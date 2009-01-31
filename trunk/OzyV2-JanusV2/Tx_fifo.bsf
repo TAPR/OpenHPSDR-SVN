@@ -4,7 +4,7 @@ editor if you plan to continue editing the block that represents it in
 the Block Editor! File corruption is VERY likely to occur.
 */
 /*
-Copyright (C) 1991-2006 Altera Corporation
+Copyright (C) 1991-2008 Altera Corporation
 Your use of Altera Corporation's design tools, logic functions 
 and other software and tools, and its AMPP partner logic 
 functions, and any output files from any of the foregoing 
@@ -57,6 +57,13 @@ applicable agreement for further details.
 		(text "rdclk" (rect 0 0 27 14)(font "Arial" (font_size 8)))
 		(text "rdclk" (rect 26 114 47 127)(font "Arial" (font_size 8)))
 		(line (pt 0 120)(pt 16 120)(line_width 1))
+	)
+	(port
+		(pt 160 40)
+		(output)
+		(text "wrfull" (rect 0 0 33 14)(font "Arial" (font_size 8)))
+		(text "wrfull" (rect 113 34 138 47)(font "Arial" (font_size 8)))
+		(line (pt 160 40)(pt 144 40)(line_width 1))
 	)
 	(port
 		(pt 160 72)

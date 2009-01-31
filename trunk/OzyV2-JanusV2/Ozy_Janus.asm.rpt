@@ -1,5 +1,5 @@
 Assembler report for Ozy_Janus
-Sun Jan 18 16:39:50 2009
+Sat Jan 31 17:13:15 2009
 Quartus II Version 8.1 Build 163 10/28/2008 SJ Web Edition
 
 
@@ -39,7 +39,7 @@ applicable agreement for further details.
 +---------------------------------------------------------------+
 ; Assembler Summary                                             ;
 +-----------------------+---------------------------------------+
-; Assembler Status      ; Successful - Sun Jan 18 16:39:50 2009 ;
+; Assembler Status      ; Successful - Sat Jan 31 17:13:15 2009 ;
 ; Revision Name         ; Ozy_Janus                             ;
 ; Top-level Entity Name ; Ozy_Janus                             ;
 ; Family                ; Cyclone II                            ;
@@ -96,7 +96,7 @@ applicable agreement for further details.
 +----------------+-----------------------------------------------------+
 ; Device         ; EP2C8Q208C8                                         ;
 ; JTAG usercode  ; 0xFFFFFFFF                                          ;
-; Checksum       ; 0x001F2BAA                                          ;
+; Checksum       ; 0x00239E12                                          ;
 +----------------+-----------------------------------------------------+
 
 
@@ -107,7 +107,7 @@ applicable agreement for further details.
 +--------------------+-------------------------------------------------+
 ; Device             ; EPCS4                                           ;
 ; JTAG usercode      ; 0x00000000                                      ;
-; Checksum           ; 0x06CFA4F8                                      ;
+; Checksum           ; 0x06C8AC10                                      ;
 ; Compression Ratio  ; 2                                               ;
 +--------------------+-------------------------------------------------+
 
@@ -128,14 +128,14 @@ applicable agreement for further details.
 Info: *******************************************************************
 Info: Running Quartus II Assembler
     Info: Version 8.1 Build 163 10/28/2008 SJ Web Edition
-    Info: Processing started: Sun Jan 18 16:39:49 2009
+    Info: Processing started: Sat Jan 31 17:13:13 2009
 Info: Command: quartus_asm --read_settings_files=off --write_settings_files=off Ozy_Janus -c Ozy_Janus
 Info: Writing out detailed assembly data for power analysis
 Info: Assembler is generating device programming files
 Info: Quartus II Assembler was successful. 0 errors, 0 warnings
-    Info: Peak virtual memory: 162 megabytes
-    Info: Processing ended: Sun Jan 18 16:39:50 2009
-    Info: Elapsed time: 00:00:01
+    Info: Peak virtual memory: 163 megabytes
+    Info: Processing ended: Sat Jan 31 17:13:15 2009
+    Info: Elapsed time: 00:00:02
     Info: Total CPU time (on all processors): 00:00:01
 
 

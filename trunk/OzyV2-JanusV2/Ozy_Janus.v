@@ -1,4 +1,4 @@
-// V1.32 14 January 2009  
+// V1.33 31 January 2009  
 //
 // Copyright 2006,2007, 2008 Bill Tracey KD5TFD and Phil Harman VK6APH
 //
@@ -195,7 +195,19 @@
 //			   13 Jan  2009 - Special test version, no PTT reset on loss of sync
 //							- Removed rx_avail since no longer required by PC code
 //							- Moved serial numbers positions in C&C data
-//							- NOTE: VOX WILL NOT WORK WITH THIS VERSION   
+//							- NOTE: VOX WILL NOT WORK WITH THIS VERSION 
+//			   18 Jan  2009 - test for use of EP4  [01]
+//			   24 Jan  2009 - More EP4 tests - send all data to both EP4 and EP6 
+//							- works to EP4
+//							- currently set to both EP4 and EP6 - fails since EP6 not read by PowerSDR_EP4
+//			   25 Jan  2009 - Skip EP4 and EP6 if no data or not available
+//			   26 Jan  2009 - added full flag to spectrum FIFO - Atlas C21  
+//			   28 Jan  2009 - Changed Tx FIFO to use IFCLK so that frame always starts with sync
+//			   29 Jan  2009 - Added FLAGB for EP4 
+//							- Changed method of writing to FX2 to give consistent writes
+//			   30 Jan  2009 - Send spectrum data to EP4 rather than mic - VOX now works 
+//				            - Removed spectrum start flag since no longer required
+//			   31 Jan  209  - Added test for Penny power out in C&C 
 //
 ////////////////////////////////////////////////////////////
 
@@ -328,7 +340,7 @@ module Ozy_Janus(
         CBCLK, CLRCLK, CDOUT,CDOUT_P, CDIN, DFS0, DFS1, LROUT, PTT_in, AK_reset,  DEBUG_LED0,
 		DEBUG_LED1, DEBUG_LED2,DEBUG_LED3, CLK_48MHZ, CC, PCLK_12MHZ, MCLK_12MHZ, MDOUT,
 		FX2_CLK, SPI_SCK, SPI_SI, SPI_SO, SPI_CS, GPIO, GPIO_nIOE, CLK_MCLK,
-		FX2_PE0, FX2_PE1, FX2_PE2, FX2_PE3,SDOBACK,TDO,TCK, TMS, spectrum_in, ADC_OVERLOAD, serno);
+		FX2_PE0, FX2_PE1, FX2_PE2, FX2_PE3,SDOBACK,TDO,TCK, TMS, spectrum_in, ADC_OVERLOAD, serno, full);
 		
 
 
@@ -370,6 +382,7 @@ input  CDOUT_P;					// Mic data from Penelope
 input  spectrum_in;				// spectrum data from Mercury on A12
 input  ADC_OVERLOAD;			// ADC overload from Mercury C18
 input  serno;					// serial number of HPSDR boards software C19
+output full; 					// spectrum FIFO full - Atlas C21
 // interface lines for GPIO control 
 input 				FX2_CLK;		// master system clock from FX2 
 input 				SPI_SCK;		// SPI SCK from FX2
@@ -403,7 +416,8 @@ assign TCK = FX2_PE2;
 assign TDO = FX2_PE0;  // TDO on our slot ties to TDI on next slot  
 assign FX2_PE1 = SDOBACK;
 
-
+// spectrum FIFO full signal to Mercury via Atlas C21
+assign full = !EP4_ready;
 
 
 // instantiate gpio control block 
@@ -438,14 +452,15 @@ FX2_FD is a bi-directional data bus
 assign PKEND = 1'b1;
 
 reg [2:0] state_A_D;            // state for A/D
-reg [3:0] state_FX;             // state for FX2
+reg [4:0] state_FX;             // state for FX2
 reg [15:0] q;                   // holds DOUT from AK5394A
 reg [15:0] Tx_q;                // holds DOUT from TLV
 reg data_flag;                  // set when data ready to send to Tx FIFO
 reg [15:0] register;            // AK5394A A/D uses this to send its data to Tx FIFO
 reg [15:0] Tx_data;             // Tx mic audio from TLV320
 reg [6:0] loop_counter;         // counts number of times round loop
-reg Tx_fifo_enable;             // set when we want to send data to the Tx FIFO
+reg Tx_fifo_enable;             // set when we want to send data to the Tx FIFO EP6
+reg Tx_fifo_enable_2;           // set when we want to send data to the Tx FIFO EP4
 
 
 
@@ -723,17 +738,14 @@ reg [7:0] Tx_control_2;    // control 2 to PC
 reg [7:0] Tx_control_3;    // control 3 to PC, number of words free in Rx FIFO
 reg [7:0] Tx_control_4;    // control 4 to PC
 
-reg [11:0] spectrum_count; // 0 to 4095 for number of spectrum samples
-reg spectrum_flag; 		   // set at start of block of spectrum samples
-
 always @ (posedge BCLK)
 // temp values until we use these control signals
 begin
 Tx_control_0[7:2] <= 6'd0;
-Tx_control_1 <= {6'b0,spectrum_flag,ADC_OVERLOAD};// ADC_OVERLOAD in bit 0
+Tx_control_1 <= {7'b0,ADC_OVERLOAD};// ADC_OVERLOAD in bit 0
 Tx_control_2 <= Merc_serialno;
 Tx_control_3 <= Penny_serialno;
-Tx_control_4 <= 8'b0;
+Tx_control_4 <= Penny_power[11:4];
 
 
 q[15:0] <= {q[14:0],`DOUTbit};                  // shift current AK5394A data left and add next bit
@@ -752,12 +764,10 @@ case (AD_state)                                 // see if sync is to be sent
         if (loop_counter == 0) begin            // if zero  then send sync and C&C bytes
            register <= 16'h7F7F;
            Tx_fifo_enable <= 1'b1;              // strobe start of sync (7F7F) into Tx FIFO
-           end
+        end
        	AD_state <= AD_state + 1'b1;
         end
 6'd3:   begin  
-        if (spectrum_count == 0) spectrum_flag <= 1'b1;		// set start of spectrum block
-		else spectrum_flag <= 1'b0; 
         if(loop_counter == 0) begin             // send C&C bytes, this is C0
             register[15:8] <= 8'h7F;			// send rest of sync
         	register[7:0]  <= {Tx_control_0[7:2], ~clean_dash, (~clean_dot || clean_PTT_in)};
@@ -773,13 +783,16 @@ case (AD_state)                                 // see if sync is to be sent
       	AD_state <= AD_state + 1'b1;
         end
 6'd5:   begin 
-        spectrum_count <= spectrum_count + 1'b1; // increment spectrum block count
         if(loop_counter == 0)begin
         	register <= {Tx_control_3,Tx_control_4}; 
 			Tx_fifo_enable <= 1'b1;
             end
         AD_state <= AD_state + 1'b1;
         end
+        
+       
+        
+        
 6'd18:  begin   
         register <= q;                                  // AK5394A data for left channel
         Tx_fifo_enable <= 1'b1;
@@ -803,11 +816,8 @@ case (AD_state)                                 // see if sync is to be sent
         Tx_fifo_enable <= 1'b1;
         AD_state <= AD_state + 1'b1;
         end
-// If we are receiving then send spectrum data otherwise send mic data       
 6'd56:  begin
-        if (PTT_out)
-			register <= Tx_data; 		// if PTT send microphone or line in data to Tx FIFO
-		else register <= spectrum;		// else send spectrum data
+		register <= Tx_data; 		
         Tx_fifo_enable <= 1'b1;
         AD_state <= AD_state + 1'b1;
         end
@@ -816,6 +826,8 @@ case (AD_state)                                 // see if sync is to be sent
         AD_state <= 6'd0;                               // done so loop again
         end
 default:AD_state <= AD_state + 1'b1;
+		
+		
 endcase
 end
 
@@ -885,17 +897,36 @@ Rx_fifo Rx_fifo(.wrclk (~SLRD),.rdreq (fifo_enable),.rdclk (CLK_MCLK),.wrreq (Rx
 
 ///////////////////////////////////////////////////////////////
 //
-//     Tx_fifo (2048 words) Dual clock FIFO  - Altera Megafunction
+//     Tx_fifo (2048 words) Dual clock FIFO  - Altera Megafunction - for EP2
 //
 //////////////////////////////////////////////////////////////
-
-Tx_fifo Tx_fifo(.wrclk (!BCLK),.rdreq (1'b1),.rdclk (Tx_read_clock),.wrreq(Tx_fifo_enable),
+               
+                
+Tx_fifo Tx_fifo(.wrclk (!BCLK),.rdreq (Tx_read_clock),.rdclk (IFCLK),.wrreq(Tx_fifo_enable),
                 .data (register),.q (Tx_register), .wrusedw(write_used));
 
 wire [15:0] Tx_register;                // holds data from A/D to send to FX2
 reg  Tx_read_clock;                     // when goes high sends data to Tx_register
 wire [10:0] write_used;                 // indicates how may bytes in the Tx buffer
 reg  [10:0] syncd_write_used;   		// ditto but synced to FX2 clock
+
+///////////////////////////////////////////////////////////////
+//
+//     FIFO_2 (2048 words) Dual clock FIFO  - Altera Megafunction - for EP4 
+//
+//////////////////////////////////////////////////////////////
+
+               
+Tx_fifo FIFO_2(.wrclk (!BCLK),.rdreq (Tx_read_clock_2),.rdclk (~IFCLK),.wrreq(Tx_fifo_enable_2),
+                .data (EP4_data),.q (Tx_register_2), .wrusedw(write_used_2), .wrfull (write_full));
+                
+
+wire [15:0] Tx_register_2;                // holds data from A/D to send to FX2
+reg  Tx_read_clock_2;                     // when goes high sends data to Tx_register
+wire [10:0] write_used_2;                 // indicates how may bytes in the Tx buffer
+reg  [10:0] syncd_write_used_2;   		  // ditto but synced to FX2 clock
+reg  [15:0] EP4_data; 					  // data to send to EP4
+wire write_full;
 
 //////////////////////////////////////////////////////////////
 //
@@ -911,26 +942,31 @@ reg  [10:0] syncd_write_used;   		// ditto but synced to FX2 clock
 */
 
 reg SLOE;                             // FX2 data bus enable - active low
-reg SLEN;                             // Put data on FX2 bus
+reg SLEN;                             // Put data on FX2 bus for EP6
+reg SLEN_2;							  // Enable data for EP4
 reg SLRD;                             // FX2 read - active low
 reg SLWR;                             // FX2 write - active low
 reg [1:0] FIFO_ADR;                   // FX2 register address
 wire EP2_has_data = FLAGA;            // high when EP2 has data available
-wire EP6_ready = FLAGC;               // high when we can write to EP6
+wire EP4_ready = FLAGB;				  // high when we can write to End Point
+wire EP6_ready = FLAGC;               // high when we can write to End Point
 reg [15:0] Rx_register;               // data from PC goes here
 
 
 always @ (negedge IFCLK)
 begin
 syncd_write_used <= write_used;
+syncd_write_used_2 <= write_used_2;
 case(state_FX)
 // state 0 - set up to check for Rx data from EP2
 4'd0:begin
-    SLWR <= 1;                        // reset FX2 FIFO write stobe
+		SLWR <= 1;                    // reset FX2 FIFO write stobe
         Tx_read_clock <= 1'b0;        // reset Tx fifo read strobe
+        Tx_read_clock_2 <= 1'b0;      // reset Tx fifo read strobe
         SLRD <= 1'b1;
         SLOE <= 1'b1;
         SLEN <= 1'b0;
+        SLEN_2 <= 1'b0;
         FIFO_ADR <= 2'b00;            // select EP2
         state_FX <= state_FX + 1'b1;
         end
@@ -958,15 +994,19 @@ case(state_FX)
         SLOE <= 1'b1;
         state_FX <= state_FX + 1'b1;
         end
+      
 // check for Tx data - Tx fifo must be at least half full before we Tx
 4'd6:begin
-		if (syncd_write_used[10] == 1'b1) begin // data available, so let's start the xfer...
-        	SLWR <= 1;
+       
+		//if (syncd_write_used[10] == 1'b1) begin // data available, so let's start the xfer...
+		if (syncd_write_used > 511) begin // data available, so let's start the xfer...
+        	//SLWR <= 1;
             state_FX <= state_FX + 1'b1;
             FIFO_ADR <= 2'b10;              	// select EP6
             end
-     	else state_FX <= 4'd2;                  // No Tx data so check for Rx data,
-        end                                     // note we already have address set
+     	else state_FX <= 4'd12;                 // No EP6 data so check EP4 data,
+
+    end                                     // note we already have address set
 // Wait 2 IFCLK for FIFO_ADR to stabilize, assert SLWR
 // NOTE: seems OK with 2 waits, may need more.
 4'd8:begin
@@ -976,13 +1016,13 @@ case(state_FX)
 // check Tx FIFO is ready then set Write strobe
 4'd9:begin
 	if (EP6_ready) begin                        // if EP6 is ready, write to it and exit this state
-    	Tx_read_clock <= 1'b0;          		// end of transfer from Tx fifo
+    	Tx_read_clock <= 1'b0;          	   // end of transfer from Tx fifo
         SLEN <= 1'b1;
         state_FX <= state_FX + 1'b1;
         end
-    else begin                                  // otherwise, hang out here until fifo is ready
+    else begin     								//skip if not ready to EP4                             
     	SLWR <= 1;
-        state_FX <= 4'd9;
+        state_FX <= 4'd12;		
         end
     end
 //  set SLWR
@@ -994,17 +1034,60 @@ case(state_FX)
 4'd11: begin
         SLWR <= 1;
         SLEN <= 1'b0;
-        state_FX <= 4'd0;
+        state_FX <= state_FX + 1'b1;
+        //state_FX <= 0;
         end
-        default: state_FX <= state_FX + 1'b1;
+ 
+// Send data to EP4 
+12:begin
+		if (syncd_write_used_2 > 511) begin // data available, so let's start the xfer...
+        	//SLWR <= 1;
+            state_FX <= state_FX + 1'b1;
+            FIFO_ADR <= 2'b01;              	// select EP4
+            end
+     	else state_FX <= 4'd0;                  // No EP4 data so check for Rx data,
+        end                                     // note RX address is not set so goto 0
+// Wait 2 IFCLK for FIFO_ADR to stabilize, assert SLWR
+// check Tx FIFO is ready then set Write strobe
+14:begin
+	if (EP4_ready) begin                        // if EP4 is ready, write to it and exit this state
+    	Tx_read_clock_2 <= 1'b1;  
+        state_FX <= state_FX + 1'b1;
+        end
+    else begin                                  
+    	SLWR <= 1;
+        state_FX <= 0;							// EP4 not ready so restart 
+        end
+    end
+
+15: begin
+	SLEN_2 <= 1'b1;
+	Tx_read_clock_2 <= 1'b0;	
+	state_FX <= state_FX + 1'b1;
+	end
+//  set SLWR
+16: begin
+       SLWR <= 1'b0;
+       state_FX <= state_FX + 1'b1;
+       end
+//  reset SLWR and tristate SLEN
+17: begin
+        SLWR <= 1;
+        SLEN_2 <= 1'b0;
+        state_FX <= 4'd0;					// done so loop again
+        end        
+default:  state_FX <= state_FX + 1'b1;
     endcase
 end
 
 // FX2_FD is tristate when SLEN  is low, otherwise it's the Tx_register value.
 // Swap endian so data is correct at PC end
 
-assign FX2_FD[15:8] = SLEN ? Tx_register[7:0]  : 8'bZ;
+assign FX2_FD[15:8] = SLEN ? Tx_register[7:0]  : 8'bZ;  // For EP6
 assign FX2_FD[7:0]  = SLEN ? Tx_register[15:8] : 8'bZ;
+
+assign FX2_FD[15:8] = SLEN_2 ? Tx_register_2[7:0]  : 8'bZ;  // For EP4
+assign FX2_FD[7:0]  = SLEN_2 ? Tx_register_2[15:8] : 8'bZ;
 
 //////////////////////////////////////////////////////////////
 //
@@ -1455,8 +1538,9 @@ end
 
 ///////////////////////////////////////////////////////////////
 //
-//  Get spectrum data from Mercury on Atlas A12  and
-//  Software serial numbers from cards on Atlas C19
+//  Get spectrum data from Mercury on Atlas A12,
+//  Software serial numbers from cards plus
+//  Penny Power output on Atlas C19
 //
 ///////////////////////////////////////////////////////////////
 
@@ -1468,13 +1552,15 @@ end
 
 
 reg  [3:0] bits;     		// how many bits clocked 
-reg  [1:0] spectrum_state;
+reg  [2:0] spectrum_state;
 reg [15:0] spectrum_data;	// 16 bits of spectrum data
 reg [15:0] spectrum; 
 reg [7:0]  temp_Merc_serialno;	// holds serial number of Mercury board sofware
 reg [7:0]  Merc_serialno;
 reg [7:0]  temp_Penny_serialno; // holds serial number of Penny board sofware
 reg [7:0]  Penny_serialno;
+reg [11:0] Penny_power;			// holds Penny output power
+reg [11:0] temp_Penny_power;
 
 
 always @(posedge BCLK)  
@@ -1507,20 +1593,42 @@ begin
 	if (bits < 8)		// get Mercury serial #
 		temp_Merc_serialno[bits]  <= serno;
     if (bits == 0)
-      spectrum_state  <= 0;      // done so restart
+      spectrum_state  <= 3;      // done so look for Penny power out
     else
     begin
       bits <= bits - 1'b1;
       spectrum_state  <= 2;  
     end
   end
+// Penny output power is presently @ posedge of LRCLK  
+ 3:
+ begin
+	if (!LRCLK) spectrum_state <= 3; // loop until LRCLK is high
+	else
+	begin
+	 bits <= 11;
+	 spectrum_state <= 4;
+	end
+end
+
+4:
+begin
+	temp_Penny_power[bits] <= serno;
+	if (bits == 0)
+		spectrum_state <= 0;		// done so loop to start
+	else
+	begin
+      bits <= bits - 1'b1;
+      spectrum_state  <= 4;  
+    end
+  end		
 
   default:
     spectrum_state <= 0;
   endcase
 end
 
-// latch data on positive edge of LRCLK
+// latch spectrum and serial numbers on positive edge of LRCLK
 
 always @ (posedge LRCLK)
 begin
@@ -1528,6 +1636,56 @@ begin
 	Penny_serialno <= temp_Penny_serialno;
 	Merc_serialno <= temp_Merc_serialno;
 end
+
+
+// latch Penny power
+always @ (negedge LRCLK)
+begin
+	Penny_power <= temp_Penny_power;
+end
+
+
+//
+// send spectrum data to spectrum FIFO and hence EP4
+//
+reg [1:0]spec;
+always @(posedge BCLK)
+begin
+Tx_fifo_enable_2 <= 1'b0;
+case (spec)	
+0:
+  begin
+    if (LRCLK == 0)
+      spec  <= 0;     // loop until LRLCK is high   
+    else
+      spec <= 1;
+  end
+
+1:
+  begin
+    if (LRCLK) spec  <= 1;     		// loop until LRCLK is low 
+    else begin
+		if (!EP4_ready) spec <= 0;  // skip this time and try the next
+		else spec  <= 2;
+	end 
+  end
+  
+2:
+	begin
+	Tx_fifo_enable_2 <= 1'b1;
+	EP4_data <= spectrum;
+	//EP4_data <= test_counter;
+	spec <= 3;
+	end
+3:
+	begin
+	Tx_fifo_enable_2 <= 1'b0;
+	//test_counter <= test_counter + 1'b1;
+	spec <= 0;
+	end
+endcase
+end	
+
 	
 
 ///////////////////////////////////////////////////////////////
@@ -1587,7 +1745,8 @@ debounce de_dash(.clean_pb(clean_dash), .pb(dash), .clk(IFCLK));
 
 // DEBUG_LED0 - flashes if 12.288MHz Atlas clock selected but not present
 
-assign DEBUG_LED1 = ~conf[1];	// test config setting 
+assign DEBUG_LED1 = ~EP4_ready;	// test config setting 
+//assign DEBUG_LED1 = ~conf[1];	// test config setting 
 assign DEBUG_LED2 = ~PTT_out; 	// lights with PTT active
 assign DEBUG_LED3 = ~have_sync; // lights when sync from PowerSDR detected 
 
