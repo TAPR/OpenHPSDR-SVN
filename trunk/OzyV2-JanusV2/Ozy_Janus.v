@@ -207,7 +207,8 @@
 //							- Changed method of writing to FX2 to give consistent writes
 //			   30 Jan  2009 - Send spectrum data to EP4 rather than mic - VOX now works 
 //				            - Removed spectrum start flag since no longer required
-//			   31 Jan  209  - Added test for Penny power out in C&C 
+//			   31 Jan  2009 - Added test for Penny power out in C&C
+//				1 Feb  2009	- reset Tx code if EP6 not ready so sync always starts at start of frame.
 //
 ////////////////////////////////////////////////////////////
 
@@ -742,95 +743,105 @@ always @ (posedge BCLK)
 // temp values until we use these control signals
 begin
 Tx_control_0[7:2] <= 6'd0;
-Tx_control_1 <= {7'b0,ADC_OVERLOAD};// ADC_OVERLOAD in bit 0
+Tx_control_1 <= {7'b0,ADC_OVERLOAD};	// ADC_OVERLOAD in bit 0
 Tx_control_2 <= Merc_serialno;
 Tx_control_3 <= Penny_serialno;
 Tx_control_4 <= Penny_power[11:4];
 
 
-q[15:0] <= {q[14:0],`DOUTbit};                  // shift current AK5394A data left and add next bit
-Tx_fifo_enable <= 1'b0;                         // reset Tx FIFO strobe
-if (loop_counter == 63) loop_counter <= 0; 		// count how many times through the loop to
-case (AD_state)                                 // see if sync is to be sent
-6'd0:   begin
-        if(!LRCLK) AD_state <= 6'd0;            // loop until LRCLK is high
-        else AD_state <= 6'd1;
-        end
-6'd1:   begin
-        if(!LRCLK) AD_state <= 6'd2;            // loop until LRCLK is low
-        else AD_state <= 6'd1;
-        end
-6'd2:   begin
-        if (loop_counter == 0) begin            // if zero  then send sync and C&C bytes
-           register <= 16'h7F7F;
-           Tx_fifo_enable <= 1'b1;              // strobe start of sync (7F7F) into Tx FIFO
-        end
-       	AD_state <= AD_state + 1'b1;
-        end
-6'd3:   begin  
-        if(loop_counter == 0) begin             // send C&C bytes, this is C0
-            register[15:8] <= 8'h7F;			// send rest of sync
-        	register[7:0]  <= {Tx_control_0[7:2], ~clean_dash, (~clean_dot || clean_PTT_in)};
-            Tx_fifo_enable <= 1'b1;
-            end
-       	AD_state <= AD_state + 1'b1;
-        end
-6'd4:   begin 
-        if(loop_counter == 0)begin
-        	register <= {Tx_control_1, Tx_control_2};  
-			Tx_fifo_enable <= 1'b1;
-            end
-      	AD_state <= AD_state + 1'b1;
-        end
-6'd5:   begin 
-        if(loop_counter == 0)begin
-        	register <= {Tx_control_3,Tx_control_4}; 
-			Tx_fifo_enable <= 1'b1;
-            end
-        AD_state <= AD_state + 1'b1;
-        end
-        
-       
-        
-        
-6'd18:  begin   
-        register <= q;                                  // AK5394A data for left channel
-        Tx_fifo_enable <= 1'b1;
-        AD_state <= AD_state + 1'b1;
-        end
-6'd26:  begin  
-        register[15:8] <= q[7:0];         
-        AD_state <= AD_state + 1'b1;
-        end
-6'd28:  begin
-        if(!LRCLK)AD_state <= 6'd28;            		// wait until LRCLK goes high
-        else AD_state <= AD_state + 1'b1;
-        end
-6'd37:  begin 
-        register[7:0] <= q[7:0];                        // AK5394A data for right channel
-        Tx_fifo_enable <= 1'b1;
-        AD_state <= AD_state + 1'b1;
-        end
-6'd53:  begin  
-        register <= q;
-        Tx_fifo_enable <= 1'b1;
-        AD_state <= AD_state + 1'b1;
-        end
-6'd56:  begin
-		register <= Tx_data; 		
-        Tx_fifo_enable <= 1'b1;
-        AD_state <= AD_state + 1'b1;
-        end
-6'd58:  begin
-        loop_counter <= loop_counter + 1'b1; 			// at end of loop so increment loop counter
-        AD_state <= 6'd0;                               // done so loop again
-        end
-default:AD_state <= AD_state + 1'b1;
-		
-		
-endcase
-end
+// This needs review since EP6 may not be ready at times and we don't really want to reset everything.
 
+if (!EP6_ready)begin		// if EP6 not ready then reset everything so that 512 byte frame 
+	loop_counter <= 0;		// always starts with sync sequence. Brutal but effective!
+	Tx_aclr <= 1; 			// clear Tx FIFO
+	AD_state <= 0;			// Reset Tx state machine
+	end
+else
+begin
+		Tx_aclr <= 0; 
+		q[15:0] <= {q[14:0],`DOUTbit};                  // shift current AK5394A data left and add next bit
+		Tx_fifo_enable <= 1'b0;                         // reset Tx FIFO strobe
+		if (loop_counter == 63) loop_counter <= 0; 		// count how many times through the loop to
+		case (AD_state)                                 // see if sync is to be sent
+		6'd0:   begin
+				if(!LRCLK) AD_state <= 6'd0;            // loop until LRCLK is high
+				else AD_state <= 6'd1;
+				end
+		6'd1:   begin
+				if(!LRCLK) AD_state <= 6'd2;            // loop until LRCLK is low
+				else AD_state <= 6'd1;
+				end
+		6'd2:   begin
+				if (loop_counter == 0) begin            // if zero  then send sync and C&C bytes
+				   register <= 16'h7F7F;
+				   Tx_fifo_enable <= 1'b1;              // strobe start of sync (7F7F) into Tx FIFO
+				end
+				AD_state <= AD_state + 1'b1;
+				end
+		6'd3:   begin  
+				if(loop_counter == 0) begin             // send C&C bytes, this is C0
+					register[15:8] <= 8'h7F;			// send rest of sync
+					register[7:0]  <= {Tx_control_0[7:2], ~clean_dash, (~clean_dot || clean_PTT_in)};
+					Tx_fifo_enable <= 1'b1;
+					end
+				AD_state <= AD_state + 1'b1;
+				end
+		6'd4:   begin 
+				if(loop_counter == 0)begin
+					register <= {Tx_control_1, Tx_control_2};  
+					Tx_fifo_enable <= 1'b1;
+					end
+				AD_state <= AD_state + 1'b1;
+				end
+		6'd5:   begin 
+				if(loop_counter == 0)begin
+					register <= {Tx_control_3,Tx_control_4}; 
+					Tx_fifo_enable <= 1'b1;
+					end
+				AD_state <= AD_state + 1'b1;
+				end
+				
+			   
+// Now send ADC data 				
+				
+		6'd18:  begin   
+				register <= q;                                  // I data 
+				Tx_fifo_enable <= 1'b1;
+				AD_state <= AD_state + 1'b1;
+				end
+		6'd26:  begin  
+				register[15:8] <= q[7:0];         
+				AD_state <= AD_state + 1'b1;
+				end
+		6'd28:  begin
+				if(!LRCLK)AD_state <= 6'd28;            		// wait until LRCLK goes high
+				else AD_state <= AD_state + 1'b1;
+				end
+		6'd37:  begin 
+				register[7:0] <= q[7:0];                        // Q data 
+				Tx_fifo_enable <= 1'b1;
+				AD_state <= AD_state + 1'b1;
+				end
+		6'd53:  begin  
+				register <= q;
+				Tx_fifo_enable <= 1'b1;
+				AD_state <= AD_state + 1'b1;
+				end
+		6'd56:  begin
+				register <= Tx_data; 							// Microphone data	
+				Tx_fifo_enable <= 1'b1;
+				AD_state <= AD_state + 1'b1;
+				end
+		6'd58:  begin
+				loop_counter <= loop_counter + 1'b1; 			// at end of loop so increment loop counter
+				AD_state <= 6'd0;                               // done so loop again
+				end
+		default:AD_state <= AD_state + 1'b1;
+				
+				
+		endcase
+		end
+end
 
 //////////////////////////////////////////////////////////////
 //
@@ -903,12 +914,14 @@ Rx_fifo Rx_fifo(.wrclk (~SLRD),.rdreq (fifo_enable),.rdclk (CLK_MCLK),.wrreq (Rx
                
                 
 Tx_fifo Tx_fifo(.wrclk (!BCLK),.rdreq (Tx_read_clock),.rdclk (IFCLK),.wrreq(Tx_fifo_enable),
-                .data (register),.q (Tx_register), .wrusedw(write_used));
+                .data (register),.q (Tx_register), .wrusedw(write_used), .aclr(Tx_aclr));
 
 wire [15:0] Tx_register;                // holds data from A/D to send to FX2
 reg  Tx_read_clock;                     // when goes high sends data to Tx_register
 wire [10:0] write_used;                 // indicates how may bytes in the Tx buffer
 reg  [10:0] syncd_write_used;   		// ditto but synced to FX2 clock
+reg Tx_aclr; 							// async clear of FIFO 
+
 
 ///////////////////////////////////////////////////////////////
 //
@@ -1745,7 +1758,7 @@ debounce de_dash(.clean_pb(clean_dash), .pb(dash), .clk(IFCLK));
 
 // DEBUG_LED0 - flashes if 12.288MHz Atlas clock selected but not present
 
-assign DEBUG_LED1 = ~EP4_ready;	// test config setting 
+assign DEBUG_LED1 = ~EP6_ready;	// LED on when EP6 available
 //assign DEBUG_LED1 = ~conf[1];	// test config setting 
 assign DEBUG_LED2 = ~PTT_out; 	// lights with PTT active
 assign DEBUG_LED3 = ~have_sync; // lights when sync from PowerSDR detected 
