@@ -1,5 +1,5 @@
 Analysis & Synthesis report for Mercury
-Fri Jan 16 22:02:09 2009
+Sun Feb 01 14:49:11 2009
 Quartus II Version 8.1 Build 163 10/28/2008 SJ Web Edition
 
 
@@ -15,31 +15,31 @@ Quartus II Version 8.1 Build 163 10/28/2008 SJ Web Edition
   7. Analysis & Synthesis RAM Summary
   8. Analysis & Synthesis DSP Block Usage Summary
   9. State Machine - |Mercury|CC_state
- 10. State Machine - |Mercury|spec_send
- 11. State Machine - |Mercury|TLV
- 12. State Machine - |Mercury|SPI:Alex_SPI_Tx|spi_state
- 13. State Machine - |Mercury|I2SEncode:I2S|encode_state
- 14. Registers Removed During Synthesis
- 15. Removed Registers Triggering Further Register Optimizations
- 16. General Register Statistics
- 17. Inverted Register Statistics
- 18. Multiplexer Restructuring Statistics (No Restructuring Performed)
- 19. Source assignments for receiver:receiver_inst|fir_coeffs:fir_coeffs_inst|fir_coeffs_rom:fir_coeffs_rom_inst|altsyncram:altsyncram_component|altsyncram_h2a1:auto_generated
- 20. Source assignments for receiver:receiver_inst|fir:fir_inst_I|fir_shiftreg:fir_shiftreg_inst|altshift_taps:altshift_taps_component|shift_taps_ils:auto_generated|altsyncram_qka1:altsyncram2
- 21. Source assignments for receiver:receiver_inst|fir:fir_inst_I|fir_mac:fir_mac_inst|mult_24Sx24S:mult_24Sx24S_inst|lpm_mult:lpm_mult_component|mult_djp:auto_generated
- 22. Source assignments for receiver:receiver_inst|fir:fir_inst_Q|fir_shiftreg:fir_shiftreg_inst|altshift_taps:altshift_taps_component|shift_taps_ils:auto_generated|altsyncram_qka1:altsyncram2
- 23. Source assignments for receiver:receiver_inst|fir:fir_inst_Q|fir_mac:fir_mac_inst|mult_24Sx24S:mult_24Sx24S_inst|lpm_mult:lpm_mult_component|mult_djp:auto_generated
- 24. Source assignments for spectrum_FIFO:inst_spectrum_FIFO|dcfifo:dcfifo_component
- 25. Source assignments for spectrum_FIFO:inst_spectrum_FIFO|dcfifo:dcfifo_component|dcfifo_tnf1:auto_generated
- 26. Source assignments for spectrum_FIFO:inst_spectrum_FIFO|dcfifo:dcfifo_component|dcfifo_tnf1:auto_generated|a_graycounter_tn6:rdptr_g1p
- 27. Source assignments for spectrum_FIFO:inst_spectrum_FIFO|dcfifo:dcfifo_component|dcfifo_tnf1:auto_generated|a_graycounter_p5c:wrptr_g1p
- 28. Source assignments for spectrum_FIFO:inst_spectrum_FIFO|dcfifo:dcfifo_component|dcfifo_tnf1:auto_generated|a_graycounter_o5c:wrptr_gp
- 29. Source assignments for spectrum_FIFO:inst_spectrum_FIFO|dcfifo:dcfifo_component|dcfifo_tnf1:auto_generated|altsyncram_8tu:fifo_ram
- 30. Source assignments for spectrum_FIFO:inst_spectrum_FIFO|dcfifo:dcfifo_component|dcfifo_tnf1:auto_generated|alt_synch_pipe_jv7:rs_dgwp
- 31. Source assignments for spectrum_FIFO:inst_spectrum_FIFO|dcfifo:dcfifo_component|dcfifo_tnf1:auto_generated|alt_synch_pipe_jv7:rs_dgwp|dffpipe_d09:dffpipe6
- 32. Source assignments for spectrum_FIFO:inst_spectrum_FIFO|dcfifo:dcfifo_component|dcfifo_tnf1:auto_generated|alt_synch_pipe_kv7:ws_dgrp
- 33. Source assignments for spectrum_FIFO:inst_spectrum_FIFO|dcfifo:dcfifo_component|dcfifo_tnf1:auto_generated|alt_synch_pipe_kv7:ws_dgrp|dffpipe_e09:dffpipe9
- 34. Parameter Settings for User Entity Instance: Top-level Entity: |Mercury
+ 10. State Machine - |Mercury|sno_send
+ 11. State Machine - |Mercury|spec_send
+ 12. State Machine - |Mercury|TLV
+ 13. State Machine - |Mercury|SPI:Alex_SPI_Tx|spi_state
+ 14. State Machine - |Mercury|I2SEncode:I2S|encode_state
+ 15. Registers Removed During Synthesis
+ 16. Removed Registers Triggering Further Register Optimizations
+ 17. General Register Statistics
+ 18. Inverted Register Statistics
+ 19. Multiplexer Restructuring Statistics (No Restructuring Performed)
+ 20. Source assignments for receiver:receiver_inst|fir_coeffs:fir_coeffs_inst|fir_coeffs_rom:fir_coeffs_rom_inst|altsyncram:altsyncram_component|altsyncram_h2a1:auto_generated
+ 21. Source assignments for receiver:receiver_inst|fir:fir_inst_I|fir_shiftreg:fir_shiftreg_inst|altshift_taps:altshift_taps_component|shift_taps_ils:auto_generated|altsyncram_qka1:altsyncram2
+ 22. Source assignments for receiver:receiver_inst|fir:fir_inst_I|fir_mac:fir_mac_inst|mult_24Sx24S:mult_24Sx24S_inst|lpm_mult:lpm_mult_component|mult_djp:auto_generated
+ 23. Source assignments for receiver:receiver_inst|fir:fir_inst_Q|fir_shiftreg:fir_shiftreg_inst|altshift_taps:altshift_taps_component|shift_taps_ils:auto_generated|altsyncram_qka1:altsyncram2
+ 24. Source assignments for receiver:receiver_inst|fir:fir_inst_Q|fir_mac:fir_mac_inst|mult_24Sx24S:mult_24Sx24S_inst|lpm_mult:lpm_mult_component|mult_djp:auto_generated
+ 25. Source assignments for spectrum_FIFO:inst_spectrum_FIFO|dcfifo:dcfifo_component
+ 26. Source assignments for spectrum_FIFO:inst_spectrum_FIFO|dcfifo:dcfifo_component|dcfifo_tnf1:auto_generated
+ 27. Source assignments for spectrum_FIFO:inst_spectrum_FIFO|dcfifo:dcfifo_component|dcfifo_tnf1:auto_generated|a_graycounter_tn6:rdptr_g1p
+ 28. Source assignments for spectrum_FIFO:inst_spectrum_FIFO|dcfifo:dcfifo_component|dcfifo_tnf1:auto_generated|a_graycounter_p5c:wrptr_g1p
+ 29. Source assignments for spectrum_FIFO:inst_spectrum_FIFO|dcfifo:dcfifo_component|dcfifo_tnf1:auto_generated|a_graycounter_o5c:wrptr_gp
+ 30. Source assignments for spectrum_FIFO:inst_spectrum_FIFO|dcfifo:dcfifo_component|dcfifo_tnf1:auto_generated|altsyncram_8tu:fifo_ram
+ 31. Source assignments for spectrum_FIFO:inst_spectrum_FIFO|dcfifo:dcfifo_component|dcfifo_tnf1:auto_generated|alt_synch_pipe_jv7:rs_dgwp
+ 32. Source assignments for spectrum_FIFO:inst_spectrum_FIFO|dcfifo:dcfifo_component|dcfifo_tnf1:auto_generated|alt_synch_pipe_jv7:rs_dgwp|dffpipe_d09:dffpipe6
+ 33. Source assignments for spectrum_FIFO:inst_spectrum_FIFO|dcfifo:dcfifo_component|dcfifo_tnf1:auto_generated|alt_synch_pipe_kv7:ws_dgrp
+ 34. Source assignments for spectrum_FIFO:inst_spectrum_FIFO|dcfifo:dcfifo_component|dcfifo_tnf1:auto_generated|alt_synch_pipe_kv7:ws_dgrp|dffpipe_e09:dffpipe9
  35. Parameter Settings for User Entity Instance: receiver:receiver_inst|cordic:cordic_inst
  36. Parameter Settings for User Entity Instance: receiver:receiver_inst|varcic:varcic_inst_I1
  37. Parameter Settings for User Entity Instance: receiver:receiver_inst|varcic:varcic_inst_I1|cic_integrator:cic_stages[0].cic_integrator_inst
@@ -148,16 +148,16 @@ applicable agreement for further details.
 +------------------------------------------------------------------------------+
 ; Analysis & Synthesis Summary                                                 ;
 +------------------------------------+-----------------------------------------+
-; Analysis & Synthesis Status        ; Successful - Fri Jan 16 22:02:09 2009   ;
+; Analysis & Synthesis Status        ; Successful - Sun Feb 01 14:49:11 2009   ;
 ; Quartus II Version                 ; 8.1 Build 163 10/28/2008 SJ Web Edition ;
 ; Revision Name                      ; Mercury                                 ;
 ; Top-level Entity Name              ; Mercury                                 ;
 ; Family                             ; Cyclone III                             ;
-; Total logic elements               ; 6,863                                   ;
-;     Total combinational functions  ; 6,606                                   ;
-;     Dedicated logic registers      ; 6,863                                   ;
-; Total registers                    ; 6863                                    ;
-; Total pins                         ; 68                                      ;
+; Total logic elements               ; 6,862                                   ;
+;     Total combinational functions  ; 6,627                                   ;
+;     Dedicated logic registers      ; 6,862                                   ;
+; Total registers                    ; 6862                                    ;
+; Total pins                         ; 69                                      ;
 ; Total virtual pins                 ; 0                                       ;
 ; Total memory bits                  ; 84,380                                  ;
 ; Embedded Multiplier 9-bit elements ; 22                                      ;
@@ -320,28 +320,28 @@ applicable agreement for further details.
 +---------------------------------------------+------------+
 ; Resource                                    ; Usage      ;
 +---------------------------------------------+------------+
-; Estimated Total logic elements              ; 6,863      ;
+; Estimated Total logic elements              ; 6,862      ;
 ;                                             ;            ;
-; Total combinational functions               ; 6606       ;
+; Total combinational functions               ; 6627       ;
 ; Logic element usage by number of LUT inputs ;            ;
-;     -- 4 input functions                    ; 454        ;
+;     -- 4 input functions                    ; 471        ;
 ;     -- 3 input functions                    ; 5252       ;
-;     -- <=2 input functions                  ; 900        ;
+;     -- <=2 input functions                  ; 904        ;
 ;                                             ;            ;
 ; Logic elements by mode                      ;            ;
-;     -- normal mode                          ; 912        ;
-;     -- arithmetic mode                      ; 5694       ;
+;     -- normal mode                          ; 935        ;
+;     -- arithmetic mode                      ; 5692       ;
 ;                                             ;            ;
-; Total registers                             ; 6863       ;
-;     -- Dedicated logic registers            ; 6863       ;
+; Total registers                             ; 6862       ;
+;     -- Dedicated logic registers            ; 6862       ;
 ;     -- I/O registers                        ; 0          ;
 ;                                             ;            ;
-; I/O pins                                    ; 68         ;
+; I/O pins                                    ; 69         ;
 ; Total memory bits                           ; 84380      ;
 ; Embedded Multiplier 9-bit elements          ; 22         ;
 ; Maximum fan-out node                        ; CLKA~input ;
-; Maximum fan-out                             ; 6611       ;
-; Total fan-out                               ; 41205      ;
+; Maximum fan-out                             ; 6604       ;
+; Total fan-out                               ; 41280      ;
 ; Average fan-out                             ; 3.00       ;
 +---------------------------------------------+------------+
 
@@ -351,11 +351,11 @@ applicable agreement for further details.
 +--------------------------------------------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+--------------+
 ; Compilation Hierarchy Node                                   ; LC Combinationals ; LC Registers ; Memory Bits ; DSP Elements ; DSP 9x9 ; DSP 18x18 ; Pins ; Virtual Pins ; Full Hierarchy Name                                                                                                                                                             ; Library Name ;
 +--------------------------------------------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+--------------+
-; |Mercury                                                     ; 6606 (356)        ; 6863 (315)   ; 84380       ; 22           ; 2       ; 10        ; 68   ; 0            ; |Mercury                                                                                                                                                                        ; work         ;
-;    |HPF_select:Alex_HPF_select|                              ; 44 (44)           ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Mercury|HPF_select:Alex_HPF_select                                                                                                                                             ; work         ;
+; |Mercury                                                     ; 6627 (371)        ; 6862 (314)   ; 84380       ; 22           ; 2       ; 10        ; 69   ; 0            ; |Mercury                                                                                                                                                                        ; work         ;
+;    |HPF_select:Alex_HPF_select|                              ; 51 (51)           ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Mercury|HPF_select:Alex_HPF_select                                                                                                                                             ; work         ;
 ;    |I2SEncode:I2S|                                           ; 69 (69)           ; 59 (59)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Mercury|I2SEncode:I2S                                                                                                                                                          ; work         ;
-;    |LPF_select:Alex_LPF_select|                              ; 89 (89)           ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Mercury|LPF_select:Alex_LPF_select                                                                                                                                             ; work         ;
-;    |SPI:Alex_SPI_Tx|                                         ; 61 (61)           ; 41 (41)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Mercury|SPI:Alex_SPI_Tx                                                                                                                                                        ; work         ;
+;    |LPF_select:Alex_LPF_select|                              ; 85 (85)           ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Mercury|LPF_select:Alex_LPF_select                                                                                                                                             ; work         ;
+;    |SPI:Alex_SPI_Tx|                                         ; 64 (64)           ; 41 (41)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Mercury|SPI:Alex_SPI_Tx                                                                                                                                                        ; work         ;
 ;    |lpm_mult:Mult0|                                          ; 33 (0)            ; 0 (0)        ; 0           ; 8            ; 0       ; 4         ; 0    ; 0            ; |Mercury|lpm_mult:Mult0                                                                                                                                                         ; work         ;
 ;       |mult_4611:auto_generated|                             ; 33 (33)           ; 0 (0)        ; 0           ; 8            ; 0       ; 4         ; 0    ; 0            ; |Mercury|lpm_mult:Mult0|mult_4611:auto_generated                                                                                                                                ; work         ;
 ;    |oddClockDivider:refClockDivider|                         ; 16 (16)           ; 8 (8)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Mercury|oddClockDivider:refClockDivider                                                                                                                                        ; work         ;
@@ -515,6 +515,18 @@ Encoding Type:  One-Hot
 
 
 Encoding Type:  One-Hot
++-------------------------------------------------------+
+; State Machine - |Mercury|sno_send                     ;
++-------------+-------------+-------------+-------------+
+; Name        ; sno_send.00 ; sno_send.10 ; sno_send.01 ;
++-------------+-------------+-------------+-------------+
+; sno_send.00 ; 0           ; 0           ; 0           ;
+; sno_send.01 ; 1           ; 0           ; 1           ;
+; sno_send.10 ; 1           ; 1           ; 0           ;
++-------------+-------------+-------------+-------------+
+
+
+Encoding Type:  One-Hot
 +-----------------------------------------------------------+
 ; State Machine - |Mercury|spec_send                        ;
 +--------------+--------------+--------------+--------------+
@@ -645,10 +657,10 @@ Encoding Type:  One-Hot
 ; counter[0]                                                                                                                                            ; Merged with count_12288[0]                                                                                                                                        ;
 ; receiver:receiver_inst|fir:fir_inst_I|fir_mac:fir_mac_inst|mult_24Sx24S:mult_24Sx24S_inst|lpm_mult:lpm_mult_component|mult_djp:auto_generated|dffe133 ; Lost fanout                                                                                                                                                       ;
 ; receiver:receiver_inst|fir:fir_inst_Q|fir_mac:fir_mac_inst|mult_24Sx24S:mult_24Sx24S_inst|lpm_mult:lpm_mult_component|mult_djp:auto_generated|dffe133 ; Lost fanout                                                                                                                                                       ;
-; counter[26]                                                                                                                                           ; Lost fanout                                                                                                                                                       ;
+; counter[24..26]                                                                                                                                       ; Lost fanout                                                                                                                                                       ;
 ; receiver:receiver_inst|fir:fir_inst_I|fir_mac:fir_mac_inst|out_data[47..55]                                                                           ; Lost fanout                                                                                                                                                       ;
 ; receiver:receiver_inst|fir:fir_inst_Q|fir_mac:fir_mac_inst|out_data[47..55]                                                                           ; Lost fanout                                                                                                                                                       ;
-; Total Number of Removed Registers = 122                                                                                                               ;                                                                                                                                                                   ;
+; Total Number of Removed Registers = 124                                                                                                               ;                                                                                                                                                                   ;
 +-------------------------------------------------------------------------------------------------------------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 
@@ -677,7 +689,7 @@ Encoding Type:  One-Hot
 +----------------------------------------------+-------+
 ; Statistic                                    ; Value ;
 +----------------------------------------------+-------+
-; Total registers                              ; 6863  ;
+; Total registers                              ; 6862  ;
 ; Number of registers using Synchronous Clear  ; 119   ;
 ; Number of registers using Synchronous Load   ; 903   ;
 ; Number of registers using Asynchronous Clear ; 238   ;
@@ -700,28 +712,29 @@ Encoding Type:  One-Hot
 +------------------------------------------------------------------------------------------------------------------------------+---------+
 
 
-+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-; Multiplexer Restructuring Statistics (No Restructuring Performed)                                                                                                               ;
-+--------------------+-----------+---------------+----------------------+------------------------+------------+-------------------------------------------------------------------+
-; Multiplexer Inputs ; Bus Width ; Baseline Area ; Area if Restructured ; Saving if Restructured ; Registered ; Example Multiplexer Output                                        ;
-+--------------------+-----------+---------------+----------------------+------------------------+------------+-------------------------------------------------------------------+
-; 3:1                ; 15 bits   ; 30 LEs        ; 15 LEs               ; 15 LEs                 ; Yes        ; |Mercury|temp_ADC[14]                                             ;
-; 4:1                ; 46 bits   ; 92 LEs        ; 92 LEs               ; 0 LEs                  ; Yes        ; |Mercury|receiver:receiver_inst|varcic:varcic_inst_I1|out_data[3] ;
-; 4:1                ; 17 bits   ; 34 LEs        ; 17 LEs               ; 17 LEs                 ; Yes        ; |Mercury|receiver:receiver_inst|cordic:cordic_inst|X[0][7]        ;
-; 4:1                ; 4 bits    ; 8 LEs         ; 4 LEs                ; 4 LEs                  ; Yes        ; |Mercury|bit_cnt[0]                                               ;
-; 4:1                ; 5 bits    ; 10 LEs        ; 5 LEs                ; 5 LEs                  ; Yes        ; |Mercury|SPI:Alex_SPI_Tx|data_count[1]                            ;
-; 5:1                ; 6 bits    ; 18 LEs        ; 6 LEs                ; 12 LEs                 ; Yes        ; |Mercury|bits[1]                                                  ;
-; 5:1                ; 4 bits    ; 12 LEs        ; 4 LEs                ; 8 LEs                  ; Yes        ; |Mercury|spec_data_count[2]                                       ;
-; 10:1               ; 2 bits    ; 12 LEs        ; 8 LEs                ; 4 LEs                  ; Yes        ; |Mercury|receiver:receiver_inst|fir:fir_inst_I|state[1]           ;
-; 10:1               ; 2 bits    ; 12 LEs        ; 8 LEs                ; 4 LEs                  ; Yes        ; |Mercury|receiver:receiver_inst|fir:fir_inst_Q|state[1]           ;
-; 5:1                ; 24 bits   ; 72 LEs        ; 24 LEs               ; 48 LEs                 ; Yes        ; |Mercury|I2SEncode:I2S|data[22]                                   ;
-; 7:1                ; 5 bits    ; 20 LEs        ; 5 LEs                ; 15 LEs                 ; Yes        ; |Mercury|I2SEncode:I2S|bit_count[1]                               ;
-; 3:1                ; 3 bits    ; 6 LEs         ; 3 LEs                ; 3 LEs                  ; No         ; |Mercury|receiver:receiver_inst|varcic:varcic_inst_I1|ShiftLeft0  ;
-; 3:1                ; 3 bits    ; 6 LEs         ; 3 LEs                ; 3 LEs                  ; No         ; |Mercury|receiver:receiver_inst|varcic:varcic_inst_I1|ShiftLeft0  ;
-; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; No         ; |Mercury|receiver:receiver_inst|varcic:varcic_inst_I1|ShiftLeft0  ;
-; 6:1                ; 2 bits    ; 8 LEs         ; 2 LEs                ; 6 LEs                  ; No         ; |Mercury|LPF_select:Alex_LPF_select|LPF[3]                        ;
-; 6:1                ; 2 bits    ; 8 LEs         ; 2 LEs                ; 6 LEs                  ; No         ; |Mercury|Alex_data[2]                                             ;
-+--------------------+-----------+---------------+----------------------+------------------------+------------+-------------------------------------------------------------------+
++----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Multiplexer Restructuring Statistics (No Restructuring Performed)                                                                                                                ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+--------------------------------------------------------------------+
+; Multiplexer Inputs ; Bus Width ; Baseline Area ; Area if Restructured ; Saving if Restructured ; Registered ; Example Multiplexer Output                                         ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+--------------------------------------------------------------------+
+; 3:1                ; 15 bits   ; 30 LEs        ; 15 LEs               ; 15 LEs                 ; Yes        ; |Mercury|temp_ADC[6]                                               ;
+; 4:1                ; 46 bits   ; 92 LEs        ; 92 LEs               ; 0 LEs                  ; Yes        ; |Mercury|receiver:receiver_inst|varcic:varcic_inst_Q1|out_data[21] ;
+; 4:1                ; 17 bits   ; 34 LEs        ; 17 LEs               ; 17 LEs                 ; Yes        ; |Mercury|receiver:receiver_inst|cordic:cordic_inst|X[0][6]         ;
+; 4:1                ; 4 bits    ; 8 LEs         ; 4 LEs                ; 4 LEs                  ; Yes        ; |Mercury|bit_cnt[3]                                                ;
+; 4:1                ; 5 bits    ; 10 LEs        ; 5 LEs                ; 5 LEs                  ; Yes        ; |Mercury|SPI:Alex_SPI_Tx|data_count[2]                             ;
+; 5:1                ; 6 bits    ; 18 LEs        ; 6 LEs                ; 12 LEs                 ; Yes        ; |Mercury|bits[3]                                                   ;
+; 5:1                ; 4 bits    ; 12 LEs        ; 4 LEs                ; 8 LEs                  ; Yes        ; |Mercury|sno_data_count[3]                                         ;
+; 10:1               ; 2 bits    ; 12 LEs        ; 8 LEs                ; 4 LEs                  ; Yes        ; |Mercury|receiver:receiver_inst|fir:fir_inst_I|state[1]            ;
+; 10:1               ; 2 bits    ; 12 LEs        ; 8 LEs                ; 4 LEs                  ; Yes        ; |Mercury|receiver:receiver_inst|fir:fir_inst_Q|state[1]            ;
+; 5:1                ; 24 bits   ; 72 LEs        ; 24 LEs               ; 48 LEs                 ; Yes        ; |Mercury|I2SEncode:I2S|data[4]                                     ;
+; 6:1                ; 4 bits    ; 16 LEs        ; 4 LEs                ; 12 LEs                 ; Yes        ; |Mercury|spec_data_count[2]                                        ;
+; 7:1                ; 5 bits    ; 20 LEs        ; 5 LEs                ; 15 LEs                 ; Yes        ; |Mercury|I2SEncode:I2S|bit_count[4]                                ;
+; 3:1                ; 3 bits    ; 6 LEs         ; 3 LEs                ; 3 LEs                  ; No         ; |Mercury|receiver:receiver_inst|varcic:varcic_inst_I1|ShiftLeft0   ;
+; 3:1                ; 3 bits    ; 6 LEs         ; 3 LEs                ; 3 LEs                  ; No         ; |Mercury|receiver:receiver_inst|varcic:varcic_inst_I1|ShiftLeft0   ;
+; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; No         ; |Mercury|receiver:receiver_inst|varcic:varcic_inst_I1|ShiftLeft0   ;
+; 6:1                ; 2 bits    ; 8 LEs         ; 2 LEs                ; 6 LEs                  ; No         ; |Mercury|LPF_select:Alex_LPF_select|LPF[3]                         ;
+; 6:1                ; 2 bits    ; 8 LEs         ; 2 LEs                ; 6 LEs                  ; No         ; |Mercury|Alex_data[2]                                              ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+--------------------------------------------------------------------+
 
 
 +----------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
@@ -1126,17 +1139,6 @@ Encoding Type:  One-Hot
 +---------------------------------+-------+------+-----------------------------------------------------------------------------------------------------------+
 ; AUTO_SHIFT_REGISTER_RECOGNITION ; OFF   ; -    ; -                                                                                                         ;
 +---------------------------------+-------+------+-----------------------------------------------------------------------------------------------------------+
-
-
-+-------------------------------------------------------------------------+
-; Parameter Settings for User Entity Instance: Top-level Entity: |Mercury ;
-+----------------+-------+------------------------------------------------+
-; Parameter Name ; Value ; Type                                           ;
-+----------------+-------+------------------------------------------------+
-; DBtime         ; 3     ; Signed Integer                                 ;
-; Nbits          ; 3     ; Signed Integer                                 ;
-+----------------+-------+------------------------------------------------+
-Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings Tables in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
 
 
 +----------------------------------------------------------------------------------------+
@@ -2161,7 +2163,7 @@ Note: In order to hide this table in the UI and the text report file, please set
 Info: *******************************************************************
 Info: Running Quartus II Analysis & Synthesis
     Info: Version 8.1 Build 163 10/28/2008 SJ Web Edition
-    Info: Processing started: Fri Jan 16 22:01:33 2009
+    Info: Processing started: Sun Feb 01 14:48:32 2009
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off Mercury -c Mercury
 Info: Found 1 design units, including 1 entities, in source file cbuffer_top.v
     Info: Found entity 1: cbuffer_top
@@ -2210,7 +2212,6 @@ Info: Found 1 design units, including 1 entities, in source file mac.v
 Info: Found 1 design units, including 1 entities, in source file division.v
     Info: Found entity 1: division
 Info: Elaborating entity "Mercury" for the top level hierarchy
-Warning (10230): Verilog HDL assignment warning at Mercury.v(745): truncated value with size 32 to match size of target (3)
 Info: Elaborating entity "receiver" for hierarchy "receiver:receiver_inst"
 Info: Elaborating entity "cordic" for hierarchy "receiver:receiver_inst|cordic:cordic_inst"
 Info: Elaborating entity "varcic" for hierarchy "receiver:receiver_inst|varcic:varcic_inst_I1"
@@ -2318,6 +2319,8 @@ Info: Elaborating entity "LPF_select" for hierarchy "LPF_select:Alex_LPF_select"
 Info: Elaborating entity "HPF_select" for hierarchy "HPF_select:Alex_HPF_select"
 Info: Elaborating entity "SPI" for hierarchy "SPI:Alex_SPI_Tx"
 Info: Elaborating entity "oddClockDivider" for hierarchy "oddClockDivider:refClockDivider"
+Warning: Clock multiplexers are found and protected
+    Warning: Found clock multiplexer reference
 Info: Ignored 350 buffer(s)
     Info: Ignored 350 SOFT buffer(s)
 Info: Inferred 1 megafunctions from design logic
@@ -2344,7 +2347,7 @@ Warning: Output pins are stuck at VCC or GND
     Warning (13410): Pin "PGA" is stuck at GND
     Warning (13410): Pin "INIT_DONE" is stuck at GND
     Warning (13410): Pin "TEST3" is stuck at GND
-Info: 81 registers lost all their fanouts during netlist optimizations. The first 81 are displayed below.
+Info: 83 registers lost all their fanouts during netlist optimizations. The first 83 are displayed below.
     Info: Register "spectrum_FIFO:inst_spectrum_FIFO|dcfifo:dcfifo_component|dcfifo_tnf1:auto_generated|a_graycounter_p5c:wrptr_g1p|counter_ffa0" lost all its fanouts during netlist optimizations.
     Info: Register "spectrum_FIFO:inst_spectrum_FIFO|dcfifo:dcfifo_component|dcfifo_tnf1:auto_generated|a_graycounter_p5c:wrptr_g1p|counter_ffa1" lost all its fanouts during netlist optimizations.
     Info: Register "spectrum_FIFO:inst_spectrum_FIFO|dcfifo:dcfifo_component|dcfifo_tnf1:auto_generated|a_graycounter_p5c:wrptr_g1p|counter_ffa2" lost all its fanouts during netlist optimizations.
@@ -2407,6 +2410,8 @@ Info: 81 registers lost all their fanouts during netlist optimizations. The firs
     Info: Register "I2SEncode:I2S|encode_state~8" lost all its fanouts during netlist optimizations.
     Info: Register "receiver:receiver_inst|fir:fir_inst_I|fir_mac:fir_mac_inst|mult_24Sx24S:mult_24Sx24S_inst|lpm_mult:lpm_mult_component|mult_djp:auto_generated|dffe133" lost all its fanouts during netlist optimizations.
     Info: Register "receiver:receiver_inst|fir:fir_inst_Q|fir_mac:fir_mac_inst|mult_24Sx24S:mult_24Sx24S_inst|lpm_mult:lpm_mult_component|mult_djp:auto_generated|dffe133" lost all its fanouts during netlist optimizations.
+    Info: Register "counter[24]" lost all its fanouts during netlist optimizations.
+    Info: Register "counter[25]" lost all its fanouts during netlist optimizations.
     Info: Register "counter[26]" lost all its fanouts during netlist optimizations.
     Info: Register "receiver:receiver_inst|fir:fir_inst_I|fir_mac:fir_mac_inst|out_data[47]" lost all its fanouts during netlist optimizations.
     Info: Register "receiver:receiver_inst|fir:fir_inst_I|fir_mac:fir_mac_inst|out_data[48]" lost all its fanouts during netlist optimizations.
@@ -2426,19 +2431,19 @@ Info: 81 registers lost all their fanouts during netlist optimizations. The firs
     Info: Register "receiver:receiver_inst|fir:fir_inst_Q|fir_mac:fir_mac_inst|out_data[53]" lost all its fanouts during netlist optimizations.
     Info: Register "receiver:receiver_inst|fir:fir_inst_Q|fir_mac:fir_mac_inst|out_data[54]" lost all its fanouts during netlist optimizations.
     Info: Register "receiver:receiver_inst|fir:fir_inst_Q|fir_mac:fir_mac_inst|out_data[55]" lost all its fanouts during netlist optimizations.
-Info: Implemented 8814 device resources after synthesis - the final resource count might be different
-    Info: Implemented 28 input pins
+Info: Implemented 8830 device resources after synthesis - the final resource count might be different
+    Info: Implemented 29 input pins
     Info: Implemented 38 output pins
     Info: Implemented 2 bidirectional pins
-    Info: Implemented 8634 logic cells
+    Info: Implemented 8649 logic cells
     Info: Implemented 90 RAM segments
     Info: Implemented 22 DSP elements
 Info: Generated suppressed messages file C:/HPSDR/trunk/Mercury V2/Mercury.map.smsg
-Info: Quartus II Analysis & Synthesis was successful. 0 errors, 9 warnings
+Info: Quartus II Analysis & Synthesis was successful. 0 errors, 10 warnings
     Info: Peak virtual memory: 201 megabytes
-    Info: Processing ended: Fri Jan 16 22:02:10 2009
-    Info: Elapsed time: 00:00:37
-    Info: Total CPU time (on all processors): 00:00:37
+    Info: Processing ended: Sun Feb 01 14:49:11 2009
+    Info: Elapsed time: 00:00:39
+    Info: Total CPU time (on all processors): 00:00:38
 
 
 +------------------------------------------+
