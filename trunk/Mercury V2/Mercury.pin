@@ -139,7 +139,7 @@ RESERVED_INPUT               : 64        :        :                   :         
 RESERVED_INPUT               : 65        :        :                   :         : 3         :                
 VCCIO3                       : 66        : power  :                   : 3.0V    : 3         :                
 GND                          : 67        : gnd    :                   :         :           :                
-RESERVED_INPUT               : 68        :        :                   :         : 3         :                
+full                         : 68        : input  : 3.0-V LVTTL       :         : 3         : Y              
 RESERVED_INPUT               : 69        :        :                   :         : 3         :                
 CC                           : 70        : input  : 3.0-V LVTTL       :         : 3         : Y              
 RESERVED_INPUT               : 71        :        :                   :         : 3         :                

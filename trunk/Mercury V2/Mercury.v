@@ -4,9 +4,9 @@
 *
 ************************************************************/
 
-// V2.4.1 12 Jan 2009 
+// V2.5 31 Jan 2009 
 
-// (C) Phil Harman VK6APH 2006,2007,2008
+// (C) Phil Harman VK6APH 2006,2007,2008, 2009
 
 
 //  HPSDR - High Performance Software Defined Radio
@@ -62,8 +62,11 @@
 	12 Jan 2009 - Spectrum data now ADC samples
 				- Simplified ADC Overlow flag code 
 				- same release number
-				- Added software serial number on serno, C19
-	16 Jan 2009 - Try debounce 10MHz reference on C16 using 122.88MHz clock 
+				- Added software serial number on serno, C19 
+	26 Jan 2009 - fixed spectum data, was sending every 16th word. 
+			    - same release no
+    31 Jan 2009 - Added seperate code for serial # and spectrum 
+				- released as V2.5
                  
 				
 	 
@@ -140,12 +143,12 @@ output        DEBUG_LED7, // Debug LED
 input         DFS0, DFS1, // I/Q sampling rate selection
 output reg	  spectrum,	  // ADC samples for bandscope A12
 output reg    ADC_OVERFLOW, // set when ADC overflows C18
-inout  reg    serno         // serial # out to Atlas bus on C19
+inout  wire   serno,	    // serial # out to Atlas bus on C19
+input  wire   full			// high when spectrum FIFO in Ozy is full
 );
 
 
-localparam SERIAL = 8'hAA;  // software version serial number - dummy for testing
-
+localparam SERIAL = 8'd25;  // software version serial number - 2.5
 reg  [15:0] temp_ADC;
 wire        CLK_122MHz;
 
@@ -423,39 +426,48 @@ always @ (posedge LRCLK)
 // Load consecutive ADC samples into FIFO until it is full, 4096 words.
 // Wait until all data has been sent and then repeat.
 
+reg [7:0] test_count;
 always @ (negedge CLK_122MHz) 
 begin
-if (wrempty)wrreq <= 1'b1;	// enable FIFO write
-else if (wrfull)wrreq <= 1'b0;		// disable FIFO write
-end	
+if (wrempty) begin
+	wrreq <= 1'b1;			// enable FIFO write
+	//test_count <= 0;
+	end 
+else if (wrfull) wrreq <= 1'b0;		// disable FIFO write
+//if (wrreq) test_count <= test_count + 1'b1;
+end
 
 // 16 x 4096 data FIFO
 reg rdreq; reg wrreq; wire wrfull; wire [15:0]q; wire wrempty;
 spectrum_FIFO inst_spectrum_FIFO(.data(temp_ADC),.rdclk(~BCLK),.rdreq(rdreq),.wrclk(CLK_122MHz),.wrreq(wrreq),.q(q),.wrempty(wrempty),.wrfull(wrfull));
+//spectrum_FIFO inst_spectrum_FIFO(.data({8'b0,test_count}),.rdclk(~BCLK),.rdreq(rdreq),.wrclk(CLK_122MHz),.wrreq(wrreq),.q(q),.wrempty(wrempty),.wrfull(wrfull));
 
 // read data from spectrum_FIFO using BCLK and LRCLK, send data using I2S format over Atlas bus to Ozy
 // read data using first BCLK after negative edge of LRCLK
 // Send spectrum data to Ozy using I2S format on negative edge of LRCLK
 
+
+// this is for spectum - need to skip if FIFO not ready
 reg [1:0]spec_send;
 reg [3:0]spec_data_count;
-
 always @ (posedge BCLK)
 begin	
 case(spec_send)
 0:  if (LRCLK)	 spec_send <= 1;	// loop until LRCLK is high
 	else spec_send <= 0;
 	
-1:	if (LRCLK)	spec_send <= 1;		// wait until it goes low - this is first BCLK after negedge of LRCLK
+1:	if (LRCLK) spec_send <= 1;			// wait until it goes low - this is first BCLK after negedge of LRCLK
 	else begin
-		spec_data_count <= 15; 		// need to have data available for Ozy on next BCLK
-		 rdreq <= 1'b1;
-		spec_send <= 2;
+		if (full) spec_send <= 0;   	// don't send data if Ozy spectrum FIFO is full, wait until next time
+		else begin 
+			spec_data_count <= 15; 		// need to have data available for Ozy on next BCLK
+			rdreq <= 1'b1;
+			spec_send <= 2;
+		end 
 	end
-	
 2:	begin
+	rdreq <= 1'b0; 					// we have a 16 bit sample, now serialise it!
 	if (spec_data_count == 0)begin
-		rdreq <= 1'b0;
 		spec_send <= 0;
 	end
 	else begin
@@ -463,8 +475,35 @@ case(spec_send)
 		spec_send <= 2;
 	end
 	end 
-
 default: spec_send <= 0;
+endcase
+end 
+
+
+// this is for serial number 
+reg [1:0]sno_send;
+reg [3:0]sno_data_count;
+
+always @ (posedge BCLK)
+begin	
+case(sno_send)
+0:  if (LRCLK)	 sno_send <= 1;	// loop until LRCLK is high
+	else sno_send <= 0;
+1:	if (LRCLK) sno_send <= 1;			// wait until it goes low - this is first BCLK after negedge of LRCLK
+	else begin
+		sno_data_count <= 15; 		// need to have data available for Ozy on next BCLK
+		sno_send <= 2;
+	end
+2:	begin
+	if (sno_data_count == 0)begin
+		sno_send <= 0;
+	end
+	else begin
+		sno_data_count <= sno_data_count - 1'b1;
+		sno_send <= 2;
+	end
+	end 
+default: sno_send <= 0;
 endcase
 end 
 
@@ -475,17 +514,19 @@ end
 ///////////////////////////////////////////////////////////
 
 // Sends current software serial # as an 8 bit value in I2S
-// format. Shares Spectrum data state machine and sends the
-// serial number as bits 7 to 0 of 16. Penny will use bits 15 to 8.
+// format. Sends the serial number as bits 7 to 0 of 16.
+// Penny will use bits 15 to 8.
 
+reg serial_number;
 // I2S data must be available on the 2nd positive edge of CBCLK after the CLRCLK transition
 always @ (negedge BCLK)
 begin
 	if (spec_send == 2)	spectrum <= q[spec_data_count];		// shift data out to Atlas bus MSB first
-	if (spec_send == 2 && spec_data_count < 8)
-		 serno <= SERIAL[spec_data_count];			// send serial number
-	else serno <= 1'bz;								// serial # bus is high Z
+	if (sno_send == 2 && sno_data_count < 8)
+		serial_number <= SERIAL[sno_data_count];			// send serial number
 end
+
+assign serno = (sno_send == 2 && sno_data_count < 8) ? serial_number : 1'bz;  // serial # bus is high Z
 
 
 ///////////////////////////////////////////////////////////
@@ -726,29 +767,12 @@ SPI Alex_SPI_Tx (.Alex_data(Alex_data), .SPI_data(SPI_data),
 	is made using ref_ext.
 */
 
-// div 10 MHz ref clock by 125 to get 80 khz
+// div 10 MHz ref clock by 125 to get 80 khz 
 
-//first debounce 10 MHz reference using 122.88MHz clock 
+wire ref_80khz; 
+reg osc_80khz; 
 
-parameter DBtime = 3;
-parameter Nbits = 3;
-
-reg [Nbits-1:0] count;
-reg xnew, Clean_10MHz;
-
-always @ (posedge CLK_122MHz)
-begin
-    if (reference != xnew) begin
-		xnew <= reference; count <=0;
-	end
-    else if (count == DBtime) Clean_10MHz <= xnew;
-    else count <= count + 1;
-end
-
-wire ref_80khz;
-reg osc_80khz;
-// divide 10MHz to give 80kHz 
-oddClockDivider refClockDivider(Clean_10MHz, ref_80khz);
+oddClockDivider refClockDivider(reference, ref_80khz); 
 
 // Divide  122.88 MHz by 1536 to get 80 khz 
 reg [9:0] count_12288; 
@@ -770,7 +794,6 @@ end
 
 // Apply to EXOR phase detector 
 assign FPGA_PLL = ref_80khz ^ osc_80khz; 
-
 
 
 // LEDs for testing 0 = off, 1 = on
@@ -796,7 +819,7 @@ assign TEST3 = 1'b0;
 //------------------------------------------------------------------------------
 reg [26:0]counter;
 always @(posedge CLKA) counter = counter + 1'b1;
-assign {DEBUG_LED2,DEBUG_LED1} = counter[25:24];  // faster flash for this version!
+assign {DEBUG_LED2,DEBUG_LED1} = counter[23:22];  // real fast flash for this version!
 
 
 endmodule 
