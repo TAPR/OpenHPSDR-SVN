@@ -37,6 +37,7 @@
 `timescale 1 ps / 1 ps
 // synopsys translate_on
 module Tx_fifo (
+	aclr,
 	data,
 	rdclk,
 	rdreq,
@@ -46,6 +47,7 @@ module Tx_fifo (
 	wrfull,
 	wrusedw);
 
+	input	  aclr;
 	input	[15:0]  data;
 	input	  rdclk;
 	input	  rdreq;
@@ -65,6 +67,7 @@ module Tx_fifo (
 	dcfifo	dcfifo_component (
 				.wrclk (wrclk),
 				.rdreq (rdreq),
+				.aclr (aclr),
 				.rdclk (rdclk),
 				.wrreq (wrreq),
 				.data (data),
@@ -73,7 +76,6 @@ module Tx_fifo (
 				.q (sub_wire2)
 				// synopsys translate_off
 				,
-				.aclr (),
 				.rdempty (),
 				.rdfull (),
 				.rdusedw (),
@@ -92,6 +94,7 @@ module Tx_fifo (
 		dcfifo_component.rdsync_delaypipe = 4,
 		dcfifo_component.underflow_checking = "OFF",
 		dcfifo_component.use_eab = "ON",
+		dcfifo_component.write_aclr_synch = "OFF",
 		dcfifo_component.wrsync_delaypipe = 4;
 
 
@@ -120,7 +123,7 @@ endmodule
 // Retrieval info: PRIVATE: UNDERFLOW_CHECKING NUMERIC "1"
 // Retrieval info: PRIVATE: UsedW NUMERIC "1"
 // Retrieval info: PRIVATE: Width NUMERIC "16"
-// Retrieval info: PRIVATE: dc_aclr NUMERIC "0"
+// Retrieval info: PRIVATE: dc_aclr NUMERIC "1"
 // Retrieval info: PRIVATE: diff_widths NUMERIC "0"
 // Retrieval info: PRIVATE: msb_usedw NUMERIC "0"
 // Retrieval info: PRIVATE: output_width NUMERIC "16"
@@ -143,7 +146,9 @@ endmodule
 // Retrieval info: CONSTANT: RDSYNC_DELAYPIPE NUMERIC "4"
 // Retrieval info: CONSTANT: UNDERFLOW_CHECKING STRING "OFF"
 // Retrieval info: CONSTANT: USE_EAB STRING "ON"
+// Retrieval info: CONSTANT: WRITE_ACLR_SYNCH STRING "OFF"
 // Retrieval info: CONSTANT: WRSYNC_DELAYPIPE NUMERIC "4"
+// Retrieval info: USED_PORT: aclr 0 0 0 0 INPUT GND aclr
 // Retrieval info: USED_PORT: data 0 0 16 0 INPUT NODEFVAL data[15..0]
 // Retrieval info: USED_PORT: q 0 0 16 0 OUTPUT NODEFVAL q[15..0]
 // Retrieval info: USED_PORT: rdclk 0 0 0 0 INPUT NODEFVAL rdclk
@@ -160,6 +165,7 @@ endmodule
 // Retrieval info: CONNECT: @wrclk 0 0 0 0 wrclk 0 0 0 0
 // Retrieval info: CONNECT: wrfull 0 0 0 0 @wrfull 0 0 0 0
 // Retrieval info: CONNECT: wrusedw 0 0 11 0 @wrusedw 0 0 11 0
+// Retrieval info: CONNECT: @aclr 0 0 0 0 aclr 0 0 0 0
 // Retrieval info: LIBRARY: altera_mf altera_mf.altera_mf_components.all
 // Retrieval info: GEN_FILE: TYPE_NORMAL Tx_fifo.v TRUE
 // Retrieval info: GEN_FILE: TYPE_NORMAL Tx_fifo.inc FALSE
@@ -167,6 +173,6 @@ endmodule
 // Retrieval info: GEN_FILE: TYPE_NORMAL Tx_fifo.bsf TRUE FALSE
 // Retrieval info: GEN_FILE: TYPE_NORMAL Tx_fifo_inst.v FALSE
 // Retrieval info: GEN_FILE: TYPE_NORMAL Tx_fifo_bb.v FALSE
-// Retrieval info: GEN_FILE: TYPE_NORMAL Tx_fifo_waveforms.html TRUE
+// Retrieval info: GEN_FILE: TYPE_NORMAL Tx_fifo_waveforms.html FALSE
 // Retrieval info: GEN_FILE: TYPE_NORMAL Tx_fifo_wave*.jpg FALSE
 // Retrieval info: LIB_FILE: altera_mf
