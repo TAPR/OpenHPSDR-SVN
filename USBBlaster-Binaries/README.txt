@@ -1,4 +1,4 @@
-Phil Harman - VK6APH - 1 Jan 2009
+Phil Harman - VK6APH - 1 Feb 2009
 
 
 Here are the steps requried to progam the EPCS16 on the Mercury board.
