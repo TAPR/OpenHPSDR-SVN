@@ -60,9 +60,9 @@ int HPSDR_LoadFPGA(usb_dev_handle *devh, char *rbf_fnamep) {
 	
 	FILE *rbffile;
 	char buf[MAX_EPO_PACKET_SIZE];
-	int bytes_read;
-	int total_bytes_xferd = 0;
-	int rc; 
+	size_t  bytes_read;
+	size_t total_bytes_xferd = 0;
+	size_t rc; 
 		
 	rbffile = fopen(rbf_fnamep, "rb"); 
 	if ( rbffile == NULL ) {
@@ -84,7 +84,7 @@ int HPSDR_LoadFPGA(usb_dev_handle *devh, char *rbf_fnamep) {
 	 */ 
 	while ( (bytes_read = fread(buf, 1, sizeof(buf), rbffile)) > 0 ) {
 		rc = usb_control_msg(devh, VENDOR_REQ_TYPE_OUT, VENDOR_REQ_FPGA_LOAD, 
-					         0, FL_XFER, buf, bytes_read, USB_TIMEOUT_MSECS);
+					         0, FL_XFER, buf, (int)bytes_read, USB_TIMEOUT_MSECS);
 		total_bytes_xferd += bytes_read; 
 		if ( rc < 0 ) {
 			fprintf(stderr, "LoadFPGA: failed @ FL_XFER\n"); 

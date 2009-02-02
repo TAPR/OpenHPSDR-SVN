@@ -66,10 +66,10 @@ void parseArgs(int argc, char *argv[]) {
   VID = strtol(argv[1], NULL, 16); 
   PID = strtol(argv[2], NULL, 16); 
   i2c_address = strtol(argv[3], NULL, 16);
-  count = strtol(argv[4], NULL, 16);
-  value1 = strtol(argv[5], NULL, 16);
-  if ( argc >= 7 ) value2 = strtol(argv[6], NULL, 16);
-  if ( argc >= 8 ) value3 = strtol(argv[7], NULL, 16);
+  count = (char)strtol(argv[4], NULL, 16);
+  value1 = (char)strtol(argv[5], NULL, 16);
+  if ( argc >= 7 ) value2 = (char)strtol(argv[6], NULL, 16);
+  if ( argc >= 8 ) value3 = (char)strtol(argv[7], NULL, 16);
   
 //printf("debug point 2\n");
 
@@ -114,7 +114,7 @@ void printRC(char *strp, int rc) {
 } 
 
 int main(int argc, char *argv[]) { 
-  int i; 
+  // int i; 
   int rc; 
   struct usb_bus *busp; 
   struct usb_device *devp; 
