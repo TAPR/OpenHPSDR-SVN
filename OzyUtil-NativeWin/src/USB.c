@@ -171,7 +171,7 @@ int HPSDR_UploadFirmware(usb_dev_handle *devh, char *fnamep) {
 		}
 		switch ( type ) {
 			case 0: /* record */
-				my_cksum = (unsigned char)(length + (addr & 0xff) + (addr >>8 + type));
+				my_cksum = (unsigned char)(length + (addr & 0xff) + ( (addr >>8) + type));
 				for ( i = 0; i < length; i++ ) { 
 					this_val = hexitsToUInt(readbuf+9+(i*2),2);
 #if 0 
