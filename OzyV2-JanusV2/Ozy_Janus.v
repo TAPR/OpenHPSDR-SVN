@@ -1,4 +1,4 @@
-// V1.33 31 January 2009  
+// V1.0 3 February 2009  
 //
 // Copyright 2006,2007, 2008 Bill Tracey KD5TFD and Phil Harman VK6APH
 //
@@ -119,7 +119,7 @@
 //
 //
 //
-// Built with Quartus II v7.1 Build 178
+// Built with Quartus II v8.1 Build 178
 //
 // Change log:  Ported from Duplex.v - 22 July 2006
 //              Code comments updated - 23 July 2006
@@ -209,6 +209,8 @@
 //				            - Removed spectrum start flag since no longer required
 //			   31 Jan  2009 - Added test for Penny power out in C&C
 //				1 Feb  2009	- reset Tx code if EP6 not ready so sync always starts at start of frame.
+//			    3 Feb  2009 - Refined Tx reset code so does not reset unless EP6 not available for multiple IFCLKs
+//				            - Added serial number to Ozy code
 //
 ////////////////////////////////////////////////////////////
 
@@ -463,6 +465,8 @@ reg [6:0] loop_counter;         // counts number of times round loop
 reg Tx_fifo_enable;             // set when we want to send data to the Tx FIFO EP6
 reg Tx_fifo_enable_2;           // set when we want to send data to the Tx FIFO EP4
 
+localparam Ozy_serialno = 4'd10;	// Serial number of this version
+
 
 
 //////////////////////////////////////////////////////////////
@@ -659,6 +663,28 @@ wire select_DOUT;
 assign select_DOUT = conf[1] ? MDOUT : DOUT;  // select Janus or Mercury I&Q data 
 
 
+//////////////////////////////////////////////////////////////
+//
+//      Reset Tx state machine if PC not reading us 
+//
+//////////////////////////////////////////////////////////////
+
+// Check that EP6 is available - if not set halt flag
+
+reg halt_flag;					// high if PC not reading USB port
+reg [7:0]halt_count;
+
+always @ (posedge IFCLK)
+begin
+	if (EP6_ready)begin
+		halt_count <= 0;
+		halt_flag <= 0;
+	end
+	else begin
+		if (halt_count > 100)  halt_flag <= 1'b1;
+		else halt_count <= halt_count + 1'b1;
+	end
+end
 
 //////////////////////////////////////////////////////////////
 //
@@ -688,7 +714,6 @@ assign select_DOUT = conf[1] ? MDOUT : DOUT;  // select Janus or Mercury I&Q dat
         If PTT_in, dot or dash inputs are acitve they are sent in C&C Tx_control_0
 */
 
-reg [6:0] AD_state;
 
 //
 // The conditional block below stubs out the AK5394a DOUT and feeds
@@ -739,6 +764,9 @@ reg [7:0] Tx_control_2;    // control 2 to PC
 reg [7:0] Tx_control_3;    // control 3 to PC, number of words free in Rx FIFO
 reg [7:0] Tx_control_4;    // control 4 to PC
 
+	
+reg [6:0] AD_state;
+
 always @ (posedge BCLK)
 // temp values until we use these control signals
 begin
@@ -746,16 +774,17 @@ Tx_control_0[7:2] <= 6'd0;
 Tx_control_1 <= {7'b0,ADC_OVERLOAD};	// ADC_OVERLOAD in bit 0
 Tx_control_2 <= Merc_serialno;
 Tx_control_3 <= Penny_serialno;
-Tx_control_4 <= Penny_power[11:4];
+Tx_control_4 <= Ozy_serialno; 				
+//Tx_control_4 <= Penny_power[11:4];
 
 
-// This needs review since EP6 may not be ready at times and we don't really want to reset everything.
+// if EP6 not ready then reset everything so that 512 byte frame always starts with sync sequence.
 
-if (!EP6_ready)begin		// if EP6 not ready then reset everything so that 512 byte frame 
-	loop_counter <= 0;		// always starts with sync sequence. Brutal but effective!
+if (halt_flag)begin		
+	loop_counter <= 0;		// reset loop counter  
 	Tx_aclr <= 1; 			// clear Tx FIFO
 	AD_state <= 0;			// Reset Tx state machine
-	end
+	end						// and loop here till halt is clear 
 else
 begin
 		Tx_aclr <= 0; 
@@ -943,7 +972,7 @@ wire write_full;
 
 //////////////////////////////////////////////////////////////
 //
-//                              State Machine to manage FX2 USB interface
+//   State Machine to manage FX2 USB interface
 //
 //////////////////////////////////////////////////////////////
 /*
@@ -1010,8 +1039,6 @@ case(state_FX)
       
 // check for Tx data - Tx fifo must be at least half full before we Tx
 4'd6:begin
-       
-		//if (syncd_write_used[10] == 1'b1) begin // data available, so let's start the xfer...
 		if (syncd_write_used > 511) begin // data available, so let's start the xfer...
         	//SLWR <= 1;
             state_FX <= state_FX + 1'b1;
@@ -1758,7 +1785,7 @@ debounce de_dash(.clean_pb(clean_dash), .pb(dash), .clk(IFCLK));
 
 // DEBUG_LED0 - flashes if 12.288MHz Atlas clock selected but not present
 
-assign DEBUG_LED1 = ~EP6_ready;	// LED on when EP6 available
+assign DEBUG_LED1 = ~halt_flag;	// LED on when EP6 available
 //assign DEBUG_LED1 = ~conf[1];	// test config setting 
 assign DEBUG_LED2 = ~PTT_out; 	// lights with PTT active
 assign DEBUG_LED3 = ~have_sync; // lights when sync from PowerSDR detected 

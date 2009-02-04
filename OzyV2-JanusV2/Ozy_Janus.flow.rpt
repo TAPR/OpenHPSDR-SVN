@@ -1,5 +1,5 @@
 Flow report for Ozy_Janus
-Sun Feb 01 16:15:13 2009
+Tue Feb 03 21:20:16 2009
 Quartus II Version 8.1 Build 163 10/28/2008 SJ Web Edition
 
 
@@ -38,7 +38,7 @@ applicable agreement for further details.
 +------------------------------------------------------------------------------+
 ; Flow Summary                                                                 ;
 +------------------------------------+-----------------------------------------+
-; Flow Status                        ; Successful - Sun Feb 01 16:15:13 2009   ;
+; Flow Status                        ; Successful - Tue Feb 03 21:20:16 2009   ;
 ; Quartus II Version                 ; 8.1 Build 163 10/28/2008 SJ Web Edition ;
 ; Revision Name                      ; Ozy_Janus                               ;
 ; Top-level Entity Name              ; Ozy_Janus                               ;
@@ -46,10 +46,10 @@ applicable agreement for further details.
 ; Device                             ; EP2C8Q208C8                             ;
 ; Timing Models                      ; Final                                   ;
 ; Met timing requirements            ; No                                      ;
-; Total logic elements               ; 1,510 / 8,256 ( 18 % )                  ;
-;     Total combinational functions  ; 1,050 / 8,256 ( 13 % )                  ;
-;     Dedicated logic registers      ; 1,042 / 8,256 ( 13 % )                  ;
-; Total registers                    ; 1042                                    ;
+; Total logic elements               ; 1,650 / 8,256 ( 20 % )                  ;
+;     Total combinational functions  ; 1,058 / 8,256 ( 13 % )                  ;
+;     Dedicated logic registers      ; 1,029 / 8,256 ( 12 % )                  ;
+; Total registers                    ; 1029                                    ;
 ; Total pins                         ; 92 / 138 ( 67 % )                       ;
 ; Total virtual pins                 ; 0                                       ;
 ; Total memory bits                  ; 131,072 / 165,888 ( 79 % )              ;
@@ -63,7 +63,7 @@ applicable agreement for further details.
 +-------------------+---------------------+
 ; Option            ; Setting             ;
 +-------------------+---------------------+
-; Start date & time ; 02/01/2009 16:14:09 ;
+; Start date & time ; 02/03/2009 21:18:58 ;
 ; Main task         ; Compilation         ;
 ; Revision Name     ; Ozy_Janus           ;
 +-------------------+---------------------+
@@ -75,7 +75,7 @@ applicable agreement for further details.
 ; Assignment Name                                   ; Value                                      ; Default Value                  ; Entity Name ; Section Id ;
 +---------------------------------------------------+--------------------------------------------+--------------------------------+-------------+------------+
 ; ALLOW_POWER_UP_DONT_CARE                          ; Off                                        ; On                             ; --          ; --         ;
-; COMPILER_SIGNATURE_ID                             ; 123483488765.123347244900456               ; --                             ; --          ; --         ;
+; COMPILER_SIGNATURE_ID                             ; 123483488765.123366353803072               ; --                             ; --          ; --         ;
 ; FITTER_EFFORT                                     ; Standard Fit                               ; Auto Fit                       ; --          ; --         ;
 ; FMAX_REQUIREMENT                                  ; 48 MHz                                     ; --                             ; --          ; --         ;
 ; MESSAGE_SUPPRESSION_RULE_FILE                     ; Ozy_Janus.srf                              ; --                             ; --          ; --         ;
@@ -97,11 +97,11 @@ applicable agreement for further details.
 +-------------------------+--------------+-------------------------+---------------------+------------------------------------+
 ; Module Name             ; Elapsed Time ; Average Processors Used ; Peak Virtual Memory ; Total CPU Time (on all processors) ;
 +-------------------------+--------------+-------------------------+---------------------+------------------------------------+
-; Analysis & Synthesis    ; 00:00:13     ; 1.0                     ; 178 MB              ; 00:00:12                           ;
-; Fitter                  ; 00:00:44     ; 1.0                     ; 215 MB              ; 00:00:42                           ;
+; Analysis & Synthesis    ; 00:00:12     ; 1.0                     ; 178 MB              ; 00:00:11                           ;
+; Fitter                  ; 00:00:59     ; 1.0                     ; 215 MB              ; 00:00:58                           ;
 ; Assembler               ; 00:00:01     ; 1.0                     ; 163 MB              ; 00:00:01                           ;
-; Classic Timing Analyzer ; 00:00:02     ; 1.0                     ; 142 MB              ; 00:00:02                           ;
-; Total                   ; 00:01:00     ; --                      ; --                  ; 00:00:57                           ;
+; Classic Timing Analyzer ; 00:00:02     ; 1.0                     ; 143 MB              ; 00:00:02                           ;
+; Total                   ; 00:01:14     ; --                      ; --                  ; 00:01:12                           ;
 +-------------------------+--------------+-------------------------+---------------------+------------------------------------+
 
 
