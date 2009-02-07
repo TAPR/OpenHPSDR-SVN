@@ -5,19 +5,19 @@ Timing Analyzer Summary
 Type           : Worst-case tsu
 Slack          : N/A
 Required Time  : None
-Actual Time    : 9.678 ns
-From           : GPIO[23]
-To             : gpio_control:gpio_controlSDR|SPI_REGS:spi_regs|sdata[7]
+Actual Time    : 9.386 ns
+From           : FLAGC
+To             : SLWR~reg0
 From Clock     : --
-To Clock       : SPI_SCK
+To Clock       : IFCLK
 Failed Paths   : 0
 
 Type           : Worst-case tco
 Slack          : N/A
 Required Time  : None
-Actual Time    : 22.727 ns
-From           : I2SAudioOut:I2SIQO|outbit_o
-To             : LROUT
+Actual Time    : 22.990 ns
+From           : got_sync
+To             : DEBUG_LED3
 From Clock     : IFCLK
 To Clock       : --
 Failed Paths   : 0
@@ -25,9 +25,9 @@ Failed Paths   : 0
 Type           : Worst-case tpd
 Slack          : N/A
 Required Time  : None
-Actual Time    : 11.946 ns
-From           : SDOBACK
-To             : FX2_PE1
+Actual Time    : 11.757 ns
+From           : FLAGB
+To             : full
 From Clock     : --
 To Clock       : --
 Failed Paths   : 0
@@ -35,112 +35,112 @@ Failed Paths   : 0
 Type           : Worst-case th
 Slack          : N/A
 Required Time  : None
-Actual Time    : 7.363 ns
-From           : spectrum_in
-To             : spectrum_data[4]
+Actual Time    : 8.580 ns
+From           : serno
+To             : temp_Merc_serialno[4]
 From Clock     : --
 To Clock       : IFCLK
 Failed Paths   : 0
 
 Type           : Clock Setup: 'MCLK_12MHZ'
-Slack          : 1.495 ns
+Slack          : 0.109 ns
 Required Time  : 48.00 MHz ( period = 20.833 ns )
-Actual Time    : 56.05 MHz ( period = 17.842 ns )
-From           : Tx_fifo_enable_2
-To             : Tx_fifo:FIFO_2|dcfifo:dcfifo_component|dcfifo_rfm1:auto_generated|altsyncram_rr61:fifo_ram|altsyncram_72f1:altsyncram3|ram_block4a8~portb_datain_reg1
+Actual Time    : 48.51 MHz ( period = 20.616 ns )
+From           : LRCLK_96
+To             : AD_state[0]
 From Clock     : MCLK_12MHZ
 To Clock       : MCLK_12MHZ
 Failed Paths   : 0
 
 Type           : Clock Setup: 'IFCLK'
-Slack          : 1.602 ns
+Slack          : 0.315 ns
 Required Time  : 48.00 MHz ( period = 20.833 ns )
-Actual Time    : 56.73 MHz ( period = 17.628 ns )
-From           : Tx_fifo_enable_2
-To             : Tx_fifo:FIFO_2|dcfifo:dcfifo_component|dcfifo_rfm1:auto_generated|altsyncram_rr61:fifo_ram|altsyncram_72f1:altsyncram3|ram_block4a8~portb_datain_reg1
+Actual Time    : 49.50 MHz ( period = 20.202 ns )
+From           : OC[4]
+To             : CC~reg0
 From Clock     : IFCLK
 To Clock       : IFCLK
 Failed Paths   : 0
 
 Type           : Clock Setup: 'SPI_SCK'
-Slack          : 14.849 ns
+Slack          : 13.093 ns
 Required Time  : 48.00 MHz ( period = 20.833 ns )
-Actual Time    : 167.11 MHz ( period = 5.984 ns )
-From           : gpio_control:gpio_controlSDR|SPI_REGS:spi_regs|saddr[0]
-To             : gpio_control:gpio_controlSDR|SPI_REGS:spi_regs|sdata[4]
+Actual Time    : 129.20 MHz ( period = 7.740 ns )
+From           : gpio_control:gpio_controlSDR|SPI_REGS:spi_regs|saddr[4]
+To             : gpio_control:gpio_controlSDR|SPI_REGS:spi_regs|sdata[1]
 From Clock     : SPI_SCK
 To Clock       : SPI_SCK
 Failed Paths   : 0
 
 Type           : Clock Setup: 'FX2_CLK'
-Slack          : 16.494 ns
+Slack          : 16.859 ns
 Required Time  : 48.00 MHz ( period = 20.833 ns )
-Actual Time    : 230.47 MHz ( period = 4.339 ns )
+Actual Time    : 251.64 MHz ( period = 3.974 ns )
 From           : gpio_control:gpio_controlSDR|SPI_REGS:spi_regs|CS_ph1
-To             : gpio_control:gpio_controlSDR|RegisterX:port0reg|OUT[0]
+To             : gpio_control:gpio_controlSDR|RegisterX:port0reg|OUT[1]
 From Clock     : FX2_CLK
 To Clock       : FX2_CLK
 Failed Paths   : 0
 
 Type           : Clock Setup: 'PCLK_12MHZ'
-Slack          : 31.063 ns
+Slack          : 30.223 ns
 Required Time  : 12.50 MHz ( period = 80.000 ns )
-Actual Time    : 55.95 MHz ( period = 17.874 ns )
-From           : Tx_fifo_enable_2
-To             : Tx_fifo:FIFO_2|dcfifo:dcfifo_component|dcfifo_rfm1:auto_generated|altsyncram_rr61:fifo_ram|altsyncram_72f1:altsyncram3|ram_block4a8~portb_datain_reg1
+Actual Time    : 51.14 MHz ( period = 19.554 ns )
+From           : LRCLK_96
+To             : AD_state[0]
 From Clock     : PCLK_12MHZ
 To Clock       : PCLK_12MHZ
 Failed Paths   : 0
 
 Type           : Clock Setup: 'CLK_12MHZ'
-Slack          : 33.140 ns
+Slack          : 30.706 ns
 Required Time  : 12.29 MHz ( period = 81.380 ns )
-Actual Time    : 66.23 MHz ( period = 15.100 ns )
-From           : Tx_fifo_enable_2
-To             : Tx_fifo:FIFO_2|dcfifo:dcfifo_component|dcfifo_rfm1:auto_generated|altsyncram_rr61:fifo_ram|altsyncram_72f1:altsyncram3|ram_block4a8~portb_datain_reg1
+Actual Time    : 50.08 MHz ( period = 19.968 ns )
+From           : LRCLK_96
+To             : AD_state[0]
 From Clock     : CLK_12MHZ
 To Clock       : CLK_12MHZ
 Failed Paths   : 0
 
 Type           : Clock Hold: 'IFCLK'
-Slack          : -10.577 ns
+Slack          : -11.954 ns
 Required Time  : 48.00 MHz ( period = 20.833 ns )
 Actual Time    : N/A
 From           : halt_flag
-To             : q[2]
+To             : Tx_aclr
 From Clock     : IFCLK
 To Clock       : IFCLK
-Failed Paths   : 638
-
-Type           : Clock Hold: 'PCLK_12MHZ'
-Slack          : -9.611 ns
-Required Time  : 12.50 MHz ( period = 80.000 ns )
-Actual Time    : N/A
-From           : temp_Penny_serialno[0]
-To             : Penny_serialno[0]
-From Clock     : PCLK_12MHZ
-To Clock       : PCLK_12MHZ
-Failed Paths   : 606
+Failed Paths   : 1237
 
 Type           : Clock Hold: 'MCLK_12MHZ'
-Slack          : -9.595 ns
+Slack          : -10.519 ns
 Required Time  : 48.00 MHz ( period = 20.833 ns )
 Actual Time    : N/A
 From           : temp_Penny_serialno[0]
 To             : Penny_serialno[0]
 From Clock     : MCLK_12MHZ
 To Clock       : MCLK_12MHZ
-Failed Paths   : 603
+Failed Paths   : 1246
 
 Type           : Clock Hold: 'CLK_12MHZ'
-Slack          : -8.224 ns
+Slack          : -10.195 ns
 Required Time  : 12.29 MHz ( period = 81.380 ns )
 Actual Time    : N/A
 From           : temp_Penny_serialno[0]
 To             : Penny_serialno[0]
 From Clock     : CLK_12MHZ
 To Clock       : CLK_12MHZ
-Failed Paths   : 418
+Failed Paths   : 1033
+
+Type           : Clock Hold: 'PCLK_12MHZ'
+Slack          : -9.988 ns
+Required Time  : 12.50 MHz ( period = 80.000 ns )
+Actual Time    : N/A
+From           : temp_Penny_serialno[0]
+To             : Penny_serialno[0]
+From Clock     : PCLK_12MHZ
+To Clock       : PCLK_12MHZ
+Failed Paths   : 952
 
 Type           : Clock Hold: 'SPI_SCK'
 Slack          : 0.499 ns
@@ -153,7 +153,7 @@ To Clock       : SPI_SCK
 Failed Paths   : 0
 
 Type           : Clock Hold: 'FX2_CLK'
-Slack          : 1.561 ns
+Slack          : 1.204 ns
 Required Time  : 48.00 MHz ( period = 20.833 ns )
 Actual Time    : N/A
 From           : gpio_control:gpio_controlSDR|SPI_REGS:spi_regs|CS_ph1
@@ -170,7 +170,7 @@ From           :
 To             : 
 From Clock     : 
 To Clock       : 
-Failed Paths   : 2265
+Failed Paths   : 4468
 
 --------------------------------------------------------------------------------------
 
