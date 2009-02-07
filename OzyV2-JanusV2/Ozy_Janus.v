@@ -1,4 +1,4 @@
-// V1.0 3 February 2009  
+// V1.1 7 February 2009  
 //
 // Copyright 2006,2007, 2008 Bill Tracey KD5TFD and Phil Harman VK6APH
 //
@@ -211,6 +211,10 @@
 //				1 Feb  2009	- reset Tx code if EP6 not ready so sync always starts at start of frame.
 //			    3 Feb  2009 - Refined Tx reset code so does not reset unless EP6 not available for multiple IFCLKs
 //				            - Added serial number to Ozy code
+//				6 Feb  2009 - Changed clock generating, now not using Megafunction 
+//			    7 Feb  2009 - Changed Synthesis options for State Machine Processing  = User Encoded
+//							- Changed EP6 timeout to ~50uS
+//							- Release as V1.1
 //
 ////////////////////////////////////////////////////////////
 
@@ -465,7 +469,7 @@ reg [6:0] loop_counter;         // counts number of times round loop
 reg Tx_fifo_enable;             // set when we want to send data to the Tx FIFO EP6
 reg Tx_fifo_enable_2;           // set when we want to send data to the Tx FIFO EP4
 
-localparam Ozy_serialno = 4'd10;	// Serial number of this version
+localparam Ozy_serialno = 4'd11;	// Serial number of this version
 
 
 
@@ -519,27 +523,56 @@ end
         LRCLK must change state on the negative edge of BCLK.
 */
 
-// divide  CLK_MCLK (12.288MHz) to give clocks for the TLV320 etc
-// using Altera Megafunction 
-
-wire [7:0]clock_out;
-wire CBCLK;
+reg CBCLK;
 wire CLRCLK;
 
-clocks clocks(CLK_MCLK, clock_out);
+//clocks clocks(CLK_MCLK, clock_out);
 
-wire BCLK_96_48;
+reg BCLK_96_48;
 wire BCLK_192;
-wire LRCLK_48;
-wire LRCLK_96;
-wire LRCLK_192;
-assign CBCLK = clock_out[1] ;           // 3.072MHz for TLV320 and PWM 
-assign BCLK_96_48 = clock_out[0]; 		// 6.144MHz for AK5394A at 48/96kHz
-assign BCLK_192   = CLK_MCLK; 			// 12.288MHz for AK5394A at 192kHz
-assign CLRCLK = clock_out[7];           // for TLV320 at 48kHz
-assign LRCLK_48 = clock_out[7]; 		// for AK5394A at 48kHz
-assign LRCLK_96 = clock_out[6];			// for AK5394A at 96kHz
-assign LRCLK_192 = clock_out[5];		// for AK5394A at 192kHz
+reg LRCLK_48;
+reg LRCLK_96;
+reg LRCLK_192;
+reg [4:0]count_LRCLK_192;
+reg [4:0]count_LRCLK_96;
+reg [5:0]count_LRCLK_48;
+
+// (C)LRCLK must change on negative edge of BCLK 
+
+always @ (negedge CLK_MCLK)
+begin 	
+	BCLK_96_48 <= ~BCLK_96_48;			// 6.144MHz for AK5394A at 48/96kHz
+	if (BCLK_96_48)
+		CBCLK <= ~CBCLK;				// 3.072MHz for TLV320 and PWM 
+	if (count_LRCLK_192 == 31)begin
+		LRCLK_192 <= ~LRCLK_192;
+		count_LRCLK_192 <= 0;
+		end
+	else
+		count_LRCLK_192 <= count_LRCLK_192 + 1'b1;
+end
+
+always @ (negedge BCLK_96_48)
+begin	
+	if (count_LRCLK_96 == 31)begin
+		LRCLK_96 <= ~LRCLK_96;
+		count_LRCLK_96 <= 0;
+		end
+	else count_LRCLK_96 <= count_LRCLK_96 + 1'b1;
+end
+
+always @ (negedge BCLK_96_48)
+begin
+	if (count_LRCLK_48 == 63)begin
+		LRCLK_48 <= ~LRCLK_48;
+		count_LRCLK_48 <= 0;
+		end
+	else count_LRCLK_48 <= count_LRCLK_48 + 1'b1;
+end 
+
+assign BCLK_192 = CLK_MCLK; 		// 12.288MHz for AK5394A at 192kHz
+assign CLRCLK = LRCLK_48;           // for TLV320 at 48kHz
+		
 
 // Only send 48MHz clock to Atlas bus if Mercury not fitted 
 // conf[1] = 1 if Mercury selected for Rx output
@@ -669,10 +702,10 @@ assign select_DOUT = conf[1] ? MDOUT : DOUT;  // select Janus or Mercury I&Q dat
 //
 //////////////////////////////////////////////////////////////
 
-// Check that EP6 is available - if not set halt flag
+// Check that EP6 is available - if not available for >~50uS then set halt flag
 
 reg halt_flag;					// high if PC not reading USB port
-reg [7:0]halt_count;
+reg [10:0]halt_count;
 
 always @ (posedge IFCLK)
 begin
@@ -681,7 +714,7 @@ begin
 		halt_flag <= 0;
 	end
 	else begin
-		if (halt_count > 100)  halt_flag <= 1'b1;
+		if (halt_count > 1999)  halt_flag <= 1'b1;
 		else halt_count <= halt_count + 1'b1;
 	end
 end
@@ -972,7 +1005,7 @@ wire write_full;
 
 //////////////////////////////////////////////////////////////
 //
-//   State Machine to manage FX2 USB interface
+//                              State Machine to manage FX2 USB interface
 //
 //////////////////////////////////////////////////////////////
 /*

@@ -161,6 +161,11 @@ set_location_assignment PIN_110 -to TCK
 set_location_assignment PIN_105 -to TDO
 set_location_assignment PIN_112 -to TMS
 set_global_assignment -name PARTITION_COLOR 14622752 -section_id Top
+set_global_assignment -name MISC_FILE "C:/HPSDR/trunk/OzyV2-JanusV2/Ozy_Janus.dpf"
+set_global_assignment -name MISC_FILE "C:/HPSDR/trunk/Ozy Test/Ozy_Janus.dpf"
+set_location_assignment PIN_135 -to spectrum_in
+set_location_assignment PIN_176 -to ADC_OVERLOAD
+set_location_assignment PIN_179 -to serno
 set_global_assignment -name VERILOG_FILE division.v
 set_global_assignment -name VERILOG_FILE SPI.v
 set_global_assignment -name VERILOG_FILE LPF_select.v
@@ -177,10 +182,5 @@ set_global_assignment -name VERILOG_FILE Rx_fifo.v
 set_global_assignment -name VERILOG_FILE HPF_select.v
 set_global_assignment -name VERILOG_FILE clock_det.v
 set_global_assignment -name VERILOG_FILE flash.v
-set_location_assignment PIN_104 -to TDI
-set_global_assignment -name MISC_FILE "C:/HPSDR/trunk/OzyV2-JanusV2/Ozy_Janus.dpf"
-set_location_assignment PIN_176 -to ADC_OVERLOAD
-set_location_assignment PIN_141 -to test
-set_location_assignment PIN_179 -to serno
-set_location_assignment PIN_135 -to spectrum_in
 set_location_assignment PIN_181 -to full
+set_global_assignment -name STATE_MACHINE_PROCESSING "USER-ENCODED"
