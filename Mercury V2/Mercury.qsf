@@ -147,18 +147,24 @@ set_global_assignment -name MISC_FILE "C:/Proj/DSP/Mercury/SVN_VE3NEA/Merc_Veril
 set_location_assignment PIN_94 -to DFS0
 set_location_assignment PIN_88 -to DFS1
 set_global_assignment -name MISC_FILE "C:/HPSDR/trunk/Mercury V2/Mercury.dpf"
-set_location_assignment PIN_113 -to A6
-set_instance_assignment -name IO_STANDARD "3.0-V LVTTL" -to A6
-set_instance_assignment -name OUTPUT_TERMINATION OFF -to A6
+set_global_assignment -name MISC_FILE "C:/HPSDR/trunk/Mercury Test/Mercury.dpf"
 set_instance_assignment -name OUTPUT_TERMINATION OFF -to ext_10MHZ
+set_location_assignment PIN_113 -to A6
+set_instance_assignment -name CURRENT_STRENGTH_NEW 16MA -to A6
+set_instance_assignment -name OUTPUT_TERMINATION OFF -to A6
+set_instance_assignment -name PCI_IO ON -to A6
 set_instance_assignment -name CURRENT_STRENGTH_NEW 16MA -to ext_10MHZ
 set_instance_assignment -name PCI_IO OFF -to ext_10MHZ
-set_instance_assignment -name PCI_IO ON -to A6
-set_instance_assignment -name CURRENT_STRENGTH_NEW 16MA -to A6
-set_global_assignment -name ON_CHIP_BITSTREAM_DECOMPRESSION ON
 set_location_assignment PIN_95 -to spectrum
+set_instance_assignment -name CURRENT_STRENGTH_NEW 16MA -to MDOUT
+set_instance_assignment -name PCI_IO ON -to MDOUT
+set_instance_assignment -name OUTPUT_TERMINATION OFF -to MDOUT
 set_location_assignment PIN_76 -to ADC_OVERFLOW
-set_global_assignment -name VERILOG_FILE cbuffer_top.v
+set_location_assignment PIN_72 -to serno
+set_location_assignment PIN_68 -to full
+set_global_assignment -name ENABLE_SIGNALTAP OFF
+set_global_assignment -name USE_SIGNALTAP_FILE "I2S test.stp"
+set_global_assignment -name STATE_MACHINE_PROCESSING "USER-ENCODED"
 set_global_assignment -name VERILOG_FILE spectrum_FIFO.v
 set_global_assignment -name VERILOG_FILE mult_24Sx24S.v
 set_global_assignment -name VERILOG_FILE receiver.v
@@ -183,8 +189,13 @@ set_global_assignment -name VERILOG_FILE mac.v
 set_global_assignment -name VERILOG_FILE division.v
 set_global_assignment -name VECTOR_WAVEFORM_FILE Mercury.vwf
 set_global_assignment -name QIP_FILE fir_shiftreg.qip
-set_instance_assignment -name CURRENT_STRENGTH_NEW 16MA -to MDOUT
-set_instance_assignment -name PCI_IO ON -to MDOUT
-set_instance_assignment -name OUTPUT_TERMINATION OFF -to MDOUT
-set_location_assignment PIN_72 -to serno
-set_location_assignment PIN_68 -to full
+set_global_assignment -name VERILOG_FILE random.v
+set_global_assignment -name VERILOG_FILE TLV320.v
+set_global_assignment -name VERILOG_FILE clocks.v
+set_global_assignment -name VERILOG_FILE freq_to_phase.v
+set_global_assignment -name VERILOG_FILE command_control.v
+set_global_assignment -name VERILOG_FILE Alex_relays.v
+set_global_assignment -name VERILOG_FILE software_serial.v
+set_global_assignment -name VERILOG_FILE spectrum.v
+set_global_assignment -name VERILOG_FILE PLL.v
+set_global_assignment -name VERILOG_FILE alex.v

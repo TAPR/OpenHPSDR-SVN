@@ -1,5 +1,5 @@
 Analysis & Synthesis report for Mercury
-Sun Feb 01 14:49:11 2009
+Wed Feb 11 21:07:29 2009
 Quartus II Version 8.1 Build 163 10/28/2008 SJ Web Edition
 
 
@@ -14,12 +14,12 @@ Quartus II Version 8.1 Build 163 10/28/2008 SJ Web Edition
   6. Analysis & Synthesis Resource Utilization by Entity
   7. Analysis & Synthesis RAM Summary
   8. Analysis & Synthesis DSP Block Usage Summary
-  9. State Machine - |Mercury|CC_state
- 10. State Machine - |Mercury|sno_send
- 11. State Machine - |Mercury|spec_send
- 12. State Machine - |Mercury|TLV
- 13. State Machine - |Mercury|SPI:Alex_SPI_Tx|spi_state
- 14. State Machine - |Mercury|I2SEncode:I2S|encode_state
+  9. State Machine - |Mercury|alex:alex_inst|SPI:Alex_SPI_Tx|spi_state
+ 10. State Machine - |Mercury|command_control:command_control_inst|CC_state
+ 11. State Machine - |Mercury|software_serial:software_serial_inst|sno_send
+ 12. State Machine - |Mercury|spectrum:spectrum_inst|spec_send
+ 13. State Machine - |Mercury|I2SEncode:I2S|encode_state
+ 14. State Machine - |Mercury|TLV320:TLV320_inst|TLV
  15. Registers Removed During Synthesis
  16. Removed Registers Triggering Further Register Optimizations
  17. General Register Statistics
@@ -30,16 +30,16 @@ Quartus II Version 8.1 Build 163 10/28/2008 SJ Web Edition
  22. Source assignments for receiver:receiver_inst|fir:fir_inst_I|fir_mac:fir_mac_inst|mult_24Sx24S:mult_24Sx24S_inst|lpm_mult:lpm_mult_component|mult_djp:auto_generated
  23. Source assignments for receiver:receiver_inst|fir:fir_inst_Q|fir_shiftreg:fir_shiftreg_inst|altshift_taps:altshift_taps_component|shift_taps_ils:auto_generated|altsyncram_qka1:altsyncram2
  24. Source assignments for receiver:receiver_inst|fir:fir_inst_Q|fir_mac:fir_mac_inst|mult_24Sx24S:mult_24Sx24S_inst|lpm_mult:lpm_mult_component|mult_djp:auto_generated
- 25. Source assignments for spectrum_FIFO:inst_spectrum_FIFO|dcfifo:dcfifo_component
- 26. Source assignments for spectrum_FIFO:inst_spectrum_FIFO|dcfifo:dcfifo_component|dcfifo_tnf1:auto_generated
- 27. Source assignments for spectrum_FIFO:inst_spectrum_FIFO|dcfifo:dcfifo_component|dcfifo_tnf1:auto_generated|a_graycounter_tn6:rdptr_g1p
- 28. Source assignments for spectrum_FIFO:inst_spectrum_FIFO|dcfifo:dcfifo_component|dcfifo_tnf1:auto_generated|a_graycounter_p5c:wrptr_g1p
- 29. Source assignments for spectrum_FIFO:inst_spectrum_FIFO|dcfifo:dcfifo_component|dcfifo_tnf1:auto_generated|a_graycounter_o5c:wrptr_gp
- 30. Source assignments for spectrum_FIFO:inst_spectrum_FIFO|dcfifo:dcfifo_component|dcfifo_tnf1:auto_generated|altsyncram_8tu:fifo_ram
- 31. Source assignments for spectrum_FIFO:inst_spectrum_FIFO|dcfifo:dcfifo_component|dcfifo_tnf1:auto_generated|alt_synch_pipe_jv7:rs_dgwp
- 32. Source assignments for spectrum_FIFO:inst_spectrum_FIFO|dcfifo:dcfifo_component|dcfifo_tnf1:auto_generated|alt_synch_pipe_jv7:rs_dgwp|dffpipe_d09:dffpipe6
- 33. Source assignments for spectrum_FIFO:inst_spectrum_FIFO|dcfifo:dcfifo_component|dcfifo_tnf1:auto_generated|alt_synch_pipe_kv7:ws_dgrp
- 34. Source assignments for spectrum_FIFO:inst_spectrum_FIFO|dcfifo:dcfifo_component|dcfifo_tnf1:auto_generated|alt_synch_pipe_kv7:ws_dgrp|dffpipe_e09:dffpipe9
+ 25. Source assignments for spectrum_FIFO:spectrum_FIFO_inst|dcfifo:dcfifo_component
+ 26. Source assignments for spectrum_FIFO:spectrum_FIFO_inst|dcfifo:dcfifo_component|dcfifo_poj1:auto_generated
+ 27. Source assignments for spectrum_FIFO:spectrum_FIFO_inst|dcfifo:dcfifo_component|dcfifo_poj1:auto_generated|a_graycounter_v57:rdptr_g1p
+ 28. Source assignments for spectrum_FIFO:spectrum_FIFO_inst|dcfifo:dcfifo_component|dcfifo_poj1:auto_generated|a_graycounter_rjc:wrptr_g1p
+ 29. Source assignments for spectrum_FIFO:spectrum_FIFO_inst|dcfifo:dcfifo_component|dcfifo_poj1:auto_generated|a_graycounter_qjc:wrptr_gp
+ 30. Source assignments for spectrum_FIFO:spectrum_FIFO_inst|dcfifo:dcfifo_component|dcfifo_poj1:auto_generated|altsyncram_9l31:fifo_ram
+ 31. Source assignments for spectrum_FIFO:spectrum_FIFO_inst|dcfifo:dcfifo_component|dcfifo_poj1:auto_generated|alt_synch_pipe_2e8:rs_dgwp
+ 32. Source assignments for spectrum_FIFO:spectrum_FIFO_inst|dcfifo:dcfifo_component|dcfifo_poj1:auto_generated|alt_synch_pipe_2e8:rs_dgwp|dffpipe_se9:dffpipe6
+ 33. Source assignments for spectrum_FIFO:spectrum_FIFO_inst|dcfifo:dcfifo_component|dcfifo_poj1:auto_generated|alt_synch_pipe_3e8:ws_dgrp
+ 34. Source assignments for spectrum_FIFO:spectrum_FIFO_inst|dcfifo:dcfifo_component|dcfifo_poj1:auto_generated|alt_synch_pipe_3e8:ws_dgrp|dffpipe_te9:dffpipe9
  35. Parameter Settings for User Entity Instance: receiver:receiver_inst|cordic:cordic_inst
  36. Parameter Settings for User Entity Instance: receiver:receiver_inst|varcic:varcic_inst_I1
  37. Parameter Settings for User Entity Instance: receiver:receiver_inst|varcic:varcic_inst_I1|cic_integrator:cic_stages[0].cic_integrator_inst
@@ -116,9 +116,9 @@ Quartus II Version 8.1 Build 163 10/28/2008 SJ Web Edition
 108. Parameter Settings for User Entity Instance: receiver:receiver_inst|fir:fir_inst_Q
 109. Parameter Settings for User Entity Instance: receiver:receiver_inst|fir:fir_inst_Q|fir_shiftreg:fir_shiftreg_inst|altshift_taps:altshift_taps_component
 110. Parameter Settings for User Entity Instance: receiver:receiver_inst|fir:fir_inst_Q|fir_mac:fir_mac_inst|mult_24Sx24S:mult_24Sx24S_inst|lpm_mult:lpm_mult_component
-111. Parameter Settings for User Entity Instance: spectrum_FIFO:inst_spectrum_FIFO|dcfifo:dcfifo_component
-112. Parameter Settings for User Entity Instance: oddClockDivider:refClockDivider
-113. Parameter Settings for Inferred Entity Instance: lpm_mult:Mult0
+111. Parameter Settings for User Entity Instance: spectrum_FIFO:spectrum_FIFO_inst|dcfifo:dcfifo_component
+112. Parameter Settings for User Entity Instance: PLL:PLL_inst|oddClockDivider:refClockDivider
+113. Parameter Settings for Inferred Entity Instance: freq_to_phase:freq_to_phase_inst|lpm_mult:Mult0
 114. altshift_taps Parameter Settings by Entity Instance
 115. lpm_mult Parameter Settings by Entity Instance
 116. Analysis & Synthesis Messages
@@ -148,15 +148,15 @@ applicable agreement for further details.
 +------------------------------------------------------------------------------+
 ; Analysis & Synthesis Summary                                                 ;
 +------------------------------------+-----------------------------------------+
-; Analysis & Synthesis Status        ; Successful - Sun Feb 01 14:49:11 2009   ;
+; Analysis & Synthesis Status        ; Successful - Wed Feb 11 21:07:29 2009   ;
 ; Quartus II Version                 ; 8.1 Build 163 10/28/2008 SJ Web Edition ;
 ; Revision Name                      ; Mercury                                 ;
 ; Top-level Entity Name              ; Mercury                                 ;
 ; Family                             ; Cyclone III                             ;
-; Total logic elements               ; 6,862                                   ;
-;     Total combinational functions  ; 6,627                                   ;
-;     Dedicated logic registers      ; 6,862                                   ;
-; Total registers                    ; 6862                                    ;
+; Total logic elements               ; 6,863                                   ;
+;     Total combinational functions  ; 6,597                                   ;
+;     Dedicated logic registers      ; 6,863                                   ;
+; Total registers                    ; 6863                                    ;
 ; Total pins                         ; 69                                      ;
 ; Total virtual pins                 ; 0                                       ;
 ; Total memory bits                  ; 84,380                                  ;
@@ -174,6 +174,7 @@ applicable agreement for further details.
 ; Top-level entity name                                          ; Mercury            ; Mercury            ;
 ; Family name                                                    ; Cyclone III        ; Stratix            ;
 ; Restructure Multiplexers                                       ; Off                ; Auto               ;
+; State Machine Processing                                       ; User-Encoded       ; Auto               ;
 ; Power-Up Don't Care                                            ; Off                ; On                 ;
 ; Optimization Technique                                         ; Speed              ; Balanced           ;
 ; Use smart compilation                                          ; Off                ; Off                ;
@@ -182,7 +183,6 @@ applicable agreement for further details.
 ; Disable OpenCore Plus hardware evaluation                      ; Off                ; Off                ;
 ; Verilog Version                                                ; Verilog_2001       ; Verilog_2001       ;
 ; VHDL Version                                                   ; VHDL93             ; VHDL93             ;
-; State Machine Processing                                       ; Auto               ; Auto               ;
 ; Safe State Machine                                             ; Off                ; Off                ;
 ; Extract Verilog State Machines                                 ; On                 ; On                 ;
 ; Extract VHDL State Machines                                    ; On                 ; On                 ;
@@ -268,6 +268,16 @@ applicable agreement for further details.
 ; oddClockDiv.v                    ; yes             ; User Verilog HDL File        ; C:/HPSDR/trunk/Mercury V2/oddClockDiv.v                            ;
 ; I2S_Encoder_24bit.v              ; yes             ; User Verilog HDL File        ; C:/HPSDR/trunk/Mercury V2/I2S_Encoder_24bit.v                      ;
 ; Mercury.v                        ; yes             ; User Verilog HDL File        ; C:/HPSDR/trunk/Mercury V2/Mercury.v                                ;
+; random.v                         ; yes             ; User Verilog HDL File        ; C:/HPSDR/trunk/Mercury V2/random.v                                 ;
+; TLV320.v                         ; yes             ; User Verilog HDL File        ; C:/HPSDR/trunk/Mercury V2/TLV320.v                                 ;
+; clocks.v                         ; yes             ; User Verilog HDL File        ; C:/HPSDR/trunk/Mercury V2/clocks.v                                 ;
+; freq_to_phase.v                  ; yes             ; User Verilog HDL File        ; C:/HPSDR/trunk/Mercury V2/freq_to_phase.v                          ;
+; command_control.v                ; yes             ; User Verilog HDL File        ; C:/HPSDR/trunk/Mercury V2/command_control.v                        ;
+; Alex_relays.v                    ; yes             ; User Verilog HDL File        ; C:/HPSDR/trunk/Mercury V2/Alex_relays.v                            ;
+; software_serial.v                ; yes             ; User Verilog HDL File        ; C:/HPSDR/trunk/Mercury V2/software_serial.v                        ;
+; spectrum.v                       ; yes             ; User Verilog HDL File        ; C:/HPSDR/trunk/Mercury V2/spectrum.v                               ;
+; PLL.v                            ; yes             ; User Verilog HDL File        ; C:/HPSDR/trunk/Mercury V2/PLL.v                                    ;
+; alex.v                           ; yes             ; User Verilog HDL File        ; C:/HPSDR/trunk/Mercury V2/alex.v                                   ;
 ; altsyncram.tdf                   ; yes             ; Megafunction                 ; c:/altera/81/quartus/libraries/megafunctions/altsyncram.tdf        ;
 ; stratix_ram_block.inc            ; yes             ; Megafunction                 ; c:/altera/81/quartus/libraries/megafunctions/stratix_ram_block.inc ;
 ; lpm_mux.inc                      ; yes             ; Megafunction                 ; c:/altera/81/quartus/libraries/megafunctions/lpm_mux.inc           ;
@@ -301,15 +311,15 @@ applicable agreement for further details.
 ; alt_sync_fifo.inc                ; yes             ; Auto-Found AHDL File         ; C:/HPSDR/trunk/VK6APH/Mercury/megafunctions/alt_sync_fifo.inc      ;
 ; altsyncram_fifo.inc              ; yes             ; Auto-Found AHDL File         ; C:/HPSDR/trunk/VK6APH/Mercury/megafunctions/altsyncram_fifo.inc    ;
 ; aglobal51.inc                    ; yes             ; Auto-Found AHDL File         ; C:/HPSDR/trunk/VK6APH/Mercury/megafunctions/aglobal51.inc          ;
-; db/dcfifo_tnf1.tdf               ; yes             ; Auto-Generated Megafunction  ; C:/HPSDR/trunk/Mercury V2/db/dcfifo_tnf1.tdf                       ;
-; db/a_graycounter_tn6.tdf         ; yes             ; Auto-Generated Megafunction  ; C:/HPSDR/trunk/Mercury V2/db/a_graycounter_tn6.tdf                 ;
-; db/a_graycounter_p5c.tdf         ; yes             ; Auto-Generated Megafunction  ; C:/HPSDR/trunk/Mercury V2/db/a_graycounter_p5c.tdf                 ;
-; db/a_graycounter_o5c.tdf         ; yes             ; Auto-Generated Megafunction  ; C:/HPSDR/trunk/Mercury V2/db/a_graycounter_o5c.tdf                 ;
-; db/altsyncram_8tu.tdf            ; yes             ; Auto-Generated Megafunction  ; C:/HPSDR/trunk/Mercury V2/db/altsyncram_8tu.tdf                    ;
-; db/alt_synch_pipe_jv7.tdf        ; yes             ; Auto-Generated Megafunction  ; C:/HPSDR/trunk/Mercury V2/db/alt_synch_pipe_jv7.tdf                ;
-; db/dffpipe_d09.tdf               ; yes             ; Auto-Generated Megafunction  ; C:/HPSDR/trunk/Mercury V2/db/dffpipe_d09.tdf                       ;
-; db/alt_synch_pipe_kv7.tdf        ; yes             ; Auto-Generated Megafunction  ; C:/HPSDR/trunk/Mercury V2/db/alt_synch_pipe_kv7.tdf                ;
-; db/dffpipe_e09.tdf               ; yes             ; Auto-Generated Megafunction  ; C:/HPSDR/trunk/Mercury V2/db/dffpipe_e09.tdf                       ;
+; db/dcfifo_poj1.tdf               ; yes             ; Auto-Generated Megafunction  ; C:/HPSDR/trunk/Mercury V2/db/dcfifo_poj1.tdf                       ;
+; db/a_graycounter_v57.tdf         ; yes             ; Auto-Generated Megafunction  ; C:/HPSDR/trunk/Mercury V2/db/a_graycounter_v57.tdf                 ;
+; db/a_graycounter_rjc.tdf         ; yes             ; Auto-Generated Megafunction  ; C:/HPSDR/trunk/Mercury V2/db/a_graycounter_rjc.tdf                 ;
+; db/a_graycounter_qjc.tdf         ; yes             ; Auto-Generated Megafunction  ; C:/HPSDR/trunk/Mercury V2/db/a_graycounter_qjc.tdf                 ;
+; db/altsyncram_9l31.tdf           ; yes             ; Auto-Generated Megafunction  ; C:/HPSDR/trunk/Mercury V2/db/altsyncram_9l31.tdf                   ;
+; db/alt_synch_pipe_2e8.tdf        ; yes             ; Auto-Generated Megafunction  ; C:/HPSDR/trunk/Mercury V2/db/alt_synch_pipe_2e8.tdf                ;
+; db/dffpipe_se9.tdf               ; yes             ; Auto-Generated Megafunction  ; C:/HPSDR/trunk/Mercury V2/db/dffpipe_se9.tdf                       ;
+; db/alt_synch_pipe_3e8.tdf        ; yes             ; Auto-Generated Megafunction  ; C:/HPSDR/trunk/Mercury V2/db/alt_synch_pipe_3e8.tdf                ;
+; db/dffpipe_te9.tdf               ; yes             ; Auto-Generated Megafunction  ; C:/HPSDR/trunk/Mercury V2/db/dffpipe_te9.tdf                       ;
 ; db/cmpr_h66.tdf                  ; yes             ; Auto-Generated Megafunction  ; C:/HPSDR/trunk/Mercury V2/db/cmpr_h66.tdf                          ;
 ; db/mult_4611.tdf                 ; yes             ; Auto-Generated Megafunction  ; C:/HPSDR/trunk/Mercury V2/db/mult_4611.tdf                         ;
 +----------------------------------+-----------------+------------------------------+--------------------------------------------------------------------+
@@ -320,29 +330,29 @@ applicable agreement for further details.
 +---------------------------------------------+------------+
 ; Resource                                    ; Usage      ;
 +---------------------------------------------+------------+
-; Estimated Total logic elements              ; 6,862      ;
+; Estimated Total logic elements              ; 6,863      ;
 ;                                             ;            ;
-; Total combinational functions               ; 6627       ;
+; Total combinational functions               ; 6597       ;
 ; Logic element usage by number of LUT inputs ;            ;
-;     -- 4 input functions                    ; 471        ;
-;     -- 3 input functions                    ; 5252       ;
-;     -- <=2 input functions                  ; 904        ;
+;     -- 4 input functions                    ; 449        ;
+;     -- 3 input functions                    ; 5261       ;
+;     -- <=2 input functions                  ; 887        ;
 ;                                             ;            ;
 ; Logic elements by mode                      ;            ;
-;     -- normal mode                          ; 935        ;
-;     -- arithmetic mode                      ; 5692       ;
+;     -- normal mode                          ; 902        ;
+;     -- arithmetic mode                      ; 5695       ;
 ;                                             ;            ;
-; Total registers                             ; 6862       ;
-;     -- Dedicated logic registers            ; 6862       ;
+; Total registers                             ; 6863       ;
+;     -- Dedicated logic registers            ; 6863       ;
 ;     -- I/O registers                        ; 0          ;
 ;                                             ;            ;
 ; I/O pins                                    ; 69         ;
 ; Total memory bits                           ; 84380      ;
 ; Embedded Multiplier 9-bit elements          ; 22         ;
 ; Maximum fan-out node                        ; CLKA~input ;
-; Maximum fan-out                             ; 6604       ;
-; Total fan-out                               ; 41280      ;
-; Average fan-out                             ; 3.00       ;
+; Maximum fan-out                             ; 6607       ;
+; Total fan-out                               ; 41317      ;
+; Average fan-out                             ; 3.01       ;
 +---------------------------------------------+------------+
 
 
@@ -351,14 +361,21 @@ applicable agreement for further details.
 +--------------------------------------------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+--------------+
 ; Compilation Hierarchy Node                                   ; LC Combinationals ; LC Registers ; Memory Bits ; DSP Elements ; DSP 9x9 ; DSP 18x18 ; Pins ; Virtual Pins ; Full Hierarchy Name                                                                                                                                                             ; Library Name ;
 +--------------------------------------------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+--------------+
-; |Mercury                                                     ; 6627 (371)        ; 6862 (314)   ; 84380       ; 22           ; 2       ; 10        ; 69   ; 0            ; |Mercury                                                                                                                                                                        ; work         ;
-;    |HPF_select:Alex_HPF_select|                              ; 51 (51)           ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Mercury|HPF_select:Alex_HPF_select                                                                                                                                             ; work         ;
-;    |I2SEncode:I2S|                                           ; 69 (69)           ; 59 (59)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Mercury|I2SEncode:I2S                                                                                                                                                          ; work         ;
-;    |LPF_select:Alex_LPF_select|                              ; 85 (85)           ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Mercury|LPF_select:Alex_LPF_select                                                                                                                                             ; work         ;
-;    |SPI:Alex_SPI_Tx|                                         ; 64 (64)           ; 41 (41)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Mercury|SPI:Alex_SPI_Tx                                                                                                                                                        ; work         ;
-;    |lpm_mult:Mult0|                                          ; 33 (0)            ; 0 (0)        ; 0           ; 8            ; 0       ; 4         ; 0    ; 0            ; |Mercury|lpm_mult:Mult0                                                                                                                                                         ; work         ;
-;       |mult_4611:auto_generated|                             ; 33 (33)           ; 0 (0)        ; 0           ; 8            ; 0       ; 4         ; 0    ; 0            ; |Mercury|lpm_mult:Mult0|mult_4611:auto_generated                                                                                                                                ; work         ;
-;    |oddClockDivider:refClockDivider|                         ; 16 (16)           ; 8 (8)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Mercury|oddClockDivider:refClockDivider                                                                                                                                        ; work         ;
+; |Mercury                                                     ; 6597 (29)         ; 6863 (28)    ; 84380       ; 22           ; 2       ; 10        ; 69   ; 0            ; |Mercury                                                                                                                                                                        ; work         ;
+;    |I2SEncode:I2S|                                           ; 67 (67)           ; 57 (57)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Mercury|I2SEncode:I2S                                                                                                                                                          ; work         ;
+;    |PLL:PLL_inst|                                            ; 33 (17)           ; 19 (11)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Mercury|PLL:PLL_inst                                                                                                                                                           ; work         ;
+;       |oddClockDivider:refClockDivider|                      ; 16 (16)           ; 8 (8)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Mercury|PLL:PLL_inst|oddClockDivider:refClockDivider                                                                                                                           ; work         ;
+;    |TLV320:TLV320_inst|                                      ; 65 (65)           ; 37 (37)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Mercury|TLV320:TLV320_inst                                                                                                                                                     ; work         ;
+;    |alex:alex_inst|                                          ; 226 (46)          ; 30 (0)       ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Mercury|alex:alex_inst                                                                                                                                                         ; work         ;
+;       |HPF_select:Alex_HPF_inst|                             ; 38 (38)           ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Mercury|alex:alex_inst|HPF_select:Alex_HPF_inst                                                                                                                                ; work         ;
+;       |LPF_select:Alex_LPF_inst|                             ; 85 (85)           ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Mercury|alex:alex_inst|LPF_select:Alex_LPF_inst                                                                                                                                ; work         ;
+;       |SPI:Alex_SPI_Tx|                                      ; 57 (57)           ; 30 (30)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Mercury|alex:alex_inst|SPI:Alex_SPI_Tx                                                                                                                                         ; work         ;
+;    |clocks:clocks_inst|                                      ; 7 (7)             ; 6 (6)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Mercury|clocks:clocks_inst                                                                                                                                                     ; work         ;
+;    |command_control:command_control_inst|                    ; 107 (107)         ; 102 (102)    ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Mercury|command_control:command_control_inst                                                                                                                                   ; work         ;
+;    |freq_to_phase:freq_to_phase_inst|                        ; 72 (39)           ; 96 (96)      ; 0           ; 8            ; 0       ; 4         ; 0    ; 0            ; |Mercury|freq_to_phase:freq_to_phase_inst                                                                                                                                       ; work         ;
+;       |lpm_mult:Mult0|                                       ; 33 (0)            ; 0 (0)        ; 0           ; 8            ; 0       ; 4         ; 0    ; 0            ; |Mercury|freq_to_phase:freq_to_phase_inst|lpm_mult:Mult0                                                                                                                        ; work         ;
+;          |mult_4611:auto_generated|                          ; 33 (33)           ; 0 (0)        ; 0           ; 8            ; 0       ; 4         ; 0    ; 0            ; |Mercury|freq_to_phase:freq_to_phase_inst|lpm_mult:Mult0|mult_4611:auto_generated                                                                                               ; work         ;
+;    |random:random_inst|                                      ; 15 (15)           ; 16 (16)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Mercury|random:random_inst                                                                                                                                                     ; work         ;
 ;    |receiver:receiver_inst|                                  ; 5885 (0)          ; 6334 (0)     ; 18844       ; 14           ; 2       ; 6         ; 0    ; 0            ; |Mercury|receiver:receiver_inst                                                                                                                                                 ; work         ;
 ;       |cic:cic_inst_I2|                                      ; 1061 (71)         ; 1481 (16)    ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Mercury|receiver:receiver_inst|cic:cic_inst_I2                                                                                                                                 ; work         ;
 ;          |cic_comb:cic_stages[0].cic_comb_inst|              ; 45 (45)           ; 90 (90)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Mercury|receiver:receiver_inst|cic:cic_inst_I2|cic_comb:cic_stages[0].cic_comb_inst                                                                                            ; work         ;
@@ -455,19 +472,21 @@ applicable agreement for further details.
 ;          |cic_integrator:cic_stages[2].cic_integrator_inst|  ; 64 (64)           ; 64 (64)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Mercury|receiver:receiver_inst|varcic:varcic_inst_Q1|cic_integrator:cic_stages[2].cic_integrator_inst                                                                          ; work         ;
 ;          |cic_integrator:cic_stages[3].cic_integrator_inst|  ; 64 (64)           ; 64 (64)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Mercury|receiver:receiver_inst|varcic:varcic_inst_Q1|cic_integrator:cic_stages[3].cic_integrator_inst                                                                          ; work         ;
 ;          |cic_integrator:cic_stages[4].cic_integrator_inst|  ; 64 (64)           ; 64 (64)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Mercury|receiver:receiver_inst|varcic:varcic_inst_Q1|cic_integrator:cic_stages[4].cic_integrator_inst                                                                          ; work         ;
-;    |spectrum_FIFO:inst_spectrum_FIFO|                        ; 53 (0)            ; 106 (0)      ; 65536       ; 0            ; 0       ; 0         ; 0    ; 0            ; |Mercury|spectrum_FIFO:inst_spectrum_FIFO                                                                                                                                       ; work         ;
-;       |dcfifo:dcfifo_component|                              ; 53 (0)            ; 106 (0)      ; 65536       ; 0            ; 0       ; 0         ; 0    ; 0            ; |Mercury|spectrum_FIFO:inst_spectrum_FIFO|dcfifo:dcfifo_component                                                                                                               ; work         ;
-;          |dcfifo_tnf1:auto_generated|                        ; 53 (5)            ; 106 (26)     ; 65536       ; 0            ; 0       ; 0         ; 0    ; 0            ; |Mercury|spectrum_FIFO:inst_spectrum_FIFO|dcfifo:dcfifo_component|dcfifo_tnf1:auto_generated                                                                                    ; work         ;
-;             |a_graycounter_o5c:wrptr_gp|                     ; 14 (14)           ; 14 (14)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Mercury|spectrum_FIFO:inst_spectrum_FIFO|dcfifo:dcfifo_component|dcfifo_tnf1:auto_generated|a_graycounter_o5c:wrptr_gp                                                         ; work         ;
-;             |a_graycounter_tn6:rdptr_g1p|                    ; 17 (17)           ; 14 (14)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Mercury|spectrum_FIFO:inst_spectrum_FIFO|dcfifo:dcfifo_component|dcfifo_tnf1:auto_generated|a_graycounter_tn6:rdptr_g1p                                                        ; work         ;
-;             |alt_synch_pipe_jv7:rs_dgwp|                     ; 0 (0)             ; 26 (0)       ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Mercury|spectrum_FIFO:inst_spectrum_FIFO|dcfifo:dcfifo_component|dcfifo_tnf1:auto_generated|alt_synch_pipe_jv7:rs_dgwp                                                         ; work         ;
-;                |dffpipe_d09:dffpipe6|                        ; 0 (0)             ; 26 (26)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Mercury|spectrum_FIFO:inst_spectrum_FIFO|dcfifo:dcfifo_component|dcfifo_tnf1:auto_generated|alt_synch_pipe_jv7:rs_dgwp|dffpipe_d09:dffpipe6                                    ; work         ;
-;             |alt_synch_pipe_kv7:ws_dgrp|                     ; 0 (0)             ; 26 (0)       ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Mercury|spectrum_FIFO:inst_spectrum_FIFO|dcfifo:dcfifo_component|dcfifo_tnf1:auto_generated|alt_synch_pipe_kv7:ws_dgrp                                                         ; work         ;
-;                |dffpipe_e09:dffpipe9|                        ; 0 (0)             ; 26 (26)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Mercury|spectrum_FIFO:inst_spectrum_FIFO|dcfifo:dcfifo_component|dcfifo_tnf1:auto_generated|alt_synch_pipe_kv7:ws_dgrp|dffpipe_e09:dffpipe9                                    ; work         ;
-;             |altsyncram_8tu:fifo_ram|                        ; 0 (0)             ; 0 (0)        ; 65536       ; 0            ; 0       ; 0         ; 0    ; 0            ; |Mercury|spectrum_FIFO:inst_spectrum_FIFO|dcfifo:dcfifo_component|dcfifo_tnf1:auto_generated|altsyncram_8tu:fifo_ram                                                            ; work         ;
-;             |cmpr_h66:rdempty_eq_comp|                       ; 8 (8)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Mercury|spectrum_FIFO:inst_spectrum_FIFO|dcfifo:dcfifo_component|dcfifo_tnf1:auto_generated|cmpr_h66:rdempty_eq_comp                                                           ; work         ;
-;             |cmpr_h66:wrempty_eq_comp|                       ; 8 (8)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Mercury|spectrum_FIFO:inst_spectrum_FIFO|dcfifo:dcfifo_component|dcfifo_tnf1:auto_generated|cmpr_h66:wrempty_eq_comp                                                           ; work         ;
-;             |cmpr_h66:wrfull_eq_comp|                        ; 1 (1)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Mercury|spectrum_FIFO:inst_spectrum_FIFO|dcfifo:dcfifo_component|dcfifo_tnf1:auto_generated|cmpr_h66:wrfull_eq_comp                                                            ; work         ;
+;    |software_serial:software_serial_inst|                    ; 14 (14)           ; 8 (8)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Mercury|software_serial:software_serial_inst                                                                                                                                   ; work         ;
+;    |spectrum:spectrum_inst|                                  ; 24 (24)           ; 24 (24)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Mercury|spectrum:spectrum_inst                                                                                                                                                 ; work         ;
+;    |spectrum_FIFO:spectrum_FIFO_inst|                        ; 53 (0)            ; 106 (0)      ; 65536       ; 0            ; 0       ; 0         ; 0    ; 0            ; |Mercury|spectrum_FIFO:spectrum_FIFO_inst                                                                                                                                       ; work         ;
+;       |dcfifo:dcfifo_component|                              ; 53 (0)            ; 106 (0)      ; 65536       ; 0            ; 0       ; 0         ; 0    ; 0            ; |Mercury|spectrum_FIFO:spectrum_FIFO_inst|dcfifo:dcfifo_component                                                                                                               ; work         ;
+;          |dcfifo_poj1:auto_generated|                        ; 53 (5)            ; 106 (26)     ; 65536       ; 0            ; 0       ; 0         ; 0    ; 0            ; |Mercury|spectrum_FIFO:spectrum_FIFO_inst|dcfifo:dcfifo_component|dcfifo_poj1:auto_generated                                                                                    ; work         ;
+;             |a_graycounter_qjc:wrptr_gp|                     ; 14 (14)           ; 14 (14)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Mercury|spectrum_FIFO:spectrum_FIFO_inst|dcfifo:dcfifo_component|dcfifo_poj1:auto_generated|a_graycounter_qjc:wrptr_gp                                                         ; work         ;
+;             |a_graycounter_v57:rdptr_g1p|                    ; 17 (17)           ; 14 (14)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Mercury|spectrum_FIFO:spectrum_FIFO_inst|dcfifo:dcfifo_component|dcfifo_poj1:auto_generated|a_graycounter_v57:rdptr_g1p                                                        ; work         ;
+;             |alt_synch_pipe_2e8:rs_dgwp|                     ; 0 (0)             ; 26 (0)       ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Mercury|spectrum_FIFO:spectrum_FIFO_inst|dcfifo:dcfifo_component|dcfifo_poj1:auto_generated|alt_synch_pipe_2e8:rs_dgwp                                                         ; work         ;
+;                |dffpipe_se9:dffpipe6|                        ; 0 (0)             ; 26 (26)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Mercury|spectrum_FIFO:spectrum_FIFO_inst|dcfifo:dcfifo_component|dcfifo_poj1:auto_generated|alt_synch_pipe_2e8:rs_dgwp|dffpipe_se9:dffpipe6                                    ; work         ;
+;             |alt_synch_pipe_3e8:ws_dgrp|                     ; 0 (0)             ; 26 (0)       ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Mercury|spectrum_FIFO:spectrum_FIFO_inst|dcfifo:dcfifo_component|dcfifo_poj1:auto_generated|alt_synch_pipe_3e8:ws_dgrp                                                         ; work         ;
+;                |dffpipe_te9:dffpipe9|                        ; 0 (0)             ; 26 (26)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Mercury|spectrum_FIFO:spectrum_FIFO_inst|dcfifo:dcfifo_component|dcfifo_poj1:auto_generated|alt_synch_pipe_3e8:ws_dgrp|dffpipe_te9:dffpipe9                                    ; work         ;
+;             |altsyncram_9l31:fifo_ram|                       ; 0 (0)             ; 0 (0)        ; 65536       ; 0            ; 0       ; 0         ; 0    ; 0            ; |Mercury|spectrum_FIFO:spectrum_FIFO_inst|dcfifo:dcfifo_component|dcfifo_poj1:auto_generated|altsyncram_9l31:fifo_ram                                                           ; work         ;
+;             |cmpr_h66:rdempty_eq_comp|                       ; 8 (8)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Mercury|spectrum_FIFO:spectrum_FIFO_inst|dcfifo:dcfifo_component|dcfifo_poj1:auto_generated|cmpr_h66:rdempty_eq_comp                                                           ; work         ;
+;             |cmpr_h66:wrempty_eq_comp|                       ; 8 (8)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Mercury|spectrum_FIFO:spectrum_FIFO_inst|dcfifo:dcfifo_component|dcfifo_poj1:auto_generated|cmpr_h66:wrempty_eq_comp                                                           ; work         ;
+;             |cmpr_h66:wrfull_eq_comp|                        ; 1 (1)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Mercury|spectrum_FIFO:spectrum_FIFO_inst|dcfifo:dcfifo_component|dcfifo_poj1:auto_generated|cmpr_h66:wrfull_eq_comp                                                            ; work         ;
 +--------------------------------------------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+--------------+
 Note: For table entries with two numbers listed, the numbers in parentheses indicate the number of resources of the given type used by the specific entity alone. The numbers listed outside of parentheses indicate the total resources of the given type used by the specific entity and all of its sub-entities in the hierarchy.
 
@@ -480,7 +499,7 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 ; receiver:receiver_inst|fir:fir_inst_I|fir_shiftreg:fir_shiftreg_inst|altshift_taps:altshift_taps_component|shift_taps_ils:auto_generated|altsyncram_qka1:altsyncram2|ALTSYNCRAM ; AUTO ; Simple Dual Port ; 254          ; 25           ; 254          ; 25           ; 6350  ; None               ;
 ; receiver:receiver_inst|fir:fir_inst_Q|fir_shiftreg:fir_shiftreg_inst|altshift_taps:altshift_taps_component|shift_taps_ils:auto_generated|altsyncram_qka1:altsyncram2|ALTSYNCRAM ; AUTO ; Simple Dual Port ; 254          ; 25           ; 254          ; 25           ; 6350  ; None               ;
 ; receiver:receiver_inst|fir_coeffs:fir_coeffs_inst|fir_coeffs_rom:fir_coeffs_rom_inst|altsyncram:altsyncram_component|altsyncram_h2a1:auto_generated|ALTSYNCRAM                  ; AUTO ; ROM              ; 256          ; 24           ; --           ; --           ; 6144  ; fir_coeffs_rom.hex ;
-; spectrum_FIFO:inst_spectrum_FIFO|dcfifo:dcfifo_component|dcfifo_tnf1:auto_generated|altsyncram_8tu:fifo_ram|ALTSYNCRAM                                                          ; AUTO ; Simple Dual Port ; 4096         ; 16           ; 4096         ; 16           ; 65536 ; None               ;
+; spectrum_FIFO:spectrum_FIFO_inst|dcfifo:dcfifo_component|dcfifo_poj1:auto_generated|altsyncram_9l31:fifo_ram|ALTSYNCRAM                                                         ; AUTO ; Simple Dual Port ; 4096         ; 16           ; 4096         ; 16           ; 65536 ; None               ;
 +---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+------+------------------+--------------+--------------+--------------+--------------+-------+--------------------+
 
 
@@ -502,85 +521,85 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 Note: number of Embedded Multiplier Blocks used is only available after a successful fit.
 
 
-Encoding Type:  One-Hot
-+-------------------------------------------------------+
-; State Machine - |Mercury|CC_state                     ;
-+-------------+-------------+-------------+-------------+
-; Name        ; CC_state.00 ; CC_state.10 ; CC_state.01 ;
-+-------------+-------------+-------------+-------------+
-; CC_state.00 ; 0           ; 0           ; 0           ;
-; CC_state.01 ; 1           ; 0           ; 1           ;
-; CC_state.10 ; 1           ; 1           ; 0           ;
-+-------------+-------------+-------------+-------------+
+Encoding Type:  User-Encoded
++-------------------------------------------------------------------+
+; State Machine - |Mercury|alex:alex_inst|SPI:Alex_SPI_Tx|spi_state ;
++----------------+--------------+--------------+--------------------+
+; Name           ; spi_state~14 ; spi_state~13 ; spi_state~12       ;
++----------------+--------------+--------------+--------------------+
+; spi_state.0000 ; 0            ; 0            ; 0                  ;
+; spi_state.0001 ; 0            ; 0            ; 1                  ;
+; spi_state.0010 ; 0            ; 1            ; 0                  ;
+; spi_state.0011 ; 0            ; 1            ; 1                  ;
+; spi_state.0100 ; 1            ; 0            ; 0                  ;
+; spi_state.0101 ; 1            ; 0            ; 1                  ;
+; spi_state.0110 ; 1            ; 1            ; 0                  ;
++----------------+--------------+--------------+--------------------+
 
 
-Encoding Type:  One-Hot
-+-------------------------------------------------------+
-; State Machine - |Mercury|sno_send                     ;
-+-------------+-------------+-------------+-------------+
-; Name        ; sno_send.00 ; sno_send.10 ; sno_send.01 ;
-+-------------+-------------+-------------+-------------+
-; sno_send.00 ; 0           ; 0           ; 0           ;
-; sno_send.01 ; 1           ; 0           ; 1           ;
-; sno_send.10 ; 1           ; 1           ; 0           ;
-+-------------+-------------+-------------+-------------+
+Encoding Type:  User-Encoded
++------------------------------------------------------------------------+
+; State Machine - |Mercury|command_control:command_control_inst|CC_state ;
++-------------+------------+---------------------------------------------+
+; Name        ; CC_state~8 ; CC_state~7                                  ;
++-------------+------------+---------------------------------------------+
+; CC_state.00 ; 0          ; 0                                           ;
+; CC_state.01 ; 0          ; 1                                           ;
+; CC_state.10 ; 1          ; 0                                           ;
++-------------+------------+---------------------------------------------+
 
 
-Encoding Type:  One-Hot
+Encoding Type:  User-Encoded
++------------------------------------------------------------------------+
+; State Machine - |Mercury|software_serial:software_serial_inst|sno_send ;
++-------------+------------+---------------------------------------------+
+; Name        ; sno_send~8 ; sno_send~7                                  ;
++-------------+------------+---------------------------------------------+
+; sno_send.00 ; 0          ; 0                                           ;
+; sno_send.01 ; 0          ; 1                                           ;
+; sno_send.10 ; 1          ; 0                                           ;
++-------------+------------+---------------------------------------------+
+
+
+Encoding Type:  User-Encoded
 +-----------------------------------------------------------+
-; State Machine - |Mercury|spec_send                        ;
-+--------------+--------------+--------------+--------------+
-; Name         ; spec_send.00 ; spec_send.10 ; spec_send.01 ;
-+--------------+--------------+--------------+--------------+
-; spec_send.00 ; 0            ; 0            ; 0            ;
-; spec_send.01 ; 1            ; 0            ; 1            ;
-; spec_send.10 ; 1            ; 1            ; 0            ;
-+--------------+--------------+--------------+--------------+
+; State Machine - |Mercury|spectrum:spectrum_inst|spec_send ;
++--------------+--------------+-----------------------------+
+; Name         ; spec_send~11 ; spec_send~10                ;
++--------------+--------------+-----------------------------+
+; spec_send.00 ; 0            ; 0                           ;
+; spec_send.01 ; 0            ; 1                           ;
+; spec_send.10 ; 1            ; 0                           ;
++--------------+--------------+-----------------------------+
 
 
-Encoding Type:  One-Hot
-+----------------------------------------------------------------------------+
-; State Machine - |Mercury|TLV                                               ;
-+----------+----------+----------+----------+----------+----------+----------+
-; Name     ; TLV.0101 ; TLV.0100 ; TLV.0011 ; TLV.0010 ; TLV.0001 ; TLV.0000 ;
-+----------+----------+----------+----------+----------+----------+----------+
-; TLV.0000 ; 0        ; 0        ; 0        ; 0        ; 0        ; 0        ;
-; TLV.0001 ; 0        ; 0        ; 0        ; 0        ; 1        ; 1        ;
-; TLV.0010 ; 0        ; 0        ; 0        ; 1        ; 0        ; 1        ;
-; TLV.0011 ; 0        ; 0        ; 1        ; 0        ; 0        ; 1        ;
-; TLV.0100 ; 0        ; 1        ; 0        ; 0        ; 0        ; 1        ;
-; TLV.0101 ; 1        ; 0        ; 0        ; 0        ; 0        ; 1        ;
-+----------+----------+----------+----------+----------+----------+----------+
+Encoding Type:  User-Encoded
++---------------------------------------------------------------------+
+; State Machine - |Mercury|I2SEncode:I2S|encode_state                 ;
++------------------+----------------+----------------+----------------+
+; Name             ; encode_state~9 ; encode_state~8 ; encode_state~7 ;
++------------------+----------------+----------------+----------------+
+; encode_state.000 ; 0              ; 0              ; 0              ;
+; encode_state.001 ; 0              ; 0              ; 1              ;
+; encode_state.010 ; 0              ; 1              ; 0              ;
+; encode_state.011 ; 0              ; 1              ; 1              ;
+; encode_state.100 ; 1              ; 0              ; 0              ;
++------------------+----------------+----------------+----------------+
 
 
-Encoding Type:  One-Hot
-+---------------------------------------------------------------------------------------------------------------------------------------+
-; State Machine - |Mercury|SPI:Alex_SPI_Tx|spi_state                                                                                    ;
-+----------------+----------------+----------------+----------------+----------------+----------------+----------------+----------------+
-; Name           ; spi_state.0110 ; spi_state.0101 ; spi_state.0100 ; spi_state.0011 ; spi_state.0010 ; spi_state.0001 ; spi_state.0000 ;
-+----------------+----------------+----------------+----------------+----------------+----------------+----------------+----------------+
-; spi_state.0000 ; 0              ; 0              ; 0              ; 0              ; 0              ; 0              ; 0              ;
-; spi_state.0001 ; 0              ; 0              ; 0              ; 0              ; 0              ; 1              ; 1              ;
-; spi_state.0010 ; 0              ; 0              ; 0              ; 0              ; 1              ; 0              ; 1              ;
-; spi_state.0011 ; 0              ; 0              ; 0              ; 1              ; 0              ; 0              ; 1              ;
-; spi_state.0100 ; 0              ; 0              ; 1              ; 0              ; 0              ; 0              ; 1              ;
-; spi_state.0101 ; 0              ; 1              ; 0              ; 0              ; 0              ; 0              ; 1              ;
-; spi_state.0110 ; 1              ; 0              ; 0              ; 0              ; 0              ; 0              ; 1              ;
-+----------------+----------------+----------------+----------------+----------------+----------------+----------------+----------------+
-
-
-Encoding Type:  One-Hot
-+-----------------------------------------------------------------------------------------------------------------+
-; State Machine - |Mercury|I2SEncode:I2S|encode_state                                                             ;
-+------------------+------------------+------------------+------------------+------------------+------------------+
-; Name             ; encode_state.011 ; encode_state.010 ; encode_state.001 ; encode_state.000 ; encode_state.100 ;
-+------------------+------------------+------------------+------------------+------------------+------------------+
-; encode_state.000 ; 0                ; 0                ; 0                ; 0                ; 0                ;
-; encode_state.001 ; 0                ; 0                ; 1                ; 1                ; 0                ;
-; encode_state.010 ; 0                ; 1                ; 0                ; 1                ; 0                ;
-; encode_state.011 ; 1                ; 0                ; 0                ; 1                ; 0                ;
-; encode_state.100 ; 0                ; 0                ; 0                ; 1                ; 1                ;
-+------------------+------------------+------------------+------------------+------------------+------------------+
+Encoding Type:  User-Encoded
++-------------------------------------------------+
+; State Machine - |Mercury|TLV320:TLV320_inst|TLV ;
++----------+-------+-------+----------------------+
+; Name     ; TLV~9 ; TLV~8 ; TLV~7                ;
++----------+-------+-------+----------------------+
+; TLV.0000 ; 0     ; 0     ; 0                    ;
+; TLV.0001 ; 0     ; 0     ; 1                    ;
+; TLV.0010 ; 0     ; 1     ; 0                    ;
+; TLV.0011 ; 0     ; 1     ; 1                    ;
+; TLV.0100 ; 1     ; 0     ; 0                    ;
+; TLV.0101 ; 1     ; 0     ; 1                    ;
++----------+-------+-------+----------------------+
 
 
 +---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
@@ -588,26 +607,26 @@ Encoding Type:  One-Hot
 +-------------------------------------------------------------------------------------------------------------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 ; Register name                                                                                                                                         ; Reason for Removal                                                                                                                                                ;
 +-------------------------------------------------------------------------------------------------------------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-; SPI:Alex_SPI_Tx|previous_Alex_data[7,16..18]                                                                                                          ; Stuck at GND due to stuck port data_in                                                                                                                            ;
-; spectrum_FIFO:inst_spectrum_FIFO|dcfifo:dcfifo_component|dcfifo_tnf1:auto_generated|a_graycounter_p5c:wrptr_g1p|counter_ffa0                          ; Lost fanout                                                                                                                                                       ;
-; spectrum_FIFO:inst_spectrum_FIFO|dcfifo:dcfifo_component|dcfifo_tnf1:auto_generated|a_graycounter_p5c:wrptr_g1p|counter_ffa1                          ; Lost fanout                                                                                                                                                       ;
-; spectrum_FIFO:inst_spectrum_FIFO|dcfifo:dcfifo_component|dcfifo_tnf1:auto_generated|a_graycounter_p5c:wrptr_g1p|counter_ffa2                          ; Lost fanout                                                                                                                                                       ;
-; spectrum_FIFO:inst_spectrum_FIFO|dcfifo:dcfifo_component|dcfifo_tnf1:auto_generated|a_graycounter_p5c:wrptr_g1p|counter_ffa3                          ; Lost fanout                                                                                                                                                       ;
-; spectrum_FIFO:inst_spectrum_FIFO|dcfifo:dcfifo_component|dcfifo_tnf1:auto_generated|a_graycounter_p5c:wrptr_g1p|counter_ffa4                          ; Lost fanout                                                                                                                                                       ;
-; spectrum_FIFO:inst_spectrum_FIFO|dcfifo:dcfifo_component|dcfifo_tnf1:auto_generated|a_graycounter_p5c:wrptr_g1p|counter_ffa5                          ; Lost fanout                                                                                                                                                       ;
-; spectrum_FIFO:inst_spectrum_FIFO|dcfifo:dcfifo_component|dcfifo_tnf1:auto_generated|a_graycounter_p5c:wrptr_g1p|counter_ffa6                          ; Lost fanout                                                                                                                                                       ;
-; spectrum_FIFO:inst_spectrum_FIFO|dcfifo:dcfifo_component|dcfifo_tnf1:auto_generated|a_graycounter_p5c:wrptr_g1p|counter_ffa7                          ; Lost fanout                                                                                                                                                       ;
-; spectrum_FIFO:inst_spectrum_FIFO|dcfifo:dcfifo_component|dcfifo_tnf1:auto_generated|a_graycounter_p5c:wrptr_g1p|counter_ffa8                          ; Lost fanout                                                                                                                                                       ;
-; spectrum_FIFO:inst_spectrum_FIFO|dcfifo:dcfifo_component|dcfifo_tnf1:auto_generated|a_graycounter_p5c:wrptr_g1p|counter_ffa9                          ; Lost fanout                                                                                                                                                       ;
-; spectrum_FIFO:inst_spectrum_FIFO|dcfifo:dcfifo_component|dcfifo_tnf1:auto_generated|a_graycounter_p5c:wrptr_g1p|counter_ffa10                         ; Lost fanout                                                                                                                                                       ;
-; spectrum_FIFO:inst_spectrum_FIFO|dcfifo:dcfifo_component|dcfifo_tnf1:auto_generated|a_graycounter_p5c:wrptr_g1p|counter_ffa11                         ; Lost fanout                                                                                                                                                       ;
-; spectrum_FIFO:inst_spectrum_FIFO|dcfifo:dcfifo_component|dcfifo_tnf1:auto_generated|a_graycounter_p5c:wrptr_g1p|counter_ffa12                         ; Lost fanout                                                                                                                                                       ;
-; spectrum_FIFO:inst_spectrum_FIFO|dcfifo:dcfifo_component|dcfifo_tnf1:auto_generated|a_graycounter_p5c:wrptr_g1p|parity_ff                             ; Lost fanout                                                                                                                                                       ;
+; alex:alex_inst|SPI:Alex_SPI_Tx|previous_Alex_data[7..11,16..18,25..26]                                                                                ; Stuck at GND due to stuck port data_in                                                                                                                            ;
+; spectrum_FIFO:spectrum_FIFO_inst|dcfifo:dcfifo_component|dcfifo_poj1:auto_generated|a_graycounter_rjc:wrptr_g1p|counter_ffa0                          ; Lost fanout                                                                                                                                                       ;
+; spectrum_FIFO:spectrum_FIFO_inst|dcfifo:dcfifo_component|dcfifo_poj1:auto_generated|a_graycounter_rjc:wrptr_g1p|counter_ffa1                          ; Lost fanout                                                                                                                                                       ;
+; spectrum_FIFO:spectrum_FIFO_inst|dcfifo:dcfifo_component|dcfifo_poj1:auto_generated|a_graycounter_rjc:wrptr_g1p|counter_ffa2                          ; Lost fanout                                                                                                                                                       ;
+; spectrum_FIFO:spectrum_FIFO_inst|dcfifo:dcfifo_component|dcfifo_poj1:auto_generated|a_graycounter_rjc:wrptr_g1p|counter_ffa3                          ; Lost fanout                                                                                                                                                       ;
+; spectrum_FIFO:spectrum_FIFO_inst|dcfifo:dcfifo_component|dcfifo_poj1:auto_generated|a_graycounter_rjc:wrptr_g1p|counter_ffa4                          ; Lost fanout                                                                                                                                                       ;
+; spectrum_FIFO:spectrum_FIFO_inst|dcfifo:dcfifo_component|dcfifo_poj1:auto_generated|a_graycounter_rjc:wrptr_g1p|counter_ffa5                          ; Lost fanout                                                                                                                                                       ;
+; spectrum_FIFO:spectrum_FIFO_inst|dcfifo:dcfifo_component|dcfifo_poj1:auto_generated|a_graycounter_rjc:wrptr_g1p|counter_ffa6                          ; Lost fanout                                                                                                                                                       ;
+; spectrum_FIFO:spectrum_FIFO_inst|dcfifo:dcfifo_component|dcfifo_poj1:auto_generated|a_graycounter_rjc:wrptr_g1p|counter_ffa7                          ; Lost fanout                                                                                                                                                       ;
+; spectrum_FIFO:spectrum_FIFO_inst|dcfifo:dcfifo_component|dcfifo_poj1:auto_generated|a_graycounter_rjc:wrptr_g1p|counter_ffa8                          ; Lost fanout                                                                                                                                                       ;
+; spectrum_FIFO:spectrum_FIFO_inst|dcfifo:dcfifo_component|dcfifo_poj1:auto_generated|a_graycounter_rjc:wrptr_g1p|counter_ffa9                          ; Lost fanout                                                                                                                                                       ;
+; spectrum_FIFO:spectrum_FIFO_inst|dcfifo:dcfifo_component|dcfifo_poj1:auto_generated|a_graycounter_rjc:wrptr_g1p|counter_ffa10                         ; Lost fanout                                                                                                                                                       ;
+; spectrum_FIFO:spectrum_FIFO_inst|dcfifo:dcfifo_component|dcfifo_poj1:auto_generated|a_graycounter_rjc:wrptr_g1p|counter_ffa11                         ; Lost fanout                                                                                                                                                       ;
+; spectrum_FIFO:spectrum_FIFO_inst|dcfifo:dcfifo_component|dcfifo_poj1:auto_generated|a_graycounter_rjc:wrptr_g1p|counter_ffa12                         ; Lost fanout                                                                                                                                                       ;
+; spectrum_FIFO:spectrum_FIFO_inst|dcfifo:dcfifo_component|dcfifo_poj1:auto_generated|a_graycounter_rjc:wrptr_g1p|parity_ff                             ; Lost fanout                                                                                                                                                       ;
 ; receiver:receiver_inst|fir:fir_inst_Q|fir_mac:fir_mac_inst|mult_24Sx24S:mult_24Sx24S_inst|lpm_mult:lpm_mult_component|mult_djp:auto_generated|dffe136 ; Lost fanout                                                                                                                                                       ;
 ; receiver:receiver_inst|fir:fir_inst_Q|fir_mac:fir_mac_inst|mult_24Sx24S:mult_24Sx24S_inst|lpm_mult:lpm_mult_component|mult_djp:auto_generated|dffe138 ; Lost fanout                                                                                                                                                       ;
 ; receiver:receiver_inst|fir:fir_inst_I|fir_mac:fir_mac_inst|mult_24Sx24S:mult_24Sx24S_inst|lpm_mult:lpm_mult_component|mult_djp:auto_generated|dffe136 ; Lost fanout                                                                                                                                                       ;
 ; receiver:receiver_inst|fir:fir_inst_I|fir_mac:fir_mac_inst|mult_24Sx24S:mult_24Sx24S_inst|lpm_mult:lpm_mult_component|mult_djp:auto_generated|dffe138 ; Lost fanout                                                                                                                                                       ;
-; SPI:Alex_SPI_Tx|previous_Alex_data[19]                                                                                                                ; Merged with SPI:Alex_SPI_Tx|previous_Alex_data[0]                                                                                                                 ;
+; alex:alex_inst|SPI:Alex_SPI_Tx|previous_Alex_data[19]                                                                                                 ; Merged with alex:alex_inst|SPI:Alex_SPI_Tx|previous_Alex_data[0]                                                                                                  ;
 ; receiver:receiver_inst|fir:fir_inst_I|fir_mac:fir_mac_inst|mult_24Sx24S:mult_24Sx24S_inst|lpm_mult:lpm_mult_component|mult_djp:auto_generated|dffe130 ; Merged with receiver:receiver_inst|fir:fir_inst_I|fir_mac:fir_mac_inst|mult_24Sx24S:mult_24Sx24S_inst|lpm_mult:lpm_mult_component|mult_djp:auto_generated|dffe127 ;
 ; receiver:receiver_inst|fir:fir_inst_I|fir_mac:fir_mac_inst|mult_24Sx24S:mult_24Sx24S_inst|lpm_mult:lpm_mult_component|mult_djp:auto_generated|dffe127 ; Merged with receiver:receiver_inst|fir:fir_inst_I|fir_mac:fir_mac_inst|mult_24Sx24S:mult_24Sx24S_inst|lpm_mult:lpm_mult_component|mult_djp:auto_generated|dffe124 ;
 ; receiver:receiver_inst|fir:fir_inst_I|fir_mac:fir_mac_inst|mult_24Sx24S:mult_24Sx24S_inst|lpm_mult:lpm_mult_component|mult_djp:auto_generated|dffe124 ; Merged with receiver:receiver_inst|fir:fir_inst_I|fir_mac:fir_mac_inst|mult_24Sx24S:mult_24Sx24S_inst|lpm_mult:lpm_mult_component|mult_djp:auto_generated|dffe121 ;
@@ -616,7 +635,7 @@ Encoding Type:  One-Hot
 ; receiver:receiver_inst|fir:fir_inst_Q|fir_mac:fir_mac_inst|mult_24Sx24S:mult_24Sx24S_inst|lpm_mult:lpm_mult_component|mult_djp:auto_generated|dffe127 ; Merged with receiver:receiver_inst|fir:fir_inst_Q|fir_mac:fir_mac_inst|mult_24Sx24S:mult_24Sx24S_inst|lpm_mult:lpm_mult_component|mult_djp:auto_generated|dffe124 ;
 ; receiver:receiver_inst|fir:fir_inst_Q|fir_mac:fir_mac_inst|mult_24Sx24S:mult_24Sx24S_inst|lpm_mult:lpm_mult_component|mult_djp:auto_generated|dffe124 ; Merged with receiver:receiver_inst|fir:fir_inst_Q|fir_mac:fir_mac_inst|mult_24Sx24S:mult_24Sx24S_inst|lpm_mult:lpm_mult_component|mult_djp:auto_generated|dffe121 ;
 ; receiver:receiver_inst|fir:fir_inst_Q|fir_mac:fir_mac_inst|mult_24Sx24S:mult_24Sx24S_inst|lpm_mult:lpm_mult_component|mult_djp:auto_generated|dffe121 ; Merged with receiver:receiver_inst|fir:fir_inst_Q|fir_mac:fir_mac_inst|mult_24Sx24S:mult_24Sx24S_inst|lpm_mult:lpm_mult_component|mult_djp:auto_generated|dffe118 ;
-; SPI:Alex_SPI_Tx|previous_Alex_data[27..28]                                                                                                            ; Merged with SPI:Alex_SPI_Tx|previous_Alex_data[15]                                                                                                                ;
+; alex:alex_inst|SPI:Alex_SPI_Tx|previous_Alex_data[27..28]                                                                                             ; Merged with alex:alex_inst|SPI:Alex_SPI_Tx|previous_Alex_data[15]                                                                                                 ;
 ; receiver:receiver_inst|cordic:cordic_inst|Z[0][19]                                                                                                    ; Merged with receiver:receiver_inst|cordic:cordic_inst|Z[0][18]                                                                                                    ;
 ; receiver:receiver_inst|cic:cic_inst_Q2|sample_no[0..15]                                                                                               ; Lost fanout                                                                                                                                                       ;
 ; receiver:receiver_inst|varcic:varcic_inst_Q1|sample_no[0..15]                                                                                         ; Lost fanout                                                                                                                                                       ;
@@ -644,23 +663,15 @@ Encoding Type:  One-Hot
 ; receiver:receiver_inst|cordic:cordic_inst|X[2][0]                                                                                                     ; Stuck at GND due to stuck port data_in                                                                                                                            ;
 ; receiver:receiver_inst|cordic:cordic_inst|Y[2][1]                                                                                                     ; Stuck at GND due to stuck port data_in                                                                                                                            ;
 ; receiver:receiver_inst|cordic:cordic_inst|X[2][1]                                                                                                     ; Stuck at GND due to stuck port data_in                                                                                                                            ;
-; TLV~7                                                                                                                                                 ; Lost fanout                                                                                                                                                       ;
-; TLV~8                                                                                                                                                 ; Lost fanout                                                                                                                                                       ;
-; TLV~9                                                                                                                                                 ; Lost fanout                                                                                                                                                       ;
-; TLV~10                                                                                                                                                ; Lost fanout                                                                                                                                                       ;
-; SPI:Alex_SPI_Tx|spi_state~12                                                                                                                          ; Lost fanout                                                                                                                                                       ;
-; SPI:Alex_SPI_Tx|spi_state~13                                                                                                                          ; Lost fanout                                                                                                                                                       ;
-; SPI:Alex_SPI_Tx|spi_state~14                                                                                                                          ; Lost fanout                                                                                                                                                       ;
-; SPI:Alex_SPI_Tx|spi_state~15                                                                                                                          ; Lost fanout                                                                                                                                                       ;
-; I2SEncode:I2S|encode_state~7                                                                                                                          ; Lost fanout                                                                                                                                                       ;
-; I2SEncode:I2S|encode_state~8                                                                                                                          ; Lost fanout                                                                                                                                                       ;
-; counter[0]                                                                                                                                            ; Merged with count_12288[0]                                                                                                                                        ;
+; alex:alex_inst|SPI:Alex_SPI_Tx|previous_Alex_data[24]                                                                                                 ; Merged with alex:alex_inst|SPI:Alex_SPI_Tx|previous_Alex_data[0]                                                                                                  ;
+; alex:alex_inst|SPI:Alex_SPI_Tx|spi_state~15                                                                                                           ; Lost fanout                                                                                                                                                       ;
+; TLV320:TLV320_inst|TLV~10                                                                                                                             ; Lost fanout                                                                                                                                                       ;
+; counter[0]                                                                                                                                            ; Merged with PLL:PLL_inst|count_12288[0]                                                                                                                           ;
 ; receiver:receiver_inst|fir:fir_inst_I|fir_mac:fir_mac_inst|mult_24Sx24S:mult_24Sx24S_inst|lpm_mult:lpm_mult_component|mult_djp:auto_generated|dffe133 ; Lost fanout                                                                                                                                                       ;
 ; receiver:receiver_inst|fir:fir_inst_Q|fir_mac:fir_mac_inst|mult_24Sx24S:mult_24Sx24S_inst|lpm_mult:lpm_mult_component|mult_djp:auto_generated|dffe133 ; Lost fanout                                                                                                                                                       ;
-; counter[24..26]                                                                                                                                       ; Lost fanout                                                                                                                                                       ;
 ; receiver:receiver_inst|fir:fir_inst_I|fir_mac:fir_mac_inst|out_data[47..55]                                                                           ; Lost fanout                                                                                                                                                       ;
 ; receiver:receiver_inst|fir:fir_inst_Q|fir_mac:fir_mac_inst|out_data[47..55]                                                                           ; Lost fanout                                                                                                                                                       ;
-; Total Number of Removed Registers = 124                                                                                                               ;                                                                                                                                                                   ;
+; Total Number of Removed Registers = 120                                                                                                               ;                                                                                                                                                                   ;
 +-------------------------------------------------------------------------------------------------------------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 
@@ -689,12 +700,12 @@ Encoding Type:  One-Hot
 +----------------------------------------------+-------+
 ; Statistic                                    ; Value ;
 +----------------------------------------------+-------+
-; Total registers                              ; 6862  ;
-; Number of registers using Synchronous Clear  ; 119   ;
+; Total registers                              ; 6863  ;
+; Number of registers using Synchronous Clear  ; 121   ;
 ; Number of registers using Synchronous Load   ; 903   ;
-; Number of registers using Asynchronous Clear ; 238   ;
+; Number of registers using Asynchronous Clear ; 344   ;
 ; Number of registers using Asynchronous Load  ; 0     ;
-; Number of registers using Clock Enable       ; 4399  ;
+; Number of registers using Clock Enable       ; 4405  ;
 ; Number of registers using Preset             ; 0     ;
 +----------------------------------------------+-------+
 
@@ -704,9 +715,9 @@ Encoding Type:  One-Hot
 +------------------------------------------------------------------------------------------------------------------------------+---------+
 ; Inverted Register                                                                                                            ; Fan out ;
 +------------------------------------------------------------------------------------------------------------------------------+---------+
-; spectrum_FIFO:inst_spectrum_FIFO|dcfifo:dcfifo_component|dcfifo_tnf1:auto_generated|a_graycounter_tn6:rdptr_g1p|counter_ffa0 ; 4       ;
-; spectrum_FIFO:inst_spectrum_FIFO|dcfifo:dcfifo_component|dcfifo_tnf1:auto_generated|a_graycounter_tn6:rdptr_g1p|parity_ff    ; 1       ;
+; spectrum_FIFO:spectrum_FIFO_inst|dcfifo:dcfifo_component|dcfifo_poj1:auto_generated|a_graycounter_v57:rdptr_g1p|counter_ffa0 ; 4       ;
 ; receiver:receiver_inst|fir:fir_inst_I|clear_mac                                                                              ; 171     ;
+; spectrum_FIFO:spectrum_FIFO_inst|dcfifo:dcfifo_component|dcfifo_poj1:auto_generated|a_graycounter_v57:rdptr_g1p|parity_ff    ; 1       ;
 ; receiver:receiver_inst|fir:fir_inst_Q|clear_mac                                                                              ; 171     ;
 ; Total number of inverted registers = 4                                                                                       ;         ;
 +------------------------------------------------------------------------------------------------------------------------------+---------+
@@ -717,23 +728,23 @@ Encoding Type:  One-Hot
 +--------------------+-----------+---------------+----------------------+------------------------+------------+--------------------------------------------------------------------+
 ; Multiplexer Inputs ; Bus Width ; Baseline Area ; Area if Restructured ; Saving if Restructured ; Registered ; Example Multiplexer Output                                         ;
 +--------------------+-----------+---------------+----------------------+------------------------+------------+--------------------------------------------------------------------+
-; 3:1                ; 15 bits   ; 30 LEs        ; 15 LEs               ; 15 LEs                 ; Yes        ; |Mercury|temp_ADC[6]                                               ;
-; 4:1                ; 46 bits   ; 92 LEs        ; 92 LEs               ; 0 LEs                  ; Yes        ; |Mercury|receiver:receiver_inst|varcic:varcic_inst_Q1|out_data[21] ;
-; 4:1                ; 17 bits   ; 34 LEs        ; 17 LEs               ; 17 LEs                 ; Yes        ; |Mercury|receiver:receiver_inst|cordic:cordic_inst|X[0][6]         ;
-; 4:1                ; 4 bits    ; 8 LEs         ; 4 LEs                ; 4 LEs                  ; Yes        ; |Mercury|bit_cnt[3]                                                ;
-; 4:1                ; 5 bits    ; 10 LEs        ; 5 LEs                ; 5 LEs                  ; Yes        ; |Mercury|SPI:Alex_SPI_Tx|data_count[2]                             ;
-; 5:1                ; 6 bits    ; 18 LEs        ; 6 LEs                ; 12 LEs                 ; Yes        ; |Mercury|bits[3]                                                   ;
-; 5:1                ; 4 bits    ; 12 LEs        ; 4 LEs                ; 8 LEs                  ; Yes        ; |Mercury|sno_data_count[3]                                         ;
-; 10:1               ; 2 bits    ; 12 LEs        ; 8 LEs                ; 4 LEs                  ; Yes        ; |Mercury|receiver:receiver_inst|fir:fir_inst_I|state[1]            ;
-; 10:1               ; 2 bits    ; 12 LEs        ; 8 LEs                ; 4 LEs                  ; Yes        ; |Mercury|receiver:receiver_inst|fir:fir_inst_Q|state[1]            ;
-; 5:1                ; 24 bits   ; 72 LEs        ; 24 LEs               ; 48 LEs                 ; Yes        ; |Mercury|I2SEncode:I2S|data[4]                                     ;
-; 6:1                ; 4 bits    ; 16 LEs        ; 4 LEs                ; 12 LEs                 ; Yes        ; |Mercury|spec_data_count[2]                                        ;
+; 3:1                ; 15 bits   ; 30 LEs        ; 15 LEs               ; 15 LEs                 ; Yes        ; |Mercury|random:random_inst|out[6]                                 ;
+; 4:1                ; 46 bits   ; 92 LEs        ; 92 LEs               ; 0 LEs                  ; Yes        ; |Mercury|receiver:receiver_inst|varcic:varcic_inst_Q1|out_data[20] ;
+; 4:1                ; 17 bits   ; 34 LEs        ; 17 LEs               ; 17 LEs                 ; Yes        ; |Mercury|receiver:receiver_inst|cordic:cordic_inst|X[0][12]        ;
+; 4:1                ; 4 bits    ; 8 LEs         ; 4 LEs                ; 4 LEs                  ; Yes        ; |Mercury|TLV320:TLV320_inst|bit_cnt[3]                             ;
+; 4:1                ; 5 bits    ; 10 LEs        ; 5 LEs                ; 5 LEs                  ; Yes        ; |Mercury|alex:alex_inst|SPI:Alex_SPI_Tx|data_count[4]              ;
+; 5:1                ; 6 bits    ; 18 LEs        ; 6 LEs                ; 12 LEs                 ; Yes        ; |Mercury|command_control:command_control_inst|bits[1]              ;
+; 5:1                ; 4 bits    ; 12 LEs        ; 4 LEs                ; 8 LEs                  ; Yes        ; |Mercury|software_serial:software_serial_inst|sno_data_count[0]    ;
+; 5:1                ; 4 bits    ; 12 LEs        ; 4 LEs                ; 8 LEs                  ; Yes        ; |Mercury|spectrum:spectrum_inst|spec_data_count[0]                 ;
+; 10:1               ; 2 bits    ; 12 LEs        ; 8 LEs                ; 4 LEs                  ; Yes        ; |Mercury|receiver:receiver_inst|fir:fir_inst_I|state[2]            ;
+; 10:1               ; 2 bits    ; 12 LEs        ; 8 LEs                ; 4 LEs                  ; Yes        ; |Mercury|receiver:receiver_inst|fir:fir_inst_Q|state[2]            ;
+; 5:1                ; 24 bits   ; 72 LEs        ; 24 LEs               ; 48 LEs                 ; Yes        ; |Mercury|I2SEncode:I2S|data[6]                                     ;
 ; 7:1                ; 5 bits    ; 20 LEs        ; 5 LEs                ; 15 LEs                 ; Yes        ; |Mercury|I2SEncode:I2S|bit_count[4]                                ;
 ; 3:1                ; 3 bits    ; 6 LEs         ; 3 LEs                ; 3 LEs                  ; No         ; |Mercury|receiver:receiver_inst|varcic:varcic_inst_I1|ShiftLeft0   ;
 ; 3:1                ; 3 bits    ; 6 LEs         ; 3 LEs                ; 3 LEs                  ; No         ; |Mercury|receiver:receiver_inst|varcic:varcic_inst_I1|ShiftLeft0   ;
 ; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; No         ; |Mercury|receiver:receiver_inst|varcic:varcic_inst_I1|ShiftLeft0   ;
-; 6:1                ; 2 bits    ; 8 LEs         ; 2 LEs                ; 6 LEs                  ; No         ; |Mercury|LPF_select:Alex_LPF_select|LPF[3]                         ;
-; 6:1                ; 2 bits    ; 8 LEs         ; 2 LEs                ; 6 LEs                  ; No         ; |Mercury|Alex_data[2]                                              ;
+; 6:1                ; 2 bits    ; 8 LEs         ; 2 LEs                ; 6 LEs                  ; No         ; |Mercury|alex:alex_inst|LPF_select:Alex_LPF_inst|LPF[3]            ;
+; 6:1                ; 2 bits    ; 8 LEs         ; 2 LEs                ; 6 LEs                  ; No         ; |Mercury|alex:alex_inst|Alex_data[2]                               ;
 +--------------------+-----------+---------------+----------------------+------------------------+------------+--------------------------------------------------------------------+
 
 
@@ -1041,7 +1052,7 @@ Encoding Type:  One-Hot
 
 
 +---------------------------------------------------------------------------------+
-; Source assignments for spectrum_FIFO:inst_spectrum_FIFO|dcfifo:dcfifo_component ;
+; Source assignments for spectrum_FIFO:spectrum_FIFO_inst|dcfifo:dcfifo_component ;
 +---------------------------------+-------+------+--------------------------------+
 ; Assignment                      ; Value ; From ; To                             ;
 +---------------------------------+-------+------+--------------------------------+
@@ -1050,7 +1061,7 @@ Encoding Type:  One-Hot
 
 
 +------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-; Source assignments for spectrum_FIFO:inst_spectrum_FIFO|dcfifo:dcfifo_component|dcfifo_tnf1:auto_generated                                                       ;
+; Source assignments for spectrum_FIFO:spectrum_FIFO_inst|dcfifo:dcfifo_component|dcfifo_poj1:auto_generated                                                       ;
 +---------------------------------+-----------------------------------------------------------------------------------+-----------------+--------------------------+
 ; Assignment                      ; Value                                                                             ; From            ; To                       ;
 +---------------------------------+-----------------------------------------------------------------------------------+-----------------+--------------------------+
@@ -1060,14 +1071,14 @@ Encoding Type:  One-Hot
 ; SUPPRESS_DA_RULE_INTERNAL       ; d102                                                                              ; -               ; -                        ;
 ; SUPPRESS_DA_RULE_INTERNAL       ; s102                                                                              ; -               ; -                        ;
 ; CUT                             ; ON                                                                                ; rdptr_g         ; ws_dgrp|dffpipe9|dffe10a ;
-; SDC_STATEMENT                   ; set_false_path -from *rdptr_g* -to *ws_dgrp|dffpipe_e09:dffpipe9|dffe10a*         ; -               ; -                        ;
+; SDC_STATEMENT                   ; set_false_path -from *rdptr_g* -to *ws_dgrp|dffpipe_te9:dffpipe9|dffe10a*         ; -               ; -                        ;
 ; CUT                             ; ON                                                                                ; delayed_wrptr_g ; rs_dgwp|dffpipe6|dffe7a  ;
-; SDC_STATEMENT                   ; set_false_path -from *delayed_wrptr_g* -to *rs_dgwp|dffpipe_d09:dffpipe6|dffe7a*  ; -               ; -                        ;
+; SDC_STATEMENT                   ; set_false_path -from *delayed_wrptr_g* -to *rs_dgwp|dffpipe_se9:dffpipe6|dffe7a*  ; -               ; -                        ;
 +---------------------------------+-----------------------------------------------------------------------------------+-----------------+--------------------------+
 
 
 +----------------------------------------------------------------------------------------------------------------------------------------+
-; Source assignments for spectrum_FIFO:inst_spectrum_FIFO|dcfifo:dcfifo_component|dcfifo_tnf1:auto_generated|a_graycounter_tn6:rdptr_g1p ;
+; Source assignments for spectrum_FIFO:spectrum_FIFO_inst|dcfifo:dcfifo_component|dcfifo_poj1:auto_generated|a_graycounter_v57:rdptr_g1p ;
 +----------------+-------+------+--------------------------------------------------------------------------------------------------------+
 ; Assignment     ; Value ; From ; To                                                                                                     ;
 +----------------+-------+------+--------------------------------------------------------------------------------------------------------+
@@ -1077,7 +1088,7 @@ Encoding Type:  One-Hot
 
 
 +----------------------------------------------------------------------------------------------------------------------------------------+
-; Source assignments for spectrum_FIFO:inst_spectrum_FIFO|dcfifo:dcfifo_component|dcfifo_tnf1:auto_generated|a_graycounter_p5c:wrptr_g1p ;
+; Source assignments for spectrum_FIFO:spectrum_FIFO_inst|dcfifo:dcfifo_component|dcfifo_poj1:auto_generated|a_graycounter_rjc:wrptr_g1p ;
 +---------------------------+-------+------+---------------------------------------------------------------------------------------------+
 ; Assignment                ; Value ; From ; To                                                                                          ;
 +---------------------------+-------+------+---------------------------------------------------------------------------------------------+
@@ -1088,7 +1099,7 @@ Encoding Type:  One-Hot
 
 
 +---------------------------------------------------------------------------------------------------------------------------------------+
-; Source assignments for spectrum_FIFO:inst_spectrum_FIFO|dcfifo:dcfifo_component|dcfifo_tnf1:auto_generated|a_graycounter_o5c:wrptr_gp ;
+; Source assignments for spectrum_FIFO:spectrum_FIFO_inst|dcfifo:dcfifo_component|dcfifo_poj1:auto_generated|a_graycounter_qjc:wrptr_gp ;
 +---------------------------+-------+------+--------------------------------------------------------------------------------------------+
 ; Assignment                ; Value ; From ; To                                                                                         ;
 +---------------------------+-------+------+--------------------------------------------------------------------------------------------+
@@ -1096,17 +1107,17 @@ Encoding Type:  One-Hot
 +---------------------------+-------+------+--------------------------------------------------------------------------------------------+
 
 
-+------------------------------------------------------------------------------------------------------------------------------------+
-; Source assignments for spectrum_FIFO:inst_spectrum_FIFO|dcfifo:dcfifo_component|dcfifo_tnf1:auto_generated|altsyncram_8tu:fifo_ram ;
-+---------------------------------+--------------------+------+----------------------------------------------------------------------+
-; Assignment                      ; Value              ; From ; To                                                                   ;
-+---------------------------------+--------------------+------+----------------------------------------------------------------------+
-; OPTIMIZE_POWER_DURING_SYNTHESIS ; NORMAL_COMPILATION ; -    ; -                                                                    ;
-+---------------------------------+--------------------+------+----------------------------------------------------------------------+
++-------------------------------------------------------------------------------------------------------------------------------------+
+; Source assignments for spectrum_FIFO:spectrum_FIFO_inst|dcfifo:dcfifo_component|dcfifo_poj1:auto_generated|altsyncram_9l31:fifo_ram ;
++---------------------------------+--------------------+------+-----------------------------------------------------------------------+
+; Assignment                      ; Value              ; From ; To                                                                    ;
++---------------------------------+--------------------+------+-----------------------------------------------------------------------+
+; OPTIMIZE_POWER_DURING_SYNTHESIS ; NORMAL_COMPILATION ; -    ; -                                                                     ;
++---------------------------------+--------------------+------+-----------------------------------------------------------------------+
 
 
 +---------------------------------------------------------------------------------------------------------------------------------------+
-; Source assignments for spectrum_FIFO:inst_spectrum_FIFO|dcfifo:dcfifo_component|dcfifo_tnf1:auto_generated|alt_synch_pipe_jv7:rs_dgwp ;
+; Source assignments for spectrum_FIFO:spectrum_FIFO_inst|dcfifo:dcfifo_component|dcfifo_poj1:auto_generated|alt_synch_pipe_2e8:rs_dgwp ;
 +-----------------------+-------+------+------------------------------------------------------------------------------------------------+
 ; Assignment            ; Value ; From ; To                                                                                             ;
 +-----------------------+-------+------+------------------------------------------------------------------------------------------------+
@@ -1115,7 +1126,7 @@ Encoding Type:  One-Hot
 
 
 +------------------------------------------------------------------------------------------------------------------------------------------------------------+
-; Source assignments for spectrum_FIFO:inst_spectrum_FIFO|dcfifo:dcfifo_component|dcfifo_tnf1:auto_generated|alt_synch_pipe_jv7:rs_dgwp|dffpipe_d09:dffpipe6 ;
+; Source assignments for spectrum_FIFO:spectrum_FIFO_inst|dcfifo:dcfifo_component|dcfifo_poj1:auto_generated|alt_synch_pipe_2e8:rs_dgwp|dffpipe_se9:dffpipe6 ;
 +---------------------------------+-------+------+-----------------------------------------------------------------------------------------------------------+
 ; Assignment                      ; Value ; From ; To                                                                                                        ;
 +---------------------------------+-------+------+-----------------------------------------------------------------------------------------------------------+
@@ -1124,7 +1135,7 @@ Encoding Type:  One-Hot
 
 
 +---------------------------------------------------------------------------------------------------------------------------------------+
-; Source assignments for spectrum_FIFO:inst_spectrum_FIFO|dcfifo:dcfifo_component|dcfifo_tnf1:auto_generated|alt_synch_pipe_kv7:ws_dgrp ;
+; Source assignments for spectrum_FIFO:spectrum_FIFO_inst|dcfifo:dcfifo_component|dcfifo_poj1:auto_generated|alt_synch_pipe_3e8:ws_dgrp ;
 +-----------------------+-------+------+------------------------------------------------------------------------------------------------+
 ; Assignment            ; Value ; From ; To                                                                                             ;
 +-----------------------+-------+------+------------------------------------------------------------------------------------------------+
@@ -1133,7 +1144,7 @@ Encoding Type:  One-Hot
 
 
 +------------------------------------------------------------------------------------------------------------------------------------------------------------+
-; Source assignments for spectrum_FIFO:inst_spectrum_FIFO|dcfifo:dcfifo_component|dcfifo_tnf1:auto_generated|alt_synch_pipe_kv7:ws_dgrp|dffpipe_e09:dffpipe9 ;
+; Source assignments for spectrum_FIFO:spectrum_FIFO_inst|dcfifo:dcfifo_component|dcfifo_poj1:auto_generated|alt_synch_pipe_3e8:ws_dgrp|dffpipe_te9:dffpipe9 ;
 +---------------------------------+-------+------+-----------------------------------------------------------------------------------------------------------+
 ; Assignment                      ; Value ; From ; To                                                                                                        ;
 +---------------------------------+-------+------+-----------------------------------------------------------------------------------------------------------+
@@ -2025,7 +2036,7 @@ Note: In order to hide this table in the UI and the text report file, please set
 
 
 +-------------------------------------------------------------------------------------------------------+
-; Parameter Settings for User Entity Instance: spectrum_FIFO:inst_spectrum_FIFO|dcfifo:dcfifo_component ;
+; Parameter Settings for User Entity Instance: spectrum_FIFO:spectrum_FIFO_inst|dcfifo:dcfifo_component ;
 +-------------------------+-------------+---------------------------------------------------------------+
 ; Parameter Name          ; Value       ; Type                                                          ;
 +-------------------------+-------------+---------------------------------------------------------------+
@@ -2047,54 +2058,54 @@ Note: In order to hide this table in the UI and the text report file, please set
 ; WRSYNC_DELAYPIPE        ; 4           ; Signed Integer                                                ;
 ; CLOCKS_ARE_SYNCHRONIZED ; FALSE       ; Untyped                                                       ;
 ; DEVICE_FAMILY           ; Cyclone III ; Untyped                                                       ;
-; CBXI_PARAMETER          ; dcfifo_tnf1 ; Untyped                                                       ;
+; CBXI_PARAMETER          ; dcfifo_poj1 ; Untyped                                                       ;
 +-------------------------+-------------+---------------------------------------------------------------+
 Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings Tables in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
 
 
-+------------------------------------------------------------------------------+
-; Parameter Settings for User Entity Instance: oddClockDivider:refClockDivider ;
-+----------------+-------+-----------------------------------------------------+
-; Parameter Name ; Value ; Type                                                ;
-+----------------+-------+-----------------------------------------------------+
-; DIVIDE_RATE    ; 125   ; Signed Integer                                      ;
-; COUNTER_WIDTH  ; 7     ; Signed Integer                                      ;
-+----------------+-------+-----------------------------------------------------+
++-------------------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: PLL:PLL_inst|oddClockDivider:refClockDivider ;
++----------------+-------+------------------------------------------------------------------+
+; Parameter Name ; Value ; Type                                                             ;
++----------------+-------+------------------------------------------------------------------+
+; DIVIDE_RATE    ; 125   ; Signed Integer                                                   ;
+; COUNTER_WIDTH  ; 7     ; Signed Integer                                                   ;
++----------------+-------+------------------------------------------------------------------+
 Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings Tables in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
 
 
-+------------------------------------------------------------------------------------+
-; Parameter Settings for Inferred Entity Instance: lpm_mult:Mult0                    ;
-+------------------------------------------------+-------------+---------------------+
-; Parameter Name                                 ; Value       ; Type                ;
-+------------------------------------------------+-------------+---------------------+
-; AUTO_CARRY_CHAINS                              ; ON          ; AUTO_CARRY          ;
-; IGNORE_CARRY_BUFFERS                           ; OFF         ; IGNORE_CARRY        ;
-; AUTO_CASCADE_CHAINS                            ; ON          ; AUTO_CASCADE        ;
-; IGNORE_CASCADE_BUFFERS                         ; OFF         ; IGNORE_CASCADE      ;
-; LPM_WIDTHA                                     ; 32          ; Untyped             ;
-; LPM_WIDTHB                                     ; 31          ; Untyped             ;
-; LPM_WIDTHP                                     ; 63          ; Untyped             ;
-; LPM_WIDTHR                                     ; 63          ; Untyped             ;
-; LPM_WIDTHS                                     ; 1           ; Untyped             ;
-; LPM_REPRESENTATION                             ; UNSIGNED    ; Untyped             ;
-; LPM_PIPELINE                                   ; 0           ; Untyped             ;
-; LATENCY                                        ; 0           ; Untyped             ;
-; INPUT_A_IS_CONSTANT                            ; NO          ; Untyped             ;
-; INPUT_B_IS_CONSTANT                            ; YES         ; Untyped             ;
-; USE_EAB                                        ; OFF         ; Untyped             ;
-; MAXIMIZE_SPEED                                 ; 5           ; Untyped             ;
-; DEVICE_FAMILY                                  ; Cyclone III ; Untyped             ;
-; CARRY_CHAIN                                    ; MANUAL      ; Untyped             ;
-; APEX20K_TECHNOLOGY_MAPPER                      ; LUT         ; TECH_MAPPER_APEX20K ;
-; DEDICATED_MULTIPLIER_CIRCUITRY                 ; AUTO        ; Untyped             ;
-; DEDICATED_MULTIPLIER_MIN_INPUT_WIDTH_FOR_AUTO  ; 0           ; Untyped             ;
-; DEDICATED_MULTIPLIER_MIN_OUTPUT_WIDTH_FOR_AUTO ; 0           ; Untyped             ;
-; CBXI_PARAMETER                                 ; mult_4611   ; Untyped             ;
-; INPUT_A_FIXED_VALUE                            ; Bx          ; Untyped             ;
-; INPUT_B_FIXED_VALUE                            ; Bx          ; Untyped             ;
-; USE_AHDL_IMPLEMENTATION                        ; OFF         ; Untyped             ;
-+------------------------------------------------+-------------+---------------------+
++--------------------------------------------------------------------------------------------------+
+; Parameter Settings for Inferred Entity Instance: freq_to_phase:freq_to_phase_inst|lpm_mult:Mult0 ;
++------------------------------------------------+-------------+-----------------------------------+
+; Parameter Name                                 ; Value       ; Type                              ;
++------------------------------------------------+-------------+-----------------------------------+
+; AUTO_CARRY_CHAINS                              ; ON          ; AUTO_CARRY                        ;
+; IGNORE_CARRY_BUFFERS                           ; OFF         ; IGNORE_CARRY                      ;
+; AUTO_CASCADE_CHAINS                            ; ON          ; AUTO_CASCADE                      ;
+; IGNORE_CASCADE_BUFFERS                         ; OFF         ; IGNORE_CASCADE                    ;
+; LPM_WIDTHA                                     ; 32          ; Untyped                           ;
+; LPM_WIDTHB                                     ; 31          ; Untyped                           ;
+; LPM_WIDTHP                                     ; 63          ; Untyped                           ;
+; LPM_WIDTHR                                     ; 63          ; Untyped                           ;
+; LPM_WIDTHS                                     ; 1           ; Untyped                           ;
+; LPM_REPRESENTATION                             ; UNSIGNED    ; Untyped                           ;
+; LPM_PIPELINE                                   ; 0           ; Untyped                           ;
+; LATENCY                                        ; 0           ; Untyped                           ;
+; INPUT_A_IS_CONSTANT                            ; NO          ; Untyped                           ;
+; INPUT_B_IS_CONSTANT                            ; YES         ; Untyped                           ;
+; USE_EAB                                        ; OFF         ; Untyped                           ;
+; MAXIMIZE_SPEED                                 ; 5           ; Untyped                           ;
+; DEVICE_FAMILY                                  ; Cyclone III ; Untyped                           ;
+; CARRY_CHAIN                                    ; MANUAL      ; Untyped                           ;
+; APEX20K_TECHNOLOGY_MAPPER                      ; LUT         ; TECH_MAPPER_APEX20K               ;
+; DEDICATED_MULTIPLIER_CIRCUITRY                 ; AUTO        ; Untyped                           ;
+; DEDICATED_MULTIPLIER_MIN_INPUT_WIDTH_FOR_AUTO  ; 0           ; Untyped                           ;
+; DEDICATED_MULTIPLIER_MIN_OUTPUT_WIDTH_FOR_AUTO ; 0           ; Untyped                           ;
+; CBXI_PARAMETER                                 ; mult_4611   ; Untyped                           ;
+; INPUT_A_FIXED_VALUE                            ; Bx          ; Untyped                           ;
+; INPUT_B_FIXED_VALUE                            ; Bx          ; Untyped                           ;
+; USE_AHDL_IMPLEMENTATION                        ; OFF         ; Untyped                           ;
++------------------------------------------------+-------------+-----------------------------------+
 Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings Tables in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
 
 
@@ -2143,7 +2154,7 @@ Note: In order to hide this table in the UI and the text report file, please set
 ;     -- DEDICATED_MULTIPLIER_CIRCUITRY ; AUTO                                                                                                                  ;
 ;     -- INPUT_A_FIXED_VALUE            ; Bx                                                                                                                    ;
 ;     -- INPUT_B_FIXED_VALUE            ; Bx                                                                                                                    ;
-; Entity Instance                       ; lpm_mult:Mult0                                                                                                        ;
+; Entity Instance                       ; freq_to_phase:freq_to_phase_inst|lpm_mult:Mult0                                                                       ;
 ;     -- LPM_WIDTHA                     ; 32                                                                                                                    ;
 ;     -- LPM_WIDTHB                     ; 31                                                                                                                    ;
 ;     -- LPM_WIDTHP                     ; 63                                                                                                                    ;
@@ -2163,10 +2174,8 @@ Note: In order to hide this table in the UI and the text report file, please set
 Info: *******************************************************************
 Info: Running Quartus II Analysis & Synthesis
     Info: Version 8.1 Build 163 10/28/2008 SJ Web Edition
-    Info: Processing started: Sun Feb 01 14:48:32 2009
+    Info: Processing started: Wed Feb 11 21:06:54 2009
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off Mercury -c Mercury
-Info: Found 1 design units, including 1 entities, in source file cbuffer_top.v
-    Info: Found entity 1: cbuffer_top
 Info: Found 1 design units, including 1 entities, in source file spectrum_FIFO.v
     Info: Found entity 1: spectrum_FIFO
 Info: Found 1 design units, including 1 entities, in source file mult_24Sx24S.v
@@ -2211,7 +2220,31 @@ Info: Found 1 design units, including 1 entities, in source file mac.v
     Info: Found entity 1: MAC
 Info: Found 1 design units, including 1 entities, in source file division.v
     Info: Found entity 1: division
+Info: Found 1 design units, including 1 entities, in source file random.v
+    Info: Found entity 1: random
+Info: Found 1 design units, including 1 entities, in source file TLV320.v
+    Info: Found entity 1: TLV320
+Info: Found 1 design units, including 1 entities, in source file clocks.v
+    Info: Found entity 1: clocks
+Info: Found 1 design units, including 1 entities, in source file freq_to_phase.v
+    Info: Found entity 1: freq_to_phase
+Info: Found 1 design units, including 1 entities, in source file command_control.v
+    Info: Found entity 1: command_control
+Info: Found 1 design units, including 1 entities, in source file Alex_relays.v
+    Info: Found entity 1: Alex_relays
+Info: Found 1 design units, including 1 entities, in source file software_serial.v
+    Info: Found entity 1: software_serial
+Info: Found 1 design units, including 1 entities, in source file spectrum.v
+    Info: Found entity 1: spectrum
+Info: Found 1 design units, including 1 entities, in source file PLL.v
+    Info: Found entity 1: PLL
+Info: Found 1 design units, including 1 entities, in source file alex.v
+    Info: Found entity 1: alex
 Info: Elaborating entity "Mercury" for the top level hierarchy
+Info: Elaborating entity "random" for hierarchy "random:random_inst"
+Info: Elaborating entity "TLV320" for hierarchy "TLV320:TLV320_inst"
+Info: Elaborating entity "clocks" for hierarchy "clocks:clocks_inst"
+Info: Elaborating entity "freq_to_phase" for hierarchy "freq_to_phase:freq_to_phase_inst"
 Info: Elaborating entity "receiver" for hierarchy "receiver:receiver_inst"
 Info: Elaborating entity "cordic" for hierarchy "receiver:receiver_inst|cordic:cordic_inst"
 Info: Elaborating entity "varcic" for hierarchy "receiver:receiver_inst|varcic:varcic_inst_I1"
@@ -2280,53 +2313,59 @@ Info: Found 1 design units, including 1 entities, in source file db/mult_djp.tdf
     Info: Found entity 1: mult_djp
 Info: Elaborating entity "mult_djp" for hierarchy "receiver:receiver_inst|fir:fir_inst_I|fir_mac:fir_mac_inst|mult_24Sx24S:mult_24Sx24S_inst|lpm_mult:lpm_mult_component|mult_djp:auto_generated"
 Info: Elaborating entity "I2SEncode" for hierarchy "I2SEncode:I2S"
-Info: Elaborating entity "spectrum_FIFO" for hierarchy "spectrum_FIFO:inst_spectrum_FIFO"
+Info: Elaborating entity "spectrum_FIFO" for hierarchy "spectrum_FIFO:spectrum_FIFO_inst"
 Warning: Entity "dcfifo" obtained from "C:/HPSDR/trunk/VK6APH/Mercury/megafunctions/dcfifo.tdf" instead of from Quartus II megafunction library
 Warning: Using design file ../VK6APH/Mercury/megafunctions/dcfifo.tdf, which is not specified as a design file for the current project, but contains definitions for 1 design units and 1 entities in project
     Info: Found entity 1: dcfifo
-Info: Elaborating entity "dcfifo" for hierarchy "spectrum_FIFO:inst_spectrum_FIFO|dcfifo:dcfifo_component"
-Info: Found 1 design units, including 1 entities, in source file db/dcfifo_tnf1.tdf
-    Info: Found entity 1: dcfifo_tnf1
-Info: Elaborating entity "dcfifo_tnf1" for hierarchy "spectrum_FIFO:inst_spectrum_FIFO|dcfifo:dcfifo_component|dcfifo_tnf1:auto_generated"
-Info: Found 1 design units, including 1 entities, in source file db/a_graycounter_tn6.tdf
-    Info: Found entity 1: a_graycounter_tn6
-Info: Elaborating entity "a_graycounter_tn6" for hierarchy "spectrum_FIFO:inst_spectrum_FIFO|dcfifo:dcfifo_component|dcfifo_tnf1:auto_generated|a_graycounter_tn6:rdptr_g1p"
-Info: Found 1 design units, including 1 entities, in source file db/a_graycounter_p5c.tdf
-    Info: Found entity 1: a_graycounter_p5c
-Info: Elaborating entity "a_graycounter_p5c" for hierarchy "spectrum_FIFO:inst_spectrum_FIFO|dcfifo:dcfifo_component|dcfifo_tnf1:auto_generated|a_graycounter_p5c:wrptr_g1p"
-Info: Found 1 design units, including 1 entities, in source file db/a_graycounter_o5c.tdf
-    Info: Found entity 1: a_graycounter_o5c
-Info: Elaborating entity "a_graycounter_o5c" for hierarchy "spectrum_FIFO:inst_spectrum_FIFO|dcfifo:dcfifo_component|dcfifo_tnf1:auto_generated|a_graycounter_o5c:wrptr_gp"
-Info: Found 1 design units, including 1 entities, in source file db/altsyncram_8tu.tdf
-    Info: Found entity 1: altsyncram_8tu
-Info: Elaborating entity "altsyncram_8tu" for hierarchy "spectrum_FIFO:inst_spectrum_FIFO|dcfifo:dcfifo_component|dcfifo_tnf1:auto_generated|altsyncram_8tu:fifo_ram"
-Info: Found 1 design units, including 1 entities, in source file db/alt_synch_pipe_jv7.tdf
-    Info: Found entity 1: alt_synch_pipe_jv7
-Info: Elaborating entity "alt_synch_pipe_jv7" for hierarchy "spectrum_FIFO:inst_spectrum_FIFO|dcfifo:dcfifo_component|dcfifo_tnf1:auto_generated|alt_synch_pipe_jv7:rs_dgwp"
-Info: Found 1 design units, including 1 entities, in source file db/dffpipe_d09.tdf
-    Info: Found entity 1: dffpipe_d09
-Info: Elaborating entity "dffpipe_d09" for hierarchy "spectrum_FIFO:inst_spectrum_FIFO|dcfifo:dcfifo_component|dcfifo_tnf1:auto_generated|alt_synch_pipe_jv7:rs_dgwp|dffpipe_d09:dffpipe6"
-Info: Found 1 design units, including 1 entities, in source file db/alt_synch_pipe_kv7.tdf
-    Info: Found entity 1: alt_synch_pipe_kv7
-Info: Elaborating entity "alt_synch_pipe_kv7" for hierarchy "spectrum_FIFO:inst_spectrum_FIFO|dcfifo:dcfifo_component|dcfifo_tnf1:auto_generated|alt_synch_pipe_kv7:ws_dgrp"
-Info: Found 1 design units, including 1 entities, in source file db/dffpipe_e09.tdf
-    Info: Found entity 1: dffpipe_e09
-Info: Elaborating entity "dffpipe_e09" for hierarchy "spectrum_FIFO:inst_spectrum_FIFO|dcfifo:dcfifo_component|dcfifo_tnf1:auto_generated|alt_synch_pipe_kv7:ws_dgrp|dffpipe_e09:dffpipe9"
+Info: Elaborating entity "dcfifo" for hierarchy "spectrum_FIFO:spectrum_FIFO_inst|dcfifo:dcfifo_component"
+Info: Found 1 design units, including 1 entities, in source file db/dcfifo_poj1.tdf
+    Info: Found entity 1: dcfifo_poj1
+Info: Elaborating entity "dcfifo_poj1" for hierarchy "spectrum_FIFO:spectrum_FIFO_inst|dcfifo:dcfifo_component|dcfifo_poj1:auto_generated"
+Info: Found 1 design units, including 1 entities, in source file db/a_graycounter_v57.tdf
+    Info: Found entity 1: a_graycounter_v57
+Info: Elaborating entity "a_graycounter_v57" for hierarchy "spectrum_FIFO:spectrum_FIFO_inst|dcfifo:dcfifo_component|dcfifo_poj1:auto_generated|a_graycounter_v57:rdptr_g1p"
+Info: Found 1 design units, including 1 entities, in source file db/a_graycounter_rjc.tdf
+    Info: Found entity 1: a_graycounter_rjc
+Info: Elaborating entity "a_graycounter_rjc" for hierarchy "spectrum_FIFO:spectrum_FIFO_inst|dcfifo:dcfifo_component|dcfifo_poj1:auto_generated|a_graycounter_rjc:wrptr_g1p"
+Info: Found 1 design units, including 1 entities, in source file db/a_graycounter_qjc.tdf
+    Info: Found entity 1: a_graycounter_qjc
+Info: Elaborating entity "a_graycounter_qjc" for hierarchy "spectrum_FIFO:spectrum_FIFO_inst|dcfifo:dcfifo_component|dcfifo_poj1:auto_generated|a_graycounter_qjc:wrptr_gp"
+Info: Found 1 design units, including 1 entities, in source file db/altsyncram_9l31.tdf
+    Info: Found entity 1: altsyncram_9l31
+Info: Elaborating entity "altsyncram_9l31" for hierarchy "spectrum_FIFO:spectrum_FIFO_inst|dcfifo:dcfifo_component|dcfifo_poj1:auto_generated|altsyncram_9l31:fifo_ram"
+Info: Found 1 design units, including 1 entities, in source file db/alt_synch_pipe_2e8.tdf
+    Info: Found entity 1: alt_synch_pipe_2e8
+Info: Elaborating entity "alt_synch_pipe_2e8" for hierarchy "spectrum_FIFO:spectrum_FIFO_inst|dcfifo:dcfifo_component|dcfifo_poj1:auto_generated|alt_synch_pipe_2e8:rs_dgwp"
+Info: Found 1 design units, including 1 entities, in source file db/dffpipe_se9.tdf
+    Info: Found entity 1: dffpipe_se9
+Info: Elaborating entity "dffpipe_se9" for hierarchy "spectrum_FIFO:spectrum_FIFO_inst|dcfifo:dcfifo_component|dcfifo_poj1:auto_generated|alt_synch_pipe_2e8:rs_dgwp|dffpipe_se9:dffpipe6"
+Info: Found 1 design units, including 1 entities, in source file db/alt_synch_pipe_3e8.tdf
+    Info: Found entity 1: alt_synch_pipe_3e8
+Info: Elaborating entity "alt_synch_pipe_3e8" for hierarchy "spectrum_FIFO:spectrum_FIFO_inst|dcfifo:dcfifo_component|dcfifo_poj1:auto_generated|alt_synch_pipe_3e8:ws_dgrp"
+Info: Found 1 design units, including 1 entities, in source file db/dffpipe_te9.tdf
+    Info: Found entity 1: dffpipe_te9
+Info: Elaborating entity "dffpipe_te9" for hierarchy "spectrum_FIFO:spectrum_FIFO_inst|dcfifo:dcfifo_component|dcfifo_poj1:auto_generated|alt_synch_pipe_3e8:ws_dgrp|dffpipe_te9:dffpipe9"
 Info: Found 1 design units, including 1 entities, in source file db/cmpr_h66.tdf
     Info: Found entity 1: cmpr_h66
-Info: Elaborating entity "cmpr_h66" for hierarchy "spectrum_FIFO:inst_spectrum_FIFO|dcfifo:dcfifo_component|dcfifo_tnf1:auto_generated|cmpr_h66:rdempty_eq_comp"
-Info: Elaborating entity "LPF_select" for hierarchy "LPF_select:Alex_LPF_select"
-Info: Elaborating entity "HPF_select" for hierarchy "HPF_select:Alex_HPF_select"
-Info: Elaborating entity "SPI" for hierarchy "SPI:Alex_SPI_Tx"
-Info: Elaborating entity "oddClockDivider" for hierarchy "oddClockDivider:refClockDivider"
+Info: Elaborating entity "cmpr_h66" for hierarchy "spectrum_FIFO:spectrum_FIFO_inst|dcfifo:dcfifo_component|dcfifo_poj1:auto_generated|cmpr_h66:rdempty_eq_comp"
+Info: Elaborating entity "spectrum" for hierarchy "spectrum:spectrum_inst"
+Info: Elaborating entity "software_serial" for hierarchy "software_serial:software_serial_inst"
+Info: Elaborating entity "command_control" for hierarchy "command_control:command_control_inst"
+Info: Elaborating entity "alex" for hierarchy "alex:alex_inst"
+Info: Elaborating entity "LPF_select" for hierarchy "alex:alex_inst|LPF_select:Alex_LPF_inst"
+Info: Elaborating entity "HPF_select" for hierarchy "alex:alex_inst|HPF_select:Alex_HPF_inst"
+Info: Elaborating entity "Alex_relays" for hierarchy "alex:alex_inst|Alex_relays:Alex_relays_inst"
+Info: Elaborating entity "SPI" for hierarchy "alex:alex_inst|SPI:Alex_SPI_Tx"
+Info: Elaborating entity "PLL" for hierarchy "PLL:PLL_inst"
+Info: Elaborating entity "oddClockDivider" for hierarchy "PLL:PLL_inst|oddClockDivider:refClockDivider"
 Warning: Clock multiplexers are found and protected
     Warning: Found clock multiplexer reference
 Info: Ignored 350 buffer(s)
     Info: Ignored 350 SOFT buffer(s)
 Info: Inferred 1 megafunctions from design logic
-    Info: Inferred multiplier megafunction ("lpm_mult") from the following logic: "Mult0"
-Info: Elaborated megafunction instantiation "lpm_mult:Mult0"
-Info: Instantiated megafunction "lpm_mult:Mult0" with the following parameter:
+    Info: Inferred multiplier megafunction ("lpm_mult") from the following logic: "freq_to_phase:freq_to_phase_inst|Mult0"
+Info: Elaborated megafunction instantiation "freq_to_phase:freq_to_phase_inst|lpm_mult:Mult0"
+Info: Instantiated megafunction "freq_to_phase:freq_to_phase_inst|lpm_mult:Mult0" with the following parameter:
     Info: Parameter "LPM_WIDTHA" = "32"
     Info: Parameter "LPM_WIDTHB" = "31"
     Info: Parameter "LPM_WIDTHP" = "63"
@@ -2341,27 +2380,29 @@ Info: Found 1 design units, including 1 entities, in source file db/mult_4611.td
     Info: Found entity 1: mult_4611
 Info: Ignored 168 buffer(s)
     Info: Ignored 168 SOFT buffer(s)
+Info: Registers with preset signals will power-up high
+Info: DEV_CLRn pin will set, and not reset, register with preset signal due to NOT Gate Push-Back
 Warning: Output pins are stuck at VCC or GND
     Warning (13410): Pin "CMODE" is stuck at VCC
     Warning (13410): Pin "SHDN" is stuck at GND
     Warning (13410): Pin "PGA" is stuck at GND
     Warning (13410): Pin "INIT_DONE" is stuck at GND
     Warning (13410): Pin "TEST3" is stuck at GND
-Info: 83 registers lost all their fanouts during netlist optimizations. The first 83 are displayed below.
-    Info: Register "spectrum_FIFO:inst_spectrum_FIFO|dcfifo:dcfifo_component|dcfifo_tnf1:auto_generated|a_graycounter_p5c:wrptr_g1p|counter_ffa0" lost all its fanouts during netlist optimizations.
-    Info: Register "spectrum_FIFO:inst_spectrum_FIFO|dcfifo:dcfifo_component|dcfifo_tnf1:auto_generated|a_graycounter_p5c:wrptr_g1p|counter_ffa1" lost all its fanouts during netlist optimizations.
-    Info: Register "spectrum_FIFO:inst_spectrum_FIFO|dcfifo:dcfifo_component|dcfifo_tnf1:auto_generated|a_graycounter_p5c:wrptr_g1p|counter_ffa2" lost all its fanouts during netlist optimizations.
-    Info: Register "spectrum_FIFO:inst_spectrum_FIFO|dcfifo:dcfifo_component|dcfifo_tnf1:auto_generated|a_graycounter_p5c:wrptr_g1p|counter_ffa3" lost all its fanouts during netlist optimizations.
-    Info: Register "spectrum_FIFO:inst_spectrum_FIFO|dcfifo:dcfifo_component|dcfifo_tnf1:auto_generated|a_graycounter_p5c:wrptr_g1p|counter_ffa4" lost all its fanouts during netlist optimizations.
-    Info: Register "spectrum_FIFO:inst_spectrum_FIFO|dcfifo:dcfifo_component|dcfifo_tnf1:auto_generated|a_graycounter_p5c:wrptr_g1p|counter_ffa5" lost all its fanouts during netlist optimizations.
-    Info: Register "spectrum_FIFO:inst_spectrum_FIFO|dcfifo:dcfifo_component|dcfifo_tnf1:auto_generated|a_graycounter_p5c:wrptr_g1p|counter_ffa6" lost all its fanouts during netlist optimizations.
-    Info: Register "spectrum_FIFO:inst_spectrum_FIFO|dcfifo:dcfifo_component|dcfifo_tnf1:auto_generated|a_graycounter_p5c:wrptr_g1p|counter_ffa7" lost all its fanouts during netlist optimizations.
-    Info: Register "spectrum_FIFO:inst_spectrum_FIFO|dcfifo:dcfifo_component|dcfifo_tnf1:auto_generated|a_graycounter_p5c:wrptr_g1p|counter_ffa8" lost all its fanouts during netlist optimizations.
-    Info: Register "spectrum_FIFO:inst_spectrum_FIFO|dcfifo:dcfifo_component|dcfifo_tnf1:auto_generated|a_graycounter_p5c:wrptr_g1p|counter_ffa9" lost all its fanouts during netlist optimizations.
-    Info: Register "spectrum_FIFO:inst_spectrum_FIFO|dcfifo:dcfifo_component|dcfifo_tnf1:auto_generated|a_graycounter_p5c:wrptr_g1p|counter_ffa10" lost all its fanouts during netlist optimizations.
-    Info: Register "spectrum_FIFO:inst_spectrum_FIFO|dcfifo:dcfifo_component|dcfifo_tnf1:auto_generated|a_graycounter_p5c:wrptr_g1p|counter_ffa11" lost all its fanouts during netlist optimizations.
-    Info: Register "spectrum_FIFO:inst_spectrum_FIFO|dcfifo:dcfifo_component|dcfifo_tnf1:auto_generated|a_graycounter_p5c:wrptr_g1p|counter_ffa12" lost all its fanouts during netlist optimizations.
-    Info: Register "spectrum_FIFO:inst_spectrum_FIFO|dcfifo:dcfifo_component|dcfifo_tnf1:auto_generated|a_graycounter_p5c:wrptr_g1p|parity_ff" lost all its fanouts during netlist optimizations.
+Info: 72 registers lost all their fanouts during netlist optimizations. The first 72 are displayed below.
+    Info: Register "spectrum_FIFO:spectrum_FIFO_inst|dcfifo:dcfifo_component|dcfifo_poj1:auto_generated|a_graycounter_rjc:wrptr_g1p|counter_ffa0" lost all its fanouts during netlist optimizations.
+    Info: Register "spectrum_FIFO:spectrum_FIFO_inst|dcfifo:dcfifo_component|dcfifo_poj1:auto_generated|a_graycounter_rjc:wrptr_g1p|counter_ffa1" lost all its fanouts during netlist optimizations.
+    Info: Register "spectrum_FIFO:spectrum_FIFO_inst|dcfifo:dcfifo_component|dcfifo_poj1:auto_generated|a_graycounter_rjc:wrptr_g1p|counter_ffa2" lost all its fanouts during netlist optimizations.
+    Info: Register "spectrum_FIFO:spectrum_FIFO_inst|dcfifo:dcfifo_component|dcfifo_poj1:auto_generated|a_graycounter_rjc:wrptr_g1p|counter_ffa3" lost all its fanouts during netlist optimizations.
+    Info: Register "spectrum_FIFO:spectrum_FIFO_inst|dcfifo:dcfifo_component|dcfifo_poj1:auto_generated|a_graycounter_rjc:wrptr_g1p|counter_ffa4" lost all its fanouts during netlist optimizations.
+    Info: Register "spectrum_FIFO:spectrum_FIFO_inst|dcfifo:dcfifo_component|dcfifo_poj1:auto_generated|a_graycounter_rjc:wrptr_g1p|counter_ffa5" lost all its fanouts during netlist optimizations.
+    Info: Register "spectrum_FIFO:spectrum_FIFO_inst|dcfifo:dcfifo_component|dcfifo_poj1:auto_generated|a_graycounter_rjc:wrptr_g1p|counter_ffa6" lost all its fanouts during netlist optimizations.
+    Info: Register "spectrum_FIFO:spectrum_FIFO_inst|dcfifo:dcfifo_component|dcfifo_poj1:auto_generated|a_graycounter_rjc:wrptr_g1p|counter_ffa7" lost all its fanouts during netlist optimizations.
+    Info: Register "spectrum_FIFO:spectrum_FIFO_inst|dcfifo:dcfifo_component|dcfifo_poj1:auto_generated|a_graycounter_rjc:wrptr_g1p|counter_ffa8" lost all its fanouts during netlist optimizations.
+    Info: Register "spectrum_FIFO:spectrum_FIFO_inst|dcfifo:dcfifo_component|dcfifo_poj1:auto_generated|a_graycounter_rjc:wrptr_g1p|counter_ffa9" lost all its fanouts during netlist optimizations.
+    Info: Register "spectrum_FIFO:spectrum_FIFO_inst|dcfifo:dcfifo_component|dcfifo_poj1:auto_generated|a_graycounter_rjc:wrptr_g1p|counter_ffa10" lost all its fanouts during netlist optimizations.
+    Info: Register "spectrum_FIFO:spectrum_FIFO_inst|dcfifo:dcfifo_component|dcfifo_poj1:auto_generated|a_graycounter_rjc:wrptr_g1p|counter_ffa11" lost all its fanouts during netlist optimizations.
+    Info: Register "spectrum_FIFO:spectrum_FIFO_inst|dcfifo:dcfifo_component|dcfifo_poj1:auto_generated|a_graycounter_rjc:wrptr_g1p|counter_ffa12" lost all its fanouts during netlist optimizations.
+    Info: Register "spectrum_FIFO:spectrum_FIFO_inst|dcfifo:dcfifo_component|dcfifo_poj1:auto_generated|a_graycounter_rjc:wrptr_g1p|parity_ff" lost all its fanouts during netlist optimizations.
     Info: Register "receiver:receiver_inst|fir:fir_inst_Q|fir_mac:fir_mac_inst|mult_24Sx24S:mult_24Sx24S_inst|lpm_mult:lpm_mult_component|mult_djp:auto_generated|dffe136" lost all its fanouts during netlist optimizations.
     Info: Register "receiver:receiver_inst|fir:fir_inst_Q|fir_mac:fir_mac_inst|mult_24Sx24S:mult_24Sx24S_inst|lpm_mult:lpm_mult_component|mult_djp:auto_generated|dffe138" lost all its fanouts during netlist optimizations.
     Info: Register "receiver:receiver_inst|fir:fir_inst_I|fir_mac:fir_mac_inst|mult_24Sx24S:mult_24Sx24S_inst|lpm_mult:lpm_mult_component|mult_djp:auto_generated|dffe136" lost all its fanouts during netlist optimizations.
@@ -2398,21 +2439,10 @@ Info: 83 registers lost all their fanouts during netlist optimizations. The firs
     Info: Register "receiver:receiver_inst|varcic:varcic_inst_Q1|sample_no[2]" lost all its fanouts during netlist optimizations.
     Info: Register "receiver:receiver_inst|varcic:varcic_inst_Q1|sample_no[1]" lost all its fanouts during netlist optimizations.
     Info: Register "receiver:receiver_inst|varcic:varcic_inst_Q1|sample_no[0]" lost all its fanouts during netlist optimizations.
-    Info: Register "TLV~7" lost all its fanouts during netlist optimizations.
-    Info: Register "TLV~8" lost all its fanouts during netlist optimizations.
-    Info: Register "TLV~9" lost all its fanouts during netlist optimizations.
-    Info: Register "TLV~10" lost all its fanouts during netlist optimizations.
-    Info: Register "SPI:Alex_SPI_Tx|spi_state~12" lost all its fanouts during netlist optimizations.
-    Info: Register "SPI:Alex_SPI_Tx|spi_state~13" lost all its fanouts during netlist optimizations.
-    Info: Register "SPI:Alex_SPI_Tx|spi_state~14" lost all its fanouts during netlist optimizations.
-    Info: Register "SPI:Alex_SPI_Tx|spi_state~15" lost all its fanouts during netlist optimizations.
-    Info: Register "I2SEncode:I2S|encode_state~7" lost all its fanouts during netlist optimizations.
-    Info: Register "I2SEncode:I2S|encode_state~8" lost all its fanouts during netlist optimizations.
+    Info: Register "alex:alex_inst|SPI:Alex_SPI_Tx|spi_state~15" lost all its fanouts during netlist optimizations.
+    Info: Register "TLV320:TLV320_inst|TLV~10" lost all its fanouts during netlist optimizations.
     Info: Register "receiver:receiver_inst|fir:fir_inst_I|fir_mac:fir_mac_inst|mult_24Sx24S:mult_24Sx24S_inst|lpm_mult:lpm_mult_component|mult_djp:auto_generated|dffe133" lost all its fanouts during netlist optimizations.
     Info: Register "receiver:receiver_inst|fir:fir_inst_Q|fir_mac:fir_mac_inst|mult_24Sx24S:mult_24Sx24S_inst|lpm_mult:lpm_mult_component|mult_djp:auto_generated|dffe133" lost all its fanouts during netlist optimizations.
-    Info: Register "counter[24]" lost all its fanouts during netlist optimizations.
-    Info: Register "counter[25]" lost all its fanouts during netlist optimizations.
-    Info: Register "counter[26]" lost all its fanouts during netlist optimizations.
     Info: Register "receiver:receiver_inst|fir:fir_inst_I|fir_mac:fir_mac_inst|out_data[47]" lost all its fanouts during netlist optimizations.
     Info: Register "receiver:receiver_inst|fir:fir_inst_I|fir_mac:fir_mac_inst|out_data[48]" lost all its fanouts during netlist optimizations.
     Info: Register "receiver:receiver_inst|fir:fir_inst_I|fir_mac:fir_mac_inst|out_data[49]" lost all its fanouts during netlist optimizations.
@@ -2431,19 +2461,19 @@ Info: 83 registers lost all their fanouts during netlist optimizations. The firs
     Info: Register "receiver:receiver_inst|fir:fir_inst_Q|fir_mac:fir_mac_inst|out_data[53]" lost all its fanouts during netlist optimizations.
     Info: Register "receiver:receiver_inst|fir:fir_inst_Q|fir_mac:fir_mac_inst|out_data[54]" lost all its fanouts during netlist optimizations.
     Info: Register "receiver:receiver_inst|fir:fir_inst_Q|fir_mac:fir_mac_inst|out_data[55]" lost all its fanouts during netlist optimizations.
-Info: Implemented 8830 device resources after synthesis - the final resource count might be different
+Info: Implemented 8804 device resources after synthesis - the final resource count might be different
     Info: Implemented 29 input pins
     Info: Implemented 38 output pins
     Info: Implemented 2 bidirectional pins
-    Info: Implemented 8649 logic cells
+    Info: Implemented 8623 logic cells
     Info: Implemented 90 RAM segments
     Info: Implemented 22 DSP elements
 Info: Generated suppressed messages file C:/HPSDR/trunk/Mercury V2/Mercury.map.smsg
 Info: Quartus II Analysis & Synthesis was successful. 0 errors, 10 warnings
     Info: Peak virtual memory: 201 megabytes
-    Info: Processing ended: Sun Feb 01 14:49:11 2009
-    Info: Elapsed time: 00:00:39
-    Info: Total CPU time (on all processors): 00:00:38
+    Info: Processing ended: Wed Feb 11 21:07:29 2009
+    Info: Elapsed time: 00:00:35
+    Info: Total CPU time (on all processors): 00:00:35
 
 
 +------------------------------------------+
