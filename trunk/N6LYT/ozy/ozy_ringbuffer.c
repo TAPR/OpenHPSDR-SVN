@@ -54,20 +54,29 @@ int ozy_ringbuffer_put(struct ozy_ringbuffer* buffer,char* f,int n) {
     if(debug_buffers) fprintf(stderr,"ozy_ring_buffer_put space=%d entries=%d total=%d\n",ozy_ringbuffer_space(buffer),ozy_ringbuffer_entries(buffer),ozy_put_bytes);
 
         pthread_mutex_lock(&ozy_output_buffer_mutex);
+
         if(ozy_ringbuffer_space(buffer)<=n) {
             
             // flush the buffer
+            fprintf(stderr,"ozy_ringbuffer_put: flush buffer\n");
             buffer->remove_index=buffer->insert_index;
             buffer->entries=0;
             
         }
 
+
         if(ozy_ringbuffer_space(buffer)>n) {
-            memcpy(&buffer->buffer[buffer->insert_index],f,n);
+            if((buffer->insert_index+n) <= buffer->size) {
+                // all contiguous
+                memcpy(&buffer->buffer[buffer->insert_index],f,n);
+            } else {
+                memcpy(&buffer->buffer[buffer->insert_index],f,buffer->size-buffer->insert_index);
+                memcpy(buffer->buffer,&f[buffer->size-buffer->insert_index],n-(buffer->size-buffer->insert_index));
+            }
             buffer->entries+=n;
             buffer->insert_index+=n;
             if(buffer->insert_index>=buffer->size) {
-                buffer->insert_index=0;
+                buffer->insert_index-=buffer->size;
             }
             i=n;
         } else {
