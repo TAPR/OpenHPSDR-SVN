@@ -28,8 +28,7 @@
 #define OZY_VID (0xfffe)
 
 /* IO Timeout - in msecs */
-//#define OZY_IO_TIMEOUT (1000)
-#define OZY_IO_TIMEOUT (1)
+#define OZY_IO_TIMEOUT (1000)
 
 // returns non zero if devp match vid and pid passed
 int doesDevMatchVIDPID(struct usb_device *devp, int vid, int pid) {

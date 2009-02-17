@@ -15,7 +15,7 @@ extern "C" {
 struct ozy_ringbuffer {
         int size;
         int entries;
-        char* buffer;
+        unsigned char* buffer;
         int insert_index;
         int remove_index;
     };

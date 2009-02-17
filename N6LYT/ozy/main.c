@@ -46,7 +46,9 @@ void start_threads() {
     // create client threads
     rc=create_ozy_client();
     rc=create_jack_client();
+#ifdef SPECTRUM_THREAD
     rc=create_spectrum_thread();
+#endif
     
     // create the command processor thread
     rc=create_command_processor();
@@ -60,20 +62,23 @@ int main(int argc, char** argv) {
     debug_commands=0;
     debug_mic_samples=0;
     debug_rx_samples=0;
-    debug_spectrum=1;
+    debug_spectrum=0;
 
     sem_init(&ozy_input_buffer_sem,0,0);
     sem_init(&jack_input_buffer_sem,0,0);
     sem_init(&spectrum_input_buffer_sem,0,0);
-
+    
+    
+    create_jack_ringbuffer(4*1024);
     create_jack_buffers(8);
-    create_ozy_buffers(34);
-    create_spectrum_buffers(4);
     
     create_ozy_ringbuffer(34*512);
-    create_jack_ringbuffer(4*1024);
+    create_ozy_buffers(34);
+
+    create_spectrum_buffers(4);
 
     start_threads();
+
     while(1) {
         if(debug) {
             sleep(1);

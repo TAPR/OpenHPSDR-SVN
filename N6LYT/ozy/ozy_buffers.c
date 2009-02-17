@@ -41,7 +41,7 @@ void put_ozy_free_buffer(struct ozy_buffer* buffer) {
         ozy_free_buffers_tail=buffer;
     }
     pthread_mutex_unlock(&ozy_free_buffer_mutex);
-    if(debug_buffers) fprintf(stderr,"put_ozy_free_buffer: %08X\n",buffer);
+    if(debug_buffers) fprintf(stderr,"put_ozy_free_buffer: %08X\n",(unsigned int)buffer);
 }
 
 struct ozy_buffer* get_ozy_free_buffer(void) {
@@ -58,7 +58,7 @@ struct ozy_buffer* get_ozy_free_buffer(void) {
     }
     buffer->size=OZY_BUFFER_SIZE;
     pthread_mutex_unlock(&ozy_free_buffer_mutex);
-    if(debug_buffers) fprintf(stderr,"get_ozy_free_buffer: %08X\n",buffer);
+    if(debug_buffers) fprintf(stderr,"get_ozy_free_buffer: %08X\n",(unsigned int)buffer);
     return buffer;
 }
 
@@ -73,7 +73,7 @@ void put_ozy_input_buffer(struct ozy_buffer* buffer) {
         ozy_input_buffers_tail=buffer;
     }
     pthread_mutex_unlock(&ozy_input_buffer_mutex);
-    if(debug_buffers) fprintf(stderr,"put_ozy_input_buffer: %08X\n",buffer);
+    if(debug_buffers) fprintf(stderr,"put_ozy_input_buffer: %08X\n",(unsigned int)buffer);
 
 }
 
@@ -90,7 +90,7 @@ struct ozy_buffer* get_ozy_input_buffer(void) {
         ozy_input_buffers_tail=NULL;
     }
     pthread_mutex_unlock(&ozy_input_buffer_mutex);
-    if(debug_buffers) fprintf(stderr,"get_ozy_input_buffer: %08X\n",buffer);
+    if(debug_buffers) fprintf(stderr,"get_ozy_input_buffer: %08X\n",(unsigned int)buffer);
     return buffer;
 }
 
@@ -99,13 +99,17 @@ struct ozy_buffer* new_ozy_buffer() {
     buffer=malloc(sizeof(struct ozy_buffer));
     buffer->next=NULL;
     buffer->size=OZY_BUFFER_SIZE;
-    if(debug_buffers) fprintf(stderr,"new_ozy_buffer: %08X size=%d\n",buffer,buffer->size);
+    if(debug_buffers) fprintf(stderr,"new_ozy_buffer: %08X size=%d\n",(unsigned int)buffer,buffer->size);
     return buffer;
 }
 
 void create_ozy_buffers(int n) {
     struct ozy_buffer* buffer;
     int i;
+
+    pthread_mutex_init(&ozy_input_buffer_mutex, NULL);
+    pthread_mutex_init(&ozy_free_buffer_mutex, NULL);
+    
     for(i=0;i<n;i++) {
         buffer=new_ozy_buffer();
         put_ozy_free_buffer(buffer);
@@ -114,9 +118,8 @@ void create_ozy_buffers(int n) {
 }
 
 void free_ozy_buffer(struct ozy_buffer* buffer) {
-    if(debug) fprintf(stderr,"free_ozy_buffer: %08X\n",buffer);
-    pthread_mutex_init(&ozy_input_buffer_mutex, NULL);
-    pthread_mutex_init(&ozy_free_buffer_mutex, NULL);
+    if(debug) fprintf(stderr,"free_ozy_buffer: %08X\n",(unsigned int)buffer);
+    
     put_ozy_free_buffer(buffer);
 }
 

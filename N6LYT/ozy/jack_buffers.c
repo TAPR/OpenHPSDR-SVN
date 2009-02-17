@@ -29,7 +29,7 @@ pthread_mutex_t jack_free_buffer_mutex;
  *
  */
 void put_jack_free_buffer(struct jack_buffer* buffer) {
-    if(debug_buffers) fprintf(stderr,"put_jack_free_buffer: %08X\n",buffer);
+    if(debug_buffers) fprintf(stderr,"put_jack_free_buffer: %08X\n",(unsigned int)buffer);
 
     pthread_mutex_lock(&jack_free_buffer_mutex);
     if(jack_free_buffers_tail==NULL) {
@@ -57,12 +57,12 @@ struct jack_buffer* get_jack_free_buffer(void) {
     }
     pthread_mutex_unlock(&jack_free_buffer_mutex);
 
-    if(debug_buffers) fprintf(stderr,"get_jack_free_buffer: %08X\n",buffer);
+    if(debug_buffers) fprintf(stderr,"get_jack_free_buffer: %08X\n",(unsigned int)buffer);
     return buffer;
 }
 
 void put_jack_input_buffer(struct jack_buffer* buffer) {
-    if(debug_buffers) fprintf(stderr,"put_jack_input_buffer: %d: %08X\n",jack_input_sequence,buffer);
+    if(debug_buffers) fprintf(stderr,"put_jack_input_buffer: %d: %08X\n",jack_input_sequence,(unsigned int)buffer);
     pthread_mutex_lock(&jack_input_buffer_mutex);
     buffer->sequence=jack_input_sequence++;
     if(jack_input_buffers_tail==NULL) {
@@ -88,7 +88,7 @@ struct jack_buffer* get_jack_input_buffer(void) {
         jack_input_buffers_tail=NULL;
     }
     pthread_mutex_unlock(&jack_input_buffer_mutex);
-    if(debug_buffers) fprintf(stderr,"get_jack_input_buffer: %d: %08X\n",buffer->sequence,buffer);
+    if(debug_buffers) fprintf(stderr,"get_jack_input_buffer: %d: %08X\n",buffer->sequence,(unsigned int)buffer);
     return buffer;
 }
 
@@ -96,23 +96,30 @@ struct jack_buffer* new_jack_buffer() {
     struct jack_buffer* buffer;
     buffer=malloc(sizeof(struct jack_buffer));
     buffer->next=NULL;
-    if(debug_buffers) fprintf(stderr,"new_jack_buffer: %08X\n",buffer);
+    if(debug_buffers) fprintf(stderr,"new_jack_buffer: %08X\n",(unsigned int)buffer);
     return buffer;
 }
 
 void create_jack_buffers(int n) {
     struct jack_buffer* buffer;
     int i;
+
+    if(debug) fprintf(stderr,"create_jack_buffers: entry: %d\n",n);
+
+    pthread_mutex_init(&jack_input_buffer_mutex, NULL);
+    pthread_mutex_init(&jack_free_buffer_mutex, NULL);
+
     for(i=0;i<n;i++) {
         buffer=new_jack_buffer();
         put_jack_free_buffer(buffer);
     }
+
+    if(debug) fprintf(stderr,"create_jack_buffers: enxit\n");
 }
 
 void free_jack_buffer(struct jack_buffer* buffer) {
-    if(debug_buffers) fprintf(stderr,"free_jack_buffer: %d: %08X\n",buffer->sequence,buffer);
-    pthread_mutex_init(&jack_input_buffer_mutex, NULL);
-    pthread_mutex_init(&jack_free_buffer_mutex, NULL);
+    if(debug_buffers) fprintf(stderr,"free_jack_buffer: %d: %08X\n",buffer->sequence,(unsigned int)buffer);
+    
     put_jack_free_buffer(buffer);
 }
 

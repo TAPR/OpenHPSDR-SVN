@@ -63,29 +63,6 @@ int jack_callback(jack_nframes_t nframes, void *arg) {
     start_time=jack_get_time();
 
     if(debug) fprintf(stderr,"jack_callback entry time=%llu\n",start_time);
-    
-    // get the input samples
-
-    samples_mon_out_l=jack_port_get_buffer(mon_out_l,nframes);
-    samples_mon_out_r=jack_port_get_buffer(mon_out_r,nframes);
-    samples_tx_out_l=jack_port_get_buffer(tx_out_l,nframes);
-    samples_tx_out_r=jack_port_get_buffer(tx_out_r,nframes);
-
-    jack_buffer=get_jack_free_buffer();
-    if(jack_buffer!=NULL) {
-        jack_buffer->nframes=nframes;
-        memcpy(jack_buffer->buffer_1,samples_mon_out_l,sizeof(jack_default_audio_sample_t)*nframes);
-        memcpy(jack_buffer->buffer_2,samples_mon_out_r,sizeof(jack_default_audio_sample_t)*nframes);
-        memcpy(jack_buffer->buffer_3,samples_tx_out_l,sizeof(jack_default_audio_sample_t)*nframes);
-        memcpy(jack_buffer->buffer_4,samples_tx_out_r,sizeof(jack_default_audio_sample_t)*nframes);
-
-        if(debug) fprintf(stderr,"jack_callback: put_jack_input_buffer\n");
-        put_jack_input_buffer(jack_buffer);
-        sem_post(&jack_input_buffer_sem);
-    } else {
-        fprintf(stderr,"jack_callback: get_jack_free_buffer returned NULL\n");
-    }
-
     // put the output samples
     samples_rx_in_l=jack_port_get_buffer(rx_in_l,nframes);
     samples_rx_in_r=jack_port_get_buffer(rx_in_r,nframes);
@@ -107,6 +84,29 @@ int jack_callback(jack_nframes_t nframes, void *arg) {
                 samples_rx_in_l[7]
                 );
     }
+
+    // get the input samples
+    samples_mon_out_l=jack_port_get_buffer(mon_out_l,nframes);
+    samples_mon_out_r=jack_port_get_buffer(mon_out_r,nframes);
+    samples_tx_out_l=jack_port_get_buffer(tx_out_l,nframes);
+    samples_tx_out_r=jack_port_get_buffer(tx_out_r,nframes);
+
+    jack_buffer=get_jack_free_buffer();
+    if(jack_buffer!=NULL) {
+        jack_buffer->nframes=nframes;
+        memcpy(jack_buffer->buffer_1,samples_mon_out_l,sizeof(jack_default_audio_sample_t)*nframes);
+        memcpy(jack_buffer->buffer_2,samples_mon_out_r,sizeof(jack_default_audio_sample_t)*nframes);
+        memcpy(jack_buffer->buffer_3,samples_tx_out_l,sizeof(jack_default_audio_sample_t)*nframes);
+        memcpy(jack_buffer->buffer_4,samples_tx_out_r,sizeof(jack_default_audio_sample_t)*nframes);
+
+        if(debug) fprintf(stderr,"jack_callback: put_jack_input_buffer\n");
+        put_jack_input_buffer(jack_buffer);
+        sem_post(&jack_input_buffer_sem);
+    } else {
+        fprintf(stderr,"jack_callback: get_jack_free_buffer returned NULL\n");
+    }
+
+    
     
     end_time=jack_get_time();
     if(debug) fprintf(stderr,"jack_callback duration%llu\n",end_time-start_time);
@@ -114,7 +114,7 @@ int jack_callback(jack_nframes_t nframes, void *arg) {
 }
 
 void jack_shutdown() {
-    if(debug) fprintf(stderr,"jack_shoutdown called\n");
+    if(debug) fprintf(stderr,"jack_shutdown called\n");
     exit(1);
 }
 

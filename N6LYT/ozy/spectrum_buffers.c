@@ -42,7 +42,7 @@ void put_spectrum_free_buffer(struct spectrum_buffer* buffer) {
         spectrum_free_buffers_tail=buffer;
     }
     pthread_mutex_unlock(&spectrum_free_buffer_mutex);
-    if(debug_buffers) fprintf(stderr,"put_spectrum_free_buffer: %08X\n",buffer);
+    if(debug_buffers) fprintf(stderr,"put_spectrum_free_buffer: %08X\n",(unsigned int)buffer);
 }
 
 struct spectrum_buffer* get_spectrum_free_buffer(void) {
@@ -59,7 +59,7 @@ struct spectrum_buffer* get_spectrum_free_buffer(void) {
     }
     buffer->size=SPECTRUM_BUFFER_SIZE;
     pthread_mutex_unlock(&spectrum_free_buffer_mutex);
-    if(debug_buffers) fprintf(stderr,"get_spectrum_free_buffer: %08X\n",buffer);
+    if(debug_buffers) fprintf(stderr,"get_spectrum_free_buffer: %08X\n",(unsigned int)buffer);
     return buffer;
 }
 
@@ -74,7 +74,7 @@ void put_spectrum_input_buffer(struct spectrum_buffer* buffer) {
         spectrum_input_buffers_tail=buffer;
     }
     pthread_mutex_unlock(&spectrum_input_buffer_mutex);
-    if(debug_buffers) fprintf(stderr,"put_spectrum_input_buffer: %08X\n",buffer);
+    if(debug_buffers) fprintf(stderr,"put_spectrum_input_buffer: %08X\n",(unsigned int)buffer);
 
 }
 
@@ -91,7 +91,7 @@ struct spectrum_buffer* get_spectrum_input_buffer(void) {
         spectrum_input_buffers_tail=NULL;
     }
     pthread_mutex_unlock(&spectrum_input_buffer_mutex);
-    if(debug_buffers) fprintf(stderr,"get_spectrum_input_buffer: %08X\n",buffer);
+    if(debug_buffers) fprintf(stderr,"get_spectrum_input_buffer: %08X\n",(unsigned int)buffer);
     return buffer;
 }
 
@@ -100,13 +100,17 @@ struct spectrum_buffer* new_spectrum_buffer() {
     buffer=malloc(sizeof(struct spectrum_buffer));
     buffer->next=NULL;
     buffer->size=SPECTRUM_BUFFER_SIZE;
-    if(debug_buffers) fprintf(stderr,"new_spectrum_buffer: %08X size=%d\n",buffer,buffer->size);
+    if(debug_buffers) fprintf(stderr,"new_spectrum_buffer: %08X size=%d\n",(unsigned int)buffer,buffer->size);
     return buffer;
 }
 
 void create_spectrum_buffers(int n) {
     struct spectrum_buffer* buffer;
     int i;
+    
+    pthread_mutex_init(&spectrum_input_buffer_mutex, NULL);
+    pthread_mutex_init(&spectrum_free_buffer_mutex, NULL);
+    
     for(i=0;i<n;i++) {
         buffer=new_spectrum_buffer();
         put_spectrum_free_buffer(buffer);
@@ -115,9 +119,8 @@ void create_spectrum_buffers(int n) {
 }
 
 void free_spectrum_buffer(struct spectrum_buffer* buffer) {
-    if(debug) fprintf(stderr,"free_spectrum_buffer: %08X\n",buffer);
-    pthread_mutex_init(&spectrum_input_buffer_mutex, NULL);
-    pthread_mutex_init(&spectrum_free_buffer_mutex, NULL);
+    if(debug) fprintf(stderr,"free_spectrum_buffer: %08X\n",(unsigned int)buffer);
+    
     put_spectrum_free_buffer(buffer);
 }
 
