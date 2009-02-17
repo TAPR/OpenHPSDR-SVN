@@ -79,8 +79,9 @@ int jack_ringbuffer_get(float* f1,float* f2,float* f3,float*f4,int nframes) {
     entries=nframes;
     if(jack_output_buffer->entries<nframes) {
         entries=jack_output_buffer->entries;
+        fprintf(stderr,"jack_ringbuffer_get: wanted %d got %d\n",nframes,entries);
     }
-    fprintf(stderr,"jack_ringbuffer_get: wanted %d got %d\n",nframes,entries);
+    
     jack_get_bytes+=entries*sizeof(float);
 
     if(debug_buffers) fprintf(stderr,"jack_ring_buffer_get space=%d entries=%d total=%d\n",jack_ringbuffer_space(jack_output_buffer),jack_ringbuffer_entries(jack_output_buffer),jack_get_bytes);

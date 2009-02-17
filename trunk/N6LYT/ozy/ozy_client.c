@@ -90,14 +90,13 @@ void* ozy_ep6_io_thread(void* arg) {
         }
         ozy_buffer=get_ozy_free_buffer();
         if(ozy_buffer!=NULL) {
-            fprintf(stderr,"OzyBulkRead: 0x86\n");
             bytes=OzyBulkRead(ozy,0x86,(void*)(ozy_buffer->buffer),OZY_BUFFER_SIZE);
             if (bytes < 0) {
                 perror("ozy_ep6_io_thread: OzyBulkRead failed");
             } else if (bytes != OZY_BUFFER_SIZE) {
                 fprintf(stderr,"ozy_ep6_io_thread: OzyBulkRead only read %d bytes\n",bytes);
             } else {
-                /*if(debug_buffers)*/ fprintf(stderr,"ozy_ep6_io_thread: OzyBulkRead read %d bytes\n",bytes);
+                if(debug_buffers) fprintf(stderr,"ozy_ep6_io_thread: OzyBulkRead read %d bytes\n",bytes);
             }
 
             if(debug_buffers) {
@@ -196,14 +195,13 @@ void* ozy_ep4_io_thread(void* arg) {
     while(1) {
         spectrum_buffer=get_spectrum_free_buffer();
         if(spectrum_buffer!=NULL) {
-            fprintf(stderr,"OzyBulkRead: 0x84\n");
             bytes=OzyBulkRead(ozy,0x84,(void*)(spectrum_buffer->buffer),SPECTRUM_BUFFER_SIZE);
             if (bytes < 0) {
                 perror("ozy_ep4_io_thread: OzyBulkRead failed");
             } else if (bytes != SPECTRUM_BUFFER_SIZE) {
                 fprintf(stderr,"ozy_ep4_io_thread: OzyBulkRead only read %d bytes\n",bytes);
             } else {
-                /*if(debug_buffers)*/ fprintf(stderr,"ozy_ep4_io_thread: OzyBulkRead read %d bytes\n",bytes);
+                if(debug_buffers) fprintf(stderr,"ozy_ep4_io_thread: OzyBulkRead read %d bytes\n",bytes);
             }
 
             // process input buffer
