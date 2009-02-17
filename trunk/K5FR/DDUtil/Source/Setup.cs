@@ -76,7 +76,7 @@ namespace DataDecoder
         private SplashScreen mSplashScreen;
         ASCIIEncoding AE = new ASCIIEncoding();
         public CATSerialPorts.CATSerialPort sp;
-        DataSet ds = new DataSet();
+        DataSet ds;
         DataSet dsm = new DataSet();
         Mini mini;// = new Mini();
         WN2Matrix wn;
@@ -400,10 +400,9 @@ namespace DataDecoder
             txtAlphaInt.Text = set.AlphaInt;
             cboAlphaBaud.SelectedIndex = set.AlphaBaud;
 
+            mSplashScreen.SetProgress("Initializing Ports", 0.6);
             CreateSerialPort();
             GetPortNames();
-
-            mSplashScreen.SetProgress("Initializing Ports", 0.6);
 
             InitRotor();
 
@@ -500,6 +499,9 @@ namespace DataDecoder
             {
                 switch (str)
                 {
+                    case "FW":
+                        rbFW.Checked = true; LPTnum = 0; DefaultLPT = str;
+                        break;
                     case "LPT1":
                         rb1.Checked = true; LPTnum = 888; DefaultLPT = str;
                         break;
@@ -547,8 +549,7 @@ namespace DataDecoder
             cboDevice.Text = set.Device;
             cboAlpha.SelectedIndex = set.AlphaPort;
             chkAlpha.Checked = set.AlphaEnab;
-            cboRepeatPort.SelectedIndex = set.RepeatPort;
-            chkRepeat.Checked = set.RepeatEnab;
+            SetupRepeater();
             numSplit.Value = set.SplitNum;
             chkSlaveDTR.Checked = set.slaveDTR;
             chkSlaveRTS.Checked = set.slaveRTS;
@@ -564,6 +565,7 @@ namespace DataDecoder
             if (set.Temp == 0) temp_format = TempFormat.Celsius;
             else temp_format = TempFormat.Fahrenheit;
 
+            FWSetup();  // setup the FW ports
             X2SetUp();  // setup the X2 Matrix
             WN2SetUp(); // setup the WN2
             AlcSetUp(); // setup the ALC
@@ -879,18 +881,65 @@ namespace DataDecoder
         // one of the Manual Override radio buttons has changed
         private void grpBCDover_CheckChanged(object sender, EventArgs e)
         {
-            if (rbOvr1.Checked) { OutParallelPort(LPTnum, 1); }
-            else if (rbOvr2.Checked) { OutParallelPort(LPTnum, 2); }
-            else if (rbOvr3.Checked) { OutParallelPort(LPTnum, 3); }
-            else if (rbOvr4.Checked) { OutParallelPort(LPTnum, 4); }
-            else if (rbOvr5.Checked) { OutParallelPort(LPTnum, 5); }
-            else if (rbOvr6.Checked) { OutParallelPort(LPTnum, 6); }
-            else if (rbOvr7.Checked) { OutParallelPort(LPTnum, 7); }
-            else if (rbOvr8.Checked) { OutParallelPort(LPTnum, 8); }
-            else if (rbOvr9.Checked) { OutParallelPort(LPTnum, 9); }
-            else if (rbOvr10.Checked) { OutParallelPort(LPTnum, 10); }
-            else if (rbOvr11.Checked) { OutParallelPort(LPTnum, 11); }
-            else if (rbOvr12.Checked) { OutParallelPort(LPTnum, 12); }
+            if (rbOvr1.Checked) 
+            { if (rbFW.Checked) {WriteFW(mAdr, cmd1, 1, false);}
+              else {OutParallelPort(LPTnum, 1); }
+            }
+            if (rbOvr2.Checked)
+            {
+                if (rbFW.Checked) { WriteFW(mAdr, cmd1, 2, false); }
+                else { OutParallelPort(LPTnum, 2); }
+            }
+            if (rbOvr3.Checked)
+            {
+                if (rbFW.Checked) { WriteFW(mAdr, cmd1, 3, false); }
+                else { OutParallelPort(LPTnum, 3); }
+            }
+            if (rbOvr4.Checked)
+            {
+                if (rbFW.Checked) { WriteFW(mAdr, cmd1, 4, false); }
+                else { OutParallelPort(LPTnum, 4); }
+            }
+            if (rbOvr5.Checked)
+            {
+                if (rbFW.Checked) { WriteFW(mAdr, cmd1, 5, false); }
+                else { OutParallelPort(LPTnum, 5); }
+            }
+            if (rbOvr6.Checked)
+            {
+                if (rbFW.Checked) { WriteFW(mAdr, cmd1, 6, false); }
+                else { OutParallelPort(LPTnum, 6); }
+            }
+            if (rbOvr7.Checked)
+            {
+                if (rbFW.Checked) { WriteFW(mAdr, cmd1, 7, false); }
+                else { OutParallelPort(LPTnum, 7); }
+            }
+            if (rbOvr8.Checked)
+            {
+                if (rbFW.Checked) { WriteFW(mAdr, cmd1, 8, false); }
+                else { OutParallelPort(LPTnum, 8); }
+            }
+            if (rbOvr9.Checked)
+            {
+                if (rbFW.Checked) { WriteFW(mAdr, cmd1, 9, false); }
+                else { OutParallelPort(LPTnum, 9); }
+            }
+            if (rbOvr10.Checked)
+            {
+                if (rbFW.Checked) { WriteFW(mAdr, cmd1, 10, false); }
+                else { OutParallelPort(LPTnum, 10); }
+            }
+            if (rbOvr11.Checked)
+            {
+                if (rbFW.Checked) { WriteFW(mAdr, cmd1, 11, false); }
+                else { OutParallelPort(LPTnum, 11); }
+            }
+            if (rbOvr12.Checked)
+            {
+                if (rbFW.Checked) { WriteFW(mAdr, cmd1, 12, false); }
+                else { OutParallelPort(LPTnum, 12); }
+            }
         }
         // The slaveDTR checkbox has changed
         private void chkSlaveDTR_CheckedChanged(object sender, EventArgs e)
@@ -1051,15 +1100,15 @@ namespace DataDecoder
             try
             {
                 // Write out the Band Data from the grid to the XML file
-                ds = new DataSet();
-                dg1.DataSource = ds;
-                dg1.DataMember = ("band");
+                //dg1.DataSource = ds;
+                //dg1.DataMember = ("band");
                 if (txtFile0.Text == null || txtFile0.Text == "")
                 {
                     MessageBox.Show("Please enter a name for the file", "File Name Error",
                     MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                     return;
                 }
+                DataSet ds = (DataSet)dg1.DataSource; 
                 fileName = txtFile0.Text;
                 File.Delete(fileName);
                 ds.WriteXml(fileName);
@@ -1283,7 +1332,7 @@ namespace DataDecoder
             if (sender == rbNone)
             {
                 OutParallelPort(LPTnum, 0); LPTnum = 0; set.lptPort = "NONE";
-                txtPort.Text = LPTnum.ToString(); set.Save();
+                chkDevice.Checked = false; txtPort.Text = LPTnum.ToString(); set.Save();
             }
             else if (sender == rbOther)
             { txtPort.Text = ""; set.lptPort = "Other"; set.Save(); }
@@ -1295,8 +1344,14 @@ namespace DataDecoder
             { LPTnum = 636; set.lptPort = "LPT3"; txtPort.Text = LPTnum.ToString(); set.Save(); }
             else if (sender == rb4)
             { LPTnum = 620; set.lptPort = "LPT4"; txtPort.Text = LPTnum.ToString(); set.Save(); }
+            else if (sender == rbFW)
+            { LPTnum = 0; set.lptPort = "FW"; txtPort.Text = LPTnum.ToString();
+            chkPortB.Checked = false;  set.Save(); }
             else
-            { LPTnum = 0; set.lptPort = "NONE"; txtPort.Text = LPTnum.ToString(); set.Save(); }
+            {
+                OutParallelPort(LPTnum, 0); LPTnum = 0; set.lptPort = "NONE"; rbNone.Checked = true;
+                chkDevice.Checked = false; txtPort.Text = LPTnum.ToString(); set.Save();
+            }
         }
         // LPT Port number changed
         private void txtPort_TextChanged(object sender, EventArgs e)
@@ -2122,11 +2177,10 @@ namespace DataDecoder
             try
             {
                 // Read in the Band Data from the XML file and display in datagrid
-                ds.Clear();
+                ds = new DataSet();
                 ds.ReadXml(fileName);
-
                 dg1.DataSource = ds;
-                dg1.DataMember = ("band");
+                dg1.DataMember = "band";
             }
             catch (Exception ex)
             {
@@ -2174,7 +2228,11 @@ namespace DataDecoder
             if (flist.ContainsKey(freq))// && chkDevice.Checked)
             {
                 keyValue = Convert.ToInt16(flist[freq]);
-                OutParallelPort(LPTnum, keyValue);    // port number(decimal), value(decimal)
+
+                if (rbFW.Checked) // write data to the FlexWire port
+                { WriteFW(mAdr, cmd1, keyValue, false); }
+                else // write data to the parallel port selected
+                { OutParallelPort(LPTnum, keyValue); } 
             }
             //else
             //{
@@ -5300,6 +5358,21 @@ namespace DataDecoder
 
         #region Repeater
 
+        //setup repeater
+        void SetupRepeater()
+        {
+            cboRepeatCom.SelectedIndex = set.RepeatCom;
+            cboRepeatPort.SelectedIndex = set.RepeatPort;
+            chkRepeat.Checked = set.RepeatEnab;
+            switch (set.RptMode)  // which format?
+            {
+                case 0: rbAll.Checked = true; break;
+                case 1: rbMHBD.Checked = true; break;
+                case 2: rbRptPal.Checked = true; break;
+                case 3: rbRptNone.Checked = true; break;
+                default: break;
+            }
+        }
         // the baud rate has changed
         private void cboRepeatCom_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -5312,14 +5385,9 @@ namespace DataDecoder
         {
             if (rbAll.Checked) { set.RptMode = 0; }
             else if (rbMHBD.Checked) { set.RptMode = 1; }
-            else if (rbRptNone.Checked) { set.RptMode = 2; }
+            else if (rbRptPal.Checked) { set.RptMode = 2; }
+            else if (rbRptNone.Checked) { set.RptMode = 3; }
             set.Save();
-        }
-        // The Misc Tab has been double clicked so toggle it's visibility
-        private void tabMisc_DoubleClick(object sender, EventArgs e)
-        {
-            if (grpRepeat.Visible) grpRepeat.Visible = false;
-            else grpRepeat.Visible = true;
         }
         // The Repeat Enable check box has changed
         private void chkRepeat_CheckedChanged(object sender, EventArgs e)
@@ -5334,7 +5402,8 @@ namespace DataDecoder
                      {
                          case 0: rbAll.Checked = true; break;
                          case 1: rbMHBD.Checked = true; break;
-                         case 2: rbRptNone.Checked = true; break;
+                         case 2: rbRptPal.Checked = true; break;
+                         case 3: rbRptNone.Checked = true; break;
                      }
                  }
                  else
@@ -5926,8 +5995,41 @@ namespace DataDecoder
             else if (rbPre16.Checked)
             { txtSP.Text = rbPre16.Text; btnSP_Click(null, null); }
         }
+        // Calc & Display grid to grid heading
+        private void txtLoc_DoubleClick(object sender, EventArgs e)
+        {
+            try
+            {
+                txtSP.Text = String.Format("{0:n0}",
+                    MaidenheadLocator.Azimuth(txtGrid.Text, txtLoc.Text));
 
-       #endregion Rotor Events
+                txtKm.Text = String.Format("{0:n0}",
+                    MaidenheadLocator.Distance(txtGrid.Text, txtLoc.Text)) + " km";
+
+                txtSm.Text = String.Format("{0:n0}", Convert.ToInt32(
+                    MaidenheadLocator.Distance(txtGrid.Text, txtLoc.Text)) * .621371) + " mi";
+
+                MaidenheadLocator.LatLong ll = MaidenheadLocator.LocatorToLatLong(txtLoc.Text);
+                txtDxLat.Text = String.Format("{0:f4}", ll.Lat);
+                txtDxLong.Text = String.Format("{0:f4}", ll.Long);
+
+                txtLP.Text = ""; lblLP.Text = "";
+                cboPrefix.Text = ""; cboEntity.Text = "";
+                txtCode.Text = ""; txtRegion.Text = ""; txtDxDist.Text = ""; txtDxCont.Text = "";
+                txtDxCQ.Text = ""; txtDxITU.Text = ""; txtDxIOTA.Text = ""; txtDxTime.Text = "";
+                lblDxTime.Text = "Coords for Grid Square";
+            }
+            catch
+            { lblSP.Text = "Error"; txtSP.Text = ""; txtLP.Text = ""; lblLP.Text = ""; }
+
+        }
+        // Catch the Enter key if pressed
+        private void txtLoc_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter) txtLoc_DoubleClick(null, null);
+        }
+          
+          #endregion Rotor Events
 
           #region # Rotor Methods #
 
@@ -6297,69 +6399,213 @@ namespace DataDecoder
                                 switch (band)
                                 {
                                     case "V00":
-                                        if(chkPortB.Checked) MatrixOutB(bPort, x2b0);
-                                        if(chkPortA.Checked) MatrixOutA(aPort, x2a0);
-                                        SetVHF("0"); break;
+                                        if (chkPortA.Checked)
+                                        {
+                                            if (aPort != mAdr) MatrixOutA(aPort, x2a0);
+                                            else { WriteFW(mAdr, cmd0, x2a0, chkInvertA.Checked); }
+                                        }
+                                        if (chkPortB.Checked)
+                                        {
+                                            if (bPort != mAdr) MatrixOutB(bPort, x2b0);
+                                            else { WriteFW(mAdr, cmd1, x2b0, chkInvertB.Checked); }
+                                        }
+                                        SetVHF("0"); 
+                                        break;
                                     case "V01":
-                                        if(chkPortB.Checked) MatrixOutB(bPort, x2b1);
-                                        if(chkPortA.Checked) MatrixOutA(aPort, x2a1);
-                                        SetVHF("1"); break;
+                                        if (chkPortA.Checked)
+                                        {
+                                            if (aPort != mAdr) MatrixOutA(aPort, x2a1);
+                                            else { WriteFW(mAdr, cmd0, x2a1, chkInvertA.Checked); }
+                                        }
+                                        if (chkPortB.Checked)
+                                        {
+                                            if (bPort != mAdr) MatrixOutB(bPort, x2b1);
+                                            else { WriteFW(mAdr, cmd1, x2b1, chkInvertB.Checked); }
+                                        }
+                                        SetVHF("1");
+                                        break;
                                     case "V02":
-                                        if(chkPortB.Checked) MatrixOutB(bPort, x2b2);
-                                        if(chkPortA.Checked) MatrixOutA(aPort, x2a2);
-                                        SetVHF("2"); break;
+                                        if (chkPortA.Checked)
+                                        {
+                                            if (aPort != mAdr) MatrixOutA(aPort, x2a2);
+                                            else { WriteFW(mAdr, cmd0, x2a2, chkInvertA.Checked); }
+                                        }
+                                        if (chkPortB.Checked)
+                                        {
+                                            if (bPort != mAdr) MatrixOutB(bPort, x2b2);
+                                            else { WriteFW(mAdr, cmd1, x2b2, chkInvertB.Checked); }
+                                        }
+                                        SetVHF("2");
+                                        break;
                                     case "V03":
-                                        if(chkPortB.Checked) MatrixOutB(bPort, x2b3);
-                                        if(chkPortA.Checked) MatrixOutA(aPort, x2a3);
-                                        SetVHF("3"); break;
+                                        if (chkPortA.Checked)
+                                        {
+                                            if (aPort != mAdr) MatrixOutA(aPort, x2a3);
+                                            else { WriteFW(mAdr, cmd0, x2a3, chkInvertA.Checked); }
+                                        }
+                                        if (chkPortB.Checked)
+                                        {
+                                            if (bPort != mAdr) MatrixOutB(bPort, x2b3);
+                                            else { WriteFW(mAdr, cmd1, x2b3, chkInvertB.Checked); }
+                                        }
+                                        SetVHF("3");
+                                        break;
                                     case "V04":
-                                        if(chkPortB.Checked) MatrixOutB(bPort, x2b4);
-                                        if(chkPortA.Checked) MatrixOutA(aPort, x2a4);
-                                        SetVHF("4"); break;
+                                        if (chkPortA.Checked)
+                                        {
+                                            if (aPort != mAdr) MatrixOutA(aPort, x2a4);
+                                            else { WriteFW(mAdr, cmd0, x2a4, chkInvertA.Checked); }
+                                        }
+                                        if (chkPortB.Checked)
+                                        {
+                                            if (bPort != mAdr) MatrixOutB(bPort, x2b4);
+                                            else { WriteFW(mAdr, cmd1, x2b4, chkInvertB.Checked); }
+                                        }
+                                        SetVHF("4");
+                                        break;
                                     case "V05":
-                                        if(chkPortB.Checked) MatrixOutB(bPort, x2b5);
-                                        if(chkPortA.Checked) MatrixOutA(aPort, x2a5);
-                                        SetVHF("5"); break;
+                                        if (chkPortA.Checked)
+                                        {
+                                            if (aPort != mAdr) MatrixOutA(aPort, x2a5);
+                                            else { WriteFW(mAdr, cmd0, x2a5, chkInvertA.Checked); }
+                                        }
+                                        if (chkPortB.Checked)
+                                        {
+                                            if (bPort != mAdr) MatrixOutB(bPort, x2b5);
+                                            else { WriteFW(mAdr, cmd1, x2b5, chkInvertB.Checked); }
+                                        }
+                                        SetVHF("5");
+                                        break;
                                     case "V06":
-                                        if(chkPortB.Checked) MatrixOutB(bPort, x2b6);
-                                        if(chkPortA.Checked) MatrixOutA(aPort, x2a6);
-                                        SetVHF("6"); break;
+                                        if (chkPortA.Checked)
+                                        {
+                                            if (aPort != mAdr) MatrixOutA(aPort, x2a6);
+                                            else { WriteFW(mAdr, cmd0, x2a6, chkInvertA.Checked); }
+                                        }
+                                        if (chkPortB.Checked)
+                                        {
+                                            if (bPort != mAdr) MatrixOutB(bPort, x2b6);
+                                            else { WriteFW(mAdr, cmd1, x2b6, chkInvertB.Checked); }
+                                        }
+                                        SetVHF("6");
+                                        break;
                                     case "V07":
-                                        if(chkPortB.Checked) MatrixOutB(bPort, x2b7);
-                                        if(chkPortA.Checked) MatrixOutA(aPort, x2a7);
-                                        SetVHF("7"); break;
+                                        if (chkPortA.Checked)
+                                        {
+                                            if (aPort != mAdr) MatrixOutA(aPort, x2a7);
+                                            else { WriteFW(mAdr, cmd0, x2a7, chkInvertA.Checked); }
+                                        }
+                                        if (chkPortB.Checked)
+                                        {
+                                            if (bPort != mAdr) MatrixOutB(bPort, x2b7);
+                                            else { WriteFW(mAdr, cmd1, x2b7, chkInvertB.Checked); }
+                                        }
+                                        SetVHF("7");
+                                        break;
                                     case "V08":
-                                        if(chkPortB.Checked) MatrixOutB(bPort, x2b8);
-                                        if(chkPortA.Checked) MatrixOutA(aPort, x2a8);
-                                        SetVHF("8"); break;
+                                        if (chkPortA.Checked)
+                                        {
+                                            if (aPort != mAdr) MatrixOutA(aPort, x2a8);
+                                            else { WriteFW(mAdr, cmd0, x2a8, chkInvertA.Checked); }
+                                        }
+                                        if (chkPortB.Checked)
+                                        {
+                                            if (bPort != mAdr) MatrixOutB(bPort, x2b8);
+                                            else { WriteFW(mAdr, cmd1, x2b8, chkInvertB.Checked); }
+                                        }
+                                        SetVHF("8");
+                                        break;
                                     case "V09":
-                                        if(chkPortB.Checked) MatrixOutB(bPort, x2b9);
-                                        if(chkPortA.Checked) MatrixOutA(aPort, x2a9);
-                                        SetVHF("9"); break;
+                                        if (chkPortA.Checked)
+                                        {
+                                            if (aPort != mAdr) MatrixOutA(aPort, x2a9);
+                                            else { WriteFW(mAdr, cmd0, x2a9, chkInvertA.Checked); }
+                                        }
+                                        if (chkPortB.Checked)
+                                        {
+                                            if (bPort != mAdr) MatrixOutB(bPort, x2b9);
+                                            else { WriteFW(mAdr, cmd1, x2b9, chkInvertB.Checked); }
+                                        }
+                                        SetVHF("9");
+                                        break;
                                     case "V10":
-                                        if(chkPortB.Checked) MatrixOutB(bPort, x2b10);
-                                        if(chkPortA.Checked) MatrixOutA(aPort, x2a10);
-                                        SetVHF("10"); break;
+                                        if (chkPortA.Checked)
+                                        {
+                                            if (aPort != mAdr) MatrixOutA(aPort, x2a10);
+                                            else { WriteFW(mAdr, cmd0, x2a10, chkInvertA.Checked); }
+                                        }
+                                        if (chkPortB.Checked)
+                                        {
+                                            if (bPort != mAdr) MatrixOutB(bPort, x2b10);
+                                            else { WriteFW(mAdr, cmd1, x2b10, chkInvertB.Checked); }
+                                        }
+                                        SetVHF("10");
+                                        break;
                                     case "V11":
-                                        if(chkPortB.Checked) MatrixOutB(bPort, x2b11);
-                                        if(chkPortA.Checked) MatrixOutA(aPort, x2a11);
-                                        SetVHF("11"); break;
+                                        if (chkPortA.Checked)
+                                        {
+                                            if (aPort != mAdr) MatrixOutA(aPort, x2a11);
+                                            else { WriteFW(mAdr, cmd0, x2a11, chkInvertA.Checked); }
+                                        }
+                                        if (chkPortB.Checked)
+                                        {
+                                            if (bPort != mAdr) MatrixOutB(bPort, x2b11);
+                                            else { WriteFW(mAdr, cmd1, x2b11, chkInvertB.Checked); }
+                                        }
+                                        SetVHF("11");
+                                        break;
                                     case "V12":
-                                        if(chkPortB.Checked) MatrixOutB(bPort, x2b12);
-                                        if(chkPortA.Checked) MatrixOutA(aPort, x2a12);
-                                        SetVHF("12"); break;
+                                        if (chkPortA.Checked)
+                                        {
+                                            if (aPort != mAdr) MatrixOutA(aPort, x2a12);
+                                            else { WriteFW(mAdr, cmd0, x2a12, chkInvertA.Checked); }
+                                        }
+                                        if (chkPortB.Checked)
+                                        {
+                                            if (bPort != mAdr) MatrixOutB(bPort, x2b12);
+                                            else { WriteFW(mAdr, cmd1, x2b12, chkInvertB.Checked); }
+                                        }
+                                        SetVHF("12");
+                                        break;
                                     case "V13":
-                                        if(chkPortB.Checked) MatrixOutB(bPort, x2b13);
-                                        if(chkPortA.Checked) MatrixOutA(aPort, x2a13);
-                                        SetVHF("13"); break;
-                                    case "006": 
-                                        if(chkPortB.Checked) MatrixOutB(bPort, x2b14);
-                                        if(chkPortA.Checked) MatrixOutA(aPort, x2a14);
-                                        SetVHF("HF6"); break;
-                                    case "002": 
-                                        if(chkPortB.Checked) MatrixOutB(bPort, x2b15);
-                                        if(chkPortA.Checked) MatrixOutA(aPort, x2a15);
-                                        SetVHF("HF2"); break;
+                                        if (chkPortA.Checked)
+                                        {
+                                            if (aPort != mAdr) MatrixOutA(aPort, x2a13);
+                                            else { WriteFW(mAdr, cmd0, x2a13, chkInvertA.Checked); }
+                                        }
+                                        if (chkPortB.Checked)
+                                        {
+                                            if (bPort != mAdr) MatrixOutB(bPort, x2b13);
+                                            else { WriteFW(mAdr, cmd1, x2b13, chkInvertB.Checked); }
+                                        }
+                                        SetVHF("13");
+                                        break;
+                                    case "006":
+                                        if (chkPortA.Checked)
+                                        {
+                                            if (aPort != mAdr) MatrixOutA(aPort, x2a14);
+                                            else { WriteFW(mAdr, cmd0, x2a14, chkInvertA.Checked); }
+                                        }
+                                        if (chkPortB.Checked)
+                                        {
+                                            if (bPort != mAdr) MatrixOutB(bPort, x2b14);
+                                            else { WriteFW(mAdr, cmd1, x2b14, chkInvertB.Checked); }
+                                        }
+                                        SetVHF("14");
+                                        break;
+                                    case "002":
+                                        if (chkPortA.Checked)
+                                        {
+                                            if (aPort != mAdr) MatrixOutA(aPort, x2a15);
+                                            else { WriteFW(mAdr, cmd0, x2a15, chkInvertA.Checked); }
+                                        }
+                                        if (chkPortB.Checked)
+                                        {
+                                            if (bPort != mAdr) MatrixOutB(bPort, x2b15);
+                                            else { WriteFW(mAdr, cmd1, x2b15, chkInvertB.Checked); }
+                                        }
+                                        SetVHF("15");
+                                        break;
                                 }
                             }
                             // If WN2 band sensor matrix enabled, set correct sensor
@@ -6533,7 +6779,7 @@ namespace DataDecoder
                         default: mode = "xxx"; break;
                     }
                     logFreq = rawFreq.Substring(2, 11);
-                    PortSend(logFreq);  // send freq. to PLs
+                    //PortSend(logFreq);  // send freq. to PLs
 
                     // Execute macro if Mode Change is checked
                     if (LastMode != sdrMode && chkModeChg.Checked)
@@ -6618,21 +6864,29 @@ namespace DataDecoder
                         }   // see StepData_DataReceived() for return
                     }
 
-                    lastFreq = logFreq; // save this freq
-                    LastMode = sdrMode; // save this mode
+                    //lastFreq = logFreq; // save this freq
+                    //LastMode = sdrMode; // save this mode
                     freq = Regex.Replace(rawFreq, regex, mask);
                     freq = freq.TrimStart('0');
-                    freqLook = rawFreq.Substring(2, 8);
-                    freqLook = freqLook.TrimStart('0');
-                    freqLook = freqLook.Substring(0, freqLook.Length - 2);
+                    if (String.Compare(lastFreq, logFreq) != 0)
+                    {   // if the freq has changed
+                        freqLook = rawFreq.Substring(2, 8);
+                        freqLook = freqLook.TrimStart('0');
+                        freqLook = freqLook.Substring(0, freqLook.Length - 2);
+                    }
                     if (logFlag == true) // RCP1 is active
                         id = title + " - " + freq.Substring(0, 9) +
                             "  " + vfo + "  " + mode + "  RCP";
                     else
                         id = title + " - " + freq.Substring(0, 9) +
                             "  " + vfo + "  " + mode;
+                    
                     //decode freq data and output to LPT port
                     if (chkDevice.Checked && chkDev0.Checked) LookUp(freqLook);
+                    PortSend(logFreq);  // send freq. to PLs
+                    lastFreq = logFreq; // save this freq
+                    LastMode = sdrMode; // save this mode
+
                     this.SetTitle(id);
                     this.SetDigit(keyValue.ToString());
                 }//For
@@ -7008,7 +7262,31 @@ namespace DataDecoder
         private void PortSend(string freq)
         {
             try
-            {   // If SteppIR is selected and the freq. has changed
+            {
+                if (rbRptPal.Checked && RepeatPort.IsOpen )
+                {
+                    byte[] bytes = new byte[11];
+                    string preamble = "FE";
+                    string palAdr = "E0";
+                    string radAdr = "3A";
+                    string EOM = "FD";
+                    string mystring = "";
+                    if (lastFreq != freq)
+                    {
+                        mystring = EOM + "00" + freq.Substring(3, 8) + "05" +
+                                   radAdr + palAdr + preamble + preamble;
+                        int j = 20;
+                        for (int i = 0; i < 11; i++)
+                        {
+                            string stemp = mystring.Substring(j, 2);
+                            bytes[i] = byte.Parse(stemp, NumberStyles.HexNumber);
+                            j -= 2;
+                        }
+                        // send freq 14.234.56 Mhz = FE FE E0 3A 05 60 45 23 14 00 FD
+                        RepeatPort.Write(bytes, 0, 11);
+                    }
+                }
+                // If SteppIR is selected and the freq. has changed
                 // send new freq data to it x reps 
                 if (chkStep.Checked && StepCtr != 0)
                 {
@@ -7231,85 +7509,103 @@ namespace DataDecoder
         }
         private void GetPortNames()
         {
-            string [] ports = SerialPort.GetPortNames();
-            if (ports.Length > 0)
+            try
             {
-                int[] port = new int[ports.Length];
-                for (int i=0; i < ports.Length; i++)
-                {   // strip the com off the port name
-                    port[i] = Convert.ToByte(ports[i].Substring(3, ports[i].Length - 3));
+                string[] ports = SerialPort.GetPortNames();
+                if (ports.Length > 0)
+                {
+                    int[] port = new int[ports.Length];
+                    for (int i = 0; i < ports.Length; i++)
+                    {   // strip the com off the port name
+                        port[i] = Convert.ToByte(ports[i].Substring(3, ports[i].Length - 3));
+                    }
+                    Array.Sort(port);   // Sort port numbers in order
+
+                    // make sure combo boxes are empty
+                    cboSerAcc.Items.Clear();
+                    cboLogPort.Items.Clear();
+                    cboLPport.Items.Clear();
+                    cboRCP2.Items.Clear();
+                    cboRCP3.Items.Clear();
+                    cboRCP4.Items.Clear();
+                    cboPW1.Items.Clear();
+                    cboStep.Items.Clear();
+                    cboRotorPort.Items.Clear();
+                    cboRCP1Rotor.Items.Clear();
+                    cboRCP2Rotor.Items.Clear();
+                    cboRCP3Rotor.Items.Clear();
+                    cboRCP4Rotor.Items.Clear();
+                    cboAlpha.Items.Clear();
+                    cboPMport.Items.Clear();
+                    cboRepeatPort.Items.Clear();
+                    // Add empty entry to port combos
+                    cboSerAcc.Items.Add("");
+                    cboLogPort.Items.Add("");
+                    cboLPport.Items.Add("");
+                    cboRCP2.Items.Add("");
+                    cboRCP3.Items.Add("");
+                    cboRCP4.Items.Add("");
+                    cboPW1.Items.Add("");
+                    cboStep.Items.Add("");
+                    cboRotorPort.Items.Add("");
+                    cboRCP1Rotor.Items.Add("");
+                    cboRCP2Rotor.Items.Add("");
+                    cboRCP3Rotor.Items.Add("");
+                    cboRCP4Rotor.Items.Add("");
+                    cboAlpha.Items.Add("");
+                    cboPMport.Items.Add("");
+                    cboRepeatPort.Items.Add("");
+
+                    for (int i = 0; i < port.Length; i++)
+                    {
+                        // load port combos with port names
+                        cboCAT.Items.Add("COM" + port[i]);
+                        cboSerAcc.Items.Add("COM" + port[i]);
+                        cboLogPort.Items.Add("COM" + port[i]);
+                        cboLPport.Items.Add("COM" + port[i]);
+                        cboRCP2.Items.Add("COM" + port[i]);
+                        cboRCP3.Items.Add("COM" + port[i]);
+                        cboRCP4.Items.Add("COM" + port[i]);
+                        cboPW1.Items.Add("COM" + port[i]);
+                        cboStep.Items.Add("COM" + port[i]);
+                        cboRotorPort.Items.Add("COM" + port[i]);
+                        cboRCP1Rotor.Items.Add("COM" + port[i]);
+                        cboRCP2Rotor.Items.Add("COM" + port[i]);
+                        cboRCP3Rotor.Items.Add("COM" + port[i]);
+                        cboRCP4Rotor.Items.Add("COM" + port[i]);
+                        cboAlpha.Items.Add("COM" + port[i]);
+                        cboPMport.Items.Add("COM" + port[i]);
+                        cboRepeatPort.Items.Add("COM" + port[i]);
+                    }
                 }
-                Array.Sort(port);   // Sort port numbers in order
+                else
+                {
+                    MessageBox.Show(
+                        "There are NO serial ports setup on this computer!\r\r" +
+                        "For this program to function there has to be at least one\r" +
+                        "pair of virtual serial ports so DDUtil can talk to PowerSDR.\r\r" +
+                        "Please try again after seting up at least one pair of ports!\r\r" +
+                        "The program will now terminate.",
+                        "Fatal Error!", MessageBoxButtons.OK, MessageBoxIcon.Stop);
 
-                // make sure combo boxes are empty
-                cboSerAcc.Items.Clear();
-                cboLogPort.Items.Clear();
-                cboLPport.Items.Clear();
-                cboRCP2.Items.Clear();
-                cboRCP3.Items.Clear();
-                cboRCP4.Items.Clear();
-                cboPW1.Items.Clear();
-                cboStep.Items.Clear();
-                cboRotorPort.Items.Clear();
-                cboRCP1Rotor.Items.Clear();
-                cboRCP2Rotor.Items.Clear();
-                cboRCP3Rotor.Items.Clear();
-                cboRCP4Rotor.Items.Clear();
-                cboAlpha.Items.Clear();
-                cboPMport.Items.Clear();
-                cboRepeatPort.Items.Clear();
-                // Add empty entry to port combos
-                cboSerAcc.Items.Add("");
-                cboLogPort.Items.Add("");
-                cboLPport.Items.Add("");
-                cboRCP2.Items.Add("");
-                cboRCP3.Items.Add("");
-                cboRCP4.Items.Add("");
-                cboPW1.Items.Add("");
-                cboStep.Items.Add("");
-                cboRotorPort.Items.Add("");
-                cboRCP1Rotor.Items.Add("");
-                cboRCP2Rotor.Items.Add("");
-                cboRCP3Rotor.Items.Add("");
-                cboRCP4Rotor.Items.Add("");
-                cboAlpha.Items.Add("");
-                cboPMport.Items.Add("");
-                cboRepeatPort.Items.Add("");
-
-                for (int i = 0; i < port.Length; i++)
-                {   
-                    // load port combos with port names
-                    cboCAT.Items.Add("COM" + port[i]);
-                    cboSerAcc.Items.Add("COM" + port[i]);
-                    cboLogPort.Items.Add("COM" + port[i]);
-                    cboLPport.Items.Add("COM" + port[i]);
-                    cboRCP2.Items.Add("COM" + port[i]);
-                    cboRCP3.Items.Add("COM" + port[i]);
-                    cboRCP4.Items.Add("COM" + port[i]);
-                    cboPW1.Items.Add("COM" + port[i]);
-                    cboStep.Items.Add("COM" + port[i]);
-                    cboRotorPort.Items.Add("COM" + port[i]);
-                    cboRCP1Rotor.Items.Add("COM" + port[i]);
-                    cboRCP2Rotor.Items.Add("COM" + port[i]);
-                    cboRCP3Rotor.Items.Add("COM" + port[i]);
-                    cboRCP4Rotor.Items.Add("COM" + port[i]);
-                    cboAlpha.Items.Add("COM" + port[i]);
-                    cboPMport.Items.Add("COM" + port[i]);
-                    cboRepeatPort.Items.Add("COM" + port[i]);
+                    Environment.Exit(0);
                 }
             }
-            else
+            catch
             {
                 MessageBox.Show(
-                    "There are NO serial ports setup on this computer!\r\r" +
-                    "For this program to function there has to be at least one\r" +
-                    "pair of virtual serial ports so DDUtil can talk to PowerSDR.\r\r" +
-                    "Please try again after seting up at least one pair of ports!\r\r" + 
-                    "The program will now terminate as there is nothing to do.", 
+                    "There is a problem with the serial ports setup on this computer!\r\r" +
+                    "DDUtil requires that port names begin with'COM'. If you are using\r" +
+                    "com0com as a virtual serial ports manager, open the com0com setup\r" +
+                    "utility and change all port names to begin with 'COM'. \r\r" +
+                    "Additionally, to avoid other problems make sure that the\r" +
+                    "'enable buffer overrun' check boxesare checked for each port.\r\r" +
+                    "The program will now terminate.",
                     "Fatal Error!", MessageBoxButtons.OK, MessageBoxIcon.Stop);
 
                 Environment.Exit(0);
             }
+
         }// end GetPortNames
         /// <summary>
         /// Opens the default CAT port.
@@ -8012,8 +8308,8 @@ namespace DataDecoder
             txtPortB.Text = set.bPortNum;
             chkInvertA.Checked = set.chkInvertA;
             chkInvertB.Checked = set.chkInvertB;
-            aPort = Convert.ToInt32(set.aPortNum);
-            bPort = Convert.ToInt32(set.bPortNum);
+            //aPort = Convert.ToInt32(set.aPortNum);
+            //bPort = Convert.ToInt32(set.bPortNum);
 
             //store the set rec vars as they will be overwritten during the load.
             int s2a0 = set.x2a0, s2a1 = set.x2a1, s2a2 = set.x2a2, s2a3 = set.x2a3;
@@ -8491,7 +8787,6 @@ namespace DataDecoder
         }
         #endregion * grpPortB_CheckedChanged Events *
 
-
         // the Port A Enable checkbox has been changed
         private void chkPortA_CheckedChanged(object sender, EventArgs e)
         {
@@ -8534,6 +8829,8 @@ namespace DataDecoder
                 btnClrPortB.Enabled = true;
                 set.chkPortB = true;
                 X2SetUp();
+                if (rbFW.Checked)
+                { rbFW.Checked = false; rbNone.Checked = true; }
             }
             else
             {
@@ -8551,16 +8848,25 @@ namespace DataDecoder
         // Port A has been changed
         private void txtPortA_TextChanged(object sender, EventArgs e)
         {
-            if (txtPortA.Text == null || txtPortA.Text == "") txtPortA.Text = "0";
+            if (txtPortA.Text == null || txtPortA.Text == "")
+            {
+                txtPortA.Text = "0";
+                aPort = Convert.ToInt32(txtPortA.Text);
+            }
+            else if (txtPortA.Text == "FW") aPort = mAdr;
             set.aPortNum = txtPortA.Text; set.Save();
-            aPort = Convert.ToInt32(txtPortA.Text);
         }
         // Port B has been changed
         private void txtPortB_TextChanged(object sender, EventArgs e)
         {
-            if (txtPortB.Text == null || txtPortB.Text == "") txtPortB.Text = "0";
+            if (txtPortB.Text == null || txtPortB.Text == "")
+            {
+                txtPortB.Text = "0";
+                bPort = Convert.ToInt32(txtPortB.Text);
+            }
+            else if (txtPortB.Text == "FW") bPort = mAdr;
             set.bPortNum = txtPortB.Text; set.Save();
-            bPort = Convert.ToInt32(txtPortB.Text);
+
         }
         // the Clear all receive bits button was pressed
         private void btnClrPortA_Click(object sender, EventArgs e)
@@ -9340,39 +9646,42 @@ namespace DataDecoder
 
         #endregion WaveNode
 
-        // Calc & Display grid to grid heading
-        private void txtLoc_DoubleClick(object sender, EventArgs e)
+
+
+        #region FlexWire
+
+        #region # Enums & Vars #
+        const int mAdr = 0x40;
+        const int cmd0 = 2;
+        const int cmd1 = 3;
+
+        #endregion Enums & Vars
+
+        #region # Methods #
+
+        // write to FlexWire port
+        void WriteFW(int adr, int cmd, int data, bool inv)
         {
-            try
-            {
-                txtSP.Text = String.Format("{0:n0}", 
-                    MaidenheadLocator.Azimuth(txtGrid.Text, txtLoc.Text));
-                
-                txtKm.Text = String.Format("{0:n0}", 
-                    MaidenheadLocator.Distance(txtGrid.Text, txtLoc.Text)) + " km";
-
-                txtSm.Text = String.Format("{0:n0}", Convert.ToInt32( 
-                    MaidenheadLocator.Distance(txtGrid.Text, txtLoc.Text)) * .621371) + " mi";
-
-                MaidenheadLocator.LatLong ll = MaidenheadLocator.LocatorToLatLong(txtLoc.Text);
-                txtDxLat.Text = String.Format("{0:f4}", ll.Lat);
-                txtDxLong.Text = String.Format("{0:f4}", ll.Long);
-
-                txtLP.Text = ""; lblLP.Text = "";
-                cboPrefix.Text = ""; cboEntity.Text = "";
-                txtCode.Text = ""; txtRegion.Text = ""; txtDxDist.Text = ""; txtDxCont.Text = "";
-                txtDxCQ.Text = ""; txtDxITU.Text = ""; txtDxIOTA.Text = ""; txtDxTime.Text = "";
-                lblDxTime.Text = "Coords for Grid Square";
-            }
-            catch
-            { lblSP.Text = "Error"; txtSP.Text = ""; txtLP.Text = ""; lblLP.Text = ""; }
-
+            string ad = adr.ToString("X");
+            if (adr < 16) ad = "0" + ad;
+            string cm = cmd.ToString("X");
+            if (cmd < 16) cm = "0" + cm;
+            if (inv) data = 255 ^ data;
+            string val = data.ToString("X");
+            if (data < 16) val = "0" + val;
+            WriteToPort("ZZFY" + ad + cm + val + ";", iSleep);
+        }
+        // FW Setup routine
+        void FWSetup()
+        {
+            WriteToPort("ZZFY400600;", iSleep);
+            WriteToPort("ZZFY400700;", iSleep);
         }
 
-        private void txtLoc_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Enter) txtLoc_DoubleClick(null, null);
-        }
+        #endregion Methods
+
+        #endregion FlexWire
+
 
     }
 }
