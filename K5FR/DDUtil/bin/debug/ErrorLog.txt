@@ -1,0 +1,16 @@
+Source		: DataDecoder
+Method		: btnSave0_Click
+Time		: 1:49:41 PM
+Date		: 2/5/2009
+Computer	: K5FR-GW32
+Error		: Unable to cast object of type 'System.Data.DataTable' to type 'System.Data.DataSet'.
+Stack Trace	: at DataDecoder.Setup.btnSave0_Click(Object sender, EventArgs e) in C:\Documents and Settings\Owner\Desktop\Repos_DDUtil 2008\Source\Setup.cs:line 1059
+-------------------------------------------------------------------
+Source		: DataDecoder
+Method		: btnSave0_Click
+Time		: 2:05:31 PM
+Date		: 2/5/2009
+Computer	: K5FR-GW32
+Error		: Unable to cast object of type 'System.Data.DataTable' to type 'System.Data.DataSet'.
+Stack Trace	: at DataDecoder.Setup.btnSave0_Click(Object sender, EventArgs e) in C:\Documents and Settings\Owner\Desktop\Repos_DDUtil 2008\Source\Setup.cs:line 1059
+-------------------------------------------------------------------

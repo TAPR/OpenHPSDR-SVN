@@ -2,7 +2,7 @@
 <macroData>
   <macro>
     <Button>Test</Button>
-    <Command>DDLF;</Command>
+    <Command>ZZFY4003F0;</Command>
   </macro>
   <macro>
     <Button>20 RTTY</Button>
@@ -42,7 +42,7 @@
   </macro>
   <macro>
     <Button>M11</Button>
-    <Command>ZZPS0;</Command>
+    <Command>ZZPS1;</Command>
   </macro>
   <macro>
     <Button>Auto</Button>
