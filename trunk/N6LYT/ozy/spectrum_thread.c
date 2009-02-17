@@ -22,10 +22,10 @@
 
 pthread_t spectrum_thread_id;
 
-int spectrum_port=19602;
+int spectrum_port=DEFAULT_SPECTRUM_PORT;
 
 void* spectrum_thread(void* arg) {
-    struct spectrum_buffer* buffer;
+    struct spectrum_buffer* spectrum_buffer;
 
     struct sockaddr_in clnt;
     int sock, clnt_len;
@@ -45,15 +45,15 @@ void* spectrum_thread(void* arg) {
         // wait for a spectrum buffer
         sem_wait(&spectrum_input_buffer_sem);
         if(debug_spectrum) fprintf(stderr,"spectrum_thread: get_spectrum_input_buffer\n");
-        buffer=get_spectrum_input_buffer();
-        if(buffer==NULL) {
+        spectrum_buffer=get_spectrum_input_buffer();
+        if(spectrum_buffer==NULL) {
             fprintf(stderr,"spectrum_thread: get_spectrum_buffer returned NULL!\n");
         } else {
             // write to spectrum port
-            if (sendto(sock,buffer->buffer,SPECTRUM_BUFFER_SIZE*sizeof(float),0,(struct sockaddr *)&clnt,clnt_len)!=SPECTRUM_BUFFER_SIZE*sizeof(float)) {
+            if (sendto(sock,spectrum_buffer->buffer,SPECTRUM_BUFFER_SIZE,0,(struct sockaddr *)&clnt,clnt_len)!=SPECTRUM_BUFFER_SIZE) {
                 perror("Failed to send spectrum");
             }
-            free_spectrum_buffer(buffer);
+            free_spectrum_buffer(spectrum_buffer);
         }
 
     }

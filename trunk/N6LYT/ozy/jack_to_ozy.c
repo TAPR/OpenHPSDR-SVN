@@ -22,10 +22,7 @@
 
 pthread_t jack_to_ozy_thread_id;
 
-int out_index=0;
-
-int state_out;
-int data_state_out;
+//int out_index=0;
 
 float left_rx_sample_float;
 float right_rx_sample_float;
@@ -38,7 +35,7 @@ short right_tx_sample;
 
 void process_jack_input_buffer(struct jack_buffer* buffer) {
     int i,b;
-    char ozy_samples[8*8]; //
+    unsigned char ozy_samples[8*8]; //
     for(i=0,b=0;i<buffer->nframes;i+=output_sample_increment) {
         left_rx_sample=(int)(buffer->buffer_1[i]*32767.0);
         right_rx_sample=(int)(buffer->buffer_2[i]*32767.0);
