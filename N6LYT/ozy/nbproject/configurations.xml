@@ -8,12 +8,12 @@
       <itemPath>global.h</itemPath>
       <itemPath>jack_buffers.h</itemPath>
       <itemPath>jack_ringbuffer.h</itemPath>
+      <itemPath>libusbio.h</itemPath>
       <itemPath>ozy.h</itemPath>
       <itemPath>ozy_buffers.h</itemPath>
       <itemPath>ozy_client.h</itemPath>
       <itemPath>ozy_ringbuffer.h</itemPath>
       <itemPath>ozy_to_jack.h</itemPath>
-      <itemPath>ozyio.h</itemPath>
       <itemPath>spectrum_buffers.h</itemPath>
       <itemPath>spectrum_thread.h</itemPath>
     </logicalFolder>
@@ -29,12 +29,12 @@
       <itemPath>jack_client.c</itemPath>
       <itemPath>jack_ringbuffer.c</itemPath>
       <itemPath>jack_to_ozy.c</itemPath>
+      <itemPath>libusbio.c</itemPath>
       <itemPath>main.c</itemPath>
       <itemPath>ozy_buffers.c</itemPath>
       <itemPath>ozy_client.c</itemPath>
       <itemPath>ozy_ringbuffer.c</itemPath>
       <itemPath>ozy_to_jack.c</itemPath>
-      <itemPath>ozyio.c</itemPath>
       <itemPath>spectrum_buffers.c</itemPath>
       <itemPath>spectrum_thread.c</itemPath>
     </logicalFolder>
@@ -63,9 +63,12 @@
           <developmentMode>5</developmentMode>
         </fortranCompilerTool>
         <linkerTool>
+          <linkerAddLib>
+            <directoryPath>/usr/local/lib</directoryPath>
+          </linkerAddLib>
           <linkerLibItems>
-            <linkerLibLibItem>usb</linkerLibLibItem>
             <linkerLibLibItem>jack</linkerLibLibItem>
+            <linkerLibLibItem>usb-1.0</linkerLibLibItem>
           </linkerLibItems>
         </linkerTool>
       </compileType>
@@ -96,6 +99,12 @@
       <item path="jack_to_ozy.c">
         <itemTool>0</itemTool>
       </item>
+      <item path="libusbio.c">
+        <itemTool>0</itemTool>
+      </item>
+      <item path="libusbio.h">
+        <itemTool>3</itemTool>
+      </item>
       <item path="main.c">
         <itemTool>0</itemTool>
       </item>
@@ -124,12 +133,6 @@
         <itemTool>0</itemTool>
       </item>
       <item path="ozy_to_jack.h">
-        <itemTool>3</itemTool>
-      </item>
-      <item path="ozyio.c">
-        <itemTool>0</itemTool>
-      </item>
-      <item path="ozyio.h">
         <itemTool>3</itemTool>
       </item>
       <item path="spectrum_buffers.c">
@@ -186,6 +189,12 @@
       <item path="jack_to_ozy.c">
         <itemTool>0</itemTool>
       </item>
+      <item path="libusbio.c">
+        <itemTool>0</itemTool>
+      </item>
+      <item path="libusbio.h">
+        <itemTool>3</itemTool>
+      </item>
       <item path="main.c">
         <itemTool>0</itemTool>
       </item>
@@ -214,12 +223,6 @@
         <itemTool>0</itemTool>
       </item>
       <item path="ozy_to_jack.h">
-        <itemTool>3</itemTool>
-      </item>
-      <item path="ozyio.c">
-        <itemTool>0</itemTool>
-      </item>
-      <item path="ozyio.h">
         <itemTool>3</itemTool>
       </item>
       <item path="spectrum_buffers.c">
