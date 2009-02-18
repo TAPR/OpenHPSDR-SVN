@@ -13,7 +13,7 @@
 
 #include "global.h"
 #include "ozy.h"
-#include "ozyio.h"
+#include "libusbio.h"
 #include "ozy_buffers.h"
 #include "ozy_ringbuffer.h"
 #include "ozy_client.h"
@@ -90,7 +90,7 @@ void* ozy_ep6_io_thread(void* arg) {
         }
         ozy_buffer=get_ozy_free_buffer();
         if(ozy_buffer!=NULL) {
-            bytes=OzyBulkRead(ozy,0x86,(void*)(ozy_buffer->buffer),OZY_BUFFER_SIZE);
+            bytes=libusb_read_ozy(0x86,(void*)(ozy_buffer->buffer),OZY_BUFFER_SIZE);
             if (bytes < 0) {
                 perror("ozy_ep6_io_thread: OzyBulkRead failed");
             } else if (bytes != OZY_BUFFER_SIZE) {
@@ -177,7 +177,7 @@ void* ozy_ep6_io_thread(void* arg) {
                 }
             }
 
-            bytes=OzyBulkWrite(ozy,0x02,(void*)(buffer),OZY_BUFFER_SIZE);
+            bytes=libusb_write_ozy(0x02,(void*)(buffer),OZY_BUFFER_SIZE);
             if(bytes!=OZY_BUFFER_SIZE) {
                 perror("OzyBulkWrite failed");
             } else {
@@ -190,19 +190,34 @@ void* ozy_ep6_io_thread(void* arg) {
 void* ozy_ep4_io_thread(void* arg) {
     struct spectrum_buffer* spectrum_buffer;
     int bytes;
+    int i;
 
     if(debug) fprintf(stderr,"ozy_ep4_io_thread\n");
     while(1) {
         spectrum_buffer=get_spectrum_free_buffer();
         if(spectrum_buffer!=NULL) {
-            bytes=OzyBulkRead(ozy,0x84,(void*)(spectrum_buffer->buffer),SPECTRUM_BUFFER_SIZE);
+            bytes=libusb_read_ozy(0x84,(void*)(spectrum_buffer->buffer),8192);
             if (bytes < 0) {
                 perror("ozy_ep4_io_thread: OzyBulkRead failed");
-            } else if (bytes != SPECTRUM_BUFFER_SIZE) {
+            } else if (bytes != 8192) {
                 fprintf(stderr,"ozy_ep4_io_thread: OzyBulkRead only read %d bytes\n",bytes);
             } else {
                 if(debug_buffers) fprintf(stderr,"ozy_ep4_io_thread: OzyBulkRead read %d bytes\n",bytes);
             }
+
+/*
+            // try 8 reads of 1024 bytes o see if that helps performance
+            for(i=0;i<8;i++) {
+                bytes=OzyBulkRead(ozy,0x84,(void*)(&spectrum_buffer->buffer[i*1024]),1024);
+                if (bytes < 0) {
+                    perror("ozy_ep4_io_thread: OzyBulkRead failed");
+                } else if (bytes != 1024) {
+                    fprintf(stderr,"ozy_ep4_io_thread: OzyBulkRead only read %d bytes\n",bytes);
+                } else {
+                    if(debug_buffers) fprintf(stderr,"ozy_ep4_io_thread: OzyBulkRead read %d bytes\n",bytes);
+                }
+            }
+*/
 
             // process input buffer
             put_spectrum_input_buffer(spectrum_buffer);
@@ -215,7 +230,7 @@ void* ozy_ep4_io_thread(void* arg) {
 
 int start_ozy_io_thread() {
     int rc;
-    
+
     if(debug) fprintf(stderr,"start_ozy_client\n");
 
     // start thread to read ep6 and write ep2
@@ -257,15 +272,9 @@ int create_ozy_client() {
 
     // start a thread to read/write to the USB ports
 
-    rc = IsOzyAttached();
+    rc=libusb_open_ozy();
     if (rc == 0) {
         perror("Cannot locate Ozy");
-        return (EXIT_FAILURE);
-    }
-
-    ozy = OzyOpen();
-    if (ozy == NULL) {
-        perror("OzyOpen failed\n");
         return (EXIT_FAILURE);
     }
 
