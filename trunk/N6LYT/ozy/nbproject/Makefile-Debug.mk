@@ -29,10 +29,10 @@ OBJECTDIR=build/Debug/${PLATFORM}
 # Object Files
 OBJECTFILES= \
 	${OBJECTDIR}/jack_to_ozy.o \
+	${OBJECTDIR}/libusbio.o \
 	${OBJECTDIR}/ozy_buffers.o \
 	${OBJECTDIR}/jack_client.o \
 	${OBJECTDIR}/spectrum_thread.o \
-	${OBJECTDIR}/ozyio.o \
 	${OBJECTDIR}/main.o \
 	${OBJECTDIR}/command_thread.o \
 	${OBJECTDIR}/ozy_client.o \
@@ -68,6 +68,11 @@ ${OBJECTDIR}/jack_to_ozy.o: jack_to_ozy.c
 	${RM} $@.d
 	$(COMPILE.c) -g -MMD -MP -MF $@.d -o ${OBJECTDIR}/jack_to_ozy.o jack_to_ozy.c
 
+${OBJECTDIR}/libusbio.o: libusbio.c 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} $@.d
+	$(COMPILE.c) -g -MMD -MP -MF $@.d -o ${OBJECTDIR}/libusbio.o libusbio.c
+
 ${OBJECTDIR}/ozy_buffers.o: ozy_buffers.c 
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} $@.d
@@ -82,11 +87,6 @@ ${OBJECTDIR}/spectrum_thread.o: spectrum_thread.c
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} $@.d
 	$(COMPILE.c) -g -MMD -MP -MF $@.d -o ${OBJECTDIR}/spectrum_thread.o spectrum_thread.c
-
-${OBJECTDIR}/ozyio.o: ozyio.c 
-	${MKDIR} -p ${OBJECTDIR}
-	${RM} $@.d
-	$(COMPILE.c) -g -MMD -MP -MF $@.d -o ${OBJECTDIR}/ozyio.o ozyio.c
 
 ${OBJECTDIR}/main.o: main.c 
 	${MKDIR} -p ${OBJECTDIR}
