@@ -29,10 +29,10 @@ OBJECTDIR=build/Release/${PLATFORM}
 # Object Files
 OBJECTFILES= \
 	${OBJECTDIR}/jack_to_ozy.o \
+	${OBJECTDIR}/libusbio.o \
 	${OBJECTDIR}/ozy_buffers.o \
 	${OBJECTDIR}/jack_client.o \
 	${OBJECTDIR}/spectrum_thread.o \
-	${OBJECTDIR}/ozyio.o \
 	${OBJECTDIR}/main.o \
 	${OBJECTDIR}/command_thread.o \
 	${OBJECTDIR}/ozy_client.o \
@@ -53,7 +53,7 @@ CXXFLAGS=
 FFLAGS=
 
 # Link Libraries and Options
-LDLIBSOPTIONS=-lusb -ljack
+LDLIBSOPTIONS=-L/usr/local/lib -ljack -lusb-1.0
 
 # Build Targets
 .build-conf: ${BUILD_SUBPROJECTS}
@@ -67,6 +67,11 @@ ${OBJECTDIR}/jack_to_ozy.o: jack_to_ozy.c
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} $@.d
 	$(COMPILE.c) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/jack_to_ozy.o jack_to_ozy.c
+
+${OBJECTDIR}/libusbio.o: libusbio.c 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} $@.d
+	$(COMPILE.c) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/libusbio.o libusbio.c
 
 ${OBJECTDIR}/ozy_buffers.o: ozy_buffers.c 
 	${MKDIR} -p ${OBJECTDIR}
@@ -82,11 +87,6 @@ ${OBJECTDIR}/spectrum_thread.o: spectrum_thread.c
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} $@.d
 	$(COMPILE.c) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/spectrum_thread.o spectrum_thread.c
-
-${OBJECTDIR}/ozyio.o: ozyio.c 
-	${MKDIR} -p ${OBJECTDIR}
-	${RM} $@.d
-	$(COMPILE.c) -O2 -MMD -MP -MF $@.d -o ${OBJECTDIR}/ozyio.o ozyio.c
 
 ${OBJECTDIR}/main.o: main.c 
 	${MKDIR} -p ${OBJECTDIR}
