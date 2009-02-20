@@ -28,6 +28,9 @@ int ozy_get_bytes=0;
 
 struct ozy_ringbuffer* new_ozy_ringbuffer(int n) {
     struct ozy_ringbuffer* buffer;
+
+    /*if(debug)*/ fprintf(stderr,"new_ozy_ringbuffer: %d\n",n);
+
     buffer=malloc(sizeof(struct ozy_ringbuffer));
     if(buffer!=NULL) {
         buffer->size=n;
@@ -51,14 +54,14 @@ int ozy_ringbuffer_put(struct ozy_ringbuffer* buffer,char* f,int n) {
     int i;
     ozy_put_bytes+=n;
 
-    if(debug_buffers) fprintf(stderr,"ozy_ring_buffer_put space=%d entries=%d total=%d\n",ozy_ringbuffer_space(buffer),ozy_ringbuffer_entries(buffer),ozy_put_bytes);
+    if(debug_buffers) fprintf(stderr,"ozy_ring_buffer_put n=%d\n",n);
 
         pthread_mutex_lock(&ozy_output_buffer_mutex);
 
         if(ozy_ringbuffer_space(buffer)<=n) {
             
             // flush the buffer
-            fprintf(stderr,"ozy_ringbuffer_put: flush buffer\n");
+            if(debug) fprintf(stderr,"ozy_ringbuffer_put: flush buffer\n");
             buffer->remove_index=buffer->insert_index;
             buffer->entries=0;
             
@@ -85,6 +88,7 @@ int ozy_ringbuffer_put(struct ozy_ringbuffer* buffer,char* f,int n) {
         }
         pthread_mutex_unlock(&ozy_output_buffer_mutex);
 
+        if(debug_buffers) fprintf(stderr,"ozy_ring_buffer_put space=%d entries=%d total=%d\n",ozy_ringbuffer_space(buffer),ozy_ringbuffer_entries(buffer),ozy_put_bytes);
         return i;
 }
 
@@ -97,7 +101,7 @@ int ozy_ringbuffer_get(struct ozy_ringbuffer* buffer,char* f,int n) {
     
     ozy_get_bytes+=entries;
 
-    if(debug_buffers) fprintf(stderr,"ozy_ring_buffer_get space=%d entries=%d total=%d\n",ozy_ringbuffer_space(buffer),ozy_ringbuffer_entries(buffer),ozy_get_bytes);
+    if(debug_buffers) fprintf(stderr,"ozy_ring_buffer_get n=%d\n",n);
     if((buffer->remove_index+entries)<=buffer->size) {
         // all together
         memcpy(f,&buffer->buffer[buffer->remove_index],entries);
@@ -112,6 +116,8 @@ int ozy_ringbuffer_get(struct ozy_ringbuffer* buffer,char* f,int n) {
         buffer->remove_index-=buffer->size;
     }
     pthread_mutex_unlock(&ozy_output_buffer_mutex);
+
+    if(debug_buffers) fprintf(stderr,"ozy_ring_buffer_get space=%d entries=%d total=%d\n",ozy_ringbuffer_space(buffer),ozy_ringbuffer_entries(buffer),ozy_get_bytes);
     return entries;
 }
 

@@ -51,6 +51,9 @@ jack_default_audio_sample_t *samples_mon_out_l,
                             *samples_tx_out_l,
                             *samples_tx_out_r;
 
+int buffer_count=0;
+
+
 int jack_callback(jack_nframes_t nframes, void *arg) {
     
     struct jack_buffer* jack_buffer;
@@ -69,7 +72,7 @@ int jack_callback(jack_nframes_t nframes, void *arg) {
     samples_mic_in_l=jack_port_get_buffer(mic_in_l,nframes);
     samples_mic_in_r=jack_port_get_buffer(mic_in_r,nframes);
 
-    jack_ringbuffer_get(samples_rx_in_l,samples_rx_in_r,samples_mic_in_l,samples_mic_in_r,nframes);
+    jack_ringbuffer_get(samples_rx_in_l,samples_rx_in_r,samples_mic_in_l,samples_mic_in_r,nframes,buffer_count);
 
     if(debug_rx_samples) {
         // first 8 samples
@@ -109,7 +112,8 @@ int jack_callback(jack_nframes_t nframes, void *arg) {
     
     
     end_time=jack_get_time();
-    if(debug) fprintf(stderr,"jack_callback duration%llu\n",end_time-start_time);
+    buffer_count++;
+    if(debug) fprintf(stderr,"jack_callback duration %llu\n",end_time-start_time);
     return 0;
 }
 

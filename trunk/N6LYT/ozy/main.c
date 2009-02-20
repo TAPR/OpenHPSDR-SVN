@@ -72,7 +72,7 @@ int main(int argc, char** argv) {
     create_jack_ringbuffer(4*1024);
     create_jack_buffers(8);
     
-    create_ozy_ringbuffer(34*512);
+    create_ozy_ringbuffer(68*512);
     create_ozy_buffers(34);
 
     create_spectrum_buffers(4);
