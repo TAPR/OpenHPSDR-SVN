@@ -26,7 +26,7 @@ extern "C" {
     extern struct jack_ringbuffer* jack_output_buffer;
 
     extern int jack_ringbuffer_put(float f1,float f2,float f3,float f4);
-    extern int jack_ringbuffer_get(float* f1,float* f2,float* f3,float* f4,int nframes);
+    extern int jack_ringbuffer_get(float* f1,float* f2,float* f3,float* f4,int nframes,int buffer_count);
 
 
 #ifdef	__cplusplus

@@ -72,14 +72,14 @@ int jack_ringbuffer_put(float f1,float f2,float f3,float f4) {
     return i;
 }
 
-int jack_ringbuffer_get(float* f1,float* f2,float* f3,float*f4,int nframes) {
+int jack_ringbuffer_get(float* f1,float* f2,float* f3,float*f4,int nframes,int buffer_count) {
     int entries;
 
     pthread_mutex_lock(&jack_output_buffer_mutex);
     entries=nframes;
     if(jack_output_buffer->entries<nframes) {
         entries=jack_output_buffer->entries;
-        fprintf(stderr,"jack_ringbuffer_get: wanted %d got %d\n",nframes,entries);
+        fprintf(stderr,"jack_ringbuffer_get: buffer=%d wanted %d got %d\n",buffer_count,nframes,entries);
     }
     
     jack_get_bytes+=entries*sizeof(float);

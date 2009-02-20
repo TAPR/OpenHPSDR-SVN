@@ -74,13 +74,16 @@ int mox_state_changed=0;
 void* ozy_ep6_io_thread(void* arg) {
     struct ozy_buffer* ozy_buffer;
 
-    unsigned char buffer[512];
+    unsigned char output_buffer[OZY_BUFFER_SIZE];
     int i;
+    int b;
     int bytes;
+    int frames;
     struct timeb tb;
 
     
     if(debug) fprintf(stderr,"ozy_ep6_io_thread\n");
+    frames=OZY_BUFFER_SIZE/512;
     while(1) {
 
         // read an input buffer (blocks until all bytes read)
@@ -98,31 +101,7 @@ void* ozy_ep6_io_thread(void* arg) {
             } else {
                 if(debug_buffers) fprintf(stderr,"ozy_ep6_io_thread: OzyBulkRead read %d bytes\n",bytes);
             }
-
-            if(debug_buffers) {
-                for(i=0;i<4/*32*/;i++) { // just the first 4 rows
-                    fprintf(stderr,"ozy(0x86)< %04X: %02X%02X%02X%02X%02X%02X%02X%02X %02X%02X%02X%02X%02X%02X%02X%02X\n",
-                            i,
-                            buffer[(i*16)],
-                            buffer[(i*16)+1],
-                            buffer[(i*16)+2],
-                            buffer[(i*16)+3],
-                            buffer[(i*16)+4],
-                            buffer[(i*16)+5],
-                            buffer[(i*16)+6],
-                            buffer[(i*16)+7],
-                            buffer[(i*16)+8],
-                            buffer[(i*16)+9],
-                            buffer[(i*16)+10],
-                            buffer[(i*16)+11],
-                            buffer[(i*16)+12],
-                            buffer[(i*16)+13],
-                            buffer[(i*16)+14],
-                            buffer[(i*16)+15]
-                            );
-                }
-            }
-
+            
             // process input buffer
             put_ozy_input_buffer(ozy_buffer);
             sem_post(&ozy_input_buffer_sem);
@@ -130,60 +109,39 @@ void* ozy_ep6_io_thread(void* arg) {
         }
         
         // create an output buffer
-        if(ozy_ringbuffer_entries(ozy_output_buffer)>=63) {
-            buffer[0]=SYNC;
-            buffer[1]=SYNC;
-            buffer[2]=SYNC;
-            if(frequency_changed) {
-                buffer[3]=control_out[0]|0x02;
-                buffer[4]=frequency>>24;
-                buffer[5]=frequency>>16;
-                buffer[6]=frequency>>8;
-                buffer[7]=frequency;
-                frequency_changed=0;
-            } else {
-                buffer[3]=control_out[0];
-                buffer[4]=control_out[1];
-                buffer[5]=control_out[2];
-                buffer[6]=control_out[3];
-                buffer[7]=control_out[4];
-            }
-
-            bytes=ozy_ringbuffer_get(ozy_output_buffer,&buffer[8],OZY_BUFFER_SIZE-8);
-            if(bytes!=(OZY_BUFFER_SIZE-8)) {
-                if(debug_buffers) fprintf(stderr,"ozy_ep6_io_thread: ozy output buffer underrun got %d bytes\n",bytes);
-            }
-            if(debug_buffers) {
-                for(i=0;i<4/*32*/;i++) { // just the first 4 rows
-                    fprintf(stderr,"ozy(0x02)> %04X: %02X%02X%02X%02X%02X%02X%02X%02X %02X%02X%02X%02X%02X%02X%02X%02X\n",
-                            i,
-                            buffer[(i*16)],
-                            buffer[(i*16)+1],
-                            buffer[(i*16)+2],
-                            buffer[(i*16)+3],
-                            buffer[(i*16)+4],
-                            buffer[(i*16)+5],
-                            buffer[(i*16)+6],
-                            buffer[(i*16)+7],
-                            buffer[(i*16)+8],
-                            buffer[(i*16)+9],
-                            buffer[(i*16)+10],
-                            buffer[(i*16)+11],
-                            buffer[(i*16)+12],
-                            buffer[(i*16)+13],
-                            buffer[(i*16)+14],
-                            buffer[(i*16)+15]
-                            );
+        if(ozy_ringbuffer_entries(ozy_output_buffer)>=(63*frames)) {
+            for(b=0,i=0;i<frames;i++) {
+                output_buffer[b++]=SYNC;
+                output_buffer[b++]=SYNC;
+                output_buffer[b++]=SYNC;
+                
+                if(frequency_changed) {
+                    output_buffer[b++]=control_out[0]|0x02;
+                    output_buffer[b++]=frequency>>24;
+                    output_buffer[b++]=frequency>>16;
+                    output_buffer[b++]=frequency>>8;
+                    output_buffer[b++]=frequency;
+                    frequency_changed=0;
+                } else {
+                    output_buffer[b++]=control_out[0];
+                    output_buffer[b++]=control_out[1];
+                    output_buffer[b++]=control_out[2];
+                    output_buffer[b++]=control_out[3];
+                    output_buffer[b++]=control_out[4];
                 }
+                
+                bytes=ozy_ringbuffer_get(ozy_output_buffer,&output_buffer[b],(OZY_BUFFER_SIZE/frames)-8);
+                b+=(OZY_BUFFER_SIZE/frames)-8;
             }
-
-            bytes=libusb_write_ozy(0x02,(void*)(buffer),OZY_BUFFER_SIZE);
+            
+            bytes=libusb_write_ozy(0x02,(void*)(output_buffer),OZY_BUFFER_SIZE);
             if(bytes!=OZY_BUFFER_SIZE) {
                 perror("OzyBulkWrite failed");
             } else {
                 if(debug_buffers) fprintf(stderr,"OzyBulkWrite %d bytes\n",bytes);
             }
         }
+        
     }
 }
 

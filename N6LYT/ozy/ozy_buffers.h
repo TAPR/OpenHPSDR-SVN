@@ -14,6 +14,7 @@ extern "C" {
 
     #include <semaphore.h>
 
+    // OZY_BUFFER_SIZE must be multiple of 512
     #define OZY_BUFFER_SIZE 512
 
     struct ozy_buffer {

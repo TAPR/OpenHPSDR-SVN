@@ -47,39 +47,44 @@ int frame=0;
 
 void process_ozy_input_buffer(char* buffer) {
     int i;
-    int b;
+    int b=0;
+    int f;
     if(debug) fprintf(stderr,"process_ozy_input_buffer frame=%d\n",frame++);
-    if(buffer[0]==SYNC && buffer[1]==SYNC && buffer[2]==SYNC) {
-        // extract control bytes
-        control_in[0]=buffer[3];
-        control_in[1]=buffer[4];
-        control_in[2]=buffer[5];
-        control_in[3]=buffer[6];
-        control_in[4]=buffer[7];
 
-        // extract the 63 samples
-        for(i=0,b=8;i<63;i++) {
-            left_sample = buffer[b++] << 16;
-            left_sample = left_sample + ((buffer[b++] & 0xFF) << 8);
-            left_sample = left_sample + (buffer[b++] & 0xFF);
-            right_sample = buffer[b++] << 16;
-            right_sample = right_sample + ((buffer[b++] & 0xFF) << 8);
-            right_sample = right_sample + (buffer[b++] & 0xFF);
-            mic_sample=buffer[b++]<<8;
-            mic_sample=mic_sample+(buffer[b++]&0xFF);
+    // allow for multiple frames (i.e. bulk read multiple of 512 bytes)
+    for(f=0;f<(OZY_BUFFER_SIZE/512);f++) {
+        if(buffer[b++]==SYNC && buffer[b++]==SYNC && buffer[b++]==SYNC) {
+            // extract control bytes
+            control_in[0]=buffer[b++];
+            control_in[1]=buffer[b++];
+            control_in[2]=buffer[b++];
+            control_in[3]=buffer[b++];
+            control_in[4]=buffer[b++];
 
-            left_sample_float=(float)left_sample/8388607.0; // 24 bit sample
-            right_sample_float=(float)right_sample/8388607.0; // 24 bit sample
-            mic_sample_float=(float)mic_sample/32767.0; // 16 bit sample
+            // extract the 63 samples
+            for(i=0;i<63;i++) {
+                left_sample = buffer[b++] << 16;
+                left_sample = left_sample + ((buffer[b++] & 0xFF) << 8);
+                left_sample = left_sample + (buffer[b++] & 0xFF);
+                right_sample = buffer[b++] << 16;
+                right_sample = right_sample + ((buffer[b++] & 0xFF) << 8);
+                right_sample = right_sample + (buffer[b++] & 0xFF);
+                mic_sample=buffer[b++]<<8;
+                mic_sample=mic_sample+(buffer[b++]&0xFF);
 
-            //fprintf(stderr,"ozy_to_jack: %f %f %f\n",left_sample_float,right_sample_float,mic_sample_float);
-            if(jack_ringbuffer_put(left_sample_float,right_sample_float,mic_sample_float,mic_sample_float)==0) {
-                fprintf(stderr,"jack_ringbuffer_put: overflow!\n");
+                left_sample_float=(float)left_sample/8388607.0; // 24 bit sample
+                right_sample_float=(float)right_sample/8388607.0; // 24 bit sample
+                mic_sample_float=(float)mic_sample/32767.0; // 16 bit sample
+
+                //fprintf(stderr,"ozy_to_jack: %f %f %f\n",left_sample_float,right_sample_float,mic_sample_float);
+                if(jack_ringbuffer_put(left_sample_float,right_sample_float,mic_sample_float,mic_sample_float)==0) {
+                    fprintf(stderr,"jack_ringbuffer_put: overflow!\n");
+                }
             }
-        }
 
-    } else {
-        fprintf(stderr,"ozy_to_jack: did not find sync\n");
+        } else {
+            fprintf(stderr,"ozy_to_jack: did not find sync f=%d\n",f);
+        }
     }
 }
 
