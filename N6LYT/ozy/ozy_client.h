@@ -23,8 +23,6 @@ extern int data_state_out;
 extern int samples_out;
 extern int total_samples_out;
 
-extern int output_sample_increment;
-
 #ifdef	__cplusplus
 }
 #endif

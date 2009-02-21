@@ -69,7 +69,7 @@ int main(int argc, char** argv) {
     sem_init(&spectrum_input_buffer_sem,0,0);
     
     
-    create_jack_ringbuffer(4*1024);
+    create_jack_ringbuffer(8*JACK_SAMPLES_PER_BUFFER);
     create_jack_buffers(8);
     
     create_ozy_ringbuffer(68*512);
