@@ -7,6 +7,7 @@
       <itemPath>command_thread.h</itemPath>
       <itemPath>global.h</itemPath>
       <itemPath>jack_buffers.h</itemPath>
+      <itemPath>jack_client.h</itemPath>
       <itemPath>jack_ringbuffer.h</itemPath>
       <itemPath>libusbio.h</itemPath>
       <itemPath>ozy.h</itemPath>
@@ -89,6 +90,9 @@
       </item>
       <item path="jack_client.c">
         <itemTool>0</itemTool>
+      </item>
+      <item path="jack_client.h">
+        <itemTool>3</itemTool>
       </item>
       <item path="jack_ringbuffer.c">
         <itemTool>0</itemTool>
@@ -179,6 +183,9 @@
       </item>
       <item path="jack_client.c">
         <itemTool>0</itemTool>
+      </item>
+      <item path="jack_client.h">
+        <itemTool>3</itemTool>
       </item>
       <item path="jack_ringbuffer.c">
         <itemTool>0</itemTool>

@@ -21,7 +21,7 @@ extern int debug_spectrum;
 
 extern int mox_state_changed;
 
-//#define SPECTRUM_THREAD
+#define SPECTRUM_THREAD
 
 #ifdef	__cplusplus
 }

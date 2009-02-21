@@ -10,7 +10,9 @@
 #include <semaphore.h>
 
 #include "global.h"
+#include "jack_client.h"
 #include "jack_ringbuffer.h"
+#include "jack_buffers.h"
 #include "ozy_buffers.h"
 #include "ozy_to_jack.h"
 #include "ozy_client.h"
@@ -44,6 +46,23 @@ int adc_spectrum_index=0;
 int collect_adc_spectrum=0;
 
 int frame=0;
+
+int init_jack=1;
+int samples=0;
+
+void dump_buffer(char* prefix,unsigned char* buffer) {
+    int i;
+    int b;
+    for(i=0,b=0;i<OZY_BUFFER_SIZE;) {
+        fprintf(stderr, "%s [%04X] %02X%02X%02X%02X%02X%02X%02X%02X %02X%02X%02X%02X%02X%02X%02X%02X\n",
+                prefix,
+                i,
+                buffer[i++],buffer[i++],buffer[i++],buffer[i++],buffer[i++],buffer[i++],buffer[i++],buffer[i++],
+                buffer[i++],buffer[i++],buffer[i++],buffer[i++],buffer[i++],buffer[i++],buffer[i++],buffer[i++]
+                );
+    }
+}
+
 
 void process_ozy_input_buffer(char* buffer) {
     int i;
@@ -80,10 +99,20 @@ void process_ozy_input_buffer(char* buffer) {
                 if(jack_ringbuffer_put(left_sample_float,right_sample_float,mic_sample_float,mic_sample_float)==0) {
                     fprintf(stderr,"jack_ringbuffer_put: overflow!\n");
                 }
+
+                if(init_jack) {
+                    samples++;
+                    if(samples >= (4*JACK_SAMPLES_PER_BUFFER)) {
+                        // ready to go
+                        sem_post(&jack_client_sem);
+                        init_jack=0;
+                    }
+                }
             }
 
         } else {
             fprintf(stderr,"ozy_to_jack: did not find sync f=%d\n",f);
+            dump_buffer("< ep6",buffer);
         }
     }
 }

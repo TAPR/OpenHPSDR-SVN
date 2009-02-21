@@ -53,6 +53,7 @@ jack_default_audio_sample_t *samples_mon_out_l,
 
 int buffer_count=0;
 
+sem_t jack_client_sem;
 
 int jack_callback(jack_nframes_t nframes, void *arg) {
     
@@ -226,7 +227,11 @@ int create_jack_client() {
 
     open_jack_client();
     create_jack_ports();
-    
+
+
+    // don't start jack until we have some samples for it
+    sem_wait(&jack_client_sem);
+
     if(debug) fprintf(stderr, "jack_activate\n");
     if (jack_activate (client)) {
         fprintf (stderr, "cannot activate client\n");
