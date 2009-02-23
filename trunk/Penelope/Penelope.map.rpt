@@ -1,5 +1,5 @@
 Analysis & Synthesis report for Penelope
-Wed Jan 21 20:12:09 2009
+Mon Feb 23 20:49:07 2009
 Quartus II Version 8.1 Build 163 10/28/2008 SJ Web Edition
 
 
@@ -63,15 +63,15 @@ applicable agreement for further details.
 +------------------------------------------------------------------------------+
 ; Analysis & Synthesis Summary                                                 ;
 +------------------------------------+-----------------------------------------+
-; Analysis & Synthesis Status        ; Successful - Wed Jan 21 20:12:08 2009   ;
+; Analysis & Synthesis Status        ; Successful - Mon Feb 23 20:49:07 2009   ;
 ; Quartus II Version                 ; 8.1 Build 163 10/28/2008 SJ Web Edition ;
 ; Revision Name                      ; Penelope                                ;
 ; Top-level Entity Name              ; Penelope                                ;
 ; Family                             ; Cyclone II                              ;
-; Total logic elements               ; 2,324                                   ;
-;     Total combinational functions  ; 2,324                                   ;
-;     Dedicated logic registers      ; 2,000                                   ;
-; Total registers                    ; 2000                                    ;
+; Total logic elements               ; 2,328                                   ;
+;     Total combinational functions  ; 2,328                                   ;
+;     Dedicated logic registers      ; 1,993                                   ;
+; Total registers                    ; 1993                                    ;
 ; Total pins                         ; 62                                      ;
 ; Total virtual pins                 ; 0                                       ;
 ; Total memory bits                  ; 51                                      ;
@@ -88,6 +88,7 @@ applicable agreement for further details.
 ; Device                                                         ; EP2C8Q208C8        ;                    ;
 ; Top-level entity name                                          ; Penelope           ; Penelope           ;
 ; Family name                                                    ; Cyclone II         ; Stratix            ;
+; State Machine Processing                                       ; User-Encoded       ; Auto               ;
 ; Power-Up Don't Care                                            ; Off                ; On                 ;
 ; Remove Redundant Logic Cells                                   ; On                 ; Off                ;
 ; Perform gate-level register retiming                           ; On                 ; Off                ;
@@ -99,7 +100,6 @@ applicable agreement for further details.
 ; Disable OpenCore Plus hardware evaluation                      ; Off                ; Off                ;
 ; Verilog Version                                                ; Verilog_2001       ; Verilog_2001       ;
 ; VHDL Version                                                   ; VHDL93             ; VHDL93             ;
-; State Machine Processing                                       ; Auto               ; Auto               ;
 ; Safe State Machine                                             ; Off                ; Off                ;
 ; Extract Verilog State Machines                                 ; On                 ; On                 ;
 ; Extract VHDL State Machines                                    ; On                 ; On                 ;
@@ -200,20 +200,20 @@ applicable agreement for further details.
 +---------------------------------------------+---------+
 ; Resource                                    ; Usage   ;
 +---------------------------------------------+---------+
-; Estimated Total logic elements              ; 2,324   ;
+; Estimated Total logic elements              ; 2,328   ;
 ;                                             ;         ;
-; Total combinational functions               ; 2324    ;
+; Total combinational functions               ; 2328    ;
 ; Logic element usage by number of LUT inputs ;         ;
 ;     -- 4 input functions                    ; 109     ;
-;     -- 3 input functions                    ; 1608    ;
-;     -- <=2 input functions                  ; 607     ;
+;     -- 3 input functions                    ; 1613    ;
+;     -- <=2 input functions                  ; 606     ;
 ;                                             ;         ;
 ; Logic elements by mode                      ;         ;
-;     -- normal mode                          ; 636     ;
+;     -- normal mode                          ; 640     ;
 ;     -- arithmetic mode                      ; 1688    ;
 ;                                             ;         ;
-; Total registers                             ; 2000    ;
-;     -- Dedicated logic registers            ; 2000    ;
+; Total registers                             ; 1993    ;
+;     -- Dedicated logic registers            ; 1993    ;
 ;     -- I/O registers                        ; 0       ;
 ;                                             ;         ;
 ; I/O pins                                    ; 62      ;
@@ -221,7 +221,7 @@ applicable agreement for further details.
 ; Embedded Multiplier 9-bit elements          ; 12      ;
 ; Maximum fan-out node                        ; _122MHZ ;
 ; Maximum fan-out                             ; 1774    ;
-; Total fan-out                               ; 12082   ;
+; Total fan-out                               ; 12083   ;
 ; Average fan-out                             ; 2.74    ;
 +---------------------------------------------+---------+
 
@@ -231,8 +231,8 @@ applicable agreement for further details.
 +---------------------------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+----------------------------------------------------------------------------------------------+--------------+
 ; Compilation Hierarchy Node                  ; LC Combinationals ; LC Registers ; Memory Bits ; DSP Elements ; DSP 9x9 ; DSP 18x18 ; Pins ; Virtual Pins ; Full Hierarchy Name                                                                          ; Library Name ;
 +---------------------------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+----------------------------------------------------------------------------------------------+--------------+
-; |Penelope                                   ; 2324 (319)        ; 2000 (484)   ; 51          ; 12           ; 0       ; 6         ; 62   ; 0            ; |Penelope                                                                                    ; work         ;
-;    |ADC:ADC_SPI|                            ; 34 (34)           ; 36 (36)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Penelope|ADC:ADC_SPI                                                                        ; work         ;
+; |Penelope                                   ; 2328 (319)        ; 1993 (479)   ; 51          ; 12           ; 0       ; 6         ; 62   ; 0            ; |Penelope                                                                                    ; work         ;
+;    |ADC:ADC_SPI|                            ; 38 (38)           ; 34 (34)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Penelope|ADC:ADC_SPI                                                                        ; work         ;
 ;    |ALC:ALC_I|                              ; 32 (32)           ; 0 (0)        ; 0           ; 2            ; 0       ; 1         ; 0    ; 0            ; |Penelope|ALC:ALC_I                                                                          ; work         ;
 ;       |lpm_mult:Mult0|                      ; 0 (0)             ; 0 (0)        ; 0           ; 2            ; 0       ; 1         ; 0    ; 0            ; |Penelope|ALC:ALC_I|lpm_mult:Mult0                                                           ; work         ;
 ;          |mult_9v01:auto_generated|         ; 0 (0)             ; 0 (0)        ; 0           ; 2            ; 0       ; 1         ; 0    ; 0            ; |Penelope|ALC:ALC_I|lpm_mult:Mult0|mult_9v01:auto_generated                                  ; work         ;
@@ -283,58 +283,58 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 Note: number of Embedded Multiplier Blocks used is only available after a successful fit.
 
 
-Encoding Type:  One-Hot
-+-----------------------------------------------------------------------------------------------------------+
-; State Machine - |Penelope|serno_state                                                                     ;
-+-----------------+-----------------+-----------------+-----------------+-----------------+-----------------+
-; Name            ; serno_state.011 ; serno_state.010 ; serno_state.001 ; serno_state.000 ; serno_state.100 ;
-+-----------------+-----------------+-----------------+-----------------+-----------------+-----------------+
-; serno_state.000 ; 0               ; 0               ; 0               ; 0               ; 0               ;
-; serno_state.001 ; 0               ; 0               ; 1               ; 1               ; 0               ;
-; serno_state.010 ; 0               ; 1               ; 0               ; 1               ; 0               ;
-; serno_state.011 ; 1               ; 0               ; 0               ; 1               ; 0               ;
-; serno_state.100 ; 0               ; 0               ; 0               ; 1               ; 1               ;
-+-----------------+-----------------+-----------------+-----------------+-----------------+-----------------+
+Encoding Type:  User-Encoded
++-----------------------------------------------------------------+
+; State Machine - |Penelope|serno_state                           ;
++-----------------+---------------+---------------+---------------+
+; Name            ; serno_state~9 ; serno_state~8 ; serno_state~7 ;
++-----------------+---------------+---------------+---------------+
+; serno_state.000 ; 0             ; 0             ; 0             ;
+; serno_state.001 ; 0             ; 0             ; 1             ;
+; serno_state.010 ; 0             ; 1             ; 0             ;
+; serno_state.011 ; 0             ; 1             ; 1             ;
+; serno_state.100 ; 1             ; 0             ; 0             ;
++-----------------+---------------+---------------+---------------+
 
 
-Encoding Type:  One-Hot
-+-------------------------------------------------------------------------+
-; State Machine - |Penelope|CC_state                                      ;
-+------------------+------------------+------------------+----------------+
-; Name             ; CC_state.CC_IDLE ; CC_state.CC_DATA ; CC_state.CC_HI ;
-+------------------+------------------+------------------+----------------+
-; CC_state.CC_IDLE ; 0                ; 0                ; 0              ;
-; CC_state.CC_HI   ; 1                ; 0                ; 1              ;
-; CC_state.CC_DATA ; 1                ; 1                ; 0              ;
-+------------------+------------------+------------------+----------------+
+Encoding Type:  User-Encoded
++--------------------------------------------+
+; State Machine - |Penelope|CC_state         ;
++------------------+------------+------------+
+; Name             ; CC_state~8 ; CC_state~7 ;
++------------------+------------+------------+
+; CC_state.CC_IDLE ; 0          ; 0          ;
+; CC_state.CC_HI   ; 0          ; 1          ;
+; CC_state.CC_DATA ; 1          ; 0          ;
++------------------+------------+------------+
 
 
-Encoding Type:  One-Hot
-+---------------------------------------------------------------------------------------------------------+
-; State Machine - |Penelope|IQ_state                                                                      ;
-+------------------+----------------+----------------+----------------+------------------+----------------+
-; Name             ; IQ_state.IQ_QW ; IQ_state.IQ_ID ; IQ_state.IQ_IW ; IQ_state.IQ_IDLE ; IQ_state.IQ_QD ;
-+------------------+----------------+----------------+----------------+------------------+----------------+
-; IQ_state.IQ_IDLE ; 0              ; 0              ; 0              ; 0                ; 0              ;
-; IQ_state.IQ_IW   ; 0              ; 0              ; 1              ; 1                ; 0              ;
-; IQ_state.IQ_ID   ; 0              ; 1              ; 0              ; 1                ; 0              ;
-; IQ_state.IQ_QW   ; 1              ; 0              ; 0              ; 1                ; 0              ;
-; IQ_state.IQ_QD   ; 0              ; 0              ; 0              ; 1                ; 1              ;
-+------------------+----------------+----------------+----------------+------------------+----------------+
+Encoding Type:  User-Encoded
++---------------------------------------------------------+
+; State Machine - |Penelope|IQ_state                      ;
++------------------+------------+------------+------------+
+; Name             ; IQ_state~9 ; IQ_state~8 ; IQ_state~7 ;
++------------------+------------+------------+------------+
+; IQ_state.IQ_IDLE ; 0          ; 0          ; 0          ;
+; IQ_state.IQ_IW   ; 0          ; 0          ; 1          ;
+; IQ_state.IQ_ID   ; 0          ; 1          ; 0          ;
+; IQ_state.IQ_QW   ; 0          ; 1          ; 1          ;
+; IQ_state.IQ_QD   ; 1          ; 0          ; 0          ;
++------------------+------------+------------+------------+
 
 
-Encoding Type:  One-Hot
-+-----------------------------------------------------------------------------------------------+
-; State Machine - |Penelope|ADC:ADC_SPI|ADC_state                                               ;
-+---------------+---------------+---------------+---------------+---------------+---------------+
-; Name          ; ADC_state.011 ; ADC_state.010 ; ADC_state.001 ; ADC_state.000 ; ADC_state.100 ;
-+---------------+---------------+---------------+---------------+---------------+---------------+
-; ADC_state.000 ; 0             ; 0             ; 0             ; 0             ; 0             ;
-; ADC_state.001 ; 0             ; 0             ; 1             ; 1             ; 0             ;
-; ADC_state.010 ; 0             ; 1             ; 0             ; 1             ; 0             ;
-; ADC_state.011 ; 1             ; 0             ; 0             ; 1             ; 0             ;
-; ADC_state.100 ; 0             ; 0             ; 0             ; 1             ; 1             ;
-+---------------+---------------+---------------+---------------+---------------+---------------+
+Encoding Type:  User-Encoded
++----------------------------------------------------------+
+; State Machine - |Penelope|ADC:ADC_SPI|ADC_state          ;
++---------------+--------------+-------------+-------------+
+; Name          ; ADC_state~10 ; ADC_state~9 ; ADC_state~8 ;
++---------------+--------------+-------------+-------------+
+; ADC_state.000 ; 0            ; 0           ; 0           ;
+; ADC_state.001 ; 0            ; 0           ; 1           ;
+; ADC_state.010 ; 0            ; 1           ; 0           ;
+; ADC_state.011 ; 0            ; 1           ; 1           ;
+; ADC_state.100 ; 1            ; 0           ; 0           ;
++---------------+--------------+-------------+-------------+
 
 
 +---------------------------------------------------------------------------------+
@@ -380,13 +380,7 @@ Encoding Type:  One-Hot
 ; cordic_16:tx_cordic|q2[1]              ; Stuck at GND due to stuck port data_in ;
 ; cordic_16:tx_cordic|i2[1]              ; Stuck at GND due to stuck port data_in ;
 ; attack_cnt[0]                          ; Stuck at GND due to stuck port data_in ;
-; serno_state~7                          ; Lost fanout                            ;
-; serno_state~8                          ; Lost fanout                            ;
-; IQ_state~7                             ; Lost fanout                            ;
-; IQ_state~8                             ; Lost fanout                            ;
-; ADC:ADC_SPI|ADC_state~8                ; Lost fanout                            ;
-; ADC:ADC_SPI|ADC_state~9                ; Lost fanout                            ;
-; Total Number of Removed Registers = 51 ;                                        ;
+; Total Number of Removed Registers = 45 ;                                        ;
 +----------------------------------------+----------------------------------------+
 
 
@@ -411,9 +405,9 @@ Encoding Type:  One-Hot
 +----------------------------------------------+-------+
 ; Statistic                                    ; Value ;
 +----------------------------------------------+-------+
-; Total registers                              ; 2000  ;
+; Total registers                              ; 1993  ;
 ; Number of registers using Synchronous Clear  ; 40    ;
-; Number of registers using Synchronous Load   ; 97    ;
+; Number of registers using Synchronous Load   ; 98    ;
 ; Number of registers using Asynchronous Clear ; 667   ;
 ; Number of registers using Asynchronous Load  ; 0     ;
 ; Number of registers using Clock Enable       ; 459   ;
@@ -730,7 +724,7 @@ Note: In order to hide this table in the UI and the text report file, please set
 Info: *******************************************************************
 Info: Running Quartus II Analysis & Synthesis
     Info: Version 8.1 Build 163 10/28/2008 SJ Web Edition
-    Info: Processing started: Wed Jan 21 20:11:55 2009
+    Info: Processing started: Mon Feb 23 20:48:55 2009
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off Penelope -c Penelope
 Info: Found 1 design units, including 1 entities, in source file ALC.v
     Info: Found entity 1: ALC
@@ -747,8 +741,8 @@ Info: Found 1 design units, including 1 entities, in source file cicint.v
 Info: Found 1 design units, including 1 entities, in source file Penelope.v
     Info: Found entity 1: Penelope
 Info: Elaborating entity "Penelope" for the top level hierarchy
-Warning (10230): Verilog HDL assignment warning at Penelope.v(478): truncated value with size 32 to match size of target (1)
-Warning (10230): Verilog HDL assignment warning at Penelope.v(483): truncated value with size 32 to match size of target (8)
+Warning (10230): Verilog HDL assignment warning at Penelope.v(479): truncated value with size 32 to match size of target (1)
+Warning (10230): Verilog HDL assignment warning at Penelope.v(484): truncated value with size 32 to match size of target (8)
 Info: Elaborating entity "ADC" for hierarchy "ADC:ADC_SPI"
 Info: Elaborating entity "ALC" for hierarchy "ALC:ALC_I"
 Info: Elaborating entity "cicint" for hierarchy "cicint:cic_I"
@@ -830,26 +824,19 @@ Info: Not allowed to move 207 registers
     Info: Not allowed to move at least 58 registers because they feed registers in a different clock domain
     Info: Not allowed to move at least 1 registers because they feed clock or asynchronous control signals of other registers
 Info: Quartus II software applied gate-level register retiming to 0 clock domains
-Info: 6 registers lost all their fanouts during netlist optimizations. The first 6 are displayed below.
-    Info: Register "serno_state~7" lost all its fanouts during netlist optimizations.
-    Info: Register "serno_state~8" lost all its fanouts during netlist optimizations.
-    Info: Register "IQ_state~7" lost all its fanouts during netlist optimizations.
-    Info: Register "IQ_state~8" lost all its fanouts during netlist optimizations.
-    Info: Register "ADC:ADC_SPI|ADC_state~8" lost all its fanouts during netlist optimizations.
-    Info: Register "ADC:ADC_SPI|ADC_state~9" lost all its fanouts during netlist optimizations.
 Info: Generated suppressed messages file C:/HPSDR/trunk/Penelope/Penelope.map.smsg
-Info: Implemented 3016 device resources after synthesis - the final resource count might be different
+Info: Implemented 3015 device resources after synthesis - the final resource count might be different
     Info: Implemented 13 input pins
     Info: Implemented 46 output pins
     Info: Implemented 3 bidirectional pins
-    Info: Implemented 2925 logic cells
+    Info: Implemented 2924 logic cells
     Info: Implemented 17 RAM segments
     Info: Implemented 12 DSP elements
 Info: Quartus II Analysis & Synthesis was successful. 0 errors, 6 warnings
     Info: Peak virtual memory: 175 megabytes
-    Info: Processing ended: Wed Jan 21 20:12:09 2009
-    Info: Elapsed time: 00:00:14
-    Info: Total CPU time (on all processors): 00:00:11
+    Info: Processing ended: Mon Feb 23 20:49:07 2009
+    Info: Elapsed time: 00:00:12
+    Info: Total CPU time (on all processors): 00:00:10
 
 
 +------------------------------------------+

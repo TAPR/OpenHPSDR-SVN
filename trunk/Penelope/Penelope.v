@@ -1,4 +1,4 @@
-// V2.0  20 Jan 2009 
+// V1.1  23 Feb 2009 
 //
 // Copyright 2007, 2007, 2008, 2009 Phil Harman VK6APH
 // Modified by Kirk Weedman KD7IRS - Dec 26, 2008
@@ -56,7 +56,8 @@
    13 Jan  2009 - Added software serial number to serno, Atlas C19
    19 Jan  2009 - Added ALC_in to serno data at posedge LRCLK
    20 Jan  2009 - Changed set_level to 0.8 = 0.8 * 65536 = 52428 = 16'hCCCC. 
-  
+   23 Feb  2009 - Released as V1.1
+
   
   
   TO DO:
@@ -159,7 +160,7 @@ assign CDIN     = C12;  // I&Q from Atlas bus
 assign CMODE    = 1'b0; // Set to 0 for I2C mode
 assign nCS      = 1'b1; // I2C address of TLV320 is 0x1B
 
-localparam SERIAL = 8'h55;  // software version serial number - dummy for testing
+localparam SERIAL = 8'd11;  // software version serial number = 1.1
 
 ////////////////////////////////////////////////////////////////////////
 //
