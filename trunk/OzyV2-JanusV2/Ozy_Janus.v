@@ -1,4 +1,4 @@
-// V1.1 7 February 2009  
+// V1.2 23 February 2009  
 //
 // Copyright 2006,2007, 2008 Bill Tracey KD5TFD and Phil Harman VK6APH
 //
@@ -215,6 +215,8 @@
 //			    7 Feb  2009 - Changed Synthesis options for State Machine Processing  = User Encoded
 //							- Changed EP6 timeout to ~50uS
 //							- Release as V1.1
+//			   17 Feb  2009 - Added Penelope Power out to C&C 
+//			   23 Feb  2009 - Release as V1.2
 //
 ////////////////////////////////////////////////////////////
 
@@ -469,7 +471,7 @@ reg [6:0] loop_counter;         // counts number of times round loop
 reg Tx_fifo_enable;             // set when we want to send data to the Tx FIFO EP6
 reg Tx_fifo_enable_2;           // set when we want to send data to the Tx FIFO EP4
 
-localparam Ozy_serialno = 4'd11;	// Serial number of this version
+localparam Ozy_serialno = 4'd12;	// Serial number of this version
 
 
 
@@ -801,15 +803,21 @@ reg [7:0] Tx_control_4;    // control 4 to PC
 reg [6:0] AD_state;
 
 always @ (posedge BCLK)
-// temp values until we use these control signals
+// select control signals based on C&C address
 begin
-Tx_control_0[7:2] <= 6'd0;
-Tx_control_1 <= {7'b0,ADC_OVERLOAD};	// ADC_OVERLOAD in bit 0
-Tx_control_2 <= Merc_serialno;
-Tx_control_3 <= Penny_serialno;
-Tx_control_4 <= Ozy_serialno; 				
-//Tx_control_4 <= Penny_power[11:4];
 
+if (Tx_control_0[2]) begin					// check C&C address 
+	Tx_control_0[7:3] <= 5'd0;
+	Tx_control_1 <= {4'd0,Penny_power[11:8]};	// send Penny power output
+	Tx_control_2 <= Penny_power[7:0];
+	end
+else begin
+	Tx_control_0[7:2] <= 6'd0;
+	Tx_control_1 <= {7'b0,ADC_OVERLOAD};	// ADC_OVERLOAD in bit 0
+	Tx_control_2 <= Merc_serialno;
+	Tx_control_3 <= Penny_serialno;
+	Tx_control_4 <= Ozy_serialno; 				
+	end
 
 // if EP6 not ready then reset everything so that 512 byte frame always starts with sync sequence.
 
@@ -841,8 +849,8 @@ begin
 				AD_state <= AD_state + 1'b1;
 				end
 		6'd3:   begin  
-				if(loop_counter == 0) begin             // send C&C bytes, this is C0
-					register[15:8] <= 8'h7F;			// send rest of sync
+				if(loop_counter == 0) begin             	// send C&C bytes, this is C0
+					register[15:8] <= 8'h7F;				// send rest of sync
 					register[7:0]  <= {Tx_control_0[7:2], ~clean_dash, (~clean_dot || clean_PTT_in)};
 					Tx_fifo_enable <= 1'b1;
 					end
@@ -859,6 +867,7 @@ begin
 				if(loop_counter == 0)begin
 					register <= {Tx_control_3,Tx_control_4}; 
 					Tx_fifo_enable <= 1'b1;
+					Tx_control_0[2] <= ~Tx_control_0[2];	// toggle C&C address
 					end
 				AD_state <= AD_state + 1'b1;
 				end
@@ -1073,7 +1082,6 @@ case(state_FX)
 // check for Tx data - Tx fifo must be at least half full before we Tx
 4'd6:begin
 		if (syncd_write_used > 511) begin // data available, so let's start the xfer...
-        	//SLWR <= 1;
             state_FX <= state_FX + 1'b1;
             FIFO_ADR <= 2'b10;              	// select EP6
             end
@@ -1095,7 +1103,8 @@ case(state_FX)
         end
     else begin     								//skip if not ready to EP4                             
     	SLWR <= 1;
-        state_FX <= 4'd12;		
+        state_FX <= 4'd12;
+        //state_FX <= 4'd9;						// loop until EP6 ready 	
         end
     end
 //  set SLWR
@@ -1114,7 +1123,6 @@ case(state_FX)
 // Send data to EP4 
 12:begin
 		if (syncd_write_used_2 > 511) begin // data available, so let's start the xfer...
-        	//SLWR <= 1;
             state_FX <= state_FX + 1'b1;
             FIFO_ADR <= 2'b01;              	// select EP4
             end
