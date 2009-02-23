@@ -149,3 +149,4 @@ set_location_assignment PIN_74 -to serno
 set_global_assignment -name MISC_FILE "C:/HPSDR/trunk/Penelope/Penelope.dpf"
 set_location_assignment PIN_112 -to BCLK
 set_location_assignment PIN_106 -to LRCLK
+set_global_assignment -name STATE_MACHINE_PROCESSING "USER-ENCODED"
