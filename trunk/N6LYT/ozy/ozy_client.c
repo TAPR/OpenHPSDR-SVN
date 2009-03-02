@@ -155,28 +155,14 @@ void* ozy_ep4_io_thread(void* arg) {
     while(1) {
         spectrum_buffer=get_spectrum_free_buffer();
         if(spectrum_buffer!=NULL) {
-            bytes=libusb_read_ozy(0x84,(void*)(spectrum_buffer->buffer),8192);
+            bytes=libusb_read_ozy(0x84,(void*)(spectrum_buffer->buffer),SPECTRUM_BUFFER_SIZE);
             if (bytes < 0) {
                 perror("ozy_ep4_io_thread: OzyBulkRead failed");
-            } else if (bytes != 8192) {
+            } else if (bytes != SPECTRUM_BUFFER_SIZE) {
                 fprintf(stderr,"ozy_ep4_io_thread: OzyBulkRead only read %d bytes\n",bytes);
             } else {
                 if(debug_buffers) fprintf(stderr,"ozy_ep4_io_thread: OzyBulkRead read %d bytes\n",bytes);
             }
-
-/*
-            // try 8 reads of 1024 bytes o see if that helps performance
-            for(i=0;i<8;i++) {
-                bytes=OzyBulkRead(ozy,0x84,(void*)(&spectrum_buffer->buffer[i*1024]),1024);
-                if (bytes < 0) {
-                    perror("ozy_ep4_io_thread: OzyBulkRead failed");
-                } else if (bytes != 1024) {
-                    fprintf(stderr,"ozy_ep4_io_thread: OzyBulkRead only read %d bytes\n",bytes);
-                } else {
-                    if(debug_buffers) fprintf(stderr,"ozy_ep4_io_thread: OzyBulkRead read %d bytes\n",bytes);
-                }
-            }
-*/
 
             // process input buffer
             put_spectrum_input_buffer(spectrum_buffer);
