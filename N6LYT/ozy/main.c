@@ -75,7 +75,7 @@ int main(int argc, char** argv) {
     create_ozy_ringbuffer(68*512);
     create_ozy_buffers(34);
 
-    create_spectrum_buffers(4);
+    create_spectrum_buffers(32);
 
     start_threads();
 

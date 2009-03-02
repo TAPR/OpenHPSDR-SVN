@@ -13,7 +13,9 @@ extern "C" {
 #endif
     #include <semaphore.h>
 
-    #define SPECTRUM_BUFFER_SIZE 8192 // 4096x16 bit samples
+    //#define SPECTRUM_BUFFER_SIZE 8192 // 4096x16 bit samples
+
+    #define SPECTRUM_BUFFER_SIZE 8192
 
     struct spectrum_buffer {
         struct spectrum_buffer* next;

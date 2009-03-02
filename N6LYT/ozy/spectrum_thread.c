@@ -30,6 +30,9 @@ void* spectrum_thread(void* arg) {
     struct sockaddr_in clnt;
     int sock, clnt_len;
 
+    unsigned char buffer[8192];
+    int buffer_offset=0;
+
     if ((sock = socket(PF_INET, SOCK_DGRAM, IPPROTO_UDP)) < 0) {
         perror("Failed to create UDP socket for spectrum");
         return;
@@ -44,14 +47,21 @@ void* spectrum_thread(void* arg) {
     while(1) {
         // wait for a spectrum buffer
         sem_wait(&spectrum_input_buffer_sem);
-        if(debug_spectrum) fprintf(stderr,"spectrum_thread: get_spectrum_input_buffer\n");
+        if(debug_spectrum) fprintf(stderr,"spectrum_thread: get_spectrum_input_buffer offset=%d\n",buffer_offset);
         spectrum_buffer=get_spectrum_input_buffer();
         if(spectrum_buffer==NULL) {
             fprintf(stderr,"spectrum_thread: get_spectrum_buffer returned NULL!\n");
         } else {
-            // write to spectrum port
-            if (sendto(sock,spectrum_buffer->buffer,SPECTRUM_BUFFER_SIZE,0,(struct sockaddr *)&clnt,clnt_len)!=SPECTRUM_BUFFER_SIZE) {
-                perror("Failed to send spectrum");
+
+            memcpy(&buffer[buffer_offset],spectrum_buffer->buffer,SPECTRUM_BUFFER_SIZE);
+            buffer_offset+=SPECTRUM_BUFFER_SIZE;
+
+            if(buffer_offset==8192) {
+                // write to spectrum port
+                if (sendto(sock,buffer,buffer_offset,0,(struct sockaddr *)&clnt,clnt_len)!=buffer_offset) {
+                    perror("Failed to send spectrum");
+                }
+                buffer_offset=0;
             }
             free_spectrum_buffer(spectrum_buffer);
         }
