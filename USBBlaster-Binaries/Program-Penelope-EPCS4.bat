@@ -1,15 +1,15 @@
 @ECHO OFF
 CLS
 :: Load the FX2 code 
-load_firmwareV1.1.exe  0xfffe  0x7 ozyfw-sdr1k.hex
+loadFW.exe  0xfffe  0x7 ozyfw-sdr1k.hex
+ECHO.
+msecsleep 3000
+loadFPGA.exe 0xfffe 0x7 usb_blaster.rbf
 ECHO.
 sleep 3000
-upload_fpgaV1.1.exe 0xfffe 0x7 usb_blaster.rbf
+loadFW.exe  0xfffe  0x7 std.hex
 ECHO.
-sleep 3000
-load_firmwareV1.1.exe  0xfffe  0x7 std.hex
-ECHO.
-sleep 3000
+msecsleep 3000
 :: prompt the user for the file to use
 :LOOP
 ECHO.     
