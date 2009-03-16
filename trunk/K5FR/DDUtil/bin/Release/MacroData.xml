@@ -2,7 +2,7 @@
 <macroData>
   <macro>
     <Button>Test</Button>
-    <Command>ZZFY4003F0;</Command>
+    <Command>DDFA0FI;</Command>
   </macro>
   <macro>
     <Button>20 RTTY</Button>
@@ -45,20 +45,20 @@
     <Command>ZZPS1;</Command>
   </macro>
   <macro>
-    <Button>Auto</Button>
-    <Command>DDAM;</Command>
+    <Button>North</Button>
+    <Command>DDFA18I;</Command>
   </macro>
   <macro>
-    <Button>Manual</Button>
-    <Command>DDMM;</Command>
+    <Button>South</Button>
+    <Command>DDFA24I;</Command>
   </macro>
   <macro>
-    <Button>Bypass</Button>
-    <Command>DDBM;</Command>
+    <Button>East</Button>
+    <Command>DDFA03I;</Command>
   </macro>
   <macro>
-    <Button>Coax</Button>
-    <Command>DDCX;</Command>
+    <Button>West</Button>
+    <Command>DDFAC0I;</Command>
   </macro>
   <macro>
     <Button>Balanced</Button>

@@ -565,7 +565,7 @@ namespace DataDecoder
             if (set.Temp == 0) temp_format = TempFormat.Celsius;
             else temp_format = TempFormat.Fahrenheit;
 
-            FWSetup();  // setup the FW ports
+//            FWSetup();  // setup the FW ports
             X2SetUp();  // setup the X2 Matrix
             WN2SetUp(); // setup the WN2
             AlcSetUp(); // setup the ALC
@@ -882,62 +882,62 @@ namespace DataDecoder
         private void grpBCDover_CheckChanged(object sender, EventArgs e)
         {
             if (rbOvr1.Checked) 
-            { if (rbFW.Checked) {WriteFW(mAdr, cmd1, 1, false);}
+            { if (rbFW.Checked) {WriteFW(mAdr1, cmd0, 1, false);}
               else {OutParallelPort(LPTnum, 1); }
             }
             if (rbOvr2.Checked)
             {
-                if (rbFW.Checked) { WriteFW(mAdr, cmd1, 2, false); }
+                if (rbFW.Checked) { WriteFW(mAdr1, cmd0, 2, false); }
                 else { OutParallelPort(LPTnum, 2); }
             }
             if (rbOvr3.Checked)
             {
-                if (rbFW.Checked) { WriteFW(mAdr, cmd1, 3, false); }
+                if (rbFW.Checked) { WriteFW(mAdr1, cmd0, 3, false); }
                 else { OutParallelPort(LPTnum, 3); }
             }
             if (rbOvr4.Checked)
             {
-                if (rbFW.Checked) { WriteFW(mAdr, cmd1, 4, false); }
+                if (rbFW.Checked) { WriteFW(mAdr1, cmd0, 4, false); }
                 else { OutParallelPort(LPTnum, 4); }
             }
             if (rbOvr5.Checked)
             {
-                if (rbFW.Checked) { WriteFW(mAdr, cmd1, 5, false); }
+                if (rbFW.Checked) { WriteFW(mAdr1, cmd0, 5, false); }
                 else { OutParallelPort(LPTnum, 5); }
             }
             if (rbOvr6.Checked)
             {
-                if (rbFW.Checked) { WriteFW(mAdr, cmd1, 6, false); }
+                if (rbFW.Checked) { WriteFW(mAdr1, cmd0, 6, false); }
                 else { OutParallelPort(LPTnum, 6); }
             }
             if (rbOvr7.Checked)
             {
-                if (rbFW.Checked) { WriteFW(mAdr, cmd1, 7, false); }
+                if (rbFW.Checked) { WriteFW(mAdr1, cmd0, 7, false); }
                 else { OutParallelPort(LPTnum, 7); }
             }
             if (rbOvr8.Checked)
             {
-                if (rbFW.Checked) { WriteFW(mAdr, cmd1, 8, false); }
+                if (rbFW.Checked) { WriteFW(mAdr1, cmd0, 8, false); }
                 else { OutParallelPort(LPTnum, 8); }
             }
             if (rbOvr9.Checked)
             {
-                if (rbFW.Checked) { WriteFW(mAdr, cmd1, 9, false); }
+                if (rbFW.Checked) { WriteFW(mAdr1, cmd0, 9, false); }
                 else { OutParallelPort(LPTnum, 9); }
             }
             if (rbOvr10.Checked)
             {
-                if (rbFW.Checked) { WriteFW(mAdr, cmd1, 10, false); }
+                if (rbFW.Checked) { WriteFW(mAdr1, cmd0, 10, false); }
                 else { OutParallelPort(LPTnum, 10); }
             }
             if (rbOvr11.Checked)
             {
-                if (rbFW.Checked) { WriteFW(mAdr, cmd1, 11, false); }
+                if (rbFW.Checked) { WriteFW(mAdr1, cmd0, 11, false); }
                 else { OutParallelPort(LPTnum, 11); }
             }
             if (rbOvr12.Checked)
             {
-                if (rbFW.Checked) { WriteFW(mAdr, cmd1, 12, false); }
+                if (rbFW.Checked) { WriteFW(mAdr1, cmd0, 12, false); }
                 else { OutParallelPort(LPTnum, 12); }
             }
         }
@@ -1346,7 +1346,8 @@ namespace DataDecoder
             { LPTnum = 620; set.lptPort = "LPT4"; txtPort.Text = LPTnum.ToString(); set.Save(); }
             else if (sender == rbFW)
             { LPTnum = 0; set.lptPort = "FW"; txtPort.Text = LPTnum.ToString();
-            chkPortB.Checked = false;  set.Save(); }
+            //chkPortB.Checked = false;  
+                set.Save(); }
             else
             {
                 OutParallelPort(LPTnum, 0); LPTnum = 0; set.lptPort = "NONE"; rbNone.Checked = true;
@@ -2228,9 +2229,9 @@ namespace DataDecoder
             if (flist.ContainsKey(freq))// && chkDevice.Checked)
             {
                 keyValue = Convert.ToInt16(flist[freq]);
-
+                if (chkDSInvert.Checked) keyValue = keyValue ^ 255;
                 if (rbFW.Checked) // write data to the FlexWire port
-                { WriteFW(mAdr, cmd1, keyValue, false); }
+                { WriteFW(mAdr1, cmd0, keyValue, false); }
                 else // write data to the parallel port selected
                 { OutParallelPort(LPTnum, keyValue); } 
             }
@@ -4730,6 +4731,12 @@ namespace DataDecoder
             string ops = cmd.Substring(4, cmd.Length-4);  // command operators less ";"
             switch (pre)
             {
+                case "FA": // Write hex to FlexWire Adapter port 4
+                    int data = int.Parse(ops.Substring(0,2), NumberStyles.HexNumber);
+                    if (ops.Length == 3 && ops.Substring(2, 1)== "I") 
+                        data = data ^ 255;
+                    WriteFW(mAdr1, cmd1, data, false); break;
+
                 case "AM": // Set AT-AUTO to Auto Mode
                     byte[] a = { 0xFE, 0xFE, 0xE0, 0x3A, 0x07, 0x00, 0xFD };
                     RepeatPort.Write(a, 0, 7); break;
@@ -8829,8 +8836,8 @@ namespace DataDecoder
                 btnClrPortB.Enabled = true;
                 set.chkPortB = true;
                 X2SetUp();
-                if (rbFW.Checked)
-                { rbFW.Checked = false; rbNone.Checked = true; }
+                //if (rbFW.Checked)
+                //{ rbFW.Checked = false; rbNone.Checked = true; }
             }
             else
             {
@@ -9646,14 +9653,17 @@ namespace DataDecoder
 
         #endregion WaveNode
 
-
-
+        
         #region FlexWire
 
         #region # Enums & Vars #
-        const int mAdr = 0x40;
-        const int cmd0 = 2;
-        const int cmd1 = 3;
+
+        const int mAdr  = 0x40;  // Chip 1 ports 0/1
+        const int mAdr1 = 0x42;  // Chip 2 ports 0/1
+        const int cmd0 = 2;      // write to port 0
+        const int cmd1 = 3;      // write to port 1
+        const int su0 = 6;       // Setup for port 0
+        const int su1 = 7;       // Setup for port 1
 
         #endregion Enums & Vars
 
@@ -9662,13 +9672,27 @@ namespace DataDecoder
         // write to FlexWire port
         void WriteFW(int adr, int cmd, int data, bool inv)
         {
-            string ad = adr.ToString("X");
-            if (adr < 16) ad = "0" + ad;
-            string cm = cmd.ToString("X");
-            if (cmd < 16) cm = "0" + cm;
-            if (inv) data = 255 ^ data;
-            string val = data.ToString("X");
-            if (data < 16) val = "0" + val;
+            string ad = adr.ToString("X");  // convert to hex
+            if (adr < 16) ad = "0" + ad;    // add zero if needed
+            string cm = cmd.ToString("X");  // convert to hex
+            if (cmd < 16) cm = "0" + cm;    // add zero if needed
+            if (inv) data = 255 ^ data;     // invert data if inv = true
+            string val = data.ToString("X");  // convert to hex
+            if (data < 16) val = "0" + val;   // add zero if needed
+            // Send initialization string to 9555
+            string p0 = "0" + su0.ToString("X");
+            string p1 = "0" + su1.ToString("X");
+            if (cmd == cmd0)
+            { WriteToPort("ZZFY" + ad + p0 + "00;", 0); }
+            else if (cmd == cmd1)
+            { WriteToPort("ZZFY" + ad + p1 + "00;", 0); }
+            else
+            {
+                MessageBox.Show(
+                    ad + " is the wrong address for this board!\r\r" +
+                   "Must be 0x40 or 0x42 only!", "Address Error", 
+                   MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            }
             WriteToPort("ZZFY" + ad + cm + val + ";", iSleep);
         }
         // FW Setup routine
@@ -9676,9 +9700,18 @@ namespace DataDecoder
         {
             WriteToPort("ZZFY400600;", iSleep);
             WriteToPort("ZZFY400700;", iSleep);
+            WriteToPort("ZZFY420600;", iSleep);
+            WriteToPort("ZZFY420700;", iSleep);
         }
 
         #endregion Methods
+
+        private void chkDSInvert_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chkDSInvert.Enabled) set.DSInv = true;
+            else set.DSInv = false;
+            set.Save();
+        }
 
         #endregion FlexWire
 

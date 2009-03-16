@@ -545,5 +545,8 @@ RCP4 - WriteLog</Value>
     <Setting Name="tune" Type="System.Decimal" Scope="User">
       <Value Profile="(Default)">12</Value>
     </Setting>
+    <Setting Name="DSInv" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

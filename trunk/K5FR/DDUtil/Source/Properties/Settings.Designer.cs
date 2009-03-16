@@ -2182,5 +2182,17 @@ namespace DataDecoder.Properties {
                 this["tune"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool DSInv {
+            get {
+                return ((bool)(this["DSInv"]));
+            }
+            set {
+                this["DSInv"] = value;
+            }
+        }
     }
 }
