@@ -1,0 +1,1089 @@
+Source		: System
+Method		: Write
+Time		: 11:02:34 AM
+Date		: 2/21/2009
+Computer	: K5FR-GW32
+Error		: The port is closed.
+Stack Trace	: at System.IO.Ports.SerialPort.Write(String text)
+   at DataDecoder.Setup.sp_CATRxEvent(Object source, SerialRXEvent e) in C:\Documents and Settings\Owner\Desktop\Repos_DDUtil 2008\Source\Setup.cs:line 6707
+-------------------------------------------------------------------
+Source		: System
+Method		: Write
+Time		: 11:02:34 AM
+Date		: 2/21/2009
+Computer	: K5FR-GW32
+Error		: The port is closed.
+Stack Trace	: at System.IO.Ports.SerialPort.Write(String text)
+   at DataDecoder.Setup.sp_CATRxEvent(Object source, SerialRXEvent e) in C:\Documents and Settings\Owner\Desktop\Repos_DDUtil 2008\Source\Setup.cs:line 6707
+-------------------------------------------------------------------
+Source		: System
+Method		: Write
+Time		: 11:02:36 AM
+Date		: 2/21/2009
+Computer	: K5FR-GW32
+Error		: The port is closed.
+Stack Trace	: at System.IO.Ports.SerialPort.Write(String text)
+   at DataDecoder.Setup.sp_CATRxEvent(Object source, SerialRXEvent e) in C:\Documents and Settings\Owner\Desktop\Repos_DDUtil 2008\Source\Setup.cs:line 6707
+-------------------------------------------------------------------
+Source		: System
+Method		: Write
+Time		: 11:02:36 AM
+Date		: 2/21/2009
+Computer	: K5FR-GW32
+Error		: The port is closed.
+Stack Trace	: at System.IO.Ports.SerialPort.Write(String text)
+   at DataDecoder.Setup.sp_CATRxEvent(Object source, SerialRXEvent e) in C:\Documents and Settings\Owner\Desktop\Repos_DDUtil 2008\Source\Setup.cs:line 6707
+-------------------------------------------------------------------
+Source		: System
+Method		: Write
+Time		: 11:02:37 AM
+Date		: 2/21/2009
+Computer	: K5FR-GW32
+Error		: The port is closed.
+Stack Trace	: at System.IO.Ports.SerialPort.Write(String text)
+   at DataDecoder.Setup.sp_CATRxEvent(Object source, SerialRXEvent e) in C:\Documents and Settings\Owner\Desktop\Repos_DDUtil 2008\Source\Setup.cs:line 6707
+-------------------------------------------------------------------
+Source		: System
+Method		: Write
+Time		: 11:02:37 AM
+Date		: 2/21/2009
+Computer	: K5FR-GW32
+Error		: The port is closed.
+Stack Trace	: at System.IO.Ports.SerialPort.Write(String text)
+   at DataDecoder.Setup.sp_CATRxEvent(Object source, SerialRXEvent e) in C:\Documents and Settings\Owner\Desktop\Repos_DDUtil 2008\Source\Setup.cs:line 6707
+-------------------------------------------------------------------
+Source		: System
+Method		: Write
+Time		: 11:02:39 AM
+Date		: 2/21/2009
+Computer	: K5FR-GW32
+Error		: The port is closed.
+Stack Trace	: at System.IO.Ports.SerialPort.Write(String text)
+   at DataDecoder.Setup.sp_CATRxEvent(Object source, SerialRXEvent e) in C:\Documents and Settings\Owner\Desktop\Repos_DDUtil 2008\Source\Setup.cs:line 6707
+-------------------------------------------------------------------
+Source		: System
+Method		: Write
+Time		: 11:02:39 AM
+Date		: 2/21/2009
+Computer	: K5FR-GW32
+Error		: The port is closed.
+Stack Trace	: at System.IO.Ports.SerialPort.Write(String text)
+   at DataDecoder.Setup.sp_CATRxEvent(Object source, SerialRXEvent e) in C:\Documents and Settings\Owner\Desktop\Repos_DDUtil 2008\Source\Setup.cs:line 6707
+-------------------------------------------------------------------
+Source		: System
+Method		: Write
+Time		: 11:02:40 AM
+Date		: 2/21/2009
+Computer	: K5FR-GW32
+Error		: The port is closed.
+Stack Trace	: at System.IO.Ports.SerialPort.Write(String text)
+   at DataDecoder.Setup.sp_CATRxEvent(Object source, SerialRXEvent e) in C:\Documents and Settings\Owner\Desktop\Repos_DDUtil 2008\Source\Setup.cs:line 6707
+-------------------------------------------------------------------
+Source		: System
+Method		: Write
+Time		: 11:02:40 AM
+Date		: 2/21/2009
+Computer	: K5FR-GW32
+Error		: The port is closed.
+Stack Trace	: at System.IO.Ports.SerialPort.Write(String text)
+   at DataDecoder.Setup.sp_CATRxEvent(Object source, SerialRXEvent e) in C:\Documents and Settings\Owner\Desktop\Repos_DDUtil 2008\Source\Setup.cs:line 6707
+-------------------------------------------------------------------
+Source		: System
+Method		: Write
+Time		: 11:02:42 AM
+Date		: 2/21/2009
+Computer	: K5FR-GW32
+Error		: The port is closed.
+Stack Trace	: at System.IO.Ports.SerialPort.Write(String text)
+   at DataDecoder.Setup.sp_CATRxEvent(Object source, SerialRXEvent e) in C:\Documents and Settings\Owner\Desktop\Repos_DDUtil 2008\Source\Setup.cs:line 6707
+-------------------------------------------------------------------
+Source		: System
+Method		: Write
+Time		: 11:02:42 AM
+Date		: 2/21/2009
+Computer	: K5FR-GW32
+Error		: The port is closed.
+Stack Trace	: at System.IO.Ports.SerialPort.Write(String text)
+   at DataDecoder.Setup.sp_CATRxEvent(Object source, SerialRXEvent e) in C:\Documents and Settings\Owner\Desktop\Repos_DDUtil 2008\Source\Setup.cs:line 6707
+-------------------------------------------------------------------
+Source		: System
+Method		: Write
+Time		: 11:02:43 AM
+Date		: 2/21/2009
+Computer	: K5FR-GW32
+Error		: The port is closed.
+Stack Trace	: at System.IO.Ports.SerialPort.Write(String text)
+   at DataDecoder.Setup.sp_CATRxEvent(Object source, SerialRXEvent e) in C:\Documents and Settings\Owner\Desktop\Repos_DDUtil 2008\Source\Setup.cs:line 6707
+-------------------------------------------------------------------
+Source		: System
+Method		: Write
+Time		: 11:02:43 AM
+Date		: 2/21/2009
+Computer	: K5FR-GW32
+Error		: The port is closed.
+Stack Trace	: at System.IO.Ports.SerialPort.Write(String text)
+   at DataDecoder.Setup.sp_CATRxEvent(Object source, SerialRXEvent e) in C:\Documents and Settings\Owner\Desktop\Repos_DDUtil 2008\Source\Setup.cs:line 6707
+-------------------------------------------------------------------
+Source		: System
+Method		: Write
+Time		: 11:02:45 AM
+Date		: 2/21/2009
+Computer	: K5FR-GW32
+Error		: The port is closed.
+Stack Trace	: at System.IO.Ports.SerialPort.Write(String text)
+   at DataDecoder.Setup.sp_CATRxEvent(Object source, SerialRXEvent e) in C:\Documents and Settings\Owner\Desktop\Repos_DDUtil 2008\Source\Setup.cs:line 6707
+-------------------------------------------------------------------
+Source		: System
+Method		: Write
+Time		: 11:02:45 AM
+Date		: 2/21/2009
+Computer	: K5FR-GW32
+Error		: The port is closed.
+Stack Trace	: at System.IO.Ports.SerialPort.Write(String text)
+   at DataDecoder.Setup.sp_CATRxEvent(Object source, SerialRXEvent e) in C:\Documents and Settings\Owner\Desktop\Repos_DDUtil 2008\Source\Setup.cs:line 6707
+-------------------------------------------------------------------
+Source		: System
+Method		: Write
+Time		: 11:02:46 AM
+Date		: 2/21/2009
+Computer	: K5FR-GW32
+Error		: The port is closed.
+Stack Trace	: at System.IO.Ports.SerialPort.Write(String text)
+   at DataDecoder.Setup.sp_CATRxEvent(Object source, SerialRXEvent e) in C:\Documents and Settings\Owner\Desktop\Repos_DDUtil 2008\Source\Setup.cs:line 6707
+-------------------------------------------------------------------
+Source		: System
+Method		: Write
+Time		: 11:02:46 AM
+Date		: 2/21/2009
+Computer	: K5FR-GW32
+Error		: The port is closed.
+Stack Trace	: at System.IO.Ports.SerialPort.Write(String text)
+   at DataDecoder.Setup.sp_CATRxEvent(Object source, SerialRXEvent e) in C:\Documents and Settings\Owner\Desktop\Repos_DDUtil 2008\Source\Setup.cs:line 6707
+-------------------------------------------------------------------
+Source		: System
+Method		: Write
+Time		: 11:02:48 AM
+Date		: 2/21/2009
+Computer	: K5FR-GW32
+Error		: The port is closed.
+Stack Trace	: at System.IO.Ports.SerialPort.Write(String text)
+   at DataDecoder.Setup.sp_CATRxEvent(Object source, SerialRXEvent e) in C:\Documents and Settings\Owner\Desktop\Repos_DDUtil 2008\Source\Setup.cs:line 6707
+-------------------------------------------------------------------
+Source		: System
+Method		: Write
+Time		: 11:02:48 AM
+Date		: 2/21/2009
+Computer	: K5FR-GW32
+Error		: The port is closed.
+Stack Trace	: at System.IO.Ports.SerialPort.Write(String text)
+   at DataDecoder.Setup.sp_CATRxEvent(Object source, SerialRXEvent e) in C:\Documents and Settings\Owner\Desktop\Repos_DDUtil 2008\Source\Setup.cs:line 6707
+-------------------------------------------------------------------
+Source		: System
+Method		: Write
+Time		: 11:02:54 AM
+Date		: 2/21/2009
+Computer	: K5FR-GW32
+Error		: The port is closed.
+Stack Trace	: at System.IO.Ports.SerialPort.Write(String text)
+   at DataDecoder.Setup.sp_CATRxEvent(Object source, SerialRXEvent e) in C:\Documents and Settings\Owner\Desktop\Repos_DDUtil 2008\Source\Setup.cs:line 6707
+-------------------------------------------------------------------
+Source		: System
+Method		: Write
+Time		: 11:02:54 AM
+Date		: 2/21/2009
+Computer	: K5FR-GW32
+Error		: The port is closed.
+Stack Trace	: at System.IO.Ports.SerialPort.Write(String text)
+   at DataDecoder.Setup.sp_CATRxEvent(Object source, SerialRXEvent e) in C:\Documents and Settings\Owner\Desktop\Repos_DDUtil 2008\Source\Setup.cs:line 6707
+-------------------------------------------------------------------
+Source		: System
+Method		: Write
+Time		: 11:02:55 AM
+Date		: 2/21/2009
+Computer	: K5FR-GW32
+Error		: The port is closed.
+Stack Trace	: at System.IO.Ports.SerialPort.Write(String text)
+   at DataDecoder.Setup.sp_CATRxEvent(Object source, SerialRXEvent e) in C:\Documents and Settings\Owner\Desktop\Repos_DDUtil 2008\Source\Setup.cs:line 6707
+-------------------------------------------------------------------
+Source		: System
+Method		: Write
+Time		: 11:02:57 AM
+Date		: 2/21/2009
+Computer	: K5FR-GW32
+Error		: The port is closed.
+Stack Trace	: at System.IO.Ports.SerialPort.Write(String text)
+   at DataDecoder.Setup.sp_CATRxEvent(Object source, SerialRXEvent e) in C:\Documents and Settings\Owner\Desktop\Repos_DDUtil 2008\Source\Setup.cs:line 6707
+-------------------------------------------------------------------
+Source		: System
+Method		: Write
+Time		: 11:02:57 AM
+Date		: 2/21/2009
+Computer	: K5FR-GW32
+Error		: The port is closed.
+Stack Trace	: at System.IO.Ports.SerialPort.Write(String text)
+   at DataDecoder.Setup.sp_CATRxEvent(Object source, SerialRXEvent e) in C:\Documents and Settings\Owner\Desktop\Repos_DDUtil 2008\Source\Setup.cs:line 6707
+-------------------------------------------------------------------
+Source		: System
+Method		: Write
+Time		: 11:02:58 AM
+Date		: 2/21/2009
+Computer	: K5FR-GW32
+Error		: The port is closed.
+Stack Trace	: at System.IO.Ports.SerialPort.Write(String text)
+   at DataDecoder.Setup.sp_CATRxEvent(Object source, SerialRXEvent e) in C:\Documents and Settings\Owner\Desktop\Repos_DDUtil 2008\Source\Setup.cs:line 6707
+-------------------------------------------------------------------
+Source		: System
+Method		: Write
+Time		: 11:02:58 AM
+Date		: 2/21/2009
+Computer	: K5FR-GW32
+Error		: The port is closed.
+Stack Trace	: at System.IO.Ports.SerialPort.Write(String text)
+   at DataDecoder.Setup.sp_CATRxEvent(Object source, SerialRXEvent e) in C:\Documents and Settings\Owner\Desktop\Repos_DDUtil 2008\Source\Setup.cs:line 6707
+-------------------------------------------------------------------
+Source		: System
+Method		: Write
+Time		: 11:02:58 AM
+Date		: 2/21/2009
+Computer	: K5FR-GW32
+Error		: The port is closed.
+Stack Trace	: at System.IO.Ports.SerialPort.Write(String text)
+   at DataDecoder.Setup.sp_CATRxEvent(Object source, SerialRXEvent e) in C:\Documents and Settings\Owner\Desktop\Repos_DDUtil 2008\Source\Setup.cs:line 6707
+-------------------------------------------------------------------
+Source		: System
+Method		: Write
+Time		: 11:03:00 AM
+Date		: 2/21/2009
+Computer	: K5FR-GW32
+Error		: The port is closed.
+Stack Trace	: at System.IO.Ports.SerialPort.Write(String text)
+   at DataDecoder.Setup.sp_CATRxEvent(Object source, SerialRXEvent e) in C:\Documents and Settings\Owner\Desktop\Repos_DDUtil 2008\Source\Setup.cs:line 6707
+-------------------------------------------------------------------
+Source		: System
+Method		: Write
+Time		: 11:03:00 AM
+Date		: 2/21/2009
+Computer	: K5FR-GW32
+Error		: The port is closed.
+Stack Trace	: at System.IO.Ports.SerialPort.Write(String text)
+   at DataDecoder.Setup.sp_CATRxEvent(Object source, SerialRXEvent e) in C:\Documents and Settings\Owner\Desktop\Repos_DDUtil 2008\Source\Setup.cs:line 6707
+-------------------------------------------------------------------
+Source		: System
+Method		: Write
+Time		: 11:03:01 AM
+Date		: 2/21/2009
+Computer	: K5FR-GW32
+Error		: The port is closed.
+Stack Trace	: at System.IO.Ports.SerialPort.Write(String text)
+   at DataDecoder.Setup.sp_CATRxEvent(Object source, SerialRXEvent e) in C:\Documents and Settings\Owner\Desktop\Repos_DDUtil 2008\Source\Setup.cs:line 6707
+-------------------------------------------------------------------
+Source		: System
+Method		: Write
+Time		: 11:03:01 AM
+Date		: 2/21/2009
+Computer	: K5FR-GW32
+Error		: The port is closed.
+Stack Trace	: at System.IO.Ports.SerialPort.Write(String text)
+   at DataDecoder.Setup.sp_CATRxEvent(Object source, SerialRXEvent e) in C:\Documents and Settings\Owner\Desktop\Repos_DDUtil 2008\Source\Setup.cs:line 6707
+-------------------------------------------------------------------
+Source		: System
+Method		: Write
+Time		: 11:03:03 AM
+Date		: 2/21/2009
+Computer	: K5FR-GW32
+Error		: The port is closed.
+Stack Trace	: at System.IO.Ports.SerialPort.Write(String text)
+   at DataDecoder.Setup.sp_CATRxEvent(Object source, SerialRXEvent e) in C:\Documents and Settings\Owner\Desktop\Repos_DDUtil 2008\Source\Setup.cs:line 6707
+-------------------------------------------------------------------
+Source		: System
+Method		: Write
+Time		: 11:03:03 AM
+Date		: 2/21/2009
+Computer	: K5FR-GW32
+Error		: The port is closed.
+Stack Trace	: at System.IO.Ports.SerialPort.Write(String text)
+   at DataDecoder.Setup.sp_CATRxEvent(Object source, SerialRXEvent e) in C:\Documents and Settings\Owner\Desktop\Repos_DDUtil 2008\Source\Setup.cs:line 6707
+-------------------------------------------------------------------
+Source		: System
+Method		: Write
+Time		: 11:03:04 AM
+Date		: 2/21/2009
+Computer	: K5FR-GW32
+Error		: The port is closed.
+Stack Trace	: at System.IO.Ports.SerialPort.Write(String text)
+   at DataDecoder.Setup.sp_CATRxEvent(Object source, SerialRXEvent e) in C:\Documents and Settings\Owner\Desktop\Repos_DDUtil 2008\Source\Setup.cs:line 6707
+-------------------------------------------------------------------
+Source		: System
+Method		: Write
+Time		: 11:03:05 AM
+Date		: 2/21/2009
+Computer	: K5FR-GW32
+Error		: The port is closed.
+Stack Trace	: at System.IO.Ports.SerialPort.Write(String text)
+   at DataDecoder.Setup.sp_CATRxEvent(Object source, SerialRXEvent e) in C:\Documents and Settings\Owner\Desktop\Repos_DDUtil 2008\Source\Setup.cs:line 6707
+-------------------------------------------------------------------
+Source		: System
+Method		: Write
+Time		: 11:03:06 AM
+Date		: 2/21/2009
+Computer	: K5FR-GW32
+Error		: The port is closed.
+Stack Trace	: at System.IO.Ports.SerialPort.Write(String text)
+   at DataDecoder.Setup.sp_CATRxEvent(Object source, SerialRXEvent e) in C:\Documents and Settings\Owner\Desktop\Repos_DDUtil 2008\Source\Setup.cs:line 6707
+-------------------------------------------------------------------
+Source		: System
+Method		: Write
+Time		: 11:03:06 AM
+Date		: 2/21/2009
+Computer	: K5FR-GW32
+Error		: The port is closed.
+Stack Trace	: at System.IO.Ports.SerialPort.Write(String text)
+   at DataDecoder.Setup.sp_CATRxEvent(Object source, SerialRXEvent e) in C:\Documents and Settings\Owner\Desktop\Repos_DDUtil 2008\Source\Setup.cs:line 6707
+-------------------------------------------------------------------
+Source		: System
+Method		: Write
+Time		: 11:03:06 AM
+Date		: 2/21/2009
+Computer	: K5FR-GW32
+Error		: The port is closed.
+Stack Trace	: at System.IO.Ports.SerialPort.Write(String text)
+   at DataDecoder.Setup.sp_CATRxEvent(Object source, SerialRXEvent e) in C:\Documents and Settings\Owner\Desktop\Repos_DDUtil 2008\Source\Setup.cs:line 6707
+-------------------------------------------------------------------
+Source		: System
+Method		: Write
+Time		: 11:03:06 AM
+Date		: 2/21/2009
+Computer	: K5FR-GW32
+Error		: The port is closed.
+Stack Trace	: at System.IO.Ports.SerialPort.Write(String text)
+   at DataDecoder.Setup.sp_CATRxEvent(Object source, SerialRXEvent e) in C:\Documents and Settings\Owner\Desktop\Repos_DDUtil 2008\Source\Setup.cs:line 6707
+-------------------------------------------------------------------
+Source		: System
+Method		: Write
+Time		: 11:03:07 AM
+Date		: 2/21/2009
+Computer	: K5FR-GW32
+Error		: The port is closed.
+Stack Trace	: at System.IO.Ports.SerialPort.Write(String text)
+   at DataDecoder.Setup.sp_CATRxEvent(Object source, SerialRXEvent e) in C:\Documents and Settings\Owner\Desktop\Repos_DDUtil 2008\Source\Setup.cs:line 6707
+-------------------------------------------------------------------
+Source		: System
+Method		: Write
+Time		: 11:03:07 AM
+Date		: 2/21/2009
+Computer	: K5FR-GW32
+Error		: The port is closed.
+Stack Trace	: at System.IO.Ports.SerialPort.Write(String text)
+   at DataDecoder.Setup.sp_CATRxEvent(Object source, SerialRXEvent e) in C:\Documents and Settings\Owner\Desktop\Repos_DDUtil 2008\Source\Setup.cs:line 6707
+-------------------------------------------------------------------
+Source		: System
+Method		: Write
+Time		: 11:03:07 AM
+Date		: 2/21/2009
+Computer	: K5FR-GW32
+Error		: The port is closed.
+Stack Trace	: at System.IO.Ports.SerialPort.Write(String text)
+   at DataDecoder.Setup.sp_CATRxEvent(Object source, SerialRXEvent e) in C:\Documents and Settings\Owner\Desktop\Repos_DDUtil 2008\Source\Setup.cs:line 6707
+-------------------------------------------------------------------
+Source		: System
+Method		: Write
+Time		: 11:03:08 AM
+Date		: 2/21/2009
+Computer	: K5FR-GW32
+Error		: The port is closed.
+Stack Trace	: at System.IO.Ports.SerialPort.Write(String text)
+   at DataDecoder.Setup.sp_CATRxEvent(Object source, SerialRXEvent e) in C:\Documents and Settings\Owner\Desktop\Repos_DDUtil 2008\Source\Setup.cs:line 6707
+-------------------------------------------------------------------
+Source		: System
+Method		: Write
+Time		: 11:03:08 AM
+Date		: 2/21/2009
+Computer	: K5FR-GW32
+Error		: The port is closed.
+Stack Trace	: at System.IO.Ports.SerialPort.Write(String text)
+   at DataDecoder.Setup.sp_CATRxEvent(Object source, SerialRXEvent e) in C:\Documents and Settings\Owner\Desktop\Repos_DDUtil 2008\Source\Setup.cs:line 6707
+-------------------------------------------------------------------
+Source		: System
+Method		: Write
+Time		: 11:03:08 AM
+Date		: 2/21/2009
+Computer	: K5FR-GW32
+Error		: The port is closed.
+Stack Trace	: at System.IO.Ports.SerialPort.Write(String text)
+   at DataDecoder.Setup.sp_CATRxEvent(Object source, SerialRXEvent e) in C:\Documents and Settings\Owner\Desktop\Repos_DDUtil 2008\Source\Setup.cs:line 6707
+-------------------------------------------------------------------
+Source		: System
+Method		: Write
+Time		: 11:03:08 AM
+Date		: 2/21/2009
+Computer	: K5FR-GW32
+Error		: The port is closed.
+Stack Trace	: at System.IO.Ports.SerialPort.Write(String text)
+   at DataDecoder.Setup.sp_CATRxEvent(Object source, SerialRXEvent e) in C:\Documents and Settings\Owner\Desktop\Repos_DDUtil 2008\Source\Setup.cs:line 6707
+-------------------------------------------------------------------
+Source		: System
+Method		: Write
+Time		: 11:03:09 AM
+Date		: 2/21/2009
+Computer	: K5FR-GW32
+Error		: The port is closed.
+Stack Trace	: at System.IO.Ports.SerialPort.Write(String text)
+   at DataDecoder.Setup.sp_CATRxEvent(Object source, SerialRXEvent e) in C:\Documents and Settings\Owner\Desktop\Repos_DDUtil 2008\Source\Setup.cs:line 6707
+-------------------------------------------------------------------
+Source		: System
+Method		: Write
+Time		: 11:03:09 AM
+Date		: 2/21/2009
+Computer	: K5FR-GW32
+Error		: The port is closed.
+Stack Trace	: at System.IO.Ports.SerialPort.Write(String text)
+   at DataDecoder.Setup.sp_CATRxEvent(Object source, SerialRXEvent e) in C:\Documents and Settings\Owner\Desktop\Repos_DDUtil 2008\Source\Setup.cs:line 6707
+-------------------------------------------------------------------
+Source		: System
+Method		: Write
+Time		: 11:03:09 AM
+Date		: 2/21/2009
+Computer	: K5FR-GW32
+Error		: The port is closed.
+Stack Trace	: at System.IO.Ports.SerialPort.Write(String text)
+   at DataDecoder.Setup.sp_CATRxEvent(Object source, SerialRXEvent e) in C:\Documents and Settings\Owner\Desktop\Repos_DDUtil 2008\Source\Setup.cs:line 6707
+-------------------------------------------------------------------
+Source		: System
+Method		: Write
+Time		: 11:03:09 AM
+Date		: 2/21/2009
+Computer	: K5FR-GW32
+Error		: The port is closed.
+Stack Trace	: at System.IO.Ports.SerialPort.Write(String text)
+   at DataDecoder.Setup.sp_CATRxEvent(Object source, SerialRXEvent e) in C:\Documents and Settings\Owner\Desktop\Repos_DDUtil 2008\Source\Setup.cs:line 6707
+-------------------------------------------------------------------
+Source		: System
+Method		: Write
+Time		: 11:03:10 AM
+Date		: 2/21/2009
+Computer	: K5FR-GW32
+Error		: The port is closed.
+Stack Trace	: at System.IO.Ports.SerialPort.Write(String text)
+   at DataDecoder.Setup.sp_CATRxEvent(Object source, SerialRXEvent e) in C:\Documents and Settings\Owner\Desktop\Repos_DDUtil 2008\Source\Setup.cs:line 6707
+-------------------------------------------------------------------
+Source		: System
+Method		: Write
+Time		: 11:03:10 AM
+Date		: 2/21/2009
+Computer	: K5FR-GW32
+Error		: The port is closed.
+Stack Trace	: at System.IO.Ports.SerialPort.Write(String text)
+   at DataDecoder.Setup.sp_CATRxEvent(Object source, SerialRXEvent e) in C:\Documents and Settings\Owner\Desktop\Repos_DDUtil 2008\Source\Setup.cs:line 6707
+-------------------------------------------------------------------
+Source		: System
+Method		: Write
+Time		: 11:03:10 AM
+Date		: 2/21/2009
+Computer	: K5FR-GW32
+Error		: The port is closed.
+Stack Trace	: at System.IO.Ports.SerialPort.Write(String text)
+   at DataDecoder.Setup.sp_CATRxEvent(Object source, SerialRXEvent e) in C:\Documents and Settings\Owner\Desktop\Repos_DDUtil 2008\Source\Setup.cs:line 6707
+-------------------------------------------------------------------
+Source		: System
+Method		: Write
+Time		: 11:03:10 AM
+Date		: 2/21/2009
+Computer	: K5FR-GW32
+Error		: The port is closed.
+Stack Trace	: at System.IO.Ports.SerialPort.Write(String text)
+   at DataDecoder.Setup.sp_CATRxEvent(Object source, SerialRXEvent e) in C:\Documents and Settings\Owner\Desktop\Repos_DDUtil 2008\Source\Setup.cs:line 6707
+-------------------------------------------------------------------
+Source		: System
+Method		: Write
+Time		: 11:03:10 AM
+Date		: 2/21/2009
+Computer	: K5FR-GW32
+Error		: The port is closed.
+Stack Trace	: at System.IO.Ports.SerialPort.Write(String text)
+   at DataDecoder.Setup.sp_CATRxEvent(Object source, SerialRXEvent e) in C:\Documents and Settings\Owner\Desktop\Repos_DDUtil 2008\Source\Setup.cs:line 6707
+-------------------------------------------------------------------
+Source		: System
+Method		: Write
+Time		: 11:03:11 AM
+Date		: 2/21/2009
+Computer	: K5FR-GW32
+Error		: The port is closed.
+Stack Trace	: at System.IO.Ports.SerialPort.Write(String text)
+   at DataDecoder.Setup.sp_CATRxEvent(Object source, SerialRXEvent e) in C:\Documents and Settings\Owner\Desktop\Repos_DDUtil 2008\Source\Setup.cs:line 6707
+-------------------------------------------------------------------
+Source		: System
+Method		: Write
+Time		: 11:03:11 AM
+Date		: 2/21/2009
+Computer	: K5FR-GW32
+Error		: The port is closed.
+Stack Trace	: at System.IO.Ports.SerialPort.Write(String text)
+   at DataDecoder.Setup.sp_CATRxEvent(Object source, SerialRXEvent e) in C:\Documents and Settings\Owner\Desktop\Repos_DDUtil 2008\Source\Setup.cs:line 6707
+-------------------------------------------------------------------
+Source		: System
+Method		: Write
+Time		: 11:03:11 AM
+Date		: 2/21/2009
+Computer	: K5FR-GW32
+Error		: The port is closed.
+Stack Trace	: at System.IO.Ports.SerialPort.Write(String text)
+   at DataDecoder.Setup.sp_CATRxEvent(Object source, SerialRXEvent e) in C:\Documents and Settings\Owner\Desktop\Repos_DDUtil 2008\Source\Setup.cs:line 6707
+-------------------------------------------------------------------
+Source		: System
+Method		: Write
+Time		: 11:03:11 AM
+Date		: 2/21/2009
+Computer	: K5FR-GW32
+Error		: The port is closed.
+Stack Trace	: at System.IO.Ports.SerialPort.Write(String text)
+   at DataDecoder.Setup.sp_CATRxEvent(Object source, SerialRXEvent e) in C:\Documents and Settings\Owner\Desktop\Repos_DDUtil 2008\Source\Setup.cs:line 6707
+-------------------------------------------------------------------
+Source		: System
+Method		: Write
+Time		: 11:03:12 AM
+Date		: 2/21/2009
+Computer	: K5FR-GW32
+Error		: The port is closed.
+Stack Trace	: at System.IO.Ports.SerialPort.Write(String text)
+   at DataDecoder.Setup.sp_CATRxEvent(Object source, SerialRXEvent e) in C:\Documents and Settings\Owner\Desktop\Repos_DDUtil 2008\Source\Setup.cs:line 6707
+-------------------------------------------------------------------
+Source		: System
+Method		: Write
+Time		: 11:03:12 AM
+Date		: 2/21/2009
+Computer	: K5FR-GW32
+Error		: The port is closed.
+Stack Trace	: at System.IO.Ports.SerialPort.Write(String text)
+   at DataDecoder.Setup.sp_CATRxEvent(Object source, SerialRXEvent e) in C:\Documents and Settings\Owner\Desktop\Repos_DDUtil 2008\Source\Setup.cs:line 6707
+-------------------------------------------------------------------
+Source		: System
+Method		: Write
+Time		: 11:03:12 AM
+Date		: 2/21/2009
+Computer	: K5FR-GW32
+Error		: The port is closed.
+Stack Trace	: at System.IO.Ports.SerialPort.Write(String text)
+   at DataDecoder.Setup.sp_CATRxEvent(Object source, SerialRXEvent e) in C:\Documents and Settings\Owner\Desktop\Repos_DDUtil 2008\Source\Setup.cs:line 6707
+-------------------------------------------------------------------
+Source		: System
+Method		: Write
+Time		: 11:03:12 AM
+Date		: 2/21/2009
+Computer	: K5FR-GW32
+Error		: The port is closed.
+Stack Trace	: at System.IO.Ports.SerialPort.Write(String text)
+   at DataDecoder.Setup.sp_CATRxEvent(Object source, SerialRXEvent e) in C:\Documents and Settings\Owner\Desktop\Repos_DDUtil 2008\Source\Setup.cs:line 6707
+-------------------------------------------------------------------
+Source		: System
+Method		: Write
+Time		: 11:03:13 AM
+Date		: 2/21/2009
+Computer	: K5FR-GW32
+Error		: The port is closed.
+Stack Trace	: at System.IO.Ports.SerialPort.Write(String text)
+   at DataDecoder.Setup.sp_CATRxEvent(Object source, SerialRXEvent e) in C:\Documents and Settings\Owner\Desktop\Repos_DDUtil 2008\Source\Setup.cs:line 6707
+-------------------------------------------------------------------
+Source		: System
+Method		: Write
+Time		: 11:03:13 AM
+Date		: 2/21/2009
+Computer	: K5FR-GW32
+Error		: The port is closed.
+Stack Trace	: at System.IO.Ports.SerialPort.Write(String text)
+   at DataDecoder.Setup.sp_CATRxEvent(Object source, SerialRXEvent e) in C:\Documents and Settings\Owner\Desktop\Repos_DDUtil 2008\Source\Setup.cs:line 6707
+-------------------------------------------------------------------
+Source		: System
+Method		: Write
+Time		: 11:03:13 AM
+Date		: 2/21/2009
+Computer	: K5FR-GW32
+Error		: The port is closed.
+Stack Trace	: at System.IO.Ports.SerialPort.Write(String text)
+   at DataDecoder.Setup.sp_CATRxEvent(Object source, SerialRXEvent e) in C:\Documents and Settings\Owner\Desktop\Repos_DDUtil 2008\Source\Setup.cs:line 6707
+-------------------------------------------------------------------
+Source		: System
+Method		: Write
+Time		: 11:03:14 AM
+Date		: 2/21/2009
+Computer	: K5FR-GW32
+Error		: The port is closed.
+Stack Trace	: at System.IO.Ports.SerialPort.Write(String text)
+   at DataDecoder.Setup.sp_CATRxEvent(Object source, SerialRXEvent e) in C:\Documents and Settings\Owner\Desktop\Repos_DDUtil 2008\Source\Setup.cs:line 6707
+-------------------------------------------------------------------
+Source		: System
+Method		: Write
+Time		: 11:03:14 AM
+Date		: 2/21/2009
+Computer	: K5FR-GW32
+Error		: The port is closed.
+Stack Trace	: at System.IO.Ports.SerialPort.Write(String text)
+   at DataDecoder.Setup.sp_CATRxEvent(Object source, SerialRXEvent e) in C:\Documents and Settings\Owner\Desktop\Repos_DDUtil 2008\Source\Setup.cs:line 6707
+-------------------------------------------------------------------
+Source		: System
+Method		: Write
+Time		: 11:03:14 AM
+Date		: 2/21/2009
+Computer	: K5FR-GW32
+Error		: The port is closed.
+Stack Trace	: at System.IO.Ports.SerialPort.Write(String text)
+   at DataDecoder.Setup.sp_CATRxEvent(Object source, SerialRXEvent e) in C:\Documents and Settings\Owner\Desktop\Repos_DDUtil 2008\Source\Setup.cs:line 6707
+-------------------------------------------------------------------
+Source		: System
+Method		: Write
+Time		: 11:03:14 AM
+Date		: 2/21/2009
+Computer	: K5FR-GW32
+Error		: The port is closed.
+Stack Trace	: at System.IO.Ports.SerialPort.Write(String text)
+   at DataDecoder.Setup.sp_CATRxEvent(Object source, SerialRXEvent e) in C:\Documents and Settings\Owner\Desktop\Repos_DDUtil 2008\Source\Setup.cs:line 6707
+-------------------------------------------------------------------
+Source		: System
+Method		: Write
+Time		: 11:03:15 AM
+Date		: 2/21/2009
+Computer	: K5FR-GW32
+Error		: The port is closed.
+Stack Trace	: at System.IO.Ports.SerialPort.Write(String text)
+   at DataDecoder.Setup.sp_CATRxEvent(Object source, SerialRXEvent e) in C:\Documents and Settings\Owner\Desktop\Repos_DDUtil 2008\Source\Setup.cs:line 6707
+-------------------------------------------------------------------
+Source		: System
+Method		: Write
+Time		: 11:03:15 AM
+Date		: 2/21/2009
+Computer	: K5FR-GW32
+Error		: The port is closed.
+Stack Trace	: at System.IO.Ports.SerialPort.Write(String text)
+   at DataDecoder.Setup.sp_CATRxEvent(Object source, SerialRXEvent e) in C:\Documents and Settings\Owner\Desktop\Repos_DDUtil 2008\Source\Setup.cs:line 6707
+-------------------------------------------------------------------
+Source		: System
+Method		: Write
+Time		: 11:03:15 AM
+Date		: 2/21/2009
+Computer	: K5FR-GW32
+Error		: The port is closed.
+Stack Trace	: at System.IO.Ports.SerialPort.Write(String text)
+   at DataDecoder.Setup.sp_CATRxEvent(Object source, SerialRXEvent e) in C:\Documents and Settings\Owner\Desktop\Repos_DDUtil 2008\Source\Setup.cs:line 6707
+-------------------------------------------------------------------
+Source		: System
+Method		: Write
+Time		: 11:03:15 AM
+Date		: 2/21/2009
+Computer	: K5FR-GW32
+Error		: The port is closed.
+Stack Trace	: at System.IO.Ports.SerialPort.Write(String text)
+   at DataDecoder.Setup.sp_CATRxEvent(Object source, SerialRXEvent e) in C:\Documents and Settings\Owner\Desktop\Repos_DDUtil 2008\Source\Setup.cs:line 6707
+-------------------------------------------------------------------
+Source		: System
+Method		: Write
+Time		: 11:03:15 AM
+Date		: 2/21/2009
+Computer	: K5FR-GW32
+Error		: The port is closed.
+Stack Trace	: at System.IO.Ports.SerialPort.Write(String text)
+   at DataDecoder.Setup.sp_CATRxEvent(Object source, SerialRXEvent e) in C:\Documents and Settings\Owner\Desktop\Repos_DDUtil 2008\Source\Setup.cs:line 6707
+-------------------------------------------------------------------
+Source		: System
+Method		: Write
+Time		: 11:03:16 AM
+Date		: 2/21/2009
+Computer	: K5FR-GW32
+Error		: The port is closed.
+Stack Trace	: at System.IO.Ports.SerialPort.Write(String text)
+   at DataDecoder.Setup.sp_CATRxEvent(Object source, SerialRXEvent e) in C:\Documents and Settings\Owner\Desktop\Repos_DDUtil 2008\Source\Setup.cs:line 6707
+-------------------------------------------------------------------
+Source		: System
+Method		: Write
+Time		: 11:03:16 AM
+Date		: 2/21/2009
+Computer	: K5FR-GW32
+Error		: The port is closed.
+Stack Trace	: at System.IO.Ports.SerialPort.Write(String text)
+   at DataDecoder.Setup.sp_CATRxEvent(Object source, SerialRXEvent e) in C:\Documents and Settings\Owner\Desktop\Repos_DDUtil 2008\Source\Setup.cs:line 6707
+-------------------------------------------------------------------
+Source		: System
+Method		: Write
+Time		: 11:03:16 AM
+Date		: 2/21/2009
+Computer	: K5FR-GW32
+Error		: The port is closed.
+Stack Trace	: at System.IO.Ports.SerialPort.Write(String text)
+   at DataDecoder.Setup.sp_CATRxEvent(Object source, SerialRXEvent e) in C:\Documents and Settings\Owner\Desktop\Repos_DDUtil 2008\Source\Setup.cs:line 6707
+-------------------------------------------------------------------
+Source		: System
+Method		: Write
+Time		: 11:03:17 AM
+Date		: 2/21/2009
+Computer	: K5FR-GW32
+Error		: The port is closed.
+Stack Trace	: at System.IO.Ports.SerialPort.Write(String text)
+   at DataDecoder.Setup.sp_CATRxEvent(Object source, SerialRXEvent e) in C:\Documents and Settings\Owner\Desktop\Repos_DDUtil 2008\Source\Setup.cs:line 6707
+-------------------------------------------------------------------
+Source		: System
+Method		: Write
+Time		: 11:03:17 AM
+Date		: 2/21/2009
+Computer	: K5FR-GW32
+Error		: The port is closed.
+Stack Trace	: at System.IO.Ports.SerialPort.Write(String text)
+   at DataDecoder.Setup.sp_CATRxEvent(Object source, SerialRXEvent e) in C:\Documents and Settings\Owner\Desktop\Repos_DDUtil 2008\Source\Setup.cs:line 6707
+-------------------------------------------------------------------
+Source		: System
+Method		: Write
+Time		: 11:03:17 AM
+Date		: 2/21/2009
+Computer	: K5FR-GW32
+Error		: The port is closed.
+Stack Trace	: at System.IO.Ports.SerialPort.Write(String text)
+   at DataDecoder.Setup.sp_CATRxEvent(Object source, SerialRXEvent e) in C:\Documents and Settings\Owner\Desktop\Repos_DDUtil 2008\Source\Setup.cs:line 6707
+-------------------------------------------------------------------
+Source		: System
+Method		: Write
+Time		: 11:03:17 AM
+Date		: 2/21/2009
+Computer	: K5FR-GW32
+Error		: The port is closed.
+Stack Trace	: at System.IO.Ports.SerialPort.Write(String text)
+   at DataDecoder.Setup.sp_CATRxEvent(Object source, SerialRXEvent e) in C:\Documents and Settings\Owner\Desktop\Repos_DDUtil 2008\Source\Setup.cs:line 6707
+-------------------------------------------------------------------
+Source		: System
+Method		: Write
+Time		: 11:03:17 AM
+Date		: 2/21/2009
+Computer	: K5FR-GW32
+Error		: The port is closed.
+Stack Trace	: at System.IO.Ports.SerialPort.Write(String text)
+   at DataDecoder.Setup.sp_CATRxEvent(Object source, SerialRXEvent e) in C:\Documents and Settings\Owner\Desktop\Repos_DDUtil 2008\Source\Setup.cs:line 6707
+-------------------------------------------------------------------
+Source		: System
+Method		: Write
+Time		: 11:03:18 AM
+Date		: 2/21/2009
+Computer	: K5FR-GW32
+Error		: The port is closed.
+Stack Trace	: at System.IO.Ports.SerialPort.Write(String text)
+   at DataDecoder.Setup.sp_CATRxEvent(Object source, SerialRXEvent e) in C:\Documents and Settings\Owner\Desktop\Repos_DDUtil 2008\Source\Setup.cs:line 6707
+-------------------------------------------------------------------
+Source		: System
+Method		: Write
+Time		: 11:03:18 AM
+Date		: 2/21/2009
+Computer	: K5FR-GW32
+Error		: The port is closed.
+Stack Trace	: at System.IO.Ports.SerialPort.Write(String text)
+   at DataDecoder.Setup.sp_CATRxEvent(Object source, SerialRXEvent e) in C:\Documents and Settings\Owner\Desktop\Repos_DDUtil 2008\Source\Setup.cs:line 6707
+-------------------------------------------------------------------
+Source		: System
+Method		: Write
+Time		: 11:03:18 AM
+Date		: 2/21/2009
+Computer	: K5FR-GW32
+Error		: The port is closed.
+Stack Trace	: at System.IO.Ports.SerialPort.Write(String text)
+   at DataDecoder.Setup.sp_CATRxEvent(Object source, SerialRXEvent e) in C:\Documents and Settings\Owner\Desktop\Repos_DDUtil 2008\Source\Setup.cs:line 6707
+-------------------------------------------------------------------
+Source		: System
+Method		: Write
+Time		: 11:03:18 AM
+Date		: 2/21/2009
+Computer	: K5FR-GW32
+Error		: The port is closed.
+Stack Trace	: at System.IO.Ports.SerialPort.Write(String text)
+   at DataDecoder.Setup.sp_CATRxEvent(Object source, SerialRXEvent e) in C:\Documents and Settings\Owner\Desktop\Repos_DDUtil 2008\Source\Setup.cs:line 6707
+-------------------------------------------------------------------
+Source		: System
+Method		: Write
+Time		: 11:03:19 AM
+Date		: 2/21/2009
+Computer	: K5FR-GW32
+Error		: The port is closed.
+Stack Trace	: at System.IO.Ports.SerialPort.Write(String text)
+   at DataDecoder.Setup.sp_CATRxEvent(Object source, SerialRXEvent e) in C:\Documents and Settings\Owner\Desktop\Repos_DDUtil 2008\Source\Setup.cs:line 6707
+-------------------------------------------------------------------
+Source		: System
+Method		: Write
+Time		: 11:03:19 AM
+Date		: 2/21/2009
+Computer	: K5FR-GW32
+Error		: The port is closed.
+Stack Trace	: at System.IO.Ports.SerialPort.Write(String text)
+   at DataDecoder.Setup.sp_CATRxEvent(Object source, SerialRXEvent e) in C:\Documents and Settings\Owner\Desktop\Repos_DDUtil 2008\Source\Setup.cs:line 6707
+-------------------------------------------------------------------
+Source		: System
+Method		: Write
+Time		: 11:03:19 AM
+Date		: 2/21/2009
+Computer	: K5FR-GW32
+Error		: The port is closed.
+Stack Trace	: at System.IO.Ports.SerialPort.Write(String text)
+   at DataDecoder.Setup.sp_CATRxEvent(Object source, SerialRXEvent e) in C:\Documents and Settings\Owner\Desktop\Repos_DDUtil 2008\Source\Setup.cs:line 6707
+-------------------------------------------------------------------
+Source		: System
+Method		: Write
+Time		: 11:03:20 AM
+Date		: 2/21/2009
+Computer	: K5FR-GW32
+Error		: The port is closed.
+Stack Trace	: at System.IO.Ports.SerialPort.Write(String text)
+   at DataDecoder.Setup.sp_CATRxEvent(Object source, SerialRXEvent e) in C:\Documents and Settings\Owner\Desktop\Repos_DDUtil 2008\Source\Setup.cs:line 6707
+-------------------------------------------------------------------
+Source		: System
+Method		: Write
+Time		: 11:03:20 AM
+Date		: 2/21/2009
+Computer	: K5FR-GW32
+Error		: The port is closed.
+Stack Trace	: at System.IO.Ports.SerialPort.Write(String text)
+   at DataDecoder.Setup.sp_CATRxEvent(Object source, SerialRXEvent e) in C:\Documents and Settings\Owner\Desktop\Repos_DDUtil 2008\Source\Setup.cs:line 6707
+-------------------------------------------------------------------
+Source		: System
+Method		: Write
+Time		: 11:03:20 AM
+Date		: 2/21/2009
+Computer	: K5FR-GW32
+Error		: The port is closed.
+Stack Trace	: at System.IO.Ports.SerialPort.Write(String text)
+   at DataDecoder.Setup.sp_CATRxEvent(Object source, SerialRXEvent e) in C:\Documents and Settings\Owner\Desktop\Repos_DDUtil 2008\Source\Setup.cs:line 6707
+-------------------------------------------------------------------
+Source		: System
+Method		: Write
+Time		: 11:03:20 AM
+Date		: 2/21/2009
+Computer	: K5FR-GW32
+Error		: The port is closed.
+Stack Trace	: at System.IO.Ports.SerialPort.Write(String text)
+   at DataDecoder.Setup.sp_CATRxEvent(Object source, SerialRXEvent e) in C:\Documents and Settings\Owner\Desktop\Repos_DDUtil 2008\Source\Setup.cs:line 6707
+-------------------------------------------------------------------
+Source		: System
+Method		: Write
+Time		: 11:03:21 AM
+Date		: 2/21/2009
+Computer	: K5FR-GW32
+Error		: The port is closed.
+Stack Trace	: at System.IO.Ports.SerialPort.Write(String text)
+   at DataDecoder.Setup.sp_CATRxEvent(Object source, SerialRXEvent e) in C:\Documents and Settings\Owner\Desktop\Repos_DDUtil 2008\Source\Setup.cs:line 6707
+-------------------------------------------------------------------
+Source		: System
+Method		: Write
+Time		: 11:03:21 AM
+Date		: 2/21/2009
+Computer	: K5FR-GW32
+Error		: The port is closed.
+Stack Trace	: at System.IO.Ports.SerialPort.Write(String text)
+   at DataDecoder.Setup.sp_CATRxEvent(Object source, SerialRXEvent e) in C:\Documents and Settings\Owner\Desktop\Repos_DDUtil 2008\Source\Setup.cs:line 6707
+-------------------------------------------------------------------
+Source		: System
+Method		: Write
+Time		: 11:03:21 AM
+Date		: 2/21/2009
+Computer	: K5FR-GW32
+Error		: The port is closed.
+Stack Trace	: at System.IO.Ports.SerialPort.Write(String text)
+   at DataDecoder.Setup.sp_CATRxEvent(Object source, SerialRXEvent e) in C:\Documents and Settings\Owner\Desktop\Repos_DDUtil 2008\Source\Setup.cs:line 6707
+-------------------------------------------------------------------
+Source		: System
+Method		: Write
+Time		: 11:03:21 AM
+Date		: 2/21/2009
+Computer	: K5FR-GW32
+Error		: The port is closed.
+Stack Trace	: at System.IO.Ports.SerialPort.Write(String text)
+   at DataDecoder.Setup.sp_CATRxEvent(Object source, SerialRXEvent e) in C:\Documents and Settings\Owner\Desktop\Repos_DDUtil 2008\Source\Setup.cs:line 6707
+-------------------------------------------------------------------
+Source		: System
+Method		: Write
+Time		: 11:03:22 AM
+Date		: 2/21/2009
+Computer	: K5FR-GW32
+Error		: The port is closed.
+Stack Trace	: at System.IO.Ports.SerialPort.Write(String text)
+   at DataDecoder.Setup.sp_CATRxEvent(Object source, SerialRXEvent e) in C:\Documents and Settings\Owner\Desktop\Repos_DDUtil 2008\Source\Setup.cs:line 6707
+-------------------------------------------------------------------
+Source		: System
+Method		: Write
+Time		: 11:03:22 AM
+Date		: 2/21/2009
+Computer	: K5FR-GW32
+Error		: The port is closed.
+Stack Trace	: at System.IO.Ports.SerialPort.Write(String text)
+   at DataDecoder.Setup.sp_CATRxEvent(Object source, SerialRXEvent e) in C:\Documents and Settings\Owner\Desktop\Repos_DDUtil 2008\Source\Setup.cs:line 6707
+-------------------------------------------------------------------
+Source		: System
+Method		: Write
+Time		: 11:03:22 AM
+Date		: 2/21/2009
+Computer	: K5FR-GW32
+Error		: The port is closed.
+Stack Trace	: at System.IO.Ports.SerialPort.Write(String text)
+   at DataDecoder.Setup.sp_CATRxEvent(Object source, SerialRXEvent e) in C:\Documents and Settings\Owner\Desktop\Repos_DDUtil 2008\Source\Setup.cs:line 6707
+-------------------------------------------------------------------
+Source		: System
+Method		: Write
+Time		: 11:03:22 AM
+Date		: 2/21/2009
+Computer	: K5FR-GW32
+Error		: The port is closed.
+Stack Trace	: at System.IO.Ports.SerialPort.Write(String text)
+   at DataDecoder.Setup.sp_CATRxEvent(Object source, SerialRXEvent e) in C:\Documents and Settings\Owner\Desktop\Repos_DDUtil 2008\Source\Setup.cs:line 6707
+-------------------------------------------------------------------
+Source		: System
+Method		: Write
+Time		: 11:03:23 AM
+Date		: 2/21/2009
+Computer	: K5FR-GW32
+Error		: The port is closed.
+Stack Trace	: at System.IO.Ports.SerialPort.Write(String text)
+   at DataDecoder.Setup.sp_CATRxEvent(Object source, SerialRXEvent e) in C:\Documents and Settings\Owner\Desktop\Repos_DDUtil 2008\Source\Setup.cs:line 6707
+-------------------------------------------------------------------
+Source		: System
+Method		: Write
+Time		: 11:03:23 AM
+Date		: 2/21/2009
+Computer	: K5FR-GW32
+Error		: The port is closed.
+Stack Trace	: at System.IO.Ports.SerialPort.Write(String text)
+   at DataDecoder.Setup.sp_CATRxEvent(Object source, SerialRXEvent e) in C:\Documents and Settings\Owner\Desktop\Repos_DDUtil 2008\Source\Setup.cs:line 6707
+-------------------------------------------------------------------
+Source		: System
+Method		: Write
+Time		: 11:03:23 AM
+Date		: 2/21/2009
+Computer	: K5FR-GW32
+Error		: The port is closed.
+Stack Trace	: at System.IO.Ports.SerialPort.Write(String text)
+   at DataDecoder.Setup.sp_CATRxEvent(Object source, SerialRXEvent e) in C:\Documents and Settings\Owner\Desktop\Repos_DDUtil 2008\Source\Setup.cs:line 6707
+-------------------------------------------------------------------
+Source		: System
+Method		: Write
+Time		: 11:03:23 AM
+Date		: 2/21/2009
+Computer	: K5FR-GW32
+Error		: The port is closed.
+Stack Trace	: at System.IO.Ports.SerialPort.Write(String text)
+   at DataDecoder.Setup.sp_CATRxEvent(Object source, SerialRXEvent e) in C:\Documents and Settings\Owner\Desktop\Repos_DDUtil 2008\Source\Setup.cs:line 6707
+-------------------------------------------------------------------
+Source		: System
+Method		: Write
+Time		: 11:03:23 AM
+Date		: 2/21/2009
+Computer	: K5FR-GW32
+Error		: The port is closed.
+Stack Trace	: at System.IO.Ports.SerialPort.Write(String text)
+   at DataDecoder.Setup.sp_CATRxEvent(Object source, SerialRXEvent e) in C:\Documents and Settings\Owner\Desktop\Repos_DDUtil 2008\Source\Setup.cs:line 6707
+-------------------------------------------------------------------
+Source		: System
+Method		: Write
+Time		: 11:03:24 AM
+Date		: 2/21/2009
+Computer	: K5FR-GW32
+Error		: The port is closed.
+Stack Trace	: at System.IO.Ports.SerialPort.Write(String text)
+   at DataDecoder.Setup.sp_CATRxEvent(Object source, SerialRXEvent e) in C:\Documents and Settings\Owner\Desktop\Repos_DDUtil 2008\Source\Setup.cs:line 6707
+-------------------------------------------------------------------
+Source		: System
+Method		: Write
+Time		: 11:03:24 AM
+Date		: 2/21/2009
+Computer	: K5FR-GW32
+Error		: The port is closed.
+Stack Trace	: at System.IO.Ports.SerialPort.Write(String text)
+   at DataDecoder.Setup.sp_CATRxEvent(Object source, SerialRXEvent e) in C:\Documents and Settings\Owner\Desktop\Repos_DDUtil 2008\Source\Setup.cs:line 6707
+-------------------------------------------------------------------
+Source		: System
+Method		: Write
+Time		: 11:03:24 AM
+Date		: 2/21/2009
+Computer	: K5FR-GW32
+Error		: The port is closed.
+Stack Trace	: at System.IO.Ports.SerialPort.Write(String text)
+   at DataDecoder.Setup.sp_CATRxEvent(Object source, SerialRXEvent e) in C:\Documents and Settings\Owner\Desktop\Repos_DDUtil 2008\Source\Setup.cs:line 6707
+-------------------------------------------------------------------
+Source		: System
+Method		: Write
+Time		: 11:03:25 AM
+Date		: 2/21/2009
+Computer	: K5FR-GW32
+Error		: The port is closed.
+Stack Trace	: at System.IO.Ports.SerialPort.Write(String text)
+   at DataDecoder.Setup.sp_CATRxEvent(Object source, SerialRXEvent e) in C:\Documents and Settings\Owner\Desktop\Repos_DDUtil 2008\Source\Setup.cs:line 6707
+-------------------------------------------------------------------
+Source		: System
+Method		: Write
+Time		: 11:03:25 AM
+Date		: 2/21/2009
+Computer	: K5FR-GW32
+Error		: The port is closed.
+Stack Trace	: at System.IO.Ports.SerialPort.Write(String text)
+   at DataDecoder.Setup.sp_CATRxEvent(Object source, SerialRXEvent e) in C:\Documents and Settings\Owner\Desktop\Repos_DDUtil 2008\Source\Setup.cs:line 6707
+-------------------------------------------------------------------
+Source		: System
+Method		: Write
+Time		: 11:03:25 AM
+Date		: 2/21/2009
+Computer	: K5FR-GW32
+Error		: The port is closed.
+Stack Trace	: at System.IO.Ports.SerialPort.Write(String text)
+   at DataDecoder.Setup.sp_CATRxEvent(Object source, SerialRXEvent e) in C:\Documents and Settings\Owner\Desktop\Repos_DDUtil 2008\Source\Setup.cs:line 6707
+-------------------------------------------------------------------
+Source		: System
+Method		: Write
+Time		: 11:03:25 AM
+Date		: 2/21/2009
+Computer	: K5FR-GW32
+Error		: The port is closed.
+Stack Trace	: at System.IO.Ports.SerialPort.Write(String text)
+   at DataDecoder.Setup.sp_CATRxEvent(Object source, SerialRXEvent e) in C:\Documents and Settings\Owner\Desktop\Repos_DDUtil 2008\Source\Setup.cs:line 6707
+-------------------------------------------------------------------
+Source		: System
+Method		: Write
+Time		: 11:03:26 AM
+Date		: 2/21/2009
+Computer	: K5FR-GW32
+Error		: The port is closed.
+Stack Trace	: at System.IO.Ports.SerialPort.Write(String text)
+   at DataDecoder.Setup.sp_CATRxEvent(Object source, SerialRXEvent e) in C:\Documents and Settings\Owner\Desktop\Repos_DDUtil 2008\Source\Setup.cs:line 6707
+-------------------------------------------------------------------
+Source		: System
+Method		: Write
+Time		: 11:03:26 AM
+Date		: 2/21/2009
+Computer	: K5FR-GW32
+Error		: The port is closed.
+Stack Trace	: at System.IO.Ports.SerialPort.Write(String text)
+   at DataDecoder.Setup.sp_CATRxEvent(Object source, SerialRXEvent e) in C:\Documents and Settings\Owner\Desktop\Repos_DDUtil 2008\Source\Setup.cs:line 6707
+-------------------------------------------------------------------
+Source		: System
+Method		: Write
+Time		: 11:03:26 AM
+Date		: 2/21/2009
+Computer	: K5FR-GW32
+Error		: The port is closed.
+Stack Trace	: at System.IO.Ports.SerialPort.Write(String text)
+   at DataDecoder.Setup.sp_CATRxEvent(Object source, SerialRXEvent e) in C:\Documents and Settings\Owner\Desktop\Repos_DDUtil 2008\Source\Setup.cs:line 6707
+-------------------------------------------------------------------
+Source		: System
+Method		: Write
+Time		: 11:03:26 AM
+Date		: 2/21/2009
+Computer	: K5FR-GW32
+Error		: The port is closed.
+Stack Trace	: at System.IO.Ports.SerialPort.Write(String text)
+   at DataDecoder.Setup.sp_CATRxEvent(Object source, SerialRXEvent e) in C:\Documents and Settings\Owner\Desktop\Repos_DDUtil 2008\Source\Setup.cs:line 6707
+-------------------------------------------------------------------
+Source		: System
+Method		: Write
+Time		: 11:03:27 AM
+Date		: 2/21/2009
+Computer	: K5FR-GW32
+Error		: The port is closed.
+Stack Trace	: at System.IO.Ports.SerialPort.Write(String text)
+   at DataDecoder.Setup.sp_CATRxEvent(Object source, SerialRXEvent e) in C:\Documents and Settings\Owner\Desktop\Repos_DDUtil 2008\Source\Setup.cs:line 6707
+-------------------------------------------------------------------
+Source		: System
+Method		: Write
+Time		: 11:03:27 AM
+Date		: 2/21/2009
+Computer	: K5FR-GW32
+Error		: The port is closed.
+Stack Trace	: at System.IO.Ports.SerialPort.Write(String text)
+   at DataDecoder.Setup.sp_CATRxEvent(Object source, SerialRXEvent e) in C:\Documents and Settings\Owner\Desktop\Repos_DDUtil 2008\Source\Setup.cs:line 6707
+-------------------------------------------------------------------

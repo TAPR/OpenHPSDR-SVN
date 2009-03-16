@@ -82,6 +82,7 @@ namespace DataDecoder
             this.label1 = new System.Windows.Forms.Label();
             this.chkDevice = new System.Windows.Forms.CheckBox();
             this.grpLPT = new System.Windows.Forms.GroupBox();
+            this.rbFW = new System.Windows.Forms.RadioButton();
             this.rbOther = new System.Windows.Forms.RadioButton();
             this.rb1 = new System.Windows.Forms.RadioButton();
             this.rb4 = new System.Windows.Forms.RadioButton();
@@ -869,7 +870,7 @@ namespace DataDecoder
             this.AlphaPort = new System.IO.Ports.SerialPort(this.components);
             this.PMport = new System.IO.Ports.SerialPort(this.components);
             this.RepeatPort = new System.IO.Ports.SerialPort(this.components);
-            this.rbFW = new System.Windows.Forms.RadioButton();
+            this.chkDSInvert = new System.Windows.Forms.CheckBox();
             this.tabControl.SuspendLayout();
             this.tabPorts.SuspendLayout();
             this.grpSlave.SuspendLayout();
@@ -1313,7 +1314,7 @@ namespace DataDecoder
             // 
             // groupBox5
             // 
-            this.groupBox5.Controls.Add(this.lblBCD);
+            this.groupBox5.Controls.Add(this.chkDSInvert);
             this.groupBox5.Controls.Add(this.cboDevice);
             this.groupBox5.Controls.Add(this.label1);
             this.groupBox5.Controls.Add(this.chkDevice);
@@ -1329,11 +1330,11 @@ namespace DataDecoder
             // lblBCD
             // 
             this.lblBCD.AutoSize = true;
-            this.lblBCD.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
+            this.lblBCD.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblBCD.ForeColor = System.Drawing.Color.Maroon;
-            this.lblBCD.Location = new System.Drawing.Point(22, 39);
+            this.lblBCD.Location = new System.Drawing.Point(84, 88);
             this.lblBCD.Name = "lblBCD";
-            this.lblBCD.Size = new System.Drawing.Size(13, 13);
+            this.lblBCD.Size = new System.Drawing.Size(15, 15);
             this.lblBCD.TabIndex = 26;
             this.lblBCD.Text = "0";
             // 
@@ -1363,7 +1364,7 @@ namespace DataDecoder
             // 
             this.chkDevice.AutoSize = true;
             this.chkDevice.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
-            this.chkDevice.Location = new System.Drawing.Point(23, 20);
+            this.chkDevice.Location = new System.Drawing.Point(23, 17);
             this.chkDevice.Name = "chkDevice";
             this.chkDevice.Size = new System.Drawing.Size(59, 17);
             this.chkDevice.TabIndex = 19;
@@ -1375,6 +1376,7 @@ namespace DataDecoder
             // grpLPT
             // 
             this.grpLPT.Controls.Add(this.rbFW);
+            this.grpLPT.Controls.Add(this.lblBCD);
             this.grpLPT.Controls.Add(this.rbOther);
             this.grpLPT.Controls.Add(this.rb1);
             this.grpLPT.Controls.Add(this.rb4);
@@ -1389,6 +1391,18 @@ namespace DataDecoder
             this.grpLPT.TabStop = false;
             this.grpLPT.Text = "Port Selector";
             this.toolTip1.SetToolTip(this.grpLPT, "Select Parallel Port");
+            // 
+            // rbFW
+            // 
+            this.rbFW.AutoSize = true;
+            this.rbFW.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
+            this.rbFW.Location = new System.Drawing.Point(61, 66);
+            this.rbFW.Name = "rbFW";
+            this.rbFW.Size = new System.Drawing.Size(66, 17);
+            this.rbFW.TabIndex = 28;
+            this.rbFW.Text = "FlexWire";
+            this.rbFW.UseVisualStyleBackColor = true;
+            this.rbFW.CheckedChanged += new System.EventHandler(this.grpLPT_CheckedChanged);
             // 
             // rbOther
             // 
@@ -11397,17 +11411,18 @@ namespace DataDecoder
             this.RepeatPort.WriteTimeout = 500;
             this.RepeatPort.DataReceived += new System.IO.Ports.SerialDataReceivedEventHandler(this.RepeatPort_DataReceived);
             // 
-            // rbFW
+            // chkDSInvert
             // 
-            this.rbFW.AutoSize = true;
-            this.rbFW.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
-            this.rbFW.Location = new System.Drawing.Point(61, 66);
-            this.rbFW.Name = "rbFW";
-            this.rbFW.Size = new System.Drawing.Size(66, 17);
-            this.rbFW.TabIndex = 28;
-            this.rbFW.Text = "FlexWire";
-            this.rbFW.UseVisualStyleBackColor = true;
-            this.rbFW.CheckedChanged += new System.EventHandler(this.grpLPT_CheckedChanged);
+            this.chkDSInvert.AutoSize = true;
+            this.chkDSInvert.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
+            this.chkDSInvert.Location = new System.Drawing.Point(23, 38);
+            this.chkDSInvert.Name = "chkDSInvert";
+            this.chkDSInvert.Size = new System.Drawing.Size(53, 17);
+            this.chkDSInvert.TabIndex = 27;
+            this.chkDSInvert.Text = "Invert";
+            this.toolTip1.SetToolTip(this.chkDSInvert, "Selects to output data on seleced LPT port from selected Device.");
+            this.chkDSInvert.UseVisualStyleBackColor = true;
+            this.chkDSInvert.CheckedChanged += new System.EventHandler(this.chkDSInvert_CheckedChanged);
             // 
             // Setup
             // 
@@ -12381,6 +12396,7 @@ namespace DataDecoder
         private Button button6;
         private RadioButton rbRptPal;
         private RadioButton rbFW;
+        private CheckBox chkDSInvert;
 
     }
 }
