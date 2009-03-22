@@ -1,19 +1,4 @@
-Phil Harman - VK6APH - 25 Feb 2009
-
-************************* IMPORTANT ******************************* 
-
-Altera have now released V9.0 of the programmer. If you have not used this process before
-and download the programmer from Altera for the first time then you will get V9.0.
-If you use V9.0 then you will need to replace  \81\ with \90\ in both 
-
-Program-Mercury-EPCS16.bat and Program-Penelope-EPCS4.bat
-
-and the instructions below
-
-***********************************************************************
-
- 
-
+Phil Harman - VK6APH - 22 March 2009
 
 Here are the steps requried to progam the EPCS16 on the Mercury board and EPCS4 on Penelope.
 
@@ -27,6 +12,7 @@ Here are the steps requried to progam the EPCS16 on the Mercury board and EPCS4 
 
    https://www.altera.com/support/software/download/programming/quartus2/dnl-quartus2_programmer.jsp
 
+   The latest version is V9.0
    Install in the default directory. If you install in a different directory then edit
    Program-Mercury-EPCS16.bat and Program-Penelope-EPCS4.bat to reflect the change. 
 
@@ -57,7 +43,7 @@ Here are the steps requried to progam the EPCS16 on the Mercury board and EPCS4 
 
    C:/altera/81/qprogrammer/drivers/usb-blaster
 
-   The Wizard will then install altera USB-Blaster"
+   The Wizard will then install altera USB-Blaster
 
 
    Check that the drivers have installed correctly by looking in 
@@ -76,11 +62,13 @@ Here are the steps requried to progam the EPCS16 on the Mercury board and EPCS4 
    The board to be programmed MUST be closest to the power connector and the Ozy board in the NEXT slot.
    Turn the power on to your Atlas bus.  
 
-6. To program Mercury run the batch file Program-Mercury-EPCS16.bat, select which version of Mercury code you wish to load
-   and look at the output, there should be no errors. It takes approximately 1 minute to load the EPCS16.
+6. To program Mercury run the batch file Program-Mercury-EPCS16.bat, select which version of the Altera Quartus 
+   programmer code you are using and the Mercury code you wish to load and look at the output, there should be no errors.
+   It takes approximately 1 minute to load the EPCS16.
 
-   To program Penelope run the batch file Program-Penelope-EPCS4.bat, select which version of Penelope code you wish to load
-   and look at the output, there should be no errors. It takes approximately 15 seconds to load the EPCS4.
+   To program Penelope run the batch file Program-Penelope-EPCS4.bat, select which version of the Altera Quartus 
+   programmer code you are using and the Penelope code you wish to load and look at the output, there should be no errors.
+   It takes approximately 15 seconds to load the EPCS4.
 
 7. Power cycle the supply to the Atlas bus. 
 
