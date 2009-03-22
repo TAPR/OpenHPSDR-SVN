@@ -6,7 +6,7 @@ ECHO.
 msecsleep 3000
 loadFPGA.exe 0xfffe 0x7 usb_blaster.rbf
 ECHO.
-sleep 3000
+msecsleep 3000
 loadFW.exe  0xfffe  0x7 std.hex
 ECHO.
 msecsleep 3000
