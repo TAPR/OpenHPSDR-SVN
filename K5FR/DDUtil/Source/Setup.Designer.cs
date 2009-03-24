@@ -77,12 +77,13 @@ namespace DataDecoder
             this.btnPortNum = new System.Windows.Forms.Button();
             this.label7 = new System.Windows.Forms.Label();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
-            this.lblBCD = new System.Windows.Forms.Label();
+            this.chkDSInvert = new System.Windows.Forms.CheckBox();
             this.cboDevice = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
             this.chkDevice = new System.Windows.Forms.CheckBox();
             this.grpLPT = new System.Windows.Forms.GroupBox();
             this.rbFW = new System.Windows.Forms.RadioButton();
+            this.lblBCD = new System.Windows.Forms.Label();
             this.rbOther = new System.Windows.Forms.RadioButton();
             this.rb1 = new System.Windows.Forms.RadioButton();
             this.rb4 = new System.Windows.Forms.RadioButton();
@@ -418,6 +419,8 @@ namespace DataDecoder
             this.btnLP = new System.Windows.Forms.Button();
             this.txtSP = new System.Windows.Forms.TextBox();
             this.tabExtCtrl = new System.Windows.Forms.TabPage();
+            this.chkFWb = new System.Windows.Forms.CheckBox();
+            this.chkFWa = new System.Windows.Forms.CheckBox();
             this.chkInvertB = new System.Windows.Forms.CheckBox();
             this.chkInvertA = new System.Windows.Forms.CheckBox();
             this.label137 = new System.Windows.Forms.Label();
@@ -870,7 +873,9 @@ namespace DataDecoder
             this.AlphaPort = new System.IO.Ports.SerialPort(this.components);
             this.PMport = new System.IO.Ports.SerialPort(this.components);
             this.RepeatPort = new System.IO.Ports.SerialPort(this.components);
-            this.chkDSInvert = new System.Windows.Forms.CheckBox();
+            this.grpPTT = new System.Windows.Forms.GroupBox();
+            this.btnByp = new System.Windows.Forms.Button();
+            this.autoDriveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tabControl.SuspendLayout();
             this.tabPorts.SuspendLayout();
             this.grpSlave.SuspendLayout();
@@ -933,6 +938,7 @@ namespace DataDecoder
             this.contextMenuStrip1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
+            this.grpPTT.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl
@@ -1327,16 +1333,18 @@ namespace DataDecoder
             this.groupBox5.Text = "Data Signals";
             this.toolTip1.SetToolTip(this.groupBox5, "Right-Click for Options");
             // 
-            // lblBCD
+            // chkDSInvert
             // 
-            this.lblBCD.AutoSize = true;
-            this.lblBCD.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblBCD.ForeColor = System.Drawing.Color.Maroon;
-            this.lblBCD.Location = new System.Drawing.Point(84, 88);
-            this.lblBCD.Name = "lblBCD";
-            this.lblBCD.Size = new System.Drawing.Size(15, 15);
-            this.lblBCD.TabIndex = 26;
-            this.lblBCD.Text = "0";
+            this.chkDSInvert.AutoSize = true;
+            this.chkDSInvert.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
+            this.chkDSInvert.Location = new System.Drawing.Point(23, 38);
+            this.chkDSInvert.Name = "chkDSInvert";
+            this.chkDSInvert.Size = new System.Drawing.Size(53, 17);
+            this.chkDSInvert.TabIndex = 27;
+            this.chkDSInvert.Text = "Invert";
+            this.toolTip1.SetToolTip(this.chkDSInvert, "Selects to output BCD data Inverted on seleced port.");
+            this.chkDSInvert.UseVisualStyleBackColor = true;
+            this.chkDSInvert.CheckedChanged += new System.EventHandler(this.chkDSInvert_CheckedChanged);
             // 
             // cboDevice
             // 
@@ -1403,6 +1411,17 @@ namespace DataDecoder
             this.rbFW.Text = "FlexWire";
             this.rbFW.UseVisualStyleBackColor = true;
             this.rbFW.CheckedChanged += new System.EventHandler(this.grpLPT_CheckedChanged);
+            // 
+            // lblBCD
+            // 
+            this.lblBCD.AutoSize = true;
+            this.lblBCD.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblBCD.ForeColor = System.Drawing.Color.Maroon;
+            this.lblBCD.Location = new System.Drawing.Point(84, 88);
+            this.lblBCD.Name = "lblBCD";
+            this.lblBCD.Size = new System.Drawing.Size(14, 15);
+            this.lblBCD.TabIndex = 26;
+            this.lblBCD.Text = "0";
             // 
             // rbOther
             // 
@@ -3000,6 +3019,7 @@ namespace DataDecoder
             // 
             // tabAmp
             // 
+            this.tabAmp.Controls.Add(this.grpPTT);
             this.tabAmp.Controls.Add(this.groupBox13);
             this.tabAmp.Controls.Add(this.grpPro);
             this.tabAmp.Controls.Add(this.grpAmpBand);
@@ -6092,6 +6112,8 @@ namespace DataDecoder
             // 
             // tabExtCtrl
             // 
+            this.tabExtCtrl.Controls.Add(this.chkFWb);
+            this.tabExtCtrl.Controls.Add(this.chkFWa);
             this.tabExtCtrl.Controls.Add(this.chkInvertB);
             this.tabExtCtrl.Controls.Add(this.chkInvertA);
             this.tabExtCtrl.Controls.Add(this.label137);
@@ -6115,11 +6137,38 @@ namespace DataDecoder
             this.tabExtCtrl.Text = "ExtCtrl";
             this.tabExtCtrl.UseVisualStyleBackColor = true;
             // 
+            // chkFWb
+            // 
+            this.chkFWb.AutoSize = true;
+            this.chkFWb.ForeColor = System.Drawing.Color.Green;
+            this.chkFWb.Location = new System.Drawing.Point(193, 221);
+            this.chkFWb.Name = "chkFWb";
+            this.chkFWb.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.chkFWb.Size = new System.Drawing.Size(43, 17);
+            this.chkFWb.TabIndex = 285;
+            this.chkFWb.Text = "FW";
+            this.toolTip1.SetToolTip(this.chkFWb, "Select to enable Port B output to FlexWire Adapter.");
+            this.chkFWb.UseVisualStyleBackColor = true;
+            this.chkFWb.CheckedChanged += new System.EventHandler(this.chkFWb_CheckedChanged);
+            // 
+            // chkFWa
+            // 
+            this.chkFWa.AutoSize = true;
+            this.chkFWa.ForeColor = System.Drawing.Color.Green;
+            this.chkFWa.Location = new System.Drawing.Point(186, 45);
+            this.chkFWa.Name = "chkFWa";
+            this.chkFWa.Size = new System.Drawing.Size(43, 17);
+            this.chkFWa.TabIndex = 284;
+            this.chkFWa.Text = "FW";
+            this.toolTip1.SetToolTip(this.chkFWa, "Select to enable Port A output to FlexWire Adapter.");
+            this.chkFWa.UseVisualStyleBackColor = true;
+            this.chkFWa.CheckedChanged += new System.EventHandler(this.chkFWa_CheckedChanged);
+            // 
             // chkInvertB
             // 
             this.chkInvertB.AutoSize = true;
             this.chkInvertB.ForeColor = System.Drawing.Color.Maroon;
-            this.chkInvertB.Location = new System.Drawing.Point(181, 216);
+            this.chkInvertB.Location = new System.Drawing.Point(183, 205);
             this.chkInvertB.Name = "chkInvertB";
             this.chkInvertB.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.chkInvertB.Size = new System.Drawing.Size(53, 17);
@@ -6133,7 +6182,7 @@ namespace DataDecoder
             // 
             this.chkInvertA.AutoSize = true;
             this.chkInvertA.ForeColor = System.Drawing.Color.Maroon;
-            this.chkInvertA.Location = new System.Drawing.Point(184, 44);
+            this.chkInvertA.Location = new System.Drawing.Point(186, 30);
             this.chkInvertA.Name = "chkInvertA";
             this.chkInvertA.Size = new System.Drawing.Size(53, 17);
             this.chkInvertA.TabIndex = 282;
@@ -6146,7 +6195,7 @@ namespace DataDecoder
             // 
             this.label137.AutoSize = true;
             this.label137.ForeColor = System.Drawing.Color.Navy;
-            this.label137.Location = new System.Drawing.Point(192, 138);
+            this.label137.Location = new System.Drawing.Point(194, 137);
             this.label137.Name = "label137";
             this.label137.Size = new System.Drawing.Size(32, 13);
             this.label137.TabIndex = 281;
@@ -6156,7 +6205,7 @@ namespace DataDecoder
             // 
             this.lblVHF.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lblVHF.ForeColor = System.Drawing.Color.Firebrick;
-            this.lblVHF.Location = new System.Drawing.Point(194, 153);
+            this.lblVHF.Location = new System.Drawing.Point(196, 152);
             this.lblVHF.Name = "lblVHF";
             this.lblVHF.Size = new System.Drawing.Size(30, 15);
             this.lblVHF.TabIndex = 280;
@@ -6169,7 +6218,7 @@ namespace DataDecoder
             this.label132.AutoSize = true;
             this.label132.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label132.ForeColor = System.Drawing.Color.Blue;
-            this.label132.Location = new System.Drawing.Point(182, 10);
+            this.label132.Location = new System.Drawing.Point(202, 5);
             this.label132.Name = "label132";
             this.label132.Size = new System.Drawing.Size(34, 13);
             this.label132.TabIndex = 279;
@@ -6180,7 +6229,7 @@ namespace DataDecoder
             this.label131.AutoSize = true;
             this.label131.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label131.ForeColor = System.Drawing.Color.Blue;
-            this.label131.Location = new System.Drawing.Point(199, 181);
+            this.label131.Location = new System.Drawing.Point(186, 179);
             this.label131.Name = "label131";
             this.label131.Size = new System.Drawing.Size(34, 13);
             this.label131.TabIndex = 278;
@@ -6190,12 +6239,13 @@ namespace DataDecoder
             // 
             this.chkPortB.AutoSize = true;
             this.chkPortB.ForeColor = System.Drawing.Color.Navy;
-            this.chkPortB.Location = new System.Drawing.Point(183, 199);
+            this.chkPortB.Location = new System.Drawing.Point(185, 189);
             this.chkPortB.Name = "chkPortB";
             this.chkPortB.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.chkPortB.Size = new System.Drawing.Size(51, 17);
             this.chkPortB.TabIndex = 277;
             this.chkPortB.Text = "Enab";
+            this.toolTip1.SetToolTip(this.chkPortB, "Select to enable Port B output.");
             this.chkPortB.UseVisualStyleBackColor = true;
             this.chkPortB.CheckedChanged += new System.EventHandler(this.chkPortB_CheckedChanged);
             // 
@@ -6207,9 +6257,9 @@ namespace DataDecoder
             this.btnClrPortB.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.btnClrPortB.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnClrPortB.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.btnClrPortB.Location = new System.Drawing.Point(191, 277);
+            this.btnClrPortB.Location = new System.Drawing.Point(193, 283);
             this.btnClrPortB.Name = "btnClrPortB";
-            this.btnClrPortB.Size = new System.Drawing.Size(35, 19);
+            this.btnClrPortB.Size = new System.Drawing.Size(35, 15);
             this.btnClrPortB.TabIndex = 276;
             this.btnClrPortB.Text = "Clear";
             this.toolTip1.SetToolTip(this.btnClrPortB, "Clears all Port B bits");
@@ -6224,9 +6274,9 @@ namespace DataDecoder
             this.btnClrPortA.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.btnClrPortA.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnClrPortA.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.btnClrPortA.Location = new System.Drawing.Point(192, 105);
+            this.btnClrPortA.Location = new System.Drawing.Point(194, 106);
             this.btnClrPortA.Name = "btnClrPortA";
-            this.btnClrPortA.Size = new System.Drawing.Size(35, 19);
+            this.btnClrPortA.Size = new System.Drawing.Size(35, 15);
             this.btnClrPortA.TabIndex = 275;
             this.btnClrPortA.Text = "Clear";
             this.toolTip1.SetToolTip(this.btnClrPortA, "Clears all Port A bits");
@@ -6390,7 +6440,7 @@ namespace DataDecoder
             this.grpPortB.Controls.Add(this.label128);
             this.grpPortB.Controls.Add(this.label130);
             this.grpPortB.ForeColor = System.Drawing.Color.Blue;
-            this.grpPortB.Location = new System.Drawing.Point(239, 6);
+            this.grpPortB.Location = new System.Drawing.Point(247, 6);
             this.grpPortB.Name = "grpPortB";
             this.grpPortB.Size = new System.Drawing.Size(174, 292);
             this.grpPortB.TabIndex = 1;
@@ -8222,7 +8272,7 @@ namespace DataDecoder
             this.grpPortA.Controls.Add(this.label82);
             this.grpPortA.Controls.Add(this.label81);
             this.grpPortA.ForeColor = System.Drawing.Color.Blue;
-            this.grpPortA.Location = new System.Drawing.Point(5, 6);
+            this.grpPortA.Location = new System.Drawing.Point(2, 6);
             this.grpPortA.Name = "grpPortA";
             this.grpPortA.Size = new System.Drawing.Size(175, 292);
             this.grpPortA.TabIndex = 0;
@@ -9901,11 +9951,12 @@ namespace DataDecoder
             // 
             this.chkPortA.AutoSize = true;
             this.chkPortA.ForeColor = System.Drawing.Color.Navy;
-            this.chkPortA.Location = new System.Drawing.Point(184, 27);
+            this.chkPortA.Location = new System.Drawing.Point(186, 15);
             this.chkPortA.Name = "chkPortA";
             this.chkPortA.Size = new System.Drawing.Size(51, 17);
             this.chkPortA.TabIndex = 2;
             this.chkPortA.Text = "Enab";
+            this.toolTip1.SetToolTip(this.chkPortA, "Select to enable Port A output.");
             this.chkPortA.UseVisualStyleBackColor = true;
             this.chkPortA.CheckedChanged += new System.EventHandler(this.chkPortA_CheckedChanged);
             // 
@@ -9913,19 +9964,19 @@ namespace DataDecoder
             // 
             this.txtPortA.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.txtPortA.Enabled = false;
-            this.txtPortA.Location = new System.Drawing.Point(189, 80);
+            this.txtPortA.Location = new System.Drawing.Point(191, 81);
             this.txtPortA.Name = "txtPortA";
             this.txtPortA.Size = new System.Drawing.Size(40, 20);
             this.txtPortA.TabIndex = 136;
             this.txtPortA.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.toolTip1.SetToolTip(this.txtPortA, "Enter the port address (decimal).");
+            this.toolTip1.SetToolTip(this.txtPortA, "Enter the port address (decimal) or FW for FlexWire.");
             this.txtPortA.TextChanged += new System.EventHandler(this.txtPortA_TextChanged);
             // 
             // label103
             // 
             this.label103.AutoSize = true;
             this.label103.ForeColor = System.Drawing.Color.Navy;
-            this.label103.Location = new System.Drawing.Point(191, 64);
+            this.label103.Location = new System.Drawing.Point(193, 67);
             this.label103.Name = "label103";
             this.label103.Size = new System.Drawing.Size(36, 13);
             this.label103.TabIndex = 135;
@@ -9935,19 +9986,19 @@ namespace DataDecoder
             // 
             this.txtPortB.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.txtPortB.Enabled = false;
-            this.txtPortB.Location = new System.Drawing.Point(188, 251);
+            this.txtPortB.Location = new System.Drawing.Point(190, 257);
             this.txtPortB.Name = "txtPortB";
             this.txtPortB.Size = new System.Drawing.Size(40, 20);
             this.txtPortB.TabIndex = 274;
             this.txtPortB.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.toolTip1.SetToolTip(this.txtPortB, "Enter the port address (decimal).");
+            this.toolTip1.SetToolTip(this.txtPortB, "Enter the port address (decimal) or FW for FlexWire.");
             this.txtPortB.TextChanged += new System.EventHandler(this.txtPortB_TextChanged);
             // 
             // label106
             // 
             this.label106.AutoSize = true;
             this.label106.ForeColor = System.Drawing.Color.Navy;
-            this.label106.Location = new System.Drawing.Point(190, 235);
+            this.label106.Location = new System.Drawing.Point(192, 243);
             this.label106.Name = "label106";
             this.label106.Size = new System.Drawing.Size(36, 13);
             this.label106.TabIndex = 273;
@@ -10048,7 +10099,6 @@ namespace DataDecoder
             this.grpALC.Controls.Add(this.txtDrive);
             this.grpALC.Controls.Add(this.label64);
             this.grpALC.Controls.Add(this.chkAlcEnab);
-            this.grpALC.Enabled = false;
             this.grpALC.ForeColor = System.Drawing.Color.Blue;
             this.grpALC.Location = new System.Drawing.Point(155, 205);
             this.grpALC.Name = "grpALC";
@@ -11117,7 +11167,8 @@ namespace DataDecoder
             // optionsToolStripMenuItem
             // 
             this.optionsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.tubeAmpsToolStripMenuItem});
+            this.tubeAmpsToolStripMenuItem,
+            this.autoDriveToolStripMenuItem});
             this.optionsToolStripMenuItem.Name = "optionsToolStripMenuItem";
             this.optionsToolStripMenuItem.Size = new System.Drawing.Size(56, 20);
             this.optionsToolStripMenuItem.Text = "Options";
@@ -11129,13 +11180,13 @@ namespace DataDecoder
             this.alpToolStripMenuItem,
             this.alpha9500ToolStripMenuItem});
             this.tubeAmpsToolStripMenuItem.Name = "tubeAmpsToolStripMenuItem";
-            this.tubeAmpsToolStripMenuItem.Size = new System.Drawing.Size(138, 22);
+            this.tubeAmpsToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.tubeAmpsToolStripMenuItem.Text = "Tube Amps";
             // 
             // aCOM2000AToolStripMenuItem
             // 
             this.aCOM2000AToolStripMenuItem.Name = "aCOM2000AToolStripMenuItem";
-            this.aCOM2000AToolStripMenuItem.Size = new System.Drawing.Size(142, 22);
+            this.aCOM2000AToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.aCOM2000AToolStripMenuItem.Text = "Acom2000A";
             this.aCOM2000AToolStripMenuItem.ToolTipText = "Click to select this amp.";
             this.aCOM2000AToolStripMenuItem.Click += new System.EventHandler(this.ACOM2K_Click);
@@ -11143,7 +11194,7 @@ namespace DataDecoder
             // alpToolStripMenuItem
             // 
             this.alpToolStripMenuItem.Name = "alpToolStripMenuItem";
-            this.alpToolStripMenuItem.Size = new System.Drawing.Size(142, 22);
+            this.alpToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.alpToolStripMenuItem.Text = "Alpha 87A";
             this.alpToolStripMenuItem.ToolTipText = "Click to select this amp.";
             this.alpToolStripMenuItem.Click += new System.EventHandler(this.Alpha87_Click);
@@ -11151,7 +11202,7 @@ namespace DataDecoder
             // alpha9500ToolStripMenuItem
             // 
             this.alpha9500ToolStripMenuItem.Name = "alpha9500ToolStripMenuItem";
-            this.alpha9500ToolStripMenuItem.Size = new System.Drawing.Size(142, 22);
+            this.alpha9500ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.alpha9500ToolStripMenuItem.Text = "Alpha 9500";
             this.alpha9500ToolStripMenuItem.ToolTipText = "Click to select this amp.";
             this.alpha9500ToolStripMenuItem.Click += new System.EventHandler(this.Alpha95_Click);
@@ -11411,18 +11462,41 @@ namespace DataDecoder
             this.RepeatPort.WriteTimeout = 500;
             this.RepeatPort.DataReceived += new System.IO.Ports.SerialDataReceivedEventHandler(this.RepeatPort_DataReceived);
             // 
-            // chkDSInvert
+            // grpPTT
             // 
-            this.chkDSInvert.AutoSize = true;
-            this.chkDSInvert.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
-            this.chkDSInvert.Location = new System.Drawing.Point(23, 38);
-            this.chkDSInvert.Name = "chkDSInvert";
-            this.chkDSInvert.Size = new System.Drawing.Size(53, 17);
-            this.chkDSInvert.TabIndex = 27;
-            this.chkDSInvert.Text = "Invert";
-            this.toolTip1.SetToolTip(this.chkDSInvert, "Selects to output data on seleced LPT port from selected Device.");
-            this.chkDSInvert.UseVisualStyleBackColor = true;
-            this.chkDSInvert.CheckedChanged += new System.EventHandler(this.chkDSInvert_CheckedChanged);
+            this.grpPTT.Controls.Add(this.btnByp);
+            this.grpPTT.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.grpPTT.ForeColor = System.Drawing.Color.Blue;
+            this.grpPTT.Location = new System.Drawing.Point(7, 106);
+            this.grpPTT.Name = "grpPTT";
+            this.grpPTT.Size = new System.Drawing.Size(97, 57);
+            this.grpPTT.TabIndex = 111;
+            this.grpPTT.TabStop = false;
+            this.grpPTT.Text = "PTT";
+            // 
+            // btnByp
+            // 
+            this.btnByp.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnByp.BackColor = System.Drawing.SystemColors.ButtonFace;
+            this.btnByp.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.btnByp.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnByp.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnByp.ForeColor = System.Drawing.Color.Navy;
+            this.btnByp.Location = new System.Drawing.Point(15, 22);
+            this.btnByp.Name = "btnByp";
+            this.btnByp.Size = new System.Drawing.Size(68, 23);
+            this.btnByp.TabIndex = 69;
+            this.btnByp.Text = "Opr/Stby";
+            this.toolTip1.SetToolTip(this.btnByp, "Press to toggle PTT on/off");
+            this.btnByp.UseVisualStyleBackColor = false;
+            this.btnByp.Click += new System.EventHandler(this.btnByp_Click);
+            // 
+            // autoDriveToolStripMenuItem
+            // 
+            this.autoDriveToolStripMenuItem.Name = "autoDriveToolStripMenuItem";
+            this.autoDriveToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.autoDriveToolStripMenuItem.Text = "Auto Drive";
+            this.autoDriveToolStripMenuItem.Click += new System.EventHandler(this.autoDriveToolStripMenuItem_Click);
             // 
             // Setup
             // 
@@ -11566,6 +11640,7 @@ namespace DataDecoder
             this.menuStrip1.PerformLayout();
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
+            this.grpPTT.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -12397,6 +12472,11 @@ namespace DataDecoder
         private RadioButton rbRptPal;
         private RadioButton rbFW;
         private CheckBox chkDSInvert;
+        private CheckBox chkFWa;
+        private CheckBox chkFWb;
+        private GroupBox grpPTT;
+        private Button btnByp;
+        private ToolStripMenuItem autoDriveToolStripMenuItem;
 
     }
 }

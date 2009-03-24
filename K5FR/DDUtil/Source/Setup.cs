@@ -500,7 +500,8 @@ namespace DataDecoder
                 switch (str)
                 {
                     case "FW":
-                        rbFW.Checked = true; LPTnum = 0; DefaultLPT = str;
+                        rbFW.Checked = true; LPTnum = Convert.ToInt32(set.lptNum);
+                        txtPort.Text = set.lptNum; DefaultLPT = str;
                         break;
                     case "LPT1":
                         rb1.Checked = true; LPTnum = 888; DefaultLPT = str;
@@ -555,6 +556,20 @@ namespace DataDecoder
             chkSlaveRTS.Checked = set.slaveRTS;
             chkPwDTR.Checked = set.pwDTR;
             chkPwRTS.Checked = set.pwRTS;
+
+            stsTX = set.stsTX;
+            stsOper = set.stsOper;
+            if (stsOper) 
+            {
+                btnByp.BackColor = Color.LimeGreen;
+                btnByp.Text = "Operate";
+            }
+            else
+            {
+                btnByp.BackColor = Color.Yellow;
+                WriteToPort("ZZOF000;", 50);  // turn TX off
+                btnByp.Text = "Stand By";
+            }
 
             switch (set.theAmp)
             {
@@ -865,6 +880,14 @@ namespace DataDecoder
         #endregion Delegates
 
         #region Form Events
+
+        // Slave radio mode has changed.
+        private void chkModeChg_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chkModeChg.Checked) set.ModeChg = true;
+            else set.ModeChg = false;
+            set.Save();
+        }
 
         // BCD Overide check box has been changed
         private void chkOvride_CheckedChanged(object sender, EventArgs e)
@@ -1329,30 +1352,33 @@ namespace DataDecoder
         // The LPT port has changed
         private void grpLPT_CheckedChanged(object sender, EventArgs e)
         {
+            txtPort.Enabled = true;
             if (sender == rbNone)
             {
                 OutParallelPort(LPTnum, 0); LPTnum = 0; set.lptPort = "NONE";
-                chkDevice.Checked = false; txtPort.Text = LPTnum.ToString(); set.Save();
+                chkDevice.Checked = false; txtPort.Text = LPTnum.ToString(); 
             }
             else if (sender == rbOther)
-            { txtPort.Text = ""; set.lptPort = "Other"; set.Save(); }
+            { txtPort.Text = ""; set.lptPort = "Other"; }
             else if (sender == rb1)
-            { LPTnum = 888; set.lptPort = "LPT1"; txtPort.Text = LPTnum.ToString(); set.Save(); }
+            { LPTnum = 888; set.lptNum = LPTnum.ToString(); set.lptPort = "LPT1"; txtPort.Text = LPTnum.ToString(); }
             else if (sender == rb2)
-            { LPTnum = 632; set.lptPort = "LPT2"; txtPort.Text = LPTnum.ToString(); set.Save(); }
+            { LPTnum = 632; set.lptNum = LPTnum.ToString(); set.lptPort = "LPT2"; txtPort.Text = LPTnum.ToString(); }
             else if (sender == rb3)
-            { LPTnum = 636; set.lptPort = "LPT3"; txtPort.Text = LPTnum.ToString(); set.Save(); }
+            { LPTnum = 636; set.lptNum = LPTnum.ToString(); set.lptPort = "LPT3"; txtPort.Text = LPTnum.ToString(); }
             else if (sender == rb4)
-            { LPTnum = 620; set.lptPort = "LPT4"; txtPort.Text = LPTnum.ToString(); set.Save(); }
+            { LPTnum = 620; set.lptNum = LPTnum.ToString(); set.lptPort = "LPT4"; txtPort.Text = LPTnum.ToString(); }
             else if (sender == rbFW)
-            { LPTnum = 0; set.lptPort = "FW"; txtPort.Text = LPTnum.ToString();
+            { txtPort.Enabled = false; set.lptPort = "FW"; txtPort.Text = LPTnum.ToString(); }
+                //LPTnum = 0; set.lptPort = "FW"; 
             //chkPortB.Checked = false;  
-                set.Save(); }
+                
             else
             {
                 OutParallelPort(LPTnum, 0); LPTnum = 0; set.lptPort = "NONE"; rbNone.Checked = true;
-                chkDevice.Checked = false; txtPort.Text = LPTnum.ToString(); set.Save();
+                chkDevice.Checked = false; txtPort.Text = LPTnum.ToString(); 
             }
+            set.Save();
         }
         // LPT Port number changed
         private void txtPort_TextChanged(object sender, EventArgs e)
@@ -3607,13 +3633,6 @@ namespace DataDecoder
 
         }
         #endregion ALC Setup
-
-        private void chkModeChg_CheckedChanged(object sender, EventArgs e)
-        {
-            if (chkModeChg.Checked) set.ModeChg = true;
-            else set.ModeChg = false;
-            set.Save();
-        }
 
         #endregion ALC
         
@@ -6351,6 +6370,25 @@ namespace DataDecoder
                             }
                         }
                     }
+                    /*** Get TX1-3 status ***/
+                    if (rawFreq.Length > 4 && rawFreq.Substring(0, 4) == "ZZOF")
+                    {
+                        stsTX = rawFreq.Substring(4, 3);
+                        set.stsTX = stsTX; set.Save();
+                        return;
+                    }
+                    /*** Write ALC volts to window ***/
+                    if (rawFreq.Length > 4 && rawFreq.Substring(0, 4) == "ZZFW")
+                    {
+                        int alcM = int.Parse(rawFreq.Substring(6, 2), NumberStyles.HexNumber);
+                        int alcL = int.Parse(rawFreq.Substring(8, 2), NumberStyles.HexNumber);
+                        int alc = alcM << 8;
+                        double calc = alc + alcL;
+                        string var = String.Format("{0:F2}", calc / 4096 * 2.5 * 4.77);
+                        SetALC(var);
+
+                        return;
+                    }
                     /*** Write PA Temperature to window ***/
                     if (rawFreq.Length > 4 && rawFreq.Substring(0, 4) == "ZZTS")
                     {   
@@ -6383,8 +6421,8 @@ namespace DataDecoder
                         if (lastBand != band)
                         {
                             lastBand = band;
-                            
-                            if (state == "Oper" && chkAutoDrv.Checked)
+
+                            if (stsOper && chkAutoDrv.Checked)
                             {   // if the amp is in Operate mode, get the stored power setting 
                                 // from the settings file and send to the radio.
                                 switch (band)
@@ -6400,6 +6438,23 @@ namespace DataDecoder
                                     case "010": WriteToPort("ZZPC" + set.pwr9 + ";", iSleep); break;
                                 }
                             }
+                            else
+                            {
+                                switch (band)
+                                {
+                                    case "160": WriteToPort("ZZPC" + set.def1.ToString().PadLeft(3, '0') + ";", iSleep); break;
+                                    case "080": WriteToPort("ZZPC" + set.def2.ToString().PadLeft(3, '0') + ";", iSleep); break;
+                                    case "040": WriteToPort("ZZPC" + set.def3.ToString().PadLeft(3, '0') + ";", iSleep); break;
+                                    case "030": WriteToPort("ZZPC" + set.def4.ToString().PadLeft(3, '0') + ";", iSleep); break;
+                                    case "020": WriteToPort("ZZPC" + set.def5.ToString().PadLeft(3, '0') + ";", iSleep); break;
+                                    case "017": WriteToPort("ZZPC" + set.def6.ToString().PadLeft(3, '0') + ";", iSleep); break;
+                                    case "015": WriteToPort("ZZPC" + set.def7.ToString().PadLeft(3, '0') + ";", iSleep); break;
+                                    case "012": WriteToPort("ZZPC" + set.def8.ToString().PadLeft(3, '0') + ";", iSleep); break;
+                                    case "010": WriteToPort("ZZPC" + set.def9.ToString().PadLeft(3, '0') + ";", iSleep); break;
+                                }
+
+                            }
+
                             // if matrix enabled output to port
                             if (chkPortA.Checked || chkPortB.Checked)
                             {
@@ -6408,12 +6463,12 @@ namespace DataDecoder
                                     case "V00":
                                         if (chkPortA.Checked)
                                         {
-                                            if (aPort != mAdr) MatrixOutA(aPort, x2a0);
+                                            if (!chkFWa.Checked) MatrixOutA(aPort, x2a0);
                                             else { WriteFW(mAdr, cmd0, x2a0, chkInvertA.Checked); }
                                         }
                                         if (chkPortB.Checked)
                                         {
-                                            if (bPort != mAdr) MatrixOutB(bPort, x2b0);
+                                            if (!chkFWb.Checked) MatrixOutB(bPort, x2b0);
                                             else { WriteFW(mAdr, cmd1, x2b0, chkInvertB.Checked); }
                                         }
                                         SetVHF("0"); 
@@ -6421,12 +6476,12 @@ namespace DataDecoder
                                     case "V01":
                                         if (chkPortA.Checked)
                                         {
-                                            if (aPort != mAdr) MatrixOutA(aPort, x2a1);
+                                            if (!chkFWa.Checked) MatrixOutA(aPort, x2a1);
                                             else { WriteFW(mAdr, cmd0, x2a1, chkInvertA.Checked); }
                                         }
                                         if (chkPortB.Checked)
                                         {
-                                            if (bPort != mAdr) MatrixOutB(bPort, x2b1);
+                                            if (!chkFWb.Checked) MatrixOutB(bPort, x2b1);
                                             else { WriteFW(mAdr, cmd1, x2b1, chkInvertB.Checked); }
                                         }
                                         SetVHF("1");
@@ -6434,12 +6489,12 @@ namespace DataDecoder
                                     case "V02":
                                         if (chkPortA.Checked)
                                         {
-                                            if (aPort != mAdr) MatrixOutA(aPort, x2a2);
+                                            if (!chkFWa.Checked) MatrixOutA(aPort, x2a2);
                                             else { WriteFW(mAdr, cmd0, x2a2, chkInvertA.Checked); }
                                         }
                                         if (chkPortB.Checked)
                                         {
-                                            if (bPort != mAdr) MatrixOutB(bPort, x2b2);
+                                            if (!chkFWb.Checked) MatrixOutB(bPort, x2b2);
                                             else { WriteFW(mAdr, cmd1, x2b2, chkInvertB.Checked); }
                                         }
                                         SetVHF("2");
@@ -6447,12 +6502,12 @@ namespace DataDecoder
                                     case "V03":
                                         if (chkPortA.Checked)
                                         {
-                                            if (aPort != mAdr) MatrixOutA(aPort, x2a3);
+                                            if (!chkFWa.Checked) MatrixOutA(aPort, x2a3);
                                             else { WriteFW(mAdr, cmd0, x2a3, chkInvertA.Checked); }
                                         }
                                         if (chkPortB.Checked)
                                         {
-                                            if (bPort != mAdr) MatrixOutB(bPort, x2b3);
+                                            if (!chkFWb.Checked) MatrixOutB(bPort, x2b3);
                                             else { WriteFW(mAdr, cmd1, x2b3, chkInvertB.Checked); }
                                         }
                                         SetVHF("3");
@@ -6460,12 +6515,12 @@ namespace DataDecoder
                                     case "V04":
                                         if (chkPortA.Checked)
                                         {
-                                            if (aPort != mAdr) MatrixOutA(aPort, x2a4);
+                                            if (!chkFWa.Checked) MatrixOutA(aPort, x2a4);
                                             else { WriteFW(mAdr, cmd0, x2a4, chkInvertA.Checked); }
                                         }
                                         if (chkPortB.Checked)
                                         {
-                                            if (bPort != mAdr) MatrixOutB(bPort, x2b4);
+                                            if (!chkFWb.Checked) MatrixOutB(bPort, x2b4);
                                             else { WriteFW(mAdr, cmd1, x2b4, chkInvertB.Checked); }
                                         }
                                         SetVHF("4");
@@ -6473,12 +6528,12 @@ namespace DataDecoder
                                     case "V05":
                                         if (chkPortA.Checked)
                                         {
-                                            if (aPort != mAdr) MatrixOutA(aPort, x2a5);
+                                            if (!chkFWa.Checked) MatrixOutA(aPort, x2a5);
                                             else { WriteFW(mAdr, cmd0, x2a5, chkInvertA.Checked); }
                                         }
                                         if (chkPortB.Checked)
                                         {
-                                            if (bPort != mAdr) MatrixOutB(bPort, x2b5);
+                                            if (!chkFWb.Checked) MatrixOutB(bPort, x2b5);
                                             else { WriteFW(mAdr, cmd1, x2b5, chkInvertB.Checked); }
                                         }
                                         SetVHF("5");
@@ -6486,12 +6541,12 @@ namespace DataDecoder
                                     case "V06":
                                         if (chkPortA.Checked)
                                         {
-                                            if (aPort != mAdr) MatrixOutA(aPort, x2a6);
+                                            if (!chkFWa.Checked) MatrixOutA(aPort, x2a6);
                                             else { WriteFW(mAdr, cmd0, x2a6, chkInvertA.Checked); }
                                         }
                                         if (chkPortB.Checked)
                                         {
-                                            if (bPort != mAdr) MatrixOutB(bPort, x2b6);
+                                            if (!chkFWb.Checked) MatrixOutB(bPort, x2b6);
                                             else { WriteFW(mAdr, cmd1, x2b6, chkInvertB.Checked); }
                                         }
                                         SetVHF("6");
@@ -6499,12 +6554,12 @@ namespace DataDecoder
                                     case "V07":
                                         if (chkPortA.Checked)
                                         {
-                                            if (aPort != mAdr) MatrixOutA(aPort, x2a7);
+                                            if (!chkFWa.Checked) MatrixOutA(aPort, x2a7);
                                             else { WriteFW(mAdr, cmd0, x2a7, chkInvertA.Checked); }
                                         }
                                         if (chkPortB.Checked)
                                         {
-                                            if (bPort != mAdr) MatrixOutB(bPort, x2b7);
+                                            if (!chkFWb.Checked) MatrixOutB(bPort, x2b7);
                                             else { WriteFW(mAdr, cmd1, x2b7, chkInvertB.Checked); }
                                         }
                                         SetVHF("7");
@@ -6512,12 +6567,12 @@ namespace DataDecoder
                                     case "V08":
                                         if (chkPortA.Checked)
                                         {
-                                            if (aPort != mAdr) MatrixOutA(aPort, x2a8);
+                                            if (!chkFWa.Checked) MatrixOutA(aPort, x2a8);
                                             else { WriteFW(mAdr, cmd0, x2a8, chkInvertA.Checked); }
                                         }
                                         if (chkPortB.Checked)
                                         {
-                                            if (bPort != mAdr) MatrixOutB(bPort, x2b8);
+                                            if (!chkFWb.Checked) MatrixOutB(bPort, x2b8);
                                             else { WriteFW(mAdr, cmd1, x2b8, chkInvertB.Checked); }
                                         }
                                         SetVHF("8");
@@ -6525,12 +6580,12 @@ namespace DataDecoder
                                     case "V09":
                                         if (chkPortA.Checked)
                                         {
-                                            if (aPort != mAdr) MatrixOutA(aPort, x2a9);
+                                            if (!chkFWa.Checked) MatrixOutA(aPort, x2a9);
                                             else { WriteFW(mAdr, cmd0, x2a9, chkInvertA.Checked); }
                                         }
                                         if (chkPortB.Checked)
                                         {
-                                            if (bPort != mAdr) MatrixOutB(bPort, x2b9);
+                                            if (!chkFWb.Checked) MatrixOutB(bPort, x2b9);
                                             else { WriteFW(mAdr, cmd1, x2b9, chkInvertB.Checked); }
                                         }
                                         SetVHF("9");
@@ -6538,12 +6593,12 @@ namespace DataDecoder
                                     case "V10":
                                         if (chkPortA.Checked)
                                         {
-                                            if (aPort != mAdr) MatrixOutA(aPort, x2a10);
+                                            if (!chkFWa.Checked) MatrixOutA(aPort, x2a10);
                                             else { WriteFW(mAdr, cmd0, x2a10, chkInvertA.Checked); }
                                         }
                                         if (chkPortB.Checked)
                                         {
-                                            if (bPort != mAdr) MatrixOutB(bPort, x2b10);
+                                            if (!chkFWb.Checked) MatrixOutB(bPort, x2b10);
                                             else { WriteFW(mAdr, cmd1, x2b10, chkInvertB.Checked); }
                                         }
                                         SetVHF("10");
@@ -6551,12 +6606,12 @@ namespace DataDecoder
                                     case "V11":
                                         if (chkPortA.Checked)
                                         {
-                                            if (aPort != mAdr) MatrixOutA(aPort, x2a11);
+                                            if (!chkFWa.Checked) MatrixOutA(aPort, x2a11);
                                             else { WriteFW(mAdr, cmd0, x2a11, chkInvertA.Checked); }
                                         }
                                         if (chkPortB.Checked)
                                         {
-                                            if (bPort != mAdr) MatrixOutB(bPort, x2b11);
+                                            if (!chkFWb.Checked) MatrixOutB(bPort, x2b11);
                                             else { WriteFW(mAdr, cmd1, x2b11, chkInvertB.Checked); }
                                         }
                                         SetVHF("11");
@@ -6564,12 +6619,12 @@ namespace DataDecoder
                                     case "V12":
                                         if (chkPortA.Checked)
                                         {
-                                            if (aPort != mAdr) MatrixOutA(aPort, x2a12);
+                                            if (!chkFWa.Checked) MatrixOutA(aPort, x2a12);
                                             else { WriteFW(mAdr, cmd0, x2a12, chkInvertA.Checked); }
                                         }
                                         if (chkPortB.Checked)
                                         {
-                                            if (bPort != mAdr) MatrixOutB(bPort, x2b12);
+                                            if (!chkFWb.Checked) MatrixOutB(bPort, x2b12);
                                             else { WriteFW(mAdr, cmd1, x2b12, chkInvertB.Checked); }
                                         }
                                         SetVHF("12");
@@ -6577,12 +6632,12 @@ namespace DataDecoder
                                     case "V13":
                                         if (chkPortA.Checked)
                                         {
-                                            if (aPort != mAdr) MatrixOutA(aPort, x2a13);
+                                            if (!chkFWa.Checked) MatrixOutA(aPort, x2a13);
                                             else { WriteFW(mAdr, cmd0, x2a13, chkInvertA.Checked); }
                                         }
                                         if (chkPortB.Checked)
                                         {
-                                            if (bPort != mAdr) MatrixOutB(bPort, x2b13);
+                                            if (!chkFWb.Checked) MatrixOutB(bPort, x2b13);
                                             else { WriteFW(mAdr, cmd1, x2b13, chkInvertB.Checked); }
                                         }
                                         SetVHF("13");
@@ -6590,12 +6645,12 @@ namespace DataDecoder
                                     case "006":
                                         if (chkPortA.Checked)
                                         {
-                                            if (aPort != mAdr) MatrixOutA(aPort, x2a14);
+                                            if (!chkFWa.Checked) MatrixOutA(aPort, x2a14);
                                             else { WriteFW(mAdr, cmd0, x2a14, chkInvertA.Checked); }
                                         }
                                         if (chkPortB.Checked)
                                         {
-                                            if (bPort != mAdr) MatrixOutB(bPort, x2b14);
+                                            if (!chkFWb.Checked) MatrixOutB(bPort, x2b14);
                                             else { WriteFW(mAdr, cmd1, x2b14, chkInvertB.Checked); }
                                         }
                                         SetVHF("14");
@@ -6603,12 +6658,12 @@ namespace DataDecoder
                                     case "002":
                                         if (chkPortA.Checked)
                                         {
-                                            if (aPort != mAdr) MatrixOutA(aPort, x2a15);
+                                            if (!chkFWa.Checked) MatrixOutA(aPort, x2a15);
                                             else { WriteFW(mAdr, cmd0, x2a15, chkInvertA.Checked); }
                                         }
                                         if (chkPortB.Checked)
                                         {
-                                            if (bPort != mAdr) MatrixOutB(bPort, x2b15);
+                                            if (!chkFWb.Checked) MatrixOutB(bPort, x2b15);
                                             else { WriteFW(mAdr, cmd1, x2b15, chkInvertB.Checked); }
                                         }
                                         SetVHF("15");
@@ -8315,6 +8370,8 @@ namespace DataDecoder
             txtPortB.Text = set.bPortNum;
             chkInvertA.Checked = set.chkInvertA;
             chkInvertB.Checked = set.chkInvertB;
+            chkFWa.Checked = set.chkFWa;
+            chkFWb.Checked = set.chkFWb;
             //aPort = Convert.ToInt32(set.aPortNum);
             //bPort = Convert.ToInt32(set.bPortNum);
 
@@ -8803,11 +8860,13 @@ namespace DataDecoder
                 {
                     if (c.GetType() == typeof(CheckBox))
                     { c.Enabled = true; }
-                    txtPortA.Enabled = true;
-                    btnClrPortA.Enabled = true;
-                    set.chkPortA = true;
-                    X2SetUp();
                 }
+                if (!chkFWa.Checked) { txtPortA.Enabled = true; }
+                chkFWa.Enabled = true; 
+                btnClrPortA.Enabled = true;
+                set.chkPortA = true;
+                X2SetUp();
+                
             }
             else
             {
@@ -8816,6 +8875,7 @@ namespace DataDecoder
                     if (c.GetType() == typeof(CheckBox))
                     { c.Enabled = false; }
                 }
+                chkFWa.Enabled = false;
                 txtPortA.Enabled = false;
                 btnClrPortA.Enabled = false;
                 set.chkPortA = false; 
@@ -8832,7 +8892,8 @@ namespace DataDecoder
                     if (c.GetType() == typeof(CheckBox))
                     { c.Enabled = true; }
                 }
-                txtPortB.Enabled = true;
+                if (!chkFWb.Checked) { txtPortB.Enabled = true; }
+                chkFWb.Enabled = true; 
                 btnClrPortB.Enabled = true;
                 set.chkPortB = true;
                 X2SetUp();
@@ -8846,6 +8907,7 @@ namespace DataDecoder
                     if (c.GetType() == typeof(CheckBox))
                     { c.Enabled = false; }
                 }
+                chkFWb.Enabled = false;
                 txtPortB.Enabled = false;
                 btnClrPortB.Enabled = false;
                 set.chkPortB = false;
@@ -9708,12 +9770,62 @@ namespace DataDecoder
 
         private void chkDSInvert_CheckedChanged(object sender, EventArgs e)
         {
-            if (chkDSInvert.Enabled) set.DSInv = true;
+            if (chkDSInvert.Checked) set.DSInv = true;
             else set.DSInv = false;
             set.Save();
         }
 
         #endregion FlexWire
+
+        private void chkFWa_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chkFWa.Checked)
+            {
+                set.chkFWa = true; txtPortA.Enabled = false;
+            }
+            else
+            {
+                set.chkFWa = false; txtPortA.Enabled = true;
+            }
+            set.Save();
+        }
+
+        private void chkFWb_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chkFWb.Checked)
+            {
+                set.chkFWb = true; txtPortB.Enabled = false;
+            }
+            else
+            {
+                set.chkFWb = false; txtPortB.Enabled = true;
+            }
+            set.Save();
+        }
+        bool stsOper;   // 
+        string stsTX;
+        private void btnByp_Click(object sender, EventArgs e)
+        {
+            if (!stsOper)   // if amp in stand by
+            {
+                WriteToPort("ZZOF" + stsTX + ";", 50);  // turn TX on
+                stsOper = true; btnByp.BackColor = Color.LimeGreen;
+                btnByp.Text = "Operate"; set.stsOper = true;
+            }
+            else
+            {
+                WriteToPort("ZZOF;", iSleep);  // turn TX off
+                stsOper = false; btnByp.BackColor = Color.Yellow;
+                WriteToPort("ZZOF000;", 50);  // turn TX off
+                btnByp.Text = "Stand By"; set.stsOper = false;
+            }
+        }
+
+        private void autoDriveToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            AutoDrive auto = new AutoDrive();
+            auto.Show();
+        }
 
 
     }
