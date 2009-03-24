@@ -2,7 +2,7 @@
 <macroData>
   <macro>
     <Button>Test</Button>
-    <Command>DDFA0FI;</Command>
+    <Command>ZZFX948C;ZZFW95;</Command>
   </macro>
   <macro>
     <Button>20 RTTY</Button>
@@ -46,19 +46,19 @@
   </macro>
   <macro>
     <Button>North</Button>
-    <Command>DDFA18I;</Command>
+    <Command>DDFA18;</Command>
   </macro>
   <macro>
     <Button>South</Button>
-    <Command>DDFA24I;</Command>
+    <Command>DDFA24;</Command>
   </macro>
   <macro>
     <Button>East</Button>
-    <Command>DDFA03I;</Command>
+    <Command>DDFA03;</Command>
   </macro>
   <macro>
     <Button>West</Button>
-    <Command>DDFAC0I;</Command>
+    <Command>DDFAC0;</Command>
   </macro>
   <macro>
     <Button>Balanced</Button>
