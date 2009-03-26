@@ -222,7 +222,7 @@ void buildMainUI() {
     GtkWidget* label;
 
     mainWindow = gtk_window_new (GTK_WINDOW_TOPLEVEL);
-    gtk_window_set_title(mainWindow,"Gtk+ GUI for HPSDR");
+    gtk_window_set_title((GtkWindow*)mainWindow,"Gtk+ GUI for HPSDR");
     gtk_widget_modify_bg(mainWindow,GTK_STATE_NORMAL,&background);
     g_signal_connect(G_OBJECT(mainWindow),"destroy",G_CALLBACK(quit),NULL);
 
@@ -292,6 +292,10 @@ void buildMainUI() {
 
     gtk_widget_show(mainWindow);
   
+
+    // set the band
+    setBand(band);
+
     // get the display and meter running
     newSpectrumUpdate();
     newMeterUpdate();

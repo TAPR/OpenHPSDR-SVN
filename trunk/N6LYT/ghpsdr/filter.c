@@ -22,7 +22,7 @@ int filterVar2High;
 
 gint filterTimerId;
 
-int filter=filter2600;
+int filter;
 
 GtkWidget* filterFixed;
 
@@ -1023,8 +1023,6 @@ GtkWidget* buildFilterUI() {
 
     gtk_widget_set_size_request(GTK_WIDGET(filterFixed),230,140);
     gtk_widget_show(filterFixed);
-
-    setFilter(filter);
 
     return filterFixed;
 }

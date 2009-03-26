@@ -347,8 +347,6 @@ GtkWidget* buildBandUI() {
     gtk_widget_set_size_request(GTK_WIDGET(bandFixed),200,125);
     gtk_widget_show(bandFixed);
 
-    setBand(band);
-
     return bandFixed;
   
 }

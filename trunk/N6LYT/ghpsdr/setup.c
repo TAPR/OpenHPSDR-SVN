@@ -38,7 +38,7 @@ void bandscopeLowChanged(GtkSpinButton* spinButton,gpointer data);
 void setup() {
     if(setupWindow==NULL) {
         setupWindow=gtk_window_new(GTK_WINDOW_TOPLEVEL);
-        gtk_window_set_title(setupWindow,(gchar *)"Gtk+ HPSDR: setup");
+        gtk_window_set_title((GtkWindow*)setupWindow,(gchar*)"Gtk+ HPSDR: setup");
         g_signal_connect(G_OBJECT(setupWindow),"destroy",G_CALLBACK(quitSetup),NULL);
         setupFixed=gtk_fixed_new();
 
