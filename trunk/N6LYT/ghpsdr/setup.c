@@ -3,6 +3,7 @@
 //
 
 #include <gtk/gtk.h>
+#include "bandscope.h"
 #include "spectrum.h"
 
 GtkWidget* setupWindow=NULL;
@@ -20,16 +21,21 @@ GtkWidget* waterfallHighSpinButton;
 GtkWidget* waterfallLowLabel;
 GtkWidget* waterfallLowSpinButton;
 
+GtkWidget* bandscopeHighLabel;
+GtkWidget* bandscopeHighSpinButton;
+GtkWidget* bandscopeLowLabel;
+GtkWidget* bandscopeLowSpinButton;
+
 void quitSetup();
 void spectrumHighChanged(GtkSpinButton* spinButton,gpointer data);
 void spectrumLowChanged(GtkSpinButton* spinButton,gpointer data);
 void spectrumStepChanged(GtkSpinButton* spinButton,gpointer data);
 void waterfallHighChanged(GtkSpinButton* spinButton,gpointer data);
 void waterfallLowChanged(GtkSpinButton* spinButton,gpointer data);
+void bandscopeHighChanged(GtkSpinButton* spinButton,gpointer data);
+void bandscopeLowChanged(GtkSpinButton* spinButton,gpointer data);
 
 void setup() {
-fprintf(stderr,"setup\n");
-
     if(setupWindow==NULL) {
         setupWindow=gtk_window_new(GTK_WINDOW_TOPLEVEL);
         gtk_window_set_title(setupWindow,(gchar *)"Gtk+ HPSDR: setup");
@@ -85,6 +91,24 @@ fprintf(stderr,"setup\n");
         gtk_fixed_put((GtkFixed*)setupFixed,waterfallLowSpinButton,150,140);
 
         // add bandscope controls
+        bandscopeHighLabel=gtk_label_new("Bandscope High");
+        gtk_widget_show(bandscopeHighLabel);
+        gtk_fixed_put((GtkFixed*)setupFixed,bandscopeHighLabel,10,180);
+        bandscopeHighSpinButton=gtk_spin_button_new_with_range(-200,200,10);
+        gtk_spin_button_set_value((GtkSpinButton*)bandscopeHighSpinButton,(double)bandscopeMAX);
+        g_signal_connect(G_OBJECT(bandscopeHighSpinButton),"value-changed",G_CALLBACK(bandscopeHighChanged),NULL);
+        gtk_widget_show(bandscopeHighSpinButton);
+        gtk_fixed_put((GtkFixed*)setupFixed,bandscopeHighSpinButton,150,180);
+
+        bandscopeLowLabel=gtk_label_new("Bandscope Low");
+        gtk_widget_show(bandscopeLowLabel);
+        gtk_fixed_put((GtkFixed*)setupFixed,bandscopeLowLabel,10,210);
+        bandscopeLowSpinButton=gtk_spin_button_new_with_range(-200,200,10);
+        gtk_spin_button_set_value((GtkSpinButton*)bandscopeLowSpinButton,(double)bandscopeMIN);
+        g_signal_connect(G_OBJECT(bandscopeLowSpinButton),"value-changed",G_CALLBACK(bandscopeLowChanged),NULL);
+        gtk_widget_show(bandscopeLowSpinButton);
+        gtk_fixed_put((GtkFixed*)setupFixed,bandscopeLowSpinButton,150,210);
+
 
         gtk_widget_set_size_request(GTK_WIDGET(setupFixed),400,400);
         gtk_widget_show(setupFixed);
@@ -115,8 +139,15 @@ void waterfallLowChanged(GtkSpinButton* spinButton,gpointer data) {
     waterfallLowThreshold=gtk_spin_button_get_value(spinButton);
 }
 
+void bandscopeHighChanged(GtkSpinButton* spinButton,gpointer data) {
+    bandscopeMAX=gtk_spin_button_get_value(spinButton);
+}
+
+void bandscopeLowChanged(GtkSpinButton* spinButton,gpointer data) {
+    bandscopeMIN=gtk_spin_button_get_value(spinButton);
+}
+
 void quitSetup() {
-fprintf(stderr,"quitSetup\n");
     gtk_widget_destroy(setupWindow);
     setupWindow=NULL;
 }

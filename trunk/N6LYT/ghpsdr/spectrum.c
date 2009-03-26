@@ -597,7 +597,6 @@ void spectrumUpdateOff() {
 }
 
 void setSpectrumMode(int mode) {
-fprintf(stderr,"setSpectrumMode %d\n",mode);
     spectrumMode=mode;
 }
 
