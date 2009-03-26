@@ -13,6 +13,13 @@
 #define spectrumWIDTH 960
 #define spectrumHEIGHT 400
 
+int spectrumMAX;
+int spectrumMIN;
+int spectrumSTEP;
+
+float waterfallHighThreshold;
+float waterfallLowThreshold;
+
 int spectrumMode;
 
 GtkWidget* newSpectrumDisplay();
