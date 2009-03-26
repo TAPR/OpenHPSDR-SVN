@@ -31,8 +31,6 @@ int ozy_get_bytes=0;
 struct ozy_ringbuffer* new_ozy_ringbuffer(int n) {
     struct ozy_ringbuffer* buffer;
 
-    /*if(debug)*/ fprintf(stderr,"new_ozy_ringbuffer: %d\n",n);
-
     buffer=malloc(sizeof(struct ozy_ringbuffer));
     if(buffer!=NULL) {
         buffer->size=n;
