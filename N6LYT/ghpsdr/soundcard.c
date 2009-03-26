@@ -3,7 +3,7 @@
 
 int soundcard=UNSUPPORTED_CARD;
 
-int sampleRate=96000;
+int sampleRate=48000;
 
 float multimeterCalibrationOffset=-25.13887f;
 float displayCalibrationOffset=-57.467f;
