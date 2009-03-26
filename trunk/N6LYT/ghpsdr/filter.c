@@ -708,46 +708,49 @@ gboolean filterLowDisplay_expose_event(GtkWidget* widget,GdkEventExpose* event) 
 
 
 void updateFilter(GtkWidget* widget) {
+    char temp[80];
     switch(filter) {
         case filterVar1:
             if(widget==buttonHighPlus) {
-                filterVar1High++;
+                filterVar1High+=10;
                 filterHigh=filterVar1High;
                 drawFilterHigh(TRUE);
             } else if(widget==buttonHighMinus) {
-                filterVar1High--;
+                filterVar1High-=10;
                 filterHigh=filterVar1High;
                 drawFilterHigh(TRUE);
             } else if(widget==buttonLowPlus) {
-                filterVar1Low++;
+                filterVar1Low+=10;
                 filterLow=filterVar1Low;
                 drawFilterLow(TRUE);
             } else if(widget==buttonLowMinus) {
-                filterVar1Low--;
+                filterVar1Low-=10;
                 filterLow=filterVar1Low;
                 drawFilterLow(TRUE);
             }
             break;
         case filterVar2:
             if(widget==buttonHighPlus) {
-                filterVar2High++;
+                filterVar2High+=10;
                 filterHigh=filterVar2High;
                 drawFilterHigh(TRUE);
             } else if(widget==buttonHighMinus) {
-                filterVar2High--;
+                filterVar2High-=10;
                 filterHigh=filterVar2High;
                 drawFilterHigh(TRUE);
             } else if(widget==buttonLowPlus) {
-                filterVar2Low++;
+                filterVar2Low+=10;
                 filterLow=filterVar2Low;
                 drawFilterLow(TRUE);
             } else if(widget==buttonLowMinus) {
-                filterVar2Low--;
+                filterVar2Low-=10;
                 filterLow=filterVar2Low;
                 drawFilterLow(TRUE);
             }
             break;
     }
+    sprintf(temp,"setFilter %d %d",filterLow,filterHigh);
+    writeCommand(temp);
 }
 
 gint filterIncrementTimer(gpointer widget) {
@@ -772,26 +775,26 @@ void filterReleasedCallback(GtkWidget* widget,gpointer data) {
 }
 
 gboolean filter_scroll_event(GtkWidget* widget,GdkEventScroll* event) {
-
+    char temp[80];
     switch(filter) {
         case filterVar1:
             if(event->direction==GDK_SCROLL_UP) {
                 if(widget==filterHighLabel || widget==filterHighDisplay) {
-                    filterVar1High++;
+                    filterVar1High+=10;
                     filterHigh=filterVar1High;
                     drawFilterHigh(TRUE);
                 } else if(widget==filterLowLabel || widget==filterLowDisplay) {
-                    filterVar1Low++;
+                    filterVar1Low+=10;
                     filterLow=filterVar1Low;
                     drawFilterLow(TRUE);
                 }
             } else {
                 if(widget==filterHighLabel || widget==filterHighDisplay) {
-                    filterVar1High--;
+                    filterVar1High-=10;
                     filterHigh=filterVar1High;
                     drawFilterHigh(TRUE);
                 } else if(widget==filterLowLabel || widget==filterLowDisplay) {
-                    filterVar1Low--;
+                    filterVar1Low-=10;
                     filterLow=filterVar1Low;
                     drawFilterLow(TRUE);
                 }
@@ -800,27 +803,29 @@ gboolean filter_scroll_event(GtkWidget* widget,GdkEventScroll* event) {
         case filterVar2:
             if(event->direction==GDK_SCROLL_UP) {
                 if(widget==filterHighLabel || widget==filterHighDisplay) {
-                    filterVar2High++;
+                    filterVar2High+=10;
                     filterHigh=filterVar1High;
                     drawFilterHigh(TRUE);
                 } else if(widget==filterLowLabel || widget==filterLowDisplay) {
-                    filterVar2Low++;
+                    filterVar2Low+=10;
                     filterLow=filterVar1Low;
                     drawFilterLow(TRUE);
                 }
             } else {
                 if(widget==filterHighLabel || widget==filterHighDisplay) {
-                    filterVar2High--;
+                    filterVar2High-=10;
                     filterHigh=filterVar1High;
                     drawFilterHigh(TRUE);
                 } else if(widget==filterLowLabel || widget==filterLowDisplay) {
-                    filterVar2Low--;
+                    filterVar2Low-=10;
                     filterLow=filterVar1Low;
                     drawFilterLow(TRUE);
                 }
             }
             break;
     }
+    sprintf(temp,"setFilter %d %d",filterLow,filterHigh);
+    writeCommand(temp);
 }
 
 GtkWidget* buildFilterUI() {

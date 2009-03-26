@@ -427,7 +427,7 @@ int main(int argc,char* argv[]) {
     dttsp_main(argc,argv);
     writeCommand("setOsc 0");
 
-    ozy_init(96000);
+    ozy_init(48000);
 
     gtk_init(&argc,&argv);
 
