@@ -32,6 +32,7 @@ void mercuryButtonCallback(GtkWidget* widget,gpointer data) {
     char command[80];
     gboolean state;
 
+fprintf(stderr,"mercuryButtonCallback\n");
     if(widget==buttonR48K) {
         R48K=TRUE;
         R96K=FALSE;
@@ -45,6 +46,7 @@ void mercuryButtonCallback(GtkWidget* widget,gpointer data) {
         sampleRate=48000;
         SetSampleRate((double)sampleRate);
         writeCommand("setOsc 0");
+fprintf(stderr,"mercuryButtonCallback: setFilter\n");
         setFilter(filter);
         setSpeed(0);
     } else if(widget==buttonR96K) {
@@ -60,6 +62,7 @@ void mercuryButtonCallback(GtkWidget* widget,gpointer data) {
         sampleRate=96000;
         SetSampleRate((double)sampleRate);
         writeCommand("setOsc 0");
+fprintf(stderr,"mercuryButtonCallback: setFilter\n");
         setFilter(filter);
         setSpeed(1);
     } else if(widget==buttonR192K) {
@@ -75,6 +78,7 @@ void mercuryButtonCallback(GtkWidget* widget,gpointer data) {
         sampleRate=192000;
         SetSampleRate((double)sampleRate);
         writeCommand("setOsc 0");
+fprintf(stderr,"mercuryButtonCallback: setFilter\n");
         setFilter(filter);
         setSpeed(2);
     } else {

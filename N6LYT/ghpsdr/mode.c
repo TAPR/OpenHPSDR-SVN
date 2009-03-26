@@ -250,7 +250,7 @@ GtkWidget* buildModeUI() {
     gtk_widget_set_size_request(GTK_WIDGET(modeFixed),100,150);
     gtk_widget_show(modeFixed);
 
-    setModeMode(mode);
+    //setModeMode(mode);
 
     return modeFixed;
   
