@@ -186,6 +186,8 @@ void meterDrawSignal() {
         gdk_draw_line(meterPixmap,gc,43+meterPeak,0,43+meterPeak,meter->allocation.height/2);
         gdk_draw_line(meterPixmap,gc,43+meterPeak-1,0,43+meterPeak-1,meter->allocation.height/2);
 
+        g_object_unref(context);
+        g_object_unref(layout);
         g_object_unref(gc);
 
         gtk_widget_queue_draw(meter);
@@ -217,9 +219,7 @@ void meterDbmDrawSignal() {
         gdk_draw_layout(GDK_DRAWABLE(dbmPixmap),gc,43,0,layout);
 
         g_object_unref(context);
-
         g_object_unref(layout);
- 
         g_object_unref(gc);
 
         gtk_widget_queue_draw(dbm);
