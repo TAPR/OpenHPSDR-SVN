@@ -5,8 +5,9 @@
 #include "command.h"
 #include "dttsp.h"
 #include "filter.h"
-#include "mercury.h"
 #include "main.h"
+#include "mercury.h"
+#include "mode.h"
 #include "property.h"
 #include "ozy.h"
 #include "soundcard.h"
@@ -45,7 +46,7 @@ void mercuryButtonCallback(GtkWidget* widget,gpointer data) {
         sampleRate=48000;
         SetSampleRate((double)sampleRate);
         writeCommand("setOsc 0");
-fprintf(stderr,"mercuryButtonCallback: setFilter\n");
+        setMode(mode);
         setFilter(filter);
         setSpeed(0);
     } else if(widget==buttonR96K) {
@@ -61,7 +62,7 @@ fprintf(stderr,"mercuryButtonCallback: setFilter\n");
         sampleRate=96000;
         SetSampleRate((double)sampleRate);
         writeCommand("setOsc 0");
-fprintf(stderr,"mercuryButtonCallback: setFilter\n");
+        setMode(mode);
         setFilter(filter);
         setSpeed(1);
     } else if(widget==buttonR192K) {
@@ -77,7 +78,7 @@ fprintf(stderr,"mercuryButtonCallback: setFilter\n");
         sampleRate=192000;
         SetSampleRate((double)sampleRate);
         writeCommand("setOsc 0");
-fprintf(stderr,"mercuryButtonCallback: setFilter\n");
+        setMode(mode);
         setFilter(filter);
         setSpeed(2);
     } else {

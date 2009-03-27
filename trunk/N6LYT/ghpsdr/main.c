@@ -45,6 +45,7 @@ GdkColor mainButtonSelected;
 GdkColor mainButtonUnselected;
 GdkColor green;
 GdkColor red;
+GdkColor grey;
 GdkColor plotColor;
 GdkColor filterColor;
 GdkColor verticalColor;
@@ -281,7 +282,7 @@ void buildMainUI() {
 
     // add the bandscope display
     gtk_widget_show(bandscopeWindow);
-    gtk_fixed_put((GtkFixed*)mainFixed,bandscopeWindow,200,spectrumHEIGHT+160);
+    gtk_fixed_put((GtkFixed*)mainFixed,bandscopeWindow,205,spectrumHEIGHT+160);
 
     gtk_widget_set_size_request(GTK_WIDGET(mainFixed),1170,spectrumHEIGHT+160+bandscopeHEIGHT);
     gtk_widget_show(mainFixed);
@@ -318,6 +319,10 @@ void initColors() {
     red.red=65535;
     red.green=0;
     red.blue=0;
+
+    grey.red=65535*64/256;
+    grey.green=65535*64/256;
+    grey.blue=65535*64/256;
 
     green.red=65535*97/256;
     green.green=65535*153/256;
