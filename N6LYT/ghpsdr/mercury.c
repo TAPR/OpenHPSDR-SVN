@@ -32,7 +32,6 @@ void mercuryButtonCallback(GtkWidget* widget,gpointer data) {
     char command[80];
     gboolean state;
 
-fprintf(stderr,"mercuryButtonCallback\n");
     if(widget==buttonR48K) {
         R48K=TRUE;
         R96K=FALSE;
