@@ -412,8 +412,6 @@ void plotSpectrum(float* samples,int height) {
 void drawWaterfall(int y,int height) {
     // get the spectrum context - just copy the window GC and modify
     GdkGC* gc;
-    PangoContext *context;
-    PangoLayout *layout;
     int i,j;
     int R,G,B;
 
@@ -423,12 +421,6 @@ void drawWaterfall(int y,int height) {
 
         /* Pointer to current pixel */
         static guchar *pix;
-
-        /* Draw a vertical red line in waterfall at detector's freq. */
-        //pix = waterfallPixels + rowStride + nChannels;
-        //pix += nChannels * (spectrumWIDTH/2);
-        //pix[0] = 0xff;
-        //pix[1] = pix[2] = 0;
 
         // shift down the lines of the waterfall
         for( i = height-2; i > 0; i-- ) {
@@ -502,7 +494,7 @@ void drawWaterfall(int y,int height) {
 
         gdk_draw_pixbuf(spectrumPixmap,gc,waterfallPixbuf,0,0,0,spectrumHEIGHT/2,spectrumWIDTH,spectrumHEIGHT/2,GDK_RGB_DITHER_NONE,0,0);
 
-//        gtk_widget_queue_draw( spectrum );
+        g_object_unref(gc);
     }
 }
 
