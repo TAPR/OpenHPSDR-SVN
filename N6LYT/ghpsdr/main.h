@@ -12,6 +12,7 @@ GdkColor mainButtonSelected;
 GdkColor mainButtonUnselected;
 GdkColor green;
 GdkColor red;
+GdkColor grey;
 GdkColor plotColor;
 GdkColor filterColor;
 GdkColor verticalColor;

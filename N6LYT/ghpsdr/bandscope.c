@@ -143,7 +143,7 @@ void drawBandscope() {
     PangoLayout *layout;
     char label[80];
 
-    int i,x;
+    int i,x,x1;
     long long f;
     float hzPerPixel;
 
@@ -162,6 +162,45 @@ void drawBandscope() {
         context = gdk_pango_context_get_for_screen (gdk_screen_get_default ());
         layout = pango_layout_new (context);
         pango_layout_set_width(layout,bandscopeWIDTH*PANGO_SCALE);
+
+
+        // show the ham bands
+        gdk_gc_set_rgb_fg_color(gc,&grey);
+
+        x=(int)(1800000.0f/hzPerPixel);
+        x1=(int)(2000000.0f/hzPerPixel);
+        gdk_draw_rectangle(bandscopePixmap,gc,TRUE,x,0,x1-x,bandscopeHEIGHT);
+        x=(int)(3500000.0f/hzPerPixel);
+        x1=(int)(4000000.0f/hzPerPixel);
+        gdk_draw_rectangle(bandscopePixmap,gc,TRUE,x,0,x1-x,bandscopeHEIGHT);
+        x=(int)(5330500.0f/hzPerPixel);
+        x1=(int)(5403500.0f/hzPerPixel);
+        gdk_draw_rectangle(bandscopePixmap,gc,TRUE,x,0,x1-x,bandscopeHEIGHT);
+        x=(int)(7000000.0f/hzPerPixel);
+        x1=(int)(7300000.0f/hzPerPixel);
+        gdk_draw_rectangle(bandscopePixmap,gc,TRUE,x,0,x1-x,bandscopeHEIGHT);
+        x=(int)(10100000.0f/hzPerPixel);
+        x1=(int)(10150000.0f/hzPerPixel);
+        gdk_draw_rectangle(bandscopePixmap,gc,TRUE,x,0,x1-x,bandscopeHEIGHT);
+        x=(int)(14000000.0f/hzPerPixel);
+        x1=(int)(14350000.0f/hzPerPixel);
+        gdk_draw_rectangle(bandscopePixmap,gc,TRUE,x,0,x1-x,bandscopeHEIGHT);
+        x=(int)(18068000.0f/hzPerPixel);
+        x1=(int)(18168000.0f/hzPerPixel);
+        gdk_draw_rectangle(bandscopePixmap,gc,TRUE,x,0,x1-x,bandscopeHEIGHT);
+        x=(int)(21000000.0f/hzPerPixel);
+        x1=(int)(21450000.0f/hzPerPixel);
+        gdk_draw_rectangle(bandscopePixmap,gc,TRUE,x,0,x1-x,bandscopeHEIGHT);
+        x=(int)(24890000.0f/hzPerPixel);
+        x1=(int)(24990000.0f/hzPerPixel);
+        gdk_draw_rectangle(bandscopePixmap,gc,TRUE,x,0,x1-x,bandscopeHEIGHT);
+        x=(int)(28000000.0f/hzPerPixel);
+        x1=(int)(29700000.0f/hzPerPixel);
+        gdk_draw_rectangle(bandscopePixmap,gc,TRUE,x,0,x1-x,bandscopeHEIGHT);
+        x=(int)(50000000.0f/hzPerPixel);
+        x1=(int)(54000000.0f/hzPerPixel);
+        gdk_draw_rectangle(bandscopePixmap,gc,TRUE,x,0,x1-x,bandscopeHEIGHT);
+        
 
         // draw the frequency markers
         for(i=5;i<(65/bandscopeZoom);i+=5) {

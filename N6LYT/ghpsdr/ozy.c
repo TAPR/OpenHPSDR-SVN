@@ -62,6 +62,7 @@ short left_tx_sample;
 short right_tx_sample;
 
 int frames=0;
+int usb_output_buffers=0;
 
 int show_software_serial_numbers=1;
 
@@ -213,6 +214,7 @@ void* ozy_ep6_ep2_io_thread(void* arg) {
 
         }
 
+        // see if we have enough to send a buffer
         if(ozy_ringbuffer_entries(ozy_output_buffer)>=(OZY_BUFFER_SIZE-8)) {
 
             output_buffer[0]=SYNC;
@@ -235,10 +237,18 @@ void* ozy_ep6_ep2_io_thread(void* arg) {
             }
 
             bytes=ozy_ringbuffer_get(ozy_output_buffer,&output_buffer[8],OZY_BUFFER_SIZE-8);
+            if(bytes!=OZY_BUFFER_SIZE-8) {
+                fprintf(stderr,"OOPS - thought there was enough for usb output but only %d\n",bytes);
+            }
 
             bytes=libusb_write_ozy(0x02,(void*)(output_buffer),OZY_BUFFER_SIZE);
             if(bytes!=OZY_BUFFER_SIZE) {
                 perror("OzyBulkWrite failed");
+            }
+
+            usb_output_buffers++;
+            if(usb_output_buffers%1000==0) {
+                fprintf(stderr,"usb_ouput_buffers=%d\n",usb_output_buffers);
             }
         }
 
