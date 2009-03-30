@@ -28,7 +28,7 @@ set_global_assignment -name DEVICE EPM240T100C5
 set_global_assignment -name TOP_LEVEL_ENTITY Test1
 set_global_assignment -name ORIGINAL_QUARTUS_VERSION 8.0
 set_global_assignment -name PROJECT_CREATION_TIME_DATE "20:08:45  NOVEMBER 06, 2008"
-set_global_assignment -name LAST_QUARTUS_VERSION 8.0
+set_global_assignment -name LAST_QUARTUS_VERSION 8.1
 set_global_assignment -name USE_GENERATED_PHYSICAL_CONSTRAINTS OFF -section_id eda_palace
 set_global_assignment -name DEVICE_FILTER_PACKAGE TQFP
 set_global_assignment -name DEVICE_FILTER_PIN_COUNT 100
@@ -56,7 +56,7 @@ set_location_assignment PIN_70 -to CBCLK
 set_location_assignment PIN_21 -to DCLK
 set_location_assignment PIN_20 -to DIN
 set_location_assignment PIN_19 -to DLD
-set_location_assignment PIN_38 -to CC
+set_location_assignment PIN_33 -to CC
 set_location_assignment PIN_68 -to CLRCLK
 set_location_assignment PIN_17 -to DDS_CLK
 set_location_assignment PIN_4 -to CSB
@@ -67,3 +67,4 @@ set_location_assignment PIN_5 -to IO_UPD
 set_global_assignment -name ADD_DEFAULT_PINS_TO_SIMULATION_OUTPUT_WAVEFORMS OFF
 set_global_assignment -name VERILOG_FILE Test1.v
 set_global_assignment -name VECTOR_WAVEFORM_FILE Test1.vwf
+set_global_assignment -name MISC_FILE "C:/HPSDR/trunk/Phoenix/CPLD/Test1.dpf"

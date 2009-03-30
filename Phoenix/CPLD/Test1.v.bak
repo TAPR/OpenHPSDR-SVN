@@ -18,6 +18,10 @@
 //  30 Nov 2008 - Only send AD9912 data when frequency changes
 //				  Drive AD9912 from external 48MHz clock
 //   1 Dec 2008 - Added QSE signals and control
+//	 4 Dec 2008 - Test code for SoftRock 
+//   6 Dec 2008 - remove freq x 4 for Mercury tests 
+//  30 Mar 2009 - Moved C&C to C24 
+
 
 
 module Test1(
@@ -32,8 +36,8 @@ module Test1(
 			  input  CC,			// C&C data from C21 for testing
 			  output reg I_CLKRX,	// QSD I clock
 			  output reg Q_CLKRX,	// QSD Q clock
-			  output I_CLKTX,		// QSE I clock
-			  output Q_CLKTX,		// QSE Q clock
+			  output reg I_CLKTX,		// QSE I clock
+			  output reg Q_CLKTX,		// QSE Q clock
 			  output reg RXOE1,		// QSD enable 
 			  output reg RXOE2,
 			  output  TXOE1,		// QSE enable 
@@ -64,27 +68,35 @@ always @ (posedge DDS_OUT)
 begin
 case (state)
 0:	begin
-	I_CLKRX <= 1'b1;
-	Q_CLKRX <= 1'b1;
-	RXOE1 <= 1'b1;
-	RXOE2 <= 1'b0;
+	//I_CLKRX <= 1'b1;
+	//Q_CLKRX <= 1'b1;
+	I_CLKTX <= 1'b1;
+	Q_CLKTX <= 1'b0;
+	//RXOE1 <= 1'b1;
+	//RXOE2 <= 1'b0;
 	state <= 1;
 	end 
 1:	begin
-	RXOE1 <= 1'b0;
-	RXOE2 <= 1'b1;
+	I_CLKTX <= 1'b1;
+	Q_CLKTX <= 1'b1;
+	//RXOE1 <= 1'b0;
+	//RXOE2 <= 1'b1;
 	state <= 2;
 	end 	
 2:	begin
-	I_CLKRX <= 1'b0;
-	Q_CLKRX <= 1'b0;
-	RXOE1 <= 1'b1;
-	RXOE2 <= 1'b0;
+	I_CLKTX <= 1'b0;
+	Q_CLKTX <= 1'b1;
+	//I_CLKRX <= 1'b0;
+	//Q_CLKRX <= 1'b0;
+	//RXOE1 <= 1'b1;
+	//RXOE2 <= 1'b0;
 	state <= 3;
 	end 
 3:	begin
-	RXOE1 <= 1'b0;
-	RXOE2 <= 1'b1;
+	I_CLKTX <= 1'b0;
+	Q_CLKTX <= 1'b0;
+	//RXOE1 <= 1'b0;
+	//RXOE2 <= 1'b1;
 	state <= 0;
 	end 
 endcase
@@ -206,7 +218,8 @@ reg [47:0] phase_word;
 always @ (negedge CLRCLK)  
 begin 
 	PTT_out <= CCdata[32]; 	    			// PTT from PC via USB
-	phase_word <= {CCdata[29:0],18'h00000};	// 32 bit AD9912 phase word x 4 & extended to 48 bits 
+	//phase_word <= {CCdata[29:0],18'h00000};	// 32 bit AD9912 phase word x 4 & extended to 48 bits 
+	phase_word <= {CCdata[31:0],16'h0000};	// 32 bit AD9912 phase word & extended to 48 bits 
 end
 
 
@@ -305,12 +318,11 @@ end
 /////////////////////////////////////////////////////////////
 
 
-assign I_CLKTX = I_CLKRX;
-assign Q_CLKTX = Q_CLKRX;
-
 // enable QSE when PTT inactive else disable
 
-assign TXOE1 = (PTT || PTT_out) ? RXOE1 : 1'b1; 
-assign TXOE2 = (PTT || PTT_out) ? RXOE2 : 1'b1; 
+//assign TXOE1 = (PTT || PTT_out) ? RXOE1 : 1'b1; 
+//assign TXOE2 = (PTT || PTT_out) ? RXOE2 : 1'b1; 
+//assign I_CLKTX = (PTT || PTT_out) ?	I_CLKRX : 1'b0;
+//assign Q_CLKTX = (PTT || PTT_out) ?	Q_CLKRX : 1'b0;
 
 endmodule

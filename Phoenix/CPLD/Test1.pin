@@ -23,7 +23,6 @@
  ---------------------------------------------------------------------------------
  -- NC            : No Connect. This pin has no internal connection to the device.
  -- DNU           : Do Not Use. This pin MUST NOT be connected.
- -- VCCPGM        : Dedicated power pin for configuration, which MUST be connected to 1.8V, 2.5V or 3.0V depending on the needs of the configuration device.
  -- VCCINT        : Dedicated power pin, which MUST be connected to VCC  (2.5V/3.3V).
  -- VCCIO         : Dedicated power pin, which MUST be connected to VCC
  --                 of its bank.
@@ -62,7 +61,7 @@
  -- Pin directions (input, output or bidir) are based on device operating in user mode.
  ---------------------------------------------------------------------------------
 
-Quartus II Version 8.0 Build 215 05/29/2008 SJ Web Edition
+Quartus II Version 8.1 Build 163 10/28/2008 SJ Web Edition
 CHIP  "Test1"  ASSIGNED TO AN: EPM240T100C5
 
 Pin Name/Usage               : Location  : Dir.   : I/O Standard      : Voltage : I/O Bank  : User Assignment
@@ -79,7 +78,7 @@ VCCIO1                       : 9         : power  :                   : 3.3V    
 GNDIO                        : 10        : gnd    :                   :         :           :                
 GNDINT                       : 11        : gnd    :                   :         :           :                
 RESERVED_INPUT               : 12        :        :                   :         : 1         :                
-VCCINT                       : 13        : power  :                   : 3.3V    :           :                
+VCCINT                       : 13        : power  :                   : 2.5V/3.3V :           :                
 RESERVED_INPUT               : 14        :        :                   :         : 1         :                
 RESERVED_INPUT               : 15        :        :                   :         : 1         :                
 RESERVED_INPUT               : 16        :        :                   :         : 1         :                
@@ -99,12 +98,12 @@ RESERVED_INPUT               : 29        :        :                   :         
 RESERVED_INPUT               : 30        :        :                   :         : 1         :                
 VCCIO1                       : 31        : power  :                   : 3.3V    : 1         :                
 GNDIO                        : 32        : gnd    :                   :         :           :                
-RESERVED_INPUT               : 33        :        :                   :         : 1         :                
+CC                           : 33        : input  : 3.3-V LVTTL       :         : 1         : Y              
 RESERVED_INPUT               : 34        :        :                   :         : 1         :                
 RESERVED_INPUT               : 35        :        :                   :         : 1         :                
 RESERVED_INPUT               : 36        :        :                   :         : 1         :                
 RESERVED_INPUT               : 37        :        :                   :         : 1         :                
-CC                           : 38        : input  : 3.3-V LVTTL       :         : 1         : Y              
+RESERVED_INPUT               : 38        :        :                   :         : 1         :                
 RESERVED_INPUT               : 39        :        :                   :         : 1         :                
 RESERVED_INPUT               : 40        :        :                   :         : 1         :                
 RESERVED_INPUT               : 41        :        :                   :         : 1         :                
@@ -129,7 +128,7 @@ VCCIO2                       : 59        : power  :                   : 3.3V    
 GNDIO                        : 60        : gnd    :                   :         :           :                
 RESERVED_INPUT               : 61        :        :                   :         : 2         :                
 RESERVED_INPUT               : 62        :        :                   :         : 2         :                
-VCCINT                       : 63        : power  :                   : 3.3V    :           :                
+VCCINT                       : 63        : power  :                   : 2.5V/3.3V :           :                
 RESERVED_INPUT               : 64        :        :                   :         : 2         :                
 GNDINT                       : 65        : gnd    :                   :         :           :                
 RESERVED_INPUT               : 66        :        :                   :         : 2         :                

@@ -1,6 +1,6 @@
 Analysis & Synthesis report for Test1
-Mon Dec 01 22:01:46 2008
-Quartus II Version 8.0 Build 215 05/29/2008 SJ Web Edition
+Mon Mar 30 21:08:00 2009
+Quartus II Version 8.1 Build 163 10/28/2008 SJ Web Edition
 
 
 ---------------------
@@ -46,84 +46,82 @@ applicable agreement for further details.
 +-----------------------------------------------------------------------+
 ; Analysis & Synthesis Summary                                          ;
 +-----------------------------+-----------------------------------------+
-; Analysis & Synthesis Status ; Successful - Mon Dec 01 22:01:46 2008   ;
-; Quartus II Version          ; 8.0 Build 215 05/29/2008 SJ Web Edition ;
+; Analysis & Synthesis Status ; Successful - Mon Mar 30 21:08:00 2009   ;
+; Quartus II Version          ; 8.1 Build 163 10/28/2008 SJ Web Edition ;
 ; Revision Name               ; Test1                                   ;
 ; Top-level Entity Name       ; Test1                                   ;
 ; Family                      ; MAX II                                  ;
-; Total logic elements        ; 262                                     ;
+; Total logic elements        ; 272                                     ;
 ; Total pins                  ; 24                                      ;
 ; Total virtual pins          ; 0                                       ;
-; Total memory bits           ; 0                                       ;
-; DSP block 9-bit elements    ; 0                                       ;
-; Total PLLs                  ; 0                                       ;
-; Total DLLs                  ; 0                                       ;
+; UFM blocks                  ; 0 / 1 ( 0 % )                           ;
 +-----------------------------+-----------------------------------------+
 
 
-+--------------------------------------------------------------------------------------------------------+
-; Analysis & Synthesis Settings                                                                          ;
-+--------------------------------------------------------------+--------------------+--------------------+
-; Option                                                       ; Setting            ; Default Value      ;
-+--------------------------------------------------------------+--------------------+--------------------+
-; Device                                                       ; EPM240T100C5       ;                    ;
-; Top-level entity name                                        ; Test1              ; Test1              ;
-; Family name                                                  ; MAX II             ; Stratix II         ;
-; Power-Up Don't Care                                          ; Off                ; On                 ;
-; Use Generated Physical Constraints File                      ; Off                ;                    ;
-; Use smart compilation                                        ; Off                ; Off                ;
-; Maximum processors allowed for parallel compilation          ; 1                  ; 1                  ;
-; Restructure Multiplexers                                     ; Auto               ; Auto               ;
-; Create Debugging Nodes for IP Cores                          ; Off                ; Off                ;
-; Preserve fewer node names                                    ; On                 ; On                 ;
-; Disable OpenCore Plus hardware evaluation                    ; Off                ; Off                ;
-; Verilog Version                                              ; Verilog_2001       ; Verilog_2001       ;
-; VHDL Version                                                 ; VHDL93             ; VHDL93             ;
-; State Machine Processing                                     ; Auto               ; Auto               ;
-; Safe State Machine                                           ; Off                ; Off                ;
-; Extract Verilog State Machines                               ; On                 ; On                 ;
-; Extract VHDL State Machines                                  ; On                 ; On                 ;
-; Ignore Verilog initial constructs                            ; Off                ; Off                ;
-; Iteration limit for constant Verilog loops                   ; 5000               ; 5000               ;
-; Iteration limit for non-constant Verilog loops               ; 250                ; 250                ;
-; Add Pass-Through Logic to Inferred RAMs                      ; On                 ; On                 ;
-; Parallel Synthesis                                           ; Off                ; Off                ;
-; NOT Gate Push-Back                                           ; On                 ; On                 ;
-; Remove Redundant Logic Cells                                 ; Off                ; Off                ;
-; Remove Duplicate Registers                                   ; On                 ; On                 ;
-; Ignore CARRY Buffers                                         ; Off                ; Off                ;
-; Ignore CASCADE Buffers                                       ; Off                ; Off                ;
-; Ignore GLOBAL Buffers                                        ; Off                ; Off                ;
-; Ignore ROW GLOBAL Buffers                                    ; Off                ; Off                ;
-; Ignore LCELL Buffers                                         ; Off                ; Off                ;
-; Ignore SOFT Buffers                                          ; On                 ; On                 ;
-; Limit AHDL Integers to 32 Bits                               ; Off                ; Off                ;
-; Optimization Technique                                       ; Balanced           ; Balanced           ;
-; Carry Chain Length                                           ; 70                 ; 70                 ;
-; Auto Carry Chains                                            ; On                 ; On                 ;
-; Auto Open-Drain Pins                                         ; On                 ; On                 ;
-; Perform WYSIWYG Primitive Resynthesis                        ; Off                ; Off                ;
-; Perform gate-level register retiming                         ; Off                ; Off                ;
-; Allow register retiming to trade off Tsu/Tco with Fmax       ; On                 ; On                 ;
-; Auto Shift Register Replacement                              ; Auto               ; Auto               ;
-; Auto Clock Enable Replacement                                ; On                 ; On                 ;
-; Allow Synchronous Control Signals                            ; On                 ; On                 ;
-; Force Use of Synchronous Clear Signals                       ; Off                ; Off                ;
-; Auto Resource Sharing                                        ; Off                ; Off                ;
-; Ignore translate_off and synthesis_off directives            ; Off                ; Off                ;
-; Show Parameter Settings Tables in Synthesis Report           ; On                 ; On                 ;
-; Ignore Maximum Fan-Out Assignments                           ; Off                ; Off                ;
-; Synchronization Register Chain Length                        ; 2                  ; 2                  ;
-; PowerPlay Power Optimization                                 ; Normal compilation ; Normal compilation ;
-; HDL message level                                            ; Level2             ; Level2             ;
-; Suppress Register Optimization Related Messages              ; Off                ; Off                ;
-; Number of Removed Registers Reported in Synthesis Report     ; 100                ; 100                ;
-; Number of Inverted Registers Reported in Synthesis Report    ; 100                ; 100                ;
-; Clock MUX Protection                                         ; On                 ; On                 ;
-; Block Design Naming                                          ; Auto               ; Auto               ;
-; Synthesis Effort                                             ; Auto               ; Auto               ;
-; Shift Register Replacement - Allow Asynchronous Clear Signal ; On                 ; On                 ;
-+--------------------------------------------------------------+--------------------+--------------------+
++----------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Settings                                                                            ;
++----------------------------------------------------------------+--------------------+--------------------+
+; Option                                                         ; Setting            ; Default Value      ;
++----------------------------------------------------------------+--------------------+--------------------+
+; Device                                                         ; EPM240T100C5       ;                    ;
+; Top-level entity name                                          ; Test1              ; Test1              ;
+; Family name                                                    ; MAX II             ; Stratix II         ;
+; Power-Up Don't Care                                            ; Off                ; On                 ;
+; Use Generated Physical Constraints File                        ; Off                ;                    ;
+; Use smart compilation                                          ; Off                ; Off                ;
+; Restructure Multiplexers                                       ; Auto               ; Auto               ;
+; Create Debugging Nodes for IP Cores                            ; Off                ; Off                ;
+; Preserve fewer node names                                      ; On                 ; On                 ;
+; Disable OpenCore Plus hardware evaluation                      ; Off                ; Off                ;
+; Verilog Version                                                ; Verilog_2001       ; Verilog_2001       ;
+; VHDL Version                                                   ; VHDL93             ; VHDL93             ;
+; State Machine Processing                                       ; Auto               ; Auto               ;
+; Safe State Machine                                             ; Off                ; Off                ;
+; Extract Verilog State Machines                                 ; On                 ; On                 ;
+; Extract VHDL State Machines                                    ; On                 ; On                 ;
+; Ignore Verilog initial constructs                              ; Off                ; Off                ;
+; Iteration limit for constant Verilog loops                     ; 5000               ; 5000               ;
+; Iteration limit for non-constant Verilog loops                 ; 250                ; 250                ;
+; Add Pass-Through Logic to Inferred RAMs                        ; On                 ; On                 ;
+; Parallel Synthesis                                             ; Off                ; Off                ;
+; NOT Gate Push-Back                                             ; On                 ; On                 ;
+; Remove Redundant Logic Cells                                   ; Off                ; Off                ;
+; Remove Duplicate Registers                                     ; On                 ; On                 ;
+; Ignore CARRY Buffers                                           ; Off                ; Off                ;
+; Ignore CASCADE Buffers                                         ; Off                ; Off                ;
+; Ignore GLOBAL Buffers                                          ; Off                ; Off                ;
+; Ignore ROW GLOBAL Buffers                                      ; Off                ; Off                ;
+; Ignore LCELL Buffers                                           ; Off                ; Off                ;
+; Ignore SOFT Buffers                                            ; On                 ; On                 ;
+; Limit AHDL Integers to 32 Bits                                 ; Off                ; Off                ;
+; Optimization Technique                                         ; Balanced           ; Balanced           ;
+; Carry Chain Length                                             ; 70                 ; 70                 ;
+; Auto Carry Chains                                              ; On                 ; On                 ;
+; Auto Open-Drain Pins                                           ; On                 ; On                 ;
+; Perform WYSIWYG Primitive Resynthesis                          ; Off                ; Off                ;
+; Perform gate-level register retiming                           ; Off                ; Off                ;
+; Allow register retiming to trade off Tsu/Tco with Fmax         ; On                 ; On                 ;
+; Auto Shift Register Replacement                                ; Auto               ; Auto               ;
+; Auto Clock Enable Replacement                                  ; On                 ; On                 ;
+; Allow Synchronous Control Signals                              ; On                 ; On                 ;
+; Force Use of Synchronous Clear Signals                         ; Off                ; Off                ;
+; Auto Resource Sharing                                          ; Off                ; Off                ;
+; Use LogicLock Constraints during Resource Balancing            ; On                 ; On                 ;
+; Ignore translate_off and synthesis_off directives              ; Off                ; Off                ;
+; Show Parameter Settings Tables in Synthesis Report             ; On                 ; On                 ;
+; Ignore Maximum Fan-Out Assignments                             ; Off                ; Off                ;
+; Synchronization Register Chain Length                          ; 2                  ; 2                  ;
+; PowerPlay Power Optimization                                   ; Normal compilation ; Normal compilation ;
+; HDL message level                                              ; Level2             ; Level2             ;
+; Suppress Register Optimization Related Messages                ; Off                ; Off                ;
+; Number of Removed Registers Reported in Synthesis Report       ; 100                ; 100                ;
+; Number of Inverted Registers Reported in Synthesis Report      ; 100                ; 100                ;
+; Clock MUX Protection                                           ; On                 ; On                 ;
+; Block Design Naming                                            ; Auto               ; Auto               ;
+; Synthesis Effort                                               ; Auto               ; Auto               ;
+; Allows Asynchronous Clear Usage For Shift Register Replacement ; On                 ; On                 ;
+; Analysis & Synthesis Message Level                             ; Medium             ; Medium             ;
++----------------------------------------------------------------+--------------------+--------------------+
 
 
 +-------------------------------------------------------------------------------------------------------------------+
@@ -140,43 +138,43 @@ applicable agreement for further details.
 +---------------------------------------------+-------+
 ; Resource                                    ; Usage ;
 +---------------------------------------------+-------+
-; Total logic elements                        ; 262   ;
-;     -- Combinational with no register       ; 90    ;
-;     -- Register only                        ; 102   ;
-;     -- Combinational with a register        ; 70    ;
+; Total logic elements                        ; 272   ;
+;     -- Combinational with no register       ; 93    ;
+;     -- Register only                        ; 107   ;
+;     -- Combinational with a register        ; 72    ;
 ;                                             ;       ;
 ; Logic element usage by number of LUT inputs ;       ;
-;     -- 4 input functions                    ; 98    ;
-;     -- 3 input functions                    ; 28    ;
-;     -- 2 input functions                    ; 25    ;
-;     -- 1 input functions                    ; 6     ;
+;     -- 4 input functions                    ; 105   ;
+;     -- 3 input functions                    ; 22    ;
+;     -- 2 input functions                    ; 30    ;
+;     -- 1 input functions                    ; 5     ;
 ;     -- 0 input functions                    ; 3     ;
 ;                                             ;       ;
 ; Logic elements by mode                      ;       ;
-;     -- normal mode                          ; 252   ;
+;     -- normal mode                          ; 262   ;
 ;     -- arithmetic mode                      ; 10    ;
 ;     -- qfbk mode                            ; 0     ;
 ;     -- register cascade mode                ; 0     ;
 ;     -- synchronous clear/load mode          ; 12    ;
 ;     -- asynchronous clear/load mode         ; 0     ;
 ;                                             ;       ;
-; Total registers                             ; 172   ;
+; Total registers                             ; 179   ;
 ; Total logic cells in carry chains           ; 12    ;
 ; I/O pins                                    ; 24    ;
 ; Maximum fan-out node                        ; CBCLK ;
-; Maximum fan-out                             ; 134   ;
-; Total fan-out                               ; 914   ;
-; Average fan-out                             ; 3.20  ;
+; Maximum fan-out                             ; 140   ;
+; Total fan-out                               ; 943   ;
+; Average fan-out                             ; 3.19  ;
 +---------------------------------------------+-------+
 
 
-+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-; Analysis & Synthesis Resource Utilization by Entity                                                                                                                                                                                                                    ;
-+----------------------------+-------------+--------------+-------------+--------------+---------+-----------+-----------+------+--------------+--------------+-------------------+------------------+-----------------+------------+---------------------+--------------+
-; Compilation Hierarchy Node ; Logic Cells ; LC Registers ; Memory Bits ; DSP Elements ; DSP 9x9 ; DSP 18x18 ; DSP 36x36 ; Pins ; Virtual Pins ; LUT-Only LCs ; Register-Only LCs ; LUT/Register LCs ; Carry Chain LCs ; Packed LCs ; Full Hierarchy Name ; Library Name ;
-+----------------------------+-------------+--------------+-------------+--------------+---------+-----------+-----------+------+--------------+--------------+-------------------+------------------+-----------------+------------+---------------------+--------------+
-; |Test1                     ; 262 (262)   ; 172          ; 0           ; 0            ; 0       ; 0         ; 0         ; 24   ; 0            ; 90 (90)      ; 102 (102)         ; 70 (70)          ; 12 (12)         ; 0 (0)      ; |Test1              ; work         ;
-+----------------------------+-------------+--------------+-------------+--------------+---------+-----------+-----------+------+--------------+--------------+-------------------+------------------+-----------------+------------+---------------------+--------------+
++----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Resource Utilization by Entity                                                                                                                                                                  ;
++----------------------------+-------------+--------------+------------+------+--------------+--------------+-------------------+------------------+-----------------+------------+---------------------+--------------+
+; Compilation Hierarchy Node ; Logic Cells ; LC Registers ; UFM Blocks ; Pins ; Virtual Pins ; LUT-Only LCs ; Register-Only LCs ; LUT/Register LCs ; Carry Chain LCs ; Packed LCs ; Full Hierarchy Name ; Library Name ;
++----------------------------+-------------+--------------+------------+------+--------------+--------------+-------------------+------------------+-----------------+------------+---------------------+--------------+
+; |Test1                     ; 272 (272)   ; 179          ; 0          ; 24   ; 0            ; 93 (93)      ; 107 (107)         ; 72 (72)          ; 12 (12)         ; 0 (0)      ; |Test1              ; work         ;
++----------------------------+-------------+--------------+------------+------+--------------+--------------+-------------------+------------------+-----------------+------------+---------------------+--------------+
 Note: For table entries with two numbers listed, the numbers in parentheses indicate the number of resources of the given type used by the specific entity alone. The numbers listed outside of parentheses indicate the total resources of the given type used by the specific entity and all of its sub-entities in the hierarchy.
 
 
@@ -245,10 +243,10 @@ Encoding Type:  One-Hot
 +-------------------------------------------+----------------------------------------+
 ; phase_word[0]                             ; Stuck at GND due to stuck port data_in ;
 ; DDS_setup[0..2,4..22,24,26..28,30..37,39] ; Stuck at GND due to stuck port data_in ;
-; phase_word[1..17]                         ; Stuck at GND due to stuck port data_in ;
+; phase_word[1..15]                         ; Stuck at GND due to stuck port data_in ;
 ; previous_DAC_data[11]                     ; Stuck at GND due to stuck port data_in ;
-; prev_phase_word[0..17]                    ; Stuck at GND due to stuck port data_in ;
-; DDS_data[0..17,50,52,54,57..60,63]        ; Stuck at GND due to stuck port data_in ;
+; prev_phase_word[0..15]                    ; Stuck at GND due to stuck port data_in ;
+; DDS_data[0..15,50,52,54,57..60,63]        ; Stuck at GND due to stuck port data_in ;
 ; previous_DAC_data[10]                     ; Merged with previous_DAC_data[9]       ;
 ; previous_DAC_data[9]                      ; Merged with previous_DAC_data[8]       ;
 ; previous_DAC_data[8]                      ; Merged with previous_DAC_data[7]       ;
@@ -270,7 +268,6 @@ Encoding Type:  One-Hot
 ; DDS_data[53]                              ; Merged with DDS_data[51]               ;
 ; DDS_data[51]                              ; Merged with DDS_data[49]               ;
 ; DDS_data[49]                              ; Merged with DDS_data[48]               ;
-; I_CLKRX~reg0                              ; Merged with Q_CLKRX~reg0               ;
 ; AD9912~8                                  ; Lost fanout                            ;
 ; AD9912~9                                  ; Lost fanout                            ;
 ; AD9912~10                                 ; Lost fanout                            ;
@@ -280,7 +277,7 @@ Encoding Type:  One-Hot
 ; state~7                                   ; Lost fanout                            ;
 ; state~8                                   ; Lost fanout                            ;
 ; CC_state.00                               ; Lost fanout                            ;
-; Total Number of Removed Registers = 129   ;                                        ;
+; Total Number of Removed Registers = 122   ;                                        ;
 +-------------------------------------------+----------------------------------------+
 
 
@@ -321,10 +318,6 @@ Encoding Type:  One-Hot
 ;                ; due to stuck port data_in ;                                        ;
 ; phase_word[15] ; Stuck at GND              ; prev_phase_word[15], DDS_data[15]      ;
 ;                ; due to stuck port data_in ;                                        ;
-; phase_word[16] ; Stuck at GND              ; prev_phase_word[16], DDS_data[16]      ;
-;                ; due to stuck port data_in ;                                        ;
-; phase_word[17] ; Stuck at GND              ; prev_phase_word[17], DDS_data[17]      ;
-;                ; due to stuck port data_in ;                                        ;
 +----------------+---------------------------+----------------------------------------+
 
 
@@ -333,12 +326,12 @@ Encoding Type:  One-Hot
 +----------------------------------------------+-------+
 ; Statistic                                    ; Value ;
 +----------------------------------------------+-------+
-; Total registers                              ; 172   ;
+; Total registers                              ; 179   ;
 ; Number of registers using Synchronous Clear  ; 0     ;
 ; Number of registers using Synchronous Load   ; 12    ;
 ; Number of registers using Asynchronous Clear ; 0     ;
 ; Number of registers using Asynchronous Load  ; 0     ;
-; Number of registers using Clock Enable       ; 73    ;
+; Number of registers using Clock Enable       ; 77    ;
 ; Number of registers using Preset             ; 0     ;
 +----------------------------------------------+-------+
 
@@ -359,198 +352,28 @@ Encoding Type:  One-Hot
 +-------------------------------+
 Info: *******************************************************************
 Info: Running Quartus II Analysis & Synthesis
-    Info: Version 8.0 Build 215 05/29/2008 SJ Web Edition
-    Info: Processing started: Mon Dec 01 22:01:44 2008
+    Info: Version 8.1 Build 163 10/28/2008 SJ Web Edition
+    Info: Processing started: Mon Mar 30 21:07:59 2009
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off Phoenix -c Test1
 Info: Found 1 design units, including 1 entities, in source file Test1.v
     Info: Found entity 1: Test1
 Info: Elaborating entity "Test1" for the top level hierarchy
-Warning (10034): Output port "DDS_CLK" at Test1.v(26) has no driver
-Warning (14130): Reduced register "phase_word[0]" with stuck data_in port to stuck value GND
-Warning (14130): Reduced register "DDS_setup[0]" with stuck data_in port to stuck value GND
-Warning (14130): Reduced register "DDS_setup[1]" with stuck data_in port to stuck value GND
-Warning (14130): Reduced register "DDS_setup[2]" with stuck data_in port to stuck value GND
-Warning (14130): Reduced register "DDS_setup[4]" with stuck data_in port to stuck value GND
-Warning (14130): Reduced register "DDS_setup[5]" with stuck data_in port to stuck value GND
-Warning (14130): Reduced register "DDS_setup[6]" with stuck data_in port to stuck value GND
-Warning (14130): Reduced register "DDS_setup[7]" with stuck data_in port to stuck value GND
-Warning (14130): Reduced register "DDS_setup[8]" with stuck data_in port to stuck value GND
-Warning (14130): Reduced register "DDS_setup[9]" with stuck data_in port to stuck value GND
-Warning (14130): Reduced register "DDS_setup[10]" with stuck data_in port to stuck value GND
-Warning (14130): Reduced register "DDS_setup[11]" with stuck data_in port to stuck value GND
-Warning (14130): Reduced register "DDS_setup[12]" with stuck data_in port to stuck value GND
-Warning (14130): Reduced register "DDS_setup[13]" with stuck data_in port to stuck value GND
-Warning (14130): Reduced register "DDS_setup[14]" with stuck data_in port to stuck value GND
-Warning (14130): Reduced register "DDS_setup[15]" with stuck data_in port to stuck value GND
-Warning (14130): Reduced register "DDS_setup[16]" with stuck data_in port to stuck value GND
-Warning (14130): Reduced register "DDS_setup[17]" with stuck data_in port to stuck value GND
-Warning (14130): Reduced register "DDS_setup[18]" with stuck data_in port to stuck value GND
-Warning (14130): Reduced register "DDS_setup[19]" with stuck data_in port to stuck value GND
-Warning (14130): Reduced register "DDS_setup[20]" with stuck data_in port to stuck value GND
-Warning (14130): Reduced register "DDS_setup[21]" with stuck data_in port to stuck value GND
-Warning (14130): Reduced register "DDS_setup[22]" with stuck data_in port to stuck value GND
-Warning (14130): Reduced register "DDS_setup[24]" with stuck data_in port to stuck value GND
-Warning (14130): Reduced register "DDS_setup[26]" with stuck data_in port to stuck value GND
-Warning (14130): Reduced register "DDS_setup[27]" with stuck data_in port to stuck value GND
-Warning (14130): Reduced register "DDS_setup[28]" with stuck data_in port to stuck value GND
-Warning (14130): Reduced register "DDS_setup[30]" with stuck data_in port to stuck value GND
-Warning (14130): Reduced register "DDS_setup[31]" with stuck data_in port to stuck value GND
-Warning (14130): Reduced register "DDS_setup[32]" with stuck data_in port to stuck value GND
-Warning (14130): Reduced register "DDS_setup[33]" with stuck data_in port to stuck value GND
-Warning (14130): Reduced register "DDS_setup[34]" with stuck data_in port to stuck value GND
-Warning (14130): Reduced register "DDS_setup[35]" with stuck data_in port to stuck value GND
-Warning (14130): Reduced register "DDS_setup[36]" with stuck data_in port to stuck value GND
-Warning (14130): Reduced register "DDS_setup[37]" with stuck data_in port to stuck value GND
-Warning (14130): Reduced register "DDS_setup[39]" with stuck data_in port to stuck value GND
-Warning (14130): Reduced register "phase_word[1]" with stuck data_in port to stuck value GND
-Warning (14130): Reduced register "phase_word[2]" with stuck data_in port to stuck value GND
-Warning (14130): Reduced register "phase_word[3]" with stuck data_in port to stuck value GND
-Warning (14130): Reduced register "phase_word[4]" with stuck data_in port to stuck value GND
-Warning (14130): Reduced register "phase_word[5]" with stuck data_in port to stuck value GND
-Warning (14130): Reduced register "phase_word[6]" with stuck data_in port to stuck value GND
-Warning (14130): Reduced register "phase_word[7]" with stuck data_in port to stuck value GND
-Warning (14130): Reduced register "phase_word[8]" with stuck data_in port to stuck value GND
-Warning (14130): Reduced register "phase_word[9]" with stuck data_in port to stuck value GND
-Warning (14130): Reduced register "phase_word[10]" with stuck data_in port to stuck value GND
-Warning (14130): Reduced register "phase_word[11]" with stuck data_in port to stuck value GND
-Warning (14130): Reduced register "phase_word[12]" with stuck data_in port to stuck value GND
-Warning (14130): Reduced register "phase_word[13]" with stuck data_in port to stuck value GND
-Warning (14130): Reduced register "phase_word[14]" with stuck data_in port to stuck value GND
-Warning (14130): Reduced register "phase_word[15]" with stuck data_in port to stuck value GND
-Warning (14130): Reduced register "phase_word[16]" with stuck data_in port to stuck value GND
-Warning (14130): Reduced register "phase_word[17]" with stuck data_in port to stuck value GND
-Warning (14130): Reduced register "previous_DAC_data[11]" with stuck data_in port to stuck value GND
-Warning (14130): Reduced register "prev_phase_word[17]" with stuck data_in port to stuck value GND
-Warning (14130): Reduced register "prev_phase_word[16]" with stuck data_in port to stuck value GND
-Warning (14130): Reduced register "prev_phase_word[15]" with stuck data_in port to stuck value GND
-Warning (14130): Reduced register "prev_phase_word[14]" with stuck data_in port to stuck value GND
-Warning (14130): Reduced register "prev_phase_word[13]" with stuck data_in port to stuck value GND
-Warning (14130): Reduced register "prev_phase_word[12]" with stuck data_in port to stuck value GND
-Warning (14130): Reduced register "prev_phase_word[11]" with stuck data_in port to stuck value GND
-Warning (14130): Reduced register "prev_phase_word[10]" with stuck data_in port to stuck value GND
-Warning (14130): Reduced register "prev_phase_word[9]" with stuck data_in port to stuck value GND
-Warning (14130): Reduced register "prev_phase_word[8]" with stuck data_in port to stuck value GND
-Warning (14130): Reduced register "prev_phase_word[7]" with stuck data_in port to stuck value GND
-Warning (14130): Reduced register "prev_phase_word[6]" with stuck data_in port to stuck value GND
-Warning (14130): Reduced register "prev_phase_word[5]" with stuck data_in port to stuck value GND
-Warning (14130): Reduced register "prev_phase_word[4]" with stuck data_in port to stuck value GND
-Warning (14130): Reduced register "prev_phase_word[3]" with stuck data_in port to stuck value GND
-Warning (14130): Reduced register "prev_phase_word[2]" with stuck data_in port to stuck value GND
-Warning (14130): Reduced register "prev_phase_word[1]" with stuck data_in port to stuck value GND
-Warning (14130): Reduced register "prev_phase_word[0]" with stuck data_in port to stuck value GND
-Warning (14130): Reduced register "DDS_data[0]" with stuck data_in port to stuck value GND
-Warning (14130): Reduced register "DDS_data[1]" with stuck data_in port to stuck value GND
-Warning (14130): Reduced register "DDS_data[2]" with stuck data_in port to stuck value GND
-Warning (14130): Reduced register "DDS_data[3]" with stuck data_in port to stuck value GND
-Warning (14130): Reduced register "DDS_data[4]" with stuck data_in port to stuck value GND
-Warning (14130): Reduced register "DDS_data[5]" with stuck data_in port to stuck value GND
-Warning (14130): Reduced register "DDS_data[6]" with stuck data_in port to stuck value GND
-Warning (14130): Reduced register "DDS_data[7]" with stuck data_in port to stuck value GND
-Warning (14130): Reduced register "DDS_data[8]" with stuck data_in port to stuck value GND
-Warning (14130): Reduced register "DDS_data[9]" with stuck data_in port to stuck value GND
-Warning (14130): Reduced register "DDS_data[10]" with stuck data_in port to stuck value GND
-Warning (14130): Reduced register "DDS_data[11]" with stuck data_in port to stuck value GND
-Warning (14130): Reduced register "DDS_data[12]" with stuck data_in port to stuck value GND
-Warning (14130): Reduced register "DDS_data[13]" with stuck data_in port to stuck value GND
-Warning (14130): Reduced register "DDS_data[14]" with stuck data_in port to stuck value GND
-Warning (14130): Reduced register "DDS_data[15]" with stuck data_in port to stuck value GND
-Warning (14130): Reduced register "DDS_data[16]" with stuck data_in port to stuck value GND
-Warning (14130): Reduced register "DDS_data[17]" with stuck data_in port to stuck value GND
-Warning (14130): Reduced register "DDS_data[50]" with stuck data_in port to stuck value GND
-Warning (14130): Reduced register "DDS_data[52]" with stuck data_in port to stuck value GND
-Warning (14130): Reduced register "DDS_data[54]" with stuck data_in port to stuck value GND
-Warning (14130): Reduced register "DDS_data[57]" with stuck data_in port to stuck value GND
-Warning (14130): Reduced register "DDS_data[58]" with stuck data_in port to stuck value GND
-Warning (14130): Reduced register "DDS_data[59]" with stuck data_in port to stuck value GND
-Warning (14130): Reduced register "DDS_data[60]" with stuck data_in port to stuck value GND
-Warning (14130): Reduced register "DDS_data[63]" with stuck data_in port to stuck value GND
-Info: Duplicate registers merged to single register
-    Info (13350): Duplicate register "previous_DAC_data[10]" merged to single register "previous_DAC_data[9]"
-    Info (13350): Duplicate register "previous_DAC_data[9]" merged to single register "previous_DAC_data[8]"
-    Info (13350): Duplicate register "previous_DAC_data[8]" merged to single register "previous_DAC_data[7]"
-    Info (13350): Duplicate register "previous_DAC_data[7]" merged to single register "previous_DAC_data[6]"
-    Info (13350): Duplicate register "previous_DAC_data[6]" merged to single register "previous_DAC_data[5]"
-    Info (13350): Duplicate register "previous_DAC_data[5]" merged to single register "previous_DAC_data[4]"
-    Info (13350): Duplicate register "previous_DAC_data[4]" merged to single register "previous_DAC_data[3]"
-    Info (13350): Duplicate register "previous_DAC_data[3]" merged to single register "previous_DAC_data[2]"
-    Info (13350): Duplicate register "previous_DAC_data[2]" merged to single register "previous_DAC_data[1]"
-    Info (13350): Duplicate register "previous_DAC_data[1]" merged to single register "previous_DAC_data[0]"
-    Info (13350): Duplicate register "DDS_setup[38]" merged to single register "DDS_setup[29]"
-    Info (13350): Duplicate register "DDS_setup[29]" merged to single register "DDS_setup[25]"
-    Info (13350): Duplicate register "DDS_setup[25]" merged to single register "DDS_setup[23]"
-    Info (13350): Duplicate register "DDS_setup[23]" merged to single register "DDS_setup[3]"
-Info: Duplicate registers merged to single register
-    Info (13350): Duplicate register "DDS_data[62]" merged to single register "DDS_data[61]"
-    Info (13350): Duplicate register "DDS_data[61]" merged to single register "DDS_data[56]"
-    Info (13350): Duplicate register "DDS_data[56]" merged to single register "DDS_data[55]"
-    Info (13350): Duplicate register "DDS_data[55]" merged to single register "DDS_data[53]"
-    Info (13350): Duplicate register "DDS_data[53]" merged to single register "DDS_data[51]"
-    Info (13350): Duplicate register "DDS_data[51]" merged to single register "DDS_data[49]"
-    Info (13350): Duplicate register "DDS_data[49]" merged to single register "DDS_data[48]"
-    Info (13350): Duplicate register "I_CLKRX~reg0" merged to single register "Q_CLKRX~reg0"
-Info: State machine "|Test1|AD9912" contains 9 states
-Info: State machine "|Test1|CC_state" contains 3 states
-Info: State machine "|Test1|spi_state" contains 6 states
-Info: State machine "|Test1|state" contains 4 states
-Info: Selected Auto state machine encoding method for state machine "|Test1|AD9912"
-Info: Encoding result for state machine "|Test1|AD9912"
-    Info: Completed encoding using 9 state bits
-        Info: Encoded state bit "AD9912.0111"
-        Info: Encoded state bit "AD9912.0110"
-        Info: Encoded state bit "AD9912.0101"
-        Info: Encoded state bit "AD9912.0100"
-        Info: Encoded state bit "AD9912.0011"
-        Info: Encoded state bit "AD9912.0010"
-        Info: Encoded state bit "AD9912.0001"
-        Info: Encoded state bit "AD9912.0000"
-        Info: Encoded state bit "AD9912.1000"
-    Info: State "|Test1|AD9912.0000" uses code string "000000000"
-    Info: State "|Test1|AD9912.0001" uses code string "000000110"
-    Info: State "|Test1|AD9912.0010" uses code string "000001010"
-    Info: State "|Test1|AD9912.0011" uses code string "000010010"
-    Info: State "|Test1|AD9912.0100" uses code string "000100010"
-    Info: State "|Test1|AD9912.0101" uses code string "001000010"
-    Info: State "|Test1|AD9912.0110" uses code string "010000010"
-    Info: State "|Test1|AD9912.0111" uses code string "100000010"
-    Info: State "|Test1|AD9912.1000" uses code string "000000011"
-Info: Selected Auto state machine encoding method for state machine "|Test1|CC_state"
-Info: Encoding result for state machine "|Test1|CC_state"
-    Info: Completed encoding using 3 state bits
-        Info: Encoded state bit "CC_state.00"
-        Info: Encoded state bit "CC_state.10"
-        Info: Encoded state bit "CC_state.01"
-    Info: State "|Test1|CC_state.00" uses code string "000"
-    Info: State "|Test1|CC_state.01" uses code string "101"
-    Info: State "|Test1|CC_state.10" uses code string "110"
-Info: Selected Auto state machine encoding method for state machine "|Test1|spi_state"
-Info: Encoding result for state machine "|Test1|spi_state"
-    Info: Completed encoding using 6 state bits
-        Info: Encoded state bit "spi_state.101"
-        Info: Encoded state bit "spi_state.100"
-        Info: Encoded state bit "spi_state.011"
-        Info: Encoded state bit "spi_state.010"
-        Info: Encoded state bit "spi_state.001"
-        Info: Encoded state bit "spi_state.000"
-    Info: State "|Test1|spi_state.000" uses code string "000000"
-    Info: State "|Test1|spi_state.001" uses code string "000011"
-    Info: State "|Test1|spi_state.010" uses code string "000101"
-    Info: State "|Test1|spi_state.011" uses code string "001001"
-    Info: State "|Test1|spi_state.100" uses code string "010001"
-    Info: State "|Test1|spi_state.101" uses code string "100001"
-Info: Selected Auto state machine encoding method for state machine "|Test1|state"
-Info: Encoding result for state machine "|Test1|state"
-    Info: Completed encoding using 4 state bits
-        Info: Encoded state bit "state.11"
-        Info: Encoded state bit "state.10"
-        Info: Encoded state bit "state.01"
-        Info: Encoded state bit "state.00"
-    Info: State "|Test1|state.00" uses code string "0000"
-    Info: State "|Test1|state.01" uses code string "0011"
-    Info: State "|Test1|state.10" uses code string "0101"
-    Info: State "|Test1|state.11" uses code string "1001"
+Warning (10034): Output port "DDS_CLK" at Test1.v(30) has no driver
+Warning (10034): Output port "I_CLKRX" at Test1.v(37) has no driver
+Warning (10034): Output port "Q_CLKRX" at Test1.v(38) has no driver
+Warning (10034): Output port "RXOE1" at Test1.v(41) has no driver
+Warning (10034): Output port "RXOE2" at Test1.v(42) has no driver
+Warning (10034): Output port "TXOE1" at Test1.v(43) has no driver
+Warning (10034): Output port "TXOE2" at Test1.v(44) has no driver
 Warning: Output pins are stuck at VCC or GND
     Warning (13410): Pin "LED1" is stuck at GND
     Warning (13410): Pin "DDS_CLK" is stuck at GND
+    Warning (13410): Pin "I_CLKRX" is stuck at GND
+    Warning (13410): Pin "Q_CLKRX" is stuck at GND
+    Warning (13410): Pin "RXOE1" is stuck at GND
+    Warning (13410): Pin "RXOE2" is stuck at GND
+    Warning (13410): Pin "TXOE1" is stuck at GND
+    Warning (13410): Pin "TXOE2" is stuck at GND
 Info: 9 registers lost all their fanouts during netlist optimizations. The first 9 are displayed below.
     Info: Register "AD9912~8" lost all its fanouts during netlist optimizations.
     Info: Register "AD9912~9" lost all its fanouts during netlist optimizations.
@@ -561,16 +384,17 @@ Info: 9 registers lost all their fanouts during netlist optimizations. The first
     Info: Register "state~7" lost all its fanouts during netlist optimizations.
     Info: Register "state~8" lost all its fanouts during netlist optimizations.
     Info: Register "CC_state.00" lost all its fanouts during netlist optimizations.
-Warning: Design contains 1 input pin(s) that do not drive logic
+Warning: Design contains 2 input pin(s) that do not drive logic
     Warning (15610): No output dependent on input pin "CLK_48MHZ"
-Info: Implemented 286 device resources after synthesis - the final resource count might be different
+    Warning (15610): No output dependent on input pin "PTT"
+Info: Implemented 296 device resources after synthesis - the final resource count might be different
     Info: Implemented 6 input pins
     Info: Implemented 18 output pins
-    Info: Implemented 262 logic cells
-Info: Quartus II Analysis & Synthesis was successful. 0 errors, 104 warnings
-    Info: Peak virtual memory: 157 megabytes
-    Info: Processing ended: Mon Dec 01 22:01:46 2008
-    Info: Elapsed time: 00:00:02
+    Info: Implemented 272 logic cells
+Info: Quartus II Analysis & Synthesis was successful. 0 errors, 19 warnings
+    Info: Peak virtual memory: 165 megabytes
+    Info: Processing ended: Mon Mar 30 21:08:00 2009
+    Info: Elapsed time: 00:00:01
     Info: Total CPU time (on all processors): 00:00:01
 
 
