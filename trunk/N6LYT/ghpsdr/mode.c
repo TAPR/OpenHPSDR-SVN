@@ -34,6 +34,7 @@ GtkWidget* buttonFMN;
 GtkWidget* buttonDIGU;
 GtkWidget* buttonSPEC;
 GtkWidget* buttonDIGL;
+GtkWidget* buttonDRM;
 
 GtkWidget* currentModeButton;
 
@@ -77,11 +78,13 @@ void selectMode(GtkWidget* widget) {
         mode=modeSPEC;
     } else if(widget==buttonDIGU) {
         mode=modeDIGU;
+    } else if(widget==buttonDRM) {
+        mode=modeDRM;
     }
 
 
     // set RX mode
-    sprintf(temp,"setMode %d 0",mode);
+    sprintf(temp,"setMode %d",mode);
     writeCommand(temp);
 
     setFilter(filter);
@@ -123,6 +126,9 @@ void setModeMode(int mode) {
             break;
         case modeDIGU:
             widget=buttonDIGU;
+            break;
+        case modeDRM:
+            widget=buttonDRM;
             break;
     }
     selectMode(widget);
@@ -246,6 +252,15 @@ GtkWidget* buildModeUI() {
     g_signal_connect(G_OBJECT(buttonSPEC),"clicked",G_CALLBACK(modeCallback),NULL);
     gtk_widget_show(buttonSPEC);
     gtk_fixed_put((GtkFixed*)modeFixed,buttonSPEC,0,125);
+
+    buttonDRM = gtk_button_new_with_label ("DRM");
+    gtk_widget_modify_bg(buttonDRM, GTK_STATE_NORMAL, &buttonBackground);
+    label=gtk_bin_get_child((GtkBin*)buttonDRM);
+    gtk_widget_modify_fg(label, GTK_STATE_NORMAL, &white);
+    gtk_widget_set_size_request(GTK_WIDGET(buttonDRM),50,25);
+    g_signal_connect(G_OBJECT(buttonDRM),"clicked",G_CALLBACK(modeCallback),NULL);
+    gtk_widget_show(buttonDRM);
+    gtk_fixed_put((GtkFixed*)modeFixed,buttonDRM,50,125);
 
     gtk_widget_set_size_request(GTK_WIDGET(modeFixed),100,150);
     gtk_widget_show(modeFixed);

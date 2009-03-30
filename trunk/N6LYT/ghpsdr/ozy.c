@@ -246,10 +246,12 @@ void* ozy_ep6_ep2_io_thread(void* arg) {
                 perror("OzyBulkWrite failed");
             }
 
+/*
             usb_output_buffers++;
             if(usb_output_buffers%1000==0) {
                 fprintf(stderr,"usb_ouput_buffers=%d\n",usb_output_buffers);
             }
+*/
         }
 
     }

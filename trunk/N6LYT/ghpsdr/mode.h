@@ -11,6 +11,7 @@
 #define modeSPEC 8
 #define modeDIGL 9
 #define modeSAM 10
+#define modeDRM 11
 
 int mode;
 
