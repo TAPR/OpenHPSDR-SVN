@@ -44,11 +44,11 @@ void mercuryButtonCallback(GtkWidget* widget,gpointer data) {
         label=gtk_bin_get_child((GtkBin*)buttonR192K);
         gtk_widget_modify_fg(label, GTK_STATE_NORMAL, &white);
         sampleRate=48000;
+        setSpeed(0);
         SetSampleRate((double)sampleRate);
         writeCommand("setOsc 0");
-        setMode(mode);
         setFilter(filter);
-        setSpeed(0);
+        setModeMode(mode);
     } else if(widget==buttonR96K) {
         R48K=FALSE;
         R96K=TRUE;
@@ -60,11 +60,11 @@ void mercuryButtonCallback(GtkWidget* widget,gpointer data) {
         label=gtk_bin_get_child((GtkBin*)buttonR192K);
         gtk_widget_modify_fg(label, GTK_STATE_NORMAL, &white);
         sampleRate=96000;
+        setSpeed(1);
         SetSampleRate((double)sampleRate);
         writeCommand("setOsc 0");
-        setMode(mode);
         setFilter(filter);
-        setSpeed(1);
+        setModeMode(mode);
     } else if(widget==buttonR192K) {
         R48K=FALSE;
         R96K=FALSE;
@@ -76,11 +76,11 @@ void mercuryButtonCallback(GtkWidget* widget,gpointer data) {
         label=gtk_bin_get_child((GtkBin*)buttonR192K);
         gtk_widget_modify_fg(label, GTK_STATE_NORMAL, &modeButtonSelected);
         sampleRate=192000;
+        setSpeed(2);
         SetSampleRate((double)sampleRate);
         writeCommand("setOsc 0");
-        setMode(mode);
         setFilter(filter);
-        setSpeed(2);
+        setModeMode(mode);
     } else {
         if(widget==buttonDither) {
             Dither=!Dither;
