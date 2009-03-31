@@ -49,6 +49,7 @@ extern "C" {
 #define LT2208_RANDOM_ON          0x10
 
 extern int ozy_init();
+extern int getADCOverflow();
 
 void getSpectrumSamples(char *samples);
 

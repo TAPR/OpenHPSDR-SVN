@@ -7,6 +7,7 @@
 #include "main.h"
 #include "filter.h"
 #include "frequency.h"
+#include "ozy.h"
 #include "property.h"
 #include "soundcard.h"
 #include "spectrum.h"
@@ -47,6 +48,8 @@ int colorHighG=255;
 int colorHighB=0;
 
 float* waterfall;
+
+int adcOverflow=0;
  
 gboolean spectrum_configure_event(GtkWidget* widget,GdkEventConfigure* event);
 gboolean spectrum_expose_event(GtkWidget* widget,GdkEventExpose* event);
@@ -356,6 +359,19 @@ void drawSpectrum(int height) {
         sprintf(label,"<span font_desc='Sans Regular 8'>%s</span>",getFrequencyInfo(frequencyA));
         pango_layout_set_markup (layout, label, -1);
         gdk_draw_layout (GDK_DRAWABLE (spectrumPixmap), gc, spectrumWIDTH/2, height-12, layout);
+
+        // dispay ADC Overflow
+        if(getADCOverflow()) {
+            adcOverflow=30;
+        }
+
+        if(adcOverflow>0) {
+            gdk_gc_set_rgb_fg_color(gc,&red);
+            sprintf(label,"<span font_desc='Sans Regular 8'>LT2208 ADC Overflow</span>");
+            pango_layout_set_markup (layout, label, -1);
+            gdk_draw_layout (GDK_DRAWABLE (spectrumPixmap), gc, spectrumWIDTH/4*3, height-12, layout);
+            adcOverflow--;
+        }
 
         // draw the spectrum
         gdk_gc_set_rgb_fg_color(gc,&plotColor);

@@ -5,11 +5,12 @@
  * Created on 10 March 2009, 20:26
  */
 
+#include <pthread.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <semaphore.h>
-#include <pthread.h>
+#include <time.h>
 
 #include "ozy.h"
 #include "ozy_buffers.h"
@@ -70,6 +71,8 @@ int show_software_serial_numbers=1;
 
 unsigned char spectrum_samples[SPECTRUM_BUFFER_SIZE];
 
+int lt2208ADCOverflow=0;
+
 void process_ozy_input_buffer(char* buffer) {
     int i,j;
     int b=0;
@@ -93,8 +96,7 @@ if(control_in[0]&0x01) {
 }
 
 if(control_in[1]&0x01) {
-    // LT2208 Overflow
-    fprintf(stderr,"LT2208 ADC Overflow\n");
+    lt2208ADCOverflow=1;
 }
 
 if(show_software_serial_numbers) {
@@ -162,7 +164,13 @@ if(show_software_serial_numbers) {
             }
         }
     } else {
-        fprintf(stderr,"process_ozy_input_buffer: did not find sync\n");
+        time_t t;
+        struct tm* gmt;
+        time(&t);
+        gmt=gmtime(&t);
+
+        fprintf(stderr,"%s: process_ozy_input_buffer: did not find sync\n",
+                asctime(gmt));
         dump_ozy_buffer("buffer",buffer);
     }
 
@@ -430,6 +438,13 @@ int ozy_init(int sample_rate) {
 
 
     return rc;
+}
+
+
+int getADCOverflow() {
+    int result=lt2208ADCOverflow;
+    lt2208ADCOverflow=0;
+    return result;
 }
 
 
