@@ -19,12 +19,12 @@ COMPILE=$(CC) $(INCLUDES)
 SOURCES= audio.c band.c bandscope.c bandscope_update.c command.c\
          display.c filter.c frequency.c libusbio.c main.c mercury.c meter.c\
          meter_update.c mode.c ozy_buffers.c ozy.c ozy_ringbuffer.c\
-         property.c setup.c soundcard.c spectrum_buffers.c spectrum.c spectrum_update.c vfo.c
+         property.c setup.c soundcard.c spectrum_buffers.c spectrum.c spectrum_update.c util.c vfo.c
 
 OBJS= audio.o band.o bandscope.o bandscope_update.o command.o\
       display.o filter.o frequency.o libusbio.o main.o mercury.o meter.o\
       meter_update.o mode.o ozy_buffers.o ozy.o ozy_ringbuffer.o\
-      property.o setup.o soundcard.o spectrum_buffers.o spectrum.o spectrum_update.o vfo.o
+      property.o setup.o soundcard.o spectrum_buffers.o spectrum.o spectrum_update.o util.o vfo.o
 
 PROGRAM=ghpsdr
 
