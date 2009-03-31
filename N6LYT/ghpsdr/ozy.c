@@ -16,11 +16,13 @@
 #include "ozy_ringbuffer.h"
 #include "spectrum_buffers.h"
 #include "dttsp.h"
+#include "util.h"
 
 /*
  *   ozy interface
  */
 
+#define USB_TIMEOUT -7
 struct OzyHandle* ozy;
 
 pthread_t ep6_ep2_io_thread_id;
@@ -161,6 +163,7 @@ if(show_software_serial_numbers) {
         }
     } else {
         fprintf(stderr,"process_ozy_input_buffer: did not find sync\n");
+        dump_ozy_buffer("buffer",buffer);
     }
 
 }
@@ -203,20 +206,20 @@ void* ozy_ep6_ep2_io_thread(void* arg) {
         if(ozy_buffer!=NULL) {
             bytes=libusb_read_ozy(0x86,(void*)(ozy_buffer->buffer),OZY_BUFFER_SIZE);
             if (bytes < 0) {
-                perror("ozy_ep6_ep2_io_thread: OzyBulkRead failed");
+                fprintf(stderr,"ozy_ep6_ep2_io_thread: OzyBulkRead read failed %d\n",bytes);
             } else if (bytes != OZY_BUFFER_SIZE) {
                 fprintf(stderr,"ozy_ep6_ep2_io_thread: OzyBulkRead only read %d bytes\n",bytes);
+            } else {
+                // process input buffer
+                put_ozy_input_buffer(ozy_buffer);
+                sem_post(&ozy_input_buffer_sem);
             }
-
-            // process input buffer
-            put_ozy_input_buffer(ozy_buffer);
-            sem_post(&ozy_input_buffer_sem);
 
         }
 
-        // see if we have enough to send a buffer
-        if(ozy_ringbuffer_entries(ozy_output_buffer)>=(OZY_BUFFER_SIZE-8)) {
-
+        // see if we have enough to send a buffer or force the write if we have a timeout
+        if((bytes==USB_TIMEOUT) || ozy_ringbuffer_entries(ozy_output_buffer)>=(OZY_BUFFER_SIZE-8)) {
+            
             output_buffer[0]=SYNC;
             output_buffer[1]=SYNC;
             output_buffer[2]=SYNC;
@@ -236,9 +239,11 @@ void* ozy_ep6_ep2_io_thread(void* arg) {
                 output_buffer[7]=control_out[4];
             }
 
-            bytes=ozy_ringbuffer_get(ozy_output_buffer,&output_buffer[8],OZY_BUFFER_SIZE-8);
-            if(bytes!=OZY_BUFFER_SIZE-8) {
-                fprintf(stderr,"OOPS - thought there was enough for usb output but only %d\n",bytes);
+            if(ozy_ringbuffer_entries(ozy_output_buffer)>=(OZY_BUFFER_SIZE-8)) {
+                bytes=ozy_ringbuffer_get(ozy_output_buffer,&output_buffer[8],OZY_BUFFER_SIZE-8);
+                if(bytes!=OZY_BUFFER_SIZE-8) {
+                    fprintf(stderr,"OOPS - thought there was enough for usb output but only %d\n",bytes);
+                }
             }
 
             bytes=libusb_write_ozy(0x02,(void*)(output_buffer),OZY_BUFFER_SIZE);
@@ -246,12 +251,6 @@ void* ozy_ep6_ep2_io_thread(void* arg) {
                 perror("OzyBulkWrite failed");
             }
 
-/*
-            usb_output_buffers++;
-            if(usb_output_buffers%1000==0) {
-                fprintf(stderr,"usb_ouput_buffers=%d\n",usb_output_buffers);
-            }
-*/
         }
 
     }
