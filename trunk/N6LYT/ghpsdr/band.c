@@ -208,6 +208,61 @@ void setBand(int band) {
     selectBand(widget);
 }
 
+void forceBand(int b) {
+    GtkWidget* label;
+    GtkWidget* widget;
+    switch(b) {
+        case band160:
+            widget=button160;
+            break;
+        case band80:
+            widget=button80;
+            break;
+        case band60:
+            widget=button60;
+            break;
+        case band40:
+            widget=button40;
+            break;
+        case band30:
+            widget=button30;
+            break;
+        case band20:
+            widget=button20;
+            break;
+        case band17:
+            widget=button17;
+            break;
+        case band15:
+            widget=button15;
+            break;
+        case band12:
+            widget=button12;
+            break;
+        case band10:
+            widget=button10;
+            break;
+        case band6:
+            widget=button6;
+            break;
+        case bandGen:
+            widget=buttonGen;
+            break;
+        case bandWWV:
+            widget=buttonWWV;
+            break;
+    }
+    if(currentBandButton) {
+        label=gtk_bin_get_child((GtkBin*)currentBandButton);
+        gtk_widget_modify_fg(label, GTK_STATE_NORMAL, &black);
+    }
+    label=gtk_bin_get_child((GtkBin*)widget);
+    gtk_widget_modify_fg(label, GTK_STATE_NORMAL, &bandButtonSelected);
+
+    currentBandButton=widget;
+    band=b;
+}
+
 //-------------------------------------------------------------------------------------------
 //
 //  callback when a band button is pressed

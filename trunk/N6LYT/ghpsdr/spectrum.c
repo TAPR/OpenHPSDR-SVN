@@ -6,6 +6,7 @@
 #include "bandstack.h"
 #include "main.h"
 #include "filter.h"
+#include "frequency.h"
 #include "property.h"
 #include "soundcard.h"
 #include "spectrum.h"
@@ -349,6 +350,12 @@ void drawSpectrum(int height) {
             pango_layout_set_markup (layout, label, -1);
             gdk_draw_layout (GDK_DRAWABLE (spectrumPixmap), gc, 0, y, layout);
         }
+
+        // display the frequency info
+        gdk_gc_set_rgb_fg_color(gc,&spectrumTextColor);
+        sprintf(label,"<span font_desc='Sans Regular 8'>%s</span>",getFrequencyInfo(frequencyA));
+        pango_layout_set_markup (layout, label, -1);
+        gdk_draw_layout (GDK_DRAWABLE (spectrumPixmap), gc, spectrumWIDTH/2, height-12, layout);
 
         // draw the spectrum
         gdk_gc_set_rgb_fg_color(gc,&plotColor);

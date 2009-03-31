@@ -12,6 +12,7 @@
 
 #include "command.h"
 #include "main.h"
+#include "band.h"
 #include "property.h"
 #include "vfo.h"
 
@@ -195,6 +196,12 @@ void setAFrequency(long long f) {
         g_object_unref(gc);
 
         gtk_widget_queue_draw(vfoAFrequency);
+    }
+
+    // check the band
+    int thisBand=getBand(f);
+    if(band!=thisBand) {
+        forceBand(thisBand);
     }
 
 }

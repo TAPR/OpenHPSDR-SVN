@@ -21,4 +21,6 @@ int band;
 void bandSaveState();
 void bandRestoreState();
 
+void forceBand(int band);
+
 GtkWidget* buildBandUI();
