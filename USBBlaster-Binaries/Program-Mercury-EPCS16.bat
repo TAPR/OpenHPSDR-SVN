@@ -87,7 +87,7 @@ GOTO CONTINUE
 %DIRECTORY% -c USB-Blaster mercury_v2.5.cdf
 GOTO CONTINUE
 :ItemG
-c:\altera\81\qprogrammer\bin\quartus_pgm -c USB-Blaster mercury_v2.6.cdf
+%DIRECTORY% -c USB-Blaster mercury_v2.6.cdf
 GOTO CONTINUE
 :CONTINUE
 PAUSE
