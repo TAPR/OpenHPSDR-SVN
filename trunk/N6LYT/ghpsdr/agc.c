@@ -63,8 +63,6 @@ void selectAgc(GtkWidget* widget) {
     sprintf(temp,"setRXAGC %d",agc);
     writeCommand(temp);
 
-fprintf(stderr,"%s\n",temp);
-
 }
 
 void setAgc(int agc) {
