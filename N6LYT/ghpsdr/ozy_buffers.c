@@ -5,6 +5,7 @@
  * Created on 05 January 2009, 16:28
  */
 
+#include <fcntl.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <semaphore.h>

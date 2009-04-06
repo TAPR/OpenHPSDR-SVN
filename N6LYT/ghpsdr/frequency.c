@@ -11,8 +11,10 @@ char* outOfBand="Out of band";
 struct frequency_info frequencyInfo[]=
     {
 
- 
-        {153000, 279000, "AM - Long Wave",                   bandGen,FALSE}, 
+        {60000, 60000, "MSF Time Signal",                     bandGen,FALSE}, 
+        {75000, 75000, "HGB Time Signal",                   bandGen,FALSE}, 
+        {77500, 77500, "DCF77 Time Signal",                   bandGen,FALSE}, 
+        {153000, 279000, "AM - Long Wave",                    bandGen,FALSE}, 
         {530000, 1710000, "Broadcast AM Med Wave",            bandGen,FALSE},                                 
 
         {1800000, 1809999, "160M CW/Digital Modes",            band160, TRUE},
