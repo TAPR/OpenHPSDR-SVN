@@ -21,12 +21,15 @@
 
 int init=0;
 libusb_device_handle* ozy_handle;
+libusb_context* context;
 
 int libusb_open_ozy(void) {
     int rc;
+
     if(init==0) {
         rc=libusb_init(NULL);
         if(rc<0) {
+            fprintf(stderr,"libusb_init failed: %d\n",rc);
             return rc;
         }
         init=1;
@@ -36,6 +39,12 @@ int libusb_open_ozy(void) {
     if(ozy_handle==NULL) {
         fprintf(stderr,"libusbio: cannot find ozy device\n");
         return -1;
+    }
+
+    rc=libusb_claim_interface(ozy_handle,0);
+    if(rc<0) {
+        fprintf(stderr,"libusb_claim_interface failed: %d\n",rc);
+        return rc;
     }
 
     return 0;

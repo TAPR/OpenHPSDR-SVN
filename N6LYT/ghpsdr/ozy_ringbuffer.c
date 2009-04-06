@@ -8,7 +8,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <semaphore.h>
 #include <pthread.h>
 
 #include "ozy_buffers.h"
@@ -20,9 +19,6 @@
 
 struct ozy_ringbuffer* ozy_output_buffer;
 
-int sem_trigger=0;
-sem_t ozy_output_buffer_sem;
- 
 pthread_mutex_t ozy_output_buffer_mutex; 
 
 int ozy_put_bytes=0;
@@ -76,20 +72,8 @@ fprintf(stderr,"ozy_ringbuffer_put: space=%d wanted=%d\n",ozy_ringbuffer_space(b
         if(buffer->insert_index>=buffer->size) {
             buffer->insert_index=0;
         }
-/*
-        sem_trigger+=bytes;
-*/
     }
     pthread_mutex_unlock(&ozy_output_buffer_mutex);
-
-/*
-    if(sem_trigger>=(OZY_BUFFER_SIZE-8)) {
-        // another buffer ready to go
-        if(debug_buffers) fprintf(stderr,"ozy_ring_buffer_put: sem_post\n");
-        sem_trigger-=(OZY_BUFFER_SIZE-8);
-        sem_post(&ozy_output_buffer_sem);
-    }
-*/
 
     return n;
 }
@@ -123,6 +107,5 @@ int ozy_ringbuffer_get(struct ozy_ringbuffer* buffer,char* f,int n) {
 
 int create_ozy_ringbuffer(int n) {
     pthread_mutex_init(&ozy_output_buffer_mutex, NULL);
-
     ozy_output_buffer=new_ozy_ringbuffer(n);
 }
