@@ -14,6 +14,7 @@
 #include <getopt.h>
 
 #include "audio.h"
+#include "agc.h"
 #include "bandstack.h"
 #include "command.h"
 #include "display.h"
@@ -68,6 +69,7 @@ GtkWidget* audioWindow;
 GtkWidget* mercuryWindow;
 GtkWidget* meterWindow;
 GtkWidget* bandscopeWindow;
+GtkWidget* agcWindow;
 
 gint mainStartX;
 gint mainStartY;
@@ -110,6 +112,7 @@ void quit() {
     audioSaveState();
     mercurySaveState();
     bandscopeSaveState();
+    agcSaveState();
 
     saveProperties(propertyPath);
 
@@ -262,6 +265,10 @@ void buildMainUI() {
     // add the mercury window
     gtk_widget_show(mercuryWindow);
     gtk_fixed_put((GtkFixed*)mainFixed,mercuryWindow,850,spectrumHEIGHT+10);
+
+    // add the agc window
+    gtk_widget_show(agcWindow);
+    gtk_fixed_put((GtkFixed*)mainFixed,agcWindow,1010,spectrumHEIGHT+10);
 
     // add the vfo window
     gtk_widget_show(vfoWindow);
@@ -480,6 +487,9 @@ int main(int argc,char* argv[]) {
 
     mercuryRestoreState();
     mercuryWindow=buildMercuryUI();
+
+    agcRestoreState();
+    agcWindow=buildAgcUI();
 
     restoreState();
 
