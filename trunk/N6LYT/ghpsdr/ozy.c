@@ -437,10 +437,10 @@ int ozy_init(int sample_rate) {
     }
 
     // create a thread to read from EP4
-//    rc=pthread_create(&ep4_io_thread_id,NULL,ozy_ep4_io_thread,NULL);
-//    if(rc != 0) {
-//        fprintf(stderr,"pthread_create failed on ozy_ep4_io_thread: rc=%d\n", rc);
-//    }
+    rc=pthread_create(&ep4_io_thread_id,NULL,ozy_ep4_io_thread,NULL);
+    if(rc != 0) {
+        fprintf(stderr,"pthread_create failed on ozy_ep4_io_thread: rc=%d\n", rc);
+    }
 
 
     return rc;
