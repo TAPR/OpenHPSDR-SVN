@@ -31,7 +31,7 @@ extern "C" {
     void create_spectrum_buffers(int n);
     struct spectrum_buffer* get_spectrum_free_buffer(void);
 
-    sem_t spectrum_input_buffer_sem;
+    sem_t* spectrum_input_buffer_sem;
 
 #ifdef	__cplusplus
 }

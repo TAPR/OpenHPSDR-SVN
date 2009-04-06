@@ -18,7 +18,7 @@
 
 struct spectrum_buffer* spectrum_input_buffers_head;
 struct spectrum_buffer* spectrum_input_buffers_tail;
-sem_t spectrum_input_buffer_sem;
+sem_t* spectrum_input_buffer_sem;
 int spectrum_input_sequence=0;
 int spectrum_input_buffers=0;
 
@@ -100,10 +100,19 @@ struct spectrum_buffer* new_spectrum_buffer() {
 void create_spectrum_buffers(int n) {
     struct spectrum_buffer* buffer;
     int i;
+    char name[64];
     
+fprintf(stderr,"create_spectrum_buffers: %d\n",n);
     pthread_mutex_init(&spectrum_input_buffer_mutex, NULL);
     pthread_mutex_init(&spectrum_free_buffer_mutex, NULL);
-    
+    sprintf(name,"spectrum_sem.%d",getpid());
+    spectrum_input_buffer_sem=sem_open(name,O_CREAT|O_EXCL,0600,0);
+    if(spectrum_input_buffer_sem==SEM_FAILED) {
+        perror(name);
+        exit(1);
+    }
+fprintf(stderr,"%s\n",name);
+
     for(i=0;i<n;i++) {
         buffer=new_spectrum_buffer();
         put_spectrum_free_buffer(buffer);

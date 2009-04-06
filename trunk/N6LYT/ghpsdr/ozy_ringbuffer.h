@@ -22,8 +22,6 @@ struct ozy_ringbuffer {
 
     extern struct ozy_ringbuffer* ozy_output_buffer;
 
-    extern sem_t ozy_output_buffer_sem;
-    
     extern struct ozy_ringbuffer* new_ozy_ringbuffer(int n);
     extern int ozy_ringbuffer_put(struct ozy_ringbuffer* buffer,char* c,int n);
     extern int ozy_ringbuffer_get(struct ozy_ringbuffer* buffer,char* c,int n);

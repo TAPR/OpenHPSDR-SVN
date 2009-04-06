@@ -17,10 +17,10 @@ void loadProperties(char* filename) {
             if(string[0]!='#') {
                 name=strtok(string,"=");
                 value=strtok(NULL,"\n");
-                property=calloc(1,sizeof(PROPERTY));
-                property->name=calloc(strlen(name)+1,1);
+                property=malloc(sizeof(PROPERTY));
+                property->name=malloc(strlen(name)+1);
                 strcpy(property->name,name);
-                property->value=calloc(strlen(value)+1,1);
+                property->value=malloc(strlen(value)+1);
                 strcpy(property->value,value);
                 property->next_property=properties;
                 properties=property;
@@ -69,15 +69,15 @@ void setProperty(char* name,char* value) {
     }
     if(property) {
         // just update
-        cfree(property->value);
-        property->value=calloc(strlen(value)+1,1);
+        free(property->value);
+        property->value=malloc(strlen(value)+1);
         strcpy(property->value,value);
     } else {
         // new property
-        property=calloc(1,sizeof(PROPERTY));
-        property->name=calloc(strlen(name)+1,1);
+        property=malloc(sizeof(PROPERTY));
+        property->name=malloc(strlen(name)+1);
         strcpy(property->name,name);
-        property->value=calloc(strlen(value)+1,1);
+        property->value=malloc(strlen(value)+1);
         strcpy(property->value,value);
         property->next_property=properties;
         properties=property;

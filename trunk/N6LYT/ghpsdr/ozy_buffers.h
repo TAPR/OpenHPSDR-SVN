@@ -32,7 +32,7 @@ extern "C" {
     void create_ozy_buffers(int n);
     struct ozy_buffer* get_ozy_free_buffer(void);
 
-    sem_t ozy_input_buffer_sem;
+    sem_t* ozy_input_buffer_sem;
 
 
 #ifdef	__cplusplus

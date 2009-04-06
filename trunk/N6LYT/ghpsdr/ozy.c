@@ -178,9 +178,10 @@ if(show_software_serial_numbers) {
 
 void* ozy_input_buffer_thread(void* arg) {
     struct ozy_buffer* buffer;
+
     while(1) {
         // wait for an ozy buffer
-        sem_wait(&ozy_input_buffer_sem);
+        sem_wait(ozy_input_buffer_sem);
         buffer=get_ozy_input_buffer();
         if(buffer==NULL) {
             fprintf(stderr,"ozy_input_buffer_thread: get_ozy_buffer returned NULL!\n");
@@ -195,7 +196,7 @@ void* ozy_input_buffer_thread(void* arg) {
 void* ozy_spectrum_buffer_thread(void* arg) {
     struct spectrum_buffer* spectrum_buffer;
     while(1) {
-        sem_wait(&spectrum_input_buffer_sem);
+        sem_wait(spectrum_input_buffer_sem);
         spectrum_buffer=get_spectrum_input_buffer();
         memcpy(spectrum_samples,spectrum_buffer->buffer,SPECTRUM_BUFFER_SIZE);
         free_spectrum_buffer(spectrum_buffer);
@@ -215,12 +216,14 @@ void* ozy_ep6_ep2_io_thread(void* arg) {
             bytes=libusb_read_ozy(0x86,(void*)(ozy_buffer->buffer),OZY_BUFFER_SIZE);
             if (bytes < 0) {
                 fprintf(stderr,"ozy_ep6_ep2_io_thread: OzyBulkRead read failed %d\n",bytes);
+                free_ozy_buffer(ozy_buffer);
             } else if (bytes != OZY_BUFFER_SIZE) {
                 fprintf(stderr,"ozy_ep6_ep2_io_thread: OzyBulkRead only read %d bytes\n",bytes);
+                free_ozy_buffer(ozy_buffer);
             } else {
                 // process input buffer
                 put_ozy_input_buffer(ozy_buffer);
-                sem_post(&ozy_input_buffer_sem);
+                sem_post(ozy_input_buffer_sem);
             }
 
         }
@@ -274,14 +277,17 @@ void* ozy_ep4_io_thread(void* arg) {
         if(spectrum_buffer!=NULL) {
             bytes=libusb_read_ozy(0x84,(void*)(spectrum_buffer->buffer),SPECTRUM_BUFFER_SIZE);
             if (bytes < 0) {
-                perror("ozy_ep4_io_thread: OzyBulkRead failed");
+                fprintf(stderr,"ozy_ep4_io_thread: OzyBulkRead failed %d bytes\n",bytes);
+                free_spectrum_buffer(spectrum_buffer);
             } else if (bytes != SPECTRUM_BUFFER_SIZE) {
                 fprintf(stderr,"ozy_ep4_io_thread: OzyBulkRead only read %d bytes\n",bytes);
-            }
+                free_spectrum_buffer(spectrum_buffer);
+            } else {
 
-            // process input buffer
-            put_spectrum_input_buffer(spectrum_buffer);
-            sem_post(&spectrum_input_buffer_sem);
+                // process input buffer
+                put_spectrum_input_buffer(spectrum_buffer);
+                sem_post(spectrum_input_buffer_sem);
+            }
         } else {
             fprintf(stderr,"ozy_ep4_io_thread: get_spectrum_free_buffer returned NULL!");
         }
@@ -431,10 +437,10 @@ int ozy_init(int sample_rate) {
     }
 
     // create a thread to read from EP4
-    rc=pthread_create(&ep4_io_thread_id,NULL,ozy_ep4_io_thread,NULL);
-    if(rc != 0) {
-        fprintf(stderr,"pthread_create failed on ozy_ep4_io_thread: rc=%d\n", rc);
-    }
+//    rc=pthread_create(&ep4_io_thread_id,NULL,ozy_ep4_io_thread,NULL);
+//    if(rc != 0) {
+//        fprintf(stderr,"pthread_create failed on ozy_ep4_io_thread: rc=%d\n", rc);
+//    }
 
 
     return rc;
