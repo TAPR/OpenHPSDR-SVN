@@ -12,6 +12,9 @@
 #include "bandscope.h"
 #include "vfo.h"
 
+GtkWidget* bandscopeScrolledWindow;
+GtkAdjustment* horizontalAdjustment;
+GtkAdjustment* verticalAdjustment;
 GtkWidget* bandscope;
 
 int bandscopeMAX=80;
@@ -21,7 +24,8 @@ int bandscopeSTEP=10;
 int bandscopeLow=0;
 int bandscopeHigh=61440000;
 
-int bandscopeZoom=1;
+int bandscopeZoom=4;
+int bandscopeOffset=0;
 
 fftwf_complex* timebuf;
 fftwf_complex* freqbuf;
@@ -48,17 +52,28 @@ GtkWidget* buildBandscopeUI() {
 
     result=malloc(BANDSCOPE_BUFFER_SIZE*sizeof(float));
 
-    // allocate space for the plotting bandscopePoints
-    bandscopePoints=calloc(bandscopeWIDTH,sizeof(GdkPoint));
+    // allocate space for the plotting bandscopePoints (allow for 4x zoom)
+    bandscopePoints=calloc(bandscopeWIDTH*4,sizeof(GdkPoint));
     int i;
-    for(i=0;i<bandscopeWIDTH;i++) {
+    for(i=0;i<bandscopeWIDTH*4;i++) {
         bandscopePoints[i].x=i;
         bandscopePoints[i].y=-1;
     }
 
     // build the UI
+
+    horizontalAdjustment=(GtkAdjustment*)gtk_adjustment_new(0.0,0.0,0.0,0.0,0.0,0.0);
+    verticalAdjustment=(GtkAdjustment*)gtk_adjustment_new(0.0,0.0,0.0,0.0,0.0,0.0);
+
+    bandscopeScrolledWindow=gtk_scrolled_window_new(horizontalAdjustment,verticalAdjustment);
+    gtk_widget_set_size_request(GTK_WIDGET(bandscopeScrolledWindow),bandscopeWIDTH+2,bandscopeHEIGHT);
+    gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (bandscopeScrolledWindow),
+                                    GTK_POLICY_ALWAYS,GTK_POLICY_NEVER);
+
+    gtk_widget_show(bandscopeScrolledWindow);
+
     bandscope=gtk_drawing_area_new();
-    gtk_widget_set_size_request(GTK_WIDGET(bandscope),bandscopeWIDTH,bandscopeHEIGHT);
+    gtk_widget_set_size_request(GTK_WIDGET(bandscope),bandscopeWIDTH*bandscopeZoom,bandscopeHEIGHT);
     gtk_widget_show(bandscope);
 
     g_signal_connect(G_OBJECT (bandscope),"configure_event",G_CALLBACK(bandscope_configure_event),NULL);
@@ -67,7 +82,10 @@ GtkWidget* buildBandscopeUI() {
 
     gtk_widget_set_events(bandscope, GDK_EXPOSURE_MASK | GDK_BUTTON_PRESS_MASK);
 
-    return bandscope;
+    gtk_scrolled_window_add_with_viewport((GtkScrolledWindow*)bandscopeScrolledWindow,bandscope);
+
+
+    return bandscopeScrolledWindow;
 }
 
 gboolean bandscope_configure_event(GtkWidget* widget,GdkEventConfigure* event) {
@@ -148,7 +166,7 @@ void drawBandscope() {
     float hzPerPixel;
 
     f=bandscopeLow;
-    hzPerPixel=(float)bandscopeHigh/(float)bandscopeZoom/(float)bandscopeWIDTH;
+    hzPerPixel=(float)bandscopeHigh/(float)(bandscopeWIDTH*bandscopeZoom);
 
     if(bandscope->window) {
 
@@ -156,13 +174,12 @@ void drawBandscope() {
         gdk_gc_copy(gc,bandscope->style->black_gc);
 
 
-        gdk_draw_rectangle(bandscopePixmap,gc,TRUE,0,0,bandscopeWIDTH,bandscopeHEIGHT);
+        gdk_draw_rectangle(bandscopePixmap,gc,TRUE,0,0,bandscopeWIDTH*bandscopeZoom,bandscopeHEIGHT);
 
         // setup for drawing text
         context = gdk_pango_context_get_for_screen (gdk_screen_get_default ());
         layout = pango_layout_new (context);
         pango_layout_set_width(layout,bandscopeWIDTH*PANGO_SCALE);
-
 
         // show the ham bands
         gdk_gc_set_rgb_fg_color(gc,&grey);
@@ -203,7 +220,7 @@ void drawBandscope() {
         
 
         // draw the frequency markers
-        for(i=5;i<(65/bandscopeZoom);i+=5) {
+        for(i=5;i<65;i+=5) {
             x=(int)(((float)i*1000000.0f)/hzPerPixel);
             gdk_gc_set_rgb_fg_color(gc,&verticalColor);
             gdk_draw_line(bandscopePixmap,gc,x,0,x,bandscopeHEIGHT);
@@ -239,7 +256,7 @@ void drawBandscope() {
 
         // draw the bandscope
         gdk_gc_set_rgb_fg_color(gc,&plotColor);
-        gdk_draw_lines(bandscopePixmap,gc,bandscopePoints,bandscopeWIDTH);
+        gdk_draw_lines(bandscopePixmap,gc,bandscopePoints,bandscopeWIDTH*bandscopeZoom);
 
         // update the bandscope
         gtk_widget_queue_draw(bandscope);
@@ -251,14 +268,14 @@ void drawBandscope() {
 }
 
 void plotBandscope(float* samples) {
-        float samplesPerPixel=(float)BANDSCOPE_BUFFER_SIZE/2.0/(float)bandscopeWIDTH/(float)bandscopeZoom;
+        float samplesPerPixel=(float)BANDSCOPE_BUFFER_SIZE/2.0/(float)(bandscopeWIDTH*bandscopeZoom);
         float max=0.0f;
         float yRange = (float)(bandscopeMAX - bandscopeMIN);
 
         int i,j;
 
         if(samplesPerPixel<1.0f) samplesPerPixel=1.0f;
-        for(i=0;i<bandscopeWIDTH;i++) {
+        for(i=0;i<bandscopeWIDTH*bandscopeZoom;i++) {
             int offset=(int)(samplesPerPixel*(float)i);
             max=-300.0f;
             for(j=offset;j<offset+samplesPerPixel;j++) {
@@ -310,5 +327,10 @@ void bandscopeRestoreState() {
     value=getProperty("bandscope.step");
     if(value) bandscopeSTEP=atoi(value);
 
+}
+
+void bandscopeSetZoom(int zoom) {
+    bandscopeZoom=zoom;
+    gtk_widget_set_size_request(GTK_WIDGET(bandscope),bandscopeWIDTH*bandscopeZoom,bandscopeHEIGHT);
 }
 

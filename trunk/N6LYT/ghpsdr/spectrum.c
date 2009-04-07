@@ -322,13 +322,15 @@ void drawSpectrum(int height) {
 
         // draw the vertical lines
         for(i=0;i<spectrumWIDTH;i++) {
-            if((f%10000)<(long long)hzPerPixel) {
-                gdk_gc_set_rgb_fg_color(gc,&verticalColor);
-                gdk_draw_line(spectrumPixmap,gc,i,0,i,height);
-                gdk_gc_set_rgb_fg_color(gc,&spectrumTextColor);
-                sprintf(label,"<span font_desc='Sans Regular 8'>%4.2f</span>",(float)f/1000000.0f);
-                pango_layout_set_markup (layout, label, -1);
-                gdk_draw_layout (GDK_DRAWABLE (spectrumPixmap), gc, i-17, 0, layout);
+            if(f>0) {
+                if((f%10000)<(long long)hzPerPixel) {
+                    gdk_gc_set_rgb_fg_color(gc,&verticalColor);
+                    gdk_draw_line(spectrumPixmap,gc,i,0,i,height);
+                    gdk_gc_set_rgb_fg_color(gc,&spectrumTextColor);
+                    sprintf(label,"<span font_desc='Sans Regular 8'>%4.2f</span>",(float)f/1000000.0f);
+                    pango_layout_set_markup (layout, label, -1);
+                    gdk_draw_layout (GDK_DRAWABLE (spectrumPixmap), gc, i-17, 0, layout);
+                }
             }
             f+=(long long)hzPerPixel;
         }
@@ -394,6 +396,11 @@ void plotSpectrum(float* samples,int height) {
     int start_sample_index;
     float slope;
     int yRange=spectrumMAX-spectrumMIN;
+    long long f;
+    float hzPerPixel;
+
+    f=frequencyA-(sampleRate/2);
+    hzPerPixel=(float)sampleRate/(float)spectrumWIDTH;
 
     start_sample_index=(SPECTRUM_BUFFER_SIZE>>1)+((spectrumLow*SPECTRUM_BUFFER_SIZE)/sampleRate);
     num_samples=(int)((spectrumHigh-spectrumLow)*SPECTRUM_BUFFER_SIZE/sampleRate);
@@ -412,12 +419,16 @@ void plotSpectrum(float* samples,int height) {
         int rindex = (int)floorf(dval + slope);
         if (rindex > SPECTRUM_BUFFER_SIZE) rindex = SPECTRUM_BUFFER_SIZE;
 
-        int j;
-        for(j=lindex;j<rindex;j++) {
-            if (samples[j] > max) max=samples[j];
-        }
+        if(f>0) {
+            int j;
+            for(j=lindex;j<rindex;j++) {
+                if (samples[j] > max) max=samples[j];
+            }
 
-        max = max + displayCalibrationOffset + preampOffset;
+            max = max + displayCalibrationOffset + preampOffset;
+        } else {
+            max=-250;
+        }
 
         // save for waterfall
         waterfall[i]=max;
@@ -427,8 +438,10 @@ void plotSpectrum(float* samples,int height) {
             spectrum_max_y = max;
             spectrum_max_x = i;
         }
-        spectrumPoints[i].x = i;
+
         spectrumPoints[i].y = (int)(floorf(((float)spectrumMAX - (float)max)*(float)height/(float)yRange));
+        spectrumPoints[i].x = i;
+        f+=(long long)hzPerPixel;
     }
 }
 
