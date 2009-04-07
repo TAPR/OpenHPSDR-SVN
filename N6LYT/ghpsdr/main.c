@@ -69,6 +69,7 @@ GtkWidget* audioWindow;
 GtkWidget* mercuryWindow;
 GtkWidget* meterWindow;
 GtkWidget* bandscopeWindow;
+GtkWidget* bandscope_controlWindow;
 GtkWidget* agcWindow;
 
 gint mainStartX;
@@ -112,6 +113,7 @@ void quit() {
     audioSaveState();
     mercurySaveState();
     bandscopeSaveState();
+    bandscope_controlSaveState();
     agcSaveState();
 
     saveProperties(propertyPath);
@@ -289,9 +291,12 @@ void buildMainUI() {
 
     // add the bandscope display
     gtk_widget_show(bandscopeWindow);
-    gtk_fixed_put((GtkFixed*)mainFixed,bandscopeWindow,205,spectrumHEIGHT+160);
+    gtk_fixed_put((GtkFixed*)mainFixed,bandscopeWindow,141,spectrumHEIGHT+160);
 
-    gtk_widget_set_size_request(GTK_WIDGET(mainFixed),1170,spectrumHEIGHT+160+bandscopeHEIGHT);
+    gtk_widget_show(bandscope_controlWindow);
+    gtk_fixed_put((GtkFixed*)mainFixed,bandscope_controlWindow,205,spectrumHEIGHT+160+bandscopeHEIGHT);
+
+    gtk_widget_set_size_request(GTK_WIDGET(mainFixed),1170,spectrumHEIGHT+160+bandscopeHEIGHT+25);
     gtk_widget_show(mainFixed);
     gtk_container_add(GTK_CONTAINER(mainWindow), mainFixed);
 
@@ -463,6 +468,9 @@ int main(int argc,char* argv[]) {
 
     bandscopeRestoreState();
     bandscopeWindow=buildBandscopeUI();
+   
+    bandscope_controlRestoreState();
+    bandscope_controlWindow=buildBandscope_controlUI();
    
     meterRestoreState();
     meterWindow=buildMeterUI();
