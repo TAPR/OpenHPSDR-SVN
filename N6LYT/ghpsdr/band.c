@@ -102,8 +102,8 @@ void selectBand(GtkWidget* widget) {
         gtk_widget_modify_fg(label, GTK_STATE_PRELIGHT, &white);
     }
     label=gtk_bin_get_child((GtkBin*)widget);
-    gtk_widget_modify_fg(label, GTK_STATE_NORMAL, &bandButtonSelected);
-    gtk_widget_modify_fg(label, GTK_STATE_PRELIGHT, &bandButtonSelected);
+    gtk_widget_modify_fg(label, GTK_STATE_NORMAL, &buttonSelected);
+    gtk_widget_modify_fg(label, GTK_STATE_PRELIGHT, &buttonSelected);
 
     //save current
     if(currentBandButton) {
@@ -259,7 +259,7 @@ void forceBand(int b) {
         gtk_widget_modify_fg(label, GTK_STATE_NORMAL, &black);
     }
     label=gtk_bin_get_child((GtkBin*)widget);
-    gtk_widget_modify_fg(label, GTK_STATE_NORMAL, &bandButtonSelected);
+    gtk_widget_modify_fg(label, GTK_STATE_NORMAL, &buttonSelected);
 
     currentBandButton=widget;
     band=b;

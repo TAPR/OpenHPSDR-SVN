@@ -3,13 +3,10 @@
 GdkColor background;
 GdkColor buttonBackground;
 GdkColor bandButtonBackground;
-GdkColor bandButtonSelected;
-GdkColor modeButtonSelected;
+GdkColor buttonSelected;
 GdkColor black;
 GdkColor white;
 GdkColor displayButton;
-GdkColor mainButtonSelected;
-GdkColor mainButtonUnselected;
 GdkColor green;
 GdkColor red;
 GdkColor grey;
