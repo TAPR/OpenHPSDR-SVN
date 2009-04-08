@@ -27,10 +27,13 @@ int bandscopeHigh=61440000;
 int bandscopeZoom=4;
 int bandscopeOffset=0;
 
+float* blackmanHarris;
+
 fftwf_complex* timebuf;
 fftwf_complex* freqbuf;
 fftwf_plan plan;
 float* result;
+
 
 GdkPixmap *bandscopePixmap=NULL;
 GdkPoint* bandscopePoints;
@@ -42,6 +45,7 @@ gboolean bandscope_button_press_event(GtkWidget* widget,GdkEventButton* event);
 void plotBandscope(float* samples);
 void drawBandscope();
 void bandscopeUpdateOff();
+float *blackmanHarrisFilter(int n);
 
 GtkWidget* buildBandscopeUI() {
     
@@ -59,6 +63,9 @@ GtkWidget* buildBandscopeUI() {
         bandscopePoints[i].x=i;
         bandscopePoints[i].y=-1;
     }
+
+    // build the BlackmanHarris filter
+    blackmanHarris=blackmanHarrisFilter(BANDSCOPE_BUFFER_SIZE);
 
     // build the UI
 
@@ -133,10 +140,11 @@ gboolean bandscope_button_press_event(GtkWidget* widget,GdkEventButton* event) {
 }
 
 void updateBandscope(float* samples) {
-    int i;
+    int i,j;
+    int half=BANDSCOPE_BUFFER_SIZE/2;
     // copy samples into time domain array
     for(i=0;i<BANDSCOPE_BUFFER_SIZE;i++) {
-        timebuf[i][0]=samples[i];
+        timebuf[i][0]=samples[i]*blackmanHarris[i];
         timebuf[i][1]=0.0f;
     }
 
@@ -334,3 +342,26 @@ void bandscopeSetZoom(int zoom) {
     gtk_widget_set_size_request(GTK_WIDGET(bandscope),bandscopeWIDTH*bandscopeZoom,bandscopeHEIGHT);
 }
 
+float *blackmanHarrisFilter(int n) {
+    float* filter;
+    float a0=0.35875F,
+          a1=0.48829F,
+          a2=0.14128F,
+          a3=0.01168F;
+    float twopi=M_PI*2.0F;
+    float fourpi=M_PI*4.0F;
+    float sixpi=M_PI*6.0F;
+    int i;
+
+    filter=malloc(n*sizeof(float));
+
+    for(i = 0;i<n;i++) {
+        filter[i]=a0
+                  - a1 * cos(twopi  * (i + 0.5) / n)
+                  + a2 * cos(fourpi * (i + 0.5) / n)
+                  - a3 * cos(sixpi * (i + 0.5) / n);
+    }
+
+    return filter;
+
+}
