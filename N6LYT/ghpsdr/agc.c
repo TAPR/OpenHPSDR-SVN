@@ -18,7 +18,7 @@
 
 GtkWidget* agcFixed;
 
-int agc;
+int agc=agcLONG;
 
 GtkWidget* buttonOFF;
 GtkWidget* buttonSLOW;
