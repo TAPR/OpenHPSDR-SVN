@@ -51,9 +51,11 @@ void selectMode(GtkWidget* widget) {
     if(currentModeButton) {
         label=gtk_bin_get_child((GtkBin*)currentModeButton);
         gtk_widget_modify_fg(label, GTK_STATE_NORMAL, &white);
+        gtk_widget_modify_fg(label, GTK_STATE_PRELIGHT, &black);
     }
     label=gtk_bin_get_child((GtkBin*)widget);
     gtk_widget_modify_fg(label, GTK_STATE_NORMAL, &modeButtonSelected);
+    gtk_widget_modify_fg(label, GTK_STATE_PRELIGHT, &modeButtonSelected);
     currentModeButton=widget;
 
     if(widget==buttonLSB) {

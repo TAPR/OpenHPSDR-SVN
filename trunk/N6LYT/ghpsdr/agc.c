@@ -41,9 +41,11 @@ void selectAgc(GtkWidget* widget) {
     if(currentAgcButton) {
         label=gtk_bin_get_child((GtkBin*)currentAgcButton);
         gtk_widget_modify_fg(label, GTK_STATE_NORMAL, &white);
+        gtk_widget_modify_fg(label, GTK_STATE_PRELIGHT, &black);
     }
     label=gtk_bin_get_child((GtkBin*)widget);
     gtk_widget_modify_fg(label, GTK_STATE_NORMAL, &modeButtonSelected);
+    gtk_widget_modify_fg(label, GTK_STATE_PRELIGHT, &modeButtonSelected);
     currentAgcButton=widget;
 
     if(widget==buttonOFF) {

@@ -146,9 +146,11 @@ void selectFilter(GtkWidget* widget) {
     if(currentFilterButton) {
         label=gtk_bin_get_child((GtkBin*)currentFilterButton);
         gtk_widget_modify_fg(label, GTK_STATE_NORMAL, &white);
+        gtk_widget_modify_fg(label, GTK_STATE_PRELIGHT, &black);
     }
     label=gtk_bin_get_child((GtkBin*)widget);
     gtk_widget_modify_fg(label, GTK_STATE_NORMAL, &modeButtonSelected);
+    gtk_widget_modify_fg(label, GTK_STATE_PRELIGHT, &modeButtonSelected);
     currentFilterButton=widget;
 
     if(widget==button6000) {
