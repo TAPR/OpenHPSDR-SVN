@@ -20,6 +20,8 @@
 #include "mode.h"
 #include "band.h"
 #include "vfo.h"
+#include "mercury.h"
+#include "spectrum.h"
 
 GtkWidget* bandFixed;
 
@@ -42,45 +44,45 @@ GtkWidget* buttonWWV;
 GtkWidget* currentBandButton;
 
 BANDSTACK bandstack[BANDS][BANDSTACKS]= {
-    {{1810000LL,modeCWL,5,-2800,-200,-2800,-200,100},
-     {1835000LL,modeCWU,5,-2800,-200,-2800,-200,100},
-     {1845000LL,modeUSB,2,-2800,-200,-2800,-200,100}},
-    {{3501000LL,modeCWL,5,-2800,-200,-2800,-200,100},
-     {3751000LL,modeLSB,2,-2800,-200,-2800,-200,100},
-     {3850000LL,modeLSB,2,-2800,-200,-2800,-200,100}},
-    {{5330500LL,modeUSB,2,-2800,-200,-2800,-200,100},
-     {5346500LL,modeUSB,2,-2800,-200,-2800,-200,100},
-     {5356500LL,modeUSB,2,-2800,-200,-2800,-200,100}},
-    {{7001000LL,modeCWL,5,-2800,-200,-2800,-200,100},
-     {7152000LL,modeLSB,2,-2800,-200,-2800,-200,100},
-     {7255000LL,modeLSB,2,-2800,-200,-2800,-200,100}},
-    {{10120000LL,modeCWU,5,200,2800,200,2800,100},
-     {10130000LL,modeCWU,5,200,2800,200,2800,100},
-     {10140000LL,modeCWU,5,200,2800,200,2800,100}},
-    {{14010000LL,modeCWU,5,200,2800,200,2800,100},
-     {14230000LL,modeUSB,2,200,2800,200,2800,100},
-     {14336000LL,modeUSB,2,200,2800,200,2800,100}},
-    {{18068600LL,modeCWU,5,200,2800,200,2800,100},
-     {18125000LL,modeUSB,2,200,2800,200,2800,100},
-     {18140000LL,modeUSB,2,200,2800,200,2800,100}},
-    {{21001000LL,modeCWU,5,200,2800,200,2800,100},
-     {21255000LL,modeUSB,2,200,2800,200,2800,100},
-     {21300000LL,modeUSB,2,200,2800,200,2800,100}},
-    {{24895000LL,modeCWU,5,200,2800,200,2800,100},
-     {24900000LL,modeUSB,2,200,2800,200,2800,100},
-     {24910000LL,modeUSB,2,200,2800,200,2800,100}},
-    {{28010000LL,modeCWU,5,200,2800,200,2800,100},
-     {28300000LL,modeUSB,2,200,2800,200,2800,100},
-     {28400000LL,modeUSB,2,200,2800,200,2800,100}},
-    {{50010000LL,modeCWU,5,200,2800,200,2800,100},
-     {50125000LL,modeUSB,2,200,2800,200,2800,100},
-     {50200000LL,modeUSB,2,200,2800,200,2800,100}},
-    {{909000LL,modeAM,0,-6000,6000,-6000,6000,1000},
-     {5975000LL,modeAM,0,-6000,6000,-6000,6000,1000},
-     {13845000LL,modeAM,0,-6000,6000,-6000,6000,1000}},
-    {{5000000LL,modeSAM,2,200,2800,200,2800,1000},
-     {10000000LL,modeSAM,2,200,2800,200,2800,1000},
-     {15000000LL,modeSAM,2,200,2800,200,2800,1000}}
+    {{1810000LL,modeCWL,5,-2800,-200,-2800,-200,100,0,-100,-180,10,-100,-150},
+     {1835000LL,modeCWU,5,-2800,-200,-2800,-200,100,0,-100,-180,10,-100,-150},
+     {1845000LL,modeUSB,2,-2800,-200,-2800,-200,100,0,-100,-180,10,-100,-150}},
+    {{3501000LL,modeCWL,5,-2800,-200,-2800,-200,100,0,-100,-180,10,-100,-150},
+     {3751000LL,modeLSB,2,-2800,-200,-2800,-200,100,0,-100,-180,10,-100,-150},
+     {3850000LL,modeLSB,2,-2800,-200,-2800,-200,100,0,-100,-180,10,-100,-150}},
+    {{5330500LL,modeUSB,2,-2800,-200,-2800,-200,100,0,-100,-180,10,-100,-150},
+     {5346500LL,modeUSB,2,-2800,-200,-2800,-200,100,0,-100,-180,10,-100,-150},
+     {5356500LL,modeUSB,2,-2800,-200,-2800,-200,100,0,-100,-180,10,-100,-150}},
+    {{7001000LL,modeCWL,5,-2800,-200,-2800,-200,100,0,-100,-180,10,-100,-150},
+     {7152000LL,modeLSB,2,-2800,-200,-2800,-200,100,0,-100,-180,10,-100,-150},
+     {7255000LL,modeLSB,2,-2800,-200,-2800,-200,100,0,-100,-180,10,-100,-150}},
+    {{10120000LL,modeCWU,5,200,2800,200,2800,100,0,-100,-180,10,-100,-150},
+     {10130000LL,modeCWU,5,200,2800,200,2800,100,0,-100,-180,10,-100,-150},
+     {10140000LL,modeCWU,5,200,2800,200,2800,100,0,-100,-180,10,-100,-150}},
+    {{14010000LL,modeCWU,5,200,2800,200,2800,100,1,-100,-180,10,-100,-150},
+     {14230000LL,modeUSB,2,200,2800,200,2800,100,1,-100,-180,10,-100,-150},
+     {14336000LL,modeUSB,2,200,2800,200,2800,100,1,-100,-180,10,-100,-150}},
+    {{18068600LL,modeCWU,5,200,2800,200,2800,100,1,-100,-180,10,-100,-150},
+     {18125000LL,modeUSB,2,200,2800,200,2800,100,1,-100,-180,10,-100,-150},
+     {18140000LL,modeUSB,2,200,2800,200,2800,100,1,-100,-180,10,-100,-150}},
+    {{21001000LL,modeCWU,5,200,2800,200,2800,100,1,-100,-180,10,-100,-150},
+     {21255000LL,modeUSB,2,200,2800,200,2800,100,1,-100,-180,10,-100,-150},
+     {21300000LL,modeUSB,2,200,2800,200,2800,100,1,-100,-180,10,-100,-150}},
+    {{24895000LL,modeCWU,5,200,2800,200,2800,100,1,-100,-180,10,-100,-150},
+     {24900000LL,modeUSB,2,200,2800,200,2800,100,1,-100,-180,10,-100,-150},
+     {24910000LL,modeUSB,2,200,2800,200,2800,100,1,-100,-180,10,-100,-150}},
+    {{28010000LL,modeCWU,5,200,2800,200,2800,100,1,-100,-180,10,-100,-150},
+     {28300000LL,modeUSB,2,200,2800,200,2800,100,1,-100,-180,10,-100,-150},
+     {28400000LL,modeUSB,2,200,2800,200,2800,100,1,-100,-180,10,-100,-150}},
+    {{50010000LL,modeCWU,5,200,2800,200,2800,100,1,-100,-180,10,-100,-150},
+     {50125000LL,modeUSB,2,200,2800,200,2800,100,1,-100,-180,10,-100,-150},
+     {50200000LL,modeUSB,2,200,2800,200,2800,100,1,-100,-180,10,-100,-150}},
+    {{909000LL,modeAM,0,-6000,6000,-6000,6000,1000,0,-100,-180,10,-100,-150},
+     {5975000LL,modeAM,0,-6000,6000,-6000,6000,1000,0,-100,-180,10,-100,-150},
+     {13845000LL,modeAM,0,-6000,6000,-6000,6000,1000,0,-100,-180,10,-100,-150}},
+    {{5000000LL,modeSAM,2,200,2800,200,2800,1000,0,-100,-180,10,-100,-150},
+     {10000000LL,modeSAM,2,200,2800,200,2800,1000,0,-100,-180,10,-100,-150},
+     {15000000LL,modeSAM,2,200,2800,200,2800,1000,0,-100,-180,10,-100,-150}}
 };
 
 int currentStack[BANDS]={0,0,0,0,0,0,0,0,0,0,0,0};
@@ -115,6 +117,12 @@ void selectBand(GtkWidget* widget) {
         bandstack[band][currentStack[band]].var2Low=filterVar2Low;
         bandstack[band][currentStack[band]].var2High=filterVar2High;
         bandstack[band][currentStack[band]].step=frequencyIncrement;
+        bandstack[band][currentStack[band]].preamp=Preamp;
+        bandstack[band][currentStack[band]].spectrumHigh=spectrumMAX;
+        bandstack[band][currentStack[band]].spectrumLow=spectrumMIN;
+        bandstack[band][currentStack[band]].spectrumStep=spectrumSTEP;
+        bandstack[band][currentStack[band]].waterfallHigh=waterfallHighThreshold;
+        bandstack[band][currentStack[band]].waterfallLow=waterfallLowThreshold;
     }
 
     if(currentBandButton==widget) {
@@ -162,6 +170,12 @@ void selectBand(GtkWidget* widget) {
     setAFrequency(bandstack[band][currentStack[band]].frequencyA);
     setIncrement(bandstack[band][currentStack[band]].step);
 
+    setPreamp(bandstack[band][currentStack[band]].preamp);
+    spectrumMAX=bandstack[band][currentStack[band]].spectrumHigh;
+    spectrumMIN=bandstack[band][currentStack[band]].spectrumLow;
+    spectrumSTEP=bandstack[band][currentStack[band]].spectrumStep;
+    waterfallHighThreshold=bandstack[band][currentStack[band]].waterfallHigh;
+    waterfallLowThreshold=bandstack[band][currentStack[band]].waterfallLow;
 }
 
 void setBand(int band) {
@@ -426,6 +440,12 @@ void bandSaveState() {
     bandstack[band][currentStack[band]].var2Low=filterVar2Low;
     bandstack[band][currentStack[band]].var2High=filterVar2High;
     bandstack[band][currentStack[band]].step=frequencyIncrement;
+    bandstack[band][currentStack[band]].preamp=Preamp;
+    bandstack[band][currentStack[band]].spectrumHigh=spectrumMAX;
+    bandstack[band][currentStack[band]].spectrumLow=spectrumMIN;
+    bandstack[band][currentStack[band]].spectrumStep=spectrumSTEP;
+    bandstack[band][currentStack[band]].waterfallHigh=waterfallHighThreshold;
+    bandstack[band][currentStack[band]].waterfallLow=waterfallLowThreshold;
 
 
     int b;
@@ -465,6 +485,31 @@ void bandSaveState() {
             sprintf(string,"%d",bandstack[b][stack].step);
             sprintf(name,"band.%d.stack.%d.step",b,stack);
             setProperty(name,string);
+
+            sprintf(string,"%d",bandstack[b][stack].preamp);
+            sprintf(name,"band.%d.stack.%d.preamp",b,stack);
+            setProperty(name,string);
+
+            sprintf(string,"%d",bandstack[b][stack].spectrumHigh);
+            sprintf(name,"band.%d.stack.%d.spectrumHigh",b,stack);
+            setProperty(name,string);
+
+            sprintf(string,"%d",bandstack[b][stack].spectrumLow);
+            sprintf(name,"band.%d.stack.%d.spectrumLow",b,stack);
+            setProperty(name,string);
+
+            sprintf(string,"%d",bandstack[b][stack].spectrumStep);
+            sprintf(name,"band.%d.stack.%d.spectrumStep",b,stack);
+            setProperty(name,string);
+
+            sprintf(string,"%d",bandstack[b][stack].waterfallHigh);
+            sprintf(name,"band.%d.stack.%d.waterfallHigh",b,stack);
+            setProperty(name,string);
+
+            sprintf(string,"%d",bandstack[b][stack].waterfallLow);
+            sprintf(name,"band.%d.stack.%d.waterfallLow",b,stack);
+            setProperty(name,string);
+
         }
         sprintf(string,"%d",currentStack[b]);
         sprintf(name,"band.%d.current.stack",b);
@@ -514,6 +559,31 @@ void bandRestoreState() {
             sprintf(name,"band.%d.stack.%d.step",b,stack);
             value=getProperty(name);
             if(value) bandstack[b][stack].step=atoi(value);
+
+            sprintf(name,"band.%d.stack.%d.preamp",b,stack);
+            value=getProperty(name);
+            if(value) bandstack[b][stack].preamp=atoi(value);
+
+            sprintf(name,"band.%d.stack.%d.spectrumHigh",b,stack);
+            value=getProperty(name);
+            if(value) bandstack[b][stack].spectrumHigh=atoi(value);
+
+            sprintf(name,"band.%d.stack.%d.spectrumLow",b,stack);
+            value=getProperty(name);
+            if(value) bandstack[b][stack].spectrumLow=atoi(value);
+
+            sprintf(name,"band.%d.stack.%d.spectrumStep",b,stack);
+            value=getProperty(name);
+            if(value) bandstack[b][stack].spectrumStep=atoi(value);
+
+            sprintf(name,"band.%d.stack.%d.waterfallHigh",b,stack);
+            value=getProperty(name);
+            if(value) bandstack[b][stack].waterfallHigh=atoi(value);
+
+            sprintf(name,"band.%d.stack.%d.waterfallLow",b,stack);
+            value=getProperty(name);
+            if(value) bandstack[b][stack].waterfallLow=atoi(value);
+
         }
         sprintf(name,"band.%d.current.stack",b);
         value=getProperty(name);
