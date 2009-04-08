@@ -253,3 +253,9 @@ void mercuryRestoreState() {
 
 }
 
+
+void setPreamp(gboolean state) {
+    if(Preamp!=state) {
+        mercuryButtonCallback(buttonPreamp,NULL);
+    }
+}

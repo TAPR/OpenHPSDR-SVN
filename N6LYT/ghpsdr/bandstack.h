@@ -11,6 +11,12 @@ struct _BANDSTACK {
     int var2Low;
     int var2High;
     int step;
+    int preamp;
+    int spectrumHigh;
+    int spectrumLow;
+    int spectrumStep;
+    int waterfallHigh;
+    int waterfallLow;
 };
 
 typedef struct _BANDSTACK BANDSTACK;
