@@ -38,8 +38,8 @@ void mercuryButtonCallback(GtkWidget* widget,gpointer data) {
         R96K=FALSE;
         R192K=FALSE;
         label=gtk_bin_get_child((GtkBin*)buttonR48K);
-        gtk_widget_modify_fg(label, GTK_STATE_NORMAL, &modeButtonSelected);
-        gtk_widget_modify_fg(label, GTK_STATE_PRELIGHT, &modeButtonSelected);
+        gtk_widget_modify_fg(label, GTK_STATE_NORMAL, &buttonSelected);
+        gtk_widget_modify_fg(label, GTK_STATE_PRELIGHT, &buttonSelected);
         label=gtk_bin_get_child((GtkBin*)buttonR96K);
         gtk_widget_modify_fg(label, GTK_STATE_NORMAL, &white);
         gtk_widget_modify_fg(label, GTK_STATE_PRELIGHT, &black);
@@ -60,8 +60,8 @@ void mercuryButtonCallback(GtkWidget* widget,gpointer data) {
         gtk_widget_modify_fg(label, GTK_STATE_NORMAL, &white);
         gtk_widget_modify_fg(label, GTK_STATE_PRELIGHT, &black);
         label=gtk_bin_get_child((GtkBin*)buttonR96K);
-        gtk_widget_modify_fg(label, GTK_STATE_NORMAL, &modeButtonSelected);
-        gtk_widget_modify_fg(label, GTK_STATE_NORMAL, &modeButtonSelected);
+        gtk_widget_modify_fg(label, GTK_STATE_NORMAL, &buttonSelected);
+        gtk_widget_modify_fg(label, GTK_STATE_NORMAL, &buttonSelected);
         label=gtk_bin_get_child((GtkBin*)buttonR192K);
         gtk_widget_modify_fg(label, GTK_STATE_NORMAL, &white);
         gtk_widget_modify_fg(label, GTK_STATE_PRELIGHT, &black);
@@ -82,8 +82,8 @@ void mercuryButtonCallback(GtkWidget* widget,gpointer data) {
         gtk_widget_modify_fg(label, GTK_STATE_NORMAL, &white);
         gtk_widget_modify_fg(label, GTK_STATE_PRELIGHT, &black);
         label=gtk_bin_get_child((GtkBin*)buttonR192K);
-        gtk_widget_modify_fg(label, GTK_STATE_NORMAL, &modeButtonSelected);
-        gtk_widget_modify_fg(label, GTK_STATE_PRELIGHT, &modeButtonSelected);
+        gtk_widget_modify_fg(label, GTK_STATE_NORMAL, &buttonSelected);
+        gtk_widget_modify_fg(label, GTK_STATE_PRELIGHT, &buttonSelected);
         sampleRate=192000;
         setSpeed(2);
         SetSampleRate((double)sampleRate);
@@ -107,8 +107,8 @@ void mercuryButtonCallback(GtkWidget* widget,gpointer data) {
 
         label=gtk_bin_get_child((GtkBin*)widget);
         if(state) {
-            gtk_widget_modify_fg(label, GTK_STATE_NORMAL, &modeButtonSelected);
-            gtk_widget_modify_fg(label, GTK_STATE_PRELIGHT, &modeButtonSelected);
+            gtk_widget_modify_fg(label, GTK_STATE_NORMAL, &buttonSelected);
+            gtk_widget_modify_fg(label, GTK_STATE_PRELIGHT, &buttonSelected);
         } else {
             gtk_widget_modify_fg(label, GTK_STATE_NORMAL, &white);
             gtk_widget_modify_fg(label, GTK_STATE_PRELIGHT, &black);
@@ -128,7 +128,7 @@ GtkWidget* buildMercuryUI() {
     gtk_widget_modify_bg(buttonR48K, GTK_STATE_NORMAL, &buttonBackground);
     label=gtk_bin_get_child((GtkBin*)buttonR48K);
     if(sampleRate==48000) {
-        gtk_widget_modify_fg(label, GTK_STATE_NORMAL, &modeButtonSelected);
+        gtk_widget_modify_fg(label, GTK_STATE_NORMAL, &buttonSelected);
     } else {
         gtk_widget_modify_fg(label, GTK_STATE_NORMAL, &white);
     }
@@ -141,7 +141,7 @@ GtkWidget* buildMercuryUI() {
     gtk_widget_modify_bg(buttonR96K, GTK_STATE_NORMAL, &buttonBackground);
     label=gtk_bin_get_child((GtkBin*)buttonR96K);
     if(sampleRate==96000) {
-        gtk_widget_modify_fg(label, GTK_STATE_NORMAL, &modeButtonSelected);
+        gtk_widget_modify_fg(label, GTK_STATE_NORMAL, &buttonSelected);
     } else {
         gtk_widget_modify_fg(label, GTK_STATE_NORMAL, &white);
     }
@@ -154,7 +154,7 @@ GtkWidget* buildMercuryUI() {
     gtk_widget_modify_bg(buttonR192K, GTK_STATE_NORMAL, &buttonBackground);
     label=gtk_bin_get_child((GtkBin*)buttonR192K);
     if(sampleRate==192000) {
-        gtk_widget_modify_fg(label, GTK_STATE_NORMAL, &modeButtonSelected);
+        gtk_widget_modify_fg(label, GTK_STATE_NORMAL, &buttonSelected);
     } else {
         gtk_widget_modify_fg(label, GTK_STATE_NORMAL, &white);
     }
@@ -167,7 +167,7 @@ GtkWidget* buildMercuryUI() {
     gtk_widget_modify_bg(buttonDither, GTK_STATE_NORMAL, &buttonBackground);
     label=gtk_bin_get_child((GtkBin*)buttonDither);
     if(Dither) {
-        gtk_widget_modify_fg(label, GTK_STATE_NORMAL, &modeButtonSelected);
+        gtk_widget_modify_fg(label, GTK_STATE_NORMAL, &buttonSelected);
     } else {
         gtk_widget_modify_fg(label, GTK_STATE_NORMAL, &white);
     }
@@ -180,7 +180,7 @@ GtkWidget* buildMercuryUI() {
     gtk_widget_modify_bg(buttonRandom, GTK_STATE_NORMAL, &buttonBackground);
     label=gtk_bin_get_child((GtkBin*)buttonRandom);
     if(Random) {
-        gtk_widget_modify_fg(label, GTK_STATE_NORMAL, &modeButtonSelected);
+        gtk_widget_modify_fg(label, GTK_STATE_NORMAL, &buttonSelected);
     } else {
         gtk_widget_modify_fg(label, GTK_STATE_NORMAL, &white);
     }
@@ -193,7 +193,7 @@ GtkWidget* buildMercuryUI() {
     gtk_widget_modify_bg(buttonPreamp, GTK_STATE_NORMAL, &buttonBackground);
     label=gtk_bin_get_child((GtkBin*)buttonPreamp);
     if(Preamp) {
-        gtk_widget_modify_fg(label, GTK_STATE_NORMAL, &modeButtonSelected);
+        gtk_widget_modify_fg(label, GTK_STATE_NORMAL, &buttonSelected);
     } else {
         gtk_widget_modify_fg(label, GTK_STATE_NORMAL, &white);
     }

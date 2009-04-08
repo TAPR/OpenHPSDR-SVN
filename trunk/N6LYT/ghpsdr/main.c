@@ -38,12 +38,9 @@
 GdkColor background;
 GdkColor buttonBackground;
 GdkColor bandButtonBackground;
-GdkColor bandButtonSelected;
-GdkColor modeButtonSelected;
+GdkColor buttonSelected;
 GdkColor black;
 GdkColor white;
-GdkColor mainButtonSelected;
-GdkColor mainButtonUnselected;
 GdkColor green;
 GdkColor red;
 GdkColor grey;
@@ -352,21 +349,9 @@ void initColors() {
     bandButtonBackground.green=65535*125/256;
     bandButtonBackground.blue=65535*125/256;
 
-    bandButtonSelected.red=65535*206/256;
-    bandButtonSelected.green=65535*138/256;
-    bandButtonSelected.blue=65535*77/256;
-
-    modeButtonSelected.red=65535*206/256;
-    modeButtonSelected.green=65535*138/256;
-    modeButtonSelected.blue=65535*77/256;
-
-    mainButtonUnselected.red=65535*67/256;
-    mainButtonUnselected.green=65535*144/256;
-    mainButtonUnselected.blue=65535*160/256;
-
-    mainButtonSelected.red=65535*206/256;
-    mainButtonSelected.green=65535*138/256;
-    mainButtonSelected.blue=65535*77/256;
+    buttonSelected.red=65535*206/256;
+    buttonSelected.green=65535*138/256;
+    buttonSelected.blue=65535*77/256;
 
     plotColor.red=65535*169/256;
     plotColor.green=65535*199/256;
