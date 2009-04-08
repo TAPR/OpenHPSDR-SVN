@@ -291,7 +291,7 @@ void buildMainUI() {
 
     // add the bandscope display
     gtk_widget_show(bandscopeWindow);
-    gtk_fixed_put((GtkFixed*)mainFixed,bandscopeWindow,141,spectrumHEIGHT+160);
+    gtk_fixed_put((GtkFixed*)mainFixed,bandscopeWindow,205,spectrumHEIGHT+160);
 
     gtk_widget_show(bandscope_controlWindow);
     gtk_fixed_put((GtkFixed*)mainFixed,bandscope_controlWindow,205,spectrumHEIGHT+160+bandscopeHEIGHT);

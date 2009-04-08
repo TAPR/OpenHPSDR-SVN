@@ -1,6 +1,6 @@
 // spectrum.h
 
-#define bandscopeWIDTH 1024
+#define bandscopeWIDTH 960
 #define bandscopeHEIGHT 100
 
 #define BANDSCOPE_BUFFER_SIZE 4096
