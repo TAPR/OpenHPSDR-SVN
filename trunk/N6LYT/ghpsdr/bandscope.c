@@ -17,14 +17,14 @@ GtkAdjustment* horizontalAdjustment;
 GtkAdjustment* verticalAdjustment;
 GtkWidget* bandscope;
 
-int bandscopeMAX=80;
-int bandscopeMIN=-80;
+int bandscopeMAX=40;
+int bandscopeMIN=-100;
 int bandscopeSTEP=10;
 
 int bandscopeLow=0;
 int bandscopeHigh=61440000;
 
-int bandscopeZoom=4;
+int bandscopeZoom=1;
 int bandscopeOffset=0;
 
 float* blackmanHarris;

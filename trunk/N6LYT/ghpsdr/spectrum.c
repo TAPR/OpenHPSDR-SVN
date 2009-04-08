@@ -16,7 +16,7 @@
 
 GtkWidget* spectrum;
 
-int spectrumMAX=0;
+int spectrumMAX=-100;
 int spectrumMIN=-180;
 int spectrumSTEP=10;
 
@@ -32,8 +32,8 @@ guchar* waterfallPixels;
 gint rowStride,
      nChannels;
 
-float waterfallHighThreshold=-80.0f;
-float waterfallLowThreshold=-130.0f;
+float waterfallHighThreshold=-100.0f;
+float waterfallLowThreshold=-150.0f;
 
 int colorLowR=0; // black
 int colorLowG=0;
