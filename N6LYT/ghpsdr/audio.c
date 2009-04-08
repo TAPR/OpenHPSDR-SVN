@@ -63,8 +63,10 @@ void audioButtonCallback(GtkWidget* widget,gpointer data) {
     label=gtk_bin_get_child((GtkBin*)widget);
     if(state) {
         gtk_widget_modify_fg(label, GTK_STATE_NORMAL, &modeButtonSelected);
+        gtk_widget_modify_fg(label, GTK_STATE_PRELIGHT, &modeButtonSelected);
     } else {
         gtk_widget_modify_fg(label, GTK_STATE_NORMAL, &white);
+        gtk_widget_modify_fg(label, GTK_STATE_PRELIGHT, &black);
     }
 }
 

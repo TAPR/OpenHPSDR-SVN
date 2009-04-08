@@ -39,10 +39,13 @@ void mercuryButtonCallback(GtkWidget* widget,gpointer data) {
         R192K=FALSE;
         label=gtk_bin_get_child((GtkBin*)buttonR48K);
         gtk_widget_modify_fg(label, GTK_STATE_NORMAL, &modeButtonSelected);
+        gtk_widget_modify_fg(label, GTK_STATE_PRELIGHT, &modeButtonSelected);
         label=gtk_bin_get_child((GtkBin*)buttonR96K);
         gtk_widget_modify_fg(label, GTK_STATE_NORMAL, &white);
+        gtk_widget_modify_fg(label, GTK_STATE_PRELIGHT, &black);
         label=gtk_bin_get_child((GtkBin*)buttonR192K);
         gtk_widget_modify_fg(label, GTK_STATE_NORMAL, &white);
+        gtk_widget_modify_fg(label, GTK_STATE_PRELIGHT, &black);
         sampleRate=48000;
         setSpeed(0);
         SetSampleRate((double)sampleRate);
@@ -55,10 +58,13 @@ void mercuryButtonCallback(GtkWidget* widget,gpointer data) {
         R192K=FALSE;
         label=gtk_bin_get_child((GtkBin*)buttonR48K);
         gtk_widget_modify_fg(label, GTK_STATE_NORMAL, &white);
+        gtk_widget_modify_fg(label, GTK_STATE_PRELIGHT, &black);
         label=gtk_bin_get_child((GtkBin*)buttonR96K);
+        gtk_widget_modify_fg(label, GTK_STATE_NORMAL, &modeButtonSelected);
         gtk_widget_modify_fg(label, GTK_STATE_NORMAL, &modeButtonSelected);
         label=gtk_bin_get_child((GtkBin*)buttonR192K);
         gtk_widget_modify_fg(label, GTK_STATE_NORMAL, &white);
+        gtk_widget_modify_fg(label, GTK_STATE_PRELIGHT, &black);
         sampleRate=96000;
         setSpeed(1);
         SetSampleRate((double)sampleRate);
@@ -71,10 +77,13 @@ void mercuryButtonCallback(GtkWidget* widget,gpointer data) {
         R192K=TRUE;
         label=gtk_bin_get_child((GtkBin*)buttonR48K);
         gtk_widget_modify_fg(label, GTK_STATE_NORMAL, &white);
+        gtk_widget_modify_fg(label, GTK_STATE_PRELIGHT, &black);
         label=gtk_bin_get_child((GtkBin*)buttonR96K);
         gtk_widget_modify_fg(label, GTK_STATE_NORMAL, &white);
+        gtk_widget_modify_fg(label, GTK_STATE_PRELIGHT, &black);
         label=gtk_bin_get_child((GtkBin*)buttonR192K);
         gtk_widget_modify_fg(label, GTK_STATE_NORMAL, &modeButtonSelected);
+        gtk_widget_modify_fg(label, GTK_STATE_PRELIGHT, &modeButtonSelected);
         sampleRate=192000;
         setSpeed(2);
         SetSampleRate((double)sampleRate);
@@ -99,8 +108,10 @@ void mercuryButtonCallback(GtkWidget* widget,gpointer data) {
         label=gtk_bin_get_child((GtkBin*)widget);
         if(state) {
             gtk_widget_modify_fg(label, GTK_STATE_NORMAL, &modeButtonSelected);
+            gtk_widget_modify_fg(label, GTK_STATE_PRELIGHT, &modeButtonSelected);
         } else {
             gtk_widget_modify_fg(label, GTK_STATE_NORMAL, &white);
+            gtk_widget_modify_fg(label, GTK_STATE_PRELIGHT, &black);
         }
     }
 }
