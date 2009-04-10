@@ -137,7 +137,7 @@ GtkWidget* buildMercuryUI() {
     gtk_widget_set_size_request(GTK_WIDGET(buttonR48K),50,25);
     g_signal_connect(G_OBJECT(buttonR48K),"clicked",G_CALLBACK(mercuryButtonCallback),NULL);
     gtk_widget_show(buttonR48K);
-    gtk_fixed_put((GtkFixed*)mercuryFixed,buttonR48K,5,0);
+    gtk_fixed_put((GtkFixed*)mercuryFixed,buttonR48K,0,0);
 
     buttonR96K = gtk_button_new_with_label ("96K");
     gtk_widget_modify_bg(buttonR96K, GTK_STATE_NORMAL, &buttonBackground);
@@ -145,7 +145,7 @@ GtkWidget* buildMercuryUI() {
     gtk_widget_set_size_request(GTK_WIDGET(buttonR96K),50,25);
     g_signal_connect(G_OBJECT(buttonR96K),"clicked",G_CALLBACK(mercuryButtonCallback),NULL);
     gtk_widget_show(buttonR96K);
-    gtk_fixed_put((GtkFixed*)mercuryFixed,buttonR96K,5,25);
+    gtk_fixed_put((GtkFixed*)mercuryFixed,buttonR96K,0,25);
 
     buttonR192K = gtk_button_new_with_label ("192K");
     gtk_widget_modify_bg(buttonR192K, GTK_STATE_NORMAL, &buttonBackground);
@@ -153,7 +153,7 @@ GtkWidget* buildMercuryUI() {
     gtk_widget_set_size_request(GTK_WIDGET(buttonR192K),50,25);
     g_signal_connect(G_OBJECT(buttonR192K),"clicked",G_CALLBACK(mercuryButtonCallback),NULL);
     gtk_widget_show(buttonR192K);
-    gtk_fixed_put((GtkFixed*)mercuryFixed,buttonR192K,5,50);
+    gtk_fixed_put((GtkFixed*)mercuryFixed,buttonR192K,0,50);
 
     buttonDither = gtk_button_new_with_label ("Dither");
     gtk_widget_modify_bg(buttonDither, GTK_STATE_NORMAL, &buttonBackground);
@@ -166,7 +166,7 @@ GtkWidget* buildMercuryUI() {
     gtk_widget_set_size_request(GTK_WIDGET(buttonDither),50,25);
     g_signal_connect(G_OBJECT(buttonDither),"clicked",G_CALLBACK(mercuryButtonCallback),NULL);
     gtk_widget_show(buttonDither);
-    gtk_fixed_put((GtkFixed*)mercuryFixed,buttonDither,55,0);
+    gtk_fixed_put((GtkFixed*)mercuryFixed,buttonDither,50,0);
 
     buttonRandom = gtk_button_new_with_label ("Random");
     gtk_widget_modify_bg(buttonRandom, GTK_STATE_NORMAL, &buttonBackground);
@@ -179,7 +179,7 @@ GtkWidget* buildMercuryUI() {
     gtk_widget_set_size_request(GTK_WIDGET(buttonRandom),50,25);
     g_signal_connect(G_OBJECT(buttonRandom),"clicked",G_CALLBACK(mercuryButtonCallback),NULL);
     gtk_widget_show(buttonRandom);
-    gtk_fixed_put((GtkFixed*)mercuryFixed,buttonRandom,55,25);
+    gtk_fixed_put((GtkFixed*)mercuryFixed,buttonRandom,50,25);
 
     buttonPreamp = gtk_button_new_with_label ("Preamp");
     gtk_widget_modify_bg(buttonPreamp, GTK_STATE_NORMAL, &buttonBackground);
@@ -192,9 +192,9 @@ GtkWidget* buildMercuryUI() {
     gtk_widget_set_size_request(GTK_WIDGET(buttonPreamp),50,25);
     g_signal_connect(G_OBJECT(buttonPreamp),"clicked",G_CALLBACK(mercuryButtonCallback),NULL);
     gtk_widget_show(buttonPreamp);
-    gtk_fixed_put((GtkFixed*)mercuryFixed,buttonPreamp,55,50);
+    gtk_fixed_put((GtkFixed*)mercuryFixed,buttonPreamp,50,50);
 
-    gtk_widget_set_size_request(GTK_WIDGET(mercuryFixed),110,75);
+    gtk_widget_set_size_request(GTK_WIDGET(mercuryFixed),100,75);
     gtk_widget_show(mercuryFixed);
 
 

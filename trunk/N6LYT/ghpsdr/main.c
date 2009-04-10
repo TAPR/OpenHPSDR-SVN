@@ -250,50 +250,52 @@ void buildMainUI() {
     gtk_widget_show(buttonSetup);
     gtk_fixed_put((GtkFixed*)mainFixed,buttonSetup,100,0);
 
-    gtk_widget_show(meterWindow);
-    gtk_fixed_put((GtkFixed*)mainFixed,meterWindow,0,25);
-
-    // add the filter window
-    gtk_widget_show(filterWindow);
-    gtk_fixed_put((GtkFixed*)mainFixed,filterWindow,520,spectrumHEIGHT+10);
-
-    // add the audio window
-    gtk_widget_show(audioWindow);
-    gtk_fixed_put((GtkFixed*)mainFixed,audioWindow,730,spectrumHEIGHT+10);
-
-    // add the mercury window
-    gtk_widget_show(mercuryWindow);
-    gtk_fixed_put((GtkFixed*)mainFixed,mercuryWindow,850,spectrumHEIGHT+10);
-
-    // add the agc window
-    gtk_widget_show(agcWindow);
-    gtk_fixed_put((GtkFixed*)mainFixed,agcWindow,1010,spectrumHEIGHT+10);
-
     // add the vfo window
     gtk_widget_show(vfoWindow);
-    gtk_fixed_put((GtkFixed*)mainFixed,vfoWindow,0,80);
+    gtk_fixed_put((GtkFixed*)mainFixed,vfoWindow,200,0);
+
+    // add the meter window
+    gtk_widget_show(meterWindow);
+    gtk_fixed_put((GtkFixed*)mainFixed,meterWindow,600,0);
 
     // add the band window
     gtk_widget_show(bandWindow);
-    gtk_fixed_put((GtkFixed*)mainFixed,bandWindow,0,180);
+    gtk_fixed_put((GtkFixed*)mainFixed,bandWindow,0,25);
 
     // add the mode window
     gtk_widget_show(modeWindow);
-    gtk_fixed_put((GtkFixed*)mainFixed,modeWindow,102,180);
+    gtk_fixed_put((GtkFixed*)mainFixed,modeWindow,102,25);
+
+    // add the filter window
+    gtk_widget_show(filterWindow);
+    gtk_fixed_put((GtkFixed*)mainFixed,filterWindow,0,200);
+
+    // add the audio window
+    gtk_widget_show(audioWindow);
+    gtk_fixed_put((GtkFixed*)mainFixed,audioWindow,0,330);
+
+    // add the agc window
+    gtk_widget_show(agcWindow);
+    gtk_fixed_put((GtkFixed*)mainFixed,agcWindow,100,330);
+
+    // add the mercury window
+    gtk_widget_show(mercuryWindow);
+    gtk_fixed_put((GtkFixed*)mainFixed,mercuryWindow,0,410);
+
 
     // add the display window
     gtk_widget_show(displayWindow);
-    gtk_fixed_put((GtkFixed*)mainFixed,displayWindow,200,0);
+    gtk_fixed_put((GtkFixed*)mainFixed,displayWindow,200,50);
 
 
     // add the bandscope display
     gtk_widget_show(bandscopeWindow);
-    gtk_fixed_put((GtkFixed*)mainFixed,bandscopeWindow,205,spectrumHEIGHT+160);
+    gtk_fixed_put((GtkFixed*)mainFixed,bandscopeWindow,200,475);
 
     gtk_widget_show(bandscope_controlWindow);
-    gtk_fixed_put((GtkFixed*)mainFixed,bandscope_controlWindow,205,spectrumHEIGHT+160+bandscopeHEIGHT);
+    gtk_fixed_put((GtkFixed*)mainFixed,bandscope_controlWindow,200,575);
 
-    gtk_widget_set_size_request(GTK_WIDGET(mainFixed),1170,spectrumHEIGHT+160+bandscopeHEIGHT+25);
+    gtk_widget_set_size_request(GTK_WIDGET(mainFixed),1170,600);
     gtk_widget_show(mainFixed);
     gtk_container_add(GTK_CONTAINER(mainWindow), mainFixed);
 
