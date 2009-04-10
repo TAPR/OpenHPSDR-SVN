@@ -103,7 +103,7 @@ GtkWidget* buildAudioUI() {
     gtk_widget_set_size_request(GTK_WIDGET(buttonNB),50,25);
     g_signal_connect(G_OBJECT(buttonNB),"clicked",G_CALLBACK(audioButtonCallback),NULL);
     gtk_widget_show(buttonNB);
-    gtk_fixed_put((GtkFixed*)audioFixed,buttonNB,5,30);
+    gtk_fixed_put((GtkFixed*)audioFixed,buttonNB,5,25);
 
     buttonNB2 = gtk_button_new_with_label ("NB2");
     gtk_widget_modify_bg(buttonNB2, GTK_STATE_NORMAL, &buttonBackground);
@@ -112,7 +112,7 @@ GtkWidget* buildAudioUI() {
     gtk_widget_set_size_request(GTK_WIDGET(buttonNB2),50,25);
     g_signal_connect(G_OBJECT(buttonNB2),"clicked",G_CALLBACK(audioButtonCallback),NULL);
     gtk_widget_show(buttonNB2);
-    gtk_fixed_put((GtkFixed*)audioFixed,buttonNB2,55,30);
+    gtk_fixed_put((GtkFixed*)audioFixed,buttonNB2,55,25);
 
     buttonMUTE = gtk_button_new_with_label ("MUTE");
     gtk_widget_modify_bg(buttonMUTE, GTK_STATE_NORMAL, &buttonBackground);
@@ -121,7 +121,7 @@ GtkWidget* buildAudioUI() {
     gtk_widget_set_size_request(GTK_WIDGET(buttonMUTE),50,25);
     g_signal_connect(G_OBJECT(buttonMUTE),"clicked",G_CALLBACK(audioButtonCallback),NULL);
     gtk_widget_show(buttonMUTE);
-    gtk_fixed_put((GtkFixed*)audioFixed,buttonMUTE,5,60);
+    gtk_fixed_put((GtkFixed*)audioFixed,buttonMUTE,5,50);
 
     buttonBIN = gtk_button_new_with_label ("BIN");
     gtk_widget_modify_bg(buttonBIN, GTK_STATE_NORMAL, &buttonBackground);
@@ -130,7 +130,7 @@ GtkWidget* buildAudioUI() {
     gtk_widget_set_size_request(GTK_WIDGET(buttonBIN),50,25);
     g_signal_connect(G_OBJECT(buttonBIN),"clicked",G_CALLBACK(audioButtonCallback),NULL);
     gtk_widget_show(buttonBIN);
-    gtk_fixed_put((GtkFixed*)audioFixed,buttonBIN,55,60);
+    gtk_fixed_put((GtkFixed*)audioFixed,buttonBIN,55,50);
 
     gtk_widget_set_size_request(GTK_WIDGET(audioFixed),110,75);
     gtk_widget_show(audioFixed);

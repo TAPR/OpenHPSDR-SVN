@@ -846,7 +846,7 @@ GtkWidget* buildFilterUI() {
     g_signal_connect(G_OBJECT(buttonHighPlus),"pressed",G_CALLBACK(filterIncrementCallback),NULL);
     g_signal_connect(G_OBJECT(buttonHighPlus),"released",G_CALLBACK(filterReleasedCallback),NULL);
     gtk_widget_show(buttonHighPlus);
-    gtk_fixed_put((GtkFixed*)filterFixed,buttonHighPlus,5,0);
+    gtk_fixed_put((GtkFixed*)filterFixed,buttonHighPlus,0,0);
 
     filterHighLabel=gtk_drawing_area_new();
     gtk_widget_set_size_request(GTK_WIDGET(filterHighLabel),15,25);
@@ -856,7 +856,7 @@ GtkWidget* buildFilterUI() {
     g_signal_connect(G_OBJECT(filterHighLabel),"scroll_event",G_CALLBACK(filter_scroll_event),NULL);
     gtk_widget_set_events(filterHighLabel,GDK_EXPOSURE_MASK|GDK_SCROLL_MASK);
     gtk_widget_show(filterHighLabel);
-    gtk_fixed_put((GtkFixed*)filterFixed,filterHighLabel,25,0);
+    gtk_fixed_put((GtkFixed*)filterFixed,filterHighLabel,20,0);
 
     filterHighDisplay=gtk_drawing_area_new();
     gtk_widget_set_size_request(GTK_WIDGET(filterHighDisplay),45,25);
@@ -866,7 +866,7 @@ GtkWidget* buildFilterUI() {
     g_signal_connect(G_OBJECT(filterHighDisplay),"scroll_event",G_CALLBACK(filter_scroll_event),NULL);
     gtk_widget_set_events(filterHighDisplay,GDK_EXPOSURE_MASK|GDK_SCROLL_MASK);
     gtk_widget_show(filterHighDisplay);
-    gtk_fixed_put((GtkFixed*)filterFixed,filterHighDisplay,40,0);
+    gtk_fixed_put((GtkFixed*)filterFixed,filterHighDisplay,35,0);
 
     buttonHighMinus = gtk_button_new_with_label ("-");
     gtk_widget_modify_bg(buttonHighMinus, GTK_STATE_NORMAL, &buttonBackground);
@@ -876,7 +876,7 @@ GtkWidget* buildFilterUI() {
     g_signal_connect(G_OBJECT(buttonHighMinus),"pressed",G_CALLBACK(filterIncrementCallback),NULL);
     g_signal_connect(G_OBJECT(buttonHighMinus),"released",G_CALLBACK(filterReleasedCallback),NULL);
     gtk_widget_show(buttonHighMinus);
-    gtk_fixed_put((GtkFixed*)filterFixed,buttonHighMinus,85,0);
+    gtk_fixed_put((GtkFixed*)filterFixed,buttonHighMinus,80,0);
 
     buttonLowPlus = gtk_button_new_with_label ("+");
     gtk_widget_modify_bg(buttonLowPlus, GTK_STATE_NORMAL, &buttonBackground);
@@ -886,7 +886,7 @@ GtkWidget* buildFilterUI() {
     g_signal_connect(G_OBJECT(buttonLowPlus),"pressed",G_CALLBACK(filterIncrementCallback),NULL);
     g_signal_connect(G_OBJECT(buttonLowPlus),"released",G_CALLBACK(filterReleasedCallback),NULL);
     gtk_widget_show(buttonLowPlus);
-    gtk_fixed_put((GtkFixed*)filterFixed,buttonLowPlus,5,27);
+    gtk_fixed_put((GtkFixed*)filterFixed,buttonLowPlus,0,25);
 
     filterLowLabel=gtk_drawing_area_new();
     gtk_widget_set_size_request(GTK_WIDGET(filterLowLabel),15,25);
@@ -896,7 +896,7 @@ GtkWidget* buildFilterUI() {
     g_signal_connect(G_OBJECT(filterLowLabel),"scroll_event",G_CALLBACK(filter_scroll_event),NULL);
     gtk_widget_set_events(filterLowLabel,GDK_EXPOSURE_MASK|GDK_SCROLL_MASK);
     gtk_widget_show(filterLowLabel);
-    gtk_fixed_put((GtkFixed*)filterFixed,filterLowLabel,25,27);
+    gtk_fixed_put((GtkFixed*)filterFixed,filterLowLabel,20,25);
 
     filterLowDisplay=gtk_drawing_area_new();
     gtk_widget_set_size_request(GTK_WIDGET(filterLowDisplay),45,25);
@@ -906,7 +906,7 @@ GtkWidget* buildFilterUI() {
     g_signal_connect(G_OBJECT(filterLowDisplay),"scroll_event",G_CALLBACK(filter_scroll_event),NULL);
     gtk_widget_set_events(filterLowDisplay,GDK_EXPOSURE_MASK|GDK_SCROLL_MASK);
     gtk_widget_show(filterLowDisplay);
-    gtk_fixed_put((GtkFixed*)filterFixed,filterLowDisplay,40,27);
+    gtk_fixed_put((GtkFixed*)filterFixed,filterLowDisplay,35,25);
 
     buttonLowMinus = gtk_button_new_with_label ("-");
     gtk_widget_modify_bg(buttonLowMinus, GTK_STATE_NORMAL, &buttonBackground);
@@ -916,7 +916,7 @@ GtkWidget* buildFilterUI() {
     g_signal_connect(G_OBJECT(buttonLowMinus),"pressed",G_CALLBACK(filterIncrementCallback),NULL);
     g_signal_connect(G_OBJECT(buttonLowMinus),"released",G_CALLBACK(filterReleasedCallback),NULL);
     gtk_widget_show(buttonLowMinus);
-    gtk_fixed_put((GtkFixed*)filterFixed,buttonLowMinus,85,27);
+    gtk_fixed_put((GtkFixed*)filterFixed,buttonLowMinus,80,25);
 
     buttonVar1 = gtk_button_new_with_label ("VAR1");
     gtk_widget_modify_bg(buttonVar1, GTK_STATE_NORMAL, &buttonBackground);
@@ -925,7 +925,7 @@ GtkWidget* buildFilterUI() {
     gtk_widget_set_size_request(GTK_WIDGET(buttonVar1),50,25);
     g_signal_connect(G_OBJECT(buttonVar1),"clicked",G_CALLBACK(filterButtonCallback),NULL);
     gtk_widget_show(buttonVar1);
-    gtk_fixed_put((GtkFixed*)filterFixed,buttonVar1,5,54);
+    gtk_fixed_put((GtkFixed*)filterFixed,buttonVar1,0,50);
 
     buttonVar2 = gtk_button_new_with_label ("VAR2");
     gtk_widget_modify_bg(buttonVar2, GTK_STATE_NORMAL, &buttonBackground);
@@ -934,7 +934,7 @@ GtkWidget* buildFilterUI() {
     gtk_widget_set_size_request(GTK_WIDGET(buttonVar2),50,25);
     g_signal_connect(G_OBJECT(buttonVar2),"clicked",G_CALLBACK(filterButtonCallback),NULL);
     gtk_widget_show(buttonVar2);
-    gtk_fixed_put((GtkFixed*)filterFixed,buttonVar2,55,54);
+    gtk_fixed_put((GtkFixed*)filterFixed,buttonVar2,50,50);
 
 
     // predefined filters
@@ -945,7 +945,7 @@ GtkWidget* buildFilterUI() {
     gtk_widget_set_size_request(GTK_WIDGET(button6000),50,25);
     g_signal_connect(G_OBJECT(button6000),"clicked",G_CALLBACK(filterButtonCallback),NULL);
     gtk_widget_show(button6000);
-    gtk_fixed_put((GtkFixed*)filterFixed,button6000,110,0);
+    gtk_fixed_put((GtkFixed*)filterFixed,button6000,100,0);
 
     button4000 = gtk_button_new_with_label ("4.0K");
     gtk_widget_modify_bg(button4000, GTK_STATE_NORMAL, &buttonBackground);
@@ -954,7 +954,7 @@ GtkWidget* buildFilterUI() {
     gtk_widget_set_size_request(GTK_WIDGET(button4000),50,25);
     g_signal_connect(G_OBJECT(button4000),"clicked",G_CALLBACK(filterButtonCallback),NULL);
     gtk_widget_show(button4000);
-    gtk_fixed_put((GtkFixed*)filterFixed,button4000,160,0);
+    gtk_fixed_put((GtkFixed*)filterFixed,button4000,150,0);
 
     button2600 = gtk_button_new_with_label ("2.6K");
     gtk_widget_modify_bg(button2600, GTK_STATE_NORMAL, &buttonBackground);
@@ -963,7 +963,7 @@ GtkWidget* buildFilterUI() {
     gtk_widget_set_size_request(GTK_WIDGET(button2600),50,25);
     g_signal_connect(G_OBJECT(button2600),"clicked",G_CALLBACK(filterButtonCallback),NULL);
     gtk_widget_show(button2600);
-    gtk_fixed_put((GtkFixed*)filterFixed,button2600,110,27);
+    gtk_fixed_put((GtkFixed*)filterFixed,button2600,100,25);
 
     button2100 = gtk_button_new_with_label ("2.1K");
     gtk_widget_modify_bg(button2100, GTK_STATE_NORMAL, &buttonBackground);
@@ -972,7 +972,7 @@ GtkWidget* buildFilterUI() {
     gtk_widget_set_size_request(GTK_WIDGET(button2100),50,25);
     g_signal_connect(G_OBJECT(button2100),"clicked",G_CALLBACK(filterButtonCallback),NULL);
     gtk_widget_show(button2100);
-    gtk_fixed_put((GtkFixed*)filterFixed,button2100,160,27);
+    gtk_fixed_put((GtkFixed*)filterFixed,button2100,150,25);
 
     button1000 = gtk_button_new_with_label ("1.0K");
     gtk_widget_modify_bg(button1000, GTK_STATE_NORMAL, &buttonBackground);
@@ -981,7 +981,7 @@ GtkWidget* buildFilterUI() {
     gtk_widget_set_size_request(GTK_WIDGET(button1000),50,25);
     g_signal_connect(G_OBJECT(button1000),"clicked",G_CALLBACK(filterButtonCallback),NULL);
     gtk_widget_show(button1000);
-    gtk_fixed_put((GtkFixed*)filterFixed,button1000,110,54);
+    gtk_fixed_put((GtkFixed*)filterFixed,button1000,100,50);
 
     button500 = gtk_button_new_with_label ("500");
     gtk_widget_modify_bg(button500, GTK_STATE_NORMAL, &buttonBackground);
@@ -990,7 +990,7 @@ GtkWidget* buildFilterUI() {
     gtk_widget_set_size_request(GTK_WIDGET(button500),50,25);
     g_signal_connect(G_OBJECT(button500),"clicked",G_CALLBACK(filterButtonCallback),NULL);
     gtk_widget_show(button500);
-    gtk_fixed_put((GtkFixed*)filterFixed,button500,160,54);
+    gtk_fixed_put((GtkFixed*)filterFixed,button500,150,50);
 
     button250 = gtk_button_new_with_label ("250");
     gtk_widget_modify_bg(button250, GTK_STATE_NORMAL, &buttonBackground);
@@ -999,7 +999,7 @@ GtkWidget* buildFilterUI() {
     gtk_widget_set_size_request(GTK_WIDGET(button250),50,25);
     g_signal_connect(G_OBJECT(button250),"clicked",G_CALLBACK(filterButtonCallback),NULL);
     gtk_widget_show(button250);
-    gtk_fixed_put((GtkFixed*)filterFixed,button250,110,81);
+    gtk_fixed_put((GtkFixed*)filterFixed,button250,100,75);
 
     button100 = gtk_button_new_with_label ("100");
     gtk_widget_modify_bg(button100, GTK_STATE_NORMAL, &buttonBackground);
@@ -1008,7 +1008,7 @@ GtkWidget* buildFilterUI() {
     gtk_widget_set_size_request(GTK_WIDGET(button100),50,25);
     g_signal_connect(G_OBJECT(button100),"clicked",G_CALLBACK(filterButtonCallback),NULL);
     gtk_widget_show(button100);
-    gtk_fixed_put((GtkFixed*)filterFixed,button100,160,81);
+    gtk_fixed_put((GtkFixed*)filterFixed,button100,150,75);
 
     button50 = gtk_button_new_with_label ("50");
     gtk_widget_modify_bg(button50, GTK_STATE_NORMAL, &buttonBackground);
@@ -1017,7 +1017,7 @@ GtkWidget* buildFilterUI() {
     gtk_widget_set_size_request(GTK_WIDGET(button50),50,25);
     g_signal_connect(G_OBJECT(button50),"clicked",G_CALLBACK(filterButtonCallback),NULL);
     gtk_widget_show(button50);
-    gtk_fixed_put((GtkFixed*)filterFixed,button50,110,108);
+    gtk_fixed_put((GtkFixed*)filterFixed,button50,100,100);
 
     button25 = gtk_button_new_with_label ("25");
     gtk_widget_modify_bg(button25, GTK_STATE_NORMAL, &buttonBackground);
@@ -1026,9 +1026,9 @@ GtkWidget* buildFilterUI() {
     gtk_widget_set_size_request(GTK_WIDGET(button25),50,25);
     g_signal_connect(G_OBJECT(button25),"clicked",G_CALLBACK(filterButtonCallback),NULL);
     gtk_widget_show(button25);
-    gtk_fixed_put((GtkFixed*)filterFixed,button25,160,108);
+    gtk_fixed_put((GtkFixed*)filterFixed,button25,150,100);
 
-    gtk_widget_set_size_request(GTK_WIDGET(filterFixed),230,140);
+    gtk_widget_set_size_request(GTK_WIDGET(filterFixed),200,125);
     gtk_widget_show(filterFixed);
 
     return filterFixed;

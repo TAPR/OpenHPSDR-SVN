@@ -2,6 +2,8 @@
 
 gboolean Preamp;
 
+float preampOffset;
+
 GtkWidget* buildMercuryUI();
 void mercurySaveState();
 void mercuryRestoreState();

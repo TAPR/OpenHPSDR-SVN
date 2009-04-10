@@ -5,8 +5,8 @@ int soundcard=UNSUPPORTED_CARD;
 
 int sampleRate=48000;
 
-float multimeterCalibrationOffset=-25.13887f;
-float displayCalibrationOffset=-57.467f;
+float multimeterCalibrationOffset=0.0f;
+float displayCalibrationOffset=0.0f;
 
 void setSoundcard(int card) {
     soundcard=card;
@@ -39,6 +39,10 @@ void setSoundcard(int card) {
             multimeterCalibrationOffset=-52.43533f;
             displayCalibrationOffset=-82.62103f;
             break;
+        case HPSDR:
+            multimeterCalibrationOffset=0.0f;
+            displayCalibrationOffset=0.0f;
+            break;
     }
 
 }
@@ -59,6 +63,8 @@ int getSoundcardId(char* name) {
         id=FIREBOX;
     } else if(strcmp(name,"EDIROL_FA_66")==0) {
         id=EDIROL_FA_66;
+    } else if(strcmp(name,"HPSDR")==0) {
+        id=HPSDR;
     }
     return id;
 }

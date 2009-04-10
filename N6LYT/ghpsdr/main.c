@@ -478,11 +478,12 @@ int main(int argc,char* argv[]) {
     audioRestoreState();
     audioWindow=buildAudioUI();
 
-    mercuryRestoreState();
-    mercuryWindow=buildMercuryUI();
 
     agcRestoreState();
     agcWindow=buildAgcUI();
+
+    mercuryRestoreState();
+    mercuryWindow=buildMercuryUI();
 
     restoreState();
 
