@@ -443,7 +443,7 @@ GtkWidget* buildVfoUI() {
 
     // vfoA
     vfoAFrequency=gtk_drawing_area_new();
-    gtk_widget_set_size_request(GTK_WIDGET(vfoAFrequency),200,20);
+    gtk_widget_set_size_request(GTK_WIDGET(vfoAFrequency),200,25);
     g_signal_connect(G_OBJECT (vfoAFrequency),"configure_event",G_CALLBACK(vfoAFrequency_configure_event),NULL);
     g_signal_connect(G_OBJECT (vfoAFrequency),"expose_event",G_CALLBACK(vfoAFrequency_expose_event),NULL);
     g_signal_connect(G_OBJECT(vfoAFrequency),"scroll_event",G_CALLBACK(frequency_scroll_event),NULL);
@@ -453,11 +453,11 @@ GtkWidget* buildVfoUI() {
 
     // vfoB
     vfoBFrequency=gtk_drawing_area_new();
-    gtk_widget_set_size_request(GTK_WIDGET(vfoBFrequency),200,20);
+    gtk_widget_set_size_request(GTK_WIDGET(vfoBFrequency),200,25);
     g_signal_connect(G_OBJECT (vfoBFrequency),"configure_event",G_CALLBACK(vfoBFrequency_configure_event),NULL);
     g_signal_connect(G_OBJECT (vfoBFrequency),"expose_event",G_CALLBACK(vfoBFrequency_expose_event),NULL);
     gtk_widget_show(vfoBFrequency);
-    gtk_fixed_put((GtkFixed*)vfoFixed,vfoBFrequency,0,20);
+    gtk_fixed_put((GtkFixed*)vfoFixed,vfoBFrequency,0,25);
 
     // vfo control
     buttonAtoB = gtk_button_new_with_label ("A>B");
@@ -467,7 +467,7 @@ GtkWidget* buildVfoUI() {
     gtk_widget_set_size_request(GTK_WIDGET(buttonAtoB),60,25);
     g_signal_connect(G_OBJECT(buttonAtoB),"clicked",G_CALLBACK(vfoCallback),NULL);
     gtk_widget_show(buttonAtoB);
-    gtk_fixed_put((GtkFixed*)vfoFixed,buttonAtoB,0,42);
+    gtk_fixed_put((GtkFixed*)vfoFixed,buttonAtoB,200,0);
 
     buttonAswapB = gtk_button_new_with_label ("A<>B");
     gtk_widget_modify_bg(buttonAswapB, GTK_STATE_NORMAL, &buttonBackground);
@@ -476,7 +476,7 @@ GtkWidget* buildVfoUI() {
     gtk_widget_set_size_request(GTK_WIDGET(buttonAswapB),80,25);
     g_signal_connect(G_OBJECT(buttonAswapB),"clicked",G_CALLBACK(vfoCallback),NULL);
     gtk_widget_show(buttonAswapB);
-    gtk_fixed_put((GtkFixed*)vfoFixed,buttonAswapB,60,42);
+    gtk_fixed_put((GtkFixed*)vfoFixed,buttonAswapB,260,0);
 
     buttonBtoA = gtk_button_new_with_label ("A<B");
     gtk_widget_modify_bg(buttonBtoA, GTK_STATE_NORMAL, &buttonBackground);
@@ -485,7 +485,7 @@ GtkWidget* buildVfoUI() {
     gtk_widget_set_size_request(GTK_WIDGET(buttonBtoA),60,25);
     g_signal_connect(G_OBJECT(buttonBtoA),"clicked",G_CALLBACK(vfoCallback),NULL);
     gtk_widget_show(buttonBtoA);
-    gtk_fixed_put((GtkFixed*)vfoFixed,buttonBtoA,140,42);
+    gtk_fixed_put((GtkFixed*)vfoFixed,buttonBtoA,340,0);
 
     buttonFrequencyUp = gtk_button_new_with_label ("^");
     gtk_widget_modify_bg(buttonFrequencyUp, GTK_STATE_NORMAL, &buttonBackground);
@@ -495,7 +495,7 @@ GtkWidget* buildVfoUI() {
     g_signal_connect(G_OBJECT(buttonFrequencyUp),"pressed",G_CALLBACK(frequencyUpCallback),NULL);
     g_signal_connect(G_OBJECT(buttonFrequencyUp),"released",G_CALLBACK(frequencyReleasedCallback),NULL);
     gtk_widget_show(buttonFrequencyUp);
-    gtk_fixed_put((GtkFixed*)vfoFixed,buttonFrequencyUp,0,70);
+    gtk_fixed_put((GtkFixed*)vfoFixed,buttonFrequencyUp,200,25);
 
     buttonIncrementPlus = gtk_button_new_with_label ("+");
     gtk_widget_modify_bg(buttonIncrementPlus, GTK_STATE_NORMAL, &buttonBackground);
@@ -504,7 +504,7 @@ GtkWidget* buildVfoUI() {
     gtk_widget_set_size_request(GTK_WIDGET(buttonIncrementPlus),20,25);
     g_signal_connect(G_OBJECT(buttonIncrementPlus),"clicked",G_CALLBACK(buttonIncrementPlusCallback),NULL);
     gtk_widget_show(buttonIncrementPlus);
-    gtk_fixed_put((GtkFixed*)vfoFixed,buttonIncrementPlus,30,70);
+    gtk_fixed_put((GtkFixed*)vfoFixed,buttonIncrementPlus,230,25);
 
     incrementDisplay=gtk_drawing_area_new();
     gtk_widget_set_size_request(GTK_WIDGET(incrementDisplay),100,25);
@@ -514,7 +514,7 @@ GtkWidget* buildVfoUI() {
     g_signal_connect(G_OBJECT(incrementDisplay),"scroll_event",G_CALLBACK(increment_scroll_event),NULL);
     gtk_widget_set_events(incrementDisplay,GDK_EXPOSURE_MASK|GDK_SCROLL_MASK);
     gtk_widget_show(incrementDisplay);
-    gtk_fixed_put((GtkFixed*)vfoFixed,incrementDisplay,50,70);
+    gtk_fixed_put((GtkFixed*)vfoFixed,incrementDisplay,250,25);
 
     buttonIncrementMinus = gtk_button_new_with_label ("-");
     gtk_widget_modify_bg(buttonIncrementMinus, GTK_STATE_NORMAL, &buttonBackground);
@@ -523,7 +523,7 @@ GtkWidget* buildVfoUI() {
     gtk_widget_set_size_request(GTK_WIDGET(buttonIncrementMinus),20,25);
     g_signal_connect(G_OBJECT(buttonIncrementMinus),"clicked",G_CALLBACK(buttonIncrementMinusCallback),NULL);
     gtk_widget_show(buttonIncrementMinus);
-    gtk_fixed_put((GtkFixed*)vfoFixed,buttonIncrementMinus,150,70);
+    gtk_fixed_put((GtkFixed*)vfoFixed,buttonIncrementMinus,350,25);
 
     buttonFrequencyDown = gtk_button_new_with_label ("v");
     gtk_widget_modify_bg(buttonFrequencyDown, GTK_STATE_NORMAL, &buttonBackground);
@@ -533,9 +533,9 @@ GtkWidget* buildVfoUI() {
     g_signal_connect(G_OBJECT(buttonFrequencyDown),"pressed",G_CALLBACK(frequencyDownCallback),NULL);
     g_signal_connect(G_OBJECT(buttonFrequencyDown),"released",G_CALLBACK(frequencyReleasedCallback),NULL);
     gtk_widget_show(buttonFrequencyDown);
-    gtk_fixed_put((GtkFixed*)vfoFixed,buttonFrequencyDown,170,70);
+    gtk_fixed_put((GtkFixed*)vfoFixed,buttonFrequencyDown,370,25);
 
-    gtk_widget_set_size_request(GTK_WIDGET(vfoFixed),185,95);
+    gtk_widget_set_size_request(GTK_WIDGET(vfoFixed),400,50);
     gtk_widget_show(vfoFixed);
 
     return vfoFixed;
