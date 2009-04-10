@@ -28,6 +28,8 @@ gboolean Dither=FALSE;
 gboolean Random=FALSE;
 gboolean Preamp=FALSE;
 
+float preampOffset=0.0f;
+
 void mercuryButtonCallback(GtkWidget* widget,gpointer data) {
     GtkWidget* label;
     char command[80];
@@ -103,6 +105,11 @@ void mercuryButtonCallback(GtkWidget* widget,gpointer data) {
             Preamp=!Preamp;
             setPreampGain(Preamp);
             state=Preamp;
+            if(state) {
+                preampOffset=-20.0f; // dB
+            } else {
+                preampOffset=0.0f; // dB
+            }
         }
 
         label=gtk_bin_get_child((GtkBin*)widget);
@@ -127,11 +134,6 @@ GtkWidget* buildMercuryUI() {
     buttonR48K = gtk_button_new_with_label ("48K");
     gtk_widget_modify_bg(buttonR48K, GTK_STATE_NORMAL, &buttonBackground);
     label=gtk_bin_get_child((GtkBin*)buttonR48K);
-    if(sampleRate==48000) {
-        gtk_widget_modify_fg(label, GTK_STATE_NORMAL, &buttonSelected);
-    } else {
-        gtk_widget_modify_fg(label, GTK_STATE_NORMAL, &white);
-    }
     gtk_widget_set_size_request(GTK_WIDGET(buttonR48K),50,25);
     g_signal_connect(G_OBJECT(buttonR48K),"clicked",G_CALLBACK(mercuryButtonCallback),NULL);
     gtk_widget_show(buttonR48K);
@@ -140,11 +142,6 @@ GtkWidget* buildMercuryUI() {
     buttonR96K = gtk_button_new_with_label ("96K");
     gtk_widget_modify_bg(buttonR96K, GTK_STATE_NORMAL, &buttonBackground);
     label=gtk_bin_get_child((GtkBin*)buttonR96K);
-    if(sampleRate==96000) {
-        gtk_widget_modify_fg(label, GTK_STATE_NORMAL, &buttonSelected);
-    } else {
-        gtk_widget_modify_fg(label, GTK_STATE_NORMAL, &white);
-    }
     gtk_widget_set_size_request(GTK_WIDGET(buttonR96K),50,25);
     g_signal_connect(G_OBJECT(buttonR96K),"clicked",G_CALLBACK(mercuryButtonCallback),NULL);
     gtk_widget_show(buttonR96K);
@@ -153,11 +150,6 @@ GtkWidget* buildMercuryUI() {
     buttonR192K = gtk_button_new_with_label ("192K");
     gtk_widget_modify_bg(buttonR192K, GTK_STATE_NORMAL, &buttonBackground);
     label=gtk_bin_get_child((GtkBin*)buttonR192K);
-    if(sampleRate==192000) {
-        gtk_widget_modify_fg(label, GTK_STATE_NORMAL, &buttonSelected);
-    } else {
-        gtk_widget_modify_fg(label, GTK_STATE_NORMAL, &white);
-    }
     gtk_widget_set_size_request(GTK_WIDGET(buttonR192K),50,25);
     g_signal_connect(G_OBJECT(buttonR192K),"clicked",G_CALLBACK(mercuryButtonCallback),NULL);
     gtk_widget_show(buttonR192K);
@@ -205,6 +197,16 @@ GtkWidget* buildMercuryUI() {
     gtk_widget_set_size_request(GTK_WIDGET(mercuryFixed),110,75);
     gtk_widget_show(mercuryFixed);
 
+
+    // setup
+    if(sampleRate==48000) {
+        mercuryButtonCallback(buttonR48K,NULL) ;
+    } else if(sampleRate==96000) {
+        mercuryButtonCallback(buttonR96K,NULL) ;
+    } else if(sampleRate==192000) {
+        mercuryButtonCallback(buttonR192K,NULL) ;
+    }
+    
     return mercuryFixed;
 }
 
@@ -230,13 +232,6 @@ void mercuryRestoreState() {
 
     value=getProperty("sampleRate");
     if(value) sampleRate=atoi(value);
-    if(sampleRate==48000) {
-        setSpeed(0);
-    } else if(sampleRate==96000) {
-        setSpeed(1);
-    } else if(sampleRate==192000) {
-        setSpeed(2);
-    }
 
     value=getProperty("Dither");
     if(value) Dither=atoi(value);
@@ -249,7 +244,11 @@ void mercuryRestoreState() {
     value=getProperty("Preamp");
     if(value) Preamp=atoi(value);
     setPreampGain(Preamp);
-    
+    if(Preamp) {
+        preampOffset=-20.0f; // dB
+    } else {
+        preampOffset=0.0f; // dB
+    }
 
 }
 

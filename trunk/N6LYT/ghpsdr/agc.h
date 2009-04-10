@@ -1,10 +1,9 @@
 // agc.h
 
-#define agcOFF 0
-#define agcLONG 1
-#define agcSLOW 2
-#define agcMEDIUM 3
-#define agcFAST 4
+#define agcLONG 0
+#define agcSLOW 1
+#define agcMEDIUM 2
+#define agcFAST 3
 
 int agc;
 

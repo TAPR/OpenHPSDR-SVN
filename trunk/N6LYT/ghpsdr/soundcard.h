@@ -8,6 +8,7 @@
 #define FIREBOX 5
 #define EDIROL_FA_66 6
 #define UNSUPPORTED_CARD 7
+#define HPSDR 8
 
 char soundCardName[80];
 

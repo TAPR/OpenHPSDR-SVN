@@ -10,6 +10,7 @@
 #include <math.h>
 
 #include "main.h"
+#include "mercury.h"
 #include "meter.h"
 #include "meter_update.h"
 #include "property.h"
@@ -25,7 +26,6 @@ GtkWidget* buttonSIGNAL;
 GtkWidget* buttonSAV;
 
 int meterDbm;
-float preampOffset;
 
 int meterMode=meterSIGNAL;
 
