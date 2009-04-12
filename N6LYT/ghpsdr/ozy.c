@@ -73,6 +73,12 @@ unsigned char spectrum_samples[SPECTRUM_BUFFER_SIZE];
 
 int lt2208ADCOverflow=0;
 
+/* --------------------------------------------------------------------------*/
+/** 
+* @brief Process the ozy input buffer
+* 
+* @param buffer
+*/
 void process_ozy_input_buffer(char* buffer) {
     int i,j;
     int b=0;
@@ -176,6 +182,14 @@ if(show_software_serial_numbers) {
 
 }
 
+/* --------------------------------------------------------------------------*/
+/** 
+* @brief Ozy input buffer thread
+* 
+* @param arg
+* 
+* @return 
+*/
 void* ozy_input_buffer_thread(void* arg) {
     struct ozy_buffer* buffer;
 
@@ -193,6 +207,14 @@ void* ozy_input_buffer_thread(void* arg) {
     }
 }
 
+/* --------------------------------------------------------------------------*/
+/** 
+* @brief Ozy spectrum buffer thread
+* 
+* @param arg
+* 
+* @return 
+*/
 void* ozy_spectrum_buffer_thread(void* arg) {
     struct spectrum_buffer* spectrum_buffer;
     while(1) {
@@ -203,6 +225,14 @@ void* ozy_spectrum_buffer_thread(void* arg) {
     }
 }
 
+/* --------------------------------------------------------------------------*/
+/** 
+* @brief Thread for reading the ep6 and ep2 I2C IO 
+* 
+* @param arg
+* 
+* @return 
+*/
 void* ozy_ep6_ep2_io_thread(void* arg) {
     struct ozy_buffer* ozy_buffer;
     unsigned char output_buffer[OZY_BUFFER_SIZE];
@@ -267,6 +297,14 @@ void* ozy_ep6_ep2_io_thread(void* arg) {
     }
 }
 
+/* --------------------------------------------------------------------------*/
+/** 
+* @brief Thread for reading the Ozy ep4 I2C IO
+* 
+* @param arg
+* 
+* @return 
+*/
 void* ozy_ep4_io_thread(void* arg) {
     struct spectrum_buffer* spectrum_buffer;
     int bytes;
@@ -294,15 +332,33 @@ void* ozy_ep4_io_thread(void* arg) {
     }
 }
 
+/* --------------------------------------------------------------------------*/
+/** 
+* @brief Get the spectrum samples
+* 
+* @param samples
+*/
 void getSpectrumSamples(char *samples) {
     memcpy(samples,spectrum_samples,SPECTRUM_BUFFER_SIZE);
 }
 
+/* --------------------------------------------------------------------------*/
+/** 
+* @brief Set the MOX
+* 
+* @param state
+*/
 void setMOX(int state) {
     control_out[0]=control_out[0]&0xFE;
     control_out[0]=control_out[0]|(state&0x01);
 }
 
+/* --------------------------------------------------------------------------*/
+/** 
+* @brief Set the speed
+* 
+* @param speed
+*/
 void setSpeed(int speed) {
     control_out[1]=control_out[1]&0xFC;
     control_out[1]=control_out[1]|speed;
@@ -315,62 +371,136 @@ void setSpeed(int speed) {
     }
 }
 
+/* --------------------------------------------------------------------------*/
+/** 
+* @brief Set the 10 mHz source
+* 
+* @param source
+*/
 void set10MHzSource(int source) {
     control_out[1]=control_out[1]&0xF3;
     control_out[1]=control_out[1]|(source<<2);
 }
 
+/* --------------------------------------------------------------------------*/
+/** 
+* @brief Set the 122 mHz source
+* 
+* @param source
+*/
 void set122MHzSource(int source) {
     control_out[1]=control_out[1]&0xEF;
     control_out[1]=control_out[1]|(source<<4);
 }
 
+/* --------------------------------------------------------------------------*/
+/** 
+* @brief Set the configuration
+* 
+* @param config
+*/
 void setConfig(int config) {
     control_out[1]=control_out[1]&0x9F;
     control_out[1]=control_out[1]|(config<<5);
 }
 
 
+/* --------------------------------------------------------------------------*/
+/** 
+* @brief Set the mic source
+* 
+* @param source
+*/
 void setMicSource(int source) {
     control_out[1]=control_out[1]&0x7F;
     control_out[1]=control_out[1]|(source<<7);
 }
 
+/* --------------------------------------------------------------------------*/
+/** 
+* @brief Set the mode
+* 
+* @param mode
+*/
 void setMode(int mode) {
     control_out[2]=control_out[2]&0xFE;
     control_out[2]=control_out[2]|mode;
 }
 
+/* --------------------------------------------------------------------------*/
+/** 
+* @brief Set the OC outputs
+* 
+* @param outputs
+*/
 void setOCOutputs(int outputs) {
     control_out[2]=control_out[2]&0x01;
     control_out[2]=control_out[2]|(outputs<<1);
 }
 
+/* --------------------------------------------------------------------------*/
+/** 
+* @brief Set the Alex attenuator
+* 
+* @param attenuator
+*/
 void setAlexAttenuator(int attenuator) {
     control_out[3]=control_out[3]&0xFC;
     control_out[3]=control_out[3]|attenuator;
 }
 
+/* --------------------------------------------------------------------------*/
+/** 
+* @brief Set the preamplifer gain
+* 
+* @param gain
+*/
 void setPreampGain(int gain) {
     control_out[3]=control_out[3]&0xFB;
     control_out[3]=control_out[3]|(gain<<2);
 }
 
+/* --------------------------------------------------------------------------*/
+/** 
+* @brief Set the LT2208 dither
+* 
+* @param dither
+*/
 void setLT2208Dither(int dither) {
     control_out[3]=control_out[3]&0xF7;
     control_out[3]=control_out[3]|(dither<<3);
 }
 
+/* --------------------------------------------------------------------------*/
+/** 
+* @brief Set the LT2208 random
+* 
+* @param random
+*/
 void setLT2208Random(int random) {
     control_out[3]=control_out[3]&0xEF;
     control_out[3]=control_out[3]|(random<<4);
 }
 
+/* --------------------------------------------------------------------------*/
+/** 
+* @brief Set Frequency
+* 
+* @param f
+*/
 void setFrequency(double f) {
     frequency=(int)((f*1000000.0)+0.5);
     frequency_changed=1;
 }
 
+/* --------------------------------------------------------------------------*/
+/** 
+* @brief Initialize Ozy
+* 
+* @param sample_rate
+* 
+* @return 
+*/
 int ozy_init(int sample_rate) {
     int rc;
 
@@ -447,6 +577,12 @@ int ozy_init(int sample_rate) {
 }
 
 
+/* --------------------------------------------------------------------------*/
+/** 
+* @brief Get the ADC Overflow 
+* 
+* @return 
+*/
 int getADCOverflow() {
     int result=lt2208ADCOverflow;
     lt2208ADCOverflow=0;

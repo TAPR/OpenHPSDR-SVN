@@ -1,9 +1,28 @@
-/* 
- * File:   ozy_ringbuffer.c
- * Author: John Melton G0ORX/N6LYT
- *
- * Created on 05 January 2009, 09:07
- */
+/** 
+* @file ozy_ringbuffer.c
+* @brief Ozy Ring Buffer functions
+* @author John Melton, G0ORX/N6LYT, Doxygen Comments Dave Larsen, KV0S
+* @version 0.1
+* @date 2009-01-05
+*/
+
+/* Copyright (C) 
+* 2009 - John Melton, G0ORX/N6LYT, Doxygen Comments Dave Larsen, KV0S
+* This program is free software; you can redistribute it and/or
+* modify it under the terms of the GNU General Public License
+* as published by the Free Software Foundation; either version 2
+* of the License, or (at your option) any later version.
+* 
+* This program is distributed in the hope that it will be useful,
+* but WITHOUT ANY WARRANTY; without even the implied warranty of
+* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+* GNU General Public License for more details.
+* 
+* You should have received a copy of the GNU General Public License
+* along with this program; if not, write to the Free Software
+* Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+* 
+*/
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -24,6 +43,10 @@ pthread_mutex_t ozy_output_buffer_mutex;
 int ozy_put_bytes=0;
 int ozy_get_bytes=0;
 
+/* --------------------------------------------------------------------------*/
+/** 
+* @brief New Ozy ringbuffer
+*/
 struct ozy_ringbuffer* new_ozy_ringbuffer(int n) {
     struct ozy_ringbuffer* buffer;
 
@@ -38,14 +61,26 @@ struct ozy_ringbuffer* new_ozy_ringbuffer(int n) {
     return buffer;
 }
 
+/* --------------------------------------------------------------------------*/
+/** 
+* @brief Ozy ringbuffer space
+*/
 int ozy_ringbuffer_space(struct ozy_ringbuffer* buffer) {
     return buffer->size-buffer->entries;
 }
 
+/* --------------------------------------------------------------------------*/
+/** 
+* @brief Ozy ringbuffer entries
+*/
 int ozy_ringbuffer_entries(struct ozy_ringbuffer* buffer) {
     return buffer->entries;
 }
 
+/* --------------------------------------------------------------------------*/
+/** 
+* @brief Ozy ringbuffer put
+*/
 int ozy_ringbuffer_put(struct ozy_ringbuffer* buffer,char* f,int n) {
     int bytes;
     bytes=n;
@@ -78,6 +113,10 @@ fprintf(stderr,"ozy_ringbuffer_put: space=%d wanted=%d\n",ozy_ringbuffer_space(b
     return n;
 }
 
+/* --------------------------------------------------------------------------*/
+/** 
+* @brief Ozy ringbuffer put
+*/
 int ozy_ringbuffer_get(struct ozy_ringbuffer* buffer,char* f,int n) {
     int entries;
 
@@ -105,6 +144,14 @@ int ozy_ringbuffer_get(struct ozy_ringbuffer* buffer,char* f,int n) {
     return entries;
 }
 
+/* --------------------------------------------------------------------------*/
+/** 
+* @brief Create an Ozy ringbuffer
+* 
+* @param n
+* 
+* @return 
+*/
 int create_ozy_ringbuffer(int n) {
     pthread_mutex_init(&ozy_output_buffer_mutex, NULL);
     ozy_output_buffer=new_ozy_ringbuffer(n);

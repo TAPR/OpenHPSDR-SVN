@@ -1,9 +1,28 @@
-/* 
- * File:   ozy_buffers.c
- * Author: John Melton G0ORX/N6LYT
- *
- * Created on 05 January 2009, 16:28
- */
+/** 
+* @file ozy_buffers.c
+* @brief Ozy buffer functions
+* @author John Melton, G0ORX/N6LYT, Doxygen Comments Dave Larsen, KV0S
+* @version 0.1
+* @date 2009-01-05
+*/
+
+/* Copyright (C) 
+* 2009 - John Melton, G0ORX/N6LYT, Doxygen Comments Dave Larsen, KV0S
+* This program is free software; you can redistribute it and/or
+* modify it under the terms of the GNU General Public License
+* as published by the Free Software Foundation; either version 2
+* of the License, or (at your option) any later version.
+* 
+* This program is distributed in the hope that it will be useful,
+* but WITHOUT ANY WARRANTY; without even the implied warranty of
+* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+* GNU General Public License for more details.
+* 
+* You should have received a copy of the GNU General Public License
+* along with this program; if not, write to the Free Software
+* Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+* 
+*/
 
 #include <fcntl.h>
 #include <stdio.h>
@@ -32,6 +51,10 @@ pthread_mutex_t ozy_free_buffer_mutex;
 
 void free_ozy_buffer(struct ozy_buffer* buffer);
 
+/* --------------------------------------------------------------------------*/
+/** 
+* @brief Put Ozy free buffer
+*/
 void put_ozy_free_buffer(struct ozy_buffer* buffer) {
 
     pthread_mutex_lock(&ozy_free_buffer_mutex);
@@ -44,6 +67,10 @@ void put_ozy_free_buffer(struct ozy_buffer* buffer) {
     pthread_mutex_unlock(&ozy_free_buffer_mutex);
 }
 
+/* --------------------------------------------------------------------------*/
+/** 
+* @brief Get Ozy free buffer
+*/
 struct ozy_buffer* get_ozy_free_buffer(void) {
     struct ozy_buffer* buffer;
     if(ozy_free_buffers_head==NULL) {
@@ -61,6 +88,10 @@ struct ozy_buffer* get_ozy_free_buffer(void) {
     return buffer;
 }
 
+/* --------------------------------------------------------------------------*/
+/** 
+* @brief Put Ozy input buffer
+*/
 void put_ozy_input_buffer(struct ozy_buffer* buffer) {
 
     pthread_mutex_lock(&ozy_input_buffer_mutex);
@@ -75,6 +106,10 @@ void put_ozy_input_buffer(struct ozy_buffer* buffer) {
 
 }
 
+/* --------------------------------------------------------------------------*/
+/** 
+* @brief Get Ozy input buffer
+*/
 struct ozy_buffer* get_ozy_input_buffer(void) {
     struct ozy_buffer* buffer;
     if(ozy_input_buffers_head==NULL) {
@@ -91,6 +126,10 @@ struct ozy_buffer* get_ozy_input_buffer(void) {
     return buffer;
 }
 
+/* --------------------------------------------------------------------------*/
+/** 
+* @brief New Ozy Buffer
+*/
 struct ozy_buffer* new_ozy_buffer() {
     struct ozy_buffer* buffer;
     buffer=malloc(sizeof(struct ozy_buffer));
@@ -99,6 +138,12 @@ struct ozy_buffer* new_ozy_buffer() {
     return buffer;
 }
 
+/* --------------------------------------------------------------------------*/
+/** 
+* @brief Create Ozy buffer
+* 
+* @param n
+*/
 void create_ozy_buffers(int n) {
     struct ozy_buffer* buffer;
     int i;
@@ -122,6 +167,10 @@ fprintf(stderr,"%s\n",name);
 
 }
 
+/* --------------------------------------------------------------------------*/
+/** 
+* @brief Free Ozy buffer
+*/
 void free_ozy_buffer(struct ozy_buffer* buffer) {
     put_ozy_free_buffer(buffer);
 }

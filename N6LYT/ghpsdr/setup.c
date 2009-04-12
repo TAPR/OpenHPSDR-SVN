@@ -1,3 +1,30 @@
+/** 
+* @file setup.c
+* @brief Setup functions
+* @author John Melton, G0ORX/N6LYT, Doxygen Comments Dave Larsen, KV0S
+* @version 0.1
+* @date 2009-04-12
+*/
+
+/* Copyright (C) 
+* 2009 - John Melton, G0ORX/N6LYT, Doxygen Comments Dave Larsen, KV0S
+* This program is free software; you can redistribute it and/or
+* modify it under the terms of the GNU General Public License
+* as published by the Free Software Foundation; either version 2
+* of the License, or (at your option) any later version.
+* 
+* This program is distributed in the hope that it will be useful,
+* but WITHOUT ANY WARRANTY; without even the implied warranty of
+* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+* GNU General Public License for more details.
+* 
+* You should have received a copy of the GNU General Public License
+* along with this program; if not, write to the Free Software
+* Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+* 
+*/
+
+
 //
 // setup.c
 //
@@ -35,6 +62,10 @@ void waterfallLowChanged(GtkSpinButton* spinButton,gpointer data);
 void bandscopeHighChanged(GtkSpinButton* spinButton,gpointer data);
 void bandscopeLowChanged(GtkSpinButton* spinButton,gpointer data);
 
+/* --------------------------------------------------------------------------*/
+/** 
+* @brief Setup
+*/
 void setup() {
     if(setupWindow==NULL) {
         setupWindow=gtk_window_new(GTK_WINDOW_TOPLEVEL);
@@ -116,39 +147,92 @@ void setup() {
 
         gtk_widget_show(setupWindow);
     } else {
-        gtk_window_set_keep_above((GtkWindow*)setupWindow,TRUE);
+        gtk_window_set_keep_above(setupWindow,TRUE);
     }
 
 }
 
+/* --------------------------------------------------------------------------*/
+/** 
+* @brief Spectrum high changed
+* 
+* @param spinButton
+* @param data
+*/
 void spectrumHighChanged(GtkSpinButton* spinButton,gpointer data) {
     spectrumMAX=gtk_spin_button_get_value(spinButton);
 }
 
+/* --------------------------------------------------------------------------*/
+/** 
+* @brief Spectrum low changed
+* 
+* @param spinButton
+* @param data
+*/
 void spectrumLowChanged(GtkSpinButton* spinButton,gpointer data) {
     spectrumMIN=gtk_spin_button_get_value(spinButton);
 }
 
+/* --------------------------------------------------------------------------*/
+/** 
+* @brief Spectrum step changed
+* 
+* @param spinButton
+* @param data
+*/
 void spectrumStepChanged(GtkSpinButton* spinButton,gpointer data) {
     spectrumSTEP=gtk_spin_button_get_value(spinButton);
 }
 
+/* --------------------------------------------------------------------------*/
+/** 
+* @brief Waterfall high changed
+* 
+* @param spinButton
+* @param data
+*/
 void waterfallHighChanged(GtkSpinButton* spinButton,gpointer data) {
     waterfallHighThreshold=gtk_spin_button_get_value(spinButton);
 }
 
+/* --------------------------------------------------------------------------*/
+/** 
+* @brief Waterfall low changed
+* 
+* @param spinButton
+* @param data
+*/
 void waterfallLowChanged(GtkSpinButton* spinButton,gpointer data) {
     waterfallLowThreshold=gtk_spin_button_get_value(spinButton);
 }
 
+/* --------------------------------------------------------------------------*/
+/** 
+* @brief Bandscope high changed
+* 
+* @param spinButton
+* @param data
+*/
 void bandscopeHighChanged(GtkSpinButton* spinButton,gpointer data) {
     bandscopeMAX=gtk_spin_button_get_value(spinButton);
 }
 
+/* --------------------------------------------------------------------------*/
+/** 
+* @brief Bandscope low changed
+* 
+* @param spinButton
+* @param data
+*/
 void bandscopeLowChanged(GtkSpinButton* spinButton,gpointer data) {
     bandscopeMIN=gtk_spin_button_get_value(spinButton);
 }
 
+/* --------------------------------------------------------------------------*/
+/** 
+* @brief Quit setup
+*/
 void quitSetup() {
     gtk_widget_destroy(setupWindow);
     setupWindow=NULL;

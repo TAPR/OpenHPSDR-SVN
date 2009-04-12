@@ -1,4 +1,29 @@
+/** 
+* @file bandscope_control.c
+* @brief Bandscope control files 
+* @author John Melton, G0ORX/N6LYT, Doxygen Comments Dave Larsen, KV0S
+* @version 0.1
+* @date 2009-04-11
+*/
 // bandscope_control.c
+
+/* Copyright (C) 
+* 2009 - John Melton, G0ORX/N6LYT, Doxygen Comments Dave Larsen, KV0S
+* This program is free software; you can redistribute it and/or
+* modify it under the terms of the GNU General Public License
+* as published by the Free Software Foundation; either version 2
+* of the License, or (at your option) any later version.
+* 
+* This program is distributed in the hope that it will be useful,
+* but WITHOUT ANY WARRANTY; without even the implied warranty of
+* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+* GNU General Public License for more details.
+* 
+* You should have received a copy of the GNU General Public License
+* along with this program; if not, write to the Free Software
+* Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+* 
+*/
 
 #include <gtk/gtk.h>
 #include <gdk/gdkkeysyms.h>
@@ -23,10 +48,12 @@ GtkWidget* buttonZoom4;
 
 GtkWidget* currentZoomButton;
 
-//-------------------------------------------------------------------------------------------
-//
-//  select the zoom
-//
+/* --------------------------------------------------------------------------*/
+/** 
+* @brief  Select the zoom
+* 
+* @param widget
+*/
 void selectZoom(GtkWidget* widget) {
     GtkWidget* label;
     char temp[80];
@@ -50,6 +77,12 @@ void selectZoom(GtkWidget* widget) {
     }
 }
 
+/* --------------------------------------------------------------------------*/
+/** 
+* @brief Set the zoom.
+* 
+* @param zoom
+*/
 void setZoom(int zoom) {
     GtkWidget* widget;
     switch(zoom) {
@@ -66,10 +99,13 @@ void setZoom(int zoom) {
     selectZoom(widget);
 }
 
-//-------------------------------------------------------------------------------------------
-//
-//  callback when a zoom button is pressed
-//
+/* --------------------------------------------------------------------------*/
+/** 
+* @brief Callback when a zoom button is pressed.
+* 
+* @param widget
+* @param data
+*/
 void zoomCallback(GtkWidget* widget,gpointer data) {
     selectZoom(widget);
 }

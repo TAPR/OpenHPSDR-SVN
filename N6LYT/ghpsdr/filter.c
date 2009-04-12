@@ -1,3 +1,31 @@
+/** 
+* @file filter.c
+* @brief Filter functions
+* @author John Melton, G0ORX/N6LYT, Doxygen Comments Dave Larsen, KV0S
+* @version 0.1
+* @date 2009-04-11
+*/
+
+
+
+/* Copyright (C) 
+* 2009 - John Melton, G0ORX/N6LYT, Doxygen Comments Dave Larsen, KV0S
+* This program is free software; you can redistribute it and/or
+* modify it under the terms of the GNU General Public License
+* as published by the Free Software Foundation; either version 2
+* of the License, or (at your option) any later version.
+* 
+* This program is distributed in the hope that it will be useful,
+* but WITHOUT ANY WARRANTY; without even the implied warranty of
+* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+* GNU General Public License for more details.
+* 
+* You should have received a copy of the GNU General Public License
+* along with this program; if not, write to the Free Software
+* Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+* 
+*/
+
 #include <gtk/gtk.h>
 #include <math.h>
 #include <stdio.h>
@@ -56,16 +84,40 @@ GtkWidget* currentFilterButton=NULL;
 gint filterRootX=0;
 gint filterRootY=0;
 
+/* --------------------------------------------------------------------------*/
+/** 
+* @brief Determine the maximum of two numbers.
+* 
+* @param a
+* @param b
+* 
+* @return 
+*/
 int max(int a,int b) {
    if(a>b) return a;
    return b;
 }
 
+/* --------------------------------------------------------------------------*/
+/** 
+* @brief Determine the minimum of two numbers.
+* 
+* @param a
+* @param b
+* 
+* @return 
+*/
 int min(int a,int b) {
    if(a<b) return a;
    return b;
 }
 
+/* --------------------------------------------------------------------------*/
+/** 
+* @brief Draw the low filter
+* 
+* @param queue
+*/
 void drawFilterLow(gboolean queue) {
     GdkGC* gc;
     PangoContext *context;
@@ -102,6 +154,12 @@ void drawFilterLow(gboolean queue) {
 
 }
 
+/* --------------------------------------------------------------------------*/
+/** 
+* @brief Draw the high filter.
+* 
+* @param queue
+*/
 void drawFilterHigh(gboolean queue) {
     GdkGC* gc;
     PangoContext *context;
@@ -139,6 +197,12 @@ void drawFilterHigh(gboolean queue) {
 
 }
 
+/* --------------------------------------------------------------------------*/
+/** 
+* @brief Select the filter
+* 
+* @param widget
+*/
 void selectFilter(GtkWidget* widget) {
     GtkWidget* label;
     char temp[128];
@@ -528,6 +592,12 @@ void selectFilter(GtkWidget* widget) {
 
 }
 
+/* --------------------------------------------------------------------------*/
+/** 
+* @brief Set the filter.
+* 
+* @param f
+*/
 void setFilter(int f) {
     GtkWidget* widget;
         switch(f) {
@@ -571,10 +641,26 @@ void setFilter(int f) {
         selectFilter(widget);
 }
 
+/* --------------------------------------------------------------------------*/
+/** 
+* @brief Filter button callback
+* 
+* @param widget
+* @param data
+*/
 void filterButtonCallback(GtkWidget* widget,gpointer data) {
     selectFilter(widget);
 }
 
+/* --------------------------------------------------------------------------*/
+/** 
+* @brief Filter High label configure event
+* 
+* @param widget
+* @param event
+* 
+* @return 
+*/
 gboolean filterHighLabel_configure_event(GtkWidget* widget,GdkEventConfigure* event) {
     GdkGC* gc;
     PangoContext *context;
@@ -606,6 +692,15 @@ gboolean filterHighLabel_configure_event(GtkWidget* widget,GdkEventConfigure* ev
     return TRUE;
 }
 
+/* --------------------------------------------------------------------------*/
+/** 
+* @brief Filter high label expose event
+* 
+* @param widget
+* @param event
+* 
+* @return 
+*/
 gboolean filterHighLabel_expose_event(GtkWidget* widget,GdkEventExpose* event) {
     gdk_draw_drawable(widget->window,
                     widget->style->fg_gc[GTK_WIDGET_STATE (widget)],
@@ -616,6 +711,15 @@ gboolean filterHighLabel_expose_event(GtkWidget* widget,GdkEventExpose* event) {
     return FALSE;
 }
 
+/* --------------------------------------------------------------------------*/
+/** 
+* @brief Filter high display configure event 
+* 
+* @param widget
+* @param event
+* 
+* @return 
+*/
 gboolean filterHighDisplay_configure_event(GtkWidget* widget,GdkEventConfigure* event) {
     GdkGC* gc;
     PangoContext *context;
@@ -631,6 +735,15 @@ gboolean filterHighDisplay_configure_event(GtkWidget* widget,GdkEventConfigure* 
     return TRUE;
 }
 
+/* --------------------------------------------------------------------------*/
+/** 
+* @brief Filter high display expose event 
+* 
+* @param widget
+* @param event
+* 
+* @return 
+*/
 gboolean filterHighDisplay_expose_event(GtkWidget* widget,GdkEventExpose* event) {
     gdk_draw_drawable(widget->window,
                     widget->style->fg_gc[GTK_WIDGET_STATE (widget)],
@@ -641,6 +754,15 @@ gboolean filterHighDisplay_expose_event(GtkWidget* widget,GdkEventExpose* event)
     return FALSE;
 }
 
+/* --------------------------------------------------------------------------*/
+/** 
+* @brief Filter low label configure event
+* 
+* @param widget
+* @param event
+* 
+* @return 
+*/
 gboolean filterLowLabel_configure_event(GtkWidget* widget,GdkEventConfigure* event) {
     GdkGC* gc;
     PangoContext *context;
@@ -673,6 +795,15 @@ gboolean filterLowLabel_configure_event(GtkWidget* widget,GdkEventConfigure* eve
     return TRUE;
 }
 
+/* --------------------------------------------------------------------------*/
+/** 
+* @brief iFilter low label expose event
+* 
+* @param widget
+* @param event
+* 
+* @return 
+*/
 gboolean filterLowLabel_expose_event(GtkWidget* widget,GdkEventExpose* event) {
     gdk_draw_drawable(widget->window,
                     widget->style->fg_gc[GTK_WIDGET_STATE (widget)],
@@ -683,6 +814,15 @@ gboolean filterLowLabel_expose_event(GtkWidget* widget,GdkEventExpose* event) {
     return FALSE;
 }
 
+/* --------------------------------------------------------------------------*/
+/** 
+* @brief Filter low display configure event
+* 
+* @param widget
+* @param event
+* 
+* @return 
+*/
 gboolean filterLowDisplay_configure_event(GtkWidget* widget,GdkEventConfigure* event) {
     GdkGC* gc;
     PangoContext *context;
@@ -697,6 +837,15 @@ gboolean filterLowDisplay_configure_event(GtkWidget* widget,GdkEventConfigure* e
     return TRUE;
 }
 
+/* --------------------------------------------------------------------------*/
+/** 
+* @brief Filter low display expose event
+* 
+* @param widget
+* @param event
+* 
+* @return 
+*/
 gboolean filterLowDisplay_expose_event(GtkWidget* widget,GdkEventExpose* event) {
     gdk_draw_drawable(widget->window,
                     widget->style->fg_gc[GTK_WIDGET_STATE (widget)],
@@ -708,6 +857,12 @@ gboolean filterLowDisplay_expose_event(GtkWidget* widget,GdkEventExpose* event) 
 }
 
 
+/* --------------------------------------------------------------------------*/
+/** 
+* @brief Update filter
+* 
+* @param widget
+*/
 void updateFilter(GtkWidget* widget) {
     char temp[80];
     switch(filter) {
@@ -754,6 +909,14 @@ void updateFilter(GtkWidget* widget) {
     writeCommand(temp);
 }
 
+/* --------------------------------------------------------------------------*/
+/** 
+* @brief Filter increment timer
+* 
+* @param widget
+* 
+* @return 
+*/
 gint filterIncrementTimer(gpointer widget) {
     // stop the current timer
     gtk_timeout_remove(filterTimerId);        
@@ -763,6 +926,15 @@ gint filterIncrementTimer(gpointer widget) {
     filterTimerId=gtk_timeout_add(50,filterIncrementTimer,widget);
 }
 
+/* --------------------------------------------------------------------------*/
+/** 
+* @brief Filter increment callback
+* 
+* @param widget
+* @param data
+* 
+* @return 
+*/
 gint filterIncrementCallback(GtkWidget* widget,gpointer data) {
     // increment/decrement the filter high/low
     updateFilter(widget);
@@ -770,11 +942,27 @@ gint filterIncrementCallback(GtkWidget* widget,gpointer data) {
     filterTimerId=gtk_timeout_add(500,filterIncrementTimer,widget);
 }
 
+/* --------------------------------------------------------------------------*/
+/** 
+* @brief Filter released callback 
+* 
+* @param widget
+* @param data
+*/
 void filterReleasedCallback(GtkWidget* widget,gpointer data) {
     // stop the timer
     gtk_timeout_remove(filterTimerId);        
 }
 
+/* --------------------------------------------------------------------------*/
+/** 
+* @brief Filter scoll event 
+* 
+* @param widget
+* @param event
+* 
+* @return 
+*/
 gboolean filter_scroll_event(GtkWidget* widget,GdkEventScroll* event) {
     char temp[80];
     switch(filter) {
@@ -829,6 +1017,12 @@ gboolean filter_scroll_event(GtkWidget* widget,GdkEventScroll* event) {
     writeCommand(temp);
 }
 
+/* --------------------------------------------------------------------------*/
+/** 
+* @brief Build Filter User Interface 
+* 
+* @return 
+*/
 GtkWidget* buildFilterUI() {
 
     GtkWidget* label;
@@ -1033,12 +1227,20 @@ GtkWidget* buildFilterUI() {
     return filterFixed;
 }
 
+/* --------------------------------------------------------------------------*/
+/** 
+* @brief Save the filter state
+*/
 void filterSaveState() {
     char string[128];
     sprintf(string,"%d",filter);
     setProperty("filter",string);
 }
 
+/* --------------------------------------------------------------------------*/
+/** 
+* @brief Restore the filter state.
+*/
 void filterRestoreState() {
     char* value;
     value=getProperty("filter");

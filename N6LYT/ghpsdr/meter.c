@@ -1,3 +1,29 @@
+/** 
+* @file meter.c
+* @brief Meter functions 
+* @author John Melton, G0ORX/N6LYT, Doxygen Comments Dave Larsen, KV0S
+* @version 0.1
+* @date 2009-04-11
+*/
+
+/* Copyright (C) 
+* 2009 - John Melton, G0ORX/N6LYT, Doxygen Comments Dave Larsen, KV0S
+* This program is free software; you can redistribute it and/or
+* modify it under the terms of the GNU General Public License
+* as published by the Free Software Foundation; either version 2
+* of the License, or (at your option) any later version.
+* 
+* This program is distributed in the hope that it will be useful,
+* but WITHOUT ANY WARRANTY; without even the implied warranty of
+* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+* GNU General Public License for more details.
+* 
+* You should have received a copy of the GNU General Public License
+* along with this program; if not, write to the Free Software
+* Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+* 
+*/
+
 // meter.c
 
 #include <gtk/gtk.h>
@@ -40,16 +66,27 @@ void drawSignal();
 void updateOff();
 
 
+/* --------------------------------------------------------------------------*/
+/** 
+* @brief Calculate filter calibration size offset 
+* 
+* @return 
+*/
 float getFilterSizeCalibrationOffset() {
     int size=1024; // dspBufferSize
     float i=log10((float)size);
     return 3.0f*(11.0f-i);
 }
 
-//-------------------------------------------------------------------------------------------
-//
-//  callback when meter is created
-//
+/* --------------------------------------------------------------------------*/
+/** 
+* @brief  Callback when meter is created
+* 
+* @param widget
+* @param event
+* 
+* @return 
+*/
 gboolean meter_configure_event(GtkWidget* widget,GdkEventConfigure* event) {
     GdkGC* gc;
 
@@ -71,10 +108,15 @@ gboolean meter_configure_event(GtkWidget* widget,GdkEventConfigure* event) {
     return TRUE;
 }
 
-//-------------------------------------------------------------------------------------------
-//
-//  callback when meter is exposed - paint it from the pixmap
-//
+/* --------------------------------------------------------------------------*/
+/** 
+* @brief Callback when meter is exposed - paint it from the pixmap
+* 
+* @param widget
+* @param event
+* 
+* @return 
+*/
 gboolean meter_expose_event(GtkWidget* widget,GdkEventExpose* event) {
     gdk_draw_drawable(widget->window,
                     widget->style->fg_gc[GTK_WIDGET_STATE (widget)],
@@ -85,10 +127,15 @@ gboolean meter_expose_event(GtkWidget* widget,GdkEventExpose* event) {
     return FALSE;
 }
 
-//-------------------------------------------------------------------------------------------
-//
-//  callback when dbm is is created
-//
+/* --------------------------------------------------------------------------*/
+/** 
+* @brief  Callback when dbm is is created
+* 
+* @param widget
+* @param event
+* 
+* @return 
+*/
 gboolean dbm_configure_event(GtkWidget* widget,GdkEventConfigure* event) {
     GdkGC* gc;
     PangoContext *context;
@@ -121,10 +168,15 @@ gboolean dbm_configure_event(GtkWidget* widget,GdkEventConfigure* event) {
     return TRUE;
 }
 
-//-------------------------------------------------------------------------------------------
-//
-//  callback when dbm is exposed - need to paint it from the pixmap
-//
+/* --------------------------------------------------------------------------*/
+/** 
+* @brief Callback when dbm is exposed - need to paint it from the pixmap
+* 
+* @param widget
+* @param event
+* 
+* @return 
+*/
 gboolean dbm_expose_event(GtkWidget* widget,GdkEventExpose* event) {
     gdk_draw_drawable(widget->window,
                     widget->style->fg_gc[GTK_WIDGET_STATE (widget)],
@@ -135,6 +187,10 @@ gboolean dbm_expose_event(GtkWidget* widget,GdkEventExpose* event) {
     return FALSE;
 }
 
+/* --------------------------------------------------------------------------*/
+/** 
+* @brief Draw the meter signal 
+*/
 void meterDrawSignal() {
 
     // get the meter context - just copy the window GC and modify
@@ -194,6 +250,10 @@ void meterDrawSignal() {
     }
 }
 
+/* --------------------------------------------------------------------------*/
+/** 
+* @brief Draw the Dbm signal value
+*/
 void meterDbmDrawSignal() {
     GdkGC* gc;
     PangoContext *context;
@@ -226,6 +286,12 @@ void meterDbmDrawSignal() {
     }
 }
 
+/* --------------------------------------------------------------------------*/
+/** 
+* @brief Plot the meter signal 
+* 
+* @param sample
+*/
 void meterPlotSignal(float sample) {
 
     // plot the meter
@@ -257,6 +323,10 @@ void meterPlotSignal(float sample) {
     if(meterX<=0) meterX=1;
 }
 
+/* --------------------------------------------------------------------------*/
+/** 
+* @brief Turn off the meter update
+*/
 void meterUpdateOff() {
 
     // get the meter context - just copy the window GC and modify
@@ -284,6 +354,12 @@ void updateMeter(float sample) {
     }
 }
 
+/* --------------------------------------------------------------------------*/
+/** 
+* @brief Set the meter mode
+* 
+* @param mode
+*/
 void setMeterMode(int mode) {
     char command[80];
     meterMode=mode;
@@ -299,6 +375,12 @@ void setMeterMode(int mode) {
 }
 
 
+/* --------------------------------------------------------------------------*/
+/** 
+* @brief Build the meter user interface
+* 
+* @return 
+*/
 GtkWidget* buildMeterUI() {
    meterFixed=gtk_fixed_new();
     gtk_widget_modify_bg(meterFixed,GTK_STATE_NORMAL,&background);
@@ -325,12 +407,20 @@ GtkWidget* buildMeterUI() {
     return meterFixed;
 }
 
+/* --------------------------------------------------------------------------*/
+/** 
+* @brief Save the meter state
+*/
 void meterSaveState() {
     char string[128];
     sprintf(string,"%d",meterMode);
     setProperty("meter.mode",string);
 }
 
+/* --------------------------------------------------------------------------*/
+/** 
+* @brief Restore the meter state
+*/
 void meterRestoreState() {
     char* value;
     value=getProperty("meter.mode");
