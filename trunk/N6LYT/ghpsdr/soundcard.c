@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include "soundcard.h"
 
-int soundcard=UNSUPPORTED_CARD;
+int soundcard=HPSDR;
 
 int sampleRate=48000;
 
@@ -36,12 +36,12 @@ void setSoundcard(int card) {
             displayCalibrationOffset=-80.429f;
             break;
         case UNSUPPORTED_CARD:
-            multimeterCalibrationOffset=-52.43533f;
-            displayCalibrationOffset=-82.62103f;
+            multimeterCalibrationOffset=-22.43533f;
+            displayCalibrationOffset=-48.62103f;
             break;
         case HPSDR:
-            multimeterCalibrationOffset=0.0f;
-            displayCalibrationOffset=0.0f;
+            multimeterCalibrationOffset=-22.43533f;
+            displayCalibrationOffset=-48.62103f;
             break;
     }
 

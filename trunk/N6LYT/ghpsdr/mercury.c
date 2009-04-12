@@ -198,6 +198,11 @@ GtkWidget* buildMercuryUI() {
     gtk_widget_show(mercuryFixed);
 
 
+    
+    return mercuryFixed;
+}
+
+void mercuryInit() {
     // setup
     if(sampleRate==48000) {
         mercuryButtonCallback(buttonR48K,NULL) ;
@@ -206,8 +211,6 @@ GtkWidget* buildMercuryUI() {
     } else if(sampleRate==192000) {
         mercuryButtonCallback(buttonR192K,NULL) ;
     }
-    
-    return mercuryFixed;
 }
 
 void mercurySaveState() {

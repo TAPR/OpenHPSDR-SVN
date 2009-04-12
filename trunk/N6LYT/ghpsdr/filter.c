@@ -581,7 +581,6 @@ gboolean filterHighLabel_configure_event(GtkWidget* widget,GdkEventConfigure* ev
     PangoLayout *layout;
 
     if(filterHighLabelPixmap) g_object_unref(filterHighLabelPixmap);
-
     filterHighLabelPixmap=gdk_pixmap_new(widget->window,widget->allocation.width,widget->allocation.height,-1);
 
     gc=gdk_gc_new(widget->window);
