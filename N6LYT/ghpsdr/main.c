@@ -33,6 +33,7 @@
 #include "band.h"
 #include "mode.h"
 #include "bandscope.h"
+#include "bandscope_control.h"
 #include "setup.h"
 
 GdkColor background;
@@ -78,7 +79,6 @@ gint mainRootY;
 char propertyPath[128];
 
 int meterDbm;
-float preampOffset;
 
 void mainSaveState() {
     char string[128];
@@ -271,6 +271,7 @@ void buildMainUI() {
     gtk_fixed_put((GtkFixed*)mainFixed,filterWindow,0,200);
 
     // add the audio window
+    gtk_widget_show(filterWindow);
     gtk_widget_show(audioWindow);
     gtk_fixed_put((GtkFixed*)mainFixed,audioWindow,0,330);
 
@@ -435,9 +436,8 @@ int main(int argc,char* argv[]) {
 
     gtk_init(&argc,&argv);
 
+    strcpy(soundCardName,"HPSDR");
     strcpy(propertyPath,".ghpsdr.properties");
-
-    strcpy(soundCardName,"UNSUPPORTED_CARD");
 
     processCommands(argc,argv);
 
@@ -489,10 +489,12 @@ int main(int argc,char* argv[]) {
 
     restoreState();
 
-    setSoundcard(getSoundcardId(soundCardName));
 
     // build the Main UI
     buildMainUI();
+
+    setSoundcard(getSoundcardId(soundCardName));
+    mercuryInit();
 
     gtk_main();
 }
