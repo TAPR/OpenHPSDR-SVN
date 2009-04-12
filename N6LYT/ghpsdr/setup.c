@@ -116,7 +116,7 @@ void setup() {
 
         gtk_widget_show(setupWindow);
     } else {
-        gtk_window_set_keep_above(setupWindow,TRUE);
+        gtk_window_set_keep_above((GtkWindow*)setupWindow,TRUE);
     }
 
 }
