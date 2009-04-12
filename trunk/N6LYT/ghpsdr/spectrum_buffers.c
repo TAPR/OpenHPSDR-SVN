@@ -1,9 +1,28 @@
-/* 
- * File:   spectrum_buffers.c
- * Author: John Melton G0ORX/N6LYT
- *
- * Created on 12 January 2009, 14:20
- */
+/** 
+* @file spectrum_buffers.c
+* @brief Spectrum buffer functions
+* @author John Melton, G0ORX/N6LYT, Doxygen Comments Dave Larsen, KV0S
+* @version 0.1
+* @date 2009-01-12
+*/
+
+/* Copyright (C) 
+* 2009 - John Melton, G0ORX/N6LYT, Doxygen Comments Dave Larsen, KV0S
+* This program is free software; you can redistribute it and/or
+* modify it under the terms of the GNU General Public License
+* as published by the Free Software Foundation; either version 2
+* of the License, or (at your option) any later version.
+* 
+* This program is distributed in the hope that it will be useful,
+* but WITHOUT ANY WARRANTY; without even the implied warranty of
+* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+* GNU General Public License for more details.
+* 
+* You should have received a copy of the GNU General Public License
+* along with this program; if not, write to the Free Software
+* Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+* 
+*/
 
 #include <fcntl.h>
 #include <stdio.h>
@@ -32,6 +51,10 @@ pthread_mutex_t spectrum_free_buffer_mutex;
 
 void free_spectrum_buffer(struct spectrum_buffer* buffer);
 
+/* --------------------------------------------------------------------------*/
+/** 
+* @brief Put spectrum free buffer
+*/
 void put_spectrum_free_buffer(struct spectrum_buffer* buffer) {
 
     pthread_mutex_lock(&spectrum_free_buffer_mutex);
@@ -44,6 +67,10 @@ void put_spectrum_free_buffer(struct spectrum_buffer* buffer) {
     pthread_mutex_unlock(&spectrum_free_buffer_mutex);
 }
 
+/* --------------------------------------------------------------------------*/
+/** 
+* @brief Get spectrum free buffer
+*/
 struct spectrum_buffer* get_spectrum_free_buffer(void) {
     struct spectrum_buffer* buffer;
     if(spectrum_free_buffers_head==NULL) {
@@ -61,6 +88,10 @@ struct spectrum_buffer* get_spectrum_free_buffer(void) {
     return buffer;
 }
 
+/* --------------------------------------------------------------------------*/
+/** 
+* @brief Put spectrum input buffer
+*/
 void put_spectrum_input_buffer(struct spectrum_buffer* buffer) {
 
     pthread_mutex_lock(&spectrum_input_buffer_mutex);
@@ -74,6 +105,10 @@ void put_spectrum_input_buffer(struct spectrum_buffer* buffer) {
     pthread_mutex_unlock(&spectrum_input_buffer_mutex);
 }
 
+/* --------------------------------------------------------------------------*/
+/** 
+* @brief Get spectrum input buffer
+*/
 struct spectrum_buffer* get_spectrum_input_buffer(void) {
     struct spectrum_buffer* buffer;
     if(spectrum_input_buffers_head==NULL) {
@@ -90,6 +125,10 @@ struct spectrum_buffer* get_spectrum_input_buffer(void) {
     return buffer;
 }
 
+/* --------------------------------------------------------------------------*/
+/** 
+* @brief New spectrum buffer
+*/
 struct spectrum_buffer* new_spectrum_buffer() {
     struct spectrum_buffer* buffer;
     buffer=malloc(sizeof(struct spectrum_buffer));
@@ -98,6 +137,12 @@ struct spectrum_buffer* new_spectrum_buffer() {
     return buffer;
 }
 
+/* --------------------------------------------------------------------------*/
+/** 
+* @brief Create spectrum buffer
+* 
+* @param n
+*/
 void create_spectrum_buffers(int n) {
     struct spectrum_buffer* buffer;
     int i;
@@ -121,6 +166,10 @@ fprintf(stderr,"%s\n",name);
 
 }
 
+/* --------------------------------------------------------------------------*/
+/** 
+* @brief Free spectrum buffer
+*/
 void free_spectrum_buffer(struct spectrum_buffer* buffer) {
     put_spectrum_free_buffer(buffer);
 }

@@ -1,3 +1,28 @@
+/** 
+* @file bandscope.c
+* @brief Bandscope definition files.
+* @author John Melton, G0ORX/N6LYT, Doxygen Comments Dave Larsen, KV0S
+* @version 0.1
+* @date 2009-04-11
+*/
+
+/* Copyright (C) 
+* This program is free software; you can redistribute it and/or2009 - John Melton, G0ORX/N6LYT, Doxygen Comments Dave Larsen, KV0S
+* modify it under the terms of the GNU General Public License
+* as published by the Free Software Foundation; either version 2
+* of the License, or (at your option) any later version.
+* 
+* This program is distributed in the hope that it will be useful,
+* but WITHOUT ANY WARRANTY; without even the implied warranty of
+* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+* GNU General Public License for more details.
+* 
+* You should have received a copy of the GNU General Public License
+* along with this program; if not, write to the Free Software
+* Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+* 
+*/
+
 #include <gtk/gtk.h>
 #include <math.h>
 #include <stdlib.h>
@@ -47,6 +72,12 @@ void drawBandscope();
 void bandscopeUpdateOff();
 float *blackmanHarrisFilter(int n);
 
+/* --------------------------------------------------------------------------*/
+/** 
+* @brief Build the bandscope User Interface. 
+* 
+* @return GtkWidget* 
+*/
 GtkWidget* buildBandscopeUI() {
     
     // prepare the fft (time domain to frequency domain)
@@ -109,6 +140,15 @@ gboolean bandscope_configure_event(GtkWidget* widget,GdkEventConfigure* event) {
     return TRUE;
 }
 
+/* --------------------------------------------------------------------------*/
+/** 
+* @brief bandscope expose event 
+* 
+* @param widget
+* @param event
+* 
+* @return 
+*/
 gboolean bandscope_expose_event(GtkWidget* widget,GdkEventExpose* event) {
     gdk_draw_drawable(widget->window,
 		    widget->style->fg_gc[GTK_WIDGET_STATE (widget)],
@@ -119,6 +159,15 @@ gboolean bandscope_expose_event(GtkWidget* widget,GdkEventExpose* event) {
     return FALSE;
 }
 
+/* --------------------------------------------------------------------------*/
+/** 
+* @brief bandscope button press event
+* 
+* @param widget
+* @param event
+* 
+* @return 
+*/
 gboolean bandscope_button_press_event(GtkWidget* widget,GdkEventButton* event) {
     float hzPerPixel;
     long long f;
@@ -139,6 +188,12 @@ gboolean bandscope_button_press_event(GtkWidget* widget,GdkEventButton* event) {
     return TRUE;
 }
 
+/* --------------------------------------------------------------------------*/
+/** 
+* @brief Update bandscope
+* 
+* @param samples
+*/
 void updateBandscope(float* samples) {
     int i,j;
     int half=BANDSCOPE_BUFFER_SIZE/2;
@@ -161,6 +216,10 @@ void updateBandscope(float* samples) {
     drawBandscope();
 }
 
+/* --------------------------------------------------------------------------*/
+/** 
+* @brief iDraw the bandscope
+*/
 void drawBandscope() {
 
     // get the bandscope context - just copy the window GC and modify
@@ -275,6 +334,12 @@ void drawBandscope() {
     }
 }
 
+/* --------------------------------------------------------------------------*/
+/** 
+* @brief Plot the bandscope
+* 
+* @param samples
+*/
 void plotBandscope(float* samples) {
         float samplesPerPixel=(float)BANDSCOPE_BUFFER_SIZE/2.0/(float)(bandscopeWIDTH*bandscopeZoom);
         float max=0.0f;
@@ -295,6 +360,10 @@ void plotBandscope(float* samples) {
 
 }
 
+/* --------------------------------------------------------------------------*/
+/** 
+* @brief Turn off the bandscope update 
+*/
 void bandscopeUpdateOff() {
 
     // get the bandscope context - just copy the window GC and modify
@@ -309,6 +378,10 @@ void bandscopeUpdateOff() {
     }
 }
 
+/* --------------------------------------------------------------------------*/
+/** 
+* @brief Save the bandscope state.
+*/
 void bandscopeSaveState() {
     char string[128];
 
@@ -323,6 +396,10 @@ void bandscopeSaveState() {
 
 }
 
+/* --------------------------------------------------------------------------*/
+/** 
+* @brief Restore the bandscope state. 
+*/
 void bandscopeRestoreState() {
     char* value;
 
@@ -337,11 +414,25 @@ void bandscopeRestoreState() {
 
 }
 
+/* --------------------------------------------------------------------------*/
+/** 
+* @brief Set the zoom for the bandscope.
+* 
+* @param zoom
+*/
 void bandscopeSetZoom(int zoom) {
     bandscopeZoom=zoom;
     gtk_widget_set_size_request(GTK_WIDGET(bandscope),bandscopeWIDTH*bandscopeZoom,bandscopeHEIGHT);
 }
 
+/* --------------------------------------------------------------------------*/
+/** 
+* @brief Blackman-Harris filter 
+* 
+* @param n
+* 
+* @return 
+*/
 float *blackmanHarrisFilter(int n) {
     float* filter;
     float a0=0.35875F,

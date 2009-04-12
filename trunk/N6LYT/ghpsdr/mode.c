@@ -1,4 +1,29 @@
+/** 
+* @file mode.c
+* @brief Mode functions
+* @author John Melton, G0ORX/N6LYT, Doxygen Comments Dave Larsen, KV0S
+* @version 0.1
+* @date 2009-04-12
+*/
 // mode.c
+
+/* Copyright (C) 
+* 2009 - John Melton, G0ORX/N6LYT, Doxygen Comments Dave Larsen, KV0S
+* This program is free software; you can redistribute it and/or
+* modify it under the terms of the GNU General Public License
+* as published by the Free Software Foundation; either version 2
+* of the License, or (at your option) any later version.
+* 
+* This program is distributed in the hope that it will be useful,
+* but WITHOUT ANY WARRANTY; without even the implied warranty of
+* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+* GNU General Public License for more details.
+* 
+* You should have received a copy of the GNU General Public License
+* along with this program; if not, write to the Free Software
+* Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+* 
+*/
 
 #include <gtk/gtk.h>
 #include <gdk/gdkkeysyms.h>
@@ -40,10 +65,12 @@ GtkWidget* currentModeButton;
 
 void setMode(int mode);
 
-//-------------------------------------------------------------------------------------------
-//
-//  select the mode - sends a setMode and setFilter to DSP
-//
+/* --------------------------------------------------------------------------*/
+/** 
+* @brief  Select the mode - sends a setMode and setFilter to DSP
+* 
+* @param widget
+*/
 void selectMode(GtkWidget* widget) {
     GtkWidget* label;
     char temp[80];
@@ -93,6 +120,12 @@ void selectMode(GtkWidget* widget) {
 
 }
 
+/* --------------------------------------------------------------------------*/
+/** 
+* @brief Set the mode of the mode function
+* 
+* @param mode
+*/
 void setModeMode(int mode) {
     GtkWidget* widget;
     switch(mode) {
@@ -136,18 +169,23 @@ void setModeMode(int mode) {
     selectMode(widget);
 }
 
-//-------------------------------------------------------------------------------------------
-//
-//  callback when a mode button is pressed
-//
+/* --------------------------------------------------------------------------*/
+/** 
+* @brief  Callback when a mode button is pressed
+* 
+* @param widget
+* @param data
+*/
 void modeCallback(GtkWidget* widget,gpointer data) {
     selectMode(widget);
 }
 
-//-------------------------------------------------------------------------------------------
-//
-// build the GUI
-//
+/* --------------------------------------------------------------------------*/
+/** 
+* @brief  Build the GUI
+* 
+* @return 
+*/
 GtkWidget* buildModeUI() {
     GtkWidget* label;
 
@@ -273,12 +311,20 @@ GtkWidget* buildModeUI() {
   
 }
 
+/* --------------------------------------------------------------------------*/
+/** 
+* @brief Save the mode state
+*/
 void modeSaveState() {
     char string[128];
     sprintf(string,"%d",mode);
     setProperty("mode",string);
 }
 
+/* --------------------------------------------------------------------------*/
+/** 
+* @brief Restore the mode state
+*/
 void modeRestoreState() {
     char* value;
     value=getProperty("mode");

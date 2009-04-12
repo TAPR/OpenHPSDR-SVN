@@ -1,4 +1,31 @@
+/** 
+* @file display.c
+* @brief Display functions
+* @author John Melton, G0ORX/N6LYT, Doxygen Comments Dave Larsen, KV0S
+* @version 0.1
+* @date 2009-04-11
+*/
 // display.c
+
+/* Copyright (C) 
+* 2009 - John Melton, G0ORX/N6LYT, Doxygen Comments Dave Larsen, KV0S
+* This program is free software; you can redistribute it and/or
+* modify it under the terms of the GNU General Public License
+* as published by the Free Software Foundation; either version 2
+* of the License, or (at your option) any later version.
+* 
+* This program is distributed in the hope that it will be useful,
+* but WITHOUT ANY WARRANTY; without even the implied warranty of
+* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+* GNU General Public License for more details.
+* 
+* You should have received a copy of the GNU General Public License
+* along with this program; if not, write to the Free Software
+* Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+* 
+*/
+
+
 //
 // GTK+ 2.0 implementation of Beppe's Display and Decode panel
 // see http://www.radioamatore.it/sdr1000/mypowersdr.html fo the original
@@ -34,10 +61,13 @@ GtkWidget* buttonPhase2;
 
 GtkWidget* currentSpectrumButton;
 
-//-------------------------------------------------------------------------------------------
-//
-//  callback when a spectrum button is pressed
-//
+/* --------------------------------------------------------------------------*/
+/** 
+* @brief  Callback when a spectrum button is pressed
+* 
+* @param widget
+* @param data
+*/
 void spectrumCallback(GtkWidget* widget,gpointer data) {
     GtkWidget* label;
     if(currentSpectrumButton) {
@@ -65,10 +95,12 @@ void spectrumCallback(GtkWidget* widget,gpointer data) {
     }
 }
 
-//-------------------------------------------------------------------------------------------
-//
-// build the GUI
-//
+/* --------------------------------------------------------------------------*/
+/** 
+* @brief Build the GUI
+* 
+* @return 
+*/
 GtkWidget* buildDisplayUI() {
     GtkWidget* label;
     //display = gtk_window_new (GTK_WINDOW_TOPLEVEL);
@@ -171,6 +203,10 @@ GtkWidget* buildDisplayUI() {
   
 }
 
+/* --------------------------------------------------------------------------*/
+/** 
+* @brief Save the display state. 
+*/
 void displaySaveState() {
     char string[128];
 
@@ -184,6 +220,10 @@ void displaySaveState() {
 
 }
 
+/* --------------------------------------------------------------------------*/
+/** 
+* @brief Restore the display state.
+*/
 void displayRestoreState() {
     char* value;
 

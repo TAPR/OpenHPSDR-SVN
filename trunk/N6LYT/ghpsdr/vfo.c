@@ -1,4 +1,29 @@
+/** 
+* @file vfo.c
+* @brief VFO functions
+* @author John Melton, G0ORX/N6LYT, Doxygen Comments Dave Larsen, KV0S
+* @version 0.1
+* @date 2009-04-12
+*/
 // vfo.c
+
+/* Copyright (C) 
+* 2009 - John Melton, G0ORX/N6LYT, Doxygen Comments Dave Larsen, KV0S
+* This program is free software; you can redistribute it and/or
+* modify it under the terms of the GNU General Public License
+* as published by the Free Software Foundation; either version 2
+* of the License, or (at your option) any later version.
+* 
+* This program is distributed in the hope that it will be useful,
+* but WITHOUT ANY WARRANTY; without even the implied warranty of
+* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+* GNU General Public License for more details.
+* 
+* You should have received a copy of the GNU General Public License
+* along with this program; if not, write to the Free Software
+* Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+* 
+*/
 
 #include <gtk/gtk.h>
 #include <gdk/gdkkeysyms.h>
@@ -48,10 +73,15 @@ GtkWidget* buttonFrequencyDown;
 
 void setIncrement(int increment);
 
-//-------------------------------------------------------------------------------------------
-//
-//  callback when vfo A is is created
-//
+/* --------------------------------------------------------------------------*/
+/** 
+* @brief Callback when vfo A is is created
+* 
+* @param widget
+* @param event
+* 
+* @return 
+*/
 gboolean vfoAFrequency_configure_event(GtkWidget* widget,GdkEventConfigure* event) {
     GdkGC* gc;
     PangoContext *context;
@@ -86,10 +116,15 @@ gboolean vfoAFrequency_configure_event(GtkWidget* widget,GdkEventConfigure* even
     return TRUE;
 }
 
-//-------------------------------------------------------------------------------------------
-//
-//  callback when vfo A is is exposed - need to paint it from the pixmap
-//
+/* --------------------------------------------------------------------------*/
+/** 
+* @brief Callback when vfo A is is exposed - need to paint it from the pixmap
+* 
+* @param widget
+* @param event
+* 
+* @return 
+*/
 gboolean vfoAFrequency_expose_event(GtkWidget* widget,GdkEventExpose* event) {
     gdk_draw_drawable(widget->window,
                     widget->style->fg_gc[GTK_WIDGET_STATE (widget)],
@@ -100,10 +135,15 @@ gboolean vfoAFrequency_expose_event(GtkWidget* widget,GdkEventExpose* event) {
     return FALSE;
 }
 
-//-------------------------------------------------------------------------------------------
-//
-//  callback when vfo B is created
-//
+/* --------------------------------------------------------------------------*/
+/** 
+* @brief  Callback when vfo B is created
+* 
+* @param widget
+* @param event
+* 
+* @return 
+*/
 gboolean vfoBFrequency_configure_event(GtkWidget* widget,GdkEventConfigure* event) {
     GdkGC* gc;
     PangoContext *context;
@@ -138,10 +178,15 @@ gboolean vfoBFrequency_configure_event(GtkWidget* widget,GdkEventConfigure* even
     return TRUE;
 }
 
-//-------------------------------------------------------------------------------------------
-//
-//  callback when vfo B is exposed - need to paint it from the pixmap
-//
+/* --------------------------------------------------------------------------*/
+/** 
+* @brief Callback when vfo B is exposed - need to paint it from the pixmap
+* 
+* @param widget
+* @param event
+* 
+* @return 
+*/
 gboolean vfoBFrequency_expose_event(GtkWidget* widget,GdkEventExpose* event) {
     gdk_draw_drawable(widget->window,
                     widget->style->fg_gc[GTK_WIDGET_STATE (widget)],
@@ -152,10 +197,12 @@ gboolean vfoBFrequency_expose_event(GtkWidget* widget,GdkEventExpose* event) {
     return FALSE;
 }
 
-//-------------------------------------------------------------------------------------------
-//
-//  set the A vfo frequency
-//
+/* --------------------------------------------------------------------------*/
+/** 
+* @brief Set the A vfo frequency
+* 
+* @param f
+*/
 void setAFrequency(long long f) {
     GdkGC* gc;
     PangoContext *context;
@@ -206,15 +253,21 @@ void setAFrequency(long long f) {
 
 }
 
+/* --------------------------------------------------------------------------*/
+/** 
+* @brief Set VFO RX frequency
+*/
 void vfoSetRxFrequency() {
     //fprintf(stderr,"setFrequency %lld\n",ddsFrequency);
     setFrequency((float)ddsFrequency/1000000.0f);
 }
 
-//-------------------------------------------------------------------------------------------
-//
-//  set the B vfo frequency
-//
+/* --------------------------------------------------------------------------*/
+/** 
+* @brief  Set the B vfo frequency
+* 
+* @param f
+*/
 void setBFrequency(long long f) {
     GdkGC* gc;
     PangoContext *context;
@@ -249,10 +302,13 @@ void setBFrequency(long long f) {
     }
 }
 
-//-------------------------------------------------------------------------------------------
-//
-//  callback when a vfo button is pressed
-//
+/* --------------------------------------------------------------------------*/
+/** 
+* @brief  Callback when a vfo button is pressed
+* 
+* @param widget
+* @param data
+*/
 void vfoCallback(GtkWidget* widget,gpointer data) {
     long long f;
     if(widget==buttonAtoB) {
@@ -266,18 +322,24 @@ void vfoCallback(GtkWidget* widget,gpointer data) {
     }
 }
 
-//-------------------------------------------------------------------------------------------
-//
-// increment the frequency - only vfo A
-//
+/* --------------------------------------------------------------------------*/
+/** 
+* @brief Increment the frequency - only vfo A
+* 
+* @param increment
+*/
 void vfoIncrementFrequency(long increment) {
     setAFrequency(frequencyA+(long long)increment);
 }
 
-//-------------------------------------------------------------------------------------------
-//
-//  callback when a frequencyUp button is pressed
-//
+/* --------------------------------------------------------------------------*/
+/** 
+* @brief Frequency up timer 
+* 
+* @param data
+* 
+* @return 
+*/
 gint frequencyUpTimer(gpointer data) {
     gtk_timeout_remove(vfoTimerId);
     vfoIncrementFrequency(frequencyIncrement);
@@ -285,15 +347,26 @@ gint frequencyUpTimer(gpointer data) {
     return TRUE;
 }
 
+/* --------------------------------------------------------------------------*/
+/** 
+* @brief  Callback when a frequency Up button is pressed
+* 
+* @param widget
+* @param data
+*/
 void frequencyUpCallback(GtkWidget* widget,gpointer data) {
     vfoIncrementFrequency(frequencyIncrement);
     vfoTimerId=gtk_timeout_add(500,frequencyUpTimer,NULL);
 }
 
-//-------------------------------------------------------------------------------------------
-//
-//  callback when a frequencyDown button is pressed
-//
+/* --------------------------------------------------------------------------*/
+/** 
+* @brief Frequency down timer 
+* 
+* @param data
+* 
+* @return 
+*/
 gint frequencyDownTimer(gpointer data) {
     gtk_timeout_remove(vfoTimerId);
     vfoIncrementFrequency(-frequencyIncrement);
@@ -301,24 +374,39 @@ gint frequencyDownTimer(gpointer data) {
     return TRUE;
 }
 
+/* --------------------------------------------------------------------------*/
+/** 
+* @brief Callback when a frequencyDown button is pressed
+* 
+* @param widget
+* @param data
+*/
 void frequencyDownCallback(GtkWidget* widget,gpointer data) {
     vfoIncrementFrequency(-frequencyIncrement);
     vfoTimerId=gtk_timeout_add(500,frequencyDownTimer,NULL);
 }
 
 
-//-------------------------------------------------------------------------------------------
-//
-//  callback when a frequencyUp/Down button is released
-//
+/* --------------------------------------------------------------------------*/
+/** 
+* @brief  Callback when a frequencyUp/Down button is released
+* 
+* @param widget
+* @param data
+*/
 void frequencyReleasedCallback(GtkWidget* widget,gpointer data) {
     gtk_timeout_remove(vfoTimerId);
 }
 
-//-------------------------------------------------------------------------------------------
-//
-// frequency scroll wheel
-//
+/* --------------------------------------------------------------------------*/
+/** 
+* @brief Frequency scroll wheel
+* 
+* @param widget
+* @param event
+* 
+* @return 
+*/
 gboolean frequency_scroll_event(GtkWidget* widget,GdkEventScroll* event) {
     if(event->direction==GDK_SCROLL_UP) {
         vfoIncrementFrequency(frequencyIncrement);
@@ -327,10 +415,15 @@ gboolean frequency_scroll_event(GtkWidget* widget,GdkEventScroll* event) {
     }
 }
 
-//-------------------------------------------------------------------------------------------
-//
-//  callback when a incrementDisplay is exposed
-//
+/* --------------------------------------------------------------------------*/
+/** 
+* @brief  Callback when a incrementDisplay is exposed
+* 
+* @param widget
+* @param event
+* 
+* @return 
+*/
 gboolean incrementDisplay_expose_event(GtkWidget* widget,GdkEventExpose* event) {
     gdk_draw_drawable(widget->window,
                     widget->style->fg_gc[GTK_WIDGET_STATE (widget)],
@@ -341,6 +434,12 @@ gboolean incrementDisplay_expose_event(GtkWidget* widget,GdkEventExpose* event) 
     return FALSE;
 }
 
+/* --------------------------------------------------------------------------*/
+/** 
+* @brief Draw increment display
+* 
+* @param queue
+*/
 void drawIncrementDisplay(gboolean queue) {
 
     GdkGC* gc;
@@ -378,21 +477,36 @@ void drawIncrementDisplay(gboolean queue) {
     }
 }
 
+/* --------------------------------------------------------------------------*/
+/** 
+* @brief Callback when display configure event occurs
+* 
+* @param widget
+* @param event
+* 
+* @return 
+*/
 gboolean incrementDisplay_configure_event(GtkWidget* widget,GdkEventConfigure* event) {
     drawIncrementDisplay(FALSE);
     return TRUE;
 }
 
-//-------------------------------------------------------------------------------------------
-//
-// increment up/down
-//
 
+/* --------------------------------------------------------------------------*/
+/** 
+* @brief  Increment up/down
+* 
+* @param increment
+*/
 void setIncrement(int increment) {
     frequencyIncrement=increment;
     drawIncrementDisplay(TRUE);
 }
 
+/* --------------------------------------------------------------------------*/
+/** 
+* @brief Next increment
+*/
 void nextIncrement() {
     if(frequencyIncrement==1000000) {
         frequencyIncrement=1;
@@ -402,6 +516,10 @@ void nextIncrement() {
     drawIncrementDisplay(TRUE);
 }
 
+/* --------------------------------------------------------------------------*/
+/** 
+* @brief Previous increment
+*/
 void previousIncrement() {
     if(frequencyIncrement==1) {
         frequencyIncrement=1000000;
@@ -411,17 +529,36 @@ void previousIncrement() {
     drawIncrementDisplay(TRUE);
 }
 
+/* --------------------------------------------------------------------------*/
+/** 
+* @brief Callback on button increment plus 
+* 
+* @param widget
+* @param data
+*/
 void buttonIncrementPlusCallback(GtkWidget* widget,gpointer data) {
     nextIncrement();
 }
 
+/* --------------------------------------------------------------------------*/
+/** 
+* @brief Callback on button increment minus 
+* 
+* @param widget
+* @param data
+*/
 void buttonIncrementMinusCallback(GtkWidget* widget,gpointer data) {
     previousIncrement();
 }
-//-------------------------------------------------------------------------------------------
-//
-// increment scroll wheel
-//
+/* --------------------------------------------------------------------------*/
+/** 
+* @brief Increment scroll wheel
+* 
+* @param widget
+* @param event
+* 
+* @return 
+*/
 gboolean increment_scroll_event(GtkWidget* widget,GdkEventScroll* event) {
     if(event->direction==GDK_SCROLL_UP) {
         nextIncrement();
@@ -431,10 +568,12 @@ gboolean increment_scroll_event(GtkWidget* widget,GdkEventScroll* event) {
     return TRUE;
 }
 
-//-------------------------------------------------------------------------------------------
-//
-// build the GUI
-//
+/* --------------------------------------------------------------------------*/
+/** 
+* @brief Build the GUI
+* 
+* @return 
+*/
 GtkWidget* buildVfoUI() {
     GtkWidget* label;
 
@@ -542,6 +681,10 @@ GtkWidget* buildVfoUI() {
   
 }
 
+/* --------------------------------------------------------------------------*/
+/** 
+* @brief Save the VFO state
+*/
 void vfoSaveState() {
     char string[128];
     char name[128];
@@ -553,6 +696,10 @@ void vfoSaveState() {
     setProperty("vfoB",string);
 }
 
+/* --------------------------------------------------------------------------*/
+/** 
+* @brief Restore the VFO state
+*/
 void vfoRestoreState() {
     char* value;
     char name[128];

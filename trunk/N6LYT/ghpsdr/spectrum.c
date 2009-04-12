@@ -1,3 +1,29 @@
+/** 
+* @file spectrum.c
+* @brief Spectrum functions
+* @author John Melton, G0ORX/N6LYT, Doxygen Comments Dave Larsen, KV0S
+* @version 0.1
+* @date 2009-04-12
+*/
+
+/* Copyright (C) 
+* 2009 - John Melton, G0ORX/N6LYT, Doxygen Comments Dave Larsen, KV0S
+* This program is free software; you can redistribute it and/or
+* modify it under the terms of the GNU General Public License
+* as published by the Free Software Foundation; either version 2
+* of the License, or (at your option) any later version.
+* 
+* This program is distributed in the hope that it will be useful,
+* but WITHOUT ANY WARRANTY; without even the implied warranty of
+* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+* GNU General Public License for more details.
+* 
+* You should have received a copy of the GNU General Public License
+* along with this program; if not, write to the Free Software
+* Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+* 
+*/
+
 #include <gtk/gtk.h>
 #include <math.h>
 #include <stdlib.h>
@@ -72,6 +98,12 @@ void drawWaterfall(int y,int height);
 void spectrumUpdateOff();
 void setSpectrumMode(int mode);
 
+/* --------------------------------------------------------------------------*/
+/** 
+* @brief New spectrum display
+* 
+* @return 
+*/
 GtkWidget* newSpectrumDisplay() {
     
     spectrumLow=-sampleRate/2;
@@ -115,11 +147,26 @@ GtkWidget* newSpectrumDisplay() {
     return spectrum;
 }
 
+/* --------------------------------------------------------------------------*/
+/** 
+* @brief Set spectrum span
+* 
+* @param span
+*/
 void setSpectrumSpan(int span) {
     spectrumLow=-span;
     spectrumHigh=span;
 }
 
+/* --------------------------------------------------------------------------*/
+/** 
+* @brief Spectrum configure event
+* 
+* @param widget
+* @param event
+* 
+* @return 
+*/
 gboolean spectrum_configure_event(GtkWidget* widget,GdkEventConfigure* event) {
     if(spectrumPixmap) g_object_unref(spectrumPixmap);
 
@@ -134,6 +181,15 @@ gboolean spectrum_configure_event(GtkWidget* widget,GdkEventConfigure* event) {
     return TRUE;
 }
 
+/* --------------------------------------------------------------------------*/
+/** 
+* @brief Spectrum expose event 
+* 
+* @param widget
+* @param event
+* 
+* @return 
+*/
 gboolean spectrum_expose_event(GtkWidget* widget,GdkEventExpose* event) {
     gdk_draw_drawable(widget->window,
 		    widget->style->fg_gc[GTK_WIDGET_STATE (widget)],
@@ -148,6 +204,15 @@ gboolean hasMoved;
 int firstX;
 int lastX;
 
+/* --------------------------------------------------------------------------*/
+/** 
+* @brief Spectrum button press event
+* 
+* @param widget
+* @param event
+* 
+* @return 
+*/
 gboolean spectrum_button_press_event(GtkWidget* widget,GdkEventButton* event) {
     int increment;
     switch(event->button) {
@@ -169,6 +234,15 @@ gboolean spectrum_button_press_event(GtkWidget* widget,GdkEventButton* event) {
     return TRUE;
 }
 
+/* --------------------------------------------------------------------------*/
+/** 
+* @brief Spectrum button released event
+* 
+* @param widget
+* @param event
+* 
+* @return 
+*/
 gboolean spectrum_button_release_event(GtkWidget* widget,GdkEventButton* event) {
     int increment;
     switch(event->button) {
@@ -189,6 +263,15 @@ gboolean spectrum_button_release_event(GtkWidget* widget,GdkEventButton* event) 
     return TRUE;
 }
 
+/* --------------------------------------------------------------------------*/
+/** 
+* @brief Spectrum motion notify event
+* 
+* @param widget
+* @param event
+* 
+* @return 
+*/
 gboolean spectrum_motion_notify_event(GtkWidget* widget,GdkEventMotion* event) {
     if(event->state & GDK_BUTTON1_MASK) {
         int moved=lastX-event->x;
@@ -201,6 +284,15 @@ gboolean spectrum_motion_notify_event(GtkWidget* widget,GdkEventMotion* event) {
     return TRUE;
 }
 
+/* --------------------------------------------------------------------------*/
+/** 
+* @brief Spectrum scroll event
+* 
+* @param widget
+* @param event
+* 
+* @return 
+*/
 gboolean spectrum_scroll_event(GtkWidget* widget,GdkEventScroll* event) {
     if(event->direction==GDK_SCROLL_UP) {
         vfoIncrementFrequency(frequencyIncrement);
@@ -209,6 +301,12 @@ gboolean spectrum_scroll_event(GtkWidget* widget,GdkEventScroll* event) {
     }
 }
 
+/* --------------------------------------------------------------------------*/
+/** 
+* @brief Spectrum update
+* 
+* @param samples
+*/
 void updateSpectrum(float* samples) {
     spectrumLow=-sampleRate/2;
     spectrumHigh=+sampleRate/2;
@@ -247,6 +345,12 @@ void updateSpectrum(float* samples) {
     }
 }
 
+/* --------------------------------------------------------------------------*/
+/** 
+* @brief Plot scope
+* 
+* @param samples
+*/
 void plotScope(float* samples) {
         int y=0;
         int pixels=0;
@@ -260,6 +364,10 @@ void plotScope(float* samples) {
 }
 
 
+/* --------------------------------------------------------------------------*/
+/** 
+* @brief Draw scope
+*/
 void drawScope() {
 
     // get the spectrum context - just copy the window GC and modify
@@ -288,6 +396,12 @@ void drawScope() {
     }
 }
 
+/* --------------------------------------------------------------------------*/
+/** 
+* @brief Draw spectrum
+* 
+* @param height
+*/
 void drawSpectrum(int height) {
 
     // get the spectrum context - just copy the window GC and modify
@@ -389,6 +503,13 @@ void drawSpectrum(int height) {
     }
 }
 
+/* --------------------------------------------------------------------------*/
+/** 
+* @brief Plot spectrum
+* 
+* @param samples
+* @param height
+*/
 void plotSpectrum(float* samples,int height) {
 
 
@@ -446,6 +567,13 @@ void plotSpectrum(float* samples,int height) {
     }
 }
 
+/* --------------------------------------------------------------------------*/
+/** 
+* @brief Draw waterfall
+* 
+* @param y
+* @param height
+*/
 void drawWaterfall(int y,int height) {
     // get the spectrum context - just copy the window GC and modify
     GdkGC* gc;
@@ -537,6 +665,12 @@ void drawWaterfall(int y,int height) {
 
 #define NUM_PHASE_POINTS 100
 
+/* --------------------------------------------------------------------------*/
+/** 
+* @brief Plot phase graph
+* 
+* @param samples
+*/
 void plotPhase(float* samples) {
         int x=0;
         int y=0;
@@ -550,6 +684,10 @@ void plotPhase(float* samples) {
 }
 
 
+/* --------------------------------------------------------------------------*/
+/** 
+* @brief Draw phase graph
+*/
 void drawPhase() {
 
     // get the spectrum context - just copy the window GC and modify
@@ -574,6 +712,12 @@ void drawPhase() {
     }
 }
 
+/* --------------------------------------------------------------------------*/
+/** 
+* @brief Plot phase2 graph
+* 
+* @param samples
+*/
 void plotPhase2(float* samples) {
         int x=0;
         int y=0;
@@ -587,6 +731,10 @@ void plotPhase2(float* samples) {
 }
 
 
+/* --------------------------------------------------------------------------*/
+/** 
+* @brief Draw phase2 graph
+*/
 void drawPhase2() {
 
     // get the spectrum context - just copy the window GC and modify
@@ -611,6 +759,10 @@ void drawPhase2() {
     }
 }
 
+/* --------------------------------------------------------------------------*/
+/** 
+* @brief Trun off spectrum update
+*/
 void spectrumUpdateOff() {
 
     // get the spectrum context - just copy the window GC and modify
@@ -625,10 +777,20 @@ void spectrumUpdateOff() {
     }
 }
 
+/* --------------------------------------------------------------------------*/
+/** 
+* @brief Set spectrum mode
+* 
+* @param mode
+*/
 void setSpectrumMode(int mode) {
     spectrumMode=mode;
 }
 
+/* --------------------------------------------------------------------------*/
+/** 
+* @brief Save the spectrum state
+*/
 void spectrumSaveState() {
     char string[128];
 
@@ -649,6 +811,10 @@ void spectrumSaveState() {
 
 }
 
+/* --------------------------------------------------------------------------*/
+/** 
+* @brief Restore the spectrum state
+*/
 void spectrumRestoreState() {
     char* value;
 
