@@ -24,13 +24,11 @@
 * 
 */
 
-#define BANDSTACKS 3
-
 /* --------------------------------------------------------------------------*/
 /** 
 * @brief Bandstack definition
 */
-struct _BANDSTACK {
+struct _BANDSTACK_ENTRY {
     long long frequencyA;
     int mode;
     int filter;
@@ -45,6 +43,14 @@ struct _BANDSTACK {
     int spectrumStep;
     int waterfallHigh;
     int waterfallLow;
+};
+
+typedef struct _BANDSTACK_ENTRY BANDSTACK_ENTRY;
+
+struct _BANDSTACK {
+    int entries;
+    int current_entry;
+    BANDSTACK_ENTRY* entry;
 };
 
 typedef struct _BANDSTACK BANDSTACK;
