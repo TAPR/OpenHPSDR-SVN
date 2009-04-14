@@ -156,10 +156,18 @@ gboolean dbm_configure_event(GtkWidget* widget,GdkEventConfigure* event) {
 
     context = gdk_pango_context_get_for_screen (gdk_screen_get_default ());
     layout = pango_layout_new (context);
-    pango_layout_set_width(layout,170*PANGO_SCALE);
+    pango_layout_set_width(layout,160*PANGO_SCALE);
     pango_layout_set_alignment(layout,PANGO_ALIGN_RIGHT);
     pango_layout_set_markup (layout, "<span foreground='#7AAA6E' background='#000000' font_desc='Sans Bold 12'>dBm    </span>", -1);
     gdk_draw_layout(GDK_DRAWABLE(dbmPixmap),gc,0,0,layout);
+
+    gdk_gc_set_rgb_fg_color(gc,&grey);
+    gdk_draw_rectangle(dbmPixmap,
+                       gc,
+                       FALSE,
+                       0,0,
+                       widget->allocation.width-1,
+                       widget->allocation.height-1);
 
     g_object_unref(context);
     g_object_unref(layout);
@@ -209,15 +217,15 @@ void meterDrawSignal() {
 
         // draw the meter
         gdk_gc_set_rgb_fg_color(gc,&green);
-        gdk_draw_rectangle(meterPixmap,gc,TRUE,43,0,meterX,meter->allocation.height/2);
+        gdk_draw_rectangle(meterPixmap,gc,TRUE,20,0,meterX,meter->allocation.height/2);
 
         // draw the S-Unit markers
         gdk_gc_set_rgb_fg_color(gc,&black);
         for(i=6;i<=54;i+=6) {
-            gdk_draw_line(meterPixmap,gc,i+43,0,i+43,meter->allocation.height/2); // 1 -- 9
+            gdk_draw_line(meterPixmap,gc,i+20,0,i+20,meter->allocation.height/2); // 1 -- 9
         }
         for(i=64;i<120;i+=10) {
-            gdk_draw_line(meterPixmap,gc,i+43,0,i+43,meter->allocation.height/2); // +10 +60
+            gdk_draw_line(meterPixmap,gc,i+20,0,i+20,meter->allocation.height/2); // +10 +60
         }
 
         // draw the levels
@@ -227,7 +235,7 @@ void meterDrawSignal() {
         pango_layout_set_alignment(layout,PANGO_ALIGN_LEFT);
         sprintf(temp,"<span foreground='#7AAA6E' background='#000000' font_desc='Sans 5'>  1    3    5    7    9    +20   +40   +60</span>",meterDbm);
         pango_layout_set_markup(layout,temp,-1);
-        gdk_draw_layout(GDK_DRAWABLE(meterPixmap),gc,43,20,layout);
+        gdk_draw_layout(GDK_DRAWABLE(meterPixmap),gc,20,20,layout);
 
         // update the peak
         if(meterX>meterPeak) {
@@ -239,8 +247,11 @@ void meterDrawSignal() {
             meterPeakCount=0;
         }
         gdk_gc_set_rgb_fg_color(gc,&red);
-        gdk_draw_line(meterPixmap,gc,43+meterPeak,0,43+meterPeak,meter->allocation.height/2);
-        gdk_draw_line(meterPixmap,gc,43+meterPeak-1,0,43+meterPeak-1,meter->allocation.height/2);
+        gdk_draw_line(meterPixmap,gc,20+meterPeak,0,20+meterPeak,meter->allocation.height/2);
+        gdk_draw_line(meterPixmap,gc,20+meterPeak-1,0,20+meterPeak-1,meter->allocation.height/2);
+
+        gdk_gc_set_rgb_fg_color(gc,&grey);
+        gdk_draw_rectangle(meterPixmap,gc,FALSE,0,0,meter->allocation.width-1,meter->allocation.height-1);
 
         g_object_unref(context);
         g_object_unref(layout);
@@ -276,7 +287,15 @@ void meterDbmDrawSignal() {
         pango_layout_set_alignment(layout,PANGO_ALIGN_RIGHT);
         sprintf(temp,"<span foreground='#7AAA6E' background='#000000' font_desc='Sans Bold 12'>%d dBm    </span>",meterDbm);
         pango_layout_set_markup(layout,temp,-1);
-        gdk_draw_layout(GDK_DRAWABLE(dbmPixmap),gc,43,0,layout);
+        gdk_draw_layout(GDK_DRAWABLE(dbmPixmap),gc,20,0,layout);
+
+        gdk_gc_set_rgb_fg_color(gc,&grey);
+        gdk_draw_rectangle(dbmPixmap,
+                           gc,
+                           FALSE,
+                           0,0,
+                           dbm->allocation.width-1,
+                           dbm->allocation.height-1);
 
         g_object_unref(context);
         g_object_unref(layout);
@@ -387,7 +406,7 @@ GtkWidget* buildMeterUI() {
 
     // meter
     meter=gtk_drawing_area_new();
-    gtk_widget_set_size_request(GTK_WIDGET(meter),200,30);
+    gtk_widget_set_size_request(GTK_WIDGET(meter),160,30);
     g_signal_connect(G_OBJECT (meter),"configure_event",G_CALLBACK(meter_configure_event),NULL);
     g_signal_connect(G_OBJECT (meter),"expose_event",G_CALLBACK(meter_expose_event),NULL);
     gtk_widget_show(meter);
@@ -395,13 +414,13 @@ GtkWidget* buildMeterUI() {
 
     // dbm
     dbm=gtk_drawing_area_new();
-    gtk_widget_set_size_request(GTK_WIDGET(dbm),200,20);
+    gtk_widget_set_size_request(GTK_WIDGET(dbm),160,20);
     g_signal_connect(G_OBJECT (dbm),"configure_event",G_CALLBACK(dbm_configure_event),NULL);
     g_signal_connect(G_OBJECT (dbm),"expose_event",G_CALLBACK(dbm_expose_event),NULL);
     gtk_widget_show(dbm);
     gtk_fixed_put((GtkFixed*)meterFixed,dbm,0,30);
 
-    gtk_widget_set_size_request(GTK_WIDGET(meterFixed),200,60);
+    gtk_widget_set_size_request(GTK_WIDGET(meterFixed),160,60);
     gtk_widget_show(meterFixed);
 
     return meterFixed;

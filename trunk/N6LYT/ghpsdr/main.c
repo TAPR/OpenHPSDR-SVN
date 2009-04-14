@@ -380,7 +380,7 @@ void buildMainUI() {
 
     // add the meter window
     gtk_widget_show(meterWindow);
-    gtk_fixed_put((GtkFixed*)mainFixed,meterWindow,600,0);
+    gtk_fixed_put((GtkFixed*)mainFixed,meterWindow,1000,0);
 
     // add the band window
     gtk_widget_show(bandWindow);

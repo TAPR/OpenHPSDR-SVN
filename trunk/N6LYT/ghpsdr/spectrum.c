@@ -357,7 +357,7 @@ void plotScope(float* samples) {
         int i;
         for(i=0;i<spectrumWIDTH;i++) {
             pixels=(int)((float)(spectrumHEIGHT/2)*samples[i*2]);
-            y = spectrumHEIGHT/2 -pixels;
+            y = spectrumHEIGHT/2-pixels;
             spectrumPoints[i].x = i;
             spectrumPoints[i].y = y;
         }

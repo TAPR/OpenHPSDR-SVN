@@ -83,8 +83,6 @@ gint spectrumUpdate(gpointer data) {
 * @brief Update samples
 */
 void updateSamples() {
-    int n;
-
     switch(spectrumMode) {
         case spectrumSPECTRUM:
             Process_Spectrum(spectrumBuffer);
