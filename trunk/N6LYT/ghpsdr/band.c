@@ -73,49 +73,76 @@ GtkWidget* currentBandButton;
 * @brief bandstack
 */
 /* ----------------------------------------------------------------------------*/
-BANDSTACK bandstack[BANDS][BANDSTACKS]= {
+BANDSTACK_ENTRY bandstack160[] =
     {{1810000LL,modeCWL,5,-2800,-200,-2800,-200,100,0,-100,-180,10,-110,-140},
      {1835000LL,modeCWU,5,-2800,-200,-2800,-200,100,0,-100,-180,10,-110,-140},
-     {1845000LL,modeUSB,2,-2800,-200,-2800,-200,100,0,-100,-180,10,-110,-140}},
+     {1845000LL,modeUSB,2,-2800,-200,-2800,-200,100,0,-100,-180,10,-110,-140}};
+
+BANDSTACK_ENTRY bandstack80[] =
     {{3501000LL,modeCWL,5,-2800,-200,-2800,-200,100,0,-100,-180,10,-110,-140},
      {3751000LL,modeLSB,2,-2800,-200,-2800,-200,100,0,-100,-180,10,-110,-140},
-     {3850000LL,modeLSB,2,-2800,-200,-2800,-200,100,0,-100,-180,10,-110,-140}},
+     {3850000LL,modeLSB,2,-2800,-200,-2800,-200,100,0,-100,-180,10,-110,-140}};
+
+BANDSTACK_ENTRY bandstack60[] =
     {{5330500LL,modeUSB,2,-2800,-200,-2800,-200,100,0,-100,-180,10,-110,-140},
      {5346500LL,modeUSB,2,-2800,-200,-2800,-200,100,0,-100,-180,10,-110,-140},
-     {5356500LL,modeUSB,2,-2800,-200,-2800,-200,100,0,-100,-180,10,-110,-140}},
+     {5366500LL,modeUSB,2,-2800,-200,-2800,-200,100,0,-100,-180,10,-110,-140},
+     {5371500LL,modeUSB,2,-2800,-200,-2800,-200,100,0,-100,-180,10,-110,-140},
+     {5403500LL,modeUSB,2,-2800,-200,-2800,-200,100,0,-100,-180,10,-110,-140}};
+
+BANDSTACK_ENTRY bandstack40[] =
     {{7001000LL,modeCWL,5,-2800,-200,-2800,-200,100,0,-100,-180,10,-110,-140},
      {7152000LL,modeLSB,2,-2800,-200,-2800,-200,100,0,-100,-180,10,-110,-140},
-     {7255000LL,modeLSB,2,-2800,-200,-2800,-200,100,0,-100,-180,10,-110,-140}},
+     {7255000LL,modeLSB,2,-2800,-200,-2800,-200,100,0,-100,-180,10,-110,-140}};
+
+BANDSTACK_ENTRY bandstack30[] =
     {{10120000LL,modeCWU,5,200,2800,200,2800,100,0,-100,-180,10,-110,-140},
      {10130000LL,modeCWU,5,200,2800,200,2800,100,0,-100,-180,10,-110,-140},
-     {10140000LL,modeCWU,5,200,2800,200,2800,100,0,-100,-180,10,-110,-140}},
+     {10140000LL,modeCWU,5,200,2800,200,2800,100,0,-100,-180,10,-110,-140}};
+
+BANDSTACK_ENTRY bandstack20[] =
     {{14010000LL,modeCWU,5,200,2800,200,2800,100,1,-100,-180,10,-110,-140},
      {14230000LL,modeUSB,2,200,2800,200,2800,100,1,-100,-180,10,-100,-140},
-     {14336000LL,modeUSB,2,200,2800,200,2800,100,1,-100,-180,10,-110,-140}},
+     {14336000LL,modeUSB,2,200,2800,200,2800,100,1,-100,-180,10,-110,-140}};
+
+BANDSTACK_ENTRY bandstack18[] =
     {{18068600LL,modeCWU,5,200,2800,200,2800,100,1,-100,-180,10,-110,-140},
      {18125000LL,modeUSB,2,200,2800,200,2800,100,1,-100,-180,10,-110,-140},
-     {18140000LL,modeUSB,2,200,2800,200,2800,100,1,-100,-180,10,-110,-140}},
+     {18140000LL,modeUSB,2,200,2800,200,2800,100,1,-100,-180,10,-110,-140}};
+
+BANDSTACK_ENTRY bandstack15[] =
     {{21001000LL,modeCWU,5,200,2800,200,2800,100,1,-100,-180,10,-110,-140},
      {21255000LL,modeUSB,2,200,2800,200,2800,100,1,-100,-180,10,-110,-140},
-     {21300000LL,modeUSB,2,200,2800,200,2800,100,1,-100,-180,10,-110,-140}},
+     {21300000LL,modeUSB,2,200,2800,200,2800,100,1,-100,-180,10,-110,-140}};
+
+BANDSTACK_ENTRY bandstack12[] =
     {{24895000LL,modeCWU,5,200,2800,200,2800,100,1,-100,-180,10,-110,-140},
      {24900000LL,modeUSB,2,200,2800,200,2800,100,1,-100,-180,10,-110,-140},
-     {24910000LL,modeUSB,2,200,2800,200,2800,100,1,-100,-180,10,-110,-140}},
+     {24910000LL,modeUSB,2,200,2800,200,2800,100,1,-100,-180,10,-110,-140}};
+
+BANDSTACK_ENTRY bandstack10[] =
     {{28010000LL,modeCWU,5,200,2800,200,2800,100,1,-100,-180,10,-110,-140},
      {28300000LL,modeUSB,2,200,2800,200,2800,100,1,-100,-180,10,-110,-140},
-     {28400000LL,modeUSB,2,200,2800,200,2800,100,1,-100,-180,10,-110,-140}},
+     {28400000LL,modeUSB,2,200,2800,200,2800,100,1,-100,-180,10,-110,-140}};
+
+BANDSTACK_ENTRY bandstack50[] =
     {{50010000LL,modeCWU,5,200,2800,200,2800,100,1,-100,-180,10,-110,-140},
      {50125000LL,modeUSB,2,200,2800,200,2800,100,1,-100,-180,10,-110,-150},
-     {50200000LL,modeUSB,2,200,2800,200,2800,100,1,-100,-180,10,-110,-140}},
+     {50200000LL,modeUSB,2,200,2800,200,2800,100,1,-100,-180,10,-110,-140}};
+
+BANDSTACK_ENTRY bandstackGEN[] =
     {{909000LL,modeAM,0,-6000,6000,-6000,6000,1000,0,-100,-180,10,-110,-140},
      {5975000LL,modeAM,0,-6000,6000,-6000,6000,1000,0,-100,-180,10,-110,-140},
-     {13845000LL,modeAM,0,-6000,6000,-6000,6000,1000,0,-100,-180,10,-110,-140}},
-    {{5000000LL,modeSAM,2,200,2800,200,2800,1000,0,-100,-180,10,-110,-140},
-     {10000000LL,modeSAM,2,200,2800,200,2800,1000,0,-100,-180,10,-110,-140},
-     {15000000LL,modeSAM,2,200,2800,200,2800,1000,0,-100,-180,10,-110,-140}}
-};
+     {13845000LL,modeAM,0,-6000,6000,-6000,6000,1000,0,-100,-180,10,-110,-140}};
 
-int currentStack[BANDS]={0,0,0,0,0,0,0,0,0,0,0,0};
+BANDSTACK_ENTRY bandstackWWV[] =
+    {{2500000LL,modeSAM,2,200,2800,200,2800,1000,0,-100,-180,10,-110,-140},
+     {5000000LL,modeSAM,2,200,2800,200,2800,1000,0,-100,-180,10,-110,-140},
+     {10000000LL,modeSAM,2,200,2800,200,2800,1000,0,-100,-180,10,-110,-140},
+     {15000000LL,modeSAM,2,200,2800,200,2800,1000,0,-100,-180,10,-110,-140},
+     {20000000LL,modeSAM,2,200,2800,200,2800,1000,0,-100,-180,10,-110,-140}};
+
+BANDSTACK bandstack[13];
 
 void setTuningMode(int mode);
 void setBand(int band);
@@ -130,6 +157,8 @@ void setIncrement(int increment);
 /* ----------------------------------------------------------------------------*/
 void selectBand(GtkWidget* widget) {
     GtkWidget* label;
+    BANDSTACK_ENTRY* entry;
+    int current;
 
     if(currentBandButton) {
         label=gtk_bin_get_child((GtkBin*)currentBandButton);
@@ -142,26 +171,29 @@ void selectBand(GtkWidget* widget) {
 
     //save current
     if(currentBandButton) {
-        bandstack[band][currentStack[band]].frequencyA=frequencyA;
-        bandstack[band][currentStack[band]].mode=mode;
-        bandstack[band][currentStack[band]].filter=filter;
-        bandstack[band][currentStack[band]].var1Low=filterVar1Low;
-        bandstack[band][currentStack[band]].var1High=filterVar1High;
-        bandstack[band][currentStack[band]].var2Low=filterVar2Low;
-        bandstack[band][currentStack[band]].var2High=filterVar2High;
-        bandstack[band][currentStack[band]].step=frequencyIncrement;
-        bandstack[band][currentStack[band]].preamp=Preamp;
-        bandstack[band][currentStack[band]].spectrumHigh=spectrumMAX;
-        bandstack[band][currentStack[band]].spectrumLow=spectrumMIN;
-        bandstack[band][currentStack[band]].spectrumStep=spectrumSTEP;
-        bandstack[band][currentStack[band]].waterfallHigh=waterfallHighThreshold;
-        bandstack[band][currentStack[band]].waterfallLow=waterfallLowThreshold;
+        current=bandstack[band].current_entry;
+        entry=&bandstack[band].entry[current];
+        entry->frequencyA=frequencyA;
+        entry->mode=mode;
+        entry->filter=filter;
+        entry->var1Low=filterVar1Low;
+        entry->var1High=filterVar1High;
+        entry->var2Low=filterVar2Low;
+        entry->var2High=filterVar2High;
+        entry->step=frequencyIncrement;
+        entry->preamp=Preamp;
+        entry->spectrumHigh=spectrumMAX;
+        entry->spectrumLow=spectrumMIN;
+        entry->spectrumStep=spectrumSTEP;
+        entry->waterfallHigh=waterfallHighThreshold;
+        entry->waterfallLow=waterfallLowThreshold;
     }
 
     if(currentBandButton==widget) {
-        currentStack[band]++;
-        if(currentStack[band]>=BANDSTACKS) {
-            currentStack[band]=0;
+fprintf(stderr,"currentBandButton==widget\n");
+        bandstack[band].current_entry++;
+        if(bandstack[band].current_entry>=bandstack[band].entries) {
+            bandstack[band].current_entry=0;
         }
     } else {
         currentBandButton=widget;
@@ -194,21 +226,24 @@ void selectBand(GtkWidget* widget) {
         }
     }
 
-    setModeMode(bandstack[band][currentStack[band]].mode);
-    filterVar1Low=bandstack[band][currentStack[band]].var1Low;
-    filterVar1High=bandstack[band][currentStack[band]].var1High;
-    filterVar2Low=bandstack[band][currentStack[band]].var2Low;
-    filterVar2High=bandstack[band][currentStack[band]].var2High;
-    setFilter(bandstack[band][currentStack[band]].filter);
-    setAFrequency(bandstack[band][currentStack[band]].frequencyA);
-    setIncrement(bandstack[band][currentStack[band]].step);
+    current=bandstack[band].current_entry;
+    entry=&bandstack[band].entry[current];
 
-    setPreamp(bandstack[band][currentStack[band]].preamp);
-    spectrumMAX=bandstack[band][currentStack[band]].spectrumHigh;
-    spectrumMIN=bandstack[band][currentStack[band]].spectrumLow;
-    spectrumSTEP=bandstack[band][currentStack[band]].spectrumStep;
-    waterfallHighThreshold=bandstack[band][currentStack[band]].waterfallHigh;
-    waterfallLowThreshold=bandstack[band][currentStack[band]].waterfallLow;
+    setModeMode(entry->mode);
+    filterVar1Low=entry->var1Low;
+    filterVar1High=entry->var1High;
+    filterVar2Low=entry->var2Low;
+    filterVar2High=entry->var2High;
+    setFilter(entry->filter);
+    setAFrequency(entry->frequencyA);
+    setIncrement(entry->step);
+
+    setPreamp(entry->preamp);
+    spectrumMAX=entry->spectrumHigh;
+    spectrumMIN=entry->spectrumLow;
+    spectrumSTEP=entry->spectrumStep;
+    waterfallHighThreshold=entry->waterfallHigh;
+    waterfallLowThreshold=entry->waterfallLow;
 }
 
 /* --------------------------------------------------------------------------*/
@@ -490,9 +525,14 @@ GtkWidget* buildBandUI() {
 */
 /* ----------------------------------------------------------------------------*/
 void setBandstack(int band,int stack,long long lo,long long a,long long b,int mode,int filter) {
-    bandstack[band][stack].frequencyA=a;
-    bandstack[band][stack].mode=mode;
-    bandstack[band][stack].filter=filter;
+    int current;
+    BANDSTACK_ENTRY* entry;
+
+    current=bandstack[band].current_entry;
+    entry=&bandstack[band].entry[current];
+    entry->frequencyA=a;
+    entry->mode=mode;
+    entry->filter=filter;
 }
 
 /* --------------------------------------------------------------------------*/
@@ -502,90 +542,101 @@ void setBandstack(int band,int stack,long long lo,long long a,long long b,int mo
 /* ----------------------------------------------------------------------------*/
 void bandSaveState() {
     char string[128];
+    int current;
+    BANDSTACK_ENTRY* entry;
 
     //save current band info
-    bandstack[band][currentStack[band]].frequencyA=frequencyA;
-    bandstack[band][currentStack[band]].mode=mode;
-    bandstack[band][currentStack[band]].filter=filter;
-    bandstack[band][currentStack[band]].var1Low=filterVar1Low;
-    bandstack[band][currentStack[band]].var1High=filterVar1High;
-    bandstack[band][currentStack[band]].var2Low=filterVar2Low;
-    bandstack[band][currentStack[band]].var2High=filterVar2High;
-    bandstack[band][currentStack[band]].step=frequencyIncrement;
-    bandstack[band][currentStack[band]].preamp=Preamp;
-    bandstack[band][currentStack[band]].spectrumHigh=spectrumMAX;
-    bandstack[band][currentStack[band]].spectrumLow=spectrumMIN;
-    bandstack[band][currentStack[band]].spectrumStep=spectrumSTEP;
-    bandstack[band][currentStack[band]].waterfallHigh=waterfallHighThreshold;
-    bandstack[band][currentStack[band]].waterfallLow=waterfallLowThreshold;
+    current=bandstack[band].current_entry;
+    entry=&bandstack[band].entry[current];
+    entry->frequencyA=frequencyA;
+    entry->mode=mode;
+    entry->filter=filter;
+    entry->var1Low=filterVar1Low;
+    entry->var1High=filterVar1High;
+    entry->var2Low=filterVar2Low;
+    entry->var2High=filterVar2High;
+    entry->step=frequencyIncrement;
+    entry->preamp=Preamp;
+    entry->spectrumHigh=spectrumMAX;
+    entry->spectrumLow=spectrumMIN;
+    entry->spectrumStep=spectrumSTEP;
+    entry->waterfallHigh=waterfallHighThreshold;
+    entry->waterfallLow=waterfallLowThreshold;
 
 
     int b;
     int stack;
     char name[128];
     for(b=0;b<BANDS;b++) {
-        for(stack=0;stack<BANDSTACKS;stack++) {
+        sprintf(string,"%d",bandstack[b].entries);
+        sprintf(name,"band.%d.entries",b);
+        setProperty(name,string);
 
-            sprintf(string,"%lld",bandstack[b][stack].frequencyA);
+        sprintf(string,"%d",bandstack[b].current_entry);
+        sprintf(name,"band.%d.current",b);
+        setProperty(name,string);
+
+        for(stack=0;stack<bandstack[b].entries;stack++) {
+            entry=bandstack[b].entry;
+            entry+=stack;
+
+            sprintf(string,"%lld",entry->frequencyA);
             sprintf(name,"band.%d.stack.%d.a",b,stack);
             setProperty(name,string);
 
-            sprintf(string,"%d",bandstack[b][stack].mode);
+            sprintf(string,"%d",entry->mode);
             sprintf(name,"band.%d.stack.%d.mode",b,stack);
             setProperty(name,string);
 
-            sprintf(string,"%d",bandstack[b][stack].filter);
+            sprintf(string,"%d",entry->filter);
             sprintf(name,"band.%d.stack.%d.filter",b,stack);
             setProperty(name,string);
 
-            sprintf(string,"%d",bandstack[b][stack].var1Low);
+            sprintf(string,"%d",entry->var1Low);
             sprintf(name,"band.%d.stack.%d.var1Low",b,stack);
             setProperty(name,string);
 
-            sprintf(string,"%d",bandstack[b][stack].var1High);
+            sprintf(string,"%d",entry->var1High);
             sprintf(name,"band.%d.stack.%d.var1High",b,stack);
             setProperty(name,string);
 
-            sprintf(string,"%d",bandstack[b][stack].var2Low);
+            sprintf(string,"%d",entry->var2Low);
             sprintf(name,"band.%d.stack.%d.var2Low",b,stack);
             setProperty(name,string);
 
-            sprintf(string,"%d",bandstack[b][stack].var2High);
+            sprintf(string,"%d",entry->var2High);
             sprintf(name,"band.%d.stack.%d.var2High",b,stack);
             setProperty(name,string);
 
-            sprintf(string,"%d",bandstack[b][stack].step);
+            sprintf(string,"%d",entry->step);
             sprintf(name,"band.%d.stack.%d.step",b,stack);
             setProperty(name,string);
 
-            sprintf(string,"%d",bandstack[b][stack].preamp);
+            sprintf(string,"%d",entry->preamp);
             sprintf(name,"band.%d.stack.%d.preamp",b,stack);
             setProperty(name,string);
 
-            sprintf(string,"%d",bandstack[b][stack].spectrumHigh);
+            sprintf(string,"%d",entry->spectrumHigh);
             sprintf(name,"band.%d.stack.%d.spectrumHigh",b,stack);
             setProperty(name,string);
 
-            sprintf(string,"%d",bandstack[b][stack].spectrumLow);
+            sprintf(string,"%d",entry->spectrumLow);
             sprintf(name,"band.%d.stack.%d.spectrumLow",b,stack);
             setProperty(name,string);
 
-            sprintf(string,"%d",bandstack[b][stack].spectrumStep);
+            sprintf(string,"%d",entry->spectrumStep);
             sprintf(name,"band.%d.stack.%d.spectrumStep",b,stack);
             setProperty(name,string);
 
-            sprintf(string,"%d",bandstack[b][stack].waterfallHigh);
+            sprintf(string,"%d",entry->waterfallHigh);
             sprintf(name,"band.%d.stack.%d.waterfallHigh",b,stack);
             setProperty(name,string);
 
-            sprintf(string,"%d",bandstack[b][stack].waterfallLow);
+            sprintf(string,"%d",entry->waterfallLow);
             sprintf(name,"band.%d.stack.%d.waterfallLow",b,stack);
             setProperty(name,string);
 
         }
-        sprintf(string,"%d",currentStack[b]);
-        sprintf(name,"band.%d.current.stack",b);
-        setProperty(name,string);
     }
     sprintf(string,"%d",band);
     setProperty("band",string);
@@ -602,69 +653,121 @@ void bandRestoreState() {
     int b;
     int stack;
     char name[128];
+    BANDSTACK_ENTRY* entry;
+    int current;
  
+    bandstack[0].entries=3;
+    bandstack[0].current_entry=0;
+    bandstack[0].entry=bandstack160;
+    bandstack[1].entries=3;
+    bandstack[1].current_entry=0;
+    bandstack[1].entry=bandstack80;
+    bandstack[2].entries=5;
+    bandstack[2].current_entry=0;
+    bandstack[2].entry=bandstack60;
+    bandstack[3].entries=3;
+    bandstack[3].current_entry=0;
+    bandstack[3].entry=bandstack40;
+    bandstack[4].entries=3;
+    bandstack[4].current_entry=0;
+    bandstack[4].entry=bandstack30;
+    bandstack[5].entries=3;
+    bandstack[5].current_entry=0;
+    bandstack[5].entry=bandstack20;
+    bandstack[6].entries=3;
+    bandstack[6].current_entry=0;
+    bandstack[6].entry=bandstack18;
+    bandstack[7].entries=3;
+    bandstack[7].current_entry=0;
+    bandstack[7].entry=bandstack15;
+    bandstack[8].entries=3;
+    bandstack[8].current_entry=0;
+    bandstack[8].entry=bandstack12;
+    bandstack[9].entries=3;
+    bandstack[9].current_entry=0;
+    bandstack[9].entry=bandstack10;
+    bandstack[10].entries=3;
+    bandstack[10].current_entry=0;
+    bandstack[10].entry=bandstack50;
+    bandstack[11].entries=3;
+    bandstack[11].current_entry=0;
+    bandstack[11].entry=bandstackGEN;
+    bandstack[12].entries=5;
+    bandstack[12].current_entry=0;
+    bandstack[12].entry=bandstackWWV;
+
+
     for(b=0;b<BANDS;b++) {
-        for(stack=0;stack<BANDSTACKS;stack++) {
+
+        sprintf(name,"band.%d.entries",b);
+        value=getProperty(name);
+        if(value) bandstack[b].entries=atoi(value);
+
+        sprintf(name,"band.%d.current",b);
+        value=getProperty(name);
+        if(value) bandstack[b].current_entry=atoi(value);
+
+        for(stack=0;stack<bandstack[b].entries;stack++) {
+            entry=bandstack[b].entry;
+            entry+=stack;
+
             sprintf(name,"band.%d.stack.%d.a",b,stack);
             value=getProperty(name);
-            if(value) bandstack[b][stack].frequencyA=atoll(value);
+            if(value) entry->frequencyA=atoll(value);
 
             sprintf(name,"band.%d.stack.%d.mode",b,stack);
             value=getProperty(name);
-            if(value) bandstack[b][stack].mode=atoi(value);
+            if(value) entry->mode=atoi(value);
 
             sprintf(name,"band.%d.stack.%d.filter",b,stack);
             value=getProperty(name);
-            if(value) bandstack[b][stack].filter=atoi(value);
+            if(value) entry->filter=atoi(value);
 
             sprintf(name,"band.%d.stack.%d.var1Low",b,stack);
             value=getProperty(name);
-            if(value) bandstack[b][stack].var1Low=atoi(value);
+            if(value) entry->var1Low=atoi(value);
 
             sprintf(name,"band.%d.stack.%d.var1High",b,stack);
             value=getProperty(name);
-            if(value) bandstack[b][stack].var1High=atoi(value);
+            if(value) entry->var1High=atoi(value);
 
             sprintf(name,"band.%d.stack.%d.var2Low",b,stack);
             value=getProperty(name);
-            if(value) bandstack[b][stack].var2Low=atoi(value);
+            if(value) entry->var2Low=atoi(value);
 
             sprintf(name,"band.%d.stack.%d.var2High",b,stack);
             value=getProperty(name);
-            if(value) bandstack[b][stack].var2High=atoi(value);
+            if(value) entry->var2High=atoi(value);
 
             sprintf(name,"band.%d.stack.%d.step",b,stack);
             value=getProperty(name);
-            if(value) bandstack[b][stack].step=atoi(value);
+            if(value) entry->step=atoi(value);
 
             sprintf(name,"band.%d.stack.%d.preamp",b,stack);
             value=getProperty(name);
-            if(value) bandstack[b][stack].preamp=atoi(value);
+            if(value) entry->preamp=atoi(value);
 
             sprintf(name,"band.%d.stack.%d.spectrumHigh",b,stack);
             value=getProperty(name);
-            if(value) bandstack[b][stack].spectrumHigh=atoi(value);
+            if(value) entry->spectrumHigh=atoi(value);
 
             sprintf(name,"band.%d.stack.%d.spectrumLow",b,stack);
             value=getProperty(name);
-            if(value) bandstack[b][stack].spectrumLow=atoi(value);
+            if(value) entry->spectrumLow=atoi(value);
 
             sprintf(name,"band.%d.stack.%d.spectrumStep",b,stack);
             value=getProperty(name);
-            if(value) bandstack[b][stack].spectrumStep=atoi(value);
+            if(value) entry->spectrumStep=atoi(value);
 
             sprintf(name,"band.%d.stack.%d.waterfallHigh",b,stack);
             value=getProperty(name);
-            if(value) bandstack[b][stack].waterfallHigh=atoi(value);
+            if(value) entry->waterfallHigh=atoi(value);
 
             sprintf(name,"band.%d.stack.%d.waterfallLow",b,stack);
             value=getProperty(name);
-            if(value) bandstack[b][stack].waterfallLow=atoi(value);
+            if(value) entry->waterfallLow=atoi(value);
 
         }
-        sprintf(name,"band.%d.current.stack",b);
-        value=getProperty(name);
-        if(value) currentStack[b]=atoi(value);
     }
     value=getProperty("band");
     if(value) band=atoi(value);
