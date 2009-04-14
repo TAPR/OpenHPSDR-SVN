@@ -7,8 +7,8 @@
 *
 *
 * \mainpage GHPSDR 
-*  \image html ghpsdr.png
-*  \image latex ghpsdr.png "Screen shot of GHPSDR" width=10cm
+*  \image html ../ghpsdr.png
+*  \image latex ../ghpsdr.png "Screen shot of GHPSDR" width=10cm
 *
 * \section A Linux based, GTK2+, Radio Graphical User Interface to HPSDR boards through DttSP without Jack.  
 * \author John Melton, G0ORX/N6LYT
@@ -57,7 +57,7 @@
 * svn://206.216.146.154/svn/repos_sdr_hpsdr/trunk/N6LYT/ghpsdr
 *
 * More information on the HPSDR project is availble at 
-* http://hpsdr.org
+* http://hpsdr.info
 *
 */
 
