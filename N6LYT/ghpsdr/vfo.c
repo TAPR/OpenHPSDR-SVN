@@ -105,7 +105,7 @@ gboolean vfoAFrequency_configure_event(GtkWidget* widget,GdkEventConfigure* even
     layout = pango_layout_new(context);
     pango_layout_set_width(layout,widget->allocation.width*PANGO_SCALE);
     pango_layout_set_alignment(layout,PANGO_ALIGN_RIGHT);
-    sprintf(temp,"<span foreground='#7AAA6E' background='#000000' font_desc='Sans Bold 24'>A    % 4lld.%03lld.%03lld </span>",frequencyA/1000000LL,(frequencyA%1000000LL)/1000LL,frequencyA%1000LL);
+    sprintf(temp,"<span foreground='#7AAA6E' background='#000000' font_desc='Sans Bold 24'>A% 7lld.%03lld.%03lld </span>",frequencyA/1000000LL,(frequencyA%1000000LL)/1000LL,frequencyA%1000LL);
     pango_layout_set_markup(layout,temp,-1);
     gdk_draw_layout(GDK_DRAWABLE(vfoAPixmap),gc,0,0,layout);
 
@@ -175,7 +175,7 @@ gboolean vfoBFrequency_configure_event(GtkWidget* widget,GdkEventConfigure* even
     layout = pango_layout_new (context);
     pango_layout_set_width(layout,widget->allocation.width*PANGO_SCALE);
     pango_layout_set_alignment(layout,PANGO_ALIGN_RIGHT);
-    sprintf(temp,"<span foreground='#707070' background='#000000' font_desc='Sans Bold 24'>B    % 4lld.%03lld.%03lld </span>",frequencyB/1000000LL,(frequencyB%1000000LL)/1000LL,frequencyB%1000LL);
+    sprintf(temp,"<span foreground='#707070' background='#000000' font_desc='Sans Bold 24'>B% 7lld.%03lld.%03lld </span>",frequencyB/1000000LL,(frequencyB%1000000LL)/1000LL,frequencyB%1000LL);
     pango_layout_set_markup(layout,temp,-1);
     gdk_draw_layout(GDK_DRAWABLE(vfoBPixmap),gc,0,0,layout);
 
@@ -250,7 +250,7 @@ void setAFrequency(long long f) {
         layout = pango_layout_new (context);
         pango_layout_set_width(layout,vfoAFrequency->allocation.width*PANGO_SCALE);
         pango_layout_set_alignment(layout,PANGO_ALIGN_RIGHT);
-        sprintf(temp,"<span foreground='#7AAA6E' background='#000000' font_desc='Sans Bold 24'>A    % 4lld.%03lld.%03lld </span>",frequencyA/1000000LL,(frequencyA%1000000LL)/1000LL,frequencyA%1000);
+        sprintf(temp,"<span foreground='#7AAA6E' background='#000000' font_desc='Sans Bold 24'>A% 7lld.%03lld.%03lld </span>",frequencyA/1000000LL,(frequencyA%1000000LL)/1000LL,frequencyA%1000);
         pango_layout_set_markup(layout,temp,-1);
         gdk_draw_layout(GDK_DRAWABLE(vfoAPixmap),gc,0,0,layout);
 
@@ -314,7 +314,7 @@ void setBFrequency(long long f) {
         layout = pango_layout_new (context);
         pango_layout_set_width(layout,vfoBFrequency->allocation.width*PANGO_SCALE);
         pango_layout_set_alignment(layout,PANGO_ALIGN_RIGHT);
-        sprintf(temp,"<span foreground='#707070' background='#000000' font_desc='Sans Bold 24'>B    % 4lld.%03lld.%03lld </span>",frequencyB/1000000LL,(frequencyB%1000000LL)/1000LL,frequencyB%1000LL);
+        sprintf(temp,"<span foreground='#707070' background='#000000' font_desc='Sans Bold 24'>B% 7lld.%03lld.%03lld </span>",frequencyB/1000000LL,(frequencyB%1000000LL)/1000LL,frequencyB%1000LL);
         pango_layout_set_markup(layout,temp,-1);
         gdk_draw_layout(GDK_DRAWABLE(vfoBPixmap),gc,0,0,layout);
 
