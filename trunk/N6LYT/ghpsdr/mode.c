@@ -116,6 +116,7 @@ void selectMode(GtkWidget* widget) {
     sprintf(temp,"setMode %d",mode);
     writeCommand(temp);
 
+    setFilterValues(mode);
     setFilter(filter);
 
 }
