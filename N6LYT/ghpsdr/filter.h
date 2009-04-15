@@ -24,16 +24,28 @@
 * 
 */
 
-#define filter6000 0
-#define filter4000 1
-#define filter2600 2
-#define filter2100 3
-#define filter1000 4
-#define filter500 5
-#define filter250 6
-#define filter100 7
-#define filter50 8
-#define filter25 9
+#define FILTERS 12
+
+#define CW_PITCH 600
+
+struct _FILTER {
+    int low;
+    int high;
+    char* title;
+};
+
+typedef struct _FILTER FILTER;
+
+#define filterF0 0
+#define filterF1 1
+#define filterF2 2
+#define filterF3 3
+#define filterF4 4
+#define filterF5 5
+#define filterF6 6
+#define filterF7 7
+#define filterF8 8
+#define filterF9 9
 #define filterVar1 10
 #define filterVar2 11
 
@@ -54,5 +66,6 @@ int filterVar2High;
 GtkWidget* buildFilterUI();
 void filterSaveState();
 void filterRestoreState();
+void setFilterValues(int mode);
 void setFilter(int filter);
 void setTxFilters();
