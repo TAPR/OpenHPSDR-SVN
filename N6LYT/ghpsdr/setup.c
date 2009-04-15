@@ -31,6 +31,9 @@
 
 #include <gtk/gtk.h>
 #include "bandscope.h"
+#include "filter.h"
+#include "main.h"
+#include "mode.h"
 #include "spectrum.h"
 
 GtkWidget* setupWindow=NULL;
@@ -53,6 +56,9 @@ GtkWidget* bandscopeHighSpinButton;
 GtkWidget* bandscopeLowLabel;
 GtkWidget* bandscopeLowSpinButton;
 
+GtkWidget* cwPitchLabel;
+GtkWidget* cwPitchSpinButton;
+
 void quitSetup();
 void spectrumHighChanged(GtkSpinButton* spinButton,gpointer data);
 void spectrumLowChanged(GtkSpinButton* spinButton,gpointer data);
@@ -61,6 +67,7 @@ void waterfallHighChanged(GtkSpinButton* spinButton,gpointer data);
 void waterfallLowChanged(GtkSpinButton* spinButton,gpointer data);
 void bandscopeHighChanged(GtkSpinButton* spinButton,gpointer data);
 void bandscopeLowChanged(GtkSpinButton* spinButton,gpointer data);
+void cwPitchChanged(GtkSpinButton* spinButton,gpointer data);
 
 /* --------------------------------------------------------------------------*/
 /** 
@@ -77,7 +84,7 @@ void setup() {
         spectrumHighLabel=gtk_label_new("Spectrum High");
         gtk_widget_show(spectrumHighLabel);
         gtk_fixed_put((GtkFixed*)setupFixed,spectrumHighLabel,10,10);
-        spectrumHighSpinButton=gtk_spin_button_new_with_range(-200,200,10);
+        spectrumHighSpinButton=gtk_spin_button_new_with_range(-200,200,5);
         gtk_spin_button_set_value((GtkSpinButton*)spectrumHighSpinButton,(double)spectrumMAX);
         g_signal_connect(G_OBJECT(spectrumHighSpinButton),"value-changed",G_CALLBACK(spectrumHighChanged),NULL);
         gtk_widget_show(spectrumHighSpinButton);
@@ -86,7 +93,7 @@ void setup() {
         spectrumLowLabel=gtk_label_new("Spectrum Low");
         gtk_widget_show(spectrumLowLabel);
         gtk_fixed_put((GtkFixed*)setupFixed,spectrumLowLabel,10,40);
-        spectrumLowSpinButton=gtk_spin_button_new_with_range(-200,200,10);
+        spectrumLowSpinButton=gtk_spin_button_new_with_range(-200,200,5);
         gtk_spin_button_set_value((GtkSpinButton*)spectrumLowSpinButton,(double)spectrumMIN);
         g_signal_connect(G_OBJECT(spectrumLowSpinButton),"value-changed",G_CALLBACK(spectrumLowChanged),NULL);
         gtk_widget_show(spectrumLowSpinButton);
@@ -106,7 +113,7 @@ void setup() {
         waterfallHighLabel=gtk_label_new("Waterfall High");
         gtk_widget_show(waterfallHighLabel);
         gtk_fixed_put((GtkFixed*)setupFixed,waterfallHighLabel,10,110);
-        waterfallHighSpinButton=gtk_spin_button_new_with_range(-200,200,10);
+        waterfallHighSpinButton=gtk_spin_button_new_with_range(-200,200,5);
         gtk_spin_button_set_value((GtkSpinButton*)waterfallHighSpinButton,(double)waterfallHighThreshold);
         g_signal_connect(G_OBJECT(waterfallHighSpinButton),"value-changed",G_CALLBACK(waterfallHighChanged),NULL);
         gtk_widget_show(waterfallHighSpinButton);
@@ -115,7 +122,7 @@ void setup() {
         waterfallLowLabel=gtk_label_new("Waterfall Low");
         gtk_widget_show(waterfallLowLabel);
         gtk_fixed_put((GtkFixed*)setupFixed,waterfallLowLabel,10,140);
-        waterfallLowSpinButton=gtk_spin_button_new_with_range(-200,200,10);
+        waterfallLowSpinButton=gtk_spin_button_new_with_range(-200,200,5);
         gtk_spin_button_set_value((GtkSpinButton*)waterfallLowSpinButton,(double)waterfallLowThreshold);
         g_signal_connect(G_OBJECT(waterfallLowSpinButton),"value-changed",G_CALLBACK(waterfallLowChanged),NULL);
         gtk_widget_show(waterfallLowSpinButton);
@@ -125,7 +132,7 @@ void setup() {
         bandscopeHighLabel=gtk_label_new("Bandscope High");
         gtk_widget_show(bandscopeHighLabel);
         gtk_fixed_put((GtkFixed*)setupFixed,bandscopeHighLabel,10,180);
-        bandscopeHighSpinButton=gtk_spin_button_new_with_range(-200,200,10);
+        bandscopeHighSpinButton=gtk_spin_button_new_with_range(-200,200,5);
         gtk_spin_button_set_value((GtkSpinButton*)bandscopeHighSpinButton,(double)bandscopeMAX);
         g_signal_connect(G_OBJECT(bandscopeHighSpinButton),"value-changed",G_CALLBACK(bandscopeHighChanged),NULL);
         gtk_widget_show(bandscopeHighSpinButton);
@@ -134,12 +141,21 @@ void setup() {
         bandscopeLowLabel=gtk_label_new("Bandscope Low");
         gtk_widget_show(bandscopeLowLabel);
         gtk_fixed_put((GtkFixed*)setupFixed,bandscopeLowLabel,10,210);
-        bandscopeLowSpinButton=gtk_spin_button_new_with_range(-200,200,10);
+        bandscopeLowSpinButton=gtk_spin_button_new_with_range(-200,200,5);
         gtk_spin_button_set_value((GtkSpinButton*)bandscopeLowSpinButton,(double)bandscopeMIN);
         g_signal_connect(G_OBJECT(bandscopeLowSpinButton),"value-changed",G_CALLBACK(bandscopeLowChanged),NULL);
         gtk_widget_show(bandscopeLowSpinButton);
         gtk_fixed_put((GtkFixed*)setupFixed,bandscopeLowSpinButton,150,210);
 
+        // add cw pitch
+        cwPitchLabel=gtk_label_new("CW Pitch");
+        gtk_widget_show(cwPitchLabel);
+        gtk_fixed_put((GtkFixed*)setupFixed,cwPitchLabel,10,250);
+        cwPitchSpinButton=gtk_spin_button_new_with_range(200,1000,50);
+        gtk_spin_button_set_value((GtkSpinButton*)cwPitchSpinButton,(double)cwPitch);
+        g_signal_connect(G_OBJECT(cwPitchSpinButton),"value-changed",G_CALLBACK(cwPitchChanged),NULL);
+        gtk_widget_show(cwPitchSpinButton);
+        gtk_fixed_put((GtkFixed*)setupFixed,cwPitchSpinButton,150,250);
 
         gtk_widget_set_size_request(GTK_WIDGET(setupFixed),400,400);
         gtk_widget_show(setupFixed);
@@ -227,6 +243,21 @@ void bandscopeHighChanged(GtkSpinButton* spinButton,gpointer data) {
 */
 void bandscopeLowChanged(GtkSpinButton* spinButton,gpointer data) {
     bandscopeMIN=gtk_spin_button_get_value(spinButton);
+}
+
+/* --------------------------------------------------------------------------*/
+/** 
+* @brief CW Pitch changed
+* 
+* @param spinButton
+* @param data
+*/
+void cwPitchChanged(GtkSpinButton* spinButton,gpointer data) {
+    cwPitch=gtk_spin_button_get_value(spinButton);
+    // could change the filter if in CW mode
+    if(mode==modeCWL || mode==modeCWU) {
+        setFilter(filter);
+    }
 }
 
 /* --------------------------------------------------------------------------*/
