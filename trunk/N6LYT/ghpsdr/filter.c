@@ -146,33 +146,33 @@ FILTER filterDIGU[FILTERS]={
     };
 
 FILTER filterCWL[FILTERS]={
-    {-CW_PITCH-500,-CW_PITCH+500,"1.0k"},
-    {-CW_PITCH-400,-CW_PITCH+400,"800"},
-    {-CW_PITCH-375,-CW_PITCH+375,"750"},
-    {-CW_PITCH-300,-CW_PITCH+300,"600"},
-    {-CW_PITCH-250,-CW_PITCH+250,"500"},
-    {-CW_PITCH-200,-CW_PITCH+200,"400"},
-    {-CW_PITCH-125,-CW_PITCH+125,"250"},
-    {-CW_PITCH-50,-CW_PITCH+50,"100"},
-    {-CW_PITCH-25,-CW_PITCH+25,"50"},
-    {-CW_PITCH-13,-CW_PITCH+13,"25"},
-    {-CW_PITCH-250,-CW_PITCH+250,"Var1"},
-    {-CW_PITCH-250,-CW_PITCH+250,"Var2"}
+    {500,500,"1.0k"},
+    {400,400,"800"},
+    {375,375,"750"},
+    {300,300,"600"},
+    {250,250,"500"},
+    {200,200,"400"},
+    {125,125,"250"},
+    {50,50,"100"},
+    {25,25,"50"},
+    {13,13,"25"},
+    {250,250,"Var1"},
+    {250,250,"Var2"}
     };
 
 FILTER filterCWU[FILTERS]={
-    {CW_PITCH-500,CW_PITCH+500,"1.0k"},
-    {CW_PITCH-400,CW_PITCH+400,"800"},
-    {CW_PITCH-375,CW_PITCH+375,"750"},
-    {CW_PITCH-300,CW_PITCH+300,"600"},
-    {CW_PITCH-250,CW_PITCH+250,"500"},
-    {CW_PITCH-200,CW_PITCH+200,"400"},
-    {CW_PITCH-125,CW_PITCH+125,"250"},
-    {CW_PITCH-50,CW_PITCH+50,"100"},
-    {CW_PITCH-25,CW_PITCH+25,"50"},
-    {CW_PITCH-13,CW_PITCH+13,"25"},
-    {CW_PITCH-250,CW_PITCH+250,"Var1"},
-    {CW_PITCH-250,CW_PITCH+250,"Var2"}
+    {500,500,"1.0k"},
+    {400,400,"800"},
+    {375,375,"750"},
+    {300,300,"600"},
+    {250,250,"500"},
+    {200,200,"400"},
+    {125,125,"250"},
+    {50,50,"100"},
+    {25,25,"50"},
+    {13,13,"25"},
+    {250,250,"Var1"},
+    {250,250,"Var2"}
     };
 
 FILTER filterAM[FILTERS]={
@@ -394,20 +394,20 @@ void saveVariableFilters() {
                 break;
             case modeCWL:
                 if(filter==filterVar1) {
-                    filterCWL[filterVar1].high=filterHigh;
-                    filterCWL[filterVar1].low=filterLow;
+                    filterCWL[filterVar1].high=-(-cwPitch-filterHigh);
+                    filterCWL[filterVar1].low=-(filterLow+cwPitch);
                 } else if(filter==filterVar2) {
-                    filterCWL[filterVar2].high=filterHigh;
-                    filterCWL[filterVar2].low=filterLow;
+                    filterCWL[filterVar2].high=-(-cwPitch-filterHigh);
+                    filterCWL[filterVar2].low=-(filterLow+cwPitch);
                 }
                 break;
             case modeCWU:
                 if(filter==filterVar1) {
-                    filterCWU[filterVar1].high=filterHigh;
-                    filterCWU[filterVar1].low=filterLow;
+                    filterCWU[filterVar1].high=filterHigh-cwPitch;
+                    filterCWU[filterVar1].low=cwPitch-filterLow;
                 } else if(filter==filterVar2) {
-                    filterCWU[filterVar2].high=filterHigh;
-                    filterCWU[filterVar2].low=filterLow;
+                    filterCWU[filterVar2].high=filterHigh-cwPitch;
+                    filterCWU[filterVar2].low=cwPitch-filterLow;
                 }
                 break;
             case modeDSB:
@@ -517,12 +517,12 @@ void selectFilter(GtkWidget* widget) {
             filterHigh=filterDIGU[filter].high;
             break;
         case modeCWL:
-            filterLow=filterCWL[filter].low;
-            filterHigh=filterCWL[filter].high;
+            filterLow=-cwPitch-filterCWL[filter].low;
+            filterHigh=-cwPitch+filterCWL[filter].high;
             break;
         case modeCWU:
-            filterLow=filterCWU[filter].low;
-            filterHigh=filterCWU[filter].high;
+            filterLow=cwPitch-filterCWU[filter].low;
+            filterHigh=cwPitch+filterCWU[filter].high;
             break;
         case modeDSB:
             filterLow=filterDSB[filter].low;

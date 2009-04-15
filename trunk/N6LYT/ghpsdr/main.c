@@ -163,6 +163,8 @@ char propertyPath[128];
 int meterDbm;
 float preampOffset;
 
+int cwPitch=600;
+
 /* --------------------------------------------------------------------------*/
 /** 
 * @brief Save the main GUI State. 
@@ -181,6 +183,8 @@ void mainSaveState() {
     setProperty("main.y",string);
     sprintf(string,"%d",meterUpdatesPerSecond);
     setProperty("meter.updates.per.second",string);
+    sprintf(string,"%d",cwPitch);
+    setProperty("cw.pitch",string);
 }
 
 /* --------------------------------------------------------------------------*/
@@ -520,6 +524,8 @@ void restoreInitialState() {
     meterUpdatesPerSecond=METER_UPDATES_PER_SECOND;
     value=getProperty("meter.updates.per.second");
     if(value) meterUpdatesPerSecond=atoi(value);
+    value=getProperty("cw.pitch");
+    if(value) cwPitch=atoi(value);
 }
 
 void restoreState() {
