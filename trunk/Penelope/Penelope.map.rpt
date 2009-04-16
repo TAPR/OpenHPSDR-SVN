@@ -1,6 +1,6 @@
 Analysis & Synthesis report for Penelope
-Mon Feb 23 20:49:07 2009
-Quartus II Version 8.1 Build 163 10/28/2008 SJ Web Edition
+Thu Apr 16 19:16:18 2009
+Quartus II Version 9.0 Build 132 02/25/2009 SJ Web Edition
 
 
 ---------------------
@@ -32,19 +32,20 @@ Quartus II Version 8.1 Build 163 10/28/2008 SJ Web Edition
  24. Parameter Settings for Inferred Entity Instance: lpm_mult:Mult0
  25. Parameter Settings for Inferred Entity Instance: ALC:ALC_I|lpm_mult:Mult0
  26. Parameter Settings for Inferred Entity Instance: cordic_16:tx_cordic|lpm_add_sub:Add6
- 27. Parameter Settings for Inferred Entity Instance: cordic_16:tx_cordic|lpm_add_sub:Add6
- 28. Parameter Settings for Inferred Entity Instance: ALC:ALC_Q|lpm_mult:Mult0
- 29. altshift_taps Parameter Settings by Entity Instance
- 30. lpm_mult Parameter Settings by Entity Instance
- 31. Analysis & Synthesis Messages
- 32. Analysis & Synthesis Suppressed Messages
+ 27. Parameter Settings for Inferred Entity Instance: ALC:ALC_Q|lpm_mult:Mult0
+ 28. altshift_taps Parameter Settings by Entity Instance
+ 29. lpm_mult Parameter Settings by Entity Instance
+ 30. Port Connectivity Checks: "cordic_16:tx_cordic"
+ 31. Port Connectivity Checks: "phase_accumulator:rx_phase_accumulator"
+ 32. Analysis & Synthesis Messages
+ 33. Analysis & Synthesis Suppressed Messages
 
 
 
 ----------------
 ; Legal Notice ;
 ----------------
-Copyright (C) 1991-2008 Altera Corporation
+Copyright (C) 1991-2009 Altera Corporation
 Your use of Altera Corporation's design tools, logic functions 
 and other software and tools, and its AMPP partner logic 
 functions, and any output files from any of the foregoing 
@@ -63,12 +64,12 @@ applicable agreement for further details.
 +------------------------------------------------------------------------------+
 ; Analysis & Synthesis Summary                                                 ;
 +------------------------------------+-----------------------------------------+
-; Analysis & Synthesis Status        ; Successful - Mon Feb 23 20:49:07 2009   ;
-; Quartus II Version                 ; 8.1 Build 163 10/28/2008 SJ Web Edition ;
+; Analysis & Synthesis Status        ; Successful - Thu Apr 16 19:16:18 2009   ;
+; Quartus II Version                 ; 9.0 Build 132 02/25/2009 SJ Web Edition ;
 ; Revision Name                      ; Penelope                                ;
 ; Top-level Entity Name              ; Penelope                                ;
 ; Family                             ; Cyclone II                              ;
-; Total logic elements               ; 2,328                                   ;
+; Total logic elements               ; 2,775                                   ;
 ;     Total combinational functions  ; 2,328                                   ;
 ;     Dedicated logic registers      ; 1,993                                   ;
 ; Total registers                    ; 1993                                    ;
@@ -91,7 +92,6 @@ applicable agreement for further details.
 ; State Machine Processing                                       ; User-Encoded       ; Auto               ;
 ; Power-Up Don't Care                                            ; Off                ; On                 ;
 ; Remove Redundant Logic Cells                                   ; On                 ; Off                ;
-; Perform gate-level register retiming                           ; On                 ; Off                ;
 ; Use smart compilation                                          ; Off                ; Off                ;
 ; Maximum processors allowed for parallel compilation            ; 1                  ; 1                  ;
 ; Restructure Multiplexers                                       ; Auto               ; Auto               ;
@@ -123,7 +123,6 @@ applicable agreement for further details.
 ; Auto Carry Chains                                              ; On                 ; On                 ;
 ; Auto Open-Drain Pins                                           ; On                 ; On                 ;
 ; Perform WYSIWYG Primitive Resynthesis                          ; Off                ; Off                ;
-; Allow register retiming to trade off Tsu/Tco with Fmax         ; On                 ; On                 ;
 ; Auto ROM Replacement                                           ; On                 ; On                 ;
 ; Auto RAM Replacement                                           ; On                 ; On                 ;
 ; Auto Shift Register Replacement                                ; Auto               ; Auto               ;
@@ -138,6 +137,7 @@ applicable agreement for further details.
 ; Allow Any Shift Register Size For Recognition                  ; Off                ; Off                ;
 ; Use LogicLock Constraints during Resource Balancing            ; On                 ; On                 ;
 ; Ignore translate_off and synthesis_off directives              ; Off                ; Off                ;
+; Timing-Driven Synthesis                                        ; Off                ; Off                ;
 ; Show Parameter Settings Tables in Synthesis Report             ; On                 ; On                 ;
 ; Ignore Maximum Fan-Out Assignments                             ; Off                ; Off                ;
 ; Synchronization Register Chain Length                          ; 2                  ; 2                  ;
@@ -168,30 +168,30 @@ applicable agreement for further details.
 ; phase_accumulator.v              ; yes             ; User Verilog HDL File        ; C:/HPSDR/trunk/Penelope/phase_accumulator.v                          ;
 ; cicint.v                         ; yes             ; User Verilog HDL File        ; C:/HPSDR/trunk/Penelope/cicint.v                                     ;
 ; Penelope.v                       ; yes             ; User Verilog HDL File        ; C:/HPSDR/trunk/Penelope/Penelope.v                                   ;
-; altshift_taps.tdf                ; yes             ; Megafunction                 ; c:/altera/81/quartus/libraries/megafunctions/altshift_taps.tdf       ;
-; altdpram.inc                     ; yes             ; Megafunction                 ; c:/altera/81/quartus/libraries/megafunctions/altdpram.inc            ;
-; lpm_counter.inc                  ; yes             ; Megafunction                 ; c:/altera/81/quartus/libraries/megafunctions/lpm_counter.inc         ;
-; lpm_compare.inc                  ; yes             ; Megafunction                 ; c:/altera/81/quartus/libraries/megafunctions/lpm_compare.inc         ;
-; lpm_constant.inc                 ; yes             ; Megafunction                 ; c:/altera/81/quartus/libraries/megafunctions/lpm_constant.inc        ;
+; altshift_taps.tdf                ; yes             ; Megafunction                 ; c:/altera/90/quartus/libraries/megafunctions/altshift_taps.tdf       ;
+; altdpram.inc                     ; yes             ; Megafunction                 ; c:/altera/90/quartus/libraries/megafunctions/altdpram.inc            ;
+; lpm_counter.inc                  ; yes             ; Megafunction                 ; c:/altera/90/quartus/libraries/megafunctions/lpm_counter.inc         ;
+; lpm_compare.inc                  ; yes             ; Megafunction                 ; c:/altera/90/quartus/libraries/megafunctions/lpm_compare.inc         ;
+; lpm_constant.inc                 ; yes             ; Megafunction                 ; c:/altera/90/quartus/libraries/megafunctions/lpm_constant.inc        ;
 ; db/shift_taps_r1m.tdf            ; yes             ; Auto-Generated Megafunction  ; C:/HPSDR/trunk/Penelope/db/shift_taps_r1m.tdf                        ;
 ; db/altsyncram_jg31.tdf           ; yes             ; Auto-Generated Megafunction  ; C:/HPSDR/trunk/Penelope/db/altsyncram_jg31.tdf                       ;
 ; db/add_sub_gvd.tdf               ; yes             ; Auto-Generated Megafunction  ; C:/HPSDR/trunk/Penelope/db/add_sub_gvd.tdf                           ;
 ; db/cntr_kkf.tdf                  ; yes             ; Auto-Generated Megafunction  ; C:/HPSDR/trunk/Penelope/db/cntr_kkf.tdf                              ;
 ; db/cmpr_6cc.tdf                  ; yes             ; Auto-Generated Megafunction  ; C:/HPSDR/trunk/Penelope/db/cmpr_6cc.tdf                              ;
-; lpm_mult.tdf                     ; yes             ; Megafunction                 ; c:/altera/81/quartus/libraries/megafunctions/lpm_mult.tdf            ;
-; aglobal81.inc                    ; yes             ; Megafunction                 ; c:/altera/81/quartus/libraries/megafunctions/aglobal81.inc           ;
-; lpm_add_sub.inc                  ; yes             ; Megafunction                 ; c:/altera/81/quartus/libraries/megafunctions/lpm_add_sub.inc         ;
-; multcore.inc                     ; yes             ; Megafunction                 ; c:/altera/81/quartus/libraries/megafunctions/multcore.inc            ;
-; bypassff.inc                     ; yes             ; Megafunction                 ; c:/altera/81/quartus/libraries/megafunctions/bypassff.inc            ;
-; altshift.inc                     ; yes             ; Megafunction                 ; c:/altera/81/quartus/libraries/megafunctions/altshift.inc            ;
+; lpm_mult.tdf                     ; yes             ; Megafunction                 ; c:/altera/90/quartus/libraries/megafunctions/lpm_mult.tdf            ;
+; aglobal90.inc                    ; yes             ; Megafunction                 ; c:/altera/90/quartus/libraries/megafunctions/aglobal90.inc           ;
+; lpm_add_sub.inc                  ; yes             ; Megafunction                 ; c:/altera/90/quartus/libraries/megafunctions/lpm_add_sub.inc         ;
+; multcore.inc                     ; yes             ; Megafunction                 ; c:/altera/90/quartus/libraries/megafunctions/multcore.inc            ;
+; bypassff.inc                     ; yes             ; Megafunction                 ; c:/altera/90/quartus/libraries/megafunctions/bypassff.inc            ;
+; altshift.inc                     ; yes             ; Megafunction                 ; c:/altera/90/quartus/libraries/megafunctions/altshift.inc            ;
 ; db/mult_r211.tdf                 ; yes             ; Auto-Generated Megafunction  ; C:/HPSDR/trunk/Penelope/db/mult_r211.tdf                             ;
 ; db/mult_9v01.tdf                 ; yes             ; Auto-Generated Megafunction  ; C:/HPSDR/trunk/Penelope/db/mult_9v01.tdf                             ;
-; lpm_add_sub.tdf                  ; yes             ; Megafunction                 ; c:/altera/81/quartus/libraries/megafunctions/lpm_add_sub.tdf         ;
-; addcore.inc                      ; yes             ; Megafunction                 ; c:/altera/81/quartus/libraries/megafunctions/addcore.inc             ;
-; look_add.inc                     ; yes             ; Megafunction                 ; c:/altera/81/quartus/libraries/megafunctions/look_add.inc            ;
-; alt_stratix_add_sub.inc          ; yes             ; Megafunction                 ; c:/altera/81/quartus/libraries/megafunctions/alt_stratix_add_sub.inc ;
-; alt_mercury_add_sub.inc          ; yes             ; Megafunction                 ; c:/altera/81/quartus/libraries/megafunctions/alt_mercury_add_sub.inc ;
-; db/add_sub_rjg.tdf               ; yes             ; Auto-Generated Megafunction  ; C:/HPSDR/trunk/Penelope/db/add_sub_rjg.tdf                           ;
+; lpm_add_sub.tdf                  ; yes             ; Megafunction                 ; c:/altera/90/quartus/libraries/megafunctions/lpm_add_sub.tdf         ;
+; addcore.inc                      ; yes             ; Megafunction                 ; c:/altera/90/quartus/libraries/megafunctions/addcore.inc             ;
+; look_add.inc                     ; yes             ; Megafunction                 ; c:/altera/90/quartus/libraries/megafunctions/look_add.inc            ;
+; alt_stratix_add_sub.inc          ; yes             ; Megafunction                 ; c:/altera/90/quartus/libraries/megafunctions/alt_stratix_add_sub.inc ;
+; alt_mercury_add_sub.inc          ; yes             ; Megafunction                 ; c:/altera/90/quartus/libraries/megafunctions/alt_mercury_add_sub.inc ;
+; db/add_sub_ari.tdf               ; yes             ; Auto-Generated Megafunction  ; C:/HPSDR/trunk/Penelope/db/add_sub_ari.tdf                           ;
 +----------------------------------+-----------------+------------------------------+----------------------------------------------------------------------+
 
 
@@ -200,7 +200,7 @@ applicable agreement for further details.
 +---------------------------------------------+---------+
 ; Resource                                    ; Usage   ;
 +---------------------------------------------+---------+
-; Estimated Total logic elements              ; 2,328   ;
+; Estimated Total logic elements              ; 2,775   ;
 ;                                             ;         ;
 ; Total combinational functions               ; 2328    ;
 ; Logic element usage by number of LUT inputs ;         ;
@@ -247,7 +247,7 @@ applicable agreement for further details.
 ;    |cicint:cic_Q|                           ; 323 (323)         ; 340 (340)    ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Penelope|cicint:cic_Q                                                                       ; work         ;
 ;    |cordic_16:tx_cordic|                    ; 1160 (1126)       ; 769 (769)    ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Penelope|cordic_16:tx_cordic                                                                ; work         ;
 ;       |lpm_add_sub:Add6|                    ; 34 (0)            ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Penelope|cordic_16:tx_cordic|lpm_add_sub:Add6                                               ; work         ;
-;          |add_sub_rjg:auto_generated|       ; 34 (34)           ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Penelope|cordic_16:tx_cordic|lpm_add_sub:Add6|add_sub_rjg:auto_generated                    ; work         ;
+;          |add_sub_ari:auto_generated|       ; 34 (34)           ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Penelope|cordic_16:tx_cordic|lpm_add_sub:Add6|add_sub_ari:auto_generated                    ; work         ;
 ;    |lpm_mult:Mult0|                         ; 33 (0)            ; 0 (0)        ; 0           ; 8            ; 0       ; 4         ; 0    ; 0            ; |Penelope|lpm_mult:Mult0                                                                     ; work         ;
 ;       |mult_r211:auto_generated|            ; 33 (33)           ; 0 (0)        ; 0           ; 8            ; 0       ; 4         ; 0    ; 0            ; |Penelope|lpm_mult:Mult0|mult_r211:auto_generated                                            ; work         ;
 ;    |oddClockDivider:refClockDivider|        ; 16 (16)           ; 8 (8)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Penelope|oddClockDivider:refClockDivider                                                    ; work         ;
@@ -287,7 +287,7 @@ Encoding Type:  User-Encoded
 +-----------------------------------------------------------------+
 ; State Machine - |Penelope|serno_state                           ;
 +-----------------+---------------+---------------+---------------+
-; Name            ; serno_state~9 ; serno_state~8 ; serno_state~7 ;
+; Name            ; serno_state~7 ; serno_state~6 ; serno_state~5 ;
 +-----------------+---------------+---------------+---------------+
 ; serno_state.000 ; 0             ; 0             ; 0             ;
 ; serno_state.001 ; 0             ; 0             ; 1             ;
@@ -301,7 +301,7 @@ Encoding Type:  User-Encoded
 +--------------------------------------------+
 ; State Machine - |Penelope|CC_state         ;
 +------------------+------------+------------+
-; Name             ; CC_state~8 ; CC_state~7 ;
+; Name             ; CC_state~6 ; CC_state~5 ;
 +------------------+------------+------------+
 ; CC_state.CC_IDLE ; 0          ; 0          ;
 ; CC_state.CC_HI   ; 0          ; 1          ;
@@ -313,7 +313,7 @@ Encoding Type:  User-Encoded
 +---------------------------------------------------------+
 ; State Machine - |Penelope|IQ_state                      ;
 +------------------+------------+------------+------------+
-; Name             ; IQ_state~9 ; IQ_state~8 ; IQ_state~7 ;
+; Name             ; IQ_state~7 ; IQ_state~6 ; IQ_state~5 ;
 +------------------+------------+------------+------------+
 ; IQ_state.IQ_IDLE ; 0          ; 0          ; 0          ;
 ; IQ_state.IQ_IW   ; 0          ; 0          ; 1          ;
@@ -324,17 +324,17 @@ Encoding Type:  User-Encoded
 
 
 Encoding Type:  User-Encoded
-+----------------------------------------------------------+
-; State Machine - |Penelope|ADC:ADC_SPI|ADC_state          ;
-+---------------+--------------+-------------+-------------+
-; Name          ; ADC_state~10 ; ADC_state~9 ; ADC_state~8 ;
-+---------------+--------------+-------------+-------------+
-; ADC_state.000 ; 0            ; 0           ; 0           ;
-; ADC_state.001 ; 0            ; 0           ; 1           ;
-; ADC_state.010 ; 0            ; 1           ; 0           ;
-; ADC_state.011 ; 0            ; 1           ; 1           ;
-; ADC_state.100 ; 1            ; 0           ; 0           ;
-+---------------+--------------+-------------+-------------+
++---------------------------------------------------------+
+; State Machine - |Penelope|ADC:ADC_SPI|ADC_state         ;
++---------------+-------------+-------------+-------------+
+; Name          ; ADC_state~8 ; ADC_state~7 ; ADC_state~6 ;
++---------------+-------------+-------------+-------------+
+; ADC_state.000 ; 0           ; 0           ; 0           ;
+; ADC_state.001 ; 0           ; 0           ; 1           ;
+; ADC_state.010 ; 0           ; 1           ; 0           ;
+; ADC_state.011 ; 0           ; 1           ; 1           ;
+; ADC_state.100 ; 1           ; 0           ; 0           ;
++---------------+-------------+-------------+-------------+
 
 
 +---------------------------------------------------------------------------------+
@@ -591,35 +591,7 @@ Note: In order to hide this table in the UI and the text report file, please set
 ; DEVICE_FAMILY          ; Cyclone II  ; Untyped                                        ;
 ; USE_WYS                ; OFF         ; Untyped                                        ;
 ; STYLE                  ; FAST        ; Untyped                                        ;
-; CBXI_PARAMETER         ; add_sub_rjg ; Untyped                                        ;
-; AUTO_CARRY_CHAINS      ; ON          ; AUTO_CARRY                                     ;
-; IGNORE_CARRY_BUFFERS   ; OFF         ; IGNORE_CARRY                                   ;
-; AUTO_CASCADE_CHAINS    ; ON          ; AUTO_CASCADE                                   ;
-; IGNORE_CASCADE_BUFFERS ; OFF         ; IGNORE_CASCADE                                 ;
-+------------------------+-------------+------------------------------------------------+
-Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings Tables in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
-
-
-+---------------------------------------------------------------------------------------+
-; Parameter Settings for Inferred Entity Instance: cordic_16:tx_cordic|lpm_add_sub:Add6 ;
-+------------------------+-------------+------------------------------------------------+
-; Parameter Name         ; Value       ; Type                                           ;
-+------------------------+-------------+------------------------------------------------+
-; LPM_WIDTH              ; 17          ; Untyped                                        ;
-; LPM_REPRESENTATION     ; UNSIGNED    ; Untyped                                        ;
-; LPM_DIRECTION          ; DEFAULT     ; Untyped                                        ;
-; ONE_INPUT_IS_CONSTANT  ; NO          ; Untyped                                        ;
-; LPM_PIPELINE           ; 0           ; Untyped                                        ;
-; MAXIMIZE_SPEED         ; 5           ; Untyped                                        ;
-; REGISTERED_AT_END      ; 0           ; Untyped                                        ;
-; OPTIMIZE_FOR_SPEED     ; 5           ; Untyped                                        ;
-; USE_CS_BUFFERS         ; 1           ; Untyped                                        ;
-; CARRY_CHAIN            ; MANUAL      ; Untyped                                        ;
-; CARRY_CHAIN_LENGTH     ; 48          ; CARRY_CHAIN_LENGTH                             ;
-; DEVICE_FAMILY          ; Cyclone II  ; Untyped                                        ;
-; USE_WYS                ; OFF         ; Untyped                                        ;
-; STYLE                  ; FAST        ; Untyped                                        ;
-; CBXI_PARAMETER         ; add_sub_rjg ; Untyped                                        ;
+; CBXI_PARAMETER         ; add_sub_ari ; Untyped                                        ;
 ; AUTO_CARRY_CHAINS      ; ON          ; AUTO_CARRY                                     ;
 ; IGNORE_CARRY_BUFFERS   ; OFF         ; IGNORE_CARRY                                   ;
 ; AUTO_CASCADE_CHAINS    ; ON          ; AUTO_CASCADE                                   ;
@@ -718,13 +690,33 @@ Note: In order to hide this table in the UI and the text report file, please set
 +---------------------------------------+--------------------------+
 
 
++----------------------------------------------------------------------------------------------------------------------+
+; Port Connectivity Checks: "cordic_16:tx_cordic"                                                                      ;
++------------+--------+----------+-------------------------------------------------------------------------------------+
+; Port       ; Type   ; Severity ; Details                                                                             ;
++------------+--------+----------+-------------------------------------------------------------------------------------+
+; iout[2..0] ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
+; iout[16]   ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
+; qout       ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
++------------+--------+----------+-------------------------------------------------------------------------------------+
+
+
++----------------------------------------------------------------------------------------------------------------------------+
+; Port Connectivity Checks: "phase_accumulator:rx_phase_accumulator"                                                         ;
++------------------+--------+----------+-------------------------------------------------------------------------------------+
+; Port             ; Type   ; Severity ; Details                                                                             ;
++------------------+--------+----------+-------------------------------------------------------------------------------------+
+; phase_out[11..0] ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
++------------------+--------+----------+-------------------------------------------------------------------------------------+
+
+
 +-------------------------------+
 ; Analysis & Synthesis Messages ;
 +-------------------------------+
 Info: *******************************************************************
 Info: Running Quartus II Analysis & Synthesis
-    Info: Version 8.1 Build 163 10/28/2008 SJ Web Edition
-    Info: Processing started: Mon Feb 23 20:48:55 2009
+    Info: Version 9.0 Build 132 02/25/2009 SJ Web Edition
+    Info: Processing started: Thu Apr 16 19:16:04 2009
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off Penelope -c Penelope
 Info: Found 1 design units, including 1 entities, in source file ALC.v
     Info: Found entity 1: ALC
@@ -746,6 +738,14 @@ Warning (10230): Verilog HDL assignment warning at Penelope.v(484): truncated va
 Info: Elaborating entity "ADC" for hierarchy "ADC:ADC_SPI"
 Info: Elaborating entity "ALC" for hierarchy "ALC:ALC_I"
 Info: Elaborating entity "cicint" for hierarchy "cicint:cic_I"
+Warning (10036): Verilog HDL or VHDL warning at cicint.v(86): object "section_in1" assigned a value but never read
+Warning (10036): Verilog HDL or VHDL warning at cicint.v(94): object "section_in2" assigned a value but never read
+Warning (10036): Verilog HDL or VHDL warning at cicint.v(102): object "section_in3" assigned a value but never read
+Warning (10036): Verilog HDL or VHDL warning at cicint.v(110): object "section_in4" assigned a value but never read
+Warning (10036): Verilog HDL or VHDL warning at cicint.v(133): object "section_in7" assigned a value but never read
+Warning (10036): Verilog HDL or VHDL warning at cicint.v(141): object "section_in8" assigned a value but never read
+Warning (10036): Verilog HDL or VHDL warning at cicint.v(149): object "section_in9" assigned a value but never read
+Warning (10036): Verilog HDL or VHDL warning at cicint.v(157): object "section_in10" assigned a value but never read
 Warning (10230): Verilog HDL assignment warning at cicint.v(182): truncated value with size 32 to match size of target (12)
 Warning (10230): Verilog HDL assignment warning at cicint.v(188): truncated value with size 32 to match size of target (1)
 Info: Elaborating entity "phase_accumulator" for hierarchy "phase_accumulator:rx_phase_accumulator"
@@ -754,7 +754,7 @@ Info: Elaborating entity "oddClockDivider" for hierarchy "oddClockDivider:refClo
 Warning: Clock multiplexers are found and protected
     Warning: Found clock multiplexer reference
 Info: Inferred 1 megafunctions from design logic
-    Info: Inferred altshift_taps megafunction from the following design logic: "ain0[0]~12"
+    Info: Inferred altshift_taps megafunction from the following design logic: "ain0[0]~0"
         Info: Parameter NUMBER_OF_TAPS set to 1
         Info: Parameter TAP_DISTANCE set to 3
         Info: Parameter WIDTH set to 17
@@ -810,10 +810,11 @@ Info: Found 1 design units, including 1 entities, in source file db/mult_9v01.td
 Info: Elaborated megafunction instantiation "cordic_16:tx_cordic|lpm_add_sub:Add6"
 Info: Instantiated megafunction "cordic_16:tx_cordic|lpm_add_sub:Add6" with the following parameter:
     Info: Parameter "LPM_WIDTH" = "17"
+    Info: Parameter "LPM_DIRECTION" = "DEFAULT"
     Info: Parameter "LPM_REPRESENTATION" = "UNSIGNED"
     Info: Parameter "ONE_INPUT_IS_CONSTANT" = "NO"
-Info: Found 1 design units, including 1 entities, in source file db/add_sub_rjg.tdf
-    Info: Found entity 1: add_sub_rjg
+Info: Found 1 design units, including 1 entities, in source file db/add_sub_ari.tdf
+    Info: Found entity 1: add_sub_ari
 Info: Ignored 168 buffer(s)
     Info: Ignored 168 SOFT buffer(s)
 Info: Performing gate-level register retiming
@@ -832,10 +833,10 @@ Info: Implemented 3015 device resources after synthesis - the final resource cou
     Info: Implemented 2924 logic cells
     Info: Implemented 17 RAM segments
     Info: Implemented 12 DSP elements
-Info: Quartus II Analysis & Synthesis was successful. 0 errors, 6 warnings
-    Info: Peak virtual memory: 175 megabytes
-    Info: Processing ended: Mon Feb 23 20:49:07 2009
-    Info: Elapsed time: 00:00:12
+Info: Quartus II Analysis & Synthesis was successful. 0 errors, 14 warnings
+    Info: Peak virtual memory: 183 megabytes
+    Info: Processing ended: Thu Apr 16 19:16:18 2009
+    Info: Elapsed time: 00:00:14
     Info: Total CPU time (on all processors): 00:00:10
 
 
