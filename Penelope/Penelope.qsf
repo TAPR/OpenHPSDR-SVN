@@ -28,7 +28,7 @@ set_global_assignment -name FAMILY "Cyclone II"
 set_global_assignment -name TOP_LEVEL_ENTITY Penelope
 set_global_assignment -name ORIGINAL_QUARTUS_VERSION 6.1
 set_global_assignment -name PROJECT_CREATION_TIME_DATE "14:58:14  FEBRUARY 17, 2007"
-set_global_assignment -name LAST_QUARTUS_VERSION 8.1
+set_global_assignment -name LAST_QUARTUS_VERSION 9.0
 set_instance_assignment -name PARTITION_HIERARCHY root_partition -to | -section_id Top
 set_global_assignment -name PARTITION_NETLIST_TYPE SOURCE -section_id Top
 set_global_assignment -name FMAX_REQUIREMENT "123 MHz"
@@ -99,12 +99,9 @@ set_location_assignment PIN_108 -to LED7
 set_global_assignment -name STRATIX_DEVICE_IO_STANDARD "3.3-V LVTTL"
 set_location_assignment PIN_70 -to CC
 set_location_assignment PIN_162 -to LROUT
-set_location_assignment PIN_96 -to C11
-set_location_assignment PIN_68 -to C21
 set_global_assignment -name MESSAGE_SUPPRESSION_RULE_FILE Penelope.srf
 set_instance_assignment -name CLOCK_SETTINGS "125MHz clock" -to _122MHZ
 set_location_assignment PIN_132 -to _122MHZ
-set_location_assignment PIN_28 -to _122MHZLVDS
 set_global_assignment -name ALLOW_POWER_UP_DONT_CARE OFF
 set_global_assignment -name PARTITION_COLOR 14622752 -section_id Top
 set_global_assignment -name LL_ROOT_REGION ON -section_id "Root Region"
