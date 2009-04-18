@@ -1,6 +1,6 @@
 Assembler report for Test1
-Mon Mar 30 21:08:05 2009
-Quartus II Version 8.1 Build 163 10/28/2008 SJ Web Edition
+Sat Apr 18 15:55:39 2009
+Quartus II Version 9.0 Build 132 02/25/2009 SJ Web Edition
 
 
 ---------------------
@@ -18,7 +18,7 @@ Quartus II Version 8.1 Build 163 10/28/2008 SJ Web Edition
 ----------------
 ; Legal Notice ;
 ----------------
-Copyright (C) 1991-2008 Altera Corporation
+Copyright (C) 1991-2009 Altera Corporation
 Your use of Altera Corporation's design tools, logic functions 
 and other software and tools, and its AMPP partner logic 
 functions, and any output files from any of the foregoing 
@@ -37,7 +37,7 @@ applicable agreement for further details.
 +---------------------------------------------------------------+
 ; Assembler Summary                                             ;
 +-----------------------+---------------------------------------+
-; Assembler Status      ; Successful - Mon Mar 30 21:08:05 2009 ;
+; Assembler Status      ; Successful - Sat Apr 18 15:55:39 2009 ;
 ; Revision Name         ; Test1                                 ;
 ; Top-level Entity Name ; Test1                                 ;
 ; Family                ; MAX II                                ;
@@ -89,7 +89,7 @@ applicable agreement for further details.
 +----------------+------------------------------------------------+
 ; Device         ; EPM240T100C5                                   ;
 ; JTAG usercode  ; 0xFFFFFFFF                                     ;
-; Checksum       ; 0x0016879B                                     ;
+; Checksum       ; 0x001686D7                                     ;
 +----------------+------------------------------------------------+
 
 
@@ -98,15 +98,15 @@ applicable agreement for further details.
 +--------------------+
 Info: *******************************************************************
 Info: Running Quartus II Assembler
-    Info: Version 8.1 Build 163 10/28/2008 SJ Web Edition
-    Info: Processing started: Mon Mar 30 21:08:04 2009
+    Info: Version 9.0 Build 132 02/25/2009 SJ Web Edition
+    Info: Processing started: Sat Apr 18 15:55:37 2009
 Info: Command: quartus_asm --read_settings_files=off --write_settings_files=off Phoenix -c Test1
 Info: Writing out detailed assembly data for power analysis
 Info: Assembler is generating device programming files
 Info: Quartus II Assembler was successful. 0 errors, 0 warnings
-    Info: Peak virtual memory: 141 megabytes
-    Info: Processing ended: Mon Mar 30 21:08:05 2009
-    Info: Elapsed time: 00:00:01
-    Info: Total CPU time (on all processors): 00:00:00
+    Info: Peak virtual memory: 146 megabytes
+    Info: Processing ended: Sat Apr 18 15:55:39 2009
+    Info: Elapsed time: 00:00:02
+    Info: Total CPU time (on all processors): 00:00:02
 
 
