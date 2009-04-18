@@ -61,6 +61,8 @@ AD9912!
 
 At this stage can set AD9912 frequecy (x4) from PowerSDR - use latest Ozy_Janus.rbf.
 
+22. 18 April 2009 - The current CPLD code and Janus_Ozy.rbf file supports a 50MHz clock into the AD9912. 
+
 
 
 
