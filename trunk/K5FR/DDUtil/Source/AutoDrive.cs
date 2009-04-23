@@ -72,5 +72,10 @@ namespace DataDecoder
             set.def9 = num9.Value; set.Save();
         }
 
+        private void num10_ValueChanged(object sender, EventArgs e)
+        {
+            set.def10 = num10.Value; set.Save();
+        }
+
     }
 }
