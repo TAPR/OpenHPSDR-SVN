@@ -233,37 +233,37 @@ RCP4 - WriteLog</Value>
     <Setting Name="Drive160" Type="System.String" Scope="User">
       <Value Profile="(Default)">0</Value>
     </Setting>
-    <Setting Name="Alc160" Type="System.String" Scope="User">
+    <Setting Name="Alc160" Type="System.Double" Scope="User">
       <Value Profile="(Default)">0</Value>
     </Setting>
     <Setting Name="AlcEnab" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
-    <Setting Name="Alc80" Type="System.String" Scope="User">
+    <Setting Name="Alc80" Type="System.Double" Scope="User">
       <Value Profile="(Default)">0</Value>
     </Setting>
-    <Setting Name="Alc40" Type="System.String" Scope="User">
+    <Setting Name="Alc40" Type="System.Double" Scope="User">
       <Value Profile="(Default)">0</Value>
     </Setting>
-    <Setting Name="Alc30" Type="System.String" Scope="User">
+    <Setting Name="Alc30" Type="System.Double" Scope="User">
       <Value Profile="(Default)">0</Value>
     </Setting>
-    <Setting Name="Alc20" Type="System.String" Scope="User">
+    <Setting Name="Alc20" Type="System.Double" Scope="User">
       <Value Profile="(Default)">0</Value>
     </Setting>
-    <Setting Name="Alc17" Type="System.String" Scope="User">
+    <Setting Name="Alc17" Type="System.Double" Scope="User">
       <Value Profile="(Default)">0</Value>
     </Setting>
-    <Setting Name="Alc15" Type="System.String" Scope="User">
+    <Setting Name="Alc15" Type="System.Double" Scope="User">
       <Value Profile="(Default)">0</Value>
     </Setting>
-    <Setting Name="Alc12" Type="System.String" Scope="User">
+    <Setting Name="Alc12" Type="System.Double" Scope="User">
       <Value Profile="(Default)">0</Value>
     </Setting>
-    <Setting Name="Alc10" Type="System.String" Scope="User">
+    <Setting Name="Alc10" Type="System.Double" Scope="User">
       <Value Profile="(Default)">0</Value>
     </Setting>
-    <Setting Name="Alc6" Type="System.String" Scope="User">
+    <Setting Name="Alc6" Type="System.Double" Scope="User">
       <Value Profile="(Default)">0</Value>
     </Setting>
     <Setting Name="Drive80" Type="System.String" Scope="User">
@@ -586,6 +586,15 @@ RCP4 - WriteLog</Value>
     </Setting>
     <Setting Name="def9" Type="System.Decimal" Scope="User">
       <Value Profile="(Default)">100</Value>
+    </Setting>
+    <Setting Name="AmpOn6" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="def10" Type="System.Decimal" Scope="User">
+      <Value Profile="(Default)">100</Value>
+    </Setting>
+    <Setting Name="pwr10" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
     </Setting>
   </Settings>
 </SettingsFile>

@@ -82,6 +82,7 @@ namespace DataDecoder
             this.label1 = new System.Windows.Forms.Label();
             this.chkDevice = new System.Windows.Forms.CheckBox();
             this.grpLPT = new System.Windows.Forms.GroupBox();
+            this.label154 = new System.Windows.Forms.Label();
             this.rbFW = new System.Windows.Forms.RadioButton();
             this.lblBCD = new System.Windows.Forms.Label();
             this.rbOther = new System.Windows.Forms.RadioButton();
@@ -202,6 +203,8 @@ namespace DataDecoder
             this.chkLPenab = new System.Windows.Forms.CheckBox();
             this.label2 = new System.Windows.Forms.Label();
             this.tabAmp = new System.Windows.Forms.TabPage();
+            this.grpPTT = new System.Windows.Forms.GroupBox();
+            this.btnByp = new System.Windows.Forms.Button();
             this.groupBox13 = new System.Windows.Forms.GroupBox();
             this.label151 = new System.Windows.Forms.Label();
             this.chkAutoDrv = new System.Windows.Forms.CheckBox();
@@ -746,30 +749,11 @@ namespace DataDecoder
             this.txtPortB = new System.Windows.Forms.TextBox();
             this.label106 = new System.Windows.Forms.Label();
             this.tabSetup = new System.Windows.Forms.TabPage();
+            this.chk6Amp = new System.Windows.Forms.CheckBox();
             this.chkOnTop = new System.Windows.Forms.CheckBox();
             this.chkModeChg = new System.Windows.Forms.CheckBox();
             this.chkAudio = new System.Windows.Forms.CheckBox();
             this.chkTips = new System.Windows.Forms.CheckBox();
-            this.grpALC = new System.Windows.Forms.GroupBox();
-            this.chk6 = new System.Windows.Forms.CheckBox();
-            this.btnChkAll = new System.Windows.Forms.Button();
-            this.btnClrAll = new System.Windows.Forms.Button();
-            this.chk10 = new System.Windows.Forms.CheckBox();
-            this.chk30 = new System.Windows.Forms.CheckBox();
-            this.chk12 = new System.Windows.Forms.CheckBox();
-            this.chk40 = new System.Windows.Forms.CheckBox();
-            this.chk15 = new System.Windows.Forms.CheckBox();
-            this.chk17 = new System.Windows.Forms.CheckBox();
-            this.chk80 = new System.Windows.Forms.CheckBox();
-            this.chk20 = new System.Windows.Forms.CheckBox();
-            this.chk160 = new System.Windows.Forms.CheckBox();
-            this.label68 = new System.Windows.Forms.Label();
-            this.txtALC = new System.Windows.Forms.TextBox();
-            this.btnSet = new System.Windows.Forms.Button();
-            this.btnCal = new System.Windows.Forms.Button();
-            this.txtDrive = new System.Windows.Forms.TextBox();
-            this.label64 = new System.Windows.Forms.Label();
-            this.chkAlcEnab = new System.Windows.Forms.CheckBox();
             this.grpDog = new System.Windows.Forms.GroupBox();
             this.txtTimer = new System.Windows.Forms.TextBox();
             this.label67 = new System.Windows.Forms.Label();
@@ -813,6 +797,7 @@ namespace DataDecoder
             this.txtAvg = new System.Windows.Forms.TextBox();
             this.btnSplit = new System.Windows.Forms.Button();
             this.numSplit = new System.Windows.Forms.NumericUpDown();
+            this.txtAlcInd = new System.Windows.Forms.TextBox();
             this.LogPort = new System.IO.Ports.SerialPort(this.components);
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
@@ -838,6 +823,7 @@ namespace DataDecoder
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.optionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.autoDriveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tubeAmpsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aCOM2000AToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.alpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -873,9 +859,6 @@ namespace DataDecoder
             this.AlphaPort = new System.IO.Ports.SerialPort(this.components);
             this.PMport = new System.IO.Ports.SerialPort(this.components);
             this.RepeatPort = new System.IO.Ports.SerialPort(this.components);
-            this.grpPTT = new System.Windows.Forms.GroupBox();
-            this.btnByp = new System.Windows.Forms.Button();
-            this.autoDriveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tabControl.SuspendLayout();
             this.tabPorts.SuspendLayout();
             this.grpSlave.SuspendLayout();
@@ -902,6 +885,7 @@ namespace DataDecoder
             this.groupBox3.SuspendLayout();
             this.grpLP.SuspendLayout();
             this.tabAmp.SuspendLayout();
+            this.grpPTT.SuspendLayout();
             this.groupBox13.SuspendLayout();
             this.grpPro.SuspendLayout();
             this.grpInP.SuspendLayout();
@@ -928,7 +912,6 @@ namespace DataDecoder
             this.grpPortB.SuspendLayout();
             this.grpPortA.SuspendLayout();
             this.tabSetup.SuspendLayout();
-            this.grpALC.SuspendLayout();
             this.grpDog.SuspendLayout();
             this.groupBox10.SuspendLayout();
             this.grpSpeed.SuspendLayout();
@@ -938,7 +921,6 @@ namespace DataDecoder
             this.contextMenuStrip1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
-            this.grpPTT.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl
@@ -1325,7 +1307,7 @@ namespace DataDecoder
             this.groupBox5.Controls.Add(this.label1);
             this.groupBox5.Controls.Add(this.chkDevice);
             this.groupBox5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold);
-            this.groupBox5.Location = new System.Drawing.Point(150, 25);
+            this.groupBox5.Location = new System.Drawing.Point(149, 17);
             this.groupBox5.Name = "groupBox5";
             this.groupBox5.Size = new System.Drawing.Size(210, 60);
             this.groupBox5.TabIndex = 3;
@@ -1337,7 +1319,7 @@ namespace DataDecoder
             // 
             this.chkDSInvert.AutoSize = true;
             this.chkDSInvert.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
-            this.chkDSInvert.Location = new System.Drawing.Point(23, 38);
+            this.chkDSInvert.Location = new System.Drawing.Point(12, 38);
             this.chkDSInvert.Name = "chkDSInvert";
             this.chkDSInvert.Size = new System.Drawing.Size(53, 17);
             this.chkDSInvert.TabIndex = 27;
@@ -1372,7 +1354,7 @@ namespace DataDecoder
             // 
             this.chkDevice.AutoSize = true;
             this.chkDevice.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
-            this.chkDevice.Location = new System.Drawing.Point(23, 17);
+            this.chkDevice.Location = new System.Drawing.Point(12, 17);
             this.chkDevice.Name = "chkDevice";
             this.chkDevice.Size = new System.Drawing.Size(59, 17);
             this.chkDevice.TabIndex = 19;
@@ -1383,6 +1365,7 @@ namespace DataDecoder
             // 
             // grpLPT
             // 
+            this.grpLPT.Controls.Add(this.label154);
             this.grpLPT.Controls.Add(this.rbFW);
             this.grpLPT.Controls.Add(this.lblBCD);
             this.grpLPT.Controls.Add(this.rbOther);
@@ -1399,6 +1382,17 @@ namespace DataDecoder
             this.grpLPT.TabStop = false;
             this.grpLPT.Text = "Port Selector";
             this.toolTip1.SetToolTip(this.grpLPT, "Select Parallel Port");
+            // 
+            // label154
+            // 
+            this.label154.AutoSize = true;
+            this.label154.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label154.ForeColor = System.Drawing.Color.Maroon;
+            this.label154.Location = new System.Drawing.Point(85, 88);
+            this.label154.Name = "label154";
+            this.label154.Size = new System.Drawing.Size(32, 15);
+            this.label154.TabIndex = 29;
+            this.label154.Text = "BCD";
             // 
             // rbFW
             // 
@@ -1417,11 +1411,12 @@ namespace DataDecoder
             this.lblBCD.AutoSize = true;
             this.lblBCD.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblBCD.ForeColor = System.Drawing.Color.Maroon;
-            this.lblBCD.Location = new System.Drawing.Point(84, 88);
+            this.lblBCD.Location = new System.Drawing.Point(60, 88);
             this.lblBCD.Name = "lblBCD";
             this.lblBCD.Size = new System.Drawing.Size(14, 15);
             this.lblBCD.TabIndex = 26;
             this.lblBCD.Text = "0";
+            this.lblBCD.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // rbOther
             // 
@@ -3033,26 +3028,57 @@ namespace DataDecoder
             this.tabAmp.Text = "Amps";
             this.tabAmp.UseVisualStyleBackColor = true;
             // 
+            // grpPTT
+            // 
+            this.grpPTT.Controls.Add(this.btnByp);
+            this.grpPTT.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.grpPTT.ForeColor = System.Drawing.Color.Firebrick;
+            this.grpPTT.Location = new System.Drawing.Point(47, 106);
+            this.grpPTT.Name = "grpPTT";
+            this.grpPTT.Size = new System.Drawing.Size(56, 57);
+            this.grpPTT.TabIndex = 111;
+            this.grpPTT.TabStop = false;
+            this.grpPTT.Text = "PTT";
+            this.toolTip1.SetToolTip(this.grpPTT, "Push-To-Talk control");
+            // 
+            // btnByp
+            // 
+            this.btnByp.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnByp.BackColor = System.Drawing.SystemColors.ButtonFace;
+            this.btnByp.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.btnByp.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnByp.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnByp.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.btnByp.Location = new System.Drawing.Point(4, 22);
+            this.btnByp.Name = "btnByp";
+            this.btnByp.Size = new System.Drawing.Size(47, 23);
+            this.btnByp.TabIndex = 69;
+            this.btnByp.Text = "STBY";
+            this.toolTip1.SetToolTip(this.btnByp, "Press to toggle PTT on/off  (ctrl+O)");
+            this.btnByp.UseVisualStyleBackColor = false;
+            this.btnByp.Click += new System.EventHandler(this.btnByp_Click);
+            // 
             // groupBox13
             // 
             this.groupBox13.Controls.Add(this.label151);
             this.groupBox13.Controls.Add(this.chkAutoDrv);
             this.groupBox13.Controls.Add(this.btnDrive);
             this.groupBox13.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox13.ForeColor = System.Drawing.Color.Blue;
-            this.groupBox13.Location = new System.Drawing.Point(107, 106);
+            this.groupBox13.ForeColor = System.Drawing.Color.Firebrick;
+            this.groupBox13.Location = new System.Drawing.Point(109, 106);
             this.groupBox13.Name = "groupBox13";
-            this.groupBox13.Size = new System.Drawing.Size(84, 57);
+            this.groupBox13.Size = new System.Drawing.Size(83, 57);
             this.groupBox13.TabIndex = 110;
             this.groupBox13.TabStop = false;
             this.groupBox13.Text = "Auto Drive";
+            this.toolTip1.SetToolTip(this.groupBox13, "Auto Drive controls");
             // 
             // label151
             // 
             this.label151.AutoSize = true;
             this.label151.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.5F);
             this.label151.ForeColor = System.Drawing.Color.Navy;
-            this.label151.Location = new System.Drawing.Point(28, 36);
+            this.label151.Location = new System.Drawing.Point(39, 36);
             this.label151.Name = "label151";
             this.label151.Size = new System.Drawing.Size(23, 13);
             this.label151.TabIndex = 61;
@@ -3079,11 +3105,11 @@ namespace DataDecoder
             this.btnDrive.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnDrive.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnDrive.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.btnDrive.Location = new System.Drawing.Point(11, 36);
+            this.btnDrive.Location = new System.Drawing.Point(7, 36);
             this.btnDrive.Name = "btnDrive";
-            this.btnDrive.Size = new System.Drawing.Size(12, 12);
+            this.btnDrive.Size = new System.Drawing.Size(25, 15);
             this.btnDrive.TabIndex = 62;
-            this.toolTip1.SetToolTip(this.btnDrive, "Press to save drive level for this band.");
+            this.toolTip1.SetToolTip(this.btnDrive, "Press to save drive level for this band (Ctrl+A).");
             this.btnDrive.UseVisualStyleBackColor = false;
             this.btnDrive.Click += new System.EventHandler(this.btnDrive_Click);
             // 
@@ -3105,14 +3131,16 @@ namespace DataDecoder
             this.grpPro.Controls.Add(this.button4);
             this.grpPro.Controls.Add(this.grpInP);
             this.grpPro.Controls.Add(this.grpAntP);
+            this.grpPro.Enabled = false;
             this.grpPro.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.grpPro.ForeColor = System.Drawing.Color.Blue;
-            this.grpPro.Location = new System.Drawing.Point(195, 5);
+            this.grpPro.Location = new System.Drawing.Point(198, 4);
             this.grpPro.Name = "grpPro";
-            this.grpPro.Size = new System.Drawing.Size(225, 158);
+            this.grpPro.Size = new System.Drawing.Size(225, 159);
             this.grpPro.TabIndex = 109;
             this.grpPro.TabStop = false;
             this.grpPro.Text = "Prometheus";
+            this.toolTip1.SetToolTip(this.grpPro, "Prometheus (DX-2400L1) Amplifier controls");
             // 
             // button6
             // 
@@ -3309,7 +3337,7 @@ namespace DataDecoder
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(35, 20);
             this.button4.TabIndex = 72;
-            this.button4.Text = "BYP";
+            this.button4.Text = "STBY";
             this.toolTip1.SetToolTip(this.button4, "Press to toggle Operate/StandBy modes.");
             this.button4.UseVisualStyleBackColor = false;
             // 
@@ -3711,7 +3739,7 @@ namespace DataDecoder
             this.grpAmp.Controls.Add(this.btnPwr);
             this.grpAmp.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.grpAmp.ForeColor = System.Drawing.Color.Blue;
-            this.grpAmp.Location = new System.Drawing.Point(7, 164);
+            this.grpAmp.Location = new System.Drawing.Point(3, 164);
             this.grpAmp.Name = "grpAmp";
             this.grpAmp.Size = new System.Drawing.Size(320, 136);
             this.grpAmp.TabIndex = 0;
@@ -4158,10 +4186,10 @@ namespace DataDecoder
             this.groupBox4.Controls.Add(this.label21);
             this.groupBox4.Controls.Add(this.label22);
             this.groupBox4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold);
-            this.groupBox4.ForeColor = System.Drawing.Color.Firebrick;
-            this.groupBox4.Location = new System.Drawing.Point(8, 4);
+            this.groupBox4.ForeColor = System.Drawing.Color.Blue;
+            this.groupBox4.Location = new System.Drawing.Point(4, 4);
             this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(183, 100);
+            this.groupBox4.Size = new System.Drawing.Size(188, 100);
             this.groupBox4.TabIndex = 48;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "IC-PW1";
@@ -4170,7 +4198,8 @@ namespace DataDecoder
             // 
             this.chkPwRTS.AutoSize = true;
             this.chkPwRTS.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
-            this.chkPwRTS.Location = new System.Drawing.Point(122, 77);
+            this.chkPwRTS.ForeColor = System.Drawing.Color.Navy;
+            this.chkPwRTS.Location = new System.Drawing.Point(124, 77);
             this.chkPwRTS.Name = "chkPwRTS";
             this.chkPwRTS.Size = new System.Drawing.Size(48, 17);
             this.chkPwRTS.TabIndex = 52;
@@ -4183,7 +4212,8 @@ namespace DataDecoder
             // 
             this.chkPwDTR.AutoSize = true;
             this.chkPwDTR.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
-            this.chkPwDTR.Location = new System.Drawing.Point(122, 60);
+            this.chkPwDTR.ForeColor = System.Drawing.Color.Navy;
+            this.chkPwDTR.Location = new System.Drawing.Point(124, 60);
             this.chkPwDTR.Name = "chkPwDTR";
             this.chkPwDTR.Size = new System.Drawing.Size(49, 17);
             this.chkPwDTR.TabIndex = 51;
@@ -4196,7 +4226,8 @@ namespace DataDecoder
             // 
             this.btnTest.AutoSize = true;
             this.btnTest.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnTest.Location = new System.Drawing.Point(67, 50);
+            this.btnTest.ForeColor = System.Drawing.Color.Navy;
+            this.btnTest.Location = new System.Drawing.Point(69, 50);
             this.btnTest.Name = "btnTest";
             this.btnTest.Size = new System.Drawing.Size(38, 23);
             this.btnTest.TabIndex = 49;
@@ -4209,7 +4240,8 @@ namespace DataDecoder
             // 
             this.chkDisBcast.AutoSize = true;
             this.chkDisBcast.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chkDisBcast.Location = new System.Drawing.Point(5, 75);
+            this.chkDisBcast.ForeColor = System.Drawing.Color.Navy;
+            this.chkDisBcast.Location = new System.Drawing.Point(7, 75);
             this.chkDisBcast.Name = "chkDisBcast";
             this.chkDisBcast.Size = new System.Drawing.Size(112, 17);
             this.chkDisBcast.TabIndex = 50;
@@ -4221,7 +4253,8 @@ namespace DataDecoder
             // label24
             // 
             this.label24.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label24.Location = new System.Drawing.Point(105, 45);
+            this.label24.ForeColor = System.Drawing.Color.Navy;
+            this.label24.Location = new System.Drawing.Point(107, 45);
             this.label24.Name = "label24";
             this.label24.Size = new System.Drawing.Size(18, 13);
             this.label24.TabIndex = 48;
@@ -4232,7 +4265,7 @@ namespace DataDecoder
             // 
             this.txtPW1ra.Enabled = false;
             this.txtPW1ra.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtPW1ra.Location = new System.Drawing.Point(98, 24);
+            this.txtPW1ra.Location = new System.Drawing.Point(100, 24);
             this.txtPW1ra.Name = "txtPW1ra";
             this.txtPW1ra.Size = new System.Drawing.Size(32, 20);
             this.txtPW1ra.TabIndex = 47;
@@ -4243,7 +4276,8 @@ namespace DataDecoder
             // label23
             // 
             this.label23.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label23.Location = new System.Drawing.Point(146, 45);
+            this.label23.ForeColor = System.Drawing.Color.Navy;
+            this.label23.Location = new System.Drawing.Point(148, 45);
             this.label23.Name = "label23";
             this.label23.Size = new System.Drawing.Size(18, 13);
             this.label23.TabIndex = 46;
@@ -4254,7 +4288,7 @@ namespace DataDecoder
             // 
             this.cboPW1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cboPW1.FormattingEnabled = true;
-            this.cboPW1.Location = new System.Drawing.Point(5, 25);
+            this.cboPW1.Location = new System.Drawing.Point(7, 25);
             this.cboPW1.Name = "cboPW1";
             this.cboPW1.Size = new System.Drawing.Size(63, 21);
             this.cboPW1.TabIndex = 17;
@@ -4264,7 +4298,7 @@ namespace DataDecoder
             // txtPW1ta
             // 
             this.txtPW1ta.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtPW1ta.Location = new System.Drawing.Point(138, 24);
+            this.txtPW1ta.Location = new System.Drawing.Point(140, 24);
             this.txtPW1ta.Name = "txtPW1ta";
             this.txtPW1ta.Size = new System.Drawing.Size(32, 20);
             this.txtPW1ta.TabIndex = 15;
@@ -4277,7 +4311,8 @@ namespace DataDecoder
             // 
             this.chkPW1.AutoSize = true;
             this.chkPW1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chkPW1.Location = new System.Drawing.Point(5, 55);
+            this.chkPW1.ForeColor = System.Drawing.Color.Navy;
+            this.chkPW1.Location = new System.Drawing.Point(7, 55);
             this.chkPW1.Name = "chkPW1";
             this.chkPW1.Size = new System.Drawing.Size(65, 17);
             this.chkPW1.TabIndex = 45;
@@ -4289,7 +4324,8 @@ namespace DataDecoder
             // label21
             // 
             this.label21.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label21.Location = new System.Drawing.Point(93, 8);
+            this.label21.ForeColor = System.Drawing.Color.Navy;
+            this.label21.Location = new System.Drawing.Point(95, 8);
             this.label21.Name = "label21";
             this.label21.Size = new System.Drawing.Size(84, 15);
             this.label21.TabIndex = 16;
@@ -4299,7 +4335,8 @@ namespace DataDecoder
             // label22
             // 
             this.label22.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label22.Location = new System.Drawing.Point(70, 28);
+            this.label22.ForeColor = System.Drawing.Color.Navy;
+            this.label22.Location = new System.Drawing.Point(72, 28);
             this.label22.Name = "label22";
             this.label22.Size = new System.Drawing.Size(30, 15);
             this.label22.TabIndex = 18;
@@ -10006,11 +10043,11 @@ namespace DataDecoder
             // 
             // tabSetup
             // 
+            this.tabSetup.Controls.Add(this.chk6Amp);
             this.tabSetup.Controls.Add(this.chkOnTop);
             this.tabSetup.Controls.Add(this.chkModeChg);
             this.tabSetup.Controls.Add(this.chkAudio);
             this.tabSetup.Controls.Add(this.chkTips);
-            this.tabSetup.Controls.Add(this.grpALC);
             this.tabSetup.Controls.Add(this.grpDog);
             this.tabSetup.Controls.Add(this.groupBox10);
             this.tabSetup.Controls.Add(this.groupBox14);
@@ -10022,12 +10059,26 @@ namespace DataDecoder
             this.tabSetup.Text = "Setup";
             this.tabSetup.UseVisualStyleBackColor = true;
             // 
+            // chk6Amp
+            // 
+            this.chk6Amp.AutoSize = true;
+            this.chk6Amp.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
+            this.chk6Amp.ForeColor = System.Drawing.Color.Navy;
+            this.chk6Amp.Location = new System.Drawing.Point(161, 265);
+            this.chk6Amp.Name = "chk6Amp";
+            this.chk6Amp.Size = new System.Drawing.Size(81, 17);
+            this.chk6Amp.TabIndex = 89;
+            this.chk6Amp.Text = "NoAmpOn6";
+            this.toolTip1.SetToolTip(this.chk6Amp, "Select to disable Amp on 6 meters.");
+            this.chk6Amp.UseVisualStyleBackColor = true;
+            this.chk6Amp.CheckedChanged += new System.EventHandler(this.chk6Amp_CheckedChanged);
+            // 
             // chkOnTop
             // 
             this.chkOnTop.AutoSize = true;
             this.chkOnTop.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
             this.chkOnTop.ForeColor = System.Drawing.Color.Navy;
-            this.chkOnTop.Location = new System.Drawing.Point(85, 285);
+            this.chkOnTop.Location = new System.Drawing.Point(86, 285);
             this.chkOnTop.Name = "chkOnTop";
             this.chkOnTop.Size = new System.Drawing.Size(62, 17);
             this.chkOnTop.TabIndex = 88;
@@ -10077,316 +10128,6 @@ namespace DataDecoder
             this.toolTip1.SetToolTip(this.chkTips, "Select to enable Tool Tips when cursor hovers over a control.");
             this.chkTips.UseVisualStyleBackColor = true;
             this.chkTips.CheckedChanged += new System.EventHandler(this.chkTips_CheckedChanged);
-            // 
-            // grpALC
-            // 
-            this.grpALC.Controls.Add(this.chk6);
-            this.grpALC.Controls.Add(this.btnChkAll);
-            this.grpALC.Controls.Add(this.btnClrAll);
-            this.grpALC.Controls.Add(this.chk10);
-            this.grpALC.Controls.Add(this.chk30);
-            this.grpALC.Controls.Add(this.chk12);
-            this.grpALC.Controls.Add(this.chk40);
-            this.grpALC.Controls.Add(this.chk15);
-            this.grpALC.Controls.Add(this.chk17);
-            this.grpALC.Controls.Add(this.chk80);
-            this.grpALC.Controls.Add(this.chk20);
-            this.grpALC.Controls.Add(this.chk160);
-            this.grpALC.Controls.Add(this.label68);
-            this.grpALC.Controls.Add(this.txtALC);
-            this.grpALC.Controls.Add(this.btnSet);
-            this.grpALC.Controls.Add(this.btnCal);
-            this.grpALC.Controls.Add(this.txtDrive);
-            this.grpALC.Controls.Add(this.label64);
-            this.grpALC.Controls.Add(this.chkAlcEnab);
-            this.grpALC.ForeColor = System.Drawing.Color.Blue;
-            this.grpALC.Location = new System.Drawing.Point(155, 205);
-            this.grpALC.Name = "grpALC";
-            this.grpALC.Size = new System.Drawing.Size(250, 100);
-            this.grpALC.TabIndex = 78;
-            this.grpALC.TabStop = false;
-            this.grpALC.Text = "ALC";
-            // 
-            // chk6
-            // 
-            this.chk6.AutoSize = true;
-            this.chk6.BackColor = System.Drawing.SystemColors.Control;
-            this.chk6.Checked = true;
-            this.chk6.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chk6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chk6.ForeColor = System.Drawing.Color.Navy;
-            this.chk6.Location = new System.Drawing.Point(186, 60);
-            this.chk6.Name = "chk6";
-            this.chk6.Size = new System.Drawing.Size(32, 17);
-            this.chk6.TabIndex = 93;
-            this.chk6.Text = "6";
-            this.toolTip1.SetToolTip(this.chk6, "Select to enable calibration on this band.");
-            this.chk6.UseVisualStyleBackColor = false;
-            // 
-            // btnChkAll
-            // 
-            this.btnChkAll.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.btnChkAll.BackColor = System.Drawing.SystemColors.Control;
-            this.btnChkAll.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.btnChkAll.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnChkAll.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.btnChkAll.Location = new System.Drawing.Point(55, 79);
-            this.btnChkAll.Name = "btnChkAll";
-            this.btnChkAll.Size = new System.Drawing.Size(50, 15);
-            this.btnChkAll.TabIndex = 92;
-            this.btnChkAll.Text = "Check All";
-            this.toolTip1.SetToolTip(this.btnChkAll, "Checks all bands for calibration.");
-            this.btnChkAll.UseVisualStyleBackColor = false;
-            this.btnChkAll.Click += new System.EventHandler(this.btnChkAll_Click);
-            // 
-            // btnClrAll
-            // 
-            this.btnClrAll.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.btnClrAll.BackColor = System.Drawing.SystemColors.Control;
-            this.btnClrAll.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.btnClrAll.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnClrAll.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.btnClrAll.Location = new System.Drawing.Point(145, 79);
-            this.btnClrAll.Name = "btnClrAll";
-            this.btnClrAll.Size = new System.Drawing.Size(50, 15);
-            this.btnClrAll.TabIndex = 91;
-            this.btnClrAll.Text = "Clear All";
-            this.toolTip1.SetToolTip(this.btnClrAll, "Un-Checks all bands for calibration.");
-            this.btnClrAll.UseVisualStyleBackColor = false;
-            this.btnClrAll.Click += new System.EventHandler(this.btnClrAll_Click);
-            // 
-            // chk10
-            // 
-            this.chk10.AutoSize = true;
-            this.chk10.BackColor = System.Drawing.SystemColors.Control;
-            this.chk10.Checked = true;
-            this.chk10.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chk10.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chk10.ForeColor = System.Drawing.Color.Navy;
-            this.chk10.Location = new System.Drawing.Point(146, 60);
-            this.chk10.Name = "chk10";
-            this.chk10.Size = new System.Drawing.Size(38, 17);
-            this.chk10.TabIndex = 90;
-            this.chk10.Text = "10";
-            this.toolTip1.SetToolTip(this.chk10, "Select to enable calibration on this band.");
-            this.chk10.UseVisualStyleBackColor = false;
-            // 
-            // chk30
-            // 
-            this.chk30.AutoSize = true;
-            this.chk30.BackColor = System.Drawing.SystemColors.Control;
-            this.chk30.Checked = true;
-            this.chk30.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chk30.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chk30.ForeColor = System.Drawing.Color.Navy;
-            this.chk30.Location = new System.Drawing.Point(146, 45);
-            this.chk30.Name = "chk30";
-            this.chk30.Size = new System.Drawing.Size(38, 17);
-            this.chk30.TabIndex = 89;
-            this.chk30.Text = "30";
-            this.toolTip1.SetToolTip(this.chk30, "Select to enable calibration on this band.");
-            this.chk30.UseVisualStyleBackColor = false;
-            // 
-            // chk12
-            // 
-            this.chk12.AutoSize = true;
-            this.chk12.BackColor = System.Drawing.SystemColors.Control;
-            this.chk12.Checked = true;
-            this.chk12.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chk12.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chk12.ForeColor = System.Drawing.Color.Navy;
-            this.chk12.Location = new System.Drawing.Point(101, 60);
-            this.chk12.Name = "chk12";
-            this.chk12.Size = new System.Drawing.Size(38, 17);
-            this.chk12.TabIndex = 88;
-            this.chk12.Text = "12";
-            this.toolTip1.SetToolTip(this.chk12, "Select to enable calibration on this band.");
-            this.chk12.UseVisualStyleBackColor = false;
-            // 
-            // chk40
-            // 
-            this.chk40.AutoSize = true;
-            this.chk40.BackColor = System.Drawing.SystemColors.Control;
-            this.chk40.Checked = true;
-            this.chk40.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chk40.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chk40.ForeColor = System.Drawing.Color.Navy;
-            this.chk40.Location = new System.Drawing.Point(101, 45);
-            this.chk40.Name = "chk40";
-            this.chk40.Size = new System.Drawing.Size(38, 17);
-            this.chk40.TabIndex = 87;
-            this.chk40.Text = "40";
-            this.toolTip1.SetToolTip(this.chk40, "Select to enable calibration on this band.");
-            this.chk40.UseVisualStyleBackColor = false;
-            // 
-            // chk15
-            // 
-            this.chk15.AutoSize = true;
-            this.chk15.BackColor = System.Drawing.SystemColors.Control;
-            this.chk15.Checked = true;
-            this.chk15.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chk15.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chk15.ForeColor = System.Drawing.Color.Navy;
-            this.chk15.Location = new System.Drawing.Point(56, 60);
-            this.chk15.Name = "chk15";
-            this.chk15.Size = new System.Drawing.Size(38, 17);
-            this.chk15.TabIndex = 86;
-            this.chk15.Text = "15";
-            this.toolTip1.SetToolTip(this.chk15, "Select to enable calibration on this band.");
-            this.chk15.UseVisualStyleBackColor = false;
-            // 
-            // chk17
-            // 
-            this.chk17.AutoSize = true;
-            this.chk17.BackColor = System.Drawing.SystemColors.Control;
-            this.chk17.Checked = true;
-            this.chk17.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chk17.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chk17.ForeColor = System.Drawing.Color.Navy;
-            this.chk17.Location = new System.Drawing.Point(11, 60);
-            this.chk17.Name = "chk17";
-            this.chk17.Size = new System.Drawing.Size(38, 17);
-            this.chk17.TabIndex = 84;
-            this.chk17.Text = "17";
-            this.toolTip1.SetToolTip(this.chk17, "Select to enable calibration on this band.");
-            this.chk17.UseVisualStyleBackColor = false;
-            // 
-            // chk80
-            // 
-            this.chk80.AutoSize = true;
-            this.chk80.BackColor = System.Drawing.SystemColors.Control;
-            this.chk80.Checked = true;
-            this.chk80.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chk80.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chk80.ForeColor = System.Drawing.Color.Navy;
-            this.chk80.Location = new System.Drawing.Point(56, 45);
-            this.chk80.Name = "chk80";
-            this.chk80.Size = new System.Drawing.Size(38, 17);
-            this.chk80.TabIndex = 83;
-            this.chk80.Text = "80";
-            this.toolTip1.SetToolTip(this.chk80, "Select to enable calibration on this band.");
-            this.chk80.UseVisualStyleBackColor = false;
-            // 
-            // chk20
-            // 
-            this.chk20.AutoSize = true;
-            this.chk20.BackColor = System.Drawing.SystemColors.Control;
-            this.chk20.Checked = true;
-            this.chk20.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chk20.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chk20.ForeColor = System.Drawing.Color.Navy;
-            this.chk20.Location = new System.Drawing.Point(186, 45);
-            this.chk20.Name = "chk20";
-            this.chk20.Size = new System.Drawing.Size(38, 17);
-            this.chk20.TabIndex = 82;
-            this.chk20.Text = "20";
-            this.toolTip1.SetToolTip(this.chk20, "Select to enable calibration on this band.");
-            this.chk20.UseVisualStyleBackColor = false;
-            // 
-            // chk160
-            // 
-            this.chk160.AutoSize = true;
-            this.chk160.BackColor = System.Drawing.SystemColors.Control;
-            this.chk160.Checked = true;
-            this.chk160.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chk160.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chk160.ForeColor = System.Drawing.Color.Navy;
-            this.chk160.Location = new System.Drawing.Point(11, 45);
-            this.chk160.Name = "chk160";
-            this.chk160.Size = new System.Drawing.Size(44, 17);
-            this.chk160.TabIndex = 81;
-            this.chk160.Text = "160";
-            this.toolTip1.SetToolTip(this.chk160, "Select to enable calibration on this band.");
-            this.chk160.UseVisualStyleBackColor = false;
-            // 
-            // label68
-            // 
-            this.label68.AutoSize = true;
-            this.label68.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label68.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.label68.Location = new System.Drawing.Point(122, 30);
-            this.label68.Name = "label68";
-            this.label68.Size = new System.Drawing.Size(27, 12);
-            this.label68.TabIndex = 80;
-            this.label68.Text = "ALC";
-            this.toolTip1.SetToolTip(this.label68, "ALC voltage from amp.");
-            // 
-            // txtALC
-            // 
-            this.txtALC.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtALC.ForeColor = System.Drawing.SystemColors.WindowText;
-            this.txtALC.Location = new System.Drawing.Point(117, 10);
-            this.txtALC.Name = "txtALC";
-            this.txtALC.Size = new System.Drawing.Size(33, 20);
-            this.txtALC.TabIndex = 79;
-            this.txtALC.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.toolTip1.SetToolTip(this.txtALC, "Amplifier ALC volts: Used for calibration only.");
-            // 
-            // btnSet
-            // 
-            this.btnSet.AutoSize = true;
-            this.btnSet.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.btnSet.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSet.ForeColor = System.Drawing.Color.Maroon;
-            this.btnSet.Location = new System.Drawing.Point(205, 10);
-            this.btnSet.Name = "btnSet";
-            this.btnSet.Size = new System.Drawing.Size(32, 22);
-            this.btnSet.TabIndex = 78;
-            this.btnSet.Text = "Set";
-            this.toolTip1.SetToolTip(this.btnSet, "Press to save calibration values for this band.");
-            this.btnSet.UseVisualStyleBackColor = true;
-            this.btnSet.Click += new System.EventHandler(this.btnSet_Click);
-            // 
-            // btnCal
-            // 
-            this.btnCal.AutoSize = true;
-            this.btnCal.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.btnCal.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnCal.ForeColor = System.Drawing.Color.Maroon;
-            this.btnCal.Location = new System.Drawing.Point(160, 10);
-            this.btnCal.Name = "btnCal";
-            this.btnCal.Size = new System.Drawing.Size(32, 22);
-            this.btnCal.TabIndex = 77;
-            this.btnCal.Text = "Cal";
-            this.toolTip1.SetToolTip(this.btnCal, "Press to start calibration routine: See documentation for procedure.");
-            this.btnCal.UseVisualStyleBackColor = true;
-            this.btnCal.Click += new System.EventHandler(this.btnCal_Click);
-            // 
-            // txtDrive
-            // 
-            this.txtDrive.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtDrive.ForeColor = System.Drawing.SystemColors.WindowText;
-            this.txtDrive.Location = new System.Drawing.Point(75, 10);
-            this.txtDrive.Name = "txtDrive";
-            this.txtDrive.Size = new System.Drawing.Size(33, 20);
-            this.txtDrive.TabIndex = 76;
-            this.txtDrive.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.toolTip1.SetToolTip(this.txtDrive, "PowerSDR drive level.");
-            // 
-            // label64
-            // 
-            this.label64.AutoSize = true;
-            this.label64.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label64.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.label64.Location = new System.Drawing.Point(78, 30);
-            this.label64.Name = "label64";
-            this.label64.Size = new System.Drawing.Size(33, 12);
-            this.label64.TabIndex = 31;
-            this.label64.Text = "Drive";
-            // 
-            // chkAlcEnab
-            // 
-            this.chkAlcEnab.AutoSize = true;
-            this.chkAlcEnab.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chkAlcEnab.ForeColor = System.Drawing.Color.Navy;
-            this.chkAlcEnab.Location = new System.Drawing.Point(10, 20);
-            this.chkAlcEnab.Name = "chkAlcEnab";
-            this.chkAlcEnab.Size = new System.Drawing.Size(59, 17);
-            this.chkAlcEnab.TabIndex = 35;
-            this.chkAlcEnab.Text = "Enable";
-            this.toolTip1.SetToolTip(this.chkAlcEnab, "Select to enable ALC monitoring");
-            this.chkAlcEnab.UseVisualStyleBackColor = true;
-            this.chkAlcEnab.CheckedChanged += new System.EventHandler(this.chkAlcEnab_CheckedChanged);
             // 
             // grpDog
             // 
@@ -10964,6 +10705,17 @@ namespace DataDecoder
             this.toolTip1.SetToolTip(this.numSplit, "Press the up/down arrows to select offset (kHz) for vfo B");
             this.numSplit.ValueChanged += new System.EventHandler(this.numSplit_ValueChanged);
             // 
+            // txtAlcInd
+            // 
+            this.txtAlcInd.BackColor = System.Drawing.SystemColors.Control;
+            this.txtAlcInd.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtAlcInd.Font = new System.Drawing.Font("Microsoft Sans Serif", 4.25F);
+            this.txtAlcInd.Location = new System.Drawing.Point(413, 5);
+            this.txtAlcInd.Name = "txtAlcInd";
+            this.txtAlcInd.Size = new System.Drawing.Size(14, 14);
+            this.txtAlcInd.TabIndex = 80;
+            this.toolTip1.SetToolTip(this.txtAlcInd, "Status Ind for OPer/Stby");
+            // 
             // LogPort
             // 
             this.LogPort.ReadTimeout = 500;
@@ -11143,7 +10895,7 @@ namespace DataDecoder
             this.aboutToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(427, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(432, 24);
             this.menuStrip1.TabIndex = 70;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -11167,11 +10919,18 @@ namespace DataDecoder
             // optionsToolStripMenuItem
             // 
             this.optionsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.tubeAmpsToolStripMenuItem,
-            this.autoDriveToolStripMenuItem});
+            this.autoDriveToolStripMenuItem,
+            this.tubeAmpsToolStripMenuItem});
             this.optionsToolStripMenuItem.Name = "optionsToolStripMenuItem";
             this.optionsToolStripMenuItem.Size = new System.Drawing.Size(56, 20);
             this.optionsToolStripMenuItem.Text = "Options";
+            // 
+            // autoDriveToolStripMenuItem
+            // 
+            this.autoDriveToolStripMenuItem.Name = "autoDriveToolStripMenuItem";
+            this.autoDriveToolStripMenuItem.Size = new System.Drawing.Size(138, 22);
+            this.autoDriveToolStripMenuItem.Text = "Auto Drive";
+            this.autoDriveToolStripMenuItem.Click += new System.EventHandler(this.autoDriveToolStripMenuItem_Click);
             // 
             // tubeAmpsToolStripMenuItem
             // 
@@ -11180,13 +10939,13 @@ namespace DataDecoder
             this.alpToolStripMenuItem,
             this.alpha9500ToolStripMenuItem});
             this.tubeAmpsToolStripMenuItem.Name = "tubeAmpsToolStripMenuItem";
-            this.tubeAmpsToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.tubeAmpsToolStripMenuItem.Size = new System.Drawing.Size(138, 22);
             this.tubeAmpsToolStripMenuItem.Text = "Tube Amps";
             // 
             // aCOM2000AToolStripMenuItem
             // 
             this.aCOM2000AToolStripMenuItem.Name = "aCOM2000AToolStripMenuItem";
-            this.aCOM2000AToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.aCOM2000AToolStripMenuItem.Size = new System.Drawing.Size(142, 22);
             this.aCOM2000AToolStripMenuItem.Text = "Acom2000A";
             this.aCOM2000AToolStripMenuItem.ToolTipText = "Click to select this amp.";
             this.aCOM2000AToolStripMenuItem.Click += new System.EventHandler(this.ACOM2K_Click);
@@ -11194,7 +10953,7 @@ namespace DataDecoder
             // alpToolStripMenuItem
             // 
             this.alpToolStripMenuItem.Name = "alpToolStripMenuItem";
-            this.alpToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.alpToolStripMenuItem.Size = new System.Drawing.Size(142, 22);
             this.alpToolStripMenuItem.Text = "Alpha 87A";
             this.alpToolStripMenuItem.ToolTipText = "Click to select this amp.";
             this.alpToolStripMenuItem.Click += new System.EventHandler(this.Alpha87_Click);
@@ -11202,7 +10961,7 @@ namespace DataDecoder
             // alpha9500ToolStripMenuItem
             // 
             this.alpha9500ToolStripMenuItem.Name = "alpha9500ToolStripMenuItem";
-            this.alpha9500ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.alpha9500ToolStripMenuItem.Size = new System.Drawing.Size(142, 22);
             this.alpha9500ToolStripMenuItem.Text = "Alpha 9500";
             this.alpha9500ToolStripMenuItem.ToolTipText = "Click to select this amp.";
             this.alpha9500ToolStripMenuItem.Click += new System.EventHandler(this.Alpha95_Click);
@@ -11308,7 +11067,7 @@ namespace DataDecoder
             this.StatusBar});
             this.statusStrip1.Location = new System.Drawing.Point(0, 389);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(427, 22);
+            this.statusStrip1.Size = new System.Drawing.Size(432, 22);
             this.statusStrip1.TabIndex = 71;
             this.statusStrip1.Text = "statusStrip1";
             // 
@@ -11462,49 +11221,14 @@ namespace DataDecoder
             this.RepeatPort.WriteTimeout = 500;
             this.RepeatPort.DataReceived += new System.IO.Ports.SerialDataReceivedEventHandler(this.RepeatPort_DataReceived);
             // 
-            // grpPTT
-            // 
-            this.grpPTT.Controls.Add(this.btnByp);
-            this.grpPTT.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.grpPTT.ForeColor = System.Drawing.Color.Blue;
-            this.grpPTT.Location = new System.Drawing.Point(7, 106);
-            this.grpPTT.Name = "grpPTT";
-            this.grpPTT.Size = new System.Drawing.Size(97, 57);
-            this.grpPTT.TabIndex = 111;
-            this.grpPTT.TabStop = false;
-            this.grpPTT.Text = "PTT";
-            // 
-            // btnByp
-            // 
-            this.btnByp.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.btnByp.BackColor = System.Drawing.SystemColors.ButtonFace;
-            this.btnByp.FlatAppearance.BorderColor = System.Drawing.Color.Black;
-            this.btnByp.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnByp.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnByp.ForeColor = System.Drawing.Color.Navy;
-            this.btnByp.Location = new System.Drawing.Point(15, 22);
-            this.btnByp.Name = "btnByp";
-            this.btnByp.Size = new System.Drawing.Size(68, 23);
-            this.btnByp.TabIndex = 69;
-            this.btnByp.Text = "Opr/Stby";
-            this.toolTip1.SetToolTip(this.btnByp, "Press to toggle PTT on/off");
-            this.btnByp.UseVisualStyleBackColor = false;
-            this.btnByp.Click += new System.EventHandler(this.btnByp_Click);
-            // 
-            // autoDriveToolStripMenuItem
-            // 
-            this.autoDriveToolStripMenuItem.Name = "autoDriveToolStripMenuItem";
-            this.autoDriveToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.autoDriveToolStripMenuItem.Text = "Auto Drive";
-            this.autoDriveToolStripMenuItem.Click += new System.EventHandler(this.autoDriveToolStripMenuItem_Click);
-            // 
             // Setup
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
-            this.ClientSize = new System.Drawing.Size(427, 411);
+            this.ClientSize = new System.Drawing.Size(432, 411);
             this.ContextMenuStrip = this.contextMenuStrip1;
+            this.Controls.Add(this.txtAlcInd);
             this.Controls.Add(this.btnSplit);
             this.Controls.Add(this.numSplit);
             this.Controls.Add(this.statusStrip1);
@@ -11575,6 +11299,7 @@ namespace DataDecoder
             this.grpLP.ResumeLayout(false);
             this.grpLP.PerformLayout();
             this.tabAmp.ResumeLayout(false);
+            this.grpPTT.ResumeLayout(false);
             this.groupBox13.ResumeLayout(false);
             this.groupBox13.PerformLayout();
             this.grpPro.ResumeLayout(false);
@@ -11622,8 +11347,6 @@ namespace DataDecoder
             this.grpPortA.PerformLayout();
             this.tabSetup.ResumeLayout(false);
             this.tabSetup.PerformLayout();
-            this.grpALC.ResumeLayout(false);
-            this.grpALC.PerformLayout();
             this.grpDog.ResumeLayout(false);
             this.grpDog.PerformLayout();
             this.groupBox10.ResumeLayout(false);
@@ -11640,7 +11363,6 @@ namespace DataDecoder
             this.menuStrip1.PerformLayout();
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
-            this.grpPTT.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -11967,26 +11689,6 @@ namespace DataDecoder
         private System.Windows.Forms.TextBox txtTimer;
         private System.Windows.Forms.Label label67;
         private System.Windows.Forms.GroupBox grpDog;
-        private System.Windows.Forms.GroupBox grpALC;
-        private System.Windows.Forms.Button btnSet;
-        private System.Windows.Forms.Button btnCal;
-        private System.Windows.Forms.TextBox txtDrive;
-        private System.Windows.Forms.Label label64;
-        public System.Windows.Forms.CheckBox chkAlcEnab;
-        private System.Windows.Forms.TextBox txtALC;
-        private System.Windows.Forms.Label label68;
-        public System.Windows.Forms.CheckBox chk20;
-        public System.Windows.Forms.CheckBox chk160;
-        private System.Windows.Forms.Button btnChkAll;
-        private System.Windows.Forms.Button btnClrAll;
-        public System.Windows.Forms.CheckBox chk10;
-        public System.Windows.Forms.CheckBox chk30;
-        public System.Windows.Forms.CheckBox chk12;
-        public System.Windows.Forms.CheckBox chk40;
-        public System.Windows.Forms.CheckBox chk15;
-        public System.Windows.Forms.CheckBox chk17;
-        public System.Windows.Forms.CheckBox chk80;
-        public System.Windows.Forms.CheckBox chk6;
         public System.Windows.Forms.Label lblSP;
         private System.Windows.Forms.CheckBox chkModeChg;
         private System.Windows.Forms.CheckBox chkOnTop;
@@ -12477,6 +12179,9 @@ namespace DataDecoder
         private GroupBox grpPTT;
         private Button btnByp;
         private ToolStripMenuItem autoDriveToolStripMenuItem;
+        private Label label154;
+        private TextBox txtAlcInd;
+        private CheckBox chk6Amp;
 
     }
 }

@@ -94,7 +94,7 @@ namespace DataDecoder
         int LPTnum = 0;         // decimal number of selected LPT port
         int iSleep = 0;         // Thread.Sleep var
         int StepCtr = 0;        // reps counter
-        int reps = 7;           // how many times to test the SteppIR port
+        int reps = 5;           // how many times to test the SteppIR port
         double pollInt = 0;     // CAT port interval timer uses txtInv text box
         double temp = 26.4;
         string fileName = Application.StartupPath + "\\BandData.xml";
@@ -107,7 +107,6 @@ namespace DataDecoder
         string band = "";
         public static string ver = Application.ProductVersion;
         public static int errCtr = 0;
-        System.Timers.Timer alcTimer;
         System.Timers.Timer AlphaTimer;
         System.Timers.Timer AtTimer;
         System.Timers.Timer blinkTimer; 
@@ -556,19 +555,22 @@ namespace DataDecoder
             chkSlaveRTS.Checked = set.slaveRTS;
             chkPwDTR.Checked = set.pwDTR;
             chkPwRTS.Checked = set.pwRTS;
+            chk6Amp.Checked = set.AmpOn6;
 
             stsTX = set.stsTX;
             stsOper = set.stsOper;
             if (stsOper) 
             {
-                btnByp.BackColor = Color.LimeGreen;
-                btnByp.Text = "Operate";
+                btnByp.BackColor = Color.Lime;
+                btnByp.Text = "OPER";
+                txtAlcInd.BackColor = Color.Lime;
             }
             else
             {
                 btnByp.BackColor = Color.Yellow;
                 WriteToPort("ZZOF000;", 50);  // turn TX off
-                btnByp.Text = "Stand By";
+                btnByp.Text = "STBY";
+                txtAlcInd.BackColor = Color.Yellow;
             }
 
             switch (set.theAmp)
@@ -583,7 +585,6 @@ namespace DataDecoder
 //            FWSetup();  // setup the FW ports
             X2SetUp();  // setup the X2 Matrix
             WN2SetUp(); // setup the WN2
-            AlcSetUp(); // setup the ALC
             PMSetup();  // setup the Power Master
 
             if (chkLPenab.Checked) lpTimer.Enabled = true;
@@ -718,9 +719,14 @@ namespace DataDecoder
                 {
                     this.Text = text;
                     mini.Text = text;
-                    if(!lblAnt.Visible) this.StatusBar.Text = text;
-                    else this.StatusBar.Text = text + 
+                    if (!lblAnt.Visible) this.StatusBar.Text = text;
+                    else
+                    {
+                        this.StatusBar.Text = text +
                         "               * * * Transmit Inhibited! * * *";
+                        mini.Text = text + 
+                        "     *** Transmit Inhibited! ***";
+                    }
                 }
             }
         }
@@ -880,6 +886,14 @@ namespace DataDecoder
         #endregion Delegates
 
         #region Form Events
+
+        // The NoAmpOn6 check box has changed
+        private void chk6Amp_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chk6Amp.Checked) set.AmpOn6 = true;
+            else set.AmpOn6 = false;
+            set.Save();
+        }
 
         // Slave radio mode has changed.
         private void chkModeChg_CheckedChanged(object sender, EventArgs e)
@@ -1245,7 +1259,6 @@ namespace DataDecoder
                 logTimer.Stop();
                 StepTimer.Stop();
                 tempTimer.Stop();
-                alcTimer.Stop();
                 WatchDog.Stop();
                 WN2Timer.Stop();
                 AlphaTimer.Stop();
@@ -3196,449 +3209,9 @@ namespace DataDecoder
 
         #endregion ACOM
 
-        #region ALC
-
-        Double dAlc = 0;    // ALC cal std.
-        int iDrive = 0;     // cal drive watts
-
-        #region ALC Delegates
-
-        // Write ALC reading to txt box
-        delegate void SetALCCallback(string text);
-        private void SetALC(string text)
-        {
-            if (this.txtALC.InvokeRequired)
-            {
-                SetALCCallback d = new SetALCCallback(SetALC);
-                this.Invoke(d, new object[] { text });
-            }
-            else
-                txtALC.Text = text;
-        }
-        // Write Drive reading to txt box
-        delegate void SetDriveCallback(string text);
-        private void SetDrive(string text)
-        {
-            if (this.txtDrive.InvokeRequired)
-            {
-                SetDriveCallback d = new SetDriveCallback(SetDrive);
-                this.Invoke(d, new object[] { text });
-            }
-            else
-                txtDrive.Text = text;
-        }
-        #endregion ALC Delegates
-
-        #region ALC Events
-
-        private void alcTimer_Elapsed(object sender, EventArgs e)
-        {
-            if (closing) { alcTimer.Close(); return; }
-            double eDong;
-            if (xOn == "1" && chkAlcEnab.Checked)
-            {
-                eDong = ReadALC();  // get dong volts
-                if (eDong > dAlc)
-                {
-                    double alc = (eDong / dAlc) - 1;
-
-                         if (alc > .4) iDrive -= 5;
-                    else if (alc > .3) iDrive -= 4;
-                    else if (alc > .2) iDrive -= 3;
-                    else if (alc > .1) iDrive -= 2;
-                    else if (alc < .1) iDrive -= 1;
-
-                    WriteToPort("ZZPC" + iDrive.ToString().PadLeft(3, '0') + ";", iSleep);
-                }
-            }
-        }
-        // the Calibrate button was pressed
-        private void btnCal_Click(object sender, EventArgs e)
-        {
-            DialogResult result;
-            result = MessageBox.Show(
-            "You are about to initiate the ALC calibration routine for your\r" +
-            "linear amplifier. If this isn't what you intended exit now.\r\r" +
-            "Please check that the following preparations are observed.\r\r" +
-            "- The amplifier must be on and not in standby mode. \r" +
-            "- Make sure a antenna or dummy load is connected to the amp.\r" +
-            "This procedure puts the radio into transmit mode. Be observant\r\r" +
-            "and prepared to act in case of a hang-up or unusual operation.\r" +
-            "Pressing the Tune button on the PowerSDR Console will un-key the radio.\r\r" +
-            "Press the OK button to start the calibration procedure.",
-            "ALC Calibrate Procedure",
-            MessageBoxButtons.OKCancel, MessageBoxIcon.Exclamation);
-
-            if (result != DialogResult.OK) return;
-
-            int calSleep = 300;
-            string band;
-            string freq;
-            WriteToPort("ZZSP0;", calSleep); // make sure radio not split
-
-            // Cal 160
-            if (chk160.Checked)
-            {
-                band = "160"; freq = "00001850000";
-                if (CalSetup(band, freq, calSleep))
-                {   // Set freq and send message
-                    if (doCal())        // run cal routine
-                    { set.Alc160 = txtALC.Text; set.Drive160 = txtDrive.Text; set.Save(); }
-                    else
-                    { if (!CalFailed(band)) goto Quit; }
-                }
-                else goto Quit;
-            }
-            // Cal 80
-            if (chk80.Checked)
-            {
-                band = "80"; freq = "00003550000";
-                if (CalSetup(band, freq, calSleep))
-                {   // Set freq and send message
-                    if (doCal())        // run cal routine
-                    { set.Alc80 = txtALC.Text; set.Drive80 = txtDrive.Text; set.Save(); }
-                    else
-                    { if (!CalFailed(band)) goto Quit; }
-                }
-                else goto Quit;
-            }
-            // Cal 40
-            if (chk40.Checked)
-            {
-                band = "40"; freq = "00007150000";
-                if (CalSetup(band, freq, calSleep))
-                {   // Set freq and send message
-                    if (doCal())        // run cal routine
-                    { set.Alc40 = txtALC.Text; set.Drive40 = txtDrive.Text; set.Save(); }
-                    else
-                    { if (!CalFailed(band)) goto Quit; }
-                }
-                else goto Quit;
-            }
-            // Cal 30
-            if (chk30.Checked)
-            {
-                band = "30"; freq = "00010125000";
-                if (CalSetup(band, freq, calSleep))
-                {   // Set freq and send message
-                    if (doCal())        // run cal routine
-                    { set.Alc30 = txtALC.Text; set.Drive30 = txtDrive.Text; set.Save(); }
-                    else
-                    { if (!CalFailed(band)) goto Quit; }
-                }
-                else goto Quit;
-            }
-            // Cal 20
-            if (chk20.Checked)
-            {
-                band = "20"; freq = "00014100000";
-                if (CalSetup(band, freq, calSleep))
-                {   // Set freq and send message
-                    if (doCal())        // run cal routine
-                    { set.Alc20 = txtALC.Text; set.Drive20 = txtDrive.Text; set.Save(); }
-                    else
-                    { if (!CalFailed(band)) goto Quit; }
-                }
-                else goto Quit;
-            }
-            // Cal 17
-            if (chk17.Checked)
-            {
-                band = "17"; freq = "00018075000";
-                if (CalSetup(band, freq, calSleep))
-                {   // Set freq and send message
-                    if (doCal())        // run cal routine
-                    { set.Alc17 = txtALC.Text; set.Drive17 = txtDrive.Text; set.Save(); }
-                    else
-                    { if (!CalFailed(band)) goto Quit; }
-                }
-                else goto Quit;
-            }
-            // Cal 15
-            if (chk15.Checked)
-            {
-                band = "15"; freq = "00021200000";
-                if (CalSetup(band, freq, calSleep))
-                {   // Set freq and send message
-                    if (doCal())        // run cal routine
-                    { set.Alc15 = txtALC.Text; set.Drive15 = txtDrive.Text; set.Save(); }
-                    else
-                    { if (!CalFailed(band)) goto Quit; }
-                }
-                else goto Quit;
-            }
-            // Cal 12
-            if (chk12.Checked)
-            {
-                band = "12"; freq = "00024900000";
-                if (CalSetup(band, freq, calSleep))
-                {   // Set freq and send message
-                    if (doCal())        // run cal routine
-                    { set.Alc12 = txtALC.Text; set.Drive12 = txtDrive.Text; set.Save(); }
-                    else
-                    { if (!CalFailed(band)) goto Quit; }
-                }
-                else goto Quit;
-            }
-            // Cal 10
-            if (chk10.Checked)
-            {
-                band = "10"; freq = "00029000000";
-                if (CalSetup(band, freq, calSleep))
-                {   // Set freq and send message
-                    if (doCal())        // run cal routine
-                    { set.Alc10 = txtALC.Text; set.Drive10 = txtDrive.Text; set.Save(); }
-                    else
-                    { if (!CalFailed(band)) goto Quit; }
-                }
-                else goto Quit;
-            }
-            // Cal 6
-            if (chk6.Checked)
-            {
-                band = "6"; freq = "00051250000";
-                if (CalSetup(band, freq, calSleep))
-                {   // Set freq and send message
-                    if (doCal())        // run cal routine
-                    { set.Alc6 = txtALC.Text; set.Drive6 = txtDrive.Text; set.Save(); }
-                    else
-                    { if (!CalFailed(band)) goto Quit; }
-                }
-                else goto Quit;
-            }
-
-            // Print calibration report
-            string msg = "";
-            if (chk160.Checked) msg +=
-            string.Format("160 Meters:\tALC= {0:f2}", Convert.ToDouble(set.Alc160)) 
-            + "\tDrive= " + set.Drive160 + "\t\r";
-
-            if (chk80.Checked) msg +=
-            string.Format(" 80 Meters:\tALC= {0:f2}", Convert.ToDouble(set.Alc80))
-            + "\tDrive= " + set.Drive80 + "\t\r";
-
-            if (chk40.Checked) msg +=
-            string.Format(" 40 Meters:\tALC= {0:f2}", Convert.ToDouble(set.Alc80))
-            + "\tDrive= " + set.Drive80 + "\t\r";
-
-            if (chk30.Checked) msg +=
-            string.Format(" 30 Meters:\tALC= {0:f2}", Convert.ToDouble(set.Alc30))
-            + "\tDrive= " + set.Drive30 + "\t\r";
-
-            if (chk20.Checked) msg +=
-            string.Format(" 20 Meters:\tALC= {0:f2}", Convert.ToDouble(set.Alc20))
-            + "\tDrive= " + set.Drive20 + "\t\r";
-
-            if (chk17.Checked) msg +=
-            string.Format(" 17 Meters:\tALC= {0:f2}", Convert.ToDouble(set.Alc17))
-            + "\tDrive= " + set.Drive17 + "\t\r";
-
-            if (chk15.Checked) msg +=
-            string.Format(" 15 Meters:\tALC= {0:f2}", Convert.ToDouble(set.Alc15))
-            + "\tDrive= " + set.Drive15 + "\t\r";
-
-            if (chk12.Checked) msg +=
-            string.Format(" 12 Meters:\tALC= {0:f2}", Convert.ToDouble(set.Alc12))
-            + "\tDrive= " + set.Drive12 + "\t\r";
-
-            if (chk10.Checked) msg +=
-            string.Format(" 10 Meters:\tALC= {0:f2}", Convert.ToDouble(set.Alc10))
-            + "\tDrive= " + set.Drive10 + "\t\r";
-
-            if (chk6.Checked) msg +=
-            string.Format(" 6 Meters:\tALC= {0:f2}", Convert.ToDouble(set.Alc6))
-            + "\tDrive= " + set.Drive6 + "\t\r";
-           
-            MessageBox.Show(msg,"ALC Calibration Report",
-            MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-
-        Quit: return;
-        }
-
-        private bool CalSetup(string band, string freq, int sleep)
-        {
-            WriteToPort("ZZFA" + freq + ";", sleep); // set freq
-            DialogResult result;
-            result = MessageBox.Show(
-                "Please verify your amplifier is set to "+ band + " meters" + 
-                "\rand the controls properly adjusted for this band.", 
-                "ALC Calibrate Procedure", MessageBoxButtons.OKCancel);
-            if (result == DialogResult.OK) return true;
-            return false;
-        }        
-
-        private bool CalFailed(string band)
-        {
-            DialogResult result;
-            result = MessageBox.Show(
-              "Calibration for " + band + " meters failed.\r\r" +
-              "Please make sure the amp is powered up, alc line\r" +
-              "is connected, not in stand-by then try again",
-              "Calibration Failed", MessageBoxButtons.OKCancel, 
-              MessageBoxIcon.Error);
-            if (result == DialogResult.OK) return true;
-            return false;
-
-        }        
-        // the Set button was pressed
-        private void btnSet_Click(object sender, EventArgs e)
-        {
-            if (band == "160")
-            { set.Drive160 = txtDrive.Text; set.Alc160 = txtALC.Text; }
-            else if (band == "080")
-            { set.Drive80 = txtDrive.Text; set.Alc80 = txtALC.Text; }
-            else if (band == "040")
-            { set.Drive40 = txtDrive.Text; set.Alc40 = txtALC.Text; }
-            else if (band == "030")
-            { set.Drive30 = txtDrive.Text; set.Alc30 = txtALC.Text; }
-            else if (band == "020")
-            { set.Drive20 = txtDrive.Text; set.Alc20 = txtALC.Text; }
-            else if (band == "017")
-            { set.Drive17 = txtDrive.Text; set.Alc17 = txtALC.Text; }
-            else if (band == "015")
-            { set.Drive15 = txtDrive.Text; set.Alc15 = txtALC.Text; }
-            else if (band == "012")
-            { set.Drive12 = txtDrive.Text; set.Alc12 = txtALC.Text; }
-            else if (band == "010")
-            { set.Drive10 = txtDrive.Text; set.Alc10 = txtALC.Text; }
-            else if (band == "006")
-            { set.Drive6 = txtDrive.Text; set.Alc6 = txtALC.Text; }
-            else
-            { MessageBox.Show("The save settings operation failed."); return; }
-            set.Save();
-            MessageBox.Show("The settings for " + band.TrimStart('0') + " meters were saved");
-        }
-        // the Enable ALC check box was changed
-        private void chkAlcEnab_CheckedChanged(object sender, EventArgs e)
-        {
-            if (chkAlcEnab.Checked)
-            {
-                set.AlcEnab = true; 
-                //dAlc = Convert.ToDouble(txtALC.Text);
-                //iDrive = Convert.ToInt16(txtDrive.Text);
-            }
-
-            else
-            {
-                alcTimer.Enabled = false;
-                set.AlcEnab = false;
-            }
-            
-            set.Save();
-        }
-        // the Check All button was pressed
-        private void btnChkAll_Click(object sender, EventArgs e)
-        {
-            chk160.Checked = true; chk80.Checked = true; chk40.Checked = true;
-            chk30.Checked = true; chk20.Checked = true; chk17.Checked = true; 
-            chk15.Checked = true; chk12.Checked = true;
-            chk10.Checked = true; chk6.Checked = true;
-        }
-        // the Clear All button was pressed
-        private void btnClrAll_Click(object sender, EventArgs e)
-        {
-            chk160.Checked = false; chk80.Checked = false; chk40.Checked = false; 
-            chk30.Checked = false; chk20.Checked = false; chk17.Checked = false; 
-            chk15.Checked = false; chk12.Checked = false; chk10.Checked = false; 
-            chk6.Checked = false;
-        }
-
-        #endregion ALC Events
-
-        #region ALC Methods
-
-        // run the amp calibration
-        private bool doCal()
-        {
-            int drive = 0;
-            double level = 0, lastLevel = 0;
-            test = 0;   // part of test code
-            WriteToPort("ZZTO000;", iSleep); // set tune pwr level to 0
-            WriteToPort("ZZTU1;", iSleep); // key rig
-            // step the power up in 5 watt steps until the alc voltage
-            // curve starts to flatten out.
-            for (int i = 10; i < 100; i +=5)
-            {
-                test++;
-                WriteToPort("ZZTO" + drive.ToString().PadLeft(3, '0') + ";", iSleep);
-                level = DummyAmp();  // get the alc volts for this drive level
-                if (level > lastLevel + .75)
-                {
-                    drive += 5;
-                    lastLevel = level;
-                }
-                else break;
-                    
-                SetDrive(drive.ToString());                               
-                SetALC(string.Format("{0:f2}",level));
-            }
-            // Set the PSDR drive level
-            WriteToPort("ZZTU0;", iSleep); // un-key rig
-            WriteToPort("ZZPC" + drive.ToString().PadLeft(3, '0') + ";", iSleep);
-            if (level > 0) return true;
-            return false;
-        }
-        // Read the ALC dongle
-        private double ReadALC()
-        {
-            double eDong = 0;
-
-            return eDong;
-        }
-
-        // get the alc settings for the amp
-        int test = 0;   // Test code!
-        private double DummyAmp()
-        {
-            double emc = 0;
-            double [] e = new double[10]; 
-            // average readings over a 10 sample period.
-            Random r = new Random(test);    // Test code!
-            for (int i = 0; i < 10; i++)
-            {
-                e[i] = (double)r.NextDouble() + test; // Test code!
-                Console.WriteLine(e[i]); // Test code!
-            }
-            if (test == 5) // Test code!
-                {emc = 4.75;} // Test code!
-            else // Test code!
-                {emc = Average(e);}
-            Console.WriteLine(emc + " Average"); // Test code!
-            return emc;
-            
-        }
-        public static double Average(Array array)
-        {
-            double average = 0;
-            for (int i = 0; i < array.Length; i++)
-            {
-                average += (double)array.GetValue(i);
-            }
-            return average / array.Length;
-        }
-
-        #endregion ALC Methods
-
-        #region ALC Setup
-
-        private void AlcSetUp()
-        {
-            chkAlcEnab.Checked = set.AlcEnab;
-
-            // setup alc Read Timer for a 100 ms interrupt
-            alcTimer = new System.Timers.Timer();
-            alcTimer.Elapsed += new System.Timers.ElapsedEventHandler(alcTimer_Elapsed);
-            alcTimer.Interval = 100;      // 1000 = 1 second
-            alcTimer.Enabled = false;
-
-        }
-        #endregion ALC Setup
-
-        #endregion ALC
-        
         #region Alpha 87A
 
-          #region # Delegates #
+        #region # Delegates #
 
         // Write to Pwr button
         delegate void SetPwrCallback(string text);
@@ -4249,6 +3822,97 @@ namespace DataDecoder
 
         #endregion Alpha 9500
 
+        #region FlexWire
+
+          #region # Enums & Vars #
+
+        const int mAdr  = 0x40;  // Addr of Chip 1 ports 0/1
+        const int mAdr1 = 0x42;  // Addr of Chip 2 ports 0/1
+        const int cmd0 = 2;      // write to port 0
+        const int cmd1 = 3;      // write to port 1
+        const int su0 = 6;       // Setup for port 0
+        const int su1 = 7;       // Setup for port 1
+
+          #endregion Enums & Vars
+
+          #region # Events #
+
+        // the Data Signals Invert checkbox has changed
+        private void chkDSInvert_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chkDSInvert.Checked) set.DSInv = true;
+            else set.DSInv = false;
+            set.Save();
+        }
+        // the FlexWire checkbox has changed for the VHF+ matrix A
+        private void chkFWa_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chkFWa.Checked)
+            {
+                set.chkFWa = true; txtPortA.Enabled = false;
+            }
+            else
+            {
+                set.chkFWa = false; txtPortA.Enabled = true;
+            }
+            set.Save();
+        }
+        // the FlexWire checkbox has changed for the VHF+ matrix B
+        private void chkFWb_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chkFWb.Checked)
+            {
+                set.chkFWb = true; txtPortB.Enabled = false;
+            }
+            else
+            {
+                set.chkFWb = false; txtPortB.Enabled = true;
+            }
+            set.Save();
+        }
+        #endregion # Events #
+
+          #region # Methods #
+
+        // write to FlexWire port
+        void WriteFW(int adr, int cmd, int data, bool inv)
+        {
+            string ad = adr.ToString("X");  // convert to hex
+            if (adr < 16) ad = "0" + ad;    // add zero if needed
+            string cm = cmd.ToString("X");  // convert to hex
+            if (cmd < 16) cm = "0" + cm;    // add zero if needed
+            if (inv) data = 255 ^ data;     // invert data if inv = true
+            string val = data.ToString("X");  // convert to hex
+            if (data < 16) val = "0" + val;   // add zero if needed
+            // Send initialization string to 9555
+            string p0 = "0" + su0.ToString("X");
+            string p1 = "0" + su1.ToString("X");
+            if (cmd == cmd0)
+            { WriteToPort("ZZFY" + ad + p0 + "00;", 0); }
+            else if (cmd == cmd1)
+            { WriteToPort("ZZFY" + ad + p1 + "00;", 0); }
+            else
+            {
+                MessageBox.Show(
+                    ad + " is the wrong address for this board!\r\r" +
+                   "Must be 0x40 or 0x42 only!", "Address Error", 
+                   MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            }
+            WriteToPort("ZZFY" + ad + cm + val + ";", iSleep);
+        }
+        // FW Setup routine (depreciated)
+        void FWSetup()
+        {
+            WriteToPort("ZZFY400600;", iSleep);
+            WriteToPort("ZZFY400700;", iSleep);
+            WriteToPort("ZZFY420600;", iSleep);
+            WriteToPort("ZZFY420700;", iSleep);
+        }
+
+          #endregion Methods
+
+        #endregion FlexWire
+
         #region LP-100
 
         // A radio button in the LP-100 group has changed.
@@ -4637,7 +4301,11 @@ namespace DataDecoder
             else if (e.KeyCode == Keys.F12)
             { ProcessMacroButton(12); }
             else if (e.Control && e.KeyCode == Keys.Oemtilde)
-            { btnSplit_Click(null, null); }
+            { btnSplit_Click(null, null); } // Set Split
+            else if (e.Control && e.KeyCode == Keys.O)
+            { btnByp_Click(null, null); }   // Toggle PTT
+            else if (e.Control && e.KeyCode == Keys.A)
+            { btnDrive_Click(null, null); }   // Saves Auto Drive setting
         }
         // Adds macro number text to the row header
         public void dgm_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
@@ -4839,6 +4507,15 @@ namespace DataDecoder
             closing = true;
             this.Close();
         }
+        // Main Menu|Options|Auto Drive
+        private void autoDriveToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            AutoDrive auto = new AutoDrive();
+            auto.Show();
+        }
+        // Main Menu|Options|Tube Amps
+        // *** See ACOM and Alpha sections for these events.
+
         // Main Menu|Tools|Enable Error Log
         private void enableErrorLoggingToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -5013,6 +4690,45 @@ namespace DataDecoder
         }
 
         #endregion Menu Events
+
+        #region Oper/Stby
+
+        // Write text to Oper/Stby button
+        delegate void SetOperStbyCallback(string text);
+        public void SetOperStby(string text)
+        {
+            if (this.btnByp.InvokeRequired)
+            {
+                SetOperStbyCallback d = new SetOperStbyCallback(SetOperStby);
+                this.Invoke(d, new object[] { text });
+            }
+            else
+            { btnByp.Text = text; }
+        }
+        // The Oper/Stby button was pressed
+        bool stsOper;
+        string stsTX;
+        private void btnByp_Click(object sender, EventArgs e)
+        {
+            if (!stsOper)   // if amp in stand by
+            {
+                WriteToPort("ZZOF" + stsTX + ";", 50);  // turn PTT (TX) on
+                stsOper = true; btnByp.BackColor = Color.Lime;
+                txtAlcInd.BackColor = Color.Lime;
+                SetOperStby("OPER"); set.stsOper = true;
+            }
+            else
+            {
+                WriteToPort("ZZOF;", iSleep);  // turn PTT (TX) off
+                stsOper = false; btnByp.BackColor = Color.Yellow;
+                WriteToPort("ZZOF000;", 50);  // turn TX off
+                txtAlcInd.BackColor = Color.Yellow;
+                SetOperStby("STBY"); set.stsOper = false;
+            }
+            lastBand = "";  // force refresh of drive level.
+        }
+
+        #endregion Oper/Stby
 
         #region Power Master
 
@@ -6062,7 +5778,7 @@ namespace DataDecoder
         // Turn the rotor
         public void TurnRotor(string heading)
         {
-            float currentSize;
+//            float currentSize;
             switch (rotormod)
             {
                 case RotorMod.AlphaSpid:
@@ -6113,14 +5829,14 @@ namespace DataDecoder
                     break;
                 default: break;
             }
-            Notification alert = new Notification();
-            Notification.notiIntvl = 2000;
-            Notification.notiMsg = "Starting Antenna Rotation!\r";
-            currentSize = alert.label1.Font.Size;
-            currentSize += 2.0F;
-            alert.label1.Font = new Font(alert.label1.Font.Name, currentSize,
-            alert.label1.Font.Style, alert.label1.Font.Unit);
-            alert.Show();
+            //Notification alert = new Notification();
+            //Notification.notiIntvl = 2000;
+            //Notification.notiMsg = "Starting Antenna Rotation!\r";
+            //currentSize = alert.label1.Font.Size;
+            //currentSize += 2.0F;
+            //alert.label1.Font = new Font(alert.label1.Font.Name, currentSize,
+            //alert.label1.Font.Style, alert.label1.Font.Unit);
+            //alert.Show();
 
         }
         // Get DXCC data from the database
@@ -6335,6 +6051,7 @@ namespace DataDecoder
         string xOn = "";            // 1 = xmit on, 0 = xmit off
         string lastFreq = "";       // freq from last CATRxEvent
         string lastBand = "";
+
         void sp_CATRxEvent(object source, CATSerialPorts.SerialRXEvent e)
         {
             try
@@ -6370,25 +6087,6 @@ namespace DataDecoder
                             }
                         }
                     }
-                    /*** Get TX1-3 status ***/
-                    if (rawFreq.Length > 4 && rawFreq.Substring(0, 4) == "ZZOF")
-                    {
-                        stsTX = rawFreq.Substring(4, 3);
-                        set.stsTX = stsTX; set.Save();
-                        return;
-                    }
-                    /*** Write ALC volts to window ***/
-                    if (rawFreq.Length > 4 && rawFreq.Substring(0, 4) == "ZZFW")
-                    {
-                        int alcM = int.Parse(rawFreq.Substring(6, 2), NumberStyles.HexNumber);
-                        int alcL = int.Parse(rawFreq.Substring(8, 2), NumberStyles.HexNumber);
-                        int alc = alcM << 8;
-                        double calc = alc + alcL;
-                        string var = String.Format("{0:F2}", calc / 4096 * 2.5 * 4.77);
-                        SetALC(var);
-
-                        return;
-                    }
                     /*** Write PA Temperature to window ***/
                     if (rawFreq.Length > 4 && rawFreq.Substring(0, 4) == "ZZTS")
                     {   
@@ -6396,20 +6094,28 @@ namespace DataDecoder
                         WriteTemp();
                         return;
                     }
+                    /*** Get TX1-3 status ***/
+                    if (rawFreq.Length > 4 && rawFreq.Substring(0, 4) == "ZZOF")
+                    {
+                        stsTX = rawFreq.Substring(4, 3);
+                        set.stsTX = stsTX; set.Save();
+                        return;
+                    }
                     /*** Save current Drive setting by band ***/
                     if (rawFreq.Length > 4 && rawFreq.Substring(0, 4) == "ZZPC")
                     {
                         switch (band)
                         {
-                            case "160": set.pwr1 = rawFreq.Substring(4, 3); break;
-                            case "080": set.pwr2 = rawFreq.Substring(4, 3); break;
-                            case "040": set.pwr3 = rawFreq.Substring(4, 3); break;
-                            case "030": set.pwr4 = rawFreq.Substring(4, 3); break;
-                            case "020": set.pwr5 = rawFreq.Substring(4, 3); break;
-                            case "017": set.pwr6 = rawFreq.Substring(4, 3); break;
-                            case "015": set.pwr7 = rawFreq.Substring(4, 3); break;
-                            case "012": set.pwr8 = rawFreq.Substring(4, 3); break;
-                            case "010": set.pwr9 = rawFreq.Substring(4, 3); break;
+                            case "160": set.pwr1 = rawFreq.Substring(4, 3);break;
+                            case "080": set.pwr2 = rawFreq.Substring(4, 3);break;
+                            case "040": set.pwr3 = rawFreq.Substring(4, 3);break;
+                            case "030": set.pwr4 = rawFreq.Substring(4, 3);break;
+                            case "020": set.pwr5 = rawFreq.Substring(4, 3);break;
+                            case "017": set.pwr6 = rawFreq.Substring(4, 3);break;
+                            case "015": set.pwr7 = rawFreq.Substring(4, 3);break;
+                            case "012": set.pwr8 = rawFreq.Substring(4, 3);break;
+                            case "010": set.pwr9 = rawFreq.Substring(4, 3);break;
+                            case "006": set.pwr10 = rawFreq.Substring(4, 3); break;
                         }//switch
                         set.Save();
                         return;
@@ -6422,24 +6128,38 @@ namespace DataDecoder
                         {
                             lastBand = band;
 
+                            if (stsOper && chk6Amp.Checked && band == "006") 
+                                btnByp_Click(null, null);
+
                             if (stsOper && chkAutoDrv.Checked)
-                            {   // if the amp is in Operate mode, get the stored power setting 
-                                // from the settings file and send to the radio.
+                            {   // if the amp is in Operate mode, get the stored power & ALC
+                                // setting from the settings file and send to the radio.
                                 switch (band)
                                 {
-                                    case "160": WriteToPort("ZZPC" + set.pwr1 + ";", iSleep); break;
-                                    case "080": WriteToPort("ZZPC" + set.pwr2 + ";", iSleep); break;
-                                    case "040": WriteToPort("ZZPC" + set.pwr3 + ";", iSleep); break;
-                                    case "030": WriteToPort("ZZPC" + set.pwr4 + ";", iSleep); break;
-                                    case "020": WriteToPort("ZZPC" + set.pwr5 + ";", iSleep); break;
-                                    case "017": WriteToPort("ZZPC" + set.pwr6 + ";", iSleep); break;
-                                    case "015": WriteToPort("ZZPC" + set.pwr7 + ";", iSleep); break;
-                                    case "012": WriteToPort("ZZPC" + set.pwr8 + ";", iSleep); break;
-                                    case "010": WriteToPort("ZZPC" + set.pwr9 + ";", iSleep); break;
+                                    case "160": WriteToPort("ZZPC" + set.pwr1 + ";", iSleep);
+                                        break;
+                                    case "080": WriteToPort("ZZPC" + set.pwr2 + ";", iSleep);
+                                        break;
+                                    case "040": WriteToPort("ZZPC" + set.pwr3 + ";", iSleep);
+                                        break;
+                                    case "030": WriteToPort("ZZPC" + set.pwr4 + ";", iSleep);
+                                        break;
+                                    case "020": WriteToPort("ZZPC" + set.pwr5 + ";", iSleep);
+                                        break;
+                                    case "017": WriteToPort("ZZPC" + set.pwr6 + ";", iSleep);
+                                        break;
+                                    case "015": WriteToPort("ZZPC" + set.pwr7 + ";", iSleep);
+                                        break;
+                                    case "012": WriteToPort("ZZPC" + set.pwr8 + ";", iSleep);
+                                        break;
+                                    case "010": WriteToPort("ZZPC" + set.pwr9 + ";", iSleep);
+                                        break;
+                                    case "006": WriteToPort("ZZPC" + set.pwr10 + ";", iSleep);
+                                        break;
                                 }
                             }
-                            else
-                            {
+                            else if (chkAutoDrv.Checked)
+                            {   // If in StandBy set power to the default value
                                 switch (band)
                                 {
                                     case "160": WriteToPort("ZZPC" + set.def1.ToString().PadLeft(3, '0') + ";", iSleep); break;
@@ -6451,8 +6171,8 @@ namespace DataDecoder
                                     case "015": WriteToPort("ZZPC" + set.def7.ToString().PadLeft(3, '0') + ";", iSleep); break;
                                     case "012": WriteToPort("ZZPC" + set.def8.ToString().PadLeft(3, '0') + ";", iSleep); break;
                                     case "010": WriteToPort("ZZPC" + set.def9.ToString().PadLeft(3, '0') + ";", iSleep); break;
+                                    case "006": WriteToPort("ZZPC" + set.def10.ToString().PadLeft(3, '0') + ";", iSleep); break;
                                 }
-
                             }
 
                             // if matrix enabled output to port
@@ -6799,11 +6519,12 @@ namespace DataDecoder
                     {   // DDUtil or RCP IF; query
                         xOn = rawFreq.Substring(rawFreq.Length - 10, 1);
                         // if mox is on, start WD timer if enabled
-                        if (xOn == "1" && chkDog.Checked)
+                        if (xOn == "1")
                         {
-                            if (!WatchDog.Enabled) WatchDog.Start();                            
+                            if (chkDog.Checked && !WatchDog.Enabled) WatchDog.Start();
                         }
-                        else  WatchDog.Stop();   
+                        else { WatchDog.Stop(); }
+
                         // what's split status
                         sdrMode = rawFreq.Substring(rawFreq.Length - 9, 1);
                         if (rawFreq.Substring(rawFreq.Length - 6, 1) == "0")
@@ -7352,10 +7073,13 @@ namespace DataDecoder
                 // send new freq data to it x reps 
                 if (chkStep.Checked && StepCtr != 0)
                 {
-                    if (bFwd) StepPortMsg(freq, "00", "31");
-                    else if (b180) StepPortMsg(freq, "40", "31");
-                    else if (bBiDir) StepPortMsg(freq, "80", "31");
-                    else if (b34) StepPortMsg(freq, "20", "31");
+                    if (lastFreq != freq)
+                    {
+                        if (bFwd) StepPortMsg(freq, "00", "31");
+                        else if (b180) StepPortMsg(freq, "40", "31");
+                        else if (bBiDir) StepPortMsg(freq, "80", "31");
+                        else if (b34) StepPortMsg(freq, "20", "31");
+                    }
                 }
             }
             catch (Exception ex)
@@ -7963,8 +7687,8 @@ namespace DataDecoder
                         // reps to see if it will start. See the Reps var for the delay count.
                         WriteToPort("ZZTI0;", iSleep);  // turn off transmit inhibit
                         StepCtr -= 1; // decrement the reps counter
-                        if (StepCtr == 0)
-                        {   // if 
+                        if (StepCtr <= 0)
+                        {
                             StepTimer.Enabled = false;
                             ShowAnt(false);
 
@@ -7980,7 +7704,16 @@ namespace DataDecoder
                         }
                     }
 
-
+                    else if (ac == "d" || ac == "\a" )
+                    {   // controller has had a power interruption
+                        WriteToPort("ZZTI0;", iSleep);  // turn off transmit inhibit
+                        StepCtr -= 1; // decrement the reps counter
+                        if (StepCtr == 0)
+                        {
+                            StepTimer.Enabled = false;
+                            ShowAnt(false);
+                        }
+                    }
                     else
                     {   // antenna is moving
                         WriteToPort("ZZTI1;", iSleep);  // turn on transmit inhibit
@@ -9714,119 +9447,6 @@ namespace DataDecoder
         #endregion WaveNode Setup
 
         #endregion WaveNode
-
         
-        #region FlexWire
-
-        #region # Enums & Vars #
-
-        const int mAdr  = 0x40;  // Chip 1 ports 0/1
-        const int mAdr1 = 0x42;  // Chip 2 ports 0/1
-        const int cmd0 = 2;      // write to port 0
-        const int cmd1 = 3;      // write to port 1
-        const int su0 = 6;       // Setup for port 0
-        const int su1 = 7;       // Setup for port 1
-
-        #endregion Enums & Vars
-
-        #region # Methods #
-
-        // write to FlexWire port
-        void WriteFW(int adr, int cmd, int data, bool inv)
-        {
-            string ad = adr.ToString("X");  // convert to hex
-            if (adr < 16) ad = "0" + ad;    // add zero if needed
-            string cm = cmd.ToString("X");  // convert to hex
-            if (cmd < 16) cm = "0" + cm;    // add zero if needed
-            if (inv) data = 255 ^ data;     // invert data if inv = true
-            string val = data.ToString("X");  // convert to hex
-            if (data < 16) val = "0" + val;   // add zero if needed
-            // Send initialization string to 9555
-            string p0 = "0" + su0.ToString("X");
-            string p1 = "0" + su1.ToString("X");
-            if (cmd == cmd0)
-            { WriteToPort("ZZFY" + ad + p0 + "00;", 0); }
-            else if (cmd == cmd1)
-            { WriteToPort("ZZFY" + ad + p1 + "00;", 0); }
-            else
-            {
-                MessageBox.Show(
-                    ad + " is the wrong address for this board!\r\r" +
-                   "Must be 0x40 or 0x42 only!", "Address Error", 
-                   MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-            }
-            WriteToPort("ZZFY" + ad + cm + val + ";", iSleep);
-        }
-        // FW Setup routine
-        void FWSetup()
-        {
-            WriteToPort("ZZFY400600;", iSleep);
-            WriteToPort("ZZFY400700;", iSleep);
-            WriteToPort("ZZFY420600;", iSleep);
-            WriteToPort("ZZFY420700;", iSleep);
-        }
-
-        #endregion Methods
-
-        private void chkDSInvert_CheckedChanged(object sender, EventArgs e)
-        {
-            if (chkDSInvert.Checked) set.DSInv = true;
-            else set.DSInv = false;
-            set.Save();
-        }
-
-        #endregion FlexWire
-
-        private void chkFWa_CheckedChanged(object sender, EventArgs e)
-        {
-            if (chkFWa.Checked)
-            {
-                set.chkFWa = true; txtPortA.Enabled = false;
-            }
-            else
-            {
-                set.chkFWa = false; txtPortA.Enabled = true;
-            }
-            set.Save();
-        }
-
-        private void chkFWb_CheckedChanged(object sender, EventArgs e)
-        {
-            if (chkFWb.Checked)
-            {
-                set.chkFWb = true; txtPortB.Enabled = false;
-            }
-            else
-            {
-                set.chkFWb = false; txtPortB.Enabled = true;
-            }
-            set.Save();
-        }
-        bool stsOper;   // 
-        string stsTX;
-        private void btnByp_Click(object sender, EventArgs e)
-        {
-            if (!stsOper)   // if amp in stand by
-            {
-                WriteToPort("ZZOF" + stsTX + ";", 50);  // turn TX on
-                stsOper = true; btnByp.BackColor = Color.LimeGreen;
-                btnByp.Text = "Operate"; set.stsOper = true;
-            }
-            else
-            {
-                WriteToPort("ZZOF;", iSleep);  // turn TX off
-                stsOper = false; btnByp.BackColor = Color.Yellow;
-                WriteToPort("ZZOF000;", 50);  // turn TX off
-                btnByp.Text = "Stand By"; set.stsOper = false;
-            }
-        }
-
-        private void autoDriveToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            AutoDrive auto = new AutoDrive();
-            auto.Show();
-        }
-
-
     }
 }

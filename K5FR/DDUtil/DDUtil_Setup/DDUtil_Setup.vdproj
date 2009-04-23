@@ -689,14 +689,14 @@
         {
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:DDUtil"
-        "ProductCode" = "8:{052423C4-B976-4542-98B5-9736C3771588}"
-        "PackageCode" = "8:{68B3628C-2257-49B4-809B-7E29DAF63989}"
+        "ProductCode" = "8:{46A3CEC8-00C0-4220-807D-B1E25AA7A337}"
+        "PackageCode" = "8:{7B894AAE-7F80-460A-9B68-CC586A373D27}"
         "UpgradeCode" = "8:{E787AEB9-A577-499D-A08E-775DE944A651}"
         "RestartWWWService" = "11:FALSE"
         "RemovePreviousVersions" = "11:TRUE"
         "DetectNewerInstalledVersion" = "11:TRUE"
         "InstallAllUsers" = "11:FALSE"
-        "ProductVersion" = "8:1.7.010"
+        "ProductVersion" = "8:1.7.3.00"
         "Manufacturer" = "8:Default Company Name"
         "ARPHELPTELEPHONE" = "8:"
         "ARPHELPLINK" = "8:"
@@ -825,7 +825,7 @@
             }
             "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_B579029AB1364468967207E95A0C4906"
             {
-            "Name" = "8:DDUtil v 1.7.0"
+            "Name" = "8:DDUtil v 1.7.3"
             "Arguments" = "8:"
             "Description" = "8:"
             "ShowCmd" = "3:1"

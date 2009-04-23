@@ -49,6 +49,8 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
             this.textBox1 = new System.Windows.Forms.TextBox();
+            this.label11 = new System.Windows.Forms.Label();
+            this.num10 = new System.Windows.Forms.NumericUpDown();
             ((System.ComponentModel.ISupportInitialize)(this.num1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.num2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.num3)).BeginInit();
@@ -58,6 +60,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.num7)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.num8)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.num9)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.num10)).BeginInit();
             this.SuspendLayout();
             // 
             // num1
@@ -278,11 +281,35 @@
             this.textBox1.TabIndex = 20;
             this.textBox1.Text = resources.GetString("textBox1.Text");
             // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(16, 266);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(13, 13);
+            this.label11.TabIndex = 22;
+            this.label11.Text = "6";
+            // 
+            // num10
+            // 
+            this.num10.Location = new System.Drawing.Point(40, 264);
+            this.num10.Name = "num10";
+            this.num10.Size = new System.Drawing.Size(47, 20);
+            this.num10.TabIndex = 21;
+            this.num10.Value = new decimal(new int[] {
+            100,
+            0,
+            0,
+            0});
+            this.num10.ValueChanged += new System.EventHandler(this.num10_ValueChanged);
+            // 
             // AutoDrive
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(292, 266);
+            this.ClientSize = new System.Drawing.Size(292, 297);
+            this.Controls.Add(this.label11);
+            this.Controls.Add(this.num10);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.label10);
             this.Controls.Add(this.label3);
@@ -314,6 +341,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.num7)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.num8)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.num9)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.num10)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -341,5 +369,7 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.NumericUpDown num10;
     }
 }
