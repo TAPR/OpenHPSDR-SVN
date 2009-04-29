@@ -25,6 +25,7 @@ namespace DataDecoder
             num7.Value = set.def7;
             num8.Value = set.def8;
             num9.Value = set.def9;
+            num10.Value = set.def10;
         }
 
         private void num1_ValueChanged(object sender, EventArgs e)

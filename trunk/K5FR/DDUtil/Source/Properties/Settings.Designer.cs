@@ -2386,5 +2386,137 @@ namespace DataDecoder.Properties {
                 this["pwr10"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool NoBandChg {
+            get {
+                return ((bool)(this["NoBandChg"]));
+            }
+            set {
+                this["NoBandChg"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool Amp160 {
+            get {
+                return ((bool)(this["Amp160"]));
+            }
+            set {
+                this["Amp160"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool Amp80 {
+            get {
+                return ((bool)(this["Amp80"]));
+            }
+            set {
+                this["Amp80"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool Amp40 {
+            get {
+                return ((bool)(this["Amp40"]));
+            }
+            set {
+                this["Amp40"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool Amp30 {
+            get {
+                return ((bool)(this["Amp30"]));
+            }
+            set {
+                this["Amp30"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool Amp20 {
+            get {
+                return ((bool)(this["Amp20"]));
+            }
+            set {
+                this["Amp20"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool Amp17 {
+            get {
+                return ((bool)(this["Amp17"]));
+            }
+            set {
+                this["Amp17"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool Amp15 {
+            get {
+                return ((bool)(this["Amp15"]));
+            }
+            set {
+                this["Amp15"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool Amp12 {
+            get {
+                return ((bool)(this["Amp12"]));
+            }
+            set {
+                this["Amp12"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool Amp10 {
+            get {
+                return ((bool)(this["Amp10"]));
+            }
+            set {
+                this["Amp10"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool Amp6 {
+            get {
+                return ((bool)(this["Amp6"]));
+            }
+            set {
+                this["Amp6"] = value;
+            }
+        }
     }
 }

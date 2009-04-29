@@ -266,9 +266,9 @@
             this.label10.AutoSize = true;
             this.label10.Location = new System.Drawing.Point(7, 9);
             this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(102, 13);
+            this.label10.Size = new System.Drawing.Size(151, 13);
             this.label10.TabIndex = 19;
-            this.label10.Text = "Default PSDR Drive";
+            this.label10.Text = "Default PSDR (Barefoot) Drive";
             // 
             // textBox1
             // 
