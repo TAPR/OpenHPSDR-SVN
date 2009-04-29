@@ -4,7 +4,6 @@ using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 using DataDecoder.Properties;
-//using Logger;
 
 
 namespace DataDecoder
@@ -51,7 +50,7 @@ namespace DataDecoder
             else
                 txtAvg.Text = text;
         }
-        // Write LP-100 SWR reading to txt box
+        // Write SWR reading to txt box
         delegate void SetSwrCallback(string text);
         public void SetSwr(string text)
         {
@@ -91,6 +90,162 @@ namespace DataDecoder
         #endregion Properties
 
         #region Form Events
+
+        // The Oper/Stby button was pressed
+        private void btnByp_Click(object sender, EventArgs e)
+        {
+            s.btnByp_Click(null, null);
+        }
+        private void btnFull_Click(object sender, EventArgs e)
+        {
+            if (s.WindowState == FormWindowState.Normal)
+                s.WindowState = FormWindowState.Minimized;
+            else if (s.WindowState == FormWindowState.Minimized)
+                s.WindowState = FormWindowState.Normal;
+        }
+
+        private void chkRCP2_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chkRCP2.Checked) s.chkRCP2.Checked = true;
+            else s.chkRCP2.Checked = false;
+        }
+
+        private void chkRCP3_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chkRCP3.Checked) s.chkRCP3.Checked = true;
+            else s.chkRCP3.Checked = false;
+        }
+
+        private void chkRCP4_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chkRCP4.Checked) s.chkRCP4.Checked = true;
+            else s.chkRCP4.Checked = false;
+        }
+
+        private void Mini_DoubleClick(object sender, EventArgs e)
+        {
+            Size size = new Size();
+            if (this.Size.Height <= 100) size.Height = this.Size.Height * 2;
+            else if (this.Size.Height > 100) size.Height = this.Size.Height / 2;
+            this.Size = new Size(this.Size.Width, size.Height);
+        }
+
+        private void Mini_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.F1 && e.Modifiers == Keys.Shift)
+            { s.ProcessMacroButton(13); }
+            else if (e.KeyCode == Keys.F2 && e.Modifiers == Keys.Shift)
+            { s.ProcessMacroButton(14); }
+            else if (e.KeyCode == Keys.F3 && e.Modifiers == Keys.Shift)
+            { s.ProcessMacroButton(15); }
+            else if (e.KeyCode == Keys.F4 && e.Modifiers == Keys.Shift)
+            { s.ProcessMacroButton(16); }
+            else if (e.KeyCode == Keys.F1)
+            { s.ProcessMacroButton(1); }
+            else if (e.KeyCode == Keys.F2)
+            { s.ProcessMacroButton(2); }
+            else if (e.KeyCode == Keys.F3)
+            { s.ProcessMacroButton(3); }
+            else if (e.KeyCode == Keys.F4)
+            { s.ProcessMacroButton(4); }
+            else if (e.KeyCode == Keys.F5)
+            { s.ProcessMacroButton(5); }
+            else if (e.KeyCode == Keys.F6)
+            { s.ProcessMacroButton(6); }
+            else if (e.KeyCode == Keys.F7)
+            { s.ProcessMacroButton(7); }
+            else if (e.KeyCode == Keys.F8)
+            { s.ProcessMacroButton(8); }
+            else if (e.KeyCode == Keys.F9)
+            { s.ProcessMacroButton(9); }
+            else if (e.KeyCode == Keys.F10)
+            { s.ProcessMacroButton(10); }
+            else if (e.KeyCode == Keys.F11)
+            { s.ProcessMacroButton(11); }
+            else if (e.KeyCode == Keys.F12)
+            { s.ProcessMacroButton(12); }
+
+        }
+
+        private void btnMzcro1_Click(object sender, EventArgs e)
+        {
+            s.btnMacro1_Click(null, null);
+        }
+
+        private void btnMacro2_Click(object sender, EventArgs e)
+        {
+            s.btnMacro2_Click(null, null);
+        }
+
+        private void btnMacro3_Click(object sender, EventArgs e)
+        {
+            s.btnMacro3_Click(null, null);
+        }
+
+        private void btnMacro4_Click(object sender, EventArgs e)
+        {
+            s.btnMacro4_Click(null, null);
+        }
+
+        private void btnMacro5_Click(object sender, EventArgs e)
+        {
+            s.btnMacro5_Click(null, null);
+        }
+
+        private void btnMacro6_Click(object sender, EventArgs e)
+        {
+            s.btnMacro6_Click(null, null);
+        }
+
+        private void btnMacro7_Click(object sender, EventArgs e)
+        {
+            s.btnMacro7_Click(null, null);
+        }
+
+        private void btnMacro8_Click(object sender, EventArgs e)
+        {
+            s.btnMacro8_Click(null, null);
+        }
+
+        private void btnMacro9_Click(object sender, EventArgs e)
+        {
+            s.btnMacro9_Click(null, null);
+        }
+
+        private void btnMacro10_Click(object sender, EventArgs e)
+        {
+            s.btnMacro10_Click(null, null);
+        }
+
+        private void btnMacro11_Click(object sender, EventArgs e)
+        {
+            s.btnMacro11_Click(null, null);
+        }
+
+        private void btnMacro12_Click(object sender, EventArgs e)
+        {
+            s.btnMacro12_Click(null, null);
+        }
+
+        private void btnMacro13_Click(object sender, EventArgs e)
+        {
+            s.btnMacro13_Click(null, null);
+        }
+
+        private void btnMacro14_Click(object sender, EventArgs e)
+        {
+            s.btnMacro14_Click(null, null);
+        }
+
+        private void btnMacro15_Click(object sender, EventArgs e)
+        {
+            s.btnMacro15_Click(null, null);
+        }
+
+        private void btnMacro16_Click(object sender, EventArgs e)
+        {
+            s.btnMacro16_Click(null, null);
+        }
 
         // SteppIR Calibrate button was pressed
         private void btnCalib_Click(object sender, EventArgs e)
@@ -239,6 +394,8 @@ namespace DataDecoder
         }
         
         #endregion Methods
+
+
 
     }// end Mini
 }

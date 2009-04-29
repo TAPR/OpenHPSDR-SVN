@@ -555,21 +555,32 @@ namespace DataDecoder
             chkSlaveRTS.Checked = set.slaveRTS;
             chkPwDTR.Checked = set.pwDTR;
             chkPwRTS.Checked = set.pwRTS;
-            chk6Amp.Checked = set.AmpOn6;
+            chkAmp160.Checked = set.Amp160;
+            chkAmp80.Checked = set.Amp80;
+            chkAmp40.Checked = set.Amp40;
+            chkAmp30.Checked = set.Amp30;
+            chkAmp20.Checked = set.Amp20;
+            chkAmp17.Checked = set.Amp17;
+            chkAmp15.Checked = set.Amp15;
+            chkAmp12.Checked = set.Amp12;
+            chkAmp10.Checked = set.Amp10;
+            chkAmp6.Checked = set.Amp6;
+            chkNoBdChg.Checked = set.NoBandChg;
 
             stsTX = set.stsTX;
             stsOper = set.stsOper;
             if (stsOper) 
             {
-                btnByp.BackColor = Color.Lime;
-                btnByp.Text = "OPER";
+                btnByp.BackColor = Color.Lime; btnByp.Text = "OPER";
+                mini.btnByp.BackColor = Color.Lime; mini.btnByp.Text = "OPER";
                 txtAlcInd.BackColor = Color.Lime;
             }
             else
             {
-                btnByp.BackColor = Color.Yellow;
+                btnByp.BackColor = Color.Yellow; btnByp.Text = "STBY";
+                mini.btnByp.BackColor = Color.Yellow; mini.btnByp.Text = "STBY";
                 WriteToPort("ZZOF000;", 50);  // turn TX off
-                btnByp.Text = "STBY";
+                
                 txtAlcInd.BackColor = Color.Yellow;
             }
 
@@ -596,7 +607,7 @@ namespace DataDecoder
             chkModeChg.Checked = set.ModeChg;
              
             mSplashScreen.SetProgress("Loading Main Form", 1.0);
-
+            COBC = lastBand;
         }// Setup
         #endregion Initialization
 
@@ -878,7 +889,7 @@ namespace DataDecoder
                         this.Invoke(d, new object[] { text });
                     }
                     else
-                        this.lblBCD.Text = text;
+                        this.lblBCD.Text = text; mini.lblBCD.Text = text;
                 }
                 catch { }
             }
@@ -887,13 +898,27 @@ namespace DataDecoder
 
         #region Form Events
 
-        // The NoAmpOn6 check box has changed
-        private void chk6Amp_CheckedChanged(object sender, EventArgs e)
+        //the FZ button was pressed
+        private void btnFZ_Click(object sender, EventArgs e)
         {
-            if (chk6Amp.Checked) set.AmpOn6 = true;
-            else set.AmpOn6 = false;
+            ShowMini();
+        }
+        // The NoBandChg check box has changed
+        private void chkNoBdChg_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chkNoBdChg.Checked)
+            { set.NoBandChg = true; }
+            else set.NoBandChg = false;
             set.Save();
         }
+        //// The NoAmpOn6 check box has changed
+        //private void chk6Amp_CheckedChanged(object sender, EventArgs e)
+        //{
+        //    if (chk6Amp.Checked && !chkNoBdChg.Checked) set.AmpOn6 = true;
+        //    else
+        //    { set.AmpOn6 = false; chk6Amp.Checked = false; }
+        //    set.Save();
+        //}
 
         // Slave radio mode has changed.
         private void chkModeChg_CheckedChanged(object sender, EventArgs e)
@@ -1102,7 +1127,7 @@ namespace DataDecoder
         // BCD device name has been changed, change the device tab and save to settings
         private void Dev0_TextChanged(object sender, EventArgs e)
         {
-            this.tabDevice.Text = Dev0.Text;
+            this.tabBCD.Text = Dev0.Text;
             set.Device0 = Dev0.Text;
             set.Save();                     // save new Device0 to system settings
         }
@@ -1831,13 +1856,13 @@ namespace DataDecoder
             }
         }
         // RCP2 enabled check box changed
-        private void chkRCP2_CheckedChanged(object sender, EventArgs e)
+        public void chkRCP2_CheckedChanged(object sender, EventArgs e)
         {
             if (chkRCP2.Checked)
             {
                 if (cboRCP2.SelectedIndex > 0)
                 {
-                    set.chkRCP2 = true;
+                    set.chkRCP2 = true; mini.chkRCP2.Checked = true;
                 }
                 else
                 {
@@ -1846,24 +1871,25 @@ namespace DataDecoder
                     MessageBoxButtons.OK, MessageBoxIcon.Warning);
 
                     chkRCP2.Checked = false;
+                    mini.chkRCP2.Checked = false;
                     set.chkRCP2 = false;
                 }
             }
             else
             {
-                set.chkRCP2 = false;
+                set.chkRCP2 = false; mini.chkRCP2.Checked = false;
             }
             set.Save();
 
         }
         // RCP3 enabled check box changed
-        private void chkRCP3_CheckedChanged(object sender, EventArgs e)
+        public void chkRCP3_CheckedChanged(object sender, EventArgs e)
         {
             if (chkRCP3.Checked)
             {
                 if (cboRCP3.SelectedIndex > 0)
                 {
-                    set.chkRCP3 = true;
+                    set.chkRCP3 = true; mini.chkRCP3.Checked = true;
                 }
                 else
                 {
@@ -1872,24 +1898,25 @@ namespace DataDecoder
                     MessageBoxButtons.OK, MessageBoxIcon.Warning);
 
                     chkRCP3.Checked = false;
+                    mini.chkRCP3.Checked = false;
                     set.chkRCP3 = false;
                 }
             }
             else
             {
-                set.chkRCP3 = false;
+                set.chkRCP3 = false; mini.chkRCP3.Checked = false;
             }
             set.Save();
 
         }
         // RCP4 enabled check box changed
-        private void chkRCP4_CheckedChanged(object sender, EventArgs e)
+        public void chkRCP4_CheckedChanged(object sender, EventArgs e)
         {
             if (chkRCP4.Checked)
             {
                 if (cboRCP4.SelectedIndex > 0)
                 {
-                    set.chkRCP4 = true;
+                    set.chkRCP4 = true; mini.chkRCP4.Checked = true;
                 }
                 else
                 {
@@ -1898,12 +1925,13 @@ namespace DataDecoder
                     MessageBoxButtons.OK, MessageBoxIcon.Warning);
 
                     chkRCP4.Checked = false;
+                    mini.chkRCP4.Checked = false;
                     set.chkRCP4 = false;
                 }
             }
             else
             {
-                set.chkRCP4 = false;
+                set.chkRCP4 = false; mini.chkRCP4.Checked = false;
             }
             set.Save();
 
@@ -3918,7 +3946,8 @@ namespace DataDecoder
         // A radio button in the LP-100 group has changed.
         private void grpLP_CheckChanged(object sender, EventArgs e)
         {
-            if (rb100.Checked) { LPport.BaudRate = 38400; set.rb100 = 1; }
+            if (rb100.Checked) 
+            { LPport.BaudRate = 38400; set.rb100 = 1; }
             else if (rb100A.Checked) { LPport.BaudRate = 115200; set.rb100 = 2; }
             set.Save();
         }
@@ -4196,7 +4225,7 @@ namespace DataDecoder
         }
         // If SDR not transmitting and SteppIR is not moving
         // Process the commands associated with a macro key, calls ParseBuffer()
-        private void ProcessMacroButton(int button)
+        public void ProcessMacroButton(int button)
         {
             if (StepCtr == 0 && xOn == "0")
             {   // 
@@ -4217,52 +4246,52 @@ namespace DataDecoder
             }
         }
         // Macro button #1 was pressed
-        private void btnMacro1_Click(object sender, EventArgs e)
+        public void btnMacro1_Click(object sender, EventArgs e)
         { ProcessMacroButton(1); }
         // Macro button #2 was pressed
-        private void btnMacro2_Click(object sender, EventArgs e)
+        public void btnMacro2_Click(object sender, EventArgs e)
         { ProcessMacroButton(2); }
         // Macro button #3 was pressed
-        private void btnMacro3_Click(object sender, EventArgs e)
+        public void btnMacro3_Click(object sender, EventArgs e)
         { ProcessMacroButton(3); }
         // Macro button #4 was pressed
-        private void btnMacro4_Click(object sender, EventArgs e)
+        public void btnMacro4_Click(object sender, EventArgs e)
         { ProcessMacroButton(4); }
         // Macro button #5 was pressed
-        private void btnMacro5_Click(object sender, EventArgs e)
+        public void btnMacro5_Click(object sender, EventArgs e)
         { ProcessMacroButton(5); }
         // Macro button #6 was pressed
-        private void btnMacro6_Click(object sender, EventArgs e)
+        public void btnMacro6_Click(object sender, EventArgs e)
         { ProcessMacroButton(6); }
         // Macro button #7 was pressed
-        private void btnMacro7_Click(object sender, EventArgs e)
+        public void btnMacro7_Click(object sender, EventArgs e)
         { ProcessMacroButton(7); }
         // Macro button #8 was pressed
-        private void btnMacro8_Click(object sender, EventArgs e)
+        public void btnMacro8_Click(object sender, EventArgs e)
         { ProcessMacroButton(8); }
         // Macro button #9 was pressed
-        private void btnMacro9_Click(object sender, EventArgs e)
+        public void btnMacro9_Click(object sender, EventArgs e)
         { ProcessMacroButton(9); }
         // Macro button #10 was pressed
-        private void btnMacro10_Click(object sender, EventArgs e)
+        public void btnMacro10_Click(object sender, EventArgs e)
         { ProcessMacroButton(10); }
         // Macro button #11 was pressed
-        private void btnMacro11_Click(object sender, EventArgs e)
+        public void btnMacro11_Click(object sender, EventArgs e)
         { ProcessMacroButton(11); }
         // Macro button #12 was pressed
-        private void btnMacro12_Click(object sender, EventArgs e)
+        public void btnMacro12_Click(object sender, EventArgs e)
         { ProcessMacroButton(12); }
         // Macro button #13 was pressed
-        private void btnMacro13_Click(object sender, EventArgs e)
+        public void btnMacro13_Click(object sender, EventArgs e)
         { ProcessMacroButton(13); }
         // Macro button #14 was pressed
-        private void btnMacro14_Click(object sender, EventArgs e)
+        public void btnMacro14_Click(object sender, EventArgs e)
         { ProcessMacroButton(14); }
         // Macro button #15 was pressed
-        private void btnMacro15_Click(object sender, EventArgs e)
+        public void btnMacro15_Click(object sender, EventArgs e)
         { ProcessMacroButton(15); }
         // Macro button #16 was pressed
-        private void btnMacro16_Click(object sender, EventArgs e)
+        public void btnMacro16_Click(object sender, EventArgs e)
         { ProcessMacroButton(16); }
 
         // A key was pressed check for "F" key
@@ -4703,24 +4732,27 @@ namespace DataDecoder
                 this.Invoke(d, new object[] { text });
             }
             else
-            { btnByp.Text = text; }
+            { btnByp.Text = text; mini.btnByp.Text = text; }
         }
         // The Oper/Stby button was pressed
         bool stsOper;
         string stsTX;
-        private void btnByp_Click(object sender, EventArgs e)
+        public void btnByp_Click(object sender, EventArgs e)
         {
             if (!stsOper)   // if amp in stand by
             {
                 WriteToPort("ZZOF" + stsTX + ";", 50);  // turn PTT (TX) on
                 stsOper = true; btnByp.BackColor = Color.Lime;
+                mini.btnByp.BackColor = Color.Lime;
                 txtAlcInd.BackColor = Color.Lime;
                 SetOperStby("OPER"); set.stsOper = true;
+                COBC = lastBand;
             }
             else
             {
                 WriteToPort("ZZOF;", iSleep);  // turn PTT (TX) off
                 stsOper = false; btnByp.BackColor = Color.Yellow;
+                mini.btnByp.BackColor = Color.Yellow;
                 WriteToPort("ZZOF000;", 50);  // turn TX off
                 txtAlcInd.BackColor = Color.Yellow;
                 SetOperStby("STBY"); set.stsOper = false;
@@ -6051,6 +6083,7 @@ namespace DataDecoder
         string xOn = "";            // 1 = xmit on, 0 = xmit off
         string lastFreq = "";       // freq from last CATRxEvent
         string lastBand = "";
+        string COBC = "";           // Chk on band change last band setting
 
         void sp_CATRxEvent(object source, CATSerialPorts.SerialRXEvent e)
         {
@@ -6125,14 +6158,36 @@ namespace DataDecoder
                     {
                         band = rawFreq.Substring(4, 3);
                         if (lastBand != band)
-                        {
+                        {   // note that BtnBypass_Click sets lastBand to ""
+                            // to force loading of power settings.
                             lastBand = band;
 
-                            if (stsOper && chk6Amp.Checked && band == "006") 
-                                btnByp_Click(null, null);
-
+                            if (stsOper)
+                            {   // if amp not selected for this band set PTT to ByPass
+                                if (!chkAmp160.Checked && band == "160") btnByp_Click(null, null);
+                                if (!chkAmp80.Checked && band == "080") btnByp_Click(null, null);
+                                if (!chkAmp40.Checked && band == "040") btnByp_Click(null, null);
+                                if (!chkAmp30.Checked && band == "030") btnByp_Click(null, null);
+                                if (!chkAmp20.Checked && band == "020") btnByp_Click(null, null);
+                                if (!chkAmp17.Checked && band == "017") btnByp_Click(null, null);
+                                if (!chkAmp15.Checked && band == "015") btnByp_Click(null, null);
+                                if (!chkAmp12.Checked && band == "012") btnByp_Click(null, null);
+                                if (!chkAmp10.Checked && band == "010") btnByp_Click(null, null);
+                                if (!chkAmp6.Checked && band == "006") btnByp_Click(null, null);
+                                // see if band has changed since last time through
+                                // note: BtnBypass_Click sets lastBand to ""
+                                // to force loading of power settings. The COBC var is used
+                                // to tell if this is btnBypass toggle or a real band change.
+                                // if band has NOT changed put PTT back online.
+                                if (chkNoBdChg.Checked && COBC != band)
+                                {
+                                    btnByp_Click(null, null);
+                                    COBC = band;
+                                }
+                                
+                            }
                             if (stsOper && chkAutoDrv.Checked)
-                            {   // if the amp is in Operate mode, get the stored power & ALC
+                            {   // if the amp is in Operate mode, get the stored power
                                 // setting from the settings file and send to the radio.
                                 switch (band)
                                 {
@@ -7703,8 +7758,8 @@ namespace DataDecoder
                             }
                         }
                     }
-
-                    else if (ac == "d" || ac == "\a" )
+                    // when SDA100 off; d = power interrupt, \a = elements home
+                    else if (ac == "d" || ac == "\a" ) 
                     {   // controller has had a power interruption
                         WriteToPort("ZZTI0;", iSleep);  // turn off transmit inhibit
                         StepCtr -= 1; // decrement the reps counter
@@ -7987,6 +8042,7 @@ namespace DataDecoder
             {
                 WriteToPort("ZZTS;", iSleep);
                 WriteToPort("ZZBS;", iSleep);
+
             }
             catch { }
         }
@@ -9447,6 +9503,76 @@ namespace DataDecoder
         #endregion WaveNode Setup
 
         #endregion WaveNode
+
+
+        private void chkAmp160_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chkAmp160.Checked) set.Amp160 = true;
+            else set.Amp160 = false;
+            set.Save();
+        }
+        private void chkAmp80_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chkAmp80.Checked) set.Amp80 = true;
+            else set.Amp80 = false;
+            set.Save();
+        }
+
+        private void chkAmp40_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chkAmp40.Checked) set.Amp40 = true;
+            else set.Amp40 = false;
+            set.Save();
+        }
+
+        private void chkAmp30_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chkAmp30.Checked) set.Amp30 = true;
+            else set.Amp30 = false;
+            set.Save();
+        }
+
+        private void chkAmp20_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chkAmp20.Checked) set.Amp20 = true;
+            else set.Amp20 = false;
+            set.Save();
+        }
+
+        private void chkAmp17_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chkAmp17.Checked) set.Amp17 = true;
+            else set.Amp17 = false;
+            set.Save();
+        }
+
+        private void chkAmp15_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chkAmp15.Checked) set.Amp15 = true;
+            else set.Amp15 = false;
+            set.Save();
+        }
+
+        private void chkAmp12_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chkAmp12.Checked) set.Amp12 = true;
+            else set.Amp12 = false;
+            set.Save();
+        }
+
+        private void chkAmp10_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chkAmp10.Checked) set.Amp10 = true;
+            else set.Amp10 = false;
+            set.Save();
+        }
+
+        private void chkAmp6_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chkAmp6.Checked) set.Amp6 = true;
+            else set.Amp6 = false;
+            set.Save();
+        }
         
     }
 }
