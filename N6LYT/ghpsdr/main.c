@@ -117,6 +117,7 @@
 #include "mode.h"
 #include "bandscope.h"
 #include "setup.h"
+#include "receiver.h"
 
 GdkColor background;
 GdkColor buttonBackground;
@@ -151,6 +152,7 @@ GtkWidget* meterWindow;
 GtkWidget* bandscopeWindow;
 GtkWidget* bandscope_controlWindow;
 GtkWidget* agcWindow;
+GtkWidget* receiverWindow;
 
 gint mainStartX;
 gint mainStartY;
@@ -205,6 +207,7 @@ void quit() {
     bandscopeSaveState();
     bandscope_controlSaveState();
     agcSaveState();
+    receiverSaveState();
 
     saveProperties(propertyPath);
 
@@ -410,6 +413,10 @@ void buildMainUI() {
     gtk_widget_show(mercuryWindow);
     gtk_fixed_put((GtkFixed*)mainFixed,mercuryWindow,0,410);
 
+    // add the receiver window
+    gtk_widget_show(receiverWindow);
+    gtk_fixed_put((GtkFixed*)mainFixed,receiverWindow,0,510);
+
 
     // add the display window
     gtk_widget_show(displayWindow);
@@ -587,9 +594,10 @@ int main(int argc,char* argv[]) {
 
     fprintf(stderr,"ghpsdr Version %s\n",VERSION);
 
+    // initialize DttSP
     dttsp_main(argc,argv);
-    writeCommand("setOsc 0");
 
+    // initialize ozy (default 48K)
     ozy_init(48000);
 
     gtk_init(&argc,&argv);
@@ -645,6 +653,9 @@ int main(int argc,char* argv[]) {
 
     mercuryRestoreState();
     mercuryWindow=buildMercuryUI();
+
+    receiverRestoreState();
+    receiverWindow=buildReceiverUI();
 
     restoreState();
 
