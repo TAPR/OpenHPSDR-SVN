@@ -32,6 +32,10 @@
 // what we know about DttSP
 //
 
+#define MAXRX 4
+
+typedef enum _trxmode { RX, TX } TRXMODE;
+
 /* --------------------------------------------------------------------------*/
 /** 
 * @brief DttSP main  

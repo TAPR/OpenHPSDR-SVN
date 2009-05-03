@@ -8,7 +8,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-#include </usr/local/include/libusb-1.0/libusb.h>
+#include <libusb-1.0/libusb.h>
 
 /*
  *  interface to libusb1.0
@@ -17,7 +17,7 @@
 #define OZY_PID (0x0007)
 #define OZY_VID (0xfffe)
 
-#define OZY_IO_TIMEOUT 1000
+#define OZY_IO_TIMEOUT 500
 
 int init=0;
 libusb_device_handle* ozy_handle;
