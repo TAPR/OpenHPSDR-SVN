@@ -37,54 +37,6 @@ namespace DataDecoder.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("Device0")]
-        public string Device {
-            get {
-                return ((string)(this["Device"]));
-            }
-            set {
-                this["Device"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("Device0")]
-        public string Device0 {
-            get {
-                return ((string)(this["Device0"]));
-            }
-            set {
-                this["Device0"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("Device1")]
-        public string Device1 {
-            get {
-                return ((string)(this["Device1"]));
-            }
-            set {
-                this["Device1"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("Device2")]
-        public string Device2 {
-            get {
-                return ((string)(this["Device2"]));
-            }
-            set {
-                this["Device2"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("BandData.xml")]
         public string DataFile {
             get {
@@ -2353,18 +2305,6 @@ namespace DataDecoder.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public bool AmpOn6 {
-            get {
-                return ((bool)(this["AmpOn6"]));
-            }
-            set {
-                this["AmpOn6"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("100")]
         public decimal def10 {
             get {
@@ -2516,6 +2456,198 @@ namespace DataDecoder.Properties {
             }
             set {
                 this["Amp6"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Device0")]
+        public string Device {
+            get {
+                return ((string)(this["Device"]));
+            }
+            set {
+                this["Device"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Device0")]
+        public string Device0 {
+            get {
+                return ((string)(this["Device0"]));
+            }
+            set {
+                this["Device0"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Device1")]
+        public string Device1 {
+            get {
+                return ((string)(this["Device1"]));
+            }
+            set {
+                this["Device1"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Device2")]
+        public string Device2 {
+            get {
+                return ((string)(this["Device2"]));
+            }
+            set {
+                this["Device2"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("BCD")]
+        public string BCD {
+            get {
+                return ((string)(this["BCD"]));
+            }
+            set {
+                this["BCD"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("1")]
+        public decimal asw1 {
+            get {
+                return ((decimal)(this["asw1"]));
+            }
+            set {
+                this["asw1"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("1")]
+        public decimal asw2 {
+            get {
+                return ((decimal)(this["asw2"]));
+            }
+            set {
+                this["asw2"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("1")]
+        public decimal asw3 {
+            get {
+                return ((decimal)(this["asw3"]));
+            }
+            set {
+                this["asw3"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("1")]
+        public decimal asw4 {
+            get {
+                return ((decimal)(this["asw4"]));
+            }
+            set {
+                this["asw4"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("1")]
+        public decimal asw5 {
+            get {
+                return ((decimal)(this["asw5"]));
+            }
+            set {
+                this["asw5"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("1")]
+        public decimal asw6 {
+            get {
+                return ((decimal)(this["asw6"]));
+            }
+            set {
+                this["asw6"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("1")]
+        public decimal asw7 {
+            get {
+                return ((decimal)(this["asw7"]));
+            }
+            set {
+                this["asw7"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("1")]
+        public decimal asw8 {
+            get {
+                return ((decimal)(this["asw8"]));
+            }
+            set {
+                this["asw8"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("1")]
+        public decimal asw9 {
+            get {
+                return ((decimal)(this["asw9"]));
+            }
+            set {
+                this["asw9"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("1")]
+        public decimal asw10 {
+            get {
+                return ((decimal)(this["asw10"]));
+            }
+            set {
+                this["asw10"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool ChkAntEnab {
+            get {
+                return ((bool)(this["ChkAntEnab"]));
+            }
+            set {
+                this["ChkAntEnab"] = value;
             }
         }
     }

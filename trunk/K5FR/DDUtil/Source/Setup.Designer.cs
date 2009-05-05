@@ -871,7 +871,7 @@ namespace DataDecoder
             this.AlphaPort = new System.IO.Ports.SerialPort(this.components);
             this.PMport = new System.IO.Ports.SerialPort(this.components);
             this.RepeatPort = new System.IO.Ports.SerialPort(this.components);
-            this.tabSO2R = new System.Windows.Forms.TabPage();
+            this.acomAntDefaultToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tabControl.SuspendLayout();
             this.tabPorts.SuspendLayout();
             this.grpSlave.SuspendLayout();
@@ -949,7 +949,6 @@ namespace DataDecoder
             this.tabControl.Controls.Add(this.tabRotor);
             this.tabControl.Controls.Add(this.tabExtCtrl);
             this.tabControl.Controls.Add(this.tabSetup);
-            this.tabControl.Controls.Add(this.tabSO2R);
             this.tabControl.ItemSize = new System.Drawing.Size(42, 18);
             this.tabControl.Location = new System.Drawing.Point(-1, 24);
             this.tabControl.Name = "tabControl";
@@ -1865,7 +1864,7 @@ namespace DataDecoder
             // 
             // Dev0
             // 
-            this.Dev0.Location = new System.Drawing.Point(90, 49);
+            this.Dev0.Location = new System.Drawing.Point(91, 49);
             this.Dev0.Name = "Dev0";
             this.Dev0.Size = new System.Drawing.Size(100, 20);
             this.Dev0.TabIndex = 51;
@@ -3069,7 +3068,7 @@ namespace DataDecoder
             this.btnByp.Size = new System.Drawing.Size(47, 23);
             this.btnByp.TabIndex = 69;
             this.btnByp.Text = "STBY";
-            this.toolTip1.SetToolTip(this.btnByp, "Press to toggle PTT on/off  (ctrl+O)");
+            this.toolTip1.SetToolTip(this.btnByp, "Press to toggle PTT on/off  (ctrl+O) works with Amp Bands (setup tab).");
             this.btnByp.UseVisualStyleBackColor = false;
             this.btnByp.Click += new System.EventHandler(this.btnByp_Click);
             // 
@@ -3788,7 +3787,6 @@ namespace DataDecoder
             // txtTune
             // 
             this.txtTune.BackColor = System.Drawing.SystemColors.Info;
-            this.txtTune.Enabled = false;
             this.txtTune.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtTune.Location = new System.Drawing.Point(252, 106);
             this.txtTune.Name = "txtTune";
@@ -11118,7 +11116,8 @@ namespace DataDecoder
             // 
             this.optionsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.autoDriveToolStripMenuItem,
-            this.tubeAmpsToolStripMenuItem});
+            this.tubeAmpsToolStripMenuItem,
+            this.acomAntDefaultToolStripMenuItem});
             this.optionsToolStripMenuItem.Name = "optionsToolStripMenuItem";
             this.optionsToolStripMenuItem.Size = new System.Drawing.Size(56, 20);
             this.optionsToolStripMenuItem.Text = "Options";
@@ -11126,7 +11125,7 @@ namespace DataDecoder
             // autoDriveToolStripMenuItem
             // 
             this.autoDriveToolStripMenuItem.Name = "autoDriveToolStripMenuItem";
-            this.autoDriveToolStripMenuItem.Size = new System.Drawing.Size(138, 22);
+            this.autoDriveToolStripMenuItem.Size = new System.Drawing.Size(169, 22);
             this.autoDriveToolStripMenuItem.Text = "Auto Drive";
             this.autoDriveToolStripMenuItem.Click += new System.EventHandler(this.autoDriveToolStripMenuItem_Click);
             // 
@@ -11137,13 +11136,13 @@ namespace DataDecoder
             this.alpToolStripMenuItem,
             this.alpha9500ToolStripMenuItem});
             this.tubeAmpsToolStripMenuItem.Name = "tubeAmpsToolStripMenuItem";
-            this.tubeAmpsToolStripMenuItem.Size = new System.Drawing.Size(138, 22);
+            this.tubeAmpsToolStripMenuItem.Size = new System.Drawing.Size(169, 22);
             this.tubeAmpsToolStripMenuItem.Text = "Tube Amps";
             // 
             // aCOM2000AToolStripMenuItem
             // 
             this.aCOM2000AToolStripMenuItem.Name = "aCOM2000AToolStripMenuItem";
-            this.aCOM2000AToolStripMenuItem.Size = new System.Drawing.Size(142, 22);
+            this.aCOM2000AToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.aCOM2000AToolStripMenuItem.Text = "Acom2000A";
             this.aCOM2000AToolStripMenuItem.ToolTipText = "Click to select this amp.";
             this.aCOM2000AToolStripMenuItem.Click += new System.EventHandler(this.ACOM2K_Click);
@@ -11151,7 +11150,7 @@ namespace DataDecoder
             // alpToolStripMenuItem
             // 
             this.alpToolStripMenuItem.Name = "alpToolStripMenuItem";
-            this.alpToolStripMenuItem.Size = new System.Drawing.Size(142, 22);
+            this.alpToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.alpToolStripMenuItem.Text = "Alpha 87A";
             this.alpToolStripMenuItem.ToolTipText = "Click to select this amp.";
             this.alpToolStripMenuItem.Click += new System.EventHandler(this.Alpha87_Click);
@@ -11159,7 +11158,7 @@ namespace DataDecoder
             // alpha9500ToolStripMenuItem
             // 
             this.alpha9500ToolStripMenuItem.Name = "alpha9500ToolStripMenuItem";
-            this.alpha9500ToolStripMenuItem.Size = new System.Drawing.Size(142, 22);
+            this.alpha9500ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.alpha9500ToolStripMenuItem.Text = "Alpha 9500";
             this.alpha9500ToolStripMenuItem.ToolTipText = "Click to select this amp.";
             this.alpha9500ToolStripMenuItem.Click += new System.EventHandler(this.Alpha95_Click);
@@ -11419,14 +11418,12 @@ namespace DataDecoder
             this.RepeatPort.WriteTimeout = 500;
             this.RepeatPort.DataReceived += new System.IO.Ports.SerialDataReceivedEventHandler(this.RepeatPort_DataReceived);
             // 
-            // tabSO2R
+            // acomAntDefaultToolStripMenuItem
             // 
-            this.tabSO2R.Location = new System.Drawing.Point(4, 22);
-            this.tabSO2R.Name = "tabSO2R";
-            this.tabSO2R.Size = new System.Drawing.Size(423, 309);
-            this.tabSO2R.TabIndex = 10;
-            this.tabSO2R.Text = "tabSO2R";
-            this.tabSO2R.UseVisualStyleBackColor = true;
+            this.acomAntDefaultToolStripMenuItem.Name = "acomAntDefaultToolStripMenuItem";
+            this.acomAntDefaultToolStripMenuItem.Size = new System.Drawing.Size(169, 22);
+            this.acomAntDefaultToolStripMenuItem.Text = "Acom Ant Default";
+            this.acomAntDefaultToolStripMenuItem.Click += new System.EventHandler(this.acomAntDefaultToolStripMenuItem_Click);
             // 
             // Setup
             // 
@@ -12405,7 +12402,7 @@ namespace DataDecoder
         public CheckBox chkAmp12;
         public CheckBox chkAmp20;
         public CheckBox chkAmp15;
-        private TabPage tabSO2R;
+        private ToolStripMenuItem acomAntDefaultToolStripMenuItem;
 
     }
 }
