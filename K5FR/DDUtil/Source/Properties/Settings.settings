@@ -5,18 +5,6 @@
     <Setting Name="portInv" Type="System.String" Scope="User">
       <Value Profile="(Default)">500</Value>
     </Setting>
-    <Setting Name="Device" Type="System.String" Scope="User">
-      <Value Profile="(Default)">Device0</Value>
-    </Setting>
-    <Setting Name="Device0" Type="System.String" Scope="User">
-      <Value Profile="(Default)">Device0</Value>
-    </Setting>
-    <Setting Name="Device1" Type="System.String" Scope="User">
-      <Value Profile="(Default)">Device1</Value>
-    </Setting>
-    <Setting Name="Device2" Type="System.String" Scope="User">
-      <Value Profile="(Default)">Device2</Value>
-    </Setting>
     <Setting Name="DataFile" Type="System.String" Scope="User">
       <Value Profile="(Default)">BandData.xml</Value>
     </Setting>
@@ -587,9 +575,6 @@ RCP4 - WriteLog</Value>
     <Setting Name="def9" Type="System.Decimal" Scope="User">
       <Value Profile="(Default)">100</Value>
     </Setting>
-    <Setting Name="AmpOn6" Type="System.Boolean" Scope="User">
-      <Value Profile="(Default)">False</Value>
-    </Setting>
     <Setting Name="def10" Type="System.Decimal" Scope="User">
       <Value Profile="(Default)">100</Value>
     </Setting>
@@ -627,6 +612,54 @@ RCP4 - WriteLog</Value>
       <Value Profile="(Default)">False</Value>
     </Setting>
     <Setting Name="Amp6" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="Device" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Device0</Value>
+    </Setting>
+    <Setting Name="Device0" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Device0</Value>
+    </Setting>
+    <Setting Name="Device1" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Device1</Value>
+    </Setting>
+    <Setting Name="Device2" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Device2</Value>
+    </Setting>
+    <Setting Name="BCD" Type="System.String" Scope="User">
+      <Value Profile="(Default)">BCD</Value>
+    </Setting>
+    <Setting Name="asw1" Type="System.Decimal" Scope="User">
+      <Value Profile="(Default)">1</Value>
+    </Setting>
+    <Setting Name="asw2" Type="System.Decimal" Scope="User">
+      <Value Profile="(Default)">1</Value>
+    </Setting>
+    <Setting Name="asw3" Type="System.Decimal" Scope="User">
+      <Value Profile="(Default)">1</Value>
+    </Setting>
+    <Setting Name="asw4" Type="System.Decimal" Scope="User">
+      <Value Profile="(Default)">1</Value>
+    </Setting>
+    <Setting Name="asw5" Type="System.Decimal" Scope="User">
+      <Value Profile="(Default)">1</Value>
+    </Setting>
+    <Setting Name="asw6" Type="System.Decimal" Scope="User">
+      <Value Profile="(Default)">1</Value>
+    </Setting>
+    <Setting Name="asw7" Type="System.Decimal" Scope="User">
+      <Value Profile="(Default)">1</Value>
+    </Setting>
+    <Setting Name="asw8" Type="System.Decimal" Scope="User">
+      <Value Profile="(Default)">1</Value>
+    </Setting>
+    <Setting Name="asw9" Type="System.Decimal" Scope="User">
+      <Value Profile="(Default)">1</Value>
+    </Setting>
+    <Setting Name="asw10" Type="System.Decimal" Scope="User">
+      <Value Profile="(Default)">1</Value>
+    </Setting>
+    <Setting Name="ChkAntEnab" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
   </Settings>

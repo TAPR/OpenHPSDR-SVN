@@ -94,7 +94,7 @@ namespace DataDecoder
         int LPTnum = 0;         // decimal number of selected LPT port
         int iSleep = 0;         // Thread.Sleep var
         int StepCtr = 0;        // reps counter
-        int reps = 5;           // how many times to test the SteppIR port
+        int reps = 7;           // how many times to test the SteppIR port
         double pollInt = 0;     // CAT port interval timer uses txtInv text box
         double temp = 26.4;
         string fileName = Application.StartupPath + "\\BandData.xml";
@@ -544,8 +544,8 @@ namespace DataDecoder
             MacFileName = set.MacDataFile; // Get saved macro file name
             txtMacFile.Text = MacFileName; // Put macro file name to file name box
             GetMacData(MacFileName);       // Load macro file to grid
-            Dev0.Text = set.Device0;
-            cboDevice.Items.Add(set.Device0);
+            Dev0.Text = set.BCD;
+            cboDevice.Items.Add(set.BCD);
             cboDevice.Text = set.Device;
             cboAlpha.SelectedIndex = set.AlphaPort;
             chkAlpha.Checked = set.AlphaEnab;
@@ -898,6 +898,76 @@ namespace DataDecoder
 
         #region Form Events
 
+        // the Amp160 check box has changed
+        private void chkAmp160_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chkAmp160.Checked) set.Amp160 = true;
+            else set.Amp160 = false;
+            set.Save();
+        }
+        // the Amp80 check box has changed
+        private void chkAmp80_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chkAmp80.Checked) set.Amp80 = true;
+            else set.Amp80 = false;
+            set.Save();
+        }
+        // the Amp40 check box has changed
+        private void chkAmp40_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chkAmp40.Checked) set.Amp40 = true;
+            else set.Amp40 = false;
+            set.Save();
+        }
+        // the Amp30 check box has changed
+        private void chkAmp30_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chkAmp30.Checked) set.Amp30 = true;
+            else set.Amp30 = false;
+            set.Save();
+        }
+        // the Amp20 check box has changed
+        private void chkAmp20_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chkAmp20.Checked) set.Amp20 = true;
+            else set.Amp20 = false;
+            set.Save();
+        }
+        // the Amp17 check box has changed
+        private void chkAmp17_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chkAmp17.Checked) set.Amp17 = true;
+            else set.Amp17 = false;
+            set.Save();
+        }
+        // the Amp15 check box has changed
+        private void chkAmp15_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chkAmp15.Checked) set.Amp15 = true;
+            else set.Amp15 = false;
+            set.Save();
+        }
+        // the Amp12 check box has changed
+        private void chkAmp12_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chkAmp12.Checked) set.Amp12 = true;
+            else set.Amp12 = false;
+            set.Save();
+        }
+        // the Amp10 check box has changed
+        private void chkAmp10_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chkAmp10.Checked) set.Amp10 = true;
+            else set.Amp10 = false;
+            set.Save();
+        }
+        // the Amp6 check box has changed
+        private void chkAmp6_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chkAmp6.Checked) set.Amp6 = true;
+            else set.Amp6 = false;
+            set.Save();
+        }
         //the FZ button was pressed
         private void btnFZ_Click(object sender, EventArgs e)
         {
@@ -911,15 +981,6 @@ namespace DataDecoder
             else set.NoBandChg = false;
             set.Save();
         }
-        //// The NoAmpOn6 check box has changed
-        //private void chk6Amp_CheckedChanged(object sender, EventArgs e)
-        //{
-        //    if (chk6Amp.Checked && !chkNoBdChg.Checked) set.AmpOn6 = true;
-        //    else
-        //    { set.AmpOn6 = false; chk6Amp.Checked = false; }
-        //    set.Save();
-        //}
-
         // Slave radio mode has changed.
         private void chkModeChg_CheckedChanged(object sender, EventArgs e)
         {
@@ -1128,7 +1189,7 @@ namespace DataDecoder
         private void Dev0_TextChanged(object sender, EventArgs e)
         {
             this.tabBCD.Text = Dev0.Text;
-            set.Device0 = Dev0.Text;
+            set.BCD = Dev0.Text;
             set.Save();                     // save new Device0 to system settings
         }
         // BCD device Drop Down open - re-load cboDevice combo box
@@ -1456,7 +1517,7 @@ namespace DataDecoder
         // cboDevice selection changed
         private void cboDevice_SelectedIndexChanged(object sender, EventArgs e)
         {
-            set.Device = cboDevice.Text;
+            set.BCD = cboDevice.Text;
             set.Save();     // save new LPT device to system settings
         }
         // Device 0 enabled condition changed
@@ -2386,7 +2447,7 @@ namespace DataDecoder
 
         int[] auto = new int[9];// band array for auto tune routine
         bool bAmp = false;      // Amp is up
-        bool bAnt = false;      // ACU is up
+        bool bAnt = true;      // ACU is up
         bool bBlink = false;    // message window 
 
         int ctr = 0;            // Auto tune reps counter
@@ -2608,7 +2669,7 @@ namespace DataDecoder
             AlphaTimer.Enabled = true;
             txtTune.ReadOnly = false;
             grpAmpBand.Visible = true;
-            SetpaTune("1"); EnabTune(false);
+            SetpaTune("1"); //EnabTune(false);
             btnHF.Visible = false; btnSF.Visible = false;
             lblHF.Visible = false; lblSF.Visible = false;
             mini.btnHF.Visible = false; mini.btnSF.Visible = false;
@@ -2650,12 +2711,12 @@ namespace DataDecoder
                 if (ant < 9) ant += 1;
                 else ant = 0;
                 SetpaTune(ant.ToString());
-                if (AlphaPort.IsOpen) AlphaPort.Write("AqW3" + ant + "\0");
-                for (int k = 0; k < 5; k++)
-                {
-                    Thread.Sleep(100);
-                    Application.DoEvents();
-                }
+                //if (AlphaPort.IsOpen) AlphaPort.Write("AqW3" + ant + "\0");
+                //for (int k = 0; k < 5; k++)
+                //{
+                //    Thread.Sleep(100);
+                //    Application.DoEvents();
+                //}
 
             }
         }
@@ -4539,11 +4600,18 @@ namespace DataDecoder
         // Main Menu|Options|Auto Drive
         private void autoDriveToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            AutoDrive auto = new AutoDrive();
+            AcomSwitch auto = new AcomSwitch();
             auto.Show();
         }
         // Main Menu|Options|Tube Amps
         // *** See ACOM and Alpha sections for these events.
+
+        // Main Menu|Options|Acom Ant Default
+        private void acomAntDefaultToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            AcomAnt Asw = new AcomAnt();
+            Asw.Show();
+        }
 
         // Main Menu|Tools|Enable Error Log
         private void enableErrorLoggingToolStripMenuItem_Click(object sender, EventArgs e)
@@ -6179,12 +6247,11 @@ namespace DataDecoder
                                 // to force loading of power settings. The COBC var is used
                                 // to tell if this is btnBypass toggle or a real band change.
                                 // if band has NOT changed put PTT back online.
-                                if (chkNoBdChg.Checked && COBC != band)
+                                if (chkNoBdChg.Checked && lastBand != "" && COBC != band)
                                 {
                                     btnByp_Click(null, null);
                                     COBC = band;
                                 }
-                                
                             }
                             if (stsOper && chkAutoDrv.Checked)
                             {   // if the amp is in Operate mode, get the stored power
@@ -6229,7 +6296,6 @@ namespace DataDecoder
                                     case "006": WriteToPort("ZZPC" + set.def10.ToString().PadLeft(3, '0') + ";", iSleep); break;
                                 }
                             }
-
                             // if matrix enabled output to port
                             if (chkPortA.Checked || chkPortB.Checked)
                             {
@@ -6529,7 +6595,23 @@ namespace DataDecoder
                                         } break;
                                 }//switch
                             }
-
+                            // use ACOM ant switch with amp off.
+                            if (ac == "Off" && set.ChkAntEnab == true)
+                            {
+                                switch (band)
+                                {
+                                    case "160": SetpaTune(set.asw1.ToString()); break;
+                                    case "080": SetpaTune(set.asw2.ToString()); break;
+                                    case "040": SetpaTune(set.asw3.ToString()); break;
+                                    case "030": SetpaTune(set.asw4.ToString()); break;
+                                    case "020": SetpaTune(set.asw5.ToString()); break;
+                                    case "017": SetpaTune(set.asw6.ToString()); break;
+                                    case "015": SetpaTune(set.asw7.ToString()); break;
+                                    case "012": SetpaTune(set.asw8.ToString()); break;
+                                    case "010": SetpaTune(set.asw9.ToString()); break;
+                                    case "006": SetpaTune(set.asw10.ToString()); break;
+                                }
+                            }
                         }// if band changed
                         return;
                     }// if ZZBS
@@ -6689,8 +6771,9 @@ namespace DataDecoder
                             else if (Amp == 2)  // Alpha 9500
                             {
                             }
-                        }
-                    }
+                        } // if(String.Compare(lastFreq)
+                    } // if (chkAlpha.Checked)
+
                     // If SteppIR enabled check for activity
                     if (chkStep.Checked)
                     {   // see if freq has changed
@@ -6702,8 +6785,6 @@ namespace DataDecoder
                         }   // see StepData_DataReceived() for return
                     }
 
-                    //lastFreq = logFreq; // save this freq
-                    //LastMode = sdrMode; // save this mode
                     freq = Regex.Replace(rawFreq, regex, mask);
                     freq = freq.TrimStart('0');
                     if (String.Compare(lastFreq, logFreq) != 0)
@@ -7734,9 +7815,9 @@ namespace DataDecoder
                 StepBufr = StepBufr.Replace(m.Value, "");
                 if (StepMsg.Length > 7)
                 {
-                    string ac = StepMsg.Substring(6, 1);
+                    string mot = StepMsg.Substring(6, 1);
                     string dir = StepMsg.Substring(7, 1);
-                    if (ac == "\0")
+                    if (mot == "\0")
                     {   // antenna is NOT moving, but a freq update has been sent to the
                         // controller that may cause movement. We are waiting for StepCtr
                         // reps to see if it will start. See the Reps var for the delay count.
@@ -7759,7 +7840,7 @@ namespace DataDecoder
                         }
                     }
                     // when SDA100 off; d = power interrupt, \a = elements home
-                    else if (ac == "d" || ac == "\a" ) 
+                    else if (mot == "d" || mot == "\a" ) 
                     {   // controller has had a power interruption
                         WriteToPort("ZZTI0;", iSleep);  // turn off transmit inhibit
                         StepCtr -= 1; // decrement the reps counter
@@ -9504,75 +9585,5 @@ namespace DataDecoder
 
         #endregion WaveNode
 
-
-        private void chkAmp160_CheckedChanged(object sender, EventArgs e)
-        {
-            if (chkAmp160.Checked) set.Amp160 = true;
-            else set.Amp160 = false;
-            set.Save();
-        }
-        private void chkAmp80_CheckedChanged(object sender, EventArgs e)
-        {
-            if (chkAmp80.Checked) set.Amp80 = true;
-            else set.Amp80 = false;
-            set.Save();
-        }
-
-        private void chkAmp40_CheckedChanged(object sender, EventArgs e)
-        {
-            if (chkAmp40.Checked) set.Amp40 = true;
-            else set.Amp40 = false;
-            set.Save();
-        }
-
-        private void chkAmp30_CheckedChanged(object sender, EventArgs e)
-        {
-            if (chkAmp30.Checked) set.Amp30 = true;
-            else set.Amp30 = false;
-            set.Save();
-        }
-
-        private void chkAmp20_CheckedChanged(object sender, EventArgs e)
-        {
-            if (chkAmp20.Checked) set.Amp20 = true;
-            else set.Amp20 = false;
-            set.Save();
-        }
-
-        private void chkAmp17_CheckedChanged(object sender, EventArgs e)
-        {
-            if (chkAmp17.Checked) set.Amp17 = true;
-            else set.Amp17 = false;
-            set.Save();
-        }
-
-        private void chkAmp15_CheckedChanged(object sender, EventArgs e)
-        {
-            if (chkAmp15.Checked) set.Amp15 = true;
-            else set.Amp15 = false;
-            set.Save();
-        }
-
-        private void chkAmp12_CheckedChanged(object sender, EventArgs e)
-        {
-            if (chkAmp12.Checked) set.Amp12 = true;
-            else set.Amp12 = false;
-            set.Save();
-        }
-
-        private void chkAmp10_CheckedChanged(object sender, EventArgs e)
-        {
-            if (chkAmp10.Checked) set.Amp10 = true;
-            else set.Amp10 = false;
-            set.Save();
-        }
-
-        private void chkAmp6_CheckedChanged(object sender, EventArgs e)
-        {
-            if (chkAmp6.Checked) set.Amp6 = true;
-            else set.Amp6 = false;
-            set.Save();
-        }
-        
     }
 }

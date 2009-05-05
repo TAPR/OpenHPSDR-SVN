@@ -86,6 +86,12 @@
     <Compile Include="AboutBox.Designer.cs">
       <DependentUpon>AboutBox.cs</DependentUpon>
     </Compile>
+    <Compile Include="AcomAnt.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AcomAnt.Designer.cs">
+      <DependentUpon>AcomAnt.cs</DependentUpon>
+    </Compile>
     <Compile Include="AutoDrive.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -118,6 +124,9 @@
     <EmbeddedResource Include="AboutBox.resx">
       <SubType>Designer</SubType>
       <DependentUpon>AboutBox.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AcomAnt.resx">
+      <DependentUpon>AcomAnt.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="AutoDrive.resx">
       <DependentUpon>AutoDrive.cs</DependentUpon>

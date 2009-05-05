@@ -9,11 +9,11 @@ using DataDecoder.Properties;
 
 namespace DataDecoder
 {
-    public partial class AutoDrive : Form
+    public partial class AcomSwitch : Form
     {
         Settings set = Settings.Default;
 
-        public AutoDrive()
+        public AcomSwitch()
         {
             InitializeComponent();
             num1.Value = set.def1;
