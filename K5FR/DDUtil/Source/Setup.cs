@@ -7211,6 +7211,7 @@ namespace DataDecoder
                 {
                     if (lastFreq != freq)
                     {
+                        Thread.Sleep(100);
                         if (bFwd) StepPortMsg(freq, "00", "31");
                         else if (b180) StepPortMsg(freq, "40", "31");
                         else if (bBiDir) StepPortMsg(freq, "80", "31");
@@ -8793,6 +8794,7 @@ namespace DataDecoder
                 aPort = Convert.ToInt32(txtPortA.Text);
             }
             else if (txtPortA.Text == "FW") aPort = mAdr;
+            else aPort = Convert.ToInt32(txtPortA.Text);
             set.aPortNum = txtPortA.Text; set.Save();
         }
         // Port B has been changed
@@ -8804,6 +8806,7 @@ namespace DataDecoder
                 bPort = Convert.ToInt32(txtPortB.Text);
             }
             else if (txtPortB.Text == "FW") bPort = mAdr;
+            else bPort = Convert.ToInt32(txtPortB.Text);
             set.bPortNum = txtPortB.Text; set.Save();
 
         }
