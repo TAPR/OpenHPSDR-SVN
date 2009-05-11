@@ -34,12 +34,13 @@
 #include <string.h>
 #include <math.h>
 #include <getopt.h>
+#include "property.h"
 
 #include "command.h"
 #include "dttsp.h"
 #include "main.h"
 
-GtkWidget* receiverFixed;
+GtkWidget* receiverFrame;
 
 int receiver;
 
@@ -82,20 +83,23 @@ void panChanged(GtkWidget* widget,gpointer data) {
 GtkWidget* buildReceiverUI() {
     GtkWidget* label;
 
-    receiverFixed=gtk_fixed_new();
-    //gtk_widget_modify_bg(receiverFixed,GTK_STATE_NORMAL,&background);
+    receiverFrame=gtk_frame_new("Pan");
+    //gtk_widget_modify_bg(receiverFrame,GTK_STATE_NORMAL,&background);
+    label=gtk_frame_get_label_widget((GtkFrame*)receiverFrame);
+    gtk_widget_modify_fg(label, GTK_STATE_NORMAL, &white);
+    gtk_frame_set_shadow_type((GtkFrame*)receiverFrame,GTK_SHADOW_ETCHED_IN);
 
     panScale=gtk_hscale_new_with_range(0.0,1.0,0.1);
     g_signal_connect(G_OBJECT(panScale),"value-changed",G_CALLBACK(panChanged),NULL);
     gtk_range_set_value((GtkRange*)panScale,pan[0]);
-    gtk_widget_set_size_request(GTK_WIDGET(panScale),200,50);
+    gtk_widget_set_size_request(GTK_WIDGET(panScale),150,25);
     gtk_widget_show(panScale);
-    gtk_fixed_put((GtkFixed*)receiverFixed,panScale,0,0);
+    gtk_container_add((GtkFrame*)receiverFrame,panScale);
 
-    gtk_widget_set_size_request(GTK_WIDGET(receiverFixed),200,150);
-    gtk_widget_show(receiverFixed);
+    gtk_widget_set_size_request(GTK_WIDGET(receiverFrame),200,55);
+    gtk_widget_show(receiverFrame);
 
-    return receiverFixed;
+    return receiverFrame;
   
 }
 

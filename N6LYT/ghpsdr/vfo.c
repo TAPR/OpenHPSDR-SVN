@@ -54,8 +54,10 @@ long long ifFrequency;
 
 gint vfoTimerId;
 
+GtkWidget* vfoAFrame;
 GtkWidget* vfoAFrequency;
 GdkPixmap* vfoAPixmap;
+GtkWidget* vfoBFrame;
 GtkWidget* vfoBFrequency;
 GdkPixmap* vfoBPixmap;
 
@@ -93,7 +95,7 @@ gboolean vfoAFrequency_configure_event(GtkWidget* widget,GdkEventConfigure* even
     vfoAPixmap=gdk_pixmap_new(widget->window,widget->allocation.width,widget->allocation.height,-1);
 
     gc=gdk_gc_new(widget->window);
-    gdk_gc_set_rgb_fg_color(gc,&black);
+    gdk_gc_set_rgb_fg_color(gc,&background);
     gdk_draw_rectangle(vfoAPixmap,
                        gc,
                        TRUE,
@@ -105,7 +107,7 @@ gboolean vfoAFrequency_configure_event(GtkWidget* widget,GdkEventConfigure* even
     layout = pango_layout_new(context);
     pango_layout_set_width(layout,widget->allocation.width*PANGO_SCALE);
     pango_layout_set_alignment(layout,PANGO_ALIGN_RIGHT);
-    sprintf(temp,"<span foreground='#7AAA6E' background='#000000' font_desc='Sans Bold 24'>A% 7lld.%03lld.%03lld </span>",frequencyA/1000000LL,(frequencyA%1000000LL)/1000LL,frequencyA%1000LL);
+    sprintf(temp,"<span foreground='#00FF00' background='#2C2C2C' font_desc='Sans Bold 24'>% 7lld.%03lld.%03lld </span>",frequencyA/1000000LL,(frequencyA%1000000LL)/1000LL,frequencyA%1000LL);
     pango_layout_set_markup(layout,temp,-1);
     gdk_draw_layout(GDK_DRAWABLE(vfoAPixmap),gc,0,0,layout);
 
@@ -163,7 +165,7 @@ gboolean vfoBFrequency_configure_event(GtkWidget* widget,GdkEventConfigure* even
     vfoBPixmap=gdk_pixmap_new(widget->window,widget->allocation.width,widget->allocation.height,-1);
 
     gc=gdk_gc_new(widget->window);
-    gdk_gc_set_rgb_fg_color(gc,&black);
+    gdk_gc_set_rgb_fg_color(gc,&background);
     gdk_draw_rectangle(vfoBPixmap,
                        gc,
                        TRUE,
@@ -175,7 +177,7 @@ gboolean vfoBFrequency_configure_event(GtkWidget* widget,GdkEventConfigure* even
     layout = pango_layout_new (context);
     pango_layout_set_width(layout,widget->allocation.width*PANGO_SCALE);
     pango_layout_set_alignment(layout,PANGO_ALIGN_RIGHT);
-    sprintf(temp,"<span foreground='#707070' background='#000000' font_desc='Sans Bold 24'>B% 7lld.%03lld.%03lld </span>",frequencyB/1000000LL,(frequencyB%1000000LL)/1000LL,frequencyB%1000LL);
+    sprintf(temp,"<span foreground='#C0C0C0' background='#2C2C2C' font_desc='Sans Bold 24'>% 7lld.%03lld.%03lld </span>",frequencyB/1000000LL,(frequencyB%1000000LL)/1000LL,frequencyB%1000LL);
     pango_layout_set_markup(layout,temp,-1);
     gdk_draw_layout(GDK_DRAWABLE(vfoBPixmap),gc,0,0,layout);
 
@@ -238,7 +240,7 @@ void setAFrequency(long long f) {
 
     if(vfoAFrequency->window) {
         gc=gdk_gc_new(vfoAFrequency->window);
-        gdk_gc_set_rgb_fg_color(gc,&black);
+        gdk_gc_set_rgb_fg_color(gc,&background);
         gdk_draw_rectangle(vfoAPixmap,
                            gc,
                            TRUE,
@@ -250,7 +252,7 @@ void setAFrequency(long long f) {
         layout = pango_layout_new (context);
         pango_layout_set_width(layout,vfoAFrequency->allocation.width*PANGO_SCALE);
         pango_layout_set_alignment(layout,PANGO_ALIGN_RIGHT);
-        sprintf(temp,"<span foreground='#7AAA6E' background='#000000' font_desc='Sans Bold 24'>A% 7lld.%03lld.%03lld </span>",frequencyA/1000000LL,(frequencyA%1000000LL)/1000LL,frequencyA%1000);
+        sprintf(temp,"<span foreground='#00FF00' background='#2C2C2C' font_desc='Sans Bold 24'>% 7lld.%03lld.%03lld </span>",frequencyA/1000000LL,(frequencyA%1000000LL)/1000LL,frequencyA%1000);
         pango_layout_set_markup(layout,temp,-1);
         gdk_draw_layout(GDK_DRAWABLE(vfoAPixmap),gc,0,0,layout);
 
@@ -302,7 +304,7 @@ void setBFrequency(long long f) {
   
     if(vfoBFrequency->window) {
         gc=gdk_gc_new(vfoBFrequency->window);
-        gdk_gc_set_rgb_fg_color(gc,&black);
+        gdk_gc_set_rgb_fg_color(gc,&background);
         gdk_draw_rectangle(vfoBPixmap,
                            gc,
                            TRUE,
@@ -314,7 +316,7 @@ void setBFrequency(long long f) {
         layout = pango_layout_new (context);
         pango_layout_set_width(layout,vfoBFrequency->allocation.width*PANGO_SCALE);
         pango_layout_set_alignment(layout,PANGO_ALIGN_RIGHT);
-        sprintf(temp,"<span foreground='#707070' background='#000000' font_desc='Sans Bold 24'>B% 7lld.%03lld.%03lld </span>",frequencyB/1000000LL,(frequencyB%1000000LL)/1000LL,frequencyB%1000LL);
+        sprintf(temp,"<span foreground='#C0C0C0' background='#2C2C2C' font_desc='Sans Bold 24'>% 7lld.%03lld.%03lld </span>",frequencyB/1000000LL,(frequencyB%1000000LL)/1000LL,frequencyB%1000LL);
         pango_layout_set_markup(layout,temp,-1);
         gdk_draw_layout(GDK_DRAWABLE(vfoBPixmap),gc,0,0,layout);
 
@@ -497,7 +499,7 @@ void drawIncrementDisplay(gboolean queue) {
         layout = pango_layout_new (context);
         pango_layout_set_width(layout,incrementDisplay->allocation.width*PANGO_SCALE);
         pango_layout_set_alignment(layout,PANGO_ALIGN_CENTER);
-        sprintf(temp,"<span foreground='#7AAA6E' background='#000000' font_desc='Sans Bold 10'>%0ld</span>",frequencyIncrement);
+        sprintf(temp,"<span foreground='#7AAA6E' background='#2C2C2C' font_desc='Sans Bold 10'>%0ld</span>",frequencyIncrement);
         pango_layout_set_markup(layout,temp,-1);
         gdk_draw_layout(GDK_DRAWABLE(incrementPixmap),gc,0,0,layout);
     
@@ -613,22 +615,35 @@ GtkWidget* buildVfoUI() {
     gtk_widget_modify_bg(vfoFixed,GTK_STATE_NORMAL,&background);
 
     // vfoA
+    vfoAFrame=gtk_frame_new("VFO A");
+    label=gtk_frame_get_label_widget(vfoAFrame);
+    gtk_widget_modify_fg(label, GTK_STATE_NORMAL, &white);
+    
+    gtk_widget_set_size_request(GTK_WIDGET(vfoAFrame),300,50);
     vfoAFrequency=gtk_drawing_area_new();
-    gtk_widget_set_size_request(GTK_WIDGET(vfoAFrequency),300,50);
+    gtk_widget_set_size_request(GTK_WIDGET(vfoAFrequency),250,35);
     g_signal_connect(G_OBJECT (vfoAFrequency),"configure_event",G_CALLBACK(vfoAFrequency_configure_event),NULL);
     g_signal_connect(G_OBJECT (vfoAFrequency),"expose_event",G_CALLBACK(vfoAFrequency_expose_event),NULL);
     g_signal_connect(G_OBJECT(vfoAFrequency),"scroll_event",G_CALLBACK(frequency_scroll_event),NULL);
     gtk_widget_set_events(vfoAFrequency,GDK_EXPOSURE_MASK|GDK_SCROLL_MASK);
     gtk_widget_show(vfoAFrequency);
-    gtk_fixed_put((GtkFixed*)vfoFixed,vfoAFrequency,0,0);
+    gtk_widget_show(vfoAFrame);
+    gtk_container_add((GtkFixed*)vfoAFrame,vfoAFrequency);
+    gtk_fixed_put((GtkFixed*)vfoFixed,vfoAFrame,0,0);
 
     // vfoB
+    vfoBFrame=gtk_frame_new("VFO B");
+    label=gtk_frame_get_label_widget(vfoBFrame);
+    gtk_widget_modify_fg(label, GTK_STATE_NORMAL, &white);
+    gtk_widget_set_size_request(GTK_WIDGET(vfoBFrame),300,50);
     vfoBFrequency=gtk_drawing_area_new();
-    gtk_widget_set_size_request(GTK_WIDGET(vfoBFrequency),300,50);
+    gtk_widget_set_size_request(GTK_WIDGET(vfoBFrequency),300,35);
     g_signal_connect(G_OBJECT (vfoBFrequency),"configure_event",G_CALLBACK(vfoBFrequency_configure_event),NULL);
     g_signal_connect(G_OBJECT (vfoBFrequency),"expose_event",G_CALLBACK(vfoBFrequency_expose_event),NULL);
     gtk_widget_show(vfoBFrequency);
-    gtk_fixed_put((GtkFixed*)vfoFixed,vfoBFrequency,500,0);
+    gtk_widget_show(vfoBFrame);
+    gtk_container_add((GtkFixed*)vfoBFrame,vfoBFrequency);
+    gtk_fixed_put((GtkFixed*)vfoFixed,vfoBFrame,500,0);
 
     // vfo control
     buttonAtoB = gtk_button_new_with_label ("A>B");
