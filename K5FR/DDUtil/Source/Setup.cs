@@ -23,6 +23,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Data;
 using System.Data.OleDb;
 using System.Diagnostics;
@@ -277,6 +278,39 @@ namespace DataDecoder
 
         public Setup(SplashScreen splash)
         {
+            Configuration config =
+            ConfigurationManager.OpenExeConfiguration(
+            ConfigurationUserLevel.PerUserRoamingAndLocal);
+            Console.WriteLine("Local user config path: {0}", config.FilePath);             
+            //// See if the user.settings file is corrupted.
+            //try
+            //{
+            //    Settings.Default.Upgrade();
+            //}
+            //catch (ConfigurationException ex)
+            //{ //(requires System.Configuration)
+            //    string filename = ((ConfigurationException)ex.InnerException).Filename;
+
+            //    if (MessageBox.Show(
+            //        "DDUtil has detected that your user settings file\r" +
+            //        "has become corrupted. This may be due to a crash\r" +
+            //        "or improper exiting of the program. DDUtil must\r" +
+            //        "reset your user settings in order to continue.\r\r" +
+            //        "Click Yes to reset your user settings and continue.\r\r" +
+            //        "Click No if you wish to attempt manual repair or to \r" +
+            //        "rescue information before proceeding.",
+            //        "Corrupt User Settings",MessageBoxButtons.YesNo,
+            //        MessageBoxIcon.Error) == DialogResult.Yes)
+            //    {
+            //        File.Delete(filename);
+            //        Settings.Default.Reload();
+            //        // you could optionally restart the app instead
+            //    }
+            //    else
+            //        Process.GetCurrentProcess().Kill();
+            //    // avoid the inevitable crash
+            //}
+            
             mSplashScreen = splash;
             mSplashScreen.SetProgress("Initializing Components", 0.0);
             // if the app is already running don't start another one.
