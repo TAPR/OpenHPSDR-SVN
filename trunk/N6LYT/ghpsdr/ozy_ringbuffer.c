@@ -84,13 +84,14 @@ int ozy_ringbuffer_entries(struct ozy_ringbuffer* buffer) {
 int ozy_ringbuffer_put(struct ozy_ringbuffer* buffer,char* f,int n) {
     int bytes;
     bytes=n;
+
+    pthread_mutex_lock(&ozy_output_buffer_mutex);
+
     if(ozy_ringbuffer_space(buffer)<=n) {
 fprintf(stderr,"ozy_ringbuffer_put: space=%d wanted=%d\n",ozy_ringbuffer_space(buffer),n);
         bytes=ozy_ringbuffer_space(buffer)-1;
     }
     ozy_put_bytes+=bytes;
-
-    pthread_mutex_lock(&ozy_output_buffer_mutex);
     
     if(bytes>0) {
 
