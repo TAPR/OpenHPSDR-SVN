@@ -840,6 +840,7 @@ namespace DataDecoder
             this.aCOM2000AToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.alpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.alpha9500ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.acomAntDefaultToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.enableErrorLoggingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openErrorLogToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -871,7 +872,6 @@ namespace DataDecoder
             this.AlphaPort = new System.IO.Ports.SerialPort(this.components);
             this.PMport = new System.IO.Ports.SerialPort(this.components);
             this.RepeatPort = new System.IO.Ports.SerialPort(this.components);
-            this.acomAntDefaultToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tabControl.SuspendLayout();
             this.tabPorts.SuspendLayout();
             this.grpSlave.SuspendLayout();
@@ -10098,7 +10098,7 @@ namespace DataDecoder
             // chkAmp6
             // 
             this.chkAmp6.AutoSize = true;
-            this.chkAmp6.BackColor = System.Drawing.SystemColors.Control;
+            this.chkAmp6.BackColor = System.Drawing.Color.Transparent;
             this.chkAmp6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.chkAmp6.ForeColor = System.Drawing.Color.Navy;
             this.chkAmp6.Location = new System.Drawing.Point(168, 32);
@@ -10113,7 +10113,7 @@ namespace DataDecoder
             // chkAmp80
             // 
             this.chkAmp80.AutoSize = true;
-            this.chkAmp80.BackColor = System.Drawing.SystemColors.Control;
+            this.chkAmp80.BackColor = System.Drawing.Color.Transparent;
             this.chkAmp80.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.chkAmp80.ForeColor = System.Drawing.Color.Navy;
             this.chkAmp80.Location = new System.Drawing.Point(51, 16);
@@ -10128,7 +10128,7 @@ namespace DataDecoder
             // chkAmp160
             // 
             this.chkAmp160.AutoSize = true;
-            this.chkAmp160.BackColor = System.Drawing.SystemColors.Control;
+            this.chkAmp160.BackColor = System.Drawing.Color.Transparent;
             this.chkAmp160.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.chkAmp160.ForeColor = System.Drawing.Color.Navy;
             this.chkAmp160.Location = new System.Drawing.Point(5, 16);
@@ -10143,7 +10143,7 @@ namespace DataDecoder
             // chkAmp30
             // 
             this.chkAmp30.AutoSize = true;
-            this.chkAmp30.BackColor = System.Drawing.SystemColors.Control;
+            this.chkAmp30.BackColor = System.Drawing.Color.Transparent;
             this.chkAmp30.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.chkAmp30.ForeColor = System.Drawing.Color.Navy;
             this.chkAmp30.Location = new System.Drawing.Point(129, 16);
@@ -10158,7 +10158,7 @@ namespace DataDecoder
             // chkAmp17
             // 
             this.chkAmp17.AutoSize = true;
-            this.chkAmp17.BackColor = System.Drawing.SystemColors.Control;
+            this.chkAmp17.BackColor = System.Drawing.Color.Transparent;
             this.chkAmp17.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.chkAmp17.ForeColor = System.Drawing.Color.Navy;
             this.chkAmp17.Location = new System.Drawing.Point(5, 32);
@@ -10173,7 +10173,7 @@ namespace DataDecoder
             // chkAmp40
             // 
             this.chkAmp40.AutoSize = true;
-            this.chkAmp40.BackColor = System.Drawing.SystemColors.Control;
+            this.chkAmp40.BackColor = System.Drawing.Color.Transparent;
             this.chkAmp40.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.chkAmp40.ForeColor = System.Drawing.Color.Navy;
             this.chkAmp40.Location = new System.Drawing.Point(90, 16);
@@ -10188,7 +10188,7 @@ namespace DataDecoder
             // chkAmp10
             // 
             this.chkAmp10.AutoSize = true;
-            this.chkAmp10.BackColor = System.Drawing.SystemColors.Control;
+            this.chkAmp10.BackColor = System.Drawing.Color.Transparent;
             this.chkAmp10.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.chkAmp10.ForeColor = System.Drawing.Color.Navy;
             this.chkAmp10.Location = new System.Drawing.Point(129, 32);
@@ -10203,7 +10203,7 @@ namespace DataDecoder
             // chkAmp12
             // 
             this.chkAmp12.AutoSize = true;
-            this.chkAmp12.BackColor = System.Drawing.SystemColors.Control;
+            this.chkAmp12.BackColor = System.Drawing.Color.Transparent;
             this.chkAmp12.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.chkAmp12.ForeColor = System.Drawing.Color.Navy;
             this.chkAmp12.Location = new System.Drawing.Point(90, 32);
@@ -10218,7 +10218,7 @@ namespace DataDecoder
             // chkAmp20
             // 
             this.chkAmp20.AutoSize = true;
-            this.chkAmp20.BackColor = System.Drawing.SystemColors.Control;
+            this.chkAmp20.BackColor = System.Drawing.Color.Transparent;
             this.chkAmp20.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.chkAmp20.ForeColor = System.Drawing.Color.Navy;
             this.chkAmp20.Location = new System.Drawing.Point(168, 16);
@@ -10233,7 +10233,7 @@ namespace DataDecoder
             // chkAmp15
             // 
             this.chkAmp15.AutoSize = true;
-            this.chkAmp15.BackColor = System.Drawing.SystemColors.Control;
+            this.chkAmp15.BackColor = System.Drawing.Color.Transparent;
             this.chkAmp15.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.chkAmp15.ForeColor = System.Drawing.Color.Navy;
             this.chkAmp15.Location = new System.Drawing.Point(51, 32);
@@ -11142,7 +11142,7 @@ namespace DataDecoder
             // aCOM2000AToolStripMenuItem
             // 
             this.aCOM2000AToolStripMenuItem.Name = "aCOM2000AToolStripMenuItem";
-            this.aCOM2000AToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.aCOM2000AToolStripMenuItem.Size = new System.Drawing.Size(142, 22);
             this.aCOM2000AToolStripMenuItem.Text = "Acom2000A";
             this.aCOM2000AToolStripMenuItem.ToolTipText = "Click to select this amp.";
             this.aCOM2000AToolStripMenuItem.Click += new System.EventHandler(this.ACOM2K_Click);
@@ -11150,7 +11150,7 @@ namespace DataDecoder
             // alpToolStripMenuItem
             // 
             this.alpToolStripMenuItem.Name = "alpToolStripMenuItem";
-            this.alpToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.alpToolStripMenuItem.Size = new System.Drawing.Size(142, 22);
             this.alpToolStripMenuItem.Text = "Alpha 87A";
             this.alpToolStripMenuItem.ToolTipText = "Click to select this amp.";
             this.alpToolStripMenuItem.Click += new System.EventHandler(this.Alpha87_Click);
@@ -11158,10 +11158,17 @@ namespace DataDecoder
             // alpha9500ToolStripMenuItem
             // 
             this.alpha9500ToolStripMenuItem.Name = "alpha9500ToolStripMenuItem";
-            this.alpha9500ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.alpha9500ToolStripMenuItem.Size = new System.Drawing.Size(142, 22);
             this.alpha9500ToolStripMenuItem.Text = "Alpha 9500";
             this.alpha9500ToolStripMenuItem.ToolTipText = "Click to select this amp.";
             this.alpha9500ToolStripMenuItem.Click += new System.EventHandler(this.Alpha95_Click);
+            // 
+            // acomAntDefaultToolStripMenuItem
+            // 
+            this.acomAntDefaultToolStripMenuItem.Name = "acomAntDefaultToolStripMenuItem";
+            this.acomAntDefaultToolStripMenuItem.Size = new System.Drawing.Size(169, 22);
+            this.acomAntDefaultToolStripMenuItem.Text = "Acom Ant Default";
+            this.acomAntDefaultToolStripMenuItem.Click += new System.EventHandler(this.acomAntDefaultToolStripMenuItem_Click);
             // 
             // toolsToolStripMenuItem
             // 
@@ -11417,13 +11424,6 @@ namespace DataDecoder
             this.RepeatPort.ReadTimeout = 500;
             this.RepeatPort.WriteTimeout = 500;
             this.RepeatPort.DataReceived += new System.IO.Ports.SerialDataReceivedEventHandler(this.RepeatPort_DataReceived);
-            // 
-            // acomAntDefaultToolStripMenuItem
-            // 
-            this.acomAntDefaultToolStripMenuItem.Name = "acomAntDefaultToolStripMenuItem";
-            this.acomAntDefaultToolStripMenuItem.Size = new System.Drawing.Size(169, 22);
-            this.acomAntDefaultToolStripMenuItem.Text = "Acom Ant Default";
-            this.acomAntDefaultToolStripMenuItem.Click += new System.EventHandler(this.acomAntDefaultToolStripMenuItem_Click);
             // 
             // Setup
             // 
@@ -12392,17 +12392,17 @@ namespace DataDecoder
         public Button btnMacro14;
         private Button btnFZ;
         private GroupBox groupBox15;
-        public CheckBox chkAmp6;
-        public CheckBox chkAmp80;
-        public CheckBox chkAmp160;
-        public CheckBox chkAmp30;
-        public CheckBox chkAmp17;
-        public CheckBox chkAmp40;
-        public CheckBox chkAmp10;
-        public CheckBox chkAmp12;
-        public CheckBox chkAmp20;
-        public CheckBox chkAmp15;
         private ToolStripMenuItem acomAntDefaultToolStripMenuItem;
+        private CheckBox chkAmp6;
+        private CheckBox chkAmp80;
+        private CheckBox chkAmp160;
+        private CheckBox chkAmp30;
+        private CheckBox chkAmp17;
+        private CheckBox chkAmp40;
+        private CheckBox chkAmp10;
+        private CheckBox chkAmp12;
+        private CheckBox chkAmp20;
+        private CheckBox chkAmp15;
 
     }
 }

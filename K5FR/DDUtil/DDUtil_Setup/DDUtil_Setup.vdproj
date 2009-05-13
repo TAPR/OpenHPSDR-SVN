@@ -15,8 +15,8 @@
     {
         "Entry"
         {
-        "MsmKey" = "8:_1BD7E1CAAFCB460987E9A0BC7796DF48"
-        "OwnerKey" = "8:_UNDEFINED"
+        "MsmKey" = "8:_22EB2E3B0874C576389E2958A4169D17"
+        "OwnerKey" = "8:_343E83015DF04222B9800260C7967A26"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -27,7 +27,7 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_37852C3604985FE906B7F933D1A32CDF"
+        "MsmKey" = "8:_4483569F2DD36C92EA6B9EF506BAF7D1"
         "OwnerKey" = "8:_343E83015DF04222B9800260C7967A26"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -51,19 +51,7 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_4A0E193E4DCE4F6CB56EC35BE0D6E04E"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
         "MsmKey" = "8:_5147E685D9F04FCE9E696502C49BC449"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_64E753E1F981451696B80AE269912680"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -81,30 +69,6 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_84033277A77A475CACE6583240BF3C76"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_8D1B41DBE554421ABDD8D1D18141DF81"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_C2B6CEC8B9344A3BA391AA2AA359F604"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_C6A6E074BC26DFC3F5D2046B22916996"
-        "OwnerKey" = "8:_343E83015DF04222B9800260C7967A26"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
         "MsmKey" = "8:_C7884B824B4848489BC0063503CD45FF"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -117,12 +81,6 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_F55278B1675F44B98BD71EE087125E70"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
         "MsmKey" = "8:_UNDEFINED"
         "OwnerKey" = "8:_343E83015DF04222B9800260C7967A26"
         "MsmSig" = "8:_UNDEFINED"
@@ -130,13 +88,13 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_37852C3604985FE906B7F933D1A32CDF"
+        "OwnerKey" = "8:_4483569F2DD36C92EA6B9EF506BAF7D1"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_C6A6E074BC26DFC3F5D2046B22916996"
+        "OwnerKey" = "8:_22EB2E3B0874C576389E2958A4169D17"
         "MsmSig" = "8:_UNDEFINED"
         }
     }
@@ -229,10 +187,21 @@
         }
         "File"
         {
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_1BD7E1CAAFCB460987E9A0BC7796DF48"
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_22EB2E3B0874C576389E2958A4169D17"
             {
-            "SourcePath" = "8:..\\bin\\Release\\evserial.cat"
-            "TargetName" = "8:evserial.cat"
+            "AssemblyRegister" = "3:1"
+            "AssemblyIsInGAC" = "11:FALSE"
+            "AssemblyAsmDisplayName" = "8:CATSerialPorts, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL"
+                "ScatterAssemblies"
+                {
+                    "_22EB2E3B0874C576389E2958A4169D17"
+                    {
+                    "Name" = "8:CATSerialPorts.DLL"
+                    "Attributes" = "3:512"
+                    }
+                }
+            "SourcePath" = "8:CATSerialPorts.DLL"
+            "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_18E81C9E3C4F4675BCD023B8455469BC"
             "Condition" = "8:"
@@ -246,7 +215,7 @@
             "PackageAs" = "3:1"
             "Register" = "3:1"
             "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
+            "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_343E83015DF04222B9800260C7967A26"
@@ -280,14 +249,14 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_37852C3604985FE906B7F933D1A32CDF"
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_4483569F2DD36C92EA6B9EF506BAF7D1"
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
             "AssemblyAsmDisplayName" = "8:WizardBase, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
-                    "_37852C3604985FE906B7F933D1A32CDF"
+                    "_4483569F2DD36C92EA6B9EF506BAF7D1"
                     {
                     "Name" = "8:WizardBase.DLL"
                     "Attributes" = "3:512"
@@ -371,50 +340,10 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_4A0E193E4DCE4F6CB56EC35BE0D6E04E"
-            {
-            "SourcePath" = "8:..\\bin\\Release\\evsbc.sys"
-            "TargetName" = "8:evsbc.sys"
-            "Tag" = "8:"
-            "Folder" = "8:_18E81C9E3C4F4675BCD023B8455469BC"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_5147E685D9F04FCE9E696502C49BC449"
             {
             "SourcePath" = "8:..\\bin\\Release\\BandData.xml"
             "TargetName" = "8:BandData.xml"
-            "Tag" = "8:"
-            "Folder" = "8:_18E81C9E3C4F4675BCD023B8455469BC"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_64E753E1F981451696B80AE269912680"
-            {
-            "SourcePath" = "8:..\\bin\\Release\\evsbc.inf"
-            "TargetName" = "8:evsbc.inf"
             "Tag" = "8:"
             "Folder" = "8:_18E81C9E3C4F4675BCD023B8455469BC"
             "Condition" = "8:"
@@ -471,97 +400,6 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_84033277A77A475CACE6583240BF3C76"
-            {
-            "SourcePath" = "8:..\\bin\\Release\\evserial.sys"
-            "TargetName" = "8:evserial.sys"
-            "Tag" = "8:"
-            "Folder" = "8:_18E81C9E3C4F4675BCD023B8455469BC"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_8D1B41DBE554421ABDD8D1D18141DF81"
-            {
-            "SourcePath" = "8:..\\bin\\Release\\evserial.inf"
-            "TargetName" = "8:evserial.inf"
-            "Tag" = "8:"
-            "Folder" = "8:_18E81C9E3C4F4675BCD023B8455469BC"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_C2B6CEC8B9344A3BA391AA2AA359F604"
-            {
-            "SourcePath" = "8:..\\bin\\Release\\evsbc.cat"
-            "TargetName" = "8:evsbc.cat"
-            "Tag" = "8:"
-            "Folder" = "8:_18E81C9E3C4F4675BCD023B8455469BC"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_C6A6E074BC26DFC3F5D2046B22916996"
-            {
-            "AssemblyRegister" = "3:1"
-            "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:CATSerialPorts, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL"
-                "ScatterAssemblies"
-                {
-                    "_C6A6E074BC26DFC3F5D2046B22916996"
-                    {
-                    "Name" = "8:CATSerialPorts.DLL"
-                    "Attributes" = "3:512"
-                    }
-                }
-            "SourcePath" = "8:CATSerialPorts.DLL"
-            "TargetName" = "8:"
-            "Tag" = "8:"
-            "Folder" = "8:_18E81C9E3C4F4675BCD023B8455469BC"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:TRUE"
-            "IsolateTo" = "8:"
-            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_C7884B824B4848489BC0063503CD45FF"
             {
             "SourcePath" = "8:..\\bin\\Release\\Alert.wav"
@@ -586,26 +424,6 @@
             {
             "SourcePath" = "8:..\\bin\\Release\\ftd2xx.dll"
             "TargetName" = "8:ftd2xx.dll"
-            "Tag" = "8:"
-            "Folder" = "8:_18E81C9E3C4F4675BCD023B8455469BC"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_F55278B1675F44B98BD71EE087125E70"
-            {
-            "SourcePath" = "8:..\\bin\\Release\\vsbsetup.exe"
-            "TargetName" = "8:vsbsetup.exe"
             "Tag" = "8:"
             "Folder" = "8:_18E81C9E3C4F4675BCD023B8455469BC"
             "Condition" = "8:"
@@ -689,14 +507,14 @@
         {
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:DDUtil"
-        "ProductCode" = "8:{CBEC859F-6291-47E2-B149-CD4BFA7FA4CF}"
-        "PackageCode" = "8:{81694598-47D3-4D11-B4EC-131AB84EF981}"
+        "ProductCode" = "8:{B9CE544C-3C06-44DF-94BF-F6A2C0BF9B80}"
+        "PackageCode" = "8:{4A294F90-C8BB-471B-B340-D73FF9246D39}"
         "UpgradeCode" = "8:{E787AEB9-A577-499D-A08E-775DE944A651}"
         "RestartWWWService" = "11:FALSE"
         "RemovePreviousVersions" = "11:TRUE"
         "DetectNewerInstalledVersion" = "11:TRUE"
         "InstallAllUsers" = "11:FALSE"
-        "ProductVersion" = "8:1.7.402"
+        "ProductVersion" = "8:1.7.406"
         "Manufacturer" = "8:Default Company Name"
         "ARPHELPTELEPHONE" = "8:"
         "ARPHELPLINK" = "8:"

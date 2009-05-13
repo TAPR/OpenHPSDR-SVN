@@ -81,8 +81,8 @@ namespace DataDecoder
 
         private void chkAntEnab_CheckedChanged(object sender, EventArgs e)
         {
-            if (chkAntEnab.Checked) set.ChkAntEnab = true;
-            else set.ChkAntEnab = false;
+            if (chkAntEnab.Checked) { set.ChkAntEnab = true; }
+            else { set.ChkAntEnab = false; }
             set.Save();
         }
     }

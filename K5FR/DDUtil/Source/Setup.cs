@@ -1,7 +1,7 @@
 //==
 // Setup.cs
 //==
-// Copyright (C) 2007, 2008  Steve Nance - K5FR
+// Copyright (C) 2007, 2008, 2009  Steve Nance - K5FR
 //
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -278,11 +278,11 @@ namespace DataDecoder
 
         public Setup(SplashScreen splash)
         {
-            Configuration config =
-            ConfigurationManager.OpenExeConfiguration(
-            ConfigurationUserLevel.PerUserRoamingAndLocal);
-            Console.WriteLine("Local user config path: {0}", config.FilePath);             
-            //// See if the user.settings file is corrupted.
+            //Configuration config =
+            //ConfigurationManager.OpenExeConfiguration(
+            //ConfigurationUserLevel.PerUserRoamingAndLocal);
+            //Console.WriteLine("Local user config path: {0}", config.FilePath);             
+            // See if the user.settings file is corrupted.
             //try
             //{
             //    Settings.Default.Upgrade();
@@ -299,7 +299,7 @@ namespace DataDecoder
             //        "Click Yes to reset your user settings and continue.\r\r" +
             //        "Click No if you wish to attempt manual repair or to \r" +
             //        "rescue information before proceeding.",
-            //        "Corrupt User Settings",MessageBoxButtons.YesNo,
+            //        "Corrupt User Settings", MessageBoxButtons.YesNo,
             //        MessageBoxIcon.Error) == DialogResult.Yes)
             //    {
             //        File.Delete(filename);
@@ -935,71 +935,71 @@ namespace DataDecoder
         // the Amp160 check box has changed
         private void chkAmp160_CheckedChanged(object sender, EventArgs e)
         {
-            if (chkAmp160.Checked) set.Amp160 = true;
-            else set.Amp160 = false;
+            if (chkAmp160.Checked) { set.Amp160 = true; }
+            else { set.Amp160 = false; }
             set.Save();
         }
         // the Amp80 check box has changed
         private void chkAmp80_CheckedChanged(object sender, EventArgs e)
         {
-            if (chkAmp80.Checked) set.Amp80 = true;
-            else set.Amp80 = false;
+            if (chkAmp80.Checked) { set.Amp80 = true; }
+            else { set.Amp80 = false; }
             set.Save();
         }
         // the Amp40 check box has changed
         private void chkAmp40_CheckedChanged(object sender, EventArgs e)
         {
-            if (chkAmp40.Checked) set.Amp40 = true;
-            else set.Amp40 = false;
+            if (chkAmp40.Checked) { set.Amp40 = true; }
+            else { set.Amp40 = false; }
             set.Save();
         }
         // the Amp30 check box has changed
         private void chkAmp30_CheckedChanged(object sender, EventArgs e)
         {
-            if (chkAmp30.Checked) set.Amp30 = true;
-            else set.Amp30 = false;
+            if (chkAmp30.Checked) { set.Amp30 = true; }
+            else { set.Amp30 = false; }
             set.Save();
         }
         // the Amp20 check box has changed
         private void chkAmp20_CheckedChanged(object sender, EventArgs e)
         {
-            if (chkAmp20.Checked) set.Amp20 = true;
-            else set.Amp20 = false;
+            if (chkAmp20.Checked) { set.Amp20 = true; }
+            else { set.Amp20 = false; }
             set.Save();
         }
         // the Amp17 check box has changed
         private void chkAmp17_CheckedChanged(object sender, EventArgs e)
         {
-            if (chkAmp17.Checked) set.Amp17 = true;
-            else set.Amp17 = false;
+            if (chkAmp17.Checked) { set.Amp17 = true; }
+            else { set.Amp17 = false; }
             set.Save();
         }
         // the Amp15 check box has changed
         private void chkAmp15_CheckedChanged(object sender, EventArgs e)
         {
-            if (chkAmp15.Checked) set.Amp15 = true;
-            else set.Amp15 = false;
+            if (chkAmp15.Checked) { set.Amp15 = true; }
+            else { set.Amp15 = false; }
             set.Save();
         }
         // the Amp12 check box has changed
         private void chkAmp12_CheckedChanged(object sender, EventArgs e)
         {
-            if (chkAmp12.Checked) set.Amp12 = true;
-            else set.Amp12 = false;
+            if (chkAmp12.Checked) { set.Amp12 = true; }
+            else { set.Amp12 = false; }
             set.Save();
         }
         // the Amp10 check box has changed
         private void chkAmp10_CheckedChanged(object sender, EventArgs e)
         {
-            if (chkAmp10.Checked) set.Amp10 = true;
-            else set.Amp10 = false;
+            if (chkAmp10.Checked) { set.Amp10 = true; }
+            else { set.Amp10 = false; }
             set.Save();
         }
         // the Amp6 check box has changed
         private void chkAmp6_CheckedChanged(object sender, EventArgs e)
         {
-            if (chkAmp6.Checked) set.Amp6 = true;
-            else set.Amp6 = false;
+            if (chkAmp6.Checked) { set.Amp6 = true; }
+            else { set.Amp6 = false; }
             set.Save();
         }
         //the FZ button was pressed
@@ -1012,14 +1012,14 @@ namespace DataDecoder
         {
             if (chkNoBdChg.Checked)
             { set.NoBandChg = true; }
-            else set.NoBandChg = false;
+            else { set.NoBandChg = false; }
             set.Save();
         }
         // Slave radio mode has changed.
         private void chkModeChg_CheckedChanged(object sender, EventArgs e)
         {
-            if (chkModeChg.Checked) set.ModeChg = true;
-            else set.ModeChg = false;
+            if (chkModeChg.Checked) { set.ModeChg = true; }
+            else { set.ModeChg = false; }
             set.Save();
         }
 
@@ -1034,6 +1034,7 @@ namespace DataDecoder
             {
                 chkDev0.Checked = true;
             }
+            set.Save();
         }
         // one of the Manual Override radio buttons has changed
         private void grpBCDover_CheckChanged(object sender, EventArgs e)
@@ -1561,13 +1562,12 @@ namespace DataDecoder
             {
                 chkOvride.Checked = false;
                 set.Dev0Enab = true;
-                set.Save();
             }
             else
             {
                 set.Dev0Enab = false;
-                set.Save();
             }
+            set.Save();
         }
         // LPT Device enabled condition changed
         private void chkDevice_CheckedChanged(object sender, EventArgs e)
@@ -1575,13 +1575,12 @@ namespace DataDecoder
             if (chkDevice.Checked == true)
             {
                 set.DevEnab = true;
-                set.Save();
             }
             else
             {
                 set.DevEnab = false;
-                set.Save();
             }
+                set.Save();
         }
         // CI-V Hex Address has changed
         private void txtRadNum_TextChanged(object sender, EventArgs e)
@@ -1710,7 +1709,6 @@ namespace DataDecoder
             set.Save();
         }
         // new PL port was selected
-//        private void cboSerAcc_SelectionChangeCommitted(object sender, EventArgs e)
         private void cboSerAcc_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (AccPort.IsOpen) AccPort.Close();
@@ -1738,7 +1736,6 @@ namespace DataDecoder
             }
 
             // save new port setting
-//            string str = set.AccPort;
             set.AccPort = cboSerAcc.SelectedIndex;
             set.Save();
         }
@@ -1760,7 +1757,6 @@ namespace DataDecoder
                 return;
             }
             // save new port setting
-//            string str = set.RadioPort;
             set.RadioPort = cboCAT.SelectedIndex;
             set.Save();
         }
@@ -2184,54 +2180,50 @@ namespace DataDecoder
         // The PW1 Disable Broadcast check box has changed.
         private void chkDisBcast_CheckedChanged(object sender, EventArgs e)
         {
-            if (chkDisBcast.Checked) set.chkPW1db = true;
-
-            else set.chkPW1db = false;
+            if (chkDisBcast.Checked) { set.chkPW1db = true; }
+            else { set.chkPW1db = false; }
             set.Save();
         }
         // The RCP2 Disable Polling check box has changed
         private void chkRCP2DisPol_CheckedChanged(object sender, EventArgs e)
         {
-            if (chkRCP2DisPol.Checked) set.RCP2DisPol = true;
-
-            else set.RCP2DisPol = false;
+            if (chkRCP2DisPol.Checked) { set.RCP2DisPol = true; }
+            else { set.RCP2DisPol = false; }
             set.Save();
         }
         // The RCP3 Disable Polling check box has changed
         private void chkRCP3DisPol_CheckedChanged(object sender, EventArgs e)
         {
-            if (chkRCP3DisPol.Checked) set.RCP3DisPol = true;
-
-            else set.RCP3DisPol = false;
+            if (chkRCP3DisPol.Checked) { set.RCP3DisPol = true; }
+            else { set.RCP3DisPol = false; }
             set.Save();
         }
         // The RCP4 Disable Polling check box has changed
         private void chkRCP4DisPol_CheckedChanged(object sender, EventArgs e)
         {
-            if (chkRCP4DisPol.Checked) set.RCP4DisPol = true;
-
-            else set.RCP4DisPol = false;
+            if (chkRCP4DisPol.Checked) { set.RCP4DisPol = true; }
+            else { set.RCP4DisPol = false; }
             set.Save();
         }
         // The RCP2IF check box has changed
         private void chkRCP2IF_CheckedChanged(object sender, EventArgs e)
         {
-            if (chkRCP2IF.Checked) set.RCP2IF = true;
-            else set.RCP2IF = false;
+            if (chkRCP2IF.Checked) { set.RCP2IF = true; }
+            else { set.RCP2IF = false; }
             set.Save();
         }
         // The RCP3IF check box has changed
         private void chkRCP3IF_CheckedChanged(object sender, EventArgs e)
         {
-            if (chkRCP3IF.Checked) set.RCP3IF = true;
-            else set.RCP3IF = false;
+            if (chkRCP3IF.Checked) { set.RCP3IF = true; }
+            else { set.RCP3IF = false; }
             set.Save();
         }
         // The RCP4IF check box has changed
         private void chkRCP4IF_CheckedChanged(object sender, EventArgs e)
         {
-            if (chkRCP4IF.Checked) set.RCP4IF = true;
-            else set.RCP4IF = false;
+            if (chkRCP4IF.Checked) { set.RCP4IF = true; }
+            else { set.RCP4IF = false; }
             set.Save();
         }
         // The Thread.Sleep interval has changed
@@ -2272,8 +2264,8 @@ namespace DataDecoder
         // Slave mode RadioButton has changed
         private void chkMode_CheckedChanged(object sender, EventArgs e)
         {
-            if (chkMode.Checked) set.slaveMode = true;
-            else set.slaveMode = false;
+            if (chkMode.Checked) { set.slaveMode = true; }
+            else { set.slaveMode = false; }
             set.Save();
         }
 
@@ -3963,8 +3955,8 @@ namespace DataDecoder
         // the Data Signals Invert checkbox has changed
         private void chkDSInvert_CheckedChanged(object sender, EventArgs e)
         {
-            if (chkDSInvert.Checked) set.DSInv = true;
-            else set.DSInv = false;
+            if (chkDSInvert.Checked) { set.DSInv = true; }
+            else { set.DSInv = false; }
             set.Save();
         }
         // the FlexWire checkbox has changed for the VHF+ matrix A
@@ -6266,16 +6258,16 @@ namespace DataDecoder
 
                             if (stsOper)
                             {   // if amp not selected for this band set PTT to ByPass
-                                if (!chkAmp160.Checked && band == "160") btnByp_Click(null, null);
-                                if (!chkAmp80.Checked && band == "080") btnByp_Click(null, null);
-                                if (!chkAmp40.Checked && band == "040") btnByp_Click(null, null);
-                                if (!chkAmp30.Checked && band == "030") btnByp_Click(null, null);
-                                if (!chkAmp20.Checked && band == "020") btnByp_Click(null, null);
-                                if (!chkAmp17.Checked && band == "017") btnByp_Click(null, null);
-                                if (!chkAmp15.Checked && band == "015") btnByp_Click(null, null);
-                                if (!chkAmp12.Checked && band == "012") btnByp_Click(null, null);
-                                if (!chkAmp10.Checked && band == "010") btnByp_Click(null, null);
-                                if (!chkAmp6.Checked && band == "006") btnByp_Click(null, null);
+                                if (!chkAmp160.Checked && band == "160") {btnByp_Click(null, null);}
+                                if (!chkAmp80.Checked && band == "080") {btnByp_Click(null, null);}
+                                if (!chkAmp40.Checked && band == "040") {btnByp_Click(null, null);}
+                                if (!chkAmp30.Checked && band == "030") {btnByp_Click(null, null);}
+                                if (!chkAmp20.Checked && band == "020") {btnByp_Click(null, null);}
+                                if (!chkAmp17.Checked && band == "017") {btnByp_Click(null, null);}
+                                if (!chkAmp15.Checked && band == "015") {btnByp_Click(null, null);}
+                                if (!chkAmp12.Checked && band == "012") {btnByp_Click(null, null);}
+                                if (!chkAmp10.Checked && band == "010") {btnByp_Click(null, null);}
+                                if (!chkAmp6.Checked && band == "006") {btnByp_Click(null, null);}
                                 // see if band has changed since last time through
                                 // note: BtnBypass_Click sets lastBand to ""
                                 // to force loading of power settings. The COBC var is used
@@ -8873,15 +8865,15 @@ namespace DataDecoder
         // the Port A invert checkbox has changed.
         private void chkInvertA_CheckedChanged(object sender, EventArgs e)
         {
-            if (chkInvertA.Checked) set.chkInvertA = true;
-            else set.chkInvertA = false;
+            if (chkInvertA.Checked) { set.chkInvertA = true; }
+            else { set.chkInvertA = false; }
             set.Save();
         }
         // the Port B invert checkbox has changed.
         private void chkInvertB_CheckedChanged(object sender, EventArgs e)
         {
-            if (chkInvertB.Checked) set.chkInvertB = true;
-            else set.chkInvertB = false;
+            if (chkInvertB.Checked) { set.chkInvertB = true; }
+            else { set.chkInvertB = false; }
             set.Save();
         }
 
