@@ -10107,7 +10107,7 @@ namespace DataDecoder
             this.chkAmp6.TabIndex = 105;
             this.chkAmp6.Text = "6";
             this.toolTip1.SetToolTip(this.chkAmp6, "Select to enable Amp on this band.");
-            this.chkAmp6.UseVisualStyleBackColor = false;
+            this.chkAmp6.UseVisualStyleBackColor = true;
             this.chkAmp6.CheckedChanged += new System.EventHandler(this.chkAmp6_CheckedChanged);
             // 
             // chkAmp80
@@ -10122,7 +10122,7 @@ namespace DataDecoder
             this.chkAmp80.TabIndex = 98;
             this.chkAmp80.Text = "80";
             this.toolTip1.SetToolTip(this.chkAmp80, "Select to enable Amp on this band.");
-            this.chkAmp80.UseVisualStyleBackColor = false;
+            this.chkAmp80.UseVisualStyleBackColor = true;
             this.chkAmp80.CheckedChanged += new System.EventHandler(this.chkAmp80_CheckedChanged);
             // 
             // chkAmp160
@@ -10137,7 +10137,7 @@ namespace DataDecoder
             this.chkAmp160.TabIndex = 96;
             this.chkAmp160.Text = "160";
             this.toolTip1.SetToolTip(this.chkAmp160, "Select to enable Amp on this band.");
-            this.chkAmp160.UseVisualStyleBackColor = false;
+            this.chkAmp160.UseVisualStyleBackColor = true;
             this.chkAmp160.CheckedChanged += new System.EventHandler(this.chkAmp160_CheckedChanged);
             // 
             // chkAmp30
@@ -10152,7 +10152,7 @@ namespace DataDecoder
             this.chkAmp30.TabIndex = 103;
             this.chkAmp30.Text = "30";
             this.toolTip1.SetToolTip(this.chkAmp30, "Select to enable Amp on this band.");
-            this.chkAmp30.UseVisualStyleBackColor = false;
+            this.chkAmp30.UseVisualStyleBackColor = true;
             this.chkAmp30.CheckedChanged += new System.EventHandler(this.chkAmp30_CheckedChanged);
             // 
             // chkAmp17
@@ -10167,7 +10167,7 @@ namespace DataDecoder
             this.chkAmp17.TabIndex = 99;
             this.chkAmp17.Text = "17";
             this.toolTip1.SetToolTip(this.chkAmp17, "Select to enable Amp on this band.");
-            this.chkAmp17.UseVisualStyleBackColor = false;
+            this.chkAmp17.UseVisualStyleBackColor = true;
             this.chkAmp17.CheckedChanged += new System.EventHandler(this.chkAmp17_CheckedChanged);
             // 
             // chkAmp40
@@ -10182,7 +10182,7 @@ namespace DataDecoder
             this.chkAmp40.TabIndex = 101;
             this.chkAmp40.Text = "40";
             this.toolTip1.SetToolTip(this.chkAmp40, "Select to enable Amp on this band.");
-            this.chkAmp40.UseVisualStyleBackColor = false;
+            this.chkAmp40.UseVisualStyleBackColor = true;
             this.chkAmp40.CheckedChanged += new System.EventHandler(this.chkAmp40_CheckedChanged);
             // 
             // chkAmp10
@@ -10197,7 +10197,7 @@ namespace DataDecoder
             this.chkAmp10.TabIndex = 104;
             this.chkAmp10.Text = "10";
             this.toolTip1.SetToolTip(this.chkAmp10, "Select to enable Amp on this band.");
-            this.chkAmp10.UseVisualStyleBackColor = false;
+            this.chkAmp10.UseVisualStyleBackColor = true;
             this.chkAmp10.CheckedChanged += new System.EventHandler(this.chkAmp10_CheckedChanged);
             // 
             // chkAmp12
@@ -10212,7 +10212,7 @@ namespace DataDecoder
             this.chkAmp12.TabIndex = 102;
             this.chkAmp12.Text = "12";
             this.toolTip1.SetToolTip(this.chkAmp12, "Select to enable Amp on this band.");
-            this.chkAmp12.UseVisualStyleBackColor = false;
+            this.chkAmp12.UseVisualStyleBackColor = true;
             this.chkAmp12.CheckedChanged += new System.EventHandler(this.chkAmp12_CheckedChanged);
             // 
             // chkAmp20
@@ -10227,7 +10227,7 @@ namespace DataDecoder
             this.chkAmp20.TabIndex = 97;
             this.chkAmp20.Text = "20";
             this.toolTip1.SetToolTip(this.chkAmp20, "Select to enable Amp on this band.");
-            this.chkAmp20.UseVisualStyleBackColor = false;
+            this.chkAmp20.UseVisualStyleBackColor = true;
             this.chkAmp20.CheckedChanged += new System.EventHandler(this.chkAmp20_CheckedChanged);
             // 
             // chkAmp15
@@ -10242,7 +10242,7 @@ namespace DataDecoder
             this.chkAmp15.TabIndex = 100;
             this.chkAmp15.Text = "15";
             this.toolTip1.SetToolTip(this.chkAmp15, "Select to enable Amp on this band.");
-            this.chkAmp15.UseVisualStyleBackColor = false;
+            this.chkAmp15.UseVisualStyleBackColor = true;
             this.chkAmp15.CheckedChanged += new System.EventHandler(this.chkAmp15_CheckedChanged);
             // 
             // chkNoBdChg
