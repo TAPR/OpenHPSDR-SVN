@@ -285,11 +285,11 @@ namespace DataDecoder
             // See if the user.settings file is corrupted.
             //try
             //{
-            //    Settings.Default.Upgrade();
+            //    Settings.Default.Reload();
             //}
-            //catch (ConfigurationException ex)
+            //catch (ConfigurationErrorsException ex)
             //{ //(requires System.Configuration)
-            //    string filename = ((ConfigurationException)ex.InnerException).Filename;
+            //    string filename = ((ConfigurationErrorsException)ex.InnerException).Filename;
 
             //    if (MessageBox.Show(
             //        "DDUtil has detected that your user settings file\r" +
@@ -303,7 +303,8 @@ namespace DataDecoder
             //        MessageBoxIcon.Error) == DialogResult.Yes)
             //    {
             //        File.Delete(filename);
-            //        Settings.Default.Reload();
+            //        Application.Restart();
+            // //       Settings.Default.Reload();
             //        // you could optionally restart the app instead
             //    }
             //    else
@@ -9611,6 +9612,7 @@ namespace DataDecoder
         }
 
         #endregion WaveNode Setup
+
 
         #endregion WaveNode
 

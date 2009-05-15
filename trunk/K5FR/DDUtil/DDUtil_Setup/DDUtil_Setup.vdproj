@@ -15,26 +15,20 @@
     {
         "Entry"
         {
-        "MsmKey" = "8:_22EB2E3B0874C576389E2958A4169D17"
-        "OwnerKey" = "8:_343E83015DF04222B9800260C7967A26"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
         "MsmKey" = "8:_343E83015DF04222B9800260C7967A26"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_4483569F2DD36C92EA6B9EF506BAF7D1"
-        "OwnerKey" = "8:_343E83015DF04222B9800260C7967A26"
+        "MsmKey" = "8:_463D12FD4293495F83587DB06BA959EB"
+        "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_463D12FD4293495F83587DB06BA959EB"
-        "OwnerKey" = "8:_UNDEFINED"
+        "MsmKey" = "8:_47BE9459692FAF18756BB46E7E8CB644"
+        "OwnerKey" = "8:_343E83015DF04222B9800260C7967A26"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -53,6 +47,12 @@
         {
         "MsmKey" = "8:_5147E685D9F04FCE9E696502C49BC449"
         "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_725F0EECD083E639ADC14AA22C2821BB"
+        "OwnerKey" = "8:_343E83015DF04222B9800260C7967A26"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -88,13 +88,13 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_4483569F2DD36C92EA6B9EF506BAF7D1"
+        "OwnerKey" = "8:_47BE9459692FAF18756BB46E7E8CB644"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_22EB2E3B0874C576389E2958A4169D17"
+        "OwnerKey" = "8:_725F0EECD083E639ADC14AA22C2821BB"
         "MsmSig" = "8:_UNDEFINED"
         }
     }
@@ -187,37 +187,6 @@
         }
         "File"
         {
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_22EB2E3B0874C576389E2958A4169D17"
-            {
-            "AssemblyRegister" = "3:1"
-            "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:CATSerialPorts, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL"
-                "ScatterAssemblies"
-                {
-                    "_22EB2E3B0874C576389E2958A4169D17"
-                    {
-                    "Name" = "8:CATSerialPorts.DLL"
-                    "Attributes" = "3:512"
-                    }
-                }
-            "SourcePath" = "8:CATSerialPorts.DLL"
-            "TargetName" = "8:"
-            "Tag" = "8:"
-            "Folder" = "8:_18E81C9E3C4F4675BCD023B8455469BC"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:TRUE"
-            "IsolateTo" = "8:"
-            }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_343E83015DF04222B9800260C7967A26"
             {
             "AssemblyRegister" = "3:1"
@@ -249,14 +218,34 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_4483569F2DD36C92EA6B9EF506BAF7D1"
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_463D12FD4293495F83587DB06BA959EB"
+            {
+            "SourcePath" = "8:..\\bin\\Release\\ErrorLog.txt"
+            "TargetName" = "8:ErrorLog.txt"
+            "Tag" = "8:"
+            "Folder" = "8:_18E81C9E3C4F4675BCD023B8455469BC"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_47BE9459692FAF18756BB46E7E8CB644"
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
             "AssemblyAsmDisplayName" = "8:WizardBase, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
-                    "_4483569F2DD36C92EA6B9EF506BAF7D1"
+                    "_47BE9459692FAF18756BB46E7E8CB644"
                     {
                     "Name" = "8:WizardBase.DLL"
                     "Attributes" = "3:512"
@@ -278,26 +267,6 @@
             "Register" = "3:1"
             "Exclude" = "11:FALSE"
             "IsDependency" = "11:TRUE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_463D12FD4293495F83587DB06BA959EB"
-            {
-            "SourcePath" = "8:..\\bin\\Release\\ErrorLog.txt"
-            "TargetName" = "8:ErrorLog.txt"
-            "Tag" = "8:"
-            "Folder" = "8:_18E81C9E3C4F4675BCD023B8455469BC"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_4813254816004B46B5BDCA8741ED54EC"
@@ -358,6 +327,37 @@
             "Register" = "3:1"
             "Exclude" = "11:FALSE"
             "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_725F0EECD083E639ADC14AA22C2821BB"
+            {
+            "AssemblyRegister" = "3:1"
+            "AssemblyIsInGAC" = "11:FALSE"
+            "AssemblyAsmDisplayName" = "8:CATSerialPorts, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL"
+                "ScatterAssemblies"
+                {
+                    "_725F0EECD083E639ADC14AA22C2821BB"
+                    {
+                    "Name" = "8:CATSerialPorts.DLL"
+                    "Attributes" = "3:512"
+                    }
+                }
+            "SourcePath" = "8:CATSerialPorts.DLL"
+            "TargetName" = "8:"
+            "Tag" = "8:"
+            "Folder" = "8:_18E81C9E3C4F4675BCD023B8455469BC"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_778224FC72C548169D6E534E68FC335B"
@@ -507,14 +507,14 @@
         {
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:DDUtil"
-        "ProductCode" = "8:{B9CE544C-3C06-44DF-94BF-F6A2C0BF9B80}"
-        "PackageCode" = "8:{4A294F90-C8BB-471B-B340-D73FF9246D39}"
+        "ProductCode" = "8:{5F63AB3B-BD53-492A-881A-7F5DA4F999F7}"
+        "PackageCode" = "8:{D8591374-4C24-4385-8BCC-FE98C24948FA}"
         "UpgradeCode" = "8:{E787AEB9-A577-499D-A08E-775DE944A651}"
         "RestartWWWService" = "11:FALSE"
         "RemovePreviousVersions" = "11:TRUE"
         "DetectNewerInstalledVersion" = "11:TRUE"
         "InstallAllUsers" = "11:FALSE"
-        "ProductVersion" = "8:1.7.406"
+        "ProductVersion" = "8:1.7.407"
         "Manufacturer" = "8:Default Company Name"
         "ARPHELPTELEPHONE" = "8:"
         "ARPHELPLINK" = "8:"

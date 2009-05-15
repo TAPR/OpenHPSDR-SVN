@@ -749,7 +749,7 @@ namespace DataDecoder
             this.txtPortB = new System.Windows.Forms.TextBox();
             this.label106 = new System.Windows.Forms.Label();
             this.tabSetup = new System.Windows.Forms.TabPage();
-            this.groupBox15 = new System.Windows.Forms.GroupBox();
+            this.grpAmpBands = new System.Windows.Forms.GroupBox();
             this.chkAmp6 = new System.Windows.Forms.CheckBox();
             this.chkAmp80 = new System.Windows.Forms.CheckBox();
             this.chkAmp160 = new System.Windows.Forms.CheckBox();
@@ -925,7 +925,7 @@ namespace DataDecoder
             this.grpPortB.SuspendLayout();
             this.grpPortA.SuspendLayout();
             this.tabSetup.SuspendLayout();
-            this.groupBox15.SuspendLayout();
+            this.grpAmpBands.SuspendLayout();
             this.grpDog.SuspendLayout();
             this.groupBox10.SuspendLayout();
             this.grpSpeed.SuspendLayout();
@@ -10056,7 +10056,7 @@ namespace DataDecoder
             // 
             // tabSetup
             // 
-            this.tabSetup.Controls.Add(this.groupBox15);
+            this.tabSetup.Controls.Add(this.grpAmpBands);
             this.tabSetup.Controls.Add(this.chkNoBdChg);
             this.tabSetup.Controls.Add(this.chkOnTop);
             this.tabSetup.Controls.Add(this.chkModeChg);
@@ -10073,27 +10073,27 @@ namespace DataDecoder
             this.tabSetup.Text = "Setup";
             this.tabSetup.UseVisualStyleBackColor = true;
             // 
-            // groupBox15
+            // grpAmpBands
             // 
-            this.groupBox15.Controls.Add(this.chkAmp6);
-            this.groupBox15.Controls.Add(this.chkAmp80);
-            this.groupBox15.Controls.Add(this.chkAmp160);
-            this.groupBox15.Controls.Add(this.chkAmp30);
-            this.groupBox15.Controls.Add(this.chkAmp17);
-            this.groupBox15.Controls.Add(this.chkAmp40);
-            this.groupBox15.Controls.Add(this.chkAmp10);
-            this.groupBox15.Controls.Add(this.chkAmp12);
-            this.groupBox15.Controls.Add(this.chkAmp20);
-            this.groupBox15.Controls.Add(this.chkAmp15);
-            this.groupBox15.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox15.ForeColor = System.Drawing.Color.Blue;
-            this.groupBox15.Location = new System.Drawing.Point(192, 203);
-            this.groupBox15.Name = "groupBox15";
-            this.groupBox15.Size = new System.Drawing.Size(214, 54);
-            this.groupBox15.TabIndex = 109;
-            this.groupBox15.TabStop = false;
-            this.groupBox15.Text = "Amp Bands";
-            this.toolTip1.SetToolTip(this.groupBox15, "Select bands to enable amplifier usage.");
+            this.grpAmpBands.Controls.Add(this.chkAmp6);
+            this.grpAmpBands.Controls.Add(this.chkAmp80);
+            this.grpAmpBands.Controls.Add(this.chkAmp160);
+            this.grpAmpBands.Controls.Add(this.chkAmp30);
+            this.grpAmpBands.Controls.Add(this.chkAmp17);
+            this.grpAmpBands.Controls.Add(this.chkAmp40);
+            this.grpAmpBands.Controls.Add(this.chkAmp10);
+            this.grpAmpBands.Controls.Add(this.chkAmp12);
+            this.grpAmpBands.Controls.Add(this.chkAmp20);
+            this.grpAmpBands.Controls.Add(this.chkAmp15);
+            this.grpAmpBands.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.grpAmpBands.ForeColor = System.Drawing.Color.Blue;
+            this.grpAmpBands.Location = new System.Drawing.Point(192, 203);
+            this.grpAmpBands.Name = "grpAmpBands";
+            this.grpAmpBands.Size = new System.Drawing.Size(214, 54);
+            this.grpAmpBands.TabIndex = 109;
+            this.grpAmpBands.TabStop = false;
+            this.grpAmpBands.Text = "Amp Bands";
+            this.toolTip1.SetToolTip(this.grpAmpBands, "Select bands to enable amplifier usage.");
             // 
             // chkAmp6
             // 
@@ -11553,8 +11553,8 @@ namespace DataDecoder
             this.grpPortA.PerformLayout();
             this.tabSetup.ResumeLayout(false);
             this.tabSetup.PerformLayout();
-            this.groupBox15.ResumeLayout(false);
-            this.groupBox15.PerformLayout();
+            this.grpAmpBands.ResumeLayout(false);
+            this.grpAmpBands.PerformLayout();
             this.grpDog.ResumeLayout(false);
             this.grpDog.PerformLayout();
             this.groupBox10.ResumeLayout(false);
@@ -12391,7 +12391,7 @@ namespace DataDecoder
         public Button btnMacro13;
         public Button btnMacro14;
         private Button btnFZ;
-        private GroupBox groupBox15;
+        private GroupBox grpAmpBands;
         private ToolStripMenuItem acomAntDefaultToolStripMenuItem;
         private CheckBox chkAmp6;
         private CheckBox chkAmp80;
