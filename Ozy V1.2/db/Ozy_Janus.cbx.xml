@@ -1,0 +1,8 @@
+<?xml version="1.0" ?>
+<LOG_ROOT>
+	<PROJECT NAME="Ozy_Janus">
+		<CBX_INST_ENTRY INSTANCE_NAME="|Ozy_Janus|Rx_fifo:RXF|scfifo:scfifo_component" CBX_FILE_NAME="scfifo_9t31.tdf"/>
+		<CBX_INST_ENTRY INSTANCE_NAME="|Ozy_Janus|SP_fifo:SPF|scfifo:scfifo_component" CBX_FILE_NAME="scfifo_1t31.tdf"/>
+		<CBX_INST_ENTRY INSTANCE_NAME="|Ozy_Janus|Tx_fifo:TXF|scfifo:scfifo_component" CBX_FILE_NAME="scfifo_ft31.tdf"/>
+	</PROJECT>
+</LOG_ROOT>
