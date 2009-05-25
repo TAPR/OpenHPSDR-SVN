@@ -5,7 +5,7 @@ Timing Analyzer Summary
 Type           : Worst-case tsu
 Slack          : N/A
 Required Time  : None
-Actual Time    : 9.878 ns
+Actual Time    : 10.797 ns
 From           : FLAGB
 To             : async_usb:usb1|FX_state~28
 From Clock     : --
@@ -15,8 +15,8 @@ Failed Paths   : 0
 Type           : Worst-case tco
 Slack          : N/A
 Required Time  : None
-Actual Time    : 17.994 ns
-From           : led_blinker:BLINK_D1|led_timer[9]
+Actual Time    : 18.328 ns
+From           : led_blinker:BLINK_D1|led_timer[14]
 To             : DEBUG_LED0
 From Clock     : IF_clk
 To Clock       : --
@@ -25,7 +25,7 @@ Failed Paths   : 0
 Type           : Worst-case tpd
 Slack          : N/A
 Required Time  : None
-Actual Time    : 11.317 ns
+Actual Time    : 11.314 ns
 From           : SDOBACK
 To             : FX2_PE1
 From Clock     : --
@@ -35,7 +35,7 @@ Failed Paths   : 0
 Type           : Worst-case th
 Slack          : N/A
 Required Time  : None
-Actual Time    : -1.398 ns
+Actual Time    : -1.384 ns
 From           : C5
 To             : I2S_rcv:J_IQ|bc0
 From Clock     : --
@@ -43,29 +43,29 @@ To Clock       : IF_clk
 Failed Paths   : 0
 
 Type           : Clock Setup: 'IF_clk'
-Slack          : 0.308 ns
+Slack          : -0.171 ns
 Required Time  : 48.00 MHz ( period = 20.833 ns )
 Actual Time    : N/A
-From           : NWire_rcv:P_MIC|idata[6]
-To             : NWire_rcv:P_MIC|DIFF_CLK.xd0[6]
+From           : NWire_xmit:P_IQPWM|irdy
+To             : NWire_xmit:P_IQPWM|DIFF_CLK.xr0
 From Clock     : clkmult3:cm3|altpll:altpll_component|_clk0
 To Clock       : IF_clk
-Failed Paths   : 0
+Failed Paths   : 2
 
 Type           : Clock Setup: 'clkmult3:cm3|altpll:altpll_component|_clk0'
-Slack          : 0.713 ns
+Slack          : 0.668 ns
 Required Time  : 144.01 MHz ( period = 6.944 ns )
-Actual Time    : 160.49 MHz ( period = 6.231 ns )
-From           : NWire_xmit:P_IQPWM|bcnt[5]
-To             : NWire_xmit:P_IQPWM|NW_state~11
+Actual Time    : 159.34 MHz ( period = 6.276 ns )
+From           : NWire_xmit:M_LRAudio|bcnt[19]
+To             : NWire_xmit:M_LRAudio|NW_state~13
 From Clock     : clkmult3:cm3|altpll:altpll_component|_clk0
 To Clock       : clkmult3:cm3|altpll:altpll_component|_clk0
 Failed Paths   : 0
 
 Type           : Clock Setup: 'C5'
-Slack          : 69.920 ns
+Slack          : 71.558 ns
 Required Time  : 12.29 MHz ( period = 81.366 ns )
-Actual Time    : 87.37 MHz ( period = 11.446 ns )
+Actual Time    : 101.96 MHz ( period = 9.808 ns )
 From           : I2S_xmit:J_IQPWM|bit_count[2]
 To             : I2S_xmit:J_IQPWM|bit_count[2]
 From Clock     : C5
@@ -73,10 +73,10 @@ To Clock       : C5
 Failed Paths   : 0
 
 Type           : Clock Setup: 'SPI_SCK'
-Slack          : 76.733 ns
+Slack          : 75.642 ns
 Required Time  : 12.29 MHz ( period = 81.366 ns )
-Actual Time    : 215.84 MHz ( period = 4.633 ns )
-From           : gpio_control:gpio_controlSDR|SPI_REGS:spi_regs|BitCounter[5]
+Actual Time    : 174.70 MHz ( period = 5.724 ns )
+From           : gpio_control:gpio_controlSDR|SPI_REGS:spi_regs|BitCounter[6]
 To             : gpio_control:gpio_controlSDR|SPI_REGS:spi_regs|sdata[7]
 From Clock     : SPI_SCK
 To Clock       : SPI_SCK
@@ -130,7 +130,7 @@ From           :
 To             : 
 From Clock     : 
 To Clock       : 
-Failed Paths   : 0
+Failed Paths   : 2
 
 --------------------------------------------------------------------------------------
 

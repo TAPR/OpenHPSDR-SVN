@@ -212,7 +212,7 @@ module Ozy_Janus(
 parameter M_TPD   = 4;
 parameter IF_TPD  = 2;
 
-localparam Ozy_serialno = 8'd12;	// Serial number of this version
+localparam Ozy_serialno = 8'd13;	// Serial number of this version
 
 localparam RX_FIFO_SZ  = 2048; // 16 by 2048 deep RX FIFO
 localparam TX_FIFO_SZ  = 4096; // 16 by 4096 deep TX FIFO
