@@ -1,5 +1,5 @@
 Design Assistant report for Ozy_Janus
-Sat May 16 08:40:28 2009
+Mon May 25 19:24:06 2009
 Quartus II Version 9.0 Build 132 02/25/2009 SJ Web Edition
 
 
@@ -38,7 +38,7 @@ applicable agreement for further details.
 +-------------------------------------------------------------------------+
 ; Design Assistant Summary                                                ;
 +-----------------------------------+-------------------------------------+
-; Design Assistant Status           ; Analyzed - Sat May 16 08:40:28 2009 ;
+; Design Assistant Status           ; Analyzed - Mon May 25 19:24:06 2009 ;
 ; Revision Name                     ; Ozy_Janus                           ;
 ; Top-level Entity Name             ; Ozy_Janus                           ;
 ; Family                            ; Cyclone II                          ;
@@ -294,8 +294,8 @@ applicable agreement for further details.
 ;  Clock ports destination node(s) list                              ; I2S_xmit:J_IQPWM|last_data[1]              ;
 ;  Clock ports destination node(s) list                              ; I2S_xmit:J_IQPWM|data[0]                   ;
 ;  Clock ports destination node(s) list                              ; I2S_xmit:J_IQPWM|last_data[17]             ;
-;  Clock ports destination node(s) list                              ; I2S_xmit:J_IQPWM|last_data[2]              ;
 ;  Clock ports destination node(s) list                              ; I2S_xmit:J_IQPWM|data[1]                   ;
+;  Clock ports destination node(s) list                              ; I2S_xmit:J_IQPWM|last_data[2]              ;
 ;  Clock ports destination node(s) list                              ; I2S_xmit:J_IQPWM|last_data[18]             ;
 ;  Clock ports destination node(s) list                              ; I2S_xmit:J_IQPWM|data[2]                   ;
 ;  Clock ports destination node(s) list                              ; I2S_xmit:J_IQPWM|last_data[3]              ;
@@ -318,11 +318,11 @@ applicable agreement for further details.
 ;  Clock ports destination node(s) list                              ; C12_SPEED.df0[0]                           ;
 ;  Clock ports destination node(s) list                              ; C12_SPEED.df1[1]                           ;
 ;  Clock ports destination node(s) list                              ; C12_SPEED.df1[0]                           ;
-;  Clock ports destination node(s) list                              ; C12_SPEED.rdy0                             ;
-;  Clock ports destination node(s) list                              ; clk_lrclk_gen:lrgen|BCLK_cnt[14]           ;
-;  Clock ports destination node(s) list                              ; clk_lrclk_gen:lrgen|BCLK_cnt[15]           ;
-;  Clock ports destination node(s) list                              ; clk_lrclk_gen:lrgen|BCLK_cnt[6]            ;
-;  Clock ports destination node(s) list                              ; clk_lrclk_gen:lrgen|BCLK_cnt[9]            ;
+;  Clock ports destination node(s) list                              ; clk_lrclk_gen:clrgen|BCLK_cnt[11]          ;
+;  Clock ports destination node(s) list                              ; clk_lrclk_gen:clrgen|BCLK_cnt[10]          ;
+;  Clock ports destination node(s) list                              ; clk_lrclk_gen:clrgen|BCLK_cnt[13]          ;
+;  Clock ports destination node(s) list                              ; clk_lrclk_gen:clrgen|BCLK_cnt[12]          ;
+;  Clock ports destination node(s) list                              ; clk_lrclk_gen:clrgen|BCLK_cnt[5]           ;
 ;  Non-clock ports destination node(s) list                          ; I2S_rcv:J_IQ|bc0                           ;
 +--------------------------------------------------------------------+--------------------------------------------+
 
@@ -336,8 +336,8 @@ applicable agreement for further details.
 ; Rule T101: Nodes with more than the specified number of fan-outs ; IF_rst                                                                                           ; 564     ;
 ; Rule T101: Nodes with more than the specified number of fan-outs ; clkmult3:cm3|altpll:altpll_component|_locked                                                     ; 459     ;
 ; Rule T101: Nodes with more than the specified number of fan-outs ; ~GND                                                                                             ; 173     ;
-; Rule T101: Nodes with more than the specified number of fan-outs ; Rx_fifo:RXF|scfifo:scfifo_component|scfifo_9t31:auto_generated|a_dpfifo_sk31:dpfifo|valid_rreq~1 ; 37      ;
 ; Rule T101: Nodes with more than the specified number of fan-outs ; Rx_fifo:RXF|scfifo:scfifo_component|scfifo_9t31:auto_generated|a_dpfifo_sk31:dpfifo|valid_wreq   ; 33      ;
+; Rule T101: Nodes with more than the specified number of fan-outs ; Rx_fifo:RXF|scfifo:scfifo_component|scfifo_9t31:auto_generated|a_dpfifo_sk31:dpfifo|valid_rreq~1 ; 37      ;
 ; Rule T101: Nodes with more than the specified number of fan-outs ; comb~1                                                                                           ; 51      ;
 ; Rule T101: Nodes with more than the specified number of fan-outs ; Tx_fifo:TXF|scfifo:scfifo_component|scfifo_ft31:auto_generated|a_dpfifo_2l31:dpfifo|valid_wreq   ; 49      ;
 ; Rule T101: Nodes with more than the specified number of fan-outs ; SYNC_state~13                                                                                    ; 35      ;
@@ -353,13 +353,13 @@ applicable agreement for further details.
 ; Rule T101: Nodes with more than the specified number of fan-outs ; clk_lrclk_gen:clrgen|BCLK~clkctrl                                                                ; 115     ;
 ; Rule T101: Nodes with more than the specified number of fan-outs ; C12_rst                                                                                          ; 84      ;
 ; Rule T101: Nodes with more than the specified number of fan-outs ; I2S_xmit:J_LRAudio|TLV_state.TLV_IDLE~1                                                          ; 34      ;
-; Rule T101: Nodes with more than the specified number of fan-outs ; NWire_xmit:P_IQPWM|id~66                                                                         ; 33      ;
 ; Rule T101: Nodes with more than the specified number of fan-outs ; NWire_xmit:M_LRAudio|id~64                                                                       ; 33      ;
-; Rule T101: Nodes with more than the specified number of fan-outs ; NWire_xmit:P_IQPWM|NW_state.NW_WAIT~1                                                            ; 65      ;
+; Rule T101: Nodes with more than the specified number of fan-outs ; NWire_xmit:P_IQPWM|id~66                                                                         ; 33      ;
 ; Rule T101: Nodes with more than the specified number of fan-outs ; NWire_xmit:M_LRAudio|NW_state.NW_WAIT~1                                                          ; 65      ;
-; Rule T101: Nodes with more than the specified number of fan-outs ; NWire_rcv:P_MIC|DB_LEN~113                                                                       ; 56      ;
-; Rule T101: Nodes with more than the specified number of fan-outs ; NWire_rcv:SPD|DB_LEN~97                                                                          ; 48      ;
+; Rule T101: Nodes with more than the specified number of fan-outs ; NWire_xmit:P_IQPWM|NW_state.NW_WAIT~1                                                            ; 65      ;
 ; Rule T101: Nodes with more than the specified number of fan-outs ; NWire_rcv:M_IQ|rdata~97                                                                          ; 48      ;
+; Rule T101: Nodes with more than the specified number of fan-outs ; NWire_rcv:SPD|DB_LEN~97                                                                          ; 48      ;
+; Rule T101: Nodes with more than the specified number of fan-outs ; NWire_rcv:P_MIC|DB_LEN~113                                                                       ; 56      ;
 ; Rule T101: Nodes with more than the specified number of fan-outs ; NWire_rcv:M_IQ|DB_LEN~113                                                                        ; 56      ;
 ; Rule T101: Nodes with more than the specified number of fan-outs ; NWire_rcv:p_ser|DB_LEN~145                                                                       ; 72      ;
 ; Rule T101: Nodes with more than the specified number of fan-outs ; NWire_rcv:m_ser|DB_LEN~145                                                                       ; 72      ;
@@ -376,48 +376,48 @@ applicable agreement for further details.
 ; Rule T102: Top nodes with the highest number of fan-outs         ; ~GND                                                                                             ; 173     ;
 ; Rule T102: Top nodes with the highest number of fan-outs         ; clk_lrclk_gen:clrgen|BCLK~clkctrl                                                                ; 115     ;
 ; Rule T102: Top nodes with the highest number of fan-outs         ; C12_rst                                                                                          ; 84      ;
-; Rule T102: Top nodes with the highest number of fan-outs         ; NWire_rcv:p_ser|DB_LEN~145                                                                       ; 72      ;
 ; Rule T102: Top nodes with the highest number of fan-outs         ; NWire_rcv:m_ser|DB_LEN~145                                                                       ; 72      ;
+; Rule T102: Top nodes with the highest number of fan-outs         ; NWire_rcv:p_ser|DB_LEN~145                                                                       ; 72      ;
 ; Rule T102: Top nodes with the highest number of fan-outs         ; NWire_xmit:CCxmit|NW_state.NW_WAIT~1                                                             ; 69      ;
 ; Rule T102: Top nodes with the highest number of fan-outs         ; C5~clkctrl                                                                                       ; 66      ;
 ; Rule T102: Top nodes with the highest number of fan-outs         ; NWire_xmit:M_LRAudio|NW_state.NW_WAIT~1                                                          ; 65      ;
 ; Rule T102: Top nodes with the highest number of fan-outs         ; NWire_xmit:P_IQPWM|NW_state.NW_WAIT~1                                                            ; 65      ;
 ; Rule T102: Top nodes with the highest number of fan-outs         ; IF_Audio_Data_rdy~2                                                                              ; 64      ;
 ; Rule T102: Top nodes with the highest number of fan-outs         ; NWire_xmit:CCxmit|id~124                                                                         ; 61      ;
-; Rule T102: Top nodes with the highest number of fan-outs         ; NWire_rcv:M_IQ|DB_LEN~113                                                                        ; 56      ;
 ; Rule T102: Top nodes with the highest number of fan-outs         ; NWire_rcv:P_MIC|DB_LEN~113                                                                       ; 56      ;
+; Rule T102: Top nodes with the highest number of fan-outs         ; NWire_rcv:M_IQ|DB_LEN~113                                                                        ; 56      ;
 ; Rule T102: Top nodes with the highest number of fan-outs         ; conf[1]                                                                                          ; 55      ;
 ; Rule T102: Top nodes with the highest number of fan-outs         ; comb~1                                                                                           ; 51      ;
 ; Rule T102: Top nodes with the highest number of fan-outs         ; NWire_rcv:M_IQ|rcv_flag                                                                          ; 50      ;
 ; Rule T102: Top nodes with the highest number of fan-outs         ; Tx_fifo:TXF|scfifo:scfifo_component|scfifo_ft31:auto_generated|a_dpfifo_2l31:dpfifo|valid_wreq   ; 49      ;
-; Rule T102: Top nodes with the highest number of fan-outs         ; NWire_rcv:M_IQ|rdata~97                                                                          ; 48      ;
 ; Rule T102: Top nodes with the highest number of fan-outs         ; NWire_rcv:SPD|DB_LEN~97                                                                          ; 48      ;
+; Rule T102: Top nodes with the highest number of fan-outs         ; NWire_rcv:M_IQ|rdata~97                                                                          ; 48      ;
 ; Rule T102: Top nodes with the highest number of fan-outs         ; SPI_SCK~clkctrl                                                                                  ; 40      ;
-; Rule T102: Top nodes with the highest number of fan-outs         ; SYNC_state~11                                                                                    ; 37      ;
 ; Rule T102: Top nodes with the highest number of fan-outs         ; Rx_fifo:RXF|scfifo:scfifo_component|scfifo_9t31:auto_generated|a_dpfifo_sk31:dpfifo|valid_rreq~1 ; 37      ;
+; Rule T102: Top nodes with the highest number of fan-outs         ; SYNC_state~11                                                                                    ; 37      ;
 ; Rule T102: Top nodes with the highest number of fan-outs         ; SYNC_state~13                                                                                    ; 35      ;
 ; Rule T102: Top nodes with the highest number of fan-outs         ; I2S_xmit:J_LRAudio|TLV_state.TLV_IDLE~1                                                          ; 34      ;
-; Rule T102: Top nodes with the highest number of fan-outs         ; Rx_fifo:RXF|scfifo:scfifo_component|scfifo_9t31:auto_generated|a_dpfifo_sk31:dpfifo|valid_wreq   ; 33      ;
-; Rule T102: Top nodes with the highest number of fan-outs         ; NWire_xmit:M_LRAudio|id~64                                                                       ; 33      ;
-; Rule T102: Top nodes with the highest number of fan-outs         ; I2S_xmit:J_IQPWM|TLV_state.TLV_IDLE~1                                                            ; 33      ;
 ; Rule T102: Top nodes with the highest number of fan-outs         ; C12_cgen_rst                                                                                     ; 33      ;
+; Rule T102: Top nodes with the highest number of fan-outs         ; I2S_xmit:J_IQPWM|TLV_state.TLV_IDLE~1                                                            ; 33      ;
+; Rule T102: Top nodes with the highest number of fan-outs         ; Rx_fifo:RXF|scfifo:scfifo_component|scfifo_9t31:auto_generated|a_dpfifo_sk31:dpfifo|valid_wreq   ; 33      ;
 ; Rule T102: Top nodes with the highest number of fan-outs         ; NWire_xmit:P_IQPWM|id~66                                                                         ; 33      ;
+; Rule T102: Top nodes with the highest number of fan-outs         ; NWire_xmit:M_LRAudio|id~64                                                                       ; 33      ;
 ; Rule T102: Top nodes with the highest number of fan-outs         ; async_usb:usb1|SLEN                                                                              ; 32      ;
 ; Rule T102: Top nodes with the highest number of fan-outs         ; IF_count[28]                                                                                     ; 32      ;
 ; Rule T102: Top nodes with the highest number of fan-outs         ; Tx_fifo:TXF|scfifo:scfifo_component|scfifo_ft31:auto_generated|a_dpfifo_2l31:dpfifo|valid_rreq   ; 32      ;
 ; Rule T102: Top nodes with the highest number of fan-outs         ; frequency~157                                                                                    ; 32      ;
 ; Rule T102: Top nodes with the highest number of fan-outs         ; NWire_xmit:P_IQPWM|dly_cnt[25]                                                                   ; 29      ;
 ; Rule T102: Top nodes with the highest number of fan-outs         ; NWire_rcv:SPD|TB_state~11                                                                        ; 27      ;
-; Rule T102: Top nodes with the highest number of fan-outs         ; led_blinker:BLINK_D1|led_timer~102                                                               ; 26      ;
 ; Rule T102: Top nodes with the highest number of fan-outs         ; led_blinker:BLINK_D4|led_timer~134                                                               ; 26      ;
 ; Rule T102: Top nodes with the highest number of fan-outs         ; TX_relay~6                                                                                       ; 26      ;
+; Rule T102: Top nodes with the highest number of fan-outs         ; led_blinker:BLINK_D1|led_timer~102                                                               ; 26      ;
 ; Rule T102: Top nodes with the highest number of fan-outs         ; I2S_rcv:J_IQ|always0~5                                                                           ; 25      ;
 ; Rule T102: Top nodes with the highest number of fan-outs         ; I2S_rcv:J_IQ|Equal2~2                                                                            ; 25      ;
 ; Rule T102: Top nodes with the highest number of fan-outs         ; I2S_rcv:J_IQ|always0~6                                                                           ; 24      ;
-; Rule T102: Top nodes with the highest number of fan-outs         ; LRcnt~108                                                                                        ; 24      ;
-; Rule T102: Top nodes with the highest number of fan-outs         ; async_usb:usb1|ep_sel                                                                            ; 24      ;
 ; Rule T102: Top nodes with the highest number of fan-outs         ; Tx_fifo_ctrl:TXFC|AD_state~18                                                                    ; 24      ;
+; Rule T102: Top nodes with the highest number of fan-outs         ; async_usb:usb1|ep_sel                                                                            ; 24      ;
 ; Rule T102: Top nodes with the highest number of fan-outs         ; NWire_xmit:CCxmit|dly_cnt~52                                                                     ; 24      ;
+; Rule T102: Top nodes with the highest number of fan-outs         ; LRcnt~108                                                                                        ; 24      ;
 ; Rule T102: Top nodes with the highest number of fan-outs         ; Tx_fifo_ctrl:TXFC|AD_state~17                                                                    ; 23      ;
 +------------------------------------------------------------------+--------------------------------------------------------------------------------------------------+---------+
 
@@ -428,7 +428,7 @@ applicable agreement for further details.
 Info: *******************************************************************
 Info: Running Quartus II Design Assistant
     Info: Version 9.0 Build 132 02/25/2009 SJ Web Edition
-    Info: Processing started: Sat May 16 08:40:25 2009
+    Info: Processing started: Mon May 25 19:24:03 2009
 Info: Command: quartus_drc --read_settings_files=off --write_settings_files=off Ozy_Janus -c Ozy_Janus
 Critical Warning: (High) Rule D101: Data bits are not synchronized when transferred between asynchronous clock domains. Found 71 asynchronous clock domain interface structure(s) related to this rule.
     Critical Warning: Node  "IF_xmit_req"
@@ -471,8 +471,8 @@ Info: (Information) Rule T101: Nodes with more than the specified number of fan-
     Info: Node  "IF_rst"
     Info: Node  "clkmult3:cm3|altpll:altpll_component|_locked"
     Info: Node  "~GND"
-    Info: Node  "Rx_fifo:RXF|scfifo:scfifo_component|scfifo_9t31:auto_generated|a_dpfifo_sk31:dpfifo|valid_rreq~1"
     Info: Node  "Rx_fifo:RXF|scfifo:scfifo_component|scfifo_9t31:auto_generated|a_dpfifo_sk31:dpfifo|valid_wreq"
+    Info: Node  "Rx_fifo:RXF|scfifo:scfifo_component|scfifo_9t31:auto_generated|a_dpfifo_sk31:dpfifo|valid_rreq~1"
     Info: Node  "comb~1"
     Info: Node  "Tx_fifo:TXF|scfifo:scfifo_component|scfifo_ft31:auto_generated|a_dpfifo_2l31:dpfifo|valid_wreq"
     Info: Node  "SYNC_state~13"
@@ -488,13 +488,13 @@ Info: (Information) Rule T101: Nodes with more than the specified number of fan-
     Info: Node  "clk_lrclk_gen:clrgen|BCLK~clkctrl"
     Info: Node  "C12_rst"
     Info: Node  "I2S_xmit:J_LRAudio|TLV_state.TLV_IDLE~1"
-    Info: Node  "NWire_xmit:P_IQPWM|id~66"
     Info: Node  "NWire_xmit:M_LRAudio|id~64"
-    Info: Node  "NWire_xmit:P_IQPWM|NW_state.NW_WAIT~1"
+    Info: Node  "NWire_xmit:P_IQPWM|id~66"
     Info: Node  "NWire_xmit:M_LRAudio|NW_state.NW_WAIT~1"
-    Info: Node  "NWire_rcv:P_MIC|DB_LEN~113"
-    Info: Node  "NWire_rcv:SPD|DB_LEN~97"
+    Info: Node  "NWire_xmit:P_IQPWM|NW_state.NW_WAIT~1"
     Info: Node  "NWire_rcv:M_IQ|rdata~97"
+    Info: Node  "NWire_rcv:SPD|DB_LEN~97"
+    Info: Node  "NWire_rcv:P_MIC|DB_LEN~113"
     Info: Node  "NWire_rcv:M_IQ|DB_LEN~113"
     Info: Node  "NWire_rcv:p_ser|DB_LEN~145"
     Info: Truncated list of Design Assistant messages to 30 messages. Go to sections under Design Assistant section of Compilation Report for complete lists of Design Assistant messages generated.
@@ -506,34 +506,34 @@ Info: (Information) Rule T102: Top nodes with the highest number of fan-outs. (V
     Info: Node  "~GND"
     Info: Node  "clk_lrclk_gen:clrgen|BCLK~clkctrl"
     Info: Node  "C12_rst"
-    Info: Node  "NWire_rcv:p_ser|DB_LEN~145"
     Info: Node  "NWire_rcv:m_ser|DB_LEN~145"
+    Info: Node  "NWire_rcv:p_ser|DB_LEN~145"
     Info: Node  "NWire_xmit:CCxmit|NW_state.NW_WAIT~1"
     Info: Node  "C5~clkctrl"
     Info: Node  "NWire_xmit:M_LRAudio|NW_state.NW_WAIT~1"
     Info: Node  "NWire_xmit:P_IQPWM|NW_state.NW_WAIT~1"
     Info: Node  "IF_Audio_Data_rdy~2"
     Info: Node  "NWire_xmit:CCxmit|id~124"
-    Info: Node  "NWire_rcv:M_IQ|DB_LEN~113"
     Info: Node  "NWire_rcv:P_MIC|DB_LEN~113"
+    Info: Node  "NWire_rcv:M_IQ|DB_LEN~113"
     Info: Node  "conf[1]"
     Info: Node  "comb~1"
     Info: Node  "NWire_rcv:M_IQ|rcv_flag"
     Info: Node  "Tx_fifo:TXF|scfifo:scfifo_component|scfifo_ft31:auto_generated|a_dpfifo_2l31:dpfifo|valid_wreq"
-    Info: Node  "NWire_rcv:M_IQ|rdata~97"
     Info: Node  "NWire_rcv:SPD|DB_LEN~97"
+    Info: Node  "NWire_rcv:M_IQ|rdata~97"
     Info: Node  "SPI_SCK~clkctrl"
-    Info: Node  "SYNC_state~11"
     Info: Node  "Rx_fifo:RXF|scfifo:scfifo_component|scfifo_9t31:auto_generated|a_dpfifo_sk31:dpfifo|valid_rreq~1"
+    Info: Node  "SYNC_state~11"
     Info: Node  "SYNC_state~13"
     Info: Node  "I2S_xmit:J_LRAudio|TLV_state.TLV_IDLE~1"
-    Info: Node  "Rx_fifo:RXF|scfifo:scfifo_component|scfifo_9t31:auto_generated|a_dpfifo_sk31:dpfifo|valid_wreq"
-    Info: Node  "NWire_xmit:M_LRAudio|id~64"
+    Info: Node  "C12_cgen_rst"
+    Info: Node  "I2S_xmit:J_IQPWM|TLV_state.TLV_IDLE~1"
     Info: Truncated list of Design Assistant messages to 30 messages. Go to sections under Design Assistant section of Compilation Report for complete lists of Design Assistant messages generated.
 Info: Design Assistant information: finished post-fitting analysis of current design -- generated 87 information messages and 74 warning messages
 Info: Quartus II Design Assistant was successful. 0 errors, 35 warnings
     Info: Peak virtual memory: 144 megabytes
-    Info: Processing ended: Sat May 16 08:40:28 2009
+    Info: Processing ended: Mon May 25 19:24:06 2009
     Info: Elapsed time: 00:00:03
     Info: Total CPU time (on all processors): 00:00:02
 
