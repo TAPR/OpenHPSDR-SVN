@@ -1,6 +1,6 @@
-Phil Harman - VK6APH - 22 March 2009
+Phil Harman - VK6APH - 18 May 2009
 
-Here are the steps requried to progam the EPCS16 on the Mercury board and EPCS4 on Penelope.
+Here are the steps requried to progam the EPCS16 on the Mercury board, EPCS4 on Penelope and the EPM240T100 on Janus.
 
 
 1. Download all the files from here
@@ -55,10 +55,13 @@ Here are the steps requried to progam the EPCS16 on the Mercury board and EPCS4 
 4. To update your Mercury board, fit a jumper to the header pins marked 
    LAST JTAG JP7 at bottom left of the board just above  the Atlas connector.
    To update your Penelope board, fit a jumper to the header pins marked
-   LAST JP7 located at the edge of the board next to the FPGA.  
+   LAST JP7 located at the edge of the board next to the FPGA.
+   To update your Janus board, fit a jumber to the header pins marked 
+   LAST JTAG JP12 located at the bottom left of the board just above the Atlas connector. 
 
 5. Power off your Atlas board. To program Mercury, plug just your Mercury and Ozy board into the Atlas bus.
    To program Penelope, plug just your Penelope board and Ozy board in the Atlas bus. 
+   To program Janus, plug just your Janus board and Ozy board in the Atlas bus.
    The board to be programmed MUST be closest to the power connector and the Ozy board in the NEXT slot.
    Turn the power on to your Atlas bus.  
 
@@ -70,6 +73,11 @@ Here are the steps requried to progam the EPCS16 on the Mercury board and EPCS4 
    programmer code you are using and the Penelope code you wish to load and look at the output, there should be no errors.
    It takes approximately 15 seconds to load the EPCS4.
 
+   To program Janus run the batch file Program-Janus-EPM240T100.bat, select which version of the Altera Quartus 
+   programmer code you are using and the Janus code you wish to load and look at the output, there should be no errors.
+   It takes approximately 5seconds to load the EPM240T100 on Janus.
+
+
 7. Power cycle the supply to the Atlas bus. 
 
 8. Remove the PowerSDR database file PowerSDR.mdb and allow PowerSDR to rebuild it when you
@@ -77,7 +85,7 @@ Here are the steps requried to progam the EPCS16 on the Mercury board and EPCS4 
 
 9. Remove Power to the Atlas bus, restart your PC and load PowerSDR.
 
-10. Test Mercury and Penelope with PowerSDR. If necessary recalibrate Frequency and Level.
+10. Test Mercury/Penelope/Janus with PowerSDR. If necessary recalibrate Frequency and Level.
 
 NOTE: The jumper inserted at step 3 can be left in place for now. 
 

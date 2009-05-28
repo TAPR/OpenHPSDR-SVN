@@ -42,8 +42,8 @@ GOTO LOOP
 :LOOP
 ECHO.     
 ECHO.      
-ECHO A. Program using Penelope_v1.1
-ECHO B. Program using Penelope_v1.2
+ECHO A. Program using Janus_V2
+ECHO B. Program using Janus_V3
 ECHO Q. Quit
 ECHO.      
 SET Choice=
@@ -59,10 +59,10 @@ ECHO "%Choice%" is not valid. Please try again.
 ECHO.
 GOTO Loop
 :ItemA
-%DIRECTORY% -c USB-Blaster Penelope_v1.1.cdf
+%DIRECTORY% -c USB-Blaster Janus_V2.cdf
 GOTO CONTINUE
 :ItemB
-%DIRECTORY% -c USB-Blaster Penelope_v1.2.cdf
+%DIRECTORY% -c USB-Blaster Janus_V3.cdf
 GOTO CONTINUE
 :CONTINUE
 PAUSE
