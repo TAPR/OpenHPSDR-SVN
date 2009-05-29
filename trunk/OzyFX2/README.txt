@@ -1,3 +1,16 @@
+Updated 24 May 2009 
+
+Now using Eclipse 3.4.2 with 5.0.x CDT plugins 
+SDCC Plugin:  http://eclipse-sdcc.sourceforge.net/   Version 1.0.0
+SCCC --version
+SDCC : mcs51/gbz80/z80/avr/ds390/pic16/pic14/TININative/xa51/ds400/hc08 2.9.0 #5416 (Mar 22 2009) (MINGW32) 
+
+
+On Vista sh.exe packaged with SDCC eclipse plugin does not work - get zsh for cygwin and rename to sh.exe and replace sh.exe from SDCC eclipse plugin  
+Also on Vista - turn off UAC and run as Admin - otherwise ran into all sorts of file permission probs running SDCC build 
+
+Bill Tracey (24 May 2009) 
+-------------------
 This is the Ozy firmware to control an SDR 1000 via Janus.  It is derived from Phil Covington's (N8VB)
 Ozy Firmware 
 
