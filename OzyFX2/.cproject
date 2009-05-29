@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<?fileVersion 4.0.0?>
+
+<cproject>
+<storageModule moduleId="org.eclipse.cdt.core.settings">
+<cconfiguration id="cdt.managedbuild.config.sdcc.exe.release.789109409">
+<storageModule buildSystemId="org.eclipse.cdt.managedbuilder.core.configurationDataProvider" id="cdt.managedbuild.config.sdcc.exe.release.789109409" moduleId="org.eclipse.cdt.core.settings" name="Release">
+<externalSettings/>
+<extensions>
+<extension id="org.eclipse.cdt.core.ELF" point="org.eclipse.cdt.core.BinaryParser"/>
+<extension id="org.eclipse.cdt.core.MakeErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
+<extension id="org.eclipse.cdt.core.GCCErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
+<extension id="org.eclipse.cdt.core.GASErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
+<extension id="org.eclipse.cdt.core.GLDErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
+</extensions>
+</storageModule>
+<storageModule moduleId="cdtBuildSystem" version="4.0.0">
+<configuration artifactExtension="hex" artifactName="ozyfw-sdr1k" buildProperties="" cleanCommand="rm -rf" description="" errorParsers="org.eclipse.cdt.core.MakeErrorParser;org.eclipse.cdt.core.GCCErrorParser;org.eclipse.cdt.core.GLDErrorParser;org.eclipse.cdt.core.GASErrorParser" id="cdt.managedbuild.config.sdcc.exe.release.789109409" name="Release" parent="cdt.managedbuild.config.sdcc.exe.release" postannouncebuildStep="Copy ouptut" postbuildStep="cmd /c copy  /y *.hex ..\\ReleaseBinary">
+<folderInfo id="cdt.managedbuild.config.sdcc.exe.release.789109409.177436181" name="/" resourcePath="">
+<toolChain id="cdt.managedbuild.toolchain.sdcc.exe.release.1659975412" name="SDCC Tool Chain" superClass="cdt.managedbuild.toolchain.sdcc.exe.release">
+<targetPlatform archList="all" binaryParser="org.eclipse.cdt.core.ELF" id="cdt.managedbuild.target.sdcc.platform.exe.release.1419229128" name="Release Platform" osList="solaris,linux,hpux,aix,qnx,win32" superClass="cdt.managedbuild.target.sdcc.platform.exe.release"/>
+<builder buildPath="${workspace_loc:/OzyFX2/Release}" id="cdt.managedbuild.target.sdcc.builder.exe.release.299689589" name="Sdcc Make.Release" superClass="cdt.managedbuild.target.sdcc.builder.exe.release"/>
+<tool command="sdcc -c --no-xinit-opt --xram-loc 0x2000 --xram-size 0x2000 --code-size 0x2000 -DSDR1K_CONTROL" id="cdt.managedbuild.tool.sdcc.c.compiler.exe.release.1594908462" name="SDCC Compiler" superClass="cdt.managedbuild.tool.sdcc.c.compiler.exe.release">
+<option id="sdcc.c.compiler.option.misc.verbose.439683963" superClass="sdcc.c.compiler.option.misc.verbose" value="true" valueType="boolean"/>
+<option id="sdcc.c.compiler.category.other.memorymodel.1294262022" superClass="sdcc.c.compiler.category.other.memorymodel" value="sdcc.c.compiler.category.other.memorymodel.small" valueType="enumerated"/>
+<option id="sdcc.c.compiler.category.other.xramsize.1365419494" superClass="sdcc.c.compiler.category.other.xramsize" value="" valueType="string"/>
+<option id="sdcc.c.compiler.category.other.codesize.2022259102" superClass="sdcc.c.compiler.category.other.codesize" value="" valueType="string"/>
+<inputType id="cdt.managedbuild.tool.sdcc.c.compiler.input.2142817452" superClass="cdt.managedbuild.tool.sdcc.c.compiler.input"/>
+</tool>
+<tool command="sh ../tools/custom-link.zsh " commandLinePattern="${COMMAND} " id="cdt.managedbuild.tool.sdcc.c.linker.exe.release.1780423096" name="SDCC Linker" superClass="cdt.managedbuild.tool.sdcc.c.linker.exe.release">
+<option id="sdcc.c.link.option.ldflags.2127675599" superClass="sdcc.c.link.option.ldflags" value="--no-xinit-opt --xram-loc 0x2000 --xram-size 0x2000 --code-size 0x2000 -Wl -b&quot; USBDESCSEG = 0xE000&quot;" valueType="string"/>
+<option id="sdcc.c.link.option.paths.775604032" superClass="sdcc.c.link.option.paths" valueType="stringList">
+<listOptionValue builtIn="false" value="&quot;f:\sdcc\lib&quot;"/>
+</option>
+</tool>
+<tool command="sh ../tools/asx8051-eclipse.zsh" commandLinePattern="${COMMAND} ${OUTPUT_PREFIX} ${OUTPUT}  ${FLAGS}  ${INPUTS}" id="cdt.managedbuild.tool.sdcc.assembler.exe.release.1934297010" name="SDCC Assembler" superClass="cdt.managedbuild.tool.sdcc.assembler.exe.release">
+<option id="sdcc.both.asm.option.flags.1920792157" superClass="sdcc.both.asm.option.flags" value="-plosgff" valueType="string"/>
+<option id="sdcc.both.asm.option.version.1470274139" superClass="sdcc.both.asm.option.version" value="false" valueType="boolean"/>
+<inputType id="cdt.managedbuild.tool.sdcc.assembler.input.481896559" superClass="cdt.managedbuild.tool.sdcc.assembler.input"/>
+</tool>
+</toolChain>
+</folderInfo>
+</configuration>
+</storageModule>
+<storageModule moduleId="org.eclipse.cdt.core.externalSettings"/>
+</cconfiguration>
+</storageModule>
+<storageModule moduleId="cdtBuildSystem" version="4.0.0">
+<project id="OzyFirmware-wjt.cdt.managedbuild.target.sdcc.exe.417969504" name="MCS51 family (SDCC)" projectType="cdt.managedbuild.target.sdcc.exe"/>
+</storageModule>
+</cproject>

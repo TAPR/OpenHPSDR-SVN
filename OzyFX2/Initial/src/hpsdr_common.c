@@ -42,7 +42,7 @@ init_hpsdr (void)
   CKCON = 0;		// MOVX takes 2 cycles
 
   // IFCLK is generated internally and runs at 48 MHz; Slave FIFO mode - PAC 07/10/2006
-  IFCONFIG = bmIFCLKSRC | bm3048MHZ | bmIFCLKOE | bmIFCLKPOL | bmIFFIFO;
+  IFCONFIG = bmIFCLKSRC | bm3048MHZ | bmIFCLKOE | bmIFCLKPOL | bmIFFIFO  | bmASYNC;
   SYNCDELAY;
 
 //Clear and reset all FIFOs see pg. 15-20 of TRM V2.1
