@@ -1,6 +1,6 @@
 @ECHO OFF
 CLS
-:: Load the FX2 code 
+:: Load the FX2 code
 loadFW.exe  0xfffe  0x7 ozyfw-sdr1k.hex
 ECHO.
 msecsleep 3000
@@ -17,7 +17,8 @@ ECHO.
 ECHO.
 ECHO  1. Quartus V8.1
 ECHO  2. Quartus V9.0
-ECHO  3. Quit
+ECHO  3. Quartus V9.0sp1
+ECHO  Q. Quit
 ECHO.
 SET Choice=
 SET /P Choice=Type the number and press Enter:
@@ -26,6 +27,7 @@ ECHO.
 :: /I makes the IF comparison case-insensitive
 IF /I '%Choice%'=='1' GOTO Q81
 IF /I '%Choice%'=='2' GOTO Q90
+IF /I '%Choice%'=='3' GOTO Q90sp1
 IF /I '%Choice%'=='Q' GOTO End
 ECHO "%Choice%" is not valid. Please try again.
 ECHO.
@@ -38,16 +40,21 @@ GOTO LOOP
 :Q90
 SET DIRECTORY=c:\altera\90\qprogrammer\bin\quartus_pgm
 GOTO LOOP
+
+:Q90sp1
+SET DIRECTORY=c:\altera\90sp1\qprogrammer\bin\quartus_pgm
+GOTO LOOP
+
 :: prompt the user for the file to use
 :LOOP
-ECHO.     
-ECHO.      
+ECHO.
+ECHO.
 ECHO A. Program using Penelope_v1.1
 ECHO B. Program using Penelope_v1.2
 ECHO Q. Quit
-ECHO.      
+ECHO.
 SET Choice=
-SET /P Choice=Type the letter and press Enter: 
+SET /P Choice=Type the letter and press Enter:
 
 IF NOT '%Choice%'=='' SET Choice=%Choice:~0,1%
 ECHO.
