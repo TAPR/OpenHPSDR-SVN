@@ -164,10 +164,13 @@ namespace DataDecoder
             { s.ProcessMacroButton(11); }
             else if (e.KeyCode == Keys.F12)
             { s.ProcessMacroButton(12); }
+            else if (e.Control && e.KeyCode == Keys.O)
+            { s.btnByp_Click(null, null); }   // Toggle PTT
+
 
         }
 
-        private void btnMzcro1_Click(object sender, EventArgs e)
+        private void btnMacro1_Click(object sender, EventArgs e)
         {
             s.btnMacro1_Click(null, null);
         }

@@ -65,7 +65,7 @@ namespace DataDecoder
             this.chkRCP2 = new System.Windows.Forms.CheckBox();
             this.chkRCP3 = new System.Windows.Forms.CheckBox();
             this.chkRCP4 = new System.Windows.Forms.CheckBox();
-            this.btnMzcro1 = new System.Windows.Forms.Button();
+            this.btnMacro1 = new System.Windows.Forms.Button();
             this.btnMacro2 = new System.Windows.Forms.Button();
             this.btnMacro3 = new System.Windows.Forms.Button();
             this.btnMacro4 = new System.Windows.Forms.Button();
@@ -581,19 +581,19 @@ namespace DataDecoder
             this.chkRCP4.UseVisualStyleBackColor = true;
             this.chkRCP4.CheckedChanged += new System.EventHandler(this.chkRCP4_CheckedChanged);
             // 
-            // btnMzcro1
+            // btnMacro1
             // 
-            this.btnMzcro1.BackColor = System.Drawing.SystemColors.Info;
-            this.btnMzcro1.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
-            this.btnMzcro1.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.btnMzcro1.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.btnMzcro1.Location = new System.Drawing.Point(8, 33);
-            this.btnMzcro1.Name = "btnMzcro1";
-            this.btnMzcro1.Size = new System.Drawing.Size(20, 12);
-            this.btnMzcro1.TabIndex = 140;
-            this.toolTip1.SetToolTip(this.btnMzcro1, "Press to run macro for this key.");
-            this.btnMzcro1.UseVisualStyleBackColor = false;
-            this.btnMzcro1.Click += new System.EventHandler(this.btnMzcro1_Click);
+            this.btnMacro1.BackColor = System.Drawing.SystemColors.Info;
+            this.btnMacro1.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
+            this.btnMacro1.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.btnMacro1.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.btnMacro1.Location = new System.Drawing.Point(8, 33);
+            this.btnMacro1.Name = "btnMacro1";
+            this.btnMacro1.Size = new System.Drawing.Size(20, 12);
+            this.btnMacro1.TabIndex = 140;
+            this.toolTip1.SetToolTip(this.btnMacro1, "Press to run macro for this key.");
+            this.btnMacro1.UseVisualStyleBackColor = false;
+            this.btnMacro1.Click += new System.EventHandler(this.btnMacro1_Click);
             // 
             // btnMacro2
             // 
@@ -1010,7 +1010,7 @@ namespace DataDecoder
             this.grpMacro.Controls.Add(this.label2);
             this.grpMacro.Controls.Add(this.btnMacro2);
             this.grpMacro.Controls.Add(this.label1);
-            this.grpMacro.Controls.Add(this.btnMzcro1);
+            this.grpMacro.Controls.Add(this.btnMacro1);
             this.grpMacro.Controls.Add(this.label28);
             this.grpMacro.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.25F, System.Drawing.FontStyle.Bold);
             this.grpMacro.ForeColor = System.Drawing.Color.Firebrick;
@@ -1287,7 +1287,7 @@ namespace DataDecoder
         public System.Windows.Forms.CheckBox chkRCP4;
         private System.Windows.Forms.Label label28;
         private System.Windows.Forms.GroupBox grpMacro;
-        private System.Windows.Forms.Button btnMzcro1;
+        private System.Windows.Forms.Button btnMacro1;
         private System.Windows.Forms.Button btnMacro8;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Button btnMacro7;
