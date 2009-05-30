@@ -2650,5 +2650,41 @@ namespace DataDecoder.Properties {
                 this["ChkAntEnab"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool SWRenab {
+            get {
+                return ((bool)(this["SWRenab"]));
+            }
+            set {
+                this["SWRenab"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("3")]
+        public decimal SWRnum {
+            get {
+                return ((decimal)(this["SWRnum"]));
+            }
+            set {
+                this["SWRnum"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool Tenths {
+            get {
+                return ((bool)(this["Tenths"]));
+            }
+            set {
+                this["Tenths"] = value;
+            }
+        }
     }
 }

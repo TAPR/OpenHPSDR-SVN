@@ -601,6 +601,9 @@ namespace DataDecoder
             chkAmp10.Checked = set.Amp10;
             chkAmp6.Checked = set.Amp6;
             chkNoBdChg.Checked = set.NoBandChg;
+            chkSWR.Checked = set.SWRenab;
+            numSWR.Value = set.SWRnum;
+            chkTenths.Checked = set.Tenths;
 
             stsTX = set.stsTX;
             stsOper = set.stsOper;
@@ -4110,7 +4113,7 @@ namespace DataDecoder
 
                     string swr = LPportMsg.Substring(LPportMsg.Length - 4, 4);
                     SetAvg(fwd); mini.SetAvg(fwd);
-                    SetSwr(swr); mini.SetSwr(swr);
+                    SetSWR(swr); mini.SetSwr(swr);
                 }
             }
         }
@@ -4423,6 +4426,12 @@ namespace DataDecoder
             { btnByp_Click(null, null); }   // Toggle PTT
             else if (e.Control && e.KeyCode == Keys.A)
             { btnDrive_Click(null, null); }   // Saves Auto Drive setting
+            else if (e.Control && e.KeyCode == Keys.B)
+            { rbBiDir.Checked=true; }   // SteppIR to Bi Direction
+            else if (e.Control && e.KeyCode == Keys.F)
+            { rbFwd.Checked = true; }   // SteppIR to Forward Direction
+            else if (e.Control && e.KeyCode == Keys.R)
+            { rb180.Checked = true; }   // SteppIR to Reverse Direction
         }
         // Adds macro number text to the row header
         public void dgm_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
@@ -5413,10 +5422,12 @@ namespace DataDecoder
                         sCmd = sCmd.Substring(0, sCmd.Length - 1);
                         if (sCmd != lastPos)
                         {
-                            RotorPort.Write("BI1;"); //request position
+                            if (chkTenths.Checked) rtrCmd = "BI1;";
+                            else rtrCmd = "AI1;";
+                            RotorPort.Write(rtrCmd); //request position
                             SetRotor(sCmd);          //print new heading
                             lastPos = sCmd;          //save position
-                            rtrCmd = "BI1;";
+                            //rtrCmd = "BI1;";
                             posCtr = posReps;
                             RtrReps.Enabled = true;
                         }
@@ -5680,14 +5691,18 @@ namespace DataDecoder
                 grpSpeed.Visible = false;
                 suffix = "/ "; // 2F, 20
                 if (chkRotorEnab.Checked) RotorPort.Write("W0000000000\x1f ");
+                chkTenths.Visible = false;
             }
             else if (rbRtrMod2.Checked)
             {
+                if (chkTenths.Checked) rtrCmd = "BI1;";
+                else rtrCmd = "AI1;";
                 set.rotorModel = 1;
                 rotormod = RotorMod.GreenHeron;
                 grpSpeed.Visible = false;
                 suffix = ";";
-                if (chkRotorEnab.Checked) RotorPort.Write("BI1;");
+                if (chkRotorEnab.Checked) RotorPort.Write(rtrCmd);
+                chkTenths.Visible = true;
             }
             else if (rbRtrMod3.Checked)
             {
@@ -5696,6 +5711,7 @@ namespace DataDecoder
                 grpSpeed.Visible = false;
                 suffix = ";";
                 if (chkRotorEnab.Checked) RotorPort.Write("AI1;");
+                chkTenths.Visible = false;
             }
             else if (rbRtrMod4.Checked)
             {
@@ -5704,6 +5720,7 @@ namespace DataDecoder
                 grpSpeed.Visible = true;
                 suffix = "\r";
                 if (chkRotorEnab.Checked) RotorPort.Write("U\r");
+                chkTenths.Visible = false;
             }
             else if (rbRtrMod5.Checked)
             {
@@ -5712,6 +5729,7 @@ namespace DataDecoder
                 grpSpeed.Visible = true;
                 suffix = "\r";
                 if (chkRotorEnab.Checked) RotorPort.Write("U\r");
+                chkTenths.Visible = false;
             }
             else if (rbRtrMod6.Checked)
             {
@@ -5719,6 +5737,7 @@ namespace DataDecoder
                 rotormod = RotorMod.Prosistel;
                 grpSpeed.Visible = false;
                 suffix = "\r";
+                chkTenths.Visible = false;
             }
             else if (rbRtrMod7.Checked)
             {
@@ -5726,6 +5745,7 @@ namespace DataDecoder
                 grpSpeed.Visible = true;
                 suffix = "\r";
                 if (chkRotorEnab.Checked) RotorPort.Write("C\r");
+                chkTenths.Visible = false;
             }
             set.Save();
         }
@@ -5921,8 +5941,8 @@ namespace DataDecoder
                 case RotorMod.GreenHeron:
                     if (heading.Length < 3) heading = heading.PadLeft(3,'0');
                     RotorPort.Write("AP1" + heading + "\r;"); // start rotor
-                    RotorPort.Write("BI1;");                  // request position
-                    rtrCmd = "BI1;";
+                    RotorPort.Write(rtrCmd);                  // request position
+                    //rtrCmd = "BI1;";
                     posCtr = posReps;
                     RtrReps.Enabled = true;
                     break;
@@ -7833,6 +7853,11 @@ namespace DataDecoder
             SerialPort port = (SerialPort)sender;
             byte[] data = new byte[port.BytesToRead];
             port.Read(data, 0, data.Length);
+            for (int i = 0; i < data.Length; i++)
+            {   // if 8x or 90 msg received from ACOM chg to '*'
+                // see DataAcom() routine for processing
+                if (data[i] > 127 && data[i] < 255) data[i] = 0x2A;
+            }
             StepBufr += AE.GetString(data, 0, data.Length);
             Regex rex = new Regex(".*?\r");  //accept any string ending in "0x0D"		
             //loop thru the buffer and find matches
@@ -7841,12 +7866,12 @@ namespace DataDecoder
                 StepMsg = m.Value;
                 // remove the match from the buffer if found
                 StepBufr = StepBufr.Replace(m.Value, "");
-                if (StepMsg.Length > 7)
+                if (data.Length > 7)
                 {
-                    string mot = StepMsg.Substring(6, 1);
-                    string dir = StepMsg.Substring(7, 1);
-                    if (mot == "\0")
-                    {   // antenna is NOT moving, but a freq update has been sent to the
+                    string mot = data[6].ToString();
+                    string dir = data[7].ToString();
+                    if (mot == "0")
+                        {   // antenna is NOT moving, but a freq update has been sent to the
                         // controller that may cause movement. We are waiting for StepCtr
                         // reps to see if it will start. See the Reps var for the delay count.
                         WriteToPort("ZZTI0;", iSleep);  // turn off transmit inhibit
@@ -9120,7 +9145,22 @@ namespace DataDecoder
                 this.Invoke(d, new object[] { text });
             }
             else
+            {
                 txtSWR.Text = text;
+                if (chkSWR.Checked && Convert.ToDecimal(text) > numSWR.Value)
+                {
+                    WriteToPort("ZZTI1;", iSleep);
+                    lblHighSWR.Visible = true;
+                    // Display a message that the SWR alarm value was exceeded.
+                    MessageBox.Show(
+                        "The SWR alarm value setting has been exceeded.\r\r" + 
+                        "PowerSDR's transmit ability is now disabled.\r\r" +
+                        "Press OK to dismiss this message and to Reset the SWR Alarm",
+                        "High SWR", MessageBoxButtons.OK,MessageBoxIcon.Error);
+                    lblHighSWR.Visible = false;
+                    WriteToPort("ZZTI0;", iSleep);
+                }
+            }
         }
         #endregion Delegates
 
@@ -9615,6 +9655,32 @@ namespace DataDecoder
 
 
         #endregion WaveNode
+
+        private void chkSWR_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chkSWR.Checked) set.SWRenab = true;
+            else set.SWRenab = false;
+            set.Save();
+        }
+
+        private void numSWR_ValueChanged(object sender, EventArgs e)
+        {
+            set.SWRnum = numSWR.Value;
+            set.Save();
+        }
+
+        private void btnSWR_Click(object sender, EventArgs e)
+        {
+            WriteToPort("ZZTI0;", iSleep);
+            lblHighSWR.Visible = false;
+        }
+
+        private void chkTenths_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chkTenths.Checked) set.Tenths = true;
+            else set.Tenths = false;
+            set.Save();
+        }
 
     }
 }
