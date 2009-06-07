@@ -1,6 +1,6 @@
 ghpsdr - Gtk+ Application for running HPSDR on Linux
 
-ghpsdr is a an application written specifically for HPSDR. It uses a modifed version of sdr-core (DttSP) that does not use Jack for the audio interface. DttSP is built as a static library that is linked with the GUI code.
+ghpsdr is a an application written specifically for HPSDR. It uses a modifed version of DttSP that is ported from the Windows version. DttSP is built as a static library that is linked with the GUI code.
 
 The following has been verified with a clean install of Ubunto 9.04.
 
@@ -13,7 +13,7 @@ You will need to install gtk+, fftw and libusb1.0
     sudo apt-get install libfftw3-dev
     sudo apt-get install libusb1.0-dev
 
-If you are going to build DttSP.a you willalso need to install libgsl
+If you are going to build DttSP.a you will also need to install libgsl
 
     sudo apt-get install libgsl0-dev
 
@@ -47,13 +47,11 @@ From the ghpsdr install directory run the command:
 Building libDttSP.a
 -------------------
 
-Included in this directory is sdr-core.tar.gz which when unpacked contains the modifed source of sdr-core.
+Included in this directory is DttSP.tar.gz which when unpacked contains the modifed source of DttSP ported from the Windows dll.
 
 If you wish to build libDttSP.a then from within the ghpsdr directory perform the following commands:
 
-    tar xvzf sdr-core.tar.gz
-    cd sdr-core/base/src
+    tar xvzf DttSP.tar.gz
+    cd DttSP
     make
-    cp libDttSP.a ../../..
-
-Do not run configure as the Makefile has been hand modified. 
+    cp libDttSP.a ..
