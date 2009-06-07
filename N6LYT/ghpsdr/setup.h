@@ -27,7 +27,7 @@
 
 
 //
-// setup.h
+// ghpsdr_setup.h
 //
 
-void setup();
+void ghpsdr_setup();

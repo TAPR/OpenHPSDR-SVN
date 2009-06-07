@@ -85,31 +85,31 @@ gint spectrumUpdate(gpointer data) {
 void updateSamples() {
     switch(spectrumMode) {
         case spectrumSPECTRUM:
-            Process_Spectrum(spectrumBuffer);
+            Process_Spectrum(0,spectrumBuffer);
             updateSpectrum(spectrumBuffer);
             break;
         case spectrumPANADAPTER:
-            Process_Panadapter(spectrumBuffer);
+            Process_Panadapter(0,spectrumBuffer);
             updateSpectrum(spectrumBuffer);
             break;
         case spectrumSCOPE:
-            Process_Scope(spectrumBuffer,4096);
+            Process_Scope(0,spectrumBuffer,4096);
             updateSpectrum(spectrumBuffer);
             break;
         case spectrumPHASE:
-            Process_Scope(spectrumBuffer,100);
+            Process_Scope(0,spectrumBuffer,100);
             updateSpectrum(spectrumBuffer);
             break;
         case spectrumPHASE2:
-            Process_Scope(spectrumBuffer,100);
+            Process_Scope(0,spectrumBuffer,100);
             updateSpectrum(spectrumBuffer);
             break;
         case spectrumPANWATER:
-            Process_Panadapter(spectrumBuffer);
+            Process_Panadapter(0,spectrumBuffer);
             updateSpectrum(spectrumBuffer);
             break;
         case spectrumHISTOGRAM:
-            Process_Panadapter(spectrumBuffer);
+            Process_Panadapter(0,spectrumBuffer);
             updateSpectrum(spectrumBuffer);
             break;
         case spectrumOFF:

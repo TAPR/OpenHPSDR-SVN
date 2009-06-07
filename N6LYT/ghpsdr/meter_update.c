@@ -78,6 +78,6 @@ gint meterUpdate(gpointer data) {
 void meterUpdateSamples(char* command) {
     int n;
 
-    float m=CalculateRXMeter(0,0);
+    float m=CalculateRXMeter(0,0,0);
     updateMeter(m);
 }

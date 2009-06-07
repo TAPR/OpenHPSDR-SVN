@@ -71,9 +71,9 @@ void cwPitchChanged(GtkSpinButton* spinButton,gpointer data);
 
 /* --------------------------------------------------------------------------*/
 /** 
-* @brief Setup
+* @brief ghpsdr_setup
 */
-void setup() {
+void ghpsdr_setup() {
     if(setupWindow==NULL) {
         setupWindow=gtk_window_new(GTK_WINDOW_TOPLEVEL);
         gtk_window_set_title((GtkWindow*)setupWindow,(gchar*)"Gtk+ HPSDR: setup");

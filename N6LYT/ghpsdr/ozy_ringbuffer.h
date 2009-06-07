@@ -46,9 +46,10 @@ struct ozy_ringbuffer {
     extern struct ozy_ringbuffer* ozy_output_buffer;
 
     extern struct ozy_ringbuffer* new_ozy_ringbuffer(int n);
-    extern int ozy_ringbuffer_put(struct ozy_ringbuffer* buffer,char* c,int n);
-    extern int ozy_ringbuffer_get(struct ozy_ringbuffer* buffer,char* c,int n);
-
+    extern int ozy_ringbuffer_put(struct ozy_ringbuffer* buffer,unsigned char* c,int n);
+    extern int ozy_ringbuffer_get(struct ozy_ringbuffer* buffer,unsigned char* c,int n);
+    extern int ozy_ringbuffer_entries(struct ozy_ringbuffer* buffer) ;
+    extern void create_ozy_ringbuffer(int n);
 
 #ifdef	__cplusplus
 }

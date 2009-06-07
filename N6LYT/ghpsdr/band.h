@@ -38,8 +38,9 @@
 #define band6 10
 #define bandGen 11
 #define bandWWV 12
+#define bandXVTR 13
 
-#define BANDS 13
+#define BANDS 14
 
 int band;
 

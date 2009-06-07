@@ -28,6 +28,10 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <semaphore.h>
+#include <pthread.h>
+#include <sys/types.h>
+#include <unistd.h>
+
 #include "ozy_buffers.h"
 
 /*
@@ -36,16 +40,16 @@
 //#define MAX_BUFFERS 32
 //#define MAX_OUTPUT_BUFFERS 34
 
-struct ozy_buffer* ozy_input_buffers_head;
-struct ozy_buffer* ozy_input_buffers_tail;
+struct ozy_buffer* ozy_input_buffers_head = NULL;
+struct ozy_buffer* ozy_input_buffers_tail = NULL;
 sem_t* ozy_input_buffer_sem;
 int ozy_input_sequence=0;
 int ozy_input_buffers=0;
 
 pthread_mutex_t ozy_input_buffer_mutex;
 
-struct ozy_buffer* ozy_free_buffers_head;
-struct ozy_buffer* ozy_free_buffers_tail;
+struct ozy_buffer* ozy_free_buffers_head = NULL;
+struct ozy_buffer* ozy_free_buffers_tail = NULL;
 
 pthread_mutex_t ozy_free_buffer_mutex;
 
@@ -84,6 +88,7 @@ struct ozy_buffer* get_ozy_free_buffer(void) {
         ozy_free_buffers_tail=NULL;
     }
     buffer->size=OZY_BUFFER_SIZE;
+    buffer->next = NULL;
     pthread_mutex_unlock(&ozy_free_buffer_mutex);
     return buffer;
 }
@@ -122,6 +127,7 @@ struct ozy_buffer* get_ozy_input_buffer(void) {
     if(ozy_input_buffers_head==NULL) {
         ozy_input_buffers_tail=NULL;
     }
+    buffer->next = NULL;
     pthread_mutex_unlock(&ozy_input_buffer_mutex);
     return buffer;
 }
@@ -132,7 +138,7 @@ struct ozy_buffer* get_ozy_input_buffer(void) {
 */
 struct ozy_buffer* new_ozy_buffer() {
     struct ozy_buffer* buffer;
-    buffer=malloc(sizeof(struct ozy_buffer));
+    buffer=calloc(1,sizeof(struct ozy_buffer));
     buffer->next=NULL;
     buffer->size=OZY_BUFFER_SIZE;
     return buffer;

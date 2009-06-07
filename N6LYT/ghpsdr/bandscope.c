@@ -292,7 +292,7 @@ void drawBandscope() {
             gdk_gc_set_rgb_fg_color(gc,&verticalColor);
             gdk_draw_line(bandscopePixmap,gc,x,0,x,bandscopeHEIGHT);
             gdk_gc_set_rgb_fg_color(gc,&spectrumTextColor);
-            sprintf(label,"<span font_desc='Sans Regular 8'>%4.2f</span>",(float)i);
+            sprintf(label,"<span font_desc='Sans Regular 8'>%5.3f</span>",(float)i);
             pango_layout_set_markup (layout, label, -1);
             gdk_draw_layout (GDK_DRAWABLE (bandscopePixmap), gc, x-17, 0, layout);
         }

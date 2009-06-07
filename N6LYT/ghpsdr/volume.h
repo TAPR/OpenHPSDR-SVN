@@ -1,10 +1,11 @@
 /** 
-* @file frequency.h
-* @brief Header files for the frequency 
+* @file volume.h
+* @brief Header files for the volume functions
 * @author John Melton, G0ORX/N6LYT, Doxygen Comments Dave Larsen, KV0S
 * @version 0.1
-* @date 2009-04-11
+* @date 2009-04-12
 */
+// volume.h
 
 /* Copyright (C) 
 * 2009 - John Melton, G0ORX/N6LYT, Doxygen Comments Dave Larsen, KV0S
@@ -24,22 +25,8 @@
 * 
 */
 
-//
-// frequency.h
-//
+double volume;
 
-/* --------------------------------------------------------------------------*/
-/** 
-* @brief Frequency information 
-*/
-struct frequency_info {
-        long long minFrequency;
-        long long maxFrequency;
-        char* info;
-        int band;
-        int transmit;
-    };
-
-
-char* getFrequencyInfo(long long frequency);
-int getBand(long long frequency);
+void volumeSaveState();
+void volumeRestoreState();
+GtkWidget* buildVolumeUI();

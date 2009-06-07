@@ -1,6 +1,6 @@
 /** 
-* @file mercury.c
-* @brief Mercury access functions
+* @file hardware.c
+* @brief Hardware access functions
 * @author John Melton, G0ORX/N6LYT, Doxygen Comments Dave Larsen, KV0S
 * @version 0.1
 * @date 2009-04-11
@@ -34,13 +34,15 @@
 #include "dttsp.h"
 #include "filter.h"
 #include "main.h"
-#include "mercury.h"
+#include "hardware.h"
 #include "mode.h"
 #include "property.h"
 #include "ozy.h"
 #include "soundcard.h"
+#include "volume.h"
 
-GtkWidget* mercuryFixed;
+GtkWidget* hardwareFrame;
+GtkWidget* hardwareTable;
 
 GtkWidget* buttonR48K;
 GtkWidget* buttonR96K;
@@ -60,12 +62,12 @@ float preampOffset=0.0f;
 
 /* --------------------------------------------------------------------------*/
 /** 
-* @brief Mercury button callback 
+* @brief Hardware button callback 
 * 
 * @param widget
 * @param data
 */
-void mercuryButtonCallback(GtkWidget* widget,gpointer data) {
+void hardwareButtonCallback(GtkWidget* widget,gpointer data) {
     GtkWidget* label;
     char command[80];
     gboolean state;
@@ -86,9 +88,11 @@ void mercuryButtonCallback(GtkWidget* widget,gpointer data) {
         sampleRate=48000;
         setSpeed(0);
         SetSampleRate((double)sampleRate);
-        writeCommand("setOsc 0");
+        //writeCommand("setOsc 0");
+        SetRXOsc(0,0,0.0);
         setFilter(filter);
         setModeMode(mode);
+        SetRXOutputGain(0,0,volume/100.0);
     } else if(widget==buttonR96K) {
         R48K=FALSE;
         R96K=TRUE;
@@ -105,9 +109,11 @@ void mercuryButtonCallback(GtkWidget* widget,gpointer data) {
         sampleRate=96000;
         setSpeed(1);
         SetSampleRate((double)sampleRate);
-        writeCommand("setOsc 0");
+        //writeCommand("setOsc 0");
+        SetRXOsc(0,0,0.0);
         setFilter(filter);
         setModeMode(mode);
+        SetRXOutputGain(0,0,volume/100.0);
     } else if(widget==buttonR192K) {
         R48K=FALSE;
         R96K=FALSE;
@@ -124,9 +130,11 @@ void mercuryButtonCallback(GtkWidget* widget,gpointer data) {
         sampleRate=192000;
         setSpeed(2);
         SetSampleRate((double)sampleRate);
-        writeCommand("setOsc 0");
+        //writeCommand("setOsc 0");
+        SetRXOsc(0,0,0.0);
         setFilter(filter);
         setModeMode(mode);
+        SetRXOutputGain(0,0,volume/100.0);
     } else {
         if(widget==buttonDither) {
             Dither=!Dither;
@@ -160,41 +168,44 @@ void mercuryButtonCallback(GtkWidget* widget,gpointer data) {
 
 /* --------------------------------------------------------------------------*/
 /** 
-* @brief Build Mercury User Interface
+* @brief Build Hardware User Interface
 * 
 * @return 
 */
-GtkWidget* buildMercuryUI() {
+GtkWidget* buildHardwareUI() {
 
     GtkWidget* label;
 
-    mercuryFixed=gtk_fixed_new();
-    gtk_widget_modify_bg(mercuryFixed,GTK_STATE_NORMAL,&background);
+    hardwareFrame=gtk_frame_new("HPSDR");
+    gtk_widget_modify_bg(hardwareFrame,GTK_STATE_NORMAL,&background);
+    gtk_widget_modify_fg(gtk_frame_get_label_widget(hardwareFrame),GTK_STATE_NORMAL,&white);
 
-    // mercury settings
+    hardwareTable=gtk_table_new(2,4,TRUE);
+
+    // hardware settings
     buttonR48K = gtk_button_new_with_label ("48K");
     gtk_widget_modify_bg(buttonR48K, GTK_STATE_NORMAL, &buttonBackground);
     label=gtk_bin_get_child((GtkBin*)buttonR48K);
     gtk_widget_set_size_request(GTK_WIDGET(buttonR48K),50,25);
-    g_signal_connect(G_OBJECT(buttonR48K),"clicked",G_CALLBACK(mercuryButtonCallback),NULL);
+    g_signal_connect(G_OBJECT(buttonR48K),"clicked",G_CALLBACK(hardwareButtonCallback),NULL);
     gtk_widget_show(buttonR48K);
-    gtk_fixed_put((GtkFixed*)mercuryFixed,buttonR48K,0,0);
+    gtk_table_attach_defaults(hardwareTable,buttonR48K,0,1,0,1);
 
     buttonR96K = gtk_button_new_with_label ("96K");
     gtk_widget_modify_bg(buttonR96K, GTK_STATE_NORMAL, &buttonBackground);
     label=gtk_bin_get_child((GtkBin*)buttonR96K);
     gtk_widget_set_size_request(GTK_WIDGET(buttonR96K),50,25);
-    g_signal_connect(G_OBJECT(buttonR96K),"clicked",G_CALLBACK(mercuryButtonCallback),NULL);
+    g_signal_connect(G_OBJECT(buttonR96K),"clicked",G_CALLBACK(hardwareButtonCallback),NULL);
     gtk_widget_show(buttonR96K);
-    gtk_fixed_put((GtkFixed*)mercuryFixed,buttonR96K,0,25);
+    gtk_table_attach_defaults(hardwareTable,buttonR96K,1,2,0,1);
 
     buttonR192K = gtk_button_new_with_label ("192K");
     gtk_widget_modify_bg(buttonR192K, GTK_STATE_NORMAL, &buttonBackground);
     label=gtk_bin_get_child((GtkBin*)buttonR192K);
     gtk_widget_set_size_request(GTK_WIDGET(buttonR192K),50,25);
-    g_signal_connect(G_OBJECT(buttonR192K),"clicked",G_CALLBACK(mercuryButtonCallback),NULL);
+    g_signal_connect(G_OBJECT(buttonR192K),"clicked",G_CALLBACK(hardwareButtonCallback),NULL);
     gtk_widget_show(buttonR192K);
-    gtk_fixed_put((GtkFixed*)mercuryFixed,buttonR192K,0,50);
+    gtk_table_attach_defaults(hardwareTable,buttonR192K,2,3,0,1);
 
     buttonDither = gtk_button_new_with_label ("Dither");
     gtk_widget_modify_bg(buttonDither, GTK_STATE_NORMAL, &buttonBackground);
@@ -205,9 +216,9 @@ GtkWidget* buildMercuryUI() {
         gtk_widget_modify_fg(label, GTK_STATE_NORMAL, &white);
     }
     gtk_widget_set_size_request(GTK_WIDGET(buttonDither),50,25);
-    g_signal_connect(G_OBJECT(buttonDither),"clicked",G_CALLBACK(mercuryButtonCallback),NULL);
+    g_signal_connect(G_OBJECT(buttonDither),"clicked",G_CALLBACK(hardwareButtonCallback),NULL);
     gtk_widget_show(buttonDither);
-    gtk_fixed_put((GtkFixed*)mercuryFixed,buttonDither,50,0);
+    gtk_table_attach_defaults(hardwareTable,buttonDither,0,1,1,2);
 
     buttonRandom = gtk_button_new_with_label ("Random");
     gtk_widget_modify_bg(buttonRandom, GTK_STATE_NORMAL, &buttonBackground);
@@ -218,9 +229,9 @@ GtkWidget* buildMercuryUI() {
         gtk_widget_modify_fg(label, GTK_STATE_NORMAL, &white);
     }
     gtk_widget_set_size_request(GTK_WIDGET(buttonRandom),50,25);
-    g_signal_connect(G_OBJECT(buttonRandom),"clicked",G_CALLBACK(mercuryButtonCallback),NULL);
+    g_signal_connect(G_OBJECT(buttonRandom),"clicked",G_CALLBACK(hardwareButtonCallback),NULL);
     gtk_widget_show(buttonRandom);
-    gtk_fixed_put((GtkFixed*)mercuryFixed,buttonRandom,50,25);
+    gtk_table_attach_defaults(hardwareTable,buttonRandom,1,2,1,2);
 
     buttonPreamp = gtk_button_new_with_label ("Preamp");
     gtk_widget_modify_bg(buttonPreamp, GTK_STATE_NORMAL, &buttonBackground);
@@ -231,33 +242,34 @@ GtkWidget* buildMercuryUI() {
         gtk_widget_modify_fg(label, GTK_STATE_NORMAL, &white);
     }
     gtk_widget_set_size_request(GTK_WIDGET(buttonPreamp),50,25);
-    g_signal_connect(G_OBJECT(buttonPreamp),"clicked",G_CALLBACK(mercuryButtonCallback),NULL);
+    g_signal_connect(G_OBJECT(buttonPreamp),"clicked",G_CALLBACK(hardwareButtonCallback),NULL);
     gtk_widget_show(buttonPreamp);
-    gtk_fixed_put((GtkFixed*)mercuryFixed,buttonPreamp,50,50);
+    gtk_table_attach_defaults(hardwareTable,buttonPreamp,2,3,1,2);
 
-    gtk_widget_set_size_request(GTK_WIDGET(mercuryFixed),100,75);
-    gtk_widget_show(mercuryFixed);
+    gtk_container_add(GTK_CONTAINER(hardwareFrame),hardwareTable);
+    gtk_widget_show(hardwareTable);
+    gtk_widget_show(hardwareFrame);
 
+    return hardwareFrame;
 
-    return mercuryFixed;
 }
 
-void mercuryInit() {
+void hardwareInit() {
     // setup
     if(sampleRate==48000) {
-        mercuryButtonCallback(buttonR48K,NULL) ;
+        hardwareButtonCallback(buttonR48K,NULL) ;
     } else if(sampleRate==96000) {
-        mercuryButtonCallback(buttonR96K,NULL) ;
+        hardwareButtonCallback(buttonR96K,NULL) ;
     } else if(sampleRate==192000) {
-        mercuryButtonCallback(buttonR192K,NULL) ;
+        hardwareButtonCallback(buttonR192K,NULL) ;
     }
 }
 
 /* --------------------------------------------------------------------------*/
 /** 
-* @brief Save the Mercury state
+* @brief Save the Hardware state
 */
-void mercurySaveState() {
+void hardwareSaveState() {
     char string[128];
 
     sprintf(string,"%d",sampleRate);
@@ -276,9 +288,9 @@ void mercurySaveState() {
 
 /* --------------------------------------------------------------------------*/
 /** 
-* @brief Restore the Mercury state
+* @brief Restore the Hardware state
 */
-void mercuryRestoreState() {
+void hardwareRestoreState() {
     char* value;
 
     value=getProperty("sampleRate");
@@ -312,6 +324,6 @@ void mercuryRestoreState() {
 */
 void setPreamp(gboolean state) {
     if(Preamp!=state) {
-        mercuryButtonCallback(buttonPreamp,NULL);
+        hardwareButtonCallback(buttonPreamp,NULL);
     }
 }

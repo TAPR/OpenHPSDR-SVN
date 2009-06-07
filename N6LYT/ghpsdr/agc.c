@@ -43,7 +43,8 @@
 #include "main.h"
 #include "property.h"
 
-GtkWidget* agcFixed;
+GtkWidget* agcFrame;
+GtkWidget* agcTable;
 
 int agc=agcLONG;
 
@@ -138,8 +139,12 @@ void agcCallback(GtkWidget* widget,gpointer data) {
 GtkWidget* buildAgcUI() {
     GtkWidget* label;
 
-    agcFixed=gtk_fixed_new();
-    gtk_widget_modify_bg(agcFixed,GTK_STATE_NORMAL,&background);
+    agcFrame=gtk_frame_new("AGC");
+    gtk_widget_modify_bg(agcFrame,GTK_STATE_NORMAL,&background);
+    gtk_widget_modify_fg(gtk_frame_get_label_widget(agcFrame),GTK_STATE_NORMAL,&white);
+
+    agcTable=gtk_table_new(1,4,TRUE);
+
 
     // agc buttons
     buttonSLOW = gtk_button_new_with_label ("SLOW");
@@ -149,16 +154,16 @@ GtkWidget* buildAgcUI() {
     gtk_widget_set_size_request(GTK_WIDGET(buttonSLOW),50,25);
     g_signal_connect(G_OBJECT(buttonSLOW),"clicked",G_CALLBACK(agcCallback),NULL);
     gtk_widget_show(buttonSLOW);
-    gtk_fixed_put((GtkFixed*)agcFixed,buttonSLOW,0,0);
+    gtk_table_attach_defaults(agcTable,buttonSLOW,0,1,0,1);
 
-    buttonMEDIUM = gtk_button_new_with_label ("MEDIUM");
+    buttonMEDIUM = gtk_button_new_with_label ("MED");
     gtk_widget_modify_bg(buttonMEDIUM, GTK_STATE_NORMAL, &buttonBackground);
     label=gtk_bin_get_child((GtkBin*)buttonMEDIUM);
     gtk_widget_modify_fg(label, GTK_STATE_NORMAL, &white);
     gtk_widget_set_size_request(GTK_WIDGET(buttonMEDIUM),50,25);
     g_signal_connect(G_OBJECT(buttonMEDIUM),"clicked",G_CALLBACK(agcCallback),NULL);
     gtk_widget_show(buttonMEDIUM);
-    gtk_fixed_put((GtkFixed*)agcFixed,buttonMEDIUM,50,0);
+    gtk_table_attach_defaults(agcTable,buttonMEDIUM,1,2,0,1);
 
     buttonFAST = gtk_button_new_with_label ("FAST");
     gtk_widget_modify_bg(buttonFAST, GTK_STATE_NORMAL, &buttonBackground);
@@ -167,7 +172,7 @@ GtkWidget* buildAgcUI() {
     gtk_widget_set_size_request(GTK_WIDGET(buttonFAST),50,25);
     g_signal_connect(G_OBJECT(buttonFAST),"clicked",G_CALLBACK(agcCallback),NULL);
     gtk_widget_show(buttonFAST);
-    gtk_fixed_put((GtkFixed*)agcFixed,buttonFAST,0,25);
+    gtk_table_attach_defaults(agcTable,buttonFAST,2,3,0,1);
 
     buttonLONG = gtk_button_new_with_label ("LONG");
     gtk_widget_modify_bg(buttonLONG, GTK_STATE_NORMAL, &buttonBackground);
@@ -176,15 +181,16 @@ GtkWidget* buildAgcUI() {
     gtk_widget_set_size_request(GTK_WIDGET(buttonLONG),50,25);
     g_signal_connect(G_OBJECT(buttonLONG),"clicked",G_CALLBACK(agcCallback),NULL);
     gtk_widget_show(buttonLONG);
-    gtk_fixed_put((GtkFixed*)agcFixed,buttonLONG,50,25);
-
-    gtk_widget_set_size_request(GTK_WIDGET(agcFixed),100,50);
-    gtk_widget_show(agcFixed);
+    gtk_table_attach_defaults(agcTable,buttonLONG,3,4,0,1);
+ 
+    gtk_container_add(GTK_CONTAINER(agcFrame),agcTable);
+    gtk_widget_show(agcTable);
+    gtk_widget_show(agcFrame);
 
     setAgc(agc);
 
-    return agcFixed;
-  
+    return agcFrame;
+ 
 }
 
 /* --------------------------------------------------------------------------*/
