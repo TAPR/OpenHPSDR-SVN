@@ -84,6 +84,16 @@ extern int ozy_init();
 */
 extern int getADCOverflow();
 
+/* --------------------------------------------------------------------------*/
+/** 
+* @brief Set 122.88 MHz clock source
+*
+* @param source
+* 
+* @return 
+*/
+extern void set122MHzSource(int source);
+
 void getSpectrumSamples(char *samples);
 
 #ifdef	__cplusplus

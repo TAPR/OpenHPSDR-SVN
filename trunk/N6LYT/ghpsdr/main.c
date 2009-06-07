@@ -108,6 +108,8 @@
 #include "filter.h"
 #include "main.h"
 #include "hardware.h"
+#include "clock122_88.h"
+#include "clock10.h"
 #include "meter.h"
 #include "meter_update.h"
 #include "ozy.h"
@@ -153,6 +155,8 @@ GtkWidget* displayWindow;
 GtkWidget* filterWindow;
 GtkWidget* audioWindow;
 GtkWidget* hardwareWindow;
+GtkWidget* clock122_88Window;
+GtkWidget* clock10Window;
 GtkWidget* meterWindow;
 GtkWidget* bandscopeWindow;
 GtkWidget* bandscope_controlWindow;
@@ -205,6 +209,8 @@ void quit() {
     filterSaveState();
     audioSaveState();
     hardwareSaveState();
+    clock122_88SaveState();
+    clock10SaveState();
     bandscopeSaveState();
     bandscope_controlSaveState();
     agcSaveState();
@@ -414,6 +420,14 @@ void buildMainUI() {
     // add the hardware window
     gtk_widget_show(hardwareWindow);
     gtk_fixed_put((GtkFixed*)mainFixed,hardwareWindow,210,600);
+
+    // add the 122.88 MHz clock window
+    gtk_widget_show(clock122_88Window);
+    gtk_fixed_put((GtkFixed*)mainFixed,clock122_88Window,460,600);
+
+    // add the 10 MHz clock window
+    gtk_widget_show(clock10Window);
+    gtk_fixed_put((GtkFixed*)mainFixed,clock10Window,660,600);
 
     // add the volume window
     gtk_widget_show(volumeWindow);
@@ -675,6 +689,12 @@ int main(int argc,char* argv[]) {
     hardwareRestoreState();
     hardwareWindow=buildHardwareUI();
 
+    clock122_88RestoreState();
+    clock122_88Window=buildClock122_88UI();
+
+    clock10RestoreState();
+    clock10Window=buildClock10UI();
+
     receiverRestoreState();
     receiverWindow=buildReceiverUI();
 
@@ -688,6 +708,8 @@ int main(int argc,char* argv[]) {
 
     setSoundcard(getSoundcardId(soundCardName));
     hardwareInit();
+    clock122_88Init();
+    clock10Init();
 
     gtk_main();
 
