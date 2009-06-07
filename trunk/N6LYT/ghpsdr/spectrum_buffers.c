@@ -30,22 +30,23 @@
 #include <semaphore.h>
 
 #include "spectrum_buffers.h"
+
 /*
  *
  */
 //#define MAX_BUFFERS 32
 //#define MAX_OUTPUT_BUFFERS 34
 
-struct spectrum_buffer* spectrum_input_buffers_head;
-struct spectrum_buffer* spectrum_input_buffers_tail;
+struct spectrum_buffer* spectrum_input_buffers_head = NULL;
+struct spectrum_buffer* spectrum_input_buffers_tail = NULL;
 sem_t* spectrum_input_buffer_sem;
 int spectrum_input_sequence=0;
 int spectrum_input_buffers=0;
 
 pthread_mutex_t spectrum_input_buffer_mutex;
 
-struct spectrum_buffer* spectrum_free_buffers_head;
-struct spectrum_buffer* spectrum_free_buffers_tail;
+struct spectrum_buffer* spectrum_free_buffers_head = NULL;
+struct spectrum_buffer* spectrum_free_buffers_tail = NULL;
 
 pthread_mutex_t spectrum_free_buffer_mutex;
 
@@ -84,6 +85,7 @@ struct spectrum_buffer* get_spectrum_free_buffer(void) {
         spectrum_free_buffers_tail=NULL;
     }
     buffer->size=SPECTRUM_BUFFER_SIZE;
+    buffer->next = NULL;
     pthread_mutex_unlock(&spectrum_free_buffer_mutex);
     return buffer;
 }
@@ -121,6 +123,7 @@ struct spectrum_buffer* get_spectrum_input_buffer(void) {
     if(spectrum_input_buffers_head==NULL) {
         spectrum_input_buffers_tail=NULL;
     }
+    buffer->next = NULL;
     pthread_mutex_unlock(&spectrum_input_buffer_mutex);
     return buffer;
 }
@@ -131,7 +134,7 @@ struct spectrum_buffer* get_spectrum_input_buffer(void) {
 */
 struct spectrum_buffer* new_spectrum_buffer() {
     struct spectrum_buffer* buffer;
-    buffer=malloc(sizeof(struct spectrum_buffer));
+    buffer=calloc(1,sizeof(struct spectrum_buffer));
     buffer->next=NULL;
     buffer->size=SPECTRUM_BUFFER_SIZE;
     return buffer;

@@ -10,6 +10,8 @@
 #include <stdlib.h>
 #include <libusb-1.0/libusb.h>
 
+#include "libusbio.h"
+
 /*
  *  interface to libusb1.0
  */
@@ -55,7 +57,7 @@ int libusb_write_ozy(int ep,void* buffer,int buffersize)
 {
 	int rc;
         int bytes;
-	rc = libusb_bulk_transfer(ozy_handle, (unsigned char)ep, (char *)buffer, buffersize,&bytes, OZY_IO_TIMEOUT);
+	rc = libusb_bulk_transfer(ozy_handle, (unsigned char)ep, (unsigned char *)buffer, buffersize,&bytes, OZY_IO_TIMEOUT);
         if(rc==0) {
             rc=bytes;
         }
@@ -67,7 +69,7 @@ int  libusb_read_ozy(int ep,void* buffer,int buffersize)
 {
 	int rc;
         int bytes;
-	rc = libusb_bulk_transfer(ozy_handle, (unsigned char)ep, (char *)buffer, buffersize,&bytes, OZY_IO_TIMEOUT);
+	rc = libusb_bulk_transfer(ozy_handle, (unsigned char)ep, (unsigned char *)buffer, buffersize,&bytes, OZY_IO_TIMEOUT);
         if(rc==0) {
             rc=bytes;
         }

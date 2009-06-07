@@ -33,7 +33,7 @@
 #include "main.h"
 #include "filter.h"
 #include "frequency.h"
-#include "mercury.h"
+#include "hardware.h"
 #include "ozy.h"
 #include "property.h"
 #include "soundcard.h"
@@ -442,7 +442,7 @@ void drawSpectrum(int height) {
                     gdk_gc_set_rgb_fg_color(gc,&verticalColor);
                     gdk_draw_line(spectrumPixmap,gc,i,0,i,height);
                     gdk_gc_set_rgb_fg_color(gc,&spectrumTextColor);
-                    sprintf(label,"<span font_desc='Sans Regular 8'>%4.2f</span>",(float)f/1000000.0f);
+                    sprintf(label,"<span font_desc='Sans Regular 8'>%5.3f</span>",(float)f/1000000.0f);
                     pango_layout_set_markup (layout, label, -1);
                     gdk_draw_layout (GDK_DRAWABLE (spectrumPixmap), gc, i-17, 0, layout);
                 }

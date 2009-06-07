@@ -57,8 +57,8 @@ extern void do_update(char* command,FILE* log);
 void writeCommand(char *command) {
     char s[80];
 //fprintf(stderr,"writeCommand: %s\n",command);
-    sprintf(s,"%s\n",command);
-    if(command!=NULL) {
-        do_update(s,NULL);
-    }
+//    sprintf(s,"%s\n",command);
+//    if(command!=NULL) {
+//        do_update(s,NULL);
+//    }
 }

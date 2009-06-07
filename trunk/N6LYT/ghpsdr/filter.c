@@ -53,17 +53,14 @@ gint filterTimerId;
 
 int filter;
 
-GtkWidget* filterFixed;
+GtkWidget* filterFrame;
+GtkWidget* filterTable;
 
 GtkWidget* buttonHighPlus;
-GtkWidget* filterHighLabel;
-GdkPixmap* filterHighLabelPixmap;
 GtkWidget* filterHighDisplay;
 GdkPixmap* filterHighDisplayPixmap;
 GtkWidget* buttonHighMinus;
 GtkWidget* buttonLowPlus;
-GtkWidget* filterLowLabel;
-GdkPixmap* filterLowLabelPixmap;
 GtkWidget* filterLowDisplay;
 GdkPixmap* filterLowDisplayPixmap;
 GtkWidget* buttonLowMinus;
@@ -292,7 +289,7 @@ void drawFilterLow(gboolean queue) {
         layout = pango_layout_new (context);
         pango_layout_set_width(layout,filterLowDisplay->allocation.width*PANGO_SCALE);
         pango_layout_set_alignment(layout,PANGO_ALIGN_RIGHT);
-        sprintf(temp,"<span foreground='#7AAA6E' background='#000000' font_desc='Sans Bold 10'>%d</span>",filterLow);
+        sprintf(temp,"<span foreground='#7AAA6E' background='#000000' font_desc='Sans Bold 10'>Low   % 5d </span>",filterLow);
         pango_layout_set_markup (layout,temp, -1);
         gdk_draw_layout(GDK_DRAWABLE(filterLowDisplayPixmap),gc,0,2,layout);
 
@@ -335,7 +332,7 @@ void drawFilterHigh(gboolean queue) {
         layout = pango_layout_new (context);
         pango_layout_set_width(layout,filterHighDisplay->allocation.width*PANGO_SCALE);
         pango_layout_set_alignment(layout,PANGO_ALIGN_RIGHT);
-        sprintf(temp,"<span foreground='#7AAA6E' background='#000000' font_desc='Sans Bold 10'>%d</span>",filterHigh);
+        sprintf(temp,"<span foreground='#7AAA6E' background='#000000' font_desc='Sans Bold 10'>High  % 5d </span>",filterHigh);
         pango_layout_set_markup (layout,temp, -1);
         gdk_draw_layout(GDK_DRAWABLE(filterHighDisplayPixmap),gc,0,2,layout);
 
@@ -546,8 +543,9 @@ void selectFilter(GtkWidget* widget) {
             break;
     }
     
-    sprintf(temp,"setFilter %d %d",filterLow,filterHigh);
-    writeCommand(temp);
+    //sprintf(temp,"setFilter %d %d",filterLow,filterHigh);
+    //writeCommand(temp);
+    SetRXFilter(0,0,(double)filterLow,(double)filterHigh);
 
     drawFilterHigh(TRUE);
     drawFilterLow(TRUE);
@@ -616,65 +614,6 @@ void filterButtonCallback(GtkWidget* widget,gpointer data) {
 
 /* --------------------------------------------------------------------------*/
 /** 
-* @brief Filter High label configure event
-* 
-* @param widget
-* @param event
-* 
-* @return 
-*/
-gboolean filterHighLabel_configure_event(GtkWidget* widget,GdkEventConfigure* event) {
-    GdkGC* gc;
-    PangoContext *context;
-    PangoLayout *layout;
-
-    if(filterHighLabelPixmap) g_object_unref(filterHighLabelPixmap);
-    filterHighLabelPixmap=gdk_pixmap_new(widget->window,widget->allocation.width,widget->allocation.height,-1);
-
-    gc=gdk_gc_new(widget->window);
-    gdk_gc_set_rgb_fg_color(gc,&black);
-    gdk_draw_rectangle(filterHighLabelPixmap,
-                       gc,
-                       TRUE,
-                       0,0,
-                       widget->allocation.width,
-                       widget->allocation.height);
-
-    context = gdk_pango_context_get_for_screen (gdk_screen_get_default ());
-    layout = pango_layout_new (context);
-    pango_layout_set_width(layout,widget->allocation.width*PANGO_SCALE);
-    pango_layout_set_alignment(layout,PANGO_ALIGN_LEFT);
-    pango_layout_set_markup (layout, "<span foreground='#7AAA6E' background='#000000' font_desc='Sans Bold 12'>H</span>", -1);
-    gdk_draw_layout(GDK_DRAWABLE(filterHighLabelPixmap),gc,0,2,layout);
-
-    g_object_unref(context);
-    g_object_unref(layout);
-    g_object_unref(gc);
-
-    return TRUE;
-}
-
-/* --------------------------------------------------------------------------*/
-/** 
-* @brief Filter high label expose event
-* 
-* @param widget
-* @param event
-* 
-* @return 
-*/
-gboolean filterHighLabel_expose_event(GtkWidget* widget,GdkEventExpose* event) {
-    gdk_draw_drawable(widget->window,
-                    widget->style->fg_gc[GTK_WIDGET_STATE (widget)],
-                    filterHighLabelPixmap,
-                    event->area.x, event->area.y,
-                    event->area.x, event->area.y,
-                    event->area.width, event->area.height);
-    return FALSE;
-}
-
-/* --------------------------------------------------------------------------*/
-/** 
 * @brief Filter high display configure event 
 * 
 * @param widget
@@ -710,66 +649,6 @@ gboolean filterHighDisplay_expose_event(GtkWidget* widget,GdkEventExpose* event)
     gdk_draw_drawable(widget->window,
                     widget->style->fg_gc[GTK_WIDGET_STATE (widget)],
                     filterHighDisplayPixmap,
-                    event->area.x, event->area.y,
-                    event->area.x, event->area.y,
-                    event->area.width, event->area.height);
-    return FALSE;
-}
-
-/* --------------------------------------------------------------------------*/
-/** 
-* @brief Filter low label configure event
-* 
-* @param widget
-* @param event
-* 
-* @return 
-*/
-gboolean filterLowLabel_configure_event(GtkWidget* widget,GdkEventConfigure* event) {
-    GdkGC* gc;
-    PangoContext *context;
-    PangoLayout *layout;
-
-    if(filterLowLabelPixmap) g_object_unref(filterLowLabelPixmap);
-
-    filterLowLabelPixmap=gdk_pixmap_new(widget->window,widget->allocation.width,widget->allocation.height,-1);
-
-    gc=gdk_gc_new(widget->window);
-    gdk_gc_set_rgb_fg_color(gc,&black);
-    gdk_draw_rectangle(filterLowLabelPixmap,
-                       gc,
-                       TRUE,
-                       0,0,
-                       widget->allocation.width,
-                       widget->allocation.height);
-
-    context = gdk_pango_context_get_for_screen (gdk_screen_get_default ());
-    layout = pango_layout_new (context);
-    pango_layout_set_width(layout,widget->allocation.width*PANGO_SCALE);
-    pango_layout_set_alignment(layout,PANGO_ALIGN_LEFT);
-    pango_layout_set_markup (layout, "<span foreground='#7AAA6E' background='#000000' font_desc='Sans Bold 12'>L</span>", -1);
-    gdk_draw_layout(GDK_DRAWABLE(filterLowLabelPixmap),gc,0,2,layout);
-
-    g_object_unref(context);
-    g_object_unref(layout);
-    g_object_unref(gc);
-
-    return TRUE;
-}
-
-/* --------------------------------------------------------------------------*/
-/** 
-* @brief iFilter low label expose event
-* 
-* @param widget
-* @param event
-* 
-* @return 
-*/
-gboolean filterLowLabel_expose_event(GtkWidget* widget,GdkEventExpose* event) {
-    gdk_draw_drawable(widget->window,
-                    widget->style->fg_gc[GTK_WIDGET_STATE (widget)],
-                    filterLowLabelPixmap,
                     event->area.x, event->area.y,
                     event->area.x, event->area.y,
                     event->area.width, event->area.height);
@@ -867,8 +746,9 @@ void updateFilter(GtkWidget* widget) {
             }
             break;
     }
-    sprintf(temp,"setFilter %d %d",filterLow,filterHigh);
-    writeCommand(temp);
+    //sprintf(temp,"setFilter %d %d",filterLow,filterHigh);
+    //writeCommand(temp);
+    SetRXFilter(0,0,(double)filterLow,(double)filterHigh);
 }
 
 /* --------------------------------------------------------------------------*/
@@ -930,21 +810,21 @@ gboolean filter_scroll_event(GtkWidget* widget,GdkEventScroll* event) {
     switch(filter) {
         case filterVar1:
             if(event->direction==GDK_SCROLL_UP) {
-                if(widget==filterHighLabel || widget==filterHighDisplay) {
+                if(widget==filterHighDisplay) {
                     filterVar1High+=10;
                     filterHigh=filterVar1High;
                     drawFilterHigh(TRUE);
-                } else if(widget==filterLowLabel || widget==filterLowDisplay) {
+                } else if(widget==filterLowDisplay) {
                     filterVar1Low+=10;
                     filterLow=filterVar1Low;
                     drawFilterLow(TRUE);
                 }
             } else {
-                if(widget==filterHighLabel || widget==filterHighDisplay) {
+                if(widget==filterHighDisplay) {
                     filterVar1High-=10;
                     filterHigh=filterVar1High;
                     drawFilterHigh(TRUE);
-                } else if(widget==filterLowLabel || widget==filterLowDisplay) {
+                } else if(widget==filterLowDisplay) {
                     filterVar1Low-=10;
                     filterLow=filterVar1Low;
                     drawFilterLow(TRUE);
@@ -953,21 +833,21 @@ gboolean filter_scroll_event(GtkWidget* widget,GdkEventScroll* event) {
             break;
         case filterVar2:
             if(event->direction==GDK_SCROLL_UP) {
-                if(widget==filterHighLabel || widget==filterHighDisplay) {
+                if(widget==filterHighDisplay) {
                     filterVar2High+=10;
                     filterHigh=filterVar1High;
                     drawFilterHigh(TRUE);
-                } else if(widget==filterLowLabel || widget==filterLowDisplay) {
+                } else if(widget==filterLowDisplay) {
                     filterVar2Low+=10;
                     filterLow=filterVar1Low;
                     drawFilterLow(TRUE);
                 }
             } else {
-                if(widget==filterHighLabel || widget==filterHighDisplay) {
+                if(widget==filterHighDisplay) {
                     filterVar2High-=10;
                     filterHigh=filterVar1High;
                     drawFilterHigh(TRUE);
-                } else if(widget==filterLowLabel || widget==filterLowDisplay) {
+                } else if(widget==filterLowDisplay) {
                     filterVar2Low-=10;
                     filterLow=filterVar1Low;
                     drawFilterLow(TRUE);
@@ -975,8 +855,9 @@ gboolean filter_scroll_event(GtkWidget* widget,GdkEventScroll* event) {
             }
             break;
     }
-    sprintf(temp,"setFilter %d %d",filterLow,filterHigh);
-    writeCommand(temp);
+    //sprintf(temp,"setFilter %d %d",filterLow,filterHigh);
+    //writeCommand(temp);
+    SetRXFilter(0,0,(double)filterLow,(double)filterHigh);
 }
 
 /* --------------------------------------------------------------------------*/
@@ -989,8 +870,11 @@ GtkWidget* buildFilterUI() {
 
     GtkWidget* label;
 
-    filterFixed=gtk_fixed_new();
-    gtk_widget_modify_bg(filterFixed,GTK_STATE_NORMAL,&background);
+    filterFrame=gtk_frame_new("Filter");
+    gtk_widget_modify_bg(filterFrame,GTK_STATE_NORMAL,&background);
+    gtk_widget_modify_fg(gtk_frame_get_label_widget(filterFrame),GTK_STATE_NORMAL,&white);
+
+    filterTable=gtk_table_new(3,4,TRUE);
 
     // filter settings
     buttonHighPlus = gtk_button_new_with_label ("+");
@@ -1001,27 +885,17 @@ GtkWidget* buildFilterUI() {
     g_signal_connect(G_OBJECT(buttonHighPlus),"pressed",G_CALLBACK(filterIncrementCallback),NULL);
     g_signal_connect(G_OBJECT(buttonHighPlus),"released",G_CALLBACK(filterReleasedCallback),NULL);
     gtk_widget_show(buttonHighPlus);
-    gtk_fixed_put((GtkFixed*)filterFixed,buttonHighPlus,0,0);
-
-    filterHighLabel=gtk_drawing_area_new();
-    gtk_widget_set_size_request(GTK_WIDGET(filterHighLabel),15,25);
-    gtk_widget_show(filterHighLabel);
-    g_signal_connect(G_OBJECT (filterHighLabel),"configure_event",G_CALLBACK(filterHighLabel_configure_event),NULL);
-    g_signal_connect(G_OBJECT (filterHighLabel),"expose_event",G_CALLBACK(filterHighLabel_expose_event),NULL);
-    g_signal_connect(G_OBJECT(filterHighLabel),"scroll_event",G_CALLBACK(filter_scroll_event),NULL);
-    gtk_widget_set_events(filterHighLabel,GDK_EXPOSURE_MASK|GDK_SCROLL_MASK);
-    gtk_widget_show(filterHighLabel);
-    gtk_fixed_put((GtkFixed*)filterFixed,filterHighLabel,20,0);
+    gtk_table_attach_defaults(filterTable,buttonHighPlus,0,1,3,4);
 
     filterHighDisplay=gtk_drawing_area_new();
-    gtk_widget_set_size_request(GTK_WIDGET(filterHighDisplay),45,25);
+    gtk_widget_set_size_request(GTK_WIDGET(filterHighDisplay),60,25);
     gtk_widget_show(filterHighDisplay);
     g_signal_connect(G_OBJECT (filterHighDisplay),"configure_event",G_CALLBACK(filterHighDisplay_configure_event),NULL);
     g_signal_connect(G_OBJECT (filterHighDisplay),"expose_event",G_CALLBACK(filterHighDisplay_expose_event),NULL);
     g_signal_connect(G_OBJECT(filterHighDisplay),"scroll_event",G_CALLBACK(filter_scroll_event),NULL);
     gtk_widget_set_events(filterHighDisplay,GDK_EXPOSURE_MASK|GDK_SCROLL_MASK);
     gtk_widget_show(filterHighDisplay);
-    gtk_fixed_put((GtkFixed*)filterFixed,filterHighDisplay,35,0);
+    gtk_table_attach_defaults(filterTable,filterHighDisplay,1,3,3,4);
 
     buttonHighMinus = gtk_button_new_with_label ("-");
     gtk_widget_modify_bg(buttonHighMinus, GTK_STATE_NORMAL, &buttonBackground);
@@ -1031,7 +905,7 @@ GtkWidget* buildFilterUI() {
     g_signal_connect(G_OBJECT(buttonHighMinus),"pressed",G_CALLBACK(filterIncrementCallback),NULL);
     g_signal_connect(G_OBJECT(buttonHighMinus),"released",G_CALLBACK(filterReleasedCallback),NULL);
     gtk_widget_show(buttonHighMinus);
-    gtk_fixed_put((GtkFixed*)filterFixed,buttonHighMinus,80,0);
+    gtk_table_attach_defaults(filterTable,buttonHighMinus,3,4,3,4);
 
     buttonLowPlus = gtk_button_new_with_label ("+");
     gtk_widget_modify_bg(buttonLowPlus, GTK_STATE_NORMAL, &buttonBackground);
@@ -1041,27 +915,17 @@ GtkWidget* buildFilterUI() {
     g_signal_connect(G_OBJECT(buttonLowPlus),"pressed",G_CALLBACK(filterIncrementCallback),NULL);
     g_signal_connect(G_OBJECT(buttonLowPlus),"released",G_CALLBACK(filterReleasedCallback),NULL);
     gtk_widget_show(buttonLowPlus);
-    gtk_fixed_put((GtkFixed*)filterFixed,buttonLowPlus,0,25);
-
-    filterLowLabel=gtk_drawing_area_new();
-    gtk_widget_set_size_request(GTK_WIDGET(filterLowLabel),15,25);
-    gtk_widget_show(filterLowLabel);
-    g_signal_connect(G_OBJECT (filterLowLabel),"configure_event",G_CALLBACK(filterLowLabel_configure_event),NULL);
-    g_signal_connect(G_OBJECT (filterLowLabel),"expose_event",G_CALLBACK(filterLowLabel_expose_event),NULL);
-    g_signal_connect(G_OBJECT(filterLowLabel),"scroll_event",G_CALLBACK(filter_scroll_event),NULL);
-    gtk_widget_set_events(filterLowLabel,GDK_EXPOSURE_MASK|GDK_SCROLL_MASK);
-    gtk_widget_show(filterLowLabel);
-    gtk_fixed_put((GtkFixed*)filterFixed,filterLowLabel,20,25);
+    gtk_table_attach_defaults(filterTable,buttonLowPlus,0,1,4,5);
 
     filterLowDisplay=gtk_drawing_area_new();
-    gtk_widget_set_size_request(GTK_WIDGET(filterLowDisplay),45,25);
+    gtk_widget_set_size_request(GTK_WIDGET(filterLowDisplay),60,25);
     gtk_widget_show(filterLowDisplay);
     g_signal_connect(G_OBJECT (filterLowDisplay),"configure_event",G_CALLBACK(filterLowDisplay_configure_event),NULL);
     g_signal_connect(G_OBJECT (filterLowDisplay),"expose_event",G_CALLBACK(filterLowDisplay_expose_event),NULL);
     g_signal_connect(G_OBJECT(filterLowDisplay),"scroll_event",G_CALLBACK(filter_scroll_event),NULL);
     gtk_widget_set_events(filterLowDisplay,GDK_EXPOSURE_MASK|GDK_SCROLL_MASK);
     gtk_widget_show(filterLowDisplay);
-    gtk_fixed_put((GtkFixed*)filterFixed,filterLowDisplay,35,25);
+    gtk_table_attach_defaults(filterTable,filterLowDisplay,1,3,4,5);
 
     buttonLowMinus = gtk_button_new_with_label ("-");
     gtk_widget_modify_bg(buttonLowMinus, GTK_STATE_NORMAL, &buttonBackground);
@@ -1071,7 +935,7 @@ GtkWidget* buildFilterUI() {
     g_signal_connect(G_OBJECT(buttonLowMinus),"pressed",G_CALLBACK(filterIncrementCallback),NULL);
     g_signal_connect(G_OBJECT(buttonLowMinus),"released",G_CALLBACK(filterReleasedCallback),NULL);
     gtk_widget_show(buttonLowMinus);
-    gtk_fixed_put((GtkFixed*)filterFixed,buttonLowMinus,80,25);
+    gtk_table_attach_defaults(filterTable,buttonLowMinus,3,4,4,5);
 
     buttonVar1 = gtk_button_new_with_label ("VAR1");
     gtk_widget_modify_bg(buttonVar1, GTK_STATE_NORMAL, &buttonBackground);
@@ -1080,7 +944,7 @@ GtkWidget* buildFilterUI() {
     gtk_widget_set_size_request(GTK_WIDGET(buttonVar1),50,25);
     g_signal_connect(G_OBJECT(buttonVar1),"clicked",G_CALLBACK(filterButtonCallback),NULL);
     gtk_widget_show(buttonVar1);
-    gtk_fixed_put((GtkFixed*)filterFixed,buttonVar1,0,50);
+    gtk_table_attach_defaults(filterTable,buttonVar1,2,3,2,3);
 
     buttonVar2 = gtk_button_new_with_label ("VAR2");
     gtk_widget_modify_bg(buttonVar2, GTK_STATE_NORMAL, &buttonBackground);
@@ -1089,7 +953,7 @@ GtkWidget* buildFilterUI() {
     gtk_widget_set_size_request(GTK_WIDGET(buttonVar2),50,25);
     g_signal_connect(G_OBJECT(buttonVar2),"clicked",G_CALLBACK(filterButtonCallback),NULL);
     gtk_widget_show(buttonVar2);
-    gtk_fixed_put((GtkFixed*)filterFixed,buttonVar2,50,50);
+    gtk_table_attach_defaults(filterTable,buttonVar2,3,4,2,3);
 
 
     // predefined filters
@@ -1100,7 +964,7 @@ GtkWidget* buildFilterUI() {
     gtk_widget_set_size_request(GTK_WIDGET(buttonF0),50,25);
     g_signal_connect(G_OBJECT(buttonF0),"clicked",G_CALLBACK(filterButtonCallback),NULL);
     gtk_widget_show(buttonF0);
-    gtk_fixed_put((GtkFixed*)filterFixed,buttonF0,100,0);
+    gtk_table_attach_defaults(filterTable,buttonF0,0,1,0,1);
 
     buttonF1 = gtk_button_new_with_label ("4.0K");
     gtk_widget_modify_bg(buttonF1, GTK_STATE_NORMAL, &buttonBackground);
@@ -1109,7 +973,7 @@ GtkWidget* buildFilterUI() {
     gtk_widget_set_size_request(GTK_WIDGET(buttonF1),50,25);
     g_signal_connect(G_OBJECT(buttonF1),"clicked",G_CALLBACK(filterButtonCallback),NULL);
     gtk_widget_show(buttonF1);
-    gtk_fixed_put((GtkFixed*)filterFixed,buttonF1,150,0);
+    gtk_table_attach_defaults(filterTable,buttonF1,1,2,0,1);
 
     buttonF2 = gtk_button_new_with_label ("2.6K");
     gtk_widget_modify_bg(buttonF2, GTK_STATE_NORMAL, &buttonBackground);
@@ -1118,7 +982,7 @@ GtkWidget* buildFilterUI() {
     gtk_widget_set_size_request(GTK_WIDGET(buttonF2),50,25);
     g_signal_connect(G_OBJECT(buttonF2),"clicked",G_CALLBACK(filterButtonCallback),NULL);
     gtk_widget_show(buttonF2);
-    gtk_fixed_put((GtkFixed*)filterFixed,buttonF2,100,25);
+    gtk_table_attach_defaults(filterTable,buttonF2,2,3,0,1);
 
     buttonF3 = gtk_button_new_with_label ("2.1K");
     gtk_widget_modify_bg(buttonF3, GTK_STATE_NORMAL, &buttonBackground);
@@ -1127,7 +991,7 @@ GtkWidget* buildFilterUI() {
     gtk_widget_set_size_request(GTK_WIDGET(buttonF3),50,25);
     g_signal_connect(G_OBJECT(buttonF3),"clicked",G_CALLBACK(filterButtonCallback),NULL);
     gtk_widget_show(buttonF3);
-    gtk_fixed_put((GtkFixed*)filterFixed,buttonF3,150,25);
+    gtk_table_attach_defaults(filterTable,buttonF3,3,4,0,1);
 
     buttonF4 = gtk_button_new_with_label ("1.0K");
     gtk_widget_modify_bg(buttonF4, GTK_STATE_NORMAL, &buttonBackground);
@@ -1136,7 +1000,7 @@ GtkWidget* buildFilterUI() {
     gtk_widget_set_size_request(GTK_WIDGET(buttonF4),50,25);
     g_signal_connect(G_OBJECT(buttonF4),"clicked",G_CALLBACK(filterButtonCallback),NULL);
     gtk_widget_show(buttonF4);
-    gtk_fixed_put((GtkFixed*)filterFixed,buttonF4,100,50);
+    gtk_table_attach_defaults(filterTable,buttonF4,0,1,1,2);
 
     buttonF5 = gtk_button_new_with_label ("500");
     gtk_widget_modify_bg(buttonF5, GTK_STATE_NORMAL, &buttonBackground);
@@ -1145,7 +1009,7 @@ GtkWidget* buildFilterUI() {
     gtk_widget_set_size_request(GTK_WIDGET(buttonF5),50,25);
     g_signal_connect(G_OBJECT(buttonF5),"clicked",G_CALLBACK(filterButtonCallback),NULL);
     gtk_widget_show(buttonF5);
-    gtk_fixed_put((GtkFixed*)filterFixed,buttonF5,150,50);
+    gtk_table_attach_defaults(filterTable,buttonF5,1,2,1,2);
 
     buttonF6 = gtk_button_new_with_label ("250");
     gtk_widget_modify_bg(buttonF6, GTK_STATE_NORMAL, &buttonBackground);
@@ -1154,7 +1018,7 @@ GtkWidget* buildFilterUI() {
     gtk_widget_set_size_request(GTK_WIDGET(buttonF6),50,25);
     g_signal_connect(G_OBJECT(buttonF6),"clicked",G_CALLBACK(filterButtonCallback),NULL);
     gtk_widget_show(buttonF6);
-    gtk_fixed_put((GtkFixed*)filterFixed,buttonF6,100,75);
+    gtk_table_attach_defaults(filterTable,buttonF6,2,3,1,2);
 
     buttonF7 = gtk_button_new_with_label ("100");
     gtk_widget_modify_bg(buttonF7, GTK_STATE_NORMAL, &buttonBackground);
@@ -1163,7 +1027,7 @@ GtkWidget* buildFilterUI() {
     gtk_widget_set_size_request(GTK_WIDGET(buttonF7),50,25);
     g_signal_connect(G_OBJECT(buttonF7),"clicked",G_CALLBACK(filterButtonCallback),NULL);
     gtk_widget_show(buttonF7);
-    gtk_fixed_put((GtkFixed*)filterFixed,buttonF7,150,75);
+    gtk_table_attach_defaults(filterTable,buttonF7,3,4,1,2);
 
     buttonF8 = gtk_button_new_with_label ("50");
     gtk_widget_modify_bg(buttonF8, GTK_STATE_NORMAL, &buttonBackground);
@@ -1172,7 +1036,7 @@ GtkWidget* buildFilterUI() {
     gtk_widget_set_size_request(GTK_WIDGET(buttonF8),50,25);
     g_signal_connect(G_OBJECT(buttonF8),"clicked",G_CALLBACK(filterButtonCallback),NULL);
     gtk_widget_show(buttonF8);
-    gtk_fixed_put((GtkFixed*)filterFixed,buttonF8,100,100);
+    gtk_table_attach_defaults(filterTable,buttonF8,0,1,2,3);
 
     buttonF9 = gtk_button_new_with_label ("25");
     gtk_widget_modify_bg(buttonF9, GTK_STATE_NORMAL, &buttonBackground);
@@ -1181,12 +1045,13 @@ GtkWidget* buildFilterUI() {
     gtk_widget_set_size_request(GTK_WIDGET(buttonF9),50,25);
     g_signal_connect(G_OBJECT(buttonF9),"clicked",G_CALLBACK(filterButtonCallback),NULL);
     gtk_widget_show(buttonF9);
-    gtk_fixed_put((GtkFixed*)filterFixed,buttonF9,150,100);
+    gtk_table_attach_defaults(filterTable,buttonF9,1,2,2,3);
 
-    gtk_widget_set_size_request(GTK_WIDGET(filterFixed),200,125);
-    gtk_widget_show(filterFixed);
+    gtk_container_add(GTK_CONTAINER(filterFrame),filterTable);
+    gtk_widget_show(filterTable);
+    gtk_widget_show(filterFrame);
 
-    return filterFixed;
+    return filterFrame;
 }
 
 /* --------------------------------------------------------------------------*/

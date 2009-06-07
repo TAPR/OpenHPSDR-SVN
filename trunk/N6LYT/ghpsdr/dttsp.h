@@ -38,14 +38,29 @@ typedef enum _trxmode { RX, TX } TRXMODE;
 
 /* --------------------------------------------------------------------------*/
 /** 
-* @brief DttSP main  
+* @brief Setup_SDR  
 * 
-* @param argc
-* @param argv[]
-* 
-* @return 
+* @return
 */
-extern void dttsp_main(int argc,char* argv[]);
+extern void Setup_SDR();
+
+/* --------------------------------------------------------------------------*/
+/** 
+* @brief Release_Update  
+* 
+* @return
+*/
+extern void Release_Update();
+
+/* --------------------------------------------------------------------------*/
+/** 
+* @brief SetThreadCom  
+*
+* @param thread
+* 
+* @return
+*/
+extern void SetThreadCom(int thread);
 
 /* --------------------------------------------------------------------------*/
 /** 
@@ -59,47 +74,51 @@ extern void dttsp_main(int argc,char* argv[]);
 * 
 * @return 
 */
-extern void audio_callback (float *input_l, float *input_r, float *output_l,
+extern void Audio_Callback (float *input_l, float *input_r, float *output_l,
                             float *output_r, unsigned int nframes);
 
 /* --------------------------------------------------------------------------*/
 /** 
 * @brief Process the spectrum 
 * 
+* @param thread
 * @param results
 * 
 * @return 
 */
-extern void Process_Spectrum (float *results);
+extern void Process_Spectrum (int thread, float *results);
 /* --------------------------------------------------------------------------*/
 /** 
 * @brief Process Panadapter
 * 
+* @param thread
 * @param results
 * 
 * @return 
 */
-extern void Process_Panadapter (float *results);
+extern void Process_Panadapter (int thread, float *results);
 /* --------------------------------------------------------------------------*/
 /** 
 * @brief Process Phase 
 * 
+* @param thread
 * @param results
 * @param numpoints
 * 
 * @return 
 */
-extern void Process_Phase (float *results, int numpoints);
+extern void Process_Phase (int thread, float *results, int numpoints);
 /* --------------------------------------------------------------------------*/
 /** 
 * @brief Process scope 
 * 
+* @param thread
 * @param results
 * @param numpoints
 * 
 * @return 
 */
-extern void Process_Scope (float *results, int numpoints);
+extern void Process_Scope (int thread, float *results, int numpoints);
 /* --------------------------------------------------------------------------*/
 /** 
 * @brief Calculate the RX meter 
@@ -109,7 +128,7 @@ extern void Process_Scope (float *results, int numpoints);
 * 
 * @return 
 */
-extern float CalculateRXMeter(unsigned int subrx, int mt);
+extern float CalculateRXMeter(int thread,unsigned int subrx, int mt);
 
 /* --------------------------------------------------------------------------*/
 /** 
@@ -120,3 +139,33 @@ extern float CalculateRXMeter(unsigned int subrx, int mt);
 * @return 
 */
 extern int SetSampleRate(double sampleRate);
+
+/* --------------------------------------------------------------------------*/
+/** 
+* @brief Set the Oscillator frequency 
+* 
+* @param frequency
+* 
+* @return 
+*/
+extern int SetRXOsc(unsigned int thread, unsigned subrx, double freq);
+
+/* --------------------------------------------------------------------------*/
+/** 
+* @brief Set the receiver output gain
+* 
+* @param gain
+* 
+* @return 
+*/
+extern int SetRXOutputGain(unsigned int thread, unsigned subrx, double gain);
+
+/* --------------------------------------------------------------------------*/
+/** 
+* @brief Set the receiver pan position
+* 
+* @param pos
+* 
+* @return 
+*/
+extern int SetRXPan(unsigned int thread, unsigned subrx, float pos);

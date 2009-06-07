@@ -99,14 +99,18 @@
 #include "audio.h"
 #include "agc.h"
 #include "bandstack.h"
+#include "bandscope_control.h"
+#include "bandscope_update.h"
 #include "command.h"
+#include "cw.h"
 #include "display.h"
 #include "dttsp.h"
 #include "filter.h"
 #include "main.h"
-#include "mercury.h"
+#include "hardware.h"
 #include "meter.h"
 #include "meter_update.h"
+#include "ozy.h"
 #include "property.h"
 #include "soundcard.h"
 #include "spectrum.h"
@@ -118,6 +122,7 @@
 #include "bandscope.h"
 #include "setup.h"
 #include "receiver.h"
+#include "volume.h"
 
 GdkColor background;
 GdkColor buttonBackground;
@@ -147,12 +152,13 @@ GtkWidget* modeWindow;
 GtkWidget* displayWindow;
 GtkWidget* filterWindow;
 GtkWidget* audioWindow;
-GtkWidget* mercuryWindow;
+GtkWidget* hardwareWindow;
 GtkWidget* meterWindow;
 GtkWidget* bandscopeWindow;
 GtkWidget* bandscope_controlWindow;
 GtkWidget* agcWindow;
 GtkWidget* receiverWindow;
+GtkWidget* volumeWindow;
 
 gint mainStartX;
 gint mainStartY;
@@ -161,11 +167,6 @@ gint mainRootX;
 gint mainRootY;
 
 char propertyPath[128];
-
-int meterDbm;
-float preampOffset;
-
-int cwPitch=600;
 
 /* --------------------------------------------------------------------------*/
 /** 
@@ -203,11 +204,12 @@ void quit() {
     displaySaveState();
     filterSaveState();
     audioSaveState();
-    mercurySaveState();
+    hardwareSaveState();
     bandscopeSaveState();
     bandscope_controlSaveState();
     agcSaveState();
     receiverSaveState();
+    volumeSaveState();
 
     saveProperties(propertyPath);
 
@@ -245,7 +247,7 @@ void exitCallback(GtkWidget* widget,gpointer data) {
 */
 /* ----------------------------------------------------------------------------*/
 void setupCallback(GtkWidget* widget,gpointer data) {
-    setup();
+    ghpsdr_setup();
 }
 
 /* --------------------------------------------------------------------------*/
@@ -370,7 +372,7 @@ void buildMainUI() {
     gtk_widget_set_size_request(GTK_WIDGET(buttonExit),100,25);
     g_signal_connect(G_OBJECT(buttonExit),"clicked",G_CALLBACK(exitCallback),NULL);
     gtk_widget_show(buttonExit);
-    gtk_fixed_put((GtkFixed*)mainFixed,buttonExit,0,0);
+    gtk_fixed_put((GtkFixed*)mainFixed,buttonExit,5,0);
 
     buttonSetup = gtk_button_new_with_label ("Setup");
     gtk_widget_modify_bg(buttonSetup, GTK_STATE_NORMAL, &buttonBackground);
@@ -379,58 +381,62 @@ void buildMainUI() {
     gtk_widget_set_size_request(GTK_WIDGET(buttonSetup),100,25);
     g_signal_connect(G_OBJECT(buttonSetup),"clicked",G_CALLBACK(setupCallback),NULL);
     gtk_widget_show(buttonSetup);
-    gtk_fixed_put((GtkFixed*)mainFixed,buttonSetup,100,0);
+    gtk_fixed_put((GtkFixed*)mainFixed,buttonSetup,105,0);
 
     // add the vfo window
     gtk_widget_show(vfoWindow);
-    gtk_fixed_put((GtkFixed*)mainFixed,vfoWindow,200,0);
+    gtk_fixed_put((GtkFixed*)mainFixed,vfoWindow,210,0);
 
     // add the meter window
     gtk_widget_show(meterWindow);
-    gtk_fixed_put((GtkFixed*)mainFixed,meterWindow,1000,0);
+    gtk_fixed_put((GtkFixed*)mainFixed,meterWindow,1010,0);
 
     // add the band window
     gtk_widget_show(bandWindow);
-    gtk_fixed_put((GtkFixed*)mainFixed,bandWindow,0,25);
+    gtk_fixed_put((GtkFixed*)mainFixed,bandWindow,5,25);
 
     // add the mode window
     gtk_widget_show(modeWindow);
-    gtk_fixed_put((GtkFixed*)mainFixed,modeWindow,102,25);
+    gtk_fixed_put((GtkFixed*)mainFixed,modeWindow,5,150);
 
     // add the filter window
     gtk_widget_show(filterWindow);
-    gtk_fixed_put((GtkFixed*)mainFixed,filterWindow,0,200);
+    gtk_fixed_put((GtkFixed*)mainFixed,filterWindow,5,250);
 
     // add the audio window
     gtk_widget_show(audioWindow);
-    gtk_fixed_put((GtkFixed*)mainFixed,audioWindow,0,330);
+    gtk_fixed_put((GtkFixed*)mainFixed,audioWindow,5,400);
 
     // add the agc window
     gtk_widget_show(agcWindow);
-    gtk_fixed_put((GtkFixed*)mainFixed,agcWindow,100,330);
+    gtk_fixed_put((GtkFixed*)mainFixed,agcWindow,5,475);
 
-    // add the mercury window
-    gtk_widget_show(mercuryWindow);
-    gtk_fixed_put((GtkFixed*)mainFixed,mercuryWindow,0,410);
+    // add the hardware window
+    gtk_widget_show(hardwareWindow);
+    gtk_fixed_put((GtkFixed*)mainFixed,hardwareWindow,210,600);
+
+    // add the volume window
+    gtk_widget_show(volumeWindow);
+    gtk_fixed_put((GtkFixed*)mainFixed,volumeWindow,5,575);
 
     // add the receiver window
     gtk_widget_show(receiverWindow);
-    gtk_fixed_put((GtkFixed*)mainFixed,receiverWindow,0,510);
+    gtk_fixed_put((GtkFixed*)mainFixed,receiverWindow,5,635);
 
 
     // add the display window
     gtk_widget_show(displayWindow);
-    gtk_fixed_put((GtkFixed*)mainFixed,displayWindow,200,50);
+    gtk_fixed_put((GtkFixed*)mainFixed,displayWindow,210,50);
 
 
     // add the bandscope display
     gtk_widget_show(bandscopeWindow);
-    gtk_fixed_put((GtkFixed*)mainFixed,bandscopeWindow,200,475);
+    gtk_fixed_put((GtkFixed*)mainFixed,bandscopeWindow,210,475);
 
     gtk_widget_show(bandscope_controlWindow);
-    gtk_fixed_put((GtkFixed*)mainFixed,bandscope_controlWindow,200,575);
+    gtk_fixed_put((GtkFixed*)mainFixed,bandscope_controlWindow,210,575);
 
-    gtk_widget_set_size_request(GTK_WIDGET(mainFixed),1170,600);
+    gtk_widget_set_size_request(GTK_WIDGET(mainFixed),1180,700);
     gtk_widget_show(mainFixed);
     gtk_container_add(GTK_CONTAINER(mainWindow), mainFixed);
 
@@ -455,9 +461,9 @@ void buildMainUI() {
 */
 /* ----------------------------------------------------------------------------*/
 void initColors() {
-    background.red=65535*44/256;
-    background.green=65535*44/256;
-    background.blue=65535*44/256;
+    background.red=65535*55/256;
+    background.green=65535*55/256;
+    background.blue=65535*55/256;
 
     black.red=0;
     black.green=0;
@@ -595,7 +601,21 @@ int main(int argc,char* argv[]) {
     fprintf(stderr,"ghpsdr Version %s\n",VERSION);
 
     // initialize DttSP
-    dttsp_main(argc,argv);
+    Setup_SDR();
+    Release_Update();
+    SetTRX(0,FALSE);
+    SetTRX(1,FALSE);
+    SetTRX(2,TRUE);
+    SetThreadProcessingMode(0,2);
+    SetThreadProcessingMode(1,2);
+    SetSubRXSt(0,0,TRUE);
+    SetSubRXSt(0,1,TRUE);
+    //SetRXOutputGain(0,0,10.0);
+
+    reset_for_buflen(0,1024);
+    reset_for_buflen(1,1024);
+    reset_for_buflen(2,1024);
+
 
     // initialize ozy (default 48K)
     ozy_init(48000);
@@ -613,7 +633,8 @@ int main(int argc,char* argv[]) {
     mainRootX=0;
     mainRootY=0;
 
-    preampOffset=-16.0F;
+    preampOffset=-20.0F;
+    cwPitch =600;
 
     restoreInitialState();
 
@@ -651,11 +672,14 @@ int main(int argc,char* argv[]) {
     agcRestoreState();
     agcWindow=buildAgcUI();
 
-    mercuryRestoreState();
-    mercuryWindow=buildMercuryUI();
+    hardwareRestoreState();
+    hardwareWindow=buildHardwareUI();
 
     receiverRestoreState();
     receiverWindow=buildReceiverUI();
+
+    volumeRestoreState();
+    volumeWindow=buildVolumeUI();
 
     restoreState();
 
@@ -663,7 +687,9 @@ int main(int argc,char* argv[]) {
     buildMainUI();
 
     setSoundcard(getSoundcardId(soundCardName));
-    mercuryInit();
+    hardwareInit();
 
     gtk_main();
+
+    return 0;
 }

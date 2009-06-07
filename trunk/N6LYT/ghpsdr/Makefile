@@ -20,14 +20,14 @@ DTTSP=libDttSP.a
 COMPILE=$(CC) $(INCLUDES)
 
 SOURCES= agc.c audio.c band.c bandscope.c bandscope_control.c bandscope_update.c command.c\
-         display.c filter.c frequency.c libusbio.c main.c mercury.c meter.c\
+         display.c filter.c frequency.c libusbio.c main.c hardware.c meter.c\
          meter_update.c mode.c ozy_buffers.c ozy.c ozy_ringbuffer.c\
-         property.c receiver.c setup.c soundcard.c spectrum_buffers.c spectrum.c spectrum_update.c util.c vfo.c
+         property.c receiver.c setup.c soundcard.c spectrum_buffers.c spectrum.c spectrum_update.c util.c vfo.c volume.c
 
 OBJS= agc.o audio.o band.o bandscope.o bandscope_control.o bandscope_update.o command.o\
-      display.o filter.o frequency.o libusbio.o main.o mercury.o meter.o\
+      display.o filter.o frequency.o libusbio.o main.o hardware.o meter.o\
       meter_update.o mode.o ozy_buffers.o ozy.o ozy_ringbuffer.o\
-      property.o receiver.o setup.o soundcard.o spectrum_buffers.o spectrum.o spectrum_update.o util.o vfo.o
+      property.o receiver.o setup.o soundcard.o spectrum_buffers.o spectrum.o spectrum_update.o util.o vfo.o volume.o
 
 PROGRAM=ghpsdr
 

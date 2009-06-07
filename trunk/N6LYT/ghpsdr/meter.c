@@ -36,7 +36,7 @@
 #include <math.h>
 
 #include "main.h"
-#include "mercury.h"
+#include "hardware.h"
 #include "meter.h"
 #include "meter_update.h"
 #include "property.h"
@@ -385,8 +385,8 @@ void setMeterMode(int mode) {
 
     switch(meterMode) {
         case meterSIGNAL:
-            sprintf(command,"setMeterType 0");
-            writeCommand(command);
+            //sprintf(command,"setMeterType 0");
+            //writeCommand(command);
             break;
         case meterOFF:
             break;

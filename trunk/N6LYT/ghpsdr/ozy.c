@@ -18,24 +18,25 @@
 #include "spectrum_buffers.h"
 #include "dttsp.h"
 #include "util.h"
+#include "libusbio.h"
 
 /*
  *   ozy interface
  */
 
 #define USB_TIMEOUT -7
-struct OzyHandle* ozy;
+//static struct OzyHandle* ozy;
 
-pthread_t ep6_ep2_io_thread_id;
-pthread_t ep4_io_thread_id;
-pthread_t ozy_input_buffer_thread_id;
-pthread_t ozy_spectrum_buffer_thread_id;
+static pthread_t ep6_ep2_io_thread_id;
+static pthread_t ep4_io_thread_id;
+static pthread_t ozy_input_buffer_thread_id;
+static pthread_t ozy_spectrum_buffer_thread_id;
 
-int frequency=7056000;
-int frequency_changed=1;
+static int frequency=7056000;
+static int frequency_changed=1;
 
 
-unsigned char control_in[5]={0x00,0x00,0x00,0x00,0x00};
+static unsigned char control_in[5]={0x00,0x00,0x00,0x00,0x00};
 
 unsigned char control_out[5]={0x00,0x00,0x00,0x00,0x00};
 
@@ -115,14 +116,15 @@ if(show_software_serial_numbers) {
 
         // extract the 63 samples
         for(i=0;i<63;i++) {
-            left_sample = buffer[b++] << 16;
-            left_sample = left_sample + ((buffer[b++] & 0xFF) << 8);
-            left_sample = left_sample + (buffer[b++] & 0xFF);
-            right_sample = buffer[b++] << 16;
-            right_sample = right_sample + ((buffer[b++] & 0xFF) << 8);
-            right_sample = right_sample + (buffer[b++] & 0xFF);
-            mic_sample=buffer[b++]<<8;
-            mic_sample=mic_sample+(buffer[b++]&0xFF);
+
+            left_sample   = (int)((signed char) buffer[b++]) << 16;
+            left_sample  += (int)((unsigned char)buffer[b++]) << 8;
+            left_sample  += (int)((unsigned char)buffer[b++]);
+            right_sample  = (int)((signed char) buffer[b++]) << 16;
+            right_sample += (int)((unsigned char)buffer[b++]) << 8;
+            right_sample += (int)((unsigned char)buffer[b++]);
+            mic_sample    = (int)((signed char) buffer[b++]) << 8;
+            mic_sample   += (int)((unsigned char)buffer[b++]);
 
             left_sample_float=(float)left_sample/8388607.0; // 24 bit sample
             right_sample_float=(float)right_sample/8388607.0; // 24 bit sample
@@ -136,8 +138,8 @@ if(show_software_serial_numbers) {
             // when we have enough samples give them to DttSP and get the results
             if(samples==buffer_size) {
                 // give to DttSP and get any output
-                //fprintf(stderr,"call dttsp: frame=%d\n",frames);
-                audio_callback (left_input_buffer,right_input_buffer,
+//fprintf(stderr,"call dttsp: frame=%d buffer_size=%d\n",frames,buffer_size);
+                Audio_Callback (left_input_buffer,right_input_buffer,
                                 left_output_buffer,right_output_buffer, buffer_size);
 
                 // process the output
@@ -177,7 +179,7 @@ if(show_software_serial_numbers) {
 
         fprintf(stderr,"%s: process_ozy_input_buffer: did not find sync\n",
                 asctime(gmt));
-        dump_ozy_buffer("buffer",buffer);
+        dump_ozy_buffer("input buffer",buffer);
     }
 
 }
@@ -291,6 +293,7 @@ void* ozy_ep6_ep2_io_thread(void* arg) {
             if(bytes!=OZY_BUFFER_SIZE) {
                 perror("OzyBulkWrite failed");
             }
+            //dump_ozy_buffer("output buffer",output_buffer);
 
         }
 
@@ -545,7 +548,7 @@ int ozy_init(int sample_rate) {
 
     // create buffers of ozy
     create_ozy_ringbuffer(68*512);
-    create_ozy_buffers(34);
+    create_ozy_buffers(68);
     create_spectrum_buffers(8);
     
     // create a thread to process EP6 input buffers

@@ -39,4 +39,4 @@ struct _PROPERTY {
 
 void loadProperties(char* filename);
 char* getProperty(char* name);
-
+void setProperty(char* name,char* value);

@@ -1,11 +1,11 @@
 /** 
-* @file receiver.c
+* @file volume.c
 * @brief Mode functions
 * @author John Melton, G0ORX/N6LYT, Doxygen Comments Dave Larsen, KV0S
 * @version 0.1
 * @date 2009-04-12
 */
-// receiver.c
+// volume.c
 
 /* Copyright (C) 
 * 2009 - John Melton, G0ORX/N6LYT, Doxygen Comments Dave Larsen, KV0S
@@ -40,35 +40,34 @@
 #include "dttsp.h"
 #include "main.h"
 
-GtkWidget* receiverFrame;
+GtkWidget* volumeFrame;
 
-int receiver;
+double volume;
 
-float pan;
-
-GtkWidget* panScale;
+GtkWidget* volumeScale;
 
 /* --------------------------------------------------------------------------*/
 /** 
-* @brief  Select the receiver
+* @brief  Select the volume
 * 
 * @param widget
 */
-void selectReceiver(GtkWidget* widget) {
+void selectVolume(GtkWidget* widget) {
     GtkWidget* label;
     char temp[80];
 }
 
 /* --------------------------------------------------------------------------*/
 /** 
-* @brief  Callback when pan values changes
+* @brief  Callback when volume values changes
 * 
 * @param widget
 * @param data
 */
-void panChanged(GtkWidget* widget,gpointer data) {
-    pan=gtk_range_get_value((GtkRange*)panScale);
-    SetRXPan(0,0,pan);
+void volumeChanged(GtkWidget* widget,gpointer data) {
+    char command[80];
+    volume=gtk_range_get_value((GtkRange*)volumeScale);
+    SetRXOutputGain(0,0,volume/100.0);
 }
 
 /* --------------------------------------------------------------------------*/
@@ -77,48 +76,44 @@ void panChanged(GtkWidget* widget,gpointer data) {
 * 
 * @return 
 */
-GtkWidget* buildReceiverUI() {
+GtkWidget* buildVolumeUI() {
     GtkWidget* label;
 
-    receiverFrame=gtk_frame_new("Pan");
-    //gtk_widget_modify_bg(receiverFrame,GTK_STATE_NORMAL,&background);
-    label=gtk_frame_get_label_widget((GtkFrame*)receiverFrame);
+    volumeFrame=gtk_frame_new("Audio Gain");
+    //gtk_widget_modify_bg(volumeFrame,GTK_STATE_NORMAL,&background);
+    label=gtk_frame_get_label_widget((GtkFrame*)volumeFrame);
     gtk_widget_modify_fg(label, GTK_STATE_NORMAL, &white);
 
-    panScale=gtk_hscale_new_with_range(0.0,1.0,0.1);
-    g_signal_connect(G_OBJECT(panScale),"value-changed",G_CALLBACK(panChanged),NULL);
-    gtk_range_set_value((GtkRange*)panScale,pan);
-    gtk_widget_set_size_request(GTK_WIDGET(panScale),150,25);
-    gtk_widget_show(panScale);
-    gtk_container_add((GtkFrame*)receiverFrame,panScale);
+    volumeScale=gtk_hscale_new_with_range(0.0,100.0,10.0);
+    g_signal_connect(G_OBJECT(volumeScale),"value-changed",G_CALLBACK(volumeChanged),NULL);
+    gtk_range_set_value((GtkRange*)volumeScale,volume);
+    gtk_widget_set_size_request(GTK_WIDGET(volumeScale),150,25);
+    gtk_widget_show(volumeScale);
+    gtk_container_add((GtkFrame*)volumeFrame,volumeScale);
 
-    gtk_widget_set_size_request(GTK_WIDGET(receiverFrame),200,55);
-    gtk_widget_show(receiverFrame);
+    gtk_widget_set_size_request(GTK_WIDGET(volumeFrame),200,55);
+    gtk_widget_show(volumeFrame);
 
-    return receiverFrame;
+    return volumeFrame;
   
 }
 
 /* --------------------------------------------------------------------------*/
 /** 
-* @brief Save the receiver state
+* @brief Save the volume state
 */
-void receiverSaveState() {
+void volumeSaveState() {
     char string[128];
-    sprintf(string,"%d",receiver);
-    setProperty("receiver",string);
-    sprintf(string,"%f",pan);
-    setProperty("pan",string);
+    sprintf(string,"%f",volume);
+    setProperty("volume",string);
 }
 
 /* --------------------------------------------------------------------------*/
 /** 
-* @brief Restore the receiver state
+* @brief Restore the volume state
 */
-void receiverRestoreState() {
+void volumeRestoreState() {
     char* value;
-    value=getProperty("receiver");
-    if(value) receiver=atoi(value);
-    value=getProperty("pan");
-    if(value) pan=atof(value); else pan=0.5f;
+    value=getProperty("volume");
+    if(value) volume=atof(value); else volume=3.0f;
 }

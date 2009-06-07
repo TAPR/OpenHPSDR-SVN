@@ -61,6 +61,7 @@ GtkWidget* vfoBFrame;
 GtkWidget* vfoBFrequency;
 GdkPixmap* vfoBPixmap;
 
+GtkWidget* vfoControlFrame;
 GtkWidget* buttonAtoB;
 GtkWidget* buttonBtoA;
 GtkWidget* buttonAswapB;
@@ -616,7 +617,7 @@ GtkWidget* buildVfoUI() {
 
     // vfoA
     vfoAFrame=gtk_frame_new("VFO A");
-    label=gtk_frame_get_label_widget(vfoAFrame);
+    label=gtk_frame_get_label_widget((GtkFrame*)vfoAFrame);
     gtk_widget_modify_fg(label, GTK_STATE_NORMAL, &white);
     
     gtk_widget_set_size_request(GTK_WIDGET(vfoAFrame),300,50);
@@ -628,12 +629,12 @@ GtkWidget* buildVfoUI() {
     gtk_widget_set_events(vfoAFrequency,GDK_EXPOSURE_MASK|GDK_SCROLL_MASK);
     gtk_widget_show(vfoAFrequency);
     gtk_widget_show(vfoAFrame);
-    gtk_container_add((GtkFixed*)vfoAFrame,vfoAFrequency);
+    gtk_container_add((GtkContainer*)vfoAFrame,vfoAFrequency);
     gtk_fixed_put((GtkFixed*)vfoFixed,vfoAFrame,0,0);
 
     // vfoB
     vfoBFrame=gtk_frame_new("VFO B");
-    label=gtk_frame_get_label_widget(vfoBFrame);
+    label=gtk_frame_get_label_widget((GtkFrame*)vfoBFrame);
     gtk_widget_modify_fg(label, GTK_STATE_NORMAL, &white);
     gtk_widget_set_size_request(GTK_WIDGET(vfoBFrame),300,50);
     vfoBFrequency=gtk_drawing_area_new();
@@ -642,10 +643,12 @@ GtkWidget* buildVfoUI() {
     g_signal_connect(G_OBJECT (vfoBFrequency),"expose_event",G_CALLBACK(vfoBFrequency_expose_event),NULL);
     gtk_widget_show(vfoBFrequency);
     gtk_widget_show(vfoBFrame);
-    gtk_container_add((GtkFixed*)vfoBFrame,vfoBFrequency);
+    gtk_container_add((GtkContainer*)vfoBFrame,vfoBFrequency);
     gtk_fixed_put((GtkFixed*)vfoFixed,vfoBFrame,500,0);
 
     // vfo control
+    vfoControlFrame=gtk_frame_new(NULL);
+
     buttonAtoB = gtk_button_new_with_label ("A>B");
     gtk_widget_modify_bg(buttonAtoB, GTK_STATE_NORMAL, &buttonBackground);
     label=gtk_bin_get_child((GtkBin*)buttonAtoB);

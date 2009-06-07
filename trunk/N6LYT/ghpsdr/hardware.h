@@ -1,11 +1,11 @@
 /** 
-* @file mercury.h
-* @brief Header files for access Mercury receiver HPSDR board  
+* @file hardware.h
+* @brief Header files for access Hardware receiver HPSDR board  
   @author John Melton, G0ORX/N6LYT, Doxygen Comments Dave Larsen, KV0S
 * @version 0.1
 * @date 2009-04-11
 */
-// mercury.h
+// hardware.h
 
 /* Copyright (C) 
 * 2009 - John Melton, G0ORX/N6LYT, Doxygen Comments Dave Larsen, KV0S
@@ -29,9 +29,9 @@ gboolean Preamp;
 
 float preampOffset;
 
-GtkWidget* buildMercuryUI();
-void mercurySaveState();
-void mercuryRestoreState();
+GtkWidget* buildHardwareUI();
+void hardwareSaveState();
+void hardwareRestoreState();
 void setPreamp(gboolean state);
-void mercuryInit();
+void hardwareInit();
 
