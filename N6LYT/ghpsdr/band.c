@@ -35,6 +35,7 @@
 #include <math.h>
 #include <getopt.h>
 
+#include "band.h"
 #include "bandstack.h"
 #include "command.h"
 #include "cw.h"
@@ -53,22 +54,27 @@ GtkWidget* bandTable;
 
 int band=band40;
 
-GtkWidget* button160;
-GtkWidget* button80;
-GtkWidget* button60;
-GtkWidget* button40;
-GtkWidget* button30;
-GtkWidget* button20;
-GtkWidget* button17;
-GtkWidget* button15;
-GtkWidget* button12;
-GtkWidget* button10;
-GtkWidget* button6;
-GtkWidget* buttonGen;
-GtkWidget* buttonWWV;
-GtkWidget* buttonXVTR;
+GtkWidget* buttonBand1;
+GtkWidget* buttonBand2;
+GtkWidget* buttonBand3;
+GtkWidget* buttonBand4;
+GtkWidget* buttonBand5;
+GtkWidget* buttonBand6;
+GtkWidget* buttonBand7;
+GtkWidget* buttonBand8;
+GtkWidget* buttonBand9;
+GtkWidget* buttonBand10;
+GtkWidget* buttonBand11;
+GtkWidget* buttonBand12;
+GtkWidget* buttonBand13;
+GtkWidget* buttonBand14;
 
 GtkWidget* currentBandButton;
+
+GtkWidget* currentHFButton;
+GtkWidget* currentXVTRButton;
+
+gboolean displayHF=TRUE;
 
 /* --------------------------------------------------------------------------*/
 /** 
@@ -144,7 +150,7 @@ BANDSTACK_ENTRY bandstackWWV[] =
      {15000000LL,modeSAM,filterF6,200,2800,200,2800,1000,0,-100,-180,10,-110,-140},
      {20000000LL,modeSAM,filterF6,200,2800,200,2800,1000,0,-100,-180,10,-110,-140}};
 
-BANDSTACK bandstack[13];
+BANDSTACK bandstack[BANDS];
 
 void setTuningMode(int mode);
 void setBand(int band);
@@ -191,63 +197,107 @@ void selectBand(GtkWidget* widget) {
         entry->waterfallLow=waterfallLowThreshold;
     }
 
-    if(currentBandButton==widget) {
-fprintf(stderr,"currentBandButton==widget\n");
-        bandstack[band].current_entry++;
-        if(bandstack[band].current_entry>=bandstack[band].entries) {
-            bandstack[band].current_entry=0;
+    if(widget==buttonBand14) {
+        // XVTR / HF
+        displayHF=!displayHF;
+        if(displayHF) {
+            currentXVTRButton=currentBandButton;
+            currentBandButton=NULL;
+            gtk_button_set_label((GtkButton*)buttonBand1,"160");
+            gtk_button_set_label((GtkButton*)buttonBand2,"80");
+            gtk_button_set_label((GtkButton*)buttonBand3,"60");
+            gtk_button_set_label((GtkButton*)buttonBand4,"40");
+            gtk_button_set_label((GtkButton*)buttonBand5,"30");
+            gtk_button_set_label((GtkButton*)buttonBand6,"20");
+            gtk_button_set_label((GtkButton*)buttonBand7,"17");
+            gtk_button_set_label((GtkButton*)buttonBand8,"15");
+            gtk_button_set_label((GtkButton*)buttonBand9,"12");
+            gtk_button_set_label((GtkButton*)buttonBand10,"10");
+            gtk_button_set_label((GtkButton*)buttonBand11,"6");
+            gtk_button_set_label((GtkButton*)buttonBand12,"GEN");
+            gtk_button_set_label((GtkButton*)buttonBand13,"WWV");
+            gtk_button_set_label((GtkButton*)buttonBand14,"XVTR");
+            selectBand(currentHFButton);
+        } else {
+            currentHFButton=currentBandButton;
+            currentBandButton=NULL;
+            gtk_button_set_label((GtkButton*)buttonBand1,"");
+            gtk_button_set_label((GtkButton*)buttonBand2,"");
+            gtk_button_set_label((GtkButton*)buttonBand3,"");
+            gtk_button_set_label((GtkButton*)buttonBand4,"");
+            gtk_button_set_label((GtkButton*)buttonBand5,"");
+            gtk_button_set_label((GtkButton*)buttonBand6,"");
+            gtk_button_set_label((GtkButton*)buttonBand7,"");
+            gtk_button_set_label((GtkButton*)buttonBand8,"");
+            gtk_button_set_label((GtkButton*)buttonBand9,"");
+            gtk_button_set_label((GtkButton*)buttonBand10,"");
+            gtk_button_set_label((GtkButton*)buttonBand11,"");
+            gtk_button_set_label((GtkButton*)buttonBand12,"");
+            gtk_button_set_label((GtkButton*)buttonBand13,"");
+            gtk_button_set_label((GtkButton*)buttonBand14,"HF");
+            selectBand(currentXVTRButton);
         }
     } else {
-        currentBandButton=widget;
-        if(widget==button160) {
-            band=band160;
-        } else if(widget==button80) {
-            band=band80;
-        } else if(widget==button60) {
-            band=band60;
-        } else if(widget==button40) {
-            band=band40;
-        } else if(widget==button30) {
-            band=band30;
-        } else if(widget==button20) {
-            band=band20;
-        } else if(widget==button17) {
-            band=band17;
-        } else if(widget==button15) {
-            band=band15;
-        } else if(widget==button12) {
-            band=band12;
-        } else if(widget==button10) {
-            band=band10;
-        } else if(widget==button6) {
-            band=band6;
-        } else if(widget==buttonGen) {
-            band=bandGen;
-        } else if(widget==buttonWWV) {
-            band=bandWWV;
-        } else if(widget==buttonXVTR) {
-            band=bandXVTR;
+        if(displayHF) {
+            if(currentBandButton==widget) {
+                bandstack[band].current_entry++;
+                if(bandstack[band].current_entry>=bandstack[band].entries) {
+                    bandstack[band].current_entry=0;
+                }
+            } else {
+                currentBandButton=widget;
+                if(widget==buttonBand1) {
+                    band=band160;
+                } else if(widget==buttonBand2) {
+                    band=band80;
+                } else if(widget==buttonBand3) {
+                    band=band60;
+                } else if(widget==buttonBand4) {
+                    band=band40;
+                } else if(widget==buttonBand5) {
+                    band=band30;
+                } else if(widget==buttonBand6) {
+                    band=band20;
+                } else if(widget==buttonBand7) {
+                    band=band17;
+                } else if(widget==buttonBand8) {
+                    band=band15;
+                } else if(widget==buttonBand9) {
+                    band=band12;
+                } else if(widget==buttonBand10) {
+                    band=band10;
+                } else if(widget==buttonBand11) {
+                    band=band6;
+                } else if(widget==buttonBand12) {
+                    band=bandGen;
+                } else if(widget==buttonBand13) {
+                    band=bandWWV;
+                } else if(widget==buttonBand14) {
+                    band=bandXVTR;
+                }
+            }
+
+            current=bandstack[band].current_entry;
+            entry=&bandstack[band].entry[current];
+
+            setModeMode(entry->mode);
+            filterVar1Low=entry->var1Low;
+            filterVar1High=entry->var1High;
+            filterVar2Low=entry->var2Low;
+            filterVar2High=entry->var2High;
+            setFilter(entry->filter);
+            setAFrequency(entry->frequencyA);
+            setIncrement(entry->step);
+
+            setPreamp(entry->preamp);
+            spectrumMAX=entry->spectrumHigh;
+            spectrumMIN=entry->spectrumLow;
+            spectrumSTEP=entry->spectrumStep;
+            waterfallHighThreshold=entry->waterfallHigh;
+            waterfallLowThreshold=entry->waterfallLow;
+        } else {
         }
     }
-
-    current=bandstack[band].current_entry;
-    entry=&bandstack[band].entry[current];
-
-    setModeMode(entry->mode);
-    filterVar1Low=entry->var1Low;
-    filterVar1High=entry->var1High;
-    filterVar2Low=entry->var2Low;
-    filterVar2High=entry->var2High;
-    setFilter(entry->filter);
-    setAFrequency(entry->frequencyA);
-    setIncrement(entry->step);
-
-    setPreamp(entry->preamp);
-    spectrumMAX=entry->spectrumHigh;
-    spectrumMIN=entry->spectrumLow;
-    spectrumSTEP=entry->spectrumStep;
-    waterfallHighThreshold=entry->waterfallHigh;
-    waterfallLowThreshold=entry->waterfallLow;
 }
 
 /* --------------------------------------------------------------------------*/
@@ -261,46 +311,46 @@ void setBand(int band) {
     GtkWidget* widget;
     switch(band) {
         case band160:
-            widget=button160;
+            widget=buttonBand1;
             break;
         case band80:
-            widget=button80;
+            widget=buttonBand2;
             break;
         case band60:
-            widget=button60;
+            widget=buttonBand3;
             break;
         case band40:
-            widget=button40;
+            widget=buttonBand4;
             break;
         case band30:
-            widget=button30;
+            widget=buttonBand5;
             break;
         case band20:
-            widget=button20;
+            widget=buttonBand6;
             break;
         case band17:
-            widget=button17;
+            widget=buttonBand7;
             break;
         case band15:
-            widget=button15;
+            widget=buttonBand8;
             break;
         case band12:
-            widget=button12;
+            widget=buttonBand9;
             break;
         case band10:
-            widget=button10;
+            widget=buttonBand10;
             break;
         case band6:
-            widget=button6;
+            widget=buttonBand11;
             break;
         case bandGen:
-            widget=buttonGen;
+            widget=buttonBand12;
             break;
         case bandWWV:
-            widget=buttonWWV;
+            widget=buttonBand13;
             break;
         case bandXVTR:
-            widget=buttonXVTR;
+            widget=buttonBand14;
             break;
     }
     selectBand(widget);
@@ -318,46 +368,46 @@ void forceBand(int b) {
     GtkWidget* widget;
     switch(b) {
         case band160:
-            widget=button160;
+            widget=buttonBand1;
             break;
         case band80:
-            widget=button80;
+            widget=buttonBand2;
             break;
         case band60:
-            widget=button60;
+            widget=buttonBand3;
             break;
         case band40:
-            widget=button40;
+            widget=buttonBand4;
             break;
         case band30:
-            widget=button30;
+            widget=buttonBand5;
             break;
         case band20:
-            widget=button20;
+            widget=buttonBand6;
             break;
         case band17:
-            widget=button17;
+            widget=buttonBand7;
             break;
         case band15:
-            widget=button15;
+            widget=buttonBand8;
             break;
         case band12:
-            widget=button12;
+            widget=buttonBand9;
             break;
         case band10:
-            widget=button10;
+            widget=buttonBand10;
             break;
         case band6:
-            widget=button6;
+            widget=buttonBand11;
             break;
         case bandGen:
-            widget=buttonGen;
+            widget=buttonBand12;
             break;
         case bandWWV:
-            widget=buttonWWV;
+            widget=buttonBand13;
             break;
         case bandXVTR:
-            widget=buttonXVTR;
+            widget=buttonBand14;
             break;
     }
     if(currentBandButton) {
@@ -400,131 +450,131 @@ GtkWidget* buildBandUI() {
     bandTable=gtk_table_new(4,4,TRUE);
 
     // band selection
-    button160 = gtk_button_new_with_label ("160");
-    gtk_widget_modify_bg(button160, GTK_STATE_NORMAL, &bandButtonBackground);
-    label=gtk_bin_get_child((GtkBin*)button160);
+    buttonBand1 = gtk_button_new_with_label ("160");
+    gtk_widget_modify_bg(buttonBand1, GTK_STATE_NORMAL, &bandButtonBackground);
+    label=gtk_bin_get_child((GtkBin*)buttonBand1);
     gtk_widget_modify_fg(label, GTK_STATE_NORMAL, &black);
-    gtk_widget_set_size_request(GTK_WIDGET(button160),50,25);
-    g_signal_connect(G_OBJECT(button160),"clicked",G_CALLBACK(bandCallback),NULL);
-    gtk_widget_show(button160);
-    gtk_table_attach_defaults(bandTable,button160,0,1,0,1);
+    gtk_widget_set_size_request(GTK_WIDGET(buttonBand1),50,25);
+    g_signal_connect(G_OBJECT(buttonBand1),"clicked",G_CALLBACK(bandCallback),NULL);
+    gtk_widget_show(buttonBand1);
+    gtk_table_attach_defaults(bandTable,buttonBand1,0,1,0,1);
 
-    button80 = gtk_button_new_with_label ("80");
-    gtk_widget_modify_bg(button80, GTK_STATE_NORMAL, &bandButtonBackground);
-    label=gtk_bin_get_child((GtkBin*)button80);
+    buttonBand2 = gtk_button_new_with_label ("80");
+    gtk_widget_modify_bg(buttonBand2, GTK_STATE_NORMAL, &bandButtonBackground);
+    label=gtk_bin_get_child((GtkBin*)buttonBand2);
     gtk_widget_modify_fg(label, GTK_STATE_NORMAL, &black);
-    gtk_widget_set_size_request(GTK_WIDGET(button80),50,25);
-    g_signal_connect(G_OBJECT(button80),"clicked",G_CALLBACK(bandCallback),NULL);
-    gtk_widget_show(button80);
-    gtk_table_attach_defaults(bandTable,button80,1,2,0,1);
+    gtk_widget_set_size_request(GTK_WIDGET(buttonBand2),50,25);
+    g_signal_connect(G_OBJECT(buttonBand2),"clicked",G_CALLBACK(bandCallback),NULL);
+    gtk_widget_show(buttonBand2);
+    gtk_table_attach_defaults(bandTable,buttonBand2,1,2,0,1);
 
-    button60 = gtk_button_new_with_label ("60");
-    gtk_widget_modify_bg(button60, GTK_STATE_NORMAL, &bandButtonBackground);
-    label=gtk_bin_get_child((GtkBin*)button60);
+    buttonBand3 = gtk_button_new_with_label ("60");
+    gtk_widget_modify_bg(buttonBand3, GTK_STATE_NORMAL, &bandButtonBackground);
+    label=gtk_bin_get_child((GtkBin*)buttonBand3);
     gtk_widget_modify_fg(label, GTK_STATE_NORMAL, &black);
-    gtk_widget_set_size_request(GTK_WIDGET(button60),50,25);
-    g_signal_connect(G_OBJECT(button60),"clicked",G_CALLBACK(bandCallback),NULL);
-    gtk_widget_show(button60);
-    gtk_table_attach_defaults(bandTable,button60,2,3,0,1);
+    gtk_widget_set_size_request(GTK_WIDGET(buttonBand3),50,25);
+    g_signal_connect(G_OBJECT(buttonBand3),"clicked",G_CALLBACK(bandCallback),NULL);
+    gtk_widget_show(buttonBand3);
+    gtk_table_attach_defaults(bandTable,buttonBand3,2,3,0,1);
 
-    button40 = gtk_button_new_with_label ("40");
-    gtk_widget_modify_bg(button40, GTK_STATE_NORMAL, &bandButtonBackground);
-    label=gtk_bin_get_child((GtkBin*)button40);
+    buttonBand4 = gtk_button_new_with_label ("40");
+    gtk_widget_modify_bg(buttonBand4, GTK_STATE_NORMAL, &bandButtonBackground);
+    label=gtk_bin_get_child((GtkBin*)buttonBand4);
     gtk_widget_modify_fg(label, GTK_STATE_NORMAL, &black);
-    gtk_widget_set_size_request(GTK_WIDGET(button40),50,25);
-    g_signal_connect(G_OBJECT(button40),"clicked",G_CALLBACK(bandCallback),NULL);
-    gtk_widget_show(button40);
-    gtk_table_attach_defaults(bandTable,button40,3,4,0,1);
+    gtk_widget_set_size_request(GTK_WIDGET(buttonBand4),50,25);
+    g_signal_connect(G_OBJECT(buttonBand4),"clicked",G_CALLBACK(bandCallback),NULL);
+    gtk_widget_show(buttonBand4);
+    gtk_table_attach_defaults(bandTable,buttonBand4,3,4,0,1);
 
-    button30 = gtk_button_new_with_label ("30");
-    gtk_widget_modify_bg(button30, GTK_STATE_NORMAL, &bandButtonBackground);
-    label=gtk_bin_get_child((GtkBin*)button30);
+    buttonBand5 = gtk_button_new_with_label ("30");
+    gtk_widget_modify_bg(buttonBand5, GTK_STATE_NORMAL, &bandButtonBackground);
+    label=gtk_bin_get_child((GtkBin*)buttonBand5);
     gtk_widget_modify_fg(label, GTK_STATE_NORMAL, &black);
-    gtk_widget_set_size_request(GTK_WIDGET(button30),50,25);
-    g_signal_connect(G_OBJECT(button30),"clicked",G_CALLBACK(bandCallback),NULL);
-    gtk_widget_show(button30);
-    gtk_table_attach_defaults(bandTable,button30,0,1,1,2);
+    gtk_widget_set_size_request(GTK_WIDGET(buttonBand5),50,25);
+    g_signal_connect(G_OBJECT(buttonBand5),"clicked",G_CALLBACK(bandCallback),NULL);
+    gtk_widget_show(buttonBand5);
+    gtk_table_attach_defaults(bandTable,buttonBand5,0,1,1,2);
 
-    button20 = gtk_button_new_with_label ("20");
-    gtk_widget_modify_bg(button20, GTK_STATE_NORMAL, &bandButtonBackground);
-    label=gtk_bin_get_child((GtkBin*)button20);
+    buttonBand6 = gtk_button_new_with_label ("20");
+    gtk_widget_modify_bg(buttonBand6, GTK_STATE_NORMAL, &bandButtonBackground);
+    label=gtk_bin_get_child((GtkBin*)buttonBand6);
     gtk_widget_modify_fg(label, GTK_STATE_NORMAL, &black);
-    gtk_widget_set_size_request(GTK_WIDGET(button20),50,25);
-    g_signal_connect(G_OBJECT(button20),"clicked",G_CALLBACK(bandCallback),NULL);
-    gtk_widget_show(button20);
-    gtk_table_attach_defaults(bandTable,button20,1,2,1,2);
+    gtk_widget_set_size_request(GTK_WIDGET(buttonBand6),50,25);
+    g_signal_connect(G_OBJECT(buttonBand6),"clicked",G_CALLBACK(bandCallback),NULL);
+    gtk_widget_show(buttonBand6);
+    gtk_table_attach_defaults(bandTable,buttonBand6,1,2,1,2);
 
-    button17 = gtk_button_new_with_label ("17");
-    gtk_widget_modify_bg(button17, GTK_STATE_NORMAL, &bandButtonBackground);
-    label=gtk_bin_get_child((GtkBin*)button17);
+    buttonBand7 = gtk_button_new_with_label ("17");
+    gtk_widget_modify_bg(buttonBand7, GTK_STATE_NORMAL, &bandButtonBackground);
+    label=gtk_bin_get_child((GtkBin*)buttonBand7);
     gtk_widget_modify_fg(label, GTK_STATE_NORMAL, &black);
-    gtk_widget_set_size_request(GTK_WIDGET(button17),50,25);
-    g_signal_connect(G_OBJECT(button17),"clicked",G_CALLBACK(bandCallback),NULL);
-    gtk_widget_show(button17);
-    gtk_table_attach_defaults(bandTable,button17,2,3,1,2);
+    gtk_widget_set_size_request(GTK_WIDGET(buttonBand7),50,25);
+    g_signal_connect(G_OBJECT(buttonBand7),"clicked",G_CALLBACK(bandCallback),NULL);
+    gtk_widget_show(buttonBand7);
+    gtk_table_attach_defaults(bandTable,buttonBand7,2,3,1,2);
 
-    button15 = gtk_button_new_with_label ("15");
-    gtk_widget_modify_bg(button15, GTK_STATE_NORMAL, &bandButtonBackground);
-    label=gtk_bin_get_child((GtkBin*)button15);
+    buttonBand8 = gtk_button_new_with_label ("15");
+    gtk_widget_modify_bg(buttonBand8, GTK_STATE_NORMAL, &bandButtonBackground);
+    label=gtk_bin_get_child((GtkBin*)buttonBand8);
     gtk_widget_modify_fg(label, GTK_STATE_NORMAL, &black);
-    gtk_widget_set_size_request(GTK_WIDGET(button15),50,25);
-    g_signal_connect(G_OBJECT(button15),"clicked",G_CALLBACK(bandCallback),NULL);
-    gtk_widget_show(button15);
-    gtk_table_attach_defaults(bandTable,button15,3,4,1,2);
+    gtk_widget_set_size_request(GTK_WIDGET(buttonBand8),50,25);
+    g_signal_connect(G_OBJECT(buttonBand8),"clicked",G_CALLBACK(bandCallback),NULL);
+    gtk_widget_show(buttonBand8);
+    gtk_table_attach_defaults(bandTable,buttonBand8,3,4,1,2);
 
-    button12 = gtk_button_new_with_label ("12");
-    gtk_widget_modify_bg(button12, GTK_STATE_NORMAL, &bandButtonBackground);
-    label=gtk_bin_get_child((GtkBin*)button12);
+    buttonBand9 = gtk_button_new_with_label ("12");
+    gtk_widget_modify_bg(buttonBand9, GTK_STATE_NORMAL, &bandButtonBackground);
+    label=gtk_bin_get_child((GtkBin*)buttonBand9);
     gtk_widget_modify_fg(label, GTK_STATE_NORMAL, &black);
-    gtk_widget_set_size_request(GTK_WIDGET(button12),50,25);
-    g_signal_connect(G_OBJECT(button12),"clicked",G_CALLBACK(bandCallback),NULL);
-    gtk_widget_show(button12);
-    gtk_table_attach_defaults(bandTable,button12,0,1,2,3);
+    gtk_widget_set_size_request(GTK_WIDGET(buttonBand9),50,25);
+    g_signal_connect(G_OBJECT(buttonBand9),"clicked",G_CALLBACK(bandCallback),NULL);
+    gtk_widget_show(buttonBand9);
+    gtk_table_attach_defaults(bandTable,buttonBand9,0,1,2,3);
 
-    button10 = gtk_button_new_with_label ("10");
-    gtk_widget_modify_bg(button10, GTK_STATE_NORMAL, &bandButtonBackground);
-    label=gtk_bin_get_child((GtkBin*)button10);
+    buttonBand10 = gtk_button_new_with_label ("10");
+    gtk_widget_modify_bg(buttonBand10, GTK_STATE_NORMAL, &bandButtonBackground);
+    label=gtk_bin_get_child((GtkBin*)buttonBand10);
     gtk_widget_modify_fg(label, GTK_STATE_NORMAL, &black);
-    gtk_widget_set_size_request(GTK_WIDGET(button10),50,25);
-    g_signal_connect(G_OBJECT(button10),"clicked",G_CALLBACK(bandCallback),NULL);
-    gtk_widget_show(button10);
-    gtk_table_attach_defaults(bandTable,button10,1,2,2,3);
+    gtk_widget_set_size_request(GTK_WIDGET(buttonBand10),50,25);
+    g_signal_connect(G_OBJECT(buttonBand10),"clicked",G_CALLBACK(bandCallback),NULL);
+    gtk_widget_show(buttonBand10);
+    gtk_table_attach_defaults(bandTable,buttonBand10,1,2,2,3);
 
-    button6 = gtk_button_new_with_label ("6");
-    gtk_widget_modify_bg(button6, GTK_STATE_NORMAL, &bandButtonBackground);
-    label=gtk_bin_get_child((GtkBin*)button6);
+    buttonBand11 = gtk_button_new_with_label ("6");
+    gtk_widget_modify_bg(buttonBand11, GTK_STATE_NORMAL, &bandButtonBackground);
+    label=gtk_bin_get_child((GtkBin*)buttonBand11);
     gtk_widget_modify_fg(label, GTK_STATE_NORMAL, &black);
-    gtk_widget_set_size_request(GTK_WIDGET(button6),50,25);
-    g_signal_connect(G_OBJECT(button6),"clicked",G_CALLBACK(bandCallback),NULL);
-    gtk_widget_show(button6);
-    gtk_table_attach_defaults(bandTable,button6,2,3,2,3);
+    gtk_widget_set_size_request(GTK_WIDGET(buttonBand11),50,25);
+    g_signal_connect(G_OBJECT(buttonBand11),"clicked",G_CALLBACK(bandCallback),NULL);
+    gtk_widget_show(buttonBand11);
+    gtk_table_attach_defaults(bandTable,buttonBand11,2,3,2,3);
 
-    buttonGen = gtk_button_new_with_label ("GEN");
-    gtk_widget_modify_bg(buttonGen, GTK_STATE_NORMAL, &bandButtonBackground);
-    label=gtk_bin_get_child((GtkBin*)buttonGen);
+    buttonBand12 = gtk_button_new_with_label ("GEN");
+    gtk_widget_modify_bg(buttonBand12, GTK_STATE_NORMAL, &bandButtonBackground);
+    label=gtk_bin_get_child((GtkBin*)buttonBand12);
     gtk_widget_modify_fg(label, GTK_STATE_NORMAL, &black);
-    gtk_widget_set_size_request(GTK_WIDGET(buttonGen),50,25);
-    g_signal_connect(G_OBJECT(buttonGen),"clicked",G_CALLBACK(bandCallback),NULL);
-    gtk_widget_show(buttonGen);
-    gtk_table_attach_defaults(bandTable,buttonGen,3,4,2,3);
+    gtk_widget_set_size_request(GTK_WIDGET(buttonBand12),50,25);
+    g_signal_connect(G_OBJECT(buttonBand12),"clicked",G_CALLBACK(bandCallback),NULL);
+    gtk_widget_show(buttonBand12);
+    gtk_table_attach_defaults(bandTable,buttonBand12,3,4,2,3);
 
-    buttonWWV = gtk_button_new_with_label ("WWV");
-    gtk_widget_modify_bg(buttonWWV, GTK_STATE_NORMAL, &bandButtonBackground);
-    label=gtk_bin_get_child((GtkBin*)buttonWWV);
+    buttonBand13 = gtk_button_new_with_label ("WWV");
+    gtk_widget_modify_bg(buttonBand13, GTK_STATE_NORMAL, &bandButtonBackground);
+    label=gtk_bin_get_child((GtkBin*)buttonBand13);
     gtk_widget_modify_fg(label, GTK_STATE_NORMAL, &black);
-    gtk_widget_set_size_request(GTK_WIDGET(buttonWWV),50,25);
-    g_signal_connect(G_OBJECT(buttonWWV),"clicked",G_CALLBACK(bandCallback),NULL);
-    gtk_widget_show(buttonWWV);
-    gtk_table_attach_defaults(bandTable,buttonWWV,0,1,3,4);
+    gtk_widget_set_size_request(GTK_WIDGET(buttonBand13),50,25);
+    g_signal_connect(G_OBJECT(buttonBand13),"clicked",G_CALLBACK(bandCallback),NULL);
+    gtk_widget_show(buttonBand13);
+    gtk_table_attach_defaults(bandTable,buttonBand13,0,1,3,4);
 
-    buttonXVTR = gtk_button_new_with_label ("XVTR");
-    gtk_widget_modify_bg(buttonXVTR, GTK_STATE_NORMAL, &bandButtonBackground);
-    label=gtk_bin_get_child((GtkBin*)buttonXVTR);
+    buttonBand14 = gtk_button_new_with_label ("XVTR");
+    gtk_widget_modify_bg(buttonBand14, GTK_STATE_NORMAL, &bandButtonBackground);
+    label=gtk_bin_get_child((GtkBin*)buttonBand14);
     gtk_widget_modify_fg(label, GTK_STATE_NORMAL, &black);
-    gtk_widget_set_size_request(GTK_WIDGET(buttonXVTR),50,25);
-    g_signal_connect(G_OBJECT(buttonXVTR),"clicked",G_CALLBACK(bandCallback),NULL);
-    gtk_widget_show(buttonXVTR);
-    gtk_table_attach_defaults(bandTable,buttonXVTR,1,2,3,4);
+    gtk_widget_set_size_request(GTK_WIDGET(buttonBand14),50,25);
+    g_signal_connect(G_OBJECT(buttonBand14),"clicked",G_CALLBACK(bandCallback),NULL);
+    gtk_widget_show(buttonBand14);
+    gtk_table_attach_defaults(bandTable,buttonBand14,1,2,3,4);
 
     gtk_container_add(GTK_CONTAINER(bandFrame),bandTable);
     gtk_widget_show(bandTable);
