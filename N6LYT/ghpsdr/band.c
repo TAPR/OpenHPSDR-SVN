@@ -48,11 +48,13 @@
 #include "vfo.h"
 #include "hardware.h"
 #include "spectrum.h"
+#include "xvtr.h"
 
 GtkWidget* bandFrame;
 GtkWidget* bandTable;
 
 int band=band40;
+int xvtr_band=band160;
 
 GtkWidget* buttonBand1;
 GtkWidget* buttonBand2;
@@ -152,6 +154,13 @@ BANDSTACK_ENTRY bandstackWWV[] =
 
 BANDSTACK bandstack[BANDS];
 
+/* --------------------------------------------------------------------------*/
+/** 
+* @brief xvtr
+*/
+/* ----------------------------------------------------------------------------*/
+XVTR_ENTRY xvtr[12];
+
 void setTuningMode(int mode);
 void setBand(int band);
 void setIncrement(int increment);
@@ -166,6 +175,7 @@ void setIncrement(int increment);
 void selectBand(GtkWidget* widget) {
     GtkWidget* label;
     BANDSTACK_ENTRY* entry;
+    XVTR_ENTRY* xvtr_entry;
     int current;
 
     if(currentBandButton) {
@@ -179,22 +189,40 @@ void selectBand(GtkWidget* widget) {
 
     //save current
     if(currentBandButton) {
-        current=bandstack[band].current_entry;
-        entry=&bandstack[band].entry[current];
-        entry->frequencyA=frequencyA;
-        entry->mode=mode;
-        entry->filter=filter;
-        entry->var1Low=filterVar1Low;
-        entry->var1High=filterVar1High;
-        entry->var2Low=filterVar2Low;
-        entry->var2High=filterVar2High;
-        entry->step=frequencyIncrement;
-        entry->preamp=Preamp;
-        entry->spectrumHigh=spectrumMAX;
-        entry->spectrumLow=spectrumMIN;
-        entry->spectrumStep=spectrumSTEP;
-        entry->waterfallHigh=waterfallHighThreshold;
-        entry->waterfallLow=waterfallLowThreshold;
+        if(displayHF) {
+            current=bandstack[band].current_entry;
+            entry=&bandstack[band].entry[current];
+            entry->frequencyA=frequencyA;
+            entry->mode=mode;
+            entry->filter=filter;
+            entry->var1Low=filterVar1Low;
+            entry->var1High=filterVar1High;
+            entry->var2Low=filterVar2Low;
+            entry->var2High=filterVar2High;
+            entry->step=frequencyIncrement;
+            entry->preamp=Preamp;
+            entry->spectrumHigh=spectrumMAX;
+            entry->spectrumLow=spectrumMIN;
+            entry->spectrumStep=spectrumSTEP;
+            entry->waterfallHigh=waterfallHighThreshold;
+            entry->waterfallLow=waterfallLowThreshold;
+        } else {
+            xvtr_entry=&xvtr[xvtr_band];
+            xvtr_entry->frequency=frequencyA;
+            xvtr_entry->mode=mode;
+            xvtr_entry->filter=filter;
+            xvtr_entry->var1Low=filterVar1Low;
+            xvtr_entry->var1High=filterVar1High;
+            xvtr_entry->var2Low=filterVar2Low;
+            xvtr_entry->var2High=filterVar2High;
+            xvtr_entry->step=frequencyIncrement;
+            xvtr_entry->preamp=Preamp;
+            xvtr_entry->spectrumHigh=spectrumMAX;
+            xvtr_entry->spectrumLow=spectrumMIN;
+            xvtr_entry->spectrumStep=spectrumSTEP;
+            xvtr_entry->waterfallHigh=waterfallHighThreshold;
+            xvtr_entry->waterfallLow=waterfallLowThreshold;
+        }
     }
 
     if(widget==buttonBand14) {
@@ -204,41 +232,117 @@ void selectBand(GtkWidget* widget) {
             currentXVTRButton=currentBandButton;
             currentBandButton=NULL;
             gtk_button_set_label((GtkButton*)buttonBand1,"160");
+            gtk_widget_set_sensitive(buttonBand1,TRUE);
             gtk_button_set_label((GtkButton*)buttonBand2,"80");
+            gtk_widget_set_sensitive(buttonBand2,TRUE);
             gtk_button_set_label((GtkButton*)buttonBand3,"60");
+            gtk_widget_set_sensitive(buttonBand3,TRUE);
             gtk_button_set_label((GtkButton*)buttonBand4,"40");
+            gtk_widget_set_sensitive(buttonBand4,TRUE);
             gtk_button_set_label((GtkButton*)buttonBand5,"30");
+            gtk_widget_set_sensitive(buttonBand5,TRUE);
             gtk_button_set_label((GtkButton*)buttonBand6,"20");
+            gtk_widget_set_sensitive(buttonBand6,TRUE);
             gtk_button_set_label((GtkButton*)buttonBand7,"17");
+            gtk_widget_set_sensitive(buttonBand7,TRUE);
             gtk_button_set_label((GtkButton*)buttonBand8,"15");
+            gtk_widget_set_sensitive(buttonBand8,TRUE);
             gtk_button_set_label((GtkButton*)buttonBand9,"12");
+            gtk_widget_set_sensitive(buttonBand9,TRUE);
             gtk_button_set_label((GtkButton*)buttonBand10,"10");
+            gtk_widget_set_sensitive(buttonBand10,TRUE);
             gtk_button_set_label((GtkButton*)buttonBand11,"6");
+            gtk_widget_set_sensitive(buttonBand11,TRUE);
             gtk_button_set_label((GtkButton*)buttonBand12,"GEN");
+            gtk_widget_set_sensitive(buttonBand12,TRUE);
             gtk_button_set_label((GtkButton*)buttonBand13,"WWV");
+            gtk_widget_set_sensitive(buttonBand13,TRUE);
             gtk_button_set_label((GtkButton*)buttonBand14,"XVTR");
             selectBand(currentHFButton);
         } else {
             currentHFButton=currentBandButton;
             currentBandButton=NULL;
-            gtk_button_set_label((GtkButton*)buttonBand1,"");
-            gtk_button_set_label((GtkButton*)buttonBand2,"");
-            gtk_button_set_label((GtkButton*)buttonBand3,"");
-            gtk_button_set_label((GtkButton*)buttonBand4,"");
-            gtk_button_set_label((GtkButton*)buttonBand5,"");
-            gtk_button_set_label((GtkButton*)buttonBand6,"");
-            gtk_button_set_label((GtkButton*)buttonBand7,"");
-            gtk_button_set_label((GtkButton*)buttonBand8,"");
-            gtk_button_set_label((GtkButton*)buttonBand9,"");
-            gtk_button_set_label((GtkButton*)buttonBand10,"");
-            gtk_button_set_label((GtkButton*)buttonBand11,"");
-            gtk_button_set_label((GtkButton*)buttonBand12,"");
+            gtk_button_set_label((GtkButton*)buttonBand1,xvtr[0].name);
+            if(strcmp(xvtr[0].name,"")==0) {
+                gtk_widget_set_sensitive(buttonBand1,FALSE);
+            } else {
+                gtk_widget_set_sensitive(buttonBand1,TRUE);
+            }
+            gtk_button_set_label((GtkButton*)buttonBand2,xvtr[1].name);
+            if(strcmp(xvtr[1].name,"")==0) {
+                gtk_widget_set_sensitive(buttonBand2,FALSE);
+            } else {
+                gtk_widget_set_sensitive(buttonBand2,TRUE);
+            }
+            gtk_button_set_label((GtkButton*)buttonBand3,xvtr[2].name);
+            if(strcmp(xvtr[2].name,"")==0) {
+                gtk_widget_set_sensitive(buttonBand3,FALSE);
+            } else {
+                gtk_widget_set_sensitive(buttonBand3,TRUE);
+            }
+            gtk_button_set_label((GtkButton*)buttonBand4,xvtr[3].name);
+            if(strcmp(xvtr[3].name,"")==0) {
+                gtk_widget_set_sensitive(buttonBand4,FALSE);
+            } else {
+                gtk_widget_set_sensitive(buttonBand4,TRUE);
+            }
+            gtk_button_set_label((GtkButton*)buttonBand5,xvtr[4].name);
+            if(strcmp(xvtr[4].name,"")==0) {
+                gtk_widget_set_sensitive(buttonBand5,FALSE);
+            } else {
+                gtk_widget_set_sensitive(buttonBand5,TRUE);
+            }
+            gtk_button_set_label((GtkButton*)buttonBand6,xvtr[5].name);
+            if(strcmp(xvtr[5].name,"")==0) {
+                gtk_widget_set_sensitive(buttonBand6,FALSE);
+            } else {
+                gtk_widget_set_sensitive(buttonBand6,TRUE);
+            }
+            gtk_button_set_label((GtkButton*)buttonBand7,xvtr[6].name);
+            if(strcmp(xvtr[6].name,"")==0) {
+                gtk_widget_set_sensitive(buttonBand7,FALSE);
+            } else {
+                gtk_widget_set_sensitive(buttonBand7,TRUE);
+            }
+            gtk_button_set_label((GtkButton*)buttonBand8,xvtr[7].name);
+            if(strcmp(xvtr[7].name,"")==0) {
+                gtk_widget_set_sensitive(buttonBand8,FALSE);
+            } else {
+                gtk_widget_set_sensitive(buttonBand8,TRUE);
+            }
+            gtk_button_set_label((GtkButton*)buttonBand9,xvtr[8].name);
+            if(strcmp(xvtr[8].name,"")==0) {
+                gtk_widget_set_sensitive(buttonBand9,FALSE);
+            } else {
+                gtk_widget_set_sensitive(buttonBand9,TRUE);
+            }
+            gtk_button_set_label((GtkButton*)buttonBand10,xvtr[9].name);
+            if(strcmp(xvtr[9].name,"")==0) {
+                gtk_widget_set_sensitive(buttonBand10,FALSE);
+            } else {
+                gtk_widget_set_sensitive(buttonBand10,TRUE);
+            }
+            gtk_button_set_label((GtkButton*)buttonBand11,xvtr[10].name);
+            if(strcmp(xvtr[10].name,"")==0) {
+                gtk_widget_set_sensitive(buttonBand11,FALSE);
+            } else {
+                gtk_widget_set_sensitive(buttonBand11,TRUE);
+            }
+            gtk_button_set_label((GtkButton*)buttonBand12,xvtr[11].name);
+            if(strcmp(xvtr[11].name,"")==0) {
+                gtk_widget_set_sensitive(buttonBand12,FALSE);
+            } else {
+                gtk_widget_set_sensitive(buttonBand12,TRUE);
+            }
             gtk_button_set_label((GtkButton*)buttonBand13,"");
+            gtk_widget_set_sensitive(buttonBand13,FALSE);
+
             gtk_button_set_label((GtkButton*)buttonBand14,"HF");
             selectBand(currentXVTRButton);
         }
     } else {
         if(displayHF) {
+            setIFFrequency(0LL);
             if(currentBandButton==widget) {
                 bandstack[band].current_entry++;
                 if(bandstack[band].current_entry>=bandstack[band].entries) {
@@ -296,6 +400,24 @@ void selectBand(GtkWidget* widget) {
             waterfallHighThreshold=entry->waterfallHigh;
             waterfallLowThreshold=entry->waterfallLow;
         } else {
+            xvtr_entry=&xvtr[xvtr_band];
+            setModeMode(xvtr_entry->mode);
+            filterVar1Low=xvtr_entry->var1Low;
+            filterVar1High=xvtr_entry->var1High;
+            filterVar2Low=xvtr_entry->var2Low;
+            filterVar2High=xvtr_entry->var2High;
+            setFilter(xvtr_entry->filter);
+            setIFFrequency(xvtr_entry->frequencyIF);
+            setAFrequency(xvtr_entry->frequency);
+            setIncrement(xvtr_entry->step);
+
+            setPreamp(xvtr_entry->preamp);
+            spectrumMAX=xvtr_entry->spectrumHigh;
+            spectrumMIN=xvtr_entry->spectrumLow;
+            spectrumSTEP=xvtr_entry->spectrumStep;
+            waterfallHighThreshold=xvtr_entry->waterfallHigh;
+            waterfallLowThreshold=xvtr_entry->waterfallLow;
+
         }
     }
 }
@@ -418,7 +540,12 @@ void forceBand(int b) {
     gtk_widget_modify_fg(label, GTK_STATE_NORMAL, &buttonSelected);
 
     currentBandButton=widget;
-    band=b;
+
+    if(displayHF) {
+        band=b;
+    } else {
+        xvtr_band=b;
+    }
 }
 
 /* --------------------------------------------------------------------------*/
@@ -617,6 +744,7 @@ void bandSaveState() {
     char string[128];
     int current;
     BANDSTACK_ENTRY* entry;
+    XVTR_ENTRY* xvtr_entry;
 
     //save current band info
     current=bandstack[band].current_entry;
@@ -711,13 +839,43 @@ void bandSaveState() {
 
         }
     }
+
     sprintf(string,"%d",band);
     setProperty("band",string);
+
+    // save xvtr entries
+    for(b=0;b<12;b++) {
+        xvtr_entry=&xvtr[b];
+
+        if(strcmp(xvtr_entry->name,"")!=0) {
+            sprintf(name,"xvtr.%d.name",b);
+            setProperty(name,xvtr_entry->name);
+
+            sprintf(string,"%lld",xvtr_entry->frequency);
+            sprintf(name,"xvtr.%d.frequency",b);
+            setProperty(name,string);
+
+            sprintf(string,"%lld",xvtr_entry->frequencyMin);
+            sprintf(name,"xvtr.%d.frequencyMin",b);
+            setProperty(name,string);
+
+            sprintf(string,"%lld",xvtr_entry->frequencyMax);
+            sprintf(name,"xvtr.%d.frequencyMax",b);
+            setProperty(name,string);
+
+            sprintf(string,"%lld",xvtr_entry->frequencyIF);
+            sprintf(name,"xvtr.%d.frequencyIF",b);
+            setProperty(name,string);
+        }
+    }
+
+    sprintf(string,"%d",xvtr_band);
+    setProperty("xvtr_band",string);
 }
 
 /* --------------------------------------------------------------------------*/
 /** 
-* @brief Restore the bandstack state.
+* @brief Restore the bandstack state and xvtr state.
 */
 /* ----------------------------------------------------------------------------*/
 void bandRestoreState() {
@@ -728,7 +886,9 @@ void bandRestoreState() {
     char name[128];
     BANDSTACK_ENTRY* entry;
     int current;
+    XVTR_ENTRY* xvtr_entry;
  
+    // setup default bandstacks
     bandstack[0].entries=3;
     bandstack[0].current_entry=0;
     bandstack[0].entry=bandstack160;
@@ -769,7 +929,7 @@ void bandRestoreState() {
     bandstack[12].current_entry=0;
     bandstack[12].entry=bandstackWWV;
 
-
+    // load the bandstack entries
     for(b=0;b<BANDS;b++) {
 
         sprintf(name,"band.%d.entries",b);
@@ -842,6 +1002,92 @@ void bandRestoreState() {
 
         }
     }
+
+    // setup XVTR
+    for(b=0;b<12;b++) {
+        xvtr_entry=&xvtr[b];
+
+        sprintf(name,"xvtr.%d.name",b);
+        value=getProperty(name);
+        if(value) {
+            strcpy(xvtr_entry->name,value);
+
+            sprintf(name,"xvtr.%d.frequency",b);
+            value=getProperty(name);
+            if(value) xvtr_entry->frequency=atoll(value);
+
+            sprintf(name,"xvtr.%d.frequencyMin",b);
+            value=getProperty(name);
+            if(value) xvtr_entry->frequencyMin=atoll(value);
+
+            sprintf(name,"xvtr.%d.frequencyMax",b);
+            value=getProperty(name);
+            if(value) xvtr_entry->frequencyMax=atoll(value);
+
+            sprintf(name,"xvtr.%d.frequencyIF",b);
+            value=getProperty(name);
+            if(value) xvtr_entry->frequencyIF=atoll(value);
+
+            sprintf(name,"xvtr.%d.mode",b);
+            value=getProperty(name);
+            if(value) xvtr_entry->mode=atoi(value);
+
+            sprintf(name,"xvtr.%d.filter",b);
+            value=getProperty(name);
+            if(value) xvtr_entry->filter=atoi(value);
+
+            sprintf(name,"xvtr.%d.var1Low",b);
+            value=getProperty(name);
+            if(value) xvtr_entry->var1Low=atoi(value);
+
+            sprintf(name,"xvtr.%d.var1High",b);
+            value=getProperty(name);
+            if(value) xvtr_entry->var1High=atoi(value);
+
+            sprintf(name,"xvtr.%d.var2Low",b);
+            value=getProperty(name);
+            if(value) xvtr_entry->var2Low=atoi(value);
+
+            sprintf(name,"xvtr.%d.var2High",b);
+            value=getProperty(name);
+            if(value) xvtr_entry->var2High=atoi(value);
+
+            sprintf(name,"xvtr.%d.step",b);
+            value=getProperty(name);
+            if(value) xvtr_entry->step=atoi(value);
+
+            sprintf(name,"xvtr.%d.preamp",b);
+            value=getProperty(name);
+            if(value) xvtr_entry->preamp=atoi(value);
+
+            sprintf(name,"xvtr.%d.spectrumHigh",b);
+            value=getProperty(name);
+            if(value) xvtr_entry->spectrumHigh=atoi(value);
+
+            sprintf(name,"xvtr.%d.spectrumLow",b);
+            value=getProperty(name);
+            if(value) xvtr_entry->spectrumLow=atoi(value);
+
+            sprintf(name,"xvtr.%d.spectrumStep",b);
+            value=getProperty(name);
+            if(value) xvtr_entry->spectrumStep=atoi(value);
+    
+            sprintf(name,"xvtr.%d.waterfallHigh",b);
+            value=getProperty(name);
+            if(value) xvtr_entry->waterfallHigh=atoi(value);
+
+            sprintf(name,"xvtr.%d.waterfallLow",b);
+            value=getProperty(name);
+            if(value) xvtr_entry->waterfallLow=atoi(value);
+        }
+
+    }
+
+
     value=getProperty("band");
     if(value) band=atoi(value);
+
+    value=getProperty("xvtr_band");
+    if(value) xvtr_band=atoi(value);
+
 }
