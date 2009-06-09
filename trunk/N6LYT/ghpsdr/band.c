@@ -190,6 +190,7 @@ void selectBand(GtkWidget* widget) {
     //save current
     if(currentBandButton) {
         if(displayHF) {
+fprintf(stderr,"selectBand: saving current HF entry\n");
             current=bandstack[band].current_entry;
             entry=&bandstack[band].entry[current];
             entry->frequencyA=frequencyA;
@@ -207,6 +208,7 @@ void selectBand(GtkWidget* widget) {
             entry->waterfallHigh=waterfallHighThreshold;
             entry->waterfallLow=waterfallLowThreshold;
         } else {
+fprintf(stderr,"selectBand: saving current XVTR entry\n");
             xvtr_entry=&xvtr[xvtr_band];
             xvtr_entry->frequency=frequencyA;
             xvtr_entry->mode=mode;
@@ -229,6 +231,7 @@ void selectBand(GtkWidget* widget) {
         // XVTR / HF
         displayHF=!displayHF;
         if(displayHF) {
+fprintf(stderr,"selectBand: switching to HF\n");
             currentXVTRButton=currentBandButton;
             currentBandButton=NULL;
             gtk_button_set_label((GtkButton*)buttonBand1,"160");
@@ -260,6 +263,7 @@ void selectBand(GtkWidget* widget) {
             gtk_button_set_label((GtkButton*)buttonBand14,"XVTR");
             selectBand(currentHFButton);
         } else {
+fprintf(stderr,"selectBand: switching to XVTR\n");
             currentHFButton=currentBandButton;
             currentBandButton=NULL;
             gtk_button_set_label((GtkButton*)buttonBand1,xvtr[0].name);
@@ -342,6 +346,7 @@ void selectBand(GtkWidget* widget) {
         }
     } else {
         if(displayHF) {
+fprintf(stderr,"HF band selected\n");
             setIFFrequency(0LL);
             if(currentBandButton==widget) {
                 bandstack[band].current_entry++;
@@ -384,6 +389,7 @@ void selectBand(GtkWidget* widget) {
             current=bandstack[band].current_entry;
             entry=&bandstack[band].entry[current];
 
+fprintf(stderr,"HF band selected: band=%d stack=%d\n",current,entry);
             setModeMode(entry->mode);
             filterVar1Low=entry->var1Low;
             filterVar1High=entry->var1High;
@@ -400,6 +406,36 @@ void selectBand(GtkWidget* widget) {
             waterfallHighThreshold=entry->waterfallHigh;
             waterfallLowThreshold=entry->waterfallLow;
         } else {
+fprintf(stderr,"XVTR band selected\n");
+            currentBandButton=widget;
+
+            if(widget==buttonBand1) {
+                xvtr_band=band160;
+            } else if(widget==buttonBand2) {
+                xvtr_band=band80;
+            } else if(widget==buttonBand3) {
+                xvtr_band=band60;
+            } else if(widget==buttonBand4) {
+                xvtr_band=band40;
+            } else if(widget==buttonBand5) {
+                xvtr_band=band30;
+            } else if(widget==buttonBand6) {
+                xvtr_band=band20;
+            } else if(widget==buttonBand7) {
+                xvtr_band=band17;
+            } else if(widget==buttonBand8) {
+                xvtr_band=band15;
+            } else if(widget==buttonBand9) {
+                xvtr_band=band12;
+            } else if(widget==buttonBand10) {
+                xvtr_band=band10;
+            } else if(widget==buttonBand11) {
+                xvtr_band=band6;
+            } else if(widget==buttonBand12) {
+                xvtr_band=bandGen;
+            }
+
+fprintf(stderr,"XVTR band selected: band=%d\n",xvtr_band);
             xvtr_entry=&xvtr[xvtr_band];
             setModeMode(xvtr_entry->mode);
             filterVar1Low=xvtr_entry->var1Low;
@@ -703,7 +739,7 @@ GtkWidget* buildBandUI() {
     gtk_widget_show(buttonBand14);
     gtk_table_attach_defaults(bandTable,buttonBand14,1,2,3,4);
 
-    gtk_widget_set_sensitive(buttonBand14,FALSE);
+//    gtk_widget_set_sensitive(buttonBand14,FALSE);
 
     gtk_container_add(GTK_CONTAINER(bandFrame),bandTable);
     gtk_widget_show(bandTable);
