@@ -703,6 +703,8 @@ GtkWidget* buildBandUI() {
     gtk_widget_show(buttonBand14);
     gtk_table_attach_defaults(bandTable,buttonBand14,1,2,3,4);
 
+    gtk_widget_set_sensitive(buttonBand14,FALSE);
+
     gtk_container_add(GTK_CONTAINER(bandFrame),bandTable);
     gtk_widget_show(bandTable);
     gtk_widget_show(bandFrame);
