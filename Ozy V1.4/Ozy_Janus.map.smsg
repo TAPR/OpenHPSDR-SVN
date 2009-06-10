@@ -1,0 +1,3 @@
+Info (10281): Verilog HDL Declaration information at Ozy_Janus.v(321): object "IF_rst" differs only in case from object "IF_RST" in the same scope
+Info (10281): Verilog HDL Declaration information at Ozy_Janus.v(365): object "C12_rst" differs only in case from object "C12_RST" in the same scope
+Info (10281): Verilog HDL Declaration information at Ozy_Janus.v(387): object "C12_speed" differs only in case from object "C12_SPEED" in the same scope
