@@ -31,17 +31,17 @@ OBJS= agc.o audio.o band.o bandscope.o bandscope_control.o bandscope_update.o co
       meter_update.o mode.o ozy_buffers.o ozy.o ozy_ringbuffer.o\
       property.o receiver.o setup.o soundcard.o spectrum_buffers.o spectrum.o spectrum_update.o util.o vfo.o volume.o
 
-PROGRAM=ghpsdr
+PROGRAM=bin/ghpsdr
 
-all: ghpsdr
+all: bin/ghpsdr
 
-ghpsdr: $(OBJS)
-	$(LINK) -o ghpsdr $(OBJS) $(DTTSP) $(FFTW) $(LIBS)
+bin/ghpsdr: $(OBJS)
+	$(LINK) -o bin/ghpsdr $(OBJS) $(DTTSP) $(FFTW) $(LIBS)
 
 .c.o:
 	$(COMPILE) $(OPTIONS) -c -o $@ $<
 
 clean:
 	-rm -f *.o
-	-rm -f ghpsdr
+	-rm -f bin/ghpsdr
 
