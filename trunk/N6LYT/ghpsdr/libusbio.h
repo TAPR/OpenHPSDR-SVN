@@ -9,9 +9,10 @@
 #ifndef _LIBUSBIO_H
 #define _LIBUSBIO_H
 
-extern int libusb_open_ozy(void);
-extern int libusb_write_ozy(int ep,void* buffer,int buffersize);
-extern int libusb_read_ozy(int ep,void* buffer,int buffersize);
+int libusb_open_ozy(void);
+int libusb_get_ozy_firmware_string(char* buffer,int buffersize);
+int libusb_write_ozy(int ep,void* buffer,int buffersize);
+int libusb_read_ozy(int ep,void* buffer,int buffersize);
 
 #endif /* _LIBUSBIO_H */
 

@@ -57,7 +57,7 @@
 * svn://206.216.146.154/svn/repos_sdr_hpsdr/trunk/N6LYT/ghpsdr
 *
 * More information on the HPSDR project is availble at 
-* http://hpsdr.info
+* http://openhpsdr.info
 *
 */
 
@@ -632,7 +632,9 @@ int main(int argc,char* argv[]) {
 
 
     // initialize ozy (default 48K)
-    ozy_init(48000);
+    if(ozy_init(48000)==EXIT_FAILURE) {
+        exit(1);
+    }
 
     gtk_init(&argc,&argv);
 

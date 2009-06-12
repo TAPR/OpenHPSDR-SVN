@@ -19,6 +19,10 @@
 #define OZY_PID (0x0007)
 #define OZY_VID (0xfffe)
 
+#define VRQ_SDR1K_CTL 0x0d
+#define SDR1KCTRL_READ_VERSION  0x7
+#define VRT_VENDOR_IN 0xC0
+
 #define OZY_IO_TIMEOUT 500
 
 int init=0;
@@ -51,6 +55,17 @@ int libusb_open_ozy(void) {
 
     return 0;
 
+}
+
+int libusb_get_ozy_firmware_string(char* buffer,int buffersize) {
+    int rc;
+    rc=libusb_control_transfer(ozy_handle, VRT_VENDOR_IN, VRQ_SDR1K_CTL, SDR1KCTRL_READ_VERSION, 0, buffer, buffersize, OZY_IO_TIMEOUT);
+    if(rc<0) {
+        fprintf(stderr,"libusb_get_ozy_firmware failed: %d\n",rc);
+        return rc;
+    }
+    buffer[rc]=0x00;
+    return 0;
 }
 
 int libusb_write_ozy(int ep,void* buffer,int buffersize)

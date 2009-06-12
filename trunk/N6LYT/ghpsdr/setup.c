@@ -163,7 +163,7 @@ void ghpsdr_setup() {
 
         gtk_widget_show(setupWindow);
     } else {
-        gtk_window_set_keep_above(setupWindow,TRUE);
+        gtk_window_set_keep_above(GTK_WINDOW(setupWindow),TRUE);
     }
 
 }

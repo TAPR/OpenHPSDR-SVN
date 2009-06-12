@@ -27,6 +27,13 @@
 #define USB_TIMEOUT -7
 //static struct OzyHandle* ozy;
 
+static char ozy_firmware_version[9];
+int mercury_software_version=0;
+int penelope_software_version=0;
+int ozy_software_version=0;
+
+int forward_power=0;
+
 static pthread_t ep6_ep2_io_thread_id;
 static pthread_t ep4_io_thread_id;
 static pthread_t ozy_input_buffer_thread_id;
@@ -94,25 +101,37 @@ void process_ozy_input_buffer(char* buffer) {
         control_in[3]=buffer[b++];
         control_in[4]=buffer[b++];
 
-if(control_in[0]&0x01) {
-    // PPT/DOT
-    fprintf(stderr,"PTT/DOT\n");
-} else if(control_in[0]&0x02) {
-    // DASH
-    fprintf(stderr,"DASH\n");
-}
+        if(control_in[0]&0x01) {
+            // PPT/DOT
+            fprintf(stderr,"PTT/DOT\n");
+        } else if(control_in[0]&0x02) {
+            // DASH
+            fprintf(stderr,"DASH\n");
+        }
 
-if(control_in[1]&0x01) {
-    lt2208ADCOverflow=1;
-}
+        if((control_in[0]&0x04)==0) {
 
-if(show_software_serial_numbers) {
-    fprintf(stderr,"Software Serial Numbers:\n");
-    fprintf(stderr,"  Mercury: %d\n",control_in[2]);
-    fprintf(stderr,"  Penelope: %d\n",control_in[3]);
-    fprintf(stderr,"  Ozy: %d\n",control_in[4]);
-    show_software_serial_numbers=0;
-}
+            if(control_in[1]&0x01) {
+                lt2208ADCOverflow=1;
+            }
+
+            if(mercury_software_version!=control_in[2]) {
+                mercury_software_version=control_in[2];
+                fprintf(stderr,"  Mercury Software version: %d (0x%0X)\n",mercury_software_version,mercury_software_version);
+            }
+
+        } else if((control_in[0]&0x04)==1) {
+            forward_power=(control_in[1]<<8)+control_in[2];
+        }
+
+        if(penelope_software_version!=control_in[3]) {
+            penelope_software_version=control_in[3];
+            fprintf(stderr,"  Penelope Software version: %d (0x%0X)\n",penelope_software_version,penelope_software_version);
+        }
+        if(ozy_software_version!=control_in[4]) {
+            ozy_software_version=control_in[4];
+            fprintf(stderr,"  Ozy Software version: %d (0x%0X)\n",ozy_software_version,ozy_software_version);
+        }
 
         // extract the 63 samples
         for(i=0;i<63;i++) {
@@ -165,8 +184,7 @@ if(show_software_serial_numbers) {
                         c=0;
                     }
                 }
-                
-                
+            
                 samples=0;
                 frames++;
             }
@@ -510,9 +528,18 @@ int ozy_init(int sample_rate) {
     // open ozy
     rc = libusb_open_ozy();
     if (rc != 0) {
-        perror("Cannot locate Ozy");
+        fprintf(stderr,"Cannot locate Ozy\n");
         return (EXIT_FAILURE);
     }
+
+    rc=libusb_get_ozy_firmware_string(ozy_firmware_version,8);
+
+    if(rc!=0) {
+        fprintf(stderr,"Failed to get Ozy Firmware Version - Have you run initozy yet?\n");
+        return (EXIT_FAILURE);
+    }
+
+    fprintf(stderr,"Ozy firmware version: %s\n",ozy_firmware_version);
     
     // setup ozy defaults
     int speed = SPEED_96KHZ;

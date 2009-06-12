@@ -194,7 +194,7 @@ GtkWidget* buildModeUI() {
 
     modeFrame=gtk_frame_new("Mode");
     gtk_widget_modify_bg(modeFrame,GTK_STATE_NORMAL,&background);
-    gtk_widget_modify_fg(gtk_frame_get_label_widget(modeFrame),GTK_STATE_NORMAL,&white);
+    gtk_widget_modify_fg(gtk_frame_get_label_widget(GTK_FRAME(modeFrame)),GTK_STATE_NORMAL,&white);
 
     modeTable=gtk_table_new(3,4,TRUE);
 
@@ -206,7 +206,7 @@ GtkWidget* buildModeUI() {
     gtk_widget_set_size_request(GTK_WIDGET(buttonLSB),50,25);
     g_signal_connect(G_OBJECT(buttonLSB),"clicked",G_CALLBACK(modeCallback),NULL);
     gtk_widget_show(buttonLSB);
-    gtk_table_attach_defaults(modeTable,buttonLSB,0,1,0,1);
+    gtk_table_attach_defaults(GTK_TABLE(modeTable),buttonLSB,0,1,0,1);
 
     buttonUSB = gtk_button_new_with_label ("USB");
     gtk_widget_modify_bg(buttonUSB, GTK_STATE_NORMAL, &buttonBackground);
@@ -215,7 +215,7 @@ GtkWidget* buildModeUI() {
     gtk_widget_set_size_request(GTK_WIDGET(buttonUSB),50,25);
     g_signal_connect(G_OBJECT(buttonUSB),"clicked",G_CALLBACK(modeCallback),NULL);
     gtk_widget_show(buttonUSB);
-    gtk_table_attach_defaults(modeTable,buttonUSB,0,1,1,2);
+    gtk_table_attach_defaults(GTK_TABLE(modeTable),buttonUSB,0,1,1,2);
 
     buttonCWL = gtk_button_new_with_label ("CW/L");
     gtk_widget_modify_bg(buttonCWL, GTK_STATE_NORMAL, &buttonBackground);
@@ -224,7 +224,7 @@ GtkWidget* buildModeUI() {
     gtk_widget_set_size_request(GTK_WIDGET(buttonCWL),50,25);
     g_signal_connect(G_OBJECT(buttonCWL),"clicked",G_CALLBACK(modeCallback),NULL);
     gtk_widget_show(buttonCWL);
-    gtk_table_attach_defaults(modeTable,buttonCWL,1,2,0,1);
+    gtk_table_attach_defaults(GTK_TABLE(modeTable),buttonCWL,1,2,0,1);
 
     buttonCWU = gtk_button_new_with_label ("CW/U");
     gtk_widget_modify_bg(buttonCWU, GTK_STATE_NORMAL, &buttonBackground);
@@ -233,7 +233,7 @@ GtkWidget* buildModeUI() {
     gtk_widget_set_size_request(GTK_WIDGET(buttonCWU),50,25);
     g_signal_connect(G_OBJECT(buttonCWU),"clicked",G_CALLBACK(modeCallback),NULL);
     gtk_widget_show(buttonCWU);
-    gtk_table_attach_defaults(modeTable,buttonCWU,1,2,1,2);
+    gtk_table_attach_defaults(GTK_TABLE(modeTable),buttonCWU,1,2,1,2);
 
     buttonDSB = gtk_button_new_with_label ("DSB");
     gtk_widget_modify_bg(buttonDSB, GTK_STATE_NORMAL, &buttonBackground);
@@ -242,7 +242,7 @@ GtkWidget* buildModeUI() {
     gtk_widget_set_size_request(GTK_WIDGET(buttonDSB),50,25);
     g_signal_connect(G_OBJECT(buttonDSB),"clicked",G_CALLBACK(modeCallback),NULL);
     gtk_widget_show(buttonDSB);
-    gtk_table_attach_defaults(modeTable,buttonDSB,0,1,2,3);
+    gtk_table_attach_defaults(GTK_TABLE(modeTable),buttonDSB,0,1,2,3);
 
 
     buttonFMN = gtk_button_new_with_label ("FM/N");
@@ -252,7 +252,7 @@ GtkWidget* buildModeUI() {
     gtk_widget_set_size_request(GTK_WIDGET(buttonFMN),50,25);
     g_signal_connect(G_OBJECT(buttonFMN),"clicked",G_CALLBACK(modeCallback),NULL);
     gtk_widget_show(buttonFMN);
-    gtk_table_attach_defaults(modeTable,buttonFMN,3,4,2,3);
+    gtk_table_attach_defaults(GTK_TABLE(modeTable),buttonFMN,3,4,2,3);
 
     buttonAM = gtk_button_new_with_label ("AM");
     gtk_widget_modify_bg(buttonAM, GTK_STATE_NORMAL, &buttonBackground);
@@ -261,7 +261,7 @@ GtkWidget* buildModeUI() {
     gtk_widget_set_size_request(GTK_WIDGET(buttonAM),50,25);
     g_signal_connect(G_OBJECT(buttonAM),"clicked",G_CALLBACK(modeCallback),NULL);
     gtk_widget_show(buttonAM);
-    gtk_table_attach_defaults(modeTable,buttonAM,3,4,0,1);
+    gtk_table_attach_defaults(GTK_TABLE(modeTable),buttonAM,3,4,0,1);
 
     buttonSAM = gtk_button_new_with_label ("SAM");
     gtk_widget_modify_bg(buttonSAM, GTK_STATE_NORMAL, &buttonBackground);
@@ -270,7 +270,7 @@ GtkWidget* buildModeUI() {
     gtk_widget_set_size_request(GTK_WIDGET(buttonSAM),50,25);
     g_signal_connect(G_OBJECT(buttonSAM),"clicked",G_CALLBACK(modeCallback),NULL);
     gtk_widget_show(buttonSAM);
-    gtk_table_attach_defaults(modeTable,buttonSAM,3,4,1,2);
+    gtk_table_attach_defaults(GTK_TABLE(modeTable),buttonSAM,3,4,1,2);
 
     buttonDIGL = gtk_button_new_with_label ("DIGL");
     gtk_widget_modify_bg(buttonDIGL, GTK_STATE_NORMAL, &buttonBackground);
@@ -279,7 +279,7 @@ GtkWidget* buildModeUI() {
     gtk_widget_set_size_request(GTK_WIDGET(buttonDIGL),50,25);
     g_signal_connect(G_OBJECT(buttonDIGL),"clicked",G_CALLBACK(modeCallback),NULL);
     gtk_widget_show(buttonDIGL);
-    gtk_table_attach_defaults(modeTable,buttonDIGL,2,3,0,1);
+    gtk_table_attach_defaults(GTK_TABLE(modeTable),buttonDIGL,2,3,0,1);
 
     buttonDIGU = gtk_button_new_with_label ("DIGU");
     gtk_widget_modify_bg(buttonDIGU, GTK_STATE_NORMAL, &buttonBackground);
@@ -288,7 +288,7 @@ GtkWidget* buildModeUI() {
     gtk_widget_set_size_request(GTK_WIDGET(buttonDIGU),50,25);
     g_signal_connect(G_OBJECT(buttonDIGU),"clicked",G_CALLBACK(modeCallback),NULL);
     gtk_widget_show(buttonDIGU);
-    gtk_table_attach_defaults(modeTable,buttonDIGU,2,3,1,2);
+    gtk_table_attach_defaults(GTK_TABLE(modeTable),buttonDIGU,2,3,1,2);
 
     buttonSPEC = gtk_button_new_with_label ("SPEC");
     gtk_widget_modify_bg(buttonSPEC, GTK_STATE_NORMAL, &buttonBackground);
@@ -297,7 +297,7 @@ GtkWidget* buildModeUI() {
     gtk_widget_set_size_request(GTK_WIDGET(buttonSPEC),50,25);
     g_signal_connect(G_OBJECT(buttonSPEC),"clicked",G_CALLBACK(modeCallback),NULL);
     gtk_widget_show(buttonSPEC);
-    gtk_table_attach_defaults(modeTable,buttonSPEC,1,2,2,3);
+    gtk_table_attach_defaults(GTK_TABLE(modeTable),buttonSPEC,1,2,2,3);
 
     buttonDRM = gtk_button_new_with_label ("DRM");
     gtk_widget_modify_bg(buttonDRM, GTK_STATE_NORMAL, &buttonBackground);
@@ -306,7 +306,7 @@ GtkWidget* buildModeUI() {
     gtk_widget_set_size_request(GTK_WIDGET(buttonDRM),50,25);
     g_signal_connect(G_OBJECT(buttonDRM),"clicked",G_CALLBACK(modeCallback),NULL);
     gtk_widget_show(buttonDRM);
-    gtk_table_attach_defaults(modeTable,buttonDRM,2,3,2,3);
+    gtk_table_attach_defaults(GTK_TABLE(modeTable),buttonDRM,2,3,2,3);
 
   
     gtk_container_add(GTK_CONTAINER(modeFrame),modeTable);

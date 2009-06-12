@@ -151,7 +151,7 @@ void create_spectrum_buffers(int n) {
     int i;
     char name[64];
     
-fprintf(stderr,"create_spectrum_buffers: %d\n",n);
+//fprintf(stderr,"create_spectrum_buffers: %d\n",n);
     pthread_mutex_init(&spectrum_input_buffer_mutex, NULL);
     pthread_mutex_init(&spectrum_free_buffer_mutex, NULL);
     sprintf(name,"spectrum_sem.%d",getpid());
@@ -160,7 +160,7 @@ fprintf(stderr,"create_spectrum_buffers: %d\n",n);
         perror(name);
         exit(1);
     }
-fprintf(stderr,"%s\n",name);
+//fprintf(stderr,"%s\n",name);
 
     for(i=0;i<n;i++) {
         buffer=new_spectrum_buffer();
