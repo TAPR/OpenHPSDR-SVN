@@ -29,6 +29,7 @@
 #include <gtk/gtk.h>
 #include <math.h>
 #include <stdio.h>
+#include <string.h>
 #include "bandstack.h"
 #include "command.h"
 #include "dttsp.h"
@@ -119,7 +120,7 @@ GtkWidget* buildClock10UI() {
 
     clock10Frame=gtk_frame_new("10 MHz Clock Source");
     gtk_widget_modify_bg(clock10Frame,GTK_STATE_NORMAL,&background);
-    gtk_widget_modify_fg(gtk_frame_get_label_widget(clock10Frame),GTK_STATE_NORMAL,&white);
+    gtk_widget_modify_fg(gtk_frame_get_label_widget(GTK_FRAME(clock10Frame)),GTK_STATE_NORMAL,&white);
 
     clock10Table=gtk_table_new(1,3,TRUE);
 
@@ -130,7 +131,7 @@ GtkWidget* buildClock10UI() {
     gtk_widget_set_size_request(GTK_WIDGET(buttonClock10Atlas),75,25);
     g_signal_connect(G_OBJECT(buttonClock10Atlas),"clicked",G_CALLBACK(clock10ButtonCallback),NULL);
     gtk_widget_show(buttonClock10Atlas);
-    gtk_table_attach_defaults(clock10Table,buttonClock10Atlas,0,1,0,1);
+    gtk_table_attach_defaults(GTK_TABLE(clock10Table),buttonClock10Atlas,0,1,0,1);
 
     buttonClock10Penelope = gtk_button_new_with_label ("Penelope");
     gtk_widget_modify_bg(buttonClock10Penelope, GTK_STATE_NORMAL, &buttonBackground);
@@ -138,7 +139,7 @@ GtkWidget* buildClock10UI() {
     gtk_widget_set_size_request(GTK_WIDGET(buttonClock10Penelope),75,25);
     g_signal_connect(G_OBJECT(buttonClock10Penelope),"clicked",G_CALLBACK(clock10ButtonCallback),NULL);
     gtk_widget_show(buttonClock10Penelope);
-    gtk_table_attach_defaults(clock10Table,buttonClock10Penelope,1,2,0,1);
+    gtk_table_attach_defaults(GTK_TABLE(clock10Table),buttonClock10Penelope,1,2,0,1);
 
     buttonClock10Mercury = gtk_button_new_with_label ("Mercury");
     gtk_widget_modify_bg(buttonClock10Mercury, GTK_STATE_NORMAL, &buttonBackground);
@@ -146,7 +147,7 @@ GtkWidget* buildClock10UI() {
     gtk_widget_set_size_request(GTK_WIDGET(buttonClock10Mercury),75,25);
     g_signal_connect(G_OBJECT(buttonClock10Mercury),"clicked",G_CALLBACK(clock10ButtonCallback),NULL);
     gtk_widget_show(buttonClock10Mercury);
-    gtk_table_attach_defaults(clock10Table,buttonClock10Mercury,2,3,0,1);
+    gtk_table_attach_defaults(GTK_TABLE(clock10Table),buttonClock10Mercury,2,3,0,1);
 
     gtk_container_add(GTK_CONTAINER(clock10Frame),clock10Table);
     gtk_widget_show(clock10Table);

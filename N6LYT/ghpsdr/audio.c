@@ -122,7 +122,7 @@ GtkWidget* buildAudioUI() {
 
     audioFrame=gtk_frame_new("DSP");
     gtk_widget_modify_bg(audioFrame,GTK_STATE_NORMAL,&background);
-    gtk_widget_modify_fg(gtk_frame_get_label_widget(audioFrame),GTK_STATE_NORMAL,&white);
+    gtk_widget_modify_fg(gtk_frame_get_label_widget(GTK_FRAME(audioFrame)),GTK_STATE_NORMAL,&white);
 
     audioTable=gtk_table_new(2,4,TRUE);
 
@@ -134,7 +134,7 @@ GtkWidget* buildAudioUI() {
     gtk_widget_set_size_request(GTK_WIDGET(buttonNR),50,25);
     g_signal_connect(G_OBJECT(buttonNR),"clicked",G_CALLBACK(audioButtonCallback),NULL);
     gtk_widget_show(buttonNR);
-    gtk_table_attach_defaults(audioTable,buttonNR,0,1,0,1);
+    gtk_table_attach_defaults(GTK_TABLE(audioTable),buttonNR,0,1,0,1);
 
     buttonANF = gtk_button_new_with_label ("ANF");
     gtk_widget_modify_bg(buttonANF, GTK_STATE_NORMAL, &buttonBackground);
@@ -143,7 +143,7 @@ GtkWidget* buildAudioUI() {
     gtk_widget_set_size_request(GTK_WIDGET(buttonANF),50,25);
     g_signal_connect(G_OBJECT(buttonANF),"clicked",G_CALLBACK(audioButtonCallback),NULL);
     gtk_widget_show(buttonANF);
-    gtk_table_attach_defaults(audioTable,buttonANF,1,2,0,1);
+    gtk_table_attach_defaults(GTK_TABLE(audioTable),buttonANF,1,2,0,1);
 
     buttonNB = gtk_button_new_with_label ("NB");
     gtk_widget_modify_bg(buttonNB, GTK_STATE_NORMAL, &buttonBackground);
@@ -152,7 +152,7 @@ GtkWidget* buildAudioUI() {
     gtk_widget_set_size_request(GTK_WIDGET(buttonNB),50,25);
     g_signal_connect(G_OBJECT(buttonNB),"clicked",G_CALLBACK(audioButtonCallback),NULL);
     gtk_widget_show(buttonNB);
-    gtk_table_attach_defaults(audioTable,buttonNB,2,3,0,1);
+    gtk_table_attach_defaults(GTK_TABLE(audioTable),buttonNB,2,3,0,1);
 
     buttonNB2 = gtk_button_new_with_label ("NB2");
     gtk_widget_modify_bg(buttonNB2, GTK_STATE_NORMAL, &buttonBackground);
@@ -161,7 +161,7 @@ GtkWidget* buildAudioUI() {
     gtk_widget_set_size_request(GTK_WIDGET(buttonNB2),50,25);
     g_signal_connect(G_OBJECT(buttonNB2),"clicked",G_CALLBACK(audioButtonCallback),NULL);
     gtk_widget_show(buttonNB2);
-    gtk_table_attach_defaults(audioTable,buttonNB2,3,4,0,1);
+    gtk_table_attach_defaults(GTK_TABLE(audioTable),buttonNB2,3,4,0,1);
 
     buttonMUTE = gtk_button_new_with_label ("MUTE");
     gtk_widget_modify_bg(buttonMUTE, GTK_STATE_NORMAL, &buttonBackground);
@@ -170,7 +170,7 @@ GtkWidget* buildAudioUI() {
     gtk_widget_set_size_request(GTK_WIDGET(buttonMUTE),50,25);
     g_signal_connect(G_OBJECT(buttonMUTE),"clicked",G_CALLBACK(audioButtonCallback),NULL);
     gtk_widget_show(buttonMUTE);
-    gtk_table_attach_defaults(audioTable,buttonMUTE,0,1,1,2);
+    gtk_table_attach_defaults(GTK_TABLE(audioTable),buttonMUTE,0,1,1,2);
 
     buttonBIN = gtk_button_new_with_label ("BIN");
     gtk_widget_modify_bg(buttonBIN, GTK_STATE_NORMAL, &buttonBackground);
@@ -179,7 +179,7 @@ GtkWidget* buildAudioUI() {
     gtk_widget_set_size_request(GTK_WIDGET(buttonBIN),50,25);
     g_signal_connect(G_OBJECT(buttonBIN),"clicked",G_CALLBACK(audioButtonCallback),NULL);
     gtk_widget_show(buttonBIN);
-    gtk_table_attach_defaults(audioTable,buttonBIN,1,2,1,2);
+    gtk_table_attach_defaults(GTK_TABLE(audioTable),buttonBIN,1,2,1,2);
 
     gtk_container_add(GTK_CONTAINER(audioFrame),audioTable);
     gtk_widget_show(audioTable);

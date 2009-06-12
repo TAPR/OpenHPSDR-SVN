@@ -89,9 +89,9 @@ GtkWidget* buildVolumeUI() {
     gtk_range_set_value((GtkRange*)volumeScale,volume);
     gtk_widget_set_size_request(GTK_WIDGET(volumeScale),150,25);
     gtk_widget_show(volumeScale);
-    gtk_container_add((GtkFrame*)volumeFrame,volumeScale);
+    gtk_container_add(GTK_CONTAINER(volumeFrame),volumeScale);
 
-    gtk_widget_set_size_request(GTK_WIDGET(volumeFrame),200,55);
+    gtk_widget_set_size_request(volumeFrame,200,55);
     gtk_widget_show(volumeFrame);
 
     return volumeFrame;

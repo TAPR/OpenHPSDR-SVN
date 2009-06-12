@@ -180,7 +180,7 @@ GtkWidget* buildHardwareUI() {
 
     hardwareFrame=gtk_frame_new("HPSDR");
     gtk_widget_modify_bg(hardwareFrame,GTK_STATE_NORMAL,&background);
-    gtk_widget_modify_fg(gtk_frame_get_label_widget(hardwareFrame),GTK_STATE_NORMAL,&white);
+    gtk_widget_modify_fg(gtk_frame_get_label_widget(GTK_FRAME(hardwareFrame)),GTK_STATE_NORMAL,&white);
 
     hardwareTable=gtk_table_new(2,3,TRUE);
 
@@ -191,7 +191,7 @@ GtkWidget* buildHardwareUI() {
     gtk_widget_set_size_request(GTK_WIDGET(buttonR48K),75,25);
     g_signal_connect(G_OBJECT(buttonR48K),"clicked",G_CALLBACK(hardwareButtonCallback),NULL);
     gtk_widget_show(buttonR48K);
-    gtk_table_attach_defaults(hardwareTable,buttonR48K,0,1,0,1);
+    gtk_table_attach_defaults(GTK_TABLE(hardwareTable),buttonR48K,0,1,0,1);
 
     buttonR96K = gtk_button_new_with_label ("96K");
     gtk_widget_modify_bg(buttonR96K, GTK_STATE_NORMAL, &buttonBackground);
@@ -199,7 +199,7 @@ GtkWidget* buildHardwareUI() {
     gtk_widget_set_size_request(GTK_WIDGET(buttonR96K),75,25);
     g_signal_connect(G_OBJECT(buttonR96K),"clicked",G_CALLBACK(hardwareButtonCallback),NULL);
     gtk_widget_show(buttonR96K);
-    gtk_table_attach_defaults(hardwareTable,buttonR96K,1,2,0,1);
+    gtk_table_attach_defaults(GTK_TABLE(hardwareTable),buttonR96K,1,2,0,1);
 
     buttonR192K = gtk_button_new_with_label ("192K");
     gtk_widget_modify_bg(buttonR192K, GTK_STATE_NORMAL, &buttonBackground);
@@ -207,7 +207,7 @@ GtkWidget* buildHardwareUI() {
     gtk_widget_set_size_request(GTK_WIDGET(buttonR192K),75,25);
     g_signal_connect(G_OBJECT(buttonR192K),"clicked",G_CALLBACK(hardwareButtonCallback),NULL);
     gtk_widget_show(buttonR192K);
-    gtk_table_attach_defaults(hardwareTable,buttonR192K,2,3,0,1);
+    gtk_table_attach_defaults(GTK_TABLE(hardwareTable),buttonR192K,2,3,0,1);
 
     buttonDither = gtk_button_new_with_label ("Dither");
     gtk_widget_modify_bg(buttonDither, GTK_STATE_NORMAL, &buttonBackground);
@@ -220,7 +220,7 @@ GtkWidget* buildHardwareUI() {
     gtk_widget_set_size_request(GTK_WIDGET(buttonDither),75,25);
     g_signal_connect(G_OBJECT(buttonDither),"clicked",G_CALLBACK(hardwareButtonCallback),NULL);
     gtk_widget_show(buttonDither);
-    gtk_table_attach_defaults(hardwareTable,buttonDither,0,1,1,2);
+    gtk_table_attach_defaults(GTK_TABLE(hardwareTable),buttonDither,0,1,1,2);
 
     buttonRandom = gtk_button_new_with_label ("Random");
     gtk_widget_modify_bg(buttonRandom, GTK_STATE_NORMAL, &buttonBackground);
@@ -233,7 +233,7 @@ GtkWidget* buildHardwareUI() {
     gtk_widget_set_size_request(GTK_WIDGET(buttonRandom),75,25);
     g_signal_connect(G_OBJECT(buttonRandom),"clicked",G_CALLBACK(hardwareButtonCallback),NULL);
     gtk_widget_show(buttonRandom);
-    gtk_table_attach_defaults(hardwareTable,buttonRandom,1,2,1,2);
+    gtk_table_attach_defaults(GTK_TABLE(hardwareTable),buttonRandom,1,2,1,2);
 
     buttonPreamp = gtk_button_new_with_label ("Preamp");
     gtk_widget_modify_bg(buttonPreamp, GTK_STATE_NORMAL, &buttonBackground);
@@ -246,7 +246,7 @@ GtkWidget* buildHardwareUI() {
     gtk_widget_set_size_request(GTK_WIDGET(buttonPreamp),75,25);
     g_signal_connect(G_OBJECT(buttonPreamp),"clicked",G_CALLBACK(hardwareButtonCallback),NULL);
     gtk_widget_show(buttonPreamp);
-    gtk_table_attach_defaults(hardwareTable,buttonPreamp,2,3,1,2);
+    gtk_table_attach_defaults(GTK_TABLE(hardwareTable),buttonPreamp,2,3,1,2);
 
     gtk_container_add(GTK_CONTAINER(hardwareFrame),hardwareTable);
     gtk_widget_show(hardwareTable);

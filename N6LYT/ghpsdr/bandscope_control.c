@@ -151,6 +151,7 @@ GtkWidget* buildBandscope_controlUI() {
     gtk_widget_show(buttonZoom2);
     gtk_fixed_put((GtkFixed*)zoomFixed,buttonZoom2,75,0);
 
+    if(BANDSCOPE_MULTIPLIER>2) {
     buttonZoom4 = gtk_button_new_with_label ("Zoom x4");
     gtk_widget_modify_bg(buttonZoom4, GTK_STATE_NORMAL, &buttonBackground);
     label=gtk_bin_get_child((GtkBin*)buttonZoom4);
@@ -159,7 +160,9 @@ GtkWidget* buildBandscope_controlUI() {
     g_signal_connect(G_OBJECT(buttonZoom4),"clicked",G_CALLBACK(zoomCallback),NULL);
     gtk_widget_show(buttonZoom4);
     gtk_fixed_put((GtkFixed*)zoomFixed,buttonZoom4,150,0);
+    }
 
+    if(BANDSCOPE_MULTIPLIER>4) {
     buttonZoom8 = gtk_button_new_with_label ("Zoom x8");
     gtk_widget_modify_bg(buttonZoom8, GTK_STATE_NORMAL, &buttonBackground);
     label=gtk_bin_get_child((GtkBin*)buttonZoom8);
@@ -169,7 +172,9 @@ GtkWidget* buildBandscope_controlUI() {
     gtk_widget_show(buttonZoom8);
     gtk_fixed_put((GtkFixed*)zoomFixed,buttonZoom8,225,0);
     gtk_widget_set_size_request(GTK_WIDGET(zoomFixed),300,25);
+    }
 
+    if(BANDSCOPE_MULTIPLIER>8) {
     buttonZoom16 = gtk_button_new_with_label ("Zoom x16");
     gtk_widget_modify_bg(buttonZoom16, GTK_STATE_NORMAL, &buttonBackground);
     label=gtk_bin_get_child((GtkBin*)buttonZoom16);
@@ -179,6 +184,7 @@ GtkWidget* buildBandscope_controlUI() {
     gtk_widget_show(buttonZoom16);
     gtk_fixed_put((GtkFixed*)zoomFixed,buttonZoom16,300,0);
     gtk_widget_set_size_request(GTK_WIDGET(zoomFixed),375,25);
+    }
 
     gtk_widget_show(zoomFixed);
 

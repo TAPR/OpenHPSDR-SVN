@@ -276,11 +276,14 @@ void setAFrequency(long long f) {
     }
 
     // check the band
-    int thisBand=getBand(f);
-    if(band!=thisBand) {
-        forceBand(thisBand);
+    if(displayHF) {
+        int thisBand=getBand(f);
+        if(band!=thisBand) {
+            if(band!=-1) {
+                forceBand(thisBand);
+            }
+        }
     }
-
 }
 
 /* --------------------------------------------------------------------------*/

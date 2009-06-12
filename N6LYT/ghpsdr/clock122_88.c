@@ -29,6 +29,7 @@
 #include <gtk/gtk.h>
 #include <math.h>
 #include <stdio.h>
+#include <string.h>
 #include "bandstack.h"
 #include "command.h"
 #include "dttsp.h"
@@ -95,7 +96,7 @@ GtkWidget* buildClock122_88UI() {
 
     clock122_88Frame=gtk_frame_new("122.88 MHz Clock Source");
     gtk_widget_modify_bg(clock122_88Frame,GTK_STATE_NORMAL,&background);
-    gtk_widget_modify_fg(gtk_frame_get_label_widget(clock122_88Frame),GTK_STATE_NORMAL,&white);
+    gtk_widget_modify_fg(gtk_frame_get_label_widget(GTK_FRAME(clock122_88Frame)),GTK_STATE_NORMAL,&white);
 
     clock122_88Table=gtk_table_new(1,2,TRUE);
 
@@ -106,7 +107,7 @@ GtkWidget* buildClock122_88UI() {
     gtk_widget_set_size_request(GTK_WIDGET(buttonClock122_88Penelope),75,25);
     g_signal_connect(G_OBJECT(buttonClock122_88Penelope),"clicked",G_CALLBACK(clock122_88ButtonCallback),NULL);
     gtk_widget_show(buttonClock122_88Penelope);
-    gtk_table_attach_defaults(clock122_88Table,buttonClock122_88Penelope,0,1,0,1);
+    gtk_table_attach_defaults(GTK_TABLE(clock122_88Table),buttonClock122_88Penelope,0,1,0,1);
 
     buttonClock122_88Mercury = gtk_button_new_with_label ("Mercury");
     gtk_widget_modify_bg(buttonClock122_88Mercury, GTK_STATE_NORMAL, &buttonBackground);
@@ -114,7 +115,7 @@ GtkWidget* buildClock122_88UI() {
     gtk_widget_set_size_request(GTK_WIDGET(buttonClock122_88Mercury),75,25);
     g_signal_connect(G_OBJECT(buttonClock122_88Mercury),"clicked",G_CALLBACK(clock122_88ButtonCallback),NULL);
     gtk_widget_show(buttonClock122_88Mercury);
-    gtk_table_attach_defaults(clock122_88Table,buttonClock122_88Mercury,1,2,0,1);
+    gtk_table_attach_defaults(GTK_TABLE(clock122_88Table),buttonClock122_88Mercury,1,2,0,1);
 
     gtk_container_add(GTK_CONTAINER(clock122_88Frame),clock122_88Table);
     gtk_widget_show(clock122_88Table);

@@ -44,9 +44,11 @@
 
 int band;
 
+gboolean displayHF;
+
 void bandSaveState();
 void bandRestoreState();
-
 void forceBand(int band);
+void configureXVTRButton();
 
 GtkWidget* buildBandUI();

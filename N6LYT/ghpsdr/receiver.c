@@ -90,7 +90,7 @@ GtkWidget* buildReceiverUI() {
     gtk_range_set_value((GtkRange*)panScale,pan);
     gtk_widget_set_size_request(GTK_WIDGET(panScale),150,25);
     gtk_widget_show(panScale);
-    gtk_container_add((GtkFrame*)receiverFrame,panScale);
+    gtk_container_add(GTK_CONTAINER(receiverFrame),panScale);
 
     gtk_widget_set_size_request(GTK_WIDGET(receiverFrame),200,55);
     gtk_widget_show(receiverFrame);
