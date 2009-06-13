@@ -44,7 +44,6 @@
 #include "property.h"
 #include "soundcard.h"
 #include "mode.h"
-#include "band.h"
 #include "vfo.h"
 #include "hardware.h"
 #include "spectrum.h"
@@ -153,6 +152,33 @@ BANDSTACK_ENTRY bandstackWWV[] =
      {20000000LL,modeSAM,filterF6,200,2800,200,2800,1000,0,-100,-180,10,-110,-140}};
 
 BANDSTACK bandstack[BANDS];
+
+#define NUM_BAND_LIMITS 22
+
+BAND_LIMITS bandLimits[NUM_BAND_LIMITS] = {
+    {1800000LL,2000000LL},
+    {3500000LL,4000000LL},
+    {5330500LL,5403500LL},
+    {7000000LL,7300000LL},
+    {10100000LL,10150000LL},
+    {14000000LL,14350000LL},
+    {18068000LL,18168000LL},
+    {21000000LL,21450000LL},
+    {24890000LL,24990000LL},
+    {28000000LL,29700000LL},
+    {50000000LL,54000000LL},
+    {144000000LL,148000000LL},
+    {222000000LL,224980000LL},
+    {420000000LL,450000000LL},
+    {902000000LL,928000000LL},
+    {1240000000LL,1300000000LL},
+    {2300000000LL,2450000000LL},
+    {3456000000LL,3456400000LL},
+    {5760000000LL,5760400000LL},
+    {10368000000LL,10368400000LL},
+    {24192000000LL,24192400000LL},
+    {47088000000LL,47088400000LL}
+};
 
 /* --------------------------------------------------------------------------*/
 /** 
@@ -1153,4 +1179,19 @@ void bandRestoreState() {
     value=getProperty("displayHF");
     if(value) displayHF=atoi(value);
 
+}
+
+BAND_LIMITS* getBandLimits(long long minDisplay,long long maxDisplay) {
+    BAND_LIMITS* limits;
+    int i;
+
+    for(i=0;i<NUM_BAND_LIMITS;i++) {
+        limits=&bandLimits[i];
+        if((minDisplay<=limits->minFrequency&&maxDisplay>=limits->minFrequency) ||
+           (minDisplay<=limits->maxFrequency&&maxDisplay>=limits->maxFrequency)) {
+            return limits;
+        }
+    }
+
+    return NULL;
 }

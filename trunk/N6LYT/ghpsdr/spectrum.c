@@ -29,6 +29,7 @@
 #include <stdlib.h>
 #include <string.h>
 
+#include "band.h"
 #include "bandstack.h"
 #include "main.h"
 #include "filter.h"
@@ -412,9 +413,16 @@ void drawSpectrum(int height) {
 
     int i;
     long long f;
+    long long minDisplay;
+    long long maxDisplay;
+    long long minFrequency;
+    BAND_LIMITS* bandLimits;
+
     float hzPerPixel;
 
-    f=frequencyA-(sampleRate/2);
+    minDisplay=f=frequencyA-(sampleRate/2);
+    maxDisplay=frequencyA+(sampleRate/2);
+    
     hzPerPixel=(float)sampleRate/(float)spectrumWIDTH;
 
     if(spectrum->window) {
@@ -448,6 +456,22 @@ void drawSpectrum(int height) {
                 }
             }
             f+=(long long)hzPerPixel;
+        }
+
+        // draw band edges
+        bandLimits=getBandLimits(minDisplay,maxDisplay);
+        if(bandLimits!=NULL) {
+            gdk_gc_set_rgb_fg_color(gc,&red);
+            if((minDisplay<bandLimits->minFrequency)&&(maxDisplay>bandLimits->minFrequency)) {
+                i=(bandLimits->minFrequency-minDisplay)/(long long)hzPerPixel;
+                gdk_draw_line(spectrumPixmap,gc,i-1,0,i-1,height);
+                gdk_draw_line(spectrumPixmap,gc,i,0,i,height);
+            }
+            if((minDisplay<bandLimits->maxFrequency)&&(maxDisplay>bandLimits->maxFrequency)) {
+                i=(bandLimits->maxFrequency-minDisplay)/(long long)hzPerPixel;
+                gdk_draw_line(spectrumPixmap,gc,i,0,i,height);
+                gdk_draw_line(spectrumPixmap,gc,i+1,0,i+1,height);
+            }
         }
         
         // draw the cursor
