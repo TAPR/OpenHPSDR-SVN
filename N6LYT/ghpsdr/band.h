@@ -42,6 +42,13 @@
 
 #define BANDS 14
 
+struct _BAND_LIMITS {
+    long long minFrequency;
+    long long maxFrequency;
+};
+
+typedef struct _BAND_LIMITS BAND_LIMITS;
+
 int band;
 
 gboolean displayHF;
@@ -50,5 +57,6 @@ void bandSaveState();
 void bandRestoreState();
 void forceBand(int band);
 void configureXVTRButton();
-
 GtkWidget* buildBandUI();
+
+BAND_LIMITS* getBandLimits(long long minDisplay,long long maxDisplay);

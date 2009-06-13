@@ -291,7 +291,7 @@ void setAFrequency(long long f) {
 * @brief Set VFO RX frequency
 */
 void vfoSetRxFrequency() {
-    fprintf(stderr,"setFrequency %lld\n",ddsFrequency);
+    //fprintf(stderr,"setFrequency %lld\n",ddsFrequency);
     setFrequency((float)ddsFrequency/1000000.0f);
 }
 

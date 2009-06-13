@@ -617,18 +617,13 @@ int main(int argc,char* argv[]) {
     // initialize DttSP
     Setup_SDR();
     Release_Update();
-    SetTRX(0,FALSE);
-    SetTRX(1,FALSE);
-    SetTRX(2,TRUE);
+    SetTRX(0,FALSE); // thread 0 is for receive
+    SetTRX(1,TRUE);  // thread 1 is for transmit
     SetThreadProcessingMode(0,2);
-    SetThreadProcessingMode(1,2);
     SetSubRXSt(0,0,TRUE);
-    SetSubRXSt(0,1,TRUE);
-    //SetRXOutputGain(0,0,10.0);
 
     reset_for_buflen(0,1024);
     reset_for_buflen(1,1024);
-    reset_for_buflen(2,1024);
 
 
     // initialize ozy (default 48K)
