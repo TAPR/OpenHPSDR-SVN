@@ -382,6 +382,7 @@ namespace DataDecoder
             this.rbPre9 = new System.Windows.Forms.RadioButton();
             this.rbPre1 = new System.Windows.Forms.RadioButton();
             this.grpStepCtrl = new System.Windows.Forms.GroupBox();
+            this.lblStepFreq = new System.Windows.Forms.Label();
             this.rb34 = new System.Windows.Forms.RadioButton();
             this.rbBiDir = new System.Windows.Forms.RadioButton();
             this.rb180 = new System.Windows.Forms.RadioButton();
@@ -5655,6 +5656,7 @@ namespace DataDecoder
             // 
             // grpStepCtrl
             // 
+            this.grpStepCtrl.Controls.Add(this.lblStepFreq);
             this.grpStepCtrl.Controls.Add(this.rb34);
             this.grpStepCtrl.Controls.Add(this.rbBiDir);
             this.grpStepCtrl.Controls.Add(this.rb180);
@@ -5670,6 +5672,18 @@ namespace DataDecoder
             this.grpStepCtrl.TabStop = false;
             this.grpStepCtrl.Text = "SteppIR Control";
             // 
+            // lblStepFreq
+            // 
+            this.lblStepFreq.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblStepFreq.ForeColor = System.Drawing.Color.Red;
+            this.lblStepFreq.Location = new System.Drawing.Point(202, 19);
+            this.lblStepFreq.Name = "lblStepFreq";
+            this.lblStepFreq.Size = new System.Drawing.Size(68, 15);
+            this.lblStepFreq.TabIndex = 103;
+            this.lblStepFreq.Text = "Fault";
+            this.lblStepFreq.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.toolTip1.SetToolTip(this.lblStepFreq, "Frequency reported from SteppIR controller.");
+            // 
             // rb34
             // 
             this.rb34.FlatAppearance.CheckedBackColor = System.Drawing.Color.Red;
@@ -5677,7 +5691,7 @@ namespace DataDecoder
             this.rb34.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.rb34.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
             this.rb34.ForeColor = System.Drawing.Color.Navy;
-            this.rb34.Location = new System.Drawing.Point(190, 17);
+            this.rb34.Location = new System.Drawing.Point(159, 17);
             this.rb34.Name = "rb34";
             this.rb34.Size = new System.Drawing.Size(50, 17);
             this.rb34.TabIndex = 102;
@@ -5693,12 +5707,12 @@ namespace DataDecoder
             this.rbBiDir.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.rbBiDir.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
             this.rbBiDir.ForeColor = System.Drawing.Color.Navy;
-            this.rbBiDir.Location = new System.Drawing.Point(130, 17);
+            this.rbBiDir.Location = new System.Drawing.Point(110, 17);
             this.rbBiDir.Name = "rbBiDir";
             this.rbBiDir.Size = new System.Drawing.Size(54, 17);
             this.rbBiDir.TabIndex = 101;
             this.rbBiDir.Text = "<-->";
-            this.toolTip1.SetToolTip(this.rbBiDir, "Select to put yagi in bi-directional mode");
+            this.toolTip1.SetToolTip(this.rbBiDir, "Select to put yagi in bi-directional mode (ctrl+B).");
             this.rbBiDir.UseVisualStyleBackColor = true;
             this.rbBiDir.CheckedChanged += new System.EventHandler(this.rbBiDir_CheckedChanged);
             // 
@@ -5709,12 +5723,12 @@ namespace DataDecoder
             this.rb180.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.rb180.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
             this.rb180.ForeColor = System.Drawing.Color.Navy;
-            this.rb180.Location = new System.Drawing.Point(70, 17);
+            this.rb180.Location = new System.Drawing.Point(62, 17);
             this.rb180.Name = "rb180";
             this.rb180.Size = new System.Drawing.Size(51, 17);
             this.rb180.TabIndex = 100;
             this.rb180.Text = "180";
-            this.toolTip1.SetToolTip(this.rb180, "Select to put yagi in 180 mode (reverse)");
+            this.toolTip1.SetToolTip(this.rb180, "Select to put yagi in 180 (reverse) mode (ctrl+R).");
             this.rb180.UseVisualStyleBackColor = true;
             this.rb180.CheckedChanged += new System.EventHandler(this.rb180_CheckedChanged);
             // 
@@ -5730,7 +5744,7 @@ namespace DataDecoder
             this.rbFwd.Size = new System.Drawing.Size(53, 17);
             this.rbFwd.TabIndex = 99;
             this.rbFwd.Text = "Fwd";
-            this.toolTip1.SetToolTip(this.rbFwd, "Select to put yagi in forward mode");
+            this.toolTip1.SetToolTip(this.rbFwd, "Select to put yagi in forward mode (ctrl+F).");
             this.rbFwd.UseVisualStyleBackColor = true;
             this.rbFwd.CheckedChanged += new System.EventHandler(this.rbFwd_CheckedChanged);
             // 
@@ -5743,7 +5757,7 @@ namespace DataDecoder
             this.btnCalib.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.btnCalib.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnCalib.ForeColor = System.Drawing.Color.Black;
-            this.btnCalib.Location = new System.Drawing.Point(330, 13);
+            this.btnCalib.Location = new System.Drawing.Point(338, 13);
             this.btnCalib.Name = "btnCalib";
             this.btnCalib.Size = new System.Drawing.Size(60, 21);
             this.btnCalib.TabIndex = 98;
@@ -5762,7 +5776,7 @@ namespace DataDecoder
             this.btnHome.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.btnHome.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnHome.ForeColor = System.Drawing.Color.Black;
-            this.btnHome.Location = new System.Drawing.Point(260, 13);
+            this.btnHome.Location = new System.Drawing.Point(275, 13);
             this.btnHome.Name = "btnHome";
             this.btnHome.Size = new System.Drawing.Size(55, 21);
             this.btnHome.TabIndex = 97;
@@ -5852,7 +5866,7 @@ namespace DataDecoder
             this.label61.AutoSize = true;
             this.label61.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
             this.label61.ForeColor = System.Drawing.Color.Navy;
-            this.label61.Location = new System.Drawing.Point(10, 77);
+            this.label61.Location = new System.Drawing.Point(14, 77);
             this.label61.Name = "label61";
             this.label61.Size = new System.Drawing.Size(58, 13);
             this.label61.TabIndex = 38;
@@ -5968,7 +5982,7 @@ namespace DataDecoder
             this.label54.AutoSize = true;
             this.label54.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
             this.label54.ForeColor = System.Drawing.Color.Navy;
-            this.label54.Location = new System.Drawing.Point(176, 40);
+            this.label54.Location = new System.Drawing.Point(174, 40);
             this.label54.Name = "label54";
             this.label54.Size = new System.Drawing.Size(49, 13);
             this.label54.TabIndex = 5;
@@ -11134,7 +11148,7 @@ namespace DataDecoder
             this.lblFwd.AutoSize = true;
             this.lblFwd.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblFwd.ForeColor = System.Drawing.Color.Navy;
-            this.lblFwd.Location = new System.Drawing.Point(50, 370);
+            this.lblFwd.Location = new System.Drawing.Point(50, 369);
             this.lblFwd.Name = "lblFwd";
             this.lblFwd.Size = new System.Drawing.Size(16, 12);
             this.lblFwd.TabIndex = 19;
@@ -11146,7 +11160,7 @@ namespace DataDecoder
             this.lblSWR.AutoSize = true;
             this.lblSWR.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblSWR.ForeColor = System.Drawing.Color.Navy;
-            this.lblSWR.Location = new System.Drawing.Point(193, 370);
+            this.lblSWR.Location = new System.Drawing.Point(191, 369);
             this.lblSWR.Name = "lblSWR";
             this.lblSWR.Size = new System.Drawing.Size(27, 12);
             this.lblSWR.TabIndex = 67;
@@ -11498,7 +11512,7 @@ namespace DataDecoder
             this.lblAvg.AutoSize = true;
             this.lblAvg.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblAvg.ForeColor = System.Drawing.Color.Navy;
-            this.lblAvg.Location = new System.Drawing.Point(118, 370);
+            this.lblAvg.Location = new System.Drawing.Point(116, 369);
             this.lblAvg.Name = "lblAvg";
             this.lblAvg.Size = new System.Drawing.Size(23, 12);
             this.lblAvg.TabIndex = 74;
@@ -12518,6 +12532,7 @@ namespace DataDecoder
         private NumericUpDown numSWR;
         private Label lblHighSWR;
         private CheckBox chkTenths;
+        private Label lblStepFreq;
 
     }
 }

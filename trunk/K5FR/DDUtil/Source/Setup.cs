@@ -670,6 +670,18 @@ namespace DataDecoder
 
         #region Delegates
 
+        // Set SteppIR Freq
+        delegate void SetStepFreqCallback(string text);
+        private void SetStepFreq(string text)
+        {
+            if (this.lblStepFreq.InvokeRequired)
+            {
+                SetStepFreqCallback d = new SetStepFreqCallback(SetStepFreq);
+                this.Invoke(d, new object[] { text });
+            }
+            else
+                this.lblStepFreq.Text = text;
+        }
         // Set rbWN1
         delegate void SetWN1Callback(bool bCmd);
         private void SetWN1(bool bCmd)
@@ -935,6 +947,33 @@ namespace DataDecoder
         #endregion Delegates
 
         #region Form Events
+
+        // 
+        private void chkSWR_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chkSWR.Checked) set.SWRenab = true;
+            else set.SWRenab = false;
+            set.Save();
+        }
+
+        private void numSWR_ValueChanged(object sender, EventArgs e)
+        {
+            set.SWRnum = numSWR.Value;
+            set.Save();
+        }
+
+        private void btnSWR_Click(object sender, EventArgs e)
+        {
+            WriteToPort("ZZTI0;", iSleep);
+            lblHighSWR.Visible = false;
+        }
+
+        private void chkTenths_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chkTenths.Checked) set.Tenths = true;
+            else set.Tenths = false;
+            set.Save();
+        }
 
         // the Amp160 check box has changed
         private void chkAmp160_CheckedChanged(object sender, EventArgs e)
@@ -3785,12 +3824,12 @@ namespace DataDecoder
         //the power button was pressed
         public void btnPwr_Click(object sender, EventArgs e)
         {
-            if (Amp == 0)
+            if (Amp == 0) //ACOM
             {
                 if (ac == "Off") { AlphaPort.DtrEnable = true; AlphaPort.RtsEnable = true; }
                 if (ac == "On") AlphaPort.Write("Aq0\0");
             }
-            if (Amp == 1)
+            if (Amp == 1) //Alpha
             {
                 if (ac == "Off") AlphaPort.Write("AC ON\r");
                 if (ac == "On") AlphaPort.Write("AC OFF\r");
@@ -7853,11 +7892,6 @@ namespace DataDecoder
             SerialPort port = (SerialPort)sender;
             byte[] data = new byte[port.BytesToRead];
             port.Read(data, 0, data.Length);
-            for (int i = 0; i < data.Length; i++)
-            {   // if 8x or 90 msg received from ACOM chg to '*'
-                // see DataAcom() routine for processing
-                if (data[i] > 127 && data[i] < 255) data[i] = 0x2A;
-            }
             StepBufr += AE.GetString(data, 0, data.Length);
             Regex rex = new Regex(".*?\r");  //accept any string ending in "0x0D"		
             //loop thru the buffer and find matches
@@ -7868,8 +7902,27 @@ namespace DataDecoder
                 StepBufr = StepBufr.Replace(m.Value, "");
                 if (data.Length > 7)
                 {
+                    string Fh = data[3].ToString("X2");
+                    string Fm = data[4].ToString("X2");
+                    string Fl = data[5].ToString("X2");
                     string mot = data[6].ToString();
                     string dir = data[7].ToString();
+                    // write steppir freq to rotor tab label
+                    string hexValue = Fh + Fm + Fl;
+                    int xfreq = int.Parse(hexValue, System.Globalization.NumberStyles.HexNumber)/10;
+                    string sfreq = xfreq.ToString();
+                    double freq = 0.0;
+                    if (xfreq > 99999)
+                    {
+                        freq = Convert.ToDouble(sfreq.Substring(0, 2) + "." + sfreq.Substring(2, 4));
+                    }
+                    else
+                    {
+                        freq = Convert.ToDouble(sfreq.Substring(0, 1) + "." + sfreq.Substring(1, 4));
+                    }
+                    SetStepFreq(freq.ToString("0.00",CultureInfo.InvariantCulture)+ " mHz");
+
+                    // See if motor(s) moving
                     if (mot == "0")
                         {   // antenna is NOT moving, but a freq update has been sent to the
                         // controller that may cause movement. We are waiting for StepCtr
@@ -9152,7 +9205,7 @@ namespace DataDecoder
                     WriteToPort("ZZTI1;", iSleep);
                     lblHighSWR.Visible = true;
                     // Display a message that the SWR alarm value was exceeded.
-                    MessageBox.Show(
+                    MessageBox.Show(this,
                         "The SWR alarm value setting has been exceeded.\r\r" + 
                         "PowerSDR's transmit ability is now disabled.\r\r" +
                         "Press OK to dismiss this message and to Reset the SWR Alarm",
@@ -9655,32 +9708,6 @@ namespace DataDecoder
 
 
         #endregion WaveNode
-
-        private void chkSWR_CheckedChanged(object sender, EventArgs e)
-        {
-            if (chkSWR.Checked) set.SWRenab = true;
-            else set.SWRenab = false;
-            set.Save();
-        }
-
-        private void numSWR_ValueChanged(object sender, EventArgs e)
-        {
-            set.SWRnum = numSWR.Value;
-            set.Save();
-        }
-
-        private void btnSWR_Click(object sender, EventArgs e)
-        {
-            WriteToPort("ZZTI0;", iSleep);
-            lblHighSWR.Visible = false;
-        }
-
-        private void chkTenths_CheckedChanged(object sender, EventArgs e)
-        {
-            if (chkTenths.Checked) set.Tenths = true;
-            else set.Tenths = false;
-            set.Save();
-        }
 
     }
 }
