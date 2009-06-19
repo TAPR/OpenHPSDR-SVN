@@ -37,6 +37,7 @@
 
 #include "command.h"
 #include "main.h"
+#include "xvtr.h"
 #include "band.h"
 #include "property.h"
 #include "vfo.h"

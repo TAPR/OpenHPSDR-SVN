@@ -29,6 +29,7 @@
 #include <stdlib.h>
 #include <string.h>
 
+#include "xvtr.h"
 #include "band.h"
 #include "bandstack.h"
 #include "main.h"
