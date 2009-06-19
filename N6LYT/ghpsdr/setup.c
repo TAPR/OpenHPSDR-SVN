@@ -75,6 +75,7 @@ void ghpsdr_setup() {
 */
 void quitSetup() {
     saveXvtrSettings();
+    configureXVTRButton();
     gtk_widget_destroy(setupWindow);
     setupWindow=NULL;
 }

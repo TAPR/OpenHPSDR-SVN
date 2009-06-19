@@ -1000,7 +1000,33 @@ void configureXVTRButton() {
         }
     }
 
-    gtk_widget_set_sensitive(buttonBand14,count>0);
+    if(displayHF) {
+        gtk_widget_set_sensitive(buttonBand14,count>0);
+    }
+
+    if(count==0) {
+        if(displayHF==0) {
+            // force back to HF bands
+            selectBand(buttonBand14);
+        }
+    } else {
+        if(displayHF==0) {
+            setXVTRTitles();
+            // check xvtr_band still valid
+            if(strcmp(xvtr[xvtr_band].name,"")==0) {
+                for(i=0;i<12;i++) {
+                    if(strcmp(xvtr[i].name,"")) {
+                        xvtr_band=i;
+                        if(displayHF==0) {
+                        }
+                        break;
+                    }
+                }
+            }
+            forceBand(xvtr_band);
+        }
+    }
+
 }
 
 /* --------------------------------------------------------------------------*/
