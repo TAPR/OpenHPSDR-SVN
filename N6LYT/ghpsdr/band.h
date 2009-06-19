@@ -50,7 +50,7 @@ struct _BAND_LIMITS {
 typedef struct _BAND_LIMITS BAND_LIMITS;
 
 int band;
-
+int xvtr_band;
 gboolean displayHF;
 
 void bandSaveState();
@@ -60,3 +60,4 @@ void configureXVTRButton();
 GtkWidget* buildBandUI();
 
 BAND_LIMITS* getBandLimits(long long minDisplay,long long maxDisplay);
+XVTR_ENTRY* getXvtrEntry(int i);

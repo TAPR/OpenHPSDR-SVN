@@ -57,6 +57,10 @@ int libusb_open_ozy(void) {
 
 }
 
+void libusb_close_ozy() {
+    libusb_close(ozy_handle);
+}
+
 int libusb_get_ozy_firmware_string(char* buffer,int buffersize) {
     int rc;
     rc=libusb_control_transfer(ozy_handle, VRT_VENDOR_IN, VRQ_SDR1K_CTL, SDR1KCTRL_READ_VERSION, 0, buffer, buffersize, OZY_IO_TIMEOUT);

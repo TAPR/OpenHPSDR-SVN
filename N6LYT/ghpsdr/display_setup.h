@@ -1,6 +1,6 @@
 /** 
 * @file setup.h
-* @brief Setup functions
+* @brief Header files for setup functions
 * @author John Melton, G0ORX/N6LYT, Doxygen Comments Dave Larsen, KV0S
 * @version 0.1
 * @date 2009-04-12
@@ -25,8 +25,9 @@
 */
 
 
+
 //
-// setup.h
+// display_setup.h
 //
 
-void ghpsdr_setup();
+GtkWidget* displaySetupUI();

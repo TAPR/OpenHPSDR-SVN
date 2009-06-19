@@ -89,6 +89,7 @@
 #include <gtk/gtk.h>
 #include <gdk/gdkkeysyms.h>
 #include <fcntl.h>
+#include <sys/types.h>
 #include <unistd.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -119,6 +120,7 @@
 #include "spectrum_update.h"
 #include "version.h"
 #include "vfo.h"
+#include "xvtr.h"
 #include "band.h"
 #include "mode.h"
 #include "bandscope.h"
@@ -461,7 +463,11 @@ void buildMainUI() {
   
 
     // set the band
-    setBand(band);
+    if(displayHF) {
+        setBand(band);
+    } else {
+        setBand(xvtr_band);
+    }
 
     // get the display and meter running
     newSpectrumUpdate();
@@ -611,6 +617,12 @@ void processCommands(int argc,char** argv) {
 */
 /* ----------------------------------------------------------------------------*/
 int main(int argc,char* argv[]) {
+    gboolean retry;
+    GtkWidget* dialog;
+    gint result;
+    int i;
+
+    gtk_init(&argc,&argv);
 
     fprintf(stderr,"ghpsdr Version %s\n",VERSION);
 
@@ -627,11 +639,61 @@ int main(int argc,char* argv[]) {
 
 
     // initialize ozy (default 48K)
-    if(ozy_init(48000)==EXIT_FAILURE) {
-        exit(1);
-    }
+    do {
 
-    gtk_init(&argc,&argv);
+        switch(ozy_init(48000)) {
+            case -1: // cannot find ozy
+                dialog = gtk_message_dialog_new (NULL,
+                                                 GTK_DIALOG_DESTROY_WITH_PARENT,
+                                                 GTK_MESSAGE_ERROR,
+                                                 GTK_BUTTONS_YES_NO,
+                                                 "Cannot locate Ozy!\n\nIs it powered on and plugged in?");
+                gtk_message_dialog_format_secondary_text(GTK_MESSAGE_DIALOG(dialog),"Retry?");
+                gtk_window_set_title(GTK_WINDOW(dialog),"GHPSDR");
+                result = gtk_dialog_run (GTK_DIALOG (dialog));
+                switch (result) {
+                    case GTK_RESPONSE_YES:
+                        retry=TRUE;
+                        break;
+                    default:
+                        exit(1);
+                        break;
+                }
+                gtk_widget_destroy (dialog);
+                break;
+            case -2:
+                result=fork();
+                if(result==0) {
+                    // child process - exec initozy
+                    fprintf(stderr,"exec initozy\n");
+                    result=execl("initozy",NULL,NULL);
+                    fprintf(stderr,"exec returned %d\n",result);
+                    exit(result);
+                } else if(result>0) {
+                    // wait for the forked process to terminate
+                    dialog = gtk_message_dialog_new (NULL,
+                                                 GTK_DIALOG_DESTROY_WITH_PARENT,
+                                                 GTK_MESSAGE_INFO,
+                                                 GTK_BUTTONS_NONE,
+                                                 "Initializing Ozy");
+                    gtk_message_dialog_format_secondary_text(GTK_MESSAGE_DIALOG(dialog),"Please Wait ...");
+                    gtk_window_set_title(GTK_WINDOW(dialog),"GHPSDR");
+                    gtk_widget_show_all (dialog);
+                    while (gtk_events_pending ())
+                        gtk_main_iteration ();
+
+                    wait(&result);
+                    fprintf(stderr,"wait status=%d\n",result);
+                }
+                gtk_widget_destroy (dialog);
+                break;
+            default:
+                retry=FALSE;
+                break;
+        }
+            
+    } while(retry);
+
 
     strcpy(propertyPath,".ghpsdr.properties");
 
@@ -650,7 +712,7 @@ int main(int argc,char* argv[]) {
     restoreInitialState();
 
     initColors();
-    gtk_key_snooper_install((GtkKeySnoopFunc)keyboardSnooper,NULL);
+    //gtk_key_snooper_install((GtkKeySnoopFunc)keyboardSnooper,NULL);
 
     bandscopeRestoreState();
     bandscopeWindow=buildBandscopeUI();

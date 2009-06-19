@@ -94,7 +94,46 @@ extern int getADCOverflow();
 */
 extern void set122MHzSource(int source);
 
+/* --------------------------------------------------------------------------*/
+/**
+* @brief Get Bandscope spectrum samples
+*
+* @return
+*/
 void getSpectrumSamples(char *samples);
+
+
+/* --------------------------------------------------------------------------*/
+/**
+* @brief Get Ozy FX2 software version
+*
+* @return
+*/
+char* get_ozy_firmware_version();
+
+/* --------------------------------------------------------------------------*/
+/**
+* @brief Get Mercury software version
+*
+* @return
+*/
+int get_mercury_software_version();
+
+/* --------------------------------------------------------------------------*/
+/**
+* @brief Get Penelope software version
+*
+* @return
+*/
+int get_penelope_software_version();
+
+/* --------------------------------------------------------------------------*/
+/**
+* @brief Get Ozy software version
+*
+* @return
+*/
+int get_ozy_software_version();
 
 #ifdef	__cplusplus
 }

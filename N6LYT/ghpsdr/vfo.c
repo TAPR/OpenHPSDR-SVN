@@ -46,7 +46,7 @@ GtkWidget* vfoFixed;
 long long frequencyA=7100000LL;
 long long frequencyB=7100000LL;
 
-long long frequencyIF=0LL;
+long long frequencyLO=0LL;
 
 long long dspFrequency;
 long long ddsFrequency;
@@ -236,7 +236,7 @@ void setAFrequency(long long f) {
     frequencyA=f;
 
     dspFrequency=0;
-    ddsFrequency=f-frequencyIF;
+    ddsFrequency=f-frequencyLO;
 
     vfoSetRxFrequency();
 
@@ -574,8 +574,8 @@ void previousIncrement() {
 /** 
 * @brief Set IF frequency
 */
-void setIFFrequency(long long freq) {
-    frequencyIF=freq;
+void setLOFrequency(long long freq) {
+    frequencyLO=freq;
 }
 
 /* --------------------------------------------------------------------------*/

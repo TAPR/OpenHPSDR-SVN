@@ -529,17 +529,18 @@ int ozy_init(int sample_rate) {
     rc = libusb_open_ozy();
     if (rc != 0) {
         fprintf(stderr,"Cannot locate Ozy\n");
-        return (EXIT_FAILURE);
+        return (-1);
     }
 
     rc=libusb_get_ozy_firmware_string(ozy_firmware_version,8);
 
     if(rc!=0) {
         fprintf(stderr,"Failed to get Ozy Firmware Version - Have you run initozy yet?\n");
-        return (EXIT_FAILURE);
+        libusb_close_ozy();
+        return (-2);
     }
 
-    fprintf(stderr,"Ozy firmware version: %s\n",ozy_firmware_version);
+    fprintf(stderr,"Ozy FX2 version: %s\n",ozy_firmware_version);
     
     // setup ozy defaults
     int speed = SPEED_96KHZ;
@@ -619,4 +620,43 @@ int getADCOverflow() {
     return result;
 }
 
+/* --------------------------------------------------------------------------*/
+/** 
+* @brief Get Ozy FX2 firmware version
+* 
+* @return 
+*/
+char* get_ozy_firmware_version() {
+    return ozy_firmware_version;
+}
+
+/* --------------------------------------------------------------------------*/
+/** 
+* @brief Get Mercury software version
+* 
+* @return 
+*/
+int get_mercury_software_version() {
+    return mercury_software_version;
+}
+
+/* --------------------------------------------------------------------------*/
+/** 
+* @brief Get Penelope software version
+* 
+* @return 
+*/
+int get_penelope_software_version() {
+    return penelope_software_version;
+}
+
+/* --------------------------------------------------------------------------*/
+/** 
+* @brief Get Ozy software version
+* 
+* @return 
+*/
+int get_ozy_software_version() {
+    return ozy_software_version;
+}
 
