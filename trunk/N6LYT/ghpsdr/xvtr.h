@@ -33,7 +33,7 @@ struct _XVTR_ENTRY {
     long long frequency;
     long long frequencyMin;
     long long frequencyMax;
-    long long frequencyIF;
+    long long frequencyLO;
     int mode;
     int filter;
     int var1Low;

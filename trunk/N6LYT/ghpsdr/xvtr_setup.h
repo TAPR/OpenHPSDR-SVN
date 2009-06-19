@@ -1,5 +1,5 @@
 /** 
-* @file setup.h
+* @file xvtr_setup.h
 * @brief Setup functions
 * @author John Melton, G0ORX/N6LYT, Doxygen Comments Dave Larsen, KV0S
 * @version 0.1
@@ -26,7 +26,18 @@
 
 
 //
-// setup.h
+// xvtr_setup.h
 //
 
-void ghpsdr_setup();
+/* --------------------------------------------------------------------------*/
+/** 
+* @brief display setup UI
+*/
+GtkWidget* xvtrSetupUI();
+
+
+/* --------------------------------------------------------------------------*/
+/** 
+* @brief save XVTR settings
+*/
+void saveXvtrSettings();

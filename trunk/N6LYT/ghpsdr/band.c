@@ -35,6 +35,7 @@
 #include <math.h>
 #include <getopt.h>
 
+#include "xvtr.h"
 #include "band.h"
 #include "bandstack.h"
 #include "command.h"
@@ -47,7 +48,6 @@
 #include "vfo.h"
 #include "hardware.h"
 #include "spectrum.h"
-#include "xvtr.h"
 
 GtkWidget* bandFrame;
 GtkWidget* bandTable;
@@ -185,11 +185,133 @@ BAND_LIMITS bandLimits[NUM_BAND_LIMITS] = {
 * @brief xvtr
 */
 /* ----------------------------------------------------------------------------*/
-XVTR_ENTRY xvtr[12];
+XVTR_ENTRY xvtr[12]=
+    {{"",0LL,0LL,0LL,0LL,modeUSB,filterF5,-2800,-200,-2800,-200,100,0,-100,-180,10,-110,-140},
+     {"",0LL,0LL,0LL,0LL,modeUSB,filterF5,-2800,-200,-2800,-200,100,0,-100,-180,10,-110,-140},
+     {"",0LL,0LL,0LL,0LL,modeUSB,filterF5,-2800,-200,-2800,-200,100,0,-100,-180,10,-110,-140},
+     {"",0LL,0LL,0LL,0LL,modeUSB,filterF5,-2800,-200,-2800,-200,100,0,-100,-180,10,-110,-140},
+     {"",0LL,0LL,0LL,0LL,modeUSB,filterF5,-2800,-200,-2800,-200,100,0,-100,-180,10,-110,-140},
+     {"",0LL,0LL,0LL,0LL,modeUSB,filterF5,-2800,-200,-2800,-200,100,0,-100,-180,10,-110,-140},
+     {"",0LL,0LL,0LL,0LL,modeUSB,filterF5,-2800,-200,-2800,-200,100,0,-100,-180,10,-110,-140},
+     {"",0LL,0LL,0LL,0LL,modeUSB,filterF5,-2800,-200,-2800,-200,100,0,-100,-180,10,-110,-140},
+     {"",0LL,0LL,0LL,0LL,modeUSB,filterF5,-2800,-200,-2800,-200,100,0,-100,-180,10,-110,-140},
+     {"",0LL,0LL,0LL,0LL,modeUSB,filterF5,-2800,-200,-2800,-200,100,0,-100,-180,10,-110,-140},
+     {"",0LL,0LL,0LL,0LL,modeUSB,filterF5,-2800,-200,-2800,-200,100,0,-100,-180,10,-110,-140},
+     {"",0LL,0LL,0LL,0LL,modeUSB,filterF5,-2800,-200,-2800,-200,100,0,-100,-180,10,-110,-140}};
 
 void setTuningMode(int mode);
 void setBand(int band);
 void setIncrement(int increment);
+
+void setHFTitles() {
+    gtk_button_set_label((GtkButton*)buttonBand1,"160");
+    gtk_widget_set_sensitive(buttonBand1,TRUE);
+    gtk_button_set_label((GtkButton*)buttonBand2,"80");
+    gtk_widget_set_sensitive(buttonBand2,TRUE);
+    gtk_button_set_label((GtkButton*)buttonBand3,"60");
+    gtk_widget_set_sensitive(buttonBand3,TRUE);
+    gtk_button_set_label((GtkButton*)buttonBand4,"40");
+    gtk_widget_set_sensitive(buttonBand4,TRUE);
+    gtk_button_set_label((GtkButton*)buttonBand5,"30");
+    gtk_widget_set_sensitive(buttonBand5,TRUE);
+    gtk_button_set_label((GtkButton*)buttonBand6,"20");
+    gtk_widget_set_sensitive(buttonBand6,TRUE);
+    gtk_button_set_label((GtkButton*)buttonBand7,"17");
+    gtk_widget_set_sensitive(buttonBand7,TRUE);
+    gtk_button_set_label((GtkButton*)buttonBand8,"15");
+    gtk_widget_set_sensitive(buttonBand8,TRUE);
+    gtk_button_set_label((GtkButton*)buttonBand9,"12");
+    gtk_widget_set_sensitive(buttonBand9,TRUE);
+    gtk_button_set_label((GtkButton*)buttonBand10,"10");
+    gtk_widget_set_sensitive(buttonBand10,TRUE);
+    gtk_button_set_label((GtkButton*)buttonBand11,"6");
+    gtk_widget_set_sensitive(buttonBand11,TRUE);
+    gtk_button_set_label((GtkButton*)buttonBand12,"GEN");
+    gtk_widget_set_sensitive(buttonBand12,TRUE);
+    gtk_button_set_label((GtkButton*)buttonBand13,"WWV");
+    gtk_widget_set_sensitive(buttonBand13,TRUE);
+    gtk_button_set_label((GtkButton*)buttonBand14,"XVTR");
+}
+
+void setXVTRTitles() {
+    gtk_button_set_label((GtkButton*)buttonBand1,xvtr[0].name);
+    if(strcmp(xvtr[0].name,"")==0) {
+        gtk_widget_set_sensitive(buttonBand1,FALSE);
+    } else {
+        gtk_widget_set_sensitive(buttonBand1,TRUE);
+    }
+    gtk_button_set_label((GtkButton*)buttonBand2,xvtr[1].name);
+    if(strcmp(xvtr[1].name,"")==0) {
+        gtk_widget_set_sensitive(buttonBand2,FALSE);
+    } else {
+        gtk_widget_set_sensitive(buttonBand2,TRUE);
+    }
+    gtk_button_set_label((GtkButton*)buttonBand3,xvtr[2].name);
+    if(strcmp(xvtr[2].name,"")==0) {
+        gtk_widget_set_sensitive(buttonBand3,FALSE);
+    } else {
+        gtk_widget_set_sensitive(buttonBand3,TRUE);
+    }
+    gtk_button_set_label((GtkButton*)buttonBand4,xvtr[3].name);
+    if(strcmp(xvtr[3].name,"")==0) {
+        gtk_widget_set_sensitive(buttonBand4,FALSE);
+    } else {
+        gtk_widget_set_sensitive(buttonBand4,TRUE);
+    }
+    gtk_button_set_label((GtkButton*)buttonBand5,xvtr[4].name);
+    if(strcmp(xvtr[4].name,"")==0) {
+        gtk_widget_set_sensitive(buttonBand5,FALSE);
+    } else {
+        gtk_widget_set_sensitive(buttonBand5,TRUE);
+    }
+    gtk_button_set_label((GtkButton*)buttonBand6,xvtr[5].name);
+    if(strcmp(xvtr[5].name,"")==0) {
+        gtk_widget_set_sensitive(buttonBand6,FALSE);
+    } else {
+        gtk_widget_set_sensitive(buttonBand6,TRUE);
+    }
+    gtk_button_set_label((GtkButton*)buttonBand7,xvtr[6].name);
+    if(strcmp(xvtr[6].name,"")==0) {
+        gtk_widget_set_sensitive(buttonBand7,FALSE);
+    } else {
+        gtk_widget_set_sensitive(buttonBand7,TRUE);
+    }
+    gtk_button_set_label((GtkButton*)buttonBand8,xvtr[7].name);
+    if(strcmp(xvtr[7].name,"")==0) {
+        gtk_widget_set_sensitive(buttonBand8,FALSE);
+    } else {
+        gtk_widget_set_sensitive(buttonBand8,TRUE);
+    }
+    gtk_button_set_label((GtkButton*)buttonBand9,xvtr[8].name);
+    if(strcmp(xvtr[8].name,"")==0) {
+        gtk_widget_set_sensitive(buttonBand9,FALSE);
+    } else {
+        gtk_widget_set_sensitive(buttonBand9,TRUE);
+    }
+    gtk_button_set_label((GtkButton*)buttonBand10,xvtr[9].name);
+    if(strcmp(xvtr[9].name,"")==0) {
+        gtk_widget_set_sensitive(buttonBand10,FALSE);
+    } else {
+        gtk_widget_set_sensitive(buttonBand10,TRUE);
+    }
+    gtk_button_set_label((GtkButton*)buttonBand11,xvtr[10].name);
+    if(strcmp(xvtr[10].name,"")==0) {
+        gtk_widget_set_sensitive(buttonBand11,FALSE);
+    } else {
+        gtk_widget_set_sensitive(buttonBand11,TRUE);
+    }
+    gtk_button_set_label((GtkButton*)buttonBand12,xvtr[11].name);
+    if(strcmp(xvtr[11].name,"")==0) {
+        gtk_widget_set_sensitive(buttonBand12,FALSE);
+    } else {
+        gtk_widget_set_sensitive(buttonBand12,TRUE);
+    }
+    gtk_button_set_label((GtkButton*)buttonBand13,"");
+    gtk_widget_set_sensitive(buttonBand13,FALSE);
+    gtk_button_set_label((GtkButton*)buttonBand14,"HF");
+}
+
+
 
 /* --------------------------------------------------------------------------*/
 /** 
@@ -218,7 +340,7 @@ void selectBand(GtkWidget* widget) {
         if(displayHF) {
             currentHFButton=currentBandButton;
             current=bandstack[band].current_entry;
-fprintf(stderr,"selectBand: saving current HF entry: band=%d stack=%d\n",band,current);
+fprintf(stderr,"selectBand: saving current HF entry: band=%d stack=%d frequency=%lld\n",band,current,frequencyA);
             entry=&bandstack[band].entry[current];
             entry->frequencyA=frequencyA;
             entry->mode=mode;
@@ -261,120 +383,20 @@ fprintf(stderr,"selectBand: saving current XVTR entry: band=%d\n",xvtr_band);
         if(displayHF) {
 fprintf(stderr,"selectBand: switching to HF\n");
             currentBandButton=NULL;
-            gtk_button_set_label((GtkButton*)buttonBand1,"160");
-            gtk_widget_set_sensitive(buttonBand1,TRUE);
-            gtk_button_set_label((GtkButton*)buttonBand2,"80");
-            gtk_widget_set_sensitive(buttonBand2,TRUE);
-            gtk_button_set_label((GtkButton*)buttonBand3,"60");
-            gtk_widget_set_sensitive(buttonBand3,TRUE);
-            gtk_button_set_label((GtkButton*)buttonBand4,"40");
-            gtk_widget_set_sensitive(buttonBand4,TRUE);
-            gtk_button_set_label((GtkButton*)buttonBand5,"30");
-            gtk_widget_set_sensitive(buttonBand5,TRUE);
-            gtk_button_set_label((GtkButton*)buttonBand6,"20");
-            gtk_widget_set_sensitive(buttonBand6,TRUE);
-            gtk_button_set_label((GtkButton*)buttonBand7,"17");
-            gtk_widget_set_sensitive(buttonBand7,TRUE);
-            gtk_button_set_label((GtkButton*)buttonBand8,"15");
-            gtk_widget_set_sensitive(buttonBand8,TRUE);
-            gtk_button_set_label((GtkButton*)buttonBand9,"12");
-            gtk_widget_set_sensitive(buttonBand9,TRUE);
-            gtk_button_set_label((GtkButton*)buttonBand10,"10");
-            gtk_widget_set_sensitive(buttonBand10,TRUE);
-            gtk_button_set_label((GtkButton*)buttonBand11,"6");
-            gtk_widget_set_sensitive(buttonBand11,TRUE);
-            gtk_button_set_label((GtkButton*)buttonBand12,"GEN");
-            gtk_widget_set_sensitive(buttonBand12,TRUE);
-            gtk_button_set_label((GtkButton*)buttonBand13,"WWV");
-            gtk_widget_set_sensitive(buttonBand13,TRUE);
-            gtk_button_set_label((GtkButton*)buttonBand14,"XVTR");
-            selectBand(currentHFButton);
+            setHFTitles();
+            setBand(band);
+            //selectBand(currentHFButton);
         } else {
 fprintf(stderr,"selectBand: switching to XVTR\n");
             currentBandButton=NULL;
-            gtk_button_set_label((GtkButton*)buttonBand1,xvtr[0].name);
-            if(strcmp(xvtr[0].name,"")==0) {
-                gtk_widget_set_sensitive(buttonBand1,FALSE);
-            } else {
-                gtk_widget_set_sensitive(buttonBand1,TRUE);
-            }
-            gtk_button_set_label((GtkButton*)buttonBand2,xvtr[1].name);
-            if(strcmp(xvtr[1].name,"")==0) {
-                gtk_widget_set_sensitive(buttonBand2,FALSE);
-            } else {
-                gtk_widget_set_sensitive(buttonBand2,TRUE);
-            }
-            gtk_button_set_label((GtkButton*)buttonBand3,xvtr[2].name);
-            if(strcmp(xvtr[2].name,"")==0) {
-                gtk_widget_set_sensitive(buttonBand3,FALSE);
-            } else {
-                gtk_widget_set_sensitive(buttonBand3,TRUE);
-            }
-            gtk_button_set_label((GtkButton*)buttonBand4,xvtr[3].name);
-            if(strcmp(xvtr[3].name,"")==0) {
-                gtk_widget_set_sensitive(buttonBand4,FALSE);
-            } else {
-                gtk_widget_set_sensitive(buttonBand4,TRUE);
-            }
-            gtk_button_set_label((GtkButton*)buttonBand5,xvtr[4].name);
-            if(strcmp(xvtr[4].name,"")==0) {
-                gtk_widget_set_sensitive(buttonBand5,FALSE);
-            } else {
-                gtk_widget_set_sensitive(buttonBand5,TRUE);
-            }
-            gtk_button_set_label((GtkButton*)buttonBand6,xvtr[5].name);
-            if(strcmp(xvtr[5].name,"")==0) {
-                gtk_widget_set_sensitive(buttonBand6,FALSE);
-            } else {
-                gtk_widget_set_sensitive(buttonBand6,TRUE);
-            }
-            gtk_button_set_label((GtkButton*)buttonBand7,xvtr[6].name);
-            if(strcmp(xvtr[6].name,"")==0) {
-                gtk_widget_set_sensitive(buttonBand7,FALSE);
-            } else {
-                gtk_widget_set_sensitive(buttonBand7,TRUE);
-            }
-            gtk_button_set_label((GtkButton*)buttonBand8,xvtr[7].name);
-            if(strcmp(xvtr[7].name,"")==0) {
-                gtk_widget_set_sensitive(buttonBand8,FALSE);
-            } else {
-                gtk_widget_set_sensitive(buttonBand8,TRUE);
-            }
-            gtk_button_set_label((GtkButton*)buttonBand9,xvtr[8].name);
-            if(strcmp(xvtr[8].name,"")==0) {
-                gtk_widget_set_sensitive(buttonBand9,FALSE);
-            } else {
-                gtk_widget_set_sensitive(buttonBand9,TRUE);
-            }
-            gtk_button_set_label((GtkButton*)buttonBand10,xvtr[9].name);
-            if(strcmp(xvtr[9].name,"")==0) {
-                gtk_widget_set_sensitive(buttonBand10,FALSE);
-            } else {
-                gtk_widget_set_sensitive(buttonBand10,TRUE);
-            }
-            gtk_button_set_label((GtkButton*)buttonBand11,xvtr[10].name);
-            if(strcmp(xvtr[10].name,"")==0) {
-                gtk_widget_set_sensitive(buttonBand11,FALSE);
-            } else {
-                gtk_widget_set_sensitive(buttonBand11,TRUE);
-            }
-            gtk_button_set_label((GtkButton*)buttonBand12,xvtr[11].name);
-            if(strcmp(xvtr[11].name,"")==0) {
-                gtk_widget_set_sensitive(buttonBand12,FALSE);
-            } else {
-                gtk_widget_set_sensitive(buttonBand12,TRUE);
-            }
-            gtk_button_set_label((GtkButton*)buttonBand13,"");
-            gtk_widget_set_sensitive(buttonBand13,FALSE);
-
-            gtk_button_set_label((GtkButton*)buttonBand14,"HF");
+            setXVTRTitles();
             setBand(xvtr_band);
             //selectBand(currentXVTRButton);
         }
     } else {
         if(displayHF) {
 fprintf(stderr,"HF band selected\n");
-            setIFFrequency(0LL);
+            setLOFrequency(0LL);
             if(currentBandButton==widget) {
                 bandstack[band].current_entry++;
                 if(bandstack[band].current_entry>=bandstack[band].entries) {
@@ -470,7 +492,7 @@ fprintf(stderr,"XVTR band selected: band=%d\n",xvtr_band);
             filterVar2Low=xvtr_entry->var2Low;
             filterVar2High=xvtr_entry->var2High;
             setFilter(xvtr_entry->filter);
-            setIFFrequency(xvtr_entry->frequencyIF);
+            setLOFrequency(xvtr_entry->frequencyLO);
             setAFrequency(xvtr_entry->frequency);
             setIncrement(xvtr_entry->step);
 
@@ -768,9 +790,14 @@ GtkWidget* buildBandUI() {
 
     configureXVTRButton();
 
+    if(!displayHF) {
+        setXVTRTitles();
+    }
+
     gtk_container_add(GTK_CONTAINER(bandFrame),bandTable);
     gtk_widget_show(bandTable);
     gtk_widget_show(bandFrame);
+
 
     return bandFrame;
   
@@ -812,23 +839,40 @@ void bandSaveState() {
     XVTR_ENTRY* xvtr_entry;
 
     //save current band info
-    current=bandstack[band].current_entry;
-    entry=&bandstack[band].entry[current];
-    entry->frequencyA=frequencyA;
-    entry->mode=mode;
-    entry->filter=filter;
-    entry->var1Low=filterVar1Low;
-    entry->var1High=filterVar1High;
-    entry->var2Low=filterVar2Low;
-    entry->var2High=filterVar2High;
-    entry->step=frequencyIncrement;
-    entry->preamp=Preamp;
-    entry->spectrumHigh=spectrumMAX;
-    entry->spectrumLow=spectrumMIN;
-    entry->spectrumStep=spectrumSTEP;
-    entry->waterfallHigh=waterfallHighThreshold;
-    entry->waterfallLow=waterfallLowThreshold;
-
+    if(displayHF) {
+        fprintf(stderr,"bandSaveState: saving current HF entry: band=%d stack=%d frequency=%lld\n",band,current,frequencyA);
+        current=bandstack[band].current_entry;
+        entry=&bandstack[band].entry[current];
+        entry->frequencyA=frequencyA;
+        entry->mode=mode;
+        entry->filter=filter;
+        entry->var1Low=filterVar1Low;
+        entry->var1High=filterVar1High;
+        entry->var2Low=filterVar2Low;
+        entry->var2High=filterVar2High;
+        entry->step=frequencyIncrement;
+        entry->preamp=Preamp;
+        entry->spectrumHigh=spectrumMAX;
+        entry->spectrumLow=spectrumMIN;
+        entry->spectrumStep=spectrumSTEP;
+        entry->waterfallHigh=waterfallHighThreshold;
+        entry->waterfallLow=waterfallLowThreshold;
+    } else {
+        xvtr_entry=&xvtr[xvtr_band];
+        xvtr_entry->frequency=frequencyA;
+        xvtr_entry->mode=mode;
+        xvtr_entry->filter=filter;
+        xvtr_entry->var1Low=filterVar1Low;
+        xvtr_entry->var1High=filterVar1High;
+        xvtr_entry->var2Low=filterVar2Low;
+        xvtr_entry->var2High=filterVar2High;
+        xvtr_entry->step=frequencyIncrement;
+        xvtr_entry->preamp=Preamp;
+        xvtr_entry->spectrumHigh=spectrumMAX;
+        xvtr_entry->spectrumLow=spectrumMIN;
+        xvtr_entry->spectrumStep=spectrumSTEP;
+        xvtr_entry->waterfallHigh=waterfallHighThreshold;
+    }
 
     int b;
     int stack;
@@ -928,8 +972,8 @@ void bandSaveState() {
             sprintf(name,"xvtr.%d.frequencyMax",b);
             setProperty(name,string);
 
-            sprintf(string,"%lld",xvtr_entry->frequencyIF);
-            sprintf(name,"xvtr.%d.frequencyIF",b);
+            sprintf(string,"%lld",xvtr_entry->frequencyLO);
+            sprintf(name,"xvtr.%d.frequencyLO",b);
             setProperty(name,string);
         }
     }
@@ -1099,6 +1143,7 @@ void bandRestoreState() {
             strcpy(xvtr_entry->name,value);
 
             sprintf(name,"xvtr.%d.frequency",b);
+
             value=getProperty(name);
             if(value) xvtr_entry->frequency=atoll(value);
 
@@ -1110,9 +1155,9 @@ void bandRestoreState() {
             value=getProperty(name);
             if(value) xvtr_entry->frequencyMax=atoll(value);
 
-            sprintf(name,"xvtr.%d.frequencyIF",b);
+            sprintf(name,"xvtr.%d.frequencyLO",b);
             value=getProperty(name);
-            if(value) xvtr_entry->frequencyIF=atoll(value);
+            if(value) xvtr_entry->frequencyLO=atoll(value);
 
             sprintf(name,"xvtr.%d.mode",b);
             value=getProperty(name);
@@ -1194,4 +1239,8 @@ BAND_LIMITS* getBandLimits(long long minDisplay,long long maxDisplay) {
     }
 
     return NULL;
+}
+
+XVTR_ENTRY* getXvtrEntry(int i) {
+    return &xvtr[i];
 }
