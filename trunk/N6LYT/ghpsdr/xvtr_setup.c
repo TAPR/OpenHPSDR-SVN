@@ -42,6 +42,32 @@ GtkWidget* minFrequency[12];
 GtkWidget* maxFrequency[12];
 GtkWidget* loFrequency[12];
 
+
+void validate_numeric(GtkEntry* entry,const gchar* text,gint length,gint* position,gpointer data) {
+  GtkEditable *editable = GTK_EDITABLE(entry);
+  int i, count=0;
+  gchar *result=g_new(gchar,length);
+
+  for (i=0; i < length; i++) {
+    if (!isdigit(text[i]))
+      continue;
+    result[count++]=text[i];
+  }
+  
+  if (count > 0) {
+    g_signal_handlers_block_by_func (G_OBJECT (editable),
+                                     G_CALLBACK (validate_numeric),
+                                     data);
+    gtk_editable_insert_text (editable, result, count, position);
+    g_signal_handlers_unblock_by_func (G_OBJECT (editable),
+                                       G_CALLBACK (validate_numeric),
+                                       data);
+  }
+  g_signal_stop_emission_by_name (G_OBJECT (editable), "insert_text");
+
+  g_free (result);
+}
+
 /* --------------------------------------------------------------------------*/
 /** 
 * @brief display setup UI
@@ -62,13 +88,13 @@ GtkWidget* xvtrSetupUI() {
     item=gtk_label_new("Button Label");
     gtk_widget_show(item);
     gtk_table_attach_defaults(GTK_TABLE(xvtrPage),item,1,2,0,1);
-    item=gtk_label_new("Min Frequency");
+    item=gtk_label_new("Min Frequency (Hz)");
     gtk_widget_show(item);
     gtk_table_attach_defaults(GTK_TABLE(xvtrPage),item,2,3,0,1);
-    item=gtk_label_new("Max Frequency");
+    item=gtk_label_new("Max Frequency (Hz)");
     gtk_widget_show(item);
     gtk_table_attach_defaults(GTK_TABLE(xvtrPage),item,3,4,0,1);
-    item=gtk_label_new("LO Frequency");
+    item=gtk_label_new("LO Frequency (Hz)");
     gtk_widget_show(item);
     gtk_table_attach_defaults(GTK_TABLE(xvtrPage),item,4,5,0,1);
 
@@ -80,7 +106,7 @@ GtkWidget* xvtrSetupUI() {
 
         xvtr_entry=getXvtrEntry(i);
 
-        item=gtk_entry_new();
+        item=gtk_entry_new_with_max_length(4);
         gtk_editable_set_editable(GTK_EDITABLE(item),TRUE);
         gtk_entry_set_text(GTK_ENTRY(item),xvtr_entry->name);
         gtk_widget_show(item);
@@ -88,24 +114,27 @@ GtkWidget* xvtrSetupUI() {
         buttonLabel[i]=item;
         
         sprintf(temp,"%lld",xvtr_entry->frequencyMin);
-        item=gtk_entry_new();
+        item=gtk_entry_new_with_max_length(12);
         gtk_editable_set_editable(GTK_EDITABLE(item),TRUE);
+        g_signal_connect(G_OBJECT(item),"insert_text",G_CALLBACK(validate_numeric),NULL);
         gtk_entry_set_text(GTK_ENTRY(item),temp);
         gtk_widget_show(item);
         gtk_table_attach_defaults(GTK_TABLE(xvtrPage),item,2,3,i+1,i+2);
         minFrequency[i]=item;
         
         sprintf(temp,"%lld",xvtr_entry->frequencyMax);
-        item=gtk_entry_new();
+        item=gtk_entry_new_with_max_length(12);
         gtk_editable_set_editable(GTK_EDITABLE(item),TRUE);
+        g_signal_connect(G_OBJECT(item),"insert_text",G_CALLBACK(validate_numeric),NULL);
         gtk_entry_set_text(GTK_ENTRY(item),temp);
         gtk_widget_show(item);
         gtk_table_attach_defaults(GTK_TABLE(xvtrPage),item,3,4,i+1,i+2);
         maxFrequency[i]=item;
         
         sprintf(temp,"%lld",xvtr_entry->frequencyLO);
-        item=gtk_entry_new();
+        item=gtk_entry_new_with_max_length(12);
         gtk_editable_set_editable(GTK_EDITABLE(item),TRUE);
+        g_signal_connect(G_OBJECT(item),"insert_text",G_CALLBACK(validate_numeric),NULL);
         gtk_entry_set_text(GTK_ENTRY(item),temp);
         gtk_widget_show(item);
         gtk_table_attach_defaults(GTK_TABLE(xvtrPage),item,4,5,i+1,i+2);
