@@ -42,11 +42,12 @@
 #include "cw.h"
 #include "filter.h"
 #include "main.h"
+#include "preamp.h"
 #include "property.h"
 #include "soundcard.h"
 #include "mode.h"
+#include "ozy.h"
 #include "vfo.h"
-#include "hardware.h"
 #include "spectrum.h"
 
 GtkWidget* bandFrame;
@@ -340,7 +341,6 @@ void selectBand(GtkWidget* widget) {
         if(displayHF) {
             currentHFButton=currentBandButton;
             current=bandstack[band].current_entry;
-fprintf(stderr,"selectBand: saving current HF entry: band=%d stack=%d frequency=%lld\n",band,current,frequencyA);
             entry=&bandstack[band].entry[current];
             entry->frequencyA=frequencyA;
             entry->mode=mode;
@@ -350,14 +350,13 @@ fprintf(stderr,"selectBand: saving current HF entry: band=%d stack=%d frequency=
             entry->var2Low=filterVar2Low;
             entry->var2High=filterVar2High;
             entry->step=frequencyIncrement;
-            entry->preamp=Preamp;
+            entry->preamp=preamp;
             entry->spectrumHigh=spectrumMAX;
             entry->spectrumLow=spectrumMIN;
             entry->spectrumStep=spectrumSTEP;
             entry->waterfallHigh=waterfallHighThreshold;
             entry->waterfallLow=waterfallLowThreshold;
         } else {
-fprintf(stderr,"selectBand: saving current XVTR entry: band=%d\n",xvtr_band);
             currentXVTRButton=currentBandButton;
             xvtr_entry=&xvtr[xvtr_band];
             xvtr_entry->frequency=frequencyA;
@@ -368,7 +367,7 @@ fprintf(stderr,"selectBand: saving current XVTR entry: band=%d\n",xvtr_band);
             xvtr_entry->var2Low=filterVar2Low;
             xvtr_entry->var2High=filterVar2High;
             xvtr_entry->step=frequencyIncrement;
-            xvtr_entry->preamp=Preamp;
+            xvtr_entry->preamp=preamp;
             xvtr_entry->spectrumHigh=spectrumMAX;
             xvtr_entry->spectrumLow=spectrumMIN;
             xvtr_entry->spectrumStep=spectrumSTEP;
@@ -381,13 +380,11 @@ fprintf(stderr,"selectBand: saving current XVTR entry: band=%d\n",xvtr_band);
         // XVTR / HF
         displayHF=!displayHF;
         if(displayHF) {
-fprintf(stderr,"selectBand: switching to HF\n");
             currentBandButton=NULL;
             setHFTitles();
             setBand(band);
             //selectBand(currentHFButton);
         } else {
-fprintf(stderr,"selectBand: switching to XVTR\n");
             currentBandButton=NULL;
             setXVTRTitles();
             setBand(xvtr_band);
@@ -395,7 +392,6 @@ fprintf(stderr,"selectBand: switching to XVTR\n");
         }
     } else {
         if(displayHF) {
-fprintf(stderr,"HF band selected\n");
             setLOFrequency(0LL);
             if(currentBandButton==widget) {
                 bandstack[band].current_entry++;
@@ -438,8 +434,7 @@ fprintf(stderr,"HF band selected\n");
             current=bandstack[band].current_entry;
             entry=&bandstack[band].entry[current];
 
-fprintf(stderr,"HF band selected: band=%d stack=%d\n",band,current);
-            setModeMode(entry->mode);
+            setMode(entry->mode);
             filterVar1Low=entry->var1Low;
             filterVar1High=entry->var1High;
             filterVar2Low=entry->var2Low;
@@ -449,13 +444,14 @@ fprintf(stderr,"HF band selected: band=%d stack=%d\n",band,current);
             setIncrement(entry->step);
 
             setPreamp(entry->preamp);
+            forcePreamp(entry->preamp);
+
             spectrumMAX=entry->spectrumHigh;
             spectrumMIN=entry->spectrumLow;
             spectrumSTEP=entry->spectrumStep;
             waterfallHighThreshold=entry->waterfallHigh;
             waterfallLowThreshold=entry->waterfallLow;
         } else {
-fprintf(stderr,"XVTR band selected\n");
             currentBandButton=widget;
 
             if(widget==buttonBand1) {
@@ -484,9 +480,8 @@ fprintf(stderr,"XVTR band selected\n");
                 xvtr_band=bandGen;
             }
 
-fprintf(stderr,"XVTR band selected: band=%d\n",xvtr_band);
             xvtr_entry=&xvtr[xvtr_band];
-            setModeMode(xvtr_entry->mode);
+            setMode(xvtr_entry->mode);
             filterVar1Low=xvtr_entry->var1Low;
             filterVar1High=xvtr_entry->var1High;
             filterVar2Low=xvtr_entry->var2Low;
@@ -497,6 +492,8 @@ fprintf(stderr,"XVTR band selected: band=%d\n",xvtr_band);
             setIncrement(xvtr_entry->step);
 
             setPreamp(xvtr_entry->preamp);
+            forcePreamp(xvtr_entry->preamp);
+
             spectrumMAX=xvtr_entry->spectrumHigh;
             spectrumMIN=xvtr_entry->spectrumLow;
             spectrumSTEP=xvtr_entry->spectrumStep;
@@ -840,7 +837,6 @@ void bandSaveState() {
 
     //save current band info
     if(displayHF) {
-        fprintf(stderr,"bandSaveState: saving current HF entry: band=%d stack=%d frequency=%lld\n",band,current,frequencyA);
         current=bandstack[band].current_entry;
         entry=&bandstack[band].entry[current];
         entry->frequencyA=frequencyA;
@@ -851,7 +847,7 @@ void bandSaveState() {
         entry->var2Low=filterVar2Low;
         entry->var2High=filterVar2High;
         entry->step=frequencyIncrement;
-        entry->preamp=Preamp;
+        entry->preamp=preamp;
         entry->spectrumHigh=spectrumMAX;
         entry->spectrumLow=spectrumMIN;
         entry->spectrumStep=spectrumSTEP;
@@ -867,7 +863,7 @@ void bandSaveState() {
         xvtr_entry->var2Low=filterVar2Low;
         xvtr_entry->var2High=filterVar2High;
         xvtr_entry->step=frequencyIncrement;
-        xvtr_entry->preamp=Preamp;
+        xvtr_entry->preamp=preamp;
         xvtr_entry->spectrumHigh=spectrumMAX;
         xvtr_entry->spectrumLow=spectrumMIN;
         xvtr_entry->spectrumStep=spectrumSTEP;

@@ -42,3 +42,4 @@ int spectrumUpdatesPerSecond;
 
 void newSpectrumUpdate();
 void stopSpectrumUpdate();
+void setSpectrumUpdateRate(int rate);

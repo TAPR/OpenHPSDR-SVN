@@ -35,7 +35,6 @@
 #include "main.h"
 #include "filter.h"
 #include "frequency.h"
-#include "hardware.h"
 #include "ozy.h"
 #include "property.h"
 #include "soundcard.h"
