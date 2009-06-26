@@ -211,11 +211,11 @@ GtkWidget* hpsdrSetupUI() {
     gtk_widget_show(speed48K);
     gtk_box_pack_start(GTK_BOX(box),speed48K,FALSE,FALSE,2);
     g_signal_connect(G_OBJECT(speed48K),"clicked",G_CALLBACK(speed48ButtonCallback),NULL);
-    speed96K=gtk_radio_button_new_with_label_from_widget(speed48K,"96K");
+    speed96K=gtk_radio_button_new_with_label_from_widget(GTK_RADIO_BUTTON(speed48K),"96K");
     gtk_widget_show(speed96K);
     gtk_box_pack_start(GTK_BOX(box),speed96K,FALSE,FALSE,2);
     g_signal_connect(G_OBJECT(speed96K),"clicked",G_CALLBACK(speed96ButtonCallback),NULL);
-    speed192K=gtk_radio_button_new_with_label_from_widget(speed48K,"192K");
+    speed192K=gtk_radio_button_new_with_label_from_widget(GTK_RADIO_BUTTON(speed48K),"192K");
     gtk_widget_show(speed192K);
     gtk_box_pack_start(GTK_BOX(box),speed192K,FALSE,FALSE,2);
     g_signal_connect(G_OBJECT(speed192K),"clicked",G_CALLBACK(speed192ButtonCallback),NULL);
@@ -245,7 +245,7 @@ GtkWidget* hpsdrSetupUI() {
     gtk_widget_show(penelope122_88MHz);
     gtk_box_pack_start(GTK_BOX(box),penelope122_88MHz,FALSE,FALSE,2);
     g_signal_connect(G_OBJECT(LT2208Random),"clicked",G_CALLBACK(penelope122_88MHzButtonCallback),NULL);
-    mercury122_88MHz=gtk_radio_button_new_with_label_from_widget(penelope122_88MHz,"Mercury");
+    mercury122_88MHz=gtk_radio_button_new_with_label_from_widget(GTK_RADIO_BUTTON(penelope122_88MHz),"Mercury");
     gtk_widget_show(mercury122_88MHz);
     gtk_box_pack_start(GTK_BOX(box),mercury122_88MHz,FALSE,FALSE,2);
     g_signal_connect(G_OBJECT(LT2208Random),"clicked",G_CALLBACK(mercury122_88MHzButtonCallback),NULL);
@@ -260,11 +260,11 @@ GtkWidget* hpsdrSetupUI() {
     gtk_widget_show(atlas10MHz);
     gtk_box_pack_start(GTK_BOX(box),atlas10MHz,FALSE,FALSE,2);
     g_signal_connect(G_OBJECT(atlas10MHz),"clicked",G_CALLBACK(atlas10MHzButtonCallback),NULL);
-    penelope10MHz=gtk_radio_button_new_with_label_from_widget(atlas10MHz,"Penelope");
+    penelope10MHz=gtk_radio_button_new_with_label_from_widget(GTK_RADIO_BUTTON(atlas10MHz),"Penelope");
     gtk_widget_show(penelope10MHz);
     gtk_box_pack_start(GTK_BOX(box),penelope10MHz,FALSE,FALSE,2);
     g_signal_connect(G_OBJECT(penelope10MHz),"clicked",G_CALLBACK(penelope10MHzButtonCallback),NULL);
-    mercury10MHz=gtk_radio_button_new_with_label_from_widget(atlas10MHz,"Mercury");
+    mercury10MHz=gtk_radio_button_new_with_label_from_widget(GTK_RADIO_BUTTON(atlas10MHz),"Mercury");
     gtk_widget_show(mercury10MHz);
     gtk_box_pack_start(GTK_BOX(box),mercury10MHz,FALSE,FALSE,2);
     g_signal_connect(G_OBJECT(mercury10MHz),"clicked",G_CALLBACK(mercury10MHzButtonCallback),NULL);
@@ -281,7 +281,7 @@ GtkWidget* hpsdrSetupUI() {
     gtk_widget_show(modeOther);
     gtk_box_pack_start(GTK_BOX(box),modeOther,FALSE,FALSE,2);
     g_signal_connect(G_OBJECT(modeOther),"clicked",G_CALLBACK(modeOtherButtonCallback),NULL);
-    modeClassE=gtk_radio_button_new_with_label_from_widget(modeOther,"Class E");
+    modeClassE=gtk_radio_button_new_with_label_from_widget(GTK_RADIO_BUTTON(modeOther),"Class E");
     gtk_widget_show(modeClassE);
     gtk_box_pack_start(GTK_BOX(box),modeClassE,FALSE,FALSE,2);
     g_signal_connect(G_OBJECT(modeClassE),"clicked",G_CALLBACK(modeClassEButtonCallback),NULL);
@@ -296,7 +296,7 @@ GtkWidget* hpsdrSetupUI() {
     gtk_widget_show(janusMicSource);
     gtk_box_pack_start(GTK_BOX(box),janusMicSource,FALSE,FALSE,2);
     g_signal_connect(G_OBJECT(janusMicSource),"clicked",G_CALLBACK(janusMicSourceButtonCallback),NULL);
-    penelopeMicSource=gtk_radio_button_new_with_label_from_widget(janusMicSource,"Penelope");
+    penelopeMicSource=gtk_radio_button_new_with_label_from_widget(GTK_RADIO_BUTTON(janusMicSource),"Penelope");
     gtk_widget_show(penelopeMicSource);
     gtk_box_pack_start(GTK_BOX(box),penelopeMicSource,FALSE,FALSE,2);
     g_signal_connect(G_OBJECT(penelopeMicSource),"clicked",G_CALLBACK(penelopeMicSourceButtonCallback),NULL);
@@ -311,15 +311,15 @@ GtkWidget* hpsdrSetupUI() {
     gtk_widget_show(alexAttenuation0Db);
     gtk_box_pack_start(GTK_BOX(box),alexAttenuation0Db,FALSE,FALSE,2);
     g_signal_connect(G_OBJECT(alexAttenuation0Db),"clicked",G_CALLBACK(alexAttenuation0DbButtonCallback),NULL);
-    alexAttenuation10Db=gtk_radio_button_new_with_label_from_widget(alexAttenuation0Db,"10Db");
+    alexAttenuation10Db=gtk_radio_button_new_with_label_from_widget(GTK_RADIO_BUTTON(alexAttenuation0Db),"10Db");
     gtk_widget_show(alexAttenuation10Db);
     gtk_box_pack_start(GTK_BOX(box),alexAttenuation10Db,FALSE,FALSE,2);
     g_signal_connect(G_OBJECT(alexAttenuation10Db),"clicked",G_CALLBACK(alexAttenuation10DbButtonCallback),NULL);
-    alexAttenuation20Db=gtk_radio_button_new_with_label_from_widget(alexAttenuation0Db,"20Db");
+    alexAttenuation20Db=gtk_radio_button_new_with_label_from_widget(GTK_RADIO_BUTTON(alexAttenuation0Db),"20Db");
     gtk_widget_show(alexAttenuation20Db);
     gtk_box_pack_start(GTK_BOX(box),alexAttenuation20Db,FALSE,FALSE,2);
     g_signal_connect(G_OBJECT(alexAttenuation20Db),"clicked",G_CALLBACK(alexAttenuation20DbButtonCallback),NULL);
-    alexAttenuation30Db=gtk_radio_button_new_with_label_from_widget(alexAttenuation0Db,"30Db");
+    alexAttenuation30Db=gtk_radio_button_new_with_label_from_widget(GTK_RADIO_BUTTON(alexAttenuation0Db),"30Db");
     gtk_widget_show(alexAttenuation30Db);
     gtk_box_pack_start(GTK_BOX(box),alexAttenuation30Db,FALSE,FALSE,2);
     g_signal_connect(G_OBJECT(alexAttenuation30Db),"clicked",G_CALLBACK(alexAttenuation30DbButtonCallback),NULL);
@@ -329,56 +329,56 @@ GtkWidget* hpsdrSetupUI() {
 
     switch(speed) {
         case 0:
-            gtk_toggle_button_set_active(speed48K,TRUE);
+            gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(speed48K),TRUE);
             break;
         case 1:
-            gtk_toggle_button_set_active(speed96K,TRUE);
+            gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(speed96K),TRUE);
             break;
         case 2:
-            gtk_toggle_button_set_active(speed192K,TRUE);
+            gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(speed192K),TRUE);
             break;
     }
 
     
-    gtk_toggle_button_set_active(LT2208Dither,lt2208Dither);
-    gtk_toggle_button_set_active(LT2208Random,lt2208Random);
+    gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(LT2208Dither),lt2208Dither);
+    gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(LT2208Random),lt2208Random);
 
     switch(clock122_88MHz) {
         case 0:
-            gtk_toggle_button_set_active(penelope122_88MHz,TRUE);
+            gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(penelope122_88MHz),TRUE);
             break;
         case 1:
-            gtk_toggle_button_set_active(mercury122_88MHz,TRUE);
+            gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(mercury122_88MHz),TRUE);
             break;
     }
 
     switch(clock10MHz) {
         case 0:
-            gtk_toggle_button_set_active(atlas10MHz,TRUE);
+            gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(atlas10MHz),TRUE);
             break;
         case 1:
-            gtk_toggle_button_set_active(penelope10MHz,TRUE);
+            gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(penelope10MHz),TRUE);
             break;
         case 2:
-            gtk_toggle_button_set_active(mercury10MHz,TRUE);
+            gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(mercury10MHz),TRUE);
             break;
     }
 
     switch(class) {
         case 0:
-            gtk_toggle_button_set_active(modeOther,TRUE);
+            gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(modeOther),TRUE);
             break;
         case 1:
-            gtk_toggle_button_set_active(modeClassE,TRUE);
+            gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(modeClassE),TRUE);
             break;
     }
 
     switch(micSource) {
         case 0:
-            gtk_toggle_button_set_active(janusMicSource,TRUE);
+            gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(janusMicSource),TRUE);
             break;
         case 1:
-            gtk_toggle_button_set_active(penelopeMicSource,TRUE);
+            gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(penelopeMicSource),TRUE);
             break;
     }
 
