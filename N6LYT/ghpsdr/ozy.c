@@ -17,6 +17,7 @@
 #include "ozy.h"
 #include "ozy_buffers.h"
 #include "ozy_ringbuffer.h"
+#include "property.h"
 #include "spectrum_buffers.h"
 #include "dttsp.h"
 #include "util.h"
