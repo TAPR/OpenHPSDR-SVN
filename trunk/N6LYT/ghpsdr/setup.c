@@ -31,6 +31,7 @@
 
 #include <gtk/gtk.h>
 #include "display_setup.h"
+#include "hpsdr_setup.h"
 #include "xvtr_setup.h"
 
 GtkWidget* setupWindow=NULL;
@@ -52,6 +53,10 @@ void ghpsdr_setup() {
 
         setupNotebook=gtk_notebook_new();
 
+        page=hpsdrSetupUI();
+        gtk_notebook_append_page(GTK_NOTEBOOK(setupNotebook),page,gtk_label_new("HPSDR"));
+        gtk_widget_show(page);
+
         page=displaySetupUI();
         gtk_notebook_append_page(GTK_NOTEBOOK(setupNotebook),page,gtk_label_new("Display"));
         gtk_widget_show(page);
@@ -59,6 +64,10 @@ void ghpsdr_setup() {
         page=xvtrSetupUI();
         gtk_notebook_append_page(GTK_NOTEBOOK(setupNotebook),page,gtk_label_new("XVTR"));
         gtk_widget_show(page);
+
+        //hardwareInit();
+        //clock122_88Init();
+        //clock10Init();
 
         gtk_widget_show(setupNotebook);
         gtk_container_add(GTK_CONTAINER(setupWindow), setupNotebook);

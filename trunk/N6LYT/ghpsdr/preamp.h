@@ -1,11 +1,11 @@
 /** 
-* @file clock10.h
-* @brief Header files for access 122.88 MHz clock HPSDR board  
-  @author John Melton, G0ORX/N6LYT, Doxygen Comments Dave Larsen, KV0S
+* @file preamp.h
+* @brief Preamp files for GHPSDR
+* @author John Melton, G0ORX/N6LYT, Doxygen Comments Dave Larsen, KV0S
 * @version 0.1
 * @date 2009-04-11
 */
-// clock10.h
+
 
 /* Copyright (C) 
 * 2009 - John Melton, G0ORX/N6LYT, Doxygen Comments Dave Larsen, KV0S
@@ -25,8 +25,19 @@
 * 
 */
 
-GtkWidget* buildClock10UI();
-void clock10SaveState();
-void clock10RestoreState();
-void clock10Init();
+/* --------------------------------------------------------------------------*/
+/** 
+* @brief Build Preamp User Interface 
+* 
+* @return GtkWidget pointer 
+*/
+GtkWidget* buildPreampUI();
+
+/* --------------------------------------------------------------------------*/
+/** 
+* @brief force preamp button state
+* 
+* @return
+*/
+void forcePreamp(int state);
 

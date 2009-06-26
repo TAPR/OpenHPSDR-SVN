@@ -108,12 +108,10 @@
 #include "dttsp.h"
 #include "filter.h"
 #include "main.h"
-#include "hardware.h"
-#include "clock122_88.h"
-#include "clock10.h"
 #include "meter.h"
 #include "meter_update.h"
 #include "ozy.h"
+#include "preamp.h"
 #include "property.h"
 #include "soundcard.h"
 #include "spectrum.h"
@@ -156,13 +154,11 @@ GtkWidget* modeWindow;
 GtkWidget* displayWindow;
 GtkWidget* filterWindow;
 GtkWidget* audioWindow;
-GtkWidget* hardwareWindow;
-GtkWidget* clock122_88Window;
-GtkWidget* clock10Window;
 GtkWidget* meterWindow;
 GtkWidget* bandscopeWindow;
 GtkWidget* bandscope_controlWindow;
 GtkWidget* agcWindow;
+GtkWidget* preampWindow;
 GtkWidget* receiverWindow;
 GtkWidget* volumeWindow;
 
@@ -210,14 +206,12 @@ void quit() {
     displaySaveState();
     filterSaveState();
     audioSaveState();
-    hardwareSaveState();
-    clock122_88SaveState();
-    clock10SaveState();
     bandscopeSaveState();
     bandscope_controlSaveState();
     agcSaveState();
     receiverSaveState();
     volumeSaveState();
+    ozySaveState();
 
     saveProperties(propertyPath);
 
@@ -419,17 +413,9 @@ void buildMainUI() {
     gtk_widget_show(agcWindow);
     gtk_fixed_put((GtkFixed*)mainFixed,agcWindow,5,475);
 
-    // add the hardware window
-    gtk_widget_show(hardwareWindow);
-    gtk_fixed_put((GtkFixed*)mainFixed,hardwareWindow,210,600);
-
-    // add the 122.88 MHz clock window
-    gtk_widget_show(clock122_88Window);
-    gtk_fixed_put((GtkFixed*)mainFixed,clock122_88Window,460,600);
-
-    // add the 10 MHz clock window
-    gtk_widget_show(clock10Window);
-    gtk_fixed_put((GtkFixed*)mainFixed,clock10Window,660,600);
+    // add the preamp window
+    gtk_widget_show(preampWindow);
+    gtk_fixed_put((GtkFixed*)mainFixed,preampWindow,5,525);
 
     // add the volume window
     gtk_widget_show(volumeWindow);
@@ -626,6 +612,11 @@ int main(int argc,char* argv[]) {
 
     fprintf(stderr,"ghpsdr Version %s\n",VERSION);
 
+    strcpy(propertyPath,".ghpsdr.properties");
+    strcpy(soundCardName,"UNSUPPORTED_CARD");
+    processCommands(argc,argv);
+    loadProperties(propertyPath);
+
     // initialize DttSP
     Setup_SDR();
     Release_Update();
@@ -637,11 +628,11 @@ int main(int argc,char* argv[]) {
     reset_for_buflen(0,1024);
     reset_for_buflen(1,1024);
 
-
     // initialize ozy (default 48K)
+    ozyRestoreState();
     do {
 
-        switch(ozy_init(48000)) {
+        switch(ozy_init()) {
             case -1: // cannot find ozy
                 dialog = gtk_message_dialog_new (NULL,
                                                  GTK_DIALOG_DESTROY_WITH_PARENT,
@@ -695,13 +686,6 @@ int main(int argc,char* argv[]) {
     } while(retry);
 
 
-    strcpy(propertyPath,".ghpsdr.properties");
-
-    strcpy(soundCardName,"UNSUPPORTED_CARD");
-
-    processCommands(argc,argv);
-
-    loadProperties(propertyPath);
 
     mainRootX=0;
     mainRootY=0;
@@ -745,14 +729,7 @@ int main(int argc,char* argv[]) {
     agcRestoreState();
     agcWindow=buildAgcUI();
 
-    hardwareRestoreState();
-    hardwareWindow=buildHardwareUI();
-
-    clock122_88RestoreState();
-    clock122_88Window=buildClock122_88UI();
-
-    clock10RestoreState();
-    clock10Window=buildClock10UI();
+    preampWindow=buildPreampUI();
 
     receiverRestoreState();
     receiverWindow=buildReceiverUI();
@@ -766,9 +743,6 @@ int main(int argc,char* argv[]) {
     buildMainUI();
 
     setSoundcard(getSoundcardId(soundCardName));
-    hardwareInit();
-    clock122_88Init();
-    clock10Init();
 
     gtk_main();
 

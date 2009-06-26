@@ -12,6 +12,8 @@
 #include <semaphore.h>
 #include <time.h>
 
+#include <gtk/gtk.h>
+
 #include "ozy.h"
 #include "ozy_buffers.h"
 #include "ozy_ringbuffer.h"
@@ -19,6 +21,9 @@
 #include "dttsp.h"
 #include "util.h"
 #include "libusbio.h"
+#include "filter.h"
+#include "volume.h"
+#include "mode.h"
 
 /*
  *   ozy interface
@@ -81,6 +86,17 @@ unsigned char spectrum_samples[SPECTRUM_BUFFER_SIZE];
 
 int lt2208ADCOverflow=0;
 
+int speed=0;           // default 48K
+int class=0;           // default other
+int lt2208Dither=1;    // default dither on
+int lt2208Random=1;    // default random 0n
+int alexAttenuation=0; // default alex attenuation 0Db
+int micSource=1;       // default mic source Penelope
+int clock10MHz=2;      // default 10 MHz clock source Mercury
+int clock122_88MHz=1;  // default 122.88 MHz clock source Mercury
+int preamp=0;          // default preamp off
+
+int sampleRate=48000;  // default 48k
 /* --------------------------------------------------------------------------*/
 /** 
 * @brief Process the ozy input buffer
@@ -380,15 +396,34 @@ void setMOX(int state) {
 * 
 * @param speed
 */
-void setSpeed(int speed) {
+void setSpeed(int s) {
+    speed=s;
     control_out[1]=control_out[1]&0xFC;
-    control_out[1]=control_out[1]|speed;
-    if(speed==SPEED_48KHZ) {
+    control_out[1]=control_out[1]|s;
+    if(s==SPEED_48KHZ) {
         output_sample_increment=1;
-    } else if(speed==SPEED_96KHZ) {
+        sampleRate=48000;
+        SetSampleRate((double)sampleRate);
+        SetRXOsc(0,0,0.0);
+        setFilter(filter);
+        setMode(mode);
+        SetRXOutputGain(0,0,volume/100.0);
+    } else if(s==SPEED_96KHZ) {
         output_sample_increment=2;
-    } else if(speed==SPEED_192KHZ) {
+        sampleRate=96000;
+        SetSampleRate((double)sampleRate);
+        SetRXOsc(0,0,0.0);
+        setFilter(filter);
+        setMode(mode);
+        SetRXOutputGain(0,0,volume/100.0);
+    } else if(s==SPEED_192KHZ) {
         output_sample_increment=4;
+        sampleRate=192000;
+        SetSampleRate((double)sampleRate);
+        SetRXOsc(0,0,0.0);
+        setFilter(filter);
+        setMode(mode);
+        SetRXOutputGain(0,0,volume/100.0);
     }
 }
 
@@ -399,6 +434,7 @@ void setSpeed(int speed) {
 * @param source
 */
 void set10MHzSource(int source) {
+    clock10MHz=source;
     control_out[1]=control_out[1]&0xF3;
     control_out[1]=control_out[1]|(source<<2);
 }
@@ -410,6 +446,7 @@ void set10MHzSource(int source) {
 * @param source
 */
 void set122MHzSource(int source) {
+    clock122_88MHz=source;
     control_out[1]=control_out[1]&0xEF;
     control_out[1]=control_out[1]|(source<<4);
 }
@@ -433,19 +470,21 @@ void setConfig(int config) {
 * @param source
 */
 void setMicSource(int source) {
+    micSource=source;
     control_out[1]=control_out[1]&0x7F;
     control_out[1]=control_out[1]|(source<<7);
 }
 
 /* --------------------------------------------------------------------------*/
 /** 
-* @brief Set the mode
+* @brief Set the class
 * 
-* @param mode
+* @param class
 */
-void setMode(int mode) {
+void setClass(int c) {
+    class=c;
     control_out[2]=control_out[2]&0xFE;
-    control_out[2]=control_out[2]|mode;
+    control_out[2]=control_out[2]|c;
 }
 
 /* --------------------------------------------------------------------------*/
@@ -461,13 +500,14 @@ void setOCOutputs(int outputs) {
 
 /* --------------------------------------------------------------------------*/
 /** 
-* @brief Set the Alex attenuator
+* @brief Set the Alex attenuation
 * 
-* @param attenuator
+* @param attenuation
 */
-void setAlexAttenuator(int attenuator) {
+void setAlexAttenuation(int attenuation) {
+    alexAttenuation=attenuation;
     control_out[3]=control_out[3]&0xFC;
-    control_out[3]=control_out[3]|attenuator;
+    control_out[3]=control_out[3]|attenuation;
 }
 
 /* --------------------------------------------------------------------------*/
@@ -476,9 +516,10 @@ void setAlexAttenuator(int attenuator) {
 * 
 * @param gain
 */
-void setPreampGain(int gain) {
+void setPreamp(int p) {
+    preamp=p;
     control_out[3]=control_out[3]&0xFB;
-    control_out[3]=control_out[3]|(gain<<2);
+    control_out[3]=control_out[3]|(p<<2);
 }
 
 /* --------------------------------------------------------------------------*/
@@ -488,6 +529,7 @@ void setPreampGain(int gain) {
 * @param dither
 */
 void setLT2208Dither(int dither) {
+    lt2208Dither=dither;
     control_out[3]=control_out[3]&0xF7;
     control_out[3]=control_out[3]|(dither<<3);
 }
@@ -499,6 +541,7 @@ void setLT2208Dither(int dither) {
 * @param random
 */
 void setLT2208Random(int random) {
+    lt2208Random=random;
     control_out[3]=control_out[3]&0xEF;
     control_out[3]=control_out[3]|(random<<4);
 }
@@ -522,8 +565,22 @@ void setFrequency(double f) {
 * 
 * @return 
 */
-int ozy_init(int sample_rate) {
+int ozy_init() {
     int rc;
+
+    // setup defaults
+    control_out[0] = MOX_DISABLED;
+    control_out[1] = CONFIG_MERCURY
+            | MERCURY_122_88MHZ_SOURCE
+            | MERCURY_10MHZ_SOURCE
+            | speed
+            | MIC_SOURCE_PENELOPE;
+    control_out[2] = MODE_OTHERS;
+    control_out[3] = ALEX_ATTENUATION_0DB
+            | LT2208_GAIN_OFF
+            | LT2208_DITHER_ON
+            | LT2208_RANDOM_ON;
+    control_out[4] = 0;
 
     // open ozy
     rc = libusb_open_ozy();
@@ -542,37 +599,18 @@ int ozy_init(int sample_rate) {
 
     fprintf(stderr,"Ozy FX2 version: %s\n",ozy_firmware_version);
     
-    // setup ozy defaults
-    int speed = SPEED_96KHZ;
-
-    switch (sample_rate) {
+    switch(speed) {
         case 48000:
-            speed = SPEED_48KHZ;
             output_sample_increment = 1;
             break;
         case 96000:
-            speed = SPEED_96KHZ;
             output_sample_increment = 2;
             break;
         case 192000:
-            speed = SPEED_192KHZ;
             output_sample_increment = 4;
             break;
     }
 
-    // setup defaults
-    control_out[0] = MOX_DISABLED;
-    control_out[1] = CONFIG_MERCURY
-            | MERCURY_122_88MHZ_SOURCE
-            | MERCURY_10MHZ_SOURCE
-            | speed
-            | MIC_SOURCE_PENELOPE;
-    control_out[2] = MODE_OTHERS;
-    control_out[3] = ALEX_ATTENUATION_0DB
-            | LT2208_GAIN_OFF
-            | LT2208_DITHER_ON
-            | LT2208_RANDOM_ON;
-    control_out[4] = 0;
 
     // create buffers of ozy
     create_ozy_ringbuffer(68*512);
@@ -658,5 +696,87 @@ int get_penelope_software_version() {
 */
 int get_ozy_software_version() {
     return ozy_software_version;
+}
+
+/* --------------------------------------------------------------------------*/
+/** 
+* @brief save Ozy state
+* 
+* @return 
+*/
+void ozySaveState() {
+    char string[128];
+    sprintf(string,"%d",clock10MHz);
+    setProperty("10MHzClock",string);
+    sprintf(string,"%d",clock122_88MHz);
+    setProperty("122_88MHzClock",string);
+    sprintf(string,"%d",micSource);
+    setProperty("micSource",string);
+    sprintf(string,"%d",class);
+    setProperty("class",string);
+    sprintf(string,"%d",lt2208Dither);
+    setProperty("lt2208Dither",string);
+    sprintf(string,"%d",lt2208Random);
+    setProperty("lt2208Random",string);
+    sprintf(string,"%d",alexAttenuation);
+    setProperty("alexAttenuation",string);
+    sprintf(string,"%d",preamp);
+    setProperty("preamp",string);
+    sprintf(string,"%d",speed);
+    setProperty("speed",string);
+    sprintf(string,"%d",sampleRate);
+    setProperty("sampleRate",string);
+
+}
+
+/* --------------------------------------------------------------------------*/
+/** 
+* @brief resore Ozy state
+* 
+* @return 
+*/
+void ozyRestoreState() {
+    char *value;
+
+    value=getProperty("10MHzClock");
+    if(value) {
+        set10MHzSource(atoi(value));
+    }
+    value=getProperty("122_88MHzClock");
+    if(value) {
+        set122MHzSource(atoi(value));
+    }
+    value=getProperty("micSource");
+    if(value) {
+        setMicSource(atoi(value));
+    }
+    value=getProperty("class");
+    if(value) {
+        setMode(atoi(value));
+    }
+    value=getProperty("lt2208Dither");
+    if(value) {
+        setLT2208Dither(atoi(value));
+    }
+    value=getProperty("lt2208Random");
+    if(value) {
+        setLT2208Random(atoi(value));
+    }
+    value=getProperty("alexAttenuation");
+    if(value) {
+        setAlexAttenuation(atoi(value));
+    }
+    value=getProperty("preamp");
+    if(value) {
+        setPreamp(atoi(value));
+    }
+    value=getProperty("speed");
+    if(value) {
+        setSpeed(atoi(value));
+    }
+    value=getProperty("sampleRate");
+    if(value) {
+        sampleRate=atoi(value);
+    }
 }
 

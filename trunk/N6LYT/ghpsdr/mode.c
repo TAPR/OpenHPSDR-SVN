@@ -129,7 +129,7 @@ void selectMode(GtkWidget* widget) {
 * 
 * @param mode
 */
-void setModeMode(int mode) {
+void setMode(int mode) {
     GtkWidget* widget;
     switch(mode) {
         case modeLSB:

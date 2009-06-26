@@ -68,6 +68,18 @@ extern "C" {
 #define LT2208_RANDOM_OFF         0x00
 #define LT2208_RANDOM_ON          0x10
 
+int speed;
+int class;
+int lt2208Dither;
+int lt2208Random;
+int alexAttenuation;
+int micSource;
+int clock10MHz;
+int clock122_88MHz;
+int preamp;
+
+int sampleRate;
+
 /* --------------------------------------------------------------------------*/
 /** 
 * @brief Initialize the Ozy interface 
@@ -75,6 +87,14 @@ extern "C" {
 * @return 
 */
 extern int ozy_init();
+
+/* --------------------------------------------------------------------------*/
+/** 
+* @brief set preamp
+* 
+* @return 
+*/
+extern void setPreamp();
 
 /* --------------------------------------------------------------------------*/
 /** 
@@ -134,6 +154,30 @@ int get_penelope_software_version();
 * @return
 */
 int get_ozy_software_version();
+
+/* --------------------------------------------------------------------------*/
+/**
+* @brief save Ozy state
+*
+* @return
+*/
+void ozySaveState();
+
+/* --------------------------------------------------------------------------*/
+/**
+* @brief restore Ozy state
+*
+* @return
+*/
+void ozyRestoreState();
+
+/* --------------------------------------------------------------------------*/
+/**
+* @brief set speed
+*
+* @return
+*/
+void setSpeed(int s);
 
 #ifdef	__cplusplus
 }

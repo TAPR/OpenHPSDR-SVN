@@ -36,7 +36,6 @@
 #include <math.h>
 
 #include "main.h"
-#include "hardware.h"
 #include "meter.h"
 #include "meter_update.h"
 #include "property.h"

@@ -1,11 +1,10 @@
 /** 
-* @file hardware.h
-* @brief Header files for access Hardware receiver HPSDR board  
-  @author John Melton, G0ORX/N6LYT, Doxygen Comments Dave Larsen, KV0S
+* @file hpsdr_setup.h
+* @brief Setup functions
+* @author John Melton, G0ORX/N6LYT, Doxygen Comments Dave Larsen, KV0S
 * @version 0.1
-* @date 2009-04-11
+* @date 2009-04-12
 */
-// hardware.h
 
 /* Copyright (C) 
 * 2009 - John Melton, G0ORX/N6LYT, Doxygen Comments Dave Larsen, KV0S
@@ -25,13 +24,13 @@
 * 
 */
 
-gboolean Preamp;
 
-float preampOffset;
+//
+// hpsdr_setup.h
+//
 
-GtkWidget* buildHardwareUI();
-void hardwareSaveState();
-void hardwareRestoreState();
-void setPreamp(gboolean state);
-void hardwareInit();
-
+/* --------------------------------------------------------------------------*/
+/** 
+* @brief hpsdr setup UI
+*/
+GtkWidget* hpsdrSetupUI();

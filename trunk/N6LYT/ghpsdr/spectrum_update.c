@@ -60,6 +60,16 @@ void stopSpectrumUpdate() {
 
 /* --------------------------------------------------------------------------*/
 /** 
+* @brief set spectrum update rate
+*/
+void setSpectrumUpdateRate(int rate) {
+    stopSpectrumUpdate();
+    spectrumUpdatesPerSecond=rate;
+    newSpectrumUpdate();
+}
+
+/* --------------------------------------------------------------------------*/
+/** 
 * @brief Spectrum update 
 * 
 * @param data
