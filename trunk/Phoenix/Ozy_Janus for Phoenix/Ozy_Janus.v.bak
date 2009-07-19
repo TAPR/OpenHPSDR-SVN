@@ -186,13 +186,16 @@
 //							 - Compiled with Quartus V8.0
 //				19 Nov  2008 - Added test code for Phoenix i.e. calculate phase word and 
 //							   send via Atlas bus C21
-//				30 Mar  2009 - Moved C21 to C24 so as not to clash with latest Mercury code 
+//				30 Mar  2009 - Moved C21 to C24 so as not to clash with latest Mercury code
+//               *****  This version is for Phoenix only **************
+//				18 Apr  2009 - Changed Penelope ref to 50MHz 
+//				18 July 2009 - Chaged  Phoenix ref to 25MHz **** not yet! 
 //
 ////////////////////////////////////////////////////////////
 
 //////////////////////////////////////////////////////////////
 //
-//              Quartus V7.1 Notes
+//              Quartus V7.1/8.0/8.1/9.0 Notes
 //
 //////////////////////////////////////////////////////////////
 
@@ -1376,7 +1379,7 @@ end
 //////////////////////////////////////////////////////////////
 
 /*	
-	Calculates  phase_word = (frequency * 2^32) /960e6  i.e. 48MHz clock x 20 in AD9912
+	Calculates  phase_word = (frequency * 2^32) /1000e6  i.e. 50MHz clock x 20 in AD9912
 	Each calculation takes ~ 1.5uS @ 48MHz
 	This method is quite fast enough and uses much fewer LEs than a Megafunction.
 	
@@ -1390,7 +1393,7 @@ begin
 	freq <= frequency;	// frequency is current frequency in Hz e.g. 14,195,000Hz
 end 
 
-division division_phoenix(.quotient(phase_word),.ready(ready),.dividend(freq),.divider(32'd960000000),.clk(IFCLK));
+division division_phoenix(.quotient(phase_word),.ready(ready),.dividend(freq),.divider(32'd1000000000),.clk(IFCLK));
 
 ///////////////////////////////////////////////////////////////
 //
@@ -1399,7 +1402,7 @@ division division_phoenix(.quotient(phase_word),.ready(ready),.dividend(freq),.d
 ///////////////////////////////////////////////////////////////
 
 /*
-	The temp C&C encoder broadcasts data over the Atlas bus C21 for
+	The temp C&C encoder broadcasts data over the Atlas bus C24 for
 	use by Phoenix.  The data is in pseudo I2S format with the clock
       being CBLCK and the start of each frame being indicated using the
       negative edge of CLRCLK.
@@ -1415,7 +1418,7 @@ division division_phoenix(.quotient(phase_word),.ready(ready),.dividend(freq),.d
 */
 
 wire [32:0]phoenix_data;		// current phoenix C&C data
-reg  PCC;					// C&C data out to Atlas bus C21
+reg  PCC;					// C&C data out to Atlas bus C24
 
 assign phoenix_data = {PTT_out,phase_word}; // concatenate data to send 
 

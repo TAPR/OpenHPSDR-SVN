@@ -188,7 +188,8 @@
 //							   send via Atlas bus C21
 //				30 Mar  2009 - Moved C21 to C24 so as not to clash with latest Mercury code
 //               *****  This version is for Phoenix only **************
-//				18 Apr  2009 - Changed Penelope ref to 50MHz  
+//				18 Apr  2009 - Changed Phoenix ref to 50MHz 
+//				18 July 2009 - Chaged  Phoenix ref to 25MHz hence 500MHz ref in DDS chip  
 //
 ////////////////////////////////////////////////////////////
 
@@ -1392,7 +1393,11 @@ begin
 	freq <= frequency;	// frequency is current frequency in Hz e.g. 14,195,000Hz
 end 
 
-division division_phoenix(.quotient(phase_word),.ready(ready),.dividend(freq),.divider(32'd1000000000),.clk(IFCLK));
+// use this version for 50MHz clock and x20 to give 1GHz ref for DDS 
+//division division_phoenix(.quotient(phase_word),.ready(ready),.dividend(freq),.divider(32'd1000000000),.clk(IFCLK));
+
+// use this version for 25MHz clock and x20 to give 500MHz clock for DDS 
+division division_phoenix(.quotient(phase_word),.ready(ready),.dividend(freq),.divider(32'd500000000),.clk(IFCLK));
 
 ///////////////////////////////////////////////////////////////
 //

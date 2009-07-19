@@ -2,6 +2,6 @@ Info (10281): Verilog HDL Declaration information at SPI.v(85): object "SPI_cloc
 Warning (10273): Verilog HDL warning at gpio_control.v(46): extended using "x" or "z"
 Warning (10273): Verilog HDL warning at gpio_control.v(47): extended using "x" or "z"
 Warning (10273): Verilog HDL warning at gpio_control.v(48): extended using "x" or "z"
-Warning (10273): Verilog HDL warning at Ozy_Janus.v(990): extended using "x" or "z"
 Warning (10273): Verilog HDL warning at Ozy_Janus.v(991): extended using "x" or "z"
-Info (10281): Verilog HDL Declaration information at Ozy_Janus.v(868): object "Rx_fifo" differs only in case from object "Rx_FIFO" in the same scope
+Warning (10273): Verilog HDL warning at Ozy_Janus.v(992): extended using "x" or "z"
+Info (10281): Verilog HDL Declaration information at Ozy_Janus.v(869): object "Rx_fifo" differs only in case from object "Rx_FIFO" in the same scope
