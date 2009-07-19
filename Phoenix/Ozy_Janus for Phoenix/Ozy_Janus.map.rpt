@@ -1,5 +1,5 @@
 Analysis & Synthesis report for Ozy_Janus
-Sat Apr 18 16:12:30 2009
+Sun Jul 19 11:37:21 2009
 Quartus II Version 9.0 Build 132 02/25/2009 SJ Web Edition
 
 
@@ -98,7 +98,7 @@ applicable agreement for further details.
 +------------------------------------------------------------------------------+
 ; Analysis & Synthesis Summary                                                 ;
 +------------------------------------+-----------------------------------------+
-; Analysis & Synthesis Status        ; Successful - Sat Apr 18 16:12:30 2009   ;
+; Analysis & Synthesis Status        ; Successful - Sun Jul 19 11:37:21 2009   ;
 ; Quartus II Version                 ; 9.0 Build 132 02/25/2009 SJ Web Edition ;
 ; Revision Name                      ; Ozy_Janus                               ;
 ; Top-level Entity Name              ; Ozy_Janus                               ;
@@ -270,13 +270,13 @@ applicable agreement for further details.
 ;                                             ;       ;
 ; Total combinational functions               ; 1019  ;
 ; Logic element usage by number of LUT inputs ;       ;
-;     -- 4 input functions                    ; 443   ;
+;     -- 4 input functions                    ; 444   ;
 ;     -- 3 input functions                    ; 238   ;
-;     -- <=2 input functions                  ; 338   ;
+;     -- <=2 input functions                  ; 337   ;
 ;                                             ;       ;
 ; Logic elements by mode                      ;       ;
-;     -- normal mode                          ; 752   ;
-;     -- arithmetic mode                      ; 267   ;
+;     -- normal mode                          ; 751   ;
+;     -- arithmetic mode                      ; 268   ;
 ;                                             ;       ;
 ; Total registers                             ; 1049  ;
 ;     -- Dedicated logic registers            ; 1049  ;
@@ -286,7 +286,7 @@ applicable agreement for further details.
 ; Total memory bits                           ; 98304 ;
 ; Maximum fan-out node                        ; IFCLK ;
 ; Maximum fan-out                             ; 238   ;
-; Total fan-out                               ; 6990  ;
+; Total fan-out                               ; 6993  ;
 ; Average fan-out                             ; 3.19  ;
 +---------------------------------------------+-------+
 
@@ -296,7 +296,7 @@ applicable agreement for further details.
 +-----------------------------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+------------------------------------------------------------------------------------------------------------------------------------+--------------+
 ; Compilation Hierarchy Node                    ; LC Combinationals ; LC Registers ; Memory Bits ; DSP Elements ; DSP 9x9 ; DSP 18x18 ; Pins ; Virtual Pins ; Full Hierarchy Name                                                                                                                ; Library Name ;
 +-----------------------------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+------------------------------------------------------------------------------------------------------------------------------------+--------------+
-; |Ozy_Janus                                    ; 1019 (452)        ; 1049 (397)   ; 98304       ; 0            ; 0       ; 0         ; 89   ; 0            ; |Ozy_Janus                                                                                                                         ; work         ;
+; |Ozy_Janus                                    ; 1019 (451)        ; 1049 (397)   ; 98304       ; 0            ; 0       ; 0         ; 89   ; 0            ; |Ozy_Janus                                                                                                                         ; work         ;
 ;    |I2SAudioOut:I2SAO|                        ; 46 (46)           ; 40 (40)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Ozy_Janus|I2SAudioOut:I2SAO                                                                                                       ; work         ;
 ;    |I2SAudioOut:I2SIQO|                       ; 46 (46)           ; 40 (40)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Ozy_Janus|I2SAudioOut:I2SIQO                                                                                                      ; work         ;
 ;    |Rx_fifo:Rx_fifo|                          ; 85 (0)            ; 132 (0)      ; 65536       ; 0            ; 0       ; 0         ; 0    ; 0            ; |Ozy_Janus|Rx_fifo:Rx_fifo                                                                                                         ; work         ;
@@ -345,7 +345,7 @@ applicable agreement for further details.
 ;    |debounce:de_PTT|                          ; 21 (21)           ; 24 (24)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Ozy_Janus|debounce:de_PTT                                                                                                         ; work         ;
 ;    |debounce:de_dash|                         ; 21 (21)           ; 24 (24)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Ozy_Janus|debounce:de_dash                                                                                                        ; work         ;
 ;    |debounce:de_dot|                          ; 21 (21)           ; 24 (24)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Ozy_Janus|debounce:de_dot                                                                                                         ; work         ;
-;    |division:division_phoenix|                ; 131 (131)         ; 136 (136)    ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Ozy_Janus|division:division_phoenix                                                                                               ; work         ;
+;    |division:division_phoenix|                ; 132 (132)         ; 136 (136)    ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Ozy_Janus|division:division_phoenix                                                                                               ; work         ;
 ;    |flash:flash_LED|                          ; 28 (28)           ; 21 (21)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Ozy_Janus|flash:flash_LED                                                                                                         ; work         ;
 ;    |gpio_control:gpio_controlSDR|             ; 45 (0)            ; 42 (0)       ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Ozy_Janus|gpio_control:gpio_controlSDR                                                                                            ; work         ;
 ;       |RegisterX:port0reg|                    ; 1 (1)             ; 8 (8)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Ozy_Janus|gpio_control:gpio_controlSDR|RegisterX:port0reg                                                                         ; work         ;
@@ -500,7 +500,7 @@ Encoding Type:  User-Encoded
 ; Statistic                                    ; Value ;
 +----------------------------------------------+-------+
 ; Total registers                              ; 1049  ;
-; Number of registers using Synchronous Clear  ; 108   ;
+; Number of registers using Synchronous Clear  ; 109   ;
 ; Number of registers using Synchronous Load   ; 73    ;
 ; Number of registers using Asynchronous Clear ; 51    ;
 ; Number of registers using Asynchronous Load  ; 0     ;
@@ -514,7 +514,7 @@ Encoding Type:  User-Encoded
 +--------------------+-----------+---------------+----------------------+------------------------+------------+--------------------------------------------------------------------+
 ; Multiplexer Inputs ; Bus Width ; Baseline Area ; Area if Restructured ; Saving if Restructured ; Registered ; Example Multiplexer Output                                         ;
 +--------------------+-----------+---------------+----------------------+------------------------+------------+--------------------------------------------------------------------+
-; 3:1                ; 23 bits   ; 46 LEs        ; 46 LEs               ; 0 LEs                  ; Yes        ; |Ozy_Janus|division:division_phoenix|qr[88]                        ;
+; 3:1                ; 24 bits   ; 48 LEs        ; 48 LEs               ; 0 LEs                  ; Yes        ; |Ozy_Janus|division:division_phoenix|qr[88]                        ;
 ; 3:1                ; 7 bits    ; 14 LEs        ; 7 LEs                ; 7 LEs                  ; Yes        ; |Ozy_Janus|loop_counter[3]                                         ;
 ; 3:1                ; 18 bits   ; 36 LEs        ; 18 LEs               ; 18 LEs                 ; Yes        ; |Ozy_Janus|debounce:de_dot|count[3]                                ;
 ; 3:1                ; 18 bits   ; 36 LEs        ; 18 LEs               ; 18 LEs                 ; Yes        ; |Ozy_Janus|debounce:de_PTT|count[10]                               ;
@@ -1024,21 +1024,21 @@ Note: In order to hide this table in the UI and the text report file, please set
 +-----------------+-------+----------+------------------+
 ; Port            ; Type  ; Severity ; Details          ;
 +-----------------+-------+----------+------------------+
-; divider[29..27] ; Input ; Info     ; Stuck at VCC     ;
-; divider[25..23] ; Input ; Info     ; Stuck at VCC     ;
-; divider[20..19] ; Input ; Info     ; Stuck at VCC     ;
-; divider[15..14] ; Input ; Info     ; Stuck at VCC     ;
-; divider[31..30] ; Input ; Info     ; Stuck at GND     ;
-; divider[22..21] ; Input ; Info     ; Stuck at GND     ;
-; divider[13..12] ; Input ; Info     ; Stuck at GND     ;
-; divider[8..0]   ; Input ; Info     ; Stuck at GND     ;
-; divider[26]     ; Input ; Info     ; Stuck at GND     ;
-; divider[18]     ; Input ; Info     ; Stuck at GND     ;
-; divider[17]     ; Input ; Info     ; Stuck at VCC     ;
-; divider[16]     ; Input ; Info     ; Stuck at GND     ;
-; divider[11]     ; Input ; Info     ; Stuck at VCC     ;
-; divider[10]     ; Input ; Info     ; Stuck at GND     ;
-; divider[9]      ; Input ; Info     ; Stuck at VCC     ;
+; divider[28..26] ; Input ; Info     ; Stuck at VCC     ;
+; divider[24..22] ; Input ; Info     ; Stuck at VCC     ;
+; divider[19..18] ; Input ; Info     ; Stuck at VCC     ;
+; divider[14..13] ; Input ; Info     ; Stuck at VCC     ;
+; divider[31..29] ; Input ; Info     ; Stuck at GND     ;
+; divider[21..20] ; Input ; Info     ; Stuck at GND     ;
+; divider[12..11] ; Input ; Info     ; Stuck at GND     ;
+; divider[7..0]   ; Input ; Info     ; Stuck at GND     ;
+; divider[25]     ; Input ; Info     ; Stuck at GND     ;
+; divider[17]     ; Input ; Info     ; Stuck at GND     ;
+; divider[16]     ; Input ; Info     ; Stuck at VCC     ;
+; divider[15]     ; Input ; Info     ; Stuck at GND     ;
+; divider[10]     ; Input ; Info     ; Stuck at VCC     ;
+; divider[9]      ; Input ; Info     ; Stuck at GND     ;
+; divider[8]      ; Input ; Info     ; Stuck at VCC     ;
 +-----------------+-------+----------+------------------+
 
 
@@ -1119,7 +1119,7 @@ Note: In order to hide this table in the UI and the text report file, please set
 Info: *******************************************************************
 Info: Running Quartus II Analysis & Synthesis
     Info: Version 9.0 Build 132 02/25/2009 SJ Web Edition
-    Info: Processing started: Sat Apr 18 16:12:21 2009
+    Info: Processing started: Sun Jul 19 11:37:10 2009
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off Ozy_Janus -c Ozy_Janus
 Info: Found 1 design units, including 1 entities, in source file division.v
     Info: Found entity 1: division
@@ -1383,9 +1383,9 @@ Info: Implemented 1692 device resources after synthesis - the final resource cou
     Info: Implemented 32 RAM segments
 Info: Generated suppressed messages file C:/HPSDR/trunk/Phoenix/Ozy_Janus for Phoenix/Ozy_Janus.map.smsg
 Info: Quartus II Analysis & Synthesis was successful. 0 errors, 47 warnings
-    Info: Peak virtual memory: 186 megabytes
-    Info: Processing ended: Sat Apr 18 16:12:31 2009
-    Info: Elapsed time: 00:00:10
+    Info: Peak virtual memory: 187 megabytes
+    Info: Processing ended: Sun Jul 19 11:37:21 2009
+    Info: Elapsed time: 00:00:11
     Info: Total CPU time (on all processors): 00:00:09
 
 

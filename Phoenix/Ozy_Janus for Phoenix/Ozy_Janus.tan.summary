@@ -5,19 +5,19 @@ Timing Analyzer Summary
 Type           : Worst-case tsu
 Slack          : N/A
 Required Time  : None
-Actual Time    : 8.826 ns
-From           : FLAGC
-To             : SLWR~reg0
+Actual Time    : 8.592 ns
+From           : GPIO[21]
+To             : gpio_control:gpio_controlSDR|SPI_REGS:spi_regs|sdata[5]
 From Clock     : --
-To Clock       : IFCLK
+To Clock       : SPI_SCK
 Failed Paths   : 0
 
 Type           : Worst-case tco
 Slack          : N/A
 Required Time  : None
-Actual Time    : 22.436 ns
-From           : Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_qqj1:auto_generated|op_1~16_OTERM43
-To             : DEBUG_LED3
+Actual Time    : 22.489 ns
+From           : LessThan0~2_OTERM219
+To             : DEBUG_LED2
 From Clock     : IFCLK
 To Clock       : --
 Failed Paths   : 0
@@ -25,7 +25,7 @@ Failed Paths   : 0
 Type           : Worst-case tpd
 Slack          : N/A
 Required Time  : None
-Actual Time    : 11.565 ns
+Actual Time    : 11.682 ns
 From           : SDOBACK
 To             : FX2_PE1
 From Clock     : --
@@ -35,112 +35,112 @@ Failed Paths   : 0
 Type           : Worst-case th
 Slack          : N/A
 Required Time  : None
-Actual Time    : 4.404 ns
-From           : CDOUT_P
-To             : Tx_q[0]
+Actual Time    : 5.787 ns
+From           : MDOUT
+To             : q[0]
 From Clock     : --
 To Clock       : IFCLK
 Failed Paths   : 0
 
 Type           : Clock Setup: 'IFCLK'
-Slack          : -0.359 ns
+Slack          : -0.075 ns
 Required Time  : 48.00 MHz ( period = 20.833 ns )
-Actual Time    : 46.40 MHz ( period = 21.550 ns )
-From           : CCcount[2]
+Actual Time    : 47.66 MHz ( period = 20.982 ns )
+From           : CCcount[0]
 To             : PCC~reg0
 From Clock     : IFCLK
 To Clock       : IFCLK
 Failed Paths   : 1
 
 Type           : Clock Setup: 'MCLK_12MHZ'
-Slack          : -0.047 ns
+Slack          : 0.260 ns
 Required Time  : 48.00 MHz ( period = 20.833 ns )
-Actual Time    : 47.79 MHz ( period = 20.926 ns )
-From           : CCcount[2]
+Actual Time    : 49.23 MHz ( period = 20.312 ns )
+From           : CCcount[0]
 To             : PCC~reg0
 From Clock     : MCLK_12MHZ
 To Clock       : MCLK_12MHZ
-Failed Paths   : 1
+Failed Paths   : 0
 
 Type           : Clock Setup: 'SPI_SCK'
-Slack          : 11.711 ns
+Slack          : 13.006 ns
 Required Time  : 48.00 MHz ( period = 20.833 ns )
-Actual Time    : 109.63 MHz ( period = 9.122 ns )
-From           : gpio_control:gpio_controlSDR|SPI_REGS:spi_regs|saddr[5]
-To             : gpio_control:gpio_controlSDR|SPI_REGS:spi_regs|sdata[3]
+Actual Time    : 127.76 MHz ( period = 7.827 ns )
+From           : gpio_control:gpio_controlSDR|SPI_REGS:spi_regs|saddr[1]
+To             : gpio_control:gpio_controlSDR|SPI_REGS:spi_regs|sdata[2]
 From Clock     : SPI_SCK
 To Clock       : SPI_SCK
 Failed Paths   : 0
 
 Type           : Clock Setup: 'FX2_CLK'
-Slack          : 16.789 ns
+Slack          : 17.111 ns
 Required Time  : 48.00 MHz ( period = 20.833 ns )
-Actual Time    : 247.28 MHz ( period = 4.044 ns )
+Actual Time    : 268.67 MHz ( period = 3.722 ns )
 From           : gpio_control:gpio_controlSDR|SPI_REGS:spi_regs|CS_ph1
-To             : gpio_control:gpio_controlSDR|RegisterX:port1reg|OUT[0]
+To             : gpio_control:gpio_controlSDR|RegisterX:port0reg|OUT[5]
 From Clock     : FX2_CLK
 To Clock       : FX2_CLK
 Failed Paths   : 0
 
 Type           : Clock Setup: 'PCLK_12MHZ'
-Slack          : 29.509 ns
+Slack          : 29.416 ns
 Required Time  : 12.50 MHz ( period = 80.000 ns )
-Actual Time    : 47.66 MHz ( period = 20.982 ns )
-From           : CCcount[2]
+Actual Time    : 47.24 MHz ( period = 21.168 ns )
+From           : CCcount[0]
 To             : PCC~reg0
 From Clock     : PCLK_12MHZ
 To Clock       : PCLK_12MHZ
 Failed Paths   : 0
 
 Type           : Clock Setup: 'CLK_12MHZ'
-Slack          : 29.527 ns
+Slack          : 30.475 ns
 Required Time  : 12.29 MHz ( period = 81.380 ns )
-Actual Time    : 44.79 MHz ( period = 22.326 ns )
-From           : CCcount[2]
+Actual Time    : 48.95 MHz ( period = 20.430 ns )
+From           : CCcount[0]
 To             : PCC~reg0
 From Clock     : CLK_12MHZ
 To Clock       : CLK_12MHZ
 Failed Paths   : 0
 
 Type           : Clock Hold: 'IFCLK'
-Slack          : -6.095 ns
+Slack          : -6.847 ns
 Required Time  : 48.00 MHz ( period = 20.833 ns )
 Actual Time    : N/A
-From           : division:division_phoenix|quotient[1]
+From           : division:division_phoenix|quotient[12]
 To             : PCC~reg0
 From Clock     : IFCLK
 To Clock       : IFCLK
-Failed Paths   : 374
-
-Type           : Clock Hold: 'CLK_12MHZ'
-Slack          : -5.067 ns
-Required Time  : 12.29 MHz ( period = 81.380 ns )
-Actual Time    : N/A
-From           : AK_reset~reg0
-To             : DFS1~reg0
-From Clock     : CLK_12MHZ
-To Clock       : CLK_12MHZ
-Failed Paths   : 465
+Failed Paths   : 989
 
 Type           : Clock Hold: 'PCLK_12MHZ'
-Slack          : -4.395 ns
+Slack          : -6.027 ns
 Required Time  : 12.50 MHz ( period = 80.000 ns )
 Actual Time    : N/A
 From           : AK_reset~reg0
-To             : DFS1~reg0
+To             : DFS0~reg0
 From Clock     : PCLK_12MHZ
 To Clock       : PCLK_12MHZ
-Failed Paths   : 294
+Failed Paths   : 974
+
+Type           : Clock Hold: 'CLK_12MHZ'
+Slack          : -5.658 ns
+Required Time  : 12.29 MHz ( period = 81.380 ns )
+Actual Time    : N/A
+From           : AK_reset~reg0
+To             : DFS0~reg0
+From Clock     : CLK_12MHZ
+To Clock       : CLK_12MHZ
+Failed Paths   : 740
 
 Type           : Clock Hold: 'MCLK_12MHZ'
-Slack          : -4.367 ns
+Slack          : -5.599 ns
 Required Time  : 48.00 MHz ( period = 20.833 ns )
 Actual Time    : N/A
 From           : AK_reset~reg0
-To             : DFS1~reg0
+To             : DFS0~reg0
 From Clock     : MCLK_12MHZ
 To Clock       : MCLK_12MHZ
-Failed Paths   : 288
+Failed Paths   : 697
 
 Type           : Clock Hold: 'SPI_SCK'
 Slack          : 0.499 ns
@@ -153,7 +153,7 @@ To Clock       : SPI_SCK
 Failed Paths   : 0
 
 Type           : Clock Hold: 'FX2_CLK'
-Slack          : 1.205 ns
+Slack          : 0.914 ns
 Required Time  : 48.00 MHz ( period = 20.833 ns )
 Actual Time    : N/A
 From           : gpio_control:gpio_controlSDR|SPI_REGS:spi_regs|CS_ph1
@@ -170,7 +170,7 @@ From           :
 To             : 
 From Clock     : 
 To Clock       : 
-Failed Paths   : 1423
+Failed Paths   : 3401
 
 --------------------------------------------------------------------------------------
 
