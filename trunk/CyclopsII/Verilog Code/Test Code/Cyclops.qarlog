@@ -1,0 +1,33 @@
+Quartus II Archive log --	C:/HPSDR/trunk/VK6APH/Cyclops/Cyclops.qarlog
+
+Archive:	C:/HPSDR/trunk/VK6APH/Cyclops/Cyclops.qar
+Date:		Thu Apr 10 15:52:48 2008
+Quartus II		7.2 Build 151 09/26/2007 SJ Web Edition
+
+	=========== Files Selected: ===========
+C:/HPSDR/trunk/VK6APH/Cyclops/Cyclops.asm.rpt
+C:/HPSDR/trunk/VK6APH/Cyclops/Cyclops.done
+C:/HPSDR/trunk/VK6APH/Cyclops/Cyclops.fit.rpt
+C:/HPSDR/trunk/VK6APH/Cyclops/Cyclops.fit.summary
+C:/HPSDR/trunk/VK6APH/Cyclops/Cyclops.flow.rpt
+C:/HPSDR/trunk/VK6APH/Cyclops/Cyclops.map.rpt
+C:/HPSDR/trunk/VK6APH/Cyclops/Cyclops.map.smsg
+C:/HPSDR/trunk/VK6APH/Cyclops/Cyclops.map.summary
+C:/HPSDR/trunk/VK6APH/Cyclops/Cyclops.pin
+C:/HPSDR/trunk/VK6APH/Cyclops/Cyclops.qarlog
+C:/HPSDR/trunk/VK6APH/Cyclops/Cyclops.qsf
+C:/HPSDR/trunk/VK6APH/Cyclops/Cyclops.sim.rpt
+C:/HPSDR/trunk/VK6APH/Cyclops/Cyclops.tan.rpt
+C:/HPSDR/trunk/VK6APH/Cyclops/Cyclops.tan.summary
+C:/HPSDR/trunk/VK6APH/Cyclops/Cyclops.v
+C:/HPSDR/trunk/VK6APH/Cyclops/Cyclops.vwf
+C:/HPSDR/trunk/VK6APH/Cyclops/LMX2326_SPI.v
+C:/HPSDR/trunk/VK6APH/Cyclops/SPI.v
+C:/HPSDR/trunk/VK6APH/Cyclops/db/Cyclops.cbx.xml
+C:/HPSDR/trunk/VK6APH/Cyclops/db/Cyclops.qpf
+C:/HPSDR/trunk/VK6APH/Cyclops/db/Cyclops.sim.cvwf
+c:/altera/72/quartus/bin/assignment_defaults.qdf
+	======= Total: 22 files to archive =======
+
+	================ Status: ===============
+All files archived successfully.

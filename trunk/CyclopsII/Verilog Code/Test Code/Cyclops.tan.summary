@@ -1,0 +1,66 @@
+--------------------------------------------------------------------------------------
+Timing Analyzer Summary
+--------------------------------------------------------------------------------------
+
+Type           : Worst-case tco
+Slack          : N/A
+Required Time  : None
+Actual Time    : 16.948 ns
+From           : SPI_state[0]
+To             : LE1
+From Clock     : IFCLK
+To Clock       : --
+Failed Paths   : 0
+
+Type           : Clock Setup: 'IFCLK'
+Slack          : 19.385 ns
+Required Time  : 48.00 MHz ( period = 20.833 ns )
+Actual Time    : Restricted to 340.02 MHz ( period = 2.941 ns )
+From           : spi_clock[1]
+To             : spi_clock[2]
+From Clock     : IFCLK
+To Clock       : IFCLK
+Failed Paths   : 0
+
+Type           : Clock Setup: 'clock'
+Slack          : 197.186 ns
+Required Time  : 4.80 MHz ( period = 208.330 ns )
+Actual Time    : 89.73 MHz ( period = 11.144 ns )
+From           : SPI_state[1]
+To             : ADF4112_SPI:ADF4112|SPI_data
+From Clock     : clock
+To Clock       : clock
+Failed Paths   : 0
+
+Type           : Clock Hold: 'clock'
+Slack          : 0.499 ns
+Required Time  : 4.80 MHz ( period = 208.330 ns )
+Actual Time    : N/A
+From           : ADF4112_SPI:ADF4112|SPI_LE
+To             : ADF4112_SPI:ADF4112|SPI_LE
+From Clock     : clock
+To Clock       : clock
+Failed Paths   : 0
+
+Type           : Clock Hold: 'IFCLK'
+Slack          : 0.499 ns
+Required Time  : 48.00 MHz ( period = 20.833 ns )
+Actual Time    : N/A
+From           : spi_clock[2]
+To             : spi_clock[2]
+From Clock     : IFCLK
+To Clock       : IFCLK
+Failed Paths   : 0
+
+Type           : Total number of failed paths
+Slack          : 
+Required Time  : 
+Actual Time    : 
+From           : 
+To             : 
+From Clock     : 
+To Clock       : 
+Failed Paths   : 0
+
+--------------------------------------------------------------------------------------
+

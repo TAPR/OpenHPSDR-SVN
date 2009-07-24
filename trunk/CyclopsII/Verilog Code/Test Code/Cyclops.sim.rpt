@@ -1,0 +1,247 @@
+Simulator report for Cyclops
+Thu Apr 10 15:08:57 2008
+Quartus II Version 7.2 Build 151 09/26/2007 SJ Web Edition
+
+
+---------------------
+; Table of Contents ;
+---------------------
+  1. Legal Notice
+  2. Simulator Summary
+  3. Simulator Settings
+  4. Simulation Waveforms
+  5. Coverage Summary
+  6. Complete 1/0-Value Coverage
+  7. Missing 1-Value Coverage
+  8. Missing 0-Value Coverage
+  9. Simulator INI Usage
+ 10. Simulator Messages
+
+
+
+----------------
+; Legal Notice ;
+----------------
+Copyright (C) 1991-2007 Altera Corporation
+Your use of Altera Corporation's design tools, logic functions 
+and other software and tools, and its AMPP partner logic 
+functions, and any output files from any of the foregoing 
+(including device programming or simulation files), and any 
+associated documentation or information are expressly subject 
+to the terms and conditions of the Altera Program License 
+Subscription Agreement, Altera MegaCore Function License 
+Agreement, or other applicable license agreement, including, 
+without limitation, that your use is for the sole purpose of 
+programming logic devices manufactured by Altera and sold by 
+Altera or its authorized distributors.  Please refer to the 
+applicable agreement for further details.
+
+
+
++--------------------------------------------+
+; Simulator Summary                          ;
++-----------------------------+--------------+
+; Type                        ; Value        ;
++-----------------------------+--------------+
+; Simulation Start Time       ; 0 ps         ;
+; Simulation End Time         ; 4.5 us       ;
+; Simulation Netlist Size     ; 76 nodes     ;
+; Simulation Coverage         ;      82.50 % ;
+; Total Number of Transitions ; 4000         ;
+; Simulation Breakpoints      ; 0            ;
+; Family                      ; Cyclone II   ;
+; Device                      ; EP2C8Q208C8  ;
++-----------------------------+--------------+
+
+
++-------------------------------------------------------------------------------------------------------------------------+
+; Simulator Settings                                                                                                      ;
++--------------------------------------------------------------------------------------------+------------+---------------+
+; Option                                                                                     ; Setting    ; Default Value ;
++--------------------------------------------------------------------------------------------+------------+---------------+
+; Simulation mode                                                                            ; Timing     ; Timing        ;
+; Start time                                                                                 ; 0 ns       ; 0 ns          ;
+; Simulation results format                                                                  ; CVWF       ;               ;
+; Add pins automatically to simulation output waveforms                                      ; On         ; On            ;
+; Check outputs                                                                              ; Off        ; Off           ;
+; Report simulation coverage                                                                 ; On         ; On            ;
+; Display complete 1/0 value coverage report                                                 ; On         ; On            ;
+; Display missing 1-value coverage report                                                    ; On         ; On            ;
+; Display missing 0-value coverage report                                                    ; On         ; On            ;
+; Detect setup and hold time violations                                                      ; Off        ; Off           ;
+; Detect glitches                                                                            ; Off        ; Off           ;
+; Disable timing delays in Timing Simulation                                                 ; Off        ; Off           ;
+; Generate Signal Activity File                                                              ; Off        ; Off           ;
+; Generate VCD File for PowerPlay Power Analyzer                                             ; Off        ; Off           ;
+; Group bus channels in simulation results                                                   ; Off        ; Off           ;
+; Preserve fewer signal transitions to reduce memory requirements                            ; On         ; On            ;
+; Trigger vector comparison with the specified mode                                          ; INPUT_EDGE ; INPUT_EDGE    ;
+; Disable setup and hold time violations detection in input registers of bi-directional pins ; Off        ; Off           ;
+; Overwrite Waveform Inputs With Simulation Outputs                                          ; Off        ;               ;
+; Perform Glitch Filtering in Timing Simulation                                              ; Auto       ; Auto          ;
++--------------------------------------------------------------------------------------------+------------+---------------+
+
+
++----------------------+
+; Simulation Waveforms ;
++----------------------+
+Waveform report data cannot be output to ASCII.
+Please use Quartus II to view the waveform report data.
+
+
++--------------------------------------------------------------------+
+; Coverage Summary                                                   ;
++-----------------------------------------------------+--------------+
+; Type                                                ; Value        ;
++-----------------------------------------------------+--------------+
+; Total coverage as a percentage                      ;      82.50 % ;
+; Total nodes checked                                 ; 76           ;
+; Total output ports checked                          ; 80           ;
+; Total output ports with complete 1/0-value coverage ; 66           ;
+; Total output ports with no 1/0-value coverage       ; 6            ;
+; Total output ports with no 1-value coverage         ; 7            ;
+; Total output ports with no 0-value coverage         ; 13           ;
++-----------------------------------------------------+--------------+
+
+
+The following table displays output ports that toggle between 1 and 0 during simulation.
++--------------------------------------------------------------------------------------------------------------------------+
+; Complete 1/0-Value Coverage                                                                                              ;
++---------------------------------------------------+---------------------------------------------------+------------------+
+; Node Name                                         ; Output Port Name                                  ; Output Port Type ;
++---------------------------------------------------+---------------------------------------------------+------------------+
+; |Cyclops|LMX2326:LMX2326_SPI|bit_count[0]         ; |Cyclops|LMX2326:LMX2326_SPI|bit_count[0]         ; regout           ;
+; |Cyclops|LMX2326:LMX2326_SPI|bit_count[1]         ; |Cyclops|LMX2326:LMX2326_SPI|bit_count[1]         ; regout           ;
+; |Cyclops|LMX2326:LMX2326_SPI|bit_count[3]         ; |Cyclops|LMX2326:LMX2326_SPI|bit_count[3]         ; regout           ;
+; |Cyclops|LMX2326:LMX2326_SPI|bit_count[2]         ; |Cyclops|LMX2326:LMX2326_SPI|bit_count[2]         ; regout           ;
+; |Cyclops|LMX2326:LMX2326_SPI|bit_count[4]         ; |Cyclops|LMX2326:LMX2326_SPI|bit_count[4]         ; regout           ;
+; |Cyclops|LMX2326:LMX2326_SPI|bit_count[0]~278     ; |Cyclops|LMX2326:LMX2326_SPI|bit_count[0]~278     ; combout          ;
+; |Cyclops|LMX2326:LMX2326_SPI|bit_count[0]~278     ; |Cyclops|LMX2326:LMX2326_SPI|bit_count[0]~279     ; cout             ;
+; |Cyclops|LMX2326:LMX2326_SPI|bit_count[1]~281     ; |Cyclops|LMX2326:LMX2326_SPI|bit_count[1]~281     ; combout          ;
+; |Cyclops|LMX2326:LMX2326_SPI|bit_count[1]~281     ; |Cyclops|LMX2326:LMX2326_SPI|bit_count[1]~282     ; cout             ;
+; |Cyclops|LMX2326:LMX2326_SPI|bit_count[2]~283     ; |Cyclops|LMX2326:LMX2326_SPI|bit_count[2]~283     ; combout          ;
+; |Cyclops|LMX2326:LMX2326_SPI|bit_count[2]~283     ; |Cyclops|LMX2326:LMX2326_SPI|bit_count[2]~284     ; cout             ;
+; |Cyclops|LMX2326:LMX2326_SPI|bit_count[3]~285     ; |Cyclops|LMX2326:LMX2326_SPI|bit_count[3]~285     ; combout          ;
+; |Cyclops|LMX2326:LMX2326_SPI|bit_count[3]~285     ; |Cyclops|LMX2326:LMX2326_SPI|bit_count[3]~286     ; cout             ;
+; |Cyclops|LMX2326:LMX2326_SPI|bit_count[4]~287     ; |Cyclops|LMX2326:LMX2326_SPI|bit_count[4]~287     ; combout          ;
+; |Cyclops|LMX2326:LMX2326_SPI|SPI_data             ; |Cyclops|LMX2326:LMX2326_SPI|SPI_data             ; regout           ;
+; |Cyclops|LMX2326:LMX2326_SPI|SPI_LE               ; |Cyclops|LMX2326:LMX2326_SPI|SPI_LE               ; regout           ;
+; |Cyclops|LMX2326:LMX2326_SPI|SPI_clock            ; |Cyclops|LMX2326:LMX2326_SPI|SPI_clock            ; regout           ;
+; |Cyclops|LMX2326_data[11]                         ; |Cyclops|LMX2326_data[11]                         ; regout           ;
+; |Cyclops|LMX2326:LMX2326_SPI|Mux0~262             ; |Cyclops|LMX2326:LMX2326_SPI|Mux0~262             ; combout          ;
+; |Cyclops|LMX2326_data[6]                          ; |Cyclops|LMX2326_data[6]                          ; regout           ;
+; |Cyclops|LMX2326:LMX2326_SPI|Mux0~263             ; |Cyclops|LMX2326:LMX2326_SPI|Mux0~263             ; combout          ;
+; |Cyclops|LMX2326_data[0]                          ; |Cyclops|LMX2326_data[0]                          ; regout           ;
+; |Cyclops|LMX2326:LMX2326_SPI|Mux0~264             ; |Cyclops|LMX2326:LMX2326_SPI|Mux0~264             ; combout          ;
+; |Cyclops|LMX2326:LMX2326_SPI|Mux0~265             ; |Cyclops|LMX2326:LMX2326_SPI|Mux0~265             ; combout          ;
+; |Cyclops|LMX2326:LMX2326_SPI|Mux0~266             ; |Cyclops|LMX2326:LMX2326_SPI|Mux0~266             ; combout          ;
+; |Cyclops|LMX2326:LMX2326_SPI|Mux0~267             ; |Cyclops|LMX2326:LMX2326_SPI|Mux0~267             ; combout          ;
+; |Cyclops|LMX2326:LMX2326_SPI|SPI_state.001        ; |Cyclops|LMX2326:LMX2326_SPI|SPI_state.001        ; regout           ;
+; |Cyclops|LMX2326:LMX2326_SPI|Mux0~268             ; |Cyclops|LMX2326:LMX2326_SPI|Mux0~268             ; combout          ;
+; |Cyclops|LMX2326:LMX2326_SPI|SPI_data~108         ; |Cyclops|LMX2326:LMX2326_SPI|SPI_data~108         ; combout          ;
+; |Cyclops|LMX2326:LMX2326_SPI|SPI_data~109         ; |Cyclops|LMX2326:LMX2326_SPI|SPI_data~109         ; combout          ;
+; |Cyclops|LMX2326:LMX2326_SPI|SPI_data~110         ; |Cyclops|LMX2326:LMX2326_SPI|SPI_data~110         ; combout          ;
+; |Cyclops|start                                    ; |Cyclops|start                                    ; regout           ;
+; |Cyclops|LMX2326:LMX2326_SPI|SPI_state.000        ; |Cyclops|LMX2326:LMX2326_SPI|SPI_state.000        ; regout           ;
+; |Cyclops|LMX2326:LMX2326_SPI|SPI_LE~92            ; |Cyclops|LMX2326:LMX2326_SPI|SPI_LE~92            ; combout          ;
+; |Cyclops|LMX2326:LMX2326_SPI|Equal0~85            ; |Cyclops|LMX2326:LMX2326_SPI|Equal0~85            ; combout          ;
+; |Cyclops|LMX2326:LMX2326_SPI|SPI_LE~93            ; |Cyclops|LMX2326:LMX2326_SPI|SPI_LE~93            ; combout          ;
+; |Cyclops|LMX2326:LMX2326_SPI|SPI_state.010        ; |Cyclops|LMX2326:LMX2326_SPI|SPI_state.010        ; regout           ;
+; |Cyclops|LMX2326:LMX2326_SPI|Selector8~19         ; |Cyclops|LMX2326:LMX2326_SPI|Selector8~19         ; combout          ;
+; |Cyclops|SPI_state.011                            ; |Cyclops|SPI_state.011                            ; regout           ;
+; |Cyclops|LMX2326:LMX2326_SPI|ready                ; |Cyclops|LMX2326:LMX2326_SPI|ready                ; regout           ;
+; |Cyclops|SPI_state.001                            ; |Cyclops|SPI_state.001                            ; regout           ;
+; |Cyclops|SPI_state.101                            ; |Cyclops|SPI_state.101                            ; regout           ;
+; |Cyclops|LMX2326_data[7]~479                      ; |Cyclops|LMX2326_data[7]~479                      ; combout          ;
+; |Cyclops|LMX2326:LMX2326_SPI|SPI_state.011        ; |Cyclops|LMX2326:LMX2326_SPI|SPI_state.011        ; regout           ;
+; |Cyclops|LMX2326:LMX2326_SPI|bit_count[0]~280     ; |Cyclops|LMX2326:LMX2326_SPI|bit_count[0]~280     ; combout          ;
+; |Cyclops|C1                                       ; |Cyclops|C1                                       ; regout           ;
+; |Cyclops|LMX2326:LMX2326_SPI|Selector6~8          ; |Cyclops|LMX2326:LMX2326_SPI|Selector6~8          ; combout          ;
+; |Cyclops|Selector6~73                             ; |Cyclops|Selector6~73                             ; combout          ;
+; |Cyclops|Selector6~74                             ; |Cyclops|Selector6~74                             ; combout          ;
+; |Cyclops|LMX2326:LMX2326_SPI|Selector5~15         ; |Cyclops|LMX2326:LMX2326_SPI|Selector5~15         ; combout          ;
+; |Cyclops|SPI_state.010                            ; |Cyclops|SPI_state.010                            ; regout           ;
+; |Cyclops|Selector3~8                              ; |Cyclops|Selector3~8                              ; combout          ;
+; |Cyclops|LMX2326:LMX2326_SPI|ready~7              ; |Cyclops|LMX2326:LMX2326_SPI|ready~7              ; combout          ;
+; |Cyclops|SPI_state.100                            ; |Cyclops|SPI_state.100                            ; regout           ;
+; |Cyclops|Selector4~8                              ; |Cyclops|Selector4~8                              ; combout          ;
+; |Cyclops|Selector0~25                             ; |Cyclops|Selector0~25                             ; combout          ;
+; |Cyclops|Selector6~75                             ; |Cyclops|Selector6~75                             ; combout          ;
+; |Cyclops|Selector6~76                             ; |Cyclops|Selector6~76                             ; combout          ;
+; |Cyclops|LMX2326_data[6]~481                      ; |Cyclops|LMX2326_data[6]~481                      ; combout          ;
+; |Cyclops|Ref                                      ; |Cyclops|Ref                                      ; padio            ;
+; |Cyclops|LMX2326_SPI_data                         ; |Cyclops|LMX2326_SPI_data                         ; padio            ;
+; |Cyclops|LMX2326_SPI_LE                           ; |Cyclops|LMX2326_SPI_LE                           ; padio            ;
+; |Cyclops|LMX2326_SPI_clock                        ; |Cyclops|LMX2326_SPI_clock                        ; padio            ;
+; |Cyclops|IFCLK                                    ; |Cyclops|IFCLK~corein                             ; combout          ;
+; |Cyclops|IFCLK~clkctrl                            ; |Cyclops|IFCLK~clkctrl                            ; outclk           ;
+; |Cyclops|LMX2326:LMX2326_SPI|SPI_state.011~feeder ; |Cyclops|LMX2326:LMX2326_SPI|SPI_state.011~feeder ; combout          ;
++---------------------------------------------------+---------------------------------------------------+------------------+
+
+
+The following table displays output ports that do not toggle to 1 during simulation.
++----------------------------------------------------------------------------------+
+; Missing 1-Value Coverage                                                         ;
++-------------------------------+-------------------------------+------------------+
+; Node Name                     ; Output Port Name              ; Output Port Type ;
++-------------------------------+-------------------------------+------------------+
+; |Cyclops|Selector2~8          ; |Cyclops|Selector2~8          ; combout          ;
+; |Cyclops|~GND                 ; |Cyclops|~GND                 ; combout          ;
+; |Cyclops|DEBUG_LED0           ; |Cyclops|DEBUG_LED0           ; padio            ;
+; |Cyclops|DEBUG_LED1           ; |Cyclops|DEBUG_LED1           ; padio            ;
+; |Cyclops|DEBUG_LED2           ; |Cyclops|DEBUG_LED2           ; padio            ;
+; |Cyclops|DEBUG_LED3           ; |Cyclops|DEBUG_LED3           ; padio            ;
+; |Cyclops|SPI_state.000~feeder ; |Cyclops|SPI_state.000~feeder ; combout          ;
++-------------------------------+-------------------------------+------------------+
+
+
+The following table displays output ports that do not toggle to 0 during simulation.
++--------------------------------------------------------------------------------------+
+; Missing 0-Value Coverage                                                             ;
++---------------------------------+---------------------------------+------------------+
+; Node Name                       ; Output Port Name                ; Output Port Type ;
++---------------------------------+---------------------------------+------------------+
+; |Cyclops|LMX2326_data[7]        ; |Cyclops|LMX2326_data[7]        ; regout           ;
+; |Cyclops|LMX2326_data[1]        ; |Cyclops|LMX2326_data[1]        ; regout           ;
+; |Cyclops|LMX2326_data[7]~480    ; |Cyclops|LMX2326_data[7]~480    ; combout          ;
+; |Cyclops|C2                     ; |Cyclops|C2                     ; regout           ;
+; |Cyclops|SPI_state.000          ; |Cyclops|SPI_state.000          ; regout           ;
+; |Cyclops|Selector1~25           ; |Cyclops|Selector1~25           ; combout          ;
+; |Cyclops|~GND                   ; |Cyclops|~GND                   ; combout          ;
+; |Cyclops|DEBUG_LED0             ; |Cyclops|DEBUG_LED0             ; padio            ;
+; |Cyclops|DEBUG_LED1             ; |Cyclops|DEBUG_LED1             ; padio            ;
+; |Cyclops|DEBUG_LED2             ; |Cyclops|DEBUG_LED2             ; padio            ;
+; |Cyclops|DEBUG_LED3             ; |Cyclops|DEBUG_LED3             ; padio            ;
+; |Cyclops|LMX2326_data[1]~feeder ; |Cyclops|LMX2326_data[1]~feeder ; combout          ;
+; |Cyclops|SPI_state.000~feeder   ; |Cyclops|SPI_state.000~feeder   ; combout          ;
++---------------------------------+---------------------------------+------------------+
+
+
++---------------------+
+; Simulator INI Usage ;
++--------+------------+
+; Option ; Usage      ;
++--------+------------+
+
+
++--------------------+
+; Simulator Messages ;
++--------------------+
+Info: *******************************************************************
+Info: Running Quartus II Simulator
+    Info: Version 7.2 Build 151 09/26/2007 SJ Web Edition
+    Info: Processing started: Thu Apr 10 15:08:55 2008
+Info: Command: quartus_sim --read_settings_files=on --write_settings_files=off Cyclops -c Cyclops
+Info: Using vector source file "C:/HPSDR/trunk/VK6APH/Cyclops/Cyclops.vwf"
+Warning: Can't display state machine states -- register holding state machine bit "|Cyclops|SPI_state.110" was synthesized away
+Info: Option to preserve fewer signal transitions to reduce memory requirements is enabled
+    Info: Simulation has been partitioned into sub-simulations according to the maximum transition count determined by the engine. Transitions from memory will be flushed out to disk at the end of each sub-simulation to reduce memory requirements.
+Info: Simulation partitioned into 1 sub-simulations
+Info: Simulation coverage is      82.50 %
+Info: Number of transitions in simulation is 4000
+Info: Quartus II Simulator was successful. 0 errors, 1 warning
+    Info: Allocated 99 megabytes of memory during processing
+    Info: Processing ended: Thu Apr 10 15:08:57 2008
+    Info: Elapsed time: 00:00:02
+
+

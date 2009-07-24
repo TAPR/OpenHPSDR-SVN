@@ -1,0 +1,342 @@
+Analysis & Synthesis report for Cyclops
+Fri Jul 24 16:54:44 2009
+Quartus II Version 9.0 Build 132 02/25/2009 SJ Web Edition
+
+
+---------------------
+; Table of Contents ;
+---------------------
+  1. Legal Notice
+  2. Analysis & Synthesis Summary
+  3. Analysis & Synthesis Settings
+  4. Analysis & Synthesis Source Files Read
+  5. Analysis & Synthesis Resource Usage Summary
+  6. Analysis & Synthesis Resource Utilization by Entity
+  7. State Machine - |Cyclops|ADF4112_SPI:ADF4112|SPI_state
+  8. Registers Removed During Synthesis
+  9. General Register Statistics
+ 10. Multiplexer Restructuring Statistics (Restructuring Performed)
+ 11. Parameter Settings for User Entity Instance: Top-level Entity: |Cyclops
+ 12. Analysis & Synthesis Messages
+
+
+
+----------------
+; Legal Notice ;
+----------------
+Copyright (C) 1991-2009 Altera Corporation
+Your use of Altera Corporation's design tools, logic functions 
+and other software and tools, and its AMPP partner logic 
+functions, and any output files from any of the foregoing 
+(including device programming or simulation files), and any 
+associated documentation or information are expressly subject 
+to the terms and conditions of the Altera Program License 
+Subscription Agreement, Altera MegaCore Function License 
+Agreement, or other applicable license agreement, including, 
+without limitation, that your use is for the sole purpose of 
+programming logic devices manufactured by Altera and sold by 
+Altera or its authorized distributors.  Please refer to the 
+applicable agreement for further details.
+
+
+
++------------------------------------------------------------------------------+
+; Analysis & Synthesis Summary                                                 ;
++------------------------------------+-----------------------------------------+
+; Analysis & Synthesis Status        ; Successful - Fri Jul 24 16:54:44 2009   ;
+; Quartus II Version                 ; 9.0 Build 132 02/25/2009 SJ Web Edition ;
+; Revision Name                      ; Cyclops                                 ;
+; Top-level Entity Name              ; Cyclops                                 ;
+; Family                             ; Cyclone II                              ;
+; Total logic elements               ; 90                                      ;
+;     Total combinational functions  ; 87                                      ;
+;     Dedicated logic registers      ; 35                                      ;
+; Total registers                    ; 35                                      ;
+; Total pins                         ; 6                                       ;
+; Total virtual pins                 ; 0                                       ;
+; Total memory bits                  ; 0                                       ;
+; Embedded Multiplier 9-bit elements ; 0                                       ;
+; Total PLLs                         ; 0                                       ;
++------------------------------------+-----------------------------------------+
+
+
++----------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Settings                                                                            ;
++----------------------------------------------------------------+--------------------+--------------------+
+; Option                                                         ; Setting            ; Default Value      ;
++----------------------------------------------------------------+--------------------+--------------------+
+; Device                                                         ; EP2C8Q208C8        ;                    ;
+; Top-level entity name                                          ; Cyclops            ; Cyclops            ;
+; Family name                                                    ; Cyclone II         ; Stratix II         ;
+; State Machine Processing                                       ; User-Encoded       ; Auto               ;
+; Power-Up Don't Care                                            ; Off                ; On                 ;
+; Use Generated Physical Constraints File                        ; Off                ;                    ;
+; Use smart compilation                                          ; Off                ; Off                ;
+; Restructure Multiplexers                                       ; Auto               ; Auto               ;
+; Create Debugging Nodes for IP Cores                            ; Off                ; Off                ;
+; Preserve fewer node names                                      ; On                 ; On                 ;
+; Disable OpenCore Plus hardware evaluation                      ; Off                ; Off                ;
+; Verilog Version                                                ; Verilog_2001       ; Verilog_2001       ;
+; VHDL Version                                                   ; VHDL93             ; VHDL93             ;
+; Safe State Machine                                             ; Off                ; Off                ;
+; Extract Verilog State Machines                                 ; On                 ; On                 ;
+; Extract VHDL State Machines                                    ; On                 ; On                 ;
+; Ignore Verilog initial constructs                              ; Off                ; Off                ;
+; Iteration limit for constant Verilog loops                     ; 5000               ; 5000               ;
+; Iteration limit for non-constant Verilog loops                 ; 250                ; 250                ;
+; Add Pass-Through Logic to Inferred RAMs                        ; On                 ; On                 ;
+; Parallel Synthesis                                             ; Off                ; Off                ;
+; DSP Block Balancing                                            ; Auto               ; Auto               ;
+; NOT Gate Push-Back                                             ; On                 ; On                 ;
+; Remove Redundant Logic Cells                                   ; Off                ; Off                ;
+; Remove Duplicate Registers                                     ; On                 ; On                 ;
+; Ignore CARRY Buffers                                           ; Off                ; Off                ;
+; Ignore CASCADE Buffers                                         ; Off                ; Off                ;
+; Ignore GLOBAL Buffers                                          ; Off                ; Off                ;
+; Ignore ROW GLOBAL Buffers                                      ; Off                ; Off                ;
+; Ignore LCELL Buffers                                           ; Off                ; Off                ;
+; Ignore SOFT Buffers                                            ; On                 ; On                 ;
+; Limit AHDL Integers to 32 Bits                                 ; Off                ; Off                ;
+; Optimization Technique                                         ; Balanced           ; Balanced           ;
+; Carry Chain Length                                             ; 70                 ; 70                 ;
+; Auto Carry Chains                                              ; On                 ; On                 ;
+; Auto Open-Drain Pins                                           ; On                 ; On                 ;
+; Perform WYSIWYG Primitive Resynthesis                          ; Off                ; Off                ;
+; Auto ROM Replacement                                           ; On                 ; On                 ;
+; Auto RAM Replacement                                           ; On                 ; On                 ;
+; Auto Shift Register Replacement                                ; Auto               ; Auto               ;
+; Auto Clock Enable Replacement                                  ; On                 ; On                 ;
+; Strict RAM Replacement                                         ; Off                ; Off                ;
+; Allow Synchronous Control Signals                              ; On                 ; On                 ;
+; Force Use of Synchronous Clear Signals                         ; Off                ; Off                ;
+; Auto RAM to Logic Cell Conversion                              ; Off                ; Off                ;
+; Auto Resource Sharing                                          ; Off                ; Off                ;
+; Allow Any RAM Size For Recognition                             ; Off                ; Off                ;
+; Allow Any ROM Size For Recognition                             ; Off                ; Off                ;
+; Allow Any Shift Register Size For Recognition                  ; Off                ; Off                ;
+; Use LogicLock Constraints during Resource Balancing            ; On                 ; On                 ;
+; Ignore translate_off and synthesis_off directives              ; Off                ; Off                ;
+; Timing-Driven Synthesis                                        ; Off                ; Off                ;
+; Show Parameter Settings Tables in Synthesis Report             ; On                 ; On                 ;
+; Ignore Maximum Fan-Out Assignments                             ; Off                ; Off                ;
+; Synchronization Register Chain Length                          ; 2                  ; 2                  ;
+; PowerPlay Power Optimization                                   ; Normal compilation ; Normal compilation ;
+; HDL message level                                              ; Level2             ; Level2             ;
+; Suppress Register Optimization Related Messages                ; Off                ; Off                ;
+; Number of Removed Registers Reported in Synthesis Report       ; 100                ; 100                ;
+; Number of Inverted Registers Reported in Synthesis Report      ; 100                ; 100                ;
+; Clock MUX Protection                                           ; On                 ; On                 ;
+; Auto Gated Clock Conversion                                    ; Off                ; Off                ;
+; Block Design Naming                                            ; Auto               ; Auto               ;
+; SDC constraint protection                                      ; Off                ; Off                ;
+; Synthesis Effort                                               ; Auto               ; Auto               ;
+; Allows Asynchronous Clear Usage For Shift Register Replacement ; On                 ; On                 ;
+; Analysis & Synthesis Message Level                             ; Medium             ; Medium             ;
++----------------------------------------------------------------+--------------------+--------------------+
+
+
++-------------------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Source Files Read                                                                                                    ;
++----------------------------------+-----------------+------------------------+-------------------------------------------------------------+
+; File Name with User-Entered Path ; Used in Netlist ; File Type              ; File Name with Absolute Path                                ;
++----------------------------------+-----------------+------------------------+-------------------------------------------------------------+
+; Cyclops.v                        ; yes             ; User Verilog HDL File  ; C:/HPSDR/trunk/Cyclops/Verllog Code/Test Code/Cyclops.v     ;
+; ADF4112_SPI.v                    ; yes             ; User Verilog HDL File  ; C:/HPSDR/trunk/Cyclops/Verllog Code/Test Code/ADF4112_SPI.v ;
++----------------------------------+-----------------+------------------------+-------------------------------------------------------------+
+
+
++-----------------------------------------------------+
+; Analysis & Synthesis Resource Usage Summary         ;
++---------------------------------------------+-------+
+; Resource                                    ; Usage ;
++---------------------------------------------+-------+
+; Estimated Total logic elements              ; 90    ;
+;                                             ;       ;
+; Total combinational functions               ; 87    ;
+; Logic element usage by number of LUT inputs ;       ;
+;     -- 4 input functions                    ; 46    ;
+;     -- 3 input functions                    ; 18    ;
+;     -- <=2 input functions                  ; 23    ;
+;                                             ;       ;
+; Logic elements by mode                      ;       ;
+;     -- normal mode                          ; 83    ;
+;     -- arithmetic mode                      ; 4     ;
+;                                             ;       ;
+; Total registers                             ; 35    ;
+;     -- Dedicated logic registers            ; 35    ;
+;     -- I/O registers                        ; 0     ;
+;                                             ;       ;
+; I/O pins                                    ; 6     ;
+; Maximum fan-out node                        ; clock ;
+; Maximum fan-out                             ; 32    ;
+; Total fan-out                               ; 378   ;
+; Average fan-out                             ; 2.95  ;
++---------------------------------------------+-------+
+
+
++--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Resource Utilization by Entity                                                                                                                                  ;
++----------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+------------------------------+--------------+
+; Compilation Hierarchy Node ; LC Combinationals ; LC Registers ; Memory Bits ; DSP Elements ; DSP 9x9 ; DSP 18x18 ; Pins ; Virtual Pins ; Full Hierarchy Name          ; Library Name ;
++----------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+------------------------------+--------------+
+; |Cyclops                   ; 87 (54)           ; 35 (24)      ; 0           ; 0            ; 0       ; 0         ; 6    ; 0            ; |Cyclops                     ; work         ;
+;    |ADF4112_SPI:ADF4112|   ; 33 (33)           ; 11 (11)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Cyclops|ADF4112_SPI:ADF4112 ; work         ;
++----------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+------------------------------+--------------+
+Note: For table entries with two numbers listed, the numbers in parentheses indicate the number of resources of the given type used by the specific entity alone. The numbers listed outside of parentheses indicate the total resources of the given type used by the specific entity and all of its sub-entities in the hierarchy.
+
+
+Encoding Type:  User-Encoded
++--------------------------------------------------------+
+; State Machine - |Cyclops|ADF4112_SPI:ADF4112|SPI_state ;
++---------------+-------------+--------------------------+
+; Name          ; SPI_state~8 ; SPI_state~7              ;
++---------------+-------------+--------------------------+
+; SPI_state.000 ; 0           ; 0                        ;
+; SPI_state.001 ; 0           ; 1                        ;
+; SPI_state.010 ; 1           ; 0                        ;
+; SPI_state.011 ; 1           ; 1                        ;
++---------------+-------------+--------------------------+
+
+
++---------------------------------------------------------------------------------+
+; Registers Removed During Synthesis                                              ;
++----------------------------------------+----------------------------------------+
+; Register name                          ; Reason for Removal                     ;
++----------------------------------------+----------------------------------------+
+; Second_LO_data[4,7]                    ; Merged with Second_LO_data[0]          ;
+; First_LO_data[14..16,18..19,22..23]    ; Merged with First_LO_data[1]           ;
+; First_LO_data[3,7..12,17,21]           ; Merged with First_LO_data[2]           ;
+; First_LO_data[13]                      ; Merged with First_LO_data[5]           ;
+; First_LO_data[20]                      ; Merged with First_LO_data[6]           ;
+; Second_LO_data[14..16,18..19,22..23]   ; Merged with Second_LO_data[1]          ;
+; Second_LO_data[6,9..11,13,17,21]       ; Merged with Second_LO_data[2]          ;
+; Second_LO_data[20]                     ; Merged with Second_LO_data[5]          ;
+; Second_LO_data[12]                     ; Merged with Second_LO_data[8]          ;
+; First_LO_data[2]                       ; Stuck at GND due to stuck port data_in ;
+; ADF4112_SPI:ADF4112|SPI_state~9        ; Lost fanout                            ;
+; Second_LO_data[2]                      ; Stuck at GND due to stuck port data_in ;
+; Total Number of Removed Registers = 39 ;                                        ;
++----------------------------------------+----------------------------------------+
+
+
++------------------------------------------------------+
+; General Register Statistics                          ;
++----------------------------------------------+-------+
+; Statistic                                    ; Value ;
++----------------------------------------------+-------+
+; Total registers                              ; 35    ;
+; Number of registers using Synchronous Clear  ; 0     ;
+; Number of registers using Synchronous Load   ; 7     ;
+; Number of registers using Asynchronous Clear ; 0     ;
+; Number of registers using Asynchronous Load  ; 0     ;
+; Number of registers using Clock Enable       ; 14    ;
+; Number of registers using Preset             ; 0     ;
++----------------------------------------------+-------+
+
+
++---------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Multiplexer Restructuring Statistics (Restructuring Performed)                                                                                          ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+-------------------------------------------+
+; Multiplexer Inputs ; Bus Width ; Baseline Area ; Area if Restructured ; Saving if Restructured ; Registered ; Example Multiplexer Output                ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+-------------------------------------------+
+; 4:1                ; 5 bits    ; 10 LEs        ; 5 LEs                ; 5 LEs                  ; Yes        ; |Cyclops|ADF4112_SPI:ADF4112|bit_count[0] ;
+; 17:1               ; 2 bits    ; 22 LEs        ; 2 LEs                ; 20 LEs                 ; Yes        ; |Cyclops|Second_LO_data[0]                ;
+; 17:1               ; 2 bits    ; 22 LEs        ; 2 LEs                ; 20 LEs                 ; Yes        ; |Cyclops|Second_LO_data[3]                ;
+; 17:1               ; 3 bits    ; 33 LEs        ; 3 LEs                ; 30 LEs                 ; Yes        ; |Cyclops|First_LO_data[4]                 ;
+; 19:1               ; 3 bits    ; 36 LEs        ; 6 LEs                ; 30 LEs                 ; Yes        ; |Cyclops|First_LO_data[5]                 ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+-------------------------------------------+
+
+
++-------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: Top-level Entity: |Cyclops ;
++----------------+--------------------------+-----------------------------+
+; Parameter Name ; Value                    ; Type                        ;
++----------------+--------------------------+-----------------------------+
+; P2             ; 1                        ; Unsigned Binary             ;
+; P1             ; 1                        ; Unsigned Binary             ;
+; PD2            ; 0                        ; Unsigned Binary             ;
+; CP16           ; 0                        ; Unsigned Binary             ;
+; CP15           ; 1                        ; Unsigned Binary             ;
+; CP14           ; 1                        ; Unsigned Binary             ;
+; CP13           ; 0                        ; Unsigned Binary             ;
+; CP12           ; 1                        ; Unsigned Binary             ;
+; CP11           ; 1                        ; Unsigned Binary             ;
+; TC4            ; 1                        ; Unsigned Binary             ;
+; TC3            ; 0                        ; Unsigned Binary             ;
+; TC2            ; 0                        ; Unsigned Binary             ;
+; TC1            ; 0                        ; Unsigned Binary             ;
+; F5             ; 0                        ; Unsigned Binary             ;
+; F4             ; 0                        ; Unsigned Binary             ;
+; F3             ; 0                        ; Unsigned Binary             ;
+; F2             ; 1                        ; Unsigned Binary             ;
+; M3             ; 0                        ; Unsigned Binary             ;
+; M2             ; 0                        ; Unsigned Binary             ;
+; M1             ; 1                        ; Unsigned Binary             ;
+; PD1            ; 0                        ; Unsigned Binary             ;
+; F1             ; 0                        ; Unsigned Binary             ;
+; C2             ; 1                        ; Unsigned Binary             ;
+; C1             ; 1                        ; Unsigned Binary             ;
+; Second_LO_INL  ; 110011011100000010010011 ; Unsigned Binary             ;
+; First_LO_INL   ; 110011011100000000010011 ; Unsigned Binary             ;
+; LO2_BD23       ; 0                        ; Unsigned Binary             ;
+; LO2_DLY        ; 0                        ; Unsigned Binary             ;
+; LO2_SYNC       ; 0                        ; Unsigned Binary             ;
+; LO2_LDP        ; 1                        ; Unsigned Binary             ;
+; LO2_T1         ; 0                        ; Unsigned Binary             ;
+; LO2_T2         ; 0                        ; Unsigned Binary             ;
+; LO2_ABP2       ; 0                        ; Unsigned Binary             ;
+; LO2_ABP1       ; 0                        ; Unsigned Binary             ;
+; LO2_R          ; 00000000001010           ; Unsigned Binary             ;
+; Second_LO_RCL  ; 000100000000000000101000 ; Unsigned Binary             ;
+; LO2_DB23       ; 0                        ; Unsigned Binary             ;
+; LO2_DB22       ; 0                        ; Unsigned Binary             ;
+; LO2_G1         ; 0                        ; Unsigned Binary             ;
+; LO2_BA         ; 0000000010001100110      ; Unsigned Binary             ;
+; Second_LO_NCL  ; 000000000001000110011001 ; Unsigned Binary             ;
+; LO1_BD23       ; 0                        ; Unsigned Binary             ;
+; LO1_DLY        ; 0                        ; Unsigned Binary             ;
+; LO1_SYNC       ; 0                        ; Unsigned Binary             ;
+; LO1_LDP        ; 1                        ; Unsigned Binary             ;
+; LO1_T1         ; 0                        ; Unsigned Binary             ;
+; LO1_T2         ; 0                        ; Unsigned Binary             ;
+; LO1_ABP2       ; 0                        ; Unsigned Binary             ;
+; LO1_ABP1       ; 0                        ; Unsigned Binary             ;
+; LO1_R          ; 00000000010100           ; Unsigned Binary             ;
+; First_LO_RCL   ; 000100000000000001010000 ; Unsigned Binary             ;
+; LO1_DB23       ; 0                        ; Unsigned Binary             ;
+; LO1_DB22       ; 0                        ; Unsigned Binary             ;
+; LO1_G1         ; 0                        ; Unsigned Binary             ;
+; LO1_BA         ; 0000000100000001100      ; Unsigned Binary             ;
+; First_LO_NCL   ; 000000000010000000110001 ; Unsigned Binary             ;
++----------------+--------------------------+-----------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings Tables in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++-------------------------------+
+; Analysis & Synthesis Messages ;
++-------------------------------+
+Info: *******************************************************************
+Info: Running Quartus II Analysis & Synthesis
+    Info: Version 9.0 Build 132 02/25/2009 SJ Web Edition
+    Info: Processing started: Fri Jul 24 16:54:42 2009
+Info: Command: quartus_map --read_settings_files=on --write_settings_files=off Cyclops -c Cyclops
+Warning (10090): Verilog HDL syntax warning at Cyclops.v(645): extra block comment delimiter characters /* within block comment
+Info: Found 1 design units, including 1 entities, in source file Cyclops.v
+    Info: Found entity 1: Cyclops
+Info: Found 1 design units, including 1 entities, in source file ADF4112_SPI.v
+    Info: Found entity 1: ADF4112_SPI
+Info: Elaborating entity "Cyclops" for the top level hierarchy
+Info: Elaborating entity "ADF4112_SPI" for hierarchy "ADF4112_SPI:ADF4112"
+Info: 1 registers lost all their fanouts during netlist optimizations. The first 1 are displayed below.
+    Info: Register "ADF4112_SPI:ADF4112|SPI_state~9" lost all its fanouts during netlist optimizations.
+Info: Implemented 99 device resources after synthesis - the final resource count might be different
+    Info: Implemented 1 input pins
+    Info: Implemented 5 output pins
+    Info: Implemented 93 logic cells
+Info: Quartus II Analysis & Synthesis was successful. 0 errors, 1 warning
+    Info: Peak virtual memory: 174 megabytes
+    Info: Processing ended: Fri Jul 24 16:54:44 2009
+    Info: Elapsed time: 00:00:02
+    Info: Total CPU time (on all processors): 00:00:02
+
+

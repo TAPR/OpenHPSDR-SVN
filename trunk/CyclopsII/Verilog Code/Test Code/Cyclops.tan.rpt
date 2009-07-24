@@ -1,0 +1,744 @@
+Classic Timing Analyzer report for Cyclops
+Fri Jul 24 16:54:53 2009
+Quartus II Version 9.0 Build 132 02/25/2009 SJ Web Edition
+
+
+---------------------
+; Table of Contents ;
+---------------------
+  1. Legal Notice
+  2. Timing Analyzer Summary
+  3. Timing Analyzer Settings
+  4. Clock Settings Summary
+  5. Parallel Compilation
+  6. Clock Setup: 'clock'
+  7. Clock Setup: 'IFCLK'
+  8. Clock Hold: 'clock'
+  9. Clock Hold: 'IFCLK'
+ 10. tco
+ 11. Timing Analyzer Messages
+
+
+
+----------------
+; Legal Notice ;
+----------------
+Copyright (C) 1991-2009 Altera Corporation
+Your use of Altera Corporation's design tools, logic functions 
+and other software and tools, and its AMPP partner logic 
+functions, and any output files from any of the foregoing 
+(including device programming or simulation files), and any 
+associated documentation or information are expressly subject 
+to the terms and conditions of the Altera Program License 
+Subscription Agreement, Altera MegaCore Function License 
+Agreement, or other applicable license agreement, including, 
+without limitation, that your use is for the sole purpose of 
+programming logic devices manufactured by Altera and sold by 
+Altera or its authorized distributors.  Please refer to the 
+applicable agreement for further details.
+
+
+
++----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Timing Analyzer Summary                                                                                                                                                                                                          ;
++------------------------------+------------+----------------------------------+------------------------------------------------+----------------------------+------------------------------+------------+----------+--------------+
+; Type                         ; Slack      ; Required Time                    ; Actual Time                                    ; From                       ; To                           ; From Clock ; To Clock ; Failed Paths ;
++------------------------------+------------+----------------------------------+------------------------------------------------+----------------------------+------------------------------+------------+----------+--------------+
+; Worst-case tco               ; N/A        ; None                             ; 16.948 ns                                      ; SPI_state[0]               ; LE1                          ; IFCLK      ; --       ; 0            ;
+; Clock Setup: 'IFCLK'         ; 19.385 ns  ; 48.00 MHz ( period = 20.833 ns ) ; Restricted to 340.02 MHz ( period = 2.941 ns ) ; spi_clock[1]               ; spi_clock[2]                 ; IFCLK      ; IFCLK    ; 0            ;
+; Clock Setup: 'clock'         ; 197.186 ns ; 4.80 MHz ( period = 208.330 ns ) ; 89.73 MHz ( period = 11.144 ns )               ; SPI_state[1]               ; ADF4112_SPI:ADF4112|SPI_data ; clock      ; clock    ; 0            ;
+; Clock Hold: 'clock'          ; 0.499 ns   ; 4.80 MHz ( period = 208.330 ns ) ; N/A                                            ; ADF4112_SPI:ADF4112|SPI_LE ; ADF4112_SPI:ADF4112|SPI_LE   ; clock      ; clock    ; 0            ;
+; Clock Hold: 'IFCLK'          ; 0.499 ns   ; 48.00 MHz ( period = 20.833 ns ) ; N/A                                            ; spi_clock[2]               ; spi_clock[2]                 ; IFCLK      ; IFCLK    ; 0            ;
+; Total number of failed paths ;            ;                                  ;                                                ;                            ;                              ;            ;          ; 0            ;
++------------------------------+------------+----------------------------------+------------------------------------------------+----------------------------+------------------------------+------------+----------+--------------+
+
+
++-----------------------------------------------------------------------------------------------------------------------+
+; Timing Analyzer Settings                                                                                              ;
++---------------------------------------------------------------------+--------------------+------+-------+-------------+
+; Option                                                              ; Setting            ; From ; To    ; Entity Name ;
++---------------------------------------------------------------------+--------------------+------+-------+-------------+
+; Device Name                                                         ; EP2C8Q208C8        ;      ;       ;             ;
+; Timing Models                                                       ; Final              ;      ;       ;             ;
+; Default hold multicycle                                             ; Same as Multicycle ;      ;       ;             ;
+; Cut paths between unrelated clock domains                           ; On                 ;      ;       ;             ;
+; Cut off read during write signal paths                              ; On                 ;      ;       ;             ;
+; Cut off feedback from I/O pins                                      ; On                 ;      ;       ;             ;
+; Report Combined Fast/Slow Timing                                    ; Off                ;      ;       ;             ;
+; fmax Requirement                                                    ; 48 MHz             ;      ;       ;             ;
+; Ignore Clock Settings                                               ; Off                ;      ;       ;             ;
+; Analyze latches as synchronous elements                             ; On                 ;      ;       ;             ;
+; Enable Recovery/Removal analysis                                    ; Off                ;      ;       ;             ;
+; Enable Clock Latency                                                ; Off                ;      ;       ;             ;
+; Use TimeQuest Timing Analyzer                                       ; Off                ;      ;       ;             ;
+; Number of source nodes to report per destination node               ; 10                 ;      ;       ;             ;
+; Number of destination nodes to report                               ; 10                 ;      ;       ;             ;
+; Number of paths to report                                           ; 200                ;      ;       ;             ;
+; Report Minimum Timing Checks                                        ; Off                ;      ;       ;             ;
+; Use Fast Timing Models                                              ; Off                ;      ;       ;             ;
+; Report IO Paths Separately                                          ; Off                ;      ;       ;             ;
+; Perform Multicorner Analysis                                        ; On                 ;      ;       ;             ;
+; Reports the worst-case path for each clock domain and analysis      ; Off                ;      ;       ;             ;
+; Removes common clock path pessimism (CCPP) during slack computation ; Off                ;      ;       ;             ;
+; Output I/O Timing Endpoint                                          ; Near End           ;      ;       ;             ;
+; Clock Settings                                                      ; IFCLK              ;      ; IFCLK ;             ;
+; Clock Settings                                                      ; clock              ;      ; clock ;             ;
++---------------------------------------------------------------------+--------------------+------+-------+-------------+
+
+
++-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Clock Settings Summary                                                                                                                                                                    ;
++-----------------+--------------------+---------------+------------------+---------------+--------------+----------+-----------------------+---------------------+----------+--------------+
+; Clock Node Name ; Clock Setting Name ; Type          ; Fmax Requirement ; Early Latency ; Late Latency ; Based on ; Multiply Base Fmax by ; Divide Base Fmax by ; Offset   ; Phase offset ;
++-----------------+--------------------+---------------+------------------+---------------+--------------+----------+-----------------------+---------------------+----------+--------------+
+; clock           ; clock              ; Internal Node ; 4.8 MHz          ; 0.000 ns      ; 0.000 ns     ; IFCLK    ; 1                     ; 10                  ; 3.115 ns ;              ;
+; IFCLK           ; IFCLK              ; User Pin      ; 48.0 MHz         ; 0.000 ns      ; 0.000 ns     ; --       ; N/A                   ; N/A                 ; N/A      ;              ;
++-----------------+--------------------+---------------+------------------+---------------+--------------+----------+-----------------------+---------------------+----------+--------------+
+
+
+Parallel compilation was disabled, but you have multiple processors available. Enable parallel compilation to reduce compilation time.
++-------------------------------------+
+; Parallel Compilation                ;
++----------------------------+--------+
+; Processors                 ; Number ;
++----------------------------+--------+
+; Number detected on machine ; 2      ;
+; Maximum allowed            ; 1      ;
++----------------------------+--------+
+
+
++---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Clock Setup: 'clock'                                                                                                                                                                                                                                                            ;
++-----------------------------------------+-----------------------------------------------------+----------------------------------+----------------------------------+------------+----------+-----------------------------+---------------------------+-------------------------+
+; Slack                                   ; Actual fmax (period)                                ; From                             ; To                               ; From Clock ; To Clock ; Required Setup Relationship ; Required Longest P2P Time ; Actual Longest P2P Time ;
++-----------------------------------------+-----------------------------------------------------+----------------------------------+----------------------------------+------------+----------+-----------------------------+---------------------------+-------------------------+
+; 197.186 ns                              ; 89.73 MHz ( period = 11.144 ns )                    ; SPI_state[1]                     ; ADF4112_SPI:ADF4112|SPI_data     ; clock      ; clock    ; 208.330 ns                  ; 208.049 ns                ; 10.863 ns               ;
+; 197.375 ns                              ; 91.28 MHz ( period = 10.955 ns )                    ; SPI_state[3]                     ; ADF4112_SPI:ADF4112|SPI_data     ; clock      ; clock    ; 208.330 ns                  ; 208.049 ns                ; 10.674 ns               ;
+; 198.208 ns                              ; 98.79 MHz ( period = 10.122 ns )                    ; SPI_state[2]                     ; ADF4112_SPI:ADF4112|SPI_data     ; clock      ; clock    ; 208.330 ns                  ; 208.053 ns                ; 9.845 ns                ;
+; 198.916 ns                              ; 106.22 MHz ( period = 9.414 ns )                    ; First_LO_data[1]                 ; ADF4112_SPI:ADF4112|SPI_data     ; clock      ; clock    ; 208.330 ns                  ; 208.049 ns                ; 9.133 ns                ;
+; 199.023 ns                              ; 107.45 MHz ( period = 9.307 ns )                    ; SPI_state[0]                     ; SPI2_state[0]                    ; clock      ; clock    ; 208.330 ns                  ; 208.081 ns                ; 9.058 ns                ;
+; 199.485 ns                              ; 113.06 MHz ( period = 8.845 ns )                    ; ADF4112_SPI:ADF4112|bit_count[2] ; ADF4112_SPI:ADF4112|SPI_data     ; clock      ; clock    ; 208.330 ns                  ; 208.078 ns                ; 8.593 ns                ;
+; 200.031 ns                              ; 120.50 MHz ( period = 8.299 ns )                    ; Second_LO_data[1]                ; ADF4112_SPI:ADF4112|SPI_data     ; clock      ; clock    ; 208.330 ns                  ; 208.078 ns                ; 8.047 ns                ;
+; 200.285 ns                              ; 124.30 MHz ( period = 8.045 ns )                    ; First_LO_data[4]                 ; ADF4112_SPI:ADF4112|SPI_data     ; clock      ; clock    ; 208.330 ns                  ; 208.049 ns                ; 7.764 ns                ;
+; 200.529 ns                              ; 128.19 MHz ( period = 7.801 ns )                    ; ADF4112_SPI:ADF4112|bit_count[0] ; ADF4112_SPI:ADF4112|SPI_data     ; clock      ; clock    ; 208.330 ns                  ; 208.078 ns                ; 7.549 ns                ;
+; 200.625 ns                              ; 129.79 MHz ( period = 7.705 ns )                    ; SPI_state[0]                     ; start1                           ; clock      ; clock    ; 208.330 ns                  ; 208.065 ns                ; 7.440 ns                ;
+; 200.699 ns                              ; 131.04 MHz ( period = 7.631 ns )                    ; First_LO_data[0]                 ; ADF4112_SPI:ADF4112|SPI_data     ; clock      ; clock    ; 208.330 ns                  ; 208.049 ns                ; 7.350 ns                ;
+; 200.810 ns                              ; 132.98 MHz ( period = 7.520 ns )                    ; SPI_state[1]                     ; SPI2_state[0]                    ; clock      ; clock    ; 208.330 ns                  ; 208.066 ns                ; 7.256 ns                ;
+; 200.956 ns                              ; 135.61 MHz ( period = 7.374 ns )                    ; Second_LO_data[8]                ; ADF4112_SPI:ADF4112|SPI_data     ; clock      ; clock    ; 208.330 ns                  ; 208.053 ns                ; 7.097 ns                ;
+; 201.145 ns                              ; 139.18 MHz ( period = 7.185 ns )                    ; First_LO_data[5]                 ; ADF4112_SPI:ADF4112|SPI_data     ; clock      ; clock    ; 208.330 ns                  ; 208.049 ns                ; 6.904 ns                ;
+; 201.674 ns                              ; 150.24 MHz ( period = 6.656 ns )                    ; Second_LO_data[3]                ; ADF4112_SPI:ADF4112|SPI_data     ; clock      ; clock    ; 208.330 ns                  ; 208.078 ns                ; 6.404 ns                ;
+; 201.685 ns                              ; 150.49 MHz ( period = 6.645 ns )                    ; SPI_state[0]                     ; First_LO_data[0]                 ; clock      ; clock    ; 208.330 ns                  ; 208.081 ns                ; 6.396 ns                ;
+; 201.685 ns                              ; 150.49 MHz ( period = 6.645 ns )                    ; SPI_state[0]                     ; First_LO_data[4]                 ; clock      ; clock    ; 208.330 ns                  ; 208.081 ns                ; 6.396 ns                ;
+; 201.685 ns                              ; 150.49 MHz ( period = 6.645 ns )                    ; SPI_state[0]                     ; First_LO_data[5]                 ; clock      ; clock    ; 208.330 ns                  ; 208.081 ns                ; 6.396 ns                ;
+; 201.685 ns                              ; 150.49 MHz ( period = 6.645 ns )                    ; SPI_state[0]                     ; First_LO_data[1]                 ; clock      ; clock    ; 208.330 ns                  ; 208.081 ns                ; 6.396 ns                ;
+; 201.685 ns                              ; 150.49 MHz ( period = 6.645 ns )                    ; SPI_state[0]                     ; First_LO_data[6]                 ; clock      ; clock    ; 208.330 ns                  ; 208.081 ns                ; 6.396 ns                ;
+; 201.699 ns                              ; 150.81 MHz ( period = 6.631 ns )                    ; SPI_state[2]                     ; SPI2_state[0]                    ; clock      ; clock    ; 208.330 ns                  ; 208.070 ns                ; 6.371 ns                ;
+; 202.141 ns                              ; 161.58 MHz ( period = 6.189 ns )                    ; ADF4112_SPI:ADF4112|ready        ; SPI2_state[0]                    ; clock      ; clock    ; 208.330 ns                  ; 208.066 ns                ; 5.925 ns                ;
+; 202.202 ns                              ; 163.19 MHz ( period = 6.128 ns )                    ; SPI_state[0]                     ; Second_LO_data[3]                ; clock      ; clock    ; 208.330 ns                  ; 208.052 ns                ; 5.850 ns                ;
+; 202.202 ns                              ; 163.19 MHz ( period = 6.128 ns )                    ; SPI_state[0]                     ; Second_LO_data[0]                ; clock      ; clock    ; 208.330 ns                  ; 208.052 ns                ; 5.850 ns                ;
+; 202.202 ns                              ; 163.19 MHz ( period = 6.128 ns )                    ; SPI_state[0]                     ; Second_LO_data[1]                ; clock      ; clock    ; 208.330 ns                  ; 208.052 ns                ; 5.850 ns                ;
+; 202.391 ns                              ; 168.38 MHz ( period = 5.939 ns )                    ; Second_LO_data[0]                ; ADF4112_SPI:ADF4112|SPI_data     ; clock      ; clock    ; 208.330 ns                  ; 208.078 ns                ; 5.687 ns                ;
+; 202.401 ns                              ; 168.66 MHz ( period = 5.929 ns )                    ; SPI_state[0]                     ; Second_LO_data[8]                ; clock      ; clock    ; 208.330 ns                  ; 208.077 ns                ; 5.676 ns                ;
+; 202.412 ns                              ; 168.98 MHz ( period = 5.918 ns )                    ; SPI_state[1]                     ; start1                           ; clock      ; clock    ; 208.330 ns                  ; 208.050 ns                ; 5.638 ns                ;
+; 202.547 ns                              ; 172.92 MHz ( period = 5.783 ns )                    ; SPI_state[3]                     ; SPI2_state[0]                    ; clock      ; clock    ; 208.330 ns                  ; 208.066 ns                ; 5.519 ns                ;
+; 202.624 ns                              ; 175.25 MHz ( period = 5.706 ns )                    ; SPI_state[0]                     ; Second_LO_data[5]                ; clock      ; clock    ; 208.330 ns                  ; 208.064 ns                ; 5.440 ns                ;
+; 202.781 ns                              ; 180.21 MHz ( period = 5.549 ns )                    ; ADF4112_SPI:ADF4112|ready        ; SPI2_state[1]                    ; clock      ; clock    ; 208.330 ns                  ; 208.066 ns                ; 5.285 ns                ;
+; 202.911 ns                              ; 184.54 MHz ( period = 5.419 ns )                    ; First_LO_data[6]                 ; ADF4112_SPI:ADF4112|SPI_data     ; clock      ; clock    ; 208.330 ns                  ; 208.049 ns                ; 5.138 ns                ;
+; 202.925 ns                              ; 185.01 MHz ( period = 5.405 ns )                    ; ADF4112_SPI:ADF4112|ready        ; Second_LO_data[3]                ; clock      ; clock    ; 208.330 ns                  ; 208.037 ns                ; 5.112 ns                ;
+; 202.925 ns                              ; 185.01 MHz ( period = 5.405 ns )                    ; ADF4112_SPI:ADF4112|ready        ; Second_LO_data[0]                ; clock      ; clock    ; 208.330 ns                  ; 208.037 ns                ; 5.112 ns                ;
+; 202.925 ns                              ; 185.01 MHz ( period = 5.405 ns )                    ; ADF4112_SPI:ADF4112|ready        ; Second_LO_data[1]                ; clock      ; clock    ; 208.330 ns                  ; 208.037 ns                ; 5.112 ns                ;
+; 203.301 ns                              ; 198.85 MHz ( period = 5.029 ns )                    ; SPI_state[2]                     ; start1                           ; clock      ; clock    ; 208.330 ns                  ; 208.054 ns                ; 4.753 ns                ;
+; 203.310 ns                              ; 199.20 MHz ( period = 5.020 ns )                    ; SPI2_state[1]                    ; SPI2_state[0]                    ; clock      ; clock    ; 208.330 ns                  ; 208.066 ns                ; 4.756 ns                ;
+; 203.334 ns                              ; 200.16 MHz ( period = 4.996 ns )                    ; ADF4112_SPI:ADF4112|bit_count[1] ; ADF4112_SPI:ADF4112|SPI_data     ; clock      ; clock    ; 208.330 ns                  ; 208.078 ns                ; 4.744 ns                ;
+; 203.335 ns                              ; 200.20 MHz ( period = 4.995 ns )                    ; start2                           ; ADF4112_SPI:ADF4112|SPI_LE       ; clock      ; clock    ; 208.330 ns                  ; 208.054 ns                ; 4.719 ns                ;
+; 203.347 ns                              ; 200.68 MHz ( period = 4.983 ns )                    ; ADF4112_SPI:ADF4112|ready        ; Second_LO_data[5]                ; clock      ; clock    ; 208.330 ns                  ; 208.049 ns                ; 4.702 ns                ;
+; 203.382 ns                              ; 202.10 MHz ( period = 4.948 ns )                    ; SPI_state[3]                     ; Second_LO_data[3]                ; clock      ; clock    ; 208.330 ns                  ; 208.037 ns                ; 4.655 ns                ;
+; 203.382 ns                              ; 202.10 MHz ( period = 4.948 ns )                    ; SPI_state[3]                     ; Second_LO_data[0]                ; clock      ; clock    ; 208.330 ns                  ; 208.037 ns                ; 4.655 ns                ;
+; 203.382 ns                              ; 202.10 MHz ( period = 4.948 ns )                    ; SPI_state[3]                     ; Second_LO_data[1]                ; clock      ; clock    ; 208.330 ns                  ; 208.037 ns                ; 4.655 ns                ;
+; 203.472 ns                              ; 205.85 MHz ( period = 4.858 ns )                    ; SPI_state[1]                     ; First_LO_data[0]                 ; clock      ; clock    ; 208.330 ns                  ; 208.066 ns                ; 4.594 ns                ;
+; 203.472 ns                              ; 205.85 MHz ( period = 4.858 ns )                    ; SPI_state[1]                     ; First_LO_data[4]                 ; clock      ; clock    ; 208.330 ns                  ; 208.066 ns                ; 4.594 ns                ;
+; 203.472 ns                              ; 205.85 MHz ( period = 4.858 ns )                    ; SPI_state[1]                     ; First_LO_data[5]                 ; clock      ; clock    ; 208.330 ns                  ; 208.066 ns                ; 4.594 ns                ;
+; 203.472 ns                              ; 205.85 MHz ( period = 4.858 ns )                    ; SPI_state[1]                     ; First_LO_data[1]                 ; clock      ; clock    ; 208.330 ns                  ; 208.066 ns                ; 4.594 ns                ;
+; 203.472 ns                              ; 205.85 MHz ( period = 4.858 ns )                    ; SPI_state[1]                     ; First_LO_data[6]                 ; clock      ; clock    ; 208.330 ns                  ; 208.066 ns                ; 4.594 ns                ;
+; 203.481 ns                              ; 206.23 MHz ( period = 4.849 ns )                    ; SPI2_state[2]                    ; First_LO_data[0]                 ; clock      ; clock    ; 208.330 ns                  ; 208.082 ns                ; 4.601 ns                ;
+; 203.481 ns                              ; 206.23 MHz ( period = 4.849 ns )                    ; SPI2_state[2]                    ; First_LO_data[4]                 ; clock      ; clock    ; 208.330 ns                  ; 208.082 ns                ; 4.601 ns                ;
+; 203.481 ns                              ; 206.23 MHz ( period = 4.849 ns )                    ; SPI2_state[2]                    ; First_LO_data[5]                 ; clock      ; clock    ; 208.330 ns                  ; 208.082 ns                ; 4.601 ns                ;
+; 203.481 ns                              ; 206.23 MHz ( period = 4.849 ns )                    ; SPI2_state[2]                    ; First_LO_data[1]                 ; clock      ; clock    ; 208.330 ns                  ; 208.082 ns                ; 4.601 ns                ;
+; 203.481 ns                              ; 206.23 MHz ( period = 4.849 ns )                    ; SPI2_state[2]                    ; First_LO_data[6]                 ; clock      ; clock    ; 208.330 ns                  ; 208.082 ns                ; 4.601 ns                ;
+; 203.486 ns                              ; 206.44 MHz ( period = 4.844 ns )                    ; start2                           ; ADF4112_SPI:ADF4112|bit_count[3] ; clock      ; clock    ; 208.330 ns                  ; 208.041 ns                ; 4.555 ns                ;
+; 203.486 ns                              ; 206.44 MHz ( period = 4.844 ns )                    ; start2                           ; ADF4112_SPI:ADF4112|bit_count[1] ; clock      ; clock    ; 208.330 ns                  ; 208.041 ns                ; 4.555 ns                ;
+; 203.486 ns                              ; 206.44 MHz ( period = 4.844 ns )                    ; start2                           ; ADF4112_SPI:ADF4112|bit_count[2] ; clock      ; clock    ; 208.330 ns                  ; 208.041 ns                ; 4.555 ns                ;
+; 203.486 ns                              ; 206.44 MHz ( period = 4.844 ns )                    ; start2                           ; ADF4112_SPI:ADF4112|bit_count[0] ; clock      ; clock    ; 208.330 ns                  ; 208.041 ns                ; 4.555 ns                ;
+; 203.486 ns                              ; 206.44 MHz ( period = 4.844 ns )                    ; start2                           ; ADF4112_SPI:ADF4112|bit_count[4] ; clock      ; clock    ; 208.330 ns                  ; 208.041 ns                ; 4.555 ns                ;
+; 203.533 ns                              ; 208.46 MHz ( period = 4.797 ns )                    ; SPI_state[1]                     ; SPI_state[0]                     ; clock      ; clock    ; 208.330 ns                  ; 208.051 ns                ; 4.518 ns                ;
+; 203.577 ns                              ; 210.39 MHz ( period = 4.753 ns )                    ; SPI_state[2]                     ; Second_LO_data[3]                ; clock      ; clock    ; 208.330 ns                  ; 208.041 ns                ; 4.464 ns                ;
+; 203.577 ns                              ; 210.39 MHz ( period = 4.753 ns )                    ; SPI_state[2]                     ; Second_LO_data[0]                ; clock      ; clock    ; 208.330 ns                  ; 208.041 ns                ; 4.464 ns                ;
+; 203.577 ns                              ; 210.39 MHz ( period = 4.753 ns )                    ; SPI_state[2]                     ; Second_LO_data[1]                ; clock      ; clock    ; 208.330 ns                  ; 208.041 ns                ; 4.464 ns                ;
+; 203.598 ns                              ; 211.33 MHz ( period = 4.732 ns )                    ; SPI_state[1]                     ; SPI_state[1]                     ; clock      ; clock    ; 208.330 ns                  ; 208.066 ns                ; 4.468 ns                ;
+; 203.602 ns                              ; 211.51 MHz ( period = 4.728 ns )                    ; SPI_state[0]                     ; SPI_state[0]                     ; clock      ; clock    ; 208.330 ns                  ; 208.066 ns                ; 4.464 ns                ;
+; 203.672 ns                              ; 214.68 MHz ( period = 4.658 ns )                    ; ADF4112_SPI:ADF4112|bit_count[4] ; ADF4112_SPI:ADF4112|SPI_data     ; clock      ; clock    ; 208.330 ns                  ; 208.078 ns                ; 4.406 ns                ;
+; 203.725 ns                              ; 217.16 MHz ( period = 4.605 ns )                    ; ADF4112_SPI:ADF4112|ready        ; SPI_state[1]                     ; clock      ; clock    ; 208.330 ns                  ; 208.066 ns                ; 4.341 ns                ;
+; 203.743 ns                              ; 218.01 MHz ( period = 4.587 ns )                    ; ADF4112_SPI:ADF4112|ready        ; start1                           ; clock      ; clock    ; 208.330 ns                  ; 208.050 ns                ; 4.307 ns                ;
+; 203.756 ns                              ; 218.63 MHz ( period = 4.574 ns )                    ; SPI2_state[1]                    ; SPI2_state[1]                    ; clock      ; clock    ; 208.330 ns                  ; 208.066 ns                ; 4.310 ns                ;
+; 203.804 ns                              ; 220.95 MHz ( period = 4.526 ns )                    ; SPI_state[3]                     ; Second_LO_data[5]                ; clock      ; clock    ; 208.330 ns                  ; 208.049 ns                ; 4.245 ns                ;
+; 203.829 ns                              ; 222.17 MHz ( period = 4.501 ns )                    ; SPI_state[1]                     ; Second_LO_data[8]                ; clock      ; clock    ; 208.330 ns                  ; 208.062 ns                ; 4.233 ns                ;
+; 203.853 ns                              ; 223.36 MHz ( period = 4.477 ns )                    ; SPI2_state[0]                    ; start1                           ; clock      ; clock    ; 208.330 ns                  ; 208.050 ns                ; 4.197 ns                ;
+; 203.878 ns                              ; 224.62 MHz ( period = 4.452 ns )                    ; ADF4112_SPI:ADF4112|bit_count[3] ; ADF4112_SPI:ADF4112|SPI_data     ; clock      ; clock    ; 208.330 ns                  ; 208.078 ns                ; 4.200 ns                ;
+; 203.910 ns                              ; 226.24 MHz ( period = 4.420 ns )                    ; ADF4112_SPI:ADF4112|ready        ; SPI_state[0]                     ; clock      ; clock    ; 208.330 ns                  ; 208.051 ns                ; 4.141 ns                ;
+; 203.927 ns                              ; 227.12 MHz ( period = 4.403 ns )                    ; SPI_state[3]                     ; SPI_state[0]                     ; clock      ; clock    ; 208.330 ns                  ; 208.051 ns                ; 4.124 ns                ;
+; 203.950 ns                              ; 228.31 MHz ( period = 4.380 ns )                    ; ADF4112_SPI:ADF4112|ready        ; Second_LO_data[8]                ; clock      ; clock    ; 208.330 ns                  ; 208.062 ns                ; 4.112 ns                ;
+; 203.986 ns                              ; 230.20 MHz ( period = 4.344 ns )                    ; SPI_state[1]                     ; Second_LO_data[3]                ; clock      ; clock    ; 208.330 ns                  ; 208.037 ns                ; 4.051 ns                ;
+; 203.986 ns                              ; 230.20 MHz ( period = 4.344 ns )                    ; SPI_state[1]                     ; Second_LO_data[0]                ; clock      ; clock    ; 208.330 ns                  ; 208.037 ns                ; 4.051 ns                ;
+; 203.986 ns                              ; 230.20 MHz ( period = 4.344 ns )                    ; SPI_state[1]                     ; Second_LO_data[1]                ; clock      ; clock    ; 208.330 ns                  ; 208.037 ns                ; 4.051 ns                ;
+; 203.999 ns                              ; 230.89 MHz ( period = 4.331 ns )                    ; SPI_state[2]                     ; Second_LO_data[5]                ; clock      ; clock    ; 208.330 ns                  ; 208.053 ns                ; 4.054 ns                ;
+; 204.085 ns                              ; 235.57 MHz ( period = 4.245 ns )                    ; SPI2_state[1]                    ; start1                           ; clock      ; clock    ; 208.330 ns                  ; 208.050 ns                ; 3.965 ns                ;
+; 204.104 ns                              ; 236.63 MHz ( period = 4.226 ns )                    ; ADF4112_SPI:ADF4112|ready        ; SPI2_state[2]                    ; clock      ; clock    ; 208.330 ns                  ; 208.050 ns                ; 3.946 ns                ;
+; 204.149 ns                              ; 239.18 MHz ( period = 4.181 ns )                    ; SPI_state[3]                     ; start1                           ; clock      ; clock    ; 208.330 ns                  ; 208.050 ns                ; 3.901 ns                ;
+; 204.154 ns                              ; 239.46 MHz ( period = 4.176 ns )                    ; ADF4112_SPI:ADF4112|bit_count[1] ; ADF4112_SPI:ADF4112|SPI_LE       ; clock      ; clock    ; 208.330 ns                  ; 208.079 ns                ; 3.925 ns                ;
+; 204.154 ns                              ; 239.46 MHz ( period = 4.176 ns )                    ; ADF4112_SPI:ADF4112|bit_count[1] ; ADF4112_SPI:ADF4112|SPI_state~8  ; clock      ; clock    ; 208.330 ns                  ; 208.079 ns                ; 3.925 ns                ;
+; 204.279 ns                              ; 246.85 MHz ( period = 4.051 ns )                    ; Second_LO_data[5]                ; ADF4112_SPI:ADF4112|SPI_data     ; clock      ; clock    ; 208.330 ns                  ; 208.066 ns                ; 3.787 ns                ;
+; 204.361 ns                              ; 251.95 MHz ( period = 3.969 ns )                    ; SPI_state[2]                     ; First_LO_data[0]                 ; clock      ; clock    ; 208.330 ns                  ; 208.070 ns                ; 3.709 ns                ;
+; 204.361 ns                              ; 251.95 MHz ( period = 3.969 ns )                    ; SPI_state[2]                     ; First_LO_data[4]                 ; clock      ; clock    ; 208.330 ns                  ; 208.070 ns                ; 3.709 ns                ;
+; 204.361 ns                              ; 251.95 MHz ( period = 3.969 ns )                    ; SPI_state[2]                     ; First_LO_data[5]                 ; clock      ; clock    ; 208.330 ns                  ; 208.070 ns                ; 3.709 ns                ;
+; 204.361 ns                              ; 251.95 MHz ( period = 3.969 ns )                    ; SPI_state[2]                     ; First_LO_data[1]                 ; clock      ; clock    ; 208.330 ns                  ; 208.070 ns                ; 3.709 ns                ;
+; 204.361 ns                              ; 251.95 MHz ( period = 3.969 ns )                    ; SPI_state[2]                     ; First_LO_data[6]                 ; clock      ; clock    ; 208.330 ns                  ; 208.070 ns                ; 3.709 ns                ;
+; 204.399 ns                              ; 254.39 MHz ( period = 3.931 ns )                    ; SPI2_state[2]                    ; SPI2_state[0]                    ; clock      ; clock    ; 208.330 ns                  ; 208.082 ns                ; 3.683 ns                ;
+; 204.408 ns                              ; 254.97 MHz ( period = 3.922 ns )                    ; SPI_state[1]                     ; Second_LO_data[5]                ; clock      ; clock    ; 208.330 ns                  ; 208.049 ns                ; 3.641 ns                ;
+; 204.414 ns                              ; 255.36 MHz ( period = 3.916 ns )                    ; SPI_state[3]                     ; SPI_state[1]                     ; clock      ; clock    ; 208.330 ns                  ; 208.066 ns                ; 3.652 ns                ;
+; 204.492 ns                              ; 260.55 MHz ( period = 3.838 ns )                    ; ADF4112_SPI:ADF4112|bit_count[4] ; ADF4112_SPI:ADF4112|SPI_LE       ; clock      ; clock    ; 208.330 ns                  ; 208.079 ns                ; 3.587 ns                ;
+; 204.492 ns                              ; 260.55 MHz ( period = 3.838 ns )                    ; ADF4112_SPI:ADF4112|bit_count[4] ; ADF4112_SPI:ADF4112|SPI_state~8  ; clock      ; clock    ; 208.330 ns                  ; 208.079 ns                ; 3.587 ns                ;
+; 204.612 ns                              ; 268.96 MHz ( period = 3.718 ns )                    ; SPI_state[0]                     ; SPI_state[3]                     ; clock      ; clock    ; 208.330 ns                  ; 208.081 ns                ; 3.469 ns                ;
+; 204.626 ns                              ; 269.98 MHz ( period = 3.704 ns )                    ; SPI_state[1]                     ; start2                           ; clock      ; clock    ; 208.330 ns                  ; 208.062 ns                ; 3.436 ns                ;
+; 204.661 ns                              ; 272.55 MHz ( period = 3.669 ns )                    ; SPI_state[1]                     ; SPI_state[2]                     ; clock      ; clock    ; 208.330 ns                  ; 208.062 ns                ; 3.401 ns                ;
+; 204.672 ns                              ; 273.37 MHz ( period = 3.658 ns )                    ; start2                           ; ADF4112_SPI:ADF4112|SPI_state~7  ; clock      ; clock    ; 208.330 ns                  ; 208.054 ns                ; 3.382 ns                ;
+; 204.683 ns                              ; 274.20 MHz ( period = 3.647 ns )                    ; ADF4112_SPI:ADF4112|SPI_state~8  ; ADF4112_SPI:ADF4112|bit_count[3] ; clock      ; clock    ; 208.330 ns                  ; 208.053 ns                ; 3.370 ns                ;
+; 204.683 ns                              ; 274.20 MHz ( period = 3.647 ns )                    ; ADF4112_SPI:ADF4112|SPI_state~8  ; ADF4112_SPI:ADF4112|bit_count[1] ; clock      ; clock    ; 208.330 ns                  ; 208.053 ns                ; 3.370 ns                ;
+; 204.683 ns                              ; 274.20 MHz ( period = 3.647 ns )                    ; ADF4112_SPI:ADF4112|SPI_state~8  ; ADF4112_SPI:ADF4112|bit_count[2] ; clock      ; clock    ; 208.330 ns                  ; 208.053 ns                ; 3.370 ns                ;
+; 204.683 ns                              ; 274.20 MHz ( period = 3.647 ns )                    ; ADF4112_SPI:ADF4112|SPI_state~8  ; ADF4112_SPI:ADF4112|bit_count[0] ; clock      ; clock    ; 208.330 ns                  ; 208.053 ns                ; 3.370 ns                ;
+; 204.683 ns                              ; 274.20 MHz ( period = 3.647 ns )                    ; ADF4112_SPI:ADF4112|SPI_state~8  ; ADF4112_SPI:ADF4112|bit_count[4] ; clock      ; clock    ; 208.330 ns                  ; 208.053 ns                ; 3.370 ns                ;
+; 204.693 ns                              ; 274.95 MHz ( period = 3.637 ns )                    ; SPI_state[0]                     ; SPI_state[2]                     ; clock      ; clock    ; 208.330 ns                  ; 208.077 ns                ; 3.384 ns                ;
+; 204.694 ns                              ; 275.03 MHz ( period = 3.636 ns )                    ; SPI_state[0]                     ; start2                           ; clock      ; clock    ; 208.330 ns                  ; 208.077 ns                ; 3.383 ns                ;
+; 204.698 ns                              ; 275.33 MHz ( period = 3.632 ns )                    ; ADF4112_SPI:ADF4112|bit_count[3] ; ADF4112_SPI:ADF4112|SPI_LE       ; clock      ; clock    ; 208.330 ns                  ; 208.079 ns                ; 3.381 ns                ;
+; 204.698 ns                              ; 275.33 MHz ( period = 3.632 ns )                    ; ADF4112_SPI:ADF4112|bit_count[3] ; ADF4112_SPI:ADF4112|SPI_state~8  ; clock      ; clock    ; 208.330 ns                  ; 208.079 ns                ; 3.381 ns                ;
+; 204.700 ns                              ; 275.48 MHz ( period = 3.630 ns )                    ; SPI2_state[3]                    ; First_LO_data[0]                 ; clock      ; clock    ; 208.330 ns                  ; 208.082 ns                ; 3.382 ns                ;
+; 204.700 ns                              ; 275.48 MHz ( period = 3.630 ns )                    ; SPI2_state[3]                    ; First_LO_data[4]                 ; clock      ; clock    ; 208.330 ns                  ; 208.082 ns                ; 3.382 ns                ;
+; 204.700 ns                              ; 275.48 MHz ( period = 3.630 ns )                    ; SPI2_state[3]                    ; First_LO_data[5]                 ; clock      ; clock    ; 208.330 ns                  ; 208.082 ns                ; 3.382 ns                ;
+; 204.700 ns                              ; 275.48 MHz ( period = 3.630 ns )                    ; SPI2_state[3]                    ; First_LO_data[1]                 ; clock      ; clock    ; 208.330 ns                  ; 208.082 ns                ; 3.382 ns                ;
+; 204.700 ns                              ; 275.48 MHz ( period = 3.630 ns )                    ; SPI2_state[3]                    ; First_LO_data[6]                 ; clock      ; clock    ; 208.330 ns                  ; 208.082 ns                ; 3.382 ns                ;
+; 204.758 ns                              ; 279.96 MHz ( period = 3.572 ns )                    ; ADF4112_SPI:ADF4112|bit_count[0] ; ADF4112_SPI:ADF4112|SPI_LE       ; clock      ; clock    ; 208.330 ns                  ; 208.079 ns                ; 3.321 ns                ;
+; 204.758 ns                              ; 279.96 MHz ( period = 3.572 ns )                    ; ADF4112_SPI:ADF4112|bit_count[0] ; ADF4112_SPI:ADF4112|SPI_state~8  ; clock      ; clock    ; 208.330 ns                  ; 208.079 ns                ; 3.321 ns                ;
+; 204.779 ns                              ; 281.61 MHz ( period = 3.551 ns )                    ; ADF4112_SPI:ADF4112|bit_count[2] ; ADF4112_SPI:ADF4112|SPI_LE       ; clock      ; clock    ; 208.330 ns                  ; 208.079 ns                ; 3.300 ns                ;
+; 204.779 ns                              ; 281.61 MHz ( period = 3.551 ns )                    ; ADF4112_SPI:ADF4112|bit_count[2] ; ADF4112_SPI:ADF4112|SPI_state~8  ; clock      ; clock    ; 208.330 ns                  ; 208.079 ns                ; 3.300 ns                ;
+; 204.803 ns                              ; 283.53 MHz ( period = 3.527 ns )                    ; ADF4112_SPI:ADF4112|ready        ; First_LO_data[0]                 ; clock      ; clock    ; 208.330 ns                  ; 208.066 ns                ; 3.263 ns                ;
+; 204.803 ns                              ; 283.53 MHz ( period = 3.527 ns )                    ; ADF4112_SPI:ADF4112|ready        ; First_LO_data[4]                 ; clock      ; clock    ; 208.330 ns                  ; 208.066 ns                ; 3.263 ns                ;
+; 204.803 ns                              ; 283.53 MHz ( period = 3.527 ns )                    ; ADF4112_SPI:ADF4112|ready        ; First_LO_data[5]                 ; clock      ; clock    ; 208.330 ns                  ; 208.066 ns                ; 3.263 ns                ;
+; 204.803 ns                              ; 283.53 MHz ( period = 3.527 ns )                    ; ADF4112_SPI:ADF4112|ready        ; First_LO_data[1]                 ; clock      ; clock    ; 208.330 ns                  ; 208.066 ns                ; 3.263 ns                ;
+; 204.803 ns                              ; 283.53 MHz ( period = 3.527 ns )                    ; ADF4112_SPI:ADF4112|ready        ; First_LO_data[6]                 ; clock      ; clock    ; 208.330 ns                  ; 208.066 ns                ; 3.263 ns                ;
+; 204.841 ns                              ; 286.62 MHz ( period = 3.489 ns )                    ; SPI2_state[1]                    ; First_LO_data[0]                 ; clock      ; clock    ; 208.330 ns                  ; 208.066 ns                ; 3.225 ns                ;
+; 204.841 ns                              ; 286.62 MHz ( period = 3.489 ns )                    ; SPI2_state[1]                    ; First_LO_data[4]                 ; clock      ; clock    ; 208.330 ns                  ; 208.066 ns                ; 3.225 ns                ;
+; 204.841 ns                              ; 286.62 MHz ( period = 3.489 ns )                    ; SPI2_state[1]                    ; First_LO_data[5]                 ; clock      ; clock    ; 208.330 ns                  ; 208.066 ns                ; 3.225 ns                ;
+; 204.841 ns                              ; 286.62 MHz ( period = 3.489 ns )                    ; SPI2_state[1]                    ; First_LO_data[1]                 ; clock      ; clock    ; 208.330 ns                  ; 208.066 ns                ; 3.225 ns                ;
+; 204.841 ns                              ; 286.62 MHz ( period = 3.489 ns )                    ; SPI2_state[1]                    ; First_LO_data[6]                 ; clock      ; clock    ; 208.330 ns                  ; 208.066 ns                ; 3.225 ns                ;
+; 204.855 ns                              ; 287.77 MHz ( period = 3.475 ns )                    ; SPI2_state[3]                    ; SPI2_state[0]                    ; clock      ; clock    ; 208.330 ns                  ; 208.082 ns                ; 3.227 ns                ;
+; 204.968 ns                              ; 297.44 MHz ( period = 3.362 ns )                    ; SPI_state[3]                     ; Second_LO_data[8]                ; clock      ; clock    ; 208.330 ns                  ; 208.062 ns                ; 3.094 ns                ;
+; 204.968 ns                              ; 297.44 MHz ( period = 3.362 ns )                    ; ADF4112_SPI:ADF4112|SPI_state~8  ; ADF4112_SPI:ADF4112|ready        ; clock      ; clock    ; 208.330 ns                  ; 208.082 ns                ; 3.114 ns                ;
+; 204.976 ns                              ; 298.15 MHz ( period = 3.354 ns )                    ; SPI2_state[2]                    ; SPI2_state[1]                    ; clock      ; clock    ; 208.330 ns                  ; 208.082 ns                ; 3.106 ns                ;
+; 205.011 ns                              ; 301.30 MHz ( period = 3.319 ns )                    ; SPI_state[3]                     ; start2                           ; clock      ; clock    ; 208.330 ns                  ; 208.062 ns                ; 3.051 ns                ;
+; 205.043 ns                              ; 304.23 MHz ( period = 3.287 ns )                    ; SPI_state[3]                     ; SPI_state[2]                     ; clock      ; clock    ; 208.330 ns                  ; 208.062 ns                ; 3.019 ns                ;
+; 205.066 ns                              ; 306.37 MHz ( period = 3.264 ns )                    ; ADF4112_SPI:ADF4112|ready        ; SPI_state[2]                     ; clock      ; clock    ; 208.330 ns                  ; 208.062 ns                ; 2.996 ns                ;
+; 205.074 ns                              ; 307.13 MHz ( period = 3.256 ns )                    ; SPI2_state[0]                    ; SPI2_state[2]                    ; clock      ; clock    ; 208.330 ns                  ; 208.050 ns                ; 2.976 ns                ;
+; 205.082 ns                              ; 307.88 MHz ( period = 3.248 ns )                    ; SPI_state[0]                     ; SPI_state[1]                     ; clock      ; clock    ; 208.330 ns                  ; 208.081 ns                ; 2.999 ns                ;
+; 205.097 ns                              ; 309.31 MHz ( period = 3.233 ns )                    ; SPI2_state[0]                    ; First_LO_data[0]                 ; clock      ; clock    ; 208.330 ns                  ; 208.066 ns                ; 2.969 ns                ;
+; 205.097 ns                              ; 309.31 MHz ( period = 3.233 ns )                    ; SPI2_state[0]                    ; First_LO_data[4]                 ; clock      ; clock    ; 208.330 ns                  ; 208.066 ns                ; 2.969 ns                ;
+; 205.097 ns                              ; 309.31 MHz ( period = 3.233 ns )                    ; SPI2_state[0]                    ; First_LO_data[5]                 ; clock      ; clock    ; 208.330 ns                  ; 208.066 ns                ; 2.969 ns                ;
+; 205.097 ns                              ; 309.31 MHz ( period = 3.233 ns )                    ; SPI2_state[0]                    ; First_LO_data[1]                 ; clock      ; clock    ; 208.330 ns                  ; 208.066 ns                ; 2.969 ns                ;
+; 205.097 ns                              ; 309.31 MHz ( period = 3.233 ns )                    ; SPI2_state[0]                    ; First_LO_data[6]                 ; clock      ; clock    ; 208.330 ns                  ; 208.066 ns                ; 2.969 ns                ;
+; 205.109 ns                              ; 310.46 MHz ( period = 3.221 ns )                    ; start1                           ; ADF4112_SPI:ADF4112|bit_count[3] ; clock      ; clock    ; 208.330 ns                  ; 208.053 ns                ; 2.944 ns                ;
+; 205.109 ns                              ; 310.46 MHz ( period = 3.221 ns )                    ; start1                           ; ADF4112_SPI:ADF4112|bit_count[1] ; clock      ; clock    ; 208.330 ns                  ; 208.053 ns                ; 2.944 ns                ;
+; 205.109 ns                              ; 310.46 MHz ( period = 3.221 ns )                    ; start1                           ; ADF4112_SPI:ADF4112|bit_count[2] ; clock      ; clock    ; 208.330 ns                  ; 208.053 ns                ; 2.944 ns                ;
+; 205.109 ns                              ; 310.46 MHz ( period = 3.221 ns )                    ; start1                           ; ADF4112_SPI:ADF4112|bit_count[0] ; clock      ; clock    ; 208.330 ns                  ; 208.053 ns                ; 2.944 ns                ;
+; 205.109 ns                              ; 310.46 MHz ( period = 3.221 ns )                    ; start1                           ; ADF4112_SPI:ADF4112|bit_count[4] ; clock      ; clock    ; 208.330 ns                  ; 208.053 ns                ; 2.944 ns                ;
+; 205.182 ns                              ; 317.66 MHz ( period = 3.148 ns )                    ; SPI2_state[2]                    ; start1                           ; clock      ; clock    ; 208.330 ns                  ; 208.066 ns                ; 2.884 ns                ;
+; 205.193 ns                              ; 318.78 MHz ( period = 3.137 ns )                    ; SPI_state[2]                     ; Second_LO_data[8]                ; clock      ; clock    ; 208.330 ns                  ; 208.066 ns                ; 2.873 ns                ;
+; 205.209 ns                              ; 320.41 MHz ( period = 3.121 ns )                    ; SPI_state[3]                     ; First_LO_data[0]                 ; clock      ; clock    ; 208.330 ns                  ; 208.066 ns                ; 2.857 ns                ;
+; 205.209 ns                              ; 320.41 MHz ( period = 3.121 ns )                    ; SPI_state[3]                     ; First_LO_data[4]                 ; clock      ; clock    ; 208.330 ns                  ; 208.066 ns                ; 2.857 ns                ;
+; 205.209 ns                              ; 320.41 MHz ( period = 3.121 ns )                    ; SPI_state[3]                     ; First_LO_data[5]                 ; clock      ; clock    ; 208.330 ns                  ; 208.066 ns                ; 2.857 ns                ;
+; 205.209 ns                              ; 320.41 MHz ( period = 3.121 ns )                    ; SPI_state[3]                     ; First_LO_data[1]                 ; clock      ; clock    ; 208.330 ns                  ; 208.066 ns                ; 2.857 ns                ;
+; 205.209 ns                              ; 320.41 MHz ( period = 3.121 ns )                    ; SPI_state[3]                     ; First_LO_data[6]                 ; clock      ; clock    ; 208.330 ns                  ; 208.066 ns                ; 2.857 ns                ;
+; 205.323 ns                              ; 332.56 MHz ( period = 3.007 ns )                    ; SPI2_state[3]                    ; SPI2_state[1]                    ; clock      ; clock    ; 208.330 ns                  ; 208.082 ns                ; 2.759 ns                ;
+; 205.325 ns                              ; 332.78 MHz ( period = 3.005 ns )                    ; ADF4112_SPI:ADF4112|SPI_state~7  ; ADF4112_SPI:ADF4112|SPI_data     ; clock      ; clock    ; 208.330 ns                  ; 208.065 ns                ; 2.740 ns                ;
+; 205.342 ns                              ; 334.67 MHz ( period = 2.988 ns )                    ; ADF4112_SPI:ADF4112|SPI_state~7  ; ADF4112_SPI:ADF4112|ready        ; clock      ; clock    ; 208.330 ns                  ; 208.082 ns                ; 2.740 ns                ;
+; 205.414 ns                              ; 342.94 MHz ( period = 2.916 ns )                    ; SPI_state[2]                     ; SPI_state[0]                     ; clock      ; clock    ; 208.330 ns                  ; 208.055 ns                ; 2.641 ns                ;
+; 205.420 ns                              ; 343.64 MHz ( period = 2.910 ns )                    ; start1                           ; ADF4112_SPI:ADF4112|ready        ; clock      ; clock    ; 208.330 ns                  ; 208.082 ns                ; 2.662 ns                ;
+; 205.443 ns                              ; 346.38 MHz ( period = 2.887 ns )                    ; SPI2_state[1]                    ; SPI2_state[3]                    ; clock      ; clock    ; 208.330 ns                  ; 208.050 ns                ; 2.607 ns                ;
+; 205.444 ns                              ; 346.50 MHz ( period = 2.886 ns )                    ; SPI2_state[1]                    ; SPI2_state[2]                    ; clock      ; clock    ; 208.330 ns                  ; 208.050 ns                ; 2.606 ns                ;
+; 205.492 ns                              ; 352.36 MHz ( period = 2.838 ns )                    ; ADF4112_SPI:ADF4112|SPI_state~8  ; ADF4112_SPI:ADF4112|SPI_data     ; clock      ; clock    ; 208.330 ns                  ; 208.065 ns                ; 2.573 ns                ;
+; 205.498 ns                              ; 353.11 MHz ( period = 2.832 ns )                    ; ADF4112_SPI:ADF4112|SPI_state~7  ; ADF4112_SPI:ADF4112|bit_count[3] ; clock      ; clock    ; 208.330 ns                  ; 208.053 ns                ; 2.555 ns                ;
+; 205.498 ns                              ; 353.11 MHz ( period = 2.832 ns )                    ; ADF4112_SPI:ADF4112|SPI_state~7  ; ADF4112_SPI:ADF4112|bit_count[1] ; clock      ; clock    ; 208.330 ns                  ; 208.053 ns                ; 2.555 ns                ;
+; 205.498 ns                              ; 353.11 MHz ( period = 2.832 ns )                    ; ADF4112_SPI:ADF4112|SPI_state~7  ; ADF4112_SPI:ADF4112|bit_count[2] ; clock      ; clock    ; 208.330 ns                  ; 208.053 ns                ; 2.555 ns                ;
+; 205.498 ns                              ; 353.11 MHz ( period = 2.832 ns )                    ; ADF4112_SPI:ADF4112|SPI_state~7  ; ADF4112_SPI:ADF4112|bit_count[0] ; clock      ; clock    ; 208.330 ns                  ; 208.053 ns                ; 2.555 ns                ;
+; 205.498 ns                              ; 353.11 MHz ( period = 2.832 ns )                    ; ADF4112_SPI:ADF4112|SPI_state~7  ; ADF4112_SPI:ADF4112|bit_count[4] ; clock      ; clock    ; 208.330 ns                  ; 208.053 ns                ; 2.555 ns                ;
+; 205.527 ns                              ; 356.76 MHz ( period = 2.803 ns )                    ; start1                           ; ADF4112_SPI:ADF4112|SPI_LE       ; clock      ; clock    ; 208.330 ns                  ; 208.066 ns                ; 2.539 ns                ;
+; 205.640 ns                              ; 371.75 MHz ( period = 2.690 ns )                    ; SPI2_state[3]                    ; start1                           ; clock      ; clock    ; 208.330 ns                  ; 208.066 ns                ; 2.426 ns                ;
+; 205.813 ns                              ; 397.30 MHz ( period = 2.517 ns )                    ; ADF4112_SPI:ADF4112|ready        ; start2                           ; clock      ; clock    ; 208.330 ns                  ; 208.062 ns                ; 2.249 ns                ;
+; 205.873 ns                              ; Restricted to 402.58 MHz ( period = 2.48 ns )       ; start2                           ; ADF4112_SPI:ADF4112|ready        ; clock      ; clock    ; 208.330 ns                  ; 208.070 ns                ; 2.197 ns                ;
+; 205.893 ns                              ; Restricted to 402.58 MHz ( period = 2.48 ns )       ; SPI2_state[0]                    ; SPI2_state[3]                    ; clock      ; clock    ; 208.330 ns                  ; 208.050 ns                ; 2.157 ns                ;
+; 205.930 ns                              ; Restricted to 402.58 MHz ( period = 2.48 ns )       ; ADF4112_SPI:ADF4112|SPI_state~8  ; ADF4112_SPI:ADF4112|SPI_LE       ; clock      ; clock    ; 208.330 ns                  ; 208.066 ns                ; 2.136 ns                ;
+; 206.002 ns                              ; Restricted to 402.58 MHz ( period = 2.48 ns )       ; SPI_state[2]                     ; SPI_state[2]                     ; clock      ; clock    ; 208.330 ns                  ; 208.066 ns                ; 2.064 ns                ;
+; 206.007 ns                              ; Restricted to 402.58 MHz ( period = 2.48 ns )       ; SPI_state[2]                     ; start2                           ; clock      ; clock    ; 208.330 ns                  ; 208.066 ns                ; 2.059 ns                ;
+; 206.051 ns                              ; Restricted to 402.58 MHz ( period = 2.48 ns )       ; ADF4112_SPI:ADF4112|bit_count[0] ; ADF4112_SPI:ADF4112|bit_count[4] ; clock      ; clock    ; 208.330 ns                  ; 208.066 ns                ; 2.015 ns                ;
+; 206.137 ns                              ; Restricted to 402.58 MHz ( period = 2.48 ns )       ; ADF4112_SPI:ADF4112|bit_count[0] ; ADF4112_SPI:ADF4112|bit_count[3] ; clock      ; clock    ; 208.330 ns                  ; 208.066 ns                ; 1.929 ns                ;
+; 206.158 ns                              ; Restricted to 402.58 MHz ( period = 2.48 ns )       ; ADF4112_SPI:ADF4112|SPI_state~7  ; ADF4112_SPI:ADF4112|SPI_clock    ; clock      ; clock    ; 208.330 ns                  ; 208.052 ns                ; 1.894 ns                ;
+; 206.207 ns                              ; Restricted to 402.58 MHz ( period = 2.48 ns )       ; SPI_state[2]                     ; SPI_state[1]                     ; clock      ; clock    ; 208.330 ns                  ; 208.070 ns                ; 1.863 ns                ;
+; 206.209 ns                              ; Restricted to 402.58 MHz ( period = 2.48 ns )       ; SPI_state[2]                     ; SPI_state[3]                     ; clock      ; clock    ; 208.330 ns                  ; 208.070 ns                ; 1.861 ns                ;
+; 206.210 ns                              ; Restricted to 402.58 MHz ( period = 2.48 ns )       ; ADF4112_SPI:ADF4112|bit_count[1] ; ADF4112_SPI:ADF4112|bit_count[4] ; clock      ; clock    ; 208.330 ns                  ; 208.066 ns                ; 1.856 ns                ;
+; 206.220 ns                              ; Restricted to 402.58 MHz ( period = 2.48 ns )       ; ADF4112_SPI:ADF4112|bit_count[2] ; ADF4112_SPI:ADF4112|bit_count[4] ; clock      ; clock    ; 208.330 ns                  ; 208.066 ns                ; 1.846 ns                ;
+; 206.223 ns                              ; Restricted to 402.58 MHz ( period = 2.48 ns )       ; ADF4112_SPI:ADF4112|bit_count[0] ; ADF4112_SPI:ADF4112|bit_count[2] ; clock      ; clock    ; 208.330 ns                  ; 208.066 ns                ; 1.843 ns                ;
+; 206.228 ns                              ; Restricted to 402.58 MHz ( period = 2.48 ns )       ; ADF4112_SPI:ADF4112|SPI_state~7  ; ADF4112_SPI:ADF4112|SPI_LE       ; clock      ; clock    ; 208.330 ns                  ; 208.066 ns                ; 1.838 ns                ;
+; 206.296 ns                              ; Restricted to 402.58 MHz ( period = 2.48 ns )       ; ADF4112_SPI:ADF4112|bit_count[1] ; ADF4112_SPI:ADF4112|bit_count[3] ; clock      ; clock    ; 208.330 ns                  ; 208.066 ns                ; 1.770 ns                ;
+; 206.306 ns                              ; Restricted to 402.58 MHz ( period = 2.48 ns )       ; ADF4112_SPI:ADF4112|bit_count[2] ; ADF4112_SPI:ADF4112|bit_count[3] ; clock      ; clock    ; 208.330 ns                  ; 208.066 ns                ; 1.760 ns                ;
+; 206.309 ns                              ; Restricted to 402.58 MHz ( period = 2.48 ns )       ; ADF4112_SPI:ADF4112|bit_count[0] ; ADF4112_SPI:ADF4112|bit_count[1] ; clock      ; clock    ; 208.330 ns                  ; 208.066 ns                ; 1.757 ns                ;
+; 206.380 ns                              ; Restricted to 402.58 MHz ( period = 2.48 ns )       ; ADF4112_SPI:ADF4112|bit_count[3] ; ADF4112_SPI:ADF4112|bit_count[4] ; clock      ; clock    ; 208.330 ns                  ; 208.066 ns                ; 1.686 ns                ;
+; 206.382 ns                              ; Restricted to 402.58 MHz ( period = 2.48 ns )       ; ADF4112_SPI:ADF4112|bit_count[1] ; ADF4112_SPI:ADF4112|bit_count[2] ; clock      ; clock    ; 208.330 ns                  ; 208.066 ns                ; 1.684 ns                ;
+; 206.558 ns                              ; Restricted to 402.58 MHz ( period = 2.48 ns )       ; start1                           ; start1                           ; clock      ; clock    ; 208.330 ns                  ; 208.066 ns                ; 1.508 ns                ;
+; 206.579 ns                              ; Restricted to 402.58 MHz ( period = 2.48 ns )       ; ADF4112_SPI:ADF4112|SPI_state~8  ; ADF4112_SPI:ADF4112|SPI_clock    ; clock      ; clock    ; 208.330 ns                  ; 208.052 ns                ; 1.473 ns                ;
+; 206.655 ns                              ; Restricted to 402.58 MHz ( period = 2.48 ns )       ; SPI2_state[3]                    ; SPI2_state[2]                    ; clock      ; clock    ; 208.330 ns                  ; 208.066 ns                ; 1.411 ns                ;
+; 206.746 ns                              ; Restricted to 402.58 MHz ( period = 2.48 ns )       ; Second_LO_data[8]                ; Second_LO_data[8]                ; clock      ; clock    ; 208.330 ns                  ; 208.066 ns                ; 1.320 ns                ;
+; 206.782 ns                              ; Restricted to 402.58 MHz ( period = 2.48 ns )       ; ADF4112_SPI:ADF4112|bit_count[2] ; ADF4112_SPI:ADF4112|bit_count[2] ; clock      ; clock    ; 208.330 ns                  ; 208.066 ns                ; 1.284 ns                ;
+; 206.785 ns                              ; Restricted to 402.58 MHz ( period = 2.48 ns )       ; ADF4112_SPI:ADF4112|bit_count[0] ; ADF4112_SPI:ADF4112|bit_count[0] ; clock      ; clock    ; 208.330 ns                  ; 208.066 ns                ; 1.281 ns                ;
+; 206.798 ns                              ; Restricted to 402.58 MHz ( period = 2.48 ns )       ; SPI2_state[2]                    ; SPI2_state[3]                    ; clock      ; clock    ; 208.330 ns                  ; 208.066 ns                ; 1.268 ns                ;
+; 206.800 ns                              ; Restricted to 402.58 MHz ( period = 2.48 ns )       ; ADF4112_SPI:ADF4112|bit_count[4] ; ADF4112_SPI:ADF4112|bit_count[4] ; clock      ; clock    ; 208.330 ns                  ; 208.066 ns                ; 1.266 ns                ;
+; 206.853 ns                              ; Restricted to 402.58 MHz ( period = 2.48 ns )       ; SPI2_state[0]                    ; SPI2_state[1]                    ; clock      ; clock    ; 208.330 ns                  ; 208.066 ns                ; 1.213 ns                ;
+; 206.864 ns                              ; Restricted to 402.58 MHz ( period = 2.48 ns )       ; start1                           ; ADF4112_SPI:ADF4112|SPI_state~7  ; clock      ; clock    ; 208.330 ns                  ; 208.066 ns                ; 1.202 ns                ;
+; 206.893 ns                              ; Restricted to 402.58 MHz ( period = 2.48 ns )       ; ADF4112_SPI:ADF4112|bit_count[3] ; ADF4112_SPI:ADF4112|bit_count[3] ; clock      ; clock    ; 208.330 ns                  ; 208.066 ns                ; 1.173 ns                ;
+; 206.895 ns                              ; Restricted to 402.58 MHz ( period = 2.48 ns )       ; ADF4112_SPI:ADF4112|bit_count[1] ; ADF4112_SPI:ADF4112|bit_count[1] ; clock      ; clock    ; 208.330 ns                  ; 208.066 ns                ; 1.171 ns                ;
+; Timing analysis restricted to 200 rows. ; To change the limit use Settings (Assignments menu) ;                                  ;                                  ;            ;          ;                             ;                           ;                         ;
++-----------------------------------------+-----------------------------------------------------+----------------------------------+----------------------------------+------------+----------+-----------------------------+---------------------------+-------------------------+
+
+
++-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Clock Setup: 'IFCLK'                                                                                                                                                                                ;
++-----------+-----------------------------------------------+--------------+--------------+------------+----------+-----------------------------+---------------------------+-------------------------+
+; Slack     ; Actual fmax (period)                          ; From         ; To           ; From Clock ; To Clock ; Required Setup Relationship ; Required Longest P2P Time ; Actual Longest P2P Time ;
++-----------+-----------------------------------------------+--------------+--------------+------------+----------+-----------------------------+---------------------------+-------------------------+
+; 19.385 ns ; Restricted to 340.02 MHz ( period = 2.94 ns ) ; spi_clock[1] ; spi_clock[2] ; IFCLK      ; IFCLK    ; 20.833 ns                   ; 20.569 ns                 ; 1.184 ns                ;
+; 19.387 ns ; Restricted to 340.02 MHz ( period = 2.94 ns ) ; spi_clock[1] ; spi_clock[0] ; IFCLK      ; IFCLK    ; 20.833 ns                   ; 20.569 ns                 ; 1.182 ns                ;
+; 19.810 ns ; Restricted to 340.02 MHz ( period = 2.94 ns ) ; spi_clock[0] ; spi_clock[1] ; IFCLK      ; IFCLK    ; 20.833 ns                   ; 20.569 ns                 ; 0.759 ns                ;
+; 19.815 ns ; Restricted to 340.02 MHz ( period = 2.94 ns ) ; spi_clock[0] ; spi_clock[2] ; IFCLK      ; IFCLK    ; 20.833 ns                   ; 20.569 ns                 ; 0.754 ns                ;
+; 19.822 ns ; Restricted to 340.02 MHz ( period = 2.94 ns ) ; spi_clock[2] ; spi_clock[0] ; IFCLK      ; IFCLK    ; 20.833 ns                   ; 20.569 ns                 ; 0.747 ns                ;
+; 20.068 ns ; Restricted to 340.02 MHz ( period = 2.94 ns ) ; spi_clock[2] ; spi_clock[2] ; IFCLK      ; IFCLK    ; 20.833 ns                   ; 20.569 ns                 ; 0.501 ns                ;
+; 20.068 ns ; Restricted to 340.02 MHz ( period = 2.94 ns ) ; spi_clock[1] ; spi_clock[1] ; IFCLK      ; IFCLK    ; 20.833 ns                   ; 20.569 ns                 ; 0.501 ns                ;
+; 20.068 ns ; Restricted to 340.02 MHz ( period = 2.94 ns ) ; spi_clock[0] ; spi_clock[0] ; IFCLK      ; IFCLK    ; 20.833 ns                   ; 20.569 ns                 ; 0.501 ns                ;
++-----------+-----------------------------------------------+--------------+--------------+------------+----------+-----------------------------+---------------------------+-------------------------+
+
+
++-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Clock Hold: 'clock'                                                                                                                                                                                                                           ;
++-----------------------------------------+-----------------------------------------------------+----------------------------------+------------+----------+----------------------------+----------------------------+--------------------------+
+; Minimum Slack                           ; From                                                ; To                               ; From Clock ; To Clock ; Required Hold Relationship ; Required Shortest P2P Time ; Actual Shortest P2P Time ;
++-----------------------------------------+-----------------------------------------------------+----------------------------------+------------+----------+----------------------------+----------------------------+--------------------------+
+; 0.499 ns                                ; ADF4112_SPI:ADF4112|SPI_LE                          ; ADF4112_SPI:ADF4112|SPI_LE       ; clock      ; clock    ; 0.000 ns                   ; 0.002 ns                   ; 0.501 ns                 ;
+; 0.499 ns                                ; Second_LO_data[8]                                   ; Second_LO_data[8]                ; clock      ; clock    ; 0.000 ns                   ; 0.002 ns                   ; 0.501 ns                 ;
+; 0.499 ns                                ; ADF4112_SPI:ADF4112|SPI_data                        ; ADF4112_SPI:ADF4112|SPI_data     ; clock      ; clock    ; 0.000 ns                   ; 0.002 ns                   ; 0.501 ns                 ;
+; 0.499 ns                                ; ADF4112_SPI:ADF4112|SPI_clock                       ; ADF4112_SPI:ADF4112|SPI_clock    ; clock      ; clock    ; 0.000 ns                   ; 0.002 ns                   ; 0.501 ns                 ;
+; 0.499 ns                                ; SPI2_state[2]                                       ; SPI2_state[2]                    ; clock      ; clock    ; 0.000 ns                   ; 0.002 ns                   ; 0.501 ns                 ;
+; 0.499 ns                                ; SPI2_state[3]                                       ; SPI2_state[3]                    ; clock      ; clock    ; 0.000 ns                   ; 0.002 ns                   ; 0.501 ns                 ;
+; 0.499 ns                                ; SPI2_state[1]                                       ; SPI2_state[1]                    ; clock      ; clock    ; 0.000 ns                   ; 0.002 ns                   ; 0.501 ns                 ;
+; 0.499 ns                                ; SPI2_state[0]                                       ; SPI2_state[0]                    ; clock      ; clock    ; 0.000 ns                   ; 0.002 ns                   ; 0.501 ns                 ;
+; 0.499 ns                                ; ADF4112_SPI:ADF4112|SPI_state~7                     ; ADF4112_SPI:ADF4112|SPI_state~7  ; clock      ; clock    ; 0.000 ns                   ; 0.002 ns                   ; 0.501 ns                 ;
+; 0.499 ns                                ; ADF4112_SPI:ADF4112|SPI_state~8                     ; ADF4112_SPI:ADF4112|SPI_state~8  ; clock      ; clock    ; 0.000 ns                   ; 0.002 ns                   ; 0.501 ns                 ;
+; 0.499 ns                                ; start2                                              ; start2                           ; clock      ; clock    ; 0.000 ns                   ; 0.002 ns                   ; 0.501 ns                 ;
+; 0.499 ns                                ; ADF4112_SPI:ADF4112|ready                           ; ADF4112_SPI:ADF4112|ready        ; clock      ; clock    ; 0.000 ns                   ; 0.002 ns                   ; 0.501 ns                 ;
+; 0.499 ns                                ; SPI_state[0]                                        ; SPI_state[0]                     ; clock      ; clock    ; 0.000 ns                   ; 0.002 ns                   ; 0.501 ns                 ;
+; 0.499 ns                                ; SPI_state[3]                                        ; SPI_state[3]                     ; clock      ; clock    ; 0.000 ns                   ; 0.002 ns                   ; 0.501 ns                 ;
+; 0.499 ns                                ; SPI_state[1]                                        ; SPI_state[1]                     ; clock      ; clock    ; 0.000 ns                   ; 0.002 ns                   ; 0.501 ns                 ;
+; 0.767 ns                                ; ADF4112_SPI:ADF4112|SPI_state~7                     ; ADF4112_SPI:ADF4112|SPI_state~8  ; clock      ; clock    ; 0.000 ns                   ; 0.002 ns                   ; 0.769 ns                 ;
+; 0.769 ns                                ; SPI_state[1]                                        ; SPI_state[3]                     ; clock      ; clock    ; 0.000 ns                   ; 0.002 ns                   ; 0.771 ns                 ;
+; 0.788 ns                                ; SPI2_state[1]                                       ; First_LO_data[1]                 ; clock      ; clock    ; 0.000 ns                   ; 0.002 ns                   ; 0.790 ns                 ;
+; 0.790 ns                                ; SPI2_state[1]                                       ; First_LO_data[5]                 ; clock      ; clock    ; 0.000 ns                   ; 0.002 ns                   ; 0.792 ns                 ;
+; 0.797 ns                                ; ADF4112_SPI:ADF4112|SPI_state~8                     ; ADF4112_SPI:ADF4112|SPI_state~7  ; clock      ; clock    ; 0.000 ns                   ; 0.002 ns                   ; 0.799 ns                 ;
+; 0.946 ns                                ; SPI2_state[0]                                       ; First_LO_data[6]                 ; clock      ; clock    ; 0.000 ns                   ; 0.002 ns                   ; 0.948 ns                 ;
+; 0.961 ns                                ; SPI2_state[0]                                       ; First_LO_data[0]                 ; clock      ; clock    ; 0.000 ns                   ; 0.002 ns                   ; 0.963 ns                 ;
+; 0.962 ns                                ; SPI2_state[0]                                       ; First_LO_data[5]                 ; clock      ; clock    ; 0.000 ns                   ; 0.002 ns                   ; 0.964 ns                 ;
+; 0.964 ns                                ; SPI2_state[0]                                       ; First_LO_data[1]                 ; clock      ; clock    ; 0.000 ns                   ; 0.002 ns                   ; 0.966 ns                 ;
+; 1.169 ns                                ; ADF4112_SPI:ADF4112|bit_count[1]                    ; ADF4112_SPI:ADF4112|bit_count[1] ; clock      ; clock    ; 0.000 ns                   ; 0.002 ns                   ; 1.171 ns                 ;
+; 1.171 ns                                ; ADF4112_SPI:ADF4112|bit_count[3]                    ; ADF4112_SPI:ADF4112|bit_count[3] ; clock      ; clock    ; 0.000 ns                   ; 0.002 ns                   ; 1.173 ns                 ;
+; 1.200 ns                                ; start1                                              ; ADF4112_SPI:ADF4112|SPI_state~7  ; clock      ; clock    ; 0.000 ns                   ; 0.002 ns                   ; 1.202 ns                 ;
+; 1.211 ns                                ; SPI2_state[0]                                       ; SPI2_state[1]                    ; clock      ; clock    ; 0.000 ns                   ; 0.002 ns                   ; 1.213 ns                 ;
+; 1.264 ns                                ; ADF4112_SPI:ADF4112|bit_count[4]                    ; ADF4112_SPI:ADF4112|bit_count[4] ; clock      ; clock    ; 0.000 ns                   ; 0.002 ns                   ; 1.266 ns                 ;
+; 1.266 ns                                ; SPI2_state[2]                                       ; SPI2_state[3]                    ; clock      ; clock    ; 0.000 ns                   ; 0.002 ns                   ; 1.268 ns                 ;
+; 1.279 ns                                ; ADF4112_SPI:ADF4112|bit_count[0]                    ; ADF4112_SPI:ADF4112|bit_count[0] ; clock      ; clock    ; 0.000 ns                   ; 0.002 ns                   ; 1.281 ns                 ;
+; 1.282 ns                                ; ADF4112_SPI:ADF4112|bit_count[2]                    ; ADF4112_SPI:ADF4112|bit_count[2] ; clock      ; clock    ; 0.000 ns                   ; 0.002 ns                   ; 1.284 ns                 ;
+; 1.307 ns                                ; SPI_state[2]                                        ; SPI_state[2]                     ; clock      ; clock    ; 0.000 ns                   ; 0.002 ns                   ; 1.309 ns                 ;
+; 1.328 ns                                ; ADF4112_SPI:ADF4112|SPI_state~7                     ; ADF4112_SPI:ADF4112|SPI_LE       ; clock      ; clock    ; 0.000 ns                   ; 0.002 ns                   ; 1.330 ns                 ;
+; 1.353 ns                                ; start1                                              ; start1                           ; clock      ; clock    ; 0.000 ns                   ; 0.002 ns                   ; 1.355 ns                 ;
+; 1.409 ns                                ; SPI2_state[3]                                       ; SPI2_state[2]                    ; clock      ; clock    ; 0.000 ns                   ; 0.002 ns                   ; 1.411 ns                 ;
+; 1.485 ns                                ; ADF4112_SPI:ADF4112|SPI_state~8                     ; ADF4112_SPI:ADF4112|SPI_clock    ; clock      ; clock    ; 0.000 ns                   ; -0.012 ns                  ; 1.473 ns                 ;
+; 1.579 ns                                ; SPI_state[2]                                        ; Second_LO_data[8]                ; clock      ; clock    ; 0.000 ns                   ; 0.002 ns                   ; 1.581 ns                 ;
+; 1.581 ns                                ; SPI_state[2]                                        ; start2                           ; clock      ; clock    ; 0.000 ns                   ; 0.002 ns                   ; 1.583 ns                 ;
+; 1.682 ns                                ; ADF4112_SPI:ADF4112|bit_count[1]                    ; ADF4112_SPI:ADF4112|bit_count[2] ; clock      ; clock    ; 0.000 ns                   ; 0.002 ns                   ; 1.684 ns                 ;
+; 1.684 ns                                ; ADF4112_SPI:ADF4112|bit_count[3]                    ; ADF4112_SPI:ADF4112|bit_count[4] ; clock      ; clock    ; 0.000 ns                   ; 0.002 ns                   ; 1.686 ns                 ;
+; 1.702 ns                                ; ADF4112_SPI:ADF4112|SPI_state~8                     ; ADF4112_SPI:ADF4112|SPI_LE       ; clock      ; clock    ; 0.000 ns                   ; 0.002 ns                   ; 1.704 ns                 ;
+; 1.755 ns                                ; ADF4112_SPI:ADF4112|bit_count[0]                    ; ADF4112_SPI:ADF4112|bit_count[1] ; clock      ; clock    ; 0.000 ns                   ; 0.002 ns                   ; 1.757 ns                 ;
+; 1.758 ns                                ; ADF4112_SPI:ADF4112|bit_count[2]                    ; ADF4112_SPI:ADF4112|bit_count[3] ; clock      ; clock    ; 0.000 ns                   ; 0.002 ns                   ; 1.760 ns                 ;
+; 1.768 ns                                ; ADF4112_SPI:ADF4112|bit_count[1]                    ; ADF4112_SPI:ADF4112|bit_count[3] ; clock      ; clock    ; 0.000 ns                   ; 0.002 ns                   ; 1.770 ns                 ;
+; 1.841 ns                                ; ADF4112_SPI:ADF4112|bit_count[0]                    ; ADF4112_SPI:ADF4112|bit_count[2] ; clock      ; clock    ; 0.000 ns                   ; 0.002 ns                   ; 1.843 ns                 ;
+; 1.844 ns                                ; ADF4112_SPI:ADF4112|bit_count[2]                    ; ADF4112_SPI:ADF4112|bit_count[4] ; clock      ; clock    ; 0.000 ns                   ; 0.002 ns                   ; 1.846 ns                 ;
+; 1.854 ns                                ; ADF4112_SPI:ADF4112|bit_count[1]                    ; ADF4112_SPI:ADF4112|bit_count[4] ; clock      ; clock    ; 0.000 ns                   ; 0.002 ns                   ; 1.856 ns                 ;
+; 1.855 ns                                ; SPI_state[2]                                        ; SPI_state[3]                     ; clock      ; clock    ; 0.000 ns                   ; 0.006 ns                   ; 1.861 ns                 ;
+; 1.857 ns                                ; SPI_state[2]                                        ; SPI_state[1]                     ; clock      ; clock    ; 0.000 ns                   ; 0.006 ns                   ; 1.863 ns                 ;
+; 1.870 ns                                ; SPI2_state[1]                                       ; First_LO_data[0]                 ; clock      ; clock    ; 0.000 ns                   ; 0.002 ns                   ; 1.872 ns                 ;
+; 1.870 ns                                ; SPI2_state[1]                                       ; First_LO_data[4]                 ; clock      ; clock    ; 0.000 ns                   ; 0.002 ns                   ; 1.872 ns                 ;
+; 1.870 ns                                ; SPI2_state[1]                                       ; First_LO_data[6]                 ; clock      ; clock    ; 0.000 ns                   ; 0.002 ns                   ; 1.872 ns                 ;
+; 1.906 ns                                ; ADF4112_SPI:ADF4112|SPI_state~7                     ; ADF4112_SPI:ADF4112|SPI_clock    ; clock      ; clock    ; 0.000 ns                   ; -0.012 ns                  ; 1.894 ns                 ;
+; 1.927 ns                                ; ADF4112_SPI:ADF4112|bit_count[0]                    ; ADF4112_SPI:ADF4112|bit_count[3] ; clock      ; clock    ; 0.000 ns                   ; 0.002 ns                   ; 1.929 ns                 ;
+; 1.970 ns                                ; SPI2_state[2]                                       ; start1                           ; clock      ; clock    ; 0.000 ns                   ; 0.002 ns                   ; 1.972 ns                 ;
+; 2.009 ns                                ; SPI_state[0]                                        ; Second_LO_data[3]                ; clock      ; clock    ; 0.000 ns                   ; -0.012 ns                  ; 1.997 ns                 ;
+; 2.013 ns                                ; ADF4112_SPI:ADF4112|bit_count[0]                    ; ADF4112_SPI:ADF4112|bit_count[4] ; clock      ; clock    ; 0.000 ns                   ; 0.002 ns                   ; 2.015 ns                 ;
+; 2.014 ns                                ; SPI_state[3]                                        ; Second_LO_data[8]                ; clock      ; clock    ; 0.000 ns                   ; -0.002 ns                  ; 2.012 ns                 ;
+; 2.028 ns                                ; SPI_state[0]                                        ; Second_LO_data[5]                ; clock      ; clock    ; 0.000 ns                   ; 0.000 ns                   ; 2.028 ns                 ;
+; 2.058 ns                                ; SPI_state[0]                                        ; Second_LO_data[0]                ; clock      ; clock    ; 0.000 ns                   ; -0.012 ns                  ; 2.046 ns                 ;
+; 2.125 ns                                ; SPI2_state[3]                                       ; start1                           ; clock      ; clock    ; 0.000 ns                   ; 0.002 ns                   ; 2.127 ns                 ;
+; 2.154 ns                                ; SPI_state[3]                                        ; SPI_state[2]                     ; clock      ; clock    ; 0.000 ns                   ; -0.002 ns                  ; 2.152 ns                 ;
+; 2.171 ns                                ; SPI2_state[0]                                       ; SPI2_state[3]                    ; clock      ; clock    ; 0.000 ns                   ; -0.014 ns                  ; 2.157 ns                 ;
+; 2.191 ns                                ; start2                                              ; ADF4112_SPI:ADF4112|ready        ; clock      ; clock    ; 0.000 ns                   ; 0.006 ns                   ; 2.197 ns                 ;
+; 2.251 ns                                ; ADF4112_SPI:ADF4112|ready                           ; start2                           ; clock      ; clock    ; 0.000 ns                   ; -0.002 ns                  ; 2.249 ns                 ;
+; 2.393 ns                                ; ADF4112_SPI:ADF4112|SPI_state~8                     ; ADF4112_SPI:ADF4112|SPI_data     ; clock      ; clock    ; 0.000 ns                   ; 0.001 ns                   ; 2.394 ns                 ;
+; 2.508 ns                                ; ADF4112_SPI:ADF4112|bit_count[4]                    ; ADF4112_SPI:ADF4112|SPI_data     ; clock      ; clock    ; 0.000 ns                   ; 0.014 ns                   ; 2.522 ns                 ;
+; 2.531 ns                                ; ADF4112_SPI:ADF4112|SPI_state~7                     ; ADF4112_SPI:ADF4112|bit_count[3] ; clock      ; clock    ; 0.000 ns                   ; -0.011 ns                  ; 2.520 ns                 ;
+; 2.531 ns                                ; ADF4112_SPI:ADF4112|SPI_state~7                     ; ADF4112_SPI:ADF4112|bit_count[1] ; clock      ; clock    ; 0.000 ns                   ; -0.011 ns                  ; 2.520 ns                 ;
+; 2.531 ns                                ; ADF4112_SPI:ADF4112|SPI_state~7                     ; ADF4112_SPI:ADF4112|bit_count[2] ; clock      ; clock    ; 0.000 ns                   ; -0.011 ns                  ; 2.520 ns                 ;
+; 2.531 ns                                ; ADF4112_SPI:ADF4112|SPI_state~7                     ; ADF4112_SPI:ADF4112|bit_count[0] ; clock      ; clock    ; 0.000 ns                   ; -0.011 ns                  ; 2.520 ns                 ;
+; 2.531 ns                                ; ADF4112_SPI:ADF4112|SPI_state~7                     ; ADF4112_SPI:ADF4112|bit_count[4] ; clock      ; clock    ; 0.000 ns                   ; -0.011 ns                  ; 2.520 ns                 ;
+; 2.537 ns                                ; start1                                              ; ADF4112_SPI:ADF4112|SPI_LE       ; clock      ; clock    ; 0.000 ns                   ; 0.002 ns                   ; 2.539 ns                 ;
+; 2.560 ns                                ; ADF4112_SPI:ADF4112|SPI_state~7                     ; ADF4112_SPI:ADF4112|SPI_data     ; clock      ; clock    ; 0.000 ns                   ; 0.001 ns                   ; 2.561 ns                 ;
+; 2.574 ns                                ; SPI_state[3]                                        ; start2                           ; clock      ; clock    ; 0.000 ns                   ; -0.002 ns                  ; 2.572 ns                 ;
+; 2.591 ns                                ; SPI_state[0]                                        ; Second_LO_data[1]                ; clock      ; clock    ; 0.000 ns                   ; -0.012 ns                  ; 2.579 ns                 ;
+; 2.620 ns                                ; SPI2_state[1]                                       ; SPI2_state[2]                    ; clock      ; clock    ; 0.000 ns                   ; -0.014 ns                  ; 2.606 ns                 ;
+; 2.621 ns                                ; SPI2_state[1]                                       ; SPI2_state[3]                    ; clock      ; clock    ; 0.000 ns                   ; -0.014 ns                  ; 2.607 ns                 ;
+; 2.644 ns                                ; start1                                              ; ADF4112_SPI:ADF4112|ready        ; clock      ; clock    ; 0.000 ns                   ; 0.018 ns                   ; 2.662 ns                 ;
+; 2.650 ns                                ; SPI_state[2]                                        ; SPI_state[0]                     ; clock      ; clock    ; 0.000 ns                   ; -0.009 ns                  ; 2.641 ns                 ;
+; 2.722 ns                                ; ADF4112_SPI:ADF4112|SPI_state~7                     ; ADF4112_SPI:ADF4112|ready        ; clock      ; clock    ; 0.000 ns                   ; 0.018 ns                   ; 2.740 ns                 ;
+; 2.741 ns                                ; SPI2_state[3]                                       ; SPI2_state[1]                    ; clock      ; clock    ; 0.000 ns                   ; 0.018 ns                   ; 2.759 ns                 ;
+; 2.741 ns                                ; SPI2_state[3]                                       ; SPI2_state[0]                    ; clock      ; clock    ; 0.000 ns                   ; 0.018 ns                   ; 2.759 ns                 ;
+; 2.786 ns                                ; ADF4112_SPI:ADF4112|ready                           ; First_LO_data[0]                 ; clock      ; clock    ; 0.000 ns                   ; 0.002 ns                   ; 2.788 ns                 ;
+; 2.786 ns                                ; ADF4112_SPI:ADF4112|ready                           ; First_LO_data[4]                 ; clock      ; clock    ; 0.000 ns                   ; 0.002 ns                   ; 2.788 ns                 ;
+; 2.786 ns                                ; ADF4112_SPI:ADF4112|ready                           ; First_LO_data[5]                 ; clock      ; clock    ; 0.000 ns                   ; 0.002 ns                   ; 2.788 ns                 ;
+; 2.786 ns                                ; ADF4112_SPI:ADF4112|ready                           ; First_LO_data[1]                 ; clock      ; clock    ; 0.000 ns                   ; 0.002 ns                   ; 2.788 ns                 ;
+; 2.786 ns                                ; ADF4112_SPI:ADF4112|ready                           ; First_LO_data[6]                 ; clock      ; clock    ; 0.000 ns                   ; 0.002 ns                   ; 2.788 ns                 ;
+; 2.855 ns                                ; SPI_state[3]                                        ; First_LO_data[0]                 ; clock      ; clock    ; 0.000 ns                   ; 0.002 ns                   ; 2.857 ns                 ;
+; 2.855 ns                                ; SPI_state[3]                                        ; First_LO_data[4]                 ; clock      ; clock    ; 0.000 ns                   ; 0.002 ns                   ; 2.857 ns                 ;
+; 2.855 ns                                ; SPI_state[3]                                        ; First_LO_data[5]                 ; clock      ; clock    ; 0.000 ns                   ; 0.002 ns                   ; 2.857 ns                 ;
+; 2.855 ns                                ; SPI_state[3]                                        ; First_LO_data[1]                 ; clock      ; clock    ; 0.000 ns                   ; 0.002 ns                   ; 2.857 ns                 ;
+; 2.855 ns                                ; SPI_state[3]                                        ; First_LO_data[6]                 ; clock      ; clock    ; 0.000 ns                   ; 0.002 ns                   ; 2.857 ns                 ;
+; 2.890 ns                                ; SPI_state[0]                                        ; start2                           ; clock      ; clock    ; 0.000 ns                   ; 0.013 ns                   ; 2.903 ns                 ;
+; 2.949 ns                                ; SPI_state[1]                                        ; SPI_state[2]                     ; clock      ; clock    ; 0.000 ns                   ; -0.002 ns                  ; 2.947 ns                 ;
+; 2.950 ns                                ; SPI_state[1]                                        ; start2                           ; clock      ; clock    ; 0.000 ns                   ; -0.002 ns                  ; 2.948 ns                 ;
+; 2.955 ns                                ; start1                                              ; ADF4112_SPI:ADF4112|bit_count[3] ; clock      ; clock    ; 0.000 ns                   ; -0.011 ns                  ; 2.944 ns                 ;
+; 2.955 ns                                ; start1                                              ; ADF4112_SPI:ADF4112|bit_count[1] ; clock      ; clock    ; 0.000 ns                   ; -0.011 ns                  ; 2.944 ns                 ;
+; 2.955 ns                                ; start1                                              ; ADF4112_SPI:ADF4112|bit_count[2] ; clock      ; clock    ; 0.000 ns                   ; -0.011 ns                  ; 2.944 ns                 ;
+; 2.955 ns                                ; start1                                              ; ADF4112_SPI:ADF4112|bit_count[0] ; clock      ; clock    ; 0.000 ns                   ; -0.011 ns                  ; 2.944 ns                 ;
+; 2.955 ns                                ; start1                                              ; ADF4112_SPI:ADF4112|bit_count[4] ; clock      ; clock    ; 0.000 ns                   ; -0.011 ns                  ; 2.944 ns                 ;
+; 2.967 ns                                ; SPI2_state[0]                                       ; First_LO_data[4]                 ; clock      ; clock    ; 0.000 ns                   ; 0.002 ns                   ; 2.969 ns                 ;
+; 2.982 ns                                ; SPI_state[0]                                        ; SPI_state[1]                     ; clock      ; clock    ; 0.000 ns                   ; 0.017 ns                   ; 2.999 ns                 ;
+; 2.990 ns                                ; SPI2_state[0]                                       ; SPI2_state[2]                    ; clock      ; clock    ; 0.000 ns                   ; -0.014 ns                  ; 2.976 ns                 ;
+; 2.998 ns                                ; ADF4112_SPI:ADF4112|ready                           ; SPI_state[2]                     ; clock      ; clock    ; 0.000 ns                   ; -0.002 ns                  ; 2.996 ns                 ;
+; 3.080 ns                                ; ADF4112_SPI:ADF4112|SPI_state~8                     ; ADF4112_SPI:ADF4112|bit_count[3] ; clock      ; clock    ; 0.000 ns                   ; -0.011 ns                  ; 3.069 ns                 ;
+; 3.080 ns                                ; ADF4112_SPI:ADF4112|SPI_state~8                     ; ADF4112_SPI:ADF4112|bit_count[1] ; clock      ; clock    ; 0.000 ns                   ; -0.011 ns                  ; 3.069 ns                 ;
+; 3.080 ns                                ; ADF4112_SPI:ADF4112|SPI_state~8                     ; ADF4112_SPI:ADF4112|bit_count[2] ; clock      ; clock    ; 0.000 ns                   ; -0.011 ns                  ; 3.069 ns                 ;
+; 3.080 ns                                ; ADF4112_SPI:ADF4112|SPI_state~8                     ; ADF4112_SPI:ADF4112|bit_count[0] ; clock      ; clock    ; 0.000 ns                   ; -0.011 ns                  ; 3.069 ns                 ;
+; 3.080 ns                                ; ADF4112_SPI:ADF4112|SPI_state~8                     ; ADF4112_SPI:ADF4112|bit_count[4] ; clock      ; clock    ; 0.000 ns                   ; -0.011 ns                  ; 3.069 ns                 ;
+; 3.081 ns                                ; Second_LO_data[5]                                   ; ADF4112_SPI:ADF4112|SPI_data     ; clock      ; clock    ; 0.000 ns                   ; 0.002 ns                   ; 3.083 ns                 ;
+; 3.088 ns                                ; SPI2_state[2]                                       ; SPI2_state[1]                    ; clock      ; clock    ; 0.000 ns                   ; 0.018 ns                   ; 3.106 ns                 ;
+; 3.088 ns                                ; SPI2_state[2]                                       ; SPI2_state[0]                    ; clock      ; clock    ; 0.000 ns                   ; 0.018 ns                   ; 3.106 ns                 ;
+; 3.096 ns                                ; ADF4112_SPI:ADF4112|SPI_state~8                     ; ADF4112_SPI:ADF4112|ready        ; clock      ; clock    ; 0.000 ns                   ; 0.018 ns                   ; 3.114 ns                 ;
+; 3.212 ns                                ; SPI2_state[1]                                       ; start1                           ; clock      ; clock    ; 0.000 ns                   ; -0.014 ns                  ; 3.198 ns                 ;
+; 3.285 ns                                ; ADF4112_SPI:ADF4112|bit_count[2]                    ; ADF4112_SPI:ADF4112|SPI_LE       ; clock      ; clock    ; 0.000 ns                   ; 0.015 ns                   ; 3.300 ns                 ;
+; 3.285 ns                                ; ADF4112_SPI:ADF4112|bit_count[2]                    ; ADF4112_SPI:ADF4112|SPI_state~8  ; clock      ; clock    ; 0.000 ns                   ; 0.015 ns                   ; 3.300 ns                 ;
+; 3.306 ns                                ; ADF4112_SPI:ADF4112|bit_count[0]                    ; ADF4112_SPI:ADF4112|SPI_LE       ; clock      ; clock    ; 0.000 ns                   ; 0.015 ns                   ; 3.321 ns                 ;
+; 3.306 ns                                ; ADF4112_SPI:ADF4112|bit_count[0]                    ; ADF4112_SPI:ADF4112|SPI_state~8  ; clock      ; clock    ; 0.000 ns                   ; 0.015 ns                   ; 3.321 ns                 ;
+; 3.312 ns                                ; SPI_state[0]                                        ; SPI_state[2]                     ; clock      ; clock    ; 0.000 ns                   ; 0.013 ns                   ; 3.325 ns                 ;
+; 3.364 ns                                ; SPI2_state[3]                                       ; First_LO_data[0]                 ; clock      ; clock    ; 0.000 ns                   ; 0.018 ns                   ; 3.382 ns                 ;
+; 3.364 ns                                ; SPI2_state[3]                                       ; First_LO_data[4]                 ; clock      ; clock    ; 0.000 ns                   ; 0.018 ns                   ; 3.382 ns                 ;
+; 3.364 ns                                ; SPI2_state[3]                                       ; First_LO_data[5]                 ; clock      ; clock    ; 0.000 ns                   ; 0.018 ns                   ; 3.382 ns                 ;
+; 3.364 ns                                ; SPI2_state[3]                                       ; First_LO_data[1]                 ; clock      ; clock    ; 0.000 ns                   ; 0.018 ns                   ; 3.382 ns                 ;
+; 3.364 ns                                ; SPI2_state[3]                                       ; First_LO_data[6]                 ; clock      ; clock    ; 0.000 ns                   ; 0.018 ns                   ; 3.382 ns                 ;
+; 3.366 ns                                ; ADF4112_SPI:ADF4112|bit_count[3]                    ; ADF4112_SPI:ADF4112|SPI_LE       ; clock      ; clock    ; 0.000 ns                   ; 0.015 ns                   ; 3.381 ns                 ;
+; 3.366 ns                                ; ADF4112_SPI:ADF4112|bit_count[3]                    ; ADF4112_SPI:ADF4112|SPI_state~8  ; clock      ; clock    ; 0.000 ns                   ; 0.015 ns                   ; 3.381 ns                 ;
+; 3.388 ns                                ; SPI2_state[0]                                       ; start1                           ; clock      ; clock    ; 0.000 ns                   ; -0.014 ns                  ; 3.374 ns                 ;
+; 3.392 ns                                ; start2                                              ; ADF4112_SPI:ADF4112|SPI_state~7  ; clock      ; clock    ; 0.000 ns                   ; -0.010 ns                  ; 3.382 ns                 ;
+; 3.413 ns                                ; SPI_state[0]                                        ; Second_LO_data[8]                ; clock      ; clock    ; 0.000 ns                   ; 0.013 ns                   ; 3.426 ns                 ;
+; 3.452 ns                                ; SPI_state[0]                                        ; SPI_state[3]                     ; clock      ; clock    ; 0.000 ns                   ; 0.017 ns                   ; 3.469 ns                 ;
+; 3.471 ns                                ; SPI_state[3]                                        ; SPI_state[0]                     ; clock      ; clock    ; 0.000 ns                   ; -0.013 ns                  ; 3.458 ns                 ;
+; 3.481 ns                                ; SPI_state[1]                                        ; Second_LO_data[8]                ; clock      ; clock    ; 0.000 ns                   ; -0.002 ns                  ; 3.479 ns                 ;
+; 3.491 ns                                ; SPI_state[1]                                        ; Second_LO_data[3]                ; clock      ; clock    ; 0.000 ns                   ; -0.027 ns                  ; 3.464 ns                 ;
+; 3.572 ns                                ; ADF4112_SPI:ADF4112|bit_count[4]                    ; ADF4112_SPI:ADF4112|SPI_LE       ; clock      ; clock    ; 0.000 ns                   ; 0.015 ns                   ; 3.587 ns                 ;
+; 3.572 ns                                ; ADF4112_SPI:ADF4112|bit_count[4]                    ; ADF4112_SPI:ADF4112|SPI_state~8  ; clock      ; clock    ; 0.000 ns                   ; 0.015 ns                   ; 3.587 ns                 ;
+; 3.579 ns                                ; ADF4112_SPI:ADF4112|bit_count[3]                    ; ADF4112_SPI:ADF4112|SPI_data     ; clock      ; clock    ; 0.000 ns                   ; 0.014 ns                   ; 3.593 ns                 ;
+; 3.596 ns                                ; ADF4112_SPI:ADF4112|bit_count[1]                    ; ADF4112_SPI:ADF4112|SPI_data     ; clock      ; clock    ; 0.000 ns                   ; 0.014 ns                   ; 3.610 ns                 ;
+; 3.650 ns                                ; SPI_state[3]                                        ; SPI_state[1]                     ; clock      ; clock    ; 0.000 ns                   ; 0.002 ns                   ; 3.652 ns                 ;
+; 3.656 ns                                ; SPI_state[1]                                        ; Second_LO_data[5]                ; clock      ; clock    ; 0.000 ns                   ; -0.015 ns                  ; 3.641 ns                 ;
+; 3.692 ns                                ; ADF4112_SPI:ADF4112|ready                           ; SPI_state[0]                     ; clock      ; clock    ; 0.000 ns                   ; -0.013 ns                  ; 3.679 ns                 ;
+; 3.703 ns                                ; SPI_state[2]                                        ; First_LO_data[0]                 ; clock      ; clock    ; 0.000 ns                   ; 0.006 ns                   ; 3.709 ns                 ;
+; 3.703 ns                                ; SPI_state[2]                                        ; First_LO_data[4]                 ; clock      ; clock    ; 0.000 ns                   ; 0.006 ns                   ; 3.709 ns                 ;
+; 3.703 ns                                ; SPI_state[2]                                        ; First_LO_data[5]                 ; clock      ; clock    ; 0.000 ns                   ; 0.006 ns                   ; 3.709 ns                 ;
+; 3.703 ns                                ; SPI_state[2]                                        ; First_LO_data[1]                 ; clock      ; clock    ; 0.000 ns                   ; 0.006 ns                   ; 3.709 ns                 ;
+; 3.703 ns                                ; SPI_state[2]                                        ; First_LO_data[6]                 ; clock      ; clock    ; 0.000 ns                   ; 0.006 ns                   ; 3.709 ns                 ;
+; 3.785 ns                                ; ADF4112_SPI:ADF4112|bit_count[0]                    ; ADF4112_SPI:ADF4112|SPI_data     ; clock      ; clock    ; 0.000 ns                   ; 0.014 ns                   ; 3.799 ns                 ;
+; 3.910 ns                                ; ADF4112_SPI:ADF4112|bit_count[1]                    ; ADF4112_SPI:ADF4112|SPI_LE       ; clock      ; clock    ; 0.000 ns                   ; 0.015 ns                   ; 3.925 ns                 ;
+; 3.910 ns                                ; ADF4112_SPI:ADF4112|bit_count[1]                    ; ADF4112_SPI:ADF4112|SPI_state~8  ; clock      ; clock    ; 0.000 ns                   ; 0.015 ns                   ; 3.925 ns                 ;
+; 3.915 ns                                ; SPI_state[3]                                        ; start1                           ; clock      ; clock    ; 0.000 ns                   ; -0.014 ns                  ; 3.901 ns                 ;
+; 3.926 ns                                ; ADF4112_SPI:ADF4112|bit_count[2]                    ; ADF4112_SPI:ADF4112|SPI_data     ; clock      ; clock    ; 0.000 ns                   ; 0.014 ns                   ; 3.940 ns                 ;
+; 3.960 ns                                ; ADF4112_SPI:ADF4112|ready                           ; SPI2_state[2]                    ; clock      ; clock    ; 0.000 ns                   ; -0.014 ns                  ; 3.946 ns                 ;
+; 4.007 ns                                ; ADF4112_SPI:ADF4112|ready                           ; start1                           ; clock      ; clock    ; 0.000 ns                   ; -0.014 ns                  ; 3.993 ns                 ;
+; 4.056 ns                                ; Second_LO_data[1]                                   ; ADF4112_SPI:ADF4112|SPI_data     ; clock      ; clock    ; 0.000 ns                   ; 0.014 ns                   ; 4.070 ns                 ;
+; 4.065 ns                                ; SPI_state[2]                                        ; Second_LO_data[5]                ; clock      ; clock    ; 0.000 ns                   ; -0.011 ns                  ; 4.054 ns                 ;
+; 4.073 ns                                ; SPI_state[1]                                        ; Second_LO_data[1]                ; clock      ; clock    ; 0.000 ns                   ; -0.027 ns                  ; 4.046 ns                 ;
+; 4.078 ns                                ; SPI_state[1]                                        ; Second_LO_data[0]                ; clock      ; clock    ; 0.000 ns                   ; -0.027 ns                  ; 4.051 ns                 ;
+; 4.114 ns                                ; ADF4112_SPI:ADF4112|ready                           ; Second_LO_data[8]                ; clock      ; clock    ; 0.000 ns                   ; -0.002 ns                  ; 4.112 ns                 ;
+; 4.260 ns                                ; SPI_state[3]                                        ; Second_LO_data[5]                ; clock      ; clock    ; 0.000 ns                   ; -0.015 ns                  ; 4.245 ns                 ;
+; 4.308 ns                                ; SPI2_state[1]                                       ; SPI2_state[0]                    ; clock      ; clock    ; 0.000 ns                   ; 0.002 ns                   ; 4.310 ns                 ;
+; 4.339 ns                                ; ADF4112_SPI:ADF4112|ready                           ; SPI_state[1]                     ; clock      ; clock    ; 0.000 ns                   ; 0.002 ns                   ; 4.341 ns                 ;
+; 4.411 ns                                ; SPI_state[1]                                        ; SPI_state[0]                     ; clock      ; clock    ; 0.000 ns                   ; -0.013 ns                  ; 4.398 ns                 ;
+; 4.487 ns                                ; SPI_state[2]                                        ; Second_LO_data[3]                ; clock      ; clock    ; 0.000 ns                   ; -0.023 ns                  ; 4.464 ns                 ;
+; 4.487 ns                                ; SPI_state[2]                                        ; Second_LO_data[0]                ; clock      ; clock    ; 0.000 ns                   ; -0.023 ns                  ; 4.464 ns                 ;
+; 4.487 ns                                ; SPI_state[2]                                        ; Second_LO_data[1]                ; clock      ; clock    ; 0.000 ns                   ; -0.023 ns                  ; 4.464 ns                 ;
+; 4.578 ns                                ; start2                                              ; ADF4112_SPI:ADF4112|bit_count[3] ; clock      ; clock    ; 0.000 ns                   ; -0.023 ns                  ; 4.555 ns                 ;
+; 4.578 ns                                ; start2                                              ; ADF4112_SPI:ADF4112|bit_count[1] ; clock      ; clock    ; 0.000 ns                   ; -0.023 ns                  ; 4.555 ns                 ;
+; 4.578 ns                                ; start2                                              ; ADF4112_SPI:ADF4112|bit_count[2] ; clock      ; clock    ; 0.000 ns                   ; -0.023 ns                  ; 4.555 ns                 ;
+; 4.578 ns                                ; start2                                              ; ADF4112_SPI:ADF4112|bit_count[0] ; clock      ; clock    ; 0.000 ns                   ; -0.023 ns                  ; 4.555 ns                 ;
+; 4.578 ns                                ; start2                                              ; ADF4112_SPI:ADF4112|bit_count[4] ; clock      ; clock    ; 0.000 ns                   ; -0.023 ns                  ; 4.555 ns                 ;
+; 4.583 ns                                ; SPI2_state[2]                                       ; First_LO_data[0]                 ; clock      ; clock    ; 0.000 ns                   ; 0.018 ns                   ; 4.601 ns                 ;
+; 4.583 ns                                ; SPI2_state[2]                                       ; First_LO_data[4]                 ; clock      ; clock    ; 0.000 ns                   ; 0.018 ns                   ; 4.601 ns                 ;
+; 4.583 ns                                ; SPI2_state[2]                                       ; First_LO_data[5]                 ; clock      ; clock    ; 0.000 ns                   ; 0.018 ns                   ; 4.601 ns                 ;
+; 4.583 ns                                ; SPI2_state[2]                                       ; First_LO_data[1]                 ; clock      ; clock    ; 0.000 ns                   ; 0.018 ns                   ; 4.601 ns                 ;
+; 4.583 ns                                ; SPI2_state[2]                                       ; First_LO_data[6]                 ; clock      ; clock    ; 0.000 ns                   ; 0.018 ns                   ; 4.601 ns                 ;
+; 4.592 ns                                ; SPI_state[1]                                        ; First_LO_data[0]                 ; clock      ; clock    ; 0.000 ns                   ; 0.002 ns                   ; 4.594 ns                 ;
+; 4.592 ns                                ; SPI_state[1]                                        ; First_LO_data[4]                 ; clock      ; clock    ; 0.000 ns                   ; 0.002 ns                   ; 4.594 ns                 ;
+; 4.592 ns                                ; SPI_state[1]                                        ; First_LO_data[5]                 ; clock      ; clock    ; 0.000 ns                   ; 0.002 ns                   ; 4.594 ns                 ;
+; 4.592 ns                                ; SPI_state[1]                                        ; First_LO_data[1]                 ; clock      ; clock    ; 0.000 ns                   ; 0.002 ns                   ; 4.594 ns                 ;
+; 4.592 ns                                ; SPI_state[1]                                        ; First_LO_data[6]                 ; clock      ; clock    ; 0.000 ns                   ; 0.002 ns                   ; 4.594 ns                 ;
+; 4.682 ns                                ; SPI_state[3]                                        ; Second_LO_data[3]                ; clock      ; clock    ; 0.000 ns                   ; -0.027 ns                  ; 4.655 ns                 ;
+; 4.682 ns                                ; SPI_state[3]                                        ; Second_LO_data[0]                ; clock      ; clock    ; 0.000 ns                   ; -0.027 ns                  ; 4.655 ns                 ;
+; 4.682 ns                                ; SPI_state[3]                                        ; Second_LO_data[1]                ; clock      ; clock    ; 0.000 ns                   ; -0.027 ns                  ; 4.655 ns                 ;
+; 4.717 ns                                ; ADF4112_SPI:ADF4112|ready                           ; Second_LO_data[5]                ; clock      ; clock    ; 0.000 ns                   ; -0.015 ns                  ; 4.702 ns                 ;
+; 4.729 ns                                ; start2                                              ; ADF4112_SPI:ADF4112|SPI_LE       ; clock      ; clock    ; 0.000 ns                   ; -0.010 ns                  ; 4.719 ns                 ;
+; 4.763 ns                                ; SPI_state[2]                                        ; start1                           ; clock      ; clock    ; 0.000 ns                   ; -0.010 ns                  ; 4.753 ns                 ;
+; 5.139 ns                                ; ADF4112_SPI:ADF4112|ready                           ; Second_LO_data[3]                ; clock      ; clock    ; 0.000 ns                   ; -0.027 ns                  ; 5.112 ns                 ;
+; 5.139 ns                                ; ADF4112_SPI:ADF4112|ready                           ; Second_LO_data[0]                ; clock      ; clock    ; 0.000 ns                   ; -0.027 ns                  ; 5.112 ns                 ;
+; 5.139 ns                                ; ADF4112_SPI:ADF4112|ready                           ; Second_LO_data[1]                ; clock      ; clock    ; 0.000 ns                   ; -0.027 ns                  ; 5.112 ns                 ;
+; 5.142 ns                                ; First_LO_data[6]                                    ; ADF4112_SPI:ADF4112|SPI_data     ; clock      ; clock    ; 0.000 ns                   ; -0.015 ns                  ; 5.127 ns                 ;
+; 5.210 ns                                ; First_LO_data[1]                                    ; ADF4112_SPI:ADF4112|SPI_data     ; clock      ; clock    ; 0.000 ns                   ; -0.015 ns                  ; 5.195 ns                 ;
+; 5.219 ns                                ; Second_LO_data[0]                                   ; ADF4112_SPI:ADF4112|SPI_data     ; clock      ; clock    ; 0.000 ns                   ; 0.014 ns                   ; 5.233 ns                 ;
+; 5.283 ns                                ; ADF4112_SPI:ADF4112|ready                           ; SPI2_state[1]                    ; clock      ; clock    ; 0.000 ns                   ; 0.002 ns                   ; 5.285 ns                 ;
+; 5.283 ns                                ; ADF4112_SPI:ADF4112|ready                           ; SPI2_state[0]                    ; clock      ; clock    ; 0.000 ns                   ; 0.002 ns                   ; 5.285 ns                 ;
+; 5.517 ns                                ; SPI_state[3]                                        ; SPI2_state[0]                    ; clock      ; clock    ; 0.000 ns                   ; 0.002 ns                   ; 5.519 ns                 ;
+; 5.573 ns                                ; SPI_state[2]                                        ; ADF4112_SPI:ADF4112|SPI_data     ; clock      ; clock    ; 0.000 ns                   ; -0.011 ns                  ; 5.562 ns                 ;
+; 5.652 ns                                ; SPI_state[1]                                        ; start1                           ; clock      ; clock    ; 0.000 ns                   ; -0.014 ns                  ; 5.638 ns                 ;
+; 5.862 ns                                ; First_LO_data[5]                                    ; ADF4112_SPI:ADF4112|SPI_data     ; clock      ; clock    ; 0.000 ns                   ; -0.015 ns                  ; 5.847 ns                 ;
+; 6.211 ns                                ; SPI_state[3]                                        ; ADF4112_SPI:ADF4112|SPI_data     ; clock      ; clock    ; 0.000 ns                   ; -0.015 ns                  ; 6.196 ns                 ;
+; Timing analysis restricted to 200 rows. ; To change the limit use Settings (Assignments menu) ;                                  ;            ;          ;                            ;                            ;                          ;
++-----------------------------------------+-----------------------------------------------------+----------------------------------+------------+----------+----------------------------+----------------------------+--------------------------+
+
+
++----------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Clock Hold: 'IFCLK'                                                                                                                                      ;
++---------------+--------------+--------------+------------+----------+----------------------------+----------------------------+--------------------------+
+; Minimum Slack ; From         ; To           ; From Clock ; To Clock ; Required Hold Relationship ; Required Shortest P2P Time ; Actual Shortest P2P Time ;
++---------------+--------------+--------------+------------+----------+----------------------------+----------------------------+--------------------------+
+; 0.499 ns      ; spi_clock[2] ; spi_clock[2] ; IFCLK      ; IFCLK    ; 0.000 ns                   ; 0.002 ns                   ; 0.501 ns                 ;
+; 0.499 ns      ; spi_clock[1] ; spi_clock[1] ; IFCLK      ; IFCLK    ; 0.000 ns                   ; 0.002 ns                   ; 0.501 ns                 ;
+; 0.499 ns      ; spi_clock[0] ; spi_clock[0] ; IFCLK      ; IFCLK    ; 0.000 ns                   ; 0.002 ns                   ; 0.501 ns                 ;
+; 0.745 ns      ; spi_clock[2] ; spi_clock[0] ; IFCLK      ; IFCLK    ; 0.000 ns                   ; 0.002 ns                   ; 0.747 ns                 ;
+; 0.752 ns      ; spi_clock[0] ; spi_clock[2] ; IFCLK      ; IFCLK    ; 0.000 ns                   ; 0.002 ns                   ; 0.754 ns                 ;
+; 0.757 ns      ; spi_clock[0] ; spi_clock[1] ; IFCLK      ; IFCLK    ; 0.000 ns                   ; 0.002 ns                   ; 0.759 ns                 ;
+; 1.180 ns      ; spi_clock[1] ; spi_clock[0] ; IFCLK      ; IFCLK    ; 0.000 ns                   ; 0.002 ns                   ; 1.182 ns                 ;
+; 1.182 ns      ; spi_clock[1] ; spi_clock[2] ; IFCLK      ; IFCLK    ; 0.000 ns                   ; 0.002 ns                   ; 1.184 ns                 ;
++---------------+--------------+--------------+------------+----------+----------------------------+----------------------------+--------------------------+
+
+
++----------------------------------------------------------------------------------------------------+
+; tco                                                                                                ;
++-------+--------------+------------+-------------------------------+-------------------+------------+
+; Slack ; Required tco ; Actual tco ; From                          ; To                ; From Clock ;
++-------+--------------+------------+-------------------------------+-------------------+------------+
+; N/A   ; None         ; 16.948 ns  ; SPI_state[0]                  ; LE1               ; IFCLK      ;
+; N/A   ; None         ; 15.161 ns  ; SPI_state[1]                  ; LE1               ; IFCLK      ;
+; N/A   ; None         ; 14.271 ns  ; SPI_state[1]                  ; LE2               ; IFCLK      ;
+; N/A   ; None         ; 14.071 ns  ; ADF4112_SPI:ADF4112|SPI_LE    ; LE2               ; IFCLK      ;
+; N/A   ; None         ; 14.034 ns  ; ADF4112_SPI:ADF4112|SPI_LE    ; LE1               ; IFCLK      ;
+; N/A   ; None         ; 13.901 ns  ; SPI_state[3]                  ; LE2               ; IFCLK      ;
+; N/A   ; None         ; 13.863 ns  ; SPI_state[3]                  ; LE1               ; IFCLK      ;
+; N/A   ; None         ; 12.971 ns  ; ADF4112_SPI:ADF4112|ready     ; DEBUG_LED0        ; IFCLK      ;
+; N/A   ; None         ; 12.903 ns  ; SPI_state[2]                  ; LE2               ; IFCLK      ;
+; N/A   ; None         ; 12.818 ns  ; SPI_state[2]                  ; LE1               ; IFCLK      ;
+; N/A   ; None         ; 11.907 ns  ; ADF4112_SPI:ADF4112|SPI_data  ; ADF4112_SPI_data  ; IFCLK      ;
+; N/A   ; None         ; 11.308 ns  ; ADF4112_SPI:ADF4112|SPI_clock ; ADF4112_SPI_clock ; IFCLK      ;
++-------+--------------+------------+-------------------------------+-------------------+------------+
+
+
++--------------------------+
+; Timing Analyzer Messages ;
++--------------------------+
+Info: *******************************************************************
+Info: Running Quartus II Classic Timing Analyzer
+    Info: Version 9.0 Build 132 02/25/2009 SJ Web Edition
+    Info: Processing started: Fri Jul 24 16:54:53 2009
+Info: Command: quartus_tan --read_settings_files=off --write_settings_files=off Cyclops -c Cyclops --timing_analysis_only
+Info: Found timing assignments -- calculating delays
+Info: Using auto detected offset of 3.12 ns between base clock "IFCLK" and derived clock "clock" because no offset is specified
+Info: Slack time is 197.186 ns for clock "clock" between source register "SPI_state[1]" and destination register "ADF4112_SPI:ADF4112|SPI_data"
+    Info: Fmax is 89.73 MHz (period= 11.144 ns)
+    Info: + Largest register to register requirement is 208.049 ns
+        Info: + Setup relationship between source and destination is 208.330 ns
+            Info: + Latch edge is 211.445 ns
+                Info: Clock period of Destination clock "clock" is 208.330 ns with  offset of 3.115 ns and duty cycle of 50
+                Info: Multicycle Setup factor for Destination register is 1
+            Info: - Launch edge is 3.115 ns
+                Info: Clock period of Source clock "clock" is 208.330 ns with  offset of 3.115 ns and duty cycle of 50
+                Info: Multicycle Setup factor for Source register is 1
+        Info: + Largest clock skew is -0.017 ns
+            Info: + Shortest clock path from clock "clock" to destination register is 2.642 ns
+                Info: 1: + IC(0.000 ns) + CELL(0.000 ns) = 0.000 ns; Loc. = LCFF_X32_Y10_N13; Fanout = 2; CLK Node = 'clock'
+                Info: 2: + IC(1.065 ns) + CELL(0.000 ns) = 1.065 ns; Loc. = CLKCTRL_G6; Fanout = 31; COMB Node = 'clock~clkctrl'
+                Info: 3: + IC(0.911 ns) + CELL(0.666 ns) = 2.642 ns; Loc. = LCFF_X23_Y5_N17; Fanout = 2; REG Node = 'ADF4112_SPI:ADF4112|SPI_data'
+                Info: Total cell delay = 0.666 ns ( 25.21 % )
+                Info: Total interconnect delay = 1.976 ns ( 74.79 % )
+            Info: - Longest clock path from clock "clock" to source register is 2.659 ns
+                Info: 1: + IC(0.000 ns) + CELL(0.000 ns) = 0.000 ns; Loc. = LCFF_X32_Y10_N13; Fanout = 2; CLK Node = 'clock'
+                Info: 2: + IC(1.065 ns) + CELL(0.000 ns) = 1.065 ns; Loc. = CLKCTRL_G6; Fanout = 31; COMB Node = 'clock~clkctrl'
+                Info: 3: + IC(0.928 ns) + CELL(0.666 ns) = 2.659 ns; Loc. = LCFF_X14_Y5_N29; Fanout = 18; REG Node = 'SPI_state[1]'
+                Info: Total cell delay = 0.666 ns ( 25.05 % )
+                Info: Total interconnect delay = 1.993 ns ( 74.95 % )
+        Info: - Micro clock to output delay of source is 0.304 ns
+        Info: - Micro setup delay of destination is -0.040 ns
+    Info: - Longest register to register delay is 10.863 ns
+        Info: 1: + IC(0.000 ns) + CELL(0.000 ns) = 0.000 ns; Loc. = LCFF_X14_Y5_N29; Fanout = 18; REG Node = 'SPI_state[1]'
+        Info: 2: + IC(2.748 ns) + CELL(0.370 ns) = 3.118 ns; Loc. = LCCOMB_X23_Y5_N24; Fanout = 4; COMB Node = 'LessThan1~0'
+        Info: 3: + IC(0.414 ns) + CELL(0.651 ns) = 4.183 ns; Loc. = LCCOMB_X23_Y5_N18; Fanout = 2; COMB Node = 'ADF4112_SPI:ADF4112|Mux0~7'
+        Info: 4: + IC(1.740 ns) + CELL(0.206 ns) = 6.129 ns; Loc. = LCCOMB_X14_Y5_N14; Fanout = 1; COMB Node = 'ADF4112_SPI:ADF4112|Mux0~8'
+        Info: 5: + IC(1.838 ns) + CELL(0.206 ns) = 8.173 ns; Loc. = LCCOMB_X23_Y5_N4; Fanout = 1; COMB Node = 'ADF4112_SPI:ADF4112|Mux0~9'
+        Info: 6: + IC(0.374 ns) + CELL(0.624 ns) = 9.171 ns; Loc. = LCCOMB_X23_Y5_N20; Fanout = 1; COMB Node = 'ADF4112_SPI:ADF4112|Mux0~18'
+        Info: 7: + IC(0.400 ns) + CELL(0.614 ns) = 10.185 ns; Loc. = LCCOMB_X23_Y5_N22; Fanout = 1; COMB Node = 'ADF4112_SPI:ADF4112|SPI_data~7'
+        Info: 8: + IC(0.364 ns) + CELL(0.206 ns) = 10.755 ns; Loc. = LCCOMB_X23_Y5_N16; Fanout = 1; COMB Node = 'ADF4112_SPI:ADF4112|SPI_data~8'
+        Info: 9: + IC(0.000 ns) + CELL(0.108 ns) = 10.863 ns; Loc. = LCFF_X23_Y5_N17; Fanout = 2; REG Node = 'ADF4112_SPI:ADF4112|SPI_data'
+        Info: Total cell delay = 2.985 ns ( 27.48 % )
+        Info: Total interconnect delay = 7.878 ns ( 72.52 % )
+Info: Slack time is 19.385 ns for clock "IFCLK" between source register "spi_clock[1]" and destination register "spi_clock[2]"
+    Info: Fmax is restricted to 340.02 MHz due to tcl and tch limits
+    Info: + Largest register to register requirement is 20.569 ns
+        Info: + Setup relationship between source and destination is 20.833 ns
+            Info: + Latch edge is 20.833 ns
+                Info: Clock period of Destination clock "IFCLK" is 20.833 ns with  offset of 0.000 ns and duty cycle of 50
+                Info: Multicycle Setup factor for Destination register is 1
+            Info: - Launch edge is 0.000 ns
+                Info: Clock period of Source clock "IFCLK" is 20.833 ns with  offset of 0.000 ns and duty cycle of 50
+                Info: Multicycle Setup factor for Source register is 1
+        Info: + Largest clock skew is 0.000 ns
+            Info: + Shortest clock path from clock "IFCLK" to destination register is 2.811 ns
+                Info: 1: + IC(0.000 ns) + CELL(1.130 ns) = 1.130 ns; Loc. = PIN_24; Fanout = 1; CLK Node = 'IFCLK'
+                Info: 2: + IC(0.136 ns) + CELL(0.000 ns) = 1.266 ns; Loc. = CLKCTRL_G2; Fanout = 4; COMB Node = 'IFCLK~clkctrl'
+                Info: 3: + IC(0.879 ns) + CELL(0.666 ns) = 2.811 ns; Loc. = LCFF_X32_Y10_N1; Fanout = 3; REG Node = 'spi_clock[2]'
+                Info: Total cell delay = 1.796 ns ( 63.89 % )
+                Info: Total interconnect delay = 1.015 ns ( 36.11 % )
+            Info: - Longest clock path from clock "IFCLK" to source register is 2.811 ns
+                Info: 1: + IC(0.000 ns) + CELL(1.130 ns) = 1.130 ns; Loc. = PIN_24; Fanout = 1; CLK Node = 'IFCLK'
+                Info: 2: + IC(0.136 ns) + CELL(0.000 ns) = 1.266 ns; Loc. = CLKCTRL_G2; Fanout = 4; COMB Node = 'IFCLK~clkctrl'
+                Info: 3: + IC(0.879 ns) + CELL(0.666 ns) = 2.811 ns; Loc. = LCFF_X32_Y10_N19; Fanout = 4; REG Node = 'spi_clock[1]'
+                Info: Total cell delay = 1.796 ns ( 63.89 % )
+                Info: Total interconnect delay = 1.015 ns ( 36.11 % )
+        Info: - Micro clock to output delay of source is 0.304 ns
+        Info: - Micro setup delay of destination is -0.040 ns
+    Info: - Longest register to register delay is 1.184 ns
+        Info: 1: + IC(0.000 ns) + CELL(0.000 ns) = 0.000 ns; Loc. = LCFF_X32_Y10_N19; Fanout = 4; REG Node = 'spi_clock[1]'
+        Info: 2: + IC(0.452 ns) + CELL(0.624 ns) = 1.076 ns; Loc. = LCCOMB_X32_Y10_N0; Fanout = 1; COMB Node = 'spi_clock~5'
+        Info: 3: + IC(0.000 ns) + CELL(0.108 ns) = 1.184 ns; Loc. = LCFF_X32_Y10_N1; Fanout = 3; REG Node = 'spi_clock[2]'
+        Info: Total cell delay = 0.732 ns ( 61.82 % )
+        Info: Total interconnect delay = 0.452 ns ( 38.18 % )
+Info: Minimum slack time is 499 ps for clock "clock" between source register "ADF4112_SPI:ADF4112|SPI_LE" and destination register "ADF4112_SPI:ADF4112|SPI_LE"
+    Info: + Shortest register to register delay is 0.501 ns
+        Info: 1: + IC(0.000 ns) + CELL(0.000 ns) = 0.000 ns; Loc. = LCFF_X24_Y5_N9; Fanout = 3; REG Node = 'ADF4112_SPI:ADF4112|SPI_LE'
+        Info: 2: + IC(0.000 ns) + CELL(0.393 ns) = 0.393 ns; Loc. = LCCOMB_X24_Y5_N8; Fanout = 1; COMB Node = 'ADF4112_SPI:ADF4112|SPI_LE~2'
+        Info: 3: + IC(0.000 ns) + CELL(0.108 ns) = 0.501 ns; Loc. = LCFF_X24_Y5_N9; Fanout = 3; REG Node = 'ADF4112_SPI:ADF4112|SPI_LE'
+        Info: Total cell delay = 0.501 ns ( 100.00 % )
+    Info: - Smallest register to register requirement is 0.002 ns
+        Info: + Hold relationship between source and destination is 0.000 ns
+            Info: + Latch edge is 3.115 ns
+                Info: Clock period of Destination clock "clock" is 208.330 ns with  offset of 3.115 ns and duty cycle of 50
+                Info: Multicycle Setup factor for Destination register is 1
+                Info: Multicycle Hold factor for Destination register is 1
+            Info: - Launch edge is 3.115 ns
+                Info: Clock period of Source clock "clock" is 208.330 ns with  offset of 3.115 ns and duty cycle of 50
+                Info: Multicycle Setup factor for Source register is 1
+                Info: Multicycle Hold factor for Source register is 1
+        Info: + Smallest clock skew is 0.000 ns
+            Info: + Longest clock path from clock "clock" to destination register is 2.643 ns
+                Info: 1: + IC(0.000 ns) + CELL(0.000 ns) = 0.000 ns; Loc. = LCFF_X32_Y10_N13; Fanout = 2; CLK Node = 'clock'
+                Info: 2: + IC(1.065 ns) + CELL(0.000 ns) = 1.065 ns; Loc. = CLKCTRL_G6; Fanout = 31; COMB Node = 'clock~clkctrl'
+                Info: 3: + IC(0.912 ns) + CELL(0.666 ns) = 2.643 ns; Loc. = LCFF_X24_Y5_N9; Fanout = 3; REG Node = 'ADF4112_SPI:ADF4112|SPI_LE'
+                Info: Total cell delay = 0.666 ns ( 25.20 % )
+                Info: Total interconnect delay = 1.977 ns ( 74.80 % )
+            Info: - Shortest clock path from clock "clock" to source register is 2.643 ns
+                Info: 1: + IC(0.000 ns) + CELL(0.000 ns) = 0.000 ns; Loc. = LCFF_X32_Y10_N13; Fanout = 2; CLK Node = 'clock'
+                Info: 2: + IC(1.065 ns) + CELL(0.000 ns) = 1.065 ns; Loc. = CLKCTRL_G6; Fanout = 31; COMB Node = 'clock~clkctrl'
+                Info: 3: + IC(0.912 ns) + CELL(0.666 ns) = 2.643 ns; Loc. = LCFF_X24_Y5_N9; Fanout = 3; REG Node = 'ADF4112_SPI:ADF4112|SPI_LE'
+                Info: Total cell delay = 0.666 ns ( 25.20 % )
+                Info: Total interconnect delay = 1.977 ns ( 74.80 % )
+        Info: - Micro clock to output delay of source is 0.304 ns
+        Info: + Micro hold delay of destination is 0.306 ns
+Info: Minimum slack time is 499 ps for clock "IFCLK" between source register "spi_clock[2]" and destination register "spi_clock[2]"
+    Info: + Shortest register to register delay is 0.501 ns
+        Info: 1: + IC(0.000 ns) + CELL(0.000 ns) = 0.000 ns; Loc. = LCFF_X32_Y10_N1; Fanout = 3; REG Node = 'spi_clock[2]'
+        Info: 2: + IC(0.000 ns) + CELL(0.393 ns) = 0.393 ns; Loc. = LCCOMB_X32_Y10_N0; Fanout = 1; COMB Node = 'spi_clock~5'
+        Info: 3: + IC(0.000 ns) + CELL(0.108 ns) = 0.501 ns; Loc. = LCFF_X32_Y10_N1; Fanout = 3; REG Node = 'spi_clock[2]'
+        Info: Total cell delay = 0.501 ns ( 100.00 % )
+    Info: - Smallest register to register requirement is 0.002 ns
+        Info: + Hold relationship between source and destination is 0.000 ns
+            Info: + Latch edge is 0.000 ns
+                Info: Clock period of Destination clock "IFCLK" is 20.833 ns with  offset of 0.000 ns and duty cycle of 50
+                Info: Multicycle Setup factor for Destination register is 1
+                Info: Multicycle Hold factor for Destination register is 1
+            Info: - Launch edge is 0.000 ns
+                Info: Clock period of Source clock "IFCLK" is 20.833 ns with  offset of 0.000 ns and duty cycle of 50
+                Info: Multicycle Setup factor for Source register is 1
+                Info: Multicycle Hold factor for Source register is 1
+        Info: + Smallest clock skew is 0.000 ns
+            Info: + Longest clock path from clock "IFCLK" to destination register is 2.811 ns
+                Info: 1: + IC(0.000 ns) + CELL(1.130 ns) = 1.130 ns; Loc. = PIN_24; Fanout = 1; CLK Node = 'IFCLK'
+                Info: 2: + IC(0.136 ns) + CELL(0.000 ns) = 1.266 ns; Loc. = CLKCTRL_G2; Fanout = 4; COMB Node = 'IFCLK~clkctrl'
+                Info: 3: + IC(0.879 ns) + CELL(0.666 ns) = 2.811 ns; Loc. = LCFF_X32_Y10_N1; Fanout = 3; REG Node = 'spi_clock[2]'
+                Info: Total cell delay = 1.796 ns ( 63.89 % )
+                Info: Total interconnect delay = 1.015 ns ( 36.11 % )
+            Info: - Shortest clock path from clock "IFCLK" to source register is 2.811 ns
+                Info: 1: + IC(0.000 ns) + CELL(1.130 ns) = 1.130 ns; Loc. = PIN_24; Fanout = 1; CLK Node = 'IFCLK'
+                Info: 2: + IC(0.136 ns) + CELL(0.000 ns) = 1.266 ns; Loc. = CLKCTRL_G2; Fanout = 4; COMB Node = 'IFCLK~clkctrl'
+                Info: 3: + IC(0.879 ns) + CELL(0.666 ns) = 2.811 ns; Loc. = LCFF_X32_Y10_N1; Fanout = 3; REG Node = 'spi_clock[2]'
+                Info: Total cell delay = 1.796 ns ( 63.89 % )
+                Info: Total interconnect delay = 1.015 ns ( 36.11 % )
+        Info: - Micro clock to output delay of source is 0.304 ns
+        Info: + Micro hold delay of destination is 0.306 ns
+Info: tco from clock "IFCLK" to destination pin "LE1" through register "SPI_state[0]" is 16.948 ns
+    Info: + Longest clock path from clock "IFCLK" to source register is 5.759 ns
+        Info: 1: + IC(0.000 ns) + CELL(1.130 ns) = 1.130 ns; Loc. = PIN_24; Fanout = 1; CLK Node = 'IFCLK'
+        Info: 2: + IC(0.136 ns) + CELL(0.000 ns) = 1.266 ns; Loc. = CLKCTRL_G2; Fanout = 4; COMB Node = 'IFCLK~clkctrl'
+        Info: 3: + IC(0.879 ns) + CELL(0.970 ns) = 3.115 ns; Loc. = LCFF_X32_Y10_N13; Fanout = 2; CLK Node = 'clock'
+        Info: 4: + IC(1.065 ns) + CELL(0.000 ns) = 4.180 ns; Loc. = CLKCTRL_G6; Fanout = 31; COMB Node = 'clock~clkctrl'
+        Info: 5: + IC(0.913 ns) + CELL(0.666 ns) = 5.759 ns; Loc. = LCFF_X28_Y6_N25; Fanout = 16; REG Node = 'SPI_state[0]'
+        Info: Total cell delay = 2.766 ns ( 48.03 % )
+        Info: Total interconnect delay = 2.993 ns ( 51.97 % )
+    Info: + Micro clock to output delay of source is 0.304 ns
+    Info: + Longest register to pin delay is 10.885 ns
+        Info: 1: + IC(0.000 ns) + CELL(0.000 ns) = 0.000 ns; Loc. = LCFF_X28_Y6_N25; Fanout = 16; REG Node = 'SPI_state[0]'
+        Info: 2: + IC(2.685 ns) + CELL(0.202 ns) = 2.887 ns; Loc. = LCCOMB_X14_Y5_N26; Fanout = 3; COMB Node = 'Second_LO_data[8]~40'
+        Info: 3: + IC(1.466 ns) + CELL(0.651 ns) = 5.004 ns; Loc. = LCCOMB_X16_Y6_N2; Fanout = 1; COMB Node = 'LE1~1'
+        Info: 4: + IC(2.775 ns) + CELL(3.106 ns) = 10.885 ns; Loc. = PIN_118; Fanout = 0; PIN Node = 'LE1'
+        Info: Total cell delay = 3.959 ns ( 36.37 % )
+        Info: Total interconnect delay = 6.926 ns ( 63.63 % )
+Info: All timing requirements were met for slow timing model timing analysis. See Report window for more details.
+Info: Quartus II Classic Timing Analyzer was successful. 0 errors, 0 warnings
+    Info: Peak virtual memory: 134 megabytes
+    Info: Processing ended: Fri Jul 24 16:54:53 2009
+    Info: Elapsed time: 00:00:00
+    Info: Total CPU time (on all processors): 00:00:00
+
+
