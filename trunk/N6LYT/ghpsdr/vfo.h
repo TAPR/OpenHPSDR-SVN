@@ -32,6 +32,8 @@ long long frequencyMax;
 
 long frequencyIncrement;
 
+int bSubRx;
+
 void vfoSaveState();
 void vfoRestoreState();
 
@@ -40,3 +42,8 @@ void vfoIncrementFrequency(long increment);
 void setAFrequency(long long frequency);
 void setBFrequency(long long frequency);
 void setLOFrequency(long long frequency);
+
+void vfoTransmit(int state);
+void vfoStepFrequency(gpointer data);
+
+void vfoRX2(int state);

@@ -49,6 +49,7 @@
 #include "ozy.h"
 #include "vfo.h"
 #include "spectrum.h"
+#include "subrx.h"
 
 GtkWidget* bandFrame;
 GtkWidget* bandTable;
@@ -327,6 +328,8 @@ void selectBand(GtkWidget* widget) {
     XVTR_ENTRY* xvtr_entry;
     int current;
 
+    resetSubRx();
+
     if(currentBandButton) {
         label=gtk_bin_get_child((GtkBin*)currentBandButton);
         gtk_widget_modify_fg(label, GTK_STATE_NORMAL, &black);
@@ -558,6 +561,19 @@ void setBand(int band) {
             break;
     }
     selectBand(widget);
+}
+
+/* --------------------------------------------------------------------------*/
+/** 
+* @brief Set the band using g_idle_add
+* 
+* @param data -- pointer to the band 
+*/
+/* ----------------------------------------------------------------------------*/
+void remoteSetBand(gpointer *data) {
+    int band=*(int*)data;
+    setBand(band);
+    free(data);
 }
 
 /* --------------------------------------------------------------------------*/

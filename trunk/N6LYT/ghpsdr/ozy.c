@@ -25,6 +25,7 @@
 #include "filter.h"
 #include "volume.h"
 #include "mode.h"
+#include "audiostream.h"
 
 /*
  *   ozy interface
@@ -98,6 +99,10 @@ int clock122_88MHz=1;  // default 122.88 MHz clock source Mercury
 int preamp=0;          // default preamp off
 
 int sampleRate=48000;  // default 48k
+
+int mox=0;             // default not transmitting
+int tune=0;            // default not tuning
+
 /* --------------------------------------------------------------------------*/
 /** 
 * @brief Process the ozy input buffer
@@ -184,6 +189,8 @@ void process_ozy_input_buffer(char* buffer) {
                     right_rx_sample=(short)(right_output_buffer[j]*32767.0);
                     left_tx_sample=0/*(short)(buffer->buffer_3[j]*32767.0)*/;
                     right_tx_sample=0/*(short)(buffer->buffer_4[j]*32767.0)*/;
+
+                    audio_stream_put_samples(left_rx_sample,right_rx_sample);
 
                     ozy_samples[c]=left_rx_sample>>8;
                     ozy_samples[c+1]=left_rx_sample;
@@ -387,6 +394,7 @@ void getSpectrumSamples(char *samples) {
 * @param state
 */
 void setMOX(int state) {
+    mox=state;
     control_out[0]=control_out[0]&0xFE;
     control_out[0]=control_out[0]|(state&0x01);
 }

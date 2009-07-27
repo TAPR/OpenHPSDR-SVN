@@ -125,6 +125,10 @@
 #include "setup.h"
 #include "receiver.h"
 #include "volume.h"
+#include "transmit.h"
+#include "subrx.h"
+#include "iphone.h"
+#include "audiostream.h"
 
 GdkColor background;
 GdkColor buttonBackground;
@@ -137,6 +141,7 @@ GdkColor red;
 GdkColor grey;
 GdkColor plotColor;
 GdkColor filterColor;
+GdkColor subrxFilterColor;
 GdkColor verticalColor;
 GdkColor horizontalColor;
 GdkColor spectrumTextColor;
@@ -161,6 +166,8 @@ GtkWidget* agcWindow;
 GtkWidget* preampWindow;
 GtkWidget* receiverWindow;
 GtkWidget* volumeWindow;
+GtkWidget* transmitWindow;
+GtkWidget* subrxWindow;
 
 gint mainStartX;
 gint mainStartY;
@@ -212,6 +219,8 @@ void quit() {
     receiverSaveState();
     volumeSaveState();
     ozySaveState();
+    transmitSaveState();
+    subrxSaveState();
 
     saveProperties(propertyPath);
 
@@ -434,9 +443,16 @@ void buildMainUI() {
     // add the bandscope display
     gtk_widget_show(bandscopeWindow);
     gtk_fixed_put((GtkFixed*)mainFixed,bandscopeWindow,210,475);
-
     gtk_widget_show(bandscope_controlWindow);
     gtk_fixed_put((GtkFixed*)mainFixed,bandscope_controlWindow,210,575);
+
+    // add the transmit window
+    gtk_widget_show(transmitWindow);
+    gtk_fixed_put((GtkFixed*)mainFixed,transmitWindow,210,625);
+
+    // add the subrx window
+    gtk_widget_show(subrxWindow);
+    gtk_fixed_put((GtkFixed*)mainFixed,subrxWindow,710,625);
 
     gtk_widget_set_size_request(GTK_WIDGET(mainFixed),1180,700);
     gtk_widget_show(mainFixed);
@@ -514,6 +530,10 @@ void initColors() {
     filterColor.red=65535*35/256;
     filterColor.green=65535*129/256;
     filterColor.blue=65535*53/256;
+
+    subrxFilterColor.red=65535*64/256;
+    subrxFilterColor.green=65535*64/256;
+    subrxFilterColor.blue=65535*64/256;
 
     verticalColor.red=65535*82/256;
     verticalColor.green=65535*34/256;
@@ -737,12 +757,21 @@ int main(int argc,char* argv[]) {
     volumeRestoreState();
     volumeWindow=buildVolumeUI();
 
+    transmitRestoreState();
+    transmitWindow=buildTransmitUI();
+
+    subrxRestoreState();
+    subrxWindow=buildSubRxUI();
+
     restoreState();
 
     // build the Main UI
     buildMainUI();
 
     setSoundcard(getSoundcardId(soundCardName));
+
+    iphone_init();
+    audio_stream_init();
 
     gtk_main();
 

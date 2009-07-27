@@ -36,9 +36,11 @@
 #include <getopt.h>
 
 #include "command.h"
+#include "dttsp.h"
 #include "main.h"
 #include "xvtr.h"
 #include "band.h"
+#include "ozy.h"
 #include "property.h"
 #include "vfo.h"
 
@@ -77,8 +79,111 @@ GdkPixmap* incrementPixmap;
 GtkWidget* buttonIncrementMinus;
 GtkWidget* buttonFrequencyDown;
 
+int aTransmitting=0;
+int bTransmitting=0;
+int bSubRx=0;
+
 void setIncrement(int increment);
 void vfoSetRxFrequency();
+
+/* --------------------------------------------------------------------------*/
+/** 
+* @brief update vfo a display
+* 
+* @param widget
+* @param event
+* 
+* @return 
+*/
+void updateVfoADisplay() {
+    GdkGC* gc;
+    PangoContext *context;
+    PangoLayout *layout;
+    char temp[128];
+
+    if(vfoAFrequency->window) {
+        gc=gdk_gc_new(vfoAFrequency->window);
+        gdk_gc_set_rgb_fg_color(gc,&background);
+        gdk_draw_rectangle(vfoAPixmap,
+                           gc,
+                           TRUE,
+                           0,0,
+                           vfoAFrequency->allocation.width,
+                           vfoAFrequency->allocation.height);
+
+        context = gdk_pango_context_get_for_screen (gdk_screen_get_default ());
+        layout = pango_layout_new (context);
+        pango_layout_set_width(layout,vfoAFrequency->allocation.width*PANGO_SCALE);
+        pango_layout_set_alignment(layout,PANGO_ALIGN_RIGHT);
+        sprintf(temp,"<span foreground='%s' background='#2C2C2C' font_desc='Sans Bold 24'>% 7lld.%03lld.%03lld </span>",aTransmitting?"#FF0000":"#00FF00",frequencyA/1000000LL,(frequencyA%1000000LL)/1000LL,frequencyA%1000LL);
+        pango_layout_set_markup(layout,temp,-1);
+        gdk_draw_layout(GDK_DRAWABLE(vfoAPixmap),gc,0,0,layout);
+
+        gdk_gc_set_rgb_fg_color(gc,&grey);
+        gdk_draw_rectangle(vfoAPixmap,
+                           gc,
+                           FALSE,
+                           0,0,
+                           vfoAFrequency->allocation.width-1,
+                           vfoAFrequency->allocation.height-1);
+
+        g_object_unref(context);
+        g_object_unref(layout);
+        g_object_unref(gc);
+
+        gtk_widget_queue_draw(vfoAFrequency);
+    }
+}
+
+/* --------------------------------------------------------------------------*/
+/** 
+* @brief update vfo b display
+* 
+* @param widget
+* @param event
+* 
+* @return 
+*/
+void updateVfoBDisplay() {
+    GdkGC* gc;
+    PangoContext *context;
+    PangoLayout *layout;
+    char temp[128];
+
+    if(vfoBFrequency->window) {
+        gc=gdk_gc_new(vfoBFrequency->window);
+        gdk_gc_set_rgb_fg_color(gc,&background);
+        gdk_draw_rectangle(vfoBPixmap,
+                           gc,
+                           TRUE,
+                           0,0,
+                           vfoBFrequency->allocation.width,
+                           vfoBFrequency->allocation.height);
+
+        context = gdk_pango_context_get_for_screen (gdk_screen_get_default ());
+        layout = pango_layout_new (context);
+        pango_layout_set_width(layout,vfoBFrequency->allocation.width*PANGO_SCALE);
+        pango_layout_set_alignment(layout,PANGO_ALIGN_RIGHT);
+        sprintf(temp,"<span foreground='%s' background='#2C2C2C' font_desc='Sans Bold 24'>% 7lld.%03lld.%03lld </span>",bSubRx?"#00FF00":"#C0C0C0",frequencyB/1000000LL,(frequencyB%1000000LL)/1000LL,frequencyB%1000LL);
+
+        pango_layout_set_markup(layout,temp,-1);
+        gdk_draw_layout(GDK_DRAWABLE(vfoBPixmap),gc,0,0,layout);
+
+        gdk_gc_set_rgb_fg_color(gc,&grey);
+        gdk_draw_rectangle(vfoBPixmap,
+                           gc,
+                           FALSE,
+                           0,0,
+                           vfoBFrequency->allocation.width-1,
+                           vfoBFrequency->allocation.height-1);
+
+        g_object_unref(context);
+        g_object_unref(layout);
+        g_object_unref(gc);
+
+        gtk_widget_queue_draw(vfoBFrequency);
+    }
+}
 
 /* --------------------------------------------------------------------------*/
 /** 
@@ -112,7 +217,7 @@ gboolean vfoAFrequency_configure_event(GtkWidget* widget,GdkEventConfigure* even
     layout = pango_layout_new(context);
     pango_layout_set_width(layout,widget->allocation.width*PANGO_SCALE);
     pango_layout_set_alignment(layout,PANGO_ALIGN_RIGHT);
-    sprintf(temp,"<span foreground='#00FF00' background='#2C2C2C' font_desc='Sans Bold 24'>% 7lld.%03lld.%03lld </span>",frequencyA/1000000LL,(frequencyA%1000000LL)/1000LL,frequencyA%1000LL);
+    sprintf(temp,"<span foreground='%s' background='#2C2C2C' font_desc='Sans Bold 24'>% 7lld.%03lld.%03lld </span>",aTransmitting?"#FF0000":"#00FF00",frequencyA/1000000LL,(frequencyA%1000000LL)/1000LL,frequencyA%1000LL);
     pango_layout_set_markup(layout,temp,-1);
     gdk_draw_layout(GDK_DRAWABLE(vfoAPixmap),gc,0,0,layout);
 
@@ -227,10 +332,6 @@ gboolean vfoBFrequency_expose_event(GtkWidget* widget,GdkEventExpose* event) {
 * @param f
 */
 void setAFrequency(long long f) {
-    GdkGC* gc;
-    PangoContext *context;
-    PangoLayout *layout;
-    char temp[128];
 
     dspFrequency=0;
     ddsFrequency=0;
@@ -243,38 +344,7 @@ void setAFrequency(long long f) {
 
 //fprintf(stderr,"f=%ld LO=%ld %s\n",f,frequencyLO,temp);
 
-    if(vfoAFrequency->window) {
-        gc=gdk_gc_new(vfoAFrequency->window);
-        gdk_gc_set_rgb_fg_color(gc,&background);
-        gdk_draw_rectangle(vfoAPixmap,
-                           gc,
-                           TRUE,
-                           0,0,
-                           vfoAFrequency->allocation.width,
-                           vfoAFrequency->allocation.height);
-
-        context = gdk_pango_context_get_for_screen (gdk_screen_get_default ());
-        layout = pango_layout_new (context);
-        pango_layout_set_width(layout,vfoAFrequency->allocation.width*PANGO_SCALE);
-        pango_layout_set_alignment(layout,PANGO_ALIGN_RIGHT);
-        sprintf(temp,"<span foreground='#00FF00' background='#2C2C2C' font_desc='Sans Bold 24'>% 7lld.%03lld.%03lld </span>",frequencyA/1000000LL,(frequencyA%1000000LL)/1000LL,frequencyA%1000);
-        pango_layout_set_markup(layout,temp,-1);
-        gdk_draw_layout(GDK_DRAWABLE(vfoAPixmap),gc,0,0,layout);
-
-        gdk_gc_set_rgb_fg_color(gc,&grey);
-        gdk_draw_rectangle(vfoAPixmap,
-                           gc,
-                           FALSE,
-                           0,0,
-                           vfoAFrequency->allocation.width-1,
-                           vfoAFrequency->allocation.height-1);
-
-        g_object_unref(context);
-        g_object_unref(layout);
-        g_object_unref(gc);
-
-        gtk_widget_queue_draw(vfoAFrequency);
-    }
+    updateVfoADisplay();
 
     // check the band
     if(displayHF) {
@@ -308,39 +378,19 @@ void setBFrequency(long long f) {
     PangoLayout *layout;
     char temp[128];
 
-    frequencyB=f;
+    if(bSubRx) {
+        if((f>=(frequencyA-(sampleRate/2)))&& (f<=(frequencyA+(sampleRate/2)))) {
+            frequencyB=f;
+        }
+    } else {
+        frequencyB=f;
+    }
   
-    if(vfoBFrequency->window) {
-        gc=gdk_gc_new(vfoBFrequency->window);
-        gdk_gc_set_rgb_fg_color(gc,&background);
-        gdk_draw_rectangle(vfoBPixmap,
-                           gc,
-                           TRUE,
-                           0,0,
-                           vfoBFrequency->allocation.width,
-                           vfoBFrequency->allocation.height);
+    updateVfoBDisplay();
 
-        context = gdk_pango_context_get_for_screen (gdk_screen_get_default ());
-        layout = pango_layout_new (context);
-        pango_layout_set_width(layout,vfoBFrequency->allocation.width*PANGO_SCALE);
-        pango_layout_set_alignment(layout,PANGO_ALIGN_RIGHT);
-        sprintf(temp,"<span foreground='#C0C0C0' background='#2C2C2C' font_desc='Sans Bold 24'>% 7lld.%03lld.%03lld </span>",frequencyB/1000000LL,(frequencyB%1000000LL)/1000LL,frequencyB%1000LL);
-        pango_layout_set_markup(layout,temp,-1);
-        gdk_draw_layout(GDK_DRAWABLE(vfoBPixmap),gc,0,0,layout);
-
-        gdk_gc_set_rgb_fg_color(gc,&grey);
-        gdk_draw_rectangle(vfoBPixmap,
-                           gc,
-                           FALSE,
-                           0,0,
-                           vfoBFrequency->allocation.width-1,
-                           vfoBFrequency->allocation.height-1);
-
-        g_object_unref(context);
-        g_object_unref(layout);
-        g_object_unref(gc);
-
-        gtk_widget_queue_draw(vfoBFrequency);
+    if(bSubRx) {
+        long long diff=frequencyA-frequencyB;
+        SetRXOsc(0,1,(double)diff);
     }
 }
 
@@ -366,12 +416,29 @@ void vfoCallback(GtkWidget* widget,gpointer data) {
 
 /* --------------------------------------------------------------------------*/
 /** 
-* @brief Increment the frequency - only vfo A
+* @brief Increment the frequency
 * 
 * @param increment
 */
 void vfoIncrementFrequency(long increment) {
-    setAFrequency(frequencyA+(long long)increment);
+    if(bSubRx) {
+        setBFrequency(frequencyB+(long long)increment);
+    } else {
+        setAFrequency(frequencyA+(long long)increment);
+    }
+}
+
+/* --------------------------------------------------------------------------*/
+/** 
+* @brief interface to allow calling from iphone using g_idle_add
+* 
+* @param increment
+*/
+void vfoStepFrequency(gpointer data) {
+    long step=*(long*)data;
+    //vfoIncrementFrequency(step*frequencyIncrement);
+    vfoIncrementFrequency(step*50);
+    free(data);
 }
 
 /* --------------------------------------------------------------------------*/
@@ -775,3 +842,20 @@ void vfoRestoreState() {
     value=getProperty("vfoB");
     if(value) frequencyB=atoll(value);
 }
+
+/* --------------------------------------------------------------------------*/
+/** 
+* @brief transmit on VFO A frequency
+*/
+void vfoTransmit(int state) {
+    aTransmitting=state;
+    updateVfoADisplay();
+}
+
+void vfoSubRx(int state) {
+    bSubRx=state;
+    updateVfoBDisplay();
+    setBFrequency(frequencyB);
+}
+
+

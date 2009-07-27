@@ -24,14 +24,20 @@ SOURCES= agc.c audio.c band.c bandscope.c bandscope_control.c bandscope_update.c
          meter_update.c mode.c ozy_buffers.c ozy.c ozy_ringbuffer.c\
          preamp.c property.c receiver.c\
          setup.c display_setup.c hpsdr_setup.c xvtr_setup.c\
-         soundcard.c spectrum_buffers.c spectrum.c spectrum_update.c util.c vfo.c volume.c
+         soundcard.c spectrum_buffers.c spectrum.c spectrum_update.c util.c vfo.c volume.c\
+         sinewave.c transmit.c\
+         iphone.c audiostream.c\
+         subrx.c
 
 OBJS= agc.o audio.o band.o bandscope.o bandscope_control.o bandscope_update.o command.o\
       display.o filter.o frequency.o libusbio.o main.o meter.o\
       meter_update.o mode.o ozy_buffers.o ozy.o ozy_ringbuffer.o\
       preamp.o property.o receiver.o\
       setup.o display_setup.o hpsdr_setup.o xvtr_setup.o\
-      soundcard.o spectrum_buffers.o spectrum.o spectrum_update.o util.o vfo.o volume.o
+      soundcard.o spectrum_buffers.o spectrum.o spectrum_update.o util.o vfo.o volume.o\
+      sinewave.o transmit.o\
+      iphone.o audiostream.o\
+      subrx.o
 
 PROGRAM=bin/ghpsdr
 

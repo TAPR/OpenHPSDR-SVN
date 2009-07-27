@@ -11,7 +11,7 @@ You will need to install gtk+, fftw and libusb1.0
 
     sudo apt-get install libgtk2.0-dev
     sudo apt-get install libfftw3-dev
-    sudo apt-get install libusb1.0-dev
+    sudo apt-get install libusb-1.0-0-dev
 
 If you are going to build DttSP.a you will also need to install libgsl
 
