@@ -181,7 +181,7 @@ GtkWidget* buildSubRxUI() {
 
 /* --------------------------------------------------------------------------*/
 /**
-* @brief Save the transmit state
+* @brief Save the sub rx state
 */
 void subrxSaveState() {
     char string[128];
@@ -195,7 +195,7 @@ void subrxSaveState() {
 
 /* --------------------------------------------------------------------------*/
 /**
-* @brief Restore the volume state
+* @brief Restore the sub rx state
 */
 void subrxRestoreState() {
     char* value;
@@ -205,6 +205,9 @@ void subrxRestoreState() {
     if(value) subrxPan=atof(value); else subrxPan=50.0f;
     value=getProperty("subrx");
     if(value) subrx=atoi(value); else subrx=0;
+
+    SetRXPan(0,1,subrxPan);
+    SetRXOutputGain(0,1,subrxGain/100.0);
 }
 
 void resetSubRx() {
