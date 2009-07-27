@@ -199,6 +199,7 @@ gboolean bandscope_button_press_event(GtkWidget* widget,GdkEventButton* event) {
 */
 void updateBandscope(float* samples) {
     int i;
+    float average=0.0f;
 
 //    if(dump_samples) {
 //        dump_samples=0;
@@ -211,11 +212,20 @@ void updateBandscope(float* samples) {
     for(i=0;i<BANDSCOPE_BUFFER_SIZE*BANDSCOPE_MULTIPLIER;i++) {
         if(i<BANDSCOPE_BUFFER_SIZE) {
             timebuf[i][0]=samples[i]*blackmanHarris[i];
+            average+=timebuf[i][0];
         } else {
             timebuf[i][0]=0.0f;
         }
         timebuf[i][1]=0.0f;
     }
+
+    average=average/(float)i;
+    for(i=0;i<BANDSCOPE_BUFFER_SIZE*BANDSCOPE_MULTIPLIER;i++) {
+        timebuf[i][0]-=average;
+    }
+
+
+
 
     // perform the fft
     fftwf_execute(plan);

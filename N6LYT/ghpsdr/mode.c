@@ -48,6 +48,7 @@ GtkWidget* modeFrame;
 GtkWidget* modeTable;
 
 int mode;
+char stringMode[8];
 
 GtkWidget* buttonLSB;
 GtkWidget* buttonUSB;
@@ -117,6 +118,7 @@ void selectMode(GtkWidget* widget) {
     //sprintf(temp,"setMode %d",mode);
     //writeCommand(temp);
     SetMode(0,0,mode);
+    SetMode(0,1,mode);
 
     setFilterValues(mode);
     setFilter(filter);
@@ -335,4 +337,51 @@ void modeRestoreState() {
     char* value;
     value=getProperty("mode");
     if(value) mode=atoi(value);
+}
+
+/* --------------------------------------------------------------------------*/
+/** 
+* @brief get the mode as a string
+*/
+char* modeToString() {
+    switch(mode) {
+        case modeLSB:
+            strcpy(stringMode,"LSB");
+            break;
+        case modeUSB:
+            strcpy(stringMode,"USB");
+            break;
+        case modeDSB:
+            strcpy(stringMode,"DSB");
+            break;
+        case modeCWL:
+            strcpy(stringMode,"CWL");
+            break;
+        case modeCWU:
+            strcpy(stringMode,"CWU");
+            break;
+        case modeAM:
+            strcpy(stringMode,"AM");
+            break;
+        case modeSAM:
+            strcpy(stringMode,"SAM");
+            break;
+        case modeFMN:
+            strcpy(stringMode,"FMN");
+            break;
+        case modeDIGL:
+            strcpy(stringMode,"DIGL");
+            break;
+        case modeSPEC:
+            strcpy(stringMode,"SPEC");
+            break;
+        case modeDIGU:
+            strcpy(stringMode,"DIGU");
+            break;
+        case modeDRM:
+            strcpy(stringMode,"DRM");
+            break;
+    }
+
+    return stringMode;
 }

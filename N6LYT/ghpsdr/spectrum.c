@@ -41,6 +41,8 @@
 #include "spectrum.h"
 #include "spectrum_update.h"
 #include "vfo.h"
+#include "subrx.h"
+#include "iphone.h"
 
 GtkWidget* spectrum;
 
@@ -78,6 +80,10 @@ int colorHighB=0;
 float* waterfall;
 
 int adcOverflow=0;
+
+int initAverage=1;
+float average[SPECTRUM_BUFFER_SIZE];
+float smoothing=0.4f;
  
 gboolean spectrum_configure_event(GtkWidget* widget,GdkEventConfigure* event);
 gboolean spectrum_expose_event(GtkWidget* widget,GdkEventExpose* event);
@@ -98,6 +104,7 @@ void drawWaterfall(int y,int height);
 
 void spectrumUpdateOff();
 void setSpectrumMode(int mode);
+
 
 /* --------------------------------------------------------------------------*/
 /** 
@@ -229,7 +236,7 @@ gboolean spectrum_button_press_event(GtkWidget* widget,GdkEventButton* event) {
         case 3:
             // right button - click to frequency (to cursor) 
             increment=(int)((float)spectrumLow+((float)event->x*((float)spectrumHigh-(float)spectrumLow)/(float)spectrumWIDTH));
-            vfoIncrementFrequency(increment);
+            if(!bSubRx) vfoIncrementFrequency(increment);
             break;
     }
     return TRUE;
@@ -251,7 +258,7 @@ gboolean spectrum_button_release_event(GtkWidget* widget,GdkEventButton* event) 
             // left button  - click to frequency (centered in filter) if not dragged
             if(!hasMoved) {
                 increment=(int)((float)spectrumLow+((float)event->x*((float)spectrumHigh-(float)spectrumLow)/(float)spectrumWIDTH)-((float)filterLow+((float)filterHigh-(float)filterLow)/2.0));
-                vfoIncrementFrequency(increment);
+                if(!bSubRx) vfoIncrementFrequency(increment);
             }
             break;
         case 2:
@@ -278,6 +285,7 @@ gboolean spectrum_motion_notify_event(GtkWidget* widget,GdkEventMotion* event) {
         int moved=lastX-event->x;
         //int f=moved*(spectrumHigh-spectrumLow)/spectrumWIDTH;
         int f=(int)((float)moved*((float)spectrumHigh-(float)spectrumLow)/(float)spectrumWIDTH);
+        if(bSubRx) f=-f;
         vfoIncrementFrequency(f);
         lastX=event->x;
         hasMoved=TRUE;
@@ -309,6 +317,9 @@ gboolean spectrum_scroll_event(GtkWidget* widget,GdkEventScroll* event) {
 * @param samples
 */
 void updateSpectrum(float* samples) {
+
+    iphone_set_samples(samples);
+
     spectrumLow=-sampleRate/2;
     spectrumHigh=+sampleRate/2;
     switch(spectrumMode) {
@@ -420,6 +431,9 @@ void drawSpectrum(int height) {
 
     float hzPerPixel;
 
+    int filterLeftX;
+    int filterRightX;
+
     minDisplay=f=frequencyA-(sampleRate/2);
     maxDisplay=frequencyA+(sampleRate/2);
     
@@ -436,9 +450,17 @@ void drawSpectrum(int height) {
         layout = pango_layout_new (context);
         pango_layout_set_width(layout,spectrumWIDTH*PANGO_SCALE);
 
+        if(bSubRx) {
+            filterLeftX=(filterLow+(frequencyB-frequencyA)-spectrumLow)*spectrumWIDTH/(spectrumHigh-spectrumLow);
+            filterRightX=(filterHigh+(frequencyB-frequencyA)-spectrumLow)*spectrumWIDTH/(spectrumHigh-spectrumLow);
+            if(filterLeftX==filterRightX) filterRightX++;
+            gdk_gc_set_rgb_fg_color(gc,&subrxFilterColor);
+            gdk_draw_rectangle(spectrumPixmap,gc,TRUE,filterLeftX,0,filterRightX-filterLeftX,height);
+        }
+
         // draw the filter 
-        int filterLeftX=(filterLow-spectrumLow)*spectrumWIDTH/(spectrumHigh-spectrumLow);
-        int filterRightX=(filterHigh-spectrumLow)*spectrumWIDTH/(spectrumHigh-spectrumLow);
+        filterLeftX=(filterLow-spectrumLow)*spectrumWIDTH/(spectrumHigh-spectrumLow);
+        filterRightX=(filterHigh-spectrumLow)*spectrumWIDTH/(spectrumHigh-spectrumLow);
         if(filterLeftX==filterRightX) filterRightX++;
         gdk_gc_set_rgb_fg_color(gc,&filterColor);
         gdk_draw_rectangle(spectrumPixmap,gc,TRUE,filterLeftX,0,filterRightX-filterLeftX,height);
@@ -536,7 +558,6 @@ void drawSpectrum(int height) {
 */
 void plotSpectrum(float* samples,int height) {
 
-
     // plot the spectrum
     int num_samples;
     int start_sample_index;
@@ -558,6 +579,21 @@ void plotSpectrum(float* samples,int height) {
     int spectrum_max_x=0;
     float spectrum_max_y = -1000000.0F;
     int i;
+
+
+    // if(spectrumAverage) {
+        if(initAverage) {
+            for(i=0;i<SPECTRUM_BUFFER_SIZE;i++) {
+                average[i]=samples[i];
+            }
+            initAverage=0;
+        } else {
+            for(i=0;i<SPECTRUM_BUFFER_SIZE;i++) {
+                average[i] = (samples[i] * (1 - smoothing)) + (average[i] * smoothing);
+            }
+        }
+    // }
+
     for(i=0; i<spectrumWIDTH; i++) {
         float max = -1000000.0F;
         float dval = i*slope + start_sample_index;
@@ -568,7 +604,7 @@ void plotSpectrum(float* samples,int height) {
         if(f>0) {
             int j;
             for(j=lindex;j<rindex;j++) {
-                if (samples[j] > max) max=samples[j];
+                if (average[j] > max) max=average[j];
             }
 
             max = max + displayCalibrationOffset + preampOffset;
@@ -588,6 +624,7 @@ void plotSpectrum(float* samples,int height) {
         spectrumPoints[i].y = (int)(floorf(((float)spectrumMAX - (float)max)*(float)height/(float)yRange));
         spectrumPoints[i].x = i;
         f+=(long long)hzPerPixel;
+
     }
 }
 

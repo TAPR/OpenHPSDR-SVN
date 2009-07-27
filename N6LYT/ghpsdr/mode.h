@@ -44,3 +44,4 @@ void setMode(int mode);
 void modeSaveState();
 void modeRestoreState();
 GtkWidget* buildModeUI();
+char* modeToString();

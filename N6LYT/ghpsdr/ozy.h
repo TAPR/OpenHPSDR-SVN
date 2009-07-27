@@ -80,6 +80,8 @@ int preamp;
 
 int sampleRate;
 
+int mox;
+
 /* --------------------------------------------------------------------------*/
 /** 
 * @brief Initialize the Ozy interface 

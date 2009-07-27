@@ -36,6 +36,7 @@ GdkColor red;
 GdkColor grey;
 GdkColor plotColor;
 GdkColor filterColor;
+GdkColor subrxFilterColor;
 GdkColor verticalColor;
 GdkColor horizontalColor;
 GdkColor spectrumTextColor;
