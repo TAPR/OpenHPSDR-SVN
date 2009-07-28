@@ -617,10 +617,53 @@ void setIncrement(int increment) {
 * @brief Next increment
 */
 void nextIncrement() {
-    if(frequencyIncrement==1000000) {
-        frequencyIncrement=1;
-    } else {
-        frequencyIncrement=frequencyIncrement*10;
+
+    switch(frequencyIncrement) {
+        case 1:
+            frequencyIncrement=10;
+            break;
+        case 10:
+            frequencyIncrement=25;
+            break;
+        case 25:
+            frequencyIncrement=50;
+            break;
+        case 50:
+            frequencyIncrement=100;
+            break;
+        case 100:
+            frequencyIncrement=250;
+            break;
+        case 250:
+            frequencyIncrement=500;
+            break;
+        case 500:
+            frequencyIncrement=1000;
+            break;
+        case 1000:
+            frequencyIncrement=5000;
+            break;
+        case 5000:
+            frequencyIncrement=9000;
+            break;
+        case 9000:
+            frequencyIncrement=10000;
+            break;
+        case 10000:
+            frequencyIncrement=100000;
+            break;
+        case 100000:
+            frequencyIncrement=250000;
+            break;
+        case 250000:
+            frequencyIncrement=500000;
+            break;
+        case 500000:
+            frequencyIncrement=1000000;
+            break;
+        case 1000000:
+            frequencyIncrement=1;
+            break;
     }
     drawIncrementDisplay(TRUE);
 }
@@ -630,10 +673,52 @@ void nextIncrement() {
 * @brief Previous increment
 */
 void previousIncrement() {
-    if(frequencyIncrement==1) {
-        frequencyIncrement=1000000;
-    } else {
-        frequencyIncrement=frequencyIncrement/10;
+    switch(frequencyIncrement) {
+        case 1:
+            frequencyIncrement=1000000;
+            break;
+        case 10:
+            frequencyIncrement=1;
+            break;
+        case 25:
+            frequencyIncrement=10;
+            break;
+        case 50:
+            frequencyIncrement=25;
+            break;
+        case 100:
+            frequencyIncrement=50;
+            break;
+        case 250:
+            frequencyIncrement=100;
+            break;
+        case 500:
+            frequencyIncrement=250;
+            break;
+        case 1000:
+            frequencyIncrement=500;
+            break;
+        case 5000:
+            frequencyIncrement=1000;
+            break;
+        case 9000:
+            frequencyIncrement=5000;
+            break;
+        case 10000:
+            frequencyIncrement=9000;
+            break;
+        case 100000:
+            frequencyIncrement=10000;
+            break;
+        case 250000:
+            frequencyIncrement=100000;
+            break;
+        case 500000:
+            frequencyIncrement=250000;
+            break;
+        case 1000000:
+            frequencyIncrement=500000;
+            break;
     }
     drawIncrementDisplay(TRUE);
 }
