@@ -27,6 +27,7 @@
 
 #include <gtk/gtk.h>
 #include <stdio.h>
+#include <stdlib.h>
 #include <sys/types.h>
 #include <sys/socket.h>
 #include <netinet/in.h>
@@ -57,7 +58,8 @@ int addrlen;
 void* iphone_thread(void* arg);
 void iphone_send_samples();
 
-unsigned char iphone_samples[SPECTRUM_BUFFER_SIZE+40];
+#define PREFIX 48
+unsigned char iphone_samples[SPECTRUM_BUFFER_SIZE+PREFIX];
 
 void iphone_init() {
 
@@ -125,14 +127,14 @@ fprintf(stderr,"iphone_thread: accept\n");
 //fprintf(stderr,"iphone message: %s\n",message);
                     long *increment=malloc(sizeof(long));
                     *increment=atol(&message[16]);
-                    g_idle_add(vfoStepFrequency,increment);
+                    g_idle_add(vfoStepFrequency,(gpointer)increment);
 //fprintf(stderr,"scrollFrequency %ld\n",*increment);
                 } else if(strncmp(message,"band",4)==0) {
                     // select a band
                     int *band=malloc(sizeof(int));
                     *band=atoi(&message[5]);
 //fprintf(stderr,"select band %d\n",*band);
-                    g_idle_add(remoteSetBand,band);
+                    g_idle_add(remoteSetBand,(gpointer)band);
                 }
 
             }
@@ -149,7 +151,7 @@ void iphone_send_samples() {
     int rc;
     if(clientSocket!=-1) {
 //fprintf(stderr,"iphone_send_samples\n");
-        rc=send(clientSocket,iphone_samples,SPECTRUM_BUFFER_SIZE+40,0);
+        rc=send(clientSocket,iphone_samples,SPECTRUM_BUFFER_SIZE+PREFIX,0);
         if(rc<0) {
             perror("iphone send");
         }
@@ -174,8 +176,11 @@ void iphone_set_samples(float* samples) {
     // next 8 bytes contain the sample rate
     sprintf(&iphone_samples[32],"%d",sampleRate);
 
+    // next 8 bytes contain the band
+    sprintf(&iphone_samples[40],"%d",band);
+
     for(i=0;i<SPECTRUM_BUFFER_SIZE;i++) {
-        iphone_samples[i+40]=(unsigned char)-(samples[i]+displayCalibrationOffset+preampOffset);
+        iphone_samples[i+PREFIX]=(unsigned char)-(samples[i]+displayCalibrationOffset+preampOffset);
     }
 
 }
