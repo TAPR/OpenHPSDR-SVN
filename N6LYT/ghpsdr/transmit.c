@@ -35,19 +35,24 @@
 #include "main.h"
 #include "property.h"
 #include "ozy.h"
+#include "mode.h"
+#include "filter.h"
+#include "volume.h"
 
 GtkWidget* transmitFrame;
 GtkWidget* transmitTable;
 
 GtkWidget* buttonMOX;
 GtkWidget* buttonTune;
-GtkWidget* micGainScale;
+GtkWidget* rfGainFrame;
 GtkWidget* rfGainScale;
 
-double micGain=10.0;
-double rfGain=10.0;
+double rfGain=0.1;
 
-double micPreamp;
+int tuning=0;
+double tuningPhase=0;
+
+int fullDuplex=1;
 
 /* --------------------------------------------------------------------------*/
 /** 
@@ -69,6 +74,16 @@ void moxButtonCallback(GtkWidget* widget,gpointer data) {
 
     vfoTransmit(state);
     setMOX(state);
+
+    if(!fullDuplex) {
+        if(mox) {
+            SetThreadProcessingMode(0,0);  // MUTE
+            //SetRXOutputGain(0,0,0.0);
+        } else {
+            SetThreadProcessingMode(0,2);  // RUN
+            //SetRXOutputGain(0,0,volume/100.0);
+        }
+    }
 
     label=gtk_bin_get_child((GtkBin*)widget);
     if(state) {
@@ -98,7 +113,36 @@ void tuneButtonCallback(GtkWidget* widget,gpointer data) {
         state=1;
     }
 
+    vfoTransmit(state);
     setMOX(state);
+    tuning=state;
+    tuningPhase=0.0;
+    if(state) {
+        switch(mode) {
+            case modeLSB:
+            case modeCWL:
+            case modeDIGL:
+                SetTXFilter(1,(double)(-cwPitch-100),(double)(-cwPitch+100));
+                break;
+            case modeUSB:
+            case modeCWU:
+            case modeDIGU:
+                SetTXFilter(1,(double)(cwPitch-100),(double)(cwPitch+100));
+                break;
+        }
+    } else {
+        SetTXFilter(1,(double)filterLow,(double)filterHigh);
+    }
+
+    if(!fullDuplex) {
+        if(mox) {
+            SetThreadProcessingMode(0,0);  // MUTE
+            //SetRXOutputGain(0,0,0.0);
+        } else {
+            SetThreadProcessingMode(0,2);  // RUN
+            //SetRXOutputGain(0,0,volume/100.0);
+        }
+    }
 
     label=gtk_bin_get_child((GtkBin*)widget);
     if(state) {
@@ -117,26 +161,10 @@ void tuneButtonCallback(GtkWidget* widget,gpointer data) {
 * @param widget
 * @param data
 */
-void micGainChanged(GtkWidget* widget,gpointer data) {
-    char command[80];
-    micGain=gtk_range_get_value((GtkRange*)micGainScale);
-    micPreamp=pow(10.0,micGain/20.0);
-    //SetTXInputGain(1,0,micGain/100.0);
-}
-
-
-/* --------------------------------------------------------------------------*/
-/**
-* @brief  Callback when rf gain values changes
-*
-* @param widget
-* @param data
-*/
 void rfGainChanged(GtkWidget* widget,gpointer data) {
-    char command[80];
     rfGain=gtk_range_get_value((GtkRange*)rfGainScale);
-    //SetTXOutputGain(1,0,rfGain/100.0);
 }
+
 /* --------------------------------------------------------------------------*/
 /** 
 * @brief Build Transmit User Interface 
@@ -151,7 +179,7 @@ GtkWidget* buildTransmitUI() {
     gtk_widget_modify_bg(transmitFrame,GTK_STATE_NORMAL,&background);
     gtk_widget_modify_fg(gtk_frame_get_label_widget(GTK_FRAME(transmitFrame)),GTK_STATE_NORMAL,&white);
 
-    transmitTable=gtk_table_new(1,8,TRUE);
+    transmitTable=gtk_table_new(1,5,TRUE);
 
     // transmit settings
     buttonMOX = gtk_button_new_with_label ("MOX");
@@ -173,21 +201,21 @@ GtkWidget* buildTransmitUI() {
     gtk_widget_show(buttonTune);
     gtk_table_attach_defaults(GTK_TABLE(transmitTable),buttonTune,1,2,0,1);
 
-    // mic gain
-    micGainScale=gtk_hscale_new_with_range(0.0,70.0,10.0);
-    g_signal_connect(G_OBJECT(micGainScale),"value-changed",G_CALLBACK(micGainChanged),NULL);
-    gtk_range_set_value((GtkRange*)micGainScale,micGain);
-    gtk_widget_set_size_request(GTK_WIDGET(micGainScale),150,50);
-    gtk_widget_show(micGainScale);
-    gtk_table_attach_defaults(GTK_TABLE(transmitTable),micGainScale,2,5,0,1);
-
     // rf gain
-    rfGainScale=gtk_hscale_new_with_range(0.0,70.0,10.0);
+
+    rfGainFrame=gtk_frame_new("Power");
+    gtk_widget_modify_bg(rfGainFrame,GTK_STATE_NORMAL,&background);
+    gtk_widget_modify_fg(gtk_frame_get_label_widget(GTK_FRAME(rfGainFrame)),GTK_STATE_NORMAL,&white);
+
+    rfGainScale=gtk_hscale_new_with_range(0.0,0.5,0.01);
+
     g_signal_connect(G_OBJECT(rfGainScale),"value-changed",G_CALLBACK(rfGainChanged),NULL);
     gtk_range_set_value((GtkRange*)rfGainScale,rfGain);
-    gtk_widget_set_size_request(GTK_WIDGET(rfGainScale),150,50);
+    gtk_widget_set_size_request(GTK_WIDGET(rfGainScale),150,30);
     gtk_widget_show(rfGainScale);
-    gtk_table_attach_defaults(GTK_TABLE(transmitTable),rfGainScale,5,8,0,1);
+    gtk_container_add(GTK_CONTAINER(rfGainFrame),rfGainScale);
+    gtk_widget_show(rfGainFrame);
+    gtk_table_attach_defaults(GTK_TABLE(transmitTable),rfGainFrame,2,5,0,1);
 
 
     gtk_container_add(GTK_CONTAINER(transmitFrame),transmitTable);
@@ -204,10 +232,10 @@ GtkWidget* buildTransmitUI() {
 */
 void transmitSaveState() {
     char string[128];
-    sprintf(string,"%f",micGain);
-    setProperty("micGain",string);
     sprintf(string,"%f",rfGain);
     setProperty("rfGain",string);
+    sprintf(string,"%d",fullDuplex);
+    setProperty("fullDuplex",string);
 }
 
 /* --------------------------------------------------------------------------*/
@@ -216,10 +244,8 @@ void transmitSaveState() {
 */
 void transmitRestoreState() {
     char* value;
-    value=getProperty("micGain");
-    if(value) micGain=atof(value); else micGain=3.0f;
-fprintf(stderr,"micGain %s=%f\n",value,micGain);
     value=getProperty("rfGain");
     if(value) rfGain=atof(value); else rfGain=3.0f;
-fprintf(stderr,"rfGain %s=%f\n",value,rfGain);
+    value=getProperty("fullDuplex");
+    if(value) fullDuplex=atoi(value); else fullDuplex=0;
 }

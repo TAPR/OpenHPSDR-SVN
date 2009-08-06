@@ -59,6 +59,11 @@ fftwf_complex* freqbuf;
 fftwf_plan plan;
 float* result;
 
+gboolean bandscopeAverage=1;
+int initBandscopeAverage=1;
+float averageBandscope[BANDSCOPE_BUFFER_SIZE];
+float bandscopeAverageSmoothing=0.6f;
+
 
 GdkPixmap *bandscopePixmap=NULL;
 GdkPoint* bandscopePoints;
@@ -201,14 +206,8 @@ void updateBandscope(float* samples) {
     int i;
     float average=0.0f;
 
-//    if(dump_samples) {
-//        dump_samples=0;
-//        for(i=0;i<BANDSCOPE_BUFFER_SIZE*BANDSCOPE_MULTIPLIER;i++) {
-//            fprintf(stderr,"%f\n",result[i]);
-//        }
-//    }
-
     // copy samples into time domain array
+/*
     for(i=0;i<BANDSCOPE_BUFFER_SIZE*BANDSCOPE_MULTIPLIER;i++) {
         if(i<BANDSCOPE_BUFFER_SIZE) {
             timebuf[i][0]=samples[i]*blackmanHarris[i];
@@ -223,7 +222,15 @@ void updateBandscope(float* samples) {
     for(i=0;i<BANDSCOPE_BUFFER_SIZE*BANDSCOPE_MULTIPLIER;i++) {
         timebuf[i][0]-=average;
     }
-
+*/
+    for(i=0;i<BANDSCOPE_BUFFER_SIZE*BANDSCOPE_MULTIPLIER;i++) {
+        if(i<BANDSCOPE_BUFFER_SIZE) {
+            timebuf[i][0]=samples[i]*blackmanHarris[i];
+        } else {
+            timebuf[i][0]=0.0f;
+        }
+        timebuf[i][1]=0.0f;
+    }
 
 
 
@@ -236,8 +243,25 @@ void updateBandscope(float* samples) {
                   freqbuf[i][1]*freqbuf[i][1]));
     }
 
+    if(bandscopeAverage) {
+        if(initBandscopeAverage) {
+            for(i=0;i<BANDSCOPE_BUFFER_SIZE;i++) {
+                averageBandscope[i]=result[i];
+            }
+            initBandscopeAverage=0;
+        } else {
+            for(i=0;i<BANDSCOPE_BUFFER_SIZE;i++) {
+                averageBandscope[i] = (result[i] * (1 - bandscopeAverageSmoothing)) + (averageBandscope[i] * bandscopeAverageSmoothing);
+            }
+        }
+    } else {
+        for(i=0;i<BANDSCOPE_BUFFER_SIZE;i++) {
+            averageBandscope[i]=result[i];
+        }
+    }
+
     
-    plotBandscope(result);
+    plotBandscope(averageBandscope);
     drawBandscope();
 }
 
@@ -267,6 +291,7 @@ void drawBandscope() {
         gc=gdk_gc_new(bandscope->window);
         gdk_gc_copy(gc,bandscope->style->black_gc);
 
+        if(bandscopeZoom!=0) {
 
         gdk_draw_rectangle(bandscopePixmap,gc,TRUE,0,0,bandscopeWIDTH*bandscopeZoom,bandscopeHEIGHT);
 
@@ -369,6 +394,7 @@ void drawBandscope() {
 
         g_object_unref(context);
         g_object_unref(layout);
+        }
         g_object_unref(gc);
     }
 }
@@ -425,6 +451,12 @@ void bandscopeUpdateOff() {
 void bandscopeSaveState() {
     char string[128];
 
+    sprintf(string,"%d",bandscopeAverage);
+    setProperty("bandscope.average",string);
+
+    sprintf(string,"%f",bandscopeAverageSmoothing);
+    setProperty("bandscope.average.smoothing",string);
+
     sprintf(string,"%d",bandscopeMAX);
     setProperty("bandscope.max",string);
 
@@ -442,6 +474,12 @@ void bandscopeSaveState() {
 */
 void bandscopeRestoreState() {
     char* value;
+
+    value=getProperty("bandscope.average");
+    if(value) bandscopeAverage=(gboolean)atoi(value);
+
+    value=getProperty("bandscope.average.smoothing");
+    if(value) bandscopeAverageSmoothing=atof(value);
 
     value=getProperty("bandscope.max");
     if(value) bandscopeMAX=atoi(value);
@@ -462,7 +500,11 @@ void bandscopeRestoreState() {
 */
 void bandscopeSetZoom(int zoom) {
     bandscopeZoom=zoom;
-    gtk_widget_set_size_request(GTK_WIDGET(bandscope),bandscopeWIDTH*bandscopeZoom,bandscopeHEIGHT);
+    if(zoom==0) {
+        bandscopeUpdateOff();
+    } else {
+        gtk_widget_set_size_request(GTK_WIDGET(bandscope),bandscopeWIDTH*bandscopeZoom,bandscopeHEIGHT);
+    }
 }
 
 /* --------------------------------------------------------------------------*/

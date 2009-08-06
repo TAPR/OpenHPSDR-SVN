@@ -25,6 +25,13 @@
 * 
 */
 
+double rfGain;
+
+int tuning;
+double tuningPhase;
+
+int fullDuplex;
+
 /* --------------------------------------------------------------------------*/
 /** 
 * @brief Build Transmit User Interface 

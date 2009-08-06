@@ -33,7 +33,7 @@
 #define spectrumPHASE2 4
 #define spectrumPANWATER 5
 #define spectrumHISTOGRAM 6
-#define spectrumOFF 7
+#define spectrumNONE 7
 
 #define spectrumWIDTH 960
 #define spectrumHEIGHT 400
@@ -46,6 +46,8 @@ float waterfallHighThreshold;
 float waterfallLowThreshold;
 
 int spectrumMode;
+gboolean spectrumAverage;
+float spectrumAverageSmoothing;
 
 GtkWidget* newSpectrumDisplay();
 void setSpectrumMode(int mode);

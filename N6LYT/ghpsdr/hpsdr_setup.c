@@ -37,6 +37,7 @@
 #include "ozy.h"
 #include "soundcard.h"
 #include "volume.h"
+#include "transmit.h"
 
 GtkWidget* hpsdrPage;
 
@@ -65,6 +66,8 @@ GtkWidget* alexAttenuation10Db;
 GtkWidget* alexAttenuation20Db;
 GtkWidget* alexAttenuation30Db;
 
+GtkWidget* hpsdrHalfDuplex;
+GtkWidget* hpsdrFullDuplex;
 
 void speed48ButtonCallback(GtkWidget* widget,gpointer data) {
     if(GTK_TOGGLE_BUTTON(widget)->active) {
@@ -168,6 +171,18 @@ void alexAttenuation20DbButtonCallback(GtkWidget* widget,gpointer data) {
 void alexAttenuation30DbButtonCallback(GtkWidget* widget,gpointer data) {
     if(GTK_TOGGLE_BUTTON(widget)->active) {
         setAlexAttenuation(3);
+    }
+}
+
+void hpsdrHalfDuplexButtonCallback(GtkWidget* widget,gpointer data) {
+    if(GTK_TOGGLE_BUTTON(widget)->active) {
+        fullDuplex=0;
+    }
+}
+
+void hpsdrFullDuplexButtonCallback(GtkWidget* widget,gpointer data) {
+    if(GTK_TOGGLE_BUTTON(widget)->active) {
+        fullDuplex=1;
     }
 }
 
@@ -326,6 +341,20 @@ GtkWidget* hpsdrSetupUI() {
     gtk_widget_show(box);
     gtk_box_pack_start(GTK_BOX(hpsdrPage),box,FALSE,FALSE,2);
 
+    box=gtk_hbox_new(FALSE,3);
+    label=gtk_label_new("HPSDR Duplex:			");
+    gtk_widget_show(label);
+    gtk_box_pack_start(GTK_BOX(box),label,FALSE,FALSE,2);
+    hpsdrHalfDuplex=gtk_radio_button_new_with_label(NULL,"Half		");
+    gtk_widget_show(hpsdrHalfDuplex);
+    gtk_box_pack_start(GTK_BOX(box),hpsdrHalfDuplex,FALSE,FALSE,2);
+    g_signal_connect(G_OBJECT(hpsdrHalfDuplex),"clicked",G_CALLBACK(hpsdrHalfDuplexButtonCallback),NULL);
+    hpsdrFullDuplex=gtk_radio_button_new_with_label_from_widget(GTK_RADIO_BUTTON(hpsdrHalfDuplex),"Full	");
+    gtk_widget_show(hpsdrFullDuplex);
+    gtk_box_pack_start(GTK_BOX(box),hpsdrFullDuplex,FALSE,FALSE,2);
+    g_signal_connect(G_OBJECT(hpsdrFullDuplex),"clicked",G_CALLBACK(hpsdrFullDuplexButtonCallback),NULL);
+    gtk_widget_show(box);
+    gtk_box_pack_start(GTK_BOX(hpsdrPage),box,FALSE,FALSE,2);
 
     switch(speed) {
         case 0:
@@ -379,6 +408,15 @@ GtkWidget* hpsdrSetupUI() {
             break;
         case 1:
             gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(penelopeMicSource),TRUE);
+            break;
+    }
+
+    switch(fullDuplex) {
+        case 0:
+            gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(hpsdrHalfDuplex),TRUE);
+            break;
+        case 1:
+            gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(hpsdrFullDuplex),TRUE);
             break;
     }
 

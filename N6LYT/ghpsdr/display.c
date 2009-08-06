@@ -52,6 +52,7 @@ GtkWidget* displayFixed;
 
 GtkWidget* spectrum;
 
+GtkWidget* buttonNone;
 GtkWidget* buttonSpectrum;
 GtkWidget* buttonPanadapter;
 GtkWidget* buttonPanWater;
@@ -80,7 +81,9 @@ void spectrumCallback(GtkWidget* widget,gpointer data) {
     gtk_widget_modify_fg(label, GTK_STATE_PRELIGHT, &buttonSelected);
     currentSpectrumButton=widget;
 
-    if(widget==buttonSpectrum) {
+    if(widget==buttonNone) {
+        setSpectrumMode(spectrumNONE);
+    } else if(widget==buttonSpectrum) {
         setSpectrumMode(spectrumSPECTRUM);
     } else if(widget==buttonPanadapter) {
         setSpectrumMode(spectrumPANADAPTER);
@@ -114,6 +117,15 @@ GtkWidget* buildDisplayUI() {
 
     gtk_fixed_put((GtkFixed*)displayFixed,spectrum,0,0);
 
+    buttonNone=gtk_button_new_with_label("NONE");
+    gtk_widget_modify_bg(buttonNone, GTK_STATE_NORMAL, &buttonBackground);
+    label=gtk_bin_get_child((GtkBin*)buttonNone);
+    gtk_widget_modify_fg(label, GTK_STATE_NORMAL, &white);
+    gtk_widget_set_size_request(GTK_WIDGET(buttonNone),100,25);
+    g_signal_connect(G_OBJECT(buttonNone),"clicked",G_CALLBACK(spectrumCallback),NULL);
+    gtk_widget_show(buttonNone);
+    gtk_fixed_put((GtkFixed*)displayFixed,buttonNone,0,spectrumHEIGHT);
+
     buttonSpectrum=gtk_button_new_with_label("SPECTRUM");
     gtk_widget_modify_bg(buttonSpectrum, GTK_STATE_NORMAL, &buttonBackground);
     label=gtk_bin_get_child((GtkBin*)buttonSpectrum);
@@ -121,7 +133,7 @@ GtkWidget* buildDisplayUI() {
     gtk_widget_set_size_request(GTK_WIDGET(buttonSpectrum),100,25);
     g_signal_connect(G_OBJECT(buttonSpectrum),"clicked",G_CALLBACK(spectrumCallback),NULL);
     gtk_widget_show(buttonSpectrum);
-    gtk_fixed_put((GtkFixed*)displayFixed,buttonSpectrum,0,spectrumHEIGHT);
+    gtk_fixed_put((GtkFixed*)displayFixed,buttonSpectrum,100,spectrumHEIGHT);
 
     buttonPanadapter=gtk_button_new_with_label("PANADAPTER");
     gtk_widget_modify_bg(buttonPanadapter, GTK_STATE_NORMAL, &buttonBackground);
@@ -130,7 +142,7 @@ GtkWidget* buildDisplayUI() {
     gtk_widget_set_size_request(GTK_WIDGET(buttonPanadapter),100,25);
     g_signal_connect(G_OBJECT(buttonPanadapter),"clicked",G_CALLBACK(spectrumCallback),NULL);
     gtk_widget_show(buttonPanadapter);
-    gtk_fixed_put((GtkFixed*)displayFixed,buttonPanadapter,100,spectrumHEIGHT);
+    gtk_fixed_put((GtkFixed*)displayFixed,buttonPanadapter,200,spectrumHEIGHT);
 
     buttonPanWater=gtk_button_new_with_label("PAN/WATER");
     gtk_widget_modify_bg(buttonPanWater, GTK_STATE_NORMAL, &buttonBackground);
@@ -139,7 +151,7 @@ GtkWidget* buildDisplayUI() {
     gtk_widget_set_size_request(GTK_WIDGET(buttonPanWater),100,25);
     g_signal_connect(G_OBJECT(buttonPanWater),"clicked",G_CALLBACK(spectrumCallback),NULL);
     gtk_widget_show(buttonPanWater);
-    gtk_fixed_put((GtkFixed*)displayFixed,buttonPanWater,200,spectrumHEIGHT);
+    gtk_fixed_put((GtkFixed*)displayFixed,buttonPanWater,300,spectrumHEIGHT);
 
     buttonScope=gtk_button_new_with_label("SCOPE");
     gtk_widget_modify_bg(buttonScope, GTK_STATE_NORMAL, &buttonBackground);
@@ -148,7 +160,7 @@ GtkWidget* buildDisplayUI() {
     gtk_widget_set_size_request(GTK_WIDGET(buttonScope),100,25);
     g_signal_connect(G_OBJECT(buttonScope),"clicked",G_CALLBACK(spectrumCallback),NULL);
     gtk_widget_show(buttonScope);
-    gtk_fixed_put((GtkFixed*)displayFixed,buttonScope,300,spectrumHEIGHT);
+    gtk_fixed_put((GtkFixed*)displayFixed,buttonScope,400,spectrumHEIGHT);
 
     buttonPhase=gtk_button_new_with_label("PHASE");
     gtk_widget_modify_bg(buttonPhase, GTK_STATE_NORMAL, &buttonBackground);
@@ -157,7 +169,7 @@ GtkWidget* buildDisplayUI() {
     gtk_widget_set_size_request(GTK_WIDGET(buttonPhase),100,25);
     g_signal_connect(G_OBJECT(buttonPhase),"clicked",G_CALLBACK(spectrumCallback),NULL);
     gtk_widget_show(buttonPhase);
-    gtk_fixed_put((GtkFixed*)displayFixed,buttonPhase,400,spectrumHEIGHT);
+    gtk_fixed_put((GtkFixed*)displayFixed,buttonPhase,500,spectrumHEIGHT);
 
     buttonPhase2=gtk_button_new_with_label("PHASE2");
     gtk_widget_modify_bg(buttonPhase2, GTK_STATE_NORMAL, &buttonBackground);
@@ -166,7 +178,7 @@ GtkWidget* buildDisplayUI() {
     gtk_widget_set_size_request(GTK_WIDGET(buttonPhase2),100,25);
     g_signal_connect(G_OBJECT(buttonPhase2),"clicked",G_CALLBACK(spectrumCallback),NULL);
     gtk_widget_show(buttonPhase2);
-    gtk_fixed_put((GtkFixed*)displayFixed,buttonPhase2,500,spectrumHEIGHT);
+    gtk_fixed_put((GtkFixed*)displayFixed,buttonPhase2,600,spectrumHEIGHT);
 
     gtk_widget_set_size_request(GTK_WIDGET(displayFixed),spectrumWIDTH,spectrumHEIGHT+25);
     gtk_widget_show(displayFixed);
@@ -179,6 +191,9 @@ GtkWidget* buildDisplayUI() {
     currentSpectrumButton=NULL;
 
     switch(spectrumMode) {
+        case spectrumNONE:
+            spectrumCallback(buttonNone,NULL);
+            break;
         case spectrumSPECTRUM:
             spectrumCallback(buttonSpectrum,NULL);
             break;

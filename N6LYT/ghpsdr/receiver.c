@@ -80,10 +80,9 @@ void panChanged(GtkWidget* widget,gpointer data) {
 GtkWidget* buildReceiverUI() {
     GtkWidget* label;
 
-    receiverFrame=gtk_frame_new("Pan");
-    //gtk_widget_modify_bg(receiverFrame,GTK_STATE_NORMAL,&background);
-    label=gtk_frame_get_label_widget((GtkFrame*)receiverFrame);
-    gtk_widget_modify_fg(label, GTK_STATE_NORMAL, &white);
+    receiverFrame=gtk_frame_new("AF Pan");
+    gtk_widget_modify_bg(receiverFrame,GTK_STATE_NORMAL,&background);
+    gtk_widget_modify_fg(gtk_frame_get_label_widget(GTK_FRAME(receiverFrame)),GTK_STATE_NORMAL,&white);
 
     panScale=gtk_hscale_new_with_range(0.0,1.0,0.1);
     g_signal_connect(G_OBJECT(panScale),"value-changed",G_CALLBACK(panChanged),NULL);
@@ -95,6 +94,8 @@ GtkWidget* buildReceiverUI() {
     gtk_widget_set_size_request(GTK_WIDGET(receiverFrame),200,55);
     gtk_widget_show(receiverFrame);
 
+    SetRXPan(0,0,pan);
+
     return receiverFrame;
   
 }
@@ -105,8 +106,6 @@ GtkWidget* buildReceiverUI() {
 */
 void receiverSaveState() {
     char string[128];
-    sprintf(string,"%d",receiver);
-    setProperty("receiver",string);
     sprintf(string,"%f",pan);
     setProperty("pan",string);
 }
@@ -117,8 +116,6 @@ void receiverSaveState() {
 */
 void receiverRestoreState() {
     char* value;
-    value=getProperty("receiver");
-    if(value) receiver=atoi(value);
     value=getProperty("pan");
     if(value) pan=atof(value); else pan=0.5f;
 }

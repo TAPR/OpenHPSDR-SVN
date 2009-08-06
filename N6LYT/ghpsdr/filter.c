@@ -547,6 +547,7 @@ void selectFilter(GtkWidget* widget) {
     //writeCommand(temp);
     SetRXFilter(0,0,(double)filterLow,(double)filterHigh);
     SetRXFilter(0,1,(double)filterLow,(double)filterHigh);
+    SetTXFilter(1,(double)filterLow,(double)filterHigh);
 
     drawFilterHigh(TRUE);
     drawFilterLow(TRUE);
@@ -751,6 +752,7 @@ void updateFilter(GtkWidget* widget) {
     //writeCommand(temp);
     SetRXFilter(0,0,(double)filterLow,(double)filterHigh);
     SetRXFilter(0,1,(double)filterLow,(double)filterHigh);
+    SetTXFilter(1,(double)filterLow,(double)filterHigh);
 }
 
 /* --------------------------------------------------------------------------*/
@@ -861,6 +863,7 @@ gboolean filter_scroll_event(GtkWidget* widget,GdkEventScroll* event) {
     //writeCommand(temp);
     SetRXFilter(0,0,(double)filterLow,(double)filterHigh);
     SetRXFilter(0,1,(double)filterLow,(double)filterHigh);
+    SetTXFilter(1,(double)filterLow,(double)filterHigh);
 }
 
 /* --------------------------------------------------------------------------*/

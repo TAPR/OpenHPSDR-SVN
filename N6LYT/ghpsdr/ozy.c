@@ -26,6 +26,9 @@
 #include "volume.h"
 #include "mode.h"
 #include "audiostream.h"
+#include "transmit.h"
+#include "main.h"
+#include "sinewave.h"
 
 /*
  *   ozy interface
@@ -39,7 +42,7 @@ int mercury_software_version=0;
 int penelope_software_version=0;
 int ozy_software_version=0;
 
-int forward_power=0;
+int forwardPower=0;
 
 static pthread_t ep6_ep2_io_thread_id;
 static pthread_t ep4_io_thread_id;
@@ -61,8 +64,14 @@ int buffer_size=1024;
 float left_input_buffer[1024];
 float right_input_buffer[1024];
 
+float mic_left_buffer[1024];
+float mic_right_buffer[1024];
+
 float left_output_buffer[1024];
 float right_output_buffer[1024];
+
+float left_tx_buffer[1024];
+float right_tx_buffer[1024];
 
 int samples=0;
 
@@ -101,7 +110,6 @@ int preamp=0;          // default preamp off
 int sampleRate=48000;  // default 48k
 
 int mox=0;             // default not transmitting
-int tune=0;            // default not tuning
 
 /* --------------------------------------------------------------------------*/
 /** 
@@ -142,8 +150,8 @@ void process_ozy_input_buffer(char* buffer) {
                 fprintf(stderr,"  Mercury Software version: %d (0x%0X)\n",mercury_software_version,mercury_software_version);
             }
 
-        } else if((control_in[0]&0x04)==1) {
-            forward_power=(control_in[1]<<8)+control_in[2];
+        } else if((control_in[0]&0x04)==0x04) {
+            forwardPower=(control_in[1]<<8)+control_in[2];
         }
 
         if(penelope_software_version!=control_in[3]) {
@@ -174,21 +182,57 @@ void process_ozy_input_buffer(char* buffer) {
             // add to buffer
             left_input_buffer[samples]=left_sample_float;
             right_input_buffer[samples]=right_sample_float;
+            mic_left_buffer[samples]=mic_sample_float;
+            mic_right_buffer[samples]=0.0f;
             samples++;
 
             // when we have enough samples give them to DttSP and get the results
             if(samples==buffer_size) {
                 // give to DttSP and get any output
-//fprintf(stderr,"call dttsp: frame=%d buffer_size=%d\n",frames,buffer_size);
+                // receive
                 Audio_Callback (left_input_buffer,right_input_buffer,
-                                left_output_buffer,right_output_buffer, buffer_size);
+                                left_output_buffer,right_output_buffer, buffer_size, 0);
+
+                // transmit
+                if(mox) {
+                    
+                    if(tuning) {
+                        tuningPhase=sineWave(mic_left_buffer,1024,tuningPhase,(double)cwPitch);
+                    }
+                    
+/*
+                    if(!tuning) {
+*/
+                        Audio_Callback (mic_left_buffer,mic_right_buffer,
+                                        left_tx_buffer,right_tx_buffer, buffer_size, 1);
+/*
+                    } else {
+                        switch(mode) {
+                            case modeUSB:
+                            case modeCWU:
+                                tuningPhase=cwSignal(left_tx_buffer,right_tx_buffer,1024,tuningPhase,(double)cwPitch);
+                                break;
+                            case modeLSB:
+                            case modeCWL:
+                                tuningPhase=cwSignal(right_tx_buffer,left_tx_buffer,1024,tuningPhase,(double)cwPitch);
+                                break;
+                        }
+                    }
+*/
+                }
 
                 // process the output
                 for(j=0,c=0;j<buffer_size;j+=output_sample_increment) {
                     left_rx_sample=(short)(left_output_buffer[j]*32767.0);
                     right_rx_sample=(short)(right_output_buffer[j]*32767.0);
-                    left_tx_sample=0/*(short)(buffer->buffer_3[j]*32767.0)*/;
-                    right_tx_sample=0/*(short)(buffer->buffer_4[j]*32767.0)*/;
+
+                    if(mox) {
+                        left_tx_sample=(short)(left_tx_buffer[j]*32767.0*rfGain);
+                        right_tx_sample=(short)(right_tx_buffer[j]*32767.0*rfGain);
+                    } else {
+                        left_tx_sample=0;
+                        right_tx_sample=0;
+                    }
 
                     audio_stream_put_samples(left_rx_sample,right_rx_sample);
 
@@ -335,8 +379,9 @@ void* ozy_ep6_ep2_io_thread(void* arg) {
             if(bytes!=OZY_BUFFER_SIZE) {
                 perror("OzyBulkWrite failed");
             }
-            //dump_ozy_buffer("output buffer",output_buffer);
-
+            //if(mox) {
+            //    dump_ozy_buffer("output buffer",output_buffer);
+            //}
         }
 
     }

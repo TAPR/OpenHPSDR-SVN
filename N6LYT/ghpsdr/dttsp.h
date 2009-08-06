@@ -75,7 +75,7 @@ extern void SetThreadCom(int thread);
 * @return 
 */
 extern void Audio_Callback (float *input_l, float *input_r, float *output_l,
-                            float *output_r, unsigned int nframes);
+                            float *output_r, unsigned int nframes, int thread);
 
 /* --------------------------------------------------------------------------*/
 /** 

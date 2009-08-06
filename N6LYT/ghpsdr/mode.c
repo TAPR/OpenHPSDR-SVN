@@ -119,6 +119,7 @@ void selectMode(GtkWidget* widget) {
     //writeCommand(temp);
     SetMode(0,0,mode);
     SetMode(0,1,mode);
+    SetMode(1,0,mode);
 
     setFilterValues(mode);
     setFilter(filter);
