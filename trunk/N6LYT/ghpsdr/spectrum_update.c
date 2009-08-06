@@ -31,6 +31,8 @@
 #include "dttsp.h"
 #include "spectrum.h"
 #include "spectrum_update.h"
+#include "transmit.h"
+#include "ozy.h"
 
 int updatingSpectrum;
 int spectrumUpdatesPerSecond;
@@ -78,7 +80,7 @@ void setSpectrumUpdateRate(int rate) {
 */
 gint spectrumUpdate(gpointer data) {
     switch(spectrumMode) {
-        case spectrumOFF:
+        case spectrumNONE:
             updatingSpectrum=FALSE;
             break;
         default:
@@ -93,36 +95,40 @@ gint spectrumUpdate(gpointer data) {
 * @brief Update samples
 */
 void updateSamples() {
+    int thread;
+    thread=0;
+    if(mox && !fullDuplex) thread=1;
+
     switch(spectrumMode) {
         case spectrumSPECTRUM:
-            Process_Spectrum(0,spectrumBuffer);
+            Process_Spectrum(thread,spectrumBuffer);
             updateSpectrum(spectrumBuffer);
             break;
         case spectrumPANADAPTER:
-            Process_Panadapter(0,spectrumBuffer);
+            Process_Panadapter(thread,spectrumBuffer);
             updateSpectrum(spectrumBuffer);
             break;
         case spectrumSCOPE:
-            Process_Scope(0,spectrumBuffer,4096);
+            Process_Scope(thread,spectrumBuffer,4096);
             updateSpectrum(spectrumBuffer);
             break;
         case spectrumPHASE:
-            Process_Scope(0,spectrumBuffer,100);
+            Process_Scope(thread,spectrumBuffer,100);
             updateSpectrum(spectrumBuffer);
             break;
         case spectrumPHASE2:
-            Process_Scope(0,spectrumBuffer,100);
+            Process_Scope(thread,spectrumBuffer,100);
             updateSpectrum(spectrumBuffer);
             break;
         case spectrumPANWATER:
-            Process_Panadapter(0,spectrumBuffer);
+            Process_Panadapter(thread,spectrumBuffer);
             updateSpectrum(spectrumBuffer);
             break;
         case spectrumHISTOGRAM:
-            Process_Panadapter(0,spectrumBuffer);
+            Process_Panadapter(thread,spectrumBuffer);
             updateSpectrum(spectrumBuffer);
             break;
-        case spectrumOFF:
+        case spectrumNONE:
             break;
     }
 

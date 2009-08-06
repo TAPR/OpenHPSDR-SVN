@@ -55,6 +55,7 @@ int spectrumHigh=+24000;
 
 int spectrumMode;
 
+
 GdkPixmap *spectrumPixmap=NULL;
 GdkPoint* spectrumPoints;
 GdkPixbuf *waterfallPixbuf;
@@ -81,9 +82,10 @@ float* waterfall;
 
 int adcOverflow=0;
 
+gboolean spectrumAverage=1;
 int initAverage=1;
-float average[SPECTRUM_BUFFER_SIZE];
-float smoothing=0.4f;
+float averageSpectrum[SPECTRUM_BUFFER_SIZE];
+float spectrumAverageSmoothing=0.4f;
  
 gboolean spectrum_configure_event(GtkWidget* widget,GdkEventConfigure* event);
 gboolean spectrum_expose_event(GtkWidget* widget,GdkEventExpose* event);
@@ -351,7 +353,7 @@ void updateSpectrum(float* samples) {
         case spectrumHISTOGRAM:
             spectrumUpdateOff();
             break;
-        case spectrumOFF:
+        case spectrumNONE:
             spectrumUpdateOff();
             break;
     }
@@ -580,19 +582,22 @@ void plotSpectrum(float* samples,int height) {
     float spectrum_max_y = -1000000.0F;
     int i;
 
-
-    // if(spectrumAverage) {
+    if(spectrumAverage) {
         if(initAverage) {
             for(i=0;i<SPECTRUM_BUFFER_SIZE;i++) {
-                average[i]=samples[i];
+                averageSpectrum[i]=samples[i];
             }
             initAverage=0;
         } else {
             for(i=0;i<SPECTRUM_BUFFER_SIZE;i++) {
-                average[i] = (samples[i] * (1 - smoothing)) + (average[i] * smoothing);
+                averageSpectrum[i] = (samples[i] * (1 - spectrumAverageSmoothing)) + (averageSpectrum[i] * spectrumAverageSmoothing);
             }
         }
-    // }
+    } else {
+        for(i=0;i<SPECTRUM_BUFFER_SIZE;i++) {
+            averageSpectrum[i]=samples[i];
+        }
+    }
 
     for(i=0; i<spectrumWIDTH; i++) {
         float max = -1000000.0F;
@@ -604,7 +609,7 @@ void plotSpectrum(float* samples,int height) {
         if(f>0) {
             int j;
             for(j=lindex;j<rindex;j++) {
-                if (average[j] > max) max=average[j];
+                if (averageSpectrum[j] > max) max=averageSpectrum[j];
             }
 
             max = max + displayCalibrationOffset + preampOffset;
@@ -828,13 +833,16 @@ void spectrumUpdateOff() {
 
     // get the spectrum context - just copy the window GC and modify
     GdkGC* gc;
+
     if(spectrum->window) {
         gc=gdk_gc_new(spectrum->window);
         gdk_gc_copy(gc,spectrum->style->black_gc);
         gdk_draw_rectangle(spectrumPixmap,gc,TRUE,0,0,spectrumWIDTH,spectrumHEIGHT);
 
         // update the spectrum
-        gtk_widget_queue_draw_area(spectrum,0,0,spectrumWIDTH,spectrumHEIGHT);
+        gtk_widget_queue_draw(spectrum);
+
+        g_object_unref(gc);
     }
 }
 
@@ -846,6 +854,11 @@ void spectrumUpdateOff() {
 */
 void setSpectrumMode(int mode) {
     spectrumMode=mode;
+
+    if(spectrumMode==spectrumNONE) {
+        spectrumUpdateOff();
+    }
+
 }
 
 /* --------------------------------------------------------------------------*/
@@ -854,6 +867,12 @@ void setSpectrumMode(int mode) {
 */
 void spectrumSaveState() {
     char string[128];
+
+    sprintf(string,"%d",spectrumAverage);
+    setProperty("spectrum.average",string);
+
+    sprintf(string,"%f",spectrumAverageSmoothing);
+    setProperty("spectrum.average.smoothing",string);
 
     sprintf(string,"%d",spectrumMAX);
     setProperty("spectrum.max",string);
@@ -878,6 +897,12 @@ void spectrumSaveState() {
 */
 void spectrumRestoreState() {
     char* value;
+
+    value=getProperty("spectrum.average");
+    if(value) spectrumAverage=(gboolean)atoi(value);
+
+    value=getProperty("spectrum.average.smoothing");
+    if(value) spectrumAverageSmoothing=atof(value);
 
     value=getProperty("spectrum.max");
     if(value) spectrumMAX=atoi(value);

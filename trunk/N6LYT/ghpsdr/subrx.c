@@ -42,7 +42,9 @@ GtkWidget* subrxFrame;
 GtkWidget* subrxTable;
 
 GtkWidget* subrxEnabled;
+GtkWidget* subrxGainFrame;
 GtkWidget* subrxGainScale;
+GtkWidget* subrxPanFrame;
 GtkWidget* subrxPanScale;
 
 float subrxGain=10.0;
@@ -116,6 +118,7 @@ void subrxPanChanged(GtkWidget* widget,gpointer data) {
     char command[80];
     subrxPan=gtk_range_get_value((GtkRange*)subrxPanScale);
     SetRXPan(0,1,subrxPan);
+
 }
 
 
@@ -155,21 +158,36 @@ GtkWidget* buildSubRxUI() {
     gtk_table_attach_defaults(GTK_TABLE(subrxTable),subrxEnabled,0,1,0,1);
 
     // subrx gain
+    subrxGainFrame=gtk_frame_new("AF Gain");
+    gtk_widget_modify_bg(subrxGainFrame,GTK_STATE_NORMAL,&background);
+    gtk_widget_modify_fg(gtk_frame_get_label_widget(GTK_FRAME(subrxGainFrame)),GTK_STATE_NORMAL,&white);
+
     subrxGainScale=gtk_hscale_new_with_range(0.0,100.0,10.0);
     g_signal_connect(G_OBJECT(subrxGainScale),"value-changed",G_CALLBACK(subrxGainChanged),NULL);
     gtk_range_set_value((GtkRange*)subrxGainScale,subrxGain);
-    gtk_widget_set_size_request(GTK_WIDGET(subrxGainScale),150,50);
+    gtk_widget_set_size_request(GTK_WIDGET(subrxGainScale),150,30);
     gtk_widget_show(subrxGainScale);
-    gtk_table_attach_defaults(GTK_TABLE(subrxTable),subrxGainScale,1,4,0,1);
+    gtk_container_add(GTK_CONTAINER(subrxGainFrame),subrxGainScale);
+    gtk_widget_show(subrxGainFrame);
+    gtk_table_attach_defaults(GTK_TABLE(subrxTable),subrxGainFrame,1,4,0,1);
 
-    // rf gain
+    SetRXOutputGain(0,1,subrxGain/100.0);
+
+    // subrx pan
+    subrxPanFrame=gtk_frame_new("AF Pan");
+    gtk_widget_modify_bg(subrxPanFrame,GTK_STATE_NORMAL,&background);
+    gtk_widget_modify_fg(gtk_frame_get_label_widget(GTK_FRAME(subrxPanFrame)),GTK_STATE_NORMAL,&white);
+
     subrxPanScale=gtk_hscale_new_with_range(0.0,1.0,0.1);
     g_signal_connect(G_OBJECT(subrxPanScale),"value-changed",G_CALLBACK(subrxPanChanged),NULL);
     gtk_range_set_value((GtkRange*)subrxPanScale,subrxPan);
-    gtk_widget_set_size_request(GTK_WIDGET(subrxPanScale),150,50);
+    gtk_widget_set_size_request(GTK_WIDGET(subrxPanScale),150,30);
     gtk_widget_show(subrxPanScale);
-    gtk_table_attach_defaults(GTK_TABLE(subrxTable),subrxPanScale,4,7,0,1);
+    gtk_container_add(GTK_CONTAINER(subrxPanFrame),subrxPanScale);
+    gtk_widget_show(subrxPanFrame);
+    gtk_table_attach_defaults(GTK_TABLE(subrxTable),subrxPanFrame,4,7,0,1);
 
+    SetRXPan(0,1,subrxPan);
 
     gtk_container_add(GTK_CONTAINER(subrxFrame),subrxTable);
     gtk_widget_show(subrxTable);

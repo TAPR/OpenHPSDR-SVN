@@ -82,6 +82,8 @@ int sampleRate;
 
 int mox;
 
+int forwardPower;
+
 /* --------------------------------------------------------------------------*/
 /** 
 * @brief Initialize the Ozy interface 

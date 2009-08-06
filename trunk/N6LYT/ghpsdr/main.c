@@ -643,6 +643,7 @@ int main(int argc,char* argv[]) {
     SetTRX(0,FALSE); // thread 0 is for receive
     SetTRX(1,TRUE);  // thread 1 is for transmit
     SetThreadProcessingMode(0,2);
+    SetThreadProcessingMode(1,2);
     SetSubRXSt(0,0,TRUE);
 
     reset_for_buflen(0,1024);

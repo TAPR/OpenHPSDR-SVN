@@ -65,7 +65,6 @@ void selectVolume(GtkWidget* widget) {
 * @param data
 */
 void volumeChanged(GtkWidget* widget,gpointer data) {
-    char command[80];
     volume=gtk_range_get_value((GtkRange*)volumeScale);
     SetRXOutputGain(0,0,volume/100.0);
 }
@@ -79,10 +78,9 @@ void volumeChanged(GtkWidget* widget,gpointer data) {
 GtkWidget* buildVolumeUI() {
     GtkWidget* label;
 
-    volumeFrame=gtk_frame_new("Audio Gain");
-    //gtk_widget_modify_bg(volumeFrame,GTK_STATE_NORMAL,&background);
-    label=gtk_frame_get_label_widget((GtkFrame*)volumeFrame);
-    gtk_widget_modify_fg(label, GTK_STATE_NORMAL, &white);
+    volumeFrame=gtk_frame_new("AF Gain");
+    gtk_widget_modify_bg(volumeFrame,GTK_STATE_NORMAL,&background);
+    gtk_widget_modify_fg(gtk_frame_get_label_widget(GTK_FRAME(volumeFrame)),GTK_STATE_NORMAL,&white);
 
     volumeScale=gtk_hscale_new_with_range(0.0,100.0,10.0);
     g_signal_connect(G_OBJECT(volumeScale),"value-changed",G_CALLBACK(volumeChanged),NULL);
@@ -93,6 +91,8 @@ GtkWidget* buildVolumeUI() {
 
     gtk_widget_set_size_request(volumeFrame,200,55);
     gtk_widget_show(volumeFrame);
+
+    SetRXOutputGain(0,0,volume/100.0);
 
     return volumeFrame;
   

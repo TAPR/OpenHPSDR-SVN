@@ -25,8 +25,6 @@
 * 
 */
 
-int receiver;
-
 void receiverSaveState();
 void receiverRestoreState();
 GtkWidget* buildReceiverUI();

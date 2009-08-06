@@ -35,6 +35,9 @@ int bandscopeMAX;
 int bandscopeMIN;
 int bandscopeZoom;
 
+gboolean bandscopeAverage;
+float bandscopeAverageSmoothing;
+
 GtkWidget* buildBandscopeUI();
 void updateBandscope(float* samples);
 void bandscopeSaveState();
