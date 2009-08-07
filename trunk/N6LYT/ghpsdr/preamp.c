@@ -52,6 +52,7 @@ void preampButtonCallback(GtkWidget* widget,gpointer data) {
     char c[80];
     gboolean state;
 
+fprintf(stderr,"preampButtonCallback\n");
     if(preamp) {
         state=0;
     } else {
@@ -78,6 +79,8 @@ void preampButtonCallback(GtkWidget* widget,gpointer data) {
 GtkWidget* buildPreampUI() {
 
     GtkWidget* label;
+
+fprintf(stderr,"buildPreampUI\n");
 
     preampFrame=gtk_frame_new("Preamp");
     gtk_widget_modify_bg(preampFrame,GTK_STATE_NORMAL,&background);

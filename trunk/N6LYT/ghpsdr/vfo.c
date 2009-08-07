@@ -779,6 +779,7 @@ gboolean increment_scroll_event(GtkWidget* widget,GdkEventScroll* event) {
 GtkWidget* buildVfoUI() {
     GtkWidget* label;
 
+fprintf(stderr,"buildVfoUI\n");
     vfoFixed=gtk_fixed_new();
     gtk_widget_modify_bg(vfoFixed,GTK_STATE_NORMAL,&background);
 

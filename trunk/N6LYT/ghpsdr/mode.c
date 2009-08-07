@@ -77,15 +77,19 @@ void selectMode(GtkWidget* widget) {
     GtkWidget* label;
     char temp[80];
 
+fprintf(stderr,"selectMode\n");
+
     if(currentModeButton) {
         label=gtk_bin_get_child((GtkBin*)currentModeButton);
         gtk_widget_modify_fg(label, GTK_STATE_NORMAL, &white);
         gtk_widget_modify_fg(label, GTK_STATE_PRELIGHT, &black);
     }
-    label=gtk_bin_get_child((GtkBin*)widget);
-    gtk_widget_modify_fg(label, GTK_STATE_NORMAL, &buttonSelected);
-    gtk_widget_modify_fg(label, GTK_STATE_PRELIGHT, &buttonSelected);
-    currentModeButton=widget;
+    if(widget) {
+        label=gtk_bin_get_child((GtkBin*)widget);
+        gtk_widget_modify_fg(label, GTK_STATE_NORMAL, &buttonSelected);
+        gtk_widget_modify_fg(label, GTK_STATE_PRELIGHT, &buttonSelected);
+        currentModeButton=widget;
+    }
 
     if(widget==buttonLSB) {
         mode=modeLSB;
@@ -194,6 +198,8 @@ void modeCallback(GtkWidget* widget,gpointer data) {
 */
 GtkWidget* buildModeUI() {
     GtkWidget* label;
+
+fprintf(stderr,"buildModeUI\n");
 
     modeFrame=gtk_frame_new("Mode");
     gtk_widget_modify_bg(modeFrame,GTK_STATE_NORMAL,&background);

@@ -67,6 +67,7 @@ void selectAgc(GtkWidget* widget) {
     GtkWidget* label;
     char temp[80];
 
+fprintf(stderr,"selectAgc\n");
     if(currentAgcButton) {
         label=gtk_bin_get_child((GtkBin*)currentAgcButton);
         gtk_widget_modify_fg(label, GTK_STATE_NORMAL, &white);
@@ -138,6 +139,8 @@ void agcCallback(GtkWidget* widget,gpointer data) {
 */
 GtkWidget* buildAgcUI() {
     GtkWidget* label;
+
+fprintf(stderr,"buildAgcUI\n");
 
     agcFrame=gtk_frame_new("AGC");
     gtk_widget_modify_bg(agcFrame,GTK_STATE_NORMAL,&background);

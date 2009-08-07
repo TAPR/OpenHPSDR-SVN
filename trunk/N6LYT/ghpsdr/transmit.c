@@ -66,6 +66,7 @@ void moxButtonCallback(GtkWidget* widget,gpointer data) {
     char c[80];
     gboolean state;
 
+fprintf(stderr,"moxButtonCallback\n");
     if(mox) {
         state=0;
     } else {
@@ -175,6 +176,7 @@ GtkWidget* buildTransmitUI() {
 
     GtkWidget* label;
 
+fprintf(stderr,"buildTransmitUI\n");
     transmitFrame=gtk_frame_new("Transmit");
     gtk_widget_modify_bg(transmitFrame,GTK_STATE_NORMAL,&background);
     gtk_widget_modify_fg(gtk_frame_get_label_widget(GTK_FRAME(transmitFrame)),GTK_STATE_NORMAL,&white);
