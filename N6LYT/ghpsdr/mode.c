@@ -77,7 +77,6 @@ void selectMode(GtkWidget* widget) {
     GtkWidget* label;
     char temp[80];
 
-fprintf(stderr,"selectMode\n");
 
     if(currentModeButton) {
         label=gtk_bin_get_child((GtkBin*)currentModeButton);
@@ -199,7 +198,6 @@ void modeCallback(GtkWidget* widget,gpointer data) {
 GtkWidget* buildModeUI() {
     GtkWidget* label;
 
-fprintf(stderr,"buildModeUI\n");
 
     modeFrame=gtk_frame_new("Mode");
     gtk_widget_modify_bg(modeFrame,GTK_STATE_NORMAL,&background);
