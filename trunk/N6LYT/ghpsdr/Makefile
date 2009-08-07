@@ -10,13 +10,11 @@ INCLUDES=-I. -I/usr/include/gtk-2.0 -I/usr/lib/gtk-2.0/include\
          -I/usr/lib/glib-2.0/include -I/usr/include/pixman-1\
          -I/usr/include/freetype2 -I/usr/include/libpng12 \
 	 -I/usr/local/include/libusb-1.0
-LIBS=-lpthread -lusb-1.0\
+LIBS=-L. -lDttSP -lpthread -lusb-1.0\
      -lgtk-x11-2.0 -lgdk-x11-2.0 -latk-1.0 -lpangoft2-1.0 -lgdk_pixbuf-2.0\
      -lm -lpangocairo-1.0 -lgio-2.0 -lcairo -lpango-1.0 -lfreetype -lz\
-     -lfontconfig -lgobject-2.0 -lgmodule-2.0 -lglib-2.0 -lusb-1.0
+     -lfontconfig -lgobject-2.0 -lgmodule-2.0 -lglib-2.0 -lfftw3f
 
-FFTW=/usr/lib/libfftw3f.a
-DTTSP=libDttSP.a
 COMPILE=$(CC) $(INCLUDES)
 
 SOURCES= agc.c audio.c band.c bandscope.c bandscope_control.c bandscope_update.c command.c\
