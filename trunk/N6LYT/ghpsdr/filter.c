@@ -456,7 +456,6 @@ void selectFilter(GtkWidget* widget) {
     GtkWidget* label;
     char temp[128];
 
-fprintf(stderr,"selectFilter\n");
 
     if(currentFilterButton) {
         // reset the button state
@@ -880,7 +879,6 @@ GtkWidget* buildFilterUI() {
 
     GtkWidget* label;
 
-fprintf(stderr,"buildFilterUI\n");
     filterFrame=gtk_frame_new("Filter");
     gtk_widget_modify_bg(filterFrame,GTK_STATE_NORMAL,&background);
     gtk_widget_modify_fg(gtk_frame_get_label_widget(GTK_FRAME(filterFrame)),GTK_STATE_NORMAL,&white);
