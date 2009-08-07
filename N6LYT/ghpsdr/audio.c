@@ -99,7 +99,7 @@ void audioButtonCallback(GtkWidget* widget,gpointer data) {
         state=BIN;
         SetBIN(0,0,BIN);
     }
-
+fprintf(stderr,"audioButtonCallback\n");
     label=gtk_bin_get_child((GtkBin*)widget);
     if(state) {
         gtk_widget_modify_fg(label, GTK_STATE_NORMAL, &buttonSelected);
@@ -120,6 +120,7 @@ GtkWidget* buildAudioUI() {
 
     GtkWidget* label;
 
+fprintf(stderr,"buildAudioUI\n");
     audioFrame=gtk_frame_new("DSP");
     gtk_widget_modify_bg(audioFrame,GTK_STATE_NORMAL,&background);
     gtk_widget_modify_fg(gtk_frame_get_label_widget(GTK_FRAME(audioFrame)),GTK_STATE_NORMAL,&white);

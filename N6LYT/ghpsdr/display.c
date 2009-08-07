@@ -71,6 +71,7 @@ GtkWidget* currentSpectrumButton;
 */
 void spectrumCallback(GtkWidget* widget,gpointer data) {
     GtkWidget* label;
+fprintf(stderr,"spectrumCallback\n");
     if(currentSpectrumButton) {
         label=gtk_bin_get_child((GtkBin*)currentSpectrumButton);
         gtk_widget_modify_fg(label, GTK_STATE_NORMAL, &white);
@@ -106,6 +107,8 @@ void spectrumCallback(GtkWidget* widget,gpointer data) {
 */
 GtkWidget* buildDisplayUI() {
     GtkWidget* label;
+
+fprintf(stderr,"buildDisplayUI\n");
     //display = gtk_window_new (GTK_WINDOW_TOPLEVEL);
     //gtk_widget_modify_bg(display,GTK_STATE_NORMAL,&background);
     //gtk_window_set_title(GTK_WINDOW(display),"Display and Decode");

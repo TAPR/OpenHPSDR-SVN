@@ -456,6 +456,8 @@ void selectFilter(GtkWidget* widget) {
     GtkWidget* label;
     char temp[128];
 
+fprintf(stderr,"selectFilter\n");
+
     if(currentFilterButton) {
         // reset the button state
         label=gtk_bin_get_child((GtkBin*)currentFilterButton);
@@ -465,10 +467,12 @@ void selectFilter(GtkWidget* widget) {
         // save variable filter setting
         saveVariableFilters();
     }
-    label=gtk_bin_get_child((GtkBin*)widget);
-    gtk_widget_modify_fg(label, GTK_STATE_NORMAL, &buttonSelected);
-    gtk_widget_modify_fg(label, GTK_STATE_PRELIGHT, &buttonSelected);
-    currentFilterButton=widget;
+    if(widget) {
+        label=gtk_bin_get_child((GtkBin*)widget);
+        gtk_widget_modify_fg(label, GTK_STATE_NORMAL, &buttonSelected);
+        gtk_widget_modify_fg(label, GTK_STATE_PRELIGHT, &buttonSelected);
+        currentFilterButton=widget;
+    }
 
     if(widget==buttonF0) {
         filter=filterF0;
@@ -876,6 +880,7 @@ GtkWidget* buildFilterUI() {
 
     GtkWidget* label;
 
+fprintf(stderr,"buildFilterUI\n");
     filterFrame=gtk_frame_new("Filter");
     gtk_widget_modify_bg(filterFrame,GTK_STATE_NORMAL,&background);
     gtk_widget_modify_fg(gtk_frame_get_label_widget(GTK_FRAME(filterFrame)),GTK_STATE_NORMAL,&white);
@@ -1273,6 +1278,8 @@ void filterRestoreState() {
 */
 void setFilterValues(int mode) {
     GtkWidget* label;
+
+    if(buttonF0) {
     switch(mode) {
         case modeLSB:
             gtk_button_set_label((GtkButton*)buttonF0,filterLSB[filterF0].title);
@@ -1312,6 +1319,7 @@ void setFilterValues(int mode) {
             gtk_button_set_label((GtkButton*)buttonF6,filterDSB[filterF6].title);
             gtk_button_set_label((GtkButton*)buttonF7,filterDSB[filterF7].title);
             gtk_button_set_label((GtkButton*)buttonF8,filterDSB[filterF8].title);
+            gtk_button_set_label((GtkButton*)buttonF9,filterDSB[filterF9].title);
             gtk_button_set_label((GtkButton*)buttonVar1,filterDSB[filterVar1].title);
             gtk_button_set_label((GtkButton*)buttonVar2,filterDSB[filterVar2].title);
             break;
@@ -1497,6 +1505,7 @@ void setFilterValues(int mode) {
             label=gtk_bin_get_child((GtkBin*)buttonVar2);
             gtk_widget_modify_fg(label, GTK_STATE_NORMAL, &white);
             break;
+    }
     }
 
 }

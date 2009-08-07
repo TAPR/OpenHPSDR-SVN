@@ -64,6 +64,7 @@ void subrxEnabledButtonCallback(GtkWidget* widget,gpointer data) {
     char c[80];
     gboolean state;
 
+fprintf(stderr,"subrxEnabledButtonCallback\n");
     if(subrx) {
         state=0;
     } else {
@@ -133,6 +134,7 @@ GtkWidget* buildSubRxUI() {
 
     GtkWidget* label;
 
+fprintf(stderr,"buildSubRxUI\n");
     subrxFrame=gtk_frame_new("Sub RX");
     gtk_widget_modify_bg(subrxFrame,GTK_STATE_NORMAL,&background);
     gtk_widget_modify_fg(gtk_frame_get_label_widget(GTK_FRAME(subrxFrame)),GTK_STATE_NORMAL,&white);

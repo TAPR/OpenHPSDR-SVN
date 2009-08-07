@@ -328,6 +328,7 @@ void selectBand(GtkWidget* widget) {
     XVTR_ENTRY* xvtr_entry;
     int current;
 
+fprintf(stderr,"selectBand\n");
     resetSubRx();
 
     if(currentBandButton) {
@@ -668,6 +669,7 @@ void bandCallback(GtkWidget* widget,gpointer data) {
 GtkWidget* buildBandUI() {
     GtkWidget* label;
 
+fprintf(stderr,"buildBandUI\n");
     bandFrame=gtk_frame_new("Band");
     gtk_widget_modify_bg(bandFrame,GTK_STATE_NORMAL,&background);
     gtk_widget_modify_fg(gtk_frame_get_label_widget(GTK_FRAME(bandFrame)),GTK_STATE_NORMAL,&white);

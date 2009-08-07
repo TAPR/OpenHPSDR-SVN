@@ -61,6 +61,7 @@ void selectZoom(GtkWidget* widget) {
     GtkWidget* label;
     char temp[80];
 
+fprintf(stderr,"selectZoom\n");
     if(currentZoomButton) {
         label=gtk_bin_get_child((GtkBin*)currentZoomButton);
         gtk_widget_modify_fg(label, GTK_STATE_NORMAL, &white);
@@ -134,6 +135,8 @@ void zoomCallback(GtkWidget* widget,gpointer data) {
 //
 GtkWidget* buildBandscope_controlUI() {
     GtkWidget* label;
+
+fprintf(stderr,"buildBandscope_controlUI\n");
 
     zoomFixed=gtk_fixed_new();
     gtk_widget_modify_bg(zoomFixed,GTK_STATE_NORMAL,&background);
