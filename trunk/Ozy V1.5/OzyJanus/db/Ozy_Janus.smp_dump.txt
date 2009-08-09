@@ -1,0 +1,164 @@
+
+State Machine - |Ozy_Janus|IF_PWM_state
+Name IF_PWM_state~15 IF_PWM_state~14 IF_PWM_state~13 
+IF_PWM_state.PWM_IDLE 0 0 0 
+IF_PWM_state.PWM_START 0 0 1 
+IF_PWM_state.PWM_LEFT 0 1 0 
+IF_PWM_state.PWM_RIGHT 0 1 1 
+IF_PWM_state.PWM_I_AUDIO 1 0 0 
+IF_PWM_state.PWM_Q_AUDIO 1 0 1 
+IF_PWM_state.PWM_WAIT 1 1 0 
+IF_PWM_state.PWM_REQ 1 1 1 
+
+State Machine - |Ozy_Janus|IF_SYNC_state
+Name IF_SYNC_state~13 IF_SYNC_state~12 IF_SYNC_state~11 
+IF_SYNC_state.SYNC_IDLE 0 0 0 
+IF_SYNC_state.SYNC_START 0 0 1 
+IF_SYNC_state.SYNC_RX_1_2 0 1 0 
+IF_SYNC_state.SYNC_RX_3_4 0 1 1 
+IF_SYNC_state.SYNC_RX 1 0 0 
+IF_SYNC_state.SYNC_FINISH 1 0 1 
+
+State Machine - |Ozy_Janus|led_blinker:BLINK_D4|LED_state
+Name LED_state~7 LED_state~6 LED_state~5 
+LED_state.LED_IDLE 0 0 0 
+LED_state.LED_FIND 0 0 1 
+LED_state.LED_ERR 0 1 0 
+LED_state.LED_BLINK 0 1 1 
+LED_state.LED_NXT 1 0 0 
+LED_state.LED_WAIT 1 0 1 
+
+State Machine - |Ozy_Janus|led_blinker:BLINK_D1|LED_state
+Name LED_state~7 LED_state~6 LED_state~5 
+LED_state.LED_IDLE 0 0 0 
+LED_state.LED_FIND 0 0 1 
+LED_state.LED_ERR 0 1 0 
+LED_state.LED_BLINK 0 1 1 
+LED_state.LED_NXT 1 0 0 
+LED_state.LED_WAIT 1 0 1 
+
+State Machine - |Ozy_Janus|NWire_rcv:m_ser|TB_state
+Name TB_state~13 TB_state~12 TB_state~11 
+TB_state.TB_IDLE 0 0 0 
+TB_state.TB_DB 0 0 1 
+TB_state.TB_CALC 0 1 0 
+TB_state.TB_SYNC 0 1 1 
+TB_state.TB_NEXT 1 0 0 
+TB_state.TB_BIT 1 0 1 
+
+State Machine - |Ozy_Janus|NWire_rcv:p_ser|TB_state
+Name TB_state~13 TB_state~12 TB_state~11 
+TB_state.TB_IDLE 0 0 0 
+TB_state.TB_DB 0 0 1 
+TB_state.TB_CALC 0 1 0 
+TB_state.TB_SYNC 0 1 1 
+TB_state.TB_NEXT 1 0 0 
+TB_state.TB_BIT 1 0 1 
+
+State Machine - |Ozy_Janus|NWire_xmit:CCxmit|NW_state
+Name NW_state~13 NW_state~12 NW_state~11 
+NW_state.NW_IDLE 0 0 0 
+NW_state.NW_WAIT 0 1 0 
+NW_state.NW_DATA_Q1 0 1 1 
+NW_state.NW_DATA_Q23 1 0 0 
+NW_state.NW_DATA_Q4 1 0 1 
+NW_state.NW_LOW 1 1 0 
+
+State Machine - |Ozy_Janus|I2S_xmit:J_IQPWM|TLV_state
+Name TLV_state~12 TLV_state~11 TLV_state~10 
+TLV_state.TLV_IDLE 0 0 0 
+TLV_state.TLV_WH 0 0 1 
+TLV_state.TLV_LR_LO 0 1 0 
+TLV_state.TLV_WL 0 1 1 
+TLV_state.TLV_LR_HI 1 0 0 
+
+State Machine - |Ozy_Janus|NWire_xmit:P_IQPWM|NW_state
+Name NW_state~13 NW_state~12 NW_state~11 
+NW_state.NW_IDLE 0 0 0 
+NW_state.NW_WAIT 0 1 0 
+NW_state.NW_DATA_Q1 0 1 1 
+NW_state.NW_DATA_Q23 1 0 0 
+NW_state.NW_DATA_Q4 1 0 1 
+NW_state.NW_LOW 1 1 0 
+
+State Machine - |Ozy_Janus|I2S_xmit:J_LRAudio|TLV_state
+Name TLV_state~12 TLV_state~11 TLV_state~10 
+TLV_state.TLV_IDLE 0 0 0 
+TLV_state.TLV_WH 0 0 1 
+TLV_state.TLV_LR_LO 0 1 0 
+TLV_state.TLV_WL 0 1 1 
+TLV_state.TLV_LR_HI 1 0 0 
+
+State Machine - |Ozy_Janus|NWire_xmit:M_LRAudio|NW_state
+Name NW_state~13 NW_state~12 NW_state~11 
+NW_state.NW_IDLE 0 0 0 
+NW_state.NW_WAIT 0 1 0 
+NW_state.NW_DATA_Q1 0 1 1 
+NW_state.NW_DATA_Q23 1 0 0 
+NW_state.NW_DATA_Q4 1 0 1 
+NW_state.NW_LOW 1 1 0 
+
+State Machine - |Ozy_Janus|async_usb:usb1|FX_state
+Name FX_state~29 FX_state~28 FX_state~27 FX_state~26 FX_state~25 
+FX_state.FX_IDLE 0 0 0 0 0 
+FX_state.FX_FROM_PC_ADDR 0 0 0 0 1 
+FX_state.FX_FROM_PC_CHECK 0 0 0 1 0 
+FX_state.FX_TO_PC_ADDR 0 0 0 1 1 
+FX_state.FX_TO_PC_CHECK 0 0 1 0 0 
+FX_state.FX_F1 0 0 1 0 1 
+FX_state.FX_F2 0 0 1 1 0 
+FX_state.FX_F3 0 0 1 1 1 
+FX_state.FX_F4 0 1 0 0 0 
+FX_state.FX_F5 0 1 0 0 1 
+FX_state.FX_F6 0 1 0 1 0 
+FX_state.FX_FDONE 0 1 0 1 1 
+FX_state.FX_T1 0 1 1 0 0 
+FX_state.FX_T2 0 1 1 0 1 
+FX_state.FX_T3 0 1 1 1 0 
+FX_state.FX_T4 0 1 1 1 1 
+FX_state.FX_T5 1 0 0 0 0 
+FX_state.FX_T6 1 0 0 0 1 
+FX_state.FX_T7 1 0 0 1 0 
+FX_state.FX_TDONE 1 0 0 1 1 
+
+State Machine - |Ozy_Janus|NWire_rcv:SPD|TB_state
+Name TB_state~13 TB_state~12 TB_state~11 
+TB_state.TB_IDLE 0 0 0 
+TB_state.TB_DB 0 0 1 
+TB_state.TB_CALC 0 1 0 
+TB_state.TB_SYNC 0 1 1 
+TB_state.TB_NEXT 1 0 0 
+TB_state.TB_BIT 1 0 1 
+
+State Machine - |Ozy_Janus|Tx_fifo_ctrl:TXFC|AD_state
+Name AD_state~20 AD_state~19 AD_state~18 AD_state~17 
+AD_state.AD_IDLE 0 0 0 0 
+AD_state.AD_SEND_SYNC1 0 0 0 1 
+AD_state.AD_SEND_SYNC2 0 0 1 0 
+AD_state.AD_SEND_CTL1_2 0 0 1 1 
+AD_state.AD_SEND_CTL3_4 0 1 0 0 
+AD_state.AD_SEND_MJ1 0 1 0 1 
+AD_state.AD_SEND_MJ2 0 1 1 0 
+AD_state.AD_SEND_MJ3 0 1 1 1 
+AD_state.AD_SEND_PJ 1 0 0 0 
+AD_state.AD_WAIT 1 0 0 1 
+AD_state.AD_LOOP_CHK 1 0 1 0 
+AD_state.AD_ERR 1 0 1 1 
+
+State Machine - |Ozy_Janus|NWire_rcv:M_IQ|TB_state
+Name TB_state~13 TB_state~12 TB_state~11 
+TB_state.TB_IDLE 0 0 0 
+TB_state.TB_DB 0 0 1 
+TB_state.TB_CALC 0 1 0 
+TB_state.TB_SYNC 0 1 1 
+TB_state.TB_NEXT 1 0 0 
+TB_state.TB_BIT 1 0 1 
+
+State Machine - |Ozy_Janus|NWire_rcv:P_MIC|TB_state
+Name TB_state~13 TB_state~12 TB_state~11 
+TB_state.TB_IDLE 0 0 0 
+TB_state.TB_DB 0 0 1 
+TB_state.TB_CALC 0 1 0 
+TB_state.TB_SYNC 0 1 1 
+TB_state.TB_NEXT 1 0 0 
+TB_state.TB_BIT 1 0 1 

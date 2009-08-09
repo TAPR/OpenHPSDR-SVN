@@ -1,0 +1,24 @@
+[||Compilation Report||Analysis & Synthesis||Connectivity Checks||Port Connectivity Checks: "NWire_rcv:p_ser"]
+COLUMN_WIDTHS=97L,38L,52L,393L,
+OUTPUT_SECTION=1
+PAGE_ORIENTATION=0
+[||Compilation Report||Analysis & Synthesis||Connectivity Checks||Port Connectivity Checks: "Rx_fifo:Rx_fifo"]
+COLUMN_WIDTHS=51L,38L,52L,493L,
+OUTPUT_SECTION=1
+PAGE_ORIENTATION=0
+[||Compilation Report||Analysis & Synthesis||Connectivity Checks||Port Connectivity Checks: "Tx_fifo_ctrl:TXFC"]
+COLUMN_WIDTHS=103L,38L,52L,72L,
+OUTPUT_SECTION=1
+PAGE_ORIENTATION=0
+[||Compilation Report||Design Assistant||High Violations]
+COLUMN_WIDTHS=532L,163L,
+OUTPUT_SECTION=1
+PAGE_ORIENTATION=0
+[||Compilation Report||Design Assistant||Information only Violations]
+COLUMN_WIDTHS=324L,467L,52L,
+OUTPUT_SECTION=1
+PAGE_ORIENTATION=0
+[||Compilation Report||Timing Analyzer||Clock Setup: 'IF_clk']
+COLUMN_WIDTHS=183L,84L,152L,211L,201L,41L,88L,98L,85L,
+OUTPUT_SECTION=1
+PAGE_ORIENTATION=0
