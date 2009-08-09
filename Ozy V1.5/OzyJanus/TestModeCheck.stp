@@ -1,0 +1,745 @@
+<session jtag_chain="ByteBlasterMV [LPT1]" jtag_device="@1: EP2C8 (0x020B20DD)" sof_file="" top_level_entity="Ozy_Janus">
+  <display_tree gui_logging_enabled="0">
+    <display_branch instance="auto_signaltap_0" log="USE_GLOBAL_TEMP" signal_set="USE_GLOBAL_TEMP" trigger="USE_GLOBAL_TEMP"/>
+  </display_tree>
+  <instance entity_name="sld_signaltap" is_auto_node="yes" is_expanded="true" name="auto_signaltap_0" source_file="sld_signaltap.vhd">
+    <node_ip_info instance_id="0" mfg_id="110" node_id="0" version="6"/>
+    <signal_set global_temp="1" is_expanded="true" name="signal_set: 2009/07/30 17:10:38  #0">
+      <clock name="TestModeCheck:TMC|clk" polarity="posedge" tap_mode="classic"/>
+      <config ram_type="M4K" reserved_data_nodes="0" reserved_storage_qualifier_nodes="0" reserved_trigger_nodes="0" sample_depth="128" trigger_in_enable="no" trigger_out_enable="no"/>
+      <top_entity/>
+      <signal_vec>
+        <trigger_input_vec>
+          <wire name="IF_get_samples" tap_mode="classic" type="combinatorial"/>
+          <wire name="TestModeCheck:TMC|C23" tap_mode="classic" type="combinatorial"/>
+          <wire name="TestModeCheck:TMC|c23_cnt[0]" tap_mode="classic" type="register"/>
+          <wire name="TestModeCheck:TMC|c23_cnt[10]" tap_mode="classic" type="register"/>
+          <wire name="TestModeCheck:TMC|c23_cnt[11]" tap_mode="classic" type="register"/>
+          <wire name="TestModeCheck:TMC|c23_cnt[12]" tap_mode="classic" type="register"/>
+          <wire name="TestModeCheck:TMC|c23_cnt[13]" tap_mode="classic" type="register"/>
+          <wire name="TestModeCheck:TMC|c23_cnt[14]" tap_mode="classic" type="register"/>
+          <wire name="TestModeCheck:TMC|c23_cnt[15]" tap_mode="classic" type="register"/>
+          <wire name="TestModeCheck:TMC|c23_cnt[1]" tap_mode="classic" type="register"/>
+          <wire name="TestModeCheck:TMC|c23_cnt[2]" tap_mode="classic" type="register"/>
+          <wire name="TestModeCheck:TMC|c23_cnt[3]" tap_mode="classic" type="register"/>
+          <wire name="TestModeCheck:TMC|c23_cnt[4]" tap_mode="classic" type="register"/>
+          <wire name="TestModeCheck:TMC|c23_cnt[5]" tap_mode="classic" type="register"/>
+          <wire name="TestModeCheck:TMC|c23_cnt[6]" tap_mode="classic" type="register"/>
+          <wire name="TestModeCheck:TMC|c23_cnt[7]" tap_mode="classic" type="register"/>
+          <wire name="TestModeCheck:TMC|c23_cnt[8]" tap_mode="classic" type="register"/>
+          <wire name="TestModeCheck:TMC|c23_cnt[9]" tap_mode="classic" type="register"/>
+          <wire name="TestModeCheck:TMC|data_in[0]" tap_mode="classic" type="combinatorial"/>
+          <wire name="TestModeCheck:TMC|data_in[10]" tap_mode="classic" type="combinatorial"/>
+          <wire name="TestModeCheck:TMC|data_in[11]" tap_mode="classic" type="combinatorial"/>
+          <wire name="TestModeCheck:TMC|data_in[12]" tap_mode="classic" type="combinatorial"/>
+          <wire name="TestModeCheck:TMC|data_in[13]" tap_mode="classic" type="combinatorial"/>
+          <wire name="TestModeCheck:TMC|data_in[14]" tap_mode="classic" type="combinatorial"/>
+          <wire name="TestModeCheck:TMC|data_in[15]" tap_mode="classic" type="combinatorial"/>
+          <wire name="TestModeCheck:TMC|data_in[1]" tap_mode="classic" type="combinatorial"/>
+          <wire name="TestModeCheck:TMC|data_in[2]" tap_mode="classic" type="combinatorial"/>
+          <wire name="TestModeCheck:TMC|data_in[3]" tap_mode="classic" type="combinatorial"/>
+          <wire name="TestModeCheck:TMC|data_in[4]" tap_mode="classic" type="combinatorial"/>
+          <wire name="TestModeCheck:TMC|data_in[5]" tap_mode="classic" type="combinatorial"/>
+          <wire name="TestModeCheck:TMC|data_in[6]" tap_mode="classic" type="combinatorial"/>
+          <wire name="TestModeCheck:TMC|data_in[7]" tap_mode="classic" type="combinatorial"/>
+          <wire name="TestModeCheck:TMC|data_in[8]" tap_mode="classic" type="combinatorial"/>
+          <wire name="TestModeCheck:TMC|data_in[9]" tap_mode="classic" type="combinatorial"/>
+          <wire name="TestModeCheck:TMC|data_out[0]" tap_mode="classic" type="combinatorial"/>
+          <wire name="TestModeCheck:TMC|data_out[10]" tap_mode="classic" type="combinatorial"/>
+          <wire name="TestModeCheck:TMC|data_out[11]" tap_mode="classic" type="combinatorial"/>
+          <wire name="TestModeCheck:TMC|data_out[12]" tap_mode="classic" type="combinatorial"/>
+          <wire name="TestModeCheck:TMC|data_out[13]" tap_mode="classic" type="combinatorial"/>
+          <wire name="TestModeCheck:TMC|data_out[14]" tap_mode="classic" type="combinatorial"/>
+          <wire name="TestModeCheck:TMC|data_out[15]" tap_mode="classic" type="combinatorial"/>
+          <wire name="TestModeCheck:TMC|data_out[1]" tap_mode="classic" type="combinatorial"/>
+          <wire name="TestModeCheck:TMC|data_out[2]" tap_mode="classic" type="combinatorial"/>
+          <wire name="TestModeCheck:TMC|data_out[3]" tap_mode="classic" type="combinatorial"/>
+          <wire name="TestModeCheck:TMC|data_out[4]" tap_mode="classic" type="combinatorial"/>
+          <wire name="TestModeCheck:TMC|data_out[5]" tap_mode="classic" type="combinatorial"/>
+          <wire name="TestModeCheck:TMC|data_out[6]" tap_mode="classic" type="combinatorial"/>
+          <wire name="TestModeCheck:TMC|data_out[7]" tap_mode="classic" type="combinatorial"/>
+          <wire name="TestModeCheck:TMC|data_out[8]" tap_mode="classic" type="combinatorial"/>
+          <wire name="TestModeCheck:TMC|data_out[9]" tap_mode="classic" type="combinatorial"/>
+          <wire name="TestModeCheck:TMC|ocnt[0]" tap_mode="classic" type="register"/>
+          <wire name="TestModeCheck:TMC|ocnt[10]" tap_mode="classic" type="register"/>
+          <wire name="TestModeCheck:TMC|ocnt[11]" tap_mode="classic" type="register"/>
+          <wire name="TestModeCheck:TMC|ocnt[12]" tap_mode="classic" type="register"/>
+          <wire name="TestModeCheck:TMC|ocnt[1]" tap_mode="classic" type="register"/>
+          <wire name="TestModeCheck:TMC|ocnt[2]" tap_mode="classic" type="register"/>
+          <wire name="TestModeCheck:TMC|ocnt[3]" tap_mode="classic" type="register"/>
+          <wire name="TestModeCheck:TMC|ocnt[4]" tap_mode="classic" type="register"/>
+          <wire name="TestModeCheck:TMC|ocnt[5]" tap_mode="classic" type="register"/>
+          <wire name="TestModeCheck:TMC|ocnt[6]" tap_mode="classic" type="register"/>
+          <wire name="TestModeCheck:TMC|ocnt[7]" tap_mode="classic" type="register"/>
+          <wire name="TestModeCheck:TMC|ocnt[8]" tap_mode="classic" type="register"/>
+          <wire name="TestModeCheck:TMC|ocnt[9]" tap_mode="classic" type="register"/>
+          <wire name="TestModeCheck:TMC|rdreq" tap_mode="classic" type="combinatorial"/>
+          <wire name="TestModeCheck:TMC|rdreq_dly" tap_mode="classic" type="register"/>
+          <wire name="TestModeCheck:TMC|rst" tap_mode="classic" type="combinatorial"/>
+          <wire name="TestModeCheck:TMC|seq_err" tap_mode="classic" type="register"/>
+          <wire name="TestModeCheck:TMC|seq_in_cnt[0]" tap_mode="classic" type="register"/>
+          <wire name="TestModeCheck:TMC|seq_in_cnt[1]" tap_mode="classic" type="register"/>
+          <wire name="TestModeCheck:TMC|seq_in_cnt[2]" tap_mode="classic" type="register"/>
+          <wire name="TestModeCheck:TMC|seq_in_cnt[3]" tap_mode="classic" type="register"/>
+          <wire name="TestModeCheck:TMC|seq_in_cnt[4]" tap_mode="classic" type="register"/>
+          <wire name="TestModeCheck:TMC|seq_in_cnt[5]" tap_mode="classic" type="register"/>
+          <wire name="TestModeCheck:TMC|seq_in_cnt[6]" tap_mode="classic" type="register"/>
+          <wire name="TestModeCheck:TMC|seq_in_cnt[7]" tap_mode="classic" type="register"/>
+          <wire name="TestModeCheck:TMC|seq_in_cnt[8]" tap_mode="classic" type="register"/>
+          <wire name="TestModeCheck:TMC|seq_out_cnt[0]" tap_mode="classic" type="register"/>
+          <wire name="TestModeCheck:TMC|seq_out_cnt[1]" tap_mode="classic" type="register"/>
+          <wire name="TestModeCheck:TMC|seq_out_cnt[2]" tap_mode="classic" type="register"/>
+          <wire name="TestModeCheck:TMC|seq_out_cnt[3]" tap_mode="classic" type="register"/>
+          <wire name="TestModeCheck:TMC|seq_out_cnt[4]" tap_mode="classic" type="register"/>
+          <wire name="TestModeCheck:TMC|seq_out_cnt[5]" tap_mode="classic" type="register"/>
+          <wire name="TestModeCheck:TMC|seq_out_cnt[6]" tap_mode="classic" type="register"/>
+          <wire name="TestModeCheck:TMC|seq_out_cnt[7]" tap_mode="classic" type="register"/>
+          <wire name="TestModeCheck:TMC|seq_out_cnt[8]" tap_mode="classic" type="register"/>
+          <wire name="TestModeCheck:TMC|sync_state[0]" tap_mode="classic" type="combinatorial"/>
+          <wire name="TestModeCheck:TMC|sync_state[1]" tap_mode="classic" type="combinatorial"/>
+          <wire name="TestModeCheck:TMC|sync_state[2]" tap_mode="classic" type="combinatorial"/>
+          <wire name="TestModeCheck:TMC|tmc_err" tap_mode="classic" type="combinatorial"/>
+          <wire name="TestModeCheck:TMC|tmc_state.TMC_12_CHK" tap_mode="classic" type="combinatorial"/>
+          <wire name="TestModeCheck:TMC|tmc_state.TMC_34_CHK" tap_mode="classic" type="combinatorial"/>
+          <wire name="TestModeCheck:TMC|tmc_state.TMC_CNT" tap_mode="classic" type="combinatorial"/>
+          <wire name="TestModeCheck:TMC|tmc_state.TMC_GO" tap_mode="classic" type="combinatorial"/>
+          <wire name="TestModeCheck:TMC|tmc_state.TMC_IDLE" tap_mode="classic" type="combinatorial"/>
+          <wire name="TestModeCheck:TMC|used[0]" tap_mode="classic" type="combinatorial"/>
+          <wire name="TestModeCheck:TMC|used[10]" tap_mode="classic" type="combinatorial"/>
+          <wire name="TestModeCheck:TMC|used[11]" tap_mode="classic" type="combinatorial"/>
+          <wire name="TestModeCheck:TMC|used[12]" tap_mode="classic" type="combinatorial"/>
+          <wire name="TestModeCheck:TMC|used[1]" tap_mode="classic" type="combinatorial"/>
+          <wire name="TestModeCheck:TMC|used[2]" tap_mode="classic" type="combinatorial"/>
+          <wire name="TestModeCheck:TMC|used[3]" tap_mode="classic" type="combinatorial"/>
+          <wire name="TestModeCheck:TMC|used[4]" tap_mode="classic" type="combinatorial"/>
+          <wire name="TestModeCheck:TMC|used[5]" tap_mode="classic" type="combinatorial"/>
+          <wire name="TestModeCheck:TMC|used[6]" tap_mode="classic" type="combinatorial"/>
+          <wire name="TestModeCheck:TMC|used[7]" tap_mode="classic" type="combinatorial"/>
+          <wire name="TestModeCheck:TMC|used[8]" tap_mode="classic" type="combinatorial"/>
+          <wire name="TestModeCheck:TMC|used[9]" tap_mode="classic" type="combinatorial"/>
+          <wire name="TestModeCheck:TMC|wrreq" tap_mode="classic" type="combinatorial"/>
+          <wire name="TestModeCheck:TMC|xrdy" tap_mode="classic" type="combinatorial"/>
+          <wire name="TestModeCheck:TMC|xrdy_cnt[0]" tap_mode="classic" type="register"/>
+          <wire name="TestModeCheck:TMC|xrdy_cnt[10]" tap_mode="classic" type="register"/>
+          <wire name="TestModeCheck:TMC|xrdy_cnt[11]" tap_mode="classic" type="register"/>
+          <wire name="TestModeCheck:TMC|xrdy_cnt[12]" tap_mode="classic" type="register"/>
+          <wire name="TestModeCheck:TMC|xrdy_cnt[13]" tap_mode="classic" type="register"/>
+          <wire name="TestModeCheck:TMC|xrdy_cnt[14]" tap_mode="classic" type="register"/>
+          <wire name="TestModeCheck:TMC|xrdy_cnt[15]" tap_mode="classic" type="register"/>
+          <wire name="TestModeCheck:TMC|xrdy_cnt[1]" tap_mode="classic" type="register"/>
+          <wire name="TestModeCheck:TMC|xrdy_cnt[2]" tap_mode="classic" type="register"/>
+          <wire name="TestModeCheck:TMC|xrdy_cnt[3]" tap_mode="classic" type="register"/>
+          <wire name="TestModeCheck:TMC|xrdy_cnt[4]" tap_mode="classic" type="register"/>
+          <wire name="TestModeCheck:TMC|xrdy_cnt[5]" tap_mode="classic" type="register"/>
+          <wire name="TestModeCheck:TMC|xrdy_cnt[6]" tap_mode="classic" type="register"/>
+          <wire name="TestModeCheck:TMC|xrdy_cnt[7]" tap_mode="classic" type="register"/>
+          <wire name="TestModeCheck:TMC|xrdy_cnt[8]" tap_mode="classic" type="register"/>
+          <wire name="TestModeCheck:TMC|xrdy_cnt[9]" tap_mode="classic" type="register"/>
+        </trigger_input_vec>
+        <data_input_vec>
+          <wire name="IF_get_samples" tap_mode="classic" type="combinatorial"/>
+          <wire name="TestModeCheck:TMC|C23" tap_mode="classic" type="combinatorial"/>
+          <wire name="TestModeCheck:TMC|c23_cnt[0]" tap_mode="classic" type="register"/>
+          <wire name="TestModeCheck:TMC|c23_cnt[10]" tap_mode="classic" type="register"/>
+          <wire name="TestModeCheck:TMC|c23_cnt[11]" tap_mode="classic" type="register"/>
+          <wire name="TestModeCheck:TMC|c23_cnt[12]" tap_mode="classic" type="register"/>
+          <wire name="TestModeCheck:TMC|c23_cnt[13]" tap_mode="classic" type="register"/>
+          <wire name="TestModeCheck:TMC|c23_cnt[14]" tap_mode="classic" type="register"/>
+          <wire name="TestModeCheck:TMC|c23_cnt[15]" tap_mode="classic" type="register"/>
+          <wire name="TestModeCheck:TMC|c23_cnt[1]" tap_mode="classic" type="register"/>
+          <wire name="TestModeCheck:TMC|c23_cnt[2]" tap_mode="classic" type="register"/>
+          <wire name="TestModeCheck:TMC|c23_cnt[3]" tap_mode="classic" type="register"/>
+          <wire name="TestModeCheck:TMC|c23_cnt[4]" tap_mode="classic" type="register"/>
+          <wire name="TestModeCheck:TMC|c23_cnt[5]" tap_mode="classic" type="register"/>
+          <wire name="TestModeCheck:TMC|c23_cnt[6]" tap_mode="classic" type="register"/>
+          <wire name="TestModeCheck:TMC|c23_cnt[7]" tap_mode="classic" type="register"/>
+          <wire name="TestModeCheck:TMC|c23_cnt[8]" tap_mode="classic" type="register"/>
+          <wire name="TestModeCheck:TMC|c23_cnt[9]" tap_mode="classic" type="register"/>
+          <wire name="TestModeCheck:TMC|data_in[0]" tap_mode="classic" type="combinatorial"/>
+          <wire name="TestModeCheck:TMC|data_in[10]" tap_mode="classic" type="combinatorial"/>
+          <wire name="TestModeCheck:TMC|data_in[11]" tap_mode="classic" type="combinatorial"/>
+          <wire name="TestModeCheck:TMC|data_in[12]" tap_mode="classic" type="combinatorial"/>
+          <wire name="TestModeCheck:TMC|data_in[13]" tap_mode="classic" type="combinatorial"/>
+          <wire name="TestModeCheck:TMC|data_in[14]" tap_mode="classic" type="combinatorial"/>
+          <wire name="TestModeCheck:TMC|data_in[15]" tap_mode="classic" type="combinatorial"/>
+          <wire name="TestModeCheck:TMC|data_in[1]" tap_mode="classic" type="combinatorial"/>
+          <wire name="TestModeCheck:TMC|data_in[2]" tap_mode="classic" type="combinatorial"/>
+          <wire name="TestModeCheck:TMC|data_in[3]" tap_mode="classic" type="combinatorial"/>
+          <wire name="TestModeCheck:TMC|data_in[4]" tap_mode="classic" type="combinatorial"/>
+          <wire name="TestModeCheck:TMC|data_in[5]" tap_mode="classic" type="combinatorial"/>
+          <wire name="TestModeCheck:TMC|data_in[6]" tap_mode="classic" type="combinatorial"/>
+          <wire name="TestModeCheck:TMC|data_in[7]" tap_mode="classic" type="combinatorial"/>
+          <wire name="TestModeCheck:TMC|data_in[8]" tap_mode="classic" type="combinatorial"/>
+          <wire name="TestModeCheck:TMC|data_in[9]" tap_mode="classic" type="combinatorial"/>
+          <wire name="TestModeCheck:TMC|data_out[0]" tap_mode="classic" type="combinatorial"/>
+          <wire name="TestModeCheck:TMC|data_out[10]" tap_mode="classic" type="combinatorial"/>
+          <wire name="TestModeCheck:TMC|data_out[11]" tap_mode="classic" type="combinatorial"/>
+          <wire name="TestModeCheck:TMC|data_out[12]" tap_mode="classic" type="combinatorial"/>
+          <wire name="TestModeCheck:TMC|data_out[13]" tap_mode="classic" type="combinatorial"/>
+          <wire name="TestModeCheck:TMC|data_out[14]" tap_mode="classic" type="combinatorial"/>
+          <wire name="TestModeCheck:TMC|data_out[15]" tap_mode="classic" type="combinatorial"/>
+          <wire name="TestModeCheck:TMC|data_out[1]" tap_mode="classic" type="combinatorial"/>
+          <wire name="TestModeCheck:TMC|data_out[2]" tap_mode="classic" type="combinatorial"/>
+          <wire name="TestModeCheck:TMC|data_out[3]" tap_mode="classic" type="combinatorial"/>
+          <wire name="TestModeCheck:TMC|data_out[4]" tap_mode="classic" type="combinatorial"/>
+          <wire name="TestModeCheck:TMC|data_out[5]" tap_mode="classic" type="combinatorial"/>
+          <wire name="TestModeCheck:TMC|data_out[6]" tap_mode="classic" type="combinatorial"/>
+          <wire name="TestModeCheck:TMC|data_out[7]" tap_mode="classic" type="combinatorial"/>
+          <wire name="TestModeCheck:TMC|data_out[8]" tap_mode="classic" type="combinatorial"/>
+          <wire name="TestModeCheck:TMC|data_out[9]" tap_mode="classic" type="combinatorial"/>
+          <wire name="TestModeCheck:TMC|ocnt[0]" tap_mode="classic" type="register"/>
+          <wire name="TestModeCheck:TMC|ocnt[10]" tap_mode="classic" type="register"/>
+          <wire name="TestModeCheck:TMC|ocnt[11]" tap_mode="classic" type="register"/>
+          <wire name="TestModeCheck:TMC|ocnt[12]" tap_mode="classic" type="register"/>
+          <wire name="TestModeCheck:TMC|ocnt[1]" tap_mode="classic" type="register"/>
+          <wire name="TestModeCheck:TMC|ocnt[2]" tap_mode="classic" type="register"/>
+          <wire name="TestModeCheck:TMC|ocnt[3]" tap_mode="classic" type="register"/>
+          <wire name="TestModeCheck:TMC|ocnt[4]" tap_mode="classic" type="register"/>
+          <wire name="TestModeCheck:TMC|ocnt[5]" tap_mode="classic" type="register"/>
+          <wire name="TestModeCheck:TMC|ocnt[6]" tap_mode="classic" type="register"/>
+          <wire name="TestModeCheck:TMC|ocnt[7]" tap_mode="classic" type="register"/>
+          <wire name="TestModeCheck:TMC|ocnt[8]" tap_mode="classic" type="register"/>
+          <wire name="TestModeCheck:TMC|ocnt[9]" tap_mode="classic" type="register"/>
+          <wire name="TestModeCheck:TMC|rdreq" tap_mode="classic" type="combinatorial"/>
+          <wire name="TestModeCheck:TMC|rdreq_dly" tap_mode="classic" type="register"/>
+          <wire name="TestModeCheck:TMC|rst" tap_mode="classic" type="combinatorial"/>
+          <wire name="TestModeCheck:TMC|seq_err" tap_mode="classic" type="register"/>
+          <wire name="TestModeCheck:TMC|seq_in_cnt[0]" tap_mode="classic" type="register"/>
+          <wire name="TestModeCheck:TMC|seq_in_cnt[1]" tap_mode="classic" type="register"/>
+          <wire name="TestModeCheck:TMC|seq_in_cnt[2]" tap_mode="classic" type="register"/>
+          <wire name="TestModeCheck:TMC|seq_in_cnt[3]" tap_mode="classic" type="register"/>
+          <wire name="TestModeCheck:TMC|seq_in_cnt[4]" tap_mode="classic" type="register"/>
+          <wire name="TestModeCheck:TMC|seq_in_cnt[5]" tap_mode="classic" type="register"/>
+          <wire name="TestModeCheck:TMC|seq_in_cnt[6]" tap_mode="classic" type="register"/>
+          <wire name="TestModeCheck:TMC|seq_in_cnt[7]" tap_mode="classic" type="register"/>
+          <wire name="TestModeCheck:TMC|seq_in_cnt[8]" tap_mode="classic" type="register"/>
+          <wire name="TestModeCheck:TMC|seq_out_cnt[0]" tap_mode="classic" type="register"/>
+          <wire name="TestModeCheck:TMC|seq_out_cnt[1]" tap_mode="classic" type="register"/>
+          <wire name="TestModeCheck:TMC|seq_out_cnt[2]" tap_mode="classic" type="register"/>
+          <wire name="TestModeCheck:TMC|seq_out_cnt[3]" tap_mode="classic" type="register"/>
+          <wire name="TestModeCheck:TMC|seq_out_cnt[4]" tap_mode="classic" type="register"/>
+          <wire name="TestModeCheck:TMC|seq_out_cnt[5]" tap_mode="classic" type="register"/>
+          <wire name="TestModeCheck:TMC|seq_out_cnt[6]" tap_mode="classic" type="register"/>
+          <wire name="TestModeCheck:TMC|seq_out_cnt[7]" tap_mode="classic" type="register"/>
+          <wire name="TestModeCheck:TMC|seq_out_cnt[8]" tap_mode="classic" type="register"/>
+          <wire name="TestModeCheck:TMC|sync_state[0]" tap_mode="classic" type="combinatorial"/>
+          <wire name="TestModeCheck:TMC|sync_state[1]" tap_mode="classic" type="combinatorial"/>
+          <wire name="TestModeCheck:TMC|sync_state[2]" tap_mode="classic" type="combinatorial"/>
+          <wire name="TestModeCheck:TMC|tmc_err" tap_mode="classic" type="combinatorial"/>
+          <wire name="TestModeCheck:TMC|tmc_state.TMC_12_CHK" tap_mode="classic" type="combinatorial"/>
+          <wire name="TestModeCheck:TMC|tmc_state.TMC_34_CHK" tap_mode="classic" type="combinatorial"/>
+          <wire name="TestModeCheck:TMC|tmc_state.TMC_CNT" tap_mode="classic" type="combinatorial"/>
+          <wire name="TestModeCheck:TMC|tmc_state.TMC_GO" tap_mode="classic" type="combinatorial"/>
+          <wire name="TestModeCheck:TMC|tmc_state.TMC_IDLE" tap_mode="classic" type="combinatorial"/>
+          <wire name="TestModeCheck:TMC|used[0]" tap_mode="classic" type="combinatorial"/>
+          <wire name="TestModeCheck:TMC|used[10]" tap_mode="classic" type="combinatorial"/>
+          <wire name="TestModeCheck:TMC|used[11]" tap_mode="classic" type="combinatorial"/>
+          <wire name="TestModeCheck:TMC|used[12]" tap_mode="classic" type="combinatorial"/>
+          <wire name="TestModeCheck:TMC|used[1]" tap_mode="classic" type="combinatorial"/>
+          <wire name="TestModeCheck:TMC|used[2]" tap_mode="classic" type="combinatorial"/>
+          <wire name="TestModeCheck:TMC|used[3]" tap_mode="classic" type="combinatorial"/>
+          <wire name="TestModeCheck:TMC|used[4]" tap_mode="classic" type="combinatorial"/>
+          <wire name="TestModeCheck:TMC|used[5]" tap_mode="classic" type="combinatorial"/>
+          <wire name="TestModeCheck:TMC|used[6]" tap_mode="classic" type="combinatorial"/>
+          <wire name="TestModeCheck:TMC|used[7]" tap_mode="classic" type="combinatorial"/>
+          <wire name="TestModeCheck:TMC|used[8]" tap_mode="classic" type="combinatorial"/>
+          <wire name="TestModeCheck:TMC|used[9]" tap_mode="classic" type="combinatorial"/>
+          <wire name="TestModeCheck:TMC|wrreq" tap_mode="classic" type="combinatorial"/>
+          <wire name="TestModeCheck:TMC|xrdy" tap_mode="classic" type="combinatorial"/>
+          <wire name="TestModeCheck:TMC|xrdy_cnt[0]" tap_mode="classic" type="register"/>
+          <wire name="TestModeCheck:TMC|xrdy_cnt[10]" tap_mode="classic" type="register"/>
+          <wire name="TestModeCheck:TMC|xrdy_cnt[11]" tap_mode="classic" type="register"/>
+          <wire name="TestModeCheck:TMC|xrdy_cnt[12]" tap_mode="classic" type="register"/>
+          <wire name="TestModeCheck:TMC|xrdy_cnt[13]" tap_mode="classic" type="register"/>
+          <wire name="TestModeCheck:TMC|xrdy_cnt[14]" tap_mode="classic" type="register"/>
+          <wire name="TestModeCheck:TMC|xrdy_cnt[15]" tap_mode="classic" type="register"/>
+          <wire name="TestModeCheck:TMC|xrdy_cnt[1]" tap_mode="classic" type="register"/>
+          <wire name="TestModeCheck:TMC|xrdy_cnt[2]" tap_mode="classic" type="register"/>
+          <wire name="TestModeCheck:TMC|xrdy_cnt[3]" tap_mode="classic" type="register"/>
+          <wire name="TestModeCheck:TMC|xrdy_cnt[4]" tap_mode="classic" type="register"/>
+          <wire name="TestModeCheck:TMC|xrdy_cnt[5]" tap_mode="classic" type="register"/>
+          <wire name="TestModeCheck:TMC|xrdy_cnt[6]" tap_mode="classic" type="register"/>
+          <wire name="TestModeCheck:TMC|xrdy_cnt[7]" tap_mode="classic" type="register"/>
+          <wire name="TestModeCheck:TMC|xrdy_cnt[8]" tap_mode="classic" type="register"/>
+          <wire name="TestModeCheck:TMC|xrdy_cnt[9]" tap_mode="classic" type="register"/>
+        </data_input_vec>
+        <storage_qualifier_input_vec>
+          <wire name="IF_get_samples" tap_mode="classic" type="combinatorial"/>
+          <wire name="TestModeCheck:TMC|C23" tap_mode="classic" type="combinatorial"/>
+          <wire name="TestModeCheck:TMC|c23_cnt[0]" tap_mode="classic" type="register"/>
+          <wire name="TestModeCheck:TMC|c23_cnt[10]" tap_mode="classic" type="register"/>
+          <wire name="TestModeCheck:TMC|c23_cnt[11]" tap_mode="classic" type="register"/>
+          <wire name="TestModeCheck:TMC|c23_cnt[12]" tap_mode="classic" type="register"/>
+          <wire name="TestModeCheck:TMC|c23_cnt[13]" tap_mode="classic" type="register"/>
+          <wire name="TestModeCheck:TMC|c23_cnt[14]" tap_mode="classic" type="register"/>
+          <wire name="TestModeCheck:TMC|c23_cnt[15]" tap_mode="classic" type="register"/>
+          <wire name="TestModeCheck:TMC|c23_cnt[1]" tap_mode="classic" type="register"/>
+          <wire name="TestModeCheck:TMC|c23_cnt[2]" tap_mode="classic" type="register"/>
+          <wire name="TestModeCheck:TMC|c23_cnt[3]" tap_mode="classic" type="register"/>
+          <wire name="TestModeCheck:TMC|c23_cnt[4]" tap_mode="classic" type="register"/>
+          <wire name="TestModeCheck:TMC|c23_cnt[5]" tap_mode="classic" type="register"/>
+          <wire name="TestModeCheck:TMC|c23_cnt[6]" tap_mode="classic" type="register"/>
+          <wire name="TestModeCheck:TMC|c23_cnt[7]" tap_mode="classic" type="register"/>
+          <wire name="TestModeCheck:TMC|c23_cnt[8]" tap_mode="classic" type="register"/>
+          <wire name="TestModeCheck:TMC|c23_cnt[9]" tap_mode="classic" type="register"/>
+          <wire name="TestModeCheck:TMC|data_in[0]" tap_mode="classic" type="combinatorial"/>
+          <wire name="TestModeCheck:TMC|data_in[10]" tap_mode="classic" type="combinatorial"/>
+          <wire name="TestModeCheck:TMC|data_in[11]" tap_mode="classic" type="combinatorial"/>
+          <wire name="TestModeCheck:TMC|data_in[12]" tap_mode="classic" type="combinatorial"/>
+          <wire name="TestModeCheck:TMC|data_in[13]" tap_mode="classic" type="combinatorial"/>
+          <wire name="TestModeCheck:TMC|data_in[14]" tap_mode="classic" type="combinatorial"/>
+          <wire name="TestModeCheck:TMC|data_in[15]" tap_mode="classic" type="combinatorial"/>
+          <wire name="TestModeCheck:TMC|data_in[1]" tap_mode="classic" type="combinatorial"/>
+          <wire name="TestModeCheck:TMC|data_in[2]" tap_mode="classic" type="combinatorial"/>
+          <wire name="TestModeCheck:TMC|data_in[3]" tap_mode="classic" type="combinatorial"/>
+          <wire name="TestModeCheck:TMC|data_in[4]" tap_mode="classic" type="combinatorial"/>
+          <wire name="TestModeCheck:TMC|data_in[5]" tap_mode="classic" type="combinatorial"/>
+          <wire name="TestModeCheck:TMC|data_in[6]" tap_mode="classic" type="combinatorial"/>
+          <wire name="TestModeCheck:TMC|data_in[7]" tap_mode="classic" type="combinatorial"/>
+          <wire name="TestModeCheck:TMC|data_in[8]" tap_mode="classic" type="combinatorial"/>
+          <wire name="TestModeCheck:TMC|data_in[9]" tap_mode="classic" type="combinatorial"/>
+          <wire name="TestModeCheck:TMC|data_out[0]" tap_mode="classic" type="combinatorial"/>
+          <wire name="TestModeCheck:TMC|data_out[10]" tap_mode="classic" type="combinatorial"/>
+          <wire name="TestModeCheck:TMC|data_out[11]" tap_mode="classic" type="combinatorial"/>
+          <wire name="TestModeCheck:TMC|data_out[12]" tap_mode="classic" type="combinatorial"/>
+          <wire name="TestModeCheck:TMC|data_out[13]" tap_mode="classic" type="combinatorial"/>
+          <wire name="TestModeCheck:TMC|data_out[14]" tap_mode="classic" type="combinatorial"/>
+          <wire name="TestModeCheck:TMC|data_out[15]" tap_mode="classic" type="combinatorial"/>
+          <wire name="TestModeCheck:TMC|data_out[1]" tap_mode="classic" type="combinatorial"/>
+          <wire name="TestModeCheck:TMC|data_out[2]" tap_mode="classic" type="combinatorial"/>
+          <wire name="TestModeCheck:TMC|data_out[3]" tap_mode="classic" type="combinatorial"/>
+          <wire name="TestModeCheck:TMC|data_out[4]" tap_mode="classic" type="combinatorial"/>
+          <wire name="TestModeCheck:TMC|data_out[5]" tap_mode="classic" type="combinatorial"/>
+          <wire name="TestModeCheck:TMC|data_out[6]" tap_mode="classic" type="combinatorial"/>
+          <wire name="TestModeCheck:TMC|data_out[7]" tap_mode="classic" type="combinatorial"/>
+          <wire name="TestModeCheck:TMC|data_out[8]" tap_mode="classic" type="combinatorial"/>
+          <wire name="TestModeCheck:TMC|data_out[9]" tap_mode="classic" type="combinatorial"/>
+          <wire name="TestModeCheck:TMC|ocnt[0]" tap_mode="classic" type="register"/>
+          <wire name="TestModeCheck:TMC|ocnt[10]" tap_mode="classic" type="register"/>
+          <wire name="TestModeCheck:TMC|ocnt[11]" tap_mode="classic" type="register"/>
+          <wire name="TestModeCheck:TMC|ocnt[12]" tap_mode="classic" type="register"/>
+          <wire name="TestModeCheck:TMC|ocnt[1]" tap_mode="classic" type="register"/>
+          <wire name="TestModeCheck:TMC|ocnt[2]" tap_mode="classic" type="register"/>
+          <wire name="TestModeCheck:TMC|ocnt[3]" tap_mode="classic" type="register"/>
+          <wire name="TestModeCheck:TMC|ocnt[4]" tap_mode="classic" type="register"/>
+          <wire name="TestModeCheck:TMC|ocnt[5]" tap_mode="classic" type="register"/>
+          <wire name="TestModeCheck:TMC|ocnt[6]" tap_mode="classic" type="register"/>
+          <wire name="TestModeCheck:TMC|ocnt[7]" tap_mode="classic" type="register"/>
+          <wire name="TestModeCheck:TMC|ocnt[8]" tap_mode="classic" type="register"/>
+          <wire name="TestModeCheck:TMC|ocnt[9]" tap_mode="classic" type="register"/>
+          <wire name="TestModeCheck:TMC|rdreq" tap_mode="classic" type="combinatorial"/>
+          <wire name="TestModeCheck:TMC|rdreq_dly" tap_mode="classic" type="register"/>
+          <wire name="TestModeCheck:TMC|rst" tap_mode="classic" type="combinatorial"/>
+          <wire name="TestModeCheck:TMC|seq_err" tap_mode="classic" type="register"/>
+          <wire name="TestModeCheck:TMC|seq_in_cnt[0]" tap_mode="classic" type="register"/>
+          <wire name="TestModeCheck:TMC|seq_in_cnt[1]" tap_mode="classic" type="register"/>
+          <wire name="TestModeCheck:TMC|seq_in_cnt[2]" tap_mode="classic" type="register"/>
+          <wire name="TestModeCheck:TMC|seq_in_cnt[3]" tap_mode="classic" type="register"/>
+          <wire name="TestModeCheck:TMC|seq_in_cnt[4]" tap_mode="classic" type="register"/>
+          <wire name="TestModeCheck:TMC|seq_in_cnt[5]" tap_mode="classic" type="register"/>
+          <wire name="TestModeCheck:TMC|seq_in_cnt[6]" tap_mode="classic" type="register"/>
+          <wire name="TestModeCheck:TMC|seq_in_cnt[7]" tap_mode="classic" type="register"/>
+          <wire name="TestModeCheck:TMC|seq_in_cnt[8]" tap_mode="classic" type="register"/>
+          <wire name="TestModeCheck:TMC|seq_out_cnt[0]" tap_mode="classic" type="register"/>
+          <wire name="TestModeCheck:TMC|seq_out_cnt[1]" tap_mode="classic" type="register"/>
+          <wire name="TestModeCheck:TMC|seq_out_cnt[2]" tap_mode="classic" type="register"/>
+          <wire name="TestModeCheck:TMC|seq_out_cnt[3]" tap_mode="classic" type="register"/>
+          <wire name="TestModeCheck:TMC|seq_out_cnt[4]" tap_mode="classic" type="register"/>
+          <wire name="TestModeCheck:TMC|seq_out_cnt[5]" tap_mode="classic" type="register"/>
+          <wire name="TestModeCheck:TMC|seq_out_cnt[6]" tap_mode="classic" type="register"/>
+          <wire name="TestModeCheck:TMC|seq_out_cnt[7]" tap_mode="classic" type="register"/>
+          <wire name="TestModeCheck:TMC|seq_out_cnt[8]" tap_mode="classic" type="register"/>
+          <wire name="TestModeCheck:TMC|sync_state[0]" tap_mode="classic" type="combinatorial"/>
+          <wire name="TestModeCheck:TMC|sync_state[1]" tap_mode="classic" type="combinatorial"/>
+          <wire name="TestModeCheck:TMC|sync_state[2]" tap_mode="classic" type="combinatorial"/>
+          <wire name="TestModeCheck:TMC|tmc_err" tap_mode="classic" type="combinatorial"/>
+          <wire name="TestModeCheck:TMC|tmc_state.TMC_12_CHK" tap_mode="classic" type="combinatorial"/>
+          <wire name="TestModeCheck:TMC|tmc_state.TMC_34_CHK" tap_mode="classic" type="combinatorial"/>
+          <wire name="TestModeCheck:TMC|tmc_state.TMC_CNT" tap_mode="classic" type="combinatorial"/>
+          <wire name="TestModeCheck:TMC|tmc_state.TMC_GO" tap_mode="classic" type="combinatorial"/>
+          <wire name="TestModeCheck:TMC|tmc_state.TMC_IDLE" tap_mode="classic" type="combinatorial"/>
+          <wire name="TestModeCheck:TMC|used[0]" tap_mode="classic" type="combinatorial"/>
+          <wire name="TestModeCheck:TMC|used[10]" tap_mode="classic" type="combinatorial"/>
+          <wire name="TestModeCheck:TMC|used[11]" tap_mode="classic" type="combinatorial"/>
+          <wire name="TestModeCheck:TMC|used[12]" tap_mode="classic" type="combinatorial"/>
+          <wire name="TestModeCheck:TMC|used[1]" tap_mode="classic" type="combinatorial"/>
+          <wire name="TestModeCheck:TMC|used[2]" tap_mode="classic" type="combinatorial"/>
+          <wire name="TestModeCheck:TMC|used[3]" tap_mode="classic" type="combinatorial"/>
+          <wire name="TestModeCheck:TMC|used[4]" tap_mode="classic" type="combinatorial"/>
+          <wire name="TestModeCheck:TMC|used[5]" tap_mode="classic" type="combinatorial"/>
+          <wire name="TestModeCheck:TMC|used[6]" tap_mode="classic" type="combinatorial"/>
+          <wire name="TestModeCheck:TMC|used[7]" tap_mode="classic" type="combinatorial"/>
+          <wire name="TestModeCheck:TMC|used[8]" tap_mode="classic" type="combinatorial"/>
+          <wire name="TestModeCheck:TMC|used[9]" tap_mode="classic" type="combinatorial"/>
+          <wire name="TestModeCheck:TMC|wrreq" tap_mode="classic" type="combinatorial"/>
+          <wire name="TestModeCheck:TMC|xrdy" tap_mode="classic" type="combinatorial"/>
+          <wire name="TestModeCheck:TMC|xrdy_cnt[0]" tap_mode="classic" type="register"/>
+          <wire name="TestModeCheck:TMC|xrdy_cnt[10]" tap_mode="classic" type="register"/>
+          <wire name="TestModeCheck:TMC|xrdy_cnt[11]" tap_mode="classic" type="register"/>
+          <wire name="TestModeCheck:TMC|xrdy_cnt[12]" tap_mode="classic" type="register"/>
+          <wire name="TestModeCheck:TMC|xrdy_cnt[13]" tap_mode="classic" type="register"/>
+          <wire name="TestModeCheck:TMC|xrdy_cnt[14]" tap_mode="classic" type="register"/>
+          <wire name="TestModeCheck:TMC|xrdy_cnt[15]" tap_mode="classic" type="register"/>
+          <wire name="TestModeCheck:TMC|xrdy_cnt[1]" tap_mode="classic" type="register"/>
+          <wire name="TestModeCheck:TMC|xrdy_cnt[2]" tap_mode="classic" type="register"/>
+          <wire name="TestModeCheck:TMC|xrdy_cnt[3]" tap_mode="classic" type="register"/>
+          <wire name="TestModeCheck:TMC|xrdy_cnt[4]" tap_mode="classic" type="register"/>
+          <wire name="TestModeCheck:TMC|xrdy_cnt[5]" tap_mode="classic" type="register"/>
+          <wire name="TestModeCheck:TMC|xrdy_cnt[6]" tap_mode="classic" type="register"/>
+          <wire name="TestModeCheck:TMC|xrdy_cnt[7]" tap_mode="classic" type="register"/>
+          <wire name="TestModeCheck:TMC|xrdy_cnt[8]" tap_mode="classic" type="register"/>
+          <wire name="TestModeCheck:TMC|xrdy_cnt[9]" tap_mode="classic" type="register"/>
+        </storage_qualifier_input_vec>
+      </signal_vec>
+      <presentation>
+        <data_view>
+          <net is_signal_inverted="no" name="TestModeCheck:TMC|rst"/>
+          <bus is_signal_inverted="no" link="all" name="TestModeCheck:TMC|data_in" order="lsb_to_msb" radix="hex" state="collapse" type="combinatorial">
+            <net is_signal_inverted="no" name="TestModeCheck:TMC|data_in[0]"/>
+            <net is_signal_inverted="no" name="TestModeCheck:TMC|data_in[1]"/>
+            <net is_signal_inverted="no" name="TestModeCheck:TMC|data_in[2]"/>
+            <net is_signal_inverted="no" name="TestModeCheck:TMC|data_in[3]"/>
+            <net is_signal_inverted="no" name="TestModeCheck:TMC|data_in[4]"/>
+            <net is_signal_inverted="no" name="TestModeCheck:TMC|data_in[5]"/>
+            <net is_signal_inverted="no" name="TestModeCheck:TMC|data_in[6]"/>
+            <net is_signal_inverted="no" name="TestModeCheck:TMC|data_in[7]"/>
+            <net is_signal_inverted="no" name="TestModeCheck:TMC|data_in[8]"/>
+            <net is_signal_inverted="no" name="TestModeCheck:TMC|data_in[9]"/>
+            <net is_signal_inverted="no" name="TestModeCheck:TMC|data_in[10]"/>
+            <net is_signal_inverted="no" name="TestModeCheck:TMC|data_in[11]"/>
+            <net is_signal_inverted="no" name="TestModeCheck:TMC|data_in[12]"/>
+            <net is_signal_inverted="no" name="TestModeCheck:TMC|data_in[13]"/>
+            <net is_signal_inverted="no" name="TestModeCheck:TMC|data_in[14]"/>
+            <net is_signal_inverted="no" name="TestModeCheck:TMC|data_in[15]"/>
+          </bus>
+          <net is_signal_inverted="no" name="TestModeCheck:TMC|wrreq"/>
+          <bus is_signal_inverted="no" link="all" name="TestModeCheck:TMC|seq_in_cnt" order="lsb_to_msb" radix="hex" state="collapse" type="register">
+            <net is_signal_inverted="no" name="TestModeCheck:TMC|seq_in_cnt[0]"/>
+            <net is_signal_inverted="no" name="TestModeCheck:TMC|seq_in_cnt[1]"/>
+            <net is_signal_inverted="no" name="TestModeCheck:TMC|seq_in_cnt[2]"/>
+            <net is_signal_inverted="no" name="TestModeCheck:TMC|seq_in_cnt[3]"/>
+            <net is_signal_inverted="no" name="TestModeCheck:TMC|seq_in_cnt[4]"/>
+            <net is_signal_inverted="no" name="TestModeCheck:TMC|seq_in_cnt[5]"/>
+            <net is_signal_inverted="no" name="TestModeCheck:TMC|seq_in_cnt[6]"/>
+            <net is_signal_inverted="no" name="TestModeCheck:TMC|seq_in_cnt[7]"/>
+            <net is_signal_inverted="no" name="TestModeCheck:TMC|seq_in_cnt[8]"/>
+          </bus>
+          <net is_signal_inverted="no" name="TestModeCheck:TMC|rdreq"/>
+          <net is_signal_inverted="no" name="TestModeCheck:TMC|rdreq_dly"/>
+          <bus is_signal_inverted="no" link="all" name="TestModeCheck:TMC|data_out" order="lsb_to_msb" radix="hex" state="collapse" type="combinatorial">
+            <net is_signal_inverted="no" name="TestModeCheck:TMC|data_out[0]"/>
+            <net is_signal_inverted="no" name="TestModeCheck:TMC|data_out[1]"/>
+            <net is_signal_inverted="no" name="TestModeCheck:TMC|data_out[2]"/>
+            <net is_signal_inverted="no" name="TestModeCheck:TMC|data_out[3]"/>
+            <net is_signal_inverted="no" name="TestModeCheck:TMC|data_out[4]"/>
+            <net is_signal_inverted="no" name="TestModeCheck:TMC|data_out[5]"/>
+            <net is_signal_inverted="no" name="TestModeCheck:TMC|data_out[6]"/>
+            <net is_signal_inverted="no" name="TestModeCheck:TMC|data_out[7]"/>
+            <net is_signal_inverted="no" name="TestModeCheck:TMC|data_out[8]"/>
+            <net is_signal_inverted="no" name="TestModeCheck:TMC|data_out[9]"/>
+            <net is_signal_inverted="no" name="TestModeCheck:TMC|data_out[10]"/>
+            <net is_signal_inverted="no" name="TestModeCheck:TMC|data_out[11]"/>
+            <net is_signal_inverted="no" name="TestModeCheck:TMC|data_out[12]"/>
+            <net is_signal_inverted="no" name="TestModeCheck:TMC|data_out[13]"/>
+            <net is_signal_inverted="no" name="TestModeCheck:TMC|data_out[14]"/>
+            <net is_signal_inverted="no" name="TestModeCheck:TMC|data_out[15]"/>
+          </bus>
+          <net is_signal_inverted="no" name="TestModeCheck:TMC|seq_err"/>
+          <bus is_signal_inverted="no" link="all" name="TestModeCheck:TMC|seq_out_cnt" order="lsb_to_msb" radix="hex" state="collapse" type="register">
+            <net is_signal_inverted="no" name="TestModeCheck:TMC|seq_out_cnt[0]"/>
+            <net is_signal_inverted="no" name="TestModeCheck:TMC|seq_out_cnt[1]"/>
+            <net is_signal_inverted="no" name="TestModeCheck:TMC|seq_out_cnt[2]"/>
+            <net is_signal_inverted="no" name="TestModeCheck:TMC|seq_out_cnt[3]"/>
+            <net is_signal_inverted="no" name="TestModeCheck:TMC|seq_out_cnt[4]"/>
+            <net is_signal_inverted="no" name="TestModeCheck:TMC|seq_out_cnt[5]"/>
+            <net is_signal_inverted="no" name="TestModeCheck:TMC|seq_out_cnt[6]"/>
+            <net is_signal_inverted="no" name="TestModeCheck:TMC|seq_out_cnt[7]"/>
+            <net is_signal_inverted="no" name="TestModeCheck:TMC|seq_out_cnt[8]"/>
+          </bus>
+          <bus is_signal_inverted="no" link="all" name="TestModeCheck:TMC|ocnt" order="lsb_to_msb" radix="hex" state="collapse" type="register">
+            <net is_signal_inverted="no" name="TestModeCheck:TMC|ocnt[0]"/>
+            <net is_signal_inverted="no" name="TestModeCheck:TMC|ocnt[1]"/>
+            <net is_signal_inverted="no" name="TestModeCheck:TMC|ocnt[2]"/>
+            <net is_signal_inverted="no" name="TestModeCheck:TMC|ocnt[3]"/>
+            <net is_signal_inverted="no" name="TestModeCheck:TMC|ocnt[4]"/>
+            <net is_signal_inverted="no" name="TestModeCheck:TMC|ocnt[5]"/>
+            <net is_signal_inverted="no" name="TestModeCheck:TMC|ocnt[6]"/>
+            <net is_signal_inverted="no" name="TestModeCheck:TMC|ocnt[7]"/>
+            <net is_signal_inverted="no" name="TestModeCheck:TMC|ocnt[8]"/>
+            <net is_signal_inverted="no" name="TestModeCheck:TMC|ocnt[9]"/>
+            <net is_signal_inverted="no" name="TestModeCheck:TMC|ocnt[10]"/>
+            <net is_signal_inverted="no" name="TestModeCheck:TMC|ocnt[11]"/>
+            <net is_signal_inverted="no" name="TestModeCheck:TMC|ocnt[12]"/>
+          </bus>
+          <bus is_signal_inverted="no" link="all" name="TestModeCheck:TMC|sync_state" order="lsb_to_msb" radix="hex" state="collapse" type="combinatorial">
+            <net is_signal_inverted="no" name="TestModeCheck:TMC|sync_state[0]"/>
+            <net is_signal_inverted="no" name="TestModeCheck:TMC|sync_state[1]"/>
+            <net is_signal_inverted="no" name="TestModeCheck:TMC|sync_state[2]"/>
+          </bus>
+          <net is_signal_inverted="no" name="TestModeCheck:TMC|tmc_err"/>
+          <net is_signal_inverted="no" name="TestModeCheck:TMC|tmc_state.TMC_IDLE"/>
+          <net is_signal_inverted="no" name="TestModeCheck:TMC|tmc_state.TMC_12_CHK"/>
+          <net is_signal_inverted="no" name="TestModeCheck:TMC|tmc_state.TMC_34_CHK"/>
+          <net is_signal_inverted="no" name="TestModeCheck:TMC|tmc_state.TMC_CNT"/>
+          <net is_signal_inverted="no" name="TestModeCheck:TMC|tmc_state.TMC_GO"/>
+          <bus is_signal_inverted="no" link="all" name="TestModeCheck:TMC|used" order="lsb_to_msb" radix="hex" state="collapse" type="combinatorial">
+            <net is_signal_inverted="no" name="TestModeCheck:TMC|used[0]"/>
+            <net is_signal_inverted="no" name="TestModeCheck:TMC|used[1]"/>
+            <net is_signal_inverted="no" name="TestModeCheck:TMC|used[2]"/>
+            <net is_signal_inverted="no" name="TestModeCheck:TMC|used[3]"/>
+            <net is_signal_inverted="no" name="TestModeCheck:TMC|used[4]"/>
+            <net is_signal_inverted="no" name="TestModeCheck:TMC|used[5]"/>
+            <net is_signal_inverted="no" name="TestModeCheck:TMC|used[6]"/>
+            <net is_signal_inverted="no" name="TestModeCheck:TMC|used[7]"/>
+            <net is_signal_inverted="no" name="TestModeCheck:TMC|used[8]"/>
+            <net is_signal_inverted="no" name="TestModeCheck:TMC|used[9]"/>
+            <net is_signal_inverted="no" name="TestModeCheck:TMC|used[10]"/>
+            <net is_signal_inverted="no" name="TestModeCheck:TMC|used[11]"/>
+            <net is_signal_inverted="no" name="TestModeCheck:TMC|used[12]"/>
+          </bus>
+          <net is_signal_inverted="no" name="TestModeCheck:TMC|C23"/>
+          <bus is_signal_inverted="no" link="all" name="TestModeCheck:TMC|c23_cnt" order="lsb_to_msb" radix="hex" state="collapse" type="register">
+            <net is_signal_inverted="no" name="TestModeCheck:TMC|c23_cnt[0]"/>
+            <net is_signal_inverted="no" name="TestModeCheck:TMC|c23_cnt[1]"/>
+            <net is_signal_inverted="no" name="TestModeCheck:TMC|c23_cnt[2]"/>
+            <net is_signal_inverted="no" name="TestModeCheck:TMC|c23_cnt[3]"/>
+            <net is_signal_inverted="no" name="TestModeCheck:TMC|c23_cnt[4]"/>
+            <net is_signal_inverted="no" name="TestModeCheck:TMC|c23_cnt[5]"/>
+            <net is_signal_inverted="no" name="TestModeCheck:TMC|c23_cnt[6]"/>
+            <net is_signal_inverted="no" name="TestModeCheck:TMC|c23_cnt[7]"/>
+            <net is_signal_inverted="no" name="TestModeCheck:TMC|c23_cnt[8]"/>
+            <net is_signal_inverted="no" name="TestModeCheck:TMC|c23_cnt[9]"/>
+            <net is_signal_inverted="no" name="TestModeCheck:TMC|c23_cnt[10]"/>
+            <net is_signal_inverted="no" name="TestModeCheck:TMC|c23_cnt[11]"/>
+            <net is_signal_inverted="no" name="TestModeCheck:TMC|c23_cnt[12]"/>
+            <net is_signal_inverted="no" name="TestModeCheck:TMC|c23_cnt[13]"/>
+            <net is_signal_inverted="no" name="TestModeCheck:TMC|c23_cnt[14]"/>
+            <net is_signal_inverted="no" name="TestModeCheck:TMC|c23_cnt[15]"/>
+          </bus>
+          <bus is_signal_inverted="no" link="all" name="TestModeCheck:TMC|xrdy_cnt" order="lsb_to_msb" radix="hex" state="collapse" type="register">
+            <net is_signal_inverted="no" name="TestModeCheck:TMC|xrdy_cnt[0]"/>
+            <net is_signal_inverted="no" name="TestModeCheck:TMC|xrdy_cnt[1]"/>
+            <net is_signal_inverted="no" name="TestModeCheck:TMC|xrdy_cnt[2]"/>
+            <net is_signal_inverted="no" name="TestModeCheck:TMC|xrdy_cnt[3]"/>
+            <net is_signal_inverted="no" name="TestModeCheck:TMC|xrdy_cnt[4]"/>
+            <net is_signal_inverted="no" name="TestModeCheck:TMC|xrdy_cnt[5]"/>
+            <net is_signal_inverted="no" name="TestModeCheck:TMC|xrdy_cnt[6]"/>
+            <net is_signal_inverted="no" name="TestModeCheck:TMC|xrdy_cnt[7]"/>
+            <net is_signal_inverted="no" name="TestModeCheck:TMC|xrdy_cnt[8]"/>
+            <net is_signal_inverted="no" name="TestModeCheck:TMC|xrdy_cnt[9]"/>
+            <net is_signal_inverted="no" name="TestModeCheck:TMC|xrdy_cnt[10]"/>
+            <net is_signal_inverted="no" name="TestModeCheck:TMC|xrdy_cnt[11]"/>
+            <net is_signal_inverted="no" name="TestModeCheck:TMC|xrdy_cnt[12]"/>
+            <net is_signal_inverted="no" name="TestModeCheck:TMC|xrdy_cnt[13]"/>
+            <net is_signal_inverted="no" name="TestModeCheck:TMC|xrdy_cnt[14]"/>
+            <net is_signal_inverted="no" name="TestModeCheck:TMC|xrdy_cnt[15]"/>
+          </bus>
+          <net is_signal_inverted="no" name="TestModeCheck:TMC|xrdy"/>
+          <net is_signal_inverted="no" name="IF_get_samples"/>
+        </data_view>
+        <setup_view>
+          <bus is_signal_inverted="no" link="all" name="TestModeCheck:TMC|data_in" order="lsb_to_msb" radix="hex" state="collapse" type="combinatorial">
+            <net is_signal_inverted="no" name="TestModeCheck:TMC|data_in[0]"/>
+            <net is_signal_inverted="no" name="TestModeCheck:TMC|data_in[1]"/>
+            <net is_signal_inverted="no" name="TestModeCheck:TMC|data_in[2]"/>
+            <net is_signal_inverted="no" name="TestModeCheck:TMC|data_in[3]"/>
+            <net is_signal_inverted="no" name="TestModeCheck:TMC|data_in[4]"/>
+            <net is_signal_inverted="no" name="TestModeCheck:TMC|data_in[5]"/>
+            <net is_signal_inverted="no" name="TestModeCheck:TMC|data_in[6]"/>
+            <net is_signal_inverted="no" name="TestModeCheck:TMC|data_in[7]"/>
+            <net is_signal_inverted="no" name="TestModeCheck:TMC|data_in[8]"/>
+            <net is_signal_inverted="no" name="TestModeCheck:TMC|data_in[9]"/>
+            <net is_signal_inverted="no" name="TestModeCheck:TMC|data_in[10]"/>
+            <net is_signal_inverted="no" name="TestModeCheck:TMC|data_in[11]"/>
+            <net is_signal_inverted="no" name="TestModeCheck:TMC|data_in[12]"/>
+            <net is_signal_inverted="no" name="TestModeCheck:TMC|data_in[13]"/>
+            <net is_signal_inverted="no" name="TestModeCheck:TMC|data_in[14]"/>
+            <net is_signal_inverted="no" name="TestModeCheck:TMC|data_in[15]"/>
+          </bus>
+          <bus is_signal_inverted="no" link="all" name="TestModeCheck:TMC|data_out" order="lsb_to_msb" radix="hex" state="collapse" type="combinatorial">
+            <net is_signal_inverted="no" name="TestModeCheck:TMC|data_out[0]"/>
+            <net is_signal_inverted="no" name="TestModeCheck:TMC|data_out[1]"/>
+            <net is_signal_inverted="no" name="TestModeCheck:TMC|data_out[2]"/>
+            <net is_signal_inverted="no" name="TestModeCheck:TMC|data_out[3]"/>
+            <net is_signal_inverted="no" name="TestModeCheck:TMC|data_out[4]"/>
+            <net is_signal_inverted="no" name="TestModeCheck:TMC|data_out[5]"/>
+            <net is_signal_inverted="no" name="TestModeCheck:TMC|data_out[6]"/>
+            <net is_signal_inverted="no" name="TestModeCheck:TMC|data_out[7]"/>
+            <net is_signal_inverted="no" name="TestModeCheck:TMC|data_out[8]"/>
+            <net is_signal_inverted="no" name="TestModeCheck:TMC|data_out[9]"/>
+            <net is_signal_inverted="no" name="TestModeCheck:TMC|data_out[10]"/>
+            <net is_signal_inverted="no" name="TestModeCheck:TMC|data_out[11]"/>
+            <net is_signal_inverted="no" name="TestModeCheck:TMC|data_out[12]"/>
+            <net is_signal_inverted="no" name="TestModeCheck:TMC|data_out[13]"/>
+            <net is_signal_inverted="no" name="TestModeCheck:TMC|data_out[14]"/>
+            <net is_signal_inverted="no" name="TestModeCheck:TMC|data_out[15]"/>
+          </bus>
+          <bus is_signal_inverted="no" link="all" name="TestModeCheck:TMC|ocnt" order="lsb_to_msb" radix="hex" state="collapse" type="register">
+            <net is_signal_inverted="no" name="TestModeCheck:TMC|ocnt[0]"/>
+            <net is_signal_inverted="no" name="TestModeCheck:TMC|ocnt[1]"/>
+            <net is_signal_inverted="no" name="TestModeCheck:TMC|ocnt[2]"/>
+            <net is_signal_inverted="no" name="TestModeCheck:TMC|ocnt[3]"/>
+            <net is_signal_inverted="no" name="TestModeCheck:TMC|ocnt[4]"/>
+            <net is_signal_inverted="no" name="TestModeCheck:TMC|ocnt[5]"/>
+            <net is_signal_inverted="no" name="TestModeCheck:TMC|ocnt[6]"/>
+            <net is_signal_inverted="no" name="TestModeCheck:TMC|ocnt[7]"/>
+            <net is_signal_inverted="no" name="TestModeCheck:TMC|ocnt[8]"/>
+            <net is_signal_inverted="no" name="TestModeCheck:TMC|ocnt[9]"/>
+            <net is_signal_inverted="no" name="TestModeCheck:TMC|ocnt[10]"/>
+            <net is_signal_inverted="no" name="TestModeCheck:TMC|ocnt[11]"/>
+            <net is_signal_inverted="no" name="TestModeCheck:TMC|ocnt[12]"/>
+          </bus>
+          <net is_signal_inverted="no" name="TestModeCheck:TMC|rdreq"/>
+          <net is_signal_inverted="no" name="TestModeCheck:TMC|rdreq_dly"/>
+          <net is_signal_inverted="no" name="TestModeCheck:TMC|rst"/>
+          <net is_signal_inverted="no" name="TestModeCheck:TMC|seq_err"/>
+          <bus is_signal_inverted="no" link="all" name="TestModeCheck:TMC|seq_in_cnt" order="lsb_to_msb" radix="hex" state="collapse" type="register">
+            <net is_signal_inverted="no" name="TestModeCheck:TMC|seq_in_cnt[0]"/>
+            <net is_signal_inverted="no" name="TestModeCheck:TMC|seq_in_cnt[1]"/>
+            <net is_signal_inverted="no" name="TestModeCheck:TMC|seq_in_cnt[2]"/>
+            <net is_signal_inverted="no" name="TestModeCheck:TMC|seq_in_cnt[3]"/>
+            <net is_signal_inverted="no" name="TestModeCheck:TMC|seq_in_cnt[4]"/>
+            <net is_signal_inverted="no" name="TestModeCheck:TMC|seq_in_cnt[5]"/>
+            <net is_signal_inverted="no" name="TestModeCheck:TMC|seq_in_cnt[6]"/>
+            <net is_signal_inverted="no" name="TestModeCheck:TMC|seq_in_cnt[7]"/>
+            <net is_signal_inverted="no" name="TestModeCheck:TMC|seq_in_cnt[8]"/>
+          </bus>
+          <bus is_signal_inverted="no" link="all" name="TestModeCheck:TMC|seq_out_cnt" order="lsb_to_msb" radix="hex" state="collapse" type="register">
+            <net is_signal_inverted="no" name="TestModeCheck:TMC|seq_out_cnt[0]"/>
+            <net is_signal_inverted="no" name="TestModeCheck:TMC|seq_out_cnt[1]"/>
+            <net is_signal_inverted="no" name="TestModeCheck:TMC|seq_out_cnt[2]"/>
+            <net is_signal_inverted="no" name="TestModeCheck:TMC|seq_out_cnt[3]"/>
+            <net is_signal_inverted="no" name="TestModeCheck:TMC|seq_out_cnt[4]"/>
+            <net is_signal_inverted="no" name="TestModeCheck:TMC|seq_out_cnt[5]"/>
+            <net is_signal_inverted="no" name="TestModeCheck:TMC|seq_out_cnt[6]"/>
+            <net is_signal_inverted="no" name="TestModeCheck:TMC|seq_out_cnt[7]"/>
+            <net is_signal_inverted="no" name="TestModeCheck:TMC|seq_out_cnt[8]"/>
+          </bus>
+          <bus is_signal_inverted="no" link="all" name="TestModeCheck:TMC|sync_state" order="lsb_to_msb" radix="hex" state="collapse" type="combinatorial">
+            <net is_signal_inverted="no" name="TestModeCheck:TMC|sync_state[0]"/>
+            <net is_signal_inverted="no" name="TestModeCheck:TMC|sync_state[1]"/>
+            <net is_signal_inverted="no" name="TestModeCheck:TMC|sync_state[2]"/>
+          </bus>
+          <net is_signal_inverted="no" name="TestModeCheck:TMC|tmc_err"/>
+          <net is_signal_inverted="no" name="TestModeCheck:TMC|tmc_state.TMC_IDLE"/>
+          <net is_signal_inverted="no" name="TestModeCheck:TMC|tmc_state.TMC_12_CHK"/>
+          <net is_signal_inverted="no" name="TestModeCheck:TMC|tmc_state.TMC_34_CHK"/>
+          <net is_signal_inverted="no" name="TestModeCheck:TMC|tmc_state.TMC_CNT"/>
+          <net is_signal_inverted="no" name="TestModeCheck:TMC|tmc_state.TMC_GO"/>
+          <bus is_signal_inverted="no" link="all" name="TestModeCheck:TMC|used" order="lsb_to_msb" radix="hex" state="collapse" type="combinatorial">
+            <net is_signal_inverted="no" name="TestModeCheck:TMC|used[0]"/>
+            <net is_signal_inverted="no" name="TestModeCheck:TMC|used[1]"/>
+            <net is_signal_inverted="no" name="TestModeCheck:TMC|used[2]"/>
+            <net is_signal_inverted="no" name="TestModeCheck:TMC|used[3]"/>
+            <net is_signal_inverted="no" name="TestModeCheck:TMC|used[4]"/>
+            <net is_signal_inverted="no" name="TestModeCheck:TMC|used[5]"/>
+            <net is_signal_inverted="no" name="TestModeCheck:TMC|used[6]"/>
+            <net is_signal_inverted="no" name="TestModeCheck:TMC|used[7]"/>
+            <net is_signal_inverted="no" name="TestModeCheck:TMC|used[8]"/>
+            <net is_signal_inverted="no" name="TestModeCheck:TMC|used[9]"/>
+            <net is_signal_inverted="no" name="TestModeCheck:TMC|used[10]"/>
+            <net is_signal_inverted="no" name="TestModeCheck:TMC|used[11]"/>
+            <net is_signal_inverted="no" name="TestModeCheck:TMC|used[12]"/>
+          </bus>
+          <net is_signal_inverted="no" name="TestModeCheck:TMC|wrreq"/>
+          <net is_signal_inverted="no" name="TestModeCheck:TMC|C23"/>
+          <bus is_signal_inverted="no" link="all" name="TestModeCheck:TMC|c23_cnt" order="lsb_to_msb" radix="hex" state="collapse" type="register">
+            <net is_signal_inverted="no" name="TestModeCheck:TMC|c23_cnt[0]"/>
+            <net is_signal_inverted="no" name="TestModeCheck:TMC|c23_cnt[1]"/>
+            <net is_signal_inverted="no" name="TestModeCheck:TMC|c23_cnt[2]"/>
+            <net is_signal_inverted="no" name="TestModeCheck:TMC|c23_cnt[3]"/>
+            <net is_signal_inverted="no" name="TestModeCheck:TMC|c23_cnt[4]"/>
+            <net is_signal_inverted="no" name="TestModeCheck:TMC|c23_cnt[5]"/>
+            <net is_signal_inverted="no" name="TestModeCheck:TMC|c23_cnt[6]"/>
+            <net is_signal_inverted="no" name="TestModeCheck:TMC|c23_cnt[7]"/>
+            <net is_signal_inverted="no" name="TestModeCheck:TMC|c23_cnt[8]"/>
+            <net is_signal_inverted="no" name="TestModeCheck:TMC|c23_cnt[9]"/>
+            <net is_signal_inverted="no" name="TestModeCheck:TMC|c23_cnt[10]"/>
+            <net is_signal_inverted="no" name="TestModeCheck:TMC|c23_cnt[11]"/>
+            <net is_signal_inverted="no" name="TestModeCheck:TMC|c23_cnt[12]"/>
+            <net is_signal_inverted="no" name="TestModeCheck:TMC|c23_cnt[13]"/>
+            <net is_signal_inverted="no" name="TestModeCheck:TMC|c23_cnt[14]"/>
+            <net is_signal_inverted="no" name="TestModeCheck:TMC|c23_cnt[15]"/>
+          </bus>
+          <bus is_signal_inverted="no" link="all" name="TestModeCheck:TMC|xrdy_cnt" order="lsb_to_msb" radix="hex" state="collapse" type="register">
+            <net is_signal_inverted="no" name="TestModeCheck:TMC|xrdy_cnt[0]"/>
+            <net is_signal_inverted="no" name="TestModeCheck:TMC|xrdy_cnt[1]"/>
+            <net is_signal_inverted="no" name="TestModeCheck:TMC|xrdy_cnt[2]"/>
+            <net is_signal_inverted="no" name="TestModeCheck:TMC|xrdy_cnt[3]"/>
+            <net is_signal_inverted="no" name="TestModeCheck:TMC|xrdy_cnt[4]"/>
+            <net is_signal_inverted="no" name="TestModeCheck:TMC|xrdy_cnt[5]"/>
+            <net is_signal_inverted="no" name="TestModeCheck:TMC|xrdy_cnt[6]"/>
+            <net is_signal_inverted="no" name="TestModeCheck:TMC|xrdy_cnt[7]"/>
+            <net is_signal_inverted="no" name="TestModeCheck:TMC|xrdy_cnt[8]"/>
+            <net is_signal_inverted="no" name="TestModeCheck:TMC|xrdy_cnt[9]"/>
+            <net is_signal_inverted="no" name="TestModeCheck:TMC|xrdy_cnt[10]"/>
+            <net is_signal_inverted="no" name="TestModeCheck:TMC|xrdy_cnt[11]"/>
+            <net is_signal_inverted="no" name="TestModeCheck:TMC|xrdy_cnt[12]"/>
+            <net is_signal_inverted="no" name="TestModeCheck:TMC|xrdy_cnt[13]"/>
+            <net is_signal_inverted="no" name="TestModeCheck:TMC|xrdy_cnt[14]"/>
+            <net is_signal_inverted="no" name="TestModeCheck:TMC|xrdy_cnt[15]"/>
+          </bus>
+          <net is_signal_inverted="no" name="TestModeCheck:TMC|xrdy"/>
+          <net is_signal_inverted="no" name="IF_get_samples"/>
+        </setup_view>
+      </presentation>
+      <trigger CRC="94F5634A" attribute_mem_mode="false" gap_record="true" global_temp="1" is_expanded="true" name="trigger: 2009/07/30 17:56:40  #0" position="center" power_up_trigger_mode="false" record_data_gap="true" segment_size="1" storage_mode="off" storage_qualifier_disabled="no" storage_qualifier_port_is_pin="false" storage_qualifier_port_name="auto_stp_external_storage_qualifier" storage_qualifier_port_tap_mode="classic" trigger_in="dont_care" trigger_out="active high" trigger_type="circular">
+        <power_up_trigger position="pre" storage_qualifier_disabled="no" trigger_in="dont_care" trigger_out="active high"/>
+        <events use_custom_flow_control="no">
+          <level enabled="yes" name="condition1" type="basic">'TestModeCheck:TMC|C23' == rising edge
+            
+            <power_up enabled="yes">
+            </power_up>
+            <op_node/>
+          </level>
+        </events>
+        <storage_qualifier_events>
+          <transitional>00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+            
+            <pwr_up_transitional>00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+            
+            </pwr_up_transitional>
+          </transitional>
+          <storage_qualifier_level type="basic">
+            <power_up>
+            </power_up>
+            <op_node/>
+          </storage_qualifier_level>
+          <storage_qualifier_level type="basic">
+            <power_up>
+            </power_up>
+            <op_node/>
+          </storage_qualifier_level>
+          <storage_qualifier_level type="basic">
+            <power_up>
+            </power_up>
+            <op_node/>
+          </storage_qualifier_level>
+        </storage_qualifier_events>
+        <log>
+          <data global_temp="1" name="log: 2009/07/30 18:09:11  #0" power_up_mode="false" sample_depth="128" trigger_position="64">0010000001100101110000000011110100000000000000010000000000000000000101111010100000010101000010010001001000100100000011110011100000000000101011100000000111101000000000000000100000000000000000001011110101000000101010000100100010010001000000000000010111001000000001010111000000001111010000000000000001000000000000000000010111101010000001010100001001000100100010010000000000101110000000001010101110000000011110100000000000000010000000000000000000101111010100000010101000010010001001000100000000010001011100100000010101011100000000111101000000000000000100000000000000000001011110101000000101010000100100010010001001000000100010111000000000011010111000000001111010000000000000001000000000000000000010111101010000001010100001001000100100010000000000100101110010000000110101110000000011110100000000000000010000000000000000000101111010100000010101000010010001001000100100000001001011100000000011101011100000000111101000000000000000100000000000000000001011110101000000101010000100100010010001000000000110010111001000000111010111000000001111010000000000000001000000000000000000010111101010000001010100001001000100100010010000001100101110000000000001101110000000011110100000000000000010000000000000000000101111010100000010101000010010001001000100000000000101011100100000000011011100000000111101000000000000000100000000000000000001011110101000000101010000100100010010001001000000001010111000000000100110111000000001111010000000000000001000000000000000000010111101010000001010100001001000100100010000000001010101110010000001001101110000000011110100000000000000010000000000000000000101111010100000010101000010010001001000100100000010101011100000000001011011100000000111101000000000000000100000000000000000001011110101000000101010000100100010010001000000000011010111001000000010110111000000001111010000000000000001000000000000000000010111101010000001010100001001000100100010010000000110101110000000001101101110000000011110100000000000000010000000000000000000101111010100000010101000010010001001000100000000011101011100100000011011011100000000111101000000000000000100000000000000000001011110101000000101010000100100010010001001000000111010111000000000001110111000000001111010000000000000001000000000000000000010111101010000001010100001001000100100010000000000001101110010000000011101110000000011110100000000000000010000000000000000000101111010100000010101000010010001001000100100000000011011100000000010111011100000000111101000000000000000100000000000000000001011110101000000101010000100100010010001000000000100110111001000000101110111000000001111010000000000000001000000000000000000010111101010000001010100001001000100100010010000001001101110000000000111101110000000011110100000000000000010000000000000000000101111010100000010101000010010001001000100000000001011011100100000001111011100000000111101000000000000000100000000000000000001011110101000000101010000100100010010001001000000010110111000000000111110111000000001111010000000000000001000000000000000000010111101010000001010100001001000100100010000000001101101110010000001111101110000000011110100000000000000010000000000000000000101111010100000010101000010010001001000100100000011011011100000000000000111100000000111101000000000000000100000000000000000001011110101000000101010000100100010010001000000000001110111001000000000001111000000001111010000000000000001000000000000000000010111101010000001010100001001000100100010010000000011101110000000001000011110000000011110100000000000000010000000000000000000101111010100000010101000010010001001000100000000010111011100100000010000111100000000111101000000000000000100000000000000000001011110101000000101010000100100010010001001000000101110111000000000010001111000000001111010000000000000001000000000000000000010111101010000001010100001001000100100010000000000111101110010000000100011110000000011110100000000000000010000000000000000000101111010100000010101000010010001001000100100000001111011100000000011000111100000000111101000000000000000100000000000000000001011110101000000101010000100100010010001000000000111110111001000000110001111000000001111010000000000000001000000000000000000010111101010000001010100001001000100100010010000001111101110000000000010011110000000011110100000000000000010000000000000000000101111010100000010101000010010001001000100000000000000111100100000000100111100000000111101000000000000000100000000000000000001011110101000000101010000100100010010001001000000000001111000000000101001111000000001111010000000000000001000000000000000000010111101010000001010100001001000100100010000000001000011110010000001010011110000000011110100000000000000010000000000000000000101111010100000010101000010010001001000100100000010000111100000000001100111100000000111101000000000000000100000000000000000001011110101000000101010000100100010010001000000000010001111001000000011001111000000001111010000000000000001000000000000000000010111101010000001010100001001000100100010010000000100011110000000001110011110000000011110100000000000000010000000000000000000101111010100000010101000010010001001000100000000011000111100100000011100111100000000111101000000000000000100000000000000000001011110101000000101010000100100010010001001000000110001111000000000000101111000000001111010000000000000001000000000000000000010111101010000001010100001001000100100010000000000010011110010000000001011110000000011110100000000000000010000000000000000000101111010100000010101000010010001001000100100000000100111100000000010010111100000000111101000000000000000100000000000000000001011110101000000101010000100100010010001000000000101001111001000000100101111000000001111010000000000000001000000000000000000010111101010000001010100001001000100100010010000001010011110000000000101011110000000011110100000000000000010000000000000000000101111010100000010101000010010001001000100000000001100111100100000001010111100000000111101000000000000000100000000000000000001011110101000000101010000100100010010001001000000011001111000000000110101111000000001111010000000000000001000000000000000000010111101010000001010100001001000100100010000000001110011110010000001101011110000000011110100000000000000010000000000000000000101111010100000010101000010010001001000100100000011100111100000000000110111100000000111101000000000000000100000000000000000001011110101000000101010000100100010010001000000000000101111001000000001101111000000001111010000000000000001000000000000000000010111101010000001010100001001000100100010010000000001011110000000001011011110000000011110100000000000000010000000000000000000101111010100000010101000010010001001000100000000010010111100100000010110111100000000111101000000000000000100000000000000000001011110101000000101010000100100010010001001000000100101111000000000011101111000000001111010000000000000001000000000000000000010111101010000001010100001001000100100010000000000101011110010000000111011110000000011110100000000000000010000000000000000000101111010100000010101000010010001001000100100000001010111100000000011110111100000000111101000000000000000100000000000000000001011110101000000101010000100100010010001000000000110101111001000000111101111000000001111010000000000000001000000000000000000010111101010000001010100001001000100100010010000001101011110000000000000111110000000011110100000000000000010000000000000000000101111010100000010101000010010001001000100000000000110111100100000000001111100000000111101000000000000000100000000000000000001011110101000000101010000100100010010001001000000001101111000000000100011111000000001111010000000000000001000000000000000000010111101010000001010100001001000100100010000000001011011110010000001000111110000000011110100000000000000010000000000000000000101111010100000010101000010010001001000100100000010110111100000000001001111100000000111101000000000000000100000000000000000001011110101000000101010000100100010010001000000000011101111001000000010011111000000001111010000000000000001000000000000000000010111101010000001010100001001000100100010010000000111011110000000001100111110000000011110100000000000000010000000000000000000101111010100000010101000010010001001000100000000011110111111100000011001111100000000111101000000000000000100000000000000000001011110101000000101010000100100010010001001000000111101111010000000000000000000000001111010000000000000001000000000000000100010111101010000001010100001001000100100010000000000000111110110000000000000000000000011110100100000000000010000000000000001100101111010100000010101000010110010001000100100000000001111101000000010000000000000000111101000000000100000100000000000000011001011110100100000101010000100100100010001000000000100011111011000000100000000000000001111010010000001000001000000000000000110010111101011000001010100001011000000100010010000001000111110100000000100000000000000011110100000000001000010000000000000000100101111010001000010101000010010000001000100000000001001111101100000001000000000000000111101000000000010000100000000000000000001011110101010000101010000100100000010001001000000010011111010000000110000000000000001111010000000000100001000000000000000000010111101010100001010100001001000000100010000000001100111110110000001100000000000000011110100000000001000010000000000000000000101111010101000010101000010010000001000101100000011001111101000000000100000000000000111101000000000010000100000000000000000001011110101010000101010000100100000010001010000000000000000011000000001000000000000001111010000000000100001000000000000000000010111101010100001010100001001000000100010110000000000000000100000001010000000000000011110100000000001000010000000000000000000101111010101000010101000010010000001000101000000010000000001100000010100000000000000111101000000000010000100000000000000000001011110101010000101010000100100000010001011000000100000000010000000011000000000000001111010000000000100001000000000000000000010111101010100001010100001001000000100010000000000100000000110000000110000000000000011110100000000001000010000000000000000000101111010101000010101000010010000001000100100000001000000001000000011100000000000000111101000000000010000100000000000000000001011110101010000101010000100100000010001000000000110000000011000000111000000000000001111010000000000100001000000000000000000010111101010100001010100001001000000100010010000001100000000100000000001000000000000011110100000000001000010000000000000000000101111010101000010101000010010000001000100000000000100000001100000000010000000000000111101000000000010000100000000000000000001011110101010000101010000100100000010001001000000001000000010000000100100000000000001111010000000000100001000000000000000000010111101010100001010100001001000000100010000000001010000000110000001001000000000000011110100000000001000010000000000000000000101111010101000010101000010010000001000100100000010100000001000000001010000000000000111101000000000010000100000000000000000001011110101010000101010000100100000010001000000000011000000011000000010100000000000001111010000000000100001000000000000000000010111101010100001010100001001000000100010010000000110000000100000001101000000000000011110100000000001000010000000000000000000101111010101000010101000010010000001000100000000011100000001100000011010000000000000111101000000000010000100000000000000000001011110101010000101010000100100000010001001000000111000000010000000001100000000000001111010000000000100001000000000000000000010111101010100001010100001001000000100010000000000001000000110000000011000000000000011110100000000001000010000000000000000000101111010101000010101000010010000001000100100000000010000001000000010110000000000000111101000000000010000100000000000000000001011110101010000101010000100100000010001000000000100100000011000000101100000000000001111010000000000100001000000000000000000010111101010100001010100001001000000100010010000001001000000100000000111000000000000011110100000000001000010000000000000000000101111010101000010101000010010000001000100000000001010000001100000001110000000000000111101000000000010000100000000000000000001011110101010000101010000100100000010001001000000010100000010000000111100000000000001111010000000000100001000000000000000000010111101010100001010100001001000000100010000000001101000000110000001111000000000000011110100000000001000010000000000000000000101111010101000010101000010010000001000100100000011010000001000000000001000000000000111101000000000010000100000000000000000001011110101010000101010000100100000010001000000000001100000011000000000010000000000001111010000000000100001000000000000000000010111101010100001010100001001000000100010010000000011000000100000001000100000000000011110100000000001000010000000000000000000101111010101000010101000010010000001000100000000010110000001100000010001000000000000111101000000000010000100000000000000000001011110101010000101010000100100000010001001000000101100000010000000010010000000000001111010000000000100001000000000000000000010111101010100001010100001001000000100010000000000111000000110000000100100000000000011110100000000001000010000000000000000000101111010101000010101000010010000001000100100000001110000001000000011001000000000000111101000000000010000100000000000000000001011110101010000101010000100100000010001000000000111100000011000000110010000000000001111010000000000100001000000000000000000010111101010100001010100001001000000100010010000001111000000100000000010100000000000011110100000000001000010000000000000000000101111010101000010101000010010000001000100000000000001000001100000000101000000000000111101000000000010000100000000000000000001011110101010000101010000100100000010001001000000000010000010000000101010000000000001111010000000000100001000000000000000000010111101010100001010100001001000000100010000000001000100000110000001010100000000000011110100000000001000010000000000000000000101111010101000010101000010010000001000100100000010001000001000000001101000000000000111101000000000010000100000000000000000001011110101010000101010000100100000010001000000000010010000011000000011010000000000001111010000000000100001000000000000000000010111101010100001010100001001000000100010010000000100100000100000001110100000000000011110100000000001000010000000000000000000101111010101000010101000010010000001000100000000011001000001100000011101000000000000111101000000000010000100000000000000000001011110101010000101010000100100000010001001000000110010000010000000000110000000000001111010000000000100001000000000000000000010111101010100001010100001001000000100010000000000010100000110000000001100000000000011110100000000001000010000000000000000000101111010101000010101000010010000001000100100000000101000001000000010011000000000000111101000000000010000100000000000000000001011110101010000101010000100100000010001000000000101010000011000000100110000000000001111010000000000100001000000000000000000010111101010100001010100001001000000100010010000001010100000100000000101100000000000011110100000000001000010000000000000000000101111010101000010101000010010000001000100000000001101000001100000001011000000000000111101000000000010000100000000000000000001011110101010000101010000100100000010001001000000011010000010000000110110000000000001111010000000000100001000000000000000000010111101010100001010100001001000000100010000000001110100000110000001101100000000000011110100000000001000010000000000000000000101111010101000010101000010010000001000100100000011101000001000000000111000000000000111101000000000010000100000000000000000001011110101010000101010000100100000010001000000000000110000011000000001110000000000001111010000000000100001000000000000000000010111101010100001010100001001000000100010010000000001100000100000001011100000000000011110100000000001000010000000000000000000101111010101000010101000010010000001000100000000010011000001100000010111000000000000111101000000000010000100000000000000000001011110101010000101010000100100000010001001000000100110000010000000011110000000000001111010000000000100001000000000000000000010111101010100001010100001001000000100010000000000101100000110000000111100000000000011110100000000001000010000000000000000000101111010101000010101000010010000001000100100000001011000001000000011111000000000000111101000000000010000100000000000000000001011110101010000101010000100100000010001000000000110110000</data>
+          <extradata>1111111111111111111111111111111111111111111111111111111111111111T111111111111111111111111111111111111111111111111111111111111111</extradata>
+        </log>
+      </trigger>
+    </signal_set>
+    <position_info>
+      <single attribute="active tab" value="0"/>
+      <single attribute="data horizontal scroll position" value="0"/>
+      <single attribute="data vertical scroll position" value="4"/>
+      <single attribute="setup horizontal scroll position" value="0"/>
+      <single attribute="setup vertical scroll position" value="4"/>
+      <single attribute="zoom level denominator" value="1"/>
+      <single attribute="zoom level numerator" value="1"/>
+      <single attribute="zoom offset denominator" value="1"/>
+      <single attribute="zoom offset numerator" value="130944"/>
+    </position_info>
+  </instance>
+  <mnemonics/>
+  <static_plugin_mnemonics/>
+  <global_info>
+    <single attribute="active instance" value="0"/>
+    <single attribute="lock mode" value="36110"/>
+    <multi attribute="column width" size="23" value="34,34,191,74,68,70,88,88,98,98,88,88,110,101,101,101,101,101,101,101,101,107,78"/>
+    <multi attribute="window position" size="9" value="1221,799,398,124,0,50,124,0,0"/>
+  </global_info>
+</session>
