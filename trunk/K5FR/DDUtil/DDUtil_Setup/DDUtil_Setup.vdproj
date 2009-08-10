@@ -21,6 +21,12 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_44E652F68AC510A794D9D937C795312E"
+        "OwnerKey" = "8:_4ADC83A2FC473AFE161D2B37227A8183"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_463D12FD4293495F83587DB06BA959EB"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -41,6 +47,12 @@
         {
         "MsmKey" = "8:_4835A00C9FC34F6B94A99D126AC26BF5"
         "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_4ADC83A2FC473AFE161D2B37227A8183"
+        "OwnerKey" = "8:_343E83015DF04222B9800260C7967A26"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -75,6 +87,18 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_DBDB6B907BE8DF73FDB83DEE6B76B706"
+        "OwnerKey" = "8:_44E652F68AC510A794D9D937C795312E"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_DBDB6B907BE8DF73FDB83DEE6B76B706"
+        "OwnerKey" = "8:_4ADC83A2FC473AFE161D2B37227A8183"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_E43C872F6B814C54B2AFCD63C78BC8C1"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -89,6 +113,24 @@
         {
         "MsmKey" = "8:_UNDEFINED"
         "OwnerKey" = "8:_47BE9459692FAF18756BB46E7E8CB644"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_4ADC83A2FC473AFE161D2B37227A8183"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_44E652F68AC510A794D9D937C795312E"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_DBDB6B907BE8DF73FDB83DEE6B76B706"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -218,6 +260,37 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_44E652F68AC510A794D9D937C795312E"
+            {
+            "AssemblyRegister" = "3:1"
+            "AssemblyIsInGAC" = "11:FALSE"
+            "AssemblyAsmDisplayName" = "8:CbtHook, Version=1.0.921.20088, Culture=neutral"
+                "ScatterAssemblies"
+                {
+                    "_44E652F68AC510A794D9D937C795312E"
+                    {
+                    "Name" = "8:CbtHook.DLL"
+                    "Attributes" = "3:512"
+                    }
+                }
+            "SourcePath" = "8:CbtHook.DLL"
+            "TargetName" = "8:"
+            "Tag" = "8:"
+            "Folder" = "8:_18E81C9E3C4F4675BCD023B8455469BC"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:TRUE"
+            "IsolateTo" = "8:"
+            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_463D12FD4293495F83587DB06BA959EB"
             {
             "SourcePath" = "8:..\\bin\\Release\\ErrorLog.txt"
@@ -307,6 +380,37 @@
             "Register" = "3:1"
             "Exclude" = "11:FALSE"
             "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_4ADC83A2FC473AFE161D2B37227A8183"
+            {
+            "AssemblyRegister" = "3:1"
+            "AssemblyIsInGAC" = "11:FALSE"
+            "AssemblyAsmDisplayName" = "8:MsgBoxCheck, Version=1.0.3499.11307, Culture=neutral, processorArchitecture=MSIL"
+                "ScatterAssemblies"
+                {
+                    "_4ADC83A2FC473AFE161D2B37227A8183"
+                    {
+                    "Name" = "8:MsgBoxCheck.DLL"
+                    "Attributes" = "3:512"
+                    }
+                }
+            "SourcePath" = "8:MsgBoxCheck.DLL"
+            "TargetName" = "8:"
+            "Tag" = "8:"
+            "Folder" = "8:_18E81C9E3C4F4675BCD023B8455469BC"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_5147E685D9F04FCE9E696502C49BC449"
@@ -420,6 +524,37 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_DBDB6B907BE8DF73FDB83DEE6B76B706"
+            {
+            "AssemblyRegister" = "3:1"
+            "AssemblyIsInGAC" = "11:FALSE"
+            "AssemblyAsmDisplayName" = "8:WindowsHook, Version=1.0.921.18849, Culture=neutral"
+                "ScatterAssemblies"
+                {
+                    "_DBDB6B907BE8DF73FDB83DEE6B76B706"
+                    {
+                    "Name" = "8:WindowsHook.DLL"
+                    "Attributes" = "3:512"
+                    }
+                }
+            "SourcePath" = "8:WindowsHook.DLL"
+            "TargetName" = "8:"
+            "Tag" = "8:"
+            "Folder" = "8:_18E81C9E3C4F4675BCD023B8455469BC"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:TRUE"
+            "IsolateTo" = "8:"
+            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_E43C872F6B814C54B2AFCD63C78BC8C1"
             {
             "SourcePath" = "8:..\\bin\\Release\\ftd2xx.dll"
@@ -507,14 +642,14 @@
         {
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:DDUtil"
-        "ProductCode" = "8:{3D3E0BCE-68A7-40B4-9081-085A814D9B27}"
-        "PackageCode" = "8:{CB4C12EB-9A9B-4720-BCE6-A671912FA052}"
+        "ProductCode" = "8:{D8279FF1-4CB6-4779-8903-8F8EAC5C08C6}"
+        "PackageCode" = "8:{F54ABAC0-79DE-4D7B-AFAF-F2D7C9C77143}"
         "UpgradeCode" = "8:{E787AEB9-A577-499D-A08E-775DE944A651}"
         "RestartWWWService" = "11:FALSE"
         "RemovePreviousVersions" = "11:TRUE"
         "DetectNewerInstalledVersion" = "11:TRUE"
         "InstallAllUsers" = "11:FALSE"
-        "ProductVersion" = "8:1.7.611"
+        "ProductVersion" = "8:1.7.614"
         "Manufacturer" = "8:Default Company Name"
         "ARPHELPTELEPHONE" = "8:"
         "ARPHELPLINK" = "8:"

@@ -54,11 +54,11 @@
   </macro>
   <macro>
     <Button>East</Button>
-    <Command>DDFA03;</Command>
+    <Command>DDFA42;</Command>
   </macro>
   <macro>
     <Button>West</Button>
-    <Command>DDFAC0;</Command>
+    <Command>DDFA81;</Command>
   </macro>
   <macro>
     <Button>Balanced</Button>
