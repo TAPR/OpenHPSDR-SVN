@@ -41,6 +41,7 @@ using System.Xml.XPath;
 using DataDecoder.Properties;
 using Logger;
 using FT_HANDLE = System.UInt32;
+using Microsoft.Win32;              // For RegKey
 
 namespace DataDecoder
 {
@@ -104,7 +105,7 @@ namespace DataDecoder
         string OutBuffer = "";
         string str = "";
         string vfo = "";
-        string band = "";
+        string band = " ";
         public static string ver = Application.ProductVersion;
         public static int errCtr = 0;
         System.Timers.Timer AlphaTimer;
@@ -350,14 +351,6 @@ namespace DataDecoder
             chkAudio.Checked = set.AudioOn;
             if (chkAudio.Checked) { Notification.useAudio = true; }
             else { Notification.useAudio = false; }
-
-            // setup error log parameters
-            ErrorLog.LogFilePath = "ErrorLog.txt";
-            enableErrorLog = set.ErrorLog;
-            if (enableErrorLog)
-                enableErrorLoggingToolStripMenuItem.Checked = true;
-            else
-                enableErrorLoggingToolStripMenuItem.Checked = false;
 
             //setup radio port timer
             pollTimer = new System.Timers.Timer();
@@ -655,6 +648,15 @@ namespace DataDecoder
 
             mSplashScreen.SetProgress("Loading Main Form", 1.0);
             COBC = lastBand;
+
+            // setup error log parameters
+            ErrorLog.LogFilePath = "ErrorLog.txt";
+            enableErrorLog = set.ErrorLog;
+            if (enableErrorLog)
+                enableErrorLoggingToolStripMenuItem.Checked = true;
+            else
+                enableErrorLoggingToolStripMenuItem.Checked = false;
+
         }// Setup
         #endregion Initialization
 
@@ -4487,6 +4489,8 @@ namespace DataDecoder
             { rbFwd.Checked = true; }   // SteppIR to Forward Direction
             else if (e.Control && e.KeyCode == Keys.R)
             { rb180.Checked = true; }   // SteppIR to Reverse Direction
+            else if (e.Control && e.Shift && e.KeyCode == Keys.X)
+            { btnFlexOn_Click(null, null); }   // 
         }
         // Adds macro number text to the row header
         public void dgm_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
@@ -4703,7 +4707,6 @@ namespace DataDecoder
             AcomAnt Asw = new AcomAnt();
             Asw.Show();
         }
-
         // Main Menu|Tools|Enable Error Log
         private void enableErrorLoggingToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -4734,14 +4737,19 @@ namespace DataDecoder
             File.CreateText("ErrorLog.txt");
             ver = Application.ProductVersion;
         }
-
+        // Main Menu|Tools|Reset Don't Ask Me Again (All Forms are Reset)
+        private void resetDontAskMeAgainToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            RegistryKey regKey =
+                Registry.CurrentUser.CreateSubKey(@"Software\DDUtil\MsgBoxCheck\RemoteStart");
+            regKey.SetValue("DontShowAgain", false);
+        }
         // Main Menu|Tools|Show Mini Window
         private void showMiniWindowToolStripMenuItem_Click(object sender, EventArgs e)
         {
             ShowMini();
         }
         // Main Menu|Help|DDUtil Help
-
         private void dDutilHelpToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Process.Start("HelpDecoder.htm");
@@ -4767,7 +4775,6 @@ namespace DataDecoder
         {
             Process.Start("http://k5fr.com/ddutilwiki/index.php");
         }
-
         /********************************************************************/
         // Context Menu|Restore Form Size
         private void toolStripMenuItem1_Click(object sender, EventArgs e)
@@ -4917,6 +4924,24 @@ namespace DataDecoder
                 SetOperStby("STBY"); set.stsOper = false;
             }
             lastBand = "";  // force refresh of drive level.
+        }
+        // the check all button was pressed
+        private void btnCkAll_Click(object sender, EventArgs e)
+        {
+            chkAmp160.Checked = true; chkAmp80.Checked = true;
+            chkAmp40.Checked = true; chkAmp30.Checked = true;
+            chkAmp20.Checked = true; chkAmp17.Checked = true;
+            chkAmp15.Checked = true; chkAmp12.Checked = true;
+            chkAmp10.Checked = true; chkAmp6.Checked = true;
+        }
+        // the clear all button was pressed
+        private void btnClrAll_Click(object sender, EventArgs e)
+        {
+            chkAmp160.Checked = false; chkAmp80.Checked = false;
+            chkAmp40.Checked = false; chkAmp30.Checked = false;
+            chkAmp20.Checked = false; chkAmp17.Checked = false;
+            chkAmp15.Checked = false; chkAmp12.Checked = false;
+            chkAmp10.Checked = false; chkAmp6.Checked = false;
         }
 
         #endregion Oper/Stby
@@ -5310,6 +5335,130 @@ namespace DataDecoder
 
         #endregion Power Master
 
+        #region PSDR PowerOn
+
+        //the flex power button was pressed
+        private void btnFlexOn_Click(object sender, EventArgs e)
+        {
+            MsgBoxCheck.MessageBox dlg = new MsgBoxCheck.MessageBox();
+            DialogResult dr = dlg.Show(@"Software\DDUtil\MsgBoxCheck\RemoteStart", "DontShowAgain", 
+                DialogResult.OK, "Don't ask me this again",
+                "CAUTION! Please understand what you are about to do!\r\r" +
+                "Continuing will either power up the radio if it is off or\r" +
+                "power down the radio if it is on.\r\r" +
+                "Additionally, PowerSDR will be started or stopped depending\r" +
+                "on the state of the radio condition.\r\r" +
+                "See the DDUtil documentation (help menu) for more information.\r\r" +
+                "Press Ok to continue or Cancel to abort this operation",
+                "Warning!", MessageBoxButtons.OKCancel, MessageBoxIcon.Exclamation);
+            if (dr == DialogResult.OK)
+            {
+                PwrPort.RtsEnable = true;
+                Thread.Sleep(500);
+                PwrPort.RtsEnable = false;
+
+                if (temp == 0)
+                    process = Process.Start(txtPSDR.Text);
+                else //see if PSDR is alreagy running
+                {
+                    if (IsPSDRrunning())
+                    {
+                        try
+                        {
+                            process.Kill();
+                            process.WaitForExit();
+                        }
+                        catch
+                        {
+                            MessageBox.Show(
+                            "Aborting Auto Shutdown Sequence!\r\r" +
+                            "PowerSDR failed to close properly.\r" +
+                            "Please close PowerSDR and DDUtil manually.",
+                            "Error!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                            return;
+                        }
+                    temp = 0;
+                    }
+//                    Application.Exit();
+                }
+            }
+        }
+        // See if PSDR is running
+        public static bool IsPSDRrunning()
+        {
+            bool IsRunning = false;
+            string proc = "PowerSDR";
+            Process[] processes = Process.GetProcessesByName(proc);
+            if (processes.Length > 0)
+            {
+                IsRunning = true;
+            }
+            else
+            {
+                IsRunning = false;
+            }
+            return IsRunning;
+        }
+        //the Flex power-on port has changed
+        private void cboPwrPort_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (PwrPort.IsOpen) PwrPort.Close();
+            if (cboPwrPort.SelectedIndex > 0)
+            {
+                PwrPort.PortName = cboPwrPort.SelectedItem.ToString();
+                try
+                {
+                    PwrPort.Open();
+                }
+                catch
+                {
+                    MessageBox.Show("The PowerOn serial port " + PwrPort.PortName +
+                       " cannot be opened!\n", "Port Error",
+                       MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    cboPwrPort.SelectedText = "";
+                    return;
+                }
+            }
+            // save new port setting
+            set.PwrPort = cboPwrPort.SelectedIndex;
+            set.Save();
+        }
+        // the PSDR file location has changed
+        private void txtPSDR_TextChanged(object sender, EventArgs e)
+        {
+            set.PwrSDRfile = txtPSDR.Text; set.Save();
+        }
+        //the PSDR file location textbox was double-clicked
+        private void txtPSDR_DoubleClick(object sender, EventArgs e)
+        {
+            openFileDialog1.Filter = "exe files|*.exe";
+            openFileDialog1.Title = "Select PowerSDR File Location";
+            if (openFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                txtPSDR.Text = openFileDialog1.FileName;
+                mini.PFfile = txtProfLoc.Text;
+                set.PSDRloc = txtPSDR.Text;
+                set.Save();
+            }
+        }
+
+        #endregion PSDR PowerOn
+
+        #region Propadex
+        // Propadex forecast UI
+        private void pixBox1_Click(object sender, EventArgs e)
+        {
+            Process.Start("http://qsonet.com/propadex.html");
+        }
+
+        void propTimer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
+        {
+            pixBox1.Load();
+
+        }
+
+        #endregion Propadex
+
         #region Repeater
 
         //setup repeater
@@ -5548,6 +5697,11 @@ namespace DataDecoder
 
             }
 
+        }
+        // the rotor stop button was pressed
+        private void btnStop_Click(object sender, EventArgs e)
+        {
+            RotorStop();
         }
         // Stop the rotor if moving (Ctrl+LP button)
         private void btnLP_KeyDown(object sender, KeyEventArgs e)
@@ -7331,9 +7485,9 @@ namespace DataDecoder
                         RepeatPort.Write(bytes, 0, 11);
                     }
                 }
-                // If SteppIR is selected and the freq. has changed
-                // send new freq data to it x reps 
-                if (chkStep.Checked && StepCtr != 0)
+                // If SteppIR is selected and the freq. has changed and 
+                // the freq is not VHF++ send new freq data to it x reps 
+                if (chkStep.Checked && StepCtr != 0 && band.Substring(0,1) != "V")
                 {
                     if (lastFreq != freq)
                     {
@@ -9747,133 +9901,7 @@ namespace DataDecoder
 
         #endregion WaveNode Setup
 
-
         #endregion WaveNode
-
-        #region PSDR PowerOn
-
-        //the flex power button was pressed
-        private void btnFlexOn_Click(object sender, EventArgs e)
-        {
-            DialogResult result;
-            result = MessageBox.Show(this,
-                "CAUTION! Please understand what you are about to do!\r\r" +
-                "Continuing will either power up the radio if it is off or\r" +
-                "power down the radio if it is on.\r\r" +
-                "Additionally, PowerSDR will be started or stopped depending\r" +
-                "on the state of the radio condition.\r\r" +
-                "See the DDUtil documentation (help menu) for more information.\r\r" +
-                "Press Ok to continue or Cancel to abort this operation",
-                "Warning!", MessageBoxButtons.OKCancel, MessageBoxIcon.Exclamation);
-            if (result == DialogResult.OK)
-            {
-                PwrPort.RtsEnable = true;
-                Thread.Sleep(1500);
-                PwrPort.RtsEnable = false;
-
-                if (temp == 0)
-                    process = Process.Start(txtPSDR.Text);
-                else if (temp > 250)
-                {
-                    if (IsPSDRrunning())
-                    {
-                        temp = 0;
-                        try
-                        {
-                            process.Kill();
-                            process.WaitForExit();
-                        }
-                        catch
-                        {
-                            MessageBox.Show(
-                            "Aborting Auto Shutdown Sequence!\r\r" +
-                            "PowerSDR failed to close properly.\r" +
-                            "Please close PowerSDR and DDUtil manually.",
-                            "Error!", MessageBoxButtons.OKCancel, MessageBoxIcon.Exclamation);
-                            return;
-                        }
-                    }
-                    Application.Exit();
-                }
-            }
-        }
-        // See if PSDR is running
-        public static bool IsPSDRrunning()
-        {
-            bool IsRunning = false;
-            string proc = "PowerSDR";
-            Process[] processes = Process.GetProcessesByName(proc);
-            if (processes.Length > 0)
-            {
-                IsRunning = true;
-            }
-            else
-            {
-                IsRunning = false;
-            }
-            return IsRunning;
-        }
-        //the Flex power-on port has changed
-        private void cboPwrPort_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (PwrPort.IsOpen) PwrPort.Close();
-            if (cboPwrPort.SelectedIndex > 0)
-            {
-                PwrPort.PortName = cboPwrPort.SelectedItem.ToString();
-                try
-                {
-                    PwrPort.Open();
-                }
-                catch
-                {
-                    MessageBox.Show("The PowerOn serial port " + PwrPort.PortName +
-                       " cannot be opened!\n", "Port Error",
-                       MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    cboPwrPort.SelectedText = "";
-                    return;
-                }
-            }
-            // save new port setting
-            set.PwrPort = cboPwrPort.SelectedIndex;
-            set.Save();
-
-        }
-        // the PSDR file location has changed
-        private void txtPSDR_TextChanged(object sender, EventArgs e)
-        {
-            set.PwrSDRfile = txtPSDR.Text; set.Save();
-        }
-        //the PSDR file location textbox was double-clicked
-        private void txtPSDR_DoubleClick(object sender, EventArgs e)
-        {
-            openFileDialog1.Filter = "exe files|*.exe";
-            openFileDialog1.Title = "Select PowerSDR File Location";
-            if (openFileDialog1.ShowDialog() == DialogResult.OK)
-            {
-                txtPSDR.Text = openFileDialog1.FileName;
-                mini.PFfile = txtProfLoc.Text;
-                set.PSDRloc = txtPSDR.Text;
-                set.Save();
-            }
-
-        }
-
-        #endregion PSDR PowerOn
-
-        #region Propadex
-        // Propadex forecast UI
-        private void pixBox1_Click(object sender, EventArgs e)
-        {
-            Process.Start("http://qsonet.com/propadex.html");
-        }
-
-        void propTimer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
-        {
-            pixBox1.Load();
-
-        }
-
-        #endregion Propadex
 
     }
  }

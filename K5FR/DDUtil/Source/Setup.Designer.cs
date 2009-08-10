@@ -419,6 +419,7 @@ namespace DataDecoder
             this.label48 = new System.Windows.Forms.Label();
             this.txtCode = new System.Windows.Forms.TextBox();
             this.groupBox8 = new System.Windows.Forms.GroupBox();
+            this.btnStop = new System.Windows.Forms.Button();
             this.lblLP = new System.Windows.Forms.Label();
             this.label59 = new System.Windows.Forms.Label();
             this.label43 = new System.Windows.Forms.Label();
@@ -761,6 +762,8 @@ namespace DataDecoder
             this.label64 = new System.Windows.Forms.Label();
             this.cboPwrPort = new System.Windows.Forms.ComboBox();
             this.grpAmpBands = new System.Windows.Forms.GroupBox();
+            this.btnClrAll = new System.Windows.Forms.Button();
+            this.btnCkAll = new System.Windows.Forms.Button();
             this.chkAmp6 = new System.Windows.Forms.CheckBox();
             this.chkAmp80 = new System.Windows.Forms.CheckBox();
             this.chkAmp160 = new System.Windows.Forms.CheckBox();
@@ -858,6 +861,7 @@ namespace DataDecoder
             this.enableErrorLoggingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openErrorLogToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.clearErrorLogToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.resetDontAskMeAgainToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.showMiniWindowToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.vSPManagerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -1008,7 +1012,7 @@ namespace DataDecoder
             this.btnFlexOn.Size = new System.Drawing.Size(46, 23);
             this.btnFlexOn.TabIndex = 69;
             this.btnFlexOn.Text = "Power";
-            this.toolTip1.SetToolTip(this.btnFlexOn, "Press to toggle Flex Power On/Off (requires hdwe).");
+            this.toolTip1.SetToolTip(this.btnFlexOn, "Press to toggle Flex Power On/Off (Ctrl+Shift+X) Note: requires hdwe.");
             this.btnFlexOn.UseVisualStyleBackColor = false;
             this.btnFlexOn.Click += new System.EventHandler(this.btnFlexOn_Click);
             // 
@@ -6171,6 +6175,7 @@ namespace DataDecoder
             // 
             // groupBox8
             // 
+            this.groupBox8.Controls.Add(this.btnStop);
             this.groupBox8.Controls.Add(this.lblLP);
             this.groupBox8.Controls.Add(this.label59);
             this.groupBox8.Controls.Add(this.label43);
@@ -6188,12 +6193,24 @@ namespace DataDecoder
             this.groupBox8.TabStop = false;
             this.groupBox8.Text = "Heading";
             // 
+            // btnStop
+            // 
+            this.btnStop.BackColor = System.Drawing.Color.Red;
+            this.btnStop.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnStop.Location = new System.Drawing.Point(43, 60);
+            this.btnStop.Name = "btnStop";
+            this.btnStop.Size = new System.Drawing.Size(10, 10);
+            this.btnStop.TabIndex = 73;
+            this.toolTip1.SetToolTip(this.btnStop, "Press to stop rotation.");
+            this.btnStop.UseVisualStyleBackColor = false;
+            this.btnStop.Click += new System.EventHandler(this.btnStop_Click);
+            // 
             // lblLP
             // 
             this.lblLP.ForeColor = System.Drawing.Color.Green;
-            this.lblLP.Location = new System.Drawing.Point(55, 80);
+            this.lblLP.Location = new System.Drawing.Point(52, 80);
             this.lblLP.Name = "lblLP";
-            this.lblLP.Size = new System.Drawing.Size(28, 13);
+            this.lblLP.Size = new System.Drawing.Size(40, 13);
             this.lblLP.TabIndex = 39;
             this.lblLP.Tag = "";
             this.lblLP.TextAlign = System.Drawing.ContentAlignment.TopCenter;
@@ -6203,7 +6220,7 @@ namespace DataDecoder
             this.label59.AutoSize = true;
             this.label59.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
             this.label59.ForeColor = System.Drawing.Color.Navy;
-            this.label59.Location = new System.Drawing.Point(53, 16);
+            this.label59.Location = new System.Drawing.Point(56, 16);
             this.label59.Name = "label59";
             this.label59.Size = new System.Drawing.Size(31, 13);
             this.label59.TabIndex = 38;
@@ -6225,7 +6242,7 @@ namespace DataDecoder
             // lblSP
             // 
             this.lblSP.ForeColor = System.Drawing.Color.Green;
-            this.lblSP.Location = new System.Drawing.Point(6, 80);
+            this.lblSP.Location = new System.Drawing.Point(4, 80);
             this.lblSP.Name = "lblSP";
             this.lblSP.Size = new System.Drawing.Size(40, 13);
             this.lblSP.TabIndex = 5;
@@ -6239,7 +6256,7 @@ namespace DataDecoder
             this.btnSP.ForeColor = System.Drawing.Color.Blue;
             this.btnSP.Location = new System.Drawing.Point(8, 55);
             this.btnSP.Name = "btnSP";
-            this.btnSP.Size = new System.Drawing.Size(36, 19);
+            this.btnSP.Size = new System.Drawing.Size(30, 19);
             this.btnSP.TabIndex = 0;
             this.btnSP.Text = "SP";
             this.btnSP.TextAlign = System.Drawing.ContentAlignment.TopCenter;
@@ -6252,7 +6269,7 @@ namespace DataDecoder
             // 
             this.txtLP.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtLP.ForeColor = System.Drawing.Color.Firebrick;
-            this.txtLP.Location = new System.Drawing.Point(49, 30);
+            this.txtLP.Location = new System.Drawing.Point(52, 30);
             this.txtLP.Name = "txtLP";
             this.txtLP.Size = new System.Drawing.Size(37, 20);
             this.txtLP.TabIndex = 4;
@@ -6264,9 +6281,9 @@ namespace DataDecoder
             this.btnLP.Enabled = false;
             this.btnLP.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnLP.ForeColor = System.Drawing.Color.Blue;
-            this.btnLP.Location = new System.Drawing.Point(51, 55);
+            this.btnLP.Location = new System.Drawing.Point(58, 55);
             this.btnLP.Name = "btnLP";
-            this.btnLP.Size = new System.Drawing.Size(36, 19);
+            this.btnLP.Size = new System.Drawing.Size(30, 19);
             this.btnLP.TabIndex = 1;
             this.btnLP.Text = "LP";
             this.btnLP.TextAlign = System.Drawing.ContentAlignment.TopCenter;
@@ -10265,6 +10282,8 @@ namespace DataDecoder
             // 
             // grpAmpBands
             // 
+            this.grpAmpBands.Controls.Add(this.btnClrAll);
+            this.grpAmpBands.Controls.Add(this.btnCkAll);
             this.grpAmpBands.Controls.Add(this.chkAmp6);
             this.grpAmpBands.Controls.Add(this.chkAmp80);
             this.grpAmpBands.Controls.Add(this.chkAmp160);
@@ -10277,13 +10296,45 @@ namespace DataDecoder
             this.grpAmpBands.Controls.Add(this.chkAmp15);
             this.grpAmpBands.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.grpAmpBands.ForeColor = System.Drawing.Color.Blue;
-            this.grpAmpBands.Location = new System.Drawing.Point(219, 248);
+            this.grpAmpBands.Location = new System.Drawing.Point(183, 248);
             this.grpAmpBands.Name = "grpAmpBands";
-            this.grpAmpBands.Size = new System.Drawing.Size(205, 54);
+            this.grpAmpBands.Size = new System.Drawing.Size(241, 54);
             this.grpAmpBands.TabIndex = 109;
             this.grpAmpBands.TabStop = false;
             this.grpAmpBands.Text = "Amp Bands";
-            this.toolTip1.SetToolTip(this.grpAmpBands, "Select bands to enable amplifier usage.");
+            this.toolTip1.SetToolTip(this.grpAmpBands, "Select bands to enable amplifier usage (rqd for Oper/Stby button).");
+            // 
+            // btnClrAll
+            // 
+            this.btnClrAll.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnClrAll.BackColor = System.Drawing.SystemColors.Control;
+            this.btnClrAll.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            this.btnClrAll.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnClrAll.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.btnClrAll.Location = new System.Drawing.Point(205, 33);
+            this.btnClrAll.Name = "btnClrAll";
+            this.btnClrAll.Size = new System.Drawing.Size(30, 15);
+            this.btnClrAll.TabIndex = 107;
+            this.btnClrAll.Text = "None";
+            this.toolTip1.SetToolTip(this.btnClrAll, "Clears all bands.");
+            this.btnClrAll.UseVisualStyleBackColor = false;
+            this.btnClrAll.Click += new System.EventHandler(this.btnClrAll_Click);
+            // 
+            // btnCkAll
+            // 
+            this.btnCkAll.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnCkAll.BackColor = System.Drawing.SystemColors.Control;
+            this.btnCkAll.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            this.btnCkAll.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnCkAll.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.btnCkAll.Location = new System.Drawing.Point(205, 12);
+            this.btnCkAll.Name = "btnCkAll";
+            this.btnCkAll.Size = new System.Drawing.Size(30, 15);
+            this.btnCkAll.TabIndex = 108;
+            this.btnCkAll.Text = "All";
+            this.toolTip1.SetToolTip(this.btnCkAll, "Checks all bands.");
+            this.btnCkAll.UseVisualStyleBackColor = false;
+            this.btnCkAll.Click += new System.EventHandler(this.btnCkAll_Click);
             // 
             // chkAmp6
             // 
@@ -11024,6 +11075,7 @@ namespace DataDecoder
             // 
             // txtTemp
             // 
+            this.txtTemp.BackColor = System.Drawing.Color.LightGreen;
             this.txtTemp.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
             this.txtTemp.Location = new System.Drawing.Point(384, 364);
             this.txtTemp.Name = "txtTemp";
@@ -11390,6 +11442,7 @@ namespace DataDecoder
             this.enableErrorLoggingToolStripMenuItem,
             this.openErrorLogToolStripMenuItem,
             this.clearErrorLogToolStripMenuItem,
+            this.resetDontAskMeAgainToolStripMenuItem,
             this.showMiniWindowToolStripMenuItem,
             this.vSPManagerToolStripMenuItem});
             this.toolsToolStripMenuItem.Name = "toolsToolStripMenuItem";
@@ -11416,6 +11469,13 @@ namespace DataDecoder
             this.clearErrorLogToolStripMenuItem.Size = new System.Drawing.Size(209, 22);
             this.clearErrorLogToolStripMenuItem.Text = "Clear Error Log";
             this.clearErrorLogToolStripMenuItem.Click += new System.EventHandler(this.clearErrorLogToolStripMenuItem_Click);
+            // 
+            // resetDontAskMeAgainToolStripMenuItem
+            // 
+            this.resetDontAskMeAgainToolStripMenuItem.Name = "resetDontAskMeAgainToolStripMenuItem";
+            this.resetDontAskMeAgainToolStripMenuItem.Size = new System.Drawing.Size(209, 22);
+            this.resetDontAskMeAgainToolStripMenuItem.Text = "Reset Don\'t Ask Me Again";
+            this.resetDontAskMeAgainToolStripMenuItem.Click += new System.EventHandler(this.resetDontAskMeAgainToolStripMenuItem_Click);
             // 
             // showMiniWindowToolStripMenuItem
             // 
@@ -12642,6 +12702,10 @@ namespace DataDecoder
         private TextBox txtPSDR;
         private Label label68;
         private PictureBox pixBox1;
+        private Button btnClrAll;
+        private Button btnCkAll;
+        private ToolStripMenuItem resetDontAskMeAgainToolStripMenuItem;
+        private Button btnStop;
 
     }
 }
