@@ -46,8 +46,11 @@ GtkWidget* buttonMOX;
 GtkWidget* buttonTune;
 GtkWidget* rfGainFrame;
 GtkWidget* rfGainScale;
+GtkWidget* micGainFrame;
+GtkWidget* micGainScale;
 
 double rfGain=0.1;
+double micGain=1.0;
 
 int tuning=0;
 double tuningPhase=0;
@@ -156,13 +159,24 @@ void tuneButtonCallback(GtkWidget* widget,gpointer data) {
 
 /* --------------------------------------------------------------------------*/
 /**
-* @brief  Callback when mic gain values changes
+* @brief  Callback when rf gain values changes
 *
 * @param widget
 * @param data
 */
 void rfGainChanged(GtkWidget* widget,gpointer data) {
     rfGain=gtk_range_get_value((GtkRange*)rfGainScale);
+}
+
+/* --------------------------------------------------------------------------*/
+/**
+* @brief  Callback when mic gain values changes
+*
+* @param widget
+* @param data
+*/
+void micGainChanged(GtkWidget* widget,gpointer data) {
+    micGain=gtk_range_get_value((GtkRange*)micGainScale);
 }
 
 /* --------------------------------------------------------------------------*/
@@ -179,7 +193,7 @@ GtkWidget* buildTransmitUI() {
     gtk_widget_modify_bg(transmitFrame,GTK_STATE_NORMAL,&background);
     gtk_widget_modify_fg(gtk_frame_get_label_widget(GTK_FRAME(transmitFrame)),GTK_STATE_NORMAL,&white);
 
-    transmitTable=gtk_table_new(1,5,TRUE);
+    transmitTable=gtk_table_new(1,8,TRUE);
 
     // transmit settings
     buttonMOX = gtk_button_new_with_label ("MOX");
@@ -207,7 +221,7 @@ GtkWidget* buildTransmitUI() {
     gtk_widget_modify_bg(rfGainFrame,GTK_STATE_NORMAL,&background);
     gtk_widget_modify_fg(gtk_frame_get_label_widget(GTK_FRAME(rfGainFrame)),GTK_STATE_NORMAL,&white);
 
-    rfGainScale=gtk_hscale_new_with_range(0.0,0.5,0.01);
+    rfGainScale=gtk_hscale_new_with_range(0.1,0.5,0.01);
 
     g_signal_connect(G_OBJECT(rfGainScale),"value-changed",G_CALLBACK(rfGainChanged),NULL);
     gtk_range_set_value((GtkRange*)rfGainScale,rfGain);
@@ -217,6 +231,21 @@ GtkWidget* buildTransmitUI() {
     gtk_widget_show(rfGainFrame);
     gtk_table_attach_defaults(GTK_TABLE(transmitTable),rfGainFrame,2,5,0,1);
 
+    // mic gain
+
+    micGainFrame=gtk_frame_new("Mic Gain");
+    gtk_widget_modify_bg(micGainFrame,GTK_STATE_NORMAL,&background);
+    gtk_widget_modify_fg(gtk_frame_get_label_widget(GTK_FRAME(micGainFrame)),GTK_STATE_NORMAL,&white);
+
+    micGainScale=gtk_hscale_new_with_range(0.01,1.0,0.01);
+
+    g_signal_connect(G_OBJECT(micGainScale),"value-changed",G_CALLBACK(micGainChanged),NULL);
+    gtk_range_set_value((GtkRange*)micGainScale,micGain);
+    gtk_widget_set_size_request(GTK_WIDGET(micGainScale),150,30);
+    gtk_widget_show(micGainScale);
+    gtk_container_add(GTK_CONTAINER(micGainFrame),micGainScale);
+    gtk_widget_show(micGainFrame);
+    gtk_table_attach_defaults(GTK_TABLE(transmitTable),micGainFrame,5,8,0,1);
 
     gtk_container_add(GTK_CONTAINER(transmitFrame),transmitTable);
     gtk_widget_show(transmitTable);
@@ -234,6 +263,8 @@ void transmitSaveState() {
     char string[128];
     sprintf(string,"%f",rfGain);
     setProperty("rfGain",string);
+    sprintf(string,"%f",micGain);
+    setProperty("micGain",string);
     sprintf(string,"%d",fullDuplex);
     setProperty("fullDuplex",string);
 }
@@ -246,6 +277,8 @@ void transmitRestoreState() {
     char* value;
     value=getProperty("rfGain");
     if(value) rfGain=atof(value); else rfGain=3.0f;
+    value=getProperty("micGain");
+    if(value) micGain=atof(value); else micGain=1.0f;
     value=getProperty("fullDuplex");
     if(value) fullDuplex=atoi(value); else fullDuplex=0;
 }

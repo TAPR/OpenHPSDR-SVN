@@ -79,6 +79,7 @@ int left_sample;
 int right_sample;
 int mic_sample;
 
+
 float left_sample_float;
 float right_sample_float;
 float mic_sample_float;
@@ -177,7 +178,7 @@ void process_ozy_input_buffer(char* buffer) {
 
             left_sample_float=(float)left_sample/8388607.0; // 24 bit sample
             right_sample_float=(float)right_sample/8388607.0; // 24 bit sample
-            mic_sample_float=(float)mic_sample/32767.0; // 16 bit sample
+            mic_sample_float=(float)mic_sample/32767.0*micGain; // 16 bit sample
 
             // add to buffer
             left_input_buffer[samples]=left_sample_float;

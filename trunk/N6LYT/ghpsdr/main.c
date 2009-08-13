@@ -652,7 +652,6 @@ int main(int argc,char* argv[]) {
     // initialize ozy (default 48K)
     ozyRestoreState();
     do {
-
         switch(ozy_init()) {
             case -1: // cannot find ozy
                 dialog = gtk_message_dialog_new (NULL,
@@ -673,7 +672,7 @@ int main(int argc,char* argv[]) {
                 }
                 gtk_widget_destroy (dialog);
                 break;
-            case -2:
+            case -2: // found but needs initializing
                 result=fork();
                 if(result==0) {
                     // child process - exec initozy
@@ -696,6 +695,7 @@ int main(int argc,char* argv[]) {
 
                     wait(&result);
                     fprintf(stderr,"wait status=%d\n",result);
+                    retry=TRUE;
                 }
                 gtk_widget_destroy (dialog);
                 break;
@@ -703,10 +703,7 @@ int main(int argc,char* argv[]) {
                 retry=FALSE;
                 break;
         }
-            
     } while(retry);
-
-
 
     mainRootX=0;
     mainRootY=0;
