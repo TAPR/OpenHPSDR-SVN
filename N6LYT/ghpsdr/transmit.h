@@ -26,6 +26,7 @@
 */
 
 double rfGain;
+double micGain;
 
 int tuning;
 double tuningPhase;
