@@ -1,5 +1,5 @@
 Fitter report for Cyclops
-Fri Jul 24 16:54:48 2009
+Sat Aug 22 15:33:48 2009
 Quartus II Version 9.0 Build 132 02/25/2009 SJ Web Edition
 
 
@@ -17,29 +17,30 @@ Quartus II Version 9.0 Build 132 02/25/2009 SJ Web Edition
   9. Fitter Resource Usage Summary
  10. Input Pins
  11. Output Pins
- 12. I/O Bank Usage
- 13. All Package Pins
- 14. Output Pin Default Load For Reported TCO
- 15. Fitter Resource Utilization by Entity
- 16. Delay Chain Summary
- 17. Pad To Core Delay Chain Fanout
- 18. Control Signals
- 19. Global & Other Fast Signals
- 20. Non-Global High Fan-Out Signals
- 21. Interconnect Usage Summary
- 22. LAB Logic Elements
- 23. LAB-wide Signals
- 24. LAB Signals Sourced
- 25. LAB Signals Sourced Out
- 26. LAB Distinct Inputs
- 27. Fitter Device Options
- 28. Operating Settings and Conditions
- 29. Estimated Delay Added for Hold Timing
- 30. Advanced Data - General
- 31. Advanced Data - Placement Preparation
- 32. Advanced Data - Placement
- 33. Advanced Data - Routing
- 34. Fitter Messages
+ 12. Bidir Pins
+ 13. I/O Bank Usage
+ 14. All Package Pins
+ 15. Output Pin Default Load For Reported TCO
+ 16. Fitter Resource Utilization by Entity
+ 17. Delay Chain Summary
+ 18. Pad To Core Delay Chain Fanout
+ 19. Control Signals
+ 20. Global & Other Fast Signals
+ 21. Non-Global High Fan-Out Signals
+ 22. Interconnect Usage Summary
+ 23. LAB Logic Elements
+ 24. LAB-wide Signals
+ 25. LAB Signals Sourced
+ 26. LAB Signals Sourced Out
+ 27. LAB Distinct Inputs
+ 28. Fitter Device Options
+ 29. Operating Settings and Conditions
+ 30. Estimated Delay Added for Hold Timing
+ 31. Advanced Data - General
+ 32. Advanced Data - Placement Preparation
+ 33. Advanced Data - Placement
+ 34. Advanced Data - Routing
+ 35. Fitter Messages
 
 
 
@@ -65,18 +66,18 @@ applicable agreement for further details.
 +------------------------------------------------------------------------------+
 ; Fitter Summary                                                               ;
 +------------------------------------+-----------------------------------------+
-; Fitter Status                      ; Successful - Fri Jul 24 16:54:47 2009   ;
+; Fitter Status                      ; Successful - Sat Aug 22 15:33:48 2009   ;
 ; Quartus II Version                 ; 9.0 Build 132 02/25/2009 SJ Web Edition ;
 ; Revision Name                      ; Cyclops                                 ;
 ; Top-level Entity Name              ; Cyclops                                 ;
 ; Family                             ; Cyclone II                              ;
 ; Device                             ; EP2C8Q208C8                             ;
 ; Timing Models                      ; Final                                   ;
-; Total logic elements               ; 88 / 8,256 ( 1 % )                      ;
-;     Total combinational functions  ; 88 / 8,256 ( 1 % )                      ;
-;     Dedicated logic registers      ; 35 / 8,256 ( < 1 % )                    ;
-; Total registers                    ; 35                                      ;
-; Total pins                         ; 6 / 138 ( 4 % )                         ;
+; Total logic elements               ; 165 / 8,256 ( 2 % )                     ;
+;     Total combinational functions  ; 142 / 8,256 ( 2 % )                     ;
+;     Dedicated logic registers      ; 88 / 8,256 ( 1 % )                      ;
+; Total registers                    ; 88                                      ;
+; Total pins                         ; 32 / 138 ( 23 % )                       ;
 ; Total virtual pins                 ; 0                                       ;
 ; Total memory bits                  ; 0 / 165,888 ( 0 % )                     ;
 ; Embedded Multiplier 9-bit elements ; 0 / 36 ( 0 % )                          ;
@@ -150,8 +151,8 @@ Parallel compilation was disabled, but you have multiple processors available. E
 ; Type                    ; Value              ;
 +-------------------------+--------------------+
 ; Placement               ;                    ;
-;     -- Requested        ; 0 / 128 ( 0.00 % ) ;
-;     -- Achieved         ; 0 / 128 ( 0.00 % ) ;
+;     -- Requested        ; 0 / 262 ( 0.00 % ) ;
+;     -- Achieved         ; 0 / 262 ( 0.00 % ) ;
 ;                         ;                    ;
 ; Routing (by Connection) ;                    ;
 ;     -- Requested        ; 0 / 0 ( 0.00 % )   ;
@@ -173,64 +174,64 @@ Parallel compilation was disabled, but you have multiple processors available. E
 +----------------+---------+-------------------+-------------------------+-------------------+
 ; Partition Name ; # Nodes ; # Preserved Nodes ; Preservation Level Used ; Netlist Type Used ;
 +----------------+---------+-------------------+-------------------------+-------------------+
-; Top            ; 128     ; 0                 ; N/A                     ; Source File       ;
+; Top            ; 262     ; 0                 ; N/A                     ; Source File       ;
 +----------------+---------+-------------------+-------------------------+-------------------+
 
 
 +--------------+
 ; Pin-Out File ;
 +--------------+
-The pin-out file can be found in C:/HPSDR/trunk/Cyclops/Verllog Code/Test Code/Cyclops.pin.
+The pin-out file can be found in C:/HPSDR/trunk/CyclopsII/Verilog Code/Test Code/Cyclops.pin.
 
 
-+--------------------------------------------------------------------+
-; Fitter Resource Usage Summary                                      ;
-+---------------------------------------------+----------------------+
-; Resource                                    ; Usage                ;
-+---------------------------------------------+----------------------+
-; Total logic elements                        ; 88 / 8,256 ( 1 % )   ;
-;     -- Combinational with no register       ; 53                   ;
-;     -- Register only                        ; 0                    ;
-;     -- Combinational with a register        ; 35                   ;
-;                                             ;                      ;
-; Logic element usage by number of LUT inputs ;                      ;
-;     -- 4 input functions                    ; 46                   ;
-;     -- 3 input functions                    ; 18                   ;
-;     -- <=2 input functions                  ; 24                   ;
-;     -- Register only                        ; 0                    ;
-;                                             ;                      ;
-; Logic elements by mode                      ;                      ;
-;     -- normal mode                          ; 84                   ;
-;     -- arithmetic mode                      ; 4                    ;
-;                                             ;                      ;
-; Total registers*                            ; 35 / 8,646 ( < 1 % ) ;
-;     -- Dedicated logic registers            ; 35 / 8,256 ( < 1 % ) ;
-;     -- I/O registers                        ; 0 / 390 ( 0 % )      ;
-;                                             ;                      ;
-; Total LABs:  partially or completely used   ; 8 / 516 ( 2 % )      ;
-; User inserted logic elements                ; 0                    ;
-; Virtual pins                                ; 0                    ;
-; I/O pins                                    ; 6 / 138 ( 4 % )      ;
-;     -- Clock pins                           ; 1 / 4 ( 25 % )       ;
-; Global signals                              ; 2                    ;
-; M4Ks                                        ; 0 / 36 ( 0 % )       ;
-; Total block memory bits                     ; 0 / 165,888 ( 0 % )  ;
-; Total block memory implementation bits      ; 0 / 165,888 ( 0 % )  ;
-; Embedded Multiplier 9-bit elements          ; 0 / 36 ( 0 % )       ;
-; PLLs                                        ; 0 / 2 ( 0 % )        ;
-; Global clocks                               ; 2 / 8 ( 25 % )       ;
-; JTAGs                                       ; 0 / 1 ( 0 % )        ;
-; ASMI blocks                                 ; 0 / 1 ( 0 % )        ;
-; CRC blocks                                  ; 0 / 1 ( 0 % )        ;
-; Average interconnect usage (total/H/V)      ; 0% / 0% / 0%         ;
-; Peak interconnect usage (total/H/V)         ; 1% / 1% / 0%         ;
-; Maximum fan-out node                        ; clock~clkctrl        ;
-; Maximum fan-out                             ; 31                   ;
-; Highest non-global fan-out signal           ; SPI_state[1]         ;
-; Highest non-global fan-out                  ; 18                   ;
-; Total fan-out                               ; 381                  ;
-; Average fan-out                             ; 2.86                 ;
-+---------------------------------------------+----------------------+
++-------------------------------------------------------------------+
+; Fitter Resource Usage Summary                                     ;
++---------------------------------------------+---------------------+
+; Resource                                    ; Usage               ;
++---------------------------------------------+---------------------+
+; Total logic elements                        ; 165 / 8,256 ( 2 % ) ;
+;     -- Combinational with no register       ; 77                  ;
+;     -- Register only                        ; 23                  ;
+;     -- Combinational with a register        ; 65                  ;
+;                                             ;                     ;
+; Logic element usage by number of LUT inputs ;                     ;
+;     -- 4 input functions                    ; 79                  ;
+;     -- 3 input functions                    ; 39                  ;
+;     -- <=2 input functions                  ; 24                  ;
+;     -- Register only                        ; 23                  ;
+;                                             ;                     ;
+; Logic elements by mode                      ;                     ;
+;     -- normal mode                          ; 138                 ;
+;     -- arithmetic mode                      ; 4                   ;
+;                                             ;                     ;
+; Total registers*                            ; 88 / 8,646 ( 1 % )  ;
+;     -- Dedicated logic registers            ; 88 / 8,256 ( 1 % )  ;
+;     -- I/O registers                        ; 0 / 390 ( 0 % )     ;
+;                                             ;                     ;
+; Total LABs:  partially or completely used   ; 14 / 516 ( 3 % )    ;
+; User inserted logic elements                ; 0                   ;
+; Virtual pins                                ; 0                   ;
+; I/O pins                                    ; 32 / 138 ( 23 % )   ;
+;     -- Clock pins                           ; 1 / 4 ( 25 % )      ;
+; Global signals                              ; 2                   ;
+; M4Ks                                        ; 0 / 36 ( 0 % )      ;
+; Total block memory bits                     ; 0 / 165,888 ( 0 % ) ;
+; Total block memory implementation bits      ; 0 / 165,888 ( 0 % ) ;
+; Embedded Multiplier 9-bit elements          ; 0 / 36 ( 0 % )      ;
+; PLLs                                        ; 0 / 2 ( 0 % )       ;
+; Global clocks                               ; 2 / 8 ( 25 % )      ;
+; JTAGs                                       ; 0 / 1 ( 0 % )       ;
+; ASMI blocks                                 ; 0 / 1 ( 0 % )       ;
+; CRC blocks                                  ; 0 / 1 ( 0 % )       ;
+; Average interconnect usage (total/H/V)      ; 0% / 1% / 0%        ;
+; Peak interconnect usage (total/H/V)         ; 2% / 2% / 2%        ;
+; Maximum fan-out node                        ; clock~clkctrl       ;
+; Maximum fan-out                             ; 61                  ;
+; Highest non-global fan-out signal           ; SPI2_state[1]       ;
+; Highest non-global fan-out                  ; 29                  ;
+; Total fan-out                               ; 747                 ;
+; Average fan-out                             ; 2.68                ;
++---------------------------------------------+---------------------+
 *  Register count does not include registers inside RAM blocks or DSP blocks.
 
 
@@ -240,6 +241,9 @@ The pin-out file can be found in C:/HPSDR/trunk/Cyclops/Verllog Code/Test Code/C
 +-------+-------+----------+--------------+--------------+-------------+-----------------------+--------------------+--------+----------------+---------------+-----------------+----------+--------------+--------------+-------------+----------------------+
 ; Name  ; Pin # ; I/O Bank ; X coordinate ; Y coordinate ; Cell number ; Combinational Fan-Out ; Registered Fan-Out ; Global ; Input Register ; Power Up High ; PCI I/O Enabled ; Bus Hold ; Weak Pull Up ; I/O Standard ; Termination ; Location assigned by ;
 +-------+-------+----------+--------------+--------------+-------------+-----------------------+--------------------+--------+----------------+---------------+-----------------+----------+--------------+--------------+-------------+----------------------+
+; FLAGA ; 198   ; 2        ; 5            ; 19           ; 1           ; 3                     ; 0                  ; no     ; no             ; no            ; no              ; no       ; Off          ; 3.3-V LVTTL  ; Off         ; User                 ;
+; FLAGB ; 197   ; 2        ; 5            ; 19           ; 0           ; 0                     ; 0                  ; no     ; no             ; no            ; no              ; no       ; Off          ; 3.3-V LVTTL  ; Off         ; User                 ;
+; FLAGC ; 5     ; 1        ; 0            ; 17           ; 0           ; 0                     ; 0                  ; no     ; no             ; no            ; no              ; no       ; Off          ; 3.3-V LVTTL  ; Off         ; User                 ;
 ; IFCLK ; 24    ; 1        ; 0            ; 9            ; 1           ; 1                     ; 0                  ; yes    ; no             ; no            ; no              ; no       ; Off          ; 3.3-V LVTTL  ; Off         ; User                 ;
 +-------+-------+----------+--------------+--------------+-------------+-----------------------+--------------------+--------+----------------+---------------+-----------------+----------+--------------+--------------+-------------+----------------------+
 
@@ -252,21 +256,52 @@ The pin-out file can be found in C:/HPSDR/trunk/Cyclops/Verllog Code/Test Code/C
 ; ADF4112_SPI_clock ; 134   ; 3        ; 34           ; 11           ; 2           ; no              ; no                     ; no            ; no              ; no         ; no            ; no       ; Off          ; 3.3-V LVTTL  ; 24mA             ; Off         ; User                 ; 0 pF ;
 ; ADF4112_SPI_data  ; 133   ; 3        ; 34           ; 11           ; 3           ; no              ; no                     ; no            ; no              ; no         ; no            ; no       ; Off          ; 3.3-V LVTTL  ; 24mA             ; Off         ; User                 ; 0 pF ;
 ; DEBUG_LED0        ; 4     ; 1        ; 0            ; 18           ; 3           ; no              ; no                     ; no            ; no              ; no         ; no            ; no       ; Off          ; 3.3-V LVTTL  ; 24mA             ; Off         ; User                 ; 0 pF ;
+; DEBUG_LED1        ; 33    ; 1        ; 0            ; 8            ; 3           ; no              ; no                     ; no            ; no              ; no         ; no            ; no       ; Off          ; 3.3-V LVTTL  ; 24mA             ; Off         ; User                 ; 0 pF ;
+; FIFO_ADR[0]       ; 11    ; 1        ; 0            ; 16           ; 0           ; no              ; no                     ; no            ; no              ; no         ; no            ; no       ; Off          ; 3.3-V LVTTL  ; 24mA             ; Off         ; User                 ; 0 pF ;
+; FIFO_ADR[1]       ; 10    ; 1        ; 0            ; 17           ; 3           ; no              ; no                     ; no            ; no              ; no         ; no            ; no       ; Off          ; 3.3-V LVTTL  ; 24mA             ; Off         ; User                 ; 0 pF ;
 ; LE1               ; 118   ; 3        ; 34           ; 7            ; 1           ; no              ; no                     ; no            ; no              ; no         ; no            ; no       ; Off          ; 3.3-V LVTTL  ; 24mA             ; Off         ; User                 ; 0 pF ;
 ; LE2               ; 128   ; 3        ; 34           ; 9            ; 0           ; no              ; no                     ; no            ; no              ; no         ; no            ; no       ; Off          ; 3.3-V LVTTL  ; 24mA             ; Off         ; User                 ; 0 pF ;
+; PKEND             ; 8     ; 1        ; 0            ; 17           ; 2           ; no              ; no                     ; no            ; no              ; no         ; no            ; no       ; Off          ; 3.3-V LVTTL  ; 24mA             ; Off         ; User                 ; 0 pF ;
+; SLOE              ; 13    ; 1        ; 0            ; 16           ; 2           ; no              ; no                     ; no            ; no              ; no         ; no            ; no       ; Off          ; 3.3-V LVTTL  ; 24mA             ; Off         ; User                 ; 0 pF ;
+; SLRD              ; 30    ; 1        ; 0            ; 8            ; 0           ; no              ; no                     ; no            ; no              ; no         ; no            ; no       ; Off          ; 3.3-V LVTTL  ; 24mA             ; Off         ; User                 ; 0 pF ;
+; SLWR              ; 31    ; 1        ; 0            ; 8            ; 1           ; no              ; no                     ; no            ; no              ; no         ; no            ; no       ; Off          ; 3.3-V LVTTL  ; 24mA             ; Off         ; User                 ; 0 pF ;
 +-------------------+-------+----------+--------------+--------------+-------------+-----------------+------------------------+---------------+-----------------+------------+---------------+----------+--------------+--------------+------------------+-------------+----------------------+------+
 
 
-+-----------------------------------------------------------+
-; I/O Bank Usage                                            ;
-+----------+-----------------+---------------+--------------+
-; I/O Bank ; Usage           ; VCCIO Voltage ; VREF Voltage ;
-+----------+-----------------+---------------+--------------+
-; 1        ; 4 / 32 ( 13 % ) ; 3.3V          ; --           ;
-; 2        ; 0 / 35 ( 0 % )  ; 3.3V          ; --           ;
-; 3        ; 4 / 35 ( 11 % ) ; 3.3V          ; --           ;
-; 4        ; 0 / 36 ( 0 % )  ; 3.3V          ; --           ;
-+----------+-----------------+---------------+--------------+
++----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Bidir Pins                                                                                                                                                                                                                                                                                                                                         ;
++------------+-------+----------+--------------+--------------+-------------+-----------------------+--------------------+--------+----------------+-----------------+------------------------+---------------+-----------------+------------+----------+--------------+--------------+------------------+-------------+----------------------+------+
+; Name       ; Pin # ; I/O Bank ; X coordinate ; Y coordinate ; Cell number ; Combinational Fan-Out ; Registered Fan-Out ; Global ; Input Register ; Output Register ; Output Enable Register ; Power Up High ; PCI I/O Enabled ; Open Drain ; Bus Hold ; Weak Pull Up ; I/O Standard ; Current Strength ; Termination ; Location assigned by ; Load ;
++------------+-------+----------+--------------+--------------+-------------+-----------------------+--------------------+--------+----------------+-----------------+------------------------+---------------+-----------------+------------+----------+--------------+--------------+------------------+-------------+----------------------+------+
+; FX2_FD[0]  ; 56    ; 4        ; 1            ; 0            ; 3           ; 1                     ; 0                  ; no     ; no             ; no              ; no                     ; no            ; no              ; yes        ; no       ; Off          ; 3.3-V LVTTL  ; 24mA             ; Off         ; User                 ; 0 pF ;
+; FX2_FD[10] ; 206   ; 2        ; 1            ; 19           ; 1           ; 1                     ; 0                  ; no     ; no             ; no              ; no                     ; no            ; no              ; yes        ; no       ; Off          ; 3.3-V LVTTL  ; 24mA             ; Off         ; User                 ; 0 pF ;
+; FX2_FD[11] ; 205   ; 2        ; 1            ; 19           ; 0           ; 1                     ; 0                  ; no     ; no             ; no              ; no                     ; no            ; no              ; yes        ; no       ; Off          ; 3.3-V LVTTL  ; 24mA             ; Off         ; User                 ; 0 pF ;
+; FX2_FD[12] ; 203   ; 2        ; 3            ; 19           ; 3           ; 1                     ; 0                  ; no     ; no             ; no              ; no                     ; no            ; no              ; yes        ; no       ; Off          ; 3.3-V LVTTL  ; 24mA             ; Off         ; User                 ; 0 pF ;
+; FX2_FD[13] ; 201   ; 2        ; 3            ; 19           ; 2           ; 1                     ; 0                  ; no     ; no             ; no              ; no                     ; no            ; no              ; yes        ; no       ; Off          ; 3.3-V LVTTL  ; 24mA             ; Off         ; User                 ; 0 pF ;
+; FX2_FD[14] ; 200   ; 2        ; 3            ; 19           ; 1           ; 1                     ; 0                  ; no     ; no             ; no              ; no                     ; no            ; no              ; yes        ; no       ; Off          ; 3.3-V LVTTL  ; 24mA             ; Off         ; User                 ; 0 pF ;
+; FX2_FD[15] ; 199   ; 2        ; 3            ; 19           ; 0           ; 1                     ; 0                  ; no     ; no             ; no              ; no                     ; no            ; no              ; yes        ; no       ; Off          ; 3.3-V LVTTL  ; 24mA             ; Off         ; User                 ; 0 pF ;
+; FX2_FD[1]  ; 57    ; 4        ; 1            ; 0            ; 2           ; 1                     ; 0                  ; no     ; no             ; no              ; no                     ; no            ; no              ; yes        ; no       ; Off          ; 3.3-V LVTTL  ; 24mA             ; Off         ; User                 ; 0 pF ;
+; FX2_FD[2]  ; 58    ; 4        ; 1            ; 0            ; 1           ; 1                     ; 0                  ; no     ; no             ; no              ; no                     ; no            ; no              ; yes        ; no       ; Off          ; 3.3-V LVTTL  ; 24mA             ; Off         ; User                 ; 0 pF ;
+; FX2_FD[3]  ; 59    ; 4        ; 1            ; 0            ; 0           ; 1                     ; 0                  ; no     ; no             ; no              ; no                     ; no            ; no              ; yes        ; no       ; Off          ; 3.3-V LVTTL  ; 24mA             ; Off         ; User                 ; 0 pF ;
+; FX2_FD[4]  ; 60    ; 4        ; 3            ; 0            ; 2           ; 1                     ; 0                  ; no     ; no             ; no              ; no                     ; no            ; no              ; yes        ; no       ; Off          ; 3.3-V LVTTL  ; 24mA             ; Off         ; User                 ; 0 pF ;
+; FX2_FD[5]  ; 61    ; 4        ; 3            ; 0            ; 1           ; 1                     ; 0                  ; no     ; no             ; no              ; no                     ; no            ; no              ; yes        ; no       ; Off          ; 3.3-V LVTTL  ; 24mA             ; Off         ; User                 ; 0 pF ;
+; FX2_FD[6]  ; 63    ; 4        ; 3            ; 0            ; 0           ; 1                     ; 0                  ; no     ; no             ; no              ; no                     ; no            ; no              ; yes        ; no       ; Off          ; 3.3-V LVTTL  ; 24mA             ; Off         ; User                 ; 0 pF ;
+; FX2_FD[7]  ; 64    ; 4        ; 5            ; 0            ; 2           ; 1                     ; 0                  ; no     ; no             ; no              ; no                     ; no            ; no              ; yes        ; no       ; Off          ; 3.3-V LVTTL  ; 24mA             ; Off         ; User                 ; 0 pF ;
+; FX2_FD[8]  ; 208   ; 2        ; 1            ; 19           ; 3           ; 1                     ; 0                  ; no     ; no             ; no              ; no                     ; no            ; no              ; yes        ; no       ; Off          ; 3.3-V LVTTL  ; 24mA             ; Off         ; User                 ; 0 pF ;
+; FX2_FD[9]  ; 207   ; 2        ; 1            ; 19           ; 2           ; 1                     ; 0                  ; no     ; no             ; no              ; no                     ; no            ; no              ; yes        ; no       ; Off          ; 3.3-V LVTTL  ; 24mA             ; Off         ; User                 ; 0 pF ;
++------------+-------+----------+--------------+--------------+-------------+-----------------------+--------------------+--------+----------------+-----------------+------------------------+---------------+-----------------+------------+----------+--------------+--------------+------------------+-------------+----------------------+------+
+
+
++------------------------------------------------------------+
+; I/O Bank Usage                                             ;
++----------+------------------+---------------+--------------+
+; I/O Bank ; Usage            ; VCCIO Voltage ; VREF Voltage ;
++----------+------------------+---------------+--------------+
+; 1        ; 12 / 32 ( 38 % ) ; 3.3V          ; --           ;
+; 2        ; 10 / 35 ( 29 % ) ; 3.3V          ; --           ;
+; 3        ; 4 / 35 ( 11 % )  ; 3.3V          ; --           ;
+; 4        ; 8 / 36 ( 22 % )  ; 3.3V          ; --           ;
++----------+------------------+---------------+--------------+
 
 
 +------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
@@ -278,15 +313,15 @@ The pin-out file can be found in C:/HPSDR/trunk/Cyclops/Verllog Code/Test Code/C
 ; 2        ; 1          ; 1        ; ~nCSO~ / RESERVED_INPUT_WITH_WEAK_PULLUP ; input  ; 3.3-V LVTTL  ;         ; Row I/O    ; N               ; no       ; On           ;
 ; 3        ; 2          ; 1        ; RESERVED_INPUT                           ;        ;              ;         ; Row I/O    ;                 ; no       ; Off          ;
 ; 4        ; 3          ; 1        ; DEBUG_LED0                               ; output ; 3.3-V LVTTL  ;         ; Row I/O    ; Y               ; no       ; Off          ;
-; 5        ; 4          ; 1        ; RESERVED_INPUT                           ;        ;              ;         ; Row I/O    ;                 ; no       ; Off          ;
+; 5        ; 4          ; 1        ; FLAGC                                    ; input  ; 3.3-V LVTTL  ;         ; Row I/O    ; Y               ; no       ; Off          ;
 ; 6        ; 5          ; 1        ; RESERVED_INPUT                           ;        ;              ;         ; Row I/O    ;                 ; no       ; Off          ;
 ; 7        ;            ; 1        ; VCCIO1                                   ; power  ;              ; 3.3V    ; --         ;                 ; --       ; --           ;
-; 8        ; 6          ; 1        ; RESERVED_INPUT                           ;        ;              ;         ; Row I/O    ;                 ; no       ; Off          ;
+; 8        ; 6          ; 1        ; PKEND                                    ; output ; 3.3-V LVTTL  ;         ; Row I/O    ; Y               ; no       ; Off          ;
 ; 9        ;            ;          ; GND                                      ; gnd    ;              ;         ; --         ;                 ; --       ; --           ;
-; 10       ; 7          ; 1        ; RESERVED_INPUT                           ;        ;              ;         ; Row I/O    ;                 ; no       ; Off          ;
-; 11       ; 8          ; 1        ; RESERVED_INPUT                           ;        ;              ;         ; Row I/O    ;                 ; no       ; Off          ;
+; 10       ; 7          ; 1        ; FIFO_ADR[1]                              ; output ; 3.3-V LVTTL  ;         ; Row I/O    ; Y               ; no       ; Off          ;
+; 11       ; 8          ; 1        ; FIFO_ADR[0]                              ; output ; 3.3-V LVTTL  ;         ; Row I/O    ; Y               ; no       ; Off          ;
 ; 12       ; 9          ; 1        ; RESERVED_INPUT                           ;        ;              ;         ; Row I/O    ;                 ; no       ; Off          ;
-; 13       ; 10         ; 1        ; RESERVED_INPUT                           ;        ;              ;         ; Row I/O    ;                 ; no       ; Off          ;
+; 13       ; 10         ; 1        ; SLOE                                     ; output ; 3.3-V LVTTL  ;         ; Row I/O    ; Y               ; no       ; Off          ;
 ; 14       ; 18         ; 1        ; RESERVED_INPUT                           ;        ;              ;         ; Row I/O    ;                 ; no       ; Off          ;
 ; 15       ; 19         ; 1        ; RESERVED_INPUT                           ;        ;              ;         ; Row I/O    ;                 ; no       ; Off          ;
 ; 16       ; 20         ; 1        ; #TDO                                     ; output ;              ;         ; --         ;                 ; --       ; --           ;
@@ -303,10 +338,10 @@ The pin-out file can be found in C:/HPSDR/trunk/Cyclops/Verllog Code/Test Code/C
 ; 27       ; 30         ; 1        ; GND+                                     ;        ;              ;         ; Row I/O    ;                 ; --       ; --           ;
 ; 28       ; 31         ; 1        ; GND+                                     ;        ;              ;         ; Row I/O    ;                 ; --       ; --           ;
 ; 29       ;            ; 1        ; VCCIO1                                   ; power  ;              ; 3.3V    ; --         ;                 ; --       ; --           ;
-; 30       ; 32         ; 1        ; RESERVED_INPUT                           ;        ;              ;         ; Row I/O    ;                 ; no       ; Off          ;
-; 31       ; 33         ; 1        ; RESERVED_INPUT                           ;        ;              ;         ; Row I/O    ;                 ; no       ; Off          ;
+; 30       ; 32         ; 1        ; SLRD                                     ; output ; 3.3-V LVTTL  ;         ; Row I/O    ; Y               ; no       ; Off          ;
+; 31       ; 33         ; 1        ; SLWR                                     ; output ; 3.3-V LVTTL  ;         ; Row I/O    ; Y               ; no       ; Off          ;
 ; 32       ;            ;          ; VCCINT                                   ; power  ;              ; 1.2V    ; --         ;                 ; --       ; --           ;
-; 33       ; 35         ; 1        ; RESERVED_INPUT                           ;        ;              ;         ; Row I/O    ;                 ; no       ; Off          ;
+; 33       ; 35         ; 1        ; DEBUG_LED1                               ; output ; 3.3-V LVTTL  ;         ; Row I/O    ; Y               ; no       ; Off          ;
 ; 34       ; 36         ; 1        ; RESERVED_INPUT                           ;        ;              ;         ; Row I/O    ;                 ; no       ; Off          ;
 ; 35       ; 37         ; 1        ; RESERVED_INPUT                           ;        ;              ;         ; Row I/O    ;                 ; no       ; Off          ;
 ; 36       ;            ;          ; GND                                      ; gnd    ;              ;         ; --         ;                 ; --       ; --           ;
@@ -329,15 +364,15 @@ The pin-out file can be found in C:/HPSDR/trunk/Cyclops/Verllog Code/Test Code/C
 ; 53       ;            ;          ; VCCA_PLL1                                ; power  ;              ; 1.2V    ; --         ;                 ; --       ; --           ;
 ; 54       ;            ;          ; GNDA_PLL1                                ; gnd    ;              ;         ; --         ;                 ; --       ; --           ;
 ; 55       ;            ;          ; GND                                      ; gnd    ;              ;         ; --         ;                 ; --       ; --           ;
-; 56       ; 54         ; 4        ; RESERVED_INPUT                           ;        ;              ;         ; Column I/O ;                 ; no       ; Off          ;
-; 57       ; 55         ; 4        ; RESERVED_INPUT                           ;        ;              ;         ; Column I/O ;                 ; no       ; Off          ;
-; 58       ; 56         ; 4        ; RESERVED_INPUT                           ;        ;              ;         ; Column I/O ;                 ; no       ; Off          ;
-; 59       ; 57         ; 4        ; RESERVED_INPUT                           ;        ;              ;         ; Column I/O ;                 ; no       ; Off          ;
-; 60       ; 58         ; 4        ; RESERVED_INPUT                           ;        ;              ;         ; Column I/O ;                 ; no       ; Off          ;
-; 61       ; 59         ; 4        ; RESERVED_INPUT                           ;        ;              ;         ; Column I/O ;                 ; no       ; Off          ;
+; 56       ; 54         ; 4        ; FX2_FD[0]                                ; bidir  ; 3.3-V LVTTL  ;         ; Column I/O ; Y               ; no       ; Off          ;
+; 57       ; 55         ; 4        ; FX2_FD[1]                                ; bidir  ; 3.3-V LVTTL  ;         ; Column I/O ; Y               ; no       ; Off          ;
+; 58       ; 56         ; 4        ; FX2_FD[2]                                ; bidir  ; 3.3-V LVTTL  ;         ; Column I/O ; Y               ; no       ; Off          ;
+; 59       ; 57         ; 4        ; FX2_FD[3]                                ; bidir  ; 3.3-V LVTTL  ;         ; Column I/O ; Y               ; no       ; Off          ;
+; 60       ; 58         ; 4        ; FX2_FD[4]                                ; bidir  ; 3.3-V LVTTL  ;         ; Column I/O ; Y               ; no       ; Off          ;
+; 61       ; 59         ; 4        ; FX2_FD[5]                                ; bidir  ; 3.3-V LVTTL  ;         ; Column I/O ; Y               ; no       ; Off          ;
 ; 62       ;            ; 4        ; VCCIO4                                   ; power  ;              ; 3.3V    ; --         ;                 ; --       ; --           ;
-; 63       ; 60         ; 4        ; RESERVED_INPUT                           ;        ;              ;         ; Column I/O ;                 ; no       ; Off          ;
-; 64       ; 61         ; 4        ; RESERVED_INPUT                           ;        ;              ;         ; Column I/O ;                 ; no       ; Off          ;
+; 63       ; 60         ; 4        ; FX2_FD[6]                                ; bidir  ; 3.3-V LVTTL  ;         ; Column I/O ; Y               ; no       ; Off          ;
+; 64       ; 61         ; 4        ; FX2_FD[7]                                ; bidir  ; 3.3-V LVTTL  ;         ; Column I/O ; Y               ; no       ; Off          ;
 ; 65       ;            ;          ; GND                                      ; gnd    ;              ;         ; --         ;                 ; --       ; --           ;
 ; 66       ;            ;          ; VCCINT                                   ; power  ;              ; 1.2V    ; --         ;                 ; --       ; --           ;
 ; 67       ; 69         ; 4        ; RESERVED_INPUT                           ;        ;              ;         ; Column I/O ;                 ; no       ; Off          ;
@@ -470,18 +505,18 @@ The pin-out file can be found in C:/HPSDR/trunk/Cyclops/Verllog Code/Test Code/C
 ; 194      ;            ; 2        ; VCCIO2                                   ; power  ;              ; 3.3V    ; --         ;                 ; --       ; --           ;
 ; 195      ; 187        ; 2        ; RESERVED_INPUT                           ;        ;              ;         ; Column I/O ;                 ; no       ; Off          ;
 ; 196      ;            ;          ; GND                                      ; gnd    ;              ;         ; --         ;                 ; --       ; --           ;
-; 197      ; 191        ; 2        ; RESERVED_INPUT                           ;        ;              ;         ; Column I/O ;                 ; no       ; Off          ;
-; 198      ; 192        ; 2        ; RESERVED_INPUT                           ;        ;              ;         ; Column I/O ;                 ; no       ; Off          ;
-; 199      ; 195        ; 2        ; RESERVED_INPUT                           ;        ;              ;         ; Column I/O ;                 ; no       ; Off          ;
-; 200      ; 196        ; 2        ; RESERVED_INPUT                           ;        ;              ;         ; Column I/O ;                 ; no       ; Off          ;
-; 201      ; 197        ; 2        ; RESERVED_INPUT                           ;        ;              ;         ; Column I/O ;                 ; no       ; Off          ;
+; 197      ; 191        ; 2        ; FLAGB                                    ; input  ; 3.3-V LVTTL  ;         ; Column I/O ; Y               ; no       ; Off          ;
+; 198      ; 192        ; 2        ; FLAGA                                    ; input  ; 3.3-V LVTTL  ;         ; Column I/O ; Y               ; no       ; Off          ;
+; 199      ; 195        ; 2        ; FX2_FD[15]                               ; bidir  ; 3.3-V LVTTL  ;         ; Column I/O ; Y               ; no       ; Off          ;
+; 200      ; 196        ; 2        ; FX2_FD[14]                               ; bidir  ; 3.3-V LVTTL  ;         ; Column I/O ; Y               ; no       ; Off          ;
+; 201      ; 197        ; 2        ; FX2_FD[13]                               ; bidir  ; 3.3-V LVTTL  ;         ; Column I/O ; Y               ; no       ; Off          ;
 ; 202      ;            ; 2        ; VCCIO2                                   ; power  ;              ; 3.3V    ; --         ;                 ; --       ; --           ;
-; 203      ; 198        ; 2        ; RESERVED_INPUT                           ;        ;              ;         ; Column I/O ;                 ; no       ; Off          ;
+; 203      ; 198        ; 2        ; FX2_FD[12]                               ; bidir  ; 3.3-V LVTTL  ;         ; Column I/O ; Y               ; no       ; Off          ;
 ; 204      ;            ;          ; GND                                      ; gnd    ;              ;         ; --         ;                 ; --       ; --           ;
-; 205      ; 199        ; 2        ; RESERVED_INPUT                           ;        ;              ;         ; Column I/O ;                 ; no       ; Off          ;
-; 206      ; 200        ; 2        ; RESERVED_INPUT                           ;        ;              ;         ; Column I/O ;                 ; no       ; Off          ;
-; 207      ; 201        ; 2        ; RESERVED_INPUT                           ;        ;              ;         ; Column I/O ;                 ; no       ; Off          ;
-; 208      ; 202        ; 2        ; RESERVED_INPUT                           ;        ;              ;         ; Column I/O ;                 ; no       ; Off          ;
+; 205      ; 199        ; 2        ; FX2_FD[11]                               ; bidir  ; 3.3-V LVTTL  ;         ; Column I/O ; Y               ; no       ; Off          ;
+; 206      ; 200        ; 2        ; FX2_FD[10]                               ; bidir  ; 3.3-V LVTTL  ;         ; Column I/O ; Y               ; no       ; Off          ;
+; 207      ; 201        ; 2        ; FX2_FD[9]                                ; bidir  ; 3.3-V LVTTL  ;         ; Column I/O ; Y               ; no       ; Off          ;
+; 208      ; 202        ; 2        ; FX2_FD[8]                                ; bidir  ; 3.3-V LVTTL  ;         ; Column I/O ; Y               ; no       ; Off          ;
 +----------+------------+----------+------------------------------------------+--------+--------------+---------+------------+-----------------+----------+--------------+
 Note: Pin directions (input, output or bidir) are based on device operating in user mode.
 
@@ -528,8 +563,8 @@ Note: User assignments will override these defaults. The user specified values a
 +----------------------------+-------------+---------------------------+---------------+-------------+------+--------------+---------+-----------+------+--------------+--------------+-------------------+------------------+------------------------------+--------------+
 ; Compilation Hierarchy Node ; Logic Cells ; Dedicated Logic Registers ; I/O Registers ; Memory Bits ; M4Ks ; DSP Elements ; DSP 9x9 ; DSP 18x18 ; Pins ; Virtual Pins ; LUT-Only LCs ; Register-Only LCs ; LUT/Register LCs ; Full Hierarchy Name          ; Library Name ;
 +----------------------------+-------------+---------------------------+---------------+-------------+------+--------------+---------+-----------+------+--------------+--------------+-------------------+------------------+------------------------------+--------------+
-; |Cyclops                   ; 88 (57)     ; 35 (24)                   ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 6    ; 0            ; 53 (33)      ; 0 (0)             ; 35 (22)          ; |Cyclops                     ; work         ;
-;    |ADF4112_SPI:ADF4112|   ; 33 (33)     ; 11 (11)                   ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 20 (20)      ; 0 (0)             ; 13 (13)          ; |Cyclops|ADF4112_SPI:ADF4112 ; work         ;
+; |Cyclops                   ; 165 (125)   ; 88 (77)                   ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 32   ; 0            ; 77 (48)      ; 23 (23)           ; 65 (52)          ; |Cyclops                     ; work         ;
+;    |ADF4112_SPI:ADF4112|   ; 42 (42)     ; 11 (11)                   ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 29 (29)      ; 0 (0)             ; 13 (13)          ; |Cyclops|ADF4112_SPI:ADF4112 ; work         ;
 +----------------------------+-------------+---------------------------+---------------+-------------+------+--------------+---------+-----------+------+--------------+--------------+-------------------+------------------+------------------------------+--------------+
 Note: For table entries with two numbers listed, the numbers in parentheses indicate the number of resources of the given type used by the specific entity alone. The numbers listed outside of parentheses indicate the total resources of the given type used by the specific entity and all of its sub-entities in the hierarchy.
 
@@ -539,47 +574,113 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 +-------------------+----------+---------------+---------------+-----------------------+-----+
 ; Name              ; Pin Type ; Pad to Core 0 ; Pad to Core 1 ; Pad to Input Register ; TCO ;
 +-------------------+----------+---------------+---------------+-----------------------+-----+
+; FX2_FD[0]         ; Bidir    ; 6             ; 6             ; --                    ; --  ;
+; FX2_FD[1]         ; Bidir    ; 6             ; 6             ; --                    ; --  ;
+; FX2_FD[2]         ; Bidir    ; 6             ; 6             ; --                    ; --  ;
+; FX2_FD[3]         ; Bidir    ; 6             ; 6             ; --                    ; --  ;
+; FX2_FD[4]         ; Bidir    ; 6             ; 6             ; --                    ; --  ;
+; FX2_FD[5]         ; Bidir    ; 6             ; 6             ; --                    ; --  ;
+; FX2_FD[6]         ; Bidir    ; 6             ; 6             ; --                    ; --  ;
+; FX2_FD[7]         ; Bidir    ; 6             ; 6             ; --                    ; --  ;
+; FX2_FD[8]         ; Bidir    ; 6             ; 6             ; --                    ; --  ;
+; FX2_FD[9]         ; Bidir    ; 6             ; 6             ; --                    ; --  ;
+; FX2_FD[10]        ; Bidir    ; 6             ; 6             ; --                    ; --  ;
+; FX2_FD[11]        ; Bidir    ; 6             ; 6             ; --                    ; --  ;
+; FX2_FD[12]        ; Bidir    ; 6             ; 6             ; --                    ; --  ;
+; FX2_FD[13]        ; Bidir    ; 6             ; 6             ; --                    ; --  ;
+; FX2_FD[14]        ; Bidir    ; 6             ; 6             ; --                    ; --  ;
+; FX2_FD[15]        ; Bidir    ; 6             ; 6             ; --                    ; --  ;
 ; ADF4112_SPI_clock ; Output   ; --            ; --            ; --                    ; --  ;
 ; ADF4112_SPI_data  ; Output   ; --            ; --            ; --                    ; --  ;
 ; LE1               ; Output   ; --            ; --            ; --                    ; --  ;
 ; LE2               ; Output   ; --            ; --            ; --                    ; --  ;
 ; DEBUG_LED0        ; Output   ; --            ; --            ; --                    ; --  ;
+; DEBUG_LED1        ; Output   ; --            ; --            ; --                    ; --  ;
+; FLAGB             ; Input    ; 0             ; 0             ; --                    ; --  ;
+; FLAGC             ; Input    ; 0             ; 0             ; --                    ; --  ;
+; SLWR              ; Output   ; --            ; --            ; --                    ; --  ;
+; SLRD              ; Output   ; --            ; --            ; --                    ; --  ;
+; SLOE              ; Output   ; --            ; --            ; --                    ; --  ;
+; PKEND             ; Output   ; --            ; --            ; --                    ; --  ;
+; FIFO_ADR[0]       ; Output   ; --            ; --            ; --                    ; --  ;
+; FIFO_ADR[1]       ; Output   ; --            ; --            ; --                    ; --  ;
+; FLAGA             ; Input    ; 6             ; 6             ; --                    ; --  ;
 ; IFCLK             ; Input    ; 0             ; 0             ; --                    ; --  ;
 +-------------------+----------+---------------+---------------+-----------------------+-----+
 
 
-+---------------------------------------------------+
-; Pad To Core Delay Chain Fanout                    ;
-+---------------------+-------------------+---------+
-; Source Pin / Fanout ; Pad To Core Index ; Setting ;
-+---------------------+-------------------+---------+
-; IFCLK               ;                   ;         ;
-+---------------------+-------------------+---------+
++-------------------------------------------------------------+
+; Pad To Core Delay Chain Fanout                              ;
++-------------------------------+-------------------+---------+
+; Source Pin / Fanout           ; Pad To Core Index ; Setting ;
++-------------------------------+-------------------+---------+
+; FX2_FD[0]                     ;                   ;         ;
+;      - Rx_register[8]         ; 0                 ; 6       ;
+; FX2_FD[1]                     ;                   ;         ;
+;      - Rx_register[9]~feeder  ; 1                 ; 6       ;
+; FX2_FD[2]                     ;                   ;         ;
+;      - Rx_register[10]        ; 1                 ; 6       ;
+; FX2_FD[3]                     ;                   ;         ;
+;      - Rx_register[11]~feeder ; 1                 ; 6       ;
+; FX2_FD[4]                     ;                   ;         ;
+;      - Rx_register[12]        ; 0                 ; 6       ;
+; FX2_FD[5]                     ;                   ;         ;
+;      - Rx_register[13]~feeder ; 0                 ; 6       ;
+; FX2_FD[6]                     ;                   ;         ;
+;      - Rx_register[14]        ; 0                 ; 6       ;
+; FX2_FD[7]                     ;                   ;         ;
+;      - Rx_register[15]        ; 1                 ; 6       ;
+; FX2_FD[8]                     ;                   ;         ;
+;      - Rx_register[0]         ; 0                 ; 6       ;
+; FX2_FD[9]                     ;                   ;         ;
+;      - Rx_register[1]         ; 0                 ; 6       ;
+; FX2_FD[10]                    ;                   ;         ;
+;      - Rx_register[2]         ; 0                 ; 6       ;
+; FX2_FD[11]                    ;                   ;         ;
+;      - Rx_register[3]         ; 1                 ; 6       ;
+; FX2_FD[12]                    ;                   ;         ;
+;      - Rx_register[4]         ; 0                 ; 6       ;
+; FX2_FD[13]                    ;                   ;         ;
+;      - Rx_register[5]         ; 0                 ; 6       ;
+; FX2_FD[14]                    ;                   ;         ;
+;      - Rx_register[6]         ; 0                 ; 6       ;
+; FX2_FD[15]                    ;                   ;         ;
+;      - Rx_register[7]         ; 0                 ; 6       ;
+; FLAGB                         ;                   ;         ;
+; FLAGC                         ;                   ;         ;
+; FLAGA                         ;                   ;         ;
+;      - SLOE~2                 ; 0                 ; 6       ;
+;      - Mux60~0                ; 0                 ; 6       ;
+;      - DEBUG_LED1             ; 1                 ; 6       ;
+; IFCLK                         ;                   ;         ;
++-------------------------------+-------------------+---------+
 
 
-+-----------------------------------------------------------------------------------------------------------------------------------------------------------------+
-; Control Signals                                                                                                                                                 ;
-+-------------------------------------+-------------------+---------+--------------+--------+----------------------+------------------+---------------------------+
-; Name                                ; Location          ; Fan-Out ; Usage        ; Global ; Global Resource Used ; Global Line Name ; Enable Signal Source Name ;
-+-------------------------------------+-------------------+---------+--------------+--------+----------------------+------------------+---------------------------+
-; ADF4112_SPI:ADF4112|SPI_state.011~1 ; LCCOMB_X24_Y7_N10 ; 5       ; Sync. load   ; no     ; --                   ; --               ; --                        ;
-; ADF4112_SPI:ADF4112|bit_count[0]~16 ; LCCOMB_X24_Y7_N12 ; 5       ; Clock enable ; no     ; --                   ; --               ; --                        ;
-; First_LO_data[4]~54                 ; LCCOMB_X14_Y5_N30 ; 5       ; Clock enable ; no     ; --                   ; --               ; --                        ;
-; IFCLK                               ; PIN_24            ; 4       ; Clock        ; yes    ; Global Clock         ; GCLK2            ; --                        ;
-; SPI_state[2]                        ; LCFF_X16_Y6_N17   ; 17      ; Sync. load   ; no     ; --                   ; --               ; --                        ;
-; Second_LO_data[3]~42                ; LCCOMB_X14_Y5_N8  ; 4       ; Clock enable ; no     ; --                   ; --               ; --                        ;
-; clock                               ; LCFF_X32_Y10_N13  ; 31      ; Clock        ; yes    ; Global Clock         ; GCLK6            ; --                        ;
-+-------------------------------------+-------------------+---------+--------------+--------+----------------------+------------------+---------------------------+
++------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Control Signals                                                                                                                                                  ;
++-------------------------------------+--------------------+---------+--------------+--------+----------------------+------------------+---------------------------+
+; Name                                ; Location           ; Fan-Out ; Usage        ; Global ; Global Resource Used ; Global Line Name ; Enable Signal Source Name ;
++-------------------------------------+--------------------+---------+--------------+--------+----------------------+------------------+---------------------------+
+; ADF4112_SPI:ADF4112|SPI_state.011~1 ; LCCOMB_X28_Y14_N18 ; 5       ; Sync. load   ; no     ; --                   ; --               ; --                        ;
+; ADF4112_SPI:ADF4112|bit_count[0]~16 ; LCCOMB_X28_Y14_N4  ; 5       ; Clock enable ; no     ; --                   ; --               ; --                        ;
+; Decoder0~0                          ; LCCOMB_X23_Y18_N14 ; 16      ; Clock enable ; no     ; --                   ; --               ; --                        ;
+; Decoder1~1                          ; LCCOMB_X19_Y18_N14 ; 16      ; Clock enable ; no     ; --                   ; --               ; --                        ;
+; First_LO_data[1]~67                 ; LCCOMB_X23_Y18_N10 ; 19      ; Clock enable ; no     ; --                   ; --               ; --                        ;
+; IFCLK                               ; PIN_24             ; 27      ; Clock        ; yes    ; Global Clock         ; GCLK2            ; --                        ;
+; SPI_state[2]                        ; LCFF_X26_Y14_N25   ; 21      ; Sync. load   ; no     ; --                   ; --               ; --                        ;
+; Second_LO_data[3]~42                ; LCCOMB_X26_Y13_N10 ; 4       ; Clock enable ; no     ; --                   ; --               ; --                        ;
+; clock                               ; LCFF_X33_Y10_N7    ; 61      ; Clock        ; yes    ; Global Clock         ; GCLK6            ; --                        ;
++-------------------------------------+--------------------+---------+--------------+--------+----------------------+------------------+---------------------------+
 
 
-+----------------------------------------------------------------------------------------------------------+
-; Global & Other Fast Signals                                                                              ;
-+-------+------------------+---------+----------------------+------------------+---------------------------+
-; Name  ; Location         ; Fan-Out ; Global Resource Used ; Global Line Name ; Enable Signal Source Name ;
-+-------+------------------+---------+----------------------+------------------+---------------------------+
-; IFCLK ; PIN_24           ; 4       ; Global Clock         ; GCLK2            ; --                        ;
-; clock ; LCFF_X32_Y10_N13 ; 31      ; Global Clock         ; GCLK6            ; --                        ;
-+-------+------------------+---------+----------------------+------------------+---------------------------+
++---------------------------------------------------------------------------------------------------------+
+; Global & Other Fast Signals                                                                             ;
++-------+-----------------+---------+----------------------+------------------+---------------------------+
+; Name  ; Location        ; Fan-Out ; Global Resource Used ; Global Line Name ; Enable Signal Source Name ;
++-------+-----------------+---------+----------------------+------------------+---------------------------+
+; IFCLK ; PIN_24          ; 27      ; Global Clock         ; GCLK2            ; --                        ;
+; clock ; LCFF_X33_Y10_N7 ; 61      ; Global Clock         ; GCLK6            ; --                        ;
++-------+-----------------+---------+----------------------+------------------+---------------------------+
 
 
 +-----------------------------------------------+
@@ -587,56 +688,56 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 +-------------------------------------+---------+
 ; Name                                ; Fan-Out ;
 +-------------------------------------+---------+
-; SPI_state[1]                        ; 18      ;
-; SPI_state[3]                        ; 17      ;
-; SPI_state[2]                        ; 17      ;
+; SPI2_state[1]                       ; 29      ;
+; SPI2_state[0]                       ; 28      ;
+; SPI_state[1]                        ; 22      ;
+; SPI_state[3]                        ; 21      ;
+; SPI_state[2]                        ; 21      ;
+; First_LO_data[1]~67                 ; 19      ;
+; Decoder0~0                          ; 16      ;
+; Decoder1~1                          ; 16      ;
 ; SPI_state[0]                        ; 16      ;
 ; ADF4112_SPI:ADF4112|ready           ; 15      ;
-; SPI2_state[1]                       ; 12      ;
-; SPI2_state[0]                       ; 11      ;
+; ADF4112_SPI:ADF4112|bit_count[3]    ; 11      ;
+; SPI2_state[3]                       ; 10      ;
 ; ADF4112_SPI:ADF4112|bit_count[2]    ; 10      ;
-; SPI2_state[3]                       ; 9       ;
-; ADF4112_SPI:ADF4112|bit_count[0]    ; 9       ;
-; SPI2_state[2]                       ; 8       ;
+; SPI2_state[2]                       ; 9       ;
+; state_FX[0]                         ; 8       ;
+; state_FX[1]                         ; 8       ;
+; ADF4112_SPI:ADF4112|bit_count[1]    ; 8       ;
+; state_FX[2]                         ; 7       ;
+; state_FX[3]                         ; 7       ;
+; LessThan1~0                         ; 7       ;
 ; ADF4112_SPI:ADF4112|SPI_state~7     ; 7       ;
 ; ADF4112_SPI:ADF4112|SPI_state~8     ; 7       ;
-; ADF4112_SPI:ADF4112|bit_count[1]    ; 6       ;
-; First_LO_data[4]~54                 ; 5       ;
+; start1                              ; 6       ;
 ; ADF4112_SPI:ADF4112|bit_count[0]~16 ; 5       ;
 ; ADF4112_SPI:ADF4112|SPI_state.011~1 ; 5       ;
-; start1                              ; 5       ;
-; ADF4112_SPI:ADF4112|bit_count[3]    ; 5       ;
+; ADF4112_SPI:ADF4112|bit_count[0]    ; 5       ;
 ; Second_LO_data[3]~42                ; 4       ;
 ; spi_clock[1]                        ; 4       ;
 ; spi_clock[0]                        ; 4       ;
 ; start2                              ; 4       ;
-; LessThan1~0                         ; 4       ;
+; First_LO_data[1]                    ; 4       ;
+; Second_LO_data[1]                   ; 4       ;
+; SLOE~reg0                           ; 4       ;
+; ADF4112_SPI:ADF4112|bit_count[4]    ; 4       ;
+; FLAGA                               ; 3       ;
 ; ~GND                                ; 3       ;
-; always2~1                           ; 3       ;
-; spi_clock[2]                        ; 3       ;
-; Second_LO_data[8]                   ; 3       ;
-; ADF4112_SPI:ADF4112|Equal0~0        ; 3       ;
-; Second_LO_data[8]~40                ; 3       ;
-; ADF4112_SPI:ADF4112|SPI_LE          ; 3       ;
-; ADF4112_SPI:ADF4112|bit_count[4]    ; 3       ;
-; Mux30~0                             ; 2       ;
-; Mux33~0                             ; 2       ;
-; Mux26~0                             ; 2       ;
-; start1~2                            ; 2       ;
-; Second_LO_data[3]~41                ; 2       ;
-; ADF4112_SPI:ADF4112|SPI_state~10    ; 2       ;
-; comb~1                              ; 2       ;
-; Second_LO_data[0]                   ; 2       ;
-; First_LO_data[5]                    ; 2       ;
-; ADF4112_SPI:ADF4112|Mux0~7          ; 2       ;
-; First_LO_data[6]                    ; 2       ;
-; Second_LO_data[5]                   ; 2       ;
-; SPI_DATA[23]~24                     ; 2       ;
-; First_LO_data[1]                    ; 2       ;
-; Second_LO_data[1]                   ; 2       ;
-; ADF4112_SPI:ADF4112|SPI_data~2      ; 2       ;
-; ADF4112_SPI:ADF4112|SPI_data        ; 2       ;
-; ADF4112_SPI:ADF4112|SPI_clock       ; 2       ;
+; Equal1~10                           ; 3       ;
+; Mux33~0                             ; 3       ;
+; Rx_register[13]                     ; 3       ;
+; Rx_register[14]                     ; 3       ;
+; Rx_register[15]                     ; 3       ;
+; Rx_register[12]                     ; 3       ;
+; Rx_register[0]                      ; 3       ;
+; Rx_register[4]                      ; 3       ;
+; Rx_register[8]                      ; 3       ;
+; Rx_register[1]                      ; 3       ;
+; Rx_register[5]                      ; 3       ;
+; Rx_register[9]                      ; 3       ;
+; Rx_register[2]                      ; 3       ;
+; Rx_register[10]                     ; 3       ;
 +-------------------------------------+---------+
 
 
@@ -645,141 +746,153 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 +----------------------------+------------------------+
 ; Interconnect Resource Type ; Usage                  ;
 +----------------------------+------------------------+
-; Block interconnects        ; 83 / 26,052 ( < 1 % )  ;
-; C16 interconnects          ; 0 / 1,156 ( 0 % )      ;
-; C4 interconnects           ; 44 / 17,952 ( < 1 % )  ;
-; Direct links               ; 10 / 26,052 ( < 1 % )  ;
+; Block interconnects        ; 183 / 26,052 ( < 1 % ) ;
+; C16 interconnects          ; 25 / 1,156 ( 2 % )     ;
+; C4 interconnects           ; 108 / 17,952 ( < 1 % ) ;
+; Direct links               ; 23 / 26,052 ( < 1 % )  ;
 ; Global clocks              ; 2 / 8 ( 25 % )         ;
-; Local interconnects        ; 61 / 8,256 ( < 1 % )   ;
-; R24 interconnects          ; 3 / 1,020 ( < 1 % )    ;
-; R4 interconnects           ; 116 / 22,440 ( < 1 % ) ;
+; Local interconnects        ; 117 / 8,256 ( 1 % )    ;
+; R24 interconnects          ; 19 / 1,020 ( 2 % )     ;
+; R4 interconnects           ; 158 / 22,440 ( < 1 % ) ;
 +----------------------------+------------------------+
 
 
-+---------------------------------------------------------------------------+
-; LAB Logic Elements                                                        ;
-+---------------------------------------------+-----------------------------+
-; Number of Logic Elements  (Average = 11.00) ; Number of LABs  (Total = 8) ;
-+---------------------------------------------+-----------------------------+
-; 1                                           ; 1                           ;
-; 2                                           ; 0                           ;
-; 3                                           ; 1                           ;
-; 4                                           ; 1                           ;
-; 5                                           ; 0                           ;
-; 6                                           ; 0                           ;
-; 7                                           ; 0                           ;
-; 8                                           ; 0                           ;
-; 9                                           ; 0                           ;
-; 10                                          ; 0                           ;
-; 11                                          ; 0                           ;
-; 12                                          ; 0                           ;
-; 13                                          ; 0                           ;
-; 14                                          ; 0                           ;
-; 15                                          ; 0                           ;
-; 16                                          ; 5                           ;
-+---------------------------------------------+-----------------------------+
-
-
-+------------------------------------------------------------------+
-; LAB-wide Signals                                                 ;
-+------------------------------------+-----------------------------+
-; LAB-wide Signals  (Average = 1.38) ; Number of LABs  (Total = 8) ;
-+------------------------------------+-----------------------------+
-; 1 Clock                            ; 8                           ;
-; 1 Clock enable                     ; 2                           ;
-; 1 Sync. load                       ; 1                           ;
-+------------------------------------+-----------------------------+
-
-
 +----------------------------------------------------------------------------+
-; LAB Signals Sourced                                                        ;
-+----------------------------------------------+-----------------------------+
-; Number of Signals Sourced  (Average = 15.38) ; Number of LABs  (Total = 8) ;
-+----------------------------------------------+-----------------------------+
-; 0                                            ; 0                           ;
-; 1                                            ; 0                           ;
-; 2                                            ; 1                           ;
-; 3                                            ; 0                           ;
-; 4                                            ; 1                           ;
-; 5                                            ; 0                           ;
-; 6                                            ; 0                           ;
-; 7                                            ; 0                           ;
-; 8                                            ; 1                           ;
-; 9                                            ; 0                           ;
-; 10                                           ; 0                           ;
-; 11                                           ; 0                           ;
-; 12                                           ; 0                           ;
-; 13                                           ; 0                           ;
-; 14                                           ; 0                           ;
-; 15                                           ; 0                           ;
-; 16                                           ; 0                           ;
-; 17                                           ; 0                           ;
-; 18                                           ; 1                           ;
-; 19                                           ; 1                           ;
-; 20                                           ; 0                           ;
-; 21                                           ; 0                           ;
-; 22                                           ; 1                           ;
-; 23                                           ; 0                           ;
-; 24                                           ; 1                           ;
-; 25                                           ; 0                           ;
-; 26                                           ; 1                           ;
-+----------------------------------------------+-----------------------------+
+; LAB Logic Elements                                                         ;
++---------------------------------------------+------------------------------+
+; Number of Logic Elements  (Average = 11.79) ; Number of LABs  (Total = 14) ;
++---------------------------------------------+------------------------------+
+; 1                                           ; 1                            ;
+; 2                                           ; 0                            ;
+; 3                                           ; 0                            ;
+; 4                                           ; 1                            ;
+; 5                                           ; 1                            ;
+; 6                                           ; 1                            ;
+; 7                                           ; 0                            ;
+; 8                                           ; 0                            ;
+; 9                                           ; 0                            ;
+; 10                                          ; 1                            ;
+; 11                                          ; 1                            ;
+; 12                                          ; 0                            ;
+; 13                                          ; 0                            ;
+; 14                                          ; 0                            ;
+; 15                                          ; 0                            ;
+; 16                                          ; 8                            ;
++---------------------------------------------+------------------------------+
 
 
-+-------------------------------------------------------------------------------+
-; LAB Signals Sourced Out                                                       ;
-+-------------------------------------------------+-----------------------------+
-; Number of Signals Sourced Out  (Average = 6.25) ; Number of LABs  (Total = 8) ;
-+-------------------------------------------------+-----------------------------+
-; 0                                               ; 0                           ;
-; 1                                               ; 3                           ;
-; 2                                               ; 0                           ;
-; 3                                               ; 1                           ;
-; 4                                               ; 0                           ;
-; 5                                               ; 0                           ;
-; 6                                               ; 0                           ;
-; 7                                               ; 0                           ;
-; 8                                               ; 1                           ;
-; 9                                               ; 0                           ;
-; 10                                              ; 1                           ;
-; 11                                              ; 1                           ;
-; 12                                              ; 0                           ;
-; 13                                              ; 0                           ;
-; 14                                              ; 0                           ;
-; 15                                              ; 1                           ;
-+-------------------------------------------------+-----------------------------+
++-------------------------------------------------------------------+
+; LAB-wide Signals                                                  ;
++------------------------------------+------------------------------+
+; LAB-wide Signals  (Average = 1.50) ; Number of LABs  (Total = 14) ;
++------------------------------------+------------------------------+
+; 1 Clock                            ; 12                           ;
+; 1 Clock enable                     ; 3                            ;
+; 1 Sync. load                       ; 1                            ;
+; 2 Clock enables                    ; 3                            ;
+; 2 Clocks                           ; 2                            ;
++------------------------------------+------------------------------+
 
 
-+---------------------------------------------------------------------------+
-; LAB Distinct Inputs                                                       ;
-+---------------------------------------------+-----------------------------+
-; Number of Distinct Inputs  (Average = 9.25) ; Number of LABs  (Total = 8) ;
-+---------------------------------------------+-----------------------------+
-; 0                                           ; 0                           ;
-; 1                                           ; 1                           ;
-; 2                                           ; 0                           ;
-; 3                                           ; 1                           ;
-; 4                                           ; 0                           ;
-; 5                                           ; 0                           ;
-; 6                                           ; 1                           ;
-; 7                                           ; 0                           ;
-; 8                                           ; 2                           ;
-; 9                                           ; 0                           ;
-; 10                                          ; 0                           ;
-; 11                                          ; 1                           ;
-; 12                                          ; 0                           ;
-; 13                                          ; 0                           ;
-; 14                                          ; 1                           ;
-; 15                                          ; 0                           ;
-; 16                                          ; 0                           ;
-; 17                                          ; 0                           ;
-; 18                                          ; 0                           ;
-; 19                                          ; 0                           ;
-; 20                                          ; 0                           ;
-; 21                                          ; 0                           ;
-; 22                                          ; 0                           ;
-; 23                                          ; 1                           ;
-+---------------------------------------------+-----------------------------+
++-----------------------------------------------------------------------------+
+; LAB Signals Sourced                                                         ;
++----------------------------------------------+------------------------------+
+; Number of Signals Sourced  (Average = 17.36) ; Number of LABs  (Total = 14) ;
++----------------------------------------------+------------------------------+
+; 0                                            ; 0                            ;
+; 1                                            ; 0                            ;
+; 2                                            ; 1                            ;
+; 3                                            ; 0                            ;
+; 4                                            ; 0                            ;
+; 5                                            ; 0                            ;
+; 6                                            ; 1                            ;
+; 7                                            ; 0                            ;
+; 8                                            ; 1                            ;
+; 9                                            ; 0                            ;
+; 10                                           ; 0                            ;
+; 11                                           ; 1                            ;
+; 12                                           ; 0                            ;
+; 13                                           ; 0                            ;
+; 14                                           ; 1                            ;
+; 15                                           ; 0                            ;
+; 16                                           ; 0                            ;
+; 17                                           ; 0                            ;
+; 18                                           ; 2                            ;
+; 19                                           ; 1                            ;
+; 20                                           ; 0                            ;
+; 21                                           ; 1                            ;
+; 22                                           ; 0                            ;
+; 23                                           ; 1                            ;
+; 24                                           ; 1                            ;
+; 25                                           ; 2                            ;
+; 26                                           ; 0                            ;
+; 27                                           ; 0                            ;
+; 28                                           ; 0                            ;
+; 29                                           ; 1                            ;
++----------------------------------------------+------------------------------+
+
+
++--------------------------------------------------------------------------------+
+; LAB Signals Sourced Out                                                        ;
++-------------------------------------------------+------------------------------+
+; Number of Signals Sourced Out  (Average = 6.43) ; Number of LABs  (Total = 14) ;
++-------------------------------------------------+------------------------------+
+; 0                                               ; 0                            ;
+; 1                                               ; 2                            ;
+; 2                                               ; 0                            ;
+; 3                                               ; 0                            ;
+; 4                                               ; 0                            ;
+; 5                                               ; 5                            ;
+; 6                                               ; 2                            ;
+; 7                                               ; 2                            ;
+; 8                                               ; 0                            ;
+; 9                                               ; 0                            ;
+; 10                                              ; 0                            ;
+; 11                                              ; 1                            ;
+; 12                                              ; 0                            ;
+; 13                                              ; 2                            ;
++-------------------------------------------------+------------------------------+
+
+
++-----------------------------------------------------------------------------+
+; LAB Distinct Inputs                                                         ;
++----------------------------------------------+------------------------------+
+; Number of Distinct Inputs  (Average = 11.93) ; Number of LABs  (Total = 14) ;
++----------------------------------------------+------------------------------+
+; 0                                            ; 0                            ;
+; 1                                            ; 1                            ;
+; 2                                            ; 1                            ;
+; 3                                            ; 2                            ;
+; 4                                            ; 0                            ;
+; 5                                            ; 1                            ;
+; 6                                            ; 0                            ;
+; 7                                            ; 1                            ;
+; 8                                            ; 0                            ;
+; 9                                            ; 2                            ;
+; 10                                           ; 0                            ;
+; 11                                           ; 0                            ;
+; 12                                           ; 0                            ;
+; 13                                           ; 0                            ;
+; 14                                           ; 0                            ;
+; 15                                           ; 1                            ;
+; 16                                           ; 0                            ;
+; 17                                           ; 0                            ;
+; 18                                           ; 1                            ;
+; 19                                           ; 0                            ;
+; 20                                           ; 1                            ;
+; 21                                           ; 1                            ;
+; 22                                           ; 1                            ;
+; 23                                           ; 0                            ;
+; 24                                           ; 0                            ;
+; 25                                           ; 0                            ;
+; 26                                           ; 0                            ;
+; 27                                           ; 0                            ;
+; 28                                           ; 0                            ;
+; 29                                           ; 0                            ;
+; 30                                           ; 0                            ;
+; 31                                           ; 0                            ;
+; 32                                           ; 1                            ;
++----------------------------------------------+------------------------------+
 
 
 +--------------------------------------------------------------------+
@@ -835,27 +948,27 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 ; Name                                                             ; Value       ;
 +------------------------------------------------------------------+-------------+
 ; Auto Fit Point 1 - Fit Attempt 1                                 ; ff          ;
-; Mid Wire Use - Fit Attempt 1                                     ; 0           ;
-; Mid Slack - Fit Attempt 1                                        ; 16178       ;
-; Internal Atom Count - Fit Attempt 1                              ; 122         ;
-; LE/ALM Count - Fit Attempt 1                                     ; 88          ;
-; LAB Count - Fit Attempt 1                                        ; 8           ;
-; Outputs per Lab - Fit Attempt 1                                  ; 6.500       ;
-; Inputs per LAB - Fit Attempt 1                                   ; 8.625       ;
-; Global Inputs per LAB - Fit Attempt 1                            ; 1.000       ;
-; LAB Constraint 'non-global clock + sync load' - Fit Attempt 1    ; 0:5;1:3     ;
-; LAB Constraint 'non-global controls' - Fit Attempt 1             ; 0:3;1:4;3:1 ;
-; LAB Constraint 'non-global + aclr' - Fit Attempt 1               ; 0:3;1:4;3:1 ;
-; LAB Constraint 'global non-clock non-aclr' - Fit Attempt 1       ; 0:8         ;
-; LAB Constraint 'global controls' - Fit Attempt 1                 ; 1:8         ;
-; LAB Constraint 'deterministic LABSMUXA/LABXMUXB' - Fit Attempt 1 ; 0:5;1:3     ;
-; LAB Constraint 'deterministic LABSMUXC/LABXMUXD' - Fit Attempt 1 ; 0:3;1:4;2:1 ;
-; LAB Constraint 'clock / ce pair constraint' - Fit Attempt 1      ; 1:5;2:3     ;
-; LAB Constraint 'aclr constraint' - Fit Attempt 1                 ; 1:8         ;
-; LAB Constraint 'true sload_sclear pair' - Fit Attempt 1          ; 0:3;1:5     ;
-; LAB Constraint 'constant sload_sclear pair' - Fit Attempt 1      ; 0:8         ;
-; LAB Constraint 'has placement constraint' - Fit Attempt 1        ; 0:8         ;
-; LAB Constraint 'group hierarchy constraint' - Fit Attempt 1      ; 1:3;2:5     ;
+; Mid Wire Use - Fit Attempt 1                                     ; 1           ;
+; Mid Slack - Fit Attempt 1                                        ; 3993        ;
+; Internal Atom Count - Fit Attempt 1                              ; 230         ;
+; LE/ALM Count - Fit Attempt 1                                     ; 165         ;
+; LAB Count - Fit Attempt 1                                        ; 14          ;
+; Outputs per Lab - Fit Attempt 1                                  ; 6.571       ;
+; Inputs per LAB - Fit Attempt 1                                   ; 11.000      ;
+; Global Inputs per LAB - Fit Attempt 1                            ; 1.143       ;
+; LAB Constraint 'non-global clock + sync load' - Fit Attempt 1    ; 0:11;1:3    ;
+; LAB Constraint 'non-global controls' - Fit Attempt 1             ; 0:4;1:5;2:5 ;
+; LAB Constraint 'non-global + aclr' - Fit Attempt 1               ; 0:4;1:5;2:5 ;
+; LAB Constraint 'global non-clock non-aclr' - Fit Attempt 1       ; 0:14        ;
+; LAB Constraint 'global controls' - Fit Attempt 1                 ; 1:12;2:2    ;
+; LAB Constraint 'deterministic LABSMUXA/LABXMUXB' - Fit Attempt 1 ; 0:5;1:9     ;
+; LAB Constraint 'deterministic LABSMUXC/LABXMUXD' - Fit Attempt 1 ; 0:4;1:8;2:2 ;
+; LAB Constraint 'clock / ce pair constraint' - Fit Attempt 1      ; 1:8;2:6     ;
+; LAB Constraint 'aclr constraint' - Fit Attempt 1                 ; 1:14        ;
+; LAB Constraint 'true sload_sclear pair' - Fit Attempt 1          ; 0:8;1:6     ;
+; LAB Constraint 'constant sload_sclear pair' - Fit Attempt 1      ; 0:14        ;
+; LAB Constraint 'has placement constraint' - Fit Attempt 1        ; 0:14        ;
+; LAB Constraint 'group hierarchy constraint' - Fit Attempt 1      ; 1:9;2:5     ;
 ; LEs in Chains - Fit Attempt 1                                    ; 5           ;
 ; LEs in Long Chains - Fit Attempt 1                               ; 0           ;
 ; LABs with Chains - Fit Attempt 1                                 ; 1           ;
@@ -864,31 +977,30 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 +------------------------------------------------------------------+-------------+
 
 
-+---------------------------------------------+
-; Advanced Data - Placement                   ;
-+-------------------------------------+-------+
-; Name                                ; Value ;
-+-------------------------------------+-------+
-; Auto Fit Point 2 - Fit Attempt 1    ; ff    ;
-; Auto Fit Point 5 - Fit Attempt 1    ; ff    ;
-; Mid Wire Use - Fit Attempt 1        ; 0     ;
-; Mid Slack - Fit Attempt 1           ; 16598 ;
-; Auto Fit Point 6 - Fit Attempt 1    ; ff    ;
-; Auto Fit Point 6 - Fit Attempt 1    ; ff    ;
-; Auto Fit Point 6 - Fit Attempt 1    ; ff    ;
-; Auto Fit Point 5 - Fit Attempt 1    ; ff    ;
-; Mid Wire Use - Fit Attempt 1        ; 0     ;
-; Mid Slack - Fit Attempt 1           ; 16598 ;
-; Auto Fit Point 6 - Fit Attempt 1    ; ff    ;
-; Auto Fit Point 6 - Fit Attempt 1    ; ff    ;
-; Auto Fit Point 6 - Fit Attempt 1    ; ff    ;
-; Late Wire Use - Fit Attempt 1       ; 0     ;
-; Late Slack - Fit Attempt 1          ; 16598 ;
-; Peak Regional Wire - Fit Attempt 1  ; 0.000 ;
-; Auto Fit Point 7 - Fit Attempt 1    ; ff    ;
-; Time - Fit Attempt 1                ; 0     ;
-; Time in tsm_tan.dll - Fit Attempt 1 ; 0.016 ;
-+-------------------------------------+-------+
++--------------------------------------------+
+; Advanced Data - Placement                  ;
++------------------------------------+-------+
+; Name                               ; Value ;
++------------------------------------+-------+
+; Auto Fit Point 2 - Fit Attempt 1   ; ff    ;
+; Auto Fit Point 5 - Fit Attempt 1   ; ff    ;
+; Mid Wire Use - Fit Attempt 1       ; 1     ;
+; Mid Slack - Fit Attempt 1          ; 6794  ;
+; Auto Fit Point 6 - Fit Attempt 1   ; ff    ;
+; Auto Fit Point 6 - Fit Attempt 1   ; ff    ;
+; Auto Fit Point 6 - Fit Attempt 1   ; ff    ;
+; Auto Fit Point 5 - Fit Attempt 1   ; ff    ;
+; Mid Wire Use - Fit Attempt 1       ; 1     ;
+; Mid Slack - Fit Attempt 1          ; 6794  ;
+; Auto Fit Point 6 - Fit Attempt 1   ; ff    ;
+; Auto Fit Point 6 - Fit Attempt 1   ; ff    ;
+; Auto Fit Point 6 - Fit Attempt 1   ; ff    ;
+; Late Wire Use - Fit Attempt 1      ; 1     ;
+; Late Slack - Fit Attempt 1         ; 6794  ;
+; Peak Regional Wire - Fit Attempt 1 ; 0.000 ;
+; Auto Fit Point 7 - Fit Attempt 1   ; ff    ;
+; Time - Fit Attempt 1               ; 0     ;
++------------------------------------+-------+
 
 
 +---------------------------------------------------+
@@ -896,14 +1008,14 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 +-------------------------------------+-------------+
 ; Name                                ; Value       ;
 +-------------------------------------+-------------+
-; Early Slack - Fit Attempt 1         ; 19523       ;
-; Early Wire Use - Fit Attempt 1      ; 0           ;
-; Peak Regional Wire - Fit Attempt 1  ; 1           ;
-; Mid Slack - Fit Attempt 1           ; 19081       ;
+; Early Slack - Fit Attempt 1         ; 9395        ;
+; Early Wire Use - Fit Attempt 1      ; 1           ;
+; Peak Regional Wire - Fit Attempt 1  ; 3           ;
+; Mid Slack - Fit Attempt 1           ; 7397        ;
 ; Late Slack - Fit Attempt 1          ; -2147483648 ;
-; Late Wire Use - Fit Attempt 1       ; 0           ;
+; Late Wire Use - Fit Attempt 1       ; 1           ;
 ; Time - Fit Attempt 1                ; 0           ;
-; Time in tsm_tan.dll - Fit Attempt 1 ; 0.016       ;
+; Time in tsm_tan.dll - Fit Attempt 1 ; 0.047       ;
 +-------------------------------------+-------------+
 
 
@@ -913,7 +1025,7 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 Info: *******************************************************************
 Info: Running Quartus II Fitter
     Info: Version 9.0 Build 132 02/25/2009 SJ Web Edition
-    Info: Processing started: Fri Jul 24 16:54:45 2009
+    Info: Processing started: Sat Aug 22 15:33:46 2009
 Info: Command: quartus_fit --read_settings_files=off --write_settings_files=off Cyclops -c Cyclops
 Info: Selected device EP2C8Q208C8 for design "Cyclops"
 Info: Fitter is performing an Auto Fit compilation, which may decrease Fitter effort to reduce compilation time
@@ -959,107 +1071,149 @@ Warning: Ignored locations or region assignments to the following nodes
     Warning: Node "ADC[7]" is assigned to location or region, but does not exist in design
     Warning: Node "ADC[8]" is assigned to location or region, but does not exist in design
     Warning: Node "ADC[9]" is assigned to location or region, but does not exist in design
-    Warning: Node "DEBUG_LED1" is assigned to location or region, but does not exist in design
     Warning: Node "DEBUG_LED2" is assigned to location or region, but does not exist in design
     Warning: Node "DEBUG_LED3" is assigned to location or region, but does not exist in design
-    Warning: Node "FIFO_ADR[0]" is assigned to location or region, but does not exist in design
-    Warning: Node "FIFO_ADR[1]" is assigned to location or region, but does not exist in design
-    Warning: Node "FLAGA" is assigned to location or region, but does not exist in design
-    Warning: Node "FLAGB" is assigned to location or region, but does not exist in design
-    Warning: Node "FLAGC" is assigned to location or region, but does not exist in design
     Warning: Node "FPGA_CLK6IN" is assigned to location or region, but does not exist in design
-    Warning: Node "FX2_FD[0]" is assigned to location or region, but does not exist in design
-    Warning: Node "FX2_FD[10]" is assigned to location or region, but does not exist in design
-    Warning: Node "FX2_FD[11]" is assigned to location or region, but does not exist in design
-    Warning: Node "FX2_FD[12]" is assigned to location or region, but does not exist in design
-    Warning: Node "FX2_FD[13]" is assigned to location or region, but does not exist in design
-    Warning: Node "FX2_FD[14]" is assigned to location or region, but does not exist in design
-    Warning: Node "FX2_FD[15]" is assigned to location or region, but does not exist in design
-    Warning: Node "FX2_FD[1]" is assigned to location or region, but does not exist in design
-    Warning: Node "FX2_FD[2]" is assigned to location or region, but does not exist in design
-    Warning: Node "FX2_FD[3]" is assigned to location or region, but does not exist in design
-    Warning: Node "FX2_FD[4]" is assigned to location or region, but does not exist in design
-    Warning: Node "FX2_FD[5]" is assigned to location or region, but does not exist in design
-    Warning: Node "FX2_FD[6]" is assigned to location or region, but does not exist in design
-    Warning: Node "FX2_FD[7]" is assigned to location or region, but does not exist in design
-    Warning: Node "FX2_FD[8]" is assigned to location or region, but does not exist in design
-    Warning: Node "FX2_FD[9]" is assigned to location or region, but does not exist in design
     Warning: Node "LMX2326_2_SPI_LE" is assigned to location or region, but does not exist in design
     Warning: Node "LMX2326_2_SPI_clock" is assigned to location or region, but does not exist in design
     Warning: Node "LMX2326_2_SPI_data" is assigned to location or region, but does not exist in design
     Warning: Node "LMX2326_SPI_LE" is assigned to location or region, but does not exist in design
     Warning: Node "LMX2326_SPI_clock" is assigned to location or region, but does not exist in design
     Warning: Node "LMX2326_SPI_data" is assigned to location or region, but does not exist in design
-    Warning: Node "PKEND" is assigned to location or region, but does not exist in design
     Warning: Node "Ref" is assigned to location or region, but does not exist in design
     Warning: Node "Ref2" is assigned to location or region, but does not exist in design
-    Warning: Node "SLOE" is assigned to location or region, but does not exist in design
-    Warning: Node "SLRD" is assigned to location or region, but does not exist in design
-    Warning: Node "SLWR" is assigned to location or region, but does not exist in design
-Info: Fitter preparation operations ending: elapsed time is 00:00:00
+Info: Fitter preparation operations ending: elapsed time is 00:00:01
 Info: Fitter placement preparation operations beginning
 Info: Fitter placement preparation operations ending: elapsed time is 00:00:00
 Info: Fitter placement operations beginning
 Info: Fitter placement was successful
 Info: Fitter placement operations ending: elapsed time is 00:00:00
-Info: Slack time is 19.58 ns between source register "spi_clock[1]" and destination register "spi_clock[0]"
-    Info: + Largest register to register requirement is 20.569 ns
-    Info:   Shortest clock path from clock "IFCLK" to destination register is 2.545 ns
-        Info: 1: + IC(0.000 ns) + CELL(0.854 ns) = 0.854 ns; Loc. = Unassigned; Fanout = 1; CLK Node = 'IFCLK'
-        Info: 2: + IC(0.138 ns) + CELL(0.000 ns) = 0.992 ns; Loc. = Unassigned; Fanout = 4; COMB Node = 'IFCLK~clkctrl'
-        Info: 3: + IC(0.887 ns) + CELL(0.666 ns) = 2.545 ns; Loc. = Unassigned; Fanout = 4; REG Node = 'spi_clock[0]'
-        Info: Total cell delay = 1.520 ns ( 59.72 % )
-        Info: Total interconnect delay = 1.025 ns ( 40.28 % )
-    Info:   Longest clock path from clock "IFCLK" to destination register is 2.545 ns
-        Info: 1: + IC(0.000 ns) + CELL(0.854 ns) = 0.854 ns; Loc. = Unassigned; Fanout = 1; CLK Node = 'IFCLK'
-        Info: 2: + IC(0.138 ns) + CELL(0.000 ns) = 0.992 ns; Loc. = Unassigned; Fanout = 4; COMB Node = 'IFCLK~clkctrl'
-        Info: 3: + IC(0.887 ns) + CELL(0.666 ns) = 2.545 ns; Loc. = Unassigned; Fanout = 4; REG Node = 'spi_clock[0]'
-        Info: Total cell delay = 1.520 ns ( 59.72 % )
-        Info: Total interconnect delay = 1.025 ns ( 40.28 % )
+Info: Slack time is 8.797 ns between source register "Rx_register[9]" and destination register "SPI2_state[0]"
+    Info: + Largest register to register requirement is 13.563 ns
+    Info:   Shortest clock path from clock "clock" to destination register is 2.531 ns
+        Info: 1: + IC(0.000 ns) + CELL(0.000 ns) = 0.000 ns; Loc. = Unassigned; Fanout = 2; CLK Node = 'clock'
+        Info: 2: + IC(0.978 ns) + CELL(0.000 ns) = 0.978 ns; Loc. = Unassigned; Fanout = 61; COMB Node = 'clock~clkctrl'
+        Info: 3: + IC(0.887 ns) + CELL(0.666 ns) = 2.531 ns; Loc. = Unassigned; Fanout = 28; REG Node = 'SPI2_state[0]'
+        Info: Total cell delay = 0.666 ns ( 26.31 % )
+        Info: Total interconnect delay = 1.865 ns ( 73.69 % )
+    Info:   Longest clock path from clock "clock" to destination register is 2.531 ns
+        Info: 1: + IC(0.000 ns) + CELL(0.000 ns) = 0.000 ns; Loc. = Unassigned; Fanout = 2; CLK Node = 'clock'
+        Info: 2: + IC(0.978 ns) + CELL(0.000 ns) = 0.978 ns; Loc. = Unassigned; Fanout = 61; COMB Node = 'clock~clkctrl'
+        Info: 3: + IC(0.887 ns) + CELL(0.666 ns) = 2.531 ns; Loc. = Unassigned; Fanout = 28; REG Node = 'SPI2_state[0]'
+        Info: Total cell delay = 0.666 ns ( 26.31 % )
+        Info: Total interconnect delay = 1.865 ns ( 73.69 % )
     Info:   Shortest clock path from clock "IFCLK" to source register is 2.545 ns
         Info: 1: + IC(0.000 ns) + CELL(0.854 ns) = 0.854 ns; Loc. = Unassigned; Fanout = 1; CLK Node = 'IFCLK'
-        Info: 2: + IC(0.138 ns) + CELL(0.000 ns) = 0.992 ns; Loc. = Unassigned; Fanout = 4; COMB Node = 'IFCLK~clkctrl'
-        Info: 3: + IC(0.887 ns) + CELL(0.666 ns) = 2.545 ns; Loc. = Unassigned; Fanout = 4; REG Node = 'spi_clock[1]'
+        Info: 2: + IC(0.138 ns) + CELL(0.000 ns) = 0.992 ns; Loc. = Unassigned; Fanout = 27; COMB Node = 'IFCLK~clkctrl'
+        Info: 3: + IC(0.887 ns) + CELL(0.666 ns) = 2.545 ns; Loc. = Unassigned; Fanout = 3; REG Node = 'Rx_register[9]'
         Info: Total cell delay = 1.520 ns ( 59.72 % )
         Info: Total interconnect delay = 1.025 ns ( 40.28 % )
     Info:   Longest clock path from clock "IFCLK" to source register is 2.545 ns
         Info: 1: + IC(0.000 ns) + CELL(0.854 ns) = 0.854 ns; Loc. = Unassigned; Fanout = 1; CLK Node = 'IFCLK'
-        Info: 2: + IC(0.138 ns) + CELL(0.000 ns) = 0.992 ns; Loc. = Unassigned; Fanout = 4; COMB Node = 'IFCLK~clkctrl'
-        Info: 3: + IC(0.887 ns) + CELL(0.666 ns) = 2.545 ns; Loc. = Unassigned; Fanout = 4; REG Node = 'spi_clock[1]'
+        Info: 2: + IC(0.138 ns) + CELL(0.000 ns) = 0.992 ns; Loc. = Unassigned; Fanout = 27; COMB Node = 'IFCLK~clkctrl'
+        Info: 3: + IC(0.887 ns) + CELL(0.666 ns) = 2.545 ns; Loc. = Unassigned; Fanout = 3; REG Node = 'Rx_register[9]'
         Info: Total cell delay = 1.520 ns ( 59.72 % )
         Info: Total interconnect delay = 1.025 ns ( 40.28 % )
     Info:   Micro clock to output delay of source is 0.304 ns
     Info:   Micro setup delay of destination is -0.040 ns
-    Info: - Longest register to register delay is 0.989 ns
-        Info: 1: + IC(0.000 ns) + CELL(0.000 ns) = 0.000 ns; Loc. = Unassigned; Fanout = 4; REG Node = 'spi_clock[1]'
-        Info: 2: + IC(0.675 ns) + CELL(0.206 ns) = 0.881 ns; Loc. = Unassigned; Fanout = 1; COMB Node = 'spi_clock~3'
-        Info: 3: + IC(0.000 ns) + CELL(0.108 ns) = 0.989 ns; Loc. = Unassigned; Fanout = 4; REG Node = 'spi_clock[0]'
-        Info: Total cell delay = 0.314 ns ( 31.75 % )
-        Info: Total interconnect delay = 0.675 ns ( 68.25 % )
-Info: Estimated most critical path is register to register delay of 0.989 ns
-    Info: 1: + IC(0.000 ns) + CELL(0.000 ns) = 0.000 ns; Loc. = LAB_X32_Y10; Fanout = 4; REG Node = 'spi_clock[1]'
-    Info: 2: + IC(0.675 ns) + CELL(0.206 ns) = 0.881 ns; Loc. = LAB_X32_Y10; Fanout = 1; COMB Node = 'spi_clock~3'
-    Info: 3: + IC(0.000 ns) + CELL(0.108 ns) = 0.989 ns; Loc. = LAB_X32_Y10; Fanout = 4; REG Node = 'spi_clock[0]'
-    Info: Total cell delay = 0.314 ns ( 31.75 % )
-    Info: Total interconnect delay = 0.675 ns ( 68.25 % )
+    Info: - Longest register to register delay is 4.766 ns
+        Info: 1: + IC(0.000 ns) + CELL(0.000 ns) = 0.000 ns; Loc. = Unassigned; Fanout = 3; REG Node = 'Rx_register[9]'
+        Info: 2: + IC(0.536 ns) + CELL(0.614 ns) = 1.150 ns; Loc. = Unassigned; Fanout = 1; COMB Node = 'Equal1~1'
+        Info: 3: + IC(0.527 ns) + CELL(0.589 ns) = 2.266 ns; Loc. = Unassigned; Fanout = 1; COMB Node = 'Equal1~4'
+        Info: 4: + IC(0.160 ns) + CELL(0.614 ns) = 3.040 ns; Loc. = Unassigned; Fanout = 3; COMB Node = 'Equal1~10'
+        Info: 5: + IC(0.605 ns) + CELL(0.202 ns) = 3.847 ns; Loc. = Unassigned; Fanout = 1; COMB Node = 'Mux32~0'
+        Info: 6: + IC(0.187 ns) + CELL(0.624 ns) = 4.658 ns; Loc. = Unassigned; Fanout = 1; COMB Node = 'Mux32~3'
+        Info: 7: + IC(0.000 ns) + CELL(0.108 ns) = 4.766 ns; Loc. = Unassigned; Fanout = 28; REG Node = 'SPI2_state[0]'
+        Info: Total cell delay = 2.751 ns ( 57.72 % )
+        Info: Total interconnect delay = 2.015 ns ( 42.28 % )
+Info: Estimated most critical path is register to register delay of 4.766 ns
+    Info: 1: + IC(0.000 ns) + CELL(0.000 ns) = 0.000 ns; Loc. = LAB_X19_Y18; Fanout = 3; REG Node = 'Rx_register[9]'
+    Info: 2: + IC(0.536 ns) + CELL(0.614 ns) = 1.150 ns; Loc. = LAB_X18_Y18; Fanout = 1; COMB Node = 'Equal1~1'
+    Info: 3: + IC(0.527 ns) + CELL(0.589 ns) = 2.266 ns; Loc. = LAB_X19_Y18; Fanout = 1; COMB Node = 'Equal1~4'
+    Info: 4: + IC(0.160 ns) + CELL(0.614 ns) = 3.040 ns; Loc. = LAB_X19_Y18; Fanout = 3; COMB Node = 'Equal1~10'
+    Info: 5: + IC(0.605 ns) + CELL(0.202 ns) = 3.847 ns; Loc. = LAB_X19_Y18; Fanout = 1; COMB Node = 'Mux32~0'
+    Info: 6: + IC(0.187 ns) + CELL(0.624 ns) = 4.658 ns; Loc. = LAB_X19_Y18; Fanout = 1; COMB Node = 'Mux32~3'
+    Info: 7: + IC(0.000 ns) + CELL(0.108 ns) = 4.766 ns; Loc. = LAB_X19_Y18; Fanout = 28; REG Node = 'SPI2_state[0]'
+    Info: Total cell delay = 2.751 ns ( 57.72 % )
+    Info: Total interconnect delay = 2.015 ns ( 42.28 % )
 Info: Fitter routing operations beginning
 Info: Average interconnect usage is 0% of the available device resources
-    Info: Peak interconnect usage is 1% of the available device resources in the region that extends from location X11_Y0 to location X22_Y9
+    Info: Peak interconnect usage is 2% of the available device resources in the region that extends from location X11_Y10 to location X22_Y19
 Info: Fitter routing operations ending: elapsed time is 00:00:00
 Info: The Fitter performed an Auto Fit compilation.  Optimizations were skipped to reduce compilation time.
     Info: Optimizations that may affect the design's routability were skipped
     Info: Optimizations that may affect the design's timing were skipped
 Info: Started post-fitting delay annotation
-Warning: Found 5 output pins without output pin load capacitance assignment
+Warning: Found 28 output pins without output pin load capacitance assignment
+    Info: Pin "FX2_FD[0]" has no specified output pin load capacitance -- assuming default load capacitance of 0 pF for timing analysis
+    Info: Pin "FX2_FD[1]" has no specified output pin load capacitance -- assuming default load capacitance of 0 pF for timing analysis
+    Info: Pin "FX2_FD[2]" has no specified output pin load capacitance -- assuming default load capacitance of 0 pF for timing analysis
+    Info: Pin "FX2_FD[3]" has no specified output pin load capacitance -- assuming default load capacitance of 0 pF for timing analysis
+    Info: Pin "FX2_FD[4]" has no specified output pin load capacitance -- assuming default load capacitance of 0 pF for timing analysis
+    Info: Pin "FX2_FD[5]" has no specified output pin load capacitance -- assuming default load capacitance of 0 pF for timing analysis
+    Info: Pin "FX2_FD[6]" has no specified output pin load capacitance -- assuming default load capacitance of 0 pF for timing analysis
+    Info: Pin "FX2_FD[7]" has no specified output pin load capacitance -- assuming default load capacitance of 0 pF for timing analysis
+    Info: Pin "FX2_FD[8]" has no specified output pin load capacitance -- assuming default load capacitance of 0 pF for timing analysis
+    Info: Pin "FX2_FD[9]" has no specified output pin load capacitance -- assuming default load capacitance of 0 pF for timing analysis
+    Info: Pin "FX2_FD[10]" has no specified output pin load capacitance -- assuming default load capacitance of 0 pF for timing analysis
+    Info: Pin "FX2_FD[11]" has no specified output pin load capacitance -- assuming default load capacitance of 0 pF for timing analysis
+    Info: Pin "FX2_FD[12]" has no specified output pin load capacitance -- assuming default load capacitance of 0 pF for timing analysis
+    Info: Pin "FX2_FD[13]" has no specified output pin load capacitance -- assuming default load capacitance of 0 pF for timing analysis
+    Info: Pin "FX2_FD[14]" has no specified output pin load capacitance -- assuming default load capacitance of 0 pF for timing analysis
+    Info: Pin "FX2_FD[15]" has no specified output pin load capacitance -- assuming default load capacitance of 0 pF for timing analysis
     Info: Pin "ADF4112_SPI_clock" has no specified output pin load capacitance -- assuming default load capacitance of 0 pF for timing analysis
     Info: Pin "ADF4112_SPI_data" has no specified output pin load capacitance -- assuming default load capacitance of 0 pF for timing analysis
     Info: Pin "LE1" has no specified output pin load capacitance -- assuming default load capacitance of 0 pF for timing analysis
     Info: Pin "LE2" has no specified output pin load capacitance -- assuming default load capacitance of 0 pF for timing analysis
     Info: Pin "DEBUG_LED0" has no specified output pin load capacitance -- assuming default load capacitance of 0 pF for timing analysis
+    Info: Pin "DEBUG_LED1" has no specified output pin load capacitance -- assuming default load capacitance of 0 pF for timing analysis
+    Info: Pin "SLWR" has no specified output pin load capacitance -- assuming default load capacitance of 0 pF for timing analysis
+    Info: Pin "SLRD" has no specified output pin load capacitance -- assuming default load capacitance of 0 pF for timing analysis
+    Info: Pin "SLOE" has no specified output pin load capacitance -- assuming default load capacitance of 0 pF for timing analysis
+    Info: Pin "PKEND" has no specified output pin load capacitance -- assuming default load capacitance of 0 pF for timing analysis
+    Info: Pin "FIFO_ADR[0]" has no specified output pin load capacitance -- assuming default load capacitance of 0 pF for timing analysis
+    Info: Pin "FIFO_ADR[1]" has no specified output pin load capacitance -- assuming default load capacitance of 0 pF for timing analysis
 Info: Delay annotation completed successfully
-Info: Quartus II Fitter was successful. 0 errors, 56 warnings
-    Info: Peak virtual memory: 192 megabytes
-    Info: Processing ended: Fri Jul 24 16:54:48 2009
+Warning: Following 16 pins have no output enable or a GND or VCC output enable - later changes to this connectivity may change fitting results
+    Info: Pin FX2_FD[0] has a permanently disabled output enable
+    Info: Pin FX2_FD[1] has a permanently disabled output enable
+    Info: Pin FX2_FD[2] has a permanently disabled output enable
+    Info: Pin FX2_FD[3] has a permanently disabled output enable
+    Info: Pin FX2_FD[4] has a permanently disabled output enable
+    Info: Pin FX2_FD[5] has a permanently disabled output enable
+    Info: Pin FX2_FD[6] has a permanently disabled output enable
+    Info: Pin FX2_FD[7] has a permanently disabled output enable
+    Info: Pin FX2_FD[8] has a permanently disabled output enable
+    Info: Pin FX2_FD[9] has a permanently disabled output enable
+    Info: Pin FX2_FD[10] has a permanently disabled output enable
+    Info: Pin FX2_FD[11] has a permanently disabled output enable
+    Info: Pin FX2_FD[12] has a permanently disabled output enable
+    Info: Pin FX2_FD[13] has a permanently disabled output enable
+    Info: Pin FX2_FD[14] has a permanently disabled output enable
+    Info: Pin FX2_FD[15] has a permanently disabled output enable
+Warning: Following 19 pins have nothing, GND, or VCC driving datain port -- changes to this connectivity may change fitting results
+    Info: Pin FX2_FD[0] has VCC driving its datain port
+    Info: Pin FX2_FD[1] has VCC driving its datain port
+    Info: Pin FX2_FD[2] has VCC driving its datain port
+    Info: Pin FX2_FD[3] has VCC driving its datain port
+    Info: Pin FX2_FD[4] has VCC driving its datain port
+    Info: Pin FX2_FD[5] has VCC driving its datain port
+    Info: Pin FX2_FD[6] has VCC driving its datain port
+    Info: Pin FX2_FD[7] has VCC driving its datain port
+    Info: Pin FX2_FD[8] has VCC driving its datain port
+    Info: Pin FX2_FD[9] has VCC driving its datain port
+    Info: Pin FX2_FD[10] has VCC driving its datain port
+    Info: Pin FX2_FD[11] has VCC driving its datain port
+    Info: Pin FX2_FD[12] has VCC driving its datain port
+    Info: Pin FX2_FD[13] has VCC driving its datain port
+    Info: Pin FX2_FD[14] has VCC driving its datain port
+    Info: Pin FX2_FD[15] has VCC driving its datain port
+    Info: Pin PKEND has VCC driving its datain port
+    Info: Pin FIFO_ADR[0] has GND driving its datain port
+    Info: Pin FIFO_ADR[1] has GND driving its datain port
+Info: Quartus II Fitter was successful. 0 errors, 32 warnings
+    Info: Peak virtual memory: 193 megabytes
+    Info: Processing ended: Sat Aug 22 15:33:49 2009
     Info: Elapsed time: 00:00:03
     Info: Total CPU time (on all processors): 00:00:02
 

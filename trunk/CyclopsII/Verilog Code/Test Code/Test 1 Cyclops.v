@@ -1,4 +1,4 @@
-// V1.1  22 Aug 2009 
+// V1.0  22 July 2009 
 //
 // Copyright 2009 Phil Harman VK6APH
 //
@@ -67,7 +67,6 @@ address control space, you address it as the FNL, not the INL.
 	Change log
 	22 July 2009  - Port previous LMX2326 code to run ADF4112 
 				  - Test program for ADF4112 PLL chips on Cyclops PCB, 1st LO = 1030MHz, 2nd LO = 1126MHz
-    22 Aug  2009  - 2nd LO = 1126MHz, 1st LO ref = 1MHz and frequency set by data from PC via FX2
   
 */
 
@@ -129,25 +128,23 @@ module Cyclops (
 				output  ADF4112_SPI_clock,	    // SPI clock to ADF4112s
 				output  ADF4112_SPI_data,		// SPI data to ADF4112s
 				output  LE1,					// Data latch, First LO
-				output  LE2,					// Data latch, Second LO
+				output  LE2,						// Data latch, Second LO
 				//input   MUX1,					// MUX out from First LO
 				//input   MUX2 					// MUX out from Second LO
-				output  DEBUG_LED0,				// debug LEDs on Ozy board		
-				output  DEBUG_LED1, 
+				output  DEBUG_LED0				// debug LEDs on Ozy board		
+				//output  DEBUG_LED1, 
 				//output  DEBUG_LED2,
-				//output  DEBUG_LED3,
-				inout  [15:0] FX2_FD,           // bidirectional FIFO data to/from the FX2
-				input 	FLAGA,
-				input 	FLAGB,
-				input 	FLAGC,
-				output 	reg SLWR,				// FX2 write - active low
-				output 	reg SLRD,				// FX2 read - active low
-				output 	reg SLOE,				// FX2 data bus enable - active low
-				output 	PKEND,
-				output  reg [1:0] FIFO_ADR		// FX2 register address
+				//output  DEBUG_LED3
+				//inout  [15:0] FX2_FD,           // bidirectional FIFO data to/from the FX2
+				//input 	FLAGA,
+				//input 	FLAGB,
+				//input 	FLAGC,
+				//output 	reg SLWR,				// FX2 write - active low
+				//output 	reg SLRD,				// FX2 read - active low
+				//output 	reg SLOE,				// FX2 data bus enable - active low
+				//output 	PKEND,
+				//output  reg [1:0] FIFO_ADR		// FX2 register address
 				);
-				
-/*
 
 ////////////////////////////////////////////////////////////////////////
 //
@@ -156,7 +153,7 @@ module Cyclops (
 ////////////////////////////////////////////////////////////////////////
 
 
-
+/*
 Initialization Latch 
 
 INL:    Normal operation
@@ -252,7 +249,7 @@ parameter Second_LO_NCL = {LO2_DB23, LO2_DB22, LO2_G1, LO2_BA, 2'b01};  // 24'h0
 
 Local Oscillator 1 Reference Counter Latch
 
-RCL:    Reference divisor = 10 (Internal ref = 1 MHz.)
+RCL:    Reference divisor = 20 (Internal ref = 0.5 MHz.)
         Anti Backlash pulse = 3 ns. (I picked the middle value)
         Lock detect precision = High
         Delay Sync = Normal
@@ -262,25 +259,29 @@ RCL:    Reference divisor = 10 (Internal ref = 1 MHz.)
 parameter LO1_BD23	 = 1'b0;  		//don't care
 parameter LO1_DLY	 = 1'b0;		
 parameter LO1_SYNC	 = 1'b0;		// normal operation
-parameter LO1_LDP	 = 1'b1;		// Lock detect precision = High
+parameter LO1_LDP	 = 1'b1;	// Lock detect precision = High
 parameter LO1_T1	 = 1'b0;		
 parameter LO1_T2	 = 1'b0;		// test mode = normal
 parameter LO1_ABP2	 = 1'b0;
 parameter LO1_ABP1	 = 1'b0;		// Anti Backlash pulse = 3 ns
-parameter [13:0]LO1_R = 14'b00_0000_0000_1010;  // divide by 10
+parameter [13:0]LO1_R = 14'b00_0000_0001_0100;  // divide by 20
  
-parameter First_LO_RCL = {LO1_DB23,LO1_DLY,LO1_SYNC,LO1_LDP,LO1_T1,LO1_T2,LO1_ABP2,LO1_ABP1,LO1_R,2'b00}; 	
+parameter First_LO_RCL = {LO1_DB23,LO1_DLY,LO1_SYNC,LO1_LDP,LO1_T1,LO1_T2,LO1_ABP2,LO1_ABP1,LO1_R,2'b00}; 	// RCL: 24'h100050
 
 /*
 
 Local Oscillator 1 N Counter Latch 
 
-Desired output: Comes from FX2 Rx_register
+Desired output: 1030.0 (Test mode)
+                1030.5 to 2029.5 MHz in one MHz steps (Operational)
 
-Internal Reference = 1 MHz.
-Reference counter = divide by 10  (R = 10)
+Internal Reference = 0.500 MHz.
+Reference counter = divide by 20  (R = 20)
 
 Internal divider range ( N = B*P+A )
+
+N = 2060 for test mode.
+N = 2061 through 4059 (odd numbers only) for operational mode.
 
 If P = 64, and B and A are adjacent registers, then B concatenated with
 A can be considered a single binary 19 bit "N" register
@@ -288,13 +289,21 @@ A can be considered a single binary 19 bit "N" register
 where 
 B13 B12 B11 | B10 B09 B08 B07 | B06 B05 B04 B03 | B02 B01 A6 A5 | A4 A3 A2 A1
 
-In which case the Rx_register from the FX2 contains directly the PLL frequency
+N = 2060 = 19'h0080C = 000 0000 1000 0000 1100
+N = 2061 = 19'h0080D = 000 0000 1000 0000 1101
+ ..
+ ..
+N = 4059 = 19'h00FDB = 000 0000 1111 1101 1011
 
 */
 
 parameter LO1_DB23	  = 1'b0;	// don't care
 parameter LO1_DB22	  = 1'b0;  // don't care
 parameter LO1_G1	  = 1'b0;  // setting 1 is used
+parameter [18:0]LO1_BA = 19'b000_0000_1000_0000_1100;  //2060
+
+parameter First_LO_NCL = {LO1_DB23, LO1_DB22, LO1_G1, LO1_BA, 2'b01};  // 24'h002031;
+ 
 
 
 ////////////////////////////////////////////////////////////////////////
@@ -350,7 +359,6 @@ end
 // Set 2nd Local Oscillator ADF4112 to 1126MHz using SPI interface
 //
 ///////////////////////////////////////////////////////////////////
-
 wire [23:0]SPI_DATA;  // 24 bit wide data and address register to ADF4112
 reg [23:0]Second_LO_data;
 
@@ -419,25 +427,23 @@ end
 
 ////////////////////////////////////////////////////////////
 //
-// set 1st LO  ADF4112 to PC sent frequency  using SPI interface
+// First Local Oscillator ADF4112 to 1030MHz using SPI interface
 //
 ///////////////////////////////////////////////////////////
 
 /*
-
- The frequency to set the First LO to comes from the PC
- and is in 16 bit register Rx_register.  Need to extend this to 
- 18 bits and send to LMX2326
-
-*/
+// The frequency to set the First LO to comes from the PC
+// and is in 16 bit register Rx_register.  Need to extend this to 
+// 18 bits and send to LMX2326
 
 wire [17:0]PLL_frequency = {2'b00, Rx_register};
+*/
+
+// for first test set first LO to 1030MHz
 
 reg [23:0]First_LO_data;
-reg [3:0]SPI2_state;
-reg [15:0] Previous_Rx_Register;
 
-wire [23:0] First_LO_NCL = {LO1_DB23, LO1_DB22, LO1_G1, PLL_frequency, 2'b01}; 
+reg [3:0]SPI2_state;
 
 always @ (posedge clock)
 begin 
@@ -484,15 +490,12 @@ case (SPI2_state)
 		SPI2_state <= SPI2_state + 1'b1;
 		end
 	else SPI2_state <= 6;
-	Previous_Rx_Register <= Rx_register;  // save the current frequecy
 	end 
 // delay
-// loop until next 1st LO frequency available 
+// stop 
 8: 	begin
 	start1 <= 1'b0;
-	if (Previous_Rx_Register == Rx_register)
-		SPI2_state <= 8;  // loop here until we have a new 1st LO frequency
-	else SPI2_state <= 5;       // else set PLL to new frequency 
+	SPI2_state <= 8;  // loop here once programming completed
 	end
 default: SPI2_state <= SPI2_state + 1'b1;
 endcase
@@ -507,140 +510,6 @@ wire ready;
 // SPI interface to ADF4112s	
 ADF4112_SPI ADF4112(.clock(clock),.start(start1 || start2),.ready(ready),.data(SPI_DATA),
 					.SPI_clock(ADF4112_SPI_clock),.SPI_LE(LE),.SPI_data(ADF4112_SPI_data));
-
-
-//////////////////////////////////////////////////////////////
-//
-//  State Machine to manage FX2 USB interface
-//
-//////////////////////////////////////////////////////////////
-
-/*
-        FX2 interface - read LO frequency from PC code and send ADC data 
-        
-        The state machine checks if there are characters to be read
-        from the FX2 Rx FIFO by checking 'EP2_has_data'  If set it loads the word
-        read into the Rx_register. Then it sends a word from the data FIFO to the FX2 Tx FIFO. 
-        After the Tx word has been sent it loops.
-*/
-
-
-// set up FX2 Port A
-assign PKEND = 1'b1;
-                 
-wire EP2_has_data = FLAGA;            // high when EP2 has data available
-//wire EP6_ready = FLAGC;               // high when we can write to EP6
-reg [3:0] state_FX;             	  // state for FX2
-reg [15:0] Rx_register;               // data from PC goes here
-reg [15:0] Tx_register;               // data to PC goes here
-reg SLEN;							  // Put data on FX2 bus
-reg sync_write_not_empty;			  // FIFO write side empty synced to FX2 clock
-
-
-always @ (negedge IFCLK)
-begin
-// sync_write_not_empty <= !wrempty;		// sync to FX2 clock
-case(state_FX)
-// state 0 - set up to check for Rx data from EP2
-4'd0:begin
-    SLWR <= 1;                    // reset FX2 FIFO write stobe
-    SLRD <= 1'b1;
-    SLOE <= 1'b1;
-    SLEN <= 1'b0;
-    FIFO_ADR <= 2'b00;            // select EP2
-    state_FX <= state_FX + 1'b1;
-    end
-// delay 2 IFCLOCK cycle, this is necessary at 48MHZ to allow FIFO_ADR to settle
-// check for Rx data
-4'd2:begin
-	if(EP2_has_data)begin
-       state_FX <= state_FX + 1'b1;
-       SLOE <= 1'b0;                  //assert SLOE
-       end
-    else begin
-       state_FX <= 4'd2;              // loop until we get data from PC
-       end
-    end
-// Wait 2 IFCLK before we assert SLRD then load received data
-4'd4:begin
-        SLRD <= 1'b0;
-        Rx_register[15:8] <= FX2_FD[7:0];  //  swap endian
-        Rx_register[7:0]  <= FX2_FD[15:8];
-        state_FX <= state_FX + 1'b1;
-        end
-// reset SLRD and SLOE
-4'd5:begin
-        SLRD <= 1'b1;
-        SLOE <= 1'b1;
-        //state_FX <= state_FX + 1'b1;
-        state_FX <= 0;					// loop back for more data 
-        end
-       
-/*   
-
- **** not sending any data to the PC at the moment ****    
-       
-// Tx data here - send data in FIFO 
-4'd6:begin
-       	SLWR <= 1;
-        state_FX <= state_FX + 1'b1;
-        FIFO_ADR <= 2'b10;              	// select EP6
-	end
-                                    
-// Wait 2 IFCLK for FIFO_ADR to stabilize, the get FIFO data and assert SLWR
-4'd7:	begin
-		rdreq <= 1'b1;						// set FIFO read required true
-		state_FX <= state_FX + 1'b1;
-		end
-		
-4'd8:	begin
-		rdreq <= 1'b0;						// set FIFO read requried false
-		state_FX <= state_FX + 1'b1;
-		end
-
-// check Tx FIFO is ready then set Write strobe
-4'd9:begin
-	if (EP6_ready && sync_write_not_empty) begin  // if EP6 is ready, write to it and exit this state
-	//if (EP6_ready && syncd_write_used[11]) begin
-        SLEN <= 1'b1;
-        state_FX <= state_FX + 1'b1;
-        end
-    else state_FX <= 4'd9;                      // otherwise, hang out here until fifo is ready
-    end
-//  set SLWR
-4'd10: begin
-       SLWR <= 1'b0;
-       state_FX <= state_FX + 1'b1;
-       end
-//  reset SLWR, tristate SLEN and loop back to receive
-4'd11: begin
-        SLWR <= 1;
-        SLEN <= 1'b0;
-        state_FX <= 4'd0;
-        end
-     
-*/     
-     
-default: state_FX <= state_FX + 1'b1;
-endcase
-end
-
-// FX2_FD is tristate when SLEN  is low, otherwise it's the RAM data.
-// NOTE: Did not swap endian due to way data is read in PC program.
-
-//assign FX2_FD = SLEN ? q  : 16'bZ;  
-assign FX2_FD = 16'bZ;  
-
-
-
-//  Test LEDs
-assign DEBUG_LED0 = ~ready;	// On when SPI module is ready
-assign DEBUG_LED1 = ~EP2_has_data;	
-//assign DEBUG_LED2 = ~wrfull;	
-//assign DEBUG_LED3 = ~Rx_register[3];
- 
-
-endmodule
 
 
 /*
@@ -767,4 +636,129 @@ reg rdreq; reg wrreq; wire wrfull; wire [15:0]q; wire wrempty;wire [11:0] write_
 FIFO data_fifo(.data(fifo_data),.rdclk(IFCLK),.rdreq(rdreq),.wrclk(FIR_strobe),.wrreq(wrreq),
 			   .q(q),.wrempty(wrempty),.wrfull(wrfull));
 
+
+//////////////////////////////////////////////////////////////
+//
+//  State Machine to manage FX2 USB interface
+//
+//////////////////////////////////////////////////////////////
+/*
+        FX2 interface - read LO frequency from PC code and send ADC data 
+        
+        The state machine checks if there are characters to be read
+        from the FX2 Rx FIFO by checking 'EP2_has_data'  If set it loads the word
+        read into the Rx_register. Then it sends a word from the data FIFO to the FX2 Tx FIFO. 
+        After the Tx word has been sent it loops.
 */
+
+/*
+// set up FX2 Port A
+assign PKEND = 1'b1;
+                 
+wire EP2_has_data = FLAGA;            // high when EP2 has data available
+wire EP6_ready = FLAGC;               // high when we can write to EP6
+reg [3:0] state_FX;             	  // state for FX2
+reg [15:0] Rx_register;               // data from PC goes here
+reg [15:0] Tx_register;               // data to PC goes here
+reg SLEN;							  // Put data on FX2 bus
+reg sync_write_not_empty;			  // FIFO write side empty synced to FX2 clock
+
+
+always @ (negedge IFCLK)
+begin
+sync_write_not_empty <= !wrempty;		// sync to FX2 clock
+case(state_FX)
+// state 0 - set up to check for Rx data from EP2
+4'd0:begin
+    SLWR <= 1;                    // reset FX2 FIFO write stobe
+    SLRD <= 1'b1;
+    SLOE <= 1'b1;
+    SLEN <= 1'b0;
+    FIFO_ADR <= 2'b00;            // select EP2
+    state_FX <= state_FX + 1'b1;
+    end
+// delay 2 IFCLOCK cycle, this is necessary at 48MHZ to allow FIFO_ADR to settle
+// check for Rx data
+4'd2:begin
+	if(EP2_has_data)begin
+       state_FX <= state_FX + 1'b1;
+       SLOE <= 1'b0;                  //assert SLOE
+       end
+    else begin
+       state_FX <= 4'd6;              // No Rx data so check for Tx data
+       end
+    end
+// Wait 2 IFCLK before we assert SLRD then load received data
+4'd4:begin
+        SLRD <= 1'b0;
+        Rx_register[15:8] <= FX2_FD[7:0];  //  swap endian
+        Rx_register[7:0]  <= FX2_FD[15:8];
+        state_FX <= state_FX + 1'b1;
+        end
+// reset SLRD and SLOE
+4'd5:begin
+        SLRD <= 1'b1;
+        SLOE <= 1'b1;
+        state_FX <= state_FX + 1'b1;
+        end
+       
+// Tx data here - send data in FIFO 
+4'd6:begin
+       	SLWR <= 1;
+        state_FX <= state_FX + 1'b1;
+        FIFO_ADR <= 2'b10;              	// select EP6
+	end
+                                    
+// Wait 2 IFCLK for FIFO_ADR to stabilize, the get FIFO data and assert SLWR
+4'd7:	begin
+		rdreq <= 1'b1;						// set FIFO read required true
+		state_FX <= state_FX + 1'b1;
+		end
+		
+4'd8:	begin
+		rdreq <= 1'b0;						// set FIFO read requried false
+		state_FX <= state_FX + 1'b1;
+		end
+
+// check Tx FIFO is ready then set Write strobe
+4'd9:begin
+	if (EP6_ready && sync_write_not_empty) begin  // if EP6 is ready, write to it and exit this state
+	//if (EP6_ready && syncd_write_used[11]) begin
+        SLEN <= 1'b1;
+        state_FX <= state_FX + 1'b1;
+        end
+    else state_FX <= 4'd9;                      // otherwise, hang out here until fifo is ready
+    end
+//  set SLWR
+4'd10: begin
+       SLWR <= 1'b0;
+       state_FX <= state_FX + 1'b1;
+       end
+//  reset SLWR, tristate SLEN and loop back to receive
+4'd11: begin
+        SLWR <= 1;
+        SLEN <= 1'b0;
+        state_FX <= 4'd0;
+        end
+     
+default: state_FX <= state_FX + 1'b1;
+endcase
+end
+
+// FX2_FD is tristate when SLEN  is low, otherwise it's the RAM data.
+// NOTE: Did not swap endian due to way data is read in PC program.
+
+assign FX2_FD = SLEN ? q  : 16'bZ;   
+
+*/
+
+  
+
+//  Test LEDs
+assign DEBUG_LED0 = ~ready;	// On when SPI module is ready
+//assign DEBUG_LED1 = ~wrempty;	
+//assign DEBUG_LED2 = ~wrfull;	
+//assign DEBUG_LED3 = ~Rx_register[3];
+ 
+
+endmodule
