@@ -1,3 +1,1 @@
-Info (10281): Verilog HDL Declaration information at FIR_top.v(43): object "strobe_out" differs only in case from object "STROBE_OUT" in the same scope
-Warning (10268): Verilog HDL information at Cyclops.v(291): always construct contains both blocking and non-blocking assignments
-Warning (10273): Verilog HDL warning at Cyclops.v(378): extended using "x" or "z"
+Warning (10273): Verilog HDL warning at Cyclops.v(632): extended using "x" or "z"
