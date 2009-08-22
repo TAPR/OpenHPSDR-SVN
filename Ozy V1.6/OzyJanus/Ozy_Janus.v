@@ -109,6 +109,7 @@
 //                 made to Tx_fifo_ctrl.v  Kirk KD7IRS
 //
 // Aug 18, 2009 1. Altered PTT, dash, dot pin connections - Phil VK6APH 
+// Aug 22, 2009 2. Changed NWire_xmit to run at 10kHz, released as V1.6
 //
 //
 //
@@ -1300,7 +1301,7 @@ end
 assign IF_xmit_data = {IF_DFS1,IF_DFS0,PTT_out,CC_address,IF_frequency[CC_address],IF_clock_s,IF_OC,IF_mode,IF_PGA,
                        IF_DITHER, IF_RAND, IF_ATTEN, IF_TX_relay, IF_Rout, IF_RX_relay};
 
-NWire_xmit  #(.DATA_BITS(61), .ICLK_FREQ(48000000), .XCLK_FREQ(48000000), .SEND_FREQ(1000)) 
+NWire_xmit  #(.DATA_BITS(61), .ICLK_FREQ(48000000), .XCLK_FREQ(48000000), .SEND_FREQ(10000)) 
       CCxmit (.irst(IF_rst), .iclk(IF_clk), .xrst(IF_rst), .xclk(IF_clk),
               .xdata(IF_xmit_data), .xreq(1'b1), .xrdy(IF_CC_rdy), .xack(), .dout(CC));
 ///////////////////////////////////////////////////////
