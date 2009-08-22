@@ -1,0 +1,5 @@
+C:\HPSDR\trunk\CyclopsII\C# Code\PLL_Test\PLL_Test\PLL_Test\bin\Release\PLL_Test.exe
+C:\HPSDR\trunk\CyclopsII\C# Code\PLL_Test\PLL_Test\PLL_Test\bin\Release\PLL_Test.pdb
+C:\HPSDR\trunk\CyclopsII\C# Code\PLL_Test\PLL_Test\PLL_Test\obj\Release\ResolveAssemblyReference.cache
+C:\HPSDR\trunk\CyclopsII\C# Code\PLL_Test\PLL_Test\PLL_Test\obj\Release\PLL_Test.exe
+C:\HPSDR\trunk\CyclopsII\C# Code\PLL_Test\PLL_Test\PLL_Test\obj\Release\PLL_Test.pdb
