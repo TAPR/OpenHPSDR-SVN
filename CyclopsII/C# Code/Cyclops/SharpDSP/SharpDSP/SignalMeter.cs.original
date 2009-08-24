@@ -1,0 +1,159 @@
+/*
+This file is part of a program that implements a Software-Defined Radio.
+
+Copyright (C) 2007, 2008 Philip A Covington
+
+This program is free software; you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation; either version 2 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program; if not, write to the Free Software
+Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+
+The author can be reached by email at
+
+p.covington@gmail.com
+
+*/
+using System;
+
+namespace SharpDSP2._1
+{
+	/// <summary>
+	/// Signal Meter Class
+	/// </summary>
+	public class SignalMeter : IDSPObject
+	{
+		#region Delegates and Events
+		
+		public static event SignalMeterEventHandler metering_event = null;
+		
+		public delegate void SignalMeterEventHandler(object source, SignalMeterEvent e);
+	
+		public class SignalMeterEvent : EventArgs
+	    {
+			private float instantaneousValue;
+			public float Instantaneous
+			{
+				get { return instantaneousValue; } 				
+			}
+			
+			private float averageValue;
+			public float Average
+			{
+				get { return averageValue; }
+			}
+			
+			public SignalMeterEvent(float instantaneous, float average)
+			{
+				this.instantaneousValue = instantaneous;
+				this.averageValue = average;
+	        }
+	    }
+		
+		#endregion
+		
+		#region Private Members
+
+        private DSPBuffer d = null;
+        private DSPState s = null;
+
+        private float sample_rate;
+        private int block_size;
+
+		private float meter_inst_value = -100.0f;
+		private float meter_average_value = -50.0f;
+		
+		#endregion
+		
+		#region Constructor
+		
+		public SignalMeter(ref DSPBuffer dsp_buffer_obj)
+		{
+            this.d = dsp_buffer_obj;
+            this.s = d.State;
+
+            this.sample_rate = s.DSPSampleRate;
+            this.block_size = s.DSPBlockSize;
+
+            this.strobe_count = (int)this.sample_rate / (this.block_size * this.rate);
+		}
+						
+		#endregion
+		        
+        #region Public Methods
+        
+        public void Process()
+        {
+            int blocksize = s.DSPBlockSize;
+
+            if (!Strobe()) return;
+
+        	if (metering_event != null)
+            {
+                float temp_metervalue = 0f;
+                for (int i = 0; i < blocksize; i++)
+                {
+                	temp_metervalue += d.GetPower(i);
+                }
+                
+                this.meter_inst_value = (float)(10.0 * Math.Log10(temp_metervalue + 1e-20));                        
+                this.meter_average_value = (this.meter_average_value * 0.9f) + (this.meter_inst_value * 0.1f);
+	            	            
+            	metering_event(this, new SignalMeterEvent(this.meter_inst_value,
+            	                                          this.meter_average_value));
+            }
+        }
+        
+        #endregion
+
+        #region Properties
+
+        private int rate = 10;
+        public int UpdatesPerSecond
+        {
+            get { return rate; }
+            set
+            {
+                rate = value;
+                this.strobe_count = (int)this.sample_rate / (this.block_size * this.rate);
+                rate_counter = 0;
+            }
+        }
+
+        private int rate_counter = 0;
+        private int strobe_count = 5;
+        public bool Strobe()
+        {
+            if (rate_counter == strobe_count)
+            {
+                rate_counter = 0;
+                return true;
+            }
+            else
+            {
+                rate_counter++;
+                return false;
+            }
+        }
+
+//        public float InstValue
+//        {
+//            get { return (meter_inst_value + s.ServerConfigObject.SMeterCorrection); }
+//        }
+
+//        public float AvgValue
+//        {
+//            get { return (meter_average_value + s.ServerConfigObject.SMeterCorrection); }
+//        }
+
+        #endregion
+    }
+}

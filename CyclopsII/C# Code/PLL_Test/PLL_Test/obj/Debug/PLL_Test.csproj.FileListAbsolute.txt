@@ -3,3 +3,5 @@ C:\HPSDR\trunk\CyclopsII\C# Code\PLL_Test\PLL_Test\PLL_Test\bin\Debug\PLL_Test.e
 C:\HPSDR\trunk\CyclopsII\C# Code\PLL_Test\PLL_Test\PLL_Test\bin\Debug\PLL_Test.pdb
 C:\HPSDR\trunk\CyclopsII\C# Code\PLL_Test\PLL_Test\PLL_Test\obj\Debug\PLL_Test.exe
 C:\HPSDR\trunk\CyclopsII\C# Code\PLL_Test\PLL_Test\PLL_Test\obj\Debug\PLL_Test.pdb
+C:\HPSDR\trunk\CyclopsII\C# Code\PLL_Test\PLL_Test\obj\Debug\PLL_Test.exe
+C:\HPSDR\trunk\CyclopsII\C# Code\PLL_Test\PLL_Test\obj\Debug\PLL_Test.pdb

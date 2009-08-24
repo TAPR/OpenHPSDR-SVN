@@ -1,0 +1,10 @@
+C:\HPSDR\trunk\CyclopsII\C# Code\Cyclops\Cyclops\bin\Release\Cyclops.exe
+C:\HPSDR\trunk\CyclopsII\C# Code\Cyclops\Cyclops\bin\Release\Cyclops.pdb
+C:\HPSDR\trunk\CyclopsII\C# Code\Cyclops\Cyclops\bin\Release\SharpDSP.dll
+C:\HPSDR\trunk\CyclopsII\C# Code\Cyclops\Cyclops\bin\Release\SharpDSP.pdb
+C:\HPSDR\trunk\CyclopsII\C# Code\Cyclops\Cyclops\obj\Release\ResolveAssemblyReference.cache
+C:\HPSDR\trunk\CyclopsII\C# Code\Cyclops\Cyclops\obj\Release\Cyclops.Form1.resources
+C:\HPSDR\trunk\CyclopsII\C# Code\Cyclops\Cyclops\obj\Release\Cyclops.Properties.Resources.resources
+C:\HPSDR\trunk\CyclopsII\C# Code\Cyclops\Cyclops\obj\Release\Cyclops.csproj.GenerateResource.Cache
+C:\HPSDR\trunk\CyclopsII\C# Code\Cyclops\Cyclops\obj\Release\Cyclops.exe
+C:\HPSDR\trunk\CyclopsII\C# Code\Cyclops\Cyclops\obj\Release\Cyclops.pdb
