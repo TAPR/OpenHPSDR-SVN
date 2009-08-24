@@ -533,7 +533,7 @@ wire EP2_has_data = FLAGA;            // high when EP2 has data available
 reg [3:0] state_FX;             	  // state for FX2
 reg [15:0] Rx_register;               // data from PC goes here
 reg [15:0] Tx_register;               // data to PC goes here
-//reg SLEN;							  // Put data on FX2 bus
+reg SLEN;							  // Put data on FX2 bus
 reg sync_write_not_empty;			  // FIFO write side empty synced to FX2 clock
 
 

@@ -113,3 +113,4 @@ set_instance_assignment -name CLOCK_SETTINGS IFCLK -to IFCLK
 set_global_assignment -name BASED_ON_CLOCK_SETTINGS IFCLK -section_id clock
 set_global_assignment -name MULTIPLY_BASE_CLOCK_PERIOD_BY 10 -section_id clock
 set_instance_assignment -name CLOCK_SETTINGS clock -to clock
+set_global_assignment -name MISC_FILE "C:/HPSDR/trunk/CyclopsII/Verilog Code/Test Code/Cyclops.dpf"

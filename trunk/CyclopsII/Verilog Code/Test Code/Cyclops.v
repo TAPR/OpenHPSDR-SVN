@@ -23,7 +23,7 @@
 //  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 
-/* 	Test program for ADF4112 PLL chips on Cyclops PCB. 
+/* 	Test 2 program for ADF4112 PLL chips on Cyclops PCB. 
 
 Analog Devices ADF4112
 
@@ -68,6 +68,10 @@ address control space, you address it as the FNL, not the INL.
 	22 July 2009  - Port previous LMX2326 code to run ADF4112 
 				  - Test program for ADF4112 PLL chips on Cyclops PCB, 1st LO = 1030MHz, 2nd LO = 1126MHz
     22 Aug  2009  - 2nd LO = 1126MHz, 1st LO ref = 1MHz and frequency set by data from PC via FX2
+    
+    
+    
+    ******  IMPORTANT - Needs 10MHz on C16 to Function *******
   
 */
 

@@ -1,0 +1,20 @@
+C:\Documents and Settings\David\My Documents\Visual Studio 2008\Projects\SharpDSP\SharpDSP\obj\Release\ResolveAssemblyReference.cache
+C:\Documents and Settings\David\My Documents\Visual Studio 2008\Projects\SharpDSP\SharpDSP\bin\Release\SharpDSP.dll
+C:\Documents and Settings\David\My Documents\Visual Studio 2008\Projects\SharpDSP\SharpDSP\bin\Release\SharpDSP.pdb
+C:\Documents and Settings\David\My Documents\Visual Studio 2008\Projects\SharpDSP\SharpDSP\obj\Release\SharpDSP.dll
+C:\Documents and Settings\David\My Documents\Visual Studio 2008\Projects\SharpDSP\SharpDSP\obj\Release\SharpDSP.pdb
+C:\Documents and Settings\David\My Documents\Visual Studio 2008\Projects\KK from SVN\branches\SharpDSP\SharpDSP\bin\Release\SharpDSP.dll
+C:\Documents and Settings\David\My Documents\Visual Studio 2008\Projects\KK from SVN\branches\SharpDSP\SharpDSP\bin\Release\SharpDSP.pdb
+C:\Documents and Settings\David\My Documents\Visual Studio 2008\Projects\KK from SVN\branches\SharpDSP\SharpDSP\obj\Release\ResolveAssemblyReference.cache
+C:\Documents and Settings\David\My Documents\Visual Studio 2008\Projects\KK from SVN\branches\SharpDSP\SharpDSP\obj\Release\SharpDSP.dll
+C:\Documents and Settings\David\My Documents\Visual Studio 2008\Projects\KK from SVN\branches\SharpDSP\SharpDSP\obj\Release\SharpDSP.pdb
+C:\HPSDR\trunk\Kiss Konsole\branches\VK6APH\SharpDSP\SharpDSP\bin\Release\SharpDSP.dll
+C:\HPSDR\trunk\Kiss Konsole\branches\VK6APH\SharpDSP\SharpDSP\bin\Release\SharpDSP.pdb
+C:\HPSDR\trunk\Kiss Konsole\branches\VK6APH\SharpDSP\SharpDSP\obj\Release\ResolveAssemblyReference.cache
+C:\HPSDR\trunk\Kiss Konsole\branches\VK6APH\SharpDSP\SharpDSP\obj\Release\SharpDSP.dll
+C:\HPSDR\trunk\Kiss Konsole\branches\VK6APH\SharpDSP\SharpDSP\obj\Release\SharpDSP.pdb
+C:\SVN KK\branches\VK6APH\SharpDSP\SharpDSP\bin\Release\SharpDSP.dll
+C:\SVN KK\branches\VK6APH\SharpDSP\SharpDSP\bin\Release\SharpDSP.pdb
+C:\SVN KK\branches\VK6APH\SharpDSP\SharpDSP\obj\Release\ResolveAssemblyReference.cache
+C:\SVN KK\branches\VK6APH\SharpDSP\SharpDSP\obj\Release\SharpDSP.dll
+C:\SVN KK\branches\VK6APH\SharpDSP\SharpDSP\obj\Release\SharpDSP.pdb

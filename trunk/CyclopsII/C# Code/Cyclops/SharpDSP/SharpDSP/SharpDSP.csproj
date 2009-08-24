@@ -1,0 +1,89 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="3.5" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{F27304FD-1398-488C-BDA7-680E1F7558A0}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>SharpDSP</RootNamespace>
+    <AssemblyName>SharpDSP</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Xml.Linq">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data.DataSetExtensions">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Agc.cs" />
+    <Compile Include="AveragingNoiseBlanker.cs" />
+    <Compile Include="BlockNoiseBlanker.cs" />
+    <Compile Include="CPX.cs" />
+    <Compile Include="DAgc.cs" />
+    <Compile Include="DataConvert.cs" />
+    <Compile Include="DCCorrector.cs" />
+    <Compile Include="DSPBuffer.cs" />
+    <Compile Include="DSPState.cs" />
+    <Compile Include="Enumerations.cs" />
+    <Compile Include="Filter.cs" />
+    <Compile Include="FilterDesigner.cs" />
+    <Compile Include="IDSPObject.cs" />
+    <Compile Include="InterferenceFilter.cs" />
+    <Compile Include="LoadableFilter.cs" />
+    <Compile Include="Memory.cs" />
+    <Compile Include="NoiseFilter.cs" />
+    <Compile Include="Oscillator.cs" />
+    <Compile Include="OutbandSignalPowerSpectrum.cs" />
+    <Compile Include="Output.cs" />
+    <Compile Include="PLL.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Receiver.cs" />
+    <Compile Include="Resampler.cs" />
+    <Compile Include="RingBuffer.cs" />
+    <Compile Include="SignalMeter.cs" />
+    <Compile Include="SignalPowerSpectrum.cs" />
+    <Compile Include="Squelch.cs" />
+    <Compile Include="Win32api.cs" />
+    <Compile Include="WorkerThread.cs" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

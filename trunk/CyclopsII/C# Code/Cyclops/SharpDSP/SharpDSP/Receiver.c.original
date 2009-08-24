@@ -1,0 +1,830 @@
+//==============================================================
+//Written by: Philip A Covington, N8VB
+//
+//This software is licensed under the GNU General Public License
+//==============================================================
+//receiver.cs
+//implements receiver functions for SDR
+//==============================================================
+
+/*
+This file is part of a program that implements a Software-Defined Radio.
+
+Copyright (C) 2007, 2008 Philip A Covington
+
+This program is free software; you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation; either version 2 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program; if not, write to the Free Software
+Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+
+The author can be reached by email at
+
+p.covington@gmail.com
+
+*/
+using System;
+using System.Runtime.InteropServices;
+using System.Diagnostics;
+using System.Runtime.Serialization;
+
+namespace SharpDSP2._1
+{	
+	[Serializable()]
+	public class Receiver
+	{			
+		#region Private members
+
+        internal DSPBuffer rxbuffer;        
+        internal Filter filter;
+		internal Oscillator local_osc;
+        internal Oscillator spec_local_osc;
+		internal DAgc agc;
+		internal BlockNoiseBlanker block_noise_blanker;
+        internal AveragingNoiseBlanker ave_noise_blanker;
+		internal Squelch squelch;
+		internal SignalMeter meter;
+		internal PowerSpectrumSignal power_spectrum;
+		internal PLL pll;
+		internal NoiseFilter noise_filter;
+        internal InterferenceFilter interference_filter;
+		internal Output output_mode;
+        internal DCCorrector dcc;
+        internal LoadableFilter cfir;
+        internal OutbandPowerSpectrumSignal ops;
+        internal BlockNoiseBlanker bnb_spec;
+        internal AveragingNoiseBlanker anb_spec;
+                
+		#endregion
+
+		#region Constructor
+
+		public Receiver()
+		{
+            DSPState state =  new DSPState();
+
+//            state.ServerConfigObject = sc;
+//            state.DSPBlockSize = sc.DSPBlockSize;
+//            state.DSPSampleRate = sc.DSPSampleRate;
+//            state.PowerSpectrumBlockSize = sc.SpecBlockSize;
+
+            rxbuffer = new DSPBuffer(state);
+
+            dcc = new DCCorrector(ref rxbuffer);
+
+            // Filter
+            filter = new Filter(ref rxbuffer);
+            
+            // Local Oscillator (channel)
+            local_osc = new Oscillator(ref rxbuffer);
+            local_osc.LocalOscillatorOn = true;
+
+            // Local Oscillator (channel)
+            spec_local_osc = new Oscillator(ref rxbuffer);
+            spec_local_osc.LocalOscillatorOn = true;
+
+            // AGC
+            agc = new DAgc(ref rxbuffer);
+
+            // Block Noise Blanker
+            block_noise_blanker = new BlockNoiseBlanker(ref rxbuffer);
+            bnb_spec = new BlockNoiseBlanker(ref rxbuffer);
+
+            // Average Noise Blanker
+            ave_noise_blanker = new AveragingNoiseBlanker(ref rxbuffer);
+            anb_spec = new AveragingNoiseBlanker(ref rxbuffer);
+
+            // Squelch
+            squelch = new Squelch(ref rxbuffer);
+
+            // Signal Metering
+            meter = new SignalMeter(ref rxbuffer);
+
+            // Power Spectrum
+            power_spectrum = new PowerSpectrumSignal(ref rxbuffer);
+
+            // PLL
+            pll = new PLL(ref rxbuffer);
+
+            // Noise Filter
+            noise_filter = new NoiseFilter(ref rxbuffer);
+
+            // Interference Filter
+            interference_filter = new InterferenceFilter(ref rxbuffer);
+
+            // Output
+            output_mode = new Output(ref rxbuffer);
+
+            cfir = new LoadableFilter(state.SpectrumAquireBlockSize, 64);
+            cfir.LoadFilter(new FilterCoeffSet(64).GetFilterCoeffSet());
+
+//            ops = new OutbandPowerSpectrumSignal(state.PowerSpectrumBlockSize);
+		}
+
+		#endregion
+
+		#region Public members
+                						
+		unsafe public void DoDSPProcess(ref CPX[] inbuffer, ref CPX[] outbuffer)
+		{
+            rxbuffer.Fill(ref inbuffer);
+
+			#region Do Noiseblankers
+
+            if (block_noise_blanker.BlockNBSwitchOn)
+			{
+				block_noise_blanker.Process();
+			}
+
+			if (ave_noise_blanker.AveNBSwitchOn)
+			{
+				ave_noise_blanker.Process();
+			}
+
+			#endregion
+			
+			#region Local Oscillator
+            
+			local_osc.Process();
+
+			#endregion
+
+			#region Power Spectrum before filter
+
+			power_spectrum.Process();   //djm uncommented
+
+			#endregion
+
+			#region Filter
+            
+			filter.Process();
+
+			#endregion                     
+
+            #region Metering after filter
+
+            meter.Process();
+
+            #endregion
+
+            #region Do AGC
+
+            agc.Process();
+
+            #endregion 
+                                  			
+			#region Squelch
+
+			squelch.Process();
+
+			#endregion
+
+            #region Do Demod
+
+            pll.Process();            
+
+            #endregion
+                                               
+            if (noise_filter.NoiseFilterSwitchOn) noise_filter.Process();
+            if (interference_filter.InterferenceFilterSwitchOn) interference_filter.Process();
+
+            #region Do Output
+
+            output_mode.Process();
+            
+			#endregion
+
+            outbuffer = (CPX[])rxbuffer.cpx.Clone();
+		}    
+
+		public Receiver CloneSubRX(Receiver obj)
+		{
+			Receiver rcv_new = null;
+            //Copier copyit = new Copier();
+            //rcv_new = (Receiver)copyit.CopyObject(obj);
+            //rcv_new.rx_type = RXType.SubRX;
+            return rcv_new;
+		}
+        
+		#endregion
+
+        #region Public Properties
+
+        public DSPState DSPStateObj
+        {
+            get { return rxbuffer.State; } 
+        }
+               
+        public float FilterFrequencyLow
+        {
+            get { return filter.FilterFrequencyLow; }
+            set 
+            { 
+
+                filter.FilterFrequencyLow = value;
+            }
+        }
+        
+        public float FilterFrequencyHigh
+        {
+            get { return filter.FilterFrequencyHigh; }
+            set
+            {
+                filter.FilterFrequencyHigh = value;
+            }
+        }
+
+        public float LOFrequency
+        {
+            get { return local_osc.LOFrequency; }
+            set { 
+                local_osc.LOFrequency = value;
+            }
+        }
+		public float SquelchMeterOffset
+		{
+            get { return squelch.SquelchMeterOffset; }
+			set
+			{
+				squelch.SquelchMeterOffset = value;				
+			}
+		}
+
+		public float SquelchGainOffset
+		{
+            get { return squelch.SquelchGainOffset; }
+			set
+			{
+				squelch.SquelchGainOffset = value;
+			}
+		}
+
+		public float SquelchAttnOffset
+		{
+            get { return squelch.SquelchAttnOffset; }
+			set
+			{
+				squelch.SquelchAttnOffset = value;
+			}
+		}
+
+		public bool SquelchOn
+		{
+            get { return squelch.SquelchOn; }
+			set
+			{
+				squelch.SquelchOn = value;
+			}
+		}
+
+		public float SquelchThreshold
+		{
+            get { return squelch.SquelchThreshold; }
+			set
+			{
+				squelch.SquelchThreshold = value;
+			}
+		}
+				
+        public bool BlockNBSwitchOn
+        {
+            get { return block_noise_blanker.BlockNBSwitchOn; }
+            set
+            {
+                block_noise_blanker.BlockNBSwitchOn = value;
+            }
+        }
+
+		public float BlockNBThreshold
+		{
+            get { return block_noise_blanker.BlockNBThreshold; }
+			set
+			{
+				block_noise_blanker.BlockNBThreshold = value;
+			}
+		}
+
+        public bool AveNBSwitchOn
+        {
+            get { return ave_noise_blanker.AveNBSwitchOn; }
+            set
+            {
+                ave_noise_blanker.AveNBSwitchOn = value;
+            }
+        }
+
+		public float AveNBThreshold
+		{
+            get { return ave_noise_blanker.AveNBThreshold; }
+			set
+			{
+				ave_noise_blanker.AveNBThreshold = value;
+			}
+		}
+
+		public AGCType_e AGCMode
+		{
+            get { return agc.AGCMode; }
+			set
+			{
+				agc.AGCMode  = value;
+			}
+		}
+        public float AGCFixedGainDB
+        {
+            get { return agc.AGCFixedGainDB; }
+            set
+            {
+                agc.AGCFixedGainDB = value;
+            }
+        }
+
+        public float AGCMaximumGainDB
+        {
+            get { return agc.AGCMaximumGainDB; }
+            set
+            {
+                agc.AGCMaximumGainDB = value;
+            }
+        }
+
+		public float AGCHangTime
+		{
+            get { return agc.AGCHangTime; }
+			set
+			{
+				agc.AGCHangTime = value;
+			}
+		}
+
+        public float AGCHangThres
+        {
+            get { return agc.AGCHangThres; }
+            set
+            {
+                agc.AGCHangThres = value;
+            }
+        }
+
+        public float AGCSlope
+        {
+            get { return agc.AGCSlope; }
+            set
+            {
+                agc.AGCSlope = value;
+            }
+        }
+
+        public float AGCAttackTime
+		{
+            get { return agc.AGCAttackTime; }
+			set
+			{
+				agc.AGCAttackTime = value;
+			}
+		}
+        
+        public float AGCDecayTime
+        {
+            get { return agc.AGCDecayTime; }
+            set
+            {
+                agc.AGCDecayTime = value;
+            }
+        }
+
+        public bool InterferenceFilterSwitchOn
+        {
+            get { return interference_filter.InterferenceFilterSwitchOn; }
+            set
+            {
+                interference_filter.InterferenceFilterSwitchOn = value;
+            }
+        }
+
+		public float InterferenceFilterAdaptationRate
+		{
+            get { return interference_filter.InterferenceFilterAdaptationRate; }
+			set
+			{
+				interference_filter.InterferenceFilterAdaptationRate = value;				
+			}
+		}
+
+		public int InterferenceFilterDelay
+		{
+            get { return interference_filter.InterferenceFilterDelay; }
+			set
+			{
+				interference_filter.InterferenceFilterDelay = value;				
+			}			
+		}
+
+		public float InterferenceFilterLeakage
+		{
+            get { return interference_filter.InterferenceFilterLeakage; }
+			set
+			{
+				interference_filter.InterferenceFilterLeakage = value;				
+			}
+		}
+		
+		public int InterferenceFilterAdaptiveFilterSize
+		{
+            get { return interference_filter.InterferenceFilterAdaptiveFilterSize; }
+			set
+			{
+                interference_filter.InterferenceFilterAdaptiveFilterSize = value;
+			}
+		}
+
+        public bool NoiseFilterSwitchOn
+        {
+            get { return noise_filter.NoiseFilterSwitchOn; }
+            set
+            {
+                noise_filter.NoiseFilterSwitchOn = value;
+            }
+        }
+
+		public int NoiseFilterDelay
+		{
+            get { return noise_filter.NoiseFilterDelay; }
+			set
+			{
+				noise_filter.NoiseFilterDelay = value;
+			}			
+		}
+
+		public float NoiseFilterLeakage
+		{
+            get { return noise_filter.NoiseFilterLeakage; }
+			set
+			{
+                noise_filter.NoiseFilterLeakage = value;				
+			}
+		}
+		
+		public int NoiseFilterAdaptiveFilterSize
+		{
+            get { return noise_filter.NoiseFilterAdaptiveFilterSize; }
+			set
+			{
+                noise_filter.NoiseFilterAdaptiveFilterSize = value;
+			}
+		}
+
+        public float NoiseFilterAdaptationRate
+        {
+            get { return noise_filter.NoiseFilterAdaptationRate; }
+            set
+            {
+                noise_filter.NoiseFilterAdaptationRate = value;
+            }
+        }
+
+        private float osc_freq = 11025F;
+		public float LocalOscillatorFrequency
+		{
+			get { return osc_freq; }
+			set
+			{
+				osc_freq = value;
+				local_osc.LOFrequency = value;
+			}
+		}
+
+		private int iq_gain_value = 1;
+		public int IQGainValue
+		{
+			get { return iq_gain_value; }
+			set
+			{
+				iq_gain_value = value;
+			}
+		}
+
+		private int iq_phase_value = 0;
+		public int IQPhaseValue
+		{
+			get { return iq_phase_value; }
+			set
+			{
+				iq_phase_value = value;
+			}
+		}
+				
+		private float samplerate = 48000F;
+		public float SampleRate
+		{
+			get { return samplerate; }
+			set
+			{
+				samplerate = value;
+			}
+		}
+								
+		private WindowType_e window_type = WindowType_e.BLACKMANHARRIS_WINDOW;
+		public WindowType_e WindowType
+		{
+			get { return window_type; }
+			set
+			{
+				window_type = value;
+			}
+		}
+		
+		private bool binaural_mode_value = false;
+		public bool BinauralMode
+		{
+			get { return binaural_mode_value; }
+			set
+			{
+				binaural_mode_value = value;
+                output_mode.BinAuralMode = value;
+			}
+		}
+
+
+
+		
+		private int block_size = 2048;
+		public int BlockSize
+		{
+			get { return block_size; }
+			set
+			{
+				block_size = value;
+				fft_size = block_size * 2;
+			}
+		}
+
+		private int fft_size = 4096;
+		public int FFTSize
+		{
+			get { return fft_size; }
+			set
+			{
+				fft_size = value;				
+			}
+		}
+
+		private float rx_volume_l = 0.25F;
+		public float VolumeLeft
+		{
+			get { return rx_volume_l; }
+			set
+			{
+				rx_volume_l = value;
+                output_mode.VolumeLeft = value;
+			}
+		}
+
+		private float rx_volume_r = 0.25F;
+		public float VolumeRight
+		{
+			get { return rx_volume_r; }
+			set
+			{
+				rx_volume_r = value;
+                output_mode.VolumeRight = value;
+			}
+		}
+		
+        //private Mode current_mode = DSPMode_e.AM;
+        //private Mode mode = DSPMode_e.AM;
+        //public Mode CurrentMode
+        //{
+        //    get { return current_mode; }
+        //    set
+        //    {
+        //        current_mode = value;
+        //        mode = value;
+        //        if (current_mode == DSPMode_e.SPEC)
+        //            power_spectrum..Mode = PowerSpectrumMode.SPECMODE; //force power_spec position to before filter			                
+        //    }
+        //}
+
+		private WindowType_e current_window = WindowType_e.BLACKMANHARRIS_WINDOW;
+		public WindowType_e CurrentWindow
+		{
+			get { return current_window; }
+			set
+			{
+				current_window = value;				
+			}
+		}
+
+		private int rx_display_low = 100;
+		public int RXDisplayLow
+		{
+			get { return rx_display_low; }
+			set { rx_display_low = value; }
+		}
+
+		private int rx_display_high = 2800;
+		public int RXDisplayHigh
+		{
+			get { return rx_display_high; }
+			set { rx_display_high = value; }
+		}
+		
+        //private int rx_filter_low_cut = 100;
+        //public int RXFilterLowCut
+        //{
+        //    get { return rx_filter_low_cut; }
+        //    set
+        //    {
+        //        rx_filter_low_cut = value;
+        //        this.UpdateRXDisplayVars();
+        //        filter.MakeFilter(this.rx_filter_low_cut, this.rx_filter_high_cut, this.SampleRate, FilterType.BandPass, (WindowType)this.WindowType);                 
+        //    }
+        //}
+
+        //private int rx_filter_high_cut = 2800;
+        //public int RXFilterHighCut
+        //{
+        //    get { return rx_filter_high_cut; }
+        //    set
+        //    {
+        //        rx_filter_high_cut = value;
+        //        this.UpdateRXDisplayVars();
+        //        filter.MakeFilter(this.rx_filter_low_cut, this.rx_filter_high_cut, this.SampleRate, FilterType.BandPass, (WindowType)this.WindowType);
+        //    }
+        //}
+				
+				
+		private float current_dds_freq = 0F;
+		public float CurrentDDSFreq
+		{
+			get { return current_dds_freq; }
+			set
+			{
+				current_dds_freq = value;
+			}
+		}
+
+		private float am_pll_freq = 0F;
+		public float AMPLLFrequency
+		{
+			get { return am_pll_freq; }
+			set
+			{
+				am_pll_freq = value;
+			}
+		}
+
+		private float am_pll_lo_limit = -500F;
+		public float AMPLLLowLimit
+		{
+			get { return am_pll_lo_limit; }
+			set
+			{
+				am_pll_lo_limit = value;
+			}
+		}
+
+		private float am_pll_hi_limit = 500F;
+		public float AMPLLHighLimit
+		{
+			get { return am_pll_hi_limit; }
+			set
+			{
+				am_pll_hi_limit = value;
+			}
+		}
+
+		private float am_pll_bandwidth = 400F;
+		public float AMPLLBandwidth
+		{
+			get { return am_pll_bandwidth; }
+			set
+			{
+				am_pll_bandwidth = value;
+			}
+		}
+
+		private float fm_pll_freq = 0F;
+		public float FMPLLFrequency
+		{
+			get { return fm_pll_freq; }
+			set
+			{
+				fm_pll_freq = value;
+			}
+		}
+
+		private float fm_pll_lo_limit = -6000F;
+		public float FMPLLLowLimit
+		{
+			get { return fm_pll_lo_limit; }
+			set
+			{
+				fm_pll_lo_limit = value;
+			}
+		}
+
+		private float fm_pll_hi_limit = 6000F;
+		public float FMPLLHighLimit
+		{
+			get { return fm_pll_hi_limit; }
+			set
+			{
+				fm_pll_hi_limit = value;
+			}
+		}
+
+		private float fm_pll_bandwidth = 10000F;
+		public float FMPLLBandwidth
+		{
+			get { return fm_pll_bandwidth; }
+			set
+			{
+				fm_pll_bandwidth = value;
+			}
+		}
+
+        //private RXType rx_type = RXType.MainRX;
+        //public RXType ReceiverType
+        //{
+        //    get { return rx_type; }			
+        //}
+
+		private RXOutputRoute_e rx_route = RXOutputRoute_e.None;
+		public RXOutputRoute_e ReceiverOutputRoute
+		{
+			get { return rx_route; }
+			set
+			{
+				rx_route = value;
+                output_mode.RXOutputRoute = value;
+			}
+		}
+        public bool PowerSpectrumOn
+        {
+            get { return power_spectrum.SpectrumSwitchOn; }
+            set
+            {
+                power_spectrum.SpectrumSwitchOn = value;
+            }
+        }
+
+        public int PowerSpectrumUpdateRate
+        {
+            get { return power_spectrum.UpdatesPerSecond; }
+            set
+            {
+                power_spectrum.UpdatesPerSecond = value;
+            }
+        }
+
+        public bool PowerSpectrumAveragingOn
+        {
+            get { return power_spectrum.PowerSpectrumAveragingOn; }
+            set
+            {
+                power_spectrum.PowerSpectrumAveragingOn = value;
+            }
+        }
+
+        public float PowerSpectrumSmoothingFactor
+        {
+            get { return power_spectrum.PowerSpectrumSmoothingFactor; }
+            set { power_spectrum.PowerSpectrumSmoothingFactor = value; }
+        }
+
+        public float PowerSpectrumCorrection
+        {
+            get { return power_spectrum.PowerSpectrumCorrection; }
+            set { power_spectrum.PowerSpectrumCorrection = value; }
+        }
+
+        public PowerSpectrumSignal DSPPowerSpectrumObj
+        {
+            get { return power_spectrum; }
+        }
+
+
+        //private PowerSpectrumMode ps_mode = PowerSpectrumMode_e.OFF;
+        //public PowerSpectrumMode PowerSpectrumMode
+        //{
+        //    get { return ps_mode; }
+        //    set
+        //    {
+        //        ps_mode = value;
+        //        power_spectrum..Mode = value;
+        //        if (this.CurrentMode == Mode.SPEC)
+        //            power_spectrum.Mode = PowerSpectrumMode.SPECMODE; //force power_spec position to before filter
+        //    }
+        //========================================
+        #endregion
+    }
+}

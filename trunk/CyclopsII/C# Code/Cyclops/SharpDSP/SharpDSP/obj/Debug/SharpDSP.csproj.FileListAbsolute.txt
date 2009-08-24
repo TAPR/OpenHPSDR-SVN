@@ -1,0 +1,5 @@
+C:\HPSDR\trunk\Kiss Konsole\branches\VK6APH\SharpDSP\SharpDSP\bin\Debug\SharpDSP.dll
+C:\HPSDR\trunk\Kiss Konsole\branches\VK6APH\SharpDSP\SharpDSP\bin\Debug\SharpDSP.pdb
+C:\HPSDR\trunk\Kiss Konsole\branches\VK6APH\SharpDSP\SharpDSP\obj\Debug\ResolveAssemblyReference.cache
+C:\HPSDR\trunk\Kiss Konsole\branches\VK6APH\SharpDSP\SharpDSP\obj\Debug\SharpDSP.dll
+C:\HPSDR\trunk\Kiss Konsole\branches\VK6APH\SharpDSP\SharpDSP\obj\Debug\SharpDSP.pdb
