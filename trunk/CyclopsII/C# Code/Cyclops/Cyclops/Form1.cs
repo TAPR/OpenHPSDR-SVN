@@ -76,7 +76,7 @@ namespace Cyclops
         const int EP4BufSize = 8192;
         byte[] EP4buf = new byte[EP4BufSize];       // Ozy EP4 samples read buffer for full-bandwidth spectrum display
         byte[] frequency = new byte[4];             // holds Mercury frequency 
-        byte[] FirstLOfreq = new byte[2];               // holds first Local Oscillator frequency
+        byte[] FirstLOfreq = new byte[2];           // holds first Local Oscillator frequency
 
         byte rc0, rc1, rc2, rc3, rc4;               // Command & Control bytes received from Ozy
 
@@ -1056,7 +1056,7 @@ namespace Cyclops
                 {
                     AudioRing.Read(ref SampleReal, ref SampleImag);
 
-                    //FirstLOfreq
+                    // FirstLOfreq is sent in the what is normally the I_data position 
 
                     // use the following rather than BitConverter.GetBytes since it uses less CPU 
                     int IntValue;
@@ -1068,10 +1068,10 @@ namespace Cyclops
                     to_Ozy[pntr + x + 3] = (byte)(IntValue & 0xff);  // right lo
 
                     // send I & Q data to Qzy 
-                    to_Ozy[pntr + x + 4] = (byte)(I_data >> 8);      // I_data[0];
-                    to_Ozy[pntr + x + 5] = (byte)(I_data & 0xff);    // I_data[1];
-                    to_Ozy[pntr + x + 6] = (byte)(Q_data >> 8);      // Q_data[0];
-                    to_Ozy[pntr + x + 7] = (byte)(Q_data & 0xff);    // Q_data[1];  
+                    to_Ozy[pntr + x + 4] = FirstLOfreq[0];          // Send first LO frequency 
+                    to_Ozy[pntr + x + 5] = FirstLOfreq[1];   
+                    to_Ozy[pntr + x + 6] = (byte) 0;                // Q_data[0]
+                    to_Ozy[pntr + x + 7] = (byte) 0;                // Q_data[1]  
                 }
             }
 
