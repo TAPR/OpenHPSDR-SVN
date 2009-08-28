@@ -2,6 +2,7 @@ using System;
 using System.Diagnostics;
 using System.Drawing;
 using System.Text;
+using System.Threading;
 using System.Windows.Forms;
 using DataDecoder.Properties;
 
@@ -91,6 +92,33 @@ namespace DataDecoder
 
         #region Form Events
 
+        // the antenna value has changed
+        private void txtTune_TextChanged(object sender, EventArgs e)
+        {
+            if (s.Amp == 0 && s.bAnt)
+            {
+                string ant = txtTune.Text;
+                if (s.AlphaPort.IsOpen) s.AlphaPort.Write("AqW3" + ant + "\0");
+                for (int k = 0; k < 5; k++)
+                {
+                    Thread.Sleep(100);
+                    Application.DoEvents();
+                }
+                set.AlphaAnt = Convert.ToInt32(txtTune.Text);
+                set.Save();
+            }
+        }
+        // The ant has changed send a command to the amp
+        private void txtTune_DoubleClick(object sender, EventArgs e)
+        {
+            if (s.Amp == 0 && s.bAnt)
+            {
+                int ant = Convert.ToInt32(txtTune.Text);
+                if (ant < 9) ant += 1;
+                else ant = 0;
+                s.SetpaTune(ant.ToString());
+            }
+        }
         // The Oper/Stby button was pressed
         private void btnByp_Click(object sender, EventArgs e)
         {
@@ -166,6 +194,8 @@ namespace DataDecoder
             { s.ProcessMacroButton(12); }
             else if (e.Control && e.KeyCode == Keys.O)
             { s.btnByp_Click(null, null); }   // Toggle PTT
+            //else if (e.Control && e.Shift && e.KeyCode == Keys.X)
+            //{ s.btnFlexOn_Click(null, null); }   // 
 
 
         }

@@ -81,6 +81,7 @@ namespace DataDecoder
             this.btnMacro11 = new System.Windows.Forms.Button();
             this.btnMacro10 = new System.Windows.Forms.Button();
             this.btnMacro9 = new System.Windows.Forms.Button();
+            this.lblStepFreq = new System.Windows.Forms.Label();
             this.grpStepCtrl = new System.Windows.Forms.GroupBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.button4 = new System.Windows.Forms.Button();
@@ -109,6 +110,8 @@ namespace DataDecoder
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
+            this.txtTune = new System.Windows.Forms.TextBox();
+            this.lblTune = new System.Windows.Forms.Label();
             this.grpStepCtrl.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.grpAmp.SuspendLayout();
@@ -139,7 +142,7 @@ namespace DataDecoder
             // txtTemp
             // 
             this.txtTemp.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.75F, System.Drawing.FontStyle.Bold);
-            this.txtTemp.Location = new System.Drawing.Point(298, 6);
+            this.txtTemp.Location = new System.Drawing.Point(289, 6);
             this.txtTemp.Name = "txtTemp";
             this.txtTemp.Size = new System.Drawing.Size(49, 19);
             this.txtTemp.TabIndex = 77;
@@ -157,7 +160,7 @@ namespace DataDecoder
             this.btnReStart.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.btnReStart.Font = new System.Drawing.Font("Microsoft Sans Serif", 6F, System.Drawing.FontStyle.Bold);
             this.btnReStart.ForeColor = System.Drawing.Color.Black;
-            this.btnReStart.Location = new System.Drawing.Point(262, 6);
+            this.btnReStart.Location = new System.Drawing.Point(255, 6);
             this.btnReStart.Name = "btnReStart";
             this.btnReStart.Size = new System.Drawing.Size(28, 19);
             this.btnReStart.TabIndex = 82;
@@ -198,7 +201,7 @@ namespace DataDecoder
             this.btnProfiler.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.btnProfiler.Font = new System.Drawing.Font("Microsoft Sans Serif", 6F, System.Drawing.FontStyle.Bold);
             this.btnProfiler.ForeColor = System.Drawing.Color.Black;
-            this.btnProfiler.Location = new System.Drawing.Point(226, 6);
+            this.btnProfiler.Location = new System.Drawing.Point(223, 6);
             this.btnProfiler.Name = "btnProfiler";
             this.btnProfiler.Size = new System.Drawing.Size(28, 19);
             this.btnProfiler.TabIndex = 81;
@@ -234,7 +237,7 @@ namespace DataDecoder
             this.btnSP.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.btnSP.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.5F, System.Drawing.FontStyle.Bold);
             this.btnSP.ForeColor = System.Drawing.Color.Blue;
-            this.btnSP.Location = new System.Drawing.Point(49, 14);
+            this.btnSP.Location = new System.Drawing.Point(50, 13);
             this.btnSP.Name = "btnSP";
             this.btnSP.Size = new System.Drawing.Size(31, 22);
             this.btnSP.TabIndex = 0;
@@ -323,13 +326,13 @@ namespace DataDecoder
             // 
             this.btnCalib.AutoSize = true;
             this.btnCalib.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.btnCalib.BackColor = System.Drawing.SystemColors.Control;
+            this.btnCalib.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(224)))), ((int)(((byte)(192)))));
             this.btnCalib.FlatAppearance.BorderColor = System.Drawing.Color.Black;
             this.btnCalib.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
             this.btnCalib.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.btnCalib.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnCalib.ForeColor = System.Drawing.Color.Navy;
-            this.btnCalib.Location = new System.Drawing.Point(225, 13);
+            this.btnCalib.Location = new System.Drawing.Point(278, 13);
             this.btnCalib.Name = "btnCalib";
             this.btnCalib.Size = new System.Drawing.Size(32, 22);
             this.btnCalib.TabIndex = 98;
@@ -342,13 +345,13 @@ namespace DataDecoder
             // 
             this.btnHome.AutoSize = true;
             this.btnHome.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.btnHome.BackColor = System.Drawing.SystemColors.Control;
+            this.btnHome.BackColor = System.Drawing.Color.LightGoldenrodYellow;
             this.btnHome.FlatAppearance.BorderColor = System.Drawing.Color.Black;
             this.btnHome.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
             this.btnHome.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.btnHome.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnHome.ForeColor = System.Drawing.Color.Navy;
-            this.btnHome.Location = new System.Drawing.Point(175, 13);
+            this.btnHome.Location = new System.Drawing.Point(228, 13);
             this.btnHome.Name = "btnHome";
             this.btnHome.Size = new System.Drawing.Size(44, 22);
             this.btnHome.TabIndex = 97;
@@ -423,9 +426,9 @@ namespace DataDecoder
             this.btnHV.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnHV.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnHV.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.btnHV.Location = new System.Drawing.Point(157, 28);
+            this.btnHV.Location = new System.Drawing.Point(130, 28);
             this.btnHV.Name = "btnHV";
-            this.btnHV.Size = new System.Drawing.Size(41, 22);
+            this.btnHV.Size = new System.Drawing.Size(35, 22);
             this.btnHV.TabIndex = 39;
             this.btnHV.Text = "Off";
             this.toolTip1.SetToolTip(this.btnHV, "Press to toggle High/Low plate voltage .");
@@ -440,9 +443,9 @@ namespace DataDecoder
             this.btnOper.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnOper.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnOper.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.btnOper.Location = new System.Drawing.Point(57, 28);
+            this.btnOper.Location = new System.Drawing.Point(47, 28);
             this.btnOper.Name = "btnOper";
-            this.btnOper.Size = new System.Drawing.Size(41, 22);
+            this.btnOper.Size = new System.Drawing.Size(38, 22);
             this.btnOper.TabIndex = 9;
             this.btnOper.Text = "Off";
             this.toolTip1.SetToolTip(this.btnOper, "Press to toggle Operate/StandBy modes.");
@@ -457,9 +460,9 @@ namespace DataDecoder
             this.btnTune.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnTune.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnTune.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.btnTune.Location = new System.Drawing.Point(107, 28);
+            this.btnTune.Location = new System.Drawing.Point(90, 28);
             this.btnTune.Name = "btnTune";
-            this.btnTune.Size = new System.Drawing.Size(41, 22);
+            this.btnTune.Size = new System.Drawing.Size(35, 22);
             this.btnTune.TabIndex = 8;
             this.btnTune.Text = "Off";
             this.toolTip1.SetToolTip(this.btnTune, "Press to toggle Autotune/Manual tuning modes.");
@@ -471,7 +474,7 @@ namespace DataDecoder
             this.label71.AutoSize = true;
             this.label71.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.5F);
             this.label71.ForeColor = System.Drawing.Color.Navy;
-            this.label71.Location = new System.Drawing.Point(62, 13);
+            this.label71.Location = new System.Drawing.Point(51, 13);
             this.label71.Name = "label71";
             this.label71.Size = new System.Drawing.Size(30, 13);
             this.label71.TabIndex = 7;
@@ -488,7 +491,7 @@ namespace DataDecoder
             this.btnPwr.ForeColor = System.Drawing.SystemColors.ControlText;
             this.btnPwr.Location = new System.Drawing.Point(7, 28);
             this.btnPwr.Name = "btnPwr";
-            this.btnPwr.Size = new System.Drawing.Size(41, 22);
+            this.btnPwr.Size = new System.Drawing.Size(35, 22);
             this.btnPwr.TabIndex = 0;
             this.btnPwr.Text = "Off";
             this.toolTip1.SetToolTip(this.btnPwr, "Press to turn On/Off amplifier.");
@@ -497,17 +500,15 @@ namespace DataDecoder
             // 
             // btnByp
             // 
-            this.btnByp.AutoSize = true;
             this.btnByp.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.btnByp.BackColor = System.Drawing.SystemColors.ButtonFace;
             this.btnByp.FlatAppearance.BorderColor = System.Drawing.Color.Black;
-            this.btnByp.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.25F);
+            this.btnByp.Font = new System.Drawing.Font("Microsoft Sans Serif", 6F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnByp.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.btnByp.Location = new System.Drawing.Point(368, 41);
+            this.btnByp.Location = new System.Drawing.Point(401, 4);
             this.btnByp.Name = "btnByp";
-            this.btnByp.Size = new System.Drawing.Size(46, 23);
+            this.btnByp.Size = new System.Drawing.Size(19, 19);
             this.btnByp.TabIndex = 89;
-            this.btnByp.Text = "OPER";
             this.toolTip1.SetToolTip(this.btnByp, "Click to toggle PTT on/off  (ctrl+O)");
             this.btnByp.UseVisualStyleBackColor = false;
             this.btnByp.Click += new System.EventHandler(this.btnByp_Click);
@@ -518,7 +519,7 @@ namespace DataDecoder
             this.lblBCD.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lblBCD.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblBCD.ForeColor = System.Drawing.Color.Red;
-            this.lblBCD.Location = new System.Drawing.Point(389, 8);
+            this.lblBCD.Location = new System.Drawing.Point(378, 6);
             this.lblBCD.Name = "lblBCD";
             this.lblBCD.Size = new System.Drawing.Size(15, 15);
             this.lblBCD.TabIndex = 90;
@@ -533,7 +534,7 @@ namespace DataDecoder
             this.btnFull.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
             this.btnFull.Font = new System.Drawing.Font("Microsoft Sans Serif", 6F, System.Drawing.FontStyle.Bold);
             this.btnFull.ForeColor = System.Drawing.Color.Black;
-            this.btnFull.Location = new System.Drawing.Point(352, 4);
+            this.btnFull.Location = new System.Drawing.Point(345, 4);
             this.btnFull.Name = "btnFull";
             this.btnFull.Size = new System.Drawing.Size(27, 19);
             this.btnFull.TabIndex = 83;
@@ -805,8 +806,21 @@ namespace DataDecoder
             this.btnMacro9.UseVisualStyleBackColor = false;
             this.btnMacro9.Click += new System.EventHandler(this.btnMacro9_Click);
             // 
+            // lblStepFreq
+            // 
+            this.lblStepFreq.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblStepFreq.ForeColor = System.Drawing.Color.Red;
+            this.lblStepFreq.Location = new System.Drawing.Point(178, 19);
+            this.lblStepFreq.Name = "lblStepFreq";
+            this.lblStepFreq.Size = new System.Drawing.Size(41, 15);
+            this.lblStepFreq.TabIndex = 104;
+            this.lblStepFreq.Text = "Fault";
+            this.lblStepFreq.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.toolTip1.SetToolTip(this.lblStepFreq, "Frequency reported from SteppIR controller.");
+            // 
             // grpStepCtrl
             // 
+            this.grpStepCtrl.Controls.Add(this.lblStepFreq);
             this.grpStepCtrl.Controls.Add(this.rb34);
             this.grpStepCtrl.Controls.Add(this.rbBiDir);
             this.grpStepCtrl.Controls.Add(this.rb180);
@@ -817,7 +831,7 @@ namespace DataDecoder
             this.grpStepCtrl.ForeColor = System.Drawing.Color.Firebrick;
             this.grpStepCtrl.Location = new System.Drawing.Point(5, 30);
             this.grpStepCtrl.Name = "grpStepCtrl";
-            this.grpStepCtrl.Size = new System.Drawing.Size(266, 40);
+            this.grpStepCtrl.Size = new System.Drawing.Size(319, 40);
             this.grpStepCtrl.TabIndex = 85;
             this.grpStepCtrl.TabStop = false;
             this.grpStepCtrl.Text = "SteppIR";
@@ -831,7 +845,7 @@ namespace DataDecoder
             this.groupBox1.Controls.Add(this.textBox3);
             this.groupBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.25F, System.Drawing.FontStyle.Bold);
             this.groupBox1.ForeColor = System.Drawing.Color.Firebrick;
-            this.groupBox1.Location = new System.Drawing.Point(274, 30);
+            this.groupBox1.Location = new System.Drawing.Point(330, 30);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(89, 40);
             this.groupBox1.TabIndex = 86;
@@ -888,6 +902,8 @@ namespace DataDecoder
             // 
             // grpAmp
             // 
+            this.grpAmp.Controls.Add(this.txtTune);
+            this.grpAmp.Controls.Add(this.lblTune);
             this.grpAmp.Controls.Add(this.btnHF);
             this.grpAmp.Controls.Add(this.btnSF);
             this.grpAmp.Controls.Add(this.lblHF);
@@ -903,7 +919,7 @@ namespace DataDecoder
             this.grpAmp.Controls.Add(this.btnPwr);
             this.grpAmp.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.25F, System.Drawing.FontStyle.Bold);
             this.grpAmp.ForeColor = System.Drawing.Color.Blue;
-            this.grpAmp.Location = new System.Drawing.Point(426, 4);
+            this.grpAmp.Location = new System.Drawing.Point(426, 1);
             this.grpAmp.Name = "grpAmp";
             this.grpAmp.Size = new System.Drawing.Size(251, 80);
             this.grpAmp.TabIndex = 88;
@@ -939,7 +955,7 @@ namespace DataDecoder
             this.label77.AutoSize = true;
             this.label77.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.5F);
             this.label77.ForeColor = System.Drawing.Color.Navy;
-            this.label77.Location = new System.Drawing.Point(167, 13);
+            this.label77.Location = new System.Drawing.Point(137, 13);
             this.label77.Name = "label77";
             this.label77.Size = new System.Drawing.Size(21, 13);
             this.label77.TabIndex = 38;
@@ -950,7 +966,7 @@ namespace DataDecoder
             this.label76.AutoSize = true;
             this.label76.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.5F);
             this.label76.ForeColor = System.Drawing.Color.Navy;
-            this.label76.Location = new System.Drawing.Point(9, 13);
+            this.label76.Location = new System.Drawing.Point(8, 13);
             this.label76.Name = "label76";
             this.label76.Size = new System.Drawing.Size(37, 13);
             this.label76.TabIndex = 37;
@@ -961,7 +977,7 @@ namespace DataDecoder
             this.label73.AutoSize = true;
             this.label73.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.5F);
             this.label73.ForeColor = System.Drawing.Color.Navy;
-            this.label73.Location = new System.Drawing.Point(112, 13);
+            this.label73.Location = new System.Drawing.Point(93, 13);
             this.label73.Name = "label73";
             this.label73.Size = new System.Drawing.Size(30, 13);
             this.label73.TabIndex = 11;
@@ -1186,6 +1202,29 @@ namespace DataDecoder
             this.label1.TabIndex = 141;
             this.label1.Text = "F2";
             // 
+            // txtTune
+            // 
+            this.txtTune.BackColor = System.Drawing.SystemColors.Info;
+            this.txtTune.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtTune.Location = new System.Drawing.Point(172, 29);
+            this.txtTune.Name = "txtTune";
+            this.txtTune.Size = new System.Drawing.Size(26, 20);
+            this.txtTune.TabIndex = 60;
+            this.txtTune.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.txtTune.DoubleClick += new System.EventHandler(this.txtTune_DoubleClick);
+            this.txtTune.TextChanged += new System.EventHandler(this.txtTune_TextChanged);
+            // 
+            // lblTune
+            // 
+            this.lblTune.AutoSize = true;
+            this.lblTune.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.5F);
+            this.lblTune.ForeColor = System.Drawing.Color.Navy;
+            this.lblTune.Location = new System.Drawing.Point(174, 12);
+            this.lblTune.Name = "lblTune";
+            this.lblTune.Size = new System.Drawing.Size(23, 13);
+            this.lblTune.TabIndex = 61;
+            this.lblTune.Text = "Ant";
+            // 
             // Mini
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1318,5 +1357,8 @@ namespace DataDecoder
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.Button btnMacro9;
         private System.Windows.Forms.Label label15;
+        public System.Windows.Forms.Label lblStepFreq;
+        public System.Windows.Forms.TextBox txtTune;
+        public System.Windows.Forms.Label lblTune;
     }
 }
