@@ -784,6 +784,7 @@ namespace DataDecoder
             this.label67 = new System.Windows.Forms.Label();
             this.chkDog = new System.Windows.Forms.CheckBox();
             this.groupBox10 = new System.Windows.Forms.GroupBox();
+            this.chkDisFB = new System.Windows.Forms.CheckBox();
             this.chkTenths = new System.Windows.Forms.CheckBox();
             this.label50 = new System.Windows.Forms.Label();
             this.label49 = new System.Windows.Forms.Label();
@@ -890,6 +891,8 @@ namespace DataDecoder
             this.PMport = new System.IO.Ports.SerialPort(this.components);
             this.RepeatPort = new System.IO.Ports.SerialPort(this.components);
             this.PwrPort = new System.IO.Ports.SerialPort(this.components);
+            this.pdTimer = new System.Windows.Forms.Timer(this.components);
+            this.chkPSDR = new System.Windows.Forms.CheckBox();
             this.tabControl.SuspendLayout();
             this.tabPorts.SuspendLayout();
             this.grpSlave.SuspendLayout();
@@ -983,6 +986,7 @@ namespace DataDecoder
             // tabPorts
             // 
             this.tabPorts.BackColor = System.Drawing.Color.Transparent;
+            this.tabPorts.Controls.Add(this.chkPSDR);
             this.tabPorts.Controls.Add(this.btnFlexOn);
             this.tabPorts.Controls.Add(this.grpSlave);
             this.tabPorts.Controls.Add(this.label5);
@@ -1007,7 +1011,7 @@ namespace DataDecoder
             this.btnFlexOn.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(224)))), ((int)(((byte)(192)))));
             this.btnFlexOn.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnFlexOn.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.btnFlexOn.Location = new System.Drawing.Point(373, 30);
+            this.btnFlexOn.Location = new System.Drawing.Point(373, 25);
             this.btnFlexOn.Name = "btnFlexOn";
             this.btnFlexOn.Size = new System.Drawing.Size(46, 23);
             this.btnFlexOn.TabIndex = 69;
@@ -5449,7 +5453,7 @@ namespace DataDecoder
             this.rbPre16.Name = "rbPre16";
             this.rbPre16.Size = new System.Drawing.Size(44, 17);
             this.rbPre16.TabIndex = 118;
-            this.rbPre16.Text = "359";
+            this.rbPre16.Text = "330";
             this.toolTip1.SetToolTip(this.rbPre16, "Preset antenna heading in degrees.");
             this.rbPre16.UseVisualStyleBackColor = true;
             this.rbPre16.CheckedChanged += new System.EventHandler(this.grpPreset_CheckChanged);
@@ -5481,7 +5485,7 @@ namespace DataDecoder
             this.rbPre15.Name = "rbPre15";
             this.rbPre15.Size = new System.Drawing.Size(44, 17);
             this.rbPre15.TabIndex = 116;
-            this.rbPre15.Text = "330";
+            this.rbPre15.Text = "300";
             this.toolTip1.SetToolTip(this.rbPre15, "Preset antenna heading in degrees.");
             this.rbPre15.UseVisualStyleBackColor = true;
             this.rbPre15.CheckedChanged += new System.EventHandler(this.grpPreset_CheckChanged);
@@ -5513,7 +5517,7 @@ namespace DataDecoder
             this.rbPre14.Name = "rbPre14";
             this.rbPre14.Size = new System.Drawing.Size(44, 17);
             this.rbPre14.TabIndex = 114;
-            this.rbPre14.Text = "315";
+            this.rbPre14.Text = "270";
             this.toolTip1.SetToolTip(this.rbPre14, "Preset antenna heading in degrees.");
             this.rbPre14.UseVisualStyleBackColor = true;
             this.rbPre14.CheckedChanged += new System.EventHandler(this.grpPreset_CheckChanged);
@@ -5545,7 +5549,7 @@ namespace DataDecoder
             this.rbPre13.Name = "rbPre13";
             this.rbPre13.Size = new System.Drawing.Size(44, 17);
             this.rbPre13.TabIndex = 112;
-            this.rbPre13.Text = "300";
+            this.rbPre13.Text = "240";
             this.toolTip1.SetToolTip(this.rbPre13, "Preset antenna heading in degrees.");
             this.rbPre13.UseVisualStyleBackColor = true;
             this.rbPre13.CheckedChanged += new System.EventHandler(this.grpPreset_CheckChanged);
@@ -5561,7 +5565,7 @@ namespace DataDecoder
             this.rbPre5.Name = "rbPre5";
             this.rbPre5.Size = new System.Drawing.Size(44, 17);
             this.rbPre5.TabIndex = 111;
-            this.rbPre5.Text = "75";
+            this.rbPre5.Text = "60";
             this.toolTip1.SetToolTip(this.rbPre5, "Preset antenna heading in degrees.");
             this.rbPre5.UseVisualStyleBackColor = true;
             this.rbPre5.CheckedChanged += new System.EventHandler(this.grpPreset_CheckChanged);
@@ -5577,7 +5581,7 @@ namespace DataDecoder
             this.rbPre12.Name = "rbPre12";
             this.rbPre12.Size = new System.Drawing.Size(44, 17);
             this.rbPre12.TabIndex = 110;
-            this.rbPre12.Text = "270";
+            this.rbPre12.Text = "225";
             this.toolTip1.SetToolTip(this.rbPre12, "Preset antenna heading in degrees.");
             this.rbPre12.UseVisualStyleBackColor = true;
             this.rbPre12.CheckedChanged += new System.EventHandler(this.grpPreset_CheckChanged);
@@ -5593,7 +5597,7 @@ namespace DataDecoder
             this.rbPre4.Name = "rbPre4";
             this.rbPre4.Size = new System.Drawing.Size(44, 17);
             this.rbPre4.TabIndex = 109;
-            this.rbPre4.Text = "60";
+            this.rbPre4.Text = "45";
             this.toolTip1.SetToolTip(this.rbPre4, "Preset antenna heading in degrees.");
             this.rbPre4.UseVisualStyleBackColor = true;
             this.rbPre4.CheckedChanged += new System.EventHandler(this.grpPreset_CheckChanged);
@@ -5609,7 +5613,7 @@ namespace DataDecoder
             this.rbPre11.Name = "rbPre11";
             this.rbPre11.Size = new System.Drawing.Size(44, 17);
             this.rbPre11.TabIndex = 108;
-            this.rbPre11.Text = "240";
+            this.rbPre11.Text = "210";
             this.toolTip1.SetToolTip(this.rbPre11, "Preset antenna heading in degrees.");
             this.rbPre11.UseVisualStyleBackColor = true;
             this.rbPre11.CheckedChanged += new System.EventHandler(this.grpPreset_CheckChanged);
@@ -5625,7 +5629,7 @@ namespace DataDecoder
             this.rbPre3.Name = "rbPre3";
             this.rbPre3.Size = new System.Drawing.Size(44, 17);
             this.rbPre3.TabIndex = 107;
-            this.rbPre3.Text = "45";
+            this.rbPre3.Text = "30";
             this.toolTip1.SetToolTip(this.rbPre3, "Preset antenna heading in degrees.");
             this.rbPre3.UseVisualStyleBackColor = true;
             this.rbPre3.CheckedChanged += new System.EventHandler(this.grpPreset_CheckChanged);
@@ -5641,7 +5645,7 @@ namespace DataDecoder
             this.rbPre10.Name = "rbPre10";
             this.rbPre10.Size = new System.Drawing.Size(44, 17);
             this.rbPre10.TabIndex = 106;
-            this.rbPre10.Text = "210";
+            this.rbPre10.Text = "195";
             this.toolTip1.SetToolTip(this.rbPre10, "Preset antenna heading in degrees.");
             this.rbPre10.UseVisualStyleBackColor = true;
             this.rbPre10.CheckedChanged += new System.EventHandler(this.grpPreset_CheckChanged);
@@ -5657,7 +5661,7 @@ namespace DataDecoder
             this.rbPre2.Name = "rbPre2";
             this.rbPre2.Size = new System.Drawing.Size(44, 17);
             this.rbPre2.TabIndex = 105;
-            this.rbPre2.Text = "30";
+            this.rbPre2.Text = "15";
             this.toolTip1.SetToolTip(this.rbPre2, "Preset antenna heading in degrees.");
             this.rbPre2.UseVisualStyleBackColor = true;
             this.rbPre2.CheckedChanged += new System.EventHandler(this.grpPreset_CheckChanged);
@@ -5689,7 +5693,7 @@ namespace DataDecoder
             this.rbPre1.Name = "rbPre1";
             this.rbPre1.Size = new System.Drawing.Size(44, 17);
             this.rbPre1.TabIndex = 103;
-            this.rbPre1.Text = "15";
+            this.rbPre1.Text = "0";
             this.toolTip1.SetToolTip(this.rbPre1, "Preset antenna heading in degrees.");
             this.rbPre1.UseVisualStyleBackColor = true;
             this.rbPre1.CheckedChanged += new System.EventHandler(this.grpPreset_CheckChanged);
@@ -10241,7 +10245,7 @@ namespace DataDecoder
             this.txtPSDR.Size = new System.Drawing.Size(186, 20);
             this.txtPSDR.TabIndex = 29;
             this.txtPSDR.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.toolTip1.SetToolTip(this.txtPSDR, "Put PowerSDR\'s file location here (copy from shortcut).");
+            this.toolTip1.SetToolTip(this.txtPSDR, "PowerSDR\'s file location here (double-click for file dialog).");
             this.txtPSDR.DoubleClick += new System.EventHandler(this.txtPSDR_DoubleClick);
             this.txtPSDR.TextChanged += new System.EventHandler(this.txtPSDR_TextChanged);
             // 
@@ -10608,6 +10612,7 @@ namespace DataDecoder
             // 
             // groupBox10
             // 
+            this.groupBox10.Controls.Add(this.chkDisFB);
             this.groupBox10.Controls.Add(this.chkTenths);
             this.groupBox10.Controls.Add(this.label50);
             this.groupBox10.Controls.Add(this.label49);
@@ -10625,12 +10630,26 @@ namespace DataDecoder
             this.groupBox10.TabStop = false;
             this.groupBox10.Text = "Rotor Setup";
             // 
+            // chkDisFB
+            // 
+            this.chkDisFB.AutoSize = true;
+            this.chkDisFB.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chkDisFB.ForeColor = System.Drawing.Color.Navy;
+            this.chkDisFB.Location = new System.Drawing.Point(10, 155);
+            this.chkDisFB.Name = "chkDisFB";
+            this.chkDisFB.Size = new System.Drawing.Size(152, 17);
+            this.chkDisFB.TabIndex = 34;
+            this.chkDisFB.Text = "Disable Position Feedback";
+            this.toolTip1.SetToolTip(this.chkDisFB, "Select to disable rotor position feed back.");
+            this.chkDisFB.UseVisualStyleBackColor = true;
+            this.chkDisFB.CheckedChanged += new System.EventHandler(this.chkDisFB_CheckedChanged);
+            // 
             // chkTenths
             // 
             this.chkTenths.AutoSize = true;
             this.chkTenths.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.chkTenths.ForeColor = System.Drawing.Color.Navy;
-            this.chkTenths.Location = new System.Drawing.Point(10, 141);
+            this.chkTenths.Location = new System.Drawing.Point(10, 133);
             this.chkTenths.Name = "chkTenths";
             this.chkTenths.Size = new System.Drawing.Size(96, 17);
             this.chkTenths.TabIndex = 33;
@@ -11703,6 +11722,25 @@ namespace DataDecoder
             this.PwrPort.ReadTimeout = 500;
             this.PwrPort.WriteTimeout = 500;
             // 
+            // pdTimer
+            // 
+            this.pdTimer.Interval = 50;
+            this.pdTimer.Tick += new System.EventHandler(this.timer2_Tick);
+            // 
+            // chkPSDR
+            // 
+            this.chkPSDR.AutoSize = true;
+            this.chkPSDR.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
+            this.chkPSDR.ForeColor = System.Drawing.Color.Navy;
+            this.chkPSDR.Location = new System.Drawing.Point(375, 53);
+            this.chkPSDR.Name = "chkPSDR";
+            this.chkPSDR.Size = new System.Drawing.Size(56, 17);
+            this.chkPSDR.TabIndex = 70;
+            this.chkPSDR.Text = "PSDR";
+            this.toolTip1.SetToolTip(this.chkPSDR, "Select to start/stop PSDR with radio.");
+            this.chkPSDR.UseVisualStyleBackColor = true;
+            this.chkPSDR.CheckedChanged += new System.EventHandler(this.chkPSDR_CheckedChanged);
+            // 
             // Setup
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -11742,6 +11780,7 @@ namespace DataDecoder
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Setup_KeyDown);
             this.tabControl.ResumeLayout(false);
             this.tabPorts.ResumeLayout(false);
+            this.tabPorts.PerformLayout();
             this.grpSlave.ResumeLayout(false);
             this.grpSlave.PerformLayout();
             this.grpBox1.ResumeLayout(false);
@@ -12706,6 +12745,9 @@ namespace DataDecoder
         private Button btnCkAll;
         private ToolStripMenuItem resetDontAskMeAgainToolStripMenuItem;
         private Button btnStop;
+        private CheckBox chkDisFB;
+        private Timer pdTimer;
+        private CheckBox chkPSDR;
 
     }
 }
