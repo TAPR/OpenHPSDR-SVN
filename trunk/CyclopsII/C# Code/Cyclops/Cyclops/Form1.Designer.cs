@@ -51,8 +51,8 @@
             this.Smoothing = new System.Windows.Forms.NumericUpDown();
             this.label2 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.Mercury10MHz = new System.Windows.Forms.RadioButton();
             this.Atlas10MHz = new System.Windows.Forms.RadioButton();
+            this.Mercury10MHz = new System.Windows.Forms.RadioButton();
             this.label3 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.Mercury = new System.Windows.Forms.TextBox();
@@ -335,21 +335,10 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "10MHz Reference";
             // 
-            // Mercury10MHz
-            // 
-            this.Mercury10MHz.AutoSize = true;
-            this.Mercury10MHz.Checked = true;
-            this.Mercury10MHz.Location = new System.Drawing.Point(15, 20);
-            this.Mercury10MHz.Name = "Mercury10MHz";
-            this.Mercury10MHz.Size = new System.Drawing.Size(63, 17);
-            this.Mercury10MHz.TabIndex = 0;
-            this.Mercury10MHz.TabStop = true;
-            this.Mercury10MHz.Text = "Mercury";
-            this.Mercury10MHz.UseVisualStyleBackColor = true;
-            // 
             // Atlas10MHz
             // 
             this.Atlas10MHz.AutoSize = true;
+            this.Atlas10MHz.Checked = true;
             this.Atlas10MHz.Location = new System.Drawing.Point(15, 41);
             this.Atlas10MHz.Name = "Atlas10MHz";
             this.Atlas10MHz.Size = new System.Drawing.Size(48, 17);
@@ -357,6 +346,16 @@
             this.Atlas10MHz.TabStop = true;
             this.Atlas10MHz.Text = "Atlas";
             this.Atlas10MHz.UseVisualStyleBackColor = true;
+            // 
+            // Mercury10MHz
+            // 
+            this.Mercury10MHz.AutoSize = true;
+            this.Mercury10MHz.Location = new System.Drawing.Point(15, 20);
+            this.Mercury10MHz.Name = "Mercury10MHz";
+            this.Mercury10MHz.Size = new System.Drawing.Size(63, 17);
+            this.Mercury10MHz.TabIndex = 0;
+            this.Mercury10MHz.Text = "Mercury";
+            this.Mercury10MHz.UseVisualStyleBackColor = true;
             // 
             // label3
             // 
