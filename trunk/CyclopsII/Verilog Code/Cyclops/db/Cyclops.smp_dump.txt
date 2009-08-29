@@ -1,0 +1,171 @@
+
+State Machine - |Cyclops|IF_PWM_state
+Name IF_PWM_state.PWM_REQ IF_PWM_state.PWM_WAIT IF_PWM_state.PWM_Q_AUDIO IF_PWM_state.PWM_I_AUDIO IF_PWM_state.PWM_RIGHT IF_PWM_state.PWM_LEFT IF_PWM_state.PWM_START IF_PWM_state.PWM_IDLE 
+IF_PWM_state.PWM_IDLE 0 0 0 0 0 0 0 0 
+IF_PWM_state.PWM_START 0 0 0 0 0 0 1 1 
+IF_PWM_state.PWM_LEFT 0 0 0 0 0 1 0 1 
+IF_PWM_state.PWM_RIGHT 0 0 0 0 1 0 0 1 
+IF_PWM_state.PWM_I_AUDIO 0 0 0 1 0 0 0 1 
+IF_PWM_state.PWM_Q_AUDIO 0 0 1 0 0 0 0 1 
+IF_PWM_state.PWM_WAIT 0 1 0 0 0 0 0 1 
+IF_PWM_state.PWM_REQ 1 0 0 0 0 0 0 1 
+
+State Machine - |Cyclops|IF_SYNC_state
+Name IF_SYNC_state.SYNC_FINISH IF_SYNC_state.SYNC_RX IF_SYNC_state.SYNC_RX_3_4 IF_SYNC_state.SYNC_RX_1_2 IF_SYNC_state.SYNC_START IF_SYNC_state.SYNC_IDLE 
+IF_SYNC_state.SYNC_IDLE 0 0 0 0 0 0 
+IF_SYNC_state.SYNC_START 0 0 0 0 1 1 
+IF_SYNC_state.SYNC_RX_1_2 0 0 0 1 0 1 
+IF_SYNC_state.SYNC_RX_3_4 0 0 1 0 0 1 
+IF_SYNC_state.SYNC_RX 0 1 0 0 0 1 
+IF_SYNC_state.SYNC_FINISH 1 0 0 0 0 1 
+
+State Machine - |Cyclops|ADF4112_SPI:ADF4112|SPI_state
+Name SPI_state.011 SPI_state.010 SPI_state.001 SPI_state.000 
+SPI_state.000 0 0 0 0 
+SPI_state.001 0 0 1 1 
+SPI_state.010 0 1 0 1 
+SPI_state.011 1 0 0 1 
+
+State Machine - |Cyclops|led_blinker:BLINK_D4|LED_state
+Name LED_state.LED_WAIT LED_state.LED_NXT LED_state.LED_BLINK LED_state.LED_ERR LED_state.LED_FIND LED_state.LED_IDLE 
+LED_state.LED_IDLE 0 0 0 0 0 0 
+LED_state.LED_FIND 0 0 0 0 1 1 
+LED_state.LED_ERR 0 0 0 1 0 1 
+LED_state.LED_BLINK 0 0 1 0 0 1 
+LED_state.LED_NXT 0 1 0 0 0 1 
+LED_state.LED_WAIT 1 0 0 0 0 1 
+
+State Machine - |Cyclops|led_blinker:BLINK_D1|LED_state
+Name LED_state.LED_WAIT LED_state.LED_NXT LED_state.LED_BLINK LED_state.LED_ERR LED_state.LED_FIND LED_state.LED_IDLE 
+LED_state.LED_IDLE 0 0 0 0 0 0 
+LED_state.LED_FIND 0 0 0 0 1 1 
+LED_state.LED_ERR 0 0 0 1 0 1 
+LED_state.LED_BLINK 0 0 1 0 0 1 
+LED_state.LED_NXT 0 1 0 0 0 1 
+LED_state.LED_WAIT 1 0 0 0 0 1 
+
+State Machine - |Cyclops|NWire_rcv:m_ser|TB_state
+Name TB_state.TB_BIT TB_state.TB_NEXT TB_state.TB_SYNC TB_state.TB_CALC TB_state.TB_DB TB_state.TB_IDLE 
+TB_state.TB_IDLE 0 0 0 0 0 0 
+TB_state.TB_DB 0 0 0 0 1 1 
+TB_state.TB_CALC 0 0 0 1 0 1 
+TB_state.TB_SYNC 0 0 1 0 0 1 
+TB_state.TB_NEXT 0 1 0 0 0 1 
+TB_state.TB_BIT 1 0 0 0 0 1 
+
+State Machine - |Cyclops|NWire_rcv:p_ser|TB_state
+Name TB_state.TB_BIT TB_state.TB_NEXT TB_state.TB_SYNC TB_state.TB_CALC TB_state.TB_DB TB_state.TB_IDLE 
+TB_state.TB_IDLE 0 0 0 0 0 0 
+TB_state.TB_DB 0 0 0 0 1 1 
+TB_state.TB_CALC 0 0 0 1 0 1 
+TB_state.TB_SYNC 0 0 1 0 0 1 
+TB_state.TB_NEXT 0 1 0 0 0 1 
+TB_state.TB_BIT 1 0 0 0 0 1 
+
+State Machine - |Cyclops|NWire_xmit:CCxmit|NW_state
+Name NW_state.NW_LOW NW_state.NW_DATA_Q4 NW_state.NW_DATA_Q23 NW_state.NW_DATA_Q1 NW_state.NW_WAIT NW_state.NW_IDLE 
+NW_state.NW_IDLE 0 0 0 0 0 0 
+NW_state.NW_WAIT 0 0 0 0 1 1 
+NW_state.NW_DATA_Q1 0 0 0 1 0 1 
+NW_state.NW_DATA_Q23 0 0 1 0 0 1 
+NW_state.NW_DATA_Q4 0 1 0 0 0 1 
+NW_state.NW_LOW 1 0 0 0 0 1 
+
+State Machine - |Cyclops|I2S_xmit:J_IQPWM|TLV_state
+Name TLV_state.TLV_WL TLV_state.TLV_LR_LO TLV_state.TLV_WH TLV_state.TLV_IDLE TLV_state.TLV_LR_HI 
+TLV_state.TLV_IDLE 0 0 0 0 0 
+TLV_state.TLV_WH 0 0 1 1 0 
+TLV_state.TLV_LR_LO 0 1 0 1 0 
+TLV_state.TLV_WL 1 0 0 1 0 
+TLV_state.TLV_LR_HI 0 0 0 1 1 
+
+State Machine - |Cyclops|NWire_xmit:P_IQPWM|NW_state
+Name NW_state.NW_LOW NW_state.NW_DATA_Q4 NW_state.NW_DATA_Q23 NW_state.NW_DATA_Q1 NW_state.NW_WAIT NW_state.NW_IDLE 
+NW_state.NW_IDLE 0 0 0 0 0 0 
+NW_state.NW_WAIT 0 0 0 0 1 1 
+NW_state.NW_DATA_Q1 0 0 0 1 0 1 
+NW_state.NW_DATA_Q23 0 0 1 0 0 1 
+NW_state.NW_DATA_Q4 0 1 0 0 0 1 
+NW_state.NW_LOW 1 0 0 0 0 1 
+
+State Machine - |Cyclops|I2S_xmit:J_LRAudio|TLV_state
+Name TLV_state.TLV_WL TLV_state.TLV_LR_LO TLV_state.TLV_WH TLV_state.TLV_IDLE TLV_state.TLV_LR_HI 
+TLV_state.TLV_IDLE 0 0 0 0 0 
+TLV_state.TLV_WH 0 0 1 1 0 
+TLV_state.TLV_LR_LO 0 1 0 1 0 
+TLV_state.TLV_WL 1 0 0 1 0 
+TLV_state.TLV_LR_HI 0 0 0 1 1 
+
+State Machine - |Cyclops|NWire_xmit:M_LRAudio|NW_state
+Name NW_state.NW_LOW NW_state.NW_DATA_Q4 NW_state.NW_DATA_Q23 NW_state.NW_DATA_Q1 NW_state.NW_WAIT NW_state.NW_IDLE 
+NW_state.NW_IDLE 0 0 0 0 0 0 
+NW_state.NW_WAIT 0 0 0 0 1 1 
+NW_state.NW_DATA_Q1 0 0 0 1 0 1 
+NW_state.NW_DATA_Q23 0 0 1 0 0 1 
+NW_state.NW_DATA_Q4 0 1 0 0 0 1 
+NW_state.NW_LOW 1 0 0 0 0 1 
+
+State Machine - |Cyclops|async_usb:usb1|FX_state
+Name FX_state.FX_TDONE FX_state.FX_T7 FX_state.FX_T6 FX_state.FX_T5 FX_state.FX_T4 FX_state.FX_T3 FX_state.FX_T2 FX_state.FX_T1 FX_state.FX_FDONE FX_state.FX_F6 FX_state.FX_F5 FX_state.FX_F4 FX_state.FX_F3 FX_state.FX_F2 FX_state.FX_F1 FX_state.FX_TO_PC_CHECK FX_state.FX_TO_PC_ADDR FX_state.FX_FROM_PC_CHECK FX_state.FX_FROM_PC_ADDR FX_state.FX_IDLE 
+FX_state.FX_IDLE 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 
+FX_state.FX_FROM_PC_ADDR 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 1 
+FX_state.FX_FROM_PC_CHECK 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 1 
+FX_state.FX_TO_PC_ADDR 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 1 
+FX_state.FX_TO_PC_CHECK 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 1 
+FX_state.FX_F1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 1 
+FX_state.FX_F2 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 1 
+FX_state.FX_F3 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 1 
+FX_state.FX_F4 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 
+FX_state.FX_F5 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 1 
+FX_state.FX_F6 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 1 
+FX_state.FX_FDONE 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 1 
+FX_state.FX_T1 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 1 
+FX_state.FX_T2 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 1 
+FX_state.FX_T3 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 1 
+FX_state.FX_T4 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 
+FX_state.FX_T5 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 
+FX_state.FX_T6 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 
+FX_state.FX_T7 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 
+FX_state.FX_TDONE 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 
+
+State Machine - |Cyclops|NWire_rcv:SPD|TB_state
+Name TB_state.TB_BIT TB_state.TB_NEXT TB_state.TB_SYNC TB_state.TB_CALC TB_state.TB_DB TB_state.TB_IDLE 
+TB_state.TB_IDLE 0 0 0 0 0 0 
+TB_state.TB_DB 0 0 0 0 1 1 
+TB_state.TB_CALC 0 0 0 1 0 1 
+TB_state.TB_SYNC 0 0 1 0 0 1 
+TB_state.TB_NEXT 0 1 0 0 0 1 
+TB_state.TB_BIT 1 0 0 0 0 1 
+
+State Machine - |Cyclops|Tx_fifo_ctrl:TXFC|AD_state
+Name AD_state.AD_ERR AD_state.AD_LOOP_CHK AD_state.AD_WAIT AD_state.AD_SEND_PJ AD_state.AD_SEND_MJ3 AD_state.AD_SEND_MJ2 AD_state.AD_SEND_MJ1 AD_state.AD_SEND_CTL3_4 AD_state.AD_SEND_CTL1_2 AD_state.AD_SEND_SYNC2 AD_state.AD_SEND_SYNC1 AD_state.AD_IDLE 
+AD_state.AD_IDLE 0 0 0 0 0 0 0 0 0 0 0 0 
+AD_state.AD_SEND_SYNC1 0 0 0 0 0 0 0 0 0 0 1 1 
+AD_state.AD_SEND_SYNC2 0 0 0 0 0 0 0 0 0 1 0 1 
+AD_state.AD_SEND_CTL1_2 0 0 0 0 0 0 0 0 1 0 0 1 
+AD_state.AD_SEND_CTL3_4 0 0 0 0 0 0 0 1 0 0 0 1 
+AD_state.AD_SEND_MJ1 0 0 0 0 0 0 1 0 0 0 0 1 
+AD_state.AD_SEND_MJ2 0 0 0 0 0 1 0 0 0 0 0 1 
+AD_state.AD_SEND_MJ3 0 0 0 0 1 0 0 0 0 0 0 1 
+AD_state.AD_SEND_PJ 0 0 0 1 0 0 0 0 0 0 0 1 
+AD_state.AD_WAIT 0 0 1 0 0 0 0 0 0 0 0 1 
+AD_state.AD_LOOP_CHK 0 1 0 0 0 0 0 0 0 0 0 1 
+AD_state.AD_ERR 1 0 0 0 0 0 0 0 0 0 0 1 
+
+State Machine - |Cyclops|NWire_rcv:M_IQ|TB_state
+Name TB_state.TB_BIT TB_state.TB_NEXT TB_state.TB_SYNC TB_state.TB_CALC TB_state.TB_DB TB_state.TB_IDLE 
+TB_state.TB_IDLE 0 0 0 0 0 0 
+TB_state.TB_DB 0 0 0 0 1 1 
+TB_state.TB_CALC 0 0 0 1 0 1 
+TB_state.TB_SYNC 0 0 1 0 0 1 
+TB_state.TB_NEXT 0 1 0 0 0 1 
+TB_state.TB_BIT 1 0 0 0 0 1 
+
+State Machine - |Cyclops|NWire_rcv:P_MIC|TB_state
+Name TB_state.TB_BIT TB_state.TB_NEXT TB_state.TB_SYNC TB_state.TB_CALC TB_state.TB_DB TB_state.TB_IDLE 
+TB_state.TB_IDLE 0 0 0 0 0 0 
+TB_state.TB_DB 0 0 0 0 1 1 
+TB_state.TB_CALC 0 0 0 1 0 1 
+TB_state.TB_SYNC 0 0 1 0 0 1 
+TB_state.TB_NEXT 0 1 0 0 0 1 
+TB_state.TB_BIT 1 0 0 0 0 1 
