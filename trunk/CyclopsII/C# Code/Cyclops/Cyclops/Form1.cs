@@ -33,9 +33,11 @@
  *  24 Aug 2009 - Added 10MHz clock selection
  *              - Added display of system frequencies
  *  29 Aug 2009 - Allow keyboard entry of frequency 0-1GHz
- *              - Save setting to Cyclops.csv
+ *              - Save settings to Cyclops.csv
  *                  - 10MHz reference source
  *                  - Last frequency used
+ *              - Uses Cyclops.rbf V1.0
+ *              - Release as V1.0
  *                  
  *
  *  
@@ -69,7 +71,7 @@ namespace Cyclops
 {
     public partial class Form1 : Form
     {
-        string version = "V1.0.0";  // change this for each release!
+        string version = "V1.0.1";  // change this for each release!
         string Ozy_version = null;  // holds version of Ozy code loaded into FX2
 
         // are these really rbufSize / 2???  If so, we should make them defined that way, and tidy up the '1024' values
@@ -277,8 +279,6 @@ namespace Cyclops
                 Mercury10MHz.Checked = TenMHzMercury;
                 Atlas10MHz.Checked = TenMHzAtlas;
                 set_frequency.Value = Convert.ToInt32(LastFrequency);
-
-
             }
 
             else  // TODO: can't find KK.csv file - should add some error handling or default values here.
@@ -321,16 +321,7 @@ namespace Cyclops
             TenMHzAtlas = LookupCYCLOPSCSVValue("Atlas 10MHz", TenMHzAtlas, value);
             LastFrequency = LookupCYCLOPSCSVValue("Last Frequency", LastFrequency, value);
 
-            //BandText = LookupKKCSVValue("Band", BandText, value);
-            //SampleRate = LookupKKCSVValue("Sample Rate", SampleRate, value);
-            //stepSize.Text = LookupKKCSVValue("Step Size", stepSize.Text, value);
-            //Mode.Text = LookupKKCSVValue("Mode", Mode.Text, value);
-            //VolumeTrackBar.Value = LookupKKCSVValue("Volume", VolumeTrackBar.Value, value);
-            //AGCTrackBar.Value = LookupKKCSVValue("AGC-T", AGCTrackBar.Value, value);
-            //AGCSpeed.Text = LookupKKCSVValue("AGC Speed", AGCSpeed.Text, value);
-        }
-
-       
+        }       
 
         public string LookupCYCLOPSCSVValue(string key, string defaultValue, List<string> value)
         {
@@ -1174,8 +1165,8 @@ namespace Cyclops
             // is this linked to the rbufSize???
             const int toOzySize = 2048;
             byte[] to_Ozy = new byte[toOzySize];       // array to send to Ozy via USB bulk write
-            short I_data = 0;
-            short Q_data = 0;
+            //short I_data = 0;
+            //short Q_data = 0;
             int frame_number = 0;
             int pntr; int x = 0;
 
@@ -1188,10 +1179,7 @@ namespace Cyclops
                 {
                     case 0:
                         {
-                            C0 = 0x00; C1 = 0x00; C2 = 0x00;
-
-                            // set C4 bit 2 if Duplex is selected
-                            C4 = 0x00;
+                            C0 = 0x00; C1 = 0x00; C2 = 0x00; C4 = 0x00;
 
                             // Select 10MHz reference clock
                             if(Mercury10MHz.Checked)
