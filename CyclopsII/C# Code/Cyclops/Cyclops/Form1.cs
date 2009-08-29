@@ -32,6 +32,11 @@
  *  23 Aug 2009 - Started coding using KK V1.0.6 as a base
  *  24 Aug 2009 - Added 10MHz clock selection
  *              - Added display of system frequencies
+ *  29 Aug 2009 - Allow keyboard entry of frequency 0-1GHz
+ *              - Save setting to Cyclops.csv
+ *                  - 10MHz reference source
+ *                  - Last frequency used
+ *                  
  *
  *  
  *              
@@ -117,7 +122,20 @@ namespace Cyclops
         bool ShowI = false;
         bool ShowQ = false;
 
+        private void WriteCYCLPOSCSV()
+        {
+            // save the current settings to CYCLOPS.csv
+            List<string> lines = new List<string>();        // create a List<string> to hold all the output lines
 
+            // each line of the output file, in output order
+            lines.Add("Atlas 10MHz," + Atlas10MHz.Checked.ToString(nfi));
+            lines.Add("Mercury 10MHz," + Mercury10MHz.Checked.ToString(nfi));
+            lines.Add("Last Frequency," + set_frequency.Value.ToString(nfi));
+
+            
+            // write all the lines
+            File.WriteAllLines(@"CYCLOPS.csv", lines.ToArray());
+        }
 
         private void SetSplitterBar()
         {
@@ -184,7 +202,10 @@ namespace Cyclops
         int FirstLOFrequency;
         double FirstIFFrequency;
         double SecondIFFrequency;
-        int MercuryFrequency;               // frequecy we send to Mercury
+        int MercuryFrequency;       // frequecy we send to Mercury
+        bool TenMHzMercury;         // set if 10MHz clock from Mercury
+        bool TenMHzAtlas;           // set of 10MHz clock from Atlas/Exchalibur
+        string LastFrequency;       // last frquency that was used so we can restore on startup 
 
         private Thread USB_thread;	// runs the loop facility 
 
@@ -238,8 +259,170 @@ namespace Cyclops
             // force narrow band spectrum scope on 
             chkSpec.Checked = true;
 
-    
+            // Load the previous radio settings from the KK.csv file and allocate values.
+            // First check that the file exists
+            if (!File.Exists("CYCLOPS.csv"))   //if file doesn't exist, create it
+            {
+                //CreateKKCSV();
+            }
 
+            // now read the lines in the config file.  Warn if action above didn't create one!
+            // This allows CYCLKPS.CSV to be no longer part of the SVN tree.  This means that the CYCLPOS.CSV
+            // file won't get mangled/updated by SVN when someone updates the code!
+            if (File.Exists("CYCLOPS.csv"))   //if file exists open it
+            {
+                ReadCYCLOPSCSV();
+
+                // set the various values to those read from CYCLOPS.CSV
+                Mercury10MHz.Checked = TenMHzMercury;
+                Atlas10MHz.Checked = TenMHzAtlas;
+                set_frequency.Value = Convert.ToInt32(LastFrequency);
+
+
+            }
+
+            else  // TODO: can't find KK.csv file - should add some error handling or default values here.
+            {
+                MessageBox.Show("Can't find CYCLPS.csv, should be in the same directory as Cyclops.exe?", "File Error");
+            }
+
+            Frequency_change();  // show last used frequency on display
+        }
+
+        public void ReadCYCLOPSCSV()
+        {
+            // read the file into an array so we can process each entry
+            var lines = File.ReadAllLines("CYCLOPS.csv");
+            List<string> value = new List<string>();
+
+            // process the string array of data that was read
+            foreach (string text in lines)
+            {
+                /* This gets around the problem of the locale of the user as far as saving floating point
+                 * values which might (because of locale) have commas in the numbers, thus creating
+                 * more entries in the array than desired, because of mis-parsing based on the extra commas.
+                 * We also get to use a List<string> so that we don't need to know how big it is before we process
+                 * data.  It indexes the same as 'string[] value' did.
+                 */
+                int p = text.IndexOf(",");      // search for the comma after the data element name
+                if (p != -1)
+                {
+                    // we found a comma.  Split the line into 'before' and 'after' the comma
+                    // before the comma is the data name
+                    // after the comma is its value
+                    value.Add(text.Substring(0, p));
+                    value.Add(text.Substring(p + 1));
+                }
+            }
+
+            // Assign the values in CYCLOPS.csv to their respective variables
+
+            TenMHzMercury = LookupCYCLOPSCSVValue("Mercury 10MHz", TenMHzMercury, value);
+            TenMHzAtlas = LookupCYCLOPSCSVValue("Atlas 10MHz", TenMHzAtlas, value);
+            LastFrequency = LookupCYCLOPSCSVValue("Last Frequency", LastFrequency, value);
+
+            //BandText = LookupKKCSVValue("Band", BandText, value);
+            //SampleRate = LookupKKCSVValue("Sample Rate", SampleRate, value);
+            //stepSize.Text = LookupKKCSVValue("Step Size", stepSize.Text, value);
+            //Mode.Text = LookupKKCSVValue("Mode", Mode.Text, value);
+            //VolumeTrackBar.Value = LookupKKCSVValue("Volume", VolumeTrackBar.Value, value);
+            //AGCTrackBar.Value = LookupKKCSVValue("AGC-T", AGCTrackBar.Value, value);
+            //AGCSpeed.Text = LookupKKCSVValue("AGC Speed", AGCSpeed.Text, value);
+        }
+
+       
+
+        public string LookupCYCLOPSCSVValue(string key, string defaultValue, List<string> value)
+        {
+            for (int i = 0; i < value.Count; i += 2)
+            {
+                string s = value[i];
+                // search all the even index entries for a key that matches.  If there is one, return
+                // the next list entry
+                if (s.Equals(key, StringComparison.InvariantCulture))
+                {
+                    // they match.  return the next element in value
+                    return value[i + 1];
+                }
+            }
+
+            // not found.  Return default value instead
+            return defaultValue;
+        }
+
+        public float LookupCYCLOPSCSVValue(string key, float defaultValue, List<string> value)
+        {
+            for (int i = 0; i < value.Count; i += 2)
+            {
+                string s = value[i];
+                // search all the even index entries for a key that matches.  If there is one, return
+                // the next list entry
+                if (s.Equals(key, StringComparison.InvariantCulture))
+                {
+                    // they match.  return the next element in value
+                    try
+                    {
+                        return (float)Convert.ToDouble(value[i + 1], nfi);
+                    }
+                    catch
+                    {
+                        return defaultValue;
+                    }
+                }
+            }
+
+            // not found.  Return default value instead
+            return defaultValue;
+        }
+
+        public int LookupCYCLOPSCSVValue(string key, int defaultValue, List<string> value)
+        {
+            for (int i = 0; i < value.Count; i += 2)
+            {
+                string s = value[i];
+                // search all the even index entries for a key that matches.  If there is one, return
+                // the next list entry
+                if (s.Equals(key, StringComparison.InvariantCulture))
+                {
+                    // they match.  return the next element in value
+                    try
+                    {
+                        return Convert.ToInt32(value[i + 1], nfi);
+                    }
+                    catch
+                    {
+                        return defaultValue;
+                    }
+                }
+            }
+
+            // not found.  Return default value instead
+            return defaultValue;
+        }
+
+        public bool LookupCYCLOPSCSVValue(string key, bool defaultValue, List<string> value)
+        {
+            for (int i = 0; i < value.Count; i += 2)
+            {
+                string s = value[i];
+                // search all the even index entries for a key that matches.  If there is one, return
+                // the next list entry
+                if (s.Equals(key, StringComparison.InvariantCulture))
+                {
+                    // they match.  return the next element in value
+                    try
+                    {
+                        return Convert.ToBoolean(value[i + 1], nfi);
+                    }
+                    catch
+                    {
+                        return defaultValue;
+                    }
+                }
+            }
+
+            // not found.  Return default value instead
+            return defaultValue;
         }
 
         void PowerSpectrumSignal_ps_event(object source, SharpDSP2._1.PowerSpectrumSignal.PSpectrumEvent e)
@@ -747,6 +930,8 @@ namespace Cyclops
                 {
                 }
             }
+            // Save the current settings to CYCLOPS.CSV
+            WriteCYCLPOSCSV();
         }
 
         // This thread runs at program load and reads data from Ozy
@@ -1068,8 +1253,8 @@ namespace Cyclops
                     to_Ozy[pntr + x + 3] = (byte)(IntValue & 0xff);  // right lo
 
                     // send I & Q data to Qzy 
-                    to_Ozy[pntr + x + 4] = FirstLOfreq[0];          // Send first LO frequency 
-                    to_Ozy[pntr + x + 5] = FirstLOfreq[1];   
+                    to_Ozy[pntr + x + 4] = FirstLOfreq[1];          // Send first LO frequency 
+                    to_Ozy[pntr + x + 5] = FirstLOfreq[0];   
                     to_Ozy[pntr + x + 6] = (byte) 0;                // Q_data[0]
                     to_Ozy[pntr + x + 7] = (byte) 0;                // Q_data[1]  
                 }
@@ -1362,7 +1547,7 @@ namespace Cyclops
                 float temp2 = temp * 1000000.0F;  // Multiply by 10e6 to give Hz
                 setfrequency = (int)temp2; // convert to an integer
                 // check frequency is valid
-                if (keycount > 0 && keycount < 9 && setfrequency < 55000001)
+                if (keycount > 0 && keycount < 9 && setfrequency < 1000000001)
                 {
                     Debug.WriteLine(setfrequency);
                     set_frequency.Value = setfrequency;
