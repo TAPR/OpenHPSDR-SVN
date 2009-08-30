@@ -1,5 +1,5 @@
 Flow report for Cyclops
-Sat Aug 29 15:41:18 2009
+Sun Aug 30 20:19:20 2009
 Quartus II Version 9.0 Build 132 02/25/2009 SJ Web Edition
 
 
@@ -38,7 +38,7 @@ applicable agreement for further details.
 +------------------------------------------------------------------------------+
 ; Flow Summary                                                                 ;
 +------------------------------------+-----------------------------------------+
-; Flow Status                        ; Successful - Sat Aug 29 15:41:18 2009   ;
+; Flow Status                        ; Successful - Sun Aug 30 20:19:20 2009   ;
 ; Quartus II Version                 ; 9.0 Build 132 02/25/2009 SJ Web Edition ;
 ; Revision Name                      ; Cyclops                                 ;
 ; Top-level Entity Name              ; Cyclops                                 ;
@@ -46,11 +46,11 @@ applicable agreement for further details.
 ; Device                             ; EP2C8Q208C8                             ;
 ; Timing Models                      ; Final                                   ;
 ; Met timing requirements            ; No                                      ;
-; Total logic elements               ; 4,577 / 8,256 ( 55 % )                  ;
-;     Total combinational functions  ; 3,803 / 8,256 ( 46 % )                  ;
-;     Dedicated logic registers      ; 2,761 / 8,256 ( 33 % )                  ;
-; Total registers                    ; 2761                                    ;
-; Total pins                         ; 90 / 138 ( 65 % )                       ;
+; Total logic elements               ; 2,550 / 8,256 ( 31 % )                  ;
+;     Total combinational functions  ; 2,049 / 8,256 ( 25 % )                  ;
+;     Dedicated logic registers      ; 1,655 / 8,256 ( 20 % )                  ;
+; Total registers                    ; 1655                                    ;
+; Total pins                         ; 43 / 138 ( 31 % )                       ;
 ; Total virtual pins                 ; 0                                       ;
 ; Total memory bits                  ; 114,688 / 165,888 ( 69 % )              ;
 ; Embedded Multiplier 9-bit elements ; 0 / 36 ( 0 % )                          ;
@@ -63,7 +63,7 @@ applicable agreement for further details.
 +-------------------+---------------------+
 ; Option            ; Setting             ;
 +-------------------+---------------------+
-; Start date & time ; 08/29/2009 15:40:06 ;
+; Start date & time ; 08/30/2009 20:18:37 ;
 ; Main task         ; Compilation         ;
 ; Revision Name     ; Cyclops             ;
 +-------------------+---------------------+
@@ -75,7 +75,7 @@ applicable agreement for further details.
 ; Assignment Name                    ; Value                                                     ; Default Value ; Entity Name ; Section Id     ;
 +------------------------------------+-----------------------------------------------------------+---------------+-------------+----------------+
 ; ALLOW_POWER_UP_DONT_CARE           ; Off                                                       ; On            ; --          ; --             ;
-; COMPILER_SIGNATURE_ID              ; 123483488765.125153160602104                              ; --            ; --          ; --             ;
+; COMPILER_SIGNATURE_ID              ; 123483488765.125163471703904                              ; --            ; --          ; --             ;
 ; MAX_CORE_JUNCTION_TEMP             ; 85                                                        ; --            ; --          ; --             ;
 ; MIN_CORE_JUNCTION_TEMP             ; 0                                                         ; --            ; --          ; --             ;
 ; MISC_FILE                          ; O:/HPSDR/trunk/CyclopsII/Verilog Code/Cyclops/Cyclops.dpf ; --            ; --          ; --             ;
@@ -90,11 +90,11 @@ applicable agreement for further details.
 +-------------------------+--------------+-------------------------+---------------------+------------------------------------+
 ; Module Name             ; Elapsed Time ; Average Processors Used ; Peak Virtual Memory ; Total CPU Time (on all processors) ;
 +-------------------------+--------------+-------------------------+---------------------+------------------------------------+
-; Analysis & Synthesis    ; 00:00:25     ; 1.0                     ; 197 MB              ; 00:00:23                           ;
-; Fitter                  ; 00:00:34     ; 1.0                     ; 199 MB              ; 00:00:33                           ;
-; Assembler               ; 00:00:03     ; 1.0                     ; 172 MB              ; 00:00:03                           ;
-; Classic Timing Analyzer ; 00:00:01     ; 1.0                     ; 150 MB              ; 00:00:02                           ;
-; Total                   ; 00:01:03     ; --                      ; --                  ; 00:01:01                           ;
+; Analysis & Synthesis    ; 00:00:13     ; 1.0                     ; 192 MB              ; 00:00:13                           ;
+; Fitter                  ; 00:00:20     ; 1.0                     ; 193 MB              ; 00:00:19                           ;
+; Assembler               ; 00:00:02     ; 1.0                     ; 168 MB              ; 00:00:03                           ;
+; Classic Timing Analyzer ; 00:00:01     ; 1.0                     ; 140 MB              ; 00:00:01                           ;
+; Total                   ; 00:00:36     ; --                      ; --                  ; 00:00:36                           ;
 +-------------------------+--------------+-------------------------+---------------------+------------------------------------+
 
 

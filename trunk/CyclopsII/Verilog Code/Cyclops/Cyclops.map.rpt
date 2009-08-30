@@ -1,5 +1,5 @@
 Analysis & Synthesis report for Cyclops
-Sat Aug 29 15:40:33 2009
+Sun Aug 30 20:18:51 2009
 Quartus II Version 9.0 Build 132 02/25/2009 SJ Web Edition
 
 
@@ -18,97 +18,49 @@ Quartus II Version 9.0 Build 132 02/25/2009 SJ Web Edition
  10. State Machine - |Cyclops|ADF4112_SPI:ADF4112|SPI_state
  11. State Machine - |Cyclops|led_blinker:BLINK_D4|LED_state
  12. State Machine - |Cyclops|led_blinker:BLINK_D1|LED_state
- 13. State Machine - |Cyclops|NWire_rcv:m_ser|TB_state
- 14. State Machine - |Cyclops|NWire_rcv:p_ser|TB_state
- 15. State Machine - |Cyclops|NWire_xmit:CCxmit|NW_state
- 16. State Machine - |Cyclops|I2S_xmit:J_IQPWM|TLV_state
- 17. State Machine - |Cyclops|NWire_xmit:P_IQPWM|NW_state
- 18. State Machine - |Cyclops|I2S_xmit:J_LRAudio|TLV_state
- 19. State Machine - |Cyclops|NWire_xmit:M_LRAudio|NW_state
- 20. State Machine - |Cyclops|async_usb:usb1|FX_state
- 21. State Machine - |Cyclops|NWire_rcv:SPD|TB_state
- 22. State Machine - |Cyclops|Tx_fifo_ctrl:TXFC|AD_state
- 23. State Machine - |Cyclops|NWire_rcv:M_IQ|TB_state
- 24. State Machine - |Cyclops|NWire_rcv:P_MIC|TB_state
- 25. Registers Removed During Synthesis
- 26. Removed Registers Triggering Further Register Optimizations
- 27. General Register Statistics
- 28. Registers Added for RAM Pass-Through Logic
- 29. Multiplexer Restructuring Statistics (Restructuring Performed)
- 30. Source assignments for Tx_fifo:TXF|scfifo:scfifo_component|scfifo_ft31:auto_generated|a_dpfifo_2l31:dpfifo|altsyncram_r3e1:FIFOram
- 31. Source assignments for Tx_fifo:TXF|scfifo:scfifo_component|scfifo_ft31:auto_generated|a_dpfifo_2l31:dpfifo|altsyncram_r3e1:FIFOram|altsyncram_mkj1:altsyncram1
- 32. Source assignments for SP_fifo:SPF|scfifo:scfifo_component|scfifo_1t31:auto_generated|a_dpfifo_kk31:dpfifo|altsyncram_v2e1:FIFOram
- 33. Source assignments for SP_fifo:SPF|scfifo:scfifo_component|scfifo_1t31:auto_generated|a_dpfifo_kk31:dpfifo|altsyncram_v2e1:FIFOram|altsyncram_qjj1:altsyncram1
- 34. Source assignments for RFIFO:RXF|altsyncram:mem_rtl_0|altsyncram_h2j1:auto_generated
- 35. Parameter Settings for User Entity Instance: Top-level Entity: |Cyclops
- 36. Parameter Settings for User Entity Instance: gpio_control:gpio_controlSDR|SPI_REGS:spi_regs
- 37. Parameter Settings for User Entity Instance: gpio_control:gpio_controlSDR|gpio_oport:port1reg
- 38. Parameter Settings for User Entity Instance: gpio_control:gpio_controlSDR|gpio_oport:port2reg
- 39. Parameter Settings for User Entity Instance: clkmult3:cm3|altpll:altpll_component
- 40. Parameter Settings for User Entity Instance: cdc_mcp:dfs
- 41. Parameter Settings for User Entity Instance: cdc_mcp:dfs|cdc_sync:rdy
- 42. Parameter Settings for User Entity Instance: cdc_mcp:dfs|pulsegen:pls
- 43. Parameter Settings for User Entity Instance: cdc_mcp:dfs|cdc_sync:ack
- 44. Parameter Settings for User Entity Instance: clk_lrclk_gen:lrgen
- 45. Parameter Settings for User Entity Instance: clk_lrclk_gen:clrgen
- 46. Parameter Settings for User Entity Instance: NWire_rcv:P_MIC
- 47. Parameter Settings for User Entity Instance: I2S_rcv:J_MIC
- 48. Parameter Settings for User Entity Instance: NWire_rcv:M_IQ
- 49. Parameter Settings for User Entity Instance: I2S_rcv:J_IQ
- 50. Parameter Settings for User Entity Instance: Tx_fifo_ctrl:TXFC
- 51. Parameter Settings for User Entity Instance: Tx_fifo:TXF|scfifo:scfifo_component
- 52. Parameter Settings for User Entity Instance: SP_fifo:SPF|scfifo:scfifo_component
- 53. Parameter Settings for User Entity Instance: NWire_rcv:SPD
- 54. Parameter Settings for User Entity Instance: async_usb:usb1
- 55. Parameter Settings for User Entity Instance: cdc_sync:cdc_c23
- 56. Parameter Settings for User Entity Instance: pulsegen:cdc_m
- 57. Parameter Settings for User Entity Instance: cdc_sync:cdc_c22
- 58. Parameter Settings for User Entity Instance: pulsegen:cdc_p
- 59. Parameter Settings for User Entity Instance: cdc_sync:cdc_clr
- 60. Parameter Settings for User Entity Instance: pulsegen:cdc_j
- 61. Parameter Settings for User Entity Instance: cdc_sync:cdc_jrdy
- 62. Parameter Settings for User Entity Instance: cdc_sync:cdc_jack
- 63. Parameter Settings for User Entity Instance: cdc_mcp:lra
- 64. Parameter Settings for User Entity Instance: cdc_mcp:lra|cdc_sync:rdy
- 65. Parameter Settings for User Entity Instance: cdc_mcp:lra|pulsegen:pls
- 66. Parameter Settings for User Entity Instance: cdc_mcp:lra|cdc_sync:ack
- 67. Parameter Settings for User Entity Instance: NWire_xmit:M_LRAudio
- 68. Parameter Settings for User Entity Instance: I2S_xmit:J_LRAudio
- 69. Parameter Settings for User Entity Instance: NWire_xmit:P_IQPWM
- 70. Parameter Settings for User Entity Instance: cdc_mcp:iqp
- 71. Parameter Settings for User Entity Instance: cdc_mcp:iqp|cdc_sync:rdy
- 72. Parameter Settings for User Entity Instance: cdc_mcp:iqp|pulsegen:pls
- 73. Parameter Settings for User Entity Instance: cdc_mcp:iqp|cdc_sync:ack
- 74. Parameter Settings for User Entity Instance: I2S_xmit:J_IQPWM
- 75. Parameter Settings for User Entity Instance: pulsegen:CC_p
- 76. Parameter Settings for User Entity Instance: NWire_xmit:CCxmit
- 77. Parameter Settings for User Entity Instance: NWire_rcv:p_ser
- 78. Parameter Settings for User Entity Instance: NWire_rcv:m_ser
- 79. Parameter Settings for User Entity Instance: debounce:de_PTT
- 80. Parameter Settings for User Entity Instance: debounce:de_dot
- 81. Parameter Settings for User Entity Instance: debounce:de_dash
- 82. Parameter Settings for User Entity Instance: led_blinker:BLINK_D1
- 83. Parameter Settings for User Entity Instance: led_blinker:BLINK_D4
- 84. Parameter Settings for Inferred Entity Instance: RFIFO:RXF|altsyncram:mem_rtl_0
- 85. altpll Parameter Settings by Entity Instance
- 86. scfifo Parameter Settings by Entity Instance
- 87. altsyncram Parameter Settings by Entity Instance
- 88. Port Connectivity Checks: "led_blinker:BLINK_D1"
- 89. Port Connectivity Checks: "NWire_xmit:CCxmit"
- 90. Port Connectivity Checks: "I2S_xmit:J_IQPWM"
- 91. Port Connectivity Checks: "cdc_mcp:iqp"
- 92. Port Connectivity Checks: "NWire_xmit:P_IQPWM"
- 93. Port Connectivity Checks: "cdc_mcp:lra"
- 94. Port Connectivity Checks: "SP_fifo:SPF"
- 95. Port Connectivity Checks: "Tx_fifo:TXF"
- 96. Port Connectivity Checks: "Tx_fifo_ctrl:TXFC"
- 97. Port Connectivity Checks: "I2S_rcv:J_IQ"
- 98. Port Connectivity Checks: "I2S_rcv:J_MIC"
- 99. Port Connectivity Checks: "clk_lrclk_gen:clrgen"
-100. Port Connectivity Checks: "clk_lrclk_gen:lrgen"
-101. Port Connectivity Checks: "gpio_control:gpio_controlSDR"
-102. Analysis & Synthesis Messages
-103. Analysis & Synthesis Suppressed Messages
+ 13. State Machine - |Cyclops|NWire_xmit:CCxmit|NW_state
+ 14. State Machine - |Cyclops|NWire_xmit:M_LRAudio|NW_state
+ 15. State Machine - |Cyclops|async_usb:usb1|FX_state
+ 16. State Machine - |Cyclops|NWire_rcv:SPD|TB_state
+ 17. State Machine - |Cyclops|Tx_fifo_ctrl:TXFC|AD_state
+ 18. State Machine - |Cyclops|NWire_rcv:M_IQ|TB_state
+ 19. User-Specified and Inferred Latches
+ 20. Registers Removed During Synthesis
+ 21. Removed Registers Triggering Further Register Optimizations
+ 22. General Register Statistics
+ 23. Registers Added for RAM Pass-Through Logic
+ 24. Multiplexer Restructuring Statistics (Restructuring Performed)
+ 25. Source assignments for Tx_fifo:TXF|scfifo:scfifo_component|scfifo_ft31:auto_generated|a_dpfifo_2l31:dpfifo|altsyncram_r3e1:FIFOram
+ 26. Source assignments for Tx_fifo:TXF|scfifo:scfifo_component|scfifo_ft31:auto_generated|a_dpfifo_2l31:dpfifo|altsyncram_r3e1:FIFOram|altsyncram_mkj1:altsyncram1
+ 27. Source assignments for SP_fifo:SPF|scfifo:scfifo_component|scfifo_1t31:auto_generated|a_dpfifo_kk31:dpfifo|altsyncram_v2e1:FIFOram
+ 28. Source assignments for SP_fifo:SPF|scfifo:scfifo_component|scfifo_1t31:auto_generated|a_dpfifo_kk31:dpfifo|altsyncram_v2e1:FIFOram|altsyncram_qjj1:altsyncram1
+ 29. Source assignments for RFIFO:RXF|altsyncram:mem_rtl_0|altsyncram_h2j1:auto_generated
+ 30. Parameter Settings for User Entity Instance: Top-level Entity: |Cyclops
+ 31. Parameter Settings for User Entity Instance: clkmult3:cm3|altpll:altpll_component
+ 32. Parameter Settings for User Entity Instance: NWire_rcv:M_IQ
+ 33. Parameter Settings for User Entity Instance: Tx_fifo_ctrl:TXFC
+ 34. Parameter Settings for User Entity Instance: Tx_fifo:TXF|scfifo:scfifo_component
+ 35. Parameter Settings for User Entity Instance: SP_fifo:SPF|scfifo:scfifo_component
+ 36. Parameter Settings for User Entity Instance: NWire_rcv:SPD
+ 37. Parameter Settings for User Entity Instance: async_usb:usb1
+ 38. Parameter Settings for User Entity Instance: cdc_sync:cdc_c23
+ 39. Parameter Settings for User Entity Instance: pulsegen:cdc_m
+ 40. Parameter Settings for User Entity Instance: NWire_xmit:M_LRAudio
+ 41. Parameter Settings for User Entity Instance: pulsegen:CC_p
+ 42. Parameter Settings for User Entity Instance: NWire_xmit:CCxmit
+ 43. Parameter Settings for User Entity Instance: led_blinker:BLINK_D1
+ 44. Parameter Settings for User Entity Instance: led_blinker:BLINK_D4
+ 45. Parameter Settings for Inferred Entity Instance: RFIFO:RXF|altsyncram:mem_rtl_0
+ 46. altpll Parameter Settings by Entity Instance
+ 47. scfifo Parameter Settings by Entity Instance
+ 48. altsyncram Parameter Settings by Entity Instance
+ 49. Port Connectivity Checks: "led_blinker:BLINK_D1"
+ 50. Port Connectivity Checks: "NWire_xmit:CCxmit"
+ 51. Port Connectivity Checks: "SP_fifo:SPF"
+ 52. Port Connectivity Checks: "Tx_fifo:TXF"
+ 53. Port Connectivity Checks: "Tx_fifo_ctrl:TXFC"
+ 54. Analysis & Synthesis Messages
+ 55. Analysis & Synthesis Suppressed Messages
 
 
 
@@ -134,16 +86,16 @@ applicable agreement for further details.
 +------------------------------------------------------------------------------+
 ; Analysis & Synthesis Summary                                                 ;
 +------------------------------------+-----------------------------------------+
-; Analysis & Synthesis Status        ; Successful - Sat Aug 29 15:40:33 2009   ;
+; Analysis & Synthesis Status        ; Successful - Sun Aug 30 20:18:51 2009   ;
 ; Quartus II Version                 ; 9.0 Build 132 02/25/2009 SJ Web Edition ;
 ; Revision Name                      ; Cyclops                                 ;
 ; Top-level Entity Name              ; Cyclops                                 ;
 ; Family                             ; Cyclone II                              ;
-; Total logic elements               ; 4,813                                   ;
-;     Total combinational functions  ; 3,802                                   ;
-;     Dedicated logic registers      ; 2,761                                   ;
-; Total registers                    ; 2761                                    ;
-; Total pins                         ; 90                                      ;
+; Total logic elements               ; 2,736                                   ;
+;     Total combinational functions  ; 2,048                                   ;
+;     Dedicated logic registers      ; 1,655                                   ;
+; Total registers                    ; 1655                                    ;
+; Total pins                         ; 43                                      ;
 ; Total virtual pins                 ; 0                                       ;
 ; Total memory bits                  ; 114,688                                 ;
 ; Embedded Multiplier 9-bit elements ; 0                                       ;
@@ -232,26 +184,18 @@ applicable agreement for further details.
 ; File Name with User-Entered Path ; Used in Netlist ; File Type                    ; File Name with Absolute Path                                         ;
 +----------------------------------+-----------------+------------------------------+----------------------------------------------------------------------+
 ; Tx_fifo_ctrl.v                   ; yes             ; User Verilog HDL File        ; C:/HPSDR/trunk/CyclopsII/Verilog Code/Cyclops/Tx_fifo_ctrl.v         ;
-; common/cdc_mcp.v                 ; yes             ; User Verilog HDL File        ; C:/HPSDR/trunk/CyclopsII/Verilog Code/Cyclops/common/cdc_mcp.v       ;
 ; common/cdc_sync.v                ; yes             ; User Verilog HDL File        ; C:/HPSDR/trunk/CyclopsII/Verilog Code/Cyclops/common/cdc_sync.v      ;
-; common/clk_lrclk_gen.v           ; yes             ; User Verilog HDL File        ; C:/HPSDR/trunk/CyclopsII/Verilog Code/Cyclops/common/clk_lrclk_gen.v ;
-; common/I2S_rcv.v                 ; yes             ; User Verilog HDL File        ; C:/HPSDR/trunk/CyclopsII/Verilog Code/Cyclops/common/I2S_rcv.v       ;
-; common/I2S_xmit.v                ; yes             ; User Verilog HDL File        ; C:/HPSDR/trunk/CyclopsII/Verilog Code/Cyclops/common/I2S_xmit.v      ;
 ; common/NWire_rcv.v               ; yes             ; User Verilog HDL File        ; C:/HPSDR/trunk/CyclopsII/Verilog Code/Cyclops/common/NWire_rcv.v     ;
 ; common/NWire_xmit.v              ; yes             ; User Verilog HDL File        ; C:/HPSDR/trunk/CyclopsII/Verilog Code/Cyclops/common/NWire_xmit.v    ;
 ; common/pulsegen.v                ; yes             ; User Verilog HDL File        ; C:/HPSDR/trunk/CyclopsII/Verilog Code/Cyclops/common/pulsegen.v      ;
 ; RFIFO.v                          ; yes             ; User Verilog HDL File        ; C:/HPSDR/trunk/CyclopsII/Verilog Code/Cyclops/RFIFO.v                ;
 ; SP_fifo.v                        ; yes             ; User Wizard-Generated File   ; C:/HPSDR/trunk/CyclopsII/Verilog Code/Cyclops/SP_fifo.v              ;
 ; sp_rcv_ctrl.v                    ; yes             ; User Verilog HDL File        ; C:/HPSDR/trunk/CyclopsII/Verilog Code/Cyclops/sp_rcv_ctrl.v          ;
-; SPI_REGS.v                       ; yes             ; User Verilog HDL File        ; C:/HPSDR/trunk/CyclopsII/Verilog Code/Cyclops/SPI_REGS.v             ;
 ; Tx_fifo.v                        ; yes             ; User Wizard-Generated File   ; C:/HPSDR/trunk/CyclopsII/Verilog Code/Cyclops/Tx_fifo.v              ;
 ; async_usb.v                      ; yes             ; User Verilog HDL File        ; C:/HPSDR/trunk/CyclopsII/Verilog Code/Cyclops/async_usb.v            ;
 ; ADF4112_SPI.v                    ; yes             ; User Verilog HDL File        ; C:/HPSDR/trunk/CyclopsII/Verilog Code/Cyclops/ADF4112_SPI.v          ;
 ; clkmult3.v                       ; yes             ; User Wizard-Generated File   ; C:/HPSDR/trunk/CyclopsII/Verilog Code/Cyclops/clkmult3.v             ;
 ; Cyclops.v                        ; yes             ; User Verilog HDL File        ; C:/HPSDR/trunk/CyclopsII/Verilog Code/Cyclops/Cyclops.v              ;
-; debounce.v                       ; yes             ; User Verilog HDL File        ; C:/HPSDR/trunk/CyclopsII/Verilog Code/Cyclops/debounce.v             ;
-; gpio_control.v                   ; yes             ; User Verilog HDL File        ; C:/HPSDR/trunk/CyclopsII/Verilog Code/Cyclops/gpio_control.v         ;
-; gpio_oport.v                     ; yes             ; User Verilog HDL File        ; C:/HPSDR/trunk/CyclopsII/Verilog Code/Cyclops/gpio_oport.v           ;
 ; led_blinker.v                    ; yes             ; User Verilog HDL File        ; C:/HPSDR/trunk/CyclopsII/Verilog Code/Cyclops/led_blinker.v          ;
 ; altpll.tdf                       ; yes             ; Megafunction                 ; c:/altera/90/quartus/libraries/megafunctions/altpll.tdf              ;
 ; aglobal90.inc                    ; yes             ; Megafunction                 ; c:/altera/90/quartus/libraries/megafunctions/aglobal90.inc           ;
@@ -298,29 +242,29 @@ applicable agreement for further details.
 +---------------------------------------------+--------+
 ; Resource                                    ; Usage  ;
 +---------------------------------------------+--------+
-; Estimated Total logic elements              ; 4,813  ;
+; Estimated Total logic elements              ; 2,736  ;
 ;                                             ;        ;
-; Total combinational functions               ; 3802   ;
+; Total combinational functions               ; 2048   ;
 ; Logic element usage by number of LUT inputs ;        ;
-;     -- 4 input functions                    ; 991    ;
-;     -- 3 input functions                    ; 1188   ;
-;     -- <=2 input functions                  ; 1623   ;
+;     -- 4 input functions                    ; 673    ;
+;     -- 3 input functions                    ; 530    ;
+;     -- <=2 input functions                  ; 845    ;
 ;                                             ;        ;
 ; Logic elements by mode                      ;        ;
-;     -- normal mode                          ; 2279   ;
-;     -- arithmetic mode                      ; 1523   ;
+;     -- normal mode                          ; 1363   ;
+;     -- arithmetic mode                      ; 685    ;
 ;                                             ;        ;
-; Total registers                             ; 2761   ;
-;     -- Dedicated logic registers            ; 2761   ;
+; Total registers                             ; 1655   ;
+;     -- Dedicated logic registers            ; 1655   ;
 ;     -- I/O registers                        ; 0      ;
 ;                                             ;        ;
-; I/O pins                                    ; 90     ;
+; I/O pins                                    ; 43     ;
 ; Total memory bits                           ; 114688 ;
 ; Total PLLs                                  ; 1      ;
 ; Maximum fan-out node                        ; IF_clk ;
-; Maximum fan-out                             ; 1808   ;
-; Total fan-out                               ; 19873  ;
-; Average fan-out                             ; 2.97   ;
+; Maximum fan-out                             ; 1154   ;
+; Total fan-out                               ; 11901  ;
+; Average fan-out                             ; 3.14   ;
 +---------------------------------------------+--------+
 
 
@@ -329,20 +273,12 @@ applicable agreement for further details.
 +-------------------------------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+--------------------------------------------------------------------------------------------------------------------------------------------------+--------------+
 ; Compilation Hierarchy Node                      ; LC Combinationals ; LC Registers ; Memory Bits ; DSP Elements ; DSP 9x9 ; DSP 18x18 ; Pins ; Virtual Pins ; Full Hierarchy Name                                                                                                                              ; Library Name ;
 +-------------------------------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+--------------------------------------------------------------------------------------------------------------------------------------------------+--------------+
-; |Cyclops                                        ; 3802 (310)        ; 2761 (605)   ; 114688      ; 0            ; 0       ; 0         ; 90   ; 0            ; |Cyclops                                                                                                                                         ; work         ;
+; |Cyclops                                        ; 2048 (298)        ; 1655 (551)   ; 114688      ; 0            ; 0       ; 0         ; 43   ; 0            ; |Cyclops                                                                                                                                         ; work         ;
 ;    |ADF4112_SPI:ADF4112|                        ; 36 (36)           ; 13 (13)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Cyclops|ADF4112_SPI:ADF4112                                                                                                                     ; work         ;
-;    |I2S_rcv:J_IQ|                               ; 26 (26)           ; 97 (97)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Cyclops|I2S_rcv:J_IQ                                                                                                                            ; work         ;
-;    |I2S_rcv:J_MIC|                              ; 25 (25)           ; 56 (56)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Cyclops|I2S_rcv:J_MIC                                                                                                                           ; work         ;
-;    |I2S_xmit:J_IQPWM|                           ; 46 (46)           ; 40 (40)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Cyclops|I2S_xmit:J_IQPWM                                                                                                                        ; work         ;
-;    |I2S_xmit:J_LRAudio|                         ; 52 (52)           ; 54 (54)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Cyclops|I2S_xmit:J_LRAudio                                                                                                                      ; work         ;
 ;    |NWire_rcv:M_IQ|                             ; 368 (368)         ; 309 (309)    ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Cyclops|NWire_rcv:M_IQ                                                                                                                          ; work         ;
-;    |NWire_rcv:P_MIC|                            ; 332 (332)         ; 176 (176)    ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Cyclops|NWire_rcv:P_MIC                                                                                                                         ; work         ;
 ;    |NWire_rcv:SPD|                              ; 292 (292)         ; 166 (166)    ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Cyclops|NWire_rcv:SPD                                                                                                                           ; work         ;
-;    |NWire_rcv:m_ser|                            ; 405 (405)         ; 150 (150)    ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Cyclops|NWire_rcv:m_ser                                                                                                                         ; work         ;
-;    |NWire_rcv:p_ser|                            ; 419 (419)         ; 174 (174)    ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Cyclops|NWire_rcv:p_ser                                                                                                                         ; work         ;
 ;    |NWire_xmit:CCxmit|                          ; 318 (318)         ; 108 (108)    ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Cyclops|NWire_xmit:CCxmit                                                                                                                       ; work         ;
-;    |NWire_xmit:M_LRAudio|                       ; 69 (69)           ; 120 (120)    ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Cyclops|NWire_xmit:M_LRAudio                                                                                                                    ; work         ;
-;    |NWire_xmit:P_IQPWM|                         ; 109 (109)         ; 102 (102)    ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Cyclops|NWire_xmit:P_IQPWM                                                                                                                      ; work         ;
+;    |NWire_xmit:M_LRAudio|                       ; 123 (123)         ; 150 (150)    ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Cyclops|NWire_xmit:M_LRAudio                                                                                                                    ; work         ;
 ;    |RFIFO:RXF|                                  ; 69 (69)           ; 77 (77)      ; 32768       ; 0            ; 0       ; 0         ; 0    ; 0            ; |Cyclops|RFIFO:RXF                                                                                                                               ; work         ;
 ;       |altsyncram:mem_rtl_0|                    ; 0 (0)             ; 0 (0)        ; 32768       ; 0            ; 0       ; 0         ; 0    ; 0            ; |Cyclops|RFIFO:RXF|altsyncram:mem_rtl_0                                                                                                          ; work         ;
 ;          |altsyncram_h2j1:auto_generated|       ; 0 (0)             ; 0 (0)        ; 32768       ; 0            ; 0       ; 0         ; 0    ; 0            ; |Cyclops|RFIFO:RXF|altsyncram:mem_rtl_0|altsyncram_h2j1:auto_generated                                                                           ; work         ;
@@ -355,49 +291,24 @@ applicable agreement for further details.
 ;                |cntr_477:usedw_counter|         ; 11 (11)           ; 10 (10)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Cyclops|SP_fifo:SPF|scfifo:scfifo_component|scfifo_1t31:auto_generated|a_dpfifo_kk31:dpfifo|cntr_477:usedw_counter                              ; work         ;
 ;                |cntr_g5b:rd_ptr_msb|            ; 10 (10)           ; 9 (9)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Cyclops|SP_fifo:SPF|scfifo:scfifo_component|scfifo_1t31:auto_generated|a_dpfifo_kk31:dpfifo|cntr_g5b:rd_ptr_msb                                 ; work         ;
 ;                |cntr_o6b:wr_ptr|                ; 11 (11)           ; 10 (10)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Cyclops|SP_fifo:SPF|scfifo:scfifo_component|scfifo_1t31:auto_generated|a_dpfifo_kk31:dpfifo|cntr_o6b:wr_ptr                                     ; work         ;
-;    |Tx_fifo:TXF|                                ; 83 (0)            ; 52 (0)       ; 65536       ; 0            ; 0       ; 0         ; 0    ; 0            ; |Cyclops|Tx_fifo:TXF                                                                                                                             ; work         ;
-;       |scfifo:scfifo_component|                 ; 83 (0)            ; 52 (0)       ; 65536       ; 0            ; 0       ; 0         ; 0    ; 0            ; |Cyclops|Tx_fifo:TXF|scfifo:scfifo_component                                                                                                     ; work         ;
-;          |scfifo_ft31:auto_generated|           ; 83 (0)            ; 52 (0)       ; 65536       ; 0            ; 0       ; 0         ; 0    ; 0            ; |Cyclops|Tx_fifo:TXF|scfifo:scfifo_component|scfifo_ft31:auto_generated                                                                          ; work         ;
-;             |a_dpfifo_2l31:dpfifo|              ; 83 (47)           ; 52 (17)      ; 65536       ; 0            ; 0       ; 0         ; 0    ; 0            ; |Cyclops|Tx_fifo:TXF|scfifo:scfifo_component|scfifo_ft31:auto_generated|a_dpfifo_2l31:dpfifo                                                     ; work         ;
+;    |Tx_fifo:TXF|                                ; 81 (0)            ; 52 (0)       ; 65536       ; 0            ; 0       ; 0         ; 0    ; 0            ; |Cyclops|Tx_fifo:TXF                                                                                                                             ; work         ;
+;       |scfifo:scfifo_component|                 ; 81 (0)            ; 52 (0)       ; 65536       ; 0            ; 0       ; 0         ; 0    ; 0            ; |Cyclops|Tx_fifo:TXF|scfifo:scfifo_component                                                                                                     ; work         ;
+;          |scfifo_ft31:auto_generated|           ; 81 (0)            ; 52 (0)       ; 65536       ; 0            ; 0       ; 0         ; 0    ; 0            ; |Cyclops|Tx_fifo:TXF|scfifo:scfifo_component|scfifo_ft31:auto_generated                                                                          ; work         ;
+;             |a_dpfifo_2l31:dpfifo|              ; 81 (43)           ; 52 (17)      ; 65536       ; 0            ; 0       ; 0         ; 0    ; 0            ; |Cyclops|Tx_fifo:TXF|scfifo:scfifo_component|scfifo_ft31:auto_generated|a_dpfifo_2l31:dpfifo                                                     ; work         ;
 ;                |altsyncram_r3e1:FIFOram|        ; 0 (0)             ; 0 (0)        ; 65536       ; 0            ; 0       ; 0         ; 0    ; 0            ; |Cyclops|Tx_fifo:TXF|scfifo:scfifo_component|scfifo_ft31:auto_generated|a_dpfifo_2l31:dpfifo|altsyncram_r3e1:FIFOram                             ; work         ;
 ;                   |altsyncram_mkj1:altsyncram1| ; 0 (0)             ; 0 (0)        ; 65536       ; 0            ; 0       ; 0         ; 0    ; 0            ; |Cyclops|Tx_fifo:TXF|scfifo:scfifo_component|scfifo_ft31:auto_generated|a_dpfifo_2l31:dpfifo|altsyncram_r3e1:FIFOram|altsyncram_mkj1:altsyncram1 ; work         ;
-;                |cntr_677:usedw_counter|         ; 12 (12)           ; 12 (12)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Cyclops|Tx_fifo:TXF|scfifo:scfifo_component|scfifo_ft31:auto_generated|a_dpfifo_2l31:dpfifo|cntr_677:usedw_counter                              ; work         ;
+;                |cntr_677:usedw_counter|         ; 13 (13)           ; 12 (12)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Cyclops|Tx_fifo:TXF|scfifo:scfifo_component|scfifo_ft31:auto_generated|a_dpfifo_2l31:dpfifo|cntr_677:usedw_counter                              ; work         ;
 ;                |cntr_p6b:rd_ptr_msb|            ; 12 (12)           ; 11 (11)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Cyclops|Tx_fifo:TXF|scfifo:scfifo_component|scfifo_ft31:auto_generated|a_dpfifo_2l31:dpfifo|cntr_p6b:rd_ptr_msb                                 ; work         ;
-;                |cntr_q6b:wr_ptr|                ; 12 (12)           ; 12 (12)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Cyclops|Tx_fifo:TXF|scfifo:scfifo_component|scfifo_ft31:auto_generated|a_dpfifo_2l31:dpfifo|cntr_q6b:wr_ptr                                     ; work         ;
-;    |Tx_fifo_ctrl:TXFC|                          ; 171 (171)         ; 30 (30)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Cyclops|Tx_fifo_ctrl:TXFC                                                                                                                       ; work         ;
+;                |cntr_q6b:wr_ptr|                ; 13 (13)           ; 12 (12)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Cyclops|Tx_fifo:TXF|scfifo:scfifo_component|scfifo_ft31:auto_generated|a_dpfifo_2l31:dpfifo|cntr_q6b:wr_ptr                                     ; work         ;
+;    |Tx_fifo_ctrl:TXFC|                          ; 100 (100)         ; 30 (30)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Cyclops|Tx_fifo_ctrl:TXFC                                                                                                                       ; work         ;
 ;    |async_usb:usb1|                             ; 83 (83)           ; 54 (54)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Cyclops|async_usb:usb1                                                                                                                          ; work         ;
-;    |cdc_mcp:dfs|                                ; 10 (6)            ; 8 (4)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Cyclops|cdc_mcp:dfs                                                                                                                             ; work         ;
-;       |cdc_sync:ack|                            ; 2 (2)             ; 2 (2)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Cyclops|cdc_mcp:dfs|cdc_sync:ack                                                                                                                ; work         ;
-;       |cdc_sync:rdy|                            ; 2 (2)             ; 2 (2)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Cyclops|cdc_mcp:dfs|cdc_sync:rdy                                                                                                                ; work         ;
-;    |cdc_mcp:iqp|                                ; 17 (17)           ; 18 (16)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Cyclops|cdc_mcp:iqp                                                                                                                             ; work         ;
-;       |cdc_sync:rdy|                            ; 0 (0)             ; 1 (1)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Cyclops|cdc_mcp:iqp|cdc_sync:rdy                                                                                                                ; work         ;
-;       |pulsegen:pls|                            ; 0 (0)             ; 1 (1)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Cyclops|cdc_mcp:iqp|pulsegen:pls                                                                                                                ; work         ;
-;    |cdc_mcp:lra|                                ; 38 (33)           ; 36 (33)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Cyclops|cdc_mcp:lra                                                                                                                             ; work         ;
-;       |cdc_sync:ack|                            ; 2 (2)             ; 2 (2)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Cyclops|cdc_mcp:lra|cdc_sync:ack                                                                                                                ; work         ;
-;       |cdc_sync:rdy|                            ; 2 (2)             ; 1 (1)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Cyclops|cdc_mcp:lra|cdc_sync:rdy                                                                                                                ; work         ;
-;       |pulsegen:pls|                            ; 1 (1)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Cyclops|cdc_mcp:lra|pulsegen:pls                                                                                                                ; work         ;
-;    |cdc_sync:cdc_c22|                           ; 2 (2)             ; 2 (2)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Cyclops|cdc_sync:cdc_c22                                                                                                                        ; work         ;
 ;    |cdc_sync:cdc_c23|                           ; 2 (2)             ; 2 (2)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Cyclops|cdc_sync:cdc_c23                                                                                                                        ; work         ;
-;    |cdc_sync:cdc_clr|                           ; 2 (2)             ; 2 (2)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Cyclops|cdc_sync:cdc_clr                                                                                                                        ; work         ;
-;    |cdc_sync:cdc_jack|                          ; 2 (2)             ; 2 (2)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Cyclops|cdc_sync:cdc_jack                                                                                                                       ; work         ;
-;    |cdc_sync:cdc_jrdy|                          ; 2 (2)             ; 2 (2)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Cyclops|cdc_sync:cdc_jrdy                                                                                                                       ; work         ;
-;    |clk_lrclk_gen:clrgen|                       ; 33 (33)           ; 25 (25)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Cyclops|clk_lrclk_gen:clrgen                                                                                                                    ; work         ;
-;    |clk_lrclk_gen:lrgen|                        ; 34 (34)           ; 24 (24)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Cyclops|clk_lrclk_gen:lrgen                                                                                                                     ; work         ;
 ;    |clkmult3:cm3|                               ; 0 (0)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Cyclops|clkmult3:cm3                                                                                                                            ; work         ;
 ;       |altpll:altpll_component|                 ; 0 (0)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Cyclops|clkmult3:cm3|altpll:altpll_component                                                                                                    ; work         ;
-;    |debounce:de_PTT|                            ; 40 (40)           ; 24 (24)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Cyclops|debounce:de_PTT                                                                                                                         ; work         ;
-;    |debounce:de_dash|                           ; 41 (41)           ; 24 (24)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Cyclops|debounce:de_dash                                                                                                                        ; work         ;
-;    |debounce:de_dot|                            ; 41 (41)           ; 24 (24)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Cyclops|debounce:de_dot                                                                                                                         ; work         ;
-;    |gpio_control:gpio_controlSDR|               ; 48 (0)            ; 40 (0)       ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Cyclops|gpio_control:gpio_controlSDR                                                                                                            ; work         ;
-;       |SPI_REGS:spi_regs|                       ; 45 (45)           ; 24 (24)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Cyclops|gpio_control:gpio_controlSDR|SPI_REGS:spi_regs                                                                                          ; work         ;
-;       |gpio_oport:port1reg|                     ; 1 (1)             ; 8 (8)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Cyclops|gpio_control:gpio_controlSDR|gpio_oport:port1reg                                                                                        ; work         ;
-;       |gpio_oport:port2reg|                     ; 2 (2)             ; 8 (8)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Cyclops|gpio_control:gpio_controlSDR|gpio_oport:port2reg                                                                                        ; work         ;
-;    |led_blinker:BLINK_D1|                       ; 94 (94)           ; 43 (43)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Cyclops|led_blinker:BLINK_D1                                                                                                                    ; work         ;
-;    |led_blinker:BLINK_D4|                       ; 88 (88)           ; 40 (40)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Cyclops|led_blinker:BLINK_D4                                                                                                                    ; work         ;
+;    |led_blinker:BLINK_D1|                       ; 95 (95)           ; 43 (43)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Cyclops|led_blinker:BLINK_D1                                                                                                                    ; work         ;
+;    |led_blinker:BLINK_D4|                       ; 90 (90)           ; 40 (40)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Cyclops|led_blinker:BLINK_D4                                                                                                                    ; work         ;
 ;    |pulsegen:CC_p|                              ; 1 (1)             ; 1 (1)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Cyclops|pulsegen:CC_p                                                                                                                           ; work         ;
-;    |pulsegen:cdc_j|                             ; 1 (1)             ; 1 (1)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Cyclops|pulsegen:cdc_j                                                                                                                          ; work         ;
 ;    |pulsegen:cdc_m|                             ; 1 (1)             ; 1 (1)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Cyclops|pulsegen:cdc_m                                                                                                                          ; work         ;
-;    |pulsegen:cdc_p|                             ; 1 (1)             ; 1 (1)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Cyclops|pulsegen:cdc_p                                                                                                                          ; work         ;
 ;    |sp_rcv_ctrl:SPC|                            ; 22 (22)           ; 14 (14)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Cyclops|sp_rcv_ctrl:SPC                                                                                                                         ; work         ;
 +-------------------------------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+--------------------------------------------------------------------------------------------------------------------------------------------------+--------------+
 Note: For table entries with two numbers listed, the numbers in parentheses indicate the number of resources of the given type used by the specific entity alone. The numbers listed outside of parentheses indicate the total resources of the given type used by the specific entity and all of its sub-entities in the hierarchy.
@@ -490,36 +401,6 @@ Encoding Type:  One-Hot
 
 
 Encoding Type:  One-Hot
-+---------------------------------------------------------------------------------------------------------------------------------+
-; State Machine - |Cyclops|NWire_rcv:m_ser|TB_state                                                                               ;
-+------------------+-----------------+------------------+------------------+------------------+----------------+------------------+
-; Name             ; TB_state.TB_BIT ; TB_state.TB_NEXT ; TB_state.TB_SYNC ; TB_state.TB_CALC ; TB_state.TB_DB ; TB_state.TB_IDLE ;
-+------------------+-----------------+------------------+------------------+------------------+----------------+------------------+
-; TB_state.TB_IDLE ; 0               ; 0                ; 0                ; 0                ; 0              ; 0                ;
-; TB_state.TB_DB   ; 0               ; 0                ; 0                ; 0                ; 1              ; 1                ;
-; TB_state.TB_CALC ; 0               ; 0                ; 0                ; 1                ; 0              ; 1                ;
-; TB_state.TB_SYNC ; 0               ; 0                ; 1                ; 0                ; 0              ; 1                ;
-; TB_state.TB_NEXT ; 0               ; 1                ; 0                ; 0                ; 0              ; 1                ;
-; TB_state.TB_BIT  ; 1               ; 0                ; 0                ; 0                ; 0              ; 1                ;
-+------------------+-----------------+------------------+------------------+------------------+----------------+------------------+
-
-
-Encoding Type:  One-Hot
-+---------------------------------------------------------------------------------------------------------------------------------+
-; State Machine - |Cyclops|NWire_rcv:p_ser|TB_state                                                                               ;
-+------------------+-----------------+------------------+------------------+------------------+----------------+------------------+
-; Name             ; TB_state.TB_BIT ; TB_state.TB_NEXT ; TB_state.TB_SYNC ; TB_state.TB_CALC ; TB_state.TB_DB ; TB_state.TB_IDLE ;
-+------------------+-----------------+------------------+------------------+------------------+----------------+------------------+
-; TB_state.TB_IDLE ; 0               ; 0                ; 0                ; 0                ; 0              ; 0                ;
-; TB_state.TB_DB   ; 0               ; 0                ; 0                ; 0                ; 1              ; 1                ;
-; TB_state.TB_CALC ; 0               ; 0                ; 0                ; 1                ; 0              ; 1                ;
-; TB_state.TB_SYNC ; 0               ; 0                ; 1                ; 0                ; 0              ; 1                ;
-; TB_state.TB_NEXT ; 0               ; 1                ; 0                ; 0                ; 0              ; 1                ;
-; TB_state.TB_BIT  ; 1               ; 0                ; 0                ; 0                ; 0              ; 1                ;
-+------------------+-----------------+------------------+------------------+------------------+----------------+------------------+
-
-
-Encoding Type:  One-Hot
 +-------------------------------------------------------------------------------------------------------------------------------------------------+
 ; State Machine - |Cyclops|NWire_xmit:CCxmit|NW_state                                                                                             ;
 +----------------------+-----------------+---------------------+----------------------+---------------------+------------------+------------------+
@@ -532,49 +413,6 @@ Encoding Type:  One-Hot
 ; NW_state.NW_DATA_Q4  ; 0               ; 1                   ; 0                    ; 0                   ; 0                ; 1                ;
 ; NW_state.NW_LOW      ; 1               ; 0                   ; 0                    ; 0                   ; 0                ; 1                ;
 +----------------------+-----------------+---------------------+----------------------+---------------------+------------------+------------------+
-
-
-Encoding Type:  One-Hot
-+----------------------------------------------------------------------------------------------------------------------------+
-; State Machine - |Cyclops|I2S_xmit:J_IQPWM|TLV_state                                                                        ;
-+---------------------+------------------+---------------------+------------------+--------------------+---------------------+
-; Name                ; TLV_state.TLV_WL ; TLV_state.TLV_LR_LO ; TLV_state.TLV_WH ; TLV_state.TLV_IDLE ; TLV_state.TLV_LR_HI ;
-+---------------------+------------------+---------------------+------------------+--------------------+---------------------+
-; TLV_state.TLV_IDLE  ; 0                ; 0                   ; 0                ; 0                  ; 0                   ;
-; TLV_state.TLV_WH    ; 0                ; 0                   ; 1                ; 1                  ; 0                   ;
-; TLV_state.TLV_LR_LO ; 0                ; 1                   ; 0                ; 1                  ; 0                   ;
-; TLV_state.TLV_WL    ; 1                ; 0                   ; 0                ; 1                  ; 0                   ;
-; TLV_state.TLV_LR_HI ; 0                ; 0                   ; 0                ; 1                  ; 1                   ;
-+---------------------+------------------+---------------------+------------------+--------------------+---------------------+
-
-
-Encoding Type:  One-Hot
-+-------------------------------------------------------------------------------------------------------------------------------------------------+
-; State Machine - |Cyclops|NWire_xmit:P_IQPWM|NW_state                                                                                            ;
-+----------------------+-----------------+---------------------+----------------------+---------------------+------------------+------------------+
-; Name                 ; NW_state.NW_LOW ; NW_state.NW_DATA_Q4 ; NW_state.NW_DATA_Q23 ; NW_state.NW_DATA_Q1 ; NW_state.NW_WAIT ; NW_state.NW_IDLE ;
-+----------------------+-----------------+---------------------+----------------------+---------------------+------------------+------------------+
-; NW_state.NW_IDLE     ; 0               ; 0                   ; 0                    ; 0                   ; 0                ; 0                ;
-; NW_state.NW_WAIT     ; 0               ; 0                   ; 0                    ; 0                   ; 1                ; 1                ;
-; NW_state.NW_DATA_Q1  ; 0               ; 0                   ; 0                    ; 1                   ; 0                ; 1                ;
-; NW_state.NW_DATA_Q23 ; 0               ; 0                   ; 1                    ; 0                   ; 0                ; 1                ;
-; NW_state.NW_DATA_Q4  ; 0               ; 1                   ; 0                    ; 0                   ; 0                ; 1                ;
-; NW_state.NW_LOW      ; 1               ; 0                   ; 0                    ; 0                   ; 0                ; 1                ;
-+----------------------+-----------------+---------------------+----------------------+---------------------+------------------+------------------+
-
-
-Encoding Type:  One-Hot
-+----------------------------------------------------------------------------------------------------------------------------+
-; State Machine - |Cyclops|I2S_xmit:J_LRAudio|TLV_state                                                                      ;
-+---------------------+------------------+---------------------+------------------+--------------------+---------------------+
-; Name                ; TLV_state.TLV_WL ; TLV_state.TLV_LR_LO ; TLV_state.TLV_WH ; TLV_state.TLV_IDLE ; TLV_state.TLV_LR_HI ;
-+---------------------+------------------+---------------------+------------------+--------------------+---------------------+
-; TLV_state.TLV_IDLE  ; 0                ; 0                   ; 0                ; 0                  ; 0                   ;
-; TLV_state.TLV_WH    ; 0                ; 0                   ; 1                ; 1                  ; 0                   ;
-; TLV_state.TLV_LR_LO ; 0                ; 1                   ; 0                ; 1                  ; 0                   ;
-; TLV_state.TLV_WL    ; 1                ; 0                   ; 0                ; 1                  ; 0                   ;
-; TLV_state.TLV_LR_HI ; 0                ; 0                   ; 0                ; 1                  ; 1                   ;
-+---------------------+------------------+---------------------+------------------+--------------------+---------------------+
 
 
 Encoding Type:  One-Hot
@@ -672,179 +510,109 @@ Encoding Type:  One-Hot
 +------------------+-----------------+------------------+------------------+------------------+----------------+------------------+
 
 
-Encoding Type:  One-Hot
-+---------------------------------------------------------------------------------------------------------------------------------+
-; State Machine - |Cyclops|NWire_rcv:P_MIC|TB_state                                                                               ;
-+------------------+-----------------+------------------+------------------+------------------+----------------+------------------+
-; Name             ; TB_state.TB_BIT ; TB_state.TB_NEXT ; TB_state.TB_SYNC ; TB_state.TB_CALC ; TB_state.TB_DB ; TB_state.TB_IDLE ;
-+------------------+-----------------+------------------+------------------+------------------+----------------+------------------+
-; TB_state.TB_IDLE ; 0               ; 0                ; 0                ; 0                ; 0              ; 0                ;
-; TB_state.TB_DB   ; 0               ; 0                ; 0                ; 0                ; 1              ; 1                ;
-; TB_state.TB_CALC ; 0               ; 0                ; 0                ; 1                ; 0              ; 1                ;
-; TB_state.TB_SYNC ; 0               ; 0                ; 1                ; 0                ; 0              ; 1                ;
-; TB_state.TB_NEXT ; 0               ; 1                ; 0                ; 0                ; 0              ; 1                ;
-; TB_state.TB_BIT  ; 1               ; 0                ; 0                ; 0                ; 0              ; 1                ;
-+------------------+-----------------+------------------+------------------+------------------+----------------+------------------+
++---------------------------------------------------------------------------------------------------+
+; User-Specified and Inferred Latches                                                               ;
++----------------------------------------------------+---------------------+------------------------+
+; Latch Name                                         ; Latch Enable Signal ; Free of Timing Hazards ;
++----------------------------------------------------+---------------------+------------------------+
+; IF_tx_IQ_mic_rdy                                   ; IF_conf[1]          ; yes                    ;
+; Number of user-specified and inferred latches = 1  ;                     ;                        ;
++----------------------------------------------------+---------------------+------------------------+
+Note: All latches listed above may not be present at the end of synthesis due to various synthesis optimizations.
 
 
-+----------------------------------------------------------------------------------------+
-; Registers Removed During Synthesis                                                     ;
-+-----------------------------------------+----------------------------------------------+
-; Register name                           ; Reason for Removal                           ;
-+-----------------------------------------+----------------------------------------------+
-; NWire_xmit:P_IQPWM|DIFF_CLK.id0[16..31] ; Stuck at GND due to stuck port data_in       ;
-; NWire_xmit:P_IQPWM|DIFF_CLK.id1[16..31] ; Stuck at GND due to stuck port data_in       ;
-; IF_clock_s[3]                           ; Stuck at GND due to stuck port data_in       ;
-; led_blinker:BLINK_D1|ld[1]              ; Stuck at GND due to stuck port data_in       ;
-; NWire_rcv:p_ser|tb_width[17]            ; Merged with NWire_rcv:p_ser|tb_width[16]     ;
-; cdc_mcp:iqp|b_data[17..31]              ; Merged with cdc_mcp:iqp|b_data[16]           ;
-; NWire_xmit:M_LRAudio|DIFF_CLK.iq0       ; Merged with NWire_xmit:P_IQPWM|DIFF_CLK.iq0  ;
-; NWire_xmit:M_LRAudio|DIFF_CLK.iq1       ; Merged with NWire_xmit:P_IQPWM|DIFF_CLK.iq1  ;
-; NWire_xmit:M_LRAudio|DIFF_CLK.iq2       ; Merged with NWire_xmit:P_IQPWM|DIFF_CLK.iq2  ;
-; NWire_rcv:SPD|tb_width[11]              ; Merged with NWire_rcv:SPD|tb_width[10]       ;
-; NWire_rcv:P_MIC|DIFF_CLK.ia0            ; Merged with NWire_rcv:M_IQ|DIFF_CLK.ia0      ;
-; NWire_rcv:M_IQ|tb_width[13]             ; Merged with NWire_rcv:M_IQ|tb_width[12]      ;
-; NWire_rcv:P_MIC|DIFF_CLK.ia1            ; Merged with NWire_rcv:M_IQ|DIFF_CLK.ia1      ;
-; NWire_rcv:P_MIC|tb_width[13]            ; Merged with NWire_rcv:P_MIC|tb_width[12]     ;
-; I2S_xmit:J_IQPWM|last_data[17..31]      ; Merged with I2S_xmit:J_IQPWM|last_data[16]   ;
-; cdc_mcp:iqp|cdc_sync:ack|sigb[0]        ; Lost fanout                                  ;
-; cdc_mcp:iqp|cdc_sync:ack|q1[0]          ; Lost fanout                                  ;
-; cdc_mcp:iqp|b_data_ack                  ; Lost fanout                                  ;
-; cdc_mcp:iqp|cdc_sync:rdy|q1[0]          ; Lost fanout                                  ;
-; cdc_mcp:iqp|a_rdy                       ; Lost fanout                                  ;
-; NWire_xmit:M_LRAudio|dly_cnt[0..24]     ; Lost fanout                                  ;
-; NWire_rcv:m_ser|tb_width[16..17]        ; Stuck at GND due to stuck port data_in       ;
-; NWire_rcv:p_ser|tb_width[16]            ; Stuck at GND due to stuck port data_in       ;
-; cdc_mcp:iqp|b_data[16]                  ; Stuck at GND due to stuck port data_in       ;
-; NWire_xmit:P_IQPWM|id[31]               ; Stuck at GND due to stuck port data_in       ;
-; NWire_rcv:SPD|tb_width[10]              ; Stuck at GND due to stuck port data_in       ;
-; NWire_rcv:M_IQ|tb_width[12]             ; Stuck at GND due to stuck port data_in       ;
-; NWire_rcv:P_MIC|tb_width[12]            ; Stuck at GND due to stuck port data_in       ;
-; I2S_xmit:J_IQPWM|last_data[16]          ; Stuck at GND due to stuck port data_in       ;
-; NWire_xmit:P_IQPWM|id[16..30]           ; Stuck at GND due to stuck port data_in       ;
-; cdc_mcp:lra|pulsegen:pls|p1             ; Merged with cdc_mcp:iqp|pulsegen:pls|p1      ;
-; cdc_mcp:lra|cdc_sync:rdy|sigb[0]        ; Merged with cdc_mcp:iqp|cdc_sync:rdy|sigb[0] ;
-; NWire_xmit:M_LRAudio|dly_cnt[25]        ; Merged with NWire_xmit:P_IQPWM|dly_cnt[25]   ;
-; First_LO_data[22]                       ; Merged with First_LO_data[1]                 ;
-; Second_LO_data[15]                      ; Merged with Second_LO_data[0]                ;
-; First_LO_data[7,21,23]                  ; Merged with First_LO_data[6]                 ;
-; Second_LO_data[7,14,16,18..19,22]       ; Merged with Second_LO_data[1]                ;
-; Second_LO_data[3,5,10..11]              ; Merged with Second_LO_data[2]                ;
-; Second_LO_data[20]                      ; Merged with Second_LO_data[4]                ;
-; Second_LO_data[9,12..13,17,21,23]       ; Merged with Second_LO_data[8]                ;
-; cdc_mcp:lra|b_data_ack                  ; Merged with cdc_mcp:iqp|pulsegen:pls|p1      ;
-; cdc_mcp:dfs|pulsegen:pls|p1             ; Merged with cdc_mcp:dfs|b_data_ack           ;
-; First_LO_data[6]                        ; Stuck at GND due to stuck port data_in       ;
-; led_blinker:BLINK_D4|bit_sel[1..3]      ; Stuck at GND due to stuck port data_in       ;
-; led_blinker:BLINK_D4|led_code[1..3]     ; Stuck at GND due to stuck port data_in       ;
-; RFIFO:RXF|mem_0_bypass[22]              ; Merged with RFIFO:RXF|outptr[10]             ;
-; RFIFO:RXF|mem_0_bypass[20]              ; Merged with RFIFO:RXF|outptr[9]              ;
-; RFIFO:RXF|mem_0_bypass[18]              ; Merged with RFIFO:RXF|outptr[8]              ;
-; RFIFO:RXF|mem_0_bypass[16]              ; Merged with RFIFO:RXF|outptr[7]              ;
-; RFIFO:RXF|mem_0_bypass[14]              ; Merged with RFIFO:RXF|outptr[6]              ;
-; RFIFO:RXF|mem_0_bypass[12]              ; Merged with RFIFO:RXF|outptr[5]              ;
-; RFIFO:RXF|mem_0_bypass[10]              ; Merged with RFIFO:RXF|outptr[4]              ;
-; RFIFO:RXF|mem_0_bypass[8]               ; Merged with RFIFO:RXF|outptr[3]              ;
-; RFIFO:RXF|mem_0_bypass[6]               ; Merged with RFIFO:RXF|outptr[2]              ;
-; RFIFO:RXF|mem_0_bypass[4]               ; Merged with RFIFO:RXF|outptr[1]              ;
-; RFIFO:RXF|mem_0_bypass[2]               ; Merged with RFIFO:RXF|outptr[0]              ;
-; IF_PWM_state~13                         ; Lost fanout                                  ;
-; IF_PWM_state~14                         ; Lost fanout                                  ;
-; IF_PWM_state~15                         ; Lost fanout                                  ;
-; IF_SYNC_state~11                        ; Lost fanout                                  ;
-; IF_SYNC_state~12                        ; Lost fanout                                  ;
-; IF_SYNC_state~13                        ; Lost fanout                                  ;
-; ADF4112_SPI:ADF4112|SPI_state~7         ; Lost fanout                                  ;
-; ADF4112_SPI:ADF4112|SPI_state~8         ; Lost fanout                                  ;
-; ADF4112_SPI:ADF4112|SPI_state~9         ; Lost fanout                                  ;
-; led_blinker:BLINK_D4|LED_state~5        ; Lost fanout                                  ;
-; led_blinker:BLINK_D4|LED_state~6        ; Lost fanout                                  ;
-; led_blinker:BLINK_D4|LED_state~7        ; Lost fanout                                  ;
-; led_blinker:BLINK_D1|LED_state~5        ; Lost fanout                                  ;
-; led_blinker:BLINK_D1|LED_state~6        ; Lost fanout                                  ;
-; led_blinker:BLINK_D1|LED_state~7        ; Lost fanout                                  ;
-; NWire_rcv:m_ser|TB_state~11             ; Lost fanout                                  ;
-; NWire_rcv:m_ser|TB_state~12             ; Lost fanout                                  ;
-; NWire_rcv:m_ser|TB_state~13             ; Lost fanout                                  ;
-; NWire_rcv:p_ser|TB_state~11             ; Lost fanout                                  ;
-; NWire_rcv:p_ser|TB_state~12             ; Lost fanout                                  ;
-; NWire_rcv:p_ser|TB_state~13             ; Lost fanout                                  ;
-; NWire_xmit:CCxmit|NW_state~11           ; Lost fanout                                  ;
-; NWire_xmit:CCxmit|NW_state~12           ; Lost fanout                                  ;
-; NWire_xmit:CCxmit|NW_state~13           ; Lost fanout                                  ;
-; I2S_xmit:J_IQPWM|TLV_state~10           ; Lost fanout                                  ;
-; I2S_xmit:J_IQPWM|TLV_state~11           ; Lost fanout                                  ;
-; NWire_xmit:P_IQPWM|NW_state~11          ; Lost fanout                                  ;
-; NWire_xmit:P_IQPWM|NW_state~12          ; Lost fanout                                  ;
-; NWire_xmit:P_IQPWM|NW_state~13          ; Lost fanout                                  ;
-; I2S_xmit:J_LRAudio|TLV_state~10         ; Lost fanout                                  ;
-; I2S_xmit:J_LRAudio|TLV_state~11         ; Lost fanout                                  ;
-; NWire_xmit:M_LRAudio|NW_state~11        ; Lost fanout                                  ;
-; NWire_xmit:M_LRAudio|NW_state~12        ; Lost fanout                                  ;
-; NWire_xmit:M_LRAudio|NW_state~13        ; Lost fanout                                  ;
-; async_usb:usb1|FX_state~25              ; Lost fanout                                  ;
-; async_usb:usb1|FX_state~26              ; Lost fanout                                  ;
-; async_usb:usb1|FX_state~27              ; Lost fanout                                  ;
-; async_usb:usb1|FX_state~28              ; Lost fanout                                  ;
-; async_usb:usb1|FX_state~29              ; Lost fanout                                  ;
-; async_usb:usb1|FX_state~30              ; Lost fanout                                  ;
-; NWire_rcv:SPD|TB_state~11               ; Lost fanout                                  ;
-; NWire_rcv:SPD|TB_state~12               ; Lost fanout                                  ;
-; NWire_rcv:SPD|TB_state~13               ; Lost fanout                                  ;
-; Tx_fifo_ctrl:TXFC|AD_state~17           ; Lost fanout                                  ;
-; Total Number of Removed Registers = 242 ;                                              ;
-+-----------------------------------------+----------------------------------------------+
-* Table truncated at 100 items. To change the number of removed registers reported, set the "Number of Removed Registers Reported" option under Assignments->Settings->Analysis and Synthesis Settings->More Settings
++-----------------------------------------------------------------------------------------------+
+; Registers Removed During Synthesis                                                            ;
++-----------------------------------------+-----------------------------------------------------+
+; Register name                           ; Reason for Removal                                  ;
++-----------------------------------------+-----------------------------------------------------+
+; IF_clock_s[3]                           ; Stuck at GND due to stuck port data_in              ;
+; led_blinker:BLINK_D1|ld[1]              ; Stuck at GND due to stuck port data_in              ;
+; NWire_rcv:SPD|tb_width[11]              ; Merged with NWire_rcv:SPD|tb_width[10]              ;
+; NWire_rcv:M_IQ|tb_width[13]             ; Merged with NWire_rcv:M_IQ|tb_width[12]             ;
+; NWire_rcv:SPD|tb_width[10]              ; Stuck at GND due to stuck port data_in              ;
+; NWire_rcv:M_IQ|tb_width[12]             ; Stuck at GND due to stuck port data_in              ;
+; First_LO_data[22]                       ; Merged with First_LO_data[1]                        ;
+; Second_LO_data[15]                      ; Merged with Second_LO_data[0]                       ;
+; First_LO_data[7,21,23]                  ; Merged with First_LO_data[6]                        ;
+; Second_LO_data[7,14,16,18..19,22]       ; Merged with Second_LO_data[1]                       ;
+; Second_LO_data[3,5,10..11]              ; Merged with Second_LO_data[2]                       ;
+; Second_LO_data[20]                      ; Merged with Second_LO_data[4]                       ;
+; Second_LO_data[9,12..13,17,21,23]       ; Merged with Second_LO_data[8]                       ;
+; First_LO_data[6]                        ; Stuck at GND due to stuck port data_in              ;
+; led_blinker:BLINK_D4|bit_sel[1..3]      ; Stuck at GND due to stuck port data_in              ;
+; led_blinker:BLINK_D4|led_code[1..3]     ; Stuck at GND due to stuck port data_in              ;
+; RFIFO:RXF|mem_0_bypass[22]              ; Merged with RFIFO:RXF|outptr[10]                    ;
+; RFIFO:RXF|mem_0_bypass[20]              ; Merged with RFIFO:RXF|outptr[9]                     ;
+; RFIFO:RXF|mem_0_bypass[18]              ; Merged with RFIFO:RXF|outptr[8]                     ;
+; RFIFO:RXF|mem_0_bypass[16]              ; Merged with RFIFO:RXF|outptr[7]                     ;
+; RFIFO:RXF|mem_0_bypass[14]              ; Merged with RFIFO:RXF|outptr[6]                     ;
+; RFIFO:RXF|mem_0_bypass[12]              ; Merged with RFIFO:RXF|outptr[5]                     ;
+; RFIFO:RXF|mem_0_bypass[10]              ; Merged with RFIFO:RXF|outptr[4]                     ;
+; RFIFO:RXF|mem_0_bypass[8]               ; Merged with RFIFO:RXF|outptr[3]                     ;
+; RFIFO:RXF|mem_0_bypass[6]               ; Merged with RFIFO:RXF|outptr[2]                     ;
+; RFIFO:RXF|mem_0_bypass[4]               ; Merged with RFIFO:RXF|outptr[1]                     ;
+; RFIFO:RXF|mem_0_bypass[2]               ; Merged with RFIFO:RXF|outptr[0]                     ;
+; IF_PWM_state~13                         ; Lost fanout                                         ;
+; IF_PWM_state~14                         ; Lost fanout                                         ;
+; IF_PWM_state~15                         ; Lost fanout                                         ;
+; IF_SYNC_state~11                        ; Lost fanout                                         ;
+; IF_SYNC_state~12                        ; Lost fanout                                         ;
+; IF_SYNC_state~13                        ; Lost fanout                                         ;
+; ADF4112_SPI:ADF4112|SPI_state~7         ; Lost fanout                                         ;
+; ADF4112_SPI:ADF4112|SPI_state~8         ; Lost fanout                                         ;
+; ADF4112_SPI:ADF4112|SPI_state~9         ; Lost fanout                                         ;
+; led_blinker:BLINK_D4|LED_state~5        ; Lost fanout                                         ;
+; led_blinker:BLINK_D4|LED_state~6        ; Lost fanout                                         ;
+; led_blinker:BLINK_D4|LED_state~7        ; Lost fanout                                         ;
+; led_blinker:BLINK_D1|LED_state~5        ; Lost fanout                                         ;
+; led_blinker:BLINK_D1|LED_state~6        ; Lost fanout                                         ;
+; led_blinker:BLINK_D1|LED_state~7        ; Lost fanout                                         ;
+; NWire_xmit:CCxmit|NW_state~11           ; Lost fanout                                         ;
+; NWire_xmit:CCxmit|NW_state~12           ; Lost fanout                                         ;
+; NWire_xmit:CCxmit|NW_state~13           ; Lost fanout                                         ;
+; NWire_xmit:M_LRAudio|NW_state~11        ; Lost fanout                                         ;
+; NWire_xmit:M_LRAudio|NW_state~12        ; Lost fanout                                         ;
+; NWire_xmit:M_LRAudio|NW_state~13        ; Lost fanout                                         ;
+; async_usb:usb1|FX_state~25              ; Lost fanout                                         ;
+; async_usb:usb1|FX_state~26              ; Lost fanout                                         ;
+; async_usb:usb1|FX_state~27              ; Lost fanout                                         ;
+; async_usb:usb1|FX_state~28              ; Lost fanout                                         ;
+; async_usb:usb1|FX_state~29              ; Lost fanout                                         ;
+; async_usb:usb1|FX_state~30              ; Lost fanout                                         ;
+; NWire_rcv:SPD|TB_state~11               ; Lost fanout                                         ;
+; NWire_rcv:SPD|TB_state~12               ; Lost fanout                                         ;
+; NWire_rcv:SPD|TB_state~13               ; Lost fanout                                         ;
+; Tx_fifo_ctrl:TXFC|AD_state~17           ; Lost fanout                                         ;
+; Tx_fifo_ctrl:TXFC|AD_state~18           ; Lost fanout                                         ;
+; Tx_fifo_ctrl:TXFC|AD_state~19           ; Lost fanout                                         ;
+; Tx_fifo_ctrl:TXFC|AD_state~20           ; Lost fanout                                         ;
+; NWire_rcv:M_IQ|TB_state~11              ; Lost fanout                                         ;
+; NWire_rcv:M_IQ|TB_state~12              ; Lost fanout                                         ;
+; NWire_rcv:M_IQ|TB_state~13              ; Lost fanout                                         ;
+; led_blinker:BLINK_D4|LED_state.LED_IDLE ; Merged with led_blinker:BLINK_D1|LED_state.LED_IDLE ;
+; async_usb:usb1|FX_state.FX_F6           ; Merged with async_usb:usb1|Rx_fifo_wreq             ;
+; Second_LO_data[8]                       ; Stuck at GND due to stuck port data_in              ;
+; led_blinker:BLINK_D1|bit_sel[2..3]      ; Stuck at GND due to stuck port data_in              ;
+; led_blinker:BLINK_D1|led_code[2..3]     ; Stuck at GND due to stuck port data_in              ;
+; Total Number of Removed Registers = 90  ;                                                     ;
++-----------------------------------------+-----------------------------------------------------+
 
 
-+----------------------------------------------------------------------------------------------------------------------------------+
-; Removed Registers Triggering Further Register Optimizations                                                                      ;
-+-------------------------------------+---------------------------+----------------------------------------------------------------+
-; Register name                       ; Reason for Removal        ; Registers Removed due to This Register                         ;
-+-------------------------------------+---------------------------+----------------------------------------------------------------+
-; NWire_xmit:P_IQPWM|DIFF_CLK.id0[16] ; Stuck at GND              ; NWire_xmit:P_IQPWM|DIFF_CLK.id1[16], NWire_xmit:P_IQPWM|id[16] ;
-;                                     ; due to stuck port data_in ;                                                                ;
-; NWire_xmit:P_IQPWM|DIFF_CLK.id0[17] ; Stuck at GND              ; NWire_xmit:P_IQPWM|DIFF_CLK.id1[17], NWire_xmit:P_IQPWM|id[17] ;
-;                                     ; due to stuck port data_in ;                                                                ;
-; NWire_xmit:P_IQPWM|DIFF_CLK.id0[18] ; Stuck at GND              ; NWire_xmit:P_IQPWM|DIFF_CLK.id1[18], NWire_xmit:P_IQPWM|id[18] ;
-;                                     ; due to stuck port data_in ;                                                                ;
-; NWire_xmit:P_IQPWM|DIFF_CLK.id0[19] ; Stuck at GND              ; NWire_xmit:P_IQPWM|DIFF_CLK.id1[19], NWire_xmit:P_IQPWM|id[19] ;
-;                                     ; due to stuck port data_in ;                                                                ;
-; NWire_xmit:P_IQPWM|DIFF_CLK.id0[20] ; Stuck at GND              ; NWire_xmit:P_IQPWM|DIFF_CLK.id1[20], NWire_xmit:P_IQPWM|id[20] ;
-;                                     ; due to stuck port data_in ;                                                                ;
-; NWire_xmit:P_IQPWM|DIFF_CLK.id0[21] ; Stuck at GND              ; NWire_xmit:P_IQPWM|DIFF_CLK.id1[21], NWire_xmit:P_IQPWM|id[21] ;
-;                                     ; due to stuck port data_in ;                                                                ;
-; NWire_xmit:P_IQPWM|DIFF_CLK.id0[22] ; Stuck at GND              ; NWire_xmit:P_IQPWM|DIFF_CLK.id1[22], NWire_xmit:P_IQPWM|id[22] ;
-;                                     ; due to stuck port data_in ;                                                                ;
-; NWire_xmit:P_IQPWM|DIFF_CLK.id0[23] ; Stuck at GND              ; NWire_xmit:P_IQPWM|DIFF_CLK.id1[23], NWire_xmit:P_IQPWM|id[23] ;
-;                                     ; due to stuck port data_in ;                                                                ;
-; NWire_xmit:P_IQPWM|DIFF_CLK.id0[24] ; Stuck at GND              ; NWire_xmit:P_IQPWM|DIFF_CLK.id1[24], NWire_xmit:P_IQPWM|id[24] ;
-;                                     ; due to stuck port data_in ;                                                                ;
-; NWire_xmit:P_IQPWM|DIFF_CLK.id0[25] ; Stuck at GND              ; NWire_xmit:P_IQPWM|DIFF_CLK.id1[25], NWire_xmit:P_IQPWM|id[25] ;
-;                                     ; due to stuck port data_in ;                                                                ;
-; NWire_xmit:P_IQPWM|DIFF_CLK.id0[26] ; Stuck at GND              ; NWire_xmit:P_IQPWM|DIFF_CLK.id1[26], NWire_xmit:P_IQPWM|id[26] ;
-;                                     ; due to stuck port data_in ;                                                                ;
-; NWire_xmit:P_IQPWM|DIFF_CLK.id0[27] ; Stuck at GND              ; NWire_xmit:P_IQPWM|DIFF_CLK.id1[27], NWire_xmit:P_IQPWM|id[27] ;
-;                                     ; due to stuck port data_in ;                                                                ;
-; NWire_xmit:P_IQPWM|DIFF_CLK.id0[28] ; Stuck at GND              ; NWire_xmit:P_IQPWM|DIFF_CLK.id1[28], NWire_xmit:P_IQPWM|id[28] ;
-;                                     ; due to stuck port data_in ;                                                                ;
-; NWire_xmit:P_IQPWM|DIFF_CLK.id0[29] ; Stuck at GND              ; NWire_xmit:P_IQPWM|DIFF_CLK.id1[29], NWire_xmit:P_IQPWM|id[29] ;
-;                                     ; due to stuck port data_in ;                                                                ;
-; NWire_xmit:P_IQPWM|DIFF_CLK.id0[30] ; Stuck at GND              ; NWire_xmit:P_IQPWM|DIFF_CLK.id1[30], NWire_xmit:P_IQPWM|id[30] ;
-;                                     ; due to stuck port data_in ;                                                                ;
-; NWire_xmit:P_IQPWM|DIFF_CLK.id0[31] ; Stuck at GND              ; NWire_xmit:P_IQPWM|DIFF_CLK.id1[31], NWire_xmit:P_IQPWM|id[31] ;
-;                                     ; due to stuck port data_in ;                                                                ;
-; cdc_mcp:iqp|b_data[16]              ; Stuck at GND              ; I2S_xmit:J_IQPWM|last_data[16]                                 ;
-;                                     ; due to stuck port data_in ;                                                                ;
-; led_blinker:BLINK_D4|bit_sel[2]     ; Stuck at GND              ; led_blinker:BLINK_D4|led_code[2]                               ;
-;                                     ; due to stuck port data_in ;                                                                ;
-; led_blinker:BLINK_D4|bit_sel[1]     ; Stuck at GND              ; led_blinker:BLINK_D4|led_code[1]                               ;
-;                                     ; due to stuck port data_in ;                                                                ;
-; led_blinker:BLINK_D4|bit_sel[3]     ; Stuck at GND              ; led_blinker:BLINK_D4|led_code[3]                               ;
-;                                     ; due to stuck port data_in ;                                                                ;
-; led_blinker:BLINK_D1|bit_sel[3]     ; Stuck at GND              ; led_blinker:BLINK_D1|led_code[3]                               ;
-;                                     ; due to stuck port data_in ;                                                                ;
-+-------------------------------------+---------------------------+----------------------------------------------------------------+
++------------------------------------------------------------------------------------------------------+
+; Removed Registers Triggering Further Register Optimizations                                          ;
++---------------------------------+---------------------------+----------------------------------------+
+; Register name                   ; Reason for Removal        ; Registers Removed due to This Register ;
++---------------------------------+---------------------------+----------------------------------------+
+; led_blinker:BLINK_D4|bit_sel[2] ; Stuck at GND              ; led_blinker:BLINK_D4|led_code[2]       ;
+;                                 ; due to stuck port data_in ;                                        ;
+; led_blinker:BLINK_D4|bit_sel[1] ; Stuck at GND              ; led_blinker:BLINK_D4|led_code[1]       ;
+;                                 ; due to stuck port data_in ;                                        ;
+; led_blinker:BLINK_D4|bit_sel[3] ; Stuck at GND              ; led_blinker:BLINK_D4|led_code[3]       ;
+;                                 ; due to stuck port data_in ;                                        ;
+; led_blinker:BLINK_D1|bit_sel[3] ; Stuck at GND              ; led_blinker:BLINK_D1|led_code[3]       ;
+;                                 ; due to stuck port data_in ;                                        ;
++---------------------------------+---------------------------+----------------------------------------+
 
 
 +------------------------------------------------------+
@@ -852,12 +620,12 @@ Encoding Type:  One-Hot
 +----------------------------------------------+-------+
 ; Statistic                                    ; Value ;
 +----------------------------------------------+-------+
-; Total registers                              ; 2761  ;
-; Number of registers using Synchronous Clear  ; 597   ;
-; Number of registers using Synchronous Load   ; 109   ;
+; Total registers                              ; 1655  ;
+; Number of registers using Synchronous Clear  ; 317   ;
+; Number of registers using Synchronous Load   ; 78    ;
 ; Number of registers using Asynchronous Clear ; 0     ;
 ; Number of registers using Asynchronous Load  ; 0     ;
-; Number of registers using Clock Enable       ; 1655  ;
+; Number of registers using Clock Enable       ; 981   ;
 ; Number of registers using Preset             ; 0     ;
 +----------------------------------------------+-------+
 
@@ -909,105 +677,64 @@ Encoding Type:  One-Hot
 +----------------------------+-----------------+
 
 
-+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-; Multiplexer Restructuring Statistics (Restructuring Performed)                                                                                                                      ;
-+--------------------+-----------+---------------+----------------------+------------------------+------------+-----------------------------------------------------------------------+
-; Multiplexer Inputs ; Bus Width ; Baseline Area ; Area if Restructured ; Saving if Restructured ; Registered ; Example Multiplexer Output                                            ;
-+--------------------+-----------+---------------+----------------------+------------------------+------------+-----------------------------------------------------------------------+
-; 3:1                ; 4 bits    ; 8 LEs         ; 4 LEs                ; 4 LEs                  ; Yes        ; |Cyclops|NWire_rcv:m_ser|DBrise_cnt[1]                                ;
-; 3:1                ; 16 bits   ; 32 LEs        ; 16 LEs               ; 16 LEs                 ; Yes        ; |Cyclops|NWire_rcv:m_ser|tb_width[5]                                  ;
-; 3:1                ; 4 bits    ; 8 LEs         ; 4 LEs                ; 4 LEs                  ; Yes        ; |Cyclops|NWire_rcv:m_ser|data_cnt[2]                                  ;
-; 3:1                ; 5 bits    ; 10 LEs        ; 5 LEs                ; 5 LEs                  ; Yes        ; |Cyclops|NWire_rcv:p_ser|DBrise_cnt[1]                                ;
-; 3:1                ; 16 bits   ; 32 LEs        ; 16 LEs               ; 16 LEs                 ; Yes        ; |Cyclops|NWire_rcv:p_ser|tb_width[11]                                 ;
-; 3:1                ; 5 bits    ; 10 LEs        ; 5 LEs                ; 5 LEs                  ; Yes        ; |Cyclops|NWire_rcv:p_ser|data_cnt[4]                                  ;
-; 3:1                ; 16 bits   ; 32 LEs        ; 16 LEs               ; 16 LEs                 ; Yes        ; |Cyclops|I2S_xmit:J_IQPWM|last_data[2]                                ;
-; 3:1                ; 32 bits   ; 64 LEs        ; 32 LEs               ; 32 LEs                 ; Yes        ; |Cyclops|I2S_xmit:J_LRAudio|last_data[11]                             ;
-; 3:1                ; 16 bits   ; 32 LEs        ; 16 LEs               ; 16 LEs                 ; Yes        ; |Cyclops|async_usb:usb1|Rx_fifo_wdata[4]                              ;
-; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |Cyclops|async_usb:usb1|FIFO_ADR[1]                                   ;
-; 3:1                ; 5 bits    ; 10 LEs        ; 5 LEs                ; 5 LEs                  ; Yes        ; |Cyclops|NWire_rcv:SPD|DBrise_cnt[0]                                  ;
-; 3:1                ; 10 bits   ; 20 LEs        ; 10 LEs               ; 10 LEs                 ; Yes        ; |Cyclops|NWire_rcv:SPD|tb_width[7]                                    ;
-; 3:1                ; 4 bits    ; 8 LEs         ; 4 LEs                ; 4 LEs                  ; Yes        ; |Cyclops|NWire_rcv:SPD|data_cnt[1]                                    ;
-; 3:1                ; 6 bits    ; 12 LEs        ; 6 LEs                ; 6 LEs                  ; Yes        ; |Cyclops|NWire_rcv:M_IQ|DBrise_cnt[3]                                 ;
-; 3:1                ; 12 bits   ; 24 LEs        ; 12 LEs               ; 12 LEs                 ; Yes        ; |Cyclops|NWire_rcv:M_IQ|tb_width[10]                                  ;
-; 3:1                ; 6 bits    ; 12 LEs        ; 6 LEs                ; 6 LEs                  ; Yes        ; |Cyclops|NWire_rcv:M_IQ|data_cnt[5]                                   ;
-; 3:1                ; 5 bits    ; 10 LEs        ; 5 LEs                ; 5 LEs                  ; Yes        ; |Cyclops|NWire_rcv:P_MIC|DBrise_cnt[1]                                ;
-; 3:1                ; 12 bits   ; 24 LEs        ; 12 LEs               ; 12 LEs                 ; Yes        ; |Cyclops|NWire_rcv:P_MIC|tb_width[2]                                  ;
-; 3:1                ; 4 bits    ; 8 LEs         ; 4 LEs                ; 4 LEs                  ; Yes        ; |Cyclops|NWire_rcv:P_MIC|data_cnt[3]                                  ;
-; 3:1                ; 13 bits   ; 26 LEs        ; 13 LEs               ; 13 LEs                 ; Yes        ; |Cyclops|IF_bleed_cnt[5]                                              ;
-; 3:1                ; 18 bits   ; 36 LEs        ; 18 LEs               ; 18 LEs                 ; Yes        ; |Cyclops|NWire_rcv:m_ser|tb_cnt[11]                                   ;
-; 3:1                ; 18 bits   ; 36 LEs        ; 18 LEs               ; 18 LEs                 ; Yes        ; |Cyclops|NWire_rcv:p_ser|tb_cnt[17]                                   ;
-; 3:1                ; 12 bits   ; 24 LEs        ; 12 LEs               ; 12 LEs                 ; Yes        ; |Cyclops|NWire_rcv:SPD|tb_cnt[2]                                      ;
-; 3:1                ; 14 bits   ; 28 LEs        ; 14 LEs               ; 14 LEs                 ; Yes        ; |Cyclops|NWire_rcv:M_IQ|tb_cnt[8]                                     ;
-; 3:1                ; 14 bits   ; 28 LEs        ; 14 LEs               ; 14 LEs                 ; Yes        ; |Cyclops|NWire_rcv:P_MIC|tb_cnt[11]                                   ;
-; 3:1                ; 15 bits   ; 30 LEs        ; 15 LEs               ; 15 LEs                 ; Yes        ; |Cyclops|NWire_xmit:P_IQPWM|id[11]                                    ;
-; 3:1                ; 31 bits   ; 62 LEs        ; 31 LEs               ; 31 LEs                 ; Yes        ; |Cyclops|NWire_xmit:M_LRAudio|id[11]                                  ;
-; 3:1                ; 27 bits   ; 54 LEs        ; 27 LEs               ; 27 LEs                 ; Yes        ; |Cyclops|NWire_xmit:CCxmit|id[0]                                      ;
-; 3:1                ; 4 bits    ; 8 LEs         ; 4 LEs                ; 4 LEs                  ; Yes        ; |Cyclops|I2S_xmit:J_IQPWM|bit_count[0]                                ;
-; 3:1                ; 4 bits    ; 8 LEs         ; 4 LEs                ; 4 LEs                  ; Yes        ; |Cyclops|I2S_xmit:J_LRAudio|bit_count[2]                              ;
-; 3:1                ; 72 bits   ; 144 LEs       ; 72 LEs               ; 72 LEs                 ; Yes        ; |Cyclops|NWire_rcv:m_ser|DB_LEN[1][14]                                ;
-; 3:1                ; 72 bits   ; 144 LEs       ; 72 LEs               ; 72 LEs                 ; Yes        ; |Cyclops|NWire_rcv:p_ser|DB_LEN[0][3]                                 ;
-; 3:1                ; 16 bits   ; 32 LEs        ; 16 LEs               ; 16 LEs                 ; Yes        ; |Cyclops|clk_lrclk_gen:lrgen|BCLK_cnt[2]                              ;
-; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |Cyclops|cdc_mcp:dfs|b_data[1]                                        ;
-; 3:1                ; 48 bits   ; 96 LEs        ; 48 LEs               ; 48 LEs                 ; Yes        ; |Cyclops|NWire_rcv:SPD|DB_LEN[2][0]                                   ;
-; 3:1                ; 10 bits   ; 20 LEs        ; 10 LEs               ; 10 LEs                 ; Yes        ; |Cyclops|I2S_rcv:J_IQ|b_clk_cnt[8]                                    ;
-; 3:1                ; 56 bits   ; 112 LEs       ; 56 LEs               ; 56 LEs                 ; Yes        ; |Cyclops|NWire_rcv:M_IQ|DB_LEN[1][1]                                  ;
-; 3:1                ; 56 bits   ; 112 LEs       ; 56 LEs               ; 56 LEs                 ; Yes        ; |Cyclops|NWire_rcv:P_MIC|DB_LEN[2][13]                                ;
-; 3:1                ; 16 bits   ; 32 LEs        ; 16 LEs               ; 16 LEs                 ; Yes        ; |Cyclops|clk_lrclk_gen:clrgen|BCLK_cnt[3]                             ;
-; 3:1                ; 8 bits    ; 16 LEs        ; 8 LEs                ; 8 LEs                  ; Yes        ; |Cyclops|gpio_control:gpio_controlSDR|SPI_REGS:spi_regs|BitCounter[6] ;
-; 3:1                ; 18 bits   ; 36 LEs        ; 18 LEs               ; 18 LEs                 ; Yes        ; |Cyclops|debounce:de_PTT|count[8]                                     ;
-; 3:1                ; 18 bits   ; 36 LEs        ; 18 LEs               ; 18 LEs                 ; Yes        ; |Cyclops|debounce:de_dash|count[16]                                   ;
-; 3:1                ; 18 bits   ; 36 LEs        ; 18 LEs               ; 18 LEs                 ; Yes        ; |Cyclops|debounce:de_dot|count[4]                                     ;
-; 3:1                ; 48 bits   ; 96 LEs        ; 48 LEs               ; 48 LEs                 ; Yes        ; |Cyclops|cdc_mcp:iqp|b_data[9]                                        ;
-; 3:1                ; 10 bits   ; 20 LEs        ; 10 LEs               ; 10 LEs                 ; Yes        ; |Cyclops|I2S_rcv:J_MIC|b_clk_cnt[8]                                   ;
-; 3:1                ; 20 bits   ; 40 LEs        ; 20 LEs               ; 20 LEs                 ; Yes        ; |Cyclops|NWire_rcv:p_ser|rdata[14]                                    ;
-; 3:1                ; 9 bits    ; 18 LEs        ; 9 LEs                ; 9 LEs                  ; Yes        ; |Cyclops|NWire_rcv:m_ser|rdata[7]                                     ;
-; 3:1                ; 16 bits   ; 32 LEs        ; 16 LEs               ; 16 LEs                 ; Yes        ; |Cyclops|NWire_rcv:SPD|rdata[15]                                      ;
-; 3:1                ; 48 bits   ; 96 LEs        ; 48 LEs               ; 48 LEs                 ; Yes        ; |Cyclops|NWire_rcv:M_IQ|rdata[18]                                     ;
-; 3:1                ; 16 bits   ; 32 LEs        ; 16 LEs               ; 16 LEs                 ; Yes        ; |Cyclops|NWire_rcv:P_MIC|rdata[2]                                     ;
-; 3:1                ; 26 bits   ; 52 LEs        ; 26 LEs               ; 26 LEs                 ; Yes        ; |Cyclops|led_blinker:BLINK_D1|led_timer[9]                            ;
-; 3:1                ; 26 bits   ; 52 LEs        ; 26 LEs               ; 26 LEs                 ; Yes        ; |Cyclops|led_blinker:BLINK_D4|led_timer[6]                            ;
-; 3:1                ; 24 bits   ; 48 LEs        ; 24 LEs               ; 24 LEs                 ; Yes        ; |Cyclops|NWire_xmit:CCxmit|dly_cnt[17]                                ;
-; 3:1                ; 25 bits   ; 50 LEs        ; 25 LEs               ; 25 LEs                 ; Yes        ; |Cyclops|NWire_xmit:P_IQPWM|dly_cnt[8]                                ;
-; 3:1                ; 12 bits   ; 24 LEs        ; 12 LEs               ; 12 LEs                 ; Yes        ; |Cyclops|sp_rcv_ctrl:SPC|count[10]                                    ;
-; 4:1                ; 15 bits   ; 30 LEs        ; 30 LEs               ; 0 LEs                  ; Yes        ; |Cyclops|I2S_xmit:J_IQPWM|data[4]                                     ;
-; 4:1                ; 15 bits   ; 30 LEs        ; 30 LEs               ; 0 LEs                  ; Yes        ; |Cyclops|I2S_xmit:J_LRAudio|data[1]                                   ;
-; 4:1                ; 5 bits    ; 10 LEs        ; 10 LEs               ; 0 LEs                  ; Yes        ; |Cyclops|clk_lrclk_gen:lrgen|LRCLK_cnt[1]                             ;
-; 4:1                ; 5 bits    ; 10 LEs        ; 10 LEs               ; 0 LEs                  ; Yes        ; |Cyclops|clk_lrclk_gen:clrgen|LRCLK_cnt[4]                            ;
-; 4:1                ; 27 bits   ; 54 LEs        ; 27 LEs               ; 27 LEs                 ; Yes        ; |Cyclops|IF_PGA                                                       ;
-; 4:1                ; 4 bits    ; 8 LEs         ; 4 LEs                ; 4 LEs                  ; Yes        ; |Cyclops|CC_address[0]                                                ;
-; 4:1                ; 5 bits    ; 10 LEs        ; 5 LEs                ; 5 LEs                  ; Yes        ; |Cyclops|Tx_fifo_ctrl:TXFC|AD_timer[4]                                ;
-; 4:1                ; 5 bits    ; 10 LEs        ; 5 LEs                ; 5 LEs                  ; Yes        ; |Cyclops|I2S_rcv:J_IQ|shift_cnt[0]                                    ;
-; 4:1                ; 5 bits    ; 10 LEs        ; 5 LEs                ; 5 LEs                  ; Yes        ; |Cyclops|Tx_fifo_ctrl:TXFC|tx_addr[4]                                 ;
-; 4:1                ; 5 bits    ; 10 LEs        ; 5 LEs                ; 5 LEs                  ; Yes        ; |Cyclops|I2S_rcv:J_MIC|shift_cnt[0]                                   ;
-; 4:1                ; 4 bits    ; 8 LEs         ; 4 LEs                ; 4 LEs                  ; Yes        ; |Cyclops|led_blinker:BLINK_D4|bit_sel[3]                              ;
-; 4:1                ; 4 bits    ; 8 LEs         ; 4 LEs                ; 4 LEs                  ; Yes        ; |Cyclops|led_blinker:BLINK_D1|bit_sel[2]                              ;
-; 4:1                ; 5 bits    ; 10 LEs        ; 5 LEs                ; 5 LEs                  ; Yes        ; |Cyclops|ADF4112_SPI:ADF4112|bit_count[0]                             ;
-; 5:1                ; 8 bits    ; 24 LEs        ; 8 LEs                ; 16 LEs                 ; Yes        ; |Cyclops|NWire_xmit:CCxmit|bcnt[0]                                    ;
-; 5:1                ; 8 bits    ; 24 LEs        ; 8 LEs                ; 16 LEs                 ; Yes        ; |Cyclops|NWire_xmit:P_IQPWM|bcnt[3]                                   ;
-; 5:1                ; 8 bits    ; 24 LEs        ; 8 LEs                ; 16 LEs                 ; Yes        ; |Cyclops|NWire_xmit:M_LRAudio|bcnt[3]                                 ;
-; 6:1                ; 7 bits    ; 28 LEs        ; 21 LEs               ; 7 LEs                  ; Yes        ; |Cyclops|gpio_control:gpio_controlSDR|SPI_REGS:spi_regs|sdata[1]      ;
-; 11:1               ; 32 bits   ; 224 LEs       ; 192 LEs              ; 32 LEs                 ; Yes        ; |Cyclops|NWire_xmit:CCxmit|id[41]                                     ;
-; 17:1               ; 2 bits    ; 22 LEs        ; 2 LEs                ; 20 LEs                 ; Yes        ; |Cyclops|Second_LO_data[4]                                            ;
-; 17:1               ; 2 bits    ; 22 LEs        ; 2 LEs                ; 20 LEs                 ; Yes        ; |Cyclops|Second_LO_data[0]                                            ;
-; 17:1               ; 2 bits    ; 22 LEs        ; 2 LEs                ; 20 LEs                 ; Yes        ; |Cyclops|First_LO_data[6]                                             ;
-; 7:1                ; 32 bits   ; 128 LEs       ; 32 LEs               ; 96 LEs                 ; Yes        ; |Cyclops|IF_frequency[0][25]                                          ;
-; 8:1                ; 32 bits   ; 160 LEs       ; 32 LEs               ; 128 LEs                ; Yes        ; |Cyclops|IF_frequency[1][0]                                           ;
-; 8:1                ; 32 bits   ; 160 LEs       ; 32 LEs               ; 128 LEs                ; Yes        ; |Cyclops|IF_frequency[2][4]                                           ;
-; 8:1                ; 32 bits   ; 160 LEs       ; 32 LEs               ; 128 LEs                ; Yes        ; |Cyclops|IF_frequency[3][24]                                          ;
-; 8:1                ; 32 bits   ; 160 LEs       ; 32 LEs               ; 128 LEs                ; Yes        ; |Cyclops|IF_frequency[4][26]                                          ;
-; 8:1                ; 32 bits   ; 160 LEs       ; 32 LEs               ; 128 LEs                ; Yes        ; |Cyclops|IF_frequency[5][25]                                          ;
-; 8:1                ; 32 bits   ; 160 LEs       ; 32 LEs               ; 128 LEs                ; Yes        ; |Cyclops|IF_frequency[6][17]                                          ;
-; 8:1                ; 32 bits   ; 160 LEs       ; 32 LEs               ; 128 LEs                ; Yes        ; |Cyclops|IF_frequency[7][1]                                           ;
-; 8:1                ; 32 bits   ; 160 LEs       ; 32 LEs               ; 128 LEs                ; Yes        ; |Cyclops|IF_frequency[8][2]                                           ;
-; 19:1               ; 2 bits    ; 24 LEs        ; 4 LEs                ; 20 LEs                 ; Yes        ; |Cyclops|First_LO_data[20]                                            ;
-; 19:1               ; 16 bits   ; 192 LEs       ; 32 LEs               ; 160 LEs                ; Yes        ; |Cyclops|First_LO_data[4]                                             ;
-; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; No         ; |Cyclops|Tx_fifo_ctrl:TXFC|AD_state~2                                 ;
-; 3:1                ; 3 bits    ; 6 LEs         ; 6 LEs                ; 0 LEs                  ; No         ; |Cyclops|IF_xrdy                                                      ;
-; 12:1               ; 6 bits    ; 48 LEs        ; 60 LEs               ; -12 LEs                ; No         ; |Cyclops|Tx_fifo_ctrl:TXFC|Selector24                                 ;
-; 12:1               ; 2 bits    ; 16 LEs        ; 20 LEs               ; -4 LEs                 ; No         ; |Cyclops|Tx_fifo_ctrl:TXFC|Selector23                                 ;
-; 12:1               ; 4 bits    ; 32 LEs        ; 40 LEs               ; -8 LEs                 ; No         ; |Cyclops|Tx_fifo_ctrl:TXFC|Selector9                                  ;
-; 13:1               ; 3 bits    ; 24 LEs        ; 33 LEs               ; -9 LEs                 ; No         ; |Cyclops|Tx_fifo_ctrl:TXFC|Selector13                                 ;
-+--------------------+-----------+---------------+----------------------+------------------------+------------+-----------------------------------------------------------------------+
++----------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Multiplexer Restructuring Statistics (Restructuring Performed)                                                                                           ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+--------------------------------------------+
+; Multiplexer Inputs ; Bus Width ; Baseline Area ; Area if Restructured ; Saving if Restructured ; Registered ; Example Multiplexer Output                 ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+--------------------------------------------+
+; 3:1                ; 16 bits   ; 32 LEs        ; 16 LEs               ; 16 LEs                 ; Yes        ; |Cyclops|async_usb:usb1|Rx_fifo_wdata[2]   ;
+; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |Cyclops|async_usb:usb1|FIFO_ADR[0]        ;
+; 3:1                ; 5 bits    ; 10 LEs        ; 5 LEs                ; 5 LEs                  ; Yes        ; |Cyclops|NWire_rcv:SPD|DBrise_cnt[4]       ;
+; 3:1                ; 10 bits   ; 20 LEs        ; 10 LEs               ; 10 LEs                 ; Yes        ; |Cyclops|NWire_rcv:SPD|tb_width[3]         ;
+; 3:1                ; 4 bits    ; 8 LEs         ; 4 LEs                ; 4 LEs                  ; Yes        ; |Cyclops|NWire_rcv:SPD|data_cnt[2]         ;
+; 3:1                ; 6 bits    ; 12 LEs        ; 6 LEs                ; 6 LEs                  ; Yes        ; |Cyclops|NWire_rcv:M_IQ|DBrise_cnt[2]      ;
+; 3:1                ; 12 bits   ; 24 LEs        ; 12 LEs               ; 12 LEs                 ; Yes        ; |Cyclops|NWire_rcv:M_IQ|tb_width[7]        ;
+; 3:1                ; 6 bits    ; 12 LEs        ; 6 LEs                ; 6 LEs                  ; Yes        ; |Cyclops|NWire_rcv:M_IQ|data_cnt[5]        ;
+; 3:1                ; 13 bits   ; 26 LEs        ; 13 LEs               ; 13 LEs                 ; Yes        ; |Cyclops|IF_bleed_cnt[10]                  ;
+; 3:1                ; 12 bits   ; 24 LEs        ; 12 LEs               ; 12 LEs                 ; Yes        ; |Cyclops|NWire_rcv:SPD|tb_cnt[7]           ;
+; 3:1                ; 24 bits   ; 48 LEs        ; 24 LEs               ; 24 LEs                 ; Yes        ; |Cyclops|LRcnt[23]                         ;
+; 3:1                ; 14 bits   ; 28 LEs        ; 14 LEs               ; 14 LEs                 ; Yes        ; |Cyclops|NWire_rcv:M_IQ|tb_cnt[6]          ;
+; 3:1                ; 31 bits   ; 62 LEs        ; 31 LEs               ; 31 LEs                 ; Yes        ; |Cyclops|NWire_xmit:M_LRAudio|id[14]       ;
+; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |Cyclops|NWire_xmit:CCxmit|id[59]          ;
+; 3:1                ; 26 bits   ; 52 LEs        ; 26 LEs               ; 26 LEs                 ; Yes        ; |Cyclops|NWire_xmit:CCxmit|id[17]          ;
+; 3:1                ; 48 bits   ; 96 LEs        ; 48 LEs               ; 48 LEs                 ; Yes        ; |Cyclops|NWire_rcv:SPD|DB_LEN[1][6]        ;
+; 3:1                ; 56 bits   ; 112 LEs       ; 56 LEs               ; 56 LEs                 ; Yes        ; |Cyclops|NWire_rcv:M_IQ|DB_LEN[2][7]       ;
+; 3:1                ; 16 bits   ; 32 LEs        ; 16 LEs               ; 16 LEs                 ; Yes        ; |Cyclops|NWire_rcv:SPD|rdata[2]            ;
+; 3:1                ; 48 bits   ; 96 LEs        ; 48 LEs               ; 48 LEs                 ; Yes        ; |Cyclops|NWire_rcv:M_IQ|rdata[12]          ;
+; 3:1                ; 26 bits   ; 52 LEs        ; 26 LEs               ; 26 LEs                 ; Yes        ; |Cyclops|led_blinker:BLINK_D1|led_timer[7] ;
+; 3:1                ; 26 bits   ; 52 LEs        ; 26 LEs               ; 26 LEs                 ; Yes        ; |Cyclops|led_blinker:BLINK_D4|led_timer[7] ;
+; 3:1                ; 24 bits   ; 48 LEs        ; 24 LEs               ; 24 LEs                 ; Yes        ; |Cyclops|NWire_xmit:CCxmit|dly_cnt[3]      ;
+; 3:1                ; 25 bits   ; 50 LEs        ; 25 LEs               ; 25 LEs                 ; Yes        ; |Cyclops|NWire_xmit:M_LRAudio|dly_cnt[5]   ;
+; 3:1                ; 12 bits   ; 24 LEs        ; 12 LEs               ; 12 LEs                 ; Yes        ; |Cyclops|sp_rcv_ctrl:SPC|count[11]         ;
+; 4:1                ; 23 bits   ; 46 LEs        ; 23 LEs               ; 23 LEs                 ; Yes        ; |Cyclops|IF_clock_s[0]                     ;
+; 4:1                ; 4 bits    ; 8 LEs         ; 4 LEs                ; 4 LEs                  ; Yes        ; |Cyclops|CC_address[2]                     ;
+; 4:1                ; 5 bits    ; 10 LEs        ; 5 LEs                ; 5 LEs                  ; Yes        ; |Cyclops|Tx_fifo_ctrl:TXFC|AD_timer[4]     ;
+; 4:1                ; 5 bits    ; 10 LEs        ; 5 LEs                ; 5 LEs                  ; Yes        ; |Cyclops|Tx_fifo_ctrl:TXFC|tx_addr[4]      ;
+; 4:1                ; 4 bits    ; 8 LEs         ; 4 LEs                ; 4 LEs                  ; Yes        ; |Cyclops|led_blinker:BLINK_D4|bit_sel[1]   ;
+; 4:1                ; 4 bits    ; 8 LEs         ; 4 LEs                ; 4 LEs                  ; Yes        ; |Cyclops|led_blinker:BLINK_D1|bit_sel[2]   ;
+; 4:1                ; 5 bits    ; 10 LEs        ; 5 LEs                ; 5 LEs                  ; Yes        ; |Cyclops|ADF4112_SPI:ADF4112|bit_count[0]  ;
+; 5:1                ; 8 bits    ; 24 LEs        ; 8 LEs                ; 16 LEs                 ; Yes        ; |Cyclops|NWire_xmit:CCxmit|bcnt[1]         ;
+; 5:1                ; 8 bits    ; 24 LEs        ; 8 LEs                ; 16 LEs                 ; Yes        ; |Cyclops|NWire_xmit:M_LRAudio|bcnt[7]      ;
+; 11:1               ; 32 bits   ; 224 LEs       ; 192 LEs              ; 32 LEs                 ; Yes        ; |Cyclops|NWire_xmit:CCxmit|id[43]          ;
+; 17:1               ; 2 bits    ; 22 LEs        ; 2 LEs                ; 20 LEs                 ; Yes        ; |Cyclops|Second_LO_data[2]                 ;
+; 17:1               ; 2 bits    ; 22 LEs        ; 2 LEs                ; 20 LEs                 ; Yes        ; |Cyclops|Second_LO_data[6]                 ;
+; 17:1               ; 2 bits    ; 22 LEs        ; 2 LEs                ; 20 LEs                 ; Yes        ; |Cyclops|First_LO_data[6]                  ;
+; 7:1                ; 32 bits   ; 128 LEs       ; 32 LEs               ; 96 LEs                 ; Yes        ; |Cyclops|IF_frequency[0][29]               ;
+; 8:1                ; 32 bits   ; 160 LEs       ; 32 LEs               ; 128 LEs                ; Yes        ; |Cyclops|IF_frequency[1][2]                ;
+; 8:1                ; 32 bits   ; 160 LEs       ; 32 LEs               ; 128 LEs                ; Yes        ; |Cyclops|IF_frequency[2][13]               ;
+; 8:1                ; 32 bits   ; 160 LEs       ; 32 LEs               ; 128 LEs                ; Yes        ; |Cyclops|IF_frequency[3][28]               ;
+; 8:1                ; 32 bits   ; 160 LEs       ; 32 LEs               ; 128 LEs                ; Yes        ; |Cyclops|IF_frequency[4][24]               ;
+; 8:1                ; 32 bits   ; 160 LEs       ; 32 LEs               ; 128 LEs                ; Yes        ; |Cyclops|IF_frequency[5][20]               ;
+; 8:1                ; 32 bits   ; 160 LEs       ; 32 LEs               ; 128 LEs                ; Yes        ; |Cyclops|IF_frequency[6][16]               ;
+; 8:1                ; 32 bits   ; 160 LEs       ; 32 LEs               ; 128 LEs                ; Yes        ; |Cyclops|IF_frequency[7][16]               ;
+; 8:1                ; 32 bits   ; 160 LEs       ; 32 LEs               ; 128 LEs                ; Yes        ; |Cyclops|IF_frequency[8][5]                ;
+; 19:1               ; 2 bits    ; 24 LEs        ; 4 LEs                ; 20 LEs                 ; Yes        ; |Cyclops|First_LO_data[0]                  ;
+; 19:1               ; 16 bits   ; 192 LEs       ; 32 LEs               ; 160 LEs                ; Yes        ; |Cyclops|First_LO_data[18]                 ;
+; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; No         ; |Cyclops|Tx_fifo_ctrl:TXFC|AD_state~11     ;
+; 7:1                ; 8 bits    ; 32 LEs        ; 32 LEs               ; 0 LEs                  ; No         ; |Cyclops|Tx_fifo_ctrl:TXFC|Selector14      ;
+; 8:1                ; 3 bits    ; 15 LEs        ; 15 LEs               ; 0 LEs                  ; No         ; |Cyclops|Tx_fifo_ctrl:TXFC|Selector22      ;
+; 8:1                ; 5 bits    ; 25 LEs        ; 25 LEs               ; 0 LEs                  ; No         ; |Cyclops|Tx_fifo_ctrl:TXFC|Selector19      ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+--------------------------------------------+
 
 
 +------------------------------------------------------------------------------------------------------------------------------------+
@@ -1118,39 +845,6 @@ Encoding Type:  One-Hot
 ; LO1_DB22       ; 0                        ; Unsigned Binary             ;
 ; LO1_G1         ; 0                        ; Unsigned Binary             ;
 +----------------+--------------------------+-----------------------------+
-Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings Tables in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
-
-
-+---------------------------------------------------------------------------------------------+
-; Parameter Settings for User Entity Instance: gpio_control:gpio_controlSDR|SPI_REGS:spi_regs ;
-+----------------+-------+--------------------------------------------------------------------+
-; Parameter Name ; Value ; Type                                                               ;
-+----------------+-------+--------------------------------------------------------------------+
-; WIDTH          ; 8     ; Signed Integer                                                     ;
-; NUM_PORTS      ; 3     ; Signed Integer                                                     ;
-+----------------+-------+--------------------------------------------------------------------+
-Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings Tables in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
-
-
-+-----------------------------------------------------------------------------------------------+
-; Parameter Settings for User Entity Instance: gpio_control:gpio_controlSDR|gpio_oport:port1reg ;
-+----------------+--------+---------------------------------------------------------------------+
-; Parameter Name ; Value  ; Type                                                                ;
-+----------------+--------+---------------------------------------------------------------------+
-; my_address     ; 000001 ; Unsigned Binary                                                     ;
-; WIDTH          ; 8      ; Signed Integer                                                      ;
-+----------------+--------+---------------------------------------------------------------------+
-Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings Tables in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
-
-
-+-----------------------------------------------------------------------------------------------+
-; Parameter Settings for User Entity Instance: gpio_control:gpio_controlSDR|gpio_oport:port2reg ;
-+----------------+--------+---------------------------------------------------------------------+
-; Parameter Name ; Value  ; Type                                                                ;
-+----------------+--------+---------------------------------------------------------------------+
-; my_address     ; 000010 ; Unsigned Binary                                                     ;
-; WIDTH          ; 8      ; Signed Integer                                                      ;
-+----------------+--------+---------------------------------------------------------------------+
 Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings Tables in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
 
 
@@ -1527,99 +1221,6 @@ Note: In order to hide this table in the UI and the text report file, please set
 Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings Tables in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
 
 
-+----------------------------------------------------------+
-; Parameter Settings for User Entity Instance: cdc_mcp:dfs ;
-+----------------+-------+---------------------------------+
-; Parameter Name ; Value ; Type                            ;
-+----------------+-------+---------------------------------+
-; SIZE           ; 2     ; Signed Integer                  ;
-; TPD            ; 0.5   ; Signed Float                    ;
-+----------------+-------+---------------------------------+
-Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings Tables in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
-
-
-+-----------------------------------------------------------------------+
-; Parameter Settings for User Entity Instance: cdc_mcp:dfs|cdc_sync:rdy ;
-+----------------+-------+----------------------------------------------+
-; Parameter Name ; Value ; Type                                         ;
-+----------------+-------+----------------------------------------------+
-; SIZE           ; 1     ; Signed Integer                               ;
-+----------------+-------+----------------------------------------------+
-Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings Tables in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
-
-
-+-----------------------------------------------------------------------+
-; Parameter Settings for User Entity Instance: cdc_mcp:dfs|pulsegen:pls ;
-+----------------+-------+----------------------------------------------+
-; Parameter Name ; Value ; Type                                         ;
-+----------------+-------+----------------------------------------------+
-; TPD            ; 0.7   ; Signed Float                                 ;
-+----------------+-------+----------------------------------------------+
-Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings Tables in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
-
-
-+-----------------------------------------------------------------------+
-; Parameter Settings for User Entity Instance: cdc_mcp:dfs|cdc_sync:ack ;
-+----------------+-------+----------------------------------------------+
-; Parameter Name ; Value ; Type                                         ;
-+----------------+-------+----------------------------------------------+
-; SIZE           ; 1     ; Signed Integer                               ;
-+----------------+-------+----------------------------------------------+
-Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings Tables in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
-
-
-+------------------------------------------------------------------+
-; Parameter Settings for User Entity Instance: clk_lrclk_gen:lrgen ;
-+----------------+----------+--------------------------------------+
-; Parameter Name ; Value    ; Type                                 ;
-+----------------+----------+--------------------------------------+
-; BCLK_00        ; 32       ; Signed Integer                       ;
-; BCLK_01        ; 32       ; Signed Integer                       ;
-; BCLK_10        ; 32       ; Signed Integer                       ;
-; CLK_FREQ       ; 12288000 ; Signed Integer                       ;
-+----------------+----------+--------------------------------------+
-Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings Tables in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
-
-
-+-------------------------------------------------------------------+
-; Parameter Settings for User Entity Instance: clk_lrclk_gen:clrgen ;
-+----------------+----------+---------------------------------------+
-; Parameter Name ; Value    ; Type                                  ;
-+----------------+----------+---------------------------------------+
-; BCLK_00        ; 32       ; Signed Integer                        ;
-; BCLK_01        ; 32       ; Signed Integer                        ;
-; BCLK_10        ; 32       ; Signed Integer                        ;
-; CLK_FREQ       ; 12288000 ; Signed Integer                        ;
-+----------------+----------+---------------------------------------+
-Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings Tables in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
-
-
-+--------------------------------------------------------------+
-; Parameter Settings for User Entity Instance: NWire_rcv:P_MIC ;
-+----------------+-----------+---------------------------------+
-; Parameter Name ; Value     ; Type                            ;
-+----------------+-----------+---------------------------------+
-; DATA_BITS      ; 16        ; Signed Integer                  ;
-; SLOWEST_FREQ   ; 20000     ; Signed Integer                  ;
-; ICLK_FREQ      ; 144000000 ; Signed Integer                  ;
-; XCLK_FREQ      ; 48000000  ; Signed Integer                  ;
-; TPD            ; 1         ; Signed Integer                  ;
-+----------------+-----------+---------------------------------+
-Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings Tables in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
-
-
-+------------------------------------------------------------+
-; Parameter Settings for User Entity Instance: I2S_rcv:J_MIC ;
-+----------------+-------+-----------------------------------+
-; Parameter Name ; Value ; Type                              ;
-+----------------+-------+-----------------------------------+
-; DATA_BITS      ; 32    ; Signed Integer                    ;
-; BCNT           ; 2     ; Signed Integer                    ;
-; DSTRB          ; 1     ; Signed Integer                    ;
-+----------------+-------+-----------------------------------+
-Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings Tables in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
-
-
 +-------------------------------------------------------------+
 ; Parameter Settings for User Entity Instance: NWire_rcv:M_IQ ;
 +----------------+-----------+--------------------------------+
@@ -1631,18 +1232,6 @@ Note: In order to hide this table in the UI and the text report file, please set
 ; XCLK_FREQ      ; 48000000  ; Signed Integer                 ;
 ; TPD            ; 1         ; Signed Integer                 ;
 +----------------+-----------+--------------------------------+
-Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings Tables in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
-
-
-+-----------------------------------------------------------+
-; Parameter Settings for User Entity Instance: I2S_rcv:J_IQ ;
-+----------------+-------+----------------------------------+
-; Parameter Name ; Value ; Type                             ;
-+----------------+-------+----------------------------------+
-; DATA_BITS      ; 48    ; Signed Integer                   ;
-; BCNT           ; 2     ; Signed Integer                   ;
-; DSTRB          ; 1     ; Signed Integer                   ;
-+----------------+-------+----------------------------------+
 Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings Tables in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
 
 
@@ -1764,107 +1353,6 @@ Note: In order to hide this table in the UI and the text report file, please set
 Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings Tables in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
 
 
-+---------------------------------------------------------------+
-; Parameter Settings for User Entity Instance: cdc_sync:cdc_c22 ;
-+----------------+-------+--------------------------------------+
-; Parameter Name ; Value ; Type                                 ;
-+----------------+-------+--------------------------------------+
-; SIZE           ; 1     ; Signed Integer                       ;
-+----------------+-------+--------------------------------------+
-Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings Tables in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
-
-
-+-------------------------------------------------------------+
-; Parameter Settings for User Entity Instance: pulsegen:cdc_p ;
-+----------------+-------+------------------------------------+
-; Parameter Name ; Value ; Type                               ;
-+----------------+-------+------------------------------------+
-; TPD            ; 0.7   ; Signed Float                       ;
-+----------------+-------+------------------------------------+
-Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings Tables in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
-
-
-+---------------------------------------------------------------+
-; Parameter Settings for User Entity Instance: cdc_sync:cdc_clr ;
-+----------------+-------+--------------------------------------+
-; Parameter Name ; Value ; Type                                 ;
-+----------------+-------+--------------------------------------+
-; SIZE           ; 1     ; Signed Integer                       ;
-+----------------+-------+--------------------------------------+
-Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings Tables in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
-
-
-+-------------------------------------------------------------+
-; Parameter Settings for User Entity Instance: pulsegen:cdc_j ;
-+----------------+-------+------------------------------------+
-; Parameter Name ; Value ; Type                               ;
-+----------------+-------+------------------------------------+
-; TPD            ; 0.7   ; Signed Float                       ;
-+----------------+-------+------------------------------------+
-Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings Tables in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
-
-
-+----------------------------------------------------------------+
-; Parameter Settings for User Entity Instance: cdc_sync:cdc_jrdy ;
-+----------------+-------+---------------------------------------+
-; Parameter Name ; Value ; Type                                  ;
-+----------------+-------+---------------------------------------+
-; SIZE           ; 1     ; Signed Integer                        ;
-+----------------+-------+---------------------------------------+
-Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings Tables in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
-
-
-+----------------------------------------------------------------+
-; Parameter Settings for User Entity Instance: cdc_sync:cdc_jack ;
-+----------------+-------+---------------------------------------+
-; Parameter Name ; Value ; Type                                  ;
-+----------------+-------+---------------------------------------+
-; SIZE           ; 1     ; Signed Integer                        ;
-+----------------+-------+---------------------------------------+
-Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings Tables in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
-
-
-+----------------------------------------------------------+
-; Parameter Settings for User Entity Instance: cdc_mcp:lra ;
-+----------------+-------+---------------------------------+
-; Parameter Name ; Value ; Type                            ;
-+----------------+-------+---------------------------------+
-; SIZE           ; 32    ; Signed Integer                  ;
-; TPD            ; 0.5   ; Signed Float                    ;
-+----------------+-------+---------------------------------+
-Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings Tables in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
-
-
-+-----------------------------------------------------------------------+
-; Parameter Settings for User Entity Instance: cdc_mcp:lra|cdc_sync:rdy ;
-+----------------+-------+----------------------------------------------+
-; Parameter Name ; Value ; Type                                         ;
-+----------------+-------+----------------------------------------------+
-; SIZE           ; 1     ; Signed Integer                               ;
-+----------------+-------+----------------------------------------------+
-Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings Tables in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
-
-
-+-----------------------------------------------------------------------+
-; Parameter Settings for User Entity Instance: cdc_mcp:lra|pulsegen:pls ;
-+----------------+-------+----------------------------------------------+
-; Parameter Name ; Value ; Type                                         ;
-+----------------+-------+----------------------------------------------+
-; TPD            ; 0.7   ; Signed Float                                 ;
-+----------------+-------+----------------------------------------------+
-Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings Tables in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
-
-
-+-----------------------------------------------------------------------+
-; Parameter Settings for User Entity Instance: cdc_mcp:lra|cdc_sync:ack ;
-+----------------+-------+----------------------------------------------+
-; Parameter Name ; Value ; Type                                         ;
-+----------------+-------+----------------------------------------------+
-; SIZE           ; 1     ; Signed Integer                               ;
-+----------------+-------+----------------------------------------------+
-Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings Tables in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
-
-
 +-------------------------------------------------------------------+
 ; Parameter Settings for User Entity Instance: NWire_xmit:M_LRAudio ;
 +----------------+-----------+--------------------------------------+
@@ -1880,87 +1368,6 @@ Note: In order to hide this table in the UI and the text report file, please set
 ; NUM_DLY_CLKS   ; 28800000  ; Signed Integer                       ;
 ; LOW_TIME       ; 246       ; Signed Integer                       ;
 +----------------+-----------+--------------------------------------+
-Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings Tables in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
-
-
-+-----------------------------------------------------------------+
-; Parameter Settings for User Entity Instance: I2S_xmit:J_LRAudio ;
-+----------------+-------+----------------------------------------+
-; Parameter Name ; Value ; Type                                   ;
-+----------------+-------+----------------------------------------+
-; DATA_BITS      ; 32    ; Signed Integer                         ;
-; TPD            ; 5     ; Signed Integer                         ;
-+----------------+-------+----------------------------------------+
-Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings Tables in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
-
-
-+-----------------------------------------------------------------+
-; Parameter Settings for User Entity Instance: NWire_xmit:P_IQPWM ;
-+----------------+-----------+------------------------------------+
-; Parameter Name ; Value     ; Type                               ;
-+----------------+-----------+------------------------------------+
-; XCLK_FREQ      ; 48000000  ; Signed Integer                     ;
-; ICLK_FREQ      ; 144000000 ; Signed Integer                     ;
-; DLY_TIME       ; 200       ; Signed Integer                     ;
-; DATA_BITS      ; 32        ; Signed Integer                     ;
-; SEND_FREQ      ; 50000     ; Signed Integer                     ;
-; LOW_BITS       ; 3         ; Signed Integer                     ;
-; TPD            ; 1         ; Signed Integer                     ;
-; NUM_DLY_CLKS   ; 28800000  ; Signed Integer                     ;
-; LOW_TIME       ; 246       ; Signed Integer                     ;
-+----------------+-----------+------------------------------------+
-Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings Tables in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
-
-
-+----------------------------------------------------------+
-; Parameter Settings for User Entity Instance: cdc_mcp:iqp ;
-+----------------+-------+---------------------------------+
-; Parameter Name ; Value ; Type                            ;
-+----------------+-------+---------------------------------+
-; SIZE           ; 32    ; Signed Integer                  ;
-; TPD            ; 0.5   ; Signed Float                    ;
-+----------------+-------+---------------------------------+
-Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings Tables in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
-
-
-+-----------------------------------------------------------------------+
-; Parameter Settings for User Entity Instance: cdc_mcp:iqp|cdc_sync:rdy ;
-+----------------+-------+----------------------------------------------+
-; Parameter Name ; Value ; Type                                         ;
-+----------------+-------+----------------------------------------------+
-; SIZE           ; 1     ; Signed Integer                               ;
-+----------------+-------+----------------------------------------------+
-Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings Tables in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
-
-
-+-----------------------------------------------------------------------+
-; Parameter Settings for User Entity Instance: cdc_mcp:iqp|pulsegen:pls ;
-+----------------+-------+----------------------------------------------+
-; Parameter Name ; Value ; Type                                         ;
-+----------------+-------+----------------------------------------------+
-; TPD            ; 0.7   ; Signed Float                                 ;
-+----------------+-------+----------------------------------------------+
-Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings Tables in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
-
-
-+-----------------------------------------------------------------------+
-; Parameter Settings for User Entity Instance: cdc_mcp:iqp|cdc_sync:ack ;
-+----------------+-------+----------------------------------------------+
-; Parameter Name ; Value ; Type                                         ;
-+----------------+-------+----------------------------------------------+
-; SIZE           ; 1     ; Signed Integer                               ;
-+----------------+-------+----------------------------------------------+
-Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings Tables in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
-
-
-+---------------------------------------------------------------+
-; Parameter Settings for User Entity Instance: I2S_xmit:J_IQPWM ;
-+----------------+-------+--------------------------------------+
-; Parameter Name ; Value ; Type                                 ;
-+----------------+-------+--------------------------------------+
-; DATA_BITS      ; 32    ; Signed Integer                       ;
-; TPD            ; 5     ; Signed Integer                       ;
-+----------------+-------+--------------------------------------+
 Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings Tables in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
 
 
@@ -1989,64 +1396,6 @@ Note: In order to hide this table in the UI and the text report file, please set
 ; NUM_DLY_CLKS   ; 9600000  ; Signed Integer                     ;
 ; LOW_TIME       ; 225      ; Signed Integer                     ;
 +----------------+----------+------------------------------------+
-Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings Tables in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
-
-
-+--------------------------------------------------------------+
-; Parameter Settings for User Entity Instance: NWire_rcv:p_ser ;
-+----------------+----------+----------------------------------+
-; Parameter Name ; Value    ; Type                             ;
-+----------------+----------+----------------------------------+
-; DATA_BITS      ; 20       ; Signed Integer                   ;
-; SLOWEST_FREQ   ; 500      ; Signed Integer                   ;
-; ICLK_FREQ      ; 48000000 ; Signed Integer                   ;
-; XCLK_FREQ      ; 48000000 ; Signed Integer                   ;
-; TPD            ; 1        ; Signed Integer                   ;
-+----------------+----------+----------------------------------+
-Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings Tables in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
-
-
-+--------------------------------------------------------------+
-; Parameter Settings for User Entity Instance: NWire_rcv:m_ser ;
-+----------------+----------+----------------------------------+
-; Parameter Name ; Value    ; Type                             ;
-+----------------+----------+----------------------------------+
-; DATA_BITS      ; 9        ; Signed Integer                   ;
-; SLOWEST_FREQ   ; 500      ; Signed Integer                   ;
-; ICLK_FREQ      ; 48000000 ; Signed Integer                   ;
-; XCLK_FREQ      ; 48000000 ; Signed Integer                   ;
-; TPD            ; 1        ; Signed Integer                   ;
-+----------------+----------+----------------------------------+
-Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings Tables in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
-
-
-+--------------------------------------------------------------+
-; Parameter Settings for User Entity Instance: debounce:de_PTT ;
-+----------------+-------+-------------------------------------+
-; Parameter Name ; Value ; Type                                ;
-+----------------+-------+-------------------------------------+
-; counter_bits   ; 18    ; Signed Integer                      ;
-+----------------+-------+-------------------------------------+
-Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings Tables in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
-
-
-+--------------------------------------------------------------+
-; Parameter Settings for User Entity Instance: debounce:de_dot ;
-+----------------+-------+-------------------------------------+
-; Parameter Name ; Value ; Type                                ;
-+----------------+-------+-------------------------------------+
-; counter_bits   ; 18    ; Signed Integer                      ;
-+----------------+-------+-------------------------------------+
-Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings Tables in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
-
-
-+---------------------------------------------------------------+
-; Parameter Settings for User Entity Instance: debounce:de_dash ;
-+----------------+-------+--------------------------------------+
-; Parameter Name ; Value ; Type                                 ;
-+----------------+-------+--------------------------------------+
-; counter_bits   ; 18    ; Signed Integer                       ;
-+----------------+-------+--------------------------------------+
 Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings Tables in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
 
 
@@ -2198,51 +1547,16 @@ Note: In order to hide this table in the UI and the text report file, please set
 +----------+-------+----------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
 
-+---------------------------------------------------+
-; Port Connectivity Checks: "NWire_xmit:CCxmit"     ;
-+------+--------+----------+------------------------+
-; Port ; Type   ; Severity ; Details                ;
-+------+--------+----------+------------------------+
-; xreq ; Input  ; Info     ; Stuck at VCC           ;
-; xack ; Output ; Info     ; Explicitly unconnected ;
-+------+--------+----------+------------------------+
-
-
-+-------------------------------------------------------+
-; Port Connectivity Checks: "I2S_xmit:J_IQPWM"          ;
-+----------+--------+----------+------------------------+
-; Port     ; Type   ; Severity ; Details                ;
-+----------+--------+----------+------------------------+
-; xmit_rdy ; Output ; Info     ; Explicitly unconnected ;
-+----------+--------+----------+------------------------+
-
-
-+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-; Port Connectivity Checks: "cdc_mcp:iqp"                                                                                                                                             ;
-+------------+--------+----------+----------------------------------------------------------------------------------------------------------------------------------------------------+
-; Port       ; Type   ; Severity ; Details                                                                                                                                            ;
-+------------+--------+----------+----------------------------------------------------------------------------------------------------------------------------------------------------+
-; a_data     ; Input  ; Warning  ; Input port expression (17 bits) is smaller than the input port (32 bits) it drives.  Extra input bit(s) "a_data[31..17]" will be connected to GND. ;
-; b_data_ack ; Output ; Warning  ; Declared by entity but not connected by instance. Logic that only feeds a dangling port will be removed.                                           ;
-+------------+--------+----------+----------------------------------------------------------------------------------------------------------------------------------------------------+
-
-
-+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-; Port Connectivity Checks: "NWire_xmit:P_IQPWM"                                                                                                                               ;
-+-------+-------+----------+---------------------------------------------------------------------------------------------------------------------------------------------------+
-; Port  ; Type  ; Severity ; Details                                                                                                                                           ;
-+-------+-------+----------+---------------------------------------------------------------------------------------------------------------------------------------------------+
-; xdata ; Input ; Warning  ; Input port expression (17 bits) is smaller than the input port (32 bits) it drives.  Extra input bit(s) "xdata[31..17]" will be connected to GND. ;
-+-------+-------+----------+---------------------------------------------------------------------------------------------------------------------------------------------------+
-
-
-+-------------------------------------------------------------------------------------------------------------------------------------------+
-; Port Connectivity Checks: "cdc_mcp:lra"                                                                                                   ;
-+------------+--------+----------+----------------------------------------------------------------------------------------------------------+
-; Port       ; Type   ; Severity ; Details                                                                                                  ;
-+------------+--------+----------+----------------------------------------------------------------------------------------------------------+
-; b_data_ack ; Output ; Warning  ; Declared by entity but not connected by instance. Logic that only feeds a dangling port will be removed. ;
-+------------+--------+----------+----------------------------------------------------------------------------------------------------------+
++--------------------------------------------------------+
+; Port Connectivity Checks: "NWire_xmit:CCxmit"          ;
++-----------+--------+----------+------------------------+
+; Port      ; Type   ; Severity ; Details                ;
++-----------+--------+----------+------------------------+
+; xdata[60] ; Input  ; Info     ; Stuck at VCC           ;
+; xdata[59] ; Input  ; Info     ; Stuck at GND           ;
+; xreq      ; Input  ; Info     ; Stuck at VCC           ;
+; xack      ; Output ; Info     ; Explicitly unconnected ;
++-----------+--------+----------+------------------------+
 
 
 +--------------------------------------------------------------------------------------------------------------------------------------+
@@ -2263,78 +1577,21 @@ Note: In order to hide this table in the UI and the text report file, please set
 +-------+--------+----------+-------------------------------------------------------------------------------------+
 
 
-+------------------------------------------------------+
-; Port Connectivity Checks: "Tx_fifo_ctrl:TXFC"        ;
-+--------------------+-------+----------+--------------+
-; Port               ; Type  ; Severity ; Details      ;
-+--------------------+-------+----------+--------------+
-; Ozy_serialno[7..4] ; Input ; Info     ; Stuck at GND ;
-; Ozy_serialno[3]    ; Input ; Info     ; Stuck at VCC ;
-; Ozy_serialno[2]    ; Input ; Info     ; Stuck at GND ;
-; Ozy_serialno[1]    ; Input ; Info     ; Stuck at VCC ;
-; Ozy_serialno[0]    ; Input ; Info     ; Stuck at GND ;
-+--------------------+-------+----------+--------------+
-
-
-+----------------------------------------------------------------------------------------------------------------------------------------+
-; Port Connectivity Checks: "I2S_rcv:J_IQ"                                                                                               ;
-+---------+--------+----------+----------------------------------------------------------------------------------------------------------+
-; Port    ; Type   ; Severity ; Details                                                                                                  ;
-+---------+--------+----------+----------------------------------------------------------------------------------------------------------+
-; xlrclk  ; Output ; Warning  ; Declared by entity but not connected by instance. Logic that only feeds a dangling port will be removed. ;
-; xBrise  ; Output ; Warning  ; Declared by entity but not connected by instance. Logic that only feeds a dangling port will be removed. ;
-; xBfall  ; Output ; Warning  ; Declared by entity but not connected by instance. Logic that only feeds a dangling port will be removed. ;
-; xLRrise ; Output ; Warning  ; Declared by entity but not connected by instance. Logic that only feeds a dangling port will be removed. ;
-; xLRfall ; Output ; Warning  ; Declared by entity but not connected by instance. Logic that only feeds a dangling port will be removed. ;
-+---------+--------+----------+----------------------------------------------------------------------------------------------------------+
-
-
-+--------------------------------------------------------------------------------------------------------------------------------------------------------------+
-; Port Connectivity Checks: "I2S_rcv:J_MIC"                                                                                                                    ;
-+-----------+--------+----------+------------------------------------------------------------------------------------------------------------------------------+
-; Port      ; Type   ; Severity ; Details                                                                                                                      ;
-+-----------+--------+----------+------------------------------------------------------------------------------------------------------------------------------+
-; xData     ; Output ; Warning  ; Output or bidir port (32 bits) is wider than the port expression (16 bits) it drives; bit(s) "xData[31..16]" have no fanouts ;
-; xData_rdy ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed.                                          ;
-; xlrclk    ; Output ; Warning  ; Declared by entity but not connected by instance. Logic that only feeds a dangling port will be removed.                     ;
-; xBrise    ; Output ; Warning  ; Declared by entity but not connected by instance. Logic that only feeds a dangling port will be removed.                     ;
-; xBfall    ; Output ; Warning  ; Declared by entity but not connected by instance. Logic that only feeds a dangling port will be removed.                     ;
-; xLRrise   ; Output ; Warning  ; Declared by entity but not connected by instance. Logic that only feeds a dangling port will be removed.                     ;
-; xLRfall   ; Output ; Warning  ; Declared by entity but not connected by instance. Logic that only feeds a dangling port will be removed.                     ;
-+-----------+--------+----------+------------------------------------------------------------------------------------------------------------------------------+
-
-
-+---------------------------------------------------------------------------------------------------------------------------------------+
-; Port Connectivity Checks: "clk_lrclk_gen:clrgen"                                                                                      ;
-+--------+--------+----------+----------------------------------------------------------------------------------------------------------+
-; Port   ; Type   ; Severity ; Details                                                                                                  ;
-+--------+--------+----------+----------------------------------------------------------------------------------------------------------+
-; Brise  ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed.                      ;
-; Bfall  ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed.                      ;
-; Speed  ; Input  ; Info     ; Stuck at GND                                                                                             ;
-; LRrise ; Output ; Warning  ; Declared by entity but not connected by instance. Logic that only feeds a dangling port will be removed. ;
-; LRfall ; Output ; Warning  ; Declared by entity but not connected by instance. Logic that only feeds a dangling port will be removed. ;
-+--------+--------+----------+----------------------------------------------------------------------------------------------------------+
-
-
-+---------------------------------------------------------------------------------------------------------------------------------------+
-; Port Connectivity Checks: "clk_lrclk_gen:lrgen"                                                                                       ;
-+--------+--------+----------+----------------------------------------------------------------------------------------------------------+
-; Port   ; Type   ; Severity ; Details                                                                                                  ;
-+--------+--------+----------+----------------------------------------------------------------------------------------------------------+
-; BCLK   ; Output ; Info     ; Explicitly unconnected                                                                                   ;
-; LRrise ; Output ; Warning  ; Declared by entity but not connected by instance. Logic that only feeds a dangling port will be removed. ;
-; LRfall ; Output ; Warning  ; Declared by entity but not connected by instance. Logic that only feeds a dangling port will be removed. ;
-+--------+--------+----------+----------------------------------------------------------------------------------------------------------+
-
-
-+-----------------------------------------------------------------------------------------------------------------------+
-; Port Connectivity Checks: "gpio_control:gpio_controlSDR"                                                              ;
-+--------------+-------+----------+-------------------------------------------------------------------------------------+
-; Port         ; Type  ; Severity ; Details                                                                             ;
-+--------------+-------+----------+-------------------------------------------------------------------------------------+
-; GPIO[20..16] ; Bidir ; Warning  ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
-+--------------+-------+----------+-------------------------------------------------------------------------------------+
++---------------------------------------------------------+
+; Port Connectivity Checks: "Tx_fifo_ctrl:TXFC"           ;
++-----------------------+-------+----------+--------------+
+; Port                  ; Type  ; Severity ; Details      ;
++-----------------------+-------+----------+--------------+
+; Tx_IQ_mic_data[15..0] ; Input ; Info     ; Stuck at GND ;
+; clean_dash            ; Input ; Info     ; Stuck at GND ;
+; clean_dot             ; Input ; Info     ; Stuck at GND ;
+; clean_PTT_in          ; Input ; Info     ; Stuck at GND ;
+; ADC_OVERLOAD          ; Input ; Info     ; Stuck at GND ;
+; Penny_serialno        ; Input ; Info     ; Stuck at GND ;
+; Merc_serialno         ; Input ; Info     ; Stuck at GND ;
+; Ozy_serialno          ; Input ; Info     ; Stuck at GND ;
+; Penny_ALC             ; Input ; Info     ; Stuck at GND ;
++-----------------------+-------+----------+--------------+
 
 
 +-------------------------------+
@@ -2343,7 +1600,7 @@ Note: In order to hide this table in the UI and the text report file, please set
 Info: *******************************************************************
 Info: Running Quartus II Analysis & Synthesis
     Info: Version 9.0 Build 132 02/25/2009 SJ Web Edition
-    Info: Processing started: Sat Aug 29 15:40:06 2009
+    Info: Processing started: Sun Aug 30 20:18:37 2009
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off Cyclops -c Cyclops
 Info: Found 1 design units, including 1 entities, in source file Tx_fifo_ctrl.v
     Info: Found entity 1: Tx_fifo_ctrl
@@ -2395,8 +1652,6 @@ Info: Found 1 design units, including 1 entities, in source file clock_det.v
     Info: Found entity 1: clock_det
 Info: Found 1 design units, including 1 entities, in source file Cyclops.v
     Info: Found entity 1: Cyclops
-Info: Found 1 design units, including 1 entities, in source file debounce.v
-    Info: Found entity 1: debounce
 Info: Found 1 design units, including 1 entities, in source file flash.v
     Info: Found entity 1: flash
 Info: Found 1 design units, including 1 entities, in source file gpio_control.v
@@ -2411,12 +1666,28 @@ Info: Found 1 design units, including 1 entities, in source file led_blinker.v
     Info: Found entity 1: led_blinker
 Info: Found 1 design units, including 1 entities, in source file LPF_select.v
     Info: Found entity 1: LPF_select
-Warning (10236): Verilog HDL Implicit Net warning at Cyclops.v(1232): created implicit net for "IF_I_PWM"
 Info: Elaborating entity "Cyclops" for the top level hierarchy
-Info: Elaborating entity "gpio_control" for hierarchy "gpio_control:gpio_controlSDR"
-Info: Elaborating entity "SPI_REGS" for hierarchy "gpio_control:gpio_controlSDR|SPI_REGS:spi_regs"
-Info: Elaborating entity "gpio_oport" for hierarchy "gpio_control:gpio_controlSDR|gpio_oport:port1reg"
-Info: Elaborating entity "gpio_oport" for hierarchy "gpio_control:gpio_controlSDR|gpio_oport:port2reg"
+Warning (10036): Verilog HDL or VHDL warning at Cyclops.v(300): object "C12_rst" assigned a value but never read
+Warning (10858): Verilog HDL warning at Cyclops.v(301): object C12_clk used but never assigned
+Warning (10858): Verilog HDL warning at Cyclops.v(334): object IF_mic_Data used but never assigned
+Warning (10240): Verilog HDL Always Construct warning at Cyclops.v(338): inferring latch(es) for variable "IF_tx_IQ_mic_rdy", which holds its previous value in one or more paths through the always construct
+Warning (10030): Net "IF_mic_Data[15]" at Cyclops.v(334) has no driver or initial value, using a default initial value '0'
+Warning (10030): Net "IF_mic_Data[14]" at Cyclops.v(334) has no driver or initial value, using a default initial value '0'
+Warning (10030): Net "IF_mic_Data[13]" at Cyclops.v(334) has no driver or initial value, using a default initial value '0'
+Warning (10030): Net "IF_mic_Data[12]" at Cyclops.v(334) has no driver or initial value, using a default initial value '0'
+Warning (10030): Net "IF_mic_Data[11]" at Cyclops.v(334) has no driver or initial value, using a default initial value '0'
+Warning (10030): Net "IF_mic_Data[10]" at Cyclops.v(334) has no driver or initial value, using a default initial value '0'
+Warning (10030): Net "IF_mic_Data[9]" at Cyclops.v(334) has no driver or initial value, using a default initial value '0'
+Warning (10030): Net "IF_mic_Data[8]" at Cyclops.v(334) has no driver or initial value, using a default initial value '0'
+Warning (10030): Net "IF_mic_Data[7]" at Cyclops.v(334) has no driver or initial value, using a default initial value '0'
+Warning (10030): Net "IF_mic_Data[6]" at Cyclops.v(334) has no driver or initial value, using a default initial value '0'
+Warning (10030): Net "IF_mic_Data[5]" at Cyclops.v(334) has no driver or initial value, using a default initial value '0'
+Warning (10030): Net "IF_mic_Data[4]" at Cyclops.v(334) has no driver or initial value, using a default initial value '0'
+Warning (10030): Net "IF_mic_Data[3]" at Cyclops.v(334) has no driver or initial value, using a default initial value '0'
+Warning (10030): Net "IF_mic_Data[2]" at Cyclops.v(334) has no driver or initial value, using a default initial value '0'
+Warning (10030): Net "IF_mic_Data[1]" at Cyclops.v(334) has no driver or initial value, using a default initial value '0'
+Warning (10030): Net "IF_mic_Data[0]" at Cyclops.v(334) has no driver or initial value, using a default initial value '0'
+Info (10041): Inferred latch for "IF_tx_IQ_mic_rdy" at Cyclops.v(340)
 Info: Elaborating entity "clkmult3" for hierarchy "clkmult3:cm3"
 Info: Elaborating entity "altpll" for hierarchy "clkmult3:cm3|altpll:altpll_component"
 Info: Elaborated megafunction instantiation "clkmult3:cm3|altpll:altpll_component"
@@ -2475,23 +1746,7 @@ Info: Instantiated megafunction "clkmult3:cm3|altpll:altpll_component" with the 
     Info: Parameter "port_extclk2" = "PORT_UNUSED"
     Info: Parameter "port_extclk3" = "PORT_UNUSED"
     Info: Parameter "valid_lock_multiplier" = "1"
-Info: Elaborating entity "cdc_mcp" for hierarchy "cdc_mcp:dfs"
-Info: Elaborating entity "cdc_sync" for hierarchy "cdc_mcp:dfs|cdc_sync:rdy"
-Info: Elaborating entity "pulsegen" for hierarchy "cdc_mcp:dfs|pulsegen:pls"
-Info: Elaborating entity "cdc_sync" for hierarchy "cdc_mcp:dfs|cdc_sync:ack"
-Info: Elaborating entity "clk_lrclk_gen" for hierarchy "clk_lrclk_gen:lrgen"
-Warning (10230): Verilog HDL assignment warning at clk_lrclk_gen.v(39): truncated value with size 32 to match size of target (16)
-Warning (10230): Verilog HDL assignment warning at clk_lrclk_gen.v(41): truncated value with size 32 to match size of target (16)
-Warning (10230): Verilog HDL assignment warning at clk_lrclk_gen.v(43): truncated value with size 32 to match size of target (16)
-Warning (10230): Verilog HDL assignment warning at clk_lrclk_gen.v(45): truncated value with size 32 to match size of target (16)
-Warning (10230): Verilog HDL assignment warning at clk_lrclk_gen.v(82): truncated value with size 32 to match size of target (5)
-Warning (10230): Verilog HDL assignment warning at clk_lrclk_gen.v(84): truncated value with size 32 to match size of target (5)
-Warning (10230): Verilog HDL assignment warning at clk_lrclk_gen.v(86): truncated value with size 32 to match size of target (5)
-Warning (10230): Verilog HDL assignment warning at clk_lrclk_gen.v(88): truncated value with size 32 to match size of target (5)
-Info: Elaborating entity "NWire_rcv" for hierarchy "NWire_rcv:P_MIC"
-Info: Elaborating entity "I2S_rcv" for hierarchy "I2S_rcv:J_MIC"
 Info: Elaborating entity "NWire_rcv" for hierarchy "NWire_rcv:M_IQ"
-Info: Elaborating entity "I2S_rcv" for hierarchy "I2S_rcv:J_IQ"
 Info: Elaborating entity "Tx_fifo_ctrl" for hierarchy "Tx_fifo_ctrl:TXFC"
 Info: Elaborating entity "Tx_fifo" for hierarchy "Tx_fifo:TXF"
 Info: Elaborating entity "scfifo" for hierarchy "Tx_fifo:TXF|scfifo:scfifo_component"
@@ -2578,77 +1833,12 @@ Info: Elaborating entity "async_usb" for hierarchy "async_usb:usb1"
 Warning (10230): Verilog HDL assignment warning at async_usb.v(138): truncated value with size 32 to match size of target (9)
 Warning (10230): Verilog HDL assignment warning at async_usb.v(141): truncated value with size 32 to match size of target (9)
 Info: Elaborating entity "cdc_sync" for hierarchy "cdc_sync:cdc_c23"
-Info: Elaborating entity "cdc_mcp" for hierarchy "cdc_mcp:lra"
-Info: Elaborating entity "cdc_sync" for hierarchy "cdc_mcp:lra|cdc_sync:rdy"
-Info: Elaborating entity "cdc_sync" for hierarchy "cdc_mcp:lra|cdc_sync:ack"
+Info: Elaborating entity "pulsegen" for hierarchy "pulsegen:cdc_m"
 Info: Elaborating entity "NWire_xmit" for hierarchy "NWire_xmit:M_LRAudio"
-Info: Elaborating entity "I2S_xmit" for hierarchy "I2S_xmit:J_LRAudio"
-Warning (10230): Verilog HDL assignment warning at I2S_xmit.v(81): truncated value with size 32 to match size of target (4)
-Info: Elaborating entity "cdc_sync" for hierarchy "cdc_mcp:iqp|cdc_sync:rdy"
-Info: Elaborating entity "cdc_sync" for hierarchy "cdc_mcp:iqp|cdc_sync:ack"
 Info: Elaborating entity "NWire_xmit" for hierarchy "NWire_xmit:CCxmit"
-Info: Elaborating entity "NWire_rcv" for hierarchy "NWire_rcv:p_ser"
-Info: Elaborating entity "NWire_rcv" for hierarchy "NWire_rcv:m_ser"
-Info: Elaborating entity "debounce" for hierarchy "debounce:de_PTT"
 Info: Elaborating entity "led_blinker" for hierarchy "led_blinker:BLINK_D1"
 Info: Elaborating entity "led_blinker" for hierarchy "led_blinker:BLINK_D4"
 Info: Elaborating entity "ADF4112_SPI" for hierarchy "ADF4112_SPI:ADF4112"
-Warning: Net is missing source, defaulting to GND
-    Warning (12110): Net "IF_I_PWM" is missing source, defaulting to GND
-Warning: Net is missing source, defaulting to GND
-    Warning (12110): Net "IF_I_PWM" is missing source, defaulting to GND
-Warning: Net is missing source, defaulting to GND
-    Warning (12110): Net "IF_I_PWM" is missing source, defaulting to GND
-Warning: Net is missing source, defaulting to GND
-    Warning (12110): Net "IF_I_PWM" is missing source, defaulting to GND
-Warning: Net is missing source, defaulting to GND
-    Warning (12110): Net "IF_I_PWM" is missing source, defaulting to GND
-Warning: Net is missing source, defaulting to GND
-    Warning (12110): Net "IF_I_PWM" is missing source, defaulting to GND
-Warning: Net is missing source, defaulting to GND
-    Warning (12110): Net "IF_I_PWM" is missing source, defaulting to GND
-Warning: Net is missing source, defaulting to GND
-    Warning (12110): Net "IF_I_PWM" is missing source, defaulting to GND
-Warning: Net is missing source, defaulting to GND
-    Warning (12110): Net "IF_I_PWM" is missing source, defaulting to GND
-Warning: Net is missing source, defaulting to GND
-    Warning (12110): Net "IF_I_PWM" is missing source, defaulting to GND
-Warning: Net is missing source, defaulting to GND
-    Warning (12110): Net "IF_I_PWM" is missing source, defaulting to GND
-Warning: Net is missing source, defaulting to GND
-    Warning (12110): Net "IF_I_PWM" is missing source, defaulting to GND
-Warning: Net is missing source, defaulting to GND
-    Warning (12110): Net "IF_I_PWM" is missing source, defaulting to GND
-Warning: Net is missing source, defaulting to GND
-    Warning (12110): Net "IF_I_PWM" is missing source, defaulting to GND
-Warning: Net is missing source, defaulting to GND
-    Warning (12110): Net "IF_I_PWM" is missing source, defaulting to GND
-Warning: Net is missing source, defaulting to GND
-    Warning (12110): Net "IF_I_PWM" is missing source, defaulting to GND
-Warning: Net is missing source, defaulting to GND
-    Warning (12110): Net "IF_I_PWM" is missing source, defaulting to GND
-Warning: Net is missing source, defaulting to GND
-    Warning (12110): Net "IF_I_PWM" is missing source, defaulting to GND
-Warning: Net is missing source, defaulting to GND
-    Warning (12110): Net "IF_I_PWM" is missing source, defaulting to GND
-Warning: Net is missing source, defaulting to GND
-    Warning (12110): Net "IF_I_PWM" is missing source, defaulting to GND
-Warning: Net is missing source, defaulting to GND
-    Warning (12110): Net "IF_I_PWM" is missing source, defaulting to GND
-Warning: Net is missing source, defaulting to GND
-    Warning (12110): Net "IF_I_PWM" is missing source, defaulting to GND
-Warning: Net is missing source, defaulting to GND
-    Warning (12110): Net "IF_I_PWM" is missing source, defaulting to GND
-Warning: Net is missing source, defaulting to GND
-    Warning (12110): Net "IF_I_PWM" is missing source, defaulting to GND
-Warning: Net is missing source, defaulting to GND
-    Warning (12110): Net "IF_I_PWM" is missing source, defaulting to GND
-Warning: Net is missing source, defaulting to GND
-    Warning (12110): Net "IF_I_PWM" is missing source, defaulting to GND
-Warning: Net is missing source, defaulting to GND
-    Warning (12110): Net "IF_I_PWM" is missing source, defaulting to GND
-Warning: Net is missing source, defaulting to GND
-    Warning (12110): Net "IF_I_PWM" is missing source, defaulting to GND
 Warning: Inferred RAM node "RFIFO:RXF|mem~0" from synchronous design logic.  Pass-through logic has been added to match the read-during-write behavior of the original design.
 Info: Inferred 1 megafunctions from design logic
     Info: Inferred altsyncram megafunction from the following design logic: "RFIFO:RXF|mem~0" 
@@ -2688,41 +1878,10 @@ Info: Instantiated megafunction "RFIFO:RXF|altsyncram:mem_rtl_0" with the follow
     Info: Parameter "READ_DURING_WRITE_MODE_MIXED_PORTS" = "OLD_DATA"
 Info: Found 1 design units, including 1 entities, in source file db/altsyncram_h2j1.tdf
     Info: Found entity 1: altsyncram_h2j1
-Warning: 10 hierarchies have connectivity warnings - see the Connectivity Checks report folder
+Warning: 2 hierarchies have connectivity warnings - see the Connectivity Checks report folder
 Warning: Output pins are stuck at VCC or GND
     Warning (13410): Pin "PKEND" is stuck at VCC
-    Warning (13410): Pin "GPIO_nIOE" is stuck at GND
-Info: 89 registers lost all their fanouts during netlist optimizations. The first 89 are displayed below.
-    Info: Register "cdc_mcp:iqp|cdc_sync:ack|sigb[0]" lost all its fanouts during netlist optimizations.
-    Info: Register "cdc_mcp:iqp|cdc_sync:ack|q1[0]" lost all its fanouts during netlist optimizations.
-    Info: Register "cdc_mcp:iqp|b_data_ack" lost all its fanouts during netlist optimizations.
-    Info: Register "cdc_mcp:iqp|cdc_sync:rdy|q1[0]" lost all its fanouts during netlist optimizations.
-    Info: Register "cdc_mcp:iqp|a_rdy" lost all its fanouts during netlist optimizations.
-    Info: Register "NWire_xmit:M_LRAudio|dly_cnt[24]" lost all its fanouts during netlist optimizations.
-    Info: Register "NWire_xmit:M_LRAudio|dly_cnt[23]" lost all its fanouts during netlist optimizations.
-    Info: Register "NWire_xmit:M_LRAudio|dly_cnt[22]" lost all its fanouts during netlist optimizations.
-    Info: Register "NWire_xmit:M_LRAudio|dly_cnt[21]" lost all its fanouts during netlist optimizations.
-    Info: Register "NWire_xmit:M_LRAudio|dly_cnt[20]" lost all its fanouts during netlist optimizations.
-    Info: Register "NWire_xmit:M_LRAudio|dly_cnt[19]" lost all its fanouts during netlist optimizations.
-    Info: Register "NWire_xmit:M_LRAudio|dly_cnt[18]" lost all its fanouts during netlist optimizations.
-    Info: Register "NWire_xmit:M_LRAudio|dly_cnt[17]" lost all its fanouts during netlist optimizations.
-    Info: Register "NWire_xmit:M_LRAudio|dly_cnt[16]" lost all its fanouts during netlist optimizations.
-    Info: Register "NWire_xmit:M_LRAudio|dly_cnt[15]" lost all its fanouts during netlist optimizations.
-    Info: Register "NWire_xmit:M_LRAudio|dly_cnt[14]" lost all its fanouts during netlist optimizations.
-    Info: Register "NWire_xmit:M_LRAudio|dly_cnt[13]" lost all its fanouts during netlist optimizations.
-    Info: Register "NWire_xmit:M_LRAudio|dly_cnt[12]" lost all its fanouts during netlist optimizations.
-    Info: Register "NWire_xmit:M_LRAudio|dly_cnt[11]" lost all its fanouts during netlist optimizations.
-    Info: Register "NWire_xmit:M_LRAudio|dly_cnt[10]" lost all its fanouts during netlist optimizations.
-    Info: Register "NWire_xmit:M_LRAudio|dly_cnt[9]" lost all its fanouts during netlist optimizations.
-    Info: Register "NWire_xmit:M_LRAudio|dly_cnt[8]" lost all its fanouts during netlist optimizations.
-    Info: Register "NWire_xmit:M_LRAudio|dly_cnt[7]" lost all its fanouts during netlist optimizations.
-    Info: Register "NWire_xmit:M_LRAudio|dly_cnt[6]" lost all its fanouts during netlist optimizations.
-    Info: Register "NWire_xmit:M_LRAudio|dly_cnt[5]" lost all its fanouts during netlist optimizations.
-    Info: Register "NWire_xmit:M_LRAudio|dly_cnt[4]" lost all its fanouts during netlist optimizations.
-    Info: Register "NWire_xmit:M_LRAudio|dly_cnt[3]" lost all its fanouts during netlist optimizations.
-    Info: Register "NWire_xmit:M_LRAudio|dly_cnt[2]" lost all its fanouts during netlist optimizations.
-    Info: Register "NWire_xmit:M_LRAudio|dly_cnt[1]" lost all its fanouts during netlist optimizations.
-    Info: Register "NWire_xmit:M_LRAudio|dly_cnt[0]" lost all its fanouts during netlist optimizations.
+Info: 37 registers lost all their fanouts during netlist optimizations. The first 37 are displayed below.
     Info: Register "IF_PWM_state~13" lost all its fanouts during netlist optimizations.
     Info: Register "IF_PWM_state~14" lost all its fanouts during netlist optimizations.
     Info: Register "IF_PWM_state~15" lost all its fanouts during netlist optimizations.
@@ -2738,22 +1897,9 @@ Info: 89 registers lost all their fanouts during netlist optimizations. The firs
     Info: Register "led_blinker:BLINK_D1|LED_state~5" lost all its fanouts during netlist optimizations.
     Info: Register "led_blinker:BLINK_D1|LED_state~6" lost all its fanouts during netlist optimizations.
     Info: Register "led_blinker:BLINK_D1|LED_state~7" lost all its fanouts during netlist optimizations.
-    Info: Register "NWire_rcv:m_ser|TB_state~11" lost all its fanouts during netlist optimizations.
-    Info: Register "NWire_rcv:m_ser|TB_state~12" lost all its fanouts during netlist optimizations.
-    Info: Register "NWire_rcv:m_ser|TB_state~13" lost all its fanouts during netlist optimizations.
-    Info: Register "NWire_rcv:p_ser|TB_state~11" lost all its fanouts during netlist optimizations.
-    Info: Register "NWire_rcv:p_ser|TB_state~12" lost all its fanouts during netlist optimizations.
-    Info: Register "NWire_rcv:p_ser|TB_state~13" lost all its fanouts during netlist optimizations.
     Info: Register "NWire_xmit:CCxmit|NW_state~11" lost all its fanouts during netlist optimizations.
     Info: Register "NWire_xmit:CCxmit|NW_state~12" lost all its fanouts during netlist optimizations.
     Info: Register "NWire_xmit:CCxmit|NW_state~13" lost all its fanouts during netlist optimizations.
-    Info: Register "I2S_xmit:J_IQPWM|TLV_state~10" lost all its fanouts during netlist optimizations.
-    Info: Register "I2S_xmit:J_IQPWM|TLV_state~11" lost all its fanouts during netlist optimizations.
-    Info: Register "NWire_xmit:P_IQPWM|NW_state~11" lost all its fanouts during netlist optimizations.
-    Info: Register "NWire_xmit:P_IQPWM|NW_state~12" lost all its fanouts during netlist optimizations.
-    Info: Register "NWire_xmit:P_IQPWM|NW_state~13" lost all its fanouts during netlist optimizations.
-    Info: Register "I2S_xmit:J_LRAudio|TLV_state~10" lost all its fanouts during netlist optimizations.
-    Info: Register "I2S_xmit:J_LRAudio|TLV_state~11" lost all its fanouts during netlist optimizations.
     Info: Register "NWire_xmit:M_LRAudio|NW_state~11" lost all its fanouts during netlist optimizations.
     Info: Register "NWire_xmit:M_LRAudio|NW_state~12" lost all its fanouts during netlist optimizations.
     Info: Register "NWire_xmit:M_LRAudio|NW_state~13" lost all its fanouts during netlist optimizations.
@@ -2773,28 +1919,21 @@ Info: 89 registers lost all their fanouts during netlist optimizations. The firs
     Info: Register "NWire_rcv:M_IQ|TB_state~11" lost all its fanouts during netlist optimizations.
     Info: Register "NWire_rcv:M_IQ|TB_state~12" lost all its fanouts during netlist optimizations.
     Info: Register "NWire_rcv:M_IQ|TB_state~13" lost all its fanouts during netlist optimizations.
-    Info: Register "NWire_rcv:P_MIC|TB_state~11" lost all its fanouts during netlist optimizations.
-    Info: Register "NWire_rcv:P_MIC|TB_state~12" lost all its fanouts during netlist optimizations.
-    Info: Register "NWire_rcv:P_MIC|TB_state~13" lost all its fanouts during netlist optimizations.
-    Info: Register "I2S_xmit:J_LRAudio|TLV_state.TLV_LR_LO" lost all its fanouts during netlist optimizations.
-    Info: Register "I2S_xmit:J_LRAudio|bit_count[0]" lost all its fanouts during netlist optimizations.
-    Info: Register "I2S_xmit:J_LRAudio|bit_count[1]" lost all its fanouts during netlist optimizations.
-    Info: Register "I2S_xmit:J_LRAudio|bit_count[2]" lost all its fanouts during netlist optimizations.
-    Info: Register "I2S_xmit:J_LRAudio|bit_count[3]" lost all its fanouts during netlist optimizations.
-    Info: Register "I2S_xmit:J_LRAudio|TLV_state.TLV_LR_HI" lost all its fanouts during netlist optimizations.
 Info: Generated suppressed messages file C:/HPSDR/trunk/CyclopsII/Verilog Code/Cyclops/Cyclops.map.smsg
-Info: Implemented 5003 device resources after synthesis - the final resource count might be different
-    Info: Implemented 27 input pins
-    Info: Implemented 46 output pins
-    Info: Implemented 17 bidirectional pins
-    Info: Implemented 4864 logic cells
+Warning: Design contains 1 input pin(s) that do not drive logic
+    Warning (15610): No output dependent on input pin "DOUT"
+Info: Implemented 2878 device resources after synthesis - the final resource count might be different
+    Info: Implemented 9 input pins
+    Info: Implemented 18 output pins
+    Info: Implemented 16 bidirectional pins
+    Info: Implemented 2786 logic cells
     Info: Implemented 48 RAM segments
     Info: Implemented 1 ClockLock PLLs
-Info: Quartus II Analysis & Synthesis was successful. 0 errors, 73 warnings
-    Info: Peak virtual memory: 197 megabytes
-    Info: Processing ended: Sat Aug 29 15:40:33 2009
-    Info: Elapsed time: 00:00:27
-    Info: Total CPU time (on all processors): 00:00:25
+Info: Quartus II Analysis & Synthesis was successful. 0 errors, 28 warnings
+    Info: Peak virtual memory: 192 megabytes
+    Info: Processing ended: Sun Aug 30 20:18:51 2009
+    Info: Elapsed time: 00:00:14
+    Info: Total CPU time (on all processors): 00:00:14
 
 
 +------------------------------------------+
