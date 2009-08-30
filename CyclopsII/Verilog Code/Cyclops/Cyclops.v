@@ -76,6 +76,9 @@ address control space, you address it as the FNL, not the INL.
 				  - Test program for ADF4112 PLL chips on Cyclops PCB, 1st LO = 1030MHz, 2nd LO = 1126MHz
     22 Aug  2009  - 2nd LO = 1126MHz, 1st LO ref = 1MHz and frequency set by data from PC via FX2
     26 Aug  2009  - First release as V1.0
+    29 Aug  2009  - Start removing unwanted code. Penny S# & ALC, 48MHz to Janus, dot, dash, PTT and 
+				  - debounce, Mercury S# and ADC overload, J_IQPWM, P_IQPWM, J_LRAudio, J_IQ
+	30 Aug  2009  - Removed remaining unused code.
   
 */
 
@@ -106,7 +109,6 @@ address control space, you address it as the FNL, not the INL.
 //    AK5394A and LTV320AIC23B connections to OZY FPGA pins
 //
 //    AK_reset      - Atlas C2  - pin 149 - AK5394A reset
-//    C48_clk       - Atlas C3  - pin 150 - 48MHz clock to PWM DACs
 //    J_LR_data     - Atlas C4  - pin 151 - L/R audio to Janus in I2S format 
 //    C5            - Atlas C5  - pin 152 - 12.288MHz clock from Janus
 //    C6            - Atlas C6  - pin 160 - BCLK to Janus
@@ -186,41 +188,22 @@ address control space, you address it as the FNL, not the INL.
 //    DEBUG_LED1    - pin 33
 //    DEBUG_LED2    - pin 34
 //    DEBUG_LED3    - pin 108
-//    FPGA_GPIO1    - pin 67
-//    FPGA_GPIO2    - pin 68
-//    FPGA_GPIO3    - pin 69
-//    FPGA_GPIO4    - pin 70
-//    FPGA_GPIO5    - pin 72
-//    FPGA_GPIO6    - pin 74
-//    FPGA_GPIO7    - pin 75
-//    FPGA_GPIO8    - pin 76
-//    FPGA_GPIO9    - pin 77
-//    FPGA_GPIO10   - pin 80
-//    FPGA_GPIO11   - pin 81
-//    FPGA_GPIO12   - pin 82
-//    FPGA_GPIO13   - pin 84
-//    FPGA_GPIO14   - pin 86
-//    FPGA_GPIO15   - pin 87
-//    FPGA_GPIO16   - pin 88
-//    FPGA_GPIO17   - pin 89
-//
 //
 ////////////////////////////////////////////////////////////////////////////////////
 `timescale 1 ns/100 ps
 
 module Cyclops(
         IF_clk, FX2_FD, FLAGA, FLAGB, FLAGC, SLWR, SLRD, SLOE, PKEND, FIFO_ADR, DOUT,
-        A5, A6, A12, C4, C5, C6, C7, C8, C9, C12, C13, C14, C19, C21, C22, C23, C24,
-        CDOUT, CDOUT_P, PTT_in, AK_reset,DEBUG_LED0,
-        DEBUG_LED1, DEBUG_LED2,DEBUG_LED3, C48_clk, CC, MDOUT, /*FX2_CLK,*/
-        SPI_SCK, SPI_SI, SPI_SO, SPI_CS, GPIO_OUT, GPIO_IN, GPIO_nIOE,
-         ADF4112_SPI_clock, ADF4112_SPI_data, LE1, LE2,					
+         A12, C21,  C23, C24,
+        DEBUG_LED0,
+        DEBUG_LED1, DEBUG_LED2,DEBUG_LED3, CC, MDOUT, 
+        ADF4112_SPI_clock, ADF4112_SPI_data, LE1, LE2,					
         /*FX2_PE0,*/ FX2_PE1, /*FX2_PE2, FX2_PE3,*/ SDOBACK /*, TDO, TCK, TMS */ );
 
 parameter M_TPD   = 4;
 parameter IF_TPD  = 2;
 
-localparam Ozy_serialno = 8'd10;	// Serial number of this version
+localparam Ozy_serialno = 8'd11;	// Serial number of this version
 
 localparam RX_FIFO_SZ  = 2048; // 16 by 2048 deep RX FIFO
 localparam TX_FIFO_SZ  = 4096; // 16 by 4096 deep TX FIFO
@@ -244,43 +227,12 @@ output wire         DEBUG_LED0;     // LEDs on OZY board
 output wire         DEBUG_LED1;
 output wire         DEBUG_LED2;
 output wire         DEBUG_LED3;
-input  wire         CDOUT;          // A/D data from TLV320AIC23B
-input  wire         PTT_in;         // PTT active high from Atlas bus
-
-input  wire         A5;             // NWire data from Penelope (serial number and ALC data)
-input  wire         A6;             // NWire data from Mercury (serial number)
 input  wire         A12;            // NWire spectrum data from Mercury
-
-output wire         C4;             // J_LR_data - Left & Right audio data in I2S format to Janus
-input  wire         C5;             // 12.288Mhz from Janus
-output wire         C6;             // BCLK to Janus
-output wire         C7;             // LRCLK to Janus
-output wire         C8;             // CBCLK to Janus
-output wire         C9;             // CLRCLK to Janus
-output wire         C12;            // J_IQ_data - Rx data to TLV320AIC23B to Janus
-output wire         C13;            // DFS0
-output wire         C14;            // DFS1
-output wire         C19;            // P_IQ_data - Rx data to TLV320AIC23B on Penelope
 output wire         C21;            // Spectrum data Trigger signal to Mercury
-input  wire         C22;            // P_IQ_sync from Penelope
 input  wire         C23;            // M_LR_sync from Mercury
 output wire         C24;            // M_LR_data - Left & Right audio data in NWire format to Mercury
 
-
-output wire         AK_reset;       // reset for AK5394A - active low
-output wire         C48_clk;        // 48MHz clock to Janus for PWM DACs 
 output wire         CC;             // Command and Control data to Atlas bus 
-input  wire         CDOUT_P;        // Mic data from Penelope
-
-// interface lines for GPIO control 
-//input  wire         FX2_CLK;        // master system clock from FX2 
-input  wire         SPI_SCK;        // SPI SCK from FX2
-input  wire         SPI_SI;         // SPI serial in from FX2
-inout  wire         SPI_SO;         // SPI serial out to FX2
-input  wire         SPI_CS;         // FPGA chip select from FX2
-output wire  [15:0] GPIO_OUT;       // OZY GPIO lines
-input  wire   [7:0] GPIO_IN;        // OZY GPIO lines
-output wire 		GPIO_nIOE;      // enable GPIO driver chips 
 
 // interface pins for JTAG programming via Atlas bus
 //input  wire         FX2_PE0;        // Port E on FX2
@@ -292,23 +244,12 @@ input  wire         SDOBACK;        // A25 on Atlas
 //output wire         TCK;            // A24 on Atlas
 //output wire         TMS;            // A23 on Atlas
 
-// internal signals
-wire          dot_n;    // CW dot key, active low
-wire          dash_n;   // CW dash key, active low
-wire 	      PTT_n;    // PTT from DB9 pin 8, active low 
-
 // connections to Cyclops
 output  ADF4112_SPI_clock;	    // SPI clock to ADF4112s
 output  ADF4112_SPI_data;		// SPI data to ADF4112s
 output  LE1;					// Data latch, First LO
 output  LE2;
 
-// alias dot, dash and PTT to appropriate GPIO lines 
-assign dot_n   	= GPIO_IN[6];
-assign dash_n  	= GPIO_IN[5];   
-assign PTT_n 	= GPIO_IN[7]; 
-
-assign GPIO_nIOE = 1'b0; 
 
 // link JTAG pins through
 //assign TMS = FX2_PE3;
@@ -316,19 +257,7 @@ assign GPIO_nIOE = 1'b0;
 //assign TDO = FX2_PE0;  // TDO on our slot ties to TDI on next slot  
 assign FX2_PE1 = SDOBACK;
 
-///////////////////////////////////////////////////////////////
-//
-//              GPIO
-//
-///////////////////////////////////////////////////////////////
-// instantiate gpio control block 
-gpio_control gpio_controlSDR(
-                .SCK(SPI_SCK), 
-                .SI(SPI_SI), 
-                .SO(SPI_SO), 
-                .CS(SPI_CS), 
-                .GPIO({GPIO_IN,GPIO_OUT})
-							 );
+
 ///////////////////////////////////////////////////////////////
 //
 //              3X clock multiplier  48MHz -> 144Mhz
@@ -340,18 +269,6 @@ reg  IF_rst, cmult_rst;
 
 clkmult3 cm3 (.areset(cmult_rst), .inclk0(IF_clk),.c0(C144_clk), .locked(C144_clk_locked));
 
-
-//////////////////////////////////////////////////////////////
-//
-// 48MHz clock to Janus
-//
-/////////////////////////////////////////////////////////////
-
-reg   [1:0] IF_conf;
-
-// **** only send 48MHz clock to Atlas bus if Mercury not fitted to see effect on spurs
-// IF_conf[1] = 1 if Mercury selected for Rx output
-assign C48_clk = IF_conf[1] ? 1'b0 : IF_clk; 	// 12MHz clock to PWM DAC on Janus only if Mercury not selected
 
 //////////////////////////////////////////////////////////////
 //
@@ -392,68 +309,9 @@ end
 
 assign C144_rst  = !C144_clk_locked;
 
-assign AK_reset = IF_count[28];  // AK_reset (active low) is long after powerup
 
-///////////////////////////////////////////////////////////////////////////////////////////////////////
-//
-// Create BCLK/LRCLK and CBCLK/CLRCLK for Janus
-//
-// make sure CBCLK/CLRCLK and BCLK/LRCLK stay synced when SPEED changes
-//
-///////////////////////////////////////////////////////////////////////////////////////////////////////
-reg        C12_cgen_rst;
-wire [1:0] C12_speed;
-reg        IF_DFS0;       // used to set AK5394A speed
-reg        IF_DFS1;       // ditto 
-reg  [1:0] IF_last_DFS;
-wire       IF_dfs_change;
-wire       C12_ack;
+reg   [1:0] IF_conf;
 
-localparam SPEED_48K = 2'b00;
-
-assign C13 = IF_DFS0;
-assign C14 = IF_DFS1;
-
-assign C12_clk = C5;
-
-always @(posedge IF_clk)
-begin
-  if (IF_rst)
-    IF_last_DFS <= #IF_TPD 2'b00;
-  else
-    IF_last_DFS <= #IF_TPD {IF_DFS1, IF_DFS0};
-end
-
-assign IF_dfs_change = (IF_last_DFS != {IF_DFS1, IF_DFS0});
-
-// transfer IF_DFS1, IF_DFS0 into C12_clk domain
-cdc_mcp #(2) dfs (.a_rst(IF_rst),  .a_clk(IF_clk),  .a_data({IF_DFS1,IF_DFS0}), .a_data_rdy(IF_dfs_change),
-                  .b_rst(C12_rst), .b_clk(C12_clk), .b_data(C12_speed), .b_data_ack(C12_ack));
-
-always @(posedge C12_clk)
-begin
-  if (C12_rst)
-    C12_cgen_rst <= 1'b1;
-  else if (C12_ack)
-    C12_cgen_rst <= 1'b1; // resynchronize all the BCLK/LRCLK/CBCLK/CLRCLK for the new speed
-  else
-    C12_cgen_rst <= 1'b0;
-end
-
-wire C12_LRCLK, C12_cbrise, C12_cbfall, C12_rise, C12_fall;
-wire C12_CBCLK, C12_CLRCLK;
-
-clk_lrclk_gen #(.CLK_FREQ(12288000))
-         lrgen (.reset(C12_cgen_rst), .CLK_IN(C12_clk), .Brise(C12_cbrise), .Bfall(C12_cbfall),
-                .BCLK(),  .LRCLK(C12_LRCLK),  .Speed(C12_speed));
-clk_lrclk_gen #(.CLK_FREQ(12288000))
-        clrgen (.reset(C12_cgen_rst), .CLK_IN(C12_clk), .Brise(C12_rise), .Bfall(C12_fall),
-                .BCLK(C12_CBCLK), .LRCLK(C12_CLRCLK), .Speed(SPEED_48K));
-
-assign C6 = C12_clk;
-assign C7 = C12_LRCLK;
-assign C8 = C12_CBCLK;
-assign C9 = C12_CLRCLK;
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////
 //
@@ -468,7 +326,6 @@ wire [47:0] IF_M_IQ_Data;
 wire        IF_M_IQ_Data_rdy;
 wire [47:0] IF_J_IQ_Data;
 wire        IF_J_IQ_Data_rdy;
-reg         IF_mic;
 reg   [3:0] IF_clock_s;
 wire [63:0] IF_tx_IQ_mic_data;
 reg         IF_tx_IQ_mic_rdy;
@@ -482,27 +339,15 @@ begin
     IF_tx_IQ_mic_rdy = 1'b0;
   else if (IF_conf[1])
     IF_tx_IQ_mic_rdy = IF_M_IQ_Data_rdy;
-  else if (IF_conf[0])
-    IF_tx_IQ_mic_rdy = IF_P_mic_Data_rdy;
-  else
-    IF_tx_IQ_mic_rdy = IF_J_IQ_Data_rdy;
 end
 
-assign IF_IQ_Data    = (IF_conf[1] ? IF_M_IQ_Data  : IF_J_IQ_Data);
-                    
-assign IF_mic_Data   = (IF_mic ? IF_P_mic_Data : IF_J_mic_Data);
+assign IF_IQ_Data    = IF_M_IQ_Data;
 
+
+// ***** this needs to be left - find out why later *****
 assign IF_tx_IQ_mic_data = {IF_IQ_Data, IF_mic_Data};
 
-NWire_rcv #(.DATA_BITS(16), .ICLK_FREQ(144000000), .XCLK_FREQ(48000000), .SLOWEST_FREQ(20000))
-    P_MIC (.irst(C144_rst), .iclk(C144_clk), .xrst(IF_rst), .xclk(IF_clk),
-           .xrcv_rdy(IF_P_mic_Data_rdy), .xrcv_ack(IF_tx_IQ_mic_ack),
-           .xrcv_data(IF_P_mic_Data), .din(CDOUT_P) );
 
-// Get I2S CDOUT mic data from Janus.  NOTE: only 16 bits used
-I2S_rcv #(32,2,1) // WARNING: values 2,1 may need adjusting for best capture of data
-    J_MIC (.xrst(IF_rst), .xclk(IF_clk), .BCLK(C12_CBCLK), .LRCLK(C12_CLRCLK), .din(CDOUT),
-           .xData(IF_J_mic_Data), .xData_rdy(IF_J_mic_Data_rdy));
 
 
 NWire_rcv #(.DATA_BITS(48), .ICLK_FREQ(144000000), .XCLK_FREQ(48000000), .SLOWEST_FREQ(20000))
@@ -510,10 +355,6 @@ NWire_rcv #(.DATA_BITS(48), .ICLK_FREQ(144000000), .XCLK_FREQ(48000000), .SLOWES
            .xrcv_rdy(IF_M_IQ_Data_rdy), .xrcv_ack(IF_tx_IQ_mic_ack),
            .xrcv_data(IF_M_IQ_Data), .din(MDOUT) );
 
-// Get I2S DOUT IQ data from Janus
-I2S_rcv #(48,2,1) // WARNING: values 2,1 may need adjusting for best capture of data
-    J_IQ (.xrst(IF_rst), .xclk(IF_clk), .BCLK(C12_clk), .LRCLK(C12_LRCLK), .din(DOUT),
-          .xData(IF_J_IQ_Data), .xData_rdy(IF_J_IQ_Data_rdy));
 
 ///////////////////////////////////////////////////////////////
 //
@@ -535,14 +376,6 @@ wire            IF_tx_fifo_empty;
 wire [RFSZ-1:0] IF_Rx_fifo_used;    // read side count
 wire            IF_Rx_fifo_full;
 
-wire            clean_dash;      // debounced dash
-wire            clean_dot;       // debounced dot
-wire            clean_PTT_in;    // debounced button
-reg       [7:0] Penny_serialno;
-reg       [7:0] Merc_serialno;
-reg      [11:0] Penny_ALC;
-
-reg             ADC_OVERLOAD;
 wire   [RFSZ:0] RX_USED;
 wire            IF_tx_fifo_clr;
 
@@ -551,8 +384,8 @@ assign RX_USED = {IF_Rx_fifo_full,IF_Rx_fifo_used};
 Tx_fifo_ctrl #(RX_FIFO_SZ, TX_FIFO_SZ) TXFC 
            (IF_rst, IF_clk, IF_tx_fifo_wdata, IF_tx_fifo_wreq, IF_tx_fifo_full, IF_tx_fifo_used,
             IF_tx_fifo_clr, IF_tx_IQ_mic_rdy, IF_tx_IQ_mic_ack,
-            IF_tx_IQ_mic_data, clean_dash, clean_dot, clean_PTT_in, ADC_OVERLOAD,
-            Penny_serialno, Merc_serialno, Ozy_serialno, Penny_ALC);
+            IF_tx_IQ_mic_data, 1'b0, 1'b0, 1'b0, 1'b0,
+            8'b0, 8'b0, 8'b0, 12'b0);
 
 ///////////////////////////////////////////////////////////////
 //
@@ -589,10 +422,6 @@ reg         IF_Rx_fifo_wreq;
 RFIFO RXF (.rst(IF_rst), .clk (IF_clk), .full(IF_Rx_fifo_full), .usedw(IF_Rx_fifo_used),
              .wrreq (IF_Rx_fifo_wreq), .data (IF_Rx_fifo_wdata), 
              .rdreq (IF_Rx_fifo_rreq), .q    (IF_Rx_fifo_rdata) );
-/*Rx_fifo RXF (.sclr(IF_rst), .clock (IF_clk), .full(IF_Rx_fifo_full), .usedw(IF_Rx_fifo_used),
-             .wrreq (IF_Rx_fifo_wreq), .data (IF_Rx_fifo_wdata), 
-             .rdreq (IF_Rx_fifo_rreq), .q    (IF_Rx_fifo_rdata) );
-*/
 
 /////////////////////////////////////////////////////////////
 //
@@ -897,10 +726,8 @@ begin
   if (IF_rst)
   begin // set up default values - 0 for now
     // RX_CONTROL_1
-    {IF_DFS1, IF_DFS0} <= 2'b00;   // decode speed 
     IF_clock_s         <= 4'b0100; // decode clock source - default Mercury
     IF_conf            <= 2'b00;   // decode configuration
-    IF_mic             <= 1'b0;    // decode microphone source
     // RX_CONTROL_2
     IF_mode            <= 1'b0;    // decode mode, normal or Class E PA
     IF_OC              <= 7'b0;    // decode open collectors on Penelope
@@ -920,10 +747,8 @@ begin
     if (IF_Rx_ctrl_0[7:1] == 7'b0000_000)
     begin
       // RX_CONTROL_1
-      {IF_DFS1, IF_DFS0}  <= IF_Rx_ctrl_1[1:0]; // decode speed 
       IF_clock_s[2:0]     <= IF_Rx_ctrl_1[4:2]; // decode clock source
       IF_conf             <= IF_Rx_ctrl_1[6:5]; // decode configuration
-      IF_mic              <= IF_Rx_ctrl_1[7];   // decode microphone source
       // RX_CONTROL_2
       IF_mode             <= IF_Rx_ctrl_2[0];   // decode mode, normal or Class E PA
       IF_OC               <= IF_Rx_ctrl_2[7:1]; // decode open collectors on Penelope
@@ -1003,16 +828,15 @@ reg   [2:0] IF_PWM_state;      // state for PWM
 reg   [2:0] IF_PWM_state_next; // next state for PWM
 reg  [15:0] IF_Left_Data;      // Left 16 bit PWM data for D/A converter
 reg  [15:0] IF_Right_Data;     // Right 16 bit PWM data for D/A converter
-//reg  [15:0] IF_I_PWM;          // I 16 bit PWM data for D/A conveter
 reg  [15:0] PLL_freq;		// frequency for First LO
 
-reg  [15:0] IF_Q_PWM;          // Q 16 bit PWM data for D/A conveter
-reg         IF_get_samples;
+// reg  [15:0] IF_Q_PWM;          // Q 16 bit PWM data for D/A conveter
+wire         IF_get_samples;
 wire        IF_get_rx_data;
 wire        IF_bleed;
 reg  [12:0] IF_bleed_cnt;
 reg         IF_xmit_req;
-reg         IF_xack, IF_xrdy;
+wire         IF_xack, IF_xrdy;
 
 // Bleed the RX FIFO if no data is being sent to Mercury/Janus or Penelope/Janus so that
 // new RX Control data keeps coming in. Otherwise everything will come to a halt.  Have
@@ -1065,8 +889,8 @@ begin
     PLL_freq 	<= #IF_TPD IF_Rx_fifo_rdata;
 
   // get Q audio
-  if (IF_PWM_state == PWM_Q_AUDIO)
-    IF_Q_PWM       <= #IF_TPD IF_Rx_fifo_rdata;
+//  if (IF_PWM_state == PWM_Q_AUDIO)
+//    IF_Q_PWM       <= #IF_TPD IF_Rx_fifo_rdata;
 
   if (IF_rst)
     IF_xmit_req    <= #IF_TPD 1'b0;
@@ -1157,7 +981,7 @@ end
 // I/Q Audio data transfer to Penelope(C19)/Janus(C12)
 //
 ///////////////////////////////////////////////////////////////////////////////
-wire       IF_m_rdy, IF_m_ack, IF_p_rdy, IF_p_ack, IF_j_rdy, IF_j_ack;
+wire       IF_m_rdy, IF_m_ack, IF_p_rdy, IF_p_ack, IF_j_rdy;
 
 wire IF_C23, IF_C22, IF_CLRCLK;
 wire IF_m_pulse, IF_p_pulse, IF_j_pulse;
@@ -1165,55 +989,16 @@ wire IF_m_pulse, IF_p_pulse, IF_j_pulse;
 cdc_sync cdc_c23 (.siga(C23), .rstb(IF_rst), .clkb(IF_clk), .sigb(IF_C23)); // C23 = M_LR_sync
 pulsegen cdc_m   (.sig(IF_C23), .rst(IF_rst), .clk(IF_clk), .pulse(IF_m_pulse));
 
-cdc_sync cdc_c22 (.siga(C22), .rstb(IF_rst), .clkb(IF_clk), .sigb(IF_C22)); // C22 = P_IQ_sync
-pulsegen cdc_p   (.sig(IF_C22), .rst(IF_rst), .clk(IF_clk), .pulse(IF_p_pulse));
-
-cdc_sync cdc_clr (.siga(C12_CLRCLK), .rstb(IF_rst), .clkb(IF_clk), .sigb(IF_CLRCLK));
-pulsegen cdc_j   (.sig(IF_CLRCLK), .rst(IF_rst), .clk(IF_clk), .pulse(IF_j_pulse));
-
 // IF_get_samples produces a single pulse telling when its time (48/96/192Khz) to get
-// new data from RX_FIFO and send it to Mercury, Penelope or Janus
-always @*
-begin
-  if (IF_conf[1])
-    IF_get_samples = IF_m_pulse;  // Mercury installed so use rising edge of C23 (M_LR_sync)
-  else if (IF_conf[0])
-    IF_get_samples = IF_p_pulse;  // Penelope installed so use rising edge of C22 (P_IQ_sync)
-  else
-    IF_get_samples = IF_j_pulse;  // use Janus so use rising edge of C23 (C12_CLRCLK)
-end
+// new data from RX_FIFO and send it to Mercury
 
-always @*
-begin
-  if (IF_conf[1])           // Mercury installed
-    IF_xrdy = IF_m_rdy;
-  else if (IF_conf[0])      // Penelope installed 
-    IF_xrdy = IF_p_rdy;
-  else
-    IF_xrdy = IF_j_rdy;
-end
+assign IF_get_samples = IF_m_pulse;  // Mercury installed so use rising edge of C23 (M_LR_sync)
 
-assign IF_j_ack = !IF_j_rdy;
+assign IF_xack = IF_m_ack;
+assign IF_xrdy = IF_m_rdy;
 
-always @*
-begin
-  if (IF_conf[1])           // Mercury installed
-    IF_xack = IF_m_ack;
-  else if (IF_conf[0])      // Penelope installed
-    IF_xack = IF_p_ack;
-  else
-    IF_xack = IF_j_ack;
-end
 
-wire   C12_j_rdy;
-wire   C12_j_ack;
-wire  [31:0] C12_LR_Data, C12_IQPWM;
-
-cdc_sync cdc_jrdy (.siga(C12_j_rdy), .rstb(IF_rst), .clkb(IF_clk), .sigb(IF_j_rdy));
-cdc_sync cdc_jack (.siga(IF_j_rdy), .rstb(C12_rst), .clkb(C12_clk), .sigb(C12_j_ack));
-// transfer IF_Left_Data, IF_Right_Data into C12_clk domain.  These only change once every 48Khz
-cdc_mcp #(32) lra (.a_rst(IF_rst),  .a_clk(IF_clk),  .a_data({IF_Left_Data,IF_Right_Data}), .a_data_rdy(IF_xmit_req),
-                   .b_rst(C12_rst), .b_clk(C12_clk), .b_data(C12_LR_Data));
+// **** need the following code in order to get data from Mercury - check exactly what is needed later ****
 
 // 16 bits, two channels for PWM DAC on Mercury or Janus
 NWire_xmit #(.SEND_FREQ(50000),.DATA_BITS(32), .ICLK_FREQ(144000000), .XCLK_FREQ(48000000))
@@ -1221,24 +1006,6 @@ NWire_xmit #(.SEND_FREQ(50000),.DATA_BITS(32), .ICLK_FREQ(144000000), .XCLK_FREQ
              .xdata({IF_Left_Data,IF_Right_Data}), .xreq(IF_xmit_req), .xrdy(IF_m_rdy),
              .xack(IF_m_ack), .dout(C24));
 
-I2S_xmit #(.DATA_BITS(32))
-  J_LRAudio (.rst(C12_rst), .lrclk(C12_CLRCLK), .clk(C12_CBCLK), .CBrise(C12_cbrise),
-             .CBfall(C12_cbfall), .sample(C12_LR_Data), .outbit(C4),
-             .xmit_rdy(C12_j_rdy), .xmit_ack(C12_j_ack));
-
-// 16 bits, two channels for TLV320AIC23B D/A converter on Penelope or Janus
-NWire_xmit #(.SEND_FREQ(50000),.DATA_BITS(32), .ICLK_FREQ(144000000), .XCLK_FREQ(48000000))
-  P_IQPWM (.irst(C144_rst), .iclk(C144_clk), .xrst(IF_rst), .xclk(IF_clk),
-           .xdata({IF_I_PWM,IF_Q_PWM}), .xreq(IF_xmit_req), .xrdy(IF_p_rdy),
-           .xack(IF_p_ack), .dout(C19) );
-
-// transfer IF_I_PWM, IF_Q_PWM into C12_clk domain.  These only change once every 48Khz
-cdc_mcp #(32) iqp (.a_rst(IF_rst),  .a_clk(IF_clk),  .a_data({IF_I_PWM,IF_Q_PWM}), .a_data_rdy(IF_xmit_req),
-                   .b_rst(C12_rst), .b_clk(C12_clk), .b_data(C12_IQPWM));
-I2S_xmit #(.DATA_BITS(32))
-  J_IQPWM (.rst(C12_rst), .lrclk(C12_CLRCLK), .clk(C12_CBCLK), .CBrise(C12_cbrise),
-           .CBfall(C12_cbfall), .sample(C12_IQPWM), .outbit(C12),
-           .xmit_rdy(), .xmit_ack(C12_j_ack));
 
 ///////////////////////////////////////////////////////////////
 //
@@ -1287,81 +1054,14 @@ begin
   end
 end
 
-assign IF_xmit_data = {IF_DFS1,IF_DFS0,PTT_out,CC_address,IF_frequency[CC_address],IF_clock_s,IF_OC,IF_mode,IF_PGA,
+// speed is always 192k for now 
+
+assign IF_xmit_data = {1'b1,1'b0,PTT_out,CC_address,IF_frequency[CC_address],IF_clock_s,IF_OC,IF_mode,IF_PGA,
                        IF_DITHER, IF_RAND, IF_ATTEN, IF_TX_relay, IF_Rout, IF_RX_relay};
 
 NWire_xmit  #(.DATA_BITS(61), .ICLK_FREQ(48000000), .XCLK_FREQ(48000000), .SEND_FREQ(10000)) 
       CCxmit (.irst(IF_rst), .iclk(IF_clk), .xrst(IF_rst), .xclk(IF_clk),
               .xdata(IF_xmit_data), .xreq(1'b1), .xrdy(IF_CC_rdy), .xack(), .dout(CC));
-///////////////////////////////////////////////////////
-//
-//                      NWire Penelope data
-//
-///////////////////////////////////////////////////////
-
-// Gets current software serial # as an 8 bit value
-// format. Sends ALC as 12 bits
-
-wire [19:0] IF_pd;
-wire        IF_pd_rdy;
-
-always @(posedge IF_clk)
-begin
-  if (IF_pd_rdy)
-    {Penny_serialno, Penny_ALC} <= #IF_TPD IF_pd;
-end
-
-NWire_rcv  #(.DATA_BITS(20), .ICLK_FREQ(48000000), .XCLK_FREQ(48000000), .SLOWEST_FREQ(500)) 
-      p_ser (.irst(IF_rst), .iclk(IF_clk), .xrst(IF_rst), .xclk(IF_clk),
-             .xrcv_data(IF_pd), .xrcv_rdy(IF_pd_rdy), .xrcv_ack(IF_pd_rdy), .din(A5));
-///////////////////////////////////////////////////////
-//
-//                      NWire Mercury data
-//
-///////////////////////////////////////////////////////
-
-wire  [8:0] IF_md;
-wire        IF_md_rdy;
-
-always @(posedge IF_clk)
-begin
-  if (IF_md_rdy)
-    {Merc_serialno, ADC_OVERLOAD} <= #IF_TPD IF_md;
-end
-
-NWire_rcv  #(.DATA_BITS(9), .ICLK_FREQ(48000000), .XCLK_FREQ(48000000), .SLOWEST_FREQ(500)) 
-      m_ser (.irst(IF_rst), .iclk(IF_clk), .xrst(IF_rst), .xclk(IF_clk),
-             .xrcv_data(IF_md), .xrcv_rdy(IF_md_rdy), .xrcv_ack(IF_md_rdy), .din(A6));
-             
-///////////////////////////////////////////////////////
-//
-//  Debounce PTT from Atlas bus OR pin 6 of DB9 (active low)
-//
-///////////////////////////////////////////////////////
-
-
-debounce de_PTT(.clean_pb(clean_PTT_in), .pb(PTT_in || ~PTT_n), .clk(IF_clk));
-
-
-///////////////////////////////////////////////////////
-//
-//  Debounce dot key - active low
-//
-///////////////////////////////////////////////////////
-
-
-debounce de_dot(.clean_pb(clean_dot), .pb(~dot_n), .clk(IF_clk));
-
-
-///////////////////////////////////////////////////////
-//
-//  Debounce dash key - active low
-//
-///////////////////////////////////////////////////////
-
-
-debounce de_dash(.clean_pb(clean_dash), .pb(~dash_n), .clk(IF_clk));
-
 
 wire led0_off;
 wire led3_off;

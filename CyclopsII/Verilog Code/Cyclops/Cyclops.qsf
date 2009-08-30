@@ -50,39 +50,6 @@ set_global_assignment -name PARTITION_NETLIST_TYPE SOURCE -section_id Top
 set_global_assignment -name PARTITION_COLOR 16764057 -section_id Top
 set_global_assignment -name LL_ROOT_REGION ON -section_id "Root Region"
 set_global_assignment -name LL_MEMBER_STATE LOCKED -section_id "Root Region"
-set_global_assignment -name VERILOG_FILE Tx_fifo_ctrl.v
-set_global_assignment -name VERILOG_FILE common/cdc_mcp.v
-set_global_assignment -name VERILOG_FILE common/cdc_sync.v
-set_global_assignment -name VERILOG_FILE common/clk_div.v
-set_global_assignment -name VERILOG_FILE common/clk_lrclk_gen.v
-set_global_assignment -name VERILOG_FILE common/I2S_rcv.v
-set_global_assignment -name VERILOG_FILE common/I2S_xmit.v
-set_global_assignment -name VERILOG_FILE common/NWire_rcv.v
-set_global_assignment -name VERILOG_FILE common/NWire_xmit.v
-set_global_assignment -name VERILOG_FILE common/OneWire_rcv.v
-set_global_assignment -name VERILOG_FILE common/OneWire_xmit.v
-set_global_assignment -name VERILOG_FILE common/pulsegen.v
-set_global_assignment -name VERILOG_FILE RFIFO.v
-set_global_assignment -name VERILOG_FILE Rx_fifo.v
-set_global_assignment -name VERILOG_FILE SP_fifo.v
-set_global_assignment -name VERILOG_FILE sp_rcv_ctrl.v
-set_global_assignment -name VERILOG_FILE SPI.v
-set_global_assignment -name VERILOG_FILE SPI_REGS.v
-set_global_assignment -name VERILOG_FILE sync_usb.v
-set_global_assignment -name VERILOG_FILE Tx_fifo.v
-set_global_assignment -name VERILOG_FILE async_usb.v
-set_global_assignment -name VERILOG_FILE ADF4112_SPI.v
-set_global_assignment -name VERILOG_FILE clkmult3.v
-set_global_assignment -name VERILOG_FILE clock_det.v
-set_global_assignment -name VERILOG_FILE Cyclops.v
-set_global_assignment -name VERILOG_FILE debounce.v
-set_global_assignment -name VERILOG_FILE flash.v
-set_global_assignment -name VERILOG_FILE gpio_control.v
-set_global_assignment -name VERILOG_FILE gpio_oport.v
-set_global_assignment -name VERILOG_FILE HPF_select.v
-set_global_assignment -name VERILOG_FILE I2S_LR_Capture.v
-set_global_assignment -name VERILOG_FILE led_blinker.v
-set_global_assignment -name VERILOG_FILE LPF_select.v
 set_global_assignment -name MISC_FILE "O:/HPSDR/trunk/CyclopsII/Verilog Code/Cyclops/Cyclops.dpf"
 set_location_assignment PIN_164 -to DOUT
 set_location_assignment PIN_165 -to CDOUT
@@ -188,3 +155,35 @@ set_global_assignment -name RESERVE_ASDO_AFTER_CONFIGURATION "AS INPUT TRI-STATE
 set_global_assignment -name ALLOW_POWER_UP_DONT_CARE OFF
 set_global_assignment -name CYCLONEII_RESERVE_NCEO_AFTER_CONFIGURATION "USE AS REGULAR IO"
 set_global_assignment -name RESERVE_ALL_UNUSED_PINS_NO_OUTPUT_GND "AS INPUT TRI-STATED"
+set_global_assignment -name VERILOG_FILE Tx_fifo_ctrl.v
+set_global_assignment -name VERILOG_FILE common/cdc_mcp.v
+set_global_assignment -name VERILOG_FILE common/cdc_sync.v
+set_global_assignment -name VERILOG_FILE common/clk_div.v
+set_global_assignment -name VERILOG_FILE common/clk_lrclk_gen.v
+set_global_assignment -name VERILOG_FILE common/I2S_rcv.v
+set_global_assignment -name VERILOG_FILE common/I2S_xmit.v
+set_global_assignment -name VERILOG_FILE common/NWire_rcv.v
+set_global_assignment -name VERILOG_FILE common/NWire_xmit.v
+set_global_assignment -name VERILOG_FILE common/OneWire_rcv.v
+set_global_assignment -name VERILOG_FILE common/OneWire_xmit.v
+set_global_assignment -name VERILOG_FILE common/pulsegen.v
+set_global_assignment -name VERILOG_FILE RFIFO.v
+set_global_assignment -name VERILOG_FILE Rx_fifo.v
+set_global_assignment -name VERILOG_FILE SP_fifo.v
+set_global_assignment -name VERILOG_FILE sp_rcv_ctrl.v
+set_global_assignment -name VERILOG_FILE SPI.v
+set_global_assignment -name VERILOG_FILE SPI_REGS.v
+set_global_assignment -name VERILOG_FILE sync_usb.v
+set_global_assignment -name VERILOG_FILE Tx_fifo.v
+set_global_assignment -name VERILOG_FILE async_usb.v
+set_global_assignment -name VERILOG_FILE ADF4112_SPI.v
+set_global_assignment -name VERILOG_FILE clkmult3.v
+set_global_assignment -name VERILOG_FILE clock_det.v
+set_global_assignment -name VERILOG_FILE Cyclops.v
+set_global_assignment -name VERILOG_FILE flash.v
+set_global_assignment -name VERILOG_FILE gpio_control.v
+set_global_assignment -name VERILOG_FILE gpio_oport.v
+set_global_assignment -name VERILOG_FILE HPF_select.v
+set_global_assignment -name VERILOG_FILE I2S_LR_Capture.v
+set_global_assignment -name VERILOG_FILE led_blinker.v
+set_global_assignment -name VERILOG_FILE LPF_select.v
