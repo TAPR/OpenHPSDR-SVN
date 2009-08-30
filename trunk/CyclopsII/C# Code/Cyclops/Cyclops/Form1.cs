@@ -37,14 +37,17 @@
  *                  - 10MHz reference source
  *                  - Last frequency used
  *              - Uses Cyclops.rbf V1.0
- *              - Release as V1.0
- *                  
+ *              - Release as V1.0.1
+ * 30 Aug 2009  - Fixed bug where spectrum tunes backwards
+ *              - Made frequency display read only so can't edit for now
+ *               
  *
  *  
  *              
  *    
  * 
- * TODO:        
+ * TODO:        - Find why PageUp, PageDown, Up/Down Arrows work in reverse 
+ *              - Allow frequency display to accept edit
  *              
  *
  * 
@@ -71,7 +74,7 @@ namespace Cyclops
 {
     public partial class Form1 : Form
     {
-        string version = "V1.0.1";  // change this for each release!
+        string version = "V1.0.2";  // change this for each release!
         string Ozy_version = null;  // holds version of Ozy code loaded into FX2
 
         // are these really rbufSize / 2???  If so, we should make them defined that way, and tidy up the '1024' values
@@ -825,7 +828,11 @@ namespace Cyclops
                 int logGain = 85;  // see above as to why this value TODO: allow user to calibrate this value
 
                 // TODO: we have 2048 samples in the FFT we could average these to 1024 pixels perhaps 
-                int nPS = (int)(PowerSpectrumData[2 * xpos] + PreampOffset);
+
+                // IMPORTANT: Since we use an alias for receiving the 96MHz IF signal from Cyclops the signals 
+                // will tune backwards. So display the FFT in the reverse order starting from 2047 and going to 0. 
+
+                int nPS = (int)(PowerSpectrumData[2047 - (2 * xpos)] + PreampOffset);
 
                 // Display FullBandwidthPowerSpectrumData on the same grid.
                 // FullBandwidthPowerSpectrumData are a block of 4096 contiguous undecimated samples taken at 122.88 Msps.
