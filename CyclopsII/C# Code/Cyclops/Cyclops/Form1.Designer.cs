@@ -98,6 +98,7 @@
             this.display_freq.ForeColor = System.Drawing.Color.Crimson;
             this.display_freq.Location = new System.Drawing.Point(410, 49);
             this.display_freq.Name = "display_freq";
+            this.display_freq.ReadOnly = true;
             this.display_freq.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.display_freq.Size = new System.Drawing.Size(187, 38);
             this.display_freq.TabIndex = 43;
