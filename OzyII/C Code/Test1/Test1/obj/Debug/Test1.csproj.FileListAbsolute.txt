@@ -6,3 +6,11 @@ O:\HPSDR\trunk\OzyII\C Code\Test1\Test1\obj\Debug\Test1.Properties.Resources.res
 O:\HPSDR\trunk\OzyII\C Code\Test1\Test1\obj\Debug\Test1.csproj.GenerateResource.Cache
 O:\HPSDR\trunk\OzyII\C Code\Test1\Test1\obj\Debug\Test1.exe
 O:\HPSDR\trunk\OzyII\C Code\Test1\Test1\obj\Debug\Test1.pdb
+C:\HPSDR\trunk\OzyII\C Code\Test1\Test1\obj\Debug\Test1.exe
+C:\HPSDR\trunk\OzyII\C Code\Test1\Test1\obj\Debug\Test1.pdb
+C:\HPSDR\trunk\OzyII\C Code\Test1\Test1\bin\Debug\Test1.exe
+C:\HPSDR\trunk\OzyII\C Code\Test1\Test1\bin\Debug\Test1.pdb
+C:\HPSDR\trunk\OzyII\C Code\Test1\Test1\obj\Debug\ResolveAssemblyReference.cache
+C:\HPSDR\trunk\OzyII\C Code\Test1\Test1\obj\Debug\Test1.Form1.resources
+C:\HPSDR\trunk\OzyII\C Code\Test1\Test1\obj\Debug\Test1.Properties.Resources.resources
+C:\HPSDR\trunk\OzyII\C Code\Test1\Test1\obj\Debug\Test1.csproj.GenerateResource.Cache

@@ -45,6 +45,7 @@
             this.Frame1 = new System.Windows.Forms.Button();
             this.Frame2 = new System.Windows.Forms.Button();
             this.Frame3 = new System.Windows.Forms.Button();
+            this.chkRaw = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // SendData
@@ -199,11 +200,22 @@
             this.Frame3.UseVisualStyleBackColor = true;
             this.Frame3.Click += new System.EventHandler(this.Frame3_Click);
             // 
+            // chkRaw
+            // 
+            this.chkRaw.AutoSize = true;
+            this.chkRaw.Location = new System.Drawing.Point(334, 352);
+            this.chkRaw.Name = "chkRaw";
+            this.chkRaw.Size = new System.Drawing.Size(74, 17);
+            this.chkRaw.TabIndex = 17;
+            this.chkRaw.Text = "Raw Data";
+            this.chkRaw.UseVisualStyleBackColor = true;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(510, 428);
+            this.Controls.Add(this.chkRaw);
             this.Controls.Add(this.Frame3);
             this.Controls.Add(this.Frame2);
             this.Controls.Add(this.Frame1);
@@ -248,6 +260,7 @@
         private System.Windows.Forms.Button Frame1;
         private System.Windows.Forms.Button Frame2;
         private System.Windows.Forms.Button Frame3;
+        private System.Windows.Forms.CheckBox chkRaw;
     }
 }
 
