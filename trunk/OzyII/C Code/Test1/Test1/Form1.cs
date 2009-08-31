@@ -1,4 +1,38 @@
-﻿using System;
+﻿/*
+ * OzyII  HPSDR Ethernet interface board - Test code 
+ *
+ * 
+ * Copyright (C) 2009 Phil Harman, VK6APH
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+ * 
+ * 
+ */
+
+/*
+ * Change log 
+ * 
+ *  31 Aug  2009 - Started coding - send MAC frames  i.e. Ethernet Type II Frames
+ *  
+ * 
+ */
+
+
+
+
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -6,6 +40,9 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using HPSDR_USB_LIB_V1;
+using System.Threading;
+using System.Diagnostics;   // use View > Output to see debug messages
 
 namespace Test1
 {
@@ -16,6 +53,7 @@ namespace Test1
             InitializeComponent();
         }
 
+        IntPtr hdev = IntPtr.Zero;                                  // USB Ozy device handle
         byte[] Ethernet_Preamble = new byte[8] { 0x55, 0x55, 0x55, 0x55, 0x55, 0x55, 0x55, 0xD5 };
         byte[] To_Ethernet_Address = new byte[4];
         byte[] From_Ethernet_Address = new byte[4];
@@ -25,7 +63,7 @@ namespace Test1
         //byte[] IP_header = new byte[9] { 0x45, 0x00, 0x00, 0x2E, 0xB3, 0xFE, 0x00, 0x00, 0x80 };
         byte[] Ethernet_type = new byte[2] {0xEF, 0xFE};           // Type is MAC, use 0x0800 for IP 
         byte[] CRC32 = new byte[4]{0x00, 0x01, 0x02, 0x03};        // CRC for MAC frames
-        //byte IP_protocol = 0x11;                                   // Protocol is UDP
+        //byte IP_protocol = 0x11;                                 // Protocol is UDP
         //short IP_checksum = 0x0000;
         //short UDP_checksum = 0x0000;
         //short Ethernet_checksum = 0x0000;
@@ -80,7 +118,48 @@ namespace Test1
                 Console.WriteLine(word);
                 From_MAC_address[j] = (byte)Convert.ToInt16(word, 16);
                 j++;
-            }           
+            }
+            
+            // Start the USB interface
+            if (!start_USB())
+            {
+                MessageBox.Show("No Ozy board found  - Check HPSDR is connected and powered");
+                return;
+            }
+
+            // Check that FX2 has been loaded with software, if not call initozy11.bat to load it
+            string Ozy_version = getOzyFirmwareString(); // Get ozy firmware version string - 8 bytes,  returns null for error
+
+            if (Ozy_version == null)
+            {
+                this.Cursor = Cursors.WaitCursor;  // show hour glass cursor whilst we load Ozy FPGA
+                // call a process to run initozy11.bat in current directory
+                ProcessStartInfo start_info = new ProcessStartInfo();
+                start_info.FileName = "initozy11.bat";
+                start_info.UseShellExecute = true;
+                Process p = new Process();
+                p.StartInfo = start_info;
+                bool rc = p.Start();
+                System.Console.WriteLine("start returned: " + rc);
+                p.WaitForExit();
+                System.Console.WriteLine("OzyInit completes");
+                stop_USB();  // need to close and re-open USB port since it renumerated
+                start_USB();
+                this.Cursor = Cursors.Default;  // revert to normal cursor
+
+                // get ozy code version now
+                Ozy_version = getOzyFirmwareString();
+            }
+
+            // check that we are using the correct version of FX2 code
+            if (Ozy_version != "20090524")
+            {
+                // note that the Ozy_version may be null.  If so, the old code here would have generated an exception
+                // and not failed softly as intended.  The current/new code handles that case reasonably...
+                MessageBox.Show(" Wrong version of Ozy code found " + (Ozy_version == null ? "(Not Found!)" : Ozy_version.ToString()) + "\n-should be 20090524");
+                stop_USB();
+                return;
+            }
 
         }
 
@@ -133,35 +212,64 @@ namespace Test1
             // now send this to the USB
             // data_to_send
 
+            int ret;
+            ret = libUSB_Interface.usb_bulk_write(hdev, 0x02, data_to_send, data_to_send.Length, 1000);
 
-
-            // Assume we get the data back - so display in the receive text box.
-
-            int received_length = data_to_send.Length;
-            string received_data = null;
-
-            // convert from Hex to text
-            for (int x = 0; x < received_length; x++)
+            if (ret != data_to_send.Length)
             {
-                received_data = received_data + data_to_send[x].ToString("X");
+                Debug.WriteLine("Write to Ozy failed - returned \t" + ret);
+                return;
             }
 
-            //ReceiveData.Text = received_data;
+            // now look to see if we get any data back
 
-            byte[] test = new  byte[10];
+            byte[] rbuf = new byte[1500];
 
-            //strip out everything but the Payload
-            Buffer.BlockCopy(data_to_send, Ethernet_Preamble.Length + To_MAC_address.Length + From_MAC_address.Length + Ethernet_type.Length, test, 0, test.Length);
-
-            // convert from Hex to text
-            for (int x = 0; x < test.Length; x++)
+            ret = libUSB_Interface.usb_bulk_read(hdev, 0x86, rbuf,1000); // rbuf.Length = 1500
+            if (ret > 0)
             {
-                received_data = test + test[x].ToString("X");
-            }
+                // Display in the receive text box.
 
-            ReceiveData.Text = received_data;
-        
-        
+                int received_length = ret;
+                string received_data = null;
+
+                if (chkRaw.Checked)  // display all bytes in the Ethernet frame
+                {
+                    // convert from Hex to text
+                    for (int x = 0; x < received_length; x++)
+                    {
+                        received_data = received_data + rbuf[x].ToString("X");
+                    }
+
+                    ReceiveData.Text = received_data;
+                }
+                else  // filter out just the payload
+                {
+
+                    // calculate the size of array needed to hold the Payload. This will be the length of the received buffer
+                    // less the sum of the known Ethernet components
+
+                    int length = received_length - (Ethernet_type.Length + From_MAC_address.Length + To_MAC_address.Length
+                                                            + Ethernet_Preamble.Length + CRC32.Length);
+                    // build an array to receive this 
+                    byte[] Payload_data = new byte[length];
+
+                    //strip out everything but the Payload
+                    Buffer.BlockCopy(rbuf, Ethernet_Preamble.Length + To_MAC_address.Length + From_MAC_address.Length + Ethernet_type.Length, Payload_data, 0, Payload_data.Length);
+
+                    // convert from Hex to a char string
+                    for (int x = 0; x < Payload_data.Length; x++)
+                    {
+                        received_data += Convert.ToChar(Payload_data[x]);
+                    }
+
+                    ReceiveData.Text = received_data;
+                }
+            }
+            else
+            {
+                ReceiveData.Text = "No data received \n";
+            }        
         }
 
         private void ClearButton_Click(object sender, EventArgs e)
@@ -184,6 +292,80 @@ namespace Test1
             SendData.Text = "ABCDEF" + Convert.ToString(Ethernet_Preamble);
         }
 
+        private bool start_USB()
+        {
+            // look for USB connection to Ozy
+            hdev = USB.InitFindAndOpenDevice(0xfffe, 0x0007);
+            if (hdev == IntPtr.Zero)
+                return false;
+
+            int ret;
+            ret = libUSB_Interface.usb_set_configuration(hdev, 1);
+            ret = libUSB_Interface.usb_claim_interface(hdev, 0);
+            ret = libUSB_Interface.usb_set_altinterface(hdev, 0);
+            ret = libUSB_Interface.usb_clear_halt(hdev, 0x02);
+            ret = libUSB_Interface.usb_clear_halt(hdev, 0x86);
+            ret = libUSB_Interface.usb_clear_halt(hdev, 0x84);
+            return true;
+        }
+
+        // Get ozy firmware version string - 8 bytes,  returns null for error - thanks to Bill KD5TFD for this code
+        private string getOzyFirmwareString()
+        {
+            if (hdev == IntPtr.Zero)
+            {
+                return null;
+            }
+
+            // the following set of declarations MUST match the values used in the FX2 code - hpsdr_commands.h
+            byte VRQ_SDR1K_CTL = 0x0d;
+            byte SDR1KCTRL_READ_VERSION = 0x7;
+            byte VRT_VENDOR_IN = 0xC0;
+            byte[] buf = new byte[8];
+            int rc = libUSB_Interface.usb_control_msg(hdev, VRT_VENDOR_IN, VRQ_SDR1K_CTL, SDR1KCTRL_READ_VERSION, 0, buf, buf.Length, 1000);
+            Debug.WriteLine("read version rc: " + rc);
+            Debug.WriteLine("read version hdev = \t" + hdev);
+
+            string result = null;
+
+            if (rc == 8)    // got length we expected
+            {
+                char[] cbuf = new char[8];
+                for (int i = 0; i < 8; i++)
+                {
+                    cbuf[i] = (char)(buf[i]);
+                }
+                result = new string(cbuf);
+                Debug.WriteLine("version: >" + result + "<");
+            }
+            return result;
+        }
+
+        // this is called when we exit the program - terminate the USB connection 
+        private void Form1_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            //if (USB_thread_running)
+            //    USB_thread.Abort();  // stop USB thread
+
+            if (hdev != IntPtr.Zero)  // check we have an active USB port
+                stop_USB();
+        }
+
+        // stop USB interface when we exit the program
+        private void stop_USB()
+        {
+            if (hdev != IntPtr.Zero) // check we have an open USB port 
+            {
+                try
+                {
+                    libUSB_Interface.usb_release_interface(hdev, 0);
+                    libUSB_Interface.usb_close(hdev);
+                }
+                catch
+                {
+                }
+            }
+        }
 
     }
 }
