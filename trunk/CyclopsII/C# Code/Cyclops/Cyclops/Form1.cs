@@ -40,6 +40,7 @@
  *              - Release as V1.0.1
  * 30 Aug 2009  - Fixed bug where spectrum tunes backwards
  *              - Made frequency display read only so can't edit for now
+ * 31 Aug 2009  - Added delay after reading FX2 version to see if that helps
  *               
  *
  *  
@@ -1427,6 +1428,7 @@ namespace Cyclops
                 stop_USB();  // need to close and re-open USB port since it renumerated
                 start_USB();
                 this.Cursor = Cursors.Default;  // revert to normal cursor
+                Thread.Sleep(1000); // see if this fixes Ozy_version problem 
 
                 // get ozy code version now
                 Ozy_version = getOzyFirmwareString();

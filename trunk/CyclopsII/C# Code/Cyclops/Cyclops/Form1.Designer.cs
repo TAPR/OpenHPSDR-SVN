@@ -107,8 +107,9 @@
             // 
             this.set_frequency.LargeChange = 0;
             this.set_frequency.Location = new System.Drawing.Point(4, 564);
-            this.set_frequency.Maximum = 55000000;
+            this.set_frequency.Maximum = 0;
             this.set_frequency.Name = "set_frequency";
+            this.set_frequency.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.set_frequency.Size = new System.Drawing.Size(1004, 45);
             this.set_frequency.SmallChange = 0;
             this.set_frequency.TabIndex = 44;
