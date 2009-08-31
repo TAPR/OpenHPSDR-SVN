@@ -79,6 +79,7 @@ address control space, you address it as the FNL, not the INL.
     29 Aug  2009  - Start removing unwanted code. Penny S# & ALC, 48MHz to Janus, dot, dash, PTT and 
 				  - debounce, Mercury S# and ADC overload, J_IQPWM, P_IQPWM, J_LRAudio, J_IQ
 	30 Aug  2009  - Removed remaining unused code.
+	31 Aug  2009  - Set C15 and C17 to outputs at 0V to protect 10MHz on C16
   
 */
 
@@ -194,7 +195,7 @@ address control space, you address it as the FNL, not the INL.
 
 module Cyclops(
         IF_clk, FX2_FD, FLAGA, FLAGB, FLAGC, SLWR, SLRD, SLOE, PKEND, FIFO_ADR, DOUT,
-         A12, C21,  C23, C24,
+         A12, C15, C17, C21,  C23, C24,
         DEBUG_LED0,
         DEBUG_LED1, DEBUG_LED2,DEBUG_LED3, CC, MDOUT, 
         ADF4112_SPI_clock, ADF4112_SPI_data, LE1, LE2,					
@@ -228,6 +229,8 @@ output wire         DEBUG_LED1;
 output wire         DEBUG_LED2;
 output wire         DEBUG_LED3;
 input  wire         A12;            // NWire spectrum data from Mercury
+output wire 		C15;
+output wire 		C17;
 output wire         C21;            // Spectrum data Trigger signal to Mercury
 input  wire         C23;            // M_LR_sync from Mercury
 output wire         C24;            // M_LR_data - Left & Right audio data in NWire format to Mercury
@@ -256,6 +259,11 @@ output  LE2;
 //assign TCK = FX2_PE2;
 //assign TDO = FX2_PE0;  // TDO on our slot ties to TDI on next slot  
 assign FX2_PE1 = SDOBACK;
+
+// ground adjacent pins to C16
+
+assign C15 = 1'b0;
+assign C17 = 1'b0;
 
 
 ///////////////////////////////////////////////////////////////

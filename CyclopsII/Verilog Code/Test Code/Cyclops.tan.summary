@@ -2,64 +2,34 @@
 Timing Analyzer Summary
 --------------------------------------------------------------------------------------
 
-Type           : Worst-case tsu
-Slack          : N/A
-Required Time  : None
-Actual Time    : 6.630 ns
-From           : FLAGA
-To             : SLOE~reg0
-From Clock     : --
-To Clock       : IFCLK
-Failed Paths   : 0
-
 Type           : Worst-case tco
 Slack          : N/A
 Required Time  : None
-Actual Time    : 13.106 ns
-From           : SPI_state[1]
-To             : LE1
+Actual Time    : 12.951 ns
+From           : ADF4112_SPI:ADF4112|ready
+To             : DEBUG_LED0
 From Clock     : IFCLK
 To Clock       : --
 Failed Paths   : 0
 
-Type           : Worst-case tpd
-Slack          : N/A
-Required Time  : None
-Actual Time    : 10.650 ns
-From           : FLAGA
-To             : DEBUG_LED1
-From Clock     : --
-To Clock       : --
-Failed Paths   : 0
-
-Type           : Worst-case th
-Slack          : N/A
-Required Time  : None
-Actual Time    : -5.079 ns
-From           : FX2_FD[10]
-To             : Rx_register[2]
-From Clock     : --
+Type           : Clock Setup: 'IFCLK'
+Slack          : 19.386 ns
+Required Time  : 48.00 MHz ( period = 20.833 ns )
+Actual Time    : Restricted to 340.02 MHz ( period = 2.941 ns )
+From           : spi_clock[1]
+To             : spi_clock[0]
+From Clock     : IFCLK
 To Clock       : IFCLK
 Failed Paths   : 0
 
 Type           : Clock Setup: 'clock'
-Slack          : 7.205 ns
+Slack          : 199.833 ns
 Required Time  : 4.80 MHz ( period = 208.330 ns )
-Actual Time    : N/A
-From           : Rx_register[9]
-To             : SPI2_state[0]
-From Clock     : IFCLK
+Actual Time    : 117.69 MHz ( period = 8.497 ns )
+From           : ADF4112_SPI:ADF4112|bit_count[1]
+To             : ADF4112_SPI:ADF4112|SPI_data
+From Clock     : clock
 To Clock       : clock
-Failed Paths   : 0
-
-Type           : Clock Setup: 'IFCLK'
-Slack          : 17.349 ns
-Required Time  : 48.00 MHz ( period = 20.833 ns )
-Actual Time    : 287.03 MHz ( period = 3.484 ns )
-From           : state_FX[2]
-To             : Rx_register[12]
-From Clock     : IFCLK
-To Clock       : IFCLK
 Failed Paths   : 0
 
 Type           : Clock Hold: 'clock'
@@ -76,8 +46,8 @@ Type           : Clock Hold: 'IFCLK'
 Slack          : 0.499 ns
 Required Time  : 48.00 MHz ( period = 20.833 ns )
 Actual Time    : N/A
-From           : SLOE~reg0
-To             : SLOE~reg0
+From           : spi_clock[0]
+To             : spi_clock[0]
 From Clock     : IFCLK
 To Clock       : IFCLK
 Failed Paths   : 0

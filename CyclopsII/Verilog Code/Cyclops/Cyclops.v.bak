@@ -376,11 +376,6 @@ wire            IF_tx_fifo_empty;
 wire [RFSZ-1:0] IF_Rx_fifo_used;    // read side count
 wire            IF_Rx_fifo_full;
 
-//reg       [7:0] Penny_serialno;
-//reg       [7:0] Merc_serialno;
-//reg      [11:0] Penny_ALC;
-//
-//reg             ADC_OVERLOAD;
 wire   [RFSZ:0] RX_USED;
 wire            IF_tx_fifo_clr;
 
