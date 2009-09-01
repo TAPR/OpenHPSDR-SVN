@@ -41,7 +41,7 @@ set_global_assignment -name DEVICE EP2C8Q208C8
 set_global_assignment -name TOP_LEVEL_ENTITY Ozy11
 set_global_assignment -name ORIGINAL_QUARTUS_VERSION 9.0
 set_global_assignment -name PROJECT_CREATION_TIME_DATE "20:54:53  AUGUST 31, 2009"
-set_global_assignment -name LAST_QUARTUS_VERSION 9.0
+set_global_assignment -name LAST_QUARTUS_VERSION "9.0 SP2"
 set_global_assignment -name USE_GENERATED_PHYSICAL_CONSTRAINTS OFF -section_id eda_blast_fpga
 set_global_assignment -name MIN_CORE_JUNCTION_TEMP 0
 set_global_assignment -name MAX_CORE_JUNCTION_TEMP 85
@@ -53,3 +53,6 @@ set_global_assignment -name LL_MEMBER_STATE LOCKED -section_id "Root Region"
 set_global_assignment -name VERILOG_FILE Tx_fifo.v
 set_global_assignment -name VERILOG_FILE Rx_fifo.v
 set_global_assignment -name VERILOG_FILE Ozy11.v
+set_global_assignment -name USE_CONFIGURATION_DEVICE ON
+set_global_assignment -name RESERVE_ALL_UNUSED_PINS "AS INPUT TRI-STATED"
+set_global_assignment -name MISC_FILE "O:/HPSDR/trunk/OzyII/Verilog Code/Test Code/Ozy11.dpf"

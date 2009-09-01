@@ -1,4 +1,4 @@
-Version 9.0 Build 132 02/25/2009 SJ Web Edition
+Version 9.0 Build 235 06/17/2009 Service Pack 2 SJ Web Edition
 11
 936
 OFF
@@ -19,50 +19,14 @@ VHSM_ON
 -- Start VHDL Libraries --
 -- End VHDL Libraries --
 # entity
-Rx_fifo
-# storage
-db|Ozy11.(1).cnf
-db|Ozy11.(1).cnf
-# logic_option {
-AUTO_RAM_RECOGNITION
-ON
-}
-# case_sensitive
-# source_file
-Rx_fifo.v
-51efa1a39c0edd4da48e1583e43247
-8
-# internal_option {
-HDL_INITIAL_FANOUT_LIMIT
-OFF
-AUTO_RESOURCE_SHARING
-OFF
-AUTO_RAM_RECOGNITION
-ON
-AUTO_ROM_RECOGNITION
-ON
-IGNORE_VERILOG_INITIAL_CONSTRUCTS
-OFF
-VERILOG_CONSTANT_LOOP_LIMIT
-5000
-VERILOG_NON_CONSTANT_LOOP_LIMIT
-250
-}
-# hierarchies {
-Rx_fifo:Rx_fifo
-}
-# macro_sequence
-
-# end
-# entity
 dcfifo
 # storage
 db|Ozy11.(2).cnf
 db|Ozy11.(2).cnf
 # case_insensitive
 # source_file
-..|..|..|..|..|altera|90|quartus|libraries|megafunctions|dcfifo.tdf
-96f686a8bdecc8b013dcdbb5aa54c0eb
+c:|altera|90sp2|quartus|libraries|megafunctions|dcfifo.tdf
+9f15fd53c99e8cfc138906046bf9
 7
 # user_parameter {
 WIDTH_BYTEENA
@@ -188,31 +152,28 @@ data
 3
 }
 # include_file {
-..|..|..|..|..|altera|90|quartus|libraries|megafunctions|a_fefifo.inc
-c8498561e0bdc47f87b5548333d65f50
-..|..|..|..|..|altera|90|quartus|libraries|megafunctions|altsyncram_fifo.inc
-12f7d8c61da985ee5330de43a169e
-..|..|..|..|..|altera|90|quartus|libraries|megafunctions|a_gray2bin.inc
-2466d892d81838e113e13f4e76e71f2
-..|..|..|..|..|altera|90|quartus|libraries|megafunctions|lpm_add_sub.inc
-7d9a33dd39f13aa690c3d0edd88351
-..|..|..|..|..|altera|90|quartus|libraries|megafunctions|lpm_counter.inc
-7f888b135ddf66f0653c44cb18ac5
-..|..|..|..|..|altera|90|quartus|libraries|megafunctions|dffpipe.inc
-8dfdb676c11c7bcef0694118a05ea2d
-..|..|..|..|..|altera|90|quartus|libraries|megafunctions|alt_sync_fifo.inc
-f4c68b9daca4a0e5389631895df30d0
-..|..|..|..|..|altera|90|quartus|libraries|megafunctions|aglobal90.inc
+c:|altera|90sp2|quartus|libraries|megafunctions|aglobal90.inc
 99832fdf63412df51d7531202d74e75
-..|..|..|..|..|altera|90|quartus|libraries|megafunctions|lpm_compare.inc
-aec4ea1b78f4cda1c3effe18f1abbf63
-..|..|..|..|..|altera|90|quartus|libraries|megafunctions|altdpram.inc
-99d442b5b66c88db4daf94d99c6e4e77
-..|..|..|..|..|altera|90|quartus|libraries|megafunctions|a_graycounter.inc
+c:|altera|90sp2|quartus|libraries|megafunctions|a_fefifo.inc
+c8498561e0bdc47f87b5548333d65f50
+c:|altera|90sp2|quartus|libraries|megafunctions|lpm_add_sub.inc
+7d9a33dd39f13aa690c3d0edd88351
+c:|altera|90sp2|quartus|libraries|megafunctions|a_gray2bin.inc
+2466d892d81838e113e13f4e76e71f2
+c:|altera|90sp2|quartus|libraries|megafunctions|a_graycounter.inc
 6bb463da5ec6451f39fdb64aba52ffc0
-}
-# hierarchies {
-Rx_fifo:Rx_fifo|dcfifo:dcfifo_component
+c:|altera|90sp2|quartus|libraries|megafunctions|lpm_compare.inc
+aec4ea1b78f4cda1c3effe18f1abbf63
+c:|altera|90sp2|quartus|libraries|megafunctions|alt_sync_fifo.inc
+f4c68b9daca4a0e5389631895df30d0
+c:|altera|90sp2|quartus|libraries|megafunctions|dffpipe.inc
+8dfdb676c11c7bcef0694118a05ea2d
+c:|altera|90sp2|quartus|libraries|megafunctions|altdpram.inc
+99d442b5b66c88db4daf94d99c6e4e77
+c:|altera|90sp2|quartus|libraries|megafunctions|lpm_counter.inc
+7f888b135ddf66f0653c44cb18ac5
+c:|altera|90sp2|quartus|libraries|megafunctions|altsyncram_fifo.inc
+12f7d8c61da985ee5330de43a169e
 }
 # macro_sequence
 
@@ -225,7 +186,7 @@ db|Ozy11.(3).cnf
 # case_insensitive
 # source_file
 db|dcfifo_mgk1.tdf
-6197e737f77138b3b6437d2ee9f9e
+3277c270f2ac24c4f81aab8edf1f8c1
 7
 # used_port {
 wrusedw9
@@ -412,9 +373,6 @@ data0
 -1
 3
 }
-# hierarchies {
-Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_mgk1:auto_generated
-}
 # macro_sequence
 
 # end
@@ -426,7 +384,7 @@ db|Ozy11.(4).cnf
 # case_insensitive
 # source_file
 db|a_gray2bin_ndb.tdf
-24ac1020f5857a77ce1a94612a6ddeb2
+fb6bc1f878791651ff7ada35fcc440ae
 7
 # used_port {
 gray9
@@ -509,10 +467,8 @@ bin0
 3
 }
 # hierarchies {
-Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_mgk1:auto_generated|a_gray2bin_ndb:rdptr_g_gray2bin
-Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_mgk1:auto_generated|a_gray2bin_ndb:rs_dgwp_gray2bin
-Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_mgk1:auto_generated|a_gray2bin_ndb:wrptr_g_gray2bin
-Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_mgk1:auto_generated|a_gray2bin_ndb:ws_dgrp_gray2bin
+Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_tgk1:auto_generated|a_gray2bin_ndb:wrptr_g_gray2bin
+Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_tgk1:auto_generated|a_gray2bin_ndb:ws_dgrp_gray2bin
 }
 # macro_sequence
 
@@ -525,7 +481,7 @@ db|Ozy11.(5).cnf
 # case_insensitive
 # source_file
 db|a_graycounter_r96.tdf
-ed3fbef7ebb5b4f6a40a5d666f8ef6b
+90d223a6b3f8a9893f19da31d78a09
 7
 # used_port {
 q9
@@ -578,7 +534,7 @@ aclr
 3
 }
 # hierarchies {
-Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_mgk1:auto_generated|a_graycounter_r96:rdptr_g1p
+Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_tgk1:auto_generated|a_graycounter_r96:rdptr_g1p
 }
 # macro_sequence
 
@@ -591,7 +547,7 @@ db|Ozy11.(6).cnf
 # case_insensitive
 # source_file
 db|a_graycounter_g2c.tdf
-ec54ed38f1cde59eb25bd8a75bb5bfca
+3379be490e84c894e8a1aca80297af9
 7
 # used_port {
 cnt_en
@@ -602,7 +558,7 @@ clock
 3
 }
 # hierarchies {
-Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_mgk1:auto_generated|a_graycounter_g2c:wrptr_g1p
+Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_tgk1:auto_generated|a_graycounter_g2c:wrptr_g1p
 }
 # macro_sequence
 
@@ -615,7 +571,7 @@ db|Ozy11.(7).cnf
 # case_insensitive
 # source_file
 db|a_graycounter_f2c.tdf
-61e9a9ebf418451bfc2e4eed62525a23
+9fce96ae26355bed1373b933242c425f
 7
 # used_port {
 q9
@@ -665,7 +621,7 @@ clock
 3
 }
 # hierarchies {
-Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_mgk1:auto_generated|a_graycounter_f2c:wrptr_gp
+Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_tgk1:auto_generated|a_graycounter_f2c:wrptr_gp
 }
 # macro_sequence
 
@@ -678,7 +634,7 @@ db|Ozy11.(8).cnf
 # case_insensitive
 # source_file
 db|altsyncram_vpu.tdf
-19742933cae09780e516ee7f7f96c1e8
+2b935aa2ddc1796e813769b815c4abe
 7
 # used_port {
 wren_a
@@ -866,7 +822,7 @@ address_a0
 3
 }
 # hierarchies {
-Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_mgk1:auto_generated|altsyncram_vpu:fifo_ram
+Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_tgk1:auto_generated|altsyncram_vpu:fifo_ram
 }
 # macro_sequence
 
@@ -879,7 +835,7 @@ db|Ozy11.(9).cnf
 # case_insensitive
 # source_file
 db|altsyncram_aec1.tdf
-4079c82d0d9d5e322375069269d42e5
+2e5d6664738c2c75c0e7c726cb6f8a70
 7
 # used_port {
 wren_b
@@ -1121,7 +1077,7 @@ data_a0
 2
 }
 # hierarchies {
-Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_mgk1:auto_generated|altsyncram_vpu:fifo_ram|altsyncram_aec1:altsyncram5
+Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_tgk1:auto_generated|altsyncram_vpu:fifo_ram|altsyncram_aec1:altsyncram5
 }
 # macro_sequence
 
@@ -1134,7 +1090,7 @@ db|Ozy11.(10).cnf
 # case_insensitive
 # source_file
 db|dffpipe_c2e.tdf
-e62276de139b8b9bfb44c87a09179a
+46e07c87ae8a37719117a53437bdd1f
 7
 # used_port {
 q0
@@ -1148,7 +1104,7 @@ d0
 2
 }
 # hierarchies {
-Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_mgk1:auto_generated|dffpipe_c2e:rdaclr
+Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_tgk1:auto_generated|dffpipe_c2e:rdaclr
 }
 # macro_sequence
 
@@ -1161,7 +1117,7 @@ db|Ozy11.(11).cnf
 # case_insensitive
 # source_file
 db|dffpipe_c09.tdf
-a04efc788ea64610984473fc17aa5c42
+56b4fe14cc3fd619eef1652750db1e9a
 7
 # used_port {
 q9
@@ -1247,10 +1203,8 @@ clock
 3
 }
 # hierarchies {
-Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_mgk1:auto_generated|dffpipe_c09:rs_brp
-Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_mgk1:auto_generated|dffpipe_c09:rs_bwp
-Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_mgk1:auto_generated|dffpipe_c09:ws_brp
-Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_mgk1:auto_generated|dffpipe_c09:ws_bwp
+Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_tgk1:auto_generated|dffpipe_c09:ws_brp
+Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_tgk1:auto_generated|dffpipe_c09:ws_bwp
 }
 # macro_sequence
 
@@ -1263,7 +1217,7 @@ db|Ozy11.(12).cnf
 # case_insensitive
 # source_file
 db|alt_synch_pipe_jv7.tdf
-17e2b562acae23b02a443512df373
+194515207ac7a0ede1909282df3de4e
 7
 # used_port {
 q9
@@ -1347,9 +1301,6 @@ d0
 clock
 -1
 3
-}
-# hierarchies {
-Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_mgk1:auto_generated|alt_synch_pipe_jv7:rs_dgwp
 }
 # macro_sequence
 
@@ -1362,7 +1313,7 @@ db|Ozy11.(13).cnf
 # case_insensitive
 # source_file
 db|dffpipe_d09.tdf
-5e21a65186f168a97838e3e1b47e6f5
+8cd0ad1c1da72280b2711df3f36fcc9b
 7
 # used_port {
 q9
@@ -1446,9 +1397,6 @@ d0
 clock
 -1
 3
-}
-# hierarchies {
-Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_mgk1:auto_generated|alt_synch_pipe_jv7:rs_dgwp|dffpipe_d09:dffpipe9
 }
 # macro_sequence
 
@@ -1461,7 +1409,7 @@ db|Ozy11.(14).cnf
 # case_insensitive
 # source_file
 db|alt_synch_pipe_kv7.tdf
-b3e28f85b244c98fc5ba6a4bc637ef3
+f5912365f3fd03daaf7918cc9f5b7e
 7
 # used_port {
 q9
@@ -1545,9 +1493,6 @@ d0
 clock
 -1
 3
-}
-# hierarchies {
-Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_mgk1:auto_generated|alt_synch_pipe_kv7:ws_dgrp
 }
 # macro_sequence
 
@@ -1560,7 +1505,7 @@ db|Ozy11.(15).cnf
 # case_insensitive
 # source_file
 db|dffpipe_e09.tdf
-22d1b59a13a7599ceb4cc57792b2
+a496337810713bfab0986875bc3da841
 7
 # used_port {
 q9
@@ -1645,9 +1590,6 @@ clock
 -1
 3
 }
-# hierarchies {
-Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_mgk1:auto_generated|alt_synch_pipe_kv7:ws_dgrp|dffpipe_e09:dffpipe12
-}
 # macro_sequence
 
 # end
@@ -1659,7 +1601,7 @@ db|Ozy11.(16).cnf
 # case_insensitive
 # source_file
 db|cmpr_836.tdf
-20b968deb358e585075139d6ba85398
+27b2d173aaab867aaee8367f7fdfa71
 7
 # used_port {
 datab9
@@ -1745,8 +1687,8 @@ aeb
 3
 }
 # hierarchies {
-Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_mgk1:auto_generated|cmpr_836:rdempty_eq_comp
-Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_mgk1:auto_generated|cmpr_836:wrfull_eq_comp
+Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_tgk1:auto_generated|cmpr_836:rdempty_eq_comp
+Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_tgk1:auto_generated|cmpr_836:wrfull_eq_comp
 }
 # macro_sequence
 
@@ -1794,8 +1736,8 @@ db|Ozy11.(18).cnf
 db|Ozy11.(18).cnf
 # case_insensitive
 # source_file
-..|..|..|..|..|altera|90|quartus|libraries|megafunctions|dcfifo.tdf
-96f686a8bdecc8b013dcdbb5aa54c0eb
+c:|altera|90sp2|quartus|libraries|megafunctions|dcfifo.tdf
+9f15fd53c99e8cfc138906046bf9
 7
 # user_parameter {
 WIDTH_BYTEENA
@@ -1924,28 +1866,28 @@ aclr
 3
 }
 # include_file {
-..|..|..|..|..|altera|90|quartus|libraries|megafunctions|a_fefifo.inc
-c8498561e0bdc47f87b5548333d65f50
-..|..|..|..|..|altera|90|quartus|libraries|megafunctions|altsyncram_fifo.inc
-12f7d8c61da985ee5330de43a169e
-..|..|..|..|..|altera|90|quartus|libraries|megafunctions|a_gray2bin.inc
-2466d892d81838e113e13f4e76e71f2
-..|..|..|..|..|altera|90|quartus|libraries|megafunctions|lpm_add_sub.inc
-7d9a33dd39f13aa690c3d0edd88351
-..|..|..|..|..|altera|90|quartus|libraries|megafunctions|lpm_counter.inc
-7f888b135ddf66f0653c44cb18ac5
-..|..|..|..|..|altera|90|quartus|libraries|megafunctions|dffpipe.inc
-8dfdb676c11c7bcef0694118a05ea2d
-..|..|..|..|..|altera|90|quartus|libraries|megafunctions|alt_sync_fifo.inc
-f4c68b9daca4a0e5389631895df30d0
-..|..|..|..|..|altera|90|quartus|libraries|megafunctions|aglobal90.inc
+c:|altera|90sp2|quartus|libraries|megafunctions|aglobal90.inc
 99832fdf63412df51d7531202d74e75
-..|..|..|..|..|altera|90|quartus|libraries|megafunctions|lpm_compare.inc
-aec4ea1b78f4cda1c3effe18f1abbf63
-..|..|..|..|..|altera|90|quartus|libraries|megafunctions|altdpram.inc
-99d442b5b66c88db4daf94d99c6e4e77
-..|..|..|..|..|altera|90|quartus|libraries|megafunctions|a_graycounter.inc
+c:|altera|90sp2|quartus|libraries|megafunctions|a_fefifo.inc
+c8498561e0bdc47f87b5548333d65f50
+c:|altera|90sp2|quartus|libraries|megafunctions|lpm_add_sub.inc
+7d9a33dd39f13aa690c3d0edd88351
+c:|altera|90sp2|quartus|libraries|megafunctions|a_gray2bin.inc
+2466d892d81838e113e13f4e76e71f2
+c:|altera|90sp2|quartus|libraries|megafunctions|a_graycounter.inc
 6bb463da5ec6451f39fdb64aba52ffc0
+c:|altera|90sp2|quartus|libraries|megafunctions|lpm_compare.inc
+aec4ea1b78f4cda1c3effe18f1abbf63
+c:|altera|90sp2|quartus|libraries|megafunctions|alt_sync_fifo.inc
+f4c68b9daca4a0e5389631895df30d0
+c:|altera|90sp2|quartus|libraries|megafunctions|dffpipe.inc
+8dfdb676c11c7bcef0694118a05ea2d
+c:|altera|90sp2|quartus|libraries|megafunctions|altdpram.inc
+99d442b5b66c88db4daf94d99c6e4e77
+c:|altera|90sp2|quartus|libraries|megafunctions|lpm_counter.inc
+7f888b135ddf66f0653c44cb18ac5
+c:|altera|90sp2|quartus|libraries|megafunctions|altsyncram_fifo.inc
+12f7d8c61da985ee5330de43a169e
 }
 # hierarchies {
 Tx_fifo:Tx_fifo|dcfifo:dcfifo_component
@@ -1961,7 +1903,7 @@ db|Ozy11.(19).cnf
 # case_insensitive
 # source_file
 db|dcfifo_60n1.tdf
-3266cd96785595d5178fc03e4297c28c
+a6d5b1564743016f8551513a5bdaf4
 7
 # used_port {
 wrusedw9
@@ -2129,7 +2071,7 @@ db|Ozy11.(20).cnf
 # case_insensitive
 # source_file
 db|a_gray2bin_mdb.tdf
-79c1c154225763b89f614988d257adab
+624dd73a2b79e35ee3e643d694b83e8
 7
 # used_port {
 gray9
@@ -2220,7 +2162,7 @@ db|Ozy11.(21).cnf
 # case_insensitive
 # source_file
 db|a_graycounter_q96.tdf
-47e94d20e965386a87465ad3ee041ba
+cd2d3351f262b624e7e2d77beb85c7a
 7
 # used_port {
 q9
@@ -2283,7 +2225,7 @@ db|Ozy11.(22).cnf
 # case_insensitive
 # source_file
 db|a_graycounter_hgc.tdf
-a986adff79e983213e2dd226c7da197
+8a808bbc20369e9b61a7f5d8a72fa2d9
 7
 # used_port {
 cnt_en
@@ -2310,7 +2252,7 @@ db|Ozy11.(23).cnf
 # case_insensitive
 # source_file
 db|a_graycounter_ggc.tdf
-fdd2a0c85181717d230698f7f2ad2f0
+56f7ba5eb760db62f49a5451ed22116
 7
 # used_port {
 q9
@@ -2373,7 +2315,7 @@ db|Ozy11.(24).cnf
 # case_insensitive
 # source_file
 db|altsyncram_rr61.tdf
-e2d0268bc1d6397597efe281078e463
+a7d965bb814af911bae0f92e49b5ea
 7
 # used_port {
 wren_a
@@ -2571,7 +2513,7 @@ db|Ozy11.(25).cnf
 # case_insensitive
 # source_file
 db|altsyncram_72f1.tdf
-493e4b6afe66b5c3fbdce06327af70c8
+eb6a50f2a43cf4ebcef0d9b3cfecef68
 7
 # used_port {
 wren_b
@@ -2823,7 +2765,7 @@ db|Ozy11.(26).cnf
 # case_insensitive
 # source_file
 db|dffpipe_ahe.tdf
-fbdd466d150b992843b8af1b473f89
+5bfb5f73dd5df1526e7e61a7ca4ff33
 7
 # used_port {
 q0
@@ -2853,7 +2795,7 @@ db|Ozy11.(27).cnf
 # case_insensitive
 # source_file
 db|alt_synch_pipe_tdb.tdf
-26ca9ed37eb1240d15fbd671fab03d
+ac01473fe40d229d56308e53a855d0
 7
 # used_port {
 q9
@@ -2949,7 +2891,7 @@ db|Ozy11.(28).cnf
 # case_insensitive
 # source_file
 db|dffpipe_re9.tdf
-5d8eff5ca6b941ebef677672a3c016c
+6696b17b4a8e9a6a1e04df8adc7dd
 7
 # used_port {
 q9
@@ -3045,7 +2987,7 @@ db|Ozy11.(29).cnf
 # case_insensitive
 # source_file
 db|dffpipe_9d9.tdf
-e97313518e7b49e4e5f68381c5e26c9d
+31c6ff22bc1aea2419a64f98b242ccfe
 7
 # used_port {
 q0
@@ -3075,7 +3017,7 @@ db|Ozy11.(30).cnf
 # case_insensitive
 # source_file
 db|dffpipe_qe9.tdf
-73cb2677e26b653f7ae637b17e18f162
+84fb269bf016d3f39f53f1af0e1fe6a
 7
 # used_port {
 q9
@@ -3172,7 +3114,7 @@ db|Ozy11.(31).cnf
 # case_insensitive
 # source_file
 db|alt_synch_pipe_1e8.tdf
-a917787da8aa915177eb3636b241b4c
+815118d7e28ac5b1b671cdf8d826dfb2
 7
 # used_port {
 q9
@@ -3268,7 +3210,7 @@ db|Ozy11.(32).cnf
 # case_insensitive
 # source_file
 db|dffpipe_se9.tdf
-5045331df5461cec584fc7e7b646aaa
+15913c1b8ed63913e66acdbfbab612
 7
 # used_port {
 q9
@@ -3364,7 +3306,7 @@ db|Ozy11.(33).cnf
 # case_insensitive
 # source_file
 db|cmpr_736.tdf
-e11874f6cb671d807cde9a8ae648aac
+8caed1d386666ca3969cbe38d17df06b
 7
 # used_port {
 datab9
@@ -3462,7 +3404,7 @@ ON
 # case_sensitive
 # source_file
 Ozy11.v
-9eb97e2bcb9a9d5fba3b5669d9cd816
+d5ee7784a4c97bd6cdc472d09daaf82
 8
 # internal_option {
 HDL_INITIAL_FANOUT_LIMIT
@@ -3482,6 +3424,769 @@ VERILOG_NON_CONSTANT_LOOP_LIMIT
 }
 # hierarchies {
 |
+}
+# macro_sequence
+
+# end
+# entity
+Rx_fifo
+# storage
+db|Ozy11.(1).cnf
+db|Ozy11.(1).cnf
+# logic_option {
+AUTO_RAM_RECOGNITION
+ON
+}
+# case_sensitive
+# source_file
+Rx_fifo.v
+fcf7a92971c388941a8275d65c41f
+8
+# internal_option {
+HDL_INITIAL_FANOUT_LIMIT
+OFF
+AUTO_RESOURCE_SHARING
+OFF
+AUTO_RAM_RECOGNITION
+ON
+AUTO_ROM_RECOGNITION
+ON
+IGNORE_VERILOG_INITIAL_CONSTRUCTS
+OFF
+VERILOG_CONSTANT_LOOP_LIMIT
+5000
+VERILOG_NON_CONSTANT_LOOP_LIMIT
+250
+}
+# hierarchies {
+Rx_fifo:Rx_fifo
+}
+# macro_sequence
+
+# end
+# entity
+dcfifo
+# storage
+db|Ozy11.(34).cnf
+db|Ozy11.(34).cnf
+# case_insensitive
+# source_file
+c:|altera|90sp2|quartus|libraries|megafunctions|dcfifo.tdf
+9f15fd53c99e8cfc138906046bf9
+7
+# user_parameter {
+WIDTH_BYTEENA
+1
+PARAMETER_UNKNOWN
+DEF
+AUTO_CARRY_CHAINS
+ON
+AUTO_CARRY
+USR
+IGNORE_CARRY_BUFFERS
+OFF
+IGNORE_CARRY
+USR
+AUTO_CASCADE_CHAINS
+ON
+AUTO_CASCADE
+USR
+IGNORE_CASCADE_BUFFERS
+OFF
+IGNORE_CASCADE
+USR
+LPM_WIDTH
+16
+PARAMETER_SIGNED_DEC
+USR
+LPM_NUMWORDS
+4096
+PARAMETER_SIGNED_DEC
+USR
+LPM_WIDTHU
+12
+PARAMETER_SIGNED_DEC
+USR
+LPM_SHOWAHEAD
+OFF
+PARAMETER_UNKNOWN
+USR
+UNDERFLOW_CHECKING
+ON
+PARAMETER_UNKNOWN
+USR
+OVERFLOW_CHECKING
+ON
+PARAMETER_UNKNOWN
+USR
+USE_EAB
+ON
+PARAMETER_UNKNOWN
+USR
+ADD_RAM_OUTPUT_REGISTER
+OFF
+PARAMETER_UNKNOWN
+DEF
+DELAY_RDUSEDW
+1
+PARAMETER_UNKNOWN
+DEF
+DELAY_WRUSEDW
+1
+PARAMETER_UNKNOWN
+DEF
+RDSYNC_DELAYPIPE
+4
+PARAMETER_SIGNED_DEC
+USR
+WRSYNC_DELAYPIPE
+4
+PARAMETER_SIGNED_DEC
+USR
+CLOCKS_ARE_SYNCHRONIZED
+FALSE
+PARAMETER_UNKNOWN
+DEF
+MAXIMIZE_SPEED
+5
+PARAMETER_UNKNOWN
+USR
+DEVICE_FAMILY
+Cyclone II
+PARAMETER_UNKNOWN
+USR
+ADD_USEDW_MSB_BIT
+OFF
+PARAMETER_UNKNOWN
+DEF
+WRITE_ACLR_SYNCH
+OFF
+PARAMETER_UNKNOWN
+DEF
+CBXI_PARAMETER
+dcfifo_tgk1
+PARAMETER_UNKNOWN
+USR
+}
+# used_port {
+wrusedw
+-1
+3
+wrreq
+-1
+3
+wrfull
+-1
+3
+wrclk
+-1
+3
+rdreq
+-1
+3
+rdempty
+-1
+3
+rdclk
+-1
+3
+q
+-1
+3
+data
+-1
+3
+}
+# include_file {
+c:|altera|90sp2|quartus|libraries|megafunctions|lpm_add_sub.inc
+7d9a33dd39f13aa690c3d0edd88351
+c:|altera|90sp2|quartus|libraries|megafunctions|lpm_counter.inc
+7f888b135ddf66f0653c44cb18ac5
+c:|altera|90sp2|quartus|libraries|megafunctions|a_fefifo.inc
+c8498561e0bdc47f87b5548333d65f50
+c:|altera|90sp2|quartus|libraries|megafunctions|altdpram.inc
+99d442b5b66c88db4daf94d99c6e4e77
+c:|altera|90sp2|quartus|libraries|megafunctions|aglobal90.inc
+99832fdf63412df51d7531202d74e75
+c:|altera|90sp2|quartus|libraries|megafunctions|dffpipe.inc
+8dfdb676c11c7bcef0694118a05ea2d
+c:|altera|90sp2|quartus|libraries|megafunctions|alt_sync_fifo.inc
+f4c68b9daca4a0e5389631895df30d0
+c:|altera|90sp2|quartus|libraries|megafunctions|lpm_compare.inc
+aec4ea1b78f4cda1c3effe18f1abbf63
+c:|altera|90sp2|quartus|libraries|megafunctions|a_graycounter.inc
+6bb463da5ec6451f39fdb64aba52ffc0
+c:|altera|90sp2|quartus|libraries|megafunctions|altsyncram_fifo.inc
+12f7d8c61da985ee5330de43a169e
+c:|altera|90sp2|quartus|libraries|megafunctions|a_gray2bin.inc
+2466d892d81838e113e13f4e76e71f2
+}
+# hierarchies {
+Rx_fifo:Rx_fifo|dcfifo:dcfifo_component
+}
+# macro_sequence
+
+# end
+# entity
+dcfifo_tgk1
+# storage
+db|Ozy11.(35).cnf
+db|Ozy11.(35).cnf
+# case_insensitive
+# source_file
+db|dcfifo_tgk1.tdf
+9e28fbfb6482da62e12ed5b9b579d157
+7
+# used_port {
+wrusedw9
+-1
+3
+wrusedw8
+-1
+3
+wrusedw7
+-1
+3
+wrusedw6
+-1
+3
+wrusedw5
+-1
+3
+wrusedw4
+-1
+3
+wrusedw3
+-1
+3
+wrusedw2
+-1
+3
+wrusedw11
+-1
+3
+wrusedw10
+-1
+3
+wrusedw1
+-1
+3
+wrusedw0
+-1
+3
+wrreq
+-1
+3
+wrfull
+-1
+3
+wrclk
+-1
+3
+rdreq
+-1
+3
+rdempty
+-1
+3
+rdclk
+-1
+3
+q9
+-1
+3
+q8
+-1
+3
+q7
+-1
+3
+q6
+-1
+3
+q5
+-1
+3
+q4
+-1
+3
+q3
+-1
+3
+q2
+-1
+3
+q15
+-1
+3
+q14
+-1
+3
+q13
+-1
+3
+q12
+-1
+3
+q11
+-1
+3
+q10
+-1
+3
+q1
+-1
+3
+q0
+-1
+3
+data9
+-1
+3
+data8
+-1
+3
+data7
+-1
+3
+data6
+-1
+3
+data5
+-1
+3
+data4
+-1
+3
+data3
+-1
+3
+data2
+-1
+3
+data15
+-1
+3
+data14
+-1
+3
+data13
+-1
+3
+data12
+-1
+3
+data11
+-1
+3
+data10
+-1
+3
+data1
+-1
+3
+data0
+-1
+3
+}
+# hierarchies {
+Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_tgk1:auto_generated
+}
+# macro_sequence
+
+# end
+# entity
+alt_synch_pipe_lv7
+# storage
+db|Ozy11.(36).cnf
+db|Ozy11.(36).cnf
+# case_insensitive
+# source_file
+db|alt_synch_pipe_lv7.tdf
+98c27a38111787355be60e08575a61e
+7
+# used_port {
+q9
+-1
+3
+q8
+-1
+3
+q7
+-1
+3
+q6
+-1
+3
+q5
+-1
+3
+q4
+-1
+3
+q3
+-1
+3
+q2
+-1
+3
+q12
+-1
+3
+q11
+-1
+3
+q10
+-1
+3
+q1
+-1
+3
+q0
+-1
+3
+d9
+-1
+3
+d8
+-1
+3
+d7
+-1
+3
+d6
+-1
+3
+d5
+-1
+3
+d4
+-1
+3
+d3
+-1
+3
+d2
+-1
+3
+d12
+-1
+3
+d11
+-1
+3
+d10
+-1
+3
+d1
+-1
+3
+d0
+-1
+3
+clock
+-1
+3
+}
+# hierarchies {
+Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_tgk1:auto_generated|alt_synch_pipe_lv7:rs_dgwp
+}
+# macro_sequence
+
+# end
+# entity
+dffpipe_f09
+# storage
+db|Ozy11.(37).cnf
+db|Ozy11.(37).cnf
+# case_insensitive
+# source_file
+db|dffpipe_f09.tdf
+335b528ef84b5eb8740ccd23aee7018
+7
+# used_port {
+q9
+-1
+3
+q8
+-1
+3
+q7
+-1
+3
+q6
+-1
+3
+q5
+-1
+3
+q4
+-1
+3
+q3
+-1
+3
+q2
+-1
+3
+q12
+-1
+3
+q11
+-1
+3
+q10
+-1
+3
+q1
+-1
+3
+q0
+-1
+3
+d9
+-1
+3
+d8
+-1
+3
+d7
+-1
+3
+d6
+-1
+3
+d5
+-1
+3
+d4
+-1
+3
+d3
+-1
+3
+d2
+-1
+3
+d12
+-1
+3
+d11
+-1
+3
+d10
+-1
+3
+d1
+-1
+3
+d0
+-1
+3
+clock
+-1
+3
+}
+# hierarchies {
+Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_tgk1:auto_generated|alt_synch_pipe_lv7:rs_dgwp|dffpipe_f09:dffpipe5
+}
+# macro_sequence
+
+# end
+# entity
+alt_synch_pipe_mv7
+# storage
+db|Ozy11.(38).cnf
+db|Ozy11.(38).cnf
+# case_insensitive
+# source_file
+db|alt_synch_pipe_mv7.tdf
+52ac7fd87b88b5bcaefd49b7c92f6567
+7
+# used_port {
+q9
+-1
+3
+q8
+-1
+3
+q7
+-1
+3
+q6
+-1
+3
+q5
+-1
+3
+q4
+-1
+3
+q3
+-1
+3
+q2
+-1
+3
+q12
+-1
+3
+q11
+-1
+3
+q10
+-1
+3
+q1
+-1
+3
+q0
+-1
+3
+d9
+-1
+3
+d8
+-1
+3
+d7
+-1
+3
+d6
+-1
+3
+d5
+-1
+3
+d4
+-1
+3
+d3
+-1
+3
+d2
+-1
+3
+d12
+-1
+3
+d11
+-1
+3
+d10
+-1
+3
+d1
+-1
+3
+d0
+-1
+3
+clock
+-1
+3
+}
+# hierarchies {
+Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_tgk1:auto_generated|alt_synch_pipe_mv7:ws_dgrp
+}
+# macro_sequence
+
+# end
+# entity
+dffpipe_g09
+# storage
+db|Ozy11.(39).cnf
+db|Ozy11.(39).cnf
+# case_insensitive
+# source_file
+db|dffpipe_g09.tdf
+403ab6c1d2383a43ee57364108e7576
+7
+# used_port {
+q9
+-1
+3
+q8
+-1
+3
+q7
+-1
+3
+q6
+-1
+3
+q5
+-1
+3
+q4
+-1
+3
+q3
+-1
+3
+q2
+-1
+3
+q12
+-1
+3
+q11
+-1
+3
+q10
+-1
+3
+q1
+-1
+3
+q0
+-1
+3
+d9
+-1
+3
+d8
+-1
+3
+d7
+-1
+3
+d6
+-1
+3
+d5
+-1
+3
+d4
+-1
+3
+d3
+-1
+3
+d2
+-1
+3
+d12
+-1
+3
+d11
+-1
+3
+d10
+-1
+3
+d1
+-1
+3
+d0
+-1
+3
+clock
+-1
+3
+}
+# hierarchies {
+Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_tgk1:auto_generated|alt_synch_pipe_mv7:ws_dgrp|dffpipe_g09:dffpipe8
 }
 # macro_sequence
 

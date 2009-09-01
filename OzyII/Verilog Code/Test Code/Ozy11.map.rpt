@@ -1,6 +1,6 @@
 Analysis & Synthesis report for Ozy11
-Mon Aug 31 21:21:41 2009
-Quartus II Version 9.0 Build 132 02/25/2009 SJ Web Edition
+Tue Sep 01 16:39:01 2009
+Quartus II Version 9.0 Build 235 06/17/2009 Service Pack 2 SJ Web Edition
 
 
 ---------------------
@@ -19,41 +19,39 @@ Quartus II Version 9.0 Build 132 02/25/2009 SJ Web Edition
  11. General Register Statistics
  12. Multiplexer Restructuring Statistics (Restructuring Performed)
  13. Source assignments for Rx_fifo:Rx_fifo|dcfifo:dcfifo_component
- 14. Source assignments for Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_mgk1:auto_generated
- 15. Source assignments for Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_mgk1:auto_generated|a_graycounter_g2c:wrptr_g1p
- 16. Source assignments for Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_mgk1:auto_generated|a_graycounter_f2c:wrptr_gp
- 17. Source assignments for Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_mgk1:auto_generated|altsyncram_vpu:fifo_ram
- 18. Source assignments for Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_mgk1:auto_generated|altsyncram_vpu:fifo_ram|altsyncram_aec1:altsyncram5
- 19. Source assignments for Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_mgk1:auto_generated|dffpipe_c2e:rdaclr
- 20. Source assignments for Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_mgk1:auto_generated|dffpipe_c09:rs_brp
- 21. Source assignments for Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_mgk1:auto_generated|dffpipe_c09:rs_bwp
- 22. Source assignments for Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_mgk1:auto_generated|alt_synch_pipe_jv7:rs_dgwp
- 23. Source assignments for Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_mgk1:auto_generated|alt_synch_pipe_jv7:rs_dgwp|dffpipe_d09:dffpipe9
- 24. Source assignments for Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_mgk1:auto_generated|dffpipe_c09:ws_brp
- 25. Source assignments for Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_mgk1:auto_generated|dffpipe_c09:ws_bwp
- 26. Source assignments for Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_mgk1:auto_generated|alt_synch_pipe_kv7:ws_dgrp
- 27. Source assignments for Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_mgk1:auto_generated|alt_synch_pipe_kv7:ws_dgrp|dffpipe_e09:dffpipe12
- 28. Source assignments for Tx_fifo:Tx_fifo|dcfifo:dcfifo_component
- 29. Source assignments for Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_60n1:auto_generated
- 30. Source assignments for Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_60n1:auto_generated|a_graycounter_hgc:wrptr_g1p
- 31. Source assignments for Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_60n1:auto_generated|a_graycounter_ggc:wrptr_gp
- 32. Source assignments for Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_60n1:auto_generated|altsyncram_rr61:fifo_ram
- 33. Source assignments for Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_60n1:auto_generated|altsyncram_rr61:fifo_ram|altsyncram_72f1:altsyncram5
- 34. Source assignments for Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_60n1:auto_generated|dffpipe_ahe:rdaclr
- 35. Source assignments for Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_60n1:auto_generated|alt_synch_pipe_tdb:rs_dgwp
- 36. Source assignments for Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_60n1:auto_generated|alt_synch_pipe_tdb:rs_dgwp|dffpipe_re9:dffpipe9
- 37. Source assignments for Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_60n1:auto_generated|dffpipe_9d9:wraclr
- 38. Source assignments for Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_60n1:auto_generated|dffpipe_qe9:ws_brp
- 39. Source assignments for Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_60n1:auto_generated|dffpipe_qe9:ws_bwp
- 40. Source assignments for Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_60n1:auto_generated|alt_synch_pipe_1e8:ws_dgrp
- 41. Source assignments for Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_60n1:auto_generated|alt_synch_pipe_1e8:ws_dgrp|dffpipe_se9:dffpipe15
- 42. Parameter Settings for User Entity Instance: Rx_fifo:Rx_fifo|dcfifo:dcfifo_component
- 43. Parameter Settings for User Entity Instance: Tx_fifo:Tx_fifo|dcfifo:dcfifo_component
- 44. dcfifo Parameter Settings by Entity Instance
- 45. Port Connectivity Checks: "Tx_fifo:Tx_fifo"
- 46. Port Connectivity Checks: "Rx_fifo:Rx_fifo"
- 47. Analysis & Synthesis Messages
- 48. Analysis & Synthesis Suppressed Messages
+ 14. Source assignments for Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_tgk1:auto_generated
+ 15. Source assignments for Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_tgk1:auto_generated|a_graycounter_g2c:wrptr_g1p
+ 16. Source assignments for Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_tgk1:auto_generated|a_graycounter_f2c:wrptr_gp
+ 17. Source assignments for Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_tgk1:auto_generated|altsyncram_vpu:fifo_ram
+ 18. Source assignments for Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_tgk1:auto_generated|altsyncram_vpu:fifo_ram|altsyncram_aec1:altsyncram5
+ 19. Source assignments for Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_tgk1:auto_generated|dffpipe_c2e:rdaclr
+ 20. Source assignments for Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_tgk1:auto_generated|alt_synch_pipe_lv7:rs_dgwp
+ 21. Source assignments for Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_tgk1:auto_generated|alt_synch_pipe_lv7:rs_dgwp|dffpipe_f09:dffpipe5
+ 22. Source assignments for Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_tgk1:auto_generated|dffpipe_c09:ws_brp
+ 23. Source assignments for Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_tgk1:auto_generated|dffpipe_c09:ws_bwp
+ 24. Source assignments for Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_tgk1:auto_generated|alt_synch_pipe_mv7:ws_dgrp
+ 25. Source assignments for Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_tgk1:auto_generated|alt_synch_pipe_mv7:ws_dgrp|dffpipe_g09:dffpipe8
+ 26. Source assignments for Tx_fifo:Tx_fifo|dcfifo:dcfifo_component
+ 27. Source assignments for Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_60n1:auto_generated
+ 28. Source assignments for Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_60n1:auto_generated|a_graycounter_hgc:wrptr_g1p
+ 29. Source assignments for Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_60n1:auto_generated|a_graycounter_ggc:wrptr_gp
+ 30. Source assignments for Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_60n1:auto_generated|altsyncram_rr61:fifo_ram
+ 31. Source assignments for Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_60n1:auto_generated|altsyncram_rr61:fifo_ram|altsyncram_72f1:altsyncram5
+ 32. Source assignments for Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_60n1:auto_generated|dffpipe_ahe:rdaclr
+ 33. Source assignments for Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_60n1:auto_generated|alt_synch_pipe_tdb:rs_dgwp
+ 34. Source assignments for Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_60n1:auto_generated|alt_synch_pipe_tdb:rs_dgwp|dffpipe_re9:dffpipe9
+ 35. Source assignments for Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_60n1:auto_generated|dffpipe_9d9:wraclr
+ 36. Source assignments for Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_60n1:auto_generated|dffpipe_qe9:ws_brp
+ 37. Source assignments for Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_60n1:auto_generated|dffpipe_qe9:ws_bwp
+ 38. Source assignments for Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_60n1:auto_generated|alt_synch_pipe_1e8:ws_dgrp
+ 39. Source assignments for Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_60n1:auto_generated|alt_synch_pipe_1e8:ws_dgrp|dffpipe_se9:dffpipe15
+ 40. Parameter Settings for User Entity Instance: Rx_fifo:Rx_fifo|dcfifo:dcfifo_component
+ 41. Parameter Settings for User Entity Instance: Tx_fifo:Tx_fifo|dcfifo:dcfifo_component
+ 42. dcfifo Parameter Settings by Entity Instance
+ 43. Port Connectivity Checks: "Tx_fifo:Tx_fifo"
+ 44. Port Connectivity Checks: "Rx_fifo:Rx_fifo"
+ 45. Analysis & Synthesis Messages
+ 46. Analysis & Synthesis Suppressed Messages
 
 
 
@@ -76,99 +74,99 @@ applicable agreement for further details.
 
 
 
-+------------------------------------------------------------------------------+
-; Analysis & Synthesis Summary                                                 ;
-+------------------------------------+-----------------------------------------+
-; Analysis & Synthesis Status        ; Successful - Mon Aug 31 21:21:41 2009   ;
-; Quartus II Version                 ; 9.0 Build 132 02/25/2009 SJ Web Edition ;
-; Revision Name                      ; Ozy11                                   ;
-; Top-level Entity Name              ; Ozy11                                   ;
-; Family                             ; Cyclone II                              ;
-; Total logic elements               ; 92                                      ;
-;     Total combinational functions  ; 64                                      ;
-;     Dedicated logic registers      ; 52                                      ;
-; Total registers                    ; 52                                      ;
-; Total pins                         ; 38                                      ;
-; Total virtual pins                 ; 0                                       ;
-; Total memory bits                  ; 32,768                                  ;
-; Embedded Multiplier 9-bit elements ; 0                                       ;
-; Total PLLs                         ; 0                                       ;
-+------------------------------------+-----------------------------------------+
++-----------------------------------------------------------------------------------+
+; Analysis & Synthesis Summary                                                      ;
++------------------------------------+----------------------------------------------+
+; Analysis & Synthesis Status        ; Successful - Tue Sep 01 16:39:01 2009        ;
+; Quartus II Version                 ; 9.0 Build 235 06/17/2009 SP 2 SJ Web Edition ;
+; Revision Name                      ; Ozy11                                        ;
+; Top-level Entity Name              ; Ozy11                                        ;
+; Family                             ; Cyclone II                                   ;
+; Total logic elements               ; 295                                          ;
+;     Total combinational functions  ; 139                                          ;
+;     Dedicated logic registers      ; 224                                          ;
+; Total registers                    ; 224                                          ;
+; Total pins                         ; 38                                           ;
+; Total virtual pins                 ; 0                                            ;
+; Total memory bits                  ; 98,304                                       ;
+; Embedded Multiplier 9-bit elements ; 0                                            ;
+; Total PLLs                         ; 0                                            ;
++------------------------------------+----------------------------------------------+
 
 
-+----------------------------------------------------------------------------------------------------------+
-; Analysis & Synthesis Settings                                                                            ;
-+----------------------------------------------------------------+--------------------+--------------------+
-; Option                                                         ; Setting            ; Default Value      ;
-+----------------------------------------------------------------+--------------------+--------------------+
-; Device                                                         ; EP2C8Q208C8        ;                    ;
-; Top-level entity name                                          ; Ozy11              ; Ozy11              ;
-; Family name                                                    ; Cyclone II         ; Stratix II         ;
-; Use Generated Physical Constraints File                        ; Off                ;                    ;
-; Use smart compilation                                          ; Off                ; Off                ;
-; Restructure Multiplexers                                       ; Auto               ; Auto               ;
-; Create Debugging Nodes for IP Cores                            ; Off                ; Off                ;
-; Preserve fewer node names                                      ; On                 ; On                 ;
-; Disable OpenCore Plus hardware evaluation                      ; Off                ; Off                ;
-; Verilog Version                                                ; Verilog_2001       ; Verilog_2001       ;
-; VHDL Version                                                   ; VHDL93             ; VHDL93             ;
-; State Machine Processing                                       ; Auto               ; Auto               ;
-; Safe State Machine                                             ; Off                ; Off                ;
-; Extract Verilog State Machines                                 ; On                 ; On                 ;
-; Extract VHDL State Machines                                    ; On                 ; On                 ;
-; Ignore Verilog initial constructs                              ; Off                ; Off                ;
-; Iteration limit for constant Verilog loops                     ; 5000               ; 5000               ;
-; Iteration limit for non-constant Verilog loops                 ; 250                ; 250                ;
-; Add Pass-Through Logic to Inferred RAMs                        ; On                 ; On                 ;
-; Parallel Synthesis                                             ; Off                ; Off                ;
-; DSP Block Balancing                                            ; Auto               ; Auto               ;
-; NOT Gate Push-Back                                             ; On                 ; On                 ;
-; Power-Up Don't Care                                            ; On                 ; On                 ;
-; Remove Redundant Logic Cells                                   ; Off                ; Off                ;
-; Remove Duplicate Registers                                     ; On                 ; On                 ;
-; Ignore CARRY Buffers                                           ; Off                ; Off                ;
-; Ignore CASCADE Buffers                                         ; Off                ; Off                ;
-; Ignore GLOBAL Buffers                                          ; Off                ; Off                ;
-; Ignore ROW GLOBAL Buffers                                      ; Off                ; Off                ;
-; Ignore LCELL Buffers                                           ; Off                ; Off                ;
-; Ignore SOFT Buffers                                            ; On                 ; On                 ;
-; Limit AHDL Integers to 32 Bits                                 ; Off                ; Off                ;
-; Optimization Technique                                         ; Balanced           ; Balanced           ;
-; Carry Chain Length                                             ; 70                 ; 70                 ;
-; Auto Carry Chains                                              ; On                 ; On                 ;
-; Auto Open-Drain Pins                                           ; On                 ; On                 ;
-; Perform WYSIWYG Primitive Resynthesis                          ; Off                ; Off                ;
-; Auto ROM Replacement                                           ; On                 ; On                 ;
-; Auto RAM Replacement                                           ; On                 ; On                 ;
-; Auto Shift Register Replacement                                ; Auto               ; Auto               ;
-; Auto Clock Enable Replacement                                  ; On                 ; On                 ;
-; Strict RAM Replacement                                         ; Off                ; Off                ;
-; Allow Synchronous Control Signals                              ; On                 ; On                 ;
-; Force Use of Synchronous Clear Signals                         ; Off                ; Off                ;
-; Auto RAM to Logic Cell Conversion                              ; Off                ; Off                ;
-; Auto Resource Sharing                                          ; Off                ; Off                ;
-; Allow Any RAM Size For Recognition                             ; Off                ; Off                ;
-; Allow Any ROM Size For Recognition                             ; Off                ; Off                ;
-; Allow Any Shift Register Size For Recognition                  ; Off                ; Off                ;
-; Use LogicLock Constraints during Resource Balancing            ; On                 ; On                 ;
-; Ignore translate_off and synthesis_off directives              ; Off                ; Off                ;
-; Timing-Driven Synthesis                                        ; Off                ; Off                ;
-; Show Parameter Settings Tables in Synthesis Report             ; On                 ; On                 ;
-; Ignore Maximum Fan-Out Assignments                             ; Off                ; Off                ;
-; Synchronization Register Chain Length                          ; 2                  ; 2                  ;
-; PowerPlay Power Optimization                                   ; Normal compilation ; Normal compilation ;
-; HDL message level                                              ; Level2             ; Level2             ;
-; Suppress Register Optimization Related Messages                ; Off                ; Off                ;
-; Number of Removed Registers Reported in Synthesis Report       ; 100                ; 100                ;
-; Number of Inverted Registers Reported in Synthesis Report      ; 100                ; 100                ;
-; Clock MUX Protection                                           ; On                 ; On                 ;
-; Auto Gated Clock Conversion                                    ; Off                ; Off                ;
-; Block Design Naming                                            ; Auto               ; Auto               ;
-; SDC constraint protection                                      ; Off                ; Off                ;
-; Synthesis Effort                                               ; Auto               ; Auto               ;
-; Allows Asynchronous Clear Usage For Shift Register Replacement ; On                 ; On                 ;
-; Analysis & Synthesis Message Level                             ; Medium             ; Medium             ;
-+----------------------------------------------------------------+--------------------+--------------------+
++--------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Settings                                                                          ;
++--------------------------------------------------------------+--------------------+--------------------+
+; Option                                                       ; Setting            ; Default Value      ;
++--------------------------------------------------------------+--------------------+--------------------+
+; Device                                                       ; EP2C8Q208C8        ;                    ;
+; Top-level entity name                                        ; Ozy11              ; Ozy11              ;
+; Family name                                                  ; Cyclone II         ; Stratix II         ;
+; Use Generated Physical Constraints File                      ; Off                ;                    ;
+; Use smart compilation                                        ; Off                ; Off                ;
+; Restructure Multiplexers                                     ; Auto               ; Auto               ;
+; Create Debugging Nodes for IP Cores                          ; Off                ; Off                ;
+; Preserve fewer node names                                    ; On                 ; On                 ;
+; Disable OpenCore Plus hardware evaluation                    ; Off                ; Off                ;
+; Verilog Version                                              ; Verilog_2001       ; Verilog_2001       ;
+; VHDL Version                                                 ; VHDL93             ; VHDL93             ;
+; State Machine Processing                                     ; Auto               ; Auto               ;
+; Safe State Machine                                           ; Off                ; Off                ;
+; Extract Verilog State Machines                               ; On                 ; On                 ;
+; Extract VHDL State Machines                                  ; On                 ; On                 ;
+; Ignore Verilog initial constructs                            ; Off                ; Off                ;
+; Iteration limit for constant Verilog loops                   ; 5000               ; 5000               ;
+; Iteration limit for non-constant Verilog loops               ; 250                ; 250                ;
+; Add Pass-Through Logic to Inferred RAMs                      ; On                 ; On                 ;
+; Parallel Synthesis                                           ; Off                ; Off                ;
+; DSP Block Balancing                                          ; Auto               ; Auto               ;
+; NOT Gate Push-Back                                           ; On                 ; On                 ;
+; Power-Up Don't Care                                          ; On                 ; On                 ;
+; Remove Redundant Logic Cells                                 ; Off                ; Off                ;
+; Remove Duplicate Registers                                   ; On                 ; On                 ;
+; Ignore CARRY Buffers                                         ; Off                ; Off                ;
+; Ignore CASCADE Buffers                                       ; Off                ; Off                ;
+; Ignore GLOBAL Buffers                                        ; Off                ; Off                ;
+; Ignore ROW GLOBAL Buffers                                    ; Off                ; Off                ;
+; Ignore LCELL Buffers                                         ; Off                ; Off                ;
+; Ignore SOFT Buffers                                          ; On                 ; On                 ;
+; Limit AHDL Integers to 32 Bits                               ; Off                ; Off                ;
+; Optimization Technique                                       ; Balanced           ; Balanced           ;
+; Carry Chain Length                                           ; 70                 ; 70                 ;
+; Auto Carry Chains                                            ; On                 ; On                 ;
+; Auto Open-Drain Pins                                         ; On                 ; On                 ;
+; Perform WYSIWYG Primitive Resynthesis                        ; Off                ; Off                ;
+; Auto ROM Replacement                                         ; On                 ; On                 ;
+; Auto RAM Replacement                                         ; On                 ; On                 ;
+; Auto Shift Register Replacement                              ; Auto               ; Auto               ;
+; Auto Clock Enable Replacement                                ; On                 ; On                 ;
+; Strict RAM Replacement                                       ; Off                ; Off                ;
+; Allow Synchronous Control Signals                            ; On                 ; On                 ;
+; Force Use of Synchronous Clear Signals                       ; Off                ; Off                ;
+; Auto RAM to Logic Cell Conversion                            ; Off                ; Off                ;
+; Auto Resource Sharing                                        ; Off                ; Off                ;
+; Allow Any RAM Size For Recognition                           ; Off                ; Off                ;
+; Allow Any ROM Size For Recognition                           ; Off                ; Off                ;
+; Allow Any Shift Register Size For Recognition                ; Off                ; Off                ;
+; Use LogicLock Constraints during Resource Balancing          ; On                 ; On                 ;
+; Ignore translate_off and synthesis_off directives            ; Off                ; Off                ;
+; Timing-Driven Synthesis                                      ; Off                ; Off                ;
+; Show Parameter Settings Tables in Synthesis Report           ; On                 ; On                 ;
+; Ignore Maximum Fan-Out Assignments                           ; Off                ; Off                ;
+; Synchronization Register Chain Length                        ; 2                  ; 2                  ;
+; PowerPlay Power Optimization                                 ; Normal compilation ; Normal compilation ;
+; HDL message level                                            ; Level2             ; Level2             ;
+; Suppress Register Optimization Related Messages              ; Off                ; Off                ;
+; Number of Removed Registers Reported in Synthesis Report     ; 100                ; 100                ;
+; Number of Inverted Registers Reported in Synthesis Report    ; 100                ; 100                ;
+; Clock MUX Protection                                         ; On                 ; On                 ;
+; Auto Gated Clock Conversion                                  ; Off                ; Off                ;
+; Block Design Naming                                          ; Auto               ; Auto               ;
+; SDC constraint protection                                    ; Off                ; Off                ;
+; Synthesis Effort                                             ; Auto               ; Auto               ;
+; Shift Register Replacement - Allow Asynchronous Clear Signal ; On                 ; On                 ;
+; Analysis & Synthesis Message Level                           ; Medium             ; Medium             ;
++--------------------------------------------------------------+--------------------+--------------------+
 
 
 +-----------------------------------------------------------------------------------------------------------------------------------------------------------+
@@ -176,50 +174,50 @@ applicable agreement for further details.
 +----------------------------------+-----------------+------------------------------+-----------------------------------------------------------------------+
 ; File Name with User-Entered Path ; Used in Netlist ; File Type                    ; File Name with Absolute Path                                          ;
 +----------------------------------+-----------------+------------------------------+-----------------------------------------------------------------------+
-; Tx_fifo.v                        ; yes             ; User Wizard-Generated File   ; C:/HPSDR/trunk/OzyII/Verilog Code/Test Code/Tx_fifo.v                 ;
-; Rx_fifo.v                        ; yes             ; User Wizard-Generated File   ; C:/HPSDR/trunk/OzyII/Verilog Code/Test Code/Rx_fifo.v                 ;
-; Ozy11.v                          ; yes             ; User Verilog HDL File        ; C:/HPSDR/trunk/OzyII/Verilog Code/Test Code/Ozy11.v                   ;
-; dcfifo.tdf                       ; yes             ; Megafunction                 ; c:/altera/90/quartus/libraries/megafunctions/dcfifo.tdf               ;
-; lpm_counter.inc                  ; yes             ; Megafunction                 ; c:/altera/90/quartus/libraries/megafunctions/lpm_counter.inc          ;
-; lpm_add_sub.inc                  ; yes             ; Megafunction                 ; c:/altera/90/quartus/libraries/megafunctions/lpm_add_sub.inc          ;
-; altdpram.inc                     ; yes             ; Megafunction                 ; c:/altera/90/quartus/libraries/megafunctions/altdpram.inc             ;
-; a_graycounter.inc                ; yes             ; Megafunction                 ; c:/altera/90/quartus/libraries/megafunctions/a_graycounter.inc        ;
-; a_fefifo.inc                     ; yes             ; Megafunction                 ; c:/altera/90/quartus/libraries/megafunctions/a_fefifo.inc             ;
-; a_gray2bin.inc                   ; yes             ; Megafunction                 ; c:/altera/90/quartus/libraries/megafunctions/a_gray2bin.inc           ;
-; dffpipe.inc                      ; yes             ; Megafunction                 ; c:/altera/90/quartus/libraries/megafunctions/dffpipe.inc              ;
-; alt_sync_fifo.inc                ; yes             ; Megafunction                 ; c:/altera/90/quartus/libraries/megafunctions/alt_sync_fifo.inc        ;
-; lpm_compare.inc                  ; yes             ; Megafunction                 ; c:/altera/90/quartus/libraries/megafunctions/lpm_compare.inc          ;
-; altsyncram_fifo.inc              ; yes             ; Megafunction                 ; c:/altera/90/quartus/libraries/megafunctions/altsyncram_fifo.inc      ;
-; aglobal90.inc                    ; yes             ; Megafunction                 ; c:/altera/90/quartus/libraries/megafunctions/aglobal90.inc            ;
-; db/dcfifo_mgk1.tdf               ; yes             ; Auto-Generated Megafunction  ; C:/HPSDR/trunk/OzyII/Verilog Code/Test Code/db/dcfifo_mgk1.tdf        ;
-; db/a_gray2bin_ndb.tdf            ; yes             ; Auto-Generated Megafunction  ; C:/HPSDR/trunk/OzyII/Verilog Code/Test Code/db/a_gray2bin_ndb.tdf     ;
-; db/a_graycounter_r96.tdf         ; yes             ; Auto-Generated Megafunction  ; C:/HPSDR/trunk/OzyII/Verilog Code/Test Code/db/a_graycounter_r96.tdf  ;
-; db/a_graycounter_g2c.tdf         ; yes             ; Auto-Generated Megafunction  ; C:/HPSDR/trunk/OzyII/Verilog Code/Test Code/db/a_graycounter_g2c.tdf  ;
-; db/a_graycounter_f2c.tdf         ; yes             ; Auto-Generated Megafunction  ; C:/HPSDR/trunk/OzyII/Verilog Code/Test Code/db/a_graycounter_f2c.tdf  ;
-; db/altsyncram_vpu.tdf            ; yes             ; Auto-Generated Megafunction  ; C:/HPSDR/trunk/OzyII/Verilog Code/Test Code/db/altsyncram_vpu.tdf     ;
-; db/altsyncram_aec1.tdf           ; yes             ; Auto-Generated Megafunction  ; C:/HPSDR/trunk/OzyII/Verilog Code/Test Code/db/altsyncram_aec1.tdf    ;
-; db/dffpipe_c2e.tdf               ; yes             ; Auto-Generated Megafunction  ; C:/HPSDR/trunk/OzyII/Verilog Code/Test Code/db/dffpipe_c2e.tdf        ;
-; db/dffpipe_c09.tdf               ; yes             ; Auto-Generated Megafunction  ; C:/HPSDR/trunk/OzyII/Verilog Code/Test Code/db/dffpipe_c09.tdf        ;
-; db/alt_synch_pipe_jv7.tdf        ; yes             ; Auto-Generated Megafunction  ; C:/HPSDR/trunk/OzyII/Verilog Code/Test Code/db/alt_synch_pipe_jv7.tdf ;
-; db/dffpipe_d09.tdf               ; yes             ; Auto-Generated Megafunction  ; C:/HPSDR/trunk/OzyII/Verilog Code/Test Code/db/dffpipe_d09.tdf        ;
-; db/alt_synch_pipe_kv7.tdf        ; yes             ; Auto-Generated Megafunction  ; C:/HPSDR/trunk/OzyII/Verilog Code/Test Code/db/alt_synch_pipe_kv7.tdf ;
-; db/dffpipe_e09.tdf               ; yes             ; Auto-Generated Megafunction  ; C:/HPSDR/trunk/OzyII/Verilog Code/Test Code/db/dffpipe_e09.tdf        ;
-; db/cmpr_836.tdf                  ; yes             ; Auto-Generated Megafunction  ; C:/HPSDR/trunk/OzyII/Verilog Code/Test Code/db/cmpr_836.tdf           ;
-; db/dcfifo_60n1.tdf               ; yes             ; Auto-Generated Megafunction  ; C:/HPSDR/trunk/OzyII/Verilog Code/Test Code/db/dcfifo_60n1.tdf        ;
-; db/a_gray2bin_mdb.tdf            ; yes             ; Auto-Generated Megafunction  ; C:/HPSDR/trunk/OzyII/Verilog Code/Test Code/db/a_gray2bin_mdb.tdf     ;
-; db/a_graycounter_q96.tdf         ; yes             ; Auto-Generated Megafunction  ; C:/HPSDR/trunk/OzyII/Verilog Code/Test Code/db/a_graycounter_q96.tdf  ;
-; db/a_graycounter_hgc.tdf         ; yes             ; Auto-Generated Megafunction  ; C:/HPSDR/trunk/OzyII/Verilog Code/Test Code/db/a_graycounter_hgc.tdf  ;
-; db/a_graycounter_ggc.tdf         ; yes             ; Auto-Generated Megafunction  ; C:/HPSDR/trunk/OzyII/Verilog Code/Test Code/db/a_graycounter_ggc.tdf  ;
-; db/altsyncram_rr61.tdf           ; yes             ; Auto-Generated Megafunction  ; C:/HPSDR/trunk/OzyII/Verilog Code/Test Code/db/altsyncram_rr61.tdf    ;
-; db/altsyncram_72f1.tdf           ; yes             ; Auto-Generated Megafunction  ; C:/HPSDR/trunk/OzyII/Verilog Code/Test Code/db/altsyncram_72f1.tdf    ;
-; db/dffpipe_ahe.tdf               ; yes             ; Auto-Generated Megafunction  ; C:/HPSDR/trunk/OzyII/Verilog Code/Test Code/db/dffpipe_ahe.tdf        ;
-; db/alt_synch_pipe_tdb.tdf        ; yes             ; Auto-Generated Megafunction  ; C:/HPSDR/trunk/OzyII/Verilog Code/Test Code/db/alt_synch_pipe_tdb.tdf ;
-; db/dffpipe_re9.tdf               ; yes             ; Auto-Generated Megafunction  ; C:/HPSDR/trunk/OzyII/Verilog Code/Test Code/db/dffpipe_re9.tdf        ;
-; db/dffpipe_9d9.tdf               ; yes             ; Auto-Generated Megafunction  ; C:/HPSDR/trunk/OzyII/Verilog Code/Test Code/db/dffpipe_9d9.tdf        ;
-; db/dffpipe_qe9.tdf               ; yes             ; Auto-Generated Megafunction  ; C:/HPSDR/trunk/OzyII/Verilog Code/Test Code/db/dffpipe_qe9.tdf        ;
-; db/alt_synch_pipe_1e8.tdf        ; yes             ; Auto-Generated Megafunction  ; C:/HPSDR/trunk/OzyII/Verilog Code/Test Code/db/alt_synch_pipe_1e8.tdf ;
-; db/dffpipe_se9.tdf               ; yes             ; Auto-Generated Megafunction  ; C:/HPSDR/trunk/OzyII/Verilog Code/Test Code/db/dffpipe_se9.tdf        ;
-; db/cmpr_736.tdf                  ; yes             ; Auto-Generated Megafunction  ; C:/HPSDR/trunk/OzyII/Verilog Code/Test Code/db/cmpr_736.tdf           ;
+; Tx_fifo.v                        ; yes             ; User Wizard-Generated File   ; O:/HPSDR/trunk/OzyII/Verilog Code/Test Code/Tx_fifo.v                 ;
+; Rx_fifo.v                        ; yes             ; User Wizard-Generated File   ; O:/HPSDR/trunk/OzyII/Verilog Code/Test Code/Rx_fifo.v                 ;
+; Ozy11.v                          ; yes             ; User Verilog HDL File        ; O:/HPSDR/trunk/OzyII/Verilog Code/Test Code/Ozy11.v                   ;
+; dcfifo.tdf                       ; yes             ; Megafunction                 ; c:/altera/90sp2/quartus/libraries/megafunctions/dcfifo.tdf            ;
+; lpm_counter.inc                  ; yes             ; Megafunction                 ; c:/altera/90sp2/quartus/libraries/megafunctions/lpm_counter.inc       ;
+; lpm_add_sub.inc                  ; yes             ; Megafunction                 ; c:/altera/90sp2/quartus/libraries/megafunctions/lpm_add_sub.inc       ;
+; altdpram.inc                     ; yes             ; Megafunction                 ; c:/altera/90sp2/quartus/libraries/megafunctions/altdpram.inc          ;
+; a_graycounter.inc                ; yes             ; Megafunction                 ; c:/altera/90sp2/quartus/libraries/megafunctions/a_graycounter.inc     ;
+; a_fefifo.inc                     ; yes             ; Megafunction                 ; c:/altera/90sp2/quartus/libraries/megafunctions/a_fefifo.inc          ;
+; a_gray2bin.inc                   ; yes             ; Megafunction                 ; c:/altera/90sp2/quartus/libraries/megafunctions/a_gray2bin.inc        ;
+; dffpipe.inc                      ; yes             ; Megafunction                 ; c:/altera/90sp2/quartus/libraries/megafunctions/dffpipe.inc           ;
+; alt_sync_fifo.inc                ; yes             ; Megafunction                 ; c:/altera/90sp2/quartus/libraries/megafunctions/alt_sync_fifo.inc     ;
+; lpm_compare.inc                  ; yes             ; Megafunction                 ; c:/altera/90sp2/quartus/libraries/megafunctions/lpm_compare.inc       ;
+; altsyncram_fifo.inc              ; yes             ; Megafunction                 ; c:/altera/90sp2/quartus/libraries/megafunctions/altsyncram_fifo.inc   ;
+; aglobal90.inc                    ; yes             ; Megafunction                 ; c:/altera/90sp2/quartus/libraries/megafunctions/aglobal90.inc         ;
+; db/dcfifo_tgk1.tdf               ; yes             ; Auto-Generated Megafunction  ; O:/HPSDR/trunk/OzyII/Verilog Code/Test Code/db/dcfifo_tgk1.tdf        ;
+; db/a_gray2bin_ndb.tdf            ; yes             ; Auto-Generated Megafunction  ; O:/HPSDR/trunk/OzyII/Verilog Code/Test Code/db/a_gray2bin_ndb.tdf     ;
+; db/a_graycounter_r96.tdf         ; yes             ; Auto-Generated Megafunction  ; O:/HPSDR/trunk/OzyII/Verilog Code/Test Code/db/a_graycounter_r96.tdf  ;
+; db/a_graycounter_g2c.tdf         ; yes             ; Auto-Generated Megafunction  ; O:/HPSDR/trunk/OzyII/Verilog Code/Test Code/db/a_graycounter_g2c.tdf  ;
+; db/a_graycounter_f2c.tdf         ; yes             ; Auto-Generated Megafunction  ; O:/HPSDR/trunk/OzyII/Verilog Code/Test Code/db/a_graycounter_f2c.tdf  ;
+; db/altsyncram_vpu.tdf            ; yes             ; Auto-Generated Megafunction  ; O:/HPSDR/trunk/OzyII/Verilog Code/Test Code/db/altsyncram_vpu.tdf     ;
+; db/altsyncram_aec1.tdf           ; yes             ; Auto-Generated Megafunction  ; O:/HPSDR/trunk/OzyII/Verilog Code/Test Code/db/altsyncram_aec1.tdf    ;
+; db/dffpipe_c2e.tdf               ; yes             ; Auto-Generated Megafunction  ; O:/HPSDR/trunk/OzyII/Verilog Code/Test Code/db/dffpipe_c2e.tdf        ;
+; db/alt_synch_pipe_lv7.tdf        ; yes             ; Auto-Generated Megafunction  ; O:/HPSDR/trunk/OzyII/Verilog Code/Test Code/db/alt_synch_pipe_lv7.tdf ;
+; db/dffpipe_f09.tdf               ; yes             ; Auto-Generated Megafunction  ; O:/HPSDR/trunk/OzyII/Verilog Code/Test Code/db/dffpipe_f09.tdf        ;
+; db/dffpipe_c09.tdf               ; yes             ; Auto-Generated Megafunction  ; O:/HPSDR/trunk/OzyII/Verilog Code/Test Code/db/dffpipe_c09.tdf        ;
+; db/alt_synch_pipe_mv7.tdf        ; yes             ; Auto-Generated Megafunction  ; O:/HPSDR/trunk/OzyII/Verilog Code/Test Code/db/alt_synch_pipe_mv7.tdf ;
+; db/dffpipe_g09.tdf               ; yes             ; Auto-Generated Megafunction  ; O:/HPSDR/trunk/OzyII/Verilog Code/Test Code/db/dffpipe_g09.tdf        ;
+; db/cmpr_836.tdf                  ; yes             ; Auto-Generated Megafunction  ; O:/HPSDR/trunk/OzyII/Verilog Code/Test Code/db/cmpr_836.tdf           ;
+; db/dcfifo_60n1.tdf               ; yes             ; Auto-Generated Megafunction  ; O:/HPSDR/trunk/OzyII/Verilog Code/Test Code/db/dcfifo_60n1.tdf        ;
+; db/a_gray2bin_mdb.tdf            ; yes             ; Auto-Generated Megafunction  ; O:/HPSDR/trunk/OzyII/Verilog Code/Test Code/db/a_gray2bin_mdb.tdf     ;
+; db/a_graycounter_q96.tdf         ; yes             ; Auto-Generated Megafunction  ; O:/HPSDR/trunk/OzyII/Verilog Code/Test Code/db/a_graycounter_q96.tdf  ;
+; db/a_graycounter_hgc.tdf         ; yes             ; Auto-Generated Megafunction  ; O:/HPSDR/trunk/OzyII/Verilog Code/Test Code/db/a_graycounter_hgc.tdf  ;
+; db/a_graycounter_ggc.tdf         ; yes             ; Auto-Generated Megafunction  ; O:/HPSDR/trunk/OzyII/Verilog Code/Test Code/db/a_graycounter_ggc.tdf  ;
+; db/altsyncram_rr61.tdf           ; yes             ; Auto-Generated Megafunction  ; O:/HPSDR/trunk/OzyII/Verilog Code/Test Code/db/altsyncram_rr61.tdf    ;
+; db/altsyncram_72f1.tdf           ; yes             ; Auto-Generated Megafunction  ; O:/HPSDR/trunk/OzyII/Verilog Code/Test Code/db/altsyncram_72f1.tdf    ;
+; db/dffpipe_ahe.tdf               ; yes             ; Auto-Generated Megafunction  ; O:/HPSDR/trunk/OzyII/Verilog Code/Test Code/db/dffpipe_ahe.tdf        ;
+; db/alt_synch_pipe_tdb.tdf        ; yes             ; Auto-Generated Megafunction  ; O:/HPSDR/trunk/OzyII/Verilog Code/Test Code/db/alt_synch_pipe_tdb.tdf ;
+; db/dffpipe_re9.tdf               ; yes             ; Auto-Generated Megafunction  ; O:/HPSDR/trunk/OzyII/Verilog Code/Test Code/db/dffpipe_re9.tdf        ;
+; db/dffpipe_9d9.tdf               ; yes             ; Auto-Generated Megafunction  ; O:/HPSDR/trunk/OzyII/Verilog Code/Test Code/db/dffpipe_9d9.tdf        ;
+; db/dffpipe_qe9.tdf               ; yes             ; Auto-Generated Megafunction  ; O:/HPSDR/trunk/OzyII/Verilog Code/Test Code/db/dffpipe_qe9.tdf        ;
+; db/alt_synch_pipe_1e8.tdf        ; yes             ; Auto-Generated Megafunction  ; O:/HPSDR/trunk/OzyII/Verilog Code/Test Code/db/alt_synch_pipe_1e8.tdf ;
+; db/dffpipe_se9.tdf               ; yes             ; Auto-Generated Megafunction  ; O:/HPSDR/trunk/OzyII/Verilog Code/Test Code/db/dffpipe_se9.tdf        ;
+; db/cmpr_736.tdf                  ; yes             ; Auto-Generated Megafunction  ; O:/HPSDR/trunk/OzyII/Verilog Code/Test Code/db/cmpr_736.tdf           ;
 +----------------------------------+-----------------+------------------------------+-----------------------------------------------------------------------+
 
 
@@ -228,28 +226,28 @@ applicable agreement for further details.
 +---------------------------------------------+-------+
 ; Resource                                    ; Usage ;
 +---------------------------------------------+-------+
-; Estimated Total logic elements              ; 92    ;
+; Estimated Total logic elements              ; 295   ;
 ;                                             ;       ;
-; Total combinational functions               ; 64    ;
+; Total combinational functions               ; 139   ;
 ; Logic element usage by number of LUT inputs ;       ;
-;     -- 4 input functions                    ; 29    ;
-;     -- 3 input functions                    ; 22    ;
-;     -- <=2 input functions                  ; 13    ;
+;     -- 4 input functions                    ; 59    ;
+;     -- 3 input functions                    ; 60    ;
+;     -- <=2 input functions                  ; 20    ;
 ;                                             ;       ;
 ; Logic elements by mode                      ;       ;
-;     -- normal mode                          ; 48    ;
-;     -- arithmetic mode                      ; 16    ;
+;     -- normal mode                          ; 85    ;
+;     -- arithmetic mode                      ; 54    ;
 ;                                             ;       ;
-; Total registers                             ; 52    ;
-;     -- Dedicated logic registers            ; 52    ;
+; Total registers                             ; 224   ;
+;     -- Dedicated logic registers            ; 224   ;
 ;     -- I/O registers                        ; 0     ;
 ;                                             ;       ;
 ; I/O pins                                    ; 38    ;
-; Total memory bits                           ; 32768 ;
+; Total memory bits                           ; 98304 ;
 ; Maximum fan-out node                        ; IFCLK ;
-; Maximum fan-out                             ; 55    ;
-; Total fan-out                               ; 625   ;
-; Average fan-out                             ; 3.42  ;
+; Maximum fan-out                             ; 256   ;
+; Total fan-out                               ; 1886  ;
+; Average fan-out                             ; 4.36  ;
 +---------------------------------------------+-------+
 
 
@@ -258,19 +256,34 @@ applicable agreement for further details.
 +----------------------------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+--------------------------------------------------------------------------------------------------------------------------------+--------------+
 ; Compilation Hierarchy Node                   ; LC Combinationals ; LC Registers ; Memory Bits ; DSP Elements ; DSP 9x9 ; DSP 18x18 ; Pins ; Virtual Pins ; Full Hierarchy Name                                                                                                            ; Library Name ;
 +----------------------------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+--------------------------------------------------------------------------------------------------------------------------------+--------------+
-; |Ozy11                                       ; 64 (40)           ; 52 (11)      ; 32768       ; 0            ; 0       ; 0         ; 38   ; 0            ; |Ozy11                                                                                                                         ; work         ;
-;    |Rx_fifo:Rx_fifo|                         ; 4 (0)             ; 13 (0)       ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Ozy11|Rx_fifo:Rx_fifo                                                                                                         ; work         ;
-;       |dcfifo:dcfifo_component|              ; 4 (0)             ; 13 (0)       ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Ozy11|Rx_fifo:Rx_fifo|dcfifo:dcfifo_component                                                                                 ; work         ;
-;          |dcfifo_mgk1:auto_generated|        ; 4 (0)             ; 13 (0)       ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Ozy11|Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_mgk1:auto_generated                                                      ; work         ;
-;             |a_graycounter_f2c:wrptr_gp|     ; 0 (0)             ; 13 (13)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Ozy11|Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_mgk1:auto_generated|a_graycounter_f2c:wrptr_gp                           ; work         ;
-;             |cmpr_836:wrfull_eq_comp|        ; 4 (4)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Ozy11|Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_mgk1:auto_generated|cmpr_836:wrfull_eq_comp                              ; work         ;
-;    |Tx_fifo:Tx_fifo|                         ; 20 (0)            ; 28 (0)       ; 32768       ; 0            ; 0       ; 0         ; 0    ; 0            ; |Ozy11|Tx_fifo:Tx_fifo                                                                                                         ; work         ;
-;       |dcfifo:dcfifo_component|              ; 20 (0)            ; 28 (0)       ; 32768       ; 0            ; 0       ; 0         ; 0    ; 0            ; |Ozy11|Tx_fifo:Tx_fifo|dcfifo:dcfifo_component                                                                                 ; work         ;
-;          |dcfifo_60n1:auto_generated|        ; 20 (3)            ; 28 (13)      ; 32768       ; 0            ; 0       ; 0         ; 0    ; 0            ; |Ozy11|Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_60n1:auto_generated                                                      ; work         ;
+; |Ozy11                                       ; 139 (42)          ; 224 (15)     ; 98304       ; 0            ; 0       ; 0         ; 38   ; 0            ; |Ozy11                                                                                                                         ; work         ;
+;    |Rx_fifo:Rx_fifo|                         ; 50 (0)            ; 108 (0)      ; 65536       ; 0            ; 0       ; 0         ; 0    ; 0            ; |Ozy11|Rx_fifo:Rx_fifo                                                                                                         ; work         ;
+;       |dcfifo:dcfifo_component|              ; 50 (0)            ; 108 (0)      ; 65536       ; 0            ; 0       ; 0         ; 0    ; 0            ; |Ozy11|Rx_fifo:Rx_fifo|dcfifo:dcfifo_component                                                                                 ; work         ;
+;          |dcfifo_tgk1:auto_generated|        ; 50 (4)            ; 108 (27)     ; 65536       ; 0            ; 0       ; 0         ; 0    ; 0            ; |Ozy11|Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_tgk1:auto_generated                                                      ; work         ;
+;             |a_graycounter_f2c:wrptr_gp|     ; 14 (14)           ; 14 (14)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Ozy11|Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_tgk1:auto_generated|a_graycounter_f2c:wrptr_gp                           ; work         ;
+;             |a_graycounter_r96:rdptr_g1p|    ; 14 (14)           ; 14 (14)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Ozy11|Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_tgk1:auto_generated|a_graycounter_r96:rdptr_g1p                          ; work         ;
+;             |alt_synch_pipe_lv7:rs_dgwp|     ; 0 (0)             ; 26 (0)       ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Ozy11|Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_tgk1:auto_generated|alt_synch_pipe_lv7:rs_dgwp                           ; work         ;
+;                |dffpipe_f09:dffpipe5|        ; 0 (0)             ; 26 (26)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Ozy11|Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_tgk1:auto_generated|alt_synch_pipe_lv7:rs_dgwp|dffpipe_f09:dffpipe5      ; work         ;
+;             |alt_synch_pipe_mv7:ws_dgrp|     ; 0 (0)             ; 26 (0)       ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Ozy11|Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_tgk1:auto_generated|alt_synch_pipe_mv7:ws_dgrp                           ; work         ;
+;                |dffpipe_g09:dffpipe8|        ; 0 (0)             ; 26 (26)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Ozy11|Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_tgk1:auto_generated|alt_synch_pipe_mv7:ws_dgrp|dffpipe_g09:dffpipe8      ; work         ;
+;             |altsyncram_vpu:fifo_ram|        ; 0 (0)             ; 0 (0)        ; 65536       ; 0            ; 0       ; 0         ; 0    ; 0            ; |Ozy11|Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_tgk1:auto_generated|altsyncram_vpu:fifo_ram                              ; work         ;
+;                |altsyncram_aec1:altsyncram5| ; 0 (0)             ; 0 (0)        ; 65536       ; 0            ; 0       ; 0         ; 0    ; 0            ; |Ozy11|Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_tgk1:auto_generated|altsyncram_vpu:fifo_ram|altsyncram_aec1:altsyncram5  ; work         ;
+;             |cmpr_836:rdempty_eq_comp|       ; 9 (9)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Ozy11|Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_tgk1:auto_generated|cmpr_836:rdempty_eq_comp                             ; work         ;
+;             |cmpr_836:wrfull_eq_comp|        ; 9 (9)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Ozy11|Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_tgk1:auto_generated|cmpr_836:wrfull_eq_comp                              ; work         ;
+;             |dffpipe_c2e:rdaclr|             ; 0 (0)             ; 1 (1)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Ozy11|Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_tgk1:auto_generated|dffpipe_c2e:rdaclr                                   ; work         ;
+;    |Tx_fifo:Tx_fifo|                         ; 47 (0)            ; 101 (0)      ; 32768       ; 0            ; 0       ; 0         ; 0    ; 0            ; |Ozy11|Tx_fifo:Tx_fifo                                                                                                         ; work         ;
+;       |dcfifo:dcfifo_component|              ; 47 (0)            ; 101 (0)      ; 32768       ; 0            ; 0       ; 0         ; 0    ; 0            ; |Ozy11|Tx_fifo:Tx_fifo|dcfifo:dcfifo_component                                                                                 ; work         ;
+;          |dcfifo_60n1:auto_generated|        ; 47 (6)            ; 101 (25)     ; 32768       ; 0            ; 0       ; 0         ; 0    ; 0            ; |Ozy11|Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_60n1:auto_generated                                                      ; work         ;
+;             |a_graycounter_ggc:wrptr_gp|     ; 13 (13)           ; 13 (13)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Ozy11|Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_60n1:auto_generated|a_graycounter_ggc:wrptr_gp                           ; work         ;
 ;             |a_graycounter_q96:rdptr_g1p|    ; 13 (13)           ; 13 (13)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Ozy11|Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_60n1:auto_generated|a_graycounter_q96:rdptr_g1p                          ; work         ;
+;             |alt_synch_pipe_1e8:ws_dgrp|     ; 0 (0)             ; 24 (0)       ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Ozy11|Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_60n1:auto_generated|alt_synch_pipe_1e8:ws_dgrp                           ; work         ;
+;                |dffpipe_se9:dffpipe15|       ; 0 (0)             ; 24 (24)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Ozy11|Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_60n1:auto_generated|alt_synch_pipe_1e8:ws_dgrp|dffpipe_se9:dffpipe15     ; work         ;
+;             |alt_synch_pipe_tdb:rs_dgwp|     ; 0 (0)             ; 24 (0)       ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Ozy11|Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_60n1:auto_generated|alt_synch_pipe_tdb:rs_dgwp                           ; work         ;
+;                |dffpipe_re9:dffpipe9|        ; 0 (0)             ; 24 (24)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Ozy11|Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_60n1:auto_generated|alt_synch_pipe_tdb:rs_dgwp|dffpipe_re9:dffpipe9      ; work         ;
 ;             |altsyncram_rr61:fifo_ram|       ; 0 (0)             ; 0 (0)        ; 32768       ; 0            ; 0       ; 0         ; 0    ; 0            ; |Ozy11|Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_60n1:auto_generated|altsyncram_rr61:fifo_ram                             ; work         ;
 ;                |altsyncram_72f1:altsyncram5| ; 0 (0)             ; 0 (0)        ; 32768       ; 0            ; 0       ; 0         ; 0    ; 0            ; |Ozy11|Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_60n1:auto_generated|altsyncram_rr61:fifo_ram|altsyncram_72f1:altsyncram5 ; work         ;
-;             |cmpr_736:rdempty_eq_comp|       ; 4 (4)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Ozy11|Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_60n1:auto_generated|cmpr_736:rdempty_eq_comp                             ; work         ;
+;             |cmpr_736:rdempty_eq_comp|       ; 8 (8)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Ozy11|Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_60n1:auto_generated|cmpr_736:rdempty_eq_comp                             ; work         ;
+;             |cmpr_736:wrfull_eq_comp|        ; 7 (7)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Ozy11|Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_60n1:auto_generated|cmpr_736:wrfull_eq_comp                              ; work         ;
 ;             |dffpipe_ahe:rdaclr|             ; 0 (0)             ; 2 (2)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Ozy11|Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_60n1:auto_generated|dffpipe_ahe:rdaclr                                   ; work         ;
 +----------------------------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+--------------------------------------------------------------------------------------------------------------------------------+--------------+
 Note: For table entries with two numbers listed, the numbers in parentheses indicate the number of resources of the given type used by the specific entity alone. The numbers listed outside of parentheses indicate the total resources of the given type used by the specific entity and all of its sub-entities in the hierarchy.
@@ -281,6 +294,7 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 +------------------------------------------------------------------------------------------------------------------------------------+------+----------------+--------------+--------------+--------------+--------------+-------+------+
 ; Name                                                                                                                               ; Type ; Mode           ; Port A Depth ; Port A Width ; Port B Depth ; Port B Width ; Size  ; MIF  ;
 +------------------------------------------------------------------------------------------------------------------------------------+------+----------------+--------------+--------------+--------------+--------------+-------+------+
+; Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_tgk1:auto_generated|altsyncram_vpu:fifo_ram|altsyncram_aec1:altsyncram5|ALTSYNCRAM  ; AUTO ; True Dual Port ; 4096         ; 16           ; 4096         ; 16           ; 65536 ; None ;
 ; Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_60n1:auto_generated|altsyncram_rr61:fifo_ram|altsyncram_72f1:altsyncram5|ALTSYNCRAM ; AUTO ; True Dual Port ; 2048         ; 16           ; 2048         ; 16           ; 32768 ; None ;
 +------------------------------------------------------------------------------------------------------------------------------------+------+----------------+--------------+--------------+--------------+--------------+-------+------+
 
@@ -292,246 +306,58 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 +-------------------------------------------------------------------------------------------------+------------------------------------------------------------------+--------------------------------------------+
 ; Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_60n1:auto_generated|dffpipe_ahe:rdaclr|dffe8a[0] ; yes                                                              ; yes                                        ;
 ; Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_60n1:auto_generated|dffpipe_ahe:rdaclr|dffe7a[0] ; yes                                                              ; yes                                        ;
+; Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_tgk1:auto_generated|dffpipe_c2e:rdaclr|dffe7a[0] ; yes                                                              ; yes                                        ;
 +-------------------------------------------------------------------------------------------------+------------------------------------------------------------------+--------------------------------------------+
 
 
-+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-; Registers Removed During Synthesis                                                                                                                                          ;
-+------------------------------------------------------------------------------------------------------------------------------------+----------------------------------------+
-; Register name                                                                                                                      ; Reason for Removal                     ;
-+------------------------------------------------------------------------------------------------------------------------------------+----------------------------------------+
-; Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_60n1:auto_generated|alt_synch_pipe_1e8:ws_dgrp|dffpipe_se9:dffpipe15|dffe17a[0]     ; Lost fanout                            ;
-; Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_60n1:auto_generated|alt_synch_pipe_1e8:ws_dgrp|dffpipe_se9:dffpipe15|dffe16a[0]     ; Lost fanout                            ;
-; Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_60n1:auto_generated|alt_synch_pipe_1e8:ws_dgrp|dffpipe_se9:dffpipe15|dffe17a[1]     ; Lost fanout                            ;
-; Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_60n1:auto_generated|alt_synch_pipe_1e8:ws_dgrp|dffpipe_se9:dffpipe15|dffe16a[1]     ; Lost fanout                            ;
-; Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_60n1:auto_generated|alt_synch_pipe_1e8:ws_dgrp|dffpipe_se9:dffpipe15|dffe17a[2]     ; Lost fanout                            ;
-; Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_60n1:auto_generated|alt_synch_pipe_1e8:ws_dgrp|dffpipe_se9:dffpipe15|dffe16a[2]     ; Lost fanout                            ;
-; Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_60n1:auto_generated|alt_synch_pipe_1e8:ws_dgrp|dffpipe_se9:dffpipe15|dffe17a[3]     ; Lost fanout                            ;
-; Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_60n1:auto_generated|alt_synch_pipe_1e8:ws_dgrp|dffpipe_se9:dffpipe15|dffe16a[3]     ; Lost fanout                            ;
-; Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_60n1:auto_generated|alt_synch_pipe_1e8:ws_dgrp|dffpipe_se9:dffpipe15|dffe17a[4]     ; Lost fanout                            ;
-; Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_60n1:auto_generated|alt_synch_pipe_1e8:ws_dgrp|dffpipe_se9:dffpipe15|dffe16a[4]     ; Lost fanout                            ;
-; Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_60n1:auto_generated|alt_synch_pipe_1e8:ws_dgrp|dffpipe_se9:dffpipe15|dffe17a[5]     ; Lost fanout                            ;
-; Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_60n1:auto_generated|alt_synch_pipe_1e8:ws_dgrp|dffpipe_se9:dffpipe15|dffe16a[5]     ; Lost fanout                            ;
-; Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_60n1:auto_generated|alt_synch_pipe_1e8:ws_dgrp|dffpipe_se9:dffpipe15|dffe17a[6]     ; Lost fanout                            ;
-; Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_60n1:auto_generated|alt_synch_pipe_1e8:ws_dgrp|dffpipe_se9:dffpipe15|dffe16a[6]     ; Lost fanout                            ;
-; Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_60n1:auto_generated|alt_synch_pipe_1e8:ws_dgrp|dffpipe_se9:dffpipe15|dffe17a[7]     ; Lost fanout                            ;
-; Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_60n1:auto_generated|alt_synch_pipe_1e8:ws_dgrp|dffpipe_se9:dffpipe15|dffe16a[7]     ; Lost fanout                            ;
-; Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_60n1:auto_generated|alt_synch_pipe_1e8:ws_dgrp|dffpipe_se9:dffpipe15|dffe17a[8]     ; Lost fanout                            ;
-; Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_60n1:auto_generated|alt_synch_pipe_1e8:ws_dgrp|dffpipe_se9:dffpipe15|dffe16a[8]     ; Lost fanout                            ;
-; Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_60n1:auto_generated|alt_synch_pipe_1e8:ws_dgrp|dffpipe_se9:dffpipe15|dffe17a[9]     ; Lost fanout                            ;
-; Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_60n1:auto_generated|alt_synch_pipe_1e8:ws_dgrp|dffpipe_se9:dffpipe15|dffe16a[9]     ; Lost fanout                            ;
-; Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_60n1:auto_generated|alt_synch_pipe_1e8:ws_dgrp|dffpipe_se9:dffpipe15|dffe17a[10]    ; Lost fanout                            ;
-; Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_60n1:auto_generated|alt_synch_pipe_1e8:ws_dgrp|dffpipe_se9:dffpipe15|dffe16a[10]    ; Lost fanout                            ;
-; Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_60n1:auto_generated|alt_synch_pipe_1e8:ws_dgrp|dffpipe_se9:dffpipe15|dffe17a[11]    ; Lost fanout                            ;
-; Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_60n1:auto_generated|alt_synch_pipe_1e8:ws_dgrp|dffpipe_se9:dffpipe15|dffe16a[11]    ; Lost fanout                            ;
-; Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_60n1:auto_generated|delayed_wrptr_g[0..11]                                          ; Stuck at GND due to stuck port clock   ;
-; Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_60n1:auto_generated|dffpipe_9d9:wraclr|dffe12a[0]                                   ; Stuck at GND due to stuck port clock   ;
-; Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_60n1:auto_generated|dffpipe_9d9:wraclr|dffe13a[0]                                   ; Stuck at GND due to stuck port clock   ;
-; Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_60n1:auto_generated|alt_synch_pipe_tdb:rs_dgwp|dffpipe_re9:dffpipe9|dffe10a[0..11]  ; Stuck at GND due to stuck port data_in ;
-; Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_60n1:auto_generated|alt_synch_pipe_tdb:rs_dgwp|dffpipe_re9:dffpipe9|dffe11a[0..11]  ; Stuck at GND due to stuck port data_in ;
-; Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_60n1:auto_generated|a_graycounter_ggc:wrptr_gp|counter_ffa[0..11]                   ; Stuck at GND due to stuck port clear   ;
-; Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_60n1:auto_generated|a_graycounter_ggc:wrptr_gp|parity_ff                            ; Stuck at GND due to stuck port clear   ;
-; Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_60n1:auto_generated|a_graycounter_hgc:wrptr_g1p|counter_ffa0                        ; Stuck at VCC due to stuck port preset  ;
-; Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_60n1:auto_generated|a_graycounter_hgc:wrptr_g1p|counter_ffa1                        ; Stuck at GND due to stuck port clear   ;
-; Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_60n1:auto_generated|a_graycounter_hgc:wrptr_g1p|counter_ffa2                        ; Stuck at GND due to stuck port clear   ;
-; Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_60n1:auto_generated|a_graycounter_hgc:wrptr_g1p|counter_ffa3                        ; Stuck at GND due to stuck port clear   ;
-; Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_60n1:auto_generated|a_graycounter_hgc:wrptr_g1p|counter_ffa4                        ; Stuck at GND due to stuck port clear   ;
-; Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_60n1:auto_generated|a_graycounter_hgc:wrptr_g1p|counter_ffa5                        ; Stuck at GND due to stuck port clear   ;
-; Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_60n1:auto_generated|a_graycounter_hgc:wrptr_g1p|counter_ffa6                        ; Stuck at GND due to stuck port clear   ;
-; Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_60n1:auto_generated|a_graycounter_hgc:wrptr_g1p|counter_ffa7                        ; Stuck at GND due to stuck port clear   ;
-; Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_60n1:auto_generated|a_graycounter_hgc:wrptr_g1p|counter_ffa8                        ; Stuck at GND due to stuck port clear   ;
-; Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_60n1:auto_generated|a_graycounter_hgc:wrptr_g1p|counter_ffa9                        ; Stuck at GND due to stuck port clear   ;
-; Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_60n1:auto_generated|a_graycounter_hgc:wrptr_g1p|counter_ffa10                       ; Stuck at GND due to stuck port clear   ;
-; Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_60n1:auto_generated|a_graycounter_hgc:wrptr_g1p|counter_ffa11                       ; Stuck at GND due to stuck port clear   ;
-; Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_60n1:auto_generated|a_graycounter_hgc:wrptr_g1p|parity_ff                           ; Stuck at VCC due to stuck port preset  ;
-; Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_mgk1:auto_generated|alt_synch_pipe_jv7:rs_dgwp|dffpipe_d09:dffpipe9|dffe11a[0]      ; Lost fanout                            ;
-; Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_mgk1:auto_generated|alt_synch_pipe_jv7:rs_dgwp|dffpipe_d09:dffpipe9|dffe10a[0]      ; Lost fanout                            ;
-; Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_mgk1:auto_generated|delayed_wrptr_g[0]                                              ; Lost fanout                            ;
-; Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_mgk1:auto_generated|alt_synch_pipe_jv7:rs_dgwp|dffpipe_d09:dffpipe9|dffe11a[1]      ; Lost fanout                            ;
-; Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_mgk1:auto_generated|alt_synch_pipe_jv7:rs_dgwp|dffpipe_d09:dffpipe9|dffe10a[1]      ; Lost fanout                            ;
-; Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_mgk1:auto_generated|delayed_wrptr_g[1]                                              ; Lost fanout                            ;
-; Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_mgk1:auto_generated|alt_synch_pipe_jv7:rs_dgwp|dffpipe_d09:dffpipe9|dffe11a[2]      ; Lost fanout                            ;
-; Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_mgk1:auto_generated|alt_synch_pipe_jv7:rs_dgwp|dffpipe_d09:dffpipe9|dffe10a[2]      ; Lost fanout                            ;
-; Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_mgk1:auto_generated|delayed_wrptr_g[2]                                              ; Lost fanout                            ;
-; Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_mgk1:auto_generated|alt_synch_pipe_jv7:rs_dgwp|dffpipe_d09:dffpipe9|dffe11a[3]      ; Lost fanout                            ;
-; Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_mgk1:auto_generated|alt_synch_pipe_jv7:rs_dgwp|dffpipe_d09:dffpipe9|dffe10a[3]      ; Lost fanout                            ;
-; Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_mgk1:auto_generated|delayed_wrptr_g[3]                                              ; Lost fanout                            ;
-; Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_mgk1:auto_generated|alt_synch_pipe_jv7:rs_dgwp|dffpipe_d09:dffpipe9|dffe11a[4]      ; Lost fanout                            ;
-; Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_mgk1:auto_generated|alt_synch_pipe_jv7:rs_dgwp|dffpipe_d09:dffpipe9|dffe10a[4]      ; Lost fanout                            ;
-; Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_mgk1:auto_generated|delayed_wrptr_g[4]                                              ; Lost fanout                            ;
-; Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_mgk1:auto_generated|alt_synch_pipe_jv7:rs_dgwp|dffpipe_d09:dffpipe9|dffe11a[5]      ; Lost fanout                            ;
-; Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_mgk1:auto_generated|alt_synch_pipe_jv7:rs_dgwp|dffpipe_d09:dffpipe9|dffe10a[5]      ; Lost fanout                            ;
-; Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_mgk1:auto_generated|delayed_wrptr_g[5]                                              ; Lost fanout                            ;
-; Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_mgk1:auto_generated|alt_synch_pipe_jv7:rs_dgwp|dffpipe_d09:dffpipe9|dffe11a[6]      ; Lost fanout                            ;
-; Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_mgk1:auto_generated|alt_synch_pipe_jv7:rs_dgwp|dffpipe_d09:dffpipe9|dffe10a[6]      ; Lost fanout                            ;
-; Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_mgk1:auto_generated|delayed_wrptr_g[6]                                              ; Lost fanout                            ;
-; Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_mgk1:auto_generated|alt_synch_pipe_jv7:rs_dgwp|dffpipe_d09:dffpipe9|dffe11a[7]      ; Lost fanout                            ;
-; Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_mgk1:auto_generated|alt_synch_pipe_jv7:rs_dgwp|dffpipe_d09:dffpipe9|dffe10a[7]      ; Lost fanout                            ;
-; Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_mgk1:auto_generated|delayed_wrptr_g[7]                                              ; Lost fanout                            ;
-; Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_mgk1:auto_generated|alt_synch_pipe_jv7:rs_dgwp|dffpipe_d09:dffpipe9|dffe11a[8]      ; Lost fanout                            ;
-; Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_mgk1:auto_generated|alt_synch_pipe_jv7:rs_dgwp|dffpipe_d09:dffpipe9|dffe10a[8]      ; Lost fanout                            ;
-; Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_mgk1:auto_generated|delayed_wrptr_g[8]                                              ; Lost fanout                            ;
-; Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_mgk1:auto_generated|alt_synch_pipe_jv7:rs_dgwp|dffpipe_d09:dffpipe9|dffe11a[9]      ; Lost fanout                            ;
-; Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_mgk1:auto_generated|alt_synch_pipe_jv7:rs_dgwp|dffpipe_d09:dffpipe9|dffe10a[9]      ; Lost fanout                            ;
-; Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_mgk1:auto_generated|delayed_wrptr_g[9]                                              ; Lost fanout                            ;
-; Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_mgk1:auto_generated|alt_synch_pipe_jv7:rs_dgwp|dffpipe_d09:dffpipe9|dffe11a[10]     ; Lost fanout                            ;
-; Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_mgk1:auto_generated|alt_synch_pipe_jv7:rs_dgwp|dffpipe_d09:dffpipe9|dffe10a[10]     ; Lost fanout                            ;
-; Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_mgk1:auto_generated|delayed_wrptr_g[10]                                             ; Lost fanout                            ;
-; Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_mgk1:auto_generated|alt_synch_pipe_jv7:rs_dgwp|dffpipe_d09:dffpipe9|dffe11a[11]     ; Lost fanout                            ;
-; Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_mgk1:auto_generated|alt_synch_pipe_jv7:rs_dgwp|dffpipe_d09:dffpipe9|dffe10a[11]     ; Lost fanout                            ;
-; Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_mgk1:auto_generated|delayed_wrptr_g[11]                                             ; Lost fanout                            ;
-; Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_mgk1:auto_generated|alt_synch_pipe_jv7:rs_dgwp|dffpipe_d09:dffpipe9|dffe11a[12]     ; Lost fanout                            ;
-; Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_mgk1:auto_generated|alt_synch_pipe_jv7:rs_dgwp|dffpipe_d09:dffpipe9|dffe10a[12]     ; Lost fanout                            ;
-; Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_mgk1:auto_generated|delayed_wrptr_g[12]                                             ; Lost fanout                            ;
-; Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_mgk1:auto_generated|p0addr                                                          ; Stuck at GND due to stuck port clock   ;
-; Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_mgk1:auto_generated|rdptr_g[0..12]                                                  ; Stuck at GND due to stuck port clock   ;
-; Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_mgk1:auto_generated|alt_synch_pipe_kv7:ws_dgrp|dffpipe_e09:dffpipe12|dffe13a[0..12] ; Stuck at GND due to stuck port data_in ;
-; Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_mgk1:auto_generated|alt_synch_pipe_kv7:ws_dgrp|dffpipe_e09:dffpipe12|dffe14a[0..12] ; Stuck at GND due to stuck port data_in ;
-; Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_mgk1:auto_generated|a_graycounter_r96:rdptr_g1p|counter_ffa[0..12]                  ; Stuck at GND due to stuck port clock   ;
-; Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_mgk1:auto_generated|a_graycounter_r96:rdptr_g1p|parity_ff                           ; Stuck at GND due to stuck port clock   ;
-; Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_mgk1:auto_generated|dffpipe_c2e:rdaclr|dffe7a[0]                                    ; Lost fanout                            ;
-; Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_mgk1:auto_generated|a_graycounter_f2c:wrptr_gp|parity_ff                            ; Lost fanout                            ;
-; Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_mgk1:auto_generated|a_graycounter_g2c:wrptr_g1p|counter_ffa0                        ; Lost fanout                            ;
-; Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_mgk1:auto_generated|a_graycounter_g2c:wrptr_g1p|counter_ffa1                        ; Lost fanout                            ;
-; Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_mgk1:auto_generated|a_graycounter_g2c:wrptr_g1p|counter_ffa2                        ; Lost fanout                            ;
-; Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_mgk1:auto_generated|a_graycounter_g2c:wrptr_g1p|counter_ffa3                        ; Lost fanout                            ;
-; Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_mgk1:auto_generated|a_graycounter_g2c:wrptr_g1p|counter_ffa4                        ; Lost fanout                            ;
-; Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_mgk1:auto_generated|a_graycounter_g2c:wrptr_g1p|counter_ffa5                        ; Lost fanout                            ;
-; Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_mgk1:auto_generated|a_graycounter_g2c:wrptr_g1p|counter_ffa6                        ; Lost fanout                            ;
-; Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_mgk1:auto_generated|a_graycounter_g2c:wrptr_g1p|counter_ffa7                        ; Lost fanout                            ;
-; Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_mgk1:auto_generated|a_graycounter_g2c:wrptr_g1p|counter_ffa8                        ; Lost fanout                            ;
-; Total Number of Removed Registers = 198                                                                                            ;                                        ;
-+------------------------------------------------------------------------------------------------------------------------------------+----------------------------------------+
-* Table truncated at 100 items. To change the number of removed registers reported, set the "Number of Removed Registers Reported" option under Assignments->Settings->Analysis and Synthesis Settings->More Settings
++-------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Registers Removed During Synthesis                                                                                                                    ;
++--------------------------------------------------------------------------------------------------------------+----------------------------------------+
+; Register name                                                                                                ; Reason for Removal                     ;
++--------------------------------------------------------------------------------------------------------------+----------------------------------------+
+; move[2..4]                                                                                                   ; Stuck at GND due to stuck port data_in ;
+; Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_60n1:auto_generated|dffpipe_9d9:wraclr|dffe12a[0]             ; Stuck at VCC due to stuck port data_in ;
+; Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_60n1:auto_generated|dffpipe_9d9:wraclr|dffe13a[0]             ; Stuck at VCC due to stuck port data_in ;
+; Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_60n1:auto_generated|a_graycounter_hgc:wrptr_g1p|counter_ffa0  ; Lost fanout                            ;
+; Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_60n1:auto_generated|a_graycounter_hgc:wrptr_g1p|counter_ffa1  ; Lost fanout                            ;
+; Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_60n1:auto_generated|a_graycounter_hgc:wrptr_g1p|counter_ffa2  ; Lost fanout                            ;
+; Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_60n1:auto_generated|a_graycounter_hgc:wrptr_g1p|counter_ffa3  ; Lost fanout                            ;
+; Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_60n1:auto_generated|a_graycounter_hgc:wrptr_g1p|counter_ffa4  ; Lost fanout                            ;
+; Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_60n1:auto_generated|a_graycounter_hgc:wrptr_g1p|counter_ffa5  ; Lost fanout                            ;
+; Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_60n1:auto_generated|a_graycounter_hgc:wrptr_g1p|counter_ffa6  ; Lost fanout                            ;
+; Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_60n1:auto_generated|a_graycounter_hgc:wrptr_g1p|counter_ffa7  ; Lost fanout                            ;
+; Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_60n1:auto_generated|a_graycounter_hgc:wrptr_g1p|counter_ffa8  ; Lost fanout                            ;
+; Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_60n1:auto_generated|a_graycounter_hgc:wrptr_g1p|counter_ffa9  ; Lost fanout                            ;
+; Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_60n1:auto_generated|a_graycounter_hgc:wrptr_g1p|counter_ffa10 ; Lost fanout                            ;
+; Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_60n1:auto_generated|a_graycounter_hgc:wrptr_g1p|counter_ffa11 ; Lost fanout                            ;
+; Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_60n1:auto_generated|a_graycounter_hgc:wrptr_g1p|parity_ff     ; Lost fanout                            ;
+; Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_tgk1:auto_generated|a_graycounter_g2c:wrptr_g1p|counter_ffa0  ; Lost fanout                            ;
+; Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_tgk1:auto_generated|a_graycounter_g2c:wrptr_g1p|counter_ffa1  ; Lost fanout                            ;
+; Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_tgk1:auto_generated|a_graycounter_g2c:wrptr_g1p|counter_ffa2  ; Lost fanout                            ;
+; Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_tgk1:auto_generated|a_graycounter_g2c:wrptr_g1p|counter_ffa3  ; Lost fanout                            ;
+; Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_tgk1:auto_generated|a_graycounter_g2c:wrptr_g1p|counter_ffa4  ; Lost fanout                            ;
+; Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_tgk1:auto_generated|a_graycounter_g2c:wrptr_g1p|counter_ffa5  ; Lost fanout                            ;
+; Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_tgk1:auto_generated|a_graycounter_g2c:wrptr_g1p|counter_ffa6  ; Lost fanout                            ;
+; Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_tgk1:auto_generated|a_graycounter_g2c:wrptr_g1p|counter_ffa7  ; Lost fanout                            ;
+; Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_tgk1:auto_generated|a_graycounter_g2c:wrptr_g1p|counter_ffa8  ; Lost fanout                            ;
+; Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_tgk1:auto_generated|a_graycounter_g2c:wrptr_g1p|counter_ffa9  ; Lost fanout                            ;
+; Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_tgk1:auto_generated|a_graycounter_g2c:wrptr_g1p|counter_ffa10 ; Lost fanout                            ;
+; Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_tgk1:auto_generated|a_graycounter_g2c:wrptr_g1p|counter_ffa11 ; Lost fanout                            ;
+; Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_tgk1:auto_generated|a_graycounter_g2c:wrptr_g1p|counter_ffa12 ; Lost fanout                            ;
+; Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_tgk1:auto_generated|a_graycounter_g2c:wrptr_g1p|parity_ff     ; Lost fanout                            ;
+; FIFO_ADR[0]~reg0                                                                                             ; Stuck at GND due to stuck port data_in ;
+; Total Number of Removed Registers = 33                                                                       ;                                        ;
++--------------------------------------------------------------------------------------------------------------+----------------------------------------+
 
 
-+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-; Removed Registers Triggering Further Register Optimizations                                                                                                                                                                                                                                  ;
-+---------------------------------------------------------------------------------------------------------------------------------+-------------------------+----------------------------------------------------------------------------------------------------------------------------------+
-; Register name                                                                                                                   ; Reason for Removal      ; Registers Removed due to This Register                                                                                           ;
-+---------------------------------------------------------------------------------------------------------------------------------+-------------------------+----------------------------------------------------------------------------------------------------------------------------------+
-; Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_60n1:auto_generated|dffpipe_9d9:wraclr|dffe12a[0]                                ; Stuck at GND            ; Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_60n1:auto_generated|dffpipe_9d9:wraclr|dffe13a[0],                                ;
-;                                                                                                                                 ; due to stuck port clock ; Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_60n1:auto_generated|a_graycounter_ggc:wrptr_gp|counter_ffa[11],                   ;
-;                                                                                                                                 ;                         ; Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_60n1:auto_generated|a_graycounter_ggc:wrptr_gp|counter_ffa[10],                   ;
-;                                                                                                                                 ;                         ; Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_60n1:auto_generated|a_graycounter_ggc:wrptr_gp|counter_ffa[9],                    ;
-;                                                                                                                                 ;                         ; Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_60n1:auto_generated|a_graycounter_ggc:wrptr_gp|counter_ffa[8],                    ;
-;                                                                                                                                 ;                         ; Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_60n1:auto_generated|a_graycounter_ggc:wrptr_gp|counter_ffa[7],                    ;
-;                                                                                                                                 ;                         ; Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_60n1:auto_generated|a_graycounter_ggc:wrptr_gp|counter_ffa[6],                    ;
-;                                                                                                                                 ;                         ; Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_60n1:auto_generated|a_graycounter_ggc:wrptr_gp|counter_ffa[5],                    ;
-;                                                                                                                                 ;                         ; Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_60n1:auto_generated|a_graycounter_ggc:wrptr_gp|counter_ffa[4],                    ;
-;                                                                                                                                 ;                         ; Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_60n1:auto_generated|a_graycounter_ggc:wrptr_gp|counter_ffa[3],                    ;
-;                                                                                                                                 ;                         ; Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_60n1:auto_generated|a_graycounter_ggc:wrptr_gp|counter_ffa[2],                    ;
-;                                                                                                                                 ;                         ; Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_60n1:auto_generated|a_graycounter_ggc:wrptr_gp|counter_ffa[1],                    ;
-;                                                                                                                                 ;                         ; Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_60n1:auto_generated|a_graycounter_ggc:wrptr_gp|counter_ffa[0],                    ;
-;                                                                                                                                 ;                         ; Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_60n1:auto_generated|a_graycounter_ggc:wrptr_gp|parity_ff,                         ;
-;                                                                                                                                 ;                         ; Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_60n1:auto_generated|a_graycounter_hgc:wrptr_g1p|counter_ffa0,                     ;
-;                                                                                                                                 ;                         ; Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_60n1:auto_generated|a_graycounter_hgc:wrptr_g1p|counter_ffa1,                     ;
-;                                                                                                                                 ;                         ; Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_60n1:auto_generated|a_graycounter_hgc:wrptr_g1p|counter_ffa2,                     ;
-;                                                                                                                                 ;                         ; Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_60n1:auto_generated|a_graycounter_hgc:wrptr_g1p|counter_ffa3,                     ;
-;                                                                                                                                 ;                         ; Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_60n1:auto_generated|a_graycounter_hgc:wrptr_g1p|counter_ffa4,                     ;
-;                                                                                                                                 ;                         ; Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_60n1:auto_generated|a_graycounter_hgc:wrptr_g1p|counter_ffa5,                     ;
-;                                                                                                                                 ;                         ; Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_60n1:auto_generated|a_graycounter_hgc:wrptr_g1p|counter_ffa6,                     ;
-;                                                                                                                                 ;                         ; Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_60n1:auto_generated|a_graycounter_hgc:wrptr_g1p|counter_ffa7,                     ;
-;                                                                                                                                 ;                         ; Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_60n1:auto_generated|a_graycounter_hgc:wrptr_g1p|counter_ffa8,                     ;
-;                                                                                                                                 ;                         ; Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_60n1:auto_generated|a_graycounter_hgc:wrptr_g1p|counter_ffa9,                     ;
-;                                                                                                                                 ;                         ; Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_60n1:auto_generated|a_graycounter_hgc:wrptr_g1p|counter_ffa10,                    ;
-;                                                                                                                                 ;                         ; Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_60n1:auto_generated|a_graycounter_hgc:wrptr_g1p|counter_ffa11,                    ;
-;                                                                                                                                 ;                         ; Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_60n1:auto_generated|a_graycounter_hgc:wrptr_g1p|parity_ff                         ;
-; Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_mgk1:auto_generated|p0addr                                                       ; Stuck at GND            ; Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_mgk1:auto_generated|a_graycounter_r96:rdptr_g1p|counter_ffa[3],                   ;
-;                                                                                                                                 ; due to stuck port clock ; Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_mgk1:auto_generated|a_graycounter_r96:rdptr_g1p|counter_ffa[2],                   ;
-;                                                                                                                                 ;                         ; Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_mgk1:auto_generated|a_graycounter_r96:rdptr_g1p|counter_ffa[1],                   ;
-;                                                                                                                                 ;                         ; Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_mgk1:auto_generated|a_graycounter_r96:rdptr_g1p|counter_ffa[0],                   ;
-;                                                                                                                                 ;                         ; Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_mgk1:auto_generated|dffpipe_c2e:rdaclr|dffe7a[0]                                  ;
-; Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_mgk1:auto_generated|rdptr_g[12]                                                  ; Stuck at GND            ; Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_mgk1:auto_generated|alt_synch_pipe_kv7:ws_dgrp|dffpipe_e09:dffpipe12|dffe13a[12], ;
-;                                                                                                                                 ; due to stuck port clock ; Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_mgk1:auto_generated|alt_synch_pipe_kv7:ws_dgrp|dffpipe_e09:dffpipe12|dffe14a[12], ;
-;                                                                                                                                 ;                         ; FIFO_ADR[0]~reg0                                                                                                                 ;
-; Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_60n1:auto_generated|delayed_wrptr_g[11]                                          ; Stuck at GND            ; Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_60n1:auto_generated|alt_synch_pipe_tdb:rs_dgwp|dffpipe_re9:dffpipe9|dffe10a[11],  ;
-;                                                                                                                                 ; due to stuck port clock ; Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_60n1:auto_generated|alt_synch_pipe_tdb:rs_dgwp|dffpipe_re9:dffpipe9|dffe11a[11]   ;
-; Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_mgk1:auto_generated|rdptr_g[9]                                                   ; Stuck at GND            ; Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_mgk1:auto_generated|alt_synch_pipe_kv7:ws_dgrp|dffpipe_e09:dffpipe12|dffe13a[9],  ;
-;                                                                                                                                 ; due to stuck port clock ; Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_mgk1:auto_generated|alt_synch_pipe_kv7:ws_dgrp|dffpipe_e09:dffpipe12|dffe14a[9]   ;
-; Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_mgk1:auto_generated|rdptr_g[8]                                                   ; Stuck at GND            ; Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_mgk1:auto_generated|alt_synch_pipe_kv7:ws_dgrp|dffpipe_e09:dffpipe12|dffe13a[8],  ;
-;                                                                                                                                 ; due to stuck port clock ; Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_mgk1:auto_generated|alt_synch_pipe_kv7:ws_dgrp|dffpipe_e09:dffpipe12|dffe14a[8]   ;
-; Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_mgk1:auto_generated|rdptr_g[7]                                                   ; Stuck at GND            ; Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_mgk1:auto_generated|alt_synch_pipe_kv7:ws_dgrp|dffpipe_e09:dffpipe12|dffe13a[7],  ;
-;                                                                                                                                 ; due to stuck port clock ; Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_mgk1:auto_generated|alt_synch_pipe_kv7:ws_dgrp|dffpipe_e09:dffpipe12|dffe14a[7]   ;
-; Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_mgk1:auto_generated|rdptr_g[5]                                                   ; Stuck at GND            ; Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_mgk1:auto_generated|alt_synch_pipe_kv7:ws_dgrp|dffpipe_e09:dffpipe12|dffe13a[5],  ;
-;                                                                                                                                 ; due to stuck port clock ; Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_mgk1:auto_generated|alt_synch_pipe_kv7:ws_dgrp|dffpipe_e09:dffpipe12|dffe14a[5]   ;
-; Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_mgk1:auto_generated|rdptr_g[4]                                                   ; Stuck at GND            ; Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_mgk1:auto_generated|alt_synch_pipe_kv7:ws_dgrp|dffpipe_e09:dffpipe12|dffe13a[4],  ;
-;                                                                                                                                 ; due to stuck port clock ; Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_mgk1:auto_generated|alt_synch_pipe_kv7:ws_dgrp|dffpipe_e09:dffpipe12|dffe14a[4]   ;
-; Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_mgk1:auto_generated|alt_synch_pipe_jv7:rs_dgwp|dffpipe_d09:dffpipe9|dffe11a[1]   ; Lost Fanouts            ; Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_mgk1:auto_generated|alt_synch_pipe_jv7:rs_dgwp|dffpipe_d09:dffpipe9|dffe10a[1],   ;
-;                                                                                                                                 ;                         ; Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_mgk1:auto_generated|delayed_wrptr_g[1]                                            ;
-; Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_mgk1:auto_generated|rdptr_g[3]                                                   ; Stuck at GND            ; Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_mgk1:auto_generated|alt_synch_pipe_kv7:ws_dgrp|dffpipe_e09:dffpipe12|dffe13a[3],  ;
-;                                                                                                                                 ; due to stuck port clock ; Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_mgk1:auto_generated|alt_synch_pipe_kv7:ws_dgrp|dffpipe_e09:dffpipe12|dffe14a[3]   ;
-; Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_mgk1:auto_generated|rdptr_g[2]                                                   ; Stuck at GND            ; Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_mgk1:auto_generated|alt_synch_pipe_kv7:ws_dgrp|dffpipe_e09:dffpipe12|dffe13a[2],  ;
-;                                                                                                                                 ; due to stuck port clock ; Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_mgk1:auto_generated|alt_synch_pipe_kv7:ws_dgrp|dffpipe_e09:dffpipe12|dffe14a[2]   ;
-; Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_mgk1:auto_generated|rdptr_g[1]                                                   ; Stuck at GND            ; Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_mgk1:auto_generated|alt_synch_pipe_kv7:ws_dgrp|dffpipe_e09:dffpipe12|dffe13a[1],  ;
-;                                                                                                                                 ; due to stuck port clock ; Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_mgk1:auto_generated|alt_synch_pipe_kv7:ws_dgrp|dffpipe_e09:dffpipe12|dffe14a[1]   ;
-; Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_mgk1:auto_generated|rdptr_g[0]                                                   ; Stuck at GND            ; Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_mgk1:auto_generated|alt_synch_pipe_kv7:ws_dgrp|dffpipe_e09:dffpipe12|dffe13a[0],  ;
-;                                                                                                                                 ; due to stuck port clock ; Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_mgk1:auto_generated|alt_synch_pipe_kv7:ws_dgrp|dffpipe_e09:dffpipe12|dffe14a[0]   ;
-; Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_60n1:auto_generated|delayed_wrptr_g[10]                                          ; Stuck at GND            ; Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_60n1:auto_generated|alt_synch_pipe_tdb:rs_dgwp|dffpipe_re9:dffpipe9|dffe10a[10],  ;
-;                                                                                                                                 ; due to stuck port clock ; Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_60n1:auto_generated|alt_synch_pipe_tdb:rs_dgwp|dffpipe_re9:dffpipe9|dffe11a[10]   ;
-; Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_60n1:auto_generated|delayed_wrptr_g[9]                                           ; Stuck at GND            ; Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_60n1:auto_generated|alt_synch_pipe_tdb:rs_dgwp|dffpipe_re9:dffpipe9|dffe10a[9],   ;
-;                                                                                                                                 ; due to stuck port clock ; Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_60n1:auto_generated|alt_synch_pipe_tdb:rs_dgwp|dffpipe_re9:dffpipe9|dffe11a[9]    ;
-; Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_60n1:auto_generated|delayed_wrptr_g[8]                                           ; Stuck at GND            ; Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_60n1:auto_generated|alt_synch_pipe_tdb:rs_dgwp|dffpipe_re9:dffpipe9|dffe10a[8],   ;
-;                                                                                                                                 ; due to stuck port clock ; Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_60n1:auto_generated|alt_synch_pipe_tdb:rs_dgwp|dffpipe_re9:dffpipe9|dffe11a[8]    ;
-; Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_60n1:auto_generated|delayed_wrptr_g[7]                                           ; Stuck at GND            ; Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_60n1:auto_generated|alt_synch_pipe_tdb:rs_dgwp|dffpipe_re9:dffpipe9|dffe10a[7],   ;
-;                                                                                                                                 ; due to stuck port clock ; Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_60n1:auto_generated|alt_synch_pipe_tdb:rs_dgwp|dffpipe_re9:dffpipe9|dffe11a[7]    ;
-; Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_60n1:auto_generated|delayed_wrptr_g[6]                                           ; Stuck at GND            ; Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_60n1:auto_generated|alt_synch_pipe_tdb:rs_dgwp|dffpipe_re9:dffpipe9|dffe10a[6],   ;
-;                                                                                                                                 ; due to stuck port clock ; Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_60n1:auto_generated|alt_synch_pipe_tdb:rs_dgwp|dffpipe_re9:dffpipe9|dffe11a[6]    ;
-; Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_60n1:auto_generated|delayed_wrptr_g[5]                                           ; Stuck at GND            ; Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_60n1:auto_generated|alt_synch_pipe_tdb:rs_dgwp|dffpipe_re9:dffpipe9|dffe10a[5],   ;
-;                                                                                                                                 ; due to stuck port clock ; Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_60n1:auto_generated|alt_synch_pipe_tdb:rs_dgwp|dffpipe_re9:dffpipe9|dffe11a[5]    ;
-; Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_60n1:auto_generated|delayed_wrptr_g[4]                                           ; Stuck at GND            ; Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_60n1:auto_generated|alt_synch_pipe_tdb:rs_dgwp|dffpipe_re9:dffpipe9|dffe10a[4],   ;
-;                                                                                                                                 ; due to stuck port clock ; Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_60n1:auto_generated|alt_synch_pipe_tdb:rs_dgwp|dffpipe_re9:dffpipe9|dffe11a[4]    ;
-; Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_60n1:auto_generated|delayed_wrptr_g[3]                                           ; Stuck at GND            ; Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_60n1:auto_generated|alt_synch_pipe_tdb:rs_dgwp|dffpipe_re9:dffpipe9|dffe10a[3],   ;
-;                                                                                                                                 ; due to stuck port clock ; Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_60n1:auto_generated|alt_synch_pipe_tdb:rs_dgwp|dffpipe_re9:dffpipe9|dffe11a[3]    ;
-; Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_60n1:auto_generated|delayed_wrptr_g[2]                                           ; Stuck at GND            ; Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_60n1:auto_generated|alt_synch_pipe_tdb:rs_dgwp|dffpipe_re9:dffpipe9|dffe10a[2],   ;
-;                                                                                                                                 ; due to stuck port clock ; Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_60n1:auto_generated|alt_synch_pipe_tdb:rs_dgwp|dffpipe_re9:dffpipe9|dffe11a[2]    ;
-; Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_60n1:auto_generated|delayed_wrptr_g[1]                                           ; Stuck at GND            ; Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_60n1:auto_generated|alt_synch_pipe_tdb:rs_dgwp|dffpipe_re9:dffpipe9|dffe10a[1],   ;
-;                                                                                                                                 ; due to stuck port clock ; Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_60n1:auto_generated|alt_synch_pipe_tdb:rs_dgwp|dffpipe_re9:dffpipe9|dffe11a[1]    ;
-; Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_60n1:auto_generated|delayed_wrptr_g[0]                                           ; Stuck at GND            ; Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_60n1:auto_generated|alt_synch_pipe_tdb:rs_dgwp|dffpipe_re9:dffpipe9|dffe10a[0],   ;
-;                                                                                                                                 ; due to stuck port clock ; Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_60n1:auto_generated|alt_synch_pipe_tdb:rs_dgwp|dffpipe_re9:dffpipe9|dffe11a[0]    ;
-; Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_mgk1:auto_generated|alt_synch_pipe_jv7:rs_dgwp|dffpipe_d09:dffpipe9|dffe11a[0]   ; Lost Fanouts            ; Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_mgk1:auto_generated|alt_synch_pipe_jv7:rs_dgwp|dffpipe_d09:dffpipe9|dffe10a[0],   ;
-;                                                                                                                                 ;                         ; Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_mgk1:auto_generated|delayed_wrptr_g[0]                                            ;
-; Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_mgk1:auto_generated|rdptr_g[6]                                                   ; Stuck at GND            ; Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_mgk1:auto_generated|alt_synch_pipe_kv7:ws_dgrp|dffpipe_e09:dffpipe12|dffe13a[6],  ;
-;                                                                                                                                 ; due to stuck port clock ; Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_mgk1:auto_generated|alt_synch_pipe_kv7:ws_dgrp|dffpipe_e09:dffpipe12|dffe14a[6]   ;
-; Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_mgk1:auto_generated|alt_synch_pipe_jv7:rs_dgwp|dffpipe_d09:dffpipe9|dffe11a[2]   ; Lost Fanouts            ; Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_mgk1:auto_generated|alt_synch_pipe_jv7:rs_dgwp|dffpipe_d09:dffpipe9|dffe10a[2],   ;
-;                                                                                                                                 ;                         ; Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_mgk1:auto_generated|delayed_wrptr_g[2]                                            ;
-; Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_mgk1:auto_generated|alt_synch_pipe_jv7:rs_dgwp|dffpipe_d09:dffpipe9|dffe11a[3]   ; Lost Fanouts            ; Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_mgk1:auto_generated|alt_synch_pipe_jv7:rs_dgwp|dffpipe_d09:dffpipe9|dffe10a[3],   ;
-;                                                                                                                                 ;                         ; Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_mgk1:auto_generated|delayed_wrptr_g[3]                                            ;
-; Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_mgk1:auto_generated|alt_synch_pipe_jv7:rs_dgwp|dffpipe_d09:dffpipe9|dffe11a[4]   ; Lost Fanouts            ; Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_mgk1:auto_generated|alt_synch_pipe_jv7:rs_dgwp|dffpipe_d09:dffpipe9|dffe10a[4],   ;
-;                                                                                                                                 ;                         ; Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_mgk1:auto_generated|delayed_wrptr_g[4]                                            ;
-; Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_mgk1:auto_generated|alt_synch_pipe_jv7:rs_dgwp|dffpipe_d09:dffpipe9|dffe11a[5]   ; Lost Fanouts            ; Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_mgk1:auto_generated|alt_synch_pipe_jv7:rs_dgwp|dffpipe_d09:dffpipe9|dffe10a[5],   ;
-;                                                                                                                                 ;                         ; Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_mgk1:auto_generated|delayed_wrptr_g[5]                                            ;
-; Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_mgk1:auto_generated|alt_synch_pipe_jv7:rs_dgwp|dffpipe_d09:dffpipe9|dffe11a[6]   ; Lost Fanouts            ; Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_mgk1:auto_generated|alt_synch_pipe_jv7:rs_dgwp|dffpipe_d09:dffpipe9|dffe10a[6],   ;
-;                                                                                                                                 ;                         ; Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_mgk1:auto_generated|delayed_wrptr_g[6]                                            ;
-; Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_mgk1:auto_generated|alt_synch_pipe_jv7:rs_dgwp|dffpipe_d09:dffpipe9|dffe11a[7]   ; Lost Fanouts            ; Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_mgk1:auto_generated|alt_synch_pipe_jv7:rs_dgwp|dffpipe_d09:dffpipe9|dffe10a[7],   ;
-;                                                                                                                                 ;                         ; Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_mgk1:auto_generated|delayed_wrptr_g[7]                                            ;
-; Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_mgk1:auto_generated|alt_synch_pipe_jv7:rs_dgwp|dffpipe_d09:dffpipe9|dffe11a[8]   ; Lost Fanouts            ; Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_mgk1:auto_generated|alt_synch_pipe_jv7:rs_dgwp|dffpipe_d09:dffpipe9|dffe10a[8],   ;
-;                                                                                                                                 ;                         ; Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_mgk1:auto_generated|delayed_wrptr_g[8]                                            ;
-; Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_mgk1:auto_generated|alt_synch_pipe_jv7:rs_dgwp|dffpipe_d09:dffpipe9|dffe11a[9]   ; Lost Fanouts            ; Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_mgk1:auto_generated|alt_synch_pipe_jv7:rs_dgwp|dffpipe_d09:dffpipe9|dffe10a[9],   ;
-;                                                                                                                                 ;                         ; Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_mgk1:auto_generated|delayed_wrptr_g[9]                                            ;
-; Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_mgk1:auto_generated|alt_synch_pipe_jv7:rs_dgwp|dffpipe_d09:dffpipe9|dffe11a[10]  ; Lost Fanouts            ; Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_mgk1:auto_generated|alt_synch_pipe_jv7:rs_dgwp|dffpipe_d09:dffpipe9|dffe10a[10],  ;
-;                                                                                                                                 ;                         ; Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_mgk1:auto_generated|delayed_wrptr_g[10]                                           ;
-; Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_mgk1:auto_generated|alt_synch_pipe_jv7:rs_dgwp|dffpipe_d09:dffpipe9|dffe11a[11]  ; Lost Fanouts            ; Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_mgk1:auto_generated|alt_synch_pipe_jv7:rs_dgwp|dffpipe_d09:dffpipe9|dffe10a[11],  ;
-;                                                                                                                                 ;                         ; Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_mgk1:auto_generated|delayed_wrptr_g[11]                                           ;
-; Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_mgk1:auto_generated|alt_synch_pipe_jv7:rs_dgwp|dffpipe_d09:dffpipe9|dffe11a[12]  ; Lost Fanouts            ; Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_mgk1:auto_generated|alt_synch_pipe_jv7:rs_dgwp|dffpipe_d09:dffpipe9|dffe10a[12],  ;
-;                                                                                                                                 ;                         ; Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_mgk1:auto_generated|delayed_wrptr_g[12]                                           ;
-; Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_mgk1:auto_generated|rdptr_g[11]                                                  ; Stuck at GND            ; Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_mgk1:auto_generated|alt_synch_pipe_kv7:ws_dgrp|dffpipe_e09:dffpipe12|dffe13a[11], ;
-;                                                                                                                                 ; due to stuck port clock ; Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_mgk1:auto_generated|alt_synch_pipe_kv7:ws_dgrp|dffpipe_e09:dffpipe12|dffe14a[11]  ;
-; Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_mgk1:auto_generated|rdptr_g[10]                                                  ; Stuck at GND            ; Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_mgk1:auto_generated|alt_synch_pipe_kv7:ws_dgrp|dffpipe_e09:dffpipe12|dffe13a[10], ;
-;                                                                                                                                 ; due to stuck port clock ; Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_mgk1:auto_generated|alt_synch_pipe_kv7:ws_dgrp|dffpipe_e09:dffpipe12|dffe14a[10]  ;
-; Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_60n1:auto_generated|alt_synch_pipe_1e8:ws_dgrp|dffpipe_se9:dffpipe15|dffe17a[1]  ; Lost Fanouts            ; Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_60n1:auto_generated|alt_synch_pipe_1e8:ws_dgrp|dffpipe_se9:dffpipe15|dffe16a[1]   ;
-; Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_60n1:auto_generated|alt_synch_pipe_1e8:ws_dgrp|dffpipe_se9:dffpipe15|dffe17a[2]  ; Lost Fanouts            ; Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_60n1:auto_generated|alt_synch_pipe_1e8:ws_dgrp|dffpipe_se9:dffpipe15|dffe16a[2]   ;
-; Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_60n1:auto_generated|alt_synch_pipe_1e8:ws_dgrp|dffpipe_se9:dffpipe15|dffe17a[3]  ; Lost Fanouts            ; Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_60n1:auto_generated|alt_synch_pipe_1e8:ws_dgrp|dffpipe_se9:dffpipe15|dffe16a[3]   ;
-; Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_60n1:auto_generated|alt_synch_pipe_1e8:ws_dgrp|dffpipe_se9:dffpipe15|dffe17a[4]  ; Lost Fanouts            ; Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_60n1:auto_generated|alt_synch_pipe_1e8:ws_dgrp|dffpipe_se9:dffpipe15|dffe16a[4]   ;
-; Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_60n1:auto_generated|alt_synch_pipe_1e8:ws_dgrp|dffpipe_se9:dffpipe15|dffe17a[5]  ; Lost Fanouts            ; Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_60n1:auto_generated|alt_synch_pipe_1e8:ws_dgrp|dffpipe_se9:dffpipe15|dffe16a[5]   ;
-; Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_60n1:auto_generated|alt_synch_pipe_1e8:ws_dgrp|dffpipe_se9:dffpipe15|dffe17a[7]  ; Lost Fanouts            ; Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_60n1:auto_generated|alt_synch_pipe_1e8:ws_dgrp|dffpipe_se9:dffpipe15|dffe16a[7]   ;
-; Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_60n1:auto_generated|alt_synch_pipe_1e8:ws_dgrp|dffpipe_se9:dffpipe15|dffe17a[8]  ; Lost Fanouts            ; Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_60n1:auto_generated|alt_synch_pipe_1e8:ws_dgrp|dffpipe_se9:dffpipe15|dffe16a[8]   ;
-; Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_60n1:auto_generated|alt_synch_pipe_1e8:ws_dgrp|dffpipe_se9:dffpipe15|dffe17a[9]  ; Lost Fanouts            ; Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_60n1:auto_generated|alt_synch_pipe_1e8:ws_dgrp|dffpipe_se9:dffpipe15|dffe16a[9]   ;
-; Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_60n1:auto_generated|alt_synch_pipe_1e8:ws_dgrp|dffpipe_se9:dffpipe15|dffe17a[10] ; Lost Fanouts            ; Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_60n1:auto_generated|alt_synch_pipe_1e8:ws_dgrp|dffpipe_se9:dffpipe15|dffe16a[10]  ;
-; Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_60n1:auto_generated|alt_synch_pipe_1e8:ws_dgrp|dffpipe_se9:dffpipe15|dffe17a[11] ; Lost Fanouts            ; Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_60n1:auto_generated|alt_synch_pipe_1e8:ws_dgrp|dffpipe_se9:dffpipe15|dffe16a[11]  ;
-; Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_60n1:auto_generated|alt_synch_pipe_1e8:ws_dgrp|dffpipe_se9:dffpipe15|dffe17a[6]  ; Lost Fanouts            ; Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_60n1:auto_generated|alt_synch_pipe_1e8:ws_dgrp|dffpipe_se9:dffpipe15|dffe16a[6]   ;
-; Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_60n1:auto_generated|alt_synch_pipe_1e8:ws_dgrp|dffpipe_se9:dffpipe15|dffe17a[0]  ; Lost Fanouts            ; Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_60n1:auto_generated|alt_synch_pipe_1e8:ws_dgrp|dffpipe_se9:dffpipe15|dffe16a[0]   ;
-+---------------------------------------------------------------------------------------------------------------------------------+-------------------------+----------------------------------------------------------------------------------------------------------------------------------+
++---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Removed Registers Triggering Further Register Optimizations                                                                                                                                                                     ;
++--------------------------------------------------------------------------------------------------+---------------------------+--------------------------------------------------------------------------------------------------+
+; Register name                                                                                    ; Reason for Removal        ; Registers Removed due to This Register                                                           ;
++--------------------------------------------------------------------------------------------------+---------------------------+--------------------------------------------------------------------------------------------------+
+; Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_60n1:auto_generated|dffpipe_9d9:wraclr|dffe12a[0] ; Stuck at VCC              ; Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_60n1:auto_generated|dffpipe_9d9:wraclr|dffe13a[0] ;
+;                                                                                                  ; due to stuck port data_in ;                                                                                                  ;
++--------------------------------------------------------------------------------------------------+---------------------------+--------------------------------------------------------------------------------------------------+
 
 
 +------------------------------------------------------+
@@ -539,12 +365,12 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 +----------------------------------------------+-------+
 ; Statistic                                    ; Value ;
 +----------------------------------------------+-------+
-; Total registers                              ; 52    ;
+; Total registers                              ; 224   ;
 ; Number of registers using Synchronous Clear  ; 0     ;
 ; Number of registers using Synchronous Load   ; 0     ;
-; Number of registers using Asynchronous Clear ; 14    ;
+; Number of registers using Asynchronous Clear ; 29    ;
 ; Number of registers using Asynchronous Load  ; 0     ;
-; Number of registers using Clock Enable       ; 12    ;
+; Number of registers using Clock Enable       ; 25    ;
 ; Number of registers using Preset             ; 0     ;
 +----------------------------------------------+-------+
 
@@ -568,26 +394,26 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 +---------------------------------+-------+------+---------------+
 
 
-+--------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-; Source assignments for Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_mgk1:auto_generated                                                                          ;
-+---------------------------------+------------------------------------------------------------------------------------+-----------------+---------------------------+
-; Assignment                      ; Value                                                                              ; From            ; To                        ;
-+---------------------------------+------------------------------------------------------------------------------------+-----------------+---------------------------+
-; AUTO_SHIFT_REGISTER_RECOGNITION ; OFF                                                                                ; -               ; -                         ;
-; REMOVE_DUPLICATE_REGISTERS      ; OFF                                                                                ; -               ; -                         ;
-; SUPPRESS_DA_RULE_INTERNAL       ; d101                                                                               ; -               ; -                         ;
-; SUPPRESS_DA_RULE_INTERNAL       ; d102                                                                               ; -               ; -                         ;
-; SUPPRESS_DA_RULE_INTERNAL       ; s102                                                                               ; -               ; -                         ;
-; POWER_UP_LEVEL                  ; LOW                                                                                ; -               ; p0addr                    ;
-; CUT                             ; ON                                                                                 ; rdptr_g         ; ws_dgrp|dffpipe12|dffe13a ;
-; SDC_STATEMENT                   ; set_false_path -from *rdptr_g* -to *ws_dgrp|dffpipe_e09:dffpipe12|dffe13a*         ; -               ; -                         ;
-; CUT                             ; ON                                                                                 ; delayed_wrptr_g ; rs_dgwp|dffpipe9|dffe10a  ;
-; SDC_STATEMENT                   ; set_false_path -from *delayed_wrptr_g* -to *rs_dgwp|dffpipe_d09:dffpipe9|dffe10a*  ; -               ; -                         ;
-+---------------------------------+------------------------------------------------------------------------------------+-----------------+---------------------------+
++-----------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Source assignments for Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_tgk1:auto_generated                                                                       ;
++---------------------------------+-----------------------------------------------------------------------------------+-----------------+-------------------------+
+; Assignment                      ; Value                                                                             ; From            ; To                      ;
++---------------------------------+-----------------------------------------------------------------------------------+-----------------+-------------------------+
+; AUTO_SHIFT_REGISTER_RECOGNITION ; OFF                                                                               ; -               ; -                       ;
+; REMOVE_DUPLICATE_REGISTERS      ; OFF                                                                               ; -               ; -                       ;
+; SUPPRESS_DA_RULE_INTERNAL       ; d101                                                                              ; -               ; -                       ;
+; SUPPRESS_DA_RULE_INTERNAL       ; d102                                                                              ; -               ; -                       ;
+; SUPPRESS_DA_RULE_INTERNAL       ; s102                                                                              ; -               ; -                       ;
+; POWER_UP_LEVEL                  ; LOW                                                                               ; -               ; p0addr                  ;
+; CUT                             ; ON                                                                                ; rdptr_g         ; ws_dgrp|dffpipe8|dffe9a ;
+; SDC_STATEMENT                   ; set_false_path -from *rdptr_g* -to *ws_dgrp|dffpipe_g09:dffpipe8|dffe9a*          ; -               ; -                       ;
+; CUT                             ; ON                                                                                ; delayed_wrptr_g ; rs_dgwp|dffpipe5|dffe6a ;
+; SDC_STATEMENT                   ; set_false_path -from *delayed_wrptr_g* -to *rs_dgwp|dffpipe_f09:dffpipe5|dffe6a*  ; -               ; -                       ;
++---------------------------------+-----------------------------------------------------------------------------------+-----------------+-------------------------+
 
 
 +-----------------------------------------------------------------------------------------------------------------------+
-; Source assignments for Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_mgk1:auto_generated|a_graycounter_g2c:wrptr_g1p ;
+; Source assignments for Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_tgk1:auto_generated|a_graycounter_g2c:wrptr_g1p ;
 +---------------------------+-------+------+----------------------------------------------------------------------------+
 ; Assignment                ; Value ; From ; To                                                                         ;
 +---------------------------+-------+------+----------------------------------------------------------------------------+
@@ -598,7 +424,7 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 
 
 +----------------------------------------------------------------------------------------------------------------------+
-; Source assignments for Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_mgk1:auto_generated|a_graycounter_f2c:wrptr_gp ;
+; Source assignments for Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_tgk1:auto_generated|a_graycounter_f2c:wrptr_gp ;
 +---------------------------+-------+------+---------------------------------------------------------------------------+
 ; Assignment                ; Value ; From ; To                                                                        ;
 +---------------------------+-------+------+---------------------------------------------------------------------------+
@@ -607,7 +433,7 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 
 
 +-------------------------------------------------------------------------------------------------------------------+
-; Source assignments for Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_mgk1:auto_generated|altsyncram_vpu:fifo_ram ;
+; Source assignments for Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_tgk1:auto_generated|altsyncram_vpu:fifo_ram ;
 +---------------------------------+--------------------+------+-----------------------------------------------------+
 ; Assignment                      ; Value              ; From ; To                                                  ;
 +---------------------------------+--------------------+------+-----------------------------------------------------+
@@ -616,7 +442,7 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 
 
 +-----------------------------------------------------------------------------------------------------------------------------------------------+
-; Source assignments for Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_mgk1:auto_generated|altsyncram_vpu:fifo_ram|altsyncram_aec1:altsyncram5 ;
+; Source assignments for Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_tgk1:auto_generated|altsyncram_vpu:fifo_ram|altsyncram_aec1:altsyncram5 ;
 +---------------------------------+--------------------+------+---------------------------------------------------------------------------------+
 ; Assignment                      ; Value              ; From ; To                                                                              ;
 +---------------------------------+--------------------+------+---------------------------------------------------------------------------------+
@@ -625,7 +451,7 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 
 
 +--------------------------------------------------------------------------------------------------------------+
-; Source assignments for Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_mgk1:auto_generated|dffpipe_c2e:rdaclr ;
+; Source assignments for Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_tgk1:auto_generated|dffpipe_c2e:rdaclr ;
 +---------------------------------+-------+------+-------------------------------------------------------------+
 ; Assignment                      ; Value ; From ; To                                                          ;
 +---------------------------------+-------+------+-------------------------------------------------------------+
@@ -635,26 +461,8 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 +---------------------------------+-------+------+-------------------------------------------------------------+
 
 
-+--------------------------------------------------------------------------------------------------------------+
-; Source assignments for Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_mgk1:auto_generated|dffpipe_c09:rs_brp ;
-+---------------------------------+-------+------+-------------------------------------------------------------+
-; Assignment                      ; Value ; From ; To                                                          ;
-+---------------------------------+-------+------+-------------------------------------------------------------+
-; AUTO_SHIFT_REGISTER_RECOGNITION ; OFF   ; -    ; -                                                           ;
-+---------------------------------+-------+------+-------------------------------------------------------------+
-
-
-+--------------------------------------------------------------------------------------------------------------+
-; Source assignments for Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_mgk1:auto_generated|dffpipe_c09:rs_bwp ;
-+---------------------------------+-------+------+-------------------------------------------------------------+
-; Assignment                      ; Value ; From ; To                                                          ;
-+---------------------------------+-------+------+-------------------------------------------------------------+
-; AUTO_SHIFT_REGISTER_RECOGNITION ; OFF   ; -    ; -                                                           ;
-+---------------------------------+-------+------+-------------------------------------------------------------+
-
-
 +----------------------------------------------------------------------------------------------------------------------+
-; Source assignments for Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_mgk1:auto_generated|alt_synch_pipe_jv7:rs_dgwp ;
+; Source assignments for Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_tgk1:auto_generated|alt_synch_pipe_lv7:rs_dgwp ;
 +-----------------------+-------+------+-------------------------------------------------------------------------------+
 ; Assignment            ; Value ; From ; To                                                                            ;
 +-----------------------+-------+------+-------------------------------------------------------------------------------+
@@ -663,7 +471,7 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 
 
 +-------------------------------------------------------------------------------------------------------------------------------------------+
-; Source assignments for Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_mgk1:auto_generated|alt_synch_pipe_jv7:rs_dgwp|dffpipe_d09:dffpipe9 ;
+; Source assignments for Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_tgk1:auto_generated|alt_synch_pipe_lv7:rs_dgwp|dffpipe_f09:dffpipe5 ;
 +---------------------------------+-------+------+------------------------------------------------------------------------------------------+
 ; Assignment                      ; Value ; From ; To                                                                                       ;
 +---------------------------------+-------+------+------------------------------------------------------------------------------------------+
@@ -672,7 +480,7 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 
 
 +--------------------------------------------------------------------------------------------------------------+
-; Source assignments for Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_mgk1:auto_generated|dffpipe_c09:ws_brp ;
+; Source assignments for Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_tgk1:auto_generated|dffpipe_c09:ws_brp ;
 +---------------------------------+-------+------+-------------------------------------------------------------+
 ; Assignment                      ; Value ; From ; To                                                          ;
 +---------------------------------+-------+------+-------------------------------------------------------------+
@@ -681,7 +489,7 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 
 
 +--------------------------------------------------------------------------------------------------------------+
-; Source assignments for Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_mgk1:auto_generated|dffpipe_c09:ws_bwp ;
+; Source assignments for Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_tgk1:auto_generated|dffpipe_c09:ws_bwp ;
 +---------------------------------+-------+------+-------------------------------------------------------------+
 ; Assignment                      ; Value ; From ; To                                                          ;
 +---------------------------------+-------+------+-------------------------------------------------------------+
@@ -690,7 +498,7 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 
 
 +----------------------------------------------------------------------------------------------------------------------+
-; Source assignments for Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_mgk1:auto_generated|alt_synch_pipe_kv7:ws_dgrp ;
+; Source assignments for Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_tgk1:auto_generated|alt_synch_pipe_mv7:ws_dgrp ;
 +-----------------------+-------+------+-------------------------------------------------------------------------------+
 ; Assignment            ; Value ; From ; To                                                                            ;
 +-----------------------+-------+------+-------------------------------------------------------------------------------+
@@ -698,13 +506,13 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 +-----------------------+-------+------+-------------------------------------------------------------------------------+
 
 
-+--------------------------------------------------------------------------------------------------------------------------------------------+
-; Source assignments for Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_mgk1:auto_generated|alt_synch_pipe_kv7:ws_dgrp|dffpipe_e09:dffpipe12 ;
-+---------------------------------+-------+------+-------------------------------------------------------------------------------------------+
-; Assignment                      ; Value ; From ; To                                                                                        ;
-+---------------------------------+-------+------+-------------------------------------------------------------------------------------------+
-; AUTO_SHIFT_REGISTER_RECOGNITION ; OFF   ; -    ; -                                                                                         ;
-+---------------------------------+-------+------+-------------------------------------------------------------------------------------------+
++-------------------------------------------------------------------------------------------------------------------------------------------+
+; Source assignments for Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_tgk1:auto_generated|alt_synch_pipe_mv7:ws_dgrp|dffpipe_g09:dffpipe8 ;
++---------------------------------+-------+------+------------------------------------------------------------------------------------------+
+; Assignment                      ; Value ; From ; To                                                                                       ;
++---------------------------------+-------+------+------------------------------------------------------------------------------------------+
+; AUTO_SHIFT_REGISTER_RECOGNITION ; OFF   ; -    ; -                                                                                        ;
++---------------------------------+-------+------+------------------------------------------------------------------------------------------+
 
 
 +----------------------------------------------------------------+
@@ -876,7 +684,7 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 ; DEVICE_FAMILY           ; Cyclone II  ; Untyped                                      ;
 ; ADD_USEDW_MSB_BIT       ; OFF         ; Untyped                                      ;
 ; WRITE_ACLR_SYNCH        ; OFF         ; Untyped                                      ;
-; CBXI_PARAMETER          ; dcfifo_mgk1 ; Untyped                                      ;
+; CBXI_PARAMETER          ; dcfifo_tgk1 ; Untyped                                      ;
 +-------------------------+-------------+----------------------------------------------+
 Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings Tables in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
 
@@ -934,28 +742,26 @@ Note: In order to hide this table in the UI and the text report file, please set
 +----------------------------+-----------------------------------------+
 
 
-+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-; Port Connectivity Checks: "Tx_fifo:Tx_fifo"                                                                                                                                                                  ;
-+----------------+--------+----------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-; Port           ; Type   ; Severity ; Details                                                                                                                                                                 ;
-+----------------+--------+----------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-; wrclk          ; Input  ; Info     ; Stuck at VCC                                                                                                                                                            ;
-; wrusedw        ; Output ; Warning  ; Output or bidir port (11 bits) is smaller than the port expression (12 bits) it drives.  The 1 most-significant bit(s) in the port expression will be connected to GND. ;
-; wrusedw[10..0] ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed.                                                                                     ;
-; wrfull         ; Output ; Warning  ; Declared by entity but not connected by instance. Logic that only feeds a dangling port will be removed.                                                                ;
-+----------------+--------+----------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
++----------------------------------------------------------------------------------------------------------------------------------------+
+; Port Connectivity Checks: "Tx_fifo:Tx_fifo"                                                                                            ;
++---------+--------+----------+----------------------------------------------------------------------------------------------------------+
+; Port    ; Type   ; Severity ; Details                                                                                                  ;
++---------+--------+----------+----------------------------------------------------------------------------------------------------------+
+; wrusedw ; Output ; Info     ; Explicitly unconnected                                                                                   ;
+; aclr    ; Input  ; Info     ; Explicitly unconnected                                                                                   ;
+; wrfull  ; Output ; Warning  ; Declared by entity but not connected by instance. Logic that only feeds a dangling port will be removed. ;
++---------+--------+----------+----------------------------------------------------------------------------------------------------------+
 
 
-+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-; Port Connectivity Checks: "Rx_fifo:Rx_fifo"                                                                                                                                  ;
-+---------+--------+----------+------------------------------------------------------------------------------------------------------------------------------------------------+
-; Port    ; Type   ; Severity ; Details                                                                                                                                        ;
-+---------+--------+----------+------------------------------------------------------------------------------------------------------------------------------------------------+
-; data    ; Input  ; Warning  ; Input port expression (1 bits) is smaller than the input port (16 bits) it drives.  Extra input bit(s) "data[15..1]" will be connected to GND. ;
-; q       ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed.                                                            ;
-; rdusedw ; Output ; Info     ; Explicitly unconnected                                                                                                                         ;
-; wrusedw ; Output ; Warning  ; Declared by entity but not connected by instance. Logic that only feeds a dangling port will be removed.                                       ;
-+---------+--------+----------+------------------------------------------------------------------------------------------------------------------------------------------------+
++-------------------------------------------------------------------------------------------------------------------------------------------------+
+; Port Connectivity Checks: "Rx_fifo:Rx_fifo"                                                                                                     ;
++---------+---------+------------------+----------------------------------------------------------------------------------------------------------+
+; Port    ; Type    ; Severity         ; Details                                                                                                  ;
++---------+---------+------------------+----------------------------------------------------------------------------------------------------------+
+; wrreq   ; Input   ; Info             ; Stuck at VCC                                                                                             ;
+; rdusedw ; Unknown ; Critical Warning ; Named port was not declared by the instantiated entity                                                   ;
+; wrusedw ; Output  ; Warning          ; Declared by entity but not connected by instance. Logic that only feeds a dangling port will be removed. ;
++---------+---------+------------------+----------------------------------------------------------------------------------------------------------+
 
 
 +-------------------------------+
@@ -963,8 +769,8 @@ Note: In order to hide this table in the UI and the text report file, please set
 +-------------------------------+
 Info: *******************************************************************
 Info: Running Quartus II Analysis & Synthesis
-    Info: Version 9.0 Build 132 02/25/2009 SJ Web Edition
-    Info: Processing started: Mon Aug 31 21:21:37 2009
+    Info: Version 9.0 Build 235 06/17/2009 Service Pack 2 SJ Web Edition
+    Info: Processing started: Tue Sep 01 16:38:54 2009
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off Ozy11 -c Ozy11
 Info: Found 1 design units, including 1 entities, in source file Tx_fifo.v
     Info: Found entity 1: Tx_fifo
@@ -972,20 +778,7 @@ Info: Found 1 design units, including 1 entities, in source file Rx_fifo.v
     Info: Found entity 1: Rx_fifo
 Info: Found 1 design units, including 1 entities, in source file Ozy11.v
     Info: Found entity 1: Ozy11
-Warning (10236): Verilog HDL Implicit Net warning at Ozy11.v(203): created implicit net for "CLK_MCLK"
-Warning (10236): Verilog HDL Implicit Net warning at Ozy11.v(203): created implicit net for "Rx_fifo_enable"
-Warning (10236): Verilog HDL Implicit Net warning at Ozy11.v(204): created implicit net for "Rx_FIFO"
-Warning (10236): Verilog HDL Implicit Net warning at Ozy11.v(213): created implicit net for "BCLK"
 Info: Elaborating entity "Ozy11" for the top level hierarchy
-Warning (10036): Verilog HDL or VHDL warning at Ozy11.v(219): object "syncd_write_used" assigned a value but never read
-Warning (10036): Verilog HDL or VHDL warning at Ozy11.v(239): object "SLEN_2" assigned a value but never read
-Warning (10036): Verilog HDL or VHDL warning at Ozy11.v(245): object "Rx_register" assigned a value but never read
-Warning (10036): Verilog HDL or VHDL warning at Ozy11.v(246): object "send_count" assigned a value but never read
-Warning (10030): Net "BCLK" at Ozy11.v(213) has no driver or initial value, using a default initial value '0'
-Warning (10034): Output port "DEBUG_LED0" at Ozy11.v(139) has no driver
-Warning (10034): Output port "DEBUG_LED1" at Ozy11.v(140) has no driver
-Warning (10034): Output port "DEBUG_LED2" at Ozy11.v(141) has no driver
-Warning (10034): Output port "DEBUG_LED3" at Ozy11.v(142) has no driver
 Info: Elaborating entity "Rx_fifo" for hierarchy "Rx_fifo:Rx_fifo"
 Info: Elaborating entity "dcfifo" for hierarchy "Rx_fifo:Rx_fifo|dcfifo:dcfifo_component"
 Info: Elaborated megafunction instantiation "Rx_fifo:Rx_fifo|dcfifo:dcfifo_component"
@@ -1002,48 +795,48 @@ Info: Instantiated megafunction "Rx_fifo:Rx_fifo|dcfifo:dcfifo_component" with t
     Info: Parameter "underflow_checking" = "ON"
     Info: Parameter "use_eab" = "ON"
     Info: Parameter "wrsync_delaypipe" = "4"
-Info: Found 1 design units, including 1 entities, in source file db/dcfifo_mgk1.tdf
-    Info: Found entity 1: dcfifo_mgk1
-Info: Elaborating entity "dcfifo_mgk1" for hierarchy "Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_mgk1:auto_generated"
+Info: Found 1 design units, including 1 entities, in source file db/dcfifo_tgk1.tdf
+    Info: Found entity 1: dcfifo_tgk1
+Info: Elaborating entity "dcfifo_tgk1" for hierarchy "Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_tgk1:auto_generated"
 Info: Found 1 design units, including 1 entities, in source file db/a_gray2bin_ndb.tdf
     Info: Found entity 1: a_gray2bin_ndb
-Info: Elaborating entity "a_gray2bin_ndb" for hierarchy "Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_mgk1:auto_generated|a_gray2bin_ndb:rdptr_g_gray2bin"
+Info: Elaborating entity "a_gray2bin_ndb" for hierarchy "Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_tgk1:auto_generated|a_gray2bin_ndb:wrptr_g_gray2bin"
 Info: Found 1 design units, including 1 entities, in source file db/a_graycounter_r96.tdf
     Info: Found entity 1: a_graycounter_r96
-Info: Elaborating entity "a_graycounter_r96" for hierarchy "Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_mgk1:auto_generated|a_graycounter_r96:rdptr_g1p"
+Info: Elaborating entity "a_graycounter_r96" for hierarchy "Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_tgk1:auto_generated|a_graycounter_r96:rdptr_g1p"
 Info: Found 1 design units, including 1 entities, in source file db/a_graycounter_g2c.tdf
     Info: Found entity 1: a_graycounter_g2c
-Info: Elaborating entity "a_graycounter_g2c" for hierarchy "Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_mgk1:auto_generated|a_graycounter_g2c:wrptr_g1p"
+Info: Elaborating entity "a_graycounter_g2c" for hierarchy "Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_tgk1:auto_generated|a_graycounter_g2c:wrptr_g1p"
 Info: Found 1 design units, including 1 entities, in source file db/a_graycounter_f2c.tdf
     Info: Found entity 1: a_graycounter_f2c
-Info: Elaborating entity "a_graycounter_f2c" for hierarchy "Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_mgk1:auto_generated|a_graycounter_f2c:wrptr_gp"
+Info: Elaborating entity "a_graycounter_f2c" for hierarchy "Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_tgk1:auto_generated|a_graycounter_f2c:wrptr_gp"
 Info: Found 1 design units, including 1 entities, in source file db/altsyncram_vpu.tdf
     Info: Found entity 1: altsyncram_vpu
-Info: Elaborating entity "altsyncram_vpu" for hierarchy "Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_mgk1:auto_generated|altsyncram_vpu:fifo_ram"
+Info: Elaborating entity "altsyncram_vpu" for hierarchy "Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_tgk1:auto_generated|altsyncram_vpu:fifo_ram"
 Info: Found 1 design units, including 1 entities, in source file db/altsyncram_aec1.tdf
     Info: Found entity 1: altsyncram_aec1
-Info: Elaborating entity "altsyncram_aec1" for hierarchy "Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_mgk1:auto_generated|altsyncram_vpu:fifo_ram|altsyncram_aec1:altsyncram5"
+Info: Elaborating entity "altsyncram_aec1" for hierarchy "Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_tgk1:auto_generated|altsyncram_vpu:fifo_ram|altsyncram_aec1:altsyncram5"
 Info: Found 1 design units, including 1 entities, in source file db/dffpipe_c2e.tdf
     Info: Found entity 1: dffpipe_c2e
-Info: Elaborating entity "dffpipe_c2e" for hierarchy "Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_mgk1:auto_generated|dffpipe_c2e:rdaclr"
+Info: Elaborating entity "dffpipe_c2e" for hierarchy "Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_tgk1:auto_generated|dffpipe_c2e:rdaclr"
+Info: Found 1 design units, including 1 entities, in source file db/alt_synch_pipe_lv7.tdf
+    Info: Found entity 1: alt_synch_pipe_lv7
+Info: Elaborating entity "alt_synch_pipe_lv7" for hierarchy "Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_tgk1:auto_generated|alt_synch_pipe_lv7:rs_dgwp"
+Info: Found 1 design units, including 1 entities, in source file db/dffpipe_f09.tdf
+    Info: Found entity 1: dffpipe_f09
+Info: Elaborating entity "dffpipe_f09" for hierarchy "Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_tgk1:auto_generated|alt_synch_pipe_lv7:rs_dgwp|dffpipe_f09:dffpipe5"
 Info: Found 1 design units, including 1 entities, in source file db/dffpipe_c09.tdf
     Info: Found entity 1: dffpipe_c09
-Info: Elaborating entity "dffpipe_c09" for hierarchy "Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_mgk1:auto_generated|dffpipe_c09:rs_brp"
-Info: Found 1 design units, including 1 entities, in source file db/alt_synch_pipe_jv7.tdf
-    Info: Found entity 1: alt_synch_pipe_jv7
-Info: Elaborating entity "alt_synch_pipe_jv7" for hierarchy "Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_mgk1:auto_generated|alt_synch_pipe_jv7:rs_dgwp"
-Info: Found 1 design units, including 1 entities, in source file db/dffpipe_d09.tdf
-    Info: Found entity 1: dffpipe_d09
-Info: Elaborating entity "dffpipe_d09" for hierarchy "Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_mgk1:auto_generated|alt_synch_pipe_jv7:rs_dgwp|dffpipe_d09:dffpipe9"
-Info: Found 1 design units, including 1 entities, in source file db/alt_synch_pipe_kv7.tdf
-    Info: Found entity 1: alt_synch_pipe_kv7
-Info: Elaborating entity "alt_synch_pipe_kv7" for hierarchy "Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_mgk1:auto_generated|alt_synch_pipe_kv7:ws_dgrp"
-Info: Found 1 design units, including 1 entities, in source file db/dffpipe_e09.tdf
-    Info: Found entity 1: dffpipe_e09
-Info: Elaborating entity "dffpipe_e09" for hierarchy "Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_mgk1:auto_generated|alt_synch_pipe_kv7:ws_dgrp|dffpipe_e09:dffpipe12"
+Info: Elaborating entity "dffpipe_c09" for hierarchy "Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_tgk1:auto_generated|dffpipe_c09:ws_brp"
+Info: Found 1 design units, including 1 entities, in source file db/alt_synch_pipe_mv7.tdf
+    Info: Found entity 1: alt_synch_pipe_mv7
+Info: Elaborating entity "alt_synch_pipe_mv7" for hierarchy "Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_tgk1:auto_generated|alt_synch_pipe_mv7:ws_dgrp"
+Info: Found 1 design units, including 1 entities, in source file db/dffpipe_g09.tdf
+    Info: Found entity 1: dffpipe_g09
+Info: Elaborating entity "dffpipe_g09" for hierarchy "Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_tgk1:auto_generated|alt_synch_pipe_mv7:ws_dgrp|dffpipe_g09:dffpipe8"
 Info: Found 1 design units, including 1 entities, in source file db/cmpr_836.tdf
     Info: Found entity 1: cmpr_836
-Info: Elaborating entity "cmpr_836" for hierarchy "Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_mgk1:auto_generated|cmpr_836:rdempty_eq_comp"
+Info: Elaborating entity "cmpr_836" for hierarchy "Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_tgk1:auto_generated|cmpr_836:rdempty_eq_comp"
 Info: Elaborating entity "Tx_fifo" for hierarchy "Tx_fifo:Tx_fifo"
 Info: Elaborating entity "dcfifo" for hierarchy "Tx_fifo:Tx_fifo|dcfifo:dcfifo_component"
 Info: Elaborated megafunction instantiation "Tx_fifo:Tx_fifo|dcfifo:dcfifo_component"
@@ -1106,161 +899,60 @@ Info: Elaborating entity "dffpipe_se9" for hierarchy "Tx_fifo:Tx_fifo|dcfifo:dcf
 Info: Found 1 design units, including 1 entities, in source file db/cmpr_736.tdf
     Info: Found entity 1: cmpr_736
 Info: Elaborating entity "cmpr_736" for hierarchy "Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_60n1:auto_generated|cmpr_736:rdempty_eq_comp"
-Warning: Synthesized away the following node(s):
-    Warning: Synthesized away the following RAM node(s):
-        Warning (14320): Synthesized away node "Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_mgk1:auto_generated|altsyncram_vpu:fifo_ram|altsyncram_aec1:altsyncram5|q_a[0]"
-        Warning (14320): Synthesized away node "Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_mgk1:auto_generated|altsyncram_vpu:fifo_ram|altsyncram_aec1:altsyncram5|q_a[1]"
-        Warning (14320): Synthesized away node "Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_mgk1:auto_generated|altsyncram_vpu:fifo_ram|altsyncram_aec1:altsyncram5|q_a[2]"
-        Warning (14320): Synthesized away node "Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_mgk1:auto_generated|altsyncram_vpu:fifo_ram|altsyncram_aec1:altsyncram5|q_a[3]"
-        Warning (14320): Synthesized away node "Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_mgk1:auto_generated|altsyncram_vpu:fifo_ram|altsyncram_aec1:altsyncram5|q_a[4]"
-        Warning (14320): Synthesized away node "Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_mgk1:auto_generated|altsyncram_vpu:fifo_ram|altsyncram_aec1:altsyncram5|q_a[5]"
-        Warning (14320): Synthesized away node "Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_mgk1:auto_generated|altsyncram_vpu:fifo_ram|altsyncram_aec1:altsyncram5|q_a[6]"
-        Warning (14320): Synthesized away node "Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_mgk1:auto_generated|altsyncram_vpu:fifo_ram|altsyncram_aec1:altsyncram5|q_a[7]"
-        Warning (14320): Synthesized away node "Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_mgk1:auto_generated|altsyncram_vpu:fifo_ram|altsyncram_aec1:altsyncram5|q_a[8]"
-        Warning (14320): Synthesized away node "Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_mgk1:auto_generated|altsyncram_vpu:fifo_ram|altsyncram_aec1:altsyncram5|q_a[9]"
-        Warning (14320): Synthesized away node "Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_mgk1:auto_generated|altsyncram_vpu:fifo_ram|altsyncram_aec1:altsyncram5|q_a[10]"
-        Warning (14320): Synthesized away node "Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_mgk1:auto_generated|altsyncram_vpu:fifo_ram|altsyncram_aec1:altsyncram5|q_a[11]"
-        Warning (14320): Synthesized away node "Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_mgk1:auto_generated|altsyncram_vpu:fifo_ram|altsyncram_aec1:altsyncram5|q_a[12]"
-        Warning (14320): Synthesized away node "Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_mgk1:auto_generated|altsyncram_vpu:fifo_ram|altsyncram_aec1:altsyncram5|q_a[13]"
-        Warning (14320): Synthesized away node "Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_mgk1:auto_generated|altsyncram_vpu:fifo_ram|altsyncram_aec1:altsyncram5|q_a[14]"
-        Warning (14320): Synthesized away node "Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_mgk1:auto_generated|altsyncram_vpu:fifo_ram|altsyncram_aec1:altsyncram5|q_a[15]"
 Warning: 2 hierarchies have connectivity warnings - see the Connectivity Checks report folder
 Warning: Output pins are stuck at VCC or GND
     Warning (13410): Pin "PKEND" is stuck at VCC
     Warning (13410): Pin "FIFO_ADR[0]" is stuck at GND
-    Warning (13410): Pin "DEBUG_LED0" is stuck at GND
     Warning (13410): Pin "DEBUG_LED1" is stuck at GND
     Warning (13410): Pin "DEBUG_LED2" is stuck at GND
     Warning (13410): Pin "DEBUG_LED3" is stuck at GND
-Info: 79 registers lost all their fanouts during netlist optimizations. The first 79 are displayed below.
-    Info: Register "Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_60n1:auto_generated|alt_synch_pipe_1e8:ws_dgrp|dffpipe_se9:dffpipe15|dffe17a[0]" lost all its fanouts during netlist optimizations.
-    Info: Register "Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_60n1:auto_generated|alt_synch_pipe_1e8:ws_dgrp|dffpipe_se9:dffpipe15|dffe16a[0]" lost all its fanouts during netlist optimizations.
-    Info: Register "Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_60n1:auto_generated|alt_synch_pipe_1e8:ws_dgrp|dffpipe_se9:dffpipe15|dffe17a[1]" lost all its fanouts during netlist optimizations.
-    Info: Register "Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_60n1:auto_generated|alt_synch_pipe_1e8:ws_dgrp|dffpipe_se9:dffpipe15|dffe16a[1]" lost all its fanouts during netlist optimizations.
-    Info: Register "Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_60n1:auto_generated|alt_synch_pipe_1e8:ws_dgrp|dffpipe_se9:dffpipe15|dffe17a[2]" lost all its fanouts during netlist optimizations.
-    Info: Register "Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_60n1:auto_generated|alt_synch_pipe_1e8:ws_dgrp|dffpipe_se9:dffpipe15|dffe16a[2]" lost all its fanouts during netlist optimizations.
-    Info: Register "Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_60n1:auto_generated|alt_synch_pipe_1e8:ws_dgrp|dffpipe_se9:dffpipe15|dffe17a[3]" lost all its fanouts during netlist optimizations.
-    Info: Register "Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_60n1:auto_generated|alt_synch_pipe_1e8:ws_dgrp|dffpipe_se9:dffpipe15|dffe16a[3]" lost all its fanouts during netlist optimizations.
-    Info: Register "Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_60n1:auto_generated|alt_synch_pipe_1e8:ws_dgrp|dffpipe_se9:dffpipe15|dffe17a[4]" lost all its fanouts during netlist optimizations.
-    Info: Register "Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_60n1:auto_generated|alt_synch_pipe_1e8:ws_dgrp|dffpipe_se9:dffpipe15|dffe16a[4]" lost all its fanouts during netlist optimizations.
-    Info: Register "Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_60n1:auto_generated|alt_synch_pipe_1e8:ws_dgrp|dffpipe_se9:dffpipe15|dffe17a[5]" lost all its fanouts during netlist optimizations.
-    Info: Register "Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_60n1:auto_generated|alt_synch_pipe_1e8:ws_dgrp|dffpipe_se9:dffpipe15|dffe16a[5]" lost all its fanouts during netlist optimizations.
-    Info: Register "Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_60n1:auto_generated|alt_synch_pipe_1e8:ws_dgrp|dffpipe_se9:dffpipe15|dffe17a[6]" lost all its fanouts during netlist optimizations.
-    Info: Register "Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_60n1:auto_generated|alt_synch_pipe_1e8:ws_dgrp|dffpipe_se9:dffpipe15|dffe16a[6]" lost all its fanouts during netlist optimizations.
-    Info: Register "Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_60n1:auto_generated|alt_synch_pipe_1e8:ws_dgrp|dffpipe_se9:dffpipe15|dffe17a[7]" lost all its fanouts during netlist optimizations.
-    Info: Register "Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_60n1:auto_generated|alt_synch_pipe_1e8:ws_dgrp|dffpipe_se9:dffpipe15|dffe16a[7]" lost all its fanouts during netlist optimizations.
-    Info: Register "Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_60n1:auto_generated|alt_synch_pipe_1e8:ws_dgrp|dffpipe_se9:dffpipe15|dffe17a[8]" lost all its fanouts during netlist optimizations.
-    Info: Register "Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_60n1:auto_generated|alt_synch_pipe_1e8:ws_dgrp|dffpipe_se9:dffpipe15|dffe16a[8]" lost all its fanouts during netlist optimizations.
-    Info: Register "Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_60n1:auto_generated|alt_synch_pipe_1e8:ws_dgrp|dffpipe_se9:dffpipe15|dffe17a[9]" lost all its fanouts during netlist optimizations.
-    Info: Register "Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_60n1:auto_generated|alt_synch_pipe_1e8:ws_dgrp|dffpipe_se9:dffpipe15|dffe16a[9]" lost all its fanouts during netlist optimizations.
-    Info: Register "Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_60n1:auto_generated|alt_synch_pipe_1e8:ws_dgrp|dffpipe_se9:dffpipe15|dffe17a[10]" lost all its fanouts during netlist optimizations.
-    Info: Register "Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_60n1:auto_generated|alt_synch_pipe_1e8:ws_dgrp|dffpipe_se9:dffpipe15|dffe16a[10]" lost all its fanouts during netlist optimizations.
-    Info: Register "Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_60n1:auto_generated|alt_synch_pipe_1e8:ws_dgrp|dffpipe_se9:dffpipe15|dffe17a[11]" lost all its fanouts during netlist optimizations.
-    Info: Register "Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_60n1:auto_generated|alt_synch_pipe_1e8:ws_dgrp|dffpipe_se9:dffpipe15|dffe16a[11]" lost all its fanouts during netlist optimizations.
-    Info: Register "Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_mgk1:auto_generated|alt_synch_pipe_jv7:rs_dgwp|dffpipe_d09:dffpipe9|dffe11a[0]" lost all its fanouts during netlist optimizations.
-    Info: Register "Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_mgk1:auto_generated|alt_synch_pipe_jv7:rs_dgwp|dffpipe_d09:dffpipe9|dffe10a[0]" lost all its fanouts during netlist optimizations.
-    Info: Register "Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_mgk1:auto_generated|delayed_wrptr_g[0]" lost all its fanouts during netlist optimizations.
-    Info: Register "Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_mgk1:auto_generated|alt_synch_pipe_jv7:rs_dgwp|dffpipe_d09:dffpipe9|dffe11a[1]" lost all its fanouts during netlist optimizations.
-    Info: Register "Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_mgk1:auto_generated|alt_synch_pipe_jv7:rs_dgwp|dffpipe_d09:dffpipe9|dffe10a[1]" lost all its fanouts during netlist optimizations.
-    Info: Register "Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_mgk1:auto_generated|delayed_wrptr_g[1]" lost all its fanouts during netlist optimizations.
-    Info: Register "Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_mgk1:auto_generated|alt_synch_pipe_jv7:rs_dgwp|dffpipe_d09:dffpipe9|dffe11a[2]" lost all its fanouts during netlist optimizations.
-    Info: Register "Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_mgk1:auto_generated|alt_synch_pipe_jv7:rs_dgwp|dffpipe_d09:dffpipe9|dffe10a[2]" lost all its fanouts during netlist optimizations.
-    Info: Register "Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_mgk1:auto_generated|delayed_wrptr_g[2]" lost all its fanouts during netlist optimizations.
-    Info: Register "Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_mgk1:auto_generated|alt_synch_pipe_jv7:rs_dgwp|dffpipe_d09:dffpipe9|dffe11a[3]" lost all its fanouts during netlist optimizations.
-    Info: Register "Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_mgk1:auto_generated|alt_synch_pipe_jv7:rs_dgwp|dffpipe_d09:dffpipe9|dffe10a[3]" lost all its fanouts during netlist optimizations.
-    Info: Register "Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_mgk1:auto_generated|delayed_wrptr_g[3]" lost all its fanouts during netlist optimizations.
-    Info: Register "Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_mgk1:auto_generated|alt_synch_pipe_jv7:rs_dgwp|dffpipe_d09:dffpipe9|dffe11a[4]" lost all its fanouts during netlist optimizations.
-    Info: Register "Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_mgk1:auto_generated|alt_synch_pipe_jv7:rs_dgwp|dffpipe_d09:dffpipe9|dffe10a[4]" lost all its fanouts during netlist optimizations.
-    Info: Register "Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_mgk1:auto_generated|delayed_wrptr_g[4]" lost all its fanouts during netlist optimizations.
-    Info: Register "Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_mgk1:auto_generated|alt_synch_pipe_jv7:rs_dgwp|dffpipe_d09:dffpipe9|dffe11a[5]" lost all its fanouts during netlist optimizations.
-    Info: Register "Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_mgk1:auto_generated|alt_synch_pipe_jv7:rs_dgwp|dffpipe_d09:dffpipe9|dffe10a[5]" lost all its fanouts during netlist optimizations.
-    Info: Register "Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_mgk1:auto_generated|delayed_wrptr_g[5]" lost all its fanouts during netlist optimizations.
-    Info: Register "Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_mgk1:auto_generated|alt_synch_pipe_jv7:rs_dgwp|dffpipe_d09:dffpipe9|dffe11a[6]" lost all its fanouts during netlist optimizations.
-    Info: Register "Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_mgk1:auto_generated|alt_synch_pipe_jv7:rs_dgwp|dffpipe_d09:dffpipe9|dffe10a[6]" lost all its fanouts during netlist optimizations.
-    Info: Register "Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_mgk1:auto_generated|delayed_wrptr_g[6]" lost all its fanouts during netlist optimizations.
-    Info: Register "Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_mgk1:auto_generated|alt_synch_pipe_jv7:rs_dgwp|dffpipe_d09:dffpipe9|dffe11a[7]" lost all its fanouts during netlist optimizations.
-    Info: Register "Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_mgk1:auto_generated|alt_synch_pipe_jv7:rs_dgwp|dffpipe_d09:dffpipe9|dffe10a[7]" lost all its fanouts during netlist optimizations.
-    Info: Register "Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_mgk1:auto_generated|delayed_wrptr_g[7]" lost all its fanouts during netlist optimizations.
-    Info: Register "Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_mgk1:auto_generated|alt_synch_pipe_jv7:rs_dgwp|dffpipe_d09:dffpipe9|dffe11a[8]" lost all its fanouts during netlist optimizations.
-    Info: Register "Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_mgk1:auto_generated|alt_synch_pipe_jv7:rs_dgwp|dffpipe_d09:dffpipe9|dffe10a[8]" lost all its fanouts during netlist optimizations.
-    Info: Register "Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_mgk1:auto_generated|delayed_wrptr_g[8]" lost all its fanouts during netlist optimizations.
-    Info: Register "Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_mgk1:auto_generated|alt_synch_pipe_jv7:rs_dgwp|dffpipe_d09:dffpipe9|dffe11a[9]" lost all its fanouts during netlist optimizations.
-    Info: Register "Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_mgk1:auto_generated|alt_synch_pipe_jv7:rs_dgwp|dffpipe_d09:dffpipe9|dffe10a[9]" lost all its fanouts during netlist optimizations.
-    Info: Register "Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_mgk1:auto_generated|delayed_wrptr_g[9]" lost all its fanouts during netlist optimizations.
-    Info: Register "Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_mgk1:auto_generated|alt_synch_pipe_jv7:rs_dgwp|dffpipe_d09:dffpipe9|dffe11a[10]" lost all its fanouts during netlist optimizations.
-    Info: Register "Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_mgk1:auto_generated|alt_synch_pipe_jv7:rs_dgwp|dffpipe_d09:dffpipe9|dffe10a[10]" lost all its fanouts during netlist optimizations.
-    Info: Register "Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_mgk1:auto_generated|delayed_wrptr_g[10]" lost all its fanouts during netlist optimizations.
-    Info: Register "Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_mgk1:auto_generated|alt_synch_pipe_jv7:rs_dgwp|dffpipe_d09:dffpipe9|dffe11a[11]" lost all its fanouts during netlist optimizations.
-    Info: Register "Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_mgk1:auto_generated|alt_synch_pipe_jv7:rs_dgwp|dffpipe_d09:dffpipe9|dffe10a[11]" lost all its fanouts during netlist optimizations.
-    Info: Register "Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_mgk1:auto_generated|delayed_wrptr_g[11]" lost all its fanouts during netlist optimizations.
-    Info: Register "Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_mgk1:auto_generated|alt_synch_pipe_jv7:rs_dgwp|dffpipe_d09:dffpipe9|dffe11a[12]" lost all its fanouts during netlist optimizations.
-    Info: Register "Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_mgk1:auto_generated|alt_synch_pipe_jv7:rs_dgwp|dffpipe_d09:dffpipe9|dffe10a[12]" lost all its fanouts during netlist optimizations.
-    Info: Register "Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_mgk1:auto_generated|delayed_wrptr_g[12]" lost all its fanouts during netlist optimizations.
-    Info: Register "Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_mgk1:auto_generated|dffpipe_c2e:rdaclr|dffe7a[0]" lost all its fanouts during netlist optimizations.
-    Info: Register "Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_mgk1:auto_generated|a_graycounter_f2c:wrptr_gp|parity_ff" lost all its fanouts during netlist optimizations.
-    Info: Register "Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_mgk1:auto_generated|a_graycounter_g2c:wrptr_g1p|counter_ffa0" lost all its fanouts during netlist optimizations.
-    Info: Register "Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_mgk1:auto_generated|a_graycounter_g2c:wrptr_g1p|counter_ffa1" lost all its fanouts during netlist optimizations.
-    Info: Register "Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_mgk1:auto_generated|a_graycounter_g2c:wrptr_g1p|counter_ffa2" lost all its fanouts during netlist optimizations.
-    Info: Register "Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_mgk1:auto_generated|a_graycounter_g2c:wrptr_g1p|counter_ffa3" lost all its fanouts during netlist optimizations.
-    Info: Register "Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_mgk1:auto_generated|a_graycounter_g2c:wrptr_g1p|counter_ffa4" lost all its fanouts during netlist optimizations.
-    Info: Register "Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_mgk1:auto_generated|a_graycounter_g2c:wrptr_g1p|counter_ffa5" lost all its fanouts during netlist optimizations.
-    Info: Register "Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_mgk1:auto_generated|a_graycounter_g2c:wrptr_g1p|counter_ffa6" lost all its fanouts during netlist optimizations.
-    Info: Register "Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_mgk1:auto_generated|a_graycounter_g2c:wrptr_g1p|counter_ffa7" lost all its fanouts during netlist optimizations.
-    Info: Register "Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_mgk1:auto_generated|a_graycounter_g2c:wrptr_g1p|counter_ffa8" lost all its fanouts during netlist optimizations.
-    Info: Register "Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_mgk1:auto_generated|a_graycounter_g2c:wrptr_g1p|counter_ffa9" lost all its fanouts during netlist optimizations.
-    Info: Register "Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_mgk1:auto_generated|a_graycounter_g2c:wrptr_g1p|counter_ffa10" lost all its fanouts during netlist optimizations.
-    Info: Register "Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_mgk1:auto_generated|a_graycounter_g2c:wrptr_g1p|counter_ffa11" lost all its fanouts during netlist optimizations.
-    Info: Register "Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_mgk1:auto_generated|a_graycounter_g2c:wrptr_g1p|counter_ffa12" lost all its fanouts during netlist optimizations.
-    Info: Register "Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_mgk1:auto_generated|a_graycounter_g2c:wrptr_g1p|parity_ff" lost all its fanouts during netlist optimizations.
-Info: Found the following redundant logic cells in design
-    Info (17048): Logic cell "Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_mgk1:auto_generated|a_graycounter_f2c:wrptr_gp|countera1"
-    Info (17048): Logic cell "Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_mgk1:auto_generated|a_graycounter_f2c:wrptr_gp|countera0"
-    Info (17048): Logic cell "Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_mgk1:auto_generated|a_graycounter_f2c:wrptr_gp|countera3"
-    Info (17048): Logic cell "Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_mgk1:auto_generated|a_graycounter_f2c:wrptr_gp|countera2"
-    Info (17048): Logic cell "Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_mgk1:auto_generated|a_graycounter_f2c:wrptr_gp|countera5"
-    Info (17048): Logic cell "Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_mgk1:auto_generated|a_graycounter_f2c:wrptr_gp|countera4"
-    Info (17048): Logic cell "Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_mgk1:auto_generated|a_graycounter_f2c:wrptr_gp|countera7"
-    Info (17048): Logic cell "Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_mgk1:auto_generated|a_graycounter_f2c:wrptr_gp|countera6"
-    Info (17048): Logic cell "Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_mgk1:auto_generated|a_graycounter_f2c:wrptr_gp|countera10"
-    Info (17048): Logic cell "Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_mgk1:auto_generated|a_graycounter_f2c:wrptr_gp|countera9"
-    Info (17048): Logic cell "Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_mgk1:auto_generated|a_graycounter_f2c:wrptr_gp|countera12"
-    Info (17048): Logic cell "Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_mgk1:auto_generated|a_graycounter_f2c:wrptr_gp|countera8"
-    Info (17048): Logic cell "Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_mgk1:auto_generated|a_graycounter_f2c:wrptr_gp|countera11"
-Info: Generated suppressed messages file C:/HPSDR/trunk/OzyII/Verilog Code/Test Code/Ozy11.map.smsg
-Warning (15400): WYSIWYG primitive "Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_60n1:auto_generated|altsyncram_rr61:fifo_ram|altsyncram_72f1:altsyncram5|ram_block6a8" has a port clk1 that is stuck at VCC
-Warning (15400): WYSIWYG primitive "Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_60n1:auto_generated|altsyncram_rr61:fifo_ram|altsyncram_72f1:altsyncram5|ram_block6a9" has a port clk1 that is stuck at VCC
-Warning (15400): WYSIWYG primitive "Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_60n1:auto_generated|altsyncram_rr61:fifo_ram|altsyncram_72f1:altsyncram5|ram_block6a10" has a port clk1 that is stuck at VCC
-Warning (15400): WYSIWYG primitive "Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_60n1:auto_generated|altsyncram_rr61:fifo_ram|altsyncram_72f1:altsyncram5|ram_block6a11" has a port clk1 that is stuck at VCC
-Warning (15400): WYSIWYG primitive "Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_60n1:auto_generated|altsyncram_rr61:fifo_ram|altsyncram_72f1:altsyncram5|ram_block6a12" has a port clk1 that is stuck at VCC
-Warning (15400): WYSIWYG primitive "Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_60n1:auto_generated|altsyncram_rr61:fifo_ram|altsyncram_72f1:altsyncram5|ram_block6a13" has a port clk1 that is stuck at VCC
-Warning (15400): WYSIWYG primitive "Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_60n1:auto_generated|altsyncram_rr61:fifo_ram|altsyncram_72f1:altsyncram5|ram_block6a14" has a port clk1 that is stuck at VCC
-Warning (15400): WYSIWYG primitive "Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_60n1:auto_generated|altsyncram_rr61:fifo_ram|altsyncram_72f1:altsyncram5|ram_block6a15" has a port clk1 that is stuck at VCC
-Warning (15400): WYSIWYG primitive "Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_60n1:auto_generated|altsyncram_rr61:fifo_ram|altsyncram_72f1:altsyncram5|ram_block6a0" has a port clk1 that is stuck at VCC
-Warning (15400): WYSIWYG primitive "Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_60n1:auto_generated|altsyncram_rr61:fifo_ram|altsyncram_72f1:altsyncram5|ram_block6a1" has a port clk1 that is stuck at VCC
-Warning (15400): WYSIWYG primitive "Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_60n1:auto_generated|altsyncram_rr61:fifo_ram|altsyncram_72f1:altsyncram5|ram_block6a2" has a port clk1 that is stuck at VCC
-Warning (15400): WYSIWYG primitive "Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_60n1:auto_generated|altsyncram_rr61:fifo_ram|altsyncram_72f1:altsyncram5|ram_block6a3" has a port clk1 that is stuck at VCC
-Warning (15400): WYSIWYG primitive "Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_60n1:auto_generated|altsyncram_rr61:fifo_ram|altsyncram_72f1:altsyncram5|ram_block6a4" has a port clk1 that is stuck at VCC
-Warning (15400): WYSIWYG primitive "Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_60n1:auto_generated|altsyncram_rr61:fifo_ram|altsyncram_72f1:altsyncram5|ram_block6a5" has a port clk1 that is stuck at VCC
-Warning (15400): WYSIWYG primitive "Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_60n1:auto_generated|altsyncram_rr61:fifo_ram|altsyncram_72f1:altsyncram5|ram_block6a6" has a port clk1 that is stuck at VCC
-Warning (15400): WYSIWYG primitive "Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_60n1:auto_generated|altsyncram_rr61:fifo_ram|altsyncram_72f1:altsyncram5|ram_block6a7" has a port clk1 that is stuck at VCC
+Info: 27 registers lost all their fanouts during netlist optimizations. The first 27 are displayed below.
+    Info: Register "Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_60n1:auto_generated|a_graycounter_hgc:wrptr_g1p|counter_ffa0" lost all its fanouts during netlist optimizations.
+    Info: Register "Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_60n1:auto_generated|a_graycounter_hgc:wrptr_g1p|counter_ffa1" lost all its fanouts during netlist optimizations.
+    Info: Register "Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_60n1:auto_generated|a_graycounter_hgc:wrptr_g1p|counter_ffa2" lost all its fanouts during netlist optimizations.
+    Info: Register "Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_60n1:auto_generated|a_graycounter_hgc:wrptr_g1p|counter_ffa3" lost all its fanouts during netlist optimizations.
+    Info: Register "Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_60n1:auto_generated|a_graycounter_hgc:wrptr_g1p|counter_ffa4" lost all its fanouts during netlist optimizations.
+    Info: Register "Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_60n1:auto_generated|a_graycounter_hgc:wrptr_g1p|counter_ffa5" lost all its fanouts during netlist optimizations.
+    Info: Register "Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_60n1:auto_generated|a_graycounter_hgc:wrptr_g1p|counter_ffa6" lost all its fanouts during netlist optimizations.
+    Info: Register "Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_60n1:auto_generated|a_graycounter_hgc:wrptr_g1p|counter_ffa7" lost all its fanouts during netlist optimizations.
+    Info: Register "Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_60n1:auto_generated|a_graycounter_hgc:wrptr_g1p|counter_ffa8" lost all its fanouts during netlist optimizations.
+    Info: Register "Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_60n1:auto_generated|a_graycounter_hgc:wrptr_g1p|counter_ffa9" lost all its fanouts during netlist optimizations.
+    Info: Register "Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_60n1:auto_generated|a_graycounter_hgc:wrptr_g1p|counter_ffa10" lost all its fanouts during netlist optimizations.
+    Info: Register "Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_60n1:auto_generated|a_graycounter_hgc:wrptr_g1p|counter_ffa11" lost all its fanouts during netlist optimizations.
+    Info: Register "Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_60n1:auto_generated|a_graycounter_hgc:wrptr_g1p|parity_ff" lost all its fanouts during netlist optimizations.
+    Info: Register "Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_tgk1:auto_generated|a_graycounter_g2c:wrptr_g1p|counter_ffa0" lost all its fanouts during netlist optimizations.
+    Info: Register "Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_tgk1:auto_generated|a_graycounter_g2c:wrptr_g1p|counter_ffa1" lost all its fanouts during netlist optimizations.
+    Info: Register "Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_tgk1:auto_generated|a_graycounter_g2c:wrptr_g1p|counter_ffa2" lost all its fanouts during netlist optimizations.
+    Info: Register "Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_tgk1:auto_generated|a_graycounter_g2c:wrptr_g1p|counter_ffa3" lost all its fanouts during netlist optimizations.
+    Info: Register "Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_tgk1:auto_generated|a_graycounter_g2c:wrptr_g1p|counter_ffa4" lost all its fanouts during netlist optimizations.
+    Info: Register "Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_tgk1:auto_generated|a_graycounter_g2c:wrptr_g1p|counter_ffa5" lost all its fanouts during netlist optimizations.
+    Info: Register "Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_tgk1:auto_generated|a_graycounter_g2c:wrptr_g1p|counter_ffa6" lost all its fanouts during netlist optimizations.
+    Info: Register "Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_tgk1:auto_generated|a_graycounter_g2c:wrptr_g1p|counter_ffa7" lost all its fanouts during netlist optimizations.
+    Info: Register "Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_tgk1:auto_generated|a_graycounter_g2c:wrptr_g1p|counter_ffa8" lost all its fanouts during netlist optimizations.
+    Info: Register "Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_tgk1:auto_generated|a_graycounter_g2c:wrptr_g1p|counter_ffa9" lost all its fanouts during netlist optimizations.
+    Info: Register "Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_tgk1:auto_generated|a_graycounter_g2c:wrptr_g1p|counter_ffa10" lost all its fanouts during netlist optimizations.
+    Info: Register "Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_tgk1:auto_generated|a_graycounter_g2c:wrptr_g1p|counter_ffa11" lost all its fanouts during netlist optimizations.
+    Info: Register "Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_tgk1:auto_generated|a_graycounter_g2c:wrptr_g1p|counter_ffa12" lost all its fanouts during netlist optimizations.
+    Info: Register "Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_tgk1:auto_generated|a_graycounter_g2c:wrptr_g1p|parity_ff" lost all its fanouts during netlist optimizations.
+Info: Generated suppressed messages file O:/HPSDR/trunk/OzyII/Verilog Code/Test Code/Ozy11.map.smsg
 Warning: Design contains 1 input pin(s) that do not drive logic
     Warning (15610): No output dependent on input pin "FLAGB"
-Info: Implemented 146 device resources after synthesis - the final resource count might be different
+Info: Implemented 365 device resources after synthesis - the final resource count might be different
     Info: Implemented 8 input pins
     Info: Implemented 14 output pins
     Info: Implemented 16 bidirectional pins
-    Info: Implemented 92 logic cells
-    Info: Implemented 16 RAM segments
-Info: Quartus II Analysis & Synthesis was successful. 0 errors, 57 warnings
+    Info: Implemented 295 logic cells
+    Info: Implemented 32 RAM segments
+Info: Quartus II Analysis & Synthesis was successful. 0 errors, 9 warnings
     Info: Peak virtual memory: 181 megabytes
-    Info: Processing ended: Mon Aug 31 21:21:41 2009
-    Info: Elapsed time: 00:00:04
-    Info: Total CPU time (on all processors): 00:00:03
+    Info: Processing ended: Tue Sep 01 16:39:01 2009
+    Info: Elapsed time: 00:00:07
+    Info: Total CPU time (on all processors): 00:00:06
 
 
 +------------------------------------------+
 ; Analysis & Synthesis Suppressed Messages ;
 +------------------------------------------+
-The suppressed messages can be found in C:/HPSDR/trunk/OzyII/Verilog Code/Test Code/Ozy11.map.smsg.
+The suppressed messages can be found in O:/HPSDR/trunk/OzyII/Verilog Code/Test Code/Ozy11.map.smsg.
 
 
