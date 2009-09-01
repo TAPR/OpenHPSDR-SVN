@@ -28,6 +28,7 @@
 // Change log:  
 //	31 Aug 2009  - started coding - read EP2 and send to EP6
 
+// **************** USE CORRECT FX2 CODE  *****************************88
 
 //
 ////////////////////////////////////////////////////////////
@@ -165,9 +166,9 @@ assign PKEND = 1'b1;
 reg [4:0] state_FX;             // state for FX2
 
 reg data_flag;                  // set when data ready to send to Tx FIFO
-reg [15:0] register;            // AK5394A A/D uses this to send its data to Tx FIFO
-reg [15:0] Tx_data;             // Tx mic audio from TLV320
-reg [6:0] loop_counter;         // counts number of times round loop
+wire [15:0] register;            // AK5394A A/D uses this to send its data to Tx FIFO
+//reg [15:0] Tx_data;             // Tx mic audio from TLV320
+//reg [6:0] loop_counter;         // counts number of times round loop
 reg Tx_fifo_enable;             // set when we want to send data to the Tx FIFO EP6
 
 
@@ -198,10 +199,11 @@ reg Tx_fifo_enable;             // set when we want to send data to the Tx FIFO 
 wire [15:0] Rx_data;
 reg fifo_enable;                        // controls reading of dual clock fifo
 
-wire Rx_full; 			 // set when write side full 
+wire Rx_full; 			 // set when write side full
+wire Rx_empty; 
 
-Rx_fifo Rx_fifo(.wrclk (~SLRD),.rdreq (fifo_enable),.rdclk (IFCLK),.wrreq (Rx_fifo_enable), 
-                .data (Rx_FIFO),.q (Rx_data),.rdusedw(), .wrfull(Rx_full));
+Rx_fifo Rx_fifo(.wrclk (IFCLK),.rdreq (fifo_enable),.rdclk (IFCLK),.wrreq (1'b1), 
+                .data (FX2_FD),.q (Rx_data),.rdusedw(), .wrfull(Rx_full), .rdempty(Rx_empty));
 
 ///////////////////////////////////////////////////////////////
 //
@@ -210,13 +212,11 @@ Rx_fifo Rx_fifo(.wrclk (~SLRD),.rdreq (fifo_enable),.rdclk (IFCLK),.wrreq (Rx_fi
 //////////////////////////////////////////////////////////////
                
                 
-Tx_fifo Tx_fifo(.wrclk (!BCLK),.rdreq (Tx_read_clock),.rdclk (IFCLK),.wrreq(Tx_fifo_enable),
-                .data (register),.q (Tx_register), .wrusedw(write_used), .aclr(Tx_aclr), .rdempty(Tx_empty));
+Tx_fifo Tx_fifo(.wrclk (IFCLK),.rdreq (Tx_read_clock),.rdclk (IFCLK),.wrreq(Tx_fifo_enable),
+                .data (register),.q (Tx_register), .wrusedw(), .aclr(), .rdempty(Tx_empty));
 
 wire [15:0] Tx_register;                // holds data from A/D to send to FX2
 reg  Tx_read_clock;                     // when goes high sends data to Tx_register
-wire [11:0] write_used;                 // indicates how may bytes in the Tx buffer
-reg  [11:0] syncd_write_used;   		// ditto but synced to FX2 clock
 reg Tx_aclr;							// async clear of FIFO 
 wire Tx_empty; 							
 
@@ -236,19 +236,16 @@ wire Tx_empty;
 
 reg SLOE;                             // FX2 data bus enable - active low
 reg SLEN;                             // Put data on FX2 bus for EP6
-reg SLEN_2;							  // Enable data for EP4
 reg SLRD;                             // FX2 read - active low
 reg SLWR;                             // FX2 write - active low
 reg [1:0] FIFO_ADR;                   // FX2 register address
 wire EP2_has_data = FLAGA;            // high when EP2 has data available
 wire EP6_ready = FLAGC;               // high when we can write to End Point
 reg [15:0] Rx_register;               // data from PC goes here
-reg [12:0] send_count;
 
 
 always @ (negedge IFCLK)
 begin
-syncd_write_used <= write_used;
 case(state_FX)
 // state 0 - set up to check for Rx data from EP2
 4'd0:begin
@@ -257,7 +254,6 @@ case(state_FX)
         SLRD <= 1'b1;
         SLOE <= 1'b1;
         SLEN <= 1'b0;
-        SLEN_2 <= 1'b0;
         FIFO_ADR <= 2'b00;            // select EP2
         state_FX <= state_FX + 1'b1;
    end
@@ -268,7 +264,6 @@ case(state_FX)
 // delay 2 IFCLOCK cycle, this is necessary at 48MHZ to allow FIFO_ADR to settle
 // check for Rx data by reading EP2. Only get data if Rx FIFO has room 
 4'd2:begin
-     send_count <= 0; 			  // reset send data counter
 	if(EP2_has_data  && !Rx_full)begin
        state_FX <= state_FX + 1'b1;
        SLOE <= 1'b0;                  //assert SLOE
@@ -281,8 +276,7 @@ case(state_FX)
 // Wait 2 IFCLK before we assert SLRD then load received data
 4'd4:begin
         SLRD <= 1'b0;
-        Rx_register[15:8] <= FX2_FD[7:0];  //  swap endian
-        Rx_register[7:0]  <= FX2_FD[15:8];
+		// FIFO connects directly to FX2_FD now 
         state_FX <= state_FX + 1'b1;
         end
 
@@ -291,8 +285,6 @@ case(state_FX)
 4'd5:begin
         SLRD <= 1'b1;
         SLOE <= 1'b1;
-        //state_FX <= state_FX + 1'b1;
-        //state_FX <= 2;			// keep reading EP2 data until it is empty
         FIFO_ADR <= 2'b10;             // select EP6
         state_FX <= 4'd6;   
         end
@@ -332,24 +324,48 @@ default:  state_FX <= state_FX + 1'b1;
     endcase
 end
 
-// FX2_FD is tristate when SLEN  is low, otherwise it's the Tx_register value.
-// Swap endian so data is correct at PC end
 
-assign FX2_FD[15:8] = SLEN ? Tx_register[7:0]  : 8'bZ;  // For EP6
-assign FX2_FD[7:0]  = SLEN ? Tx_register[15:8] : 8'bZ;
+assign FX2_FD = SLEN ? Tx_register  : 16'bZ;  // For EP6
 
+// move the data from the Rx FIFO to the Tx FIFO
+
+assign register = Rx_data;  // connect the Rx to Tx FIFOs
+
+reg [4:0] move;
+
+always @ (negedge IFCLK)
+begin 
+case  (move)
+
+0:	begin
+	if (!Rx_empty) begin 			// if we have data in the Rx FIFO
+		fifo_enable <= 1'b1;		// enable read of Rx FIFO
+		move <= move + 1'b1;
+	end
+	else move <= 0;				// loop until we have data
+	end  
+	
+1:	begin 
+	fifo_enable <= 1'b0;		// Rx FIFO data now available
+	Tx_fifo_enable <= 1'b1; 	// enable write to Tx FIFO
+	move <= move + 1'b1;
+	end 
+2:  begin 
+	Tx_fifo_enable <= 1'b0;		// disable write to Tx FIFO
+	move <= 0;					// start again 
+	end
+endcase
+end
 
 
 
 // Flash the LEDs to show something is working! - LEDs are active low
 
-// DEBUG_LED0 - flashes if 12.288MHz Atlas clock selected but not present
-
-//assign DEBUG_LED1 = ~halt_flag;	// LED on when EP6 available
-//assign DEBUG_LED1 = ~conf[1];	// test config setting 
-//assign DEBUG_LED2 = ~EP2_has_data; 	
-//assign DEBUG_LED3 = ~have_sync; // lights when sync from PowerSDR detected 
-
+assign DEBUG_LED0 = ~EP2_has_data;  
+assign DEBUG_LED1 = 1'b0;
+assign DEBUG_LED1 = 1'b0;
+assign DEBUG_LED2 = 1'b0;	
+assign DEBUG_LED3 = 1'b0;
 
 endmodule
 

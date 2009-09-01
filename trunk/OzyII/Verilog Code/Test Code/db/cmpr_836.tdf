@@ -1,5 +1,5 @@
 --lpm_compare DEVICE_FAMILY="Cyclone II" LPM_WIDTH=13 aeb dataa datab
---VERSION_BEGIN 9.0 cbx_cycloneii 2008:05:19:10:57:37:SJ cbx_lpm_add_sub 2008:12:09:22:11:50:SJ cbx_lpm_compare 2009:02:03:01:43:16:SJ cbx_mgl 2009:01:29:16:12:07:SJ cbx_stratix 2008:09:18:16:08:35:SJ cbx_stratixii 2008:11:14:16:08:42:SJ  VERSION_END
+--VERSION_BEGIN 9.0SP2 cbx_cycloneii 2008:05:19:10:57:37:SJ cbx_lpm_add_sub 2009:05:07:10:25:28:SJ cbx_lpm_compare 2009:02:03:01:43:16:SJ cbx_mgl 2009:02:26:16:06:21:SJ cbx_stratix 2008:09:18:16:08:35:SJ cbx_stratixii 2008:11:14:16:08:42:SJ  VERSION_END
 
 
 -- Copyright (C) 1991-2009 Altera Corporation
