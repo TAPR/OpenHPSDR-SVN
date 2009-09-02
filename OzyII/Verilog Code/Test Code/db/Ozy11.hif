@@ -3393,42 +3393,6 @@ Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_60n1:auto_generated|cmpr_736:wrfu
 
 # end
 # entity
-Ozy11
-# storage
-db|Ozy11.(0).cnf
-db|Ozy11.(0).cnf
-# logic_option {
-AUTO_RAM_RECOGNITION
-ON
-}
-# case_sensitive
-# source_file
-Ozy11.v
-d5ee7784a4c97bd6cdc472d09daaf82
-8
-# internal_option {
-HDL_INITIAL_FANOUT_LIMIT
-OFF
-AUTO_RESOURCE_SHARING
-OFF
-AUTO_RAM_RECOGNITION
-ON
-AUTO_ROM_RECOGNITION
-ON
-IGNORE_VERILOG_INITIAL_CONSTRUCTS
-OFF
-VERILOG_CONSTANT_LOOP_LIMIT
-5000
-VERILOG_NON_CONSTANT_LOOP_LIMIT
-250
-}
-# hierarchies {
-|
-}
-# macro_sequence
-
-# end
-# entity
 Rx_fifo
 # storage
 db|Ozy11.(1).cnf
@@ -4187,6 +4151,42 @@ clock
 }
 # hierarchies {
 Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_tgk1:auto_generated|alt_synch_pipe_mv7:ws_dgrp|dffpipe_g09:dffpipe8
+}
+# macro_sequence
+
+# end
+# entity
+Ozy11
+# storage
+db|Ozy11.(0).cnf
+db|Ozy11.(0).cnf
+# logic_option {
+AUTO_RAM_RECOGNITION
+ON
+}
+# case_sensitive
+# source_file
+Ozy11.v
+1657f61bef2dca33d7c4dfb31223740
+8
+# internal_option {
+HDL_INITIAL_FANOUT_LIMIT
+OFF
+AUTO_RESOURCE_SHARING
+OFF
+AUTO_RAM_RECOGNITION
+ON
+AUTO_ROM_RECOGNITION
+ON
+IGNORE_VERILOG_INITIAL_CONSTRUCTS
+OFF
+VERILOG_CONSTANT_LOOP_LIMIT
+5000
+VERILOG_NON_CONSTANT_LOOP_LIMIT
+250
+}
+# hierarchies {
+|
 }
 # macro_sequence
 

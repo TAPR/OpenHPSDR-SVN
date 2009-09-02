@@ -26,8 +26,7 @@
 // Built with Quartus II v9.0 Build 178
 //
 // Change log:  
-//	31 Aug  2009  - started coding - read EP2 and send to EP6 via FIFOs
-//   2 Sept 2009  - Add interface to PHY, connect PHY to FIFOs
+//	31 Aug 2009  - started coding - read EP2 and send to EP6
 
 // **************** USE CORRECT FX2 CODE  *****************************
 
@@ -228,11 +227,9 @@ reg fifo_enable;         // controls reading of dual clock fifo
 wire Rx_full; 			 // set when write side full
 wire Rx_empty; 
 
-Rx_fifo Rx_fifo(.wrclk (!SLRD),.rdreq (!Rx_empty),.rdclk (!Tx_clock),.wrreq (1'b1), 
-                .data (PHY_Tx),.q (Rx_data),.rdusedw(), .wrfull(Rx_full), .rdempty(Rx_empty));
-                
+Rx_fifo Rx_fifo(.wrclk (!SLRD),.rdreq (fifo_enable),.rdclk (IFCLK),.wrreq (1'b1), 
+                .data (FX2_FD),.q (Rx_data),.rdusedw(), .wrfull(Rx_full), .rdempty(Rx_empty));
 
-                
 ///////////////////////////////////////////////////////////////
 //
 //     Tx_fifo (2048 words) Dual clock FIFO  - Altera Megafunction - for EP6
@@ -256,8 +253,8 @@ Tx_read_clock	|rdreq		  q[15:0]| Tx_register (to FX_FD when SLEN high)
 */
                
                 
-Tx_fifo Tx_fifo(.wrclk (Rx_clock),.rdreq (Tx_read_clock),.rdclk (IFCLK),.wrreq(Rx_CTL),
-                .data (PHY_Rx),.q (Tx_register), .wrusedw(), .aclr(), .rdempty(Tx_empty));
+Tx_fifo Tx_fifo(.wrclk (IFCLK),.rdreq (Tx_read_clock),.rdclk (IFCLK),.wrreq(Tx_fifo_enable),
+                .data (register),.q (Tx_register), .wrusedw(), .aclr(), .rdempty(Tx_empty));
 
 wire [15:0] Tx_register;                // holds data from A/D to send to FX2
 reg  Tx_read_clock;                     // when goes high sends data to Tx_register
@@ -369,6 +366,35 @@ end
 
 assign FX2_FD = SLEN ? Tx_register  : 16'bZ;  // For EP6
 
+// move the data from the Rx FIFO to the Tx FIFO
+
+assign register = Rx_data;  // connect the Rx to Tx FIFOs
+
+reg [4:0] move;
+
+always @ (negedge IFCLK)
+begin 
+case  (move)
+
+0:	begin
+	if (!Rx_empty) begin 			// if we have data in the Rx FIFO
+		fifo_enable <= 1'b1;		// enable read of Rx FIFO
+		move <= move + 1'b1;
+	end
+	else move <= 0;				// loop until we have data
+	end  
+	
+1:	begin 
+	fifo_enable <= 1'b0;		// Rx FIFO data now available
+	Tx_fifo_enable <= 1'b1; 	// enable write to Tx FIFO
+	move <= move + 1'b1;
+	end 
+2:  begin 
+	Tx_fifo_enable <= 1'b0;		// disable write to Tx FIFO
+	move <= 0;					// start again 
+	end
+endcase
+end
 
 //  Test code for PHY interface
 
@@ -378,34 +404,27 @@ reg [7:0] PHY_Rx;
 
 always @ (posedge Rx_clock)
 begin
-	if (Rx_CTL) PHY_Rx[3:0] = RD[3:0];
+	if (Rx_CTL) PHY_Rx[3:0] = RD; 
 end 
-
-always @ (negedge Rx_clock)
-begin
-	if (Rx_CTL) PHY_Rx[7:4] = RD[3:0];
-end
 			
-// clock PHY_Rx data into Tx_FIFO on posedge of  Rx_clock if  Rx_CTL true
+// clock PHY_Rx data into Tx_FIFO on negedge of  Rx_clock if  Rx_CTL true
 
-//  .data(PHY_Rx), .wrclk(Rx_clock), .wrreq(Rx_CTL)  		
+//  .data(PHY_Rx), .wrclk(!Rx_clock), .wrreq(Rx_CTL)  		
 
 
 // get data to send to PHY from Rx_FIFO, use TX clock for now
 
 assign Tx_clock = Rx_clock;
 
-reg [3:0] PHY_Tx;
+reg [7:0] PHY_Tx;
 
 always @ (Tx_clock)
 begin
 	if (!Rx_empty) begin
 		if (Tx_clock) PHY_Tx[3:0] = Rx_data[3:0];
-		else PHY_Tx[3:0] = Rx_data[7:4];
-	end
+		else PHY_Tx[7:4] = Rx_data[7:4];
+		end
 end
-
-assign TD = PHY_Tx;
 
 assign Tx_CTL = !Rx_empty;
 
