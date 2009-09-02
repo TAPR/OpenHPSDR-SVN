@@ -26,9 +26,10 @@
 // Built with Quartus II v9.0 Build 178
 //
 // Change log:  
-//	31 Aug 2009  - started coding - read EP2 and send to EP6
+//	31 Aug  2009  - started coding - read EP2 and send to EP6 via FIFOs
+//   2 Sept 2009  - Add interface to PHY, connect PHY to FIFOs
 
-// **************** USE CORRECT FX2 CODE  *****************************88
+// **************** USE CORRECT FX2 CODE  *****************************
 
 //
 ////////////////////////////////////////////////////////////
@@ -46,8 +47,7 @@
 	- Analysis and Synthesis Settings\Power Up Dont Care [not checked]
 	- Analysis and Synthesis Settings\Restructure Multiplexers  [OFF]
 	- Fitter Settings\Optimise fast-corner timing [ON]
-	
-	Same setting for Quartus V8.0 and V8.1
+
 	****** Synthesis options for State Machine Processing  = User Encoded ******
 	
 */
@@ -121,8 +121,7 @@
 
 module Ozy11(
         IFCLK, FX2_FD, FLAGA, FLAGB, FLAGC, SLWR, SLRD, SLOE, PKEND, FIFO_ADR, 
-        DEBUG_LED0,
-		DEBUG_LED1, DEBUG_LED2,DEBUG_LED3,
+        DEBUG_LED0,	DEBUG_LED1, DEBUG_LED2,DEBUG_LED3, Rx_clock, Tx_clock, Rx_CTL, Tx_CTL, RD, TD,
 		FX2_PE0, FX2_PE1, FX2_PE2, FX2_PE3,SDOBACK,TDO,TCK, TMS );
 
 input IFCLK;                   // FX2 IFCLOCK - 48MHz
@@ -152,11 +151,24 @@ input  SDOBACK;		// A25 on Atlas
 output TCK;			// A24 on Atlas
 output TMS;			// A23 on Atlas
 
+// interface to PHY 
+
+input  Rx_clock;	// Rx clock from PHY
+output Tx_clock;	// Tx clock to PHY
+input  Rx_CTL;		// Rx control from PHY
+output Tx_CTL;		// Tx control to PHY
+input  [3:0] RD;	// Rx data from PHY
+output [3:0] TD;	// Tx data to PHY
+
+
 // link JTAG pins through
 assign TMS = FX2_PE3;
 assign TCK = FX2_PE2;
 assign TDO = FX2_PE0;  // TDO on our slot ties to TDI on next slot  
 assign FX2_PE1 = SDOBACK;
+
+
+
 
 
 // set up FX2 Port A
@@ -183,42 +195,72 @@ reg Tx_fifo_enable;             // set when we want to send data to the Tx FIFO 
 
 /////////////////////////////////////////////////////////////
 //
-//   Rx_fifo  (2048 words) Dual clock FIFO - Altera Megafunction (dcfifo)
+//   Rx_fifo  (4096 words) Dual clock FIFO - Altera Megafunction (dcfifo)
 //
 /////////////////////////////////////////////////////////////
 
 /*
-        The write clock of the FIFO is SLRD and the read clock IFCLK.
+        The write clock of the FIFO is !SLRD and the read clock IFCLK.
         Data from the FX2_FIFO is written to the FIFO using !SLRD. Data from the
         FIFO is read on the positive edge of IFCLK when fifo_enable is high. The
         FIFO is 4096 words long.
         NB: The output flags are only valid after a read/write clock has taken place
+        
+        
+				---------------------
+		FX2_FD	|data[15:0]		wrful| Rx_full
+				|				     |
+		      1 |wreq				 |
+				|					 |
+		!SLRD	|>wrclk	 wrused[11:0]|
+				---------------------
+	fifo_enable	|rdreq		  q[15:0]| Rx_data
+				|					 |
+		IFCLK	|rdclk		  rdempty| Rx_empty
+				---------------------
+        
 */
 
 
 wire [15:0] Rx_data;
-reg fifo_enable;                        // controls reading of dual clock fifo
+reg fifo_enable;         // controls reading of dual clock fifo
 
 wire Rx_full; 			 // set when write side full
 wire Rx_empty; 
 
-Rx_fifo Rx_fifo(.wrclk (IFCLK),.rdreq (fifo_enable),.rdclk (IFCLK),.wrreq (1'b1), 
-                .data (FX2_FD),.q (Rx_data),.rdusedw(), .wrfull(Rx_full), .rdempty(Rx_empty));
+Rx_fifo Rx_fifo(.wrclk (!SLRD),.rdreq (!Rx_empty),.rdclk (!Tx_clock),.wrreq (1'b1), 
+                .data (PHY_Tx),.q (Rx_data),.rdusedw(), .wrfull(Rx_full), .rdempty(Rx_empty));
+                
 
+                
 ///////////////////////////////////////////////////////////////
 //
-//     Tx_fifo (4096 words) Dual clock FIFO  - Altera Megafunction - for EP6
+//     Tx_fifo (2048 words) Dual clock FIFO  - Altera Megafunction - for EP6
 //
 //////////////////////////////////////////////////////////////
+
+/*
+
+				---------------------
+	  register	|data[15:0]		wrful| 
+				|				     |
+Tx_fifo_enable	|wreq				 |
+				|					 |
+		IFCLK	|>wrclk	 wrused[11:0]|
+				---------------------
+Tx_read_clock	|rdreq		  q[15:0]| Tx_register (to FX_FD when SLEN high)
+				|					 |
+		IFCLK	|rdclk		  rdempty| Tx_empty
+				---------------------
+				
+*/
                
                 
-Tx_fifo Tx_fifo(.wrclk (IFCLK),.rdreq (Tx_read_clock),.rdclk (IFCLK),.wrreq(Tx_fifo_enable),
-                .data (register),.q (Tx_register), .wrusedw(write_used), .aclr(), .rdempty(Tx_empty));
+Tx_fifo Tx_fifo(.wrclk (Rx_clock),.rdreq (Tx_read_clock),.rdclk (IFCLK),.wrreq(Rx_CTL),
+                .data (PHY_Rx),.q (Tx_register), .wrusedw(), .aclr(), .rdempty(Tx_empty));
 
 wire [15:0] Tx_register;                // holds data from A/D to send to FX2
 reg  Tx_read_clock;                     // when goes high sends data to Tx_register
-wire [11:0] write_used;                 // indicates how may bytes in the Tx buffer
-reg  [11:0] syncd_write_used;   		// ditto but synced to FX2 clock
 reg Tx_aclr;							// async clear of FIFO 
 wire Tx_empty; 							
 
@@ -230,10 +272,9 @@ wire Tx_empty;
 //////////////////////////////////////////////////////////////
 /*
         The state machine checks if there are characters to be read
-        in the FX2 Rx FIFO by checking 'EP2_has_data'  If set it loads the word
-        read into the Rx_register. On the next clock it  checks if the Tx_data_fag is set
-         - if so it sends the data in 'register'to the Tx FIFO. After the Tx data has been sent
-        it checks 'EP2_has_data'again and repeats.
+        in the FX2 Rx FIFO by checking 'EP2_has_data'  If set it loads the word read into the Rx FIFO. 
+        It then checks if EP6 is ready and the Tx FIFO has data - if so it sends the data in Tx_register to the FX2
+        After the Tx data has been sent it checks 'EP2_has_data'again and repeats.
 */
 
 reg SLOE;                             // FX2 data bus enable - active low
@@ -242,16 +283,14 @@ reg SLRD;                             // FX2 read - active low
 reg SLWR;                             // FX2 write - active low
 reg [1:0] FIFO_ADR;                   // FX2 register address
 wire EP2_has_data = FLAGA;            // high when EP2 has data available
-wire EP6_ready = FLAGC;               // high when we can write to End Point
-reg [15:0] Rx_register;               // data from PC goes here
+wire EP6_ready = FLAGC;               // high when we can write to End Point 6
 
 
 always @ (negedge IFCLK)
 begin
-syncd_write_used <= write_used;
 case(state_FX)
 // state 0 - set up to check for Rx data from EP2
-4'd0:begin
+0:begin
 		SLWR <= 1;                    // reset FX2 FIFO write stobe
         Tx_read_clock <= 1'b0;        // reset Tx fifo read strobe
         SLRD <= 1'b1;
@@ -266,7 +305,7 @@ case(state_FX)
 		
 // delay 2 IFCLOCK cycle, this is necessary at 48MHZ to allow FIFO_ADR to settle
 // check for Rx data by reading EP2. Only get data if Rx FIFO has room 
-4'd2:begin
+2:begin
 	if(EP2_has_data  && !Rx_full)begin
        state_FX <= state_FX + 1'b1;
        SLOE <= 1'b0;                  //assert SLOE
@@ -276,16 +315,16 @@ case(state_FX)
        state_FX <= 4'd6;              // No Rx data so check for Tx data
        end
     end
-// Wait 2 IFCLK before we assert SLRD then load received data
-4'd4:begin
-        SLRD <= 1'b0;
+// Wait 2 IFCLK before we assert SLRD then load received data  *** why wait here 
+4:begin
+        SLRD <= 1'b0;				// !SLRD clocks data into Rx FIFO 
 		// FIFO connects directly to FX2_FD now 
         state_FX <= state_FX + 1'b1;
         end
 
 
 // reset SLRD and SLOE
-4'd5:begin
+5:begin
         SLRD <= 1'b1;
         SLOE <= 1'b1;
         FIFO_ADR <= 2'b10;             // select EP6
@@ -295,7 +334,7 @@ case(state_FX)
 6: // delay so address is stable
 		state_FX <= state_FX + 1'b1;
       
-// check for Tx data - Tx fifo must be at least half full before we Tx
+// check for Tx data 
 7:begin
         if (EP6_ready && !Tx_empty) begin // data available, so let's start the xfer...
             Tx_read_clock <= 1'b1;
@@ -330,35 +369,51 @@ end
 
 assign FX2_FD = SLEN ? Tx_register  : 16'bZ;  // For EP6
 
-// move the data from the Rx FIFO to the Tx FIFO
 
-assign register = Rx_data;  // connect the Rx to Tx FIFOs
+//  Test code for PHY interface
 
-reg [4:0] move;
+// get Rx data from PHY and put into PHY_Rx register
 
-always @ (negedge IFCLK)
-begin 
-case  (move)
+reg [7:0] PHY_Rx;
 
-0:	begin
-	if (!Rx_empty) begin 			// if we have data in the Rx FIFO
-		fifo_enable <= 1'b1;		// enable read of Rx FIFO
-		move <= move + 1'b1;
-	end
-	else move <= 0;				// loop until we have data
-	end  
-	
-1:	begin 
-	fifo_enable <= 1'b0;		// Rx FIFO data now available
-	Tx_fifo_enable <= 1'b1; 	// enable write to Tx FIFO
-	move <= move + 1'b1;
-	end 
-2:  begin 
-	Tx_fifo_enable <= 1'b0;		// disable write to Tx FIFO
-	move <= 0;					// start again 
-	end
-endcase
+always @ (posedge Rx_clock)
+begin
+	if (Rx_CTL) PHY_Rx[3:0] = RD[3:0];
+end 
+
+always @ (negedge Rx_clock)
+begin
+	if (Rx_CTL) PHY_Rx[7:4] = RD[3:0];
 end
+			
+// clock PHY_Rx data into Tx_FIFO on posedge of  Rx_clock if  Rx_CTL true
+
+//  .data(PHY_Rx), .wrclk(Rx_clock), .wrreq(Rx_CTL)  		
+
+
+// get data to send to PHY from Rx_FIFO, use TX clock for now
+
+assign Tx_clock = Rx_clock;
+
+reg [3:0] PHY_Tx;
+
+always @ (Tx_clock)
+begin
+	if (!Rx_empty) begin
+		if (Tx_clock) PHY_Tx[3:0] = Rx_data[3:0];
+		else PHY_Tx[3:0] = Rx_data[7:4];
+	end
+end
+
+assing TD = PHY_Tx;
+
+assign Tx_CTL = !Rx_empty;
+
+// clock Rx FIFO data into PHY_Tx on negedge of Tx_clock if !Rx_empty
+
+
+// .data (PHY_Tx), .rdclk(!Tx_clock), .rdreq(!Rx_empty)
+		
 
 
 
