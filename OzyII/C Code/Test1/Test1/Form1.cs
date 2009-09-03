@@ -26,7 +26,7 @@
  * 
  *  31 Aug  2009 - Started coding - send MAC frames  i.e. Ethernet Type II Frames
  *  
- * 
+ * NOTE:  data to libUSB must be a multiple of 512 bytes, receive buffer the same.
  */
 
 
@@ -152,22 +152,18 @@ namespace Test1
             }
 
             // check that we are using the correct version of FX2 code
-            if (Ozy_version != "20090524")
+            if (Ozy_version != "20090201")
             {
-                // note that the Ozy_version may be null.  If so, the old code here would have generated an exception
-                // and not failed softly as intended.  The current/new code handles that case reasonably...
                 MessageBox.Show(" Wrong version of Ozy code found " + (Ozy_version == null ? "(Not Found!)" : Ozy_version.ToString()) + "\n-should be 20090524");
                 stop_USB();
                 return;
             }
-
         }
 
 
         private void SendButton_Click(object sender, EventArgs e)
         {
             ReceiveData.Text = null;
-            //ReceiveData.Text = SendData.Text;
             // Format data ready to send via USB
             // get all data to send into an array - format is:
             // Ethernet_Preamble, To_MAC_address, From_MAC_address, Ethernet_type, IP_header, IP_protocol, *****
@@ -176,7 +172,7 @@ namespace Test1
             // Ethernet_Preamble, To_MAC_address, From_MAC_address, Ethernet_type (0xEFFE),Payload (46 - 1500bytes), CRC32 (4 bytes)
            
             // create a tempory array to hold the Payload - do this each time so that it initialises to null
-            byte[] Temp_Payload = new byte[1500];       // length will be a minimum of 46 and a maximim of 1500 bytes
+            byte[] Temp_Payload = new byte[4096];       // length will be a minimum of 46 and a maximim of 1500 bytes
             int Payload_length = 0;
 
             //Convert the data we are going to send into an array
@@ -186,12 +182,12 @@ namespace Test1
                 Payload_length++;
             }
 
-            if (Payload_length < 46) Payload_length = 46;  // minimum payload is 46 bytes
+            if (Payload_length < 998) Payload_length = 998;  // minimum payload is 46 bytes, send 1024 for now
 
             // now make an array of this length to hold the Payload data
             byte[] Payload = new byte[Payload_length];
 
-            // Now we know the length of the Payload data to use we can copy the temp datat into it
+            // Now we know the length of the Payload data to use we can copy the temp data into it
             Array.Copy(Temp_Payload, Payload, Payload_length);
 
             // first calculate the length of the byte array we are going to send, this is the sum of all the array lengths
@@ -208,12 +204,12 @@ namespace Test1
                                                         + Ethernet_Preamble.Length, Payload.Length);
             Buffer.BlockCopy(CRC32, 0, data_to_send, Payload.Length + Ethernet_type.Length + From_MAC_address.Length + To_MAC_address.Length
                                                         + Ethernet_Preamble.Length, CRC32.Length);
- 
+           
             // now send this to the USB
-            // data_to_send
 
             int ret;
-            ret = libUSB_Interface.usb_bulk_write(hdev, 0x02, data_to_send, data_to_send.Length, 1000);
+            ret = libUSB_Interface.usb_bulk_write(hdev, 0x02, data_to_send, data_to_send.Length, 100);
+
 
             if (ret != data_to_send.Length)
             {
@@ -223,9 +219,9 @@ namespace Test1
 
             // now look to see if we get any data back
 
-            byte[] rbuf = new byte[1500];
+            byte[] rbuf = new byte[data_to_send.Length];
 
-            ret = libUSB_Interface.usb_bulk_read(hdev, 0x86, rbuf,1000); // rbuf.Length = 1500
+            ret = libUSB_Interface.usb_bulk_read(hdev, 0x86, rbuf, 1000); // rbuf.Length = 1024
             if (ret > 0)
             {
                 // Display in the receive text box.
@@ -252,10 +248,24 @@ namespace Test1
                     int length = received_length - (Ethernet_type.Length + From_MAC_address.Length + To_MAC_address.Length
                                                             + Ethernet_Preamble.Length + CRC32.Length);
                     // build an array to receive this 
-                    byte[] Payload_data = new byte[length];
+                    byte[] Payload_data = new byte[1024];
+
+                    // search the array and strip out the payload 
+
+                    int i = 0;
+                    for ( i=0; i<rbuf.Length-2; i++)
+                    {
+                        if (rbuf[i] == 0x55 && rbuf[i + 1] == 0x55 && rbuf[i + 2] == 0x55 && rbuf[i + 3] == 0x55 &&
+                            rbuf[i + 4] == 0x55 && rbuf[i + 5] == 0x55 && rbuf[i + 6] == 0x55 && rbuf[i + 7] == 0xD5)
+                        {
+                            Console.WriteLine("Found sync at \t" + i);
+                            break;
+                        }
+                    }
+
 
                     //strip out everything but the Payload
-                    Buffer.BlockCopy(rbuf, Ethernet_Preamble.Length + To_MAC_address.Length + From_MAC_address.Length + Ethernet_type.Length, Payload_data, 0, Payload_data.Length);
+                    Buffer.BlockCopy(rbuf, i + To_MAC_address.Length + From_MAC_address.Length + Ethernet_type.Length, Payload_data, 0, 100);
 
                     // convert from Hex to a char string
                     for (int x = 0; x < Payload_data.Length; x++)
@@ -305,7 +315,6 @@ namespace Test1
             ret = libUSB_Interface.usb_set_altinterface(hdev, 0);
             ret = libUSB_Interface.usb_clear_halt(hdev, 0x02);
             ret = libUSB_Interface.usb_clear_halt(hdev, 0x86);
-            ret = libUSB_Interface.usb_clear_halt(hdev, 0x84);
             return true;
         }
 
