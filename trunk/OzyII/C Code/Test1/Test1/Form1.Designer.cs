@@ -160,7 +160,7 @@
             this.ToMAC.Name = "ToMAC";
             this.ToMAC.Size = new System.Drawing.Size(98, 20);
             this.ToMAC.TabIndex = 11;
-            this.ToMAC.Text = "00 10 A4 7B EA 80";
+            this.ToMAC.Text = "00 1C C0 30 81 FD";
             // 
             // ToIP
             // 
