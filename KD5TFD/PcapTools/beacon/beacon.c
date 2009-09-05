@@ -136,40 +136,6 @@ char* ip6tos(struct sockaddr *sockaddr, char *address, int addrlen)
 #define GAA_FLAGS ( GAA_FLAG_SKIP_ANYCAST |   GAA_FLAG_SKIP_DNS_SERVER |  GAA_FLAG_SKIP_FRIENDLY_NAME |   GAA_FLAG_SKIP_MULTICAST )
                  
 
-/* 
- * resultbufp assumed to point to a PCAP_BUF_SIZE sized buffer 
- * returns 0 on succes, !0 else 
- */ 
-int pcapNameFromIPv4(IN_ADDR *in_addrp, char *resultbufp) { 
-
-    pcap_if_t *alldevs;
-    pcap_if_t *d;
-    int i=0;
-    char errbuf[PCAP_ERRBUF_SIZE];
-
-
-    
-    /* Retrieve the device list from the local machine */
-	if (pcap_findalldevs_ex(PCAP_SRC_IF_STRING, NULL /* auth is not needed */, &alldevs, errbuf) == -1) { 
-		return 1;        
-    }
-    
-    /* loop thru devices  looking for ours */ 
-    for(d= alldevs; d != NULL; d= d->next)
-    {
-		pcap_addr_t *a; 
-		/* loop thru addrs on the device */ 
-		for  ( a = d->addresses; a != NULL; a = a->next ) {
-			if ( a->addr->sa_family == AF_INET ) { 
-				if ( memcmp(&(((struct sockaddr_in *)(a->addr))->sin_addr), in_addrp, sizeof(IN_ADDR)) == 0 ) {  /* found it */ 
-					strncpy(resultbufp, d->name, PCAP_BUF_SIZE);
-					return 0; 
-				} 
-			} 
-		} 
-    }
-	return -1; 
-} 
 
 
 
@@ -185,7 +151,7 @@ int main(int argc, char *argv[]) {
 	char inbuf[200]; 
 	char namebuf[PCAP_BUF_SIZE]; 
 
-	IN_ADDR in_addr; 
+
 	pcap_t *fp; 
 	int rc;
 	int packet_num = 0; 
@@ -269,6 +235,8 @@ int main(int argc, char *argv[]) {
 	} 
 	packet[12] = 0xef; /* set ethertype to 0xeffe */ 
 	packet[13] = 0xfe; 
+
+	printf("Beaconing 1 packet/sec ... ctrl-c to stop..."); fflush(stdout); 
 
 	while ( 1 ) { 
 		int adder; 
