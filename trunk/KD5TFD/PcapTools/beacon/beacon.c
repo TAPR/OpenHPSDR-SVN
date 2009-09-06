@@ -21,6 +21,7 @@
 #define _CRT_SECURE_NO_WARNINGS  (1) /* I'm an old C programmer, I can handle the danger! */ 
 
 #include <stdio.h>
+#include <string.h> 
 #define HAVE_REMOTE (1) 
 
 #include <pcap.h>
@@ -37,7 +38,7 @@
 #endif 
 
 
-char *wjt_copyright = "Copyright (C) 2009 Bill Tracey, KD5TFD (bill@ewjt.com).  This progam is licensed under the GUN General Public License Version 2.";
+char *wjt_Copyright = "Copyright (C) 2009 Bill Tracey, KD5TFD (bill@ewjt.com).\nThis progam is licensed under the GUN General Public License Version 2.\n";
 
 
 // Function prototypes
@@ -133,14 +134,16 @@ char* ip6tos(struct sockaddr *sockaddr, char *address, int addrlen)
     return address;
 }
 
-#define GAA_FLAGS ( GAA_FLAG_SKIP_ANYCAST |   GAA_FLAG_SKIP_DNS_SERVER |  GAA_FLAG_SKIP_FRIENDLY_NAME |   GAA_FLAG_SKIP_MULTICAST )
-                 
-
-
-
 
 #define PACKET_LEN (512) 
 BYTE macbuf[6] = { 0xfa, 0xaf, 0xb0, 0x0b, 0xd0, 0x0d };
+
+char *HelpMsg = "\nusage: beacon [n]\n\nBeacons a packet 1 time/sec. [n] indicates interface to beacon on, omit n to get a list of interfaces.\n\n"; 
+
+void doHelp() { 
+	printf(HelpMsg); 
+	printf(wjt_Copyright); 
+} 
 
 int main(int argc, char *argv[]) {
     pcap_if_t *alldevs;
@@ -150,6 +153,7 @@ int main(int argc, char *argv[]) {
 	int devidx;
 	char inbuf[200]; 
 	char namebuf[PCAP_BUF_SIZE]; 
+	char descbuf[PCAP_BUF_SIZE]; 
 
 
 	pcap_t *fp; 
@@ -158,7 +162,18 @@ int main(int argc, char *argv[]) {
 	int count_is_odd; 
 	unsigned char packet[PACKET_LEN]; 
 	
-
+	if ( argc >= 2 ) { 
+		char *lcasearg;
+		lcasearg = _strdup(argv[1]); 
+		if ( lcasearg != NULL ) { 
+			_strlwr(lcasearg); 
+			if (   strstr(lcasearg, "?") != 0 ||  strstr(lcasearg, "help") != 0 ) { 
+				doHelp(); 
+				exit(99); 
+			}
+			free(lcasearg); 
+		} 
+	} 
   
 
     /* Retrieve the device list from the local machine */
@@ -171,9 +186,12 @@ int main(int argc, char *argv[]) {
     /* Print the list */
     for(d= alldevs; d != NULL; d= d->next)
     {
-        printf("%d. %s", ++i, d->name);
-		if (d->description)  printf(" (%s)\n", d->description);
-        else printf(" (No description available)\n");
+		++i;
+		if ( argc <= 1 ) {  /* no need to list interfaces if we have idx to use on command line */ 
+			printf("%d. %s", i, d->name);
+			if (d->description)  printf(" (%s)\n", d->description);
+			else printf(" (No description available)\n");
+		}
 		/* ifprint(d);  */ 
     }
     
@@ -183,8 +201,11 @@ int main(int argc, char *argv[]) {
         return;
     }
 	
-	if ( i != 1 ) { 
-	
+	if ( argc >= 2 ) {  /* devidx given on command line */ 
+			strncpy(inbuf, argv[1], sizeof(inbuf));
+			devidx = atoi(inbuf); 
+	}
+	else if ( i != 1 ) { 	
 		printf("Enter number of interface to beacon on: "); fflush(stdout); 
 		gets(inbuf); 
 		devidx = atoi(inbuf); 
@@ -198,6 +219,7 @@ int main(int argc, char *argv[]) {
 		++i; 
 		if ( devidx == i ) { 
 			strncpy(namebuf, d->name, sizeof(namebuf)); 
+			strncpy(descbuf, d->description, sizeof(descbuf)); 
 			break; 
 		} 
 	} 
@@ -210,7 +232,7 @@ int main(int argc, char *argv[]) {
 		return 8;
 	} 
 
-	printf("Using: %s\n", namebuf); 
+	printf("Using: %s (%s)\n", namebuf, descbuf); 
 
 
 	/* if we get here namebuf has the name of the pcapbuf we want to play with */ 
