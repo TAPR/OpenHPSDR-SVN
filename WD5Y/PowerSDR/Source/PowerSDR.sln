@@ -1,0 +1,32 @@
+Microsoft Visual Studio Solution File, Format Version 8.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PowerSDR", "Console\PowerSDR.csproj", "{831AEB2F-CA78-4057-85D7-32B4816ED6AE}"
+	ProjectSection(ProjectDependencies) = postProject
+		{E8E40DF8-8A3B-422D-B7A1-44BB036F4994} = {E8E40DF8-8A3B-422D-B7A1-44BB036F4994}
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "DttSP", "DttSP\DttSP.vcproj", "{E8E40DF8-8A3B-422D-B7A1-44BB036F4994}"
+	ProjectSection(ProjectDependencies) = postProject
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfiguration) = preSolution
+		Debug = Debug
+		Release = Release
+	EndGlobalSection
+	GlobalSection(ProjectDependencies) = postSolution
+	EndGlobalSection
+	GlobalSection(ProjectConfiguration) = postSolution
+		{831AEB2F-CA78-4057-85D7-32B4816ED6AE}.Debug.ActiveCfg = Debug|.NET
+		{831AEB2F-CA78-4057-85D7-32B4816ED6AE}.Debug.Build.0 = Debug|.NET
+		{831AEB2F-CA78-4057-85D7-32B4816ED6AE}.Release.ActiveCfg = Release|.NET
+		{831AEB2F-CA78-4057-85D7-32B4816ED6AE}.Release.Build.0 = Release|.NET
+		{E8E40DF8-8A3B-422D-B7A1-44BB036F4994}.Debug.ActiveCfg = Debug|Win32
+		{E8E40DF8-8A3B-422D-B7A1-44BB036F4994}.Debug.Build.0 = Debug|Win32
+		{E8E40DF8-8A3B-422D-B7A1-44BB036F4994}.Release.ActiveCfg = Release|Win32
+		{E8E40DF8-8A3B-422D-B7A1-44BB036F4994}.Release.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+	EndGlobalSection
+	GlobalSection(ExtensibilityAddIns) = postSolution
+	EndGlobalSection
+EndGlobal
