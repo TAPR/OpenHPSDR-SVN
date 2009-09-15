@@ -135,7 +135,7 @@ char* ip6tos(struct sockaddr *sockaddr, char *address, int addrlen)
 }
 
 
-#define PACKET_LEN (512) 
+#define PACKET_LEN (500) 
 BYTE macbuf[6] = { 0xfa, 0xaf, 0xb0, 0x0b, 0xd0, 0x0d };
 
 char *HelpMsg = "\nusage: beacon [n]\n\nBeacons a packet 1 time/sec. [n] indicates interface to beacon on, omit n to get a list of interfaces.\n\n"; 
