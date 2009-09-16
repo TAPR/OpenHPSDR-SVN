@@ -1,6 +1,6 @@
 Flow report for Ozy11
-Wed Sep 02 16:39:50 2009
-Quartus II Version 9.0 Build 235 06/17/2009 Service Pack 2 SJ Web Edition
+Wed Sep 16 21:58:21 2009
+Quartus II Version 9.0 Build 132 02/25/2009 SJ Web Edition
 
 
 ---------------------
@@ -35,27 +35,27 @@ applicable agreement for further details.
 
 
 
-+-----------------------------------------------------------------------------------+
-; Flow Summary                                                                      ;
-+------------------------------------+----------------------------------------------+
-; Flow Status                        ; Successful - Wed Sep 02 16:39:49 2009        ;
-; Quartus II Version                 ; 9.0 Build 235 06/17/2009 SP 2 SJ Web Edition ;
-; Revision Name                      ; Ozy11                                        ;
-; Top-level Entity Name              ; Ozy11                                        ;
-; Family                             ; Cyclone II                                   ;
-; Device                             ; EP2C8Q208C8                                  ;
-; Timing Models                      ; Final                                        ;
-; Met timing requirements            ; No                                           ;
-; Total logic elements               ; 279 / 8,256 ( 3 % )                          ;
-;     Total combinational functions  ; 148 / 8,256 ( 2 % )                          ;
-;     Dedicated logic registers      ; 228 / 8,256 ( 3 % )                          ;
-; Total registers                    ; 228                                          ;
-; Total pins                         ; 50 / 138 ( 36 % )                            ;
-; Total virtual pins                 ; 0                                            ;
-; Total memory bits                  ; 65,536 / 165,888 ( 40 % )                    ;
-; Embedded Multiplier 9-bit elements ; 0 / 36 ( 0 % )                               ;
-; Total PLLs                         ; 0 / 2 ( 0 % )                                ;
-+------------------------------------+----------------------------------------------+
++------------------------------------------------------------------------------+
+; Flow Summary                                                                 ;
++------------------------------------+-----------------------------------------+
+; Flow Status                        ; Successful - Wed Sep 16 21:58:20 2009   ;
+; Quartus II Version                 ; 9.0 Build 132 02/25/2009 SJ Web Edition ;
+; Revision Name                      ; Ozy11                                   ;
+; Top-level Entity Name              ; Ozy11                                   ;
+; Family                             ; Cyclone II                              ;
+; Device                             ; EP2C8Q208C8                             ;
+; Timing Models                      ; Final                                   ;
+; Met timing requirements            ; No                                      ;
+; Total logic elements               ; 415 / 8,256 ( 5 % )                     ;
+;     Total combinational functions  ; 275 / 8,256 ( 3 % )                     ;
+;     Dedicated logic registers      ; 332 / 8,256 ( 4 % )                     ;
+; Total registers                    ; 332                                     ;
+; Total pins                         ; 50 / 138 ( 36 % )                       ;
+; Total virtual pins                 ; 0                                       ;
+; Total memory bits                  ; 40,960 / 165,888 ( 25 % )               ;
+; Embedded Multiplier 9-bit elements ; 0 / 36 ( 0 % )                          ;
+; Total PLLs                         ; 1 / 2 ( 50 % )                          ;
++------------------------------------+-----------------------------------------+
 
 
 +-----------------------------------------+
@@ -63,7 +63,7 @@ applicable agreement for further details.
 +-------------------+---------------------+
 ; Option            ; Setting             ;
 +-------------------+---------------------+
-; Start date & time ; 09/02/2009 16:39:19 ;
+; Start date & time ; 09/16/2009 21:58:03 ;
 ; Main task         ; Compilation         ;
 ; Revision Name     ; Ozy11               ;
 +-------------------+---------------------+
@@ -74,14 +74,17 @@ applicable agreement for further details.
 +------------------------------------+-------------------------------------------------------+---------------+-------------+----------------+
 ; Assignment Name                    ; Value                                                 ; Default Value ; Entity Name ; Section Id     ;
 +------------------------------------+-------------------------------------------------------+---------------+-------------+----------------+
-; COMPILER_SIGNATURE_ID              ; 85160415027.125188075904160                           ; --            ; --          ; --             ;
+; COMPILER_SIGNATURE_ID              ; 123483488765.125310948204068                          ; --            ; --          ; --             ;
+; ENABLE_SIGNALTAP                   ; Off                                                   ; --            ; --          ; --             ;
 ; FMAX_REQUIREMENT                   ; 48 MHz                                                ; --            ; --          ; --             ;
 ; MAX_CORE_JUNCTION_TEMP             ; 85                                                    ; --            ; --          ; --             ;
 ; MIN_CORE_JUNCTION_TEMP             ; 0                                                     ; --            ; --          ; --             ;
 ; MISC_FILE                          ; O:/HPSDR/trunk/OzyII/Verilog Code/Test Code/Ozy11.dpf ; --            ; --          ; --             ;
+; MISC_FILE                          ; C:/HPSDR/trunk/OzyII/Verilog Code/Test Code/Ozy11.dpf ; --            ; --          ; --             ;
 ; PARTITION_COLOR                    ; 16764057                                              ; --            ; --          ; Top            ;
 ; PARTITION_NETLIST_TYPE             ; SOURCE                                                ; --            ; --          ; Top            ;
 ; USE_GENERATED_PHYSICAL_CONSTRAINTS ; Off                                                   ; --            ; --          ; eda_blast_fpga ;
+; USE_SIGNALTAP_FILE                 ; stp1.stp                                              ; --            ; --          ; --             ;
 +------------------------------------+-------------------------------------------------------+---------------+-------------+----------------+
 
 
@@ -90,11 +93,11 @@ applicable agreement for further details.
 +-------------------------+--------------+-------------------------+---------------------+------------------------------------+
 ; Module Name             ; Elapsed Time ; Average Processors Used ; Peak Virtual Memory ; Total CPU Time (on all processors) ;
 +-------------------------+--------------+-------------------------+---------------------+------------------------------------+
-; Analysis & Synthesis    ; 00:00:07     ; 1.0                     ; 181 MB              ; 00:00:06                           ;
-; Fitter                  ; 00:00:10     ; 1.0                     ; 185 MB              ; 00:00:08                           ;
+; Analysis & Synthesis    ; 00:00:04     ; 1.0                     ; 182 MB              ; 00:00:04                           ;
+; Fitter                  ; 00:00:06     ; 1.0                     ; 185 MB              ; 00:00:06                           ;
 ; Assembler               ; 00:00:03     ; 1.0                     ; 164 MB              ; 00:00:02                           ;
-; Classic Timing Analyzer ; 00:00:02     ; 1.0                     ; 124 MB              ; 00:00:01                           ;
-; Total                   ; 00:00:22     ; --                      ; --                  ; 00:00:17                           ;
+; Classic Timing Analyzer ; 00:00:00     ; 1.0                     ; 125 MB              ; 00:00:01                           ;
+; Total                   ; 00:00:13     ; --                      ; --                  ; 00:00:13                           ;
 +-------------------------+--------------+-------------------------+---------------------+------------------------------------+
 
 
@@ -103,10 +106,10 @@ applicable agreement for further details.
 +-------------------------+------------------+------------+------------+----------------+
 ; Module Name             ; Machine Hostname ; OS Name    ; OS Version ; Processor type ;
 +-------------------------+------------------+------------+------------+----------------+
-; Analysis & Synthesis    ; pcphil           ; Windows XP ; 5.1        ; i1586          ;
-; Fitter                  ; pcphil           ; Windows XP ; 5.1        ; i1586          ;
-; Assembler               ; pcphil           ; Windows XP ; 5.1        ; i1586          ;
-; Classic Timing Analyzer ; pcphil           ; Windows XP ; 5.1        ; i1586          ;
+; Analysis & Synthesis    ; phil             ; Windows XP ; 5.1        ; i686           ;
+; Fitter                  ; phil             ; Windows XP ; 5.1        ; i686           ;
+; Assembler               ; phil             ; Windows XP ; 5.1        ; i686           ;
+; Classic Timing Analyzer ; phil             ; Windows XP ; 5.1        ; i686           ;
 +-------------------------+------------------+------------+------------+----------------+
 
 

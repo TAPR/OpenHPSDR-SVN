@@ -1,14 +1,14 @@
-Analysis & Synthesis Status : Successful - Wed Sep 02 16:39:26 2009
-Quartus II Version : 9.0 Build 235 06/17/2009 SP 2 SJ Web Edition
+Analysis & Synthesis Status : Successful - Wed Sep 16 21:58:06 2009
+Quartus II Version : 9.0 Build 132 02/25/2009 SJ Web Edition
 Revision Name : Ozy11
 Top-level Entity Name : Ozy11
 Family : Cyclone II
-Total logic elements : 307
-    Total combinational functions : 144
-    Dedicated logic registers : 228
-Total registers : 228
+Total logic elements : 436
+    Total combinational functions : 271
+    Dedicated logic registers : 332
+Total registers : 332
 Total pins : 50
 Total virtual pins : 0
-Total memory bits : 65,536
+Total memory bits : 40,960
 Embedded Multiplier 9-bit elements : 0
-Total PLLs : 0
+Total PLLs : 1
