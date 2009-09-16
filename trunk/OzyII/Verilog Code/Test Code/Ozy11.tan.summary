@@ -5,27 +5,27 @@ Timing Analyzer Summary
 Type           : Worst-case tsu
 Slack          : N/A
 Required Time  : None
-Actual Time    : 8.367 ns
-From           : Rx_CTL
-To             : Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_60n1:auto_generated|altsyncram_rr61:fifo_ram|altsyncram_72f1:altsyncram5|ram_block6a0~portb_datain_reg1
+Actual Time    : 8.483 ns
+From           : FLAGC
+To             : state_FX[2]
 From Clock     : --
-To Clock       : Rx_clock
+To Clock       : IFCLK
 Failed Paths   : 0
 
 Type           : Worst-case tco
 Slack          : N/A
 Required Time  : None
-Actual Time    : 16.430 ns
-From           : PHY_Tx[3]
-To             : TD[3]
-From Clock     : Rx_clock
+Actual Time    : 13.271 ns
+From           : PLL:Txclock|altpll:altpll_component|_clk1
+To             : PHY_Tx_clock
+From Clock     : IFCLK
 To Clock       : --
 Failed Paths   : 0
 
 Type           : Worst-case tpd
 Slack          : N/A
 Required Time  : None
-Actual Time    : 11.337 ns
+Actual Time    : 11.314 ns
 From           : SDOBACK
 To             : FX2_PE1
 From Clock     : --
@@ -35,51 +35,71 @@ Failed Paths   : 0
 Type           : Worst-case th
 Slack          : N/A
 Required Time  : None
-Actual Time    : 6.674 ns
-From           : Rx_clock
-To             : PHY_Tx[1]
+Actual Time    : -4.088 ns
+From           : RD[0]
+To             : Tx_nibble_fifo:Tx_fifo|dcfifo_mixed_widths:dcfifo_mixed_widths_component|dcfifo_eii1:auto_generated|altsyncram_vo61:fifo_ram|altsyncram_bve1:altsyncram5|ram_block6a0~portb_datain_reg0
 From Clock     : --
 To Clock       : Rx_clock
 Failed Paths   : 0
 
 Type           : Clock Setup: 'IFCLK'
-Slack          : 5.081 ns
+Slack          : -0.953 ns
 Required Time  : 48.00 MHz ( period = 20.833 ns )
-Actual Time    : 93.70 MHz ( period = 10.672 ns )
-From           : Tx_read_clock
-To             : Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_60n1:auto_generated|altsyncram_rr61:fifo_ram|altsyncram_72f1:altsyncram5|q_a[3]
-From Clock     : IFCLK
+Actual Time    : N/A
+From           : Tx_CTL~reg0
+To             : Led_flash:Flash_LED1|counter[9]
+From Clock     : PLL:Txclock|altpll:altpll_component|_clk0
 To Clock       : IFCLK
+Failed Paths   : 25
+
+Type           : Clock Setup: 'PLL:Txclock|altpll:altpll_component|_clk0'
+Slack          : 13.356 ns
+Required Time  : 25.00 MHz ( period = 39.999 ns )
+Actual Time    : 75.26 MHz ( period = 13.288 ns )
+From           : Tx_enable
+To             : Rx_nibble_fifo:Rx_fifo|dcfifo_mixed_widths:dcfifo_mixed_widths_component|dcfifo_eni1:auto_generated|a_graycounter_q96:rdptr_g1p|counter_ffa[11]
+From Clock     : PLL:Txclock|altpll:altpll_component|_clk0
+To Clock       : PLL:Txclock|altpll:altpll_component|_clk0
 Failed Paths   : 0
 
 Type           : Clock Setup: 'Rx_clock'
-Slack          : 8.747 ns
+Slack          : 13.882 ns
 Required Time  : 48.00 MHz ( period = 20.833 ns )
-Actual Time    : Restricted to 163.03 MHz ( period = 6.134 ns )
-From           : PHY_Rx[5]
-To             : Tx_fifo:Tx_fifo|dcfifo:dcfifo_component|dcfifo_60n1:auto_generated|altsyncram_rr61:fifo_ram|altsyncram_72f1:altsyncram5|ram_block6a4~portb_datain_reg1
+Actual Time    : 143.86 MHz ( period = 6.951 ns )
+From           : Tx_nibble_fifo:Tx_fifo|dcfifo_mixed_widths:dcfifo_mixed_widths_component|dcfifo_eii1:auto_generated|alt_synch_pipe_vd8:ws_dgrp|dffpipe_ve9:dffpipe10|dffe12a[6]
+To             : Tx_nibble_fifo:Tx_fifo|dcfifo_mixed_widths:dcfifo_mixed_widths_component|dcfifo_eii1:auto_generated|wrptr_g[10]
 From Clock     : Rx_clock
 To Clock       : Rx_clock
 Failed Paths   : 0
 
-Type           : Clock Hold: 'Rx_clock'
-Slack          : -5.282 ns
-Required Time  : 48.00 MHz ( period = 20.833 ns )
+Type           : Clock Hold: 'PLL:Txclock|altpll:altpll_component|_clk0'
+Slack          : 0.499 ns
+Required Time  : 25.00 MHz ( period = 39.999 ns )
 Actual Time    : N/A
-From           : Rx_fifo:Rx_fifo|dcfifo:dcfifo_component|dcfifo_tgk1:auto_generated|altsyncram_vpu:fifo_ram|altsyncram_aec1:altsyncram5|q_a[0]
-To             : PHY_Tx[0]
-From Clock     : Rx_clock
-To Clock       : Rx_clock
-Failed Paths   : 8
+From           : test.00001
+To             : test.00001
+From Clock     : PLL:Txclock|altpll:altpll_component|_clk0
+To Clock       : PLL:Txclock|altpll:altpll_component|_clk0
+Failed Paths   : 0
 
 Type           : Clock Hold: 'IFCLK'
 Slack          : 0.499 ns
 Required Time  : 48.00 MHz ( period = 20.833 ns )
 Actual Time    : N/A
-From           : SLEN
-To             : SLEN
+From           : FIFO_ADR[1]~reg0
+To             : FIFO_ADR[1]~reg0
 From Clock     : IFCLK
 To Clock       : IFCLK
+Failed Paths   : 0
+
+Type           : Clock Hold: 'Rx_clock'
+Slack          : 0.739 ns
+Required Time  : 48.00 MHz ( period = 20.833 ns )
+Actual Time    : N/A
+From           : Tx_nibble_fifo:Tx_fifo|dcfifo_mixed_widths:dcfifo_mixed_widths_component|dcfifo_eii1:auto_generated|alt_synch_pipe_vd8:ws_dgrp|dffpipe_ve9:dffpipe10|dffe11a[3]
+To             : Tx_nibble_fifo:Tx_fifo|dcfifo_mixed_widths:dcfifo_mixed_widths_component|dcfifo_eii1:auto_generated|alt_synch_pipe_vd8:ws_dgrp|dffpipe_ve9:dffpipe10|dffe12a[3]
+From Clock     : Rx_clock
+To Clock       : Rx_clock
 Failed Paths   : 0
 
 Type           : Total number of failed paths
@@ -90,7 +110,7 @@ From           :
 To             : 
 From Clock     : 
 To Clock       : 
-Failed Paths   : 8
+Failed Paths   : 25
 
 --------------------------------------------------------------------------------------
 
