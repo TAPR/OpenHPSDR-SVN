@@ -64,6 +64,7 @@ ECHO E. Program using Mercury_v2.4
 ECHO F. Program using Mercury_v2.5
 ECHO G. Program using Mercury_v2.6
 ECHO H. Program using Mercury_v2.7
+ECHO I. Program using Mercury_v2.8
 ECHO Q. Quit
 ECHO.
 SET Choice=
@@ -80,6 +81,8 @@ IF /I '%Choice%'=='E' GOTO ItemE
 IF /I '%Choice%'=='F' GOTO ItemF
 IF /I '%Choice%'=='G' GOTO ItemG
 IF /I '%Choice%'=='H' GOTO ItemH
+IF /I '%Choice%'=='I' GOTO ItemI
+
 IF /I '%Choice%'=='Q' GOTO End
 ECHO "%Choice%" is not valid. Please try again.
 ECHO.
@@ -107,6 +110,10 @@ GOTO CONTINUE
 GOTO CONTINUE
 :ItemH
 %DIRECTORY% -c USB-Blaster mercury_v2.7.cdf
+GOTO CONTINUE
+:CONTINUE
+:ItemI
+%DIRECTORY% -c USB-Blaster mercury_v2.8.cdf
 GOTO CONTINUE
 :CONTINUE
 PAUSE
