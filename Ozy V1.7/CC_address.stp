@@ -1,0 +1,776 @@
+<session jtag_chain="ByteBlasterMV [LPT1]" jtag_device="@1: EP2C8 (0x020B20DD)" sof_file="" top_level_entity="Ozy_Janus">
+  <display_tree gui_logging_enabled="0">
+    <display_branch instance="auto_signaltap_0" log="USE_GLOBAL_TEMP" signal_set="USE_GLOBAL_TEMP" trigger="USE_GLOBAL_TEMP"/>
+  </display_tree>
+  <instance entity_name="sld_signaltap" is_auto_node="yes" is_expanded="true" name="auto_signaltap_0" source_file="sld_signaltap.vhd">
+    <node_ip_info instance_id="0" mfg_id="110" node_id="0" version="6"/>
+    <signal_set global_temp="1" is_expanded="true" name="signal_set: 2009/08/12 16:11:13  #0">
+      <clock name="IF_clk" polarity="posedge" tap_mode="classic"/>
+      <config ram_type="M4K" reserved_data_nodes="0" reserved_storage_qualifier_nodes="0" reserved_trigger_nodes="0" sample_depth="128" trigger_in_enable="no" trigger_out_enable="no"/>
+      <top_entity/>
+      <signal_vec>
+        <trigger_input_vec>
+          <wire name="CC_address[0]" tap_mode="classic" type="register"/>
+          <wire name="CC_address[1]" tap_mode="classic" type="register"/>
+          <wire name="CC_address[2]" tap_mode="classic" type="register"/>
+          <wire name="CC_address[3]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[0][0]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[0][10]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[0][11]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[0][12]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[0][13]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[0][14]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[0][15]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[0][16]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[0][17]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[0][18]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[0][19]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[0][1]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[0][20]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[0][21]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[0][22]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[0][23]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[0][24]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[0][25]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[0][26]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[0][27]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[0][28]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[0][29]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[0][2]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[0][30]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[0][31]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[0][3]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[0][4]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[0][5]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[0][6]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[0][7]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[0][8]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[0][9]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[1][0]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[1][10]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[1][11]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[1][12]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[1][13]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[1][14]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[1][15]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[1][16]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[1][17]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[1][18]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[1][19]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[1][1]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[1][20]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[1][21]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[1][22]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[1][23]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[1][24]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[1][25]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[1][26]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[1][27]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[1][28]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[1][29]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[1][2]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[1][30]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[1][31]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[1][3]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[1][4]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[1][5]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[1][6]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[1][7]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[1][8]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[1][9]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[2][0]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[2][10]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[2][11]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[2][12]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[2][13]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[2][14]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[2][15]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[2][16]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[2][17]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[2][18]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[2][19]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[2][1]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[2][20]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[2][21]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[2][22]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[2][23]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[2][24]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[2][25]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[2][26]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[2][27]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[2][28]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[2][29]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[2][2]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[2][30]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[2][31]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[2][3]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[2][4]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[2][5]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[2][6]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[2][7]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[2][8]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[2][9]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[3][0]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[3][10]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[3][11]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[3][12]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[3][13]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[3][14]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[3][15]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[3][16]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[3][17]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[3][18]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[3][19]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[3][1]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[3][20]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[3][21]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[3][22]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[3][23]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[3][24]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[3][25]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[3][26]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[3][27]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[3][28]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[3][29]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[3][2]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[3][30]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[3][31]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[3][3]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[3][4]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[3][5]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[3][6]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[3][7]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[3][8]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[3][9]" tap_mode="classic" type="register"/>
+          <wire name="NWire_xmit:CCxmit|iack" tap_mode="classic" type="register"/>
+          <wire name="NWire_xmit:CCxmit|irdy" tap_mode="classic" type="register"/>
+          <wire name="pulsegen:CC_p|pulse" tap_mode="classic" type="combinatorial"/>
+        </trigger_input_vec>
+        <data_input_vec>
+          <wire name="CC_address[0]" tap_mode="classic" type="register"/>
+          <wire name="CC_address[1]" tap_mode="classic" type="register"/>
+          <wire name="CC_address[2]" tap_mode="classic" type="register"/>
+          <wire name="CC_address[3]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[0][0]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[0][10]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[0][11]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[0][12]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[0][13]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[0][14]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[0][15]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[0][16]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[0][17]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[0][18]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[0][19]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[0][1]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[0][20]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[0][21]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[0][22]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[0][23]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[0][24]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[0][25]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[0][26]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[0][27]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[0][28]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[0][29]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[0][2]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[0][30]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[0][31]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[0][3]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[0][4]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[0][5]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[0][6]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[0][7]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[0][8]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[0][9]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[1][0]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[1][10]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[1][11]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[1][12]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[1][13]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[1][14]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[1][15]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[1][16]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[1][17]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[1][18]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[1][19]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[1][1]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[1][20]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[1][21]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[1][22]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[1][23]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[1][24]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[1][25]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[1][26]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[1][27]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[1][28]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[1][29]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[1][2]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[1][30]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[1][31]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[1][3]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[1][4]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[1][5]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[1][6]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[1][7]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[1][8]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[1][9]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[2][0]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[2][10]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[2][11]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[2][12]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[2][13]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[2][14]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[2][15]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[2][16]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[2][17]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[2][18]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[2][19]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[2][1]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[2][20]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[2][21]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[2][22]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[2][23]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[2][24]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[2][25]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[2][26]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[2][27]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[2][28]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[2][29]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[2][2]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[2][30]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[2][31]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[2][3]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[2][4]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[2][5]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[2][6]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[2][7]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[2][8]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[2][9]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[3][0]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[3][10]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[3][11]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[3][12]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[3][13]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[3][14]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[3][15]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[3][16]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[3][17]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[3][18]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[3][19]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[3][1]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[3][20]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[3][21]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[3][22]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[3][23]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[3][24]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[3][25]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[3][26]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[3][27]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[3][28]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[3][29]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[3][2]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[3][30]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[3][31]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[3][3]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[3][4]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[3][5]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[3][6]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[3][7]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[3][8]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[3][9]" tap_mode="classic" type="register"/>
+          <wire name="NWire_xmit:CCxmit|iack" tap_mode="classic" type="register"/>
+          <wire name="NWire_xmit:CCxmit|irdy" tap_mode="classic" type="register"/>
+          <wire name="pulsegen:CC_p|pulse" tap_mode="classic" type="combinatorial"/>
+        </data_input_vec>
+        <storage_qualifier_input_vec>
+          <wire name="CC_address[0]" tap_mode="classic" type="register"/>
+          <wire name="CC_address[1]" tap_mode="classic" type="register"/>
+          <wire name="CC_address[2]" tap_mode="classic" type="register"/>
+          <wire name="CC_address[3]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[0][0]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[0][10]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[0][11]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[0][12]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[0][13]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[0][14]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[0][15]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[0][16]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[0][17]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[0][18]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[0][19]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[0][1]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[0][20]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[0][21]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[0][22]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[0][23]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[0][24]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[0][25]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[0][26]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[0][27]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[0][28]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[0][29]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[0][2]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[0][30]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[0][31]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[0][3]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[0][4]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[0][5]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[0][6]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[0][7]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[0][8]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[0][9]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[1][0]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[1][10]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[1][11]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[1][12]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[1][13]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[1][14]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[1][15]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[1][16]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[1][17]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[1][18]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[1][19]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[1][1]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[1][20]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[1][21]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[1][22]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[1][23]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[1][24]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[1][25]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[1][26]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[1][27]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[1][28]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[1][29]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[1][2]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[1][30]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[1][31]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[1][3]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[1][4]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[1][5]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[1][6]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[1][7]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[1][8]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[1][9]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[2][0]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[2][10]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[2][11]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[2][12]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[2][13]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[2][14]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[2][15]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[2][16]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[2][17]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[2][18]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[2][19]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[2][1]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[2][20]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[2][21]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[2][22]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[2][23]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[2][24]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[2][25]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[2][26]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[2][27]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[2][28]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[2][29]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[2][2]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[2][30]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[2][31]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[2][3]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[2][4]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[2][5]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[2][6]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[2][7]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[2][8]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[2][9]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[3][0]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[3][10]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[3][11]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[3][12]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[3][13]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[3][14]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[3][15]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[3][16]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[3][17]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[3][18]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[3][19]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[3][1]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[3][20]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[3][21]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[3][22]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[3][23]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[3][24]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[3][25]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[3][26]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[3][27]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[3][28]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[3][29]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[3][2]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[3][30]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[3][31]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[3][3]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[3][4]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[3][5]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[3][6]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[3][7]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[3][8]" tap_mode="classic" type="register"/>
+          <wire name="IF_frequency[3][9]" tap_mode="classic" type="register"/>
+          <wire name="NWire_xmit:CCxmit|iack" tap_mode="classic" type="register"/>
+          <wire name="NWire_xmit:CCxmit|irdy" tap_mode="classic" type="register"/>
+          <wire name="pulsegen:CC_p|pulse" tap_mode="classic" type="combinatorial"/>
+        </storage_qualifier_input_vec>
+      </signal_vec>
+      <presentation>
+        <data_view>
+          <bus is_signal_inverted="no" link="all" name="CC_address" order="lsb_to_msb" radix="hex" state="collapse" type="register">
+            <net is_signal_inverted="no" name="CC_address[0]"/>
+            <net is_signal_inverted="no" name="CC_address[1]"/>
+            <net is_signal_inverted="no" name="CC_address[2]"/>
+            <net is_signal_inverted="no" name="CC_address[3]"/>
+          </bus>
+          <net is_signal_inverted="no" name="pulsegen:CC_p|pulse"/>
+          <net is_signal_inverted="no" name="NWire_xmit:CCxmit|irdy"/>
+          <net is_signal_inverted="no" name="NWire_xmit:CCxmit|iack"/>
+          <bus is_signal_inverted="no" link="all" name="IF_frequency[0]" order="lsb_to_msb" radix="hex" state="collapse" type="register">
+            <net is_signal_inverted="no" name="IF_frequency[0][0]"/>
+            <net is_signal_inverted="no" name="IF_frequency[0][1]"/>
+            <net is_signal_inverted="no" name="IF_frequency[0][2]"/>
+            <net is_signal_inverted="no" name="IF_frequency[0][3]"/>
+            <net is_signal_inverted="no" name="IF_frequency[0][4]"/>
+            <net is_signal_inverted="no" name="IF_frequency[0][5]"/>
+            <net is_signal_inverted="no" name="IF_frequency[0][6]"/>
+            <net is_signal_inverted="no" name="IF_frequency[0][7]"/>
+            <net is_signal_inverted="no" name="IF_frequency[0][8]"/>
+            <net is_signal_inverted="no" name="IF_frequency[0][9]"/>
+            <net is_signal_inverted="no" name="IF_frequency[0][10]"/>
+            <net is_signal_inverted="no" name="IF_frequency[0][11]"/>
+            <net is_signal_inverted="no" name="IF_frequency[0][12]"/>
+            <net is_signal_inverted="no" name="IF_frequency[0][13]"/>
+            <net is_signal_inverted="no" name="IF_frequency[0][14]"/>
+            <net is_signal_inverted="no" name="IF_frequency[0][15]"/>
+            <net is_signal_inverted="no" name="IF_frequency[0][16]"/>
+            <net is_signal_inverted="no" name="IF_frequency[0][17]"/>
+            <net is_signal_inverted="no" name="IF_frequency[0][18]"/>
+            <net is_signal_inverted="no" name="IF_frequency[0][19]"/>
+            <net is_signal_inverted="no" name="IF_frequency[0][20]"/>
+            <net is_signal_inverted="no" name="IF_frequency[0][21]"/>
+            <net is_signal_inverted="no" name="IF_frequency[0][22]"/>
+            <net is_signal_inverted="no" name="IF_frequency[0][23]"/>
+            <net is_signal_inverted="no" name="IF_frequency[0][24]"/>
+            <net is_signal_inverted="no" name="IF_frequency[0][25]"/>
+            <net is_signal_inverted="no" name="IF_frequency[0][26]"/>
+            <net is_signal_inverted="no" name="IF_frequency[0][27]"/>
+            <net is_signal_inverted="no" name="IF_frequency[0][28]"/>
+            <net is_signal_inverted="no" name="IF_frequency[0][29]"/>
+            <net is_signal_inverted="no" name="IF_frequency[0][30]"/>
+            <net is_signal_inverted="no" name="IF_frequency[0][31]"/>
+          </bus>
+          <bus is_signal_inverted="no" link="all" name="IF_frequency[1]" order="lsb_to_msb" radix="hex" state="collapse" type="register">
+            <net is_signal_inverted="no" name="IF_frequency[1][0]"/>
+            <net is_signal_inverted="no" name="IF_frequency[1][1]"/>
+            <net is_signal_inverted="no" name="IF_frequency[1][2]"/>
+            <net is_signal_inverted="no" name="IF_frequency[1][3]"/>
+            <net is_signal_inverted="no" name="IF_frequency[1][4]"/>
+            <net is_signal_inverted="no" name="IF_frequency[1][5]"/>
+            <net is_signal_inverted="no" name="IF_frequency[1][6]"/>
+            <net is_signal_inverted="no" name="IF_frequency[1][7]"/>
+            <net is_signal_inverted="no" name="IF_frequency[1][8]"/>
+            <net is_signal_inverted="no" name="IF_frequency[1][9]"/>
+            <net is_signal_inverted="no" name="IF_frequency[1][10]"/>
+            <net is_signal_inverted="no" name="IF_frequency[1][11]"/>
+            <net is_signal_inverted="no" name="IF_frequency[1][12]"/>
+            <net is_signal_inverted="no" name="IF_frequency[1][13]"/>
+            <net is_signal_inverted="no" name="IF_frequency[1][14]"/>
+            <net is_signal_inverted="no" name="IF_frequency[1][15]"/>
+            <net is_signal_inverted="no" name="IF_frequency[1][16]"/>
+            <net is_signal_inverted="no" name="IF_frequency[1][17]"/>
+            <net is_signal_inverted="no" name="IF_frequency[1][18]"/>
+            <net is_signal_inverted="no" name="IF_frequency[1][19]"/>
+            <net is_signal_inverted="no" name="IF_frequency[1][20]"/>
+            <net is_signal_inverted="no" name="IF_frequency[1][21]"/>
+            <net is_signal_inverted="no" name="IF_frequency[1][22]"/>
+            <net is_signal_inverted="no" name="IF_frequency[1][23]"/>
+            <net is_signal_inverted="no" name="IF_frequency[1][24]"/>
+            <net is_signal_inverted="no" name="IF_frequency[1][25]"/>
+            <net is_signal_inverted="no" name="IF_frequency[1][26]"/>
+            <net is_signal_inverted="no" name="IF_frequency[1][27]"/>
+            <net is_signal_inverted="no" name="IF_frequency[1][28]"/>
+            <net is_signal_inverted="no" name="IF_frequency[1][29]"/>
+            <net is_signal_inverted="no" name="IF_frequency[1][30]"/>
+            <net is_signal_inverted="no" name="IF_frequency[1][31]"/>
+          </bus>
+          <bus is_signal_inverted="no" link="all" name="IF_frequency[2]" order="lsb_to_msb" radix="hex" state="collapse" type="register">
+            <net is_signal_inverted="no" name="IF_frequency[2][0]"/>
+            <net is_signal_inverted="no" name="IF_frequency[2][1]"/>
+            <net is_signal_inverted="no" name="IF_frequency[2][2]"/>
+            <net is_signal_inverted="no" name="IF_frequency[2][3]"/>
+            <net is_signal_inverted="no" name="IF_frequency[2][4]"/>
+            <net is_signal_inverted="no" name="IF_frequency[2][5]"/>
+            <net is_signal_inverted="no" name="IF_frequency[2][6]"/>
+            <net is_signal_inverted="no" name="IF_frequency[2][7]"/>
+            <net is_signal_inverted="no" name="IF_frequency[2][8]"/>
+            <net is_signal_inverted="no" name="IF_frequency[2][9]"/>
+            <net is_signal_inverted="no" name="IF_frequency[2][10]"/>
+            <net is_signal_inverted="no" name="IF_frequency[2][11]"/>
+            <net is_signal_inverted="no" name="IF_frequency[2][12]"/>
+            <net is_signal_inverted="no" name="IF_frequency[2][13]"/>
+            <net is_signal_inverted="no" name="IF_frequency[2][14]"/>
+            <net is_signal_inverted="no" name="IF_frequency[2][15]"/>
+            <net is_signal_inverted="no" name="IF_frequency[2][16]"/>
+            <net is_signal_inverted="no" name="IF_frequency[2][17]"/>
+            <net is_signal_inverted="no" name="IF_frequency[2][18]"/>
+            <net is_signal_inverted="no" name="IF_frequency[2][19]"/>
+            <net is_signal_inverted="no" name="IF_frequency[2][20]"/>
+            <net is_signal_inverted="no" name="IF_frequency[2][21]"/>
+            <net is_signal_inverted="no" name="IF_frequency[2][22]"/>
+            <net is_signal_inverted="no" name="IF_frequency[2][23]"/>
+            <net is_signal_inverted="no" name="IF_frequency[2][24]"/>
+            <net is_signal_inverted="no" name="IF_frequency[2][25]"/>
+            <net is_signal_inverted="no" name="IF_frequency[2][26]"/>
+            <net is_signal_inverted="no" name="IF_frequency[2][27]"/>
+            <net is_signal_inverted="no" name="IF_frequency[2][28]"/>
+            <net is_signal_inverted="no" name="IF_frequency[2][29]"/>
+            <net is_signal_inverted="no" name="IF_frequency[2][30]"/>
+            <net is_signal_inverted="no" name="IF_frequency[2][31]"/>
+          </bus>
+          <bus is_signal_inverted="no" link="all" name="IF_frequency[3]" order="lsb_to_msb" radix="hex" state="collapse" type="register">
+            <net is_signal_inverted="no" name="IF_frequency[3][0]"/>
+            <net is_signal_inverted="no" name="IF_frequency[3][1]"/>
+            <net is_signal_inverted="no" name="IF_frequency[3][2]"/>
+            <net is_signal_inverted="no" name="IF_frequency[3][3]"/>
+            <net is_signal_inverted="no" name="IF_frequency[3][4]"/>
+            <net is_signal_inverted="no" name="IF_frequency[3][5]"/>
+            <net is_signal_inverted="no" name="IF_frequency[3][6]"/>
+            <net is_signal_inverted="no" name="IF_frequency[3][7]"/>
+            <net is_signal_inverted="no" name="IF_frequency[3][8]"/>
+            <net is_signal_inverted="no" name="IF_frequency[3][9]"/>
+            <net is_signal_inverted="no" name="IF_frequency[3][10]"/>
+            <net is_signal_inverted="no" name="IF_frequency[3][11]"/>
+            <net is_signal_inverted="no" name="IF_frequency[3][12]"/>
+            <net is_signal_inverted="no" name="IF_frequency[3][13]"/>
+            <net is_signal_inverted="no" name="IF_frequency[3][14]"/>
+            <net is_signal_inverted="no" name="IF_frequency[3][15]"/>
+            <net is_signal_inverted="no" name="IF_frequency[3][16]"/>
+            <net is_signal_inverted="no" name="IF_frequency[3][17]"/>
+            <net is_signal_inverted="no" name="IF_frequency[3][18]"/>
+            <net is_signal_inverted="no" name="IF_frequency[3][19]"/>
+            <net is_signal_inverted="no" name="IF_frequency[3][20]"/>
+            <net is_signal_inverted="no" name="IF_frequency[3][21]"/>
+            <net is_signal_inverted="no" name="IF_frequency[3][22]"/>
+            <net is_signal_inverted="no" name="IF_frequency[3][23]"/>
+            <net is_signal_inverted="no" name="IF_frequency[3][24]"/>
+            <net is_signal_inverted="no" name="IF_frequency[3][25]"/>
+            <net is_signal_inverted="no" name="IF_frequency[3][26]"/>
+            <net is_signal_inverted="no" name="IF_frequency[3][27]"/>
+            <net is_signal_inverted="no" name="IF_frequency[3][28]"/>
+            <net is_signal_inverted="no" name="IF_frequency[3][29]"/>
+            <net is_signal_inverted="no" name="IF_frequency[3][30]"/>
+            <net is_signal_inverted="no" name="IF_frequency[3][31]"/>
+          </bus>
+        </data_view>
+        <setup_view>
+          <bus is_signal_inverted="no" link="all" name="CC_address" order="lsb_to_msb" radix="hex" state="collapse" type="register">
+            <net is_signal_inverted="no" name="CC_address[0]"/>
+            <net is_signal_inverted="no" name="CC_address[1]"/>
+            <net is_signal_inverted="no" name="CC_address[2]"/>
+            <net is_signal_inverted="no" name="CC_address[3]"/>
+          </bus>
+          <net is_signal_inverted="no" name="pulsegen:CC_p|pulse"/>
+          <net is_signal_inverted="no" name="NWire_xmit:CCxmit|irdy"/>
+          <net is_signal_inverted="no" name="NWire_xmit:CCxmit|iack"/>
+          <bus is_signal_inverted="no" link="all" name="IF_frequency[0]" order="lsb_to_msb" radix="hex" state="collapse" type="register">
+            <net is_signal_inverted="no" name="IF_frequency[0][0]"/>
+            <net is_signal_inverted="no" name="IF_frequency[0][1]"/>
+            <net is_signal_inverted="no" name="IF_frequency[0][2]"/>
+            <net is_signal_inverted="no" name="IF_frequency[0][3]"/>
+            <net is_signal_inverted="no" name="IF_frequency[0][4]"/>
+            <net is_signal_inverted="no" name="IF_frequency[0][5]"/>
+            <net is_signal_inverted="no" name="IF_frequency[0][6]"/>
+            <net is_signal_inverted="no" name="IF_frequency[0][7]"/>
+            <net is_signal_inverted="no" name="IF_frequency[0][8]"/>
+            <net is_signal_inverted="no" name="IF_frequency[0][9]"/>
+            <net is_signal_inverted="no" name="IF_frequency[0][10]"/>
+            <net is_signal_inverted="no" name="IF_frequency[0][11]"/>
+            <net is_signal_inverted="no" name="IF_frequency[0][12]"/>
+            <net is_signal_inverted="no" name="IF_frequency[0][13]"/>
+            <net is_signal_inverted="no" name="IF_frequency[0][14]"/>
+            <net is_signal_inverted="no" name="IF_frequency[0][15]"/>
+            <net is_signal_inverted="no" name="IF_frequency[0][16]"/>
+            <net is_signal_inverted="no" name="IF_frequency[0][17]"/>
+            <net is_signal_inverted="no" name="IF_frequency[0][18]"/>
+            <net is_signal_inverted="no" name="IF_frequency[0][19]"/>
+            <net is_signal_inverted="no" name="IF_frequency[0][20]"/>
+            <net is_signal_inverted="no" name="IF_frequency[0][21]"/>
+            <net is_signal_inverted="no" name="IF_frequency[0][22]"/>
+            <net is_signal_inverted="no" name="IF_frequency[0][23]"/>
+            <net is_signal_inverted="no" name="IF_frequency[0][24]"/>
+            <net is_signal_inverted="no" name="IF_frequency[0][25]"/>
+            <net is_signal_inverted="no" name="IF_frequency[0][26]"/>
+            <net is_signal_inverted="no" name="IF_frequency[0][27]"/>
+            <net is_signal_inverted="no" name="IF_frequency[0][28]"/>
+            <net is_signal_inverted="no" name="IF_frequency[0][29]"/>
+            <net is_signal_inverted="no" name="IF_frequency[0][30]"/>
+            <net is_signal_inverted="no" name="IF_frequency[0][31]"/>
+          </bus>
+          <bus is_signal_inverted="no" link="all" name="IF_frequency[1]" order="lsb_to_msb" radix="hex" state="collapse" type="register">
+            <net is_signal_inverted="no" name="IF_frequency[1][0]"/>
+            <net is_signal_inverted="no" name="IF_frequency[1][1]"/>
+            <net is_signal_inverted="no" name="IF_frequency[1][2]"/>
+            <net is_signal_inverted="no" name="IF_frequency[1][3]"/>
+            <net is_signal_inverted="no" name="IF_frequency[1][4]"/>
+            <net is_signal_inverted="no" name="IF_frequency[1][5]"/>
+            <net is_signal_inverted="no" name="IF_frequency[1][6]"/>
+            <net is_signal_inverted="no" name="IF_frequency[1][7]"/>
+            <net is_signal_inverted="no" name="IF_frequency[1][8]"/>
+            <net is_signal_inverted="no" name="IF_frequency[1][9]"/>
+            <net is_signal_inverted="no" name="IF_frequency[1][10]"/>
+            <net is_signal_inverted="no" name="IF_frequency[1][11]"/>
+            <net is_signal_inverted="no" name="IF_frequency[1][12]"/>
+            <net is_signal_inverted="no" name="IF_frequency[1][13]"/>
+            <net is_signal_inverted="no" name="IF_frequency[1][14]"/>
+            <net is_signal_inverted="no" name="IF_frequency[1][15]"/>
+            <net is_signal_inverted="no" name="IF_frequency[1][16]"/>
+            <net is_signal_inverted="no" name="IF_frequency[1][17]"/>
+            <net is_signal_inverted="no" name="IF_frequency[1][18]"/>
+            <net is_signal_inverted="no" name="IF_frequency[1][19]"/>
+            <net is_signal_inverted="no" name="IF_frequency[1][20]"/>
+            <net is_signal_inverted="no" name="IF_frequency[1][21]"/>
+            <net is_signal_inverted="no" name="IF_frequency[1][22]"/>
+            <net is_signal_inverted="no" name="IF_frequency[1][23]"/>
+            <net is_signal_inverted="no" name="IF_frequency[1][24]"/>
+            <net is_signal_inverted="no" name="IF_frequency[1][25]"/>
+            <net is_signal_inverted="no" name="IF_frequency[1][26]"/>
+            <net is_signal_inverted="no" name="IF_frequency[1][27]"/>
+            <net is_signal_inverted="no" name="IF_frequency[1][28]"/>
+            <net is_signal_inverted="no" name="IF_frequency[1][29]"/>
+            <net is_signal_inverted="no" name="IF_frequency[1][30]"/>
+            <net is_signal_inverted="no" name="IF_frequency[1][31]"/>
+          </bus>
+          <bus is_signal_inverted="no" link="all" name="IF_frequency[2]" order="lsb_to_msb" radix="hex" state="collapse" type="register">
+            <net is_signal_inverted="no" name="IF_frequency[2][0]"/>
+            <net is_signal_inverted="no" name="IF_frequency[2][1]"/>
+            <net is_signal_inverted="no" name="IF_frequency[2][2]"/>
+            <net is_signal_inverted="no" name="IF_frequency[2][3]"/>
+            <net is_signal_inverted="no" name="IF_frequency[2][4]"/>
+            <net is_signal_inverted="no" name="IF_frequency[2][5]"/>
+            <net is_signal_inverted="no" name="IF_frequency[2][6]"/>
+            <net is_signal_inverted="no" name="IF_frequency[2][7]"/>
+            <net is_signal_inverted="no" name="IF_frequency[2][8]"/>
+            <net is_signal_inverted="no" name="IF_frequency[2][9]"/>
+            <net is_signal_inverted="no" name="IF_frequency[2][10]"/>
+            <net is_signal_inverted="no" name="IF_frequency[2][11]"/>
+            <net is_signal_inverted="no" name="IF_frequency[2][12]"/>
+            <net is_signal_inverted="no" name="IF_frequency[2][13]"/>
+            <net is_signal_inverted="no" name="IF_frequency[2][14]"/>
+            <net is_signal_inverted="no" name="IF_frequency[2][15]"/>
+            <net is_signal_inverted="no" name="IF_frequency[2][16]"/>
+            <net is_signal_inverted="no" name="IF_frequency[2][17]"/>
+            <net is_signal_inverted="no" name="IF_frequency[2][18]"/>
+            <net is_signal_inverted="no" name="IF_frequency[2][19]"/>
+            <net is_signal_inverted="no" name="IF_frequency[2][20]"/>
+            <net is_signal_inverted="no" name="IF_frequency[2][21]"/>
+            <net is_signal_inverted="no" name="IF_frequency[2][22]"/>
+            <net is_signal_inverted="no" name="IF_frequency[2][23]"/>
+            <net is_signal_inverted="no" name="IF_frequency[2][24]"/>
+            <net is_signal_inverted="no" name="IF_frequency[2][25]"/>
+            <net is_signal_inverted="no" name="IF_frequency[2][26]"/>
+            <net is_signal_inverted="no" name="IF_frequency[2][27]"/>
+            <net is_signal_inverted="no" name="IF_frequency[2][28]"/>
+            <net is_signal_inverted="no" name="IF_frequency[2][29]"/>
+            <net is_signal_inverted="no" name="IF_frequency[2][30]"/>
+            <net is_signal_inverted="no" name="IF_frequency[2][31]"/>
+          </bus>
+          <bus is_signal_inverted="no" link="all" name="IF_frequency[3]" order="lsb_to_msb" radix="hex" state="collapse" type="register">
+            <net is_signal_inverted="no" name="IF_frequency[3][0]"/>
+            <net is_signal_inverted="no" name="IF_frequency[3][1]"/>
+            <net is_signal_inverted="no" name="IF_frequency[3][2]"/>
+            <net is_signal_inverted="no" name="IF_frequency[3][3]"/>
+            <net is_signal_inverted="no" name="IF_frequency[3][4]"/>
+            <net is_signal_inverted="no" name="IF_frequency[3][5]"/>
+            <net is_signal_inverted="no" name="IF_frequency[3][6]"/>
+            <net is_signal_inverted="no" name="IF_frequency[3][7]"/>
+            <net is_signal_inverted="no" name="IF_frequency[3][8]"/>
+            <net is_signal_inverted="no" name="IF_frequency[3][9]"/>
+            <net is_signal_inverted="no" name="IF_frequency[3][10]"/>
+            <net is_signal_inverted="no" name="IF_frequency[3][11]"/>
+            <net is_signal_inverted="no" name="IF_frequency[3][12]"/>
+            <net is_signal_inverted="no" name="IF_frequency[3][13]"/>
+            <net is_signal_inverted="no" name="IF_frequency[3][14]"/>
+            <net is_signal_inverted="no" name="IF_frequency[3][15]"/>
+            <net is_signal_inverted="no" name="IF_frequency[3][16]"/>
+            <net is_signal_inverted="no" name="IF_frequency[3][17]"/>
+            <net is_signal_inverted="no" name="IF_frequency[3][18]"/>
+            <net is_signal_inverted="no" name="IF_frequency[3][19]"/>
+            <net is_signal_inverted="no" name="IF_frequency[3][20]"/>
+            <net is_signal_inverted="no" name="IF_frequency[3][21]"/>
+            <net is_signal_inverted="no" name="IF_frequency[3][22]"/>
+            <net is_signal_inverted="no" name="IF_frequency[3][23]"/>
+            <net is_signal_inverted="no" name="IF_frequency[3][24]"/>
+            <net is_signal_inverted="no" name="IF_frequency[3][25]"/>
+            <net is_signal_inverted="no" name="IF_frequency[3][26]"/>
+            <net is_signal_inverted="no" name="IF_frequency[3][27]"/>
+            <net is_signal_inverted="no" name="IF_frequency[3][28]"/>
+            <net is_signal_inverted="no" name="IF_frequency[3][29]"/>
+            <net is_signal_inverted="no" name="IF_frequency[3][30]"/>
+            <net is_signal_inverted="no" name="IF_frequency[3][31]"/>
+          </bus>
+        </setup_view>
+      </presentation>
+      <trigger CRC="A9A4E9DA" attribute_mem_mode="false" gap_record="true" global_temp="1" is_expanded="true" name="trigger: 2009/08/12 16:11:13  #1" position="pre" power_up_trigger_mode="false" record_data_gap="true" segment_size="1" storage_mode="off" storage_qualifier_disabled="no" storage_qualifier_port_is_pin="true" storage_qualifier_port_name="auto_stp_external_storage_qualifier" storage_qualifier_port_tap_mode="classic" trigger_in="dont_care" trigger_out="active high" trigger_type="circular">
+        <power_up_trigger position="pre" storage_qualifier_disabled="no" trigger_in="dont_care" trigger_out="active high"/>
+        <events use_custom_flow_control="no">
+          <level enabled="yes" name="condition1" type="basic">'NWire_xmit:CCxmit|irdy' == rising edge
+            
+            <power_up enabled="yes">
+            </power_up>
+            <op_node/>
+          </level>
+        </events>
+        <storage_qualifier_events>
+          <transitional>000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+            
+            <pwr_up_transitional>000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+            
+            </pwr_up_transitional>
+          </transitional>
+          <storage_qualifier_level type="basic">
+            <power_up>
+            </power_up>
+            <op_node/>
+          </storage_qualifier_level>
+          <storage_qualifier_level type="basic">
+            <power_up>
+            </power_up>
+            <op_node/>
+          </storage_qualifier_level>
+          <storage_qualifier_level type="basic">
+            <power_up>
+            </power_up>
+            <op_node/>
+          </storage_qualifier_level>
+        </storage_qualifier_events>
+        <log>
+          <data global_temp="1" name="log: 2009/08/12 16:31:30  #0" power_up_mode="false" sample_depth="128" trigger_position="16">100001000000100010000000000001001010010000001000100000000000010010100100000010001000000000000100101001000000100010000000000001001010000100001000000100010000000000001001010010000001000100000000000010010100100000010001000000000000100101001000000100010000000000001001010000100001000000100010000000000001001010010000001000100000000000010010100100000010001000000000000100101001000000100010000000000001001010000100001000000100010000000000001001010010000001000100000000000010010100100000010001000000000000100101001000000100010000000000001001010000100001000000100010000000000001001010010000001000100000000000010010100100000010001000000000000100101001000000100010000000000001001010000100001000000100010000000000001001010010000001000100000000000010010100100000010001000000000000100101001000000100010000000000001001010000100001000000100010000000000001001010010000001000100000000000010010100100000010001000000000000100101001000000100010000000000001001010000100001000000100010000000000001001010010000001000100000000000010010100100000010001000000000000100101001000000100010000000000001001010000100001000000100010000000000001001010010000001000100000000000010010100100000010001000000000000100101001000000100010000000000001001010000100001000000100010000000000001001010010000001000100000000000010010100100000010001000000000000100101001000000100010000000000001001010000100001000000100010000000000001001010010000001000100000000000010010100100000010001000000000000100101001000000100010000000000001001010000100001000000100010000000000001001010010000001000100000000000010010100100000010001000000000000100101001000000100010000000000001001010000100001000000100010000000000001001010010000001000100000000000010010100100000010001000000000000100101001000000100010000000000001001010000100001000000100010000000000001001010010000001000100000000000010010100100000010001000000000000100101001000000100010000000000001001010000100001000000100010000000000001001010010000001000100000000000010010100100000010001000000000000100101001000000100010000000000001001010000100001000000100010000000000001001010010000001000100000000000010010100100000010001000000000000100101001000000100010000000000001001010000100001000000100010000000000001001010010000001000100000000000010010100100000010001000000000000100101001000000100010000000000001001010011010001000000100010000000000001001010010000001000100000000000010010100100000010001000000000000100101001000000100010000000000001001010110010001000000100010000000000001001010010000001000100000000000010010100100000010001000000000000100101001000000100010000000000001001010110010001000000100010000000000001001010010000001000100000000000010010100100000010001000000000000100101001000000100010000000000001001010100010001000000100010000000000001001010010000001000100000000000010010100100000010001000000000000100101001000000100010000000000001001010100010001000000100010000000000001001010010000001000100000000000010010100100000010001000000000000100101001000000100010000000000001001010100010001000000100010000000000001001010010000001000100000000000010010100100000010001000000000000100101001000000100010000000000001001010100010001000000100010000000000001001010010000001000100000000000010010100100000010001000000000000100101001000000100010000000000001001010100010001000000100010000000000001001010010000001000100000000000010010100100000010001000000000000100101001000000100010000000000001001010100010001000000100010000000000001001010010000001000100000000000010010100100000010001000000000000100101001000000100010000000000001001010100010001000000100010000000000001001010010000001000100000000000010010100100000010001000000000000100101001000000100010000000000001001010100010001000000100010000000000001001010010000001000100000000000010010100100000010001000000000000100101001000000100010000000000001001010100010001000000100010000000000001001010010000001000100000000000010010100100000010001000000000000100101001000000100010000000000001001010100010001000000100010000000000001001010010000001000100000000000010010100100000010001000000000000100101001000000100010000000000001001010100010001000000100010000000000001001010010000001000100000000000010010100100000010001000000000000100101001000000100010000000000001001010100010001000000100010000000000001001010010000001000100000000000010010100100000010001000000000000100101001000000100010000000000001001010100010001000000100010000000000001001010010000001000100000000000010010100100000010001000000000000100101001000000100010000000000001001010100010001000000100010000000000001001010010000001000100000000000010010100100000010001000000000000100101001000000100010000000000001001010100010001000000100010000000000001001010010000001000100000000000010010100100000010001000000000000100101001000000100010000000000001001010100010001000000100010000000000001001010010000001000100000000000010010100100000010001000000000000100101001000000100010000000000001001010100010001000000100010000000000001001010010000001000100000000000010010100100000010001000000000000100101001000000100010000000000001001010100010001000000100010000000000001001010010000001000100000000000010010100100000010001000000000000100101001000000100010000000000001001010100010001000000100010000000000001001010010000001000100000000000010010100100000010001000000000000100101001000000100010000000000001001010100010001000000100010000000000001001010010000001000100000000000010010100100000010001000000000000100101001000000100010000000000001001010100010001000000100010000000000001001010010000001000100000000000010010100100000010001000000000000100101001000000100010000000000001001010100010001000000100010000000000001001010010000001000100000000000010010100100000010001000000000000100101001000000100010000000000001001010100010001000000100010000000000001001010010000001000100000000000010010100100000010001000000000000100101001000000100010000000000001001010100010001000000100010000000000001001010010000001000100000000000010010100100000010001000000000000100101001000000100010000000000001001010100010001000000100010000000000001001010010000001000100000000000010010100100000010001000000000000100101001000000100010000000000001001010100010001000000100010000000000001001010010000001000100000000000010010100100000010001000000000000100101001000000100010000000000001001010100010001000000100010000000000001001010010000001000100000000000010010100100000010001000000000000100101001000000100010000000000001001010100010001000000100010000000000001001010010000001000100000000000010010100100000010001000000000000100101001000000100010000000000001001010100010001000000100010000000000001001010010000001000100000000000010010100100000010001000000000000100101001000000100010000000000001001010100010001000000100010000000000001001010010000001000100000000000010010100100000010001000000000000100101001000000100010000000000001001010100010001000000100010000000000001001010010000001000100000000000010010100100000010001000000000000100101001000000100010000000000001001010100010001000000100010000000000001001010010000001000100000000000010010100100000010001000000000000100101001000000100010000000000001001010100010001000000100010000000000001001010010000001000100000000000010010100100000010001000000000000100101001000000100010000000000001001010100010001000000100010000000000001001010010000001000100000000000010010100100000010001000000000000100101001000000100010000000000001001010100010001000000100010000000000001001010010000001000100000000000010010100100000010001000000000000100101001000000100010000000000001001010100010001000000100010000000000001001010010000001000100000000000010010100100000010001000000000000100101001000000100010000000000001001010100010001000000100010000000000001001010010000001000100000000000010010100100000010001000000000000100101001000000100010000000000001001010100010001000000100010000000000001001010010000001000100000000000010010100100000010001000000000000100101001000000100010000000000001001010100010001000000100010000000000001001010010000001000100000000000010010100100000010001000000000000100101001000000100010000000000001001010100010001000000100010000000000001001010010000001000100000000000010010100100000010001000000000000100101001000000100010000000000001001010100010001000000100010000000000001001010010000001000100000000000010010100100000010001000000000000100101001000000100010000000000001001010100010001000000100010000000000001001010010000001000100000000000010010100100000010001000000000000100101001000000100010000000000001001010100010001000000100010000000000001001010010000001000100000000000010010100100000010001000000000000100101001000000100010000000000001001010100010001000000100010000000000001001010010000001000100000000000010010100100000010001000000000000100101001000000100010000000000001001010100010001000000100010000000000001001010010000001000100000000000010010100100000010001000000000000100101001000000100010000000000001001010100010001000000100010000000000001001010010000001000100000000000010010100100000010001000000000000100101001000000100010000000000001001010100010001000000100010000000000001001010010000001000100000000000010010100100000010001000000000000100101001000000100010000000000001001010100010001000000100010000000000001001010010000001000100000000000010010100100000010001000000000000100101001000000100010000000000001001010100010001000000100010000000000001001010010000001000100000000000010010100100000010001000000000000100101001000000100010000000000001001010100010001000000100010000000000001001010010000001000100000000000010010100100000010001000000000000100101001000000100010000000000001001010100010001000000100010000000000001001010010000001000100000000000010010100100000010001000000000000100101001000000100010000000000001001010100010001000000100010000000000001001010010000001000100000000000010010100100000010001000000000000100101001000000100010000000000001001010100010001000000100010000000000001001010010000001000100000000000010010100100000010001000000000000100101001000000100010000000000001001010100010001000000100010000000000001001010010000001000100000000000010010100100000010001000000000000100101001000000100010000000000001001010100010001000000100010000000000001001010010000001000100000000000010010100100000010001000000000000100101001000000100010000000000001001010100010001000000100010000000000001001010010000001000100000000000010010100100000010001000000000000100101001000000100010000000000001001010100010001000000100010000000000001001010010000001000100000000000010010100100000010001000000000000100101001000000100010000000000001001010100010001000000100010000000000001001010010000001000100000000000010010100100000010001000000000000100101001000000100010000000000001001010100010001000000100010000000000001001010010000001000100000000000010010100100000010001000000000000100101001000000100010000000000001001010100010001000000100010000000000001001010010000001000100000000000010010100100000010001000000000000100101001000000100010000000000001001010100010001000000100010000000000001001010010000001000100000000000010010100100000010001000000000000100101001000000100010000000000001001010100010001000000100010000000000001001010010000001000100000000000010010100100000010001000000000000100101001000000100010000000000001001010100010001000000100010000000000001001010010000001000100000000000010010100100000010001000000000000100101001000000100010000000000001001010100010001000000100010000000000001001010010000001000100000000000010010100100000010001000000000000100101001000000100010000000000001001010100010001000000100010000000000001001010010000001000100000000000010010100100000010001000000000000100101001000000100010000000000001001010100010001000000100010000000000001001010010000001000100000000000010010100100000010001000000000000100101001000000100010000000000001001010100010001000000100010000000000001001010010000001000100000000000010010100100000010001000000000000100101001000000100010000000000001001010100010001000000100010000000000001001010010000001000100000000000010010100100000010001000000000000100101001000000100010000000000001001010100010001000000100010000000000001001010010000001000100000000000010010100100000010001000000000000100101001000000100010000000000001001010100010001000000100010000000000001001010010000001000100000000000010010100100000010001000000000000100101001000000100010000000000001001010100010001000000100010000000000001001010010000001000100000000000010010100100000010001000000000000100101001000000100010000000000001001010100010001000000100010000000000001001010010000001000100000000000010010100100000010001000000000000100101001000000100010000000000001001010100010001000000100010000000000001001010010000001000100000000000010010100100000010001000000000000100101001000000100010000000000001001010100010001000000100010000000000001001010010000001000100000000000010010100100000010001000000000000100101001000000100010000000000001001010100010001000000100010000000000001001010010000001000100000000000010010100100000010001000000000000100101001000000100010000000000001001010100010001000000100010000000000001001010010000001000100000000000010010100100000010001000000000000100101001000000100010000000000001001010100010001000000100010000000000001001010010000001000100000000000010010100100000010001000000000000100101001000000100010000000000001001010100010001000000100010000000000001001010010000001000100000000000010010100100000010001000000000000100101001000000100010000000000001001010100010001000000100010000000000001001010010000001000100000000000010010100100000010001000000000000100101001000000100010000000000001001010100010001000000100010000000000001001010010000001000100000000000010010100100000010001000000000000100101001000000100010000000000001001010100010001000000100010000000000001001010010000001000100000000000010010100100000010001000000000000100101001000000100010000000000001001010100010001000000100010000000000001001010010000001000100000000000010010100100000010001000000000000100101001000000100010000000000001001010100010001000000100010000000000001001010010000001000100000000000010010100100000010001000000000000100101001000000100010000000000001001010100010001000000100010000000000001001010010000001000100000000000010010100100000010001000000000000100101001000000100010000000000001001010100010001000000100010000000000001001010010000001000100000000000010010100100000010001000000000000100101001000000100010000000000001001010100010001000000100010000000000001001010010000001000100000000000010010100100000010001000000000000100101001000000100010000000000001001010100010001000000100010000000000001001010010000001000100000000000010010100100000010001000000000000100101001000000100010000000000001001010100010001000000100010000000000001001010010000001000100000000000010010100100000010001000000000000100101001000000100010000000000001001010100010001000000100010000000000001001010010000001000100000000000010010100100000010001000000000000100101001000000100010000000000001001010100010001000000100010000000000001001010010000001000100000000000010010100100000010001000000000000100101001000000100010000000000001001010100010001000000100010000000000001001010010000001000100000000000010010100100000010001000000000000100101001000000100010000000000001001010100010001000000100010000000000001001010010000001000100000000000010010100100000010001000000000000100101001000000100010000000000001001010100010001000000100010000000000001001010010000001000100000000000010010100100000010001000000000000100101001000000100010000000000001001010100010001000000100010000000000001001010010000001000100000000000010010100100000010001000000000000100101001000000100010000000000001001010100010001000000100010000000000001001010010000001000100000000000010010100100000010001000000000000100101001000000100010000000000001001010100010001000000100010000000000001001010010000001000100000000000010010100100000010001000000000000100101001000000100010000000000001001010100010001000000100010000000000001001010010000001000100000000000010010100100000010001000000000000100101001000000100010000000000001001010100010001000000100010000000000001001010010000001000100000000000010010100100000010001000000000000100101001000000100010000000000001001010100010001000000100010000000000001001010010000001000100000000000010010100100000010001000000000000100101001000000100010000000000001001010100010001000000100010000000000001001010010000001000100000000000010010100100000010001000000000000100101001000000100010000000000001001010100010001000000100010000000000001001010010000001000100000000000010010100100000010001000000000000100101001000000100010000000000001001010100010001000000100010000000000001001010010000001000100000000000010010100100000010001000000000000100101001000000100010000000000001001010100010001000000100010000000000001001010010000001000100000000000010010100100000010001000000000000100101001000000100010000000000001001010100010001000000100010000000000001001010010000001000100000000000010010100100000010001000000000000100101001000000100010000000000001001010100010001000000100010000000000001001010010000001000100000000000010010100100000010001000000000000100101001000000100010000000000001001010100010001000000100010000000000001001010010000001000100000000000010010100100000010001000000000000100101001000000100010000000000001001010100010001000000100010000000000001001010010000001000100000000000010010100100000010001000000000000100101001000000100010000000000001001010100010001000000100010000000000001001010010000001000100000000000010010100100000010001000000000000100101001000000100010000000000001001010100</data>
+          <extradata>1111111111111111T111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111</extradata>
+        </log>
+      </trigger>
+    </signal_set>
+    <position_info>
+      <single attribute="active tab" value="0"/>
+      <single attribute="data horizontal scroll position" value="0"/>
+      <single attribute="data vertical scroll position" value="0"/>
+      <single attribute="zoom level denominator" value="1"/>
+      <single attribute="zoom level numerator" value="1"/>
+      <single attribute="zoom offset denominator" value="1"/>
+      <single attribute="zoom offset numerator" value="130944"/>
+    </position_info>
+  </instance>
+  <mnemonics/>
+  <static_plugin_mnemonics/>
+  <global_info>
+    <single attribute="active instance" value="0"/>
+    <single attribute="lock mode" value="36110"/>
+    <multi attribute="window position" size="9" value="1221,799,398,124,0,50,124,0,0"/>
+  </global_info>
+</session>
