@@ -12,7 +12,7 @@ Here are the steps requried to progam the EPCS16 on the Mercury board, EPCS4 on 
 
    https://www.altera.com/support/software/download/programming/quartus2/dnl-quartus2_programmer.jsp
 
-   The latest version is V9.0
+   The latest version is V9.0sp2
    Install in the default directory. If you install in a different directory then edit
    Program-Mercury-EPCS16.bat and Program-Penelope-EPCS4.bat to reflect the change. 
 
