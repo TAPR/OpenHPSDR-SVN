@@ -2782,5 +2782,17 @@ namespace DataDecoder.Properties {
                 this["StartPSDR"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("25")]
+        public decimal defLow {
+            get {
+                return ((decimal)(this["defLow"]));
+            }
+            set {
+                this["defLow"] = value;
+            }
+        }
     }
 }

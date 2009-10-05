@@ -51,6 +51,9 @@
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.label11 = new System.Windows.Forms.Label();
             this.num10 = new System.Windows.Forms.NumericUpDown();
+            this.label12 = new System.Windows.Forms.Label();
+            this.numLow = new System.Windows.Forms.NumericUpDown();
+            this.textBox2 = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.num1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.num2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.num3)).BeginInit();
@@ -61,6 +64,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.num8)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.num9)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.num10)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numLow)).BeginInit();
             this.SuspendLayout();
             // 
             // num1
@@ -303,11 +307,48 @@
             0});
             this.num10.ValueChanged += new System.EventHandler(this.num10_ValueChanged);
             // 
-            // AutoDrive
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(7, 301);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(172, 13);
+            this.label12.TabIndex = 23;
+            this.label12.Text = "Default Low-Power Drive (Operate)";
+            // 
+            // numLow
+            // 
+            this.numLow.Location = new System.Drawing.Point(40, 328);
+            this.numLow.Name = "numLow";
+            this.numLow.Size = new System.Drawing.Size(47, 20);
+            this.numLow.TabIndex = 24;
+            this.numLow.Value = new decimal(new int[] {
+            25,
+            0,
+            0,
+            0});
+            this.numLow.ValueChanged += new System.EventHandler(this.numLow_ValueChanged);
+            // 
+            // textBox2
+            // 
+            this.textBox2.BackColor = System.Drawing.SystemColors.Control;
+            this.textBox2.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.textBox2.Location = new System.Drawing.Point(105, 320);
+            this.textBox2.Multiline = true;
+            this.textBox2.Name = "textBox2";
+            this.textBox2.Size = new System.Drawing.Size(175, 44);
+            this.textBox2.TabIndex = 25;
+            this.textBox2.Text = "Power level for amplifier drive when using the Low Power Operate setting (ctrl + " +
+                "H).";
+            // 
+            // AcomSwitch
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(292, 297);
+            this.ClientSize = new System.Drawing.Size(292, 368);
+            this.Controls.Add(this.textBox2);
+            this.Controls.Add(this.numLow);
+            this.Controls.Add(this.label12);
             this.Controls.Add(this.label11);
             this.Controls.Add(this.num10);
             this.Controls.Add(this.textBox1);
@@ -330,7 +371,8 @@
             this.Controls.Add(this.num2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.num1);
-            this.Name = "AutoDrive";
+            this.Name = "AcomSwitch";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "AutoDrive";
             ((System.ComponentModel.ISupportInitialize)(this.num1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.num2)).EndInit();
@@ -342,6 +384,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.num8)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.num9)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.num10)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numLow)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -371,5 +414,8 @@
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.NumericUpDown num10;
+        private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.NumericUpDown numLow;
+        private System.Windows.Forms.TextBox textBox2;
     }
 }

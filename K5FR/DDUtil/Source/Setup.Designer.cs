@@ -50,6 +50,7 @@ namespace DataDecoder
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Setup));
             this.tabControl = new System.Windows.Forms.TabControl();
             this.tabPorts = new System.Windows.Forms.TabPage();
+            this.chkPSDR = new System.Windows.Forms.CheckBox();
             this.btnFlexOn = new System.Windows.Forms.Button();
             this.grpSlave = new System.Windows.Forms.GroupBox();
             this.chkSlaveRTS = new System.Windows.Forms.CheckBox();
@@ -784,7 +785,6 @@ namespace DataDecoder
             this.label67 = new System.Windows.Forms.Label();
             this.chkDog = new System.Windows.Forms.CheckBox();
             this.groupBox10 = new System.Windows.Forms.GroupBox();
-            this.chkDisFB = new System.Windows.Forms.CheckBox();
             this.chkTenths = new System.Windows.Forms.CheckBox();
             this.label50 = new System.Windows.Forms.Label();
             this.label49 = new System.Windows.Forms.Label();
@@ -892,7 +892,6 @@ namespace DataDecoder
             this.RepeatPort = new System.IO.Ports.SerialPort(this.components);
             this.PwrPort = new System.IO.Ports.SerialPort(this.components);
             this.pdTimer = new System.Windows.Forms.Timer(this.components);
-            this.chkPSDR = new System.Windows.Forms.CheckBox();
             this.tabControl.SuspendLayout();
             this.tabPorts.SuspendLayout();
             this.grpSlave.SuspendLayout();
@@ -1001,6 +1000,20 @@ namespace DataDecoder
             this.tabPorts.Text = "Ports";
             this.toolTip1.SetToolTip(this.tabPorts, "Right-Click for Options");
             this.tabPorts.UseVisualStyleBackColor = true;
+            // 
+            // chkPSDR
+            // 
+            this.chkPSDR.AutoSize = true;
+            this.chkPSDR.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
+            this.chkPSDR.ForeColor = System.Drawing.Color.Navy;
+            this.chkPSDR.Location = new System.Drawing.Point(375, 53);
+            this.chkPSDR.Name = "chkPSDR";
+            this.chkPSDR.Size = new System.Drawing.Size(56, 17);
+            this.chkPSDR.TabIndex = 70;
+            this.chkPSDR.Text = "PSDR";
+            this.toolTip1.SetToolTip(this.chkPSDR, "Select to start/stop PSDR with radio.");
+            this.chkPSDR.UseVisualStyleBackColor = true;
+            this.chkPSDR.CheckedChanged += new System.EventHandler(this.chkPSDR_CheckedChanged);
             // 
             // btnFlexOn
             // 
@@ -10612,7 +10625,6 @@ namespace DataDecoder
             // 
             // groupBox10
             // 
-            this.groupBox10.Controls.Add(this.chkDisFB);
             this.groupBox10.Controls.Add(this.chkTenths);
             this.groupBox10.Controls.Add(this.label50);
             this.groupBox10.Controls.Add(this.label49);
@@ -10630,26 +10642,12 @@ namespace DataDecoder
             this.groupBox10.TabStop = false;
             this.groupBox10.Text = "Rotor Setup";
             // 
-            // chkDisFB
-            // 
-            this.chkDisFB.AutoSize = true;
-            this.chkDisFB.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chkDisFB.ForeColor = System.Drawing.Color.Navy;
-            this.chkDisFB.Location = new System.Drawing.Point(10, 155);
-            this.chkDisFB.Name = "chkDisFB";
-            this.chkDisFB.Size = new System.Drawing.Size(152, 17);
-            this.chkDisFB.TabIndex = 34;
-            this.chkDisFB.Text = "Disable Position Feedback";
-            this.toolTip1.SetToolTip(this.chkDisFB, "Select to disable rotor position feed back.");
-            this.chkDisFB.UseVisualStyleBackColor = true;
-            this.chkDisFB.CheckedChanged += new System.EventHandler(this.chkDisFB_CheckedChanged);
-            // 
             // chkTenths
             // 
             this.chkTenths.AutoSize = true;
             this.chkTenths.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.chkTenths.ForeColor = System.Drawing.Color.Navy;
-            this.chkTenths.Location = new System.Drawing.Point(10, 133);
+            this.chkTenths.Location = new System.Drawing.Point(10, 145);
             this.chkTenths.Name = "chkTenths";
             this.chkTenths.Size = new System.Drawing.Size(96, 17);
             this.chkTenths.TabIndex = 33;
@@ -11508,7 +11506,9 @@ namespace DataDecoder
             // 
             this.vSPManagerToolStripMenuItem.Name = "vSPManagerToolStripMenuItem";
             this.vSPManagerToolStripMenuItem.Size = new System.Drawing.Size(209, 22);
-            this.vSPManagerToolStripMenuItem.Text = "VSP Manager";
+            this.vSPManagerToolStripMenuItem.Text = "Start VSP Manager";
+            this.vSPManagerToolStripMenuItem.ToolTipText = "Start VSP Manager (note: must be located in C:\\Program Files\\vspMgr directory).";
+            this.vSPManagerToolStripMenuItem.Click += new System.EventHandler(this.vSPManagerToolStripMenuItem_Click);
             // 
             // aboutToolStripMenuItem
             // 
@@ -11650,9 +11650,8 @@ namespace DataDecoder
             // 
             // RotorPort
             // 
-            this.RotorPort.DtrEnable = true;
             this.RotorPort.ReadTimeout = 500;
-            this.RotorPort.RtsEnable = true;
+            this.RotorPort.ReceivedBytesThreshold = 4;
             this.RotorPort.WriteTimeout = 500;
             this.RotorPort.DataReceived += new System.IO.Ports.SerialDataReceivedEventHandler(this.RotorPort_DataReceived);
             // 
@@ -11726,20 +11725,6 @@ namespace DataDecoder
             // 
             this.pdTimer.Interval = 50;
             this.pdTimer.Tick += new System.EventHandler(this.timer2_Tick);
-            // 
-            // chkPSDR
-            // 
-            this.chkPSDR.AutoSize = true;
-            this.chkPSDR.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
-            this.chkPSDR.ForeColor = System.Drawing.Color.Navy;
-            this.chkPSDR.Location = new System.Drawing.Point(375, 53);
-            this.chkPSDR.Name = "chkPSDR";
-            this.chkPSDR.Size = new System.Drawing.Size(56, 17);
-            this.chkPSDR.TabIndex = 70;
-            this.chkPSDR.Text = "PSDR";
-            this.toolTip1.SetToolTip(this.chkPSDR, "Select to start/stop PSDR with radio.");
-            this.chkPSDR.UseVisualStyleBackColor = true;
-            this.chkPSDR.CheckedChanged += new System.EventHandler(this.chkPSDR_CheckedChanged);
             // 
             // Setup
             // 
@@ -12745,7 +12730,6 @@ namespace DataDecoder
         private Button btnCkAll;
         private ToolStripMenuItem resetDontAskMeAgainToolStripMenuItem;
         private Button btnStop;
-        private CheckBox chkDisFB;
         private Timer pdTimer;
         private CheckBox chkPSDR;
 

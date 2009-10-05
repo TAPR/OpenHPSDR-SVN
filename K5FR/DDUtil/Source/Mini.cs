@@ -192,6 +192,8 @@ namespace DataDecoder
             { s.ProcessMacroButton(11); }
             else if (e.KeyCode == Keys.F12)
             { s.ProcessMacroButton(12); }
+            else if (e.Control && e.KeyCode == Keys.L)
+            { s.LowPower(); }   // go to low power mode
             else if (e.Control && e.KeyCode == Keys.O)
             { s.btnByp_Click(null, null); }   // Toggle PTT
             //else if (e.Control && e.Shift && e.KeyCode == Keys.X)
@@ -396,6 +398,11 @@ namespace DataDecoder
         {
             s.lblHF_DoubleClick(null, null);
         }
+        // the rotor window was double-clicked
+        private void txtSP_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            s.ToggleRtrEnab();
+        }
 
         #endregion Form Events
 
@@ -427,8 +434,6 @@ namespace DataDecoder
         }
         
         #endregion Methods
-
-
 
     }// end Mini
 }

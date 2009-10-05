@@ -83,11 +83,13 @@ namespace DataDecoder
             this.btnMacro9 = new System.Windows.Forms.Button();
             this.lblStepFreq = new System.Windows.Forms.Label();
             this.grpStepCtrl = new System.Windows.Forms.GroupBox();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.grpRotor = new System.Windows.Forms.GroupBox();
             this.button4 = new System.Windows.Forms.Button();
             this.button5 = new System.Windows.Forms.Button();
             this.textBox3 = new System.Windows.Forms.TextBox();
             this.grpAmp = new System.Windows.Forms.GroupBox();
+            this.txtTune = new System.Windows.Forms.TextBox();
+            this.lblTune = new System.Windows.Forms.Label();
             this.lblHF = new System.Windows.Forms.Label();
             this.lblSF = new System.Windows.Forms.Label();
             this.label77 = new System.Windows.Forms.Label();
@@ -110,10 +112,8 @@ namespace DataDecoder
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.txtTune = new System.Windows.Forms.TextBox();
-            this.lblTune = new System.Windows.Forms.Label();
             this.grpStepCtrl.SuspendLayout();
-            this.groupBox1.SuspendLayout();
+            this.grpRotor.SuspendLayout();
             this.grpAmp.SuspendLayout();
             this.grpMacro.SuspendLayout();
             this.SuspendLayout();
@@ -257,6 +257,7 @@ namespace DataDecoder
             this.txtSP.TabIndex = 3;
             this.txtSP.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.toolTip1.SetToolTip(this.txtSP, "Enter Rotor Heading in whole degrees.");
+            this.txtSP.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.txtSP_MouseDoubleClick);
             // 
             // rb34
             // 
@@ -428,7 +429,7 @@ namespace DataDecoder
             this.btnHV.ForeColor = System.Drawing.SystemColors.ControlText;
             this.btnHV.Location = new System.Drawing.Point(130, 28);
             this.btnHV.Name = "btnHV";
-            this.btnHV.Size = new System.Drawing.Size(35, 22);
+            this.btnHV.Size = new System.Drawing.Size(37, 22);
             this.btnHV.TabIndex = 39;
             this.btnHV.Text = "Off";
             this.toolTip1.SetToolTip(this.btnHV, "Press to toggle High/Low plate voltage .");
@@ -443,7 +444,7 @@ namespace DataDecoder
             this.btnOper.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnOper.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnOper.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.btnOper.Location = new System.Drawing.Point(47, 28);
+            this.btnOper.Location = new System.Drawing.Point(46, 28);
             this.btnOper.Name = "btnOper";
             this.btnOper.Size = new System.Drawing.Size(38, 22);
             this.btnOper.TabIndex = 9;
@@ -460,9 +461,9 @@ namespace DataDecoder
             this.btnTune.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnTune.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnTune.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.btnTune.Location = new System.Drawing.Point(90, 28);
+            this.btnTune.Location = new System.Drawing.Point(89, 28);
             this.btnTune.Name = "btnTune";
-            this.btnTune.Size = new System.Drawing.Size(35, 22);
+            this.btnTune.Size = new System.Drawing.Size(37, 22);
             this.btnTune.TabIndex = 8;
             this.btnTune.Text = "Off";
             this.toolTip1.SetToolTip(this.btnTune, "Press to toggle Autotune/Manual tuning modes.");
@@ -836,21 +837,21 @@ namespace DataDecoder
             this.grpStepCtrl.TabStop = false;
             this.grpStepCtrl.Text = "SteppIR";
             // 
-            // groupBox1
+            // grpRotor
             // 
-            this.groupBox1.Controls.Add(this.btnSP);
-            this.groupBox1.Controls.Add(this.txtSP);
-            this.groupBox1.Controls.Add(this.button4);
-            this.groupBox1.Controls.Add(this.button5);
-            this.groupBox1.Controls.Add(this.textBox3);
-            this.groupBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.25F, System.Drawing.FontStyle.Bold);
-            this.groupBox1.ForeColor = System.Drawing.Color.Firebrick;
-            this.groupBox1.Location = new System.Drawing.Point(330, 30);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(89, 40);
-            this.groupBox1.TabIndex = 86;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Rotor";
+            this.grpRotor.Controls.Add(this.btnSP);
+            this.grpRotor.Controls.Add(this.txtSP);
+            this.grpRotor.Controls.Add(this.button4);
+            this.grpRotor.Controls.Add(this.button5);
+            this.grpRotor.Controls.Add(this.textBox3);
+            this.grpRotor.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.25F, System.Drawing.FontStyle.Bold);
+            this.grpRotor.ForeColor = System.Drawing.Color.Firebrick;
+            this.grpRotor.Location = new System.Drawing.Point(330, 30);
+            this.grpRotor.Name = "grpRotor";
+            this.grpRotor.Size = new System.Drawing.Size(89, 40);
+            this.grpRotor.TabIndex = 86;
+            this.grpRotor.TabStop = false;
+            this.grpRotor.Text = "Rotor";
             // 
             // button4
             // 
@@ -925,6 +926,29 @@ namespace DataDecoder
             this.grpAmp.TabIndex = 88;
             this.grpAmp.TabStop = false;
             this.grpAmp.Text = "Amplifier";
+            // 
+            // txtTune
+            // 
+            this.txtTune.BackColor = System.Drawing.SystemColors.Info;
+            this.txtTune.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtTune.Location = new System.Drawing.Point(173, 29);
+            this.txtTune.Name = "txtTune";
+            this.txtTune.Size = new System.Drawing.Size(26, 20);
+            this.txtTune.TabIndex = 60;
+            this.txtTune.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.txtTune.DoubleClick += new System.EventHandler(this.txtTune_DoubleClick);
+            this.txtTune.TextChanged += new System.EventHandler(this.txtTune_TextChanged);
+            // 
+            // lblTune
+            // 
+            this.lblTune.AutoSize = true;
+            this.lblTune.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.5F);
+            this.lblTune.ForeColor = System.Drawing.Color.Navy;
+            this.lblTune.Location = new System.Drawing.Point(174, 12);
+            this.lblTune.Name = "lblTune";
+            this.lblTune.Size = new System.Drawing.Size(23, 13);
+            this.lblTune.TabIndex = 61;
+            this.lblTune.Text = "Ant";
             // 
             // lblHF
             // 
@@ -1202,29 +1226,6 @@ namespace DataDecoder
             this.label1.TabIndex = 141;
             this.label1.Text = "F2";
             // 
-            // txtTune
-            // 
-            this.txtTune.BackColor = System.Drawing.SystemColors.Info;
-            this.txtTune.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtTune.Location = new System.Drawing.Point(172, 29);
-            this.txtTune.Name = "txtTune";
-            this.txtTune.Size = new System.Drawing.Size(26, 20);
-            this.txtTune.TabIndex = 60;
-            this.txtTune.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.txtTune.DoubleClick += new System.EventHandler(this.txtTune_DoubleClick);
-            this.txtTune.TextChanged += new System.EventHandler(this.txtTune_TextChanged);
-            // 
-            // lblTune
-            // 
-            this.lblTune.AutoSize = true;
-            this.lblTune.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.5F);
-            this.lblTune.ForeColor = System.Drawing.Color.Navy;
-            this.lblTune.Location = new System.Drawing.Point(174, 12);
-            this.lblTune.Name = "lblTune";
-            this.lblTune.Size = new System.Drawing.Size(23, 13);
-            this.lblTune.TabIndex = 61;
-            this.lblTune.Text = "Ant";
-            // 
             // Mini
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1240,7 +1241,7 @@ namespace DataDecoder
             this.Controls.Add(this.btnByp);
             this.Controls.Add(this.grpAmp);
             this.Controls.Add(this.AOT);
-            this.Controls.Add(this.groupBox1);
+            this.Controls.Add(this.grpRotor);
             this.Controls.Add(this.grpStepCtrl);
             this.Controls.Add(this.lblAvg);
             this.Controls.Add(this.txtAvg);
@@ -1267,8 +1268,8 @@ namespace DataDecoder
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Mini_KeyDown);
             this.grpStepCtrl.ResumeLayout(false);
             this.grpStepCtrl.PerformLayout();
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
+            this.grpRotor.ResumeLayout(false);
+            this.grpRotor.PerformLayout();
             this.grpAmp.ResumeLayout(false);
             this.grpAmp.PerformLayout();
             this.grpMacro.ResumeLayout(false);
@@ -1288,7 +1289,7 @@ namespace DataDecoder
         private System.Windows.Forms.GroupBox grpStepCtrl;
         private System.Windows.Forms.Button btnCalib;
         private System.Windows.Forms.Button btnHome;
-        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.GroupBox grpRotor;
         public System.Windows.Forms.TextBox txtFwd;
         public System.Windows.Forms.TextBox txtAvg;
         public System.Windows.Forms.TextBox txtTemp;
