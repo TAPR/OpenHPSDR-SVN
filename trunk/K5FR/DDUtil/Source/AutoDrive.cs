@@ -26,6 +26,7 @@ namespace DataDecoder
             num8.Value = set.def8;
             num9.Value = set.def9;
             num10.Value = set.def10;
+            numLow.Value = set.defLow;
         }
 
         private void num1_ValueChanged(object sender, EventArgs e)
@@ -76,6 +77,11 @@ namespace DataDecoder
         private void num10_ValueChanged(object sender, EventArgs e)
         {
             set.def10 = num10.Value; set.Save();
+        }
+
+        private void numLow_ValueChanged(object sender, EventArgs e)
+        {
+            set.defLow = numLow.Value; set.Save();
         }
 
     }

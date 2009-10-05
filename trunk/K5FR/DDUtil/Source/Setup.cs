@@ -115,7 +115,7 @@ namespace DataDecoder
         System.Timers.Timer lpTimer;
         System.Timers.Timer pollTimer;
         System.Timers.Timer propTimer;
-        System.Timers.Timer RtrReps;
+        System.Timers.Timer RepsTimer;
         System.Timers.Timer StepTimer;
         System.Timers.Timer tempTimer;
         System.Timers.Timer WatchDog;
@@ -387,10 +387,10 @@ namespace DataDecoder
             lpTimer.Enabled = false;
 
             // setup RtrReps Timer
-            RtrReps = new System.Timers.Timer();
-            RtrReps.Elapsed += new System.Timers.ElapsedEventHandler(RtrReps_Elapsed);
-            RtrReps.Interval = 500;
-            RtrReps.Enabled = false;
+            RepsTimer = new System.Timers.Timer();
+            RepsTimer.Elapsed += new System.Timers.ElapsedEventHandler(RtrReps_Elapsed);
+            RepsTimer.Interval = 1000;
+            RepsTimer.Enabled = false;
 
             // setup PA Temp Timer for a 1000 ms interrupt
             tempTimer = new System.Timers.Timer();
@@ -997,13 +997,6 @@ namespace DataDecoder
         {
             WriteToPort("ZZTI0;", iSleep);
             lblHighSWR.Visible = false;
-        }
-
-        private void chkTenths_CheckedChanged(object sender, EventArgs e)
-        {
-            if (chkTenths.Checked) set.Tenths = true;
-            else set.Tenths = false;
-            set.Save();
         }
 
         // the Amp160 check box has changed
@@ -4497,6 +4490,8 @@ namespace DataDecoder
             { ProcessMacroButton(12); }
             else if (e.Control && e.KeyCode == Keys.Oemtilde)
             { btnSplit_Click(null, null); } // Set Split
+            else if (e.Control && e.KeyCode == Keys.L)
+            { LowPower(); }
             else if (e.Control && e.KeyCode == Keys.O)
             { btnByp_Click(null, null); }   // Toggle PTT
             else if (e.Control && e.KeyCode == Keys.A)
@@ -4767,6 +4762,24 @@ namespace DataDecoder
         {
             ShowMini();
         }
+        // Main Menu|Tools|Start VSP Manager
+        private void vSPManagerToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                ProcessStartInfo psi = new ProcessStartInfo();
+                psi.WorkingDirectory = @"C:\Program Files\vspMgr\";
+                psi.FileName = @"C:\Program Files\vspMgr\vspMgr.exe";
+                Process myProcess = Process.Start(psi);
+            }
+            catch
+            {
+                MessageBox.Show(
+                    "C:\\Program Files\\vspMgr\\vspMgr.exe was not found!\n\n" + 
+                    "            Please start VSP Manager manually.", 
+                    "File not found!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            }
+        }
         // Main Menu|Help|DDUtil Help
         private void dDutilHelpToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -4943,6 +4956,17 @@ namespace DataDecoder
             }
             lastBand = "";  // force refresh of drive level.
         }
+        public void LowPower()
+        {
+            if (stsOper)
+            {
+                WriteToPort("ZZPC" + set.defLow.ToString().PadLeft(3, '0') + ";", iSleep); 
+                btnByp.BackColor = Color.Orange;
+                mini.btnByp.BackColor = Color.Orange;
+                txtAlcInd.BackColor = Color.Orange;
+                SetOperStby("OPER");
+            }
+        }
         // the check all button was pressed
         private void btnCkAll_Click(object sender, EventArgs e)
         {
@@ -5037,8 +5061,8 @@ namespace DataDecoder
 
         void PMSetup()
         {
-            cboPMport.SelectedIndex = set.PMport;
             cboPMcom.SelectedIndex = set.PMcom;
+            cboPMport.SelectedIndex = set.PMport;
             chkPM.Checked = set.chkPM;
         }
         // calc crc for inbuff and write cmd to port
@@ -5232,7 +5256,7 @@ namespace DataDecoder
                     PMport.Parity = System.IO.Ports.Parity.None;
                     PMport.StopBits = System.IO.Ports.StopBits.One;
                     break;
-                case 1: // 38400 8N1
+                case 1: // 19200 8N1
                     PMport.BaudRate = 19200;
                     PMport.DataBits = 8;
                     PMport.Parity = System.IO.Ports.Parity.None;
@@ -5673,17 +5697,17 @@ namespace DataDecoder
         // the rotor reps timer has elasped
         private void RtrReps_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
         {
-            if (posCtr != 0)
-            { RotorPort.Write(rtrCmd); posCtr -= 1; }
+            if (RepsCtr != 0)
+            { RotorPort.Write(rtrCmd); RepsCtr -= 1; }
             else
-            { RtrReps.Enabled = false; }
+            { RepsTimer.Enabled = false; }
         }
 
         string rtrCmd = "";
         string sRtrBuf = "";
         string lastPos = "";
-        int posCtr = 0;
-        const int posReps = 10;
+        int RepsCtr = 0;
+        const int posReps = 3;
         private void RotorPort_DataReceived(object sender, SerialDataReceivedEventArgs e)
         {
             string sCmd = "";
@@ -5719,8 +5743,8 @@ namespace DataDecoder
                             SetRotor(sCmd);                 //print new heading
                             lastPos = sCmd;                 //save position
                             rtrCmd = "W0000000000\x1f ";    // save new heading cmd
-                            posCtr = posReps;               // # reps to run timer
-                            RtrReps.Enabled = true;         // enable reps timer
+                            RepsCtr = posReps;               // # reps to run timer
+                            RepsTimer.Enabled = true;         // enable reps timer
                         }
                         break;
                     case RotorMod.GreenHeron:
@@ -5733,21 +5757,21 @@ namespace DataDecoder
                             RotorPort.Write(rtrCmd); //request position
                             SetRotor(sCmd);          //print new heading
                             lastPos = sCmd;          //save position
-                            posCtr = posReps;
-                            RtrReps.Enabled = true;
+                            RepsCtr = posReps;
+                            RepsTimer.Enabled = true;
                         }
                         break;
                     case RotorMod.Hygain:
                         sCmd = sCmd.Substring(0, sCmd.Length - 1);
-                        if (!chkDisFB.Checked && sCmd != lastPos)
+                        if (sCmd != lastPos)
                         {// if heading chgd, print new heading, 
                             {
-                                RotorPort.Write("AI1;"); //request position
+ //                               RotorPort.Write("AI1;"); //request position
                                 SetRotor(sCmd);
                                 lastPos = sCmd;
                                 rtrCmd = "AI1;";
-                                posCtr = posReps;
-                                RtrReps.Enabled = true;
+                                RepsCtr = posReps;
+                                RepsTimer.Enabled = true;
                             }
                         }
                         break;
@@ -5767,8 +5791,8 @@ namespace DataDecoder
                             SetRotor(sCmd);
                             lastPos = sCmd;
                             rtrCmd = "C\r";
-                            posCtr = posReps;
-                            RtrReps.Enabled = true;
+                            RepsCtr = posReps;
+                            RepsTimer.Enabled = true;
                         }
                         break;
                     default: break;
@@ -5960,7 +5984,7 @@ namespace DataDecoder
         // The Enable Rotor Check Box has changed
         private void chkRotorEnab_CheckedChanged(object sender, EventArgs e)
         {
-            if (chkRotorEnab.Checked)
+            if (chkRotorEnab.Checked && RotorPort.IsOpen)
             {
                 btnSP.Enabled = true;
                 btnLP.Enabled = true;
@@ -5971,6 +5995,9 @@ namespace DataDecoder
                 if (cboRotorPort.SelectedIndex > 0)
                 {
                     set.RotorEnab = true;
+                    RotorPort.DiscardInBuffer();
+                    RotorPort.DiscardOutBuffer();
+                    grpModel_CheckedChanged(null, null);
                 }
                 else
                 {
@@ -6013,6 +6040,7 @@ namespace DataDecoder
                 rotormod = RotorMod.GreenHeron;
                 grpSpeed.Visible = false;
                 suffix = ";";
+//                RotorPort.ReceivedBytesThreshold = 1;
                 if (chkRotorEnab.Checked) RotorPort.Write(rtrCmd);
                 chkTenths.Visible = true;
             }
@@ -6022,7 +6050,8 @@ namespace DataDecoder
                 rotormod = RotorMod.Hygain;
                 grpSpeed.Visible = false;
                 suffix = ";";
-                if (chkRotorEnab.Checked && !chkDisFB.Checked) RotorPort.Write("AI1;");
+//                RotorPort.ReceivedBytesThreshold = 4;
+                if (chkRotorEnab.Checked) RotorPort.Write("AI1;");
                 chkTenths.Visible = false;
             }
             else if (rbRtrMod4.Checked)
@@ -6075,6 +6104,21 @@ namespace DataDecoder
                 if (rotormod == RotorMod.M2R2800PX) RotorPort.Write("S" + rtrSpd + "\r");
                 if (rotormod == RotorMod.Yaesu) RotorPort.Write("X" + rtrSpd + "\r");
             }
+        }
+
+        private void chkTenths_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chkTenths.Checked)
+            {
+                set.Tenths = true;
+//                RotorPort.ReceivedBytesThreshold = 5;
+            }
+            else
+            {
+                set.Tenths = false;
+ //               RotorPort.ReceivedBytesThreshold = 4;
+            }
+            set.Save();
         }
         // *** Prefix Combo Box Events ***
         string pre = "";
@@ -6230,82 +6274,83 @@ namespace DataDecoder
             if (e.KeyCode == Keys.Enter) txtLoc_DoubleClick(null, null);
         }
         // the disable feedback check box has changed
-        private void chkDisFB_CheckedChanged(object sender, EventArgs e)
-        {
-            if (chkDisFB.Checked) set.DisFBchk = true;
-            else set.DisFBchk = false;
-        }
+        //private void chkDisFB_CheckedChanged(object sender, EventArgs e)
+        //{
+        //    if (chkDisFB.Checked) set.DisFBchk = true;
+        //    else set.DisFBchk = false;
+        //}
 
         #endregion Rotor Events
 
         #region # Rotor Methods #
 
+        // Toggle the rotor enable check box
+        public void ToggleRtrEnab()
+        {
+            if (chkRotorEnab.Checked)
+            {
+                chkRotorEnab.Checked = false;
+                chkRotorEnab.Checked = true;
+            }
+        }
         // Turn the rotor
+        string lastMove = "";
         public void TurnRotor(string heading)
         {
-            //            float currentSize;
-            switch (rotormod)
+            if (heading.PadLeft(3, '0') != lastMove)
             {
-                case RotorMod.AlphaSpid:
-                    int circle = 360;
-                    int bearing = Convert.ToInt32(heading);
-                    bearing = bearing + circle;
-                    RotorPort.Write("W" + bearing.ToString() + "0\x01     \x2f ");
-                    RotorPort.Write("W0000000000\x1f ");    // request position
-                    rtrCmd = "W0000000000\x1f ";            // save new position cmd
-                    posCtr = posReps;
-                    RtrReps.Enabled = true;
-                    break;
-                case RotorMod.GreenHeron:
-                    if (heading.Length < 3) heading = heading.PadLeft(3, '0');
-                    RotorPort.Write("AP1" + heading + "\r;"); // start rotor
-                    RotorPort.Write(rtrCmd);                  // request position
-                    //rtrCmd = "BI1;";
-                    posCtr = posReps;
-                    RtrReps.Enabled = true;
-                    break;
-                case RotorMod.Hygain:
-                    if (heading.Length < 3) heading = heading.PadLeft(3, '0');
-                    RotorPort.Write("AP1" + heading + ";"); // set heading
-                    RotorPort.Write("AM1;");                // start rotor
-                    if (!chkDisFB.Checked)
-                    {
+                switch (rotormod)
+                {
+                    case RotorMod.AlphaSpid:
+                        int circle = 360;
+                        int bearing = Convert.ToInt32(heading);
+                        bearing = bearing + circle;
+                        RotorPort.Write("W" + bearing.ToString() + "0\x01     \x2f ");
+                        RotorPort.Write("W0000000000\x1f ");    // request position
+                        rtrCmd = "W0000000000\x1f ";            // save new position cmd
+                        RepsCtr = posReps;
+                        RepsTimer.Enabled = true;
+                        break;
+                    case RotorMod.GreenHeron:
+                        if (heading.Length < 3) heading = heading.PadLeft(3, '0');
+                        RotorPort.Write("AP1" + heading + "\r;"); // start rotor
+                        RotorPort.Write(rtrCmd);                  // request position
+                        //rtrCmd = "BI1;";
+                        RepsCtr = posReps;
+                        RepsTimer.Enabled = true;
+                        break;
+                    case RotorMod.Hygain:
+                        if (heading.Length < 3) heading = heading.PadLeft(3, '0');
+                        RotorPort.Write("AP1" + heading + ";"); // set heading
+                        RotorPort.Write("AM1;");                // start rotor
                         RotorPort.Write("AI1;");    // request position
                         rtrCmd = "AI1;";
-                        posCtr = posReps;
-                        RtrReps.Enabled = true;
-                    }
-                    break;
-                case RotorMod.M2R2800PA:
-                    RotorPort.Write("S\r");                 // stop rotor
-                    RotorPort.Write(heading + "\r");        // start rotor
-                    RotorPort.Write("U\r");                 // request position
-                    break;
-                case RotorMod.M2R2800PX:
-                    RotorPort.Write("A" + heading + "\r");  // start rotor
-                    RotorPort.Write("U\r");                 // request position
-                    break;
-                case RotorMod.Prosistel:
-                    RotorPort.Write("\x02\x41\x47" + heading + "\r");
-                    break;
-                case RotorMod.Yaesu:
-                    RotorPort.Write("M" + heading + "\r");  // start rotor
-                    RotorPort.Write("C\r");                 // request position
-                    rtrCmd = "C\r;";
-                    posCtr = posReps;
-                    RtrReps.Enabled = true;
-                    break;
-                default: break;
+                        RepsCtr = posReps;
+                        RepsTimer.Enabled = true;
+                        break;
+                    case RotorMod.M2R2800PA:
+                        RotorPort.Write("S\r");                 // stop rotor
+                        RotorPort.Write(heading + "\r");        // start rotor
+                        RotorPort.Write("U\r");                 // request position
+                        break;
+                    case RotorMod.M2R2800PX:
+                        RotorPort.Write("A" + heading + "\r");  // start rotor
+                        RotorPort.Write("U\r");                 // request position
+                        break;
+                    case RotorMod.Prosistel:
+                        RotorPort.Write("\x02\x41\x47" + heading + "\r");
+                        break;
+                    case RotorMod.Yaesu:
+                        RotorPort.Write("M" + heading + "\r");  // start rotor
+                        RotorPort.Write("C\r");                 // request position
+                        rtrCmd = "C\r;";
+                        RepsCtr = posReps;
+                        RepsTimer.Enabled = true;
+                        break;
+                    default: break;
+                }
+                lastMove = heading;
             }
-            //Notification alert = new Notification();
-            //Notification.notiIntvl = 2000;
-            //Notification.notiMsg = "Starting Antenna Rotation!\r";
-            //currentSize = alert.label1.Font.Size;
-            //currentSize += 2.0F;
-            //alert.label1.Font = new Font(alert.label1.Font.Name, currentSize,
-            //alert.label1.Font.Style, alert.label1.Font.Unit);
-            //alert.Show();
-
         }
         // Get DXCC data from the database
         private void GetDXCC(string SQL)
@@ -6464,15 +6509,16 @@ namespace DataDecoder
                 cboEntity.Sorted = true;
             }
             conn.Close();
+
             // Load saved settings
-            chkDisFB.Checked = set.DisFBchk;
+//            chkDisFB.Checked = set.DisFBchk;
             txtLat.Text = set.Latitude;
             txtLong.Text = set.Longitude;
             txtGrid.Text = set.Grid;
             try { cboRotorPort.SelectedIndex = set.RotorPort; }
             catch { cboRotorPort.SelectedIndex = -1; BadPort("Rotor"); }
             cboRotorCom.SelectedIndex = set.RotorCom;
-            chkRotorEnab.Checked = set.RotorEnab;
+
             switch (set.RotorSpeed)
             {
                 case 0: rbRtrSpd1.Checked = true; break;
@@ -6485,6 +6531,7 @@ namespace DataDecoder
                 case 0: rbRtrMod1.Checked = true; break;  // Alpha Spid
                 case 1: rbRtrMod2.Checked = true; break;  // Green Heron
                 case 2: rbRtrMod3.Checked = true; break;  // HyGain
+                    
                 case 3: rbRtrMod4.Checked = true;         // M2RC2800A-P
                     if (cboRotorPort.SelectedIndex > 0 && chkRotorEnab.Checked)
                         RotorPort.Write("S" + rtrSpd + "\r");
@@ -6503,6 +6550,7 @@ namespace DataDecoder
                     break;
                 default: break;
             }
+            chkRotorEnab.Checked = set.RotorEnab;
         }
 
         #endregion Rotor Setup
@@ -6648,6 +6696,9 @@ namespace DataDecoder
                                     case "006": WriteToPort("ZZPC" + set.pwr10 + ";", iSleep);
                                         break;
                                 }
+                                btnByp.BackColor = Color.Lime;
+                                mini.btnByp.BackColor = Color.Lime;
+                                txtAlcInd.BackColor = Color.Lime;
                             }
                             else if (chkAutoDrv.Checked)
                             {   // If in StandBy set power to the default value
