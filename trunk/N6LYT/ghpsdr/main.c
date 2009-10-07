@@ -452,7 +452,7 @@ void buildMainUI() {
 
     // add the subrx window
     gtk_widget_show(subrxWindow);
-    gtk_fixed_put((GtkFixed*)mainFixed,subrxWindow,710,625);
+    gtk_fixed_put((GtkFixed*)mainFixed,subrxWindow,710,575);
 
     gtk_widget_set_size_request(GTK_WIDGET(mainFixed),1180,700);
     gtk_widget_show(mainFixed);

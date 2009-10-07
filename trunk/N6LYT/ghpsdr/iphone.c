@@ -61,6 +61,12 @@ void iphone_send_samples();
 #define PREFIX 48
 unsigned char iphone_samples[SPECTRUM_BUFFER_SIZE+PREFIX];
 
+int rejectAddress(char* address) {
+    int result=0;
+    if(strcmp(address,"222.208.183.218")==0) result=1;
+    return result;
+}
+
 void iphone_init() {
 
     int rc;
@@ -111,32 +117,36 @@ fprintf(stderr,"iphone_thread: accept\n");
 
             fprintf(stderr,"iphone connection from %s:%d\n",inet_ntoa(client.sin_addr),ntohs(client.sin_port));
 
-            while(1) {
+            if(rejectAddress(inet_ntoa(client.sin_addr))) {
+                fprintf(stderr,"connection rejected!\n");
+            } else {
+                while(1) {
+                    bytesRead=recv(clientSocket, message, sizeof(message), 0);
+                    if(bytesRead<=0) {
+                        perror("iphone recv");
+                        break;
+                    }
+                    message[bytesRead]=0;
 
-
-                bytesRead=recv(clientSocket, message, sizeof(message), 0);
-                if(bytesRead<=0) {
-                    perror("iphone recv");
-                    break;
-                }
-                message[bytesRead]=0;
-
-                if(strncmp(message,"getSpectrum",11)==0) {
-                    iphone_send_samples();
-                } else if(strncmp(message,"scrollFrequency",15)==0) {
+                    if(strncmp(message,"getSpectrum",11)==0) {
+                        iphone_send_samples();
+                    } else if(strncmp(message,"scrollFrequency",15)==0) {
 //fprintf(stderr,"iphone message: %s\n",message);
-                    long *increment=malloc(sizeof(long));
-                    *increment=atol(&message[16]);
-                    g_idle_add(vfoStepFrequency,(gpointer)increment);
+                        long *increment=malloc(sizeof(long));
+                        *increment=atol(&message[16]);
+                        g_idle_add(vfoStepFrequency,(gpointer)increment);
 //fprintf(stderr,"scrollFrequency %ld\n",*increment);
-                } else if(strncmp(message,"band",4)==0) {
-                    // select a band
-                    int *band=malloc(sizeof(int));
-                    *band=atoi(&message[5]);
+                    } else if(strncmp(message,"band",4)==0) {
+                        // select a band
+                        int *band=malloc(sizeof(int));
+                        *band=atoi(&message[5]);
 //fprintf(stderr,"select band %d\n",*band);
-                    g_idle_add(remoteSetBand,(gpointer)band);
+                        g_idle_add(remoteSetBand,(gpointer)band);
+                    } else {
+fprintf(stderr,"iphone_thread: invalid command: %s\n",message);
+                        break;
+                    }
                 }
-
             }
 
             close(clientSocket);

@@ -237,8 +237,13 @@ gboolean spectrum_button_press_event(GtkWidget* widget,GdkEventButton* event) {
             break;
         case 3:
             // right button - click to frequency (to cursor) 
-            increment=(int)((float)spectrumLow+((float)event->x*((float)spectrumHigh-(float)spectrumLow)/(float)spectrumWIDTH));
-            if(!bSubRx) vfoIncrementFrequency(increment);
+            if(subrx) {
+                int subCursor=((subrxFrequency-frequencyA)-spectrumLow)*spectrumWIDTH/(spectrumHigh-spectrumLow);
+                increment=-(int)(subCursor+((float)event->x*((float)spectrumHigh-(float)spectrumLow)/(float)spectrumWIDTH));
+            } else {
+                increment=(int)((float)spectrumLow+((float)event->x*((float)spectrumHigh-(float)spectrumLow)/(float)spectrumWIDTH));
+            }
+            vfoIncrementFrequency(increment);
             break;
     }
     return TRUE;
@@ -260,7 +265,8 @@ gboolean spectrum_button_release_event(GtkWidget* widget,GdkEventButton* event) 
             // left button  - click to frequency (centered in filter) if not dragged
             if(!hasMoved) {
                 increment=(int)((float)spectrumLow+((float)event->x*((float)spectrumHigh-(float)spectrumLow)/(float)spectrumWIDTH)-((float)filterLow+((float)filterHigh-(float)filterLow)/2.0));
-                if(!bSubRx) vfoIncrementFrequency(increment);
+                if(!subrx)
+                    vfoIncrementFrequency(increment);
             }
             break;
         case 2:
@@ -287,7 +293,7 @@ gboolean spectrum_motion_notify_event(GtkWidget* widget,GdkEventMotion* event) {
         int moved=lastX-event->x;
         //int f=moved*(spectrumHigh-spectrumLow)/spectrumWIDTH;
         int f=(int)((float)moved*((float)spectrumHigh-(float)spectrumLow)/(float)spectrumWIDTH);
-        if(bSubRx) f=-f;
+        if(subrx) f=-f;
         vfoIncrementFrequency(f);
         lastX=event->x;
         hasMoved=TRUE;
@@ -452,9 +458,9 @@ void drawSpectrum(int height) {
         layout = pango_layout_new (context);
         pango_layout_set_width(layout,spectrumWIDTH*PANGO_SCALE);
 
-        if(bSubRx) {
-            filterLeftX=(filterLow+(frequencyB-frequencyA)-spectrumLow)*spectrumWIDTH/(spectrumHigh-spectrumLow);
-            filterRightX=(filterHigh+(frequencyB-frequencyA)-spectrumLow)*spectrumWIDTH/(spectrumHigh-spectrumLow);
+        if(subrx) {
+            filterLeftX=(filterLow+(subrxFrequency-frequencyA)-spectrumLow)*spectrumWIDTH/(spectrumHigh-spectrumLow);
+            filterRightX=(filterHigh+(subrxFrequency-frequencyA)-spectrumLow)*spectrumWIDTH/(spectrumHigh-spectrumLow);
             if(filterLeftX==filterRightX) filterRightX++;
             gdk_gc_set_rgb_fg_color(gc,&subrxFilterColor);
             gdk_draw_rectangle(spectrumPixmap,gc,TRUE,filterLeftX,0,filterRightX-filterLeftX,height);

@@ -29,6 +29,7 @@
 #include "transmit.h"
 #include "main.h"
 #include "sinewave.h"
+#include "vfo.h"
 
 /*
  *   ozy interface
@@ -49,9 +50,12 @@ static pthread_t ep4_io_thread_id;
 static pthread_t ozy_input_buffer_thread_id;
 static pthread_t ozy_spectrum_buffer_thread_id;
 
-static int frequency=7056000;
-static int frequency_changed=1;
+static long rxFrequency=7056000;
+static int rxFrequency_changed=1;
+static long txFrequency=7056000;
+static int txFrequency_changed=1;
 
+static int force_write=0;
 
 static unsigned char control_in[5]={0x00,0x00,0x00,0x00,0x00};
 
@@ -112,6 +116,10 @@ int sampleRate=48000;  // default 48k
 
 int mox=0;             // default not transmitting
 
+int ptt=0;
+int dot=0;
+int dash=0;
+
 /* --------------------------------------------------------------------------*/
 /** 
 * @brief Process the ozy input buffer
@@ -124,6 +132,10 @@ void process_ozy_input_buffer(char* buffer) {
     int c=0;
     unsigned char ozy_samples[8*8];
 
+    int last_ptt;
+    int last_dot;
+    int last_dash;
+
     if(buffer[b++]==SYNC && buffer[b++]==SYNC && buffer[b++]==SYNC) {
         // extract control bytes
         control_in[0]=buffer[b++];
@@ -132,36 +144,38 @@ void process_ozy_input_buffer(char* buffer) {
         control_in[3]=buffer[b++];
         control_in[4]=buffer[b++];
 
-        if(control_in[0]&0x01) {
-            // PPT/DOT
-            fprintf(stderr,"PTT/DOT\n");
-        } else if(control_in[0]&0x02) {
-            // DASH
-            fprintf(stderr,"DASH\n");
+        last_ptt=ptt;
+        last_dot=dot;
+        last_dash=dash;
+        ptt=(control_in[0]&0x01)==0x01;
+        dash=(control_in[0]&0x02)==0x02;
+        dot=(control_in[0]&0x04)==0x04;
+
+        if(ptt!=last_ptt || dot!=last_dot || dash!=last_dash) {
+            //vfoTransmit(ptt | dot | dash);
+            int *vfoState=malloc(sizeof(int));
+            *vfoState=ptt|dot|dash;
+            g_idle_add(vfoTransmit,(gpointer)vfoState);
         }
 
-        if((control_in[0]&0x04)==0) {
-
+        if((control_in[0]&0x08)==0) {
             if(control_in[1]&0x01) {
                 lt2208ADCOverflow=1;
             }
-
             if(mercury_software_version!=control_in[2]) {
                 mercury_software_version=control_in[2];
                 fprintf(stderr,"  Mercury Software version: %d (0x%0X)\n",mercury_software_version,mercury_software_version);
             }
-
-        } else if((control_in[0]&0x04)==0x04) {
+            if(penelope_software_version!=control_in[3]) {
+                penelope_software_version=control_in[3];
+                fprintf(stderr,"  Penelope Software version: %d (0x%0X)\n",penelope_software_version,penelope_software_version);
+            }
+            if(ozy_software_version!=control_in[4]) {
+                ozy_software_version=control_in[4];
+                fprintf(stderr,"  Ozy Software version: %d (0x%0X)\n",ozy_software_version,ozy_software_version);
+            }
+        } else if(control_in[0]&0x08) {
             forwardPower=(control_in[1]<<8)+control_in[2];
-        }
-
-        if(penelope_software_version!=control_in[3]) {
-            penelope_software_version=control_in[3];
-            fprintf(stderr,"  Penelope Software version: %d (0x%0X)\n",penelope_software_version,penelope_software_version);
-        }
-        if(ozy_software_version!=control_in[4]) {
-            ozy_software_version=control_in[4];
-            fprintf(stderr,"  Ozy Software version: %d (0x%0X)\n",ozy_software_version,ozy_software_version);
         }
 
         // extract the 63 samples
@@ -199,8 +213,7 @@ void process_ozy_input_buffer(char* buffer) {
                     
                     if(tuning) {
                         tuningPhase=sineWave(mic_left_buffer,1024,tuningPhase,(double)cwPitch);
-                    }
-                    
+                    } 
 /*
                     if(!tuning) {
 */
@@ -220,6 +233,28 @@ void process_ozy_input_buffer(char* buffer) {
                         }
                     }
 */
+                } else if(dot) {
+                    switch(mode) {
+                        case modeUSB:
+                        case modeCWU:
+                            tuningPhase=cwSignal(left_tx_buffer,right_tx_buffer,1024,tuningPhase,(double)cwPitch);
+                            break;
+                        case modeLSB:
+                        case modeCWL:
+                            tuningPhase=cwSignal(right_tx_buffer,left_tx_buffer,1024,tuningPhase,(double)cwPitch);
+                            break;
+                    }
+                } else if (dash) {
+                    switch(mode) {
+                        case modeUSB:
+                        case modeCWU:
+                            tuningPhase=cwSignal(left_tx_buffer,right_tx_buffer,1024,tuningPhase,(double)cwPitch);
+                            break;
+                        case modeLSB:
+                        case modeCWL:
+                            tuningPhase=cwSignal(right_tx_buffer,left_tx_buffer,1024,tuningPhase,(double)cwPitch);
+                            break;
+                    }
                 }
 
                 // process the output
@@ -227,7 +262,7 @@ void process_ozy_input_buffer(char* buffer) {
                     left_rx_sample=(short)(left_output_buffer[j]*32767.0);
                     right_rx_sample=(short)(right_output_buffer[j]*32767.0);
 
-                    if(mox) {
+                    if(mox || ptt || dot || dash ) {
                         left_tx_sample=(short)(left_tx_buffer[j]*32767.0*rfGain);
                         right_tx_sample=(short)(right_tx_buffer[j]*32767.0*rfGain);
                     } else {
@@ -348,25 +383,55 @@ void* ozy_ep6_ep2_io_thread(void* arg) {
         }
 
         // see if we have enough to send a buffer or force the write if we have a timeout
-        if((bytes==USB_TIMEOUT) || ozy_ringbuffer_entries(ozy_output_buffer)>=(OZY_BUFFER_SIZE-8)) {
+        if((bytes==USB_TIMEOUT) || ozy_ringbuffer_entries(ozy_output_buffer)>=(OZY_BUFFER_SIZE-8) || force_write || frequencyAChanged || frequencyBChanged) {
             
+            force_write=0;
+
             output_buffer[0]=SYNC;
             output_buffer[1]=SYNC;
             output_buffer[2]=SYNC;
 
-            if(frequency_changed) {
-                output_buffer[3]=control_out[0]|0x02;
-                output_buffer[4]=frequency>>24;
-                output_buffer[5]=frequency>>16;
-                output_buffer[6]=frequency>>8;
-                output_buffer[7]=frequency;
-                frequency_changed=0;
+            if(splitChanged) {
+                output_buffer[3]=control_out[0];
+                output_buffer[4]=control_out[1];
+                output_buffer[5]=control_out[2];
+                output_buffer[6]=control_out[3];
+                if(bSplit) {
+                    output_buffer[7]=control_out[4]|0x04;
+                } else {
+                    output_buffer[7]=control_out[4];
+                }
+                splitChanged=0;
+            } else if(frequencyAChanged) {
+                if(bSplit) {
+                    output_buffer[3]=control_out[0]|0x04; // Mercury (1)
+                } else {
+                    output_buffer[3]=control_out[0]|0x02; // Mercury and Penelope
+                }
+                output_buffer[4]=ddsAFrequency>>24;
+                output_buffer[5]=ddsAFrequency>>16;
+                output_buffer[6]=ddsAFrequency>>8;
+                output_buffer[7]=ddsAFrequency;
+                frequencyAChanged=0;
+            } else if(frequencyBChanged) {
+                if(bSplit) {
+                    output_buffer[3]=control_out[0]|0x02; // Penelope
+                    output_buffer[4]=ddsBFrequency>>24;
+                    output_buffer[5]=ddsBFrequency>>16;
+                    output_buffer[6]=ddsBFrequency>>8;
+                    output_buffer[7]=ddsBFrequency;
+                }
+                frequencyBChanged=0;
             } else {
                 output_buffer[3]=control_out[0];
                 output_buffer[4]=control_out[1];
                 output_buffer[5]=control_out[2];
                 output_buffer[6]=control_out[3];
-                output_buffer[7]=control_out[4];
+                if(bSplit) {
+                    output_buffer[7]=control_out[4]|0x04;
+                } else {
+                    output_buffer[7]=control_out[4];
+                }
             }
 
             if(ozy_ringbuffer_entries(ozy_output_buffer)>=(OZY_BUFFER_SIZE-8)) {
@@ -380,6 +445,8 @@ void* ozy_ep6_ep2_io_thread(void* arg) {
             if(bytes!=OZY_BUFFER_SIZE) {
                 perror("OzyBulkWrite failed");
             }
+            //dump_ozy_buffer("output buffer",output_buffer);
+
             //if(mox) {
             //    dump_ozy_buffer("output buffer",output_buffer);
             //}
@@ -603,17 +670,6 @@ void setLT2208Random(int random) {
 
 /* --------------------------------------------------------------------------*/
 /** 
-* @brief Set Frequency
-* 
-* @param f
-*/
-void setFrequency(double f) {
-    frequency=(int)((f*1000000.0)+0.5);
-    frequency_changed=1;
-}
-
-/* --------------------------------------------------------------------------*/
-/** 
 * @brief Initialize Ozy
 * 
 * @param sample_rate
@@ -666,6 +722,7 @@ int ozy_init() {
             break;
     }
 
+    force_write=0;
 
     // create buffers of ozy
     create_ozy_ringbuffer(68*512);

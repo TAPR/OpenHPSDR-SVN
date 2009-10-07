@@ -43,17 +43,24 @@
 #include "ozy.h"
 #include "property.h"
 #include "vfo.h"
+#include "subrx.h"
 
 GtkWidget* vfoFixed;
 
 long long frequencyA=7100000LL;
 long long frequencyB=7100000LL;
 
-long long frequencyLO=0LL;
+int frequencyAChanged=0;
+int frequencyBChanged=0;
 
-long long dspFrequency;
-long long ddsFrequency;
-long long ifFrequency;
+long long frequencyALO=0LL;
+long long frequencyBLO=0LL;
+
+long long dspAFrequency;
+long long ddsAFrequency;
+
+long long dspBFrequency;
+long long ddsBFrequency;
 
 #define OFFSET 0
 
@@ -70,6 +77,7 @@ GtkWidget* vfoControlFrame;
 GtkWidget* buttonAtoB;
 GtkWidget* buttonBtoA;
 GtkWidget* buttonAswapB;
+GtkWidget* buttonSplit;
 
 long frequencyIncrement=100;
 GtkWidget* buttonFrequencyUp;
@@ -81,10 +89,10 @@ GtkWidget* buttonFrequencyDown;
 
 int aTransmitting=0;
 int bTransmitting=0;
-int bSubRx=0;
+int bSplit=0;
+int splitChanged=0;
 
 void setIncrement(int increment);
-void vfoSetRxFrequency();
 
 /* --------------------------------------------------------------------------*/
 /** 
@@ -164,7 +172,7 @@ void updateVfoBDisplay() {
         layout = pango_layout_new (context);
         pango_layout_set_width(layout,vfoBFrequency->allocation.width*PANGO_SCALE);
         pango_layout_set_alignment(layout,PANGO_ALIGN_RIGHT);
-        sprintf(temp,"<span foreground='%s' background='#2C2C2C' font_desc='Sans Bold 24'>% 7lld.%03lld.%03lld </span>",bSubRx?"#00FF00":"#C0C0C0",frequencyB/1000000LL,(frequencyB%1000000LL)/1000LL,frequencyB%1000LL);
+        sprintf(temp,"<span foreground='%s' background='#2C2C2C' font_desc='Sans Bold 24'>% 7lld.%03lld.%03lld </span>",bTransmitting?"#FF0000":"#C0C0C0",frequencyB/1000000LL,(frequencyB%1000000LL)/1000LL,frequencyB%1000LL);
 
         pango_layout_set_markup(layout,temp,-1);
         gdk_draw_layout(GDK_DRAWABLE(vfoBPixmap),gc,0,0,layout);
@@ -333,17 +341,16 @@ gboolean vfoBFrequency_expose_event(GtkWidget* widget,GdkEventExpose* event) {
 */
 void setAFrequency(long long f) {
 
-    dspFrequency=0;
-    ddsFrequency=0;
+    dspAFrequency=0;
+    ddsAFrequency=0;
     frequencyA=f;
 
-    dspFrequency=0;
-    ddsFrequency=f-frequencyLO;
-
-    vfoSetRxFrequency();
-
+    dspAFrequency=0;
+    ddsAFrequency=f-frequencyALO;
 
     updateVfoADisplay();
+
+    frequencyAChanged=1;
 
     // check the band
     if(displayHF) {
@@ -358,14 +365,6 @@ void setAFrequency(long long f) {
 
 /* --------------------------------------------------------------------------*/
 /** 
-* @brief Set VFO RX frequency
-*/
-void vfoSetRxFrequency() {
-    setFrequency((float)ddsFrequency/1000000.0f);
-}
-
-/* --------------------------------------------------------------------------*/
-/** 
 * @brief  Set the B vfo frequency
 * 
 * @param f
@@ -376,20 +375,33 @@ void setBFrequency(long long f) {
     PangoLayout *layout;
     char temp[128];
 
-    if(bSubRx) {
-        if((f>=(frequencyA-(sampleRate/2)))&& (f<=(frequencyA+(sampleRate/2)))) {
-            frequencyB=f;
-        }
-    } else {
-        frequencyB=f;
-    }
-  
+    dspBFrequency=0;
+    ddsBFrequency=0;
+    frequencyB=f;
+
+    dspBFrequency=0;
+    ddsBFrequency=f-frequencyBLO;
+
     updateVfoBDisplay();
 
-    if(bSubRx) {
-        long long diff=frequencyA-frequencyB;
-        SetRXOsc(0,1,(double)diff);
-    }
+    frequencyBChanged=1;
+
+//    if(bSubRx) {
+//        /* sub rx can only run within the sampled spectrum range */
+//        if((f>=(frequencyA-(sampleRate/2)))&& (f<=(frequencyA+(sampleRate/2)))) {
+//            frequencyB=f;
+//        }
+//    } else {
+//        frequencyB=f;
+//    }
+//    updateVfoBDisplay();
+//    frequencyBChanged=1;
+//
+//    if(bSubRx) {
+//        long long diff=frequencyA-frequencyB;
+//        SetRXOsc(0,1,(double)diff);
+//    }
+
 }
 
 /* --------------------------------------------------------------------------*/
@@ -401,6 +413,8 @@ void setBFrequency(long long f) {
 */
 void vfoCallback(GtkWidget* widget,gpointer data) {
     long long f;
+    GtkWidget* label;
+
     if(widget==buttonAtoB) {
         setBFrequency(frequencyA);
     } else if(widget==buttonBtoA) {
@@ -409,6 +423,21 @@ void vfoCallback(GtkWidget* widget,gpointer data) {
         f=frequencyA;
         setAFrequency(frequencyB);
         setBFrequency(f);
+    } else if(widget==buttonSplit) {
+        label=gtk_bin_get_child((GtkBin*)buttonSplit);
+        if(bSplit) {
+            bSplit=0;
+            gtk_widget_modify_fg(label, GTK_STATE_NORMAL, &white);
+            gtk_widget_modify_fg(label, GTK_STATE_PRELIGHT, &white);
+            splitChanged=1;
+            frequencyAChanged=1;
+        } else {
+            bSplit=1;
+            gtk_widget_modify_fg(label, GTK_STATE_NORMAL, &red);
+            gtk_widget_modify_fg(label, GTK_STATE_PRELIGHT, &red);
+            splitChanged=1;
+            frequencyBChanged=1;
+        }
     }
 }
 
@@ -419,11 +448,33 @@ void vfoCallback(GtkWidget* widget,gpointer data) {
 * @param increment
 */
 void vfoIncrementFrequency(long increment) {
-    if(bSubRx) {
-        setBFrequency(frequencyB+(long long)increment);
+    if(subrx) {
+        subrxIncrementFrequency(increment);
     } else {
         setAFrequency(frequencyA+(long long)increment);
     }
+}
+
+/* --------------------------------------------------------------------------*/
+/** 
+/* --------------------------------------------------------------------------*/
+/** 
+* @brief Increment the A frequency
+* 
+* @param increment
+*/
+void vfoIncrementAFrequency(long increment) {
+    setAFrequency(frequencyA+(long long)increment);
+}
+
+/* --------------------------------------------------------------------------*/
+/** 
+* @brief Increment the B frequency
+* 
+* @param increment
+*/
+void vfoIncrementBFrequency(long increment) {
+    setBFrequency(frequencyB+(long long)increment);
 }
 
 /* --------------------------------------------------------------------------*/
@@ -432,11 +483,11 @@ void vfoIncrementFrequency(long increment) {
 * 
 * @param increment
 */
-void vfoStepFrequency(gpointer data) {
+int vfoStepFrequency(gpointer data) {
     long step=*(long*)data;
-    //vfoIncrementFrequency(step*frequencyIncrement);
     vfoIncrementFrequency(step*50);
     free(data);
+    return 0;
 }
 
 /* --------------------------------------------------------------------------*/
@@ -515,10 +566,17 @@ void frequencyReleasedCallback(GtkWidget* widget,gpointer data) {
 * @return 
 */
 gboolean frequency_scroll_event(GtkWidget* widget,GdkEventScroll* event) {
+    long increment=frequencyIncrement;
+
     if(event->direction==GDK_SCROLL_UP) {
-        vfoIncrementFrequency(frequencyIncrement);
+        increment=frequencyIncrement;
     } else {
-        vfoIncrementFrequency(-frequencyIncrement);
+        increment=-frequencyIncrement;
+    }
+    if(widget==vfoAFrequency) {
+        vfoIncrementAFrequency(increment);
+    } else {
+        vfoIncrementBFrequency(increment);
     }
 }
 
@@ -726,7 +784,8 @@ void previousIncrement() {
 * @brief Set IF frequency
 */
 void setLOFrequency(long long freq) {
-    frequencyLO=freq;
+    frequencyALO=freq;
+    frequencyBLO=freq;
 }
 
 /* --------------------------------------------------------------------------*/
@@ -806,6 +865,8 @@ GtkWidget* buildVfoUI() {
     gtk_widget_set_size_request(GTK_WIDGET(vfoBFrequency),300,35);
     g_signal_connect(G_OBJECT (vfoBFrequency),"configure_event",G_CALLBACK(vfoBFrequency_configure_event),NULL);
     g_signal_connect(G_OBJECT (vfoBFrequency),"expose_event",G_CALLBACK(vfoBFrequency_expose_event),NULL);
+    g_signal_connect(G_OBJECT(vfoBFrequency),"scroll_event",G_CALLBACK(frequency_scroll_event),NULL);
+    gtk_widget_set_events(vfoBFrequency,GDK_EXPOSURE_MASK|GDK_SCROLL_MASK);
     gtk_widget_show(vfoBFrequency);
     gtk_widget_show(vfoBFrame);
     gtk_container_add((GtkContainer*)vfoBFrame,vfoBFrequency);
@@ -818,7 +879,7 @@ GtkWidget* buildVfoUI() {
     gtk_widget_modify_bg(buttonAtoB, GTK_STATE_NORMAL, &buttonBackground);
     label=gtk_bin_get_child((GtkBin*)buttonAtoB);
     gtk_widget_modify_fg(label, GTK_STATE_NORMAL, &white);
-    gtk_widget_set_size_request(GTK_WIDGET(buttonAtoB),60,25);
+    gtk_widget_set_size_request(GTK_WIDGET(buttonAtoB),45,25);
     g_signal_connect(G_OBJECT(buttonAtoB),"clicked",G_CALLBACK(vfoCallback),NULL);
     gtk_widget_show(buttonAtoB);
     gtk_fixed_put((GtkFixed*)vfoFixed,buttonAtoB,300,0);
@@ -827,19 +888,28 @@ GtkWidget* buildVfoUI() {
     gtk_widget_modify_bg(buttonAswapB, GTK_STATE_NORMAL, &buttonBackground);
     label=gtk_bin_get_child((GtkBin*)buttonAswapB);
     gtk_widget_modify_fg(label, GTK_STATE_NORMAL, &white);
-    gtk_widget_set_size_request(GTK_WIDGET(buttonAswapB),80,25);
+    gtk_widget_set_size_request(GTK_WIDGET(buttonAswapB),60,25);
     g_signal_connect(G_OBJECT(buttonAswapB),"clicked",G_CALLBACK(vfoCallback),NULL);
     gtk_widget_show(buttonAswapB);
-    gtk_fixed_put((GtkFixed*)vfoFixed,buttonAswapB,360,0);
+    gtk_fixed_put((GtkFixed*)vfoFixed,buttonAswapB,345,0);
 
     buttonBtoA = gtk_button_new_with_label ("A<B");
     gtk_widget_modify_bg(buttonBtoA, GTK_STATE_NORMAL, &buttonBackground);
     label=gtk_bin_get_child((GtkBin*)buttonBtoA);
     gtk_widget_modify_fg(label, GTK_STATE_NORMAL, &white);
-    gtk_widget_set_size_request(GTK_WIDGET(buttonBtoA),60,25);
+    gtk_widget_set_size_request(GTK_WIDGET(buttonBtoA),45,25);
     g_signal_connect(G_OBJECT(buttonBtoA),"clicked",G_CALLBACK(vfoCallback),NULL);
     gtk_widget_show(buttonBtoA);
-    gtk_fixed_put((GtkFixed*)vfoFixed,buttonBtoA,440,0);
+    gtk_fixed_put((GtkFixed*)vfoFixed,buttonBtoA,405,0);
+
+    buttonSplit = gtk_button_new_with_label ("Split");
+    gtk_widget_modify_bg(buttonSplit, GTK_STATE_NORMAL, &buttonBackground);
+    label=gtk_bin_get_child((GtkBin*)buttonSplit);
+    gtk_widget_modify_fg(label, GTK_STATE_NORMAL, &white);
+    gtk_widget_set_size_request(GTK_WIDGET(buttonSplit),50,25);
+    g_signal_connect(G_OBJECT(buttonSplit),"clicked",G_CALLBACK(vfoCallback),NULL);
+    gtk_widget_show(buttonSplit);
+    gtk_fixed_put((GtkFixed*)vfoFixed,buttonSplit,450,0);
 
     buttonFrequencyUp = gtk_button_new_with_label ("^");
     gtk_widget_modify_bg(buttonFrequencyUp, GTK_STATE_NORMAL, &buttonBackground);
@@ -906,9 +976,21 @@ void vfoSaveState() {
 
     sprintf(string,"%lld",frequencyA);
     setProperty("vfoA",string);
+    sprintf(string,"%lld",frequencyALO);
+    setProperty("vfoALO",string);
+    sprintf(string,"%lld",dspAFrequency);
+    setProperty("vfoDspAFrequency",string);
+    sprintf(string,"%lld",ddsAFrequency);
+    setProperty("vfoDdsAFrequency",string);
 
     sprintf(string,"%lld",frequencyB);
     setProperty("vfoB",string);
+    sprintf(string,"%lld",frequencyBLO);
+    setProperty("vfoBLO",string);
+    sprintf(string,"%lld",dspBFrequency);
+    setProperty("vfoDspBFrequency",string);
+    sprintf(string,"%lld",ddsBFrequency);
+    setProperty("vfoDdsBFrequency",string);
 }
 
 /* --------------------------------------------------------------------------*/
@@ -921,24 +1003,49 @@ void vfoRestoreState() {
  
     value=getProperty("vfoA");
     if(value) frequencyA=atoll(value);
+    value=getProperty("vfoALO");
+    if(value) frequencyALO=atoll(value);
+    value=getProperty("vfoDspAFrequency");
+    if(value) dspAFrequency=atoll(value);
+    value=getProperty("vfoDdsAFrequency");
+    if(value) ddsAFrequency=atoll(value);
   
     value=getProperty("vfoB");
     if(value) frequencyB=atoll(value);
+    value=getProperty("vfoBLO");
+    if(value) frequencyBLO=atoll(value);
+    value=getProperty("vfoDspBFrequency");
+    if(value) dspBFrequency=atoll(value);
+    value=getProperty("vfoDdsBFrequency");
+    if(value) ddsBFrequency=atoll(value);
+
+    frequencyAChanged=1;
+    frequencyBChanged=1;
 }
 
 /* --------------------------------------------------------------------------*/
 /** 
 * @brief transmit on VFO A frequency
 */
-void vfoTransmit(int state) {
-    aTransmitting=state;
-    updateVfoADisplay();
+int vfoTransmit(gpointer data) {
+    int state=*(int*)data;
+
+fprintf(stderr,"vfoTransmit: %d\n",state);
+
+    free(data);
+
+    if(bSplit) {
+        bTransmitting=state;
+        //updateVfoBDisplay();
+    } else {
+        aTransmitting=state;
+        //updateVfoADisplay();
+    }
+    return 0;
 }
 
-void vfoSubRx(int state) {
-    bSubRx=state;
+void vfoSplit(int state) {
+    bSplit=state;
     updateVfoBDisplay();
     setBFrequency(frequencyB);
 }
-
-
