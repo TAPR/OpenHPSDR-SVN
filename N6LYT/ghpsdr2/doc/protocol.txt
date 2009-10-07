@@ -1,0 +1,47 @@
+
+The server listens on port 11000.
+
+
+connect <rx> <port>
+
+    arguments:
+
+        rx = receiver (0..7)
+        port = udp port client listens on for I/Q samples
+
+    response:
+
+        OK 48000|96000|192000
+        ERROR <message>
+
+
+disconnect
+
+    response:
+
+        OK
+        ERROR <message>
+
+set frequency <f>
+
+    arguments:
+
+        f = frequency in Hz.
+
+    response:
+
+        OK
+        ERROR <message>
+
+
+keepalive
+
+    response:
+
+        OK
+        ERROR <message>
+
+
+      
+    
+     
