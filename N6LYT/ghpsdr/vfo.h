@@ -27,12 +27,22 @@
 
 long long frequencyA;
 long long frequencyB;
+int frequencyAChanged;
+int frequencyBChanged;
+
+long long frequencyALO;
+long long frequencyBLO;
+long long ddsAFrequency;
+long long ddsBFrequency;
+
 long long frequencyMin;
 long long frequencyMax;
 
 long frequencyIncrement;
 
 int bSubRx;
+int bSplit;
+int splitChanged;
 
 void vfoSaveState();
 void vfoRestoreState();
@@ -43,7 +53,8 @@ void setAFrequency(long long frequency);
 void setBFrequency(long long frequency);
 void setLOFrequency(long long frequency);
 
-void vfoTransmit(int state);
-void vfoStepFrequency(gpointer data);
+int vfoTransmit(gpointer data);
+int vfoStepFrequency(gpointer data);
 
 void vfoRX2(int state);
+void vfoSplit(int state);

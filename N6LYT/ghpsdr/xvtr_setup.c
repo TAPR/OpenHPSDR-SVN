@@ -38,9 +38,12 @@
 GtkWidget* xvtrPage;
 
 GtkWidget* buttonLabel[12];
-GtkWidget* minFrequency[12];
-GtkWidget* maxFrequency[12];
-GtkWidget* loFrequency[12];
+GtkWidget* minRxFrequency[12];
+GtkWidget* maxRxFrequency[12];
+GtkWidget* loRxFrequency[12];
+GtkWidget* minTxFrequency[12];
+GtkWidget* maxTxFrequency[12];
+GtkWidget* loTxFrequency[12];
 
 
 void validate_numeric(GtkEntry* entry,const gchar* text,gint length,gint* position,gpointer data) {
@@ -78,25 +81,34 @@ GtkWidget* xvtrSetupUI() {
     char temp[32];
     XVTR_ENTRY* xvtr_entry;
 
-    xvtrPage=gtk_table_new(14,5,FALSE);
+    xvtrPage=gtk_table_new(14,8,FALSE);
 
     gtk_table_set_col_spacings(GTK_TABLE(xvtrPage),10);
 
     item=gtk_label_new("Button");
     gtk_widget_show(item);
     gtk_table_attach_defaults(GTK_TABLE(xvtrPage),item,0,1,0,1);
-    item=gtk_label_new("Button Label");
+    item=gtk_label_new("Label");
     gtk_widget_show(item);
     gtk_table_attach_defaults(GTK_TABLE(xvtrPage),item,1,2,0,1);
-    item=gtk_label_new("Min Frequency (Hz)");
+    item=gtk_label_new("Min Rx Freq (Hz)");
     gtk_widget_show(item);
     gtk_table_attach_defaults(GTK_TABLE(xvtrPage),item,2,3,0,1);
-    item=gtk_label_new("Max Frequency (Hz)");
+    item=gtk_label_new("Max Rx Freq (Hz)");
     gtk_widget_show(item);
     gtk_table_attach_defaults(GTK_TABLE(xvtrPage),item,3,4,0,1);
-    item=gtk_label_new("LO Frequency (Hz)");
+    item=gtk_label_new("LO Rx Freq (Hz)");
     gtk_widget_show(item);
     gtk_table_attach_defaults(GTK_TABLE(xvtrPage),item,4,5,0,1);
+    item=gtk_label_new("Min Tx Freq (Hz)");
+    gtk_widget_show(item);
+    gtk_table_attach_defaults(GTK_TABLE(xvtrPage),item,5,6,0,1);
+    item=gtk_label_new("Max Tx Freq (Hz)");
+    gtk_widget_show(item);
+    gtk_table_attach_defaults(GTK_TABLE(xvtrPage),item,6,7,0,1);
+    item=gtk_label_new("LO Tx Freq (Hz)");
+    gtk_widget_show(item);
+    gtk_table_attach_defaults(GTK_TABLE(xvtrPage),item,7,8,0,1);
 
     for(i=0;i<12;i++) {
         sprintf(temp,"%d",i);
@@ -113,32 +125,59 @@ GtkWidget* xvtrSetupUI() {
         gtk_table_attach_defaults(GTK_TABLE(xvtrPage),item,1,2,i+1,i+2);
         buttonLabel[i]=item;
         
-        sprintf(temp,"%lld",xvtr_entry->frequencyMin);
+        sprintf(temp,"%lld",xvtr_entry->rxFrequencyMin);
         item=gtk_entry_new_with_max_length(12);
         gtk_editable_set_editable(GTK_EDITABLE(item),TRUE);
         g_signal_connect(G_OBJECT(item),"insert_text",G_CALLBACK(validate_numeric),NULL);
         gtk_entry_set_text(GTK_ENTRY(item),temp);
         gtk_widget_show(item);
         gtk_table_attach_defaults(GTK_TABLE(xvtrPage),item,2,3,i+1,i+2);
-        minFrequency[i]=item;
+        minRxFrequency[i]=item;
         
-        sprintf(temp,"%lld",xvtr_entry->frequencyMax);
+        sprintf(temp,"%lld",xvtr_entry->rxFrequencyMax);
         item=gtk_entry_new_with_max_length(12);
         gtk_editable_set_editable(GTK_EDITABLE(item),TRUE);
         g_signal_connect(G_OBJECT(item),"insert_text",G_CALLBACK(validate_numeric),NULL);
         gtk_entry_set_text(GTK_ENTRY(item),temp);
         gtk_widget_show(item);
         gtk_table_attach_defaults(GTK_TABLE(xvtrPage),item,3,4,i+1,i+2);
-        maxFrequency[i]=item;
+        maxRxFrequency[i]=item;
         
-        sprintf(temp,"%lld",xvtr_entry->frequencyLO);
+        sprintf(temp,"%lld",xvtr_entry->rxFrequencyLO);
         item=gtk_entry_new_with_max_length(12);
         gtk_editable_set_editable(GTK_EDITABLE(item),TRUE);
         g_signal_connect(G_OBJECT(item),"insert_text",G_CALLBACK(validate_numeric),NULL);
         gtk_entry_set_text(GTK_ENTRY(item),temp);
         gtk_widget_show(item);
         gtk_table_attach_defaults(GTK_TABLE(xvtrPage),item,4,5,i+1,i+2);
-        loFrequency[i]=item;
+        loRxFrequency[i]=item;
+        
+        sprintf(temp,"%lld",xvtr_entry->txFrequencyMin);
+        item=gtk_entry_new_with_max_length(12);
+        gtk_editable_set_editable(GTK_EDITABLE(item),TRUE);
+        g_signal_connect(G_OBJECT(item),"insert_text",G_CALLBACK(validate_numeric),NULL);
+        gtk_entry_set_text(GTK_ENTRY(item),temp);
+        gtk_widget_show(item);
+        gtk_table_attach_defaults(GTK_TABLE(xvtrPage),item,5,6,i+1,i+2);
+        minTxFrequency[i]=item;
+        
+        sprintf(temp,"%lld",xvtr_entry->txFrequencyMax);
+        item=gtk_entry_new_with_max_length(12);
+        gtk_editable_set_editable(GTK_EDITABLE(item),TRUE);
+        g_signal_connect(G_OBJECT(item),"insert_text",G_CALLBACK(validate_numeric),NULL);
+        gtk_entry_set_text(GTK_ENTRY(item),temp);
+        gtk_widget_show(item);
+        gtk_table_attach_defaults(GTK_TABLE(xvtrPage),item,6,7,i+1,i+2);
+        maxTxFrequency[i]=item;
+        
+        sprintf(temp,"%lld",xvtr_entry->txFrequencyLO);
+        item=gtk_entry_new_with_max_length(12);
+        gtk_editable_set_editable(GTK_EDITABLE(item),TRUE);
+        g_signal_connect(G_OBJECT(item),"insert_text",G_CALLBACK(validate_numeric),NULL);
+        gtk_entry_set_text(GTK_ENTRY(item),temp);
+        gtk_widget_show(item);
+        gtk_table_attach_defaults(GTK_TABLE(xvtrPage),item,7,8,i+1,i+2);
+        loTxFrequency[i]=item;
     }
 
     gtk_widget_show(xvtrPage);
@@ -156,31 +195,58 @@ void saveXvtrSettings() {
         temp=gtk_entry_get_text(GTK_ENTRY(buttonLabel[i]));
         strcpy(xvtr_entry->name,temp);
 
-        temp=gtk_entry_get_text(GTK_ENTRY(minFrequency[i]));
+        temp=gtk_entry_get_text(GTK_ENTRY(minRxFrequency[i]));
         if(strcmp(temp,"")==0) {
-            xvtr_entry->frequencyMin=0LL;
+            xvtr_entry->rxFrequencyMin=0LL;
         } else {
-            xvtr_entry->frequencyMin=atoll(temp);
+            xvtr_entry->rxFrequencyMin=atoll(temp);
         }
 
-        temp=gtk_entry_get_text(GTK_ENTRY(maxFrequency[i]));
+        temp=gtk_entry_get_text(GTK_ENTRY(maxRxFrequency[i]));
         if(strcmp(temp,"")==0) {
-            xvtr_entry->frequencyMax=0LL;
+            xvtr_entry->rxFrequencyMax=0LL;
         } else {
-            xvtr_entry->frequencyMax=atoll(temp);
+            xvtr_entry->rxFrequencyMax=atoll(temp);
         }
 
-        temp=gtk_entry_get_text(GTK_ENTRY(loFrequency[i]));
+        temp=gtk_entry_get_text(GTK_ENTRY(loRxFrequency[i]));
         if(strcmp(temp,"")==0) {
-            xvtr_entry->frequencyLO=0LL;
+            xvtr_entry->rxFrequencyLO=0LL;
         } else {
-            xvtr_entry->frequencyLO=atoll(temp);
+            xvtr_entry->rxFrequencyLO=atoll(temp);
         }
 
-        if((xvtr_entry->frequency<xvtr_entry->frequencyMin) ||
-           (xvtr_entry->frequency>xvtr_entry->frequencyMax)) {
-            xvtr_entry->frequency=xvtr_entry->frequencyMin;
+        if((xvtr_entry->rxFrequency<xvtr_entry->rxFrequencyMin) ||
+           (xvtr_entry->rxFrequency>xvtr_entry->rxFrequencyMax)) {
+            xvtr_entry->rxFrequency=xvtr_entry->rxFrequencyMin;
         }
+
+        temp=gtk_entry_get_text(GTK_ENTRY(minTxFrequency[i]));
+        if(strcmp(temp,"")==0) {
+            xvtr_entry->txFrequencyMin=0LL;
+        } else {
+            xvtr_entry->txFrequencyMin=atoll(temp);
+        }
+
+        temp=gtk_entry_get_text(GTK_ENTRY(maxTxFrequency[i]));
+        if(strcmp(temp,"")==0) {
+            xvtr_entry->txFrequencyMax=0LL;
+        } else {
+            xvtr_entry->txFrequencyMax=atoll(temp);
+        }
+
+        temp=gtk_entry_get_text(GTK_ENTRY(loTxFrequency[i]));
+        if(strcmp(temp,"")==0) {
+            xvtr_entry->txFrequencyLO=0LL;
+        } else {
+            xvtr_entry->txFrequencyLO=atoll(temp);
+        }
+
+        if((xvtr_entry->txFrequency<xvtr_entry->txFrequencyMin) ||
+           (xvtr_entry->txFrequency>xvtr_entry->txFrequencyMax)) {
+            xvtr_entry->txFrequency=xvtr_entry->txFrequencyMin;
+        }
+
     }
 }
 

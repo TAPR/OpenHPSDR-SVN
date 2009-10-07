@@ -59,7 +59,7 @@ void forceBand(int band);
 void configureXVTRButton();
 GtkWidget* buildBandUI();
 
-void remoteSetBand(gpointer *data);
+int remoteSetBand(gpointer *data);
 
 BAND_LIMITS* getBandLimits(long long minDisplay,long long maxDisplay);
 XVTR_ENTRY* getXvtrEntry(int i);

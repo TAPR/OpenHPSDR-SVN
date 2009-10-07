@@ -188,18 +188,18 @@ BAND_LIMITS bandLimits[NUM_BAND_LIMITS] = {
 */
 /* ----------------------------------------------------------------------------*/
 XVTR_ENTRY xvtr[12]=
-    {{"",0LL,0LL,0LL,0LL,modeUSB,filterF5,-2800,-200,-2800,-200,100,0,-100,-180,10,-110,-140},
-     {"",0LL,0LL,0LL,0LL,modeUSB,filterF5,-2800,-200,-2800,-200,100,0,-100,-180,10,-110,-140},
-     {"",0LL,0LL,0LL,0LL,modeUSB,filterF5,-2800,-200,-2800,-200,100,0,-100,-180,10,-110,-140},
-     {"",0LL,0LL,0LL,0LL,modeUSB,filterF5,-2800,-200,-2800,-200,100,0,-100,-180,10,-110,-140},
-     {"",0LL,0LL,0LL,0LL,modeUSB,filterF5,-2800,-200,-2800,-200,100,0,-100,-180,10,-110,-140},
-     {"",0LL,0LL,0LL,0LL,modeUSB,filterF5,-2800,-200,-2800,-200,100,0,-100,-180,10,-110,-140},
-     {"",0LL,0LL,0LL,0LL,modeUSB,filterF5,-2800,-200,-2800,-200,100,0,-100,-180,10,-110,-140},
-     {"",0LL,0LL,0LL,0LL,modeUSB,filterF5,-2800,-200,-2800,-200,100,0,-100,-180,10,-110,-140},
-     {"",0LL,0LL,0LL,0LL,modeUSB,filterF5,-2800,-200,-2800,-200,100,0,-100,-180,10,-110,-140},
-     {"",0LL,0LL,0LL,0LL,modeUSB,filterF5,-2800,-200,-2800,-200,100,0,-100,-180,10,-110,-140},
-     {"",0LL,0LL,0LL,0LL,modeUSB,filterF5,-2800,-200,-2800,-200,100,0,-100,-180,10,-110,-140},
-     {"",0LL,0LL,0LL,0LL,modeUSB,filterF5,-2800,-200,-2800,-200,100,0,-100,-180,10,-110,-140}};
+    {{"",0LL,0LL,0LL,0LL,0LL,0LL,0LL,0LL,0,modeUSB,filterF5,-2800,-200,-2800,-200,100,0,-100,-180,10,-110,-140},
+     {"",0LL,0LL,0LL,0LL,0LL,0LL,0LL,0LL,0,modeUSB,filterF5,-2800,-200,-2800,-200,100,0,-100,-180,10,-110,-140},
+     {"",0LL,0LL,0LL,0LL,0LL,0LL,0LL,0LL,0,modeUSB,filterF5,-2800,-200,-2800,-200,100,0,-100,-180,10,-110,-140},
+     {"",0LL,0LL,0LL,0LL,0LL,0LL,0LL,0LL,0,modeUSB,filterF5,-2800,-200,-2800,-200,100,0,-100,-180,10,-110,-140},
+     {"",0LL,0LL,0LL,0LL,0LL,0LL,0LL,0LL,0,modeUSB,filterF5,-2800,-200,-2800,-200,100,0,-100,-180,10,-110,-140},
+     {"",0LL,0LL,0LL,0LL,0LL,0LL,0LL,0LL,0,modeUSB,filterF5,-2800,-200,-2800,-200,100,0,-100,-180,10,-110,-140},
+     {"",0LL,0LL,0LL,0LL,0LL,0LL,0LL,0LL,0,modeUSB,filterF5,-2800,-200,-2800,-200,100,0,-100,-180,10,-110,-140},
+     {"",0LL,0LL,0LL,0LL,0LL,0LL,0LL,0LL,0,modeUSB,filterF5,-2800,-200,-2800,-200,100,0,-100,-180,10,-110,-140},
+     {"",0LL,0LL,0LL,0LL,0LL,0LL,0LL,0LL,0,modeUSB,filterF5,-2800,-200,-2800,-200,100,0,-100,-180,10,-110,-140},
+     {"",0LL,0LL,0LL,0LL,0LL,0LL,0LL,0LL,0,modeUSB,filterF5,-2800,-200,-2800,-200,100,0,-100,-180,10,-110,-140},
+     {"",0LL,0LL,0LL,0LL,0LL,0LL,0LL,0LL,0,modeUSB,filterF5,-2800,-200,-2800,-200,100,0,-100,-180,10,-110,-140},
+     {"",0LL,0LL,0LL,0LL,0LL,0LL,0LL,0LL,0,modeUSB,filterF5,-2800,-200,-2800,-200,100,0,-100,-180,10,-110,-140}};
 
 void setTuningMode(int mode);
 void setBand(int band);
@@ -362,7 +362,8 @@ void selectBand(GtkWidget* widget) {
         } else {
             currentXVTRButton=currentBandButton;
             xvtr_entry=&xvtr[xvtr_band];
-            xvtr_entry->frequency=frequencyA;
+            xvtr_entry->rxFrequency=frequencyA;
+            xvtr_entry->txFrequency=frequencyB;
             xvtr_entry->mode=mode;
             xvtr_entry->filter=filter;
             xvtr_entry->var1Low=filterVar1Low;
@@ -490,8 +491,8 @@ void selectBand(GtkWidget* widget) {
             filterVar2Low=xvtr_entry->var2Low;
             filterVar2High=xvtr_entry->var2High;
             setFilter(xvtr_entry->filter);
-            setLOFrequency(xvtr_entry->frequencyLO);
-            setAFrequency(xvtr_entry->frequency);
+            setLOFrequency(xvtr_entry->rxFrequencyLO);
+            setAFrequency(xvtr_entry->rxFrequency);
             setIncrement(xvtr_entry->step);
 
             setPreamp(xvtr_entry->preamp);
@@ -570,10 +571,11 @@ void setBand(int band) {
 * @param data -- pointer to the band 
 */
 /* ----------------------------------------------------------------------------*/
-void remoteSetBand(gpointer *data) {
+int remoteSetBand(gpointer *data) {
     int band=*(int*)data;
     setBand(band);
     free(data);
+    return 0;
 }
 
 /* --------------------------------------------------------------------------*/
@@ -871,7 +873,8 @@ void bandSaveState() {
         entry->waterfallLow=waterfallLowThreshold;
     } else {
         xvtr_entry=&xvtr[xvtr_band];
-        xvtr_entry->frequency=frequencyA;
+        xvtr_entry->rxFrequency=frequencyA;
+        xvtr_entry->txFrequency=frequencyB;
         xvtr_entry->mode=mode;
         xvtr_entry->filter=filter;
         xvtr_entry->var1Low=filterVar1Low;
@@ -972,21 +975,38 @@ void bandSaveState() {
             sprintf(name,"xvtr.%d.name",b);
             setProperty(name,xvtr_entry->name);
 
-            sprintf(string,"%lld",xvtr_entry->frequency);
-            sprintf(name,"xvtr.%d.frequency",b);
+            sprintf(string,"%lld",xvtr_entry->rxFrequency);
+            sprintf(name,"xvtr.%d.rxFrequency",b);
             setProperty(name,string);
 
-            sprintf(string,"%lld",xvtr_entry->frequencyMin);
-            sprintf(name,"xvtr.%d.frequencyMin",b);
+            sprintf(string,"%lld",xvtr_entry->rxFrequencyMin);
+            sprintf(name,"xvtr.%d.rxFrequencyMin",b);
             setProperty(name,string);
 
-            sprintf(string,"%lld",xvtr_entry->frequencyMax);
-            sprintf(name,"xvtr.%d.frequencyMax",b);
+            sprintf(string,"%lld",xvtr_entry->rxFrequencyMax);
+            sprintf(name,"xvtr.%d.rxFrequencyMax",b);
             setProperty(name,string);
 
-            sprintf(string,"%lld",xvtr_entry->frequencyLO);
-            sprintf(name,"xvtr.%d.frequencyLO",b);
+            sprintf(string,"%lld",xvtr_entry->rxFrequencyLO);
+            sprintf(name,"xvtr.%d.rxFrequencyLO",b);
             setProperty(name,string);
+
+            sprintf(string,"%lld",xvtr_entry->txFrequency);
+            sprintf(name,"xvtr.%d.txFrequency",b);
+            setProperty(name,string);
+
+            sprintf(string,"%lld",xvtr_entry->txFrequencyMin);
+            sprintf(name,"xvtr.%d.txFrequencyMin",b);
+            setProperty(name,string);
+
+            sprintf(string,"%lld",xvtr_entry->txFrequencyMax);
+            sprintf(name,"xvtr.%d.txFrequencyMax",b);
+            setProperty(name,string);
+
+            sprintf(string,"%lld",xvtr_entry->txFrequencyLO);
+            sprintf(name,"xvtr.%d.txFrequencyLO",b);
+            setProperty(name,string);
+
         }
     }
 
@@ -1180,22 +1200,37 @@ void bandRestoreState() {
         if(value) {
             strcpy(xvtr_entry->name,value);
 
-            sprintf(name,"xvtr.%d.frequency",b);
-
+            sprintf(name,"xvtr.%d.rxFrequency",b);
             value=getProperty(name);
-            if(value) xvtr_entry->frequency=atoll(value);
+            if(value) xvtr_entry->rxFrequency=atoll(value);
 
-            sprintf(name,"xvtr.%d.frequencyMin",b);
+            sprintf(name,"xvtr.%d.rxFrequencyMin",b);
             value=getProperty(name);
-            if(value) xvtr_entry->frequencyMin=atoll(value);
+            if(value) xvtr_entry->rxFrequencyMin=atoll(value);
 
-            sprintf(name,"xvtr.%d.frequencyMax",b);
+            sprintf(name,"xvtr.%d.rxFrequencyMax",b);
             value=getProperty(name);
-            if(value) xvtr_entry->frequencyMax=atoll(value);
+            if(value) xvtr_entry->rxFrequencyMax=atoll(value);
 
-            sprintf(name,"xvtr.%d.frequencyLO",b);
+            sprintf(name,"xvtr.%d.rxFrequencyLO",b);
             value=getProperty(name);
-            if(value) xvtr_entry->frequencyLO=atoll(value);
+            if(value) xvtr_entry->rxFrequencyLO=atoll(value);
+
+            sprintf(name,"xvtr.%d.txFrequency",b);
+            value=getProperty(name);
+            if(value) xvtr_entry->txFrequency=atoll(value);
+
+            sprintf(name,"xvtr.%d.txFrequencyMin",b);
+            value=getProperty(name);
+            if(value) xvtr_entry->txFrequencyMin=atoll(value);
+
+            sprintf(name,"xvtr.%d.txFrequencyMax",b);
+            value=getProperty(name);
+            if(value) xvtr_entry->txFrequencyMax=atoll(value);
+
+            sprintf(name,"xvtr.%d.txFrequencyLO",b);
+            value=getProperty(name);
+            if(value) xvtr_entry->txFrequencyLO=atoll(value);
 
             sprintf(name,"xvtr.%d.mode",b);
             value=getProperty(name);

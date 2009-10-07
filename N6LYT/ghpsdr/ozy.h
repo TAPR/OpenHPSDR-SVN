@@ -92,6 +92,39 @@ int forwardPower;
 */
 extern int ozy_init();
 
+
+/* --------------------------------------------------------------------------*/
+/** 
+* @brief set frequency
+* 
+* @return 
+*/
+extern void setFrequency(long f);
+
+/* --------------------------------------------------------------------------*/
+/** 
+* @brief set rx frequency
+* 
+* @return 
+*/
+extern void setRxFrequency(long f);
+
+/* --------------------------------------------------------------------------*/
+/** 
+* @brief set tx frequency
+* 
+* @return 
+*/
+extern void setTxFrequency(long f);
+
+/* --------------------------------------------------------------------------*/
+/** 
+* @brief set duplex
+* 
+* @return 
+*/
+extern void setDuplex(int d);
+
 /* --------------------------------------------------------------------------*/
 /** 
 * @brief set preamp

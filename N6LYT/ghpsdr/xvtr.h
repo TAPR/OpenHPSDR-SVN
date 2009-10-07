@@ -30,10 +30,15 @@
 */
 struct _XVTR_ENTRY {
     char name[32];
-    long long frequency;
-    long long frequencyMin;
-    long long frequencyMax;
-    long long frequencyLO;
+    long long rxFrequency;
+    long long rxFrequencyMin;
+    long long rxFrequencyMax;
+    long long rxFrequencyLO;
+    long long txFrequency;
+    long long txFrequencyMin;
+    long long txFrequencyMax;
+    long long txFrequencyLO;
+    int fullDuplex;
     int mode;
     int filter;
     int var1Low;

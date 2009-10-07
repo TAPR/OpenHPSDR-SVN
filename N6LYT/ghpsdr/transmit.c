@@ -37,6 +37,7 @@
 #include "ozy.h"
 #include "mode.h"
 #include "filter.h"
+#include "vfo.h"
 #include "volume.h"
 
 GtkWidget* transmitFrame;
@@ -67,7 +68,7 @@ int fullDuplex=1;
 void moxButtonCallback(GtkWidget* widget,gpointer data) {
     GtkWidget* label;
     char c[80];
-    gboolean state;
+    int state;
 
     if(mox) {
         state=0;
@@ -75,7 +76,11 @@ void moxButtonCallback(GtkWidget* widget,gpointer data) {
         state=1;
     }    
 
-    vfoTransmit(state);
+    //vfoTransmit(state);
+    int *vfoState=malloc(sizeof(int));
+    *vfoState=state;
+    g_idle_add(vfoTransmit,(gpointer)vfoState);
+
     setMOX(state);
 
     if(!fullDuplex) {
@@ -116,7 +121,14 @@ void tuneButtonCallback(GtkWidget* widget,gpointer data) {
         state=1;
     }
 
-    vfoTransmit(state);
+fprintf(stderr,"tuneButtonCallback: %d\n", state);
+
+    //vfoTransmit(state);
+    int *vfoState=malloc(sizeof(int));
+    *vfoState=state;
+fprintf(stderr,"g_idle_add: vfoTransmit\n");
+    g_idle_add(vfoTransmit,(gpointer)vfoState);
+
     setMOX(state);
     tuning=state;
     tuningPhase=0.0;
