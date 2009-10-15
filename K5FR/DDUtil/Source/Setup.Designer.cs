@@ -300,6 +300,9 @@ namespace DataDecoder
             this.label21 = new System.Windows.Forms.Label();
             this.label22 = new System.Windows.Forms.Label();
             this.tabOther = new System.Windows.Forms.TabPage();
+            this.groupBox17 = new System.Windows.Forms.GroupBox();
+            this.txtVspMgr = new System.Windows.Forms.TextBox();
+            this.label155 = new System.Windows.Forms.Label();
             this.pixBox1 = new System.Windows.Forms.PictureBox();
             this.grpRepeat = new System.Windows.Forms.GroupBox();
             this.label79 = new System.Windows.Forms.Label();
@@ -930,6 +933,7 @@ namespace DataDecoder
             this.grpAmp.SuspendLayout();
             this.groupBox4.SuspendLayout();
             this.tabOther.SuspendLayout();
+            this.groupBox17.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pixBox1)).BeginInit();
             this.grpRepeat.SuspendLayout();
             this.grpRmode.SuspendLayout();
@@ -4480,6 +4484,7 @@ namespace DataDecoder
             // 
             // tabOther
             // 
+            this.tabOther.Controls.Add(this.groupBox17);
             this.tabOther.Controls.Add(this.pixBox1);
             this.tabOther.Controls.Add(this.grpRepeat);
             this.tabOther.Controls.Add(this.groupBox6);
@@ -4493,11 +4498,46 @@ namespace DataDecoder
             this.tabOther.UseVisualStyleBackColor = true;
             this.tabOther.DoubleClick += new System.EventHandler(this.tabOther_DoubleClick);
             // 
+            // groupBox17
+            // 
+            this.groupBox17.Controls.Add(this.txtVspMgr);
+            this.groupBox17.Controls.Add(this.label155);
+            this.groupBox17.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold);
+            this.groupBox17.ForeColor = System.Drawing.Color.Blue;
+            this.groupBox17.Location = new System.Drawing.Point(6, 118);
+            this.groupBox17.Name = "groupBox17";
+            this.groupBox17.Size = new System.Drawing.Size(190, 56);
+            this.groupBox17.TabIndex = 80;
+            this.groupBox17.TabStop = false;
+            this.groupBox17.Text = "VSP Manager";
+            // 
+            // txtVspMgr
+            // 
+            this.txtVspMgr.ForeColor = System.Drawing.Color.Firebrick;
+            this.txtVspMgr.Location = new System.Drawing.Point(10, 17);
+            this.txtVspMgr.Name = "txtVspMgr";
+            this.txtVspMgr.Size = new System.Drawing.Size(170, 20);
+            this.txtVspMgr.TabIndex = 29;
+            this.toolTip1.SetToolTip(this.txtVspMgr, "VSP Manager\'s file location here (double-click for file dialog).");
+            this.txtVspMgr.DoubleClick += new System.EventHandler(this.txtVspMgr_DoubleClick);
+            this.txtVspMgr.TextChanged += new System.EventHandler(this.txtVspMgr_TextChanged);
+            // 
+            // label155
+            // 
+            this.label155.AutoSize = true;
+            this.label155.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
+            this.label155.ForeColor = System.Drawing.Color.Navy;
+            this.label155.Location = new System.Drawing.Point(9, 39);
+            this.label155.Name = "label155";
+            this.label155.Size = new System.Drawing.Size(67, 13);
+            this.label155.TabIndex = 30;
+            this.label155.Text = "File Location";
+            // 
             // pixBox1
             // 
             this.pixBox1.ImageLocation = "http://qsonet.com/propadex.png";
             this.pixBox1.InitialImage = null;
-            this.pixBox1.Location = new System.Drawing.Point(275, 134);
+            this.pixBox1.Location = new System.Drawing.Point(278, 123);
             this.pixBox1.Name = "pixBox1";
             this.pixBox1.Size = new System.Drawing.Size(146, 120);
             this.pixBox1.TabIndex = 79;
@@ -4638,7 +4678,7 @@ namespace DataDecoder
             this.cboRepeatPort.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
             this.cboRepeatPort.ForeColor = System.Drawing.Color.Navy;
             this.cboRepeatPort.FormattingEnabled = true;
-            this.cboRepeatPort.Location = new System.Drawing.Point(81, 21);
+            this.cboRepeatPort.Location = new System.Drawing.Point(77, 21);
             this.cboRepeatPort.Name = "cboRepeatPort";
             this.cboRepeatPort.Size = new System.Drawing.Size(63, 21);
             this.cboRepeatPort.TabIndex = 49;
@@ -4764,7 +4804,7 @@ namespace DataDecoder
             // txtSleep
             // 
             this.txtSleep.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtSleep.Location = new System.Drawing.Point(42, 98);
+            this.txtSleep.Location = new System.Drawing.Point(321, 273);
             this.txtSleep.Name = "txtSleep";
             this.txtSleep.Size = new System.Drawing.Size(32, 22);
             this.txtSleep.TabIndex = 51;
@@ -4775,9 +4815,9 @@ namespace DataDecoder
             // 
             // lblSleep
             // 
-            this.lblSleep.Location = new System.Drawing.Point(44, 127);
+            this.lblSleep.Location = new System.Drawing.Point(357, 276);
             this.lblSleep.Name = "lblSleep";
-            this.lblSleep.Size = new System.Drawing.Size(49, 19);
+            this.lblSleep.Size = new System.Drawing.Size(38, 19);
             this.lblSleep.TabIndex = 51;
             this.lblSleep.Text = "Sleep";
             this.lblSleep.Visible = false;
@@ -11829,6 +11869,8 @@ namespace DataDecoder
             this.groupBox4.PerformLayout();
             this.tabOther.ResumeLayout(false);
             this.tabOther.PerformLayout();
+            this.groupBox17.ResumeLayout(false);
+            this.groupBox17.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pixBox1)).EndInit();
             this.grpRepeat.ResumeLayout(false);
             this.grpRepeat.PerformLayout();
@@ -12732,6 +12774,9 @@ namespace DataDecoder
         private Button btnStop;
         private Timer pdTimer;
         private CheckBox chkPSDR;
+        private GroupBox groupBox17;
+        private TextBox txtVspMgr;
+        private Label label155;
 
     }
 }

@@ -684,7 +684,7 @@ RCP4 - WriteLog</Value>
       <Value Profile="(Default)">0, 0</Value>
     </Setting>
     <Setting Name="PSDRloc" Type="System.String" Scope="User">
-      <Value Profile="(Default)" />
+      <Value Profile="(Default)">""</Value>
     </Setting>
     <Setting Name="AlphaAnt" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">1</Value>
@@ -697,6 +697,9 @@ RCP4 - WriteLog</Value>
     </Setting>
     <Setting Name="defLow" Type="System.Decimal" Scope="User">
       <Value Profile="(Default)">25</Value>
+    </Setting>
+    <Setting Name="vspMgrFile" Type="System.String" Scope="User">
+      <Value Profile="(Default)">""</Value>
     </Setting>
   </Settings>
 </SettingsFile>
