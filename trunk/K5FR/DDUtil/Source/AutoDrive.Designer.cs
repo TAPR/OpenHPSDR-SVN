@@ -270,9 +270,9 @@
             this.label10.AutoSize = true;
             this.label10.Location = new System.Drawing.Point(7, 9);
             this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(151, 13);
+            this.label10.Size = new System.Drawing.Size(223, 13);
             this.label10.TabIndex = 19;
-            this.label10.Text = "Default PSDR (Barefoot) Drive";
+            this.label10.Text = "Default PSDR Barefoot Drive (StandBy mode)";
             // 
             // textBox1
             // 
@@ -312,9 +312,9 @@
             this.label12.AutoSize = true;
             this.label12.Location = new System.Drawing.Point(7, 301);
             this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(172, 13);
+            this.label12.Size = new System.Drawing.Size(201, 13);
             this.label12.TabIndex = 23;
-            this.label12.Text = "Default Low-Power Drive (Operate)";
+            this.label12.Text = "Default Low-Power Drive (Operate mode)";
             // 
             // numLow
             // 
@@ -339,7 +339,7 @@
             this.textBox2.Size = new System.Drawing.Size(175, 44);
             this.textBox2.TabIndex = 25;
             this.textBox2.Text = "Power level for amplifier drive when using the Low Power Operate setting (ctrl + " +
-                "H).";
+                "L).";
             // 
             // AcomSwitch
             // 

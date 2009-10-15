@@ -605,6 +605,7 @@ namespace DataDecoder
             numSWR.Value = set.SWRnum;
             chkTenths.Checked = set.Tenths;
             cboPwrPort.SelectedIndex = set.PwrPort;
+            txtVspMgr.Text = set.vspMgrFile;
             txtPSDR.Text = set.PwrSDRfile;
             chkPSDR.Checked = set.StartPSDR;
 
@@ -4767,16 +4768,19 @@ namespace DataDecoder
         {
             try
             {
+                string file = set.vspMgrFile;
                 ProcessStartInfo psi = new ProcessStartInfo();
-                psi.WorkingDirectory = @"C:\Program Files\vspMgr\";
-                psi.FileName = @"C:\Program Files\vspMgr\vspMgr.exe";
+                psi.WorkingDirectory = file.Substring(0, file.Length-10);
+                psi.FileName = file;
                 Process myProcess = Process.Start(psi);
             }
             catch
             {
                 MessageBox.Show(
-                    "C:\\Program Files\\vspMgr\\vspMgr.exe was not found!\n\n" + 
-                    "            Please start VSP Manager manually.", 
+                    "There was a problem locating or starting vspMgr.exe!\n\n" +
+                    "Please make sure the file location for vspMgr.exe is entered properly\n" +
+                    "in the File location window on the 'Other' tab (see tool tips for info).\n" +
+                    "or start VSP Manager manually.", 
                     "File not found!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             }
         }
@@ -10049,6 +10053,21 @@ namespace DataDecoder
 
         #endregion WaveNode
 
+        // the PSDR file location has changed
+        private void txtVspMgr_TextChanged(object sender, EventArgs e)
+        {
+            set.vspMgrFile = txtVspMgr.Text; set.Save();
+        }
+        //the PSDR file location textbox was double-clicked
+        private void txtVspMgr_DoubleClick(object sender, EventArgs e)
+        {
+            openFileDialog1.Filter = "exe files|*.exe";
+            openFileDialog1.Title = "Select PowerSDR File Location";
+            if (openFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                txtVspMgr.Text = openFileDialog1.FileName;
+            }
+        }
     }
 
     #region Helper Classes

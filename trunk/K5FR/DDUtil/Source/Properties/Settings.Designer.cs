@@ -2737,7 +2737,7 @@ namespace DataDecoder.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        [global::System.Configuration.DefaultSettingValueAttribute("\"\"")]
         public string PSDRloc {
             get {
                 return ((string)(this["PSDRloc"]));
@@ -2792,6 +2792,18 @@ namespace DataDecoder.Properties {
             }
             set {
                 this["defLow"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("\"\"")]
+        public string vspMgrFile {
+            get {
+                return ((string)(this["vspMgrFile"]));
+            }
+            set {
+                this["vspMgrFile"] = value;
             }
         }
     }
