@@ -435,10 +435,12 @@ int main(int argc, char *argv[]) {
 	packet[15] = 0x04; /* ep 4 */ 
 
 	if ( iqlr_mode ) { 
+		packet[15] = 0x02; /* ep 4 */ 
 		memcpy(packet+20, iqlr_pktData, 512); 
 		memcpy(packet+20+512, iqlr_pktData, 512); 
 	} 
 	else { 
+		packet[15] = 0x04; /* ep 4 */ 
 		memcpy(packet+20, pktData, 512); 
 		memcpy(packet+20+512, pktData, 512); 
 	} 
