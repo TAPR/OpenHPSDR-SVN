@@ -1,6 +1,6 @@
 /*
  *
- * Copyright (C) 2009 Bill Tracey, KD5TFD 
+ * Copyright (C) 2009 Bill Tracey, KD5TFD  (bill@ewjt.com) 
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -17,6 +17,8 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
+
+#define _CRT_SECURE_NO_WARNINGS  (1) /* I'm an old C programmer, I can handle the danger! */ 
 
 #include <stdio.h>
 
@@ -283,17 +285,64 @@ int getMacAddrfromIPv4(IN_ADDR *in_addrp, BYTE *macbufp) {
 
 #define PACKET_LEN (1500)
 
+
+void sendBurst(int packet_count, pcap_t *fp, byte *srcmac, byte *targetmac) { 
+	char odd_packet[PACKET_LEN]; 
+	char even_packet[PACKET_LEN]; 
+	char *packetp; 
+	int rc; 
+	int j; 
+	int i; 
+	
+
+	printf("bursting %d packets\n", packet_count); 
+	for ( i = 0; i < 6; i++ ) { 
+		odd_packet[i] = *(targetmac + i);
+	} 
+	for ( i = 0 ; i < 6; i++ ) { 
+		odd_packet[6+i] = *(srcmac + i); 
+	} 
+	odd_packet[12] = 0xef;
+	odd_packet[13] = 0xfe;
+	memcpy(even_packet, odd_packet, 14); 
+	
+	for ( i = 18; i < PACKET_LEN; i++ ) { 
+		even_packet[i] = 2 * ( i - 18 );
+		odd_packet[i] = 1 + even_packet[i]; 
+	} 
+
+	for ( j = 0; j < packet_count; j++ ) { 
+		if ( ( j & 1 ) != 0 ) { 
+			packetp = odd_packet; 
+		} 
+		else { 
+			packetp = even_packet; 
+		} 
+		memcpy(packetp + 14, &j, 4); /* insert packet num */ 
+		rc = pcap_sendpacket(fp, packetp, PACKET_LEN); 
+		if ( rc != 0 ) { 
+            printf("i=%d, pcap_sendpacket failed: %s\n", i, pcap_geterr(fp));
+			return;
+		}
+	} 
+	return;
+} 
+
+
+
+
 int main(int argc, char *argv[]) {
     pcap_if_t *alldevs;
     pcap_if_t *d;
     int i=0;
     char errbuf[PCAP_ERRBUF_SIZE];
-        char namebuf[PCAP_BUF_SIZE];
-        BYTE macbuf[6];
-        IN_ADDR in_addr;
-        pcap_t *fp;
-        int rc;
-        unsigned char packet[PACKET_LEN];
+    char namebuf[PCAP_BUF_SIZE];
+    BYTE macbuf[6];
+	BYTE target_mac[6]; 
+    IN_ADDR in_addr;
+    pcap_t *fp;
+
+    
 
     /* Retrieve the device list from the local machine */
     if (pcap_findalldevs_ex(PCAP_SRC_IF_STRING, NULL /* auth is not needed */, &alldevs, errbuf) == -1)
@@ -386,38 +435,21 @@ int main(int argc, char *argv[]) {
                 exit(97);
         }
 
-#if 0
-        for ( i = 0; i < 6; i++ ) {
-                packet[i] = 0xff;
-        }
-#else 		
-		packet[0] = 0x00; 
-		packet[1] = 0x1a; 
-		packet[2] = 0x6b; 
-		packet[3] = 0xce; 
-		packet[4] = 0x34; 
-		packet[5] = 0xeb; 
-#endif 
-        for ( i = 6; i < 12; i++ ) {
-                packet[i] = macbuf[i-6];
-        }
+		target_mac[0] = 0x00; 
+		target_mac[1] = 0x1a; 
+		target_mac[2] = 0x6b; 
+		target_mac[3] = 0xce; 
+		target_mac[4] = 0x34; 
+		target_mac[5] = 0xeb; 
 
-        packet[12] = 0xef; /* experimental ethertype are 0x0101 to 0x01ff */
-        packet[13] = 0xfe;
-        for ( i = 18;  i <  PACKET_LEN; i++ ) {
-                packet[i] = i - 14;
-        }
-        for ( i = 0; i < 10000; i++ ) {
-                memcpy(packet + 14, &i, 4);
-                rc = pcap_sendpacket(fp, packet, PACKET_LEN);
-                if ( rc != 0 ) {
-                        printf("i=%d, pcap_sendpacket failed: %s\n", i, pcap_geterr(fp));
-                        break;
-                }
-        }
+		sendBurst(100, fp, macbuf, target_mac); 
+
         pcap_close(fp);
 
 
 #endif
         /* getMacAddrfromIPv4(0);  */
 }
+
+
+

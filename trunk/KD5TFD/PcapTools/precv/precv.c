@@ -139,6 +139,7 @@ void doHelp() {
 } 
 
 
+#if 0 
 void handlePacket(struct pcap_pkthdr *pheader, unsigned char *pdata) { 
 	int caplen = pheader->caplen; 
 	if ( caplen >= 0x40 ) { 
@@ -147,7 +148,59 @@ void handlePacket(struct pcap_pkthdr *pheader, unsigned char *pdata) {
 	Dump(stdout, pdata, caplen, "pacekt dump"); 
 	return;
 } 
+#else 
+unsigned int last_packet_idx = 0; 
+unsigned int waiting_packet_idx = 0; 
+unsigned int short_packet_count = 0; 
+unsigned int missing_packet_count = 0; 
+unsigned int good_packet_count = 0; 
+unsigned int bad_packet_type_count = 0; 
 
+void handlePacket(struct pcap_pkthdr *pheader, unsigned char *pdata) { 
+	unsigned char *p; 
+	unsigned int this_packet_idx; 
+	int caplen = pheader->caplen; 
+	if ( caplen < ( 20 + 1024) ) { 
+		++short_packet_count; 
+		return; 
+	}
+	if ( ( *(pdata+0x0e) != 0x1 ) || ( *(pdata+0x0f) != 0x4 ) ) { 
+		++bad_packet_type_count; 
+		return; 
+	}
+	// memcpy(&this_packet_idx, pdata+0x10, 4); 
+    p = (unsigned  char *)&this_packet_idx; 
+	
+	*(p+3) = *(pdata+0x10); 
+	*(p+2) = *(pdata+0x11); 
+	*(p+1) = *(pdata+0x12); 
+	*(p)   = *(pdata+0x13); 
+
+	++good_packet_count; 
+	if ( this_packet_idx >= waiting_packet_idx ) {
+		if ( waiting_packet_idx != 0 ) { /* print status of last block and reset */ 
+			if ( this_packet_idx > (last_packet_idx+1) ) { 
+				missing_packet_count += this_packet_idx - last_packet_idx - 1; 
+			} 
+			printf("good: %d missing: %u short: %u bad type: %u\n", good_packet_count, missing_packet_count, short_packet_count, bad_packet_type_count); 
+			short_packet_count = 0; 
+			missing_packet_count = 0; 
+			good_packet_count = 0; 
+			bad_packet_type_count = 0; 
+			
+		} 		
+		waiting_packet_idx = 1500 + this_packet_idx; 					
+	} 
+	else {  /* we're still waiting for more packets */ 
+		if ( this_packet_idx != (1+last_packet_idx) ) {  /* we've got missing packets */ 
+			missing_packet_count += this_packet_idx - last_packet_idx - 1; 
+		}
+	} 
+	last_packet_idx = this_packet_idx; 
+
+	return;
+} 
+#endif
 
 
 int main(int argc, char *argv[]) {
@@ -246,7 +299,7 @@ int main(int argc, char *argv[]) {
 	fp = pcap_open(namebuf, 
 		           2048, /* snaplen */ 
 				   0,  /* flags */
-				   1000, /* read timeout */ 
+				   3000, /* read timeout */ 
 				   NULL, /* authentication */ 
 				   errbuf); 
 	if ( fp == NULL ) { 

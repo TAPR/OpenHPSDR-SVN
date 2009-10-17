@@ -9,6 +9,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "precv", "precv\precv.vcproj
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "beacon", "beacon\beacon.vcproj", "{F9329E48-A1FD-47D3-8A40-B72124D3F69A}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "RadioEmulator", "RadioEmulator\RadioEmulator.vcproj", "{90820930-9514-4D22-97BC-6E8CC6764991}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
@@ -31,6 +33,10 @@ Global
 		{F9329E48-A1FD-47D3-8A40-B72124D3F69A}.Debug|Win32.Build.0 = Debug|Win32
 		{F9329E48-A1FD-47D3-8A40-B72124D3F69A}.Release|Win32.ActiveCfg = Release|Win32
 		{F9329E48-A1FD-47D3-8A40-B72124D3F69A}.Release|Win32.Build.0 = Release|Win32
+		{90820930-9514-4D22-97BC-6E8CC6764991}.Debug|Win32.ActiveCfg = Debug|Win32
+		{90820930-9514-4D22-97BC-6E8CC6764991}.Debug|Win32.Build.0 = Debug|Win32
+		{90820930-9514-4D22-97BC-6E8CC6764991}.Release|Win32.ActiveCfg = Release|Win32
+		{90820930-9514-4D22-97BC-6E8CC6764991}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
