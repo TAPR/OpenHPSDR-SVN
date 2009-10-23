@@ -438,6 +438,11 @@ int main(int argc, char *argv[]) {
 		packet[15] = 0x02; /* ep 4 */ 
 		memcpy(packet+20, iqlr_pktData, 512); 
 		memcpy(packet+20+512, iqlr_pktData, 512); 
+		packet[24] = 0x58; /* 0101 1000 -- 0 - Janus Mic, 10 = Merc, 1 = 122.88 from Merc, 10 = Merc 10 Mhz, 00 - 48 khz */ 
+		packet[512+23] = 2;  
+		packet[512+25] = 0xd5; 
+		packet[512+26] = 0xc6; 
+		packet[512+27] = 0x90; 
 	} 
 	else { 
 		packet[15] = 0x04; /* ep 4 */ 
