@@ -34,6 +34,7 @@
 #include <windows.h>
 #include <nanotimer.h> 
 
+
 #if 0 
 #include <mstcpip.h>
 #endif 
@@ -184,6 +185,97 @@ void ifprint(pcap_if_t *d);
 char *iptos(u_long in);
 char* ip6tos(struct sockaddr *sockaddr, char *address, int addrlen);
 
+#define GAA_FLAGS ( GAA_FLAG_SKIP_ANYCAST |   GAA_FLAG_SKIP_DNS_SERVER |  GAA_FLAG_SKIP_FRIENDLY_NAME |   GAA_FLAG_SKIP_MULTICAST )
+
+/*
+ * returns 0 if an adapter with IP addr in in_addrp can be found, !0 otherwise
+ * macbufp MUST point to a 6 byte buffer
+ */
+int getMacAddrFromIPv4(IN_ADDR *in_addrp, BYTE *macbufp) {
+        unsigned char addrbuf[8192];
+        int addrbufsize = sizeof(addrbuf);
+        int rc;
+
+        IP_ADAPTER_ADDRESSES *addrp = (IP_ADAPTER_ADDRESSES *)addrbuf;
+
+        rc =  GetAdaptersAddresses(AF_INET, GAA_FLAGS, NULL, addrp,  &addrbufsize);
+        if ( rc == ERROR_BUFFER_OVERFLOW ) {
+                /* not enough space... alloc buffer needed and retry */
+                addrp = malloc(addrbufsize);
+                if ( addrp == NULL ) {
+                        return -1;
+                }
+                rc =  GetAdaptersAddresses(AF_INET, GAA_FLAGS, NULL, addrp,  &addrbufsize);
+        }
+
+        if ( rc == NO_ERROR ) {
+                IP_ADAPTER_ADDRESSES *adapterp = addrp;
+                while ( adapterp != NULL ) {
+                        IP_ADAPTER_UNICAST_ADDRESS *ipaddrp = adapterp->FirstUnicastAddress;
+                        /* printf("name: %s\n", adapterp->AdapterName);  */
+                        while ( ipaddrp != NULL ) {
+                                SOCKADDR *sap = (ipaddrp->Address.lpSockaddr);
+                                if ( sap->sa_family == AF_INET ) {
+                                        SOCKADDR_IN *sainp = (SOCKADDR_IN *)sap;
+                                        if ( memcmp(&(sainp->sin_addr), in_addrp, sizeof(IN_ADDR)) == 0 ) {
+                                                memcpy(macbufp, adapterp->PhysicalAddress, min(6, adapterp->PhysicalAddressLength));
+                                                if ( (void *)addrp != (void *)addrbuf ) {
+                                                        free(addrp);
+                                                }
+                                                return 0;
+                                        }
+                                        /* printf("ip addr: %s\n", inet_ntoa(sainp->sin_addr));  */ /* return frmo inet_ntoa does not need to be freed */
+                                }
+                                ipaddrp = ipaddrp->Next;
+                        }
+                        adapterp = adapterp->Next;
+                }
+        }
+
+        if ( (void *)addrp != (void *)addrbuf ) {
+                free(addrp);
+        }
+        return 1;
+}
+
+
+
+/*
+ * returns 0 if an adapter with name given can be found, !0 otherwise
+ * macbufp MUST point to a 6 byte buffer
+ */
+int getMacAddrFromPcapName(char *namep,  BYTE *macbufp) {
+        unsigned char addrbuf[8192];
+        int addrbufsize = sizeof(addrbuf);
+        int rc;
+		int myrc = -1; 
+
+        IP_ADAPTER_ADDRESSES *addrp = (IP_ADAPTER_ADDRESSES *)addrbuf;
+
+        rc =  GetAdaptersAddresses(AF_INET, GAA_FLAGS, NULL, addrp,  &addrbufsize);
+        if ( rc == ERROR_BUFFER_OVERFLOW ) {
+                /* not enough space... alloc buffer needed and retry */
+                addrp = malloc(addrbufsize);
+                if ( addrp == NULL ) {
+                        return -1;
+                }
+                rc =  GetAdaptersAddresses(AF_INET, GAA_FLAGS, NULL, addrp,  &addrbufsize);
+        }
+        if ( rc == NO_ERROR ) {
+                IP_ADAPTER_ADDRESSES *adapterp = addrp;
+                while ( adapterp != NULL ) {
+					if ( strstr(namep, adapterp->AdapterName) != NULL ) { 
+						memcpy(macbufp, adapterp->PhysicalAddress, min(6, adapterp->PhysicalAddressLength));
+						myrc = 0; 
+						break; 						
+					}
+				}
+		}
+        if ( (void *)addrp != (void *)addrbuf ) {
+                free(addrp);
+        }
+        return myrc;
+}
 
 
 /* Print all the available information on the given interface */
@@ -308,11 +400,11 @@ int main(int argc, char *argv[]) {
 	int pkts_sec; 
 	int per_cycle_pkt_count; 
 	int sleep_time; 
-	
-
+	int rc; 
+	int inner_count; 
+	// char macbuf[6]; 
 
 	pcap_t *fp; 
-	int rc;
 	unsigned int packet_num = 0; 	
 	unsigned char packet[PACKET_LEN]; 
 	__int64 perf_freq; 
@@ -406,6 +498,23 @@ int main(int argc, char *argv[]) {
 	} 
 
 	printf("Using: %s (%s)\n", namebuf, descbuf); 
+	
+	/* get mac addr of our buffer */ 
+	rc = getMacAddrFromPcapName(namebuf, macbuf); 
+	if ( rc != 0 ) { 
+		printf("could not find mac addr for: %s\n", namebuf); 
+	} 
+	else { 
+		int j; 
+		printf("Phys addr: "); 
+		for (  j = 0; j < sizeof(macbuf); j++ ) { 
+			if ( j != 0 ) { 
+				printf(":"); 
+			}
+			printf("%02x", (unsigned char)(macbuf[j])); 
+		} 
+		printf("\n");
+	} 
 
 
 	/* if we get here namebuf has the name of the pcapbuf we want to play with */ 
@@ -451,9 +560,10 @@ int main(int argc, char *argv[]) {
 	} 
 
 	if ( iqlr_mode ) { 
-		pkts_sec = 380; 
-		per_cycle_pkt_count = 4; 
-		sleep_time = 10; 
+		pkts_sec = 381; 
+		per_cycle_pkt_count = 2; 
+		sleep_time = 5; 
+		inner_count = -1; 
 	}
 	else { 
 		pkts_sec = 1500; 
@@ -464,7 +574,7 @@ int main(int argc, char *argv[]) {
 	printf("Beaconing %d packets/sec ... ctrl-c to stop...", pkts_sec); fflush(stdout); 
 
 	while ( 1 ) { 
-		int j; 
+		int j; 		
 		for ( j = 0; j < per_cycle_pkt_count; j++ ) { 
 			// memcpy(packet + 16, &packet_num, 4);		
 			cvt32BitsIntTo4Bytes(packet_num, packet + 16);
@@ -477,12 +587,14 @@ int main(int argc, char *argv[]) {
 		}
 		Sleep(sleep_time); 
 		if ( iqlr_mode ) { 
-			if ( sleep_time == 10 ) { 
-				sleep_time = 11; 
+			++inner_count; 
+			if ( inner_count >= 3 ) { 
+				sleep_time = 6;
+				inner_count = -1; 
 			} 
 			else { 
-				sleep_time = 10; 
-			} 	 
+				sleep_time = 5; 
+			} 
 		} 
 	}
 	pcap_close(fp);
