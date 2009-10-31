@@ -530,9 +530,18 @@ int main(int argc, char *argv[]) {
 	} 
 
 	/* target mac addr */ 
+	/*
 	for ( i = 0; i < 6; i++ ) { 
 		packet[i] = 0xff; 
 	} 
+	*/ 
+	packet[0] =  0x00; 
+	packet[1] =  0x04;
+	packet[2] =  0xf4; 
+	packet[3] =  0x55; 
+	packet[4] =  0x5e; 
+	packet[5] =  0x8e; 
+
 	/* src mac addr */ 
 	for ( i = 6; i < 12; i++ ) { 
 		packet[i] = macbuf[i-6]; 
