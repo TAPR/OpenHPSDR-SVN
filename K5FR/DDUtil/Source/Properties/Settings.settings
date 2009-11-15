@@ -701,5 +701,14 @@ RCP4 - WriteLog</Value>
     <Setting Name="vspMgrFile" Type="System.String" Scope="User">
       <Value Profile="(Default)">""</Value>
     </Setting>
+    <Setting Name="AzOffset" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="SPEport" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">-1</Value>
+    </Setting>
+    <Setting Name="SPEenab" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

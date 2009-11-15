@@ -815,7 +815,7 @@ namespace DataDecoder
             this.lblStepFreq.Name = "lblStepFreq";
             this.lblStepFreq.Size = new System.Drawing.Size(41, 15);
             this.lblStepFreq.TabIndex = 104;
-            this.lblStepFreq.Text = "Fault";
+            this.lblStepFreq.Text = ". . . . .";
             this.lblStepFreq.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             this.toolTip1.SetToolTip(this.lblStepFreq, "Frequency reported from SteppIR controller.");
             // 

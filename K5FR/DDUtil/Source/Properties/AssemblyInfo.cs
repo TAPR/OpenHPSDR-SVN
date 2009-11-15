@@ -6,7 +6,7 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("DDUtil")]
-[assembly: AssemblyDescription("Flex Data Decoder Utility")]
+[assembly: AssemblyDescription("Data Decoder Utility")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("DDUtil")]
@@ -30,4 +30,4 @@ using System.Runtime.InteropServices;
 //      Revision
 //
 [assembly: AssemblyVersion("1.0.0.0")]
-[assembly: AssemblyFileVersion("1.7.7.14")]
+[assembly: AssemblyFileVersion("1.7.8.10")]
