@@ -6098,7 +6098,7 @@ namespace DataDecoder
                 set.rotorModel = 0;
                 rotormod = RotorMod.AlphaSpid;
                 grpSpeed.Visible = false;
-                suffix = "/ "; // 1F, 20
+                suffix = "/ "; // 0x2F, 0x20
                 if (chkRotorEnab.Checked) RotorPort.Write(
                     "W\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x1f\x20");
                 chkTenths.Visible = false;
@@ -6149,6 +6149,7 @@ namespace DataDecoder
                 rotormod = RotorMod.Prosistel;
                 grpSpeed.Visible = false;
                 chkTenths.Visible = false;
+                suffix = "\r";
                 //put rotor in CPM mode
                 RotorPort.Write("\x02\x41\x4d\r");
                 Thread.Sleep(100);
@@ -8317,6 +8318,7 @@ namespace DataDecoder
             if (chkStep.Checked)
             {
                 StepData.Write("@A\0\0\0\0\0\0S0\r"); // Home the antenna
+                ShowAnt(true);
                 Thread.Sleep(100);
                 StepData.Write("?A\r");
                 StepTimer.Enabled = true;
@@ -8339,6 +8341,7 @@ namespace DataDecoder
         public void btnCalib_Click(object sender, EventArgs e)
         {
             StepData.Write("@A\0\0\0\0\0\0V0\r");
+            ShowAnt(true);
             Thread.Sleep(100);
             StepData.Write("?A\r");
             StepTimer.Enabled = true;
@@ -8403,12 +8406,19 @@ namespace DataDecoder
                     if (xfreq > 99999)
                     {
                         freq = Convert.ToDouble(sfreq.Substring(0, 2) + "." + sfreq.Substring(2, 4));
+                        SetStepFreq(freq.ToString("0.00", CultureInfo.InvariantCulture));
+                    }
+                    else if (xfreq > 0 && xfreq < 99999)
+                    {
+                        freq = Convert.ToDouble(sfreq.Substring(0, 1) + "." + sfreq.Substring(1, 4));
+                        SetStepFreq(freq.ToString("0.00", CultureInfo.InvariantCulture));
                     }
                     else
                     {
-                        freq = Convert.ToDouble(sfreq.Substring(0, 1) + "." + sfreq.Substring(1, 4));
+                        SetStepFreq("Home");
                     }
-                    SetStepFreq(freq.ToString("0.00", CultureInfo.InvariantCulture));
+                    
+                    
 
                     // See if motor(s) moving
                     if (mot == "0")
@@ -10204,9 +10214,7 @@ namespace DataDecoder
         bool SPEon = false;
         static string[] SPEerrors = new string[] {
 
-            "","","","","","","","","","","","","","","", // 00-0E
-            "WARNING: PA Voltage Low",   //0F
-            "WARNING: PA Voltage Low",   //10
+            "","","","","","","","","","","","","","","","","", // 0x00-0x10
             "WARNING: PA Voltage Low",   //11
             "WARNING: PA Voltage Low",   //12
             "WARNING: PA Voltage High",  //13
@@ -10403,7 +10411,8 @@ namespace DataDecoder
             chkSPEenab.Checked = set.SPEenab;
             SPEmsgClr("");
             // the following are for testing only, see SPE test routines region 
-            //if (TestPort.IsOpen) { TestPort.Close();}
+            //if (TestPort.IsOpen) { TestPort.Close(); }
+            //TestPort.PortName = "COM29";
             //TestPort.Open();
             //LoadPkt();
         }
@@ -10416,7 +10425,10 @@ namespace DataDecoder
         private void SPEport_DataReceived(object sender, SerialDataReceivedEventArgs e)
         {
             if (!SPEon) // turn on the main power light
-            { SPETimer.Enabled = true; SPEon = true; SetSPEon("True"); }
+            { 
+                SPETimer.Enabled = true; 
+                SPEon = true; 
+                SetSPEon("True"); }
 
             SetSPEled("");
             led = !led;
@@ -10465,6 +10477,7 @@ namespace DataDecoder
                                 SPETimer.Enabled = false;
                                 SetSPEled("False");
                                 SPEon = false;
+                                SPEport.DiscardInBuffer();
                                 return;
                             }
                         }
@@ -10556,16 +10569,27 @@ namespace DataDecoder
         private void btnSPEon_Click(object sender, EventArgs e)
         {
             SPEport.DtrEnable = true;
-            Thread.Sleep(200);
-            SPEport.DtrEnable = false;
+            using (new HourGlass())
+            {
+                Thread.Sleep(10000); // allow time for radio to initialize
+            }
+            byte[] bytes = new byte[6] { 0x55, 0x55, 0x55, 0x01, 0x81, 0x81 };
+            SPEport.Write(bytes, 0, 6);
         }
         // the power off button has been pressed
         private void btnSPEoff_Click(object sender, EventArgs e)
         {
-            if (SPEport.IsOpen)
+            SPETimer.Stop();
+            SPEport.DiscardOutBuffer();
+            SPEport.DtrEnable = false;
+            using (new HourGlass())
             {
-                byte[] bytes = new byte[7] 
-                { 0x55, 0x55, 0x55, 0x02, 0x10, 0x18, 0x28 };
+                Thread.Sleep(5000); // allow time for radio to react
+            }
+            // send turn-off command
+            if (!SPEport.IsOpen) SPEport.Open();
+            {
+                byte[] bytes = new byte[7] { 0x55, 0x55, 0x55, 0x02, 0x10, 0x18, 0x28 };
                 SPEport.Write(bytes, 0, 7);
             }
         }
@@ -10744,16 +10768,13 @@ namespace DataDecoder
         private void button7_Click(object sender, EventArgs e)
         {
             // Don't forget to set port to com number before using
+            TestPort.PortName = "COM29";
             if (!TestPort.IsOpen) 
                 TestPort.Open();
             // 02 41 2C 3F 2C 31 35 37 2C B 2C 0D
             byte[] bytes = new byte[11] 
             { 0x02, 0x41, 0x2C, 0x3F, 0x2C, 0x31, 0x35, 0x37, 0x2C, 0x42, 0x0D };
             TestPort.Write(bytes, 0, 11);
-
-//            byte[] bytes = new byte[5] { 0x57, 0x04, 0x08, 0x03, 0x20 };
-//            TestPort.Write(bytes, 0, 5);
-
         }
 
         #endregion * Test Routines *
