@@ -5721,7 +5721,7 @@ namespace DataDecoder
             this.button7.Name = "button7";
             this.button7.Size = new System.Drawing.Size(10, 10);
             this.button7.TabIndex = 114;
-            this.toolTip1.SetToolTip(this.button7, "Press to display sensor matrix.");
+            this.toolTip1.SetToolTip(this.button7, "test button");
             this.button7.UseVisualStyleBackColor = false;
             this.button7.Visible = false;
             this.button7.Click += new System.EventHandler(this.button7_Click);
@@ -11737,7 +11737,6 @@ namespace DataDecoder
             // 
             // TestPort
             // 
-            this.TestPort.PortName = "COM29";
             this.TestPort.ReadTimeout = 500;
             this.TestPort.ReceivedBytesThreshold = 6;
             this.TestPort.WriteBufferSize = 4096;
