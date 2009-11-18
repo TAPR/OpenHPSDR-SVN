@@ -1,0 +1,54 @@
+Source		: System
+Method		: Read
+Time		: 1:15:46 PM
+Date		: 11/17/2009
+Computer	: i7-940
+Error		: The port is closed.
+Stack Trace	: at System.IO.Ports.SerialPort.Read(Byte[] buffer, Int32 offset, Int32 count)
+   at DataDecoder.Setup.SPEport_DataReceived(Object sender, SerialDataReceivedEventArgs e) in C:\Documents and Settings\Steve\Desktop\Repose_DDUtil\Source\Setup.cs:line 10454
+-------------------------------------------------------------------
+Source		: System
+Method		: Read
+Time		: 1:45:10 PM
+Date		: 11/17/2009
+Computer	: i7-940
+Error		: The port is closed.
+Stack Trace	: at System.IO.Ports.SerialPort.Read(Byte[] buffer, Int32 offset, Int32 count)
+   at DataDecoder.Setup.SPEport_DataReceived(Object sender, SerialDataReceivedEventArgs e) in C:\Documents and Settings\Steve\Desktop\Repose_DDUtil\Source\Setup.cs:line 10454
+-------------------------------------------------------------------
+Source		: System
+Method		: Read
+Time		: 5:34:28 PM
+Date		: 11/17/2009
+Computer	: i7-940
+Error		: The port is closed.
+Stack Trace	: at System.IO.Ports.SerialPort.Read(Byte[] buffer, Int32 offset, Int32 count)
+   at DataDecoder.Setup.SPEport_DataReceived(Object sender, SerialDataReceivedEventArgs e) in C:\Documents and Settings\Steve\Desktop\Repose_DDUtil\Source\Setup.cs:line 10468
+-------------------------------------------------------------------
+Source		: System
+Method		: Read
+Time		: 5:37:25 PM
+Date		: 11/17/2009
+Computer	: i7-940
+Error		: The port is closed.
+Stack Trace	: at System.IO.Ports.SerialPort.Read(Byte[] buffer, Int32 offset, Int32 count)
+   at DataDecoder.Setup.SPEport_DataReceived(Object sender, SerialDataReceivedEventArgs e) in C:\Documents and Settings\Steve\Desktop\Repose_DDUtil\Source\Setup.cs:line 10468
+-------------------------------------------------------------------
+Source		: System
+Method		: Read
+Time		: 5:52:29 PM
+Date		: 11/17/2009
+Computer	: i7-940
+Error		: The port is closed.
+Stack Trace	: at System.IO.Ports.SerialPort.Read(Byte[] buffer, Int32 offset, Int32 count)
+   at DataDecoder.Setup.SPEport_DataReceived(Object sender, SerialDataReceivedEventArgs e) in C:\Documents and Settings\Steve\Desktop\Repose_DDUtil\Source\Setup.cs:line 10468
+-------------------------------------------------------------------
+Source		: System
+Method		: Read
+Time		: 6:03:49 PM
+Date		: 11/17/2009
+Computer	: i7-940
+Error		: The port is closed.
+Stack Trace	: at System.IO.Ports.SerialPort.Read(Byte[] buffer, Int32 offset, Int32 count)
+   at DataDecoder.Setup.SPEport_DataReceived(Object sender, SerialDataReceivedEventArgs e) in C:\Documents and Settings\Steve\Desktop\Repose_DDUtil\Source\Setup.cs:line 10468
+-------------------------------------------------------------------
