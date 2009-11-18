@@ -10212,6 +10212,8 @@ namespace DataDecoder
         #region # Vars & Tables #
 
         bool SPEon = false;
+        bool wattmtr = false;
+
         static string[] SPEerrors = new string[] {
 
             "","","","","","","","","","","","","","","","","", // 0x00-0x10
@@ -10222,9 +10224,9 @@ namespace DataDecoder
             "WARNING: PA Current High",  //15
             "WARNING: PA Current High",  //16
             "WARNING: PA Temp >90C",     //17
-            "WARNING: PA Drive to High",    //18
-            "WARNING: Attempt to Oper in 12M Band",  //19
-            "WARNING: Attempt to Oper in 10M Band",  //1A
+            "WARNING: PA Drive to High", //18
+            "",                          //19
+            "",                          //1A
             "WARNING: HIGH SWR",         //1B
             "WARNING: PA Protection Fault",  //1C
             "Alarm History to Follow",   //1D
@@ -10409,7 +10411,22 @@ namespace DataDecoder
         {
             cboSPEport.SelectedIndex = set.SPEport;
             chkSPEenab.Checked = set.SPEenab;
+            SPETimer.Enabled = false;
             SPEmsgClr("");
+            // see if digital watt meter is being used.
+            if (chkSPEenab.Checked && !chkLPenab.Checked && !chkWNEnab.Checked && !chkPM.Checked)
+            {
+                txtAvg.Enabled = true; txtSWR.Enabled = true;
+                txtAvg.Text = "0.0"; txtSWR.Text = "0.00";
+                wattmtr = true;
+            }
+            else wattmtr = false;
+
+            // test to see if amp is running
+            if (!SPEport.IsOpen) SPEport.Open();
+            byte[] bytes = new byte[6] { 0x55, 0x55, 0x55, 0x01, 0x81, 0x81 };
+            SPEport.Write(bytes, 0, 6);
+
             // the following are for testing only, see SPE test routines region 
             //if (TestPort.IsOpen) { TestPort.Close(); }
             //TestPort.PortName = "COM29";
@@ -10425,12 +10442,21 @@ namespace DataDecoder
         private void SPEport_DataReceived(object sender, SerialDataReceivedEventArgs e)
         {
             if (!SPEon) // turn on the main power light
-            { 
+            {
+                // see if digital watt meter is being used.
+                if (!chkLPenab.Checked && !chkWNEnab.Checked && !chkPM.Checked)
+                {
+                    //txtAvg.Enabled = true; txtSWR.Enabled = true;
+                    //txtAvg.Text = "0.0"; txtSWR.Text = "0.00";
+                    wattmtr = true;
+                }
+                else wattmtr = false;
+
                 SPETimer.Enabled = true; 
                 SPEon = true; 
-                SetSPEon("True"); }
-
-            SetSPEled("");
+                SetSPEon("True"); 
+            }
+            SetSPEled("");  // toggle activity indicator
             led = !led;
 
             if (chkSPEenab.Checked) // port must be enabled to accept data
@@ -10442,21 +10468,21 @@ namespace DataDecoder
                     port.Read(data, 0, data.Length);
                     if (data[0] == 0xAA && data[1] == 0xAA && data[2] == 0xAA)
                     {   // Power status
-                        if (Convert.ToBoolean(data[5] & 0x10)) 
+                        if (Convert.ToBoolean(data[5] & 0x10))
                             SetSPEpwr("Full");
                         else SetSPEpwr("Half");
                         // Operate / Stby
-                        if (Convert.ToBoolean(data[5] & 0x02)) 
+                        if (Convert.ToBoolean(data[5] & 0x02))
                             SetSPEoper("Oper");
                         else SetSPEoper("Stby");
                         // tuner operation
-                        if (Convert.ToBoolean(data[5] & 0x01)) 
+                        if (Convert.ToBoolean(data[5] & 0x01))
                             SetSPEtune("True");
                         else SetSPEtune("False");
                         // Warning message received
                         if (data[6] > 0x00)
                         {
-                            if (data[6] > 0x0E && data[6] < 0x1D)
+                            if (data[6] > 0x10 && data[6] < 0x1D)
                             {
                                 SetSPEmsg(SPEerrors[data[6]]);
                             }
@@ -10477,18 +10503,38 @@ namespace DataDecoder
                                 SPETimer.Enabled = false;
                                 SetSPEled("False");
                                 SPEon = false;
+                                wattmtr = false;
                                 SPEport.DiscardInBuffer();
+                                SetAvg(" ");
+                                SetSwr(" ");
                                 return;
                             }
                         }
-
                         // antenna selected
-                        SetSPEant(data[22].ToString());     // antenna
+                        SetSPEant((data[22] & 0x0F).ToString());     // antenna
+
+                        // SWR reading
+                        if (wattmtr)
+                        {
+                            int tswr = (data[24] << 8) + data[23];
+                            string swr = tswr.ToString();
+                            SetSwr(swr.Substring(0, swr.Length - 2) + "." +
+                                swr.Substring(swr.Length - 2, 2));
+                        }
                         // pa temp(C)
-                        if (Convert.ToBoolean(data[5] & 0x80)) 
-                        SetSPEtemp(data[25].ToString() + " C");
+                        if (Convert.ToBoolean(data[5] & 0x80))
+                            SetSPEtemp(data[25].ToString() + " C");
                         else
                             SetSPEtemp(data[25].ToString() + " F");
+                        
+                        // PWR reading
+                        if (wattmtr)
+                        {
+                            int tpwr = (data[27] << 8) + data[26];
+                            string pwr = tpwr.ToString();
+                            SetAvg(pwr.Substring(0, pwr.Length - 1) + "." +
+                                    pwr.Substring(pwr.Length - 1, 1));
+                        }
                     }
                 }
                 catch (Exception ex)
@@ -10507,6 +10553,7 @@ namespace DataDecoder
                 if (cboSPEport.SelectedIndex > 0)
                 {
                     set.SPEenab = true;
+                    InitSPE();
                 }
                 else
                 {
@@ -10522,7 +10569,7 @@ namespace DataDecoder
                 SPEon = false;
                 SetSPEon("False"); SetSPEoper("Off"); SetSPEtune("Off");
                 SetSPEpwr("Off"); SetSPEtemp("   "); SPEmsgClr("");
-                SetSPEled("False");
+                SetSPEled("False"); txtAvg.Enabled = false; txtSWR.Enabled = false;
                 chkSPEenab.Checked = false; set.SPEenab = false;
             }
             set.Save();
@@ -10568,26 +10615,31 @@ namespace DataDecoder
         // the power on button has been pressed, toggle the DTR line
         private void btnSPEon_Click(object sender, EventArgs e)
         {
-            SPEport.DtrEnable = true;
-            using (new HourGlass())
+            if (!SPEon)
             {
-                Thread.Sleep(10000); // allow time for radio to initialize
+                SPEport.DtrEnable = true;
+                using (new HourGlass())
+                {
+                    Thread.Sleep(5000); // allow time for DTR to initialize radio
+                }
+                SPEport.DtrEnable = false;
+                using (new HourGlass())
+                {
+                    Thread.Sleep(3000); // allow time for radio to settle
+                }
+                // send polling command
+                byte[] bytes = new byte[6] { 0x55, 0x55, 0x55, 0x01, 0x81, 0x81 };
+                SPEport.Write(bytes, 0, 6);
             }
-            byte[] bytes = new byte[6] { 0x55, 0x55, 0x55, 0x01, 0x81, 0x81 };
-            SPEport.Write(bytes, 0, 6);
         }
         // the power off button has been pressed
         private void btnSPEoff_Click(object sender, EventArgs e)
         {
             SPETimer.Stop();
             SPEport.DiscardOutBuffer();
-            SPEport.DtrEnable = false;
-            using (new HourGlass())
-            {
-                Thread.Sleep(5000); // allow time for radio to react
-            }
+            SPEport.DtrEnable = false; // backup, should already be off...
             // send turn-off command
-            if (!SPEport.IsOpen) SPEport.Open();
+            if (SPEport.IsOpen)
             {
                 byte[] bytes = new byte[7] { 0x55, 0x55, 0x55, 0x02, 0x10, 0x18, 0x28 };
                 SPEport.Write(bytes, 0, 7);
@@ -10631,6 +10683,8 @@ namespace DataDecoder
                 byte[] bytes = new byte[7]
                 { 0x55, 0x55, 0x55, 0x02, 0x10, 0x1B, 0x2B };
                 SPEport.Write(bytes, 0, 7);
+                //Thread.Sleep(100);
+                //SPEport.Write(bytes, 0, 7);
             }
         }
         // the message text box has been double-clicked, clear the window.
@@ -10742,13 +10796,13 @@ namespace DataDecoder
                 string sts = "00";          // 4
                 string flgs = "80";         // 5
                 string ctx = "1D";          // 6
-                string dis = "0010141517181B00000000"; // 7 - 17
+                string dis = "00131517181B1C00000000"; // 7 - 17
                 string bnd = "0000";        // 18 - 19
                 string freq = "1437";       // 20 - 21 14100 khz
-                string ant = "01";          // 22 ant 1 selected
-                string swr = "0000";        // 23 - 24 Lo/Hi bytes
+                string ant = "F3";          // 22 ant 1 selected
+                string swr = "7B00";        // 23 - 24 Lo/Hi bytes
                 string tmp = "18";          // 25 50C
-                string pwrf = "0000";       // 26 - 27 fwd pwr Lo/Hi
+                string pwrf = "0528";       // 26 - 27 fwd pwr Lo/Hi
                 string pwrr = "0000";       // 28 - 29 ref pwr Lo/Hi
                 string va = "0000";         // 30 - 31 pa volts Lo/Hi
                 string ia = "0000";         // 32 - 33 pa current Lo/Hi
@@ -10778,7 +10832,6 @@ namespace DataDecoder
         }
 
         #endregion * Test Routines *
-
 
         #endregion SPE Amp
     }

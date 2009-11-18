@@ -208,6 +208,7 @@ namespace DataDecoder
             this.chkLPenab = new System.Windows.Forms.CheckBox();
             this.label2 = new System.Windows.Forms.Label();
             this.tabAmp = new System.Windows.Forms.TabPage();
+            this.button7 = new System.Windows.Forms.Button();
             this.grpSPE = new System.Windows.Forms.GroupBox();
             this.rbLed = new System.Windows.Forms.RadioButton();
             this.label161 = new System.Windows.Forms.Label();
@@ -384,7 +385,6 @@ namespace DataDecoder
             this.btnMacro9 = new System.Windows.Forms.Button();
             this.btnMacro10 = new System.Windows.Forms.Button();
             this.tabRotor = new System.Windows.Forms.TabPage();
-            this.button7 = new System.Windows.Forms.Button();
             this.groupBox12 = new System.Windows.Forms.GroupBox();
             this.txtKm = new System.Windows.Forms.TextBox();
             this.txtSm = new System.Windows.Forms.TextBox();
@@ -3187,6 +3187,7 @@ namespace DataDecoder
             // 
             // tabAmp
             // 
+            this.tabAmp.Controls.Add(this.button7);
             this.tabAmp.Controls.Add(this.grpSPE);
             this.tabAmp.Controls.Add(this.grpAmpBand);
             this.tabAmp.Controls.Add(this.grpPTT);
@@ -3199,6 +3200,19 @@ namespace DataDecoder
             this.tabAmp.TabIndex = 7;
             this.tabAmp.Text = "Amps";
             this.tabAmp.UseVisualStyleBackColor = true;
+            // 
+            // button7
+            // 
+            this.button7.BackColor = System.Drawing.SystemColors.Control;
+            this.button7.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button7.Location = new System.Drawing.Point(250, 100);
+            this.button7.Name = "button7";
+            this.button7.Size = new System.Drawing.Size(39, 22);
+            this.button7.TabIndex = 115;
+            this.button7.Text = "Test";
+            this.toolTip1.SetToolTip(this.button7, "test button");
+            this.button7.UseVisualStyleBackColor = false;
+            this.button7.Visible = false;
             // 
             // grpSPE
             // 
@@ -3382,7 +3396,7 @@ namespace DataDecoder
             this.txtSPEmsg.Size = new System.Drawing.Size(214, 46);
             this.txtSPEmsg.TabIndex = 61;
             this.txtSPEmsg.Text = "- Amp Condition Status\r\n- Error Messages\r\n- Double-Click to Clear";
-            this.toolTip1.SetToolTip(this.txtSPEmsg, "Displays Status and Fault messages.");
+            this.toolTip1.SetToolTip(this.txtSPEmsg, "Displays Status and Fault messages (double-click to clear).");
             this.txtSPEmsg.DoubleClick += new System.EventHandler(this.txtSPEmsg_DoubleClick);
             // 
             // btnSPEtune
@@ -5699,7 +5713,6 @@ namespace DataDecoder
             // 
             // tabRotor
             // 
-            this.tabRotor.Controls.Add(this.button7);
             this.tabRotor.Controls.Add(this.groupBox12);
             this.tabRotor.Controls.Add(this.grpPreset);
             this.tabRotor.Controls.Add(this.grpStepCtrl);
@@ -5712,19 +5725,6 @@ namespace DataDecoder
             this.tabRotor.TabIndex = 5;
             this.tabRotor.Text = "Rotor";
             this.tabRotor.UseVisualStyleBackColor = true;
-            // 
-            // button7
-            // 
-            this.button7.BackColor = System.Drawing.Color.Lime;
-            this.button7.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button7.Location = new System.Drawing.Point(418, 132);
-            this.button7.Name = "button7";
-            this.button7.Size = new System.Drawing.Size(10, 10);
-            this.button7.TabIndex = 114;
-            this.toolTip1.SetToolTip(this.button7, "test button");
-            this.button7.UseVisualStyleBackColor = false;
-            this.button7.Visible = false;
-            this.button7.Click += new System.EventHandler(this.button7_Click);
             // 
             // groupBox12
             // 
