@@ -10211,7 +10211,9 @@ namespace DataDecoder
 
         #region # Vars & Tables #
 
+        int SPEctr = 0;
         bool SPEon = false;
+        bool SPEoff = false;
         bool wattmtr = false;
 
         static string[] SPEerrors = new string[] {
@@ -10307,7 +10309,7 @@ namespace DataDecoder
             }
             else txtSPEant.Text = text;
         }
-        // Write to AC Power On button
+        // Write to Mains On button
         delegate void SetSPEonCallback(string text);
         public void SetSPEon(string text)
         {
@@ -10320,6 +10322,21 @@ namespace DataDecoder
             {
                 if (text == "True") btnSPEon.BackColor = Color.LightGreen;
                 else btnSPEon.BackColor = Color.Empty;
+            }
+        }
+        // Write to Mains OFF button
+        delegate void SetSPEoffCallback(string text);
+        public void SetSPEoff(string text)
+        {
+            if (this.btnSPEoff.InvokeRequired)
+            {
+                SetSPEoffCallback d = new SetSPEoffCallback(SetSPEoff);
+                this.Invoke(d, new object[] { text });
+            }
+            else
+            {
+                if (text == "True") btnSPEoff.BackColor = Color.Yellow;
+                else btnSPEoff.BackColor = Color.Empty;
             }
         }
         // Write to Oper/Stby (Mode) button
@@ -10409,29 +10426,35 @@ namespace DataDecoder
         //  Initialize SPE settings and controls (called from Setup())
         private void InitSPE()
         {
-            cboSPEport.SelectedIndex = set.SPEport;
-            chkSPEenab.Checked = set.SPEenab;
-            SPETimer.Enabled = false;
-            SPEmsgClr("");
-            // see if digital watt meter is being used.
-            if (chkSPEenab.Checked && !chkLPenab.Checked && !chkWNEnab.Checked && !chkPM.Checked)
+            try
             {
-                txtAvg.Enabled = true; txtSWR.Enabled = true;
-                txtAvg.Text = "0.0"; txtSWR.Text = "0.00";
-                wattmtr = true;
+                cboSPEport.SelectedIndex = set.SPEport;
+                chkSPEenab.Checked = set.SPEenab;
+                SPETimer.Enabled = false;
+                SPEoff = false;
+                SPEmsgClr("");
+                // see if digital watt meter is being used.
+                if (chkSPEenab.Checked && !chkLPenab.Checked && !chkWNEnab.Checked && !chkPM.Checked)
+                {
+                    txtAvg.Enabled = true; txtSWR.Enabled = true;
+                    txtAvg.Text = "0.0"; txtSWR.Text = "0.00";
+                    wattmtr = true;
+                }
+                else wattmtr = false;
+
+                // the following are for testing only, see SPE test routines region 
+                //if (TestPort.IsOpen) { TestPort.Close(); }
+                //TestPort.PortName = "COM29";
+                //TestPort.Open();
+                //LoadPkt();
+
+                // test to see if amp is running
+                if (!SPEport.IsOpen) SPEport.Open();
+                byte[] bytes = new byte[6] { 0x55, 0x55, 0x55, 0x01, 0x81, 0x81 };
+                SPEport.Write(bytes, 0, 6);
+
             }
-            else wattmtr = false;
-
-            // test to see if amp is running
-            if (!SPEport.IsOpen) SPEport.Open();
-            byte[] bytes = new byte[6] { 0x55, 0x55, 0x55, 0x01, 0x81, 0x81 };
-            SPEport.Write(bytes, 0, 6);
-
-            // the following are for testing only, see SPE test routines region 
-            //if (TestPort.IsOpen) { TestPort.Close(); }
-            //TestPort.PortName = "COM29";
-            //TestPort.Open();
-            //LoadPkt();
+            catch { }
         }
 
         #endregion # Methods #
@@ -10441,31 +10464,29 @@ namespace DataDecoder
         // the SPE port has received data
         private void SPEport_DataReceived(object sender, SerialDataReceivedEventArgs e)
         {
-            if (!SPEon) // turn on the main power light
-            {
-                // see if digital watt meter is being used.
-                if (!chkLPenab.Checked && !chkWNEnab.Checked && !chkPM.Checked)
-                {
-                    //txtAvg.Enabled = true; txtSWR.Enabled = true;
-                    //txtAvg.Text = "0.0"; txtSWR.Text = "0.00";
-                    wattmtr = true;
-                }
-                else wattmtr = false;
 
-                SPETimer.Enabled = true; 
-                SPEon = true; 
-                SetSPEon("True"); 
-            }
-            SetSPEled("");  // toggle activity indicator
-            led = !led;
-
-            if (chkSPEenab.Checked) // port must be enabled to accept data
+            if (!SPEoff && chkSPEenab.Checked) // port must be enabled to accept data
             {
                 try
                 {
+                    if (!SPEon) // turn on the main power light
+                    {
+                        // see if digital watt meter is being used.
+                        if (!chkLPenab.Checked && !chkWNEnab.Checked && !chkPM.Checked)
+                            wattmtr = true;
+                        else
+                            wattmtr = false;
+
+                        SPETimer.Enabled = true;
+                        SPEon = true;
+                        SetSPEon("True");
+                    }
+                    SetSPEled("");  // toggle activity indicator
+                    led = !led;
                     SerialPort port = (SerialPort)sender;
-                    byte[] data = new byte[35];
+                    byte[] data = new byte[port.BytesToRead];
                     port.Read(data, 0, data.Length);
+
                     if (data[0] == 0xAA && data[1] == 0xAA && data[2] == 0xAA)
                     {   // Power status
                         if (Convert.ToBoolean(data[5] & 0x10))
@@ -10496,19 +10517,19 @@ namespace DataDecoder
                                 }
                             }
                             // the amp is shutting down
-                            else if (data[6] == 0x1E)
-                            {
-                                SetSPEon("False"); SetSPEoper("Off"); SetSPEtune("Off");
-                                SetSPEpwr("Off"); SetSPEtemp("   "); SPEmsgClr("");
-                                SPETimer.Enabled = false;
-                                SetSPEled("False");
-                                SPEon = false;
-                                wattmtr = false;
-                                SPEport.DiscardInBuffer();
-                                SetAvg(" ");
-                                SetSwr(" ");
-                                return;
-                            }
+                            //else if (data[6] == 0x1E)
+                            //{
+                            //    SetSPEon("False"); SetSPEoper("Off"); SetSPEtune("Off");
+                            //    SetSPEpwr("Off"); SetSPEtemp("   "); SPEmsgClr("");
+                            //    SPETimer.Enabled = false;
+                            //    SetSPEled("False");
+                            //    SPEon = false;
+                            //    wattmtr = false;
+                            //    SPEport.DiscardInBuffer();
+                            //    SetAvg(" ");
+                            //    SetSwr(" ");
+                            //    return;
+                            //}
                         }
                         // antenna selected
                         SetSPEant((data[22] & 0x0F).ToString());     // antenna
@@ -10526,7 +10547,7 @@ namespace DataDecoder
                             SetSPEtemp(data[25].ToString() + " C");
                         else
                             SetSPEtemp(data[25].ToString() + " F");
-                        
+
                         // PWR reading
                         if (wattmtr)
                         {
@@ -10543,6 +10564,21 @@ namespace DataDecoder
                     bReturnLog = ErrorLog.ErrorRoutine(false, enableErrorLog, ex);
                     if (false == bReturnLog) MessageBox.Show("Unable to write to log");
                 }
+            }
+            else if (SPEoff)
+            {
+                SPEport.DiscardInBuffer();
+                SetSPEon("False"); SetSPEoper("Off"); SetSPEtune("Off");
+                SetSPEpwr("Off"); SetSPEtemp("   "); SPEmsgClr("");
+                SPETimer.Enabled = false;
+                SetSPEled("False");
+                SPEon = false;
+                wattmtr = false;
+                SetAvg(" ");
+                SetSwr(" ");
+                SetSPEoff("True"); // blink the off button
+                Thread.Sleep(300);
+                SetSPEoff("False");
             }
         }
         // the enable checkbox has been checked
@@ -10617,6 +10653,7 @@ namespace DataDecoder
         {
             if (!SPEon)
             {
+                SPEoff = false;
                 SPEport.DtrEnable = true;
                 using (new HourGlass())
                 {
@@ -10638,12 +10675,21 @@ namespace DataDecoder
             SPETimer.Stop();
             SPEport.DiscardOutBuffer();
             SPEport.DtrEnable = false; // backup, should already be off...
+            SPEoff = true;
+            SPEctr = 0;
             // send turn-off command
             if (SPEport.IsOpen)
             {
+                // send Off cmd to amp
                 byte[] bytes = new byte[7] { 0x55, 0x55, 0x55, 0x02, 0x10, 0x18, 0x28 };
                 SPEport.Write(bytes, 0, 7);
             }
+            using (new HourGlass())
+            {
+                Thread.Sleep(5000); // allow time for radio to shut down
+            }
+            SPEoff = false;
+            SPEon = false;
         }
         // the oper/stby button has been pressed
         private void btnSPEoper_Click(object sender, EventArgs e)
@@ -10683,8 +10729,8 @@ namespace DataDecoder
                 byte[] bytes = new byte[7]
                 { 0x55, 0x55, 0x55, 0x02, 0x10, 0x1B, 0x2B };
                 SPEport.Write(bytes, 0, 7);
-                //Thread.Sleep(100);
-                //SPEport.Write(bytes, 0, 7);
+                Thread.Sleep(100);
+                SPEport.Write(bytes, 0, 7);
             }
         }
         // the message text box has been double-clicked, clear the window.

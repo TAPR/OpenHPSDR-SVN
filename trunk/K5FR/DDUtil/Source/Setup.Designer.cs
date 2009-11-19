@@ -3274,7 +3274,6 @@ namespace DataDecoder
             this.txtSPEant.Name = "txtSPEant";
             this.txtSPEant.Size = new System.Drawing.Size(18, 18);
             this.txtSPEant.TabIndex = 85;
-            this.txtSPEant.Text = "0";
             this.txtSPEant.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.toolTip1.SetToolTip(this.txtSPEant, "Selected antenna");
             // 
