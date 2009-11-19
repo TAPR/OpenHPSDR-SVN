@@ -52,3 +52,12 @@ Error		: The port is closed.
 Stack Trace	: at System.IO.Ports.SerialPort.Read(Byte[] buffer, Int32 offset, Int32 count)
    at DataDecoder.Setup.SPEport_DataReceived(Object sender, SerialDataReceivedEventArgs e) in C:\Documents and Settings\Steve\Desktop\Repose_DDUtil\Source\Setup.cs:line 10468
 -------------------------------------------------------------------
+Source		: System
+Method		: get_BytesToRead
+Time		: 1:42:14 PM
+Date		: 11/18/2009
+Computer	: i7-940
+Error		: The port is closed.
+Stack Trace	: at System.IO.Ports.SerialPort.get_BytesToRead()
+   at DataDecoder.Setup.SPEport_DataReceived(Object sender, SerialDataReceivedEventArgs e) in C:\Documents and Settings\Steve\Desktop\Repose_DDUtil\Source\Setup.cs:line 10487
+-------------------------------------------------------------------
