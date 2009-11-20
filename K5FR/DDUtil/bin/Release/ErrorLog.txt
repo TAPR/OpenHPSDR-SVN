@@ -61,3 +61,1548 @@ Error		: The port is closed.
 Stack Trace	: at System.IO.Ports.SerialPort.get_BytesToRead()
    at DataDecoder.Setup.SPEport_DataReceived(Object sender, SerialDataReceivedEventArgs e) in C:\Documents and Settings\Steve\Desktop\Repose_DDUtil\Source\Setup.cs:line 10487
 -------------------------------------------------------------------
+Source		: DataDecoder
+Method		: SPEport_DataReceived
+Time		: 8:20:10 AM
+Date		: 11/20/2009
+Computer	: i7-940
+Error		: Index was outside the bounds of the array.
+Stack Trace	: at DataDecoder.Setup.SPEport_DataReceived(Object sender, SerialDataReceivedEventArgs e) in C:\Documents and Settings\Steve\Desktop\Repose_DDUtil\Source\Setup.cs:line 10512
+-------------------------------------------------------------------
+Source		: DataDecoder
+Method		: SPEport_DataReceived
+Time		: 8:20:37 AM
+Date		: 11/20/2009
+Computer	: i7-940
+Error		: Index was outside the bounds of the array.
+Stack Trace	: at DataDecoder.Setup.SPEport_DataReceived(Object sender, SerialDataReceivedEventArgs e) in C:\Documents and Settings\Steve\Desktop\Repose_DDUtil\Source\Setup.cs:line 10512
+-------------------------------------------------------------------
+Source		: mscorlib
+Method		: InternalSubStringWithChecks
+Time		: 8:20:48 AM
+Date		: 11/20/2009
+Computer	: i7-940
+Error		: Length cannot be less than zero.
+Parameter name: length
+Stack Trace	: at System.String.InternalSubStringWithChecks(Int32 startIndex, Int32 length, Boolean fAlwaysCopy)
+   at System.String.Substring(Int32 startIndex, Int32 length)
+   at DataDecoder.Setup.SPEport_DataReceived(Object sender, SerialDataReceivedEventArgs e) in C:\Documents and Settings\Steve\Desktop\Repose_DDUtil\Source\Setup.cs:line 10564
+-------------------------------------------------------------------
+Source		: mscorlib
+Method		: InternalSubStringWithChecks
+Time		: 8:20:58 AM
+Date		: 11/20/2009
+Computer	: i7-940
+Error		: Length cannot be less than zero.
+Parameter name: length
+Stack Trace	: at System.String.InternalSubStringWithChecks(Int32 startIndex, Int32 length, Boolean fAlwaysCopy)
+   at System.String.Substring(Int32 startIndex, Int32 length)
+   at DataDecoder.Setup.SPEport_DataReceived(Object sender, SerialDataReceivedEventArgs e) in C:\Documents and Settings\Steve\Desktop\Repose_DDUtil\Source\Setup.cs:line 10564
+-------------------------------------------------------------------
+Source		: mscorlib
+Method		: InternalSubStringWithChecks
+Time		: 8:21:02 AM
+Date		: 11/20/2009
+Computer	: i7-940
+Error		: Length cannot be less than zero.
+Parameter name: length
+Stack Trace	: at System.String.InternalSubStringWithChecks(Int32 startIndex, Int32 length, Boolean fAlwaysCopy)
+   at System.String.Substring(Int32 startIndex, Int32 length)
+   at DataDecoder.Setup.SPEport_DataReceived(Object sender, SerialDataReceivedEventArgs e) in C:\Documents and Settings\Steve\Desktop\Repose_DDUtil\Source\Setup.cs:line 10564
+-------------------------------------------------------------------
+Source		: DataDecoder
+Method		: SPEport_DataReceived
+Time		: 8:21:04 AM
+Date		: 11/20/2009
+Computer	: i7-940
+Error		: Index was outside the bounds of the array.
+Stack Trace	: at DataDecoder.Setup.SPEport_DataReceived(Object sender, SerialDataReceivedEventArgs e) in C:\Documents and Settings\Steve\Desktop\Repose_DDUtil\Source\Setup.cs:line 10512
+-------------------------------------------------------------------
+Source		: mscorlib
+Method		: InternalSubStringWithChecks
+Time		: 8:21:04 AM
+Date		: 11/20/2009
+Computer	: i7-940
+Error		: Length cannot be less than zero.
+Parameter name: length
+Stack Trace	: at System.String.InternalSubStringWithChecks(Int32 startIndex, Int32 length, Boolean fAlwaysCopy)
+   at System.String.Substring(Int32 startIndex, Int32 length)
+   at DataDecoder.Setup.SPEport_DataReceived(Object sender, SerialDataReceivedEventArgs e) in C:\Documents and Settings\Steve\Desktop\Repose_DDUtil\Source\Setup.cs:line 10564
+-------------------------------------------------------------------
+Source		: mscorlib
+Method		: InternalSubStringWithChecks
+Time		: 8:21:07 AM
+Date		: 11/20/2009
+Computer	: i7-940
+Error		: Length cannot be less than zero.
+Parameter name: length
+Stack Trace	: at System.String.InternalSubStringWithChecks(Int32 startIndex, Int32 length, Boolean fAlwaysCopy)
+   at System.String.Substring(Int32 startIndex, Int32 length)
+   at DataDecoder.Setup.SPEport_DataReceived(Object sender, SerialDataReceivedEventArgs e) in C:\Documents and Settings\Steve\Desktop\Repose_DDUtil\Source\Setup.cs:line 10564
+-------------------------------------------------------------------
+Source		: mscorlib
+Method		: InternalSubStringWithChecks
+Time		: 8:21:11 AM
+Date		: 11/20/2009
+Computer	: i7-940
+Error		: Length cannot be less than zero.
+Parameter name: length
+Stack Trace	: at System.String.InternalSubStringWithChecks(Int32 startIndex, Int32 length, Boolean fAlwaysCopy)
+   at System.String.Substring(Int32 startIndex, Int32 length)
+   at DataDecoder.Setup.SPEport_DataReceived(Object sender, SerialDataReceivedEventArgs e) in C:\Documents and Settings\Steve\Desktop\Repose_DDUtil\Source\Setup.cs:line 10564
+-------------------------------------------------------------------
+Source		: mscorlib
+Method		: InternalSubStringWithChecks
+Time		: 8:21:13 AM
+Date		: 11/20/2009
+Computer	: i7-940
+Error		: Length cannot be less than zero.
+Parameter name: length
+Stack Trace	: at System.String.InternalSubStringWithChecks(Int32 startIndex, Int32 length, Boolean fAlwaysCopy)
+   at System.String.Substring(Int32 startIndex, Int32 length)
+   at DataDecoder.Setup.SPEport_DataReceived(Object sender, SerialDataReceivedEventArgs e) in C:\Documents and Settings\Steve\Desktop\Repose_DDUtil\Source\Setup.cs:line 10564
+-------------------------------------------------------------------
+Source		: System
+Method		: get_BytesToRead
+Time		: 8:21:30 AM
+Date		: 11/20/2009
+Computer	: i7-940
+Error		: The port is closed.
+Stack Trace	: at System.IO.Ports.SerialPort.get_BytesToRead()
+   at DataDecoder.Setup.SPEport_DataReceived(Object sender, SerialDataReceivedEventArgs e) in C:\Documents and Settings\Steve\Desktop\Repose_DDUtil\Source\Setup.cs:line 10509
+-------------------------------------------------------------------
+Source		: mscorlib
+Method		: InternalSubStringWithChecks
+Time		: 10:49:46 AM
+Date		: 11/20/2009
+Computer	: i7-940
+Error		: Length cannot be less than zero.
+Parameter name: length
+Stack Trace	: at System.String.InternalSubStringWithChecks(Int32 startIndex, Int32 length, Boolean fAlwaysCopy)
+   at System.String.Substring(Int32 startIndex, Int32 length)
+   at DataDecoder.Setup.SPEport_DataReceived(Object sender, SerialDataReceivedEventArgs e) in C:\Documents and Settings\Steve\Desktop\Repose_DDUtil\Source\Setup.cs:line 10568
+-------------------------------------------------------------------
+Source		: DataDecoder
+Method		: SPEport_DataReceived
+Time		: 10:49:46 AM
+Date		: 11/20/2009
+Computer	: i7-940
+Error		: Index was outside the bounds of the array.
+Stack Trace	: at DataDecoder.Setup.SPEport_DataReceived(Object sender, SerialDataReceivedEventArgs e) in C:\Documents and Settings\Steve\Desktop\Repose_DDUtil\Source\Setup.cs:line 10512
+-------------------------------------------------------------------
+Source		: DataDecoder
+Method		: SPEport_DataReceived
+Time		: 10:50:11 AM
+Date		: 11/20/2009
+Computer	: i7-940
+Error		: Index was outside the bounds of the array.
+Stack Trace	: at DataDecoder.Setup.SPEport_DataReceived(Object sender, SerialDataReceivedEventArgs e) in C:\Documents and Settings\Steve\Desktop\Repose_DDUtil\Source\Setup.cs:line 10512
+-------------------------------------------------------------------
+Source		: mscorlib
+Method		: InternalSubStringWithChecks
+Time		: 10:50:16 AM
+Date		: 11/20/2009
+Computer	: i7-940
+Error		: Length cannot be less than zero.
+Parameter name: length
+Stack Trace	: at System.String.InternalSubStringWithChecks(Int32 startIndex, Int32 length, Boolean fAlwaysCopy)
+   at System.String.Substring(Int32 startIndex, Int32 length)
+   at DataDecoder.Setup.SPEport_DataReceived(Object sender, SerialDataReceivedEventArgs e) in C:\Documents and Settings\Steve\Desktop\Repose_DDUtil\Source\Setup.cs:line 10568
+-------------------------------------------------------------------
+Source		: mscorlib
+Method		: InternalSubStringWithChecks
+Time		: 10:50:19 AM
+Date		: 11/20/2009
+Computer	: i7-940
+Error		: Length cannot be less than zero.
+Parameter name: length
+Stack Trace	: at System.String.InternalSubStringWithChecks(Int32 startIndex, Int32 length, Boolean fAlwaysCopy)
+   at System.String.Substring(Int32 startIndex, Int32 length)
+   at DataDecoder.Setup.SPEport_DataReceived(Object sender, SerialDataReceivedEventArgs e) in C:\Documents and Settings\Steve\Desktop\Repose_DDUtil\Source\Setup.cs:line 10568
+-------------------------------------------------------------------
+Source		: DataDecoder
+Method		: SPEport_DataReceived
+Time		: 10:50:38 AM
+Date		: 11/20/2009
+Computer	: i7-940
+Error		: Index was outside the bounds of the array.
+Stack Trace	: at DataDecoder.Setup.SPEport_DataReceived(Object sender, SerialDataReceivedEventArgs e) in C:\Documents and Settings\Steve\Desktop\Repose_DDUtil\Source\Setup.cs:line 10512
+-------------------------------------------------------------------
+Source		: DataDecoder
+Method		: SPEport_DataReceived
+Time		: 10:51:05 AM
+Date		: 11/20/2009
+Computer	: i7-940
+Error		: Index was outside the bounds of the array.
+Stack Trace	: at DataDecoder.Setup.SPEport_DataReceived(Object sender, SerialDataReceivedEventArgs e) in C:\Documents and Settings\Steve\Desktop\Repose_DDUtil\Source\Setup.cs:line 10512
+-------------------------------------------------------------------
+Source		: System
+Method		: get_BytesToRead
+Time		: 10:51:22 AM
+Date		: 11/20/2009
+Computer	: i7-940
+Error		: The port is closed.
+Stack Trace	: at System.IO.Ports.SerialPort.get_BytesToRead()
+   at DataDecoder.Setup.SPEport_DataReceived(Object sender, SerialDataReceivedEventArgs e) in C:\Documents and Settings\Steve\Desktop\Repose_DDUtil\Source\Setup.cs:line 10509
+-------------------------------------------------------------------
+Source		: mscorlib
+Method		: InternalSubStringWithChecks
+Time		: 10:57:49 AM
+Date		: 11/20/2009
+Computer	: i7-940
+Error		: Length cannot be less than zero.
+Parameter name: length
+Stack Trace	: at System.String.InternalSubStringWithChecks(Int32 startIndex, Int32 length, Boolean fAlwaysCopy)
+   at System.String.Substring(Int32 startIndex, Int32 length)
+   at DataDecoder.Setup.SPEport_DataReceived(Object sender, SerialDataReceivedEventArgs e) in C:\Documents and Settings\Steve\Desktop\Repose_DDUtil\Source\Setup.cs:line 10568
+-------------------------------------------------------------------
+Source		: DataDecoder
+Method		: SPEport_DataReceived
+Time		: 10:57:55 AM
+Date		: 11/20/2009
+Computer	: i7-940
+Error		: Index was outside the bounds of the array.
+Stack Trace	: at DataDecoder.Setup.SPEport_DataReceived(Object sender, SerialDataReceivedEventArgs e) in C:\Documents and Settings\Steve\Desktop\Repose_DDUtil\Source\Setup.cs:line 10512
+-------------------------------------------------------------------
+Source		: DataDecoder
+Method		: SPEport_DataReceived
+Time		: 10:58:20 AM
+Date		: 11/20/2009
+Computer	: i7-940
+Error		: Index was outside the bounds of the array.
+Stack Trace	: at DataDecoder.Setup.SPEport_DataReceived(Object sender, SerialDataReceivedEventArgs e) in C:\Documents and Settings\Steve\Desktop\Repose_DDUtil\Source\Setup.cs:line 10512
+-------------------------------------------------------------------
+Source		: DataDecoder
+Method		: SPEport_DataReceived
+Time		: 10:59:29 AM
+Date		: 11/20/2009
+Computer	: i7-940
+Error		: Index was outside the bounds of the array.
+Stack Trace	: at DataDecoder.Setup.SPEport_DataReceived(Object sender, SerialDataReceivedEventArgs e) in C:\Documents and Settings\Steve\Desktop\Repose_DDUtil\Source\Setup.cs:line 10512
+-------------------------------------------------------------------
+Source		: DataDecoder
+Method		: SPEport_DataReceived
+Time		: 11:00:41 AM
+Date		: 11/20/2009
+Computer	: i7-940
+Error		: Index was outside the bounds of the array.
+Stack Trace	: at DataDecoder.Setup.SPEport_DataReceived(Object sender, SerialDataReceivedEventArgs e) in C:\Documents and Settings\Steve\Desktop\Repose_DDUtil\Source\Setup.cs:line 10512
+-------------------------------------------------------------------
+Source		: DataDecoder
+Method		: SPEport_DataReceived
+Time		: 11:01:07 AM
+Date		: 11/20/2009
+Computer	: i7-940
+Error		: Index was outside the bounds of the array.
+Stack Trace	: at DataDecoder.Setup.SPEport_DataReceived(Object sender, SerialDataReceivedEventArgs e) in C:\Documents and Settings\Steve\Desktop\Repose_DDUtil\Source\Setup.cs:line 10512
+-------------------------------------------------------------------
+Source		: mscorlib
+Method		: InternalSubStringWithChecks
+Time		: 11:01:08 AM
+Date		: 11/20/2009
+Computer	: i7-940
+Error		: Length cannot be less than zero.
+Parameter name: length
+Stack Trace	: at System.String.InternalSubStringWithChecks(Int32 startIndex, Int32 length, Boolean fAlwaysCopy)
+   at System.String.Substring(Int32 startIndex, Int32 length)
+   at DataDecoder.Setup.SPEport_DataReceived(Object sender, SerialDataReceivedEventArgs e) in C:\Documents and Settings\Steve\Desktop\Repose_DDUtil\Source\Setup.cs:line 10568
+-------------------------------------------------------------------
+Source		: System
+Method		: get_BytesToRead
+Time		: 11:01:33 AM
+Date		: 11/20/2009
+Computer	: i7-940
+Error		: The port is closed.
+Stack Trace	: at System.IO.Ports.SerialPort.get_BytesToRead()
+   at DataDecoder.Setup.SPEport_DataReceived(Object sender, SerialDataReceivedEventArgs e) in C:\Documents and Settings\Steve\Desktop\Repose_DDUtil\Source\Setup.cs:line 10509
+-------------------------------------------------------------------
+Source		: mscorlib
+Method		: InternalSubStringWithChecks
+Time		: 11:07:18 AM
+Date		: 11/20/2009
+Computer	: i7-940
+Error		: Length cannot be less than zero.
+Parameter name: length
+Stack Trace	: at System.String.InternalSubStringWithChecks(Int32 startIndex, Int32 length, Boolean fAlwaysCopy)
+   at System.String.Substring(Int32 startIndex, Int32 length)
+   at DataDecoder.Setup.SPEport_DataReceived(Object sender, SerialDataReceivedEventArgs e) in C:\Documents and Settings\Steve\Desktop\Repose_DDUtil\Source\Setup.cs:line 10568
+-------------------------------------------------------------------
+Source		: DataDecoder
+Method		: SPEport_DataReceived
+Time		: 11:07:18 AM
+Date		: 11/20/2009
+Computer	: i7-940
+Error		: Index was outside the bounds of the array.
+Stack Trace	: at DataDecoder.Setup.SPEport_DataReceived(Object sender, SerialDataReceivedEventArgs e) in C:\Documents and Settings\Steve\Desktop\Repose_DDUtil\Source\Setup.cs:line 10512
+-------------------------------------------------------------------
+Source		: DataDecoder
+Method		: SPEport_DataReceived
+Time		: 11:07:28 AM
+Date		: 11/20/2009
+Computer	: i7-940
+Error		: Index was outside the bounds of the array.
+Stack Trace	: at DataDecoder.Setup.SPEport_DataReceived(Object sender, SerialDataReceivedEventArgs e) in C:\Documents and Settings\Steve\Desktop\Repose_DDUtil\Source\Setup.cs:line 10512
+-------------------------------------------------------------------
+Source		: DataDecoder
+Method		: SPEport_DataReceived
+Time		: 11:07:37 AM
+Date		: 11/20/2009
+Computer	: i7-940
+Error		: Index was outside the bounds of the array.
+Stack Trace	: at DataDecoder.Setup.SPEport_DataReceived(Object sender, SerialDataReceivedEventArgs e) in C:\Documents and Settings\Steve\Desktop\Repose_DDUtil\Source\Setup.cs:line 10512
+-------------------------------------------------------------------
+Source		: DataDecoder
+Method		: SPEport_DataReceived
+Time		: 11:07:47 AM
+Date		: 11/20/2009
+Computer	: i7-940
+Error		: Index was outside the bounds of the array.
+Stack Trace	: at DataDecoder.Setup.SPEport_DataReceived(Object sender, SerialDataReceivedEventArgs e) in C:\Documents and Settings\Steve\Desktop\Repose_DDUtil\Source\Setup.cs:line 10512
+-------------------------------------------------------------------
+Source		: mscorlib
+Method		: InternalSubStringWithChecks
+Time		: 11:13:18 AM
+Date		: 11/20/2009
+Computer	: i7-940
+Error		: Length cannot be less than zero.
+Parameter name: length
+Stack Trace	: at System.String.InternalSubStringWithChecks(Int32 startIndex, Int32 length, Boolean fAlwaysCopy)
+   at System.String.Substring(Int32 startIndex, Int32 length)
+   at DataDecoder.Setup.SPEport_DataReceived(Object sender, SerialDataReceivedEventArgs e) in C:\Documents and Settings\Steve\Desktop\Repose_DDUtil\Source\Setup.cs:line 10568
+-------------------------------------------------------------------
+Source		: DataDecoder
+Method		: SPEport_DataReceived
+Time		: 11:13:18 AM
+Date		: 11/20/2009
+Computer	: i7-940
+Error		: Index was outside the bounds of the array.
+Stack Trace	: at DataDecoder.Setup.SPEport_DataReceived(Object sender, SerialDataReceivedEventArgs e) in C:\Documents and Settings\Steve\Desktop\Repose_DDUtil\Source\Setup.cs:line 10512
+-------------------------------------------------------------------
+Source		: DataDecoder
+Method		: SPEport_DataReceived
+Time		: 11:13:27 AM
+Date		: 11/20/2009
+Computer	: i7-940
+Error		: Index was outside the bounds of the array.
+Stack Trace	: at DataDecoder.Setup.SPEport_DataReceived(Object sender, SerialDataReceivedEventArgs e) in C:\Documents and Settings\Steve\Desktop\Repose_DDUtil\Source\Setup.cs:line 10512
+-------------------------------------------------------------------
+Source		: DataDecoder
+Method		: SPEport_DataReceived
+Time		: 11:13:37 AM
+Date		: 11/20/2009
+Computer	: i7-940
+Error		: Index was outside the bounds of the array.
+Stack Trace	: at DataDecoder.Setup.SPEport_DataReceived(Object sender, SerialDataReceivedEventArgs e) in C:\Documents and Settings\Steve\Desktop\Repose_DDUtil\Source\Setup.cs:line 10512
+-------------------------------------------------------------------
+Source		: DataDecoder
+Method		: SPEport_DataReceived
+Time		: 11:13:47 AM
+Date		: 11/20/2009
+Computer	: i7-940
+Error		: Index was outside the bounds of the array.
+Stack Trace	: at DataDecoder.Setup.SPEport_DataReceived(Object sender, SerialDataReceivedEventArgs e) in C:\Documents and Settings\Steve\Desktop\Repose_DDUtil\Source\Setup.cs:line 10512
+-------------------------------------------------------------------
+Source		: mscorlib
+Method		: InternalSubStringWithChecks
+Time		: 11:17:20 AM
+Date		: 11/20/2009
+Computer	: i7-940
+Error		: Length cannot be less than zero.
+Parameter name: length
+Stack Trace	: at System.String.InternalSubStringWithChecks(Int32 startIndex, Int32 length, Boolean fAlwaysCopy)
+   at System.String.Substring(Int32 startIndex, Int32 length)
+   at DataDecoder.Setup.SPEport_DataReceived(Object sender, SerialDataReceivedEventArgs e) in C:\Documents and Settings\Steve\Desktop\Repose_DDUtil\Source\Setup.cs:line 10568
+-------------------------------------------------------------------
+Source		: DataDecoder
+Method		: SPEport_DataReceived
+Time		: 11:17:20 AM
+Date		: 11/20/2009
+Computer	: i7-940
+Error		: Index was outside the bounds of the array.
+Stack Trace	: at DataDecoder.Setup.SPEport_DataReceived(Object sender, SerialDataReceivedEventArgs e) in C:\Documents and Settings\Steve\Desktop\Repose_DDUtil\Source\Setup.cs:line 10512
+-------------------------------------------------------------------
+Source		: DataDecoder
+Method		: SPEport_DataReceived
+Time		: 11:17:29 AM
+Date		: 11/20/2009
+Computer	: i7-940
+Error		: Index was outside the bounds of the array.
+Stack Trace	: at DataDecoder.Setup.SPEport_DataReceived(Object sender, SerialDataReceivedEventArgs e) in C:\Documents and Settings\Steve\Desktop\Repose_DDUtil\Source\Setup.cs:line 10512
+-------------------------------------------------------------------
+Source		: DataDecoder
+Method		: SPEport_DataReceived
+Time		: 11:17:39 AM
+Date		: 11/20/2009
+Computer	: i7-940
+Error		: Index was outside the bounds of the array.
+Stack Trace	: at DataDecoder.Setup.SPEport_DataReceived(Object sender, SerialDataReceivedEventArgs e) in C:\Documents and Settings\Steve\Desktop\Repose_DDUtil\Source\Setup.cs:line 10512
+-------------------------------------------------------------------
+Source		: DataDecoder
+Method		: SPEport_DataReceived
+Time		: 11:17:49 AM
+Date		: 11/20/2009
+Computer	: i7-940
+Error		: Index was outside the bounds of the array.
+Stack Trace	: at DataDecoder.Setup.SPEport_DataReceived(Object sender, SerialDataReceivedEventArgs e) in C:\Documents and Settings\Steve\Desktop\Repose_DDUtil\Source\Setup.cs:line 10512
+-------------------------------------------------------------------
+Source		: DataDecoder
+Method		: SPEport_DataReceived
+Time		: 11:17:58 AM
+Date		: 11/20/2009
+Computer	: i7-940
+Error		: Index was outside the bounds of the array.
+Stack Trace	: at DataDecoder.Setup.SPEport_DataReceived(Object sender, SerialDataReceivedEventArgs e) in C:\Documents and Settings\Steve\Desktop\Repose_DDUtil\Source\Setup.cs:line 10512
+-------------------------------------------------------------------
+Source		: DataDecoder
+Method		: SPEport_DataReceived
+Time		: 11:18:08 AM
+Date		: 11/20/2009
+Computer	: i7-940
+Error		: Index was outside the bounds of the array.
+Stack Trace	: at DataDecoder.Setup.SPEport_DataReceived(Object sender, SerialDataReceivedEventArgs e) in C:\Documents and Settings\Steve\Desktop\Repose_DDUtil\Source\Setup.cs:line 10512
+-------------------------------------------------------------------
+Source		: DataDecoder
+Method		: SPEport_DataReceived
+Time		: 11:18:17 AM
+Date		: 11/20/2009
+Computer	: i7-940
+Error		: Index was outside the bounds of the array.
+Stack Trace	: at DataDecoder.Setup.SPEport_DataReceived(Object sender, SerialDataReceivedEventArgs e) in C:\Documents and Settings\Steve\Desktop\Repose_DDUtil\Source\Setup.cs:line 10512
+-------------------------------------------------------------------
+Source		: DataDecoder
+Method		: SPEport_DataReceived
+Time		: 11:18:27 AM
+Date		: 11/20/2009
+Computer	: i7-940
+Error		: Index was outside the bounds of the array.
+Stack Trace	: at DataDecoder.Setup.SPEport_DataReceived(Object sender, SerialDataReceivedEventArgs e) in C:\Documents and Settings\Steve\Desktop\Repose_DDUtil\Source\Setup.cs:line 10512
+-------------------------------------------------------------------
+Source		: DataDecoder
+Method		: SPEport_DataReceived
+Time		: 11:18:36 AM
+Date		: 11/20/2009
+Computer	: i7-940
+Error		: Index was outside the bounds of the array.
+Stack Trace	: at DataDecoder.Setup.SPEport_DataReceived(Object sender, SerialDataReceivedEventArgs e) in C:\Documents and Settings\Steve\Desktop\Repose_DDUtil\Source\Setup.cs:line 10512
+-------------------------------------------------------------------
+Source		: System
+Method		: get_BytesToRead
+Time		: 11:18:46 AM
+Date		: 11/20/2009
+Computer	: i7-940
+Error		: The port is closed.
+Stack Trace	: at System.IO.Ports.SerialPort.get_BytesToRead()
+   at DataDecoder.Setup.SPEport_DataReceived(Object sender, SerialDataReceivedEventArgs e) in C:\Documents and Settings\Steve\Desktop\Repose_DDUtil\Source\Setup.cs:line 10509
+-------------------------------------------------------------------
+Source		: mscorlib
+Method		: InternalSubStringWithChecks
+Time		: 12:59:45 PM
+Date		: 11/20/2009
+Computer	: i7-940
+Error		: Length cannot be less than zero.
+Parameter name: length
+Stack Trace	: at System.String.InternalSubStringWithChecks(Int32 startIndex, Int32 length, Boolean fAlwaysCopy)
+   at System.String.Substring(Int32 startIndex, Int32 length)
+   at DataDecoder.Setup.SPEport_DataReceived(Object sender, SerialDataReceivedEventArgs e) in C:\Documents and Settings\Steve\Desktop\Repose_DDUtil\Source\Setup.cs:line 10568
+-------------------------------------------------------------------
+Source		: DataDecoder
+Method		: SPEport_DataReceived
+Time		: 12:59:45 PM
+Date		: 11/20/2009
+Computer	: i7-940
+Error		: Index was outside the bounds of the array.
+Stack Trace	: at DataDecoder.Setup.SPEport_DataReceived(Object sender, SerialDataReceivedEventArgs e) in C:\Documents and Settings\Steve\Desktop\Repose_DDUtil\Source\Setup.cs:line 10512
+-------------------------------------------------------------------
+Source		: DataDecoder
+Method		: SPEport_DataReceived
+Time		: 12:59:54 PM
+Date		: 11/20/2009
+Computer	: i7-940
+Error		: Index was outside the bounds of the array.
+Stack Trace	: at DataDecoder.Setup.SPEport_DataReceived(Object sender, SerialDataReceivedEventArgs e) in C:\Documents and Settings\Steve\Desktop\Repose_DDUtil\Source\Setup.cs:line 10512
+-------------------------------------------------------------------
+Source		: DataDecoder
+Method		: SPEport_DataReceived
+Time		: 1:00:04 PM
+Date		: 11/20/2009
+Computer	: i7-940
+Error		: Index was outside the bounds of the array.
+Stack Trace	: at DataDecoder.Setup.SPEport_DataReceived(Object sender, SerialDataReceivedEventArgs e) in C:\Documents and Settings\Steve\Desktop\Repose_DDUtil\Source\Setup.cs:line 10512
+-------------------------------------------------------------------
+Source		: DataDecoder
+Method		: SPEport_DataReceived
+Time		: 1:00:13 PM
+Date		: 11/20/2009
+Computer	: i7-940
+Error		: Index was outside the bounds of the array.
+Stack Trace	: at DataDecoder.Setup.SPEport_DataReceived(Object sender, SerialDataReceivedEventArgs e) in C:\Documents and Settings\Steve\Desktop\Repose_DDUtil\Source\Setup.cs:line 10512
+-------------------------------------------------------------------
+Source		: DataDecoder
+Method		: SPEport_DataReceived
+Time		: 1:00:23 PM
+Date		: 11/20/2009
+Computer	: i7-940
+Error		: Index was outside the bounds of the array.
+Stack Trace	: at DataDecoder.Setup.SPEport_DataReceived(Object sender, SerialDataReceivedEventArgs e) in C:\Documents and Settings\Steve\Desktop\Repose_DDUtil\Source\Setup.cs:line 10512
+-------------------------------------------------------------------
+Source		: DataDecoder
+Method		: SPEport_DataReceived
+Time		: 1:00:32 PM
+Date		: 11/20/2009
+Computer	: i7-940
+Error		: Index was outside the bounds of the array.
+Stack Trace	: at DataDecoder.Setup.SPEport_DataReceived(Object sender, SerialDataReceivedEventArgs e) in C:\Documents and Settings\Steve\Desktop\Repose_DDUtil\Source\Setup.cs:line 10512
+-------------------------------------------------------------------
+Source		: DataDecoder
+Method		: SPEport_DataReceived
+Time		: 1:00:42 PM
+Date		: 11/20/2009
+Computer	: i7-940
+Error		: Index was outside the bounds of the array.
+Stack Trace	: at DataDecoder.Setup.SPEport_DataReceived(Object sender, SerialDataReceivedEventArgs e) in C:\Documents and Settings\Steve\Desktop\Repose_DDUtil\Source\Setup.cs:line 10512
+-------------------------------------------------------------------
+Source		: mscorlib
+Method		: InternalSubStringWithChecks
+Time		: 1:24:39 PM
+Date		: 11/20/2009
+Computer	: i7-940
+Error		: Length cannot be less than zero.
+Parameter name: length
+Stack Trace	: at System.String.InternalSubStringWithChecks(Int32 startIndex, Int32 length, Boolean fAlwaysCopy)
+   at System.String.Substring(Int32 startIndex, Int32 length)
+   at DataDecoder.Setup.SPEport_DataReceived(Object sender, SerialDataReceivedEventArgs e) in C:\Documents and Settings\Steve\Desktop\Repose_DDUtil\Source\Setup.cs:line 10567
+-------------------------------------------------------------------
+Source		: DataDecoder
+Method		: SPEport_DataReceived
+Time		: 1:24:39 PM
+Date		: 11/20/2009
+Computer	: i7-940
+Error		: Index was outside the bounds of the array.
+Stack Trace	: at DataDecoder.Setup.SPEport_DataReceived(Object sender, SerialDataReceivedEventArgs e) in C:\Documents and Settings\Steve\Desktop\Repose_DDUtil\Source\Setup.cs:line 10512
+-------------------------------------------------------------------
+Source		: DataDecoder
+Method		: SPEport_DataReceived
+Time		: 1:24:48 PM
+Date		: 11/20/2009
+Computer	: i7-940
+Error		: Index was outside the bounds of the array.
+Stack Trace	: at DataDecoder.Setup.SPEport_DataReceived(Object sender, SerialDataReceivedEventArgs e) in C:\Documents and Settings\Steve\Desktop\Repose_DDUtil\Source\Setup.cs:line 10512
+-------------------------------------------------------------------
+Source		: DataDecoder
+Method		: SPEport_DataReceived
+Time		: 1:24:58 PM
+Date		: 11/20/2009
+Computer	: i7-940
+Error		: Index was outside the bounds of the array.
+Stack Trace	: at DataDecoder.Setup.SPEport_DataReceived(Object sender, SerialDataReceivedEventArgs e) in C:\Documents and Settings\Steve\Desktop\Repose_DDUtil\Source\Setup.cs:line 10512
+-------------------------------------------------------------------
+Source		: DataDecoder
+Method		: SPEport_DataReceived
+Time		: 1:25:07 PM
+Date		: 11/20/2009
+Computer	: i7-940
+Error		: Index was outside the bounds of the array.
+Stack Trace	: at DataDecoder.Setup.SPEport_DataReceived(Object sender, SerialDataReceivedEventArgs e) in C:\Documents and Settings\Steve\Desktop\Repose_DDUtil\Source\Setup.cs:line 10512
+-------------------------------------------------------------------
+Source		: DataDecoder
+Method		: SPEport_DataReceived
+Time		: 1:25:17 PM
+Date		: 11/20/2009
+Computer	: i7-940
+Error		: Index was outside the bounds of the array.
+Stack Trace	: at DataDecoder.Setup.SPEport_DataReceived(Object sender, SerialDataReceivedEventArgs e) in C:\Documents and Settings\Steve\Desktop\Repose_DDUtil\Source\Setup.cs:line 10512
+-------------------------------------------------------------------
+Source		: DataDecoder
+Method		: SPEport_DataReceived
+Time		: 1:25:50 PM
+Date		: 11/20/2009
+Computer	: i7-940
+Error		: Index was outside the bounds of the array.
+Stack Trace	: at DataDecoder.Setup.SPEport_DataReceived(Object sender, SerialDataReceivedEventArgs e) in C:\Documents and Settings\Steve\Desktop\Repose_DDUtil\Source\Setup.cs:line 10512
+-------------------------------------------------------------------
+Source		: DataDecoder
+Method		: SPEport_DataReceived
+Time		: 1:26:00 PM
+Date		: 11/20/2009
+Computer	: i7-940
+Error		: Index was outside the bounds of the array.
+Stack Trace	: at DataDecoder.Setup.SPEport_DataReceived(Object sender, SerialDataReceivedEventArgs e) in C:\Documents and Settings\Steve\Desktop\Repose_DDUtil\Source\Setup.cs:line 10512
+-------------------------------------------------------------------
+Source		: DataDecoder
+Method		: SPEport_DataReceived
+Time		: 1:26:09 PM
+Date		: 11/20/2009
+Computer	: i7-940
+Error		: Index was outside the bounds of the array.
+Stack Trace	: at DataDecoder.Setup.SPEport_DataReceived(Object sender, SerialDataReceivedEventArgs e) in C:\Documents and Settings\Steve\Desktop\Repose_DDUtil\Source\Setup.cs:line 10512
+-------------------------------------------------------------------
+Source		: DataDecoder
+Method		: SPEport_DataReceived
+Time		: 1:26:19 PM
+Date		: 11/20/2009
+Computer	: i7-940
+Error		: Index was outside the bounds of the array.
+Stack Trace	: at DataDecoder.Setup.SPEport_DataReceived(Object sender, SerialDataReceivedEventArgs e) in C:\Documents and Settings\Steve\Desktop\Repose_DDUtil\Source\Setup.cs:line 10512
+-------------------------------------------------------------------
+Source		: DataDecoder
+Method		: SPEport_DataReceived
+Time		: 1:26:28 PM
+Date		: 11/20/2009
+Computer	: i7-940
+Error		: Index was outside the bounds of the array.
+Stack Trace	: at DataDecoder.Setup.SPEport_DataReceived(Object sender, SerialDataReceivedEventArgs e) in C:\Documents and Settings\Steve\Desktop\Repose_DDUtil\Source\Setup.cs:line 10512
+-------------------------------------------------------------------
+Source		: DataDecoder
+Method		: SPEport_DataReceived
+Time		: 1:26:38 PM
+Date		: 11/20/2009
+Computer	: i7-940
+Error		: Index was outside the bounds of the array.
+Stack Trace	: at DataDecoder.Setup.SPEport_DataReceived(Object sender, SerialDataReceivedEventArgs e) in C:\Documents and Settings\Steve\Desktop\Repose_DDUtil\Source\Setup.cs:line 10512
+-------------------------------------------------------------------
+Source		: DataDecoder
+Method		: SPEport_DataReceived
+Time		: 1:26:47 PM
+Date		: 11/20/2009
+Computer	: i7-940
+Error		: Index was outside the bounds of the array.
+Stack Trace	: at DataDecoder.Setup.SPEport_DataReceived(Object sender, SerialDataReceivedEventArgs e) in C:\Documents and Settings\Steve\Desktop\Repose_DDUtil\Source\Setup.cs:line 10512
+-------------------------------------------------------------------
+Source		: DataDecoder
+Method		: SPEport_DataReceived
+Time		: 1:26:57 PM
+Date		: 11/20/2009
+Computer	: i7-940
+Error		: Index was outside the bounds of the array.
+Stack Trace	: at DataDecoder.Setup.SPEport_DataReceived(Object sender, SerialDataReceivedEventArgs e) in C:\Documents and Settings\Steve\Desktop\Repose_DDUtil\Source\Setup.cs:line 10512
+-------------------------------------------------------------------
+Source		: DataDecoder
+Method		: SPEport_DataReceived
+Time		: 1:27:06 PM
+Date		: 11/20/2009
+Computer	: i7-940
+Error		: Index was outside the bounds of the array.
+Stack Trace	: at DataDecoder.Setup.SPEport_DataReceived(Object sender, SerialDataReceivedEventArgs e) in C:\Documents and Settings\Steve\Desktop\Repose_DDUtil\Source\Setup.cs:line 10512
+-------------------------------------------------------------------
+Source		: DataDecoder
+Method		: SPEport_DataReceived
+Time		: 1:27:16 PM
+Date		: 11/20/2009
+Computer	: i7-940
+Error		: Index was outside the bounds of the array.
+Stack Trace	: at DataDecoder.Setup.SPEport_DataReceived(Object sender, SerialDataReceivedEventArgs e) in C:\Documents and Settings\Steve\Desktop\Repose_DDUtil\Source\Setup.cs:line 10512
+-------------------------------------------------------------------
+Source		: DataDecoder
+Method		: SPEport_DataReceived
+Time		: 1:27:26 PM
+Date		: 11/20/2009
+Computer	: i7-940
+Error		: Index was outside the bounds of the array.
+Stack Trace	: at DataDecoder.Setup.SPEport_DataReceived(Object sender, SerialDataReceivedEventArgs e) in C:\Documents and Settings\Steve\Desktop\Repose_DDUtil\Source\Setup.cs:line 10512
+-------------------------------------------------------------------
+Source		: DataDecoder
+Method		: SPEport_DataReceived
+Time		: 1:27:35 PM
+Date		: 11/20/2009
+Computer	: i7-940
+Error		: Index was outside the bounds of the array.
+Stack Trace	: at DataDecoder.Setup.SPEport_DataReceived(Object sender, SerialDataReceivedEventArgs e) in C:\Documents and Settings\Steve\Desktop\Repose_DDUtil\Source\Setup.cs:line 10512
+-------------------------------------------------------------------
+Source		: DataDecoder
+Method		: SPEport_DataReceived
+Time		: 1:27:45 PM
+Date		: 11/20/2009
+Computer	: i7-940
+Error		: Index was outside the bounds of the array.
+Stack Trace	: at DataDecoder.Setup.SPEport_DataReceived(Object sender, SerialDataReceivedEventArgs e) in C:\Documents and Settings\Steve\Desktop\Repose_DDUtil\Source\Setup.cs:line 10512
+-------------------------------------------------------------------
+Source		: DataDecoder
+Method		: SPEport_DataReceived
+Time		: 1:27:54 PM
+Date		: 11/20/2009
+Computer	: i7-940
+Error		: Index was outside the bounds of the array.
+Stack Trace	: at DataDecoder.Setup.SPEport_DataReceived(Object sender, SerialDataReceivedEventArgs e) in C:\Documents and Settings\Steve\Desktop\Repose_DDUtil\Source\Setup.cs:line 10512
+-------------------------------------------------------------------
+Source		: DataDecoder
+Method		: SPEport_DataReceived
+Time		: 1:28:04 PM
+Date		: 11/20/2009
+Computer	: i7-940
+Error		: Index was outside the bounds of the array.
+Stack Trace	: at DataDecoder.Setup.SPEport_DataReceived(Object sender, SerialDataReceivedEventArgs e) in C:\Documents and Settings\Steve\Desktop\Repose_DDUtil\Source\Setup.cs:line 10512
+-------------------------------------------------------------------
+Source		: DataDecoder
+Method		: SPEport_DataReceived
+Time		: 1:28:13 PM
+Date		: 11/20/2009
+Computer	: i7-940
+Error		: Index was outside the bounds of the array.
+Stack Trace	: at DataDecoder.Setup.SPEport_DataReceived(Object sender, SerialDataReceivedEventArgs e) in C:\Documents and Settings\Steve\Desktop\Repose_DDUtil\Source\Setup.cs:line 10512
+-------------------------------------------------------------------
+Source		: DataDecoder
+Method		: SPEport_DataReceived
+Time		: 1:28:23 PM
+Date		: 11/20/2009
+Computer	: i7-940
+Error		: Index was outside the bounds of the array.
+Stack Trace	: at DataDecoder.Setup.SPEport_DataReceived(Object sender, SerialDataReceivedEventArgs e) in C:\Documents and Settings\Steve\Desktop\Repose_DDUtil\Source\Setup.cs:line 10512
+-------------------------------------------------------------------
+Source		: DataDecoder
+Method		: SPEport_DataReceived
+Time		: 1:28:32 PM
+Date		: 11/20/2009
+Computer	: i7-940
+Error		: Index was outside the bounds of the array.
+Stack Trace	: at DataDecoder.Setup.SPEport_DataReceived(Object sender, SerialDataReceivedEventArgs e) in C:\Documents and Settings\Steve\Desktop\Repose_DDUtil\Source\Setup.cs:line 10512
+-------------------------------------------------------------------
+Source		: DataDecoder
+Method		: SPEport_DataReceived
+Time		: 1:30:11 PM
+Date		: 11/20/2009
+Computer	: i7-940
+Error		: Index was outside the bounds of the array.
+Stack Trace	: at DataDecoder.Setup.SPEport_DataReceived(Object sender, SerialDataReceivedEventArgs e) in C:\Documents and Settings\Steve\Desktop\Repose_DDUtil\Source\Setup.cs:line 10512
+-------------------------------------------------------------------
+Source		: DataDecoder
+Method		: SPEport_DataReceived
+Time		: 1:30:21 PM
+Date		: 11/20/2009
+Computer	: i7-940
+Error		: Index was outside the bounds of the array.
+Stack Trace	: at DataDecoder.Setup.SPEport_DataReceived(Object sender, SerialDataReceivedEventArgs e) in C:\Documents and Settings\Steve\Desktop\Repose_DDUtil\Source\Setup.cs:line 10512
+-------------------------------------------------------------------
+Source		: DataDecoder
+Method		: SPEport_DataReceived
+Time		: 1:30:30 PM
+Date		: 11/20/2009
+Computer	: i7-940
+Error		: Index was outside the bounds of the array.
+Stack Trace	: at DataDecoder.Setup.SPEport_DataReceived(Object sender, SerialDataReceivedEventArgs e) in C:\Documents and Settings\Steve\Desktop\Repose_DDUtil\Source\Setup.cs:line 10512
+-------------------------------------------------------------------
+Source		: DataDecoder
+Method		: SPEport_DataReceived
+Time		: 1:30:40 PM
+Date		: 11/20/2009
+Computer	: i7-940
+Error		: Index was outside the bounds of the array.
+Stack Trace	: at DataDecoder.Setup.SPEport_DataReceived(Object sender, SerialDataReceivedEventArgs e) in C:\Documents and Settings\Steve\Desktop\Repose_DDUtil\Source\Setup.cs:line 10512
+-------------------------------------------------------------------
+Source		: DataDecoder
+Method		: SPEport_DataReceived
+Time		: 1:30:50 PM
+Date		: 11/20/2009
+Computer	: i7-940
+Error		: Index was outside the bounds of the array.
+Stack Trace	: at DataDecoder.Setup.SPEport_DataReceived(Object sender, SerialDataReceivedEventArgs e) in C:\Documents and Settings\Steve\Desktop\Repose_DDUtil\Source\Setup.cs:line 10512
+-------------------------------------------------------------------
+Source		: DataDecoder
+Method		: SPEport_DataReceived
+Time		: 1:30:59 PM
+Date		: 11/20/2009
+Computer	: i7-940
+Error		: Index was outside the bounds of the array.
+Stack Trace	: at DataDecoder.Setup.SPEport_DataReceived(Object sender, SerialDataReceivedEventArgs e) in C:\Documents and Settings\Steve\Desktop\Repose_DDUtil\Source\Setup.cs:line 10512
+-------------------------------------------------------------------
+Source		: DataDecoder
+Method		: SPEport_DataReceived
+Time		: 1:31:09 PM
+Date		: 11/20/2009
+Computer	: i7-940
+Error		: Index was outside the bounds of the array.
+Stack Trace	: at DataDecoder.Setup.SPEport_DataReceived(Object sender, SerialDataReceivedEventArgs e) in C:\Documents and Settings\Steve\Desktop\Repose_DDUtil\Source\Setup.cs:line 10512
+-------------------------------------------------------------------
+Source		: DataDecoder
+Method		: SPEport_DataReceived
+Time		: 1:31:18 PM
+Date		: 11/20/2009
+Computer	: i7-940
+Error		: Index was outside the bounds of the array.
+Stack Trace	: at DataDecoder.Setup.SPEport_DataReceived(Object sender, SerialDataReceivedEventArgs e) in C:\Documents and Settings\Steve\Desktop\Repose_DDUtil\Source\Setup.cs:line 10512
+-------------------------------------------------------------------
+Source		: DataDecoder
+Method		: SPEport_DataReceived
+Time		: 1:31:28 PM
+Date		: 11/20/2009
+Computer	: i7-940
+Error		: Index was outside the bounds of the array.
+Stack Trace	: at DataDecoder.Setup.SPEport_DataReceived(Object sender, SerialDataReceivedEventArgs e) in C:\Documents and Settings\Steve\Desktop\Repose_DDUtil\Source\Setup.cs:line 10512
+-------------------------------------------------------------------
+Source		: DataDecoder
+Method		: SPEport_DataReceived
+Time		: 1:31:37 PM
+Date		: 11/20/2009
+Computer	: i7-940
+Error		: Index was outside the bounds of the array.
+Stack Trace	: at DataDecoder.Setup.SPEport_DataReceived(Object sender, SerialDataReceivedEventArgs e) in C:\Documents and Settings\Steve\Desktop\Repose_DDUtil\Source\Setup.cs:line 10512
+-------------------------------------------------------------------
+Source		: DataDecoder
+Method		: SPEport_DataReceived
+Time		: 1:31:47 PM
+Date		: 11/20/2009
+Computer	: i7-940
+Error		: Index was outside the bounds of the array.
+Stack Trace	: at DataDecoder.Setup.SPEport_DataReceived(Object sender, SerialDataReceivedEventArgs e) in C:\Documents and Settings\Steve\Desktop\Repose_DDUtil\Source\Setup.cs:line 10512
+-------------------------------------------------------------------
+Source		: DataDecoder
+Method		: SPEport_DataReceived
+Time		: 1:31:56 PM
+Date		: 11/20/2009
+Computer	: i7-940
+Error		: Index was outside the bounds of the array.
+Stack Trace	: at DataDecoder.Setup.SPEport_DataReceived(Object sender, SerialDataReceivedEventArgs e) in C:\Documents and Settings\Steve\Desktop\Repose_DDUtil\Source\Setup.cs:line 10512
+-------------------------------------------------------------------
+Source		: DataDecoder
+Method		: SPEport_DataReceived
+Time		: 1:32:06 PM
+Date		: 11/20/2009
+Computer	: i7-940
+Error		: Index was outside the bounds of the array.
+Stack Trace	: at DataDecoder.Setup.SPEport_DataReceived(Object sender, SerialDataReceivedEventArgs e) in C:\Documents and Settings\Steve\Desktop\Repose_DDUtil\Source\Setup.cs:line 10512
+-------------------------------------------------------------------
+Source		: DataDecoder
+Method		: SPEport_DataReceived
+Time		: 1:32:15 PM
+Date		: 11/20/2009
+Computer	: i7-940
+Error		: Index was outside the bounds of the array.
+Stack Trace	: at DataDecoder.Setup.SPEport_DataReceived(Object sender, SerialDataReceivedEventArgs e) in C:\Documents and Settings\Steve\Desktop\Repose_DDUtil\Source\Setup.cs:line 10512
+-------------------------------------------------------------------
+Source		: DataDecoder
+Method		: SPEport_DataReceived
+Time		: 1:32:25 PM
+Date		: 11/20/2009
+Computer	: i7-940
+Error		: Index was outside the bounds of the array.
+Stack Trace	: at DataDecoder.Setup.SPEport_DataReceived(Object sender, SerialDataReceivedEventArgs e) in C:\Documents and Settings\Steve\Desktop\Repose_DDUtil\Source\Setup.cs:line 10512
+-------------------------------------------------------------------
+Source		: DataDecoder
+Method		: SPEport_DataReceived
+Time		: 1:32:35 PM
+Date		: 11/20/2009
+Computer	: i7-940
+Error		: Index was outside the bounds of the array.
+Stack Trace	: at DataDecoder.Setup.SPEport_DataReceived(Object sender, SerialDataReceivedEventArgs e) in C:\Documents and Settings\Steve\Desktop\Repose_DDUtil\Source\Setup.cs:line 10512
+-------------------------------------------------------------------
+Source		: DataDecoder
+Method		: SPEport_DataReceived
+Time		: 1:32:44 PM
+Date		: 11/20/2009
+Computer	: i7-940
+Error		: Index was outside the bounds of the array.
+Stack Trace	: at DataDecoder.Setup.SPEport_DataReceived(Object sender, SerialDataReceivedEventArgs e) in C:\Documents and Settings\Steve\Desktop\Repose_DDUtil\Source\Setup.cs:line 10512
+-------------------------------------------------------------------
+Source		: DataDecoder
+Method		: SPEport_DataReceived
+Time		: 1:32:54 PM
+Date		: 11/20/2009
+Computer	: i7-940
+Error		: Index was outside the bounds of the array.
+Stack Trace	: at DataDecoder.Setup.SPEport_DataReceived(Object sender, SerialDataReceivedEventArgs e) in C:\Documents and Settings\Steve\Desktop\Repose_DDUtil\Source\Setup.cs:line 10512
+-------------------------------------------------------------------
+Source		: DataDecoder
+Method		: SPEport_DataReceived
+Time		: 1:33:03 PM
+Date		: 11/20/2009
+Computer	: i7-940
+Error		: Index was outside the bounds of the array.
+Stack Trace	: at DataDecoder.Setup.SPEport_DataReceived(Object sender, SerialDataReceivedEventArgs e) in C:\Documents and Settings\Steve\Desktop\Repose_DDUtil\Source\Setup.cs:line 10512
+-------------------------------------------------------------------
+Source		: DataDecoder
+Method		: SPEport_DataReceived
+Time		: 1:33:13 PM
+Date		: 11/20/2009
+Computer	: i7-940
+Error		: Index was outside the bounds of the array.
+Stack Trace	: at DataDecoder.Setup.SPEport_DataReceived(Object sender, SerialDataReceivedEventArgs e) in C:\Documents and Settings\Steve\Desktop\Repose_DDUtil\Source\Setup.cs:line 10512
+-------------------------------------------------------------------
+Source		: DataDecoder
+Method		: SPEport_DataReceived
+Time		: 1:33:22 PM
+Date		: 11/20/2009
+Computer	: i7-940
+Error		: Index was outside the bounds of the array.
+Stack Trace	: at DataDecoder.Setup.SPEport_DataReceived(Object sender, SerialDataReceivedEventArgs e) in C:\Documents and Settings\Steve\Desktop\Repose_DDUtil\Source\Setup.cs:line 10512
+-------------------------------------------------------------------
+Source		: DataDecoder
+Method		: SPEport_DataReceived
+Time		: 1:33:32 PM
+Date		: 11/20/2009
+Computer	: i7-940
+Error		: Index was outside the bounds of the array.
+Stack Trace	: at DataDecoder.Setup.SPEport_DataReceived(Object sender, SerialDataReceivedEventArgs e) in C:\Documents and Settings\Steve\Desktop\Repose_DDUtil\Source\Setup.cs:line 10512
+-------------------------------------------------------------------
+Source		: DataDecoder
+Method		: SPEport_DataReceived
+Time		: 1:33:41 PM
+Date		: 11/20/2009
+Computer	: i7-940
+Error		: Index was outside the bounds of the array.
+Stack Trace	: at DataDecoder.Setup.SPEport_DataReceived(Object sender, SerialDataReceivedEventArgs e) in C:\Documents and Settings\Steve\Desktop\Repose_DDUtil\Source\Setup.cs:line 10512
+-------------------------------------------------------------------
+Source		: DataDecoder
+Method		: SPEport_DataReceived
+Time		: 1:33:51 PM
+Date		: 11/20/2009
+Computer	: i7-940
+Error		: Index was outside the bounds of the array.
+Stack Trace	: at DataDecoder.Setup.SPEport_DataReceived(Object sender, SerialDataReceivedEventArgs e) in C:\Documents and Settings\Steve\Desktop\Repose_DDUtil\Source\Setup.cs:line 10512
+-------------------------------------------------------------------
+Source		: DataDecoder
+Method		: SPEport_DataReceived
+Time		: 1:34:00 PM
+Date		: 11/20/2009
+Computer	: i7-940
+Error		: Index was outside the bounds of the array.
+Stack Trace	: at DataDecoder.Setup.SPEport_DataReceived(Object sender, SerialDataReceivedEventArgs e) in C:\Documents and Settings\Steve\Desktop\Repose_DDUtil\Source\Setup.cs:line 10512
+-------------------------------------------------------------------
+Source		: DataDecoder
+Method		: SPEport_DataReceived
+Time		: 1:34:10 PM
+Date		: 11/20/2009
+Computer	: i7-940
+Error		: Index was outside the bounds of the array.
+Stack Trace	: at DataDecoder.Setup.SPEport_DataReceived(Object sender, SerialDataReceivedEventArgs e) in C:\Documents and Settings\Steve\Desktop\Repose_DDUtil\Source\Setup.cs:line 10512
+-------------------------------------------------------------------
+Source		: DataDecoder
+Method		: SPEport_DataReceived
+Time		: 1:34:20 PM
+Date		: 11/20/2009
+Computer	: i7-940
+Error		: Index was outside the bounds of the array.
+Stack Trace	: at DataDecoder.Setup.SPEport_DataReceived(Object sender, SerialDataReceivedEventArgs e) in C:\Documents and Settings\Steve\Desktop\Repose_DDUtil\Source\Setup.cs:line 10512
+-------------------------------------------------------------------
+Source		: DataDecoder
+Method		: SPEport_DataReceived
+Time		: 1:34:29 PM
+Date		: 11/20/2009
+Computer	: i7-940
+Error		: Index was outside the bounds of the array.
+Stack Trace	: at DataDecoder.Setup.SPEport_DataReceived(Object sender, SerialDataReceivedEventArgs e) in C:\Documents and Settings\Steve\Desktop\Repose_DDUtil\Source\Setup.cs:line 10512
+-------------------------------------------------------------------
+Source		: DataDecoder
+Method		: SPEport_DataReceived
+Time		: 1:34:39 PM
+Date		: 11/20/2009
+Computer	: i7-940
+Error		: Index was outside the bounds of the array.
+Stack Trace	: at DataDecoder.Setup.SPEport_DataReceived(Object sender, SerialDataReceivedEventArgs e) in C:\Documents and Settings\Steve\Desktop\Repose_DDUtil\Source\Setup.cs:line 10512
+-------------------------------------------------------------------
+Source		: DataDecoder
+Method		: SPEport_DataReceived
+Time		: 1:34:48 PM
+Date		: 11/20/2009
+Computer	: i7-940
+Error		: Index was outside the bounds of the array.
+Stack Trace	: at DataDecoder.Setup.SPEport_DataReceived(Object sender, SerialDataReceivedEventArgs e) in C:\Documents and Settings\Steve\Desktop\Repose_DDUtil\Source\Setup.cs:line 10512
+-------------------------------------------------------------------
+Source		: System
+Method		: get_BytesToRead
+Time		: 1:34:52 PM
+Date		: 11/20/2009
+Computer	: i7-940
+Error		: The port is closed.
+Stack Trace	: at System.IO.Ports.SerialPort.get_BytesToRead()
+   at DataDecoder.Setup.SPEport_DataReceived(Object sender, SerialDataReceivedEventArgs e) in C:\Documents and Settings\Steve\Desktop\Repose_DDUtil\Source\Setup.cs:line 10509
+-------------------------------------------------------------------
+Source		: DataDecoder
+Method		: SPEport_DataReceived
+Time		: 1:37:20 PM
+Date		: 11/20/2009
+Computer	: i7-940
+Error		: Index was outside the bounds of the array.
+Stack Trace	: at DataDecoder.Setup.SPEport_DataReceived(Object sender, SerialDataReceivedEventArgs e) in C:\Documents and Settings\Steve\Desktop\Repose_DDUtil\Source\Setup.cs:line 10512
+-------------------------------------------------------------------
+Source		: DataDecoder
+Method		: SPEport_DataReceived
+Time		: 1:37:35 PM
+Date		: 11/20/2009
+Computer	: i7-940
+Error		: Index was outside the bounds of the array.
+Stack Trace	: at DataDecoder.Setup.SPEport_DataReceived(Object sender, SerialDataReceivedEventArgs e) in C:\Documents and Settings\Steve\Desktop\Repose_DDUtil\Source\Setup.cs:line 10512
+-------------------------------------------------------------------
+Source		: DataDecoder
+Method		: SPEport_DataReceived
+Time		: 1:37:51 PM
+Date		: 11/20/2009
+Computer	: i7-940
+Error		: Index was outside the bounds of the array.
+Stack Trace	: at DataDecoder.Setup.SPEport_DataReceived(Object sender, SerialDataReceivedEventArgs e) in C:\Documents and Settings\Steve\Desktop\Repose_DDUtil\Source\Setup.cs:line 10512
+-------------------------------------------------------------------
+Source		: DataDecoder
+Method		: SPEport_DataReceived
+Time		: 1:38:23 PM
+Date		: 11/20/2009
+Computer	: i7-940
+Error		: Index was outside the bounds of the array.
+Stack Trace	: at DataDecoder.Setup.SPEport_DataReceived(Object sender, SerialDataReceivedEventArgs e) in C:\Documents and Settings\Steve\Desktop\Repose_DDUtil\Source\Setup.cs:line 10512
+-------------------------------------------------------------------
+Source		: DataDecoder
+Method		: SPEport_DataReceived
+Time		: 1:48:58 PM
+Date		: 11/20/2009
+Computer	: i7-940
+Error		: Index was outside the bounds of the array.
+Stack Trace	: at DataDecoder.Setup.SPEport_DataReceived(Object sender, SerialDataReceivedEventArgs e) in C:\Documents and Settings\Steve\Desktop\Repose_DDUtil\Source\Setup.cs:line 10512
+-------------------------------------------------------------------
+Source		: DataDecoder
+Method		: SPEport_DataReceived
+Time		: 1:49:14 PM
+Date		: 11/20/2009
+Computer	: i7-940
+Error		: Index was outside the bounds of the array.
+Stack Trace	: at DataDecoder.Setup.SPEport_DataReceived(Object sender, SerialDataReceivedEventArgs e) in C:\Documents and Settings\Steve\Desktop\Repose_DDUtil\Source\Setup.cs:line 10512
+-------------------------------------------------------------------
+Source		: DataDecoder
+Method		: SPEport_DataReceived
+Time		: 1:49:48 PM
+Date		: 11/20/2009
+Computer	: i7-940
+Error		: Index was outside the bounds of the array.
+Stack Trace	: at DataDecoder.Setup.SPEport_DataReceived(Object sender, SerialDataReceivedEventArgs e) in C:\Documents and Settings\Steve\Desktop\Repose_DDUtil\Source\Setup.cs:line 10512
+-------------------------------------------------------------------
+Source		: DataDecoder
+Method		: SPEport_DataReceived
+Time		: 1:53:38 PM
+Date		: 11/20/2009
+Computer	: i7-940
+Error		: Index was outside the bounds of the array.
+Stack Trace	: at DataDecoder.Setup.SPEport_DataReceived(Object sender, SerialDataReceivedEventArgs e) in C:\Documents and Settings\Steve\Desktop\Repose_DDUtil\Source\Setup.cs:line 10512
+-------------------------------------------------------------------
+Source		: DataDecoder
+Method		: SPEport_DataReceived
+Time		: 1:53:53 PM
+Date		: 11/20/2009
+Computer	: i7-940
+Error		: Index was outside the bounds of the array.
+Stack Trace	: at DataDecoder.Setup.SPEport_DataReceived(Object sender, SerialDataReceivedEventArgs e) in C:\Documents and Settings\Steve\Desktop\Repose_DDUtil\Source\Setup.cs:line 10512
+-------------------------------------------------------------------
+Source		: DataDecoder
+Method		: SPEport_DataReceived
+Time		: 1:54:27 PM
+Date		: 11/20/2009
+Computer	: i7-940
+Error		: Index was outside the bounds of the array.
+Stack Trace	: at DataDecoder.Setup.SPEport_DataReceived(Object sender, SerialDataReceivedEventArgs e) in C:\Documents and Settings\Steve\Desktop\Repose_DDUtil\Source\Setup.cs:line 10512
+-------------------------------------------------------------------
+Source		: DataDecoder
+Method		: SPEport_DataReceived
+Time		: 1:54:42 PM
+Date		: 11/20/2009
+Computer	: i7-940
+Error		: Index was outside the bounds of the array.
+Stack Trace	: at DataDecoder.Setup.SPEport_DataReceived(Object sender, SerialDataReceivedEventArgs e) in C:\Documents and Settings\Steve\Desktop\Repose_DDUtil\Source\Setup.cs:line 10512
+-------------------------------------------------------------------
+Source		: DataDecoder
+Method		: SPEport_DataReceived
+Time		: 1:54:59 PM
+Date		: 11/20/2009
+Computer	: i7-940
+Error		: Index was outside the bounds of the array.
+Stack Trace	: at DataDecoder.Setup.SPEport_DataReceived(Object sender, SerialDataReceivedEventArgs e) in C:\Documents and Settings\Steve\Desktop\Repose_DDUtil\Source\Setup.cs:line 10512
+-------------------------------------------------------------------
+Source		: DataDecoder
+Method		: SPEport_DataReceived
+Time		: 1:59:03 PM
+Date		: 11/20/2009
+Computer	: i7-940
+Error		: Index was outside the bounds of the array.
+Stack Trace	: at DataDecoder.Setup.SPEport_DataReceived(Object sender, SerialDataReceivedEventArgs e) in C:\Documents and Settings\Steve\Desktop\Repose_DDUtil\Source\Setup.cs:line 10512
+-------------------------------------------------------------------
+Source		: DataDecoder
+Method		: SPEport_DataReceived
+Time		: 2:04:49 PM
+Date		: 11/20/2009
+Computer	: i7-940
+Error		: Index was outside the bounds of the array.
+Stack Trace	: at DataDecoder.Setup.SPEport_DataReceived(Object sender, SerialDataReceivedEventArgs e) in C:\Documents and Settings\Steve\Desktop\Repose_DDUtil\Source\Setup.cs:line 10512
+-------------------------------------------------------------------
+Source		: DataDecoder
+Method		: SPEport_DataReceived
+Time		: 2:05:04 PM
+Date		: 11/20/2009
+Computer	: i7-940
+Error		: Index was outside the bounds of the array.
+Stack Trace	: at DataDecoder.Setup.SPEport_DataReceived(Object sender, SerialDataReceivedEventArgs e) in C:\Documents and Settings\Steve\Desktop\Repose_DDUtil\Source\Setup.cs:line 10512
+-------------------------------------------------------------------
+Source		: DataDecoder
+Method		: SPEport_DataReceived
+Time		: 2:05:26 PM
+Date		: 11/20/2009
+Computer	: i7-940
+Error		: Index was outside the bounds of the array.
+Stack Trace	: at DataDecoder.Setup.SPEport_DataReceived(Object sender, SerialDataReceivedEventArgs e) in C:\Documents and Settings\Steve\Desktop\Repose_DDUtil\Source\Setup.cs:line 10512
+-------------------------------------------------------------------
+Source		: DataDecoder
+Method		: SPEport_DataReceived
+Time		: 2:05:42 PM
+Date		: 11/20/2009
+Computer	: i7-940
+Error		: Index was outside the bounds of the array.
+Stack Trace	: at DataDecoder.Setup.SPEport_DataReceived(Object sender, SerialDataReceivedEventArgs e) in C:\Documents and Settings\Steve\Desktop\Repose_DDUtil\Source\Setup.cs:line 10512
+-------------------------------------------------------------------
+Source		: DataDecoder
+Method		: SPEport_DataReceived
+Time		: 2:05:58 PM
+Date		: 11/20/2009
+Computer	: i7-940
+Error		: Index was outside the bounds of the array.
+Stack Trace	: at DataDecoder.Setup.SPEport_DataReceived(Object sender, SerialDataReceivedEventArgs e) in C:\Documents and Settings\Steve\Desktop\Repose_DDUtil\Source\Setup.cs:line 10512
+-------------------------------------------------------------------
+Source		: DataDecoder
+Method		: SPEport_DataReceived
+Time		: 2:06:13 PM
+Date		: 11/20/2009
+Computer	: i7-940
+Error		: Index was outside the bounds of the array.
+Stack Trace	: at DataDecoder.Setup.SPEport_DataReceived(Object sender, SerialDataReceivedEventArgs e) in C:\Documents and Settings\Steve\Desktop\Repose_DDUtil\Source\Setup.cs:line 10512
+-------------------------------------------------------------------
+Source		: DataDecoder
+Method		: SPEport_DataReceived
+Time		: 2:06:29 PM
+Date		: 11/20/2009
+Computer	: i7-940
+Error		: Index was outside the bounds of the array.
+Stack Trace	: at DataDecoder.Setup.SPEport_DataReceived(Object sender, SerialDataReceivedEventArgs e) in C:\Documents and Settings\Steve\Desktop\Repose_DDUtil\Source\Setup.cs:line 10512
+-------------------------------------------------------------------
+Source		: DataDecoder
+Method		: SPEport_DataReceived
+Time		: 2:06:45 PM
+Date		: 11/20/2009
+Computer	: i7-940
+Error		: Index was outside the bounds of the array.
+Stack Trace	: at DataDecoder.Setup.SPEport_DataReceived(Object sender, SerialDataReceivedEventArgs e) in C:\Documents and Settings\Steve\Desktop\Repose_DDUtil\Source\Setup.cs:line 10512
+-------------------------------------------------------------------
+Source		: mscorlib
+Method		: InternalSubStringWithChecks
+Time		: 2:07:53 PM
+Date		: 11/20/2009
+Computer	: i7-940
+Error		: Length cannot be less than zero.
+Parameter name: length
+Stack Trace	: at System.String.InternalSubStringWithChecks(Int32 startIndex, Int32 length, Boolean fAlwaysCopy)
+   at System.String.Substring(Int32 startIndex, Int32 length)
+   at DataDecoder.Setup.SPEport_DataReceived(Object sender, SerialDataReceivedEventArgs e) in C:\Documents and Settings\Steve\Desktop\Repose_DDUtil\Source\Setup.cs:line 10567
+-------------------------------------------------------------------
+Source		: DataDecoder
+Method		: SPEport_DataReceived
+Time		: 2:07:54 PM
+Date		: 11/20/2009
+Computer	: i7-940
+Error		: Index was outside the bounds of the array.
+Stack Trace	: at DataDecoder.Setup.SPEport_DataReceived(Object sender, SerialDataReceivedEventArgs e) in C:\Documents and Settings\Steve\Desktop\Repose_DDUtil\Source\Setup.cs:line 10512
+-------------------------------------------------------------------
+Source		: DataDecoder
+Method		: SPEport_DataReceived
+Time		: 2:08:09 PM
+Date		: 11/20/2009
+Computer	: i7-940
+Error		: Index was outside the bounds of the array.
+Stack Trace	: at DataDecoder.Setup.SPEport_DataReceived(Object sender, SerialDataReceivedEventArgs e) in C:\Documents and Settings\Steve\Desktop\Repose_DDUtil\Source\Setup.cs:line 10512
+-------------------------------------------------------------------
+Source		: DataDecoder
+Method		: SPEport_DataReceived
+Time		: 2:08:27 PM
+Date		: 11/20/2009
+Computer	: i7-940
+Error		: Index was outside the bounds of the array.
+Stack Trace	: at DataDecoder.Setup.SPEport_DataReceived(Object sender, SerialDataReceivedEventArgs e) in C:\Documents and Settings\Steve\Desktop\Repose_DDUtil\Source\Setup.cs:line 10512
+-------------------------------------------------------------------
+Source		: DataDecoder
+Method		: SPEport_DataReceived
+Time		: 2:08:42 PM
+Date		: 11/20/2009
+Computer	: i7-940
+Error		: Index was outside the bounds of the array.
+Stack Trace	: at DataDecoder.Setup.SPEport_DataReceived(Object sender, SerialDataReceivedEventArgs e) in C:\Documents and Settings\Steve\Desktop\Repose_DDUtil\Source\Setup.cs:line 10512
+-------------------------------------------------------------------
+Source		: System
+Method		: get_BytesToRead
+Time		: 2:08:53 PM
+Date		: 11/20/2009
+Computer	: i7-940
+Error		: The port is closed.
+Stack Trace	: at System.IO.Ports.SerialPort.get_BytesToRead()
+   at DataDecoder.Setup.SPEport_DataReceived(Object sender, SerialDataReceivedEventArgs e) in C:\Documents and Settings\Steve\Desktop\Repose_DDUtil\Source\Setup.cs:line 10509
+-------------------------------------------------------------------
+Source		: mscorlib
+Method		: InternalSubStringWithChecks
+Time		: 3:33:43 PM
+Date		: 11/20/2009
+Computer	: i7-940
+Error		: Length cannot be less than zero.
+Parameter name: length
+Stack Trace	: at System.String.InternalSubStringWithChecks(Int32 startIndex, Int32 length, Boolean fAlwaysCopy)
+   at System.String.Substring(Int32 startIndex, Int32 length)
+   at DataDecoder.Setup.SPEport_DataReceived(Object sender, SerialDataReceivedEventArgs e) in C:\Documents and Settings\Steve\Desktop\Repose_DDUtil\Source\Setup.cs:line 10573
+-------------------------------------------------------------------
+Source		: DataDecoder
+Method		: SPEport_DataReceived
+Time		: 3:33:43 PM
+Date		: 11/20/2009
+Computer	: i7-940
+Error		: Index was outside the bounds of the array.
+Stack Trace	: at DataDecoder.Setup.SPEport_DataReceived(Object sender, SerialDataReceivedEventArgs e) in C:\Documents and Settings\Steve\Desktop\Repose_DDUtil\Source\Setup.cs:line 10518
+-------------------------------------------------------------------
+Source		: DataDecoder
+Method		: SPEport_DataReceived
+Time		: 3:33:59 PM
+Date		: 11/20/2009
+Computer	: i7-940
+Error		: Index was outside the bounds of the array.
+Stack Trace	: at DataDecoder.Setup.SPEport_DataReceived(Object sender, SerialDataReceivedEventArgs e) in C:\Documents and Settings\Steve\Desktop\Repose_DDUtil\Source\Setup.cs:line 10518
+-------------------------------------------------------------------
+Source		: DataDecoder
+Method		: SPEport_DataReceived
+Time		: 3:34:14 PM
+Date		: 11/20/2009
+Computer	: i7-940
+Error		: Index was outside the bounds of the array.
+Stack Trace	: at DataDecoder.Setup.SPEport_DataReceived(Object sender, SerialDataReceivedEventArgs e) in C:\Documents and Settings\Steve\Desktop\Repose_DDUtil\Source\Setup.cs:line 10518
+-------------------------------------------------------------------
+Source		: mscorlib
+Method		: InternalSubStringWithChecks
+Time		: 3:37:32 PM
+Date		: 11/20/2009
+Computer	: i7-940
+Error		: Length cannot be less than zero.
+Parameter name: length
+Stack Trace	: at System.String.InternalSubStringWithChecks(Int32 startIndex, Int32 length, Boolean fAlwaysCopy)
+   at System.String.Substring(Int32 startIndex, Int32 length)
+   at DataDecoder.Setup.SPEport_DataReceived(Object sender, SerialDataReceivedEventArgs e) in C:\Documents and Settings\Steve\Desktop\Repose_DDUtil\Source\Setup.cs:line 10575
+-------------------------------------------------------------------
+Source		: DataDecoder
+Method		: SPEport_DataReceived
+Time		: 3:37:32 PM
+Date		: 11/20/2009
+Computer	: i7-940
+Error		: Index was outside the bounds of the array.
+Stack Trace	: at DataDecoder.Setup.SPEport_DataReceived(Object sender, SerialDataReceivedEventArgs e) in C:\Documents and Settings\Steve\Desktop\Repose_DDUtil\Source\Setup.cs:line 10520
+-------------------------------------------------------------------
+Source		: DataDecoder
+Method		: SPEport_DataReceived
+Time		: 3:37:48 PM
+Date		: 11/20/2009
+Computer	: i7-940
+Error		: Index was outside the bounds of the array.
+Stack Trace	: at DataDecoder.Setup.SPEport_DataReceived(Object sender, SerialDataReceivedEventArgs e) in C:\Documents and Settings\Steve\Desktop\Repose_DDUtil\Source\Setup.cs:line 10520
+-------------------------------------------------------------------
+Source		: DataDecoder
+Method		: SPEport_DataReceived
+Time		: 3:38:03 PM
+Date		: 11/20/2009
+Computer	: i7-940
+Error		: Index was outside the bounds of the array.
+Stack Trace	: at DataDecoder.Setup.SPEport_DataReceived(Object sender, SerialDataReceivedEventArgs e) in C:\Documents and Settings\Steve\Desktop\Repose_DDUtil\Source\Setup.cs:line 10520
+-------------------------------------------------------------------
+Source		: DataDecoder
+Method		: SPEport_DataReceived
+Time		: 3:38:19 PM
+Date		: 11/20/2009
+Computer	: i7-940
+Error		: Index was outside the bounds of the array.
+Stack Trace	: at DataDecoder.Setup.SPEport_DataReceived(Object sender, SerialDataReceivedEventArgs e) in C:\Documents and Settings\Steve\Desktop\Repose_DDUtil\Source\Setup.cs:line 10520
+-------------------------------------------------------------------
+Source		: DataDecoder
+Method		: SPEport_DataReceived
+Time		: 3:38:35 PM
+Date		: 11/20/2009
+Computer	: i7-940
+Error		: Index was outside the bounds of the array.
+Stack Trace	: at DataDecoder.Setup.SPEport_DataReceived(Object sender, SerialDataReceivedEventArgs e) in C:\Documents and Settings\Steve\Desktop\Repose_DDUtil\Source\Setup.cs:line 10520
+-------------------------------------------------------------------
+Source		: DataDecoder
+Method		: SPEport_DataReceived
+Time		: 3:38:50 PM
+Date		: 11/20/2009
+Computer	: i7-940
+Error		: Index was outside the bounds of the array.
+Stack Trace	: at DataDecoder.Setup.SPEport_DataReceived(Object sender, SerialDataReceivedEventArgs e) in C:\Documents and Settings\Steve\Desktop\Repose_DDUtil\Source\Setup.cs:line 10520
+-------------------------------------------------------------------
+Source		: DataDecoder
+Method		: SPEport_DataReceived
+Time		: 3:39:06 PM
+Date		: 11/20/2009
+Computer	: i7-940
+Error		: Index was outside the bounds of the array.
+Stack Trace	: at DataDecoder.Setup.SPEport_DataReceived(Object sender, SerialDataReceivedEventArgs e) in C:\Documents and Settings\Steve\Desktop\Repose_DDUtil\Source\Setup.cs:line 10520
+-------------------------------------------------------------------
+Source		: DataDecoder
+Method		: SPEport_DataReceived
+Time		: 3:39:22 PM
+Date		: 11/20/2009
+Computer	: i7-940
+Error		: Index was outside the bounds of the array.
+Stack Trace	: at DataDecoder.Setup.SPEport_DataReceived(Object sender, SerialDataReceivedEventArgs e) in C:\Documents and Settings\Steve\Desktop\Repose_DDUtil\Source\Setup.cs:line 10520
+-------------------------------------------------------------------
+Source		: DataDecoder
+Method		: SPEport_DataReceived
+Time		: 3:39:37 PM
+Date		: 11/20/2009
+Computer	: i7-940
+Error		: Index was outside the bounds of the array.
+Stack Trace	: at DataDecoder.Setup.SPEport_DataReceived(Object sender, SerialDataReceivedEventArgs e) in C:\Documents and Settings\Steve\Desktop\Repose_DDUtil\Source\Setup.cs:line 10520
+-------------------------------------------------------------------
+Source		: mscorlib
+Method		: InternalSubStringWithChecks
+Time		: 3:43:12 PM
+Date		: 11/20/2009
+Computer	: i7-940
+Error		: Length cannot be less than zero.
+Parameter name: length
+Stack Trace	: at System.String.InternalSubStringWithChecks(Int32 startIndex, Int32 length, Boolean fAlwaysCopy)
+   at System.String.Substring(Int32 startIndex, Int32 length)
+   at DataDecoder.Setup.SPEport_DataReceived(Object sender, SerialDataReceivedEventArgs e) in C:\Documents and Settings\Steve\Desktop\Repose_DDUtil\Source\Setup.cs:line 10576
+-------------------------------------------------------------------
+Source		: mscorlib
+Method		: InternalSubStringWithChecks
+Time		: 3:50:12 PM
+Date		: 11/20/2009
+Computer	: i7-940
+Error		: Length cannot be less than zero.
+Parameter name: length
+Stack Trace	: at System.String.InternalSubStringWithChecks(Int32 startIndex, Int32 length, Boolean fAlwaysCopy)
+   at System.String.Substring(Int32 startIndex, Int32 length)
+   at DataDecoder.Setup.SPEport_DataReceived(Object sender, SerialDataReceivedEventArgs e) in C:\Documents and Settings\Steve\Desktop\Repose_DDUtil\Source\Setup.cs:line 10576
+-------------------------------------------------------------------
+Source		: mscorlib
+Method		: InternalSubStringWithChecks
+Time		: 3:53:09 PM
+Date		: 11/20/2009
+Computer	: i7-940
+Error		: Length cannot be less than zero.
+Parameter name: length
+Stack Trace	: at System.String.InternalSubStringWithChecks(Int32 startIndex, Int32 length, Boolean fAlwaysCopy)
+   at System.String.Substring(Int32 startIndex, Int32 length)
+   at DataDecoder.Setup.SPEport_DataReceived(Object sender, SerialDataReceivedEventArgs e) in C:\Documents and Settings\Steve\Desktop\Repose_DDUtil\Source\Setup.cs:line 10577
+-------------------------------------------------------------------
+Source		: mscorlib
+Method		: InternalSubStringWithChecks
+Time		: 3:54:37 PM
+Date		: 11/20/2009
+Computer	: i7-940
+Error		: Length cannot be less than zero.
+Parameter name: length
+Stack Trace	: at System.String.InternalSubStringWithChecks(Int32 startIndex, Int32 length, Boolean fAlwaysCopy)
+   at System.String.Substring(Int32 startIndex, Int32 length)
+   at DataDecoder.Setup.SPEport_DataReceived(Object sender, SerialDataReceivedEventArgs e) in C:\Documents and Settings\Steve\Desktop\Repose_DDUtil\Source\Setup.cs:line 10577
+-------------------------------------------------------------------
+Source		: DataDecoder
+Method		: SPEport_DataReceived
+Time		: 3:54:37 PM
+Date		: 11/20/2009
+Computer	: i7-940
+Error		: Index was outside the bounds of the array.
+Stack Trace	: at DataDecoder.Setup.SPEport_DataReceived(Object sender, SerialDataReceivedEventArgs e) in C:\Documents and Settings\Steve\Desktop\Repose_DDUtil\Source\Setup.cs:line 10522
+-------------------------------------------------------------------
+Source		: mscorlib
+Method		: InternalSubStringWithChecks
+Time		: 3:55:01 PM
+Date		: 11/20/2009
+Computer	: i7-940
+Error		: Length cannot be less than zero.
+Parameter name: length
+Stack Trace	: at System.String.InternalSubStringWithChecks(Int32 startIndex, Int32 length, Boolean fAlwaysCopy)
+   at System.String.Substring(Int32 startIndex, Int32 length)
+   at DataDecoder.Setup.SPEport_DataReceived(Object sender, SerialDataReceivedEventArgs e) in C:\Documents and Settings\Steve\Desktop\Repose_DDUtil\Source\Setup.cs:line 10577
+-------------------------------------------------------------------
+Source		: DataDecoder
+Method		: SPEport_DataReceived
+Time		: 3:55:01 PM
+Date		: 11/20/2009
+Computer	: i7-940
+Error		: Index was outside the bounds of the array.
+Stack Trace	: at DataDecoder.Setup.SPEport_DataReceived(Object sender, SerialDataReceivedEventArgs e) in C:\Documents and Settings\Steve\Desktop\Repose_DDUtil\Source\Setup.cs:line 10522
+-------------------------------------------------------------------
+Source		: DataDecoder
+Method		: SPEport_DataReceived
+Time		: 3:55:16 PM
+Date		: 11/20/2009
+Computer	: i7-940
+Error		: Index was outside the bounds of the array.
+Stack Trace	: at DataDecoder.Setup.SPEport_DataReceived(Object sender, SerialDataReceivedEventArgs e) in C:\Documents and Settings\Steve\Desktop\Repose_DDUtil\Source\Setup.cs:line 10522
+-------------------------------------------------------------------
+Source		: DataDecoder
+Method		: SPEport_DataReceived
+Time		: 3:55:32 PM
+Date		: 11/20/2009
+Computer	: i7-940
+Error		: Index was outside the bounds of the array.
+Stack Trace	: at DataDecoder.Setup.SPEport_DataReceived(Object sender, SerialDataReceivedEventArgs e) in C:\Documents and Settings\Steve\Desktop\Repose_DDUtil\Source\Setup.cs:line 10522
+-------------------------------------------------------------------
+Source		: DataDecoder
+Method		: SPEport_DataReceived
+Time		: 3:55:48 PM
+Date		: 11/20/2009
+Computer	: i7-940
+Error		: Index was outside the bounds of the array.
+Stack Trace	: at DataDecoder.Setup.SPEport_DataReceived(Object sender, SerialDataReceivedEventArgs e) in C:\Documents and Settings\Steve\Desktop\Repose_DDUtil\Source\Setup.cs:line 10522
+-------------------------------------------------------------------
+Source		: DataDecoder
+Method		: SPEport_DataReceived
+Time		: 3:56:03 PM
+Date		: 11/20/2009
+Computer	: i7-940
+Error		: Index was outside the bounds of the array.
+Stack Trace	: at DataDecoder.Setup.SPEport_DataReceived(Object sender, SerialDataReceivedEventArgs e) in C:\Documents and Settings\Steve\Desktop\Repose_DDUtil\Source\Setup.cs:line 10522
+-------------------------------------------------------------------
+Source		: DataDecoder
+Method		: SPEport_DataReceived
+Time		: 3:56:19 PM
+Date		: 11/20/2009
+Computer	: i7-940
+Error		: Index was outside the bounds of the array.
+Stack Trace	: at DataDecoder.Setup.SPEport_DataReceived(Object sender, SerialDataReceivedEventArgs e) in C:\Documents and Settings\Steve\Desktop\Repose_DDUtil\Source\Setup.cs:line 10522
+-------------------------------------------------------------------
+Source		: DataDecoder
+Method		: SPEport_DataReceived
+Time		: 3:56:35 PM
+Date		: 11/20/2009
+Computer	: i7-940
+Error		: Index was outside the bounds of the array.
+Stack Trace	: at DataDecoder.Setup.SPEport_DataReceived(Object sender, SerialDataReceivedEventArgs e) in C:\Documents and Settings\Steve\Desktop\Repose_DDUtil\Source\Setup.cs:line 10522
+-------------------------------------------------------------------
+Source		: DataDecoder
+Method		: SPEport_DataReceived
+Time		: 3:56:50 PM
+Date		: 11/20/2009
+Computer	: i7-940
+Error		: Index was outside the bounds of the array.
+Stack Trace	: at DataDecoder.Setup.SPEport_DataReceived(Object sender, SerialDataReceivedEventArgs e) in C:\Documents and Settings\Steve\Desktop\Repose_DDUtil\Source\Setup.cs:line 10522
+-------------------------------------------------------------------
+Source		: DataDecoder
+Method		: SPEport_DataReceived
+Time		: 3:57:06 PM
+Date		: 11/20/2009
+Computer	: i7-940
+Error		: Index was outside the bounds of the array.
+Stack Trace	: at DataDecoder.Setup.SPEport_DataReceived(Object sender, SerialDataReceivedEventArgs e) in C:\Documents and Settings\Steve\Desktop\Repose_DDUtil\Source\Setup.cs:line 10522
+-------------------------------------------------------------------
+Source		: DataDecoder
+Method		: SPEport_DataReceived
+Time		: 3:57:21 PM
+Date		: 11/20/2009
+Computer	: i7-940
+Error		: Index was outside the bounds of the array.
+Stack Trace	: at DataDecoder.Setup.SPEport_DataReceived(Object sender, SerialDataReceivedEventArgs e) in C:\Documents and Settings\Steve\Desktop\Repose_DDUtil\Source\Setup.cs:line 10522
+-------------------------------------------------------------------
+Source		: DataDecoder
+Method		: SPEport_DataReceived
+Time		: 3:57:37 PM
+Date		: 11/20/2009
+Computer	: i7-940
+Error		: Index was outside the bounds of the array.
+Stack Trace	: at DataDecoder.Setup.SPEport_DataReceived(Object sender, SerialDataReceivedEventArgs e) in C:\Documents and Settings\Steve\Desktop\Repose_DDUtil\Source\Setup.cs:line 10522
+-------------------------------------------------------------------
+Source		: System
+Method		: get_BytesToRead
+Time		: 3:57:50 PM
+Date		: 11/20/2009
+Computer	: i7-940
+Error		: The port is closed.
+Stack Trace	: at System.IO.Ports.SerialPort.get_BytesToRead()
+   at DataDecoder.Setup.SPEport_DataReceived(Object sender, SerialDataReceivedEventArgs e) in C:\Documents and Settings\Steve\Desktop\Repose_DDUtil\Source\Setup.cs:line 10519
+-------------------------------------------------------------------
+Source		: mscorlib
+Method		: InternalSubStringWithChecks
+Time		: 4:00:36 PM
+Date		: 11/20/2009
+Computer	: i7-940
+Error		: Length cannot be less than zero.
+Parameter name: length
+Stack Trace	: at System.String.InternalSubStringWithChecks(Int32 startIndex, Int32 length, Boolean fAlwaysCopy)
+   at System.String.Substring(Int32 startIndex, Int32 length)
+   at DataDecoder.Setup.SPEport_DataReceived(Object sender, SerialDataReceivedEventArgs e) in C:\Documents and Settings\Steve\Desktop\Repose_DDUtil\Source\Setup.cs:line 10577
+-------------------------------------------------------------------
+Source		: DataDecoder
+Method		: SPEport_DataReceived
+Time		: 4:00:37 PM
+Date		: 11/20/2009
+Computer	: i7-940
+Error		: Index was outside the bounds of the array.
+Stack Trace	: at DataDecoder.Setup.SPEport_DataReceived(Object sender, SerialDataReceivedEventArgs e) in C:\Documents and Settings\Steve\Desktop\Repose_DDUtil\Source\Setup.cs:line 10522
+-------------------------------------------------------------------
+Source		: DataDecoder
+Method		: SPEport_DataReceived
+Time		: 4:00:52 PM
+Date		: 11/20/2009
+Computer	: i7-940
+Error		: Index was outside the bounds of the array.
+Stack Trace	: at DataDecoder.Setup.SPEport_DataReceived(Object sender, SerialDataReceivedEventArgs e) in C:\Documents and Settings\Steve\Desktop\Repose_DDUtil\Source\Setup.cs:line 10522
+-------------------------------------------------------------------
+Source		: DataDecoder
+Method		: SPEport_DataReceived
+Time		: 4:01:08 PM
+Date		: 11/20/2009
+Computer	: i7-940
+Error		: Index was outside the bounds of the array.
+Stack Trace	: at DataDecoder.Setup.SPEport_DataReceived(Object sender, SerialDataReceivedEventArgs e) in C:\Documents and Settings\Steve\Desktop\Repose_DDUtil\Source\Setup.cs:line 10522
+-------------------------------------------------------------------
+Source		: DataDecoder
+Method		: SPEport_DataReceived
+Time		: 4:01:24 PM
+Date		: 11/20/2009
+Computer	: i7-940
+Error		: Index was outside the bounds of the array.
+Stack Trace	: at DataDecoder.Setup.SPEport_DataReceived(Object sender, SerialDataReceivedEventArgs e) in C:\Documents and Settings\Steve\Desktop\Repose_DDUtil\Source\Setup.cs:line 10522
+-------------------------------------------------------------------
+Source		: DataDecoder
+Method		: SPEport_DataReceived
+Time		: 4:01:39 PM
+Date		: 11/20/2009
+Computer	: i7-940
+Error		: Index was outside the bounds of the array.
+Stack Trace	: at DataDecoder.Setup.SPEport_DataReceived(Object sender, SerialDataReceivedEventArgs e) in C:\Documents and Settings\Steve\Desktop\Repose_DDUtil\Source\Setup.cs:line 10522
+-------------------------------------------------------------------
+Source		: DataDecoder
+Method		: SPEport_DataReceived
+Time		: 4:01:55 PM
+Date		: 11/20/2009
+Computer	: i7-940
+Error		: Index was outside the bounds of the array.
+Stack Trace	: at DataDecoder.Setup.SPEport_DataReceived(Object sender, SerialDataReceivedEventArgs e) in C:\Documents and Settings\Steve\Desktop\Repose_DDUtil\Source\Setup.cs:line 10522
+-------------------------------------------------------------------
+Source		: mscorlib
+Method		: InternalSubStringWithChecks
+Time		: 4:02:36 PM
+Date		: 11/20/2009
+Computer	: i7-940
+Error		: Length cannot be less than zero.
+Parameter name: length
+Stack Trace	: at System.String.InternalSubStringWithChecks(Int32 startIndex, Int32 length, Boolean fAlwaysCopy)
+   at System.String.Substring(Int32 startIndex, Int32 length)
+   at DataDecoder.Setup.SPEport_DataReceived(Object sender, SerialDataReceivedEventArgs e) in C:\Documents and Settings\Steve\Desktop\Repose_DDUtil\Source\Setup.cs:line 10577
+-------------------------------------------------------------------
+Source		: DataDecoder
+Method		: SPEport_DataReceived
+Time		: 4:02:36 PM
+Date		: 11/20/2009
+Computer	: i7-940
+Error		: Index was outside the bounds of the array.
+Stack Trace	: at DataDecoder.Setup.SPEport_DataReceived(Object sender, SerialDataReceivedEventArgs e) in C:\Documents and Settings\Steve\Desktop\Repose_DDUtil\Source\Setup.cs:line 10522
+-------------------------------------------------------------------
+Source		: DataDecoder
+Method		: SPEport_DataReceived
+Time		: 4:02:52 PM
+Date		: 11/20/2009
+Computer	: i7-940
+Error		: Index was outside the bounds of the array.
+Stack Trace	: at DataDecoder.Setup.SPEport_DataReceived(Object sender, SerialDataReceivedEventArgs e) in C:\Documents and Settings\Steve\Desktop\Repose_DDUtil\Source\Setup.cs:line 10522
+-------------------------------------------------------------------
+Source		: DataDecoder
+Method		: SPEport_DataReceived
+Time		: 4:03:07 PM
+Date		: 11/20/2009
+Computer	: i7-940
+Error		: Index was outside the bounds of the array.
+Stack Trace	: at DataDecoder.Setup.SPEport_DataReceived(Object sender, SerialDataReceivedEventArgs e) in C:\Documents and Settings\Steve\Desktop\Repose_DDUtil\Source\Setup.cs:line 10522
+-------------------------------------------------------------------
+Source		: System
+Method		: get_BytesToRead
+Time		: 4:03:09 PM
+Date		: 11/20/2009
+Computer	: i7-940
+Error		: The port is closed.
+Stack Trace	: at System.IO.Ports.SerialPort.get_BytesToRead()
+   at DataDecoder.Setup.SPEport_DataReceived(Object sender, SerialDataReceivedEventArgs e) in C:\Documents and Settings\Steve\Desktop\Repose_DDUtil\Source\Setup.cs:line 10519
+-------------------------------------------------------------------

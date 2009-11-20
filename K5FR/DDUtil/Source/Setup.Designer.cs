@@ -877,6 +877,8 @@ namespace DataDecoder
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.optionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.autoDriveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.ampSettingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.barefootSettingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tubeAmpsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aCOM2000AToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.alpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -11426,7 +11428,7 @@ namespace DataDecoder
             // txtSWR
             // 
             this.txtSWR.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtSWR.ForeColor = System.Drawing.Color.Red;
+            this.txtSWR.ForeColor = System.Drawing.SystemColors.WindowText;
             this.txtSWR.Location = new System.Drawing.Point(144, 365);
             this.txtSWR.Name = "txtSWR";
             this.txtSWR.Size = new System.Drawing.Size(45, 20);
@@ -11785,10 +11787,27 @@ namespace DataDecoder
             // 
             // autoDriveToolStripMenuItem
             // 
+            this.autoDriveToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.ampSettingsToolStripMenuItem,
+            this.barefootSettingsToolStripMenuItem});
             this.autoDriveToolStripMenuItem.Name = "autoDriveToolStripMenuItem";
             this.autoDriveToolStripMenuItem.Size = new System.Drawing.Size(169, 22);
             this.autoDriveToolStripMenuItem.Text = "Auto Drive";
             this.autoDriveToolStripMenuItem.Click += new System.EventHandler(this.autoDriveToolStripMenuItem_Click);
+            // 
+            // ampSettingsToolStripMenuItem
+            // 
+            this.ampSettingsToolStripMenuItem.Name = "ampSettingsToolStripMenuItem";
+            this.ampSettingsToolStripMenuItem.Size = new System.Drawing.Size(169, 22);
+            this.ampSettingsToolStripMenuItem.Text = "Amp Settings";
+            this.ampSettingsToolStripMenuItem.Click += new System.EventHandler(this.ampSettingsToolStripMenuItem_Click);
+            // 
+            // barefootSettingsToolStripMenuItem
+            // 
+            this.barefootSettingsToolStripMenuItem.Name = "barefootSettingsToolStripMenuItem";
+            this.barefootSettingsToolStripMenuItem.Size = new System.Drawing.Size(169, 22);
+            this.barefootSettingsToolStripMenuItem.Text = "Barefoot Settings";
+            this.barefootSettingsToolStripMenuItem.Click += new System.EventHandler(this.barefootSettingsToolStripMenuItem_Click);
             // 
             // tubeAmpsToolStripMenuItem
             // 
@@ -13145,6 +13164,8 @@ namespace DataDecoder
         private Label label161;
         private RadioButton rbLed;
         private Button button7;
+        private ToolStripMenuItem ampSettingsToolStripMenuItem;
+        private ToolStripMenuItem barefootSettingsToolStripMenuItem;
 
     }
 }
