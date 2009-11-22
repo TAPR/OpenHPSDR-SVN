@@ -898,6 +898,7 @@ namespace DataDecoder
                     {
                         txtSWR.Text = text;
                         double clr = Convert.ToDouble(text);
+
                         if (clr > 2 && clr < 3)
                             txtSWR.BackColor = Color.Yellow;
                         else if (clr > 3)
@@ -905,8 +906,8 @@ namespace DataDecoder
                         else txtSWR.BackColor = Color.Empty;
                     }
                 }
-                catch (Exception e)
-                { MessageBox.Show(e.ToString()); }
+                catch //(Exception e)
+                { }//{ MessageBox.Show(e.ToString()); }
             }
         }
         // Write LP-100 Alarm reading
@@ -10245,6 +10246,7 @@ namespace DataDecoder
         bool SPEon = false;
 //        bool SPEoff = false;
         bool wattmtr = false;
+        private List<byte> PortBuf = new List<byte>();
 
         static string[] SPEerrors = new string[] {
 
@@ -10461,27 +10463,26 @@ namespace DataDecoder
                 cboSPEport.SelectedIndex = set.SPEport;
                 chkSPEenab.Checked = set.SPEenab;
                 SPETimer.Enabled = false;
-//                SPEoff = false;
                 SPEmsgClr("");
                 // see if digital watt meter is being used.
-                if (chkSPEenab.Checked && !chkLPenab.Checked && !chkWNEnab.Checked && !chkPM.Checked)
+                if (chkSPEenab.Checked && !chkLPenab.Checked && 
+                    !chkWNEnab.Checked && !chkPM.Checked)
                 {
                     txtAvg.Enabled = true; txtSWR.Enabled = true;
                     txtAvg.Text = "0.0"; txtSWR.Text = "0.00";
-                    lblAvg.Text = "Fwd";
+                    lblAvg.Text = "FWD";
                     wattmtr = true;
                 }
                 else wattmtr = false;
 
-                // the following are for testing only, see SPE test routines region 
-                if (TestPort.IsOpen) { TestPort.Close(); }
-                TestPort.PortName = "COM29";
-                TestPort.Open();
-                LoadPkt();
+                //// the following are for testing only, see SPE test routines region 
+                //if (TestPort.IsOpen) { TestPort.Close(); }
+                //TestPort.PortName = "COM29";
+                //TestPort.Open();
+                //LoadPkt();
 
                 // test to see if amp is running
                 if (!SPEport.IsOpen) SPEport.Open();
-                //byte[] bytes = new byte[6] { 0x55, 0x55, 0x55, 0x01, 0x81, 0x81 };
                 byte[] bytes = new byte[6] { 0x55, 0x55, 0x55, 0x01, 0x80, 0x80 };
                 SPEport.Write(bytes, 0, 6);
 
@@ -10496,7 +10497,6 @@ namespace DataDecoder
         // the SPE port has received data
         private void SPEport_DataReceived(object sender, SerialDataReceivedEventArgs e)
         {
-            //!SPEoff && 
             if (chkSPEenab.Checked) // port must be enabled to accept data
             {
                 try
@@ -10508,89 +10508,37 @@ namespace DataDecoder
                             wattmtr = true;
                         else
                             wattmtr = false;
-
-//                        SPETimer.Enabled = true;
                         SPEon = true;
                         SetSPEon("True");
                     }
                     SetSPEled("");  // toggle activity indicator
                     led = !led;
+
                     SerialPort port = (SerialPort)sender;
                     byte[] data = new byte[port.BytesToRead];
+
                     port.Read(data, 0, data.Length);
+                    PortBuf.AddRange(data);
 
-                    if (data[3] == 0x01 && data.Length >= 41) // lose the first 6 bytes
-                        Array.ConstrainedCopy(data, 6, data, 0, 35);
-                    
-                    if (data[0] == 0xAA && data[1] == 0xAA && data[2] == 0xAA)
-                    {   // Power status
-                        if (Convert.ToBoolean(data[5] & 0x10))
-                            SetSPEpwr("Full");
-                        else SetSPEpwr("Half");
-                        // Operate / Stby
-                        if (Convert.ToBoolean(data[5] & 0x02))
-                            SetSPEoper("Oper");
-                        else SetSPEoper("Stby");
-                        // tuner operation
-                        if (Convert.ToBoolean(data[5] & 0x01))
-                            SetSPEtune("True");
-                        else SetSPEtune("False");
-                        // Warning message received
-                        if (data[6] > 0x00)
+                    while (PortBuf.Count >=6)
+                    {
+                        int i1 = PortBuf.IndexOf(0xAA); // find sync start
+                        if (i1 < 0) // if sync bytes not found clear buffer
+                        { PortBuf.Clear(); }
+                        else if (PortBuf[i1 + 1] == 0xAA && PortBuf[i1 + 2] == 0xAA)
                         {
-                            if (data[6] > 0x10 && data[6] < 0x1D)
+                            if (i1 > 0) // if index > 0 delete all before it.
+                            { PortBuf.RemoveRange(0, i1); }
+                            if (PortBuf[3] == 0x01) // dump the ack packet
+                            { PortBuf.RemoveRange(0, 6); continue; }
+                            if ( PortBuf.Count >=35 && PortBuf[0] == 0xAA && 
+                                PortBuf[1] == 0xAA && PortBuf[2] == 0xAA)
                             {
-                                SetSPEmsg(SPEerrors[data[6]]);
-                            }
-                            else if (data[6] == 0x1D && data[7] > 0x00)
-                            {
-                                int ctr = data[7] & 0x0F;
-                                SetSPEmsg("Error Msg History Follows (" + ctr + ")");
-                                for (int i = 1; i < ctr + 1; i++)
-                                {
-                                    SetSPEmsg(SPEerrors[data[7 + i]]);
-                                }
-                            }
-                            // the amp is shutting down
-                            else if (data[6] == 0x1E)
-                            {
-                                SetSPEon("False"); SetSPEoper("Off"); SetSPEtune("Off");
-                                SetSPEpwr("Off"); SetSPEtemp("   "); SPEmsgClr("");
-                                //SPETimer.Enabled = false;
-                                SetSPEled("False");
-                                SPEon = false;
-                                wattmtr = false;
-                                SPEport.DiscardInBuffer();
-                                SetAvg(" ");
-                                SetSwr(" ");
-                                return;
+                                ProcessBuf(); //process the 35 byte data packet
+                                PortBuf.RemoveRange(0, 35); // delete procesed packet
                             }
                         }
-                        // antenna selected
-                        SetSPEant(((data[22] & 0x0F) + 1).ToString());     // antenna
-
-                        // SWR reading
-                        if (wattmtr)
-                        {
-                            int tswr = (data[24] << 8) + data[23];
-                            string swr = tswr.ToString();
-                            SetSwr(swr.Substring(0, swr.Length - 2) + "." +
-                                swr.Substring(swr.Length - 2, 2));
-                        }
-                        // pa temp(C)
-                        if (Convert.ToBoolean(data[5] & 0x80))
-                            SetSPEtemp(data[25].ToString() + " C");
-                        else
-                            SetSPEtemp(data[25].ToString() + " F");
-
-                        // PWR reading
-                        if (wattmtr)
-                        {
-                            int tpwr = (data[27] << 8) + data[26];
-                            string pwr = tpwr.ToString();
-                            SetAvg(pwr.Substring(0, pwr.Length - 1) + "." +
-                                    pwr.Substring(pwr.Length - 1, 1));
-                        }
+                        else { return; }
                     }
                 }
                 catch (Exception ex)
@@ -10600,22 +10548,98 @@ namespace DataDecoder
                     if (false == bReturnLog) MessageBox.Show("Unable to write to log");
                 }
             }
-            //else if (SPEoff)
-            //{
-            //    SPEport.DiscardInBuffer();
-            //    SetSPEon("False"); SetSPEoper("Off"); SetSPEtune("Off");
-            //    SetSPEpwr("Off"); SetSPEtemp("   "); SPEmsgClr("");
-            //    SPETimer.Enabled = false;
-            //    SetSPEled("False");
-            //    SPEon = false;
-            //    wattmtr = false;
-            //    SetAvg(" ");
-            //    SetSwr(" ");
-            //    SetSPEoff("True"); // blink the off button
-            //    Thread.Sleep(300);
-            //    SetSPEoff("False");
-            //}
         }
+        // Process the port buffer data
+        private void ProcessBuf()
+        {
+            try
+            {
+                if (Convert.ToBoolean(PortBuf[5] & 0x10))
+                    SetSPEpwr("Full");
+                else SetSPEpwr("Half");
+                // Operate / Stby
+                if (Convert.ToBoolean(PortBuf[5] & 0x02))
+                    SetSPEoper("Oper");
+                else SetSPEoper("Stby");
+                // tuner operation
+                if (Convert.ToBoolean(PortBuf[5] & 0x01))
+                    SetSPEtune("True");
+                else SetSPEtune("False");
+                // Warning message received
+                if (PortBuf[6] > 0x00)
+                {
+                    if (PortBuf[6] > 0x10 && PortBuf[6] < 0x1D)
+                    {
+                        SetSPEmsg(SPEerrors[PortBuf[6]]);
+                    }
+                    else if (PortBuf[6] == 0x1D && PortBuf[7] > 0x00)
+                    {
+                        int ctr = PortBuf[7] & 0x0F;
+                        SetSPEmsg("Error Msg History Follows (" + ctr + ")");
+                        for (int i = 1; i < ctr + 1; i++)
+                        {
+                            SetSPEmsg(SPEerrors[PortBuf[7 + i]]);
+                        }
+                    }
+                    // the amp is shutting down
+                    else if (PortBuf[6] == 0x1E)
+                    {
+                        SetSPEon("False"); SetSPEoper("Off"); SetSPEtune("Off");
+                        SetSPEpwr("Off"); SetSPEtemp("   "); SPEmsgClr("");
+                        //SPETimer.Enabled = false;
+                        SetSPEled("False");
+                        SPEon = false;
+                        wattmtr = false;
+                        SPEport.DiscardInBuffer();
+                        SetAvg(" ");
+                        SetSwr(" ");
+                        return;
+                    }
+                }
+                // antenna selected
+                SetSPEant(((PortBuf[22] & 0x0F) + 1).ToString());     // antenna
+
+                // SWR reading
+                if (wattmtr)
+                {
+                    int tswr = (PortBuf[24] << 8) + PortBuf[23];
+                    string swr = tswr.ToString();
+                    if (tswr == 0)
+                        SetSwr("0.00");
+                    else
+                    {
+                        SetSwr(swr.Substring(0, swr.Length - 2) + "." +
+                            swr.Substring(swr.Length - 2, 2));
+                    }
+                }
+                // pa temp(C)
+                if (Convert.ToBoolean(PortBuf[5] & 0x80))
+                    SetSPEtemp(PortBuf[25].ToString() + " C");
+                else
+                    SetSPEtemp(PortBuf[25].ToString() + " F");
+
+                // PWR reading
+                if (wattmtr)
+                {
+                    int tpwr = (PortBuf[27] << 8) + PortBuf[26];
+                    string pwr = tpwr.ToString();
+                    if (tpwr == 0)
+                        SetAvg("0.0");
+                    else
+                    {
+                        SetAvg(pwr.Substring(0, pwr.Length - 1) + "." +
+                                pwr.Substring(pwr.Length - 1, 1));
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                bool bReturnLog = false;
+                bReturnLog = ErrorLog.ErrorRoutine(false, enableErrorLog, ex);
+                if (false == bReturnLog) MessageBox.Show("Unable to write to log");
+            }
+        }
+
         // the enable checkbox has been checked
         private void chkSPEenab_CheckedChanged(object sender, EventArgs e)
         {
@@ -10707,24 +10731,12 @@ namespace DataDecoder
         // the power off button has been pressed
         private void btnSPEoff_Click(object sender, EventArgs e)
         {
-            //SPETimer.Stop();
-            //SPEport.DiscardOutBuffer();
-            //SPEport.DtrEnable = false; // backup, should already be off...
-            //SPEoff = true;
-            //SPEctr = 0;
-            // send turn-off command
             if (SPEport.IsOpen)
             {
                 // send Off cmd to amp
                 byte[] bytes = new byte[7] { 0x55, 0x55, 0x55, 0x02, 0x10, 0x18, 0x28 };
                 SPEport.Write(bytes, 0, 7);
             }
-            //using (new HourGlass())
-            //{
-            //    Thread.Sleep(5000); // allow time for radio to shut down
-            //}
-            //SPEoff = false;
-            //SPEon = false;
         }
         // the oper/stby button has been pressed
         private void btnSPEoper_Click(object sender, EventArgs e)
@@ -10808,6 +10820,7 @@ namespace DataDecoder
             {   //loop thru the buffer and find matches
                 sCmd = m.Value.Substring(0, m.Value.Length);
                 sTest = sTest.Replace(m.Value, ""); //remove the match from the buffer
+//                SPETimer.Start();
 
                 if (data[4] == 16)    // key command (0x10)
                 {
@@ -10864,13 +10877,13 @@ namespace DataDecoder
                             break;
                     }
                 }
-                if (data[4] == 128)  //RPU_ON (0x80)
+                if (data[4] == 128)  //RCU_ON (0x80)
                 {
                     TestPort.Write(ackBytes, 0, 6);
                     SPETimer.Interval = 200;
                     SPETimer.Start();
                 }
-                if (data[4] == 129)  // RPU_OFF (ox81)
+                if (data[4] == 129)  // RCU_OFF (0x81)
                 {
                     TestPort.Write(ackBytes, 0, 6); 
                     SPETimer.Stop();
@@ -10894,7 +10907,7 @@ namespace DataDecoder
                 string bnd = "0000";        // 18 - 19
                 string freq = "1437";       // 20 - 21 14100 khz
                 string ant = "03";          // 22 ant 1 selected
-                string swr = "4D01";        // 23 - 24 Lo/Hi bytes
+                string swr = "6500";        // 23 - 24 Lo/Hi bytes
                 string tmp = "18";          // 25 50C
                 string pwrf = "0528";       // 26 - 27 fwd pwr Lo/Hi
                 string pwrr = "0000";       // 28 - 29 ref pwr Lo/Hi
@@ -10916,12 +10929,16 @@ namespace DataDecoder
         private void button7_Click(object sender, EventArgs e)
         {
             // Don't forget to set port to com number before using
-            TestPort.PortName = "COM29";
-            if (!TestPort.IsOpen)
-                TestPort.Open();
+            if (TestPort.IsOpen) TestPort.Close();
+            TestPort.PortName = "COM24";
+            TestPort.Open();
             // 02 41 2C 3F 2C 31 35 37 2C B 2C 0D
-            byte[] bytes = new byte[11] { 0x02, 0x41, 0x2C, 0x3F, 0x2C, 0x31, 0x35, 0x37, 0x2C, 0x42, 0x0D };
-            TestPort.Write(bytes, 0, 11);
+            //byte[] bytes = new byte[11] 
+            //{ 0x02, 0x41, 0x2C, 0x3F, 0x2C, 0x31, 0x35, 0x37, 0x2C, 0x42, 0x0D };
+            //TestPort.Write(bytes, 0, 11);
+            TestPort.Write(ackBytes, 0, 6);
+            TestPort.Write(ackBytes, 0, 6);
+            TestPort.Write(stsBytes, 0, 35);
         }
 
         #endregion * Test Routines *
