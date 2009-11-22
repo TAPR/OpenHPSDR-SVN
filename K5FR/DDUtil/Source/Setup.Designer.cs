@@ -3214,7 +3214,7 @@ namespace DataDecoder
             this.button7.Text = "Test";
             this.toolTip1.SetToolTip(this.button7, "test button");
             this.button7.UseVisualStyleBackColor = false;
-            this.button7.Visible = false;
+            this.button7.Click += new System.EventHandler(this.button7_Click);
             // 
             // grpSPE
             // 
@@ -12126,7 +12126,6 @@ namespace DataDecoder
             // SPEport
             // 
             this.SPEport.ReadTimeout = 500;
-            this.SPEport.ReceivedBytesThreshold = 35;
             this.SPEport.WriteTimeout = 500;
             this.SPEport.DataReceived += new System.IO.Ports.SerialDataReceivedEventHandler(this.SPEport_DataReceived);
             // 
