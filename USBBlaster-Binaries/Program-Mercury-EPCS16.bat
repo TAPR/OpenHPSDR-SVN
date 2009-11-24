@@ -120,11 +120,9 @@ GOTO CONTINUE
 :ItemH
 %DIRECTORY% -c USB-Blaster mercury_v2.7.cdf
 GOTO CONTINUE
-:CONTINUE
 :ItemI
 %DIRECTORY% -c USB-Blaster mercury_v2.8.cdf
 GOTO CONTINUE
-:CONTINUE
 :ItemJ
 %DIRECTORY% -c USB-Blaster mercury_v2.9.cdf
 GOTO CONTINUE
