@@ -208,13 +208,13 @@ namespace DataDecoder
             this.chkLPenab = new System.Windows.Forms.CheckBox();
             this.label2 = new System.Windows.Forms.Label();
             this.tabAmp = new System.Windows.Forms.TabPage();
-            this.button7 = new System.Windows.Forms.Button();
             this.grpSPE = new System.Windows.Forms.GroupBox();
+            this.btnSPEright = new System.Windows.Forms.Button();
+            this.btnSPEset = new System.Windows.Forms.Button();
+            this.btnSPEleft = new System.Windows.Forms.Button();
             this.rbLed = new System.Windows.Forms.RadioButton();
             this.label161 = new System.Windows.Forms.Label();
             this.txtSPEant = new System.Windows.Forms.TextBox();
-            this.label160 = new System.Windows.Forms.Label();
-            this.label159 = new System.Windows.Forms.Label();
             this.btnSPEant = new System.Windows.Forms.Button();
             this.btnSPEdisp = new System.Windows.Forms.Button();
             this.btnSPEoff = new System.Windows.Forms.Button();
@@ -3189,7 +3189,6 @@ namespace DataDecoder
             // 
             // tabAmp
             // 
-            this.tabAmp.Controls.Add(this.button7);
             this.tabAmp.Controls.Add(this.grpSPE);
             this.tabAmp.Controls.Add(this.grpAmpBand);
             this.tabAmp.Controls.Add(this.grpPTT);
@@ -3203,26 +3202,14 @@ namespace DataDecoder
             this.tabAmp.Text = "Amps";
             this.tabAmp.UseVisualStyleBackColor = true;
             // 
-            // button7
-            // 
-            this.button7.BackColor = System.Drawing.SystemColors.Control;
-            this.button7.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button7.Location = new System.Drawing.Point(250, 100);
-            this.button7.Name = "button7";
-            this.button7.Size = new System.Drawing.Size(39, 22);
-            this.button7.TabIndex = 115;
-            this.button7.Text = "Test";
-            this.toolTip1.SetToolTip(this.button7, "test button");
-            this.button7.UseVisualStyleBackColor = false;
-            this.button7.Click += new System.EventHandler(this.button7_Click);
-            // 
             // grpSPE
             // 
+            this.grpSPE.Controls.Add(this.btnSPEright);
+            this.grpSPE.Controls.Add(this.btnSPEset);
+            this.grpSPE.Controls.Add(this.btnSPEleft);
             this.grpSPE.Controls.Add(this.rbLed);
             this.grpSPE.Controls.Add(this.label161);
             this.grpSPE.Controls.Add(this.txtSPEant);
-            this.grpSPE.Controls.Add(this.label160);
-            this.grpSPE.Controls.Add(this.label159);
             this.grpSPE.Controls.Add(this.btnSPEant);
             this.grpSPE.Controls.Add(this.btnSPEdisp);
             this.grpSPE.Controls.Add(this.btnSPEoff);
@@ -3238,13 +3225,67 @@ namespace DataDecoder
             this.grpSPE.Controls.Add(this.btnSPEon);
             this.grpSPE.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.grpSPE.ForeColor = System.Drawing.Color.Blue;
-            this.grpSPE.Location = new System.Drawing.Point(3, 5);
+            this.grpSPE.Location = new System.Drawing.Point(3, 2);
             this.grpSPE.Name = "grpSPE";
-            this.grpSPE.Size = new System.Drawing.Size(225, 151);
+            this.grpSPE.Size = new System.Drawing.Size(225, 162);
             this.grpSPE.TabIndex = 112;
             this.grpSPE.TabStop = false;
             this.grpSPE.Text = "SPE 1K-FA";
             this.toolTip1.SetToolTip(this.grpSPE, "SPE 1K-FA Amplifier controls");
+            // 
+            // btnSPEright
+            // 
+            this.btnSPEright.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnSPEright.BackColor = System.Drawing.Color.Transparent;
+            this.btnSPEright.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.btnSPEright.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Yellow;
+            this.btnSPEright.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.btnSPEright.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F);
+            this.btnSPEright.ForeColor = System.Drawing.Color.Navy;
+            this.btnSPEright.Location = new System.Drawing.Point(86, 49);
+            this.btnSPEright.Name = "btnSPEright";
+            this.btnSPEright.Size = new System.Drawing.Size(31, 20);
+            this.btnSPEright.TabIndex = 116;
+            this.btnSPEright.Text = ">>>";
+            this.toolTip1.SetToolTip(this.btnSPEright, "Press to initiate --> function on amp.");
+            this.btnSPEright.UseVisualStyleBackColor = false;
+            this.btnSPEright.Click += new System.EventHandler(this.btnSPEright_Click);
+            // 
+            // btnSPEset
+            // 
+            this.btnSPEset.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnSPEset.BackColor = System.Drawing.Color.Transparent;
+            this.btnSPEset.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.btnSPEset.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Yellow;
+            this.btnSPEset.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.btnSPEset.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F);
+            this.btnSPEset.ForeColor = System.Drawing.Color.Navy;
+            this.btnSPEset.Location = new System.Drawing.Point(121, 49);
+            this.btnSPEset.Name = "btnSPEset";
+            this.btnSPEset.Size = new System.Drawing.Size(31, 20);
+            this.btnSPEset.TabIndex = 115;
+            this.btnSPEset.Text = "SET";
+            this.toolTip1.SetToolTip(this.btnSPEset, "Press to initiate SET function on amp.");
+            this.btnSPEset.UseVisualStyleBackColor = false;
+            this.btnSPEset.Click += new System.EventHandler(this.btnSPEset_Click);
+            // 
+            // btnSPEleft
+            // 
+            this.btnSPEleft.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnSPEleft.BackColor = System.Drawing.Color.Transparent;
+            this.btnSPEleft.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.btnSPEleft.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Yellow;
+            this.btnSPEleft.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.btnSPEleft.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F);
+            this.btnSPEleft.ForeColor = System.Drawing.Color.Navy;
+            this.btnSPEleft.Location = new System.Drawing.Point(51, 49);
+            this.btnSPEleft.Name = "btnSPEleft";
+            this.btnSPEleft.Size = new System.Drawing.Size(31, 20);
+            this.btnSPEleft.TabIndex = 114;
+            this.btnSPEleft.Text = "<<<";
+            this.toolTip1.SetToolTip(this.btnSPEleft, "Press to initiate <-- function on amp.");
+            this.btnSPEleft.UseVisualStyleBackColor = false;
+            this.btnSPEleft.Click += new System.EventHandler(this.btnSPEleft_Click);
             // 
             // rbLed
             // 
@@ -3264,42 +3305,20 @@ namespace DataDecoder
             this.label161.ForeColor = System.Drawing.Color.Navy;
             this.label161.Location = new System.Drawing.Point(180, 10);
             this.label161.Name = "label161";
-            this.label161.Size = new System.Drawing.Size(37, 13);
+            this.label161.Size = new System.Drawing.Size(39, 13);
             this.label161.TabIndex = 86;
-            this.label161.Text = "Power";
+            this.label161.Text = "Output";
             // 
             // txtSPEant
             // 
             this.txtSPEant.BackColor = System.Drawing.SystemColors.Window;
-            this.txtSPEant.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.25F);
-            this.txtSPEant.Location = new System.Drawing.Point(155, 49);
+            this.txtSPEant.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtSPEant.Location = new System.Drawing.Point(158, 50);
             this.txtSPEant.Name = "txtSPEant";
-            this.txtSPEant.Size = new System.Drawing.Size(18, 18);
+            this.txtSPEant.Size = new System.Drawing.Size(15, 18);
             this.txtSPEant.TabIndex = 85;
             this.txtSPEant.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.toolTip1.SetToolTip(this.txtSPEant, "Selected antenna");
-            // 
-            // label160
-            // 
-            this.label160.AutoSize = true;
-            this.label160.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.5F);
-            this.label160.ForeColor = System.Drawing.Color.Navy;
-            this.label160.Location = new System.Drawing.Point(94, 57);
-            this.label160.Name = "label160";
-            this.label160.Size = new System.Drawing.Size(34, 13);
-            this.label160.TabIndex = 84;
-            this.label160.Text = "Mode";
-            // 
-            // label159
-            // 
-            this.label159.AutoSize = true;
-            this.label159.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label159.ForeColor = System.Drawing.Color.Navy;
-            this.label159.Location = new System.Drawing.Point(13, 57);
-            this.label159.Name = "label159";
-            this.label159.Size = new System.Drawing.Size(68, 13);
-            this.label159.TabIndex = 83;
-            this.label159.Text = "Mains Power";
+            this.toolTip1.SetToolTip(this.txtSPEant, "Selected antenna (yellow background indicates Contest mode).");
             // 
             // btnSPEant
             // 
@@ -3394,9 +3413,10 @@ namespace DataDecoder
             this.txtSPEmsg.Name = "txtSPEmsg";
             this.txtSPEmsg.ReadOnly = true;
             this.txtSPEmsg.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.txtSPEmsg.Size = new System.Drawing.Size(214, 46);
+            this.txtSPEmsg.Size = new System.Drawing.Size(214, 59);
             this.txtSPEmsg.TabIndex = 61;
-            this.txtSPEmsg.Text = "- Amp Condition Status\r\n- Error Messages\r\n- Double-Click to Clear";
+            this.txtSPEmsg.Text = "- Amp Condition Status\r\n- Error Messages\r\n- Double-Click to Clear\r\nNo Antenna Sel" +
+                "ected!";
             this.toolTip1.SetToolTip(this.txtSPEmsg, "Displays Status and Fault messages (double-click to clear).");
             this.txtSPEmsg.DoubleClick += new System.EventHandler(this.txtSPEmsg_DoubleClick);
             // 
@@ -3480,7 +3500,7 @@ namespace DataDecoder
             this.btnSPEoper.Name = "btnSPEoper";
             this.btnSPEoper.Size = new System.Drawing.Size(39, 20);
             this.btnSPEoper.TabIndex = 73;
-            this.btnSPEoper.Text = "Stby";
+            this.btnSPEoper.Text = "Mode";
             this.toolTip1.SetToolTip(this.btnSPEoper, "Press to toggle Operate/StandBy mode.");
             this.btnSPEoper.UseVisualStyleBackColor = false;
             this.btnSPEoper.Click += new System.EventHandler(this.btnSPEoper_Click);
@@ -3498,7 +3518,7 @@ namespace DataDecoder
             this.btnSPEon.Name = "btnSPEon";
             this.btnSPEon.Size = new System.Drawing.Size(39, 20);
             this.btnSPEon.TabIndex = 72;
-            this.btnSPEon.Text = "ON";
+            this.btnSPEon.Text = "PWR";
             this.toolTip1.SetToolTip(this.btnSPEon, "Press to turn Mains Power On.");
             this.btnSPEon.UseVisualStyleBackColor = false;
             this.btnSPEon.Click += new System.EventHandler(this.btnSPEon_Click);
@@ -3521,7 +3541,7 @@ namespace DataDecoder
             this.grpAmpBand.Controls.Add(this.chkB15);
             this.grpAmpBand.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.grpAmpBand.ForeColor = System.Drawing.Color.Blue;
-            this.grpAmpBand.Location = new System.Drawing.Point(331, 164);
+            this.grpAmpBand.Location = new System.Drawing.Point(331, 168);
             this.grpAmpBand.Name = "grpAmpBand";
             this.grpAmpBand.Size = new System.Drawing.Size(93, 136);
             this.grpAmpBand.TabIndex = 108;
@@ -3868,7 +3888,7 @@ namespace DataDecoder
             this.grpAmp.Controls.Add(this.btnPwr);
             this.grpAmp.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.grpAmp.ForeColor = System.Drawing.Color.Blue;
-            this.grpAmp.Location = new System.Drawing.Point(3, 164);
+            this.grpAmp.Location = new System.Drawing.Point(3, 168);
             this.grpAmp.Name = "grpAmp";
             this.grpAmp.Size = new System.Drawing.Size(320, 136);
             this.grpAmp.TabIndex = 0;
@@ -4946,10 +4966,11 @@ namespace DataDecoder
             // txtSleep
             // 
             this.txtSleep.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtSleep.Location = new System.Drawing.Point(321, 273);
+            this.txtSleep.Location = new System.Drawing.Point(172, 24);
             this.txtSleep.Name = "txtSleep";
             this.txtSleep.Size = new System.Drawing.Size(32, 22);
             this.txtSleep.TabIndex = 51;
+            this.txtSleep.Text = "0";
             this.txtSleep.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.toolTip1.SetToolTip(this.txtSleep, "Danger Will Robinson! If you don\'t know what this is for don\'t change it.");
             this.txtSleep.Visible = false;
@@ -4957,9 +4978,9 @@ namespace DataDecoder
             // 
             // lblSleep
             // 
-            this.lblSleep.Location = new System.Drawing.Point(357, 276);
+            this.lblSleep.Location = new System.Drawing.Point(169, 43);
             this.lblSleep.Name = "lblSleep";
-            this.lblSleep.Size = new System.Drawing.Size(38, 19);
+            this.lblSleep.Size = new System.Drawing.Size(41, 19);
             this.lblSleep.TabIndex = 51;
             this.lblSleep.Text = "Sleep";
             this.lblSleep.Visible = false;
@@ -13157,14 +13178,14 @@ namespace DataDecoder
         private Button btnSPEpwr;
         private System.IO.Ports.SerialPort SPEport;
         private Button btnSPEant;
-        private Label label160;
-        private Label label159;
         private TextBox txtSPEant;
         private Label label161;
         private RadioButton rbLed;
-        private Button button7;
         private ToolStripMenuItem ampSettingsToolStripMenuItem;
         private ToolStripMenuItem barefootSettingsToolStripMenuItem;
+        private Button btnSPEset;
+        private Button btnSPEleft;
+        private Button btnSPEright;
 
     }
 }

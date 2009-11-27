@@ -2005,7 +2005,7 @@ namespace DataDecoder.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("\"\"")]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
         public string pwr1 {
             get {
                 return ((string)(this["pwr1"]));
@@ -2017,7 +2017,7 @@ namespace DataDecoder.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("\"\"")]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
         public string pwr2 {
             get {
                 return ((string)(this["pwr2"]));
@@ -2029,7 +2029,7 @@ namespace DataDecoder.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("\"\"")]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
         public string pwr3 {
             get {
                 return ((string)(this["pwr3"]));
@@ -2041,7 +2041,7 @@ namespace DataDecoder.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("\"\"")]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
         public string pwr4 {
             get {
                 return ((string)(this["pwr4"]));
@@ -2053,7 +2053,7 @@ namespace DataDecoder.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("\"\"")]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
         public string pwr5 {
             get {
                 return ((string)(this["pwr5"]));
@@ -2065,7 +2065,7 @@ namespace DataDecoder.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("\"\"")]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
         public string pwr6 {
             get {
                 return ((string)(this["pwr6"]));
@@ -2077,7 +2077,7 @@ namespace DataDecoder.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("\"\"")]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
         public string pwr7 {
             get {
                 return ((string)(this["pwr7"]));
@@ -2089,7 +2089,7 @@ namespace DataDecoder.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("\"\"")]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
         public string pwr8 {
             get {
                 return ((string)(this["pwr8"]));
@@ -2101,7 +2101,7 @@ namespace DataDecoder.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("\"\"")]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
         public string pwr9 {
             get {
                 return ((string)(this["pwr9"]));
@@ -2713,10 +2713,10 @@ namespace DataDecoder.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("\"\"")]
-        public string WindowState {
+        [global::System.Configuration.DefaultSettingValueAttribute("Normal")]
+        public global::System.Windows.Forms.FormWindowState WindowState {
             get {
-                return ((string)(this["WindowState"]));
+                return ((global::System.Windows.Forms.FormWindowState)(this["WindowState"]));
             }
             set {
                 this["WindowState"] = value;
@@ -2725,10 +2725,10 @@ namespace DataDecoder.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("0, 0")]
-        public global::System.Drawing.Point WindowPosition {
+        [global::System.Configuration.DefaultSettingValueAttribute("0, 0, 0, 0")]
+        public global::System.Drawing.Rectangle WindowPosition {
             get {
-                return ((global::System.Drawing.Point)(this["WindowPosition"]));
+                return ((global::System.Drawing.Rectangle)(this["WindowPosition"]));
             }
             set {
                 this["WindowPosition"] = value;
@@ -2840,6 +2840,30 @@ namespace DataDecoder.Properties {
             }
             set {
                 this["SPEenab"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0, 0, 0, 0")]
+        public global::System.Drawing.Rectangle WindowPositionMini {
+            get {
+                return ((global::System.Drawing.Rectangle)(this["WindowPositionMini"]));
+            }
+            set {
+                this["WindowPositionMini"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Normal")]
+        public global::System.Windows.Forms.FormWindowState WindowStateMini {
+            get {
+                return ((global::System.Windows.Forms.FormWindowState)(this["WindowStateMini"]));
+            }
+            set {
+                this["WindowStateMini"] = value;
             }
         }
     }
