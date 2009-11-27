@@ -583,7 +583,7 @@
         {
             "{3C67513D-01DD-4637-8A68-80971EB9504F}:_18E81C9E3C4F4675BCD023B8455469BC"
             {
-            "DefaultLocation" = "8:[ProgramFilesFolder]\\[ProductName]"
+            "DefaultLocation" = "8:C:\\[ProductName]"
             "Name" = "8:#1925"
             "AlwaysCreate" = "11:FALSE"
             "Condition" = "8:"
@@ -642,14 +642,14 @@
         {
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:DDUtil"
-        "ProductCode" = "8:{DDE6C1A1-01C6-47DD-B200-027E3DB5EA95}"
-        "PackageCode" = "8:{369EA95D-D4B6-48F5-840A-25589B4137EE}"
+        "ProductCode" = "8:{FEC5DB18-F476-46BC-A2AA-44E7083A97F8}"
+        "PackageCode" = "8:{ED5D2700-EC53-4023-B056-FDB87942BB21}"
         "UpgradeCode" = "8:{E787AEB9-A577-499D-A08E-775DE944A651}"
         "RestartWWWService" = "11:FALSE"
         "RemovePreviousVersions" = "11:TRUE"
         "DetectNewerInstalledVersion" = "11:TRUE"
         "InstallAllUsers" = "11:FALSE"
-        "ProductVersion" = "8:1.7.821"
+        "ProductVersion" = "8:1.7.829"
         "Manufacturer" = "8:Default Company Name"
         "ARPHELPTELEPHONE" = "8:"
         "ARPHELPLINK" = "8:"

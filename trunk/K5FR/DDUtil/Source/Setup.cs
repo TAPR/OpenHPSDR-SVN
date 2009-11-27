@@ -321,7 +321,38 @@ namespace DataDecoder
             mini = new Mini(this);
             wn = new WN2Matrix(this);
             mSplashScreen.SetProgress("Restoring Personal Settings", 0.2);
-            GeometryFromString(set.WindowGeometry, this);
+
+//            GeometryFromString(set.WindowGeometry, this);
+            // Restore window size and position 
+            // this is the default
+            this.WindowState = FormWindowState.Normal;
+            this.StartPosition = FormStartPosition.WindowsDefaultBounds;
+
+            // check if the saved bounds are nonzero and visible on any screen
+            if (Settings.Default.WindowPosition != Rectangle.Empty &&
+                IsVisibleOnAnyScreen(Settings.Default.WindowPosition))
+            {
+                // first set the bounds
+                this.StartPosition = FormStartPosition.Manual;
+                this.DesktopBounds = Settings.Default.WindowPosition;
+
+                // afterwards set the window state to the saved value (which could be Maximized)
+                this.WindowState = Settings.Default.WindowState;
+            }
+            else
+            {
+                // this resets the upper left corner of the window to windows standards
+                this.StartPosition = FormStartPosition.WindowsDefaultLocation;
+
+                // we can still apply the saved size
+                // msorens: added gatekeeper, otherwise first time appears as just a title bar!
+                if (Settings.Default.WindowPosition != Rectangle.Empty)
+                {
+                    this.Size = Settings.Default.WindowPosition.Size;
+                }
+            }
+            windowInitialized = true;
+
             chkDevice.Checked = set.DevEnab;
             chkDev0.Checked = set.Dev0Enab;
             chkRCP2DisPol.Checked = set.RCP2DisPol;
@@ -1584,7 +1615,8 @@ namespace DataDecoder
         {
             try
             {
-                set.WindowGeometry = GeometryToString(this);
+//                set.WindowGeometry = GeometryToString(this);
+
                 set.TabOpen = tabControl.SelectedIndex;
                 set.Save();
                 PortAccess.Output(LPTnum, 0);
@@ -8340,6 +8372,839 @@ namespace DataDecoder
         }
         #endregion Serial Port Methods
 
+        #region SPE Amp
+
+        #region # Vars & Tables #
+
+        bool alarm = false;     // amp has an alarm in progress
+        bool contest = false;   // the contest mode is true
+        //bool isQuit = false;    // The Quit setup command is showing
+        bool led = false;       // CAT activity indicator
+        //bool rcu = false;       // RCU On/Off
+        bool SPEon = false;     // DDU thinks the amp is on
+        bool wattmtr = false;
+        private List<byte> PortBuf = new List<byte>(); // port storage
+
+        static string[] SPEerrors = new string[] {
+
+            "","","","","","","","","","","","","","","","","", // 0x00-0x10
+            "WARNING: PA Voltage Low",   //11
+            "WARNING: PA Voltage Low",   //12
+            "WARNING: PA Voltage High",  //13
+            "WARNING: PA Voltage High",  //14
+            "WARNING: PA Current High",  //15
+            "WARNING: PA Current High",  //16
+            "WARNING: PA Temp >90C",     //17
+            "WARNING: PA Drive to High", //18
+            "",                          //19
+            "",                          //1A
+            "WARNING: HIGH SWR",         //1B
+            "WARNING: PA Protection Fault",  //1C
+            "Alarm History to Follow",   //1D
+            "Shutdown in Progress",      //1E
+            "Switching to Oper, Please Wait!",  //1F
+            };
+
+        #endregion # Vars & Tables #
+
+        #region # Delegates #
+
+        // change LED color
+        delegate void SetSPEledCallback(string text);
+        public void SetSPEled(string text)
+        {
+            //     if (this.txtLed.InvokeRequired)
+            if (this.rbLed.InvokeRequired)
+            {
+                SetSPEledCallback d = new SetSPEledCallback(SetSPEled);
+                this.Invoke(d, new object[] { text });
+            }
+            else
+            {
+                if (led) rbLed.Checked = true; else rbLed.Checked = false;
+                if (text == "False") rbLed.Checked = false;
+
+            }
+        }
+        // Write to Temp window
+        delegate void SetSPEtempCallback(string text);
+        public void SetSPEtemp(string text)
+        {
+            if (this.txtSPEtemp.InvokeRequired)
+            {
+                SetSPEtempCallback d = new SetSPEtempCallback(SetSPEtemp);
+                this.Invoke(d, new object[] { text });
+            }
+            else
+            {
+                txtSPEtemp.Text = text;
+                if (text == "   ")
+                { txtSPEtemp.BackColor = Color.Empty; return; }
+                int temp = Convert.ToInt32(text.Substring(0, text.Length - 2));
+
+                if (text.Substring(text.Length - 1, 1) == "C")
+                {
+                    if (temp >= 70 && temp < 80)
+                        txtSPEtemp.BackColor = Color.Yellow;
+                    else if (temp >= 80 && temp < 90)
+                        txtSPEtemp.BackColor = Color.Orange;
+                    else if (temp >= 90)
+                        txtSPEtemp.BackColor = Color.Red;
+                    else
+                        txtSPEtemp.BackColor = Color.LightGreen;
+                }
+                else
+                {
+                    if (temp >= 150 && temp < 175)
+                        txtSPEtemp.BackColor = Color.Yellow;
+                    else if (temp >= 175 && temp < 195)
+                        txtSPEtemp.BackColor = Color.Orange;
+                    else if (temp >= 195)
+                        txtSPEtemp.BackColor = Color.Red;
+                    else
+                        txtSPEtemp.BackColor = Color.LightGreen;
+                }
+
+            }
+        }
+        // Write to Antenna window
+        delegate void SetSPEantCallback(string text);
+        public void SetSPEant(string text)
+        {
+            if (this.txtSPEant.InvokeRequired)
+            {
+                SetSPEantCallback d = new SetSPEantCallback(SetSPEant);
+                this.Invoke(d, new object[] { text });
+            }
+            else
+            {
+                txtSPEant.Text = text;
+                if (contest) 
+                    txtSPEant.BackColor = Color.Yellow;
+                else 
+                    txtSPEant.BackColor = Color.Empty;
+            }
+        }
+        // Write to Mains On button
+        delegate void SetSPEonCallback(string text);
+        public void SetSPEon(string text)
+        {
+            if (this.btnSPEon.InvokeRequired)
+            {
+                SetSPEonCallback d = new SetSPEonCallback(SetSPEon);
+                this.Invoke(d, new object[] { text });
+            }
+            else
+            {
+                if (text == "True") btnSPEon.BackColor = Color.LightGreen;
+                else btnSPEon.BackColor = Color.Empty;
+            }
+        }
+        // Write to Mains OFF button
+        delegate void SetSPEoffCallback(string text);
+        public void SetSPEoff(string text)
+        {
+            if (this.btnSPEoff.InvokeRequired)
+            {
+                SetSPEoffCallback d = new SetSPEoffCallback(SetSPEoff);
+                this.Invoke(d, new object[] { text });
+            }
+            else
+            {
+                if (text == "True") btnSPEoff.BackColor = Color.Yellow;
+                else btnSPEoff.BackColor = Color.Empty;
+            }
+        }
+        // Write to Oper/Stby (Mode) button
+        delegate void SetSPEoperCallback(string text);
+        public void SetSPEoper(string text)
+        {
+            if (this.btnSPEoper.InvokeRequired)
+            {
+                SetSPEoperCallback d = new SetSPEoperCallback(SetSPEoper);
+                this.Invoke(d, new object[] { text });
+            }
+            else
+            {
+                btnSPEoper.Text = text;
+                if (text == "Oper") btnSPEoper.BackColor = Color.LightGreen;
+                else if (text == "Stby") btnSPEoper.BackColor = Color.Yellow;
+                else btnSPEoper.BackColor = Color.Empty;
+            }
+        }
+        // Write to Tune button
+        delegate void SetSPEtuneCallback(string text);
+        public void SetSPEtune(string text)
+        {
+            if (this.btnSPEtune.InvokeRequired)
+            {
+                SetSPEtuneCallback d = new SetSPEtuneCallback(SetSPEtune);
+                this.Invoke(d, new object[] { text });
+            }
+            else
+            {
+                if (text == "True") btnSPEtune.BackColor = Color.Pink;
+                else btnSPEtune.BackColor = Color.Empty;
+            }
+        }
+        // Write to Full/Half Power button
+        delegate void SetSPEpwrCallback(string text);
+        public void SetSPEpwr(string text)
+        {
+            if (this.btnSPEpwr.InvokeRequired)
+            {
+                SetSPEpwrCallback d = new SetSPEpwrCallback(SetSPEpwr);
+                this.Invoke(d, new object[] { text });
+            }
+            else
+            {
+                btnSPEpwr.Text = text;
+                if (text == "Full") btnSPEpwr.BackColor = Color.LightGreen;
+                else if (text == "Half") btnSPEpwr.BackColor = Color.Yellow;
+                else btnSPEpwr.BackColor = Color.Empty;
+            }
+        }
+        // Write to Msg window
+        delegate void SetSPEmsgCallback(string text);
+        public void SetSPEmsg(string text)
+        {
+            if (this.txtSPEmsg.InvokeRequired)
+            {
+                SetSPEmsgCallback d = new SetSPEmsgCallback(SetSPEmsg);
+                this.Invoke(d, new object[] { text });
+            }
+            else
+            {
+                txtSPEmsg.Text += "\r\n" + text;
+                txtSPEmsg.SelectionStart = txtSPEmsg.Text.Length;
+                txtSPEmsg.ScrollToCaret();
+            }
+        }
+        // Clear Msg window
+        delegate void SPEmsgClrCallback(string text);
+        public void SPEmsgClr(string text)
+        {
+            if (this.txtSPEmsg.InvokeRequired)
+            {
+                SPEmsgClrCallback d = new SPEmsgClrCallback(SPEmsgClr);
+                this.Invoke(d, new object[] { text });
+            }
+            else
+            {
+                txtSPEmsg.Clear();
+            }
+        }
+        // Write to Display button
+        delegate void SetSPEdispCallback(string text);
+        public void SetSPEdisp(string text)
+        {
+            if (this.btnSPEdisp.InvokeRequired)
+            {
+                SetSPEdispCallback d = new SetSPEdispCallback(SetSPEdisp);
+                this.Invoke(d, new object[] { text });
+            }
+            else
+            {
+                if (alarm) btnSPEdisp.BackColor = Color.Pink;
+                else btnSPEdisp.BackColor = Color.Empty;
+            }
+        }
+
+        #endregion Delegates
+
+        #region # Methods #
+
+        //  Initialize SPE settings and controls (called from Setup())
+        private void InitSPE()
+        {
+            try
+            {
+                cboSPEport.SelectedIndex = set.SPEport;
+                chkSPEenab.Checked = set.SPEenab;
+                SPETimer.Enabled = false;
+                SPEmsgClr("");
+                // see if digital watt meter is being used.
+                if (chkSPEenab.Checked && !chkLPenab.Checked && 
+                    !chkWNEnab.Checked && !chkPM.Checked)
+                {
+                    txtAvg.Enabled = true; txtSWR.Enabled = true;
+                    txtAvg.Text = "0.0"; txtSWR.Text = "0.00";
+                    lblAvg.Text = "FWD";
+                    wattmtr = true;
+                }
+                else wattmtr = false;
+
+                //// the following are for testing only, see SPE test routines region 
+                //if (TestPort.IsOpen) { TestPort.Close(); }
+                //TestPort.PortName = "COM29";
+                //TestPort.Open();
+
+                // test to see if amp is running
+                if (!SPEport.IsOpen) SPEport.Open();
+                byte[] bytes = new byte[6] { 0x55, 0x55, 0x55, 0x01, 0x80, 0x80 };
+                SPEport.Write(bytes, 0, 6);
+                //rcu = true;
+            }
+            catch { }
+        }
+
+        #endregion # Methods #
+
+        #region # Events #
+
+        // the SPE port has received data
+        private void SPEport_DataReceived(object sender, SerialDataReceivedEventArgs e)
+        {
+            if (chkSPEenab.Checked) // port must be enabled to accept data
+            {
+                try
+                {
+                    if (!SPEon) // turn on the main power light
+                    {
+                        // see if digital watt meter is being used.
+                        if (!chkLPenab.Checked && !chkWNEnab.Checked && !chkPM.Checked)
+                            wattmtr = true;
+                        else
+                            wattmtr = false;
+                        SPEon = true;
+                        SetSPEon("True");
+                    }
+                    SetSPEled("");  // toggle activity indicator
+                    led = !led;
+
+                    SerialPort port = (SerialPort)sender;
+                    byte[] data = new byte[port.BytesToRead];
+
+                    port.Read(data, 0, data.Length);
+                    PortBuf.AddRange(data);
+
+                    if (PortBuf.Count >=6)
+                    {
+                        int i1 = PortBuf.IndexOf(0xAA); // find sync start
+                        if (i1 < 0) // if sync bytes not found clear buffer
+                        { PortBuf.Clear(); }
+                        else if (PortBuf[i1 + 1] == 0xAA && PortBuf[i1 + 2] == 0xAA)
+                        {
+                            if (i1 > 0) // if index > 0 delete all before it.
+                            { PortBuf.RemoveRange(0, i1); }
+                            if (PortBuf[3] == 0x01) // dump the ack packet
+                            { PortBuf.RemoveRange(0, 6); }
+                            if ( PortBuf.Count >=35 && PortBuf[0] == 0xAA && 
+                                PortBuf[1] == 0xAA && PortBuf[2] == 0xAA)
+                            {
+                                ProcessBuf(); //process the 35 byte data packet
+//                                Console.WriteLine(PortBuf.Count);
+                                PortBuf.RemoveRange(0, 35); // delete procesed packet
+                            }
+                        }
+                        else { return; }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    bool bReturnLog = false;
+                    bReturnLog = ErrorLog.ErrorRoutine(false, enableErrorLog, ex);
+                    if (false == bReturnLog) MessageBox.Show("Unable to write to log");
+                }
+            }
+        }
+        // Process the port buffer data
+        private void ProcessBuf()
+        {
+            try
+            {
+                // tuner operation
+                if (Convert.ToBoolean(PortBuf[5] & 0x01))
+                    SetSPEtune("True");
+                else 
+                    SetSPEtune("False");
+                // Operate / Stby
+                if (Convert.ToBoolean(PortBuf[5] & 0x02))
+                    SetSPEoper("Oper");
+                else 
+                    SetSPEoper("Stby");
+                // Alarm in progress
+                if (Convert.ToBoolean(PortBuf[5] & 0x08))
+                { alarm = true; SetSPEdisp(""); }
+                else 
+                { alarm = false; SetSPEdisp(""); }
+                // Power level
+                if (Convert.ToBoolean(PortBuf[5] & 0x10))
+                    SetSPEpwr("Full");
+                else 
+                    SetSPEpwr("Half");
+                // Contest mode
+                if (Convert.ToBoolean(PortBuf[5] & 0x20))
+                    contest = true;
+                else 
+                    contest = false;
+
+                // CTX message received
+                if (PortBuf[6] > 0x02)
+                {
+                    // Data stored message
+                    if (PortBuf[6] == 0x05)
+                    {
+                        SetSPEmsg("Data Stored");
+                    }
+                    // Setup Opotions Menu messages
+                    if (PortBuf[6] == 0x06)
+                    {
+                        switch (PortBuf[8])
+                        {
+                            case 0x00: SetSPEmsg("Setup: ANTENNA"); break;
+                            case 0x01: SetSPEmsg("Setup: CAT"); break;
+                            case 0x02: SetSPEmsg("Setup: MANUAL TUNE"); break;
+                            case 0x03: SetSPEmsg("Setup: BACKLIGHT"); break;
+                            case 0x04: SetSPEmsg("Setup: CONTEST"); break;
+                            case 0x05: SetSPEmsg("Setup: BEEP"); break;
+                            case 0x06: SetSPEmsg("Setup: START"); break;
+                            case 0x07: SetSPEmsg("Setup: TEMP"); break;
+                            case 0x08: SetSPEmsg("Setup: QUIT"); break;
+                        }
+                    }
+                    // Warning msg displayed
+                    if (PortBuf[6] > 0x10 && PortBuf[6] < 0x1D)
+                    {   
+                        SetSPEmsg(SPEerrors[PortBuf[6]]);
+                    }
+                    // Warning msg displayed
+                    if (PortBuf[6] == 0x1D && PortBuf[7] > 0x00)
+                    {
+                        int ctr = PortBuf[7] & 0x0F;
+                        SetSPEmsg("Error Msg History Follows (" + ctr + ")");
+                        for (int i = 1; i < ctr + 1; i++)
+                        {
+                            SetSPEmsg(SPEerrors[PortBuf[7 + i]]);
+                        }
+                    }
+                    // the amp is shutting down
+                    if (PortBuf[6] == 0x1E)
+                    {
+                        SetSPEon("False"); SetSPEoper("Off"); SetSPEtune("Off");
+                        SetSPEpwr("Off"); SetSPEtemp("   "); SPEmsgClr("");
+                        alarm = false; SetSPEdisp("");
+                        contest = false; SetSPEant("");
+                        SetSPEled("False");
+                        SPEon = false;
+                        wattmtr = false;
+                        SPEport.DiscardInBuffer();
+                        PortBuf.Clear();
+                        SetAvg(" ");
+                        SetSwr(" ");
+                    }
+                }// end if (PortBuf[6] > 0x02)
+
+                // antenna selected
+                if (PortBuf[22] == 4)
+                {
+                    SetSPEmsg("No Antenna Selected!");
+                    SetSPEant("?");
+                }
+                else
+                { SetSPEant(((PortBuf[22] & 0x0F) + 1).ToString()); }
+
+                // PWR reading
+                int tpwr = 0;
+                if (wattmtr)
+                {
+                    tpwr = (PortBuf[27] << 8) + PortBuf[26];
+                    string pwr = tpwr.ToString();
+                    if (tpwr == 0)
+                        SetAvg("0.0");
+                    else
+                    {
+                        SetAvg(pwr.Substring(0, pwr.Length - 1) + "." +
+                                pwr.Substring(pwr.Length - 1, 1));
+                    }
+                }
+                // SWR reading
+                if (wattmtr)
+                {
+                    if (Convert.ToBoolean(PortBuf[5] & 0x02)) // ? Oper mode
+                    {
+                        double pfwd = ((PortBuf[27] << 8) + PortBuf[26]) / 10;
+                        double pref = ((PortBuf[29] << 8) + PortBuf[28]) / 10;
+                        if (pfwd > 0 && pref > 0)
+                        {
+                            double rho = Math.Sqrt(pref / pfwd);
+                            double tswr = (1 + rho) / (1 - rho);
+                            string swr = tswr.ToString("0.00");
+                            SetSwr(swr);
+                        }
+                        else
+                            SetSwr("0.00");
+
+                    }
+                    else // No
+                    {
+                        int tswr = (PortBuf[24] << 8) + PortBuf[23];
+                        string swr = tswr.ToString();
+                        if (tswr == 0)
+                            SetSwr("0.00");
+                        else
+                        {
+                            SetSwr(swr.Substring(0, swr.Length - 2) + "." +
+                                swr.Substring(swr.Length - 2, 2));
+                        }
+                    }
+                }
+                // pa temp(C)
+                if (Convert.ToBoolean(PortBuf[5] & 0x80))
+                    SetSPEtemp(PortBuf[25].ToString() + " C");
+                else
+                    SetSPEtemp(PortBuf[25].ToString() + " F");
+
+            }
+            catch (Exception ex)
+            {
+                bool bReturnLog = false;
+                bReturnLog = ErrorLog.ErrorRoutine(false, enableErrorLog, ex);
+                if (false == bReturnLog) MessageBox.Show("Unable to write to log");
+            }
+        } // end ProcessBuf()
+
+        // the enable checkbox has been checked
+        private void chkSPEenab_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chkSPEenab.Checked)
+            {
+                if (cboSPEport.SelectedIndex > 0)
+                {
+                    set.SPEenab = true;
+                    InitSPE();
+                }
+                else
+                {
+                    MessageBox.Show("No port has been selected for the SPE amplifier.\n\n" +
+                    "Please select a valid port number and try again.", "Port Error",
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    chkSPEenab.Checked = false; set.SPEenab = false;
+                }
+            }
+            else
+            {
+                SPEon = false;
+                SetSPEon("False"); SetSPEoper("Off"); SetSPEtune("Off");
+                SetSPEpwr("Off"); SetSPEtemp("   "); SPEmsgClr("");
+                SetSPEled("False"); txtAvg.Enabled = false; txtSWR.Enabled = false;
+                chkSPEenab.Checked = false; set.SPEenab = false;
+            }
+            set.Save();
+        }
+        // the serial port selection has changed
+        private void cboSPEport_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (SPEport.IsOpen) SPEport.Close();
+            if (cboSPEport.SelectedIndex > 0)
+            {
+                SPEport.PortName = cboSPEport.SelectedItem.ToString();
+                try
+                {
+                    SPEport.Open();
+                }
+                catch
+                {
+                    MessageBox.Show("The Amplifier serial port " + SPEport.PortName +
+                       " cannot be opened!\n", "Port Error",
+                       MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    cboSPEport.SelectedText = "";
+                    chkSPEenab.Checked = false;
+                    return;
+                }
+            }
+            else
+            {
+                chkSPEenab.Checked = false;
+            }
+            set.SPEport = cboSPEport.SelectedIndex;
+            set.Save();
+        }
+        // the antenna button has been pressed 
+        private void btnSPEant_Click(object sender, EventArgs e)
+        {
+            if (SPEport.IsOpen)
+            {
+                byte[] bytes = new byte[7] { 0x55, 0x55, 0x55, 0x02, 0x10, 0x2B, 0x3B };
+                SPEport.Write(bytes, 0, 7);
+            }
+        }
+        // the power on button has been pressed, toggle the DTR line
+        private void btnSPEon_Click(object sender, EventArgs e)
+        {
+            if (!SPEon)
+            {
+                SPEport.DtrEnable = true;
+                using (new HourGlass())
+                {
+                    Thread.Sleep(5000); // allow time for DTR to initialize radio
+                }
+                SPEport.DtrEnable = false;
+                using (new HourGlass())
+                {
+                    Thread.Sleep(3000); // allow time for radio to settle
+                }
+                // send polling command
+                byte[] bytes = new byte[6] { 0x55, 0x55, 0x55, 0x01, 0x80, 0x80 };
+                SPEport.Write(bytes, 0, 6);
+            }
+        }
+        // the power off button has been pressed
+        private void btnSPEoff_Click(object sender, EventArgs e)
+        {
+            if (SPEport.IsOpen)
+            {
+                // send Off cmd to amp
+                byte[] bytes = new byte[7] { 0x55, 0x55, 0x55, 0x02, 0x10, 0x18, 0x28 };
+                SPEport.Write(bytes, 0, 7);
+            }
+        }
+        // the oper/stby button has been pressed
+        private void btnSPEoper_Click(object sender, EventArgs e)
+        {
+            if (SPEport.IsOpen)
+            {
+                byte[] bytes = new byte[7] { 0x55, 0x55, 0x55, 0x02, 0x10, 0x1C, 0x2C };
+                SPEport.Write(bytes, 0, 7);
+            }
+        }
+        // the tune button has been pressed
+        private void btnSPEtune_Click(object sender, EventArgs e)
+        {
+            if (SPEport.IsOpen)
+            {
+                byte[] bytes = new byte[7] { 0x55, 0x55, 0x55, 0x02, 0x10, 0x34, 0x44 };
+                SPEport.Write(bytes, 0, 7);
+            }
+        }
+        // the Full/Half power button has been pressed
+        private void btnSPEpwr_Click(object sender, EventArgs e)
+        {
+            if (SPEport.IsOpen)
+            {
+                byte[] bytes = new byte[7] { 0x55, 0x55, 0x55, 0x02, 0x10, 0x1A, 0x2A };
+                SPEport.Write(bytes, 0, 7);
+            }
+        }
+        // the display error button has been pressed
+        private void btnSPEdisp_Click(object sender, EventArgs e)
+        {
+            if (SPEport.IsOpen)
+            {
+                byte[] bytes = new byte[7] { 0x55, 0x55, 0x55, 0x02, 0x10, 0x1B, 0x2B };
+                SPEport.Write(bytes, 0, 7);
+                Thread.Sleep(100);
+                SPEport.Write(bytes, 0, 7);
+            }
+        }
+        // the message text box has been double-clicked, clear the window.
+        private void txtSPEmsg_DoubleClick(object sender, EventArgs e)
+        {
+            txtSPEmsg.Clear();
+        }
+        // the SET button was pressed
+        private void btnSPEset_Click(object sender, EventArgs e)
+        {
+            byte[] bytes = new byte[7] { 0x55, 0x55, 0x55, 0x02, 0x10, 0x2F, 0x3F };
+            SPEport.Write(bytes, 0, 7);
+        }
+        // the <<< button was pressed
+        private void btnSPEleft_Click(object sender, EventArgs e)
+        {
+            byte[] bytes = new byte[7] { 0x55, 0x55, 0x55, 0x02, 0x10, 0x2D, 0x3D };
+            SPEport.Write(bytes, 0, 7);
+        }
+        // the >>> button was pressed
+        private void btnSPEright_Click(object sender, EventArgs e)
+        {
+            byte[] bytes = new byte[7] { 0x55, 0x55, 0x55, 0x02, 0x10, 0x2E, 0x3E };
+            SPEport.Write(bytes, 0, 7);
+        }
+        // the SPE timer has elapsed, request status from amp.
+        void SPETimer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
+        {
+            if (TestPort.IsOpen)
+                {
+                TestPort.Write(stsBytes1, 0, 12);
+                Thread.Sleep(10);
+                TestPort.Write(stsBytes2, 0, 12);
+                Thread.Sleep(10); 
+                TestPort.Write(stsBytes3, 0, 11);
+                Thread.Sleep(10);
+            }
+        }
+
+        #endregion # Events #
+
+        #region * Test Routines *
+
+        // the test port (Amp) has received data from DDUtil
+        // process the message and send back a response ststus packet
+        bool stby = false;
+        bool pwr = false;
+        string sTest = "";             // Port buffer message
+        byte[] ackBytes = new byte[6] { 0xAA, 0XAA, 0XAA, 0X01, 0X06, 0X06 };
+        private void TestPort_DataReceived(object sender, System.IO.Ports.SerialDataReceivedEventArgs e)
+        {
+            string sCmd = "";
+            SerialPort port = (SerialPort)sender;
+            byte[] data = new byte[port.BytesToRead];
+            if (port.BytesToRead == 0) return;
+            port.Read(data, 0, data.Length);
+            sTest += AE.GetString(data, 0, data.Length);
+
+            Regex rex = new Regex(@"\x55{3}.*");
+            for (Match m = rex.Match(sTest); m.Success; m = m.NextMatch())
+            {   //loop thru the buffer and find matches
+                sCmd = m.Value.Substring(0, m.Value.Length);
+                sTest = sTest.Replace(m.Value, ""); //remove the match from the buffer
+
+                if (data[4] == 16)    // key command (0x10)
+                {
+                    switch (data[5])
+                    {
+                        case 24:  //off     (0x18)
+                            Thread.Sleep(100);
+                            stsBytes1[6] = 0x1E;
+                            SPETimer.Stop();
+                            TestPort.Write(ackBytes, 0, 6);
+                            TestPort.Write(stsBytes1, 0, 12);
+                            TestPort.Write(stsBytes2, 0, 12);
+                            TestPort.Write(stsBytes3, 0, 11);
+                            break;
+                        case 26:  //mode    (0x1A)
+                            int xx = 0;
+                            if (pwr) xx = stsBytes1[5] ^ 0x10;
+                            else xx = stsBytes1[5] | 0x10;
+                            stsBytes1[5] = (byte)xx;
+                            pwr = !pwr;
+                            Thread.Sleep(100);
+                            TestPort.Write(ackBytes, 0, 6);
+                            break;
+                        case 27:  //display (0x1B)
+                            stsBytes1[6] = 0x1d;
+                            stsBytes1[7] = 0x06;
+                            TestPort.Write(ackBytes, 0, 6);
+                            TestPort.Write(stsBytes1, 0, 12);
+                            TestPort.Write(stsBytes2, 0, 12);
+                            TestPort.Write(stsBytes3, 0, 11);
+                            stsBytes1[7] = 0x00;
+                            stsBytes1[6] = 0x00;
+                            break;
+                        case 28:  //operate (0x1C)
+                            if (stby) xx = stsBytes1[5] ^ 0x02;
+                            else xx = stsBytes1[5] | 0x02;
+                            stsBytes1[5] = (byte)xx;
+                            stby = !stby;
+                            Thread.Sleep(100);
+                            TestPort.Write(ackBytes, 0, 6);
+                            break;
+                        case 43:  //ant     (0x2B)
+                            //SPETimer.Stop();
+                            if (stsBytes2[10] >= 3) stsBytes2[10] = 0;
+                            else stsBytes2[10] += 1;
+                            TestPort.Write(ackBytes, 0, 6);
+                            break;
+                        case 45:  // <<<     (0x2D)
+                            if (stsBytes1[8] <= 0) stsBytes1[8] = 8;
+                            else stsBytes1[8] -= 1;
+                            TestPort.Write(ackBytes, 0, 6);
+                            TestPort.Write(stsBytes1, 0, 12);
+                            TestPort.Write(stsBytes2, 0, 12);
+                            TestPort.Write(stsBytes3, 0, 11);
+                            break;
+                        case 46:  // >>>     (0x2E)
+                            if (stsBytes1[8] >= 8) stsBytes1[8] = 0;
+                            else stsBytes1[8] += 1;
+                            TestPort.Write(ackBytes, 0, 6);
+                            TestPort.Write(stsBytes1, 0, 12);
+                            TestPort.Write(stsBytes2, 0, 12);
+                            TestPort.Write(stsBytes3, 0, 11);
+                            break;
+                        case 47:  // SET     (0x2F)
+                            TestPort.Write(ackBytes, 0, 6);
+                            //if (rcu)
+                            //    stsBytes1[6] = 0x02;
+                            //else
+                            //    stsBytes1[6] = 0x06;
+                            SetSPEmsg("Set Confirmed");
+                            TestPort.Write(stsBytes1, 0, 12);
+                            TestPort.Write(stsBytes2, 0, 12);
+                            TestPort.Write(stsBytes3, 0, 11);
+                            break;
+                        case 52:  //tune    (0x34)
+                            xx = stsBytes1[5] | 0x01;
+                            stsBytes1[5] = (byte)xx;
+                            TestPort.Write(stsBytes1, 0, 12);
+                            TestPort.Write(stsBytes2, 0, 12);
+                            TestPort.Write(stsBytes3, 0, 11);
+                            Thread.Sleep(1000);
+                            xx = stsBytes1[5] ^ 0x01;
+                            stsBytes1[5] = (byte)xx;
+                            TestPort.Write(ackBytes, 0, 6);
+                            break;
+                    }
+                }
+                if (data[4] == 128)  //RCU_ON (0x80)
+                {
+                    TestPort.Write(ackBytes, 0, 6);
+                    SPETimer.Interval = 1000;
+                    SPETimer.Start();
+                }
+                if (data[4] == 129)  // RCU_OFF (0x81)
+                {
+                    TestPort.Write(ackBytes, 0, 6);
+                    SPETimer.Stop();
+                }
+                else
+                    return;
+            }
+        }
+        // load the status packet with test data 
+        byte[] stsBytes1 = new byte[12] // 0-11
+        { 0xAA, 0xAA, 0xAA, 0x1E, 0x00, 0xFF, 0x00, 0x00, 0x13, 0x15, 0x17, 0x18 };
+        byte[] stsBytes2 = new byte[12] // 12-23
+        { 0x1b, 0x1c, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x14, 0x37, 0x00, 0x67 };
+        byte[] stsBytes3 = new byte[11] // 24-34
+        { 0x00, 0x18, 0x10, 0x27, 0x64, 0x00, 0x00, 0x00, 0x00, 0x00, 0x3c };
+//        { 0x00, 0x18, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x3c };
+
+        //private void LoadPkt()
+        //{
+        //    {
+        //        string preamble = "AAAAAA"; // 0, 1, 2
+        //        string cnt = "1E";          // 3
+        //        string sts = "00";          // 4
+        //        string flgs = "FF";         // 5
+        //        string ctx = "1D";          // 6
+        //        string dis = "00131517181B1C00000000"; // 7 - 17
+        //        string bnd = "0000";        // 18 - 19
+        //        string freq = "1437";       // 20 - 21 14100 khz
+        //        string ant = "03";          // 22 ant 1 selected
+        //        string swr = "6500";        // 23 - 24 Lo/Hi bytes
+        //        string tmp = "18";          // 25 50C
+        //        string pwrf = "0528";       // 26 - 27 fwd pwr Lo/Hi
+        //        string pwrr = "0000";       // 28 - 29 ref pwr Lo/Hi
+        //        string va = "0000";         // 30 - 31 pa volts Lo/Hi
+        //        string ia = "0000";         // 32 - 33 pa current Lo/Hi
+        //        string chk = "3B";          // 34 checksum
+        //        string mystring = preamble + cnt + sts + flgs + ctx + dis + bnd + freq +
+        //            ant + swr + tmp + pwrf + pwrr + va + ia + chk;
+        //        int j = 0;
+        //        for (int i = 0; i < 35; i++)
+        //        {
+        //            string stemp = mystring.Substring(j, 2);
+        //            stsBytes[i] = byte.Parse(stemp, NumberStyles.HexNumber);
+        //            j += 2;
+        //        }
+        //    }
+        //}
+
+
+        #endregion * Test Routines *
+
+        #endregion SPE Amp
+
         #region SteppIR
 
         // The Home SteppIR button was pressed
@@ -9572,6 +10437,62 @@ namespace DataDecoder
         }
         #endregion Window Geometry
 
+        # region Window Geometry New
+
+        private bool IsVisibleOnAnyScreen(Rectangle rect)
+        {
+            foreach (Screen screen in Screen.AllScreens)
+            {
+                if (screen.WorkingArea.IntersectsWith(rect))
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+        protected override void OnClosed(EventArgs e)
+        {
+            base.OnClosed(e);
+            // only save the WindowState if Normal or Maximized
+            switch (this.WindowState)
+            {
+                case FormWindowState.Normal:
+                case FormWindowState.Maximized:
+                    Settings.Default.WindowState = this.WindowState;
+                    break;
+
+                default:
+                    Settings.Default.WindowState = FormWindowState.Normal;
+                    break;
+            }
+
+            Settings.Default.Save();
+        }
+        protected override void OnResize(EventArgs e)
+        {
+            base.OnResize(e);
+            TrackWindowState();
+        }
+        protected override void OnMove(EventArgs e)
+        {
+            base.OnMove(e);
+            TrackWindowState();
+        }
+        bool windowInitialized;
+        // On a move or resize in Normal state, record the new values as they occur.
+        // This solves the problem of closing the app when minimized or maximized.
+        private void TrackWindowState()
+        {
+            // Don't record the window setup, otherwise we lose the persistent values!
+            if (!windowInitialized) { return; }
+
+            if (WindowState == FormWindowState.Normal)
+            {
+                Settings.Default.WindowPosition = this.DesktopBounds;
+            }
+        }
+        # endregion Window Geometry New
+       
         #region WatchDog Timer
 
         // the WatchDog timer has fired.
@@ -10238,714 +11159,8 @@ namespace DataDecoder
 
         #endregion WaveNode
 
-        #region SPE Amp
-
-        #region # Vars & Tables #
-
-//        int SPEctr = 0;
-        bool SPEon = false;
-//        bool SPEoff = false;
-        bool wattmtr = false;
-        private List<byte> PortBuf = new List<byte>();
-
-        static string[] SPEerrors = new string[] {
-
-            "","","","","","","","","","","","","","","","","", // 0x00-0x10
-            "WARNING: PA Voltage Low",   //11
-            "WARNING: PA Voltage Low",   //12
-            "WARNING: PA Voltage High",  //13
-            "WARNING: PA Voltage High",  //14
-            "WARNING: PA Current High",  //15
-            "WARNING: PA Current High",  //16
-            "WARNING: PA Temp >90C",     //17
-            "WARNING: PA Drive to High", //18
-            "",                          //19
-            "",                          //1A
-            "WARNING: HIGH SWR",         //1B
-            "WARNING: PA Protection Fault",  //1C
-            "Alarm History to Follow",   //1D
-            "Shutdown in Progress",      //1E
-            "Switching to Oper, Please Wait!",  //1F
-            };
-
-        #endregion # Vars & Tables #
-
-        #region # Delegates #
-
-        // change LED color
-        delegate void SetSPEledCallback(string text);
-        public void SetSPEled(string text)
-        {
-            //     if (this.txtLed.InvokeRequired)
-            if (this.rbLed.InvokeRequired)
-            {
-                SetSPEledCallback d = new SetSPEledCallback(SetSPEled);
-                this.Invoke(d, new object[] { text });
-            }
-            else
-            {
-                if (led) rbLed.Checked = true; else rbLed.Checked = false;
-                if (text == "False") rbLed.Checked = false;
-
-            }
-        }
-        // Write to Temp window
-        delegate void SetSPEtempCallback(string text);
-        public void SetSPEtemp(string text)
-        {
-            if (this.txtSPEtemp.InvokeRequired)
-            {
-                SetSPEtempCallback d = new SetSPEtempCallback(SetSPEtemp);
-                this.Invoke(d, new object[] { text });
-            }
-            else
-            {
-                txtSPEtemp.Text = text;
-                if (text == "   ")
-                { txtSPEtemp.BackColor = Color.Empty; return; }
-                int temp = Convert.ToInt32(text.Substring(0, text.Length - 2));
-
-                if (text.Substring(text.Length - 1, 1) == "C")
-                {
-                    if (temp >= 70 && temp < 80)
-                        txtSPEtemp.BackColor = Color.Yellow;
-                    else if (temp >= 80 && temp < 90)
-                        txtSPEtemp.BackColor = Color.Orange;
-                    else if (temp >= 90)
-                        txtSPEtemp.BackColor = Color.Red;
-                    else
-                        txtSPEtemp.BackColor = Color.LightGreen;
-                }
-                else
-                {
-                    if (temp >= 150 && temp < 175)
-                        txtSPEtemp.BackColor = Color.Yellow;
-                    else if (temp >= 175 && temp < 195)
-                        txtSPEtemp.BackColor = Color.Orange;
-                    else if (temp >= 195)
-                        txtSPEtemp.BackColor = Color.Red;
-                    else
-                        txtSPEtemp.BackColor = Color.LightGreen;
-                }
-
-            }
-        }
-        // Write to Antenna window
-        delegate void SetSPEantCallback(string text);
-        public void SetSPEant(string text)
-        {
-            if (this.txtSPEant.InvokeRequired)
-            {
-                SetSPEantCallback d = new SetSPEantCallback(SetSPEant);
-                this.Invoke(d, new object[] { text });
-            }
-            else txtSPEant.Text = text;
-        }
-        // Write to Mains On button
-        delegate void SetSPEonCallback(string text);
-        public void SetSPEon(string text)
-        {
-            if (this.btnSPEon.InvokeRequired)
-            {
-                SetSPEonCallback d = new SetSPEonCallback(SetSPEon);
-                this.Invoke(d, new object[] { text });
-            }
-            else
-            {
-                if (text == "True") btnSPEon.BackColor = Color.LightGreen;
-                else btnSPEon.BackColor = Color.Empty;
-            }
-        }
-        // Write to Mains OFF button
-        delegate void SetSPEoffCallback(string text);
-        public void SetSPEoff(string text)
-        {
-            if (this.btnSPEoff.InvokeRequired)
-            {
-                SetSPEoffCallback d = new SetSPEoffCallback(SetSPEoff);
-                this.Invoke(d, new object[] { text });
-            }
-            else
-            {
-                if (text == "True") btnSPEoff.BackColor = Color.Yellow;
-                else btnSPEoff.BackColor = Color.Empty;
-            }
-        }
-        // Write to Oper/Stby (Mode) button
-        delegate void SetSPEoperCallback(string text);
-        public void SetSPEoper(string text)
-        {
-            if (this.btnSPEoper.InvokeRequired)
-            {
-                SetSPEoperCallback d = new SetSPEoperCallback(SetSPEoper);
-                this.Invoke(d, new object[] { text });
-            }
-            else
-            {
-                btnSPEoper.Text = text;
-                if (text == "Oper") btnSPEoper.BackColor = Color.LightGreen;
-                else if (text == "Stby") btnSPEoper.BackColor = Color.Yellow;
-                else btnSPEoper.BackColor = Color.Empty;
-            }
-        }
-        // Write to Tune button
-        delegate void SetSPEtuneCallback(string text);
-        public void SetSPEtune(string text)
-        {
-            if (this.btnSPEtune.InvokeRequired)
-            {
-                SetSPEtuneCallback d = new SetSPEtuneCallback(SetSPEtune);
-                this.Invoke(d, new object[] { text });
-            }
-            else
-            {
-                if (text == "True") btnSPEtune.BackColor = Color.Pink;
-                else btnSPEtune.BackColor = Color.Empty;
-            }
-        }
-        // Write to Full/Half Power button
-        delegate void SetSPEpwrCallback(string text);
-        public void SetSPEpwr(string text)
-        {
-            if (this.btnSPEpwr.InvokeRequired)
-            {
-                SetSPEpwrCallback d = new SetSPEpwrCallback(SetSPEpwr);
-                this.Invoke(d, new object[] { text });
-            }
-            else
-            {
-                btnSPEpwr.Text = text;
-                if (text == "Full") btnSPEpwr.BackColor = Color.LightGreen;
-                else if (text == "Half") btnSPEpwr.BackColor = Color.Yellow;
-                else btnSPEpwr.BackColor = Color.Empty;
-            }
-        }
-        // Write to Msg window
-        delegate void SetSPEmsgCallback(string text);
-        public void SetSPEmsg(string text)
-        {
-            if (this.txtSPEmsg.InvokeRequired)
-            {
-                SetSPEmsgCallback d = new SetSPEmsgCallback(SetSPEmsg);
-                this.Invoke(d, new object[] { text });
-            }
-            else
-            {
-                txtSPEmsg.Text += "\r\n" + text;
-                txtSPEmsg.SelectionStart = txtSPEmsg.Text.Length;
-                txtSPEmsg.ScrollToCaret();
-            }
-        }
-        // Clear Msg window
-        delegate void SPEmsgClrCallback(string text);
-        public void SPEmsgClr(string text)
-        {
-            if (this.txtSPEmsg.InvokeRequired)
-            {
-                SPEmsgClrCallback d = new SPEmsgClrCallback(SPEmsgClr);
-                this.Invoke(d, new object[] { text });
-            }
-            else
-            {
-                txtSPEmsg.Clear();
-            }
-        }
-
-        #endregion Delegates
-
-        #region # Methods #
-
-        //  Initialize SPE settings and controls (called from Setup())
-        private void InitSPE()
-        {
-            try
-            {
-                cboSPEport.SelectedIndex = set.SPEport;
-                chkSPEenab.Checked = set.SPEenab;
-                SPETimer.Enabled = false;
-                SPEmsgClr("");
-                // see if digital watt meter is being used.
-                if (chkSPEenab.Checked && !chkLPenab.Checked && 
-                    !chkWNEnab.Checked && !chkPM.Checked)
-                {
-                    txtAvg.Enabled = true; txtSWR.Enabled = true;
-                    txtAvg.Text = "0.0"; txtSWR.Text = "0.00";
-                    lblAvg.Text = "FWD";
-                    wattmtr = true;
-                }
-                else wattmtr = false;
-
-                //// the following are for testing only, see SPE test routines region 
-                //if (TestPort.IsOpen) { TestPort.Close(); }
-                //TestPort.PortName = "COM29";
-                //TestPort.Open();
-                //LoadPkt();
-
-                // test to see if amp is running
-                if (!SPEport.IsOpen) SPEport.Open();
-                byte[] bytes = new byte[6] { 0x55, 0x55, 0x55, 0x01, 0x80, 0x80 };
-                SPEport.Write(bytes, 0, 6);
-
-            }
-            catch { }
-        }
-
-        #endregion # Methods #
-
-        #region # Events #
-
-        // the SPE port has received data
-        private void SPEport_DataReceived(object sender, SerialDataReceivedEventArgs e)
-        {
-            if (chkSPEenab.Checked) // port must be enabled to accept data
-            {
-                try
-                {
-                    if (!SPEon) // turn on the main power light
-                    {
-                        // see if digital watt meter is being used.
-                        if (!chkLPenab.Checked && !chkWNEnab.Checked && !chkPM.Checked)
-                            wattmtr = true;
-                        else
-                            wattmtr = false;
-                        SPEon = true;
-                        SetSPEon("True");
-                    }
-                    SetSPEled("");  // toggle activity indicator
-                    led = !led;
-
-                    SerialPort port = (SerialPort)sender;
-                    byte[] data = new byte[port.BytesToRead];
-
-                    port.Read(data, 0, data.Length);
-                    PortBuf.AddRange(data);
-
-                    while (PortBuf.Count >=6)
-                    {
-                        int i1 = PortBuf.IndexOf(0xAA); // find sync start
-                        if (i1 < 0) // if sync bytes not found clear buffer
-                        { PortBuf.Clear(); }
-                        else if (PortBuf[i1 + 1] == 0xAA && PortBuf[i1 + 2] == 0xAA)
-                        {
-                            if (i1 > 0) // if index > 0 delete all before it.
-                            { PortBuf.RemoveRange(0, i1); }
-                            if (PortBuf[3] == 0x01) // dump the ack packet
-                            { PortBuf.RemoveRange(0, 6); continue; }
-                            if ( PortBuf.Count >=35 && PortBuf[0] == 0xAA && 
-                                PortBuf[1] == 0xAA && PortBuf[2] == 0xAA)
-                            {
-                                ProcessBuf(); //process the 35 byte data packet
-                                PortBuf.RemoveRange(0, 35); // delete procesed packet
-                            }
-                        }
-                        else { return; }
-                    }
-                }
-                catch (Exception ex)
-                {
-                    bool bReturnLog = false;
-                    bReturnLog = ErrorLog.ErrorRoutine(false, enableErrorLog, ex);
-                    if (false == bReturnLog) MessageBox.Show("Unable to write to log");
-                }
-            }
-        }
-        // Process the port buffer data
-        private void ProcessBuf()
-        {
-            try
-            {
-                if (Convert.ToBoolean(PortBuf[5] & 0x10))
-                    SetSPEpwr("Full");
-                else SetSPEpwr("Half");
-                // Operate / Stby
-                if (Convert.ToBoolean(PortBuf[5] & 0x02))
-                    SetSPEoper("Oper");
-                else SetSPEoper("Stby");
-                // tuner operation
-                if (Convert.ToBoolean(PortBuf[5] & 0x01))
-                    SetSPEtune("True");
-                else SetSPEtune("False");
-                // Warning message received
-                if (PortBuf[6] > 0x00)
-                {
-                    if (PortBuf[6] > 0x10 && PortBuf[6] < 0x1D)
-                    {
-                        SetSPEmsg(SPEerrors[PortBuf[6]]);
-                    }
-                    else if (PortBuf[6] == 0x1D && PortBuf[7] > 0x00)
-                    {
-                        int ctr = PortBuf[7] & 0x0F;
-                        SetSPEmsg("Error Msg History Follows (" + ctr + ")");
-                        for (int i = 1; i < ctr + 1; i++)
-                        {
-                            SetSPEmsg(SPEerrors[PortBuf[7 + i]]);
-                        }
-                    }
-                    // the amp is shutting down
-                    else if (PortBuf[6] == 0x1E)
-                    {
-                        SetSPEon("False"); SetSPEoper("Off"); SetSPEtune("Off");
-                        SetSPEpwr("Off"); SetSPEtemp("   "); SPEmsgClr("");
-                        //SPETimer.Enabled = false;
-                        SetSPEled("False");
-                        SPEon = false;
-                        wattmtr = false;
-                        SPEport.DiscardInBuffer();
-                        SetAvg(" ");
-                        SetSwr(" ");
-                        return;
-                    }
-                }
-                // antenna selected
-                SetSPEant(((PortBuf[22] & 0x0F) + 1).ToString());     // antenna
-
-                // SWR reading
-                if (wattmtr)
-                {
-                    int tswr = (PortBuf[24] << 8) + PortBuf[23];
-                    string swr = tswr.ToString();
-                    if (tswr == 0)
-                        SetSwr("0.00");
-                    else
-                    {
-                        SetSwr(swr.Substring(0, swr.Length - 2) + "." +
-                            swr.Substring(swr.Length - 2, 2));
-                    }
-                }
-                // pa temp(C)
-                if (Convert.ToBoolean(PortBuf[5] & 0x80))
-                    SetSPEtemp(PortBuf[25].ToString() + " C");
-                else
-                    SetSPEtemp(PortBuf[25].ToString() + " F");
-
-                // PWR reading
-                if (wattmtr)
-                {
-                    int tpwr = (PortBuf[27] << 8) + PortBuf[26];
-                    string pwr = tpwr.ToString();
-                    if (tpwr == 0)
-                        SetAvg("0.0");
-                    else
-                    {
-                        SetAvg(pwr.Substring(0, pwr.Length - 1) + "." +
-                                pwr.Substring(pwr.Length - 1, 1));
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                bool bReturnLog = false;
-                bReturnLog = ErrorLog.ErrorRoutine(false, enableErrorLog, ex);
-                if (false == bReturnLog) MessageBox.Show("Unable to write to log");
-            }
-        }
-
-        // the enable checkbox has been checked
-        private void chkSPEenab_CheckedChanged(object sender, EventArgs e)
-        {
-            if (chkSPEenab.Checked)
-            {
-                if (cboSPEport.SelectedIndex > 0)
-                {
-                    set.SPEenab = true;
-                    InitSPE();
-                }
-                else
-                {
-                    MessageBox.Show("No port has been selected for the SPE amplifier.\n\n" +
-                    "Please select a valid port number and try again.", "Port Error",
-                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    chkSPEenab.Checked = false; set.SPEenab = false;
-                }
-            }
-            else
-            {
-                //SPETimer.Enabled = false;
-                SPEon = false;
-                SetSPEon("False"); SetSPEoper("Off"); SetSPEtune("Off");
-                SetSPEpwr("Off"); SetSPEtemp("   "); SPEmsgClr("");
-                SetSPEled("False"); txtAvg.Enabled = false; txtSWR.Enabled = false;
-                chkSPEenab.Checked = false; set.SPEenab = false;
-            }
-            set.Save();
-        }
-        // the serial port selection has changed
-        private void cboSPEport_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (SPEport.IsOpen) SPEport.Close();
-            if (cboSPEport.SelectedIndex > 0)
-            {
-                SPEport.PortName = cboSPEport.SelectedItem.ToString();
-                try
-                {
-                    SPEport.Open();
-                }
-                catch
-                {
-                    MessageBox.Show("The Amplifier serial port " + SPEport.PortName +
-                       " cannot be opened!\n", "Port Error",
-                       MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    cboSPEport.SelectedText = "";
-                    chkSPEenab.Checked = false;
-                    return;
-                }
-            }
-            else
-            {
-                chkSPEenab.Checked = false;
-            }
-            set.SPEport = cboSPEport.SelectedIndex;
-            set.Save();
-        }
-        // the antenna button has been pressed 
-        private void btnSPEant_Click(object sender, EventArgs e)
-        {
-            if (SPEport.IsOpen)
-            {
-                byte[] bytes = new byte[7] { 0x55, 0x55, 0x55, 0x02, 0x10, 0x2B, 0x3B };
-                SPEport.Write(bytes, 0, 7);
-            }
-        }
-        // the power on button has been pressed, toggle the DTR line
-        private void btnSPEon_Click(object sender, EventArgs e)
-        {
-            if (!SPEon)
-            {
-//                SPEoff = false;
-                SPEport.DtrEnable = true;
-                using (new HourGlass())
-                {
-                    Thread.Sleep(5000); // allow time for DTR to initialize radio
-                }
-                SPEport.DtrEnable = false;
-                using (new HourGlass())
-                {
-                    Thread.Sleep(3000); // allow time for radio to settle
-                }
-                // send polling command
-//                byte[] bytes = new byte[6] { 0x55, 0x55, 0x55, 0x01, 0x81, 0x81 };
-                byte[] bytes = new byte[6] { 0x55, 0x55, 0x55, 0x01, 0x80, 0x80 };
-                SPEport.Write(bytes, 0, 6);
-            }
-        }
-        // the power off button has been pressed
-        private void btnSPEoff_Click(object sender, EventArgs e)
-        {
-            if (SPEport.IsOpen)
-            {
-                // send Off cmd to amp
-                byte[] bytes = new byte[7] { 0x55, 0x55, 0x55, 0x02, 0x10, 0x18, 0x28 };
-                SPEport.Write(bytes, 0, 7);
-            }
-        }
-        // the oper/stby button has been pressed
-        private void btnSPEoper_Click(object sender, EventArgs e)
-        {
-            if (SPEport.IsOpen)
-            {
-                byte[] bytes = new byte[7] { 0x55, 0x55, 0x55, 0x02, 0x10, 0x1C, 0x2C };
-                SPEport.Write(bytes, 0, 7);
-            }
-        }
-        // the tune button has been pressed
-        private void btnSPEtune_Click(object sender, EventArgs e)
-        {
-            if (SPEport.IsOpen)
-            {
-                byte[] bytes = new byte[7] { 0x55, 0x55, 0x55, 0x02, 0x10, 0x34, 0x44 };
-                SPEport.Write(bytes, 0, 7);
-            }
-        }
-        // the Full/Half power button has been pressed
-        private void btnSPEpwr_Click(object sender, EventArgs e)
-        {
-            if (SPEport.IsOpen)
-            {
-                byte[] bytes = new byte[7] { 0x55, 0x55, 0x55, 0x02, 0x10, 0x1A, 0x2A };
-                SPEport.Write(bytes, 0, 7);
-            }
-        }
-        // the display error button has been pressed
-        private void btnSPEdisp_Click(object sender, EventArgs e)
-        {
-            if (SPEport.IsOpen)
-            {
-                byte[] bytes = new byte[7] { 0x55, 0x55, 0x55, 0x02, 0x10, 0x1B, 0x2B };
-                SPEport.Write(bytes, 0, 7);
-                Thread.Sleep(100);
-                SPEport.Write(bytes, 0, 7);
-            }
-        }
-        // the message text box has been double-clicked, clear the window.
-        private void txtSPEmsg_DoubleClick(object sender, EventArgs e)
-        {
-            txtSPEmsg.Clear();
-        }
-        // the SPE timer has elapsed, request status from amp.
-        bool led;
-        void SPETimer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
-        {
-//            if (SPEport.IsOpen)
-            if (TestPort.IsOpen)
-                {
-                //byte[] bytes = new byte[6] { 0x55, 0x55, 0x55, 0x01, 0x81, 0x81 };
-                //SPEport.Write(bytes, 0, 6);
-                TestPort.Write(stsBytes, 0, 35);
-                if (stsBytes[25] < 101) stsBytes[25] += 1;
-                else stsBytes[25] = 25;
-            }
-        }
-
-        #endregion # Events #
-
-        #region * Test Routines *
-
-        // the test port (Amp) has received data from DDUtil
-        // process the message and send back a response ststus packet
-        bool stby = false;
-        bool pwr = false;
-        string sTest = "";             // Port buffer message
-        byte[] ackBytes = new byte[6] { 0xAA, 0XAA, 0XAA, 0X01, 0X06, 0X06 };
-        private void TestPort_DataReceived(object sender, System.IO.Ports.SerialDataReceivedEventArgs e)
-        {
-            string sCmd = "";
-            SerialPort port = (SerialPort)sender;
-            byte[] data = new byte[port.BytesToRead];
-            if (port.BytesToRead == 0) return;
-            port.Read(data, 0, data.Length);
-            sTest += AE.GetString(data, 0, data.Length);
-
-            Regex rex = new Regex(@"\x55{3}.*");
-            for (Match m = rex.Match(sTest); m.Success; m = m.NextMatch())
-            {   //loop thru the buffer and find matches
-                sCmd = m.Value.Substring(0, m.Value.Length);
-                sTest = sTest.Replace(m.Value, ""); //remove the match from the buffer
-//                SPETimer.Start();
-
-                if (data[4] == 16)    // key command (0x10)
-                {
-                    switch (data[5])
-                    {
-                        case 52:  //tune    (0x34)
-                            int xx = stsBytes[5] | 0x01;
-                            stsBytes[5] = (byte)xx;
-                            TestPort.Write(stsBytes, 0, 35);
-                            Thread.Sleep(1000);
-                            xx = stsBytes[5] ^ 0x01;
-                            stsBytes[5] = (byte)xx;
-                            //TestPort.Write(stsBytes, 0, 35);
-                            TestPort.Write(ackBytes, 0, 6);
-                            break;
-                        case 43:  //ant     (0x2B)
-                            Thread.Sleep(100);
-                            if (stsBytes[22] >= 3) stsBytes[22] = 0;
-                            else stsBytes[22] += 1;
-                            //TestPort.Write(stsBytes, 0, 35);
-                            TestPort.Write(ackBytes, 0, 6);
-                            break;
-                        case 24:  //off     (0x18)
-                            Thread.Sleep(100);
-                            stsBytes[6] = 0x1E;
-                            SPETimer.Stop();
-                            TestPort.Write(ackBytes, 0, 6);
-                            TestPort.Write(stsBytes, 0, 35);
-                            LoadPkt();
-                            break;
-                        case 26:  //mode    (0x1A)
-                            if (pwr) xx = stsBytes[5] ^ 0x10;
-                            else xx = stsBytes[5] | 0x10;
-                            stsBytes[5] = (byte)xx;
-                            pwr = !pwr;
-                            Thread.Sleep(100);
-                            //TestPort.Write(stsBytes, 0, 35);
-                            TestPort.Write(ackBytes, 0, 6);
-                            break;
-                        case 27:  //display (0x1B)
-                            stsBytes[7] = 0x06;
-                            TestPort.Write(ackBytes, 0, 6);
-                            TestPort.Write(stsBytes, 0, 35);
-                            stsBytes[7] = 0x00;
-                            break;
-                        case 28:  //operate (0x1C)
-                            if (stby) xx = stsBytes[5] ^ 0x02;
-                            else xx = stsBytes[5] | 0x02;
-                            stsBytes[5] = (byte)xx;
-                            stby = !stby;
-                            Thread.Sleep(100);
-                            //TestPort.Write(stsBytes, 0, 35);
-                            TestPort.Write(ackBytes, 0, 6);
-                            break;
-                    }
-                }
-                if (data[4] == 128)  //RCU_ON (0x80)
-                {
-                    TestPort.Write(ackBytes, 0, 6);
-                    SPETimer.Interval = 200;
-                    SPETimer.Start();
-                }
-                if (data[4] == 129)  // RCU_OFF (0x81)
-                {
-                    TestPort.Write(ackBytes, 0, 6); 
-                    SPETimer.Stop();
-//                    TestPort.Write(stsBytes, 0, 35);
-                }
-                else
-                    return;
-            }
-        }
-        // load the status packet with test data 
-        byte[] stsBytes = new byte[35];
-        private void LoadPkt()
-        {
-            {
-                string preamble = "AAAAAA"; // 0, 1, 2
-                string cnt = "1E";          // 3
-                string sts = "00";          // 4
-                string flgs = "80";         // 5
-                string ctx = "1D";          // 6
-                string dis = "00131517181B1C00000000"; // 7 - 17
-                string bnd = "0000";        // 18 - 19
-                string freq = "1437";       // 20 - 21 14100 khz
-                string ant = "03";          // 22 ant 1 selected
-                string swr = "6500";        // 23 - 24 Lo/Hi bytes
-                string tmp = "18";          // 25 50C
-                string pwrf = "0528";       // 26 - 27 fwd pwr Lo/Hi
-                string pwrr = "0000";       // 28 - 29 ref pwr Lo/Hi
-                string va = "0000";         // 30 - 31 pa volts Lo/Hi
-                string ia = "0000";         // 32 - 33 pa current Lo/Hi
-                string chk = "3B";          // 34 checksum
-                string mystring = preamble + cnt + sts + flgs + ctx + dis + bnd + freq +
-                    ant + swr + tmp + pwrf + pwrr + va + ia + chk;
-                int j = 0;
-                for (int i = 0; i < 35; i++)
-                {
-                    string stemp = mystring.Substring(j, 2);
-                    stsBytes[i] = byte.Parse(stemp, NumberStyles.HexNumber);
-                    j += 2;
-                }
-            }
-        }
-
-        private void button7_Click(object sender, EventArgs e)
-        {
-            // Don't forget to set port to com number before using
-            if (TestPort.IsOpen) TestPort.Close();
-            TestPort.PortName = "COM24";
-            TestPort.Open();
-            // 02 41 2C 3F 2C 31 35 37 2C B 2C 0D
-            //byte[] bytes = new byte[11] 
-            //{ 0x02, 0x41, 0x2C, 0x3F, 0x2C, 0x31, 0x35, 0x37, 0x2C, 0x42, 0x0D };
-            //TestPort.Write(bytes, 0, 11);
-            TestPort.Write(ackBytes, 0, 6);
-            TestPort.Write(ackBytes, 0, 6);
-            TestPort.Write(stsBytes, 0, 35);
-        }
-
-        #endregion * Test Routines *
-
-        #endregion SPE Amp
-
     }
+
     #region Helper Classes
     //using (new HourGlass())
     //{

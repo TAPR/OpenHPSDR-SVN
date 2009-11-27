@@ -501,31 +501,31 @@ RCP4 - WriteLog</Value>
       <Value Profile="(Default)">0</Value>
     </Setting>
     <Setting Name="pwr1" Type="System.String" Scope="User">
-      <Value Profile="(Default)">""</Value>
+      <Value Profile="(Default)">0</Value>
     </Setting>
     <Setting Name="pwr2" Type="System.String" Scope="User">
-      <Value Profile="(Default)">""</Value>
+      <Value Profile="(Default)">0</Value>
     </Setting>
     <Setting Name="pwr3" Type="System.String" Scope="User">
-      <Value Profile="(Default)">""</Value>
+      <Value Profile="(Default)">0</Value>
     </Setting>
     <Setting Name="pwr4" Type="System.String" Scope="User">
-      <Value Profile="(Default)">""</Value>
+      <Value Profile="(Default)">0</Value>
     </Setting>
     <Setting Name="pwr5" Type="System.String" Scope="User">
-      <Value Profile="(Default)">""</Value>
+      <Value Profile="(Default)">0</Value>
     </Setting>
     <Setting Name="pwr6" Type="System.String" Scope="User">
-      <Value Profile="(Default)">""</Value>
+      <Value Profile="(Default)">0</Value>
     </Setting>
     <Setting Name="pwr7" Type="System.String" Scope="User">
-      <Value Profile="(Default)">""</Value>
+      <Value Profile="(Default)">0</Value>
     </Setting>
     <Setting Name="pwr8" Type="System.String" Scope="User">
-      <Value Profile="(Default)">""</Value>
+      <Value Profile="(Default)">0</Value>
     </Setting>
     <Setting Name="pwr9" Type="System.String" Scope="User">
-      <Value Profile="(Default)">""</Value>
+      <Value Profile="(Default)">0</Value>
     </Setting>
     <Setting Name="chkAutoDrv" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
@@ -677,11 +677,11 @@ RCP4 - WriteLog</Value>
     <Setting Name="PwrSDRfile" Type="System.String" Scope="User">
       <Value Profile="(Default)">""</Value>
     </Setting>
-    <Setting Name="WindowState" Type="System.String" Scope="User">
-      <Value Profile="(Default)">""</Value>
+    <Setting Name="WindowState" Type="System.Windows.Forms.FormWindowState" Scope="User">
+      <Value Profile="(Default)">Normal</Value>
     </Setting>
-    <Setting Name="WindowPosition" Type="System.Drawing.Point" Scope="User">
-      <Value Profile="(Default)">0, 0</Value>
+    <Setting Name="WindowPosition" Type="System.Drawing.Rectangle" Scope="User">
+      <Value Profile="(Default)">0, 0, 0, 0</Value>
     </Setting>
     <Setting Name="PSDRloc" Type="System.String" Scope="User">
       <Value Profile="(Default)">""</Value>
@@ -709,6 +709,12 @@ RCP4 - WriteLog</Value>
     </Setting>
     <Setting Name="SPEenab" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="WindowPositionMini" Type="System.Drawing.Rectangle" Scope="User">
+      <Value Profile="(Default)">0, 0, 0, 0</Value>
+    </Setting>
+    <Setting Name="WindowStateMini" Type="System.Windows.Forms.FormWindowState" Scope="User">
+      <Value Profile="(Default)">Normal</Value>
     </Setting>
   </Settings>
 </SettingsFile>
