@@ -593,6 +593,7 @@ struct option longOptions[] = {
     {"receiver",required_argument, 0, 3},
     {"server",required_argument, 0, 4},
     {"audio-device",required_argument, 0, 5},
+    {"local-audio",required_argument, 0, 6},
 };
 
 char* shortOptions="";
@@ -628,6 +629,9 @@ void processCommands(int argc,char** argv) {
                 break;
             case 5:
                 set_local_audio_device(optarg);
+                break;
+            case 6:
+                ozy_set_local_audio(atoi(optarg));
                 break;
         }
     }

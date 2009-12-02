@@ -112,21 +112,17 @@ char* detach_receiver(int rx,CLIENT* client) {
     return OK;
 }
 
-char* set_frequency(int rx,CLIENT* client,long frequency) {
+char* set_frequency(CLIENT* client,long frequency) {
     if(client->state==RECEIVER_DETACHED) {
         return CLIENT_DETACHED;
     }
 
-    if(rx>=ozy_get_receivers()) {
+    if(client->receiver<0) {
         return RECEIVER_INVALID;
     }
 
-    if(receiver[rx].client!=client) {
-        return RECEIVER_NOT_OWNER;
-    }
-
-    receiver[rx].frequency=frequency;
-    receiver[rx].frequency_changed=1;
+    receiver[client->receiver].frequency=frequency;
+    receiver[client->receiver].frequency_changed=1;
 
     return OK;
 }
