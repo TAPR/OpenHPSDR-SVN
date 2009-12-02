@@ -16,17 +16,20 @@ receiver - ghpsdr modified for client/server.
 
     ghpsdr
         --receiver [0..7]
+        --server ipaddress
 
 monitor -  a simple waterfall client.
 
     monitor
         --receiver [0..7]
         --frequency <frequency-in-hz>
+        --server ipaddress
 
 
 bandscope - a banscope client.
 
     bandscope
+        --server ipaddress
 
 
 
