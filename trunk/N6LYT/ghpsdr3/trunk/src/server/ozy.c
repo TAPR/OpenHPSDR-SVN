@@ -31,6 +31,7 @@
 #include <arpa/inet.h>
 #include <netdb.h>
 #include <sys/timeb.h>
+#include <pthread.h>
 
 #include "ozy_ringbuffer.h"
 #include "client.h"
@@ -38,6 +39,8 @@
 #include "bandscope.h"
 #include "receiver.h"
 #include "util.h"
+
+#define THREAD_STACK 32768
 
 #define OZY_BUFFERS 1
 #define OZY_BUFFER_SIZE 512
@@ -136,13 +139,51 @@ void process_bandscope_buffer(char* buffer);
 
 int create_ozy_thread() {
     int rc;
+    pthread_attr_t attributes;
+    struct sched_param rt_param;
 
     ozy_init();
+
+    pthread_attr_init(&attributes);
+
+    rc=pthread_attr_setdetachstate(&attributes, PTHREAD_CREATE_JOINABLE);
+    if(rc<0) {
+        fprintf(stderr,"pthread_attr_setdetachablestate failed: %d", rc);
+    }
+
+    rc=pthread_attr_setscope(&attributes, PTHREAD_SCOPE_SYSTEM);
+    if(rc<0) {
+        fprintf(stderr,"pthread_attr_setscope failed: %d", rc);
+    }
+
+    rc=pthread_attr_setinheritsched(&attributes, PTHREAD_EXPLICIT_SCHED);
+    if(rc<0) {
+        fprintf(stderr,"pthread_attr_setinheritsched failed: %d", rc);
+    }
+
+    rc=pthread_attr_setschedpolicy(&attributes, SCHED_FIFO);
+    if(rc<0) {
+        fprintf(stderr,"pthread_attr_setschedpolicy failed: %d", rc);
+    }
+
+    memset(&rt_param, 0, sizeof(rt_param));
+    rt_param.sched_priority = 60;
+
+    rc=pthread_attr_setschedparam(&attributes, &rt_param);
+    if(rc<0) {
+        fprintf(stderr,"pthread_attr_setschedparam failed: %d", rc);
+    }
+
+
+    pthread_attr_setstacksize(&attributes, THREAD_STACK);
+    if(rc<0) {
+        fprintf(stderr,"pthread_attr_setstacksize failed: %d", rc);
+    }
 
     ftime(&start_time);
 
     // create a thread to read/write to EP6/EP2
-    rc=pthread_create(&ep6_ep2_io_thread_id,NULL,ozy_ep6_ep2_io_thread,NULL);
+    rc=pthread_create(&ep6_ep2_io_thread_id,&attributes,ozy_ep6_ep2_io_thread,NULL);
     if(rc != 0) {
         fprintf(stderr,"pthread_create failed on ozy_ep6_io_thread: rc=%d\n", rc);
         exit(1);
@@ -154,6 +195,8 @@ int create_ozy_thread() {
         fprintf(stderr,"pthread_create failed on ozy_ep4_io_thread: rc=%d\n", rc);
         exit(1);
     }
+
+    pthread_attr_destroy(&attributes);
     return 0;
 }
 
@@ -242,7 +285,7 @@ int ozy_init() {
         ozy_load_firmware(ozy_firmware);
         ozy_reset_cpu(0);
 ozy_close();
-        sleep(2);
+        sleep(5);
 ozy_open();
         ozy_set_led(1,1);
         ozy_load_fpga(ozy_fpga);
@@ -362,6 +405,8 @@ void process_ozy_input_buffer(char* buffer) {
     int left_sample,right_sample,mic_sample;
     float left_sample_float,right_sample_float,mic_sample_float;
     int rc;
+    int i;
+    int bytes;
 
 if(rx_frame<10) {
     dump_ozy_buffer("received from Ozy:",rx_frame,buffer);
@@ -458,7 +503,28 @@ if(rx_frame<10) {
     } else {
         fprintf(stderr,"SYNC error\n");
         dump_ozy_buffer("SYNC ERROR",rx_frame,buffer);
-        exit(1);
+
+        // try to resync
+        fprintf(stderr,"Trying to resync ...\n");
+        while(i<(OZY_BUFFER_SIZE-3)) {
+            if(buffer[i]==SYNC && buffer[i+1]==SYNC && buffer[i+2]==SYNC) {
+                break;
+            }
+            i++;
+        }
+
+        if(i<(OZY_BUFFER_SIZE-3)) {
+            fprintf(stderr,"resync at offset %d\n",i);
+            fprintf(stderr,"trying to read %d bytes\n",i);
+            bytes=ozy_read(0x86,buffer,i);
+            if (bytes != i) {
+                fprintf(stderr,"resync: OzyBulkRead read failed %d\n",bytes);
+                exit(1);
+            }
+        } else {
+            fprintf(stderr,"cannot resync\n");
+            exit(1);
+        }
     }
 }
 

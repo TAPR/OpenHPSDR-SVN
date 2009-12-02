@@ -178,7 +178,7 @@ int main(int argc,char* argv[]) {
         exit(1);
     }
 
-    sprintf(command,"frequency %d %ld",receiver,frequency);
+    sprintf(command,"frequency %ld",frequency);
     send_command(command);
 
     build_ui();

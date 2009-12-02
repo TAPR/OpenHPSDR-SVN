@@ -149,7 +149,7 @@ char response[64];
 int session;
 
 
-static int local_audio=1;
+static int local_audio=0;
 
 void* spectrum_thread(void* arg) {
     int bytes_read;
@@ -314,7 +314,7 @@ int set_frequency() {
     int result;
 
     result=0;
-    sprintf(command,"frequency %d %lld",receiver,ddsAFrequency);
+    sprintf(command,"frequency %lld",ddsAFrequency);
     send_command(command);
     token=strtok(response," ");
     if(token!=NULL) {
@@ -527,3 +527,7 @@ void ozyRestoreState() {
     char *value;
 }
 
+
+void ozy_set_local_audio(int state) {
+    local_audio=state;
+}
