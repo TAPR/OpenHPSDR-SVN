@@ -1,0 +1,8 @@
+
+State Machine - |Janus|IQ_state
+Name IQ_state.011 IQ_state.010 IQ_state.001 IQ_state.000 IQ_state.100 
+IQ_state.000 0 0 0 0 0 
+IQ_state.001 0 0 1 1 0 
+IQ_state.010 0 1 0 1 0 
+IQ_state.011 1 0 0 1 0 
+IQ_state.100 0 0 0 1 1 

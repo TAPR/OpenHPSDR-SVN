@@ -1,0 +1,7 @@
+<?xml version="1.0" ?>
+<LOG_ROOT>
+	<PROJECT NAME="Janus">
+		<CBX_INST_ENTRY INSTANCE_NAME="|Janus|counter1:counter1|lpm_counter:lpm_counter_component" CBX_FILE_NAME="cntr_45j.tdf"/>
+		<CBX_INST_ENTRY INSTANCE_NAME="|Janus|counter2:counter2|lpm_counter:lpm_counter_component" CBX_FILE_NAME="cntr_c5j.tdf"/>
+	</PROJECT>
+</LOG_ROOT>
