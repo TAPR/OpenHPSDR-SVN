@@ -49,3 +49,4 @@ C:\Documents and Settings\Steve\Desktop\Repose_DDUtil\Source\obj\Release\DataDec
 C:\Documents and Settings\Steve\Desktop\Repose_DDUtil\Source\obj\Release\DataDecoder.csproj.GenerateResource.Cache
 C:\Documents and Settings\Steve\Desktop\Repose_DDUtil\Source\obj\Release\DataDecoder.exe
 C:\Documents and Settings\Steve\Desktop\Repose_DDUtil\Source\obj\Release\DataDecoder.pdb
+C:\Documents and Settings\Steve\Desktop\Repose_DDUtil\Source\obj\Release\DataDecoder.TipOfTheDayDialog.resources
