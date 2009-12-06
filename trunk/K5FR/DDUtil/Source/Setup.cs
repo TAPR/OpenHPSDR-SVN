@@ -17,7 +17,7 @@
 // along with this program; if not, write to the Free Software
 // Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 //
-// You may contact the author via email at: steve@k5fr.com
+// You may contact the author via email at: snance@charter.net
 //==
 
 using System;
@@ -279,40 +279,6 @@ namespace DataDecoder
 
         public Setup(SplashScreen splash)
         {
-            //Configuration config =
-            //ConfigurationManager.OpenExeConfiguration(
-            //ConfigurationUserLevel.PerUserRoamingAndLocal);
-            //Console.WriteLine("Local user config path: {0}", config.FilePath);             
-            // See if the user.settings file is corrupted.
-            //try
-            //{
-            //    Settings.Default.Reload();
-            //}
-            //catch (ConfigurationErrorsException ex)
-            //{ //(requires System.Configuration)
-            //    string filename = ((ConfigurationErrorsException)ex.InnerException).Filename;
-
-            //    if (MessageBox.Show(
-            //        "DDUtil has detected that your user settings file\r" +
-            //        "has become corrupted. This may be due to a crash\r" +
-            //        "or improper exiting of the program. DDUtil must\r" +
-            //        "reset your user settings in order to continue.\r\r" +
-            //        "Click Yes to reset your user settings and continue.\r\r" +
-            //        "Click No if you wish to attempt manual repair or to \r" +
-            //        "rescue information before proceeding.",
-            //        "Corrupt User Settings", MessageBoxButtons.YesNo,
-            //        MessageBoxIcon.Error) == DialogResult.Yes)
-            //    {
-            //        File.Delete(filename);
-            //        Application.Restart();
-            // //       Settings.Default.Reload();
-            //        // you could optionally restart the app instead
-            //    }
-            //    else
-            //        Process.GetCurrentProcess().Kill();
-            //    // avoid the inevitable crash
-            //}
-
             mSplashScreen = splash;
             mSplashScreen.SetProgress("Initializing Components", 0.0);
             // if the app is already running don't start another one.
@@ -322,7 +288,6 @@ namespace DataDecoder
             wn = new WN2Matrix(this);
             mSplashScreen.SetProgress("Restoring Personal Settings", 0.2);
 
-//            GeometryFromString(set.WindowGeometry, this);
             // Restore window size and position 
             // this is the default
             this.WindowState = FormWindowState.Normal;
@@ -1458,7 +1423,6 @@ namespace DataDecoder
                 cboPrefix.SelectedIndex = RandomNumber(0, 300);
                 // Kill the splash screen
                 if (mSplashScreen != null) mSplashScreen.Hide();
-
             }
             catch (Exception ex)
             {
@@ -1518,7 +1482,6 @@ namespace DataDecoder
             }
             try
             {
-                // // Debug.WriteLine("   *** Starting Form Close ***");
                 closing = true;
                 AtTimer.Stop();
                 blinkTimer.Stop();
@@ -1615,8 +1578,6 @@ namespace DataDecoder
         {
             try
             {
-//                set.WindowGeometry = GeometryToString(this);
-
                 set.TabOpen = tabControl.SelectedIndex;
                 set.Save();
                 PortAccess.Output(LPTnum, 0);
@@ -4795,7 +4756,7 @@ namespace DataDecoder
         // Main Menu|File|Exit
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            set.WindowGeometry = GeometryToString(this);
+//            set.WindowGeometry = GeometryToString(this);
             set.TabOpen = tabControl.SelectedIndex;
             set.Save();
             closing = true;
@@ -4809,18 +4770,18 @@ namespace DataDecoder
         private void ampSettingsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             MessageBox.Show(
-                "Band   Value\n" +
-                "----   -----\n" +
-                "160    " + set.pwr1 + "\n" +
-                "80      " + set.pwr2 + "\n" +
-                "40      " + set.pwr3 + "\n" +
-                "30      " + set.pwr4 + "\n" +
-                "20      " + set.pwr5 + "\n" +
-                "17      " + set.pwr6 + "\n" +
-                "15      " + set.pwr7 + "\n" +
-                "12      " + set.pwr8 + "\n" +
-                "10      " + set.pwr9 + "\n" +
-                "6        " + set.pwr10 + "\n", "Auto Drive Values!",
+                "Band  Value\n" +
+                "------   -----\n" +
+                "160    " + set.pwr1.TrimStart('0') + "\n" +
+                "80      " + set.pwr2.TrimStart('0') + "\n" +
+                "40      " + set.pwr3.TrimStart('0') + "\n" +
+                "30      " + set.pwr4.TrimStart('0') + "\n" +
+                "20      " + set.pwr5.TrimStart('0') + "\n" +
+                "17      " + set.pwr6.TrimStart('0') + "\n" +
+                "15      " + set.pwr7.TrimStart('0') + "\n" +
+                "12      " + set.pwr8.TrimStart('0') + "\n" +
+                "10      " + set.pwr9.TrimStart('0') + "\n" +
+                "6        " + set.pwr10.TrimStart('0') + "\n", "Auto Drive Values!",
                 MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
         // Main Menu|Options|Auto Drive | Barefoot settings
@@ -4921,6 +4882,12 @@ namespace DataDecoder
         {
             SetupWiz wiz = new SetupWiz();
             wiz.Show();
+        }
+        // Main Menu|Help|ShowTips
+        private void showTipsToolStripMenuItem_Click_1(object sender, EventArgs e)
+        {
+            TipOfTheDayDialog dlg = new TipOfTheDayDialog();
+            dlg.ShowDialog();
         }
         // Main Menu|Help|Web Site
         private void webSiteToolStripMenuItem_Click(object sender, EventArgs e)
@@ -5887,14 +5854,12 @@ namespace DataDecoder
                             sCmd = sCmd.Substring(0, sCmd.Length - 1);
                             if (sCmd != lastPos)
                             {// if heading chgd, print new heading, 
-                                {
-                                    //                               RotorPort.Write("AI1;"); //request position
-                                    SetRotor(sCmd);
-                                    lastPos = sCmd;
-                                    rtrCmd = "AI1;";
-                                    RepsCtr = posReps;
-                                    RepsTimer.Enabled = true;
-                                }
+                                SetRotor(sCmd);
+                                lastPos = sCmd;
+                                RotorPort.Write("AI1;"); //request position
+                                rtrCmd = "AI1;";
+                                RepsCtr = posReps;
+                                RepsTimer.Enabled = true;
                             }
                             break;
                         case RotorMod.M2R2800PA:
@@ -6185,7 +6150,7 @@ namespace DataDecoder
                 rotormod = RotorMod.Hygain;
                 grpSpeed.Visible = false;
                 suffix = ";";
-                //                RotorPort.ReceivedBytesThreshold = 4;
+//                RotorPort.ReceivedBytesThreshold = 4;
                 if (chkRotorEnab.Checked) RotorPort.Write("AI1;");
                 chkTenths.Visible = false;
             }
@@ -6489,7 +6454,8 @@ namespace DataDecoder
                         if (newhead.Length < 3) newhead = newhead.PadLeft(3, '0');
                         RotorPort.Write("AP1" + newhead + ";"); // set newhead
                         RotorPort.Write("AM1;");                // start rotor
-                        RotorPort.Write("AI1;");    // request position
+                        RotorPort.Write("AI1;"); 
+//                        Thread.Sleep(100);
                         rtrCmd = "AI1;";
                         RepsCtr = posReps;
                         RepsTimer.Enabled = true;
@@ -10358,86 +10324,7 @@ namespace DataDecoder
 
         #endregion VHF+ Matrix
 
-        #region Window Geometry
-
-
-        // Saves window size and location to Settings
-        public static void GeometryFromString(string thisWindowGeometry, Form formIn)
-        {
-            if (string.IsNullOrEmpty(thisWindowGeometry) == true)
-            {
-                return;
-            }
-            string[] numbers = thisWindowGeometry.Split('|');
-            string windowString = numbers[4];
-            if (windowString == "Normal")
-            {
-                Point windowPoint = new Point(int.Parse(numbers[0]),
-                    int.Parse(numbers[1]));
-                Size windowSize = new Size(int.Parse(numbers[2]),
-                    int.Parse(numbers[3]));
-
-                bool locOkay = GeometryIsBizarreLocation(windowPoint, windowSize);
-                bool sizeOkay = GeometryIsBizarreSize(windowSize);
-
-                if (locOkay == true && sizeOkay == true)
-                {
-                    formIn.Location = windowPoint;
-                    formIn.Size = windowSize;
-                    formIn.StartPosition = FormStartPosition.Manual;
-                    formIn.WindowState = FormWindowState.Normal;
-                }
-                else if (sizeOkay == true)
-                {
-                    formIn.Size = windowSize;
-                }
-            }
-            else if (windowString == "Maximized")
-            {
-                formIn.Location = new Point(100, 100);
-                formIn.StartPosition = FormStartPosition.Manual;
-                formIn.WindowState = FormWindowState.Maximized;
-            }
-        }
-        // See if the window location is funky 
-        private static bool GeometryIsBizarreLocation(Point loc, Size size)
-        {
-            bool locOkay;
-            if (loc.X < 0 || loc.Y < 0)
-            {
-                locOkay = false;
-            }
-            else if (loc.X + size.Width > Screen.PrimaryScreen.WorkingArea.Width)
-            {
-                locOkay = false;
-            }
-            else if (loc.Y + size.Height > Screen.PrimaryScreen.WorkingArea.Height)
-            {
-                locOkay = false;
-            }
-            else
-            {
-                locOkay = true;
-            }
-            return locOkay;
-        }
-        // See if the window size is funky 
-        private static bool GeometryIsBizarreSize(Size size)
-        {
-            return (size.Height <= Screen.PrimaryScreen.WorkingArea.Height &&
-                size.Width <= Screen.PrimaryScreen.WorkingArea.Width);
-        }
-        public static string GeometryToString(Form mainForm)
-        {
-            return mainForm.Location.X.ToString() + "|" +
-                mainForm.Location.Y.ToString() + "|" +
-                mainForm.Size.Width.ToString() + "|" +
-                mainForm.Size.Height.ToString() + "|" +
-                mainForm.WindowState.ToString();
-        }
-        #endregion Window Geometry
-
-        # region Window Geometry New
+        # region Window Geometry
 
         private bool IsVisibleOnAnyScreen(Rectangle rect)
         {
@@ -10460,12 +10347,10 @@ namespace DataDecoder
                 case FormWindowState.Maximized:
                     Settings.Default.WindowState = this.WindowState;
                     break;
-
                 default:
                     Settings.Default.WindowState = FormWindowState.Normal;
                     break;
             }
-
             Settings.Default.Save();
         }
         protected override void OnResize(EventArgs e)
@@ -10491,7 +10376,7 @@ namespace DataDecoder
                 Settings.Default.WindowPosition = this.DesktopBounds;
             }
         }
-        # endregion Window Geometry New
+        # endregion Window Geometry
        
         #region WatchDog Timer
 
@@ -11157,9 +11042,19 @@ namespace DataDecoder
 
         #endregion WaveNode Setup
 
+        private void Setup_Shown(object sender, EventArgs e)
+        {
+            if (TipOfTheDayDialog.IsShowTipsOnStartUp())
+            {
+                TipOfTheDayDialog dlg = new TipOfTheDayDialog();
+                dlg.ShowDialog();
+            }
+
+        }
+
         #endregion WaveNode
 
-    }
+    } // end class Setup
 
     #region Helper Classes
     //using (new HourGlass())

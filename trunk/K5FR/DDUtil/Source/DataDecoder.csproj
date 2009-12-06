@@ -161,6 +161,9 @@
       <DependentUpon>SetupWiz.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="TipOfTheDayDialog.resx">
+      <DependentUpon>TipOfTheDayDialog.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="TransDialog.resx">
       <DependentUpon>TransDialog.cs</DependentUpon>
       <SubType>Designer</SubType>
@@ -192,6 +195,9 @@
       <DependentUpon>SetupWiz.cs</DependentUpon>
     </Compile>
     <Compile Include="SplashScreen.cs" />
+    <Compile Include="TipOfTheDayDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="TransDialog.cs">
       <SubType>Form</SubType>
     </Compile>

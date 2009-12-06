@@ -895,6 +895,7 @@ namespace DataDecoder
             this.onLineHelpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.checkForUpdatesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.setupWizardToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.showTipsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.webSiteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
@@ -11934,6 +11935,7 @@ namespace DataDecoder
             this.onLineHelpToolStripMenuItem,
             this.checkForUpdatesToolStripMenuItem,
             this.setupWizardToolStripMenuItem,
+            this.showTipsToolStripMenuItem,
             this.webSiteToolStripMenuItem,
             this.aboutToolStripMenuItem1});
             this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
@@ -11960,6 +11962,13 @@ namespace DataDecoder
             this.setupWizardToolStripMenuItem.Size = new System.Drawing.Size(174, 22);
             this.setupWizardToolStripMenuItem.Text = "Setup Wizard";
             this.setupWizardToolStripMenuItem.Click += new System.EventHandler(this.setupWizardToolStripMenuItem_Click);
+            // 
+            // showTipsToolStripMenuItem
+            // 
+            this.showTipsToolStripMenuItem.Name = "showTipsToolStripMenuItem";
+            this.showTipsToolStripMenuItem.Size = new System.Drawing.Size(174, 22);
+            this.showTipsToolStripMenuItem.Text = "Show Tips";
+            this.showTipsToolStripMenuItem.Click += new System.EventHandler(this.showTipsToolStripMenuItem_Click_1);
             // 
             // webSiteToolStripMenuItem
             // 
@@ -12068,8 +12077,8 @@ namespace DataDecoder
             // 
             // RotorPort
             // 
+            this.RotorPort.DtrEnable = true;
             this.RotorPort.ReadTimeout = 500;
-            this.RotorPort.ReceivedBytesThreshold = 4;
             this.RotorPort.WriteTimeout = 500;
             this.RotorPort.DataReceived += new System.IO.Ports.SerialDataReceivedEventHandler(this.RotorPort_DataReceived);
             // 
@@ -12184,6 +12193,7 @@ namespace DataDecoder
             this.Text = "DDUtil - (Not Connected)";
             this.toolTip1.SetToolTip(this, "Right-Click for Options");
             this.Load += new System.EventHandler(this.Setup_Load);
+            this.Shown += new System.EventHandler(this.Setup_Shown);
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Setup_FormClosing);
             this.Closing += new System.ComponentModel.CancelEventHandler(this.Setup_FormClosing);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Setup_KeyDown);
@@ -13186,6 +13196,7 @@ namespace DataDecoder
         private Button btnSPEset;
         private Button btnSPEleft;
         private Button btnSPEright;
+        private ToolStripMenuItem showTipsToolStripMenuItem;
 
     }
 }

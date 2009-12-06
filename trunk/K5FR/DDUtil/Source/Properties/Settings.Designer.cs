@@ -2317,7 +2317,7 @@ namespace DataDecoder.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("\"\"")]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
         public string pwr10 {
             get {
                 return ((string)(this["pwr10"]));
