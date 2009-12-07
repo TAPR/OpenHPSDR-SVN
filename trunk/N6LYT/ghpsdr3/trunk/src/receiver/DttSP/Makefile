@@ -562,6 +562,9 @@ maintainer-clean-generic:
 	@echo "it deletes files that may require special tools to rebuild."
 clean: clean-am
 
+clean-noinstLIBRARIES:
+	-test -z "$(noinst_LIBRARIES)" || rm -f $(noinst_LIBRARIES)
+
 clean-am: clean-binPROGRAMS clean-generic clean-noinstLIBRARIES \
 	mostlyclean-am
 
