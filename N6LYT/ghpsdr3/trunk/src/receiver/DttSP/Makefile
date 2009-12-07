@@ -12,7 +12,7 @@
 # even the implied warranty of MERCHANTABILITY or FITNESS FOR A
 # PARTICULAR PURPOSE.
 
-
+# hand changes by John Melton g0orx/n6lyt
 
 
 
@@ -35,17 +35,6 @@ build_triplet = i686-pc-linux-gnu
 host_triplet = i686-pc-linux-gnu
 bin_PROGRAMS = 
 subdir = .
-DIST_COMMON = README $(am__configure_deps) $(srcdir)/Makefile.am \
-	$(srcdir)/Makefile.in $(top_srcdir)/configure AUTHORS COPYING \
-	ChangeLog INSTALL NEWS config.guess config.sub depcomp \
-	install-sh missing
-ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
-am__aclocal_m4_deps = $(top_srcdir)/configure.ac
-am__configure_deps = $(am__aclocal_m4_deps) $(CONFIGURE_DEPENDENCIES) \
-	$(ACLOCAL_M4)
-am__CONFIG_DISTCLEAN_FILES = config.status config.cache config.log \
- configure.lineno config.status.lineno
-mkinstalldirs = $(install_sh) -d
 CONFIG_CLEAN_FILES =
 LIBRARIES = $(noinst_LIBRARIES)
 AR = ar
@@ -93,11 +82,11 @@ DIST_ARCHIVES = $(distdir).tar.gz
 GZIP_ENV = --best
 distuninstallcheck_listfiles = find . -type f -print
 distcleancheck_listfiles = find . -type f -print
-ACLOCAL = ${SHELL} /home/jm57878/ghpsdr/DttSP/missing --run aclocal-1.10
-AMTAR = ${SHELL} /home/jm57878/ghpsdr/DttSP/missing --run tar
-AUTOCONF = ${SHELL} /home/jm57878/ghpsdr/DttSP/missing --run autoconf
-AUTOHEADER = ${SHELL} /home/jm57878/ghpsdr/DttSP/missing --run autoheader
-AUTOMAKE = ${SHELL} /home/jm57878/ghpsdr/DttSP/missing --run automake-1.10
+#ACLOCAL = ${SHELL} /home/jm57878/ghpsdr/DttSP/missing --run aclocal-1.10
+#AMTAR = ${SHELL} /home/jm57878/ghpsdr/DttSP/missing --run tar
+#AUTOCONF = ${SHELL} /home/jm57878/ghpsdr/DttSP/missing --run autoconf
+#AUTOHEADER = ${SHELL} /home/jm57878/ghpsdr/DttSP/missing --run autoheader
+#AUTOMAKE = ${SHELL} /home/jm57878/ghpsdr/DttSP/missing --run automake-1.10
 AWK = mawk
 CC = gcc
 CCDEPMODE = depmode=gcc3
@@ -122,7 +111,7 @@ LDFLAGS =
 LIBOBJS = 
 LIBS = -llo -lpthread -lm -lfftw3f 
 LTLIBOBJS = 
-MAKEINFO = ${SHELL} /home/jm57878/ghpsdr/DttSP/missing --run makeinfo
+#MAKEINFO = ${SHELL} /home/jm57878/ghpsdr/DttSP/missing --run makeinfo
 MKDIR_P = /bin/mkdir -p
 OBJEXT = o
 PACKAGE = dttsp
@@ -137,10 +126,10 @@ SET_MAKE =
 SHELL = /bin/bash
 STRIP = 
 VERSION = new
-abs_builddir = /home/jm57878/ghpsdr/DttSP
-abs_srcdir = /home/jm57878/ghpsdr/DttSP
-abs_top_builddir = /home/jm57878/ghpsdr/DttSP
-abs_top_srcdir = /home/jm57878/ghpsdr/DttSP
+#abs_builddir = /home/jm57878/ghpsdr/DttSP
+#abs_srcdir = /home/jm57878/ghpsdr/DttSP
+#abs_top_builddir = /home/jm57878/ghpsdr/DttSP
+#abs_top_srcdir = /home/jm57878/ghpsdr/DttSP
 ac_ct_CC = gcc
 am__include = include
 am__leading_dot = .
@@ -167,7 +156,7 @@ host_vendor = pc
 htmldir = ${docdir}
 includedir = ${prefix}/include
 infodir = ${datarootdir}/info
-install_sh = $(SHELL) /home/jm57878/ghpsdr/DttSP/install-sh
+#install_sh = $(SHELL) /home/jm57878/ghpsdr/DttSP/install-sh
 libdir = ${exec_prefix}/lib
 libexecdir = ${exec_prefix}/libexec
 localedir = ${datarootdir}/locale
@@ -274,42 +263,7 @@ all: all-am
 
 .SUFFIXES:
 .SUFFIXES: .c .o .obj
-am--refresh:
-	@:
-$(srcdir)/Makefile.in:  $(srcdir)/Makefile.am  $(am__configure_deps)
-	@for dep in $?; do \
-	  case '$(am__configure_deps)' in \
-	    *$$dep*) \
-	      echo ' cd $(srcdir) && $(AUTOMAKE) --gnu '; \
-	      cd $(srcdir) && $(AUTOMAKE) --gnu  \
-		&& exit 0; \
-	      exit 1;; \
-	  esac; \
-	done; \
-	echo ' cd $(top_srcdir) && $(AUTOMAKE) --gnu  Makefile'; \
-	cd $(top_srcdir) && \
-	  $(AUTOMAKE) --gnu  Makefile
-.PRECIOUS: Makefile
-Makefile: $(srcdir)/Makefile.in $(top_builddir)/config.status
-	@case '$?' in \
-	  *config.status*) \
-	    echo ' $(SHELL) ./config.status'; \
-	    $(SHELL) ./config.status;; \
-	  *) \
-	    echo ' cd $(top_builddir) && $(SHELL) ./config.status $@ $(am__depfiles_maybe)'; \
-	    cd $(top_builddir) && $(SHELL) ./config.status $@ $(am__depfiles_maybe);; \
-	esac;
 
-$(top_builddir)/config.status: $(top_srcdir)/configure $(CONFIG_STATUS_DEPENDENCIES)
-	$(SHELL) ./config.status --recheck
-
-$(top_srcdir)/configure:  $(am__configure_deps)
-	cd $(srcdir) && $(AUTOCONF)
-$(ACLOCAL_M4):  $(am__aclocal_m4_deps)
-	cd $(srcdir) && $(ACLOCAL) $(ACLOCAL_AMFLAGS)
-
-clean-noinstLIBRARIES:
-	-test -z "$(noinst_LIBRARIES)" || rm -f $(noinst_LIBRARIES)
 libDttSP.a: $(libDttSP_a_OBJECTS) $(libDttSP_a_DEPENDENCIES) 
 	-rm -f libDttSP.a
 	$(libDttSP_a_AR) libDttSP.a $(libDttSP_a_OBJECTS) $(libDttSP_a_LIBADD)
