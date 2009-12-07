@@ -836,6 +836,8 @@ namespace DataDecoder
             this.label51 = new System.Windows.Forms.Label();
             this.label52 = new System.Windows.Forms.Label();
             this.txtLong = new System.Windows.Forms.TextBox();
+            this.tabProp = new System.Windows.Forms.TabPage();
+            this.pixBox1 = new System.Windows.Forms.PictureBox();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.AccPort = new System.IO.Ports.SerialPort(this.components);
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
@@ -984,6 +986,8 @@ namespace DataDecoder
             this.grpSpeed.SuspendLayout();
             this.grpModel.SuspendLayout();
             this.groupBox14.SuspendLayout();
+            this.tabProp.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pixBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numSplit)).BeginInit();
             this.contextMenuStrip1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
@@ -1002,6 +1006,7 @@ namespace DataDecoder
             this.tabControl.Controls.Add(this.tabRotor);
             this.tabControl.Controls.Add(this.tabExtCtrl);
             this.tabControl.Controls.Add(this.tabSetup);
+            this.tabControl.Controls.Add(this.tabProp);
             this.tabControl.ItemSize = new System.Drawing.Size(42, 18);
             this.tabControl.Location = new System.Drawing.Point(-1, 24);
             this.tabControl.Name = "tabControl";
@@ -11418,6 +11423,28 @@ namespace DataDecoder
             this.toolTip1.SetToolTip(this.txtLong, "Home station longitude");
             this.txtLong.TextChanged += new System.EventHandler(this.txtLong_TextChanged);
             // 
+            // tabProp
+            // 
+            this.tabProp.Controls.Add(this.pixBox1);
+            this.tabProp.Location = new System.Drawing.Point(4, 22);
+            this.tabProp.Name = "tabProp";
+            this.tabProp.Size = new System.Drawing.Size(431, 309);
+            this.tabProp.TabIndex = 10;
+            this.tabProp.Text = "Prop";
+            this.tabProp.UseVisualStyleBackColor = true;
+            // 
+            // pixBox1
+            // 
+            this.pixBox1.ImageLocation = "http://qsonet.com/propadex.png";
+            this.pixBox1.InitialImage = null;
+            this.pixBox1.Location = new System.Drawing.Point(138, 91);
+            this.pixBox1.Name = "pixBox1";
+            this.pixBox1.Size = new System.Drawing.Size(146, 120);
+            this.pixBox1.TabIndex = 80;
+            this.pixBox1.TabStop = false;
+            this.toolTip1.SetToolTip(this.pixBox1, "Current propagation condition (click image for more info).");
+            this.pixBox1.Click += new System.EventHandler(this.pixBox1_Click);
+            // 
             // openFileDialog1
             // 
             this.openFileDialog1.FileName = "openFileDialog1";
@@ -11776,7 +11803,7 @@ namespace DataDecoder
             this.aboutToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(437, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(436, 24);
             this.menuStrip1.TabIndex = 70;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -11991,7 +12018,7 @@ namespace DataDecoder
             this.StatusBar});
             this.statusStrip1.Location = new System.Drawing.Point(0, 390);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(437, 22);
+            this.statusStrip1.Size = new System.Drawing.Size(436, 22);
             this.statusStrip1.TabIndex = 71;
             this.statusStrip1.Text = "statusStrip1";
             // 
@@ -12165,7 +12192,7 @@ namespace DataDecoder
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.ClientSize = new System.Drawing.Size(437, 412);
+            this.ClientSize = new System.Drawing.Size(436, 412);
             this.ContextMenuStrip = this.contextMenuStrip1;
             this.Controls.Add(this.lblHighSWR);
             this.Controls.Add(this.txtAlcInd);
@@ -12311,6 +12338,8 @@ namespace DataDecoder
             this.grpModel.PerformLayout();
             this.groupBox14.ResumeLayout(false);
             this.groupBox14.PerformLayout();
+            this.tabProp.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pixBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numSplit)).EndInit();
             this.contextMenuStrip1.ResumeLayout(false);
             this.menuStrip1.ResumeLayout(false);
@@ -13197,6 +13226,8 @@ namespace DataDecoder
         private Button btnSPEleft;
         private Button btnSPEright;
         private ToolStripMenuItem showTipsToolStripMenuItem;
+        private TabPage tabProp;
+        private PictureBox pixBox1;
 
     }
 }
