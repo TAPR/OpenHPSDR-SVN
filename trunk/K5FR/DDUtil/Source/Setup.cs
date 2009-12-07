@@ -114,6 +114,7 @@ namespace DataDecoder
         System.Timers.Timer logTimer;
         System.Timers.Timer lpTimer;
         System.Timers.Timer pollTimer;
+        System.Timers.Timer propTimer;
         System.Timers.Timer RepsTimer;
         System.Timers.Timer SPETimer;
         System.Timers.Timer StepTimer;
@@ -428,6 +429,12 @@ namespace DataDecoder
             AlphaTimer.Enabled = false;
             txtAlphaInt.Text = set.AlphaInt;
             cboAlphaBaud.SelectedIndex = set.AlphaBaud;
+
+            // setup Propadex Timer
+            propTimer = new System.Timers.Timer();
+            propTimer.Elapsed += new System.Timers.ElapsedEventHandler(propTimer_Elapsed);
+            propTimer.Interval = 600000;
+            propTimer.Enabled = true;
 
             mSplashScreen.SetProgress("Initializing Ports", 0.6);
             CreateSerialPort();
@@ -11053,6 +11060,21 @@ namespace DataDecoder
         }
 
         #endregion WaveNode
+
+        #region Propadex
+        // Propadex forecast UI
+        private void pixBox1_Click(object sender, EventArgs e)
+        {
+            Process.Start("http://qsonet.com/propadex.html");
+        }
+
+        void propTimer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
+        {
+            pixBox1.Load();
+
+        }
+
+        #endregion Propadex
 
     } // end class Setup
 
