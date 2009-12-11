@@ -132,4 +132,5 @@ set_location_assignment PIN_145 -to ATLAS_A4
 set_location_assignment PIN_146 -to ATLAS_A3
 set_location_assignment PIN_147 -to ATLAS_A2
 set_location_assignment PIN_24 -to FX2_IFCLK
+set_location_assignment PIN_23 -to FX2_CLK
 set_instance_assignment -name PARTITION_HIERARCHY root_partition -to | -section_id Top
