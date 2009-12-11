@@ -24,7 +24,7 @@ applicable agreement for further details.
 	(input)
 	(rect 784 160 952 176)
 	(text "INPUT" (rect 133 0 161 10)(font "Arial" (font_size 6)))
-	(text "FX2_IFCLK" (rect 5 0 61 12)(font "Arial" ))
+	(text "FX2_CLK" (rect 5 0 51 12)(font "Arial" ))
 	(pt 168 8)
 	(drawing
 		(line (pt 92 12)(pt 117 12)(line_width 1))
@@ -119,6 +119,7 @@ applicable agreement for further details.
 		(line (pt 82 8)(pt 78 12)(line_width 1))
 		(line (pt 78 12)(pt 82 8)(line_width 1))
 	)
+	(annotation_block (location)(rect 1248 176 1304 192))
 )
 (symbol
 	(rect 680 368 712 400)
