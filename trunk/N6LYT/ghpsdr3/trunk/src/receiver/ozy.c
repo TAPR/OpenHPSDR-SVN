@@ -189,7 +189,9 @@ void* spectrum_thread(void* arg) {
 
 fprintf(stderr,"spectrum_thread: socket %d\n",spectrum_socket);
 
-    open_local_audio();
+    if(local_audio) {
+        open_local_audio();
+    }
 
 
 fprintf(stderr,"output_sample_increment=%d\n",output_sample_increment);
