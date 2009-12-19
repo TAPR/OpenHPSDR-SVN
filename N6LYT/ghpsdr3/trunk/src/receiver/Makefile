@@ -12,7 +12,7 @@ INCLUDES=-I. -I/usr/include/gtk-2.0 -I/usr/lib/gtk-2.0/include\
 LIBS=-L. -LDttSP -lDttSP -lpthread\
      -lgtk-x11-2.0 -lgdk-x11-2.0 -latk-1.0 -lpangoft2-1.0 -lgdk_pixbuf-2.0\
      -lm -lpangocairo-1.0 -lgio-2.0 -lcairo -lpango-1.0 -lfreetype -lz\
-     -lfontconfig -lgobject-2.0 -lgmodule-2.0 -lglib-2.0 -lfftw3f
+     -lfontconfig -lgobject-2.0 -lgmodule-2.0 -lglib-2.0 -lfftw3f -lportaudio
 
 BIN=../../bin
 
@@ -30,7 +30,7 @@ SOURCES= agc.c audio.c band.c bandscope.c bandscope_control.c bandscope_update.c
          soundcard.c spectrum_buffers.c spectrum.c spectrum_update.c vfo.c volume.c\
          sinewave.c transmit.c\
          iphone.c audiostream.c\
-         subrx.c local_audio.c
+         subrx.c local_audio.c port_audio.c
 
 OBJS= agc.o audio.o band.o bandscope.o bandscope_control.o bandscope_update.o command.o\
       display.o filter.o frequency.o main.o meter.o\
@@ -40,7 +40,7 @@ OBJS= agc.o audio.o band.o bandscope.o bandscope_control.o bandscope_update.o co
       soundcard.o spectrum_buffers.o spectrum.o spectrum_update.o vfo.o volume.o\
       sinewave.o transmit.o\
       iphone.o audiostream.o\
-      subrx.o local_audio.o
+      subrx.o local_audio.o port_audio.o
 
 
 all: $(BIN)/$(PROGRAM)
