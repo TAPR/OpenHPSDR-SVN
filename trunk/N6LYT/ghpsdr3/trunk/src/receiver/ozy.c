@@ -31,6 +31,7 @@
 #include "sinewave.h"
 #include "vfo.h"
 #include "local_audio.h"
+#include "port_audio.h"
 
 /*
  *   ozy interface
@@ -150,6 +151,7 @@ int session;
 
 
 static int local_audio=0;
+static int port_audio=0;
 
 void* spectrum_thread(void* arg) {
     int bytes_read;
@@ -191,6 +193,8 @@ fprintf(stderr,"spectrum_thread: socket %d\n",spectrum_socket);
 
     if(local_audio) {
         open_local_audio();
+    } else if(port_audio) {
+        open_port_audio();
     }
 
 
@@ -209,6 +213,8 @@ fprintf(stderr,"output_sample_increment=%d\n",output_sample_increment);
         if(local_audio) {
             // play the audio back locally
             write_local_audio(&output_buffer,&output_buffer[BUFFER_SIZE],BUFFER_SIZE,output_sample_increment);
+        } else if(port_audio) {
+            write_port_audio(&output_buffer,&output_buffer[BUFFER_SIZE],BUFFER_SIZE,output_sample_increment);
         } else {
             // send the audio back to the server
             bytes_written=sendto(audio_socket,output_buffer,sizeof(output_buffer),0,(struct sockaddr *)&audio_addr,audio_length);
@@ -532,4 +538,8 @@ void ozyRestoreState() {
 
 void ozy_set_local_audio(int state) {
     local_audio=state;
+}
+
+void ozy_set_port_audio(int state) {
+    port_audio=state;
 }

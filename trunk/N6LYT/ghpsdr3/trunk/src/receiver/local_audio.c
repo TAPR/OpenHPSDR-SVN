@@ -33,7 +33,7 @@ int open_local_audio() {
     int status;
     int rc;
 
-fprintf(stderr,"init_local_audio\n");
+fprintf(stderr,"open_local_audio\n");
 
     /* open sound device */
     fd = open(local_audio_device, O_RDWR);

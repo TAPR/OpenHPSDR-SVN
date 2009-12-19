@@ -233,6 +233,7 @@ void setSpeed(int s);
 int set_frequency();
 
 void ozy_set_local_audio(int state);
+void ozy_set_port_audio(int state);
 
 #endif	/* _OZY_H */
 

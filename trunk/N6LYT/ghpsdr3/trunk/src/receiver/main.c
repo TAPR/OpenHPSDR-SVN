@@ -130,6 +130,7 @@
 #include "iphone.h"
 #include "audiostream.h"
 #include "local_audio.h"
+#include "port_audio.h"
 
 GdkColor background;
 GdkColor buttonBackground;
@@ -594,6 +595,7 @@ struct option longOptions[] = {
     {"server",required_argument, 0, 4},
     {"audio-device",required_argument, 0, 5},
     {"local-audio",required_argument, 0, 6},
+    {"port-audio",required_argument, 0, 7},
 };
 
 char* shortOptions="";
@@ -632,6 +634,9 @@ void processCommands(int argc,char** argv) {
                 break;
             case 6:
                 ozy_set_local_audio(atoi(optarg));
+                break;
+            case 7:
+                ozy_set_port_audio(atoi(optarg));
                 break;
         }
     }
