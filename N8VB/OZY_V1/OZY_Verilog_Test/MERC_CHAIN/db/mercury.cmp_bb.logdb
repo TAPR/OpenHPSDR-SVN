@@ -1,5 +1,0 @@
-v1
-DSP_BALANCING_IMPLEMENTATION,SIMPLE_18_BIT_MULTIPLIERS,hb_filt:hbd_i|lpm_mult:Mult3|mult_mo21:auto_generated|mac_out2,
-DSP_BALANCING_IMPLEMENTATION,SIMPLE_18_BIT_MULTIPLIERS,hb_filt:hbd_i|lpm_mult:Mult2|mult_to21:auto_generated|mac_out2,
-DSP_BALANCING_IMPLEMENTATION,SIMPLE_18_BIT_MULTIPLIERS,hb_filt:hbd_i|lpm_mult:Mult1|mult_mo21:auto_generated|mac_out2,
-DSP_BALANCING_IMPLEMENTATION,SIMPLE_18_BIT_MULTIPLIERS,hb_filt:hbd_i|lpm_mult:Mult0|mult_qo21:auto_generated|mac_out2,

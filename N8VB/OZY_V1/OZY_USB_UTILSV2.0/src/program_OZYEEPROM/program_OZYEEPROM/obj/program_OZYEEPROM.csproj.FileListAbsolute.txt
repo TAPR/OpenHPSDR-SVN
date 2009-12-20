@@ -1,2 +1,0 @@
-C:\Data\HPSDR\trunk\N8VB\OZY_V1\OZY_USB_UTILSV2.0\src\program_OZYEEPROM\program_OZYEEPROM\obj\Release\program_OZYEEPROM.exe
-C:\Data\HPSDR\trunk\N8VB\OZY_V1\OZY_USB_UTILSV2.0\src\program_OZYEEPROM\program_OZYEEPROM\obj\Release\program_OZYEEPROM.pdb

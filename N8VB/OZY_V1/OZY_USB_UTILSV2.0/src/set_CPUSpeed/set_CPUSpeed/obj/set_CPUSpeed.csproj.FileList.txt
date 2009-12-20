@@ -1,7 +1,0 @@
-bin\Release\set_CPUSpeed.exe
-bin\Release\set_CPUSpeed.pdb
-bin\Release\HPSDR_USB_LIB_V1.dll
-bin\Release\HPSDR_USB_LIB_V1.pdb
-obj\Release\ResolveAssemblyReference.cache
-obj\Release\set_CPUSpeed.exe
-obj\Release\set_CPUSpeed.pdb

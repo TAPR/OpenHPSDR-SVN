@@ -1,2 +1,0 @@
-Warning (10268): Verilog HDL information at ozy_eval.v(59): Always Construct contains both blocking and non-blocking assignments
-Warning (10268): Verilog HDL information at ozy_eval.v(121): Always Construct contains both blocking and non-blocking assignments
