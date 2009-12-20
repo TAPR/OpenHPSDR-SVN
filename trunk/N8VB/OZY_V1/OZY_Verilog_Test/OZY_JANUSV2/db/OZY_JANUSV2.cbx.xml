@@ -1,6 +1,0 @@
-<?xml version="1.0" ?>
-<LOG_ROOT>
-	<PROJECT NAME="OZY_JANUSV2">
-		<CBX_INST_ENTRY INSTANCE_NAME="|OZY_JANUSV2|tx_fifo:tx_fifo|dcfifo:dcfifo_component" CBX_FILE_NAME="dcfifo_h9b1.tdf"/>
-	</PROJECT>
-</LOG_ROOT>

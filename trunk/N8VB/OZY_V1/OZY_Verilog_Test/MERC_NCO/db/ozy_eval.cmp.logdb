@@ -1,7 +1,0 @@
-v1
-DSP_BALANCING_IMPLEMENTATION,DSP_BLOCKS,halfband_decim:hb_i3|mult:mult|lpm_mult:Mult0|mult_5o01:auto_generated|mac_out2,
-DSP_BALANCING_IMPLEMENTATION,DSP_BLOCKS,halfband_decim:hb_q3|mult:mult|lpm_mult:Mult0|mult_5o01:auto_generated|mac_out2,
-DSP_BALANCING_IMPLEMENTATION,DSP_BLOCKS,halfband_decim:hb_i|mult:mult|lpm_mult:Mult0|mult_5o01:auto_generated|mac_out2,
-DSP_BALANCING_IMPLEMENTATION,DSP_BLOCKS,halfband_decim:hb_q|mult:mult|lpm_mult:Mult0|mult_5o01:auto_generated|mac_out2,
-DSP_BALANCING_IMPLEMENTATION,DSP_BLOCKS,halfband_decim:hb_i2|mult:mult|lpm_mult:Mult0|mult_5o01:auto_generated|mac_out2,
-DSP_BALANCING_IMPLEMENTATION,DSP_BLOCKS,halfband_decim:hb_q2|mult:mult|lpm_mult:Mult0|mult_5o01:auto_generated|mac_out2,
