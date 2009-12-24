@@ -71,7 +71,8 @@ ECHO F. Program using Mercury_v2.5
 ECHO G. Program using Mercury_v2.6
 ECHO H. Program using Mercury_v2.7
 ECHO I. Program using Mercury_v2.8
-ECHO J. Program using Mercury_v2.9
+ECHO J. Program using Mercury_v2.9a
+ECHO K. Program using Mercury_Apollo_Test ** not for general use!
 
 ECHO Q. Quit
 ECHO.
@@ -91,6 +92,7 @@ IF /I '%Choice%'=='G' GOTO ItemG
 IF /I '%Choice%'=='H' GOTO ItemH
 IF /I '%Choice%'=='I' GOTO ItemI
 IF /I '%Choice%'=='J' GOTO ItemJ
+IF /I '%Choice%'=='K' GOTO ItemK
 
 IF /I '%Choice%'=='Q' GOTO End
 ECHO "%Choice%" is not valid. Please try again.
@@ -125,6 +127,9 @@ GOTO CONTINUE
 GOTO CONTINUE
 :ItemJ
 %DIRECTORY% -c USB-Blaster mercury_v2.9.cdf
+GOTO CONTINUE
+:ItemK
+%DIRECTORY% -c USB-Blaster mercury_apollo_test.cdf
 GOTO CONTINUE
 :CONTINUE
 PAUSE
