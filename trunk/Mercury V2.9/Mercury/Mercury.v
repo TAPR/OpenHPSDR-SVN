@@ -46,7 +46,8 @@
 	  1 Nov 2009 - Replaced Kordic with Cordic, released as V2.8a	
 	 21 Nov 2009 - Added PLL dividers for 122.88MHz to 80kHz and 10MHz AUX_CLK (J8)	
 	             - Added PLL lock LEDs for both PLLs
-	             - release as V2.9 	
+	             - release as V2.9
+	 24 Dec 2009 - Fixed bug in SPI clock generation - release as V2.9a 	
 	 
 */
 	
@@ -315,12 +316,11 @@ clk_lrclk_gen lrgen (.reset(C122_cgen_rst), .CLK_IN(C122_clk), .BCLK(BCLK),  .Sp
 wire      SPI_clk;
 reg       [1:0] spc;
 
-always @(posedge C122_clk)
+always @(posedge C122_cbclk)
 begin
   if (C122_rst)
     spc <= 2'b00;
-  else if (C122_cbclk)
-    spc <= spc + 2'b01;
+  else  spc <= spc + 2'b01;
 end
 
 assign SPI_clk = spc[1];
