@@ -1,5 +1,5 @@
 Assembler report for Mercury
-Sat Nov 21 17:00:33 2009
+Thu Dec 24 20:12:44 2009
 Quartus II Version 9.1 Build 222 10/21/2009 SJ Web Edition
 
 
@@ -39,7 +39,7 @@ applicable agreement for further details.
 +---------------------------------------------------------------+
 ; Assembler Summary                                             ;
 +-----------------------+---------------------------------------+
-; Assembler Status      ; Successful - Sat Nov 21 17:00:33 2009 ;
+; Assembler Status      ; Successful - Thu Dec 24 20:12:44 2009 ;
 ; Revision Name         ; Mercury                               ;
 ; Top-level Entity Name ; Mercury                               ;
 ; Family                ; Cyclone III                           ;
@@ -97,7 +97,7 @@ applicable agreement for further details.
 +----------------+----------------------------------------------------------+
 ; Device         ; EP3C25Q240C8                                             ;
 ; JTAG usercode  ; 0xFFFFFFFF                                               ;
-; Checksum       ; 0x00661770                                               ;
+; Checksum       ; 0x00674646                                               ;
 +----------------+----------------------------------------------------------+
 
 
@@ -108,7 +108,7 @@ applicable agreement for further details.
 +--------------------+------------------------------------------------------+
 ; Device             ; EPCS16                                               ;
 ; JTAG usercode      ; 0x00000000                                           ;
-; Checksum           ; 0x1C5B8CAB                                           ;
+; Checksum           ; 0x1C6843D4                                           ;
 ; Compression Ratio  ; 2                                                    ;
 +--------------------+------------------------------------------------------+
 
@@ -129,7 +129,7 @@ applicable agreement for further details.
 Info: *******************************************************************
 Info: Running Quartus II Assembler
     Info: Version 9.1 Build 222 10/21/2009 SJ Web Edition
-    Info: Processing started: Sat Nov 21 17:00:25 2009
+    Info: Processing started: Thu Dec 24 20:12:35 2009
 Info: Command: quartus_asm --read_settings_files=off --write_settings_files=off Mercury -c Mercury
 Info: Timing-driven compilation is using the Classic Timing Analyzer
 Info: Detected fmax, tsu, tco, and/or tpd requirements -- optimizing circuit to achieve only the specified requirements
@@ -139,8 +139,8 @@ Info: Writing out detailed assembly data for power analysis
 Info: Assembler is generating device programming files
 Info: Quartus II Assembler was successful. 0 errors, 0 warnings
     Info: Peak virtual memory: 223 megabytes
-    Info: Processing ended: Sat Nov 21 17:00:33 2009
-    Info: Elapsed time: 00:00:08
+    Info: Processing ended: Thu Dec 24 20:12:44 2009
+    Info: Elapsed time: 00:00:09
     Info: Total CPU time (on all processors): 00:00:08
 
 

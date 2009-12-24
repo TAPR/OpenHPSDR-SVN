@@ -1,5 +1,5 @@
 Flow report for Mercury
-Sat Nov 21 17:00:52 2009
+Thu Dec 24 20:13:04 2009
 Quartus II Version 9.1 Build 222 10/21/2009 SJ Web Edition
 
 
@@ -38,7 +38,7 @@ applicable agreement for further details.
 +------------------------------------------------------------------------------+
 ; Flow Summary                                                                 ;
 +------------------------------------+-----------------------------------------+
-; Flow Status                        ; Analyzed - Sat Nov 21 17:00:52 2009     ;
+; Flow Status                        ; Analyzed - Thu Dec 24 20:13:04 2009     ;
 ; Quartus II Version                 ; 9.1 Build 222 10/21/2009 SJ Web Edition ;
 ; Revision Name                      ; Mercury                                 ;
 ; Top-level Entity Name              ; Mercury                                 ;
@@ -46,8 +46,8 @@ applicable agreement for further details.
 ; Device                             ; EP3C25Q240C8                            ;
 ; Timing Models                      ; Final                                   ;
 ; Met timing requirements            ; Yes                                     ;
-; Total logic elements               ; 9,666 / 24,624 ( 39 % )                 ;
-;     Total combinational functions  ; 7,777 / 24,624 ( 32 % )                 ;
+; Total logic elements               ; 9,656 / 24,624 ( 39 % )                 ;
+;     Total combinational functions  ; 7,780 / 24,624 ( 32 % )                 ;
 ;     Dedicated logic registers      ; 7,440 / 24,624 ( 30 % )                 ;
 ; Total registers                    ; 7440                                    ;
 ; Total pins                         ; 62 / 149 ( 42 % )                       ;
@@ -63,7 +63,7 @@ applicable agreement for further details.
 +-------------------+---------------------+
 ; Option            ; Setting             ;
 +-------------------+---------------------+
-; Start date & time ; 11/21/2009 16:55:16 ;
+; Start date & time ; 12/24/2009 20:07:10 ;
 ; Main task         ; Compilation         ;
 ; Revision Name     ; Mercury             ;
 +-------------------+---------------------+
@@ -76,7 +76,7 @@ applicable agreement for further details.
 +----------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+--------------------+-------------+------------+
 ; ADV_NETLIST_OPT_SYNTH_WYSIWYG_REMAP    ; On                                                                                                                                                                                                                 ; Off                ; --          ; --         ;
 ; ALLOW_POWER_UP_DONT_CARE               ; Off                                                                                                                                                                                                                ; On                 ; --          ; --         ;
-; COMPILER_SIGNATURE_ID                  ; 123483488765.125879371603732                                                                                                                                                                                       ; --                 ; --          ; --         ;
+; COMPILER_SIGNATURE_ID                  ; 123483488765.126165643002592                                                                                                                                                                                       ; --                 ; --          ; --         ;
 ; ENABLE_DRC_SETTINGS                    ; On                                                                                                                                                                                                                 ; Off                ; --          ; --         ;
 ; ENABLE_SIGNALTAP                       ; Off                                                                                                                                                                                                                ; --                 ; --          ; --         ;
 ; FITTER_EFFORT                          ; Standard Fit                                                                                                                                                                                                       ; Auto Fit           ; --          ; --         ;
@@ -122,12 +122,12 @@ applicable agreement for further details.
 +-------------------------+--------------+-------------------------+---------------------+------------------------------------+
 ; Module Name             ; Elapsed Time ; Average Processors Used ; Peak Virtual Memory ; Total CPU Time (on all processors) ;
 +-------------------------+--------------+-------------------------+---------------------+------------------------------------+
-; Analysis & Synthesis    ; 00:00:34     ; 1.0                     ; 216 MB              ; 00:00:33                           ;
-; Fitter                  ; 00:04:32     ; 1.0                     ; 301 MB              ; 00:04:31                           ;
-; Assembler               ; 00:00:08     ; 1.0                     ; 223 MB              ; 00:00:08                           ;
-; Classic Timing Analyzer ; 00:00:07     ; 1.0                     ; 181 MB              ; 00:00:07                           ;
+; Analysis & Synthesis    ; 00:00:36     ; 1.0                     ; 216 MB              ; 00:00:34                           ;
+; Fitter                  ; 00:04:45     ; 1.0                     ; 302 MB              ; 00:04:39                           ;
+; Assembler               ; 00:00:09     ; 1.0                     ; 223 MB              ; 00:00:08                           ;
+; Classic Timing Analyzer ; 00:00:08     ; 1.0                     ; 181 MB              ; 00:00:08                           ;
 ; Design Assistant        ; 00:00:08     ; 1.0                     ; 180 MB              ; 00:00:08                           ;
-; Total                   ; 00:05:29     ; --                      ; --                  ; 00:05:27                           ;
+; Total                   ; 00:05:46     ; --                      ; --                  ; 00:05:37                           ;
 +-------------------------+--------------+-------------------------+---------------------+------------------------------------+
 
 
