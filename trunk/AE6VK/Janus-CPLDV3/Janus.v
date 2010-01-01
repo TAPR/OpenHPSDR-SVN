@@ -81,8 +81,8 @@ module Janus(
    	output DFS0,
    	output DFS1,
    	output TUNE,
-   	output LED1,
-   	output LED2,
+   	output nLED1,
+   	output nLED2,
    	output EXP4,
    	input  FSYNC,
    	output HPF,
@@ -129,7 +129,7 @@ reg ref_8k;
 reg osc_8k;
 wire cout1;
 wire cout2;
-reg ref_OK; // is low when 10MHz reference signal is present
+reg nref_OK; // is low when 10MHz reference signal is present
 
 //////////////////////////////////////////////////////////////
 //
@@ -156,8 +156,8 @@ always @ (posedge cout2)
 
 
 // apply to PFD
-wire lock;
-pfd Janus_pfd(.ref_in(ref_8k),.osc_in(osc_8k),.pfd_out(pfd_out),.lock(lock));
+wire nlock;
+pfd Janus_pfd(.ref_in(ref_8k),.osc_in(osc_8k),.pfd_out(pfd_out),.lock(nlock));
 
 //
 // check if the 10MHz reference signal is present.
@@ -167,12 +167,12 @@ pfd Janus_pfd(.ref_in(ref_8k),.osc_in(osc_8k),.pfd_out(pfd_out),.lock(lock));
 
 always @ (posedge ref_in or posedge osc_8k)
 begin 
-	if (ref_in)ref_OK <= 1'b0;   // ref_OK goes low if ref present so we can drive an LED
-	else ref_OK <= 1'b1;		 // goes high if no reference 
+	if (ref_in) nref_OK <= 1'b0;   // nref_OK goes low if ref present so we can drive an LED
+	else nref_OK <= 1'b1;		 // goes high if no reference 
 end 
 
 // select the signal to send to the loop LPF depending if the 10MHz reference is present
-assign  TUNE = ref_OK ?  osc_8k : pfd_out; 
+assign  TUNE = nref_OK ?  osc_8k : pfd_out; 
 
 ///////////////////////////////////////////////////////////
 //
@@ -291,8 +291,8 @@ assign nCS = 1'b0;   		// this results in an i2c addr of 0x1a
 
 // Other pins 
 
-assign LED1 = ref_OK;		  	// Green LED on when 10MHz reference signal is present
-assign LED2 = (lock & ref_OK);  // Yellow LED on when loop is locked and we have a reference signal 
+assign nLED1 = nref_OK;		  	// Green LED on when 10MHz reference signal is present
+assign nLED2 = (nlock | nref_OK);  // Yellow LED on when loop is locked and we have a reference signal 
 assign EXP4 = 1'b0;
 
 endmodule 

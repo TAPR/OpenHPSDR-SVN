@@ -61,7 +61,7 @@
  -- Pin directions (input, output or bidir) are based on device operating in user mode.
  ---------------------------------------------------------------------------------
 
-Quartus II Version 9.0 Build 132 02/25/2009 SJ Web Edition
+Quartus II Version 9.1 Build 222 10/21/2009 SJ Web Edition
 CHIP  "Janus"  ASSIGNED TO AN: EPM240T100C5
 
 Pin Name/Usage               : Location  : Dir.   : I/O Standard      : Voltage : I/O Bank  : User Assignment
@@ -151,8 +151,8 @@ CLK_48MHZ                    : 82        : input  : 3.3-V LVTTL       :         
 RESERVED_INPUT               : 83        :        :                   :         : 2         :                
 C2                           : 84        : input  : 3.3-V LVTTL       :         : 2         : Y              
 TUNE                         : 85        : output : 3.3-V LVTTL       :         : 2         : Y              
-LED1                         : 86        : output : 3.3-V LVTTL       :         : 2         : Y              
-LED2                         : 87        : output : 3.3-V LVTTL       :         : 2         : Y              
+nLED1                        : 86        : output : 3.3-V LVTTL       :         : 2         : Y              
+nLED2                        : 87        : output : 3.3-V LVTTL       :         : 2         : Y              
 EXP4                         : 88        : output : 3.3-V LVTTL       :         : 2         : Y              
 QPWM                         : 89        : output : 3.3-V LVTTL       :         : 2         : Y              
 IPWM                         : 90        : output : 3.3-V LVTTL       :         : 2         : Y              

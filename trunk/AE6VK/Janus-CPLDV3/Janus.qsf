@@ -28,7 +28,7 @@ set_global_assignment -name DEVICE EPM240T100C5
 set_global_assignment -name TOP_LEVEL_ENTITY Janus
 set_global_assignment -name ORIGINAL_QUARTUS_VERSION 5.1
 set_global_assignment -name PROJECT_CREATION_TIME_DATE "20:37:01  JUNE 30, 2006"
-set_global_assignment -name LAST_QUARTUS_VERSION 9.0
+set_global_assignment -name LAST_QUARTUS_VERSION 9.1
 set_global_assignment -name DEVICE_FILTER_PACKAGE TQFP
 set_global_assignment -name DEVICE_FILTER_PIN_COUNT 100
 set_global_assignment -name AUTO_RESTART_CONFIGURATION OFF
@@ -76,8 +76,6 @@ set_location_assignment PIN_54 -to C14
 set_location_assignment PIN_52 -to C15
 set_location_assignment PIN_4 -to CLK_12MHZ
 set_location_assignment PIN_85 -to TUNE
-set_location_assignment PIN_86 -to LED1
-set_location_assignment PIN_87 -to LED2
 set_location_assignment PIN_50 -to ref_in
 set_location_assignment PIN_82 -to CLK_48MHZ
 set_location_assignment PIN_78 -to IQOUT
@@ -90,3 +88,5 @@ set_global_assignment -name BDF_FILE pfd.bdf
 set_global_assignment -name VERILOG_FILE Janus.v
 set_global_assignment -name MISC_FILE "C:/HPSDR/trunk/Janus-CPLDV3/Janus.dpf"
 set_global_assignment -name ALLOW_POWER_UP_DONT_CARE OFF
+set_location_assignment PIN_86 -to nLED1
+set_location_assignment PIN_87 -to nLED2
