@@ -183,7 +183,7 @@ assign  TUNE = nref_OK ?  osc_8k : pfd_out;
 // receive I and Q data from Atlas bus in I2S format
 
 reg [3:0] bit_count;     // how many bits clocked 
-reg [2:0]IQ_state;
+reg [2:0] IQ_state;
 reg [15:0] I_data;
 reg [15:0] Q_data;
 wire CLRCLK;
@@ -194,10 +194,10 @@ always @(posedge CBCLK)
 begin
 case(IQ_state)
 0:	begin
-	if (!CLRCLK)IQ_state <= 0;					// loop until CLRLCK is high
+	if (!CLRCLK) IQ_state <= 0;					// loop until CLRLCK is high
 	else IQ_state <= 1;
 	end
-1:	if (CLRCLK)IQ_state <= 1;					// loop until CLRCLK is low
+1:	if (CLRCLK) IQ_state <= 1;					// loop until CLRCLK is low
 	else IQ_state <= 2;
 2:	begin
 	I_data[bit_count] <= IQOUT;					// get 16 bits of I data 
