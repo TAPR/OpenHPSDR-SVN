@@ -66,7 +66,7 @@ init_hpsdr (void)
   OEA = bmPORT_A_OUTPUTS;	// Port A direction register
 
   IOC = bmPORT_C_INITIAL;	// Port C initial state
-  OEC = bmPORT_C_OUTPUTS;	// Port C direction register
+  OEC = bmPORT_C_INITIAL;	// Port C direction register (only LEDs until loading FPGA)
 
   IOE = bmPORT_E_INITIAL;	// Port E initial state
   OEE = bmPORT_E_OUTPUTS;	// Port E direction register
