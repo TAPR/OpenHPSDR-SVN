@@ -1,0 +1,7 @@
+#Sat Dec 23 16:51:21 CST 2006
+cdt.managedbuild.config.sdcc.exe.release.789109409/internalBuilder/enabled=false
+cdt.managedbuild.config.sdcc.exe.release.789109409/internalBuilder/ignoreErr=true
+eclipse.preferences.version=1
+environment/buildEnvironmentLibrary/cdt.managedbuild.config.sdcc.exe.release.789109409=<?xml version\="1.0" encoding\="UTF-8"?>\r\n<environment>\r\n<variable name\="LIBRARY_PATH" operation\="remove"/>\r\n</environment>\r\n
+environment/project=<?xml version\="1.0" encoding\="UTF-8"?>\r\n<environment/>\r\n
+environment/project/cdt.managedbuild.config.sdcc.exe.release.789109409=<?xml version\="1.0" encoding\="UTF-8"?>\r\n<environment/>\r\n
