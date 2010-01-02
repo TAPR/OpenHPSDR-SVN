@@ -40,6 +40,8 @@ fpga_load_begin (void)
 {
     unsigned char counter = 0;
 
+    OEC = bmPORT_C_OUTPUTS;			// enable FPGA load lines
+
 	HPSDR_ALTERA_CONFIG &= ~bmALTERA_BITS;		// clear all bits (NCONFIG low)
   	udelay (40);					// wait 40 us
   	HPSDR_ALTERA_CONFIG |= bmALTERA_NCONFIG;	// set NCONFIG high
@@ -158,6 +160,8 @@ unsigned char
 fpga_load_end (void)
 {
   unsigned char status = HPSDR_ALTERA_CONFIG;
+
+  OEC = bmPORT_C_INITIAL;		// disable FPGA load lines
 
   if ((status & bmALTERA_NSTATUS) == 0)		// failed to program
     return 0;
