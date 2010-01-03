@@ -90,7 +90,8 @@ distcleancheck_listfiles = find . -type f -print
 AWK = mawk
 CC = gcc
 CCDEPMODE = depmode=gcc3
-CFLAGS = -g -O2
+#CFLAGS = -g -O2
+CFLAGS=-g -O3 -msse -msse3 -ffast-math -march=core2 -Wall
 CPP = gcc -E
 CPPFLAGS = 
 CYGPATH_W = echo

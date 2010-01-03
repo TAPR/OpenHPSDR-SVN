@@ -1,9 +1,9 @@
 #
 # ghpsdr Makefile (Linux)
 #
-CC=gcc
+CC=gcc 
 LINK=gcc
-OPTIONS=-g
+OPTIONS=-g -O3 -msse -msse3 -ffast-math -march=core2 -Wall
 INCLUDES=-I. -I/usr/include/gtk-2.0 -I/usr/lib/gtk-2.0/include\
          -I/usr/include/atk-1.0 -I/usr/include/cairo\
          -I/usr/include/pango-1.0 -I/usr/include/glib-2.0\
