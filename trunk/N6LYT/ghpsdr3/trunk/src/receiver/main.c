@@ -212,6 +212,7 @@ void mainSaveState() {
 void quit() {
 
     ozyDisconnect();
+    ozyClose();
 
     // save state
     mainSaveState();
