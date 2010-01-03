@@ -1,0 +1,69 @@
+Info: *******************************************************************
+Info: Running Quartus II Analysis & Synthesis
+    Info: Version 6.1 Build 201 11/27/2006 SJ Web Edition
+    Info: Processing started: Fri Apr 06 20:55:08 2007
+Info: Command: quartus_map --read_settings_files=on --write_settings_files=off Janus -c Janus
+Info: Found 1 design units, including 1 entities, in source file counter2.v
+    Info: Found entity 1: counter2
+Info: Found 1 design units, including 1 entities, in source file counter1.v
+    Info: Found entity 1: counter1
+Info: Found 1 design units, including 1 entities, in source file pfd.bdf
+    Info: Found entity 1: pfd
+Info: Found 1 design units, including 1 entities, in source file Janus.v
+    Info: Found entity 1: Janus
+Info: Elaborating entity "Janus" for the top level hierarchy
+Info: Elaborating entity "counter1" for hierarchy "counter1:counter1"
+Info: Found 1 design units, including 1 entities, in source file ../../../altera/61/quartus/libraries/megafunctions/lpm_counter.tdf
+    Info: Found entity 1: lpm_counter
+Info: Elaborating entity "lpm_counter" for hierarchy "counter1:counter1|lpm_counter:lpm_counter_component"
+Info: Elaborated megafunction instantiation "counter1:counter1|lpm_counter:lpm_counter_component"
+Info: Found 1 design units, including 1 entities, in source file db/cntr_45j.tdf
+    Info: Found entity 1: cntr_45j
+Info: Elaborating entity "cntr_45j" for hierarchy "counter1:counter1|lpm_counter:lpm_counter_component|cntr_45j:auto_generated"
+Info: Elaborating entity "counter2" for hierarchy "counter2:counter2"
+Info: Elaborating entity "lpm_counter" for hierarchy "counter2:counter2|lpm_counter:lpm_counter_component"
+Info: Elaborated megafunction instantiation "counter2:counter2|lpm_counter:lpm_counter_component"
+Info: Found 1 design units, including 1 entities, in source file db/cntr_c5j.tdf
+    Info: Found entity 1: cntr_c5j
+Info: Elaborating entity "cntr_c5j" for hierarchy "counter2:counter2|lpm_counter:lpm_counter_component|cntr_c5j:auto_generated"
+Info: Elaborating entity "pfd" for hierarchy "pfd:Janus_pfd"
+Info: State machine "|Janus|IQ_state" contains 5 states
+Info: Selected Auto state machine encoding method for state machine "|Janus|IQ_state"
+Info: Encoding result for state machine "|Janus|IQ_state"
+    Info: Completed encoding using 5 state bits
+        Info: Encoded state bit "IQ_state.001"
+        Info: Encoded state bit "IQ_state.010"
+        Info: Encoded state bit "IQ_state.011"
+        Info: Encoded state bit "IQ_state.000"
+        Info: Encoded state bit "IQ_state.100"
+    Info: State "|Janus|IQ_state.000" uses code string "00000"
+    Info: State "|Janus|IQ_state.011" uses code string "00110"
+    Info: State "|Janus|IQ_state.010" uses code string "01010"
+    Info: State "|Janus|IQ_state.001" uses code string "10010"
+    Info: State "|Janus|IQ_state.100" uses code string "00011"
+Warning: Output pins are stuck at VCC or GND
+    Warning: Pin "CMODE" stuck at GND
+    Warning: Pin "EXP4" stuck at GND
+    Warning: Pin "HPF" stuck at VCC
+    Warning: Pin "nCS" stuck at GND
+    Warning: Pin "SMODE1" stuck at GND
+    Warning: Pin "SMODE2" stuck at VCC
+    Warning: Pin "ZCAL" stuck at VCC
+Info: Registers with preset signals will power-up high
+Info: 2 registers lost all their fanouts during netlist optimizations. The first 2 are displayed below.
+    Info: Register "IQ_state~7" lost all its fanouts during netlist optimizations.
+    Info: Register "IQ_state~8" lost all its fanouts during netlist optimizations.
+Warning: Design contains 4 input pin(s) that do not drive logic
+    Warning: No output dependent on input pin "CAL"
+    Warning: No output dependent on input pin "FSYNC"
+    Warning: No output dependent on input pin "SSCK"
+    Warning: No output dependent on input pin "MOSI"
+Info: Implemented 243 device resources after synthesis - the final resource count might be different
+    Info: Implemented 20 input pins
+    Info: Implemented 26 output pins
+    Info: Implemented 1 bidirectional pins
+    Info: Implemented 196 logic cells
+Info: Quartus II Analysis & Synthesis was successful. 0 errors, 13 warnings
+    Info: Allocated 126 megabytes of memory during processing
+    Info: Processing ended: Fri Apr 06 20:55:11 2007
+    Info: Elapsed time: 00:00:03
