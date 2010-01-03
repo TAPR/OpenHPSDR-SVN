@@ -1,0 +1,186 @@
+# Copyright (C) 1991-2005 Altera Corporation
+# Your use of Altera Corporation's design tools, logic functions 
+# and other software and tools, and its AMPP partner logic 
+# functions, and any output files any of the foregoing 
+# (including device programming or simulation files), and any 
+# associated documentation or information are expressly subject 
+# to the terms and conditions of the Altera Program License 
+# Subscription Agreement, Altera MegaCore Function License 
+# Agreement, or other applicable license agreement, including, 
+# without limitation, that your use is for the sole purpose of 
+# programming logic devices manufactured by Altera and sold by 
+# Altera or its authorized distributors.  Please refer to the 
+# applicable agreement for further details.
+
+
+# The default values for assignments are stored in the file
+#		Ozy_Janus_assignment_defaults.qdf
+# If this file doesn't exist, and for assignments not listed, see file
+#		assignment_defaults.qdf
+
+# Altera recommends that you do not modify this file. This
+# file is updated automatically by the Quartus II software
+# and any changes you make may be lost or overwritten.
+
+
+set_global_assignment -name FAMILY "Cyclone II"
+set_global_assignment -name DEVICE EP2C8Q208C8
+set_global_assignment -name TOP_LEVEL_ENTITY Ozy_Janus
+set_global_assignment -name ORIGINAL_QUARTUS_VERSION 5.1
+set_global_assignment -name PROJECT_CREATION_TIME_DATE "10:29:17  JULY 22, 2006"
+set_global_assignment -name LAST_QUARTUS_VERSION 8.1
+set_global_assignment -name ADD_DEFAULT_PINS_TO_SIMULATION_OUTPUT_WAVEFORMS OFF
+set_global_assignment -name ENABLE_INIT_DONE_OUTPUT ON
+set_global_assignment -name GENERATE_RBF_FILE ON
+set_global_assignment -name RESERVE_ALL_UNUSED_PINS "AS INPUT TRI-STATED"
+set_global_assignment -name STRATIX_DEVICE_IO_STANDARD "3.3-V LVTTL"
+set_global_assignment -name VECTOR_INPUT_SOURCE "C:\\HPDSDR\\trunk\\VK6APH\\Ozy_Janus\\Ozy_Janus.vwf"
+set_instance_assignment -name CLOCK_SETTINGS "BCLK to AK5394A" -to BCLK
+set_global_assignment -name FMAX_REQUIREMENT "24 MHz" -section_id "FX2 Clock"
+set_instance_assignment -name CLOCK_SETTINGS "CBCLK to TLV320" -to CBCLK
+set_global_assignment -name OPTIMIZE_HOLD_TIMING "ALL PATHS"
+set_global_assignment -name FITTER_EFFORT "STANDARD FIT"
+set_location_assignment PIN_160 -to BCLK
+set_location_assignment PIN_164 -to DOUT
+set_location_assignment PIN_161 -to LRCLK
+set_location_assignment PIN_162 -to CBCLK
+set_location_assignment PIN_165 -to CDOUT
+set_location_assignment PIN_168 -to CDIN
+set_location_assignment PIN_163 -to CLRCLK
+set_location_assignment PIN_56 -to FX2_FD[0]
+set_location_assignment PIN_57 -to FX2_FD[1]
+set_location_assignment PIN_58 -to FX2_FD[2]
+set_location_assignment PIN_59 -to FX2_FD[3]
+set_location_assignment PIN_60 -to FX2_FD[4]
+set_location_assignment PIN_61 -to FX2_FD[5]
+set_location_assignment PIN_63 -to FX2_FD[6]
+set_location_assignment PIN_64 -to FX2_FD[7]
+set_location_assignment PIN_208 -to FX2_FD[8]
+set_location_assignment PIN_207 -to FX2_FD[9]
+set_location_assignment PIN_206 -to FX2_FD[10]
+set_location_assignment PIN_205 -to FX2_FD[11]
+set_location_assignment PIN_203 -to FX2_FD[12]
+set_location_assignment PIN_201 -to FX2_FD[13]
+set_location_assignment PIN_200 -to FX2_FD[14]
+set_location_assignment PIN_199 -to FX2_FD[15]
+set_location_assignment PIN_24 -to IFCLK
+set_location_assignment PIN_198 -to FLAGA
+set_location_assignment PIN_197 -to FLAGB
+set_location_assignment PIN_5 -to FLAGC
+set_location_assignment PIN_13 -to SLOE
+set_location_assignment PIN_11 -to FIFO_ADR[0]
+set_location_assignment PIN_10 -to FIFO_ADR[1]
+set_location_assignment PIN_8 -to PKEND
+set_location_assignment PIN_30 -to SLRD
+set_location_assignment PIN_31 -to SLWR
+set_global_assignment -name PHYSICAL_SYNTHESIS_COMBO_LOGIC ON
+set_global_assignment -name PHYSICAL_SYNTHESIS_REGISTER_DUPLICATION ON
+set_global_assignment -name PHYSICAL_SYNTHESIS_ASYNCHRONOUS_SIGNAL_PIPELINING ON
+set_global_assignment -name PHYSICAL_SYNTHESIS_REGISTER_RETIMING ON
+set_global_assignment -name FMAX_REQUIREMENT "48 MHz" -section_id "48MHz clock"
+set_instance_assignment -name CLOCK_SETTINGS "48MHz clock" -to IFCLK
+set_location_assignment PIN_149 -to AK_reset
+set_location_assignment PIN_169 -to DFS0
+set_location_assignment PIN_170 -to DFS1
+set_location_assignment PIN_171 -to PTT_in
+set_location_assignment PIN_152 -to CLK_12MHZ
+set_global_assignment -name RESERVE_ASDO_AFTER_CONFIGURATION "AS INPUT TRI-STATED"
+set_location_assignment PIN_4 -to DEBUG_LED0
+set_location_assignment PIN_33 -to DEBUG_LED1
+set_location_assignment PIN_34 -to DEBUG_LED2
+set_location_assignment PIN_108 -to DEBUG_LED3
+set_global_assignment -name CYCLONEII_RESERVE_NCEO_AFTER_CONFIGURATION "USE AS REGULAR IO"
+set_location_assignment PIN_150 -to CLK_48MHZ
+set_location_assignment PIN_151 -to LROUT
+set_global_assignment -name FMAX_REQUIREMENT "48 MHz"
+set_global_assignment -name FMAX_REQUIREMENT "12.288 MHz" -section_id CLK_12MHZ
+set_global_assignment -name BASED_ON_CLOCK_SETTINGS CLK_12MHZ -section_id "BCLK to AK5394A"
+set_global_assignment -name BASED_ON_CLOCK_SETTINGS CLK_12MHZ -section_id "LRCLK to AD5394A"
+set_global_assignment -name MULTIPLY_BASE_CLOCK_PERIOD_BY 64 -section_id "LRCLK to AD5394A"
+set_instance_assignment -name CLOCK_SETTINGS "LRCLK to AD5394A" -to LRCLK
+set_global_assignment -name BASED_ON_CLOCK_SETTINGS CLK_12MHZ -section_id "CBCLK to TLV320"
+set_global_assignment -name MULTIPLY_BASE_CLOCK_PERIOD_BY 4 -section_id "CBCLK to TLV320"
+set_global_assignment -name BASED_ON_CLOCK_SETTINGS CLK_12MHZ -section_id "CLRCLK to TLV320"
+set_global_assignment -name MULTIPLY_BASE_CLOCK_PERIOD_BY 256 -section_id "CLRCLK to TLV320"
+set_instance_assignment -name CLOCK_SETTINGS "CLRCLK to TLV320" -to CLRCLK
+set_instance_assignment -name CLOCK_SETTINGS CLK_12MHZ -to CLK_12MHZ
+set_location_assignment PIN_180 -to CC
+set_location_assignment PIN_23 -to FX2_CLK
+set_location_assignment PIN_67 -to GPIO[0]
+set_location_assignment PIN_68 -to GPIO[1]
+set_location_assignment PIN_69 -to GPIO[2]
+set_location_assignment PIN_70 -to GPIO[3]
+set_location_assignment PIN_72 -to GPIO[4]
+set_location_assignment PIN_74 -to GPIO[5]
+set_location_assignment PIN_75 -to GPIO[6]
+set_location_assignment PIN_76 -to GPIO[7]
+set_location_assignment PIN_77 -to GPIO[8]
+set_location_assignment PIN_80 -to GPIO[9]
+set_location_assignment PIN_81 -to GPIO[10]
+set_location_assignment PIN_82 -to GPIO[11]
+set_location_assignment PIN_84 -to GPIO[12]
+set_location_assignment PIN_86 -to GPIO[13]
+set_location_assignment PIN_87 -to GPIO[14]
+set_location_assignment PIN_88 -to GPIO[15]
+set_location_assignment PIN_89 -to GPIO[16]
+set_location_assignment PIN_90 -to GPIO[17]
+set_location_assignment PIN_92 -to GPIO[18]
+set_location_assignment PIN_94 -to GPIO[19]
+set_location_assignment PIN_95 -to GPIO[20]
+set_location_assignment PIN_96 -to GPIO[21]
+set_location_assignment PIN_97 -to GPIO[22]
+set_location_assignment PIN_99 -to GPIO[23]
+set_location_assignment PIN_45 -to SPI_CS
+set_location_assignment PIN_15 -to SPI_SCK
+set_location_assignment PIN_14 -to SPI_SI
+set_location_assignment PIN_12 -to SPI_SO
+set_location_assignment PIN_41 -to GPIO_nIOE
+set_location_assignment PIN_144 -to PCLK_12MHZ
+set_global_assignment -name FMAX_REQUIREMENT "12.5 MHz" -section_id PCLK_12MHZ
+set_instance_assignment -name CLOCK_SETTINGS PCLK_12MHZ -to PCLK_12MHZ
+set_global_assignment -name ALLOW_POWER_UP_DONT_CARE OFF
+set_global_assignment -name MUX_RESTRUCTURE OFF
+set_global_assignment -name OPTIMIZE_FAST_CORNER_TIMING ON
+set_location_assignment PIN_137 -to CDOUT_P
+set_global_assignment -name MESSAGE_SUPPRESSION_RULE_FILE Ozy_Janus.srf
+set_instance_assignment -name PARTITION_HIERARCHY root_partition -to | -section_id Top
+set_global_assignment -name PARTITION_NETLIST_TYPE SOURCE -section_id Top
+set_location_assignment PIN_143 -to MCLK_12MHZ
+set_location_assignment PIN_138 -to MDOUT
+set_global_assignment -name LL_ROOT_REGION ON -section_id "Root Region"
+set_global_assignment -name LL_MEMBER_STATE LOCKED -section_id "Root Region"
+set_location_assignment PIN_175 -to CLK_MCLK
+set_global_assignment -name USE_CONFIGURATION_DEVICE ON
+set_global_assignment -name RESERVE_ALL_UNUSED_PINS_NO_OUTPUT_GND "AS INPUT TRI-STATED"
+set_location_assignment PIN_35 -to FX2_PE0
+set_location_assignment PIN_37 -to FX2_PE1
+set_location_assignment PIN_39 -to FX2_PE2
+set_location_assignment PIN_40 -to FX2_PE3
+set_location_assignment PIN_106 -to SDOBACK
+set_location_assignment PIN_110 -to TCK
+set_location_assignment PIN_105 -to TDO
+set_location_assignment PIN_112 -to TMS
+set_global_assignment -name PARTITION_COLOR 14622752 -section_id Top
+set_global_assignment -name MISC_FILE "C:/HPSDR/trunk/OzyV2-JanusV2/Ozy_Janus.dpf"
+set_global_assignment -name MISC_FILE "C:/HPSDR/trunk/Ozy Test/Ozy_Janus.dpf"
+set_location_assignment PIN_135 -to spectrum_in
+set_location_assignment PIN_176 -to ADC_OVERLOAD
+set_location_assignment PIN_179 -to serno
+set_global_assignment -name VERILOG_FILE division.v
+set_global_assignment -name VERILOG_FILE SPI.v
+set_global_assignment -name VERILOG_FILE LPF_select.v
+set_global_assignment -name VERILOG_FILE RegisterX.v
+set_global_assignment -name VERILOG_FILE SPI_REGS.v
+set_global_assignment -name VERILOG_FILE gpio_control.v
+set_global_assignment -name VERILOG_FILE Tx_fifo.v
+set_global_assignment -name VECTOR_WAVEFORM_FILE Duplex.vwf
+set_global_assignment -name VERILOG_FILE clocks.v
+set_global_assignment -name VERILOG_FILE debounce.v
+set_global_assignment -name VERILOG_FILE DigAudioOut48k16bI2S.v
+set_global_assignment -name VERILOG_FILE Ozy_Janus.v
+set_global_assignment -name VERILOG_FILE Rx_fifo.v
+set_global_assignment -name VERILOG_FILE HPF_select.v
+set_global_assignment -name VERILOG_FILE clock_det.v
+set_global_assignment -name VERILOG_FILE flash.v
+set_location_assignment PIN_181 -to full
+set_global_assignment -name STATE_MACHINE_PROCESSING "USER-ENCODED"
