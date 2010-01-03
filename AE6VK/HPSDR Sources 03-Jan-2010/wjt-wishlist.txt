@@ -1,0 +1,52 @@
+HPSDR PowerSDR wishlist items
+
+Transverter output is hosed
+
+Need to hook Mic boost UI to I2c stuff
+
+Check for proper FX2 version on all Power On's (zl3ix)
+
+Set all shorrtcuts to null button on UI (zl3ix)
+
+Get rid of parallel port pings with HPSDR (outportb PortTalk error messages)
+
+Ozy conterol pins -- band vs. ranges
+
+CW Keyer timing are off by approx 10% (zl3ix)
+
+PennyCtrl pins need to be able to 'round off' (Kjell - LA2NI) 
+
+No CW tone when not using break in (email - ww2r?)  
+
+Keystroke for PTT -- see below 
+From: Ronald Cox <w9kfb1@mac.com>
+To: Bill Tracey <bill@ewjt.com>
+Subject: PTT Shortcut keyboard sequence request
+Date: Sun, 23 Aug 2009 12:01:40 -0400
+Cc: HPSDR list <hpsdr@lists.openhpsdr.org>
+X-Mailer: Apple Mail (2.936)
+
+
+Bill,
+Thank you for the latest Dit Dash and PTT change. It works great. I am
+using a $9 USB mike from Logitech and VAC, and get excellent audio on
+PowerSDR. What I need now is a shortcut key sequence for MOX. I have a
+Gyration mouse with extra buttons that I would like to program to
+initiate the PTT. Others also have the powermate Griffin knob that
+could also be programmed to the same keyboard sequence. Is there
+anyway you could add this shortcut to the Keyboard Tab in PowerSDR
+setup?
+
+
+Ron Cox W9KFB
+Indianapolis
+
+
+
+
+Done
+Externalize max VFO setting - Mercury EU post on list
+
+
+
+
