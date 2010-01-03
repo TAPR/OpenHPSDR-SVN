@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?><?xml-stylesheet type='text/xsl' href='_UpgradeReport_Files/UpgradeReport.xslt'?><UpgradeLog>
+<Properties><Property Name="Solution" Value="program_OZYEEPROM">
+</Property><Property Name="Solution File" Value="C:\Users\CTDay\Documents\HPSDR\OZY_V1\OZY_USB_UTILSV2.0\src\program_OZYEEPROM\program_OZYEEPROM.sln">
+</Property><Property Name="Date" Value="Sunday, December 20, 2009">
+</Property><Property Name="Time" Value="13:27 PM">
+</Property></Properties><Event ErrorLevel="0" Project="program_OZYEEPROM" Source="program_OZYEEPROM\program_OZYEEPROM.csproj" Description="Project converted successfully">
+</Event><Event ErrorLevel="3" Project="program_OZYEEPROM" Source="program_OZYEEPROM\program_OZYEEPROM.csproj" Description="Converted">
+</Event><Event ErrorLevel="0" Project="" Source="program_OZYEEPROM.sln" Description="Solution converted successfully">
+</Event><Event ErrorLevel="3" Project="" Source="program_OZYEEPROM.sln" Description="Converted">
+</Event><Event ErrorLevel="0" Project="program_OZYEEPROM" Source="program_OZYEEPROM\program_OZYEEPROM.csproj" Description="Scan complete: Upgrade not required for project files.">
+</Event></UpgradeLog>
