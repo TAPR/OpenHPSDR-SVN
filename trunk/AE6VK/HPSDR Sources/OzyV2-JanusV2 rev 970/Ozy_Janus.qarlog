@@ -1,0 +1,201 @@
+Quartus II Archive log --	C:/HPDSDR/trunk/VK6APH/Ozy_Janus/Ozy_Janus.qarlog
+
+Archive:	C:/HPDSDR/trunk/VK6APH/Ozy_Janus/Ozy_Janus.qar
+Date:		Tue Sep 12 22:02:42 2006
+Quartus II		6.0 Build 202 06/20/2006 SP 1 SJ Web Edition
+
+	=========== Files Selected: ===========
+C:/HPDSDR/trunk/VK6APH/Ozy_Janus/10 Aug before new FX2 code  Ozy_Janus.v
+C:/HPDSDR/trunk/VK6APH/Ozy_Janus/11 Aug Major FX2 changes not working  Ozy_Janus.v
+C:/HPDSDR/trunk/VK6APH/Ozy_Janus/11 Aug before FIFO changes Ozy_Janus.v
+C:/HPDSDR/trunk/VK6APH/Ozy_Janus/11 aug sends 1024 then hangs Ozy_Janus.v
+C:/HPDSDR/trunk/VK6APH/Ozy_Janus/12 Aug WORKS  Ozy_Janus.v
+C:/HPDSDR/trunk/VK6APH/Ozy_Janus/12 Aug almost AK data wrong  Ozy_Janus.v
+C:/HPDSDR/trunk/VK6APH/Ozy_Janus/13 Aug Working before FX2 changes Ozy_Janus.v
+C:/HPDSDR/trunk/VK6APH/Ozy_Janus/13 Aug first try at FX2 changes Ozy_Janus.v
+C:/HPDSDR/trunk/VK6APH/Ozy_Janus/14 Aug before PTT Ozy_Janus.v
+C:/HPDSDR/trunk/VK6APH/Ozy_Janus/15 Aug PTT and CW working Ozy_Janus.v
+C:/HPDSDR/trunk/VK6APH/Ozy_Janus/19 Aug  Ozy_Janus.v
+C:/HPDSDR/trunk/VK6APH/Ozy_Janus/28 Aug working but I-Q samples wrong Ozy_Janus.v
+C:/HPDSDR/trunk/VK6APH/Ozy_Janus/3 Aug Ozy_Janus.v
+C:/HPDSDR/trunk/VK6APH/Ozy_Janus/31 July Ozy_Janus.v
+C:/HPDSDR/trunk/VK6APH/Ozy_Janus/4 Aug Ozy_Janus.v
+C:/HPDSDR/trunk/VK6APH/Ozy_Janus/7 Aug Ozy_Janus.v
+C:/HPDSDR/trunk/VK6APH/Ozy_Janus/7 Aug before state changes  Ozy_Janus.v
+C:/HPDSDR/trunk/VK6APH/Ozy_Janus/DigAudioOut48k16bI2S.v
+C:/HPDSDR/trunk/VK6APH/Ozy_Janus/OZYV1FW.hex
+C:/HPDSDR/trunk/VK6APH/Ozy_Janus/OZYV1FW08042006-1.hex
+C:/HPDSDR/trunk/VK6APH/Ozy_Janus/OZYV1FW08082006-1.hex
+C:/HPDSDR/trunk/VK6APH/Ozy_Janus/Org Tx_fifo.v
+C:/HPDSDR/trunk/VK6APH/Ozy_Janus/Ozy_Janus.asm.rpt
+C:/HPDSDR/trunk/VK6APH/Ozy_Janus/Ozy_Janus.done
+C:/HPDSDR/trunk/VK6APH/Ozy_Janus/Ozy_Janus.dpf
+C:/HPDSDR/trunk/VK6APH/Ozy_Janus/Ozy_Janus.fit.eqn
+C:/HPDSDR/trunk/VK6APH/Ozy_Janus/Ozy_Janus.fit.rpt
+C:/HPDSDR/trunk/VK6APH/Ozy_Janus/Ozy_Janus.fit.summary
+C:/HPDSDR/trunk/VK6APH/Ozy_Janus/Ozy_Janus.flow.rpt
+C:/HPDSDR/trunk/VK6APH/Ozy_Janus/Ozy_Janus.map.eqn
+C:/HPDSDR/trunk/VK6APH/Ozy_Janus/Ozy_Janus.map.rpt
+C:/HPDSDR/trunk/VK6APH/Ozy_Janus/Ozy_Janus.map.smsg
+C:/HPDSDR/trunk/VK6APH/Ozy_Janus/Ozy_Janus.map.summary
+C:/HPDSDR/trunk/VK6APH/Ozy_Janus/Ozy_Janus.pin
+C:/HPDSDR/trunk/VK6APH/Ozy_Janus/Ozy_Janus.pof
+C:/HPDSDR/trunk/VK6APH/Ozy_Janus/Ozy_Janus.qarlog
+C:/HPDSDR/trunk/VK6APH/Ozy_Janus/Ozy_Janus.qsf
+C:/HPDSDR/trunk/VK6APH/Ozy_Janus/Ozy_Janus.qws
+C:/HPDSDR/trunk/VK6APH/Ozy_Janus/Ozy_Janus.rbf
+C:/HPDSDR/trunk/VK6APH/Ozy_Janus/Ozy_Janus.sim.rpt
+C:/HPDSDR/trunk/VK6APH/Ozy_Janus/Ozy_Janus.sof
+C:/HPDSDR/trunk/VK6APH/Ozy_Janus/Ozy_Janus.tan.rpt
+C:/HPDSDR/trunk/VK6APH/Ozy_Janus/Ozy_Janus.tan.summary
+C:/HPDSDR/trunk/VK6APH/Ozy_Janus/Ozy_Janus.v
+C:/HPDSDR/trunk/VK6APH/Ozy_Janus/Ozy_Janus.vwf
+C:/HPDSDR/trunk/VK6APH/Ozy_Janus/Rx_fifo.bsf
+C:/HPDSDR/trunk/VK6APH/Ozy_Janus/Rx_fifo.v
+C:/HPDSDR/trunk/VK6APH/Ozy_Janus/Tx_fifo.bsf
+C:/HPDSDR/trunk/VK6APH/Ozy_Janus/Tx_fifo.v
+C:/HPDSDR/trunk/VK6APH/Ozy_Janus/clocks.v
+C:/HPDSDR/trunk/VK6APH/Ozy_Janus/db/Ozy_Janus.cbx.xml
+C:/HPDSDR/trunk/VK6APH/Ozy_Janus/db/Ozy_Janus.qpf
+C:/HPDSDR/trunk/VK6APH/Ozy_Janus/db/Ozy_Janus.sim.vwf
+C:/HPDSDR/trunk/VK6APH/Ozy_Janus/db/a_gray2bin_kdb.tdf
+C:/HPDSDR/trunk/VK6APH/Ozy_Janus/db/a_gray2bin_ldb.tdf
+C:/HPDSDR/trunk/VK6APH/Ozy_Janus/db/a_gray2bin_mdb.tdf
+C:/HPDSDR/trunk/VK6APH/Ozy_Janus/db/a_gray2bin_ndb.tdf
+C:/HPDSDR/trunk/VK6APH/Ozy_Janus/db/a_graycounter_hk6.tdf
+C:/HPDSDR/trunk/VK6APH/Ozy_Janus/db/a_graycounter_ik6.tdf
+C:/HPDSDR/trunk/VK6APH/Ozy_Janus/db/a_graycounter_jk6.tdf
+C:/HPDSDR/trunk/VK6APH/Ozy_Janus/db/a_graycounter_kk6.tdf
+C:/HPDSDR/trunk/VK6APH/Ozy_Janus/db/a_graycounter_lk6.tdf
+C:/HPDSDR/trunk/VK6APH/Ozy_Janus/db/a_graycounter_mk6.tdf
+C:/HPDSDR/trunk/VK6APH/Ozy_Janus/db/a_graycounter_o96.tdf
+C:/HPDSDR/trunk/VK6APH/Ozy_Janus/db/a_graycounter_p96.tdf
+C:/HPDSDR/trunk/VK6APH/Ozy_Janus/db/a_graycounter_q96.tdf
+C:/HPDSDR/trunk/VK6APH/Ozy_Janus/db/a_graycounter_r96.tdf
+C:/HPDSDR/trunk/VK6APH/Ozy_Janus/db/add_sub_a7c.tdf
+C:/HPDSDR/trunk/VK6APH/Ozy_Janus/db/add_sub_b7c.tdf
+C:/HPDSDR/trunk/VK6APH/Ozy_Janus/db/add_sub_c7c.tdf
+C:/HPDSDR/trunk/VK6APH/Ozy_Janus/db/alt_synch_pipe_008.tdf
+C:/HPDSDR/trunk/VK6APH/Ozy_Janus/db/alt_synch_pipe_108.tdf
+C:/HPDSDR/trunk/VK6APH/Ozy_Janus/db/alt_synch_pipe_208.tdf
+C:/HPDSDR/trunk/VK6APH/Ozy_Janus/db/alt_synch_pipe_297.tdf
+C:/HPDSDR/trunk/VK6APH/Ozy_Janus/db/alt_synch_pipe_308.tdf
+C:/HPDSDR/trunk/VK6APH/Ozy_Janus/db/alt_synch_pipe_397.tdf
+C:/HPDSDR/trunk/VK6APH/Ozy_Janus/db/alt_synch_pipe_408.tdf
+C:/HPDSDR/trunk/VK6APH/Ozy_Janus/db/alt_synch_pipe_497.tdf
+C:/HPDSDR/trunk/VK6APH/Ozy_Janus/db/alt_synch_pipe_508.tdf
+C:/HPDSDR/trunk/VK6APH/Ozy_Janus/db/alt_synch_pipe_597.tdf
+C:/HPDSDR/trunk/VK6APH/Ozy_Janus/db/alt_synch_pipe_697.tdf
+C:/HPDSDR/trunk/VK6APH/Ozy_Janus/db/alt_synch_pipe_797.tdf
+C:/HPDSDR/trunk/VK6APH/Ozy_Janus/db/alt_synch_pipe_897.tdf
+C:/HPDSDR/trunk/VK6APH/Ozy_Janus/db/alt_synch_pipe_997.tdf
+C:/HPDSDR/trunk/VK6APH/Ozy_Janus/db/alt_synch_pipe_a97.tdf
+C:/HPDSDR/trunk/VK6APH/Ozy_Janus/db/alt_synch_pipe_b97.tdf
+C:/HPDSDR/trunk/VK6APH/Ozy_Janus/db/alt_synch_pipe_c97.tdf
+C:/HPDSDR/trunk/VK6APH/Ozy_Janus/db/alt_synch_pipe_gv7.tdf
+C:/HPDSDR/trunk/VK6APH/Ozy_Janus/db/alt_synch_pipe_hv7.tdf
+C:/HPDSDR/trunk/VK6APH/Ozy_Janus/db/alt_synch_pipe_iv7.tdf
+C:/HPDSDR/trunk/VK6APH/Ozy_Janus/db/alt_synch_pipe_jv7.tdf
+C:/HPDSDR/trunk/VK6APH/Ozy_Janus/db/alt_synch_pipe_kv7.tdf
+C:/HPDSDR/trunk/VK6APH/Ozy_Janus/db/alt_synch_pipe_lv7.tdf
+C:/HPDSDR/trunk/VK6APH/Ozy_Janus/db/alt_synch_pipe_mv7.tdf
+C:/HPDSDR/trunk/VK6APH/Ozy_Janus/db/alt_synch_pipe_nv7.tdf
+C:/HPDSDR/trunk/VK6APH/Ozy_Janus/db/alt_synch_pipe_ov7.tdf
+C:/HPDSDR/trunk/VK6APH/Ozy_Janus/db/alt_synch_pipe_pv7.tdf
+C:/HPDSDR/trunk/VK6APH/Ozy_Janus/db/alt_synch_pipe_qv7.tdf
+C:/HPDSDR/trunk/VK6APH/Ozy_Janus/db/alt_synch_pipe_rv7.tdf
+C:/HPDSDR/trunk/VK6APH/Ozy_Janus/db/alt_synch_pipe_sv7.tdf
+C:/HPDSDR/trunk/VK6APH/Ozy_Janus/db/alt_synch_pipe_tv7.tdf
+C:/HPDSDR/trunk/VK6APH/Ozy_Janus/db/alt_synch_pipe_uv7.tdf
+C:/HPDSDR/trunk/VK6APH/Ozy_Janus/db/alt_synch_pipe_vv7.tdf
+C:/HPDSDR/trunk/VK6APH/Ozy_Janus/db/altsyncram_0kp.tdf
+C:/HPDSDR/trunk/VK6APH/Ozy_Janus/db/altsyncram_2hp.tdf
+C:/HPDSDR/trunk/VK6APH/Ozy_Janus/db/altsyncram_2kp.tdf
+C:/HPDSDR/trunk/VK6APH/Ozy_Janus/db/altsyncram_4hp.tdf
+C:/HPDSDR/trunk/VK6APH/Ozy_Janus/db/altsyncram_4p41.tdf
+C:/HPDSDR/trunk/VK6APH/Ozy_Janus/db/altsyncram_6p41.tdf
+C:/HPDSDR/trunk/VK6APH/Ozy_Janus/db/altsyncram_8ec1.tdf
+C:/HPDSDR/trunk/VK6APH/Ozy_Janus/db/altsyncram_8m41.tdf
+C:/HPDSDR/trunk/VK6APH/Ozy_Janus/db/altsyncram_8p41.tdf
+C:/HPDSDR/trunk/VK6APH/Ozy_Janus/db/altsyncram_aec1.tdf
+C:/HPDSDR/trunk/VK6APH/Ozy_Janus/db/altsyncram_am41.tdf
+C:/HPDSDR/trunk/VK6APH/Ozy_Janus/db/altsyncram_tpu.tdf
+C:/HPDSDR/trunk/VK6APH/Ozy_Janus/db/altsyncram_ujp.tdf
+C:/HPDSDR/trunk/VK6APH/Ozy_Janus/db/altsyncram_vpu.tdf
+C:/HPDSDR/trunk/VK6APH/Ozy_Janus/db/cntr_emd.tdf
+C:/HPDSDR/trunk/VK6APH/Ozy_Janus/db/cntr_tkh.tdf
+C:/HPDSDR/trunk/VK6APH/Ozy_Janus/db/dcfifo_3ob1.tdf
+C:/HPDSDR/trunk/VK6APH/Ozy_Janus/db/dcfifo_7l61.tdf
+C:/HPDSDR/trunk/VK6APH/Ozy_Janus/db/dcfifo_8d41.tdf
+C:/HPDSDR/trunk/VK6APH/Ozy_Janus/db/dcfifo_9p91.tdf
+C:/HPDSDR/trunk/VK6APH/Ozy_Janus/db/dcfifo_dj91.tdf
+C:/HPDSDR/trunk/VK6APH/Ozy_Janus/db/dcfifo_er51.tdf
+C:/HPDSDR/trunk/VK6APH/Ozy_Janus/db/dcfifo_gd41.tdf
+C:/HPDSDR/trunk/VK6APH/Ozy_Janus/db/dcfifo_m8b1.tdf
+C:/HPDSDR/trunk/VK6APH/Ozy_Janus/db/dcfifo_q2b1.tdf
+C:/HPDSDR/trunk/VK6APH/Ozy_Janus/db/dcfifo_ts51.tdf
+C:/HPDSDR/trunk/VK6APH/Ozy_Janus/db/dcfifo_vtb1.tdf
+C:/HPDSDR/trunk/VK6APH/Ozy_Janus/db/dffpipe_019.tdf
+C:/HPDSDR/trunk/VK6APH/Ozy_Janus/db/dffpipe_0a8.tdf
+C:/HPDSDR/trunk/VK6APH/Ozy_Janus/db/dffpipe_119.tdf
+C:/HPDSDR/trunk/VK6APH/Ozy_Janus/db/dffpipe_1a8.tdf
+C:/HPDSDR/trunk/VK6APH/Ozy_Janus/db/dffpipe_2a8.tdf
+C:/HPDSDR/trunk/VK6APH/Ozy_Janus/db/dffpipe_3a8.tdf
+C:/HPDSDR/trunk/VK6APH/Ozy_Janus/db/dffpipe_4a8.tdf
+C:/HPDSDR/trunk/VK6APH/Ozy_Janus/db/dffpipe_5a8.tdf
+C:/HPDSDR/trunk/VK6APH/Ozy_Janus/db/dffpipe_6a8.tdf
+C:/HPDSDR/trunk/VK6APH/Ozy_Janus/db/dffpipe_909.tdf
+C:/HPDSDR/trunk/VK6APH/Ozy_Janus/db/dffpipe_a09.tdf
+C:/HPDSDR/trunk/VK6APH/Ozy_Janus/db/dffpipe_b09.tdf
+C:/HPDSDR/trunk/VK6APH/Ozy_Janus/db/dffpipe_c09.tdf
+C:/HPDSDR/trunk/VK6APH/Ozy_Janus/db/dffpipe_d09.tdf
+C:/HPDSDR/trunk/VK6APH/Ozy_Janus/db/dffpipe_e09.tdf
+C:/HPDSDR/trunk/VK6APH/Ozy_Janus/db/dffpipe_f09.tdf
+C:/HPDSDR/trunk/VK6APH/Ozy_Janus/db/dffpipe_g09.tdf
+C:/HPDSDR/trunk/VK6APH/Ozy_Janus/db/dffpipe_h09.tdf
+C:/HPDSDR/trunk/VK6APH/Ozy_Janus/db/dffpipe_i09.tdf
+C:/HPDSDR/trunk/VK6APH/Ozy_Janus/db/dffpipe_j09.tdf
+C:/HPDSDR/trunk/VK6APH/Ozy_Janus/db/dffpipe_k09.tdf
+C:/HPDSDR/trunk/VK6APH/Ozy_Janus/db/dffpipe_l09.tdf
+C:/HPDSDR/trunk/VK6APH/Ozy_Janus/db/dffpipe_m09.tdf
+C:/HPDSDR/trunk/VK6APH/Ozy_Janus/db/dffpipe_n09.tdf
+C:/HPDSDR/trunk/VK6APH/Ozy_Janus/db/dffpipe_o09.tdf
+C:/HPDSDR/trunk/VK6APH/Ozy_Janus/db/dffpipe_p09.tdf
+C:/HPDSDR/trunk/VK6APH/Ozy_Janus/db/dffpipe_q09.tdf
+C:/HPDSDR/trunk/VK6APH/Ozy_Janus/db/dffpipe_r09.tdf
+C:/HPDSDR/trunk/VK6APH/Ozy_Janus/db/dffpipe_s09.tdf
+C:/HPDSDR/trunk/VK6APH/Ozy_Janus/db/dffpipe_s98.tdf
+C:/HPDSDR/trunk/VK6APH/Ozy_Janus/db/dffpipe_t09.tdf
+C:/HPDSDR/trunk/VK6APH/Ozy_Janus/db/dffpipe_t98.tdf
+C:/HPDSDR/trunk/VK6APH/Ozy_Janus/db/dffpipe_u09.tdf
+C:/HPDSDR/trunk/VK6APH/Ozy_Janus/db/dffpipe_u98.tdf
+C:/HPDSDR/trunk/VK6APH/Ozy_Janus/db/dffpipe_v09.tdf
+C:/HPDSDR/trunk/VK6APH/Ozy_Janus/db/dffpipe_v98.tdf
+C:/HPDSDR/trunk/VK6APH/Ozy_Janus/debounce.v
+c:/altera/quartus60/libraries/megafunctions/a_fefifo.inc
+c:/altera/quartus60/libraries/megafunctions/a_gray2bin.inc
+c:/altera/quartus60/libraries/megafunctions/a_graycounter.inc
+c:/altera/quartus60/libraries/megafunctions/aglobal60.inc
+c:/altera/quartus60/libraries/megafunctions/alt_counter_f10ke.inc
+c:/altera/quartus60/libraries/megafunctions/alt_counter_stratix.inc
+c:/altera/quartus60/libraries/megafunctions/alt_sync_fifo.inc
+c:/altera/quartus60/libraries/megafunctions/alt_synch_counter.inc
+c:/altera/quartus60/libraries/megafunctions/alt_synch_counter_f.inc
+c:/altera/quartus60/libraries/megafunctions/altdpram.inc
+c:/altera/quartus60/libraries/megafunctions/altsyncram_fifo.inc
+c:/altera/quartus60/libraries/megafunctions/cbx.lst
+c:/altera/quartus60/libraries/megafunctions/cmpconst.inc
+c:/altera/quartus60/libraries/megafunctions/dcfifo.tdf
+c:/altera/quartus60/libraries/megafunctions/dffeea.inc
+c:/altera/quartus60/libraries/megafunctions/dffpipe.inc
+c:/altera/quartus60/libraries/megafunctions/lpm_add_sub.inc
+c:/altera/quartus60/libraries/megafunctions/lpm_compare.inc
+c:/altera/quartus60/libraries/megafunctions/lpm_constant.inc
+c:/altera/quartus60/libraries/megafunctions/lpm_counter.inc
+c:/altera/quartus60/libraries/megafunctions/lpm_counter.tdf
+c:/altera/quartus60/libraries/megafunctions/lpm_decode.inc
+c:/altera/quartus60/win/assignment_defaults.qdf
+	======= Total: 190 files to archive =======
+
+	================ Status: ===============
+All files archived successfully.
