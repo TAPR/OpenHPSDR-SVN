@@ -23,13 +23,13 @@ static void write_port_audio_thread(void* arg) {
         sem_wait(&audio_sem);
         rc=Pa_WriteStream(stream,audio_buffer,SAMPLES_PER_BUFFER);
         if(rc!=0) {
-            fprintf(stderr,"writing first audio_buffer rc=%d",rc);
+            fprintf(stderr,"error writing first audio_buffer rc=%d\n",rc);
         }
 
         sem_wait(&audio_sem);
         rc=Pa_WriteStream(stream,&audio_buffer[SAMPLES_PER_BUFFER],SAMPLES_PER_BUFFER);
         if(rc!=0) {
-            fprintf(stderr,"writing second audio_buffer rc=%d",rc);
+            fprintf(stderr,"error writing second audio_buffer rc=%d\n",rc);
         }
     }
 
@@ -66,7 +66,7 @@ void open_port_audio() {
 
 }
 
-void pa_close() {
+void close_port_audio() {
     int rc=Pa_Terminate();
     if(rc!=paNoError) {
         fprintf(stderr,"Pa_Terminate failed: %s\n",Pa_GetErrorText(rc));

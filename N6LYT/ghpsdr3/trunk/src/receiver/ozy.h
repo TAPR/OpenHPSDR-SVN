@@ -94,6 +94,15 @@ char server_address[64];
 */
 extern int ozy_init();
 
+
+/* --------------------------------------------------------------------------*/
+/** 
+* @brief Close the Ozy interface 
+* 
+* @return 
+*/
+extern void ozyClose();
+
 /* --------------------------------------------------------------------------*/
 /** 
 * @brief Disconnect the Ozy interface 
