@@ -1,4 +1,4 @@
-#Sun Jan 03 21:52:10 PST 2010
+#Sun Jan 03 22:09:58 PST 2010
 eclipse.preferences.version=1
 environment/project/cdt.managedbuild.config.sdcc.exe.release.789109409=<?xml version\="1.0" encoding\="UTF-8" standalone\="no"?>\r\n<environment append\="true" appendContributed\="true">\r\n<variable delimiter\=";" name\="PATH" operation\="replace" value\="C\:\\eclipse\\plugins\\net.sourceforge.eclipsesdcc.win32_1.0.0\\os\\win32\\x86;${CYGWIN}\\bin;${SDCC}\\bin;${WINDOWS}"/>\r\n</environment>\r\n
 indexerId=org.eclipse.cdt.core.fastIndexer

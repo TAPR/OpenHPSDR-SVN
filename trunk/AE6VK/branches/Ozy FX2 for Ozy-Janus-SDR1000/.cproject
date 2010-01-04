@@ -8,7 +8,7 @@
 <macros>
 <stringMacro name="WINDOWS" type="VALUE_TEXT" value="C:\Windows\System32"/>
 <stringMacro name="CYGWIN" type="VALUE_TEXT" value="C:\cygwin"/>
-<stringMacro name="SDCC" type="VALUE_TEXT" value="C:\Program Files (x86)\SDCC"/>
+<stringMacro name="SDCC" type="VALUE_TEXT" value="C:\Program Files\SDCC"/>
 </macros>
 <externalSettings/>
 <extensions>
@@ -47,6 +47,7 @@
 </storageModule>
 <storageModule moduleId="scannerConfiguration"/>
 <storageModule moduleId="org.eclipse.cdt.core.externalSettings"/>
+<storageModule moduleId="org.eclipse.cdt.core.language.mapping"/>
 </cconfiguration>
 </storageModule>
 <storageModule moduleId="cdtBuildSystem" version="4.0.0">
