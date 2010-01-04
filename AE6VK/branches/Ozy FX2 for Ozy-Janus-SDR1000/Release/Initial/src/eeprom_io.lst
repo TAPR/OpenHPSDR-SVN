@@ -1,0 +1,152 @@
+                              1 ;--------------------------------------------------------
+                              2 ; File Created by SDCC : free open source ANSI-C Compiler
+                              3 ; Version 2.9.0 #5416 (Mar 22 2009) (MINGW32)
+                              4 ; This file was generated Mon Jan 04 09:33:53 2010
+                              5 ;--------------------------------------------------------
+                              6 	.module eeprom_io
+                              7 	.optsdcc -mmcs51 --model-small
+                              8 	
+                              9 ;--------------------------------------------------------
+                             10 ; Public variables in this module
+                             11 ;--------------------------------------------------------
+                             12 	.globl _eeprom_read_PARM_4
+                             13 	.globl _eeprom_read_PARM_3
+                             14 	.globl _eeprom_read_PARM_2
+                             15 	.globl _eeprom_read
+                             16 ;--------------------------------------------------------
+                             17 ; special function registers
+                             18 ;--------------------------------------------------------
+                             19 	.area RSEG    (DATA)
+                             20 ;--------------------------------------------------------
+                             21 ; special function bits
+                             22 ;--------------------------------------------------------
+                             23 	.area RSEG    (DATA)
+                             24 ;--------------------------------------------------------
+                             25 ; overlayable register banks
+                             26 ;--------------------------------------------------------
+                             27 	.area REG_BANK_0	(REL,OVR,DATA)
+   0000                      28 	.ds 8
+                             29 ;--------------------------------------------------------
+                             30 ; internal ram data
+                             31 ;--------------------------------------------------------
+                             32 	.area DSEG    (DATA)
+   0000                      33 _eeprom_read_PARM_2:
+   0000                      34 	.ds 1
+   0001                      35 _eeprom_read_PARM_3:
+   0001                      36 	.ds 2
+   0003                      37 _eeprom_read_PARM_4:
+   0003                      38 	.ds 1
+                             39 ;--------------------------------------------------------
+                             40 ; overlayable items in internal ram 
+                             41 ;--------------------------------------------------------
+                             42 	.area OSEG    (OVR,DATA)
+                             43 ;--------------------------------------------------------
+                             44 ; indirectly addressable internal ram data
+                             45 ;--------------------------------------------------------
+                             46 	.area ISEG    (DATA)
+                             47 ;--------------------------------------------------------
+                             48 ; absolute internal ram data
+                             49 ;--------------------------------------------------------
+                             50 	.area IABS    (ABS,DATA)
+                             51 	.area IABS    (ABS,DATA)
+                             52 ;--------------------------------------------------------
+                             53 ; bit data
+                             54 ;--------------------------------------------------------
+                             55 	.area BSEG    (BIT)
+                             56 ;--------------------------------------------------------
+                             57 ; paged external ram data
+                             58 ;--------------------------------------------------------
+                             59 	.area PSEG    (PAG,XDATA)
+                             60 ;--------------------------------------------------------
+                             61 ; external ram data
+                             62 ;--------------------------------------------------------
+                             63 	.area XSEG    (XDATA)
+   0000                      64 _eeprom_read_cmd_1_1:
+   0000                      65 	.ds 2
+                             66 ;--------------------------------------------------------
+                             67 ; absolute external ram data
+                             68 ;--------------------------------------------------------
+                             69 	.area XABS    (ABS,XDATA)
+                             70 ;--------------------------------------------------------
+                             71 ; external initialized ram data
+                             72 ;--------------------------------------------------------
+                             73 	.area HOME    (CODE)
+                             74 	.area GSINIT0 (CODE)
+                             75 	.area GSINIT1 (CODE)
+                             76 	.area GSINIT2 (CODE)
+                             77 	.area GSINIT3 (CODE)
+                             78 	.area GSINIT4 (CODE)
+                             79 	.area GSINIT5 (CODE)
+                             80 	.area GSINIT  (CODE)
+                             81 	.area GSFINAL (CODE)
+                             82 	.area CSEG    (CODE)
+                             83 ;--------------------------------------------------------
+                             84 ; global & static initialisations
+                             85 ;--------------------------------------------------------
+                             86 	.area HOME    (CODE)
+                             87 	.area GSINIT  (CODE)
+                             88 	.area GSFINAL (CODE)
+                             89 	.area GSINIT  (CODE)
+                             90 ;--------------------------------------------------------
+                             91 ; Home
+                             92 ;--------------------------------------------------------
+                             93 	.area HOME    (CODE)
+                             94 	.area HOME    (CODE)
+                             95 ;--------------------------------------------------------
+                             96 ; code
+                             97 ;--------------------------------------------------------
+                             98 	.area CSEG    (CODE)
+                             99 ;------------------------------------------------------------
+                            100 ;Allocation info for local variables in function 'eeprom_read'
+                            101 ;------------------------------------------------------------
+                            102 ;eeprom_offset             Allocated with name '_eeprom_read_PARM_2'
+                            103 ;buf                       Allocated with name '_eeprom_read_PARM_3'
+                            104 ;len                       Allocated with name '_eeprom_read_PARM_4'
+                            105 ;i2c_addr                  Allocated to registers r2 
+                            106 ;cmd                       Allocated with name '_eeprom_read_cmd_1_1'
+                            107 ;------------------------------------------------------------
+                            108 ;	../Initial/src/eeprom_io.c:32: eeprom_read (unsigned char i2c_addr, unsigned char eeprom_offset,
+                            109 ;	-----------------------------------------
+                            110 ;	 function eeprom_read
+                            111 ;	-----------------------------------------
+   0000                     112 _eeprom_read:
+                    0002    113 	ar2 = 0x02
+                    0003    114 	ar3 = 0x03
+                    0004    115 	ar4 = 0x04
+                    0005    116 	ar5 = 0x05
+                    0006    117 	ar6 = 0x06
+                    0007    118 	ar7 = 0x07
+                    0000    119 	ar0 = 0x00
+                    0001    120 	ar1 = 0x01
+   0000 AA 82               121 	mov	r2,dpl
+                            122 ;	../Initial/src/eeprom_io.c:41: cmd[0] = 0; // <-- address high byte, set to 0 since we are going to always
+   0002 90s00r00            123 	mov	dptr,#_eeprom_read_cmd_1_1
+   0005 E4                  124 	clr	a
+   0006 F0                  125 	movx	@dptr,a
+                            126 ;	../Initial/src/eeprom_io.c:43: cmd[1] = eeprom_offset; // <-- address low byte
+   0007 90s00r01            127 	mov	dptr,#(_eeprom_read_cmd_1_1 + 0x0001)
+   000A E5*00               128 	mov	a,_eeprom_read_PARM_2
+   000C F0                  129 	movx	@dptr,a
+                            130 ;	../Initial/src/eeprom_io.c:44: if (!i2c_write(i2c_addr, cmd, 2))
+   000D 75*00r00            131 	mov	_i2c_write_PARM_2,#_eeprom_read_cmd_1_1
+   0010 75*01s00            132 	mov	(_i2c_write_PARM_2 + 1),#(_eeprom_read_cmd_1_1 >> 8)
+   0013 75*00 02            133 	mov	_i2c_write_PARM_3,#0x02
+   0016 8A 82               134 	mov	dpl,r2
+   0018 C0 02               135 	push	ar2
+   001A 12s00r00            136 	lcall	_i2c_write
+   001D E5 82               137 	mov	a,dpl
+   001F D0 02               138 	pop	ar2
+                            139 ;	../Initial/src/eeprom_io.c:45: return 0;
+   0021 70 03               140 	jnz	00102$
+   0023 F5 82               141 	mov	dpl,a
+   0025 22                  142 	ret
+   0026                     143 00102$:
+                            144 ;	../Initial/src/eeprom_io.c:47: return i2c_read(i2c_addr, buf, len);
+   0026 85*01*00            145 	mov	_i2c_read_PARM_2,_eeprom_read_PARM_3
+   0029 85*02*01            146 	mov	(_i2c_read_PARM_2 + 1),(_eeprom_read_PARM_3 + 1)
+   002C 85*03*00            147 	mov	_i2c_read_PARM_3,_eeprom_read_PARM_4
+   002F 8A 82               148 	mov	dpl,r2
+   0031 02s00r00            149 	ljmp	_i2c_read
+                            150 	.area CSEG    (CODE)
+                            151 	.area CONST   (CODE)
+                            152 	.area CABS    (ABS,CODE)
