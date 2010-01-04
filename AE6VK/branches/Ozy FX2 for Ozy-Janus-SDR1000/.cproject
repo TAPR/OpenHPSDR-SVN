@@ -30,6 +30,7 @@
 <option id="sdcc.c.compiler.category.other.memorymodel.1294262022" superClass="sdcc.c.compiler.category.other.memorymodel" value="sdcc.c.compiler.category.other.memorymodel.small" valueType="enumerated"/>
 <option id="sdcc.c.compiler.category.other.xramsize.1365419494" superClass="sdcc.c.compiler.category.other.xramsize" value="" valueType="string"/>
 <option id="sdcc.c.compiler.category.other.codesize.2022259102" superClass="sdcc.c.compiler.category.other.codesize" value="" valueType="string"/>
+<inputType id="cdt.managedbuild.tool.sdcc.c.compiler.input.976490103" superClass="cdt.managedbuild.tool.sdcc.c.compiler.input"/>
 </tool>
 <tool command="sh ../tools/custom-link.zsh " commandLinePattern="${COMMAND} " id="cdt.managedbuild.tool.sdcc.c.linker.exe.release.1780423096" name="SDCC Linker" superClass="cdt.managedbuild.tool.sdcc.c.linker.exe.release">
 <option id="sdcc.c.link.option.ldflags.2127675599" superClass="sdcc.c.link.option.ldflags" value="--no-xinit-opt --xram-loc 0x2000 --xram-size 0x2000 --code-size 0x2000 -Wl -b&quot; USBDESCSEG = 0xE000&quot;" valueType="string"/>
@@ -40,6 +41,7 @@
 <tool command="sh ../tools/asx8051-eclipse.zsh" commandLinePattern="${COMMAND} ${OUTPUT_PREFIX} ${OUTPUT}  ${FLAGS}  ${INPUTS}" id="cdt.managedbuild.tool.sdcc.assembler.exe.release.1934297010" name="SDCC Assembler" superClass="cdt.managedbuild.tool.sdcc.assembler.exe.release">
 <option id="sdcc.both.asm.option.flags.1920792157" superClass="sdcc.both.asm.option.flags" value="-plosgff" valueType="string"/>
 <option id="sdcc.both.asm.option.version.1470274139" superClass="sdcc.both.asm.option.version" value="false" valueType="boolean"/>
+<inputType id="cdt.managedbuild.tool.sdcc.assembler.input.439518161" superClass="cdt.managedbuild.tool.sdcc.assembler.input"/>
 </tool>
 </toolChain>
 </folderInfo>
