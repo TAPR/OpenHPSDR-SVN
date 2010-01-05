@@ -64,3 +64,28 @@ void dump_ozy_header(char* prefix,int frame,unsigned char* buffer) {
             );
     fprintf(stderr,"\n");
 }
+
+void dump_iq_buffer(unsigned char* buffer) {
+    int i;
+    fprintf(stderr, "iq ...\n");
+    for(i=0;i<8192;i+=16) {
+        fprintf(stderr, "  [%04X] %02X%02X%02X%02X%02X%02X%02X%02X %02X%02X%02X%02X%02X%02X%02X%02X\n",
+                i,
+                buffer[i],buffer[i+1],buffer[i+2],buffer[i+3],buffer[i+4],buffer[i+5],buffer[i+6],buffer[i+7],
+                buffer[i+8],buffer[i+9],buffer[i+10],buffer[i+11],buffer[i+12],buffer[i+13],buffer[i+14],buffer[i+15]
+                );
+    }
+    fprintf(stderr,"\n");
+}
+void dump_udp_buffer(unsigned char* buffer) {
+    int i;
+    fprintf(stderr, "udp ...\n");
+    for(i=0;i<512;i+=16) {
+        fprintf(stderr, "  [%04X] %02X%02X%02X%02X%02X%02X%02X%02X %02X%02X%02X%02X%02X%02X%02X%02X\n",
+                i,
+                buffer[i],buffer[i+1],buffer[i+2],buffer[i+3],buffer[i+4],buffer[i+5],buffer[i+6],buffer[i+7],
+                buffer[i+8],buffer[i+9],buffer[i+10],buffer[i+11],buffer[i+12],buffer[i+13],buffer[i+14],buffer[i+15]
+                );
+    }
+    fprintf(stderr,"\n");
+}

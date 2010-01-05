@@ -37,6 +37,9 @@
 #include "receiver.h"
 #include "messages.h"
 #include "ozy.h"
+#include "util.h"
+
+#define SMALL_PACKETS
 
 RECEIVER receiver[MAX_RECEIVERS];
 static int iq_socket;
@@ -44,6 +47,8 @@ static struct sockaddr_in iq_addr;
 static int iq_length;
 
 static char response[80];
+
+static unsigned long sequence=0L;
 
 void init_receivers() {
     int i;
@@ -130,6 +135,9 @@ char* set_frequency(CLIENT* client,long frequency) {
 void send_IQ_buffer(int rx) {
     struct sockaddr_in client;
     int client_length;
+    unsigned short offset;
+    unsigned short length;
+    BUFFER buffer;
     int rc;
 
     if(rx>=ozy_get_receivers()) {
@@ -147,12 +155,35 @@ void send_IQ_buffer(int rx) {
             client.sin_addr.s_addr=receiver[rx].client->address.sin_addr.s_addr;
             client.sin_port=htons(receiver[rx].client->iq_port);
 
-            rc=sendto(iq_socket,receiver[rx].input_buffer,sizeof(receiver[rx].input_buffer),0,(struct sockaddr*)&client,client_length);
+#ifdef SMALL_PACKETS
+            // keep UDP packets to 512 bytes or less
+            //     8 bytes sequency number
+            //     2 byte offset
+            //     2 byte length
+            offset=0;
+            while(offset<sizeof(receiver[rx].input_buffer)) {
+                buffer.sequence=sequence;
+                buffer.offset=offset;
+                buffer.length=sizeof(receiver[rx].input_buffer)-offset;
+                if(buffer.length>500) buffer.length=500;
+                memcpy((char*)&buffer.data[0],(char*)&receiver[rx].input_buffer[offset/4],buffer.length);
+                rc=sendto(iq_socket,(char*)&buffer,sizeof(buffer),0,(struct sockaddr*)&client,client_length);
+                if(rc<=0) {
+                    perror("sendto failed for iq data");
+                    exit(1);
+                }
+                offset+=buffer.length;
+            }
+            sequence++;
 
+            
+#else
+            rc=sendto(iq_socket,receiver[rx].input_buffer,sizeof(receiver[rx].input_buffer),0,(struct sockaddr*)&client,client_length);
             if(rc<=0) {
                 perror("sendto failed for iq data");
                 exit(1);
             }
+#endif
  
         }
     }
