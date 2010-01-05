@@ -68,6 +68,13 @@ extern "C" {
 #define LT2208_RANDOM_OFF         0x00
 #define LT2208_RANDOM_ON          0x10
 
+typedef struct _buffer {
+    unsigned long sequence;
+    unsigned short offset;
+    unsigned short length;
+    unsigned char data[500];
+} BUFFER;
+
 int speed;
 int class;
 int lt2208Dither;

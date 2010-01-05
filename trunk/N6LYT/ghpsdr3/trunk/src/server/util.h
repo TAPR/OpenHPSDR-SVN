@@ -34,7 +34,8 @@ extern "C" {
 
 extern void dump_ozy_buffer(char* prefix,int frame,unsigned char* buffer);
 extern void dump_ozy_header(char* prefix,int frame,unsigned char* buffer);
-
+extern void dump_iq_buffer(unsigned char* buffer);
+extern void dump_udp_buffer(unsigned char* buffer);
 #ifdef	__cplusplus
 }
 #endif

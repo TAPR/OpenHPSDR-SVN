@@ -37,6 +37,8 @@
  *   ozy interface
  */
 
+#define SMALL_PACKETS
+
 #define USB_TIMEOUT -7
 //static struct OzyHandle* ozy;
 
@@ -153,6 +155,8 @@ int session;
 static int local_audio=0;
 static int port_audio=0;
 
+void dump_udp_buffer(unsigned char* buffer);
+
 void* spectrum_thread(void* arg) {
     int bytes_read;
     int bytes_written;
@@ -164,6 +168,10 @@ void* spectrum_thread(void* arg) {
     int i,j;
     short sample;
     unsigned char audio_buffer[BUFFER_SIZE*2*2];
+    BUFFER buffer;
+    unsigned long sequence=0L;
+    unsigned short offset=0;;
+    unsigned short length;
 
     spectrum_length=sizeof(spectrum_addr);
     client_length=sizeof(client_addr);
@@ -201,11 +209,39 @@ fprintf(stderr,"spectrum_thread: socket %d\n",spectrum_socket);
 fprintf(stderr,"output_sample_increment=%d\n",output_sample_increment);
     
     while(1) {
+#ifdef SMALL_PACKETS
+        while(1) {
+            bytes_read=recvfrom(spectrum_socket,(char*)&buffer,sizeof(buffer),0,(struct sockaddr*)&client_addr,&client_length);
+            if(bytes_read<0) {
+                perror("recvfrom socket failed for spectrum buffer");
+                exit(1);
+            }
+
+            if(buffer.offset==0) {
+                offset=0;
+                sequence=buffer.sequence;
+                // start of a frame
+                memcpy((char *)&input_buffer[buffer.offset/4],(char *)&buffer.data[0],buffer.length);
+                offset+=buffer.length;
+            } else {
+                if((sequence==buffer.sequence) && (offset==buffer.offset)) {
+                    memcpy((char *)&input_buffer[buffer.offset/4],(char *)&buffer.data[0],buffer.length);
+                    offset+=buffer.length;
+                    if(offset==sizeof(input_buffer)) {
+                        offset=0;
+                        break;
+                    }
+                } else {
+                }
+            }
+        }
+#else
         bytes_read=recvfrom(spectrum_socket,(char*)input_buffer,BUFFER_SIZE*2*4,0,(struct sockaddr*)&client_addr,&client_length);
         if(bytes_read<0) {
             perror("recvfrom socket failed for spectrum buffer");
             exit(1);
         }
+#endif
 
         Audio_Callback (input_buffer,&input_buffer[BUFFER_SIZE],
                                 output_buffer,&output_buffer[BUFFER_SIZE], buffer_size, 0);
@@ -555,3 +591,17 @@ void ozy_set_local_audio(int state) {
 void ozy_set_port_audio(int state) {
     port_audio=state;
 }
+
+void dump_udp_buffer(unsigned char* buffer) {
+    int i;
+    fprintf(stderr, "udp ...\n");
+    for(i=0;i<512;i+=16) {
+        fprintf(stderr, "  [%04X] %02X%02X%02X%02X%02X%02X%02X%02X %02X%02X%02X%02X%02X%02X%02X%02X\n",
+                i,
+                buffer[i],buffer[i+1],buffer[i+2],buffer[i+3],buffer[i+4],buffer[i+5],buffer[i+6],buffer[i+7],
+                buffer[i+8],buffer[i+9],buffer[i+10],buffer[i+11],buffer[i+12],buffer[i+13],buffer[i+14],buffer[i+15]
+                );
+    }
+    fprintf(stderr,"\n");
+}
+
