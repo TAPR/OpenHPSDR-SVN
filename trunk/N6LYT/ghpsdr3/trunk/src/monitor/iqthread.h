@@ -24,7 +24,14 @@
 *
 */
 
-#define IQPORT 12000
+#define IQPORT 13000
+
+typedef struct _buffer {
+    unsigned long sequence;
+    unsigned short offset;
+    unsigned short length;
+    unsigned char data[500];
+} BUFFER;
 
 void init_iq_thread();
 int get_iq_port();

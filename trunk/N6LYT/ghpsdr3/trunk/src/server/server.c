@@ -51,6 +51,7 @@ static struct option long_options[] = {
     {"122.88mhzsource",required_argument, 0, 6},
     {"micsource",required_argument, 0, 7},
     {"class",required_argument, 0, 8},
+    {"timing",no_argument, 0, 9},
 };
 static char* short_options="rs";
 static int option_index;
@@ -153,6 +154,16 @@ void process_args(int argc,char* argv[]) {
                     fprintf(stderr,"invalid class option\n");
                 }
                 break;
+
+            case 9: // timing
+                ozy_set_timing(1);
+                break;
+
+            default:
+                fprintf(stderr,"Usage: \n");
+                fprintf(stderr,"  server --receivers N --samplerate 48000|96000|192000\n");
+                break;
+               
         }
     }
 }

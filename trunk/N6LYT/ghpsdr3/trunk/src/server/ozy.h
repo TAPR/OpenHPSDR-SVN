@@ -36,4 +36,5 @@ void ozy_set_10mhzsource(int source);
 void ozy_set_122_88mhzsource(int source);
 void ozy_set_micsource(int source);
 
+void ozy_set_timing(int t);
 
