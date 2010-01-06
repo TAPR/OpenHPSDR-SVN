@@ -57,6 +57,8 @@ static int rxFrequency_changed=1;
 static long txFrequency=7056000;
 static int txFrequency_changed=1;
 
+static int ozy_debug=0;
+
 
 static unsigned char control_in[5]={0x00,0x00,0x00,0x00,0x00};
 
@@ -216,6 +218,11 @@ fprintf(stderr,"output_sample_increment=%d\n",output_sample_increment);
                 perror("recvfrom socket failed for spectrum buffer");
                 exit(1);
             }
+
+if(ozy_debug) {
+    fprintf(stderr,"rcvd UDP packet: sequence=%ld offset=%d length=%d\n",
+            buffer.sequence, buffer.offset, buffer.length);
+}
 
             if(buffer.offset==0) {
                 offset=0;
@@ -590,6 +597,10 @@ void ozy_set_local_audio(int state) {
 
 void ozy_set_port_audio(int state) {
     port_audio=state;
+}
+
+void ozy_set_debug(int state) {
+    ozy_debug=state;
 }
 
 void dump_udp_buffer(unsigned char* buffer) {
