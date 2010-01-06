@@ -295,7 +295,7 @@ gboolean spectrum_button_press_event(GtkWidget* widget,GdkEventButton* event) {
             gtk_dialog_run(dialog);
             frequency=configure_get_frequency();
             configure_destroy();
-            sprintf(command,"frequency %d %ld",receiver,frequency);
+            sprintf(command,"frequency %ld",frequency);
             send_command(command);
             set_title();
             break;

@@ -23,13 +23,13 @@ static void write_port_audio_thread(void* arg) {
         sem_wait(&audio_sem);
         rc=Pa_WriteStream(stream,audio_buffer,SAMPLES_PER_BUFFER);
         if(rc!=0) {
-            fprintf(stderr,"error writing first audio_buffer rc=%d\n",rc);
+            fprintf(stderr,"error writing first audio_buffer %s (rc=%d)\n",Pa_GetErrorText(rc),rc);
         }
 
         sem_wait(&audio_sem);
         rc=Pa_WriteStream(stream,&audio_buffer[SAMPLES_PER_BUFFER],SAMPLES_PER_BUFFER);
         if(rc!=0) {
-            fprintf(stderr,"error writing second audio_buffer rc=%d\n",rc);
+            fprintf(stderr,"error writing second audio_buffer %s (rc=%d)\n",Pa_GetErrorText(rc),rc);
         }
     }
 

@@ -95,6 +95,7 @@ static int speed=1;
 static int sample_rate=96000;
 static int output_sample_increment=2;
 
+static int timing=0;
 static struct timeb start_time;
 static struct timeb end_time;
 static int sample_count=0;
@@ -443,12 +444,14 @@ if(rx_frame<10) {
             mic_right_buffer[samples]=0.0f;
             samples++;
 
-            sample_count++;
-            if(sample_count==sample_rate) {
-                ftime(&end_time);
-                fprintf(stderr,"%d samples in %ld ms\n",sample_count,((end_time.time*1000)+end_time.millitm)-((start_time.time*1000)+start_time.millitm));
-                sample_count=0;
-                ftime(&start_time);
+            if(timing) {
+                sample_count++;
+                if(sample_count==sample_rate) {
+                    ftime(&end_time);
+                    fprintf(stderr,"%d samples in %ld ms\n",sample_count,((end_time.time*1000)+end_time.millitm)-((start_time.time*1000)+start_time.millitm));
+                    sample_count=0;
+                    ftime(&start_time);
+            }
             }
 
             // when we have enough samples send them to the clients
@@ -605,5 +608,9 @@ void ozy_set_micsource(int source) {
 void ozy_set_class(int c) {
     control_out[2]=control_out[2]&0xFE;
     control_out[2]=control_out[2]|c;
+}
+
+void ozy_set_timing(int t) {
+    timing=t;
 }
 

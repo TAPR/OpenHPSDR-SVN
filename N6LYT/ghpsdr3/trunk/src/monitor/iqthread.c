@@ -35,6 +35,8 @@
 
 #include "iqthread.h"
 
+#define SMALL_PACKETS
+
 static int iq_socket;
 static struct sockaddr_in iq_addr;
 static int iq_length;
@@ -82,15 +84,53 @@ void* iq_thread(void* arg) {
     int server_length;
     int bytes;
     char buffer[1024*4*2];
+    BUFFER small_buffer;
+    unsigned long sequence=0L;
+    unsigned short offset=0;;
+    unsigned short length;
+
 
 fprintf(stderr,"iq_thread: listening on port %d\n",ntohs(iq_addr.sin_port));
+#ifdef SMALL_PACKETS
+fprintf(stderr,"SMALL_PACKETS defined\n");
+#endif
 
     while(1) {
+
+#ifdef SMALL_PACKETS
+        while(1) {
+            bytes=recvfrom(iq_socket,(char*)&small_buffer,sizeof(small_buffer),0,(struct sockaddr*)&server_addr,&server_length);
+            if(bytes<0) {
+                perror("recvfrom socket failed for spectrum buffer");
+                exit(1);
+            }
+
+            if(small_buffer.offset==0) {
+                offset=0;
+                sequence=small_buffer.sequence;
+                // start of a frame
+                memcpy((char *)&buffer[small_buffer.offset],(char *)&small_buffer.data[0],small_buffer.length);
+                offset+=small_buffer.length;
+            } else {
+                if((sequence==small_buffer.sequence) && (offset==small_buffer.offset)) {
+                    memcpy((char *)&buffer[small_buffer.offset],(char *)&small_buffer.data[0],small_buffer.length);
+                    offset+=small_buffer.length;
+                    if(offset==sizeof(buffer)) {
+                        offset=0;
+                        break;
+                    }
+                } else {
+                }
+            }
+        }
+
+#else
         bytes=recvfrom(iq_socket,(char*)buffer,sizeof(buffer),0,(struct sockaddr*)&server_addr,&server_length);
         if(bytes<0) {
             perror("recvfrom failed for iq buffer");
             exit(1);
         }
+#endif
 
         // process the I/Q samples
         iq_callback(buffer);
