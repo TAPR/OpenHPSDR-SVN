@@ -33,6 +33,7 @@ using System.IO;
 using System.IO.Ports;
 using System.Net;
 using System.Runtime.InteropServices;
+using System.Security.Permissions;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading;
@@ -42,6 +43,9 @@ using DataDecoder.Properties;
 using Logger;
 using FT_HANDLE = System.UInt32;
 using Microsoft.Win32;              // For RegKey
+
+//[assembly: RegistryPermissionAttribute(SecurityAction.RequestMinimum,
+//ViewAndModify = "HKEY_LOCAL_MACHINE")]
 
 namespace DataDecoder
 {
@@ -311,7 +315,6 @@ namespace DataDecoder
                 this.StartPosition = FormStartPosition.WindowsDefaultLocation;
 
                 // we can still apply the saved size
-                // msorens: added gatekeeper, otherwise first time appears as just a title bar!
                 if (Settings.Default.WindowPosition != Rectangle.Empty)
                 {
                     this.Size = Settings.Default.WindowPosition.Size;
@@ -383,7 +386,7 @@ namespace DataDecoder
             lpTimer.Interval = Convert.ToDouble(set.LPint);
             lpTimer.Enabled = false;
 
-            // setup RtrReps Timer
+            // setup Rotor Reps Timer
             RepsTimer = new System.Timers.Timer();
             RepsTimer.Elapsed += new System.Timers.ElapsedEventHandler(RtrReps_Elapsed);
             RepsTimer.Interval = 1000;
@@ -642,6 +645,7 @@ namespace DataDecoder
             WN2SetUp(); // setup the WN2
             PMSetup();  // setup the Power Master
             InitSPE();  // setup SPE Amp
+            SOinit();   // setup SO2R
 
             if (chkLPenab.Checked) lpTimer.Enabled = true;
             else lpTimer.Enabled = false;
@@ -1487,6 +1491,20 @@ namespace DataDecoder
                 if (result == DialogResult.No)
                 { e.Cancel = true; return; }
             }
+            if (bSo2rChg)
+            {
+                DialogResult result;
+                result = MessageBox.Show(this,
+                    "Are you sure you want to exit?\n\n" +
+                    "SO2R data has been changed and not saved!\n\n" +
+                    "If you want to save your work press NO and\n" +
+                    "return to the SO2R tab and save your work.",
+                    "SO2R Data UnSaved", MessageBoxButtons.YesNo,
+                    MessageBoxIcon.Exclamation,
+                    MessageBoxDefaultButton.Button2);
+                if (result == DialogResult.No)
+                { e.Cancel = true; return; }
+            }
             try
             {
                 closing = true;
@@ -1503,6 +1521,7 @@ namespace DataDecoder
                 AlphaTimer.Stop();
                 mini.Close();
                 this.Text = "DDUtil Shutting Down";
+//                btnSaveSO2R_Click(null, null);
                 if (sp.isOpen)
                 {
                     e.Cancel = true; y = 1;
@@ -1588,6 +1607,11 @@ namespace DataDecoder
                 set.TabOpen = tabControl.SelectedIndex;
                 set.Save();
                 PortAccess.Output(LPTnum, 0);
+                if (chkSoEnab.Checked)
+                {
+                    PortAccess.Output(lpt1, 0);
+                    PortAccess.Output(lpt2, 0);
+                }
 
                 // close other open ports
                 if (StepData.IsOpen) StepData.Close();
@@ -1601,6 +1625,7 @@ namespace DataDecoder
                 if (RCP3Rotor.IsOpen) RCP3Rotor.Close();
                 if (RCP4Rotor.IsOpen) RCP4Rotor.Close();
                 if (RotorPort.IsOpen) RotorPort.Close();
+                if (SwitchPort.IsOpen) SwitchPort.Close();
             }
             catch (Exception ex)
             {
@@ -2400,6 +2425,16 @@ namespace DataDecoder
 
         #region Helper Methods
 
+        // display tip of the day dialog
+        private void Setup_Shown(object sender, EventArgs e)
+        {
+            if (TipOfTheDayDialog.IsShowTipsOnStartUp())
+            {
+                TipOfTheDayDialog dlg = new TipOfTheDayDialog();
+                dlg.ShowDialog();
+            }
+
+        }
         // Converts string to hex string
         public string ConvertToHex(string asciiString)
         {
@@ -2454,10 +2489,10 @@ namespace DataDecoder
         // output data to the parallel port
         private void OutParallelPort(int port, int num)
         {
-            //if (chkDevice.Checked == true)
-            //{
+            if (!closing)
+            {
             PortAccess.Output(port, num);
-            //}
+            }
             //else
             //{
             //    PortAccess.Output(port, 0);
@@ -4450,7 +4485,7 @@ namespace DataDecoder
         // Process the commands associated with a macro key, calls ParseBuffer()
         public void ProcessMacroButton(int button)
         {
-            if (StepCtr == 0 && xOn == "0")
+            if (StepCtr == 0 && (xOn == "0" || xOn == ""))
             {   // 
                 try
                 {
@@ -4680,6 +4715,12 @@ namespace DataDecoder
             string ops = cmd.Substring(4, cmd.Length - 4);  // command operators less ";"
             switch (pre)
             {
+                case "LP": // write to desig LPT port
+                    string sport = ops.TrimStart('0').Substring(0, ops.Length - 2);
+                    int icmd = int.Parse(ops.Substring(ops.Length-2,2),NumberStyles.HexNumber);
+                    int iport = Convert.ToInt32(sport.Substring(0, sport.Length-2));
+                    OutParallelPort(iport, icmd);
+                    break;
                 case "FA": // Write hex to FlexWire Adapter port 4
                     int data = int.Parse(ops.Substring(0, 2), NumberStyles.HexNumber);
                     if (ops.Length == 3 && ops.Substring(2, 1) == "I")
@@ -6704,6 +6745,21 @@ namespace DataDecoder
 
         #endregion Rotor Control
 
+        #region Propadex
+        // Propadex forecast UI
+        private void pixBox1_Click(object sender, EventArgs e)
+        {
+            Process.Start("http://qsonet.com/propadex.html");
+        }
+
+        void propTimer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
+        {
+            pixBox1.Load();
+
+        }
+
+        #endregion Propadex
+
         #region Serial Port Events
 
         /// <summary>
@@ -6716,7 +6772,9 @@ namespace DataDecoder
         string lastFreq = "";       // freq from last CATRxEvent
         string lastBand = "";
         string COBC = "";           // Chk on band change last band setting
-
+        int vfoFreq = 0;       // VFO B freq, used for SO2R calcs
+        int bBand, LastB = 0;   // current and last vfoB band
+        string lastFreqB = "";
         void sp_CATRxEvent(object source, CATSerialPorts.SerialRXEvent e)
         {
             try
@@ -6785,6 +6843,31 @@ namespace DataDecoder
                         set.Save();
                         return;
                     }
+                    /*** SO2R active vfo status ***/
+                    if (rawFreq.Length > 4 && rawFreq.Substring(0, 4) == "ZZSW")
+                    {
+                        ZZSW = Convert.ToInt32(rawFreq.Substring(4, 1));
+                        if (LastZZSW != ZZSW)
+                        {
+                            LastZZSW = ZZSW;
+                            zzswChanged(ZZSW); }
+                    }
+                    /*** Set SO2R vfo B band data ***/
+                    if (rawFreq.Length > 4 && rawFreq.Substring(0, 4) == "FB00")
+                    {
+                        string bFreq = rawFreq.Substring(2, 11);
+                        if (lastFreqB != bFreq)
+                        {
+                            lastFreqB = bFreq;
+                            vfoFreq = Convert.ToInt32(rawFreq.Substring(2, 7).TrimStart('0'));
+                            bBand = FreqToBand(vfoFreq);
+                            if (LastB != bBand)
+                            {
+                                LastB = bBand;
+                                SetVfoB();
+                            }
+                        }
+                    }
                     /*** save the band setting ***/
                     if (rawFreq.Length > 4 && rawFreq.Substring(0, 4) == "ZZBS")
                     {
@@ -6793,6 +6876,13 @@ namespace DataDecoder
                         {   // note that BtnBypass_Click sets lastBand to ""
                             // to force loading of power settings.
                             lastBand = band;
+
+                            /*** Set SO2R vfo A band data ***/
+                            if (chkSoEnab.Checked)
+                            {
+                                SetVfoA();
+
+                            }
                             /*** Setup Auto Drive for this band ***/
                             if (stsOper)
                             {   // if amp not selected for this band set PTT to ByPass
@@ -6863,7 +6953,7 @@ namespace DataDecoder
                                     case "006": WriteToPort("ZZPC" + set.def10.ToString().PadLeft(3, '0') + ";", iSleep); break;
                                 }
                             }
-                            /*** VHF+ Matrix ***/
+                            #region VHF+ Matrix
                             // if matrix enabled output to port
                             if (chkPortA.Checked || chkPortB.Checked)
                             {
@@ -7079,7 +7169,10 @@ namespace DataDecoder
                                         break;
                                 }
                             }
-                            /*** WaveNode sensor matrix ***/
+                            #endregion VHF+ Matrix
+
+                            #region WaveNode sensor Matrix
+
                             // If WN2 band sensor matrix enabled, set correct sensor
                             if (wn.chkEnab.Checked)
                             {
@@ -7164,6 +7257,10 @@ namespace DataDecoder
                                         } break;
                                 }//switch
                             }
+                            #endregion WaveNode sensor Matrix
+
+                            #region ACOM Antenna Switch
+
                             // use ACOM ant switch with amp off.
                             if (ac == "Off" && set.ChkAntEnab == true)
                             {
@@ -7181,6 +7278,8 @@ namespace DataDecoder
                                     case "006": SetpaTune(set.asw10.ToString()); break;
                                 }
                             }
+                            #endregion ACOM Antenna Switch
+
                         }// if band changed
                         return;
                     }// if ZZBS
@@ -7445,6 +7544,11 @@ namespace DataDecoder
                 {   //loop thru the buffer and find matches
                     sCmd = m.Value;
                     sBuf1 = sBuf1.Replace(m.Value, ""); //remove the match from the buffer
+                    if (chkSoEnab.Checked)
+                    {
+                        if (sCmd == "FT0;") sCmd = "ZZSW0;";
+                        else if (sCmd == "FT1;") sCmd = "ZZSW1;";
+                    }
                     WriteToPort(sCmd, iSleep);
                 }
                 logTimer.Enabled = true;
@@ -7508,6 +7612,11 @@ namespace DataDecoder
                         sBuf2 = sBuf2.Replace(m.Value, "");       //remove the match from the buffer
                         if (chkRCP2DisPol.Checked && sCmd.Length <= 3)
                             break;
+                        if (chkSoEnab.Checked)
+                        {
+                            if (sCmd == "FT0;") sCmd = "ZZSW0;";
+                            else if (sCmd == "FT1;") sCmd = "ZZSW1;";
+                        }
                         WriteToPort(sCmd, iSleep);
                     }
                 }
@@ -7570,6 +7679,11 @@ namespace DataDecoder
                         sBuf3 = sBuf3.Replace(m.Value, "");       //remove the match from the buffer
                         if (chkRCP3DisPol.Checked && sCmd.Length <= 3)
                             break;
+                        if (chkSoEnab.Checked)
+                        {
+                            if (sCmd == "FT0;") sCmd = "ZZSW0;";
+                            else if (sCmd == "FT1;") sCmd = "ZZSW1;";
+                        }
                         WriteToPort(sCmd, iSleep);
                     }
                 }
@@ -7632,6 +7746,11 @@ namespace DataDecoder
                         sBuf4 = sBuf4.Replace(m.Value, "");       //remove the match from the buffer
                         if (chkRCP2DisPol.Checked && sCmd.Length <= 3)
                             break;
+                        if (chkSoEnab.Checked)
+                        {
+                            if (sCmd == "FT0;") sCmd = "ZZSW0;";
+                            else if (sCmd == "FT1;") sCmd = "ZZSW1;";
+                        }
                         WriteToPort(sCmd, iSleep);
                     }
                 }
@@ -8087,6 +8206,7 @@ namespace DataDecoder
                     cboRepeatPort.Items.Add("");
                     cboPwrPort.Items.Add("");
                     cboSPEport.Items.Add("");
+                    cboSwPort.Items.Add("");
 
                     for (int i = 0; i < port.Length; i++)
                     {
@@ -8110,6 +8230,7 @@ namespace DataDecoder
                         cboRepeatPort.Items.Add("COM" + port[i]);
                         cboPwrPort.Items.Add("COM" + port[i]);
                         cboSPEport.Items.Add("COM" + port[i]);
+                        cboSwPort.Items.Add("COM" + port[i]);
                     }
                 }
                 else
@@ -9277,14 +9398,14 @@ namespace DataDecoder
                         freq = Convert.ToDouble(sfreq.Substring(0, 2) + "." + sfreq.Substring(2, 4));
                         SetStepFreq(freq.ToString("0.00", CultureInfo.InvariantCulture));
                     }
-                    else if (xfreq > 0 && xfreq < 99999)
+                    else if (xfreq > 9999 && xfreq < 99999)
                     {
                         freq = Convert.ToDouble(sfreq.Substring(0, 1) + "." + sfreq.Substring(1, 4));
                         SetStepFreq(freq.ToString("0.00", CultureInfo.InvariantCulture));
                     }
                     else
                     {
-                        SetStepFreq("Home");
+                        SetStepFreq("----");
                     }
 
 
@@ -9596,7 +9717,7 @@ namespace DataDecoder
             {
                 WriteToPort("ZZTS;", iSleep);
                 WriteToPort("ZZBS;", iSleep);
-
+//                WriteToPort("ZZSW;", iSleep);
             }
             catch { }
         }
@@ -11049,40 +11170,857 @@ namespace DataDecoder
 
         #endregion WaveNode Setup
 
-        private void Setup_Shown(object sender, EventArgs e)
-        {
-            if (TipOfTheDayDialog.IsShowTipsOnStartUp())
-            {
-                TipOfTheDayDialog dlg = new TipOfTheDayDialog();
-                dlg.ShowDialog();
-            }
-
-        }
-
         #endregion WaveNode
 
-        #region Propadex
-        // Propadex forecast UI
-        private void pixBox1_Click(object sender, EventArgs e)
+        #region SO2R
+
+        // All specific SO2R methods and events are here. See CatRX_DataReceived for
+        // other routines specific to band change and CAT operations
+
+        #region # Enums, Signatures & Vars #
+
+//        IntPtr ptr;
+        int lpt1 = 0; 
+        int lpt2 = 0;
+        bool bSo2rChg = false;
+        string dataH = "", dataL = "";  // data word for LPT1
+        string ctrlH = "", ctrlL = "";  // control word for LPT2
+        string TXa = "", TXb = "";      // TX ant for vfo a/b
+        int ZZSW = 0;               // active tx vfo
+        int LastZZSW = 0;               // last active tx vfo a/b
+        bool inhibA = false;
+        bool inhibB = false;
+        //        uint Control;
+        public const short FILE_ATTRIBUTE_NORMAL = 0x80;
+        public const short INVALID_HANDLE_VALUE = -1;
+        public const uint GENERIC_READ = 0x80000000;
+        public const uint GENERIC_WRITE = 0x40000000;
+        public const uint CREATE_NEW = 1;
+        public const uint CREATE_ALWAYS = 2;
+        public const uint OPEN_EXISTING = 3;
+        public const uint FILE_DEVICE_UNKNOWN = 0x00000022;
+        public const uint METHOD_BUFFERED = 0;
+        public const uint FILE_ANY_ACCESS = 0;
+
+        [DllImport("kernel32.dll", SetLastError = true)]
+        static extern IntPtr CreateFile(string lpFileName, uint dwDesiredAccess,
+            uint dwShareMode, IntPtr lpSecurityAttributes, uint dwCreationDisposition,
+            uint dwFlagsAndAttributes, IntPtr hTemplateFile);
+
+        [DllImport("kernel32.dll", ExactSpelling = true, SetLastError = true, CharSet = CharSet.Auto)]
+        static extern bool DeviceIoControl(IntPtr hDevice, uint dwIoControlCode,
+        IntPtr lpInBuffer, uint nInBufferSize,
+        IntPtr lpOutBuffer, uint nOutBufferSize,
+        out uint lpBytesReturned, IntPtr lpOverlapped);
+
+        #endregion # Enums, Signatures & Vars #
+
+        #region # SO2R Methods #
+
+        // Initialization
+        void SOinit()
         {
-            Process.Start("http://qsonet.com/propadex.html");
+            chkSoEnab.Checked = set.chkSoEnab;
+            cboSwPort.SelectedIndex = set.cboSwPort;
+            txtLPT2.Text = set.txtLPT2;
+            chk1Amp.Checked = set.chk1Amp;
+            txtTxA.Text = set.txtTxA; 
+            txtTxB.Text = set.txtTxB; 
+            chkAutoDrv.Checked = false;
+            if (chkSoEnab.Checked)
+            {
+                if (cboSwPort.SelectedIndex != -1)
+                {
+                    if (!SwitchPort.IsOpen) SwitchPort.Open();
+                }
+
+                #region # Load SO2R Matrix Controls #
+
+                // Load SO2R band controls from settings file
+                chkSO1a.Checked = set.chkSO1a; chkSO2a.Checked = set.chkSO2a; 
+                chkSO3a.Checked = set.chkSO3a; chkSO4a.Checked = set.chkSO4a; 
+                chkSO5a.Checked = set.chkSO5a; chkSO6a.Checked = set.chkSO6a; 
+                chkSO7a.Checked = set.chkSO7a; chkSO8a.Checked = set.chkSO8a; 
+                chkSO9a.Checked = set.chkSO9a; chkSO10a.Checked = set.chkSO10a;
+                chkSO1b.Checked = set.chkSO1b; chkSO2b.Checked = set.chkSO2b;
+                chkSO3b.Checked = set.chkSO3b; chkSO4b.Checked = set.chkSO4b;
+                chkSO5b.Checked = set.chkSO5b; chkSO6b.Checked = set.chkSO6b;
+                chkSO7b.Checked = set.chkSO7b; chkSO8b.Checked = set.chkSO8b;
+                chkSO9b.Checked = set.chkSO9b; chkSO10b.Checked = set.chkSO10b;
+                // misc text boxes
+                txtLPT1_1.Text = set.txtLPT1_1; txtLPT1_2.Text = set.txtLPT1_2;
+                txtLPT1_3.Text = set.txtLPT1_3; txtLPT1_4.Text = set.txtLPT1_4;
+                txtLPT1_5.Text = set.txtLPT1_5; txtLPT1_6.Text = set.txtLPT1_6;
+                txtLPT1_7.Text = set.txtLPT1_7; txtLPT1_8.Text = set.txtLPT1_8;
+                txtLPT1_9.Text = set.txtLPT1_9; txtLPT1_10.Text = set.txtLPT1_10;
+                // VFO A Controls
+                txtHi1_1a.Text = set.txtHi1_1a; txtHi1_2a.Text = set.txtHi1_2a;
+                txtHi1_3a.Text = set.txtHi1_3a; txtHi1_4a.Text = set.txtHi1_4a;
+                txtHi1_5a.Text = set.txtHi1_5a; txtHi1_6a.Text = set.txtHi1_6a;
+                txtHi1_7a.Text = set.txtHi1_7a; txtHi1_8a.Text = set.txtHi1_8a;
+                txtHi1_9a.Text = set.txtHi1_9a; txtHi1_10a.Text = set.txtHi1_10a;
+                txtPwr_1a.Text = set.txtPwr_1a; txtPwr_2a.Text = set.txtPwr_2a;
+                txtPwr_3a.Text = set.txtPwr_3a; txtPwr_4a.Text = set.txtPwr_4a;
+                txtPwr_5a.Text = set.txtPwr_5a; txtPwr_6a.Text = set.txtPwr_6a;
+                txtPwr_7a.Text = set.txtPwr_7a; txtPwr_8a.Text = set.txtPwr_8a;
+                txtPwr_9a.Text = set.txtPwr_9a; txtPwr_10a.Text = set.txtPwr_10a;
+                txtRx_1a.Text = set.txtRx_1a; txtRx_2a.Text = set.txtRx_2a;
+                txtRx_3a.Text = set.txtRx_3a; txtRx_4a.Text = set.txtRx_4a;
+                txtRx_5a.Text = set.txtRx_5a; txtRx_6a.Text = set.txtRx_6a;
+                txtRx_7a.Text = set.txtRx_7a; txtRx_8a.Text = set.txtRx_8a;
+                txtRx_9a.Text = set.txtRx_9a; txtRx_10a.Text = set.txtRx_10a;
+                txtTx_1a.Text = set.txtTx_1a; txtTx_2a.Text = set.txtTx_2a;
+                txtTx_3a.Text = set.txtTx_3a; txtTx_4a.Text = set.txtTx_4a;
+                txtTx_5a.Text = set.txtTx_5a; txtTx_6a.Text = set.txtTx_6a;
+                txtTx_7a.Text = set.txtTx_7a; txtTx_8a.Text = set.txtTx_8a;
+                txtTx_9a.Text = set.txtTx_9a; txtTx_10a.Text = set.txtTx_10a;
+                txtHi2_1a.Text = set.txtHi2_1a; txtHi2_2a.Text = set.txtHi2_2a;
+                txtHi2_3a.Text = set.txtHi2_3a; txtHi2_4a.Text = set.txtHi2_4a;
+                txtHi2_5a.Text = set.txtHi2_5a; txtHi2_6a.Text = set.txtHi2_6a;
+                txtHi2_7a.Text = set.txtHi2_7a; txtHi2_8a.Text = set.txtHi2_8a;
+                txtHi2_9a.Text = set.txtHi2_9a; txtHi2_10a.Text = set.txtHi2_10a;
+                // VFO B Controls
+                txtLo1_1b.Text = set.txtLo1_1b; txtLo1_2b.Text = set.txtLo1_2b;
+                txtLo1_3b.Text = set.txtLo1_3b; txtLo1_4b.Text = set.txtLo1_4b;
+                txtLo1_5b.Text = set.txtLo1_5b; txtLo1_6b.Text = set.txtLo1_6b;
+                txtLo1_7b.Text = set.txtLo1_7b; txtLo1_8b.Text = set.txtLo1_8b;
+                txtLo1_9b.Text = set.txtLo1_9b; txtLo1_10b.Text = set.txtLo1_10b;
+                txtPwr_1b.Text = set.txtPwr_1b; txtPwr_2b.Text = set.txtPwr_2b;
+                txtPwr_3b.Text = set.txtPwr_3b; txtPwr_4b.Text = set.txtPwr_4b;
+                txtPwr_5b.Text = set.txtPwr_5b; txtPwr_6b.Text = set.txtPwr_6b;
+                txtPwr_7b.Text = set.txtPwr_7b; txtPwr_8b.Text = set.txtPwr_8b;
+                txtPwr_9b.Text = set.txtPwr_9b; txtPwr_10b.Text = set.txtPwr_10b;
+                txtRx_1b.Text = set.txtRx_1b; txtRx_2b.Text = set.txtRx_2b;
+                txtRx_3b.Text = set.txtRx_3b; txtRx_4b.Text = set.txtRx_4b;
+                txtRx_5b.Text = set.txtRx_5b; txtRx_6b.Text = set.txtRx_6b;
+                txtRx_7b.Text = set.txtRx_7b; txtRx_8b.Text = set.txtRx_8b;
+                txtRx_9b.Text = set.txtRx_9b; txtRx_10b.Text = set.txtRx_10b;
+                txtTx_1b.Text = set.txtTx_1b; txtTx_2b.Text = set.txtTx_2b;
+                txtTx_3b.Text = set.txtTx_3b; txtTx_4b.Text = set.txtTx_4b;
+                txtTx_5b.Text = set.txtTx_5b; txtTx_6b.Text = set.txtTx_6b;
+                txtTx_7b.Text = set.txtTx_7b; txtTx_8b.Text = set.txtTx_8b;
+                txtTx_9b.Text = set.txtTx_9b; txtTx_10b.Text = set.txtTx_10b;
+                txtLo2_1b.Text = set.txtLo2_1b; txtLo2_2b.Text = set.txtLo2_2b;
+                txtLo2_3b.Text = set.txtLo2_3b; txtLo2_4b.Text = set.txtLo2_4b;
+                txtLo2_5b.Text = set.txtLo2_5b; txtLo2_6b.Text = set.txtLo2_6b;
+                txtLo2_7b.Text = set.txtLo2_7b; txtLo2_8b.Text = set.txtLo2_8b;
+                txtLo2_9b.Text = set.txtLo2_9b; txtLo2_10b.Text = set.txtLo2_10b;
+
+                #endregion # Load SO2R Controls #
+
+                WriteToPort("ZZRS1;", iSleep);  // turn on rx2
+                WriteToPort("ZZSW0;", iSleep);  // select vfo a xmit default
+                ZZSW = 0;                       // set vfo default status to VFO A
+                SetVfoB();                      // force setup of the data &
+                SetVfoA();                      // control words
+                bSo2rChg = false;               // set the so2r controls flag to false
+                lpt1 = Convert.ToInt32(txtLPT1_1.Text);
+                lpt2 = Convert.ToInt32(txtLPT2.Text);
+            }
+        }
+        // setup data for vfo a by band
+        void SetVfoA()
+        {
+            try
+            {
+                int ctrl = 0, data = 0;
+                switch (band)
+                {
+                    case "160":
+                        if (!chkSO1a.Checked) { inhibA = true; }
+                        else
+                        {
+                            inhibA = false;
+                            WriteToPort("ZZPC" + txtPwr_1a.Text.PadLeft(3, '0') + ";", iSleep);
+                            WriteToPort("ZZOA" + txtRx_1a.Text + ";", iSleep);
+                            TXa = txtTx_1a.Text;
+                            dataH = txtHi1_1a.Text;
+                            ctrlH = txtHi2_1a.Text;
+                        }                                                                                                         
+                        break;
+                    case "080":
+                        if (!chkSO2a.Checked) { inhibA = true; }
+                        else
+                        {
+                            inhibA = false;
+                            WriteToPort("ZZPC" + txtPwr_2a.Text.PadLeft(3, '0') + ";", iSleep);
+                            WriteToPort("ZZOA" + txtRx_2a.Text + ";", iSleep);
+                            TXa = txtTx_2a.Text;
+                            dataH = txtHi1_2a.Text;
+                            ctrlH = txtHi2_2a.Text;
+                        }
+                        break;
+                    case "040":
+                        if (!chkSO3a.Checked) { inhibA = true; }
+                        else
+                        {
+                            inhibA = false; 
+                            WriteToPort("ZZPC" + txtPwr_3a.Text.PadLeft(3, '0') + ";", iSleep);
+                            WriteToPort("ZZOA" + txtRx_3a.Text + ";", iSleep);
+                            TXa = txtTx_3a.Text;
+                            dataH = txtHi1_3a.Text;
+                            ctrlH = txtHi2_3a.Text;
+                        }
+                        break;
+                    case "030":
+                        if (!chkSO4a.Checked) { inhibA = true; }
+                        else
+                        {
+                            inhibA = false; 
+                            WriteToPort("ZZPC" + txtPwr_4a.Text.PadLeft(3, '0') + ";", iSleep);
+                            WriteToPort("ZZOA" + txtRx_4a.Text + ";", iSleep);
+                            TXa = txtTx_4a.Text;
+                            dataH = txtHi1_4a.Text;
+                            ctrlH = txtHi2_4a.Text;
+                        }
+                        break;
+                    case "020":
+                        if (!chkSO5a.Checked) { inhibA = true; }
+                        else
+                        {
+                            inhibA = false;
+                            WriteToPort("ZZPC" + txtPwr_5a.Text.PadLeft(3, '0') + ";", iSleep);
+                            WriteToPort("ZZOA" + txtRx_5a.Text + ";", iSleep);
+                            TXa = txtTx_5a.Text;
+                            dataH = txtHi1_5a.Text;
+                            ctrlH = txtHi2_5a.Text;
+                        }
+                        break;
+                    case "017":
+                        if (!chkSO6a.Checked) { inhibA = true; }
+                        else
+                        {
+                            inhibA = false;
+                            WriteToPort("ZZPC" + txtPwr_6a.Text.PadLeft(3, '0') + ";", iSleep);
+                            WriteToPort("ZZOB" + txtRx_6a.Text + ";", iSleep);
+                            TXa = txtTx_6a.Text;
+                            dataH = txtHi1_6a.Text;
+                            ctrlH = txtHi2_6a.Text;
+                        }
+                        break;
+                    case "015":
+                        if (!chkSO7a.Checked) { inhibA = true; }
+                        else
+                        {
+                            inhibA = false;
+                            WriteToPort("ZZPC" + txtPwr_7a.Text.PadLeft(3, '0') + ";", iSleep);
+                            WriteToPort("ZZOB" + txtRx_7a.Text + ";", iSleep);
+                            TXa = txtTx_7a.Text;
+                            dataH = txtHi1_7a.Text;
+                            ctrlH = txtHi2_7a.Text;
+                        }
+                        break;
+                    case "012":
+                        if (!chkSO8a.Checked) { inhibA = true; }
+                        else
+                        {
+                            inhibA = false;
+                            WriteToPort("ZZPC" + txtPwr_8a.Text.PadLeft(3, '0') + ";", iSleep);
+                            WriteToPort("ZZOB" + txtRx_8a.Text + ";", iSleep);
+                            TXa = txtTx_8a.Text;
+                            dataH = txtHi1_8a.Text;
+                            ctrlH = txtHi2_8a.Text;
+                        }
+                        break;
+                    case "010":
+                        if (!chkSO9a.Checked) { inhibA = true; }
+                        else
+                        {
+                            inhibA = false;
+                            WriteToPort("ZZPC" + txtPwr_9a.Text.PadLeft(3, '0') + ";", iSleep);
+                            WriteToPort("ZZOB" + txtRx_9a.Text + ";", iSleep);
+                            TXa = txtTx_9a.Text;
+                            dataH = txtHi1_9a.Text;
+                            ctrlH = txtHi2_9a.Text;
+                        }
+                        break;
+
+                    case "006":
+                        if (!chkSO10a.Checked) { inhibA = true; }
+                        else
+                        {
+                            inhibA = false;
+                            WriteToPort("ZZPC" + txtPwr_10a.Text.PadLeft(3, '0') + ";", iSleep);
+                            WriteToPort("ZZOB" + txtRx_10a.Text + ";", iSleep);
+                            TXa = txtTx_10a.Text;
+                            dataH = txtHi1_10a.Text;
+                            ctrlH = txtHi2_10a.Text;
+                        }
+                        break;
+                }//switch band
+                data = int.Parse(dataH + ctrlH, NumberStyles.HexNumber);
+                ctrl = int.Parse(dataL + ctrlL, NumberStyles.HexNumber);
+                OutParallelPort(Convert.ToInt32(txtLPT1_1.Text), data);
+                OutParallelPort(lpt2, ctrl);
+                if (ZZSW == 0)
+                {
+                    switch (txtTxA.Text)
+                    {
+                        case "1": WriteToPort("ZZOF100;", iSleep); break;
+                        case "2": WriteToPort("ZZOF010;", iSleep); break;
+                        case "3": WriteToPort("ZZOF001;", iSleep); break;
+                    }
+                    WriteToPort("ZZOC" + TXa + ";", iSleep);
+                }
+                if (inhibA) { WriteToPort("ZZPC000;", iSleep); } // set drive to zero
+            }
+            catch { }
+        }
+        // setup data for vfo b by band
+        void SetVfoB()
+        {
+            try
+            {
+                int ctrl = 0, data = 0;
+                switch (bBand)
+                {
+                    case 1:
+                        if (!chkSO1b.Checked) { inhibB = true; }
+                        else
+                        {
+                            inhibB = false;
+                            WriteToPort("ZZPC" + txtPwr_1b.Text.PadLeft(3, '0') + ";", iSleep);
+                            WriteToPort("ZZOB" + txtRx_1b.Text + ";", iSleep);
+                            TXb = txtTx_1b.Text;
+                            if (!chk1Amp.Checked)   // if single amp not checked load Low words
+                            {
+                                dataL = txtLo1_1b.Text;
+                                ctrlL = txtLo2_1b.Text;
+                            }
+                            else
+                            {                       // else load High word, zero out Low words 
+                                dataH = txtLo1_1b.Text;
+                                ctrlH = txtLo2_1b.Text;
+                                dataL = "0";
+                                ctrlL = "0";
+                            }
+                        }
+                        break;
+                    case 2:
+                        if (!chkSO2b.Checked) { inhibB = true; }
+                        else
+                        {
+                            inhibB = false;
+                            WriteToPort("ZZPC" + txtPwr_2b.Text.PadLeft(3, '0') + ";", iSleep);
+                            WriteToPort("ZZOB" + txtRx_2b.Text + ";", iSleep);
+                            TXb = txtTx_2b.Text;
+                            if (!chk1Amp.Checked)
+                            {
+                                dataL = txtLo1_2b.Text;
+                                ctrlL = txtLo2_2b.Text;
+                            }
+                            else
+                            {
+                                dataH = txtLo1_2b.Text;
+                                ctrlH = txtLo2_2b.Text;
+                                dataL = "0";
+                                ctrlL = "0";
+                            }
+                        }
+                        break;
+                    case 3:
+                        if (!chkSO3b.Checked) { inhibB = true; }
+                        else
+                        {
+                            inhibB = false;
+                            WriteToPort("ZZPC" + txtPwr_3b.Text.PadLeft(3, '0') + ";", iSleep);
+                            WriteToPort("ZZOB" + txtRx_3b.Text + ";", iSleep);
+                            TXb = txtTx_3b.Text;
+                            if (!chk1Amp.Checked)
+                            {
+                                dataL = txtLo1_3b.Text;
+                                ctrlL = txtLo2_3b.Text;
+                            }
+                            else
+                            {
+                                dataH = txtLo1_3b.Text;
+                                ctrlH = txtLo2_3b.Text;
+                                dataL = "0";
+                                ctrlL = "0";
+                            }
+                        }
+                        break;
+                    case 4:
+                        if (!chkSO4b.Checked) { inhibB = true; }
+                        else
+                        {
+                            inhibB = false;
+                            WriteToPort("ZZPC" + txtPwr_4b.Text.PadLeft(3, '0') + ";", iSleep);
+                            WriteToPort("ZZOB" + txtRx_4b.Text + ";", iSleep);
+                            TXb = txtTx_4b.Text;
+                            if (!chk1Amp.Checked)
+                            {
+                                dataL = txtLo1_4b.Text;
+                                ctrlL = txtLo2_4b.Text;
+                            }
+                            else
+                            {
+                                dataH = txtLo1_4b.Text;
+                                ctrlH = txtLo2_4b.Text;
+                                dataL = "0";
+                                ctrlL = "0";
+                            }
+                        }
+                        break;
+                    case 5:
+                        if (!chkSO5b.Checked) { inhibB = true; }
+                        else
+                        {
+                            inhibB = false;
+                            WriteToPort("ZZPC" + txtPwr_5b.Text.PadLeft(3, '0') + ";", iSleep);
+                            WriteToPort("ZZOB" + txtRx_5b.Text + ";", iSleep);
+                            TXb = txtTx_5b.Text;
+                            if (!chk1Amp.Checked)
+                            {
+                                dataL = txtLo1_5b.Text;
+                                ctrlL = txtLo2_5b.Text;
+                            }
+                            else
+                            {
+                                dataH = txtLo1_5b.Text;
+                                ctrlH = txtLo2_5b.Text;
+                                dataL = "0";
+                                ctrlL = "0";
+                            }
+                        }
+                        break;
+                    case 6:
+                        if (!chkSO6b.Checked) { inhibB = true; }
+                        else
+                        {
+                            inhibB = false;
+                            WriteToPort("ZZPC" + txtPwr_6b.Text.PadLeft(3, '0') + ";", iSleep);
+                            WriteToPort("ZZOB" + txtRx_6b.Text + ";", iSleep);
+                            TXb = txtTx_6b.Text;
+                            if (!chk1Amp.Checked)
+                            {
+                                dataL = txtLo1_6b.Text;
+                                ctrlL = txtLo2_6b.Text;
+                            }
+                            else
+                            {
+                                dataH = txtLo1_6b.Text;
+                                ctrlH = txtLo2_6b.Text;
+                                dataL = "0";
+                                ctrlL = "0";
+                            }
+                        }
+                        break;
+                    case 7:
+                        if (!chkSO7b.Checked) { inhibB = true; }
+                        else
+                        {
+                            inhibB = false;
+                            WriteToPort("ZZPC" + txtPwr_7b.Text.PadLeft(3, '0') + ";", iSleep);
+                            WriteToPort("ZZOB" + txtRx_7b.Text + ";", iSleep);
+                            TXb = txtTx_7b.Text;
+                            if (!chk1Amp.Checked)
+                            {
+                                dataL = txtLo1_7b.Text;
+                                ctrlL = txtLo2_7b.Text;
+                            }
+                            else
+                            {
+                                dataH = txtLo1_7b.Text;
+                                ctrlH = txtLo2_7b.Text;
+                                dataL = "0";
+                                ctrlL = "0";
+                            }
+                        }
+                        break;
+                    case 8:
+                        if (!chkSO8b.Checked) { inhibB = true; }
+                        else
+                        {
+                            inhibB = false;
+                            WriteToPort("ZZPC" + txtPwr_8b.Text.PadLeft(3, '0') + ";", iSleep);
+                            WriteToPort("ZZOB" + txtRx_8b.Text + ";", iSleep);
+                            TXb = txtTx_8b.Text;
+                            if (!chk1Amp.Checked)
+                            {
+                                dataL = txtLo1_8b.Text;
+                                ctrlL = txtLo2_8b.Text;
+                            }
+                            else
+                            {
+                                dataH = txtLo1_8b.Text;
+                                ctrlH = txtLo2_8b.Text;
+                                dataL = "0";
+                                ctrlL = "0";
+                            }
+                        }
+                        break;
+                    case 9:
+                        if (!chkSO9b.Checked) { inhibB = true; }
+                        else
+                        {
+                            inhibB = false;
+                            WriteToPort("ZZPC" + txtPwr_9b.Text.PadLeft(3, '0') + ";", iSleep);
+                            WriteToPort("ZZOB" + txtRx_9b.Text + ";", iSleep);
+                            TXb = txtTx_9b.Text;
+                            if (!chk1Amp.Checked)
+                            {
+                                dataL = txtLo1_9b.Text;
+                                ctrlL = txtLo2_9b.Text;
+                            }
+                            else
+                            {
+                                dataH = txtLo1_9b.Text;
+                                ctrlH = txtLo2_9b.Text;
+                                dataL = "0";
+                                ctrlL = "0";
+                            }
+                        }
+                
+                        break;
+                    case 10:
+                        if (!chkSO10b.Checked) { inhibB = true; }
+                        else
+                        {
+                            inhibB = false;
+                            WriteToPort("ZZPC" + txtPwr_10b.Text.PadLeft(3, '0') + ";", iSleep);
+                            WriteToPort("ZZOB" + txtRx_10b.Text + ";", iSleep);
+                            TXb = txtTx_10b.Text;
+                            if (!chk1Amp.Checked)
+                            {
+                                dataL = txtLo1_10b.Text;
+                                ctrlL = txtLo2_10b.Text;
+                            }
+                            else
+                            {
+                                dataH = txtLo1_10b.Text;
+                                ctrlH = txtLo2_10b.Text;
+                                dataL = "0";
+                                ctrlL = "0";
+                            }
+                        }
+                        break;
+                }
+                data = int.Parse(dataH + ctrlH, NumberStyles.HexNumber);
+                ctrl = int.Parse(dataL + ctrlL, NumberStyles.HexNumber);
+                OutParallelPort(Convert.ToInt32(txtLPT1_1.Text), data);
+                OutParallelPort(lpt2, ctrl);
+                if (ZZSW == 1)
+                {
+                    switch (txtTxB.Text)
+                    {
+                        case "1": WriteToPort("ZZOF100;", iSleep); break;
+                        case "2": WriteToPort("ZZOF010;", iSleep); break;
+                        case "3": WriteToPort("ZZOF001;", iSleep); break;
+                    }
+                    WriteToPort("ZZOC" + TXb + ";", iSleep);
+                }
+                if (inhibB) { WriteToPort("ZZPC000;", iSleep); } // set drive to zero
+
+            }
+            catch { }
+        }
+        // convert vfo b freq to band
+        int FreqToBand(int freq)
+        {
+            int vfoBband = 0;
+            if (freq > 180 && freq < 200) {vfoBband = 1;}// "160";
+            else if (freq > 349 && freq < 401) {vfoBband = 2;}
+            else if (freq > 699 && freq < 731) {vfoBband = 3;}
+            else if (freq > 1009 && freq < 1016) {vfoBband = 4;}
+            else if (freq > 1399 && freq < 1436) {vfoBband = 5;}
+            else if (freq > 1806 && freq < 1817) {vfoBband = 6;}
+            else if (freq > 2099 && freq < 2145) {vfoBband = 7;}
+            else if (freq > 2488 && freq < 2500) {vfoBband = 8;}
+            else if (freq > 2799 && freq < 3001) {vfoBband = 9;}
+            else if (freq > 4999 && freq < 5401) { vfoBband = 10; }
+
+            return vfoBband;
+        }
+        // One of the VFO TX buttons was pressed on the console
+        void zzswChanged(int zzsw)
+        {
+            if (zzsw == 0) SetVfoA();
+            else if (zzsw == 1) SetVfoB();
         }
 
-        void propTimer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
-        {
-            pixBox1.Load();
+        #endregion # SO2R Methods #
 
+        #region # SO2R Events #
+
+        private void btnSaveSO2R_Click(object sender, EventArgs e)
+        {
+            set.txtLPT2 = txtLPT2.Text; lpt2 = Convert.ToInt32(txtLPT2.Text);
+            set.txtTxA = txtTxA.Text; set.txtTxB = txtTxB.Text;
+            // save SO2R band controls to settings file
+            if (chkSO1a.Checked) set.chkSO1a = true; else set.chkSO1a = false;
+            if (chkSO2a.Checked) set.chkSO2a = true; else set.chkSO2a = false;
+            if (chkSO3a.Checked) set.chkSO3a = true; else set.chkSO3a = false;
+            if (chkSO4a.Checked) set.chkSO4a = true; else set.chkSO4a = false;
+            if (chkSO5a.Checked) set.chkSO5a = true; else set.chkSO5a = false;
+            if (chkSO6a.Checked) set.chkSO6a = true; else set.chkSO6a = false;
+            if (chkSO7a.Checked) set.chkSO7a = true; else set.chkSO7a = false;
+            if (chkSO8a.Checked) set.chkSO8a = true; else set.chkSO8a = false;
+            if (chkSO9a.Checked) set.chkSO9a = true; else set.chkSO9a = false;
+            if (chkSO10a.Checked) set.chkSO10a = true; else set.chkSO10a = false;
+            if (chkSO1b.Checked) set.chkSO1b = true; else set.chkSO1b = false;
+            if (chkSO2b.Checked) set.chkSO2b = true; else set.chkSO2b = false;
+            if (chkSO3b.Checked) set.chkSO3b = true; else set.chkSO3b = false;
+            if (chkSO4b.Checked) set.chkSO4b = true; else set.chkSO4b = false;
+            if (chkSO5b.Checked) set.chkSO5b = true; else set.chkSO5b = false;
+            if (chkSO6b.Checked) set.chkSO6b = true; else set.chkSO6b = false;
+            if (chkSO7b.Checked) set.chkSO7b = true; else set.chkSO7b = false;
+            if (chkSO8b.Checked) set.chkSO8b = true; else set.chkSO8b = false;
+            if (chkSO9b.Checked) set.chkSO9b = true; else set.chkSO9b = false;
+            if (chkSO10b.Checked) set.chkSO10b = true; else set.chkSO10b = false;
+            // misc text boxes
+            set.txtLPT1_1 = txtLPT1_1.Text; set.txtLPT1_2 = txtLPT1_2.Text;
+            set.txtLPT1_3 = txtLPT1_3.Text; set.txtLPT1_4 = txtLPT1_4.Text;
+            set.txtLPT1_5 = txtLPT1_5.Text; set.txtLPT1_6 = txtLPT1_6.Text;
+            set.txtLPT1_7 = txtLPT1_7.Text; set.txtLPT1_8 = txtLPT1_8.Text;
+            set.txtLPT1_9 = txtLPT1_9.Text; set.txtLPT1_10 = txtLPT1_10.Text;
+            // VFO A Controls
+            set.txtHi1_1a = txtHi1_1a.Text; set.txtHi1_2a = txtHi1_2a.Text;
+            set.txtHi1_3a = txtHi1_3a.Text; set.txtHi1_4a = txtHi1_4a.Text;
+            set.txtHi1_5a = txtHi1_5a.Text; set.txtHi1_6a = txtHi1_6a.Text;
+            set.txtHi1_7a = txtHi1_7a.Text; set.txtHi1_8a = txtHi1_8a.Text;
+            set.txtHi1_9a = txtHi1_9a.Text; set.txtHi1_10a = txtHi1_10a.Text;
+            set.txtPwr_1a = txtPwr_1a.Text; set.txtPwr_2a = txtPwr_2a.Text;
+            set.txtPwr_3a = txtPwr_3a.Text; set.txtPwr_4a = txtPwr_4a.Text;
+            set.txtPwr_5a = txtPwr_5a.Text; set.txtPwr_6a = txtPwr_6a.Text;
+            set.txtPwr_7a = txtPwr_7a.Text; set.txtPwr_8a = txtPwr_8a.Text;
+            set.txtPwr_9a = txtPwr_9a.Text; set.txtPwr_10a = txtPwr_10a.Text;
+            set.txtRx_1a = txtRx_1a.Text; set.txtRx_2a = txtRx_2a.Text;
+            set.txtRx_3a = txtRx_3a.Text; set.txtRx_4a = txtRx_4a.Text;
+            set.txtRx_5a = txtRx_5a.Text; set.txtRx_6a = txtRx_6a.Text;
+            set.txtRx_7a = txtRx_7a.Text; set.txtRx_8a = txtRx_8a.Text;
+            set.txtRx_9a = txtRx_9a.Text; set.txtRx_10a = txtRx_10a.Text;
+            set.txtTx_1a = txtTx_1a.Text; set.txtTx_2a = txtTx_2a.Text;
+            set.txtTx_3a = txtTx_3a.Text; set.txtTx_4a = txtTx_4a.Text;
+            set.txtTx_5a = txtTx_5a.Text; set.txtTx_6a = txtTx_6a.Text;
+            set.txtTx_7a = txtTx_7a.Text; set.txtTx_8a = txtTx_8a.Text;
+            set.txtTx_9a = txtTx_9a.Text; set.txtTx_10a = txtTx_10a.Text;
+            set.txtHi2_1a = txtHi2_1a.Text; set.txtHi2_2a = txtHi2_2a.Text;
+            set.txtHi2_3a = txtHi2_3a.Text; set.txtHi2_4a = txtHi2_4a.Text;
+            set.txtHi2_5a = txtHi2_5a.Text; set.txtHi2_6a = txtHi2_6a.Text;
+            set.txtHi2_7a = txtHi2_7a.Text; set.txtHi2_8a = txtHi2_8a.Text;
+            set.txtHi2_9a = txtHi2_9a.Text; set.txtHi2_10a = txtHi2_10a.Text;
+            // VFO B Controls
+            set.txtLo1_1b = txtLo1_1b.Text; set.txtLo1_2b = txtLo1_2b.Text;
+            set.txtLo1_3b = txtLo1_3b.Text; set.txtLo1_4b = txtLo1_4b.Text;
+            set.txtLo1_5b = txtLo1_5b.Text; set.txtLo1_6b = txtLo1_6b.Text;
+            set.txtLo1_7b = txtLo1_7b.Text; set.txtLo1_8b = txtLo1_8b.Text;
+            set.txtLo1_9b = txtLo1_9b.Text; set.txtLo1_10b = txtLo1_10b.Text;
+            set.txtPwr_1b = txtPwr_1b.Text; set.txtPwr_2b = txtPwr_2b.Text;
+            set.txtPwr_3b = txtPwr_3b.Text; set.txtPwr_4b = txtPwr_4b.Text;
+            set.txtPwr_5b = txtPwr_5b.Text; set.txtPwr_6b = txtPwr_6b.Text;
+            set.txtPwr_7b = txtPwr_7b.Text; set.txtPwr_8b = txtPwr_8b.Text;
+            set.txtPwr_9b = txtPwr_9b.Text; set.txtPwr_10b = txtPwr_10b.Text;
+            set.txtRx_1b = txtRx_1b.Text; set.txtRx_2b = txtRx_2b.Text;
+            set.txtRx_3b = txtRx_3b.Text; set.txtRx_4b = txtRx_4b.Text;
+            set.txtRx_5b = txtRx_5b.Text; set.txtRx_6b = txtRx_6b.Text;
+            set.txtRx_7b = txtRx_7b.Text; set.txtRx_8b = txtRx_8b.Text;
+            set.txtRx_9b = txtRx_9b.Text; set.txtRx_10b = txtRx_10b.Text;
+            set.txtTx_1b = txtTx_1b.Text; set.txtTx_2b = txtTx_2b.Text;
+            set.txtTx_3b = txtTx_3b.Text; set.txtTx_4b = txtTx_4b.Text;
+            set.txtTx_5b = txtTx_5b.Text; set.txtTx_6b = txtTx_6b.Text;
+            set.txtTx_7b = txtTx_7b.Text; set.txtTx_8b = txtTx_8b.Text;
+            set.txtTx_9b = txtTx_9b.Text; set.txtTx_10b = txtTx_10b.Text;
+            set.txtLo2_1b = txtLo2_1b.Text; set.txtLo2_2b = txtLo2_2b.Text;
+            set.txtLo2_3b = txtLo2_3b.Text; set.txtLo2_4b = txtLo2_4b.Text;
+            set.txtLo2_5b = txtLo2_5b.Text; set.txtLo2_6b = txtLo2_6b.Text;
+            set.txtLo2_7b = txtLo2_7b.Text; set.txtLo2_8b = txtLo2_8b.Text;
+            set.txtLo2_9b = txtLo2_9b.Text; set.txtLo2_10b = txtLo2_10b.Text;
+            set.Save();
+            lpt2 = Convert.ToInt32(txtLPT2.Text);
+            bSo2rChg = false;
+            SOinit();
+        }
+        internal void PinChanged(object sender, SerialPinChangedEventArgs e)
+        {
+            SerialPinChange SerialPinChange1;
+            SerialPinChange1 = e.EventType;
+            switch (SerialPinChange1)
+            {
+                case SerialPinChange.Break: break;
+                case SerialPinChange.CDChanged: break;
+                case SerialPinChange.CtsChanged:
+                    if (SwitchPort.CtsHolding)  // set VFO B active
+                    {
+                        ZZSW = 1;
+                        SetVfoB();
+                        WriteToPort("ZZSW1;", iSleep);
+                    }
+                    else    // set VFO A active
+                    {
+                        ZZSW = 0;
+                        SetVfoA();
+                        WriteToPort("ZZSW0;", iSleep);
+                    }
+                    break;
+                case SerialPinChange.DsrChanged: break;
+            }
+        }
+        // the SO2R enable check box has changed
+        private void chkSoEnab_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chkSoEnab.Checked)
+            {
+                set.chkSoEnab = true;
+                SOinit();
+            }
+            else set.chkSoEnab = false;
+            set.Save();
+        }
+        // the SO2R port number has changed
+        private void cboSwPort_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (SwitchPort.IsOpen) SwitchPort.Close();
+            if (cboSwPort.SelectedIndex > 0)
+            {
+                SwitchPort.PortName = cboSwPort.SelectedItem.ToString();
+                try
+                {
+                    SwitchPort.Open();
+                }
+                catch
+                {
+                    MessageBox.Show("The VFO switch serial port " + SwitchPort.PortName +
+                       " cannot be opened!\n", "Port Error",
+                       MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    cboSwPort.SelectedIndex = -1;
+                    //chkSoEnab.Checked = false;
+                    //return;
+                }
+            }
+            //else
+            //{
+            //    chkSoEnab.Checked = false;
+            //}
+            set.cboSwPort = cboSwPort.SelectedIndex;
+            set.Save();
+        }
+        // the single amp check box has changed
+        private void chk1Amp_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chk1Amp.Checked) set.chk1Amp = true;
+            else set.chk1Amp = false;
+            set.Save();
+        }
+        // matrix data has changed
+        private void grpSo2R_TextChanged(object sender, EventArgs e)
+        {
+            bSo2rChg = true;
+        }
+        // the TXA digit has changed
+        private void txtTxA_TextChanged(object sender, EventArgs e)
+        {
+            if (txtTxA.Text == "1" || txtTxA.Text == "2" || txtTxA.Text == "3")
+                if (txtTxA.Text != txtTxB.Text)
+                { set.txtTxA = txtTxA.Text; set.Save(); }
+                else
+                {
+                    MessageBox.Show("TXA and TXB can not use the same TX line. \n\n" +
+                        "Please select another TX line (1-3).", "Input Error", 
+                        MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    if (txtTxB.Text == "3") { txtTxA.Text = "1"; }
+                    else if (txtTxB.Text == "1") { txtTxA.Text = "2"; }
+                    else if (txtTxB.Text == "2") { txtTxA.Text = "3"; }
+                    set.txtTxA = txtTxA.Text; set.Save();
+                    return;
+                }
+            else if (txtTxA.Text == "") { return; }
+            else
+            {
+                MessageBox.Show("This value can only be a decimal number from 1-3. \n\n" +
+                    "Please select a number in this range.", "Input Error",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+                if (txtTxB.Text == "3") { txtTxA.Text = "1"; }
+                else if (txtTxB.Text == "2") { txtTxA.Text = "3"; }
+                else if (txtTxB.Text == "1") { txtTxA.Text = "2"; }
+                set.txtTxA = txtTxA.Text; set.Save();
+            }
+        }
+        // the TXB digit has changed
+        private void txtTxB_TextChanged(object sender, EventArgs e)
+        {
+            if (txtTxB.Text == "1" || txtTxB.Text == "2" || txtTxB.Text == "3")
+                if (txtTxA.Text != txtTxB.Text)
+                { set.txtTxB = txtTxB.Text; set.Save(); }
+                else
+                {
+                    MessageBox.Show("TXA and TXB can not use the same TX line. \n\n" +
+                        "Please select another TX line (1-3).", "Input Error",
+                        MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    if (txtTxA.Text == "3") { txtTxB.Text = "1"; }
+                    else if (txtTxA.Text == "2") { txtTxB.Text = "3"; }
+                    else if (txtTxA.Text == "1") { txtTxB.Text = "2"; }
+                    set.txtTxB = txtTxB.Text; set.Save();
+                    return;
+                }
+            else if (txtTxB.Text == "") { return; }
+            else
+            {
+                MessageBox.Show("This value can only be a decimal number from 1-3. \n\n" +
+                    "Please select a number in this range.", "Input Error",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+                if (txtTxA.Text == "3") { txtTxB.Text = "1"; }
+                else if (txtTxA.Text == "2") { txtTxB.Text = "3"; }
+                else if (txtTxA.Text == "1") { txtTxB.Text = "2"; }
+                set.txtTxB = txtTxB.Text; set.Save();
+            }
         }
 
-        #endregion Propadex
+        #endregion # SO2R Events #
+
+        #region # USB2LPT #
+        // add to SOInit()
+        //try
+        //{
+        //    string device = @"\\.\LPT1";
+        //    ptr = CreateFile(device, GENERIC_READ | GENERIC_WRITE,
+        //        0, IntPtr.Zero, OPEN_EXISTING, 0, IntPtr.Zero);
+        //    if (ptr.ToInt32() == -1)
+        //    {
+        //        Marshal.ThrowExceptionForHR(Marshal.GetHRForLastWin32Error());
+        //    }
+        //}
+        //catch (Exception HR)
+        //{
+        //    MessageBox.Show(HR.Message);
+        //}
+
+
+        //        byte inb(byte a)
+        //        {
+        //            byte[] IoData = new byte[1];
+        //            IoData[0] = Convert.ToByte(a | 0x10);
+        //     //       IntPtr IoData;
+        //            uint BytesRet;
+        ////            byte tmp = Convert.ToByte(a|0x10);
+        ////            IoData = (IntPtr)tmp;	// set the bit for read operations
+        //            uint InBuf;// = 0;
+        //            uint OutBuf;// = 0;
+
+        //            DeviceIoControl(ptr, 0x222010,
+        //              IoData, InBuf, IoData, OutBuf, out BytesRet, IntPtr.Zero);
+        //            return IoData[0];
+        //        }
+
+        //internal delegate void SerialPinChangedEventHandlerDelagate
+        //    (object sender, SerialPinChangedEventArgs e);
+
+        //SerialPinChangedEventHandler SPCEH;
+
+        //private void SerialPinChangedEventHandlerDelegate(object sender, SerialPinChangedEventArgs e)
+        //{
+        //    SPCEH = new SerialPinChangedEventHandler(this.PinChanged);
+        //}
+        // a serial port control line has changed
+
+        #endregion # USB2LPT #
+
+        #endregion SO2R
 
     } // end class Setup
 
+
     #region Helper Classes
-    //using (new HourGlass())
-    //{
-    //    Thread.Sleep(5000); // allow time for radio to initialize
-    //}
 
     public class HourGlass : IDisposable
     {
@@ -11109,6 +12047,10 @@ namespace DataDecoder
         [System.Runtime.InteropServices.DllImport("user32.dll")]
         private static extern IntPtr SendMessage(IntPtr hWnd, int msg, IntPtr wp, IntPtr lp);
     }
+    //using (new HourGlass())
+    //{
+    //    Thread.Sleep(5000); // allow time for radio to initialize
+    //}
 
     public class ProgressDialog
     {

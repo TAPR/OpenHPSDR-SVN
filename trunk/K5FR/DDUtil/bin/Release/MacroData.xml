@@ -57,12 +57,12 @@
     <Command>DDFA42;</Command>
   </macro>
   <macro>
-    <Button>West</Button>
-    <Command>DDFA81;</Command>
+    <Button>Port77</Button>
+    <Command>DDLP0063277;</Command>
   </macro>
   <macro>
-    <Button>Balanced</Button>
-    <Command>DDBL;</Command>
+    <Button>PortFF</Button>
+    <Command>DDLP00632FF;</Command>
   </macro>
   <macro>
     <Button>AM</Button>
