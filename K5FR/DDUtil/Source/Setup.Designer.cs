@@ -243,6 +243,7 @@ namespace DataDecoder
             this.chkB12 = new System.Windows.Forms.CheckBox();
             this.chkB20 = new System.Windows.Forms.CheckBox();
             this.chkB15 = new System.Windows.Forms.CheckBox();
+            this.pixBox1 = new System.Windows.Forms.PictureBox();
             this.grpPTT = new System.Windows.Forms.GroupBox();
             this.btnByp = new System.Windows.Forms.Button();
             this.groupBox13 = new System.Windows.Forms.GroupBox();
@@ -837,7 +838,194 @@ namespace DataDecoder
             this.label52 = new System.Windows.Forms.Label();
             this.txtLong = new System.Windows.Forms.TextBox();
             this.tabProp = new System.Windows.Forms.TabPage();
-            this.pixBox1 = new System.Windows.Forms.PictureBox();
+            this.grpSO2R = new System.Windows.Forms.GroupBox();
+            this.label215 = new System.Windows.Forms.Label();
+            this.txtTxB = new System.Windows.Forms.TextBox();
+            this.label214 = new System.Windows.Forms.Label();
+            this.txtTxA = new System.Windows.Forms.TextBox();
+            this.label202 = new System.Windows.Forms.Label();
+            this.label204 = new System.Windows.Forms.Label();
+            this.label206 = new System.Windows.Forms.Label();
+            this.label207 = new System.Windows.Forms.Label();
+            this.label208 = new System.Windows.Forms.Label();
+            this.label209 = new System.Windows.Forms.Label();
+            this.label210 = new System.Windows.Forms.Label();
+            this.label211 = new System.Windows.Forms.Label();
+            this.label212 = new System.Windows.Forms.Label();
+            this.label213 = new System.Windows.Forms.Label();
+            this.txtHi2_5a = new System.Windows.Forms.TextBox();
+            this.chkSO10b = new System.Windows.Forms.CheckBox();
+            this.chkSO9b = new System.Windows.Forms.CheckBox();
+            this.chkSO8b = new System.Windows.Forms.CheckBox();
+            this.chkSO7b = new System.Windows.Forms.CheckBox();
+            this.chkSO6b = new System.Windows.Forms.CheckBox();
+            this.chkSO5b = new System.Windows.Forms.CheckBox();
+            this.chkSO4b = new System.Windows.Forms.CheckBox();
+            this.chkSO3b = new System.Windows.Forms.CheckBox();
+            this.chkSO2b = new System.Windows.Forms.CheckBox();
+            this.chkSO1b = new System.Windows.Forms.CheckBox();
+            this.label200 = new System.Windows.Forms.Label();
+            this.chk1Amp = new System.Windows.Forms.CheckBox();
+            this.label205 = new System.Windows.Forms.Label();
+            this.label203 = new System.Windows.Forms.Label();
+            this.txtLPT2 = new System.Windows.Forms.TextBox();
+            this.btnSaveSO2R = new System.Windows.Forms.Button();
+            this.label184 = new System.Windows.Forms.Label();
+            this.txtLo1_10b = new System.Windows.Forms.TextBox();
+            this.txtLo1_9b = new System.Windows.Forms.TextBox();
+            this.txtLo1_8b = new System.Windows.Forms.TextBox();
+            this.txtLo1_7b = new System.Windows.Forms.TextBox();
+            this.txtLo1_6b = new System.Windows.Forms.TextBox();
+            this.txtLo1_5b = new System.Windows.Forms.TextBox();
+            this.txtLo1_4b = new System.Windows.Forms.TextBox();
+            this.cboSwPort = new System.Windows.Forms.ComboBox();
+            this.txtLo1_3b = new System.Windows.Forms.TextBox();
+            this.txtLo1_2b = new System.Windows.Forms.TextBox();
+            this.chkSoEnab = new System.Windows.Forms.CheckBox();
+            this.txtLo1_1b = new System.Windows.Forms.TextBox();
+            this.label201 = new System.Windows.Forms.Label();
+            this.label199 = new System.Windows.Forms.Label();
+            this.txtLo2_10b = new System.Windows.Forms.TextBox();
+            this.txtTx_10b = new System.Windows.Forms.TextBox();
+            this.txtPwr_10b = new System.Windows.Forms.TextBox();
+            this.txtRx_10b = new System.Windows.Forms.TextBox();
+            this.label198 = new System.Windows.Forms.Label();
+            this.txtLo2_9b = new System.Windows.Forms.TextBox();
+            this.txtTx_9b = new System.Windows.Forms.TextBox();
+            this.txtPwr_9b = new System.Windows.Forms.TextBox();
+            this.txtRx_9b = new System.Windows.Forms.TextBox();
+            this.label197 = new System.Windows.Forms.Label();
+            this.txtLo2_8b = new System.Windows.Forms.TextBox();
+            this.txtTx_8b = new System.Windows.Forms.TextBox();
+            this.txtPwr_8b = new System.Windows.Forms.TextBox();
+            this.txtRx_8b = new System.Windows.Forms.TextBox();
+            this.label196 = new System.Windows.Forms.Label();
+            this.txtLo2_7b = new System.Windows.Forms.TextBox();
+            this.txtTx_7b = new System.Windows.Forms.TextBox();
+            this.txtPwr_7b = new System.Windows.Forms.TextBox();
+            this.txtRx_7b = new System.Windows.Forms.TextBox();
+            this.label195 = new System.Windows.Forms.Label();
+            this.txtLo2_6b = new System.Windows.Forms.TextBox();
+            this.txtTx_6b = new System.Windows.Forms.TextBox();
+            this.txtPwr_6b = new System.Windows.Forms.TextBox();
+            this.txtRx_6b = new System.Windows.Forms.TextBox();
+            this.label194 = new System.Windows.Forms.Label();
+            this.txtLo2_5b = new System.Windows.Forms.TextBox();
+            this.txtTx_5b = new System.Windows.Forms.TextBox();
+            this.txtPwr_5b = new System.Windows.Forms.TextBox();
+            this.txtRx_5b = new System.Windows.Forms.TextBox();
+            this.label193 = new System.Windows.Forms.Label();
+            this.txtLo2_4b = new System.Windows.Forms.TextBox();
+            this.txtTx_4b = new System.Windows.Forms.TextBox();
+            this.txtPwr_4b = new System.Windows.Forms.TextBox();
+            this.txtRx_4b = new System.Windows.Forms.TextBox();
+            this.label192 = new System.Windows.Forms.Label();
+            this.txtLo2_3b = new System.Windows.Forms.TextBox();
+            this.txtTx_3b = new System.Windows.Forms.TextBox();
+            this.txtPwr_3b = new System.Windows.Forms.TextBox();
+            this.txtRx_3b = new System.Windows.Forms.TextBox();
+            this.label191 = new System.Windows.Forms.Label();
+            this.txtLo2_2b = new System.Windows.Forms.TextBox();
+            this.txtTx_2b = new System.Windows.Forms.TextBox();
+            this.txtPwr_2b = new System.Windows.Forms.TextBox();
+            this.txtRx_2b = new System.Windows.Forms.TextBox();
+            this.label190 = new System.Windows.Forms.Label();
+            this.label189 = new System.Windows.Forms.Label();
+            this.label185 = new System.Windows.Forms.Label();
+            this.txtLo2_1b = new System.Windows.Forms.TextBox();
+            this.label186 = new System.Windows.Forms.Label();
+            this.txtTx_1b = new System.Windows.Forms.TextBox();
+            this.label187 = new System.Windows.Forms.Label();
+            this.label188 = new System.Windows.Forms.Label();
+            this.txtPwr_1b = new System.Windows.Forms.TextBox();
+            this.txtRx_1b = new System.Windows.Forms.TextBox();
+            this.label183 = new System.Windows.Forms.Label();
+            this.txtHi2_10a = new System.Windows.Forms.TextBox();
+            this.txtTx_10a = new System.Windows.Forms.TextBox();
+            this.txtPwr_10a = new System.Windows.Forms.TextBox();
+            this.txtRx_10a = new System.Windows.Forms.TextBox();
+            this.txtHi1_10a = new System.Windows.Forms.TextBox();
+            this.txtLPT1_10 = new System.Windows.Forms.TextBox();
+            this.label179 = new System.Windows.Forms.Label();
+            this.chkSO10a = new System.Windows.Forms.CheckBox();
+            this.txtHi2_9a = new System.Windows.Forms.TextBox();
+            this.txtTx_9a = new System.Windows.Forms.TextBox();
+            this.txtPwr_9a = new System.Windows.Forms.TextBox();
+            this.txtRx_9a = new System.Windows.Forms.TextBox();
+            this.txtHi1_9a = new System.Windows.Forms.TextBox();
+            this.txtLPT1_9 = new System.Windows.Forms.TextBox();
+            this.label180 = new System.Windows.Forms.Label();
+            this.chkSO9a = new System.Windows.Forms.CheckBox();
+            this.txtHi2_8a = new System.Windows.Forms.TextBox();
+            this.txtTx_8a = new System.Windows.Forms.TextBox();
+            this.txtPwr_8a = new System.Windows.Forms.TextBox();
+            this.txtRx_8a = new System.Windows.Forms.TextBox();
+            this.txtHi1_8a = new System.Windows.Forms.TextBox();
+            this.txtLPT1_8 = new System.Windows.Forms.TextBox();
+            this.label181 = new System.Windows.Forms.Label();
+            this.chkSO8a = new System.Windows.Forms.CheckBox();
+            this.txtHi2_7a = new System.Windows.Forms.TextBox();
+            this.txtTx_7a = new System.Windows.Forms.TextBox();
+            this.txtPwr_7a = new System.Windows.Forms.TextBox();
+            this.txtRx_7a = new System.Windows.Forms.TextBox();
+            this.txtHi1_7a = new System.Windows.Forms.TextBox();
+            this.txtLPT1_7 = new System.Windows.Forms.TextBox();
+            this.label182 = new System.Windows.Forms.Label();
+            this.chkSO7a = new System.Windows.Forms.CheckBox();
+            this.txtHi2_6a = new System.Windows.Forms.TextBox();
+            this.txtTx_6a = new System.Windows.Forms.TextBox();
+            this.txtPwr_6a = new System.Windows.Forms.TextBox();
+            this.txtRx_6a = new System.Windows.Forms.TextBox();
+            this.txtHi1_6a = new System.Windows.Forms.TextBox();
+            this.txtLPT1_6 = new System.Windows.Forms.TextBox();
+            this.label178 = new System.Windows.Forms.Label();
+            this.chkSO6a = new System.Windows.Forms.CheckBox();
+            this.txtTx_5a = new System.Windows.Forms.TextBox();
+            this.txtPwr_5a = new System.Windows.Forms.TextBox();
+            this.txtRx_5a = new System.Windows.Forms.TextBox();
+            this.txtHi1_5a = new System.Windows.Forms.TextBox();
+            this.txtLPT1_5 = new System.Windows.Forms.TextBox();
+            this.label177 = new System.Windows.Forms.Label();
+            this.chkSO5a = new System.Windows.Forms.CheckBox();
+            this.txtHi2_4a = new System.Windows.Forms.TextBox();
+            this.txtTx_4a = new System.Windows.Forms.TextBox();
+            this.txtPwr_4a = new System.Windows.Forms.TextBox();
+            this.txtRx_4a = new System.Windows.Forms.TextBox();
+            this.txtHi1_4a = new System.Windows.Forms.TextBox();
+            this.txtLPT1_4 = new System.Windows.Forms.TextBox();
+            this.label176 = new System.Windows.Forms.Label();
+            this.chkSO4a = new System.Windows.Forms.CheckBox();
+            this.txtHi2_3a = new System.Windows.Forms.TextBox();
+            this.txtTx_3a = new System.Windows.Forms.TextBox();
+            this.txtPwr_3a = new System.Windows.Forms.TextBox();
+            this.txtRx_3a = new System.Windows.Forms.TextBox();
+            this.txtHi1_3a = new System.Windows.Forms.TextBox();
+            this.txtLPT1_3 = new System.Windows.Forms.TextBox();
+            this.label175 = new System.Windows.Forms.Label();
+            this.chkSO3a = new System.Windows.Forms.CheckBox();
+            this.txtHi2_2a = new System.Windows.Forms.TextBox();
+            this.txtTx_2a = new System.Windows.Forms.TextBox();
+            this.txtPwr_2a = new System.Windows.Forms.TextBox();
+            this.txtRx_2a = new System.Windows.Forms.TextBox();
+            this.txtHi1_2a = new System.Windows.Forms.TextBox();
+            this.txtLPT1_2 = new System.Windows.Forms.TextBox();
+            this.label168 = new System.Windows.Forms.Label();
+            this.chkSO2a = new System.Windows.Forms.CheckBox();
+            this.label174 = new System.Windows.Forms.Label();
+            this.txtHi2_1a = new System.Windows.Forms.TextBox();
+            this.label173 = new System.Windows.Forms.Label();
+            this.txtTx_1a = new System.Windows.Forms.TextBox();
+            this.label172 = new System.Windows.Forms.Label();
+            this.label170 = new System.Windows.Forms.Label();
+            this.txtPwr_1a = new System.Windows.Forms.TextBox();
+            this.txtRx_1a = new System.Windows.Forms.TextBox();
+            this.txtHi1_1a = new System.Windows.Forms.TextBox();
+            this.label167 = new System.Windows.Forms.Label();
+            this.txtLPT1_1 = new System.Windows.Forms.TextBox();
+            this.label166 = new System.Windows.Forms.Label();
+            this.label169 = new System.Windows.Forms.Label();
+            this.chkSO1a = new System.Windows.Forms.CheckBox();
+            this.label171 = new System.Windows.Forms.Label();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.AccPort = new System.IO.Ports.SerialPort(this.components);
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
@@ -853,6 +1041,22 @@ namespace DataDecoder
             this.txtAlcInd = new System.Windows.Forms.TextBox();
             this.btnFZ = new System.Windows.Forms.Button();
             this.lblHighSWR = new System.Windows.Forms.Label();
+            this.comboBox2 = new System.Windows.Forms.ComboBox();
+            this.comboBox3 = new System.Windows.Forms.ComboBox();
+            this.comboBox4 = new System.Windows.Forms.ComboBox();
+            this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.textBox3 = new System.Windows.Forms.TextBox();
+            this.comboBox5 = new System.Windows.Forms.ComboBox();
+            this.checkBox3 = new System.Windows.Forms.CheckBox();
+            this.checkBox4 = new System.Windows.Forms.CheckBox();
+            this.checkBox5 = new System.Windows.Forms.CheckBox();
+            this.checkBox6 = new System.Windows.Forms.CheckBox();
+            this.comboBox6 = new System.Windows.Forms.ComboBox();
+            this.checkBox7 = new System.Windows.Forms.CheckBox();
+            this.checkBox8 = new System.Windows.Forms.CheckBox();
+            this.checkBox9 = new System.Windows.Forms.CheckBox();
+            this.comboBox7 = new System.Windows.Forms.ComboBox();
+            this.checkBox10 = new System.Windows.Forms.CheckBox();
             this.LogPort = new System.IO.Ports.SerialPort(this.components);
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
@@ -922,6 +1126,13 @@ namespace DataDecoder
             this.PwrPort = new System.IO.Ports.SerialPort(this.components);
             this.pdTimer = new System.Windows.Forms.Timer(this.components);
             this.SPEport = new System.IO.Ports.SerialPort(this.components);
+            this.label159 = new System.Windows.Forms.Label();
+            this.label160 = new System.Windows.Forms.Label();
+            this.label162 = new System.Windows.Forms.Label();
+            this.label163 = new System.Windows.Forms.Label();
+            this.label164 = new System.Windows.Forms.Label();
+            this.label165 = new System.Windows.Forms.Label();
+            this.SwitchPort = new System.IO.Ports.SerialPort(this.components);
             this.tabControl.SuspendLayout();
             this.tabPorts.SuspendLayout();
             this.grpSlave.SuspendLayout();
@@ -953,6 +1164,7 @@ namespace DataDecoder
             this.grpSPE.SuspendLayout();
             this.grpAmpBand.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numDrive)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pixBox1)).BeginInit();
             this.grpPTT.SuspendLayout();
             this.groupBox13.SuspendLayout();
             this.grpAmp.SuspendLayout();
@@ -987,7 +1199,7 @@ namespace DataDecoder
             this.grpModel.SuspendLayout();
             this.groupBox14.SuspendLayout();
             this.tabProp.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pixBox1)).BeginInit();
+            this.grpSO2R.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numSplit)).BeginInit();
             this.contextMenuStrip1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
@@ -1012,7 +1224,7 @@ namespace DataDecoder
             this.tabControl.Name = "tabControl";
             this.tabControl.Padding = new System.Drawing.Point(4, 3);
             this.tabControl.SelectedIndex = 0;
-            this.tabControl.Size = new System.Drawing.Size(439, 335);
+            this.tabControl.Size = new System.Drawing.Size(439, 337);
             this.tabControl.TabIndex = 31;
             this.toolTip1.SetToolTip(this.tabControl, "Right-Click for Options");
             // 
@@ -1029,7 +1241,7 @@ namespace DataDecoder
             this.tabPorts.Location = new System.Drawing.Point(4, 22);
             this.tabPorts.Name = "tabPorts";
             this.tabPorts.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPorts.Size = new System.Drawing.Size(431, 309);
+            this.tabPorts.Size = new System.Drawing.Size(431, 311);
             this.tabPorts.TabIndex = 0;
             this.tabPorts.Text = "Ports";
             this.toolTip1.SetToolTip(this.tabPorts, "Right-Click for Options");
@@ -1624,7 +1836,7 @@ namespace DataDecoder
             this.tabBCD.Location = new System.Drawing.Point(4, 22);
             this.tabBCD.Name = "tabBCD";
             this.tabBCD.Padding = new System.Windows.Forms.Padding(3);
-            this.tabBCD.Size = new System.Drawing.Size(431, 309);
+            this.tabBCD.Size = new System.Drawing.Size(431, 311);
             this.tabBCD.TabIndex = 1;
             this.tabBCD.Text = "BCD";
             this.toolTip1.SetToolTip(this.tabBCD, "Right-Click for Options");
@@ -1979,7 +2191,7 @@ namespace DataDecoder
             this.tabRCP.Controls.Add(this.groupBox7);
             this.tabRCP.Location = new System.Drawing.Point(4, 22);
             this.tabRCP.Name = "tabRCP";
-            this.tabRCP.Size = new System.Drawing.Size(431, 309);
+            this.tabRCP.Size = new System.Drawing.Size(431, 311);
             this.tabRCP.TabIndex = 3;
             this.tabRCP.Text = "RCP";
             this.tabRCP.UseVisualStyleBackColor = true;
@@ -2287,7 +2499,7 @@ namespace DataDecoder
             this.tabWatt.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tabWatt.Location = new System.Drawing.Point(4, 22);
             this.tabWatt.Name = "tabWatt";
-            this.tabWatt.Size = new System.Drawing.Size(431, 309);
+            this.tabWatt.Size = new System.Drawing.Size(431, 311);
             this.tabWatt.TabIndex = 2;
             this.tabWatt.Text = "Watt";
             this.tabWatt.UseVisualStyleBackColor = true;
@@ -3197,13 +3409,14 @@ namespace DataDecoder
             // 
             this.tabAmp.Controls.Add(this.grpSPE);
             this.tabAmp.Controls.Add(this.grpAmpBand);
+            this.tabAmp.Controls.Add(this.pixBox1);
             this.tabAmp.Controls.Add(this.grpPTT);
             this.tabAmp.Controls.Add(this.groupBox13);
             this.tabAmp.Controls.Add(this.grpAmp);
             this.tabAmp.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.25F);
             this.tabAmp.Location = new System.Drawing.Point(4, 22);
             this.tabAmp.Name = "tabAmp";
-            this.tabAmp.Size = new System.Drawing.Size(431, 309);
+            this.tabAmp.Size = new System.Drawing.Size(431, 311);
             this.tabAmp.TabIndex = 7;
             this.tabAmp.Text = "Amps";
             this.tabAmp.UseVisualStyleBackColor = true;
@@ -3774,6 +3987,18 @@ namespace DataDecoder
             this.toolTip1.SetToolTip(this.chkB15, "Select to enable Auto Tune on this band.");
             this.chkB15.UseVisualStyleBackColor = false;
             // 
+            // pixBox1
+            // 
+            this.pixBox1.ImageLocation = "http://qsonet.com/propadex.png";
+            this.pixBox1.InitialImage = null;
+            this.pixBox1.Location = new System.Drawing.Point(276, 73);
+            this.pixBox1.Name = "pixBox1";
+            this.pixBox1.Size = new System.Drawing.Size(146, 91);
+            this.pixBox1.TabIndex = 80;
+            this.pixBox1.TabStop = false;
+            this.toolTip1.SetToolTip(this.pixBox1, "Current propagation condition (click image for more info).");
+            this.pixBox1.Click += new System.EventHandler(this.pixBox1_Click);
+            // 
             // grpPTT
             // 
             this.grpPTT.Controls.Add(this.btnByp);
@@ -4336,7 +4561,7 @@ namespace DataDecoder
             this.tabOther.Controls.Add(this.groupBox4);
             this.tabOther.Location = new System.Drawing.Point(4, 22);
             this.tabOther.Name = "tabOther";
-            this.tabOther.Size = new System.Drawing.Size(431, 309);
+            this.tabOther.Size = new System.Drawing.Size(431, 311);
             this.tabOther.TabIndex = 9;
             this.tabOther.Text = "Other";
             this.tabOther.UseVisualStyleBackColor = true;
@@ -5200,7 +5425,7 @@ namespace DataDecoder
             this.tabMacro.Controls.Add(this.btnMacro10);
             this.tabMacro.Location = new System.Drawing.Point(4, 22);
             this.tabMacro.Name = "tabMacro";
-            this.tabMacro.Size = new System.Drawing.Size(431, 309);
+            this.tabMacro.Size = new System.Drawing.Size(431, 311);
             this.tabMacro.TabIndex = 4;
             this.tabMacro.Text = "Macro";
             this.tabMacro.UseVisualStyleBackColor = true;
@@ -5749,7 +5974,7 @@ namespace DataDecoder
             this.tabRotor.Controls.Add(this.groupBox8);
             this.tabRotor.Location = new System.Drawing.Point(4, 22);
             this.tabRotor.Name = "tabRotor";
-            this.tabRotor.Size = new System.Drawing.Size(431, 309);
+            this.tabRotor.Size = new System.Drawing.Size(431, 311);
             this.tabRotor.TabIndex = 5;
             this.tabRotor.Text = "Rotor";
             this.tabRotor.UseVisualStyleBackColor = true;
@@ -6723,7 +6948,7 @@ namespace DataDecoder
             this.tabExtCtrl.Controls.Add(this.label106);
             this.tabExtCtrl.Location = new System.Drawing.Point(4, 22);
             this.tabExtCtrl.Name = "tabExtCtrl";
-            this.tabExtCtrl.Size = new System.Drawing.Size(431, 309);
+            this.tabExtCtrl.Size = new System.Drawing.Size(431, 311);
             this.tabExtCtrl.TabIndex = 8;
             this.tabExtCtrl.Text = "ExtCtrl";
             this.tabExtCtrl.UseVisualStyleBackColor = true;
@@ -10610,7 +10835,7 @@ namespace DataDecoder
             this.tabSetup.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold);
             this.tabSetup.Location = new System.Drawing.Point(4, 22);
             this.tabSetup.Name = "tabSetup";
-            this.tabSetup.Size = new System.Drawing.Size(431, 309);
+            this.tabSetup.Size = new System.Drawing.Size(431, 311);
             this.tabSetup.TabIndex = 6;
             this.tabSetup.Text = "Setup";
             this.tabSetup.UseVisualStyleBackColor = true;
@@ -11425,25 +11650,2323 @@ namespace DataDecoder
             // 
             // tabProp
             // 
-            this.tabProp.Controls.Add(this.pixBox1);
+            this.tabProp.Controls.Add(this.grpSO2R);
             this.tabProp.Location = new System.Drawing.Point(4, 22);
             this.tabProp.Name = "tabProp";
-            this.tabProp.Size = new System.Drawing.Size(431, 309);
+            this.tabProp.Size = new System.Drawing.Size(431, 311);
             this.tabProp.TabIndex = 10;
-            this.tabProp.Text = "Prop";
+            this.tabProp.Text = "SO2R";
             this.tabProp.UseVisualStyleBackColor = true;
             // 
-            // pixBox1
+            // grpSO2R
             // 
-            this.pixBox1.ImageLocation = "http://qsonet.com/propadex.png";
-            this.pixBox1.InitialImage = null;
-            this.pixBox1.Location = new System.Drawing.Point(138, 91);
-            this.pixBox1.Name = "pixBox1";
-            this.pixBox1.Size = new System.Drawing.Size(146, 120);
-            this.pixBox1.TabIndex = 80;
-            this.pixBox1.TabStop = false;
-            this.toolTip1.SetToolTip(this.pixBox1, "Current propagation condition (click image for more info).");
-            this.pixBox1.Click += new System.EventHandler(this.pixBox1_Click);
+            this.grpSO2R.Controls.Add(this.label215);
+            this.grpSO2R.Controls.Add(this.txtTxB);
+            this.grpSO2R.Controls.Add(this.label214);
+            this.grpSO2R.Controls.Add(this.txtTxA);
+            this.grpSO2R.Controls.Add(this.label202);
+            this.grpSO2R.Controls.Add(this.label204);
+            this.grpSO2R.Controls.Add(this.label206);
+            this.grpSO2R.Controls.Add(this.label207);
+            this.grpSO2R.Controls.Add(this.label208);
+            this.grpSO2R.Controls.Add(this.label209);
+            this.grpSO2R.Controls.Add(this.label210);
+            this.grpSO2R.Controls.Add(this.label211);
+            this.grpSO2R.Controls.Add(this.label212);
+            this.grpSO2R.Controls.Add(this.label213);
+            this.grpSO2R.Controls.Add(this.txtHi2_5a);
+            this.grpSO2R.Controls.Add(this.chkSO10b);
+            this.grpSO2R.Controls.Add(this.chkSO9b);
+            this.grpSO2R.Controls.Add(this.chkSO8b);
+            this.grpSO2R.Controls.Add(this.chkSO7b);
+            this.grpSO2R.Controls.Add(this.chkSO6b);
+            this.grpSO2R.Controls.Add(this.chkSO5b);
+            this.grpSO2R.Controls.Add(this.chkSO4b);
+            this.grpSO2R.Controls.Add(this.chkSO3b);
+            this.grpSO2R.Controls.Add(this.chkSO2b);
+            this.grpSO2R.Controls.Add(this.chkSO1b);
+            this.grpSO2R.Controls.Add(this.label200);
+            this.grpSO2R.Controls.Add(this.chk1Amp);
+            this.grpSO2R.Controls.Add(this.label205);
+            this.grpSO2R.Controls.Add(this.label203);
+            this.grpSO2R.Controls.Add(this.txtLPT2);
+            this.grpSO2R.Controls.Add(this.btnSaveSO2R);
+            this.grpSO2R.Controls.Add(this.label184);
+            this.grpSO2R.Controls.Add(this.txtLo1_10b);
+            this.grpSO2R.Controls.Add(this.txtLo1_9b);
+            this.grpSO2R.Controls.Add(this.txtLo1_8b);
+            this.grpSO2R.Controls.Add(this.txtLo1_7b);
+            this.grpSO2R.Controls.Add(this.txtLo1_6b);
+            this.grpSO2R.Controls.Add(this.txtLo1_5b);
+            this.grpSO2R.Controls.Add(this.txtLo1_4b);
+            this.grpSO2R.Controls.Add(this.cboSwPort);
+            this.grpSO2R.Controls.Add(this.txtLo1_3b);
+            this.grpSO2R.Controls.Add(this.txtLo1_2b);
+            this.grpSO2R.Controls.Add(this.chkSoEnab);
+            this.grpSO2R.Controls.Add(this.txtLo1_1b);
+            this.grpSO2R.Controls.Add(this.label201);
+            this.grpSO2R.Controls.Add(this.label199);
+            this.grpSO2R.Controls.Add(this.txtLo2_10b);
+            this.grpSO2R.Controls.Add(this.txtTx_10b);
+            this.grpSO2R.Controls.Add(this.txtPwr_10b);
+            this.grpSO2R.Controls.Add(this.txtRx_10b);
+            this.grpSO2R.Controls.Add(this.label198);
+            this.grpSO2R.Controls.Add(this.txtLo2_9b);
+            this.grpSO2R.Controls.Add(this.txtTx_9b);
+            this.grpSO2R.Controls.Add(this.txtPwr_9b);
+            this.grpSO2R.Controls.Add(this.txtRx_9b);
+            this.grpSO2R.Controls.Add(this.label197);
+            this.grpSO2R.Controls.Add(this.txtLo2_8b);
+            this.grpSO2R.Controls.Add(this.txtTx_8b);
+            this.grpSO2R.Controls.Add(this.txtPwr_8b);
+            this.grpSO2R.Controls.Add(this.txtRx_8b);
+            this.grpSO2R.Controls.Add(this.label196);
+            this.grpSO2R.Controls.Add(this.txtLo2_7b);
+            this.grpSO2R.Controls.Add(this.txtTx_7b);
+            this.grpSO2R.Controls.Add(this.txtPwr_7b);
+            this.grpSO2R.Controls.Add(this.txtRx_7b);
+            this.grpSO2R.Controls.Add(this.label195);
+            this.grpSO2R.Controls.Add(this.txtLo2_6b);
+            this.grpSO2R.Controls.Add(this.txtTx_6b);
+            this.grpSO2R.Controls.Add(this.txtPwr_6b);
+            this.grpSO2R.Controls.Add(this.txtRx_6b);
+            this.grpSO2R.Controls.Add(this.label194);
+            this.grpSO2R.Controls.Add(this.txtLo2_5b);
+            this.grpSO2R.Controls.Add(this.txtTx_5b);
+            this.grpSO2R.Controls.Add(this.txtPwr_5b);
+            this.grpSO2R.Controls.Add(this.txtRx_5b);
+            this.grpSO2R.Controls.Add(this.label193);
+            this.grpSO2R.Controls.Add(this.txtLo2_4b);
+            this.grpSO2R.Controls.Add(this.txtTx_4b);
+            this.grpSO2R.Controls.Add(this.txtPwr_4b);
+            this.grpSO2R.Controls.Add(this.txtRx_4b);
+            this.grpSO2R.Controls.Add(this.label192);
+            this.grpSO2R.Controls.Add(this.txtLo2_3b);
+            this.grpSO2R.Controls.Add(this.txtTx_3b);
+            this.grpSO2R.Controls.Add(this.txtPwr_3b);
+            this.grpSO2R.Controls.Add(this.txtRx_3b);
+            this.grpSO2R.Controls.Add(this.label191);
+            this.grpSO2R.Controls.Add(this.txtLo2_2b);
+            this.grpSO2R.Controls.Add(this.txtTx_2b);
+            this.grpSO2R.Controls.Add(this.txtPwr_2b);
+            this.grpSO2R.Controls.Add(this.txtRx_2b);
+            this.grpSO2R.Controls.Add(this.label190);
+            this.grpSO2R.Controls.Add(this.label189);
+            this.grpSO2R.Controls.Add(this.label185);
+            this.grpSO2R.Controls.Add(this.txtLo2_1b);
+            this.grpSO2R.Controls.Add(this.label186);
+            this.grpSO2R.Controls.Add(this.txtTx_1b);
+            this.grpSO2R.Controls.Add(this.label187);
+            this.grpSO2R.Controls.Add(this.label188);
+            this.grpSO2R.Controls.Add(this.txtPwr_1b);
+            this.grpSO2R.Controls.Add(this.txtRx_1b);
+            this.grpSO2R.Controls.Add(this.label183);
+            this.grpSO2R.Controls.Add(this.txtHi2_10a);
+            this.grpSO2R.Controls.Add(this.txtTx_10a);
+            this.grpSO2R.Controls.Add(this.txtPwr_10a);
+            this.grpSO2R.Controls.Add(this.txtRx_10a);
+            this.grpSO2R.Controls.Add(this.txtHi1_10a);
+            this.grpSO2R.Controls.Add(this.txtLPT1_10);
+            this.grpSO2R.Controls.Add(this.label179);
+            this.grpSO2R.Controls.Add(this.chkSO10a);
+            this.grpSO2R.Controls.Add(this.txtHi2_9a);
+            this.grpSO2R.Controls.Add(this.txtTx_9a);
+            this.grpSO2R.Controls.Add(this.txtPwr_9a);
+            this.grpSO2R.Controls.Add(this.txtRx_9a);
+            this.grpSO2R.Controls.Add(this.txtHi1_9a);
+            this.grpSO2R.Controls.Add(this.txtLPT1_9);
+            this.grpSO2R.Controls.Add(this.label180);
+            this.grpSO2R.Controls.Add(this.chkSO9a);
+            this.grpSO2R.Controls.Add(this.txtHi2_8a);
+            this.grpSO2R.Controls.Add(this.txtTx_8a);
+            this.grpSO2R.Controls.Add(this.txtPwr_8a);
+            this.grpSO2R.Controls.Add(this.txtRx_8a);
+            this.grpSO2R.Controls.Add(this.txtHi1_8a);
+            this.grpSO2R.Controls.Add(this.txtLPT1_8);
+            this.grpSO2R.Controls.Add(this.label181);
+            this.grpSO2R.Controls.Add(this.chkSO8a);
+            this.grpSO2R.Controls.Add(this.txtHi2_7a);
+            this.grpSO2R.Controls.Add(this.txtTx_7a);
+            this.grpSO2R.Controls.Add(this.txtPwr_7a);
+            this.grpSO2R.Controls.Add(this.txtRx_7a);
+            this.grpSO2R.Controls.Add(this.txtHi1_7a);
+            this.grpSO2R.Controls.Add(this.txtLPT1_7);
+            this.grpSO2R.Controls.Add(this.label182);
+            this.grpSO2R.Controls.Add(this.chkSO7a);
+            this.grpSO2R.Controls.Add(this.txtHi2_6a);
+            this.grpSO2R.Controls.Add(this.txtTx_6a);
+            this.grpSO2R.Controls.Add(this.txtPwr_6a);
+            this.grpSO2R.Controls.Add(this.txtRx_6a);
+            this.grpSO2R.Controls.Add(this.txtHi1_6a);
+            this.grpSO2R.Controls.Add(this.txtLPT1_6);
+            this.grpSO2R.Controls.Add(this.label178);
+            this.grpSO2R.Controls.Add(this.chkSO6a);
+            this.grpSO2R.Controls.Add(this.txtTx_5a);
+            this.grpSO2R.Controls.Add(this.txtPwr_5a);
+            this.grpSO2R.Controls.Add(this.txtRx_5a);
+            this.grpSO2R.Controls.Add(this.txtHi1_5a);
+            this.grpSO2R.Controls.Add(this.txtLPT1_5);
+            this.grpSO2R.Controls.Add(this.label177);
+            this.grpSO2R.Controls.Add(this.chkSO5a);
+            this.grpSO2R.Controls.Add(this.txtHi2_4a);
+            this.grpSO2R.Controls.Add(this.txtTx_4a);
+            this.grpSO2R.Controls.Add(this.txtPwr_4a);
+            this.grpSO2R.Controls.Add(this.txtRx_4a);
+            this.grpSO2R.Controls.Add(this.txtHi1_4a);
+            this.grpSO2R.Controls.Add(this.txtLPT1_4);
+            this.grpSO2R.Controls.Add(this.label176);
+            this.grpSO2R.Controls.Add(this.chkSO4a);
+            this.grpSO2R.Controls.Add(this.txtHi2_3a);
+            this.grpSO2R.Controls.Add(this.txtTx_3a);
+            this.grpSO2R.Controls.Add(this.txtPwr_3a);
+            this.grpSO2R.Controls.Add(this.txtRx_3a);
+            this.grpSO2R.Controls.Add(this.txtHi1_3a);
+            this.grpSO2R.Controls.Add(this.txtLPT1_3);
+            this.grpSO2R.Controls.Add(this.label175);
+            this.grpSO2R.Controls.Add(this.chkSO3a);
+            this.grpSO2R.Controls.Add(this.txtHi2_2a);
+            this.grpSO2R.Controls.Add(this.txtTx_2a);
+            this.grpSO2R.Controls.Add(this.txtPwr_2a);
+            this.grpSO2R.Controls.Add(this.txtRx_2a);
+            this.grpSO2R.Controls.Add(this.txtHi1_2a);
+            this.grpSO2R.Controls.Add(this.txtLPT1_2);
+            this.grpSO2R.Controls.Add(this.label168);
+            this.grpSO2R.Controls.Add(this.chkSO2a);
+            this.grpSO2R.Controls.Add(this.label174);
+            this.grpSO2R.Controls.Add(this.txtHi2_1a);
+            this.grpSO2R.Controls.Add(this.label173);
+            this.grpSO2R.Controls.Add(this.txtTx_1a);
+            this.grpSO2R.Controls.Add(this.label172);
+            this.grpSO2R.Controls.Add(this.label170);
+            this.grpSO2R.Controls.Add(this.txtPwr_1a);
+            this.grpSO2R.Controls.Add(this.txtRx_1a);
+            this.grpSO2R.Controls.Add(this.txtHi1_1a);
+            this.grpSO2R.Controls.Add(this.label167);
+            this.grpSO2R.Controls.Add(this.txtLPT1_1);
+            this.grpSO2R.Controls.Add(this.label166);
+            this.grpSO2R.Controls.Add(this.label169);
+            this.grpSO2R.Controls.Add(this.chkSO1a);
+            this.grpSO2R.Controls.Add(this.label171);
+            this.grpSO2R.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.grpSO2R.ForeColor = System.Drawing.Color.Blue;
+            this.grpSO2R.Location = new System.Drawing.Point(3, 4);
+            this.grpSO2R.Name = "grpSO2R";
+            this.grpSO2R.Size = new System.Drawing.Size(425, 303);
+            this.grpSO2R.TabIndex = 81;
+            this.grpSO2R.TabStop = false;
+            this.grpSO2R.Text = "SO2R";
+            // 
+            // label215
+            // 
+            this.label215.AutoSize = true;
+            this.label215.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.25F, System.Drawing.FontStyle.Bold);
+            this.label215.ForeColor = System.Drawing.Color.Blue;
+            this.label215.Location = new System.Drawing.Point(348, 52);
+            this.label215.Name = "label215";
+            this.label215.Size = new System.Drawing.Size(38, 13);
+            this.label215.TabIndex = 265;
+            this.label215.Text = "PTT b";
+            // 
+            // txtTxB
+            // 
+            this.txtTxB.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtTxB.Location = new System.Drawing.Point(388, 49);
+            this.txtTxB.Name = "txtTxB";
+            this.txtTxB.Size = new System.Drawing.Size(20, 20);
+            this.txtTxB.TabIndex = 264;
+            this.txtTxB.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.toolTip1.SetToolTip(this.txtTxB, "Enter VFO B TX control line to use (1, 2, 3).");
+            this.txtTxB.TextChanged += new System.EventHandler(this.txtTxB_TextChanged);
+            // 
+            // label214
+            // 
+            this.label214.AutoSize = true;
+            this.label214.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.25F, System.Drawing.FontStyle.Bold);
+            this.label214.ForeColor = System.Drawing.Color.Firebrick;
+            this.label214.Location = new System.Drawing.Point(201, 52);
+            this.label214.Name = "label214";
+            this.label214.Size = new System.Drawing.Size(38, 13);
+            this.label214.TabIndex = 263;
+            this.label214.Text = "PTT a";
+            // 
+            // txtTxA
+            // 
+            this.txtTxA.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtTxA.Location = new System.Drawing.Point(178, 49);
+            this.txtTxA.Name = "txtTxA";
+            this.txtTxA.Size = new System.Drawing.Size(21, 20);
+            this.txtTxA.TabIndex = 262;
+            this.txtTxA.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.toolTip1.SetToolTip(this.txtTxA, "Enter VFO A TX control line to use (1, 2, 3).");
+            this.txtTxA.TextChanged += new System.EventHandler(this.txtTxA_TextChanged);
+            // 
+            // label202
+            // 
+            this.label202.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label202.ForeColor = System.Drawing.Color.Navy;
+            this.label202.Location = new System.Drawing.Point(397, 280);
+            this.label202.Name = "label202";
+            this.label202.Size = new System.Drawing.Size(25, 13);
+            this.label202.TabIndex = 261;
+            this.label202.Text = "6";
+            this.label202.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label204
+            // 
+            this.label204.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label204.ForeColor = System.Drawing.Color.Navy;
+            this.label204.Location = new System.Drawing.Point(397, 260);
+            this.label204.Name = "label204";
+            this.label204.Size = new System.Drawing.Size(25, 13);
+            this.label204.TabIndex = 260;
+            this.label204.Text = "10";
+            // 
+            // label206
+            // 
+            this.label206.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label206.ForeColor = System.Drawing.Color.Navy;
+            this.label206.Location = new System.Drawing.Point(397, 240);
+            this.label206.Name = "label206";
+            this.label206.Size = new System.Drawing.Size(25, 13);
+            this.label206.TabIndex = 259;
+            this.label206.Text = "12";
+            // 
+            // label207
+            // 
+            this.label207.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label207.ForeColor = System.Drawing.Color.Navy;
+            this.label207.Location = new System.Drawing.Point(397, 220);
+            this.label207.Name = "label207";
+            this.label207.Size = new System.Drawing.Size(25, 13);
+            this.label207.TabIndex = 258;
+            this.label207.Text = "15";
+            // 
+            // label208
+            // 
+            this.label208.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label208.ForeColor = System.Drawing.Color.Navy;
+            this.label208.Location = new System.Drawing.Point(397, 200);
+            this.label208.Name = "label208";
+            this.label208.Size = new System.Drawing.Size(25, 13);
+            this.label208.TabIndex = 257;
+            this.label208.Text = "17";
+            // 
+            // label209
+            // 
+            this.label209.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label209.ForeColor = System.Drawing.Color.Navy;
+            this.label209.Location = new System.Drawing.Point(397, 180);
+            this.label209.Name = "label209";
+            this.label209.Size = new System.Drawing.Size(25, 13);
+            this.label209.TabIndex = 256;
+            this.label209.Text = "20";
+            // 
+            // label210
+            // 
+            this.label210.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label210.ForeColor = System.Drawing.Color.Navy;
+            this.label210.Location = new System.Drawing.Point(397, 160);
+            this.label210.Name = "label210";
+            this.label210.Size = new System.Drawing.Size(25, 13);
+            this.label210.TabIndex = 255;
+            this.label210.Text = "30";
+            // 
+            // label211
+            // 
+            this.label211.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label211.ForeColor = System.Drawing.Color.Navy;
+            this.label211.Location = new System.Drawing.Point(397, 140);
+            this.label211.Name = "label211";
+            this.label211.Size = new System.Drawing.Size(25, 13);
+            this.label211.TabIndex = 254;
+            this.label211.Text = "40";
+            // 
+            // label212
+            // 
+            this.label212.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label212.ForeColor = System.Drawing.Color.Navy;
+            this.label212.Location = new System.Drawing.Point(397, 120);
+            this.label212.Name = "label212";
+            this.label212.Size = new System.Drawing.Size(25, 13);
+            this.label212.TabIndex = 253;
+            this.label212.Text = "80";
+            // 
+            // label213
+            // 
+            this.label213.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label213.ForeColor = System.Drawing.Color.Navy;
+            this.label213.Location = new System.Drawing.Point(395, 100);
+            this.label213.Name = "label213";
+            this.label213.Size = new System.Drawing.Size(28, 13);
+            this.label213.TabIndex = 252;
+            this.label213.Text = "160";
+            // 
+            // txtHi2_5a
+            // 
+            this.txtHi2_5a.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.txtHi2_5a.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.25F);
+            this.txtHi2_5a.Location = new System.Drawing.Point(211, 176);
+            this.txtHi2_5a.Name = "txtHi2_5a";
+            this.txtHi2_5a.Size = new System.Drawing.Size(18, 18);
+            this.txtHi2_5a.TabIndex = 251;
+            this.txtHi2_5a.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.toolTip1.SetToolTip(this.txtHi2_5a, "Amplifer A control code (hex notation)");
+            this.txtHi2_5a.TextChanged += new System.EventHandler(this.grpSo2R_TextChanged);
+            // 
+            // chkSO10b
+            // 
+            this.chkSO10b.AutoSize = true;
+            this.chkSO10b.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
+            this.chkSO10b.Location = new System.Drawing.Point(378, 280);
+            this.chkSO10b.Name = "chkSO10b";
+            this.chkSO10b.Size = new System.Drawing.Size(15, 14);
+            this.chkSO10b.TabIndex = 250;
+            this.toolTip1.SetToolTip(this.chkSO10b, "Check to enable the use of this band for VFO B.");
+            this.chkSO10b.UseVisualStyleBackColor = true;
+            // 
+            // chkSO9b
+            // 
+            this.chkSO9b.AutoSize = true;
+            this.chkSO9b.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
+            this.chkSO9b.Location = new System.Drawing.Point(378, 260);
+            this.chkSO9b.Name = "chkSO9b";
+            this.chkSO9b.Size = new System.Drawing.Size(15, 14);
+            this.chkSO9b.TabIndex = 249;
+            this.toolTip1.SetToolTip(this.chkSO9b, "Check to enable the use of this band for VFO B.");
+            this.chkSO9b.UseVisualStyleBackColor = true;
+            // 
+            // chkSO8b
+            // 
+            this.chkSO8b.AutoSize = true;
+            this.chkSO8b.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
+            this.chkSO8b.Location = new System.Drawing.Point(378, 240);
+            this.chkSO8b.Name = "chkSO8b";
+            this.chkSO8b.Size = new System.Drawing.Size(15, 14);
+            this.chkSO8b.TabIndex = 248;
+            this.toolTip1.SetToolTip(this.chkSO8b, "Check to enable the use of this band for VFO B.");
+            this.chkSO8b.UseVisualStyleBackColor = true;
+            // 
+            // chkSO7b
+            // 
+            this.chkSO7b.AutoSize = true;
+            this.chkSO7b.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
+            this.chkSO7b.Location = new System.Drawing.Point(378, 220);
+            this.chkSO7b.Name = "chkSO7b";
+            this.chkSO7b.Size = new System.Drawing.Size(15, 14);
+            this.chkSO7b.TabIndex = 247;
+            this.toolTip1.SetToolTip(this.chkSO7b, "Check to enable the use of this band for VFO B.");
+            this.chkSO7b.UseVisualStyleBackColor = true;
+            // 
+            // chkSO6b
+            // 
+            this.chkSO6b.AutoSize = true;
+            this.chkSO6b.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
+            this.chkSO6b.Location = new System.Drawing.Point(378, 200);
+            this.chkSO6b.Name = "chkSO6b";
+            this.chkSO6b.Size = new System.Drawing.Size(15, 14);
+            this.chkSO6b.TabIndex = 246;
+            this.toolTip1.SetToolTip(this.chkSO6b, "Check to enable the use of this band for VFO B.");
+            this.chkSO6b.UseVisualStyleBackColor = true;
+            // 
+            // chkSO5b
+            // 
+            this.chkSO5b.AutoSize = true;
+            this.chkSO5b.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
+            this.chkSO5b.Location = new System.Drawing.Point(378, 180);
+            this.chkSO5b.Name = "chkSO5b";
+            this.chkSO5b.Size = new System.Drawing.Size(15, 14);
+            this.chkSO5b.TabIndex = 245;
+            this.toolTip1.SetToolTip(this.chkSO5b, "Check to enable the use of this band for VFO B.");
+            this.chkSO5b.UseVisualStyleBackColor = true;
+            // 
+            // chkSO4b
+            // 
+            this.chkSO4b.AutoSize = true;
+            this.chkSO4b.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
+            this.chkSO4b.Location = new System.Drawing.Point(378, 160);
+            this.chkSO4b.Name = "chkSO4b";
+            this.chkSO4b.Size = new System.Drawing.Size(15, 14);
+            this.chkSO4b.TabIndex = 244;
+            this.toolTip1.SetToolTip(this.chkSO4b, "Check to enable the use of this band for VFO B.");
+            this.chkSO4b.UseVisualStyleBackColor = true;
+            // 
+            // chkSO3b
+            // 
+            this.chkSO3b.AutoSize = true;
+            this.chkSO3b.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
+            this.chkSO3b.Location = new System.Drawing.Point(378, 140);
+            this.chkSO3b.Name = "chkSO3b";
+            this.chkSO3b.Size = new System.Drawing.Size(15, 14);
+            this.chkSO3b.TabIndex = 243;
+            this.toolTip1.SetToolTip(this.chkSO3b, "Check to enable the use of this band for VFO B.");
+            this.chkSO3b.UseVisualStyleBackColor = true;
+            // 
+            // chkSO2b
+            // 
+            this.chkSO2b.AutoSize = true;
+            this.chkSO2b.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
+            this.chkSO2b.Location = new System.Drawing.Point(378, 120);
+            this.chkSO2b.Name = "chkSO2b";
+            this.chkSO2b.Size = new System.Drawing.Size(15, 14);
+            this.chkSO2b.TabIndex = 242;
+            this.toolTip1.SetToolTip(this.chkSO2b, "Check to enable the use of this band for VFO B.");
+            this.chkSO2b.UseVisualStyleBackColor = true;
+            // 
+            // chkSO1b
+            // 
+            this.chkSO1b.AutoSize = true;
+            this.chkSO1b.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
+            this.chkSO1b.Location = new System.Drawing.Point(378, 100);
+            this.chkSO1b.Name = "chkSO1b";
+            this.chkSO1b.Size = new System.Drawing.Size(15, 14);
+            this.chkSO1b.TabIndex = 240;
+            this.toolTip1.SetToolTip(this.chkSO1b, "Check to enable the use of this band for VFO B.");
+            this.chkSO1b.UseVisualStyleBackColor = true;
+            // 
+            // label200
+            // 
+            this.label200.AutoSize = true;
+            this.label200.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label200.ForeColor = System.Drawing.Color.Blue;
+            this.label200.Location = new System.Drawing.Point(372, 81);
+            this.label200.Name = "label200";
+            this.label200.Size = new System.Drawing.Size(29, 13);
+            this.label200.TabIndex = 241;
+            this.label200.Text = "Use";
+            // 
+            // chk1Amp
+            // 
+            this.chk1Amp.AutoSize = true;
+            this.chk1Amp.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.25F, System.Drawing.FontStyle.Bold);
+            this.chk1Amp.ForeColor = System.Drawing.Color.Navy;
+            this.chk1Amp.Location = new System.Drawing.Point(9, 42);
+            this.chk1Amp.Name = "chk1Amp";
+            this.chk1Amp.Size = new System.Drawing.Size(89, 17);
+            this.chk1Amp.TabIndex = 239;
+            this.chk1Amp.Text = "Single Amp";
+            this.toolTip1.SetToolTip(this.chk1Amp, "Select to enable only a single amplifier.");
+            this.chk1Amp.UseVisualStyleBackColor = true;
+            this.chk1Amp.CheckedChanged += new System.EventHandler(this.chk1Amp_CheckedChanged);
+            // 
+            // label205
+            // 
+            this.label205.AutoSize = true;
+            this.label205.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.25F, System.Drawing.FontStyle.Bold);
+            this.label205.ForeColor = System.Drawing.Color.Navy;
+            this.label205.Location = new System.Drawing.Point(480, 158);
+            this.label205.Name = "label205";
+            this.label205.Size = new System.Drawing.Size(46, 13);
+            this.label205.TabIndex = 238;
+            this.label205.Text = "LPT #1";
+            // 
+            // label203
+            // 
+            this.label203.AutoSize = true;
+            this.label203.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.25F, System.Drawing.FontStyle.Bold);
+            this.label203.ForeColor = System.Drawing.Color.Blue;
+            this.label203.Location = new System.Drawing.Point(254, 37);
+            this.label203.Name = "label203";
+            this.label203.Size = new System.Drawing.Size(39, 13);
+            this.label203.TabIndex = 234;
+            this.label203.Text = "LPT 2";
+            // 
+            // txtLPT2
+            // 
+            this.txtLPT2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtLPT2.Location = new System.Drawing.Point(252, 15);
+            this.txtLPT2.Name = "txtLPT2";
+            this.txtLPT2.Size = new System.Drawing.Size(42, 20);
+            this.txtLPT2.TabIndex = 233;
+            this.txtLPT2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.toolTip1.SetToolTip(this.txtLPT2, "LPT port number (decimal) for VFO B band and data control.");
+            this.txtLPT2.TextChanged += new System.EventHandler(this.grpSo2R_TextChanged);
+            // 
+            // btnSaveSO2R
+            // 
+            this.btnSaveSO2R.AutoSize = true;
+            this.btnSaveSO2R.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnSaveSO2R.ForeColor = System.Drawing.Color.Navy;
+            this.btnSaveSO2R.Location = new System.Drawing.Point(323, 14);
+            this.btnSaveSO2R.Name = "btnSaveSO2R";
+            this.btnSaveSO2R.Size = new System.Drawing.Size(96, 23);
+            this.btnSaveSO2R.TabIndex = 230;
+            this.btnSaveSO2R.Text = "Save Settings";
+            this.toolTip1.SetToolTip(this.btnSaveSO2R, "Press to save matrix data.");
+            this.btnSaveSO2R.UseVisualStyleBackColor = true;
+            this.btnSaveSO2R.Click += new System.EventHandler(this.btnSaveSO2R_Click);
+            // 
+            // label184
+            // 
+            this.label184.AutoSize = true;
+            this.label184.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.25F, System.Drawing.FontStyle.Bold);
+            this.label184.ForeColor = System.Drawing.Color.Navy;
+            this.label184.Location = new System.Drawing.Point(100, 38);
+            this.label184.Name = "label184";
+            this.label184.Size = new System.Drawing.Size(62, 13);
+            this.label184.TabIndex = 228;
+            this.label184.Text = "TX Switch";
+            // 
+            // txtLo1_10b
+            // 
+            this.txtLo1_10b.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.txtLo1_10b.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.25F);
+            this.txtLo1_10b.Location = new System.Drawing.Point(244, 276);
+            this.txtLo1_10b.Name = "txtLo1_10b";
+            this.txtLo1_10b.Size = new System.Drawing.Size(18, 18);
+            this.txtLo1_10b.TabIndex = 225;
+            this.txtLo1_10b.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.toolTip1.SetToolTip(this.txtLo1_10b, "VFO B band data (Hex notation).");
+            this.txtLo1_10b.TextChanged += new System.EventHandler(this.grpSo2R_TextChanged);
+            // 
+            // txtLo1_9b
+            // 
+            this.txtLo1_9b.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.txtLo1_9b.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.25F);
+            this.txtLo1_9b.Location = new System.Drawing.Point(244, 256);
+            this.txtLo1_9b.Name = "txtLo1_9b";
+            this.txtLo1_9b.Size = new System.Drawing.Size(18, 18);
+            this.txtLo1_9b.TabIndex = 224;
+            this.txtLo1_9b.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.toolTip1.SetToolTip(this.txtLo1_9b, "VFO B band data (Hex notation).");
+            this.txtLo1_9b.TextChanged += new System.EventHandler(this.grpSo2R_TextChanged);
+            // 
+            // txtLo1_8b
+            // 
+            this.txtLo1_8b.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.txtLo1_8b.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.25F);
+            this.txtLo1_8b.Location = new System.Drawing.Point(244, 236);
+            this.txtLo1_8b.Name = "txtLo1_8b";
+            this.txtLo1_8b.Size = new System.Drawing.Size(18, 18);
+            this.txtLo1_8b.TabIndex = 223;
+            this.txtLo1_8b.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.toolTip1.SetToolTip(this.txtLo1_8b, "VFO B band data (Hex notation).");
+            this.txtLo1_8b.TextChanged += new System.EventHandler(this.grpSo2R_TextChanged);
+            // 
+            // txtLo1_7b
+            // 
+            this.txtLo1_7b.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.txtLo1_7b.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.25F);
+            this.txtLo1_7b.Location = new System.Drawing.Point(244, 216);
+            this.txtLo1_7b.Name = "txtLo1_7b";
+            this.txtLo1_7b.Size = new System.Drawing.Size(18, 18);
+            this.txtLo1_7b.TabIndex = 222;
+            this.txtLo1_7b.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.toolTip1.SetToolTip(this.txtLo1_7b, "VFO B band data (Hex notation).");
+            this.txtLo1_7b.TextChanged += new System.EventHandler(this.grpSo2R_TextChanged);
+            // 
+            // txtLo1_6b
+            // 
+            this.txtLo1_6b.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.txtLo1_6b.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.25F);
+            this.txtLo1_6b.Location = new System.Drawing.Point(244, 196);
+            this.txtLo1_6b.Name = "txtLo1_6b";
+            this.txtLo1_6b.Size = new System.Drawing.Size(18, 18);
+            this.txtLo1_6b.TabIndex = 221;
+            this.txtLo1_6b.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.toolTip1.SetToolTip(this.txtLo1_6b, "VFO B band data (Hex notation).");
+            this.txtLo1_6b.TextChanged += new System.EventHandler(this.grpSo2R_TextChanged);
+            // 
+            // txtLo1_5b
+            // 
+            this.txtLo1_5b.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.txtLo1_5b.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.25F);
+            this.txtLo1_5b.Location = new System.Drawing.Point(244, 176);
+            this.txtLo1_5b.Name = "txtLo1_5b";
+            this.txtLo1_5b.Size = new System.Drawing.Size(18, 18);
+            this.txtLo1_5b.TabIndex = 220;
+            this.txtLo1_5b.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.toolTip1.SetToolTip(this.txtLo1_5b, "VFO B band data (Hex notation).");
+            this.txtLo1_5b.TextChanged += new System.EventHandler(this.grpSo2R_TextChanged);
+            // 
+            // txtLo1_4b
+            // 
+            this.txtLo1_4b.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.txtLo1_4b.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.25F);
+            this.txtLo1_4b.Location = new System.Drawing.Point(244, 156);
+            this.txtLo1_4b.Name = "txtLo1_4b";
+            this.txtLo1_4b.Size = new System.Drawing.Size(18, 18);
+            this.txtLo1_4b.TabIndex = 219;
+            this.txtLo1_4b.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.toolTip1.SetToolTip(this.txtLo1_4b, "VFO B band data (Hex notation).");
+            this.txtLo1_4b.TextChanged += new System.EventHandler(this.grpSo2R_TextChanged);
+            // 
+            // cboSwPort
+            // 
+            this.cboSwPort.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboSwPort.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.25F, System.Drawing.FontStyle.Bold);
+            this.cboSwPort.ForeColor = System.Drawing.Color.Firebrick;
+            this.cboSwPort.FormattingEnabled = true;
+            this.cboSwPort.Location = new System.Drawing.Point(102, 14);
+            this.cboSwPort.Name = "cboSwPort";
+            this.cboSwPort.Size = new System.Drawing.Size(68, 21);
+            this.cboSwPort.TabIndex = 227;
+            this.toolTip1.SetToolTip(this.cboSwPort, "TX select switch port");
+            this.cboSwPort.SelectedIndexChanged += new System.EventHandler(this.cboSwPort_SelectedIndexChanged);
+            // 
+            // txtLo1_3b
+            // 
+            this.txtLo1_3b.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.txtLo1_3b.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.25F);
+            this.txtLo1_3b.Location = new System.Drawing.Point(244, 136);
+            this.txtLo1_3b.Name = "txtLo1_3b";
+            this.txtLo1_3b.Size = new System.Drawing.Size(18, 18);
+            this.txtLo1_3b.TabIndex = 218;
+            this.txtLo1_3b.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.toolTip1.SetToolTip(this.txtLo1_3b, "VFO B band data (Hex notation).");
+            this.txtLo1_3b.TextChanged += new System.EventHandler(this.grpSo2R_TextChanged);
+            // 
+            // txtLo1_2b
+            // 
+            this.txtLo1_2b.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.txtLo1_2b.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.25F);
+            this.txtLo1_2b.Location = new System.Drawing.Point(244, 116);
+            this.txtLo1_2b.Name = "txtLo1_2b";
+            this.txtLo1_2b.Size = new System.Drawing.Size(18, 18);
+            this.txtLo1_2b.TabIndex = 217;
+            this.txtLo1_2b.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.toolTip1.SetToolTip(this.txtLo1_2b, "VFO B band data (Hex notation).");
+            this.txtLo1_2b.TextChanged += new System.EventHandler(this.grpSo2R_TextChanged);
+            // 
+            // chkSoEnab
+            // 
+            this.chkSoEnab.AutoSize = true;
+            this.chkSoEnab.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.25F, System.Drawing.FontStyle.Bold);
+            this.chkSoEnab.ForeColor = System.Drawing.Color.Navy;
+            this.chkSoEnab.Location = new System.Drawing.Point(9, 22);
+            this.chkSoEnab.Name = "chkSoEnab";
+            this.chkSoEnab.Size = new System.Drawing.Size(65, 17);
+            this.chkSoEnab.TabIndex = 226;
+            this.chkSoEnab.Text = "Enable";
+            this.toolTip1.SetToolTip(this.chkSoEnab, "Select to enable SO2R operation");
+            this.chkSoEnab.UseVisualStyleBackColor = true;
+            this.chkSoEnab.CheckedChanged += new System.EventHandler(this.chkSoEnab_CheckedChanged);
+            // 
+            // txtLo1_1b
+            // 
+            this.txtLo1_1b.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.txtLo1_1b.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.25F);
+            this.txtLo1_1b.Location = new System.Drawing.Point(244, 96);
+            this.txtLo1_1b.Name = "txtLo1_1b";
+            this.txtLo1_1b.Size = new System.Drawing.Size(18, 18);
+            this.txtLo1_1b.TabIndex = 216;
+            this.txtLo1_1b.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.toolTip1.SetToolTip(this.txtLo1_1b, "VFO B band data (Hex notation).");
+            this.txtLo1_1b.TextChanged += new System.EventHandler(this.grpSo2R_TextChanged);
+            // 
+            // label201
+            // 
+            this.label201.AutoSize = true;
+            this.label201.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label201.ForeColor = System.Drawing.Color.Blue;
+            this.label201.Location = new System.Drawing.Point(243, 80);
+            this.label201.Name = "label201";
+            this.label201.Size = new System.Drawing.Size(23, 13);
+            this.label201.TabIndex = 215;
+            this.label201.Text = "Db";
+            this.label201.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
+            // label199
+            // 
+            this.label199.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label199.ForeColor = System.Drawing.Color.Navy;
+            this.label199.Location = new System.Drawing.Point(233, 279);
+            this.label199.Name = "label199";
+            this.label199.Size = new System.Drawing.Size(9, 13);
+            this.label199.TabIndex = 214;
+            this.label199.Text = "-";
+            this.label199.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.label199.TextChanged += new System.EventHandler(this.grpSo2R_TextChanged);
+            // 
+            // txtLo2_10b
+            // 
+            this.txtLo2_10b.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.txtLo2_10b.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.25F);
+            this.txtLo2_10b.Location = new System.Drawing.Point(351, 276);
+            this.txtLo2_10b.Name = "txtLo2_10b";
+            this.txtLo2_10b.Size = new System.Drawing.Size(18, 18);
+            this.txtLo2_10b.TabIndex = 213;
+            this.txtLo2_10b.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.toolTip1.SetToolTip(this.txtLo2_10b, "Amplifer B control code (hex notation).");
+            this.txtLo2_10b.TextChanged += new System.EventHandler(this.grpSo2R_TextChanged);
+            // 
+            // txtTx_10b
+            // 
+            this.txtTx_10b.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.25F);
+            this.txtTx_10b.Location = new System.Drawing.Point(327, 276);
+            this.txtTx_10b.Name = "txtTx_10b";
+            this.txtTx_10b.Size = new System.Drawing.Size(18, 18);
+            this.txtTx_10b.TabIndex = 212;
+            this.txtTx_10b.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.toolTip1.SetToolTip(this.txtTx_10b, "TX antenna to use for this band (1-3).");
+            this.txtTx_10b.TextChanged += new System.EventHandler(this.grpSo2R_TextChanged);
+            // 
+            // txtPwr_10b
+            // 
+            this.txtPwr_10b.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.25F);
+            this.txtPwr_10b.Location = new System.Drawing.Point(267, 276);
+            this.txtPwr_10b.Name = "txtPwr_10b";
+            this.txtPwr_10b.Size = new System.Drawing.Size(30, 18);
+            this.txtPwr_10b.TabIndex = 211;
+            this.txtPwr_10b.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.toolTip1.SetToolTip(this.txtPwr_10b, "Drive Power Amp B (decimal).");
+            this.txtPwr_10b.TextChanged += new System.EventHandler(this.grpSo2R_TextChanged);
+            // 
+            // txtRx_10b
+            // 
+            this.txtRx_10b.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.25F);
+            this.txtRx_10b.Location = new System.Drawing.Point(303, 276);
+            this.txtRx_10b.Name = "txtRx_10b";
+            this.txtRx_10b.Size = new System.Drawing.Size(18, 18);
+            this.txtRx_10b.TabIndex = 210;
+            this.txtRx_10b.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.toolTip1.SetToolTip(this.txtRx_10b, "RX2 antenna to use for this band (1-3).");
+            this.txtRx_10b.TextChanged += new System.EventHandler(this.grpSo2R_TextChanged);
+            // 
+            // label198
+            // 
+            this.label198.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label198.ForeColor = System.Drawing.Color.Navy;
+            this.label198.Location = new System.Drawing.Point(233, 259);
+            this.label198.Name = "label198";
+            this.label198.Size = new System.Drawing.Size(9, 13);
+            this.label198.TabIndex = 209;
+            this.label198.Text = "-";
+            this.label198.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.label198.TextChanged += new System.EventHandler(this.grpSo2R_TextChanged);
+            // 
+            // txtLo2_9b
+            // 
+            this.txtLo2_9b.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.txtLo2_9b.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.25F);
+            this.txtLo2_9b.Location = new System.Drawing.Point(351, 256);
+            this.txtLo2_9b.Name = "txtLo2_9b";
+            this.txtLo2_9b.Size = new System.Drawing.Size(18, 18);
+            this.txtLo2_9b.TabIndex = 208;
+            this.txtLo2_9b.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.toolTip1.SetToolTip(this.txtLo2_9b, "Amplifer B control code (hex notation).");
+            this.txtLo2_9b.TextChanged += new System.EventHandler(this.grpSo2R_TextChanged);
+            // 
+            // txtTx_9b
+            // 
+            this.txtTx_9b.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.25F);
+            this.txtTx_9b.Location = new System.Drawing.Point(327, 256);
+            this.txtTx_9b.Name = "txtTx_9b";
+            this.txtTx_9b.Size = new System.Drawing.Size(18, 18);
+            this.txtTx_9b.TabIndex = 207;
+            this.txtTx_9b.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.toolTip1.SetToolTip(this.txtTx_9b, "TX antenna to use for this band (1-3).");
+            this.txtTx_9b.TextChanged += new System.EventHandler(this.grpSo2R_TextChanged);
+            // 
+            // txtPwr_9b
+            // 
+            this.txtPwr_9b.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.25F);
+            this.txtPwr_9b.Location = new System.Drawing.Point(267, 256);
+            this.txtPwr_9b.Name = "txtPwr_9b";
+            this.txtPwr_9b.Size = new System.Drawing.Size(30, 18);
+            this.txtPwr_9b.TabIndex = 206;
+            this.txtPwr_9b.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.toolTip1.SetToolTip(this.txtPwr_9b, "Drive Power Amp B (decimal).");
+            this.txtPwr_9b.TextChanged += new System.EventHandler(this.grpSo2R_TextChanged);
+            // 
+            // txtRx_9b
+            // 
+            this.txtRx_9b.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.25F);
+            this.txtRx_9b.Location = new System.Drawing.Point(303, 256);
+            this.txtRx_9b.Name = "txtRx_9b";
+            this.txtRx_9b.Size = new System.Drawing.Size(18, 18);
+            this.txtRx_9b.TabIndex = 205;
+            this.txtRx_9b.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.toolTip1.SetToolTip(this.txtRx_9b, "RX2 antenna to use for this band (1-3).");
+            this.txtRx_9b.TextChanged += new System.EventHandler(this.grpSo2R_TextChanged);
+            // 
+            // label197
+            // 
+            this.label197.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label197.ForeColor = System.Drawing.Color.Navy;
+            this.label197.Location = new System.Drawing.Point(233, 239);
+            this.label197.Name = "label197";
+            this.label197.Size = new System.Drawing.Size(9, 13);
+            this.label197.TabIndex = 204;
+            this.label197.Text = "-";
+            this.label197.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.label197.TextChanged += new System.EventHandler(this.grpSo2R_TextChanged);
+            // 
+            // txtLo2_8b
+            // 
+            this.txtLo2_8b.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.txtLo2_8b.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.25F);
+            this.txtLo2_8b.Location = new System.Drawing.Point(351, 236);
+            this.txtLo2_8b.Name = "txtLo2_8b";
+            this.txtLo2_8b.Size = new System.Drawing.Size(18, 18);
+            this.txtLo2_8b.TabIndex = 203;
+            this.txtLo2_8b.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.toolTip1.SetToolTip(this.txtLo2_8b, "Amplifer B control code (hex notation).");
+            this.txtLo2_8b.TextChanged += new System.EventHandler(this.grpSo2R_TextChanged);
+            // 
+            // txtTx_8b
+            // 
+            this.txtTx_8b.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.25F);
+            this.txtTx_8b.Location = new System.Drawing.Point(327, 236);
+            this.txtTx_8b.Name = "txtTx_8b";
+            this.txtTx_8b.Size = new System.Drawing.Size(18, 18);
+            this.txtTx_8b.TabIndex = 202;
+            this.txtTx_8b.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.toolTip1.SetToolTip(this.txtTx_8b, "TX antenna to use for this band (1-3).");
+            this.txtTx_8b.TextChanged += new System.EventHandler(this.grpSo2R_TextChanged);
+            // 
+            // txtPwr_8b
+            // 
+            this.txtPwr_8b.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.25F);
+            this.txtPwr_8b.Location = new System.Drawing.Point(267, 236);
+            this.txtPwr_8b.Name = "txtPwr_8b";
+            this.txtPwr_8b.Size = new System.Drawing.Size(30, 18);
+            this.txtPwr_8b.TabIndex = 201;
+            this.txtPwr_8b.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.toolTip1.SetToolTip(this.txtPwr_8b, "Drive Power Amp B (decimal).");
+            this.txtPwr_8b.TextChanged += new System.EventHandler(this.grpSo2R_TextChanged);
+            // 
+            // txtRx_8b
+            // 
+            this.txtRx_8b.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.25F);
+            this.txtRx_8b.Location = new System.Drawing.Point(303, 236);
+            this.txtRx_8b.Name = "txtRx_8b";
+            this.txtRx_8b.Size = new System.Drawing.Size(18, 18);
+            this.txtRx_8b.TabIndex = 200;
+            this.txtRx_8b.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.toolTip1.SetToolTip(this.txtRx_8b, "RX2 antenna to use for this band (1-3).");
+            this.txtRx_8b.TextChanged += new System.EventHandler(this.grpSo2R_TextChanged);
+            // 
+            // label196
+            // 
+            this.label196.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label196.ForeColor = System.Drawing.Color.Navy;
+            this.label196.Location = new System.Drawing.Point(233, 219);
+            this.label196.Name = "label196";
+            this.label196.Size = new System.Drawing.Size(9, 13);
+            this.label196.TabIndex = 199;
+            this.label196.Text = "-";
+            this.label196.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.label196.TextChanged += new System.EventHandler(this.grpSo2R_TextChanged);
+            // 
+            // txtLo2_7b
+            // 
+            this.txtLo2_7b.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.txtLo2_7b.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.25F);
+            this.txtLo2_7b.Location = new System.Drawing.Point(351, 216);
+            this.txtLo2_7b.Name = "txtLo2_7b";
+            this.txtLo2_7b.Size = new System.Drawing.Size(18, 18);
+            this.txtLo2_7b.TabIndex = 198;
+            this.txtLo2_7b.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.toolTip1.SetToolTip(this.txtLo2_7b, "Amplifer B control code (hex notation).");
+            this.txtLo2_7b.TextChanged += new System.EventHandler(this.grpSo2R_TextChanged);
+            // 
+            // txtTx_7b
+            // 
+            this.txtTx_7b.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.25F);
+            this.txtTx_7b.Location = new System.Drawing.Point(327, 216);
+            this.txtTx_7b.Name = "txtTx_7b";
+            this.txtTx_7b.Size = new System.Drawing.Size(18, 18);
+            this.txtTx_7b.TabIndex = 197;
+            this.txtTx_7b.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.toolTip1.SetToolTip(this.txtTx_7b, "TX antenna to use for this band (1-3).");
+            this.txtTx_7b.TextChanged += new System.EventHandler(this.grpSo2R_TextChanged);
+            // 
+            // txtPwr_7b
+            // 
+            this.txtPwr_7b.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.25F);
+            this.txtPwr_7b.Location = new System.Drawing.Point(267, 216);
+            this.txtPwr_7b.Name = "txtPwr_7b";
+            this.txtPwr_7b.Size = new System.Drawing.Size(30, 18);
+            this.txtPwr_7b.TabIndex = 196;
+            this.txtPwr_7b.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.toolTip1.SetToolTip(this.txtPwr_7b, "Drive Power Amp B (decimal).");
+            this.txtPwr_7b.TextChanged += new System.EventHandler(this.grpSo2R_TextChanged);
+            // 
+            // txtRx_7b
+            // 
+            this.txtRx_7b.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.25F);
+            this.txtRx_7b.Location = new System.Drawing.Point(303, 216);
+            this.txtRx_7b.Name = "txtRx_7b";
+            this.txtRx_7b.Size = new System.Drawing.Size(18, 18);
+            this.txtRx_7b.TabIndex = 195;
+            this.txtRx_7b.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.toolTip1.SetToolTip(this.txtRx_7b, "RX2 antenna to use for this band (1-3).");
+            this.txtRx_7b.TextChanged += new System.EventHandler(this.grpSo2R_TextChanged);
+            // 
+            // label195
+            // 
+            this.label195.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label195.ForeColor = System.Drawing.Color.Navy;
+            this.label195.Location = new System.Drawing.Point(233, 199);
+            this.label195.Name = "label195";
+            this.label195.Size = new System.Drawing.Size(9, 13);
+            this.label195.TabIndex = 194;
+            this.label195.Text = "-";
+            this.label195.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.label195.TextChanged += new System.EventHandler(this.grpSo2R_TextChanged);
+            // 
+            // txtLo2_6b
+            // 
+            this.txtLo2_6b.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.txtLo2_6b.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.25F);
+            this.txtLo2_6b.Location = new System.Drawing.Point(351, 196);
+            this.txtLo2_6b.Name = "txtLo2_6b";
+            this.txtLo2_6b.Size = new System.Drawing.Size(18, 18);
+            this.txtLo2_6b.TabIndex = 193;
+            this.txtLo2_6b.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.toolTip1.SetToolTip(this.txtLo2_6b, "Amplifer B control code (hex notation).");
+            this.txtLo2_6b.TextChanged += new System.EventHandler(this.grpSo2R_TextChanged);
+            // 
+            // txtTx_6b
+            // 
+            this.txtTx_6b.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.25F);
+            this.txtTx_6b.Location = new System.Drawing.Point(327, 196);
+            this.txtTx_6b.Name = "txtTx_6b";
+            this.txtTx_6b.Size = new System.Drawing.Size(18, 18);
+            this.txtTx_6b.TabIndex = 192;
+            this.txtTx_6b.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.toolTip1.SetToolTip(this.txtTx_6b, "TX antenna to use for this band (1-3).");
+            this.txtTx_6b.TextChanged += new System.EventHandler(this.grpSo2R_TextChanged);
+            // 
+            // txtPwr_6b
+            // 
+            this.txtPwr_6b.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.25F);
+            this.txtPwr_6b.Location = new System.Drawing.Point(267, 196);
+            this.txtPwr_6b.Name = "txtPwr_6b";
+            this.txtPwr_6b.Size = new System.Drawing.Size(30, 18);
+            this.txtPwr_6b.TabIndex = 191;
+            this.txtPwr_6b.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.toolTip1.SetToolTip(this.txtPwr_6b, "Drive Power Amp B (decimal).");
+            this.txtPwr_6b.TextChanged += new System.EventHandler(this.grpSo2R_TextChanged);
+            // 
+            // txtRx_6b
+            // 
+            this.txtRx_6b.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.25F);
+            this.txtRx_6b.Location = new System.Drawing.Point(303, 196);
+            this.txtRx_6b.Name = "txtRx_6b";
+            this.txtRx_6b.Size = new System.Drawing.Size(18, 18);
+            this.txtRx_6b.TabIndex = 190;
+            this.txtRx_6b.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.toolTip1.SetToolTip(this.txtRx_6b, "RX2 antenna to use for this band (1-3).");
+            this.txtRx_6b.TextChanged += new System.EventHandler(this.grpSo2R_TextChanged);
+            // 
+            // label194
+            // 
+            this.label194.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label194.ForeColor = System.Drawing.Color.Navy;
+            this.label194.Location = new System.Drawing.Point(233, 179);
+            this.label194.Name = "label194";
+            this.label194.Size = new System.Drawing.Size(9, 13);
+            this.label194.TabIndex = 189;
+            this.label194.Text = "-";
+            this.label194.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.label194.TextChanged += new System.EventHandler(this.grpSo2R_TextChanged);
+            // 
+            // txtLo2_5b
+            // 
+            this.txtLo2_5b.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.txtLo2_5b.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.25F);
+            this.txtLo2_5b.Location = new System.Drawing.Point(351, 176);
+            this.txtLo2_5b.Name = "txtLo2_5b";
+            this.txtLo2_5b.Size = new System.Drawing.Size(18, 18);
+            this.txtLo2_5b.TabIndex = 188;
+            this.txtLo2_5b.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.toolTip1.SetToolTip(this.txtLo2_5b, "Amplifer B control code (hex notation).");
+            this.txtLo2_5b.TextChanged += new System.EventHandler(this.grpSo2R_TextChanged);
+            // 
+            // txtTx_5b
+            // 
+            this.txtTx_5b.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.25F);
+            this.txtTx_5b.Location = new System.Drawing.Point(327, 176);
+            this.txtTx_5b.Name = "txtTx_5b";
+            this.txtTx_5b.Size = new System.Drawing.Size(18, 18);
+            this.txtTx_5b.TabIndex = 187;
+            this.txtTx_5b.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.toolTip1.SetToolTip(this.txtTx_5b, "TX antenna to use for this band (1-3).");
+            this.txtTx_5b.TextChanged += new System.EventHandler(this.grpSo2R_TextChanged);
+            // 
+            // txtPwr_5b
+            // 
+            this.txtPwr_5b.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.25F);
+            this.txtPwr_5b.Location = new System.Drawing.Point(267, 176);
+            this.txtPwr_5b.Name = "txtPwr_5b";
+            this.txtPwr_5b.Size = new System.Drawing.Size(30, 18);
+            this.txtPwr_5b.TabIndex = 186;
+            this.txtPwr_5b.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.toolTip1.SetToolTip(this.txtPwr_5b, "Drive Power Amp B (decimal).");
+            this.txtPwr_5b.TextChanged += new System.EventHandler(this.grpSo2R_TextChanged);
+            // 
+            // txtRx_5b
+            // 
+            this.txtRx_5b.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.25F);
+            this.txtRx_5b.Location = new System.Drawing.Point(303, 176);
+            this.txtRx_5b.Name = "txtRx_5b";
+            this.txtRx_5b.Size = new System.Drawing.Size(18, 18);
+            this.txtRx_5b.TabIndex = 185;
+            this.txtRx_5b.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.toolTip1.SetToolTip(this.txtRx_5b, "RX2 antenna to use for this band (1-3).");
+            this.txtRx_5b.TextChanged += new System.EventHandler(this.grpSo2R_TextChanged);
+            // 
+            // label193
+            // 
+            this.label193.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label193.ForeColor = System.Drawing.Color.Navy;
+            this.label193.Location = new System.Drawing.Point(233, 159);
+            this.label193.Name = "label193";
+            this.label193.Size = new System.Drawing.Size(9, 13);
+            this.label193.TabIndex = 184;
+            this.label193.Text = "-";
+            this.label193.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.label193.TextChanged += new System.EventHandler(this.grpSo2R_TextChanged);
+            // 
+            // txtLo2_4b
+            // 
+            this.txtLo2_4b.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.txtLo2_4b.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.25F);
+            this.txtLo2_4b.Location = new System.Drawing.Point(351, 156);
+            this.txtLo2_4b.Name = "txtLo2_4b";
+            this.txtLo2_4b.Size = new System.Drawing.Size(18, 18);
+            this.txtLo2_4b.TabIndex = 183;
+            this.txtLo2_4b.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.toolTip1.SetToolTip(this.txtLo2_4b, "Amplifer B control code (hex notation).");
+            this.txtLo2_4b.TextChanged += new System.EventHandler(this.grpSo2R_TextChanged);
+            // 
+            // txtTx_4b
+            // 
+            this.txtTx_4b.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.25F);
+            this.txtTx_4b.Location = new System.Drawing.Point(327, 156);
+            this.txtTx_4b.Name = "txtTx_4b";
+            this.txtTx_4b.Size = new System.Drawing.Size(18, 18);
+            this.txtTx_4b.TabIndex = 182;
+            this.txtTx_4b.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.toolTip1.SetToolTip(this.txtTx_4b, "TX antenna to use for this band (1-3).");
+            this.txtTx_4b.TextChanged += new System.EventHandler(this.grpSo2R_TextChanged);
+            // 
+            // txtPwr_4b
+            // 
+            this.txtPwr_4b.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.25F);
+            this.txtPwr_4b.Location = new System.Drawing.Point(267, 156);
+            this.txtPwr_4b.Name = "txtPwr_4b";
+            this.txtPwr_4b.Size = new System.Drawing.Size(30, 18);
+            this.txtPwr_4b.TabIndex = 181;
+            this.txtPwr_4b.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.toolTip1.SetToolTip(this.txtPwr_4b, "Drive Power Amp B (decimal).");
+            this.txtPwr_4b.TextChanged += new System.EventHandler(this.grpSo2R_TextChanged);
+            // 
+            // txtRx_4b
+            // 
+            this.txtRx_4b.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.25F);
+            this.txtRx_4b.Location = new System.Drawing.Point(303, 156);
+            this.txtRx_4b.Name = "txtRx_4b";
+            this.txtRx_4b.Size = new System.Drawing.Size(18, 18);
+            this.txtRx_4b.TabIndex = 180;
+            this.txtRx_4b.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.toolTip1.SetToolTip(this.txtRx_4b, "RX2 antenna to use for this band (1-3).");
+            this.txtRx_4b.TextChanged += new System.EventHandler(this.grpSo2R_TextChanged);
+            // 
+            // label192
+            // 
+            this.label192.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label192.ForeColor = System.Drawing.Color.Navy;
+            this.label192.Location = new System.Drawing.Point(233, 139);
+            this.label192.Name = "label192";
+            this.label192.Size = new System.Drawing.Size(9, 13);
+            this.label192.TabIndex = 179;
+            this.label192.Text = "-";
+            this.label192.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.label192.TextChanged += new System.EventHandler(this.grpSo2R_TextChanged);
+            // 
+            // txtLo2_3b
+            // 
+            this.txtLo2_3b.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.txtLo2_3b.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.25F);
+            this.txtLo2_3b.Location = new System.Drawing.Point(351, 136);
+            this.txtLo2_3b.Name = "txtLo2_3b";
+            this.txtLo2_3b.Size = new System.Drawing.Size(18, 18);
+            this.txtLo2_3b.TabIndex = 178;
+            this.txtLo2_3b.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.toolTip1.SetToolTip(this.txtLo2_3b, "Amplifer B control code (hex notation).");
+            this.txtLo2_3b.TextChanged += new System.EventHandler(this.grpSo2R_TextChanged);
+            // 
+            // txtTx_3b
+            // 
+            this.txtTx_3b.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.25F);
+            this.txtTx_3b.Location = new System.Drawing.Point(327, 136);
+            this.txtTx_3b.Name = "txtTx_3b";
+            this.txtTx_3b.Size = new System.Drawing.Size(18, 18);
+            this.txtTx_3b.TabIndex = 177;
+            this.txtTx_3b.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.toolTip1.SetToolTip(this.txtTx_3b, "TX antenna to use for this band (1-3).");
+            this.txtTx_3b.TextChanged += new System.EventHandler(this.grpSo2R_TextChanged);
+            // 
+            // txtPwr_3b
+            // 
+            this.txtPwr_3b.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.25F);
+            this.txtPwr_3b.Location = new System.Drawing.Point(267, 136);
+            this.txtPwr_3b.Name = "txtPwr_3b";
+            this.txtPwr_3b.Size = new System.Drawing.Size(30, 18);
+            this.txtPwr_3b.TabIndex = 176;
+            this.txtPwr_3b.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.toolTip1.SetToolTip(this.txtPwr_3b, "Drive Power Amp B (decimal).");
+            this.txtPwr_3b.TextChanged += new System.EventHandler(this.grpSo2R_TextChanged);
+            // 
+            // txtRx_3b
+            // 
+            this.txtRx_3b.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.25F);
+            this.txtRx_3b.Location = new System.Drawing.Point(303, 136);
+            this.txtRx_3b.Name = "txtRx_3b";
+            this.txtRx_3b.Size = new System.Drawing.Size(18, 18);
+            this.txtRx_3b.TabIndex = 175;
+            this.txtRx_3b.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.toolTip1.SetToolTip(this.txtRx_3b, "RX2 antenna to use for this band (1-3).");
+            this.txtRx_3b.TextChanged += new System.EventHandler(this.grpSo2R_TextChanged);
+            // 
+            // label191
+            // 
+            this.label191.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label191.ForeColor = System.Drawing.Color.Navy;
+            this.label191.Location = new System.Drawing.Point(233, 119);
+            this.label191.Name = "label191";
+            this.label191.Size = new System.Drawing.Size(9, 13);
+            this.label191.TabIndex = 174;
+            this.label191.Text = "-";
+            this.label191.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.label191.TextChanged += new System.EventHandler(this.grpSo2R_TextChanged);
+            // 
+            // txtLo2_2b
+            // 
+            this.txtLo2_2b.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.txtLo2_2b.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.25F);
+            this.txtLo2_2b.Location = new System.Drawing.Point(351, 116);
+            this.txtLo2_2b.Name = "txtLo2_2b";
+            this.txtLo2_2b.Size = new System.Drawing.Size(18, 18);
+            this.txtLo2_2b.TabIndex = 173;
+            this.txtLo2_2b.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.toolTip1.SetToolTip(this.txtLo2_2b, "Amplifer B control code (hex notation).");
+            this.txtLo2_2b.TextChanged += new System.EventHandler(this.grpSo2R_TextChanged);
+            // 
+            // txtTx_2b
+            // 
+            this.txtTx_2b.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.25F);
+            this.txtTx_2b.Location = new System.Drawing.Point(327, 116);
+            this.txtTx_2b.Name = "txtTx_2b";
+            this.txtTx_2b.Size = new System.Drawing.Size(18, 18);
+            this.txtTx_2b.TabIndex = 172;
+            this.txtTx_2b.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.toolTip1.SetToolTip(this.txtTx_2b, "TX antenna to use for this band (1-3).");
+            this.txtTx_2b.TextChanged += new System.EventHandler(this.grpSo2R_TextChanged);
+            // 
+            // txtPwr_2b
+            // 
+            this.txtPwr_2b.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.25F);
+            this.txtPwr_2b.Location = new System.Drawing.Point(267, 116);
+            this.txtPwr_2b.Name = "txtPwr_2b";
+            this.txtPwr_2b.Size = new System.Drawing.Size(30, 18);
+            this.txtPwr_2b.TabIndex = 171;
+            this.txtPwr_2b.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.toolTip1.SetToolTip(this.txtPwr_2b, "Drive Power Amp B (decimal).");
+            this.txtPwr_2b.TextChanged += new System.EventHandler(this.grpSo2R_TextChanged);
+            // 
+            // txtRx_2b
+            // 
+            this.txtRx_2b.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.25F);
+            this.txtRx_2b.Location = new System.Drawing.Point(303, 116);
+            this.txtRx_2b.Name = "txtRx_2b";
+            this.txtRx_2b.Size = new System.Drawing.Size(18, 18);
+            this.txtRx_2b.TabIndex = 170;
+            this.txtRx_2b.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.toolTip1.SetToolTip(this.txtRx_2b, "RX2 antenna to use for this band (1-3).");
+            this.txtRx_2b.TextChanged += new System.EventHandler(this.grpSo2R_TextChanged);
+            // 
+            // label190
+            // 
+            this.label190.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label190.ForeColor = System.Drawing.Color.Navy;
+            this.label190.Location = new System.Drawing.Point(233, 99);
+            this.label190.Name = "label190";
+            this.label190.Size = new System.Drawing.Size(9, 13);
+            this.label190.TabIndex = 169;
+            this.label190.Text = "-";
+            this.label190.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.label190.TextChanged += new System.EventHandler(this.grpSo2R_TextChanged);
+            // 
+            // label189
+            // 
+            this.label189.AutoSize = true;
+            this.label189.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label189.ForeColor = System.Drawing.Color.Blue;
+            this.label189.Location = new System.Drawing.Point(242, 65);
+            this.label189.Name = "label189";
+            this.label189.Size = new System.Drawing.Size(159, 13);
+            this.label189.TabIndex = 168;
+            this.label189.Text = "              VFO B               ";
+            this.label189.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
+            // label185
+            // 
+            this.label185.AutoSize = true;
+            this.label185.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label185.ForeColor = System.Drawing.Color.Blue;
+            this.label185.Location = new System.Drawing.Point(350, 81);
+            this.label185.Name = "label185";
+            this.label185.Size = new System.Drawing.Size(22, 13);
+            this.label185.TabIndex = 167;
+            this.label185.Text = "Ab";
+            // 
+            // txtLo2_1b
+            // 
+            this.txtLo2_1b.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.txtLo2_1b.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.25F);
+            this.txtLo2_1b.Location = new System.Drawing.Point(351, 96);
+            this.txtLo2_1b.Name = "txtLo2_1b";
+            this.txtLo2_1b.Size = new System.Drawing.Size(18, 18);
+            this.txtLo2_1b.TabIndex = 166;
+            this.txtLo2_1b.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.toolTip1.SetToolTip(this.txtLo2_1b, "Amplifer B control code (hex notation).");
+            this.txtLo2_1b.TextChanged += new System.EventHandler(this.grpSo2R_TextChanged);
+            // 
+            // label186
+            // 
+            this.label186.AutoSize = true;
+            this.label186.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label186.ForeColor = System.Drawing.Color.Blue;
+            this.label186.Location = new System.Drawing.Point(323, 81);
+            this.label186.Name = "label186";
+            this.label186.Size = new System.Drawing.Size(23, 13);
+            this.label186.TabIndex = 165;
+            this.label186.Text = "TX";
+            // 
+            // txtTx_1b
+            // 
+            this.txtTx_1b.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.25F);
+            this.txtTx_1b.Location = new System.Drawing.Point(327, 96);
+            this.txtTx_1b.Name = "txtTx_1b";
+            this.txtTx_1b.Size = new System.Drawing.Size(18, 18);
+            this.txtTx_1b.TabIndex = 164;
+            this.txtTx_1b.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.toolTip1.SetToolTip(this.txtTx_1b, "TX antenna to use for this band (1-3).");
+            this.txtTx_1b.TextChanged += new System.EventHandler(this.grpSo2R_TextChanged);
+            // 
+            // label187
+            // 
+            this.label187.AutoSize = true;
+            this.label187.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label187.ForeColor = System.Drawing.Color.Blue;
+            this.label187.Location = new System.Drawing.Point(300, 81);
+            this.label187.Name = "label187";
+            this.label187.Size = new System.Drawing.Size(23, 13);
+            this.label187.TabIndex = 163;
+            this.label187.Text = "R2";
+            // 
+            // label188
+            // 
+            this.label188.AutoSize = true;
+            this.label188.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label188.ForeColor = System.Drawing.Color.Blue;
+            this.label188.Location = new System.Drawing.Point(268, 80);
+            this.label188.Name = "label188";
+            this.label188.Size = new System.Drawing.Size(27, 13);
+            this.label188.TabIndex = 162;
+            this.label188.Text = "Drv";
+            // 
+            // txtPwr_1b
+            // 
+            this.txtPwr_1b.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.25F);
+            this.txtPwr_1b.Location = new System.Drawing.Point(267, 96);
+            this.txtPwr_1b.Name = "txtPwr_1b";
+            this.txtPwr_1b.Size = new System.Drawing.Size(30, 18);
+            this.txtPwr_1b.TabIndex = 161;
+            this.txtPwr_1b.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.toolTip1.SetToolTip(this.txtPwr_1b, "Drive Power Amp B (decimal).");
+            this.txtPwr_1b.TextChanged += new System.EventHandler(this.grpSo2R_TextChanged);
+            // 
+            // txtRx_1b
+            // 
+            this.txtRx_1b.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.25F);
+            this.txtRx_1b.Location = new System.Drawing.Point(303, 96);
+            this.txtRx_1b.Name = "txtRx_1b";
+            this.txtRx_1b.Size = new System.Drawing.Size(18, 18);
+            this.txtRx_1b.TabIndex = 160;
+            this.txtRx_1b.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.toolTip1.SetToolTip(this.txtRx_1b, "RX2 antenna to use for this band (1-3).");
+            this.txtRx_1b.TextChanged += new System.EventHandler(this.grpSo2R_TextChanged);
+            // 
+            // label183
+            // 
+            this.label183.AutoSize = true;
+            this.label183.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label183.ForeColor = System.Drawing.Color.Firebrick;
+            this.label183.Location = new System.Drawing.Point(24, 65);
+            this.label183.Name = "label183";
+            this.label183.Size = new System.Drawing.Size(207, 13);
+            this.label183.TabIndex = 158;
+            this.label183.Text = "                    VFO A                     ";
+            this.label183.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
+            // txtHi2_10a
+            // 
+            this.txtHi2_10a.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.txtHi2_10a.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.25F);
+            this.txtHi2_10a.Location = new System.Drawing.Point(211, 276);
+            this.txtHi2_10a.Name = "txtHi2_10a";
+            this.txtHi2_10a.Size = new System.Drawing.Size(18, 18);
+            this.txtHi2_10a.TabIndex = 157;
+            this.txtHi2_10a.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.toolTip1.SetToolTip(this.txtHi2_10a, "Amplifer A control code (hex notation)");
+            this.txtHi2_10a.TextChanged += new System.EventHandler(this.grpSo2R_TextChanged);
+            // 
+            // txtTx_10a
+            // 
+            this.txtTx_10a.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.25F);
+            this.txtTx_10a.Location = new System.Drawing.Point(187, 276);
+            this.txtTx_10a.Name = "txtTx_10a";
+            this.txtTx_10a.Size = new System.Drawing.Size(18, 18);
+            this.txtTx_10a.TabIndex = 156;
+            this.txtTx_10a.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.toolTip1.SetToolTip(this.txtTx_10a, "TX antenna to use for this band (1-3).");
+            this.txtTx_10a.TextChanged += new System.EventHandler(this.grpSo2R_TextChanged);
+            // 
+            // txtPwr_10a
+            // 
+            this.txtPwr_10a.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.25F);
+            this.txtPwr_10a.Location = new System.Drawing.Point(127, 276);
+            this.txtPwr_10a.Name = "txtPwr_10a";
+            this.txtPwr_10a.Size = new System.Drawing.Size(30, 18);
+            this.txtPwr_10a.TabIndex = 155;
+            this.txtPwr_10a.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.toolTip1.SetToolTip(this.txtPwr_10a, "Drive power (decimal).");
+            this.txtPwr_10a.TextChanged += new System.EventHandler(this.grpSo2R_TextChanged);
+            // 
+            // txtRx_10a
+            // 
+            this.txtRx_10a.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.25F);
+            this.txtRx_10a.Location = new System.Drawing.Point(163, 276);
+            this.txtRx_10a.Name = "txtRx_10a";
+            this.txtRx_10a.Size = new System.Drawing.Size(18, 18);
+            this.txtRx_10a.TabIndex = 154;
+            this.txtRx_10a.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.toolTip1.SetToolTip(this.txtRx_10a, "RX1 antenna to use for this band (1-3).");
+            this.txtRx_10a.TextChanged += new System.EventHandler(this.grpSo2R_TextChanged);
+            // 
+            // txtHi1_10a
+            // 
+            this.txtHi1_10a.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.txtHi1_10a.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.25F);
+            this.txtHi1_10a.Location = new System.Drawing.Point(103, 276);
+            this.txtHi1_10a.Name = "txtHi1_10a";
+            this.txtHi1_10a.Size = new System.Drawing.Size(18, 18);
+            this.txtHi1_10a.TabIndex = 153;
+            this.txtHi1_10a.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.toolTip1.SetToolTip(this.txtHi1_10a, "Band data (Hex notation).");
+            this.txtHi1_10a.TextChanged += new System.EventHandler(this.grpSo2R_TextChanged);
+            // 
+            // txtLPT1_10
+            // 
+            this.txtLPT1_10.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.25F);
+            this.txtLPT1_10.Location = new System.Drawing.Point(55, 276);
+            this.txtLPT1_10.Name = "txtLPT1_10";
+            this.txtLPT1_10.Size = new System.Drawing.Size(42, 18);
+            this.txtLPT1_10.TabIndex = 152;
+            this.txtLPT1_10.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.toolTip1.SetToolTip(this.txtLPT1_10, "LPT port number (decimal) for VFO A band and data control.");
+            this.txtLPT1_10.TextChanged += new System.EventHandler(this.grpSo2R_TextChanged);
+            // 
+            // label179
+            // 
+            this.label179.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label179.ForeColor = System.Drawing.Color.Navy;
+            this.label179.Location = new System.Drawing.Point(2, 278);
+            this.label179.Name = "label179";
+            this.label179.Size = new System.Drawing.Size(25, 13);
+            this.label179.TabIndex = 151;
+            this.label179.Text = "6";
+            this.label179.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // chkSO10a
+            // 
+            this.chkSO10a.AutoSize = true;
+            this.chkSO10a.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
+            this.chkSO10a.Location = new System.Drawing.Point(34, 279);
+            this.chkSO10a.Name = "chkSO10a";
+            this.chkSO10a.Size = new System.Drawing.Size(15, 14);
+            this.chkSO10a.TabIndex = 150;
+            this.toolTip1.SetToolTip(this.chkSO10a, "Check to enable the use of this band for VFO A");
+            this.chkSO10a.UseVisualStyleBackColor = true;
+            // 
+            // txtHi2_9a
+            // 
+            this.txtHi2_9a.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.txtHi2_9a.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.25F);
+            this.txtHi2_9a.Location = new System.Drawing.Point(211, 256);
+            this.txtHi2_9a.Name = "txtHi2_9a";
+            this.txtHi2_9a.Size = new System.Drawing.Size(18, 18);
+            this.txtHi2_9a.TabIndex = 149;
+            this.txtHi2_9a.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.toolTip1.SetToolTip(this.txtHi2_9a, "Amplifer A control code (hex notation)");
+            this.txtHi2_9a.TextChanged += new System.EventHandler(this.grpSo2R_TextChanged);
+            // 
+            // txtTx_9a
+            // 
+            this.txtTx_9a.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.25F);
+            this.txtTx_9a.Location = new System.Drawing.Point(187, 256);
+            this.txtTx_9a.Name = "txtTx_9a";
+            this.txtTx_9a.Size = new System.Drawing.Size(18, 18);
+            this.txtTx_9a.TabIndex = 148;
+            this.txtTx_9a.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.toolTip1.SetToolTip(this.txtTx_9a, "TX antenna to use for this band (1-3).");
+            this.txtTx_9a.TextChanged += new System.EventHandler(this.grpSo2R_TextChanged);
+            // 
+            // txtPwr_9a
+            // 
+            this.txtPwr_9a.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.25F);
+            this.txtPwr_9a.Location = new System.Drawing.Point(127, 256);
+            this.txtPwr_9a.Name = "txtPwr_9a";
+            this.txtPwr_9a.Size = new System.Drawing.Size(30, 18);
+            this.txtPwr_9a.TabIndex = 147;
+            this.txtPwr_9a.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.toolTip1.SetToolTip(this.txtPwr_9a, "Drive power (decimal).");
+            this.txtPwr_9a.TextChanged += new System.EventHandler(this.grpSo2R_TextChanged);
+            // 
+            // txtRx_9a
+            // 
+            this.txtRx_9a.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.25F);
+            this.txtRx_9a.Location = new System.Drawing.Point(163, 256);
+            this.txtRx_9a.Name = "txtRx_9a";
+            this.txtRx_9a.Size = new System.Drawing.Size(18, 18);
+            this.txtRx_9a.TabIndex = 146;
+            this.txtRx_9a.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.toolTip1.SetToolTip(this.txtRx_9a, "RX1 antenna to use for this band (1-3).");
+            this.txtRx_9a.TextChanged += new System.EventHandler(this.grpSo2R_TextChanged);
+            // 
+            // txtHi1_9a
+            // 
+            this.txtHi1_9a.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.txtHi1_9a.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.25F);
+            this.txtHi1_9a.Location = new System.Drawing.Point(103, 256);
+            this.txtHi1_9a.Name = "txtHi1_9a";
+            this.txtHi1_9a.Size = new System.Drawing.Size(18, 18);
+            this.txtHi1_9a.TabIndex = 145;
+            this.txtHi1_9a.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.toolTip1.SetToolTip(this.txtHi1_9a, "Band data (Hex notation).");
+            this.txtHi1_9a.TextChanged += new System.EventHandler(this.grpSo2R_TextChanged);
+            // 
+            // txtLPT1_9
+            // 
+            this.txtLPT1_9.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.25F);
+            this.txtLPT1_9.Location = new System.Drawing.Point(55, 256);
+            this.txtLPT1_9.Name = "txtLPT1_9";
+            this.txtLPT1_9.Size = new System.Drawing.Size(42, 18);
+            this.txtLPT1_9.TabIndex = 144;
+            this.txtLPT1_9.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.toolTip1.SetToolTip(this.txtLPT1_9, "LPT port number (decimal) for VFO A band and data control.");
+            this.txtLPT1_9.TextChanged += new System.EventHandler(this.grpSo2R_TextChanged);
+            // 
+            // label180
+            // 
+            this.label180.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label180.ForeColor = System.Drawing.Color.Navy;
+            this.label180.Location = new System.Drawing.Point(2, 258);
+            this.label180.Name = "label180";
+            this.label180.Size = new System.Drawing.Size(25, 13);
+            this.label180.TabIndex = 143;
+            this.label180.Text = "10";
+            this.label180.TextAlign = System.Drawing.ContentAlignment.TopRight;
+            // 
+            // chkSO9a
+            // 
+            this.chkSO9a.AutoSize = true;
+            this.chkSO9a.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
+            this.chkSO9a.Location = new System.Drawing.Point(34, 259);
+            this.chkSO9a.Name = "chkSO9a";
+            this.chkSO9a.Size = new System.Drawing.Size(15, 14);
+            this.chkSO9a.TabIndex = 142;
+            this.toolTip1.SetToolTip(this.chkSO9a, "Check to enable the use of this band for VFO A");
+            this.chkSO9a.UseVisualStyleBackColor = true;
+            // 
+            // txtHi2_8a
+            // 
+            this.txtHi2_8a.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.txtHi2_8a.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.25F);
+            this.txtHi2_8a.Location = new System.Drawing.Point(211, 236);
+            this.txtHi2_8a.Name = "txtHi2_8a";
+            this.txtHi2_8a.Size = new System.Drawing.Size(18, 18);
+            this.txtHi2_8a.TabIndex = 141;
+            this.txtHi2_8a.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.toolTip1.SetToolTip(this.txtHi2_8a, "Amplifer A control code (hex notation)");
+            this.txtHi2_8a.TextChanged += new System.EventHandler(this.grpSo2R_TextChanged);
+            // 
+            // txtTx_8a
+            // 
+            this.txtTx_8a.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.25F);
+            this.txtTx_8a.Location = new System.Drawing.Point(187, 236);
+            this.txtTx_8a.Name = "txtTx_8a";
+            this.txtTx_8a.Size = new System.Drawing.Size(18, 18);
+            this.txtTx_8a.TabIndex = 140;
+            this.txtTx_8a.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.toolTip1.SetToolTip(this.txtTx_8a, "TX antenna to use for this band (1-3).");
+            this.txtTx_8a.TextChanged += new System.EventHandler(this.grpSo2R_TextChanged);
+            // 
+            // txtPwr_8a
+            // 
+            this.txtPwr_8a.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.25F);
+            this.txtPwr_8a.Location = new System.Drawing.Point(127, 236);
+            this.txtPwr_8a.Name = "txtPwr_8a";
+            this.txtPwr_8a.Size = new System.Drawing.Size(30, 18);
+            this.txtPwr_8a.TabIndex = 139;
+            this.txtPwr_8a.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.toolTip1.SetToolTip(this.txtPwr_8a, "Drive power (decimal).");
+            this.txtPwr_8a.TextChanged += new System.EventHandler(this.grpSo2R_TextChanged);
+            // 
+            // txtRx_8a
+            // 
+            this.txtRx_8a.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.25F);
+            this.txtRx_8a.Location = new System.Drawing.Point(163, 236);
+            this.txtRx_8a.Name = "txtRx_8a";
+            this.txtRx_8a.Size = new System.Drawing.Size(18, 18);
+            this.txtRx_8a.TabIndex = 138;
+            this.txtRx_8a.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.toolTip1.SetToolTip(this.txtRx_8a, "RX1 antenna to use for this band (1-3).");
+            this.txtRx_8a.TextChanged += new System.EventHandler(this.grpSo2R_TextChanged);
+            // 
+            // txtHi1_8a
+            // 
+            this.txtHi1_8a.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.txtHi1_8a.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.25F);
+            this.txtHi1_8a.Location = new System.Drawing.Point(103, 236);
+            this.txtHi1_8a.Name = "txtHi1_8a";
+            this.txtHi1_8a.Size = new System.Drawing.Size(18, 18);
+            this.txtHi1_8a.TabIndex = 137;
+            this.txtHi1_8a.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.toolTip1.SetToolTip(this.txtHi1_8a, "Band data (Hex notation).");
+            this.txtHi1_8a.TextChanged += new System.EventHandler(this.grpSo2R_TextChanged);
+            // 
+            // txtLPT1_8
+            // 
+            this.txtLPT1_8.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.25F);
+            this.txtLPT1_8.Location = new System.Drawing.Point(55, 236);
+            this.txtLPT1_8.Name = "txtLPT1_8";
+            this.txtLPT1_8.Size = new System.Drawing.Size(42, 18);
+            this.txtLPT1_8.TabIndex = 136;
+            this.txtLPT1_8.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.toolTip1.SetToolTip(this.txtLPT1_8, "LPT port number (decimal) for VFO A band and data control.");
+            this.txtLPT1_8.TextChanged += new System.EventHandler(this.grpSo2R_TextChanged);
+            // 
+            // label181
+            // 
+            this.label181.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label181.ForeColor = System.Drawing.Color.Navy;
+            this.label181.Location = new System.Drawing.Point(2, 238);
+            this.label181.Name = "label181";
+            this.label181.Size = new System.Drawing.Size(25, 13);
+            this.label181.TabIndex = 135;
+            this.label181.Text = "12";
+            this.label181.TextAlign = System.Drawing.ContentAlignment.TopRight;
+            // 
+            // chkSO8a
+            // 
+            this.chkSO8a.AutoSize = true;
+            this.chkSO8a.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
+            this.chkSO8a.Location = new System.Drawing.Point(34, 239);
+            this.chkSO8a.Name = "chkSO8a";
+            this.chkSO8a.Size = new System.Drawing.Size(15, 14);
+            this.chkSO8a.TabIndex = 134;
+            this.toolTip1.SetToolTip(this.chkSO8a, "Check to enable the use of this band for VFO A");
+            this.chkSO8a.UseVisualStyleBackColor = true;
+            // 
+            // txtHi2_7a
+            // 
+            this.txtHi2_7a.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.txtHi2_7a.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.25F);
+            this.txtHi2_7a.Location = new System.Drawing.Point(211, 216);
+            this.txtHi2_7a.Name = "txtHi2_7a";
+            this.txtHi2_7a.Size = new System.Drawing.Size(18, 18);
+            this.txtHi2_7a.TabIndex = 133;
+            this.txtHi2_7a.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.toolTip1.SetToolTip(this.txtHi2_7a, "Amplifer A control code (hex notation)");
+            this.txtHi2_7a.TextChanged += new System.EventHandler(this.grpSo2R_TextChanged);
+            // 
+            // txtTx_7a
+            // 
+            this.txtTx_7a.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.25F);
+            this.txtTx_7a.Location = new System.Drawing.Point(187, 216);
+            this.txtTx_7a.Name = "txtTx_7a";
+            this.txtTx_7a.Size = new System.Drawing.Size(18, 18);
+            this.txtTx_7a.TabIndex = 132;
+            this.txtTx_7a.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.toolTip1.SetToolTip(this.txtTx_7a, "TX antenna to use for this band (1-3).");
+            this.txtTx_7a.TextChanged += new System.EventHandler(this.grpSo2R_TextChanged);
+            // 
+            // txtPwr_7a
+            // 
+            this.txtPwr_7a.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.25F);
+            this.txtPwr_7a.Location = new System.Drawing.Point(127, 216);
+            this.txtPwr_7a.Name = "txtPwr_7a";
+            this.txtPwr_7a.Size = new System.Drawing.Size(30, 18);
+            this.txtPwr_7a.TabIndex = 131;
+            this.txtPwr_7a.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.toolTip1.SetToolTip(this.txtPwr_7a, "Drive power (decimal).");
+            this.txtPwr_7a.TextChanged += new System.EventHandler(this.grpSo2R_TextChanged);
+            // 
+            // txtRx_7a
+            // 
+            this.txtRx_7a.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.25F);
+            this.txtRx_7a.Location = new System.Drawing.Point(163, 216);
+            this.txtRx_7a.Name = "txtRx_7a";
+            this.txtRx_7a.Size = new System.Drawing.Size(18, 18);
+            this.txtRx_7a.TabIndex = 130;
+            this.txtRx_7a.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.toolTip1.SetToolTip(this.txtRx_7a, "RX1 antenna to use for this band (1-3).");
+            this.txtRx_7a.TextChanged += new System.EventHandler(this.grpSo2R_TextChanged);
+            // 
+            // txtHi1_7a
+            // 
+            this.txtHi1_7a.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.txtHi1_7a.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.25F);
+            this.txtHi1_7a.Location = new System.Drawing.Point(103, 216);
+            this.txtHi1_7a.Name = "txtHi1_7a";
+            this.txtHi1_7a.Size = new System.Drawing.Size(18, 18);
+            this.txtHi1_7a.TabIndex = 129;
+            this.txtHi1_7a.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.toolTip1.SetToolTip(this.txtHi1_7a, "Band data (Hex notation).");
+            this.txtHi1_7a.TextChanged += new System.EventHandler(this.grpSo2R_TextChanged);
+            // 
+            // txtLPT1_7
+            // 
+            this.txtLPT1_7.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.25F);
+            this.txtLPT1_7.Location = new System.Drawing.Point(55, 216);
+            this.txtLPT1_7.Name = "txtLPT1_7";
+            this.txtLPT1_7.Size = new System.Drawing.Size(42, 18);
+            this.txtLPT1_7.TabIndex = 128;
+            this.txtLPT1_7.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.toolTip1.SetToolTip(this.txtLPT1_7, "LPT port number (decimal) for VFO A band and data control.");
+            this.txtLPT1_7.TextChanged += new System.EventHandler(this.grpSo2R_TextChanged);
+            // 
+            // label182
+            // 
+            this.label182.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label182.ForeColor = System.Drawing.Color.Navy;
+            this.label182.Location = new System.Drawing.Point(2, 218);
+            this.label182.Name = "label182";
+            this.label182.Size = new System.Drawing.Size(25, 13);
+            this.label182.TabIndex = 127;
+            this.label182.Text = "15";
+            this.label182.TextAlign = System.Drawing.ContentAlignment.TopRight;
+            // 
+            // chkSO7a
+            // 
+            this.chkSO7a.AutoSize = true;
+            this.chkSO7a.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
+            this.chkSO7a.Location = new System.Drawing.Point(34, 219);
+            this.chkSO7a.Name = "chkSO7a";
+            this.chkSO7a.Size = new System.Drawing.Size(15, 14);
+            this.chkSO7a.TabIndex = 126;
+            this.toolTip1.SetToolTip(this.chkSO7a, "Check to enable the use of this band for VFO A");
+            this.chkSO7a.UseVisualStyleBackColor = true;
+            // 
+            // txtHi2_6a
+            // 
+            this.txtHi2_6a.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.txtHi2_6a.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.25F);
+            this.txtHi2_6a.Location = new System.Drawing.Point(211, 196);
+            this.txtHi2_6a.Name = "txtHi2_6a";
+            this.txtHi2_6a.Size = new System.Drawing.Size(18, 18);
+            this.txtHi2_6a.TabIndex = 125;
+            this.txtHi2_6a.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.toolTip1.SetToolTip(this.txtHi2_6a, "Amplifer A control code (hex notation)");
+            this.txtHi2_6a.TextChanged += new System.EventHandler(this.grpSo2R_TextChanged);
+            // 
+            // txtTx_6a
+            // 
+            this.txtTx_6a.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.25F);
+            this.txtTx_6a.Location = new System.Drawing.Point(187, 196);
+            this.txtTx_6a.Name = "txtTx_6a";
+            this.txtTx_6a.Size = new System.Drawing.Size(18, 18);
+            this.txtTx_6a.TabIndex = 124;
+            this.txtTx_6a.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.toolTip1.SetToolTip(this.txtTx_6a, "TX antenna to use for this band (1-3).");
+            this.txtTx_6a.TextChanged += new System.EventHandler(this.grpSo2R_TextChanged);
+            // 
+            // txtPwr_6a
+            // 
+            this.txtPwr_6a.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.25F);
+            this.txtPwr_6a.Location = new System.Drawing.Point(127, 196);
+            this.txtPwr_6a.Name = "txtPwr_6a";
+            this.txtPwr_6a.Size = new System.Drawing.Size(30, 18);
+            this.txtPwr_6a.TabIndex = 123;
+            this.txtPwr_6a.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.toolTip1.SetToolTip(this.txtPwr_6a, "Drive power (decimal).");
+            this.txtPwr_6a.TextChanged += new System.EventHandler(this.grpSo2R_TextChanged);
+            // 
+            // txtRx_6a
+            // 
+            this.txtRx_6a.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.25F);
+            this.txtRx_6a.Location = new System.Drawing.Point(163, 196);
+            this.txtRx_6a.Name = "txtRx_6a";
+            this.txtRx_6a.Size = new System.Drawing.Size(18, 18);
+            this.txtRx_6a.TabIndex = 122;
+            this.txtRx_6a.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.toolTip1.SetToolTip(this.txtRx_6a, "RX1 antenna to use for this band (1-3).");
+            this.txtRx_6a.TextChanged += new System.EventHandler(this.grpSo2R_TextChanged);
+            // 
+            // txtHi1_6a
+            // 
+            this.txtHi1_6a.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.txtHi1_6a.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.25F);
+            this.txtHi1_6a.Location = new System.Drawing.Point(103, 196);
+            this.txtHi1_6a.Name = "txtHi1_6a";
+            this.txtHi1_6a.Size = new System.Drawing.Size(18, 18);
+            this.txtHi1_6a.TabIndex = 121;
+            this.txtHi1_6a.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.toolTip1.SetToolTip(this.txtHi1_6a, "Band data (Hex notation).");
+            this.txtHi1_6a.TextChanged += new System.EventHandler(this.grpSo2R_TextChanged);
+            // 
+            // txtLPT1_6
+            // 
+            this.txtLPT1_6.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.25F);
+            this.txtLPT1_6.Location = new System.Drawing.Point(55, 196);
+            this.txtLPT1_6.Name = "txtLPT1_6";
+            this.txtLPT1_6.Size = new System.Drawing.Size(42, 18);
+            this.txtLPT1_6.TabIndex = 120;
+            this.txtLPT1_6.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.toolTip1.SetToolTip(this.txtLPT1_6, "LPT port number (decimal) for VFO A band and data control.");
+            this.txtLPT1_6.TextChanged += new System.EventHandler(this.grpSo2R_TextChanged);
+            // 
+            // label178
+            // 
+            this.label178.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label178.ForeColor = System.Drawing.Color.Navy;
+            this.label178.Location = new System.Drawing.Point(2, 198);
+            this.label178.Name = "label178";
+            this.label178.Size = new System.Drawing.Size(25, 13);
+            this.label178.TabIndex = 119;
+            this.label178.Text = "17";
+            this.label178.TextAlign = System.Drawing.ContentAlignment.TopRight;
+            // 
+            // chkSO6a
+            // 
+            this.chkSO6a.AutoSize = true;
+            this.chkSO6a.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
+            this.chkSO6a.Location = new System.Drawing.Point(34, 199);
+            this.chkSO6a.Name = "chkSO6a";
+            this.chkSO6a.Size = new System.Drawing.Size(15, 14);
+            this.chkSO6a.TabIndex = 118;
+            this.toolTip1.SetToolTip(this.chkSO6a, "Check to enable the use of this band for VFO A");
+            this.chkSO6a.UseVisualStyleBackColor = true;
+            // 
+            // txtTx_5a
+            // 
+            this.txtTx_5a.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.25F);
+            this.txtTx_5a.Location = new System.Drawing.Point(187, 176);
+            this.txtTx_5a.Name = "txtTx_5a";
+            this.txtTx_5a.Size = new System.Drawing.Size(18, 18);
+            this.txtTx_5a.TabIndex = 116;
+            this.txtTx_5a.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.toolTip1.SetToolTip(this.txtTx_5a, "TX antenna to use for this band (1-3).");
+            this.txtTx_5a.TextChanged += new System.EventHandler(this.grpSo2R_TextChanged);
+            // 
+            // txtPwr_5a
+            // 
+            this.txtPwr_5a.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.25F);
+            this.txtPwr_5a.Location = new System.Drawing.Point(127, 176);
+            this.txtPwr_5a.Name = "txtPwr_5a";
+            this.txtPwr_5a.Size = new System.Drawing.Size(30, 18);
+            this.txtPwr_5a.TabIndex = 115;
+            this.txtPwr_5a.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.toolTip1.SetToolTip(this.txtPwr_5a, "Drive power (decimal).");
+            this.txtPwr_5a.TextChanged += new System.EventHandler(this.grpSo2R_TextChanged);
+            // 
+            // txtRx_5a
+            // 
+            this.txtRx_5a.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.25F);
+            this.txtRx_5a.Location = new System.Drawing.Point(163, 176);
+            this.txtRx_5a.Name = "txtRx_5a";
+            this.txtRx_5a.Size = new System.Drawing.Size(18, 18);
+            this.txtRx_5a.TabIndex = 114;
+            this.txtRx_5a.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.toolTip1.SetToolTip(this.txtRx_5a, "RX1 antenna to use for this band (1-3).");
+            this.txtRx_5a.TextChanged += new System.EventHandler(this.grpSo2R_TextChanged);
+            // 
+            // txtHi1_5a
+            // 
+            this.txtHi1_5a.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.txtHi1_5a.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.25F);
+            this.txtHi1_5a.Location = new System.Drawing.Point(103, 176);
+            this.txtHi1_5a.Name = "txtHi1_5a";
+            this.txtHi1_5a.Size = new System.Drawing.Size(18, 18);
+            this.txtHi1_5a.TabIndex = 113;
+            this.txtHi1_5a.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.toolTip1.SetToolTip(this.txtHi1_5a, "Band data (Hex notation).");
+            this.txtHi1_5a.TextChanged += new System.EventHandler(this.grpSo2R_TextChanged);
+            // 
+            // txtLPT1_5
+            // 
+            this.txtLPT1_5.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.25F);
+            this.txtLPT1_5.Location = new System.Drawing.Point(55, 176);
+            this.txtLPT1_5.Name = "txtLPT1_5";
+            this.txtLPT1_5.Size = new System.Drawing.Size(42, 18);
+            this.txtLPT1_5.TabIndex = 112;
+            this.txtLPT1_5.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.toolTip1.SetToolTip(this.txtLPT1_5, "LPT port number (decimal) for VFO A band and data control.");
+            this.txtLPT1_5.TextChanged += new System.EventHandler(this.grpSo2R_TextChanged);
+            // 
+            // label177
+            // 
+            this.label177.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label177.ForeColor = System.Drawing.Color.Navy;
+            this.label177.Location = new System.Drawing.Point(2, 178);
+            this.label177.Name = "label177";
+            this.label177.Size = new System.Drawing.Size(25, 13);
+            this.label177.TabIndex = 111;
+            this.label177.Text = "20";
+            this.label177.TextAlign = System.Drawing.ContentAlignment.TopRight;
+            // 
+            // chkSO5a
+            // 
+            this.chkSO5a.AutoSize = true;
+            this.chkSO5a.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
+            this.chkSO5a.Location = new System.Drawing.Point(34, 179);
+            this.chkSO5a.Name = "chkSO5a";
+            this.chkSO5a.Size = new System.Drawing.Size(15, 14);
+            this.chkSO5a.TabIndex = 110;
+            this.toolTip1.SetToolTip(this.chkSO5a, "Check to enable the use of this band for VFO A");
+            this.chkSO5a.UseVisualStyleBackColor = true;
+            // 
+            // txtHi2_4a
+            // 
+            this.txtHi2_4a.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.txtHi2_4a.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.25F);
+            this.txtHi2_4a.Location = new System.Drawing.Point(211, 156);
+            this.txtHi2_4a.Name = "txtHi2_4a";
+            this.txtHi2_4a.Size = new System.Drawing.Size(18, 18);
+            this.txtHi2_4a.TabIndex = 109;
+            this.txtHi2_4a.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.toolTip1.SetToolTip(this.txtHi2_4a, "Amplifer A control code (hex notation)");
+            this.txtHi2_4a.TextChanged += new System.EventHandler(this.grpSo2R_TextChanged);
+            // 
+            // txtTx_4a
+            // 
+            this.txtTx_4a.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.25F);
+            this.txtTx_4a.Location = new System.Drawing.Point(187, 156);
+            this.txtTx_4a.Name = "txtTx_4a";
+            this.txtTx_4a.Size = new System.Drawing.Size(18, 18);
+            this.txtTx_4a.TabIndex = 108;
+            this.txtTx_4a.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.toolTip1.SetToolTip(this.txtTx_4a, "TX antenna to use for this band (1-3).");
+            this.txtTx_4a.TextChanged += new System.EventHandler(this.grpSo2R_TextChanged);
+            // 
+            // txtPwr_4a
+            // 
+            this.txtPwr_4a.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.25F);
+            this.txtPwr_4a.Location = new System.Drawing.Point(127, 156);
+            this.txtPwr_4a.Name = "txtPwr_4a";
+            this.txtPwr_4a.Size = new System.Drawing.Size(30, 18);
+            this.txtPwr_4a.TabIndex = 107;
+            this.txtPwr_4a.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.toolTip1.SetToolTip(this.txtPwr_4a, "Drive power (decimal).");
+            this.txtPwr_4a.TextChanged += new System.EventHandler(this.grpSo2R_TextChanged);
+            // 
+            // txtRx_4a
+            // 
+            this.txtRx_4a.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.25F);
+            this.txtRx_4a.Location = new System.Drawing.Point(163, 156);
+            this.txtRx_4a.Name = "txtRx_4a";
+            this.txtRx_4a.Size = new System.Drawing.Size(18, 18);
+            this.txtRx_4a.TabIndex = 106;
+            this.txtRx_4a.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.toolTip1.SetToolTip(this.txtRx_4a, "RX1 antenna to use for this band (1-3).");
+            this.txtRx_4a.TextChanged += new System.EventHandler(this.grpSo2R_TextChanged);
+            // 
+            // txtHi1_4a
+            // 
+            this.txtHi1_4a.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.txtHi1_4a.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.25F);
+            this.txtHi1_4a.Location = new System.Drawing.Point(103, 156);
+            this.txtHi1_4a.Name = "txtHi1_4a";
+            this.txtHi1_4a.Size = new System.Drawing.Size(18, 18);
+            this.txtHi1_4a.TabIndex = 105;
+            this.txtHi1_4a.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.toolTip1.SetToolTip(this.txtHi1_4a, "Band data (Hex notation).");
+            this.txtHi1_4a.TextChanged += new System.EventHandler(this.grpSo2R_TextChanged);
+            // 
+            // txtLPT1_4
+            // 
+            this.txtLPT1_4.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.25F);
+            this.txtLPT1_4.Location = new System.Drawing.Point(55, 156);
+            this.txtLPT1_4.Name = "txtLPT1_4";
+            this.txtLPT1_4.Size = new System.Drawing.Size(42, 18);
+            this.txtLPT1_4.TabIndex = 104;
+            this.txtLPT1_4.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.toolTip1.SetToolTip(this.txtLPT1_4, "LPT port number (decimal) for VFO A band and data control.");
+            this.txtLPT1_4.TextChanged += new System.EventHandler(this.grpSo2R_TextChanged);
+            // 
+            // label176
+            // 
+            this.label176.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label176.ForeColor = System.Drawing.Color.Navy;
+            this.label176.Location = new System.Drawing.Point(2, 158);
+            this.label176.Name = "label176";
+            this.label176.Size = new System.Drawing.Size(25, 13);
+            this.label176.TabIndex = 103;
+            this.label176.Text = "30";
+            this.label176.TextAlign = System.Drawing.ContentAlignment.TopRight;
+            // 
+            // chkSO4a
+            // 
+            this.chkSO4a.AutoSize = true;
+            this.chkSO4a.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
+            this.chkSO4a.Location = new System.Drawing.Point(34, 159);
+            this.chkSO4a.Name = "chkSO4a";
+            this.chkSO4a.Size = new System.Drawing.Size(15, 14);
+            this.chkSO4a.TabIndex = 102;
+            this.toolTip1.SetToolTip(this.chkSO4a, "Check to enable the use of this band for VFO A");
+            this.chkSO4a.UseVisualStyleBackColor = true;
+            // 
+            // txtHi2_3a
+            // 
+            this.txtHi2_3a.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.txtHi2_3a.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.25F);
+            this.txtHi2_3a.Location = new System.Drawing.Point(211, 136);
+            this.txtHi2_3a.Name = "txtHi2_3a";
+            this.txtHi2_3a.Size = new System.Drawing.Size(18, 18);
+            this.txtHi2_3a.TabIndex = 101;
+            this.txtHi2_3a.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.toolTip1.SetToolTip(this.txtHi2_3a, "Amplifer A control code (hex notation)");
+            this.txtHi2_3a.TextChanged += new System.EventHandler(this.grpSo2R_TextChanged);
+            // 
+            // txtTx_3a
+            // 
+            this.txtTx_3a.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.25F);
+            this.txtTx_3a.Location = new System.Drawing.Point(187, 136);
+            this.txtTx_3a.Name = "txtTx_3a";
+            this.txtTx_3a.Size = new System.Drawing.Size(18, 18);
+            this.txtTx_3a.TabIndex = 100;
+            this.txtTx_3a.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.toolTip1.SetToolTip(this.txtTx_3a, "TX antenna to use for this band (1-3).");
+            this.txtTx_3a.TextChanged += new System.EventHandler(this.grpSo2R_TextChanged);
+            // 
+            // txtPwr_3a
+            // 
+            this.txtPwr_3a.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.25F);
+            this.txtPwr_3a.Location = new System.Drawing.Point(127, 136);
+            this.txtPwr_3a.Name = "txtPwr_3a";
+            this.txtPwr_3a.Size = new System.Drawing.Size(30, 18);
+            this.txtPwr_3a.TabIndex = 99;
+            this.txtPwr_3a.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.toolTip1.SetToolTip(this.txtPwr_3a, "Drive power (decimal).");
+            this.txtPwr_3a.TextChanged += new System.EventHandler(this.grpSo2R_TextChanged);
+            // 
+            // txtRx_3a
+            // 
+            this.txtRx_3a.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.25F);
+            this.txtRx_3a.Location = new System.Drawing.Point(163, 136);
+            this.txtRx_3a.Name = "txtRx_3a";
+            this.txtRx_3a.Size = new System.Drawing.Size(18, 18);
+            this.txtRx_3a.TabIndex = 98;
+            this.txtRx_3a.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.toolTip1.SetToolTip(this.txtRx_3a, "RX1 antenna to use for this band (1-3).");
+            this.txtRx_3a.TextChanged += new System.EventHandler(this.grpSo2R_TextChanged);
+            // 
+            // txtHi1_3a
+            // 
+            this.txtHi1_3a.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.txtHi1_3a.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.25F);
+            this.txtHi1_3a.Location = new System.Drawing.Point(103, 136);
+            this.txtHi1_3a.Name = "txtHi1_3a";
+            this.txtHi1_3a.Size = new System.Drawing.Size(18, 18);
+            this.txtHi1_3a.TabIndex = 97;
+            this.txtHi1_3a.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.toolTip1.SetToolTip(this.txtHi1_3a, "Band data (Hex notation).");
+            this.txtHi1_3a.TextChanged += new System.EventHandler(this.grpSo2R_TextChanged);
+            // 
+            // txtLPT1_3
+            // 
+            this.txtLPT1_3.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.25F);
+            this.txtLPT1_3.Location = new System.Drawing.Point(55, 136);
+            this.txtLPT1_3.Name = "txtLPT1_3";
+            this.txtLPT1_3.Size = new System.Drawing.Size(42, 18);
+            this.txtLPT1_3.TabIndex = 96;
+            this.txtLPT1_3.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.toolTip1.SetToolTip(this.txtLPT1_3, "LPT port number (decimal) for VFO A band and data control.");
+            this.txtLPT1_3.TextChanged += new System.EventHandler(this.grpSo2R_TextChanged);
+            // 
+            // label175
+            // 
+            this.label175.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label175.ForeColor = System.Drawing.Color.Navy;
+            this.label175.Location = new System.Drawing.Point(2, 138);
+            this.label175.Name = "label175";
+            this.label175.Size = new System.Drawing.Size(25, 13);
+            this.label175.TabIndex = 95;
+            this.label175.Text = "40";
+            this.label175.TextAlign = System.Drawing.ContentAlignment.TopRight;
+            // 
+            // chkSO3a
+            // 
+            this.chkSO3a.AutoSize = true;
+            this.chkSO3a.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
+            this.chkSO3a.Location = new System.Drawing.Point(34, 139);
+            this.chkSO3a.Name = "chkSO3a";
+            this.chkSO3a.Size = new System.Drawing.Size(15, 14);
+            this.chkSO3a.TabIndex = 94;
+            this.toolTip1.SetToolTip(this.chkSO3a, "Check to enable the use of this band for VFO A");
+            this.chkSO3a.UseVisualStyleBackColor = true;
+            // 
+            // txtHi2_2a
+            // 
+            this.txtHi2_2a.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.txtHi2_2a.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.25F);
+            this.txtHi2_2a.Location = new System.Drawing.Point(211, 116);
+            this.txtHi2_2a.Name = "txtHi2_2a";
+            this.txtHi2_2a.Size = new System.Drawing.Size(18, 18);
+            this.txtHi2_2a.TabIndex = 93;
+            this.txtHi2_2a.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.toolTip1.SetToolTip(this.txtHi2_2a, "Amplifer A control code (hex notation)");
+            this.txtHi2_2a.TextChanged += new System.EventHandler(this.grpSo2R_TextChanged);
+            // 
+            // txtTx_2a
+            // 
+            this.txtTx_2a.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.25F);
+            this.txtTx_2a.Location = new System.Drawing.Point(187, 116);
+            this.txtTx_2a.Name = "txtTx_2a";
+            this.txtTx_2a.Size = new System.Drawing.Size(18, 18);
+            this.txtTx_2a.TabIndex = 92;
+            this.txtTx_2a.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.toolTip1.SetToolTip(this.txtTx_2a, "TX antenna to use for this band (1-3).");
+            this.txtTx_2a.TextChanged += new System.EventHandler(this.grpSo2R_TextChanged);
+            // 
+            // txtPwr_2a
+            // 
+            this.txtPwr_2a.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.25F);
+            this.txtPwr_2a.Location = new System.Drawing.Point(127, 116);
+            this.txtPwr_2a.Name = "txtPwr_2a";
+            this.txtPwr_2a.Size = new System.Drawing.Size(30, 18);
+            this.txtPwr_2a.TabIndex = 91;
+            this.txtPwr_2a.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.toolTip1.SetToolTip(this.txtPwr_2a, "Drive power (decimal).");
+            this.txtPwr_2a.TextChanged += new System.EventHandler(this.grpSo2R_TextChanged);
+            // 
+            // txtRx_2a
+            // 
+            this.txtRx_2a.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.25F);
+            this.txtRx_2a.Location = new System.Drawing.Point(163, 116);
+            this.txtRx_2a.Name = "txtRx_2a";
+            this.txtRx_2a.Size = new System.Drawing.Size(18, 18);
+            this.txtRx_2a.TabIndex = 90;
+            this.txtRx_2a.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.toolTip1.SetToolTip(this.txtRx_2a, "RX1 antenna to use for this band (1-3).");
+            this.txtRx_2a.TextChanged += new System.EventHandler(this.grpSo2R_TextChanged);
+            // 
+            // txtHi1_2a
+            // 
+            this.txtHi1_2a.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.txtHi1_2a.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.25F);
+            this.txtHi1_2a.Location = new System.Drawing.Point(103, 116);
+            this.txtHi1_2a.Name = "txtHi1_2a";
+            this.txtHi1_2a.Size = new System.Drawing.Size(18, 18);
+            this.txtHi1_2a.TabIndex = 89;
+            this.txtHi1_2a.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.toolTip1.SetToolTip(this.txtHi1_2a, "Band data (Hex notation).");
+            this.txtHi1_2a.TextChanged += new System.EventHandler(this.grpSo2R_TextChanged);
+            // 
+            // txtLPT1_2
+            // 
+            this.txtLPT1_2.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.25F);
+            this.txtLPT1_2.Location = new System.Drawing.Point(55, 116);
+            this.txtLPT1_2.Name = "txtLPT1_2";
+            this.txtLPT1_2.Size = new System.Drawing.Size(42, 18);
+            this.txtLPT1_2.TabIndex = 88;
+            this.txtLPT1_2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.toolTip1.SetToolTip(this.txtLPT1_2, "LPT port number (decimal) for VFO A band and data control.");
+            this.txtLPT1_2.TextChanged += new System.EventHandler(this.grpSo2R_TextChanged);
+            // 
+            // label168
+            // 
+            this.label168.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label168.ForeColor = System.Drawing.Color.Navy;
+            this.label168.Location = new System.Drawing.Point(2, 118);
+            this.label168.Name = "label168";
+            this.label168.Size = new System.Drawing.Size(25, 13);
+            this.label168.TabIndex = 87;
+            this.label168.Text = "80";
+            this.label168.TextAlign = System.Drawing.ContentAlignment.TopRight;
+            // 
+            // chkSO2a
+            // 
+            this.chkSO2a.AutoSize = true;
+            this.chkSO2a.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
+            this.chkSO2a.Location = new System.Drawing.Point(34, 119);
+            this.chkSO2a.Name = "chkSO2a";
+            this.chkSO2a.Size = new System.Drawing.Size(15, 14);
+            this.chkSO2a.TabIndex = 86;
+            this.toolTip1.SetToolTip(this.chkSO2a, "Check to enable the use of this band for VFO A");
+            this.chkSO2a.UseVisualStyleBackColor = true;
+            // 
+            // label174
+            // 
+            this.label174.AutoSize = true;
+            this.label174.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label174.ForeColor = System.Drawing.Color.Firebrick;
+            this.label174.Location = new System.Drawing.Point(209, 80);
+            this.label174.Name = "label174";
+            this.label174.Size = new System.Drawing.Size(22, 13);
+            this.label174.TabIndex = 85;
+            this.label174.Text = "Aa";
+            // 
+            // txtHi2_1a
+            // 
+            this.txtHi2_1a.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.txtHi2_1a.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.25F);
+            this.txtHi2_1a.Location = new System.Drawing.Point(211, 96);
+            this.txtHi2_1a.Name = "txtHi2_1a";
+            this.txtHi2_1a.Size = new System.Drawing.Size(18, 18);
+            this.txtHi2_1a.TabIndex = 84;
+            this.txtHi2_1a.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.toolTip1.SetToolTip(this.txtHi2_1a, "Amplifer A control code (hex notation)");
+            this.txtHi2_1a.TextChanged += new System.EventHandler(this.grpSo2R_TextChanged);
+            // 
+            // label173
+            // 
+            this.label173.AutoSize = true;
+            this.label173.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label173.ForeColor = System.Drawing.Color.Firebrick;
+            this.label173.Location = new System.Drawing.Point(183, 80);
+            this.label173.Name = "label173";
+            this.label173.Size = new System.Drawing.Size(23, 13);
+            this.label173.TabIndex = 83;
+            this.label173.Text = "TX";
+            // 
+            // txtTx_1a
+            // 
+            this.txtTx_1a.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.25F);
+            this.txtTx_1a.Location = new System.Drawing.Point(187, 96);
+            this.txtTx_1a.Name = "txtTx_1a";
+            this.txtTx_1a.Size = new System.Drawing.Size(18, 18);
+            this.txtTx_1a.TabIndex = 82;
+            this.txtTx_1a.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.toolTip1.SetToolTip(this.txtTx_1a, "TX antenna to use for this band (1-3).");
+            this.txtTx_1a.TextChanged += new System.EventHandler(this.grpSo2R_TextChanged);
+            // 
+            // label172
+            // 
+            this.label172.AutoSize = true;
+            this.label172.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label172.ForeColor = System.Drawing.Color.Firebrick;
+            this.label172.Location = new System.Drawing.Point(161, 80);
+            this.label172.Name = "label172";
+            this.label172.Size = new System.Drawing.Size(23, 13);
+            this.label172.TabIndex = 81;
+            this.label172.Text = "R1";
+            // 
+            // label170
+            // 
+            this.label170.AutoSize = true;
+            this.label170.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label170.ForeColor = System.Drawing.Color.Firebrick;
+            this.label170.Location = new System.Drawing.Point(129, 79);
+            this.label170.Name = "label170";
+            this.label170.Size = new System.Drawing.Size(27, 13);
+            this.label170.TabIndex = 80;
+            this.label170.Text = "Drv";
+            // 
+            // txtPwr_1a
+            // 
+            this.txtPwr_1a.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.25F);
+            this.txtPwr_1a.Location = new System.Drawing.Point(127, 96);
+            this.txtPwr_1a.Name = "txtPwr_1a";
+            this.txtPwr_1a.Size = new System.Drawing.Size(30, 18);
+            this.txtPwr_1a.TabIndex = 79;
+            this.txtPwr_1a.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.toolTip1.SetToolTip(this.txtPwr_1a, "Drive Power Amp A (decimal).");
+            this.txtPwr_1a.TextChanged += new System.EventHandler(this.grpSo2R_TextChanged);
+            // 
+            // txtRx_1a
+            // 
+            this.txtRx_1a.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.25F);
+            this.txtRx_1a.Location = new System.Drawing.Point(163, 96);
+            this.txtRx_1a.Name = "txtRx_1a";
+            this.txtRx_1a.Size = new System.Drawing.Size(18, 18);
+            this.txtRx_1a.TabIndex = 78;
+            this.txtRx_1a.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.toolTip1.SetToolTip(this.txtRx_1a, "RX1 antenna to use for this band (1-3).");
+            this.txtRx_1a.TextChanged += new System.EventHandler(this.grpSo2R_TextChanged);
+            // 
+            // txtHi1_1a
+            // 
+            this.txtHi1_1a.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.txtHi1_1a.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.25F);
+            this.txtHi1_1a.Location = new System.Drawing.Point(103, 96);
+            this.txtHi1_1a.Name = "txtHi1_1a";
+            this.txtHi1_1a.Size = new System.Drawing.Size(18, 18);
+            this.txtHi1_1a.TabIndex = 77;
+            this.txtHi1_1a.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.toolTip1.SetToolTip(this.txtHi1_1a, "Band data high 4 bits (Hex notation).");
+            this.txtHi1_1a.TextChanged += new System.EventHandler(this.grpSo2R_TextChanged);
+            // 
+            // label167
+            // 
+            this.label167.AutoSize = true;
+            this.label167.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label167.ForeColor = System.Drawing.Color.Firebrick;
+            this.label167.Location = new System.Drawing.Point(56, 79);
+            this.label167.Name = "label167";
+            this.label167.Size = new System.Drawing.Size(41, 13);
+            this.label167.TabIndex = 75;
+            this.label167.Text = "LPT 1";
+            // 
+            // txtLPT1_1
+            // 
+            this.txtLPT1_1.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.25F);
+            this.txtLPT1_1.Location = new System.Drawing.Point(55, 96);
+            this.txtLPT1_1.Name = "txtLPT1_1";
+            this.txtLPT1_1.Size = new System.Drawing.Size(42, 18);
+            this.txtLPT1_1.TabIndex = 74;
+            this.txtLPT1_1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.toolTip1.SetToolTip(this.txtLPT1_1, "LPT port number (decimal) for VFO A band and data control.");
+            this.txtLPT1_1.TextChanged += new System.EventHandler(this.grpSo2R_TextChanged);
+            // 
+            // label166
+            // 
+            this.label166.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label166.ForeColor = System.Drawing.Color.Navy;
+            this.label166.Location = new System.Drawing.Point(0, 98);
+            this.label166.Name = "label166";
+            this.label166.Size = new System.Drawing.Size(28, 13);
+            this.label166.TabIndex = 73;
+            this.label166.Text = "160";
+            // 
+            // label169
+            // 
+            this.label169.AutoSize = true;
+            this.label169.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label169.ForeColor = System.Drawing.Color.Firebrick;
+            this.label169.Location = new System.Drawing.Point(101, 79);
+            this.label169.Name = "label169";
+            this.label169.Size = new System.Drawing.Size(23, 13);
+            this.label169.TabIndex = 71;
+            this.label169.Text = "Da";
+            this.label169.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
+            // chkSO1a
+            // 
+            this.chkSO1a.AutoSize = true;
+            this.chkSO1a.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
+            this.chkSO1a.Location = new System.Drawing.Point(34, 99);
+            this.chkSO1a.Name = "chkSO1a";
+            this.chkSO1a.Size = new System.Drawing.Size(15, 14);
+            this.chkSO1a.TabIndex = 48;
+            this.toolTip1.SetToolTip(this.chkSO1a, "Check to enable the use of this band for VFO A.");
+            this.chkSO1a.UseVisualStyleBackColor = true;
+            // 
+            // label171
+            // 
+            this.label171.AutoSize = true;
+            this.label171.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label171.ForeColor = System.Drawing.Color.Firebrick;
+            this.label171.Location = new System.Drawing.Point(25, 79);
+            this.label171.Name = "label171";
+            this.label171.Size = new System.Drawing.Size(29, 13);
+            this.label171.TabIndex = 49;
+            this.label171.Text = "Use";
             // 
             // openFileDialog1
             // 
@@ -11467,7 +13990,7 @@ namespace DataDecoder
             // txtFwd
             // 
             this.txtFwd.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtFwd.Location = new System.Drawing.Point(3, 365);
+            this.txtFwd.Location = new System.Drawing.Point(4, 365);
             this.txtFwd.Name = "txtFwd";
             this.txtFwd.Size = new System.Drawing.Size(45, 20);
             this.txtFwd.TabIndex = 65;
@@ -11626,6 +14149,188 @@ namespace DataDecoder
             this.lblHighSWR.Text = "High SWR";
             this.toolTip1.SetToolTip(this.lblHighSWR, "Illuminated when antenna is adjusting");
             this.lblHighSWR.Visible = false;
+            // 
+            // comboBox2
+            // 
+            this.comboBox2.Enabled = false;
+            this.comboBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
+            this.comboBox2.FormattingEnabled = true;
+            this.comboBox2.Location = new System.Drawing.Point(325, 109);
+            this.comboBox2.Name = "comboBox2";
+            this.comboBox2.Size = new System.Drawing.Size(63, 21);
+            this.comboBox2.TabIndex = 67;
+            this.toolTip1.SetToolTip(this.comboBox2, "Rotor Port for RCP 4");
+            // 
+            // comboBox3
+            // 
+            this.comboBox3.Enabled = false;
+            this.comboBox3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
+            this.comboBox3.FormattingEnabled = true;
+            this.comboBox3.Location = new System.Drawing.Point(325, 72);
+            this.comboBox3.Name = "comboBox3";
+            this.comboBox3.Size = new System.Drawing.Size(63, 21);
+            this.comboBox3.TabIndex = 66;
+            this.toolTip1.SetToolTip(this.comboBox3, "Rotor Port for RCP 3");
+            // 
+            // comboBox4
+            // 
+            this.comboBox4.Enabled = false;
+            this.comboBox4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
+            this.comboBox4.FormattingEnabled = true;
+            this.comboBox4.Location = new System.Drawing.Point(325, 37);
+            this.comboBox4.Name = "comboBox4";
+            this.comboBox4.Size = new System.Drawing.Size(63, 21);
+            this.comboBox4.TabIndex = 65;
+            this.toolTip1.SetToolTip(this.comboBox4, "Rotor Port for RCP 2");
+            // 
+            // checkBox1
+            // 
+            this.checkBox1.AutoSize = true;
+            this.checkBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
+            this.checkBox1.Location = new System.Drawing.Point(50, 40);
+            this.checkBox1.Name = "checkBox1";
+            this.checkBox1.Size = new System.Drawing.Size(65, 17);
+            this.checkBox1.TabIndex = 48;
+            this.checkBox1.Text = "Enabled";
+            this.toolTip1.SetToolTip(this.checkBox1, "Check to enable RCP 2");
+            this.checkBox1.UseVisualStyleBackColor = true;
+            // 
+            // textBox3
+            // 
+            this.textBox3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
+            this.textBox3.Location = new System.Drawing.Point(119, 141);
+            this.textBox3.Multiline = true;
+            this.textBox3.Name = "textBox3";
+            this.textBox3.Size = new System.Drawing.Size(164, 61);
+            this.textBox3.TabIndex = 63;
+            this.textBox3.Text = "RCP1 Commander\r\nRCP2 MixW\r\nRCP3 WriteLog\r\nRCP4 DXBase";
+            this.toolTip1.SetToolTip(this.textBox3, "Use this to keep track of which port your programs are on.");
+            // 
+            // comboBox5
+            // 
+            this.comboBox5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
+            this.comboBox5.FormattingEnabled = true;
+            this.comboBox5.Location = new System.Drawing.Point(121, 37);
+            this.comboBox5.Name = "comboBox5";
+            this.comboBox5.Size = new System.Drawing.Size(63, 21);
+            this.comboBox5.TabIndex = 46;
+            this.toolTip1.SetToolTip(this.comboBox5, "RCP2 CAT Port");
+            // 
+            // checkBox3
+            // 
+            this.checkBox3.AutoSize = true;
+            this.checkBox3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
+            this.checkBox3.Location = new System.Drawing.Point(191, 107);
+            this.checkBox3.Name = "checkBox3";
+            this.checkBox3.Size = new System.Drawing.Size(57, 17);
+            this.checkBox3.TabIndex = 62;
+            this.checkBox3.Text = "IF only";
+            this.toolTip1.SetToolTip(this.checkBox3, "Check to disable all CAT commands but IF");
+            this.checkBox3.UseVisualStyleBackColor = true;
+            // 
+            // checkBox4
+            // 
+            this.checkBox4.AutoSize = true;
+            this.checkBox4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
+            this.checkBox4.Location = new System.Drawing.Point(191, 74);
+            this.checkBox4.Name = "checkBox4";
+            this.checkBox4.Size = new System.Drawing.Size(57, 17);
+            this.checkBox4.TabIndex = 61;
+            this.checkBox4.Text = "IF only";
+            this.toolTip1.SetToolTip(this.checkBox4, "Check to disable all CAT commands but IF");
+            this.checkBox4.UseVisualStyleBackColor = true;
+            // 
+            // checkBox5
+            // 
+            this.checkBox5.AutoSize = true;
+            this.checkBox5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
+            this.checkBox5.Location = new System.Drawing.Point(50, 74);
+            this.checkBox5.Name = "checkBox5";
+            this.checkBox5.Size = new System.Drawing.Size(65, 17);
+            this.checkBox5.TabIndex = 51;
+            this.checkBox5.Text = "Enabled";
+            this.toolTip1.SetToolTip(this.checkBox5, "Check to enable RCP 3");
+            this.checkBox5.UseVisualStyleBackColor = true;
+            // 
+            // checkBox6
+            // 
+            this.checkBox6.AutoSize = true;
+            this.checkBox6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
+            this.checkBox6.Location = new System.Drawing.Point(191, 40);
+            this.checkBox6.Name = "checkBox6";
+            this.checkBox6.Size = new System.Drawing.Size(57, 17);
+            this.checkBox6.TabIndex = 60;
+            this.checkBox6.Text = "IF only";
+            this.toolTip1.SetToolTip(this.checkBox6, "Check to disable all CAT commands but IF");
+            this.checkBox6.UseVisualStyleBackColor = true;
+            // 
+            // comboBox6
+            // 
+            this.comboBox6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
+            this.comboBox6.FormattingEnabled = true;
+            this.comboBox6.Location = new System.Drawing.Point(121, 72);
+            this.comboBox6.Name = "comboBox6";
+            this.comboBox6.Size = new System.Drawing.Size(63, 21);
+            this.comboBox6.TabIndex = 50;
+            this.toolTip1.SetToolTip(this.comboBox6, "RCP 3 CAT Port");
+            // 
+            // checkBox7
+            // 
+            this.checkBox7.AutoSize = true;
+            this.checkBox7.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
+            this.checkBox7.Location = new System.Drawing.Point(255, 108);
+            this.checkBox7.Name = "checkBox7";
+            this.checkBox7.Size = new System.Drawing.Size(61, 17);
+            this.checkBox7.TabIndex = 59;
+            this.checkBox7.Text = "Dis Poll";
+            this.toolTip1.SetToolTip(this.checkBox7, "Check to disable polling for RCP 4");
+            this.checkBox7.UseVisualStyleBackColor = true;
+            // 
+            // checkBox8
+            // 
+            this.checkBox8.AutoSize = true;
+            this.checkBox8.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
+            this.checkBox8.Location = new System.Drawing.Point(50, 109);
+            this.checkBox8.Name = "checkBox8";
+            this.checkBox8.Size = new System.Drawing.Size(65, 17);
+            this.checkBox8.TabIndex = 54;
+            this.checkBox8.Text = "Enabled";
+            this.toolTip1.SetToolTip(this.checkBox8, "Check to enable RCP 4");
+            this.checkBox8.UseVisualStyleBackColor = true;
+            // 
+            // checkBox9
+            // 
+            this.checkBox9.AutoSize = true;
+            this.checkBox9.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
+            this.checkBox9.Location = new System.Drawing.Point(255, 74);
+            this.checkBox9.Name = "checkBox9";
+            this.checkBox9.Size = new System.Drawing.Size(61, 17);
+            this.checkBox9.TabIndex = 58;
+            this.checkBox9.Text = "Dis Poll";
+            this.toolTip1.SetToolTip(this.checkBox9, "Check to disable polling for RCP 3");
+            this.checkBox9.UseVisualStyleBackColor = true;
+            // 
+            // comboBox7
+            // 
+            this.comboBox7.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
+            this.comboBox7.FormattingEnabled = true;
+            this.comboBox7.Location = new System.Drawing.Point(121, 106);
+            this.comboBox7.Name = "comboBox7";
+            this.comboBox7.Size = new System.Drawing.Size(63, 21);
+            this.comboBox7.TabIndex = 53;
+            this.toolTip1.SetToolTip(this.comboBox7, "RCP 4 CAT Port");
+            // 
+            // checkBox10
+            // 
+            this.checkBox10.AutoSize = true;
+            this.checkBox10.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
+            this.checkBox10.Location = new System.Drawing.Point(255, 40);
+            this.checkBox10.Name = "checkBox10";
+            this.checkBox10.Size = new System.Drawing.Size(61, 17);
+            this.checkBox10.TabIndex = 57;
+            this.checkBox10.Text = "Dis Poll";
+            this.toolTip1.SetToolTip(this.checkBox10, "Check to disable polling for RCP 2");
+            this.checkBox10.UseVisualStyleBackColor = true;
             // 
             // LogPort
             // 
@@ -11803,7 +14508,7 @@ namespace DataDecoder
             this.aboutToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(436, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(437, 24);
             this.menuStrip1.TabIndex = 70;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -12018,7 +14723,7 @@ namespace DataDecoder
             this.StatusBar});
             this.statusStrip1.Location = new System.Drawing.Point(0, 390);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(436, 22);
+            this.statusStrip1.Size = new System.Drawing.Size(437, 22);
             this.statusStrip1.TabIndex = 71;
             this.statusStrip1.Text = "statusStrip1";
             // 
@@ -12186,13 +14891,81 @@ namespace DataDecoder
             this.SPEport.WriteTimeout = 500;
             this.SPEport.DataReceived += new System.IO.Ports.SerialDataReceivedEventHandler(this.SPEport_DataReceived);
             // 
+            // label159
+            // 
+            this.label159.AutoSize = true;
+            this.label159.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
+            this.label159.Location = new System.Drawing.Point(5, 110);
+            this.label159.Name = "label159";
+            this.label159.Size = new System.Drawing.Size(35, 13);
+            this.label159.TabIndex = 74;
+            this.label159.Text = "RCP4";
+            // 
+            // label160
+            // 
+            this.label160.AutoSize = true;
+            this.label160.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
+            this.label160.Location = new System.Drawing.Point(5, 75);
+            this.label160.Name = "label160";
+            this.label160.Size = new System.Drawing.Size(35, 13);
+            this.label160.TabIndex = 73;
+            this.label160.Text = "RCP3";
+            // 
+            // label162
+            // 
+            this.label162.AutoSize = true;
+            this.label162.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
+            this.label162.Location = new System.Drawing.Point(315, 21);
+            this.label162.Name = "label162";
+            this.label162.Size = new System.Drawing.Size(80, 13);
+            this.label162.TabIndex = 72;
+            this.label162.Text = "RCP Rotor Port";
+            this.label162.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
+            // label163
+            // 
+            this.label163.AutoSize = true;
+            this.label163.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
+            this.label163.Location = new System.Drawing.Point(115, 21);
+            this.label163.Name = "label163";
+            this.label163.Size = new System.Drawing.Size(75, 13);
+            this.label163.TabIndex = 71;
+            this.label163.Text = "RCP CAT Port";
+            this.label163.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
+            // label164
+            // 
+            this.label164.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
+            this.label164.Location = new System.Drawing.Point(150, 205);
+            this.label164.Name = "label164";
+            this.label164.Size = new System.Drawing.Size(100, 13);
+            this.label164.TabIndex = 64;
+            this.label164.Text = "Program Memo";
+            this.label164.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
+            // label165
+            // 
+            this.label165.AutoSize = true;
+            this.label165.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
+            this.label165.Location = new System.Drawing.Point(6, 41);
+            this.label165.Name = "label165";
+            this.label165.Size = new System.Drawing.Size(35, 13);
+            this.label165.TabIndex = 49;
+            this.label165.Text = "RCP2";
+            // 
+            // SwitchPort
+            // 
+            this.SwitchPort.DtrEnable = true;
+            this.SwitchPort.RtsEnable = true;
+            this.SwitchPort.PinChanged += new System.IO.Ports.SerialPinChangedEventHandler(this.PinChanged);
+            // 
             // Setup
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.ClientSize = new System.Drawing.Size(436, 412);
+            this.ClientSize = new System.Drawing.Size(437, 412);
             this.ContextMenuStrip = this.contextMenuStrip1;
             this.Controls.Add(this.lblHighSWR);
             this.Controls.Add(this.txtAlcInd);
@@ -12277,6 +15050,7 @@ namespace DataDecoder
             this.grpAmpBand.ResumeLayout(false);
             this.grpAmpBand.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numDrive)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pixBox1)).EndInit();
             this.grpPTT.ResumeLayout(false);
             this.groupBox13.ResumeLayout(false);
             this.groupBox13.PerformLayout();
@@ -12339,7 +15113,8 @@ namespace DataDecoder
             this.groupBox14.ResumeLayout(false);
             this.groupBox14.PerformLayout();
             this.tabProp.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pixBox1)).EndInit();
+            this.grpSO2R.ResumeLayout(false);
+            this.grpSO2R.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numSplit)).EndInit();
             this.contextMenuStrip1.ResumeLayout(false);
             this.menuStrip1.ResumeLayout(false);
@@ -13228,6 +16003,217 @@ namespace DataDecoder
         private ToolStripMenuItem showTipsToolStripMenuItem;
         private TabPage tabProp;
         private PictureBox pixBox1;
+        private GroupBox grpSO2R;
+        private Label label166;
+        private Label label169;
+        public CheckBox chkSO1a;
+        private Label label171;
+        private Label label159;
+        private Label label160;
+        private Label label162;
+        private Label label163;
+        private ComboBox comboBox2;
+        private ComboBox comboBox3;
+        private ComboBox comboBox4;
+        private Label label164;
+        public CheckBox checkBox1;
+        private TextBox textBox3;
+        private ComboBox comboBox5;
+        private CheckBox checkBox3;
+        private Label label165;
+        private CheckBox checkBox4;
+        public CheckBox checkBox5;
+        private CheckBox checkBox6;
+        private ComboBox comboBox6;
+        private CheckBox checkBox7;
+        public CheckBox checkBox8;
+        private CheckBox checkBox9;
+        private ComboBox comboBox7;
+        private CheckBox checkBox10;
+        private TextBox txtHi1_1a;
+        private Label label167;
+        private TextBox txtLPT1_1;
+        private TextBox txtRx_1a;
+        private Label label170;
+        private TextBox txtPwr_1a;
+        private Label label174;
+        private TextBox txtHi2_1a;
+        private Label label173;
+        private TextBox txtTx_1a;
+        private Label label172;
+        private TextBox txtHi2_10a;
+        private TextBox txtTx_10a;
+        private TextBox txtPwr_10a;
+        private TextBox txtRx_10a;
+        private TextBox txtHi1_10a;
+        private TextBox txtLPT1_10;
+        private Label label179;
+        public CheckBox chkSO10a;
+        private TextBox txtHi2_9a;
+        private TextBox txtTx_9a;
+        private TextBox txtPwr_9a;
+        private TextBox txtRx_9a;
+        private TextBox txtHi1_9a;
+        private TextBox txtLPT1_9;
+        private Label label180;
+        public CheckBox chkSO9a;
+        private TextBox txtHi2_8a;
+        private TextBox txtTx_8a;
+        private TextBox txtPwr_8a;
+        private TextBox txtRx_8a;
+        private TextBox txtHi1_8a;
+        private TextBox txtLPT1_8;
+        private Label label181;
+        public CheckBox chkSO8a;
+        private TextBox txtHi2_7a;
+        private TextBox txtTx_7a;
+        private TextBox txtPwr_7a;
+        private TextBox txtRx_7a;
+        private TextBox txtHi1_7a;
+        private TextBox txtLPT1_7;
+        private Label label182;
+        public CheckBox chkSO7a;
+        private TextBox txtHi2_6a;
+        private TextBox txtTx_6a;
+        private TextBox txtPwr_6a;
+        private TextBox txtRx_6a;
+        private TextBox txtHi1_6a;
+        private TextBox txtLPT1_6;
+        private Label label178;
+        public CheckBox chkSO6a;
+        private TextBox txtTx_5a;
+        private TextBox txtPwr_5a;
+        private TextBox txtRx_5a;
+        private TextBox txtHi1_5a;
+        private TextBox txtLPT1_5;
+        private Label label177;
+        public CheckBox chkSO5a;
+        private TextBox txtHi2_4a;
+        private TextBox txtTx_4a;
+        private TextBox txtPwr_4a;
+        private TextBox txtRx_4a;
+        private TextBox txtHi1_4a;
+        private TextBox txtLPT1_4;
+        private Label label176;
+        public CheckBox chkSO4a;
+        private TextBox txtHi2_3a;
+        private TextBox txtTx_3a;
+        private TextBox txtPwr_3a;
+        private TextBox txtRx_3a;
+        private TextBox txtHi1_3a;
+        private TextBox txtLPT1_3;
+        private Label label175;
+        public CheckBox chkSO3a;
+        private TextBox txtHi2_2a;
+        private TextBox txtTx_2a;
+        private TextBox txtPwr_2a;
+        private TextBox txtRx_2a;
+        private TextBox txtHi1_2a;
+        private TextBox txtLPT1_2;
+        private Label label168;
+        public CheckBox chkSO2a;
+        private Label label183;
+        private Label label189;
+        private Label label185;
+        private TextBox txtLo2_1b;
+        private Label label186;
+        private TextBox txtTx_1b;
+        private Label label187;
+        private Label label188;
+        private TextBox txtPwr_1b;
+        private TextBox txtRx_1b;
+        private Label label194;
+        private TextBox txtLo2_5b;
+        private TextBox txtTx_5b;
+        private TextBox txtPwr_5b;
+        private TextBox txtRx_5b;
+        private Label label193;
+        private TextBox txtLo2_4b;
+        private TextBox txtTx_4b;
+        private TextBox txtPwr_4b;
+        private TextBox txtRx_4b;
+        private Label label192;
+        private TextBox txtLo2_3b;
+        private TextBox txtTx_3b;
+        private TextBox txtPwr_3b;
+        private TextBox txtRx_3b;
+        private Label label191;
+        private TextBox txtLo2_2b;
+        private TextBox txtTx_2b;
+        private TextBox txtPwr_2b;
+        private TextBox txtRx_2b;
+        private Label label190;
+        private Label label195;
+        private TextBox txtLo2_6b;
+        private TextBox txtTx_6b;
+        private TextBox txtPwr_6b;
+        private TextBox txtRx_6b;
+        private Label label199;
+        private TextBox txtLo2_10b;
+        private TextBox txtTx_10b;
+        private TextBox txtPwr_10b;
+        private TextBox txtRx_10b;
+        private Label label198;
+        private TextBox txtLo2_9b;
+        private TextBox txtTx_9b;
+        private TextBox txtPwr_9b;
+        private TextBox txtRx_9b;
+        private Label label197;
+        private TextBox txtLo2_8b;
+        private TextBox txtTx_8b;
+        private TextBox txtPwr_8b;
+        private TextBox txtRx_8b;
+        private Label label196;
+        private TextBox txtLo2_7b;
+        private TextBox txtTx_7b;
+        private TextBox txtPwr_7b;
+        private TextBox txtRx_7b;
+        private TextBox txtLo1_10b;
+        private TextBox txtLo1_9b;
+        private TextBox txtLo1_8b;
+        private TextBox txtLo1_7b;
+        private TextBox txtLo1_6b;
+        private TextBox txtLo1_5b;
+        private TextBox txtLo1_4b;
+        private TextBox txtLo1_3b;
+        private TextBox txtLo1_2b;
+        private TextBox txtLo1_1b;
+        private Label label201;
+        private Label label184;
+        private ComboBox cboSwPort;
+        private CheckBox chkSoEnab;
+        private Button btnSaveSO2R;
+        private Label label203;
+        private TextBox txtLPT2;
+        private Label label205;
+        private System.IO.Ports.SerialPort SwitchPort;
+        private CheckBox chk1Amp;
+        public CheckBox chkSO10b;
+        public CheckBox chkSO9b;
+        public CheckBox chkSO8b;
+        public CheckBox chkSO7b;
+        public CheckBox chkSO6b;
+        public CheckBox chkSO5b;
+        public CheckBox chkSO4b;
+        public CheckBox chkSO3b;
+        public CheckBox chkSO2b;
+        public CheckBox chkSO1b;
+        private Label label200;
+        private TextBox txtHi2_5a;
+        private Label label202;
+        private Label label204;
+        private Label label206;
+        private Label label207;
+        private Label label208;
+        private Label label209;
+        private Label label210;
+        private Label label211;
+        private Label label212;
+        private Label label213;
+        private Label label215;
+        private TextBox txtTxB;
+        private Label label214;
+        private TextBox txtTxA;
 
     }
 }
