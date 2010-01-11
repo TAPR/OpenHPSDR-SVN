@@ -71,7 +71,7 @@ void process_args(int argc,char* argv[]) {
     // set defaults
     softrock_set_receivers(1);
     softrock_set_sample_rate(96000);
-    softrock_set_device("/dev/dsp");
+    //softrock_set_device("/dev/dsp");
 
     while((i=getopt_long(argc,argv,short_options,long_options,&option_index))!=EOF) {
         switch(option_index) {

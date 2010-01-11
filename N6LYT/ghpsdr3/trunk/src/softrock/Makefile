@@ -1,2 +1,2 @@
 all:
-	gcc -o ../../bin/srserver -lpthread *.c
+	gcc -o ../../bin/softrock -lpthread -lportaudio *.c

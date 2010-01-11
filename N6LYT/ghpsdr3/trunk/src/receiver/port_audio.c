@@ -1,8 +1,10 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <semaphore.h>
+#include <portaudio.h>
+#include <pthread.h>
 
-#include "portaudio.h"
+#include "port_audio.h"
 
 #define CHANNELS 2
 #define SAMPLE_RATE 48000
@@ -74,7 +76,7 @@ void close_port_audio() {
     }
 }
 
-int write_port_audio(float* left_samples,float* right_samples,int samples,int increment) {
+void write_port_audio(float* left_samples,float* right_samples,int samples,int increment) {
     int i;
 
     for(i=0;i<samples;i+=increment) {

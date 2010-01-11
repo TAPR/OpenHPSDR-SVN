@@ -26,5 +26,5 @@
 
 int softrock_open(void);
 int softrock_close();
-int softrock_write(unsigned char* buffer,int buffer_size);
-int softrock_read(unsigned char* buffer,int buffer_size);
+int softrock_write(float* left_samples,float* right_samples);
+int softrock_read(float* left_samples,float* right_samples);

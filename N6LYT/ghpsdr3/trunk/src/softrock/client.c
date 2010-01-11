@@ -182,6 +182,7 @@ void* audio_thread(void* arg) {
     int audio_length;
     int old_state, old_type;
     int bytes_read;
+    int on=1;
 
 fprintf(stderr,"audio_thread port=%d\n",audio_port+(rx->id*2));
 
@@ -193,6 +194,8 @@ fprintf(stderr,"audio_thread port=%d\n",audio_port+(rx->id*2));
         perror("create socket failed for server audio socket");
         exit(1);
     }
+
+    setsockopt(rx->audio_socket, SOL_SOCKET, SO_REUSEADDR, &on, sizeof(on));
 
     audio_length=sizeof(audio);
     memset(&audio,0,audio_length);

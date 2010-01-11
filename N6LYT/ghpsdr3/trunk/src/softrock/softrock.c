@@ -165,96 +165,30 @@ fprintf(stderr,"server configured for %d receivers at %d\n",receivers,sample_rat
 }
 
 void* softrock_io_thread(void* arg) {
-    unsigned char input_buffer[BUFFER_SIZE*6]; // samples * 3 * 2
-    int bytes;
+    int rc;
     int i,j;
 
     while(1) {
 
         // read an input buffer (blocks until all bytes read)
-        bytes=softrock_read(input_buffer,sizeof(input_buffer));
-        if (bytes < 0) {
-            fprintf(stderr,"softrock_io_thread: read failed %d\n",bytes);
-        } else if (bytes != sizeof(input_buffer)) {
-            fprintf(stderr,"sfoftrock_io_thread: only read %d bytes\n",bytes);
-        } else {
+        rc=softrock_read(receiver[current_receiver].input_buffer,&receiver[current_receiver].input_buffer[BUFFER_SIZE]);
+        if(rc==0) {
             // process input buffer
             rx_frame++;
-            process_softrock_input_buffer(input_buffer);
+            input_buffers++;
+            send_IQ_buffer(current_receiver);
+        } else {
+            fprintf(stderr,"softrock_read returned %d\n",rc);
         }
-        input_buffers++;
-
         current_receiver++;
 
         if(current_receiver==receivers) {
             current_receiver=0;
         }
-
-
     }
-}
-
-void process_softrock_input_buffer(char* buffer) {
-    int b=0;
-    int r;
-    int left_sample,right_sample;
-    float left_sample_float,right_sample_float;
-    int rc;
-
-        // extract the samples
-    while(b<(BUFFER_SIZE*6)) {
-        // extract each of the receivers
-        for(r=0;r<receivers;r++) {
-            left_sample   = (int)((unsigned char)buffer[b++]);
-            left_sample  += (int)((unsigned char)buffer[b++])<<8;
-            left_sample  += (int)((signed char)buffer[b++])<<16;
-            right_sample  = (int)((unsigned char)buffer[b++]);
-            right_sample += (int)((unsigned char)buffer[b++])<<8;
-            right_sample += (int)((signed char)buffer[b++])<<16;
-/*
-            left_sample_float=(float)left_sample/32767.0; // 16 bit sample
-            right_sample_float=(float)right_sample/32767.0; // 16 bit sample
-*/
-            left_sample_float=(float)left_sample/8388607.0; // 24 bit sample
-            right_sample_float=(float)right_sample/8388607.0; // 24 bit sample
-            receiver[r].input_buffer[samples]=left_sample_float;
-            receiver[r].input_buffer[samples+BUFFER_SIZE]=right_sample_float;
-        }
-        samples++;
-
-        // when we have enough samples send them to the clients
-        if(samples==BUFFER_SIZE) {
-            // send I/Q data to clients
-            for(r=0;r<receivers;r++) {
-                send_IQ_buffer(r);
-            }
-            samples=0;
-        }
-    }
-
 }
 
 void process_softrock_output_buffer(float* left_output_buffer,float* right_output_buffer) {
-    int i;
-    unsigned char output_buffer[BUFFER_SIZE*3*2];
-    int left_sample,right_sample;
-    int b=0;
-
-    for(i=0;i<BUFFER_SIZE;i++) {
-/*
-        left_sample=(int)(left_output_buffer[i]*32767.0F);
-        right_sample=(int)(right_output_buffer[i]*32767.0F);
-*/
-        left_sample=(int)(left_output_buffer[i]*8388607.0F);
-        right_sample=(int)(right_output_buffer[i]*8388607.0F);
-        output_buffer[b++]=left_sample&0xFF;
-        output_buffer[b++]=(left_sample>>8)&0xFF;
-        output_buffer[b++]=(left_sample>>16)&0xFF;
-        output_buffer[b++]=right_sample&0xFF;
-        output_buffer[b++]=(right_sample>>8)&0xFF;
-        output_buffer[b++]=(right_sample>>16)&0xFF;
-    }
-
-    softrock_write(output_buffer,sizeof(output_buffer));
+    softrock_write(left_output_buffer,right_output_buffer);
     
 }
