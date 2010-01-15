@@ -22,7 +22,7 @@ public class Client {
             this.server=server;
         }
         try {
-            socket=new Socket(server,port);
+            socket=new Socket(this.server,port);
             inputStream=socket.getInputStream();
             outputStream=socket.getOutputStream();
             System.err.println("opened socket on port "+Integer.toString(port));
@@ -30,6 +30,7 @@ public class Client {
             System.err.println("Client: UnknownHost: "+server);
         } catch (IOException e) {
             System.err.println("Client: IOException: "+e.getMessage());
+            e.printStackTrace();
         }
     }
 
@@ -75,6 +76,6 @@ public class Client {
     private InputStream inputStream;
     private OutputStream outputStream;
 
-    private static final int SAMPLES=4096;
+    private static final int SAMPLES=480;
     private float[] samples=new float[SAMPLES];
 }

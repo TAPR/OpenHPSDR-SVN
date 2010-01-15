@@ -66,19 +66,9 @@ public class MonitorPanel extends javax.swing.JPanel {
     }
 
     private void plotSpectrum(float[] samples) {
-        float slope=(float)SAMPLES/(float)WIDTH;
         for(int i=0;i<WIDTH;i++) {
-            float max=-10000.0F;
-            int lindex=(int)Math.floor(i*slope);
-            int rindex=(int)Math.floor((i*slope)+slope);
-            if(rindex>samples.length) rindex=samples.length;
-
-            for(int j=lindex;j<rindex;j++) {
-                if(samples[j]>max) max=samples[j];
-            }
-
             X[i]=i;
-            Y[i]=(int)Math.floor(((float)spectrumHigh-max)*(float)HEIGHT/(float)(spectrumHigh-spectrumLow));
+            Y[i]=(int)Math.floor(((float)spectrumHigh-samples[i])*(float)HEIGHT/(float)(spectrumHigh-spectrumLow));
         }
 
         if(debugCount<2) {
@@ -102,7 +92,7 @@ public class MonitorPanel extends javax.swing.JPanel {
         this.repaint(new Rectangle(WIDTH,HEIGHT));
     }
 
-    private static final int SAMPLES=4096;
+    private static final int SAMPLES=480;
     private static final int WIDTH=480;
     private static final int HEIGHT=100;
 
