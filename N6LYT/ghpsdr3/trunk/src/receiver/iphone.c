@@ -35,6 +35,7 @@
 #include <netdb.h>
 #include <string.h>
 #include <pthread.h>
+#include <math.h>
 #include "filter.h"
 #include "xvtr.h"
 #include "band.h"
@@ -59,7 +60,8 @@ void* iphone_thread(void* arg);
 void iphone_send_samples();
 
 #define PREFIX 48
-unsigned char iphone_samples[SPECTRUM_BUFFER_SIZE+PREFIX];
+#define BUFFER_SIZE 480
+unsigned char iphone_samples[BUFFER_SIZE+PREFIX];
 
 int rejectAddress(char* address) {
     int result=0;
@@ -161,7 +163,7 @@ void iphone_send_samples() {
     int rc;
     if(clientSocket!=-1) {
 //fprintf(stderr,"iphone_send_samples\n");
-        rc=send(clientSocket,iphone_samples,SPECTRUM_BUFFER_SIZE+PREFIX,0);
+        rc=send(clientSocket,iphone_samples,BUFFER_SIZE+PREFIX,0);
         if(rc<0) {
             perror("iphone send");
         }
@@ -169,7 +171,10 @@ void iphone_send_samples() {
 }
 
 void iphone_set_samples(float* samples) {
-    int i;
+    int i,j;
+    float slope;
+    float max;
+    int lindex,rindex;
 
     // first 14 bytes contain the frequency
     sprintf(iphone_samples,"% 4lld.%03lld.%03lld",frequencyA/1000000LL,(frequencyA%1000000LL)/1000LL,frequencyA%1000LL);
@@ -189,8 +194,16 @@ void iphone_set_samples(float* samples) {
     // next 8 bytes contain the band
     sprintf(&iphone_samples[40],"%d",band);
 
-    for(i=0;i<SPECTRUM_BUFFER_SIZE;i++) {
-        iphone_samples[i+PREFIX]=(unsigned char)-(samples[i]+displayCalibrationOffset+preampOffset);
+    slope=(float)SPECTRUM_BUFFER_SIZE/(float)BUFFER_SIZE;
+    for(i=0;i<BUFFER_SIZE;i++) {
+        max=-10000.0F;
+        lindex=(int)floor((float)i*slope);
+        rindex=(int)floor(((float)i*slope)+slope);
+        if(rindex>SPECTRUM_BUFFER_SIZE) rindex=SPECTRUM_BUFFER_SIZE;
+        for(j=lindex;j<rindex;j++) {
+            if(samples[j]>max) max=samples[j];
+        }
+        iphone_samples[i+PREFIX]=(unsigned char)-(max+displayCalibrationOffset+preampOffset);
     }
 
 }
