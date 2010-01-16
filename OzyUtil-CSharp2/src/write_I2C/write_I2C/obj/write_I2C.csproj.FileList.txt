@@ -1,0 +1,11 @@
+obj\Release\ResolveAssemblyReference.cache
+bin\Release\write_I2C.exe
+bin\Release\write_I2C.pdb
+bin\Release\HPSDR_USB_LIB_V1.dll
+bin\Release\HPSDR_USB_LIB_V1.pdb
+obj\Release\write_I2C.exe
+obj\Release\write_I2C.pdb
+bin\Release\write_I2C.exe.manifest
+bin\Release\write_I2C.application
+obj\Release\write_I2C.exe.manifest
+obj\Release\write_I2C.application
