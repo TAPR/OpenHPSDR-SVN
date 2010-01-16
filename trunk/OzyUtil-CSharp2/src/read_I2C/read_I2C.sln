@@ -1,0 +1,20 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 9.00
+# Visual C# Express 2005
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "read_I2C", "read_I2C\read_I2C.csproj", "{04A26DF2-C0A8-4F25-9D64-4D31D0C3338D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{04A26DF2-C0A8-4F25-9D64-4D31D0C3338D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{04A26DF2-C0A8-4F25-9D64-4D31D0C3338D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{04A26DF2-C0A8-4F25-9D64-4D31D0C3338D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{04A26DF2-C0A8-4F25-9D64-4D31D0C3338D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
