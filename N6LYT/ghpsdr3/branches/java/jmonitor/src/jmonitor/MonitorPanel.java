@@ -113,13 +113,6 @@ public class MonitorPanel extends javax.swing.JPanel {
             Y[i]=(int)Math.floor(((float)spectrumHigh-samples[i])*(float)HEIGHT/(float)(spectrumHigh-spectrumLow));
         }
 
-        if(debugCount<2) {
-            for(int i=0;i<WIDTH;i++) {
-                System.err.println(Integer.toString(i)+","+Integer.toString(Y[i]));
-            }
-            debugCount++;
-        }
-
         filterLeft=(filterLow-(-sampleRate/2))*WIDTH/sampleRate;
         filterRight=(filterHigh-(-sampleRate/2))*WIDTH/sampleRate;
     }
@@ -162,8 +155,6 @@ public class MonitorPanel extends javax.swing.JPanel {
     private Image image;
 
     private int startX;
-
-    private int debugCount=0;
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     // End of variables declaration//GEN-END:variables
