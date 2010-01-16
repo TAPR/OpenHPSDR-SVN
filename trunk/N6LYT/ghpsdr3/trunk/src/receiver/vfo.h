@@ -54,7 +54,7 @@ void setBFrequency(long long frequency);
 void setLOFrequency(long long frequency);
 
 void vfoTransmit(gpointer data);
-void vfoStepFrequency(gpointer data);
+int vfoStepFrequency(gpointer data);
 
 void vfoRX2(int state);
 void vfoSplit(int state);
