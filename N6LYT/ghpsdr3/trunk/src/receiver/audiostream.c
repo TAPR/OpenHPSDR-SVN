@@ -157,8 +157,8 @@ void audio_stream_put_samples(short left_sample,short right_sample) {
         // use this sample and convert to a-law (mono)
         //audio_stream_buffer[audio_stream_buffer_insert]=alaw((left_sample+right_sample)/2);
         //audio_stream_buffer[audio_stream_buffer_insert]=(left_sample+right_sample)/2;
-        audio_stream_buffer[audio_stream_buffer_insert]=left_sample;
-        audio_stream_buffer_insert++;
+//        audio_stream_buffer[audio_stream_buffer_insert]=left_sample;
+//        audio_stream_buffer_insert++;
         //audio_stream_buffer[audio_stream_buffer_insert]=((left_sample+right_sample)/2)>>8;
         audio_stream_buffer[audio_stream_buffer_insert]=left_sample>>8;
         audio_stream_buffer_insert++;

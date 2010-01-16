@@ -167,7 +167,7 @@ void* spectrum_thread(void* arg) {
     int spectrum_length;
     struct sockaddr_in client_addr;
     int client_length;
-    int i,j;
+    int c,i,j;
     short sample;
     unsigned char audio_buffer[BUFFER_SIZE*2*2];
     BUFFER buffer;
@@ -252,6 +252,12 @@ if(ozy_debug) {
 
         Audio_Callback (input_buffer,&input_buffer[BUFFER_SIZE],
                                 output_buffer,&output_buffer[BUFFER_SIZE], buffer_size, 0);
+
+        // process the output
+        for(j=0,c=0;j<buffer_size;j+=output_sample_increment) {
+            left_rx_sample=(short)(output_buffer[j]*32767.0);
+            audio_stream_put_samples(left_rx_sample,left_rx_sample);
+        }
 
         if(local_audio) {
             // play the audio back locally
