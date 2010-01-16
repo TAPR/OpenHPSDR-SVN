@@ -20,10 +20,12 @@ public class MonitorUpdateThread extends Thread {
         System.err.println("MonitorUpdateThread.run");
         while(true) {
             client.getSpectrum();
-            monitorFrame.updateMonitor(client.getSamples());
+            monitorFrame.updateMonitor(client.getSamples(),client.getFilterLow(),client.getFilterHigh(),client.getSampleRate());
+            monitorFrame.setTitle("JMonitor: "+client.getFrequency()+" "+client.getMode());
             try {
                 sleep(1000/fps);
             } catch (InterruptedException e) {
+                System.err.println("MonitorUpdateThread: InterruptedException: "+e.getMessage());
             }
         }
     }

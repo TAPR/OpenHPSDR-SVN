@@ -37,18 +37,60 @@ public class MonitorPanel extends javax.swing.JPanel {
     private void initComponents() {
 
         setPreferredSize(new java.awt.Dimension(480, 100));
+        addMouseWheelListener(new java.awt.event.MouseWheelListener() {
+            public void mouseWheelMoved(java.awt.event.MouseWheelEvent evt) {
+                formMouseWheelMoved(evt);
+            }
+        });
+        addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                formMousePressed(evt);
+            }
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                formMouseClicked(evt);
+            }
+        });
+        addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseDragged(java.awt.event.MouseEvent evt) {
+                formMouseDragged(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 496, Short.MAX_VALUE)
+            .addGap(0, 480, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 85, Short.MAX_VALUE)
+            .addGap(0, 100, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    public void setClient(Client client) {
+        this.client=client;
+    }
+
+    private void formMouseWheelMoved(java.awt.event.MouseWheelEvent evt) {//GEN-FIRST:event_formMouseWheelMoved
+        client.sendCommand("scrollFrequency "+Integer.toString(evt.getWheelRotation()*(client.getSampleRate()/WIDTH)));
+    }//GEN-LAST:event_formMouseWheelMoved
+
+    private void formMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseClicked
+        client.sendCommand("scrollFrequency "+Integer.toString((evt.getX()-(WIDTH/2))*(client.getSampleRate()/WIDTH)));
+    }//GEN-LAST:event_formMouseClicked
+
+    private void formMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseDragged
+        // TODO add your handling code here:
+        int increment=startX-evt.getX();
+        client.sendCommand("scrollFrequency "+Integer.toString(increment*(client.getSampleRate()/WIDTH)));
+        startX=evt.getX();
+    }//GEN-LAST:event_formMouseDragged
+
+    private void formMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMousePressed
+        // TODO add your handling code here:
+        startX=evt.getX();
+    }//GEN-LAST:event_formMousePressed
 
 
     protected void paintComponent(Graphics g) {
@@ -60,12 +102,12 @@ public class MonitorPanel extends javax.swing.JPanel {
         }
     }
 
-    public void updateMonitor(float[] samples) {
-        plotSpectrum(samples);
+    public void updateMonitor(float[] samples,int filterLow,int filterHigh,int sampleRate) {
+        plotSpectrum(samples,filterLow,filterHigh,sampleRate);
         drawSpectrum();
     }
 
-    private void plotSpectrum(float[] samples) {
+    private void plotSpectrum(float[] samples,int filterLow,int filterHigh,int sampleRate) {
         for(int i=0;i<WIDTH;i++) {
             X[i]=i;
             Y[i]=(int)Math.floor(((float)spectrumHigh-samples[i])*(float)HEIGHT/(float)(spectrumHigh-spectrumLow));
@@ -77,6 +119,9 @@ public class MonitorPanel extends javax.swing.JPanel {
             }
             debugCount++;
         }
+
+        filterLeft=(filterLow-(-sampleRate/2))*WIDTH/sampleRate;
+        filterRight=(filterHigh-(-sampleRate/2))*WIDTH/sampleRate;
     }
 
     private void drawSpectrum() {
@@ -84,6 +129,14 @@ public class MonitorPanel extends javax.swing.JPanel {
         Graphics graphics=image.getGraphics();
         graphics.setColor(Color.BLACK);
         graphics.fillRect(0,0,WIDTH,HEIGHT);
+
+        // draw cursor
+        graphics.setColor(Color.RED);
+        graphics.drawLine(WIDTH/2, 0, WIDTH/2, HEIGHT);
+
+        // draw the filter
+        graphics.setColor(Color.LIGHT_GRAY);
+        graphics.fillRect(filterLeft,0,filterRight-filterLeft,HEIGHT);
 
         // plot the data
         graphics.setColor(Color.WHITE);
@@ -96,13 +149,19 @@ public class MonitorPanel extends javax.swing.JPanel {
     private static final int WIDTH=480;
     private static final int HEIGHT=100;
 
+    private Client client;
+
     private int spectrumHigh=-40;
     private int spectrumLow=-160;
 
     private int X[]=new int[WIDTH];
     private int Y[]=new int[WIDTH];
+    private int filterLeft;
+    private int filterRight;
 
     private Image image;
+
+    private int startX;
 
     private int debugCount=0;
 
