@@ -18,8 +18,10 @@ package jmonitor;
 public class MonitorFrame extends javax.swing.JFrame {
 
     /** Creates new form MonitorFrame */
-    public MonitorFrame() {
+    public MonitorFrame(Client client) {
+        this.client=client;
         initComponents();
+        monitorPanel1.setClient(client);
     }
 
     /** This method is called from within the constructor to
@@ -32,6 +34,36 @@ public class MonitorFrame extends javax.swing.JFrame {
     private void initComponents() {
 
         monitorPanel1 = new jmonitor.MonitorPanel();
+        jMenuBar1 = new javax.swing.JMenuBar();
+        jMenu1 = new javax.swing.JMenu();
+        menuQuit = new javax.swing.JMenuItem();
+        jMenu2 = new javax.swing.JMenu();
+        menu160 = new javax.swing.JMenuItem();
+        menu80 = new javax.swing.JMenuItem();
+        menu60 = new javax.swing.JMenuItem();
+        menu40 = new javax.swing.JMenuItem();
+        menu30 = new javax.swing.JMenuItem();
+        menu20 = new javax.swing.JMenuItem();
+        menu17 = new javax.swing.JMenuItem();
+        menu15 = new javax.swing.JMenuItem();
+        menu12 = new javax.swing.JMenuItem();
+        menu10 = new javax.swing.JMenuItem();
+        menu6 = new javax.swing.JMenuItem();
+        menuGen = new javax.swing.JMenuItem();
+        menuWWV = new javax.swing.JMenuItem();
+        jMenu3 = new javax.swing.JMenu();
+        menuLSB = new javax.swing.JMenuItem();
+        menuUSB = new javax.swing.JMenuItem();
+        menuDSB = new javax.swing.JMenuItem();
+        menuCWL = new javax.swing.JMenuItem();
+        menuCWU = new javax.swing.JMenuItem();
+        menuSPEC = new javax.swing.JMenuItem();
+        menuDIGL = new javax.swing.JMenuItem();
+        menuDIGU = new javax.swing.JMenuItem();
+        menuDRM = new javax.swing.JMenuItem();
+        menuAM = new javax.swing.JMenuItem();
+        menuSAM = new javax.swing.JMenuItem();
+        menuFMN = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("JMonitor");
@@ -45,34 +77,280 @@ public class MonitorFrame extends javax.swing.JFrame {
         );
         monitorPanel1Layout.setVerticalGroup(
             monitorPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
+            .addGap(0, 111, Short.MAX_VALUE)
         );
+
+        jMenu1.setText("File");
+
+        menuQuit.setText("Quit");
+        menuQuit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuQuitActionPerformed(evt);
+            }
+        });
+        jMenu1.add(menuQuit);
+
+        jMenuBar1.add(jMenu1);
+
+        jMenu2.setText("Band");
+
+        menu160.setText("160");
+        menu160.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menu160ActionPerformed(evt);
+            }
+        });
+        jMenu2.add(menu160);
+
+        menu80.setText("80");
+        menu80.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menu80ActionPerformed(evt);
+            }
+        });
+        jMenu2.add(menu80);
+
+        menu60.setText("60");
+        menu60.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menu60ActionPerformed(evt);
+            }
+        });
+        jMenu2.add(menu60);
+
+        menu40.setText("40");
+        menu40.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menu40ActionPerformed(evt);
+            }
+        });
+        jMenu2.add(menu40);
+
+        menu30.setText("30");
+        menu30.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menu30ActionPerformed(evt);
+            }
+        });
+        jMenu2.add(menu30);
+
+        menu20.setText("20");
+        menu20.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menu20ActionPerformed(evt);
+            }
+        });
+        jMenu2.add(menu20);
+
+        menu17.setText("17");
+        menu17.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menu17ActionPerformed(evt);
+            }
+        });
+        jMenu2.add(menu17);
+
+        menu15.setText("15");
+        menu15.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menu15ActionPerformed(evt);
+            }
+        });
+        jMenu2.add(menu15);
+
+        menu12.setText("12");
+        menu12.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menu12ActionPerformed(evt);
+            }
+        });
+        jMenu2.add(menu12);
+
+        menu10.setText("10");
+        menu10.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menu10ActionPerformed(evt);
+            }
+        });
+        jMenu2.add(menu10);
+
+        menu6.setText("6");
+        menu6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menu6ActionPerformed(evt);
+            }
+        });
+        jMenu2.add(menu6);
+
+        menuGen.setText("Gen");
+        menuGen.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuGenActionPerformed(evt);
+            }
+        });
+        jMenu2.add(menuGen);
+
+        menuWWV.setText("WWV");
+        menuWWV.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuWWVActionPerformed(evt);
+            }
+        });
+        jMenu2.add(menuWWV);
+
+        jMenuBar1.add(jMenu2);
+
+        jMenu3.setText("Mode");
+
+        menuLSB.setText("LSB");
+        jMenu3.add(menuLSB);
+
+        menuUSB.setText("USB");
+        jMenu3.add(menuUSB);
+
+        menuDSB.setText("DSB");
+        jMenu3.add(menuDSB);
+
+        menuCWL.setText("CW/L");
+        jMenu3.add(menuCWL);
+
+        menuCWU.setText("CW/U");
+        jMenu3.add(menuCWU);
+
+        menuSPEC.setText("SPEC");
+        jMenu3.add(menuSPEC);
+
+        menuDIGL.setText("DIGL");
+        jMenu3.add(menuDIGL);
+
+        menuDIGU.setText("DIGU");
+        jMenu3.add(menuDIGU);
+
+        menuDRM.setText("DRM");
+        jMenu3.add(menuDRM);
+
+        menuAM.setText("AM");
+        jMenu3.add(menuAM);
+
+        menuSAM.setText("SAM");
+        jMenu3.add(menuSAM);
+
+        menuFMN.setText("FM/N");
+        jMenu3.add(menuFMN);
+
+        jMenuBar1.add(jMenu3);
+
+        setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(monitorPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+            .addComponent(monitorPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(monitorPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(monitorPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    public void updateMonitor(float[] samples) {
-        monitorPanel1.updateMonitor(samples);
+    private void menuQuitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuQuitActionPerformed
+        System.exit(0);
+    }//GEN-LAST:event_menuQuitActionPerformed
+
+    private void menu160ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menu160ActionPerformed
+        client.sendCommand("band 0");
+    }//GEN-LAST:event_menu160ActionPerformed
+
+    private void menu80ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menu80ActionPerformed
+        client.sendCommand("band 1");
+    }//GEN-LAST:event_menu80ActionPerformed
+
+    private void menu60ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menu60ActionPerformed
+        client.sendCommand("band 2");
+    }//GEN-LAST:event_menu60ActionPerformed
+
+    private void menu40ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menu40ActionPerformed
+        client.sendCommand("band 3");
+    }//GEN-LAST:event_menu40ActionPerformed
+
+    private void menu30ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menu30ActionPerformed
+        client.sendCommand("band 4");
+    }//GEN-LAST:event_menu30ActionPerformed
+
+    private void menu20ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menu20ActionPerformed
+        client.sendCommand("band 5");
+    }//GEN-LAST:event_menu20ActionPerformed
+
+    private void menu17ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menu17ActionPerformed
+        client.sendCommand("band 6");
+    }//GEN-LAST:event_menu17ActionPerformed
+
+    private void menu15ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menu15ActionPerformed
+        client.sendCommand("band 7");
+    }//GEN-LAST:event_menu15ActionPerformed
+
+    private void menu12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menu12ActionPerformed
+        client.sendCommand("band 8");
+    }//GEN-LAST:event_menu12ActionPerformed
+
+    private void menu10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menu10ActionPerformed
+        client.sendCommand("band 9");
+    }//GEN-LAST:event_menu10ActionPerformed
+
+    private void menu6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menu6ActionPerformed
+        client.sendCommand("band 10");
+    }//GEN-LAST:event_menu6ActionPerformed
+
+    private void menuGenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuGenActionPerformed
+        client.sendCommand("band 11");
+    }//GEN-LAST:event_menuGenActionPerformed
+
+    private void menuWWVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuWWVActionPerformed
+        client.sendCommand("band 12");
+    }//GEN-LAST:event_menuWWVActionPerformed
+
+    public void updateMonitor(float[] samples,int filterLow,int filterHigh,int sampleRate) {
+        monitorPanel1.updateMonitor(samples,filterLow,filterHigh,sampleRate);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenu jMenu2;
+    private javax.swing.JMenu jMenu3;
+    private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem menu10;
+    private javax.swing.JMenuItem menu12;
+    private javax.swing.JMenuItem menu15;
+    private javax.swing.JMenuItem menu160;
+    private javax.swing.JMenuItem menu17;
+    private javax.swing.JMenuItem menu20;
+    private javax.swing.JMenuItem menu30;
+    private javax.swing.JMenuItem menu40;
+    private javax.swing.JMenuItem menu6;
+    private javax.swing.JMenuItem menu60;
+    private javax.swing.JMenuItem menu80;
+    private javax.swing.JMenuItem menuAM;
+    private javax.swing.JMenuItem menuCWL;
+    private javax.swing.JMenuItem menuCWU;
+    private javax.swing.JMenuItem menuDIGL;
+    private javax.swing.JMenuItem menuDIGU;
+    private javax.swing.JMenuItem menuDRM;
+    private javax.swing.JMenuItem menuDSB;
+    private javax.swing.JMenuItem menuFMN;
+    private javax.swing.JMenuItem menuGen;
+    private javax.swing.JMenuItem menuLSB;
+    private javax.swing.JMenuItem menuQuit;
+    private javax.swing.JMenuItem menuSAM;
+    private javax.swing.JMenuItem menuSPEC;
+    private javax.swing.JMenuItem menuUSB;
+    private javax.swing.JMenuItem menuWWV;
     private jmonitor.MonitorPanel monitorPanel1;
     // End of variables declaration//GEN-END:variables
 
+    private Client client;
 }

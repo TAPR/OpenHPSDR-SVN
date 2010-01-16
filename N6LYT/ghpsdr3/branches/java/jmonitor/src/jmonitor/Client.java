@@ -25,40 +25,73 @@ public class Client {
             socket=new Socket(this.server,port);
             inputStream=socket.getInputStream();
             outputStream=socket.getOutputStream();
+
             System.err.println("opened socket on port "+Integer.toString(port));
         } catch (UnknownHostException e) {
             System.err.println("Client: UnknownHost: "+server);
+            System.exit(1);
         } catch (IOException e) {
             System.err.println("Client: IOException: "+e.getMessage());
-            e.printStackTrace();
+            System.exit(1);
+        }
+    }
+
+    public synchronized void sendCommand(String command) {
+        byte[] buffer=new byte[32];
+        byte[] commandBytes=command.getBytes();
+        System.err.println(command);
+        
+        for(int i=0;i<32;i++) {
+            if(i<commandBytes.length) {
+                buffer[i]=commandBytes[i];
+            } else {
+                buffer[i]=0;
+            }
+        }
+
+        try {
+            outputStream.write(buffer);
+            outputStream.flush();
+        } catch (IOException e) {
+            System.err.println("sendCommand: IOException: "+e.getMessage());
         }
     }
 
     public void getSpectrum() {
         int bytes;
         byte[] buffer=new byte[48+SAMPLES];
+        int j;
         if(socket!=null) {
             try {
-                outputStream.write("getSpectrum".getBytes());
-                outputStream.flush();
+                sendCommand("getSpectrum");
                 bytes=inputStream.read(buffer);
-                //System.err.println("getSpectrum read "+Integer.toString(bytes)+" bytes");
-                String frequency=new String(buffer,0,14);
-                String filterLow=new String(buffer,14,6);
-                String filterHigh=new String(buffer,20,6);
-                String mode=new String(buffer,26,6);
-                String sampleRate=new String(buffer,32,8);
-                String band=new String(buffer,40,8);
+                if(bytes==buffer.length) {
+                    System.err.println("getSpectrum: read "+Integer.toString(bytes)+" bytes");
+                    // Strings sent with NULL terminator
+                    j = 0;
+                    while (buffer[j] != '\0')j++;
+                    frequency=new String(buffer,0,j);
+                    j=0;
+                    while(buffer[j+14]!='\0') j++;
+                    filterLow=new String(buffer,14,j);
+                    j=0;
+                    while(buffer[j+20]!='\0') j++;
+                    filterHigh=new String(buffer,20,j);
+                    j = 0;
+                    while (buffer[j+26] != '\0') j++;
+                    mode=new String(buffer,26,j);
+                    j=0;
+                    while(buffer[j+32]!='\0') j++;
+                    sampleRate=new String(buffer,32,j);
+                    j=0;
+                    while(buffer[j+40]!='\0') j++;
+                    band=new String(buffer,40,j);
 
-                //System.err.println("frequency="+frequency);
-                //System.err.println("filterLow="+filterLow);
-                //System.err.println("filterHigh=" + filterHigh);
-                //System.err.println("mode=" + mode);
-                //System.err.println("sampleRate=" + sampleRate);
-                //System.err.println("band=" + band);
-
-                for(int i=0;i<SAMPLES;i++) {
-                    samples[i]=-(buffer[i+48]&0xFF);
+                    for(int i=0;i<SAMPLES;i++) {
+                        samples[i]=-(buffer[i+48]&0xFF);
+                    }
+                } else {
+                    System.err.println("read spectrum read "+Integer.toString(bytes)+" bytes");
                 }
             } catch (IOException e) {
             }
@@ -67,6 +100,27 @@ public class Client {
 
     public float[] getSamples() {
         return samples;
+    }
+
+    public String getFrequency() {
+        return frequency;
+    }
+
+    public String getMode() {
+        return mode;
+    }
+
+    public int getFilterLow() {
+        System.err.println("getFIlterLow: "+filterLow);
+        return Integer.parseInt(filterLow);
+    }
+
+    public int getFilterHigh() {
+        return Integer.parseInt(filterHigh);
+    }
+
+    public int getSampleRate() {
+        return Integer.parseInt(sampleRate);
     }
 
     private static final int port=8000;
@@ -78,4 +132,11 @@ public class Client {
 
     private static final int SAMPLES=480;
     private float[] samples=new float[SAMPLES];
+
+    String frequency;
+    String filterLow;
+    String filterHigh;
+    String mode;
+    String sampleRate;
+    String band;
 }
