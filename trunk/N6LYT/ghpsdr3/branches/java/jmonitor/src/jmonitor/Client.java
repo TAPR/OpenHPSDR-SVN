@@ -26,7 +26,7 @@ public class Client {
             inputStream=socket.getInputStream();
             outputStream=socket.getOutputStream();
 
-            System.err.println("opened socket on port "+Integer.toString(port));
+            System.err.println("opened client socket on port "+Integer.toString(port));
         } catch (UnknownHostException e) {
             System.err.println("Client: UnknownHost: "+server);
             System.exit(1);
@@ -39,7 +39,8 @@ public class Client {
     public synchronized void sendCommand(String command) {
         byte[] buffer=new byte[32];
         byte[] commandBytes=command.getBytes();
-        System.err.println(command);
+
+        //System.err.println(command);
         
         for(int i=0;i<32;i++) {
             if(i<commandBytes.length) {
@@ -66,7 +67,7 @@ public class Client {
                 sendCommand("getSpectrum");
                 bytes=inputStream.read(buffer);
                 if(bytes==buffer.length) {
-                    System.err.println("getSpectrum: read "+Integer.toString(bytes)+" bytes");
+                    //System.err.println("getSpectrum: read "+Integer.toString(bytes)+" bytes");
                     // Strings sent with NULL terminator
                     j = 0;
                     while (buffer[j] != '\0')j++;
@@ -111,7 +112,6 @@ public class Client {
     }
 
     public int getFilterLow() {
-        System.err.println("getFIlterLow: "+filterLow);
         return Integer.parseInt(filterLow);
     }
 

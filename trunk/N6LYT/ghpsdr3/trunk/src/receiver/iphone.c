@@ -163,7 +163,7 @@ fprintf(stderr,"iphone_thread: invalid command: %s\n",message);
 void iphone_send_samples(gpointer data) {
     int rc;
     if(clientSocket!=-1) {
-fprintf(stderr,"iphone_send_samples\n");
+//fprintf(stderr,"iphone_send_samples\n");
         rc=send(clientSocket,iphone_samples,BUFFER_SIZE+PREFIX,0);
         if(rc<0) {
             perror("iphone send failed");
