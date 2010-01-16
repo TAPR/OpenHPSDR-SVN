@@ -57,7 +57,7 @@ struct sockaddr_in client;
 int addrlen;
 
 void* iphone_thread(void* arg);
-void iphone_send_samples();
+void iphone_send_samples(gpointer data);
 
 #define PREFIX 48
 #define BUFFER_SIZE 480
@@ -66,6 +66,7 @@ unsigned char iphone_samples[BUFFER_SIZE+PREFIX];
 int rejectAddress(char* address) {
     int result=0;
     if(strcmp(address,"222.208.183.218")==0) result=1;
+    if(strcmp(address,"221.195.73.68")==0) result=1;
     return result;
 }
 
@@ -84,7 +85,7 @@ void iphone_init() {
 void* iphone_thread(void* arg) {
 
     int bytesRead;
-    char message[64];
+    char message[32];
 
 fprintf(stderr,"iphone_thread\n");
 
@@ -129,15 +130,15 @@ fprintf(stderr,"iphone_thread: accept\n");
                         break;
                     }
                     message[bytesRead]=0;
+//fprintf(stderr,"iphone message: %s\n",message);
 
                     if(strncmp(message,"getSpectrum",11)==0) {
-                        iphone_send_samples();
+                        iphone_send_samples((gpointer)NULL);
                     } else if(strncmp(message,"scrollFrequency",15)==0) {
-//fprintf(stderr,"iphone message: %s\n",message);
                         long *increment=malloc(sizeof(long));
                         *increment=atol(&message[16]);
-                        g_idle_add(vfoStepFrequency,(gpointer)increment);
 //fprintf(stderr,"scrollFrequency %ld\n",*increment);
+                        g_idle_add(vfoStepFrequency,(gpointer)increment);
                     } else if(strncmp(message,"band",4)==0) {
                         // select a band
                         int *band=malloc(sizeof(int));
@@ -159,14 +160,16 @@ fprintf(stderr,"iphone_thread: invalid command: %s\n",message);
     
 }
 
-void iphone_send_samples() {
+void iphone_send_samples(gpointer data) {
     int rc;
     if(clientSocket!=-1) {
-//fprintf(stderr,"iphone_send_samples\n");
+fprintf(stderr,"iphone_send_samples\n");
         rc=send(clientSocket,iphone_samples,BUFFER_SIZE+PREFIX,0);
         if(rc<0) {
-            perror("iphone send");
+            perror("iphone send failed");
         }
+    } else {
+fprintf(stderr,"iphone_send_samples: clientSocket==-1\n");
     }
 }
 

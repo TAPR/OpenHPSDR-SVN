@@ -341,6 +341,9 @@ gboolean vfoBFrequency_expose_event(GtkWidget* widget,GdkEventExpose* event) {
 */
 void setAFrequency(long long f) {
 
+
+//fprintf(stderr,"setAFrequency %lld\n",f);
+
     dspAFrequency=0;
     ddsAFrequency=0;
     frequencyA=f;
@@ -450,6 +453,7 @@ void vfoCallback(GtkWidget* widget,gpointer data) {
 * @param increment
 */
 void vfoIncrementFrequency(long increment) {
+//fprintf(stderr,"vfoIncrementFrequency %ld\n",increment);
     if(subrx) {
         subrxIncrementFrequency(increment);
     } else {
@@ -485,10 +489,12 @@ void vfoIncrementBFrequency(long increment) {
 * 
 * @param increment
 */
-void vfoStepFrequency(gpointer data) {
+int vfoStepFrequency(gpointer data) {
     long step=*(long*)data;
-    vfoIncrementFrequency(step*50);
+//fprintf(stderr,"vfoStepFrequency %ld\n",step);
+    vfoIncrementFrequency(step);
     free(data);
+    return FALSE;
 }
 
 /* --------------------------------------------------------------------------*/
@@ -1031,7 +1037,7 @@ void vfoRestoreState() {
 void vfoTransmit(gpointer data) {
     int state=*(int*)data;
 
-fprintf(stderr,"vfoTransmit: %d\n",state);
+//fprintf(stderr,"vfoTransmit: %d\n",state);
     if(bSplit) {
         bTransmitting=state;
         updateVfoBDisplay();
