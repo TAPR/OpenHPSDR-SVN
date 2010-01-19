@@ -174,6 +174,7 @@ void* spectrum_thread(void* arg) {
     unsigned long sequence=0L;
     unsigned short offset=0;;
     unsigned short length;
+    int on=1;
 
     spectrum_length=sizeof(spectrum_addr);
     client_length=sizeof(client_addr);
@@ -185,6 +186,7 @@ void* spectrum_thread(void* arg) {
         exit(1);
     }
 
+    setsockopt(spectrum_socket, SOL_SOCKET, SO_REUSEADDR, &on, sizeof(on));
 
     memset(&spectrum_addr,0,spectrum_length);
 
