@@ -60,9 +60,9 @@ public class Audio extends Thread {
                 bytes=0;
                 while(bytes<AUDIO_BUFFER_SIZE) {
                     bytes+=inputStream.read(buffer,bytes,AUDIO_BUFFER_SIZE-bytes);
-                    aLawDecode(buffer,decodedBuffer);
-                    source.write(decodedBuffer,0,bytes);
                 }
+                aLawDecode(buffer,decodedBuffer);
+                source.write(decodedBuffer,0,AUDIO_BUFFER_SIZE*2);
             } catch (IOException e) {
                 System.err.println("Audio.run: IOException: "+e.getMessage());
             }
