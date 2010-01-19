@@ -86,6 +86,7 @@ void* iphone_thread(void* arg) {
 
     int bytesRead;
     char message[32];
+    int on=1;
 
 fprintf(stderr,"iphone_thread\n");
 
@@ -94,6 +95,8 @@ fprintf(stderr,"iphone_thread\n");
         perror("iphone socket");
         return;
     }
+
+    setsockopt(serverSocket, SOL_SOCKET, SO_REUSEADDR, &on, sizeof(on));
 
     memset(&server,0,sizeof(server));
     server.sin_family=AF_INET;

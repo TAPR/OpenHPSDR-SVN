@@ -39,7 +39,7 @@
 
 static int sample_count=0;
 
-unsigned char audio_stream_buffer[2048];
+unsigned char audio_stream_buffer[512];
 int audio_stream_buffer_insert=0;
 int audio_stream_buffer_remove=0;
 
@@ -78,6 +78,7 @@ void* audio_stream_thread(void* arg) {
 
     int bytesRead;
     char message[64];
+    int on=1;
 
 fprintf(stderr,"audio_stream_thread\n");
 
@@ -86,6 +87,8 @@ fprintf(stderr,"audio_stream_thread\n");
         perror("audio_stream socket");
         return;
     }
+
+    setsockopt(audio_stream_serverSocket, SOL_SOCKET, SO_REUSEADDR, &on, sizeof(on));
 
     memset(&audio_stream_server,0,sizeof(audio_stream_server));
     audio_stream_server.sin_family=AF_INET;
@@ -155,17 +158,17 @@ void audio_stream_put_samples(short left_sample,short right_sample) {
     // output to stream at 8K (1 in 6)
     if(sample_count==0) {
         // use this sample and convert to a-law (mono)
-        //audio_stream_buffer[audio_stream_buffer_insert]=alaw((left_sample+right_sample)/2);
+        audio_stream_buffer[audio_stream_buffer_insert]=alaw((left_sample+right_sample)/2);
         //audio_stream_buffer[audio_stream_buffer_insert]=(left_sample+right_sample)/2;
 //        audio_stream_buffer[audio_stream_buffer_insert]=left_sample;
 //        audio_stream_buffer_insert++;
         //audio_stream_buffer[audio_stream_buffer_insert]=((left_sample+right_sample)/2)>>8;
-        audio_stream_buffer[audio_stream_buffer_insert]=left_sample>>8;
+        //audio_stream_buffer[audio_stream_buffer_insert]=left_sample>>8;
         audio_stream_buffer_insert++;
-        if(audio_stream_buffer_insert==1024) {
-            send_audio_buffer(&audio_stream_buffer[0],1024);
-        } else if(audio_stream_buffer_insert==2048) {
-            send_audio_buffer(&audio_stream_buffer[1024],1024);
+        if(audio_stream_buffer_insert==256) {
+            send_audio_buffer(&audio_stream_buffer[0],256);
+        } else if(audio_stream_buffer_insert==512) {
+            send_audio_buffer(&audio_stream_buffer[256],256);
             audio_stream_buffer_insert=0;
         }
     }
