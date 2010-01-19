@@ -1,0 +1,80 @@
+THPSDR
+v7
+r1
+cCheck dependencies
+
+N/Users/jm57878/Desktop/HPSDR/Default.png
+c000000004A68BF5700000000000085CF
+t1248378711
+s34255
+
+N/Users/jm57878/Desktop/HPSDR/FlipsideView.xib
+c000000004A532940000000000000779C
+t1246964032
+s30620
+
+N/Users/jm57878/Desktop/HPSDR/MainView.xib
+c000000004A6EBAFF0000000000009270
+t1248770815
+s37488
+
+N/Users/jm57878/Desktop/HPSDR/MainWindow.xib
+c000000004A52EB340000000000001DCF
+t1246948148
+s7631
+
+N/Users/jm57878/Desktop/HPSDR/build/Debug/HPSDR.app
+t2
+s0
+
+N/Users/jm57878/Desktop/HPSDR/build/Debug/HPSDR.app/Contents/Info.plist
+t2
+s0
+
+N/Users/jm57878/Desktop/HPSDR/build/Debug/HPSDR.app/Contents/PkgInfo
+t2
+s0
+
+N/Users/jm57878/Desktop/HPSDR/build/Debug/HPSDR.app/Contents/Resources/Default.png
+t2
+s0
+
+N/Users/jm57878/Desktop/HPSDR/build/Debug/HPSDR.app/Contents/Resources/FlipsideView.nib
+t2
+s0
+
+N/Users/jm57878/Desktop/HPSDR/build/Debug/HPSDR.app/Contents/Resources/MainView.nib
+t2
+s0
+
+N/Users/jm57878/Desktop/HPSDR/build/Debug/HPSDR.app/Contents/Resources/MainWindow.nib
+t2
+s0
+
+NHPSDR-Info.plist
+c000000004A533DBB00000000000003C2
+t1246969275
+s962
+
+CCheck dependencies
+r0
+lSLF07#2@18"Check dependencies285374047#285374047#0(73"[BEROR]error: There is no SDK with the name or path 'iphonesimulator3.0'1(4@65"error: There is no SDK with the name or path 'iphonesimulator3.0'285374047#18446744073709551615#0#0(1@0"0(0#1#0"7947009927035180032#0"0#
+
+CCompileXIB /Users/jm57878/Desktop/HPSDR/FlipsideView.xib
+r0
+
+CCompileXIB /Users/jm57878/Desktop/HPSDR/MainView.xib
+r0
+
+CCompileXIB /Users/jm57878/Desktop/HPSDR/MainWindow.xib
+r0
+
+CCpResource build/Debug/HPSDR.app/Contents/Resources/Default.png Default.png
+r0
+
+CProcessInfoPlistFile /Users/jm57878/Desktop/HPSDR/build/Debug/HPSDR.app/Contents/Info.plist HPSDR-Info.plist
+r0
+
+CTouch /Users/jm57878/Desktop/HPSDR/build/Debug/HPSDR.app
+r0
+
