@@ -101,24 +101,29 @@ fprintf(stderr,"audio_stream_thread\n");
     }
 
     while(1) {
-fprintf(stderr,"audio_stream_thread: listen\n");
+//fprintf(stderr,"audio_stream_thread: listen\n");
         if (listen(audio_stream_serverSocket, 5) == -1) {
             perror("audio_stream listen");
             break;
         }
 
-fprintf(stderr,"audio_stream_thread: accept\n");
+//fprintf(stderr,"audio_stream_thread: accept\n");
         audio_stream_addrlen = sizeof(audio_stream_client);
         if ((audio_stream_clientSocket = accept(audio_stream_serverSocket,(struct sockaddr *)&audio_stream_client,&audio_stream_addrlen)) == -1) {
                 perror("audio_stream accept");
         } else {
 
-            fprintf(stderr,"audio_stream connection from %s:%d\n",inet_ntoa(audio_stream_client.sin_addr),ntohs(audio_stream_client.sin_port));
+            time_t tt;
+            struct tm *tod;
+
+            time(&tt);
+            tod=localtime(&tt);
+            fprintf(stderr,"%02d/%02d/%02d %02d:%02d:%02d audiostream connection from %s:%d\n",tod->tm_mday,tod->tm_mon+1,tod->tm_year+1900,tod->tm_hour,tod->tm_min,tod->tm_sec,inet_ntoa(audio_stream_client.sin_addr),ntohs(audio_stream_client.sin_port));
 
             while(1) {
                 bytesRead=recv(audio_stream_clientSocket, message, sizeof(message), 0);
                 if(bytesRead<=0) {
-                    perror("audio_stream recv");
+                    //perror("audio_stream recv");
                     break;
                 }
                 message[bytesRead]=0;
@@ -126,6 +131,10 @@ fprintf(stderr,"audio_stream_thread: accept\n");
             }
 
             close(audio_stream_clientSocket);
+
+            time(&tt);
+            tod=localtime(&tt);
+            fprintf(stderr,"%02d/%02d/%02d %02d:%02d:%02d audiostream disconnected from %s:%d\n",tod->tm_mday,tod->tm_mon+1,tod->tm_year+1900,tod->tm_hour,tod->tm_min,tod->tm_sec,inet_ntoa(audio_stream_client.sin_addr),ntohs(audio_stream_client.sin_port));
         }
         audio_stream_clientSocket=-1;
 

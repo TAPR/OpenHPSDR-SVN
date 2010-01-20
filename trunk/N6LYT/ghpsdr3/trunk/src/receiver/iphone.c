@@ -36,6 +36,7 @@
 #include <string.h>
 #include <pthread.h>
 #include <math.h>
+#include <time.h>
 #include "filter.h"
 #include "xvtr.h"
 #include "band.h"
@@ -109,19 +110,23 @@ fprintf(stderr,"iphone_thread\n");
     }
 
     while(1) {
-fprintf(stderr,"iphone_thread: listen\n");
+//fprintf(stderr,"iphone_thread: listen\n");
         if (listen(serverSocket, 5) == -1) {
             perror("iphone listen");
             break;
         }
 
-fprintf(stderr,"iphone_thread: accept\n");
+//fprintf(stderr,"iphone_thread: accept\n");
         addrlen = sizeof(client); 
 	if ((clientSocket = accept(serverSocket,(struct sockaddr *)&client,&addrlen)) == -1) {
 		perror("iphone accept");
 	} else {
 
-            fprintf(stderr,"iphone connection from %s:%d\n",inet_ntoa(client.sin_addr),ntohs(client.sin_port));
+            time_t tt;
+            struct tm *tod;
+            time(&tt);
+            tod=localtime(&tt);
+            fprintf(stderr,"%02d/%02d/%02d %02d:%02d:%02d iphone connection from %s:%d\n",tod->tm_mday,tod->tm_mon+1,tod->tm_year+1900,tod->tm_hour,tod->tm_min,tod->tm_sec,inet_ntoa(client.sin_addr),ntohs(client.sin_port));
 
             if(rejectAddress(inet_ntoa(client.sin_addr))) {
                 fprintf(stderr,"connection rejected!\n");
@@ -129,7 +134,7 @@ fprintf(stderr,"iphone_thread: accept\n");
                 while(1) {
                     bytesRead=recv(clientSocket, message, sizeof(message), 0);
                     if(bytesRead<=0) {
-                        perror("iphone recv");
+                        //perror("iphone recv");
                         break;
                     }
                     message[bytesRead]=0;
@@ -156,6 +161,9 @@ fprintf(stderr,"iphone_thread: invalid command: %s\n",message);
             }
 
             close(clientSocket);
+            time(&tt);
+            tod=localtime(&tt);
+            fprintf(stderr,"%02d/%02d/%02d %02d:%02d:%02d iphone disconnected from %s:%d\n",tod->tm_mday,tod->tm_mon+1,tod->tm_year+1900,tod->tm_hour,tod->tm_min,tod->tm_sec,inet_ntoa(client.sin_addr),ntohs(client.sin_port));
         }
         clientSocket=-1;
 
