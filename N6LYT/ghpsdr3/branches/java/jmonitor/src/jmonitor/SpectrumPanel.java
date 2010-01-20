@@ -75,7 +75,8 @@ public class SpectrumPanel extends javax.swing.JPanel {
     }
 
     private void formMouseWheelMoved(java.awt.event.MouseWheelEvent evt) {//GEN-FIRST:event_formMouseWheelMoved
-        client.sendCommand("scrollFrequency "+Integer.toString(evt.getWheelRotation()*(client.getSampleRate()/WIDTH)));
+        //client.sendCommand("scrollFrequency "+Integer.toString(evt.getWheelRotation()*(client.getSampleRate()/WIDTH)));
+        client.sendCommand("scrollFrequency "+Integer.toString(evt.getWheelRotation()*100));
     }//GEN-LAST:event_formMouseWheelMoved
 
     private void formMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseClicked
@@ -94,14 +95,12 @@ public class SpectrumPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_formMouseClicked
 
     private void formMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseDragged
-        // TODO add your handling code here:
         int increment=startX-evt.getX();
         client.sendCommand("scrollFrequency "+Integer.toString(increment*(client.getSampleRate()/WIDTH)));
         startX=evt.getX();
     }//GEN-LAST:event_formMouseDragged
 
     private void formMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMousePressed
-        // TODO add your handling code here:
         startX=evt.getX();
     }//GEN-LAST:event_formMousePressed
 
@@ -138,13 +137,13 @@ public class SpectrumPanel extends javax.swing.JPanel {
         graphics.setColor(Color.BLACK);
         graphics.fillRect(0,0,WIDTH,HEIGHT);
 
-        // draw cursor
-        graphics.setColor(Color.RED);
-        graphics.drawLine(WIDTH/2, 0, WIDTH/2, HEIGHT);
-
         // draw the filter
         graphics.setColor(Color.LIGHT_GRAY);
         graphics.fillRect(filterLeft,0,filterRight-filterLeft,HEIGHT);
+
+        // draw cursor
+        graphics.setColor(Color.RED);
+        graphics.drawLine(WIDTH/2, 0, WIDTH/2, HEIGHT);
 
         // plot the data
         graphics.setColor(Color.WHITE);
