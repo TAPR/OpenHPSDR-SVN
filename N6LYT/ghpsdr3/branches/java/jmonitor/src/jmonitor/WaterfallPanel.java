@@ -116,7 +116,11 @@ public class WaterfallPanel extends javax.swing.JPanel {
         switch(evt.getButton()) {
             case MouseEvent.BUTTON1:
                 // Left Button - move to center of filter
-                client.sendCommand("scrollFrequency " + Integer.toString(scrollAmount+((filterHigh-filterLow)/2)));
+                if(filterHigh<0) {
+                    client.sendCommand("scrollFrequency " + Integer.toString(scrollAmount + ((filterHigh - filterLow) / 2)));
+                } else {
+                    client.sendCommand("scrollFrequency " + Integer.toString(scrollAmount - ((filterHigh - filterLow) / 2)));
+                }
                 break;
             case MouseEvent.BUTTON3:
                 // Right Button - move to cursor
