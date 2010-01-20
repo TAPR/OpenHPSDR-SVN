@@ -70,7 +70,7 @@ public class MonitorFrame extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("JMonitor");
         setResizable(false);
-        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        getContentPane().setLayout(new java.awt.GridLayout(2, 0));
 
         javax.swing.GroupLayout spectrumPanelLayout = new javax.swing.GroupLayout(spectrumPanel);
         spectrumPanel.setLayout(spectrumPanelLayout);
@@ -83,20 +83,10 @@ public class MonitorFrame extends javax.swing.JFrame {
             .addGap(0, 100, Short.MAX_VALUE)
         );
 
-        getContentPane().add(spectrumPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+        getContentPane().add(spectrumPanel);
 
-        javax.swing.GroupLayout waterfallPanelLayout = new javax.swing.GroupLayout(waterfallPanel);
-        waterfallPanel.setLayout(waterfallPanelLayout);
-        waterfallPanelLayout.setHorizontalGroup(
-            waterfallPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 480, Short.MAX_VALUE)
-        );
-        waterfallPanelLayout.setVerticalGroup(
-            waterfallPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
-        );
-
-        getContentPane().add(waterfallPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 100, -1, -1));
+        waterfallPanel.setLayout(new java.awt.GridLayout());
+        getContentPane().add(waterfallPanel);
 
         jMenu1.setText("File");
 
