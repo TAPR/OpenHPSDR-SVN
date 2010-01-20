@@ -22,6 +22,7 @@ public class MonitorFrame extends javax.swing.JFrame {
         this.client=client;
         initComponents();
         spectrumPanel.setClient(client);
+        waterfallPanel.setClient(client);
     }
 
     /** This method is called from within the constructor to
@@ -320,7 +321,7 @@ public class MonitorFrame extends javax.swing.JFrame {
 
     public void updateMonitor(float[] samples,int filterLow,int filterHigh,int sampleRate) {
         spectrumPanel.updateMonitor(samples,filterLow,filterHigh,sampleRate);
-        waterfallPanel.updateWaterfall(samples);
+        waterfallPanel.updateWaterfall(samples,filterLow,filterHigh,sampleRate);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
