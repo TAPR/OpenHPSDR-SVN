@@ -287,7 +287,7 @@ if(ozy_debug) {
 void send_command(char* command) {
     int rc;
 
-fprintf(stderr,"send_command: command='%s'\n",command);
+//fprintf(stderr,"send_command: command='%s'\n",command);
 
     rc=send(command_socket,command,strlen(command),0);
     if(rc<0) {
@@ -301,7 +301,7 @@ fprintf(stderr,"send_command: command='%s'\n",command);
     }
     response[rc]=0;
 
-fprintf(stderr,"send_command: response='%s'\n",response);
+//fprintf(stderr,"send_command: response='%s'\n",response);
 }
 
 void* keepalive_thread(void* arg) {

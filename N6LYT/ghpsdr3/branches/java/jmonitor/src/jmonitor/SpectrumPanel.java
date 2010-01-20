@@ -15,15 +15,16 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Rectangle;
+import java.awt.event.MouseEvent;
 
 /**
  *
  * @author john
  */
-public class MonitorPanel extends javax.swing.JPanel {
+public class SpectrumPanel extends javax.swing.JPanel {
 
     /** Creates new form MonitorPanel */
-    public MonitorPanel() {
+    public SpectrumPanel() {
         initComponents();
     }
 
@@ -36,6 +37,7 @@ public class MonitorPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        setBackground(new java.awt.Color(0, 0, 0));
         setPreferredSize(new java.awt.Dimension(480, 100));
         addMouseWheelListener(new java.awt.event.MouseWheelListener() {
             public void mouseWheelMoved(java.awt.event.MouseWheelEvent evt) {
@@ -77,7 +79,18 @@ public class MonitorPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_formMouseWheelMoved
 
     private void formMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseClicked
-        client.sendCommand("scrollFrequency "+Integer.toString((evt.getX()-(WIDTH/2))*(client.getSampleRate()/WIDTH)));
+        int scrollAmount=(evt.getX() - (WIDTH / 2)) * (client.getSampleRate() / WIDTH);
+        switch(evt.getButton()) {
+            case MouseEvent.BUTTON1:
+                // Left Button - move to center of filter
+                client.sendCommand("scrollFrequency " + Integer.toString(scrollAmount+((filterHigh-filterLow)/2)));
+                break;
+            case MouseEvent.BUTTON3:
+                // Right Button - move to cursor
+                client.sendCommand("scrollFrequency " + Integer.toString(scrollAmount));
+                break;
+        }
+
     }//GEN-LAST:event_formMouseClicked
 
     private void formMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseDragged
@@ -108,6 +121,8 @@ public class MonitorPanel extends javax.swing.JPanel {
     }
 
     private void plotSpectrum(float[] samples,int filterLow,int filterHigh,int sampleRate) {
+        this.filterLow=filterLow;
+        this.filterHigh=filterHigh;
         for(int i=0;i<WIDTH;i++) {
             X[i]=i;
             Y[i]=(int)Math.floor(((float)spectrumHigh-samples[i])*(float)HEIGHT/(float)(spectrumHigh-spectrumLow));
@@ -145,7 +160,10 @@ public class MonitorPanel extends javax.swing.JPanel {
     private Client client;
 
     private int spectrumHigh=-40;
-    private int spectrumLow=-160;
+    private int spectrumLow=-140;
+
+    private int filterLow;
+    private int filterHigh;
 
     private int X[]=new int[WIDTH];
     private int Y[]=new int[WIDTH];

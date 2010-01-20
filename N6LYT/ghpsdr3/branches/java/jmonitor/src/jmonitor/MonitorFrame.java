@@ -33,7 +33,8 @@ public class MonitorFrame extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        monitorPanel1 = new jmonitor.MonitorPanel();
+        monitorPanel1 = new jmonitor.SpectrumPanel();
+        waterfallPanel1 = new jmonitor.WaterfallPanel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         menuQuit = new javax.swing.JMenuItem();
@@ -68,6 +69,7 @@ public class MonitorFrame extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("JMonitor");
         setResizable(false);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         javax.swing.GroupLayout monitorPanel1Layout = new javax.swing.GroupLayout(monitorPanel1);
         monitorPanel1.setLayout(monitorPanel1Layout);
@@ -77,8 +79,23 @@ public class MonitorFrame extends javax.swing.JFrame {
         );
         monitorPanel1Layout.setVerticalGroup(
             monitorPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 111, Short.MAX_VALUE)
+            .addGap(0, 100, Short.MAX_VALUE)
         );
+
+        getContentPane().add(monitorPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+
+        javax.swing.GroupLayout waterfallPanel1Layout = new javax.swing.GroupLayout(waterfallPanel1);
+        waterfallPanel1.setLayout(waterfallPanel1Layout);
+        waterfallPanel1Layout.setHorizontalGroup(
+            waterfallPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 480, Short.MAX_VALUE)
+        );
+        waterfallPanel1Layout.setVerticalGroup(
+            waterfallPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
+
+        getContentPane().add(waterfallPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 100, -1, -1));
 
         jMenu1.setText("File");
 
@@ -242,19 +259,6 @@ public class MonitorFrame extends javax.swing.JFrame {
 
         setJMenuBar(jMenuBar1);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(monitorPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(monitorPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
@@ -316,6 +320,7 @@ public class MonitorFrame extends javax.swing.JFrame {
 
     public void updateMonitor(float[] samples,int filterLow,int filterHigh,int sampleRate) {
         monitorPanel1.updateMonitor(samples,filterLow,filterHigh,sampleRate);
+        waterfallPanel1.updateWaterfall(samples);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -349,7 +354,8 @@ public class MonitorFrame extends javax.swing.JFrame {
     private javax.swing.JMenuItem menuSPEC;
     private javax.swing.JMenuItem menuUSB;
     private javax.swing.JMenuItem menuWWV;
-    private jmonitor.MonitorPanel monitorPanel1;
+    private jmonitor.SpectrumPanel monitorPanel1;
+    private jmonitor.WaterfallPanel waterfallPanel1;
     // End of variables declaration//GEN-END:variables
 
     private Client client;
