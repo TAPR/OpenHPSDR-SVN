@@ -226,7 +226,7 @@
     <Property name="useNullLayout" type="boolean" value="false"/>
   </Layout>
   <SubComponents>
-    <Container class="jmonitor.SpectrumPanel" name="monitorPanel1">
+    <Container class="jmonitor.SpectrumPanel" name="spectrumPanel">
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
           <AbsoluteConstraints x="0" y="0" width="-1" height="-1"/>
@@ -246,7 +246,7 @@
         </DimensionLayout>
       </Layout>
     </Container>
-    <Container class="jmonitor.WaterfallPanel" name="waterfallPanel1">
+    <Container class="jmonitor.WaterfallPanel" name="waterfallPanel">
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
           <AbsoluteConstraints x="0" y="100" width="-1" height="-1"/>
