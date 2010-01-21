@@ -85,7 +85,7 @@ public class MonitorFrame extends javax.swing.JFrame {
 
         getContentPane().add(spectrumPanel);
 
-        waterfallPanel.setLayout(new java.awt.GridLayout());
+        waterfallPanel.setLayout(new java.awt.GridLayout(1, 0));
         getContentPane().add(waterfallPanel);
 
         jMenu1.setText("File");
@@ -211,39 +211,99 @@ public class MonitorFrame extends javax.swing.JFrame {
         jMenu3.setText("Mode");
 
         menuLSB.setText("LSB");
+        menuLSB.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuLSBActionPerformed(evt);
+            }
+        });
         jMenu3.add(menuLSB);
 
         menuUSB.setText("USB");
+        menuUSB.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuUSBActionPerformed(evt);
+            }
+        });
         jMenu3.add(menuUSB);
 
         menuDSB.setText("DSB");
+        menuDSB.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuDSBActionPerformed(evt);
+            }
+        });
         jMenu3.add(menuDSB);
 
         menuCWL.setText("CW/L");
+        menuCWL.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuCWLActionPerformed(evt);
+            }
+        });
         jMenu3.add(menuCWL);
 
         menuCWU.setText("CW/U");
+        menuCWU.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuCWUActionPerformed(evt);
+            }
+        });
         jMenu3.add(menuCWU);
 
         menuSPEC.setText("SPEC");
+        menuSPEC.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuSPECActionPerformed(evt);
+            }
+        });
         jMenu3.add(menuSPEC);
 
         menuDIGL.setText("DIGL");
+        menuDIGL.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuDIGLActionPerformed(evt);
+            }
+        });
         jMenu3.add(menuDIGL);
 
         menuDIGU.setText("DIGU");
+        menuDIGU.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuDIGUActionPerformed(evt);
+            }
+        });
         jMenu3.add(menuDIGU);
 
         menuDRM.setText("DRM");
+        menuDRM.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuDRMActionPerformed(evt);
+            }
+        });
         jMenu3.add(menuDRM);
 
         menuAM.setText("AM");
+        menuAM.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuAMActionPerformed(evt);
+            }
+        });
         jMenu3.add(menuAM);
 
         menuSAM.setText("SAM");
+        menuSAM.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuSAMActionPerformed(evt);
+            }
+        });
         jMenu3.add(menuSAM);
 
         menuFMN.setText("FM/N");
+        menuFMN.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuFMNActionPerformed(evt);
+            }
+        });
         jMenu3.add(menuFMN);
 
         jMenuBar1.add(jMenu3);
@@ -308,6 +368,54 @@ public class MonitorFrame extends javax.swing.JFrame {
     private void menuWWVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuWWVActionPerformed
         client.sendCommand("band 12");
     }//GEN-LAST:event_menuWWVActionPerformed
+
+    private void menuLSBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuLSBActionPerformed
+        client.sendCommand("setMode LSB");
+    }//GEN-LAST:event_menuLSBActionPerformed
+
+    private void menuUSBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuUSBActionPerformed
+        client.sendCommand("setMode USB");
+    }//GEN-LAST:event_menuUSBActionPerformed
+
+    private void menuDSBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuDSBActionPerformed
+        client.sendCommand("setMode DSB");
+    }//GEN-LAST:event_menuDSBActionPerformed
+
+    private void menuCWLActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuCWLActionPerformed
+        client.sendCommand("setMode CWL");
+    }//GEN-LAST:event_menuCWLActionPerformed
+
+    private void menuCWUActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuCWUActionPerformed
+        client.sendCommand("setMode CWU");
+    }//GEN-LAST:event_menuCWUActionPerformed
+
+    private void menuSPECActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuSPECActionPerformed
+        client.sendCommand("setMode SPEC");
+    }//GEN-LAST:event_menuSPECActionPerformed
+
+    private void menuDIGLActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuDIGLActionPerformed
+        client.sendCommand("setMode DIGL");
+    }//GEN-LAST:event_menuDIGLActionPerformed
+
+    private void menuDIGUActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuDIGUActionPerformed
+        client.sendCommand("setMode DIGU");
+    }//GEN-LAST:event_menuDIGUActionPerformed
+
+    private void menuDRMActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuDRMActionPerformed
+        client.sendCommand("setMode DRM");
+    }//GEN-LAST:event_menuDRMActionPerformed
+
+    private void menuAMActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuAMActionPerformed
+        client.sendCommand("setMode AM");
+    }//GEN-LAST:event_menuAMActionPerformed
+
+    private void menuSAMActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuSAMActionPerformed
+        client.sendCommand("setMode SAM");
+    }//GEN-LAST:event_menuSAMActionPerformed
+
+    private void menuFMNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuFMNActionPerformed
+        client.sendCommand("setMode FMN");
+    }//GEN-LAST:event_menuFMNActionPerformed
 
     public void updateMonitor(float[] samples,int filterLow,int filterHigh,int sampleRate) {
         spectrumPanel.updateMonitor(samples,filterLow,filterHigh,sampleRate);

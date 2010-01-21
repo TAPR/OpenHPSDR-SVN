@@ -224,7 +224,6 @@ int lastX;
 * @return 
 */
 gboolean spectrum_button_press_event(GtkWidget* widget,GdkEventButton* event) {
-    int increment;
     switch(event->button) {
         case 1:
             // left button - start dragging frequency
@@ -237,6 +236,8 @@ gboolean spectrum_button_press_event(GtkWidget* widget,GdkEventButton* event) {
             break;
         case 3:
             // right button - click to frequency (to cursor) 
+            {
+            long increment;
             if(subrx) {
                 int subCursor=((subrxFrequency-frequencyA)-spectrumLow)*spectrumWIDTH/(spectrumHigh-spectrumLow);
                 increment=-(int)(subCursor+((float)event->x*((float)spectrumHigh-(float)spectrumLow)/(float)spectrumWIDTH));
@@ -244,6 +245,7 @@ gboolean spectrum_button_press_event(GtkWidget* widget,GdkEventButton* event) {
                 increment=(int)((float)spectrumLow+((float)event->x*((float)spectrumHigh-(float)spectrumLow)/(float)spectrumWIDTH));
             }
             vfoIncrementFrequency(increment);
+            }
             break;
     }
     return TRUE;
@@ -259,14 +261,15 @@ gboolean spectrum_button_press_event(GtkWidget* widget,GdkEventButton* event) {
 * @return 
 */
 gboolean spectrum_button_release_event(GtkWidget* widget,GdkEventButton* event) {
-    int increment;
     switch(event->button) {
         case 1:
             // left button  - click to frequency (centered in filter) if not dragged
             if(!hasMoved) {
-                increment=(int)((float)spectrumLow+((float)event->x*((float)spectrumHigh-(float)spectrumLow)/(float)spectrumWIDTH)-((float)filterLow+((float)filterHigh-(float)filterLow)/2.0));
-                if(!subrx)
+                if(!subrx) {
+                    long increment;
+                    increment=(int)((float)spectrumLow+((float)event->x*((float)spectrumHigh-(float)spectrumLow)/(float)spectrumWIDTH)-((float)filterLow+((float)filterHigh-(float)filterLow)/2.0));
                     vfoIncrementFrequency(increment);
+                }
             }
             break;
         case 2:
@@ -290,9 +293,9 @@ gboolean spectrum_button_release_event(GtkWidget* widget,GdkEventButton* event) 
 */
 gboolean spectrum_motion_notify_event(GtkWidget* widget,GdkEventMotion* event) {
     if(event->state & GDK_BUTTON1_MASK) {
+        long f;
         int moved=lastX-event->x;
-        //int f=moved*(spectrumHigh-spectrumLow)/spectrumWIDTH;
-        int f=(int)((float)moved*((float)spectrumHigh-(float)spectrumLow)/(float)spectrumWIDTH);
+        f=(long)((float)moved*((float)spectrumHigh-(float)spectrumLow)/(float)spectrumWIDTH);
         if(subrx) f=-f;
         vfoIncrementFrequency(f);
         lastX=event->x;
@@ -311,11 +314,13 @@ gboolean spectrum_motion_notify_event(GtkWidget* widget,GdkEventMotion* event) {
 * @return 
 */
 gboolean spectrum_scroll_event(GtkWidget* widget,GdkEventScroll* event) {
+    long f;
     if(event->direction==GDK_SCROLL_UP) {
-        vfoIncrementFrequency(frequencyIncrement);
+        f=frequencyIncrement;
     } else {
-        vfoIncrementFrequency(-frequencyIncrement);
+        f=-frequencyIncrement;
     }
+    vfoIncrementFrequency(f);
 }
 
 /* --------------------------------------------------------------------------*/

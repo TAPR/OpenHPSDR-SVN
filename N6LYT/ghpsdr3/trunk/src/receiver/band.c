@@ -438,13 +438,21 @@ void selectBand(GtkWidget* widget) {
             current=bandstack[band].current_entry;
             entry=&bandstack[band].entry[current];
 
-            setMode(entry->mode);
+            {
+                int *m=malloc(sizeof(int));
+                *m=entry->mode;
+                setMode(m);
+            }
             filterVar1Low=entry->var1Low;
             filterVar1High=entry->var1High;
             filterVar2Low=entry->var2Low;
             filterVar2High=entry->var2High;
             setFilter(entry->filter);
-            setAFrequency(entry->frequencyA);
+            {
+                long long *f=malloc(sizeof(long long));
+                *f=entry->frequencyA;
+                setAFrequency(f);
+            }
             setIncrement(entry->step);
 
             //setPreamp(entry->preamp);
@@ -485,14 +493,22 @@ void selectBand(GtkWidget* widget) {
             }
 
             xvtr_entry=&xvtr[xvtr_band];
-            setMode(xvtr_entry->mode);
+            {
+                int *m=malloc(sizeof(int));
+                *m=xvtr_entry->mode;
+                setMode(m);
+            }
             filterVar1Low=xvtr_entry->var1Low;
             filterVar1High=xvtr_entry->var1High;
             filterVar2Low=xvtr_entry->var2Low;
             filterVar2High=xvtr_entry->var2High;
             setFilter(xvtr_entry->filter);
             setLOFrequency(xvtr_entry->rxFrequencyLO);
-            setAFrequency(xvtr_entry->rxFrequency);
+            {
+                long long *f=malloc(sizeof(long long));
+                *f=xvtr_entry->rxFrequency;
+                setAFrequency(f);
+            }
             setIncrement(xvtr_entry->step);
 
             //setPreamp(xvtr_entry->preamp);

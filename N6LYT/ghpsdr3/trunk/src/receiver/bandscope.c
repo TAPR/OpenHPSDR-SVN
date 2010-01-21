@@ -178,12 +178,12 @@ gboolean bandscope_expose_event(GtkWidget* widget,GdkEventExpose* event) {
 */
 gboolean bandscope_button_press_event(GtkWidget* widget,GdkEventButton* event) {
     float hzPerPixel;
-    long long f;
+    long long *f=malloc(sizeof(long long));
     switch(event->button) {
         case 1:
             // left button - click to frequency (to cursor) 
             hzPerPixel=(float)bandscopeHigh/(float)bandscopeZoom/(float)bandscopeWIDTH;
-            f=(long long)((float)event->x*hzPerPixel);
+            *f=(long long)((float)event->x*hzPerPixel);
             setAFrequency(f);
             break;
         case 2:
