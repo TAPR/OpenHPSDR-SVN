@@ -339,17 +339,17 @@ gboolean vfoBFrequency_expose_event(GtkWidget* widget,GdkEventExpose* event) {
 * 
 * @param f
 */
-void setAFrequency(long long f) {
+void setAFrequency(long long *f) {
 
 
 //fprintf(stderr,"setAFrequency %lld\n",f);
 
     dspAFrequency=0;
     ddsAFrequency=0;
-    frequencyA=f;
+    frequencyA=*f;
 
     dspAFrequency=0;
-    ddsAFrequency=f-frequencyALO;
+    ddsAFrequency=*f-frequencyALO;
 
     updateVfoADisplay();
 
@@ -359,13 +359,15 @@ void setAFrequency(long long f) {
 
     // check the band
     if(displayHF) {
-        int thisBand=getBand(f);
+        int thisBand=getBand(*f);
         if(band!=thisBand) {
             if(band!=-1) {
                 forceBand(thisBand);
             }
         }
     }
+
+    free(f);
 }
 
 /* --------------------------------------------------------------------------*/
@@ -417,17 +419,22 @@ void setBFrequency(long long f) {
 * @param data
 */
 void vfoCallback(GtkWidget* widget,gpointer data) {
-    long long f;
+    long long *f=malloc(sizeof(long long));
+    long long temp;
     GtkWidget* label;
 
     if(widget==buttonAtoB) {
         setBFrequency(frequencyA);
     } else if(widget==buttonBtoA) {
-        setAFrequency(frequencyB);
+        *f=frequencyB;
+        setAFrequency(f);
     } else if(widget==buttonAswapB) {
-        f=frequencyA;
-        setAFrequency(frequencyB);
-        setBFrequency(f);
+        temp=frequencyA;
+        *f=frequencyB;
+        setAFrequency(f);
+        f=malloc(sizeof(long long));
+        *f=temp;
+        setBFrequency(temp);
     } else if(widget==buttonSplit) {
         label=gtk_bin_get_child((GtkBin*)buttonSplit);
         if(bSplit) {
@@ -453,12 +460,15 @@ void vfoCallback(GtkWidget* widget,gpointer data) {
 * @param increment
 */
 void vfoIncrementFrequency(long increment) {
-//fprintf(stderr,"vfoIncrementFrequency %ld\n",increment);
+//fprintf(stderr,"vfoIncrementFrequency %ld\n",*increment);
     if(subrx) {
         subrxIncrementFrequency(increment);
     } else {
-        setAFrequency(frequencyA+(long long)increment);
+        long long *f=malloc(sizeof(long long));
+        *f=frequencyA+(long long)increment;
+        setAFrequency(f);
     }
+
 }
 
 /* --------------------------------------------------------------------------*/
@@ -470,7 +480,9 @@ void vfoIncrementFrequency(long increment) {
 * @param increment
 */
 void vfoIncrementAFrequency(long increment) {
-    setAFrequency(frequencyA+(long long)increment);
+        long long *f=malloc(sizeof(long long));
+        *f=frequencyA+(long long)increment;
+        setAFrequency(f);
 }
 
 /* --------------------------------------------------------------------------*/

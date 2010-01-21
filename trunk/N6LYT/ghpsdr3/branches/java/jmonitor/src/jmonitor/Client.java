@@ -55,6 +55,7 @@ public class Client {
             outputStream.flush();
         } catch (IOException e) {
             System.err.println("sendCommand: IOException: "+e.getMessage());
+            System.exit(1);
         }
     }
 

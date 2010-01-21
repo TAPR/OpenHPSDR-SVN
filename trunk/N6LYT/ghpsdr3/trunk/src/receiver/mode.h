@@ -40,7 +40,7 @@
 
 int mode;
 
-void setMode(int mode);
+int setMode(int *mode);
 void modeSaveState();
 void modeRestoreState();
 GtkWidget* buildModeUI();

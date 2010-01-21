@@ -65,7 +65,7 @@ GtkWidget* buttonDRM;
 
 GtkWidget* currentModeButton;
 
-void setMode(int mode);
+int setMode(int *mode);
 
 /* --------------------------------------------------------------------------*/
 /** 
@@ -76,7 +76,6 @@ void setMode(int mode);
 void selectMode(GtkWidget* widget) {
     GtkWidget* label;
     char temp[80];
-
 
     if(currentModeButton) {
         label=gtk_bin_get_child((GtkBin*)currentModeButton);
@@ -135,9 +134,9 @@ void selectMode(GtkWidget* widget) {
 * 
 * @param mode
 */
-void setMode(int mode) {
+int setMode(int *mode) {
     GtkWidget* widget;
-    switch(mode) {
+    switch(*mode) {
         case modeLSB:
             widget=buttonLSB;
             break;
@@ -176,6 +175,8 @@ void setMode(int mode) {
             break;
     }
     selectMode(widget);
+    free(mode);
+    return FALSE;
 }
 
 /* --------------------------------------------------------------------------*/

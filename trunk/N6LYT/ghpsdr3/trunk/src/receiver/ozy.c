@@ -426,7 +426,11 @@ fprintf(stderr,"setSpeed %d\n",s);
         SetSampleRate((double)sampleRate);
         SetRXOsc(0,0,0.0);
         setFilter(filter);
-        setMode(mode);
+        {
+            int *m=malloc(sizeof(int));
+            *m=mode;
+            setMode(m);
+        }
         SetRXOutputGain(0,0,volume/100.0);
     } else if(s==SPEED_96KHZ) {
         sampleRate=96000;
@@ -434,7 +438,11 @@ fprintf(stderr,"setSpeed %d\n",s);
         SetSampleRate((double)sampleRate);
         SetRXOsc(0,0,0.0);
         setFilter(filter);
-        setMode(mode);
+        {
+            int *m=malloc(sizeof(int));
+            *m=mode;
+            setMode(m);
+        }
         SetRXOutputGain(0,0,volume/100.0);
     } else if(s==SPEED_192KHZ) {
         sampleRate=192000;
@@ -442,7 +450,11 @@ fprintf(stderr,"setSpeed %d\n",s);
         SetSampleRate((double)sampleRate);
         SetRXOsc(0,0,0.0);
         setFilter(filter);
-        setMode(mode);
+        {
+            int *m=malloc(sizeof(int));
+            *m=mode;
+            setMode(m);
+        }
         SetRXOutputGain(0,0,volume/100.0);
     }
 }

@@ -68,6 +68,7 @@ int rejectAddress(char* address) {
     int result=0;
     if(strcmp(address,"222.208.183.218")==0) result=1;
     if(strcmp(address,"221.195.73.68")==0) result=1;
+    if(strcmp(address,"61.183.15.9")==0) result=1;
     return result;
 }
 
@@ -142,6 +143,39 @@ fprintf(stderr,"iphone_thread\n");
 
                     if(strncmp(message,"getSpectrum",11)==0) {
                         iphone_send_samples((gpointer)NULL);
+                    } else if(strncmp(message,"setMode",7)==0) {
+                        int *mode=malloc(sizeof(int));
+                        char* stringMode=&message[8];
+                        if(strcmp(stringMode,"LSB")==0) {
+                            *mode=modeLSB;
+                        } else if(strcmp(stringMode,"USB")==0) {
+                            *mode=modeUSB;
+                        } else if(strcmp(stringMode,"DSB")==0) {
+                            *mode=modeDSB;
+                        } else if(strcmp(stringMode,"CWL")==0) {
+                            *mode=modeCWL;
+                        } else if(strcmp(stringMode,"CWU")==0) {
+                            *mode=modeCWU;
+                        } else if(strcmp(stringMode,"SPEC")==0) {
+                            *mode=modeSPEC;
+                        } else if(strcmp(stringMode,"DIGL")==0) {
+                            *mode=modeDIGL;
+                        } else if(strcmp(stringMode,"DIGU")==0) {
+                            *mode=modeDIGU;
+                        } else if(strcmp(stringMode,"DRM")==0) {
+                            *mode=modeDRM;
+                        } else if(strcmp(stringMode,"AM")==0) {
+                            *mode=modeAM;
+                        } else if(strcmp(stringMode,"SAM")==0) {
+                            *mode=modeSAM;
+                        } else if(strcmp(stringMode,"FMN")==0) {
+                            *mode=modeFMN;
+                        }
+                        g_idle_add(setMode,(gpointer)mode);
+                    } else if(strncmp(message,"setAFrequency",12)==0) {
+                        long long*frequency=malloc(sizeof(long long));
+                        *frequency=atoll(&message[13]);
+                        g_idle_add(setAFrequency,(gpointer)frequency);
                     } else if(strncmp(message,"scrollFrequency",15)==0) {
                         long *increment=malloc(sizeof(long));
                         *increment=atol(&message[16]);
