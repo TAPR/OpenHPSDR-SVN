@@ -69,7 +69,7 @@
       <Value Profile="(Default)">False</Value>
     </Setting>
     <Setting Name="Sleep" Type="System.String" Scope="User">
-      <Value Profile="(Default)">100</Value>
+      <Value Profile="(Default)">25</Value>
     </Setting>
     <Setting Name="SleepVis" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
@@ -614,20 +614,8 @@ RCP4 - WriteLog</Value>
     <Setting Name="Amp6" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
-    <Setting Name="Device" Type="System.String" Scope="User">
-      <Value Profile="(Default)">Device0</Value>
-    </Setting>
-    <Setting Name="Device0" Type="System.String" Scope="User">
-      <Value Profile="(Default)">Device0</Value>
-    </Setting>
-    <Setting Name="Device1" Type="System.String" Scope="User">
-      <Value Profile="(Default)">Device1</Value>
-    </Setting>
-    <Setting Name="Device2" Type="System.String" Scope="User">
-      <Value Profile="(Default)">Device2</Value>
-    </Setting>
     <Setting Name="BCD" Type="System.String" Scope="User">
-      <Value Profile="(Default)">BCD</Value>
+      <Value Profile="(Default)">""</Value>
     </Setting>
     <Setting Name="asw1" Type="System.Decimal" Scope="User">
       <Value Profile="(Default)">1</Value>
@@ -1129,6 +1117,30 @@ RCP4 - WriteLog</Value>
     </Setting>
     <Setting Name="txtTxB" Type="System.String" Scope="User">
       <Value Profile="(Default)">2</Value>
+    </Setting>
+    <Setting Name="cboKnobPort" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">-1</Value>
+    </Setting>
+    <Setting Name="chkKnobEnab" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="cboKnobAOn" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">-1</Value>
+    </Setting>
+    <Setting Name="cboKnobBOn" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">-1</Value>
+    </Setting>
+    <Setting Name="cboKnobADC" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">-1</Value>
+    </Setting>
+    <Setting Name="cboKnobAOff" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">-1</Value>
+    </Setting>
+    <Setting Name="cboKnobBOff" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">-1</Value>
+    </Setting>
+    <Setting Name="cboKnobBDC" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">-1</Value>
     </Setting>
   </Settings>
 </SettingsFile>

@@ -1,0 +1,25 @@
+Source		: System.Windows.Forms
+Method		: get_Handle
+Time		: 10:22:31 AM
+Date		: 1/19/2010
+Computer	: i7-940
+Error		: Cross-thread operation not valid: Control 'txtZC' accessed from a thread other than the thread it was created on.
+Stack Trace	: at System.Windows.Forms.Control.get_Handle()
+   at System.Windows.Forms.Control.set_WindowText(String value)
+   at System.Windows.Forms.TextBoxBase.set_WindowText(String value)
+   at System.Windows.Forms.Control.set_Text(String value)
+   at System.Windows.Forms.TextBoxBase.set_Text(String value)
+   at System.Windows.Forms.TextBox.set_Text(String value)
+   at DataDecoder.Setup.KnobPort_DataReceived(Object sender, SerialDataReceivedEventArgs e) in C:\Documents and Settings\Steve\Desktop\Repose_DDUtil\Source\Setup.cs:line 12366
+-------------------------------------------------------------------
+Source		: System.Windows.Forms
+Method		: get_Handle
+Time		: 2:21:12 PM
+Date		: 1/19/2010
+Computer	: i7-940
+Error		: Cross-thread operation not valid: Control 'grpTKnob' accessed from a thread other than the thread it was created on.
+Stack Trace	: at System.Windows.Forms.Control.get_Handle()
+   at System.Windows.Forms.Control.SendMessage(Int32 msg, Int32 wparam, Int32 lparam)
+   at System.Windows.Forms.GroupBox.set_Text(String value)
+   at DataDecoder.Setup.KnobPort_DataReceived(Object sender, SerialDataReceivedEventArgs e) in C:\Documents and Settings\Steve\Desktop\Repose_DDUtil\Source\Setup.cs:line 12326
+-------------------------------------------------------------------

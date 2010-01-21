@@ -289,7 +289,7 @@ namespace DataDecoder.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("100")]
+        [global::System.Configuration.DefaultSettingValueAttribute("25")]
         public string Sleep {
             get {
                 return ((string)(this["Sleep"]));
@@ -2461,55 +2461,7 @@ namespace DataDecoder.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("Device0")]
-        public string Device {
-            get {
-                return ((string)(this["Device"]));
-            }
-            set {
-                this["Device"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("Device0")]
-        public string Device0 {
-            get {
-                return ((string)(this["Device0"]));
-            }
-            set {
-                this["Device0"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("Device1")]
-        public string Device1 {
-            get {
-                return ((string)(this["Device1"]));
-            }
-            set {
-                this["Device1"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("Device2")]
-        public string Device2 {
-            get {
-                return ((string)(this["Device2"]));
-            }
-            set {
-                this["Device2"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("BCD")]
+        [global::System.Configuration.DefaultSettingValueAttribute("\"\"")]
         public string BCD {
             get {
                 return ((string)(this["BCD"]));
@@ -4520,6 +4472,102 @@ namespace DataDecoder.Properties {
             }
             set {
                 this["txtTxB"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("-1")]
+        public int cboKnobPort {
+            get {
+                return ((int)(this["cboKnobPort"]));
+            }
+            set {
+                this["cboKnobPort"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool chkKnobEnab {
+            get {
+                return ((bool)(this["chkKnobEnab"]));
+            }
+            set {
+                this["chkKnobEnab"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("-1")]
+        public int cboKnobAOn {
+            get {
+                return ((int)(this["cboKnobAOn"]));
+            }
+            set {
+                this["cboKnobAOn"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("-1")]
+        public int cboKnobBOn {
+            get {
+                return ((int)(this["cboKnobBOn"]));
+            }
+            set {
+                this["cboKnobBOn"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("-1")]
+        public int cboKnobADC {
+            get {
+                return ((int)(this["cboKnobADC"]));
+            }
+            set {
+                this["cboKnobADC"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("-1")]
+        public int cboKnobAOff {
+            get {
+                return ((int)(this["cboKnobAOff"]));
+            }
+            set {
+                this["cboKnobAOff"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("-1")]
+        public int cboKnobBOff {
+            get {
+                return ((int)(this["cboKnobBOff"]));
+            }
+            set {
+                this["cboKnobBOff"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("-1")]
+        public int cboKnobBDC {
+            get {
+                return ((int)(this["cboKnobBDC"]));
+            }
+            set {
+                this["cboKnobBDC"] = value;
             }
         }
     }

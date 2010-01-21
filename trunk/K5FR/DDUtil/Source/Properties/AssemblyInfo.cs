@@ -10,7 +10,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("DDUtil")]
-[assembly: AssemblyCopyright("Copyright © Steve Nance 2007-2009")]
+[assembly: AssemblyCopyright("Copyright © Steve Nance 2007-2010")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -30,4 +30,4 @@ using System.Runtime.InteropServices;
 //      Revision
 //
 [assembly: AssemblyVersion("1.0.0.0")]
-[assembly: AssemblyFileVersion("1.7.9.11")]
+[assembly: AssemblyFileVersion("1.8.0.02")]
