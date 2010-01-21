@@ -79,8 +79,8 @@ namespace DataDecoder
             this.btnPortNum = new System.Windows.Forms.Button();
             this.label7 = new System.Windows.Forms.Label();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
+            this.Dev0 = new System.Windows.Forms.TextBox();
             this.chkDSInvert = new System.Windows.Forms.CheckBox();
-            this.cboDevice = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
             this.chkDevice = new System.Windows.Forms.CheckBox();
             this.grpLPT = new System.Windows.Forms.GroupBox();
@@ -118,9 +118,30 @@ namespace DataDecoder
             this.txtFile0 = new System.Windows.Forms.TextBox();
             this.dg1 = new System.Windows.Forms.DataGridView();
             this.chkDev0 = new System.Windows.Forms.CheckBox();
-            this.Dev0 = new System.Windows.Forms.TextBox();
-            this.label27 = new System.Windows.Forms.Label();
             this.tabRCP = new System.Windows.Forms.TabPage();
+            this.grpTKnob = new System.Windows.Forms.GroupBox();
+            this.lblZR = new System.Windows.Forms.Label();
+            this.txtZR = new System.Windows.Forms.TextBox();
+            this.lblZL = new System.Windows.Forms.Label();
+            this.txtZL = new System.Windows.Forms.TextBox();
+            this.lblZC = new System.Windows.Forms.Label();
+            this.txtZC = new System.Windows.Forms.TextBox();
+            this.chkKnobAdv = new System.Windows.Forms.CheckBox();
+            this.button7 = new System.Windows.Forms.Button();
+            this.cboKnobBDC = new System.Windows.Forms.ComboBox();
+            this.cboKnobBOn = new System.Windows.Forms.ComboBox();
+            this.cboKnobBOff = new System.Windows.Forms.ComboBox();
+            this.label221 = new System.Windows.Forms.Label();
+            this.label220 = new System.Windows.Forms.Label();
+            this.label219 = new System.Windows.Forms.Label();
+            this.label218 = new System.Windows.Forms.Label();
+            this.label217 = new System.Windows.Forms.Label();
+            this.cboKnobADC = new System.Windows.Forms.ComboBox();
+            this.cboKnobAOn = new System.Windows.Forms.ComboBox();
+            this.cboKnobAOff = new System.Windows.Forms.ComboBox();
+            this.label216 = new System.Windows.Forms.Label();
+            this.cboKnobPort = new System.Windows.Forms.ComboBox();
+            this.chkKnobEnab = new System.Windows.Forms.CheckBox();
             this.groupBox7 = new System.Windows.Forms.GroupBox();
             this.label18 = new System.Windows.Forms.Label();
             this.label16 = new System.Windows.Forms.Label();
@@ -129,9 +150,7 @@ namespace DataDecoder
             this.cboRCP4Rotor = new System.Windows.Forms.ComboBox();
             this.cboRCP3Rotor = new System.Windows.Forms.ComboBox();
             this.cboRCP2Rotor = new System.Windows.Forms.ComboBox();
-            this.label40 = new System.Windows.Forms.Label();
             this.chkRCP2 = new System.Windows.Forms.CheckBox();
-            this.txtRCP = new System.Windows.Forms.TextBox();
             this.cboRCP2 = new System.Windows.Forms.ComboBox();
             this.chkRCP4IF = new System.Windows.Forms.CheckBox();
             this.label17 = new System.Windows.Forms.Label();
@@ -144,6 +163,8 @@ namespace DataDecoder
             this.chkRCP3DisPol = new System.Windows.Forms.CheckBox();
             this.cboRCP4 = new System.Windows.Forms.ComboBox();
             this.chkRCP2DisPol = new System.Windows.Forms.CheckBox();
+            this.txtRCP = new System.Windows.Forms.TextBox();
+            this.label40 = new System.Windows.Forms.Label();
             this.tabWatt = new System.Windows.Forms.TabPage();
             this.groupBox15 = new System.Windows.Forms.GroupBox();
             this.chkSWR = new System.Windows.Forms.CheckBox();
@@ -1133,6 +1154,7 @@ namespace DataDecoder
             this.label164 = new System.Windows.Forms.Label();
             this.label165 = new System.Windows.Forms.Label();
             this.SwitchPort = new System.IO.Ports.SerialPort(this.components);
+            this.KnobPort = new System.IO.Ports.SerialPort(this.components);
             this.tabControl.SuspendLayout();
             this.tabPorts.SuspendLayout();
             this.grpSlave.SuspendLayout();
@@ -1145,6 +1167,7 @@ namespace DataDecoder
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dg1)).BeginInit();
             this.tabRCP.SuspendLayout();
+            this.grpTKnob.SuspendLayout();
             this.groupBox7.SuspendLayout();
             this.tabWatt.SuspendLayout();
             this.groupBox15.SuspendLayout();
@@ -1365,7 +1388,7 @@ namespace DataDecoder
             "Yaesu Type 1",
             "Yaesu Type 2",
             "Icom"});
-            this.cboRadio.Location = new System.Drawing.Point(99, 19);
+            this.cboRadio.Location = new System.Drawing.Point(96, 19);
             this.cboRadio.Name = "cboRadio";
             this.cboRadio.Size = new System.Drawing.Size(89, 21);
             this.cboRadio.TabIndex = 26;
@@ -1542,7 +1565,7 @@ namespace DataDecoder
             this.txtInv.Size = new System.Drawing.Size(34, 20);
             this.txtInv.TabIndex = 11;
             this.txtInv.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.toolTip1.SetToolTip(this.txtInv, "Radio CAT polling interval (with DDUtil only running)");
+            this.toolTip1.SetToolTip(this.txtInv, "Radio CAT polling interval in ms (with DDUtil only running)");
             this.txtInv.TextChanged += new System.EventHandler(this.txtInv_TextChanged);
             // 
             // label3
@@ -1620,8 +1643,8 @@ namespace DataDecoder
             // 
             // groupBox5
             // 
+            this.groupBox5.Controls.Add(this.Dev0);
             this.groupBox5.Controls.Add(this.chkDSInvert);
-            this.groupBox5.Controls.Add(this.cboDevice);
             this.groupBox5.Controls.Add(this.label1);
             this.groupBox5.Controls.Add(this.chkDevice);
             this.groupBox5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold);
@@ -1632,6 +1655,16 @@ namespace DataDecoder
             this.groupBox5.TabStop = false;
             this.groupBox5.Text = "Data Signals";
             this.toolTip1.SetToolTip(this.groupBox5, "Right-Click for Options");
+            // 
+            // Dev0
+            // 
+            this.Dev0.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Dev0.Location = new System.Drawing.Point(94, 14);
+            this.Dev0.Name = "Dev0";
+            this.Dev0.Size = new System.Drawing.Size(95, 20);
+            this.Dev0.TabIndex = 52;
+            this.toolTip1.SetToolTip(this.Dev0, "Device name (Amp, Antenna Switch)");
+            this.Dev0.TextChanged += new System.EventHandler(this.Dev0_TextChanged);
             // 
             // chkDSInvert
             // 
@@ -1646,27 +1679,15 @@ namespace DataDecoder
             this.chkDSInvert.UseVisualStyleBackColor = true;
             this.chkDSInvert.CheckedChanged += new System.EventHandler(this.chkDSInvert_CheckedChanged);
             // 
-            // cboDevice
-            // 
-            this.cboDevice.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
-            this.cboDevice.FormattingEnabled = true;
-            this.cboDevice.Location = new System.Drawing.Point(88, 16);
-            this.cboDevice.Name = "cboDevice";
-            this.cboDevice.Size = new System.Drawing.Size(116, 21);
-            this.cboDevice.TabIndex = 22;
-            this.toolTip1.SetToolTip(this.cboDevice, "Select Device to use for LPT Data Source.");
-            this.cboDevice.SelectedIndexChanged += new System.EventHandler(this.cboDevice_SelectedIndexChanged);
-            this.cboDevice.DropDown += new System.EventHandler(this.Dev0_DropDown);
-            // 
             // label1
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
-            this.label1.Location = new System.Drawing.Point(120, 41);
+            this.label1.Location = new System.Drawing.Point(106, 36);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(41, 13);
+            this.label1.Size = new System.Drawing.Size(72, 13);
             this.label1.TabIndex = 25;
-            this.label1.Text = "Device";
+            this.label1.Text = "Device Name";
             // 
             // chkDevice
             // 
@@ -1831,8 +1852,6 @@ namespace DataDecoder
             this.tabBCD.Controls.Add(this.groupBox1);
             this.tabBCD.Controls.Add(this.dg1);
             this.tabBCD.Controls.Add(this.chkDev0);
-            this.tabBCD.Controls.Add(this.Dev0);
-            this.tabBCD.Controls.Add(this.label27);
             this.tabBCD.Location = new System.Drawing.Point(4, 22);
             this.tabBCD.Name = "tabBCD";
             this.tabBCD.Padding = new System.Windows.Forms.Padding(3);
@@ -1859,7 +1878,7 @@ namespace DataDecoder
             this.grpBCDover.Controls.Add(this.chkOvride);
             this.grpBCDover.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.grpBCDover.ForeColor = System.Drawing.Color.Firebrick;
-            this.grpBCDover.Location = new System.Drawing.Point(6, 106);
+            this.grpBCDover.Location = new System.Drawing.Point(3, 61);
             this.grpBCDover.Name = "grpBCDover";
             this.grpBCDover.Size = new System.Drawing.Size(167, 100);
             this.grpBCDover.TabIndex = 62;
@@ -2066,7 +2085,7 @@ namespace DataDecoder
             // 
             this.label20.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label20.ForeColor = System.Drawing.Color.Blue;
-            this.label20.Location = new System.Drawing.Point(27, 10);
+            this.label20.Location = new System.Drawing.Point(6, 11);
             this.label20.Name = "label20";
             this.label20.Size = new System.Drawing.Size(161, 24);
             this.label20.TabIndex = 61;
@@ -2081,7 +2100,7 @@ namespace DataDecoder
             this.groupBox1.Controls.Add(this.txtFile0);
             this.groupBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold);
             this.groupBox1.ForeColor = System.Drawing.Color.Navy;
-            this.groupBox1.Location = new System.Drawing.Point(6, 223);
+            this.groupBox1.Location = new System.Drawing.Point(3, 167);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(403, 79);
             this.groupBox1.TabIndex = 60;
@@ -2149,17 +2168,17 @@ namespace DataDecoder
             // 
             this.dg1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.dg1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dg1.Location = new System.Drawing.Point(217, 6);
+            this.dg1.Location = new System.Drawing.Point(217, 11);
             this.dg1.Name = "dg1";
             this.dg1.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.dg1.Size = new System.Drawing.Size(186, 205);
+            this.dg1.Size = new System.Drawing.Size(186, 150);
             this.dg1.TabIndex = 42;
             this.dg1.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dg1_CellValueChanged);
             // 
             // chkDev0
             // 
             this.chkDev0.AutoSize = true;
-            this.chkDev0.Location = new System.Drawing.Point(17, 53);
+            this.chkDev0.Location = new System.Drawing.Point(13, 38);
             this.chkDev0.Name = "chkDev0";
             this.chkDev0.Size = new System.Drawing.Size(65, 17);
             this.chkDev0.TabIndex = 44;
@@ -2168,33 +2187,348 @@ namespace DataDecoder
             this.chkDev0.UseVisualStyleBackColor = true;
             this.chkDev0.CheckedChanged += new System.EventHandler(this.chkDev0_CheckedChanged);
             // 
-            // Dev0
-            // 
-            this.Dev0.Location = new System.Drawing.Point(91, 49);
-            this.Dev0.Name = "Dev0";
-            this.Dev0.Size = new System.Drawing.Size(100, 20);
-            this.Dev0.TabIndex = 51;
-            this.toolTip1.SetToolTip(this.Dev0, "Device name (Amp, Antenna Switch)");
-            this.Dev0.TextChanged += new System.EventHandler(this.Dev0_TextChanged);
-            // 
-            // label27
-            // 
-            this.label27.AutoSize = true;
-            this.label27.Location = new System.Drawing.Point(92, 72);
-            this.label27.Name = "label27";
-            this.label27.Size = new System.Drawing.Size(72, 13);
-            this.label27.TabIndex = 52;
-            this.label27.Text = "Device Name";
-            // 
             // tabRCP
             // 
+            this.tabRCP.Controls.Add(this.grpTKnob);
             this.tabRCP.Controls.Add(this.groupBox7);
+            this.tabRCP.Controls.Add(this.txtRCP);
+            this.tabRCP.Controls.Add(this.label40);
             this.tabRCP.Location = new System.Drawing.Point(4, 22);
             this.tabRCP.Name = "tabRCP";
             this.tabRCP.Size = new System.Drawing.Size(431, 311);
             this.tabRCP.TabIndex = 3;
             this.tabRCP.Text = "RCP";
             this.tabRCP.UseVisualStyleBackColor = true;
+            // 
+            // grpTKnob
+            // 
+            this.grpTKnob.Controls.Add(this.lblZR);
+            this.grpTKnob.Controls.Add(this.txtZR);
+            this.grpTKnob.Controls.Add(this.lblZL);
+            this.grpTKnob.Controls.Add(this.txtZL);
+            this.grpTKnob.Controls.Add(this.lblZC);
+            this.grpTKnob.Controls.Add(this.txtZC);
+            this.grpTKnob.Controls.Add(this.chkKnobAdv);
+            this.grpTKnob.Controls.Add(this.button7);
+            this.grpTKnob.Controls.Add(this.cboKnobBDC);
+            this.grpTKnob.Controls.Add(this.cboKnobBOn);
+            this.grpTKnob.Controls.Add(this.cboKnobBOff);
+            this.grpTKnob.Controls.Add(this.label221);
+            this.grpTKnob.Controls.Add(this.label220);
+            this.grpTKnob.Controls.Add(this.label219);
+            this.grpTKnob.Controls.Add(this.label218);
+            this.grpTKnob.Controls.Add(this.label217);
+            this.grpTKnob.Controls.Add(this.cboKnobADC);
+            this.grpTKnob.Controls.Add(this.cboKnobAOn);
+            this.grpTKnob.Controls.Add(this.cboKnobAOff);
+            this.grpTKnob.Controls.Add(this.label216);
+            this.grpTKnob.Controls.Add(this.cboKnobPort);
+            this.grpTKnob.Controls.Add(this.chkKnobEnab);
+            this.grpTKnob.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.grpTKnob.ForeColor = System.Drawing.Color.Navy;
+            this.grpTKnob.Location = new System.Drawing.Point(5, 154);
+            this.grpTKnob.Name = "grpTKnob";
+            this.grpTKnob.Size = new System.Drawing.Size(298, 150);
+            this.grpTKnob.TabIndex = 67;
+            this.grpTKnob.TabStop = false;
+            this.grpTKnob.Text = "Tuning Knob";
+            this.grpTKnob.Visible = false;
+            // 
+            // lblZR
+            // 
+            this.lblZR.AutoSize = true;
+            this.lblZR.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
+            this.lblZR.Location = new System.Drawing.Point(237, 124);
+            this.lblZR.Name = "lblZR";
+            this.lblZR.Size = new System.Drawing.Size(22, 13);
+            this.lblZR.TabIndex = 98;
+            this.lblZR.Text = "ZR";
+            this.lblZR.TextAlign = System.Drawing.ContentAlignment.TopRight;
+            this.lblZR.Visible = false;
+            // 
+            // txtZR
+            // 
+            this.txtZR.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.txtZR.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtZR.Location = new System.Drawing.Point(207, 120);
+            this.txtZR.MaxLength = 2;
+            this.txtZR.Name = "txtZR";
+            this.txtZR.Size = new System.Drawing.Size(28, 20);
+            this.txtZR.TabIndex = 97;
+            this.txtZR.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.toolTip1.SetToolTip(this.txtZR, "Set value for rate period (8-bit hex).");
+            this.txtZR.Visible = false;
+            this.txtZR.DoubleClick += new System.EventHandler(this.txtZR_DoubleClick);
+            this.txtZR.TextChanged += new System.EventHandler(this.txtZR_TextChanged);
+            // 
+            // lblZL
+            // 
+            this.lblZL.AutoSize = true;
+            this.lblZL.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
+            this.lblZL.Location = new System.Drawing.Point(178, 124);
+            this.lblZL.Name = "lblZL";
+            this.lblZL.Size = new System.Drawing.Size(20, 13);
+            this.lblZL.TabIndex = 96;
+            this.lblZL.Text = "ZL";
+            this.lblZL.TextAlign = System.Drawing.ContentAlignment.TopRight;
+            this.lblZL.Visible = false;
+            // 
+            // txtZL
+            // 
+            this.txtZL.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.txtZL.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtZL.Location = new System.Drawing.Point(148, 120);
+            this.txtZL.MaxLength = 2;
+            this.txtZL.Name = "txtZL";
+            this.txtZL.Size = new System.Drawing.Size(28, 20);
+            this.txtZL.TabIndex = 95;
+            this.txtZL.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.toolTip1.SetToolTip(this.txtZL, "Set value for long-click timer (8-bit hex).");
+            this.txtZL.Visible = false;
+            this.txtZL.DoubleClick += new System.EventHandler(this.txtZL_DoubleClick);
+            this.txtZL.TextChanged += new System.EventHandler(this.txtZL_TextChanged);
+            // 
+            // lblZC
+            // 
+            this.lblZC.AutoSize = true;
+            this.lblZC.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
+            this.lblZC.Location = new System.Drawing.Point(118, 124);
+            this.lblZC.Name = "lblZC";
+            this.lblZC.Size = new System.Drawing.Size(21, 13);
+            this.lblZC.TabIndex = 94;
+            this.lblZC.Text = "ZC";
+            this.lblZC.TextAlign = System.Drawing.ContentAlignment.TopRight;
+            this.lblZC.Visible = false;
+            // 
+            // txtZC
+            // 
+            this.txtZC.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.txtZC.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtZC.Location = new System.Drawing.Point(88, 120);
+            this.txtZC.MaxLength = 2;
+            this.txtZC.Name = "txtZC";
+            this.txtZC.Size = new System.Drawing.Size(28, 20);
+            this.txtZC.TabIndex = 93;
+            this.txtZC.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.toolTip1.SetToolTip(this.txtZC, "Set value for double-click timer (8-bit hex).");
+            this.txtZC.Visible = false;
+            this.txtZC.DoubleClick += new System.EventHandler(this.txtZC_DoubleClick);
+            this.txtZC.TextChanged += new System.EventHandler(this.txtZC_TextChanged);
+            // 
+            // chkKnobAdv
+            // 
+            this.chkKnobAdv.AutoSize = true;
+            this.chkKnobAdv.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
+            this.chkKnobAdv.Location = new System.Drawing.Point(6, 122);
+            this.chkKnobAdv.Name = "chkKnobAdv";
+            this.chkKnobAdv.Size = new System.Drawing.Size(56, 17);
+            this.chkKnobAdv.TabIndex = 92;
+            this.chkKnobAdv.Text = "Expert";
+            this.toolTip1.SetToolTip(this.chkKnobAdv, "Check to enable RCP 2");
+            this.chkKnobAdv.UseVisualStyleBackColor = true;
+            this.chkKnobAdv.CheckedChanged += new System.EventHandler(this.chkKnobAdv_CheckedChanged);
+            // 
+            // button7
+            // 
+            this.button7.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold);
+            this.button7.ForeColor = System.Drawing.Color.Blue;
+            this.button7.Location = new System.Drawing.Point(212, 16);
+            this.button7.Name = "button7";
+            this.button7.Size = new System.Drawing.Size(75, 23);
+            this.button7.TabIndex = 91;
+            this.button7.Text = "UpDate";
+            this.button7.UseVisualStyleBackColor = true;
+            // 
+            // cboKnobBDC
+            // 
+            this.cboKnobBDC.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
+            this.cboKnobBDC.FormattingEnabled = true;
+            this.cboKnobBDC.Items.AddRange(new object[] {
+            "Swap Tx Vfo",
+            "RIT On/Off",
+            "XIT On/Off",
+            "Swap A<>B",
+            "Split On/Off"});
+            this.cboKnobBDC.Location = new System.Drawing.Point(203, 87);
+            this.cboKnobBDC.Name = "cboKnobBDC";
+            this.cboKnobBDC.Size = new System.Drawing.Size(90, 21);
+            this.cboKnobBDC.TabIndex = 90;
+            this.toolTip1.SetToolTip(this.cboKnobBDC, "Select Mode B Double-Click function to perform.");
+            this.cboKnobBDC.SelectedIndexChanged += new System.EventHandler(this.cboKnobBDC_SelectedIndexChanged);
+            // 
+            // cboKnobBOn
+            // 
+            this.cboKnobBOn.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
+            this.cboKnobBOn.FormattingEnabled = true;
+            this.cboKnobBOn.Items.AddRange(new object[] {
+            "Tune VFO A",
+            "Tune VFO B",
+            "Tune RIT",
+            "Tune XIT"});
+            this.cboKnobBOn.Location = new System.Drawing.Point(17, 87);
+            this.cboKnobBOn.Name = "cboKnobBOn";
+            this.cboKnobBOn.Size = new System.Drawing.Size(90, 21);
+            this.cboKnobBOn.TabIndex = 89;
+            this.cboKnobBOn.Text = " ";
+            this.toolTip1.SetToolTip(this.cboKnobBOn, "Select Mode B On function to perform.");
+            this.cboKnobBOn.SelectedIndexChanged += new System.EventHandler(this.cboKnobBOn_SelectedIndexChanged);
+            // 
+            // cboKnobBOff
+            // 
+            this.cboKnobBOff.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
+            this.cboKnobBOff.FormattingEnabled = true;
+            this.cboKnobBOff.Items.AddRange(new object[] {
+            "Tune VFO A",
+            "Tune VFO B",
+            "Tune RIT",
+            "Tune XIT"});
+            this.cboKnobBOff.Location = new System.Drawing.Point(110, 87);
+            this.cboKnobBOff.Name = "cboKnobBOff";
+            this.cboKnobBOff.Size = new System.Drawing.Size(90, 21);
+            this.cboKnobBOff.TabIndex = 88;
+            this.toolTip1.SetToolTip(this.cboKnobBOff, "Select Mode B Off function to perform.");
+            this.cboKnobBOff.SelectedIndexChanged += new System.EventHandler(this.cboKnobBOff_SelectedIndexChanged);
+            // 
+            // label221
+            // 
+            this.label221.AutoSize = true;
+            this.label221.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
+            this.label221.Location = new System.Drawing.Point(2, 90);
+            this.label221.Name = "label221";
+            this.label221.Size = new System.Drawing.Size(14, 13);
+            this.label221.TabIndex = 86;
+            this.label221.Text = "B";
+            this.label221.TextAlign = System.Drawing.ContentAlignment.TopRight;
+            // 
+            // label220
+            // 
+            this.label220.AutoSize = true;
+            this.label220.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
+            this.label220.Location = new System.Drawing.Point(2, 64);
+            this.label220.Name = "label220";
+            this.label220.Size = new System.Drawing.Size(14, 13);
+            this.label220.TabIndex = 85;
+            this.label220.Text = "A";
+            this.label220.TextAlign = System.Drawing.ContentAlignment.TopRight;
+            // 
+            // label219
+            // 
+            this.label219.AutoSize = true;
+            this.label219.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
+            this.label219.Location = new System.Drawing.Point(221, 45);
+            this.label219.Name = "label219";
+            this.label219.Size = new System.Drawing.Size(41, 13);
+            this.label219.TabIndex = 84;
+            this.label219.Text = "Dbl-Clk";
+            this.label219.TextAlign = System.Drawing.ContentAlignment.TopRight;
+            // 
+            // label218
+            // 
+            this.label218.AutoSize = true;
+            this.label218.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
+            this.label218.Location = new System.Drawing.Point(137, 45);
+            this.label218.Name = "label218";
+            this.label218.Size = new System.Drawing.Size(21, 13);
+            this.label218.TabIndex = 83;
+            this.label218.Text = "Off";
+            this.label218.TextAlign = System.Drawing.ContentAlignment.TopRight;
+            // 
+            // label217
+            // 
+            this.label217.AutoSize = true;
+            this.label217.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
+            this.label217.Location = new System.Drawing.Point(45, 45);
+            this.label217.Name = "label217";
+            this.label217.Size = new System.Drawing.Size(21, 13);
+            this.label217.TabIndex = 82;
+            this.label217.Text = "On";
+            this.label217.TextAlign = System.Drawing.ContentAlignment.TopRight;
+            // 
+            // cboKnobADC
+            // 
+            this.cboKnobADC.BackColor = System.Drawing.SystemColors.Window;
+            this.cboKnobADC.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
+            this.cboKnobADC.FormattingEnabled = true;
+            this.cboKnobADC.Items.AddRange(new object[] {
+            "Swap Tx Vfo",
+            "RIT On/Off",
+            "XIT On/Off",
+            "Swap A<>B",
+            "Split On/Off"});
+            this.cboKnobADC.Location = new System.Drawing.Point(203, 60);
+            this.cboKnobADC.Name = "cboKnobADC";
+            this.cboKnobADC.Size = new System.Drawing.Size(90, 21);
+            this.cboKnobADC.TabIndex = 81;
+            this.toolTip1.SetToolTip(this.cboKnobADC, "Select Mode A Double-Click function to perform.");
+            this.cboKnobADC.SelectedIndexChanged += new System.EventHandler(this.cboKnobADC_SelectedIndexChanged);
+            // 
+            // cboKnobAOn
+            // 
+            this.cboKnobAOn.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
+            this.cboKnobAOn.FormattingEnabled = true;
+            this.cboKnobAOn.Items.AddRange(new object[] {
+            "Tune VFO A",
+            "Tune VFO B",
+            "Tune RIT",
+            "Tune XIT"});
+            this.cboKnobAOn.Location = new System.Drawing.Point(17, 60);
+            this.cboKnobAOn.Name = "cboKnobAOn";
+            this.cboKnobAOn.Size = new System.Drawing.Size(90, 21);
+            this.cboKnobAOn.TabIndex = 80;
+            this.cboKnobAOn.Text = " ";
+            this.toolTip1.SetToolTip(this.cboKnobAOn, "Select Mode A On function to perform.");
+            this.cboKnobAOn.SelectedIndexChanged += new System.EventHandler(this.cboKnobAOn_SelectedIndexChanged);
+            // 
+            // cboKnobAOff
+            // 
+            this.cboKnobAOff.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
+            this.cboKnobAOff.FormattingEnabled = true;
+            this.cboKnobAOff.Items.AddRange(new object[] {
+            "Tune VFO A",
+            "Tune VFO B",
+            "Tune RIT",
+            "Tune XIT"});
+            this.cboKnobAOff.Location = new System.Drawing.Point(110, 60);
+            this.cboKnobAOff.Name = "cboKnobAOff";
+            this.cboKnobAOff.Size = new System.Drawing.Size(90, 21);
+            this.cboKnobAOff.TabIndex = 79;
+            this.toolTip1.SetToolTip(this.cboKnobAOff, "Select Mode A Off function to perform.");
+            this.cboKnobAOff.SelectedIndexChanged += new System.EventHandler(this.cboKnobAOff_SelectedIndexChanged);
+            // 
+            // label216
+            // 
+            this.label216.AutoSize = true;
+            this.label216.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
+            this.label216.Location = new System.Drawing.Point(150, 22);
+            this.label216.Name = "label216";
+            this.label216.Size = new System.Drawing.Size(50, 13);
+            this.label216.TabIndex = 78;
+            this.label216.Text = "Com Port";
+            this.label216.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
+            // cboKnobPort
+            // 
+            this.cboKnobPort.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
+            this.cboKnobPort.FormattingEnabled = true;
+            this.cboKnobPort.Location = new System.Drawing.Point(79, 16);
+            this.cboKnobPort.Name = "cboKnobPort";
+            this.cboKnobPort.Size = new System.Drawing.Size(69, 21);
+            this.cboKnobPort.TabIndex = 75;
+            this.toolTip1.SetToolTip(this.cboKnobPort, "Serial Port for knob (see docs).");
+            this.cboKnobPort.SelectedIndexChanged += new System.EventHandler(this.cboKnobPort_SelectedIndexChanged);
+            // 
+            // chkKnobEnab
+            // 
+            this.chkKnobEnab.AutoSize = true;
+            this.chkKnobEnab.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
+            this.chkKnobEnab.Location = new System.Drawing.Point(6, 18);
+            this.chkKnobEnab.Name = "chkKnobEnab";
+            this.chkKnobEnab.Size = new System.Drawing.Size(65, 17);
+            this.chkKnobEnab.TabIndex = 76;
+            this.chkKnobEnab.Text = "Enabled";
+            this.toolTip1.SetToolTip(this.chkKnobEnab, "Check to enable RCP 2");
+            this.chkKnobEnab.UseVisualStyleBackColor = true;
+            this.chkKnobEnab.CheckedChanged += new System.EventHandler(this.chkKnobEnab_CheckedChanged);
             // 
             // groupBox7
             // 
@@ -2205,9 +2539,7 @@ namespace DataDecoder
             this.groupBox7.Controls.Add(this.cboRCP4Rotor);
             this.groupBox7.Controls.Add(this.cboRCP3Rotor);
             this.groupBox7.Controls.Add(this.cboRCP2Rotor);
-            this.groupBox7.Controls.Add(this.label40);
             this.groupBox7.Controls.Add(this.chkRCP2);
-            this.groupBox7.Controls.Add(this.txtRCP);
             this.groupBox7.Controls.Add(this.cboRCP2);
             this.groupBox7.Controls.Add(this.chkRCP4IF);
             this.groupBox7.Controls.Add(this.label17);
@@ -2222,9 +2554,9 @@ namespace DataDecoder
             this.groupBox7.Controls.Add(this.chkRCP2DisPol);
             this.groupBox7.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold);
             this.groupBox7.ForeColor = System.Drawing.Color.Navy;
-            this.groupBox7.Location = new System.Drawing.Point(5, 15);
+            this.groupBox7.Location = new System.Drawing.Point(5, 7);
             this.groupBox7.Name = "groupBox7";
-            this.groupBox7.Size = new System.Drawing.Size(403, 225);
+            this.groupBox7.Size = new System.Drawing.Size(416, 141);
             this.groupBox7.TabIndex = 66;
             this.groupBox7.TabStop = false;
             this.groupBox7.Text = "Radio Control Programs";
@@ -2307,16 +2639,6 @@ namespace DataDecoder
             this.toolTip1.SetToolTip(this.cboRCP2Rotor, "Rotor Port for RCP 2");
             this.cboRCP2Rotor.SelectedIndexChanged += new System.EventHandler(this.cboRCP2Rotor_SelectedIndexChanged);
             // 
-            // label40
-            // 
-            this.label40.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
-            this.label40.Location = new System.Drawing.Point(150, 205);
-            this.label40.Name = "label40";
-            this.label40.Size = new System.Drawing.Size(100, 13);
-            this.label40.TabIndex = 64;
-            this.label40.Text = "Program Memo";
-            this.label40.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-            // 
             // chkRCP2
             // 
             this.chkRCP2.AutoSize = true;
@@ -2329,18 +2651,6 @@ namespace DataDecoder
             this.toolTip1.SetToolTip(this.chkRCP2, "Check to enable RCP 2");
             this.chkRCP2.UseVisualStyleBackColor = true;
             this.chkRCP2.CheckedChanged += new System.EventHandler(this.chkRCP2_CheckedChanged);
-            // 
-            // txtRCP
-            // 
-            this.txtRCP.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
-            this.txtRCP.Location = new System.Drawing.Point(119, 141);
-            this.txtRCP.Multiline = true;
-            this.txtRCP.Name = "txtRCP";
-            this.txtRCP.Size = new System.Drawing.Size(164, 61);
-            this.txtRCP.TabIndex = 63;
-            this.txtRCP.Text = "RCP1 Commander\r\nRCP2 MixW\r\nRCP3 WriteLog\r\nRCP4 DXBase";
-            this.toolTip1.SetToolTip(this.txtRCP, "Use this to keep track of which port your programs are on.");
-            this.txtRCP.TextChanged += new System.EventHandler(this.txtRCP_TextChanged);
             // 
             // cboRCP2
             // 
@@ -2488,6 +2798,31 @@ namespace DataDecoder
             this.toolTip1.SetToolTip(this.chkRCP2DisPol, "Check to disable polling for RCP 2");
             this.chkRCP2DisPol.UseVisualStyleBackColor = true;
             this.chkRCP2DisPol.CheckedChanged += new System.EventHandler(this.chkRCP2DisPol_CheckedChanged);
+            // 
+            // txtRCP
+            // 
+            this.txtRCP.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
+            this.txtRCP.Location = new System.Drawing.Point(312, 162);
+            this.txtRCP.Multiline = true;
+            this.txtRCP.Name = "txtRCP";
+            this.txtRCP.ScrollBars = System.Windows.Forms.ScrollBars.Horizontal;
+            this.txtRCP.Size = new System.Drawing.Size(112, 121);
+            this.txtRCP.TabIndex = 63;
+            this.txtRCP.Text = "RCP1 Commander\r\nRCP2 MixW\r\nRCP3 WriteLog\r\nRCP4 DXBase";
+            this.toolTip1.SetToolTip(this.txtRCP, "Use this to keep track of which port your programs are on.");
+            this.txtRCP.WordWrap = false;
+            this.txtRCP.TextChanged += new System.EventHandler(this.txtRCP_TextChanged);
+            // 
+            // label40
+            // 
+            this.label40.AutoSize = true;
+            this.label40.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
+            this.label40.Location = new System.Drawing.Point(330, 286);
+            this.label40.Name = "label40";
+            this.label40.Size = new System.Drawing.Size(77, 13);
+            this.label40.TabIndex = 64;
+            this.label40.Text = "Program Notes";
+            this.label40.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // tabWatt
             // 
@@ -11859,45 +12194,45 @@ namespace DataDecoder
             // label215
             // 
             this.label215.AutoSize = true;
-            this.label215.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.25F, System.Drawing.FontStyle.Bold);
+            this.label215.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold);
             this.label215.ForeColor = System.Drawing.Color.Blue;
-            this.label215.Location = new System.Drawing.Point(348, 52);
+            this.label215.Location = new System.Drawing.Point(210, 39);
             this.label215.Name = "label215";
-            this.label215.Size = new System.Drawing.Size(38, 13);
+            this.label215.Size = new System.Drawing.Size(64, 13);
             this.label215.TabIndex = 265;
-            this.label215.Text = "PTT b";
+            this.label215.Text = "AmpKey B";
             // 
             // txtTxB
             // 
-            this.txtTxB.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtTxB.Location = new System.Drawing.Point(388, 49);
+            this.txtTxB.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtTxB.Location = new System.Drawing.Point(193, 35);
             this.txtTxB.Name = "txtTxB";
-            this.txtTxB.Size = new System.Drawing.Size(20, 20);
+            this.txtTxB.Size = new System.Drawing.Size(15, 20);
             this.txtTxB.TabIndex = 264;
             this.txtTxB.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.toolTip1.SetToolTip(this.txtTxB, "Enter VFO B TX control line to use (1, 2, 3).");
+            this.toolTip1.SetToolTip(this.txtTxB, "Enter VFO B TX control line to use for PTT (1, 2, 3).");
             this.txtTxB.TextChanged += new System.EventHandler(this.txtTxB_TextChanged);
             // 
             // label214
             // 
             this.label214.AutoSize = true;
-            this.label214.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.25F, System.Drawing.FontStyle.Bold);
+            this.label214.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold);
             this.label214.ForeColor = System.Drawing.Color.Firebrick;
-            this.label214.Location = new System.Drawing.Point(201, 52);
+            this.label214.Location = new System.Drawing.Point(210, 15);
             this.label214.Name = "label214";
-            this.label214.Size = new System.Drawing.Size(38, 13);
+            this.label214.Size = new System.Drawing.Size(64, 13);
             this.label214.TabIndex = 263;
-            this.label214.Text = "PTT a";
+            this.label214.Text = "AmpKey A";
             // 
             // txtTxA
             // 
-            this.txtTxA.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtTxA.Location = new System.Drawing.Point(178, 49);
+            this.txtTxA.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtTxA.Location = new System.Drawing.Point(193, 11);
             this.txtTxA.Name = "txtTxA";
-            this.txtTxA.Size = new System.Drawing.Size(21, 20);
+            this.txtTxA.Size = new System.Drawing.Size(15, 20);
             this.txtTxA.TabIndex = 262;
             this.txtTxA.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.toolTip1.SetToolTip(this.txtTxA, "Enter VFO A TX control line to use (1, 2, 3).");
+            this.toolTip1.SetToolTip(this.txtTxA, "Enter VFO A TX control line to use for PTT (1, 2, 3).");
             this.txtTxA.TextChanged += new System.EventHandler(this.txtTxA_TextChanged);
             // 
             // label202
@@ -12137,7 +12472,7 @@ namespace DataDecoder
             // chk1Amp
             // 
             this.chk1Amp.AutoSize = true;
-            this.chk1Amp.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.25F, System.Drawing.FontStyle.Bold);
+            this.chk1Amp.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold);
             this.chk1Amp.ForeColor = System.Drawing.Color.Navy;
             this.chk1Amp.Location = new System.Drawing.Point(9, 42);
             this.chk1Amp.Name = "chk1Amp";
@@ -12162,18 +12497,18 @@ namespace DataDecoder
             // label203
             // 
             this.label203.AutoSize = true;
-            this.label203.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.25F, System.Drawing.FontStyle.Bold);
+            this.label203.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold);
             this.label203.ForeColor = System.Drawing.Color.Blue;
-            this.label203.Location = new System.Drawing.Point(254, 37);
+            this.label203.Location = new System.Drawing.Point(367, 43);
             this.label203.Name = "label203";
-            this.label203.Size = new System.Drawing.Size(39, 13);
+            this.label203.Size = new System.Drawing.Size(41, 13);
             this.label203.TabIndex = 234;
             this.label203.Text = "LPT 2";
             // 
             // txtLPT2
             // 
-            this.txtLPT2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtLPT2.Location = new System.Drawing.Point(252, 15);
+            this.txtLPT2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtLPT2.Location = new System.Drawing.Point(323, 39);
             this.txtLPT2.Name = "txtLPT2";
             this.txtLPT2.Size = new System.Drawing.Size(42, 20);
             this.txtLPT2.TabIndex = 233;
@@ -12185,8 +12520,9 @@ namespace DataDecoder
             // 
             this.btnSaveSO2R.AutoSize = true;
             this.btnSaveSO2R.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnSaveSO2R.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold);
             this.btnSaveSO2R.ForeColor = System.Drawing.Color.Navy;
-            this.btnSaveSO2R.Location = new System.Drawing.Point(323, 14);
+            this.btnSaveSO2R.Location = new System.Drawing.Point(318, 11);
             this.btnSaveSO2R.Name = "btnSaveSO2R";
             this.btnSaveSO2R.Size = new System.Drawing.Size(96, 23);
             this.btnSaveSO2R.TabIndex = 230;
@@ -12198,11 +12534,11 @@ namespace DataDecoder
             // label184
             // 
             this.label184.AutoSize = true;
-            this.label184.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.25F, System.Drawing.FontStyle.Bold);
+            this.label184.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold);
             this.label184.ForeColor = System.Drawing.Color.Navy;
-            this.label184.Location = new System.Drawing.Point(100, 38);
+            this.label184.Location = new System.Drawing.Point(103, 34);
             this.label184.Name = "label184";
-            this.label184.Size = new System.Drawing.Size(62, 13);
+            this.label184.Size = new System.Drawing.Size(65, 13);
             this.label184.TabIndex = 228;
             this.label184.Text = "TX Switch";
             // 
@@ -12296,7 +12632,7 @@ namespace DataDecoder
             this.cboSwPort.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.25F, System.Drawing.FontStyle.Bold);
             this.cboSwPort.ForeColor = System.Drawing.Color.Firebrick;
             this.cboSwPort.FormattingEnabled = true;
-            this.cboSwPort.Location = new System.Drawing.Point(102, 14);
+            this.cboSwPort.Location = new System.Drawing.Point(103, 11);
             this.cboSwPort.Name = "cboSwPort";
             this.cboSwPort.Size = new System.Drawing.Size(68, 21);
             this.cboSwPort.TabIndex = 227;
@@ -12330,7 +12666,7 @@ namespace DataDecoder
             // chkSoEnab
             // 
             this.chkSoEnab.AutoSize = true;
-            this.chkSoEnab.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.25F, System.Drawing.FontStyle.Bold);
+            this.chkSoEnab.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold);
             this.chkSoEnab.ForeColor = System.Drawing.Color.Navy;
             this.chkSoEnab.Location = new System.Drawing.Point(9, 22);
             this.chkSoEnab.Name = "chkSoEnab";
@@ -13068,7 +13404,7 @@ namespace DataDecoder
             this.txtLPT1_10.Size = new System.Drawing.Size(42, 18);
             this.txtLPT1_10.TabIndex = 152;
             this.txtLPT1_10.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.toolTip1.SetToolTip(this.txtLPT1_10, "LPT port number (decimal) for VFO A band and data control.");
+            this.toolTip1.SetToolTip(this.txtLPT1_10, "LPT port number (decimal) to use for VFO A band and data control.");
             this.txtLPT1_10.TextChanged += new System.EventHandler(this.grpSo2R_TextChanged);
             // 
             // label179
@@ -13158,7 +13494,7 @@ namespace DataDecoder
             this.txtLPT1_9.Size = new System.Drawing.Size(42, 18);
             this.txtLPT1_9.TabIndex = 144;
             this.txtLPT1_9.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.toolTip1.SetToolTip(this.txtLPT1_9, "LPT port number (decimal) for VFO A band and data control.");
+            this.toolTip1.SetToolTip(this.txtLPT1_9, "LPT port number (decimal) to use for VFO A band and data control.");
             this.txtLPT1_9.TextChanged += new System.EventHandler(this.grpSo2R_TextChanged);
             // 
             // label180
@@ -13248,7 +13584,7 @@ namespace DataDecoder
             this.txtLPT1_8.Size = new System.Drawing.Size(42, 18);
             this.txtLPT1_8.TabIndex = 136;
             this.txtLPT1_8.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.toolTip1.SetToolTip(this.txtLPT1_8, "LPT port number (decimal) for VFO A band and data control.");
+            this.toolTip1.SetToolTip(this.txtLPT1_8, "LPT port number (decimal) to use for VFO A band and data control.");
             this.txtLPT1_8.TextChanged += new System.EventHandler(this.grpSo2R_TextChanged);
             // 
             // label181
@@ -13338,7 +13674,7 @@ namespace DataDecoder
             this.txtLPT1_7.Size = new System.Drawing.Size(42, 18);
             this.txtLPT1_7.TabIndex = 128;
             this.txtLPT1_7.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.toolTip1.SetToolTip(this.txtLPT1_7, "LPT port number (decimal) for VFO A band and data control.");
+            this.toolTip1.SetToolTip(this.txtLPT1_7, "LPT port number (decimal) to use for VFO A band and data control.");
             this.txtLPT1_7.TextChanged += new System.EventHandler(this.grpSo2R_TextChanged);
             // 
             // label182
@@ -13428,7 +13764,7 @@ namespace DataDecoder
             this.txtLPT1_6.Size = new System.Drawing.Size(42, 18);
             this.txtLPT1_6.TabIndex = 120;
             this.txtLPT1_6.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.toolTip1.SetToolTip(this.txtLPT1_6, "LPT port number (decimal) for VFO A band and data control.");
+            this.toolTip1.SetToolTip(this.txtLPT1_6, "LPT port number (decimal) to use for VFO A band and data control.");
             this.txtLPT1_6.TextChanged += new System.EventHandler(this.grpSo2R_TextChanged);
             // 
             // label178
@@ -13506,7 +13842,7 @@ namespace DataDecoder
             this.txtLPT1_5.Size = new System.Drawing.Size(42, 18);
             this.txtLPT1_5.TabIndex = 112;
             this.txtLPT1_5.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.toolTip1.SetToolTip(this.txtLPT1_5, "LPT port number (decimal) for VFO A band and data control.");
+            this.toolTip1.SetToolTip(this.txtLPT1_5, "LPT port number (decimal) to use for VFO A band and data control.");
             this.txtLPT1_5.TextChanged += new System.EventHandler(this.grpSo2R_TextChanged);
             // 
             // label177
@@ -13596,7 +13932,7 @@ namespace DataDecoder
             this.txtLPT1_4.Size = new System.Drawing.Size(42, 18);
             this.txtLPT1_4.TabIndex = 104;
             this.txtLPT1_4.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.toolTip1.SetToolTip(this.txtLPT1_4, "LPT port number (decimal) for VFO A band and data control.");
+            this.toolTip1.SetToolTip(this.txtLPT1_4, "LPT port number (decimal) to use for VFO A band and data control.");
             this.txtLPT1_4.TextChanged += new System.EventHandler(this.grpSo2R_TextChanged);
             // 
             // label176
@@ -13686,7 +14022,7 @@ namespace DataDecoder
             this.txtLPT1_3.Size = new System.Drawing.Size(42, 18);
             this.txtLPT1_3.TabIndex = 96;
             this.txtLPT1_3.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.toolTip1.SetToolTip(this.txtLPT1_3, "LPT port number (decimal) for VFO A band and data control.");
+            this.toolTip1.SetToolTip(this.txtLPT1_3, "LPT port number (decimal) to use for VFO A band and data control.");
             this.txtLPT1_3.TextChanged += new System.EventHandler(this.grpSo2R_TextChanged);
             // 
             // label175
@@ -13776,7 +14112,7 @@ namespace DataDecoder
             this.txtLPT1_2.Size = new System.Drawing.Size(42, 18);
             this.txtLPT1_2.TabIndex = 88;
             this.txtLPT1_2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.toolTip1.SetToolTip(this.txtLPT1_2, "LPT port number (decimal) for VFO A band and data control.");
+            this.toolTip1.SetToolTip(this.txtLPT1_2, "LPT port number (decimal) to use for VFO A band and data control.");
             this.txtLPT1_2.TextChanged += new System.EventHandler(this.grpSo2R_TextChanged);
             // 
             // label168
@@ -13921,7 +14257,7 @@ namespace DataDecoder
             this.txtLPT1_1.Size = new System.Drawing.Size(42, 18);
             this.txtLPT1_1.TabIndex = 74;
             this.txtLPT1_1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.toolTip1.SetToolTip(this.txtLPT1_1, "LPT port number (decimal) for VFO A band and data control.");
+            this.toolTip1.SetToolTip(this.txtLPT1_1, "LPT port number (decimal) to use for VFO A band and data control.");
             this.txtLPT1_1.TextChanged += new System.EventHandler(this.grpSo2R_TextChanged);
             // 
             // label166
@@ -14959,6 +15295,11 @@ namespace DataDecoder
             this.SwitchPort.RtsEnable = true;
             this.SwitchPort.PinChanged += new System.IO.Ports.SerialPinChangedEventHandler(this.PinChanged);
             // 
+            // KnobPort
+            // 
+            this.KnobPort.RtsEnable = true;
+            this.KnobPort.DataReceived += new System.IO.Ports.SerialDataReceivedEventHandler(this.KnobPort_DataReceived);
+            // 
             // Setup
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -15018,6 +15359,9 @@ namespace DataDecoder
             this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dg1)).EndInit();
             this.tabRCP.ResumeLayout(false);
+            this.tabRCP.PerformLayout();
+            this.grpTKnob.ResumeLayout(false);
+            this.grpTKnob.PerformLayout();
             this.groupBox7.ResumeLayout(false);
             this.groupBox7.PerformLayout();
             this.tabWatt.ResumeLayout(false);
@@ -15132,7 +15476,6 @@ namespace DataDecoder
         private System.Windows.Forms.TabPage tabPorts;
         private System.Windows.Forms.GroupBox grpBox2;
         private System.Windows.Forms.GroupBox groupBox5;
-        private System.Windows.Forms.ComboBox cboDevice;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.CheckBox chkDevice;
         private System.Windows.Forms.GroupBox grpLPT;
@@ -15144,8 +15487,6 @@ namespace DataDecoder
         private System.Windows.Forms.TabPage tabBCD;
         private System.Windows.Forms.CheckBox chkDev0;
         private System.Windows.Forms.DataGridView dg1;
-        private System.Windows.Forms.TextBox Dev0;
-        private System.Windows.Forms.Label label27;
         private System.Windows.Forms.GroupBox grpBox1;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.ComboBox cboCAT;
@@ -16214,6 +16555,31 @@ namespace DataDecoder
         private TextBox txtTxB;
         private Label label214;
         private TextBox txtTxA;
+        private GroupBox grpTKnob;
+        private Label label216;
+        private ComboBox cboKnobPort;
+        public CheckBox chkKnobEnab;
+        private Label label219;
+        private Label label218;
+        private Label label217;
+        private ComboBox cboKnobADC;
+        private ComboBox cboKnobAOn;
+        private ComboBox cboKnobAOff;
+        private System.IO.Ports.SerialPort KnobPort;
+        private Label label221;
+        private Label label220;
+        private ComboBox cboKnobBDC;
+        private ComboBox cboKnobBOn;
+        private ComboBox cboKnobBOff;
+        private TextBox Dev0;
+        private Button button7;
+        public CheckBox chkKnobAdv;
+        private Label lblZC;
+        private TextBox txtZC;
+        private Label lblZR;
+        private TextBox txtZR;
+        private Label lblZL;
+        private TextBox txtZL;
 
     }
 }
