@@ -58,6 +58,8 @@ GOTO LOOP
 SET DIRECTORY=c:\altera\91\qprogrammer\bin\quartus_pgm
 GOTO LOOP
 
+
+
 :: prompt the user for the file to use
 :LOOP
 ECHO.
@@ -73,7 +75,8 @@ ECHO H. Program using Mercury_v2.7
 ECHO I. Program using Mercury_v2.8
 ECHO J. Program using Mercury_v2.9a
 ECHO K. Program using Mercury_Apollo_Test ** not for general use!
-
+ECHO.
+ECHO Z. Mercury Test (carrier at 7.68MHz)
 ECHO Q. Quit
 ECHO.
 SET Choice=
@@ -93,6 +96,7 @@ IF /I '%Choice%'=='H' GOTO ItemH
 IF /I '%Choice%'=='I' GOTO ItemI
 IF /I '%Choice%'=='J' GOTO ItemJ
 IF /I '%Choice%'=='K' GOTO ItemK
+IF /I '%Choice%'=='Z' GOTO ItemZ
 
 IF /I '%Choice%'=='Q' GOTO End
 ECHO "%Choice%" is not valid. Please try again.
@@ -131,6 +135,10 @@ GOTO CONTINUE
 :ItemK
 %DIRECTORY% -c USB-Blaster mercury_apollo_test.cdf
 GOTO CONTINUE
+:ItemZ
+%DIRECTORY% -c USB-Blaster mercury_test.cdf
+GOTO CONTINUE
+
 :CONTINUE
 PAUSE
 CLS
