@@ -1468,7 +1468,7 @@ namespace DataDecoder
         int y = 0;
         private void Setup_FormClosing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            if (bMacChg)
+            if (bMacChg)    // see if macro was changed and not saved.
             {
                 DialogResult result;
                 result = MessageBox.Show(this,
@@ -1482,19 +1482,22 @@ namespace DataDecoder
                 if (result == DialogResult.No)
                 { e.Cancel = true; return; }
             }
-            if (bSo2rChg)
+            // see if SO2R data was changed and not saved.
+            if (bSo2rChg && chkSoEnab.Checked && !bClosePass1) 
             {
                 DialogResult result;
                 result = MessageBox.Show(this,
                     "Are you sure you want to exit?\n\n" +
-                    "SO2R data has been changed and not saved!\n\n" +
-                    "If you want to save your work press NO and\n" +
-                    "return to the SO2R tab and save your work.",
+                    "SO2R data has been changed and has not saved!\n\n" +
+                    "If you want to save your work press NO, return\n" +
+                    "to the SO2R tab, save your settings and then exit.",
                     "SO2R Data UnSaved", MessageBoxButtons.YesNo,
                     MessageBoxIcon.Exclamation,
                     MessageBoxDefaultButton.Button2);
                 if (result == DialogResult.No)
-                { e.Cancel = true; return; }
+                { e.Cancel = true; bClosePass1 = false; return; }
+                else
+                { bClosePass1 = true; } // set to true if 1st pass to close
             }
             try
             {
@@ -8512,18 +8515,18 @@ namespace DataDecoder
 
         #region # Enums, Signatures & Vars #
 
-//        IntPtr ptr;
         int lpt1 = 0; 
         int lpt2 = 0;
-        bool bSo2rChg = false;
+        bool bSo2rChg = false;            // SP2R data has changed
+        bool bClosePass1 = false;         // 1stss thru form close routine
         string dataH = "0", dataL = "0";  // data word for LPT1
         string ctrlH = "0", ctrlL = "0";  // control word for LPT2
         string TXa = "0", TXb = "0";      // TX ant for vfo a/b
-        int ZZSW = 0;               // active tx vfo
-        int LastZZSW = 0;               // last active tx vfo a/b
+        int ZZSW = 0;                     // active tx vfo
+        int LastZZSW = 0;                 // last active tx vfo a/b
         bool inhibA = false;
         bool inhibB = false;
-        //        uint Control;
+
         public const short FILE_ATTRIBUTE_NORMAL = 0x80;
         public const short INVALID_HANDLE_VALUE = -1;
         public const uint GENERIC_READ = 0x80000000;
@@ -9229,10 +9232,6 @@ namespace DataDecoder
                     //return;
                 }
             }
-            //else
-            //{
-            //    chkSoEnab.Checked = false;
-            //}
             set.cboSwPort = cboSwPort.SelectedIndex;
             set.Save();
         }
@@ -10194,7 +10193,6 @@ namespace DataDecoder
         #region SteppIR
 
         // The Home SteppIR button was pressed
-        //        public static string notiMsg;
         public void btnHome_Click(object sender, EventArgs e)
         {
             if (chkStep.Checked)
@@ -10270,77 +10268,84 @@ namespace DataDecoder
             //loop thru the buffer and find matches
             for (Match m = rex.Match(StepBufr); m.Success; m = m.NextMatch())
             {
-                StepMsg = m.Value;
-                // remove the match from the buffer if found
-                StepBufr = StepBufr.Replace(m.Value, "");
-                if (data.Length > 7)
+                try
                 {
-                    string Fh = data[3].ToString("X2");
-                    string Fm = data[4].ToString("X2");
-                    string Fl = data[5].ToString("X2");
-                    string mot = data[6].ToString();
-                    string dir = data[7].ToString();
-                    // write steppir freq to rotor tab label
-                    string hexValue = Fh + Fm + Fl;
-                    int xfreq = int.Parse(hexValue, System.Globalization.NumberStyles.HexNumber) / 10;
-                    string sfreq = xfreq.ToString();
-                    double freq = 0.0;
-                    if (xfreq > 99999)
+                    StepMsg = m.Value;
+                    // remove the match from the buffer if found
+                    StepBufr = StepBufr.Replace(m.Value, "");
+                    if (data.Length > 7)
                     {
-                        freq = Convert.ToDouble(sfreq.Substring(0, 2) + "." + sfreq.Substring(2, 4));
-                        SetStepFreq(freq.ToString("0.00", CultureInfo.InvariantCulture));
-                    }
-                    else if (xfreq > 9999 && xfreq < 99999)
-                    {
-                        freq = Convert.ToDouble(sfreq.Substring(0, 1) + "." + sfreq.Substring(1, 4));
-                        SetStepFreq(freq.ToString("0.00", CultureInfo.InvariantCulture));
-                    }
-                    else
-                    {
-                        SetStepFreq("----");
-                    }
-
-
-
-                    // See if motor(s) moving
-                    if (mot == "0")
-                    {   // antenna is NOT moving, but a freq update has been sent to the
-                        // controller that may cause movement. We are waiting for StepCtr
-                        // reps to see if it will start. See the Reps var for the delay count.
-                        WriteToPort("ZZTI0;", iSleep);  // turn off transmit inhibit
-                        StepCtr -= 1; // decrement the reps counter
-                        if (StepCtr <= 0)
+                        string Fh = data[3].ToString("X2");
+                        string Fm = data[4].ToString("X2");
+                        string Fl = data[5].ToString("X2");
+                        string mot = data[6].ToString();
+                        string dir = data[7].ToString();
+                        // write steppir freq to rotor tab label
+                        string hexValue = Fh + Fm + Fl;
+                        int xfreq = int.Parse(hexValue, System.Globalization.NumberStyles.HexNumber) / 10;
+                        string sfreq = xfreq.ToString();
+                        double freq = 0.0;
+                        if (xfreq > 99999)
                         {
-                            StepTimer.Enabled = false;
-                            ShowAnt(false);
+                            freq = Convert.ToDouble(sfreq.Substring(0, 2) + "." + sfreq.Substring(2, 4));
+                            SetStepFreq(freq.ToString("0.00", CultureInfo.InvariantCulture));
+                        }
+                        else if (xfreq > 9999 && xfreq < 99999)
+                        {
+                            freq = Convert.ToDouble(sfreq.Substring(0, 1) + "." + sfreq.Substring(1, 4));
+                            SetStepFreq(freq.ToString("0.00", CultureInfo.InvariantCulture));
+                        }
+                        else
+                        {
+                            SetStepFreq("----");
+                        }
 
-                            if (bCal)
-                            {   // if the calibration is finished send freq data to the antenna
-                                StepPortMsg(lastFreq, "00", "52");
-                                Thread.Sleep(100);
-                                StepData.Write("?A\r");
-                                StepTimer.Enabled = true;
-                                StepCtr = reps; // counter to allow for delay
-                                bCal = false;
+                        // See if motor(s) moving
+                        if (mot == "0")
+                        {   // antenna is NOT moving, but a freq update has been sent to the
+                            // controller that may cause movement. We are waiting for StepCtr
+                            // reps to see if it will start. See the Reps var for the delay count.
+                            WriteToPort("ZZTI0;", iSleep);  // turn off transmit inhibit
+                            StepCtr -= 1; // decrement the reps counter
+                            if (StepCtr <= 0)
+                            {
+                                StepTimer.Enabled = false;
+                                ShowAnt(false);
+
+                                if (bCal)
+                                {   // if the calibration is finished send freq data to the antenna
+                                    StepPortMsg(lastFreq, "00", "52");
+                                    Thread.Sleep(100);
+                                    StepData.Write("?A\r");
+                                    StepTimer.Enabled = true;
+                                    StepCtr = reps; // counter to allow for delay
+                                    bCal = false;
+                                }
                             }
                         }
-                    }
-                    // when SDA100 off; d = power interrupt, \a = elements home
-                    else if (mot == "d" || mot == "\a")
-                    {   // controller has had a power interruption
-                        WriteToPort("ZZTI0;", iSleep);  // turn off transmit inhibit
-                        StepCtr -= 1; // decrement the reps counter
-                        if (StepCtr == 0)
-                        {
-                            StepTimer.Enabled = false;
-                            ShowAnt(false);
+                        // when SDA100 off; d = power interrupt, \a = elements home
+                        else if (mot == "d" || mot == "\a")
+                        {   // controller has had a power interruption
+                            WriteToPort("ZZTI0;", iSleep);  // turn off transmit inhibit
+                            StepCtr -= 1; // decrement the reps counter
+                            if (StepCtr == 0)
+                            {
+                                StepTimer.Enabled = false;
+                                ShowAnt(false);
+                            }
+                        }
+                        else
+                        {   // antenna is moving
+                            WriteToPort("ZZTI1;", iSleep);  // turn on transmit inhibit
+                            ShowAnt(true);
                         }
                     }
-                    else
-                    {   // antenna is moving
-                        WriteToPort("ZZTI1;", iSleep);  // turn on transmit inhibit
-                        ShowAnt(true);
-                    }
+                }
+                catch (Exception ex)
+                {
+                    bool bReturnLog = false;
+                    bReturnLog = ErrorLog.ErrorRoutine(false, enableErrorLog, ex);
+                    if (false == bReturnLog) MessageBox.Show("Unable to write to log");
                 }
             }
         }
@@ -10904,8 +10909,8 @@ namespace DataDecoder
                                 { WriteToPort(kCATdcOn, iSleep); }
                                 else
                                 { WriteToPort(kCATdcOff, iSleep);
-                                if (kCATdcOff.Substring(0, 4) == "ZZRC") RITfrq = 0;
-                                if (kCATdcOff.Substring(0, 4) == "ZZXC") XITfrq = 0;
+                                //if (kCATdcOff.Substring(0, 4) == "ZZRC") RITfrq = 0;
+                                //if (kCATdcOff.Substring(0, 4) == "ZZXC") XITfrq = 0;
                                 }
                                 break;
                             case "D": //tune down
@@ -10947,6 +10952,14 @@ namespace DataDecoder
                             case "S": //knob single click
                                 kFlags ^= 0x10; // toggle single click bit
                                 WriteFlags(); WriteLED();
+                                //if (kCATup.Substring(0, 4) == "ZZRF")
+                                //{
+                                //    RITfrq = 0; WriteToPort("ZZXC;ZZXS0;ZZRT1;", iSleep);
+                                //}
+                                //else if (kCATup.Substring(0, 4) == "ZZXF")
+                                //{
+                                //    XITfrq = 0; WriteToPort("ZZRC;ZZRT0;ZZXS1;", iSleep);
+                                //}
                                 break;
                             case "U": //tune up
                                 if (kCATup == "ZZSB;" && sCmd.Length > 3)
@@ -11137,9 +11150,9 @@ namespace DataDecoder
 
         void WriteLED()
         {
-            string led1 = (kFlags >> 4 & 1).ToString();
-            string led2 = (kFlags >> 5 & 1).ToString();
-            string led3 = (kFlags >> 6 & 1).ToString();
+            string led2 = (kFlags >> 4 & 1).ToString(); // single click
+            string led3 = (kFlags >> 5 & 1).ToString(); // double click
+            string led1 = (kFlags >> 6 & 1).ToString(); // long click
             string led = "I" + led1 + led2 + led3 + ";";
             KnobPort.Write(led);
         }
@@ -11181,37 +11194,32 @@ namespace DataDecoder
                 }
             }
             GetCat();
-            //Console.WriteLine("ActIdx:\t{0}", ActIdx);
-            //Console.WriteLine("ActIdxDC:\t{0}", ActIdxDC);
-
         }
-
+        //Get the CAT commands for the active controls
         void GetCat()
         {
-            switch (ActIdx)
+            switch (ActIdx) // active single click control
             {
                 case 0: kCATup = "ZZSB;"; kCATdn = "ZZSA;"; //VFO A
+                    WriteToPort("ZZXC;ZZXS0;ZZRC;ZZRT0;", iSleep);
                     break;
                 case 1: kCATup = "ZZSH;"; kCATdn = "ZZSG;"; //VFO B
+                    WriteToPort("ZZXC;ZZXS0;ZZRC;ZZRT0;", iSleep);
                     break;
                 case 2: kCATup = "ZZRF"; kCATdn = "ZZRF"; //TUNE RIT
+                        RITfrq = 0; WriteToPort("ZZXC;ZZXS0;ZZRT1;", iSleep);
                     break;
                 case 3: kCATup = "ZZXF"; kCATdn = "ZZXF"; //TUNE XIT
+                        XITfrq = 0; WriteToPort("ZZRC;ZZRT0;ZZXS1;", iSleep);
                     break;
             }
-            switch (ActIdxDC)
+            switch (ActIdxDC) // active double click control
             {
                 case 0: kCATdcOn = "ZZSW1;"; kCATdcOff = "ZZSW0;"; //Toggle TX VFO
                     break;
-                case 1: kCATdcOn = "ZZRT1;"; kCATdcOff = "ZZRC;ZZRT0;"; //Toggle RIT
-                    if (!Convert.ToBoolean(kFlags & 0x20)) RITfrq = 0;
+                case 1: kCATdcOn = "ZZVS2;"; kCATdcOff = "ZZVS2;"; //Exchange A<>B
                     break;
-                case 2: kCATdcOn = "ZZXS1;"; kCATdcOff = "ZZXC;ZZXS0;"; //Toggle XIT 
-                    if (!Convert.ToBoolean(kFlags & 0x20)) XITfrq = 0;
-                    break;
-                case 3: kCATdcOn = "ZZVS2;"; kCATdcOff = "ZZVS2;"; //Exchange A<>B
-                    break;
-                case 4: kCATdcOn = "ZZSP1;"; kCATdcOff = "ZZSP0;"; //Toggle Split
+                case 2: kCATdcOn = "ZZSP1;"; kCATdcOff = "ZZSP0;"; //Toggle Split
                     break;
             }
         }

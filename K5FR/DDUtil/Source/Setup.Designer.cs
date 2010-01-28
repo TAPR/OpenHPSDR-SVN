@@ -2232,7 +2232,6 @@ namespace DataDecoder
             this.grpTKnob.TabIndex = 67;
             this.grpTKnob.TabStop = false;
             this.grpTKnob.Text = "Tuning Knob";
-            this.grpTKnob.Visible = false;
             // 
             // lblZR
             // 
@@ -2332,7 +2331,7 @@ namespace DataDecoder
             // 
             this.button7.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold);
             this.button7.ForeColor = System.Drawing.Color.Blue;
-            this.button7.Location = new System.Drawing.Point(212, 16);
+            this.button7.Location = new System.Drawing.Point(212, 14);
             this.button7.Name = "button7";
             this.button7.Size = new System.Drawing.Size(75, 23);
             this.button7.TabIndex = 91;
@@ -2345,8 +2344,6 @@ namespace DataDecoder
             this.cboKnobBDC.FormattingEnabled = true;
             this.cboKnobBDC.Items.AddRange(new object[] {
             "Swap Tx Vfo",
-            "RIT On/Off",
-            "XIT On/Off",
             "Swap A<>B",
             "Split On/Off"});
             this.cboKnobBDC.Location = new System.Drawing.Point(203, 87);
@@ -2451,8 +2448,6 @@ namespace DataDecoder
             this.cboKnobADC.FormattingEnabled = true;
             this.cboKnobADC.Items.AddRange(new object[] {
             "Swap Tx Vfo",
-            "RIT On/Off",
-            "XIT On/Off",
             "Swap A<>B",
             "Split On/Off"});
             this.cboKnobADC.Location = new System.Drawing.Point(203, 60);
@@ -2499,7 +2494,7 @@ namespace DataDecoder
             // 
             this.label216.AutoSize = true;
             this.label216.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
-            this.label216.Location = new System.Drawing.Point(150, 22);
+            this.label216.Location = new System.Drawing.Point(150, 20);
             this.label216.Name = "label216";
             this.label216.Size = new System.Drawing.Size(50, 13);
             this.label216.TabIndex = 78;
