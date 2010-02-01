@@ -53,8 +53,8 @@
     <Command>DDFA24;</Command>
   </macro>
   <macro>
-    <Button>East</Button>
-    <Command>DDFA42;</Command>
+    <Button>Port66</Button>
+    <Command>DDLP0063266;</Command>
   </macro>
   <macro>
     <Button>Port77</Button>

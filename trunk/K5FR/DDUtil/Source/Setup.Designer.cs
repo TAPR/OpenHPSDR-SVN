@@ -6835,7 +6835,7 @@ namespace DataDecoder
             this.label62.AutoSize = true;
             this.label62.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
             this.label62.ForeColor = System.Drawing.Color.Navy;
-            this.label62.Location = new System.Drawing.Point(284, 77);
+            this.label62.Location = new System.Drawing.Point(284, 78);
             this.label62.Name = "label62";
             this.label62.Size = new System.Drawing.Size(32, 13);
             this.label62.TabIndex = 40;
@@ -6858,7 +6858,7 @@ namespace DataDecoder
             this.label61.AutoSize = true;
             this.label61.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
             this.label61.ForeColor = System.Drawing.Color.Navy;
-            this.label61.Location = new System.Drawing.Point(14, 77);
+            this.label61.Location = new System.Drawing.Point(14, 78);
             this.label61.Name = "label61";
             this.label61.Size = new System.Drawing.Size(58, 13);
             this.label61.TabIndex = 38;
@@ -6870,7 +6870,7 @@ namespace DataDecoder
             this.label58.AutoSize = true;
             this.label58.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
             this.label58.ForeColor = System.Drawing.Color.Navy;
-            this.label58.Location = new System.Drawing.Point(305, 40);
+            this.label58.Location = new System.Drawing.Point(303, 41);
             this.label58.Name = "label58";
             this.label58.Size = new System.Drawing.Size(25, 13);
             this.label58.TabIndex = 36;
@@ -6893,7 +6893,7 @@ namespace DataDecoder
             this.label57.AutoSize = true;
             this.label57.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
             this.label57.ForeColor = System.Drawing.Color.Navy;
-            this.label57.Location = new System.Drawing.Point(270, 40);
+            this.label57.Location = new System.Drawing.Point(269, 41);
             this.label57.Name = "label57";
             this.label57.Size = new System.Drawing.Size(22, 13);
             this.label57.TabIndex = 34;
@@ -6927,7 +6927,7 @@ namespace DataDecoder
             this.label55.AutoSize = true;
             this.label55.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
             this.label55.ForeColor = System.Drawing.Color.Navy;
-            this.label55.Location = new System.Drawing.Point(23, 40);
+            this.label55.Location = new System.Drawing.Point(23, 41);
             this.label55.Name = "label55";
             this.label55.Size = new System.Drawing.Size(45, 13);
             this.label55.TabIndex = 29;
@@ -6939,7 +6939,7 @@ namespace DataDecoder
             this.label56.AutoSize = true;
             this.label56.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
             this.label56.ForeColor = System.Drawing.Color.Navy;
-            this.label56.Location = new System.Drawing.Point(100, 40);
+            this.label56.Location = new System.Drawing.Point(98, 41);
             this.label56.Name = "label56";
             this.label56.Size = new System.Drawing.Size(54, 13);
             this.label56.TabIndex = 30;
@@ -6962,7 +6962,7 @@ namespace DataDecoder
             this.label53.AutoSize = true;
             this.label53.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
             this.label53.ForeColor = System.Drawing.Color.Navy;
-            this.label53.Location = new System.Drawing.Point(230, 40);
+            this.label53.Location = new System.Drawing.Point(230, 41);
             this.label53.Name = "label53";
             this.label53.Size = new System.Drawing.Size(29, 13);
             this.label53.TabIndex = 6;
@@ -6974,7 +6974,7 @@ namespace DataDecoder
             this.label54.AutoSize = true;
             this.label54.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
             this.label54.ForeColor = System.Drawing.Color.Navy;
-            this.label54.Location = new System.Drawing.Point(174, 40);
+            this.label54.Location = new System.Drawing.Point(173, 41);
             this.label54.Name = "label54";
             this.label54.Size = new System.Drawing.Size(49, 13);
             this.label54.TabIndex = 5;
@@ -12353,6 +12353,7 @@ namespace DataDecoder
             this.chkSO10b.TabIndex = 250;
             this.toolTip1.SetToolTip(this.chkSO10b, "Check to enable the use of this band for VFO B.");
             this.chkSO10b.UseVisualStyleBackColor = true;
+            this.chkSO10b.CheckedChanged += new System.EventHandler(this.SO2Rband_CheckedChanged);
             // 
             // chkSO9b
             // 
@@ -12364,6 +12365,7 @@ namespace DataDecoder
             this.chkSO9b.TabIndex = 249;
             this.toolTip1.SetToolTip(this.chkSO9b, "Check to enable the use of this band for VFO B.");
             this.chkSO9b.UseVisualStyleBackColor = true;
+            this.chkSO9b.CheckedChanged += new System.EventHandler(this.SO2Rband_CheckedChanged);
             // 
             // chkSO8b
             // 
@@ -12375,6 +12377,7 @@ namespace DataDecoder
             this.chkSO8b.TabIndex = 248;
             this.toolTip1.SetToolTip(this.chkSO8b, "Check to enable the use of this band for VFO B.");
             this.chkSO8b.UseVisualStyleBackColor = true;
+            this.chkSO8b.CheckedChanged += new System.EventHandler(this.SO2Rband_CheckedChanged);
             // 
             // chkSO7b
             // 
@@ -12386,6 +12389,7 @@ namespace DataDecoder
             this.chkSO7b.TabIndex = 247;
             this.toolTip1.SetToolTip(this.chkSO7b, "Check to enable the use of this band for VFO B.");
             this.chkSO7b.UseVisualStyleBackColor = true;
+            this.chkSO7b.CheckedChanged += new System.EventHandler(this.SO2Rband_CheckedChanged);
             // 
             // chkSO6b
             // 
@@ -12397,6 +12401,7 @@ namespace DataDecoder
             this.chkSO6b.TabIndex = 246;
             this.toolTip1.SetToolTip(this.chkSO6b, "Check to enable the use of this band for VFO B.");
             this.chkSO6b.UseVisualStyleBackColor = true;
+            this.chkSO6b.CheckedChanged += new System.EventHandler(this.SO2Rband_CheckedChanged);
             // 
             // chkSO5b
             // 
@@ -12408,6 +12413,7 @@ namespace DataDecoder
             this.chkSO5b.TabIndex = 245;
             this.toolTip1.SetToolTip(this.chkSO5b, "Check to enable the use of this band for VFO B.");
             this.chkSO5b.UseVisualStyleBackColor = true;
+            this.chkSO5b.CheckedChanged += new System.EventHandler(this.SO2Rband_CheckedChanged);
             // 
             // chkSO4b
             // 
@@ -12419,6 +12425,7 @@ namespace DataDecoder
             this.chkSO4b.TabIndex = 244;
             this.toolTip1.SetToolTip(this.chkSO4b, "Check to enable the use of this band for VFO B.");
             this.chkSO4b.UseVisualStyleBackColor = true;
+            this.chkSO4b.CheckedChanged += new System.EventHandler(this.SO2Rband_CheckedChanged);
             // 
             // chkSO3b
             // 
@@ -12430,6 +12437,7 @@ namespace DataDecoder
             this.chkSO3b.TabIndex = 243;
             this.toolTip1.SetToolTip(this.chkSO3b, "Check to enable the use of this band for VFO B.");
             this.chkSO3b.UseVisualStyleBackColor = true;
+            this.chkSO3b.CheckedChanged += new System.EventHandler(this.SO2Rband_CheckedChanged);
             // 
             // chkSO2b
             // 
@@ -12441,6 +12449,7 @@ namespace DataDecoder
             this.chkSO2b.TabIndex = 242;
             this.toolTip1.SetToolTip(this.chkSO2b, "Check to enable the use of this band for VFO B.");
             this.chkSO2b.UseVisualStyleBackColor = true;
+            this.chkSO2b.CheckedChanged += new System.EventHandler(this.SO2Rband_CheckedChanged);
             // 
             // chkSO1b
             // 
@@ -12452,6 +12461,7 @@ namespace DataDecoder
             this.chkSO1b.TabIndex = 240;
             this.toolTip1.SetToolTip(this.chkSO1b, "Check to enable the use of this band for VFO B.");
             this.chkSO1b.UseVisualStyleBackColor = true;
+            this.chkSO1b.CheckedChanged += new System.EventHandler(this.SO2Rband_CheckedChanged);
             // 
             // label200
             // 
@@ -13423,6 +13433,7 @@ namespace DataDecoder
             this.chkSO10a.TabIndex = 150;
             this.toolTip1.SetToolTip(this.chkSO10a, "Check to enable the use of this band for VFO A");
             this.chkSO10a.UseVisualStyleBackColor = true;
+            this.chkSO10a.CheckedChanged += new System.EventHandler(this.SO2Rband_CheckedChanged);
             // 
             // txtHi2_9a
             // 
@@ -13513,6 +13524,7 @@ namespace DataDecoder
             this.chkSO9a.TabIndex = 142;
             this.toolTip1.SetToolTip(this.chkSO9a, "Check to enable the use of this band for VFO A");
             this.chkSO9a.UseVisualStyleBackColor = true;
+            this.chkSO9a.CheckedChanged += new System.EventHandler(this.SO2Rband_CheckedChanged);
             // 
             // txtHi2_8a
             // 
@@ -13603,6 +13615,7 @@ namespace DataDecoder
             this.chkSO8a.TabIndex = 134;
             this.toolTip1.SetToolTip(this.chkSO8a, "Check to enable the use of this band for VFO A");
             this.chkSO8a.UseVisualStyleBackColor = true;
+            this.chkSO8a.CheckedChanged += new System.EventHandler(this.SO2Rband_CheckedChanged);
             // 
             // txtHi2_7a
             // 
@@ -13693,6 +13706,7 @@ namespace DataDecoder
             this.chkSO7a.TabIndex = 126;
             this.toolTip1.SetToolTip(this.chkSO7a, "Check to enable the use of this band for VFO A");
             this.chkSO7a.UseVisualStyleBackColor = true;
+            this.chkSO7a.CheckedChanged += new System.EventHandler(this.SO2Rband_CheckedChanged);
             // 
             // txtHi2_6a
             // 
@@ -13783,6 +13797,7 @@ namespace DataDecoder
             this.chkSO6a.TabIndex = 118;
             this.toolTip1.SetToolTip(this.chkSO6a, "Check to enable the use of this band for VFO A");
             this.chkSO6a.UseVisualStyleBackColor = true;
+            this.chkSO6a.CheckedChanged += new System.EventHandler(this.SO2Rband_CheckedChanged);
             // 
             // txtTx_5a
             // 
@@ -13861,6 +13876,7 @@ namespace DataDecoder
             this.chkSO5a.TabIndex = 110;
             this.toolTip1.SetToolTip(this.chkSO5a, "Check to enable the use of this band for VFO A");
             this.chkSO5a.UseVisualStyleBackColor = true;
+            this.chkSO5a.CheckedChanged += new System.EventHandler(this.SO2Rband_CheckedChanged);
             // 
             // txtHi2_4a
             // 
@@ -13951,6 +13967,7 @@ namespace DataDecoder
             this.chkSO4a.TabIndex = 102;
             this.toolTip1.SetToolTip(this.chkSO4a, "Check to enable the use of this band for VFO A");
             this.chkSO4a.UseVisualStyleBackColor = true;
+            this.chkSO4a.CheckedChanged += new System.EventHandler(this.SO2Rband_CheckedChanged);
             // 
             // txtHi2_3a
             // 
@@ -14041,6 +14058,7 @@ namespace DataDecoder
             this.chkSO3a.TabIndex = 94;
             this.toolTip1.SetToolTip(this.chkSO3a, "Check to enable the use of this band for VFO A");
             this.chkSO3a.UseVisualStyleBackColor = true;
+            this.chkSO3a.CheckedChanged += new System.EventHandler(this.SO2Rband_CheckedChanged);
             // 
             // txtHi2_2a
             // 
@@ -14131,6 +14149,7 @@ namespace DataDecoder
             this.chkSO2a.TabIndex = 86;
             this.toolTip1.SetToolTip(this.chkSO2a, "Check to enable the use of this band for VFO A");
             this.chkSO2a.UseVisualStyleBackColor = true;
+            this.chkSO2a.CheckedChanged += new System.EventHandler(this.SO2Rband_CheckedChanged);
             // 
             // label174
             // 
@@ -14287,6 +14306,7 @@ namespace DataDecoder
             this.chkSO1a.TabIndex = 48;
             this.toolTip1.SetToolTip(this.chkSO1a, "Check to enable the use of this band for VFO A.");
             this.chkSO1a.UseVisualStyleBackColor = true;
+            this.chkSO1a.CheckedChanged += new System.EventHandler(this.SO2Rband_CheckedChanged);
             // 
             // label171
             // 
