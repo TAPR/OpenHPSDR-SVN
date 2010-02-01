@@ -1474,13 +1474,15 @@ namespace DataDecoder
                 result = MessageBox.Show(this,
                     "Are you sure you want to exit?\n\n" +
                     "Macro data has been changed and not saved!\n\n" +
-                    "If you want to save your work press NO and\n" +
-                    "return to the Macro tab and save your work.",
-                    "Macro Data UnSaved", MessageBoxButtons.YesNo,
+                    "If you want to save your work press YES\n" +
+                    "If you want to Stop the Form Close press Cancel",
+                    "Macro Data UnSaved", MessageBoxButtons.YesNoCancel,
                     MessageBoxIcon.Exclamation,
-                    MessageBoxDefaultButton.Button2);
-                if (result == DialogResult.No)
+                    MessageBoxDefaultButton.Button1);
+                if (result == DialogResult.Cancel)
                 { e.Cancel = true; return; }
+                else if (result == DialogResult.Yes)
+                { btnMacSave_Click(null, null); }
             }
             // see if SO2R data was changed and not saved.
             if (bSo2rChg && chkSoEnab.Checked && !bClosePass1) 
@@ -1489,15 +1491,16 @@ namespace DataDecoder
                 result = MessageBox.Show(this,
                     "Are you sure you want to exit?\n\n" +
                     "SO2R data has been changed and has not saved!\n\n" +
-                    "If you want to save your work press NO, return\n" +
-                    "to the SO2R tab, save your settings and then exit.",
-                    "SO2R Data UnSaved", MessageBoxButtons.YesNo,
+                    "If you want to save your work press YES\n" +
+                    "If you want to Stop the Form Close press Cancel",
+                    "SO2R Data UnSaved", MessageBoxButtons.YesNoCancel,
                     MessageBoxIcon.Exclamation,
-                    MessageBoxDefaultButton.Button2);
-                if (result == DialogResult.No)
+                    MessageBoxDefaultButton.Button1);
+                if (result == DialogResult.Cancel)
                 { e.Cancel = true; bClosePass1 = false; return; }
-                else
-                { bClosePass1 = true; } // set to true if 1st pass to close
+                else if (result == DialogResult.Yes)
+                { btnSaveSO2R_Click(null, null); }
+                bClosePass1 = true;
             }
             try
             {
@@ -4878,6 +4881,9 @@ namespace DataDecoder
             RegistryKey regKey =
                 Registry.CurrentUser.CreateSubKey(@"Software\DDUtil\MsgBoxCheck\RemoteStart");
             regKey.SetValue("DontShowAgain", false);
+            regKey =
+                Registry.CurrentUser.CreateSubKey(@"Software\DDUtil\MsgBoxCheck\SO2R");
+            regKey.SetValue("DontShowAgain", false);
         }
         // Main Menu|Tools|Show Mini Window
         private void showMiniWindowToolStripMenuItem_Click(object sender, EventArgs e)
@@ -6844,25 +6850,32 @@ namespace DataDecoder
                     /*** SO2R active vfo status ***/
                     if (rawFreq.Length > 4 && rawFreq.Substring(0, 4) == "ZZSW")
                     {
-                        ZZSW = Convert.ToInt32(rawFreq.Substring(4, 1));
-                        if (LastZZSW != ZZSW)
+                        if (chkSoEnab.Checked)
                         {
-                            LastZZSW = ZZSW;
-                            zzswChanged(ZZSW); }
+                            ZZSW = Convert.ToInt32(rawFreq.Substring(4, 1));
+                            if (LastZZSW != ZZSW)
+                            {
+                                LastZZSW = ZZSW;
+                                zzswChanged(ZZSW);
+                            }
+                        }
                     }
                     /*** Set SO2R vfo B band data ***/
                     if (rawFreq.Length > 4 && rawFreq.Substring(0, 4) == "FB00")
                     {
-                        string bFreq = rawFreq.Substring(2, 11);
-                        if (lastFreqB != bFreq)
+                        if (chkSoEnab.Checked)
                         {
-                            lastFreqB = bFreq;
-                            vfoFreq = Convert.ToInt32(rawFreq.Substring(2, 7).TrimStart('0'));
-                            bBand = FreqToBand(vfoFreq);
-                            if (LastB != bBand)
+                            string bFreq = rawFreq.Substring(2, 11);
+                            if (lastFreqB != bFreq)
                             {
-                                LastB = bBand;
-                                SetVfoB();
+                                lastFreqB = bFreq;
+                                vfoFreq = Convert.ToInt32(rawFreq.Substring(2, 7).TrimStart('0'));
+                                bBand = FreqToBand(vfoFreq);
+                                if (LastB != bBand)
+                                {
+                                    LastB = bBand;
+                                    SetVfoB();
+                                }
                             }
                         }
                     }
@@ -8518,7 +8531,7 @@ namespace DataDecoder
         int lpt1 = 0; 
         int lpt2 = 0;
         bool bSo2rChg = false;            // SP2R data has changed
-        bool bClosePass1 = false;         // 1stss thru form close routine
+        bool bClosePass1 = false;         // 1st pass thru form close routine
         string dataH = "0", dataL = "0";  // data word for LPT1
         string ctrlH = "0", ctrlL = "0";  // control word for LPT2
         string TXa = "0", TXb = "0";      // TX ant for vfo a/b
@@ -9007,7 +9020,7 @@ namespace DataDecoder
                                 ctrlL = "0";
                             }
                         }
-                
+
                         break;
                     case 10:
                         if (!chkSO10b.Checked) { inhibB = true; }
@@ -9038,16 +9051,28 @@ namespace DataDecoder
                 OutParallelPort(lpt2, ctrl);
                 if (ZZSW == 1)
                 {
-                    switch (txtTxB.Text)
+                    if (chk1Amp.Checked)       // if using 1 amp
                     {
-                        case "1": WriteToPort("ZZOF100;", iSleep); break;
-                        case "2": WriteToPort("ZZOF010;", iSleep); break;
-                        case "3": WriteToPort("ZZOF001;", iSleep); break;
+                        switch (txtTxA.Text)    // use Key Line A
+                        {
+                            case "1": WriteToPort("ZZOF100;", iSleep); break;
+                            case "2": WriteToPort("ZZOF010;", iSleep); break;
+                            case "3": WriteToPort("ZZOF001;", iSleep); break;
+                        }
                     }
-                    WriteToPort("ZZOC" + TXb + ";", iSleep);
+                    else
+                    {
+                        switch (txtTxB.Text)    // use Key Line B
+                        {
+                            case "1": WriteToPort("ZZOF100;", iSleep); break;
+                            case "2": WriteToPort("ZZOF010;", iSleep); break;
+                            case "3": WriteToPort("ZZOF001;", iSleep); break;
+                        }
+                    }
+                    WriteToPort("ZZOC" + TXb + ";", iSleep);    // set xmit antenna
                 }
-                if (inhibB) { WriteToPort("ZZPC000;", iSleep); } // set drive to zero
-
+                // if band not used set drive to zero
+                if (inhibB) { WriteToPort("ZZPC000;", iSleep); }
             }
             catch { }
         }
@@ -9079,6 +9104,7 @@ namespace DataDecoder
 
         #region # SO2R Events #
 
+        // The Save Settings button was pressed
         private void btnSaveSO2R_Click(object sender, EventArgs e)
         {
             set.txtLPT2 = txtLPT2.Text; lpt2 = Convert.ToInt32(txtLPT2.Text);
@@ -9167,6 +9193,7 @@ namespace DataDecoder
             bSo2rChg = false;
             SOinit();
         }
+        // the TX switch has changed
         internal void PinChanged(object sender, SerialPinChangedEventArgs e)
         {
             if (chkSoEnab.Checked)
@@ -9208,8 +9235,18 @@ namespace DataDecoder
                 set.chkSoEnab = false;
                 OutParallelPort(lpt1, 0);
                 OutParallelPort(lpt2, 0);
+                set.Save();
+                MsgBoxCheck.MessageBox dlg = new MsgBoxCheck.MessageBox();
+                DialogResult dr = dlg.Show(@"Software\DDUtil\MsgBoxCheck\SO2R", "DontShowAgain",
+                    DialogResult.OK, "Don't show me this again",
+                    "When disabling the SO2R feature you may need to reset some of the\r" +
+                    "local settings in PowerSDR and DDUtil:\r\r" +
+                    "PowerSDR - Antenna & TX settings may be altered.\r" +
+                    "                    Drive settings may be altered.\r\r" +
+                    "DDUtil -        Auto Drive will be disabled, re-enable if needed.\r" +
+                    "                    Toggle PTT (ctrl+O) to reset TX line(s).",
+                    "Warning!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             }
-            set.Save();
         }
         // the SO2R port number has changed
         private void cboSwPort_SelectedIndexChanged(object sender, EventArgs e)
@@ -9242,8 +9279,13 @@ namespace DataDecoder
             else set.chk1Amp = false;
             set.Save();
         }
-        // matrix data has changed
+        // matrix text data has changed
         private void grpSo2R_TextChanged(object sender, EventArgs e)
+        {
+            bSo2rChg = true;
+        }
+        // matrix check box data has changed
+        private void SO2Rband_CheckedChanged(object sender, EventArgs e)
         {
             bSo2rChg = true;
         }
@@ -10893,24 +10935,22 @@ namespace DataDecoder
                 byte[] data = new byte[port.BytesToRead];
                 port.Read(data, 0, data.Length);
                 KnobBuf += AE.GetString(data, 0, data.Length);
-                Regex rex = new Regex(".*?;");				//accept any string ending in ;		
+                Regex rex = new Regex(".*?;"); //accept any string ending in ;		
                 for (Match m = rex.Match(KnobBuf); m.Success; m = m.NextMatch())
                 {   //loop thru the buffer and find matches
                     sCmd = m.Value;
-                    KnobBuf = KnobBuf.Replace(m.Value, "");       //remove the match from the buffer
+                    KnobBuf = KnobBuf.Replace(m.Value, ""); //remove the match from the buffer
                     if (chkKnobEnab.Checked)
                     {
                         switch (sCmd.Substring(0, 1))
                         {
-                            case "C": //knob double click
+                            case "C": //double click
                                 kFlags ^= 0x20;
                                 WriteFlags(); WriteLED();
                                 if (Convert.ToBoolean(kFlags >> 5 & 0x01)) //led2 lit
                                 { WriteToPort(kCATdcOn, iSleep); }
                                 else
                                 { WriteToPort(kCATdcOff, iSleep);
-                                //if (kCATdcOff.Substring(0, 4) == "ZZRC") RITfrq = 0;
-                                //if (kCATdcOff.Substring(0, 4) == "ZZXC") XITfrq = 0;
                                 }
                                 break;
                             case "D": //tune down
@@ -10940,7 +10980,7 @@ namespace DataDecoder
                                 }
                                 WriteToPort(kCATdn, iSleep);
                                 break;
-                            case "F":   //LED status
+                            case "F":   //firm ware revision
                                 grpTKnob.Text = "Tuning Knob Rev. " +
                                     sCmd.Substring(1, 2) + "." +
                                     sCmd.Substring(3, 2);
@@ -10952,14 +10992,6 @@ namespace DataDecoder
                             case "S": //knob single click
                                 kFlags ^= 0x10; // toggle single click bit
                                 WriteFlags(); WriteLED();
-                                //if (kCATup.Substring(0, 4) == "ZZRF")
-                                //{
-                                //    RITfrq = 0; WriteToPort("ZZXC;ZZXS0;ZZRT1;", iSleep);
-                                //}
-                                //else if (kCATup.Substring(0, 4) == "ZZXF")
-                                //{
-                                //    XITfrq = 0; WriteToPort("ZZRC;ZZRT0;ZZXS1;", iSleep);
-                                //}
                                 break;
                             case "U": //tune up
                                 if (kCATup == "ZZSB;" && sCmd.Length > 3)
@@ -11021,7 +11053,7 @@ namespace DataDecoder
             }
             set.Save();
         }
-        
+
         private void cboKnobPort_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (KnobPort.IsOpen) KnobPort.Close();
@@ -11047,7 +11079,6 @@ namespace DataDecoder
         private void cboKnobAOn_SelectedIndexChanged(object sender, EventArgs e)
         {
             set.cboKnobAOn = cboKnobAOn.SelectedIndex; set.Save(); WriteFlags();
-
         }
 
         private void cboKnobBOn_SelectedIndexChanged(object sender, EventArgs e)
@@ -11148,7 +11179,7 @@ namespace DataDecoder
             }
         }
 
-        void WriteLED()
+        void WriteLED() // set the knob leds
         {
             string led2 = (kFlags >> 4 & 1).ToString(); // single click
             string led3 = (kFlags >> 5 & 1).ToString(); // double click
@@ -11157,7 +11188,7 @@ namespace DataDecoder
             KnobPort.Write(led);
         }
 
-        void WriteFlags()
+        void WriteFlags()   // set indicators based on active control
         {
             if (Convert.ToBoolean(kFlags & 0x10))   // single click on
             {
@@ -11195,8 +11226,8 @@ namespace DataDecoder
             }
             GetCat();
         }
-        //Get the CAT commands for the active controls
-        void GetCat()
+        
+        void GetCat()   //Get the CAT commands for the active controls
         {
             switch (ActIdx) // active single click control
             {
