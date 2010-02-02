@@ -108,7 +108,7 @@ public class WaterfallPanel extends javax.swing.JPanel {
 
     private void formMouseWheelMoved(java.awt.event.MouseWheelEvent evt) {//GEN-FIRST:event_formMouseWheelMoved
         //client.sendCommand("scrollFrequency "+Integer.toString(evt.getWheelRotation()*(client.getSampleRate()/WIDTH)));
-        client.sendCommand("scrollFrequency "+Integer.toString(evt.getWheelRotation()*100));
+        client.setFrequency(client.getFrequency()+(evt.getWheelRotation()*100));
     }//GEN-LAST:event_formMouseWheelMoved
 
     private void formMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseClicked
@@ -117,21 +117,21 @@ public class WaterfallPanel extends javax.swing.JPanel {
             case MouseEvent.BUTTON1:
                 // Left Button - move to center of filter
                 if(filterHigh<0) {
-                    client.sendCommand("scrollFrequency " + Integer.toString(scrollAmount + ((filterHigh - filterLow) / 2)));
+                    client.setFrequency(client.getFrequency()+(scrollAmount + ((filterHigh - filterLow) / 2)));
                 } else {
-                    client.sendCommand("scrollFrequency " + Integer.toString(scrollAmount - ((filterHigh - filterLow) / 2)));
+                    client.setFrequency(client.getFrequency()+(scrollAmount - ((filterHigh - filterLow) / 2)));
                 }
                 break;
             case MouseEvent.BUTTON3:
                 // Right Button - move to cursor
-                client.sendCommand("scrollFrequency " + Integer.toString(scrollAmount));
+                client.setFrequency(client.getFrequency()+(scrollAmount));
                 break;
         }
     }//GEN-LAST:event_formMouseClicked
 
     private void formMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseDragged
         int increment=startX-evt.getX();
-        client.sendCommand("scrollFrequency "+Integer.toString(increment*(client.getSampleRate()/WIDTH)));
+        client.setFrequency(client.getFrequency()+(increment*(client.getSampleRate()/WIDTH)));
         startX=evt.getX();
     }//GEN-LAST:event_formMouseDragged
 

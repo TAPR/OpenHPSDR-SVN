@@ -12,10 +12,12 @@
 package jmonitor;
 
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Rectangle;
 import java.awt.event.MouseEvent;
+import java.text.DecimalFormat;
 
 /**
  *
@@ -75,8 +77,7 @@ public class SpectrumPanel extends javax.swing.JPanel {
     }
 
     private void formMouseWheelMoved(java.awt.event.MouseWheelEvent evt) {//GEN-FIRST:event_formMouseWheelMoved
-        //client.sendCommand("scrollFrequency "+Integer.toString(evt.getWheelRotation()*(client.getSampleRate()/WIDTH)));
-        client.sendCommand("scrollFrequency "+Integer.toString(evt.getWheelRotation()*100));
+        client.setFrequency(client.getFrequency()+(evt.getWheelRotation()*100));
     }//GEN-LAST:event_formMouseWheelMoved
 
     private void formMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseClicked
@@ -85,14 +86,14 @@ public class SpectrumPanel extends javax.swing.JPanel {
             case MouseEvent.BUTTON1:
                 // Left Button - move to center of filter
                 if(filterHigh<0) {
-                    client.sendCommand("scrollFrequency " + Integer.toString(scrollAmount + ((filterHigh - filterLow) / 2)));
+                    client.setFrequency(client.getFrequency()+(scrollAmount + ((filterHigh - filterLow) / 2)));
                 } else {
-                    client.sendCommand("scrollFrequency " + Integer.toString(scrollAmount - ((filterHigh - filterLow) / 2)));
+                    client.setFrequency(client.getFrequency()+(scrollAmount - ((filterHigh - filterLow) / 2)));
                 }
                 break;
             case MouseEvent.BUTTON3:
                 // Right Button - move to cursor
-                client.sendCommand("scrollFrequency " + Integer.toString(scrollAmount));
+                client.setFrequency(client.getFrequency()+scrollAmount);
                 break;
         }
 
@@ -100,7 +101,7 @@ public class SpectrumPanel extends javax.swing.JPanel {
 
     private void formMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseDragged
         int increment=startX-evt.getX();
-        client.sendCommand("scrollFrequency "+Integer.toString(increment*(client.getSampleRate()/WIDTH)));
+        client.setFrequency(client.getFrequency()+(increment*(client.getSampleRate()/WIDTH)));
         startX=evt.getX();
     }//GEN-LAST:event_formMouseDragged
 
@@ -138,12 +139,43 @@ public class SpectrumPanel extends javax.swing.JPanel {
     private void drawSpectrum() {
         if(image==null) image=this.createImage(WIDTH,HEIGHT);
         Graphics graphics=image.getGraphics();
+        graphics.setFont(font);
         graphics.setColor(Color.BLACK);
         graphics.fillRect(0,0,WIDTH,HEIGHT);
 
         // draw the filter
         graphics.setColor(Color.LIGHT_GRAY);
         graphics.fillRect(filterLeft,0,filterRight-filterLeft,HEIGHT);
+
+        // plot frequency markers
+        long f=client.getFrequency()-(client.getSampleRate()/2);
+        long increment;
+        increment=200;
+
+        for(int i=0;i<WIDTH;i++) {
+            if((f%20000)<increment) {
+                graphics.setColor(Color.YELLOW);
+                graphics.drawLine(i,0,i,HEIGHT);
+                graphics.setColor(java.awt.Color.GREEN);
+                graphics.drawString(frequencyFormat.format((double)f/1000000.0),i-8,15);
+            }
+            f+=increment;
+        }
+        // plot horizontal grid
+        int V = spectrumHigh - spectrumLow;
+        int numSteps = V/20;
+        int pixelStepSize = HEIGHT/numSteps;
+        for(int i=1; i<numSteps; i++)
+        {
+            int num = spectrumHigh - i*20;
+            int y = (int)Math.floor((spectrumHigh - num)*HEIGHT/V);
+
+            graphics.setColor(Color.YELLOW);
+            graphics.drawLine(0, y, WIDTH, y);
+
+            graphics.setColor(Color.GREEN);
+            graphics.drawString(Integer.toString(num),3,y+2);
+        }
 
         // draw cursor
         graphics.setColor(Color.RED);
@@ -176,6 +208,10 @@ public class SpectrumPanel extends javax.swing.JPanel {
     private Image image;
 
     private int startX;
+
+    private Font font=new Font("Ariel",Font.PLAIN,10);
+
+    private DecimalFormat frequencyFormat=new java.text.DecimalFormat("####.00");
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     // End of variables declaration//GEN-END:variables

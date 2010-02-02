@@ -11,17 +11,17 @@ package jmonitor;
  */
 public class MonitorUpdateThread extends Thread {
 
-    MonitorUpdateThread(Client client,MonitorFrame monitorFrame) {
+    MonitorUpdateThread(Client client,MonitorUpdateListener listener) {
         this.client=client;
-        this.monitorFrame=monitorFrame;
+        this.listener=listener;
     }
 
     public void run() {
         System.err.println("MonitorUpdateThread.run");
         while(true) {
             client.getSpectrum();
-            monitorFrame.updateMonitor(client.getSamples(),client.getFilterLow(),client.getFilterHigh(),client.getSampleRate());
-            monitorFrame.setTitle("JMonitor: "+client.getFrequency()+" "+client.getMode());
+            listener.updateSamples(client.getSamples(),client.getFilterLow(),client.getFilterHigh(),client.getSampleRate());
+            //monitorFrame.setTitle("JMonitor: "+client.getFrequency()+" "+client.getMode()+" S="+client.getMeter());
             try {
                 sleep(1000/fps);
             } catch (InterruptedException e) {
@@ -31,7 +31,7 @@ public class MonitorUpdateThread extends Thread {
     }
 
     private Client client;
-    private MonitorFrame monitorFrame;
+    private MonitorUpdateListener listener;
     private int fps=10;
 
 }
