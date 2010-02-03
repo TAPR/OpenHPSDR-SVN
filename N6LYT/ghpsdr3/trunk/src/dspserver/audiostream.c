@@ -35,10 +35,12 @@
 
 
 #include "audiostream.h"
+#include "client.h"
+#include "buffer.h"
 
 static int sample_count=0;
 
-unsigned char audio_stream_buffer[512];
+unsigned char audio_stream_buffer[480+48];
 int audio_stream_buffer_insert=0;
 int audio_stream_buffer_remove=0;
 
@@ -46,6 +48,7 @@ unsigned char encodetable[65536];
 
 unsigned char alaw(short sample);
 
+/*
 static pthread_t audio_stream_thread_id;
 
 #define BASE_PORT 8001
@@ -59,6 +62,7 @@ struct sockaddr_in audio_stream_client;
 int audio_stream_addrlen;
 
 void* audio_stream_thread(void* arg);
+*/
 void init_alaw_tables();
 
 void audio_stream_init(int receiver) {
@@ -67,15 +71,17 @@ void audio_stream_init(int receiver) {
 
     init_alaw_tables();
 
+/*
     audio_stream_port=BASE_PORT+(2*receiver);
     audio_stream_clientSocket=-1;
     rc=pthread_create(&audio_stream_thread_id,NULL,audio_stream_thread,NULL);
     if(rc != 0) {
         fprintf(stderr,"pthread_create failed on audio_stream_thread: rc=%d\n", rc);
     }
+*/
 
 }
-
+/*
 void* audio_stream_thread(void* arg) {
 
     int bytesRead;
@@ -104,7 +110,7 @@ fprintf(stderr,"audio_stream_thread\n");
 
     while(1) {
 //fprintf(stderr,"audio_stream_thread: listen\n");
-        if (listen(audio_stream_serverSocket, 0) == -1) {
+        if (listen(audio_stream_serverSocket, 5) == -1) {
             perror("audio_stream listen");
             break;
         }
@@ -157,6 +163,7 @@ void send_audio_buffer(unsigned char* buffer,int length) {
     }
 
 }
+*/
 
 /* --------------------------------------------------------------------------*/
 /**
@@ -171,17 +178,11 @@ void audio_stream_put_samples(short left_sample,short right_sample) {
     // output to stream at 8K (1 in 6)
     if(sample_count==0) {
         // use this sample and convert to a-law (mono)
-        audio_stream_buffer[audio_stream_buffer_insert]=alaw((left_sample+right_sample)/2);
-        //audio_stream_buffer[audio_stream_buffer_insert]=(left_sample+right_sample)/2;
-//        audio_stream_buffer[audio_stream_buffer_insert]=left_sample;
-//        audio_stream_buffer_insert++;
-        //audio_stream_buffer[audio_stream_buffer_insert]=((left_sample+right_sample)/2)>>8;
-        //audio_stream_buffer[audio_stream_buffer_insert]=left_sample>>8;
+        audio_stream_buffer[audio_stream_buffer_insert+48]=alaw((left_sample+right_sample)/2);
         audio_stream_buffer_insert++;
-        if(audio_stream_buffer_insert==256) {
-            send_audio_buffer(&audio_stream_buffer[0],256);
-        } else if(audio_stream_buffer_insert==512) {
-            send_audio_buffer(&audio_stream_buffer[256],256);
+        if(audio_stream_buffer_insert==480) {
+            audio_stream_buffer[0]=AUDIO_BUFFER;
+            client_send_audio(480);
             audio_stream_buffer_insert=0;
         }
     }
