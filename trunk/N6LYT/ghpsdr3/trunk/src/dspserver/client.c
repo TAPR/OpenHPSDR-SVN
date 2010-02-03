@@ -34,12 +34,15 @@
 #include <netdb.h>
 #include <string.h>
 #include <pthread.h>
+#include <semaphore.h>
 #include <math.h>
 #include <time.h>
 #include "ozy.h"
+#include "audiostream.h"
 #include "main.h"
 #include "soundcard.h"
 #include "dttsp.h"
+#include "buffer.h"
 
 static pthread_t client_thread_id;
 
@@ -59,6 +62,8 @@ float spectrumBuffer[SPECTRUM_BUFFER_SIZE];
 float meter;
 int smeter;
 
+sem_t network_semaphore;
+
 void* client_thread(void* arg);
 void client_send_samples(int size);
 void client_set_samples(float* samples,int size);
@@ -68,9 +73,12 @@ unsigned char* client_samples;
 
 int rejectAddress(char* address) {
     int result=0;
+
+    // ports scanners from China
     if(strcmp(address,"222.208.183.218")==0) result=1;
     if(strcmp(address,"221.195.73.68")==0) result=1;
     if(strcmp(address,"61.183.15.9")==0) result=1;
+
     return result;
 }
 
@@ -82,8 +90,9 @@ float getFilterSizeCalibrationOffset() {
 
 
 void client_init(int receiver) {
-
     int rc;
+
+    sem_init(&network_semaphore,0,1);
 
     port=BASE_PORT+(receiver*2);
     clientSocket=-1;
@@ -121,13 +130,11 @@ fprintf(stderr,"client_thread\n");
     }
 
     while(1) {
-//fprintf(stderr,"client_thread: listen\n");
-        if (listen(serverSocket, 0) == -1) {
+        if (listen(serverSocket, 5) == -1) {
             perror("client listen");
             break;
         }
 
-//fprintf(stderr,"client_thread: accept\n");
         addrlen = sizeof(client); 
 	if ((clientSocket = accept(serverSocket,(struct sockaddr *)&client,&addrlen)) == -1) {
 		perror("client accept");
@@ -137,6 +144,8 @@ fprintf(stderr,"client_thread\n");
             struct tm *tod;
             time(&tt);
             tod=localtime(&tt);
+            fprintf(stdout,"wget -O - http://api.hostip.info/get_html.php?ip=%s\n",inet_ntoa(client.sin_addr));
+            fflush(stdout);
             fprintf(stderr,"%02d/%02d/%02d %02d:%02d:%02d client connection from %s:%d\n",tod->tm_mday,tod->tm_mon+1,tod->tm_year+1900,tod->tm_hour,tod->tm_min,tod->tm_sec,inet_ntoa(client.sin_addr),ntohs(client.sin_port));
 
             if(rejectAddress(inet_ntoa(client.sin_addr))) {
@@ -194,21 +203,34 @@ fprintf(stderr,"client_thread\n");
             fprintf(stderr,"%02d/%02d/%02d %02d:%02d:%02d client disconnected from %s:%d\n",tod->tm_mday,tod->tm_mon+1,tod->tm_year+1900,tod->tm_hour,tod->tm_min,tod->tm_sec,inet_ntoa(client.sin_addr),ntohs(client.sin_port));
         }
         clientSocket=-1;
-
     }
-    
 }
 
 void client_send_samples(int size) {
     int rc;
     if(clientSocket!=-1) {
-//fprintf(stderr,"client_send_samples\n");
-        rc=send(clientSocket,client_samples,size+PREFIX,0);
-        if(rc<0) {
-            perror("client send failed");
-        }
+        //sem_wait(&network_semaphore);
+            rc=send(clientSocket,client_samples,size+PREFIX,0);
+            if(rc<0) {
+                perror("client_send_samples failed");
+            }
+        //sem_post(&network_semaphore);
     } else {
-fprintf(stderr,"client_send_samples: clientSocket==-1\n");
+        fprintf(stderr,"client_send_samples: clientSocket==-1\n");
+    }
+}
+
+void client_send_audio(int size) {
+    int rc;
+    if(clientSocket!=-1) {
+        //sem_wait(&network_semaphore);
+            rc=send(clientSocket,audio_stream_buffer,size+PREFIX,0);
+            if(rc<0) {
+                //perror("client_send_audio failed");
+            }
+        //sem_post(&network_semaphore);
+    } else {
+        //fprintf(stderr,"client_send_audio: clientSocket==-1\n");
     }
 }
 
@@ -218,6 +240,8 @@ void client_set_samples(float* samples,int size) {
     float max;
     int lindex,rindex;
 
+    // first byte is the buffer type
+    client_samples[0]=SPECTRUM_BUFFER;
 
     // first 14 bytes contain the frequency
     //sprintf(client_samples,"% 4lld.%03lld.%03lld",frequencyA/1000000LL,(frequencyA%1000000LL)/1000LL,frequencyA%1000LL);
@@ -233,8 +257,6 @@ void client_set_samples(float* samples,int size) {
 
     // next 8 bytes contain the sample rate
     sprintf(&client_samples[32],"%d",sampleRate);
-
-//fprintf(stderr,"setting samplerate: %d\n",sampleRate);
 
     // next 8 bytes contain the meter
     sprintf(&client_samples[40],"%d",(int)meter);
