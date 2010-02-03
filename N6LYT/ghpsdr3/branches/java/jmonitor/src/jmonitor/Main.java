@@ -44,7 +44,10 @@ public class Main {
             i++;
         }
 
-        Client client=new Client(server,receiver);
+        Audio audio = new Audio(server, receiver);
+
+        Client client=new Client(server,receiver,audio);
+        client.start();
         client.setFrequency(7048000);
         client.setMode(0);
         client.setFilter(-2850,-150);
@@ -55,8 +58,6 @@ public class Main {
         frame.setVisible(true);
 
         monitorUpdateThread.start();
-        Audio audio=new Audio(server,receiver);
-        audio.start();
     }
 
     private static void usage(String error) {
