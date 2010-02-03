@@ -860,6 +860,8 @@ namespace DataDecoder
             this.txtLong = new System.Windows.Forms.TextBox();
             this.tabProp = new System.Windows.Forms.TabPage();
             this.grpSO2R = new System.Windows.Forms.GroupBox();
+            this.btnSo2rFile = new System.Windows.Forms.Button();
+            this.btnLoadSO2R = new System.Windows.Forms.Button();
             this.label215 = new System.Windows.Forms.Label();
             this.txtTxB = new System.Windows.Forms.TextBox();
             this.label214 = new System.Windows.Forms.Label();
@@ -11990,6 +11992,8 @@ namespace DataDecoder
             // 
             // grpSO2R
             // 
+            this.grpSO2R.Controls.Add(this.btnSo2rFile);
+            this.grpSO2R.Controls.Add(this.btnLoadSO2R);
             this.grpSO2R.Controls.Add(this.label215);
             this.grpSO2R.Controls.Add(this.txtTxB);
             this.grpSO2R.Controls.Add(this.label214);
@@ -12184,14 +12188,44 @@ namespace DataDecoder
             this.grpSO2R.Size = new System.Drawing.Size(425, 303);
             this.grpSO2R.TabIndex = 81;
             this.grpSO2R.TabStop = false;
-            this.grpSO2R.Text = "SO2R";
+            this.grpSO2R.Text = "SO2R - [160CW.xml]";
+            // 
+            // btnSo2rFile
+            // 
+            this.btnSo2rFile.AutoSize = true;
+            this.btnSo2rFile.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnSo2rFile.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold);
+            this.btnSo2rFile.ForeColor = System.Drawing.Color.Navy;
+            this.btnSo2rFile.Location = new System.Drawing.Point(382, 11);
+            this.btnSo2rFile.Name = "btnSo2rFile";
+            this.btnSo2rFile.Size = new System.Drawing.Size(37, 23);
+            this.btnSo2rFile.TabIndex = 267;
+            this.btnSo2rFile.Text = "File";
+            this.toolTip1.SetToolTip(this.btnSo2rFile, "Press to select matrix data file.");
+            this.btnSo2rFile.UseVisualStyleBackColor = true;
+            this.btnSo2rFile.Click += new System.EventHandler(this.btnSo2rFile_Click);
+            // 
+            // btnLoadSO2R
+            // 
+            this.btnLoadSO2R.AutoSize = true;
+            this.btnLoadSO2R.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnLoadSO2R.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold);
+            this.btnLoadSO2R.ForeColor = System.Drawing.Color.Navy;
+            this.btnLoadSO2R.Location = new System.Drawing.Point(332, 11);
+            this.btnLoadSO2R.Name = "btnLoadSO2R";
+            this.btnLoadSO2R.Size = new System.Drawing.Size(45, 23);
+            this.btnLoadSO2R.TabIndex = 266;
+            this.btnLoadSO2R.Text = "Load";
+            this.toolTip1.SetToolTip(this.btnLoadSO2R, "Press to load matrix data.");
+            this.btnLoadSO2R.UseVisualStyleBackColor = true;
+            this.btnLoadSO2R.Click += new System.EventHandler(this.btnLoadSO2R_Click);
             // 
             // label215
             // 
             this.label215.AutoSize = true;
             this.label215.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold);
             this.label215.ForeColor = System.Drawing.Color.Blue;
-            this.label215.Location = new System.Drawing.Point(210, 39);
+            this.label215.Location = new System.Drawing.Point(202, 49);
             this.label215.Name = "label215";
             this.label215.Size = new System.Drawing.Size(64, 13);
             this.label215.TabIndex = 265;
@@ -12200,7 +12234,7 @@ namespace DataDecoder
             // txtTxB
             // 
             this.txtTxB.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtTxB.Location = new System.Drawing.Point(193, 35);
+            this.txtTxB.Location = new System.Drawing.Point(185, 45);
             this.txtTxB.Name = "txtTxB";
             this.txtTxB.Size = new System.Drawing.Size(15, 20);
             this.txtTxB.TabIndex = 264;
@@ -12213,7 +12247,7 @@ namespace DataDecoder
             this.label214.AutoSize = true;
             this.label214.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold);
             this.label214.ForeColor = System.Drawing.Color.Firebrick;
-            this.label214.Location = new System.Drawing.Point(210, 15);
+            this.label214.Location = new System.Drawing.Point(202, 25);
             this.label214.Name = "label214";
             this.label214.Size = new System.Drawing.Size(64, 13);
             this.label214.TabIndex = 263;
@@ -12222,7 +12256,7 @@ namespace DataDecoder
             // txtTxA
             // 
             this.txtTxA.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtTxA.Location = new System.Drawing.Point(193, 11);
+            this.txtTxA.Location = new System.Drawing.Point(185, 21);
             this.txtTxA.Name = "txtTxA";
             this.txtTxA.Size = new System.Drawing.Size(15, 20);
             this.txtTxA.TabIndex = 262;
@@ -12527,11 +12561,11 @@ namespace DataDecoder
             this.btnSaveSO2R.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.btnSaveSO2R.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold);
             this.btnSaveSO2R.ForeColor = System.Drawing.Color.Navy;
-            this.btnSaveSO2R.Location = new System.Drawing.Point(318, 11);
+            this.btnSaveSO2R.Location = new System.Drawing.Point(280, 11);
             this.btnSaveSO2R.Name = "btnSaveSO2R";
-            this.btnSaveSO2R.Size = new System.Drawing.Size(96, 23);
+            this.btnSaveSO2R.Size = new System.Drawing.Size(46, 23);
             this.btnSaveSO2R.TabIndex = 230;
-            this.btnSaveSO2R.Text = "Save Settings";
+            this.btnSaveSO2R.Text = "Save";
             this.toolTip1.SetToolTip(this.btnSaveSO2R, "Press to save matrix data.");
             this.btnSaveSO2R.UseVisualStyleBackColor = true;
             this.btnSaveSO2R.Click += new System.EventHandler(this.btnSaveSO2R_Click);
@@ -12541,7 +12575,7 @@ namespace DataDecoder
             this.label184.AutoSize = true;
             this.label184.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold);
             this.label184.ForeColor = System.Drawing.Color.Navy;
-            this.label184.Location = new System.Drawing.Point(103, 34);
+            this.label184.Location = new System.Drawing.Point(103, 43);
             this.label184.Name = "label184";
             this.label184.Size = new System.Drawing.Size(65, 13);
             this.label184.TabIndex = 228;
@@ -12637,7 +12671,7 @@ namespace DataDecoder
             this.cboSwPort.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.25F, System.Drawing.FontStyle.Bold);
             this.cboSwPort.ForeColor = System.Drawing.Color.Firebrick;
             this.cboSwPort.FormattingEnabled = true;
-            this.cboSwPort.Location = new System.Drawing.Point(103, 11);
+            this.cboSwPort.Location = new System.Drawing.Point(103, 20);
             this.cboSwPort.Name = "cboSwPort";
             this.cboSwPort.Size = new System.Drawing.Size(68, 21);
             this.cboSwPort.TabIndex = 227;
@@ -14321,7 +14355,7 @@ namespace DataDecoder
             // 
             // openFileDialog1
             // 
-            this.openFileDialog1.FileName = "openFileDialog1";
+            this.openFileDialog1.CheckFileExists = false;
             // 
             // AccPort
             // 
@@ -16595,6 +16629,8 @@ namespace DataDecoder
         private TextBox txtZR;
         private Label lblZL;
         private TextBox txtZL;
+        private Button btnLoadSO2R;
+        private Button btnSo2rFile;
 
     }
 }

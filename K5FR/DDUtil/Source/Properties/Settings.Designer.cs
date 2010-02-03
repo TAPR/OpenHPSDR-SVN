@@ -4570,5 +4570,17 @@ namespace DataDecoder.Properties {
                 this["cboKnobBDC"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("SO2R.xml")]
+        public string SO2RDataFile {
+            get {
+                return ((string)(this["SO2RDataFile"]));
+            }
+            set {
+                this["SO2RDataFile"] = value;
+            }
+        }
     }
 }
