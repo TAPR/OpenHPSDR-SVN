@@ -33,6 +33,7 @@ using System.Globalization;
 using System.IO;
 using System.IO.Ports;
 using System.Net;
+using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Security.Permissions;
 using System.Text;
@@ -4462,7 +4463,7 @@ namespace DataDecoder
             try
             {
                 openFileDialog1.Filter = "xml files|*.xml";
-                openFileDialog1.Title = "Select a XML File";
+                openFileDialog1.Title = "Select an XML File";
                 if (openFileDialog1.ShowDialog() == DialogResult.OK)
                 {
                     txtMacFile.Text = openFileDialog1.FileName;
@@ -4668,12 +4669,6 @@ namespace DataDecoder
                 }
             }
             catch { }
-            //catch (Exception ex)
-            //{
-            //    bool bReturnLog = false;
-            //    bReturnLog = ErrorLog.ErrorRoutine(false, enableErrorLog, ex);
-            //    if (false == bReturnLog) MessageBox.Show("Unable to write to log");
-            //}
         }
         // Processes commands from the data grid, calls WriteToPort()
         // which sends commands to the radio. This routine includes a buffer
@@ -8539,6 +8534,15 @@ namespace DataDecoder
         int LastZZSW = 0;                 // last active tx vfo a/b
         bool inhibA = false;
         bool inhibB = false;
+        public static string so2rFile = "";
+
+        public static DataSet dso;
+
+        private static string app_data_path = "";
+        public static string AppDataPath
+        {
+            set { app_data_path = value; }
+        }
 
         public const short FILE_ATTRIBUTE_NORMAL = 0x80;
         public const short INVALID_HANDLE_VALUE = -1;
@@ -8569,12 +8573,31 @@ namespace DataDecoder
         // Initialization
         void SOinit()
         {
-            chkSoEnab.Checked = set.chkSoEnab;
+            //chkSoEnab.Checked = set.chkSoEnab;
             cboSwPort.SelectedIndex = set.cboSwPort;
-            txtLPT2.Text = set.txtLPT2;
-            chk1Amp.Checked = set.chk1Amp;
-            txtTxA.Text = set.txtTxA; 
-            txtTxB.Text = set.txtTxB; 
+            so2rFile = set.SO2RDataFile;
+            if (app_data_path == "")
+            {
+                Assembly assembly = Assembly.GetExecutingAssembly();
+                FileVersionInfo fvi = FileVersionInfo.GetVersionInfo(assembly.Location);
+                string version = fvi.FileVersion.Substring(0, fvi.FileVersion.LastIndexOf("."));
+                //AppDataPath = assembly.Location;
+                AppDataPath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData)
+                + "\\DDUtil\\";
+            }
+            if (!Directory.Exists(app_data_path))
+                Directory.CreateDirectory(app_data_path);
+
+            dso = new DataSet();
+            if (File.Exists(app_data_path + "\\" + so2rFile))
+                dso.ReadXml(app_data_path + "\\" + so2rFile);
+            grpSO2R.Text = "SO2R - [" + so2rFile + "]";
+            LoadVars(); //load matrix with last used data file
+
+            //txtLPT2.Text = set.txtLPT2;
+            //chk1Amp.Checked = set.chk1Amp;
+            //txtTxA.Text = set.txtTxA;
+            //txtTxB.Text = set.txtTxB;
             chkAutoDrv.Checked = false;
             if (chkSoEnab.Checked)
             {
@@ -8585,75 +8608,75 @@ namespace DataDecoder
 
                 #region # Load SO2R Matrix Controls #
 
-                // Load SO2R band controls from settings file
-                chkSO1a.Checked = set.chkSO1a; chkSO2a.Checked = set.chkSO2a; 
-                chkSO3a.Checked = set.chkSO3a; chkSO4a.Checked = set.chkSO4a; 
-                chkSO5a.Checked = set.chkSO5a; chkSO6a.Checked = set.chkSO6a; 
-                chkSO7a.Checked = set.chkSO7a; chkSO8a.Checked = set.chkSO8a; 
-                chkSO9a.Checked = set.chkSO9a; chkSO10a.Checked = set.chkSO10a;
-                chkSO1b.Checked = set.chkSO1b; chkSO2b.Checked = set.chkSO2b;
-                chkSO3b.Checked = set.chkSO3b; chkSO4b.Checked = set.chkSO4b;
-                chkSO5b.Checked = set.chkSO5b; chkSO6b.Checked = set.chkSO6b;
-                chkSO7b.Checked = set.chkSO7b; chkSO8b.Checked = set.chkSO8b;
-                chkSO9b.Checked = set.chkSO9b; chkSO10b.Checked = set.chkSO10b;
-                // misc text boxes
-                txtLPT1_1.Text = set.txtLPT1_1; txtLPT1_2.Text = set.txtLPT1_2;
-                txtLPT1_3.Text = set.txtLPT1_3; txtLPT1_4.Text = set.txtLPT1_4;
-                txtLPT1_5.Text = set.txtLPT1_5; txtLPT1_6.Text = set.txtLPT1_6;
-                txtLPT1_7.Text = set.txtLPT1_7; txtLPT1_8.Text = set.txtLPT1_8;
-                txtLPT1_9.Text = set.txtLPT1_9; txtLPT1_10.Text = set.txtLPT1_10;
-                // VFO A Controls
-                txtHi1_1a.Text = set.txtHi1_1a; txtHi1_2a.Text = set.txtHi1_2a;
-                txtHi1_3a.Text = set.txtHi1_3a; txtHi1_4a.Text = set.txtHi1_4a;
-                txtHi1_5a.Text = set.txtHi1_5a; txtHi1_6a.Text = set.txtHi1_6a;
-                txtHi1_7a.Text = set.txtHi1_7a; txtHi1_8a.Text = set.txtHi1_8a;
-                txtHi1_9a.Text = set.txtHi1_9a; txtHi1_10a.Text = set.txtHi1_10a;
-                txtPwr_1a.Text = set.txtPwr_1a; txtPwr_2a.Text = set.txtPwr_2a;
-                txtPwr_3a.Text = set.txtPwr_3a; txtPwr_4a.Text = set.txtPwr_4a;
-                txtPwr_5a.Text = set.txtPwr_5a; txtPwr_6a.Text = set.txtPwr_6a;
-                txtPwr_7a.Text = set.txtPwr_7a; txtPwr_8a.Text = set.txtPwr_8a;
-                txtPwr_9a.Text = set.txtPwr_9a; txtPwr_10a.Text = set.txtPwr_10a;
-                txtRx_1a.Text = set.txtRx_1a; txtRx_2a.Text = set.txtRx_2a;
-                txtRx_3a.Text = set.txtRx_3a; txtRx_4a.Text = set.txtRx_4a;
-                txtRx_5a.Text = set.txtRx_5a; txtRx_6a.Text = set.txtRx_6a;
-                txtRx_7a.Text = set.txtRx_7a; txtRx_8a.Text = set.txtRx_8a;
-                txtRx_9a.Text = set.txtRx_9a; txtRx_10a.Text = set.txtRx_10a;
-                txtTx_1a.Text = set.txtTx_1a; txtTx_2a.Text = set.txtTx_2a;
-                txtTx_3a.Text = set.txtTx_3a; txtTx_4a.Text = set.txtTx_4a;
-                txtTx_5a.Text = set.txtTx_5a; txtTx_6a.Text = set.txtTx_6a;
-                txtTx_7a.Text = set.txtTx_7a; txtTx_8a.Text = set.txtTx_8a;
-                txtTx_9a.Text = set.txtTx_9a; txtTx_10a.Text = set.txtTx_10a;
-                txtHi2_1a.Text = set.txtHi2_1a; txtHi2_2a.Text = set.txtHi2_2a;
-                txtHi2_3a.Text = set.txtHi2_3a; txtHi2_4a.Text = set.txtHi2_4a;
-                txtHi2_5a.Text = set.txtHi2_5a; txtHi2_6a.Text = set.txtHi2_6a;
-                txtHi2_7a.Text = set.txtHi2_7a; txtHi2_8a.Text = set.txtHi2_8a;
-                txtHi2_9a.Text = set.txtHi2_9a; txtHi2_10a.Text = set.txtHi2_10a;
-                // VFO B Controls
-                txtLo1_1b.Text = set.txtLo1_1b; txtLo1_2b.Text = set.txtLo1_2b;
-                txtLo1_3b.Text = set.txtLo1_3b; txtLo1_4b.Text = set.txtLo1_4b;
-                txtLo1_5b.Text = set.txtLo1_5b; txtLo1_6b.Text = set.txtLo1_6b;
-                txtLo1_7b.Text = set.txtLo1_7b; txtLo1_8b.Text = set.txtLo1_8b;
-                txtLo1_9b.Text = set.txtLo1_9b; txtLo1_10b.Text = set.txtLo1_10b;
-                txtPwr_1b.Text = set.txtPwr_1b; txtPwr_2b.Text = set.txtPwr_2b;
-                txtPwr_3b.Text = set.txtPwr_3b; txtPwr_4b.Text = set.txtPwr_4b;
-                txtPwr_5b.Text = set.txtPwr_5b; txtPwr_6b.Text = set.txtPwr_6b;
-                txtPwr_7b.Text = set.txtPwr_7b; txtPwr_8b.Text = set.txtPwr_8b;
-                txtPwr_9b.Text = set.txtPwr_9b; txtPwr_10b.Text = set.txtPwr_10b;
-                txtRx_1b.Text = set.txtRx_1b; txtRx_2b.Text = set.txtRx_2b;
-                txtRx_3b.Text = set.txtRx_3b; txtRx_4b.Text = set.txtRx_4b;
-                txtRx_5b.Text = set.txtRx_5b; txtRx_6b.Text = set.txtRx_6b;
-                txtRx_7b.Text = set.txtRx_7b; txtRx_8b.Text = set.txtRx_8b;
-                txtRx_9b.Text = set.txtRx_9b; txtRx_10b.Text = set.txtRx_10b;
-                txtTx_1b.Text = set.txtTx_1b; txtTx_2b.Text = set.txtTx_2b;
-                txtTx_3b.Text = set.txtTx_3b; txtTx_4b.Text = set.txtTx_4b;
-                txtTx_5b.Text = set.txtTx_5b; txtTx_6b.Text = set.txtTx_6b;
-                txtTx_7b.Text = set.txtTx_7b; txtTx_8b.Text = set.txtTx_8b;
-                txtTx_9b.Text = set.txtTx_9b; txtTx_10b.Text = set.txtTx_10b;
-                txtLo2_1b.Text = set.txtLo2_1b; txtLo2_2b.Text = set.txtLo2_2b;
-                txtLo2_3b.Text = set.txtLo2_3b; txtLo2_4b.Text = set.txtLo2_4b;
-                txtLo2_5b.Text = set.txtLo2_5b; txtLo2_6b.Text = set.txtLo2_6b;
-                txtLo2_7b.Text = set.txtLo2_7b; txtLo2_8b.Text = set.txtLo2_8b;
-                txtLo2_9b.Text = set.txtLo2_9b; txtLo2_10b.Text = set.txtLo2_10b;
+                //// Load SO2R band controls from settings file
+                //chkSO1a.Checked = set.chkSO1a; chkSO2a.Checked = set.chkSO2a;
+                //chkSO3a.Checked = set.chkSO3a; chkSO4a.Checked = set.chkSO4a;
+                //chkSO5a.Checked = set.chkSO5a; chkSO6a.Checked = set.chkSO6a;
+                //chkSO7a.Checked = set.chkSO7a; chkSO8a.Checked = set.chkSO8a;
+                //chkSO9a.Checked = set.chkSO9a; chkSO10a.Checked = set.chkSO10a;
+                //chkSO1b.Checked = set.chkSO1b; chkSO2b.Checked = set.chkSO2b;
+                //chkSO3b.Checked = set.chkSO3b; chkSO4b.Checked = set.chkSO4b;
+                //chkSO5b.Checked = set.chkSO5b; chkSO6b.Checked = set.chkSO6b;
+                //chkSO7b.Checked = set.chkSO7b; chkSO8b.Checked = set.chkSO8b;
+                //chkSO9b.Checked = set.chkSO9b; chkSO10b.Checked = set.chkSO10b;
+                //// misc text boxes
+                //txtLPT1_1.Text = set.txtLPT1_1; txtLPT1_2.Text = set.txtLPT1_2;
+                //txtLPT1_3.Text = set.txtLPT1_3; txtLPT1_4.Text = set.txtLPT1_4;
+                //txtLPT1_5.Text = set.txtLPT1_5; txtLPT1_6.Text = set.txtLPT1_6;
+                //txtLPT1_7.Text = set.txtLPT1_7; txtLPT1_8.Text = set.txtLPT1_8;
+                //txtLPT1_9.Text = set.txtLPT1_9; txtLPT1_10.Text = set.txtLPT1_10;
+                //// VFO A Controls
+                //txtHi1_1a.Text = set.txtHi1_1a; txtHi1_2a.Text = set.txtHi1_2a;
+                //txtHi1_3a.Text = set.txtHi1_3a; txtHi1_4a.Text = set.txtHi1_4a;
+                //txtHi1_5a.Text = set.txtHi1_5a; txtHi1_6a.Text = set.txtHi1_6a;
+                //txtHi1_7a.Text = set.txtHi1_7a; txtHi1_8a.Text = set.txtHi1_8a;
+                //txtHi1_9a.Text = set.txtHi1_9a; txtHi1_10a.Text = set.txtHi1_10a;
+                //txtPwr_1a.Text = set.txtPwr_1a; txtPwr_2a.Text = set.txtPwr_2a;
+                //txtPwr_3a.Text = set.txtPwr_3a; txtPwr_4a.Text = set.txtPwr_4a;
+                //txtPwr_5a.Text = set.txtPwr_5a; txtPwr_6a.Text = set.txtPwr_6a;
+                //txtPwr_7a.Text = set.txtPwr_7a; txtPwr_8a.Text = set.txtPwr_8a;
+                //txtPwr_9a.Text = set.txtPwr_9a; txtPwr_10a.Text = set.txtPwr_10a;
+                //txtRx_1a.Text = set.txtRx_1a; txtRx_2a.Text = set.txtRx_2a;
+                //txtRx_3a.Text = set.txtRx_3a; txtRx_4a.Text = set.txtRx_4a;
+                //txtRx_5a.Text = set.txtRx_5a; txtRx_6a.Text = set.txtRx_6a;
+                //txtRx_7a.Text = set.txtRx_7a; txtRx_8a.Text = set.txtRx_8a;
+                //txtRx_9a.Text = set.txtRx_9a; txtRx_10a.Text = set.txtRx_10a;
+                //txtTx_1a.Text = set.txtTx_1a; txtTx_2a.Text = set.txtTx_2a;
+                //txtTx_3a.Text = set.txtTx_3a; txtTx_4a.Text = set.txtTx_4a;
+                //txtTx_5a.Text = set.txtTx_5a; txtTx_6a.Text = set.txtTx_6a;
+                //txtTx_7a.Text = set.txtTx_7a; txtTx_8a.Text = set.txtTx_8a;
+                //txtTx_9a.Text = set.txtTx_9a; txtTx_10a.Text = set.txtTx_10a;
+                //txtHi2_1a.Text = set.txtHi2_1a; txtHi2_2a.Text = set.txtHi2_2a;
+                //txtHi2_3a.Text = set.txtHi2_3a; txtHi2_4a.Text = set.txtHi2_4a;
+                //txtHi2_5a.Text = set.txtHi2_5a; txtHi2_6a.Text = set.txtHi2_6a;
+                //txtHi2_7a.Text = set.txtHi2_7a; txtHi2_8a.Text = set.txtHi2_8a;
+                //txtHi2_9a.Text = set.txtHi2_9a; txtHi2_10a.Text = set.txtHi2_10a;
+                //// VFO B Controls
+                //txtLo1_1b.Text = set.txtLo1_1b; txtLo1_2b.Text = set.txtLo1_2b;
+                //txtLo1_3b.Text = set.txtLo1_3b; txtLo1_4b.Text = set.txtLo1_4b;
+                //txtLo1_5b.Text = set.txtLo1_5b; txtLo1_6b.Text = set.txtLo1_6b;
+                //txtLo1_7b.Text = set.txtLo1_7b; txtLo1_8b.Text = set.txtLo1_8b;
+                //txtLo1_9b.Text = set.txtLo1_9b; txtLo1_10b.Text = set.txtLo1_10b;
+                //txtPwr_1b.Text = set.txtPwr_1b; txtPwr_2b.Text = set.txtPwr_2b;
+                //txtPwr_3b.Text = set.txtPwr_3b; txtPwr_4b.Text = set.txtPwr_4b;
+                //txtPwr_5b.Text = set.txtPwr_5b; txtPwr_6b.Text = set.txtPwr_6b;
+                //txtPwr_7b.Text = set.txtPwr_7b; txtPwr_8b.Text = set.txtPwr_8b;
+                //txtPwr_9b.Text = set.txtPwr_9b; txtPwr_10b.Text = set.txtPwr_10b;
+                //txtRx_1b.Text = set.txtRx_1b; txtRx_2b.Text = set.txtRx_2b;
+                //txtRx_3b.Text = set.txtRx_3b; txtRx_4b.Text = set.txtRx_4b;
+                //txtRx_5b.Text = set.txtRx_5b; txtRx_6b.Text = set.txtRx_6b;
+                //txtRx_7b.Text = set.txtRx_7b; txtRx_8b.Text = set.txtRx_8b;
+                //txtRx_9b.Text = set.txtRx_9b; txtRx_10b.Text = set.txtRx_10b;
+                //txtTx_1b.Text = set.txtTx_1b; txtTx_2b.Text = set.txtTx_2b;
+                //txtTx_3b.Text = set.txtTx_3b; txtTx_4b.Text = set.txtTx_4b;
+                //txtTx_5b.Text = set.txtTx_5b; txtTx_6b.Text = set.txtTx_6b;
+                //txtTx_7b.Text = set.txtTx_7b; txtTx_8b.Text = set.txtTx_8b;
+                //txtTx_9b.Text = set.txtTx_9b; txtTx_10b.Text = set.txtTx_10b;
+                //txtLo2_1b.Text = set.txtLo2_1b; txtLo2_2b.Text = set.txtLo2_2b;
+                //txtLo2_3b.Text = set.txtLo2_3b; txtLo2_4b.Text = set.txtLo2_4b;
+                //txtLo2_5b.Text = set.txtLo2_5b; txtLo2_6b.Text = set.txtLo2_6b;
+                //txtLo2_7b.Text = set.txtLo2_7b; txtLo2_8b.Text = set.txtLo2_8b;
+                //txtLo2_9b.Text = set.txtLo2_9b; txtLo2_10b.Text = set.txtLo2_10b;
 
                 #endregion # Load SO2R Controls #
 
@@ -8665,6 +8688,33 @@ namespace DataDecoder
                 bSo2rChg = false;               // set the so2r controls flag to false
                 lpt1 = Convert.ToInt32(txtLPT1_1.Text);
                 lpt2 = Convert.ToInt32(txtLPT2.Text);
+
+
+            }
+        }
+        // call file dialog
+        void GetFile()
+        {
+            try
+            {
+                openFileDialog1.InitialDirectory = app_data_path;
+                openFileDialog1.Filter = "xml files|*.xml";
+                openFileDialog1.Title = "Select a file";
+                if (openFileDialog1.ShowDialog() == DialogResult.OK)
+                {
+                    string filename = openFileDialog1.FileName;
+                    int start = openFileDialog1.FileName.LastIndexOf("\\") + 1;
+                    so2rFile = filename.Substring(start, filename.Length - start);
+                    grpSO2R.Text = "SO2R - [" + so2rFile + "]";
+                    set.SO2RDataFile = so2rFile;
+                    set.Save();
+                }
+            }
+            catch (Exception ex)
+            {
+                bool bReturnLog = false;
+                bReturnLog = ErrorLog.ErrorRoutine(false, enableErrorLog, ex);
+                if (false == bReturnLog) MessageBox.Show("Unable to write to log");
             }
         }
         // setup data for vfo a by band
@@ -9099,13 +9149,126 @@ namespace DataDecoder
             if (zzsw == 0) SetVfoA();
             else if (zzsw == 1) SetVfoB();
         }
+        //Load user vars
+        void LoadVars()
+        {
+            ArrayList chk_list = new ArrayList();
+            ArrayList txt_list = new ArrayList();
+            foreach (Control c in this.grpSO2R.Controls)			// For each control
+            {
+                if (c.GetType() == typeof(CheckBox))
+                    chk_list.Add(c);
+                else if (c.GetType() == typeof(TextBox))
+                    txt_list.Add(c);
+            }
+            ArrayList a = GetVars("SO2R");							// Get the saved list of controls
+            a.Sort();
+            int num_controls = chk_list.Count + txt_list.Count;
+
+            foreach (string s in a)				// string is in the format "name,value"
+            {
+                string[] vals = s.Split('/');
+                string name = vals[0];
+                string val = vals[1];
+
+                if (s.StartsWith("chk"))			// control is a CheckBox
+                {
+                    for (int i = 0; i < chk_list.Count; i++)
+                    {	// look through each control to find the matching name
+                        CheckBox c = (CheckBox)chk_list[i];
+                        if (c.Name.Equals(name))		// name found
+                        {
+                            c.Checked = bool.Parse(val);	// restore value
+                            i = chk_list.Count + 1;
+                        }
+                        if (i == chk_list.Count)
+                            MessageBox.Show("Control not found: " + name, "GetVars Error",
+                                MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    }
+                }
+                else if (s.StartsWith("txt"))
+                {	// look through each control to find the matching name
+                    for (int i = 0; i < txt_list.Count; i++)
+                    {
+                        TextBox c = (TextBox)txt_list[i];
+                        if (c.Name.Equals(name))		// name found
+                        {
+                            c.Text = val;	// restore value
+                            i = txt_list.Count + 1;
+                        }
+                        if (i == txt_list.Count)
+                            MessageBox.Show("Control not found: " + name, "GetVars Error",
+                                MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    }
+                }
+            }
+            bSo2rChg = false;               // set the so2r controls flag to false
+        }
+        // save user variables
+		public static void SaveVars(string tableName, ref ArrayList list)
+		{
+			if(!dso.Tables.Contains(tableName))
+				AddFormTable(tableName);
+
+			foreach(string s in list)
+			{
+				string[] vals = s.Split('/');
+				if(vals.Length > 2)
+				{
+					for(int i=2; i<vals.Length; i++)
+						vals[1] += "/"+vals[i];
+				}
+
+				DataRow[] rows = dso.Tables[tableName].Select("Key = '"+vals[0]+"'");
+				if(rows.Length == 0)	// name is not in list
+				{
+					DataRow newRow = dso.Tables[tableName].NewRow();
+					newRow[0] = vals[0];
+					newRow[1] = vals[1];
+					dso.Tables[tableName].Rows.Add(newRow);
+				}
+				else if(rows.Length == 1)
+				{
+					rows[0][1] = vals[1];
+				}
+			}
+            SaveDB();
+		}
+        // retrieve user variables
+		public static ArrayList GetVars(string tableName)
+		{
+			ArrayList list = new ArrayList();
+			if(!dso.Tables.Contains(tableName))
+				return list;
+
+			DataTable t = dso.Tables[tableName];
+
+			for(int i=0; i<t.Rows.Count; i++)
+			{
+				list.Add(t.Rows[i][0].ToString()+"/"+t.Rows[i][1].ToString());
+			}
+
+			return list;
+		}
+        // add a table to the data set
+        private static void AddFormTable(string name)
+        {
+            dso.Tables.Add(name);
+            dso.Tables[name].Columns.Add("Key", typeof(string));
+            dso.Tables[name].Columns.Add("Value", typeof(string));
+        }
+        // write data to the db file
+        public static void SaveDB()
+        {
+            dso.WriteXml(app_data_path + "\\" + so2rFile , XmlWriteMode.WriteSchema);
+        }
 
         #endregion # SO2R Methods #
 
         #region # SO2R Events #
 
-        // The Save Settings button was pressed
-        private void btnSaveSO2R_Click(object sender, EventArgs e)
+        // The Save button was pressed
+        private void btnSaveSO2R_ClickOld(object sender, EventArgs e)
         {
             set.txtLPT2 = txtLPT2.Text; lpt2 = Convert.ToInt32(txtLPT2.Text);
             set.txtTxA = txtTxA.Text; set.txtTxB = txtTxB.Text;
@@ -9192,6 +9355,71 @@ namespace DataDecoder
             lpt2 = Convert.ToInt32(txtLPT2.Text);
             bSo2rChg = false;
             SOinit();
+        }
+        // The Save button was pressed
+        private void btnSaveSO2R_Click(object sender, EventArgs e)
+        {
+            
+            DialogResult result;
+            result = MessageBox.Show("Saving matrix data to file: " + so2rFile + " Is this ok?\r\r" +
+                "If 'Yes' press Ok to continue saving the file.\r" +
+                "If 'No' press No to select a new file name.\r" +
+                "Press Cancel to abort this operation.", "Information",
+                MessageBoxButtons.YesNoCancel, MessageBoxIcon.Information,
+                MessageBoxDefaultButton.Button1);
+            
+            if (result == DialogResult.Cancel)
+                return;
+            else if (result == DialogResult.No)
+            {
+                GetFile();
+                if (File.Exists(app_data_path + "\\" + so2rFile))
+                { dso.Clear(); dso.ReadXml(app_data_path + "\\" + so2rFile); }
+            }
+
+            ArrayList a = new ArrayList();
+            foreach (Control c in this.grpSO2R.Controls)			// For each control
+            {
+                if (c.GetType() == typeof(CheckBox))
+                    a.Add(c.Name + "/" + ((CheckBox)c).Checked.ToString());
+                else if (c.GetType() == typeof(TextBox))
+                    a.Add(c.Name + "/" + ((TextBox)c).Text);
+            }
+            SaveVars("SO2R", ref a);		// save the values to the DB
+        }        
+        // The Load button was pressed
+        private void btnLoadSO2R_Click(object sender, EventArgs e)
+        {
+            GetFile();
+            if (File.Exists(app_data_path + "\\" + so2rFile))
+            { dso.Clear(); dso.ReadXml(app_data_path + "\\" + so2rFile); }
+            LoadVars();
+        }
+        // the file button was pressed
+        private void btnSo2rFile_Click(object sender, EventArgs e)
+        {
+            //try
+            //{
+            //    openFileDialog1.InitialDirectory = app_data_path;
+            //    openFileDialog1.Filter = "xml files|*.xml";
+            //    openFileDialog1.Title = "Select an XML File";
+            //    if (openFileDialog1.ShowDialog() == DialogResult.OK)
+            //    {
+            //        string filename = openFileDialog1.FileName;
+            //        int start = openFileDialog1.FileName.LastIndexOf("\\") + 1;
+            //        so2rFile = filename.Substring(start, filename.Length-start);
+            //        grpSO2R.Text = "SO2R - [" + so2rFile + "]";
+            //        set.SO2RDataFile = so2rFile;
+            //        set.Save();
+            //    }
+            //}
+            //catch (Exception ex)
+            //{
+            //    bool bReturnLog = false;
+            //    bReturnLog = ErrorLog.ErrorRoutine(false, enableErrorLog, ex);
+            //    if (false == bReturnLog) MessageBox.Show("Unable to write to log");
+            //}
+
         }
         // the TX switch has changed
         internal void PinChanged(object sender, SerialPinChangedEventArgs e)

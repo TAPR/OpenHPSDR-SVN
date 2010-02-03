@@ -1142,5 +1142,8 @@ RCP4 - WriteLog</Value>
     <Setting Name="cboKnobBDC" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">-1</Value>
     </Setting>
+    <Setting Name="SO2RDataFile" Type="System.String" Scope="User">
+      <Value Profile="(Default)">SO2R.xml</Value>
+    </Setting>
   </Settings>
 </SettingsFile>
