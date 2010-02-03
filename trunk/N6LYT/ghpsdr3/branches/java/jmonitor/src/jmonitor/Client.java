@@ -15,9 +15,10 @@ import java.net.UnknownHostException;
  *
  * @author john
  */
-public class Client {
+public class Client extends Thread {
 
-    public Client(String server,int receiver) {
+    public Client(String server,int receiver,Audio audio) {
+        this.audio=audio;
         if(server!=null) {
             this.server=server;
         }
@@ -61,6 +62,7 @@ public class Client {
     }
 
     public void close() {
+        running=false;
         try {
             socket.close();
         } catch(IOException e) {
@@ -68,46 +70,90 @@ public class Client {
         }
     }
 
-    public void getSpectrum() {
+    public void run() {
         int bytes;
-        byte[] buffer=new byte[48+SAMPLES];
+        byte[] buffer = new byte[48 + SAMPLES];
         int j;
-        if(socket!=null) {
+        while(running) {
             try {
-                sendCommand("getSpectrum "+SAMPLES);
-                bytes=inputStream.read(buffer);
-                if(bytes==buffer.length) {
-                    //System.err.println("getSpectrum: read "+Integer.toString(bytes)+" bytes");
-                    // Strings sent with NULL terminator
-                    //j = 0;
-                    //while (buffer[j] != '\0')j++;
-                    //frequency=new String(buffer,0,j);
-                    //j=0;
-                    //while(buffer[j+14]!='\0') j++;
-                    //filterLow=new String(buffer,14,j);
-                    //j=0;
-                    //while(buffer[j+20]!='\0') j++;
-                    //filterHigh=new String(buffer,20,j);
-                    //j = 0;
-                    //while (buffer[j+26] != '\0') j++;
-                    //mode=new String(buffer,26,j);
-                    j=0;
-                    while(buffer[j+32]!='\0') j++;
-                    sampleRate=new String(buffer,32,j);
-                    j=0;
-                    while(buffer[j+40]!='\0') j++;
-                    meter=Integer.parseInt(new String(buffer,40,j));
+                bytes=0;
+                while(bytes<buffer.length) {
+                    bytes += inputStream.read(buffer,bytes,buffer.length-bytes);
+                }
+                if (bytes == buffer.length) {
 
-                    for(int i=0;i<SAMPLES;i++) {
-                        samples[i]=-(buffer[i+48]&0xFF)-30;
+                    //System.err.println("input buffer: "+Integer.toString(buffer[0]));
+                    
+                    if(buffer[0]==0) {
+                        //spectrum buffer
+                        processSpectrumBuffer(buffer);
+                    } else if(buffer[0]==1) {
+                        // audio buffer
+                        processAudioBuffer(buffer);
+                    } else {
+                        System.err.println("invalid buffer");
                     }
                 } else {
-                    System.err.println("read spectrum read "+Integer.toString(bytes)+" bytes");
+                    System.err.println("read spectrum read " + Integer.toString(bytes) + " bytes");
                 }
             } catch (IOException e) {
+                if(running) {
+                    System.err.println("Client.run exception reading input stream "+e.getMessage());
+                    running=false;
+                }
             }
+
         }
     }
+
+    private void processSpectrumBuffer(byte[] buffer) {
+        int j;
+        //System.err.println("getSpectrum: read "+Integer.toString(bytes)+" bytes");
+        // Strings sent with NULL terminator
+        //j = 0;
+        //while (buffer[j] != '\0')j++;
+        //frequency=new String(buffer,0,j);
+        //j=0;
+        //while(buffer[j+14]!='\0') j++;
+        //filterLow=new String(buffer,14,j);
+        //j=0;
+        //while(buffer[j+20]!='\0') j++;
+        //filterHigh=new String(buffer,20,j);
+        //j = 0;
+        //while (buffer[j+26] != '\0') j++;
+        //mode=new String(buffer,26,j);
+        j = 0;
+        while (buffer[j + 32] != '\0') {
+            j++;
+        }
+        sampleRate = new String(buffer, 32, j);
+        j = 0;
+        while (buffer[j + 40] != '\0') {
+            j++;
+        }
+        try {
+            meter = Integer.parseInt(new String(buffer, 40, j));
+        } catch (NumberFormatException e) {
+            meter=-121;
+        }
+
+        for (int i = 0; i < SAMPLES; i++) {
+            samples[i] = -(buffer[i + 48] & 0xFF) - 30;
+        }
+
+        listener.updateSamples(this.getSamples(),this.getFilterLow(),this.getFilterHigh(),this.getSampleRate());
+
+    }
+
+    private void processAudioBuffer(byte[] buffer) {
+        audio.playAudioBuffer(buffer);
+    }
+
+    public void getSpectrum(MonitorUpdateListener listener) {
+        this.listener=listener;
+        sendCommand("getSpectrum "+SAMPLES);
+    }
+
 
     public float[] getSamples() {
         return samples;
@@ -162,6 +208,11 @@ public class Client {
     public int getCWPitch() {
         return cwPitch;
     }
+
+    Audio audio;
+    MonitorUpdateListener listener;
+
+    boolean running=true;
 
     private int port=8000;
     private String server="81.146.61.118";

@@ -19,9 +19,7 @@ public class MonitorUpdateThread extends Thread {
     public void run() {
         System.err.println("MonitorUpdateThread.run");
         while(true) {
-            client.getSpectrum();
-            listener.updateSamples(client.getSamples(),client.getFilterLow(),client.getFilterHigh(),client.getSampleRate());
-            //monitorFrame.setTitle("JMonitor: "+client.getFrequency()+" "+client.getMode()+" S="+client.getMeter());
+            client.getSpectrum(listener);
             try {
                 sleep(1000/fps);
             } catch (InterruptedException e) {
