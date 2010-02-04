@@ -860,7 +860,6 @@ namespace DataDecoder
             this.txtLong = new System.Windows.Forms.TextBox();
             this.tabProp = new System.Windows.Forms.TabPage();
             this.grpSO2R = new System.Windows.Forms.GroupBox();
-            this.btnSo2rFile = new System.Windows.Forms.Button();
             this.btnLoadSO2R = new System.Windows.Forms.Button();
             this.label215 = new System.Windows.Forms.Label();
             this.txtTxB = new System.Windows.Forms.TextBox();
@@ -11992,7 +11991,6 @@ namespace DataDecoder
             // 
             // grpSO2R
             // 
-            this.grpSO2R.Controls.Add(this.btnSo2rFile);
             this.grpSO2R.Controls.Add(this.btnLoadSO2R);
             this.grpSO2R.Controls.Add(this.label215);
             this.grpSO2R.Controls.Add(this.txtTxB);
@@ -12188,22 +12186,7 @@ namespace DataDecoder
             this.grpSO2R.Size = new System.Drawing.Size(425, 303);
             this.grpSO2R.TabIndex = 81;
             this.grpSO2R.TabStop = false;
-            this.grpSO2R.Text = "SO2R - [160CW.xml]";
-            // 
-            // btnSo2rFile
-            // 
-            this.btnSo2rFile.AutoSize = true;
-            this.btnSo2rFile.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.btnSo2rFile.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold);
-            this.btnSo2rFile.ForeColor = System.Drawing.Color.Navy;
-            this.btnSo2rFile.Location = new System.Drawing.Point(382, 11);
-            this.btnSo2rFile.Name = "btnSo2rFile";
-            this.btnSo2rFile.Size = new System.Drawing.Size(37, 23);
-            this.btnSo2rFile.TabIndex = 267;
-            this.btnSo2rFile.Text = "File";
-            this.toolTip1.SetToolTip(this.btnSo2rFile, "Press to select matrix data file.");
-            this.btnSo2rFile.UseVisualStyleBackColor = true;
-            this.btnSo2rFile.Click += new System.EventHandler(this.btnSo2rFile_Click);
+            this.grpSO2R.Text = "SO2R";
             // 
             // btnLoadSO2R
             // 
@@ -12211,7 +12194,7 @@ namespace DataDecoder
             this.btnLoadSO2R.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.btnLoadSO2R.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold);
             this.btnLoadSO2R.ForeColor = System.Drawing.Color.Navy;
-            this.btnLoadSO2R.Location = new System.Drawing.Point(332, 11);
+            this.btnLoadSO2R.Location = new System.Drawing.Point(352, 11);
             this.btnLoadSO2R.Name = "btnLoadSO2R";
             this.btnLoadSO2R.Size = new System.Drawing.Size(45, 23);
             this.btnLoadSO2R.TabIndex = 266;
@@ -12561,7 +12544,7 @@ namespace DataDecoder
             this.btnSaveSO2R.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.btnSaveSO2R.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold);
             this.btnSaveSO2R.ForeColor = System.Drawing.Color.Navy;
-            this.btnSaveSO2R.Location = new System.Drawing.Point(280, 11);
+            this.btnSaveSO2R.Location = new System.Drawing.Point(290, 11);
             this.btnSaveSO2R.Name = "btnSaveSO2R";
             this.btnSaveSO2R.Size = new System.Drawing.Size(46, 23);
             this.btnSaveSO2R.TabIndex = 230;
@@ -16630,7 +16613,6 @@ namespace DataDecoder
         private Label lblZL;
         private TextBox txtZL;
         private Button btnLoadSO2R;
-        private Button btnSo2rFile;
 
     }
 }
