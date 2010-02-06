@@ -36,7 +36,7 @@ int ozy_software_version=0;
 
 int forwardPower=0;
 
-static pthread_t spectrum_thread_id;
+static pthread_t iq_thread_id;
 static pthread_t keepalive_thread_id;
 
 static long rxFrequency=7056000;
@@ -87,7 +87,7 @@ int usb_output_buffers=0;
 
 int show_software_serial_numbers=1;
 
-unsigned char spectrum_samples[SPECTRUM_BUFFER_SIZE];
+unsigned char iq_samples[SPECTRUM_BUFFER_SIZE];
 
 int lt2208ADCOverflow=0;
 
@@ -141,57 +141,46 @@ static int port_audio=0;
 
 void dump_udp_buffer(unsigned char* buffer);
 
-void* spectrum_thread(void* arg) {
+void* iq_thread(void* arg) {
     int bytes_read;
     int bytes_written;
-    int spectrum_socket;
-    struct sockaddr_in spectrum_addr;
-    int spectrum_length;
+    int iq_socket;
+    struct sockaddr_in iq_addr;
+    int iq_length;
     struct sockaddr_in client_addr;
     int client_length;
-    int c,i,j;
-    short sample;
-    unsigned char audio_buffer[BUFFER_SIZE*2*2];
+    int c,j;
     BUFFER buffer;
     unsigned long sequence=0L;
     unsigned short offset=0;;
-    unsigned short length;
     int on=1;
 
-    spectrum_length=sizeof(spectrum_addr);
+    iq_length=sizeof(iq_addr);
     client_length=sizeof(client_addr);
 
-    // create a socket to receive spectrum from the server
-    spectrum_socket=socket(PF_INET,SOCK_DGRAM,IPPROTO_UDP);
-    if(spectrum_socket<0) {
-        perror("spectrum_thread: create spectrum socket failed");
+    // create a socket to receive iq from the server
+    iq_socket=socket(PF_INET,SOCK_DGRAM,IPPROTO_UDP);
+    if(iq_socket<0) {
+        perror("iq_thread: create iq socket failed");
         exit(1);
     }
 
-    setsockopt(spectrum_socket, SOL_SOCKET, SO_REUSEADDR, &on, sizeof(on));
+    setsockopt(iq_socket, SOL_SOCKET, SO_REUSEADDR, &on, sizeof(on));
 
-    memset(&spectrum_addr,0,spectrum_length);
+    memset(&iq_addr,0,iq_length);
 
-    spectrum_addr.sin_family=AF_INET;
-    spectrum_addr.sin_addr.s_addr=htonl(INADDR_ANY);
-    spectrum_addr.sin_port=htons(SPECTRUM_PORT+(receiver*2));
+    iq_addr.sin_family=AF_INET;
+    iq_addr.sin_addr.s_addr=htonl(INADDR_ANY);
+    iq_addr.sin_port=htons(SPECTRUM_PORT+(receiver*2));
 
-    if(bind(spectrum_socket,(struct sockaddr*)&spectrum_addr,spectrum_length)<0) {
-        perror("spectrum_thread: bind socket failed for spectrum socket");
+    if(bind(iq_socket,(struct sockaddr*)&iq_addr,iq_length)<0) {
+        perror("iq_thread: bind socket failed for iq socket");
         exit(1);
     }
 
-    fprintf(stderr,"ozy_init: spectrum bound to port %d socket=%d\n",spectrum_addr.sin_port,spectrum_socket);
+    fprintf(stderr,"ozy_init: iq bound to port %d socket=%d\n",iq_addr.sin_port,iq_socket);
 
-fprintf(stderr,"spectrum_thread: socket %d\n",spectrum_socket);
-
-/*
-    if(local_audio) {
-        open_local_audio();
-    } else if(port_audio) {
-        open_port_audio();
-    }
-*/
+fprintf(stderr,"iq_thread: socket %d\n",iq_socket);
 
 
 fprintf(stderr,"output_sample_increment=%d\n",output_sample_increment);
@@ -199,9 +188,9 @@ fprintf(stderr,"output_sample_increment=%d\n",output_sample_increment);
     while(1) {
 #ifdef SMALL_PACKETS
         while(1) {
-            bytes_read=recvfrom(spectrum_socket,(char*)&buffer,sizeof(buffer),0,(struct sockaddr*)&client_addr,&client_length);
+            bytes_read=recvfrom(iq_socket,(char*)&buffer,sizeof(buffer),0,(struct sockaddr*)&client_addr,&client_length);
             if(bytes_read<0) {
-                perror("recvfrom socket failed for spectrum buffer");
+                perror("recvfrom socket failed for iq buffer");
                 exit(1);
             }
 
@@ -229,9 +218,9 @@ if(ozy_debug) {
             }
         }
 #else
-        bytes_read=recvfrom(spectrum_socket,(char*)input_buffer,BUFFER_SIZE*2*4,0,(struct sockaddr*)&client_addr,&client_length);
+        bytes_read=recvfrom(iq_socket,(char*)input_buffer,BUFFER_SIZE*2*4,0,(struct sockaddr*)&client_addr,&client_length);
         if(bytes_read<0) {
-            perror("recvfrom socket failed for spectrum buffer");
+            perror("recvfrom socket failed for iq buffer");
             exit(1);
         }
 #endif
@@ -245,23 +234,12 @@ if(ozy_debug) {
             audio_stream_put_samples(left_rx_sample,left_rx_sample);
         }
 
-/*
-        if(local_audio) {
-            // play the audio back locally
-            write_local_audio(&output_buffer,&output_buffer[BUFFER_SIZE],BUFFER_SIZE,output_sample_increment);
-        } else if(port_audio) {
-            write_port_audio(&output_buffer,&output_buffer[BUFFER_SIZE],BUFFER_SIZE,output_sample_increment);
-        } else {
-*/
-            // send the audio back to the server
-            bytes_written=sendto(audio_socket,output_buffer,sizeof(output_buffer),0,(struct sockaddr *)&audio_addr,audio_length);
-            if(bytes_written<0) {
-                fprintf(stderr,"sendto audio failed: %d\n",bytes_written);
-                exit(1);
-            }
-/*
+        // send the audio back to the server
+        bytes_written=sendto(audio_socket,output_buffer,sizeof(output_buffer),0,(struct sockaddr *)&audio_addr,audio_length);
+        if(bytes_written<0) {
+           fprintf(stderr,"sendto audio failed: %d\n",bytes_written);
+           exit(1);
         }
-*/
 
     }
 }
@@ -389,12 +367,12 @@ void process_ozy_input_buffer(char* buffer) {
 
 /* --------------------------------------------------------------------------*/
 /** 
-* @brief Get the spectrum samples
+* @brief Get the iq samples
 * 
 * @param samples
 */
 void getSpectrumSamples(char *samples) {
-    memcpy(samples,spectrum_samples,SPECTRUM_BUFFER_SIZE);
+    memcpy(samples,iq_samples,SPECTRUM_BUFFER_SIZE);
 }
 
 /* --------------------------------------------------------------------------*/
@@ -433,7 +411,6 @@ fprintf(stderr,"setSpeed %d\n",s);
 int ozy_init() {
     int rc;
     struct hostent *h;
-    char command[64];
     int on=1;
 
     h=gethostbyname(server_address);
@@ -503,10 +480,10 @@ int ozy_init() {
         exit(1);
     }
 
-    // create a thread to listen for spectrum frames
-    rc=pthread_create(&spectrum_thread_id,NULL,spectrum_thread,NULL);
+    // create a thread to listen for iq frames
+    rc=pthread_create(&iq_thread_id,NULL,iq_thread,NULL);
     if(rc != 0) {
-        fprintf(stderr,"pthread_create failed on spectrum_thread: rc=%d\n", rc);
+        fprintf(stderr,"pthread_create failed on iq_thread: rc=%d\n", rc);
     }
 
     return rc;
@@ -545,7 +522,6 @@ int getADCOverflow() {
 * @return 
 */
 void ozySaveState() {
-    char string[128];
 }
 
 /* --------------------------------------------------------------------------*/
@@ -555,7 +531,6 @@ void ozySaveState() {
 * @return 
 */
 void ozyRestoreState() {
-    char *value;
 }
 
 

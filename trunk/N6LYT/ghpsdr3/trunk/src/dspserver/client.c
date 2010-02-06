@@ -32,6 +32,7 @@
 #include <netinet/in.h>
 #include <arpa/inet.h>
 #include <netdb.h>
+#include <signal.h>
 #include <string.h>
 #include <pthread.h>
 #include <semaphore.h>
@@ -54,15 +55,15 @@ int serverSocket;
 int clientSocket;
 struct sockaddr_in server;
 struct sockaddr_in client;
-int addrlen;
+socklen_t addrlen;
 
-#define SPECTRUM_BUFFER_SIZE 4096
-float spectrumBuffer[SPECTRUM_BUFFER_SIZE];
+#define SAMPLE_BUFFER_SIZE 4096
+float spectrumBuffer[SAMPLE_BUFFER_SIZE];
 
 float meter;
 int smeter;
 
-sem_t network_semaphore;
+static sem_t network_semaphore;
 
 void* client_thread(void* arg);
 void client_send_samples(int size);
@@ -94,6 +95,8 @@ void client_init(int receiver) {
 
     sem_init(&network_semaphore,0,1);
 
+    signal(SIGPIPE, SIG_IGN);
+
     port=BASE_PORT+(receiver*2);
     clientSocket=-1;
     rc=pthread_create(&client_thread_id,NULL,client_thread,NULL);
@@ -114,7 +117,7 @@ fprintf(stderr,"client_thread\n");
     serverSocket=socket(AF_INET,SOCK_STREAM,0);
     if(serverSocket==-1) {
         perror("client socket");
-        return;
+        return NULL;
     }
 
     setsockopt(serverSocket, SOL_SOCKET, SO_REUSEADDR, &on, sizeof(on));
@@ -126,7 +129,7 @@ fprintf(stderr,"client_thread\n");
 
     if(bind(serverSocket,(struct sockaddr *)&server,sizeof(server))<0) {
         perror("client bind");
-        return;
+        return NULL;
     }
 
     while(1) {
@@ -209,12 +212,12 @@ fprintf(stderr,"client_thread\n");
 void client_send_samples(int size) {
     int rc;
     if(clientSocket!=-1) {
-        //sem_wait(&network_semaphore);
+        sem_wait(&network_semaphore);
             rc=send(clientSocket,client_samples,size+PREFIX,0);
             if(rc<0) {
-                perror("client_send_samples failed");
+                // perror("client_send_samples failed");
             }
-        //sem_post(&network_semaphore);
+        sem_post(&network_semaphore);
     } else {
         fprintf(stderr,"client_send_samples: clientSocket==-1\n");
     }
@@ -223,12 +226,12 @@ void client_send_samples(int size) {
 void client_send_audio(int size) {
     int rc;
     if(clientSocket!=-1) {
-        //sem_wait(&network_semaphore);
+        sem_wait(&network_semaphore);
             rc=send(clientSocket,audio_stream_buffer,size+PREFIX,0);
             if(rc<0) {
                 //perror("client_send_audio failed");
             }
-        //sem_post(&network_semaphore);
+        sem_post(&network_semaphore);
     } else {
         //fprintf(stderr,"client_send_audio: clientSocket==-1\n");
     }
@@ -261,12 +264,12 @@ void client_set_samples(float* samples,int size) {
     // next 8 bytes contain the meter
     sprintf(&client_samples[40],"%d",(int)meter);
 
-    slope=(float)SPECTRUM_BUFFER_SIZE/(float)size;
+    slope=(float)SAMPLE_BUFFER_SIZE/(float)size;
     for(i=0;i<size;i++) {
         max=-10000.0F;
         lindex=(int)floor((float)i*slope);
         rindex=(int)floor(((float)i*slope)+slope);
-        if(rindex>SPECTRUM_BUFFER_SIZE) rindex=SPECTRUM_BUFFER_SIZE;
+        if(rindex>SAMPLE_BUFFER_SIZE) rindex=SAMPLE_BUFFER_SIZE;
         for(j=lindex;j<rindex;j++) {
             if(samples[j]>max) max=samples[j];
         }
