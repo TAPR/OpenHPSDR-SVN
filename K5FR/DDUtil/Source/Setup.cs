@@ -93,6 +93,7 @@ namespace DataDecoder
         bool logFlag = false;
         bool tempFlag = false;  // false = DDUtil, true = RCP1
         bool enableErrorLog = false;
+        bool formLoaded = false;
         int keyValue = 0;
         int LPTnum = 0;         // decimal number of selected LPT port
         int iSleep = 0;         // Thread.Sleep var
@@ -1464,6 +1465,7 @@ namespace DataDecoder
             {
                 // this is a silent notification so ignore any failure.
             }
+            formLoaded = true;
         }
         // program is about to close
         int y = 0;
@@ -4772,6 +4774,12 @@ namespace DataDecoder
                     if (ops.Length == 3)
                     {
                         txtSP.Text = cmd.Substring(4, 3); btnSP_Click(null, null);
+                    }
+                    else malform(pre); break;
+                case "SR":  // SO2R file load
+                    if (ops.Length >= 5)
+                    {
+                        LoadMacro(ops);
                     }
                     else malform(pre); break;
                 default: malform(cmd); break;
@@ -8591,7 +8599,7 @@ namespace DataDecoder
             dso = new DataSet();
             if (File.Exists(app_data_path + "\\" + so2rFile))
                 dso.ReadXml(app_data_path + "\\" + so2rFile);
-            grpSO2R.Text = "SO2R - [ " + so2rFile + " ]";
+            grpSO2R.Text = "SO2R - Profile: " + so2rFile;
             LoadVars(); //load matrix with last used data file
 
             chkAutoDrv.Checked = false;
@@ -8607,11 +8615,13 @@ namespace DataDecoder
                 SetVfoB();                      // force setup of the data &
                 SetVfoA();                      // control words
                 bSo2rChg = false;               // set the so2r controls flag to false
+                if (txtLPT1_1.Text != "")
                 lpt1 = Convert.ToInt32(txtLPT1_1.Text);
-                lpt2 = Convert.ToInt32(txtLPT2.Text);
+                if (txtLPT2.Text != "")
+                    lpt2 = Convert.ToInt32(txtLPT2.Text);
             }
         }
-        // call file dialog
+        // call file dialog to set the user file.
         void GetFile()
         {
             try
@@ -8624,7 +8634,7 @@ namespace DataDecoder
                     string filename = openFileDialog1.FileName;
                     int start = openFileDialog1.FileName.LastIndexOf("\\") + 1;
                     so2rFile = filename.Substring(start, filename.Length - start);
-                    grpSO2R.Text = "SO2R - [ " + so2rFile + " ]";
+                    grpSO2R.Text = "SO2R - Profile: " + so2rFile;
                     set.SO2RDataFile = so2rFile;
                     set.Save();
                 }
@@ -9123,6 +9133,19 @@ namespace DataDecoder
             }
             bSo2rChg = false;   // set the so2r change flag to false
         }
+        // load macro file
+        void LoadMacro(string file)
+        {
+            if (File.Exists(app_data_path + "\\" + file))
+            {
+                dso.Clear(); 
+                dso.ReadXml(app_data_path + "\\" + file); 
+                grpSO2R.Text = "SO2R - Profile: " + file;
+                set.SO2RDataFile = file;
+                set.Save();
+            }
+            LoadVars();
+        }
         // save user variables from controls to dataset
 		public static void SaveVars(string tableName, ref ArrayList list)
 		{
@@ -9137,7 +9160,7 @@ namespace DataDecoder
 					for(int i=2; i<vals.Length; i++)
 						vals[1] += "/"+vals[i];
 				}
-
+//                dso.Clear(); 
 				DataRow[] rows = dso.Tables[tableName].Select("Key = '"+vals[0]+"'");
 				if(rows.Length == 0)	// name is not in list
 				{
@@ -9179,7 +9202,8 @@ namespace DataDecoder
         // write data set to the db file
         public static void SaveDB()
         {
-            dso.WriteXml(app_data_path + "\\" + so2rFile , XmlWriteMode.WriteSchema);
+//            dso.WriteXml(app_data_path + "\\" + so2rFile , XmlWriteMode.WriteSchema);
+            dso.WriteXml(app_data_path + "\\" + so2rFile);
         }
 
         #endregion # SO2R Methods #
@@ -9203,14 +9227,14 @@ namespace DataDecoder
             else if (result == DialogResult.No)
             {
                 GetFile();
-                if (File.Exists(app_data_path + "\\" + so2rFile))
-                { dso.Clear(); dso.ReadXml(app_data_path + "\\" + so2rFile); }
             }
-
+                if (File.Exists(app_data_path + "\\" + so2rFile))
+                    File.Delete(app_data_path + "\\" + so2rFile);
+            dso.Clear(); 
             ArrayList a = new ArrayList();
             foreach (Control c in this.grpSO2R.Controls)			// For each control
             {
-                if (c.GetType() == typeof(CheckBox))
+                if (c.GetType() == typeof(CheckBox) && c.Name != "chkSoEnab")
                     a.Add(c.Name + "/" + ((CheckBox)c).Checked.ToString());
                 else if (c.GetType() == typeof(TextBox))
                     a.Add(c.Name + "/" + ((TextBox)c).Text);
@@ -9224,6 +9248,19 @@ namespace DataDecoder
             if (File.Exists(app_data_path + "\\" + so2rFile))
             { dso.Clear(); dso.ReadXml(app_data_path + "\\" + so2rFile); }
             LoadVars();
+        }
+        // The clear matrix button was pressed
+        private void btnSO2Rclear_Click(object sender, EventArgs e)
+        {
+            foreach (Control c in this.grpSO2R.Controls)			// For each control
+            {
+                if (c.GetType() == typeof(CheckBox) && c.Name != "chkSoEnab")
+                    ((CheckBox)c).Checked = false;
+                else if (c.GetType() == typeof(TextBox))
+                    ((TextBox)c).Text = "";
+            }
+            OutParallelPort(lpt1, 0);
+            OutParallelPort(lpt2, 0);
         }
         // the TX switch has changed
         internal void PinChanged(object sender, SerialPinChangedEventArgs e)
@@ -9297,8 +9334,6 @@ namespace DataDecoder
                        " cannot be opened!\n", "Port Error",
                        MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     cboSwPort.SelectedIndex = -1;
-                    //chkSoEnab.Checked = false;
-                    //return;
                 }
             }
             set.cboSwPort = cboSwPort.SelectedIndex;
@@ -9307,9 +9342,11 @@ namespace DataDecoder
         // the single amp check box has changed
         private void chk1Amp_CheckedChanged(object sender, EventArgs e)
         {
-            if (chk1Amp.Checked) set.chk1Amp = true;
-            else set.chk1Amp = false;
-            set.Save();
+            //if (chk1Amp.Checked) set.chk1Amp = true;
+            //else set.chk1Amp = false;
+            //set.Save();
+            SetVfoA();
+            SetVfoB();
         }
         // matrix text data has changed
         private void grpSo2R_TextChanged(object sender, EventArgs e)
@@ -9324,10 +9361,11 @@ namespace DataDecoder
         // the TXA digit has changed
         private void txtTxA_TextChanged(object sender, EventArgs e)
         {
+            if (!formLoaded) return;
             if (txtTxA.Text == "1" || txtTxA.Text == "2" || txtTxA.Text == "3")
-                if (txtTxA.Text != txtTxB.Text)
-                { set.txtTxA = txtTxA.Text; set.Save(); }
-                else
+                if (txtTxA.Text == txtTxB.Text)
+                //{ set.txtTxA = txtTxA.Text; set.Save(); }
+                //else
                 {
                     MessageBox.Show("TXA and TXB can not use the same TX line. \n\n" +
                         "Please select another TX line (1-3).", "Input Error", 
@@ -9335,7 +9373,7 @@ namespace DataDecoder
                     if (txtTxB.Text == "3") { txtTxA.Text = "1"; }
                     else if (txtTxB.Text == "1") { txtTxA.Text = "2"; }
                     else if (txtTxB.Text == "2") { txtTxA.Text = "3"; }
-                    set.txtTxA = txtTxA.Text; set.Save();
+                    //set.txtTxA = txtTxA.Text; set.Save();
                     return;
                 }
             else if (txtTxA.Text == "") { return; }
@@ -9347,16 +9385,17 @@ namespace DataDecoder
                 if (txtTxB.Text == "3") { txtTxA.Text = "1"; }
                 else if (txtTxB.Text == "2") { txtTxA.Text = "3"; }
                 else if (txtTxB.Text == "1") { txtTxA.Text = "2"; }
-                set.txtTxA = txtTxA.Text; set.Save();
+                //set.txtTxA = txtTxA.Text; set.Save();
             }
         }
         // the TXB digit has changed
         private void txtTxB_TextChanged(object sender, EventArgs e)
         {
+            if (!formLoaded) return;
             if (txtTxB.Text == "1" || txtTxB.Text == "2" || txtTxB.Text == "3")
-                if (txtTxA.Text != txtTxB.Text)
-                { set.txtTxB = txtTxB.Text; set.Save(); }
-                else
+                if (txtTxA.Text == txtTxB.Text)
+                //{ set.txtTxB = txtTxB.Text; set.Save(); }
+                //else
                 {
                     MessageBox.Show("TXA and TXB can not use the same TX line. \n\n" +
                         "Please select another TX line (1-3).", "Input Error",
@@ -9364,7 +9403,7 @@ namespace DataDecoder
                     if (txtTxA.Text == "3") { txtTxB.Text = "1"; }
                     else if (txtTxA.Text == "2") { txtTxB.Text = "3"; }
                     else if (txtTxA.Text == "1") { txtTxB.Text = "2"; }
-                    set.txtTxB = txtTxB.Text; set.Save();
+                    //set.txtTxB = txtTxB.Text; set.Save();
                     return;
                 }
             else if (txtTxB.Text == "") { return; }
@@ -9376,7 +9415,7 @@ namespace DataDecoder
                 if (txtTxA.Text == "3") { txtTxB.Text = "1"; }
                 else if (txtTxA.Text == "2") { txtTxB.Text = "3"; }
                 else if (txtTxA.Text == "1") { txtTxB.Text = "2"; }
-                set.txtTxB = txtTxB.Text; set.Save();
+                //set.txtTxB = txtTxB.Text; set.Save();
             }
         }
 

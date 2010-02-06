@@ -1,8 +1,8 @@
 <?xml version="1.0" standalone="yes"?>
 <macroData>
   <macro>
-    <Button>Test</Button>
-    <Command>ZZFX948C;ZZFW95;</Command>
+    <Button>So2rLoad</Button>
+    <Command>DDSRSO2R.XML;</Command>
   </macro>
   <macro>
     <Button>20 RTTY</Button>
