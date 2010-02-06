@@ -860,6 +860,7 @@ namespace DataDecoder
             this.txtLong = new System.Windows.Forms.TextBox();
             this.tabProp = new System.Windows.Forms.TabPage();
             this.grpSO2R = new System.Windows.Forms.GroupBox();
+            this.btnSO2Rclear = new System.Windows.Forms.Button();
             this.btnLoadSO2R = new System.Windows.Forms.Button();
             this.label215 = new System.Windows.Forms.Label();
             this.txtTxB = new System.Windows.Forms.TextBox();
@@ -11991,6 +11992,7 @@ namespace DataDecoder
             // 
             // grpSO2R
             // 
+            this.grpSO2R.Controls.Add(this.btnSO2Rclear);
             this.grpSO2R.Controls.Add(this.btnLoadSO2R);
             this.grpSO2R.Controls.Add(this.label215);
             this.grpSO2R.Controls.Add(this.txtTxB);
@@ -12186,7 +12188,20 @@ namespace DataDecoder
             this.grpSO2R.Size = new System.Drawing.Size(425, 303);
             this.grpSO2R.TabIndex = 81;
             this.grpSO2R.TabStop = false;
-            this.grpSO2R.Text = "SO2R";
+            this.grpSO2R.Text = "SO2R   (SO2R.xml)";
+            // 
+            // btnSO2Rclear
+            // 
+            this.btnSO2Rclear.BackColor = System.Drawing.Color.Crimson;
+            this.btnSO2Rclear.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnSO2Rclear.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.btnSO2Rclear.Location = new System.Drawing.Point(401, 18);
+            this.btnSO2Rclear.Name = "btnSO2Rclear";
+            this.btnSO2Rclear.Size = new System.Drawing.Size(10, 10);
+            this.btnSO2Rclear.TabIndex = 267;
+            this.toolTip1.SetToolTip(this.btnSO2Rclear, "Press to clear matrix.");
+            this.btnSO2Rclear.UseVisualStyleBackColor = false;
+            this.btnSO2Rclear.Click += new System.EventHandler(this.btnSO2Rclear_Click);
             // 
             // btnLoadSO2R
             // 
@@ -12194,7 +12209,7 @@ namespace DataDecoder
             this.btnLoadSO2R.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.btnLoadSO2R.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold);
             this.btnLoadSO2R.ForeColor = System.Drawing.Color.Navy;
-            this.btnLoadSO2R.Location = new System.Drawing.Point(352, 11);
+            this.btnLoadSO2R.Location = new System.Drawing.Point(348, 11);
             this.btnLoadSO2R.Name = "btnLoadSO2R";
             this.btnLoadSO2R.Size = new System.Drawing.Size(45, 23);
             this.btnLoadSO2R.TabIndex = 266;
@@ -12521,7 +12536,7 @@ namespace DataDecoder
             this.label203.AutoSize = true;
             this.label203.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold);
             this.label203.ForeColor = System.Drawing.Color.Blue;
-            this.label203.Location = new System.Drawing.Point(367, 43);
+            this.label203.Location = new System.Drawing.Point(350, 44);
             this.label203.Name = "label203";
             this.label203.Size = new System.Drawing.Size(41, 13);
             this.label203.TabIndex = 234;
@@ -12530,7 +12545,7 @@ namespace DataDecoder
             // txtLPT2
             // 
             this.txtLPT2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtLPT2.Location = new System.Drawing.Point(323, 39);
+            this.txtLPT2.Location = new System.Drawing.Point(298, 40);
             this.txtLPT2.Name = "txtLPT2";
             this.txtLPT2.Size = new System.Drawing.Size(42, 20);
             this.txtLPT2.TabIndex = 233;
@@ -12544,7 +12559,7 @@ namespace DataDecoder
             this.btnSaveSO2R.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.btnSaveSO2R.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold);
             this.btnSaveSO2R.ForeColor = System.Drawing.Color.Navy;
-            this.btnSaveSO2R.Location = new System.Drawing.Point(290, 11);
+            this.btnSaveSO2R.Location = new System.Drawing.Point(296, 11);
             this.btnSaveSO2R.Name = "btnSaveSO2R";
             this.btnSaveSO2R.Size = new System.Drawing.Size(46, 23);
             this.btnSaveSO2R.TabIndex = 230;
@@ -16613,6 +16628,7 @@ namespace DataDecoder
         private Label lblZL;
         private TextBox txtZL;
         private Button btnLoadSO2R;
+        private Button btnSO2Rclear;
 
     }
 }
