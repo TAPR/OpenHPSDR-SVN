@@ -4486,22 +4486,28 @@ namespace DataDecoder
         // Process the commands associated with a macro key, calls ParseBuffer()
         public void ProcessMacroButton(int button)
         {
-            if (StepCtr == 0 && (xOn == "0" || xOn == ""))
-            {   // 
-                try
-                {
+            try
+            {
+                if (StepCtr == 0 && (xOn == "0" || xOn == ""))
+                {   // 
                     if (dgm.Rows[button - 1].Cells[1].Value.ToString() == "")
                     {
-                        throw new NullReferenceException();
+                        throw new Exception();
                     }
                     string cmds = dgm.Rows[button - 1].Cells[1].Value.ToString();
                     ParseBuffer(cmds);
                 }
-                catch (NullReferenceException)
-                {
-                    int btn = button + 1;
-                    MessageBox.Show("There are no commands setup for this Macro " + button);
-                }
+            }
+            catch (ArgumentOutOfRangeException)
+            {
+                //MessageBox.Show("It appears there is no macro for this function.\r\r" +
+                //    "Macro M21 is required for this function to work.\r" +
+                //    "Please check the macro editor, correct and try again." );
+            }
+            catch (NullReferenceException)
+            {
+                int btn = button + 1;
+                MessageBox.Show("There are no commands setup for this Macro " + button);
             }
         }
         // Macro button #1 was pressed
@@ -4710,79 +4716,86 @@ namespace DataDecoder
             string ops = cmd.Substring(4, cmd.Length - 4);  // command operators less ";"
             switch (pre)
             {
+                case "34":  // Set SteppIR to 3/4 wavelength Mode (verticle only)
+                    rb34.Checked = true; 
+                    break;
+                case "AD": // Enable/Disable AutoDrive function.
+                    if (ops == "0") chkAutoDrv.Checked = false;
+                    else if (ops == "1") chkAutoDrv.Checked = true;
+                    break;
+                case "AM": // Set AT-AUTO to Auto Mode
+                    byte[] a = { 0xFE, 0xFE, 0xE0, 0x3A, 0x07, 0x00, 0xFD };
+                    RepeatPort.Write(a, 0, 7); 
+                    break;
+                case "BI":  // Set SteppIR to Bi-Directional Mode
+                    rbBiDir.Checked = true; 
+                    break;
+                case "BL": // Set AT-AUTO to Select Balanced
+                    byte[] e = { 0xFE, 0xFE, 0xE0, 0x3A, 0x08, 0x10, 0xFD };
+                    RepeatPort.Write(e, 0, 7); 
+                    break;
+                case "BM": // Set AT-AUTO to Bypass Mode
+                    byte[] c = { 0xFE, 0xFE, 0xE0, 0x3A, 0x07, 0x02, 0xFD };
+                    RepeatPort.Write(c, 0, 7); 
+                    break;
+                case "CX": // Set AT-AUTO to Select Coax
+                    byte[] d = { 0xFE, 0xFE, 0xE0, 0x3A, 0x08, 0x00, 0xFD };
+                    RepeatPort.Write(d, 0, 7); 
+                    break;
+                case "FA": // Write hex to FlexWire Adapter port 4
+                    int data = int.Parse(ops.Substring(0, 2), NumberStyles.HexNumber);
+                    if (ops.Length == 3 && ops.Substring(2, 1) == "I")
+                        data = data ^ 255;
+                    WriteFW(mAdr1, cmd1, data, false); 
+                    break;
+                case "FW":  // Set SteppIR to Forward Mode
+                    rbFwd.Checked = true; 
+                    break;
                 case "LP": // write to desig LPT port
                     string sport = ops.TrimStart('0').Substring(0, ops.Length - 2);
                     int icmd = int.Parse(ops.Substring(ops.Length-2,2),NumberStyles.HexNumber);
                     int iport = Convert.ToInt32(sport.Substring(0, sport.Length-2));
                     OutParallelPort(iport, icmd);
                     break;
-                case "FA": // Write hex to FlexWire Adapter port 4
-                    int data = int.Parse(ops.Substring(0, 2), NumberStyles.HexNumber);
-                    if (ops.Length == 3 && ops.Substring(2, 1) == "I")
-                        data = data ^ 255;
-                    WriteFW(mAdr1, cmd1, data, false); break;
-
-                case "AM": // Set AT-AUTO to Auto Mode
-                    byte[] a = { 0xFE, 0xFE, 0xE0, 0x3A, 0x07, 0x00, 0xFD };
-                    RepeatPort.Write(a, 0, 7); break;
-
                 case "MM": // Set AT-AUTO to Manual Mode
                     byte[] b = { 0xFE, 0xFE, 0xE0, 0x3A, 0x07, 0x01, 0xFD };
-                    RepeatPort.Write(b, 0, 7); break;
-
-                case "BM": // Set AT-AUTO to Bypass Mode
-                    byte[] c = { 0xFE, 0xFE, 0xE0, 0x3A, 0x07, 0x02, 0xFD };
-                    RepeatPort.Write(c, 0, 7); break;
-
-                case "CX": // Set AT-AUTO to Select Coax
-                    byte[] d = { 0xFE, 0xFE, 0xE0, 0x3A, 0x08, 0x00, 0xFD };
-                    RepeatPort.Write(d, 0, 7); break;
-
-                case "BL": // Set AT-AUTO to Select Balanced
-                    byte[] e = { 0xFE, 0xFE, 0xE0, 0x3A, 0x08, 0x10, 0xFD };
-                    RepeatPort.Write(e, 0, 7); break;
-
-                case "FW":  // Set SteppIR to Forward Mode
-                    rbFwd.Checked = true; break;
-
-                case "BI":  // Set SteppIR to Bi-Directional Mode
-                    rbBiDir.Checked = true; break;
-
-                case "RV":  // Set SteppIR to Reverse Mode
-                    rb180.Checked = true; break;
-
-                case "34":  // Set SteppIR to 3/4 wavelength Mode (verticle only)
-                    rb34.Checked = true; break;
-
+                    RepeatPort.Write(b, 0, 7); 
+                    break;
                 case "RE":  // Enable Rotor Control
                     if (ops.Length == 1)
                     {
                         if (ops == "1") chkRotorEnab.Checked = true;
                         else chkRotorEnab.Checked = false;
                     }
-                    else malform(pre); break;
-
+                    else malform(pre); 
+                    break;
+                case "RV":  // Set SteppIR to Reverse Mode
+                    rb180.Checked = true; 
+                    break;
                 case "SE":  // Enabled SteppIR
                     if (ops.Length == 1)
                     {
                         if (ops == "1") chkStep.Checked = true;
                         else chkStep.Checked = false;
                     }
-                    else malform(pre); break;
-
+                    else malform(pre); 
+                    break;
                 case "SP":  // Turn rotor
                     if (ops.Length == 3)
                     {
                         txtSP.Text = cmd.Substring(4, 3); btnSP_Click(null, null);
                     }
-                    else malform(pre); break;
+                    else malform(pre); 
+                    break;
                 case "SR":  // SO2R file load
                     if (ops.Length >= 5)
                     {
                         LoadMacro(ops);
                     }
-                    else malform(pre); break;
-                default: malform(cmd); break;
+                    else malform(pre); 
+                    break;
+                default: malform(cmd); 
+                    break;
             }
         }
         private void malform(string pre)
@@ -8576,12 +8589,237 @@ namespace DataDecoder
 
         #endregion # Enums, Signatures & Vars #
 
+        #region # SO2R Events #
+
+        // The Save button was pressed
+        private void btnSaveSO2R_Click(object sender, EventArgs e)
+        {
+            
+            DialogResult result;
+            result = MessageBox.Show("Saving matrix data to file: " + so2rFile + " Is this ok?\r\r" +
+                "If 'Yes' press Ok to continue saving the file.\r" +
+                "If 'No' press No to select a new file name.\r" +
+                "Press Cancel to abort this operation.", "Information",
+                MessageBoxButtons.YesNoCancel, MessageBoxIcon.Information,
+                MessageBoxDefaultButton.Button1);
+            
+            if (result == DialogResult.Cancel)
+                return;
+            else if (result == DialogResult.No)
+            {
+                GetFile();
+            }
+                if (File.Exists(app_data_path + "\\" + so2rFile))
+                    File.Delete(app_data_path + "\\" + so2rFile);
+            dso.Clear(); 
+            ArrayList a = new ArrayList();
+            foreach (Control c in this.grpSO2R.Controls)			// For each control
+            {
+                if (c.GetType() == typeof(CheckBox) && c.Name != "chkSoEnab")
+                    a.Add(c.Name + "/" + ((CheckBox)c).Checked.ToString());
+                else if (c.GetType() == typeof(TextBox))
+                    a.Add(c.Name + "/" + ((TextBox)c).Text);
+            }
+            SaveVars("SO2R", ref a);		// save the values to the DB
+            bSo2rChg = false;
+        }        
+        // The Load button was pressed
+        private void btnLoadSO2R_Click(object sender, EventArgs e)
+        {
+            GetFile();
+            if (File.Exists(app_data_path + "\\" + so2rFile))
+            { dso.Clear(); dso.ReadXml(app_data_path + "\\" + so2rFile); }
+            LoadVars();
+        }
+        // The clear matrix button was pressed
+        private void btnSO2Rclear_Click(object sender, EventArgs e)
+        {
+            foreach (Control c in this.grpSO2R.Controls)			// For each control
+            {
+                if (c.GetType() == typeof(CheckBox) && c.Name != "chkSoEnab")
+                    ((CheckBox)c).Checked = false;
+                else if (c.GetType() == typeof(TextBox))
+                    ((TextBox)c).Text = "";
+            }
+            OutParallelPort(lpt1, 0);
+            OutParallelPort(lpt2, 0);
+        }
+        // the TX switch has changed
+        internal void PinChanged(object sender, SerialPinChangedEventArgs e)
+        {
+            if (chkSoEnab.Checked)
+            {
+                SerialPinChange SerialPinChange1;
+                SerialPinChange1 = e.EventType;
+                switch (SerialPinChange1)
+                {
+                    case SerialPinChange.Break: break;
+                    case SerialPinChange.CDChanged: break;
+                    case SerialPinChange.CtsChanged:
+                        if (SwitchPort.CtsHolding)  // set VFO B active
+                        {
+                            ZZSW = 1;
+                            SetVfoB();
+                            WriteToPort("ZZSW1;", iSleep);
+                        }
+                        else    // set VFO A active
+                        {
+                            ZZSW = 0;
+                            SetVfoA();
+                            WriteToPort("ZZSW0;", iSleep);
+                        }
+                        break;
+                    case SerialPinChange.DsrChanged: break;
+                }
+            }
+        }
+        // the SO2R enable check box has changed
+        private void chkSoEnab_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chkSoEnab.Checked)
+            {
+                set.chkSoEnab = true;
+                SOinit();
+            }
+            else
+            {
+                set.chkSoEnab = false;
+                OutParallelPort(lpt1, 0);
+                OutParallelPort(lpt2, 0);
+                set.Save();
+                ProcessMacroButton(21);
+                MsgBoxCheck.MessageBox dlg = new MsgBoxCheck.MessageBox();
+                DialogResult dr = dlg.Show(@"Software\DDUtil\MsgBoxCheck\SO2R", "DontShowAgain",
+                    DialogResult.OK, "Don't show me this again",
+                    "When disabling the SO2R feature you may need to reset some of the\r" +
+                    "local settings in PowerSDR and DDUtil:\r\r" +
+                    "PowerSDR - Antenna & TX settings may be altered.\r" +
+                    "                    Drive settings may be altered.\r\r" +
+                    "DDUtil -        Auto Drive will be disabled, re-enable if needed.\r" +
+                    "                    Toggle PTT (ctrl+O) to reset TX line(s).",
+                    "Warning!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            }
+        }
+        // the SO2R port number has changed
+        private void cboSwPort_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (SwitchPort.IsOpen) SwitchPort.Close();
+            if (cboSwPort.SelectedIndex > 0)
+            {
+                SwitchPort.PortName = cboSwPort.SelectedItem.ToString();
+                try
+                {
+                    SwitchPort.Open();
+                }
+                catch
+                {
+                    MessageBox.Show("The VFO switch serial port " + SwitchPort.PortName +
+                       " cannot be opened!\n", "Port Error",
+                       MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    cboSwPort.SelectedIndex = -1;
+                }
+            }
+            set.cboSwPort = cboSwPort.SelectedIndex;
+            set.Save();
+        }
+        // the single amp check box has changed
+        private void chk1Amp_CheckedChanged(object sender, EventArgs e)
+        {
+            //if (chk1Amp.Checked) set.chk1Amp = true;
+            //else set.chk1Amp = false;
+            //set.Save();
+            SetVfoA();
+            SetVfoB();
+        }
+        // matrix text data has changed
+        private void grpSo2R_TextChanged(object sender, EventArgs e)
+        {
+            bSo2rChg = true;
+        }
+        // matrix check box data has changed
+        private void SO2Rband_CheckedChanged(object sender, EventArgs e)
+        {
+            bSo2rChg = true;
+        }
+        // the TXA digit has changed
+        private void txtTxA_TextChanged(object sender, EventArgs e)
+        {
+            if (!formLoaded || txtTxA.Text == "") return;
+            try
+            {
+                int aVal = Convert.ToInt32(txtTxA.Text);
+                if (aVal < 1 || aVal > 3)
+                {
+                    throw new Exception();
+                }
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("This value can only be a decimal number from 1-3. \n\n" +
+                    "Please select a number in this range.", "Input Error",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+                if (txtTxB.Text == "3") { txtTxA.Text = "1"; }
+                else if (txtTxB.Text == "2") { txtTxA.Text = "3"; }
+                else if (txtTxB.Text == "1") { txtTxA.Text = "2"; }
+                return;
+            }
+
+            if (txtTxA.Text == txtTxB.Text)
+            {
+                MessageBox.Show("TXA and TXB can not use the same TX line. \n\n" +
+                    "Please select another TX line (1-3).", "Input Error",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+                if (txtTxB.Text == "3") { txtTxA.Text = "1"; }
+                else if (txtTxB.Text == "1") { txtTxA.Text = "2"; }
+                else if (txtTxB.Text == "2") { txtTxA.Text = "3"; }
+                return;
+            }
+            bSo2rChg = true;
+        }
+        // the TXB digit has changed
+        private void txtTxB_TextChanged(object sender, EventArgs e)
+        {
+            if (!formLoaded || txtTxB.Text == "") return;
+            try
+            {
+                int aVal = Convert.ToInt32(txtTxB.Text);
+                if (aVal < 1 || aVal > 3)
+                {
+                    throw new Exception();
+                }
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("This value can only be a decimal number from 1-3. \n\n" +
+                    "Please select a number in this range.", "Input Error",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+                if (txtTxA.Text == "3") { txtTxB.Text = "1"; }
+                else if (txtTxA.Text == "2") { txtTxB.Text = "3"; }
+                else if (txtTxA.Text == "1") { txtTxB.Text = "2"; }
+                return;
+            }
+
+            if (txtTxA.Text == txtTxB.Text)
+            {
+                MessageBox.Show("TXA and TXB can not use the same TX line. \n\n" +
+                    "Please select another TX line (1-3).", "Input Error",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+                if (txtTxA.Text == "3") { txtTxB.Text = "1"; }
+                else if (txtTxA.Text == "1") { txtTxB.Text = "2"; }
+                else if (txtTxA.Text == "2") { txtTxB.Text = "3"; }
+                return;
+            }
+            bSo2rChg = true;
+        }
+
+        #endregion # SO2R Events #
+
         #region # SO2R Methods #
 
         // Initialization
         void SOinit()
         {
-            //chkSoEnab.Checked = set.chkSoEnab;
+            chkSoEnab.Checked = set.chkSoEnab;
             cboSwPort.SelectedIndex = set.cboSwPort;
             so2rFile = set.SO2RDataFile;
             if (app_data_path == "")
@@ -9207,219 +9445,6 @@ namespace DataDecoder
         }
 
         #endregion # SO2R Methods #
-
-        #region # SO2R Events #
-
-        // The Save button was pressed
-        private void btnSaveSO2R_Click(object sender, EventArgs e)
-        {
-            
-            DialogResult result;
-            result = MessageBox.Show("Saving matrix data to file: " + so2rFile + " Is this ok?\r\r" +
-                "If 'Yes' press Ok to continue saving the file.\r" +
-                "If 'No' press No to select a new file name.\r" +
-                "Press Cancel to abort this operation.", "Information",
-                MessageBoxButtons.YesNoCancel, MessageBoxIcon.Information,
-                MessageBoxDefaultButton.Button1);
-            
-            if (result == DialogResult.Cancel)
-                return;
-            else if (result == DialogResult.No)
-            {
-                GetFile();
-            }
-                if (File.Exists(app_data_path + "\\" + so2rFile))
-                    File.Delete(app_data_path + "\\" + so2rFile);
-            dso.Clear(); 
-            ArrayList a = new ArrayList();
-            foreach (Control c in this.grpSO2R.Controls)			// For each control
-            {
-                if (c.GetType() == typeof(CheckBox) && c.Name != "chkSoEnab")
-                    a.Add(c.Name + "/" + ((CheckBox)c).Checked.ToString());
-                else if (c.GetType() == typeof(TextBox))
-                    a.Add(c.Name + "/" + ((TextBox)c).Text);
-            }
-            SaveVars("SO2R", ref a);		// save the values to the DB
-        }        
-        // The Load button was pressed
-        private void btnLoadSO2R_Click(object sender, EventArgs e)
-        {
-            GetFile();
-            if (File.Exists(app_data_path + "\\" + so2rFile))
-            { dso.Clear(); dso.ReadXml(app_data_path + "\\" + so2rFile); }
-            LoadVars();
-        }
-        // The clear matrix button was pressed
-        private void btnSO2Rclear_Click(object sender, EventArgs e)
-        {
-            foreach (Control c in this.grpSO2R.Controls)			// For each control
-            {
-                if (c.GetType() == typeof(CheckBox) && c.Name != "chkSoEnab")
-                    ((CheckBox)c).Checked = false;
-                else if (c.GetType() == typeof(TextBox))
-                    ((TextBox)c).Text = "";
-            }
-            OutParallelPort(lpt1, 0);
-            OutParallelPort(lpt2, 0);
-        }
-        // the TX switch has changed
-        internal void PinChanged(object sender, SerialPinChangedEventArgs e)
-        {
-            if (chkSoEnab.Checked)
-            {
-                SerialPinChange SerialPinChange1;
-                SerialPinChange1 = e.EventType;
-                switch (SerialPinChange1)
-                {
-                    case SerialPinChange.Break: break;
-                    case SerialPinChange.CDChanged: break;
-                    case SerialPinChange.CtsChanged:
-                        if (SwitchPort.CtsHolding)  // set VFO B active
-                        {
-                            ZZSW = 1;
-                            SetVfoB();
-                            WriteToPort("ZZSW1;", iSleep);
-                        }
-                        else    // set VFO A active
-                        {
-                            ZZSW = 0;
-                            SetVfoA();
-                            WriteToPort("ZZSW0;", iSleep);
-                        }
-                        break;
-                    case SerialPinChange.DsrChanged: break;
-                }
-            }
-        }
-        // the SO2R enable check box has changed
-        private void chkSoEnab_CheckedChanged(object sender, EventArgs e)
-        {
-            if (chkSoEnab.Checked)
-            {
-                set.chkSoEnab = true;
-                SOinit();
-            }
-            else
-            {
-                set.chkSoEnab = false;
-                OutParallelPort(lpt1, 0);
-                OutParallelPort(lpt2, 0);
-                set.Save();
-                MsgBoxCheck.MessageBox dlg = new MsgBoxCheck.MessageBox();
-                DialogResult dr = dlg.Show(@"Software\DDUtil\MsgBoxCheck\SO2R", "DontShowAgain",
-                    DialogResult.OK, "Don't show me this again",
-                    "When disabling the SO2R feature you may need to reset some of the\r" +
-                    "local settings in PowerSDR and DDUtil:\r\r" +
-                    "PowerSDR - Antenna & TX settings may be altered.\r" +
-                    "                    Drive settings may be altered.\r\r" +
-                    "DDUtil -        Auto Drive will be disabled, re-enable if needed.\r" +
-                    "                    Toggle PTT (ctrl+O) to reset TX line(s).",
-                    "Warning!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-            }
-        }
-        // the SO2R port number has changed
-        private void cboSwPort_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (SwitchPort.IsOpen) SwitchPort.Close();
-            if (cboSwPort.SelectedIndex > 0)
-            {
-                SwitchPort.PortName = cboSwPort.SelectedItem.ToString();
-                try
-                {
-                    SwitchPort.Open();
-                }
-                catch
-                {
-                    MessageBox.Show("The VFO switch serial port " + SwitchPort.PortName +
-                       " cannot be opened!\n", "Port Error",
-                       MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    cboSwPort.SelectedIndex = -1;
-                }
-            }
-            set.cboSwPort = cboSwPort.SelectedIndex;
-            set.Save();
-        }
-        // the single amp check box has changed
-        private void chk1Amp_CheckedChanged(object sender, EventArgs e)
-        {
-            //if (chk1Amp.Checked) set.chk1Amp = true;
-            //else set.chk1Amp = false;
-            //set.Save();
-            SetVfoA();
-            SetVfoB();
-        }
-        // matrix text data has changed
-        private void grpSo2R_TextChanged(object sender, EventArgs e)
-        {
-            bSo2rChg = true;
-        }
-        // matrix check box data has changed
-        private void SO2Rband_CheckedChanged(object sender, EventArgs e)
-        {
-            bSo2rChg = true;
-        }
-        // the TXA digit has changed
-        private void txtTxA_TextChanged(object sender, EventArgs e)
-        {
-            if (!formLoaded) return;
-            if (txtTxA.Text == "1" || txtTxA.Text == "2" || txtTxA.Text == "3")
-                if (txtTxA.Text == txtTxB.Text)
-                //{ set.txtTxA = txtTxA.Text; set.Save(); }
-                //else
-                {
-                    MessageBox.Show("TXA and TXB can not use the same TX line. \n\n" +
-                        "Please select another TX line (1-3).", "Input Error", 
-                        MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    if (txtTxB.Text == "3") { txtTxA.Text = "1"; }
-                    else if (txtTxB.Text == "1") { txtTxA.Text = "2"; }
-                    else if (txtTxB.Text == "2") { txtTxA.Text = "3"; }
-                    //set.txtTxA = txtTxA.Text; set.Save();
-                    return;
-                }
-            else if (txtTxA.Text == "") { return; }
-            else
-            {
-                MessageBox.Show("This value can only be a decimal number from 1-3. \n\n" +
-                    "Please select a number in this range.", "Input Error",
-                    MessageBoxButtons.OK, MessageBoxIcon.Error);
-                if (txtTxB.Text == "3") { txtTxA.Text = "1"; }
-                else if (txtTxB.Text == "2") { txtTxA.Text = "3"; }
-                else if (txtTxB.Text == "1") { txtTxA.Text = "2"; }
-                //set.txtTxA = txtTxA.Text; set.Save();
-            }
-        }
-        // the TXB digit has changed
-        private void txtTxB_TextChanged(object sender, EventArgs e)
-        {
-            if (!formLoaded) return;
-            if (txtTxB.Text == "1" || txtTxB.Text == "2" || txtTxB.Text == "3")
-                if (txtTxA.Text == txtTxB.Text)
-                //{ set.txtTxB = txtTxB.Text; set.Save(); }
-                //else
-                {
-                    MessageBox.Show("TXA and TXB can not use the same TX line. \n\n" +
-                        "Please select another TX line (1-3).", "Input Error",
-                        MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    if (txtTxA.Text == "3") { txtTxB.Text = "1"; }
-                    else if (txtTxA.Text == "2") { txtTxB.Text = "3"; }
-                    else if (txtTxA.Text == "1") { txtTxB.Text = "2"; }
-                    //set.txtTxB = txtTxB.Text; set.Save();
-                    return;
-                }
-            else if (txtTxB.Text == "") { return; }
-            else
-            {
-                MessageBox.Show("This value can only be a decimal number from 1-3. \n\n" +
-                    "Please select a number in this range.", "Input Error",
-                    MessageBoxButtons.OK, MessageBoxIcon.Error);
-                if (txtTxA.Text == "3") { txtTxB.Text = "1"; }
-                else if (txtTxA.Text == "2") { txtTxB.Text = "3"; }
-                else if (txtTxA.Text == "1") { txtTxB.Text = "2"; }
-                //set.txtTxB = txtTxB.Text; set.Save();
-            }
-        }
-
-        #endregion # SO2R Events #
 
         #region # USB2LPT #
         // add to SOInit()
