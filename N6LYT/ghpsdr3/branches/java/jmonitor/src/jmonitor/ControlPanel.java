@@ -181,6 +181,7 @@ public class ControlPanel extends javax.swing.JPanel {
                 client.setFrequency(1850000);
                 client.setFilter(-3440, -150);
                 client.setMode(Client.modeLSB);
+                lsb.setSelected(true);
                 createLSBFilterMenu();
             }
         });
@@ -190,9 +191,10 @@ public class ControlPanel extends javax.swing.JPanel {
         item = new JRadioButtonMenuItem("80");
         item.addActionListener (new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                client.setFrequency(3890000);
+                client.setFrequency(3790000);
                 client.setFilter(-3440, -150);
                 client.setMode(Client.modeLSB);
+                lsb.setSelected(true);
                 createLSBFilterMenu();
             }
         });group.add(item);
@@ -206,6 +208,7 @@ public class ControlPanel extends javax.swing.JPanel {
                 client.setFilter(-3440, -150);
                 client.setMode(Client.modeLSB);
                 createLSBFilterMenu();
+                lsb.setSelected(true);
             }
         });
         group.add(item);
@@ -219,6 +222,7 @@ public class ControlPanel extends javax.swing.JPanel {
                 client.setFilter(-3440, -150);
                 client.setMode(Client.modeLSB);
                 createLSBFilterMenu();
+                lsb.setSelected(true);
             }
         });
         group.add(item);
@@ -231,6 +235,7 @@ public class ControlPanel extends javax.swing.JPanel {
                 client.setFilter(150,3440);
                 client.setMode(Client.modeUSB);
                 createUSBFilterMenu();
+                lsb.setSelected(true);
             }
         });
         group.add(item);
@@ -243,6 +248,7 @@ public class ControlPanel extends javax.swing.JPanel {
                 client.setFilter(150,3440);
                 client.setMode(Client.modeUSB);
                 createUSBFilterMenu();
+                usb.setSelected(true);
             }
         });
         group.add(item);
@@ -255,6 +261,7 @@ public class ControlPanel extends javax.swing.JPanel {
                 client.setFilter(150,3440);
                 client.setMode(Client.modeUSB);
                 createUSBFilterMenu();
+                usb.setSelected(true);
             }
         });
         group.add(item);
@@ -267,6 +274,7 @@ public class ControlPanel extends javax.swing.JPanel {
                 client.setFilter(150,3440);
                 client.setMode(Client.modeUSB);
                 createUSBFilterMenu();
+                usb.setSelected(true);
             }
         });
         group.add(item);
@@ -279,6 +287,7 @@ public class ControlPanel extends javax.swing.JPanel {
                 client.setFilter(150,3440);
                 client.setMode(Client.modeUSB);
                 createUSBFilterMenu();
+                usb.setSelected(true);
             }
         });
         group.add(item);
@@ -291,6 +300,7 @@ public class ControlPanel extends javax.swing.JPanel {
                 client.setFilter(150,3440);
                 client.setMode(Client.modeUSB);
                 createUSBFilterMenu();
+                usb.setSelected(true);
             }
         });
         group.add(item);
@@ -303,6 +313,7 @@ public class ControlPanel extends javax.swing.JPanel {
                 client.setFilter(150,3440);
                 client.setMode(Client.modeUSB);
                 createUSBFilterMenu();
+                usb.setSelected(true);
             }
         });
         group.add(item);
@@ -315,6 +326,7 @@ public class ControlPanel extends javax.swing.JPanel {
                 client.setFilter(-4000,4000);
                 client.setMode(Client.modeAM);
                 createAMFilterMenu();
+                am.setSelected(true);
             }
 
         });
@@ -328,6 +340,7 @@ public class ControlPanel extends javax.swing.JPanel {
                 client.setFilter(-4000,4000);
                 client.setMode(Client.modeSAM);
                 createAMFilterMenu();
+                sam.setSelected(true);
             }
         });
         group.add(item);
@@ -344,6 +357,7 @@ public class ControlPanel extends javax.swing.JPanel {
         modeMenu = new JPopupMenu("Mode");
         
         item=new JRadioButtonMenuItem("LSB");
+        lsb=item;
         item.setSelected(true);
         item.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -356,6 +370,7 @@ public class ControlPanel extends javax.swing.JPanel {
         modeMenu.add(item);
 
         item = new JRadioButtonMenuItem("USB");
+        usb=item;
         item.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 client.setMode(1);
@@ -443,6 +458,7 @@ public class ControlPanel extends javax.swing.JPanel {
         modeMenu.add(item);
 
         item = new JRadioButtonMenuItem("AM");
+        am=item;
         item.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 client.setMode(6);
@@ -454,6 +470,7 @@ public class ControlPanel extends javax.swing.JPanel {
         modeMenu.add(item);
 
         item = new JRadioButtonMenuItem("SAM");
+        sam=item;
         item.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 client.setMode(10);
@@ -1276,6 +1293,11 @@ public class ControlPanel extends javax.swing.JPanel {
     private JPopupMenu filterMenu;
     private JPopupMenu agcMenu;
     private JPopupMenu dspMenu;
+
+    private JRadioButtonMenuItem lsb;
+    private JRadioButtonMenuItem usb;
+    private JRadioButtonMenuItem am;
+    private JRadioButtonMenuItem sam;
 
     private DecimalFormat mhzFormat=new DecimalFormat("####0");
     private DecimalFormat khzFormat=new DecimalFormat("000000");
