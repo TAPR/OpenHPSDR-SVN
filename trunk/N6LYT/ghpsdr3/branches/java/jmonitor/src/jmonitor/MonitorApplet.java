@@ -52,11 +52,13 @@ public class MonitorApplet extends javax.swing.JApplet {
     public void start() {
 
         audio = new Audio(server, receiver);
+        
         client = new Client(server, receiver,audio);
         client.start();
         client.setFrequency(7048000);
         client.setMode(0);
         client.setFilter(-2850, -150);
+        client.setAGC(0);
 
         monitorPanel.setClient(client);
         add(monitorPanel);
