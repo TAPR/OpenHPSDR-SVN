@@ -11,9 +11,13 @@
 
 package jmonitor;
 
-import java.awt.Insets;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.text.DecimalFormat;
+import javax.swing.ButtonGroup;
+import javax.swing.JCheckBoxMenuItem;
 import javax.swing.JPopupMenu;
+import javax.swing.JRadioButtonMenuItem;
 
 /**
  *
@@ -24,190 +28,12 @@ public class ControlPanel extends javax.swing.JPanel {
     /** Creates new form ControlPanel */
     public ControlPanel() {
         initComponents();
-       
-
-        createLSBFilterMenu();
         
-        bandMenu = new JPopupMenu("Band");
-        bandMenu.add("160").addActionListener (new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                client.setFrequency(1850000);
-                client.setFilter(-3440, -150);
-                client.setMode(Client.modeLSB);
-            }
-        });
-        bandMenu.add("80").addActionListener (new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                client.setFrequency(3890000);
-                client.setFilter(-3440, -150);
-                client.setMode(Client.modeLSB);
-            }
-        });
-        bandMenu.add("60").addActionListener (new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                client.setFrequency(5371500);
-                client.setFilter(-3440, -150);
-                client.setMode(Client.modeLSB);
-            }
-        });
-        bandMenu.add("40").addActionListener (new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                client.setFrequency(7048000);
-                client.setFilter(-3440, -150);
-                client.setMode(Client.modeLSB);
-            }
-        });
-        bandMenu.add("30").addActionListener (new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                client.setFrequency(10135600);
-                client.setFilter(150,3440);
-                client.setMode(Client.modeUSB);
-            }
-        });
-        bandMenu.add("20").addActionListener (new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                client.setFrequency(14200000);
-                client.setFilter(150,3440);
-                client.setMode(Client.modeUSB);
-            }
-        });
-        bandMenu.add("17").addActionListener (new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                client.setFrequency(18118900);
-                client.setFilter(150,3440);
-                client.setMode(Client.modeUSB);
-            }
-        });
-        bandMenu.add("15").addActionListener (new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                client.setFrequency(21200000);
-                client.setFilter(150,3440);
-                client.setMode(Client.modeUSB);
-            }
-        });
-        bandMenu.add("12").addActionListener (new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                client.setFrequency(24910000);
-                client.setFilter(150,3440);
-                client.setMode(Client.modeUSB);
-            }
-        });
-        bandMenu.add("10").addActionListener (new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                client.setFrequency(28500000);
-                client.setFilter(150,3440);
-                client.setMode(Client.modeUSB);
-            }
-        });
-        bandMenu.add("6").addActionListener (new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                client.setFrequency(50200000);
-                client.setFilter(150,3440);
-                client.setMode(Client.modeUSB);
-            }
-        });
-        bandMenu.add("GEN").addActionListener (new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                client.setFrequency(909000);
-                client.setFilter(-4000,4000);
-                client.setMode(Client.modeAM);
-            }
-
-        });
-        bandMenu.add("WWV").addActionListener (new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                client.setFrequency(5000000);
-                client.setFilter(-4000,4000);
-                client.setMode(Client.modeSAM);
-            }
-        });
-
-
-        modeMenu = new JPopupMenu("Mode");
-        modeMenu.add("LSB").addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                client.setMode(0);
-                client.setFilter(-2850, -150);
-                createLSBFilterMenu();
-            }
-        });
-        modeMenu.add("USB").addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                client.setMode(1);
-                client.setFilter(150, 2850);
-                createUSBFilterMenu();
-            }
-        });
-        modeMenu.add("DSB").addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                client.setMode(2);
-                client.setFilter(-2600, 2600);
-                createAMFilterMenu();
-            }
-        });
-        modeMenu.add("CWL").addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                client.setMode(3);
-                client.setFilter(-800, -400);
-                createCWFilterMenu();
-            }
-        });
-        modeMenu.add("CWU").addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                client.setMode(4);
-                client.setFilter(400, 800);
-                createCWFilterMenu();
-            }
-        });
-        modeMenu.add("SPEC").addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                client.setMode(8);
-                client.setFilter(-6000, -6000);
-            }
-        });
-        modeMenu.add("DIGL").addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                client.setMode(9);
-                client.setFilter(-3450, -150);
-                createDIGLFilterMenu();
-            }
-        });
-        modeMenu.add("DIGU").addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                client.setMode(7);
-                client.setFilter(150, 3450);
-                createDIGUFilterMenu();
-            }
-        });
-        modeMenu.add("DRM").addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                client.setMode(11);
-                client.setFilter(-6000, 6000);
-                filterMenu=null;
-            }
-        });
-        modeMenu.add("AM").addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                client.setMode(6);
-                client.setFilter(-4000,4000);
-                createAMFilterMenu();
-            }
-        });
-        modeMenu.add("SAM").addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                client.setMode(10);
-                client.setFilter(-4000,4000);
-                createAMFilterMenu();
-            }
-        });
-        modeMenu.add("FMN").addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                client.setMode(5);
-                client.setFilter(-2600, 2600);
-                createAMFilterMenu();
-            }
-        });
-
+        createLSBFilterMenu();
+        createBandMenu();
+        createModeMenu();
+        createAGCMenu();
+        createDSPMenu();
     }
 
     public void setClient(Client client) {
@@ -217,13 +43,13 @@ public class ControlPanel extends javax.swing.JPanel {
     public void update() {
         long f=client.getFrequency();
         String fString=mhzFormat.format(f/1000000)+"."+khzFormat.format(f%1000000);
-        
+
         vfo.setText(fString);
         mode.setText(client.getStringMode());
         digitalMeter.update(client.getMeter());
-        
-    }
 
+    }
+   
     /** This method is called from within the constructor to
      * initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is
@@ -239,13 +65,15 @@ public class ControlPanel extends javax.swing.JPanel {
         mode = new javax.swing.JTextField();
         digitalMeter = new jmonitor.DigitalMeter();
         filterButton = new javax.swing.JButton();
+        agcButton = new javax.swing.JButton();
+        dspButton = new javax.swing.JButton();
 
         setMaximumSize(new java.awt.Dimension(480, 27));
         setMinimumSize(new java.awt.Dimension(480, 27));
         setPreferredSize(new java.awt.Dimension(480, 27));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        bandButton.setFont(new java.awt.Font("DejaVu Sans", 0, 12)); // NOI18N
+        bandButton.setFont(new java.awt.Font("DejaVu Sans", 0, 12));
         bandButton.setText("Band");
         bandButton.setAlignmentY(0.0F);
         bandButton.setMaximumSize(new java.awt.Dimension(100, 27));
@@ -273,7 +101,7 @@ public class ControlPanel extends javax.swing.JPanel {
 
         vfo.setBackground(new java.awt.Color(0, 0, 0));
         vfo.setEditable(false);
-        vfo.setFont(new java.awt.Font("FreeMono", 1, 24)); // NOI18N
+        vfo.setFont(new java.awt.Font("FreeMono", 1, 24));
         vfo.setForeground(new java.awt.Color(0, 255, 0));
         vfo.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         vfo.setText("2400.000.000");
@@ -285,7 +113,7 @@ public class ControlPanel extends javax.swing.JPanel {
 
         mode.setBackground(new java.awt.Color(0, 0, 0));
         mode.setEditable(false);
-        mode.setFont(new java.awt.Font("DejaVu Sans", 1, 14)); // NOI18N
+        mode.setFont(new java.awt.Font("DejaVu Sans", 1, 14));
         mode.setForeground(new java.awt.Color(0, 255, 0));
         mode.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         mode.setText("LSB");
@@ -317,7 +145,337 @@ public class ControlPanel extends javax.swing.JPanel {
             }
         });
         add(filterButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 0, 90, -1));
+
+        agcButton.setText("AGC");
+        agcButton.setMaximumSize(new java.awt.Dimension(100, 27));
+        agcButton.setMinimumSize(new java.awt.Dimension(100, 27));
+        agcButton.setPreferredSize(new java.awt.Dimension(100, 27));
+        agcButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                agcButtonActionPerformed(evt);
+            }
+        });
+        add(agcButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 30, 90, -1));
+
+        dspButton.setText("DSP");
+        dspButton.setMaximumSize(new java.awt.Dimension(100, 27));
+        dspButton.setMinimumSize(new java.awt.Dimension(100, 27));
+        dspButton.setPreferredSize(new java.awt.Dimension(100, 27));
+        dspButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                dspButtonActionPerformed(evt);
+            }
+        });
+        add(dspButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 0, 90, -1));
     }// </editor-fold>//GEN-END:initComponents
+
+    private void createBandMenu() {
+        ButtonGroup group=new ButtonGroup();
+        JRadioButtonMenuItem item;
+
+        bandMenu = new JPopupMenu("Band");
+        
+        item=new JRadioButtonMenuItem("160");
+        item.addActionListener (new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                client.setFrequency(1850000);
+                client.setFilter(-3440, -150);
+                client.setMode(Client.modeLSB);
+                createLSBFilterMenu();
+            }
+        });
+        group.add(item);
+        bandMenu.add(item);
+
+        item = new JRadioButtonMenuItem("80");
+        item.addActionListener (new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                client.setFrequency(3890000);
+                client.setFilter(-3440, -150);
+                client.setMode(Client.modeLSB);
+                createLSBFilterMenu();
+            }
+        });group.add(item);
+        bandMenu.add(item);
+
+
+        item=new JRadioButtonMenuItem("60");
+        item.addActionListener (new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                client.setFrequency(5371500);
+                client.setFilter(-3440, -150);
+                client.setMode(Client.modeLSB);
+                createLSBFilterMenu();
+            }
+        });
+        group.add(item);
+        bandMenu.add(item);
+
+        item=new JRadioButtonMenuItem("40");
+        item.setSelected(true);
+        item.addActionListener (new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                client.setFrequency(7048000);
+                client.setFilter(-3440, -150);
+                client.setMode(Client.modeLSB);
+                createLSBFilterMenu();
+            }
+        });
+        group.add(item);
+        bandMenu.add(item);
+
+        item=new JRadioButtonMenuItem("30");
+        item.addActionListener (new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                client.setFrequency(10135600);
+                client.setFilter(150,3440);
+                client.setMode(Client.modeUSB);
+                createUSBFilterMenu();
+            }
+        });
+        group.add(item);
+        bandMenu.add(item);
+
+        item=new JRadioButtonMenuItem("20");
+        item.addActionListener (new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                client.setFrequency(14200000);
+                client.setFilter(150,3440);
+                client.setMode(Client.modeUSB);
+                createUSBFilterMenu();
+            }
+        });
+        group.add(item);
+        bandMenu.add(item);
+
+        item=new JRadioButtonMenuItem("17");
+        item.addActionListener (new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                client.setFrequency(18118900);
+                client.setFilter(150,3440);
+                client.setMode(Client.modeUSB);
+                createUSBFilterMenu();
+            }
+        });
+        group.add(item);
+        bandMenu.add(item);
+
+        item=new JRadioButtonMenuItem("15");
+        item.addActionListener (new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                client.setFrequency(21200000);
+                client.setFilter(150,3440);
+                client.setMode(Client.modeUSB);
+                createUSBFilterMenu();
+            }
+        });
+        group.add(item);
+        bandMenu.add(item);
+
+        item=new JRadioButtonMenuItem("12");
+        item.addActionListener (new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                client.setFrequency(24910000);
+                client.setFilter(150,3440);
+                client.setMode(Client.modeUSB);
+                createUSBFilterMenu();
+            }
+        });
+        group.add(item);
+        bandMenu.add(item);
+
+        item=new JRadioButtonMenuItem("10");
+        item.addActionListener (new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                client.setFrequency(28500000);
+                client.setFilter(150,3440);
+                client.setMode(Client.modeUSB);
+                createUSBFilterMenu();
+            }
+        });
+        group.add(item);
+        bandMenu.add(item);
+
+        item=new JRadioButtonMenuItem("6");
+        item.addActionListener (new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                client.setFrequency(50200000);
+                client.setFilter(150,3440);
+                client.setMode(Client.modeUSB);
+                createUSBFilterMenu();
+            }
+        });
+        group.add(item);
+        bandMenu.add(item);
+
+        item=new JRadioButtonMenuItem("GEN");
+        item.addActionListener (new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                client.setFrequency(909000);
+                client.setFilter(-4000,4000);
+                client.setMode(Client.modeAM);
+                createAMFilterMenu();
+            }
+
+        });
+        group.add(item);
+        bandMenu.add(item);
+
+        item=new JRadioButtonMenuItem("WWV");
+        item.addActionListener (new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                client.setFrequency(5000000);
+                client.setFilter(-4000,4000);
+                client.setMode(Client.modeSAM);
+                createAMFilterMenu();
+            }
+        });
+        group.add(item);
+        bandMenu.add(item);
+
+    }
+
+    private void createModeMenu() {
+
+        ButtonGroup group=new ButtonGroup();
+
+        JRadioButtonMenuItem item;
+
+        modeMenu = new JPopupMenu("Mode");
+        
+        item=new JRadioButtonMenuItem("LSB");
+        item.setSelected(true);
+        item.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                client.setMode(0);
+                client.setFilter(-2850, -150);
+                createLSBFilterMenu();
+            }
+        });
+        group.add(item);
+        modeMenu.add(item);
+
+        item = new JRadioButtonMenuItem("USB");
+        item.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                client.setMode(1);
+                client.setFilter(150, 2850);
+                createUSBFilterMenu();
+            }
+        });
+        group.add(item);
+        modeMenu.add(item);
+
+        item = new JRadioButtonMenuItem("DSB");
+        item.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                client.setMode(2);
+                client.setFilter(-2600, 2600);
+                createAMFilterMenu();
+            }
+        });
+        group.add(item);
+        modeMenu.add(item);
+
+        item = new JRadioButtonMenuItem("CWL");
+        item.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                client.setMode(3);
+                client.setFilter(-800, -400);
+                createCWFilterMenu();
+            }
+        });
+        group.add(item);
+        modeMenu.add(item);
+
+        item = new JRadioButtonMenuItem("CWU");
+        item.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                client.setMode(4);
+                client.setFilter(400, 800);
+                createCWFilterMenu();
+            }
+        });
+        group.add(item);
+        modeMenu.add(item);
+
+        item = new JRadioButtonMenuItem("SPEC");
+        item.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                client.setMode(8);
+                client.setFilter(-6000, -6000);
+            }
+        });
+        group.add(item);
+        modeMenu.add(item);
+
+        item = new JRadioButtonMenuItem("DIGL");
+        item.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                client.setMode(9);
+                client.setFilter(-3450, -150);
+                createDIGLFilterMenu();
+            }
+        });
+        group.add(item);
+        modeMenu.add(item);
+
+        item = new JRadioButtonMenuItem("DIGU");
+        item.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                client.setMode(7);
+                client.setFilter(150, 3450);
+                createDIGUFilterMenu();
+            }
+        });
+        group.add(item);
+        modeMenu.add(item);
+
+        item = new JRadioButtonMenuItem("DRM");
+        item.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                client.setMode(11);
+                client.setFilter(-6000, 6000);
+                filterMenu=null;
+            }
+        });
+        group.add(item);
+        modeMenu.add(item);
+
+        item = new JRadioButtonMenuItem("AM");
+        item.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                client.setMode(6);
+                client.setFilter(-4000,4000);
+                createAMFilterMenu();
+            }
+        });
+        group.add(item);
+        modeMenu.add(item);
+
+        item = new JRadioButtonMenuItem("SAM");
+        item.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                client.setMode(10);
+                client.setFilter(-4000,4000);
+                createAMFilterMenu();
+            }
+        });
+        group.add(item);
+        modeMenu.add(item);
+
+        item = new JRadioButtonMenuItem("FMN");
+        item.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                client.setMode(5);
+                client.setFilter(-2600, 2600);
+                createAMFilterMenu();
+            }
+        });
+        group.add(item);
+        modeMenu.add(item);
+
+    }
 
     private void bandButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bandButtonActionPerformed
         bandMenu.show(bandButton, 0, 0);
@@ -333,137 +491,244 @@ public class ControlPanel extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_filterButtonActionPerformed
 
+    private void agcButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agcButtonActionPerformed
+        if(agcMenu!=null) {
+            agcMenu.show(agcButton, 0, 0);
+        }
+    }//GEN-LAST:event_agcButtonActionPerformed
+
+    private void dspButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dspButtonActionPerformed
+        if(dspMenu!=null) {
+            dspMenu.show(dspButton, 0, 0);
+        }
+    }//GEN-LAST:event_dspButtonActionPerformed
 
     private void createLSBFilterMenu() {
+
+        ButtonGroup group=new ButtonGroup();
+        JRadioButtonMenuItem item;
+
         filterMenu = new JPopupMenu("Filter");
-        filterMenu.add("5.0k").addActionListener (new java.awt.event.ActionListener() {
+
+
+        item=new JRadioButtonMenuItem("5.0k");
+        item.addActionListener (new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 client.setFilter(-5150,-150);
             }
         });
-        filterMenu.add("4.4k").addActionListener(new java.awt.event.ActionListener() {
+        group.add(item);
+        filterMenu.add(item);
+
+        item=new JRadioButtonMenuItem("4.4k");
+        item.addActionListener(new java.awt.event.ActionListener() {
 
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 client.setFilter(-4550, -150);
             }
         });
-        filterMenu.add("3.8k").addActionListener(new java.awt.event.ActionListener() {
+        group.add(item);
+        filterMenu.add(item);
+
+        item=new JRadioButtonMenuItem("3.8k");
+        item.addActionListener(new java.awt.event.ActionListener() {
 
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 client.setFilter(-3950, -150);
             }
         });
-        filterMenu.add("3.3k").addActionListener(new java.awt.event.ActionListener() {
+        group.add(item);
+        filterMenu.add(item);
+
+        item=new JRadioButtonMenuItem("3.3k");
+        item.setSelected(true);
+        item.addActionListener(new java.awt.event.ActionListener() {
 
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 client.setFilter(-3440, -150);
             }
         });
-        filterMenu.add("2.9k").addActionListener(new java.awt.event.ActionListener() {
+        group.add(item);
+        filterMenu.add(item);
+
+        item=new JRadioButtonMenuItem("2.9k");
+        item.addActionListener(new java.awt.event.ActionListener() {
 
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 client.setFilter(-3050, -150);
             }
         });
-        filterMenu.add("2.7k").addActionListener(new java.awt.event.ActionListener() {
+        group.add(item);
+        filterMenu.add(item);
+
+        item=new JRadioButtonMenuItem("2.7k");
+        item.addActionListener(new java.awt.event.ActionListener() {
 
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 client.setFilter(-2850, -150);
             }
         });
-        filterMenu.add("2.4k").addActionListener(new java.awt.event.ActionListener() {
+        group.add(item);
+        filterMenu.add(item);
+
+        item=new JRadioButtonMenuItem("2.4k");
+        item.addActionListener(new java.awt.event.ActionListener() {
 
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 client.setFilter(-2550, -150);
             }
         });
-        filterMenu.add("2.1k").addActionListener(new java.awt.event.ActionListener() {
+        group.add(item);
+        filterMenu.add(item);
+
+        item=new JRadioButtonMenuItem("2.1k");
+        item.addActionListener(new java.awt.event.ActionListener() {
 
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 client.setFilter(-2250, -150);
             }
         });
-        filterMenu.add("1.8k").addActionListener(new java.awt.event.ActionListener() {
+        group.add(item);
+        filterMenu.add(item);
+
+        item=new JRadioButtonMenuItem("1.8k");
+        item.addActionListener(new java.awt.event.ActionListener() {
 
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 client.setFilter(-1950, -150);
             }
         });
-        filterMenu.add("1.0k").addActionListener(new java.awt.event.ActionListener() {
+        group.add(item);
+        filterMenu.add(item);
+
+        item=new JRadioButtonMenuItem("1.0k");
+        item.addActionListener(new java.awt.event.ActionListener() {
 
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 client.setFilter(-1150, -150);
             }
         });
+        group.add(item);
+        filterMenu.add(item);
     }
 
     private void createUSBFilterMenu() {
+
+        ButtonGroup group=new ButtonGroup();
+        JRadioButtonMenuItem item;
+
         filterMenu = new JPopupMenu("Filter");
-        filterMenu.add("5.0k").addActionListener(new java.awt.event.ActionListener() {
+
+        item=new JRadioButtonMenuItem("5.0k");
+        item.addActionListener(new java.awt.event.ActionListener() {
 
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 client.setFilter(150,5150);
             }
         });
-        filterMenu.add("4.4k").addActionListener(new java.awt.event.ActionListener() {
+        group.add(item);
+        filterMenu.add(item);
+
+        item=new JRadioButtonMenuItem("4.4k");
+        item.addActionListener(new java.awt.event.ActionListener() {
 
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 client.setFilter(150,4550);
             }
         });
-        filterMenu.add("3.8k").addActionListener(new java.awt.event.ActionListener() {
+        group.add(item);
+        filterMenu.add(item);
+
+        item=new JRadioButtonMenuItem("3.8k");
+        item.addActionListener(new java.awt.event.ActionListener() {
 
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 client.setFilter(150,3950);
             }
         });
-        filterMenu.add("3.3k").addActionListener(new java.awt.event.ActionListener() {
+        group.add(item);
+        filterMenu.add(item);
+
+        item=new JRadioButtonMenuItem("3.3k");
+        item.setSelected(true);
+        item.addActionListener(new java.awt.event.ActionListener() {
 
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 client.setFilter(150,3440);
             }
         });
-        filterMenu.add("2.9k").addActionListener(new java.awt.event.ActionListener() {
+        group.add(item);
+        filterMenu.add(item);
+
+        item=new JRadioButtonMenuItem("2.9k");
+        item.addActionListener(new java.awt.event.ActionListener() {
 
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 client.setFilter(150,3050);
             }
         });
-        filterMenu.add("2.7k").addActionListener(new java.awt.event.ActionListener() {
+        group.add(item);
+        filterMenu.add(item);
+
+        item=new JRadioButtonMenuItem("2.7k");
+        item.addActionListener(new java.awt.event.ActionListener() {
 
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 client.setFilter(150,2850);
             }
         });
-        filterMenu.add("2.4k").addActionListener(new java.awt.event.ActionListener() {
+        group.add(item);
+        filterMenu.add(item);
+
+        item=new JRadioButtonMenuItem("2.4k");
+        item.addActionListener(new java.awt.event.ActionListener() {
 
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 client.setFilter(150,2550);
             }
         });
-        filterMenu.add("2.1k").addActionListener(new java.awt.event.ActionListener() {
+        group.add(item);
+        filterMenu.add(item);
+
+        item=new JRadioButtonMenuItem("2.1k");
+        item.addActionListener(new java.awt.event.ActionListener() {
 
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 client.setFilter(150,2250);
             }
         });
-        filterMenu.add("1.8k").addActionListener(new java.awt.event.ActionListener() {
+        group.add(item);
+        filterMenu.add(item);
+
+        item=new JRadioButtonMenuItem("1.8k");
+        item.addActionListener(new java.awt.event.ActionListener() {
 
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 client.setFilter(150,1950);
             }
         });
-        filterMenu.add("1.0k").addActionListener(new java.awt.event.ActionListener() {
+        group.add(item);
+        filterMenu.add(item);
+
+        item=new JRadioButtonMenuItem("1.0k");
+        item.addActionListener(new java.awt.event.ActionListener() {
 
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 client.setFilter(150,1150);
             }
         });
+        group.add(item);
+        filterMenu.add(item);
     }
 
     private void createCWFilterMenu() {
+        ButtonGroup group=new ButtonGroup();
+        JRadioButtonMenuItem item=new JRadioButtonMenuItem();
+
         filterMenu = new JPopupMenu("Filter");
-        filterMenu.add("1.0k").addActionListener(new java.awt.event.ActionListener() {
+
+        item=new JRadioButtonMenuItem("1.0k");
+        item.addActionListener(new java.awt.event.ActionListener() {
 
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 if(client.getMode()==Client.modeCWL) {
@@ -473,7 +738,11 @@ public class ControlPanel extends javax.swing.JPanel {
                 }
             }
         });
-        filterMenu.add("800").addActionListener(new java.awt.event.ActionListener() {
+        group.add(item);
+        filterMenu.add(item);
+
+        item=new JRadioButtonMenuItem("800");
+        item.addActionListener(new java.awt.event.ActionListener() {
 
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 if(client.getMode()==Client.modeCWL) {
@@ -483,7 +752,11 @@ public class ControlPanel extends javax.swing.JPanel {
                 }
             }
         });
-        filterMenu.add("750").addActionListener(new java.awt.event.ActionListener() {
+        group.add(item);
+        filterMenu.add(item);
+
+        item=new JRadioButtonMenuItem("750");
+        item.addActionListener(new java.awt.event.ActionListener() {
 
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 if(client.getMode()==Client.modeCWL) {
@@ -493,7 +766,11 @@ public class ControlPanel extends javax.swing.JPanel {
                 }
             }
         });
-        filterMenu.add("600").addActionListener(new java.awt.event.ActionListener() {
+        group.add(item);
+        filterMenu.add(item);
+
+        item=new JRadioButtonMenuItem("600");
+        item.addActionListener(new java.awt.event.ActionListener() {
 
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 if(client.getMode()==Client.modeCWL) {
@@ -503,7 +780,11 @@ public class ControlPanel extends javax.swing.JPanel {
                 }
             }
         });
-        filterMenu.add("500").addActionListener(new java.awt.event.ActionListener() {
+        group.add(item);
+        filterMenu.add(item);
+
+        item=new JRadioButtonMenuItem("500");
+        item.addActionListener(new java.awt.event.ActionListener() {
 
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 if(client.getMode()==Client.modeCWL) {
@@ -513,7 +794,12 @@ public class ControlPanel extends javax.swing.JPanel {
                 }
             }
         });
-        filterMenu.add("400").addActionListener(new java.awt.event.ActionListener() {
+        group.add(item);
+        filterMenu.add(item);
+
+        item=new JRadioButtonMenuItem("400");
+        item.setSelected(true);
+        item.addActionListener(new java.awt.event.ActionListener() {
 
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 if(client.getMode()==Client.modeCWL) {
@@ -523,7 +809,11 @@ public class ControlPanel extends javax.swing.JPanel {
                 }
             }
         });
-        filterMenu.add("250").addActionListener(new java.awt.event.ActionListener() {
+        group.add(item);
+        filterMenu.add(item);
+
+        item=new JRadioButtonMenuItem("250");
+        item.addActionListener(new java.awt.event.ActionListener() {
 
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 if(client.getMode()==Client.modeCWL) {
@@ -533,7 +823,11 @@ public class ControlPanel extends javax.swing.JPanel {
                 }
             }
         });
-        filterMenu.add("100").addActionListener(new java.awt.event.ActionListener() {
+        group.add(item);
+        filterMenu.add(item);
+
+        item=new JRadioButtonMenuItem("100");
+        item.addActionListener(new java.awt.event.ActionListener() {
 
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 if(client.getMode()==Client.modeCWL) {
@@ -543,7 +837,11 @@ public class ControlPanel extends javax.swing.JPanel {
                 }
             }
         });
-        filterMenu.add("50").addActionListener(new java.awt.event.ActionListener() {
+        group.add(item);
+        filterMenu.add(item);
+
+        item=new JRadioButtonMenuItem("50");
+        item.addActionListener(new java.awt.event.ActionListener() {
 
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 if(client.getMode()==Client.modeCWL) {
@@ -553,7 +851,11 @@ public class ControlPanel extends javax.swing.JPanel {
                 }
             }
         });
-        filterMenu.add("25").addActionListener(new java.awt.event.ActionListener() {
+        group.add(item);
+        filterMenu.add(item);
+
+        item=new JRadioButtonMenuItem("25");
+        item.addActionListener(new java.awt.event.ActionListener() {
 
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 if(client.getMode()==Client.modeCWL) {
@@ -563,206 +865,404 @@ public class ControlPanel extends javax.swing.JPanel {
                 }
             }
         });
+        group.add(item);
+        filterMenu.add(item);
     }
 
 
     private void createDIGLFilterMenu() {
+        ButtonGroup group=new ButtonGroup();
+        JRadioButtonMenuItem item=new JRadioButtonMenuItem();
+
         filterMenu = new JPopupMenu("Filter");
-        filterMenu.add("5.0k").addActionListener(new java.awt.event.ActionListener() {
+
+        item=new JRadioButtonMenuItem("5.0k");
+        item.addActionListener(new java.awt.event.ActionListener() {
 
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 client.setFilter(-5150, -150);
             }
         });
-        filterMenu.add("4.4k").addActionListener(new java.awt.event.ActionListener() {
+        group.add(item);
+        filterMenu.add(item);
+
+        item=new JRadioButtonMenuItem("4.4k");
+        item.addActionListener(new java.awt.event.ActionListener() {
 
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 client.setFilter(-4550, -150);
             }
         });
-        filterMenu.add("3.8k").addActionListener(new java.awt.event.ActionListener() {
+        group.add(item);
+        filterMenu.add(item);
+
+        item=new JRadioButtonMenuItem("3.8k");
+        item.addActionListener(new java.awt.event.ActionListener() {
 
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 client.setFilter(-3950, -150);
             }
         });
-        filterMenu.add("3.3k").addActionListener(new java.awt.event.ActionListener() {
+        group.add(item);
+        filterMenu.add(item);
+
+        item=new JRadioButtonMenuItem("3.3k");
+        item.setSelected(true);
+        item.addActionListener(new java.awt.event.ActionListener() {
 
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 client.setFilter(-3440, -150);
             }
         });
-        filterMenu.add("2.9k").addActionListener(new java.awt.event.ActionListener() {
+        group.add(item);
+        filterMenu.add(item);
+
+        item=new JRadioButtonMenuItem("2.9k");
+        item.addActionListener(new java.awt.event.ActionListener() {
 
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 client.setFilter(-3050, -150);
             }
         });
-        filterMenu.add("2.7k").addActionListener(new java.awt.event.ActionListener() {
+        group.add(item);
+        filterMenu.add(item);
+
+        item=new JRadioButtonMenuItem("2.7k");
+        item.addActionListener(new java.awt.event.ActionListener() {
 
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 client.setFilter(-2850, -150);
             }
         });
-        filterMenu.add("2.4k").addActionListener(new java.awt.event.ActionListener() {
+        group.add(item);
+        filterMenu.add(item);
+
+        item=new JRadioButtonMenuItem("2.4k");
+        item.addActionListener(new java.awt.event.ActionListener() {
 
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 client.setFilter(-2550, -150);
             }
         });
-        filterMenu.add("2.1k").addActionListener(new java.awt.event.ActionListener() {
+        group.add(item);
+        filterMenu.add(item);
+
+        item=new JRadioButtonMenuItem("2.1");
+        item.addActionListener(new java.awt.event.ActionListener() {
 
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 client.setFilter(-2250, -150);
             }
         });
-        filterMenu.add("1.8k").addActionListener(new java.awt.event.ActionListener() {
+        group.add(item);
+        filterMenu.add(item);
+
+        item=new JRadioButtonMenuItem("1.8k");
+        item.addActionListener(new java.awt.event.ActionListener() {
 
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 client.setFilter(-1950, -150);
             }
         });
-        filterMenu.add("1.0k").addActionListener(new java.awt.event.ActionListener() {
+        group.add(item);
+        filterMenu.add(item);
+
+        item=new JRadioButtonMenuItem("1.0k");
+        item.addActionListener(new java.awt.event.ActionListener() {
 
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 client.setFilter(-1150, -150);
             }
         });
+        group.add(item);
+        filterMenu.add(item);
     }
 
     private void createDIGUFilterMenu() {
-        filterMenu = new JPopupMenu("Filter");
-        filterMenu.add("5.0k").addActionListener(new java.awt.event.ActionListener() {
+        ButtonGroup group=new ButtonGroup();
+        JRadioButtonMenuItem item;
 
+        filterMenu = new JPopupMenu("Filter");
+        
+        item=new JRadioButtonMenuItem("5.0k");
+        filterMenu.add("5.0k").addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 client.setFilter(150, 5150);
             }
         });
-        filterMenu.add("4.4k").addActionListener(new java.awt.event.ActionListener() {
+        group.add(item);
+        filterMenu.add(item);
 
+        item=new JRadioButtonMenuItem("4.4k");
+        filterMenu.add("4.4k").addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 client.setFilter(150, 4550);
             }
         });
+        group.add(item);
+        filterMenu.add(item);
+
+        item=new JRadioButtonMenuItem("3.8k");
         filterMenu.add("3.8k").addActionListener(new java.awt.event.ActionListener() {
 
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 client.setFilter(150, 3950);
             }
         });
-        filterMenu.add("3.3k").addActionListener(new java.awt.event.ActionListener() {
+        group.add(item);
+        filterMenu.add(item);
 
+        item=new JRadioButtonMenuItem("3.3k");
+        item.setSelected(true);
+        filterMenu.add("3.3k").addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 client.setFilter(150, 3440);
             }
         });
-        filterMenu.add("2.9k").addActionListener(new java.awt.event.ActionListener() {
+        group.add(item);
+        filterMenu.add(item);
 
+        item=new JRadioButtonMenuItem("2.9k");
+        filterMenu.add("2.9k").addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 client.setFilter(150, 3050);
             }
         });
-        filterMenu.add("2.7k").addActionListener(new java.awt.event.ActionListener() {
+        group.add(item);
+        filterMenu.add(item);
 
+        item=new JRadioButtonMenuItem("2.7k");
+        filterMenu.add("2.7k").addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 client.setFilter(150, 2850);
             }
         });
-        filterMenu.add("2.4k").addActionListener(new java.awt.event.ActionListener() {
+        group.add(item);
+        filterMenu.add(item);
 
+        item=new JRadioButtonMenuItem("2.4k");
+        filterMenu.add("2.4k").addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 client.setFilter(150, 2550);
             }
         });
-        filterMenu.add("2.1k").addActionListener(new java.awt.event.ActionListener() {
+        group.add(item);
+        filterMenu.add(item);
 
+        item=new JRadioButtonMenuItem("2.1k");
+        filterMenu.add("2.1k").addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 client.setFilter(150, 2250);
             }
         });
-        filterMenu.add("1.8k").addActionListener(new java.awt.event.ActionListener() {
+        group.add(item);
+        filterMenu.add(item);
 
+        item=new JRadioButtonMenuItem("1.8k");
+        filterMenu.add("1.8k").addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 client.setFilter(150, 1950);
             }
         });
-        filterMenu.add("1.0k").addActionListener(new java.awt.event.ActionListener() {
+        group.add(item);
+        filterMenu.add(item);
 
+        item=new JRadioButtonMenuItem("1.0k");
+        filterMenu.add("1.0k").addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 client.setFilter(150, 1150);
             }
         });
+        group.add(item);
+        filterMenu.add(item);
     }
 
     private void createAMFilterMenu() {
-        filterMenu = new JPopupMenu("Filter");
-        filterMenu.add("16.0k").addActionListener(new java.awt.event.ActionListener() {
+        ButtonGroup group=new ButtonGroup();
+        JRadioButtonMenuItem item;
 
+        filterMenu = new JPopupMenu("Filter");
+        
+        item=new JRadioButtonMenuItem("16.0k");
+        item.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 client.setFilter(-8000,8000);
             }
         });
-        filterMenu.add("12.0k").addActionListener(new java.awt.event.ActionListener() {
+        group.add(item);
+        filterMenu.add(item);
 
+        item=new JRadioButtonMenuItem("12.0k");
+        item.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 client.setFilter(-6000,6000);
             }
         });
-        filterMenu.add("10.0k").addActionListener(new java.awt.event.ActionListener() {
+        group.add(item);
+        filterMenu.add(item);
+
+        item=new JRadioButtonMenuItem("10.0k");
+        item.addActionListener(new java.awt.event.ActionListener() {
 
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 client.setFilter(-5000,5000);
             }
         });
-        filterMenu.add("8.0k").addActionListener(new java.awt.event.ActionListener() {
+        group.add(item);
+        filterMenu.add(item);
+
+        item=new JRadioButtonMenuItem("8.0k");
+        item.setSelected(true);
+        item.addActionListener(new java.awt.event.ActionListener() {
 
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 client.setFilter(-4000,4000);
             }
         });
-        filterMenu.add("6.6k").addActionListener(new java.awt.event.ActionListener() {
+        group.add(item);
+        filterMenu.add(item);
+
+        item=new JRadioButtonMenuItem("6.6k");
+        item.addActionListener(new java.awt.event.ActionListener() {
 
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 client.setFilter(-3300,3300);
             }
         });
-        filterMenu.add("5.2k").addActionListener(new java.awt.event.ActionListener() {
+        group.add(item);
+        filterMenu.add(item);
+
+        item=new JRadioButtonMenuItem("5.2k");
+        item.addActionListener(new java.awt.event.ActionListener() {
 
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 client.setFilter(-2600,2600);
             }
         });
-        filterMenu.add("4.0k").addActionListener(new java.awt.event.ActionListener() {
+        group.add(item);
+        filterMenu.add(item);
+
+        item=new JRadioButtonMenuItem("4.0k");
+        item.addActionListener(new java.awt.event.ActionListener() {
 
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 client.setFilter(-2000,2000);
             }
         });
-        filterMenu.add("3.1k").addActionListener(new java.awt.event.ActionListener() {
+        group.add(item);
+        filterMenu.add(item);
+
+        item=new JRadioButtonMenuItem("3.1k");
+        item.addActionListener(new java.awt.event.ActionListener() {
 
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 client.setFilter(-1550,1550);
             }
         });
-        filterMenu.add("2.9k").addActionListener(new java.awt.event.ActionListener() {
+        group.add(item);
+        filterMenu.add(item);
+
+        item=new JRadioButtonMenuItem("2.9k");
+        item.addActionListener(new java.awt.event.ActionListener() {
 
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 client.setFilter(-1450,1450);
             }
         });
-        filterMenu.add("2.4k").addActionListener(new java.awt.event.ActionListener() {
+        group.add(item);
+        filterMenu.add(item);
+
+        item=new JRadioButtonMenuItem("2.4k");
+        item.addActionListener(new java.awt.event.ActionListener() {
 
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 client.setFilter(-1200,1200);
             }
         });
+        group.add(item);
+        filterMenu.add(item);
     }
 
+    private void createAGCMenu() {
+        ButtonGroup group=new ButtonGroup();
+        JRadioButtonMenuItem item;
 
+        agcMenu = new JPopupMenu("AGC");
+        item=new JRadioButtonMenuItem("Long");
+        item.setSelected(true);
+        item.addActionListener(new java.awt.event.ActionListener() {
+
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                client.setAGC(1);
+            }
+        });
+        group.add(item);
+        agcMenu.add(item);
+
+        item=new JRadioButtonMenuItem("Slow");
+        item.addActionListener(new java.awt.event.ActionListener() {
+
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                client.setAGC(2);
+            }
+        });
+        group.add(item);
+        agcMenu.add(item);
+
+        item=new JRadioButtonMenuItem("Medium");
+        item.addActionListener(new java.awt.event.ActionListener() {
+
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                client.setAGC(3);
+            }
+        });
+        group.add(item);
+        agcMenu.add(item);
+
+        item=new JRadioButtonMenuItem("Fast");
+        item.addActionListener(new java.awt.event.ActionListener() {
+
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                client.setAGC(4);
+            }
+        });
+        group.add(item);
+        agcMenu.add(item);
+    }
+
+    private void createDSPMenu() {
+        dspMenu = new JPopupMenu("DSP");
+        JCheckBoxMenuItem item=new JCheckBoxMenuItem("NR");
+        item.addActionListener(new ActionListener() {
+           public void actionPerformed(ActionEvent evt) {
+               JCheckBoxMenuItem item=(JCheckBoxMenuItem)evt.getSource();
+               client.setNR(item.getState());
+           }
+        });
+        dspMenu.add(item);
+        item=new JCheckBoxMenuItem("ANF");
+        item.addActionListener(new ActionListener() {
+           public void actionPerformed(ActionEvent evt) {
+               JCheckBoxMenuItem item=(JCheckBoxMenuItem)evt.getSource();
+               client.setANF(item.getState());
+           }
+        });
+        dspMenu.add(item);
+        item=new JCheckBoxMenuItem("NB");
+        item.addActionListener(new ActionListener() {
+           public void actionPerformed(ActionEvent evt) {
+               JCheckBoxMenuItem item=(JCheckBoxMenuItem)evt.getSource();
+               client.setNB(item.getState());
+           }
+        });
+        dspMenu.add(item);
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton agcButton;
     private javax.swing.JButton bandButton;
     private jmonitor.DigitalMeter digitalMeter;
+    private javax.swing.JButton dspButton;
     private javax.swing.JButton filterButton;
     private javax.swing.JTextField mode;
     private javax.swing.JButton modeButton;
@@ -774,6 +1274,8 @@ public class ControlPanel extends javax.swing.JPanel {
     private JPopupMenu bandMenu;
     private JPopupMenu modeMenu;
     private JPopupMenu filterMenu;
+    private JPopupMenu agcMenu;
+    private JPopupMenu dspMenu;
 
     private DecimalFormat mhzFormat=new DecimalFormat("####0");
     private DecimalFormat khzFormat=new DecimalFormat("000000");

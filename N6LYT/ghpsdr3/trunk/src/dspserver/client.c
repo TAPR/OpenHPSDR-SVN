@@ -193,7 +193,38 @@ fprintf(stderr,"client_thread\n");
                             token=strtok(NULL," ");
                             high=atoi(token);
                             SetRXFilter(0,0,(double)low,(double)high);
-                        } else {
+                        } else if(strcmp(token,"setAGC")==0) {
+                            int agc;
+                            token=strtok(NULL," ");
+                            agc=atoi(token);
+                            SetRXAGC(0,0,agc);
+                        } else if(strcmp(token,"setNR")==0) {
+                            int nr;
+                            token=strtok(NULL," ");
+                            if(strcmp(token,"true")==0) {
+                                nr=1;
+                            } else {
+                                nr=0;
+                            }
+                            SetNR(0,0,nr);
+                        } else if(strcmp(token,"setNB")==0) {
+                            int nb;
+                            token=strtok(NULL," ");
+                            if(strcmp(token,"true")==0) {
+                                nb=1;
+                            } else {
+                                nb=0;
+                            }
+                            SetNB(0,0,nb);
+                        } else if(strcmp(token,"setANF")==0) {
+                            int anf;
+                            token=strtok(NULL," ");
+                            if(strcmp(token,"true")==0) {
+                                anf=1;
+                            } else {
+                                anf=0;
+                            }
+                            SetANF(0,0,anf);
                         }
                     } else {
                     }

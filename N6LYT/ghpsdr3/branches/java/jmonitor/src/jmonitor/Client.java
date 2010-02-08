@@ -192,13 +192,13 @@ public class Client extends Thread {
         this.filterLow=filterLow;
         this.filterHigh=filterHigh;
         sendCommand("setFilter "+filterLow+" "+filterHigh);
-        System.err.println("setFilter "+filterLow+" "+filterHigh);
+        //System.err.println("setFilter "+filterLow+" "+filterHigh);
     }
 
     public void setMode(int mode) {
         this.mode=mode;
         sendCommand("setMode "+mode);
-        System.err.println("setMode " + mode);
+        //System.err.println("setMode " + mode);
     }
 
     public int getMeter() {
@@ -208,6 +208,24 @@ public class Client extends Thread {
     public int getCWPitch() {
         return cwPitch;
     }
+
+    public void setAGC(int agc) {
+        this.agc=agc;
+        sendCommand("setRXAGC  "+agc);
+    }
+
+    public void setNR(boolean state) {
+        sendCommand("setNR "+state);
+    }
+
+    public void setANF(boolean state) {
+        sendCommand("setANF "+state);
+    }
+
+    public void setNB(boolean state) {
+        sendCommand("setNB "+state);
+    }
+
 
     Audio audio;
     MonitorUpdateListener listener;
@@ -231,6 +249,7 @@ public class Client extends Thread {
     private String sampleRate;
     private int band;
     private int meter;
+    private int agc;
 
     private int cwPitch=600;
 
