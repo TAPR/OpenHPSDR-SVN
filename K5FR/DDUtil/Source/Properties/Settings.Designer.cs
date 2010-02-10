@@ -2950,5 +2950,53 @@ namespace DataDecoder.Properties {
                 this["SO2RDataFile"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool chkAutoExpert {
+            get {
+                return ((bool)(this["chkAutoExpert"]));
+            }
+            set {
+                this["chkAutoExpert"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public string txtAM {
+            get {
+                return ((string)(this["txtAM"]));
+            }
+            set {
+                this["txtAM"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public string txtSSB {
+            get {
+                return ((string)(this["txtSSB"]));
+            }
+            set {
+                this["txtSSB"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public string txtDigi {
+            get {
+                return ((string)(this["txtDigi"]));
+            }
+            set {
+                this["txtDigi"] = value;
+            }
+        }
     }
 }
