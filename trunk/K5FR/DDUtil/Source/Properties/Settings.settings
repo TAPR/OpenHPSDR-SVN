@@ -737,5 +737,17 @@ RCP4 - WriteLog</Value>
     <Setting Name="SO2RDataFile" Type="System.String" Scope="User">
       <Value Profile="(Default)">SO2R.xml</Value>
     </Setting>
+    <Setting Name="chkAutoExpert" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="txtAM" Type="System.String" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="txtSSB" Type="System.String" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="txtDigi" Type="System.String" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

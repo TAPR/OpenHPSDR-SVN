@@ -268,6 +268,14 @@ namespace DataDecoder
             this.grpPTT = new System.Windows.Forms.GroupBox();
             this.btnByp = new System.Windows.Forms.Button();
             this.groupBox13 = new System.Windows.Forms.GroupBox();
+            this.label224 = new System.Windows.Forms.Label();
+            this.label223 = new System.Windows.Forms.Label();
+            this.label222 = new System.Windows.Forms.Label();
+            this.label27 = new System.Windows.Forms.Label();
+            this.txtDigi = new System.Windows.Forms.TextBox();
+            this.txtSSB = new System.Windows.Forms.TextBox();
+            this.txtAM = new System.Windows.Forms.TextBox();
+            this.chkAutoExpert = new System.Windows.Forms.CheckBox();
             this.label151 = new System.Windows.Forms.Label();
             this.chkAutoDrv = new System.Windows.Forms.CheckBox();
             this.btnDrive = new System.Windows.Forms.Button();
@@ -4323,7 +4331,7 @@ namespace DataDecoder
             // 
             this.pixBox1.ImageLocation = "http://qsonet.com/propadex.png";
             this.pixBox1.InitialImage = null;
-            this.pixBox1.Location = new System.Drawing.Point(276, 73);
+            this.pixBox1.Location = new System.Drawing.Point(254, 75);
             this.pixBox1.Name = "pixBox1";
             this.pixBox1.Size = new System.Drawing.Size(146, 91);
             this.pixBox1.TabIndex = 80;
@@ -4336,7 +4344,7 @@ namespace DataDecoder
             this.grpPTT.Controls.Add(this.btnByp);
             this.grpPTT.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.grpPTT.ForeColor = System.Drawing.Color.Firebrick;
-            this.grpPTT.Location = new System.Drawing.Point(258, 9);
+            this.grpPTT.Location = new System.Drawing.Point(233, 2);
             this.grpPTT.Name = "grpPTT";
             this.grpPTT.Size = new System.Drawing.Size(56, 57);
             this.grpPTT.TabIndex = 111;
@@ -4362,25 +4370,132 @@ namespace DataDecoder
             // 
             // groupBox13
             // 
+            this.groupBox13.Controls.Add(this.label224);
+            this.groupBox13.Controls.Add(this.label223);
+            this.groupBox13.Controls.Add(this.label222);
+            this.groupBox13.Controls.Add(this.label27);
+            this.groupBox13.Controls.Add(this.txtDigi);
+            this.groupBox13.Controls.Add(this.txtSSB);
+            this.groupBox13.Controls.Add(this.txtAM);
+            this.groupBox13.Controls.Add(this.chkAutoExpert);
             this.groupBox13.Controls.Add(this.label151);
             this.groupBox13.Controls.Add(this.chkAutoDrv);
             this.groupBox13.Controls.Add(this.btnDrive);
             this.groupBox13.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox13.ForeColor = System.Drawing.Color.Firebrick;
-            this.groupBox13.Location = new System.Drawing.Point(331, 9);
+            this.groupBox13.Location = new System.Drawing.Point(294, 1);
             this.groupBox13.Name = "groupBox13";
-            this.groupBox13.Size = new System.Drawing.Size(82, 57);
+            this.groupBox13.Size = new System.Drawing.Size(133, 70);
             this.groupBox13.TabIndex = 110;
             this.groupBox13.TabStop = false;
             this.groupBox13.Text = "Auto Drive";
             this.toolTip1.SetToolTip(this.groupBox13, "Auto Drive controls");
+            // 
+            // label224
+            // 
+            this.label224.AutoSize = true;
+            this.label224.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.5F);
+            this.label224.ForeColor = System.Drawing.Color.Navy;
+            this.label224.Location = new System.Drawing.Point(2, 55);
+            this.label224.Name = "label224";
+            this.label224.Size = new System.Drawing.Size(32, 13);
+            this.label224.TabIndex = 71;
+            this.label224.Text = "Xpert";
+            // 
+            // label223
+            // 
+            this.label223.AutoSize = true;
+            this.label223.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.5F);
+            this.label223.ForeColor = System.Drawing.Color.Navy;
+            this.label223.Location = new System.Drawing.Point(100, 55);
+            this.label223.Name = "label223";
+            this.label223.Size = new System.Drawing.Size(25, 13);
+            this.label223.TabIndex = 70;
+            this.label223.Text = "Digi";
+            // 
+            // label222
+            // 
+            this.label222.AutoSize = true;
+            this.label222.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.5F);
+            this.label222.ForeColor = System.Drawing.Color.Navy;
+            this.label222.Location = new System.Drawing.Point(69, 55);
+            this.label222.Name = "label222";
+            this.label222.Size = new System.Drawing.Size(28, 13);
+            this.label222.TabIndex = 69;
+            this.label222.Text = "SSB";
+            // 
+            // label27
+            // 
+            this.label27.AutoSize = true;
+            this.label27.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.5F);
+            this.label27.ForeColor = System.Drawing.Color.Navy;
+            this.label27.Location = new System.Drawing.Point(39, 55);
+            this.label27.Name = "label27";
+            this.label27.Size = new System.Drawing.Size(23, 13);
+            this.label27.TabIndex = 68;
+            this.label27.Text = "AM";
+            // 
+            // txtDigi
+            // 
+            this.txtDigi.BackColor = System.Drawing.SystemColors.Window;
+            this.txtDigi.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.25F);
+            this.txtDigi.Location = new System.Drawing.Point(99, 35);
+            this.txtDigi.Name = "txtDigi";
+            this.txtDigi.Size = new System.Drawing.Size(26, 18);
+            this.txtDigi.TabIndex = 67;
+            this.txtDigi.Text = "-25";
+            this.txtDigi.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.toolTip1.SetToolTip(this.txtDigi, "Enter percentage increase/decrease for this mode (enter as nn for pos or -nn for " +
+                    "neg).");
+            this.txtDigi.TextChanged += new System.EventHandler(this.txtDigi_TextChanged);
+            // 
+            // txtSSB
+            // 
+            this.txtSSB.BackColor = System.Drawing.SystemColors.Window;
+            this.txtSSB.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.25F);
+            this.txtSSB.Location = new System.Drawing.Point(68, 35);
+            this.txtSSB.Name = "txtSSB";
+            this.txtSSB.Size = new System.Drawing.Size(26, 18);
+            this.txtSSB.TabIndex = 66;
+            this.txtSSB.Text = "-50";
+            this.txtSSB.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.toolTip1.SetToolTip(this.txtSSB, "Enter percentage increase/decrease for this mode (enter as nn for pos or -nn for " +
+                    "neg).");
+            this.txtSSB.TextChanged += new System.EventHandler(this.txtSSB_TextChanged);
+            // 
+            // txtAM
+            // 
+            this.txtAM.BackColor = System.Drawing.SystemColors.Window;
+            this.txtAM.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.25F);
+            this.txtAM.Location = new System.Drawing.Point(37, 35);
+            this.txtAM.Name = "txtAM";
+            this.txtAM.Size = new System.Drawing.Size(26, 18);
+            this.txtAM.TabIndex = 65;
+            this.txtAM.Text = "-50";
+            this.txtAM.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.toolTip1.SetToolTip(this.txtAM, "Enter percentage increase/decrease for this mode (enter as nn for pos or -nn for " +
+                    "neg).");
+            this.txtAM.TextChanged += new System.EventHandler(this.txtAM_TextChanged);
+            // 
+            // chkAutoExpert
+            // 
+            this.chkAutoExpert.AutoSize = true;
+            this.chkAutoExpert.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F);
+            this.chkAutoExpert.ForeColor = System.Drawing.Color.Navy;
+            this.chkAutoExpert.Location = new System.Drawing.Point(10, 38);
+            this.chkAutoExpert.Name = "chkAutoExpert";
+            this.chkAutoExpert.Size = new System.Drawing.Size(15, 14);
+            this.chkAutoExpert.TabIndex = 64;
+            this.toolTip1.SetToolTip(this.chkAutoExpert, "Select to enable Auto Drive Expert mode.");
+            this.chkAutoExpert.UseVisualStyleBackColor = true;
+            this.chkAutoExpert.CheckedChanged += new System.EventHandler(this.chkAutoExpert_CheckedChanged);
             // 
             // label151
             // 
             this.label151.AutoSize = true;
             this.label151.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.5F);
             this.label151.ForeColor = System.Drawing.Color.Navy;
-            this.label151.Location = new System.Drawing.Point(39, 36);
+            this.label151.Location = new System.Drawing.Point(106, 14);
             this.label151.Name = "label151";
             this.label151.Size = new System.Drawing.Size(23, 13);
             this.label151.TabIndex = 61;
@@ -4391,7 +4506,7 @@ namespace DataDecoder
             this.chkAutoDrv.AutoSize = true;
             this.chkAutoDrv.Font = new System.Drawing.Font("Microsoft Sans Serif", 7F);
             this.chkAutoDrv.ForeColor = System.Drawing.Color.Navy;
-            this.chkAutoDrv.Location = new System.Drawing.Point(10, 16);
+            this.chkAutoDrv.Location = new System.Drawing.Point(10, 15);
             this.chkAutoDrv.Name = "chkAutoDrv";
             this.chkAutoDrv.Size = new System.Drawing.Size(59, 17);
             this.chkAutoDrv.TabIndex = 63;
@@ -4406,7 +4521,7 @@ namespace DataDecoder
             this.btnDrive.FlatAppearance.BorderColor = System.Drawing.SystemColors.ControlText;
             this.btnDrive.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnDrive.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.btnDrive.Location = new System.Drawing.Point(7, 36);
+            this.btnDrive.Location = new System.Drawing.Point(77, 13);
             this.btnDrive.Name = "btnDrive";
             this.btnDrive.Size = new System.Drawing.Size(25, 15);
             this.btnDrive.TabIndex = 62;
@@ -16629,6 +16744,14 @@ namespace DataDecoder
         private TextBox txtZL;
         private Button btnLoadSO2R;
         private Button btnSO2Rclear;
+        private TextBox txtAM;
+        private CheckBox chkAutoExpert;
+        private TextBox txtDigi;
+        private TextBox txtSSB;
+        private Label label224;
+        private Label label223;
+        private Label label222;
+        private Label label27;
 
     }
 }

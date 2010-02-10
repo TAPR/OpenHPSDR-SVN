@@ -610,6 +610,10 @@ namespace DataDecoder
             txtVspMgr.Text = set.vspMgrFile;
             txtPSDR.Text = set.PwrSDRfile;
             chkPSDR.Checked = set.StartPSDR;
+            chkAutoExpert.Checked = set.chkAutoExpert;
+            txtAM.Text = set.txtAM;
+            txtSSB.Text = set.txtSSB;
+            txtDigi.Text = set.txtDigi;
 
             stsTX = set.stsTX;
             stsOper = set.stsOper;
@@ -1609,8 +1613,8 @@ namespace DataDecoder
                 PortAccess.Output(LPTnum, 0);
                 if (chkSoEnab.Checked)
                 {
-                    PortAccess.Output(lpt1, 0);
-                    PortAccess.Output(lpt2, 0);
+                    PortAccess.Output(solpt1, 0);
+                    PortAccess.Output(solpt2, 0);
                 }
                 if (chkKnobEnab.Checked) KnobPort.Write("I000;");
 
@@ -4162,7 +4166,8 @@ namespace DataDecoder
         #region # Methods #
 
         // write to FlexWire port
-        void WriteFW(int adr, int cmd, int data, bool inv)
+        void 
+            WriteFW(int adr, int cmd, int data, bool inv)
         {
             string ad = adr.ToString("X");  // convert to hex
             if (adr < 16) ad = "0" + ad;    // add zero if needed
@@ -6782,9 +6787,7 @@ namespace DataDecoder
 
         #region Serial Port Events
 
-        /// <summary>
-        /// Radio CAT data has arrived
-        /// </summary>
+        // Radio CAT data has arrived
         string CommBuffer = "";
         string rawFreq = "";
         string sdrMode = "";
@@ -6792,8 +6795,9 @@ namespace DataDecoder
         string lastFreq = "";       // freq from last CATRxEvent
         string lastBand = "";
         string COBC = "";           // Chk on band change last band setting
-        int vfoFreq = 0;       // VFO B freq, used for SO2R calcs
-        int bBand, LastB = 0;   // current and last vfoB band
+        int vfoFreq = 0;            // VFO B freq, used for SO2R calcs
+        int bBand, LastB = 0;       // current and last vfoB band
+        double modeFactor = 1;         // holds expert auto drive mode factor
         string lastFreqB = "";
         void sp_CATRxEvent(object source, CATSerialPorts.SerialRXEvent e)
         {
@@ -6937,29 +6941,44 @@ namespace DataDecoder
                             if (stsOper && chkAutoDrv.Checked)
                             {   // if the amp is in Operate mode, get the stored power
                                 // setting from the settings file and send to the radio.
+                                double pwrCor = 0;
+                                if (!chkAutoExpert.Checked) modeFactor = 1;
                                 switch (band)
                                 {
-                                    case "160": WriteToPort("ZZPC" + set.pwr1 + ";", iSleep);
+                                    case "160": 
+                                        pwrCor = Convert.ToInt32(set.pwr1) * modeFactor;
                                         break;
-                                    case "080": WriteToPort("ZZPC" + set.pwr2 + ";", iSleep);
+                                    case "080":
+                                        pwrCor = Convert.ToInt32(set.pwr2) * modeFactor;
                                         break;
-                                    case "040": WriteToPort("ZZPC" + set.pwr3 + ";", iSleep);
+                                    case "040":
+                                        pwrCor = Convert.ToInt32(set.pwr3) * modeFactor;
                                         break;
-                                    case "030": WriteToPort("ZZPC" + set.pwr4 + ";", iSleep);
+                                    case "030":
+                                        pwrCor = Convert.ToInt32(set.pwr4) * modeFactor;
                                         break;
-                                    case "020": WriteToPort("ZZPC" + set.pwr5 + ";", iSleep);
+                                    case "020":
+                                        pwrCor = Convert.ToInt32(set.pwr5) * modeFactor;
                                         break;
-                                    case "017": WriteToPort("ZZPC" + set.pwr6 + ";", iSleep);
+                                    case "017":
+                                        pwrCor = Convert.ToInt32(set.pwr6) * modeFactor;
                                         break;
-                                    case "015": WriteToPort("ZZPC" + set.pwr7 + ";", iSleep);
+                                    case "015":
+                                        pwrCor = Convert.ToInt32(set.pwr7) * modeFactor;
                                         break;
-                                    case "012": WriteToPort("ZZPC" + set.pwr8 + ";", iSleep);
+                                    case "012":
+                                        pwrCor = Convert.ToInt32(set.pwr8) * modeFactor;
                                         break;
-                                    case "010": WriteToPort("ZZPC" + set.pwr9 + ";", iSleep);
+                                    case "010":
+                                        pwrCor = Convert.ToInt32(set.pwr9) * modeFactor;
                                         break;
-                                    case "006": WriteToPort("ZZPC" + set.pwr10 + ";", iSleep);
+                                    case "006":
+                                        pwrCor = Convert.ToInt32(set.pwr10) * modeFactor;
                                         break;
                                 }
+                                WriteToPort("ZZPC" + (Convert.ToInt32(pwrCor).ToString())
+                                    .PadLeft(3, '0') + ";", iSleep);
+
                                 btnByp.BackColor = Color.Lime;
                                 mini.btnByp.BackColor = Color.Lime;
                                 txtAlcInd.BackColor = Color.Lime;
@@ -7362,8 +7381,8 @@ namespace DataDecoder
                         }
                         else { WatchDog.Stop(); }
 
-                        // what's the split status
                         sdrMode = rawFreq.Substring(rawFreq.Length - 9, 1);
+                        // what's the split status
                         if (rawFreq.Substring(rawFreq.Length - 6, 1) == "0")
                         {   // if xmit vfo is "A" then send passive listener commands now
                             vfo = "VFO A";
@@ -7398,6 +7417,21 @@ namespace DataDecoder
                         case "9": mode = "DIGU"; break;
                         default: mode = "xxx"; break;
                     }
+                    // If Auto Drive Expert mode is checked calc mode % change
+                    if (LastMode != sdrMode && chkAutoExpert.Checked)
+                    {
+                        if (sdrMode == "1" || sdrMode == "2")
+                        { modeFactor = (Convert.ToDouble(set.txtSSB) / 100) + 1; }
+                        else if (sdrMode == "3" || sdrMode == "7")
+                            modeFactor = 1;
+                        else if (sdrMode == "5")
+                        { modeFactor = (Convert.ToDouble(set.txtAM) / 100) + 1; }
+                        else if (sdrMode == "6" || sdrMode == "9")
+                        { modeFactor = (Convert.ToDouble(set.txtDigi) / 100) + 1; }
+                        else modeFactor = 1;
+                        lastBand = "";
+                    }
+                    
                     logFreq = rawFreq.Substring(2, 11);
 
                     //fix for PSDR sending 7000.000 on 1st IF; query after start-up
@@ -8544,8 +8578,8 @@ namespace DataDecoder
 
         #region # Enums, Signatures & Vars #
 
-        int lpt1 = 0; 
-        int lpt2 = 0;
+        int solpt1 = 0; 
+        int solpt2 = 0;
         bool bSo2rChg = false;            // SP2R data has changed
         bool bClosePass1 = false;         // 1st pass thru form close routine
         string dataH = "0", dataL = "0";  // data word for LPT1
@@ -8641,8 +8675,8 @@ namespace DataDecoder
                 else if (c.GetType() == typeof(TextBox))
                     ((TextBox)c).Text = "";
             }
-            OutParallelPort(lpt1, 0);
-            OutParallelPort(lpt2, 0);
+            OutParallelPort(solpt1, 0);
+            OutParallelPort(solpt2, 0);
         }
         // the TX switch has changed
         internal void PinChanged(object sender, SerialPinChangedEventArgs e)
@@ -8684,8 +8718,8 @@ namespace DataDecoder
             else
             {
                 set.chkSoEnab = false;
-                OutParallelPort(lpt1, 0);
-                OutParallelPort(lpt2, 0);
+                OutParallelPort(solpt1, 0);
+                OutParallelPort(solpt2, 0);
                 set.Save();
                 ProcessMacroButton(21);
                 MsgBoxCheck.MessageBox dlg = new MsgBoxCheck.MessageBox();
@@ -8820,43 +8854,46 @@ namespace DataDecoder
         void SOinit()
         {
             chkSoEnab.Checked = set.chkSoEnab;
-            cboSwPort.SelectedIndex = set.cboSwPort;
-            so2rFile = set.SO2RDataFile;
-            if (app_data_path == "")
-            {
-                Assembly assembly = Assembly.GetExecutingAssembly();
-                FileVersionInfo fvi = FileVersionInfo.GetVersionInfo(assembly.Location);
-                string version = fvi.FileVersion.Substring(0, fvi.FileVersion.LastIndexOf("."));
-                //AppDataPath = assembly.Location;
-                AppDataPath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData)
-                + "\\DDUtil\\";
-            }
-            if (!Directory.Exists(app_data_path))
-                Directory.CreateDirectory(app_data_path);
-
-            dso = new DataSet();
-            if (File.Exists(app_data_path + "\\" + so2rFile))
-                dso.ReadXml(app_data_path + "\\" + so2rFile);
-            grpSO2R.Text = "SO2R - Profile: " + so2rFile;
-            LoadVars(); //load matrix with last used data file
-
-            chkAutoDrv.Checked = false;
             if (chkSoEnab.Checked)
             {
-                if (cboSwPort.SelectedIndex != -1)
+                cboSwPort.SelectedIndex = set.cboSwPort;
+                so2rFile = set.SO2RDataFile;
+                if (app_data_path == "")
                 {
-                    if (!SwitchPort.IsOpen) SwitchPort.Open();
+                    Assembly assembly = Assembly.GetExecutingAssembly();
+                    FileVersionInfo fvi = FileVersionInfo.GetVersionInfo(assembly.Location);
+                    string version = fvi.FileVersion.Substring(0, fvi.FileVersion.LastIndexOf("."));
+                    //AppDataPath = assembly.Location;
+                    AppDataPath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData)
+                    + "\\DDUtil\\";
                 }
-                WriteToPort("ZZRS1;", iSleep);  // turn on rx2
-                WriteToPort("ZZSW0;", iSleep);  // select vfo a xmit default
-                ZZSW = 0;                       // set vfo default status to VFO A
-                SetVfoB();                      // force setup of the data &
-                SetVfoA();                      // control words
-                bSo2rChg = false;               // set the so2r controls flag to false
-                if (txtLPT1_1.Text != "")
-                lpt1 = Convert.ToInt32(txtLPT1_1.Text);
-                if (txtLPT2.Text != "")
-                    lpt2 = Convert.ToInt32(txtLPT2.Text);
+                if (!Directory.Exists(app_data_path))
+                    Directory.CreateDirectory(app_data_path);
+
+                dso = new DataSet();
+                if (File.Exists(app_data_path + "\\" + so2rFile))
+                    dso.ReadXml(app_data_path + "\\" + so2rFile);
+                grpSO2R.Text = "SO2R - Profile: " + so2rFile;
+                LoadVars(); //load matrix with last used data file
+
+                chkAutoDrv.Checked = false;
+                if (chkSoEnab.Checked)
+                {
+                    if (cboSwPort.SelectedIndex != -1)
+                    {
+                        if (!SwitchPort.IsOpen) SwitchPort.Open();
+                    }
+                    WriteToPort("ZZRS1;", iSleep);  // turn on rx2
+                    WriteToPort("ZZSW0;", iSleep);  // select vfo a xmit default
+                    ZZSW = 0;                       // set vfo default status to VFO A
+                    SetVfoB();                      // force setup of the data &
+                    SetVfoA();                      // control words
+                    bSo2rChg = false;               // set the so2r controls flag to false
+                    if (txtLPT1_1.Text != "")
+                        solpt1 = Convert.ToInt32(txtLPT1_1.Text);
+                    if (txtLPT2.Text != "")
+                        solpt2 = Convert.ToInt32(txtLPT2.Text);
+                }
             }
         }
         // call file dialog to set the user file.
@@ -9017,7 +9054,7 @@ namespace DataDecoder
                 data = int.Parse(dataH + ctrlH, NumberStyles.HexNumber);
                 ctrl = int.Parse(dataL + ctrlL, NumberStyles.HexNumber);
                 OutParallelPort(Convert.ToInt32(txtLPT1_1.Text), data);
-                OutParallelPort(lpt2, ctrl);
+                OutParallelPort(solpt2, ctrl);
                 if (ZZSW == 0)
                 {
                     switch (txtTxA.Text)
@@ -9265,7 +9302,7 @@ namespace DataDecoder
                 data = int.Parse(dataH + ctrlH, NumberStyles.HexNumber);
                 ctrl = int.Parse(dataL + ctrlL, NumberStyles.HexNumber);
                 OutParallelPort(Convert.ToInt32(txtLPT1_1.Text), data);
-                OutParallelPort(lpt2, ctrl);
+                OutParallelPort(solpt2, ctrl);
                 if (ZZSW == 1)
                 {
                     if (chk1Amp.Checked)       // if using 1 amp
@@ -12738,6 +12775,33 @@ namespace DataDecoder
         #endregion WaveNode Setup
 
         #endregion WaveNode
+
+        private void chkAutoExpert_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chkAutoExpert.Checked) 
+            { set.chkAutoExpert = true; }
+            else 
+            { set.chkAutoExpert = false; }
+            set.Save();
+            modeFactor = 1;
+            lastBand = "";
+            LastMode = "";
+        }
+
+        private void txtAM_TextChanged(object sender, EventArgs e)
+        {
+            set.txtAM = txtAM.Text; set.Save();
+        }
+
+        private void txtSSB_TextChanged(object sender, EventArgs e)
+        {
+            set.txtSSB = txtSSB.Text; set.Save();
+        }
+
+        private void txtDigi_TextChanged(object sender, EventArgs e)
+        {
+            set.txtDigi = txtDigi.Text; set.Save();
+        }
 
     } // end class Setup
 
