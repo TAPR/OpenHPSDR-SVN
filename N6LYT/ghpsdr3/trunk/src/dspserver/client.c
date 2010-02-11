@@ -225,6 +225,12 @@ fprintf(stderr,"client_thread\n");
                                 anf=0;
                             }
                             SetANF(0,0,anf);
+                        } else if(strcmp(token,"SetRXOutputGain")==0) {
+                            int gain;
+                            token=strtok(NULL," ");
+                            gain=atoi(token);
+                            SetRXOutputGain(0,0,(double)gain/100.0);
+fprintf(stderr,"SetRXOutputGain %f\n",(double)gain/100.0);
                         }
                     } else {
                     }

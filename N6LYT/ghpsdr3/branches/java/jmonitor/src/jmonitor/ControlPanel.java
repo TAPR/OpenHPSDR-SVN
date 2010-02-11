@@ -34,6 +34,7 @@ public class ControlPanel extends javax.swing.JPanel {
         createModeMenu();
         createAGCMenu();
         createDSPMenu();
+        createGainMenu();
     }
 
     public void setClient(Client client) {
@@ -67,48 +68,54 @@ public class ControlPanel extends javax.swing.JPanel {
         filterButton = new javax.swing.JButton();
         agcButton = new javax.swing.JButton();
         dspButton = new javax.swing.JButton();
+        afgainButton = new javax.swing.JButton();
 
         setMaximumSize(new java.awt.Dimension(480, 27));
         setMinimumSize(new java.awt.Dimension(480, 27));
         setPreferredSize(new java.awt.Dimension(480, 27));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        bandButton.setFont(new java.awt.Font("DejaVu Sans", 0, 12));
+        bandButton.setFont(new java.awt.Font("DejaVu Sans", 0, 12)); // NOI18N
         bandButton.setText("Band");
         bandButton.setAlignmentY(0.0F);
-        bandButton.setMaximumSize(new java.awt.Dimension(100, 27));
-        bandButton.setMinimumSize(new java.awt.Dimension(100, 27));
-        bandButton.setPreferredSize(new java.awt.Dimension(100, 27));
+        bandButton.setMaximumSize(new java.awt.Dimension(90, 27));
+        bandButton.setMinimumSize(new java.awt.Dimension(90, 27));
+        bandButton.setPreferredSize(new java.awt.Dimension(90, 27));
         bandButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 bandButtonActionPerformed(evt);
             }
         });
-        add(bandButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+        add(bandButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 90, -1));
 
         modeButton.setFont(new java.awt.Font("DejaVu Sans", 0, 12)); // NOI18N
         modeButton.setText("Mode");
         modeButton.setAlignmentY(0.0F);
-        modeButton.setMaximumSize(new java.awt.Dimension(100, 27));
-        modeButton.setMinimumSize(new java.awt.Dimension(100, 27));
-        modeButton.setPreferredSize(new java.awt.Dimension(100, 27));
+        modeButton.setMaximumSize(new java.awt.Dimension(90, 27));
+        modeButton.setMinimumSize(new java.awt.Dimension(90, 27));
+        modeButton.setPreferredSize(new java.awt.Dimension(90, 27));
         modeButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 modeButtonActionPerformed(evt);
             }
         });
-        add(modeButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 30, -1, -1));
+        add(modeButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 30, 90, -1));
 
         vfo.setBackground(new java.awt.Color(0, 0, 0));
         vfo.setEditable(false);
         vfo.setFont(new java.awt.Font("FreeMono", 1, 24));
         vfo.setForeground(new java.awt.Color(0, 255, 0));
         vfo.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
-        vfo.setText("2400.000.000");
+        vfo.setText("7.048.000");
         vfo.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         vfo.setMaximumSize(new java.awt.Dimension(178, 26));
         vfo.setMinimumSize(new java.awt.Dimension(178, 26));
         vfo.setPreferredSize(new java.awt.Dimension(178, 26));
+        vfo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                vfoActionPerformed(evt);
+            }
+        });
         add(vfo, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 30, 180, 30));
 
         mode.setBackground(new java.awt.Color(0, 0, 0));
@@ -135,38 +142,53 @@ public class ControlPanel extends javax.swing.JPanel {
 
         add(digitalMeter, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 0, 140, 20));
 
+        filterButton.setFont(new java.awt.Font("DejaVu Sans", 0, 12)); // NOI18N
         filterButton.setText("Filter");
-        filterButton.setMaximumSize(new java.awt.Dimension(100, 27));
-        filterButton.setMinimumSize(new java.awt.Dimension(100, 27));
-        filterButton.setPreferredSize(new java.awt.Dimension(100, 27));
+        filterButton.setMaximumSize(new java.awt.Dimension(90, 27));
+        filterButton.setMinimumSize(new java.awt.Dimension(90, 27));
+        filterButton.setPreferredSize(new java.awt.Dimension(90, 27));
         filterButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 filterButtonActionPerformed(evt);
             }
         });
-        add(filterButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 0, 90, -1));
+        add(filterButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 0, 80, -1));
 
+        agcButton.setFont(new java.awt.Font("DejaVu Sans", 0, 12)); // NOI18N
         agcButton.setText("AGC");
-        agcButton.setMaximumSize(new java.awt.Dimension(100, 27));
-        agcButton.setMinimumSize(new java.awt.Dimension(100, 27));
-        agcButton.setPreferredSize(new java.awt.Dimension(100, 27));
+        agcButton.setMaximumSize(new java.awt.Dimension(90, 27));
+        agcButton.setMinimumSize(new java.awt.Dimension(90, 27));
+        agcButton.setPreferredSize(new java.awt.Dimension(90, 27));
         agcButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 agcButtonActionPerformed(evt);
             }
         });
-        add(agcButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 30, 90, -1));
+        add(agcButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 30, 80, -1));
 
+        dspButton.setFont(new java.awt.Font("DejaVu Sans", 0, 12)); // NOI18N
         dspButton.setText("DSP");
-        dspButton.setMaximumSize(new java.awt.Dimension(100, 27));
-        dspButton.setMinimumSize(new java.awt.Dimension(100, 27));
-        dspButton.setPreferredSize(new java.awt.Dimension(100, 27));
+        dspButton.setMaximumSize(new java.awt.Dimension(90, 27));
+        dspButton.setMinimumSize(new java.awt.Dimension(90, 27));
+        dspButton.setPreferredSize(new java.awt.Dimension(90, 27));
         dspButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 dspButtonActionPerformed(evt);
             }
         });
-        add(dspButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 0, 90, -1));
+        add(dspButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 0, 80, -1));
+
+        afgainButton.setFont(new java.awt.Font("DejaVu Sans", 0, 12)); // NOI18N
+        afgainButton.setText("AFGain");
+        afgainButton.setMaximumSize(new java.awt.Dimension(90, 27));
+        afgainButton.setMinimumSize(new java.awt.Dimension(90, 27));
+        afgainButton.setPreferredSize(new java.awt.Dimension(90, 27));
+        afgainButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                afgainButtonActionPerformed(evt);
+            }
+        });
+        add(afgainButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 30, 80, -1));
     }// </editor-fold>//GEN-END:initComponents
 
     private void createBandMenu() {
@@ -519,6 +541,16 @@ public class ControlPanel extends javax.swing.JPanel {
             dspMenu.show(dspButton, 0, 0);
         }
     }//GEN-LAST:event_dspButtonActionPerformed
+
+    private void vfoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_vfoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_vfoActionPerformed
+
+    private void afgainButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_afgainButtonActionPerformed
+        if(gainMenu!=null) {
+            gainMenu.show(afgainButton,0,0);
+        }
+    }//GEN-LAST:event_afgainButtonActionPerformed
 
     private void createLSBFilterMenu() {
 
@@ -1275,7 +1307,114 @@ public class ControlPanel extends javax.swing.JPanel {
         dspMenu.add(item);
     }
 
+    private void createGainMenu() {
+        ButtonGroup group=new ButtonGroup();
+        gainMenu = new JPopupMenu("AF Gain");
+        JCheckBoxMenuItem item=new JCheckBoxMenuItem("0");
+        item.addActionListener(new ActionListener() {
+           public void actionPerformed(ActionEvent evt) {
+               JCheckBoxMenuItem item=(JCheckBoxMenuItem)evt.getSource();
+               client.setGain(0);
+           }
+        });
+        gainMenu.add(item);
+        group.add(item);
+        item=new JCheckBoxMenuItem("10");
+
+        item.addActionListener(new ActionListener() {
+           public void actionPerformed(ActionEvent evt) {
+               JCheckBoxMenuItem item=(JCheckBoxMenuItem)evt.getSource();
+               client.setGain(10);
+           }
+        });
+        gainMenu.add(item);
+        group.add(item);
+        item=new JCheckBoxMenuItem("20");
+        item.addActionListener(new ActionListener() {
+           public void actionPerformed(ActionEvent evt) {
+               JCheckBoxMenuItem item=(JCheckBoxMenuItem)evt.getSource();
+               client.setGain(20);
+           }
+        });
+        gainMenu.add(item);
+        group.add(item);
+        item.setSelected(true);
+        item=new JCheckBoxMenuItem("30");
+        item.addActionListener(new ActionListener() {
+           public void actionPerformed(ActionEvent evt) {
+               JCheckBoxMenuItem item=(JCheckBoxMenuItem)evt.getSource();
+               client.setGain(30);
+           }
+        });
+        gainMenu.add(item);
+        group.add(item);
+        item=new JCheckBoxMenuItem("40");
+        item.addActionListener(new ActionListener() {
+           public void actionPerformed(ActionEvent evt) {
+               JCheckBoxMenuItem item=(JCheckBoxMenuItem)evt.getSource();
+               client.setGain(40);
+           }
+        });
+        gainMenu.add(item);
+        group.add(item);
+        item=new JCheckBoxMenuItem("50");
+        item.addActionListener(new ActionListener() {
+           public void actionPerformed(ActionEvent evt) {
+               JCheckBoxMenuItem item=(JCheckBoxMenuItem)evt.getSource();
+               client.setGain(50);
+           }
+        });
+        gainMenu.add(item);
+        group.add(item);
+        item=new JCheckBoxMenuItem("60");
+        item.addActionListener(new ActionListener() {
+           public void actionPerformed(ActionEvent evt) {
+               JCheckBoxMenuItem item=(JCheckBoxMenuItem)evt.getSource();
+               client.setGain(60);
+           }
+        });
+        gainMenu.add(item);
+        group.add(item);
+        item=new JCheckBoxMenuItem("70");
+        item.addActionListener(new ActionListener() {
+           public void actionPerformed(ActionEvent evt) {
+               JCheckBoxMenuItem item=(JCheckBoxMenuItem)evt.getSource();
+               client.setGain(70);
+           }
+        });
+        gainMenu.add(item);
+        group.add(item);
+        item=new JCheckBoxMenuItem("80");
+        item.addActionListener(new ActionListener() {
+           public void actionPerformed(ActionEvent evt) {
+               JCheckBoxMenuItem item=(JCheckBoxMenuItem)evt.getSource();
+               client.setGain(80);
+           }
+        });
+        gainMenu.add(item);
+        group.add(item);
+        item=new JCheckBoxMenuItem("90");
+        item.addActionListener(new ActionListener() {
+           public void actionPerformed(ActionEvent evt) {
+               JCheckBoxMenuItem item=(JCheckBoxMenuItem)evt.getSource();
+               client.setGain(90);
+           }
+        });
+        gainMenu.add(item);
+        group.add(item);
+        item=new JCheckBoxMenuItem("100");
+        item.addActionListener(new ActionListener() {
+           public void actionPerformed(ActionEvent evt) {
+               JCheckBoxMenuItem item=(JCheckBoxMenuItem)evt.getSource();
+               client.setGain(100);
+           }
+        });
+        gainMenu.add(item);
+        group.add(item);
+    }
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton afgainButton;
     private javax.swing.JButton agcButton;
     private javax.swing.JButton bandButton;
     private jmonitor.DigitalMeter digitalMeter;
@@ -1293,6 +1432,7 @@ public class ControlPanel extends javax.swing.JPanel {
     private JPopupMenu filterMenu;
     private JPopupMenu agcMenu;
     private JPopupMenu dspMenu;
+    private JPopupMenu gainMenu;
 
     private JRadioButtonMenuItem lsb;
     private JRadioButtonMenuItem usb;

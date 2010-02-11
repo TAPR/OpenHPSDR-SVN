@@ -23,18 +23,19 @@ public class Client extends Thread {
             this.server=server;
         }
         port=8000+(receiver*2);
+        connected=false;
+        status="Server "+server+" is busy - please wait";
         try {
             socket=new Socket(this.server,port);
             inputStream=socket.getInputStream();
             outputStream=socket.getOutputStream();
-
             System.err.println("opened client socket on port "+Integer.toString(port));
         } catch (UnknownHostException e) {
             System.err.println("Client: UnknownHost: "+server);
-            System.exit(1);
+            status="Unknown host "+server;
         } catch (IOException e) {
             System.err.println("Client: IOException: "+e.getMessage());
-            System.exit(1);
+            status="Server "+server+" "+e.getMessage()+" - please try later.";
         }
     }
 
@@ -52,21 +53,25 @@ public class Client extends Thread {
             }
         }
 
-        try {
-            outputStream.write(buffer);
-            outputStream.flush();
-        } catch (IOException e) {
-            System.err.println("sendCommand: IOException: "+e.getMessage());
-            System.exit(1);
+        if(socket!=null) {
+            try {
+                outputStream.write(buffer);
+                outputStream.flush();
+            } catch (IOException e) {
+                System.err.println("sendCommand: IOException: "+e.getMessage());
+                System.exit(1);
+            }
         }
     }
 
     public void close() {
         running=false;
-        try {
-            socket.close();
-        } catch(IOException e) {
-            // ignore error on close
+        if(socket!=null) {
+            try {
+                socket.close();
+            } catch(IOException e) {
+                // ignore error on close
+            }
         }
     }
 
@@ -74,35 +79,38 @@ public class Client extends Thread {
         int bytes;
         byte[] buffer = new byte[48 + SAMPLES];
         int j;
-        while(running) {
-            try {
-                bytes=0;
-                while(bytes<buffer.length) {
-                    bytes += inputStream.read(buffer,bytes,buffer.length-bytes);
-                }
-                if (bytes == buffer.length) {
-
-                    //System.err.println("input buffer: "+Integer.toString(buffer[0]));
-                    
-                    if(buffer[0]==0) {
-                        //spectrum buffer
-                        processSpectrumBuffer(buffer);
-                    } else if(buffer[0]==1) {
-                        // audio buffer
-                        processAudioBuffer(buffer);
-                    } else {
-                        System.err.println("invalid buffer");
+        if(socket!=null) {
+            while(running) {
+                try {
+                    bytes=0;
+                    while(bytes<buffer.length) {
+                        bytes += inputStream.read(buffer,bytes,buffer.length-bytes);
                     }
-                } else {
-                    System.err.println("read spectrum read " + Integer.toString(bytes) + " bytes");
-                }
-            } catch (IOException e) {
-                if(running) {
-                    System.err.println("Client.run exception reading input stream "+e.getMessage());
-                    running=false;
-                }
-            }
+                    connected=true;
+                    if (bytes == buffer.length) {
 
+                        //System.err.println("input buffer: "+Integer.toString(buffer[0]));
+
+                        if(buffer[0]==0) {
+                            //spectrum buffer
+                            processSpectrumBuffer(buffer);
+                        } else if(buffer[0]==1) {
+                            // audio buffer
+                            processAudioBuffer(buffer);
+                        } else {
+                            System.err.println("invalid buffer");
+                        }
+                    } else {
+                        System.err.println("read spectrum read " + Integer.toString(bytes) + " bytes");
+                    }
+                } catch (IOException e) {
+                    if(running) {
+                        System.err.println("Client.run exception reading input stream "+e.getMessage());
+                        running=false;
+                    }
+                }
+
+            }
         }
     }
 
@@ -226,6 +234,17 @@ public class Client extends Thread {
         sendCommand("setNB "+state);
     }
 
+    public void setGain(int gain) {
+        sendCommand("SetRXOutputGain "+gain);
+    }
+    
+    public String getStatus() {
+        return status;
+    }
+
+    public boolean isConnected() {
+        return connected;
+    }
 
     Audio audio;
     MonitorUpdateListener listener;
@@ -267,4 +286,8 @@ public class Client extends Thread {
     public static final int modeDRM=11;
 
     private String[] modes={"LSB","USB","DSB","CWL","CWU","FMN","AM","DIGU","SPEC","DIGL","SAM","DRM"};
+
+    private String status;
+
+    private boolean connected;
 }
