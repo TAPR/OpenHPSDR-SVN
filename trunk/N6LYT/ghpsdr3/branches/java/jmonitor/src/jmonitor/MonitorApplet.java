@@ -59,6 +59,7 @@ public class MonitorApplet extends javax.swing.JApplet {
         client.setMode(0);
         client.setFilter(-2850, -150);
         client.setAGC(0);
+        client.setGain(30);
 
         monitorPanel.setClient(client);
         add(monitorPanel);

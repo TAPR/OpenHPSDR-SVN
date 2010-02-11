@@ -112,31 +112,37 @@ public class WaterfallPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_formMouseWheelMoved
 
     private void formMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseClicked
-        int scrollAmount=(evt.getX() - (WIDTH / 2)) * (client.getSampleRate() / WIDTH);
-        switch(evt.getButton()) {
-            case MouseEvent.BUTTON1:
-                // Left Button - move to center of filter
-                if(filterHigh<0) {
-                    client.setFrequency(client.getFrequency()+(scrollAmount + ((filterHigh - filterLow) / 2)));
-                } else {
-                    client.setFrequency(client.getFrequency()+(scrollAmount - ((filterHigh - filterLow) / 2)));
-                }
-                break;
-            case MouseEvent.BUTTON3:
-                // Right Button - move to cursor
-                client.setFrequency(client.getFrequency()+(scrollAmount));
-                break;
+        if(client.isConnected()) {
+            int scrollAmount=(evt.getX() - (WIDTH / 2)) * (client.getSampleRate() / WIDTH);
+            switch(evt.getButton()) {
+                case MouseEvent.BUTTON1:
+                    // Left Button - move to center of filter
+                    if(filterHigh<0) {
+                        client.setFrequency(client.getFrequency()+(scrollAmount + ((filterHigh - filterLow) / 2)));
+                    } else {
+                        client.setFrequency(client.getFrequency()+(scrollAmount - ((filterHigh - filterLow) / 2)));
+                    }
+                    break;
+                case MouseEvent.BUTTON3:
+                    // Right Button - move to cursor
+                    client.setFrequency(client.getFrequency()+(scrollAmount));
+                    break;
+            }
         }
     }//GEN-LAST:event_formMouseClicked
 
     private void formMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseDragged
-        int increment=startX-evt.getX();
-        client.setFrequency(client.getFrequency()+(increment*(client.getSampleRate()/WIDTH)));
-        startX=evt.getX();
+        if(client.isConnected()) {
+            int increment=startX-evt.getX();
+            client.setFrequency(client.getFrequency()+(increment*(client.getSampleRate()/WIDTH)));
+            startX=evt.getX();
+        }
     }//GEN-LAST:event_formMouseDragged
 
     private void formMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMousePressed
-        startX=evt.getX();
+        if(client.isConnected()) {
+            startX=evt.getX();
+        }
     }//GEN-LAST:event_formMousePressed
 
 

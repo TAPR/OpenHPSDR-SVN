@@ -48,21 +48,6 @@ unsigned char encodetable[65536];
 
 unsigned char alaw(short sample);
 
-/*
-static pthread_t audio_stream_thread_id;
-
-#define BASE_PORT 8001
-
-int audio_stream_port=BASE_PORT;
-
-int audio_stream_serverSocket;
-int audio_stream_clientSocket=-1;
-struct sockaddr_in audio_stream_server;
-struct sockaddr_in audio_stream_client;
-int audio_stream_addrlen;
-
-void* audio_stream_thread(void* arg);
-*/
 void init_alaw_tables();
 
 void audio_stream_init(int receiver) {
@@ -71,99 +56,7 @@ void audio_stream_init(int receiver) {
 
     init_alaw_tables();
 
-/*
-    audio_stream_port=BASE_PORT+(2*receiver);
-    audio_stream_clientSocket=-1;
-    rc=pthread_create(&audio_stream_thread_id,NULL,audio_stream_thread,NULL);
-    if(rc != 0) {
-        fprintf(stderr,"pthread_create failed on audio_stream_thread: rc=%d\n", rc);
-    }
-*/
-
 }
-/*
-void* audio_stream_thread(void* arg) {
-
-    int bytesRead;
-    char message[64];
-    int on=1;
-
-fprintf(stderr,"audio_stream_thread\n");
-
-    audio_stream_serverSocket=socket(AF_INET,SOCK_STREAM,0);
-    if(audio_stream_serverSocket==-1) {
-        perror("audio_stream socket");
-        return;
-    }
-
-    setsockopt(audio_stream_serverSocket, SOL_SOCKET, SO_REUSEADDR, &on, sizeof(on));
-
-    memset(&audio_stream_server,0,sizeof(audio_stream_server));
-    audio_stream_server.sin_family=AF_INET;
-    audio_stream_server.sin_addr.s_addr=INADDR_ANY;
-    audio_stream_server.sin_port=htons(audio_stream_port);
-
-    if(bind(audio_stream_serverSocket,(struct sockaddr *)&audio_stream_server,sizeof(audio_stream_server))<0) {
-        perror("audio_stream bind");
-        return;
-    }
-
-    while(1) {
-//fprintf(stderr,"audio_stream_thread: listen\n");
-        if (listen(audio_stream_serverSocket, 5) == -1) {
-            perror("audio_stream listen");
-            break;
-        }
-
-//fprintf(stderr,"audio_stream_thread: accept\n");
-        audio_stream_addrlen = sizeof(audio_stream_client);
-        if ((audio_stream_clientSocket = accept(audio_stream_serverSocket,(struct sockaddr *)&audio_stream_client,&audio_stream_addrlen)) == -1) {
-                perror("audio_stream accept");
-        } else {
-
-            time_t tt;
-            struct tm *tod;
-
-            time(&tt);
-            tod=localtime(&tt);
-            fprintf(stderr,"%02d/%02d/%02d %02d:%02d:%02d audiostream connection from %s:%d\n",tod->tm_mday,tod->tm_mon+1,tod->tm_year+1900,tod->tm_hour,tod->tm_min,tod->tm_sec,inet_ntoa(audio_stream_client.sin_addr),ntohs(audio_stream_client.sin_port));
-
-            while(1) {
-                bytesRead=recv(audio_stream_clientSocket, message, sizeof(message), 0);
-                if(bytesRead<=0) {
-                    //perror("audio_stream recv");
-                    break;
-                }
-                message[bytesRead]=0;
-
-                fprintf(stderr,"Audio: %s\n",message);
-
-            }
-
-            close(audio_stream_clientSocket);
-
-            time(&tt);
-            tod=localtime(&tt);
-            fprintf(stderr,"%02d/%02d/%02d %02d:%02d:%02d audiostream disconnected from %s:%d\n",tod->tm_mday,tod->tm_mon+1,tod->tm_year+1900,tod->tm_hour,tod->tm_min,tod->tm_sec,inet_ntoa(audio_stream_client.sin_addr),ntohs(audio_stream_client.sin_port));
-        }
-        audio_stream_clientSocket=-1;
-
-    }
-
-}
-
-void send_audio_buffer(unsigned char* buffer,int length) {
-    int rc;
-    if(audio_stream_clientSocket!=-1) {
-//fprintf(stderr,"audio_stream_send_samples\n");
-        rc=send(audio_stream_clientSocket,buffer,length,0);
-        if(rc<0) {
-            perror("audiostream send");
-        }
-    }
-
-}
-*/
 
 /* --------------------------------------------------------------------------*/
 /**

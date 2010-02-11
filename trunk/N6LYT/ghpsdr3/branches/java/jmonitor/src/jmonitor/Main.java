@@ -51,6 +51,7 @@ public class Main {
         client.setFrequency(7048000);
         client.setMode(0);
         client.setFilter(-2850,-150);
+        client.setGain(30);
         
         MonitorFrame frame=new MonitorFrame(client);
         MonitorUpdateThread monitorUpdateThread=new MonitorUpdateThread(client,frame);
