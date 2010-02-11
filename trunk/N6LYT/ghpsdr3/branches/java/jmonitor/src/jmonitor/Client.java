@@ -80,6 +80,15 @@ public class Client extends Thread {
         byte[] buffer = new byte[48 + SAMPLES];
         int j;
         if(socket!=null) {
+
+            // flush
+            try {
+                while(inputStream.available()>buffer.length) {
+                    inputStream.skip(buffer.length);
+                }
+            } catch (IOException e) {
+                System.err.println("Client.run: flush: "+e.getMessage());
+            }
             while(running) {
                 try {
                     bytes=0;
