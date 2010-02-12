@@ -20,6 +20,8 @@ CGPoint lastLocation;
 int touched=0;
 int dragged=0;
 
+char *modeStr[]={"LSB","USB","DSB","CWL","CWU","FMN","AM","DIGU","SPEC","DIGL","SAM","DRM"};
+
 - (void)refresh {
     [self setNeedsDisplay];
 }
@@ -95,7 +97,7 @@ int dragged=0;
 	if(isConnected()) {
 	    CGContextSetRGBFillColor(context,0,255,0,1);
 	    CGContextSelectFont(context,"Helvetica",20.0,kCGEncodingMacRoman);
-	    sprintf(text,"%s %s",frequency,mode);
+	    sprintf(text,"%ld %s",frequency,modeStr[mode]);
 	    CGContextShowTextAtPoint(context,200,20,text,strlen(text));
 	} else {
 		CGContextSetRGBFillColor(context,255,0,0,1);
@@ -156,11 +158,9 @@ int dragged=0;
 }
 
 - (void)dragged {
-	char command[64];
 	if(touched) {
 		touched=0;
-		sprintf(command,"scrollFrequency %d", dragged*(sampleRate/480));
-		sendCommand(command);
+		setFrequency(frequency+(dragged*(sampleRate/480)));
 		dragged=0;
     }
 	
