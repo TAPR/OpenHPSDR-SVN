@@ -1,0 +1,85 @@
+/Users/jm57878/Desktop/HPSDR/Classes/FlipsideView.m: In function '-[FlipsideView init]':
+/Users/jm57878/Desktop/HPSDR/Classes/FlipsideView.m:34: warning: no '+sharedInstance' method found
+/Users/jm57878/Desktop/HPSDR/Classes/FlipsideView.m:34: warning: (Messages without a matching method signature
+/Users/jm57878/Desktop/HPSDR/Classes/FlipsideView.m:34: warning: will be assumed to return 'id' and accept
+/Users/jm57878/Desktop/HPSDR/Classes/FlipsideView.m:34: warning: '...' as arguments.)
+/Users/jm57878/Desktop/HPSDR/Classes/FlipsideView.m: In function '-[FlipsideView saveState]':
+/Users/jm57878/Desktop/HPSDR/Classes/FlipsideView.m:94: error: 'specHigh' undeclared (first use in this function)
+/Users/jm57878/Desktop/HPSDR/Classes/FlipsideView.m:94: error: (Each undeclared identifier is reported only once
+/Users/jm57878/Desktop/HPSDR/Classes/FlipsideView.m:94: error: for each function it appears in.)
+/Users/jm57878/Desktop/HPSDR/Classes/FlipsideView.m:95: error: 'specLow' undeclared (first use in this function)
+{standard input}:361:non-relocatable subtraction expression, "L_OBJC_SELECTOR_REFERENCES_6" minus "L00000000003$pb"
+{standard input}:361:symbol: "L_OBJC_SELECTOR_REFERENCES_6" can't be undefined in a subtraction expression
+{standard input}:349:non-relocatable subtraction expression, "L_OBJC_SELECTOR_REFERENCES_5" minus "L00000000003$pb"
+{standard input}:349:symbol: "L_OBJC_SELECTOR_REFERENCES_5" can't be undefined in a subtraction expression
+{standard input}:343:non-relocatable subtraction expression, "L_OBJC_SELECTOR_REFERENCES_4" minus "L00000000003$pb"
+{standard input}:343:symbol: "L_OBJC_SELECTOR_REFERENCES_4" can't be undefined in a subtraction expression
+{standard input}:340:non-relocatable subtraction expression, "L_OBJC_CLASS_REFERENCES_0" minus "L00000000003$pb"
+{standard input}:340:symbol: "L_OBJC_CLASS_REFERENCES_0" can't be undefined in a subtraction expression
+{standard input}:325:non-relocatable subtraction expression, "L_OBJC_SELECTOR_REFERENCES_6" minus "L00000000003$pb"
+{standard input}:325:symbol: "L_OBJC_SELECTOR_REFERENCES_6" can't be undefined in a subtraction expression
+{standard input}:313:non-relocatable subtraction expression, "L_OBJC_SELECTOR_REFERENCES_5" minus "L00000000003$pb"
+{standard input}:313:symbol: "L_OBJC_SELECTOR_REFERENCES_5" can't be undefined in a subtraction expression
+{standard input}:307:non-relocatable subtraction expression, "L_OBJC_SELECTOR_REFERENCES_4" minus "L00000000003$pb"
+{standard input}:307:symbol: "L_OBJC_SELECTOR_REFERENCES_4" can't be undefined in a subtraction expression
+{standard input}:304:non-relocatable subtraction expression, "L_OBJC_CLASS_REFERENCES_0" minus "L00000000003$pb"
+{standard input}:304:symbol: "L_OBJC_CLASS_REFERENCES_0" can't be undefined in a subtraction expression
+{standard input}:289:non-relocatable subtraction expression, "L_OBJC_SELECTOR_REFERENCES_6" minus "L00000000003$pb"
+{standard input}:289:symbol: "L_OBJC_SELECTOR_REFERENCES_6" can't be undefined in a subtraction expression
+{standard input}:277:non-relocatable subtraction expression, "L_OBJC_SELECTOR_REFERENCES_5" minus "L00000000003$pb"
+{standard input}:277:symbol: "L_OBJC_SELECTOR_REFERENCES_5" can't be undefined in a subtraction expression
+{standard input}:271:non-relocatable subtraction expression, "L_OBJC_SELECTOR_REFERENCES_4" minus "L00000000003$pb"
+{standard input}:271:symbol: "L_OBJC_SELECTOR_REFERENCES_4" can't be undefined in a subtraction expression
+{standard input}:268:non-relocatable subtraction expression, "L_OBJC_CLASS_REFERENCES_0" minus "L00000000003$pb"
+{standard input}:268:symbol: "L_OBJC_CLASS_REFERENCES_0" can't be undefined in a subtraction expression
+{standard input}:253:non-relocatable subtraction expression, "L_OBJC_SELECTOR_REFERENCES_6" minus "L00000000003$pb"
+{standard input}:253:symbol: "L_OBJC_SELECTOR_REFERENCES_6" can't be undefined in a subtraction expression
+{standard input}:241:non-relocatable subtraction expression, "L_OBJC_SELECTOR_REFERENCES_5" minus "L00000000003$pb"
+{standard input}:241:symbol: "L_OBJC_SELECTOR_REFERENCES_5" can't be undefined in a subtraction expression
+{standard input}:235:non-relocatable subtraction expression, "L_OBJC_SELECTOR_REFERENCES_4" minus "L00000000003$pb"
+{standard input}:235:symbol: "L_OBJC_SELECTOR_REFERENCES_4" can't be undefined in a subtraction expression
+{standard input}:232:non-relocatable subtraction expression, "L_OBJC_CLASS_REFERENCES_0" minus "L00000000003$pb"
+{standard input}:232:symbol: "L_OBJC_CLASS_REFERENCES_0" can't be undefined in a subtraction expression
+{standard input}:222:non-relocatable subtraction expression, "L_port$non_lazy_ptr" minus "L00000000003$pb"
+{standard input}:222:symbol: "L_port$non_lazy_ptr" can't be undefined in a subtraction expression
+{standard input}:214:non-relocatable subtraction expression, "L_OBJC_SELECTOR_REFERENCES_6" minus "L00000000003$pb"
+{standard input}:214:symbol: "L_OBJC_SELECTOR_REFERENCES_6" can't be undefined in a subtraction expression
+{standard input}:203:non-relocatable subtraction expression, "L_host$non_lazy_ptr" minus "L00000000003$pb"
+{standard input}:203:symbol: "L_host$non_lazy_ptr" can't be undefined in a subtraction expression
+{standard input}:201:non-relocatable subtraction expression, "L_OBJC_SELECTOR_REFERENCES_5" minus "L00000000003$pb"
+{standard input}:201:symbol: "L_OBJC_SELECTOR_REFERENCES_5" can't be undefined in a subtraction expression
+{standard input}:195:non-relocatable subtraction expression, "L_OBJC_SELECTOR_REFERENCES_4" minus "L00000000003$pb"
+{standard input}:195:symbol: "L_OBJC_SELECTOR_REFERENCES_4" can't be undefined in a subtraction expression
+{standard input}:192:non-relocatable subtraction expression, "L_OBJC_CLASS_REFERENCES_0" minus "L00000000003$pb"
+{standard input}:192:symbol: "L_OBJC_CLASS_REFERENCES_0" can't be undefined in a subtraction expression
+{standard input}:182:non-relocatable subtraction expression, "L___stderrp$non_lazy_ptr" minus "L00000000003$pb"
+{standard input}:182:symbol: "L___stderrp$non_lazy_ptr" can't be undefined in a subtraction expression
+{standard input}:175:non-relocatable subtraction expression, "LC2" minus "L00000000003$pb"
+{standard input}:175:symbol: "LC2" can't be undefined in a subtraction expression
+{standard input}:173:non-relocatable subtraction expression, "L_OBJC_SELECTOR_REFERENCES_3" minus "L00000000003$pb"
+{standard input}:173:symbol: "L_OBJC_SELECTOR_REFERENCES_3" can't be undefined in a subtraction expression
+{standard input}:165:non-relocatable subtraction expression, "L_OBJC_SELECTOR_REFERENCES_2" minus "L00000000003$pb"
+{standard input}:165:symbol: "L_OBJC_SELECTOR_REFERENCES_2" can't be undefined in a subtraction expression
+{standard input}:126:non-relocatable subtraction expression, "L_OBJC_SELECTOR_REFERENCES_1" minus "L00000000002$pb"
+{standard input}:126:symbol: "L_OBJC_SELECTOR_REFERENCES_1" can't be undefined in a subtraction expression
+{standard input}:122:non-relocatable subtraction expression, "L_OBJC_CLASS_FlipsideView" minus "L00000000002$pb"
+{standard input}:122:symbol: "L_OBJC_CLASS_FlipsideView" can't be undefined in a subtraction expression
+{standard input}:68:non-relocatable subtraction expression, "L_OBJC_SELECTOR_REFERENCES_0" minus "L00000000001$pb"
+{standard input}:68:symbol: "L_OBJC_SELECTOR_REFERENCES_0" can't be undefined in a subtraction expression
+{standard input}:64:non-relocatable subtraction expression, "L_OBJC_CLASS_FlipsideView" minus "L00000000001$pb"
+{standard input}:64:symbol: "L_OBJC_CLASS_FlipsideView" can't be undefined in a subtraction expression
+{standard input}:51:non-relocatable subtraction expression, "L___stderrp$non_lazy_ptr" minus "L00000000001$pb"
+{standard input}:51:symbol: "L___stderrp$non_lazy_ptr" can't be undefined in a subtraction expression
+{standard input}:unknown:Undefined local symbol L___stderrp$non_lazy_ptr
+{standard input}:unknown:Undefined local symbol L_OBJC_CLASS_FlipsideView
+{standard input}:unknown:Undefined local symbol L_OBJC_SELECTOR_REFERENCES_0
+{standard input}:unknown:Undefined local symbol L_OBJC_SELECTOR_REFERENCES_1
+{standard input}:unknown:Undefined local symbol L_OBJC_SELECTOR_REFERENCES_2
+{standard input}:unknown:Undefined local symbol L_OBJC_SELECTOR_REFERENCES_3
+{standard input}:unknown:Undefined local symbol LC2
+{standard input}:unknown:Undefined local symbol L_OBJC_CLASS_REFERENCES_0
+{standard input}:unknown:Undefined local symbol L_OBJC_SELECTOR_REFERENCES_4
+{standard input}:unknown:Undefined local symbol L_OBJC_SELECTOR_REFERENCES_5
+{standard input}:unknown:Undefined local symbol L_host$non_lazy_ptr
+{standard input}:unknown:Undefined local symbol L_OBJC_SELECTOR_REFERENCES_6
+{standard input}:unknown:Undefined local symbol L_port$non_lazy_ptr
