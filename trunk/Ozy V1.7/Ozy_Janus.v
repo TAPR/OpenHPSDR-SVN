@@ -161,9 +161,9 @@
 //
 //    DB9 - pin connections
 //
-//    PTT           - FPGA       pin 96  - PTT       - DB9 pin 6
-//    dash          - FPGA       pin 97  - dash  key - DB9 pin 7
-//	  dot           - FPGA       pin 99  - dot   key - DB9 pin 8
+//    PTT           - FPGA       pin 96  - PTT       - DB9 pin 8
+//    dash          - FPGA       pin 97  - dash  key - DB9 pin 6
+//	  dot           - FPGA       pin 99  - dot   key - DB9 pin 7
 //
 //
 //    FX2 pin    to   FPGA pin connections
