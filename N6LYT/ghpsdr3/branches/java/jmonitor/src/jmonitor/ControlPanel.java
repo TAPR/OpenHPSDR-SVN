@@ -1338,8 +1338,9 @@ public class ControlPanel extends javax.swing.JPanel {
         });
         gainMenu.add(item);
         group.add(item);
-        item.setSelected(true);
+        
         item=new JCheckBoxMenuItem("30");
+        item.setSelected(true);
         item.addActionListener(new ActionListener() {
            public void actionPerformed(ActionEvent evt) {
                JCheckBoxMenuItem item=(JCheckBoxMenuItem)evt.getSource();
