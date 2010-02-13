@@ -72,6 +72,8 @@ void client_set_samples(float* samples,int size);
 #define PREFIX 48
 unsigned char* client_samples;
 
+int send_audio=0;
+
 int rejectAddress(char* address) {
     int result=0;
 
@@ -97,7 +99,7 @@ void client_init(int receiver) {
 
     signal(SIGPIPE, SIG_IGN);
 
-    port=BASE_PORT+(receiver*2);
+    port=BASE_PORT+receiver;
     clientSocket=-1;
     rc=pthread_create(&client_thread_id,NULL,client_thread,NULL);
     if(rc != 0) {
@@ -132,11 +134,12 @@ fprintf(stderr,"client_thread\n");
         return NULL;
     }
 
-    while(1) {
+fprintf(stderr,"client_thread: listening on port %d\n",port);
         if (listen(serverSocket, 5) == -1) {
             perror("client listen");
-            break;
+            exit(1);
         }
+    while(1) {
 
         addrlen = sizeof(client); 
 	if ((clientSocket = accept(serverSocket,(struct sockaddr *)&client,&addrlen)) == -1) {
@@ -231,6 +234,10 @@ fprintf(stderr,"client_thread\n");
                             gain=atoi(token);
                             SetRXOutputGain(0,0,(double)gain/100.0);
 fprintf(stderr,"SetRXOutputGain %f\n",(double)gain/100.0);
+                        } else if(strcmp(token,"startAudioStream")==0) {
+                            send_audio=1;
+                        } else if(strcmp(token,"stopAudioStream")==0) {
+                            send_audio=0;
                         }
                     } else {
                     }
@@ -242,6 +249,7 @@ fprintf(stderr,"SetRXOutputGain %f\n",(double)gain/100.0);
             tod=localtime(&tt);
             fprintf(stderr,"%02d/%02d/%02d %02d:%02d:%02d client disconnected from %s:%d\n",tod->tm_mday,tod->tm_mon+1,tod->tm_year+1900,tod->tm_hour,tod->tm_min,tod->tm_sec,inet_ntoa(client.sin_addr),ntohs(client.sin_port));
         }
+        send_audio=0;
         clientSocket=-1;
     }
 }
@@ -262,15 +270,17 @@ void client_send_samples(int size) {
 
 void client_send_audio(int size) {
     int rc;
-    if(clientSocket!=-1) {
-        sem_wait(&network_semaphore);
-            rc=send(clientSocket,audio_stream_buffer,size+PREFIX,0);
-            if(rc<0) {
-                //perror("client_send_audio failed");
-            }
-        sem_post(&network_semaphore);
-    } else {
-        //fprintf(stderr,"client_send_audio: clientSocket==-1\n");
+    if(send_audio) {
+        if(clientSocket!=-1) {
+            sem_wait(&network_semaphore);
+                rc=send(clientSocket,audio_stream_buffer,size+PREFIX,0);
+                if(rc<0) {
+                    //perror("client_send_audio failed");
+                }
+            sem_post(&network_semaphore);
+        } else {
+            //fprintf(stderr,"client_send_audio: clientSocket==-1\n");
+        }
     }
 }
 
