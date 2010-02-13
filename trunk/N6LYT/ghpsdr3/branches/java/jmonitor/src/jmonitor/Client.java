@@ -22,7 +22,7 @@ public class Client extends Thread {
         if(server!=null) {
             this.server=server;
         }
-        port=8000+(receiver*2);
+        port=8000+receiver;
         connected=false;
         status="Server "+server+" is busy - please wait";
         try {
@@ -95,7 +95,10 @@ public class Client extends Thread {
                     while(bytes<buffer.length) {
                         bytes += inputStream.read(buffer,bytes,buffer.length-bytes);
                     }
-                    connected=true;
+                    if(connected==false) {
+                        sendCommand("startAudioStream");
+                        connected=true;
+                    }
                     if (bytes == buffer.length) {
 
                         //System.err.println("input buffer: "+Integer.toString(buffer[0]));
