@@ -314,9 +314,16 @@ namespace DataDecoder
             this.chkAlpha = new System.Windows.Forms.CheckBox();
             this.btnPwr = new System.Windows.Forms.Button();
             this.tabOther = new System.Windows.Forms.TabPage();
+            this.grpMacSw = new System.Windows.Forms.GroupBox();
+            this.txtMacSwOff = new System.Windows.Forms.TextBox();
+            this.label226 = new System.Windows.Forms.Label();
+            this.txtMacSwOn = new System.Windows.Forms.TextBox();
+            this.label225 = new System.Windows.Forms.Label();
+            this.label155 = new System.Windows.Forms.Label();
+            this.chkMacSwEnab = new System.Windows.Forms.CheckBox();
+            this.cboMacSwPort = new System.Windows.Forms.ComboBox();
             this.groupBox17 = new System.Windows.Forms.GroupBox();
             this.txtVspMgr = new System.Windows.Forms.TextBox();
-            this.label155 = new System.Windows.Forms.Label();
             this.grpRepeat = new System.Windows.Forms.GroupBox();
             this.label79 = new System.Windows.Forms.Label();
             this.label147 = new System.Windows.Forms.Label();
@@ -1165,6 +1172,7 @@ namespace DataDecoder
             this.label165 = new System.Windows.Forms.Label();
             this.SwitchPort = new System.IO.Ports.SerialPort(this.components);
             this.KnobPort = new System.IO.Ports.SerialPort(this.components);
+            this.MacroPort = new System.IO.Ports.SerialPort(this.components);
             this.tabControl.SuspendLayout();
             this.tabPorts.SuspendLayout();
             this.grpSlave.SuspendLayout();
@@ -1202,6 +1210,7 @@ namespace DataDecoder
             this.groupBox13.SuspendLayout();
             this.grpAmp.SuspendLayout();
             this.tabOther.SuspendLayout();
+            this.grpMacSw.SuspendLayout();
             this.groupBox17.SuspendLayout();
             this.grpRepeat.SuspendLayout();
             this.grpRmode.SuspendLayout();
@@ -2333,7 +2342,7 @@ namespace DataDecoder
             this.chkKnobAdv.Size = new System.Drawing.Size(56, 17);
             this.chkKnobAdv.TabIndex = 92;
             this.chkKnobAdv.Text = "Expert";
-            this.toolTip1.SetToolTip(this.chkKnobAdv, "Check to enable RCP 2");
+            this.toolTip1.SetToolTip(this.chkKnobAdv, "Check to enable Expert controls");
             this.chkKnobAdv.UseVisualStyleBackColor = true;
             this.chkKnobAdv.CheckedChanged += new System.EventHandler(this.chkKnobAdv_CheckedChanged);
             // 
@@ -4999,6 +5008,7 @@ namespace DataDecoder
             // 
             // tabOther
             // 
+            this.tabOther.Controls.Add(this.grpMacSw);
             this.tabOther.Controls.Add(this.groupBox17);
             this.tabOther.Controls.Add(this.grpRepeat);
             this.tabOther.Controls.Add(this.groupBox6);
@@ -5014,15 +5024,118 @@ namespace DataDecoder
             this.tabOther.UseVisualStyleBackColor = true;
             this.tabOther.DoubleClick += new System.EventHandler(this.tabOther_DoubleClick);
             // 
+            // grpMacSw
+            // 
+            this.grpMacSw.Controls.Add(this.txtMacSwOff);
+            this.grpMacSw.Controls.Add(this.label226);
+            this.grpMacSw.Controls.Add(this.txtMacSwOn);
+            this.grpMacSw.Controls.Add(this.label225);
+            this.grpMacSw.Controls.Add(this.label155);
+            this.grpMacSw.Controls.Add(this.chkMacSwEnab);
+            this.grpMacSw.Controls.Add(this.cboMacSwPort);
+            this.grpMacSw.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.grpMacSw.ForeColor = System.Drawing.Color.Blue;
+            this.grpMacSw.Location = new System.Drawing.Point(6, 237);
+            this.grpMacSw.Name = "grpMacSw";
+            this.grpMacSw.Size = new System.Drawing.Size(188, 66);
+            this.grpMacSw.TabIndex = 232;
+            this.grpMacSw.TabStop = false;
+            this.grpMacSw.Text = "Macro Switch";
+            // 
+            // txtMacSwOff
+            // 
+            this.txtMacSwOff.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtMacSwOff.Location = new System.Drawing.Point(115, 41);
+            this.txtMacSwOff.Multiline = true;
+            this.txtMacSwOff.Name = "txtMacSwOff";
+            this.txtMacSwOff.Size = new System.Drawing.Size(56, 20);
+            this.txtMacSwOff.TabIndex = 234;
+            this.txtMacSwOff.Text = "ZZSW0;";
+            this.txtMacSwOff.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.toolTip1.SetToolTip(this.txtMacSwOff, "CAT command to send for switch Off.");
+            this.txtMacSwOff.TextChanged += new System.EventHandler(this.txtMacSwOff_TextChanged);
+            // 
+            // label226
+            // 
+            this.label226.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label226.ForeColor = System.Drawing.Color.Navy;
+            this.label226.Location = new System.Drawing.Point(89, 44);
+            this.label226.Name = "label226";
+            this.label226.Size = new System.Drawing.Size(25, 15);
+            this.label226.TabIndex = 235;
+            this.label226.Text = "Off";
+            this.label226.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
+            // txtMacSwOn
+            // 
+            this.txtMacSwOn.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtMacSwOn.Location = new System.Drawing.Point(28, 41);
+            this.txtMacSwOn.Multiline = true;
+            this.txtMacSwOn.Name = "txtMacSwOn";
+            this.txtMacSwOn.Size = new System.Drawing.Size(56, 20);
+            this.txtMacSwOn.TabIndex = 232;
+            this.txtMacSwOn.Text = "ZZSW1;";
+            this.txtMacSwOn.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.toolTip1.SetToolTip(this.txtMacSwOn, "CAT command to send for switch on.");
+            this.txtMacSwOn.TextChanged += new System.EventHandler(this.txtMacSwOn_TextChanged);
+            // 
+            // label225
+            // 
+            this.label225.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label225.ForeColor = System.Drawing.Color.Navy;
+            this.label225.Location = new System.Drawing.Point(2, 44);
+            this.label225.Name = "label225";
+            this.label225.Size = new System.Drawing.Size(25, 15);
+            this.label225.TabIndex = 233;
+            this.label225.Text = "On";
+            this.label225.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
+            // label155
+            // 
+            this.label155.AutoSize = true;
+            this.label155.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
+            this.label155.ForeColor = System.Drawing.Color.Navy;
+            this.label155.Location = new System.Drawing.Point(87, 20);
+            this.label155.Name = "label155";
+            this.label155.Size = new System.Drawing.Size(26, 13);
+            this.label155.TabIndex = 231;
+            this.label155.Text = "Port";
+            // 
+            // chkMacSwEnab
+            // 
+            this.chkMacSwEnab.AutoSize = true;
+            this.chkMacSwEnab.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
+            this.chkMacSwEnab.ForeColor = System.Drawing.Color.Navy;
+            this.chkMacSwEnab.Location = new System.Drawing.Point(7, 19);
+            this.chkMacSwEnab.Name = "chkMacSwEnab";
+            this.chkMacSwEnab.Size = new System.Drawing.Size(59, 17);
+            this.chkMacSwEnab.TabIndex = 229;
+            this.chkMacSwEnab.Text = "Enable";
+            this.toolTip1.SetToolTip(this.chkMacSwEnab, "Select to enable Macro Switch operation");
+            this.chkMacSwEnab.UseVisualStyleBackColor = true;
+            this.chkMacSwEnab.CheckedChanged += new System.EventHandler(this.chkMacSwEnab_CheckedChanged);
+            // 
+            // cboMacSwPort
+            // 
+            this.cboMacSwPort.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboMacSwPort.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.25F, System.Drawing.FontStyle.Bold);
+            this.cboMacSwPort.ForeColor = System.Drawing.Color.Firebrick;
+            this.cboMacSwPort.FormattingEnabled = true;
+            this.cboMacSwPort.Location = new System.Drawing.Point(115, 16);
+            this.cboMacSwPort.Name = "cboMacSwPort";
+            this.cboMacSwPort.Size = new System.Drawing.Size(68, 21);
+            this.cboMacSwPort.TabIndex = 230;
+            this.toolTip1.SetToolTip(this.cboMacSwPort, "Select Macro switch serial port.");
+            this.cboMacSwPort.SelectedIndexChanged += new System.EventHandler(this.cboMacSwPort_SelectedIndexChanged);
+            // 
             // groupBox17
             // 
             this.groupBox17.Controls.Add(this.txtVspMgr);
-            this.groupBox17.Controls.Add(this.label155);
             this.groupBox17.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold);
             this.groupBox17.ForeColor = System.Drawing.Color.Blue;
-            this.groupBox17.Location = new System.Drawing.Point(6, 205);
+            this.groupBox17.Location = new System.Drawing.Point(6, 189);
             this.groupBox17.Name = "groupBox17";
-            this.groupBox17.Size = new System.Drawing.Size(188, 56);
+            this.groupBox17.Size = new System.Drawing.Size(188, 47);
             this.groupBox17.TabIndex = 80;
             this.groupBox17.TabStop = false;
             this.groupBox17.Text = "VSP Manager";
@@ -5034,20 +5147,9 @@ namespace DataDecoder
             this.txtVspMgr.Name = "txtVspMgr";
             this.txtVspMgr.Size = new System.Drawing.Size(170, 20);
             this.txtVspMgr.TabIndex = 29;
-            this.toolTip1.SetToolTip(this.txtVspMgr, "VSP Manager\'s file location here (double-click for file dialog).");
+            this.toolTip1.SetToolTip(this.txtVspMgr, "VSP Manager\'s file location (double-click for file dialog).");
             this.txtVspMgr.DoubleClick += new System.EventHandler(this.txtVspMgr_DoubleClick);
             this.txtVspMgr.TextChanged += new System.EventHandler(this.txtVspMgr_TextChanged);
-            // 
-            // label155
-            // 
-            this.label155.AutoSize = true;
-            this.label155.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
-            this.label155.ForeColor = System.Drawing.Color.Navy;
-            this.label155.Location = new System.Drawing.Point(9, 39);
-            this.label155.Name = "label155";
-            this.label155.Size = new System.Drawing.Size(67, 13);
-            this.label155.TabIndex = 30;
-            this.label155.Text = "File Location";
             // 
             // grpRepeat
             // 
@@ -5112,7 +5214,7 @@ namespace DataDecoder
             this.grpRmode.Controls.Add(this.rbIFonly);
             this.grpRmode.Controls.Add(this.rbAll);
             this.grpRmode.ForeColor = System.Drawing.Color.Blue;
-            this.grpRmode.Location = new System.Drawing.Point(6, 40);
+            this.grpRmode.Location = new System.Drawing.Point(9, 42);
             this.grpRmode.Name = "grpRmode";
             this.grpRmode.Size = new System.Drawing.Size(199, 34);
             this.grpRmode.TabIndex = 66;
@@ -5326,7 +5428,7 @@ namespace DataDecoder
             this.grpPro.Enabled = false;
             this.grpPro.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.grpPro.ForeColor = System.Drawing.Color.Blue;
-            this.grpPro.Location = new System.Drawing.Point(202, 95);
+            this.grpPro.Location = new System.Drawing.Point(202, 87);
             this.grpPro.Name = "grpPro";
             this.grpPro.Size = new System.Drawing.Size(225, 166);
             this.grpPro.TabIndex = 109;
@@ -5530,7 +5632,7 @@ namespace DataDecoder
             this.grpInP.Controls.Add(this.radioButton7);
             this.grpInP.Controls.Add(this.radioButton8);
             this.grpInP.ForeColor = System.Drawing.Color.Navy;
-            this.grpInP.Location = new System.Drawing.Point(134, 9);
+            this.grpInP.Location = new System.Drawing.Point(133, 9);
             this.grpInP.Name = "grpInP";
             this.grpInP.Size = new System.Drawing.Size(39, 48);
             this.grpInP.TabIndex = 71;
@@ -5644,7 +5746,7 @@ namespace DataDecoder
             // txtSleep
             // 
             this.txtSleep.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtSleep.Location = new System.Drawing.Point(172, 24);
+            this.txtSleep.Location = new System.Drawing.Point(173, 24);
             this.txtSleep.Name = "txtSleep";
             this.txtSleep.Size = new System.Drawing.Size(32, 22);
             this.txtSleep.TabIndex = 51;
@@ -5656,7 +5758,7 @@ namespace DataDecoder
             // 
             // lblSleep
             // 
-            this.lblSleep.Location = new System.Drawing.Point(169, 43);
+            this.lblSleep.Location = new System.Drawing.Point(172, 47);
             this.lblSleep.Name = "lblSleep";
             this.lblSleep.Size = new System.Drawing.Size(41, 19);
             this.lblSleep.TabIndex = 51;
@@ -5679,7 +5781,7 @@ namespace DataDecoder
             this.groupBox4.Controls.Add(this.label22);
             this.groupBox4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold);
             this.groupBox4.ForeColor = System.Drawing.Color.Blue;
-            this.groupBox4.Location = new System.Drawing.Point(6, 95);
+            this.groupBox4.Location = new System.Drawing.Point(6, 87);
             this.groupBox4.Name = "groupBox4";
             this.groupBox4.Size = new System.Drawing.Size(188, 100);
             this.groupBox4.TabIndex = 48;
@@ -6105,7 +6207,7 @@ namespace DataDecoder
             this.dgm.Location = new System.Drawing.Point(4, 3);
             this.dgm.Name = "dgm";
             this.dgm.RowHeadersWidth = 40;
-            this.dgm.Size = new System.Drawing.Size(409, 151);
+            this.dgm.Size = new System.Drawing.Size(421, 151);
             this.dgm.TabIndex = 78;
             this.dgm.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgm_CellValueChanged);
             this.dgm.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.dgm_MouseDoubleClick);
@@ -15462,6 +15564,12 @@ namespace DataDecoder
             this.KnobPort.RtsEnable = true;
             this.KnobPort.DataReceived += new System.IO.Ports.SerialDataReceivedEventHandler(this.KnobPort_DataReceived);
             // 
+            // MacroPort
+            // 
+            this.MacroPort.DtrEnable = true;
+            this.MacroPort.RtsEnable = true;
+            this.MacroPort.PinChanged += new System.IO.Ports.SerialPinChangedEventHandler(this.MacroPort_PinChanged);
+            // 
             // Setup
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -15564,6 +15672,8 @@ namespace DataDecoder
             this.grpAmp.PerformLayout();
             this.tabOther.ResumeLayout(false);
             this.tabOther.PerformLayout();
+            this.grpMacSw.ResumeLayout(false);
+            this.grpMacSw.PerformLayout();
             this.groupBox17.ResumeLayout(false);
             this.groupBox17.PerformLayout();
             this.grpRepeat.ResumeLayout(false);
@@ -16477,7 +16587,6 @@ namespace DataDecoder
         private CheckBox chkPSDR;
         private GroupBox groupBox17;
         private TextBox txtVspMgr;
-        private Label label155;
         private TextBox txtAzOffset;
         private Label label156;
         private GroupBox grpSPE;
@@ -16752,6 +16861,15 @@ namespace DataDecoder
         private Label label223;
         private Label label222;
         private Label label27;
+        private ComboBox cboMacSwPort;
+        private CheckBox chkMacSwEnab;
+        private GroupBox grpMacSw;
+        private Label label155;
+        private System.IO.Ports.SerialPort MacroPort;
+        private TextBox txtMacSwOff;
+        private Label label226;
+        private TextBox txtMacSwOn;
+        private Label label225;
 
     }
 }
