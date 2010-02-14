@@ -614,6 +614,10 @@ namespace DataDecoder
             txtAM.Text = set.txtAM;
             txtSSB.Text = set.txtSSB;
             txtDigi.Text = set.txtDigi;
+            cboMacSwPort.SelectedIndex = set.cboMacSwPort;
+            txtMacSwOn.Text = set.txtMacSwOn;
+            txtMacSwOff.Text = set.txtMacSwOff;
+            chkMacSwEnab.Checked = set.chkMacSwEnab;
 
             stsTX = set.stsTX;
             stsOper = set.stsOper;
@@ -1000,6 +1004,43 @@ namespace DataDecoder
 
         #region Form Events
 
+        // the auto drive expert check box has changed
+        private void chkAutoExpert_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chkAutoExpert.Checked)
+            {
+                set.chkAutoExpert = true;
+                txtAM.Enabled = true;
+                txtSSB.Enabled = true;
+                txtDigi.Enabled = true;
+            }
+            else
+            {
+                set.chkAutoExpert = false;
+                txtAM.Enabled = false;
+                txtSSB.Enabled = false;
+                txtDigi.Enabled = false;
+            }
+            set.Save();
+            modeFactor = 1;
+            lastBand = "";
+            LastMode = "";
+        }
+        // the txtAM text box has changed
+        private void txtAM_TextChanged(object sender, EventArgs e)
+        {
+            set.txtAM = txtAM.Text; set.Save();
+        }
+        // the txtSSB text box has changed
+        private void txtSSB_TextChanged(object sender, EventArgs e)
+        {
+            set.txtSSB = txtSSB.Text; set.Save();
+        }
+        // the txtDigi text box has changed
+        private void txtDigi_TextChanged(object sender, EventArgs e)
+        {
+            set.txtDigi = txtDigi.Text; set.Save();
+        }
         // the PSDR file location has changed
         private void txtVspMgr_TextChanged(object sender, EventArgs e)
         {
@@ -1034,27 +1075,25 @@ namespace DataDecoder
             }
             catch { }
         }
-
-        // 
+        // the SWR enable check box has been changed
         private void chkSWR_CheckedChanged(object sender, EventArgs e)
         {
             if (chkSWR.Checked) set.SWRenab = true;
             else set.SWRenab = false;
             set.Save();
         }
-
+        // the SWR number value has changed
         private void numSWR_ValueChanged(object sender, EventArgs e)
         {
             set.SWRnum = numSWR.Value;
             set.Save();
         }
-
-        private void btnSWR_Click(object sender, EventArgs e)
-        {
-            WriteToPort("ZZTI0;", iSleep);
-            lblHighSWR.Visible = false;
-        }
-
+        //
+        //private void btnSWR_Click(object sender, EventArgs e)
+        //{
+        //    WriteToPort("ZZTI0;", iSleep);
+        //    lblHighSWR.Visible = false;
+        //}
         // the Amp160 check box has changed
         private void chkAmp160_CheckedChanged(object sender, EventArgs e)
         {
@@ -1145,7 +1184,6 @@ namespace DataDecoder
             else { set.ModeChg = false; }
             set.Save();
         }
-
         // BCD Overide check box has been changed
         private void chkOvride_CheckedChanged(object sender, EventArgs e)
         {
@@ -1261,9 +1299,8 @@ namespace DataDecoder
             { PW1port.RtsEnable = false; set.pwRTS = false; }
             set.Save();
         }
-
-        bool split = false;
         // The Split button was pressed
+        bool split = false;
         private void btnSplit_Click(object sender, EventArgs e)
         {
             try
@@ -1631,6 +1668,7 @@ namespace DataDecoder
                 if (RCP4Rotor.IsOpen) RCP4Rotor.Close();
                 if (RotorPort.IsOpen) RotorPort.Close();
                 if (SwitchPort.IsOpen) SwitchPort.Close();
+                if (MacroPort.IsOpen) MacroPort.Close();
             }
             catch (Exception ex)
             {
@@ -4699,9 +4737,14 @@ namespace DataDecoder
                     OutBuf = m.Value;
                     // remove the match from the buffer if found
                     CmdBuf = CmdBuf.Replace(m.Value, "");
+                    //if (OutBuf.Substring(0, 1) == ":")
+                    //{
+                    //    macVar = true;
+                    //    OutBuf = OutBuf.Substring(1, 4);
+                    //}
                     if (OutBuf.Length < 5) malform(OutBuf);
                     if (OutBuf.Substring(0, 2) == "DD") DDParse(OutBuf);
-                    else WriteToPort(OutBuf, 100);
+                    else WriteToPort(OutBuf, iSleep);
                 }
             }
             catch (Exception ex)
@@ -4817,6 +4860,74 @@ namespace DataDecoder
         #endregion# Macro Methods #
 
         #endregion Macro Routines
+
+        #region Macro Switch
+
+        // the macro switch has changed
+        private void MacroPort_PinChanged(object sender, SerialPinChangedEventArgs e)
+        {
+            if (chkMacSwEnab.Checked)
+            {
+                SerialPinChange SerialPinChange1;
+                SerialPinChange1 = e.EventType;
+                switch (SerialPinChange1)
+                {
+                    case SerialPinChange.CtsChanged:
+                        if (MacroPort.CtsHolding)  // 
+                        {
+                            if (txtMacSwOn.Text.Length > 5)
+                                WriteToPort(txtMacSwOn.Text, iSleep);
+                        }
+                        else    // 
+                        {
+                            if (txtMacSwOff.Text.Length > 5)
+                                WriteToPort(txtMacSwOff.Text, iSleep);
+                        }
+                        break;
+                }
+            }
+        }
+        // the macro switch com port has changed
+        private void cboMacSwPort_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (MacroPort.IsOpen) MacroPort.Close();
+            if (cboMacSwPort.SelectedIndex > 0)
+            {
+                MacroPort.PortName = cboMacSwPort.SelectedItem.ToString();
+                try
+                {
+                    MacroPort.Open();
+                }
+                catch
+                {
+                    MessageBox.Show("The Macro switch serial port " + MacroPort.PortName +
+                       " cannot be opened!\n", "Port Error",
+                       MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    cboMacSwPort.SelectedIndex = -1;
+                }
+            }
+            set.cboMacSwPort = cboMacSwPort.SelectedIndex;
+            set.Save();
+        }
+        // the macro switch enable check box has changed
+        private void chkMacSwEnab_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chkMacSwEnab.Checked) { set.chkMacSwEnab = true; }
+            else { set.chkMacSwEnab = false; }
+            set.Save();
+        }
+        // the macro switch On CAT command has changed
+        private void txtMacSwOn_TextChanged(object sender, EventArgs e)
+        {
+            set.txtMacSwOn = txtMacSwOn.Text; set.Save();
+        }
+        // the macro switch Off CAT command has changed
+        private void txtMacSwOff_TextChanged(object sender, EventArgs e)
+        {
+            set.txtMacSwOff = txtMacSwOff.Text; set.Save();
+        }
+
+        #endregion Macro Switch
 
         #region Menu Events
 
@@ -7570,7 +7681,8 @@ namespace DataDecoder
                             "  " + vfo + "  " + mode;
                     /*** Output to LPT port ***/
                     //decode freq data and output to LPT port
-                    if (chkDevice.Checked && chkDev0.Checked) LookUp(freqLook);
+                    if (chkDevice.Checked && chkDev0.Checked)
+                    { LookUp(freqLook); }
                     PortSend(logFreq);  // send freq. to PLs
                     lastFreq = logFreq; // save this freq
                     LastMode = sdrMode; // save this mode
@@ -8055,6 +8167,8 @@ namespace DataDecoder
             {
                 try
                 {
+                    if (chkSoEnab.Checked && chk1Amp.Checked && ZZSW == 1)
+                    { freq = lastFreqB; }
                     byte[] bytes = new byte[11];
                     string preamble = "FE";
                     string ta = txtPW1ta.Text;
@@ -8290,6 +8404,7 @@ namespace DataDecoder
                     cboSPEport.Items.Clear();
                     cboSwPort.Items.Clear();
                     cboKnobPort.Items.Clear();
+                    cboMacSwPort.Items.Clear();
                     // Add empty entry to port combos
                     cboSerAcc.Items.Add("");
                     cboLogPort.Items.Add("");
@@ -8311,6 +8426,7 @@ namespace DataDecoder
                     cboSPEport.Items.Add("");
                     cboSwPort.Items.Add("");
                     cboKnobPort.Items.Add("");
+                    cboMacSwPort.Items.Add("");
 
                     for (int i = 0; i < port.Length; i++)
                     {
@@ -8336,6 +8452,7 @@ namespace DataDecoder
                         cboSPEport.Items.Add("COM" + port[i]);
                         cboSwPort.Items.Add("COM" + port[i]);
                         cboKnobPort.Items.Add("COM" + port[i]);
+                        cboMacSwPort.Items.Add("COM" + port[i]);
                     }
                 }
                 else
@@ -8628,46 +8745,70 @@ namespace DataDecoder
         // The Save button was pressed
         private void btnSaveSO2R_Click(object sender, EventArgs e)
         {
-            
-            DialogResult result;
-            result = MessageBox.Show("Saving matrix data to file: " + so2rFile + " Is this ok?\r\r" +
-                "If 'Yes' press Ok to continue saving the file.\r" +
-                "If 'No' press No to select a new file name.\r" +
-                "Press Cancel to abort this operation.", "Information",
-                MessageBoxButtons.YesNoCancel, MessageBoxIcon.Information,
-                MessageBoxDefaultButton.Button1);
-            
-            if (result == DialogResult.Cancel)
-                return;
-            else if (result == DialogResult.No)
+
+            if (chkSoEnab.Checked)
             {
-                GetFile();
-            }
+                DialogResult result;
+                result = MessageBox.Show("Saving matrix data to file: " + so2rFile + " Is this ok?\r\r" +
+                    "If 'Yes' press Ok to continue saving the file.\r" +
+                    "If 'No' press No to select a new file name.\r" +
+                    "Press Cancel to abort this operation.", "Information",
+                    MessageBoxButtons.YesNoCancel, MessageBoxIcon.Information,
+                    MessageBoxDefaultButton.Button1);
+
+                if (result == DialogResult.Cancel)
+                    return;
+                else if (result == DialogResult.No)
+                {
+                    GetFile();
+                }
                 if (File.Exists(app_data_path + "\\" + so2rFile))
                     File.Delete(app_data_path + "\\" + so2rFile);
-            dso.Clear(); 
-            ArrayList a = new ArrayList();
-            foreach (Control c in this.grpSO2R.Controls)			// For each control
-            {
-                if (c.GetType() == typeof(CheckBox) && c.Name != "chkSoEnab")
-                    a.Add(c.Name + "/" + ((CheckBox)c).Checked.ToString());
-                else if (c.GetType() == typeof(TextBox))
-                    a.Add(c.Name + "/" + ((TextBox)c).Text);
+                dso.Clear();
+                ArrayList a = new ArrayList();
+                foreach (Control c in this.grpSO2R.Controls)			// For each control
+                {
+                    if (c.GetType() == typeof(CheckBox) && c.Name != "chkSoEnab")
+                        a.Add(c.Name + "/" + ((CheckBox)c).Checked.ToString());
+                    else if (c.GetType() == typeof(TextBox))
+                        a.Add(c.Name + "/" + ((TextBox)c).Text);
+                }
+                SaveVars("SO2R", ref a);		// save the values to the DB
+                bSo2rChg = false;
             }
-            SaveVars("SO2R", ref a);		// save the values to the DB
-            bSo2rChg = false;
+            else
+            {
+                MessageBox.Show("The Enable check box must be selected before a file can be saved");
+            }
+
         }        
         // The Load button was pressed
         private void btnLoadSO2R_Click(object sender, EventArgs e)
         {
-            GetFile();
-            if (File.Exists(app_data_path + "\\" + so2rFile))
-            { dso.Clear(); dso.ReadXml(app_data_path + "\\" + so2rFile); }
-            LoadVars();
+            if (chkSoEnab.Checked)
+            {
+                GetFile();
+                if (File.Exists(app_data_path + "\\" + so2rFile))
+                { dso.Clear(); dso.ReadXml(app_data_path + "\\" + so2rFile); }
+                LoadVars();
+            }
+            else
+            {
+                MessageBox.Show("The Enable check box must be selected before a file can be loaded");
+            }
         }
         // The clear matrix button was pressed
         private void btnSO2Rclear_Click(object sender, EventArgs e)
         {
+            DialogResult result;
+            result = MessageBox.Show(
+                "You are about to clear all the matrix settings.\r\r" +
+                "Do you really want to do that?\r", "Information",
+                MessageBoxButtons.YesNo, MessageBoxIcon.Information,
+                MessageBoxDefaultButton.Button1);
+            if (result == DialogResult.No)
+                return;
+
             foreach (Control c in this.grpSO2R.Controls)			// For each control
             {
                 if (c.GetType() == typeof(CheckBox) && c.Name != "chkSoEnab")
@@ -8879,7 +9020,7 @@ namespace DataDecoder
                 chkAutoDrv.Checked = false;
                 if (chkSoEnab.Checked)
                 {
-                    if (cboSwPort.SelectedIndex != -1)
+                    if (cboSwPort.SelectedIndex > 0)
                     {
                         if (!SwitchPort.IsOpen) SwitchPort.Open();
                     }
@@ -11081,9 +11222,16 @@ namespace DataDecoder
                                 kFlags ^= 0x20;
                                 WriteFlags(); WriteLED();
                                 if (Convert.ToBoolean(kFlags >> 5 & 0x01)) //led2 lit
-                                { WriteToPort(kCATdcOn, iSleep); }
+                                {
+                                    WriteToPort(kCATdcOn, iSleep);
+                                    if (kCATdcOn == "ZZSW1;" && chkSoEnab.Checked)
+                                    { ZZSW = 1; SetVfoB(); }
+                                }
                                 else
-                                { WriteToPort(kCATdcOff, iSleep);
+                                {
+                                    WriteToPort(kCATdcOff, iSleep);
+                                    if (kCATdcOff == "ZZSW0;" && chkSoEnab.Checked)
+                                    { ZZSW = 0; SetVfoA(); }
                                 }
                                 break;
                             case "D": //tune down
@@ -12775,33 +12923,6 @@ namespace DataDecoder
         #endregion WaveNode Setup
 
         #endregion WaveNode
-
-        private void chkAutoExpert_CheckedChanged(object sender, EventArgs e)
-        {
-            if (chkAutoExpert.Checked) 
-            { set.chkAutoExpert = true; }
-            else 
-            { set.chkAutoExpert = false; }
-            set.Save();
-            modeFactor = 1;
-            lastBand = "";
-            LastMode = "";
-        }
-
-        private void txtAM_TextChanged(object sender, EventArgs e)
-        {
-            set.txtAM = txtAM.Text; set.Save();
-        }
-
-        private void txtSSB_TextChanged(object sender, EventArgs e)
-        {
-            set.txtSSB = txtSSB.Text; set.Save();
-        }
-
-        private void txtDigi_TextChanged(object sender, EventArgs e)
-        {
-            set.txtDigi = txtDigi.Text; set.Save();
-        }
 
     } // end class Setup
 
