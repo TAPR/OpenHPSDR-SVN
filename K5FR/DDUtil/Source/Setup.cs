@@ -6910,6 +6910,7 @@ namespace DataDecoder
         int bBand, LastB = 0;       // current and last vfoB band
         double modeFactor = 1;         // holds expert auto drive mode factor
         string lastFreqB = "";
+        string freqLook = "";
         void sp_CATRxEvent(object source, CATSerialPorts.SerialRXEvent e)
         {
             try
@@ -6928,7 +6929,6 @@ namespace DataDecoder
                     string regex = "(?<cat>\\w{2})(?<mz>\\d{5})(?<kz>\\d{3})(?<hz>\\d{2})";
                     string mask = "${mz},${kz}.${hz}";
                     string freq = "";
-                    string freqLook = "";
                     string mode = "";
                     rawFreq = OutBuffer;
                     OutBuffer = "";
@@ -7542,8 +7542,10 @@ namespace DataDecoder
                         else modeFactor = 1;
                         lastBand = "";
                     }
-                    
-                    logFreq = rawFreq.Substring(2, 11);
+                    if (chkSoEnab.Checked && chk1Amp.Checked && ZZSW == 1)
+                    { logFreq = lastFreqB; }
+                    else
+                    { logFreq = rawFreq.Substring(2, 11); }
 
                     //fix for PSDR sending 7000.000 on 1st IF; query after start-up
                     if (logFreq == "00007000000" && lastFreq != logFreq)
@@ -7570,6 +7572,9 @@ namespace DataDecoder
                     /*** SPE smp, send it the freq ***/
                     if (chkSPEenab.Checked)
                     {
+                        //if (chkSoEnab.Checked && chk1Amp.Checked && ZZSW == 1)
+                        //{ logFreq = lastFreqB; }
+
                         string last = ""; // need to drop decimal digits
                         if (lastFreq != "") last = lastFreq.Substring(0, 8);
                         else last = "";
@@ -7669,7 +7674,8 @@ namespace DataDecoder
                     freq = freq.TrimStart('0');
                     if (String.Compare(lastFreq, logFreq) != 0)
                     {   // if the freq has changed
-                        freqLook = rawFreq.Substring(2, 8);
+//                        freqLook = rawFreq.Substring(2, 8);
+                        freqLook = logFreq.Substring(0, 8);
                         freqLook = freqLook.TrimStart('0');
                         freqLook = freqLook.Substring(0, freqLook.Length - 2);
                     }

@@ -2251,6 +2251,7 @@ namespace DataDecoder
             this.grpTKnob.TabIndex = 67;
             this.grpTKnob.TabStop = false;
             this.grpTKnob.Text = "Tuning Knob";
+            this.grpTKnob.Visible = false;
             // 
             // lblZR
             // 
@@ -5044,6 +5045,7 @@ namespace DataDecoder
             // 
             // txtMacSwOff
             // 
+            this.txtMacSwOff.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.txtMacSwOff.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtMacSwOff.Location = new System.Drawing.Point(115, 41);
             this.txtMacSwOff.Multiline = true;
@@ -5068,6 +5070,7 @@ namespace DataDecoder
             // 
             // txtMacSwOn
             // 
+            this.txtMacSwOn.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.txtMacSwOn.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtMacSwOn.Location = new System.Drawing.Point(28, 41);
             this.txtMacSwOn.Multiline = true;
