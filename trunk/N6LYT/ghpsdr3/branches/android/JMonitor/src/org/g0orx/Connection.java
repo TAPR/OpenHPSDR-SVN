@@ -178,7 +178,15 @@ public class Connection extends Thread {
 
     public void setNR(boolean state) {
         sendCommand("setNR "+state);
-    }    
+    }
+    
+    public void setANF(boolean state) {
+        sendCommand("setANF "+state);
+    }
+    
+    public void setNB(boolean state) {
+        sendCommand("setNB "+state);
+    }
     
     public void setGain(int gain) {
         sendCommand("SetRXOutputGain "+gain);
