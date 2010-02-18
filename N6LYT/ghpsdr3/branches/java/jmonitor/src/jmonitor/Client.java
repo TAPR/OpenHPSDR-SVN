@@ -22,7 +22,7 @@ public class Client extends Thread {
         if(server!=null) {
             this.server=server;
         }
-        port=8001+receiver;
+        port=8000+receiver;
         connected=false;
         status="Server "+server+" is busy - please wait";
         try {
