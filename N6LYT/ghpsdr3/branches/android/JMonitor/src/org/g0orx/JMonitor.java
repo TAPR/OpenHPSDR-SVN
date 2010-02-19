@@ -5,6 +5,7 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -18,6 +19,8 @@ public class JMonitor extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+        
         connection=new Connection(server,BASE_PORT+receiver);
         
         update=new Update(connection);
@@ -30,45 +33,60 @@ public class JMonitor extends Activity {
         
     }
     
+    public boolean onTrackballEvent(MotionEvent event) {
+    	switch(event.getAction()) {
+    case MotionEvent.ACTION_DOWN:
+    	//Log.i("onTouch","ACTION_DOWN");
+    	spectrumView.setVfoLock();
+    	break;
+    case MotionEvent.ACTION_MOVE:
+    	//Log.i("onTrackballEvent","ACTION_MOVE");
+    	spectrumView.scroll(-(int)(event.getX()*6.0));
+    	break;
+    	}
+        return true;
+    }
+    
     public void onStart() {
     	super.onStart();
-    	//Log.i("Jmonitor","onStart");
+    	Log.i("Jmonitor","onStart");
     	
+    	
+    }
+    
+    public void onRestart() {
+    	super.onRestart();
+    	Log.i("Jmonitor","onRestart");
+    	
+    }
+    
+    public void onResume() {
+    	super.onResume();
+    	Log.i("Jmonitor","onResume");
     	connection.start();        
         connection.setFrequency(7048000);
         connection.setMode(0);
         connection.setFilter(-2850,-150);
         connection.setGain(30);
         connection.setAGC(AGC_LONG);
-    }
-    
-    public void onRestart() {
-    	super.onRestart();
-    	//Log.i("Jmonitor","onRestart");
-    	
-    }
-    
-    public void onResume() {
-    	super.onResume();
-    	//Log.i("Jmonitor","onResume");
     	update.start();
     }
     
     public void onPause() {
     	super.onPause();
-    	//Log.i("Jmonitor","onPause");
+    	Log.i("Jmonitor","onPause");
     }
     
     public void onStop() {
     	super.onStop();
-    	//Log.i("Jmonitor","onStop");
+    	Log.i("Jmonitor","onStop");
     	update.close();
     	connection.close();
     }
     
     public void onDestroy() {
     	super.onDestroy();
-    	//Log.i("Jmonitor","onDestroy");
+    	Log.i("Jmonitor","onDestroy");
     }
 
     public boolean onCreateOptionsMenu(Menu menu) {

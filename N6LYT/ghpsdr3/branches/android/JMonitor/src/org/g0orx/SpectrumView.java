@@ -56,7 +56,12 @@ public class SpectrumView extends View implements OnTouchListener {
 			
 			// display the frequency and mode
 			paint.setColor(Color.GREEN);
-			canvas.drawText(Long.toString(connection.getFrequency())+" "+connection.getStringMode(), 200, 10, paint);
+			canvas.drawText(Long.toString(connection.getFrequency())+" "+connection.getStringMode(), 100, 10, paint);
+			
+			if(vfoLocked) {
+				paint.setColor(Color.RED);
+				canvas.drawText("LOCKED", 300, 10, paint);
+			}
 			
 			// plot the spectrum
 			paint.setColor(Color.WHITE);
@@ -64,6 +69,12 @@ public class SpectrumView extends View implements OnTouchListener {
 			
 			// draw the waterfall
 			canvas.drawBitmap(waterfall, 1,HEIGHT, paint);
+			
+			String status=connection.getStatus();
+			if(status!=null) {
+				paint.setColor(Color.RED);
+				canvas.drawText(status, 0, 10, paint);
+			}
 			
 		} else {
 		    paint.setColor(0xffffffff);
@@ -120,7 +131,18 @@ public class SpectrumView extends View implements OnTouchListener {
         return pixel;
     }
 	
+	public void setVfoLock() {
+	    vfoLocked=!vfoLocked;	
+	}
+	
+	public void scroll(int step) {
+		if(!vfoLocked) {
+		    connection.setFrequency((long)(connection.getFrequency()+(step*(connection.getSampleRate()/WIDTH))));
+		}
+	}
+	
 	public boolean onTouch(View view,MotionEvent event) {
+		if(!vfoLocked) {
 		switch(event.getAction()) {
 		    case MotionEvent.ACTION_CANCEL:
 		    	//Log.i("onTouch","ACTION_CANCEL");
@@ -128,13 +150,15 @@ public class SpectrumView extends View implements OnTouchListener {
 		    case MotionEvent.ACTION_DOWN:
 		    	//Log.i("onTouch","ACTION_DOWN");
 		    	if(connection.isConnected()) {
+		    		//connection.setStatus("onTouch.ACTION_DOWN: "+event.getX());
 		    		startX=event.getX();
 		    	}
 		    	break;
 		    case MotionEvent.ACTION_MOVE:
 		    	//Log.i("onTouch","ACTION_MOVE");
 		    	if(connection.isConnected()) {
-		            float increment=startX-event.getX();
+		    		//connection.setStatus("onTouch.ACTION_MOVE: "+(int)event.getX());
+		            int increment=(int)(startX-event.getX());
 		            connection.setFrequency((long)(connection.getFrequency()+(increment*(connection.getSampleRate()/WIDTH))));
 		            startX=event.getX();
 		        }
@@ -157,6 +181,7 @@ public class SpectrumView extends View implements OnTouchListener {
 		    		}
 		    	}
 		    	break;
+		}
 		}
 		
 		return true;
@@ -185,6 +210,8 @@ public class SpectrumView extends View implements OnTouchListener {
 	
 	private int filterLeft;
 	private int filterRight;
+	
+	private boolean vfoLocked=false;
 	
 	private float startX;
 	
