@@ -96,7 +96,7 @@ public class Client extends Thread {
                         bytes += inputStream.read(buffer,bytes,buffer.length-bytes);
                     }
                     if(connected==false) {
-                        sendCommand("startAudioStream");
+                        sendCommand("startAudioStream "+SAMPLES);
                         connected=true;
                     }
                     if (bytes == buffer.length) {
