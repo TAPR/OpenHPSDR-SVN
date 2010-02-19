@@ -26,6 +26,6 @@ public class Update extends Thread {
 	
 	private Connection connection;
 	private boolean running=true;
-	private int fps=10;
+	private int fps=8;
 	
 }

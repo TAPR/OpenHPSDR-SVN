@@ -24,8 +24,15 @@ public class Connection extends Thread {
 		} catch (Exception e) {
 			Log.e("Connection","Error creating socket for "+server+":"+port+"'"+e.getMessage()+"'");
 		}
+		
+		// 2.1
 		//audioTrack=new AudioTrack(AudioManager.STREAM_MUSIC,8000,AudioFormat.CHANNEL_OUT_MONO,AudioFormat.ENCODING_PCM_16BIT,BUFFER_SIZE*2,AudioTrack.MODE_STREAM);
-		audioTrack=new AudioTrack(AudioManager.STREAM_MUSIC,8000,AudioFormat.CHANNEL_CONFIGURATION_MONO,AudioFormat.ENCODING_PCM_16BIT,BUFFER_SIZE*2,AudioTrack.MODE_STREAM);
+		
+		// 1.6
+		audioTrack=new AudioTrack(AudioManager.STREAM_MUSIC,8000,AudioFormat.CHANNEL_CONFIGURATION_MONO,AudioFormat.ENCODING_PCM_16BIT,AUDIO_BUFFER_SIZE*2,AudioTrack.MODE_STREAM);	
+		
+		audioTrack.play();
+		System.gc();
 	}
 	
 	public void close() {
@@ -37,65 +44,79 @@ public class Connection extends Thread {
 				
 			}
 		}
+		if(audioTrack.getPlayState()!=AudioTrack.PLAYSTATE_PLAYING) {
+        	audioTrack.stop();
+        }
 	}
+	
 	public void run() {
 		int bytes;
-		byte[] buffer=new byte[HEADER_SIZE+BUFFER_SIZE];
+		byte[] header=new byte[HEADER_SIZE];
+		byte[] spectrumBuffer=new byte[BUFFER_SIZE];
+		byte[] audioBuffer=new byte[AUDIO_BUFFER_SIZE];
+		
 		if(socket!=null) {
 		    while(running) {
 			    try {
-			    	bytes=inputStream.read(buffer);
-			    	if(bytes<0) {
-			    		Log.e("Connection.run","read returned "+bytes+" bytes");
-			    		close();
-			    		break;
+			    	bytes=0;
+			    	while(bytes!=HEADER_SIZE) {
+			    	    bytes+=inputStream.read(header,bytes,HEADER_SIZE-bytes);
 			    	}
 			    	
+			    	// start the audio once we are connected
 			    	if(!connected) {
-			    		sendCommand("startAudioStream");
+			    		sendCommand("startAudioStream "+AUDIO_BUFFER_SIZE);
 			    		connected=true;
 			    	}
 			    	
-			    	if(bytes==buffer.length){
-			    		switch(buffer[0]) {
-			    		    case SPECTRUM_BUFFER:
-			    		    	processSpectrumBuffer(buffer);
-			    			    break;
-			    		    case AUDIO_BUFFER:
-			    		    	processAudioBuffer(buffer);
-			    		    	break;
-			    		}
-			    	} else {
-			    		System.err.println("Connection.run: socket read "+bytes+" bytes!");
-			    	}
+			    	switch(header[0]) {
+			    		case SPECTRUM_BUFFER:
+			    			bytes=0;
+					    	while(bytes!=BUFFER_SIZE) {
+					    	    bytes+=inputStream.read(spectrumBuffer,bytes,BUFFER_SIZE-bytes);
+					    	}
+			    		    processSpectrumBuffer(header,spectrumBuffer);
+			    			break;
+			    		case AUDIO_BUFFER:
+			    			bytes=0;
+					    	while(bytes!=AUDIO_BUFFER_SIZE) {
+					    	    bytes+=inputStream.read(audioBuffer,bytes,AUDIO_BUFFER_SIZE-bytes);
+					    	}
+			    		    processAudioBuffer(header,audioBuffer);
+			    		    break;
+			    		default:
+			    			Log.e("header","Invalid type "+header[0]);
+			    		    break;	
+			        }
 			    	
 			    } catch (Exception e) {
-			    	System.err.println("Connection.run: Exception reading socket: "+e.getMessage());
+			    	System.err.println("Connection.run: Exception reading socket: "+e.toString());
+			    	e.printStackTrace();
 			    }
 	   	    }
 		}
 	}
 	
-	private void processSpectrumBuffer(byte[] buffer) {
+	private void processSpectrumBuffer(byte[] header,byte[] buffer) {
 		int j;
 		String s;
 		
 		j=0;
-		while(buffer[j+32]!='\0') {
+		while(header[j+32]!='\0') {
 			j++;
 		}
-		s=new String(buffer,32,j);
+		s=new String(header,32,j);
 		sampleRate=Integer.parseInt(s);
 		
 		j=0;
-		while(buffer[j+40]!='\0') {
+		while(header[j+40]!='\0') {
 			j++;
 		}
-		s=new String(buffer,40,j);
+		s=new String(header,40,j);
 		meter=Integer.parseInt(s);
 		
 		for(int i=0;i<BUFFER_SIZE;i++) {
-			samples[i]=-(buffer[i+48]&0xFF)-30;
+			samples[i]=-(buffer[i]&0xFF)-30;
 		}
 		
 		if(spectrumView!=null) {
@@ -103,37 +124,39 @@ public class Connection extends Thread {
 		}
 	}
 	
-	private void processAudioBuffer(byte[] buffer) {
+	private void processAudioBuffer(byte[] header,byte[] buffer) {
 		
 		// decode 8 bit aLaw to 16 bit linear
-		byte[] decodedBuffer=new byte[BUFFER_SIZE*2];
-		int i;
-        short v;
-        for (int inIx=0, outIx=0; inIx < BUFFER_SIZE; inIx++) {
-            i=buffer[inIx+HEADER_SIZE]&0xFF;
-            v=aLawDecode[i];
-            // assumes BIGENDIAN
-            decodedBuffer[outIx++]=(byte)((v>>8)&0xFF);
-            decodedBuffer[outIx++]=(byte)(v&0xFF);
+        for (int i=0; i < AUDIO_BUFFER_SIZE; i++) {
+            decodedBuffer[i]=aLawDecode[buffer[i]&0xFF];
         }
-		
+        
+        int waitingToSend=audioSampleCount-audioTrack.getPlaybackHeadPosition();
+        //Log.d("AudioTrack","waitingToSend="+waitingToSend);
+        if(waitingToSend<AUDIO_BUFFER_SIZE) {
+            //audioTrack.pause();
+	    	audioSampleCount+=audioTrack.write(decodedBuffer,0,AUDIO_BUFFER_SIZE);
+        } else {
+        	Log.d("AudioTrack","dropping buffer");
+        }
+        //audioTrack.play();
 	}
 	
 	public synchronized void sendCommand(String command) {
 		
-		byte[] buffer=new byte[32];
+		// Log.i("sendCommand",command);
 		byte[] commandBytes=command.getBytes();
 		for(int i=0;i<32;i++) {
 			if(i<commandBytes.length) {
-				buffer[i]=commandBytes[i];
+				commandBuffer[i]=commandBytes[i];
 			} else {
-				buffer[i]=0;
+				commandBuffer[i]=0;
 			}
 		}
 		
 		if(socket!=null) {
 			try {
-				outputStream.write(buffer);
+				outputStream.write(commandBuffer);
 				outputStream.flush();
 			} catch (IOException e) {
 				System.err.println("Connection.sendCommand: IOException: "+e.getMessage());
@@ -154,13 +177,11 @@ public class Connection extends Thread {
         this.filterLow=filterLow;
         this.filterHigh=filterHigh;
         sendCommand("setFilter "+filterLow+" "+filterHigh);
-        //System.err.println("setFilter "+filterLow+" "+filterHigh);
     }
 
     public void setMode(int mode) {
         this.mode=mode;
         sendCommand("setMode "+mode);
-        //System.err.println("setMode " + mode);
     }
     
     public int getMode() {
@@ -216,10 +237,19 @@ public class Connection extends Thread {
 		this.spectrumView=spectrumView;
 	}
 	
+	public void setStatus(String message) {
+		status=message;
+	}
+	
+	public String getStatus() {
+		return status;
+	}
+	
 	private SpectrumView spectrumView;
 	
 	private static final int HEADER_SIZE=48;
 	private static final int BUFFER_SIZE=480;
+	private static final int AUDIO_BUFFER_SIZE=2000;
 	
 	private static final int SPECTRUM_BUFFER=0;
 	private static final int AUDIO_BUFFER=1;
@@ -243,10 +273,14 @@ public class Connection extends Thread {
     
     private int cwPitch=600;
     
-    int[] samples=new int[BUFFER_SIZE];
-
+    byte[] commandBuffer=new byte[32];
+    
+    private int[] samples=new int[BUFFER_SIZE];
+    private int audioSampleCount;
+    short[] decodedBuffer=new short[AUDIO_BUFFER_SIZE];
     
 	private AudioTrack audioTrack;
+	private String status=null;
 	
 	public static final int modeLSB=0;
     public static final int modeUSB=1;
