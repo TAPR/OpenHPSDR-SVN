@@ -31,8 +31,7 @@
 * @return
 */
 
-unsigned char audio_stream_buffer[480+48];
-
+void audio_stream_reset();
 void audio_stream_put_samples(short left_sample,short right_sample);
 
 void audio_stream_init(int port);

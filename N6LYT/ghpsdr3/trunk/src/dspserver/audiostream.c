@@ -38,13 +38,15 @@
 #include "client.h"
 #include "buffer.h"
 
+extern int audio_buffer_size;
+extern unsigned char* audio_buffer;
+extern int send_audio;
+
 static int sample_count=0;
 
-unsigned char audio_stream_buffer[480+48];
-int audio_stream_buffer_insert=0;
-int audio_stream_buffer_remove=0;
+static int audio_stream_buffer_insert=0;
 
-unsigned char encodetable[65536];
+static unsigned char encodetable[65536];
 
 unsigned char alaw(short sample);
 
@@ -65,19 +67,23 @@ void audio_stream_init(int receiver) {
 * @return
 */
 
+void audio_stream_reset() {
+    audio_stream_buffer_insert=0;
+}
+
 void audio_stream_put_samples(short left_sample,short right_sample) {
 
     // samples are delivered at 48K
     // output to stream at 8K (1 in 6)
     if(sample_count==0) {
         // use this sample and convert to a-law (mono)
-        audio_stream_buffer[audio_stream_buffer_insert+48]=alaw((left_sample+right_sample)/2);
-        audio_stream_buffer_insert++;
-        if(audio_stream_buffer_insert==480) {
-            audio_stream_buffer[0]=AUDIO_BUFFER;
-            client_send_audio(480);
-            audio_stream_buffer_insert=0;
-        }
+            audio_buffer[audio_stream_buffer_insert+48]=alaw((left_sample+right_sample)/2);
+            audio_stream_buffer_insert++;
+            if(audio_stream_buffer_insert==audio_buffer_size) {
+                audio_buffer[0]=AUDIO_BUFFER;
+                client_send_audio();
+                audio_stream_buffer_insert=0;
+            }
     }
     sample_count++;
     if(sample_count==6) {

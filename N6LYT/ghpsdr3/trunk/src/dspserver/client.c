@@ -38,6 +38,7 @@
 #include <semaphore.h>
 #include <math.h>
 #include <time.h>
+#include "client.h"
 #include "ozy.h"
 #include "audiostream.h"
 #include "main.h"
@@ -49,19 +50,22 @@ static pthread_t client_thread_id;
 
 #define BASE_PORT 8000
 
-int port=BASE_PORT;
+static int port=BASE_PORT;
 
-int serverSocket;
-int clientSocket;
-struct sockaddr_in server;
-struct sockaddr_in client;
-socklen_t addrlen;
+static int serverSocket;
+static int clientSocket;
+static struct sockaddr_in server;
+static struct sockaddr_in client;
+static socklen_t addrlen;
 
 #define SAMPLE_BUFFER_SIZE 4096
-float spectrumBuffer[SAMPLE_BUFFER_SIZE];
+static float spectrumBuffer[SAMPLE_BUFFER_SIZE];
 
-float meter;
-int smeter;
+int audio_buffer_size;
+unsigned char* audio_buffer;
+int send_audio=0;
+
+static float meter;
 
 static sem_t network_semaphore;
 
@@ -70,9 +74,8 @@ void client_send_samples(int size);
 void client_set_samples(float* samples,int size);
 
 #define PREFIX 48
-unsigned char* client_samples;
+static unsigned char* client_samples;
 
-int send_audio=0;
 
 int rejectAddress(char* address) {
     int result=0;
@@ -98,6 +101,11 @@ void client_init(int receiver) {
     sem_init(&network_semaphore,0,1);
 
     signal(SIGPIPE, SIG_IGN);
+
+    audio_buffer_size=2000;
+    audio_buffer=malloc(audio_buffer_size+PREFIX);
+
+fprintf(stderr,"client_init audio_buffer_size=%d audio_buffer=%ld\n",audio_buffer_size,audio_buffer);
 
     port=BASE_PORT+receiver;
     clientSocket=-1;
@@ -233,11 +241,21 @@ fprintf(stderr,"client_thread: listening on port %d\n",port);
                             token=strtok(NULL," ");
                             gain=atoi(token);
                             SetRXOutputGain(0,0,(double)gain/100.0);
-fprintf(stderr,"SetRXOutputGain %f\n",(double)gain/100.0);
                         } else if(strcmp(token,"startAudioStream")==0) {
+                            token=strtok(NULL," ");
+                            if(token==NULL) {
+                                audio_buffer_size=480;
+                            } else {
+                                audio_buffer_size=atoi(token);
+                            }
+                            free(audio_buffer);
+                            audio_buffer=malloc(audio_buffer_size+PREFIX);
+                            audio_stream_reset();
                             send_audio=1;
+fprintf(stderr,"startAudioStream %d send_audio=%d\n",audio_buffer_size,send_audio);
                         } else if(strcmp(token,"stopAudioStream")==0) {
                             send_audio=0;
+fprintf(stderr,"stopAudioStream send_audio=%d\n",send_audio);
                         }
                     } else {
                     }
@@ -251,6 +269,8 @@ fprintf(stderr,"SetRXOutputGain %f\n",(double)gain/100.0);
         }
         send_audio=0;
         clientSocket=-1;
+fprintf(stderr,"client disconnected send_audio=%d\n",send_audio);
+
     }
 }
 
@@ -268,20 +288,20 @@ void client_send_samples(int size) {
     }
 }
 
-void client_send_audio(int size) {
+void client_send_audio() {
     int rc;
-    if(send_audio) {
         if(clientSocket!=-1) {
             sem_wait(&network_semaphore);
-                rc=send(clientSocket,audio_stream_buffer,size+PREFIX,0);
-                if(rc<0) {
-                    //perror("client_send_audio failed");
+                if(send_audio) {
+                    rc=send(clientSocket,audio_buffer,audio_buffer_size+PREFIX,0);
+                    if(rc!=(audio_buffer_size+PREFIX)) {
+                        fprintf(stderr,"client_send_audio sent %d bytes",rc);
+                    }
                 }
             sem_post(&network_semaphore);
         } else {
             //fprintf(stderr,"client_send_audio: clientSocket==-1\n");
         }
-    }
 }
 
 void client_set_samples(float* samples,int size) {

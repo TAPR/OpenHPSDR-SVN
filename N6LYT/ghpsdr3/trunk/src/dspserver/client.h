@@ -26,3 +26,4 @@
 */
 
 void client_init(int receiver);
+void client_send_audio();

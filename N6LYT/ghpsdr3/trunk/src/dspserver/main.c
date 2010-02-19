@@ -170,12 +170,11 @@ int main(int argc,char* argv[]) {
     reset_for_buflen(0,1024);
     reset_for_buflen(1,1024);
 
-    // initialize ozy
-    ozy_init();
-
-
     client_init(receiver);
     audio_stream_init(receiver);
+
+    // initialize ozy
+    ozy_init();
 
     while(1) {
         sleep(10000);
