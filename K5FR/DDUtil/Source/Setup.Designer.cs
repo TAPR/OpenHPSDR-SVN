@@ -315,6 +315,8 @@ namespace DataDecoder
             this.btnPwr = new System.Windows.Forms.Button();
             this.tabOther = new System.Windows.Forms.TabPage();
             this.grpMacSw = new System.Windows.Forms.GroupBox();
+            this.label227 = new System.Windows.Forms.Label();
+            this.txtMacSwMsg = new System.Windows.Forms.TextBox();
             this.txtMacSwOff = new System.Windows.Forms.TextBox();
             this.label226 = new System.Windows.Forms.Label();
             this.txtMacSwOn = new System.Windows.Forms.TextBox();
@@ -1128,6 +1130,13 @@ namespace DataDecoder
             this.alpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.alpha9500ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.acomAntDefaultToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.antToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.recallToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem6 = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem7 = new System.Windows.Forms.ToolStripMenuItem();
+            this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem8 = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem9 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.enableErrorLoggingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openErrorLogToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -1173,6 +1182,7 @@ namespace DataDecoder
             this.SwitchPort = new System.IO.Ports.SerialPort(this.components);
             this.KnobPort = new System.IO.Ports.SerialPort(this.components);
             this.MacroPort = new System.IO.Ports.SerialPort(this.components);
+            this.txtVolts = new System.Windows.Forms.TextBox();
             this.tabControl.SuspendLayout();
             this.tabPorts.SuspendLayout();
             this.grpSlave.SuspendLayout();
@@ -2251,7 +2261,6 @@ namespace DataDecoder
             this.grpTKnob.TabIndex = 67;
             this.grpTKnob.TabStop = false;
             this.grpTKnob.Text = "Tuning Knob";
-            this.grpTKnob.Visible = false;
             // 
             // lblZR
             // 
@@ -3509,6 +3518,8 @@ namespace DataDecoder
             this.groupBox3.Controls.Add(this.btnPFfile);
             this.groupBox3.Controls.Add(this.label15);
             this.groupBox3.Controls.Add(this.txtProfLoc);
+            this.groupBox3.Controls.Add(this.btnProfiler);
+            this.groupBox3.Controls.Add(this.btnReStart);
             this.groupBox3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold);
             this.groupBox3.ForeColor = System.Drawing.Color.Blue;
             this.groupBox3.Location = new System.Drawing.Point(7, 234);
@@ -3523,7 +3534,7 @@ namespace DataDecoder
             // 
             this.btnPFfile.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
             this.btnPFfile.ForeColor = System.Drawing.Color.Navy;
-            this.btnPFfile.Location = new System.Drawing.Point(171, 43);
+            this.btnPFfile.Location = new System.Drawing.Point(90, 43);
             this.btnPFfile.Name = "btnPFfile";
             this.btnPFfile.Size = new System.Drawing.Size(57, 23);
             this.btnPFfile.TabIndex = 60;
@@ -5027,6 +5038,8 @@ namespace DataDecoder
             // 
             // grpMacSw
             // 
+            this.grpMacSw.Controls.Add(this.label227);
+            this.grpMacSw.Controls.Add(this.txtMacSwMsg);
             this.grpMacSw.Controls.Add(this.txtMacSwOff);
             this.grpMacSw.Controls.Add(this.label226);
             this.grpMacSw.Controls.Add(this.txtMacSwOn);
@@ -5036,17 +5049,42 @@ namespace DataDecoder
             this.grpMacSw.Controls.Add(this.cboMacSwPort);
             this.grpMacSw.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.grpMacSw.ForeColor = System.Drawing.Color.Blue;
-            this.grpMacSw.Location = new System.Drawing.Point(6, 237);
+            this.grpMacSw.Location = new System.Drawing.Point(6, 185);
             this.grpMacSw.Name = "grpMacSw";
-            this.grpMacSw.Size = new System.Drawing.Size(188, 66);
+            this.grpMacSw.Size = new System.Drawing.Size(188, 116);
             this.grpMacSw.TabIndex = 232;
             this.grpMacSw.TabStop = false;
             this.grpMacSw.Text = "Macro Switch";
             // 
+            // label227
+            // 
+            this.label227.AutoSize = true;
+            this.label227.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
+            this.label227.ForeColor = System.Drawing.Color.Navy;
+            this.label227.Location = new System.Drawing.Point(1, 91);
+            this.label227.Name = "label227";
+            this.label227.Size = new System.Drawing.Size(81, 13);
+            this.label227.TabIndex = 236;
+            this.label227.Text = "Event Message";
+            // 
+            // txtMacSwMsg
+            // 
+            this.txtMacSwMsg.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.25F, System.Drawing.FontStyle.Bold);
+            this.txtMacSwMsg.ForeColor = System.Drawing.Color.Firebrick;
+            this.txtMacSwMsg.Location = new System.Drawing.Point(2, 69);
+            this.txtMacSwMsg.Multiline = true;
+            this.txtMacSwMsg.Name = "txtMacSwMsg";
+            this.txtMacSwMsg.Size = new System.Drawing.Size(180, 20);
+            this.txtMacSwMsg.TabIndex = 30;
+            this.toolTip1.SetToolTip(this.txtMacSwMsg, "Enter a message to display when the Macro Switch event fires (leave blank for no " +
+                    "message).");
+            this.txtMacSwMsg.TextChanged += new System.EventHandler(this.txtMacSwMsg_TextChanged);
+            // 
             // txtMacSwOff
             // 
             this.txtMacSwOff.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
-            this.txtMacSwOff.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtMacSwOff.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.25F, System.Drawing.FontStyle.Bold);
+            this.txtMacSwOff.ForeColor = System.Drawing.Color.Firebrick;
             this.txtMacSwOff.Location = new System.Drawing.Point(115, 41);
             this.txtMacSwOff.Multiline = true;
             this.txtMacSwOff.Name = "txtMacSwOff";
@@ -5071,7 +5109,8 @@ namespace DataDecoder
             // txtMacSwOn
             // 
             this.txtMacSwOn.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
-            this.txtMacSwOn.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtMacSwOn.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.25F, System.Drawing.FontStyle.Bold);
+            this.txtMacSwOn.ForeColor = System.Drawing.Color.Firebrick;
             this.txtMacSwOn.Location = new System.Drawing.Point(28, 41);
             this.txtMacSwOn.Multiline = true;
             this.txtMacSwOn.Name = "txtMacSwOn";
@@ -5136,7 +5175,7 @@ namespace DataDecoder
             this.groupBox17.Controls.Add(this.txtVspMgr);
             this.groupBox17.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold);
             this.groupBox17.ForeColor = System.Drawing.Color.Blue;
-            this.groupBox17.Location = new System.Drawing.Point(6, 189);
+            this.groupBox17.Location = new System.Drawing.Point(202, 254);
             this.groupBox17.Name = "groupBox17";
             this.groupBox17.Size = new System.Drawing.Size(188, 47);
             this.groupBox17.TabIndex = 80;
@@ -5145,10 +5184,11 @@ namespace DataDecoder
             // 
             // txtVspMgr
             // 
+            this.txtVspMgr.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.25F, System.Drawing.FontStyle.Bold);
             this.txtVspMgr.ForeColor = System.Drawing.Color.Firebrick;
             this.txtVspMgr.Location = new System.Drawing.Point(10, 17);
             this.txtVspMgr.Name = "txtVspMgr";
-            this.txtVspMgr.Size = new System.Drawing.Size(170, 20);
+            this.txtVspMgr.Size = new System.Drawing.Size(170, 18);
             this.txtVspMgr.TabIndex = 29;
             this.toolTip1.SetToolTip(this.txtVspMgr, "VSP Manager\'s file location (double-click for file dialog).");
             this.txtVspMgr.DoubleClick += new System.EventHandler(this.txtVspMgr_DoubleClick);
@@ -5784,7 +5824,7 @@ namespace DataDecoder
             this.groupBox4.Controls.Add(this.label22);
             this.groupBox4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold);
             this.groupBox4.ForeColor = System.Drawing.Color.Blue;
-            this.groupBox4.Location = new System.Drawing.Point(6, 87);
+            this.groupBox4.Location = new System.Drawing.Point(6, 84);
             this.groupBox4.Name = "groupBox4";
             this.groupBox4.Size = new System.Drawing.Size(188, 100);
             this.groupBox4.TabIndex = 48;
@@ -14613,32 +14653,34 @@ namespace DataDecoder
             // 
             // btnProfiler
             // 
+            this.btnProfiler.AutoSize = true;
             this.btnProfiler.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.btnProfiler.BackColor = System.Drawing.Color.Beige;
             this.btnProfiler.FlatAppearance.BorderColor = System.Drawing.Color.Black;
             this.btnProfiler.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.5F, System.Drawing.FontStyle.Bold);
             this.btnProfiler.ForeColor = System.Drawing.Color.Navy;
-            this.btnProfiler.Location = new System.Drawing.Point(222, 365);
+            this.btnProfiler.Location = new System.Drawing.Point(183, 44);
             this.btnProfiler.Name = "btnProfiler";
-            this.btnProfiler.Size = new System.Drawing.Size(31, 20);
+            this.btnProfiler.Size = new System.Drawing.Size(81, 22);
             this.btnProfiler.TabIndex = 68;
-            this.btnProfiler.Text = "PO";
+            this.btnProfiler.Text = "Profiler Open";
             this.toolTip1.SetToolTip(this.btnProfiler, "Starts Flex Profiler program");
             this.btnProfiler.UseVisualStyleBackColor = false;
             this.btnProfiler.Click += new System.EventHandler(this.btnProfiler_Click);
             // 
             // btnReStart
             // 
+            this.btnReStart.AutoSize = true;
             this.btnReStart.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.btnReStart.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.btnReStart.FlatAppearance.BorderColor = System.Drawing.Color.Black;
             this.btnReStart.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.5F, System.Drawing.FontStyle.Bold);
             this.btnReStart.ForeColor = System.Drawing.Color.Navy;
-            this.btnReStart.Location = new System.Drawing.Point(256, 365);
+            this.btnReStart.Location = new System.Drawing.Point(291, 45);
             this.btnReStart.Name = "btnReStart";
-            this.btnReStart.Size = new System.Drawing.Size(31, 20);
+            this.btnReStart.Size = new System.Drawing.Size(84, 22);
             this.btnReStart.TabIndex = 69;
-            this.btnReStart.Text = "PC";
+            this.btnReStart.Text = "Profiler Close";
             this.toolTip1.SetToolTip(this.btnReStart, "Closes Flex Profiler program");
             this.btnReStart.UseVisualStyleBackColor = false;
             this.btnReStart.Click += new System.EventHandler(this.btnReStart_Click);
@@ -14647,7 +14689,7 @@ namespace DataDecoder
             // 
             this.txtTemp.BackColor = System.Drawing.Color.LightGreen;
             this.txtTemp.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
-            this.txtTemp.Location = new System.Drawing.Point(384, 364);
+            this.txtTemp.Location = new System.Drawing.Point(382, 364);
             this.txtTemp.Name = "txtTemp";
             this.txtTemp.Size = new System.Drawing.Size(50, 21);
             this.txtTemp.TabIndex = 62;
@@ -14684,7 +14726,7 @@ namespace DataDecoder
             // 
             this.btnSplit.BackColor = System.Drawing.Color.PaleTurquoise;
             this.btnSplit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnSplit.Location = new System.Drawing.Point(367, 366);
+            this.btnSplit.Location = new System.Drawing.Point(307, 366);
             this.btnSplit.Name = "btnSplit";
             this.btnSplit.Size = new System.Drawing.Size(14, 17);
             this.btnSplit.TabIndex = 77;
@@ -14694,7 +14736,7 @@ namespace DataDecoder
             // 
             // numSplit
             // 
-            this.numSplit.Location = new System.Drawing.Point(324, 365);
+            this.numSplit.Location = new System.Drawing.Point(263, 365);
             this.numSplit.Maximum = new decimal(new int[] {
             50,
             0,
@@ -14730,7 +14772,7 @@ namespace DataDecoder
             this.btnFZ.FlatAppearance.BorderColor = System.Drawing.Color.Black;
             this.btnFZ.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnFZ.ForeColor = System.Drawing.Color.Navy;
-            this.btnFZ.Location = new System.Drawing.Point(290, 365);
+            this.btnFZ.Location = new System.Drawing.Point(223, 365);
             this.btnFZ.Name = "btnFZ";
             this.btnFZ.Size = new System.Drawing.Size(31, 20);
             this.btnFZ.TabIndex = 83;
@@ -15137,7 +15179,8 @@ namespace DataDecoder
             this.optionsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.autoDriveToolStripMenuItem,
             this.tubeAmpsToolStripMenuItem,
-            this.acomAntDefaultToolStripMenuItem});
+            this.acomAntDefaultToolStripMenuItem,
+            this.antToolStripMenuItem});
             this.optionsToolStripMenuItem.Name = "optionsToolStripMenuItem";
             this.optionsToolStripMenuItem.Size = new System.Drawing.Size(56, 20);
             this.optionsToolStripMenuItem.Text = "Options";
@@ -15206,6 +15249,61 @@ namespace DataDecoder
             this.acomAntDefaultToolStripMenuItem.Size = new System.Drawing.Size(169, 22);
             this.acomAntDefaultToolStripMenuItem.Text = "Acom Ant Default";
             this.acomAntDefaultToolStripMenuItem.Click += new System.EventHandler(this.acomAntDefaultToolStripMenuItem_Click);
+            // 
+            // antToolStripMenuItem
+            // 
+            this.antToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.recallToolStripMenuItem,
+            this.saveToolStripMenuItem});
+            this.antToolStripMenuItem.Name = "antToolStripMenuItem";
+            this.antToolStripMenuItem.Size = new System.Drawing.Size(169, 22);
+            this.antToolStripMenuItem.Text = "Ant Profiles";
+            // 
+            // recallToolStripMenuItem
+            // 
+            this.recallToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripMenuItem6,
+            this.toolStripMenuItem7});
+            this.recallToolStripMenuItem.Name = "recallToolStripMenuItem";
+            this.recallToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.recallToolStripMenuItem.Text = "Recall";
+            // 
+            // toolStripMenuItem6
+            // 
+            this.toolStripMenuItem6.Name = "toolStripMenuItem6";
+            this.toolStripMenuItem6.Size = new System.Drawing.Size(152, 22);
+            this.toolStripMenuItem6.Text = "Profile 1";
+            this.toolStripMenuItem6.Click += new System.EventHandler(this.toolStripMenuItem6_Click);
+            // 
+            // toolStripMenuItem7
+            // 
+            this.toolStripMenuItem7.Name = "toolStripMenuItem7";
+            this.toolStripMenuItem7.Size = new System.Drawing.Size(152, 22);
+            this.toolStripMenuItem7.Text = "Profile 2";
+            this.toolStripMenuItem7.Click += new System.EventHandler(this.toolStripMenuItem7_Click);
+            // 
+            // saveToolStripMenuItem
+            // 
+            this.saveToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripMenuItem8,
+            this.toolStripMenuItem9});
+            this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
+            this.saveToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.saveToolStripMenuItem.Text = "Save";
+            // 
+            // toolStripMenuItem8
+            // 
+            this.toolStripMenuItem8.Name = "toolStripMenuItem8";
+            this.toolStripMenuItem8.Size = new System.Drawing.Size(152, 22);
+            this.toolStripMenuItem8.Text = "Profile 1";
+            this.toolStripMenuItem8.Click += new System.EventHandler(this.toolStripMenuItem8_Click);
+            // 
+            // toolStripMenuItem9
+            // 
+            this.toolStripMenuItem9.Name = "toolStripMenuItem9";
+            this.toolStripMenuItem9.Size = new System.Drawing.Size(152, 22);
+            this.toolStripMenuItem9.Text = "Profile 2";
+            this.toolStripMenuItem9.Click += new System.EventHandler(this.toolStripMenuItem9_Click);
             // 
             // toolsToolStripMenuItem
             // 
@@ -15573,6 +15671,18 @@ namespace DataDecoder
             this.MacroPort.RtsEnable = true;
             this.MacroPort.PinChanged += new System.IO.Ports.SerialPinChangedEventHandler(this.MacroPort_PinChanged);
             // 
+            // txtVolts
+            // 
+            this.txtVolts.BackColor = System.Drawing.Color.LightYellow;
+            this.txtVolts.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
+            this.txtVolts.Location = new System.Drawing.Point(328, 364);
+            this.txtVolts.Name = "txtVolts";
+            this.txtVolts.Size = new System.Drawing.Size(50, 21);
+            this.txtVolts.TabIndex = 85;
+            this.txtVolts.Text = "PAVolts";
+            this.txtVolts.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.toolTip1.SetToolTip(this.txtVolts, "Power Supply voltage.");
+            // 
             // Setup
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -15581,18 +15691,17 @@ namespace DataDecoder
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.ClientSize = new System.Drawing.Size(437, 412);
             this.ContextMenuStrip = this.contextMenuStrip1;
+            this.Controls.Add(this.txtVolts);
             this.Controls.Add(this.lblHighSWR);
             this.Controls.Add(this.txtAlcInd);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.lblAvg);
             this.Controls.Add(this.txtAvg);
             this.Controls.Add(this.txtTemp);
-            this.Controls.Add(this.btnReStart);
             this.Controls.Add(this.lblAnt);
             this.Controls.Add(this.tabControl);
             this.Controls.Add(this.txtSWR);
             this.Controls.Add(this.lblSWR);
-            this.Controls.Add(this.btnProfiler);
             this.Controls.Add(this.txtFwd);
             this.Controls.Add(this.lblFwd);
             this.Controls.Add(this.menuStrip1);
@@ -16873,6 +16982,16 @@ namespace DataDecoder
         private Label label226;
         private TextBox txtMacSwOn;
         private Label label225;
+        private Label label227;
+        private TextBox txtMacSwMsg;
+        private ToolStripMenuItem antToolStripMenuItem;
+        private ToolStripMenuItem recallToolStripMenuItem;
+        private ToolStripMenuItem saveToolStripMenuItem;
+        private ToolStripMenuItem toolStripMenuItem6;
+        private ToolStripMenuItem toolStripMenuItem7;
+        private ToolStripMenuItem toolStripMenuItem8;
+        private ToolStripMenuItem toolStripMenuItem9;
+        private TextBox txtVolts;
 
     }
 }
