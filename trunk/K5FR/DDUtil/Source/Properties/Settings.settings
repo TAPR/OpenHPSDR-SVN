@@ -2,7 +2,7 @@
 <SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="DataDecoder.Properties" GeneratedClassName="Settings">
   <Profiles />
   <Settings>
-    <Setting Name="portInv" Type="System.String" Scope="User">
+    <Setting Name="r" Type="System.String" Scope="User">
       <Value Profile="(Default)">500</Value>
     </Setting>
     <Setting Name="DataFile" Type="System.String" Scope="User">
@@ -126,22 +126,22 @@ RCP4 - WriteLog</Value>
       <Value Profile="(Default)">-1</Value>
     </Setting>
     <Setting Name="RotorPort" Type="System.Int32" Scope="User">
-      <Value Profile="(Default)">-1</Value>
+      <Value Profile="(Default)">0</Value>
     </Setting>
     <Setting Name="TabOpen" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">0</Value>
     </Setting>
     <Setting Name="RCP1RotorPort" Type="System.Int32" Scope="User">
-      <Value Profile="(Default)">-1</Value>
+      <Value Profile="(Default)">0</Value>
     </Setting>
     <Setting Name="RCP2RotorPort" Type="System.Int32" Scope="User">
-      <Value Profile="(Default)">-1</Value>
+      <Value Profile="(Default)">0</Value>
     </Setting>
     <Setting Name="RCP3RotorPort" Type="System.Int32" Scope="User">
-      <Value Profile="(Default)">-1</Value>
+      <Value Profile="(Default)">0</Value>
     </Setting>
     <Setting Name="RCP4RotorPort" Type="System.Int32" Scope="User">
-      <Value Profile="(Default)">-1</Value>
+      <Value Profile="(Default)">0</Value>
     </Setting>
     <Setting Name="WindowGeometry" Type="System.String" Scope="User">
       <Value Profile="(Default)">""</Value>
@@ -180,13 +180,13 @@ RCP4 - WriteLog</Value>
       <Value Profile="(Default)">""</Value>
     </Setting>
     <Setting Name="AccPort" Type="System.Int32" Scope="User">
-      <Value Profile="(Default)">-1</Value>
+      <Value Profile="(Default)">0</Value>
     </Setting>
     <Setting Name="RadioPort" Type="System.Int32" Scope="User">
-      <Value Profile="(Default)">-1</Value>
+      <Value Profile="(Default)">0</Value>
     </Setting>
     <Setting Name="LogPort" Type="System.Int32" Scope="User">
-      <Value Profile="(Default)">-1</Value>
+      <Value Profile="(Default)">0</Value>
     </Setting>
     <Setting Name="lptNum" Type="System.String" Scope="User">
       <Value Profile="(Default)">0</Value>
@@ -195,22 +195,22 @@ RCP4 - WriteLog</Value>
       <Value Profile="(Default)">-1</Value>
     </Setting>
     <Setting Name="cboRCP2" Type="System.Int32" Scope="User">
-      <Value Profile="(Default)">-1</Value>
+      <Value Profile="(Default)">0</Value>
     </Setting>
     <Setting Name="cboRCP3" Type="System.Int32" Scope="User">
-      <Value Profile="(Default)">-1</Value>
+      <Value Profile="(Default)">0</Value>
     </Setting>
     <Setting Name="cboRCP4" Type="System.Int32" Scope="User">
-      <Value Profile="(Default)">-1</Value>
+      <Value Profile="(Default)">0</Value>
     </Setting>
     <Setting Name="StepPortNum" Type="System.Int32" Scope="User">
-      <Value Profile="(Default)">-1</Value>
+      <Value Profile="(Default)">0</Value>
     </Setting>
     <Setting Name="lptPort" Type="System.String" Scope="User">
       <Value Profile="(Default)">0</Value>
     </Setting>
     <Setting Name="cboPW1" Type="System.Int32" Scope="User">
-      <Value Profile="(Default)">-1</Value>
+      <Value Profile="(Default)">0</Value>
     </Setting>
     <Setting Name="DogEnab" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
@@ -297,7 +297,7 @@ RCP4 - WriteLog</Value>
       <Value Profile="(Default)">False</Value>
     </Setting>
     <Setting Name="AlphaPort" Type="System.Int32" Scope="User">
-      <Value Profile="(Default)">-1</Value>
+      <Value Profile="(Default)">0</Value>
     </Setting>
     <Setting Name="AlphaInt" Type="System.String" Scope="User">
       <Value Profile="(Default)">60000</Value>
@@ -459,7 +459,7 @@ RCP4 - WriteLog</Value>
       <Value Profile="(Default)">False</Value>
     </Setting>
     <Setting Name="PMport" Type="System.Int32" Scope="User">
-      <Value Profile="(Default)">-1</Value>
+      <Value Profile="(Default)">0</Value>
     </Setting>
     <Setting Name="PMcom" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">-1</Value>
@@ -471,7 +471,7 @@ RCP4 - WriteLog</Value>
       <Value Profile="(Default)">False</Value>
     </Setting>
     <Setting Name="RepeatPort" Type="System.Int32" Scope="User">
-      <Value Profile="(Default)">-1</Value>
+      <Value Profile="(Default)">0</Value>
     </Setting>
     <Setting Name="SplitNum" Type="System.Decimal" Scope="User">
       <Value Profile="(Default)">1</Value>
@@ -660,7 +660,7 @@ RCP4 - WriteLog</Value>
       <Value Profile="(Default)">False</Value>
     </Setting>
     <Setting Name="PwrPort" Type="System.Int32" Scope="User">
-      <Value Profile="(Default)">-1</Value>
+      <Value Profile="(Default)">0</Value>
     </Setting>
     <Setting Name="PwrSDRfile" Type="System.String" Scope="User">
       <Value Profile="(Default)">""</Value>
@@ -693,7 +693,7 @@ RCP4 - WriteLog</Value>
       <Value Profile="(Default)">0</Value>
     </Setting>
     <Setting Name="SPEport" Type="System.Int32" Scope="User">
-      <Value Profile="(Default)">-1</Value>
+      <Value Profile="(Default)">0</Value>
     </Setting>
     <Setting Name="SPEenab" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
@@ -708,10 +708,10 @@ RCP4 - WriteLog</Value>
       <Value Profile="(Default)">False</Value>
     </Setting>
     <Setting Name="cboSwPort" Type="System.Int32" Scope="User">
-      <Value Profile="(Default)">-1</Value>
+      <Value Profile="(Default)">0</Value>
     </Setting>
     <Setting Name="cboKnobPort" Type="System.Int32" Scope="User">
-      <Value Profile="(Default)">-1</Value>
+      <Value Profile="(Default)">0</Value>
     </Setting>
     <Setting Name="chkKnobEnab" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
@@ -753,13 +753,52 @@ RCP4 - WriteLog</Value>
       <Value Profile="(Default)">False</Value>
     </Setting>
     <Setting Name="cboMacSwPort" Type="System.Int32" Scope="User">
-      <Value Profile="(Default)">-1</Value>
+      <Value Profile="(Default)">0</Value>
     </Setting>
     <Setting Name="txtMacSwOn" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
     <Setting Name="txtMacSwOff" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="txtMacSwMsg" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="antPro1RtrPort" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="antPro2RtrPort" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="antPro1RtrCom" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="antPro2RtrCom" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="antPro1RtrModel" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="antPro2RtrModel" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="antPro1RtrSpeed" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="antPro2RtrSpeed" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="antPro1StepPort" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="antPro2StepPort" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="antPro1StepCom" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="antPro2StepCom" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">0</Value>
     </Setting>
   </Settings>
 </SettingsFile>

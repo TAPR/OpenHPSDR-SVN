@@ -26,12 +26,12 @@ namespace DataDecoder.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("500")]
-        public string portInv {
+        public string r {
             get {
-                return ((string)(this["portInv"]));
+                return ((string)(this["r"]));
             }
             set {
-                this["portInv"] = value;
+                this["r"] = value;
             }
         }
         
@@ -505,7 +505,7 @@ namespace DataDecoder.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("-1")]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
         public int RotorPort {
             get {
                 return ((int)(this["RotorPort"]));
@@ -529,7 +529,7 @@ namespace DataDecoder.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("-1")]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
         public int RCP1RotorPort {
             get {
                 return ((int)(this["RCP1RotorPort"]));
@@ -541,7 +541,7 @@ namespace DataDecoder.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("-1")]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
         public int RCP2RotorPort {
             get {
                 return ((int)(this["RCP2RotorPort"]));
@@ -553,7 +553,7 @@ namespace DataDecoder.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("-1")]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
         public int RCP3RotorPort {
             get {
                 return ((int)(this["RCP3RotorPort"]));
@@ -565,7 +565,7 @@ namespace DataDecoder.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("-1")]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
         public int RCP4RotorPort {
             get {
                 return ((int)(this["RCP4RotorPort"]));
@@ -721,7 +721,7 @@ namespace DataDecoder.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("-1")]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
         public int AccPort {
             get {
                 return ((int)(this["AccPort"]));
@@ -733,7 +733,7 @@ namespace DataDecoder.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("-1")]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
         public int RadioPort {
             get {
                 return ((int)(this["RadioPort"]));
@@ -745,7 +745,7 @@ namespace DataDecoder.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("-1")]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
         public int LogPort {
             get {
                 return ((int)(this["LogPort"]));
@@ -781,7 +781,7 @@ namespace DataDecoder.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("-1")]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
         public int cboRCP2 {
             get {
                 return ((int)(this["cboRCP2"]));
@@ -793,7 +793,7 @@ namespace DataDecoder.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("-1")]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
         public int cboRCP3 {
             get {
                 return ((int)(this["cboRCP3"]));
@@ -805,7 +805,7 @@ namespace DataDecoder.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("-1")]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
         public int cboRCP4 {
             get {
                 return ((int)(this["cboRCP4"]));
@@ -817,7 +817,7 @@ namespace DataDecoder.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("-1")]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
         public int StepPortNum {
             get {
                 return ((int)(this["StepPortNum"]));
@@ -841,7 +841,7 @@ namespace DataDecoder.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("-1")]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
         public int cboPW1 {
             get {
                 return ((int)(this["cboPW1"]));
@@ -1189,7 +1189,7 @@ namespace DataDecoder.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("-1")]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
         public int AlphaPort {
             get {
                 return ((int)(this["AlphaPort"]));
@@ -1837,7 +1837,7 @@ namespace DataDecoder.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("-1")]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
         public int PMport {
             get {
                 return ((int)(this["PMport"]));
@@ -1885,7 +1885,7 @@ namespace DataDecoder.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("-1")]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
         public int RepeatPort {
             get {
                 return ((int)(this["RepeatPort"]));
@@ -2641,7 +2641,7 @@ namespace DataDecoder.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("-1")]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
         public int PwrPort {
             get {
                 return ((int)(this["PwrPort"]));
@@ -2773,7 +2773,7 @@ namespace DataDecoder.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("-1")]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
         public int SPEport {
             get {
                 return ((int)(this["SPEport"]));
@@ -2833,7 +2833,7 @@ namespace DataDecoder.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("-1")]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
         public int cboSwPort {
             get {
                 return ((int)(this["cboSwPort"]));
@@ -2845,7 +2845,7 @@ namespace DataDecoder.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("-1")]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
         public int cboKnobPort {
             get {
                 return ((int)(this["cboKnobPort"]));
@@ -3013,7 +3013,7 @@ namespace DataDecoder.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("-1")]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
         public int cboMacSwPort {
             get {
                 return ((int)(this["cboMacSwPort"]));
@@ -3044,6 +3044,162 @@ namespace DataDecoder.Properties {
             }
             set {
                 this["txtMacSwOff"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string txtMacSwMsg {
+            get {
+                return ((string)(this["txtMacSwMsg"]));
+            }
+            set {
+                this["txtMacSwMsg"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int antPro1RtrPort {
+            get {
+                return ((int)(this["antPro1RtrPort"]));
+            }
+            set {
+                this["antPro1RtrPort"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int antPro2RtrPort {
+            get {
+                return ((int)(this["antPro2RtrPort"]));
+            }
+            set {
+                this["antPro2RtrPort"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int antPro1RtrCom {
+            get {
+                return ((int)(this["antPro1RtrCom"]));
+            }
+            set {
+                this["antPro1RtrCom"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int antPro2RtrCom {
+            get {
+                return ((int)(this["antPro2RtrCom"]));
+            }
+            set {
+                this["antPro2RtrCom"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int antPro1RtrModel {
+            get {
+                return ((int)(this["antPro1RtrModel"]));
+            }
+            set {
+                this["antPro1RtrModel"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int antPro2RtrModel {
+            get {
+                return ((int)(this["antPro2RtrModel"]));
+            }
+            set {
+                this["antPro2RtrModel"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int antPro1RtrSpeed {
+            get {
+                return ((int)(this["antPro1RtrSpeed"]));
+            }
+            set {
+                this["antPro1RtrSpeed"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int antPro2RtrSpeed {
+            get {
+                return ((int)(this["antPro2RtrSpeed"]));
+            }
+            set {
+                this["antPro2RtrSpeed"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int antPro1StepPort {
+            get {
+                return ((int)(this["antPro1StepPort"]));
+            }
+            set {
+                this["antPro1StepPort"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int antPro2StepPort {
+            get {
+                return ((int)(this["antPro2StepPort"]));
+            }
+            set {
+                this["antPro2StepPort"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int antPro1StepCom {
+            get {
+                return ((int)(this["antPro1StepCom"]));
+            }
+            set {
+                this["antPro1StepCom"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int antPro2StepCom {
+            get {
+                return ((int)(this["antPro2StepCom"]));
+            }
+            set {
+                this["antPro2StepCom"] = value;
             }
         }
     }

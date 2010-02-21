@@ -354,9 +354,9 @@ namespace DataDecoder
             //setup radio port timer
             pollTimer = new System.Timers.Timer();
             pollTimer.Elapsed += new System.Timers.ElapsedEventHandler(pollTimer_Elapsed);
-            str = set.portInv;
+            str = set.r;
             txtInv.Text = str;
-            pollInt = Convert.ToDouble(set.portInv);
+            pollInt = Convert.ToDouble(set.r);
             if (pollInt == 0) pollInt = 1000.0;
             pollTimer.Interval = pollInt;  // 1000 = 1 second
             pollTimer.Enabled = false;
@@ -449,7 +449,7 @@ namespace DataDecoder
 
             // set Radio Serial port to the last one used
             try { cboCAT.SelectedIndex = set.RadioPort; }
-            catch { cboCAT.SelectedIndex = -1; BadPort("Radio CAT"); }
+            catch { cboCAT.SelectedIndex = 0; BadPort("Radio CAT"); }
             txtInv.Text = Convert.ToString(pollInt);
 
             txtProfLoc.Text = set.ProfLoc;
@@ -457,11 +457,11 @@ namespace DataDecoder
 
             // set Acc Serial (passive listener) port to the last one used
             try { cboSerAcc.SelectedIndex = set.AccPort; }
-            catch { cboSerAcc.SelectedIndex = -1; BadPort("Passive Listener"); }
+            catch { cboSerAcc.SelectedIndex = 0; BadPort("Passive Listener"); }
 
             // set Follow Radio port
             try { cboRadio.SelectedIndex = set.followRadio; }
-            catch { cboRadio.SelectedIndex = -1; BadPort("Follow Radio"); }
+            catch { cboRadio.SelectedIndex = 0; BadPort("Follow Radio"); }
 
             chkFollow.Checked = set.followChk;
             if (chkFollow.Checked == false)
@@ -471,11 +471,11 @@ namespace DataDecoder
 
             // set Logger Serial (RCP1) port to the last one used
             try { cboLogPort.SelectedIndex = set.LogPort; }
-            catch { cboLogPort.SelectedIndex = -1; BadPort("RCP1 CAT"); }
+            catch { cboLogPort.SelectedIndex = 0; BadPort("RCP1 CAT"); }
 
             // set LP100 Serial port to the last one used
             try { cboLPport.SelectedIndex = set.LPportNum; }
-            catch { cboLPport.SelectedIndex = -1; BadPort("LP-100"); }
+            catch { cboLPport.SelectedIndex = 0; BadPort("LP-100"); }
             txtLPint.Text = Convert.ToString(set.LPint);
             chkLPenab.Checked = set.LPenab;
             switch (set.rb100)  // which model?
@@ -487,47 +487,47 @@ namespace DataDecoder
 
             // set SteppIR Data Serial port to the last one used
             try { cboStep.SelectedIndex = set.StepPortNum; }
-            catch { cboStep.SelectedIndex = -1; BadPort("SteppIR Data"); }
+            catch { cboStep.SelectedIndex = 0; BadPort("SteppIR Data"); }
             chkStep.Checked = set.StepEnab;
             txtStepInv.Text = set.StepInv;
             cboStepCom.SelectedIndex = set.StepCom;
 
             // Set RCP2 serial port to last one used
             try { cboRCP2.SelectedIndex = set.cboRCP2; }
-            catch { cboRCP2.SelectedIndex = -1; BadPort("RCP2 CAT"); }
+            catch { cboRCP2.SelectedIndex = 0; BadPort("RCP2 CAT"); }
             chkRCP2.Checked = set.chkRCP2;
 
             // Set RCP3 serial port to last one used
             try { cboRCP3.SelectedIndex = set.cboRCP3; }
-            catch { cboRCP3.SelectedIndex = -1; BadPort("RCP3 CAT"); }
+            catch { cboRCP3.SelectedIndex = 0; BadPort("RCP3 CAT"); }
             chkRCP3.Checked = set.chkRCP3;
 
             // Set RCP4 serial port to last one used
             try { cboRCP4.SelectedIndex = set.cboRCP4; }
-            catch { cboRCP4.SelectedIndex = -1; BadPort("RCP4 CAT"); }
+            catch { cboRCP4.SelectedIndex = 0; BadPort("RCP4 CAT"); }
             chkRCP4.Checked = set.chkRCP4;
 
             // Set PW1 serial port to last port used
             try { cboPW1.SelectedIndex = set.cboPW1; }
-            catch { cboPW1.SelectedIndex = -1; BadPort("PW1 CAT"); }
+            catch { cboPW1.SelectedIndex = 0; BadPort("PW1 CAT"); }
             chkPW1.Checked = set.chkPW1;
             chkDisBcast.Checked = set.chkPW1db;
             txtPW1ta.Text = set.txtPW1ta;
             // Set RCP1 Rotor port to last one used
             try { cboRCP1Rotor.SelectedIndex = set.RCP1RotorPort; }
-            catch { cboRCP1Rotor.SelectedIndex = -1; BadPort("RCP1 Rotor"); }
+            catch { cboRCP1Rotor.SelectedIndex = 0; BadPort("RCP1 Rotor"); }
 
             // Set RCP2 Rotor port to last one used
             try { cboRCP2Rotor.SelectedIndex = set.RCP2RotorPort; }
-            catch { cboRCP2Rotor.SelectedIndex = -1; BadPort("RCP2 Rotor"); }
+            catch { cboRCP2Rotor.SelectedIndex = 0; BadPort("RCP2 Rotor"); }
 
             // Set RCP3 Rotor port to last one used
             try { cboRCP3Rotor.SelectedIndex = set.RCP3RotorPort; }
-            catch { cboRCP3Rotor.SelectedIndex = -1; BadPort("RCP3 Rotor"); }
+            catch { cboRCP3Rotor.SelectedIndex = 0; BadPort("RCP3 Rotor"); }
 
             // Set RCP4 Rotor port to last one used
             try { cboRCP4Rotor.SelectedIndex = set.RCP4RotorPort; }
-            catch { cboRCP4Rotor.SelectedIndex = -1; BadPort("RCP4 Rotor"); }
+            catch { cboRCP4Rotor.SelectedIndex = 0; BadPort("RCP4 Rotor"); }
 
             mSplashScreen.SetProgress("Initializing Features", 0.8);
 
@@ -618,6 +618,7 @@ namespace DataDecoder
             txtMacSwOn.Text = set.txtMacSwOn;
             txtMacSwOff.Text = set.txtMacSwOff;
             chkMacSwEnab.Checked = set.chkMacSwEnab;
+            txtMacSwMsg.Text = set.txtMacSwMsg;
 
             stsTX = set.stsTX;
             stsOper = set.stsOper;
@@ -837,6 +838,31 @@ namespace DataDecoder
                 catch { }
             }
         }
+        // Write Volts reading to txt box
+        delegate void SetVoltsCallback(string text);
+        private void SetVolts(string text)
+        {
+            if (!closing)
+            {
+                try
+                {
+                    if (this.txtVolts.InvokeRequired)
+                    {
+                        SetVoltsCallback d = new SetVoltsCallback(SetVolts);
+                        this.Invoke(d, new object[] { text });
+                    }
+                    else
+                    {
+                        txtVolts.Text = text;
+                        if (Convert.ToInt32(text) < 13 || Convert.ToInt32(text) > 14.5)
+                            txtVolts.BackColor = Color.Red;
+                        else
+                            txtVolts.BackColor = Color.LightYellow;
+                    }
+                }
+                catch { }
+            }
+        }
         // Write Temp reading to txt box
         delegate void SetTempCallback(string text);
         private void SetTemp(string text)
@@ -911,6 +937,19 @@ namespace DataDecoder
                     else
                     {
                         txtSWR.Text = text;
+                        if (chkSWR.Checked && Convert.ToDecimal(text) > numSWR.Value)
+                        {
+                            WriteToPort("ZZTI1;", iSleep);
+                            lblHighSWR.Visible = true;
+                            // Display a message that the SWR alarm value was exceeded.
+                            MessageBox.Show(this,
+                                "The SWR alarm value setting has been exceeded.\r\r" +
+                                "PowerSDR's transmit ability is now disabled.\r\r" +
+                                "Press OK to dismiss this message and to Reset the SWR Alarm",
+                                "High SWR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            lblHighSWR.Visible = false;
+                            WriteToPort("ZZTI0;", iSleep);
+                        }
                         double clr = Convert.ToDouble(text);
 
                         if (clr > 2 && clr < 3)
@@ -1732,7 +1771,7 @@ namespace DataDecoder
             {
                 pollTimer.Enabled = false;
                 pollInt = Convert.ToDouble(txtInv.Text);
-                set.portInv = txtInv.Text;
+                set.r = txtInv.Text;
                 set.Save();     // save new polling interval to system settings
                 pollTimer.Interval = pollInt;
                 pollTimer.Enabled = true;
@@ -1937,17 +1976,20 @@ namespace DataDecoder
         private void cboCAT_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (sp.isOpen) sp.Close();
-            sp.Name = cboCAT.SelectedItem.ToString();
             try
             {
-                sp.Open();
+                if (cboCAT.SelectedIndex > 0)
+                {
+                    sp.Name = cboCAT.SelectedItem.ToString();
+                    sp.Open();
+                }
             }
             catch
             {
                 MessageBox.Show("The Radio serial port " + sp.Name +
                    " cannot be opened!\n", "Port Error",
                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                cboCAT.SelectedText = "";
+                cboCAT.SelectedIndex = 0; ;
                 return;
             }
             // save new port setting
@@ -3551,7 +3593,19 @@ namespace DataDecoder
                 this.Invoke(d, new object[] { text });
             }
             else
-            { btnPwr.Text = text; mini.btnPwr.Text = text; }
+            {
+                btnPwr.Text = text; mini.btnPwr.Text = text;
+                if (text == "Off")
+                {
+                    btnPwr.BackColor = Color.Empty;
+                    mini.btnPwr.BackColor = Color.Empty;
+                }
+                else if (text == "On")
+                {
+                    btnPwr.BackColor = Color.Lime;
+                    mini.btnPwr.BackColor = Color.Lime;
+                }
+            }
         }
         // Write to Oper button
         delegate void SetOperCallback(string text);
@@ -3563,7 +3617,29 @@ namespace DataDecoder
                 this.Invoke(d, new object[] { text });
             }
             else
-            { btnOper.Text = text; mini.btnOper.Text = text; }
+            {
+                btnOper.Text = text; mini.btnOper.Text = text;
+                if (text == "Off")
+                {
+                    btnOper.BackColor = Color.Empty;
+                    mini.btnOper.BackColor = Color.Empty;
+                }
+                else if (text == "Stby")
+                {
+                    btnOper.BackColor = Color.Yellow;
+                    mini.btnOper.BackColor = Color.Yellow;
+                }
+                else if (text == "Wait")
+                {
+                    btnOper.BackColor = Color.Pink;
+                    mini.btnOper.BackColor = Color.Pink;
+                }
+                else if (text == "Oper")
+                {
+                    btnOper.BackColor = Color.Lime;
+                    mini.btnOper.BackColor = Color.Lime;
+                }
+            }
         }
         // Write to Tune button
         delegate void SetTuneCallback(string text);
@@ -3574,7 +3650,25 @@ namespace DataDecoder
                 SetTuneCallback d = new SetTuneCallback(SetTune);
                 this.Invoke(d, new object[] { text });
             }
-            else { btnTune.Text = text; mini.btnTune.Text = text; }
+            else
+            {
+                btnTune.Text = text; mini.btnTune.Text = text;
+                if (text == "Off")
+                {
+                    btnTune.BackColor = Color.Empty;
+                    mini.btnTune.BackColor = Color.Empty;
+                }
+                else if (text == "Man")
+                {
+                    btnTune.BackColor = Color.Yellow;
+                    mini.btnTune.BackColor = Color.Yellow;
+                }
+                else if (text == "Auto")
+                {
+                    btnTune.BackColor = Color.Lime;
+                    mini.btnTune.BackColor = Color.Lime;
+                }
+            }
         }
         // Write to HV button
         delegate void SetHVCallback(string text);
@@ -3586,7 +3680,24 @@ namespace DataDecoder
                 this.Invoke(d, new object[] { text });
             }
             else
-            { btnHV.Text = text; mini.btnHV.Text = text; }
+            {
+                btnHV.Text = text; mini.btnHV.Text = text;
+                if (text == "Off")
+                {
+                    btnHV.BackColor = Color.Empty;
+                    mini.btnHV.BackColor = Color.Empty;
+                }
+                else if (text == "Low")
+                {
+                    btnHV.BackColor = Color.Yellow;
+                    mini.btnHV.BackColor = Color.Yellow;
+                }
+                else if (text == "High")
+                {
+                    btnHV.BackColor = Color.Lime;
+                    mini.btnHV.BackColor = Color.Lime;
+                }
+            }
         }
         // Write to Band window
         delegate void SetBandCallback(string text);
@@ -3732,16 +3843,23 @@ namespace DataDecoder
                     if (set.theAmp == 0) ACOM2K_Click(null, null);
                     if (set.theAmp == 1)
                     {
-                        if (AlphaPort.IsOpen) AlphaPort.Write("AC\r");
-                        if (AlphaPort.IsOpen) AlphaPort.Write("EXT OFF\r");
-                        if (AlphaPort.IsOpen) AlphaPort.Write("STAT\r");
-                        if (AlphaPort.IsOpen) AlphaPort.Write("AUTOTUNE\r");
+                        if (AlphaPort.IsOpen) 
+                        {
+                            AlphaPort.Write("AC\r");
+                            AlphaPort.Write("STAT\r");
+                            AlphaPort.Write("GPIO OFF\r");
+                            AlphaPort.Write("EXT ON\r");
+                            AlphaPort.Write("RM ON\r");
+                            AlphaPort.Write("AUTOTUNE\r");
+                        }
                     }
                     if (set.theAmp == 2)
                     { }
                 }
                 else
                 {
+                    SetPwr("Off"); SetTune("Off"); SetOper("Off"); SetHV("Off");
+                    ac = "Off"; tune = "Off"; state = "Off"; mode = "Off";
                     btnPwr.Enabled = false; btnOper.Enabled = false;
                     mini.btnPwr.Enabled = false; mini.btnOper.Enabled = false;
                     btnTune.Enabled = false; btnHV.Enabled = false;
@@ -3751,8 +3869,8 @@ namespace DataDecoder
                     txtMsg.Enabled = false; mini.txtMsg.Enabled = false;
                     txtBand.Enabled = false; txtSeg.Enabled = false; txtFreq.Enabled = false;
                     txtTune.Enabled = false; txtLoad.Enabled = false;
-                    set.AlphaEnab = false; txtAlphaInt.Enabled = false;
-                    AlphaTimer.Enabled = false; set.Save();
+                    set.AlphaEnab = false; set.Save();txtAlphaInt.Enabled = false;
+                    AlphaTimer.Enabled = false; 
                     grpAmpBand.Enabled = false;
                 }
             }
@@ -3835,7 +3953,7 @@ namespace DataDecoder
         public string sf = "";          // Soft fault message
         public string hf = "";          // Hard fault message
         public string ac = "Off";       // Amp power (On/Off)
-        public string mode = "LOW";     // HV mode
+        public string mode = "Off";     // HV mode
         public string state = "Off";    // Amp State (On/Off)
         public string tune = "Off";     // State of autotune 
         string sAlpha = "";             // Port buffer message
@@ -3872,58 +3990,45 @@ namespace DataDecoder
                         else
                         {
                             sCmd = sCmd.Substring(0, sCmd.Length - 2);
-                            if (sCmd.Contains("FACTORY MODE = ON"))
-                                AlphaPort.Write("EXT OFF\r");
+                            //if (sCmd.Contains("FACTORY MODE = ON"))
+                            //    AlphaPort.Write("EXT OFF\r");
 
                             if (sCmd.Contains("AMPLIFIER IS OFF"))
                             {
-                                SetPwr("Off"); btnPwr.BackColor = Color.Empty;
-                                ac = "Off"; mini.btnPwr.BackColor = Color.Empty;
+                                SetPwr("Off"); SetTune("Off"); SetOper("Off"); SetHV("Off");
+                                ac = "Off"; tune = "Off"; state = "Off"; mode = "Off";
                             }
                             if (sCmd.Contains("AMPLIFIER IS ON"))
                             {
-                                SetPwr("On"); btnPwr.BackColor = Color.Lime;
-                                ac = "On"; mini.btnPwr.BackColor = Color.Lime;
+                                SetPwr("On"); ac = "On"; 
                             }
                             if (sCmd.Contains("AUTOTUNE ENABLED"))
                             {
-                                SetTune("Auto"); btnTune.BackColor = Color.Lime;
-                                tune = "On"; mini.btnTune.BackColor = Color.Lime;
+                                SetTune("Auto"); tune = "On"; 
                             }
                             if (sCmd.Contains("AUTOTUNE DISABLED"))
                             {
-                                SetTune("Man"); btnTune.BackColor = Color.Yellow;
-                                tune = "Off"; mini.btnTune.BackColor = Color.Yellow;
-                            }
-                            if (sCmd.Contains("MODE = HIGH"))
-                            {
-                                SetHV("High"); btnHV.BackColor = Color.Lime;
-                                mode = "High"; mini.btnHV.BackColor = Color.Lime;
-                            }
-                            if (sCmd.Contains("MODE = LOW"))
-                            {
-                                SetHV("Low"); btnHV.BackColor = Color.Yellow;
-                                mode = "Low"; mini.btnHV.BackColor = Color.Yellow;
-                            }
-                            if (sCmd.Contains("STATE = OFF"))
-                            {
-                                SetOper("Off"); btnOper.BackColor = Color.Empty;
-                                state = "Off"; mini.btnOper.BackColor = Color.Empty;
+                                SetTune("Man"); tune = "Off"; 
                             }
                             if (sCmd.Contains("STATE = WARMUP"))
                             {
-                                SetOper("Wait"); btnOper.BackColor = Color.Pink;
-                                state = "Wait"; mini.btnOper.BackColor = Color.Pink;
+                                SetOper("Wait"); state = "Wait"; 
                             }
                             if (sCmd.Contains("STATE = STANDBY"))
                             {
-                                SetOper("Stby"); btnOper.BackColor = Color.Yellow;
-                                state = "Stby"; mini.btnOper.BackColor = Color.Yellow;
+                                SetOper("Stby"); state = "Stby"; 
                             }
                             if (sCmd.Contains("STATE = OPERATE"))
                             {
-                                SetOper("Oper"); btnOper.BackColor = Color.Lime;
-                                state = "Oper"; mini.btnOper.BackColor = Color.Lime;
+                                SetOper("Oper"); state = "Oper"; 
+                            }
+                            if (sCmd.Contains("MODE = HIGH"))
+                            {
+                                SetHV("High"); mode = "High"; 
+                            }
+                            if (sCmd.Contains("MODE = LOW") && state !="Off")
+                            {
+                                SetHV("Low"); mode = "Low"; 
                             }
 
                             string sb = ""; string sbx = "";
@@ -3967,14 +4072,14 @@ namespace DataDecoder
                             if (sCmd.Contains("SFAULT"))
                             {
                                 SetMsg(sCmd);
-                                //SetMsg("Soft Fault Warning: press SF button to view.");
                                 sf = sCmd; btnSF.BackColor = Color.Yellow;
                                 mini.btnSF.BackColor = Color.Yellow;
                             }
                             if (sCmd.Contains("HFAULT"))
                             {
                                 SetMsg(sCmd);
-                                //SetMsg("Hard Fault Warning: press HF button to view.");
+                                SetPwr("Off"); SetTune("Off"); SetOper("Off"); SetHV("Off");
+                                ac = "Off"; tune = "Off"; state = "Off"; mode = "Off";
                                 hf = sCmd; btnHF.BackColor = Color.Red;
                                 mini.btnHF.BackColor = Color.Red;
                             }
@@ -3991,7 +4096,6 @@ namespace DataDecoder
 
             }//if (chkAlpha.Checked)
         }//AlphaPort_DataReceived
-
         //the power button was pressed
         public void btnPwr_Click(object sender, EventArgs e)
         {
@@ -4002,7 +4106,10 @@ namespace DataDecoder
             }
             if (Amp == 1) //Alpha
             {
-                if (ac == "Off") AlphaPort.Write("AC ON\r");
+                if (ac == "Off")
+                {
+                    AlphaPort.Write("AC ON\r");
+                }
                 if (ac == "On") AlphaPort.Write("AC OFF\r");
             }
         }
@@ -4016,7 +4123,11 @@ namespace DataDecoder
             }
             if (Amp == 1)
             {
-                if (ac == "On" && state != "Oper") AlphaPort.Write("OPER ON\r");
+                if (ac == "On" && state != "Oper")
+                {
+                    AlphaPort.Write("OPER OFF\r");
+                    AlphaPort.Write("OPER ON\r");
+                }
                 else AlphaPort.Write("OPER OFF\r");
             }
         }
@@ -4324,7 +4435,7 @@ namespace DataDecoder
 
                     string swr = LPportMsg.Substring(LPportMsg.Length - 4, 4);
                     SetAvg(fwd); mini.SetAvg(fwd);
-                    SetSWR(swr); mini.SetSwr(swr);
+                    SetSwr(swr); mini.SetSwr(swr);
                 }
             }
         }
@@ -4877,6 +4988,10 @@ namespace DataDecoder
                         {
                             if (txtMacSwOn.Text.Length > 5)
                                 WriteToPort(txtMacSwOn.Text, iSleep);
+                            if (txtMacSwMsg.Text.Length > 2)
+                            {
+                                MessageBox.Show(txtMacSwMsg.Text, "Macro Switch Event!");
+                            }
                         }
                         else    // 
                         {
@@ -4903,7 +5018,7 @@ namespace DataDecoder
                     MessageBox.Show("The Macro switch serial port " + MacroPort.PortName +
                        " cannot be opened!\n", "Port Error",
                        MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    cboMacSwPort.SelectedIndex = -1;
+                    cboMacSwPort.SelectedIndex = 0;
                 }
             }
             set.cboMacSwPort = cboMacSwPort.SelectedIndex;
@@ -4925,6 +5040,12 @@ namespace DataDecoder
         private void txtMacSwOff_TextChanged(object sender, EventArgs e)
         {
             set.txtMacSwOff = txtMacSwOff.Text; set.Save();
+        }
+        // the Mac Switch Message has changed
+        private void txtMacSwMsg_TextChanged(object sender, EventArgs e)
+        {
+            set.txtMacSwMsg = txtMacSwMsg.Text;
+            set.Save();
         }
 
         #endregion Macro Switch
@@ -5420,7 +5541,7 @@ namespace DataDecoder
                             fwd = sCmd.Substring(3, 7); swr = sCmd.Substring(19, 5);
                             SetAvg(Regex.Replace(fwd, @"\s*(\d+.\d)", "$1"));
                             mini.SetAvg(Regex.Replace(fwd, @"\s*(\d+.\d)", "$1"));
-                            SetSWR(Regex.Replace(swr, @"\s*(\d+.\d{2})", "$1"));
+                            SetSwr(Regex.Replace(swr, @"\s*(\d+.\d{2})", "$1"));
                             mini.SetSwr(Regex.Replace(swr, @"\s*(\d+.\d{2})", "$1"));
                         }
                         else if (sCmd.Substring(1, 1) == "T")
@@ -6172,7 +6293,6 @@ namespace DataDecoder
             }
             catch { }
         }
-
         // The Long Path Rotor button has been pressed
         private void btnLP_Click(object sender, EventArgs e)
         {
@@ -6409,7 +6529,6 @@ namespace DataDecoder
                 if (rotormod == RotorMod.Yaesu) RotorPort.Write("X" + rtrSpd + "\r");
             }
         }
-
         private void chkTenths_CheckedChanged(object sender, EventArgs e)
         {
             if (chkTenths.Checked)
@@ -6582,6 +6701,50 @@ namespace DataDecoder
 
         #region # Rotor Methods #
 
+        //Set Rotor Speed
+        void SetRotorSpeed(int Speed)
+        {
+            switch (Speed)
+            {
+                case 0: rbRtrSpd1.Checked = true; break;
+                case 1: rbRtrSpd2.Checked = true; break;
+                case 2: rbRtrSpd3.Checked = true; break;
+                default: break;
+            }
+        }
+        void SetRotorModel(int model)
+        {
+            switch (model)
+            {   // set model & send rotor initialization if required
+                case 0: rbRtrMod1.Checked = true; break;  // Alpha Spid
+                case 1: rbRtrMod2.Checked = true; break;  // Green Heron
+                case 2: rbRtrMod3.Checked = true; break;  // HyGain
+
+                case 3: rbRtrMod4.Checked = true;         // M2RC2800A-P
+                    if (cboRotorPort.SelectedIndex > 0 && chkRotorEnab.Checked)
+                        RotorPort.Write("S" + rtrSpd + "\r");
+                    break;
+                case 4: rbRtrMod5.Checked = true;         // M2RC2800AX
+                    if (cboRotorPort.SelectedIndex > 0 && chkRotorEnab.Checked)
+                        RotorPort.Write("S" + rtrSpd + "\r");
+                    break;
+                case 5: rbRtrMod6.Checked = true;         // Prosistel
+                    if (cboRotorPort.SelectedIndex > 0 && chkRotorEnab.Checked)
+                    {
+                        RotorPort.Write("\x02\x41WENA_PWM=1\r"); // setup soft start/stop
+                        Thread.Sleep(100);
+                        RotorPort.Write("\x02\x41\x4D\r");        // set to CPM mode
+                        Thread.Sleep(100);
+                        RotorPort.Write("\x02\x41\x3f\r");        // request position
+                    }
+                    break;
+                case 6: rbRtrMod7.Checked = true;         // Yaesu
+                    if (cboRotorPort.SelectedIndex > 0 && chkRotorEnab.Checked)
+                        RotorPort.Write("X" + rtrSpd + "\r");
+                    break;
+                default: break;
+            }
+        }
         // Toggle the rotor enable check box
         public void ToggleRtrEnab()
         {
@@ -6595,8 +6758,8 @@ namespace DataDecoder
         string lastMove = "";
         public void TurnRotor(string heading)
         {
-            if (heading.PadLeft(3, '0') != lastMove)
-            {
+            //if (heading.PadLeft(3, '0') != lastMove)
+            //{
                 int head = Convert.ToInt32(heading);
                 int off = Convert.ToInt32(txtAzOffset.Text);
                 //               int calchead = 0;
@@ -6682,7 +6845,7 @@ namespace DataDecoder
                     default: break;
                 }
                 lastMove = heading.PadLeft(3, '0');
-            }
+//            }
         }
         // Get DXCC data from the database
         private void GetDXCC(string SQL)
@@ -6848,48 +7011,49 @@ namespace DataDecoder
             txtLong.Text = set.Longitude;
             txtGrid.Text = set.Grid;
             try { cboRotorPort.SelectedIndex = set.RotorPort; }
-            catch { cboRotorPort.SelectedIndex = -1; BadPort("Rotor"); }
+            catch { cboRotorPort.SelectedIndex = 0; BadPort("Rotor"); }
             cboRotorCom.SelectedIndex = set.RotorCom;
             txtAzOffset.Text = Convert.ToInt32(set.AzOffset).ToString();
-
-            switch (set.RotorSpeed)
-            {
-                case 0: rbRtrSpd1.Checked = true; break;
-                case 1: rbRtrSpd2.Checked = true; break;
-                case 2: rbRtrSpd3.Checked = true; break;
-                default: break;
-            }
+            SetRotorModel(set.rotorModel);
+            SetRotorSpeed(set.RotorSpeed);
             chkRotorEnab.Checked = set.RotorEnab;
-            switch (set.rotorModel)
-            {   // send rotor initialization if required
-                case 0: rbRtrMod1.Checked = true; break;  // Alpha Spid
-                case 1: rbRtrMod2.Checked = true; break;  // Green Heron
-                case 2: rbRtrMod3.Checked = true; break;  // HyGain
+            //switch (set.RotorSpeed)
+            //{
+            //    case 0: rbRtrSpd1.Checked = true; break;
+            //    case 1: rbRtrSpd2.Checked = true; break;
+            //    case 2: rbRtrSpd3.Checked = true; break;
+            //    default: break;
+            //}
+            //switch (set.rotorModel)
+            //{   // send rotor initialization if required
+            //    case 0: rbRtrMod1.Checked = true; break;  // Alpha Spid
+            //    case 1: rbRtrMod2.Checked = true; break;  // Green Heron
+            //    case 2: rbRtrMod3.Checked = true; break;  // HyGain
 
-                case 3: rbRtrMod4.Checked = true;         // M2RC2800A-P
-                    if (cboRotorPort.SelectedIndex > 0 && chkRotorEnab.Checked)
-                        RotorPort.Write("S" + rtrSpd + "\r");
-                    break;
-                case 4: rbRtrMod5.Checked = true;         // M2RC2800AX
-                    if (cboRotorPort.SelectedIndex > 0 && chkRotorEnab.Checked)
-                        RotorPort.Write("S" + rtrSpd + "\r");
-                    break;
-                case 5: rbRtrMod6.Checked = true;         // Prosistel
-                    if (cboRotorPort.SelectedIndex > 0 && chkRotorEnab.Checked)
-                    {
-                        RotorPort.Write("\x02\x41WENA_PWM=1\r"); // setup soft start/stop
-                        Thread.Sleep(100);
-                        RotorPort.Write("\x02\x41\x4D\r");        // set to CPM mode
-                        Thread.Sleep(100);
-                        RotorPort.Write("\x02\x41\x3f\r");        // request position
-                    }
-                    break;
-                case 6: rbRtrMod7.Checked = true;         // Yaesu
-                    if (cboRotorPort.SelectedIndex > 0 && chkRotorEnab.Checked)
-                        RotorPort.Write("X" + rtrSpd + "\r");
-                    break;
-                default: break;
-            }
+            //    case 3: rbRtrMod4.Checked = true;         // M2RC2800A-P
+            //        if (cboRotorPort.SelectedIndex > 0 && chkRotorEnab.Checked)
+            //            RotorPort.Write("S" + rtrSpd + "\r");
+            //        break;
+            //    case 4: rbRtrMod5.Checked = true;         // M2RC2800AX
+            //        if (cboRotorPort.SelectedIndex > 0 && chkRotorEnab.Checked)
+            //            RotorPort.Write("S" + rtrSpd + "\r");
+            //        break;
+            //    case 5: rbRtrMod6.Checked = true;         // Prosistel
+            //        if (cboRotorPort.SelectedIndex > 0 && chkRotorEnab.Checked)
+            //        {
+            //            RotorPort.Write("\x02\x41WENA_PWM=1\r"); // setup soft start/stop
+            //            Thread.Sleep(100);
+            //            RotorPort.Write("\x02\x41\x4D\r");        // set to CPM mode
+            //            Thread.Sleep(100);
+            //            RotorPort.Write("\x02\x41\x3f\r");        // request position
+            //        }
+            //        break;
+            //    case 6: rbRtrMod7.Checked = true;         // Yaesu
+            //        if (cboRotorPort.SelectedIndex > 0 && chkRotorEnab.Checked)
+            //            RotorPort.Write("X" + rtrSpd + "\r");
+            //        break;
+            //    default: break;
+            //}
         }
 
         #endregion Rotor Setup
@@ -8390,6 +8554,7 @@ namespace DataDecoder
                     Array.Sort(port);   // Sort port numbers in order
 
                     // make sure combo boxes are empty
+                    cboCAT.Items.Clear();
                     cboSerAcc.Items.Clear();
                     cboLogPort.Items.Clear();
                     cboLPport.Items.Clear();
@@ -8412,6 +8577,7 @@ namespace DataDecoder
                     cboKnobPort.Items.Clear();
                     cboMacSwPort.Items.Clear();
                     // Add empty entry to port combos
+                    cboCAT.Items.Add("");
                     cboSerAcc.Items.Add("");
                     cboLogPort.Items.Add("");
                     cboLPport.Items.Add("");
@@ -8897,7 +9063,7 @@ namespace DataDecoder
                     MessageBox.Show("The VFO switch serial port " + SwitchPort.PortName +
                        " cannot be opened!\n", "Port Error",
                        MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    cboSwPort.SelectedIndex = -1;
+                    cboSwPort.SelectedIndex = 0;
                 }
             }
             set.cboSwPort = cboSwPort.SelectedIndex;
@@ -12410,33 +12576,33 @@ namespace DataDecoder
                 txtAvg.Text = text;
         }
         // Write SWR reading to txt box
-        delegate void SetSWRCallback(string text);
-        private void SetSWR(string text)
-        {
-            if (closing) return;
-            if (this.txtSWR.InvokeRequired)
-            {
-                SetSWRCallback d = new SetSWRCallback(SetSWR);
-                this.Invoke(d, new object[] { text });
-            }
-            else
-            {
-                txtSWR.Text = text;
-                if (chkSWR.Checked && Convert.ToDecimal(text) > numSWR.Value)
-                {
-                    WriteToPort("ZZTI1;", iSleep);
-                    lblHighSWR.Visible = true;
-                    // Display a message that the SWR alarm value was exceeded.
-                    MessageBox.Show(this,
-                        "The SWR alarm value setting has been exceeded.\r\r" +
-                        "PowerSDR's transmit ability is now disabled.\r\r" +
-                        "Press OK to dismiss this message and to Reset the SWR Alarm",
-                        "High SWR", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    lblHighSWR.Visible = false;
-                    WriteToPort("ZZTI0;", iSleep);
-                }
-            }
-        }
+        //delegate void SetSWRCallback(string text);
+        //private void SetSWR(string text)
+        //{
+        //    if (closing) return;
+        //    if (this.txtSWR.InvokeRequired)
+        //    {
+        //        SetSWRCallback d = new SetSWRCallback(SetSWR);
+        //        this.Invoke(d, new object[] { text });
+        //    }
+        //    else
+        //    {
+        //        txtSWR.Text = text;
+        //        if (chkSWR.Checked && Convert.ToDecimal(text) > numSWR.Value)
+        //        {
+        //            WriteToPort("ZZTI1;", iSleep);
+        //            lblHighSWR.Visible = true;
+        //            // Display a message that the SWR alarm value was exceeded.
+        //            MessageBox.Show(this,
+        //                "The SWR alarm value setting has been exceeded.\r\r" +
+        //                "PowerSDR's transmit ability is now disabled.\r\r" +
+        //                "Press OK to dismiss this message and to Reset the SWR Alarm",
+        //                "High SWR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        //            lblHighSWR.Visible = false;
+        //            WriteToPort("ZZTI0;", iSleep);
+        //        }
+        //    }
+        //}
         #endregion Delegates
 
         #region # WaveNode Events #
@@ -12777,7 +12943,7 @@ namespace DataDecoder
             mini.txtFwd.Text = (string.Format("{0:f1}", power));
             SetAvg(string.Format("{0:f1}", avg));
             mini.txtAvg.Text = (string.Format("{0:f1}", avg));
-            SetSWR(string.Format("{0:f1}", swr));
+            SetSwr(string.Format("{0:f1}", swr));
             mini.txtSWR.Text = (string.Format("{0:f1}", swr));
         }
         // Find max sample
@@ -12929,6 +13095,47 @@ namespace DataDecoder
         #endregion WaveNode Setup
 
         #endregion WaveNode
+
+        //Recall ant profile 1
+        private void toolStripMenuItem6_Click(object sender, EventArgs e)
+        {
+            cboRotorPort.SelectedIndex = set.antPro1RtrPort;
+            cboRotorCom.SelectedIndex = set.antPro1RtrCom;
+            cboStep.SelectedIndex = set.antPro1StepPort;
+            cboStepCom.SelectedIndex = set.antPro1StepCom;
+            SetRotorModel(set.antPro1RtrModel);
+            SetRotorSpeed(set.antPro1RtrSpeed);
+        }
+        //Recall ant profile 2
+        private void toolStripMenuItem7_Click(object sender, EventArgs e)
+        {
+            cboRotorPort.SelectedIndex = set.antPro2RtrPort;
+            cboRotorCom.SelectedIndex = set.antPro2RtrCom;
+            cboStep.SelectedIndex = set.antPro2StepPort;
+            cboStepCom.SelectedIndex = set.antPro2StepCom;
+            SetRotorModel(set.antPro2RtrModel);
+            SetRotorSpeed(set.antPro2RtrSpeed);
+        }
+        //Save ant profile 1
+        private void toolStripMenuItem8_Click(object sender, EventArgs e)
+        {
+            set.antPro1RtrPort = set.RotorPort;
+            set.antPro1RtrCom = set.RotorCom;
+            set.antPro1RtrModel = set.rotorModel;
+            set.antPro1RtrSpeed = set.RotorSpeed;
+            set.antPro1StepPort = set.StepPortNum;
+            set.antPro1StepCom = set.StepCom;
+        }
+        //Save ant profile 2
+        private void toolStripMenuItem9_Click(object sender, EventArgs e)
+        {
+            set.antPro2RtrPort = set.RotorPort;
+            set.antPro2RtrCom = set.RotorCom;
+            set.antPro2RtrModel = set.rotorModel;
+            set.antPro2RtrSpeed = set.RotorSpeed;
+            set.antPro2StepPort = set.StepPortNum;
+            set.antPro2StepCom = set.StepCom;
+        }
 
     } // end class Setup
 
