@@ -51,6 +51,16 @@ public class MonitorApplet extends javax.swing.JApplet {
 
     public void start() {
 
+        String s;
+        s=this.getParameter("server");
+        if(s!=null) {
+            server=s;
+        }
+        s=this.getParameter("receiver");
+        if(s!=null) {
+            receiver=Integer.parseInt(s);
+        }
+
         audio = new Audio(server, receiver);
         
         client = new Client(server, receiver,audio);
