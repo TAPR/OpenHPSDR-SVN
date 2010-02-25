@@ -141,7 +141,7 @@ void send_IQ_buffer(int rx) {
     int rc;
 
     if(rx>=ozy_get_receivers()) {
-        fprintf(stderr,"send_spectrum_buffer: invalid rx: %d\n",rx);
+        fprintf(stderr,"send_IQ_buffer: invalid rx: %d\n",rx);
         return;
     }
 

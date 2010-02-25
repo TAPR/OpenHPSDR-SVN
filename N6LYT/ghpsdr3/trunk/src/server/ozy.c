@@ -47,6 +47,9 @@
 
 #define SYNC 0x7F
 
+// uncomment to compile code that allows for SYNC error recovery
+#define RESYNC
+
 // ozy command and control
 #define MOX_DISABLED    0x00
 #define MOX_ENABLED     0x01
@@ -130,6 +133,34 @@ static int iq_address_length;
 
 static char ozy_firmware[64];
 static char ozy_fpga[64];
+
+#ifdef RESYNC
+
+static int left_sample,right_sample,mic_sample;
+static float left_sample_float,right_sample_float,mic_sample_float;
+static int rx,buffer_samples;
+
+#define SYNC_0 0
+#define SYNC_1 1
+#define SYNC_2 2
+#define CONTROL_0 3
+#define CONTROL_1 4
+#define CONTROL_2 5
+#define CONTROL_3 6
+#define CONTROL_4 7
+#define LEFT_SAMPLE_0 8
+#define LEFT_SAMPLE_1 9
+#define LEFT_SAMPLE_2 10
+#define RIGHT_SAMPLE_0 11
+#define RIGHT_SAMPLE_1 12
+#define RIGHT_SAMPLE_2 13
+#define MIC_SAMPLE_0 14
+#define MIC_SAMPLE_1 15
+
+static int decode_state=SYNC_0;
+
+void process_ozy_byte(char byte);
+#endif
 
 void* ozy_ep6_ep2_io_thread(void* arg);
 void* ozy_ep4_io_thread(void* arg);
@@ -237,25 +268,22 @@ int ozy_init() {
     rc = ozy_open();
     if (rc != 0) {
         fprintf(stderr,"Cannot locate Ozy\n");
-        return (-1);
+        exit(1);
     }
 
-//    rc=ozy_get_firmware_string(ozy_firmware_version,8);
-//    if(rc!=0) {
-        // load Ozy FW
-        ozy_reset_cpu(1);
-        ozy_load_firmware(ozy_firmware);
-        ozy_reset_cpu(0);
+    // load Ozy FW
+    ozy_reset_cpu(1);
+    ozy_load_firmware(ozy_firmware);
+    ozy_reset_cpu(0);
 ozy_close();
-        sleep(5);
+    sleep(5);
 ozy_open();
-        ozy_set_led(1,1);
-        ozy_load_fpga(ozy_fpga);
-        ozy_set_led(1,0);
-ozy_close();
-//    }
+    ozy_set_led(1,1);
+    ozy_load_fpga(ozy_fpga);
+    ozy_set_led(1,0);
+    ozy_close();
 
-ozy_open();
+    ozy_open();
     rc=ozy_get_firmware_string(ozy_firmware_version,8);
     fprintf(stderr,"Ozy FX2 version: %s\n",ozy_firmware_version);
 
@@ -360,6 +388,209 @@ if(tx_frame<10) {
 
 }
 
+#ifdef RESYNC
+
+void process_ozy_input_buffer(char* buffer) {
+    int i;
+    for(i=0;i<OZY_BUFFER_SIZE;i++) {
+        process_ozy_byte(buffer[i]);
+    }
+}
+
+void process_ozy_byte(char byte) {
+
+    switch(decode_state) {
+        case SYNC_0:
+            if(byte==SYNC) decode_state=SYNC_1;
+            break;
+        case SYNC_1:
+            if(byte==SYNC)
+                decode_state=SYNC_2;
+            else 
+                decode_state=SYNC_0;
+            break;
+        case SYNC_2:
+            if(byte==SYNC)
+                decode_state=CONTROL_0;
+            else 
+                decode_state=SYNC_0;
+            break;
+        case CONTROL_0:
+            rx=0;
+            buffer_samples=0;
+            control_in[0]=byte;
+            decode_state=CONTROL_1;
+            break;
+        case CONTROL_1:
+            control_in[1]=byte;
+            decode_state=CONTROL_2;
+            break;
+        case CONTROL_2:
+            control_in[2]=byte;
+            decode_state=CONTROL_3;
+            break;
+        case CONTROL_3:
+            control_in[3]=byte;
+            decode_state=CONTROL_4;
+            break;
+        case CONTROL_4:
+            control_in[4]=byte;
+
+            // decode control bytes
+            ptt=(control_in[0]&0x01)==0x01;
+            dash=(control_in[0]&0x02)==0x02;
+            dot=(control_in[0]&0x04)==0x04;
+            if((control_in[0]&0x08)==0) {
+                if(control_in[1]&0x01) {
+                    lt2208ADCOverflow=1;
+                }
+                if(mercury_software_version!=control_in[2]) {
+                    mercury_software_version=control_in[2];
+                    fprintf(stderr,"Mercury Software version: %d (0x%0X)\n",mercury_software_version,mercury_software_version);
+                }
+                if(penelope_software_version!=control_in[3]) {
+                    penelope_software_version=control_in[3];
+                    fprintf(stderr,"Penelope Software version: %d (0x%0X)\n",penelope_software_version,penelope_software_version);
+                }
+                if(ozy_software_version!=control_in[4]) {
+                    ozy_software_version=control_in[4];
+                    fprintf(stderr,"Ozy Software version: %d (0x%0X)\n",ozy_software_version,ozy_software_version);
+                }
+            } else if(control_in[0]&0x08) {
+                forward_power=(control_in[1]<<8)+control_in[2];
+            }
+
+            decode_state=LEFT_SAMPLE_0;
+            break;
+        case LEFT_SAMPLE_0:
+            left_sample   = (int)byte << 16;
+            decode_state=LEFT_SAMPLE_1;
+            break;
+        case LEFT_SAMPLE_1:
+            left_sample  += (int)(unsigned char)byte << 8;
+            decode_state=LEFT_SAMPLE_2;
+            break;
+        case LEFT_SAMPLE_2:
+            left_sample  += (int)(unsigned char)byte;
+            decode_state=RIGHT_SAMPLE_0;
+            break;
+        case RIGHT_SAMPLE_0:
+            right_sample   = (int)byte << 16;
+            decode_state=RIGHT_SAMPLE_1;
+            break;
+        case RIGHT_SAMPLE_1:
+            right_sample  += (int)(unsigned char)byte << 8;
+            decode_state=RIGHT_SAMPLE_2;
+            break;
+        case RIGHT_SAMPLE_2:
+            right_sample  += (int)(unsigned char)byte;
+            left_sample_float=(float)left_sample/8388607.0; // 24 bit sample
+            right_sample_float=(float)right_sample/8388607.0; // 24 bit sample
+            receiver[rx].input_buffer[samples]=left_sample_float;
+            receiver[rx].input_buffer[samples+BUFFER_SIZE]=right_sample_float;
+            rx++;
+            if(rx==receivers) {
+                rx=0;
+                decode_state=MIC_SAMPLE_0;
+            } else {
+                decode_state=LEFT_SAMPLE_0;
+            }
+            break;
+        case MIC_SAMPLE_0:
+            mic_sample  = (int)byte << 8;
+            decode_state=MIC_SAMPLE_1;
+            break;
+        case MIC_SAMPLE_1:
+            mic_sample  += (int)(unsigned char)byte;
+            mic_sample_float=(float)mic_sample/32767.0*mic_gain; // 16 bit sample
+            mic_left_buffer[samples]=mic_sample_float;
+            mic_right_buffer[samples]=0.0f;
+
+            if(timing) {
+                sample_count++;
+                if(sample_count==sample_rate) {
+                    ftime(&end_time);
+                    fprintf(stderr,"%d samples in %ld ms\n",sample_count,((end_time.time*1000)+end_time.millitm)-((start_time.time*1000)+start_time.millitm));
+                    sample_count=0;
+                    ftime(&start_time);
+                }
+            }
+
+            samples++;
+            if(samples==BUFFER_SIZE) {
+                int r;
+                // send I/Q data to clients
+                for(r=0;r<receivers;r++) {
+                    send_IQ_buffer(r);
+                }
+                samples=0;
+            }
+
+            buffer_samples++;
+            switch(receivers) {
+                case 1:
+                    if(buffer_samples==63) {
+                        decode_state=SYNC_0;
+                    } else {
+                        decode_state=LEFT_SAMPLE_0;
+                    }
+                    break;
+                case 2:
+                    if(buffer_samples==36) {
+                        decode_state=SYNC_0;
+                    } else {
+                        decode_state=LEFT_SAMPLE_0;
+                    }
+                    break;
+                case 3:
+                    if(buffer_samples==25) {
+                        decode_state=SYNC_0;
+                    } else {
+                        decode_state=LEFT_SAMPLE_0;
+                    }
+                    break;
+                case 4:
+                    if(buffer_samples==19) {
+                        decode_state=SYNC_0;
+                    } else {
+                        decode_state=LEFT_SAMPLE_0;
+                    }
+                    break;
+                case 5:
+                    if(buffer_samples==15) {
+                        decode_state=SYNC_0;
+                    } else {
+                        decode_state=LEFT_SAMPLE_0;
+                    }
+                    break;
+                case 6:
+                    if(buffer_samples==13) {
+                        decode_state=SYNC_0;
+                    } else {
+                        decode_state=LEFT_SAMPLE_0;
+                    }
+                    break;
+                case 7:
+                    if(buffer_samples==11) {
+                        decode_state=SYNC_0;
+                    } else {
+                        decode_state=LEFT_SAMPLE_0;
+                    }
+                    break;
+                case 8:
+                    if(buffer_samples==10) {
+                        decode_state=SYNC_0;
+                    } else {
+                        decode_state=LEFT_SAMPLE_0;
+                    }
+                    break;
+            }
+            break;
+    }
+}
+
+#else
+
 void process_ozy_input_buffer(char* buffer) {
     int b=0;
     int b_max;
@@ -451,7 +682,7 @@ if(rx_frame<10) {
                     fprintf(stderr,"%d samples in %ld ms\n",sample_count,((end_time.time*1000)+end_time.millitm)-((start_time.time*1000)+start_time.millitm));
                     sample_count=0;
                     ftime(&start_time);
-            }
+                }
             }
 
             // when we have enough samples send them to the clients
@@ -467,30 +698,11 @@ if(rx_frame<10) {
     } else {
         fprintf(stderr,"SYNC error\n");
         dump_ozy_buffer("SYNC ERROR",rx_frame,buffer);
-
-        // try to resync
-        fprintf(stderr,"Trying to resync ...\n");
-        while(i<(OZY_BUFFER_SIZE-3)) {
-            if(buffer[i]==SYNC && buffer[i+1]==SYNC && buffer[i+2]==SYNC) {
-                break;
-            }
-            i++;
-        }
-
-        if(i<(OZY_BUFFER_SIZE-3)) {
-            fprintf(stderr,"resync at offset %d\n",i);
-            fprintf(stderr,"trying to read %d bytes\n",i);
-            bytes=ozy_read(0x86,buffer,i);
-            if (bytes != i) {
-                fprintf(stderr,"resync: OzyBulkRead read failed %d\n",bytes);
-                exit(1);
-            }
-        } else {
-            fprintf(stderr,"cannot resync\n");
-            exit(1);
-        }
+        exit(1);
     }
 }
+
+#endif
 
 void* ozy_ep4_io_thread(void* arg) {
     unsigned char buffer[BANDSCOPE_BUFFER_SIZE*2];
