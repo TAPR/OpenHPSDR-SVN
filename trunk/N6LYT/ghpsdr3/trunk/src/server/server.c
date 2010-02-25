@@ -52,8 +52,9 @@ static struct option long_options[] = {
     {"micsource",required_argument, 0, 7},
     {"class",required_argument, 0, 8},
     {"timing",no_argument, 0, 9},
+    {0,0, 0, 0},
 };
-static char* short_options="rs";
+static char* short_options="";
 static int option_index;
 
 void process_args(int argc,char* argv[]);
@@ -81,7 +82,8 @@ void process_args(int argc,char* argv[]) {
     ozy_set_sample_rate(96000);
 
     while((i=getopt_long(argc,argv,short_options,long_options,&option_index))!=EOF) {
-        switch(option_index) {
+
+        switch(i) {
             case 0: // receivers
                 ozy_set_receivers(atoi(optarg));
                 break;
@@ -162,6 +164,7 @@ void process_args(int argc,char* argv[]) {
             default:
                 fprintf(stderr,"Usage: \n");
                 fprintf(stderr,"  server --receivers N --samplerate 48000|96000|192000\n");
+                exit(1);
                 break;
                
         }
