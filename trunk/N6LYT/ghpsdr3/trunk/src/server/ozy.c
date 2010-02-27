@@ -33,7 +33,6 @@
 #include <sys/timeb.h>
 #include <pthread.h>
 
-#include "ozy_ringbuffer.h"
 #include "client.h"
 #include "ozyio.h"
 #include "bandscope.h"
@@ -44,6 +43,7 @@
 
 #define OZY_BUFFERS 1
 #define OZY_BUFFER_SIZE 512
+#define OZY_HEADER_SIZE 8
 
 #define SYNC 0x7F
 
@@ -133,6 +133,9 @@ static int iq_address_length;
 
 static char ozy_firmware[64];
 static char ozy_fpga[64];
+
+static unsigned char ozy_output_buffer[OZY_BUFFER_SIZE];
+static int ozy_output_buffer_index=OZY_HEADER_SIZE;
 
 #ifdef RESYNC
 
@@ -292,8 +295,7 @@ ozy_open();
         receiver[i].frequency_changed=1;
     }
 
-    create_ozy_ringbuffer(68*OZY_BUFFER_SIZE*OZY_BUFFERS);
-
+    memset((char *)&ozy_output_buffer,0,OZY_BUFFER_SIZE);
     while(configure>0) {
         write_ozy_output_buffer();
         configure--;
@@ -320,14 +322,7 @@ void* ozy_ep6_ep2_io_thread(void* arg) {
             for(i=0;i<OZY_BUFFERS;i++) {
                 rx_frame++;
                 process_ozy_input_buffer(&input_buffer[i*OZY_BUFFER_SIZE]);
-
-                // see if it is time to send an output buffer
-                if((rx_frame%output_sample_increment)==0) {
-                    write_ozy_output_buffer();
-                    tx_frame++;
-                }
             }
-
         }
 
         current_receiver++;
@@ -339,52 +334,44 @@ void* ozy_ep6_ep2_io_thread(void* arg) {
 }
 
 void write_ozy_output_buffer() {
-    unsigned char output_buffer[OZY_BUFFER_SIZE];
     int bytes;
 
-    output_buffer[0]=SYNC;
-    output_buffer[1]=SYNC;
-    output_buffer[2]=SYNC;
+    ozy_output_buffer[0]=SYNC;
+    ozy_output_buffer[1]=SYNC;
+    ozy_output_buffer[2]=SYNC;
 
     if(configure>0) {
         configure--;
-        output_buffer[3]=control_out[0];
-        output_buffer[4]=control_out[1];
-        output_buffer[5]=control_out[2];
-        output_buffer[6]=control_out[3];
-        output_buffer[7]=control_out[4];
+        ozy_output_buffer[3]=control_out[0];
+        ozy_output_buffer[4]=control_out[1];
+        ozy_output_buffer[5]=control_out[2];
+        ozy_output_buffer[6]=control_out[3];
+        ozy_output_buffer[7]=control_out[4];
     } else if(receiver[current_receiver].frequency_changed) {
-        output_buffer[3]=control_out[0]|((current_receiver+2)<<1);
-        output_buffer[4]=receiver[current_receiver].frequency>>24;
-        output_buffer[5]=receiver[current_receiver].frequency>>16;
-        output_buffer[6]=receiver[current_receiver].frequency>>8;
-        output_buffer[7]=receiver[current_receiver].frequency;
+        ozy_output_buffer[3]=control_out[0]|((current_receiver+2)<<1);
+        ozy_output_buffer[4]=receiver[current_receiver].frequency>>24;
+        ozy_output_buffer[5]=receiver[current_receiver].frequency>>16;
+        ozy_output_buffer[6]=receiver[current_receiver].frequency>>8;
+        ozy_output_buffer[7]=receiver[current_receiver].frequency;
         receiver[current_receiver].frequency_changed=0;
     } else {
-        output_buffer[3]=control_out[0];
-        output_buffer[4]=control_out[1];
-        output_buffer[5]=control_out[2];
-        output_buffer[6]=control_out[3];
-        output_buffer[7]=control_out[4];
+        ozy_output_buffer[3]=control_out[0];
+        ozy_output_buffer[4]=control_out[1];
+        ozy_output_buffer[5]=control_out[2];
+        ozy_output_buffer[6]=control_out[3];
+        ozy_output_buffer[7]=control_out[4];
     }
 
-    if(ozy_ringbuffer_entries(ozy_output_buffer)>=(OZY_BUFFER_SIZE-8)) {
-        bytes=ozy_ringbuffer_get(ozy_output_buffer,&output_buffer[8],OZY_BUFFER_SIZE-8);
-        if(bytes!=OZY_BUFFER_SIZE-8) {
-            fprintf(stderr,"OOPS - thought there was enough for usb output but only %d\n",bytes);
-        }
-    } else {
-        memset((char *)&output_buffer[8],0,OZY_BUFFER_SIZE-8);
-    }
 
-    bytes=ozy_write(0x02,output_buffer,OZY_BUFFER_SIZE);
+    bytes=ozy_write(0x02,ozy_output_buffer,OZY_BUFFER_SIZE);
     if(bytes!=OZY_BUFFER_SIZE) {
         perror("OzyBulkWrite failed");
     }
 
 if(tx_frame<10) {
-    dump_ozy_buffer("sent to Ozy:",tx_frame,output_buffer);
+    dump_ozy_buffer("sent to Ozy:",tx_frame,ozy_output_buffer);
 }
+    tx_frame++;
 
 }
 
@@ -749,42 +736,29 @@ void process_ozy_output_buffer(float *left_output_buffer,float *right_output_buf
     short left_tx_sample;
     short right_tx_sample;
 
-    // process any output
+    // process the output
     for(j=0,c=0;j<BUFFER_SIZE;j+=output_sample_increment) {
         left_rx_sample=(short)(left_output_buffer[j]*32767.0);
         right_rx_sample=(short)(right_output_buffer[j]*32767.0);
 
-/*
-        if(mox || ptt || dot || dash ) {
-            left_tx_sample=(short)(left_tx_buffer[j]*32767.0*rfGain);
-            right_tx_sample=(short)(right_tx_buffer[j]*32767.0*rfGain);
-        } else {
-*/
-            left_tx_sample=0;
-            right_tx_sample=0;
-/*
-        }
-*/
+        left_tx_sample=0;
+        right_tx_sample=0;
 
-        ozy_samples[c]=left_rx_sample>>8;
-        ozy_samples[c+1]=left_rx_sample;
-        ozy_samples[c+2]=right_rx_sample>>8;
-        ozy_samples[c+3]=right_rx_sample;
-        ozy_samples[c+4]=left_tx_sample>>8;
-        ozy_samples[c+5]=left_tx_sample;
-        ozy_samples[c+6]=right_tx_sample>>8;
-        ozy_samples[c+7]=right_tx_sample;
-        c+=8;
-/*
-        if(c==sizeof(ozy_samples)) {
-            if(ozy_ringbuffer_put(ozy_output_buffer,ozy_samples,c)!=c) {
-                // ozy output buffer overflow
-            }
-            c=0;
+        ozy_output_buffer[ozy_output_buffer_index++]=left_rx_sample>>8;
+        ozy_output_buffer[ozy_output_buffer_index++]=left_rx_sample;
+        ozy_output_buffer[ozy_output_buffer_index++]=right_rx_sample>>8;
+        ozy_output_buffer[ozy_output_buffer_index++]=right_rx_sample;
+        ozy_output_buffer[ozy_output_buffer_index++]=left_tx_sample>>8;
+        ozy_output_buffer[ozy_output_buffer_index++]=left_tx_sample;
+        ozy_output_buffer[ozy_output_buffer_index++]=right_tx_sample>>8;
+        ozy_output_buffer[ozy_output_buffer_index++]=right_tx_sample;
+
+        if(ozy_output_buffer_index==OZY_BUFFER_SIZE) {
+            write_ozy_output_buffer();
+            ozy_output_buffer_index=OZY_HEADER_SIZE;
         }
-*/
     }
-   ozy_ringbuffer_put(ozy_output_buffer,ozy_samples,c);
+
 }
 
 void ozy_set_preamp(int p) {
