@@ -114,7 +114,6 @@ namespace DataDecoder
             this.btnSave0 = new System.Windows.Forms.Button();
             this.btnReLoad0 = new System.Windows.Forms.Button();
             this.btnFile0 = new System.Windows.Forms.Button();
-            this.label4 = new System.Windows.Forms.Label();
             this.txtFile0 = new System.Windows.Forms.TextBox();
             this.dg1 = new System.Windows.Forms.DataGridView();
             this.chkDev0 = new System.Windows.Forms.CheckBox();
@@ -214,6 +213,8 @@ namespace DataDecoder
             this.btnPFfile = new System.Windows.Forms.Button();
             this.label15 = new System.Windows.Forms.Label();
             this.txtProfLoc = new System.Windows.Forms.TextBox();
+            this.btnProfiler = new System.Windows.Forms.Button();
+            this.btnReStart = new System.Windows.Forms.Button();
             this.grpLP = new System.Windows.Forms.GroupBox();
             this.rb100A = new System.Windows.Forms.RadioButton();
             this.rb100 = new System.Windows.Forms.RadioButton();
@@ -1071,8 +1072,6 @@ namespace DataDecoder
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.txtFwd = new System.Windows.Forms.TextBox();
             this.txtSWR = new System.Windows.Forms.TextBox();
-            this.btnProfiler = new System.Windows.Forms.Button();
-            this.btnReStart = new System.Windows.Forms.Button();
             this.txtTemp = new System.Windows.Forms.TextBox();
             this.lblAnt = new System.Windows.Forms.Label();
             this.txtAvg = new System.Windows.Forms.TextBox();
@@ -1097,6 +1096,16 @@ namespace DataDecoder
             this.checkBox9 = new System.Windows.Forms.CheckBox();
             this.comboBox7 = new System.Windows.Forms.ComboBox();
             this.checkBox10 = new System.Windows.Forms.CheckBox();
+            this.txtVolts = new System.Windows.Forms.TextBox();
+            this.btnReCall = new System.Windows.Forms.Button();
+            this.btnMemSave = new System.Windows.Forms.Button();
+            this.btnMV = new System.Windows.Forms.Button();
+            this.btnMemClear = new System.Windows.Forms.Button();
+            this.txtMemFreq = new System.Windows.Forms.TextBox();
+            this.txtMemMode = new System.Windows.Forms.TextBox();
+            this.btnMemLoad = new System.Windows.Forms.Button();
+            this.txtMemIdx = new System.Windows.Forms.TextBox();
+            this.txtMemVfo = new System.Windows.Forms.TextBox();
             this.LogPort = new System.IO.Ports.SerialPort(this.components);
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
@@ -1182,7 +1191,6 @@ namespace DataDecoder
             this.SwitchPort = new System.IO.Ports.SerialPort(this.components);
             this.KnobPort = new System.IO.Ports.SerialPort(this.components);
             this.MacroPort = new System.IO.Ports.SerialPort(this.components);
-            this.txtVolts = new System.Windows.Forms.TextBox();
             this.tabControl.SuspendLayout();
             this.tabPorts.SuspendLayout();
             this.grpSlave.SuspendLayout();
@@ -1327,7 +1335,7 @@ namespace DataDecoder
             this.btnFlexOn.Size = new System.Drawing.Size(46, 23);
             this.btnFlexOn.TabIndex = 69;
             this.btnFlexOn.Text = "Power";
-            this.toolTip1.SetToolTip(this.btnFlexOn, "Press to toggle Flex Power On/Off (Ctrl+Shift+X) Note: requires hdwe.");
+            this.toolTip1.SetToolTip(this.btnFlexOn, "Press to toggle Flex Power On/Off (Ctrl+Shift+S) Note: requires hdwe.");
             this.btnFlexOn.UseVisualStyleBackColor = false;
             this.btnFlexOn.Click += new System.EventHandler(this.btnFlexOn_Click);
             // 
@@ -2125,7 +2133,6 @@ namespace DataDecoder
             this.groupBox1.Controls.Add(this.btnSave0);
             this.groupBox1.Controls.Add(this.btnReLoad0);
             this.groupBox1.Controls.Add(this.btnFile0);
-            this.groupBox1.Controls.Add(this.label4);
             this.groupBox1.Controls.Add(this.txtFile0);
             this.groupBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold);
             this.groupBox1.ForeColor = System.Drawing.Color.Navy;
@@ -2172,16 +2179,6 @@ namespace DataDecoder
             this.toolTip1.SetToolTip(this.btnFile0, "Opens file dialog to select file to use for this device.");
             this.btnFile0.UseVisualStyleBackColor = true;
             this.btnFile0.Click += new System.EventHandler(this.btnFile0_Click);
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
-            this.label4.Location = new System.Drawing.Point(10, 42);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(54, 13);
-            this.label4.TabIndex = 59;
-            this.label4.Text = "File Name";
             // 
             // txtFile0
             // 
@@ -2261,6 +2258,7 @@ namespace DataDecoder
             this.grpTKnob.TabIndex = 67;
             this.grpTKnob.TabStop = false;
             this.grpTKnob.Text = "Tuning Knob";
+            this.grpTKnob.Visible = false;
             // 
             // lblZR
             // 
@@ -3563,6 +3561,40 @@ namespace DataDecoder
             this.txtProfLoc.TabIndex = 58;
             this.toolTip1.SetToolTip(this.txtProfLoc, "Flex Profiler data file & location to use for this device.");
             this.txtProfLoc.WordWrap = false;
+            // 
+            // btnProfiler
+            // 
+            this.btnProfiler.AutoSize = true;
+            this.btnProfiler.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnProfiler.BackColor = System.Drawing.Color.Beige;
+            this.btnProfiler.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.btnProfiler.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.5F, System.Drawing.FontStyle.Bold);
+            this.btnProfiler.ForeColor = System.Drawing.Color.Navy;
+            this.btnProfiler.Location = new System.Drawing.Point(183, 44);
+            this.btnProfiler.Name = "btnProfiler";
+            this.btnProfiler.Size = new System.Drawing.Size(81, 22);
+            this.btnProfiler.TabIndex = 68;
+            this.btnProfiler.Text = "Profiler Open";
+            this.toolTip1.SetToolTip(this.btnProfiler, "Starts Flex Profiler program");
+            this.btnProfiler.UseVisualStyleBackColor = false;
+            this.btnProfiler.Click += new System.EventHandler(this.btnProfiler_Click);
+            // 
+            // btnReStart
+            // 
+            this.btnReStart.AutoSize = true;
+            this.btnReStart.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnReStart.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.btnReStart.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+            this.btnReStart.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.5F, System.Drawing.FontStyle.Bold);
+            this.btnReStart.ForeColor = System.Drawing.Color.Navy;
+            this.btnReStart.Location = new System.Drawing.Point(291, 45);
+            this.btnReStart.Name = "btnReStart";
+            this.btnReStart.Size = new System.Drawing.Size(84, 22);
+            this.btnReStart.TabIndex = 69;
+            this.btnReStart.Text = "Profiler Close";
+            this.toolTip1.SetToolTip(this.btnReStart, "Closes Flex Profiler program");
+            this.btnReStart.UseVisualStyleBackColor = false;
+            this.btnReStart.Click += new System.EventHandler(this.btnReStart_Click);
             // 
             // grpLP
             // 
@@ -14633,7 +14665,7 @@ namespace DataDecoder
             // txtFwd
             // 
             this.txtFwd.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtFwd.Location = new System.Drawing.Point(4, 365);
+            this.txtFwd.Location = new System.Drawing.Point(6, 365);
             this.txtFwd.Name = "txtFwd";
             this.txtFwd.Size = new System.Drawing.Size(45, 20);
             this.txtFwd.TabIndex = 65;
@@ -14644,46 +14676,12 @@ namespace DataDecoder
             // 
             this.txtSWR.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtSWR.ForeColor = System.Drawing.SystemColors.WindowText;
-            this.txtSWR.Location = new System.Drawing.Point(144, 365);
+            this.txtSWR.Location = new System.Drawing.Point(145, 365);
             this.txtSWR.Name = "txtSWR";
             this.txtSWR.Size = new System.Drawing.Size(45, 20);
             this.txtSWR.TabIndex = 66;
             this.txtSWR.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.toolTip1.SetToolTip(this.txtSWR, "Antenna SWR");
-            // 
-            // btnProfiler
-            // 
-            this.btnProfiler.AutoSize = true;
-            this.btnProfiler.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.btnProfiler.BackColor = System.Drawing.Color.Beige;
-            this.btnProfiler.FlatAppearance.BorderColor = System.Drawing.Color.Black;
-            this.btnProfiler.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.5F, System.Drawing.FontStyle.Bold);
-            this.btnProfiler.ForeColor = System.Drawing.Color.Navy;
-            this.btnProfiler.Location = new System.Drawing.Point(183, 44);
-            this.btnProfiler.Name = "btnProfiler";
-            this.btnProfiler.Size = new System.Drawing.Size(81, 22);
-            this.btnProfiler.TabIndex = 68;
-            this.btnProfiler.Text = "Profiler Open";
-            this.toolTip1.SetToolTip(this.btnProfiler, "Starts Flex Profiler program");
-            this.btnProfiler.UseVisualStyleBackColor = false;
-            this.btnProfiler.Click += new System.EventHandler(this.btnProfiler_Click);
-            // 
-            // btnReStart
-            // 
-            this.btnReStart.AutoSize = true;
-            this.btnReStart.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.btnReStart.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.btnReStart.FlatAppearance.BorderColor = System.Drawing.Color.Black;
-            this.btnReStart.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.5F, System.Drawing.FontStyle.Bold);
-            this.btnReStart.ForeColor = System.Drawing.Color.Navy;
-            this.btnReStart.Location = new System.Drawing.Point(291, 45);
-            this.btnReStart.Name = "btnReStart";
-            this.btnReStart.Size = new System.Drawing.Size(84, 22);
-            this.btnReStart.TabIndex = 69;
-            this.btnReStart.Text = "Profiler Close";
-            this.toolTip1.SetToolTip(this.btnReStart, "Closes Flex Profiler program");
-            this.btnReStart.UseVisualStyleBackColor = false;
-            this.btnReStart.Click += new System.EventHandler(this.btnReStart_Click);
             // 
             // txtTemp
             // 
@@ -14715,7 +14713,7 @@ namespace DataDecoder
             // txtAvg
             // 
             this.txtAvg.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtAvg.Location = new System.Drawing.Point(69, 365);
+            this.txtAvg.Location = new System.Drawing.Point(72, 365);
             this.txtAvg.Name = "txtAvg";
             this.txtAvg.Size = new System.Drawing.Size(45, 20);
             this.txtAvg.TabIndex = 75;
@@ -14726,7 +14724,7 @@ namespace DataDecoder
             // 
             this.btnSplit.BackColor = System.Drawing.Color.PaleTurquoise;
             this.btnSplit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnSplit.Location = new System.Drawing.Point(307, 366);
+            this.btnSplit.Location = new System.Drawing.Point(320, 366);
             this.btnSplit.Name = "btnSplit";
             this.btnSplit.Size = new System.Drawing.Size(14, 17);
             this.btnSplit.TabIndex = 77;
@@ -14736,7 +14734,7 @@ namespace DataDecoder
             // 
             // numSplit
             // 
-            this.numSplit.Location = new System.Drawing.Point(263, 365);
+            this.numSplit.Location = new System.Drawing.Point(274, 365);
             this.numSplit.Maximum = new decimal(new int[] {
             50,
             0,
@@ -14772,7 +14770,7 @@ namespace DataDecoder
             this.btnFZ.FlatAppearance.BorderColor = System.Drawing.Color.Black;
             this.btnFZ.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnFZ.ForeColor = System.Drawing.Color.Navy;
-            this.btnFZ.Location = new System.Drawing.Point(223, 365);
+            this.btnFZ.Location = new System.Drawing.Point(237, 365);
             this.btnFZ.Name = "btnFZ";
             this.btnFZ.Size = new System.Drawing.Size(31, 20);
             this.btnFZ.TabIndex = 83;
@@ -14977,6 +14975,147 @@ namespace DataDecoder
             this.toolTip1.SetToolTip(this.checkBox10, "Check to disable polling for RCP 2");
             this.checkBox10.UseVisualStyleBackColor = true;
             // 
+            // txtVolts
+            // 
+            this.txtVolts.BackColor = System.Drawing.Color.LightYellow;
+            this.txtVolts.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
+            this.txtVolts.Location = new System.Drawing.Point(340, 364);
+            this.txtVolts.Name = "txtVolts";
+            this.txtVolts.Size = new System.Drawing.Size(36, 21);
+            this.txtVolts.TabIndex = 85;
+            this.txtVolts.Text = "Volts";
+            this.txtVolts.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.toolTip1.SetToolTip(this.txtVolts, "Power Supply voltage.");
+            // 
+            // btnReCall
+            // 
+            this.btnReCall.AutoSize = true;
+            this.btnReCall.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnReCall.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold);
+            this.btnReCall.ForeColor = System.Drawing.Color.Blue;
+            this.btnReCall.Location = new System.Drawing.Point(111, 390);
+            this.btnReCall.Name = "btnReCall";
+            this.btnReCall.Size = new System.Drawing.Size(54, 23);
+            this.btnReCall.TabIndex = 92;
+            this.btnReCall.Text = "ReCall";
+            this.toolTip1.SetToolTip(this.btnReCall, "Press to step-thru memories (Ctrl+X).");
+            this.btnReCall.UseVisualStyleBackColor = true;
+            this.btnReCall.Click += new System.EventHandler(this.btnReCall_Click);
+            // 
+            // btnMemSave
+            // 
+            this.btnMemSave.AutoSize = true;
+            this.btnMemSave.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnMemSave.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold);
+            this.btnMemSave.ForeColor = System.Drawing.Color.Blue;
+            this.btnMemSave.Location = new System.Drawing.Point(223, 390);
+            this.btnMemSave.Name = "btnMemSave";
+            this.btnMemSave.Size = new System.Drawing.Size(46, 23);
+            this.btnMemSave.TabIndex = 93;
+            this.btnMemSave.Text = "Save";
+            this.toolTip1.SetToolTip(this.btnMemSave, "Press to save current memory data (Ctrl+C).");
+            this.btnMemSave.UseVisualStyleBackColor = true;
+            this.btnMemSave.Click += new System.EventHandler(this.btnMemSave_Click);
+            // 
+            // btnMV
+            // 
+            this.btnMV.AutoSize = true;
+            this.btnMV.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnMV.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold);
+            this.btnMV.ForeColor = System.Drawing.Color.ForestGreen;
+            this.btnMV.Location = new System.Drawing.Point(59, 390);
+            this.btnMV.Name = "btnMV";
+            this.btnMV.Size = new System.Drawing.Size(49, 23);
+            this.btnMV.TabIndex = 94;
+            this.btnMV.Text = "V<>M";
+            this.toolTip1.SetToolTip(this.btnMV, "Press to toggle between VFO A and selected memory (Ctrl+Z) .");
+            this.btnMV.UseVisualStyleBackColor = true;
+            this.btnMV.Click += new System.EventHandler(this.btnMV_Click);
+            // 
+            // btnMemClear
+            // 
+            this.btnMemClear.AutoSize = true;
+            this.btnMemClear.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnMemClear.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold);
+            this.btnMemClear.ForeColor = System.Drawing.Color.Red;
+            this.btnMemClear.Location = new System.Drawing.Point(386, 390);
+            this.btnMemClear.Name = "btnMemClear";
+            this.btnMemClear.Size = new System.Drawing.Size(46, 23);
+            this.btnMemClear.TabIndex = 95;
+            this.btnMemClear.Text = "Clear";
+            this.toolTip1.SetToolTip(this.btnMemClear, "Press to clear ALL memories.");
+            this.btnMemClear.UseVisualStyleBackColor = true;
+            this.btnMemClear.Click += new System.EventHandler(this.btnMemClear_Click);
+            // 
+            // txtMemFreq
+            // 
+            this.txtMemFreq.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtMemFreq.ForeColor = System.Drawing.Color.Navy;
+            this.txtMemFreq.Location = new System.Drawing.Point(169, 392);
+            this.txtMemFreq.Name = "txtMemFreq";
+            this.txtMemFreq.Size = new System.Drawing.Size(50, 20);
+            this.txtMemFreq.TabIndex = 96;
+            this.txtMemFreq.Text = "MHZ";
+            this.txtMemFreq.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.toolTip1.SetToolTip(this.txtMemFreq, "Memory frequency.");
+            this.txtMemFreq.WordWrap = false;
+            // 
+            // txtMemMode
+            // 
+            this.txtMemMode.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.txtMemMode.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtMemMode.ForeColor = System.Drawing.Color.Navy;
+            this.txtMemMode.Location = new System.Drawing.Point(342, 392);
+            this.txtMemMode.Name = "txtMemMode";
+            this.txtMemMode.Size = new System.Drawing.Size(40, 20);
+            this.txtMemMode.TabIndex = 98;
+            this.txtMemMode.Text = "MODE";
+            this.txtMemMode.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.toolTip1.SetToolTip(this.txtMemMode, "Memory Mode");
+            this.txtMemMode.WordWrap = false;
+            // 
+            // btnMemLoad
+            // 
+            this.btnMemLoad.AutoSize = true;
+            this.btnMemLoad.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnMemLoad.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold);
+            this.btnMemLoad.ForeColor = System.Drawing.Color.Firebrick;
+            this.btnMemLoad.Location = new System.Drawing.Point(293, 390);
+            this.btnMemLoad.Name = "btnMemLoad";
+            this.btnMemLoad.Size = new System.Drawing.Size(45, 23);
+            this.btnMemLoad.TabIndex = 99;
+            this.btnMemLoad.Text = "Load";
+            this.toolTip1.SetToolTip(this.btnMemLoad, "Press to load current memory data to PSDR (Ctrl+V).");
+            this.btnMemLoad.UseVisualStyleBackColor = true;
+            this.btnMemLoad.Click += new System.EventHandler(this.btnMemLoad_Click);
+            // 
+            // txtMemIdx
+            // 
+            this.txtMemIdx.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.txtMemIdx.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtMemIdx.ForeColor = System.Drawing.Color.Navy;
+            this.txtMemIdx.Location = new System.Drawing.Point(273, 392);
+            this.txtMemIdx.Name = "txtMemIdx";
+            this.txtMemIdx.Size = new System.Drawing.Size(16, 20);
+            this.txtMemIdx.TabIndex = 100;
+            this.txtMemIdx.Text = "#";
+            this.txtMemIdx.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.toolTip1.SetToolTip(this.txtMemIdx, "Memory number");
+            this.txtMemIdx.WordWrap = false;
+            // 
+            // txtMemVfo
+            // 
+            this.txtMemVfo.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtMemVfo.ForeColor = System.Drawing.Color.Navy;
+            this.txtMemVfo.Location = new System.Drawing.Point(4, 392);
+            this.txtMemVfo.Name = "txtMemVfo";
+            this.txtMemVfo.Size = new System.Drawing.Size(50, 20);
+            this.txtMemVfo.TabIndex = 101;
+            this.txtMemVfo.Text = "VFO";
+            this.txtMemVfo.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.toolTip1.SetToolTip(this.txtMemVfo, "VFO frequency saved.");
+            this.txtMemVfo.WordWrap = false;
+            // 
             // LogPort
             // 
             this.LogPort.ReadTimeout = 500;
@@ -15092,7 +15231,7 @@ namespace DataDecoder
             this.lblFwd.AutoSize = true;
             this.lblFwd.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblFwd.ForeColor = System.Drawing.Color.Navy;
-            this.lblFwd.Location = new System.Drawing.Point(50, 369);
+            this.lblFwd.Location = new System.Drawing.Point(53, 369);
             this.lblFwd.Name = "lblFwd";
             this.lblFwd.Size = new System.Drawing.Size(16, 12);
             this.lblFwd.TabIndex = 19;
@@ -15104,11 +15243,11 @@ namespace DataDecoder
             this.lblSWR.AutoSize = true;
             this.lblSWR.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblSWR.ForeColor = System.Drawing.Color.Navy;
-            this.lblSWR.Location = new System.Drawing.Point(191, 369);
+            this.lblSWR.Location = new System.Drawing.Point(192, 369);
             this.lblSWR.Name = "lblSWR";
-            this.lblSWR.Size = new System.Drawing.Size(27, 12);
+            this.lblSWR.Size = new System.Drawing.Size(22, 12);
             this.lblSWR.TabIndex = 67;
-            this.lblSWR.Text = "SWR";
+            this.lblSWR.Text = "Swr";
             this.lblSWR.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // RCP2port
@@ -15265,20 +15404,20 @@ namespace DataDecoder
             this.toolStripMenuItem6,
             this.toolStripMenuItem7});
             this.recallToolStripMenuItem.Name = "recallToolStripMenuItem";
-            this.recallToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.recallToolStripMenuItem.Size = new System.Drawing.Size(113, 22);
             this.recallToolStripMenuItem.Text = "Recall";
             // 
             // toolStripMenuItem6
             // 
             this.toolStripMenuItem6.Name = "toolStripMenuItem6";
-            this.toolStripMenuItem6.Size = new System.Drawing.Size(152, 22);
+            this.toolStripMenuItem6.Size = new System.Drawing.Size(124, 22);
             this.toolStripMenuItem6.Text = "Profile 1";
             this.toolStripMenuItem6.Click += new System.EventHandler(this.toolStripMenuItem6_Click);
             // 
             // toolStripMenuItem7
             // 
             this.toolStripMenuItem7.Name = "toolStripMenuItem7";
-            this.toolStripMenuItem7.Size = new System.Drawing.Size(152, 22);
+            this.toolStripMenuItem7.Size = new System.Drawing.Size(124, 22);
             this.toolStripMenuItem7.Text = "Profile 2";
             this.toolStripMenuItem7.Click += new System.EventHandler(this.toolStripMenuItem7_Click);
             // 
@@ -15288,20 +15427,20 @@ namespace DataDecoder
             this.toolStripMenuItem8,
             this.toolStripMenuItem9});
             this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
-            this.saveToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.saveToolStripMenuItem.Size = new System.Drawing.Size(113, 22);
             this.saveToolStripMenuItem.Text = "Save";
             // 
             // toolStripMenuItem8
             // 
             this.toolStripMenuItem8.Name = "toolStripMenuItem8";
-            this.toolStripMenuItem8.Size = new System.Drawing.Size(152, 22);
+            this.toolStripMenuItem8.Size = new System.Drawing.Size(124, 22);
             this.toolStripMenuItem8.Text = "Profile 1";
             this.toolStripMenuItem8.Click += new System.EventHandler(this.toolStripMenuItem8_Click);
             // 
             // toolStripMenuItem9
             // 
             this.toolStripMenuItem9.Name = "toolStripMenuItem9";
-            this.toolStripMenuItem9.Size = new System.Drawing.Size(152, 22);
+            this.toolStripMenuItem9.Size = new System.Drawing.Size(124, 22);
             this.toolStripMenuItem9.Text = "Profile 2";
             this.toolStripMenuItem9.Click += new System.EventHandler(this.toolStripMenuItem9_Click);
             // 
@@ -15422,7 +15561,7 @@ namespace DataDecoder
             this.statusStrip1.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.StatusBar});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 390);
+            this.statusStrip1.Location = new System.Drawing.Point(0, 419);
             this.statusStrip1.Name = "statusStrip1";
             this.statusStrip1.Size = new System.Drawing.Size(437, 22);
             this.statusStrip1.TabIndex = 71;
@@ -15544,7 +15683,7 @@ namespace DataDecoder
             this.lblAvg.AutoSize = true;
             this.lblAvg.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblAvg.ForeColor = System.Drawing.Color.Navy;
-            this.lblAvg.Location = new System.Drawing.Point(116, 369);
+            this.lblAvg.Location = new System.Drawing.Point(119, 369);
             this.lblAvg.Name = "lblAvg";
             this.lblAvg.Size = new System.Drawing.Size(23, 12);
             this.lblAvg.TabIndex = 74;
@@ -15671,32 +15810,29 @@ namespace DataDecoder
             this.MacroPort.RtsEnable = true;
             this.MacroPort.PinChanged += new System.IO.Ports.SerialPinChangedEventHandler(this.MacroPort_PinChanged);
             // 
-            // txtVolts
-            // 
-            this.txtVolts.BackColor = System.Drawing.Color.LightYellow;
-            this.txtVolts.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
-            this.txtVolts.Location = new System.Drawing.Point(328, 364);
-            this.txtVolts.Name = "txtVolts";
-            this.txtVolts.Size = new System.Drawing.Size(50, 21);
-            this.txtVolts.TabIndex = 85;
-            this.txtVolts.Text = "PAVolts";
-            this.txtVolts.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.toolTip1.SetToolTip(this.txtVolts, "Power Supply voltage.");
-            // 
             // Setup
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.ClientSize = new System.Drawing.Size(437, 412);
+            this.ClientSize = new System.Drawing.Size(437, 441);
             this.ContextMenuStrip = this.contextMenuStrip1;
+            this.Controls.Add(this.txtMemVfo);
+            this.Controls.Add(this.btnMV);
+            this.Controls.Add(this.btnMemLoad);
+            this.Controls.Add(this.txtMemIdx);
+            this.Controls.Add(this.btnMemClear);
+            this.Controls.Add(this.txtMemMode);
+            this.Controls.Add(this.btnReCall);
+            this.Controls.Add(this.txtMemFreq);
             this.Controls.Add(this.txtVolts);
             this.Controls.Add(this.lblHighSWR);
             this.Controls.Add(this.txtAlcInd);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.lblAvg);
             this.Controls.Add(this.txtAvg);
+            this.Controls.Add(this.btnMemSave);
             this.Controls.Add(this.txtTemp);
             this.Controls.Add(this.lblAnt);
             this.Controls.Add(this.tabControl);
@@ -15876,7 +16012,6 @@ namespace DataDecoder
         private System.Windows.Forms.ComboBox cboCAT;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.Label label4;
         private System.Windows.Forms.TextBox txtFile0;
         private System.Windows.Forms.Button btnSave0;
         private System.Windows.Forms.Button btnReLoad0;
@@ -16992,6 +17127,15 @@ namespace DataDecoder
         private ToolStripMenuItem toolStripMenuItem8;
         private ToolStripMenuItem toolStripMenuItem9;
         private TextBox txtVolts;
+        private Button btnReCall;
+        private Button btnMemSave;
+        private Button btnMV;
+        private Button btnMemClear;
+        private TextBox txtMemFreq;
+        private TextBox txtMemMode;
+        private Button btnMemLoad;
+        private TextBox txtMemIdx;
+        private TextBox txtMemVfo;
 
     }
 }
