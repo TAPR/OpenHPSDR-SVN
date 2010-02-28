@@ -854,7 +854,7 @@ namespace DataDecoder
                     else
                     {
                         txtVolts.Text = text;
-                        if (Convert.ToInt32(text) < 13 || Convert.ToInt32(text) > 14.5)
+                        if (Convert.ToDouble(text) < 13 || Convert.ToDouble(text) > 14.5)
                             txtVolts.BackColor = Color.Red;
                         else
                             txtVolts.BackColor = Color.LightYellow;
@@ -1039,6 +1039,7 @@ namespace DataDecoder
                 catch { }
             }
         }
+
         #endregion Delegates
 
         #region Form Events
@@ -1780,7 +1781,7 @@ namespace DataDecoder
                 else if (pollInt < 1000)
                     tempTimer.Interval = 1000;
             }
-            catch { }
+            catch {}
         }
         // cboDevice selection changed
         //private void cboDevice_SelectedIndexChanged(object sender, EventArgs e)
@@ -3143,11 +3144,11 @@ namespace DataDecoder
                     if (msg.Contains("A1")) // Amp Filiments On, warming up
                     {
                         SetMsg("Amp is warming, please wait!");
-                        SetPwr("On"); btnPwr.BackColor = Color.Lime;
-                        ac = "On"; mini.btnPwr.BackColor = Color.Lime;
+                        SetPwr("On"); //btnPwr.BackColor = Color.Lime;
+                        ac = "On"; //mini.btnPwr.BackColor = Color.Lime;
                         AlphaPort.DtrEnable = false; AlphaPort.RtsEnable = false;
-                        SetOper("Wait"); btnOper.BackColor = Color.Pink;
-                        state = "Wait"; mini.btnOper.BackColor = Color.Pink;
+                        SetOper("Wait"); //btnOper.BackColor = Color.Pink;
+                        state = "Wait"; //mini.btnOper.BackColor = Color.Pink;
                         SetHV("Off"); btnHV.BackColor = Color.Empty;
                         mode = "Off"; mini.btnHV.BackColor = Color.Empty;
                         return;
@@ -3156,23 +3157,23 @@ namespace DataDecoder
                     {
                         AlphaPort.DtrEnable = false; AlphaPort.RtsEnable = false;
                         SetMsg("Amp is ready!");
-                        SetPwr("On"); btnPwr.BackColor = Color.Lime;
-                        ac = "On"; mini.btnPwr.BackColor = Color.Lime;
-                        SetOper("Stby"); btnOper.BackColor = Color.Yellow;
-                        state = "Stby"; mini.btnOper.BackColor = Color.Yellow;
+                        SetPwr("On"); //btnPwr.BackColor = Color.Lime;
+                        ac = "On"; //mini.btnPwr.BackColor = Color.Lime;
+                        SetOper("Stby"); //btnOper.BackColor = Color.Yellow;
+                        state = "Stby"; //mini.btnOper.BackColor = Color.Yellow;
                         SetTune("Rdy");
                         btnTune.BackColor = Color.Azure;
                         mini.btnTune.BackColor = Color.Azure;
-                        SetHV("On"); btnHV.BackColor = Color.Lime;
-                        mode = "High"; mini.btnHV.BackColor = Color.Lime;
+                        SetHV("On"); //btnHV.BackColor = Color.Lime;
+                        mode = "High"; //mini.btnHV.BackColor = Color.Lime;
                         return;
                     }
                     if (msg.Contains("A3")) // Amp is Off, but cooling
                     {
                         bAmp = false;
                         SetMsg("Amp is off & cooling down!");
-                        SetPwr("Off"); btnPwr.BackColor = Color.Yellow;
-                        ac = "Off"; mini.btnPwr.BackColor = Color.Yellow;
+                        SetPwr("Off"); //btnPwr.BackColor = Color.Yellow;
+                        ac = "Off"; //mini.btnPwr.BackColor = Color.Yellow;
                         SetOper("Off"); btnOper.BackColor = Color.Empty;
                         state = "Cool"; mini.btnOper.BackColor = Color.Empty;
                         SetTune("Off");
@@ -3239,20 +3240,19 @@ namespace DataDecoder
                             if (AlphaPort.IsOpen) AlphaPort.Write("QqQ\0"); // get ACU status
                             Thread.Sleep(200);
                             lastFreq = ""; // force freq update
-                            SetPwr("On"); btnPwr.BackColor = Color.Lime;
-                            ac = "On"; mini.btnPwr.BackColor = Color.Lime;
+                            SetPwr("On"); 
+                            ac = "On"; 
                             SetTune("Rdy");
                             btnTune.BackColor = Color.Azure;
                             mini.btnTune.BackColor = Color.Azure;
-                            SetHV("On"); btnHV.BackColor = Color.Lime;
-                            mode = "On"; mini.btnHV.BackColor = Color.Lime;
+                            SetHV("On"); 
+                            mode = "On"; 
                         }
                         return;
                     }
                     if (msg.Contains("AO")) // amp in Operate mode
                     {
-                        SetOper("Oper"); btnOper.BackColor = Color.Lime;
-                        state = "Oper"; mini.btnOper.BackColor = Color.Lime;
+                        SetOper("Oper"); state = "Oper"; 
                         if (chkAutoDrv.Checked)
                         {
                             switch (band)
@@ -3375,8 +3375,7 @@ namespace DataDecoder
                     }
                     if (msg.Contains("AS")) // amp in Stand By mode
                     {
-                        SetOper("Stby"); btnOper.BackColor = Color.Yellow;
-                        state = "Stby"; mini.btnOper.BackColor = Color.Yellow;
+                        SetOper("Stby"); state = "Stby"; 
                         return;
                     }
                     if (msg.Contains("AW1")) // Seg/Ant/User/Band/
@@ -3415,13 +3414,11 @@ namespace DataDecoder
                         int sv = AsciiDec(msg.Substring(p, 2));
                         if (sv > 70)
                         {
-                            SetOper("Oper"); btnOper.BackColor = Color.Lime;
-                            state = "Oper"; mini.btnOper.BackColor = Color.Lime;
+                            SetOper("Oper"); state = "Oper"; 
                         }
                         else
                         {
-                            SetOper("Stby"); btnOper.BackColor = Color.Yellow;
-                            state = "Stby"; mini.btnOper.BackColor = Color.Yellow;
+                            SetOper("Stby"); state = "Stby";
                         }
                         bctr++;
                         if (bctr > 3)   // let the measuring continue for 3 reps
@@ -3692,7 +3689,7 @@ namespace DataDecoder
                     btnHV.BackColor = Color.Yellow;
                     mini.btnHV.BackColor = Color.Yellow;
                 }
-                else if (text == "High")
+                else if (text == "High" || text == "On")
                 {
                     btnHV.BackColor = Color.Lime;
                     mini.btnHV.BackColor = Color.Lime;
@@ -4071,15 +4068,15 @@ namespace DataDecoder
                             }
                             if (sCmd.Contains("SFAULT"))
                             {
+                                AlphaPort.Write("STAT\r");
                                 SetMsg(sCmd);
                                 sf = sCmd; btnSF.BackColor = Color.Yellow;
                                 mini.btnSF.BackColor = Color.Yellow;
                             }
                             if (sCmd.Contains("HFAULT"))
                             {
+                                AlphaPort.Write("STAT\r");
                                 SetMsg(sCmd);
-                                SetPwr("Off"); SetTune("Off"); SetOper("Off"); SetHV("Off");
-                                ac = "Off"; tune = "Off"; state = "Off"; mode = "Off";
                                 hf = sCmd; btnHF.BackColor = Color.Red;
                                 mini.btnHF.BackColor = Color.Red;
                             }
@@ -4118,7 +4115,7 @@ namespace DataDecoder
         {
             if (Amp == 0)
             {
-                if (ac == "On" && state != "Oper") AlphaPort.Write("ApO\0");
+                if (ac == "On" && state != "Oper") AlphaPort.Write("AqO\0");
                 else AlphaPort.Write("AqS\0");
             }
             if (Amp == 1)
@@ -4261,6 +4258,51 @@ namespace DataDecoder
         #endregion Methods
 
         #endregion Alpha 9500
+
+        #region Ant Profile
+
+        ////Recall ant profile 1
+        //private void toolStripMenuItem6_Click(object sender, EventArgs e)
+        //{
+        //    cboRotorPort.SelectedIndex = set.antPro1RtrPort;
+        //    cboRotorCom.SelectedIndex = set.antPro1RtrCom;
+        //    cboStep.SelectedIndex = set.antPro1StepPort;
+        //    cboStepCom.SelectedIndex = set.antPro1StepCom;
+        //    SetRotorModel(set.antPro1RtrModel);
+        //    SetRotorSpeed(set.antPro1RtrSpeed);
+        //}
+        ////Recall ant profile 2
+        //private void toolStripMenuItem7_Click(object sender, EventArgs e)
+        //{
+        //    cboRotorPort.SelectedIndex = set.antPro2RtrPort;
+        //    cboRotorCom.SelectedIndex = set.antPro2RtrCom;
+        //    cboStep.SelectedIndex = set.antPro2StepPort;
+        //    cboStepCom.SelectedIndex = set.antPro2StepCom;
+        //    SetRotorModel(set.antPro2RtrModel);
+        //    SetRotorSpeed(set.antPro2RtrSpeed);
+        //}
+        ////Save ant profile 1
+        //private void toolStripMenuItem8_Click(object sender, EventArgs e)
+        //{
+        //    set.antPro1RtrPort = set.RotorPort;
+        //    set.antPro1RtrCom = set.RotorCom;
+        //    set.antPro1RtrModel = set.rotorModel;
+        //    set.antPro1RtrSpeed = set.RotorSpeed;
+        //    set.antPro1StepPort = set.StepPortNum;
+        //    set.antPro1StepCom = set.StepCom;
+        //}
+        ////Save ant profile 2
+        //private void toolStripMenuItem9_Click(object sender, EventArgs e)
+        //{
+        //    set.antPro2RtrPort = set.RotorPort;
+        //    set.antPro2RtrCom = set.RotorCom;
+        //    set.antPro2RtrModel = set.rotorModel;
+        //    set.antPro2RtrSpeed = set.RotorSpeed;
+        //    set.antPro2StepPort = set.StepPortNum;
+        //    set.antPro2StepCom = set.StepCom;
+        //}
+
+        #endregion Ant Profile
 
         #region FlexWire
 
@@ -4748,22 +4790,30 @@ namespace DataDecoder
             { ProcessMacroButton(11); }
             else if (e.KeyCode == Keys.F12)
             { ProcessMacroButton(12); }
-            else if (e.Control && e.KeyCode == Keys.Oemtilde)
-            { btnSplit_Click(null, null); } // Set Split
-            else if (e.Control && e.KeyCode == Keys.L)
-            { LowPower(); }
-            else if (e.Control && e.KeyCode == Keys.O)
-            { btnByp_Click(null, null); }   // Toggle PTT
-            else if (e.Control && e.KeyCode == Keys.A)
-            { btnDrive_Click(null, null); }   // Saves Auto Drive setting
-            else if (e.Control && e.KeyCode == Keys.B)
-            { rbBiDir.Checked = true; }   // SteppIR to Bi Direction
-            else if (e.Control && e.KeyCode == Keys.F)
-            { rbFwd.Checked = true; }   // SteppIR to Forward Direction
-            else if (e.Control && e.KeyCode == Keys.R)
-            { rb180.Checked = true; }   // SteppIR to Reverse Direction
-            else if (e.Control && e.Shift && e.KeyCode == Keys.X)
-            { btnFlexOn_Click(null, null); }   // 
+            else if (e.Control && e.KeyCode == Keys.Oemtilde) // Set Split
+            { btnSplit_Click(null, null); }
+            else if (e.Control && e.KeyCode == Keys.A) // Saves Auto Drive setting
+            { btnDrive_Click(null, null); }
+            else if (e.Control && e.KeyCode == Keys.B) // SteppIR to Bi Direction
+            { rbBiDir.Checked = true; }  
+            else if (e.Control && e.KeyCode == Keys.C) // Memory Save
+            { btnMemSave_Click(null, null); }  
+            else if (e.Control && e.KeyCode == Keys.F) // SteppIR to Forward
+            { rbFwd.Checked = true; }  
+            else if (e.Control && e.KeyCode == Keys.L) // Set drive to low power
+            { LowPower(); }                    
+            else if (e.Control && e.KeyCode == Keys.O) // Toggle PTT
+            { btnByp_Click(null, null); }  
+            else if (e.Control && e.KeyCode == Keys.R) // SteppIR to Reverse
+            { rb180.Checked = true; }  
+            else if (e.Control && e.KeyCode == Keys.V) // Memory Load
+            { btnMemLoad_Click(null, null); }  
+            else if (e.Control && e.KeyCode == Keys.X) // Memory select (1-5)
+            { btnReCall_Click(null, null); }  
+            else if (e.Control && e.KeyCode == Keys.Z) // Toggle VFO/Memory
+            { btnMV_Click(null, null); }  
+            else if (e.Control && e.Shift && e.KeyCode == Keys.S) // Power On/Off
+            { btnFlexOn_Click(null, null); }    
         }
         // Adds macro number text to the row header
         public void dgm_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
@@ -4911,9 +4961,8 @@ namespace DataDecoder
                     rbFwd.Checked = true; 
                     break;
                 case "LP": // write to desig LPT port
-                    string sport = ops.TrimStart('0').Substring(0, ops.Length - 2);
                     int icmd = int.Parse(ops.Substring(ops.Length-2,2),NumberStyles.HexNumber);
-                    int iport = Convert.ToInt32(sport.Substring(0, sport.Length-2));
+                    int iport = Convert.ToInt32(ops.Substring(0, ops.Length-2));
                     OutParallelPort(iport, icmd);
                     break;
                 case "MM": // Set AT-AUTO to Manual Mode
@@ -5091,12 +5140,51 @@ namespace DataDecoder
         }
         // Main Menu|Options|Tube Amps
         // *** See ACOM and Alpha sections for these events.
-
         // Main Menu|Options|Acom Ant Default
         private void acomAntDefaultToolStripMenuItem_Click(object sender, EventArgs e)
         {
             AcomAnt Asw = new AcomAnt();
             Asw.Show();
+        }
+        // Main Menu|Options|Ant Profile|recall|Profile 1
+        private void toolStripMenuItem6_Click(object sender, EventArgs e)
+        {
+            cboRotorPort.SelectedIndex = set.antPro1RtrPort;
+            cboRotorCom.SelectedIndex = set.antPro1RtrCom;
+            cboStep.SelectedIndex = set.antPro1StepPort;
+            cboStepCom.SelectedIndex = set.antPro1StepCom;
+            SetRotorModel(set.antPro1RtrModel);
+            SetRotorSpeed(set.antPro1RtrSpeed);
+        }
+        // Main Menu|Options|Ant Profile|recall|Profile 2
+        private void toolStripMenuItem7_Click(object sender, EventArgs e)
+        {
+            cboRotorPort.SelectedIndex = set.antPro2RtrPort;
+            cboRotorCom.SelectedIndex = set.antPro2RtrCom;
+            cboStep.SelectedIndex = set.antPro2StepPort;
+            cboStepCom.SelectedIndex = set.antPro2StepCom;
+            SetRotorModel(set.antPro2RtrModel);
+            SetRotorSpeed(set.antPro2RtrSpeed);
+        }
+        // Main Menu|Options|Ant Profile|Save|Profile 1
+        private void toolStripMenuItem8_Click(object sender, EventArgs e)
+        {
+            set.antPro1RtrPort = set.RotorPort;
+            set.antPro1RtrCom = set.RotorCom;
+            set.antPro1RtrModel = set.rotorModel;
+            set.antPro1RtrSpeed = set.RotorSpeed;
+            set.antPro1StepPort = set.StepPortNum;
+            set.antPro1StepCom = set.StepCom;
+        }
+        // Main Menu|Options|Ant Profile|Save|Profile 2
+        private void toolStripMenuItem9_Click(object sender, EventArgs e)
+        {
+            set.antPro2RtrPort = set.RotorPort;
+            set.antPro2RtrCom = set.RotorCom;
+            set.antPro2RtrModel = set.rotorModel;
+            set.antPro2RtrSpeed = set.RotorSpeed;
+            set.antPro2StepPort = set.StepPortNum;
+            set.antPro2StepCom = set.StepCom;
         }
         // Main Menu|Tools|Enable Error Log
         private void enableErrorLoggingToolStripMenuItem_Click(object sender, EventArgs e)
@@ -7068,6 +7156,7 @@ namespace DataDecoder
         string sdrMode = "";
         string xOn = "";            // 1 = xmit on, 0 = xmit off
         string lastFreq = "";       // freq from last CATRxEvent
+        string memMode = "";
         string lastBand = "";
         string COBC = "";           // Chk on band change last band setting
         int vfoFreq = 0;            // VFO B freq, used for SO2R calcs
@@ -7075,6 +7164,7 @@ namespace DataDecoder
         double modeFactor = 1;         // holds expert auto drive mode factor
         string lastFreqB = "";
         string freqLook = "";
+        string pwrVolts = "";
         void sp_CATRxEvent(object source, CATSerialPorts.SerialRXEvent e)
         {
             try
@@ -7093,7 +7183,6 @@ namespace DataDecoder
                     string regex = "(?<cat>\\w{2})(?<mz>\\d{5})(?<kz>\\d{3})(?<hz>\\d{2})";
                     string mask = "${mz},${kz}.${hz}";
                     string freq = "";
-                    string mode = "";
                     rawFreq = OutBuffer;
                     OutBuffer = "";
 
@@ -7109,6 +7198,13 @@ namespace DataDecoder
                             }
                         }
                     }
+                    /*** Get pwr supply volts ***/
+                    if (rawFreq.Length > 4 && rawFreq.Substring(0, 4) == "ZZRV")
+                    {
+                        pwrVolts = rawFreq.Substring(4, 4);
+                        SetVolts(pwrVolts);
+                        return;
+                    }
                     /*** Write PA Temperature to window ***/
                     if (rawFreq.Length > 4 && rawFreq.Substring(0, 4) == "ZZTS")
                     {
@@ -7116,11 +7212,75 @@ namespace DataDecoder
                         WriteTemp();
                         return;
                     }
+                    /*** Get RX1 ant status ***/
+                    if (rawFreq.Length > 4 && rawFreq.Substring(0, 4) == "ZZOA")
+                    {
+                        Rx1 = rawFreq.Substring(4, 1);
+                        return;
+                    }
+                    /*** Get RX2 ant status ***/
+                    if (rawFreq.Length > 4 && rawFreq.Substring(0, 4) == "ZZOB")
+                    {
+                        Rx2 = rawFreq.Substring(4, 1);
+                        return;
+                    }
+                    /*** Get TX ant status ***/
+                    if (rawFreq.Length > 4 && rawFreq.Substring(0, 4) == "ZZOC")
+                    {
+                        TxA = rawFreq.Substring(4, 1);
+                        return;
+                    }
                     /*** Get TX1-3 status ***/
                     if (rawFreq.Length > 4 && rawFreq.Substring(0, 4) == "ZZOF")
                     {
                         stsTX = rawFreq.Substring(4, 3);
                         set.stsTX = stsTX; set.Save();
+                        return;
+                    }
+                    /*** Get RX filter status ***/
+                    if (rawFreq.Length > 4 && rawFreq.Substring(0, 4) == "ZZFI")
+                    {
+                        RxFlt = rawFreq.Substring(4, 2);
+                        return;
+                    }
+                    /*** Get PSDR Mode  ***/
+                    if (rawFreq.Length > 4 && rawFreq.Substring(0, 4) == "ZZMD")
+                    {
+                        ZZMD = rawFreq.Substring(4, 2);
+                        return;
+                    }
+                    /*** get the TX Profile ***/
+                    if (rawFreq.Length > 4 && rawFreq.Substring(0, 4) == "ZZTP")
+                    {
+                        TxPro = rawFreq.Substring(4, 2);
+
+                        if (mem[0, 0] != null || mem[0, 0] != "")
+                        {
+                            // ok we got the last var from PSDR lets save it
+                            // push down the stack one row
+                            for (int i = 4; i >= 1; i--)
+                            {
+                                for (int j = 0; j <= 10; j++)
+                                {
+                                    mem[i, j] = mem[i - 1, j];
+                                }
+                            }
+                        }
+                        // this is the last var from PSDR. save to mem array
+                        mem[0, 0] = vfoA; mem[0, 1] = vfoB; mem[0, 2] = ZZSW.ToString();
+                        mem[0, 3] = ZZMD; mem[0, 4] = Rx1; mem[0, 5] = Rx2;
+                        mem[0, 6] = TxA; mem[0, 7] = stsTX; mem[0, 8] = RxFlt;
+                        mem[0, 9] = TxPro; mem[0, 10] = memMode;
+                        // display the stored mem number, freq and mode
+                        int xfrq = Convert.ToInt32(vfoA.Substring(0, vfoA.Length - 3).TrimStart('0'));
+                        SetMemFreq(xfrq.ToString("N0")); 
+                        SetMemMode(memMode);
+                        idxMem = 0;
+                        SetMemIdx((idxMem + 1).ToString());
+                        // blink the button to show data saved
+                        SetMemSave("Yellow");
+                        Thread.Sleep(500);
+                        SetMemSave("");
                         return;
                     }
                     /*** Save current Drive setting by band ***/
@@ -7145,9 +7305,9 @@ namespace DataDecoder
                     /*** SO2R active vfo status ***/
                     if (rawFreq.Length > 4 && rawFreq.Substring(0, 4) == "ZZSW")
                     {
+                        ZZSW = Convert.ToInt32(rawFreq.Substring(4, 1));
                         if (chkSoEnab.Checked)
                         {
-                            ZZSW = Convert.ToInt32(rawFreq.Substring(4, 1));
                             if (LastZZSW != ZZSW)
                             {
                                 LastZZSW = ZZSW;
@@ -7158,6 +7318,7 @@ namespace DataDecoder
                     /*** Set SO2R vfo B band data ***/
                     if (rawFreq.Length > 4 && rawFreq.Substring(0, 4) == "FB00")
                     {
+                        vfoB = rawFreq.Substring(2, 11);
                         if (chkSoEnab.Checked)
                         {
                             string bFreq = rawFreq.Substring(2, 11);
@@ -7647,7 +7808,9 @@ namespace DataDecoder
 
                     /*** start checking for specific cat responses ***/
                     if (rawFreq.Length > 4 && rawFreq.Substring(0, 2) == "IF")
-                    {   // DDUtil or RCP IF; query
+                    {
+                        vfoA = rawFreq.Substring(2, 11);
+                        // DDUtil or RCP IF; query
                         xOn = rawFreq.Substring(rawFreq.Length - 10, 1);
                         // if mox is on, start WD timer if enabled
                         if (xOn == "1")
@@ -7682,15 +7845,15 @@ namespace DataDecoder
                 SendData:
                     switch (sdrMode)
                     {   // Lookup the correct SDR mode
-                        case "1": mode = "LSB"; break;
-                        case "2": mode = "USB"; break;
-                        case "3": mode = "CWU"; break;
-                        case "4": mode = "FMN"; break;
-                        case "5": mode = "AM"; break;
-                        case "6": mode = "DIGL"; break;
-                        case "7": mode = "CWL"; break;
-                        case "9": mode = "DIGU"; break;
-                        default: mode = "xxx"; break;
+                        case "1": memMode = "LSB"; break;
+                        case "2": memMode = "USB"; break;
+                        case "3": memMode = "CWU"; break;
+                        case "4": memMode = "FMN"; break;
+                        case "5": memMode = "AM"; break;
+                        case "6": memMode = "DIGL"; break;
+                        case "7": memMode = "CWL"; break;
+                        case "9": memMode = "DIGU"; break;
+                        default: memMode = "xxx"; break;
                     }
                     // If Auto Drive Expert mode is checked calc mode % change
                     if (LastMode != sdrMode && chkAutoExpert.Checked)
@@ -7845,10 +8008,10 @@ namespace DataDecoder
                     }
                     if (logFlag == true) // RCP1 is active
                         id = title + " - " + freq.Substring(0, 9) +
-                            "  " + vfo + "  " + mode + "  RCP";
+                            "  " + vfo + "  " + memMode + "  RCP";
                     else
                         id = title + " - " + freq.Substring(0, 9) +
-                            "  " + vfo + "  " + mode;
+                            "  " + vfo + "  " + memMode;
                     /*** Output to LPT port ***/
                     //decode freq data and output to LPT port
                     if (chkDevice.Checked && chkDev0.Checked)
@@ -8943,7 +9106,12 @@ namespace DataDecoder
                     if (c.GetType() == typeof(CheckBox) && c.Name != "chkSoEnab")
                         a.Add(c.Name + "/" + ((CheckBox)c).Checked.ToString());
                     else if (c.GetType() == typeof(TextBox))
+                    {
+                        string xx = ((TextBox)c).Text;
+                        if (xx == "" || xx == null)
+                        ((TextBox)c).Text= "0";
                         a.Add(c.Name + "/" + ((TextBox)c).Text);
+                    }
                 }
                 SaveVars("SO2R", ref a);		// save the values to the DB
                 bSo2rChg = false;
@@ -9103,7 +9271,7 @@ namespace DataDecoder
             catch (Exception)
             {
                 MessageBox.Show("This value can only be a decimal number from 1-3. \n\n" +
-                    "Please select a number in this range.", "Input Error",
+                    "Please select a number in this range.", "AmpKey A Input Error",
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
                 if (txtTxB.Text == "3") { txtTxA.Text = "1"; }
                 else if (txtTxB.Text == "2") { txtTxA.Text = "3"; }
@@ -9114,7 +9282,7 @@ namespace DataDecoder
             if (txtTxA.Text == txtTxB.Text)
             {
                 MessageBox.Show("TXA and TXB can not use the same TX line. \n\n" +
-                    "Please select another TX line (1-3).", "Input Error",
+                    "Please select another TX line (1-3).", "AmpKey A Input Error",
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
                 if (txtTxB.Text == "3") { txtTxA.Text = "1"; }
                 else if (txtTxB.Text == "1") { txtTxA.Text = "2"; }
@@ -9138,7 +9306,7 @@ namespace DataDecoder
             catch (Exception)
             {
                 MessageBox.Show("This value can only be a decimal number from 1-3. \n\n" +
-                    "Please select a number in this range.", "Input Error",
+                    "Please select a number in this range.", "AmpKey B Input Error",
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
                 if (txtTxA.Text == "3") { txtTxB.Text = "1"; }
                 else if (txtTxA.Text == "2") { txtTxB.Text = "3"; }
@@ -9149,7 +9317,7 @@ namespace DataDecoder
             if (txtTxA.Text == txtTxB.Text)
             {
                 MessageBox.Show("TXA and TXB can not use the same TX line. \n\n" +
-                    "Please select another TX line (1-3).", "Input Error",
+                    "Please select another TX line (1-3).", "AmpKey B Input Error",
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
                 if (txtTxA.Text == "3") { txtTxB.Text = "1"; }
                 else if (txtTxA.Text == "1") { txtTxB.Text = "2"; }
@@ -9164,6 +9332,7 @@ namespace DataDecoder
         #region # SO2R Methods #
 
         // Initialization
+        bool so2rInit = false;
         void SOinit()
         {
             chkSoEnab.Checked = set.chkSoEnab;
@@ -9207,6 +9376,7 @@ namespace DataDecoder
                     if (txtLPT2.Text != "")
                         solpt2 = Convert.ToInt32(txtLPT2.Text);
                 }
+                so2rInit = true;
             }
         }
         // call file dialog to set the user file.
@@ -9252,7 +9422,7 @@ namespace DataDecoder
                             TXa = txtTx_1a.Text;
                             dataH = txtHi1_1a.Text;
                             ctrlH = txtHi2_1a.Text;
-                        }                                                                                                         
+                        }
                         break;
                     case "080":
                         if (!chkSO2a.Checked) { inhibA = true; }
@@ -9270,7 +9440,7 @@ namespace DataDecoder
                         if (!chkSO3a.Checked) { inhibA = true; }
                         else
                         {
-                            inhibA = false; 
+                            inhibA = false;
                             WriteToPort("ZZPC" + txtPwr_3a.Text.PadLeft(3, '0') + ";", iSleep);
                             WriteToPort("ZZOA" + txtRx_3a.Text + ";", iSleep);
                             TXa = txtTx_3a.Text;
@@ -9282,7 +9452,7 @@ namespace DataDecoder
                         if (!chkSO4a.Checked) { inhibA = true; }
                         else
                         {
-                            inhibA = false; 
+                            inhibA = false;
                             WriteToPort("ZZPC" + txtPwr_4a.Text.PadLeft(3, '0') + ";", iSleep);
                             WriteToPort("ZZOA" + txtRx_4a.Text + ";", iSleep);
                             TXa = txtTx_4a.Text;
@@ -9380,7 +9550,16 @@ namespace DataDecoder
                 }
                 if (inhibA) { WriteToPort("ZZPC000;", iSleep); } // set drive to zero
             }
-            catch { }
+            catch(Exception e)
+            {
+                if (so2rInit)
+                {
+                    MessageBox.Show(
+                    "The most probable cause for this error is missing data in the matrix. " +
+                    "Enter a zero ('0') for non-used fields\r\r" + e, "SO2R Matrix Data Error",
+                    MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                }
+            }
         }
         // setup data for vfo b by band
         void SetVfoB()
@@ -9641,7 +9820,17 @@ namespace DataDecoder
                 // if band not used set drive to zero
                 if (inhibB) { WriteToPort("ZZPC000;", iSleep); }
             }
-            catch { }
+            catch (Exception e)
+            {
+                if (so2rInit)
+                {
+                    MessageBox.Show(
+                    "The most probable cause for this error is missing data in the matrix. " +
+                    "Enter a zero ('0') for non-used fields\r\r" + e, "SO2R Matrix Data Error",
+                    MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                }
+            }
+
         }
         // convert vfo b freq to band
         int FreqToBand(int freq)
@@ -11100,9 +11289,10 @@ namespace DataDecoder
         {
             try
             {
-                WriteToPort("ZZTS;", iSleep);
-                WriteToPort("ZZBS;", iSleep);
-//                WriteToPort("ZZSW;", iSleep);
+                WriteToPort("ZZTS;", iSleep); // TEMP 
+                WriteToPort("ZZBS;", iSleep); // BAND
+                WriteToPort("ZZRV;", iSleep); // PS VOLTS
+                WriteToPort("ZZFI;", iSleep); // Filter in use
             }
             catch { }
         }
@@ -13096,46 +13286,204 @@ namespace DataDecoder
 
         #endregion WaveNode
 
-        //Recall ant profile 1
-        private void toolStripMenuItem6_Click(object sender, EventArgs e)
+        #region Memory
+
+        #region # Declarations #
+
+        // create memory array wit 5 rows and 10 columns
+        string[,] mem = new string[5,11];
+        
+        int idxMem = 5; // mem array index
+        string vfoA, vfoB, Rx1, Rx2, TxA, RxFlt, TxPro, ZZMD; // PSDR vars
+        string mvFq, mvFl, mvMd;    // M<>V vars (freq, fltr, mode)
+        int MV = 1;    // 1 = vfo, 2 = memory
+
+        #endregion # Declarations #
+
+        #region # Delegates #
+
+        // Write to MV button
+        delegate void SetMVCallback(string text);
+        public void SetMV(string text)
         {
-            cboRotorPort.SelectedIndex = set.antPro1RtrPort;
-            cboRotorCom.SelectedIndex = set.antPro1RtrCom;
-            cboStep.SelectedIndex = set.antPro1StepPort;
-            cboStepCom.SelectedIndex = set.antPro1StepCom;
-            SetRotorModel(set.antPro1RtrModel);
-            SetRotorSpeed(set.antPro1RtrSpeed);
+            if (this.btnMV.InvokeRequired)
+            {
+                SetMVCallback d = new SetMVCallback(SetMV);
+                this.Invoke(d, new object[] { text });
+            }
+            else
+            {
+                if (text == "Memory")
+                    btnMV.BackColor = Color.Yellow;
+                else
+                    btnMV.BackColor = Color.Empty;
+            }
         }
-        //Recall ant profile 2
-        private void toolStripMenuItem7_Click(object sender, EventArgs e)
+        // Write to MemSave button
+        delegate void SetMemSaveCallback(string text);
+        public void SetMemSave(string text)
         {
-            cboRotorPort.SelectedIndex = set.antPro2RtrPort;
-            cboRotorCom.SelectedIndex = set.antPro2RtrCom;
-            cboStep.SelectedIndex = set.antPro2StepPort;
-            cboStepCom.SelectedIndex = set.antPro2StepCom;
-            SetRotorModel(set.antPro2RtrModel);
-            SetRotorSpeed(set.antPro2RtrSpeed);
+            if (this.btnMemSave.InvokeRequired)
+            {
+                SetMemSaveCallback d = new SetMemSaveCallback(SetMemSave);
+                this.Invoke(d, new object[] { text });
+            }
+            else
+            {
+                if (text == "Yellow")
+                btnMemSave.BackColor = Color.Yellow;
+                else
+                btnMemSave.BackColor = Color.Empty;
+            }
         }
-        //Save ant profile 1
-        private void toolStripMenuItem8_Click(object sender, EventArgs e)
+        // Write to MemFreq button
+        delegate void SetMemFreqCallback(string text);
+        public void SetMemFreq(string text)
         {
-            set.antPro1RtrPort = set.RotorPort;
-            set.antPro1RtrCom = set.RotorCom;
-            set.antPro1RtrModel = set.rotorModel;
-            set.antPro1RtrSpeed = set.RotorSpeed;
-            set.antPro1StepPort = set.StepPortNum;
-            set.antPro1StepCom = set.StepCom;
+            if (this.txtMemFreq.InvokeRequired)
+            {
+                SetMemFreqCallback d = new SetMemFreqCallback(SetMemFreq);
+                this.Invoke(d, new object[] { text });
+            }
+            else
+            {
+                txtMemFreq.Text = text;
+            }
         }
-        //Save ant profile 2
-        private void toolStripMenuItem9_Click(object sender, EventArgs e)
+        // Write to MemMode button
+        delegate void SetMemModeCallback(string text);
+        public void SetMemMode(string text)
         {
-            set.antPro2RtrPort = set.RotorPort;
-            set.antPro2RtrCom = set.RotorCom;
-            set.antPro2RtrModel = set.rotorModel;
-            set.antPro2RtrSpeed = set.RotorSpeed;
-            set.antPro2StepPort = set.StepPortNum;
-            set.antPro2StepCom = set.StepCom;
+            if (this.txtMemMode.InvokeRequired)
+            {
+                SetMemModeCallback d = new SetMemModeCallback(SetMemMode);
+                this.Invoke(d, new object[] { text });
+            }
+            else
+            {
+                txtMemMode.Text = text;
+            }
         }
+        // Write to MemIdx button
+        delegate void SetMemIdxCallback(string text);
+        public void SetMemIdx(string text)
+        {
+            if (this.txtMemIdx.InvokeRequired)
+            {
+                SetMemIdxCallback d = new SetMemIdxCallback(SetMemIdx);
+                this.Invoke(d, new object[] { text });
+            }
+            else
+            {
+                txtMemIdx.Text = text;
+            }
+        }
+        
+        #endregion # Delegates #
+
+        #region # Events #
+
+        // the memory/vfo toggle button has been pressed
+        private void btnMV_Click(object sender, EventArgs e)
+        { 
+            if (idxMem == 5 || mem[idxMem, 0] == "" || mem[idxMem, 0] == null)
+            { btnMemLoad_Click(null, null); return; }
+
+            if (MV == 1)    // save vfo & load memory to psdr
+            {
+                mvFq = vfoA; mvFl = RxFlt; mvMd = sdrMode;
+                btnMemLoad_Click(null, null); 
+                MV = 2;
+                SetMV("Memory");
+                string freq = vfoA.TrimStart('0');
+                txtMemVfo.Text = Convert.ToInt32(freq.Substring(0, freq.Length - 3)).ToString("N0");
+            }
+            else if (MV == 2)   // reload vfo
+            {
+                WriteToPort("MD" + mvMd + ";", iSleep); // SDR MODE
+                WriteToPort("ZZFA" + mvFq + ";", iSleep); // VFO A
+                WriteToPort("ZZFI" + mvFl + ";", iSleep); // RX Filter
+                MV = 1;
+                SetMV("");
+                txtMemVfo.Text = "";
+            }
+        }
+        // the memory recall button has been pressed
+        // display memory slot freq & mode
+        // start timer running
+        private void btnReCall_Click(object sender, EventArgs e)
+        {
+            idxMem++;
+            if (idxMem > 4) idxMem = 0;
+            SetMemIdx((idxMem + 1).ToString());
+            if (mem[idxMem, 0] == "" || mem[idxMem, 0] == null)
+            { txtMemFreq.Text = "Empty"; txtMemMode.Text = ""; return; }
+            string freq = mem[idxMem, 0].TrimStart('0');
+            txtMemFreq.Text = Convert.ToInt32(freq.Substring(0, freq.Length-3)).ToString("N0"); 
+            txtMemMode.Text = mem[idxMem, 10];
+        }
+        // the memory save button has been pressed
+        private void btnMemSave_Click(object sender, EventArgs e)
+        {
+            // get current radio status
+            WriteToPort("ZZSW;", iSleep); // TX VFO
+            WriteToPort("ZZMD;", iSleep); // MODE
+            WriteToPort("ZZOA;", iSleep); // RX1 ANT
+            WriteToPort("ZZOB;", iSleep); // RX2 ANT
+            WriteToPort("ZZOC;", iSleep); // TX ANT
+            WriteToPort("ZZOF;", iSleep); // TX LINE
+//            WriteToPort("ZZFI;", iSleep); // RX Filter
+            WriteToPort("ZZTP;", iSleep); // TX Profile
+        }
+        // the memory clear button has been pressed
+        private void btnMemClear_Click(object sender, EventArgs e)
+        {
+            for (int i = 0; i <= 4; i++)
+            {
+                for (int j = 0; j <= 10; j++)
+                {
+                    mem[i, j] = "";
+                }
+            }
+            idxMem = 0;
+            SetMemIdx((idxMem + 1).ToString());
+            txtMemFreq.Text = "Empty"; txtMemMode.Text = "";
+        }
+        // load memory vars to PSDR
+        private void btnMemLoad_Click(object sender, EventArgs e)
+        {
+            if (idxMem == 5 || mem[idxMem, 0] == "" || mem[idxMem, 0] == null)
+            {
+                Notification alert = new Notification();
+                Notification.notiIntvl = 7000;
+                Notification.notiMsg =
+                    "Can Not load Power SDR from this memory. " +
+                    "The selected memory slot is empty.\r\r" +
+                    "Please select another memory and try again.\r";
+                alert.Show();
+                SetMV("");
+                return;
+            }
+            WriteToPort("ZZMD" + mem[idxMem, 3] + ";", iSleep); // SDR MODE
+            WriteToPort("ZZFA" + mem[idxMem, 0] + ";", iSleep); // VFO A
+            WriteToPort("ZZFB" + mem[idxMem, 1] + ";", iSleep); // VFO B
+            WriteToPort("ZZSW" + mem[idxMem, 2] + ";", iSleep); // TX VFO
+            WriteToPort("ZZOA" + mem[idxMem, 4] + ";", iSleep); // RX1 ANT
+            WriteToPort("ZZOB" + mem[idxMem, 5] + ";", iSleep); // RX2 ANT
+            WriteToPort("ZZOC" + mem[idxMem, 6] + ";", iSleep); // TX ANT
+            WriteToPort("ZZOF" + mem[idxMem, 7] + ";", iSleep); // TX LINE
+            WriteToPort("ZZFI" + mem[idxMem, 8] + ";", iSleep); // RX Filter
+            WriteToPort("ZZTP" + mem[idxMem, 9] + ";", iSleep); // TX Profile
+        }
+
+        #endregion # Events #
+
+        #region # Methods #
+
+
+        #endregion # Methods #
+
+        #endregion Memory
 
     } // end class Setup
 
