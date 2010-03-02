@@ -231,7 +231,7 @@ public class Client extends Thread {
 
     public void setAGC(int agc) {
         this.agc=agc;
-        sendCommand("setRXAGC  "+agc);
+        sendCommand("setAGC  "+agc);
     }
 
     public void setNR(boolean state) {

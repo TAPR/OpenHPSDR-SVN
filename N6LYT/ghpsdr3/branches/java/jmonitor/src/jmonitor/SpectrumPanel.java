@@ -152,7 +152,7 @@ public class SpectrumPanel extends javax.swing.JPanel {
         graphics.fillRect(0,0,WIDTH,HEIGHT);
 
         // draw the filter
-        graphics.setColor(Color.LIGHT_GRAY);
+        graphics.setColor(Color.GRAY);
         graphics.fillRect(filterLeft,0,filterRight-filterLeft,HEIGHT);
 
         // plot frequency markers
