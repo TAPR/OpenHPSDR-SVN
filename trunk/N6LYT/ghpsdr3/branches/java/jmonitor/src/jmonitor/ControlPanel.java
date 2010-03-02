@@ -75,7 +75,7 @@ public class ControlPanel extends javax.swing.JPanel {
         setPreferredSize(new java.awt.Dimension(480, 27));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        bandButton.setFont(new java.awt.Font("DejaVu Sans", 0, 12)); // NOI18N
+        bandButton.setFont(new java.awt.Font("DejaVu Sans", 0, 12));
         bandButton.setText("Band");
         bandButton.setAlignmentY(0.0F);
         bandButton.setMaximumSize(new java.awt.Dimension(90, 27));
@@ -88,7 +88,7 @@ public class ControlPanel extends javax.swing.JPanel {
         });
         add(bandButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 90, -1));
 
-        modeButton.setFont(new java.awt.Font("DejaVu Sans", 0, 12)); // NOI18N
+        modeButton.setFont(new java.awt.Font("DejaVu Sans", 0, 12));
         modeButton.setText("Mode");
         modeButton.setAlignmentY(0.0F);
         modeButton.setMaximumSize(new java.awt.Dimension(90, 27));
@@ -103,7 +103,7 @@ public class ControlPanel extends javax.swing.JPanel {
 
         vfo.setBackground(new java.awt.Color(0, 0, 0));
         vfo.setEditable(false);
-        vfo.setFont(new java.awt.Font("FreeMono", 1, 24));
+        vfo.setFont(new java.awt.Font("FreeMono", 1, 24)); // NOI18N
         vfo.setForeground(new java.awt.Color(0, 255, 0));
         vfo.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         vfo.setText("7.048.000");
@@ -111,6 +111,11 @@ public class ControlPanel extends javax.swing.JPanel {
         vfo.setMaximumSize(new java.awt.Dimension(178, 26));
         vfo.setMinimumSize(new java.awt.Dimension(178, 26));
         vfo.setPreferredSize(new java.awt.Dimension(178, 26));
+        vfo.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                vfoMouseClicked(evt);
+            }
+        });
         vfo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 vfoActionPerformed(evt);
@@ -142,7 +147,7 @@ public class ControlPanel extends javax.swing.JPanel {
 
         add(digitalMeter, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 0, 140, 20));
 
-        filterButton.setFont(new java.awt.Font("DejaVu Sans", 0, 12)); // NOI18N
+        filterButton.setFont(new java.awt.Font("DejaVu Sans", 0, 12));
         filterButton.setText("Filter");
         filterButton.setMaximumSize(new java.awt.Dimension(90, 27));
         filterButton.setMinimumSize(new java.awt.Dimension(90, 27));
@@ -154,7 +159,7 @@ public class ControlPanel extends javax.swing.JPanel {
         });
         add(filterButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 0, 80, -1));
 
-        agcButton.setFont(new java.awt.Font("DejaVu Sans", 0, 12)); // NOI18N
+        agcButton.setFont(new java.awt.Font("DejaVu Sans", 0, 12));
         agcButton.setText("AGC");
         agcButton.setMaximumSize(new java.awt.Dimension(90, 27));
         agcButton.setMinimumSize(new java.awt.Dimension(90, 27));
@@ -166,7 +171,7 @@ public class ControlPanel extends javax.swing.JPanel {
         });
         add(agcButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 30, 80, -1));
 
-        dspButton.setFont(new java.awt.Font("DejaVu Sans", 0, 12)); // NOI18N
+        dspButton.setFont(new java.awt.Font("DejaVu Sans", 0, 12));
         dspButton.setText("DSP");
         dspButton.setMaximumSize(new java.awt.Dimension(90, 27));
         dspButton.setMinimumSize(new java.awt.Dimension(90, 27));
@@ -178,7 +183,7 @@ public class ControlPanel extends javax.swing.JPanel {
         });
         add(dspButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 0, 80, -1));
 
-        afgainButton.setFont(new java.awt.Font("DejaVu Sans", 0, 12)); // NOI18N
+        afgainButton.setFont(new java.awt.Font("DejaVu Sans", 0, 12));
         afgainButton.setText("AFGain");
         afgainButton.setMaximumSize(new java.awt.Dimension(90, 27));
         afgainButton.setMinimumSize(new java.awt.Dimension(90, 27));
@@ -543,7 +548,12 @@ public class ControlPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_dspButtonActionPerformed
 
     private void vfoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_vfoActionPerformed
-        // TODO add your handling code here:
+        // user has entered a frequency
+        String s=vfo.getText();
+
+        long f=Long.parseLong(s);
+
+        client.setFrequency(f);
     }//GEN-LAST:event_vfoActionPerformed
 
     private void afgainButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_afgainButtonActionPerformed
@@ -551,6 +561,13 @@ public class ControlPanel extends javax.swing.JPanel {
             gainMenu.show(afgainButton,0,0);
         }
     }//GEN-LAST:event_afgainButtonActionPerformed
+
+    private void vfoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_vfoMouseClicked
+        // look for right mouse event
+        if(evt.getButton()==evt.BUTTON3) {
+
+        }
+    }//GEN-LAST:event_vfoMouseClicked
 
     private void createLSBFilterMenu() {
 
