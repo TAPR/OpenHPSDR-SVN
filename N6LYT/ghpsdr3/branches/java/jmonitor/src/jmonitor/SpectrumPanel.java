@@ -146,54 +146,71 @@ public class SpectrumPanel extends javax.swing.JPanel {
 
     private void drawSpectrum() {
         if(image==null) image=this.createImage(WIDTH,HEIGHT);
-        Graphics graphics=image.getGraphics();
-        graphics.setFont(font);
-        graphics.setColor(Color.BLACK);
-        graphics.fillRect(0,0,WIDTH,HEIGHT);
+        if(image!=null) {
+            Graphics graphics=image.getGraphics();
+            graphics.setFont(font);
+            graphics.setColor(Color.BLACK);
+            graphics.fillRect(0,0,WIDTH,HEIGHT);
 
-        // draw the filter
-        graphics.setColor(Color.GRAY);
-        graphics.fillRect(filterLeft,0,filterRight-filterLeft,HEIGHT);
+            // draw the filter
+            graphics.setColor(Color.GRAY);
+            graphics.fillRect(filterLeft,0,filterRight-filterLeft,HEIGHT);
 
-        // plot frequency markers
-        long f=client.getFrequency()-(client.getSampleRate()/2);
-        long increment;
-        increment=200;
+            // plot frequency markers
+            int sampleRate=client.getSampleRate();
+            long f=client.getFrequency()-(sampleRate/2);
+            long increment;
 
-        for(int i=0;i<WIDTH;i++) {
-            if((f%20000)<increment) {
-                graphics.setColor(Color.YELLOW);
-                graphics.drawLine(i,0,i,HEIGHT);
-                graphics.setColor(java.awt.Color.GREEN);
-                graphics.drawString(frequencyFormat.format((double)f/1000000.0),i-8,15);
+            switch(sampleRate) {
+                case 48000:
+                    increment=100;
+                    break;
+                case 96000:
+                    increment=200;
+                    break;
+                case 192000:
+                    increment=400;
+                    break;
+                default:
+                    increment=200;
+                    break;
             }
-            f+=increment;
+
+            for(int i=0;i<WIDTH;i++) {
+                if((f%20000)<increment) {
+                    graphics.setColor(Color.YELLOW);
+                    graphics.drawLine(i,0,i,HEIGHT);
+                    graphics.setColor(java.awt.Color.GREEN);
+                    graphics.drawString(frequencyFormat.format((double)f/1000000.0),i-8,15);
+                }
+                f+=increment;
+            }
+            // plot horizontal grid
+            int V = spectrumHigh - spectrumLow;
+            int numSteps = V/20;
+            int pixelStepSize = HEIGHT/numSteps;
+            for(int i=1; i<numSteps; i++)
+            {
+                int num = spectrumHigh - i*20;
+                int y = (int)Math.floor((spectrumHigh - num)*HEIGHT/V);
+
+                graphics.setColor(Color.YELLOW);
+                graphics.drawLine(0, y, WIDTH, y);
+
+                graphics.setColor(Color.GREEN);
+                graphics.drawString(Integer.toString(num),3,y+2);
+            }
+
+            // draw cursor
+            graphics.setColor(Color.RED);
+            graphics.drawLine(WIDTH/2, 0, WIDTH/2, HEIGHT);
+
+            // plot the data
+            graphics.setColor(Color.WHITE);
+            graphics.drawPolyline(X,Y,X.length);
+
+            this.repaint(new Rectangle(WIDTH,HEIGHT));
         }
-        // plot horizontal grid
-        int V = spectrumHigh - spectrumLow;
-        int numSteps = V/20;
-        int pixelStepSize = HEIGHT/numSteps;
-        for(int i=1; i<numSteps; i++)
-        {
-            int num = spectrumHigh - i*20;
-            int y = (int)Math.floor((spectrumHigh - num)*HEIGHT/V);
-
-            graphics.setColor(Color.YELLOW);
-            graphics.drawLine(0, y, WIDTH, y);
-
-            graphics.setColor(Color.GREEN);
-            graphics.drawString(Integer.toString(num),3,y+2);
-        }
-
-        // draw cursor
-        graphics.setColor(Color.RED);
-        graphics.drawLine(WIDTH/2, 0, WIDTH/2, HEIGHT);
-
-        // plot the data
-        graphics.setColor(Color.WHITE);
-        graphics.drawPolyline(X,Y,X.length);
-
-        this.repaint(new Rectangle(WIDTH,HEIGHT));
     }
 
     private static final int SAMPLES=480;
