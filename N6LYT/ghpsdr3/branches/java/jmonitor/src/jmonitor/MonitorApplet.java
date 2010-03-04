@@ -70,7 +70,7 @@ public class MonitorApplet extends javax.swing.JApplet {
         client.setFrequency(7048000);
         client.setMode(0);
         client.setFilter(-2850, -150);
-        client.setAGC(0);
+        client.setAGC(1);
         client.setGain(30);
 
         monitorPanel.setClient(client);
