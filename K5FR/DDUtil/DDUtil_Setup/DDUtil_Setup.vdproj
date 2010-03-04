@@ -57,6 +57,12 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_4C68C4F0F57C4F849BD261C3DD0D83F3"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_5147E685D9F04FCE9E696502C49BC449"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -419,6 +425,26 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_4C68C4F0F57C4F849BD261C3DD0D83F3"
+            {
+            "SourcePath" = "8:..\\bin\\Release\\uh_oh.wav"
+            "TargetName" = "8:uh_oh.wav"
+            "Tag" = "8:"
+            "Folder" = "8:_18E81C9E3C4F4675BCD023B8455469BC"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_5147E685D9F04FCE9E696502C49BC449"
             {
             "SourcePath" = "8:..\\bin\\Release\\BandData.xml"
@@ -668,14 +694,14 @@
         {
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:DDUtil"
-        "ProductCode" = "8:{5011C1F7-FF5A-4B10-A4EA-768F77C2E451}"
-        "PackageCode" = "8:{A58B7156-45E7-4709-8B08-68CA2B766C4E}"
+        "ProductCode" = "8:{2AF8E70A-BD7C-4BCB-9A32-A5FABFFB2F60}"
+        "PackageCode" = "8:{9FF79FDD-9E08-42A3-A85D-68B4541A87DE}"
         "UpgradeCode" = "8:{E787AEB9-A577-499D-A08E-775DE944A651}"
         "RestartWWWService" = "11:FALSE"
         "RemovePreviousVersions" = "11:TRUE"
         "DetectNewerInstalledVersion" = "11:TRUE"
         "InstallAllUsers" = "11:FALSE"
-        "ProductVersion" = "8:1.8.302"
+        "ProductVersion" = "8:1.8.303"
         "Manufacturer" = "8:Default Company Name"
         "ARPHELPTELEPHONE" = "8:"
         "ARPHELPLINK" = "8:"

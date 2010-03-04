@@ -35,10 +35,8 @@ namespace DataDecoder
             this.lblAvg = new System.Windows.Forms.Label();
             this.txtAvg = new System.Windows.Forms.TextBox();
             this.txtTemp = new System.Windows.Forms.TextBox();
-            this.btnReStart = new System.Windows.Forms.Button();
             this.txtSWR = new System.Windows.Forms.TextBox();
             this.lblSWR = new System.Windows.Forms.Label();
-            this.btnProfiler = new System.Windows.Forms.Button();
             this.txtFwd = new System.Windows.Forms.TextBox();
             this.lblFwd = new System.Windows.Forms.Label();
             this.btnSP = new System.Windows.Forms.Button();
@@ -82,6 +80,16 @@ namespace DataDecoder
             this.btnMacro10 = new System.Windows.Forms.Button();
             this.btnMacro9 = new System.Windows.Forms.Button();
             this.lblStepFreq = new System.Windows.Forms.Label();
+            this.txtVolts = new System.Windows.Forms.TextBox();
+            this.txtMemVfo = new System.Windows.Forms.TextBox();
+            this.btnMV = new System.Windows.Forms.Button();
+            this.btnMemLoad = new System.Windows.Forms.Button();
+            this.txtMemIdx = new System.Windows.Forms.TextBox();
+            this.btnMemClear = new System.Windows.Forms.Button();
+            this.txtMemMode = new System.Windows.Forms.TextBox();
+            this.btnReCall = new System.Windows.Forms.Button();
+            this.txtMemFreq = new System.Windows.Forms.TextBox();
+            this.btnMemSave = new System.Windows.Forms.Button();
             this.grpStepCtrl = new System.Windows.Forms.GroupBox();
             this.grpRotor = new System.Windows.Forms.GroupBox();
             this.button4 = new System.Windows.Forms.Button();
@@ -141,33 +149,14 @@ namespace DataDecoder
             // 
             // txtTemp
             // 
-            this.txtTemp.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.75F, System.Drawing.FontStyle.Bold);
-            this.txtTemp.Location = new System.Drawing.Point(289, 6);
+            this.txtTemp.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtTemp.Location = new System.Drawing.Point(290, 5);
             this.txtTemp.Name = "txtTemp";
-            this.txtTemp.Size = new System.Drawing.Size(49, 19);
+            this.txtTemp.Size = new System.Drawing.Size(49, 20);
             this.txtTemp.TabIndex = 77;
             this.txtTemp.Text = "PA Tmp";
             this.txtTemp.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.toolTip1.SetToolTip(this.txtTemp, "PA Temp");
-            // 
-            // btnReStart
-            // 
-            this.btnReStart.AutoSize = true;
-            this.btnReStart.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.btnReStart.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.btnReStart.FlatAppearance.BorderColor = System.Drawing.Color.Black;
-            this.btnReStart.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
-            this.btnReStart.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.btnReStart.Font = new System.Drawing.Font("Microsoft Sans Serif", 6F, System.Drawing.FontStyle.Bold);
-            this.btnReStart.ForeColor = System.Drawing.Color.Black;
-            this.btnReStart.Location = new System.Drawing.Point(255, 6);
-            this.btnReStart.Name = "btnReStart";
-            this.btnReStart.Size = new System.Drawing.Size(28, 19);
-            this.btnReStart.TabIndex = 82;
-            this.btnReStart.Text = "PC";
-            this.toolTip1.SetToolTip(this.btnReStart, "Profiler Close");
-            this.btnReStart.UseVisualStyleBackColor = false;
-            this.btnReStart.Click += new System.EventHandler(this.btnReStart_Click);
             // 
             // txtSWR
             // 
@@ -190,25 +179,6 @@ namespace DataDecoder
             this.lblSWR.TabIndex = 80;
             this.lblSWR.Text = "SWR";
             this.lblSWR.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // btnProfiler
-            // 
-            this.btnProfiler.AutoSize = true;
-            this.btnProfiler.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.btnProfiler.BackColor = System.Drawing.Color.LightYellow;
-            this.btnProfiler.FlatAppearance.BorderColor = System.Drawing.Color.Black;
-            this.btnProfiler.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Yellow;
-            this.btnProfiler.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.btnProfiler.Font = new System.Drawing.Font("Microsoft Sans Serif", 6F, System.Drawing.FontStyle.Bold);
-            this.btnProfiler.ForeColor = System.Drawing.Color.Black;
-            this.btnProfiler.Location = new System.Drawing.Point(223, 6);
-            this.btnProfiler.Name = "btnProfiler";
-            this.btnProfiler.Size = new System.Drawing.Size(28, 19);
-            this.btnProfiler.TabIndex = 81;
-            this.btnProfiler.Text = "PO";
-            this.toolTip1.SetToolTip(this.btnProfiler, "Profiler Open");
-            this.btnProfiler.UseVisualStyleBackColor = false;
-            this.btnProfiler.Click += new System.EventHandler(this.btnProfiler_Click);
             // 
             // txtFwd
             // 
@@ -364,7 +334,7 @@ namespace DataDecoder
             // AOT
             // 
             this.AOT.AutoSize = true;
-            this.AOT.Location = new System.Drawing.Point(286, 142);
+            this.AOT.Location = new System.Drawing.Point(287, 160);
             this.AOT.Name = "AOT";
             this.AOT.Size = new System.Drawing.Size(62, 17);
             this.AOT.TabIndex = 87;
@@ -506,7 +476,7 @@ namespace DataDecoder
             this.btnByp.FlatAppearance.BorderColor = System.Drawing.Color.Black;
             this.btnByp.Font = new System.Drawing.Font("Microsoft Sans Serif", 6F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnByp.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.btnByp.Location = new System.Drawing.Point(401, 4);
+            this.btnByp.Location = new System.Drawing.Point(401, 5);
             this.btnByp.Name = "btnByp";
             this.btnByp.Size = new System.Drawing.Size(19, 19);
             this.btnByp.TabIndex = 89;
@@ -520,7 +490,7 @@ namespace DataDecoder
             this.lblBCD.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lblBCD.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblBCD.ForeColor = System.Drawing.Color.Red;
-            this.lblBCD.Location = new System.Drawing.Point(378, 6);
+            this.lblBCD.Location = new System.Drawing.Point(379, 7);
             this.lblBCD.Name = "lblBCD";
             this.lblBCD.Size = new System.Drawing.Size(15, 15);
             this.lblBCD.TabIndex = 90;
@@ -535,7 +505,7 @@ namespace DataDecoder
             this.btnFull.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
             this.btnFull.Font = new System.Drawing.Font("Microsoft Sans Serif", 6F, System.Drawing.FontStyle.Bold);
             this.btnFull.ForeColor = System.Drawing.Color.Black;
-            this.btnFull.Location = new System.Drawing.Point(345, 4);
+            this.btnFull.Location = new System.Drawing.Point(345, 5);
             this.btnFull.Name = "btnFull";
             this.btnFull.Size = new System.Drawing.Size(27, 19);
             this.btnFull.TabIndex = 83;
@@ -548,7 +518,7 @@ namespace DataDecoder
             // 
             this.chkRCP2.AutoSize = true;
             this.chkRCP2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
-            this.chkRCP2.Location = new System.Drawing.Point(286, 81);
+            this.chkRCP2.Location = new System.Drawing.Point(287, 99);
             this.chkRCP2.Name = "chkRCP2";
             this.chkRCP2.Size = new System.Drawing.Size(54, 17);
             this.chkRCP2.TabIndex = 91;
@@ -561,7 +531,7 @@ namespace DataDecoder
             // 
             this.chkRCP3.AutoSize = true;
             this.chkRCP3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
-            this.chkRCP3.Location = new System.Drawing.Point(286, 101);
+            this.chkRCP3.Location = new System.Drawing.Point(287, 119);
             this.chkRCP3.Name = "chkRCP3";
             this.chkRCP3.Size = new System.Drawing.Size(54, 17);
             this.chkRCP3.TabIndex = 93;
@@ -574,7 +544,7 @@ namespace DataDecoder
             // 
             this.chkRCP4.AutoSize = true;
             this.chkRCP4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
-            this.chkRCP4.Location = new System.Drawing.Point(286, 122);
+            this.chkRCP4.Location = new System.Drawing.Point(287, 140);
             this.chkRCP4.Name = "chkRCP4";
             this.chkRCP4.Size = new System.Drawing.Size(54, 17);
             this.chkRCP4.TabIndex = 94;
@@ -819,6 +789,148 @@ namespace DataDecoder
             this.lblStepFreq.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             this.toolTip1.SetToolTip(this.lblStepFreq, "Frequency reported from SteppIR controller.");
             // 
+            // txtVolts
+            // 
+            this.txtVolts.BackColor = System.Drawing.Color.LightYellow;
+            this.txtVolts.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtVolts.Location = new System.Drawing.Point(248, 5);
+            this.txtVolts.Name = "txtVolts";
+            this.txtVolts.Size = new System.Drawing.Size(36, 20);
+            this.txtVolts.TabIndex = 104;
+            this.txtVolts.Text = "Volts";
+            this.txtVolts.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.toolTip1.SetToolTip(this.txtVolts, "Power Supply voltage.");
+            // 
+            // txtMemVfo
+            // 
+            this.txtMemVfo.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtMemVfo.ForeColor = System.Drawing.Color.Navy;
+            this.txtMemVfo.Location = new System.Drawing.Point(3, 69);
+            this.txtMemVfo.Name = "txtMemVfo";
+            this.txtMemVfo.Size = new System.Drawing.Size(50, 20);
+            this.txtMemVfo.TabIndex = 113;
+            this.txtMemVfo.Text = "VFO";
+            this.txtMemVfo.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.toolTip1.SetToolTip(this.txtMemVfo, "VFO frequency saved.");
+            this.txtMemVfo.WordWrap = false;
+            // 
+            // btnMV
+            // 
+            this.btnMV.AutoSize = true;
+            this.btnMV.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnMV.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold);
+            this.btnMV.ForeColor = System.Drawing.Color.ForestGreen;
+            this.btnMV.Location = new System.Drawing.Point(55, 68);
+            this.btnMV.Name = "btnMV";
+            this.btnMV.Size = new System.Drawing.Size(49, 23);
+            this.btnMV.TabIndex = 107;
+            this.btnMV.Text = "V<>M";
+            this.toolTip1.SetToolTip(this.btnMV, "Press to toggle between VFO A and selected memory (Ctrl+Z) .");
+            this.btnMV.UseVisualStyleBackColor = true;
+            this.btnMV.Click += new System.EventHandler(this.btnMV_Click);
+            // 
+            // btnMemLoad
+            // 
+            this.btnMemLoad.AutoSize = true;
+            this.btnMemLoad.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnMemLoad.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold);
+            this.btnMemLoad.ForeColor = System.Drawing.Color.Firebrick;
+            this.btnMemLoad.Location = new System.Drawing.Point(160, 68);
+            this.btnMemLoad.Name = "btnMemLoad";
+            this.btnMemLoad.Size = new System.Drawing.Size(45, 23);
+            this.btnMemLoad.TabIndex = 111;
+            this.btnMemLoad.Text = "Load";
+            this.toolTip1.SetToolTip(this.btnMemLoad, "Press to load current memory data to PSDR (Ctrl+C).");
+            this.btnMemLoad.UseVisualStyleBackColor = true;
+            this.btnMemLoad.Click += new System.EventHandler(this.btnMemLoad_Click);
+            // 
+            // txtMemIdx
+            // 
+            this.txtMemIdx.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.txtMemIdx.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtMemIdx.ForeColor = System.Drawing.Color.Navy;
+            this.txtMemIdx.Location = new System.Drawing.Point(208, 70);
+            this.txtMemIdx.Name = "txtMemIdx";
+            this.txtMemIdx.Size = new System.Drawing.Size(16, 20);
+            this.txtMemIdx.TabIndex = 112;
+            this.txtMemIdx.Text = "#";
+            this.txtMemIdx.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.toolTip1.SetToolTip(this.txtMemIdx, "Memory number");
+            this.txtMemIdx.WordWrap = false;
+            // 
+            // btnMemClear
+            // 
+            this.btnMemClear.AutoSize = true;
+            this.btnMemClear.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnMemClear.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold);
+            this.btnMemClear.ForeColor = System.Drawing.Color.Red;
+            this.btnMemClear.Location = new System.Drawing.Point(374, 69);
+            this.btnMemClear.Name = "btnMemClear";
+            this.btnMemClear.Size = new System.Drawing.Size(46, 23);
+            this.btnMemClear.TabIndex = 108;
+            this.btnMemClear.Text = "Clear";
+            this.toolTip1.SetToolTip(this.btnMemClear, "Press to clear selected memory. Ctrl+Clear to delete ALL memories.");
+            this.btnMemClear.UseVisualStyleBackColor = true;
+            this.btnMemClear.Click += new System.EventHandler(this.btnMemClear_Click);
+            this.btnMemClear.KeyDown += new System.Windows.Forms.KeyEventHandler(this.btnMemClear_KeyDown);
+            // 
+            // txtMemMode
+            // 
+            this.txtMemMode.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.txtMemMode.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtMemMode.ForeColor = System.Drawing.Color.Navy;
+            this.txtMemMode.Location = new System.Drawing.Point(331, 71);
+            this.txtMemMode.Name = "txtMemMode";
+            this.txtMemMode.Size = new System.Drawing.Size(40, 20);
+            this.txtMemMode.TabIndex = 110;
+            this.txtMemMode.Text = "MODE";
+            this.txtMemMode.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.toolTip1.SetToolTip(this.txtMemMode, "Memory Mode");
+            this.txtMemMode.WordWrap = false;
+            // 
+            // btnReCall
+            // 
+            this.btnReCall.AutoSize = true;
+            this.btnReCall.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnReCall.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold);
+            this.btnReCall.ForeColor = System.Drawing.Color.Blue;
+            this.btnReCall.Location = new System.Drawing.Point(105, 68);
+            this.btnReCall.Name = "btnReCall";
+            this.btnReCall.Size = new System.Drawing.Size(54, 23);
+            this.btnReCall.TabIndex = 105;
+            this.btnReCall.Text = "ReCall";
+            this.toolTip1.SetToolTip(this.btnReCall, "Press to step-thru memories (Ctrl+X).");
+            this.btnReCall.UseVisualStyleBackColor = true;
+            this.btnReCall.Click += new System.EventHandler(this.btnReCall_Click);
+            // 
+            // txtMemFreq
+            // 
+            this.txtMemFreq.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtMemFreq.ForeColor = System.Drawing.Color.Navy;
+            this.txtMemFreq.Location = new System.Drawing.Point(228, 70);
+            this.txtMemFreq.Name = "txtMemFreq";
+            this.txtMemFreq.Size = new System.Drawing.Size(50, 20);
+            this.txtMemFreq.TabIndex = 109;
+            this.txtMemFreq.Text = "MHZ";
+            this.txtMemFreq.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.toolTip1.SetToolTip(this.txtMemFreq, "Memory frequency.");
+            this.txtMemFreq.WordWrap = false;
+            // 
+            // btnMemSave
+            // 
+            this.btnMemSave.AutoSize = true;
+            this.btnMemSave.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnMemSave.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold);
+            this.btnMemSave.ForeColor = System.Drawing.Color.Blue;
+            this.btnMemSave.Location = new System.Drawing.Point(282, 69);
+            this.btnMemSave.Name = "btnMemSave";
+            this.btnMemSave.Size = new System.Drawing.Size(46, 23);
+            this.btnMemSave.TabIndex = 106;
+            this.btnMemSave.Text = "Save";
+            this.toolTip1.SetToolTip(this.btnMemSave, "Press to save current memory data (Ctrl+V).");
+            this.btnMemSave.UseVisualStyleBackColor = true;
+            this.btnMemSave.Click += new System.EventHandler(this.btnMemSave_Click);
+            // 
             // grpStepCtrl
             // 
             this.grpStepCtrl.Controls.Add(this.lblStepFreq);
@@ -830,7 +942,7 @@ namespace DataDecoder
             this.grpStepCtrl.Controls.Add(this.btnHome);
             this.grpStepCtrl.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.25F, System.Drawing.FontStyle.Bold);
             this.grpStepCtrl.ForeColor = System.Drawing.Color.Firebrick;
-            this.grpStepCtrl.Location = new System.Drawing.Point(5, 30);
+            this.grpStepCtrl.Location = new System.Drawing.Point(5, 26);
             this.grpStepCtrl.Name = "grpStepCtrl";
             this.grpStepCtrl.Size = new System.Drawing.Size(319, 40);
             this.grpStepCtrl.TabIndex = 85;
@@ -846,7 +958,7 @@ namespace DataDecoder
             this.grpRotor.Controls.Add(this.textBox3);
             this.grpRotor.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.25F, System.Drawing.FontStyle.Bold);
             this.grpRotor.ForeColor = System.Drawing.Color.Firebrick;
-            this.grpRotor.Location = new System.Drawing.Point(330, 30);
+            this.grpRotor.Location = new System.Drawing.Point(330, 26);
             this.grpRotor.Name = "grpRotor";
             this.grpRotor.Size = new System.Drawing.Size(89, 40);
             this.grpRotor.TabIndex = 86;
@@ -870,7 +982,6 @@ namespace DataDecoder
             this.button4.TabIndex = 81;
             this.button4.Text = "PO";
             this.button4.UseVisualStyleBackColor = false;
-            this.button4.Click += new System.EventHandler(this.btnProfiler_Click);
             // 
             // button5
             // 
@@ -889,7 +1000,6 @@ namespace DataDecoder
             this.button5.TabIndex = 82;
             this.button5.Text = "PC";
             this.button5.UseVisualStyleBackColor = false;
-            this.button5.Click += new System.EventHandler(this.btnReStart_Click);
             // 
             // textBox3
             // 
@@ -920,7 +1030,7 @@ namespace DataDecoder
             this.grpAmp.Controls.Add(this.btnPwr);
             this.grpAmp.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.25F, System.Drawing.FontStyle.Bold);
             this.grpAmp.ForeColor = System.Drawing.Color.Blue;
-            this.grpAmp.Location = new System.Drawing.Point(426, 1);
+            this.grpAmp.Location = new System.Drawing.Point(426, 5);
             this.grpAmp.Name = "grpAmp";
             this.grpAmp.Size = new System.Drawing.Size(251, 80);
             this.grpAmp.TabIndex = 88;
@@ -1054,7 +1164,7 @@ namespace DataDecoder
             this.grpMacro.Controls.Add(this.label28);
             this.grpMacro.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.25F, System.Drawing.FontStyle.Bold);
             this.grpMacro.ForeColor = System.Drawing.Color.Firebrick;
-            this.grpMacro.Location = new System.Drawing.Point(5, 74);
+            this.grpMacro.Location = new System.Drawing.Point(5, 91);
             this.grpMacro.Name = "grpMacro";
             this.grpMacro.Size = new System.Drawing.Size(272, 86);
             this.grpMacro.TabIndex = 103;
@@ -1231,7 +1341,17 @@ namespace DataDecoder
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
-            this.ClientSize = new System.Drawing.Size(681, 174);
+            this.ClientSize = new System.Drawing.Size(693, 182);
+            this.Controls.Add(this.txtMemVfo);
+            this.Controls.Add(this.btnMV);
+            this.Controls.Add(this.btnMemLoad);
+            this.Controls.Add(this.txtMemIdx);
+            this.Controls.Add(this.btnMemClear);
+            this.Controls.Add(this.txtMemMode);
+            this.Controls.Add(this.btnReCall);
+            this.Controls.Add(this.txtMemFreq);
+            this.Controls.Add(this.btnMemSave);
+            this.Controls.Add(this.txtVolts);
             this.Controls.Add(this.grpMacro);
             this.Controls.Add(this.chkRCP2);
             this.Controls.Add(this.chkRCP3);
@@ -1246,10 +1366,8 @@ namespace DataDecoder
             this.Controls.Add(this.lblAvg);
             this.Controls.Add(this.txtAvg);
             this.Controls.Add(this.txtTemp);
-            this.Controls.Add(this.btnReStart);
             this.Controls.Add(this.txtSWR);
             this.Controls.Add(this.lblSWR);
-            this.Controls.Add(this.btnProfiler);
             this.Controls.Add(this.txtFwd);
             this.Controls.Add(this.lblFwd);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow;
@@ -1281,9 +1399,7 @@ namespace DataDecoder
 
         #endregion
 
-        private System.Windows.Forms.Button btnReStart;
         private System.Windows.Forms.Label lblSWR;
-        private System.Windows.Forms.Button btnProfiler;
         private System.Windows.Forms.Button btnSP;
         private System.Windows.Forms.ToolTip toolTip1;
         private System.Windows.Forms.GroupBox grpStepCtrl;
@@ -1361,5 +1477,15 @@ namespace DataDecoder
         public System.Windows.Forms.Label lblStepFreq;
         public System.Windows.Forms.TextBox txtTune;
         public System.Windows.Forms.Label lblTune;
+        public System.Windows.Forms.TextBox txtVolts;
+        public System.Windows.Forms.TextBox txtMemVfo;
+        public System.Windows.Forms.Button btnMV;
+        public System.Windows.Forms.Button btnMemLoad;
+        public System.Windows.Forms.TextBox txtMemIdx;
+        public System.Windows.Forms.Button btnMemClear;
+        public System.Windows.Forms.TextBox txtMemMode;
+        public System.Windows.Forms.Button btnReCall;
+        public System.Windows.Forms.TextBox txtMemFreq;
+        public System.Windows.Forms.Button btnMemSave;
     }
 }

@@ -2,7 +2,7 @@
 <SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="DataDecoder.Properties" GeneratedClassName="Settings">
   <Profiles />
   <Settings>
-    <Setting Name="r" Type="System.String" Scope="User">
+    <Setting Name="pollIntvl" Type="System.String" Scope="User">
       <Value Profile="(Default)">500</Value>
     </Setting>
     <Setting Name="DataFile" Type="System.String" Scope="User">
@@ -799,6 +799,9 @@ RCP4 - WriteLog</Value>
     </Setting>
     <Setting Name="antPro2StepCom" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="chkStepDipole" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
     </Setting>
   </Settings>
 </SettingsFile>
