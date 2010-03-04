@@ -32,6 +32,7 @@ using System.Drawing;
 using System.Globalization;
 using System.IO;
 using System.IO.Ports;
+using System.Media;
 using System.Net;
 using System.Reflection;
 using System.Runtime.InteropServices;
@@ -83,6 +84,7 @@ namespace DataDecoder
         DataSet ds;
         DataSet dsm = new DataSet();
         Mini mini;// = new Mini();
+        SoundPlayer wav = new SoundPlayer();
         WN2Matrix wn;
         Hashtable flist = new Hashtable();
         Settings set = Settings.Default;
@@ -354,9 +356,9 @@ namespace DataDecoder
             //setup radio port timer
             pollTimer = new System.Timers.Timer();
             pollTimer.Elapsed += new System.Timers.ElapsedEventHandler(pollTimer_Elapsed);
-            str = set.r;
+            str = set.pollIntvl;
             txtInv.Text = str;
-            pollInt = Convert.ToDouble(set.r);
+            pollInt = Convert.ToDouble(set.pollIntvl);
             if (pollInt == 0) pollInt = 1000.0;
             pollTimer.Interval = pollInt;  // 1000 = 1 second
             pollTimer.Enabled = false;
@@ -452,8 +454,8 @@ namespace DataDecoder
             catch { cboCAT.SelectedIndex = 0; BadPort("Radio CAT"); }
             txtInv.Text = Convert.ToString(pollInt);
 
-            txtProfLoc.Text = set.ProfLoc;
-            mini.PFfile = set.ProfLoc;
+            //txtProfLoc.Text = set.ProfLoc;
+            //mini.PFfile = set.ProfLoc;
 
             // set Acc Serial (passive listener) port to the last one used
             try { cboSerAcc.SelectedIndex = set.AccPort; }
@@ -654,6 +656,7 @@ namespace DataDecoder
             SOinit();   // setup SO2R
             cboKnobPort.SelectedIndex = set.cboKnobPort;
             chkKnobEnab.Checked = set.chkKnobEnab;
+            btnReCall_Click(null, null);
 
             if (chkLPenab.Checked) lpTimer.Enabled = true;
             else lpTimer.Enabled = false;
@@ -698,6 +701,20 @@ namespace DataDecoder
 
         #region Delegates
 
+        // Write to AzOffset button
+        delegate void SetAzOffsetCallback(string text);
+        public void SetAzOffset(string text)
+        {
+            if (this.txtAzOffset.InvokeRequired)
+            {
+                SetAzOffsetCallback d = new SetAzOffsetCallback(SetAzOffset);
+                this.Invoke(d, new object[] { text });
+            }
+            else
+            {
+                txtAzOffset.Text = text;
+            }
+        }
         // Set SteppIR Freq
         delegate void SetStepFreqCallback(string text);
         private void SetStepFreq(string text)
@@ -853,11 +870,13 @@ namespace DataDecoder
                     }
                     else
                     {
-                        txtVolts.Text = text;
+                        txtVolts.Text = text; mini.txtVolts.Text = text;
                         if (Convert.ToDouble(text) < 13 || Convert.ToDouble(text) > 14.5)
-                            txtVolts.BackColor = Color.Red;
+                        { txtVolts.BackColor = Color.Red; 
+                            mini.txtVolts.BackColor = Color.Red; }
                         else
-                            txtVolts.BackColor = Color.LightYellow;
+                        { txtVolts.BackColor = Color.LightYellow; 
+                            mini.txtVolts.BackColor = Color.LightYellow; }
                     }
                 }
                 catch { }
@@ -1549,7 +1568,7 @@ namespace DataDecoder
             formLoaded = true;
         }
         // program is about to close
-        int y = 0;
+        int IdxClose = 0;
         private void Setup_FormClosing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             if (bMacChg)    // see if macro was changed and not saved.
@@ -1605,43 +1624,43 @@ namespace DataDecoder
 //                btnSaveSO2R_Click(null, null);
                 if (sp.isOpen)
                 {
-                    e.Cancel = true; y = 1;
+                    e.Cancel = true; IdxClose = 1;
                     Thread ClosePort = new Thread(new ThreadStart(CloseSerialOnExit));
                     ClosePort.Start();
                 }
                 if (LPport.IsOpen)
                 {
-                    e.Cancel = true; y = 2;
+                    e.Cancel = true; IdxClose = 2;
                     Thread ClosePort = new Thread(new ThreadStart(CloseSerialOnExit));
                     ClosePort.Start();
                 }
                 if (AccPort.IsOpen)
                 {
-                    e.Cancel = true; y = 3;
+                    e.Cancel = true; IdxClose = 3;
                     Thread ClosePort = new Thread(new ThreadStart(CloseSerialOnExit));
                     ClosePort.Start();
                 }
                 if (AlphaPort.IsOpen)
                 {
-                    e.Cancel = true; y = 4;
+                    e.Cancel = true; IdxClose = 4;
                     Thread ClosePort = new Thread(new ThreadStart(CloseSerialOnExit));
                     ClosePort.Start();
                 }
                 if (PMport.IsOpen)
                 {
-                    e.Cancel = true; y = 5;
+                    e.Cancel = true; IdxClose = 5;
                     Thread ClosePort = new Thread(new ThreadStart(CloseSerialOnExit));
                     ClosePort.Start();
                 }
                 if (LogPort.IsOpen)
                 {
-                    e.Cancel = true; y = 6;
+                    e.Cancel = true; IdxClose = 6;
                     Thread ClosePort = new Thread(new ThreadStart(CloseSerialOnExit));
                     ClosePort.Start();
                 }
                 if (SPEport.IsOpen)
                 {
-                    e.Cancel = true; y = 7;
+                    e.Cancel = true; IdxClose = 7;
                     Thread ClosePort = new Thread(new ThreadStart(CloseSerialOnExit));
                     ClosePort.Start();
                 }
@@ -1658,7 +1677,7 @@ namespace DataDecoder
         {
             try
             {
-                switch (y)
+                switch (IdxClose)
                 {
                     case 1: sp.Close(); break;
                     case 2: LPport.Close(); break;
@@ -1772,7 +1791,7 @@ namespace DataDecoder
             {
                 pollTimer.Enabled = false;
                 pollInt = Convert.ToDouble(txtInv.Text);
-                set.r = txtInv.Text;
+                set.pollIntvl = txtInv.Text;
                 set.Save();     // save new polling interval to system settings
                 pollTimer.Interval = pollInt;
                 pollTimer.Enabled = true;
@@ -1838,7 +1857,8 @@ namespace DataDecoder
                     MessageBox.Show("The RCP1 serial port " + LogPort.PortName +
                        " cannot be opened!", "Port Error",
                        MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    cboLogPort.SelectedText = "";
+                    cboLogPort.SelectedIndex = 0;
+                    set.Save();
                     return;
                 }
             }
@@ -1863,6 +1883,7 @@ namespace DataDecoder
                        " cannot be opened!", "Port Error",
                        MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     cboRCP1Rotor.SelectedIndex = 0;
+                    set.Save();
                     return;
                 }
             }
@@ -1887,6 +1908,7 @@ namespace DataDecoder
                        " cannot be opened!", "Port Error",
                        MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     cboRCP2Rotor.SelectedIndex = 0;
+                    set.Save(); 
                     return;
                 }
             }
@@ -1911,6 +1933,7 @@ namespace DataDecoder
                        " cannot be opened!", "Port Error",
                        MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     cboRCP3Rotor.SelectedIndex = 0;
+                    set.Save(); 
                     return;
                 }
             }
@@ -1935,6 +1958,7 @@ namespace DataDecoder
                        " cannot be opened!", "Port Error",
                        MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     cboRCP4Rotor.SelectedIndex = 0;
+                    set.Save(); 
                     return;
                 }
             }
@@ -1958,15 +1982,18 @@ namespace DataDecoder
                     MessageBox.Show("The Passive Listener serial port " + AccPort.PortName +
                        " cannot be opened!", "Port Error",
                        MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    cboSerAcc.SelectedText = "";
+                    cboSerAcc.SelectedIndex = 0;
+                    set.Save();
                     return;
                 }
             }
             else
             {
+                cboSerAcc.SelectedIndex = 0; 
                 chkFollow.Checked = false; cboRadio.SelectedIndex = 0;
                 cboRadio.Enabled = false; chkMode.Enabled = false;
-                set.followChk = false; set.Save();
+                set.followChk = false; 
+                set.Save();
             }
 
             // save new port setting
@@ -1991,6 +2018,7 @@ namespace DataDecoder
                    " cannot be opened!\n", "Port Error",
                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 cboCAT.SelectedIndex = 0; ;
+                set.Save();
                 return;
             }
             // save new port setting
@@ -2122,68 +2150,67 @@ namespace DataDecoder
             set.RadData = (int)cboRadData.SelectedIndex;
             set.Save();
         }
-        // Profiller button was pressed
-        Process process;
-        public void btnProfiler_Click(object sender, EventArgs e)
-        {
-            if (txtProfLoc.Text != "" && txtProfLoc.Text != null)
-            {
-                try
-                {
-                    sp.Close();
-                    process = Process.Start(txtProfLoc.Text);
-                    this.Text = "Starting Profiler";
-                    mini.Text = "Starting Profiler";
-                }
-                catch (Exception ex)
-                {
-                    bool bReturnLog = false;
-                    bReturnLog = ErrorLog.ErrorRoutine(false, enableErrorLog, ex);
-                    if (false == bReturnLog) MessageBox.Show("Unable to write to log");
-                }
-            }
-            else
-                MessageBox.Show("No location has been selected for the FlexProfiler.exe file.\n\n" +
-                    "Please select a file location on the 'Other' tab and try again.", "File Error",
-                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
-        }
-        // Re-Start button was pressed
-        public void btnReStart_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                if (IsFPRunning())
-                {
-                    process.Kill();
-                    process.WaitForExit();
-                }
-                if (!sp.isOpen)
-                {
-                    sp.Open();
-                    this.Text = "DDUtil Re-Starting";
-                    mini.Text = "DDUtil Re-Starting";
-                }
-            }
-            catch (Exception ex)
-            {
-                bool bReturnLog = false;
-                bReturnLog = ErrorLog.ErrorRoutine(false, enableErrorLog, ex);
-                if (false == bReturnLog) MessageBox.Show("Unable to write to log");
-            }
-        }
-        // The Flex Profiler File Location Select button was pressed
-        private void btnPFfile_Click(object sender, EventArgs e)
-        {
-            openFileDialog1.Filter = "exe files|*.exe";
-            openFileDialog1.Title = "Select Flex Profiler File";
-            if (openFileDialog1.ShowDialog() == DialogResult.OK)
-            {
-                txtProfLoc.Text = openFileDialog1.FileName;
-                mini.PFfile = txtProfLoc.Text;
-                set.ProfLoc = txtProfLoc.Text;
-                set.Save();
-            }
-        }
+        //// Profiller button was pressed
+        //public void btnProfiler_Click(object sender, EventArgs e)
+        //{
+        //    if (txtProfLoc.Text != "" && txtProfLoc.Text != null)
+        //    {
+        //        try
+        //        {
+        //            sp.Close();
+        //            process = Process.Start(txtProfLoc.Text);
+        //            this.Text = "Starting Profiler";
+        //            mini.Text = "Starting Profiler";
+        //        }
+        //        catch (Exception ex)
+        //        {
+        //            bool bReturnLog = false;
+        //            bReturnLog = ErrorLog.ErrorRoutine(false, enableErrorLog, ex);
+        //            if (false == bReturnLog) MessageBox.Show("Unable to write to log");
+        //        }
+        //    }
+        //    else
+        //        MessageBox.Show("No location has been selected for the FlexProfiler.exe file.\n\n" +
+        //            "Please select a file location on the 'Other' tab and try again.", "File Error",
+        //            MessageBoxButtons.OK, MessageBoxIcon.Warning);
+        //}
+        //// Re-Start button was pressed
+        //public void btnReStart_Click(object sender, EventArgs e)
+        //{
+        //    try
+        //    {
+        //        if (IsFPRunning())
+        //        {
+        //            process.Kill();
+        //            process.WaitForExit();
+        //        }
+        //        if (!sp.isOpen)
+        //        {
+        //            sp.Open();
+        //            this.Text = "DDUtil Re-Starting";
+        //            mini.Text = "DDUtil Re-Starting";
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        bool bReturnLog = false;
+        //        bReturnLog = ErrorLog.ErrorRoutine(false, enableErrorLog, ex);
+        //        if (false == bReturnLog) MessageBox.Show("Unable to write to log");
+        //    }
+        //}
+        //// The Flex Profiler File Location Select button was pressed
+        //private void btnPFfile_Click(object sender, EventArgs e)
+        //{
+        //    openFileDialog1.Filter = "exe files|*.exe";
+        //    openFileDialog1.Title = "Select Flex Profiler File";
+        //    if (openFileDialog1.ShowDialog() == DialogResult.OK)
+        //    {
+        //        txtProfLoc.Text = openFileDialog1.FileName;
+        //        mini.PFfile = txtProfLoc.Text;
+        //        set.ProfLoc = txtProfLoc.Text;
+        //        set.Save();
+        //    }
+        //}
         // RCP2 enabled check box changed
         public void chkRCP2_CheckedChanged(object sender, EventArgs e)
         {
@@ -2202,6 +2229,7 @@ namespace DataDecoder
                     chkRCP2.Checked = false;
                     mini.chkRCP2.Checked = false;
                     set.chkRCP2 = false;
+                    cboRCP2.SelectedIndex = 0;
                 }
             }
             else
@@ -2229,6 +2257,7 @@ namespace DataDecoder
                     chkRCP3.Checked = false;
                     mini.chkRCP3.Checked = false;
                     set.chkRCP3 = false;
+                    cboRCP3.SelectedIndex = 0;
                 }
             }
             else
@@ -2256,6 +2285,7 @@ namespace DataDecoder
                     chkRCP4.Checked = false;
                     mini.chkRCP4.Checked = false;
                     set.chkRCP4 = false;
+                    cboRCP4.SelectedIndex = 0;
                 }
             }
             else
@@ -2281,13 +2311,17 @@ namespace DataDecoder
                     MessageBox.Show("The RCP2 serial port " + RCP2port.PortName +
                        " cannot be opened!\n", "Port Error",
                        MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    cboRCP2.SelectedText = "";
+                    chkRCP2.Checked = false;
+                    cboRCP2.SelectedIndex = 0;
+                    set.Save();
                     return;
                 }
             }
             else
             {
+                cboRCP2.SelectedIndex = 0; 
                 chkRCP2.Checked = false;
+                set.Save();
             }
             // save new port setting
             set.cboRCP2 = cboRCP2.SelectedIndex;
@@ -2309,13 +2343,17 @@ namespace DataDecoder
                     MessageBox.Show("The RCP3 serial port " + RCP3port.PortName +
                        " cannot be opened!\n", "Port Error",
                        MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    cboRCP3.SelectedText = "";
+                    chkRCP3.Checked = false;
+                    cboRCP3.SelectedIndex = 0;
+                    set.Save();
                     return;
                 }
             }
             else
             {
+                cboRCP3.SelectedIndex = 0; 
                 chkRCP3.Checked = false;
+                set.Save();
             }
             // save new port setting
             set.cboRCP3 = cboRCP3.SelectedIndex;
@@ -2337,12 +2375,15 @@ namespace DataDecoder
                     MessageBox.Show("The RCP4 serial port " + RCP4port.PortName +
                        " cannot be opened!\n", "Port Error",
                        MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    cboRCP4.SelectedText = "";
+                    chkRCP4.Checked = false;
+                    cboRCP4.SelectedIndex = 0;
+                    set.Save();
                     return;
                 }
             }
             else
             {
+                cboRCP4.SelectedIndex = 0;
                 chkRCP4.Checked = false;
             }
             // save new port setting
@@ -2366,6 +2407,7 @@ namespace DataDecoder
 
                     chkPW1.Checked = false;
                     set.chkPW1 = false;
+                    cboPW1.SelectedIndex = 0;
                 }
             }
             else
@@ -2391,12 +2433,15 @@ namespace DataDecoder
                     MessageBox.Show("The IC-PW1 serial port " + PW1port.PortName +
                        " cannot be opened!\n", "Port Error",
                        MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    cboPW1.SelectedText = "";
+                    chkPW1.Checked = false;
+                    cboPW1.SelectedIndex = 0;
+                    set.Save();
                     return;
                 }
             }
             else
             {
+                cboPW1.SelectedIndex = 0;
                 chkPW1.Checked = false;
             }
             // save new port setting
@@ -3935,13 +3980,15 @@ namespace DataDecoder
                     MessageBox.Show("The Amplifier serial port " + AlphaPort.PortName +
                        " cannot be opened!\n", "Port Error",
                        MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    cboAlpha.SelectedText = "";
+                    cboAlpha.SelectedIndex = 0;
                     chkAlpha.Checked = false;
+                    set.Save();
                     return;
                 }
             }
             else
             {
+                cboAlpha.SelectedIndex = 0;
                 chkAlpha.Checked = false;
             }
             set.AlphaPort = cboAlpha.SelectedIndex;
@@ -4499,12 +4546,15 @@ namespace DataDecoder
                     MessageBox.Show("The LP-100 serial port " + LPport.PortName +
                        " cannot be opened!\n", "Port Error",
                        MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    cboLPport.SelectedText = "";
+                    chkLPenab.Checked = false; 
+                    cboLPport.SelectedIndex = 0;
+                    set.Save();
                     return;
                 }
             }
             else
             {
+                cboLPport.SelectedIndex = 0; 
                 lpTimer.Enabled = false;
                 chkLPenab.Checked = false;
             }
@@ -4547,6 +4597,7 @@ namespace DataDecoder
                     mini.txtAvg.Text = ""; mini.txtFwd.Text = ""; mini.txtSWR.Text = "";
                     txtAvg.Enabled = false; txtFwd.Enabled = false; txtSWR.Enabled = false;
                     mini.txtAvg.Enabled = false; mini.txtFwd.Enabled = false; mini.txtSWR.Enabled = false;
+                    cboLPport.SelectedIndex = 0;
                 }
             }
             else
@@ -4796,8 +4847,6 @@ namespace DataDecoder
             { btnDrive_Click(null, null); }
             else if (e.Control && e.KeyCode == Keys.B) // SteppIR to Bi Direction
             { rbBiDir.Checked = true; }  
-            else if (e.Control && e.KeyCode == Keys.C) // Memory Save
-            { btnMemSave_Click(null, null); }  
             else if (e.Control && e.KeyCode == Keys.F) // SteppIR to Forward
             { rbFwd.Checked = true; }  
             else if (e.Control && e.KeyCode == Keys.L) // Set drive to low power
@@ -4806,12 +4855,14 @@ namespace DataDecoder
             { btnByp_Click(null, null); }  
             else if (e.Control && e.KeyCode == Keys.R) // SteppIR to Reverse
             { rb180.Checked = true; }  
-            else if (e.Control && e.KeyCode == Keys.V) // Memory Load
-            { btnMemLoad_Click(null, null); }  
-            else if (e.Control && e.KeyCode == Keys.X) // Memory select (1-5)
-            { btnReCall_Click(null, null); }  
             else if (e.Control && e.KeyCode == Keys.Z) // Toggle VFO/Memory
             { btnMV_Click(null, null); }  
+            else if (e.Control && e.KeyCode == Keys.X) // Memory select (1-5)
+            { btnReCall_Click(null, null); }  
+            else if (e.Control && e.KeyCode == Keys.C) // Memory Load
+            { btnMemLoad_Click(null, null); }  
+            else if (e.Control && e.KeyCode == Keys.V) // Memory Save
+            { btnMemSave_Click(null, null); }  
             else if (e.Control && e.Shift && e.KeyCode == Keys.S) // Power On/Off
             { btnFlexOn_Click(null, null); }    
         }
@@ -5661,10 +5712,8 @@ namespace DataDecoder
                     PMport.Write("\x02\x74\x3F\x03\x37\x37\r"); // Get swr trim
                     Thread.Sleep(150);
                     PMport.Write("\x02\x44\x34\x03\x36\x36\r"); // Start data broadcast
-                    set.Save();
                     if (set.StdNet == 1) rbStd.Checked = true;
                     else if (set.StdNet == 2) rbNet.Checked = true;
-
                 }
                 else
                 {
@@ -5679,7 +5728,7 @@ namespace DataDecoder
                     mini.txtSWR.Enabled = false;
                     if (PMport.IsOpen)
                     { PMport.Write("\x02\x44\x30\x03\x37\x31\r"); }// Stop data broadcast
-                    set.Save();
+                    cboPMport.SelectedIndex = 0;
                 }
             }
             else
@@ -5692,8 +5741,8 @@ namespace DataDecoder
                 mini.txtSWR.Enabled = false;
                 if (PMport.IsOpen)
                 { PMport.Write("\x02\x44\x30\x03\x37\x31\r"); }// Stop data broadcast
-                set.Save();
             }
+            set.Save();
         }
         // The PM port has changed
         private void cboPMport_SelectedIndexChanged(object sender, EventArgs e)
@@ -5711,13 +5760,15 @@ namespace DataDecoder
                     MessageBox.Show("The Power Master serial port " + PMport.PortName +
                        " cannot be opened!\n", "Port Error",
                        MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    cboPMport.SelectedText = "";
                     chkPM.Checked = false;
+                    cboPMport.SelectedIndex = 0;
+                    set.Save();
                     return;
                 }
             }
             else
             {
+                cboPMport.SelectedIndex = 0; 
                 chkPM.Checked = false;
             }
             set.PMport = cboPMport.SelectedIndex;
@@ -5857,6 +5908,7 @@ namespace DataDecoder
 
         #region PSDR PowerOn
 
+        Process process; 
         private ProgressDialog pd;
         private uint progressPercent;
         bool PSDRrunning = false;
@@ -6007,9 +6059,14 @@ namespace DataDecoder
                     MessageBox.Show("The PowerOn serial port " + PwrPort.PortName +
                        " cannot be opened!\n", "Port Error",
                        MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    cboPwrPort.SelectedText = "";
+                    cboPwrPort.SelectedIndex = 0;
+                    set.Save();
                     return;
                 }
+            }
+            else
+            {
+                cboPwrPort.SelectedIndex = 0;
             }
             // save new port setting
             set.PwrPort = cboPwrPort.SelectedIndex;
@@ -6028,7 +6085,7 @@ namespace DataDecoder
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
                 txtPSDR.Text = openFileDialog1.FileName;
-                mini.PFfile = txtProfLoc.Text;
+                //mini.PFfile = txtProfLoc.Text;
                 set.PSDRloc = txtPSDR.Text;
                 set.Save();
             }
@@ -6108,6 +6165,7 @@ namespace DataDecoder
                        "Please select a valid port number and try again.", "Port Error",
                        MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     set.RepeatEnab = false;
+                    cboRepeatPort.SelectedIndex = 0;
                 }
             }
             else
@@ -6133,13 +6191,15 @@ namespace DataDecoder
                     MessageBox.Show("The Repeater serial port " + RepeatPort.PortName +
                        " cannot be opened!\n", "Port Error",
                        MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    cboRepeatPort.SelectedText = "";
+                    cboRepeatPort.SelectedIndex = 0;
                     chkRepeat.Checked = false;
+                    set.Save();
                     return;
                 }
             }
             else
             {
+                cboRepeatPort.SelectedIndex = 0; 
                 chkRepeat.Checked = false;
             }
             set.RepeatPort = cboRepeatPort.SelectedIndex;
@@ -6358,6 +6418,15 @@ namespace DataDecoder
             alert.label1.Font.Style, alert.label1.Font.Unit);
             alert.Show();
         }
+        // the check steppir dipole check box has changed
+        private void chkStepDipole_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chkStepDipole.Checked)
+            { set.chkStepDipole = true; }
+            else
+            { set.chkStepDipole = false; }
+            set.Save();
+        }
         // The Short Path Rotor button has been pressed
         string rtrSpd = "";
         private void btnSP_Click(object sender, EventArgs e)
@@ -6406,13 +6475,15 @@ namespace DataDecoder
                     MessageBox.Show("The Rotor serial port " + RotorPort.PortName +
                        " cannot be opened!\n", "Port Error",
                        MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    cboRotorPort.SelectedText = "";
+                    cboRotorPort.SelectedIndex = 0;
                     chkRotorEnab.Checked = false;
+                    set.Save();
                     return;
                 }
             }
             else
             {
+                cboRotorPort.SelectedIndex = 0; 
                 chkRotorEnab.Checked = false;
             }
             // save new port setting
@@ -6508,6 +6579,7 @@ namespace DataDecoder
                     "Please select a valid port number and try again.", "Port Error",
                     MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     chkRotorEnab.Checked = false;
+                    cboRotorPort.SelectedIndex = 0;
                 }
             }
             else
@@ -6843,97 +6915,112 @@ namespace DataDecoder
             }
         }
         // Turn the rotor
-        string lastMove = "";
+        string lastMove = "0";
         public void TurnRotor(string heading)
         {
-            //if (heading.PadLeft(3, '0') != lastMove)
-            //{
-                int head = Convert.ToInt32(heading);
-                int off = Convert.ToInt32(txtAzOffset.Text);
-                //               int calchead = 0;
-                int offsign = Math.Sign(off);
-                string newhead = "";
-                switch (offsign)
-                {
-                    case -1:    // - offset
-                        if (head + off < 0) // 5 + -10 = -5
-                            newhead = (head - off).ToString();
-                        else if (head - off > 360)  // 355 + 10 = 375
-                            newhead = ((head - off) - 360).ToString();
-                        else
-                            newhead = (head - off).ToString();
-                        break;
-                    case 0:     // no offset
-                        newhead = heading;
-                        break;
-                    case 1:     // + offset
-                        if (head + off > 360)
-                            newhead = (head - off).ToString();
-                        else if (head - off < 0)
-                            newhead = (360 + (head - off)).ToString();
-                        else if (head == off)
-                            newhead = "0";
-                        else
-                            newhead = (head + off).ToString();
-                        break;
-                    default: break;
-                }
+            int head = Convert.ToInt32(heading);
+            int dipAzHead;
+            // If using SteppIR dipole on 80 mtrs
+            if (chkStepDipole.Checked && band == "080")
+            {
+                dipAzHead = head;
+                if (dipAzHead + 90 >= 180)
+                { dipAzHead -= 90; }
+                else
+                { dipAzHead += 90; }
+                head = dipAzHead;
+                if (head >= 180 && Convert.ToInt32(lastMove) < 180)
+                    head -= 180;
+                else if (head < 180 && Convert.ToInt32(lastMove) >= 180)
+                    head += 180;
+            }
+            //else
+            //{ head = Convert.ToInt32(heading); }
 
-                switch (rotormod)
-                {
-                    case RotorMod.AlphaSpid:
-                        int circle = 360;
-                        int bearing = Convert.ToInt32(newhead);
-                        bearing = bearing + circle;
-                        RotorPort.Write("W" + bearing.ToString() + "0\x01     \x2f ");
-                        RotorPort.Write(
-                            "W\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x1f\x20");    // request position
-                        rtrCmd = "W\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x1f\x20"; // save new position cmd
-                        RepsCtr = posReps;
-                        RepsTimer.Enabled = true;
-                        break;
-                    case RotorMod.GreenHeron:
-                        if (newhead.Length < 3) newhead = newhead.PadLeft(3, '0');
-                        RotorPort.Write("AP1" + newhead + "\r;"); // start rotor
-                        //                        rtrCmd = "BI1;";
-                        RotorPort.Write(rtrCmd);                  // request position
-                        RepsCtr = posReps;
-                        RepsTimer.Enabled = true;
-                        break;
-                    case RotorMod.Hygain:
-                        if (newhead.Length < 3) newhead = newhead.PadLeft(3, '0');
-                        RotorPort.Write("AP1" + newhead + ";"); // set newhead
-                        RotorPort.Write("AM1;");                // start rotor
-                        RotorPort.Write("AI1;"); 
-//                        Thread.Sleep(100);
-                        rtrCmd = "AI1;";
-                        RepsCtr = posReps;
-                        RepsTimer.Enabled = true;
-                        break;
-                    case RotorMod.M2R2800PA:
-                        RotorPort.Write("S\r");                 // stop rotor
-                        RotorPort.Write(newhead + "\r");        // start rotor
-                        RotorPort.Write("U\r");                 // request position
-                        break;
-                    case RotorMod.M2R2800PX:
-                        RotorPort.Write("A" + newhead + "\r");  // start rotor
-                        RotorPort.Write("U\r");                 // request position
-                        break;
-                    case RotorMod.Prosistel:
-                        RotorPort.Write("\x02\x41\x47" + newhead + "\r");
-                        break;
-                    case RotorMod.Yaesu:
-                        if (newhead.Length < 3) newhead = newhead.PadLeft(3, '0');
-                        RotorPort.Write("M" + newhead + "\r");  // start rotor
-                        RotorPort.Write("C\r");                 // request position
-                        rtrCmd = "C\r";
-                        RepsCtr = posReps;
-                        RepsTimer.Enabled = true;
-                        break;
-                    default: break;
-                }
-                lastMove = heading.PadLeft(3, '0');
-//            }
+            int off = Convert.ToInt32(txtAzOffset.Text);
+            int offsign = Math.Sign(off);
+            string newhead = "";
+            switch (offsign)
+            {
+                case -1:    // - offset
+                    if (head + off < 0) // 5 + -10 = -5
+                        newhead = (head - off).ToString();
+                    else if (head - off > 360)  // 355 + 10 = 375
+                        newhead = ((head - off) - 360).ToString();
+                    else
+                        newhead = (head - off).ToString();
+                    break;
+                case 0:     // no offset
+                    newhead = head.ToString();
+                    break;
+                case 1:     // + offset
+                    if (head + off > 360)
+                        newhead = (head - off).ToString();
+                    else if (head - off < 0)
+                        newhead = (360 + (head - off)).ToString();
+                    else if (head == off)
+                        newhead = "0";
+                    else
+                        newhead = (head + off).ToString();
+                    break;
+                default: break;
+            }
+
+            switch (rotormod)
+            {
+                case RotorMod.AlphaSpid:
+                    int circle = 360;
+                    int bearing = Convert.ToInt32(newhead);
+                    bearing = bearing + circle;
+                    RotorPort.Write("W" + bearing.ToString() + "0\x01     \x2f ");
+                    RotorPort.Write(
+                        "W\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x1f\x20");    // request position
+                    rtrCmd = "W\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x1f\x20"; // save new position cmd
+                    RepsCtr = posReps;
+                    RepsTimer.Enabled = true;
+                    break;
+                case RotorMod.GreenHeron:
+                    if (newhead.Length < 3) newhead = newhead.PadLeft(3, '0');
+                    RotorPort.Write("AP1" + newhead + "\r;"); // start rotor
+                    //                        rtrCmd = "BI1;";
+                    RotorPort.Write(rtrCmd);                  // request position
+                    RepsCtr = posReps;
+                    RepsTimer.Enabled = true;
+                    break;
+                case RotorMod.Hygain:
+                    if (newhead.Length < 3) newhead = newhead.PadLeft(3, '0');
+                    RotorPort.Write("AP1" + newhead + ";"); // set newhead
+                    RotorPort.Write("AM1;");                // start rotor
+                    RotorPort.Write("AI1;");
+                    //                        Thread.Sleep(100);
+                    rtrCmd = "AI1;";
+                    RepsCtr = posReps;
+                    RepsTimer.Enabled = true;
+                    break;
+                case RotorMod.M2R2800PA:
+                    RotorPort.Write("S\r");                 // stop rotor
+                    RotorPort.Write(newhead + "\r");        // start rotor
+                    RotorPort.Write("U\r");                 // request position
+                    break;
+                case RotorMod.M2R2800PX:
+                    RotorPort.Write("A" + newhead + "\r");  // start rotor
+                    RotorPort.Write("U\r");                 // request position
+                    break;
+                case RotorMod.Prosistel:
+                    RotorPort.Write("\x02\x41\x47" + newhead + "\r");
+                    break;
+                case RotorMod.Yaesu:
+                    if (newhead.Length < 3) newhead = newhead.PadLeft(3, '0');
+                    RotorPort.Write("M" + newhead + "\r");  // start rotor
+                    RotorPort.Write("C\r");                 // request position
+                    rtrCmd = "C\r";
+                    RepsCtr = posReps;
+                    RepsTimer.Enabled = true;
+                    break;
+                default: break;
+            }
+            lastMove = head.ToString().PadLeft(3, '0');
+            //            }
         }
         // Get DXCC data from the database
         private void GetDXCC(string SQL)
@@ -7102,46 +7189,10 @@ namespace DataDecoder
             catch { cboRotorPort.SelectedIndex = 0; BadPort("Rotor"); }
             cboRotorCom.SelectedIndex = set.RotorCom;
             txtAzOffset.Text = Convert.ToInt32(set.AzOffset).ToString();
+            chkStepDipole.Checked = set.chkStepDipole;
             SetRotorModel(set.rotorModel);
             SetRotorSpeed(set.RotorSpeed);
             chkRotorEnab.Checked = set.RotorEnab;
-            //switch (set.RotorSpeed)
-            //{
-            //    case 0: rbRtrSpd1.Checked = true; break;
-            //    case 1: rbRtrSpd2.Checked = true; break;
-            //    case 2: rbRtrSpd3.Checked = true; break;
-            //    default: break;
-            //}
-            //switch (set.rotorModel)
-            //{   // send rotor initialization if required
-            //    case 0: rbRtrMod1.Checked = true; break;  // Alpha Spid
-            //    case 1: rbRtrMod2.Checked = true; break;  // Green Heron
-            //    case 2: rbRtrMod3.Checked = true; break;  // HyGain
-
-            //    case 3: rbRtrMod4.Checked = true;         // M2RC2800A-P
-            //        if (cboRotorPort.SelectedIndex > 0 && chkRotorEnab.Checked)
-            //            RotorPort.Write("S" + rtrSpd + "\r");
-            //        break;
-            //    case 4: rbRtrMod5.Checked = true;         // M2RC2800AX
-            //        if (cboRotorPort.SelectedIndex > 0 && chkRotorEnab.Checked)
-            //            RotorPort.Write("S" + rtrSpd + "\r");
-            //        break;
-            //    case 5: rbRtrMod6.Checked = true;         // Prosistel
-            //        if (cboRotorPort.SelectedIndex > 0 && chkRotorEnab.Checked)
-            //        {
-            //            RotorPort.Write("\x02\x41WENA_PWM=1\r"); // setup soft start/stop
-            //            Thread.Sleep(100);
-            //            RotorPort.Write("\x02\x41\x4D\r");        // set to CPM mode
-            //            Thread.Sleep(100);
-            //            RotorPort.Write("\x02\x41\x3f\r");        // request position
-            //        }
-            //        break;
-            //    case 6: rbRtrMod7.Checked = true;         // Yaesu
-            //        if (cboRotorPort.SelectedIndex > 0 && chkRotorEnab.Checked)
-            //            RotorPort.Write("X" + rtrSpd + "\r");
-            //        break;
-            //    default: break;
-            //}
         }
 
         #endregion Rotor Setup
@@ -7249,15 +7300,16 @@ namespace DataDecoder
                         ZZMD = rawFreq.Substring(4, 2);
                         return;
                     }
-                    /*** get the TX Profile ***/
+                    /*** Quick Memory, get the TX Profile & load  ***/
                     if (rawFreq.Length > 4 && rawFreq.Substring(0, 4) == "ZZTP")
                     {
                         TxPro = rawFreq.Substring(4, 2);
-
-                        if (mem[0, 0] != null || mem[0, 0] != "")
-                        {
-                            // ok we got the last var from PSDR lets save it
-                            // push down the stack one row
+                        // ok we got the last var from PSDR lets save it to mem array
+                        // if idxmem > 0 & that slot is empty load that slot.
+                        if (idxMem != 0 && mem[idxMem, 0] == null) 
+                        { } // do nothing
+                        else
+                        {   // push down the stack one row & load slot #1
                             for (int i = 4; i >= 1; i--)
                             {
                                 for (int j = 0; j <= 10; j++)
@@ -7265,17 +7317,21 @@ namespace DataDecoder
                                     mem[i, j] = mem[i - 1, j];
                                 }
                             }
+                            idxMem = 0; // set idxmem to 0
                         }
-                        // this is the last var from PSDR. save to mem array
-                        mem[0, 0] = vfoA; mem[0, 1] = vfoB; mem[0, 2] = ZZSW.ToString();
-                        mem[0, 3] = ZZMD; mem[0, 4] = Rx1; mem[0, 5] = Rx2;
-                        mem[0, 6] = TxA; mem[0, 7] = stsTX; mem[0, 8] = RxFlt;
-                        mem[0, 9] = TxPro; mem[0, 10] = memMode;
+                        // load memory slot pointed to by idxMem
+                        mem[idxMem, 0] = vfoA; mem[idxMem, 1] = vfoB; 
+                        mem[idxMem, 2] = ZZSW.ToString(); mem[idxMem, 3] = ZZMD; 
+                        mem[idxMem, 4] = Rx1; mem[idxMem, 5] = Rx2;
+                        mem[idxMem, 6] = TxA; mem[idxMem, 7] = stsTX; 
+                        mem[idxMem, 8] = RxFlt; mem[idxMem, 9] = TxPro; 
+                        mem[idxMem, 10] = memMode;
                         // display the stored mem number, freq and mode
                         int xfrq = Convert.ToInt32(vfoA.Substring(0, vfoA.Length - 3).TrimStart('0'));
                         SetMemFreq(xfrq.ToString("N0")); 
                         SetMemMode(memMode);
-                        idxMem = 0;
+                        //idxMem = 0;
+                        // set idxmem to correct visual number
                         SetMemIdx((idxMem + 1).ToString());
                         // blink the button to show data saved
                         SetMemSave("Yellow");
@@ -7346,10 +7402,22 @@ namespace DataDecoder
 
                             /*** Set SO2R vfo A band data ***/
                             if (chkSoEnab.Checked)
-                            {
-                                SetVfoA();
+                            {SetVfoA();}
 
-                            }
+                            /*** Set rotor offset for steppir dipole ***/
+                            //if (chkStepDipole.Checked && band == "080")
+                            //{
+                            //    StepDipole = true;
+                            //    //dipAzHead = set.AzOffset;
+                            //    //if (dipAzHead + 90 > 180)
+                            //    //{ dipAzHead -= 90; }
+                            //    //else
+                            //    //{ dipAzHead += 90; }
+                            //}
+                            //else
+                            //{ StepDipole = false;} // dipAzHead = set.AzOffset; }
+
+
                             /*** Setup Auto Drive for this band ***/
                             if (stsOper)
                             {   // if amp not selected for this band set PTT to ByPass
@@ -10542,6 +10610,8 @@ namespace DataDecoder
                     "Please select a valid port number and try again.", "Port Error",
                     MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     chkSPEenab.Checked = false; set.SPEenab = false;
+                    cboSPEport.SelectedIndex = 0; 
+                    set.SPEport = cboSPEport.SelectedIndex;
                 }
             }
             else
@@ -10570,13 +10640,17 @@ namespace DataDecoder
                     MessageBox.Show("The Amplifier serial port " + SPEport.PortName +
                        " cannot be opened!\n", "Port Error",
                        MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    cboSPEport.SelectedText = "";
-                    chkSPEenab.Checked = false;
+                    chkSPEenab.Checked = false; 
+                    set.SPEenab = false;
+                    cboSPEport.SelectedIndex = 0;
+                    set.SPEport = cboSPEport.SelectedIndex;
+                    set.Save();
                     return;
                 }
             }
             else
             {
+                cboSPEport.SelectedIndex = 0;
                 chkSPEenab.Checked = false;
             }
             set.SPEport = cboSPEport.SelectedIndex;
@@ -11124,13 +11198,15 @@ namespace DataDecoder
                     StepTimer.Enabled = true;
                     StepCtr = reps; // counter to allow for delay
                 }
-                if (cboStep.SelectedIndex > 0) set.StepEnab = true;
+                if (cboStep.SelectedIndex > 0) 
+                    set.StepEnab = true;
                 else
                 {
                     MessageBox.Show("No port has been selected for the SteppIR.\n\n" +
                     "Please select a valid port number and try again.", "Port Error",
                     MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     chkStep.Checked = false;
+                    cboStep.SelectedIndex = 0;
                 }
             }
             else
@@ -11156,13 +11232,15 @@ namespace DataDecoder
                     MessageBox.Show("The STeppIR serial port " + StepData.PortName +
                        " cannot be opened!\n", "Port Error",
                        MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    cboStep.SelectedText = "";
+                    cboStep.SelectedIndex = 0;
                     chkStep.Checked = false;
+                    set.Save(); 
                     return;
                 }
             }
             else
             {
+                cboStep.SelectedIndex = 0; 
                 chkStep.Checked = false;
             }
             set.StepPortNum = cboStep.SelectedIndex;
@@ -11712,7 +11790,7 @@ namespace DataDecoder
                     MessageBox.Show("The Tuning Knob serial port " + KnobPort.PortName +
                        " cannot be opened!\n", "Port Error",
                        MessageBoxButtons.OK, MessageBoxIcon.Warning);
-//                    cboKnobPort.SelectedIndex = 0;
+                    cboKnobPort.SelectedIndex = 0;
                 }
             }
             set.cboKnobPort = cboKnobPort.SelectedIndex;
@@ -12763,7 +12841,7 @@ namespace DataDecoder
                 this.Invoke(d, new object[] { text });
             }
             else
-                txtAvg.Text = text;
+                txtAvg.Text = text.TrimStart('0'); ;
         }
         // Write SWR reading to txt box
         //delegate void SetSWRCallback(string text);
@@ -13314,9 +13392,15 @@ namespace DataDecoder
             else
             {
                 if (text == "Memory")
+                {
                     btnMV.BackColor = Color.Yellow;
+                    mini.btnMV.BackColor = Color.Yellow;
+                }
                 else
+                {
                     btnMV.BackColor = Color.Empty;
+                    mini.btnMV.BackColor = Color.Empty;
+                }
             }
         }
         // Write to MemSave button
@@ -13331,9 +13415,15 @@ namespace DataDecoder
             else
             {
                 if (text == "Yellow")
-                btnMemSave.BackColor = Color.Yellow;
+                {
+                    btnMemSave.BackColor = Color.Yellow;
+                    mini.btnMemSave.BackColor = Color.Yellow;
+                }
                 else
-                btnMemSave.BackColor = Color.Empty;
+                {
+                    btnMemSave.BackColor = Color.Empty;
+                    mini.btnMemSave.BackColor = Color.Empty;
+                }
             }
         }
         // Write to MemFreq button
@@ -13348,6 +13438,7 @@ namespace DataDecoder
             else
             {
                 txtMemFreq.Text = text;
+                mini.txtMemFreq.Text = text;
             }
         }
         // Write to MemMode button
@@ -13362,6 +13453,7 @@ namespace DataDecoder
             else
             {
                 txtMemMode.Text = text;
+                mini.txtMemMode.Text = text;
             }
         }
         // Write to MemIdx button
@@ -13375,7 +13467,8 @@ namespace DataDecoder
             }
             else
             {
-                txtMemIdx.Text = text;
+                txtMemIdx.Text = text; 
+                mini.txtMemIdx.Text = text;
             }
         }
         
@@ -13384,7 +13477,7 @@ namespace DataDecoder
         #region # Events #
 
         // the memory/vfo toggle button has been pressed
-        private void btnMV_Click(object sender, EventArgs e)
+        public void btnMV_Click(object sender, EventArgs e)
         { 
             if (idxMem == 5 || mem[idxMem, 0] == "" || mem[idxMem, 0] == null)
             { btnMemLoad_Click(null, null); return; }
@@ -13396,7 +13489,9 @@ namespace DataDecoder
                 MV = 2;
                 SetMV("Memory");
                 string freq = vfoA.TrimStart('0');
-                txtMemVfo.Text = Convert.ToInt32(freq.Substring(0, freq.Length - 3)).ToString("N0");
+                freq = Convert.ToInt32(freq.Substring(0, freq.Length - 3)).ToString("N0");
+                txtMemVfo.Text = freq; 
+                mini.txtMemVfo.Text = freq;
             }
             else if (MV == 2)   // reload vfo
             {
@@ -13405,25 +13500,27 @@ namespace DataDecoder
                 WriteToPort("ZZFI" + mvFl + ";", iSleep); // RX Filter
                 MV = 1;
                 SetMV("");
-                txtMemVfo.Text = "";
+                txtMemVfo.Text = ""; 
+                mini.txtMemVfo.Text = "";
             }
         }
         // the memory recall button has been pressed
-        // display memory slot freq & mode
-        // start timer running
-        private void btnReCall_Click(object sender, EventArgs e)
+        public void btnReCall_Click(object sender, EventArgs e)
         {
             idxMem++;
             if (idxMem > 4) idxMem = 0;
             SetMemIdx((idxMem + 1).ToString());
             if (mem[idxMem, 0] == "" || mem[idxMem, 0] == null)
-            { txtMemFreq.Text = "Empty"; txtMemMode.Text = ""; return; }
+            {
+                SetMemFreq("Empty"); SetMemMode(""); return;
+            }
             string freq = mem[idxMem, 0].TrimStart('0');
-            txtMemFreq.Text = Convert.ToInt32(freq.Substring(0, freq.Length-3)).ToString("N0"); 
-            txtMemMode.Text = mem[idxMem, 10];
+            freq = Convert.ToInt32(freq.Substring(0, freq.Length - 3)).ToString("N0");
+            SetMemFreq(freq);
+            SetMemMode(mem[idxMem, 10]);
         }
         // the memory save button has been pressed
-        private void btnMemSave_Click(object sender, EventArgs e)
+        public void btnMemSave_Click(object sender, EventArgs e)
         {
             // get current radio status
             WriteToPort("ZZSW;", iSleep); // TX VFO
@@ -13432,36 +13529,42 @@ namespace DataDecoder
             WriteToPort("ZZOB;", iSleep); // RX2 ANT
             WriteToPort("ZZOC;", iSleep); // TX ANT
             WriteToPort("ZZOF;", iSleep); // TX LINE
-//            WriteToPort("ZZFI;", iSleep); // RX Filter
             WriteToPort("ZZTP;", iSleep); // TX Profile
         }
         // the memory clear button has been pressed
-        private void btnMemClear_Click(object sender, EventArgs e)
+        public void btnMemClear_Click(object sender, EventArgs e)
         {
-            for (int i = 0; i <= 4; i++)
+            for (int j = 0; j <= 10; j++)
             {
-                for (int j = 0; j <= 10; j++)
-                {
-                    mem[i, j] = "";
-                }
+                mem[idxMem, j] = null;
             }
-            idxMem = 0;
-            SetMemIdx((idxMem + 1).ToString());
-            txtMemFreq.Text = "Empty"; txtMemMode.Text = "";
+            SetMemFreq("Empty"); SetMemMode("");
+        }
+        // if Control + Clear key is pressed delete all memories
+        public void btnMemClear_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Control && e.Shift)
+            {
+                for (int i = 0; i <= 4; i++)
+                {
+                    for (int j = 0; j <= 10; j++)
+                    {
+                        mem[i, j] = null;
+                    }
+                }
+                idxMem = 0;
+                SetMemIdx((idxMem + 1).ToString());
+                SetMemFreq("Empty"); SetMemMode("");
+            }
         }
         // load memory vars to PSDR
-        private void btnMemLoad_Click(object sender, EventArgs e)
+        public void btnMemLoad_Click(object sender, EventArgs e)
         {
             if (idxMem == 5 || mem[idxMem, 0] == "" || mem[idxMem, 0] == null)
             {
-                Notification alert = new Notification();
-                Notification.notiIntvl = 7000;
-                Notification.notiMsg =
-                    "Can Not load Power SDR from this memory. " +
-                    "The selected memory slot is empty.\r\r" +
-                    "Please select another memory and try again.\r";
-                alert.Show();
                 SetMV("");
+                wav.SoundLocation = "uh_oh.wav";
+                wav.Play();
                 return;
             }
             WriteToPort("ZZMD" + mem[idxMem, 3] + ";", iSleep); // SDR MODE

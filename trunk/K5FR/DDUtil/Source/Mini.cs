@@ -225,10 +225,14 @@ namespace DataDecoder
             { s.LowPower(); }   // go to low power mode
             else if (e.Control && e.KeyCode == Keys.O)
             { s.btnByp_Click(null, null); }   // Toggle PTT
-            //else if (e.Control && e.Shift && e.KeyCode == Keys.X)
-            //{ s.btnFlexOn_Click(null, null); }   // 
-
-
+            else if (e.Control && e.KeyCode == Keys.Z) // Toggle VFO/Memory
+            { s.btnMV_Click(null, null); }  
+            else if (e.Control && e.KeyCode == Keys.X) // Memory select (1-5)
+            { s.btnReCall_Click(null, null); }
+            else if (e.Control && e.KeyCode == Keys.C) // Memory Load
+            { s.btnMemLoad_Click(null, null); }
+            else if (e.Control && e.KeyCode == Keys.V) // Memory Save
+            { s.btnMemSave_Click(null, null); }
         }
 
         private void btnMacro1_Click(object sender, EventArgs e)
@@ -321,16 +325,16 @@ namespace DataDecoder
         {
             s.btnHome_Click(null, null);
         }
-        // Profiler button was pressed
-        private void btnProfiler_Click(object sender, EventArgs e)
-        {
-            s.btnProfiler_Click(null, null);
-        }
-        // Profiler Re start button was pressed
-        private void btnReStart_Click(object sender, EventArgs e)
-        {
-            s.btnReStart_Click(null, null);
-        }
+        //// Profiler button was pressed
+        //private void btnProfiler_Click(object sender, EventArgs e)
+        //{
+        //    s.btnProfiler_Click(null, null);
+        //}
+        //// Profiler Re start button was pressed
+        //private void btnReStart_Click(object sender, EventArgs e)
+        //{
+        //    s.btnReStart_Click(null, null);
+        //}
         // Rotor button was pressed
         public void btnSP_Click(object sender, EventArgs e)
         {
@@ -357,9 +361,8 @@ namespace DataDecoder
         }
         private void Mini_FormClosing(object sender, FormClosingEventArgs e)
         {
-//            s.WindowState = FormWindowState.Normal;
+            s.WindowState = FormWindowState.Normal;
         }
-
         // form load
         private void Mini_Load(object sender, EventArgs e)
         {
@@ -431,6 +434,36 @@ namespace DataDecoder
         private void txtSP_MouseDoubleClick(object sender, MouseEventArgs e)
         {
             s.ToggleRtrEnab();
+        }
+        // the mem vfo exchange button was pressed
+        private void btnMV_Click(object sender, EventArgs e)
+        {
+            s.btnMV_Click(null, null);
+        }
+        // the memory recall button was pressed
+        private void btnReCall_Click(object sender, EventArgs e)
+        {
+            s.btnReCall_Click(null, null);
+        }
+        // the memory save button was pressed
+        private void btnMemSave_Click(object sender, EventArgs e)
+        {
+            s.btnMemSave_Click(null, null);
+        }
+        // the memory load button was pressed
+        private void btnMemLoad_Click(object sender, EventArgs e)
+        {
+            s.btnMemLoad_Click(null, null);
+        }
+        // the memory clear button was pressed
+        private void btnMemClear_Click(object sender, EventArgs e)
+        {
+            s.btnMemClear_Click(null, null);
+        }
+        // the Control + Clear button was pressed
+        private void btnMemClear_KeyDown(object sender, KeyEventArgs e)
+        {
+            s.btnMemClear_KeyDown(null, null);
         }
 
         #endregion Form Events
@@ -525,6 +558,7 @@ namespace DataDecoder
             }
         }
         # endregion Window Geometry New
+
 
     }// end Mini
 

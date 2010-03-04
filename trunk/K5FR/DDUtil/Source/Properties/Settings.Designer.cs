@@ -26,12 +26,12 @@ namespace DataDecoder.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("500")]
-        public string r {
+        public string pollIntvl {
             get {
-                return ((string)(this["r"]));
+                return ((string)(this["pollIntvl"]));
             }
             set {
-                this["r"] = value;
+                this["pollIntvl"] = value;
             }
         }
         
@@ -3200,6 +3200,18 @@ namespace DataDecoder.Properties {
             }
             set {
                 this["antPro2StepCom"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool chkStepDipole {
+            get {
+                return ((bool)(this["chkStepDipole"]));
+            }
+            set {
+                this["chkStepDipole"] = value;
             }
         }
     }
