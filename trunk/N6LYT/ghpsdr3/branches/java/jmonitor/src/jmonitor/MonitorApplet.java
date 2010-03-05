@@ -52,11 +52,15 @@ public class MonitorApplet extends javax.swing.JApplet {
     public void start() {
 
         // get the host we came from
-        String s=getCodeBase().getHost();
+        String s;
+
+        server=getCodeBase().getHost();
+
         s=this.getParameter("server");
         if(s!=null) {
             server=s;
         }
+        System.err.println("server: "+server);
 
         s=this.getParameter("receiver");
         if(s!=null) {

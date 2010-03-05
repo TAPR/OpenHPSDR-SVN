@@ -123,7 +123,9 @@ public class SpectrumPanel extends javax.swing.JPanel {
             g.fillRect(0,0,WIDTH,HEIGHT);
             g.setColor(Color.RED);
 
-            g.drawString(client.getStatus(),50,50);
+            if(client.getStatus()!=null) {
+                g.drawString(client.getStatus(),50,50);
+            }
         }
     }
 
