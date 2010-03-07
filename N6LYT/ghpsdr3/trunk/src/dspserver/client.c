@@ -25,8 +25,10 @@
 * 
 */
 
+#include <errno.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <unistd.h>
 #include <sys/types.h>
 #include <sys/socket.h>
 #include <netinet/in.h>
@@ -47,6 +49,8 @@
 #include "buffer.h"
 
 static pthread_t client_thread_id;
+
+static int client_terminate=0;
 
 #define BASE_PORT 8000
 
@@ -70,23 +74,13 @@ static float meter;
 static sem_t network_semaphore;
 
 void* client_thread(void* arg);
+
 void client_send_samples(int size);
 void client_set_samples(float* samples,int size);
 
 #define PREFIX 48
 static unsigned char* client_samples;
 
-
-int rejectAddress(char* address) {
-    int result=0;
-
-    // ports scanners from China
-    if(strcmp(address,"222.208.183.218")==0) result=1;
-    if(strcmp(address,"221.195.73.68")==0) result=1;
-    if(strcmp(address,"61.183.15.9")==0) result=1;
-
-    return result;
-}
 
 float getFilterSizeCalibrationOffset() {
     int size=1024; // dspBufferSize
@@ -117,7 +111,8 @@ fprintf(stderr,"client_init audio_buffer_size=%d audio_buffer=%ld\n",audio_buffe
 }
 
 void* client_thread(void* arg) {
-
+    int rc;
+    char *token;
     int bytesRead;
     char message[32];
     int on=1;
@@ -143,12 +138,12 @@ fprintf(stderr,"client_thread\n");
     }
 
 fprintf(stderr,"client_thread: listening on port %d\n",port);
-        if (listen(serverSocket, 5) == -1) {
-            perror("client listen");
-            exit(1);
-        }
-    while(1) {
+    if (listen(serverSocket, 5) == -1) {
+        perror("client listen");
+        exit(1);
+    }
 
+    while(1) {
         addrlen = sizeof(client); 
 	if ((clientSocket = accept(serverSocket,(struct sockaddr *)&client,&addrlen)) == -1) {
 		perror("client accept");
@@ -162,103 +157,113 @@ fprintf(stderr,"client_thread: listening on port %d\n",port);
             fflush(stdout);
             fprintf(stderr,"%02d/%02d/%02d %02d:%02d:%02d client connection from %s:%d\n",tod->tm_mday,tod->tm_mon+1,tod->tm_year+1900,tod->tm_hour,tod->tm_min,tod->tm_sec,inet_ntoa(client.sin_addr),ntohs(client.sin_port));
 
-            if(rejectAddress(inet_ntoa(client.sin_addr))) {
-                fprintf(stderr,"connection rejected!\n");
-            } else {
-                char *token;
-                while(1) {
-                    bytesRead=recv(clientSocket, message, sizeof(message), 0);
-                    if(bytesRead<=0) {
-                        //perror("client recv");
-                        break;
+
+            struct timeval tv;
+            tv.tv_sec=3;
+            tv.tv_usec=0;
+
+            rc=setsockopt(clientSocket, SOL_SOCKET, SO_RCVTIMEO,(char *)&tv,sizeof tv);
+
+            client_terminate=0;
+            while(client_terminate==0) {
+                bytesRead=recv(clientSocket, message, sizeof(message), 0);
+                if(bytesRead==0) {
+                    break;
+                }
+         
+                if(bytesRead<0) {
+                    if(errno!=EWOULDBLOCK) {
+                        continue;
                     }
-                    message[bytesRead]=0;
+                    break;
+                }
+
+                message[bytesRead]=0;
 //fprintf(stderr,"client message: %s\n",message);
 
-                    token=strtok(message," ");
+                token=strtok(message," ");
                     if(token!=NULL) {
-                        if(strcmp(token,"getSpectrum")==0) {
-                            int samples;
-                            token=strtok(NULL," ");
-                            samples=atoi(token);
-                            Process_Panadapter(0,spectrumBuffer);
-                            meter=CalculateRXMeter(0,0,0)+multimeterCalibrationOffset+getFilterSizeCalibrationOffset();
-                            client_samples=malloc(PREFIX+samples);
-                            client_set_samples(spectrumBuffer,samples);
-                            client_send_samples(samples);
-                            free(client_samples);
-                        } else if(strcmp(token,"setFrequency")==0) {
-                            long long frequency;
-                            token=strtok(NULL," ");
-                            frequency=atoll(token);
-                            ozySetFrequency(frequency);
-                        } else if(strcmp(token,"setMode")==0) {
-                            int mode;
-                            token=strtok(NULL," ");
-                            mode=atoi(token);
-                            SetMode(0,0,mode);
-                        } else if(strcmp(token,"setFilter")==0) {
-                            int low,high;
-                            token=strtok(NULL," ");
-                            low=atoi(token);
-                            token=strtok(NULL," ");
-                            high=atoi(token);
-                            SetRXFilter(0,0,(double)low,(double)high);
-                        } else if(strcmp(token,"setAGC")==0) {
-                            int agc;
-                            token=strtok(NULL," ");
-                            agc=atoi(token);
-                            SetRXAGC(0,0,agc);
-                        } else if(strcmp(token,"setNR")==0) {
-                            int nr;
-                            token=strtok(NULL," ");
-                            if(strcmp(token,"true")==0) {
-                                nr=1;
-                            } else {
-                                nr=0;
-                            }
-                            SetNR(0,0,nr);
-                        } else if(strcmp(token,"setNB")==0) {
-                            int nb;
-                            token=strtok(NULL," ");
-                            if(strcmp(token,"true")==0) {
-                                nb=1;
-                            } else {
-                                nb=0;
-                            }
-                            SetNB(0,0,nb);
-                        } else if(strcmp(token,"setANF")==0) {
-                            int anf;
-                            token=strtok(NULL," ");
-                            if(strcmp(token,"true")==0) {
-                                anf=1;
-                            } else {
-                                anf=0;
-                            }
-                            SetANF(0,0,anf);
-                        } else if(strcmp(token,"SetRXOutputGain")==0) {
-                            int gain;
-                            token=strtok(NULL," ");
-                            gain=atoi(token);
-                            SetRXOutputGain(0,0,(double)gain/100.0);
-                        } else if(strcmp(token,"startAudioStream")==0) {
-                            token=strtok(NULL," ");
-                            if(token==NULL) {
-                                audio_buffer_size=480;
-                            } else {
-                                audio_buffer_size=atoi(token);
-                            }
-                            free(audio_buffer);
-                            audio_buffer=malloc(audio_buffer_size+PREFIX);
-                            audio_stream_reset();
-                            send_audio=1;
-fprintf(stderr,"startAudioStream %d send_audio=%d\n",audio_buffer_size,send_audio);
-                        } else if(strcmp(token,"stopAudioStream")==0) {
-                            send_audio=0;
-fprintf(stderr,"stopAudioStream send_audio=%d\n",send_audio);
+                    if(strcmp(token,"getSpectrum")==0) {
+                        int samples;
+                        token=strtok(NULL," ");
+                        samples=atoi(token);
+                        Process_Panadapter(0,spectrumBuffer);
+                        meter=CalculateRXMeter(0,0,0)+multimeterCalibrationOffset+getFilterSizeCalibrationOffset();
+                        client_samples=malloc(PREFIX+samples);
+                        client_set_samples(spectrumBuffer,samples);
+                        client_send_samples(samples);
+                        free(client_samples);
+                    } else if(strcmp(token,"setFrequency")==0) {
+                        long long frequency;
+                        token=strtok(NULL," ");
+                        frequency=atoll(token);
+                        ozySetFrequency(frequency);
+                    } else if(strcmp(token,"setMode")==0) {
+                        int mode;
+                        token=strtok(NULL," ");
+                        mode=atoi(token);
+                        SetMode(0,0,mode);
+                    } else if(strcmp(token,"setFilter")==0) {
+                        int low,high;
+                        token=strtok(NULL," ");
+                        low=atoi(token);
+                        token=strtok(NULL," ");
+                        high=atoi(token);
+                        SetRXFilter(0,0,(double)low,(double)high);
+                    } else if(strcmp(token,"setAGC")==0) {
+                        int agc;
+                        token=strtok(NULL," ");
+                        agc=atoi(token);
+                        SetRXAGC(0,0,agc);
+                    } else if(strcmp(token,"setNR")==0) {
+                        int nr;
+                        token=strtok(NULL," ");
+                        if(strcmp(token,"true")==0) {
+                            nr=1;
+                        } else {
+                            nr=0;
                         }
-                    } else {
+                        SetNR(0,0,nr);
+                    } else if(strcmp(token,"setNB")==0) {
+                        int nb;
+                        token=strtok(NULL," ");
+                        if(strcmp(token,"true")==0) {
+                            nb=1;
+                        } else {
+                            nb=0;
+                        }
+                        SetNB(0,0,nb);
+                    } else if(strcmp(token,"setANF")==0) {
+                        int anf;
+                        token=strtok(NULL," ");
+                        if(strcmp(token,"true")==0) {
+                            anf=1;
+                        } else {
+                            anf=0;
+                        }
+                        SetANF(0,0,anf);
+                    } else if(strcmp(token,"SetRXOutputGain")==0) {
+                        int gain;
+                        token=strtok(NULL," ");
+                        gain=atoi(token);
+                        SetRXOutputGain(0,0,(double)gain/100.0);
+                    } else if(strcmp(token,"startAudioStream")==0) {
+                        token=strtok(NULL," ");
+                        if(token==NULL) {
+                            audio_buffer_size=480;
+                        } else {
+                            audio_buffer_size=atoi(token);
+                        }
+                        free(audio_buffer);
+                        audio_buffer=malloc(audio_buffer_size+PREFIX);
+                        audio_stream_reset();
+                        send_audio=1;
+fprintf(stderr,"startAudioStream %d send_audio=%d\n",audio_buffer_size,send_audio);
+                    } else if(strcmp(token,"stopAudioStream")==0) {
+                        send_audio=0;
+fprintf(stderr,"stopAudioStream send_audio=%d\n",send_audio);
                     }
+                } else {
                 }
             }
 
