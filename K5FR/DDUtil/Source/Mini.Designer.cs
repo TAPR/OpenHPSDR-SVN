@@ -150,7 +150,7 @@ namespace DataDecoder
             // txtTemp
             // 
             this.txtTemp.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtTemp.Location = new System.Drawing.Point(290, 5);
+            this.txtTemp.Location = new System.Drawing.Point(283, 5);
             this.txtTemp.Name = "txtTemp";
             this.txtTemp.Size = new System.Drawing.Size(49, 20);
             this.txtTemp.TabIndex = 77;
@@ -334,7 +334,7 @@ namespace DataDecoder
             // AOT
             // 
             this.AOT.AutoSize = true;
-            this.AOT.Location = new System.Drawing.Point(287, 160);
+            this.AOT.Location = new System.Drawing.Point(199, 140);
             this.AOT.Name = "AOT";
             this.AOT.Size = new System.Drawing.Size(62, 17);
             this.AOT.TabIndex = 87;
@@ -486,13 +486,12 @@ namespace DataDecoder
             // 
             // lblBCD
             // 
-            this.lblBCD.AutoSize = true;
             this.lblBCD.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lblBCD.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblBCD.ForeColor = System.Drawing.Color.Red;
-            this.lblBCD.Location = new System.Drawing.Point(379, 7);
+            this.lblBCD.Location = new System.Drawing.Point(369, 7);
             this.lblBCD.Name = "lblBCD";
-            this.lblBCD.Size = new System.Drawing.Size(15, 15);
+            this.lblBCD.Size = new System.Drawing.Size(27, 15);
             this.lblBCD.TabIndex = 90;
             this.lblBCD.Text = "0";
             this.lblBCD.TextAlign = System.Drawing.ContentAlignment.TopCenter;
@@ -505,7 +504,7 @@ namespace DataDecoder
             this.btnFull.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
             this.btnFull.Font = new System.Drawing.Font("Microsoft Sans Serif", 6F, System.Drawing.FontStyle.Bold);
             this.btnFull.ForeColor = System.Drawing.Color.Black;
-            this.btnFull.Location = new System.Drawing.Point(345, 5);
+            this.btnFull.Location = new System.Drawing.Point(337, 5);
             this.btnFull.Name = "btnFull";
             this.btnFull.Size = new System.Drawing.Size(27, 19);
             this.btnFull.TabIndex = 83;
@@ -518,7 +517,7 @@ namespace DataDecoder
             // 
             this.chkRCP2.AutoSize = true;
             this.chkRCP2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
-            this.chkRCP2.Location = new System.Drawing.Point(287, 99);
+            this.chkRCP2.Location = new System.Drawing.Point(13, 140);
             this.chkRCP2.Name = "chkRCP2";
             this.chkRCP2.Size = new System.Drawing.Size(54, 17);
             this.chkRCP2.TabIndex = 91;
@@ -531,7 +530,7 @@ namespace DataDecoder
             // 
             this.chkRCP3.AutoSize = true;
             this.chkRCP3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
-            this.chkRCP3.Location = new System.Drawing.Point(287, 119);
+            this.chkRCP3.Location = new System.Drawing.Point(75, 140);
             this.chkRCP3.Name = "chkRCP3";
             this.chkRCP3.Size = new System.Drawing.Size(54, 17);
             this.chkRCP3.TabIndex = 93;
@@ -544,7 +543,7 @@ namespace DataDecoder
             // 
             this.chkRCP4.AutoSize = true;
             this.chkRCP4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
-            this.chkRCP4.Location = new System.Drawing.Point(287, 140);
+            this.chkRCP4.Location = new System.Drawing.Point(137, 140);
             this.chkRCP4.Name = "chkRCP4";
             this.chkRCP4.Size = new System.Drawing.Size(54, 17);
             this.chkRCP4.TabIndex = 94;
@@ -559,11 +558,10 @@ namespace DataDecoder
             this.btnMacro1.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
             this.btnMacro1.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.btnMacro1.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.btnMacro1.Location = new System.Drawing.Point(8, 33);
+            this.btnMacro1.Location = new System.Drawing.Point(5, 24);
             this.btnMacro1.Name = "btnMacro1";
             this.btnMacro1.Size = new System.Drawing.Size(20, 12);
             this.btnMacro1.TabIndex = 140;
-            this.toolTip1.SetToolTip(this.btnMacro1, "Press to run macro for this key.");
             this.btnMacro1.UseVisualStyleBackColor = false;
             this.btnMacro1.Click += new System.EventHandler(this.btnMacro1_Click);
             // 
@@ -573,11 +571,10 @@ namespace DataDecoder
             this.btnMacro2.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
             this.btnMacro2.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.btnMacro2.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.btnMacro2.Location = new System.Drawing.Point(41, 33);
+            this.btnMacro2.Location = new System.Drawing.Point(31, 24);
             this.btnMacro2.Name = "btnMacro2";
             this.btnMacro2.Size = new System.Drawing.Size(20, 12);
             this.btnMacro2.TabIndex = 142;
-            this.toolTip1.SetToolTip(this.btnMacro2, "Press to run macro for this key.");
             this.btnMacro2.UseVisualStyleBackColor = false;
             this.btnMacro2.Click += new System.EventHandler(this.btnMacro2_Click);
             // 
@@ -587,11 +584,10 @@ namespace DataDecoder
             this.btnMacro3.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
             this.btnMacro3.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.btnMacro3.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.btnMacro3.Location = new System.Drawing.Point(75, 33);
+            this.btnMacro3.Location = new System.Drawing.Point(58, 24);
             this.btnMacro3.Name = "btnMacro3";
             this.btnMacro3.Size = new System.Drawing.Size(20, 12);
             this.btnMacro3.TabIndex = 144;
-            this.toolTip1.SetToolTip(this.btnMacro3, "Press to run macro for this key.");
             this.btnMacro3.UseVisualStyleBackColor = false;
             this.btnMacro3.Click += new System.EventHandler(this.btnMacro3_Click);
             // 
@@ -601,11 +597,10 @@ namespace DataDecoder
             this.btnMacro4.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
             this.btnMacro4.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.btnMacro4.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.btnMacro4.Location = new System.Drawing.Point(109, 33);
+            this.btnMacro4.Location = new System.Drawing.Point(85, 24);
             this.btnMacro4.Name = "btnMacro4";
             this.btnMacro4.Size = new System.Drawing.Size(20, 12);
             this.btnMacro4.TabIndex = 146;
-            this.toolTip1.SetToolTip(this.btnMacro4, "Press to run macro for this key.");
             this.btnMacro4.UseVisualStyleBackColor = false;
             this.btnMacro4.Click += new System.EventHandler(this.btnMacro4_Click);
             // 
@@ -615,11 +610,10 @@ namespace DataDecoder
             this.btnMacro5.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
             this.btnMacro5.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.btnMacro5.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.btnMacro5.Location = new System.Drawing.Point(143, 33);
+            this.btnMacro5.Location = new System.Drawing.Point(112, 24);
             this.btnMacro5.Name = "btnMacro5";
             this.btnMacro5.Size = new System.Drawing.Size(20, 12);
             this.btnMacro5.TabIndex = 148;
-            this.toolTip1.SetToolTip(this.btnMacro5, "Press to run macro for this key.");
             this.btnMacro5.UseVisualStyleBackColor = false;
             this.btnMacro5.Click += new System.EventHandler(this.btnMacro5_Click);
             // 
@@ -629,11 +623,10 @@ namespace DataDecoder
             this.btnMacro6.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
             this.btnMacro6.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.btnMacro6.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.btnMacro6.Location = new System.Drawing.Point(177, 33);
+            this.btnMacro6.Location = new System.Drawing.Point(139, 24);
             this.btnMacro6.Name = "btnMacro6";
             this.btnMacro6.Size = new System.Drawing.Size(20, 12);
             this.btnMacro6.TabIndex = 150;
-            this.toolTip1.SetToolTip(this.btnMacro6, "Press to run macro for this key.");
             this.btnMacro6.UseVisualStyleBackColor = false;
             this.btnMacro6.Click += new System.EventHandler(this.btnMacro6_Click);
             // 
@@ -643,11 +636,10 @@ namespace DataDecoder
             this.btnMacro7.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
             this.btnMacro7.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.btnMacro7.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.btnMacro7.Location = new System.Drawing.Point(210, 33);
+            this.btnMacro7.Location = new System.Drawing.Point(165, 24);
             this.btnMacro7.Name = "btnMacro7";
             this.btnMacro7.Size = new System.Drawing.Size(20, 12);
             this.btnMacro7.TabIndex = 152;
-            this.toolTip1.SetToolTip(this.btnMacro7, "Press to run macro for this key.");
             this.btnMacro7.UseVisualStyleBackColor = false;
             this.btnMacro7.Click += new System.EventHandler(this.btnMacro7_Click);
             // 
@@ -657,11 +649,10 @@ namespace DataDecoder
             this.btnMacro8.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
             this.btnMacro8.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.btnMacro8.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.btnMacro8.Location = new System.Drawing.Point(243, 33);
+            this.btnMacro8.Location = new System.Drawing.Point(191, 24);
             this.btnMacro8.Name = "btnMacro8";
             this.btnMacro8.Size = new System.Drawing.Size(20, 12);
             this.btnMacro8.TabIndex = 154;
-            this.toolTip1.SetToolTip(this.btnMacro8, "Press to run macro for this key.");
             this.btnMacro8.UseVisualStyleBackColor = false;
             this.btnMacro8.Click += new System.EventHandler(this.btnMacro8_Click);
             // 
@@ -671,11 +662,10 @@ namespace DataDecoder
             this.btnMacro16.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
             this.btnMacro16.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.btnMacro16.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.btnMacro16.Location = new System.Drawing.Point(243, 64);
+            this.btnMacro16.Location = new System.Drawing.Point(404, 24);
             this.btnMacro16.Name = "btnMacro16";
             this.btnMacro16.Size = new System.Drawing.Size(20, 12);
             this.btnMacro16.TabIndex = 170;
-            this.toolTip1.SetToolTip(this.btnMacro16, "Press to run macro for this key.");
             this.btnMacro16.UseVisualStyleBackColor = false;
             this.btnMacro16.Click += new System.EventHandler(this.btnMacro16_Click);
             // 
@@ -685,11 +675,10 @@ namespace DataDecoder
             this.btnMacro15.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
             this.btnMacro15.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.btnMacro15.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.btnMacro15.Location = new System.Drawing.Point(210, 64);
+            this.btnMacro15.Location = new System.Drawing.Point(378, 24);
             this.btnMacro15.Name = "btnMacro15";
             this.btnMacro15.Size = new System.Drawing.Size(20, 12);
             this.btnMacro15.TabIndex = 168;
-            this.toolTip1.SetToolTip(this.btnMacro15, "Press to run macro for this key.");
             this.btnMacro15.UseVisualStyleBackColor = false;
             this.btnMacro15.Click += new System.EventHandler(this.btnMacro15_Click);
             // 
@@ -699,11 +688,10 @@ namespace DataDecoder
             this.btnMacro14.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
             this.btnMacro14.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.btnMacro14.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.btnMacro14.Location = new System.Drawing.Point(177, 64);
+            this.btnMacro14.Location = new System.Drawing.Point(352, 24);
             this.btnMacro14.Name = "btnMacro14";
             this.btnMacro14.Size = new System.Drawing.Size(20, 12);
             this.btnMacro14.TabIndex = 166;
-            this.toolTip1.SetToolTip(this.btnMacro14, "Press to run macro for this key.");
             this.btnMacro14.UseVisualStyleBackColor = false;
             this.btnMacro14.Click += new System.EventHandler(this.btnMacro14_Click);
             // 
@@ -713,11 +701,10 @@ namespace DataDecoder
             this.btnMacro13.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
             this.btnMacro13.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.btnMacro13.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.btnMacro13.Location = new System.Drawing.Point(143, 64);
+            this.btnMacro13.Location = new System.Drawing.Point(325, 24);
             this.btnMacro13.Name = "btnMacro13";
             this.btnMacro13.Size = new System.Drawing.Size(20, 12);
             this.btnMacro13.TabIndex = 164;
-            this.toolTip1.SetToolTip(this.btnMacro13, "Press to run macro for this key.");
             this.btnMacro13.UseVisualStyleBackColor = false;
             this.btnMacro13.Click += new System.EventHandler(this.btnMacro13_Click);
             // 
@@ -727,11 +714,10 @@ namespace DataDecoder
             this.btnMacro12.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
             this.btnMacro12.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.btnMacro12.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.btnMacro12.Location = new System.Drawing.Point(109, 64);
+            this.btnMacro12.Location = new System.Drawing.Point(297, 24);
             this.btnMacro12.Name = "btnMacro12";
             this.btnMacro12.Size = new System.Drawing.Size(20, 12);
             this.btnMacro12.TabIndex = 162;
-            this.toolTip1.SetToolTip(this.btnMacro12, "Press to run macro for this key.");
             this.btnMacro12.UseVisualStyleBackColor = false;
             this.btnMacro12.Click += new System.EventHandler(this.btnMacro12_Click);
             // 
@@ -741,11 +727,10 @@ namespace DataDecoder
             this.btnMacro11.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
             this.btnMacro11.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.btnMacro11.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.btnMacro11.Location = new System.Drawing.Point(75, 64);
+            this.btnMacro11.Location = new System.Drawing.Point(270, 24);
             this.btnMacro11.Name = "btnMacro11";
             this.btnMacro11.Size = new System.Drawing.Size(20, 12);
             this.btnMacro11.TabIndex = 160;
-            this.toolTip1.SetToolTip(this.btnMacro11, "Press to run macro for this key.");
             this.btnMacro11.UseVisualStyleBackColor = false;
             this.btnMacro11.Click += new System.EventHandler(this.btnMacro11_Click);
             // 
@@ -755,11 +740,10 @@ namespace DataDecoder
             this.btnMacro10.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
             this.btnMacro10.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.btnMacro10.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.btnMacro10.Location = new System.Drawing.Point(41, 64);
+            this.btnMacro10.Location = new System.Drawing.Point(243, 24);
             this.btnMacro10.Name = "btnMacro10";
             this.btnMacro10.Size = new System.Drawing.Size(20, 12);
             this.btnMacro10.TabIndex = 158;
-            this.toolTip1.SetToolTip(this.btnMacro10, "Press to run macro for this key.");
             this.btnMacro10.UseVisualStyleBackColor = false;
             this.btnMacro10.Click += new System.EventHandler(this.btnMacro10_Click);
             // 
@@ -769,11 +753,10 @@ namespace DataDecoder
             this.btnMacro9.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
             this.btnMacro9.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.btnMacro9.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.btnMacro9.Location = new System.Drawing.Point(8, 64);
+            this.btnMacro9.Location = new System.Drawing.Point(217, 24);
             this.btnMacro9.Name = "btnMacro9";
             this.btnMacro9.Size = new System.Drawing.Size(20, 12);
             this.btnMacro9.TabIndex = 156;
-            this.toolTip1.SetToolTip(this.btnMacro9, "Press to run macro for this key.");
             this.btnMacro9.UseVisualStyleBackColor = false;
             this.btnMacro9.Click += new System.EventHandler(this.btnMacro9_Click);
             // 
@@ -793,7 +776,7 @@ namespace DataDecoder
             // 
             this.txtVolts.BackColor = System.Drawing.Color.LightYellow;
             this.txtVolts.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtVolts.Location = new System.Drawing.Point(248, 5);
+            this.txtVolts.Location = new System.Drawing.Point(241, 5);
             this.txtVolts.Name = "txtVolts";
             this.txtVolts.Size = new System.Drawing.Size(36, 20);
             this.txtVolts.TabIndex = 104;
@@ -869,7 +852,7 @@ namespace DataDecoder
             this.btnMemClear.Size = new System.Drawing.Size(46, 23);
             this.btnMemClear.TabIndex = 108;
             this.btnMemClear.Text = "Clear";
-            this.toolTip1.SetToolTip(this.btnMemClear, "Press to clear selected memory. Ctrl+Clear to delete ALL memories.");
+            this.toolTip1.SetToolTip(this.btnMemClear, "Press to clear selected memory. Ctrl+Shift+Clear to delete ALL memories.");
             this.btnMemClear.UseVisualStyleBackColor = true;
             this.btnMemClear.Click += new System.EventHandler(this.btnMemClear_Click);
             this.btnMemClear.KeyDown += new System.Windows.Forms.KeyEventHandler(this.btnMemClear_KeyDown);
@@ -913,8 +896,9 @@ namespace DataDecoder
             this.txtMemFreq.TabIndex = 109;
             this.txtMemFreq.Text = "MHZ";
             this.txtMemFreq.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.toolTip1.SetToolTip(this.txtMemFreq, "Memory frequency.");
+            this.toolTip1.SetToolTip(this.txtMemFreq, "Memory frequency (double-click [Ctrl+N] to add note).");
             this.txtMemFreq.WordWrap = false;
+            this.txtMemFreq.DoubleClick += new System.EventHandler(this.txtMemFreq_DoubleClick);
             // 
             // btnMemSave
             // 
@@ -942,7 +926,7 @@ namespace DataDecoder
             this.grpStepCtrl.Controls.Add(this.btnHome);
             this.grpStepCtrl.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.25F, System.Drawing.FontStyle.Bold);
             this.grpStepCtrl.ForeColor = System.Drawing.Color.Firebrick;
-            this.grpStepCtrl.Location = new System.Drawing.Point(5, 26);
+            this.grpStepCtrl.Location = new System.Drawing.Point(4, 26);
             this.grpStepCtrl.Name = "grpStepCtrl";
             this.grpStepCtrl.Size = new System.Drawing.Size(319, 40);
             this.grpStepCtrl.TabIndex = 85;
@@ -1030,7 +1014,7 @@ namespace DataDecoder
             this.grpAmp.Controls.Add(this.btnPwr);
             this.grpAmp.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.25F, System.Drawing.FontStyle.Bold);
             this.grpAmp.ForeColor = System.Drawing.Color.Blue;
-            this.grpAmp.Location = new System.Drawing.Point(426, 5);
+            this.grpAmp.Location = new System.Drawing.Point(431, 5);
             this.grpAmp.Name = "grpAmp";
             this.grpAmp.Size = new System.Drawing.Size(251, 80);
             this.grpAmp.TabIndex = 88;
@@ -1122,7 +1106,7 @@ namespace DataDecoder
             this.label28.AutoSize = true;
             this.label28.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label28.ForeColor = System.Drawing.Color.Navy;
-            this.label28.Location = new System.Drawing.Point(9, 17);
+            this.label28.Location = new System.Drawing.Point(6, 8);
             this.label28.Name = "label28";
             this.label28.Size = new System.Drawing.Size(18, 12);
             this.label28.TabIndex = 114;
@@ -1164,19 +1148,19 @@ namespace DataDecoder
             this.grpMacro.Controls.Add(this.label28);
             this.grpMacro.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.25F, System.Drawing.FontStyle.Bold);
             this.grpMacro.ForeColor = System.Drawing.Color.Firebrick;
-            this.grpMacro.Location = new System.Drawing.Point(5, 91);
+            this.grpMacro.Location = new System.Drawing.Point(3, 90);
             this.grpMacro.Name = "grpMacro";
-            this.grpMacro.Size = new System.Drawing.Size(272, 86);
+            this.grpMacro.Size = new System.Drawing.Size(430, 43);
             this.grpMacro.TabIndex = 103;
             this.grpMacro.TabStop = false;
-            this.grpMacro.Text = "Macro";
+            this.toolTip1.SetToolTip(this.grpMacro, "Macro Buttons");
             // 
             // label8
             // 
             this.label8.AutoSize = true;
             this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label8.ForeColor = System.Drawing.Color.Navy;
-            this.label8.Location = new System.Drawing.Point(241, 48);
+            this.label8.Location = new System.Drawing.Point(402, 8);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(24, 12);
             this.label8.TabIndex = 169;
@@ -1187,7 +1171,7 @@ namespace DataDecoder
             this.label9.AutoSize = true;
             this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label9.ForeColor = System.Drawing.Color.Navy;
-            this.label9.Location = new System.Drawing.Point(208, 48);
+            this.label9.Location = new System.Drawing.Point(376, 8);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(24, 12);
             this.label9.TabIndex = 167;
@@ -1198,7 +1182,7 @@ namespace DataDecoder
             this.label10.AutoSize = true;
             this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label10.ForeColor = System.Drawing.Color.Navy;
-            this.label10.Location = new System.Drawing.Point(175, 48);
+            this.label10.Location = new System.Drawing.Point(350, 8);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(24, 12);
             this.label10.TabIndex = 165;
@@ -1209,7 +1193,7 @@ namespace DataDecoder
             this.label11.AutoSize = true;
             this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label11.ForeColor = System.Drawing.Color.Navy;
-            this.label11.Location = new System.Drawing.Point(141, 48);
+            this.label11.Location = new System.Drawing.Point(323, 8);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(24, 12);
             this.label11.TabIndex = 163;
@@ -1220,7 +1204,7 @@ namespace DataDecoder
             this.label12.AutoSize = true;
             this.label12.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label12.ForeColor = System.Drawing.Color.Navy;
-            this.label12.Location = new System.Drawing.Point(108, 48);
+            this.label12.Location = new System.Drawing.Point(296, 8);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(24, 12);
             this.label12.TabIndex = 161;
@@ -1231,7 +1215,7 @@ namespace DataDecoder
             this.label13.AutoSize = true;
             this.label13.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label13.ForeColor = System.Drawing.Color.Navy;
-            this.label13.Location = new System.Drawing.Point(74, 48);
+            this.label13.Location = new System.Drawing.Point(269, 8);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(24, 12);
             this.label13.TabIndex = 159;
@@ -1242,7 +1226,7 @@ namespace DataDecoder
             this.label14.AutoSize = true;
             this.label14.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label14.ForeColor = System.Drawing.Color.Navy;
-            this.label14.Location = new System.Drawing.Point(40, 48);
+            this.label14.Location = new System.Drawing.Point(242, 8);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(24, 12);
             this.label14.TabIndex = 157;
@@ -1253,7 +1237,7 @@ namespace DataDecoder
             this.label15.AutoSize = true;
             this.label15.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label15.ForeColor = System.Drawing.Color.Navy;
-            this.label15.Location = new System.Drawing.Point(9, 48);
+            this.label15.Location = new System.Drawing.Point(218, 8);
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(18, 12);
             this.label15.TabIndex = 155;
@@ -1264,7 +1248,7 @@ namespace DataDecoder
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label7.ForeColor = System.Drawing.Color.Navy;
-            this.label7.Location = new System.Drawing.Point(244, 17);
+            this.label7.Location = new System.Drawing.Point(192, 8);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(18, 12);
             this.label7.TabIndex = 153;
@@ -1275,7 +1259,7 @@ namespace DataDecoder
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label6.ForeColor = System.Drawing.Color.Navy;
-            this.label6.Location = new System.Drawing.Point(211, 17);
+            this.label6.Location = new System.Drawing.Point(166, 8);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(18, 12);
             this.label6.TabIndex = 151;
@@ -1286,7 +1270,7 @@ namespace DataDecoder
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label5.ForeColor = System.Drawing.Color.Navy;
-            this.label5.Location = new System.Drawing.Point(178, 17);
+            this.label5.Location = new System.Drawing.Point(140, 8);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(18, 12);
             this.label5.TabIndex = 149;
@@ -1297,7 +1281,7 @@ namespace DataDecoder
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label4.ForeColor = System.Drawing.Color.Navy;
-            this.label4.Location = new System.Drawing.Point(144, 17);
+            this.label4.Location = new System.Drawing.Point(113, 8);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(18, 12);
             this.label4.TabIndex = 147;
@@ -1308,7 +1292,7 @@ namespace DataDecoder
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label3.ForeColor = System.Drawing.Color.Navy;
-            this.label3.Location = new System.Drawing.Point(110, 17);
+            this.label3.Location = new System.Drawing.Point(86, 8);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(18, 12);
             this.label3.TabIndex = 145;
@@ -1319,7 +1303,7 @@ namespace DataDecoder
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.ForeColor = System.Drawing.Color.Navy;
-            this.label2.Location = new System.Drawing.Point(76, 17);
+            this.label2.Location = new System.Drawing.Point(59, 8);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(18, 12);
             this.label2.TabIndex = 143;
@@ -1330,7 +1314,7 @@ namespace DataDecoder
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.Color.Navy;
-            this.label1.Location = new System.Drawing.Point(42, 17);
+            this.label1.Location = new System.Drawing.Point(32, 8);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(18, 12);
             this.label1.TabIndex = 141;
@@ -1341,7 +1325,7 @@ namespace DataDecoder
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
-            this.ClientSize = new System.Drawing.Size(693, 182);
+            this.ClientSize = new System.Drawing.Size(694, 160);
             this.Controls.Add(this.txtMemVfo);
             this.Controls.Add(this.btnMV);
             this.Controls.Add(this.btnMemLoad);
@@ -1377,7 +1361,7 @@ namespace DataDecoder
             this.Name = "Mini";
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "DDUtil - (Not Connected)";
-            this.toolTip1.SetToolTip(this, "Double Click the background to reveal more controls.");
+            this.toolTip1.SetToolTip(this, "Double-Click the background to reveal more/less controls.");
             this.Load += new System.EventHandler(this.Mini_Load);
             this.DoubleClick += new System.EventHandler(this.Mini_DoubleClick);
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Mini_FormClosing);
@@ -1401,7 +1385,6 @@ namespace DataDecoder
 
         private System.Windows.Forms.Label lblSWR;
         private System.Windows.Forms.Button btnSP;
-        private System.Windows.Forms.ToolTip toolTip1;
         private System.Windows.Forms.GroupBox grpStepCtrl;
         private System.Windows.Forms.Button btnCalib;
         private System.Windows.Forms.Button btnHome;
@@ -1443,36 +1426,20 @@ namespace DataDecoder
         public System.Windows.Forms.CheckBox chkRCP4;
         private System.Windows.Forms.Label label28;
         private System.Windows.Forms.GroupBox grpMacro;
-        private System.Windows.Forms.Button btnMacro1;
-        private System.Windows.Forms.Button btnMacro8;
         private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.Button btnMacro7;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.Button btnMacro6;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Button btnMacro5;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Button btnMacro4;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Button btnMacro3;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Button btnMacro2;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Button btnMacro16;
         private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.Button btnMacro15;
         private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.Button btnMacro14;
         private System.Windows.Forms.Label label10;
-        private System.Windows.Forms.Button btnMacro13;
         private System.Windows.Forms.Label label11;
-        private System.Windows.Forms.Button btnMacro12;
         private System.Windows.Forms.Label label12;
-        private System.Windows.Forms.Button btnMacro11;
         private System.Windows.Forms.Label label13;
-        private System.Windows.Forms.Button btnMacro10;
         private System.Windows.Forms.Label label14;
-        private System.Windows.Forms.Button btnMacro9;
         private System.Windows.Forms.Label label15;
         public System.Windows.Forms.Label lblStepFreq;
         public System.Windows.Forms.TextBox txtTune;
@@ -1487,5 +1454,22 @@ namespace DataDecoder
         public System.Windows.Forms.Button btnReCall;
         public System.Windows.Forms.TextBox txtMemFreq;
         public System.Windows.Forms.Button btnMemSave;
+        public System.Windows.Forms.ToolTip toolTip1;
+        public System.Windows.Forms.Button btnMacro1;
+        public System.Windows.Forms.Button btnMacro8;
+        public System.Windows.Forms.Button btnMacro7;
+        public System.Windows.Forms.Button btnMacro6;
+        public System.Windows.Forms.Button btnMacro5;
+        public System.Windows.Forms.Button btnMacro4;
+        public System.Windows.Forms.Button btnMacro3;
+        public System.Windows.Forms.Button btnMacro2;
+        public System.Windows.Forms.Button btnMacro16;
+        public System.Windows.Forms.Button btnMacro15;
+        public System.Windows.Forms.Button btnMacro14;
+        public System.Windows.Forms.Button btnMacro13;
+        public System.Windows.Forms.Button btnMacro12;
+        public System.Windows.Forms.Button btnMacro11;
+        public System.Windows.Forms.Button btnMacro10;
+        public System.Windows.Forms.Button btnMacro9;
     }
 }

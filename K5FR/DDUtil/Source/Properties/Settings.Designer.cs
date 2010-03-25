@@ -757,7 +757,7 @@ namespace DataDecoder.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        [global::System.Configuration.DefaultSettingValueAttribute("-1")]
         public string lptNum {
             get {
                 return ((string)(this["lptNum"]));
@@ -769,7 +769,7 @@ namespace DataDecoder.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("-1")]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
         public int LPportNum {
             get {
                 return ((int)(this["LPportNum"]));
@@ -3212,6 +3212,150 @@ namespace DataDecoder.Properties {
             }
             set {
                 this["chkStepDipole"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool chkAuxEnab {
+            get {
+                return ((bool)(this["chkAuxEnab"]));
+            }
+            set {
+                this["chkAuxEnab"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool chkFollowFreq {
+            get {
+                return ((bool)(this["chkFollowFreq"]));
+            }
+            set {
+                this["chkFollowFreq"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool chkAuxMacro {
+            get {
+                return ((bool)(this["chkAuxMacro"]));
+            }
+            set {
+                this["chkAuxMacro"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool chkAuxBit1 {
+            get {
+                return ((bool)(this["chkAuxBit1"]));
+            }
+            set {
+                this["chkAuxBit1"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool chkAuxBit2 {
+            get {
+                return ((bool)(this["chkAuxBit2"]));
+            }
+            set {
+                this["chkAuxBit2"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool chkAuxBit3 {
+            get {
+                return ((bool)(this["chkAuxBit3"]));
+            }
+            set {
+                this["chkAuxBit3"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool chkAuxBit4 {
+            get {
+                return ((bool)(this["chkAuxBit4"]));
+            }
+            set {
+                this["chkAuxBit4"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool chkAuxBit5 {
+            get {
+                return ((bool)(this["chkAuxBit5"]));
+            }
+            set {
+                this["chkAuxBit5"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool chkAuxBit6 {
+            get {
+                return ((bool)(this["chkAuxBit6"]));
+            }
+            set {
+                this["chkAuxBit6"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool chkAuxBit7 {
+            get {
+                return ((bool)(this["chkAuxBit7"]));
+            }
+            set {
+                this["chkAuxBit7"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool chkAuxBit8 {
+            get {
+                return ((bool)(this["chkAuxBit8"]));
+            }
+            set {
+                this["chkAuxBit8"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool chkCwTx {
+            get {
+                return ((bool)(this["chkCwTx"]));
+            }
+            set {
+                this["chkCwTx"] = value;
             }
         }
     }

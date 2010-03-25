@@ -24,6 +24,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Configuration;
 using System.Data;
 using System.Data.OleDb;
@@ -652,8 +653,12 @@ namespace DataDecoder
             X2SetUp();  // setup the X2 Matrix
             WN2SetUp(); // setup the WN2
             PMSetup();  // setup the Power Master
-            InitSPE();  // setup SPE Amp
+            cboSPEport.SelectedIndex = set.SPEport;
+            chkSPEenab.Checked = set.SPEenab;
+            chkAutoDrv.Checked = set.chkAutoDrv;
+            autoDriveToolStripMenuItem1.Checked = set.chkAutoDrv;
             SOinit();   // setup SO2R
+            AuxBcdInit();
             cboKnobPort.SelectedIndex = set.cboKnobPort;
             chkKnobEnab.Checked = set.chkKnobEnab;
             btnReCall_Click(null, null);
@@ -665,14 +670,21 @@ namespace DataDecoder
             pollTimer.Enabled = true;
             tempTimer.Enabled = true;
             chkModeChg.Checked = set.ModeChg;
+            chkCwTx.Checked = set.chkCwTx;
 
             // setup error log parameters
             ErrorLog.LogFilePath = "ErrorLog.txt";
             enableErrorLog = set.ErrorLog;
             if (enableErrorLog)
+            {
                 enableErrorLoggingToolStripMenuItem.Checked = true;
+                errorLogToolStripMenuItem.Checked = true;
+            }
             else
+            {
                 enableErrorLoggingToolStripMenuItem.Checked = false;
+                errorLogToolStripMenuItem.Checked = false;
+            }
 
             mSplashScreen.SetProgress("Loading Main Form", 1.0);
             COBC = lastBand;
@@ -701,6 +713,23 @@ namespace DataDecoder
 
         #region Delegates
 
+        // Write to Split button
+        delegate void SetSplitCallback(string text);
+        public void SetSplit(string text)
+        {
+            if (this.btnSplit.InvokeRequired)
+            {
+                SetSplitCallback d = new SetSplitCallback(SetSplit);
+                this.Invoke(d, new object[] { text });
+            }
+            else
+            {
+                if (text == "On")
+                    btnSplit.BackColor = Color.Yellow;
+                else
+                    btnSplit.BackColor = Color.PaleTurquoise;
+            }
+        }
         // Write to AzOffset button
         delegate void SetAzOffsetCallback(string text);
         public void SetAzOffset(string text)
@@ -825,7 +854,18 @@ namespace DataDecoder
                 {
                     this.Text = text;
                     mini.Text = text;
-                    if (!lblAnt.Visible) this.StatusBar.Text = text;
+                    if (!lblAnt.Visible)
+                    {
+                        if (mem[idxMem, 11] != "" && mem[idxMem, 11] != null)
+                        {
+                            this.StatusBar.Text = text + "                    " +
+                                   mem[idxMem, 11];
+                           mini.Text = text + "          " +
+                                mem[idxMem, 11];
+                        }
+                        else
+                            this.StatusBar.Text = text;
+                    }
                     else
                     {
                         this.StatusBar.Text = text +
@@ -870,13 +910,28 @@ namespace DataDecoder
                     }
                     else
                     {
+                        double volts = Convert.ToDouble(text);
                         txtVolts.Text = text; mini.txtVolts.Text = text;
-                        if (Convert.ToDouble(text) < 13 || Convert.ToDouble(text) > 14.5)
-                        { txtVolts.BackColor = Color.Red; 
-                            mini.txtVolts.BackColor = Color.Red; }
+                        if (volts < 11.5 || volts > 14.5)
+                        {
+                            txtVolts.BackColor = Color.Red;
+                            mini.txtVolts.BackColor = Color.Red;
+                        }
+                        else if (volts >= 11.5 && volts <= 12.0)
+                        {
+                            txtVolts.BackColor = Color.Orange;
+                            mini.txtVolts.BackColor = Color.Orange;
+                        }
+                        else if (volts > 12.0 && volts <= 12.8)
+                        {
+                            txtVolts.BackColor = Color.Yellow;
+                            mini.txtVolts.BackColor = Color.Yellow;
+                        }
                         else
-                        { txtVolts.BackColor = Color.LightYellow; 
-                            mini.txtVolts.BackColor = Color.LightYellow; }
+                        {
+                            txtVolts.BackColor = Color.LightGreen;
+                            mini.txtVolts.BackColor = Color.LightGreen;
+                        }
                     }
                 }
                 catch { }
@@ -1063,11 +1118,21 @@ namespace DataDecoder
 
         #region Form Events
 
+        // the chkCwTx check box has changed
+        private void chkCwTx_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chkCwTx.Checked)
+                set.chkCwTx = true;
+            else
+                set.chkCwTx = false;
+            set.Save();
+        }
         // the auto drive expert check box has changed
         private void chkAutoExpert_CheckedChanged(object sender, EventArgs e)
         {
             if (chkAutoExpert.Checked)
             {
+                enableExpertModeToolStripMenuItem.Checked = true;
                 set.chkAutoExpert = true;
                 txtAM.Enabled = true;
                 txtSSB.Enabled = true;
@@ -1075,6 +1140,7 @@ namespace DataDecoder
             }
             else
             {
+                enableExpertModeToolStripMenuItem.Checked = false;
                 set.chkAutoExpert = false;
                 txtAM.Enabled = false;
                 txtSSB.Enabled = false;
@@ -1250,13 +1316,15 @@ namespace DataDecoder
             {
                 chkDev0.Checked = false;
                 lblBCD.ForeColor = Color.Blue;
+                mini.lblBCD.ForeColor = Color.Blue;
             }
             else
             {
                 chkDev0.Checked = true;
                 lblBCD.ForeColor = Color.Red;
+                mini.lblBCD.ForeColor = Color.Red;
             }
-            set.Save();
+            //set.Save();
         }
         // one of the Manual Override radio buttons has changed
         private void grpBCDover_CheckChanged(object sender, EventArgs e)
@@ -1360,7 +1428,7 @@ namespace DataDecoder
         }
         // The Split button was pressed
         bool split = false;
-        private void btnSplit_Click(object sender, EventArgs e)
+        public void btnSplit_Click(object sender, EventArgs e)
         {
             try
             {
@@ -1858,6 +1926,7 @@ namespace DataDecoder
                        " cannot be opened!", "Port Error",
                        MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     cboLogPort.SelectedIndex = 0;
+                    set.LogPort = 0;
                     set.Save();
                     return;
                 }
@@ -1883,6 +1952,7 @@ namespace DataDecoder
                        " cannot be opened!", "Port Error",
                        MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     cboRCP1Rotor.SelectedIndex = 0;
+                    set.RCP1RotorPort = 0;
                     set.Save();
                     return;
                 }
@@ -1908,6 +1978,7 @@ namespace DataDecoder
                        " cannot be opened!", "Port Error",
                        MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     cboRCP2Rotor.SelectedIndex = 0;
+                    set.RCP2RotorPort = 0;
                     set.Save(); 
                     return;
                 }
@@ -1933,6 +2004,7 @@ namespace DataDecoder
                        " cannot be opened!", "Port Error",
                        MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     cboRCP3Rotor.SelectedIndex = 0;
+                    set.RCP3RotorPort = 0;
                     set.Save(); 
                     return;
                 }
@@ -1958,6 +2030,7 @@ namespace DataDecoder
                        " cannot be opened!", "Port Error",
                        MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     cboRCP4Rotor.SelectedIndex = 0;
+                    set.RCP4RotorPort = 0;
                     set.Save(); 
                     return;
                 }
@@ -1983,6 +2056,7 @@ namespace DataDecoder
                        " cannot be opened!", "Port Error",
                        MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     cboSerAcc.SelectedIndex = 0;
+                    set.AccPort = 0;
                     set.Save();
                     return;
                 }
@@ -2018,6 +2092,7 @@ namespace DataDecoder
                    " cannot be opened!\n", "Port Error",
                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 cboCAT.SelectedIndex = 0; ;
+                set.RadioPort = 0;
                 set.Save();
                 return;
             }
@@ -2150,68 +2225,6 @@ namespace DataDecoder
             set.RadData = (int)cboRadData.SelectedIndex;
             set.Save();
         }
-        //// Profiller button was pressed
-        //public void btnProfiler_Click(object sender, EventArgs e)
-        //{
-        //    if (txtProfLoc.Text != "" && txtProfLoc.Text != null)
-        //    {
-        //        try
-        //        {
-        //            sp.Close();
-        //            process = Process.Start(txtProfLoc.Text);
-        //            this.Text = "Starting Profiler";
-        //            mini.Text = "Starting Profiler";
-        //        }
-        //        catch (Exception ex)
-        //        {
-        //            bool bReturnLog = false;
-        //            bReturnLog = ErrorLog.ErrorRoutine(false, enableErrorLog, ex);
-        //            if (false == bReturnLog) MessageBox.Show("Unable to write to log");
-        //        }
-        //    }
-        //    else
-        //        MessageBox.Show("No location has been selected for the FlexProfiler.exe file.\n\n" +
-        //            "Please select a file location on the 'Other' tab and try again.", "File Error",
-        //            MessageBoxButtons.OK, MessageBoxIcon.Warning);
-        //}
-        //// Re-Start button was pressed
-        //public void btnReStart_Click(object sender, EventArgs e)
-        //{
-        //    try
-        //    {
-        //        if (IsFPRunning())
-        //        {
-        //            process.Kill();
-        //            process.WaitForExit();
-        //        }
-        //        if (!sp.isOpen)
-        //        {
-        //            sp.Open();
-        //            this.Text = "DDUtil Re-Starting";
-        //            mini.Text = "DDUtil Re-Starting";
-        //        }
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        bool bReturnLog = false;
-        //        bReturnLog = ErrorLog.ErrorRoutine(false, enableErrorLog, ex);
-        //        if (false == bReturnLog) MessageBox.Show("Unable to write to log");
-        //    }
-        //}
-        //// The Flex Profiler File Location Select button was pressed
-        //private void btnPFfile_Click(object sender, EventArgs e)
-        //{
-        //    openFileDialog1.Filter = "exe files|*.exe";
-        //    openFileDialog1.Title = "Select Flex Profiler File";
-        //    if (openFileDialog1.ShowDialog() == DialogResult.OK)
-        //    {
-        //        txtProfLoc.Text = openFileDialog1.FileName;
-        //        mini.PFfile = txtProfLoc.Text;
-        //        set.ProfLoc = txtProfLoc.Text;
-        //        set.Save();
-        //    }
-        //}
-        // RCP2 enabled check box changed
         public void chkRCP2_CheckedChanged(object sender, EventArgs e)
         {
             if (chkRCP2.Checked)
@@ -2313,6 +2326,7 @@ namespace DataDecoder
                        MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     chkRCP2.Checked = false;
                     cboRCP2.SelectedIndex = 0;
+                    set.cboRCP2 = 0;
                     set.Save();
                     return;
                 }
@@ -2353,6 +2367,7 @@ namespace DataDecoder
             {
                 cboRCP3.SelectedIndex = 0; 
                 chkRCP3.Checked = false;
+                set.cboRCP3 = 0;
                 set.Save();
             }
             // save new port setting
@@ -2377,6 +2392,7 @@ namespace DataDecoder
                        MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     chkRCP4.Checked = false;
                     cboRCP4.SelectedIndex = 0;
+                    set.cboRCP4 = 0;
                     set.Save();
                     return;
                 }
@@ -2435,6 +2451,7 @@ namespace DataDecoder
                        MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     chkPW1.Checked = false;
                     cboPW1.SelectedIndex = 0;
+                    set.cboPW1 = 0;
                     set.Save();
                     return;
                 }
@@ -2576,7 +2593,8 @@ namespace DataDecoder
                 hex += String.Format("{0:x2}", (uint)System.Convert.ToUInt32(tmp.ToString()));
             }
             return hex;
-        }        // takes hex byte and converts to ascii for 0-F digits
+        }
+        // takes hex byte and converts to ascii for 0-F digits
         public static string ByteToAscii(byte[] hex)
         {
             int num = hex[0];
@@ -2598,7 +2616,7 @@ namespace DataDecoder
             {
                 int b = bytes[i];
                 chars[i * 2] = hexDigits[b >> 4];
-                chars[i * 2 + 1] = hexDigits[b & 0xF];
+                chars[i * 2 + 1] = hexDigits[b & 0x0F];
             }
             return new string(chars);
         }
@@ -2689,14 +2707,38 @@ namespace DataDecoder
                 if (chkDSInvert.Checked) keyValue = keyValue ^ 255;
                 if (rbFW.Checked) // write data to the FlexWire port
                 { WriteFW(mAdr1, cmd0, keyValue, false); }
-                else // write data to the parallel port selected
-                { OutParallelPort(LPTnum, keyValue); }
+                else 
+                {   // write data to the parallel port selected
+                    if (chkAuxEnab.Checked) // Aux BCD control
+                    {
+                        int auxByteL = 0;   // aux BCD LSB's data
+                        int auxByteH = 0;   // aux BCD MSB's data
+                        if (chkAuxBit1.Checked) auxByteL = 1;       // 4 LSB's
+                        if (chkAuxBit2.Checked) auxByteL += 2;
+                        if (chkAuxBit3.Checked) auxByteL += 4;
+                        if (chkAuxBit4.Checked) auxByteL += 8;
+                        if (chkAuxBit5.Checked) auxByteH = 16;      // 4 MSB's
+                        if (chkAuxBit6.Checked) auxByteH += 32;
+                        if (chkAuxBit7.Checked) auxByteH += 64;
+                        if (chkAuxBit8.Checked) auxByteH += 128;
+
+                        if (chkFollowFreq.Checked)
+                        {   // if checked, 4 LSB's follow BCD file freq
+                            // 4 MSB's follow aux data
+                            keyValue = keyValue & 0x0f;     // save freq LSBs
+                            keyValue = keyValue + auxByteH; // Add aux data MSBs
+                        }
+                        else
+                        {   // output aux data only
+                            keyValue = auxByteL + auxByteH;
+                            if (chkDSInvert.Checked) 
+                                keyValue = keyValue ^ 255;
+                        }
+                    }
+                    OutParallelPort(LPTnum, keyValue);
+                }
             }
-            //else
-            //{
-            //    OutParallelPort(LPTnum, 0);     // if freq key not found, turn off port
-            //    keyValue = 0;
-            //}
+
         }
         // See if a copy of DDUtil is already running
         public static int myID;
@@ -2764,6 +2806,7 @@ namespace DataDecoder
                     break;
             }
         }
+
         #endregion Helper Methods
 
         #region ACOM
@@ -2980,7 +3023,8 @@ namespace DataDecoder
             grpAmp.Text = "ACOM 2000A";
             mini.grpAmp.Text = "ACOM 2000A";
             cboAlphaBaud.SelectedIndex = set.AlphaBaud;
-            chkAutoDrv.Checked = set.chkAutoDrv;
+            //chkAutoDrv.Checked = set.chkAutoDrv;
+            //autoDriveToolStripMenuItem1.Checked = set.chkAutoDrv;
             numDrive.Value = set.tune;
             cboAlphaBaud.SelectedIndex = 0;
             AlphaPort.DtrEnable = false;
@@ -3082,7 +3126,7 @@ namespace DataDecoder
             Process.Start("http://k5fr.com/ddutilwiki/index.php?title=How_To#Setup_a_ACOM2000A_Linear_Amplifier");
         }
         // The save drive button was pressed.
-        private void btnDrive_Click(object sender, EventArgs e)
+        public void btnDrive_Click(object sender, EventArgs e)
         {
             WriteToPort("ZZPC;", iSleep);
         }
@@ -3090,8 +3134,15 @@ namespace DataDecoder
         private void chkAutoDrv_CheckedChanged(object sender, EventArgs e)
         {
             if (chkAutoDrv.Checked)
-            { set.chkAutoDrv = true; }
-            else { set.chkAutoDrv = false; }
+            {
+                set.chkAutoDrv = true;
+                autoDriveToolStripMenuItem1.Checked = true;
+            }
+            else
+            {
+                set.chkAutoDrv = false;
+                autoDriveToolStripMenuItem1.Checked = false;
+            }
             set.Save();
         }
         // the drive level has changed
@@ -3843,8 +3894,9 @@ namespace DataDecoder
             lblAmpInt.Text = "Interval";
             lblTune.Text = "Tune"; lblLoad.Text = "Load";
             Amp = 1;
+            //chkAutoDrv.Checked = set.chkAutoDrv;
+            //autoDriveToolStripMenuItem1.Checked = set.chkAutoDrv;
             set.theAmp = 1; set.Save();
-            chkAutoDrv.Checked = set.chkAutoDrv;
             txtAlphaInt.Text = "60000";
             AlphaTimer.Enabled = true;
             grpAmpBand.Visible = false;
@@ -3982,6 +4034,7 @@ namespace DataDecoder
                        MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     cboAlpha.SelectedIndex = 0;
                     chkAlpha.Checked = false;
+                    set.AlphaPort = 0;
                     set.Save();
                     return;
                 }
@@ -4306,50 +4359,160 @@ namespace DataDecoder
 
         #endregion Alpha 9500
 
-        #region Ant Profile
+        #region Aux BCD
+        // see the LookUp() method for the bit handeling code
+        // which is tied to the polling rate thru spCatRx
 
-        ////Recall ant profile 1
-        //private void toolStripMenuItem6_Click(object sender, EventArgs e)
-        //{
-        //    cboRotorPort.SelectedIndex = set.antPro1RtrPort;
-        //    cboRotorCom.SelectedIndex = set.antPro1RtrCom;
-        //    cboStep.SelectedIndex = set.antPro1StepPort;
-        //    cboStepCom.SelectedIndex = set.antPro1StepCom;
-        //    SetRotorModel(set.antPro1RtrModel);
-        //    SetRotorSpeed(set.antPro1RtrSpeed);
-        //}
-        ////Recall ant profile 2
-        //private void toolStripMenuItem7_Click(object sender, EventArgs e)
-        //{
-        //    cboRotorPort.SelectedIndex = set.antPro2RtrPort;
-        //    cboRotorCom.SelectedIndex = set.antPro2RtrCom;
-        //    cboStep.SelectedIndex = set.antPro2StepPort;
-        //    cboStepCom.SelectedIndex = set.antPro2StepCom;
-        //    SetRotorModel(set.antPro2RtrModel);
-        //    SetRotorSpeed(set.antPro2RtrSpeed);
-        //}
-        ////Save ant profile 1
-        //private void toolStripMenuItem8_Click(object sender, EventArgs e)
-        //{
-        //    set.antPro1RtrPort = set.RotorPort;
-        //    set.antPro1RtrCom = set.RotorCom;
-        //    set.antPro1RtrModel = set.rotorModel;
-        //    set.antPro1RtrSpeed = set.RotorSpeed;
-        //    set.antPro1StepPort = set.StepPortNum;
-        //    set.antPro1StepCom = set.StepCom;
-        //}
-        ////Save ant profile 2
-        //private void toolStripMenuItem9_Click(object sender, EventArgs e)
-        //{
-        //    set.antPro2RtrPort = set.RotorPort;
-        //    set.antPro2RtrCom = set.RotorCom;
-        //    set.antPro2RtrModel = set.rotorModel;
-        //    set.antPro2RtrSpeed = set.RotorSpeed;
-        //    set.antPro2StepPort = set.StepPortNum;
-        //    set.antPro2StepCom = set.StepCom;
-        //}
+        #region # Events #
 
-        #endregion Ant Profile
+        // the Auxilary BCD Enable check box has changed
+        private void chkAuxEnab_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chkAuxEnab.Checked)
+            {
+                chkFollowFreq.Enabled = true;
+                chkAuxMacro.Enabled = true;
+                chkAuxBit1.Enabled = true; chkAuxBit2.Enabled = true;
+                chkAuxBit3.Enabled = true; chkAuxBit4.Enabled = true;
+                chkAuxBit5.Enabled = true; chkAuxBit6.Enabled = true;
+                chkAuxBit7.Enabled = true; chkAuxBit8.Enabled = true;
+                lblBCD.ForeColor = Color.Green;
+                mini.lblBCD.ForeColor = Color.Green;
+                set.chkAuxEnab = true;
+            }
+            else
+            {
+                lblBCD.ForeColor = Color.Red;
+                mini.lblBCD.ForeColor = Color.Red;
+                set.chkAuxEnab = false;
+                chkFollowFreq.Checked = false;
+                chkAuxMacro.Checked = false;
+                chkFollowFreq.Enabled = false;
+                chkAuxMacro.Enabled = false;
+                chkAuxBit1.Enabled = false; chkAuxBit2.Enabled = false;
+                chkAuxBit3.Enabled = false; chkAuxBit4.Enabled = false;
+                chkAuxBit5.Enabled = false; chkAuxBit6.Enabled = false;
+                chkAuxBit7.Enabled = false; chkAuxBit8.Enabled = false;
+            }
+            chkDev0.Checked = true;
+            set.Save();
+        }
+        // the follow freq check box has changed.
+        private void chkFollowFreq_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chkAuxEnab.Checked)
+            {
+                if (chkFollowFreq.Checked)
+                {
+                    chkAuxBit1.Enabled = false; chkAuxBit2.Enabled = false;
+                    chkAuxBit3.Enabled = false; chkAuxBit4.Enabled = false;
+                    set.chkFollowFreq = true;
+                }
+                else
+                {
+                    chkAuxBit1.Enabled = true; chkAuxBit2.Enabled = true;
+                    chkAuxBit3.Enabled = true; chkAuxBit4.Enabled = true;
+                    set.chkFollowFreq = false;
+                }
+            }
+            else
+            {
+                chkFollowFreq.Checked = false;
+                chkAuxBit1.Enabled = true; chkAuxBit2.Enabled = true;
+                chkAuxBit3.Enabled = true; chkAuxBit4.Enabled = true;
+                set.chkFollowFreq = false;
+            }
+            set.Save();
+        }
+        // the Aux Macro check box has changed.
+        private void chkAuxMacro_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chkAuxMacro.Checked)
+            { set.chkAuxMacro = true; }
+            else
+            { set.chkAuxMacro = false; }
+            set.Save();
+        }
+
+        private void chkAuxBit1_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chkAuxBit1.Checked) set.chkAuxBit1 = true;
+            else set.chkAuxBit1 = false;
+            set.Save();
+        }
+
+        private void chkAuxBit2_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chkAuxBit2.Checked) set.chkAuxBit2 = true;
+            else set.chkAuxBit2 = false;
+            set.Save();
+        }
+
+        private void chkAuxBit3_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chkAuxBit3.Checked) set.chkAuxBit3 = true;
+            else set.chkAuxBit3 = false;
+            set.Save();
+        }
+
+        private void chkAuxBit4_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chkAuxBit4.Checked) set.chkAuxBit4 = true;
+            else set.chkAuxBit4 = false;
+            set.Save();
+        }
+
+        private void chkAuxBit5_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chkAuxBit5.Checked) set.chkAuxBit5 = true;
+            else set.chkAuxBit5 = false;
+            set.Save();
+        }
+
+        private void chkAuxBit6_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chkAuxBit6.Checked) set.chkAuxBit6 = true;
+            else set.chkAuxBit6 = false;
+            set.Save();
+        }
+
+        private void chkAuxBit7_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chkAuxBit7.Checked) set.chkAuxBit7 = true;
+            else set.chkAuxBit7 = false;
+            set.Save();
+        }
+
+        private void chkAuxBit8_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chkAuxBit8.Checked) set.chkAuxBit8 = true;
+            else set.chkAuxBit8 = false;
+            set.Save();
+        }
+
+        #endregion # Events #
+
+        #region # Methods #
+
+        void AuxBcdInit()
+        {
+            chkAuxEnab.Checked = set.chkAuxEnab;
+            chkFollowFreq.Checked = set.chkFollowFreq;
+            chkAuxMacro.Checked = set.chkAuxMacro;
+            chkAuxBit1.Checked = set.chkAuxBit1;
+            chkAuxBit2.Checked = set.chkAuxBit2;
+            chkAuxBit3.Checked = set.chkAuxBit3;
+            chkAuxBit4.Checked = set.chkAuxBit4;
+            chkAuxBit5.Checked = set.chkAuxBit5;
+            chkAuxBit6.Checked = set.chkAuxBit6;
+            chkAuxBit7.Checked = set.chkAuxBit7;
+            chkAuxBit8.Checked = set.chkAuxBit8;
+
+        }
+
+        #endregion # Methods #
+
+        #endregion Aux BCD
 
         #region FlexWire
 
@@ -4548,6 +4711,7 @@ namespace DataDecoder
                        MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     chkLPenab.Checked = false; 
                     cboLPport.SelectedIndex = 0;
+                    set.LPportNum = 0;
                     set.Save();
                     return;
                 }
@@ -4644,22 +4808,38 @@ namespace DataDecoder
             {
                 switch (e.RowIndex)
                 {
-                    case 0: btnMacro1.Text = dgmData; break;
-                    case 1: btnMacro2.Text = dgmData; break;
-                    case 2: btnMacro3.Text = dgmData; break;
-                    case 3: btnMacro4.Text = dgmData; break;
-                    case 4: btnMacro5.Text = dgmData; break;
-                    case 5: btnMacro6.Text = dgmData; break;
-                    case 6: btnMacro7.Text = dgmData; break;
-                    case 7: btnMacro8.Text = dgmData; break;
-                    case 8: btnMacro9.Text = dgmData; break;
-                    case 9: btnMacro10.Text = dgmData; break;
-                    case 10: btnMacro11.Text = dgmData; break;
-                    case 11: btnMacro12.Text = dgmData; break;
-                    case 12: btnMacro13.Text = dgmData; break;
-                    case 13: btnMacro14.Text = dgmData; break;
-                    case 14: btnMacro15.Text = dgmData; break;
-                    case 15: btnMacro16.Text = dgmData; break;
+                    case 0: btnMacro1.Text = dgmData;
+                        mini.toolTip1.SetToolTip(mini.btnMacro1, this.btnMacro1.Text); break;
+                    case 1: btnMacro2.Text = dgmData;
+                        mini.toolTip1.SetToolTip(mini.btnMacro2, this.btnMacro2.Text); break;
+                    case 2: btnMacro3.Text = dgmData;
+                        mini.toolTip1.SetToolTip(mini.btnMacro3, this.btnMacro3.Text); break;
+                    case 3: btnMacro4.Text = dgmData;
+                        mini.toolTip1.SetToolTip(mini.btnMacro4, this.btnMacro4.Text); break;
+                    case 4: btnMacro5.Text = dgmData;
+                        mini.toolTip1.SetToolTip(mini.btnMacro5, this.btnMacro5.Text); break;
+                    case 5: btnMacro6.Text = dgmData;
+                        mini.toolTip1.SetToolTip(mini.btnMacro6, this.btnMacro6.Text); break;
+                    case 6: btnMacro7.Text = dgmData;
+                        mini.toolTip1.SetToolTip(mini.btnMacro7, this.btnMacro7.Text); break;
+                    case 7: btnMacro8.Text = dgmData;
+                        mini.toolTip1.SetToolTip(mini.btnMacro8, this.btnMacro8.Text); break;
+                    case 8: btnMacro9.Text = dgmData;
+                        mini.toolTip1.SetToolTip(mini.btnMacro9, this.btnMacro9.Text); break;
+                    case 9: btnMacro10.Text = dgmData;
+                        mini.toolTip1.SetToolTip(mini.btnMacro10, this.btnMacro10.Text); break;
+                    case 10: btnMacro11.Text = dgmData;
+                        mini.toolTip1.SetToolTip(mini.btnMacro11, this.btnMacro11.Text); break;
+                    case 11: btnMacro12.Text = dgmData;
+                        mini.toolTip1.SetToolTip(mini.btnMacro12, this.btnMacro12.Text); break;
+                    case 12: btnMacro13.Text = dgmData;
+                        mini.toolTip1.SetToolTip(mini.btnMacro13, this.btnMacro13.Text); break;
+                    case 13: btnMacro14.Text = dgmData;
+                        mini.toolTip1.SetToolTip(mini.btnMacro14, this.btnMacro14.Text); break;
+                    case 14: btnMacro15.Text = dgmData;
+                        mini.toolTip1.SetToolTip(mini.btnMacro15, this.btnMacro15.Text); break;
+                    case 15: btnMacro16.Text = dgmData;
+                        mini.toolTip1.SetToolTip(mini.btnMacro16, this.btnMacro16.Text); break;
                     case 16: btnMacro16.Text = dgmData; break;
                     case 17: btnMacro16.Text = dgmData; break;
                     case 18: btnMacro16.Text = dgmData; break;
@@ -4735,7 +4915,7 @@ namespace DataDecoder
         {
             try
             {
-                if (StepCtr == 0 && (xOn == "0" || xOn == ""))
+                if (StepCtr == 0)// && (xOn == "0" || xOn == ""))
                 {   // 
                     if (dgm.Rows[button - 1].Cells[1].Value.ToString() == "")
                     {
@@ -4860,9 +5040,13 @@ namespace DataDecoder
             else if (e.Control && e.KeyCode == Keys.X) // Memory select (1-5)
             { btnReCall_Click(null, null); }  
             else if (e.Control && e.KeyCode == Keys.C) // Memory Load
-            { btnMemLoad_Click(null, null); }  
+            { btnMemLoad_Click(null, null); }
+            else if (e.Control && e.KeyCode == Keys.N) // Open Memory Note window
+            { txtMemFreq_DoubleClick(null, null); }
             else if (e.Control && e.KeyCode == Keys.V) // Memory Save
-            { btnMemSave_Click(null, null); }  
+            { btnMemSave_Click(null, null); }
+            else if (e.Control && e.KeyCode == Keys.U) // Undo freq move
+            { WriteToPort("FA" + prevFreq + ";", iSleep); }
             else if (e.Control && e.Shift && e.KeyCode == Keys.S) // Power On/Off
             { btnFlexOn_Click(null, null); }    
         }
@@ -4987,7 +5171,31 @@ namespace DataDecoder
                     byte[] a = { 0xFE, 0xFE, 0xE0, 0x3A, 0x07, 0x00, 0xFD };
                     RepeatPort.Write(a, 0, 7); 
                     break;
-                case "BI":  // Set SteppIR to Bi-Directional Mode
+                case "BC": // Set Aux BCD bits
+                    if (chkAuxEnab.Checked && chkAuxMacro.Checked)
+                    {
+                        if (!chkFollowFreq.Checked)
+                        {
+                            if (ops.Substring(7, 1) == "1") chkAuxBit1.Checked = true;
+                            else chkAuxBit1.Checked = false;
+                            if (ops.Substring(6, 1) == "1") chkAuxBit2.Checked = true;
+                            else chkAuxBit2.Checked = false;
+                            if (ops.Substring(5, 1) == "1") chkAuxBit3.Checked = true;
+                            else chkAuxBit3.Checked = false;
+                            if (ops.Substring(4, 1) == "1") chkAuxBit4.Checked = true;
+                            else chkAuxBit4.Checked = false;
+                        }
+                        if (ops.Substring(3, 1) == "1") chkAuxBit5.Checked = true;
+                        else chkAuxBit5.Checked = false;
+                        if (ops.Substring(2, 1) == "1") chkAuxBit6.Checked = true;
+                        else chkAuxBit6.Checked = false;
+                        if (ops.Substring(1, 1) == "1") chkAuxBit7.Checked = true;
+                        else chkAuxBit7.Checked = false;
+                        if (ops.Substring(0, 1) == "1") chkAuxBit8.Checked = true;
+                        else chkAuxBit8.Checked = false;
+                    }
+                    break;
+                case "BI": // Set SteppIR to Bi-Directional Mode
                     rbBiDir.Checked = true; 
                     break;
                 case "BL": // Set AT-AUTO to Select Balanced
@@ -5087,17 +5295,12 @@ namespace DataDecoder
                         if (MacroPort.CtsHolding)  // 
                         {
                             if (txtMacSwOn.Text.Length > 5)
-                                WriteToPort(txtMacSwOn.Text, iSleep);
+                                ParseBuffer(txtMacSwOn.Text);
                             if (txtMacSwMsg.Text.Length > 2)
-                            {
-                                MessageBox.Show(txtMacSwMsg.Text, "Macro Switch Event!");
-                            }
+                            { MessageBox.Show(txtMacSwMsg.Text, "Macro Switch Event!"); }
                         }
-                        else    // 
-                        {
-                            if (txtMacSwOff.Text.Length > 5)
-                                WriteToPort(txtMacSwOff.Text, iSleep);
-                        }
+                        else if (txtMacSwOff.Text.Length > 5)
+                            ParseBuffer(txtMacSwOff.Text);
                         break;
                 }
             }
@@ -5147,8 +5350,288 @@ namespace DataDecoder
             set.txtMacSwMsg = txtMacSwMsg.Text;
             set.Save();
         }
+        // the message window has been double-clicked
+        private void txtMacSwMsg_DoubleClick(object sender, EventArgs e)
+        {
+            Process.Start("http://k5fr.com/ddutilwiki/index.php?title=Setup#Macro_Switch");
+        }
 
         #endregion Macro Switch
+
+        #region Memory
+
+        #region # Declarations #
+
+        // create memory array wit 5 rows and 10 columns
+        public string[,] mem = new string[5,12];
+        
+        public int idxMem = 5; // mem array index
+        string vfoA, vfoB, Rx1, Rx2, TxA, RxFlt, TxPro, ZZMD; // PSDR vars
+        string mvFq, mvFl, mvMd;    // M<>V vars (freq, fltr, mode)
+        int MV = 1;    // 1 = vfo, 2 = memory
+
+        #endregion # Declarations #
+
+        #region # Delegates #
+
+        // Write to MV button
+        delegate void SetMVCallback(string text);
+        public void SetMV(string text)
+        {
+            if (this.btnMV.InvokeRequired)
+            {
+                SetMVCallback d = new SetMVCallback(SetMV);
+                this.Invoke(d, new object[] { text });
+            }
+            else
+            {
+                if (text == "Memory")
+                {
+                    btnMV.BackColor = Color.Yellow;
+                    mini.btnMV.BackColor = Color.Yellow;
+                }
+                else
+                {
+                    btnMV.BackColor = Color.Empty;
+                    mini.btnMV.BackColor = Color.Empty;
+                }
+            }
+        }
+        // Write to MemSave button
+        delegate void SetMemSaveCallback(string text);
+        public void SetMemSave(string text)
+        {
+            if (this.btnMemSave.InvokeRequired)
+            {
+                SetMemSaveCallback d = new SetMemSaveCallback(SetMemSave);
+                this.Invoke(d, new object[] { text });
+            }
+            else
+            {
+                if (text == "Yellow")
+                {
+                    btnMemSave.BackColor = Color.Yellow;
+                    mini.btnMemSave.BackColor = Color.Yellow;
+                }
+                else
+                {
+                    btnMemSave.BackColor = Color.Empty;
+                    mini.btnMemSave.BackColor = Color.Empty;
+                }
+            }
+        }
+        // Write to MemFreq button
+        delegate void SetMemFreqCallback(string text);
+        public void SetMemFreq(string text)
+        {
+            if (this.txtMemFreq.InvokeRequired)
+            {
+                SetMemFreqCallback d = new SetMemFreqCallback(SetMemFreq);
+                this.Invoke(d, new object[] { text });
+            }
+            else
+            {
+                txtMemFreq.Text = text;
+                mini.txtMemFreq.Text = text;
+            }
+        }
+        // Write to MemMode button
+        delegate void SetMemModeCallback(string text);
+        public void SetMemMode(string text)
+        {
+            if (this.txtMemMode.InvokeRequired)
+            {
+                SetMemModeCallback d = new SetMemModeCallback(SetMemMode);
+                this.Invoke(d, new object[] { text });
+            }
+            else
+            {
+                txtMemMode.Text = text;
+                mini.txtMemMode.Text = text;
+            }
+        }
+        // Write to MemIdx button
+        delegate void SetMemIdxCallback(string text);
+        public void SetMemIdx(string text)
+        {
+            if (this.txtMemIdx.InvokeRequired)
+            {
+                SetMemIdxCallback d = new SetMemIdxCallback(SetMemIdx);
+                this.Invoke(d, new object[] { text });
+            }
+            else
+            {
+                txtMemIdx.Text = text; 
+                mini.txtMemIdx.Text = text;
+            }
+        }
+        
+        #endregion # Delegates #
+
+        #region # Events #
+
+        // the memory/vfo toggle button has been pressed
+        public void btnMV_Click(object sender, EventArgs e)
+        { 
+            if (idxMem == 5 || mem[idxMem, 0] == "" || mem[idxMem, 0] == null)
+            { btnMemLoad_Click(null, null); return; }
+
+            if (MV == 1)    // save vfo & load memory to psdr
+            {
+                mvFq = vfoA; mvFl = RxFlt; mvMd = sdrMode;
+                btnMemLoad_Click(null, null); 
+                MV = 2;
+                SetMV("Memory");
+                string freq = vfoA.TrimStart('0');
+                freq = Convert.ToInt32(freq.Substring(0, freq.Length - 3)).ToString("N0");
+                txtMemVfo.Text = freq; 
+                mini.txtMemVfo.Text = freq;
+            }
+            else if (MV == 2)   // reload vfo
+            {
+                WriteToPort("MD" + mvMd + ";", iSleep); // SDR MODE
+                WriteToPort("ZZFA" + mvFq + ";", iSleep); // VFO A
+                WriteToPort("ZZFI" + mvFl + ";", iSleep); // RX Filter
+                MV = 1;
+                SetMV("");
+                txtMemVfo.Text = ""; 
+                mini.txtMemVfo.Text = "";
+            }
+        }
+        // the memory recall button has been pressed
+        public void btnReCall_Click(object sender, EventArgs e)
+        {
+            idxMem++;
+            if (idxMem > 4) idxMem = 0;
+            SetMemIdx((idxMem + 1).ToString());
+            if (mem[idxMem, 0] == "" || mem[idxMem, 0] == null)
+            {
+                SetMemFreq("Empty"); SetMemMode(""); return;
+            }
+            string freq = mem[idxMem, 0].TrimStart('0');
+            freq = Convert.ToInt32(freq.Substring(0, freq.Length - 3)).ToString("N0");
+            SetMemFreq(freq);
+            SetMemMode(mem[idxMem, 10]);
+        }
+        // the memory save button has been pressed
+        public void btnMemSave_Click(object sender, EventArgs e)
+        {
+            // get current radio status
+            WriteToPort("ZZSW;", iSleep); // TX VFO
+            WriteToPort("ZZMD;", iSleep); // MODE
+            WriteToPort("ZZOA;", iSleep); // RX1 ANT
+            WriteToPort("ZZOB;", iSleep); // RX2 ANT
+            WriteToPort("ZZOC;", iSleep); // TX ANT
+            WriteToPort("ZZOF;", iSleep); // TX LINE
+            WriteToPort("ZZTP;", iSleep); // TX Profile
+        }
+        // the memory clear button has been pressed
+        public void btnMemClear_Click(object sender, EventArgs e)
+        {
+            for (int j = 0; j <= 11; j++)
+            {
+                mem[idxMem, j] = null;
+            }
+            SetMemFreq("Empty"); SetMemMode("");
+        }
+        // if Control + Clear key is pressed delete all memories
+        public void btnMemClear_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Control && e.Shift)
+            {
+                for (int i = 0; i <= 4; i++)
+                {
+                    for (int j = 0; j <= 11; j++)
+                    {
+                        mem[i, j] = null;
+                    }
+                }
+                idxMem = 0;
+                SetMemIdx((idxMem + 1).ToString());
+                SetMemFreq("Empty"); SetMemMode("");
+            }
+        }
+        // load memory vars to PSDR
+        public void btnMemLoad_Click(object sender, EventArgs e)
+        {
+            if (idxMem == 5 || mem[idxMem, 0] == "" || mem[idxMem, 0] == null)
+            {
+                SetMV("");
+                wav.SoundLocation = "uh_oh.wav";
+                wav.Play();
+                return;
+            }
+            WriteToPort("ZZMD" + mem[idxMem, 3] + ";", iSleep); // SDR MODE
+            WriteToPort("ZZFA" + mem[idxMem, 0] + ";", iSleep); // VFO A
+            WriteToPort("ZZFB" + mem[idxMem, 1] + ";", iSleep); // VFO B
+            WriteToPort("ZZSW" + mem[idxMem, 2] + ";", iSleep); // TX VFO
+            WriteToPort("ZZOA" + mem[idxMem, 4] + ";", iSleep); // RX1 ANT
+            WriteToPort("ZZOB" + mem[idxMem, 5] + ";", iSleep); // RX2 ANT
+            WriteToPort("ZZOC" + mem[idxMem, 6] + ";", iSleep); // TX ANT
+            WriteToPort("ZZOF" + mem[idxMem, 7] + ";", iSleep); // TX LINE
+            WriteToPort("ZZFI" + mem[idxMem, 8] + ";", iSleep); // RX Filter
+            WriteToPort("ZZTP" + mem[idxMem, 9] + ";", iSleep); // TX Profile
+        }
+        // the freq window was double-clicked
+        public void txtMemFreq_DoubleClick(object sender, EventArgs e)
+        {
+            string value = "";
+            if (InputBox("Memory Note", "Enter Memory Note:", ref value) == DialogResult.OK)
+            {
+               mem[idxMem,11] = value.ToUpper();
+            }
+
+        }
+
+        #endregion # Events #
+
+        #region # Methods #
+
+        public static DialogResult InputBox(string title, string promptText, ref string value)
+        {
+            Form form = new Form();
+            Label label = new Label();
+            TextBox textBox = new TextBox();
+            Button buttonOk = new Button();
+            Button buttonCancel = new Button();
+
+            form.Text = title;
+            label.Text = promptText;
+            textBox.Text = value;
+
+            buttonOk.Text = "OK";
+            buttonCancel.Text = "Cancel";
+            buttonOk.DialogResult = DialogResult.OK;
+            buttonCancel.DialogResult = DialogResult.Cancel;
+
+            label.SetBounds(9, 20, 372, 13);
+            textBox.SetBounds(12, 36, 372, 20);
+            buttonOk.SetBounds(228, 72, 75, 23);
+            buttonCancel.SetBounds(309, 72, 75, 23);
+
+            label.AutoSize = true;
+            textBox.Anchor = textBox.Anchor | AnchorStyles.Right;
+            buttonOk.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+            buttonCancel.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+
+            form.ClientSize = new Size(396, 107);
+            form.Controls.AddRange(new Control[] { label, textBox, buttonOk, buttonCancel });
+            form.ClientSize = new Size(Math.Max(300, label.Right + 10), form.ClientSize.Height);
+            form.FormBorderStyle = FormBorderStyle.FixedDialog;
+            form.StartPosition = FormStartPosition.CenterScreen;
+            form.MinimizeBox = false;
+            form.MaximizeBox = false;
+            form.AcceptButton = buttonOk;
+            form.CancelButton = buttonCancel;
+
+            DialogResult dialogResult = form.ShowDialog();
+            value = textBox.Text;
+            return dialogResult;
+        }
+
+        #endregion # Methods #
+
+        #endregion Memory
 
         #region Menu Events
 
@@ -5243,12 +5726,14 @@ namespace DataDecoder
             if (enableErrorLoggingToolStripMenuItem.Checked)
             {
                 enableErrorLoggingToolStripMenuItem.Checked = false;
+                errorLogToolStripMenuItem.Checked = false;
                 enableErrorLog = false;
                 set.ErrorLog = false;
             }
             else
             {
                 enableErrorLoggingToolStripMenuItem.Checked = true;
+                errorLogToolStripMenuItem.Checked = true;
                 enableErrorLog = true;
                 set.ErrorLog = true;
             }
@@ -5318,6 +5803,37 @@ namespace DataDecoder
         {
             Process.Start("http://k5fr.com/ddutilwiki/index.php?title=Latest_Revision");
         }
+        // Main Menu|Help|Download latest version
+        private void updateToLatestVersionToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            string myStringWebResource = null;
+            string remoteUri = "http://k5fr.com/binary/";
+            string fileName = "version.txt";
+            TextReader tr = new StreamReader(fileName);
+            string tempStr = tr.ReadLine();
+            tr.Close();
+            string newVer = tempStr.Substring(0, 1) + tempStr.Substring(2, 1) + 
+                tempStr.Substring(4, 1) + tempStr.Substring(6, 2);
+            string upDate = "DDUtil" + newVer + "_Setup.zip";
+            // Create a new WebClient instance.
+            WebClient myWebClient = new WebClient();
+            // Concatenate the domain with the Web resource filename.
+            myStringWebResource = remoteUri + upDate;
+            // Download the Web resource and save it into the current filesystem folder.
+            try
+            {
+                myWebClient.DownloadFile(myStringWebResource, upDate);
+                process = Process.Start(upDate);
+                if (MessageBox.Show("DDUtil will now close so the update can proceed.\r\r" +
+                "Press Ok to proceed, Cancel to quite", "Attention!", MessageBoxButtons.OKCancel,
+                MessageBoxIcon.Exclamation) == DialogResult.OK)
+                { this.Close(); }
+            }
+            catch (Win32Exception w)
+            {
+                MessageBox.Show(w.Message);
+            }
+        }
         // Main Menu|Help|Setup Wizard
         private void setupWizardToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -5335,25 +5851,16 @@ namespace DataDecoder
         {
             Process.Start("http://k5fr.com/ddutilwiki/index.php");
         }
+        
         /********************************************************************/
-        // Context Menu|Restore Form Size
-        private void toolStripMenuItem1_Click(object sender, EventArgs e)
-        {
-            this.Size = new Size(438, 445);
-        }
-        // Context Menu|Shrink Form Size
-        private void toolStripMenuItem2_Click(object sender, EventArgs e)
-        {
-            this.Size = new Size(438, 60);
-        }
-        // Context Menu|About DDUtil
+        // Context Menu|Help|About DDUtil
         private void toolStripMenuItem3_Click(object sender, EventArgs e)
         {
             AboutBox about = new AboutBox();
             about.Show();
         }
-        // Context Menu|Slave Radio Info
-        private void toolStripMenuItem4_Click(object sender, EventArgs e)
+        // Context Menu|Help|Slave Radio Info
+        private void slaveRadioInfoToolStripMenuItem_Click(object sender, EventArgs e)
         {
             MessageBox.Show(
                 "Info for selecting a Slave Radio Type\n\n" +
@@ -5366,8 +5873,8 @@ namespace DataDecoder
                 "   All Icom radios, TenTec emulating Icom\n",
                 "Slave Radio Info", MessageBoxButtons.OK, MessageBoxIcon.None);
         }
-        // Context Menu|LP-100
-        private void lP100ToolStripMenuItem_Click(object sender, EventArgs e)
+        // Context Menu|Help|LP-100
+        private void lP100ToolStripMenuItem1_Click(object sender, EventArgs e)
         {
             MessageBox.Show(
                 "- Select the port the LP-100 is connected to.\n\n" +
@@ -5377,8 +5884,8 @@ namespace DataDecoder
                 "- Check the Enabled Check Box to complete setup.\n",
                 "LP-100 Setup Info", MessageBoxButtons.OK, MessageBoxIcon.None);
         }
-        // Context Menu|ICOM IC-PW1
-        private void iCOMICPW1ToolStripMenuItem_Click(object sender, EventArgs e)
+        // Context Menu|Help|ICOM IC-PW1
+        private void iCOMICPW1ToolStripMenuItem1_Click(object sender, EventArgs e)
         {
             MessageBox.Show(
                 "- Select the port to which the IC-PW1 is attached.\n\n" +
@@ -5388,18 +5895,8 @@ namespace DataDecoder
                 "- Check the Enabled Check Box to complete the setup.\n",
                 "IC-PW1 Setup Info", MessageBoxButtons.OK, MessageBoxIcon.None);
         }
-        // Context Menu|Flex Profiler
-        private void flexProfilerToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            MessageBox.Show(
-                "- Select the file location where Profiler is installed.\n\n" +
-                "- Select the PF Open button to start the Profiler.\n\n" +
-                "- Work with profiles.\n\n" +
-                "- Press the Re-Start button to activate DDUtil.\n",
-                "Flex Profiler Setup & Operation", MessageBoxButtons.OK, MessageBoxIcon.None);
-        }
-        // Context Menu|Macro Commands
-        private void macroFormToolStripMenuItem_Click(object sender, EventArgs e)
+        // Context Menu|Help|Macro Commands
+        private void macroCommandsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             MessageBox.Show(
             "- To execute a macro command, press either the appropriate form button or desiginated 'F' key\n\n" +
@@ -5408,8 +5905,8 @@ namespace DataDecoder
             "- See the documentation (Help Menu) for assistance with editing info and tips.\n\n",
             "Formatting and Using Macro Commands", MessageBoxButtons.OK, MessageBoxIcon.None);
         }
-        // Context Menu|RCP ports
-        private void rCPPortsToolStripMenuItem_Click(object sender, EventArgs e)
+        // Context Menu|Help|RCP ports
+        private void rCPPortsToolStripMenuItem1_Click(object sender, EventArgs e)
         {
             MessageBox.Show(
                 "Setup procedure for using the bi-directional RCP ports\n\n" +
@@ -5419,8 +5916,8 @@ namespace DataDecoder
                 "- Check the Enabled check box to turn on a port.\n",
                 "RCP Port Setup", MessageBoxButtons.OK, MessageBoxIcon.None);
         }
-
-        private void rotorControlToolStripMenuItem_Click(object sender, EventArgs e)
+        // Context Menu|Help|Rotor Control
+        private void rotorControlToolStripMenuItem1_Click(object sender, EventArgs e)
         {
             MessageBox.Show(
                 "Setup procedure for using Rotor Control\n\n" +
@@ -5431,8 +5928,8 @@ namespace DataDecoder
                 "- Enter your Latitude and Longitude for your location.\n",
                 "Rotor Setup", MessageBoxButtons.OK, MessageBoxIcon.None);
         }
-
-        private void waveNodeToolStripMenuItem_Click(object sender, EventArgs e)
+        // Context Menu|Help|WaveNode watt meter
+        private void waveNodeToolStripMenuItem1_Click(object sender, EventArgs e)
         {
             MessageBox.Show(
                 "Setup procedure for using the WN2 watt meter\n\n" +
@@ -5442,6 +5939,53 @@ namespace DataDecoder
                 "- If that fails, toggle the power to the WN2.\n",
                 "WaveNode Operation", MessageBoxButtons.OK, MessageBoxIcon.None);
 
+        }
+        // Context Menu|Exit
+        private void toolStripMenuItem5_Click(object sender, EventArgs e)
+        {
+            exitToolStripMenuItem_Click(null, null);
+        }
+        // Context Menu|Error Log|Enable Logging
+        private void enableLoggingToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            enableErrorLoggingToolStripMenuItem_Click(null, null);
+        }
+        // Context Menu|Error Log|Open Error Log
+        private void openErrorLogToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            openErrorLogToolStripMenuItem_Click(null, null);
+        }
+        // Context Menu|Error Log|Clear Error Log
+        private void clearErrorLogToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            clearErrorLogToolStripMenuItem_Click(null, null);
+        }
+        // Context Menu|Auto Drive Enable
+        private void enableToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (chkAutoDrv.Checked) chkAutoDrv.Checked = false;
+            else chkAutoDrv.Checked = true;
+        }
+        // Context Menu|Auto Drive Amp Settings
+        private void settingsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ampSettingsToolStripMenuItem_Click(null, null);
+        }
+        // Context Menu|Auto Drive Barefoot settings
+        private void barefootSettingsToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            barefootSettingsToolStripMenuItem_Click(null, null);
+        }
+        // Context Menu|Auto Drive|Enable Expert Mode
+        private void enableExpertModeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (chkAutoExpert.Checked) chkAutoExpert.Checked = false;
+            else chkAutoExpert.Checked = true;
+        }
+        // Context Menu|Help|Short-Cut Keys
+        private void shortCutKeysToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Process.Start("http://k5fr.com/ddutilwiki/index.php?title=Shortcut_Keys");
         }
 
         #endregion Menu Events
@@ -5485,6 +6029,7 @@ namespace DataDecoder
             }
             lastBand = "";  // force refresh of drive level.
         }
+        // Low power drive activated
         public void LowPower()
         {
             if (stsOper)
@@ -5762,6 +6307,7 @@ namespace DataDecoder
                        MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     chkPM.Checked = false;
                     cboPMport.SelectedIndex = 0;
+                    set.PMport = 0;
                     set.Save();
                     return;
                 }
@@ -6060,6 +6606,7 @@ namespace DataDecoder
                        " cannot be opened!\n", "Port Error",
                        MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     cboPwrPort.SelectedIndex = 0;
+                    set.PwrPort = 0;
                     set.Save();
                     return;
                 }
@@ -6193,6 +6740,7 @@ namespace DataDecoder
                        MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     cboRepeatPort.SelectedIndex = 0;
                     chkRepeat.Checked = false;
+                    set.RepeatPort = 0;
                     set.Save();
                     return;
                 }
@@ -6477,6 +7025,7 @@ namespace DataDecoder
                        MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     cboRotorPort.SelectedIndex = 0;
                     chkRotorEnab.Checked = false;
+                    set.RotorPort = 0;
                     set.Save();
                     return;
                 }
@@ -7185,13 +7734,15 @@ namespace DataDecoder
             txtLat.Text = set.Latitude;
             txtLong.Text = set.Longitude;
             txtGrid.Text = set.Grid;
-            try { cboRotorPort.SelectedIndex = set.RotorPort; }
-            catch { cboRotorPort.SelectedIndex = 0; BadPort("Rotor"); }
+            //try { cboRotorPort.SelectedIndex = set.RotorPort; }
+            //catch { cboRotorPort.SelectedIndex = 0; BadPort("Rotor"); }
             cboRotorCom.SelectedIndex = set.RotorCom;
             txtAzOffset.Text = Convert.ToInt32(set.AzOffset).ToString();
             chkStepDipole.Checked = set.chkStepDipole;
             SetRotorModel(set.rotorModel);
             SetRotorSpeed(set.RotorSpeed);
+            try { cboRotorPort.SelectedIndex = set.RotorPort; }
+            catch { cboRotorPort.SelectedIndex = 0; BadPort("Rotor"); return; }
             chkRotorEnab.Checked = set.RotorEnab;
         }
 
@@ -7207,12 +7758,13 @@ namespace DataDecoder
         string sdrMode = "";
         string xOn = "";            // 1 = xmit on, 0 = xmit off
         string lastFreq = "";       // freq from last CATRxEvent
+        string prevFreq = "";       // undo freq
         string memMode = "";
         string lastBand = "";
         string COBC = "";           // Chk on band change last band setting
         int vfoFreq = 0;            // VFO B freq, used for SO2R calcs
         int bBand, LastB = 0;       // current and last vfoB band
-        double modeFactor = 1;         // holds expert auto drive mode factor
+        double modeFactor = 1;      // holds expert auto drive mode factor
         string lastFreqB = "";
         string freqLook = "";
         string pwrVolts = "";
@@ -7254,51 +7806,51 @@ namespace DataDecoder
                     {
                         pwrVolts = rawFreq.Substring(4, 4);
                         SetVolts(pwrVolts);
-                        return;
+//                        return;
                     }
                     /*** Write PA Temperature to window ***/
                     if (rawFreq.Length > 4 && rawFreq.Substring(0, 4) == "ZZTS")
                     {
                         temp = Convert.ToDouble(rawFreq.Substring(4, 5));
                         WriteTemp();
-                        return;
+//                        return;
                     }
                     /*** Get RX1 ant status ***/
                     if (rawFreq.Length > 4 && rawFreq.Substring(0, 4) == "ZZOA")
                     {
                         Rx1 = rawFreq.Substring(4, 1);
-                        return;
+//                        return;
                     }
                     /*** Get RX2 ant status ***/
                     if (rawFreq.Length > 4 && rawFreq.Substring(0, 4) == "ZZOB")
                     {
                         Rx2 = rawFreq.Substring(4, 1);
-                        return;
+//                        return;
                     }
                     /*** Get TX ant status ***/
                     if (rawFreq.Length > 4 && rawFreq.Substring(0, 4) == "ZZOC")
                     {
                         TxA = rawFreq.Substring(4, 1);
-                        return;
+//                        return;
                     }
                     /*** Get TX1-3 status ***/
                     if (rawFreq.Length > 4 && rawFreq.Substring(0, 4) == "ZZOF")
                     {
                         stsTX = rawFreq.Substring(4, 3);
                         set.stsTX = stsTX; set.Save();
-                        return;
+//                        return;
                     }
                     /*** Get RX filter status ***/
                     if (rawFreq.Length > 4 && rawFreq.Substring(0, 4) == "ZZFI")
                     {
                         RxFlt = rawFreq.Substring(4, 2);
-                        return;
+//                        return;
                     }
                     /*** Get PSDR Mode  ***/
                     if (rawFreq.Length > 4 && rawFreq.Substring(0, 4) == "ZZMD")
                     {
                         ZZMD = rawFreq.Substring(4, 2);
-                        return;
+//                        return;
                     }
                     /*** Quick Memory, get the TX Profile & load  ***/
                     if (rawFreq.Length > 4 && rawFreq.Substring(0, 4) == "ZZTP")
@@ -7337,7 +7889,7 @@ namespace DataDecoder
                         SetMemSave("Yellow");
                         Thread.Sleep(500);
                         SetMemSave("");
-                        return;
+//                        return;
                     }
                     /*** Save current Drive setting by band ***/
                     if (rawFreq.Length > 4 && rawFreq.Substring(0, 4) == "ZZPC")
@@ -7356,7 +7908,7 @@ namespace DataDecoder
                             case "006": set.pwr10 = rawFreq.Substring(4, 3); break;
                         }//switch
                         set.Save();
-                        return;
+//                        return;
                     }
                     /*** SO2R active vfo status ***/
                     if (rawFreq.Length > 4 && rawFreq.Substring(0, 4) == "ZZSW")
@@ -7403,20 +7955,6 @@ namespace DataDecoder
                             /*** Set SO2R vfo A band data ***/
                             if (chkSoEnab.Checked)
                             {SetVfoA();}
-
-                            /*** Set rotor offset for steppir dipole ***/
-                            //if (chkStepDipole.Checked && band == "080")
-                            //{
-                            //    StepDipole = true;
-                            //    //dipAzHead = set.AzOffset;
-                            //    //if (dipAzHead + 90 > 180)
-                            //    //{ dipAzHead -= 90; }
-                            //    //else
-                            //    //{ dipAzHead += 90; }
-                            //}
-                            //else
-                            //{ StepDipole = false;} // dipAzHead = set.AzOffset; }
-
 
                             /*** Setup Auto Drive for this band ***/
                             if (stsOper)
@@ -7836,7 +8374,7 @@ namespace DataDecoder
                             #endregion ACOM Antenna Switch
 
                         }// if band changed
-                        return;
+//                        return;
                     }// if ZZBS
 
                     /*** send radio's CAT reply back to RCP1 ***/
@@ -7892,11 +8430,15 @@ namespace DataDecoder
                         if (rawFreq.Substring(rawFreq.Length - 6, 1) == "0")
                         {   // if xmit vfo is "A" then send passive listener commands now
                             vfo = "VFO A";
+                            if (chkCwTx.Checked) WriteToPort("ZZCF0;", iSleep);
+                            SetSplit("Off");
                             goto SendData;
                         }
                         else // if not set vfo variable to "B"
                         {     // and wait for next FB command to arrive
                             vfo = "VFO B";
+                            SetSplit("On");
+                            if (chkCwTx.Checked) WriteToPort("ZZCF1;", iSleep);
                             return;
                         }
                     }
@@ -7907,7 +8449,7 @@ namespace DataDecoder
                     else if (rawFreq.Length == 3 && rawFreq.Substring(0, 2) == "MD")
                     {   // this is a mode cmd, save it
                         sdrMode = rawFreq.Substring(2, 1);
-                        return;
+//                        return;
                     }
                     else return;
                 SendData:
@@ -8070,6 +8612,7 @@ namespace DataDecoder
                     if (String.Compare(lastFreq, logFreq) != 0)
                     {   // if the freq has changed
 //                        freqLook = rawFreq.Substring(2, 8);
+                    prevFreq = lastFreq;// save for undo
                         freqLook = logFreq.Substring(0, 8);
                         freqLook = freqLook.TrimStart('0');
                         freqLook = freqLook.Substring(0, freqLook.Length - 2);
@@ -8081,7 +8624,7 @@ namespace DataDecoder
                         id = title + " - " + freq.Substring(0, 9) +
                             "  " + vfo + "  " + memMode;
                     /*** Output to LPT port ***/
-                    //decode freq data and output to LPT port
+                        //decode freq data and output to LPT port
                     if (chkDevice.Checked && chkDev0.Checked)
                     { LookUp(freqLook); }
                     PortSend(logFreq);  // send freq. to PLs
@@ -8890,160 +9433,160 @@ namespace DataDecoder
         /// <summary>
         /// Opens the default CAT port.
         /// </summary>
-        private void SetDefaultComRadio()
-        {
-            int n = cboCAT.Items.IndexOf(DefaultComRadio);
-            if (n >= 0)
-            {
-                cboCAT.SelectedIndex = n;
-                if (!sp.isOpen) OpenSerialPort();
-            }
-            else
-            {
-                MessageBox.Show("Default Radio Port is not valid." +
-                    "Please select a port from the list.");
-                cboCAT.SelectedIndex = 0;
-            }
+        //private void SetDefaultComRadio()
+        //{
+        //    int n = cboCAT.Items.IndexOf(DefaultComRadio);
+        //    if (n >= 0)
+        //    {
+        //        cboCAT.SelectedIndex = n;
+        //        if (!sp.isOpen) OpenSerialPort();
+        //    }
+        //    else
+        //    {
+        //        MessageBox.Show("Default Radio Port is not valid." +
+        //            "Please select a port from the list.");
+        //        cboCAT.SelectedIndex = 0;
+        //    }
 
-        }
-        /// <summary>
-        /// Opens the default Accessory (passive listener) port.
-        /// </summary>
-        private void SetDefaultComAcc()
-        {
+        //}
+        ///// <summary>
+        ///// Opens the default Accessory (passive listener) port.
+        ///// </summary>
+        //private void SetDefaultComAcc()
+        //{
 
-            int n = cboSerAcc.Items.IndexOf(DefaultComAcc);
-            if (n >= 0)
-            {
-                cboSerAcc.SelectedIndex = n;
-                if (!AccPort.IsOpen) AccPort.Open();
-            }
-            else
-            {
-                MessageBox.Show("Default Accessory Port is not valid.  Please select a port from the list.");
-                cboSerAcc.SelectedIndex = 0;
-            }
+        //    int n = cboSerAcc.Items.IndexOf(DefaultComAcc);
+        //    if (n >= 0)
+        //    {
+        //        cboSerAcc.SelectedIndex = n;
+        //        if (!AccPort.IsOpen) AccPort.Open();
+        //    }
+        //    else
+        //    {
+        //        MessageBox.Show("Default Accessory Port is not valid.  Please select a port from the list.");
+        //        cboSerAcc.SelectedIndex = 0;
+        //    }
 
-        }
-        /// <summary>
-        /// Opens the default LP100 port.
-        /// </summary>
-        private void SetDefaultLPport()
-        {
-            int n = cboLPport.Items.IndexOf(DefaultLPport);
-            if (n >= 0)
-            {
-                cboLPport.SelectedIndex = n;
-                if (!LPport.IsOpen) LPport.Open();
-            }
-            else
-            {
-                MessageBox.Show("Default LP100 Port is not valid.  Please select a port from the list.");
-                cboLPport.SelectedIndex = 0;
-            }
-        }        /// <summary>
-        /// Opens the default SteppIR port.
-        /// </summary>
-        private void SetDefaultStepPort()
-        {
-            int n = cboStep.Items.IndexOf(DefaultStepPort);
-            if (n >= 0)
-            {
-                cboStep.SelectedIndex = n;
-                if (!StepData.IsOpen) StepData.Open();
-            }
-            else
-            {
-                MessageBox.Show("Default SteppIR Port is not valid.  Please select a port from the list.");
-                cboStep.SelectedIndex = 0;
-            }
-        }        /// <summary>
-        /// Opens the default RCP2 (Radio control) port.
-        /// </summary>
-        private void SetDefaultRCP2port()
-        {
-            int n = cboRCP2.Items.IndexOf(DefaultRCP2port);
-            if (n >= 0)
-            {
-                cboRCP2.SelectedIndex = n;
-                if (!RCP2port.IsOpen) RCP2port.Open();
-            }
-            else
-            {
-                MessageBox.Show("Default RCP2 Radio Control Port is not valid." +
-                    "Please select a port from the list.");
-                cboRCP2.SelectedIndex = 0;
-            }
-        }        /// <summary>
-        /// Opens the default RCP3 (Radio control) port.
-        /// </summary>
-        private void SetDefaultRCP3port()
-        {
-            int n = cboRCP3.Items.IndexOf(DefaultRCP3port);
-            if (n >= 0)
-            {
-                cboRCP3.SelectedIndex = n;
-                if (!RCP3port.IsOpen) RCP3port.Open();
-            }
-            else
-            {
-                MessageBox.Show("Default RCP3 Radio Control Port is not valid." +
-                                "Please select a port from the list.");
-                cboRCP3.SelectedIndex = 0;
-            }
-        }
-        /// <summary>
-        /// Opens the default RCP4 (Radio control) port.
-        /// </summary>
-        private void SetDefaultRCP4port()
-        {
-            int n = cboRCP4.Items.IndexOf(DefaultRCP4port);
-            if (n >= 0)
-            {
-                cboRCP4.SelectedIndex = n;
-                if (!RCP4port.IsOpen) RCP4port.Open();
-            }
-            else
-            {
-                MessageBox.Show("Default RCP4 Radio Control Port is not valid." +
-                                "Please select a port from the list.");
-                cboRCP4.SelectedIndex = 0;
-            }
-        }        /// <summary>
-        /// Opens the default IC-PW1 port.
-        /// </summary>
-        private void SetDefaultPW1port()
-        {
-            int n = cboPW1.Items.IndexOf(DefaultPW1port);
-            if (n >= 0)
-            {
-                cboPW1.SelectedIndex = n;
-                if (!PW1port.IsOpen) PW1port.Open();
-            }
-            else
-            {
-                MessageBox.Show("Default PW1 Radio Control Port is not valid." +
-                    "Please select a port from the list.");
-                cboPW1.SelectedIndex = 0;
-            }
-        }        /// <summary>
-        /// Opens the default Radio control port.
-        /// </summary>
-        private void SetDefaultLogPort()
-        {
-            int n = cboLogPort.Items.IndexOf(DefaultLogPort);
-            if (n >= 0)
-            {
-                cboLogPort.SelectedIndex = n;
-                if (!LogPort.IsOpen) LogPort.Open();
-            }
-            else
-            {
-                MessageBox.Show("Default Radio Control Port is not valid." +
-                    "Please select a port from the list.");
-                cboLogPort.SelectedIndex = 0;
-            }
-        }
+        //}
+        ///// <summary>
+        ///// Opens the default LP100 port.
+        ///// </summary>
+        //private void SetDefaultLPport()
+        //{
+        //    int n = cboLPport.Items.IndexOf(DefaultLPport);
+        //    if (n >= 0)
+        //    {
+        //        cboLPport.SelectedIndex = n;
+        //        if (!LPport.IsOpen) LPport.Open();
+        //    }
+        //    else
+        //    {
+        //        MessageBox.Show("Default LP100 Port is not valid.  Please select a port from the list.");
+        //        cboLPport.SelectedIndex = 0;
+        //    }
+        //}        /// <summary>
+        ///// Opens the default SteppIR port.
+        ///// </summary>
+        //private void SetDefaultStepPort()
+        //{
+        //    int n = cboStep.Items.IndexOf(DefaultStepPort);
+        //    if (n >= 0)
+        //    {
+        //        cboStep.SelectedIndex = n;
+        //        if (!StepData.IsOpen) StepData.Open();
+        //    }
+        //    else
+        //    {
+        //        MessageBox.Show("Default SteppIR Port is not valid.  Please select a port from the list.");
+        //        cboStep.SelectedIndex = 0;
+        //    }
+        //}        /// <summary>
+        ///// Opens the default RCP2 (Radio control) port.
+        ///// </summary>
+        //private void SetDefaultRCP2port()
+        //{
+        //    int n = cboRCP2.Items.IndexOf(DefaultRCP2port);
+        //    if (n >= 0)
+        //    {
+        //        cboRCP2.SelectedIndex = n;
+        //        if (!RCP2port.IsOpen) RCP2port.Open();
+        //    }
+        //    else
+        //    {
+        //        MessageBox.Show("Default RCP2 Radio Control Port is not valid." +
+        //            "Please select a port from the list.");
+        //        cboRCP2.SelectedIndex = 0;
+        //    }
+        //}        /// <summary>
+        ///// Opens the default RCP3 (Radio control) port.
+        ///// </summary>
+        //private void SetDefaultRCP3port()
+        //{
+        //    int n = cboRCP3.Items.IndexOf(DefaultRCP3port);
+        //    if (n >= 0)
+        //    {
+        //        cboRCP3.SelectedIndex = n;
+        //        if (!RCP3port.IsOpen) RCP3port.Open();
+        //    }
+        //    else
+        //    {
+        //        MessageBox.Show("Default RCP3 Radio Control Port is not valid." +
+        //                        "Please select a port from the list.");
+        //        cboRCP3.SelectedIndex = 0;
+        //    }
+        //}
+        ///// <summary>
+        ///// Opens the default RCP4 (Radio control) port.
+        ///// </summary>
+        //private void SetDefaultRCP4port()
+        //{
+        //    int n = cboRCP4.Items.IndexOf(DefaultRCP4port);
+        //    if (n >= 0)
+        //    {
+        //        cboRCP4.SelectedIndex = n;
+        //        if (!RCP4port.IsOpen) RCP4port.Open();
+        //    }
+        //    else
+        //    {
+        //        MessageBox.Show("Default RCP4 Radio Control Port is not valid." +
+        //                        "Please select a port from the list.");
+        //        cboRCP4.SelectedIndex = 0;
+        //    }
+        //}        /// <summary>
+        ///// Opens the default IC-PW1 port.
+        ///// </summary>
+        //private void SetDefaultPW1port()
+        //{
+        //    int n = cboPW1.Items.IndexOf(DefaultPW1port);
+        //    if (n >= 0)
+        //    {
+        //        cboPW1.SelectedIndex = n;
+        //        if (!PW1port.IsOpen) PW1port.Open();
+        //    }
+        //    else
+        //    {
+        //        MessageBox.Show("Default PW1 Radio Control Port is not valid." +
+        //            "Please select a port from the list.");
+        //        cboPW1.SelectedIndex = 0;
+        //    }
+        //}        /// <summary>
+        ///// Opens the default Radio control port.
+        ///// </summary>
+        //private void SetDefaultLogPort()
+        //{
+        //    int n = cboLogPort.Items.IndexOf(DefaultLogPort);
+        //    if (n >= 0)
+        //    {
+        //        cboLogPort.SelectedIndex = n;
+        //        if (!LogPort.IsOpen) LogPort.Open();
+        //    }
+        //    else
+        //    {
+        //        MessageBox.Show("Default Radio Control Port is not valid." +
+        //            "Please select a port from the list.");
+        //        cboLogPort.SelectedIndex = 0;
+        //    }
+        //}
         /// <summary>
         /// Opens the CAT port name stored in the DefaultComRadio property.
         /// </summary>
@@ -9118,28 +9661,6 @@ namespace DataDecoder
         {
             set { app_data_path = value; }
         }
-
-        public const short FILE_ATTRIBUTE_NORMAL = 0x80;
-        public const short INVALID_HANDLE_VALUE = -1;
-        public const uint GENERIC_READ = 0x80000000;
-        public const uint GENERIC_WRITE = 0x40000000;
-        public const uint CREATE_NEW = 1;
-        public const uint CREATE_ALWAYS = 2;
-        public const uint OPEN_EXISTING = 3;
-        public const uint FILE_DEVICE_UNKNOWN = 0x00000022;
-        public const uint METHOD_BUFFERED = 0;
-        public const uint FILE_ANY_ACCESS = 0;
-
-        [DllImport("kernel32.dll", SetLastError = true)]
-        static extern IntPtr CreateFile(string lpFileName, uint dwDesiredAccess,
-            uint dwShareMode, IntPtr lpSecurityAttributes, uint dwCreationDisposition,
-            uint dwFlagsAndAttributes, IntPtr hTemplateFile);
-
-        [DllImport("kernel32.dll", ExactSpelling = true, SetLastError = true, CharSet = CharSet.Auto)]
-        static extern bool DeviceIoControl(IntPtr hDevice, uint dwIoControlCode,
-        IntPtr lpInBuffer, uint nInBufferSize,
-        IntPtr lpOutBuffer, uint nOutBufferSize,
-        out uint lpBytesReturned, IntPtr lpOverlapped);
 
         #endregion # Enums, Signatures & Vars #
 
@@ -10053,53 +10574,6 @@ namespace DataDecoder
 
         #endregion # SO2R Methods #
 
-        #region # USB2LPT #
-        // add to SOInit()
-        //try
-        //{
-        //    string device = @"\\.\LPT1";
-        //    ptr = CreateFile(device, GENERIC_READ | GENERIC_WRITE,
-        //        0, IntPtr.Zero, OPEN_EXISTING, 0, IntPtr.Zero);
-        //    if (ptr.ToInt32() == -1)
-        //    {
-        //        Marshal.ThrowExceptionForHR(Marshal.GetHRForLastWin32Error());
-        //    }
-        //}
-        //catch (Exception HR)
-        //{
-        //    MessageBox.Show(HR.Message);
-        //}
-
-
-        //        byte inb(byte a)
-        //        {
-        //            byte[] IoData = new byte[1];
-        //            IoData[0] = Convert.ToByte(a | 0x10);
-        //     //       IntPtr IoData;
-        //            uint BytesRet;
-        ////            byte tmp = Convert.ToByte(a|0x10);
-        ////            IoData = (IntPtr)tmp;	// set the bit for read operations
-        //            uint InBuf;// = 0;
-        //            uint OutBuf;// = 0;
-
-        //            DeviceIoControl(ptr, 0x222010,
-        //              IoData, InBuf, IoData, OutBuf, out BytesRet, IntPtr.Zero);
-        //            return IoData[0];
-        //        }
-
-        //internal delegate void SerialPinChangedEventHandlerDelagate
-        //    (object sender, SerialPinChangedEventArgs e);
-
-        //SerialPinChangedEventHandler SPCEH;
-
-        //private void SerialPinChangedEventHandlerDelegate(object sender, SerialPinChangedEventArgs e)
-        //{
-        //    SPCEH = new SerialPinChangedEventHandler(this.PinChanged);
-        //}
-        // a serial port control line has changed
-
-        #endregion # USB2LPT #
-
         #endregion SO2R
 
         #region SPE Amp
@@ -10349,8 +10823,8 @@ namespace DataDecoder
         {
             try
             {
-                cboSPEport.SelectedIndex = set.SPEport;
-                chkSPEenab.Checked = set.SPEenab;
+                //cboSPEport.SelectedIndex = set.SPEport;   //moved to Initialization()
+                //chkSPEenab.Checked = set.SPEenab;
                 SPETimer.Enabled = false;
                 SPEmsgClr("");
                 // see if digital watt meter is being used.
@@ -10621,6 +11095,7 @@ namespace DataDecoder
                 SetSPEpwr("Off"); SetSPEtemp("   "); SPEmsgClr("");
                 SetSPEled("False"); txtAvg.Enabled = false; txtSWR.Enabled = false;
                 chkSPEenab.Checked = false; set.SPEenab = false;
+//                if (SPEport.IsOpen) SPEport.Close();
             }
             set.Save();
         }
@@ -10643,7 +11118,7 @@ namespace DataDecoder
                     chkSPEenab.Checked = false; 
                     set.SPEenab = false;
                     cboSPEport.SelectedIndex = 0;
-                    set.SPEport = cboSPEport.SelectedIndex;
+                    set.SPEport = 0;
                     set.Save();
                     return;
                 }
@@ -11234,6 +11709,7 @@ namespace DataDecoder
                        MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     cboStep.SelectedIndex = 0;
                     chkStep.Checked = false;
+                    set.StepPortNum = 0;
                     set.Save(); 
                     return;
                 }
@@ -11635,6 +12111,25 @@ namespace DataDecoder
                 catch { }
             }
         }
+        // Write to grpTKnob heading
+        delegate void SetgrpTKnobCallback(string text);
+        private void SetgrpTKnob(string text)
+        {
+            if (!closing)
+            {
+                try
+                {
+                    if (this.grpTKnob.InvokeRequired)
+                    {
+                        SetgrpTKnobCallback d = new SetgrpTKnobCallback(SetgrpTKnob);
+                        this.Invoke(d, new object[] { text });
+                    }
+                    else
+                        grpTKnob.Text = text;
+                }
+                catch { }
+            }
+        }
         //ZC
         #endregion # Delegates #
 
@@ -11874,6 +12369,12 @@ namespace DataDecoder
             KnobPort.Write("ZR0A;" + "ZR;");
         }
 
+        private void tabRCP_DoubleClick(object sender, EventArgs e)
+        {
+            if (grpTKnob.Enabled) grpTKnob.Enabled = false;
+            else grpTKnob.Enabled = true;
+        }
+
         #endregion * Events *
 
         #region * Methods *
@@ -11972,6 +12473,10 @@ namespace DataDecoder
                 case 1: kCATdcOn = "ZZVS2;"; kCATdcOff = "ZZVS2;"; //Exchange A<>B
                     break;
                 case 2: kCATdcOn = "ZZSP1;"; kCATdcOff = "ZZSP0;"; //Toggle Split
+                    break;
+                case 3: kCATdcOn = "ZZRC;"; kCATdcOff = "ZZRC;"; //Clear RIT
+                    break;
+                case 4: kCATdcOn = "ZZXC;"; kCATdcOff = "ZZXC;"; //Clear XIT
                     break;
             }
         }
@@ -13363,230 +13868,6 @@ namespace DataDecoder
         #endregion WaveNode Setup
 
         #endregion WaveNode
-
-        #region Memory
-
-        #region # Declarations #
-
-        // create memory array wit 5 rows and 10 columns
-        string[,] mem = new string[5,11];
-        
-        int idxMem = 5; // mem array index
-        string vfoA, vfoB, Rx1, Rx2, TxA, RxFlt, TxPro, ZZMD; // PSDR vars
-        string mvFq, mvFl, mvMd;    // M<>V vars (freq, fltr, mode)
-        int MV = 1;    // 1 = vfo, 2 = memory
-
-        #endregion # Declarations #
-
-        #region # Delegates #
-
-        // Write to MV button
-        delegate void SetMVCallback(string text);
-        public void SetMV(string text)
-        {
-            if (this.btnMV.InvokeRequired)
-            {
-                SetMVCallback d = new SetMVCallback(SetMV);
-                this.Invoke(d, new object[] { text });
-            }
-            else
-            {
-                if (text == "Memory")
-                {
-                    btnMV.BackColor = Color.Yellow;
-                    mini.btnMV.BackColor = Color.Yellow;
-                }
-                else
-                {
-                    btnMV.BackColor = Color.Empty;
-                    mini.btnMV.BackColor = Color.Empty;
-                }
-            }
-        }
-        // Write to MemSave button
-        delegate void SetMemSaveCallback(string text);
-        public void SetMemSave(string text)
-        {
-            if (this.btnMemSave.InvokeRequired)
-            {
-                SetMemSaveCallback d = new SetMemSaveCallback(SetMemSave);
-                this.Invoke(d, new object[] { text });
-            }
-            else
-            {
-                if (text == "Yellow")
-                {
-                    btnMemSave.BackColor = Color.Yellow;
-                    mini.btnMemSave.BackColor = Color.Yellow;
-                }
-                else
-                {
-                    btnMemSave.BackColor = Color.Empty;
-                    mini.btnMemSave.BackColor = Color.Empty;
-                }
-            }
-        }
-        // Write to MemFreq button
-        delegate void SetMemFreqCallback(string text);
-        public void SetMemFreq(string text)
-        {
-            if (this.txtMemFreq.InvokeRequired)
-            {
-                SetMemFreqCallback d = new SetMemFreqCallback(SetMemFreq);
-                this.Invoke(d, new object[] { text });
-            }
-            else
-            {
-                txtMemFreq.Text = text;
-                mini.txtMemFreq.Text = text;
-            }
-        }
-        // Write to MemMode button
-        delegate void SetMemModeCallback(string text);
-        public void SetMemMode(string text)
-        {
-            if (this.txtMemMode.InvokeRequired)
-            {
-                SetMemModeCallback d = new SetMemModeCallback(SetMemMode);
-                this.Invoke(d, new object[] { text });
-            }
-            else
-            {
-                txtMemMode.Text = text;
-                mini.txtMemMode.Text = text;
-            }
-        }
-        // Write to MemIdx button
-        delegate void SetMemIdxCallback(string text);
-        public void SetMemIdx(string text)
-        {
-            if (this.txtMemIdx.InvokeRequired)
-            {
-                SetMemIdxCallback d = new SetMemIdxCallback(SetMemIdx);
-                this.Invoke(d, new object[] { text });
-            }
-            else
-            {
-                txtMemIdx.Text = text; 
-                mini.txtMemIdx.Text = text;
-            }
-        }
-        
-        #endregion # Delegates #
-
-        #region # Events #
-
-        // the memory/vfo toggle button has been pressed
-        public void btnMV_Click(object sender, EventArgs e)
-        { 
-            if (idxMem == 5 || mem[idxMem, 0] == "" || mem[idxMem, 0] == null)
-            { btnMemLoad_Click(null, null); return; }
-
-            if (MV == 1)    // save vfo & load memory to psdr
-            {
-                mvFq = vfoA; mvFl = RxFlt; mvMd = sdrMode;
-                btnMemLoad_Click(null, null); 
-                MV = 2;
-                SetMV("Memory");
-                string freq = vfoA.TrimStart('0');
-                freq = Convert.ToInt32(freq.Substring(0, freq.Length - 3)).ToString("N0");
-                txtMemVfo.Text = freq; 
-                mini.txtMemVfo.Text = freq;
-            }
-            else if (MV == 2)   // reload vfo
-            {
-                WriteToPort("MD" + mvMd + ";", iSleep); // SDR MODE
-                WriteToPort("ZZFA" + mvFq + ";", iSleep); // VFO A
-                WriteToPort("ZZFI" + mvFl + ";", iSleep); // RX Filter
-                MV = 1;
-                SetMV("");
-                txtMemVfo.Text = ""; 
-                mini.txtMemVfo.Text = "";
-            }
-        }
-        // the memory recall button has been pressed
-        public void btnReCall_Click(object sender, EventArgs e)
-        {
-            idxMem++;
-            if (idxMem > 4) idxMem = 0;
-            SetMemIdx((idxMem + 1).ToString());
-            if (mem[idxMem, 0] == "" || mem[idxMem, 0] == null)
-            {
-                SetMemFreq("Empty"); SetMemMode(""); return;
-            }
-            string freq = mem[idxMem, 0].TrimStart('0');
-            freq = Convert.ToInt32(freq.Substring(0, freq.Length - 3)).ToString("N0");
-            SetMemFreq(freq);
-            SetMemMode(mem[idxMem, 10]);
-        }
-        // the memory save button has been pressed
-        public void btnMemSave_Click(object sender, EventArgs e)
-        {
-            // get current radio status
-            WriteToPort("ZZSW;", iSleep); // TX VFO
-            WriteToPort("ZZMD;", iSleep); // MODE
-            WriteToPort("ZZOA;", iSleep); // RX1 ANT
-            WriteToPort("ZZOB;", iSleep); // RX2 ANT
-            WriteToPort("ZZOC;", iSleep); // TX ANT
-            WriteToPort("ZZOF;", iSleep); // TX LINE
-            WriteToPort("ZZTP;", iSleep); // TX Profile
-        }
-        // the memory clear button has been pressed
-        public void btnMemClear_Click(object sender, EventArgs e)
-        {
-            for (int j = 0; j <= 10; j++)
-            {
-                mem[idxMem, j] = null;
-            }
-            SetMemFreq("Empty"); SetMemMode("");
-        }
-        // if Control + Clear key is pressed delete all memories
-        public void btnMemClear_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.Control && e.Shift)
-            {
-                for (int i = 0; i <= 4; i++)
-                {
-                    for (int j = 0; j <= 10; j++)
-                    {
-                        mem[i, j] = null;
-                    }
-                }
-                idxMem = 0;
-                SetMemIdx((idxMem + 1).ToString());
-                SetMemFreq("Empty"); SetMemMode("");
-            }
-        }
-        // load memory vars to PSDR
-        public void btnMemLoad_Click(object sender, EventArgs e)
-        {
-            if (idxMem == 5 || mem[idxMem, 0] == "" || mem[idxMem, 0] == null)
-            {
-                SetMV("");
-                wav.SoundLocation = "uh_oh.wav";
-                wav.Play();
-                return;
-            }
-            WriteToPort("ZZMD" + mem[idxMem, 3] + ";", iSleep); // SDR MODE
-            WriteToPort("ZZFA" + mem[idxMem, 0] + ";", iSleep); // VFO A
-            WriteToPort("ZZFB" + mem[idxMem, 1] + ";", iSleep); // VFO B
-            WriteToPort("ZZSW" + mem[idxMem, 2] + ";", iSleep); // TX VFO
-            WriteToPort("ZZOA" + mem[idxMem, 4] + ";", iSleep); // RX1 ANT
-            WriteToPort("ZZOB" + mem[idxMem, 5] + ";", iSleep); // RX2 ANT
-            WriteToPort("ZZOC" + mem[idxMem, 6] + ";", iSleep); // TX ANT
-            WriteToPort("ZZOF" + mem[idxMem, 7] + ";", iSleep); // TX LINE
-            WriteToPort("ZZFI" + mem[idxMem, 8] + ";", iSleep); // RX Filter
-            WriteToPort("ZZTP" + mem[idxMem, 9] + ";", iSleep); // TX Profile
-        }
-
-        #endregion # Events #
-
-        #region # Methods #
-
-
-        #endregion # Methods #
-
-        #endregion Memory
 
     } // end class Setup
 

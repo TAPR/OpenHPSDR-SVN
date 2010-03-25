@@ -182,8 +182,8 @@ namespace DataDecoder
         private void Mini_DoubleClick(object sender, EventArgs e)
         {
             Size size = new Size();
-            if (this.Size.Height <= 100) size.Height = this.Size.Height * 2;
-            else if (this.Size.Height > 100) size.Height = this.Size.Height / 2;
+            if (this.Size.Height <= 120) size.Height = 186;//this.Size.Height * 2;
+            else if (this.Size.Height > 120) size.Height = 120;// this.Size.Height / 2;
             this.Size = new Size(this.Size.Width, size.Height);
         }
 
@@ -221,10 +221,20 @@ namespace DataDecoder
             { s.ProcessMacroButton(11); }
             else if (e.KeyCode == Keys.F12)
             { s.ProcessMacroButton(12); }
-            else if (e.Control && e.KeyCode == Keys.L)
-            { s.LowPower(); }   // go to low power mode
-            else if (e.Control && e.KeyCode == Keys.O)
-            { s.btnByp_Click(null, null); }   // Toggle PTT
+            else if (e.Control && e.KeyCode == Keys.Oemtilde) // Set Split
+            { s.btnSplit_Click(null, null); }
+            else if (e.Control && e.KeyCode == Keys.A) // Saves Auto Drive setting
+            { s.btnDrive_Click(null, null); }
+            else if (e.Control && e.KeyCode == Keys.B) // SteppIR to Bi Direction
+            { s.rbBiDir.Checked = true; }
+            else if (e.Control && e.KeyCode == Keys.F) // SteppIR to Forward
+            { s.rbFwd.Checked = true; }
+            else if (e.Control && e.KeyCode == Keys.R) // SteppIR to Reverse
+            { s.rb180.Checked = true; }
+            else if (e.Control && e.KeyCode == Keys.L) // Set drive to low power
+            { s.LowPower(); }
+            else if (e.Control && e.KeyCode == Keys.O) // Toggle PTT
+            { s.btnByp_Click(null, null); }
             else if (e.Control && e.KeyCode == Keys.Z) // Toggle VFO/Memory
             { s.btnMV_Click(null, null); }  
             else if (e.Control && e.KeyCode == Keys.X) // Memory select (1-5)
@@ -233,6 +243,8 @@ namespace DataDecoder
             { s.btnMemLoad_Click(null, null); }
             else if (e.Control && e.KeyCode == Keys.V) // Memory Save
             { s.btnMemSave_Click(null, null); }
+            else if (e.Control && e.KeyCode == Keys.N) // Open Memory Note window
+            { s.txtMemFreq_DoubleClick(null, null); }
         }
 
         private void btnMacro1_Click(object sender, EventArgs e)
@@ -325,16 +337,6 @@ namespace DataDecoder
         {
             s.btnHome_Click(null, null);
         }
-        //// Profiler button was pressed
-        //private void btnProfiler_Click(object sender, EventArgs e)
-        //{
-        //    s.btnProfiler_Click(null, null);
-        //}
-        //// Profiler Re start button was pressed
-        //private void btnReStart_Click(object sender, EventArgs e)
-        //{
-        //    s.btnReStart_Click(null, null);
-        //}
         // Rotor button was pressed
         public void btnSP_Click(object sender, EventArgs e)
         {
@@ -367,7 +369,23 @@ namespace DataDecoder
         private void Mini_Load(object sender, EventArgs e)
         {
             AOT.Checked = set.MiniTopMost;
-//            DataDecoder.Setup.GeometryFromString(set.miniGeo, this);
+            this.toolTip1.SetToolTip(this.btnMacro1, s.btnMacro1.Text);
+            this.toolTip1.SetToolTip(this.btnMacro2, s.btnMacro2.Text);
+            this.toolTip1.SetToolTip(this.btnMacro3, s.btnMacro3.Text);
+            this.toolTip1.SetToolTip(this.btnMacro4, s.btnMacro4.Text);
+            this.toolTip1.SetToolTip(this.btnMacro5, s.btnMacro5.Text);
+            this.toolTip1.SetToolTip(this.btnMacro6, s.btnMacro6.Text);
+            this.toolTip1.SetToolTip(this.btnMacro7, s.btnMacro7.Text);
+            this.toolTip1.SetToolTip(this.btnMacro8, s.btnMacro8.Text);
+            this.toolTip1.SetToolTip(this.btnMacro9, s.btnMacro9.Text);
+            this.toolTip1.SetToolTip(this.btnMacro10, s.btnMacro10.Text);
+            this.toolTip1.SetToolTip(this.btnMacro11, s.btnMacro11.Text);
+            this.toolTip1.SetToolTip(this.btnMacro12, s.btnMacro12.Text);
+            this.toolTip1.SetToolTip(this.btnMacro13, s.btnMacro13.Text);
+            this.toolTip1.SetToolTip(this.btnMacro14, s.btnMacro14.Text);
+            this.toolTip1.SetToolTip(this.btnMacro15, s.btnMacro15.Text);
+            this.toolTip1.SetToolTip(this.btnMacro16, s.btnMacro16.Text);
+            //            DataDecoder.Setup.GeometryFromString(set.miniGeo, this);
         }
         // the always on top chk box has changed
         private void AOT_CheckedChanged(object sender, EventArgs e)
@@ -463,7 +481,24 @@ namespace DataDecoder
         // the Control + Clear button was pressed
         private void btnMemClear_KeyDown(object sender, KeyEventArgs e)
         {
-            s.btnMemClear_KeyDown(null, null);
+            if (e.Control && e.Shift)
+            {
+                for (int i = 0; i <= 4; i++)
+                {
+                    for (int j = 0; j <= 10; j++)
+                    {
+                        s.mem[i, j] = null;
+                    }
+                }
+                s.idxMem = 0;
+                s.SetMemIdx((s.idxMem + 1).ToString());
+                s.SetMemFreq("Empty"); s.SetMemMode("");
+            }
+        }
+        // the mem freq window was double-clicked
+        private void txtMemFreq_DoubleClick(object sender, EventArgs e)
+        {
+            s.txtMemFreq_DoubleClick(null, null);
         }
 
         #endregion Form Events
@@ -478,22 +513,22 @@ namespace DataDecoder
             Notification alert = new Notification();
             alert.Show();
         }
-        // See if Flex Profiler is running
-        public static bool IsFPRunning()
-        {
-            bool IsRunning = false;
-            string proc = "FlexProfiler";
-            Process[] processes = Process.GetProcessesByName(proc);
-            if (processes.Length > 0)
-            {
-                IsRunning = true;
-            }
-            else
-            {
-                IsRunning = false;
-            }
-            return IsRunning;
-        }
+        //// See if Flex Profiler is running
+        //public static bool IsFPRunning()
+        //{
+        //    bool IsRunning = false;
+        //    string proc = "FlexProfiler";
+        //    Process[] processes = Process.GetProcessesByName(proc);
+        //    if (processes.Length > 0)
+        //    {
+        //        IsRunning = true;
+        //    }
+        //    else
+        //    {
+        //        IsRunning = false;
+        //    }
+        //    return IsRunning;
+        //}
         
         #endregion Methods
 
@@ -557,7 +592,9 @@ namespace DataDecoder
                 Settings.Default.WindowPositionMini = this.DesktopBounds;
             }
         }
+
         # endregion Window Geometry New
+
 
 
     }// end Mini
