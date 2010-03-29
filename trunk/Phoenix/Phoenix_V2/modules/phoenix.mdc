@@ -1,0 +1,15 @@
+PCBNEW-LibDoc----V1  8/11/2009-07:03:07
+#
+$MODULE LFCSP64
+Li LFCSP64
+Cd Module CMS VQFP 64 pins
+Kw CMS VQFP
+$EndMODULE
+#
+$MODULE JMP_1X2
+Li JMP_1X2
+Cd Double rangee de contacts 2 x 2 pins
+Kw CONN
+$EndMODULE
+#
+$EndLIBDOC

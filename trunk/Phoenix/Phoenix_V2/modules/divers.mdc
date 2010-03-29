@@ -1,0 +1,33 @@
+PCBNEW-LibDoc----V1  16/5/2006-13:37:21
+#
+$MODULE pin_array_8x2
+Li pin_array_8x2
+Cd Double rangee de contacts 2 x 8 pins
+Kw CONN
+$EndMODULE
+#
+$MODULE douille_4mm
+Li douille_4mm
+Cd module 1 pin (ou trou mecanique de percage 6 mm)
+Kw DEV
+$EndMODULE
+#
+$MODULE 2PIN_6mm
+Li 2PIN_6mm
+Cd module 2 pin (trou 6 mm)
+Kw DEV
+$EndMODULE
+#
+$MODULE 3PIN_6mm
+Li 3PIN_6mm
+Cd module 2 pin (trou 6 mm)
+Kw DEV
+$EndMODULE
+#
+$MODULE OPTORESISTOR_NSL-32
+Li OPTORESISTOR_NSL-32
+Cd Module Dil 6 pins, pads elliptiques
+Kw DIL
+$EndMODULE
+#
+$EndLIBDOC

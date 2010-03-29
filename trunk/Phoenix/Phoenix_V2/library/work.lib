@@ -1,0 +1,11 @@
+EESchema-LIBRARY Version 2.3  Date: 5/12/2005-13:08:46
+#
+# +1.8V
+#
+DEF +1.8V #PWR 0 0 Y Y 1 F P
+F0 "#PWR" 0 140 20 H I C C
+F1 "+1.8V" 0 200 30 H V C C
+ALIAS 1V8
+ENDDEF
+#
+#End Library
