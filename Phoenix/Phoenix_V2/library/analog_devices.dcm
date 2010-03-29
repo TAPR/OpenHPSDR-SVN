@@ -1,0 +1,8 @@
+EESchema-DOCLIB  Version 2.0  Date: 18/11/2005-04:15:58
+#
+$CMP AD725
+D RGB to PAL/NTSC encoder
+K VIDEO PAL NTSC
+$ENDCMP
+#
+#End Doc Library

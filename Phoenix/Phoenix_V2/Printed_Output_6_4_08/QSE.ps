@@ -1,0 +1,11838 @@
+%!PS-Adobe-2.0
+%%Title: Printing QSE2-sch
+%%Creator: wxWidgets PostScript renderer
+%%CreationDate: Sat Apr  5 20:24:00 2008
+%%Orientation: Landscape
+%%DocumentPaperSizes: A4
+%%EndComments
+
+%%BeginProlog
+/conicto {
+    /to_y exch def
+    /to_x exch def
+    /conic_cntrl_y exch def
+    /conic_cntrl_x exch def
+    currentpoint
+    /p0_y exch def
+    /p0_x exch def
+    /p1_x p0_x conic_cntrl_x p0_x sub 2 3 div mul add def
+    /p1_y p0_y conic_cntrl_y p0_y sub 2 3 div mul add def
+    /p2_x p1_x to_x p0_x sub 1 3 div mul add def
+    /p2_y p1_y to_y p0_y sub 1 3 div mul add def
+    p1_x p1_y p2_x p2_y to_x to_y curveto
+}  bind def
+/ellipsedict 8 dict def
+ellipsedict /mtrx matrix put
+/ellipse {
+    ellipsedict begin
+    /endangle exch def
+    /startangle exch def
+    /yrad exch def
+    /xrad exch def
+    /y exch def
+    /x exch def
+    /savematrix mtrx currentmatrix def
+    x y translate
+    xrad yrad scale
+    0 0 1 startangle endangle arc
+    savematrix setmatrix
+    end
+    } def
+/ellipticarcdict 8 dict def
+ellipticarcdict /mtrx matrix put
+/ellipticarc
+{ ellipticarcdict begin
+  /do_fill exch def
+  /endangle exch def
+  /startangle exch def
+  /yrad exch def
+  /xrad exch def 
+  /y exch def
+  /x exch def
+  /savematrix mtrx currentmatrix def
+  x y translate
+  xrad yrad scale
+  do_fill { 0 0 moveto } if
+  0 0 1 startangle endangle arc
+  savematrix setmatrix
+  do_fill { fill }{ stroke } ifelse
+  end
+} def
+% define 'colorimage' if it isn't defined
+%   ('colortogray' and 'mergeprocs' come from xwd2ps
+%     via xgrab)
+/colorimage where   % do we know about 'colorimage'?
+  { pop }           % yes: pop off the 'dict' returned
+  {                 % no:  define one
+    /colortogray {  % define an RGB->I function
+      /rgbdata exch store    % call input 'rgbdata'
+      rgbdata length 3 idiv
+      /npixls exch store
+      /rgbindx 0 store
+      0 1 npixls 1 sub {
+        grays exch
+        rgbdata rgbindx       get 20 mul    % Red
+        rgbdata rgbindx 1 add get 32 mul    % Green
+        rgbdata rgbindx 2 add get 12 mul    % Blue
+        add add 64 idiv      % I = .5G + .31R + .18B
+        put
+        /rgbindx rgbindx 3 add store
+      } for
+      grays 0 npixls getinterval
+    } bind def
+
+    % Utility procedure for colorimage operator.
+    % This procedure takes two procedures off the
+    % stack and merges them into a single procedure.
+
+    /mergeprocs { % def
+      dup length
+      3 -1 roll
+      dup
+      length
+      dup
+      5 1 roll
+      3 -1 roll
+      add
+      array cvx
+      dup
+      3 -1 roll
+      0 exch
+      putinterval
+      dup
+      4 2 roll
+      putinterval
+    } bind def
+
+    /colorimage { % def
+      pop pop     % remove 'false 3' operands
+      {colortogray} mergeprocs
+      image
+    } bind def
+  } ifelse          % end of 'false' case
+
+/reencodeISO {
+dup dup findfont dup length dict begin
+{ 1 index /FID ne { def }{ pop pop } ifelse } forall
+/Encoding ISOLatin1Encoding def
+currentdict end definefont
+} def
+/ISOLatin1Encoding [
+/.notdef/.notdef/.notdef/.notdef/.notdef/.notdef/.notdef/.notdef
+/.notdef/.notdef/.notdef/.notdef/.notdef/.notdef/.notdef/.notdef
+/.notdef/.notdef/.notdef/.notdef/.notdef/.notdef/.notdef/.notdef
+/.notdef/.notdef/.notdef/.notdef/.notdef/.notdef/.notdef/.notdef
+/space/exclam/quotedbl/numbersign/dollar/percent/ampersand/quoteright
+/parenleft/parenright/asterisk/plus/comma/minus/period/slash
+/zero/one/two/three/four/five/six/seven/eight/nine/colon/semicolon
+/less/equal/greater/question/at/A/B/C/D/E/F/G/H/I/J/K/L/M/N
+/O/P/Q/R/S/T/U/V/W/X/Y/Z/bracketleft/backslash/bracketright
+/asciicircum/underscore/quoteleft/a/b/c/d/e/f/g/h/i/j/k/l/m
+/n/o/p/q/r/s/t/u/v/w/x/y/z/braceleft/bar/braceright/asciitilde
+/.notdef/.notdef/.notdef/.notdef/.notdef/.notdef/.notdef/.notdef
+/.notdef/.notdef/.notdef/.notdef/.notdef/.notdef/.notdef/.notdef
+/.notdef/dotlessi/grave/acute/circumflex/tilde/macron/breve
+/dotaccent/dieresis/.notdef/ring/cedilla/.notdef/hungarumlaut
+/ogonek/caron/space/exclamdown/cent/sterling/currency/yen/brokenbar
+/section/dieresis/copyright/ordfeminine/guillemotleft/logicalnot
+/hyphen/registered/macron/degree/plusminus/twosuperior/threesuperior
+/acute/mu/paragraph/periodcentered/cedilla/onesuperior/ordmasculine
+/guillemotright/onequarter/onehalf/threequarters/questiondown
+/Agrave/Aacute/Acircumflex/Atilde/Adieresis/Aring/AE/Ccedilla
+/Egrave/Eacute/Ecircumflex/Edieresis/Igrave/Iacute/Icircumflex
+/Idieresis/Eth/Ntilde/Ograve/Oacute/Ocircumflex/Otilde/Odieresis
+/multiply/Oslash/Ugrave/Uacute/Ucircumflex/Udieresis/Yacute
+/Thorn/germandbls/agrave/aacute/acircumflex/atilde/adieresis
+/aring/ae/ccedilla/egrave/eacute/ecircumflex/edieresis/igrave
+/iacute/icircumflex/idieresis/eth/ntilde/ograve/oacute/ocircumflex
+/otilde/odieresis/divide/oslash/ugrave/uacute/ucircumflex/udieresis
+/yacute/thorn/ydieresis
+] def
+
+/DrawSplineSection {
+    /y3 exch def
+    /x3 exch def
+    /y2 exch def
+    /x2 exch def
+    /y1 exch def
+    /x1 exch def
+    /xa x1 x2 x1 sub 0.666667 mul add def
+    /ya y1 y2 y1 sub 0.666667 mul add def
+    /xb x3 x2 x3 sub 0.666667 mul add def
+    /yb y3 y2 y3 sub 0.666667 mul add def
+    x1 y1 lineto
+    xa ya xb yb x3 y3 curveto
+    } def
+%%EndProlog
+1.000000 setlinewidth
+%%Page: 1
+90 rotate
+0.12000000 0.12000000 scale
+0 -4958 translate
+4.193000 setlinewidth
+4.193000 setlinewidth
+newpath
+4642 3101 moveto
+4852 3101 lineto
+stroke
+4.193000 setlinewidth
+newpath
+4402 2951 moveto
+4402 2802 lineto
+stroke
+4.193000 setlinewidth
+newpath
+4073 3041 moveto
+4283 3041 lineto
+stroke
+4.193000 setlinewidth
+newpath
+4073 3161 moveto
+4283 3161 lineto
+stroke
+4.193000 setlinewidth
+newpath
+4402 3251 moveto
+4402 3341 lineto
+stroke
+4.193000 setlinewidth
+newpath
+4073 3940 moveto
+4283 3940 lineto
+stroke
+4.193000 setlinewidth
+newpath
+4073 4060 moveto
+4283 4060 lineto
+stroke
+newpath
+4393 4339 moveto
+4412 4339 lineto
+4412 4319 lineto
+4393 4319 lineto
+closepath
+fill
+4.193000 setlinewidth
+newpath
+4393 4339 moveto
+4412 4339 lineto
+4412 4319 lineto
+4393 4319 lineto
+closepath
+stroke
+4.193000 setlinewidth
+newpath
+4402 4149 moveto
+4402 4329 lineto
+stroke
+4.193000 setlinewidth
+newpath
+4402 3850 moveto
+4402 3790 lineto
+stroke
+4.193000 setlinewidth
+newpath
+4642 4000 moveto
+4852 4000 lineto
+stroke
+4.193000 setlinewidth
+newpath
+4343 2981 moveto
+4582 3101 lineto
+4343 3221 lineto
+4343 2981 lineto
+stroke
+4.193000 setlinewidth
+newpath
+4402 3011 moveto
+4402 2951 lineto
+stroke
+4.193000 setlinewidth
+newpath
+4390 3026 moveto
+4414 3036 lineto
+4390 3047 lineto
+stroke
+4.193000 setlinewidth
+newpath
+4404 3052 moveto
+4404 3068 lineto
+stroke
+4.193000 setlinewidth
+newpath
+4412 3060 moveto
+4396 3060 lineto
+stroke
+4.193000 setlinewidth
+newpath
+4396 2973 moveto
+4394 2971 lineto
+4386 2971 lineto
+4383 2973 lineto
+4383 2987 lineto
+4381 2989 lineto
+4376 2989 lineto
+4373 2987 lineto
+4373 2973 lineto
+4376 2971 lineto
+4381 2971 lineto
+4383 2973 lineto
+stroke
+4.193000 setlinewidth
+newpath
+4383 2987 moveto
+4386 2989 lineto
+4394 2989 lineto
+4396 2987 lineto
+4396 2973 lineto
+stroke
+4.193000 setlinewidth
+newpath
+4582 3101 moveto
+4642 3101 lineto
+stroke
+4.193000 setlinewidth
+newpath
+4601 3131 moveto
+4620 3131 lineto
+4601 3107 lineto
+stroke
+4.193000 setlinewidth
+newpath
+4283 3161 moveto
+4343 3161 lineto
+stroke
+4.193000 setlinewidth
+newpath
+4359 3159 moveto
+4373 3159 lineto
+stroke
+4.193000 setlinewidth
+newpath
+4320 3188 moveto
+4318 3191 lineto
+4304 3191 lineto
+4302 3188 lineto
+4302 3169 lineto
+4304 3167 lineto
+4318 3167 lineto
+4320 3169 lineto
+4320 3177 lineto
+4318 3180 lineto
+4304 3180 lineto
+4302 3177 lineto
+stroke
+4.193000 setlinewidth
+newpath
+4283 3041 moveto
+4343 3041 lineto
+stroke
+4.193000 setlinewidth
+newpath
+4357 3039 moveto
+4373 3039 lineto
+stroke
+4.193000 setlinewidth
+newpath
+4365 3032 moveto
+4365 3048 lineto
+stroke
+4.193000 setlinewidth
+newpath
+4302 3052 moveto
+4302 3050 lineto
+4304 3047 lineto
+4318 3047 lineto
+4320 3050 lineto
+4320 3057 lineto
+4315 3063 lineto
+4302 3063 lineto
+4302 3071 lineto
+4320 3071 lineto
+stroke
+4.193000 setlinewidth
+newpath
+4402 3191 moveto
+4402 3251 lineto
+stroke
+4.193000 setlinewidth
+newpath
+4390 3129 moveto
+4414 3140 lineto
+4390 3150 lineto
+stroke
+4.193000 setlinewidth
+newpath
+4404 3157 moveto
+4404 3171 lineto
+stroke
+4.193000 setlinewidth
+newpath
+4396 3223 moveto
+4373 3223 lineto
+4392 3210 lineto
+4392 3229 lineto
+stroke
+4.193000 setlinewidth
+newpath
+4436 2999 moveto
+4436 2967 lineto
+4440 2963 lineto
+4460 2963 lineto
+4464 2967 lineto
+4464 2999 lineto
+stroke
+4.193000 setlinewidth
+newpath
+4504 2963 moveto
+4476 2963 lineto
+4476 2975 lineto
+4480 2979 lineto
+4499 2979 lineto
+4504 2983 lineto
+4504 2995 lineto
+4499 2999 lineto
+4480 2999 lineto
+4476 2995 lineto
+stroke
+4.193000 setlinewidth
+newpath
+4515 2963 moveto
+4515 2999 lineto
+4539 2999 lineto
+4543 2995 lineto
+4543 2987 lineto
+4539 2983 lineto
+4515 2983 lineto
+stroke
+4.193000 setlinewidth
+newpath
+4539 2983 moveto
+4543 2975 lineto
+4543 2967 lineto
+4539 2963 lineto
+4515 2963 lineto
+stroke
+4.193000 setlinewidth
+newpath
+4440 3233 moveto
+4436 3237 lineto
+4436 3265 lineto
+4440 3269 lineto
+4460 3269 lineto
+4464 3265 lineto
+4464 3237 lineto
+4460 3233 lineto
+4440 3233 lineto
+stroke
+4.193000 setlinewidth
+newpath
+4476 3233 moveto
+4476 3269 lineto
+4499 3269 lineto
+4504 3265 lineto
+4504 3253 lineto
+4499 3249 lineto
+4476 3249 lineto
+stroke
+4.193000 setlinewidth
+newpath
+4515 3233 moveto
+4515 3261 lineto
+4523 3269 lineto
+4535 3269 lineto
+4543 3261 lineto
+4543 3233 lineto
+stroke
+4.193000 setlinewidth
+newpath
+4515 3253 moveto
+4543 3253 lineto
+stroke
+4.193000 setlinewidth
+newpath
+4583 3233 moveto
+4555 3233 lineto
+4555 3245 lineto
+4559 3249 lineto
+4579 3249 lineto
+4583 3253 lineto
+4583 3265 lineto
+4579 3269 lineto
+4559 3269 lineto
+4555 3265 lineto
+stroke
+4.193000 setlinewidth
+newpath
+4622 3265 moveto
+4618 3269 lineto
+4598 3269 lineto
+4594 3265 lineto
+4594 3237 lineto
+4598 3233 lineto
+4618 3233 lineto
+4622 3237 lineto
+4622 3249 lineto
+4618 3253 lineto
+4598 3253 lineto
+4594 3249 lineto
+stroke
+4.193000 setlinewidth
+newpath
+4634 3269 moveto
+4662 3269 lineto
+4634 3233 lineto
+stroke
+4.193000 setlinewidth
+newpath
+4694 3233 moveto
+4694 3269 lineto
+4673 3241 lineto
+4701 3241 lineto
+stroke
+4.193000 setlinewidth
+newpath
+4343 4119 moveto
+4582 4000 lineto
+4343 3880 lineto
+4343 4119 lineto
+stroke
+4.193000 setlinewidth
+newpath
+4402 4089 moveto
+4402 4149 lineto
+stroke
+4.193000 setlinewidth
+newpath
+4390 4027 moveto
+4414 4038 lineto
+4390 4049 lineto
+stroke
+4.193000 setlinewidth
+newpath
+4404 4054 moveto
+4404 4070 lineto
+stroke
+4.193000 setlinewidth
+newpath
+4412 4061 moveto
+4396 4061 lineto
+stroke
+4.193000 setlinewidth
+newpath
+4396 4111 moveto
+4394 4109 lineto
+4386 4109 lineto
+4383 4111 lineto
+4383 4125 lineto
+4381 4127 lineto
+4376 4127 lineto
+4373 4125 lineto
+4373 4111 lineto
+4376 4109 lineto
+4381 4109 lineto
+4383 4111 lineto
+stroke
+4.193000 setlinewidth
+newpath
+4383 4125 moveto
+4386 4127 lineto
+4394 4127 lineto
+4396 4125 lineto
+4396 4111 lineto
+stroke
+4.193000 setlinewidth
+newpath
+4582 4000 moveto
+4642 4000 lineto
+stroke
+4.193000 setlinewidth
+newpath
+4607 4006 moveto
+4617 4006 lineto
+stroke
+4.193000 setlinewidth
+newpath
+4612 4006 moveto
+4612 4030 lineto
+stroke
+4.193000 setlinewidth
+newpath
+4612 4027 moveto
+4607 4021 lineto
+stroke
+4.193000 setlinewidth
+newpath
+4283 3940 moveto
+4343 3940 lineto
+stroke
+4.193000 setlinewidth
+newpath
+4359 3938 moveto
+4373 3938 lineto
+stroke
+4.193000 setlinewidth
+newpath
+4320 3946 moveto
+4302 3946 lineto
+4302 3954 lineto
+4304 3956 lineto
+4318 3956 lineto
+4320 3959 lineto
+4320 3967 lineto
+4318 3970 lineto
+4304 3970 lineto
+4302 3967 lineto
+stroke
+4.193000 setlinewidth
+newpath
+4283 4060 moveto
+4343 4060 lineto
+stroke
+4.193000 setlinewidth
+newpath
+4357 4058 moveto
+4373 4058 lineto
+stroke
+4.193000 setlinewidth
+newpath
+4365 4050 moveto
+4365 4066 lineto
+stroke
+4.193000 setlinewidth
+newpath
+4302 4089 moveto
+4320 4089 lineto
+4320 4086 lineto
+4310 4079 lineto
+4318 4079 lineto
+4320 4076 lineto
+4320 4068 lineto
+4318 4066 lineto
+4304 4066 lineto
+4302 4068 lineto
+stroke
+4.193000 setlinewidth
+newpath
+4402 3910 moveto
+4402 3850 lineto
+stroke
+4.193000 setlinewidth
+newpath
+4390 3924 moveto
+4414 3935 lineto
+4390 3946 lineto
+stroke
+4.193000 setlinewidth
+newpath
+4404 3953 moveto
+4404 3967 lineto
+stroke
+4.193000 setlinewidth
+newpath
+4396 3882 moveto
+4373 3882 lineto
+4392 3869 lineto
+4392 3888 lineto
+stroke
+4.193000 setlinewidth
+newpath
+4436 4137 moveto
+4436 4105 lineto
+4440 4101 lineto
+4460 4101 lineto
+4464 4105 lineto
+4464 4137 lineto
+stroke
+4.193000 setlinewidth
+newpath
+4504 4101 moveto
+4476 4101 lineto
+4476 4113 lineto
+4480 4117 lineto
+4499 4117 lineto
+4504 4121 lineto
+4504 4133 lineto
+4499 4137 lineto
+4480 4137 lineto
+4476 4133 lineto
+stroke
+4.193000 setlinewidth
+newpath
+4515 4101 moveto
+4515 4129 lineto
+4523 4137 lineto
+4535 4137 lineto
+4543 4129 lineto
+4543 4101 lineto
+stroke
+4.193000 setlinewidth
+newpath
+4515 4121 moveto
+4543 4121 lineto
+stroke
+4.193000 setlinewidth
+newpath
+4440 3832 moveto
+4436 3836 lineto
+4436 3864 lineto
+4440 3868 lineto
+4460 3868 lineto
+4464 3864 lineto
+4464 3836 lineto
+4460 3832 lineto
+4440 3832 lineto
+stroke
+4.193000 setlinewidth
+newpath
+4476 3832 moveto
+4476 3868 lineto
+4499 3868 lineto
+4504 3864 lineto
+4504 3852 lineto
+4499 3848 lineto
+4476 3848 lineto
+stroke
+4.193000 setlinewidth
+newpath
+4515 3832 moveto
+4515 3859 lineto
+4523 3868 lineto
+4535 3868 lineto
+4543 3859 lineto
+4543 3832 lineto
+stroke
+4.193000 setlinewidth
+newpath
+4515 3852 moveto
+4543 3852 lineto
+stroke
+4.193000 setlinewidth
+newpath
+4583 3832 moveto
+4555 3832 lineto
+4555 3844 lineto
+4559 3848 lineto
+4579 3848 lineto
+4583 3852 lineto
+4583 3864 lineto
+4579 3868 lineto
+4559 3868 lineto
+4555 3864 lineto
+stroke
+4.193000 setlinewidth
+newpath
+4622 3864 moveto
+4618 3868 lineto
+4598 3868 lineto
+4594 3864 lineto
+4594 3836 lineto
+4598 3832 lineto
+4618 3832 lineto
+4622 3836 lineto
+4622 3848 lineto
+4618 3852 lineto
+4598 3852 lineto
+4594 3848 lineto
+stroke
+4.193000 setlinewidth
+newpath
+4634 3868 moveto
+4662 3868 lineto
+4634 3832 lineto
+stroke
+4.193000 setlinewidth
+newpath
+4694 3832 moveto
+4694 3868 lineto
+4673 3840 lineto
+4701 3840 lineto
+stroke
+newpath
+4842 2482 moveto
+4861 2482 lineto
+4861 2463 lineto
+4842 2463 lineto
+closepath
+fill
+4.193000 setlinewidth
+newpath
+4842 2482 moveto
+4861 2482 lineto
+4861 2463 lineto
+4842 2463 lineto
+closepath
+stroke
+4.193000 setlinewidth
+newpath
+4852 2472 moveto
+4852 2203 lineto
+stroke
+4.193000 setlinewidth
+newpath
+4852 2203 moveto
+4942 2203 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5331 2382 moveto
+5331 2472 lineto
+stroke
+4.193000 setlinewidth
+newpath
+4642 2472 moveto
+5331 2472 lineto
+stroke
+4.193000 setlinewidth
+newpath
+4193 2472 moveto
+4402 2472 lineto
+stroke
+4.193000 setlinewidth
+newpath
+4193 2472 moveto
+4193 2233 lineto
+stroke
+newpath
+4842 1823 moveto
+4861 1823 lineto
+4861 1804 lineto
+4842 1804 lineto
+closepath
+fill
+4.193000 setlinewidth
+newpath
+4842 1823 moveto
+4861 1823 lineto
+4861 1804 lineto
+4842 1804 lineto
+closepath
+stroke
+4.193000 setlinewidth
+newpath
+4852 2083 moveto
+4942 2083 lineto
+stroke
+4.193000 setlinewidth
+newpath
+4852 2083 moveto
+4852 1813 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5331 1903 moveto
+5331 1813 lineto
+stroke
+4.193000 setlinewidth
+newpath
+4642 1813 moveto
+5331 1813 lineto
+stroke
+4.193000 setlinewidth
+newpath
+4193 1813 moveto
+4402 1813 lineto
+stroke
+4.193000 setlinewidth
+newpath
+4193 1813 moveto
+4193 2113 lineto
+stroke
+4.193000 setlinewidth
+newpath
+4073 825 moveto
+4402 825 lineto
+stroke
+4.193000 setlinewidth
+newpath
+4073 825 moveto
+4073 1394 lineto
+stroke
+4.193000 setlinewidth
+newpath
+3594 1514 moveto
+4402 1514 lineto
+stroke
+newpath
+4872 1523 moveto
+4891 1523 lineto
+4891 1504 lineto
+4872 1504 lineto
+closepath
+fill
+4.193000 setlinewidth
+newpath
+4872 1523 moveto
+4891 1523 lineto
+4891 1504 lineto
+4872 1504 lineto
+closepath
+stroke
+4.193000 setlinewidth
+newpath
+4882 1514 moveto
+4882 1214 lineto
+stroke
+4.193000 setlinewidth
+newpath
+4882 1214 moveto
+4942 1214 lineto
+stroke
+4.193000 setlinewidth
+newpath
+4642 1514 moveto
+5331 1514 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5331 1514 moveto
+5331 1394 lineto
+stroke
+newpath
+4872 835 moveto
+4891 835 lineto
+4891 815 lineto
+4872 815 lineto
+closepath
+fill
+4.193000 setlinewidth
+newpath
+4872 835 moveto
+4891 835 lineto
+4891 815 lineto
+4872 815 lineto
+closepath
+stroke
+4.193000 setlinewidth
+newpath
+4882 825 moveto
+4882 1095 lineto
+stroke
+4.193000 setlinewidth
+newpath
+4882 1095 moveto
+4942 1095 lineto
+stroke
+4.193000 setlinewidth
+newpath
+4642 825 moveto
+5331 825 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5331 825 moveto
+5331 915 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5391 885 moveto
+5391 705 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5391 1424 moveto
+5391 1604 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5630 1005 moveto
+5750 1005 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5630 1304 moveto
+5780 1304 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5391 1873 moveto
+5391 1694 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5391 2412 moveto
+5391 2592 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5630 2293 moveto
+5780 2293 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5630 1993 moveto
+5750 1993 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5421 3640 30 30 0 360 ellipse
+stroke
+4.193000 setlinewidth
+newpath
+5660 3640 0 0 0 360 ellipse
+stroke
+4.193000 setlinewidth
+newpath
+5480 3491 30 30 272 358 ellipse
+5480 3491 lineto
+stroke
+fill
+4.193000 setlinewidth
+newpath
+5600 3670 30 30 181 268 ellipse
+5600 3670 lineto
+stroke
+fill
+4.193000 setlinewidth
+newpath
+5481 3550 30 30 268 1 ellipse
+5481 3550 lineto
+stroke
+fill
+4.193000 setlinewidth
+newpath
+5526 3461 moveto
+5526 3700 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5600 3670 30 30 91 178 ellipse
+5600 3670 lineto
+stroke
+fill
+4.193000 setlinewidth
+newpath
+5600 3550 30 30 181 268 ellipse
+5600 3550 lineto
+stroke
+fill
+4.193000 setlinewidth
+newpath
+5481 3670 30 30 358 91 ellipse
+5481 3670 lineto
+stroke
+fill
+4.193000 setlinewidth
+newpath
+5600 3550 30 30 91 178 ellipse
+5600 3550 lineto
+stroke
+fill
+4.193000 setlinewidth
+newpath
+5555 3700 moveto
+5555 3461 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5600 3610 30 30 91 178 ellipse
+5600 3610 lineto
+stroke
+fill
+4.193000 setlinewidth
+newpath
+5480 3491 30 30 358 88 ellipse
+5480 3491 lineto
+stroke
+fill
+4.193000 setlinewidth
+newpath
+5481 3610 30 30 268 1 ellipse
+5481 3610 lineto
+stroke
+fill
+4.193000 setlinewidth
+newpath
+5600 3491 30 30 181 268 ellipse
+5600 3491 lineto
+stroke
+fill
+4.193000 setlinewidth
+newpath
+5481 3610 30 30 358 91 ellipse
+5481 3610 lineto
+stroke
+fill
+4.193000 setlinewidth
+newpath
+5481 3670 30 30 268 1 ellipse
+5481 3670 lineto
+stroke
+fill
+4.193000 setlinewidth
+newpath
+5481 3550 30 30 358 91 ellipse
+5481 3550 lineto
+stroke
+fill
+4.193000 setlinewidth
+newpath
+5600 3610 30 30 181 268 ellipse
+5600 3610 lineto
+stroke
+fill
+4.193000 setlinewidth
+newpath
+5600 3491 30 30 91 178 ellipse
+5600 3491 lineto
+stroke
+fill
+4.193000 setlinewidth
+newpath
+5660 3640 30 30 0 360 ellipse
+stroke
+4.193000 setlinewidth
+newpath
+5301 3461 moveto
+5481 3461 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5403 3498 moveto
+5399 3502 lineto
+5379 3502 lineto
+5375 3498 lineto
+5375 3470 lineto
+5379 3467 lineto
+5399 3467 lineto
+5403 3470 lineto
+5403 3482 lineto
+5399 3486 lineto
+5379 3486 lineto
+5375 3482 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5301 3580 moveto
+5481 3580 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5401 3586 moveto
+5378 3586 lineto
+5378 3596 lineto
+5381 3600 lineto
+5397 3600 lineto
+5401 3603 lineto
+5401 3613 lineto
+5397 3616 lineto
+5381 3616 lineto
+5378 3613 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5301 3700 moveto
+5481 3700 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5395 3706 moveto
+5395 3742 lineto
+5375 3714 lineto
+5403 3714 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5600 3461 moveto
+5780 3461 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5674 3502 moveto
+5702 3502 lineto
+5702 3498 lineto
+5686 3486 lineto
+5698 3486 lineto
+5702 3482 lineto
+5702 3470 lineto
+5698 3467 lineto
+5678 3467 lineto
+5674 3470 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5600 3700 moveto
+5780 3700 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5684 3706 moveto
+5697 3706 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5690 3706 moveto
+5690 3736 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5690 3732 moveto
+5684 3726 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5499 3751 moveto
+5536 3751 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5517 3751 moveto
+5517 3709 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5545 3751 moveto
+5578 3751 lineto
+5578 3746 lineto
+5559 3732 lineto
+5573 3732 lineto
+5578 3728 lineto
+5578 3713 lineto
+5573 3709 lineto
+5549 3709 lineto
+5545 3713 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5360 3380 moveto
+5360 3412 lineto
+5370 3422 lineto
+5384 3422 lineto
+5393 3412 lineto
+5393 3380 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5360 3402 moveto
+5393 3402 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5411 3380 moveto
+5411 3422 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5406 3422 moveto
+5434 3422 lineto
+5439 3417 lineto
+5439 3384 lineto
+5434 3380 lineto
+5406 3380 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5452 3422 moveto
+5490 3422 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5471 3422 moveto
+5471 3380 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5508 3380 moveto
+5527 3380 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5517 3380 moveto
+5517 3422 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5517 3417 moveto
+5508 3407 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5549 3398 moveto
+5573 3398 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5591 3389 moveto
+5591 3384 lineto
+5596 3380 lineto
+5619 3380 lineto
+5624 3384 lineto
+5624 3398 lineto
+5614 3407 lineto
+5591 3407 lineto
+5591 3422 lineto
+5624 3422 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5642 3398 moveto
+5665 3398 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5693 3380 moveto
+5711 3380 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5702 3380 moveto
+5702 3422 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5702 3417 moveto
+5693 3407 lineto
+stroke
+4.193000 setlinewidth
+newpath
+2857 649 moveto
+2857 681 lineto
+stroke
+4.193000 setlinewidth
+newpath
+2857 665 moveto
+2893 665 lineto
+stroke
+4.193000 setlinewidth
+newpath
+2893 689 moveto
+2857 717 lineto
+stroke
+4.193000 setlinewidth
+newpath
+2857 689 moveto
+2893 717 lineto
+stroke
+4.193000 setlinewidth
+newpath
+2893 732 moveto
+2889 728 lineto
+2861 728 lineto
+2857 732 lineto
+2857 752 lineto
+2861 756 lineto
+2889 756 lineto
+2893 752 lineto
+2893 732 lineto
+stroke
+4.193000 setlinewidth
+newpath
+2893 796 moveto
+2893 768 lineto
+2857 768 lineto
+2857 796 lineto
+stroke
+4.193000 setlinewidth
+newpath
+2873 768 moveto
+2873 784 lineto
+stroke
+4.193000 setlinewidth
+newpath
+2893 835 moveto
+2893 807 lineto
+2881 807 lineto
+2877 811 lineto
+2877 831 lineto
+2873 835 lineto
+2861 835 lineto
+2857 831 lineto
+2857 811 lineto
+2861 807 lineto
+stroke
+4.193000 setlinewidth
+newpath
+2875 885 moveto
+2893 867 lineto
+2893 849 lineto
+2857 849 lineto
+2857 867 lineto
+2875 885 lineto
+stroke
+4.193000 setlinewidth
+newpath
+2875 885 moveto
+2875 1514 lineto
+stroke
+4.193000 setlinewidth
+newpath
+2875 1514 moveto
+3055 1514 lineto
+stroke
+4.193000 setlinewidth
+newpath
+988 4449 moveto
+988 3970 lineto
+stroke
+4.193000 setlinewidth
+newpath
+809 4329 moveto
+809 3970 lineto
+stroke
+4.193000 setlinewidth
+newpath
+809 3640 moveto
+988 3640 lineto
+stroke
+4.193000 setlinewidth
+newpath
+6020 2293 moveto
+6139 2293 lineto
+stroke
+newpath
+2416 3290 moveto
+2435 3290 lineto
+2435 3271 lineto
+2416 3271 lineto
+closepath
+fill
+4.193000 setlinewidth
+newpath
+2416 3290 moveto
+2435 3290 lineto
+2435 3271 lineto
+2416 3271 lineto
+closepath
+stroke
+4.193000 setlinewidth
+newpath
+2396 3281 moveto
+3055 3281 lineto
+stroke
+4.193000 setlinewidth
+newpath
+2396 3281 moveto
+2396 3431 lineto
+stroke
+newpath
+919 2662 moveto
+938 2662 lineto
+938 2642 lineto
+919 2642 lineto
+closepath
+fill
+4.193000 setlinewidth
+newpath
+919 2662 moveto
+938 2662 lineto
+938 2642 lineto
+919 2642 lineto
+closepath
+stroke
+4.193000 setlinewidth
+newpath
+928 2682 moveto
+928 2652 lineto
+stroke
+newpath
+919 3021 moveto
+938 3021 lineto
+938 3002 lineto
+919 3002 lineto
+closepath
+fill
+4.193000 setlinewidth
+newpath
+919 3021 moveto
+938 3021 lineto
+938 3002 lineto
+919 3002 lineto
+closepath
+stroke
+4.193000 setlinewidth
+newpath
+928 3011 moveto
+928 2921 lineto
+stroke
+newpath
+3554 4339 moveto
+3573 4339 lineto
+3573 4319 lineto
+3554 4319 lineto
+closepath
+fill
+4.193000 setlinewidth
+newpath
+3554 4339 moveto
+3573 4339 lineto
+3573 4319 lineto
+3554 4319 lineto
+closepath
+stroke
+4.193000 setlinewidth
+newpath
+3564 4329 moveto
+3564 3850 lineto
+stroke
+newpath
+4063 3859 moveto
+4083 3859 lineto
+4083 3840 lineto
+4063 3840 lineto
+closepath
+fill
+4.193000 setlinewidth
+newpath
+4063 3859 moveto
+4083 3859 lineto
+4083 3840 lineto
+4063 3840 lineto
+closepath
+stroke
+4.193000 setlinewidth
+newpath
+3564 3850 moveto
+4073 3850 lineto
+stroke
+4.193000 setlinewidth
+newpath
+3205 3910 moveto
+3324 3910 lineto
+stroke
+4.193000 setlinewidth
+newpath
+3205 3910 moveto
+3205 4000 lineto
+stroke
+4.193000 setlinewidth
+newpath
+3205 4239 moveto
+3205 4329 lineto
+stroke
+4.193000 setlinewidth
+newpath
+3205 4329 moveto
+3774 4329 lineto
+stroke
+4.193000 setlinewidth
+newpath
+4073 4329 moveto
+5660 4329 lineto
+stroke
+4.193000 setlinewidth
+newpath
+2815 2233 moveto
+3055 2233 lineto
+stroke
+4.193000 setlinewidth
+newpath
+2815 2233 moveto
+2815 885 lineto
+stroke
+4.193000 setlinewidth
+newpath
+2725 2323 moveto
+3055 2323 lineto
+stroke
+4.193000 setlinewidth
+newpath
+2366 1604 moveto
+2426 1604 lineto
+stroke
+4.193000 setlinewidth
+newpath
+1917 1184 moveto
+2066 1184 lineto
+stroke
+newpath
+3794 2332 moveto
+3813 2332 lineto
+3813 2313 lineto
+3794 2313 lineto
+closepath
+fill
+4.193000 setlinewidth
+newpath
+3794 2332 moveto
+3813 2332 lineto
+3813 2313 lineto
+3794 2313 lineto
+closepath
+stroke
+4.193000 setlinewidth
+newpath
+3594 2323 moveto
+3803 2323 lineto
+stroke
+4.193000 setlinewidth
+newpath
+3803 2592 moveto
+3803 1604 lineto
+stroke
+4.193000 setlinewidth
+newpath
+3594 1604 moveto
+3803 1604 lineto
+stroke
+4.193000 setlinewidth
+newpath
+3594 1394 moveto
+4073 1394 lineto
+stroke
+4.193000 setlinewidth
+newpath
+3594 2113 moveto
+4193 2113 lineto
+stroke
+4.193000 setlinewidth
+newpath
+2366 1604 moveto
+2366 1873 lineto
+stroke
+4.193000 setlinewidth
+newpath
+3594 2023 moveto
+3923 2023 lineto
+stroke
+4.193000 setlinewidth
+newpath
+3923 2023 moveto
+3923 915 lineto
+stroke
+newpath
+2925 2033 moveto
+2945 2033 lineto
+2945 2013 lineto
+2925 2013 lineto
+closepath
+fill
+4.193000 setlinewidth
+newpath
+2925 2033 moveto
+2945 2033 lineto
+2945 2013 lineto
+2925 2013 lineto
+closepath
+stroke
+newpath
+2925 1404 moveto
+2945 1404 lineto
+2945 1385 lineto
+2925 1385 lineto
+closepath
+fill
+4.193000 setlinewidth
+newpath
+2925 1404 moveto
+2945 1404 lineto
+2945 1385 lineto
+2925 1385 lineto
+closepath
+stroke
+4.193000 setlinewidth
+newpath
+2935 2113 moveto
+3055 2113 lineto
+stroke
+4.193000 setlinewidth
+newpath
+2935 2113 moveto
+2935 1005 lineto
+stroke
+4.193000 setlinewidth
+newpath
+2935 1394 moveto
+3055 1394 lineto
+stroke
+newpath
+2536 3290 moveto
+2555 3290 lineto
+2555 3271 lineto
+2536 3271 lineto
+closepath
+fill
+4.193000 setlinewidth
+newpath
+2536 3290 moveto
+2555 3290 lineto
+2555 3271 lineto
+2536 3271 lineto
+closepath
+stroke
+newpath
+2446 3290 moveto
+2465 3290 lineto
+2465 3271 lineto
+2446 3271 lineto
+closepath
+fill
+4.193000 setlinewidth
+newpath
+2446 3290 moveto
+2465 3290 lineto
+2465 3271 lineto
+2446 3271 lineto
+closepath
+stroke
+4.193000 setlinewidth
+newpath
+2456 3431 moveto
+2456 3281 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5780 3700 moveto
+5870 3700 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5391 705 moveto
+5481 705 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5391 1694 moveto
+5481 1694 lineto
+stroke
+4.193000 setlinewidth
+newpath
+719 2652 moveto
+719 2472 lineto
+stroke
+newpath
+799 3650 moveto
+818 3650 lineto
+818 3631 lineto
+799 3631 lineto
+closepath
+fill
+4.193000 setlinewidth
+newpath
+799 3650 moveto
+818 3650 lineto
+818 3631 lineto
+799 3631 lineto
+closepath
+stroke
+4.193000 setlinewidth
+newpath
+809 3730 moveto
+809 3580 lineto
+stroke
+newpath
+799 4099 moveto
+818 4099 lineto
+818 4080 lineto
+799 4080 lineto
+closepath
+fill
+4.193000 setlinewidth
+newpath
+799 4099 moveto
+818 4099 lineto
+818 4080 lineto
+799 4080 lineto
+closepath
+stroke
+4.193000 setlinewidth
+newpath
+5391 2592 moveto
+5511 2592 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5391 1604 moveto
+5481 1604 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5750 1005 moveto
+5750 885 lineto
+stroke
+newpath
+2057 1194 moveto
+2076 1194 lineto
+2076 1175 lineto
+2057 1175 lineto
+closepath
+fill
+4.193000 setlinewidth
+newpath
+2057 1194 moveto
+2076 1194 lineto
+2076 1175 lineto
+2057 1175 lineto
+closepath
+stroke
+4.193000 setlinewidth
+newpath
+1917 1514 moveto
+1917 1634 lineto
+stroke
+newpath
+2296 1643 moveto
+2316 1643 lineto
+2316 1624 lineto
+2296 1624 lineto
+closepath
+fill
+4.193000 setlinewidth
+newpath
+2296 1643 moveto
+2316 1643 lineto
+2316 1624 lineto
+2296 1624 lineto
+closepath
+stroke
+4.193000 setlinewidth
+newpath
+1917 1634 moveto
+2306 1634 lineto
+stroke
+4.193000 setlinewidth
+newpath
+2216 2113 moveto
+2366 2113 lineto
+stroke
+4.193000 setlinewidth
+newpath
+1677 1783 moveto
+1677 1873 lineto
+stroke
+4.193000 setlinewidth
+newpath
+1677 1873 moveto
+1737 1873 lineto
+stroke
+newpath
+5561 3949 moveto
+5580 3949 lineto
+5580 3930 lineto
+5561 3930 lineto
+closepath
+fill
+4.193000 setlinewidth
+newpath
+5561 3949 moveto
+5580 3949 lineto
+5580 3930 lineto
+5561 3930 lineto
+closepath
+stroke
+4.193000 setlinewidth
+newpath
+5570 4000 moveto
+5570 3910 lineto
+stroke
+newpath
+5561 4339 moveto
+5580 4339 lineto
+5580 4319 lineto
+5561 4319 lineto
+closepath
+fill
+4.193000 setlinewidth
+newpath
+5561 4339 moveto
+5580 4339 lineto
+5580 4319 lineto
+5561 4319 lineto
+closepath
+stroke
+4.193000 setlinewidth
+newpath
+5570 4239 moveto
+5570 4329 lineto
+stroke
+4.193000 setlinewidth
+newpath
+4492 2682 moveto
+4822 2682 lineto
+stroke
+newpath
+4812 3111 moveto
+4831 3111 lineto
+4831 3092 lineto
+4812 3092 lineto
+closepath
+fill
+4.193000 setlinewidth
+newpath
+4812 3111 moveto
+4831 3111 lineto
+4831 3092 lineto
+4812 3092 lineto
+closepath
+stroke
+4.193000 setlinewidth
+newpath
+4822 2682 moveto
+4822 3101 lineto
+stroke
+4.193000 setlinewidth
+newpath
+4133 2682 moveto
+4193 2682 lineto
+stroke
+newpath
+4123 3051 moveto
+4143 3051 lineto
+4143 3032 lineto
+4123 3032 lineto
+closepath
+fill
+4.193000 setlinewidth
+newpath
+4123 3051 moveto
+4143 3051 lineto
+4143 3032 lineto
+4123 3032 lineto
+closepath
+stroke
+4.193000 setlinewidth
+newpath
+4133 2682 moveto
+4133 3041 lineto
+stroke
+4.193000 setlinewidth
+newpath
+3684 3041 moveto
+3774 3041 lineto
+stroke
+4.193000 setlinewidth
+newpath
+3684 3041 moveto
+3684 3491 lineto
+stroke
+4.193000 setlinewidth
+newpath
+3594 3491 moveto
+3684 3491 lineto
+stroke
+4.193000 setlinewidth
+newpath
+4073 3940 moveto
+4073 3161 lineto
+stroke
+newpath
+4812 4009 moveto
+4831 4009 lineto
+4831 3990 lineto
+4812 3990 lineto
+closepath
+fill
+4.193000 setlinewidth
+newpath
+4812 4009 moveto
+4831 4009 lineto
+4831 3990 lineto
+4812 3990 lineto
+closepath
+stroke
+4.193000 setlinewidth
+newpath
+4133 4479 moveto
+4253 4479 lineto
+stroke
+newpath
+4123 4069 moveto
+4143 4069 lineto
+4143 4050 lineto
+4123 4050 lineto
+closepath
+fill
+4.193000 setlinewidth
+newpath
+4123 4069 moveto
+4143 4069 lineto
+4143 4050 lineto
+4123 4050 lineto
+closepath
+stroke
+4.193000 setlinewidth
+newpath
+4133 4479 moveto
+4133 4060 lineto
+stroke
+4.193000 setlinewidth
+newpath
+3684 4060 moveto
+3774 4060 lineto
+stroke
+4.193000 setlinewidth
+newpath
+3684 4060 moveto
+3684 3730 lineto
+stroke
+4.193000 setlinewidth
+newpath
+3594 3730 moveto
+3684 3730 lineto
+stroke
+4.193000 setlinewidth
+newpath
+4552 4479 moveto
+4822 4479 lineto
+stroke
+4.193000 setlinewidth
+newpath
+4822 4479 moveto
+4822 4000 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5271 3700 moveto
+5301 3700 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5271 3700 moveto
+5271 4000 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5151 4000 moveto
+5271 4000 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5271 3461 moveto
+5301 3461 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5271 3461 moveto
+5271 3101 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5151 3101 moveto
+5271 3101 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5840 3281 moveto
+5840 3461 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5421 4239 moveto
+5421 4329 lineto
+stroke
+newpath
+5411 4339 moveto
+5430 4339 lineto
+5430 4319 lineto
+5411 4319 lineto
+closepath
+fill
+4.193000 setlinewidth
+newpath
+5411 4339 moveto
+5430 4339 lineto
+5430 4319 lineto
+5411 4319 lineto
+closepath
+stroke
+4.193000 setlinewidth
+newpath
+5421 4000 moveto
+5421 3940 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5421 3940 moveto
+5570 3940 lineto
+stroke
+4.193000 setlinewidth
+newpath
+2216 1873 moveto
+2366 1873 lineto
+stroke
+4.193000 setlinewidth
+newpath
+2216 1993 moveto
+2306 1993 lineto
+stroke
+4.193000 setlinewidth
+newpath
+2306 1993 moveto
+2306 1544 lineto
+stroke
+4.193000 setlinewidth
+newpath
+2066 1514 moveto
+2066 1634 lineto
+stroke
+newpath
+2057 1643 moveto
+2076 1643 lineto
+2076 1624 lineto
+2057 1624 lineto
+closepath
+fill
+4.193000 setlinewidth
+newpath
+2057 1643 moveto
+2076 1643 lineto
+2076 1624 lineto
+2057 1624 lineto
+closepath
+stroke
+4.193000 setlinewidth
+newpath
+1917 1184 moveto
+1917 1274 lineto
+stroke
+4.193000 setlinewidth
+newpath
+2066 1095 moveto
+2066 1274 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5750 1993 moveto
+5750 1843 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5930 4329 moveto
+6199 4329 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5780 3461 moveto
+5840 3461 lineto
+stroke
+newpath
+979 4249 moveto
+998 4249 lineto
+998 4230 lineto
+979 4230 lineto
+closepath
+fill
+4.193000 setlinewidth
+newpath
+979 4249 moveto
+998 4249 lineto
+998 4230 lineto
+979 4230 lineto
+closepath
+stroke
+4.193000 setlinewidth
+newpath
+988 3640 moveto
+988 3730 lineto
+stroke
+4.193000 setlinewidth
+newpath
+659 3011 moveto
+659 3101 lineto
+stroke
+4.193000 setlinewidth
+newpath
+6110 3700 moveto
+6229 3700 lineto
+stroke
+4.193000 setlinewidth
+newpath
+3055 3281 moveto
+3055 3491 lineto
+stroke
+4.193000 setlinewidth
+newpath
+3055 3491 moveto
+3115 3491 lineto
+stroke
+4.193000 setlinewidth
+newpath
+2426 3281 moveto
+2426 3431 lineto
+stroke
+4.193000 setlinewidth
+newpath
+2576 3431 moveto
+2576 3281 lineto
+stroke
+newpath
+2566 3290 moveto
+2585 3290 lineto
+2585 3271 lineto
+2566 3271 lineto
+closepath
+fill
+4.193000 setlinewidth
+newpath
+2566 3290 moveto
+2585 3290 lineto
+2585 3271 lineto
+2566 3271 lineto
+closepath
+stroke
+4.193000 setlinewidth
+newpath
+2546 3191 moveto
+2546 3431 lineto
+stroke
+4.193000 setlinewidth
+newpath
+2905 3730 moveto
+3115 3730 lineto
+stroke
+4.193000 setlinewidth
+newpath
+2935 1304 moveto
+3055 1304 lineto
+stroke
+newpath
+2925 1314 moveto
+2945 1314 lineto
+2945 1295 lineto
+2925 1295 lineto
+closepath
+fill
+4.193000 setlinewidth
+newpath
+2925 1314 moveto
+2945 1314 lineto
+2945 1295 lineto
+2925 1295 lineto
+closepath
+stroke
+4.193000 setlinewidth
+newpath
+3803 915 moveto
+3803 1304 lineto
+stroke
+4.193000 setlinewidth
+newpath
+3594 1304 moveto
+3803 1304 lineto
+stroke
+4.193000 setlinewidth
+newpath
+2366 2113 moveto
+2366 2323 lineto
+stroke
+4.193000 setlinewidth
+newpath
+3594 2233 moveto
+4193 2233 lineto
+stroke
+4.193000 setlinewidth
+newpath
+1557 2113 moveto
+1737 2113 lineto
+stroke
+4.193000 setlinewidth
+newpath
+1557 2113 moveto
+1557 3730 lineto
+stroke
+4.193000 setlinewidth
+newpath
+1557 3730 moveto
+2096 3730 lineto
+stroke
+4.193000 setlinewidth
+newpath
+2306 885 moveto
+2306 1244 lineto
+stroke
+4.193000 setlinewidth
+newpath
+2725 1604 moveto
+3055 1604 lineto
+stroke
+4.193000 setlinewidth
+newpath
+2366 2323 moveto
+2426 2323 lineto
+stroke
+4.193000 setlinewidth
+newpath
+3324 4269 moveto
+3324 4329 lineto
+stroke
+newpath
+3315 4339 moveto
+3334 4339 lineto
+3334 4319 lineto
+3315 4319 lineto
+closepath
+fill
+4.193000 setlinewidth
+newpath
+3315 4339 moveto
+3334 4339 lineto
+3334 4319 lineto
+3315 4319 lineto
+closepath
+stroke
+4.193000 setlinewidth
+newpath
+3324 3970 moveto
+3324 3880 lineto
+stroke
+newpath
+3315 3919 moveto
+3334 3919 lineto
+3334 3900 lineto
+3315 3900 lineto
+closepath
+fill
+4.193000 setlinewidth
+newpath
+3315 3919 moveto
+3334 3919 lineto
+3334 3900 lineto
+3315 3900 lineto
+closepath
+stroke
+4.193000 setlinewidth
+newpath
+509 3011 moveto
+1138 3011 lineto
+stroke
+4.193000 setlinewidth
+newpath
+1138 3011 moveto
+1138 2921 lineto
+stroke
+newpath
+649 3021 moveto
+668 3021 lineto
+668 3002 lineto
+649 3002 lineto
+closepath
+fill
+4.193000 setlinewidth
+newpath
+649 3021 moveto
+668 3021 lineto
+668 3002 lineto
+649 3002 lineto
+closepath
+stroke
+4.193000 setlinewidth
+newpath
+1138 2682 moveto
+1138 2652 lineto
+stroke
+4.193000 setlinewidth
+newpath
+509 2652 moveto
+1138 2652 lineto
+stroke
+newpath
+709 2662 moveto
+728 2662 lineto
+728 2642 lineto
+709 2642 lineto
+closepath
+fill
+4.193000 setlinewidth
+newpath
+709 2662 moveto
+728 2662 lineto
+728 2642 lineto
+709 2642 lineto
+closepath
+stroke
+4.193000 setlinewidth
+newpath
+2935 2023 moveto
+3055 2023 lineto
+stroke
+4.193000 setlinewidth
+newpath
+2516 3431 moveto
+2516 3281 lineto
+stroke
+newpath
+2506 3290 moveto
+2525 3290 lineto
+2525 3271 lineto
+2506 3271 lineto
+closepath
+fill
+4.193000 setlinewidth
+newpath
+2506 3290 moveto
+2525 3290 lineto
+2525 3271 lineto
+2506 3271 lineto
+closepath
+stroke
+4.193000 setlinewidth
+newpath
+6020 1304 moveto
+6139 1304 lineto
+stroke
+4.193000 setlinewidth
+newpath
+569 4089 moveto
+809 4089 lineto
+stroke
+4.193000 setlinewidth
+newpath
+569 4239 moveto
+988 4239 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5091 4389 moveto
+5091 4329 lineto
+stroke
+newpath
+5082 4339 moveto
+5101 4339 lineto
+5101 4319 lineto
+5082 4319 lineto
+closepath
+fill
+4.193000 setlinewidth
+newpath
+5082 4339 moveto
+5101 4339 lineto
+5101 4319 lineto
+5082 4319 lineto
+closepath
+stroke
+4.193000 setlinewidth
+newpath
+5091 4449 moveto
+5031 4479 lineto
+5091 4509 lineto
+5151 4479 lineto
+5091 4449 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5091 4389 moveto
+5091 4449 lineto
+5091 4449 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5091 4389 moveto
+5091 4389 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5014 4518 moveto
+5014 4536 lineto
+5026 4536 lineto
+5028 4533 lineto
+5028 4527 lineto
+5026 4526 lineto
+5014 4526 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5034 4536 moveto
+5038 4518 lineto
+5042 4524 lineto
+5046 4518 lineto
+5050 4536 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5054 4518 moveto
+5054 4536 lineto
+5066 4536 lineto
+5067 4533 lineto
+5067 4527 lineto
+5066 4526 lineto
+5054 4526 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5060 4526 moveto
+5067 4518 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5073 4518 moveto
+5087 4518 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5093 4518 moveto
+5093 4536 lineto
+5107 4536 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5093 4527 moveto
+5101 4527 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5113 4536 moveto
+5113 4518 lineto
+5129 4518 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5133 4518 moveto
+5133 4532 lineto
+5137 4536 lineto
+5143 4536 lineto
+5146 4532 lineto
+5146 4518 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5133 4527 moveto
+5146 4527 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5164 4533 moveto
+5164 4536 lineto
+5154 4536 lineto
+5152 4533 lineto
+5152 4520 lineto
+5154 4518 lineto
+5164 4518 lineto
+5166 4520 lineto
+5166 4526 lineto
+5160 4526 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5882 1364 moveto
+5882 1244 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5918 1364 moveto
+5918 1244 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5918 1304 moveto
+6020 1304 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5780 1304 moveto
+5882 1304 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5817 1187 moveto
+5814 1184 lineto
+5797 1184 lineto
+5794 1187 lineto
+5794 1211 lineto
+5797 1214 lineto
+5814 1214 lineto
+5817 1211 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5830 1184 moveto
+5847 1184 lineto
+5850 1187 lineto
+5850 1211 lineto
+5847 1214 lineto
+5830 1214 lineto
+5827 1211 lineto
+5827 1201 lineto
+5830 1198 lineto
+5847 1198 lineto
+5850 1201 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5863 1184 moveto
+5860 1187 lineto
+5860 1198 lineto
+5863 1201 lineto
+5880 1201 lineto
+5883 1204 lineto
+5883 1211 lineto
+5880 1214 lineto
+5863 1214 lineto
+5860 1211 lineto
+5860 1204 lineto
+5863 1201 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5880 1201 moveto
+5883 1198 lineto
+5883 1187 lineto
+5880 1184 lineto
+5863 1184 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5966 1184 moveto
+5980 1184 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5973 1184 moveto
+5973 1214 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5973 1211 moveto
+5966 1204 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5993 1204 moveto
+5993 1191 lineto
+5999 1184 lineto
+6010 1184 lineto
+6016 1191 lineto
+6016 1204 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5882 2352 moveto
+5882 2233 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5918 2352 moveto
+5918 2233 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5918 2293 moveto
+6020 2293 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5780 2293 moveto
+5882 2293 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5817 2176 moveto
+5814 2173 lineto
+5797 2173 lineto
+5794 2176 lineto
+5794 2199 lineto
+5797 2203 lineto
+5814 2203 lineto
+5817 2199 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5830 2173 moveto
+5847 2173 lineto
+5850 2176 lineto
+5850 2199 lineto
+5847 2203 lineto
+5830 2203 lineto
+5827 2199 lineto
+5827 2189 lineto
+5830 2186 lineto
+5847 2186 lineto
+5850 2189 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5860 2203 moveto
+5883 2203 lineto
+5860 2173 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5996 2173 moveto
+6010 2173 lineto
+stroke
+4.193000 setlinewidth
+newpath
+6003 2173 moveto
+6003 2203 lineto
+stroke
+4.193000 setlinewidth
+newpath
+6003 2199 moveto
+5996 2193 lineto
+stroke
+4.193000 setlinewidth
+newpath
+6023 2193 moveto
+6023 2179 lineto
+6029 2173 lineto
+6039 2173 lineto
+6046 2179 lineto
+6046 2193 lineto
+stroke
+4.193000 setlinewidth
+newpath
+1078 2784 moveto
+1198 2784 lineto
+stroke
+4.193000 setlinewidth
+newpath
+1078 2820 moveto
+1198 2820 lineto
+stroke
+4.193000 setlinewidth
+newpath
+1138 2820 moveto
+1138 2921 lineto
+stroke
+4.193000 setlinewidth
+newpath
+1138 2784 moveto
+1138 2682 lineto
+stroke
+4.193000 setlinewidth
+newpath
+1194 2850 moveto
+1191 2847 lineto
+1175 2847 lineto
+1171 2850 lineto
+1171 2873 lineto
+1175 2877 lineto
+1191 2877 lineto
+1194 2873 lineto
+stroke
+4.193000 setlinewidth
+newpath
+1208 2847 moveto
+1224 2847 lineto
+1227 2850 lineto
+1227 2873 lineto
+1224 2877 lineto
+1208 2877 lineto
+1204 2873 lineto
+1204 2863 lineto
+1208 2860 lineto
+1224 2860 lineto
+1227 2863 lineto
+stroke
+4.193000 setlinewidth
+newpath
+1237 2853 moveto
+1237 2850 lineto
+1240 2847 lineto
+1257 2847 lineto
+1260 2850 lineto
+1260 2860 lineto
+1254 2866 lineto
+1237 2866 lineto
+1237 2877 lineto
+1260 2877 lineto
+stroke
+4.193000 setlinewidth
+newpath
+1178 2727 moveto
+1191 2727 lineto
+stroke
+4.193000 setlinewidth
+newpath
+1184 2727 moveto
+1184 2757 lineto
+stroke
+4.193000 setlinewidth
+newpath
+1184 2753 moveto
+1178 2747 lineto
+stroke
+4.193000 setlinewidth
+newpath
+1204 2727 moveto
+1227 2757 lineto
+stroke
+4.193000 setlinewidth
+newpath
+1204 2730 moveto
+1204 2753 lineto
+1208 2757 lineto
+1224 2757 lineto
+1227 2753 lineto
+1227 2730 lineto
+1224 2727 lineto
+1208 2727 lineto
+1204 2730 lineto
+stroke
+4.193000 setlinewidth
+newpath
+1237 2727 moveto
+1260 2757 lineto
+stroke
+4.193000 setlinewidth
+newpath
+1237 2730 moveto
+1237 2753 lineto
+1240 2757 lineto
+1257 2757 lineto
+1260 2753 lineto
+1260 2730 lineto
+1257 2727 lineto
+1240 2727 lineto
+1237 2730 lineto
+stroke
+4.193000 setlinewidth
+newpath
+1270 2727 moveto
+1270 2747 lineto
+stroke
+4.193000 setlinewidth
+newpath
+1270 2743 moveto
+1273 2747 lineto
+1287 2747 lineto
+1290 2743 lineto
+1290 2727 lineto
+stroke
+4.193000 setlinewidth
+newpath
+3807 2614 moveto
+3831 2614 lineto
+stroke
+4.193000 setlinewidth
+newpath
+3819 2602 moveto
+3819 2626 lineto
+stroke
+4.193000 setlinewidth
+newpath
+3847 2634 moveto
+3875 2634 lineto
+3875 2630 lineto
+3859 2618 lineto
+3871 2618 lineto
+3875 2614 lineto
+3875 2602 lineto
+3871 2598 lineto
+3851 2598 lineto
+3847 2602 lineto
+stroke
+4.193000 setlinewidth
+newpath
+3898 2598 moveto
+3898 2602 lineto
+stroke
+4.193000 setlinewidth
+newpath
+3926 2634 moveto
+3954 2634 lineto
+3954 2630 lineto
+3938 2618 lineto
+3950 2618 lineto
+3954 2614 lineto
+3954 2602 lineto
+3950 2598 lineto
+3930 2598 lineto
+3926 2602 lineto
+stroke
+4.193000 setlinewidth
+newpath
+3965 2634 moveto
+3981 2598 lineto
+3998 2634 lineto
+stroke
+4.193000 setlinewidth
+newpath
+4005 2598 moveto
+4005 2634 lineto
+4029 2634 lineto
+4033 2630 lineto
+4033 2622 lineto
+4029 2618 lineto
+4005 2618 lineto
+stroke
+4.193000 setlinewidth
+newpath
+4029 2618 moveto
+4033 2610 lineto
+4033 2602 lineto
+4029 2598 lineto
+4005 2598 lineto
+stroke
+4.193000 setlinewidth
+newpath
+2288 689 moveto
+2324 705 lineto
+2288 721 lineto
+stroke
+4.193000 setlinewidth
+newpath
+2324 728 moveto
+2288 728 lineto
+2288 752 lineto
+2292 756 lineto
+2304 756 lineto
+2308 752 lineto
+2308 728 lineto
+stroke
+4.193000 setlinewidth
+newpath
+2308 740 moveto
+2324 756 lineto
+stroke
+4.193000 setlinewidth
+newpath
+2324 796 moveto
+2324 768 lineto
+2288 768 lineto
+2288 796 lineto
+stroke
+4.193000 setlinewidth
+newpath
+2304 768 moveto
+2304 784 lineto
+stroke
+4.193000 setlinewidth
+newpath
+2324 807 moveto
+2288 807 lineto
+2288 835 lineto
+stroke
+4.193000 setlinewidth
+newpath
+2304 807 moveto
+2304 823 lineto
+stroke
+4.193000 setlinewidth
+newpath
+2306 885 moveto
+2324 867 lineto
+2324 849 lineto
+2288 849 lineto
+2288 867 lineto
+2306 885 lineto
+stroke
+4.193000 setlinewidth
+newpath
+3234 1694 moveto
+3414 1694 lineto
+3414 1214 lineto
+3234 1214 lineto
+closepath
+stroke
+4.193000 setlinewidth
+newpath
+3414 1304 moveto
+3594 1304 lineto
+stroke
+4.193000 setlinewidth
+newpath
+3491 1310 moveto
+3491 1333 lineto
+3497 1340 lineto
+3508 1340 lineto
+3514 1333 lineto
+3514 1310 lineto
+stroke
+4.193000 setlinewidth
+newpath
+3491 1326 moveto
+3514 1326 lineto
+stroke
+4.193000 setlinewidth
+newpath
+3491 1275 moveto
+3491 1271 lineto
+3494 1268 lineto
+3511 1268 lineto
+3514 1271 lineto
+3514 1281 lineto
+3508 1288 lineto
+3491 1288 lineto
+3491 1298 lineto
+3514 1298 lineto
+stroke
+4.193000 setlinewidth
+newpath
+3414 1394 moveto
+3594 1394 lineto
+stroke
+4.193000 setlinewidth
+newpath
+3474 1430 moveto
+3487 1413 lineto
+3501 1430 lineto
+stroke
+4.193000 setlinewidth
+newpath
+3487 1413 moveto
+3487 1400 lineto
+stroke
+4.193000 setlinewidth
+newpath
+3530 1400 moveto
+3507 1400 lineto
+3507 1410 lineto
+3511 1413 lineto
+3527 1413 lineto
+3530 1416 lineto
+3530 1426 lineto
+3527 1430 lineto
+3511 1430 lineto
+3507 1426 lineto
+stroke
+4.193000 setlinewidth
+newpath
+3514 1385 moveto
+3511 1388 lineto
+3494 1388 lineto
+3491 1385 lineto
+3491 1361 lineto
+3494 1358 lineto
+3511 1358 lineto
+3514 1361 lineto
+3514 1371 lineto
+3511 1374 lineto
+3494 1374 lineto
+3491 1371 lineto
+stroke
+4.193000 setlinewidth
+newpath
+3414 1514 moveto
+3594 1514 lineto
+stroke
+4.193000 setlinewidth
+newpath
+3474 1550 moveto
+3487 1533 lineto
+3501 1550 lineto
+stroke
+4.193000 setlinewidth
+newpath
+3487 1533 moveto
+3487 1520 lineto
+stroke
+4.193000 setlinewidth
+newpath
+3514 1520 moveto
+3527 1520 lineto
+stroke
+4.193000 setlinewidth
+newpath
+3520 1520 moveto
+3520 1550 lineto
+stroke
+4.193000 setlinewidth
+newpath
+3520 1546 moveto
+3514 1540 lineto
+stroke
+4.193000 setlinewidth
+newpath
+3491 1508 moveto
+3514 1508 lineto
+3491 1478 lineto
+stroke
+4.193000 setlinewidth
+newpath
+3414 1604 moveto
+3594 1604 lineto
+stroke
+4.193000 setlinewidth
+newpath
+3458 1640 moveto
+3471 1610 lineto
+3485 1640 lineto
+stroke
+4.193000 setlinewidth
+newpath
+3514 1613 moveto
+3511 1610 lineto
+3494 1610 lineto
+3491 1613 lineto
+3491 1636 lineto
+3494 1640 lineto
+3511 1640 lineto
+3514 1636 lineto
+stroke
+4.193000 setlinewidth
+newpath
+3547 1613 moveto
+3544 1610 lineto
+3527 1610 lineto
+3524 1613 lineto
+3524 1636 lineto
+3527 1640 lineto
+3544 1640 lineto
+3547 1636 lineto
+stroke
+4.193000 setlinewidth
+newpath
+3494 1568 moveto
+3491 1571 lineto
+3491 1581 lineto
+3494 1584 lineto
+3511 1584 lineto
+3514 1588 lineto
+3514 1594 lineto
+3511 1598 lineto
+3494 1598 lineto
+3491 1594 lineto
+3491 1588 lineto
+3494 1584 lineto
+stroke
+4.193000 setlinewidth
+newpath
+3511 1584 moveto
+3514 1581 lineto
+3514 1571 lineto
+3511 1568 lineto
+3494 1568 lineto
+stroke
+4.193000 setlinewidth
+newpath
+3055 1304 moveto
+3234 1304 lineto
+stroke
+4.193000 setlinewidth
+newpath
+3118 1337 moveto
+3118 1340 lineto
+3102 1340 lineto
+3098 1337 lineto
+3098 1313 lineto
+3102 1310 lineto
+3118 1310 lineto
+3122 1313 lineto
+3122 1323 lineto
+3112 1323 lineto
+stroke
+4.193000 setlinewidth
+newpath
+3131 1310 moveto
+3131 1340 lineto
+3155 1310 lineto
+3155 1340 lineto
+stroke
+4.193000 setlinewidth
+newpath
+3168 1310 moveto
+3168 1340 lineto
+stroke
+4.193000 setlinewidth
+newpath
+3164 1340 moveto
+3184 1340 lineto
+3188 1337 lineto
+3188 1313 lineto
+3184 1310 lineto
+3164 1310 lineto
+stroke
+4.193000 setlinewidth
+newpath
+3148 1268 moveto
+3148 1298 lineto
+3131 1275 lineto
+3155 1275 lineto
+stroke
+4.193000 setlinewidth
+newpath
+3055 1394 moveto
+3234 1394 lineto
+stroke
+4.193000 setlinewidth
+newpath
+3118 1426 moveto
+3118 1430 lineto
+3102 1430 lineto
+3098 1426 lineto
+3098 1403 lineto
+3102 1400 lineto
+3118 1400 lineto
+3122 1403 lineto
+3122 1413 lineto
+3112 1413 lineto
+stroke
+4.193000 setlinewidth
+newpath
+3131 1400 moveto
+3131 1430 lineto
+3155 1400 lineto
+3155 1430 lineto
+stroke
+4.193000 setlinewidth
+newpath
+3168 1400 moveto
+3168 1430 lineto
+stroke
+4.193000 setlinewidth
+newpath
+3164 1430 moveto
+3184 1430 lineto
+3188 1426 lineto
+3188 1403 lineto
+3184 1400 lineto
+3164 1400 lineto
+stroke
+4.193000 setlinewidth
+newpath
+3131 1388 moveto
+3155 1388 lineto
+3155 1385 lineto
+3142 1374 lineto
+3151 1374 lineto
+3155 1371 lineto
+3155 1361 lineto
+3151 1358 lineto
+3135 1358 lineto
+3131 1361 lineto
+stroke
+4.193000 setlinewidth
+newpath
+3055 1514 moveto
+3234 1514 lineto
+stroke
+4.193000 setlinewidth
+newpath
+3102 1520 moveto
+3115 1520 lineto
+stroke
+4.193000 setlinewidth
+newpath
+3109 1520 moveto
+3109 1550 lineto
+stroke
+4.193000 setlinewidth
+newpath
+3102 1550 moveto
+3115 1550 lineto
+stroke
+4.193000 setlinewidth
+newpath
+3131 1520 moveto
+3131 1550 lineto
+3155 1520 lineto
+3155 1550 lineto
+stroke
+4.193000 setlinewidth
+newpath
+3164 1520 moveto
+3164 1550 lineto
+stroke
+4.193000 setlinewidth
+newpath
+3188 1520 moveto
+3188 1550 lineto
+stroke
+4.193000 setlinewidth
+newpath
+3164 1533 moveto
+3188 1533 lineto
+stroke
+4.193000 setlinewidth
+newpath
+3155 1478 moveto
+3131 1478 lineto
+3131 1488 lineto
+3135 1491 lineto
+3151 1491 lineto
+3155 1494 lineto
+3155 1504 lineto
+3151 1508 lineto
+3135 1508 lineto
+3131 1504 lineto
+stroke
+4.193000 setlinewidth
+newpath
+3055 1604 moveto
+3234 1604 lineto
+stroke
+4.193000 setlinewidth
+newpath
+3122 1613 moveto
+3118 1610 lineto
+3102 1610 lineto
+3098 1613 lineto
+3098 1636 lineto
+3102 1640 lineto
+3118 1640 lineto
+3122 1636 lineto
+stroke
+4.193000 setlinewidth
+newpath
+3135 1610 moveto
+3131 1613 lineto
+3131 1636 lineto
+3135 1640 lineto
+3151 1640 lineto
+3155 1636 lineto
+3155 1613 lineto
+3151 1610 lineto
+3135 1610 lineto
+stroke
+4.193000 setlinewidth
+newpath
+3164 1610 moveto
+3164 1640 lineto
+3178 1626 lineto
+3191 1640 lineto
+3191 1610 lineto
+stroke
+4.193000 setlinewidth
+newpath
+3138 1568 moveto
+3151 1568 lineto
+stroke
+4.193000 setlinewidth
+newpath
+3145 1568 moveto
+3145 1598 lineto
+stroke
+4.193000 setlinewidth
+newpath
+3145 1594 moveto
+3138 1588 lineto
+stroke
+4.193000 setlinewidth
+newpath
+3209 1771 moveto
+3209 1739 lineto
+3213 1736 lineto
+3233 1736 lineto
+3237 1739 lineto
+3237 1771 lineto
+stroke
+4.193000 setlinewidth
+newpath
+3276 1736 moveto
+3248 1736 lineto
+3248 1747 lineto
+3252 1751 lineto
+3272 1751 lineto
+3276 1755 lineto
+3276 1767 lineto
+3272 1771 lineto
+3252 1771 lineto
+3248 1767 lineto
+stroke
+4.193000 setlinewidth
+newpath
+3288 1743 moveto
+3288 1739 lineto
+3292 1736 lineto
+3312 1736 lineto
+3316 1739 lineto
+3316 1751 lineto
+3308 1759 lineto
+3288 1759 lineto
+3288 1771 lineto
+3316 1771 lineto
+stroke
+4.193000 setlinewidth
+newpath
+3170 1140 moveto
+3175 1137 lineto
+3194 1137 lineto
+3199 1140 lineto
+3199 1152 lineto
+3194 1156 lineto
+3175 1156 lineto
+3170 1161 lineto
+3170 1168 lineto
+3175 1172 lineto
+3194 1172 lineto
+3199 1168 lineto
+stroke
+4.193000 setlinewidth
+newpath
+3210 1137 moveto
+3210 1172 lineto
+3238 1137 lineto
+3238 1172 lineto
+stroke
+4.193000 setlinewidth
+newpath
+3249 1172 moveto
+3278 1172 lineto
+3249 1137 lineto
+stroke
+4.193000 setlinewidth
+newpath
+3309 1137 moveto
+3309 1172 lineto
+3289 1144 lineto
+3317 1144 lineto
+stroke
+4.193000 setlinewidth
+newpath
+3329 1137 moveto
+3329 1164 lineto
+3337 1172 lineto
+3349 1172 lineto
+3357 1164 lineto
+3357 1137 lineto
+stroke
+4.193000 setlinewidth
+newpath
+3329 1156 moveto
+3357 1156 lineto
+stroke
+4.193000 setlinewidth
+newpath
+3368 1172 moveto
+3368 1140 lineto
+3372 1137 lineto
+3392 1137 lineto
+3396 1140 lineto
+3396 1172 lineto
+stroke
+4.193000 setlinewidth
+newpath
+3436 1140 moveto
+3432 1137 lineto
+3412 1137 lineto
+3408 1140 lineto
+3408 1168 lineto
+3412 1172 lineto
+3432 1172 lineto
+3436 1168 lineto
+stroke
+4.193000 setlinewidth
+newpath
+3475 1137 moveto
+3447 1137 lineto
+3447 1149 lineto
+3451 1152 lineto
+3471 1152 lineto
+3475 1156 lineto
+3475 1168 lineto
+3471 1172 lineto
+3451 1172 lineto
+3447 1168 lineto
+stroke
+4.193000 setlinewidth
+newpath
+3511 1168 moveto
+3511 1172 lineto
+3491 1172 lineto
+3487 1168 lineto
+3487 1140 lineto
+3491 1137 lineto
+3511 1137 lineto
+3515 1140 lineto
+3515 1152 lineto
+3503 1152 lineto
+stroke
+4.193000 setlinewidth
+newpath
+3526 1144 moveto
+3526 1140 lineto
+3530 1137 lineto
+3550 1137 lineto
+3554 1140 lineto
+3554 1152 lineto
+3547 1161 lineto
+3526 1161 lineto
+3526 1172 lineto
+3554 1172 lineto
+stroke
+4.193000 setlinewidth
+newpath
+3566 1172 moveto
+3594 1172 lineto
+3594 1168 lineto
+3578 1156 lineto
+3590 1156 lineto
+3594 1152 lineto
+3594 1140 lineto
+3590 1137 lineto
+3570 1137 lineto
+3566 1140 lineto
+stroke
+4.193000 setlinewidth
+newpath
+3234 2412 moveto
+3414 2412 lineto
+3414 1933 lineto
+3234 1933 lineto
+closepath
+stroke
+4.193000 setlinewidth
+newpath
+3414 2023 moveto
+3594 2023 lineto
+stroke
+4.193000 setlinewidth
+newpath
+3491 2029 moveto
+3491 2052 lineto
+3497 2059 lineto
+3508 2059 lineto
+3514 2052 lineto
+3514 2029 lineto
+stroke
+4.193000 setlinewidth
+newpath
+3491 2045 moveto
+3514 2045 lineto
+stroke
+4.193000 setlinewidth
+newpath
+3491 1994 moveto
+3491 1990 lineto
+3494 1987 lineto
+3511 1987 lineto
+3514 1990 lineto
+3514 2000 lineto
+3508 2007 lineto
+3491 2007 lineto
+3491 2017 lineto
+3514 2017 lineto
+stroke
+4.193000 setlinewidth
+newpath
+3414 2113 moveto
+3594 2113 lineto
+stroke
+4.193000 setlinewidth
+newpath
+3474 2149 moveto
+3487 2132 lineto
+3501 2149 lineto
+stroke
+4.193000 setlinewidth
+newpath
+3487 2132 moveto
+3487 2119 lineto
+stroke
+4.193000 setlinewidth
+newpath
+3530 2119 moveto
+3507 2119 lineto
+3507 2128 lineto
+3511 2132 lineto
+3527 2132 lineto
+3530 2135 lineto
+3530 2145 lineto
+3527 2149 lineto
+3511 2149 lineto
+3507 2145 lineto
+stroke
+4.193000 setlinewidth
+newpath
+3514 2103 moveto
+3511 2107 lineto
+3494 2107 lineto
+3491 2103 lineto
+3491 2080 lineto
+3494 2077 lineto
+3511 2077 lineto
+3514 2080 lineto
+3514 2090 lineto
+3511 2093 lineto
+3494 2093 lineto
+3491 2090 lineto
+stroke
+4.193000 setlinewidth
+newpath
+3414 2233 moveto
+3594 2233 lineto
+stroke
+4.193000 setlinewidth
+newpath
+3474 2269 moveto
+3487 2252 lineto
+3501 2269 lineto
+stroke
+4.193000 setlinewidth
+newpath
+3487 2252 moveto
+3487 2239 lineto
+stroke
+4.193000 setlinewidth
+newpath
+3514 2239 moveto
+3527 2239 lineto
+stroke
+4.193000 setlinewidth
+newpath
+3520 2239 moveto
+3520 2269 lineto
+stroke
+4.193000 setlinewidth
+newpath
+3520 2265 moveto
+3514 2258 lineto
+stroke
+4.193000 setlinewidth
+newpath
+3491 2227 moveto
+3514 2227 lineto
+3491 2197 lineto
+stroke
+4.193000 setlinewidth
+newpath
+3414 2323 moveto
+3594 2323 lineto
+stroke
+4.193000 setlinewidth
+newpath
+3458 2358 moveto
+3471 2329 lineto
+3485 2358 lineto
+stroke
+4.193000 setlinewidth
+newpath
+3514 2331 moveto
+3511 2329 lineto
+3494 2329 lineto
+3491 2331 lineto
+3491 2355 lineto
+3494 2358 lineto
+3511 2358 lineto
+3514 2355 lineto
+stroke
+4.193000 setlinewidth
+newpath
+3547 2331 moveto
+3544 2329 lineto
+3527 2329 lineto
+3524 2331 lineto
+3524 2355 lineto
+3527 2358 lineto
+3544 2358 lineto
+3547 2355 lineto
+stroke
+4.193000 setlinewidth
+newpath
+3494 2287 moveto
+3491 2290 lineto
+3491 2300 lineto
+3494 2303 lineto
+3511 2303 lineto
+3514 2306 lineto
+3514 2313 lineto
+3511 2317 lineto
+3494 2317 lineto
+3491 2313 lineto
+3491 2306 lineto
+3494 2303 lineto
+stroke
+4.193000 setlinewidth
+newpath
+3511 2303 moveto
+3514 2300 lineto
+3514 2290 lineto
+3511 2287 lineto
+3494 2287 lineto
+stroke
+4.193000 setlinewidth
+newpath
+3055 2023 moveto
+3234 2023 lineto
+stroke
+4.193000 setlinewidth
+newpath
+3118 2055 moveto
+3118 2059 lineto
+3102 2059 lineto
+3098 2055 lineto
+3098 2032 lineto
+3102 2029 lineto
+3118 2029 lineto
+3122 2032 lineto
+3122 2042 lineto
+3112 2042 lineto
+stroke
+4.193000 setlinewidth
+newpath
+3131 2029 moveto
+3131 2059 lineto
+3155 2029 lineto
+3155 2059 lineto
+stroke
+4.193000 setlinewidth
+newpath
+3168 2029 moveto
+3168 2059 lineto
+stroke
+4.193000 setlinewidth
+newpath
+3164 2059 moveto
+3184 2059 lineto
+3188 2055 lineto
+3188 2032 lineto
+3184 2029 lineto
+3164 2029 lineto
+stroke
+4.193000 setlinewidth
+newpath
+3148 1987 moveto
+3148 2017 lineto
+3131 1994 lineto
+3155 1994 lineto
+stroke
+4.193000 setlinewidth
+newpath
+3055 2113 moveto
+3234 2113 lineto
+stroke
+4.193000 setlinewidth
+newpath
+3118 2145 moveto
+3118 2149 lineto
+3102 2149 lineto
+3098 2145 lineto
+3098 2122 lineto
+3102 2119 lineto
+3118 2119 lineto
+3122 2122 lineto
+3122 2132 lineto
+3112 2132 lineto
+stroke
+4.193000 setlinewidth
+newpath
+3131 2119 moveto
+3131 2149 lineto
+3155 2119 lineto
+3155 2149 lineto
+stroke
+4.193000 setlinewidth
+newpath
+3168 2119 moveto
+3168 2149 lineto
+stroke
+4.193000 setlinewidth
+newpath
+3164 2149 moveto
+3184 2149 lineto
+3188 2145 lineto
+3188 2122 lineto
+3184 2119 lineto
+3164 2119 lineto
+stroke
+4.193000 setlinewidth
+newpath
+3131 2107 moveto
+3155 2107 lineto
+3155 2103 lineto
+3142 2093 lineto
+3151 2093 lineto
+3155 2090 lineto
+3155 2080 lineto
+3151 2077 lineto
+3135 2077 lineto
+3131 2080 lineto
+stroke
+4.193000 setlinewidth
+newpath
+3055 2233 moveto
+3234 2233 lineto
+stroke
+4.193000 setlinewidth
+newpath
+3102 2239 moveto
+3115 2239 lineto
+stroke
+4.193000 setlinewidth
+newpath
+3109 2239 moveto
+3109 2269 lineto
+stroke
+4.193000 setlinewidth
+newpath
+3102 2269 moveto
+3115 2269 lineto
+stroke
+4.193000 setlinewidth
+newpath
+3131 2239 moveto
+3131 2269 lineto
+3155 2239 lineto
+3155 2269 lineto
+stroke
+4.193000 setlinewidth
+newpath
+3164 2239 moveto
+3164 2269 lineto
+stroke
+4.193000 setlinewidth
+newpath
+3188 2239 moveto
+3188 2269 lineto
+stroke
+4.193000 setlinewidth
+newpath
+3164 2252 moveto
+3188 2252 lineto
+stroke
+4.193000 setlinewidth
+newpath
+3155 2197 moveto
+3131 2197 lineto
+3131 2206 lineto
+3135 2210 lineto
+3151 2210 lineto
+3155 2213 lineto
+3155 2223 lineto
+3151 2227 lineto
+3135 2227 lineto
+3131 2223 lineto
+stroke
+4.193000 setlinewidth
+newpath
+3055 2323 moveto
+3234 2323 lineto
+stroke
+4.193000 setlinewidth
+newpath
+3122 2331 moveto
+3118 2329 lineto
+3102 2329 lineto
+3098 2331 lineto
+3098 2355 lineto
+3102 2358 lineto
+3118 2358 lineto
+3122 2355 lineto
+stroke
+4.193000 setlinewidth
+newpath
+3135 2329 moveto
+3131 2331 lineto
+3131 2355 lineto
+3135 2358 lineto
+3151 2358 lineto
+3155 2355 lineto
+3155 2331 lineto
+3151 2329 lineto
+3135 2329 lineto
+stroke
+4.193000 setlinewidth
+newpath
+3164 2329 moveto
+3164 2358 lineto
+3178 2345 lineto
+3191 2358 lineto
+3191 2329 lineto
+stroke
+4.193000 setlinewidth
+newpath
+3138 2287 moveto
+3151 2287 lineto
+stroke
+4.193000 setlinewidth
+newpath
+3145 2287 moveto
+3145 2317 lineto
+stroke
+4.193000 setlinewidth
+newpath
+3145 2313 moveto
+3138 2306 lineto
+stroke
+4.193000 setlinewidth
+newpath
+3209 2490 moveto
+3209 2458 lineto
+3213 2454 lineto
+3233 2454 lineto
+3237 2458 lineto
+3237 2490 lineto
+stroke
+4.193000 setlinewidth
+newpath
+3276 2454 moveto
+3248 2454 lineto
+3248 2466 lineto
+3252 2470 lineto
+3272 2470 lineto
+3276 2474 lineto
+3276 2486 lineto
+3272 2490 lineto
+3252 2490 lineto
+3248 2486 lineto
+stroke
+4.193000 setlinewidth
+newpath
+3308 2454 moveto
+3308 2490 lineto
+3288 2462 lineto
+3316 2462 lineto
+stroke
+4.193000 setlinewidth
+newpath
+3170 1859 moveto
+3175 1855 lineto
+3194 1855 lineto
+3199 1859 lineto
+3199 1871 lineto
+3194 1875 lineto
+3175 1875 lineto
+3170 1879 lineto
+3170 1887 lineto
+3175 1891 lineto
+3194 1891 lineto
+3199 1887 lineto
+stroke
+4.193000 setlinewidth
+newpath
+3210 1855 moveto
+3210 1891 lineto
+3238 1855 lineto
+3238 1891 lineto
+stroke
+4.193000 setlinewidth
+newpath
+3249 1891 moveto
+3278 1891 lineto
+3249 1855 lineto
+stroke
+4.193000 setlinewidth
+newpath
+3309 1855 moveto
+3309 1891 lineto
+3289 1863 lineto
+3317 1863 lineto
+stroke
+4.193000 setlinewidth
+newpath
+3329 1855 moveto
+3329 1883 lineto
+3337 1891 lineto
+3349 1891 lineto
+3357 1883 lineto
+3357 1855 lineto
+stroke
+4.193000 setlinewidth
+newpath
+3329 1875 moveto
+3357 1875 lineto
+stroke
+4.193000 setlinewidth
+newpath
+3368 1891 moveto
+3368 1859 lineto
+3372 1855 lineto
+3392 1855 lineto
+3396 1859 lineto
+3396 1891 lineto
+stroke
+4.193000 setlinewidth
+newpath
+3436 1859 moveto
+3432 1855 lineto
+3412 1855 lineto
+3408 1859 lineto
+3408 1887 lineto
+3412 1891 lineto
+3432 1891 lineto
+3436 1887 lineto
+stroke
+4.193000 setlinewidth
+newpath
+3475 1855 moveto
+3447 1855 lineto
+3447 1867 lineto
+3451 1871 lineto
+3471 1871 lineto
+3475 1875 lineto
+3475 1887 lineto
+3471 1891 lineto
+3451 1891 lineto
+3447 1887 lineto
+stroke
+4.193000 setlinewidth
+newpath
+3511 1887 moveto
+3511 1891 lineto
+3491 1891 lineto
+3487 1887 lineto
+3487 1859 lineto
+3491 1855 lineto
+3511 1855 lineto
+3515 1859 lineto
+3515 1871 lineto
+3503 1871 lineto
+stroke
+4.193000 setlinewidth
+newpath
+3526 1863 moveto
+3526 1859 lineto
+3530 1855 lineto
+3550 1855 lineto
+3554 1859 lineto
+3554 1871 lineto
+3547 1879 lineto
+3526 1879 lineto
+3526 1891 lineto
+3554 1891 lineto
+stroke
+4.193000 setlinewidth
+newpath
+3566 1891 moveto
+3594 1891 lineto
+3594 1887 lineto
+3578 1875 lineto
+3590 1875 lineto
+3594 1871 lineto
+3594 1859 lineto
+3590 1855 lineto
+3570 1855 lineto
+3566 1859 lineto
+stroke
+4.193000 setlinewidth
+newpath
+2516 3191 moveto
+2546 3161 lineto
+2576 3191 lineto
+2516 3191 lineto
+stroke
+4.193000 setlinewidth
+newpath
+2516 3670 29 29 270 1 ellipse
+2516 3670 lineto
+stroke
+fill
+4.193000 setlinewidth
+newpath
+2456 3671 30 30 358 90 ellipse
+2456 3671 lineto
+stroke
+fill
+4.193000 setlinewidth
+newpath
+2456 3760 moveto
+2516 3820 lineto
+2516 3820 lineto
+stroke
+4.193000 setlinewidth
+newpath
+2515 3790 29 29 180 271 ellipse
+2515 3790 lineto
+stroke
+fill
+4.193000 setlinewidth
+newpath
+2455 3790 30 30 88 180 ellipse
+2455 3790 lineto
+stroke
+fill
+4.193000 setlinewidth
+newpath
+2515 3730 29 29 180 271 ellipse
+2515 3730 lineto
+stroke
+fill
+4.193000 setlinewidth
+newpath
+2455 3730 30 30 88 180 ellipse
+2455 3730 lineto
+stroke
+fill
+4.193000 setlinewidth
+newpath
+2456 3731 30 30 358 90 ellipse
+2456 3731 lineto
+stroke
+fill
+4.193000 setlinewidth
+newpath
+2516 3730 29 29 270 1 ellipse
+2516 3730 lineto
+stroke
+fill
+4.193000 setlinewidth
+newpath
+2456 3700 moveto
+2516 3760 lineto
+2516 3760 lineto
+stroke
+4.193000 setlinewidth
+newpath
+2456 3791 30 30 358 90 ellipse
+2456 3791 lineto
+stroke
+fill
+4.193000 setlinewidth
+newpath
+2516 3789 29 29 270 1 ellipse
+2516 3789 lineto
+stroke
+fill
+4.193000 setlinewidth
+newpath
+2455 3670 30 30 88 180 ellipse
+2455 3670 lineto
+stroke
+fill
+4.193000 setlinewidth
+newpath
+2515 3670 29 29 180 271 ellipse
+2515 3670 lineto
+stroke
+fill
+4.193000 setlinewidth
+newpath
+2276 3880 moveto
+2725 3880 lineto
+2725 3610 lineto
+2276 3610 lineto
+closepath
+stroke
+4.193000 setlinewidth
+newpath
+2725 3730 moveto
+2905 3730 lineto
+stroke
+4.193000 setlinewidth
+newpath
+2610 3715 moveto
+2606 3718 lineto
+2606 3741 lineto
+2610 3745 lineto
+2626 3745 lineto
+2629 3741 lineto
+2629 3718 lineto
+2626 3715 lineto
+2610 3715 lineto
+stroke
+4.193000 setlinewidth
+newpath
+2639 3745 moveto
+2639 3718 lineto
+2643 3715 lineto
+2659 3715 lineto
+2662 3718 lineto
+2662 3745 lineto
+stroke
+4.193000 setlinewidth
+newpath
+2672 3745 moveto
+2699 3745 lineto
+stroke
+4.193000 setlinewidth
+newpath
+2685 3745 moveto
+2685 3715 lineto
+stroke
+4.193000 setlinewidth
+newpath
+2806 3736 moveto
+2802 3739 lineto
+2802 3749 lineto
+2806 3752 lineto
+2822 3752 lineto
+2825 3756 lineto
+2825 3762 lineto
+2822 3766 lineto
+2806 3766 lineto
+2802 3762 lineto
+2802 3756 lineto
+2806 3752 lineto
+stroke
+4.193000 setlinewidth
+newpath
+2822 3752 moveto
+2825 3749 lineto
+2825 3739 lineto
+2822 3736 lineto
+2806 3736 lineto
+stroke
+4.193000 setlinewidth
+newpath
+2096 3730 moveto
+2276 3730 lineto
+stroke
+4.193000 setlinewidth
+newpath
+2307 3715 moveto
+2320 3715 lineto
+stroke
+4.193000 setlinewidth
+newpath
+2313 3715 moveto
+2313 3745 lineto
+stroke
+4.193000 setlinewidth
+newpath
+2307 3745 moveto
+2320 3745 lineto
+stroke
+4.193000 setlinewidth
+newpath
+2336 3715 moveto
+2336 3745 lineto
+2359 3715 lineto
+2359 3745 lineto
+stroke
+4.193000 setlinewidth
+newpath
+2180 3736 moveto
+2193 3736 lineto
+stroke
+4.193000 setlinewidth
+newpath
+2186 3736 moveto
+2186 3766 lineto
+stroke
+4.193000 setlinewidth
+newpath
+2186 3762 moveto
+2180 3756 lineto
+stroke
+4.193000 setlinewidth
+newpath
+2396 3610 moveto
+2396 3431 lineto
+stroke
+4.193000 setlinewidth
+newpath
+2390 3531 moveto
+2390 3507 lineto
+2380 3507 lineto
+2377 3511 lineto
+2377 3527 lineto
+2374 3531 lineto
+2364 3531 lineto
+2360 3527 lineto
+2360 3511 lineto
+2364 3507 lineto
+stroke
+4.193000 setlinewidth
+newpath
+2426 3610 moveto
+2426 3431 lineto
+stroke
+4.193000 setlinewidth
+newpath
+2390 3507 moveto
+2390 3531 lineto
+2394 3531 lineto
+2404 3517 lineto
+2404 3527 lineto
+2407 3531 lineto
+2417 3531 lineto
+2420 3527 lineto
+2420 3511 lineto
+2417 3507 lineto
+stroke
+4.193000 setlinewidth
+newpath
+2456 3610 moveto
+2456 3431 lineto
+stroke
+4.193000 setlinewidth
+newpath
+2450 3524 moveto
+2420 3524 lineto
+2443 3507 lineto
+2443 3531 lineto
+stroke
+4.193000 setlinewidth
+newpath
+2516 3610 moveto
+2516 3431 lineto
+stroke
+4.193000 setlinewidth
+newpath
+2503 3507 moveto
+2507 3507 lineto
+2510 3511 lineto
+2510 3527 lineto
+2507 3531 lineto
+2497 3531 lineto
+2490 3524 lineto
+2490 3507 lineto
+2480 3507 lineto
+2480 3531 lineto
+stroke
+4.193000 setlinewidth
+newpath
+2546 3610 moveto
+2546 3431 lineto
+stroke
+4.193000 setlinewidth
+newpath
+2513 3531 moveto
+2510 3527 lineto
+2510 3511 lineto
+2513 3507 lineto
+2537 3507 lineto
+2540 3511 lineto
+2540 3527 lineto
+2537 3531 lineto
+2526 3531 lineto
+2523 3527 lineto
+2523 3511 lineto
+2526 3507 lineto
+stroke
+4.193000 setlinewidth
+newpath
+2576 3610 moveto
+2576 3431 lineto
+stroke
+4.193000 setlinewidth
+newpath
+2540 3507 moveto
+2540 3531 lineto
+2570 3507 lineto
+stroke
+4.193000 setlinewidth
+newpath
+2330 3922 moveto
+2330 3958 lineto
+2358 3958 lineto
+stroke
+4.193000 setlinewidth
+newpath
+2330 3942 moveto
+2346 3942 lineto
+stroke
+4.193000 setlinewidth
+newpath
+2378 3922 moveto
+2394 3922 lineto
+stroke
+4.193000 setlinewidth
+newpath
+2386 3922 moveto
+2386 3958 lineto
+stroke
+4.193000 setlinewidth
+newpath
+2386 3954 moveto
+2378 3946 lineto
+stroke
+4.193000 setlinewidth
+newpath
+2471 3925 moveto
+2475 3922 lineto
+2495 3922 lineto
+2499 3925 lineto
+2499 3937 lineto
+2495 3942 lineto
+2475 3942 lineto
+2471 3946 lineto
+2471 3954 lineto
+2475 3958 lineto
+2495 3958 lineto
+2499 3954 lineto
+stroke
+4.193000 setlinewidth
+newpath
+2538 3925 moveto
+2534 3922 lineto
+2514 3922 lineto
+2510 3925 lineto
+2510 3954 lineto
+2514 3958 lineto
+2534 3958 lineto
+2538 3954 lineto
+stroke
+4.193000 setlinewidth
+newpath
+2550 3958 moveto
+2550 3922 lineto
+2582 3922 lineto
+stroke
+4.193000 setlinewidth
+newpath
+2589 3922 moveto
+2589 3958 lineto
+2618 3958 lineto
+stroke
+4.193000 setlinewidth
+newpath
+2589 3942 moveto
+2606 3942 lineto
+stroke
+4.193000 setlinewidth
+newpath
+2633 3937 moveto
+2653 3937 lineto
+stroke
+4.193000 setlinewidth
+newpath
+2697 3954 moveto
+2692 3958 lineto
+2673 3958 lineto
+2668 3954 lineto
+2668 3925 lineto
+2673 3922 lineto
+2692 3922 lineto
+2697 3925 lineto
+2697 3937 lineto
+2692 3942 lineto
+2673 3942 lineto
+2668 3937 lineto
+stroke
+4.193000 setlinewidth
+newpath
+2708 3930 moveto
+2708 3925 lineto
+2712 3922 lineto
+2732 3922 lineto
+2736 3925 lineto
+2736 3937 lineto
+2728 3946 lineto
+2708 3946 lineto
+2708 3958 lineto
+2736 3958 lineto
+stroke
+4.193000 setlinewidth
+newpath
+3474 3670 30 30 0 360 ellipse
+stroke
+4.193000 setlinewidth
+newpath
+3234 3670 0 0 0 360 ellipse
+stroke
+4.193000 setlinewidth
+newpath
+3415 3520 30 30 181 267 ellipse
+3415 3520 lineto
+stroke
+fill
+4.193000 setlinewidth
+newpath
+3294 3700 30 30 271 358 ellipse
+3294 3700 lineto
+stroke
+fill
+4.193000 setlinewidth
+newpath
+3414 3580 30 30 178 271 ellipse
+3414 3580 lineto
+stroke
+fill
+4.193000 setlinewidth
+newpath
+3369 3491 moveto
+3369 3730 lineto
+stroke
+4.193000 setlinewidth
+newpath
+3294 3700 30 30 1 88 ellipse
+3294 3700 lineto
+stroke
+fill
+4.193000 setlinewidth
+newpath
+3294 3580 30 30 271 358 ellipse
+3294 3580 lineto
+stroke
+fill
+4.193000 setlinewidth
+newpath
+3414 3700 30 30 88 181 ellipse
+3414 3700 lineto
+stroke
+fill
+4.193000 setlinewidth
+newpath
+3294 3580 30 30 1 88 ellipse
+3294 3580 lineto
+stroke
+fill
+4.193000 setlinewidth
+newpath
+3339 3730 moveto
+3339 3491 lineto
+stroke
+4.193000 setlinewidth
+newpath
+3294 3640 30 30 1 88 ellipse
+3294 3640 lineto
+stroke
+fill
+4.193000 setlinewidth
+newpath
+3415 3520 30 30 91 181 ellipse
+3415 3520 lineto
+stroke
+fill
+4.193000 setlinewidth
+newpath
+3414 3640 30 30 178 271 ellipse
+3414 3640 lineto
+stroke
+fill
+4.193000 setlinewidth
+newpath
+3294 3520 30 30 271 358 ellipse
+3294 3520 lineto
+stroke
+fill
+4.193000 setlinewidth
+newpath
+3414 3640 30 30 88 181 ellipse
+3414 3640 lineto
+stroke
+fill
+4.193000 setlinewidth
+newpath
+3414 3700 30 30 178 271 ellipse
+3414 3700 lineto
+stroke
+fill
+4.193000 setlinewidth
+newpath
+3414 3580 30 30 88 181 ellipse
+3414 3580 lineto
+stroke
+fill
+4.193000 setlinewidth
+newpath
+3294 3640 30 30 271 358 ellipse
+3294 3640 lineto
+stroke
+fill
+4.193000 setlinewidth
+newpath
+3294 3520 30 30 1 88 ellipse
+3294 3520 lineto
+stroke
+fill
+4.193000 setlinewidth
+newpath
+3234 3670 30 30 0 360 ellipse
+stroke
+4.193000 setlinewidth
+newpath
+3414 3491 moveto
+3594 3491 lineto
+stroke
+4.193000 setlinewidth
+newpath
+3488 3532 moveto
+3516 3532 lineto
+3516 3528 lineto
+3500 3516 lineto
+3512 3516 lineto
+3516 3512 lineto
+3516 3500 lineto
+3512 3497 lineto
+3492 3497 lineto
+3488 3500 lineto
+stroke
+4.193000 setlinewidth
+newpath
+3414 3610 moveto
+3594 3610 lineto
+stroke
+4.193000 setlinewidth
+newpath
+3514 3616 moveto
+3491 3616 lineto
+3491 3626 lineto
+3494 3629 lineto
+3511 3629 lineto
+3514 3632 lineto
+3514 3643 lineto
+3511 3646 lineto
+3494 3646 lineto
+3491 3643 lineto
+stroke
+4.193000 setlinewidth
+newpath
+3414 3730 moveto
+3594 3730 lineto
+stroke
+4.193000 setlinewidth
+newpath
+3496 3736 moveto
+3512 3736 lineto
+stroke
+4.193000 setlinewidth
+newpath
+3504 3736 moveto
+3504 3772 lineto
+stroke
+4.193000 setlinewidth
+newpath
+3504 3768 moveto
+3496 3760 lineto
+stroke
+4.193000 setlinewidth
+newpath
+3115 3491 moveto
+3294 3491 lineto
+stroke
+4.193000 setlinewidth
+newpath
+3209 3497 moveto
+3209 3532 lineto
+3188 3504 lineto
+3216 3504 lineto
+stroke
+4.193000 setlinewidth
+newpath
+3115 3730 moveto
+3294 3730 lineto
+stroke
+4.193000 setlinewidth
+newpath
+3215 3762 moveto
+3211 3766 lineto
+3195 3766 lineto
+3191 3762 lineto
+3191 3739 lineto
+3195 3736 lineto
+3211 3736 lineto
+3215 3739 lineto
+3215 3749 lineto
+3211 3752 lineto
+3195 3752 lineto
+3191 3749 lineto
+stroke
+4.193000 setlinewidth
+newpath
+3312 3781 moveto
+3350 3781 lineto
+stroke
+4.193000 setlinewidth
+newpath
+3331 3781 moveto
+3331 3739 lineto
+stroke
+4.193000 setlinewidth
+newpath
+3391 3739 moveto
+3358 3739 lineto
+3358 3753 lineto
+3363 3758 lineto
+3387 3758 lineto
+3391 3762 lineto
+3391 3776 lineto
+3387 3781 lineto
+3363 3781 lineto
+3358 3776 lineto
+stroke
+4.193000 setlinewidth
+newpath
+3220 3452 moveto
+3258 3452 lineto
+stroke
+4.193000 setlinewidth
+newpath
+3239 3452 moveto
+3239 3410 lineto
+stroke
+4.193000 setlinewidth
+newpath
+3299 3414 moveto
+3294 3410 lineto
+3271 3410 lineto
+3266 3414 lineto
+3266 3447 lineto
+3271 3452 lineto
+3294 3452 lineto
+3299 3447 lineto
+stroke
+4.193000 setlinewidth
+newpath
+3336 3410 moveto
+3336 3452 lineto
+3312 3419 lineto
+3345 3419 lineto
+stroke
+4.193000 setlinewidth
+newpath
+3363 3428 moveto
+3387 3428 lineto
+stroke
+4.193000 setlinewidth
+newpath
+3414 3410 moveto
+3433 3410 lineto
+stroke
+4.193000 setlinewidth
+newpath
+3423 3410 moveto
+3423 3452 lineto
+stroke
+4.193000 setlinewidth
+newpath
+3423 3447 moveto
+3414 3437 lineto
+stroke
+4.193000 setlinewidth
+newpath
+3451 3452 moveto
+3488 3452 lineto
+stroke
+4.193000 setlinewidth
+newpath
+3469 3452 moveto
+3469 3410 lineto
+stroke
+4.193000 setlinewidth
+newpath
+4406 2844 moveto
+4422 2808 lineto
+4438 2844 lineto
+stroke
+4.193000 setlinewidth
+newpath
+4474 2811 moveto
+4470 2808 lineto
+4450 2808 lineto
+4446 2811 lineto
+4446 2839 lineto
+4450 2844 lineto
+4470 2844 lineto
+4474 2839 lineto
+stroke
+4.193000 setlinewidth
+newpath
+4513 2811 moveto
+4509 2808 lineto
+4489 2808 lineto
+4485 2811 lineto
+4485 2839 lineto
+4489 2844 lineto
+4509 2844 lineto
+4513 2839 lineto
+stroke
+4.193000 setlinewidth
+newpath
+4525 2808 moveto
+4525 2835 lineto
+4533 2844 lineto
+4545 2844 lineto
+4553 2835 lineto
+4553 2808 lineto
+stroke
+4.193000 setlinewidth
+newpath
+4525 2827 moveto
+4553 2827 lineto
+stroke
+4.193000 setlinewidth
+newpath
+4556 4371 moveto
+4572 4335 lineto
+4588 4371 lineto
+stroke
+4.193000 setlinewidth
+newpath
+4623 4339 moveto
+4619 4335 lineto
+4600 4335 lineto
+4595 4339 lineto
+4595 4367 lineto
+4600 4371 lineto
+4619 4371 lineto
+4623 4367 lineto
+stroke
+4.193000 setlinewidth
+newpath
+4663 4339 moveto
+4659 4335 lineto
+4639 4335 lineto
+4635 4339 lineto
+4635 4367 lineto
+4639 4371 lineto
+4659 4371 lineto
+4663 4367 lineto
+stroke
+4.193000 setlinewidth
+newpath
+4674 4335 moveto
+4674 4363 lineto
+4683 4371 lineto
+4695 4371 lineto
+4703 4363 lineto
+4703 4335 lineto
+stroke
+4.193000 setlinewidth
+newpath
+4674 4355 moveto
+4703 4355 lineto
+stroke
+4.193000 setlinewidth
+newpath
+4373 3341 moveto
+4402 3371 lineto
+4432 3341 lineto
+4373 3341 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5972 3760 moveto
+5972 3640 lineto
+stroke
+4.193000 setlinewidth
+newpath
+6008 3760 moveto
+6008 3640 lineto
+stroke
+4.193000 setlinewidth
+newpath
+6008 3700 moveto
+6110 3700 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5870 3700 moveto
+5972 3700 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5997 3553 moveto
+5993 3550 lineto
+5977 3550 lineto
+5974 3553 lineto
+5974 3577 lineto
+5977 3580 lineto
+5993 3580 lineto
+5997 3577 lineto
+stroke
+4.193000 setlinewidth
+newpath
+6010 3550 moveto
+6026 3550 lineto
+6030 3553 lineto
+6030 3577 lineto
+6026 3580 lineto
+6010 3580 lineto
+6007 3577 lineto
+6007 3567 lineto
+6010 3564 lineto
+6026 3564 lineto
+6030 3567 lineto
+stroke
+4.193000 setlinewidth
+newpath
+6039 3550 moveto
+6063 3580 lineto
+stroke
+4.193000 setlinewidth
+newpath
+6039 3553 moveto
+6039 3577 lineto
+6043 3580 lineto
+6059 3580 lineto
+6063 3577 lineto
+6063 3553 lineto
+6059 3550 lineto
+6043 3550 lineto
+6039 3553 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5980 3491 moveto
+5993 3491 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5987 3491 moveto
+5987 3520 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5987 3517 moveto
+5980 3510 lineto
+stroke
+4.193000 setlinewidth
+newpath
+6007 3491 moveto
+6030 3520 lineto
+stroke
+4.193000 setlinewidth
+newpath
+6007 3494 moveto
+6007 3517 lineto
+6010 3520 lineto
+6026 3520 lineto
+6030 3517 lineto
+6030 3494 lineto
+6026 3491 lineto
+6010 3491 lineto
+6007 3494 lineto
+stroke
+4.193000 setlinewidth
+newpath
+6039 3491 moveto
+6039 3510 lineto
+stroke
+4.193000 setlinewidth
+newpath
+6039 3507 moveto
+6043 3510 lineto
+6056 3510 lineto
+6059 3507 lineto
+6059 3491 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5993 4351 moveto
+6017 4351 lineto
+stroke
+4.193000 setlinewidth
+newpath
+6005 4339 moveto
+6005 4363 lineto
+stroke
+4.193000 setlinewidth
+newpath
+6041 4335 moveto
+6057 4335 lineto
+stroke
+4.193000 setlinewidth
+newpath
+6049 4335 moveto
+6049 4371 lineto
+stroke
+4.193000 setlinewidth
+newpath
+6049 4367 moveto
+6041 4359 lineto
+stroke
+4.193000 setlinewidth
+newpath
+6101 4335 moveto
+6072 4335 lineto
+6072 4347 lineto
+6077 4351 lineto
+6096 4351 lineto
+6101 4355 lineto
+6101 4367 lineto
+6096 4371 lineto
+6077 4371 lineto
+6072 4367 lineto
+stroke
+4.193000 setlinewidth
+newpath
+6112 4371 moveto
+6128 4335 lineto
+6144 4371 lineto
+stroke
+4.193000 setlinewidth
+newpath
+662 3123 moveto
+686 3123 lineto
+stroke
+4.193000 setlinewidth
+newpath
+674 3111 moveto
+674 3135 lineto
+stroke
+4.193000 setlinewidth
+newpath
+702 3143 moveto
+730 3143 lineto
+730 3139 lineto
+714 3127 lineto
+726 3127 lineto
+730 3123 lineto
+730 3111 lineto
+726 3107 lineto
+706 3107 lineto
+702 3111 lineto
+stroke
+4.193000 setlinewidth
+newpath
+754 3107 moveto
+754 3111 lineto
+stroke
+4.193000 setlinewidth
+newpath
+781 3143 moveto
+809 3143 lineto
+809 3139 lineto
+793 3127 lineto
+805 3127 lineto
+809 3123 lineto
+809 3111 lineto
+805 3107 lineto
+785 3107 lineto
+781 3111 lineto
+stroke
+4.193000 setlinewidth
+newpath
+821 3143 moveto
+837 3107 lineto
+853 3143 lineto
+stroke
+4.193000 setlinewidth
+newpath
+860 3107 moveto
+860 3143 lineto
+884 3143 lineto
+888 3139 lineto
+888 3131 lineto
+884 3127 lineto
+860 3127 lineto
+stroke
+4.193000 setlinewidth
+newpath
+884 3127 moveto
+888 3119 lineto
+888 3111 lineto
+884 3107 lineto
+860 3107 lineto
+stroke
+4.193000 setlinewidth
+newpath
+816 4351 moveto
+836 4351 lineto
+stroke
+4.193000 setlinewidth
+newpath
+860 4335 moveto
+876 4335 lineto
+stroke
+4.193000 setlinewidth
+newpath
+868 4335 moveto
+868 4371 lineto
+stroke
+4.193000 setlinewidth
+newpath
+868 4367 moveto
+860 4359 lineto
+stroke
+4.193000 setlinewidth
+newpath
+891 4335 moveto
+919 4371 lineto
+stroke
+4.193000 setlinewidth
+newpath
+891 4339 moveto
+891 4367 lineto
+895 4371 lineto
+915 4371 lineto
+919 4367 lineto
+919 4339 lineto
+915 4335 lineto
+895 4335 lineto
+891 4339 lineto
+stroke
+4.193000 setlinewidth
+newpath
+931 4371 moveto
+947 4335 lineto
+963 4371 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5488 727 moveto
+5508 727 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5532 711 moveto
+5548 711 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5540 711 moveto
+5540 747 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5540 743 moveto
+5532 735 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5563 711 moveto
+5591 747 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5563 715 moveto
+5563 743 lineto
+5567 747 lineto
+5587 747 lineto
+5591 743 lineto
+5591 715 lineto
+5587 711 lineto
+5567 711 lineto
+5563 715 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5603 747 moveto
+5619 711 lineto
+5635 747 lineto
+stroke
+4.193000 setlinewidth
+newpath
+3579 3625 moveto
+3608 3596 lineto
+stroke
+4.193000 setlinewidth
+newpath
+3579 3596 moveto
+3608 3625 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5287 3595 moveto
+5315 3566 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5287 3566 moveto
+5315 3595 lineto
+stroke
+4.193000 setlinewidth
+newpath
+376 2666 moveto
+376 2670 lineto
+356 2670 lineto
+352 2666 lineto
+352 2638 lineto
+356 2634 lineto
+376 2634 lineto
+380 2638 lineto
+380 2650 lineto
+368 2650 lineto
+stroke
+4.193000 setlinewidth
+newpath
+392 2634 moveto
+392 2670 lineto
+420 2634 lineto
+420 2670 lineto
+stroke
+4.193000 setlinewidth
+newpath
+435 2634 moveto
+435 2670 lineto
+stroke
+4.193000 setlinewidth
+newpath
+431 2670 moveto
+455 2670 lineto
+459 2666 lineto
+459 2638 lineto
+455 2634 lineto
+431 2634 lineto
+stroke
+4.193000 setlinewidth
+newpath
+509 2652 moveto
+491 2670 lineto
+473 2670 lineto
+473 2634 lineto
+491 2634 lineto
+509 2652 lineto
+stroke
+4.193000 setlinewidth
+newpath
+689 2472 moveto
+719 2442 lineto
+749 2472 lineto
+689 2472 lineto
+stroke
+4.193000 setlinewidth
+newpath
+992 4470 moveto
+1016 4470 lineto
+stroke
+4.193000 setlinewidth
+newpath
+1004 4458 moveto
+1004 4482 lineto
+stroke
+4.193000 setlinewidth
+newpath
+1040 4455 moveto
+1055 4455 lineto
+stroke
+4.193000 setlinewidth
+newpath
+1048 4455 moveto
+1048 4491 lineto
+stroke
+4.193000 setlinewidth
+newpath
+1048 4487 moveto
+1040 4479 lineto
+stroke
+4.193000 setlinewidth
+newpath
+1071 4455 moveto
+1099 4491 lineto
+stroke
+4.193000 setlinewidth
+newpath
+1071 4458 moveto
+1071 4487 lineto
+1075 4491 lineto
+1095 4491 lineto
+1099 4487 lineto
+1099 4458 lineto
+1095 4455 lineto
+1075 4455 lineto
+1071 4458 lineto
+stroke
+4.193000 setlinewidth
+newpath
+1110 4491 moveto
+1127 4455 lineto
+1143 4491 lineto
+stroke
+4.193000 setlinewidth
+newpath
+779 3580 moveto
+809 3550 lineto
+839 3580 lineto
+779 3580 lineto
+stroke
+4.193000 setlinewidth
+newpath
+928 3832 moveto
+1048 3832 lineto
+stroke
+4.193000 setlinewidth
+newpath
+928 3868 moveto
+1048 3868 lineto
+stroke
+4.193000 setlinewidth
+newpath
+988 3868 moveto
+988 3970 lineto
+stroke
+4.193000 setlinewidth
+newpath
+988 3832 moveto
+988 3730 lineto
+stroke
+4.193000 setlinewidth
+newpath
+1045 3898 moveto
+1041 3895 lineto
+1025 3895 lineto
+1021 3898 lineto
+1021 3921 lineto
+1025 3925 lineto
+1041 3925 lineto
+1045 3921 lineto
+stroke
+4.193000 setlinewidth
+newpath
+1078 3895 moveto
+1054 3895 lineto
+1054 3904 lineto
+1058 3908 lineto
+1074 3908 lineto
+1078 3911 lineto
+1078 3921 lineto
+1074 3925 lineto
+1058 3925 lineto
+1054 3921 lineto
+stroke
+4.193000 setlinewidth
+newpath
+1028 3775 moveto
+1041 3775 lineto
+stroke
+4.193000 setlinewidth
+newpath
+1034 3775 moveto
+1034 3805 lineto
+stroke
+4.193000 setlinewidth
+newpath
+1034 3801 moveto
+1028 3795 lineto
+stroke
+4.193000 setlinewidth
+newpath
+1054 3775 moveto
+1078 3805 lineto
+stroke
+4.193000 setlinewidth
+newpath
+1054 3778 moveto
+1054 3801 lineto
+1058 3805 lineto
+1074 3805 lineto
+1078 3801 lineto
+1078 3778 lineto
+1074 3775 lineto
+1058 3775 lineto
+1054 3778 lineto
+stroke
+4.193000 setlinewidth
+newpath
+1087 3775 moveto
+1110 3805 lineto
+stroke
+4.193000 setlinewidth
+newpath
+1087 3778 moveto
+1087 3801 lineto
+1091 3805 lineto
+1107 3805 lineto
+1110 3801 lineto
+1110 3778 lineto
+1107 3775 lineto
+1091 3775 lineto
+1087 3778 lineto
+stroke
+4.193000 setlinewidth
+newpath
+1120 3775 moveto
+1120 3795 lineto
+stroke
+4.193000 setlinewidth
+newpath
+1120 3791 moveto
+1124 3795 lineto
+1137 3795 lineto
+1140 3791 lineto
+1140 3775 lineto
+stroke
+4.193000 setlinewidth
+newpath
+749 3832 moveto
+869 3832 lineto
+stroke
+4.193000 setlinewidth
+newpath
+749 3868 moveto
+869 3868 lineto
+stroke
+4.193000 setlinewidth
+newpath
+809 3868 moveto
+809 3970 lineto
+stroke
+4.193000 setlinewidth
+newpath
+809 3832 moveto
+809 3730 lineto
+stroke
+4.193000 setlinewidth
+newpath
+865 3898 moveto
+861 3895 lineto
+845 3895 lineto
+842 3898 lineto
+842 3921 lineto
+845 3925 lineto
+861 3925 lineto
+865 3921 lineto
+stroke
+4.193000 setlinewidth
+newpath
+881 3895 moveto
+894 3895 lineto
+stroke
+4.193000 setlinewidth
+newpath
+888 3895 moveto
+888 3925 lineto
+stroke
+4.193000 setlinewidth
+newpath
+888 3921 moveto
+881 3915 lineto
+stroke
+4.193000 setlinewidth
+newpath
+848 3775 moveto
+861 3775 lineto
+stroke
+4.193000 setlinewidth
+newpath
+855 3775 moveto
+855 3805 lineto
+stroke
+4.193000 setlinewidth
+newpath
+855 3801 moveto
+848 3795 lineto
+stroke
+4.193000 setlinewidth
+newpath
+875 3775 moveto
+898 3805 lineto
+stroke
+4.193000 setlinewidth
+newpath
+875 3778 moveto
+875 3801 lineto
+878 3805 lineto
+894 3805 lineto
+898 3801 lineto
+898 3778 lineto
+894 3775 lineto
+878 3775 lineto
+875 3778 lineto
+stroke
+4.193000 setlinewidth
+newpath
+907 3775 moveto
+931 3805 lineto
+stroke
+4.193000 setlinewidth
+newpath
+907 3778 moveto
+907 3801 lineto
+911 3805 lineto
+927 3805 lineto
+931 3801 lineto
+931 3778 lineto
+927 3775 lineto
+911 3775 lineto
+907 3778 lineto
+stroke
+4.193000 setlinewidth
+newpath
+940 3775 moveto
+940 3795 lineto
+stroke
+4.193000 setlinewidth
+newpath
+940 3791 moveto
+944 3795 lineto
+957 3795 lineto
+960 3791 lineto
+960 3775 lineto
+stroke
+4.193000 setlinewidth
+newpath
+234 3009 moveto
+258 3009 lineto
+stroke
+4.193000 setlinewidth
+newpath
+246 2997 moveto
+246 3021 lineto
+stroke
+4.193000 setlinewidth
+newpath
+273 3029 moveto
+301 3029 lineto
+301 3025 lineto
+285 3013 lineto
+297 3013 lineto
+301 3009 lineto
+301 2997 lineto
+297 2993 lineto
+277 2993 lineto
+273 2997 lineto
+stroke
+4.193000 setlinewidth
+newpath
+325 2993 moveto
+325 2997 lineto
+stroke
+4.193000 setlinewidth
+newpath
+352 3029 moveto
+380 3029 lineto
+380 3025 lineto
+364 3013 lineto
+376 3013 lineto
+380 3009 lineto
+380 2997 lineto
+376 2993 lineto
+356 2993 lineto
+352 2997 lineto
+stroke
+4.193000 setlinewidth
+newpath
+392 3029 moveto
+408 2993 lineto
+424 3029 lineto
+stroke
+4.193000 setlinewidth
+newpath
+431 2993 moveto
+431 3029 lineto
+455 3029 lineto
+459 3025 lineto
+459 3017 lineto
+455 3013 lineto
+431 3013 lineto
+stroke
+4.193000 setlinewidth
+newpath
+455 3013 moveto
+459 3005 lineto
+459 2997 lineto
+455 2993 lineto
+431 2993 lineto
+stroke
+4.193000 setlinewidth
+newpath
+509 3011 moveto
+491 3029 lineto
+473 3029 lineto
+473 2993 lineto
+491 2993 lineto
+509 3011 lineto
+stroke
+4.193000 setlinewidth
+newpath
+377 4087 moveto
+397 4087 lineto
+stroke
+4.193000 setlinewidth
+newpath
+420 4072 moveto
+436 4072 lineto
+stroke
+4.193000 setlinewidth
+newpath
+428 4072 moveto
+428 4107 lineto
+stroke
+4.193000 setlinewidth
+newpath
+428 4103 moveto
+420 4095 lineto
+stroke
+4.193000 setlinewidth
+newpath
+452 4072 moveto
+480 4107 lineto
+stroke
+4.193000 setlinewidth
+newpath
+452 4075 moveto
+452 4103 lineto
+456 4107 lineto
+476 4107 lineto
+480 4103 lineto
+480 4075 lineto
+476 4072 lineto
+456 4072 lineto
+452 4075 lineto
+stroke
+4.193000 setlinewidth
+newpath
+491 4107 moveto
+507 4072 lineto
+524 4107 lineto
+stroke
+4.193000 setlinewidth
+newpath
+569 4089 moveto
+551 4107 lineto
+533 4107 lineto
+533 4072 lineto
+551 4072 lineto
+569 4089 lineto
+stroke
+4.193000 setlinewidth
+newpath
+373 4237 moveto
+397 4237 lineto
+stroke
+4.193000 setlinewidth
+newpath
+385 4225 moveto
+385 4249 lineto
+stroke
+4.193000 setlinewidth
+newpath
+420 4221 moveto
+436 4221 lineto
+stroke
+4.193000 setlinewidth
+newpath
+428 4221 moveto
+428 4257 lineto
+stroke
+4.193000 setlinewidth
+newpath
+428 4253 moveto
+420 4245 lineto
+stroke
+4.193000 setlinewidth
+newpath
+452 4221 moveto
+480 4257 lineto
+stroke
+4.193000 setlinewidth
+newpath
+452 4225 moveto
+452 4253 lineto
+456 4257 lineto
+476 4257 lineto
+480 4253 lineto
+480 4225 lineto
+476 4221 lineto
+456 4221 lineto
+452 4225 lineto
+stroke
+4.193000 setlinewidth
+newpath
+491 4257 moveto
+507 4221 lineto
+524 4257 lineto
+stroke
+4.193000 setlinewidth
+newpath
+569 4239 moveto
+551 4257 lineto
+533 4257 lineto
+533 4221 lineto
+551 4221 lineto
+569 4239 lineto
+stroke
+4.193000 setlinewidth
+newpath
+6245 4327 moveto
+6269 4327 lineto
+stroke
+4.193000 setlinewidth
+newpath
+6257 4315 moveto
+6257 4339 lineto
+stroke
+4.193000 setlinewidth
+newpath
+6293 4311 moveto
+6308 4311 lineto
+stroke
+4.193000 setlinewidth
+newpath
+6301 4311 moveto
+6301 4347 lineto
+stroke
+4.193000 setlinewidth
+newpath
+6301 4343 moveto
+6293 4335 lineto
+stroke
+4.193000 setlinewidth
+newpath
+6352 4311 moveto
+6324 4311 lineto
+6324 4323 lineto
+6328 4327 lineto
+6348 4327 lineto
+6352 4331 lineto
+6352 4343 lineto
+6348 4347 lineto
+6328 4347 lineto
+6324 4343 lineto
+stroke
+4.193000 setlinewidth
+newpath
+6364 4347 moveto
+6380 4311 lineto
+6396 4347 lineto
+stroke
+4.193000 setlinewidth
+newpath
+6199 4329 moveto
+6217 4311 lineto
+6235 4311 lineto
+6235 4347 lineto
+6217 4347 lineto
+6199 4329 lineto
+stroke
+4.193000 setlinewidth
+newpath
+6275 3686 moveto
+6275 3714 lineto
+6279 3718 lineto
+6299 3718 lineto
+6303 3714 lineto
+6303 3686 lineto
+6299 3682 lineto
+6279 3682 lineto
+6275 3686 lineto
+stroke
+4.193000 setlinewidth
+newpath
+6295 3698 moveto
+6303 3682 lineto
+stroke
+4.193000 setlinewidth
+newpath
+6314 3686 moveto
+6319 3682 lineto
+6338 3682 lineto
+6343 3686 lineto
+6343 3698 lineto
+6338 3702 lineto
+6319 3702 lineto
+6314 3706 lineto
+6314 3714 lineto
+6319 3718 lineto
+6338 3718 lineto
+6343 3714 lineto
+stroke
+4.193000 setlinewidth
+newpath
+6382 3682 moveto
+6354 3682 lineto
+6354 3718 lineto
+6382 3718 lineto
+stroke
+4.193000 setlinewidth
+newpath
+6354 3702 moveto
+6370 3702 lineto
+stroke
+4.193000 setlinewidth
+newpath
+6398 3682 moveto
+6393 3686 lineto
+6393 3714 lineto
+6398 3718 lineto
+6417 3718 lineto
+6422 3714 lineto
+6422 3686 lineto
+6417 3682 lineto
+6398 3682 lineto
+stroke
+4.193000 setlinewidth
+newpath
+6433 3718 moveto
+6433 3686 lineto
+6437 3682 lineto
+6457 3682 lineto
+6461 3686 lineto
+6461 3718 lineto
+stroke
+4.193000 setlinewidth
+newpath
+6473 3718 moveto
+6505 3718 lineto
+stroke
+4.193000 setlinewidth
+newpath
+6489 3718 moveto
+6489 3682 lineto
+stroke
+4.193000 setlinewidth
+newpath
+6229 3700 moveto
+6247 3682 lineto
+6265 3682 lineto
+6265 3718 lineto
+6247 3718 lineto
+6229 3700 lineto
+stroke
+4.193000 setlinewidth
+newpath
+6189 2275 moveto
+6205 2275 lineto
+stroke
+4.193000 setlinewidth
+newpath
+6197 2275 moveto
+6197 2311 lineto
+stroke
+4.193000 setlinewidth
+newpath
+6189 2311 moveto
+6205 2311 lineto
+stroke
+4.193000 setlinewidth
+newpath
+6229 2275 moveto
+6245 2275 lineto
+stroke
+4.193000 setlinewidth
+newpath
+6237 2275 moveto
+6237 2311 lineto
+stroke
+4.193000 setlinewidth
+newpath
+6229 2311 moveto
+6245 2311 lineto
+stroke
+4.193000 setlinewidth
+newpath
+6264 2275 moveto
+6264 2311 lineto
+6292 2275 lineto
+6292 2311 lineto
+stroke
+4.193000 setlinewidth
+newpath
+6139 2293 moveto
+6157 2275 lineto
+6175 2275 lineto
+6175 2311 lineto
+6157 2311 lineto
+6139 2293 lineto
+stroke
+4.193000 setlinewidth
+newpath
+6185 1290 moveto
+6185 1318 lineto
+6189 1322 lineto
+6209 1322 lineto
+6213 1318 lineto
+6213 1290 lineto
+6209 1286 lineto
+6189 1286 lineto
+6185 1290 lineto
+stroke
+4.193000 setlinewidth
+newpath
+6205 1302 moveto
+6213 1286 lineto
+stroke
+4.193000 setlinewidth
+newpath
+6229 1286 moveto
+6245 1286 lineto
+stroke
+4.193000 setlinewidth
+newpath
+6237 1286 moveto
+6237 1322 lineto
+stroke
+4.193000 setlinewidth
+newpath
+6229 1322 moveto
+6245 1322 lineto
+stroke
+4.193000 setlinewidth
+newpath
+6264 1286 moveto
+6264 1322 lineto
+6292 1286 lineto
+6292 1322 lineto
+stroke
+4.193000 setlinewidth
+newpath
+6139 1304 moveto
+6157 1286 lineto
+6175 1286 lineto
+6175 1322 lineto
+6157 1322 lineto
+6139 1304 lineto
+stroke
+4.193000 setlinewidth
+newpath
+2797 649 moveto
+2797 681 lineto
+stroke
+4.193000 setlinewidth
+newpath
+2797 665 moveto
+2833 665 lineto
+stroke
+4.193000 setlinewidth
+newpath
+2833 689 moveto
+2797 717 lineto
+stroke
+4.193000 setlinewidth
+newpath
+2797 689 moveto
+2833 717 lineto
+stroke
+4.193000 setlinewidth
+newpath
+2833 732 moveto
+2830 728 lineto
+2801 728 lineto
+2797 732 lineto
+2797 752 lineto
+2801 756 lineto
+2830 756 lineto
+2833 752 lineto
+2833 732 lineto
+stroke
+4.193000 setlinewidth
+newpath
+2833 796 moveto
+2833 768 lineto
+2797 768 lineto
+2797 796 lineto
+stroke
+4.193000 setlinewidth
+newpath
+2813 768 moveto
+2813 784 lineto
+stroke
+4.193000 setlinewidth
+newpath
+2833 815 moveto
+2833 831 lineto
+stroke
+4.193000 setlinewidth
+newpath
+2833 823 moveto
+2797 823 lineto
+stroke
+4.193000 setlinewidth
+newpath
+2801 823 moveto
+2809 815 lineto
+stroke
+4.193000 setlinewidth
+newpath
+2815 885 moveto
+2833 867 lineto
+2833 849 lineto
+2797 849 lineto
+2797 867 lineto
+2815 885 lineto
+stroke
+4.193000 setlinewidth
+newpath
+3938 679 moveto
+3910 679 lineto
+3905 683 lineto
+3905 703 lineto
+3910 707 lineto
+3938 707 lineto
+3941 703 lineto
+3941 683 lineto
+3938 679 lineto
+stroke
+4.193000 setlinewidth
+newpath
+3926 699 moveto
+3941 707 lineto
+stroke
+4.193000 setlinewidth
+newpath
+3941 718 moveto
+3941 747 lineto
+stroke
+4.193000 setlinewidth
+newpath
+3938 786 moveto
+3941 782 lineto
+3941 762 lineto
+3938 758 lineto
+3910 758 lineto
+3905 762 lineto
+3905 782 lineto
+3910 786 lineto
+stroke
+4.193000 setlinewidth
+newpath
+3905 798 moveto
+3941 798 lineto
+3941 830 lineto
+stroke
+4.193000 setlinewidth
+newpath
+3941 837 moveto
+3905 837 lineto
+stroke
+4.193000 setlinewidth
+newpath
+3905 861 moveto
+3921 837 lineto
+3941 865 lineto
+stroke
+4.193000 setlinewidth
+newpath
+3923 915 moveto
+3941 897 lineto
+3941 879 lineto
+3905 879 lineto
+3905 897 lineto
+3923 915 lineto
+stroke
+4.193000 setlinewidth
+newpath
+3821 683 moveto
+3821 699 lineto
+stroke
+4.193000 setlinewidth
+newpath
+3821 691 moveto
+3786 691 lineto
+stroke
+4.193000 setlinewidth
+newpath
+3786 683 moveto
+3786 699 lineto
+stroke
+4.193000 setlinewidth
+newpath
+3821 718 moveto
+3821 747 lineto
+stroke
+4.193000 setlinewidth
+newpath
+3818 786 moveto
+3821 782 lineto
+3821 762 lineto
+3818 758 lineto
+3790 758 lineto
+3786 762 lineto
+3786 782 lineto
+3790 786 lineto
+stroke
+4.193000 setlinewidth
+newpath
+3786 798 moveto
+3821 798 lineto
+3821 830 lineto
+stroke
+4.193000 setlinewidth
+newpath
+3821 837 moveto
+3786 837 lineto
+stroke
+4.193000 setlinewidth
+newpath
+3786 861 moveto
+3802 837 lineto
+3821 865 lineto
+stroke
+4.193000 setlinewidth
+newpath
+3803 915 moveto
+3821 897 lineto
+3821 879 lineto
+3786 879 lineto
+3786 897 lineto
+3803 915 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5484 1625 moveto
+5508 1625 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5496 1613 moveto
+5496 1637 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5532 1610 moveto
+5548 1610 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5540 1610 moveto
+5540 1646 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5540 1641 moveto
+5532 1634 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5563 1610 moveto
+5591 1646 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5563 1613 moveto
+5563 1641 lineto
+5567 1646 lineto
+5587 1646 lineto
+5591 1641 lineto
+5591 1613 lineto
+5587 1610 lineto
+5567 1610 lineto
+5563 1613 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5603 1646 moveto
+5619 1610 lineto
+5635 1646 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5488 1715 moveto
+5508 1715 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5532 1700 moveto
+5548 1700 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5540 1700 moveto
+5540 1736 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5540 1731 moveto
+5532 1724 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5563 1700 moveto
+5591 1736 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5563 1703 moveto
+5563 1731 lineto
+5567 1736 lineto
+5587 1736 lineto
+5591 1731 lineto
+5591 1703 lineto
+5587 1700 lineto
+5567 1700 lineto
+5563 1703 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5603 1736 moveto
+5619 1700 lineto
+5635 1736 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5514 2614 moveto
+5538 2614 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5526 2602 moveto
+5526 2626 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5562 2598 moveto
+5578 2598 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5570 2598 moveto
+5570 2634 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5570 2630 moveto
+5562 2622 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5593 2598 moveto
+5621 2634 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5593 2602 moveto
+5593 2630 lineto
+5597 2634 lineto
+5617 2634 lineto
+5621 2630 lineto
+5621 2602 lineto
+5617 2598 lineto
+5597 2598 lineto
+5593 2602 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5633 2634 moveto
+5649 2598 lineto
+5665 2634 lineto
+stroke
+4.193000 setlinewidth
+newpath
+869 2784 moveto
+988 2784 lineto
+stroke
+4.193000 setlinewidth
+newpath
+869 2820 moveto
+988 2820 lineto
+stroke
+4.193000 setlinewidth
+newpath
+928 2820 moveto
+928 2921 lineto
+stroke
+4.193000 setlinewidth
+newpath
+928 2784 moveto
+928 2682 lineto
+stroke
+4.193000 setlinewidth
+newpath
+985 2850 moveto
+981 2847 lineto
+965 2847 lineto
+961 2850 lineto
+961 2873 lineto
+965 2877 lineto
+981 2877 lineto
+985 2873 lineto
+stroke
+4.193000 setlinewidth
+newpath
+1001 2847 moveto
+1014 2847 lineto
+stroke
+4.193000 setlinewidth
+newpath
+1007 2847 moveto
+1007 2877 lineto
+stroke
+4.193000 setlinewidth
+newpath
+1007 2873 moveto
+1001 2866 lineto
+stroke
+4.193000 setlinewidth
+newpath
+1051 2847 moveto
+1027 2847 lineto
+1027 2856 lineto
+1031 2860 lineto
+1047 2860 lineto
+1051 2863 lineto
+1051 2873 lineto
+1047 2877 lineto
+1031 2877 lineto
+1027 2873 lineto
+stroke
+4.193000 setlinewidth
+newpath
+968 2727 moveto
+981 2727 lineto
+stroke
+4.193000 setlinewidth
+newpath
+975 2727 moveto
+975 2757 lineto
+stroke
+4.193000 setlinewidth
+newpath
+975 2753 moveto
+968 2747 lineto
+stroke
+4.193000 setlinewidth
+newpath
+994 2727 moveto
+1018 2757 lineto
+stroke
+4.193000 setlinewidth
+newpath
+994 2730 moveto
+994 2753 lineto
+998 2757 lineto
+1014 2757 lineto
+1018 2753 lineto
+1018 2730 lineto
+1014 2727 lineto
+998 2727 lineto
+994 2730 lineto
+stroke
+4.193000 setlinewidth
+newpath
+1027 2727 moveto
+1051 2757 lineto
+stroke
+4.193000 setlinewidth
+newpath
+1027 2730 moveto
+1027 2753 lineto
+1031 2757 lineto
+1047 2757 lineto
+1051 2753 lineto
+1051 2730 lineto
+1047 2727 lineto
+1031 2727 lineto
+1027 2730 lineto
+stroke
+4.193000 setlinewidth
+newpath
+1060 2727 moveto
+1060 2747 lineto
+stroke
+4.193000 setlinewidth
+newpath
+1060 2743 moveto
+1064 2747 lineto
+1077 2747 lineto
+1080 2743 lineto
+1080 2727 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5720 885 moveto
+5750 855 lineto
+5780 885 lineto
+5720 885 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5720 1843 moveto
+5750 1813 lineto
+5780 1843 lineto
+5720 1843 lineto
+stroke
+newpath
+4612 795 moveto
+4612 735 lineto
+4612 735 lineto
+eofill
+4.193000 setlinewidth
+newpath
+4612 795 moveto
+4612 735 lineto
+4612 735 lineto
+closepath
+stroke
+newpath
+4642 765 moveto
+4582 765 lineto
+4582 765 lineto
+4582 765 lineto
+eofill
+4.193000 setlinewidth
+newpath
+4642 765 moveto
+4582 765 lineto
+4582 765 lineto
+4582 765 lineto
+closepath
+stroke
+newpath
+4462 885 moveto
+4492 885 lineto
+4492 765 lineto
+4462 765 lineto
+closepath
+fill
+4.193000 setlinewidth
+newpath
+4462 885 moveto
+4492 885 lineto
+4492 765 lineto
+4462 765 lineto
+closepath
+stroke
+4.193000 setlinewidth
+newpath
+4522 885 moveto
+4552 885 lineto
+4552 765 lineto
+4522 765 lineto
+closepath
+stroke
+4.193000 setlinewidth
+newpath
+4552 855 moveto
+4552 855 lineto
+stroke
+4.193000 setlinewidth
+newpath
+4552 825 moveto
+4642 825 lineto
+stroke
+4.193000 setlinewidth
+newpath
+4402 825 moveto
+4492 825 lineto
+stroke
+4.193000 setlinewidth
+newpath
+4440 948 moveto
+4436 945 lineto
+4420 945 lineto
+4416 948 lineto
+4416 971 lineto
+4420 975 lineto
+4436 975 lineto
+4440 971 lineto
+stroke
+4.193000 setlinewidth
+newpath
+4456 945 moveto
+4469 945 lineto
+stroke
+4.193000 setlinewidth
+newpath
+4462 945 moveto
+4462 975 lineto
+stroke
+4.193000 setlinewidth
+newpath
+4462 971 moveto
+4456 965 lineto
+stroke
+4.193000 setlinewidth
+newpath
+4499 945 moveto
+4499 975 lineto
+4482 951 lineto
+4505 951 lineto
+stroke
+4.193000 setlinewidth
+newpath
+4583 945 moveto
+4560 945 lineto
+4560 954 lineto
+4564 958 lineto
+4580 958 lineto
+4583 961 lineto
+4583 971 lineto
+4580 975 lineto
+4564 975 lineto
+4560 971 lineto
+stroke
+4.193000 setlinewidth
+newpath
+4616 945 moveto
+4593 945 lineto
+4593 954 lineto
+4597 958 lineto
+4613 958 lineto
+4616 961 lineto
+4616 971 lineto
+4613 975 lineto
+4597 975 lineto
+4593 971 lineto
+stroke
+4.193000 setlinewidth
+newpath
+4626 965 moveto
+4626 951 lineto
+4632 945 lineto
+4643 945 lineto
+4649 951 lineto
+4649 965 lineto
+stroke
+4.193000 setlinewidth
+newpath
+4662 945 moveto
+4676 975 lineto
+stroke
+4.193000 setlinewidth
+newpath
+4698 945 moveto
+4712 945 lineto
+stroke
+4.193000 setlinewidth
+newpath
+4705 945 moveto
+4705 975 lineto
+stroke
+4.193000 setlinewidth
+newpath
+4705 971 moveto
+4698 965 lineto
+stroke
+4.193000 setlinewidth
+newpath
+4748 971 moveto
+4744 975 lineto
+4728 975 lineto
+4725 971 lineto
+4725 948 lineto
+4728 945 lineto
+4744 945 lineto
+4748 948 lineto
+4748 958 lineto
+4744 961 lineto
+4728 961 lineto
+4725 958 lineto
+stroke
+4.193000 setlinewidth
+newpath
+4758 975 moveto
+4771 945 lineto
+4785 975 lineto
+stroke
+newpath
+4612 1484 moveto
+4612 1424 lineto
+4612 1424 lineto
+eofill
+4.193000 setlinewidth
+newpath
+4612 1484 moveto
+4612 1424 lineto
+4612 1424 lineto
+closepath
+stroke
+newpath
+4642 1454 moveto
+4582 1454 lineto
+4582 1454 lineto
+4582 1454 lineto
+eofill
+4.193000 setlinewidth
+newpath
+4642 1454 moveto
+4582 1454 lineto
+4582 1454 lineto
+4582 1454 lineto
+closepath
+stroke
+newpath
+4462 1574 moveto
+4492 1574 lineto
+4492 1454 lineto
+4462 1454 lineto
+closepath
+fill
+4.193000 setlinewidth
+newpath
+4462 1574 moveto
+4492 1574 lineto
+4492 1454 lineto
+4462 1454 lineto
+closepath
+stroke
+4.193000 setlinewidth
+newpath
+4522 1574 moveto
+4552 1574 lineto
+4552 1454 lineto
+4522 1454 lineto
+closepath
+stroke
+4.193000 setlinewidth
+newpath
+4552 1544 moveto
+4552 1544 lineto
+stroke
+4.193000 setlinewidth
+newpath
+4552 1514 moveto
+4642 1514 lineto
+stroke
+4.193000 setlinewidth
+newpath
+4402 1514 moveto
+4492 1514 lineto
+stroke
+4.193000 setlinewidth
+newpath
+4559 1367 moveto
+4556 1364 lineto
+4540 1364 lineto
+4536 1367 lineto
+4536 1391 lineto
+4540 1394 lineto
+4556 1394 lineto
+4559 1391 lineto
+stroke
+4.193000 setlinewidth
+newpath
+4576 1364 moveto
+4589 1364 lineto
+stroke
+4.193000 setlinewidth
+newpath
+4582 1364 moveto
+4582 1394 lineto
+stroke
+4.193000 setlinewidth
+newpath
+4582 1391 moveto
+4576 1384 lineto
+stroke
+4.193000 setlinewidth
+newpath
+4602 1394 moveto
+4625 1394 lineto
+4625 1391 lineto
+4612 1380 lineto
+4622 1380 lineto
+4625 1377 lineto
+4625 1367 lineto
+4622 1364 lineto
+4606 1364 lineto
+4602 1367 lineto
+stroke
+4.193000 setlinewidth
+newpath
+4494 1304 moveto
+4470 1304 lineto
+4470 1314 lineto
+4474 1317 lineto
+4490 1317 lineto
+4494 1320 lineto
+4494 1331 lineto
+4490 1334 lineto
+4474 1334 lineto
+4470 1331 lineto
+stroke
+4.193000 setlinewidth
+newpath
+4526 1304 moveto
+4503 1304 lineto
+4503 1314 lineto
+4507 1317 lineto
+4523 1317 lineto
+4526 1320 lineto
+4526 1331 lineto
+4523 1334 lineto
+4507 1334 lineto
+4503 1331 lineto
+stroke
+4.193000 setlinewidth
+newpath
+4536 1324 moveto
+4536 1311 lineto
+4543 1304 lineto
+4553 1304 lineto
+4559 1311 lineto
+4559 1324 lineto
+stroke
+4.193000 setlinewidth
+newpath
+4573 1304 moveto
+4586 1334 lineto
+stroke
+4.193000 setlinewidth
+newpath
+4609 1304 moveto
+4622 1304 lineto
+stroke
+4.193000 setlinewidth
+newpath
+4615 1304 moveto
+4615 1334 lineto
+stroke
+4.193000 setlinewidth
+newpath
+4615 1331 moveto
+4609 1324 lineto
+stroke
+4.193000 setlinewidth
+newpath
+4658 1331 moveto
+4655 1334 lineto
+4638 1334 lineto
+4635 1331 lineto
+4635 1307 lineto
+4638 1304 lineto
+4655 1304 lineto
+4658 1307 lineto
+4658 1317 lineto
+4655 1320 lineto
+4638 1320 lineto
+4635 1317 lineto
+stroke
+4.193000 setlinewidth
+newpath
+4668 1334 moveto
+4681 1304 lineto
+4695 1334 lineto
+stroke
+newpath
+4612 2442 moveto
+4612 2382 lineto
+4612 2382 lineto
+eofill
+4.193000 setlinewidth
+newpath
+4612 2442 moveto
+4612 2382 lineto
+4612 2382 lineto
+closepath
+stroke
+newpath
+4642 2412 moveto
+4582 2412 lineto
+4582 2412 lineto
+4582 2412 lineto
+eofill
+4.193000 setlinewidth
+newpath
+4642 2412 moveto
+4582 2412 lineto
+4582 2412 lineto
+4582 2412 lineto
+closepath
+stroke
+newpath
+4462 2532 moveto
+4492 2532 lineto
+4492 2412 lineto
+4462 2412 lineto
+closepath
+fill
+4.193000 setlinewidth
+newpath
+4462 2532 moveto
+4492 2532 lineto
+4492 2412 lineto
+4462 2412 lineto
+closepath
+stroke
+4.193000 setlinewidth
+newpath
+4522 2532 moveto
+4552 2532 lineto
+4552 2412 lineto
+4522 2412 lineto
+closepath
+stroke
+4.193000 setlinewidth
+newpath
+4552 2502 moveto
+4552 2502 lineto
+stroke
+4.193000 setlinewidth
+newpath
+4552 2472 moveto
+4642 2472 lineto
+stroke
+4.193000 setlinewidth
+newpath
+4402 2472 moveto
+4492 2472 lineto
+stroke
+4.193000 setlinewidth
+newpath
+4559 2355 moveto
+4556 2352 lineto
+4540 2352 lineto
+4536 2355 lineto
+4536 2379 lineto
+4540 2382 lineto
+4556 2382 lineto
+4559 2379 lineto
+stroke
+4.193000 setlinewidth
+newpath
+4576 2352 moveto
+4589 2352 lineto
+stroke
+4.193000 setlinewidth
+newpath
+4582 2352 moveto
+4582 2382 lineto
+stroke
+4.193000 setlinewidth
+newpath
+4582 2379 moveto
+4576 2372 lineto
+stroke
+4.193000 setlinewidth
+newpath
+4602 2359 moveto
+4602 2355 lineto
+4606 2352 lineto
+4622 2352 lineto
+4625 2355 lineto
+4625 2366 lineto
+4619 2372 lineto
+4602 2372 lineto
+4602 2382 lineto
+4625 2382 lineto
+stroke
+4.193000 setlinewidth
+newpath
+4494 2293 moveto
+4470 2293 lineto
+4470 2302 lineto
+4474 2306 lineto
+4490 2306 lineto
+4494 2309 lineto
+4494 2319 lineto
+4490 2323 lineto
+4474 2323 lineto
+4470 2319 lineto
+stroke
+4.193000 setlinewidth
+newpath
+4526 2293 moveto
+4503 2293 lineto
+4503 2302 lineto
+4507 2306 lineto
+4523 2306 lineto
+4526 2309 lineto
+4526 2319 lineto
+4523 2323 lineto
+4507 2323 lineto
+4503 2319 lineto
+stroke
+4.193000 setlinewidth
+newpath
+4536 2312 moveto
+4536 2299 lineto
+4543 2293 lineto
+4553 2293 lineto
+4559 2299 lineto
+4559 2312 lineto
+stroke
+4.193000 setlinewidth
+newpath
+4573 2293 moveto
+4586 2323 lineto
+stroke
+4.193000 setlinewidth
+newpath
+4609 2293 moveto
+4622 2293 lineto
+stroke
+4.193000 setlinewidth
+newpath
+4615 2293 moveto
+4615 2323 lineto
+stroke
+4.193000 setlinewidth
+newpath
+4615 2319 moveto
+4609 2312 lineto
+stroke
+4.193000 setlinewidth
+newpath
+4658 2319 moveto
+4655 2323 lineto
+4638 2323 lineto
+4635 2319 lineto
+4635 2296 lineto
+4638 2293 lineto
+4655 2293 lineto
+4658 2296 lineto
+4658 2306 lineto
+4655 2309 lineto
+4638 2309 lineto
+4635 2306 lineto
+stroke
+4.193000 setlinewidth
+newpath
+4668 2323 moveto
+4681 2293 lineto
+4695 2323 lineto
+stroke
+newpath
+4612 1783 moveto
+4612 1724 lineto
+4612 1724 lineto
+eofill
+4.193000 setlinewidth
+newpath
+4612 1783 moveto
+4612 1724 lineto
+4612 1724 lineto
+closepath
+stroke
+newpath
+4642 1753 moveto
+4582 1753 lineto
+4582 1753 lineto
+4582 1753 lineto
+eofill
+4.193000 setlinewidth
+newpath
+4642 1753 moveto
+4582 1753 lineto
+4582 1753 lineto
+4582 1753 lineto
+closepath
+stroke
+newpath
+4462 1873 moveto
+4492 1873 lineto
+4492 1753 lineto
+4462 1753 lineto
+closepath
+fill
+4.193000 setlinewidth
+newpath
+4462 1873 moveto
+4492 1873 lineto
+4492 1753 lineto
+4462 1753 lineto
+closepath
+stroke
+4.193000 setlinewidth
+newpath
+4522 1873 moveto
+4552 1873 lineto
+4552 1753 lineto
+4522 1753 lineto
+closepath
+stroke
+4.193000 setlinewidth
+newpath
+4552 1843 moveto
+4552 1843 lineto
+stroke
+4.193000 setlinewidth
+newpath
+4552 1813 moveto
+4642 1813 lineto
+stroke
+4.193000 setlinewidth
+newpath
+4402 1813 moveto
+4492 1813 lineto
+stroke
+4.193000 setlinewidth
+newpath
+4529 1667 moveto
+4526 1664 lineto
+4510 1664 lineto
+4506 1667 lineto
+4506 1690 lineto
+4510 1694 lineto
+4526 1694 lineto
+4529 1690 lineto
+stroke
+4.193000 setlinewidth
+newpath
+4546 1664 moveto
+4559 1664 lineto
+stroke
+4.193000 setlinewidth
+newpath
+4552 1664 moveto
+4552 1694 lineto
+stroke
+4.193000 setlinewidth
+newpath
+4552 1690 moveto
+4546 1683 lineto
+stroke
+4.193000 setlinewidth
+newpath
+4595 1690 moveto
+4592 1694 lineto
+4576 1694 lineto
+4572 1690 lineto
+4572 1667 lineto
+4576 1664 lineto
+4592 1664 lineto
+4595 1667 lineto
+4595 1677 lineto
+4592 1680 lineto
+4576 1680 lineto
+4572 1677 lineto
+stroke
+4.193000 setlinewidth
+newpath
+4464 1604 moveto
+4440 1604 lineto
+4440 1613 lineto
+4444 1617 lineto
+4460 1617 lineto
+4464 1620 lineto
+4464 1630 lineto
+4460 1634 lineto
+4444 1634 lineto
+4440 1630 lineto
+stroke
+4.193000 setlinewidth
+newpath
+4497 1604 moveto
+4473 1604 lineto
+4473 1613 lineto
+4477 1617 lineto
+4493 1617 lineto
+4497 1620 lineto
+4497 1630 lineto
+4493 1634 lineto
+4477 1634 lineto
+4473 1630 lineto
+stroke
+4.193000 setlinewidth
+newpath
+4506 1624 moveto
+4506 1610 lineto
+4513 1604 lineto
+4523 1604 lineto
+4529 1610 lineto
+4529 1624 lineto
+stroke
+4.193000 setlinewidth
+newpath
+4543 1604 moveto
+4556 1634 lineto
+stroke
+4.193000 setlinewidth
+newpath
+4579 1604 moveto
+4592 1604 lineto
+stroke
+4.193000 setlinewidth
+newpath
+4585 1604 moveto
+4585 1634 lineto
+stroke
+4.193000 setlinewidth
+newpath
+4585 1630 moveto
+4579 1624 lineto
+stroke
+4.193000 setlinewidth
+newpath
+4628 1630 moveto
+4625 1634 lineto
+4609 1634 lineto
+4605 1630 lineto
+4605 1607 lineto
+4609 1604 lineto
+4625 1604 lineto
+4628 1607 lineto
+4628 1617 lineto
+4625 1620 lineto
+4609 1620 lineto
+4605 1617 lineto
+stroke
+4.193000 setlinewidth
+newpath
+4638 1634 moveto
+4651 1604 lineto
+4665 1634 lineto
+stroke
+4.193000 setlinewidth
+newpath
+1647 1783 moveto
+1677 1753 lineto
+1707 1783 lineto
+1647 1783 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5570 1304 moveto
+5570 855 lineto
+5001 1155 lineto
+5570 1454 lineto
+5570 1304 lineto
+5570 1304 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5331 1334 moveto
+5331 1394 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5333 1235 moveto
+5333 1259 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5345 1247 moveto
+5321 1247 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5345 1274 moveto
+5349 1279 lineto
+5349 1298 lineto
+5345 1302 lineto
+5333 1302 lineto
+5329 1298 lineto
+5329 1279 lineto
+5325 1274 lineto
+5317 1274 lineto
+5313 1279 lineto
+5313 1298 lineto
+5317 1302 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5289 1348 moveto
+5289 1376 lineto
+5325 1348 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5391 1364 moveto
+5391 1424 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5373 1265 moveto
+5409 1281 lineto
+5373 1297 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5393 1304 moveto
+5393 1328 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5405 1316 moveto
+5381 1316 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5353 1406 moveto
+5349 1402 lineto
+5349 1382 lineto
+5353 1378 lineto
+5381 1378 lineto
+5385 1382 lineto
+5385 1402 lineto
+5381 1406 lineto
+5369 1406 lineto
+5365 1402 lineto
+5365 1382 lineto
+5369 1378 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5570 1005 moveto
+5630 1005 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5455 1019 moveto
+5455 1023 lineto
+5436 1023 lineto
+5431 1019 lineto
+5431 990 lineto
+5436 987 lineto
+5455 987 lineto
+5460 990 lineto
+5460 1002 lineto
+5448 1002 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5471 987 moveto
+5471 1023 lineto
+5499 987 lineto
+5499 1023 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5515 987 moveto
+5515 1023 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5511 1023 moveto
+5535 1023 lineto
+5539 1019 lineto
+5539 990 lineto
+5535 987 lineto
+5511 987 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5584 1047 moveto
+5612 1047 lineto
+5612 1043 lineto
+5596 1031 lineto
+5608 1031 lineto
+5612 1026 lineto
+5612 1014 lineto
+5608 1011 lineto
+5588 1011 lineto
+5584 1014 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5570 1304 moveto
+5630 1304 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5431 1322 moveto
+5448 1286 lineto
+5464 1322 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5475 1286 moveto
+5491 1286 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5483 1286 moveto
+5483 1322 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5475 1322 moveto
+5491 1322 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5511 1286 moveto
+5511 1322 lineto
+5539 1286 lineto
+5539 1322 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5605 1310 moveto
+5605 1346 lineto
+5584 1318 lineto
+5612 1318 lineto
+stroke
+4.193000 setlinewidth
+newpath
+4942 1095 moveto
+5121 1095 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5153 1092 moveto
+5173 1092 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5188 1113 moveto
+5204 1077 lineto
+5221 1113 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5232 1077 moveto
+5228 1080 lineto
+5228 1108 lineto
+5232 1113 lineto
+5252 1113 lineto
+5256 1108 lineto
+5256 1080 lineto
+5252 1077 lineto
+5232 1077 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5024 1101 moveto
+5039 1101 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5031 1101 moveto
+5031 1137 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5031 1132 moveto
+5024 1125 lineto
+stroke
+4.193000 setlinewidth
+newpath
+4942 1214 moveto
+5121 1214 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5149 1212 moveto
+5173 1212 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5161 1200 moveto
+5161 1224 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5188 1232 moveto
+5204 1196 lineto
+5221 1232 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5232 1196 moveto
+5228 1200 lineto
+5228 1228 lineto
+5232 1232 lineto
+5252 1232 lineto
+5256 1228 lineto
+5256 1200 lineto
+5252 1196 lineto
+5232 1196 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5019 1220 moveto
+5015 1224 lineto
+5015 1236 lineto
+5019 1240 lineto
+5039 1240 lineto
+5043 1244 lineto
+5043 1252 lineto
+5039 1256 lineto
+5019 1256 lineto
+5015 1252 lineto
+5015 1244 lineto
+5019 1240 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5039 1240 moveto
+5043 1236 lineto
+5043 1224 lineto
+5039 1220 lineto
+5019 1220 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5331 975 moveto
+5331 915 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5333 1007 moveto
+5333 1026 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5345 1042 moveto
+5349 1046 lineto
+5349 1066 lineto
+5345 1070 lineto
+5333 1070 lineto
+5329 1066 lineto
+5329 1046 lineto
+5325 1042 lineto
+5317 1042 lineto
+5313 1046 lineto
+5313 1066 lineto
+5317 1070 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5325 957 moveto
+5325 929 lineto
+5313 929 lineto
+5309 933 lineto
+5309 953 lineto
+5305 957 lineto
+5293 957 lineto
+5289 953 lineto
+5289 933 lineto
+5293 929 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5391 945 moveto
+5391 885 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5373 972 moveto
+5409 989 lineto
+5373 1005 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5393 1016 moveto
+5393 1036 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5377 899 moveto
+5381 899 lineto
+5385 903 lineto
+5385 923 lineto
+5381 927 lineto
+5369 927 lineto
+5361 919 lineto
+5361 899 lineto
+5349 899 lineto
+5349 927 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5055 1382 moveto
+5055 1350 lineto
+5060 1346 lineto
+5079 1346 lineto
+5083 1350 lineto
+5083 1382 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5115 1346 moveto
+5115 1382 lineto
+5095 1354 lineto
+5123 1354 lineto
+stroke
+4.193000 setlinewidth
+newpath
+4951 957 moveto
+4951 993 lineto
+stroke
+4.193000 setlinewidth
+newpath
+4946 993 moveto
+4970 993 lineto
+4974 989 lineto
+4974 960 lineto
+4970 957 lineto
+4946 957 lineto
+stroke
+4.193000 setlinewidth
+newpath
+4986 957 moveto
+4986 993 lineto
+5010 993 lineto
+5014 989 lineto
+5014 977 lineto
+5010 972 lineto
+4986 972 lineto
+stroke
+4.193000 setlinewidth
+newpath
+4998 972 moveto
+5014 957 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5025 993 moveto
+5042 957 lineto
+5058 993 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5073 957 moveto
+5089 957 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5081 957 moveto
+5081 993 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5081 989 moveto
+5073 981 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5104 993 moveto
+5133 993 lineto
+5133 989 lineto
+5116 977 lineto
+5128 977 lineto
+5133 972 lineto
+5133 960 lineto
+5128 957 lineto
+5109 957 lineto
+5104 960 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5144 965 moveto
+5144 960 lineto
+5148 957 lineto
+5168 957 lineto
+5172 960 lineto
+5172 972 lineto
+5164 981 lineto
+5144 981 lineto
+5144 993 lineto
+5172 993 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5570 2293 moveto
+5570 1843 lineto
+5001 2143 lineto
+5570 2442 lineto
+5570 2293 lineto
+5570 2293 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5331 2323 moveto
+5331 2382 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5333 2223 moveto
+5333 2247 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5345 2235 moveto
+5321 2235 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5345 2263 moveto
+5349 2267 lineto
+5349 2287 lineto
+5345 2291 lineto
+5333 2291 lineto
+5329 2287 lineto
+5329 2267 lineto
+5325 2263 lineto
+5317 2263 lineto
+5313 2267 lineto
+5313 2287 lineto
+5317 2291 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5289 2336 moveto
+5289 2364 lineto
+5325 2336 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5391 2352 moveto
+5391 2412 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5373 2253 moveto
+5409 2269 lineto
+5373 2285 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5393 2293 moveto
+5393 2317 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5405 2305 moveto
+5381 2305 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5353 2394 moveto
+5349 2390 lineto
+5349 2370 lineto
+5353 2366 lineto
+5381 2366 lineto
+5385 2370 lineto
+5385 2390 lineto
+5381 2394 lineto
+5369 2394 lineto
+5365 2390 lineto
+5365 2370 lineto
+5369 2366 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5570 1993 moveto
+5630 1993 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5455 2007 moveto
+5455 2011 lineto
+5436 2011 lineto
+5431 2007 lineto
+5431 1979 lineto
+5436 1975 lineto
+5455 1975 lineto
+5460 1979 lineto
+5460 1991 lineto
+5448 1991 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5471 1975 moveto
+5471 2011 lineto
+5499 1975 lineto
+5499 2011 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5515 1975 moveto
+5515 2011 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5511 2011 moveto
+5535 2011 lineto
+5539 2007 lineto
+5539 1979 lineto
+5535 1975 lineto
+5511 1975 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5584 2035 moveto
+5612 2035 lineto
+5612 2031 lineto
+5596 2019 lineto
+5608 2019 lineto
+5612 2015 lineto
+5612 2003 lineto
+5608 1999 lineto
+5588 1999 lineto
+5584 2003 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5570 2293 moveto
+5630 2293 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5431 2311 moveto
+5448 2275 lineto
+5464 2311 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5475 2275 moveto
+5491 2275 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5483 2275 moveto
+5483 2311 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5475 2311 moveto
+5491 2311 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5511 2275 moveto
+5511 2311 lineto
+5539 2275 lineto
+5539 2311 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5605 2299 moveto
+5605 2334 lineto
+5584 2306 lineto
+5612 2306 lineto
+stroke
+4.193000 setlinewidth
+newpath
+4942 2083 moveto
+5121 2083 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5153 2081 moveto
+5173 2081 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5188 2101 moveto
+5204 2065 lineto
+5221 2101 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5232 2065 moveto
+5228 2069 lineto
+5228 2097 lineto
+5232 2101 lineto
+5252 2101 lineto
+5256 2097 lineto
+5256 2069 lineto
+5252 2065 lineto
+5232 2065 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5024 2089 moveto
+5039 2089 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5031 2089 moveto
+5031 2125 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5031 2121 moveto
+5024 2113 lineto
+stroke
+4.193000 setlinewidth
+newpath
+4942 2203 moveto
+5121 2203 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5149 2200 moveto
+5173 2200 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5161 2188 moveto
+5161 2212 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5188 2221 moveto
+5204 2185 lineto
+5221 2221 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5232 2185 moveto
+5228 2188 lineto
+5228 2216 lineto
+5232 2221 lineto
+5252 2221 lineto
+5256 2216 lineto
+5256 2188 lineto
+5252 2185 lineto
+5232 2185 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5019 2209 moveto
+5015 2212 lineto
+5015 2224 lineto
+5019 2228 lineto
+5039 2228 lineto
+5043 2233 lineto
+5043 2240 lineto
+5039 2245 lineto
+5019 2245 lineto
+5015 2240 lineto
+5015 2233 lineto
+5019 2228 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5039 2228 moveto
+5043 2224 lineto
+5043 2212 lineto
+5039 2209 lineto
+5019 2209 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5331 1963 moveto
+5331 1903 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5333 1995 moveto
+5333 2015 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5345 2030 moveto
+5349 2034 lineto
+5349 2054 lineto
+5345 2058 lineto
+5333 2058 lineto
+5329 2054 lineto
+5329 2034 lineto
+5325 2030 lineto
+5317 2030 lineto
+5313 2034 lineto
+5313 2054 lineto
+5317 2058 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5325 1945 moveto
+5325 1917 lineto
+5313 1917 lineto
+5309 1921 lineto
+5309 1941 lineto
+5305 1945 lineto
+5293 1945 lineto
+5289 1941 lineto
+5289 1921 lineto
+5293 1917 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5391 1933 moveto
+5391 1873 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5373 1961 moveto
+5409 1977 lineto
+5373 1993 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5393 2004 moveto
+5393 2024 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5377 1887 moveto
+5381 1887 lineto
+5385 1891 lineto
+5385 1911 lineto
+5381 1915 lineto
+5369 1915 lineto
+5361 1907 lineto
+5361 1887 lineto
+5349 1887 lineto
+5349 1915 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5115 2370 moveto
+5115 2338 lineto
+5119 2334 lineto
+5139 2334 lineto
+5143 2338 lineto
+5143 2370 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5155 2370 moveto
+5183 2370 lineto
+5183 2366 lineto
+5167 2354 lineto
+5179 2354 lineto
+5183 2350 lineto
+5183 2338 lineto
+5179 2334 lineto
+5159 2334 lineto
+5155 2338 lineto
+stroke
+4.193000 setlinewidth
+newpath
+4980 1915 moveto
+4980 1951 lineto
+stroke
+4.193000 setlinewidth
+newpath
+4976 1951 moveto
+5000 1951 lineto
+5004 1947 lineto
+5004 1919 lineto
+5000 1915 lineto
+4976 1915 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5016 1915 moveto
+5016 1951 lineto
+5040 1951 lineto
+5044 1947 lineto
+5044 1935 lineto
+5040 1931 lineto
+5016 1931 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5028 1931 moveto
+5044 1915 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5055 1951 moveto
+5072 1915 lineto
+5088 1951 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5103 1915 moveto
+5119 1915 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5111 1915 moveto
+5111 1951 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5111 1947 moveto
+5103 1939 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5134 1951 moveto
+5163 1951 lineto
+5163 1947 lineto
+5146 1935 lineto
+5158 1935 lineto
+5163 1931 lineto
+5163 1919 lineto
+5158 1915 lineto
+5139 1915 lineto
+5134 1919 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5174 1923 moveto
+5174 1919 lineto
+5178 1915 lineto
+5198 1915 lineto
+5202 1919 lineto
+5202 1931 lineto
+5194 1939 lineto
+5174 1939 lineto
+5174 1951 lineto
+5202 1951 lineto
+stroke
+4.193000 setlinewidth
+newpath
+2037 1095 moveto
+2066 1065 lineto
+2096 1095 lineto
+2037 1095 lineto
+stroke
+4.193000 setlinewidth
+newpath
+2905 1005 moveto
+2935 975 lineto
+2965 1005 lineto
+2905 1005 lineto
+stroke
+newpath
+1947 1484 moveto
+2007 1484 lineto
+2007 1484 lineto
+eofill
+4.193000 setlinewidth
+newpath
+1947 1484 moveto
+2007 1484 lineto
+2007 1484 lineto
+closepath
+stroke
+newpath
+1977 1514 moveto
+1977 1454 lineto
+1977 1454 lineto
+1977 1454 lineto
+eofill
+4.193000 setlinewidth
+newpath
+1977 1514 moveto
+1977 1454 lineto
+1977 1454 lineto
+1977 1454 lineto
+closepath
+stroke
+newpath
+1857 1364 moveto
+1977 1364 lineto
+1977 1334 lineto
+1857 1334 lineto
+closepath
+fill
+4.193000 setlinewidth
+newpath
+1857 1364 moveto
+1977 1364 lineto
+1977 1334 lineto
+1857 1334 lineto
+closepath
+stroke
+4.193000 setlinewidth
+newpath
+1857 1424 moveto
+1977 1424 lineto
+1977 1394 lineto
+1857 1394 lineto
+closepath
+stroke
+4.193000 setlinewidth
+newpath
+1887 1424 moveto
+1887 1424 lineto
+stroke
+4.193000 setlinewidth
+newpath
+1917 1424 moveto
+1917 1514 lineto
+stroke
+4.193000 setlinewidth
+newpath
+1917 1364 moveto
+1917 1274 lineto
+stroke
+4.193000 setlinewidth
+newpath
+1763 1382 moveto
+1760 1379 lineto
+1744 1379 lineto
+1740 1382 lineto
+1740 1405 lineto
+1744 1409 lineto
+1760 1409 lineto
+1763 1405 lineto
+stroke
+4.193000 setlinewidth
+newpath
+1777 1379 moveto
+1773 1382 lineto
+1773 1392 lineto
+1777 1395 lineto
+1793 1395 lineto
+1796 1399 lineto
+1796 1405 lineto
+1793 1409 lineto
+1777 1409 lineto
+1773 1405 lineto
+1773 1399 lineto
+1777 1395 lineto
+stroke
+4.193000 setlinewidth
+newpath
+1793 1395 moveto
+1796 1392 lineto
+1796 1382 lineto
+1793 1379 lineto
+1777 1379 lineto
+stroke
+4.193000 setlinewidth
+newpath
+1733 1289 moveto
+1710 1289 lineto
+1710 1299 lineto
+1714 1302 lineto
+1730 1302 lineto
+1733 1305 lineto
+1733 1316 lineto
+1730 1319 lineto
+1714 1319 lineto
+1710 1316 lineto
+stroke
+4.193000 setlinewidth
+newpath
+1766 1289 moveto
+1743 1289 lineto
+1743 1299 lineto
+1747 1302 lineto
+1763 1302 lineto
+1766 1305 lineto
+1766 1316 lineto
+1763 1319 lineto
+1747 1319 lineto
+1743 1316 lineto
+stroke
+4.193000 setlinewidth
+newpath
+1776 1309 moveto
+1776 1296 lineto
+1783 1289 lineto
+1793 1289 lineto
+1799 1296 lineto
+1799 1309 lineto
+stroke
+4.193000 setlinewidth
+newpath
+1812 1289 moveto
+1826 1319 lineto
+stroke
+4.193000 setlinewidth
+newpath
+1865 1316 moveto
+1862 1319 lineto
+1845 1319 lineto
+1842 1316 lineto
+1842 1292 lineto
+1845 1289 lineto
+1862 1289 lineto
+1865 1292 lineto
+1865 1302 lineto
+1862 1305 lineto
+1845 1305 lineto
+1842 1302 lineto
+stroke
+4.193000 setlinewidth
+newpath
+1875 1319 moveto
+1888 1289 lineto
+1902 1319 lineto
+stroke
+4.193000 setlinewidth
+newpath
+2007 1376 moveto
+2126 1376 lineto
+stroke
+4.193000 setlinewidth
+newpath
+2007 1412 moveto
+2126 1412 lineto
+stroke
+4.193000 setlinewidth
+newpath
+2066 1412 moveto
+2066 1514 lineto
+stroke
+4.193000 setlinewidth
+newpath
+2066 1376 moveto
+2066 1274 lineto
+stroke
+4.193000 setlinewidth
+newpath
+2063 1023 moveto
+2059 1020 lineto
+2043 1020 lineto
+2040 1023 lineto
+2040 1046 lineto
+2043 1050 lineto
+2059 1050 lineto
+2063 1046 lineto
+stroke
+4.193000 setlinewidth
+newpath
+2076 1020 moveto
+2092 1020 lineto
+2096 1023 lineto
+2096 1046 lineto
+2092 1050 lineto
+2076 1050 lineto
+2072 1046 lineto
+2072 1036 lineto
+2076 1033 lineto
+2092 1033 lineto
+2096 1036 lineto
+stroke
+4.193000 setlinewidth
+newpath
+2046 960 moveto
+2059 960 lineto
+stroke
+4.193000 setlinewidth
+newpath
+2053 960 moveto
+2053 990 lineto
+stroke
+4.193000 setlinewidth
+newpath
+2053 986 moveto
+2046 980 lineto
+stroke
+4.193000 setlinewidth
+newpath
+2072 960 moveto
+2096 990 lineto
+stroke
+4.193000 setlinewidth
+newpath
+2072 963 moveto
+2072 986 lineto
+2076 990 lineto
+2092 990 lineto
+2096 986 lineto
+2096 963 lineto
+2092 960 lineto
+2076 960 lineto
+2072 963 lineto
+stroke
+4.193000 setlinewidth
+newpath
+2105 960 moveto
+2129 990 lineto
+stroke
+4.193000 setlinewidth
+newpath
+2105 963 moveto
+2105 986 lineto
+2109 990 lineto
+2125 990 lineto
+2129 986 lineto
+2129 963 lineto
+2125 960 lineto
+2109 960 lineto
+2105 963 lineto
+stroke
+4.193000 setlinewidth
+newpath
+2138 960 moveto
+2138 980 lineto
+stroke
+4.193000 setlinewidth
+newpath
+2138 976 moveto
+2142 980 lineto
+2155 980 lineto
+2158 976 lineto
+2158 960 lineto
+stroke
+4.193000 setlinewidth
+newpath
+2282 1484 moveto
+2330 1484 lineto
+2330 1304 lineto
+2282 1304 lineto
+closepath
+stroke
+4.193000 setlinewidth
+newpath
+2306 1484 moveto
+2306 1544 lineto
+stroke
+4.193000 setlinewidth
+newpath
+2306 1304 moveto
+2306 1244 lineto
+stroke
+4.193000 setlinewidth
+newpath
+2366 1289 moveto
+2366 1319 lineto
+2386 1319 lineto
+2389 1316 lineto
+2389 1305 lineto
+2386 1302 lineto
+2366 1302 lineto
+stroke
+4.193000 setlinewidth
+newpath
+2376 1302 moveto
+2389 1289 lineto
+stroke
+4.193000 setlinewidth
+newpath
+2422 1289 moveto
+2399 1289 lineto
+2399 1299 lineto
+2402 1302 lineto
+2419 1302 lineto
+2422 1305 lineto
+2422 1316 lineto
+2419 1319 lineto
+2402 1319 lineto
+2399 1316 lineto
+stroke
+4.193000 setlinewidth
+newpath
+2340 1229 moveto
+2353 1229 lineto
+stroke
+4.193000 setlinewidth
+newpath
+2346 1229 moveto
+2346 1259 lineto
+stroke
+4.193000 setlinewidth
+newpath
+2346 1256 moveto
+2340 1249 lineto
+stroke
+4.193000 setlinewidth
+newpath
+2366 1229 moveto
+2389 1259 lineto
+stroke
+4.193000 setlinewidth
+newpath
+2366 1232 moveto
+2366 1256 lineto
+2370 1259 lineto
+2386 1259 lineto
+2389 1256 lineto
+2389 1232 lineto
+2386 1229 lineto
+2370 1229 lineto
+2366 1232 lineto
+stroke
+4.193000 setlinewidth
+newpath
+2399 1229 moveto
+2422 1259 lineto
+stroke
+4.193000 setlinewidth
+newpath
+2399 1232 moveto
+2399 1256 lineto
+2402 1259 lineto
+2419 1259 lineto
+2422 1256 lineto
+2422 1232 lineto
+2419 1229 lineto
+2402 1229 lineto
+2399 1232 lineto
+stroke
+4.193000 setlinewidth
+newpath
+2432 1229 moveto
+2432 1259 lineto
+2452 1259 lineto
+2455 1256 lineto
+2455 1246 lineto
+2452 1243 lineto
+2432 1243 lineto
+stroke
+4.193000 setlinewidth
+newpath
+2442 1243 moveto
+2455 1229 lineto
+stroke
+4.193000 setlinewidth
+newpath
+2486 1628 moveto
+2665 1628 lineto
+2665 1580 lineto
+2486 1580 lineto
+closepath
+stroke
+4.193000 setlinewidth
+newpath
+2665 1604 moveto
+2725 1604 lineto
+stroke
+4.193000 setlinewidth
+newpath
+2426 1604 moveto
+2486 1604 lineto
+stroke
+4.193000 setlinewidth
+newpath
+2546 1541 moveto
+2546 1571 lineto
+2565 1571 lineto
+2569 1567 lineto
+2569 1557 lineto
+2565 1554 lineto
+2546 1554 lineto
+stroke
+4.193000 setlinewidth
+newpath
+2556 1554 moveto
+2569 1541 lineto
+stroke
+4.193000 setlinewidth
+newpath
+2595 1541 moveto
+2595 1571 lineto
+2579 1547 lineto
+2602 1547 lineto
+stroke
+4.193000 setlinewidth
+newpath
+2529 1506 moveto
+2529 1502 lineto
+2533 1499 lineto
+2549 1499 lineto
+2553 1502 lineto
+2553 1512 lineto
+2546 1519 lineto
+2529 1519 lineto
+2529 1529 lineto
+2553 1529 lineto
+stroke
+4.193000 setlinewidth
+newpath
+2562 1499 moveto
+2586 1529 lineto
+stroke
+4.193000 setlinewidth
+newpath
+2562 1502 moveto
+2562 1525 lineto
+2566 1529 lineto
+2582 1529 lineto
+2586 1525 lineto
+2586 1502 lineto
+2582 1499 lineto
+2566 1499 lineto
+2562 1502 lineto
+stroke
+4.193000 setlinewidth
+newpath
+2595 1499 moveto
+2595 1529 lineto
+2615 1529 lineto
+2619 1525 lineto
+2619 1515 lineto
+2615 1512 lineto
+2595 1512 lineto
+stroke
+4.193000 setlinewidth
+newpath
+2606 1512 moveto
+2619 1499 lineto
+stroke
+4.193000 setlinewidth
+newpath
+2486 2346 moveto
+2665 2346 lineto
+2665 2299 lineto
+2486 2299 lineto
+closepath
+stroke
+4.193000 setlinewidth
+newpath
+2665 2323 moveto
+2725 2323 lineto
+stroke
+4.193000 setlinewidth
+newpath
+2426 2323 moveto
+2486 2323 lineto
+stroke
+4.193000 setlinewidth
+newpath
+2546 2248 moveto
+2546 2278 lineto
+2565 2278 lineto
+2569 2274 lineto
+2569 2264 lineto
+2565 2261 lineto
+2546 2261 lineto
+stroke
+4.193000 setlinewidth
+newpath
+2556 2261 moveto
+2569 2248 lineto
+stroke
+4.193000 setlinewidth
+newpath
+2579 2278 moveto
+2602 2278 lineto
+2602 2274 lineto
+2589 2264 lineto
+2598 2264 lineto
+2602 2261 lineto
+2602 2251 lineto
+2598 2248 lineto
+2582 2248 lineto
+2579 2251 lineto
+stroke
+4.193000 setlinewidth
+newpath
+2529 2194 moveto
+2529 2191 lineto
+2533 2188 lineto
+2549 2188 lineto
+2553 2191 lineto
+2553 2201 lineto
+2546 2208 lineto
+2529 2208 lineto
+2529 2218 lineto
+2553 2218 lineto
+stroke
+4.193000 setlinewidth
+newpath
+2562 2188 moveto
+2586 2218 lineto
+stroke
+4.193000 setlinewidth
+newpath
+2562 2191 moveto
+2562 2214 lineto
+2566 2218 lineto
+2582 2218 lineto
+2586 2214 lineto
+2586 2191 lineto
+2582 2188 lineto
+2566 2188 lineto
+2562 2191 lineto
+stroke
+4.193000 setlinewidth
+newpath
+2595 2188 moveto
+2595 2218 lineto
+2615 2218 lineto
+2619 2214 lineto
+2619 2204 lineto
+2615 2201 lineto
+2595 2201 lineto
+stroke
+4.193000 setlinewidth
+newpath
+2606 2201 moveto
+2619 2188 lineto
+stroke
+4.193000 setlinewidth
+newpath
+2096 2053 30 30 0 360 ellipse
+stroke
+4.193000 setlinewidth
+newpath
+1857 2053 0 0 0 360 ellipse
+stroke
+4.193000 setlinewidth
+newpath
+2037 1903 30 30 181 267 ellipse
+2037 1903 lineto
+stroke
+fill
+4.193000 setlinewidth
+newpath
+1917 2083 30 30 271 358 ellipse
+1917 2083 lineto
+stroke
+fill
+4.193000 setlinewidth
+newpath
+2037 1963 30 30 178 271 ellipse
+2037 1963 lineto
+stroke
+fill
+4.193000 setlinewidth
+newpath
+1992 1873 moveto
+1992 2113 lineto
+stroke
+4.193000 setlinewidth
+newpath
+1917 2083 30 30 1 88 ellipse
+1917 2083 lineto
+stroke
+fill
+4.193000 setlinewidth
+newpath
+1917 1963 30 30 271 358 ellipse
+1917 1963 lineto
+stroke
+fill
+4.193000 setlinewidth
+newpath
+2037 2083 30 30 88 181 ellipse
+2037 2083 lineto
+stroke
+fill
+4.193000 setlinewidth
+newpath
+1917 1963 30 30 1 88 ellipse
+1917 1963 lineto
+stroke
+fill
+4.193000 setlinewidth
+newpath
+1962 2113 moveto
+1962 1873 lineto
+stroke
+4.193000 setlinewidth
+newpath
+1917 2023 30 30 1 88 ellipse
+1917 2023 lineto
+stroke
+fill
+4.193000 setlinewidth
+newpath
+2037 1903 30 30 91 181 ellipse
+2037 1903 lineto
+stroke
+fill
+4.193000 setlinewidth
+newpath
+2037 2023 30 30 178 271 ellipse
+2037 2023 lineto
+stroke
+fill
+4.193000 setlinewidth
+newpath
+1917 1903 30 30 271 358 ellipse
+1917 1903 lineto
+stroke
+fill
+4.193000 setlinewidth
+newpath
+2037 2023 30 30 88 181 ellipse
+2037 2023 lineto
+stroke
+fill
+4.193000 setlinewidth
+newpath
+2037 2083 30 30 178 271 ellipse
+2037 2083 lineto
+stroke
+fill
+4.193000 setlinewidth
+newpath
+2037 1963 30 30 88 181 ellipse
+2037 1963 lineto
+stroke
+fill
+4.193000 setlinewidth
+newpath
+1917 2023 30 30 271 358 ellipse
+1917 2023 lineto
+stroke
+fill
+4.193000 setlinewidth
+newpath
+1917 1903 30 30 1 88 ellipse
+1917 1903 lineto
+stroke
+fill
+4.193000 setlinewidth
+newpath
+1857 2053 30 30 0 360 ellipse
+stroke
+4.193000 setlinewidth
+newpath
+2037 1873 moveto
+2216 1873 lineto
+stroke
+4.193000 setlinewidth
+newpath
+2110 1915 moveto
+2138 1915 lineto
+2138 1911 lineto
+2122 1899 lineto
+2134 1899 lineto
+2138 1895 lineto
+2138 1883 lineto
+2134 1879 lineto
+2114 1879 lineto
+2110 1883 lineto
+stroke
+4.193000 setlinewidth
+newpath
+2037 1993 moveto
+2216 1993 lineto
+stroke
+4.193000 setlinewidth
+newpath
+2137 1999 moveto
+2113 1999 lineto
+2113 2009 lineto
+2117 2012 lineto
+2133 2012 lineto
+2137 2015 lineto
+2137 2025 lineto
+2133 2029 lineto
+2117 2029 lineto
+2113 2025 lineto
+stroke
+4.193000 setlinewidth
+newpath
+2037 2113 moveto
+2216 2113 lineto
+stroke
+4.193000 setlinewidth
+newpath
+2119 2119 moveto
+2134 2119 lineto
+stroke
+4.193000 setlinewidth
+newpath
+2126 2119 moveto
+2126 2155 lineto
+stroke
+4.193000 setlinewidth
+newpath
+2126 2151 moveto
+2119 2143 lineto
+stroke
+4.193000 setlinewidth
+newpath
+1737 1873 moveto
+1917 1873 lineto
+stroke
+4.193000 setlinewidth
+newpath
+1831 1879 moveto
+1831 1915 lineto
+1811 1887 lineto
+1839 1887 lineto
+stroke
+4.193000 setlinewidth
+newpath
+1737 2113 moveto
+1917 2113 lineto
+stroke
+4.193000 setlinewidth
+newpath
+1837 2145 moveto
+1833 2149 lineto
+1817 2149 lineto
+1814 2145 lineto
+1814 2122 lineto
+1817 2119 lineto
+1833 2119 lineto
+1837 2122 lineto
+1837 2132 lineto
+1833 2135 lineto
+1817 2135 lineto
+1814 2132 lineto
+stroke
+4.193000 setlinewidth
+newpath
+1935 2164 moveto
+1972 2164 lineto
+stroke
+4.193000 setlinewidth
+newpath
+1953 2164 moveto
+1953 2122 lineto
+stroke
+4.193000 setlinewidth
+newpath
+1990 2122 moveto
+2009 2122 lineto
+stroke
+4.193000 setlinewidth
+newpath
+1999 2122 moveto
+1999 2164 lineto
+stroke
+4.193000 setlinewidth
+newpath
+1999 2159 moveto
+1990 2149 lineto
+stroke
+4.193000 setlinewidth
+newpath
+1842 1834 moveto
+1880 1834 lineto
+stroke
+4.193000 setlinewidth
+newpath
+1861 1834 moveto
+1861 1792 lineto
+stroke
+4.193000 setlinewidth
+newpath
+1922 1797 moveto
+1917 1792 lineto
+1893 1792 lineto
+1889 1797 lineto
+1889 1830 lineto
+1893 1834 lineto
+1917 1834 lineto
+1922 1830 lineto
+stroke
+4.193000 setlinewidth
+newpath
+1958 1792 moveto
+1958 1834 lineto
+1935 1801 lineto
+1968 1801 lineto
+stroke
+4.193000 setlinewidth
+newpath
+1986 1811 moveto
+2009 1811 lineto
+stroke
+4.193000 setlinewidth
+newpath
+2037 1792 moveto
+2055 1792 lineto
+stroke
+4.193000 setlinewidth
+newpath
+2045 1792 moveto
+2045 1834 lineto
+stroke
+4.193000 setlinewidth
+newpath
+2045 1830 moveto
+2037 1820 lineto
+stroke
+4.193000 setlinewidth
+newpath
+2073 1834 moveto
+2111 1834 lineto
+stroke
+4.193000 setlinewidth
+newpath
+2092 1834 moveto
+2092 1792 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5541 3910 moveto
+5570 3880 lineto
+5600 3910 lineto
+5541 3910 lineto
+stroke
+newpath
+5600 4209 moveto
+5660 4209 lineto
+5660 4209 lineto
+eofill
+4.193000 setlinewidth
+newpath
+5600 4209 moveto
+5660 4209 lineto
+5660 4209 lineto
+closepath
+stroke
+newpath
+5630 4239 moveto
+5630 4179 lineto
+5630 4179 lineto
+5630 4179 lineto
+eofill
+4.193000 setlinewidth
+newpath
+5630 4239 moveto
+5630 4179 lineto
+5630 4179 lineto
+5630 4179 lineto
+closepath
+stroke
+newpath
+5511 4089 moveto
+5630 4089 lineto
+5630 4060 lineto
+5511 4060 lineto
+closepath
+fill
+4.193000 setlinewidth
+newpath
+5511 4089 moveto
+5630 4089 lineto
+5630 4060 lineto
+5511 4060 lineto
+closepath
+stroke
+4.193000 setlinewidth
+newpath
+5511 4149 moveto
+5630 4149 lineto
+5630 4119 lineto
+5511 4119 lineto
+closepath
+stroke
+4.193000 setlinewidth
+newpath
+5541 4149 moveto
+5541 4149 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5570 4149 moveto
+5570 4239 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5570 4089 moveto
+5570 4000 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5627 4167 moveto
+5623 4164 lineto
+5607 4164 lineto
+5603 4167 lineto
+5603 4191 lineto
+5607 4194 lineto
+5623 4194 lineto
+5627 4191 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5643 4164 moveto
+5656 4164 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5650 4164 moveto
+5650 4194 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5650 4191 moveto
+5643 4184 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5673 4164 moveto
+5669 4167 lineto
+5669 4178 lineto
+5673 4181 lineto
+5689 4181 lineto
+5693 4184 lineto
+5693 4191 lineto
+5689 4194 lineto
+5673 4194 lineto
+5669 4191 lineto
+5669 4184 lineto
+5673 4181 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5689 4181 moveto
+5693 4178 lineto
+5693 4167 lineto
+5689 4164 lineto
+5673 4164 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5610 4045 moveto
+5623 4045 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5617 4045 moveto
+5617 4075 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5617 4071 moveto
+5610 4064 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5636 4045 moveto
+5660 4075 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5636 4048 moveto
+5636 4071 lineto
+5640 4075 lineto
+5656 4075 lineto
+5660 4071 lineto
+5660 4048 lineto
+5656 4045 lineto
+5640 4045 lineto
+5636 4048 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5669 4064 moveto
+5669 4051 lineto
+5676 4045 lineto
+5686 4045 lineto
+5693 4051 lineto
+5693 4064 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5706 4045 moveto
+5719 4075 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5742 4045 moveto
+5755 4045 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5748 4045 moveto
+5748 4075 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5748 4071 moveto
+5742 4064 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5791 4071 moveto
+5788 4075 lineto
+5772 4075 lineto
+5768 4071 lineto
+5768 4048 lineto
+5772 4045 lineto
+5788 4045 lineto
+5791 4048 lineto
+5791 4058 lineto
+5788 4061 lineto
+5772 4061 lineto
+5768 4058 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5801 4075 moveto
+5814 4045 lineto
+5828 4075 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5361 4101 moveto
+5481 4101 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5361 4137 moveto
+5481 4137 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5421 4137 moveto
+5421 4239 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5421 4101 moveto
+5421 4000 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5477 4167 moveto
+5473 4164 lineto
+5457 4164 lineto
+5454 4167 lineto
+5454 4191 lineto
+5457 4194 lineto
+5473 4194 lineto
+5477 4191 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5493 4164 moveto
+5506 4164 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5500 4164 moveto
+5500 4194 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5500 4191 moveto
+5493 4184 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5520 4194 moveto
+5543 4194 lineto
+5520 4164 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5460 4045 moveto
+5473 4045 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5467 4045 moveto
+5467 4075 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5467 4071 moveto
+5460 4064 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5487 4045 moveto
+5510 4075 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5487 4048 moveto
+5487 4071 lineto
+5490 4075 lineto
+5506 4075 lineto
+5510 4071 lineto
+5510 4048 lineto
+5506 4045 lineto
+5490 4045 lineto
+5487 4048 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5520 4045 moveto
+5543 4075 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5520 4048 moveto
+5520 4071 lineto
+5523 4075 lineto
+5539 4075 lineto
+5543 4071 lineto
+5543 4048 lineto
+5539 4045 lineto
+5523 4045 lineto
+5520 4048 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5552 4045 moveto
+5552 4064 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5552 4061 moveto
+5556 4064 lineto
+5569 4064 lineto
+5572 4061 lineto
+5572 4045 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5750 4299 moveto
+5840 4299 lineto
+5840 4299 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5810 4329 42 42 315 44 ellipse
+5810 4329 lineto
+stroke
+fill
+4.193000 setlinewidth
+newpath
+5720 4329 42 42 315 44 ellipse
+5720 4329 lineto
+stroke
+fill
+4.193000 setlinewidth
+newpath
+5780 4329 42 42 134 225 ellipse
+5780 4329 lineto
+stroke
+fill
+4.193000 setlinewidth
+newpath
+5750 4359 moveto
+5840 4359 lineto
+5840 4359 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5840 4329 moveto
+5930 4329 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5660 4329 moveto
+5750 4329 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5744 4407 moveto
+5744 4371 lineto
+5777 4371 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5804 4371 moveto
+5804 4407 lineto
+5784 4379 lineto
+5812 4379 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5774 4251 moveto
+5774 4287 lineto
+5802 4287 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5774 4271 moveto
+5790 4271 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5814 4251 moveto
+5814 4287 lineto
+5838 4287 lineto
+5842 4283 lineto
+5842 4275 lineto
+5838 4271 lineto
+5814 4271 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5838 4271 moveto
+5842 4263 lineto
+5842 4255 lineto
+5838 4251 lineto
+5814 4251 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5810 3281 moveto
+5840 3251 lineto
+5870 3281 lineto
+5810 3281 lineto
+stroke
+4.193000 setlinewidth
+newpath
+4432 3790 moveto
+4402 3760 lineto
+4373 3790 lineto
+4432 3790 lineto
+stroke
+4.193000 setlinewidth
+newpath
+3354 3880 moveto
+3324 3850 lineto
+3294 3880 lineto
+3354 3880 lineto
+stroke
+4.193000 setlinewidth
+newpath
+3264 4101 moveto
+3145 4101 lineto
+stroke
+4.193000 setlinewidth
+newpath
+3264 4137 moveto
+3145 4137 lineto
+stroke
+4.193000 setlinewidth
+newpath
+3205 4137 moveto
+3205 4239 lineto
+stroke
+4.193000 setlinewidth
+newpath
+3205 4101 moveto
+3205 4000 lineto
+stroke
+4.193000 setlinewidth
+newpath
+3073 4197 moveto
+3069 4194 lineto
+3053 4194 lineto
+3049 4197 lineto
+3049 4221 lineto
+3053 4224 lineto
+3069 4224 lineto
+3073 4221 lineto
+stroke
+4.193000 setlinewidth
+newpath
+3089 4194 moveto
+3102 4194 lineto
+stroke
+4.193000 setlinewidth
+newpath
+3095 4194 moveto
+3095 4224 lineto
+stroke
+4.193000 setlinewidth
+newpath
+3095 4221 moveto
+3089 4214 lineto
+stroke
+4.193000 setlinewidth
+newpath
+3122 4194 moveto
+3135 4194 lineto
+stroke
+4.193000 setlinewidth
+newpath
+3128 4194 moveto
+3128 4224 lineto
+stroke
+4.193000 setlinewidth
+newpath
+3128 4221 moveto
+3122 4214 lineto
+stroke
+4.193000 setlinewidth
+newpath
+3052 4045 moveto
+3066 4045 lineto
+stroke
+4.193000 setlinewidth
+newpath
+3059 4045 moveto
+3059 4075 lineto
+stroke
+4.193000 setlinewidth
+newpath
+3059 4071 moveto
+3052 4064 lineto
+stroke
+4.193000 setlinewidth
+newpath
+3079 4045 moveto
+3102 4075 lineto
+stroke
+4.193000 setlinewidth
+newpath
+3079 4048 moveto
+3079 4071 lineto
+3082 4075 lineto
+3098 4075 lineto
+3102 4071 lineto
+3102 4048 lineto
+3098 4045 lineto
+3082 4045 lineto
+3079 4048 lineto
+stroke
+4.193000 setlinewidth
+newpath
+3112 4045 moveto
+3135 4075 lineto
+stroke
+4.193000 setlinewidth
+newpath
+3112 4048 moveto
+3112 4071 lineto
+3115 4075 lineto
+3131 4075 lineto
+3135 4071 lineto
+3135 4048 lineto
+3131 4045 lineto
+3115 4045 lineto
+3112 4048 lineto
+stroke
+4.193000 setlinewidth
+newpath
+3145 4045 moveto
+3145 4064 lineto
+stroke
+4.193000 setlinewidth
+newpath
+3145 4061 moveto
+3148 4064 lineto
+3161 4064 lineto
+3164 4061 lineto
+3164 4045 lineto
+stroke
+4.193000 setlinewidth
+newpath
+3300 4209 moveto
+3348 4209 lineto
+3348 4030 lineto
+3300 4030 lineto
+closepath
+stroke
+4.193000 setlinewidth
+newpath
+3324 4209 moveto
+3324 4269 lineto
+stroke
+4.193000 setlinewidth
+newpath
+3324 4030 moveto
+3324 3970 lineto
+stroke
+4.193000 setlinewidth
+newpath
+3384 4194 moveto
+3384 4224 lineto
+3404 4224 lineto
+3408 4221 lineto
+3408 4210 lineto
+3404 4207 lineto
+3384 4207 lineto
+stroke
+4.193000 setlinewidth
+newpath
+3394 4207 moveto
+3408 4194 lineto
+stroke
+4.193000 setlinewidth
+newpath
+3417 4201 moveto
+3417 4197 lineto
+3421 4194 lineto
+3437 4194 lineto
+3441 4197 lineto
+3441 4207 lineto
+3434 4214 lineto
+3417 4214 lineto
+3417 4224 lineto
+3441 4224 lineto
+stroke
+4.193000 setlinewidth
+newpath
+3391 4134 moveto
+3404 4134 lineto
+stroke
+4.193000 setlinewidth
+newpath
+3397 4134 moveto
+3397 4164 lineto
+stroke
+4.193000 setlinewidth
+newpath
+3397 4161 moveto
+3391 4154 lineto
+stroke
+4.193000 setlinewidth
+newpath
+3417 4134 moveto
+3417 4164 lineto
+stroke
+4.193000 setlinewidth
+newpath
+3437 4164 moveto
+3417 4151 lineto
+3441 4134 lineto
+stroke
+4.193000 setlinewidth
+newpath
+3833 4353 moveto
+4013 4353 lineto
+4013 4305 lineto
+3833 4305 lineto
+closepath
+stroke
+4.193000 setlinewidth
+newpath
+4013 4329 moveto
+4073 4329 lineto
+stroke
+4.193000 setlinewidth
+newpath
+3774 4329 moveto
+3833 4329 lineto
+stroke
+4.193000 setlinewidth
+newpath
+3833 4254 moveto
+3833 4284 lineto
+3853 4284 lineto
+3857 4281 lineto
+3857 4270 lineto
+3853 4267 lineto
+3833 4267 lineto
+stroke
+4.193000 setlinewidth
+newpath
+3844 4267 moveto
+3857 4254 lineto
+stroke
+4.193000 setlinewidth
+newpath
+3890 4281 moveto
+3886 4284 lineto
+3870 4284 lineto
+3866 4281 lineto
+3866 4257 lineto
+3870 4254 lineto
+3886 4254 lineto
+3890 4257 lineto
+3890 4267 lineto
+3886 4270 lineto
+3870 4270 lineto
+3866 4267 lineto
+stroke
+4.193000 setlinewidth
+newpath
+3930 4254 moveto
+3943 4254 lineto
+stroke
+4.193000 setlinewidth
+newpath
+3936 4254 moveto
+3936 4284 lineto
+stroke
+4.193000 setlinewidth
+newpath
+3936 4281 moveto
+3930 4274 lineto
+stroke
+4.193000 setlinewidth
+newpath
+3956 4254 moveto
+3956 4284 lineto
+stroke
+4.193000 setlinewidth
+newpath
+3976 4284 moveto
+3956 4270 lineto
+3980 4254 lineto
+stroke
+4.193000 setlinewidth
+newpath
+4253 2706 moveto
+4432 2706 lineto
+4432 2658 lineto
+4253 2658 lineto
+closepath
+stroke
+4.193000 setlinewidth
+newpath
+4432 2682 moveto
+4492 2682 lineto
+stroke
+4.193000 setlinewidth
+newpath
+4193 2682 moveto
+4253 2682 lineto
+stroke
+4.193000 setlinewidth
+newpath
+4313 2619 moveto
+4313 2649 lineto
+4332 2649 lineto
+4336 2645 lineto
+4336 2635 lineto
+4332 2632 lineto
+4313 2632 lineto
+stroke
+4.193000 setlinewidth
+newpath
+4323 2632 moveto
+4336 2619 lineto
+stroke
+4.193000 setlinewidth
+newpath
+4349 2619 moveto
+4365 2619 lineto
+4369 2622 lineto
+4369 2645 lineto
+4365 2649 lineto
+4349 2649 lineto
+4346 2645 lineto
+4346 2635 lineto
+4349 2632 lineto
+4365 2632 lineto
+4369 2635 lineto
+stroke
+4.193000 setlinewidth
+newpath
+4319 2577 moveto
+4332 2577 lineto
+stroke
+4.193000 setlinewidth
+newpath
+4326 2577 moveto
+4326 2607 lineto
+stroke
+4.193000 setlinewidth
+newpath
+4326 2603 moveto
+4319 2597 lineto
+stroke
+4.193000 setlinewidth
+newpath
+4346 2577 moveto
+4346 2607 lineto
+stroke
+4.193000 setlinewidth
+newpath
+4365 2607 moveto
+4346 2593 lineto
+4369 2577 lineto
+stroke
+4.193000 setlinewidth
+newpath
+3833 3065 moveto
+4013 3065 lineto
+4013 3017 lineto
+3833 3017 lineto
+closepath
+stroke
+4.193000 setlinewidth
+newpath
+4013 3041 moveto
+4073 3041 lineto
+stroke
+4.193000 setlinewidth
+newpath
+3774 3041 moveto
+3833 3041 lineto
+stroke
+4.193000 setlinewidth
+newpath
+3863 2966 moveto
+3863 2996 lineto
+3883 2996 lineto
+3887 2993 lineto
+3887 2983 lineto
+3883 2980 lineto
+3863 2980 lineto
+stroke
+4.193000 setlinewidth
+newpath
+3874 2980 moveto
+3887 2966 lineto
+stroke
+4.193000 setlinewidth
+newpath
+3900 2966 moveto
+3896 2969 lineto
+3896 2980 lineto
+3900 2983 lineto
+3916 2983 lineto
+3920 2986 lineto
+3920 2993 lineto
+3916 2996 lineto
+3900 2996 lineto
+3896 2993 lineto
+3896 2986 lineto
+3900 2983 lineto
+stroke
+4.193000 setlinewidth
+newpath
+3916 2983 moveto
+3920 2980 lineto
+3920 2969 lineto
+3916 2966 lineto
+3900 2966 lineto
+stroke
+4.193000 setlinewidth
+newpath
+3867 2907 moveto
+3880 2907 lineto
+stroke
+4.193000 setlinewidth
+newpath
+3874 2907 moveto
+3874 2936 lineto
+stroke
+4.193000 setlinewidth
+newpath
+3874 2933 moveto
+3867 2926 lineto
+stroke
+4.193000 setlinewidth
+newpath
+3893 2907 moveto
+3917 2936 lineto
+stroke
+4.193000 setlinewidth
+newpath
+3893 2910 moveto
+3893 2933 lineto
+3897 2936 lineto
+3913 2936 lineto
+3917 2933 lineto
+3917 2910 lineto
+3913 2907 lineto
+3897 2907 lineto
+3893 2910 lineto
+stroke
+4.193000 setlinewidth
+newpath
+3926 2907 moveto
+3950 2936 lineto
+stroke
+4.193000 setlinewidth
+newpath
+3926 2910 moveto
+3926 2933 lineto
+3930 2936 lineto
+3946 2936 lineto
+3950 2933 lineto
+3950 2910 lineto
+3946 2907 lineto
+3930 2907 lineto
+3926 2910 lineto
+stroke
+4.193000 setlinewidth
+newpath
+3959 2907 moveto
+3959 2936 lineto
+3979 2936 lineto
+3983 2933 lineto
+3983 2923 lineto
+3979 2920 lineto
+3959 2920 lineto
+stroke
+4.193000 setlinewidth
+newpath
+3969 2920 moveto
+3983 2907 lineto
+stroke
+4.193000 setlinewidth
+newpath
+4313 4503 moveto
+4492 4503 lineto
+4492 4455 lineto
+4313 4455 lineto
+closepath
+stroke
+4.193000 setlinewidth
+newpath
+4492 4479 moveto
+4552 4479 lineto
+stroke
+4.193000 setlinewidth
+newpath
+4253 4479 moveto
+4313 4479 lineto
+stroke
+4.193000 setlinewidth
+newpath
+4356 4416 moveto
+4356 4446 lineto
+4376 4446 lineto
+4380 4442 lineto
+4380 4432 lineto
+4376 4429 lineto
+4356 4429 lineto
+stroke
+4.193000 setlinewidth
+newpath
+4367 4429 moveto
+4380 4416 lineto
+stroke
+4.193000 setlinewidth
+newpath
+4396 4416 moveto
+4409 4416 lineto
+stroke
+4.193000 setlinewidth
+newpath
+4402 4416 moveto
+4402 4446 lineto
+stroke
+4.193000 setlinewidth
+newpath
+4402 4442 moveto
+4396 4436 lineto
+stroke
+4.193000 setlinewidth
+newpath
+4422 4416 moveto
+4446 4446 lineto
+stroke
+4.193000 setlinewidth
+newpath
+4422 4419 moveto
+4422 4442 lineto
+4426 4446 lineto
+4442 4446 lineto
+4446 4442 lineto
+4446 4419 lineto
+4442 4416 lineto
+4426 4416 lineto
+4422 4419 lineto
+stroke
+4.193000 setlinewidth
+newpath
+4379 4374 moveto
+4392 4374 lineto
+stroke
+4.193000 setlinewidth
+newpath
+4386 4374 moveto
+4386 4404 lineto
+stroke
+4.193000 setlinewidth
+newpath
+4386 4400 moveto
+4379 4394 lineto
+stroke
+4.193000 setlinewidth
+newpath
+4405 4374 moveto
+4405 4404 lineto
+stroke
+4.193000 setlinewidth
+newpath
+4425 4404 moveto
+4405 4390 lineto
+4429 4374 lineto
+stroke
+4.193000 setlinewidth
+newpath
+3833 4083 moveto
+4013 4083 lineto
+4013 4036 lineto
+3833 4036 lineto
+closepath
+stroke
+4.193000 setlinewidth
+newpath
+4013 4060 moveto
+4073 4060 lineto
+stroke
+4.193000 setlinewidth
+newpath
+3774 4060 moveto
+3833 4060 lineto
+stroke
+4.193000 setlinewidth
+newpath
+3893 3997 moveto
+3893 4027 lineto
+3913 4027 lineto
+3917 4023 lineto
+3917 4013 lineto
+3913 4010 lineto
+3893 4010 lineto
+stroke
+4.193000 setlinewidth
+newpath
+3904 4010 moveto
+3917 3997 lineto
+stroke
+4.193000 setlinewidth
+newpath
+3926 4027 moveto
+3950 4027 lineto
+3926 3997 lineto
+stroke
+4.193000 setlinewidth
+newpath
+3867 3955 moveto
+3880 3955 lineto
+stroke
+4.193000 setlinewidth
+newpath
+3874 3955 moveto
+3874 3985 lineto
+stroke
+4.193000 setlinewidth
+newpath
+3874 3981 moveto
+3867 3974 lineto
+stroke
+4.193000 setlinewidth
+newpath
+3893 3955 moveto
+3917 3985 lineto
+stroke
+4.193000 setlinewidth
+newpath
+3893 3958 moveto
+3893 3981 lineto
+3897 3985 lineto
+3913 3985 lineto
+3917 3981 lineto
+3917 3958 lineto
+3913 3955 lineto
+3897 3955 lineto
+3893 3958 lineto
+stroke
+4.193000 setlinewidth
+newpath
+3926 3955 moveto
+3950 3985 lineto
+stroke
+4.193000 setlinewidth
+newpath
+3926 3958 moveto
+3926 3981 lineto
+3930 3985 lineto
+3946 3985 lineto
+3950 3981 lineto
+3950 3958 lineto
+3946 3955 lineto
+3930 3955 lineto
+3926 3958 lineto
+stroke
+4.193000 setlinewidth
+newpath
+3959 3955 moveto
+3959 3985 lineto
+3979 3985 lineto
+3983 3981 lineto
+3983 3971 lineto
+3979 3968 lineto
+3959 3968 lineto
+stroke
+4.193000 setlinewidth
+newpath
+3969 3968 moveto
+3983 3955 lineto
+stroke
+4.193000 setlinewidth
+newpath
+4912 3125 moveto
+5091 3125 lineto
+5091 3077 lineto
+4912 3077 lineto
+closepath
+stroke
+4.193000 setlinewidth
+newpath
+5091 3101 moveto
+5151 3101 lineto
+stroke
+4.193000 setlinewidth
+newpath
+4852 3101 moveto
+4912 3101 lineto
+stroke
+4.193000 setlinewidth
+newpath
+4955 3026 moveto
+4955 3056 lineto
+4975 3056 lineto
+4979 3053 lineto
+4979 3042 lineto
+4975 3039 lineto
+4955 3039 lineto
+stroke
+4.193000 setlinewidth
+newpath
+4965 3039 moveto
+4979 3026 lineto
+stroke
+4.193000 setlinewidth
+newpath
+4995 3026 moveto
+5008 3026 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5001 3026 moveto
+5001 3056 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5001 3053 moveto
+4995 3046 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5045 3026 moveto
+5021 3026 lineto
+5021 3036 lineto
+5025 3039 lineto
+5041 3039 lineto
+5045 3042 lineto
+5045 3053 lineto
+5041 3056 lineto
+5025 3056 lineto
+5021 3053 lineto
+stroke
+4.193000 setlinewidth
+newpath
+4985 2966 moveto
+4985 2996 lineto
+4968 2973 lineto
+4992 2973 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5001 2966 moveto
+5001 2996 lineto
+5021 2996 lineto
+5025 2993 lineto
+5025 2983 lineto
+5021 2980 lineto
+5001 2980 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5012 2980 moveto
+5025 2966 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5038 2966 moveto
+5054 2966 lineto
+5058 2969 lineto
+5058 2993 lineto
+5054 2996 lineto
+5038 2996 lineto
+5034 2993 lineto
+5034 2983 lineto
+5038 2980 lineto
+5054 2980 lineto
+5058 2983 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5071 2966 moveto
+5087 2966 lineto
+5091 2969 lineto
+5091 2993 lineto
+5087 2996 lineto
+5071 2996 lineto
+5067 2993 lineto
+5067 2983 lineto
+5071 2980 lineto
+5087 2980 lineto
+5091 2983 lineto
+stroke
+4.193000 setlinewidth
+newpath
+4912 4024 moveto
+5091 4024 lineto
+5091 3976 lineto
+4912 3976 lineto
+closepath
+stroke
+4.193000 setlinewidth
+newpath
+5091 4000 moveto
+5151 4000 lineto
+stroke
+4.193000 setlinewidth
+newpath
+4852 4000 moveto
+4912 4000 lineto
+stroke
+4.193000 setlinewidth
+newpath
+4955 3937 moveto
+4955 3967 lineto
+4975 3967 lineto
+4979 3963 lineto
+4979 3953 lineto
+4975 3950 lineto
+4955 3950 lineto
+stroke
+4.193000 setlinewidth
+newpath
+4965 3950 moveto
+4979 3937 lineto
+stroke
+4.193000 setlinewidth
+newpath
+4995 3937 moveto
+5008 3937 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5001 3937 moveto
+5001 3967 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5001 3963 moveto
+4995 3957 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5028 3937 moveto
+5041 3937 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5034 3937 moveto
+5034 3967 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5034 3963 moveto
+5028 3957 lineto
+stroke
+4.193000 setlinewidth
+newpath
+4955 3865 moveto
+4955 3895 lineto
+4939 3871 lineto
+4962 3871 lineto
+stroke
+4.193000 setlinewidth
+newpath
+4971 3865 moveto
+4971 3895 lineto
+4991 3895 lineto
+4995 3891 lineto
+4995 3881 lineto
+4991 3878 lineto
+4971 3878 lineto
+stroke
+4.193000 setlinewidth
+newpath
+4982 3878 moveto
+4995 3865 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5008 3865 moveto
+5024 3865 lineto
+5028 3868 lineto
+5028 3891 lineto
+5024 3895 lineto
+5008 3895 lineto
+5004 3891 lineto
+5004 3881 lineto
+5008 3878 lineto
+5024 3878 lineto
+5028 3881 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5041 3865 moveto
+5057 3865 lineto
+5061 3868 lineto
+5061 3891 lineto
+5057 3895 lineto
+5041 3895 lineto
+5037 3891 lineto
+5037 3881 lineto
+5041 3878 lineto
+5057 3878 lineto
+5061 3881 lineto
+stroke
+4.193000 setlinewidth
+newpath
+240 4718 moveto
+6768 4718 lineto
+6768 246 lineto
+240 246 lineto
+closepath
+stroke
+4.193000 setlinewidth
+newpath
+282 4676 moveto
+6726 4676 lineto
+6726 288 lineto
+282 288 lineto
+closepath
+stroke
+4.193000 setlinewidth
+newpath
+1545 4718 moveto
+1545 4676 lineto
+stroke
+4.193000 setlinewidth
+newpath
+886 4682 moveto
+899 4682 lineto
+stroke
+4.193000 setlinewidth
+newpath
+892 4682 moveto
+892 4712 lineto
+stroke
+4.193000 setlinewidth
+newpath
+892 4709 moveto
+886 4702 lineto
+stroke
+4.193000 setlinewidth
+newpath
+1545 246 moveto
+1545 288 lineto
+stroke
+4.193000 setlinewidth
+newpath
+886 252 moveto
+899 252 lineto
+stroke
+4.193000 setlinewidth
+newpath
+892 252 moveto
+892 282 lineto
+stroke
+4.193000 setlinewidth
+newpath
+892 278 moveto
+886 272 lineto
+stroke
+4.193000 setlinewidth
+newpath
+2851 4718 moveto
+2851 4676 lineto
+stroke
+4.193000 setlinewidth
+newpath
+2208 4682 moveto
+2185 4682 lineto
+2185 4692 lineto
+2189 4696 lineto
+2205 4696 lineto
+2208 4699 lineto
+2208 4709 lineto
+2205 4712 lineto
+2189 4712 lineto
+2185 4709 lineto
+stroke
+4.193000 setlinewidth
+newpath
+2851 246 moveto
+2851 288 lineto
+stroke
+4.193000 setlinewidth
+newpath
+2208 252 moveto
+2185 252 lineto
+2185 261 lineto
+2189 265 lineto
+2205 265 lineto
+2208 268 lineto
+2208 278 lineto
+2205 282 lineto
+2189 282 lineto
+2185 278 lineto
+stroke
+4.193000 setlinewidth
+newpath
+4157 4718 moveto
+4157 4676 lineto
+stroke
+4.193000 setlinewidth
+newpath
+3491 4712 moveto
+3514 4712 lineto
+3514 4709 lineto
+3501 4699 lineto
+3511 4699 lineto
+3514 4696 lineto
+3514 4685 lineto
+3511 4682 lineto
+3494 4682 lineto
+3491 4685 lineto
+stroke
+4.193000 setlinewidth
+newpath
+4157 246 moveto
+4157 288 lineto
+stroke
+4.193000 setlinewidth
+newpath
+3491 282 moveto
+3514 282 lineto
+3514 278 lineto
+3501 268 lineto
+3511 268 lineto
+3514 265 lineto
+3514 255 lineto
+3511 252 lineto
+3494 252 lineto
+3491 255 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5463 4718 moveto
+5463 4676 lineto
+stroke
+4.193000 setlinewidth
+newpath
+4813 4682 moveto
+4813 4712 lineto
+4797 4689 lineto
+4820 4689 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5463 246 moveto
+5463 288 lineto
+stroke
+4.193000 setlinewidth
+newpath
+4813 252 moveto
+4813 282 lineto
+4797 258 lineto
+4820 258 lineto
+stroke
+4.193000 setlinewidth
+newpath
+6102 4689 moveto
+6102 4685 lineto
+6106 4682 lineto
+6122 4682 lineto
+6126 4685 lineto
+6126 4696 lineto
+6119 4702 lineto
+6102 4702 lineto
+6102 4712 lineto
+6126 4712 lineto
+stroke
+4.193000 setlinewidth
+newpath
+6102 258 moveto
+6102 255 lineto
+6106 252 lineto
+6122 252 lineto
+6126 255 lineto
+6126 265 lineto
+6119 272 lineto
+6102 272 lineto
+6102 282 lineto
+6126 282 lineto
+stroke
+4.193000 setlinewidth
+newpath
+240 3228 moveto
+282 3228 lineto
+stroke
+4.193000 setlinewidth
+newpath
+247 3958 moveto
+247 3980 lineto
+254 3988 lineto
+264 3988 lineto
+271 3980 lineto
+271 3958 lineto
+stroke
+4.193000 setlinewidth
+newpath
+247 3974 moveto
+271 3974 lineto
+stroke
+4.193000 setlinewidth
+newpath
+6726 3228 moveto
+6768 3228 lineto
+stroke
+4.193000 setlinewidth
+newpath
+6734 3865 moveto
+6734 3888 lineto
+6741 3895 lineto
+6751 3895 lineto
+6758 3888 lineto
+6758 3865 lineto
+stroke
+4.193000 setlinewidth
+newpath
+6734 3882 moveto
+6758 3882 lineto
+stroke
+4.193000 setlinewidth
+newpath
+240 1737 moveto
+282 1737 lineto
+stroke
+4.193000 setlinewidth
+newpath
+247 2467 moveto
+247 2497 lineto
+267 2497 lineto
+271 2493 lineto
+271 2487 lineto
+267 2483 lineto
+247 2483 lineto
+stroke
+4.193000 setlinewidth
+newpath
+267 2483 moveto
+271 2476 lineto
+271 2470 lineto
+267 2467 lineto
+247 2467 lineto
+stroke
+4.193000 setlinewidth
+newpath
+6726 1737 moveto
+6768 1737 lineto
+stroke
+4.193000 setlinewidth
+newpath
+6734 2375 moveto
+6734 2405 lineto
+6754 2405 lineto
+6758 2401 lineto
+6758 2394 lineto
+6754 2391 lineto
+6734 2391 lineto
+stroke
+4.193000 setlinewidth
+newpath
+6754 2391 moveto
+6758 2384 lineto
+6758 2378 lineto
+6754 2375 lineto
+6734 2375 lineto
+stroke
+4.193000 setlinewidth
+newpath
+271 979 moveto
+267 976 lineto
+251 976 lineto
+247 979 lineto
+247 1002 lineto
+251 1006 lineto
+267 1006 lineto
+271 1002 lineto
+stroke
+4.193000 setlinewidth
+newpath
+6758 887 moveto
+6754 884 lineto
+6738 884 lineto
+6734 887 lineto
+6734 910 lineto
+6738 914 lineto
+6754 914 lineto
+6758 910 lineto
+stroke
+4.193000 setlinewidth
+newpath
+4758 378 moveto
+4758 414 lineto
+stroke
+4.193000 setlinewidth
+newpath
+4753 414 moveto
+4777 414 lineto
+4782 409 lineto
+4782 381 lineto
+4777 378 lineto
+4753 378 lineto
+stroke
+4.193000 setlinewidth
+newpath
+4793 402 moveto
+4817 402 lineto
+4821 397 lineto
+4821 378 lineto
+4797 378 lineto
+4793 381 lineto
+4793 385 lineto
+4797 390 lineto
+4821 390 lineto
+stroke
+4.193000 setlinewidth
+newpath
+4856 381 moveto
+4853 378 lineto
+4841 378 lineto
+4837 381 lineto
+4837 414 lineto
+stroke
+4.193000 setlinewidth
+newpath
+4837 402 moveto
+4849 402 lineto
+stroke
+4.193000 setlinewidth
+newpath
+4872 390 moveto
+4900 390 lineto
+4900 397 lineto
+4896 402 lineto
+4876 402 lineto
+4872 397 lineto
+4872 381 lineto
+4876 378 lineto
+4896 378 lineto
+4900 381 lineto
+stroke
+4.193000 setlinewidth
+newpath
+4924 402 moveto
+4924 397 lineto
+stroke
+4.193000 setlinewidth
+newpath
+4924 390 moveto
+4924 385 lineto
+stroke
+4.193000 setlinewidth
+newpath
+4991 385 moveto
+4991 381 lineto
+4995 378 lineto
+5015 378 lineto
+5019 381 lineto
+5019 393 lineto
+5011 402 lineto
+4991 402 lineto
+4991 414 lineto
+5019 414 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5070 402 moveto
+5094 402 lineto
+5098 397 lineto
+5098 378 lineto
+5074 378 lineto
+5070 381 lineto
+5070 385 lineto
+5074 390 lineto
+5098 390 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5109 366 moveto
+5109 402 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5109 397 moveto
+5113 402 lineto
+5133 402 lineto
+5137 397 lineto
+5137 381 lineto
+5133 378 lineto
+5113 378 lineto
+5109 381 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5149 378 moveto
+5149 402 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5149 393 moveto
+5157 402 lineto
+5169 402 lineto
+5177 393 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5256 378 moveto
+5228 378 lineto
+5228 390 lineto
+5232 393 lineto
+5252 393 lineto
+5256 397 lineto
+5256 409 lineto
+5252 414 lineto
+5232 414 lineto
+5228 409 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5267 378 moveto
+5296 414 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5267 381 moveto
+5267 409 lineto
+5272 414 lineto
+5291 414 lineto
+5296 409 lineto
+5296 381 lineto
+5291 378 lineto
+5272 378 lineto
+5267 381 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5307 378 moveto
+5335 414 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5307 381 moveto
+5307 409 lineto
+5311 414 lineto
+5331 414 lineto
+5335 409 lineto
+5335 381 lineto
+5331 378 lineto
+5311 378 lineto
+5307 381 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5351 378 moveto
+5346 381 lineto
+5346 393 lineto
+5351 397 lineto
+5370 397 lineto
+5375 402 lineto
+5375 409 lineto
+5370 414 lineto
+5351 414 lineto
+5346 409 lineto
+5346 402 lineto
+5351 397 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5370 397 moveto
+5375 393 lineto
+5375 381 lineto
+5370 378 lineto
+5351 378 lineto
+stroke
+4.193000 setlinewidth
+newpath
+4250 306 moveto
+4250 342 lineto
+stroke
+4.193000 setlinewidth
+newpath
+4274 342 moveto
+4250 326 lineto
+4278 306 lineto
+stroke
+4.193000 setlinewidth
+newpath
+4302 342 moveto
+4302 338 lineto
+stroke
+4.193000 setlinewidth
+newpath
+4302 326 moveto
+4302 309 lineto
+4306 306 lineto
+4310 306 lineto
+stroke
+4.193000 setlinewidth
+newpath
+4358 309 moveto
+4353 306 lineto
+4334 306 lineto
+4329 309 lineto
+4329 338 lineto
+4334 342 lineto
+4353 342 lineto
+4358 338 lineto
+stroke
+4.193000 setlinewidth
+newpath
+4369 330 moveto
+4393 330 lineto
+4397 326 lineto
+4397 306 lineto
+4373 306 lineto
+4369 309 lineto
+4369 314 lineto
+4373 318 lineto
+4397 318 lineto
+stroke
+4.193000 setlinewidth
+newpath
+4437 342 moveto
+4437 306 lineto
+4413 306 lineto
+4408 309 lineto
+4408 326 lineto
+4413 330 lineto
+4437 330 lineto
+stroke
+4.193000 setlinewidth
+newpath
+4516 306 moveto
+4488 306 lineto
+4488 342 lineto
+4516 342 lineto
+stroke
+4.193000 setlinewidth
+newpath
+4488 326 moveto
+4504 326 lineto
+stroke
+4.193000 setlinewidth
+newpath
+4539 306 moveto
+4539 309 lineto
+stroke
+4.193000 setlinewidth
+newpath
+4571 306 moveto
+4571 342 lineto
+stroke
+4.193000 setlinewidth
+newpath
+4567 342 moveto
+4591 342 lineto
+4595 338 lineto
+4595 309 lineto
+4591 306 lineto
+4567 306 lineto
+stroke
+4.193000 setlinewidth
+newpath
+4618 306 moveto
+4618 309 lineto
+stroke
+4.193000 setlinewidth
+newpath
+4646 306 moveto
+4646 333 lineto
+4654 342 lineto
+4666 342 lineto
+4674 333 lineto
+4674 306 lineto
+stroke
+4.193000 setlinewidth
+newpath
+4646 326 moveto
+4674 326 lineto
+stroke
+4.193000 setlinewidth
+newpath
+4697 306 moveto
+4697 309 lineto
+stroke
+4.193000 setlinewidth
+newpath
+4832 306 moveto
+4804 306 lineto
+4804 342 lineto
+4832 342 lineto
+stroke
+4.193000 setlinewidth
+newpath
+4804 326 moveto
+4820 326 lineto
+stroke
+4.193000 setlinewidth
+newpath
+4871 306 moveto
+4843 306 lineto
+4843 342 lineto
+4871 342 lineto
+stroke
+4.193000 setlinewidth
+newpath
+4843 326 moveto
+4859 326 lineto
+stroke
+4.193000 setlinewidth
+newpath
+4883 309 moveto
+4887 306 lineto
+4907 306 lineto
+4911 309 lineto
+4911 321 lineto
+4907 326 lineto
+4887 326 lineto
+4883 330 lineto
+4883 338 lineto
+4887 342 lineto
+4907 342 lineto
+4911 338 lineto
+stroke
+4.193000 setlinewidth
+newpath
+4951 309 moveto
+4946 306 lineto
+4927 306 lineto
+4922 309 lineto
+4922 326 lineto
+4927 330 lineto
+4946 330 lineto
+4951 326 lineto
+stroke
+4.193000 setlinewidth
+newpath
+4962 306 moveto
+4962 342 lineto
+stroke
+4.193000 setlinewidth
+newpath
+4962 326 moveto
+4966 330 lineto
+4986 330 lineto
+4990 326 lineto
+4990 306 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5001 318 moveto
+5030 318 lineto
+5030 326 lineto
+5025 330 lineto
+5006 330 lineto
+5001 326 lineto
+5001 309 lineto
+5006 306 lineto
+5025 306 lineto
+5030 309 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5041 306 moveto
+5041 330 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5041 326 moveto
+5045 330 lineto
+5053 330 lineto
+5057 326 lineto
+5057 306 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5057 326 moveto
+5061 330 lineto
+5069 330 lineto
+5073 326 lineto
+5073 306 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5081 330 moveto
+5104 330 lineto
+5109 326 lineto
+5109 306 lineto
+5085 306 lineto
+5081 309 lineto
+5081 314 lineto
+5085 318 lineto
+5109 318 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5172 306 moveto
+5168 314 lineto
+5168 333 lineto
+5172 342 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5227 306 moveto
+5199 306 lineto
+5199 318 lineto
+5203 321 lineto
+5223 321 lineto
+5227 326 lineto
+5227 338 lineto
+5223 342 lineto
+5203 342 lineto
+5199 338 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5239 306 moveto
+5267 342 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5239 309 moveto
+5239 338 lineto
+5243 342 lineto
+5263 342 lineto
+5267 338 lineto
+5267 309 lineto
+5263 306 lineto
+5243 306 lineto
+5239 309 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5278 306 moveto
+5306 342 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5278 309 moveto
+5278 338 lineto
+5282 342 lineto
+5302 342 lineto
+5306 338 lineto
+5306 309 lineto
+5302 306 lineto
+5282 306 lineto
+5278 309 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5346 338 moveto
+5342 342 lineto
+5322 342 lineto
+5318 338 lineto
+5318 309 lineto
+5322 306 lineto
+5342 306 lineto
+5346 309 lineto
+5346 321 lineto
+5342 326 lineto
+5322 326 lineto
+5318 321 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5361 321 moveto
+5381 321 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5397 306 moveto
+5425 342 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5397 309 moveto
+5397 338 lineto
+5401 342 lineto
+5421 342 lineto
+5425 338 lineto
+5425 309 lineto
+5421 306 lineto
+5401 306 lineto
+5397 309 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5440 306 moveto
+5436 309 lineto
+5436 321 lineto
+5440 326 lineto
+5460 326 lineto
+5464 330 lineto
+5464 338 lineto
+5460 342 lineto
+5440 342 lineto
+5436 338 lineto
+5436 330 lineto
+5440 326 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5460 326 moveto
+5464 321 lineto
+5464 309 lineto
+5460 306 lineto
+5440 306 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5480 321 moveto
+5500 321 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5544 306 moveto
+5515 306 lineto
+5515 318 lineto
+5520 321 lineto
+5539 321 lineto
+5544 326 lineto
+5544 338 lineto
+5539 342 lineto
+5520 342 lineto
+5515 338 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5559 306 moveto
+5555 309 lineto
+5555 321 lineto
+5559 326 lineto
+5579 326 lineto
+5583 330 lineto
+5583 338 lineto
+5579 342 lineto
+5559 342 lineto
+5555 338 lineto
+5555 330 lineto
+5559 326 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5579 326 moveto
+5583 321 lineto
+5583 309 lineto
+5579 306 lineto
+5559 306 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5606 306 moveto
+5611 314 lineto
+5611 333 lineto
+5606 342 lineto
+stroke
+4.193000 setlinewidth
+newpath
+6239 378 moveto
+6239 414 lineto
+6263 414 lineto
+6267 409 lineto
+6267 397 lineto
+6263 393 lineto
+6239 393 lineto
+stroke
+4.193000 setlinewidth
+newpath
+6251 393 moveto
+6267 378 lineto
+stroke
+4.193000 setlinewidth
+newpath
+6278 390 moveto
+6307 390 lineto
+6307 397 lineto
+6302 402 lineto
+6283 402 lineto
+6278 397 lineto
+6278 381 lineto
+6283 378 lineto
+6302 378 lineto
+6307 381 lineto
+stroke
+4.193000 setlinewidth
+newpath
+6318 402 moveto
+6318 390 lineto
+6330 378 lineto
+6342 390 lineto
+6342 402 lineto
+stroke
+4.193000 setlinewidth
+newpath
+6369 402 moveto
+6369 397 lineto
+stroke
+4.193000 setlinewidth
+newpath
+6369 390 moveto
+6369 385 lineto
+stroke
+4.193000 setlinewidth
+newpath
+6445 378 moveto
+6461 378 lineto
+stroke
+4.193000 setlinewidth
+newpath
+6453 378 moveto
+6453 414 lineto
+stroke
+4.193000 setlinewidth
+newpath
+6453 409 moveto
+6445 402 lineto
+stroke
+4.193000 setlinewidth
+newpath
+4250 381 moveto
+4255 378 lineto
+4274 378 lineto
+4278 381 lineto
+4278 393 lineto
+4274 397 lineto
+4255 397 lineto
+4250 402 lineto
+4250 409 lineto
+4255 414 lineto
+4274 414 lineto
+4278 409 lineto
+stroke
+4.193000 setlinewidth
+newpath
+4302 414 moveto
+4302 409 lineto
+stroke
+4.193000 setlinewidth
+newpath
+4302 397 moveto
+4302 381 lineto
+4306 378 lineto
+4310 378 lineto
+stroke
+4.193000 setlinewidth
+newpath
+4329 402 moveto
+4358 402 lineto
+4329 378 lineto
+4358 378 lineto
+stroke
+4.193000 setlinewidth
+newpath
+4369 390 moveto
+4397 390 lineto
+4397 397 lineto
+4393 402 lineto
+4373 402 lineto
+4369 397 lineto
+4369 381 lineto
+4373 378 lineto
+4393 378 lineto
+4397 381 lineto
+stroke
+4.193000 setlinewidth
+newpath
+4420 402 moveto
+4420 397 lineto
+stroke
+4.193000 setlinewidth
+newpath
+4420 390 moveto
+4420 385 lineto
+stroke
+4.193000 setlinewidth
+newpath
+4488 378 moveto
+4488 405 lineto
+4496 414 lineto
+4508 414 lineto
+4516 405 lineto
+4516 378 lineto
+stroke
+4.193000 setlinewidth
+newpath
+4488 397 moveto
+4516 397 lineto
+stroke
+4.193000 setlinewidth
+newpath
+4547 378 moveto
+4547 414 lineto
+4527 385 lineto
+4555 385 lineto
+stroke
+4.193000 setlinewidth
+newpath
+6239 309 moveto
+6243 306 lineto
+6263 306 lineto
+6267 309 lineto
+6267 321 lineto
+6263 326 lineto
+6243 326 lineto
+6239 330 lineto
+6239 338 lineto
+6243 342 lineto
+6263 342 lineto
+6267 338 lineto
+stroke
+4.193000 setlinewidth
+newpath
+6278 306 moveto
+6278 342 lineto
+stroke
+4.193000 setlinewidth
+newpath
+6278 326 moveto
+6283 330 lineto
+6302 330 lineto
+6307 326 lineto
+6307 306 lineto
+stroke
+4.193000 setlinewidth
+newpath
+6318 318 moveto
+6346 318 lineto
+6346 326 lineto
+6342 330 lineto
+6322 330 lineto
+6318 326 lineto
+6318 309 lineto
+6322 306 lineto
+6342 306 lineto
+6346 309 lineto
+stroke
+4.193000 setlinewidth
+newpath
+6358 318 moveto
+6386 318 lineto
+6386 326 lineto
+6381 330 lineto
+6362 330 lineto
+6358 326 lineto
+6358 309 lineto
+6362 306 lineto
+6381 306 lineto
+6386 309 lineto
+stroke
+4.193000 setlinewidth
+newpath
+6421 309 moveto
+6417 306 lineto
+6405 306 lineto
+6401 309 lineto
+6401 342 lineto
+stroke
+4.193000 setlinewidth
+newpath
+6401 330 moveto
+6413 330 lineto
+stroke
+4.193000 setlinewidth
+newpath
+6449 330 moveto
+6449 326 lineto
+stroke
+4.193000 setlinewidth
+newpath
+6449 318 moveto
+6449 314 lineto
+stroke
+4.193000 setlinewidth
+newpath
+6544 306 moveto
+6516 306 lineto
+6516 318 lineto
+6520 321 lineto
+6540 321 lineto
+6544 326 lineto
+6544 338 lineto
+6540 342 lineto
+6520 342 lineto
+6516 338 lineto
+stroke
+4.193000 setlinewidth
+newpath
+6559 306 moveto
+6576 342 lineto
+stroke
+4.193000 setlinewidth
+newpath
+6595 342 moveto
+6623 342 lineto
+6595 306 lineto
+stroke
+4.193000 setlinewidth
+newpath
+4250 485 moveto
+4283 485 lineto
+stroke
+4.193000 setlinewidth
+newpath
+4266 485 moveto
+4266 450 lineto
+stroke
+4.193000 setlinewidth
+newpath
+4302 485 moveto
+4302 481 lineto
+stroke
+4.193000 setlinewidth
+newpath
+4302 469 moveto
+4302 453 lineto
+4306 450 lineto
+4310 450 lineto
+stroke
+4.193000 setlinewidth
+newpath
+4353 453 moveto
+4350 450 lineto
+4338 450 lineto
+4334 453 lineto
+4334 485 lineto
+stroke
+4.193000 setlinewidth
+newpath
+4334 473 moveto
+4346 473 lineto
+stroke
+4.193000 setlinewidth
+newpath
+4377 485 moveto
+4381 485 lineto
+4381 450 lineto
+stroke
+4.193000 setlinewidth
+newpath
+4377 450 moveto
+4385 450 lineto
+stroke
+4.193000 setlinewidth
+newpath
+4408 461 moveto
+4437 461 lineto
+4437 469 lineto
+4432 473 lineto
+4413 473 lineto
+4408 469 lineto
+4408 453 lineto
+4413 450 lineto
+4432 450 lineto
+4437 453 lineto
+stroke
+4.193000 setlinewidth
+newpath
+4460 473 moveto
+4460 469 lineto
+stroke
+4.193000 setlinewidth
+newpath
+4460 461 moveto
+4460 457 lineto
+stroke
+4.193000 setlinewidth
+newpath
+4527 450 moveto
+4527 485 lineto
+4551 485 lineto
+4555 481 lineto
+4555 469 lineto
+4551 465 lineto
+4527 465 lineto
+stroke
+4.193000 setlinewidth
+newpath
+4567 450 moveto
+4567 485 lineto
+stroke
+4.193000 setlinewidth
+newpath
+4567 469 moveto
+4571 473 lineto
+4591 473 lineto
+4595 469 lineto
+4595 450 lineto
+stroke
+4.193000 setlinewidth
+newpath
+4610 450 moveto
+4606 453 lineto
+4606 469 lineto
+4610 473 lineto
+4630 473 lineto
+4634 469 lineto
+4634 453 lineto
+4630 450 lineto
+4610 450 lineto
+stroke
+4.193000 setlinewidth
+newpath
+4646 461 moveto
+4674 461 lineto
+4674 469 lineto
+4670 473 lineto
+4650 473 lineto
+4646 469 lineto
+4646 453 lineto
+4650 450 lineto
+4670 450 lineto
+4674 453 lineto
+stroke
+4.193000 setlinewidth
+newpath
+4685 450 moveto
+4685 473 lineto
+stroke
+4.193000 setlinewidth
+newpath
+4685 469 moveto
+4689 473 lineto
+4706 473 lineto
+4709 469 lineto
+4709 450 lineto
+stroke
+4.193000 setlinewidth
+newpath
+4737 485 moveto
+4737 481 lineto
+stroke
+4.193000 setlinewidth
+newpath
+4737 469 moveto
+4737 453 lineto
+4741 450 lineto
+4745 450 lineto
+stroke
+4.193000 setlinewidth
+newpath
+4764 450 moveto
+4792 473 lineto
+stroke
+4.193000 setlinewidth
+newpath
+4764 473 moveto
+4792 450 lineto
+stroke
+4.193000 setlinewidth
+newpath
+4843 453 moveto
+4843 481 lineto
+4847 485 lineto
+4867 485 lineto
+4871 481 lineto
+4871 453 lineto
+4867 450 lineto
+4847 450 lineto
+4843 453 lineto
+stroke
+4.193000 setlinewidth
+newpath
+4864 465 moveto
+4871 450 lineto
+stroke
+4.193000 setlinewidth
+newpath
+4883 453 moveto
+4887 450 lineto
+4907 450 lineto
+4911 453 lineto
+4911 465 lineto
+4907 469 lineto
+4887 469 lineto
+4883 473 lineto
+4883 481 lineto
+4887 485 lineto
+4907 485 lineto
+4911 481 lineto
+stroke
+4.193000 setlinewidth
+newpath
+4951 450 moveto
+4922 450 lineto
+4922 485 lineto
+4951 485 lineto
+stroke
+4.193000 setlinewidth
+newpath
+4922 469 moveto
+4939 469 lineto
+stroke
+4.193000 setlinewidth
+newpath
+4250 521 moveto
+4250 557 lineto
+stroke
+4.193000 setlinewidth
+newpath
+4278 521 moveto
+4278 557 lineto
+stroke
+4.193000 setlinewidth
+newpath
+4250 537 moveto
+4278 537 lineto
+stroke
+4.193000 setlinewidth
+newpath
+4290 521 moveto
+4290 557 lineto
+4314 557 lineto
+4318 553 lineto
+4318 541 lineto
+4314 537 lineto
+4290 537 lineto
+stroke
+4.193000 setlinewidth
+newpath
+4329 525 moveto
+4334 521 lineto
+4353 521 lineto
+4358 525 lineto
+4358 537 lineto
+4353 541 lineto
+4334 541 lineto
+4329 545 lineto
+4329 553 lineto
+4334 557 lineto
+4353 557 lineto
+4358 553 lineto
+stroke
+4.193000 setlinewidth
+newpath
+4373 521 moveto
+4373 557 lineto
+stroke
+4.193000 setlinewidth
+newpath
+4369 557 moveto
+4393 557 lineto
+4397 553 lineto
+4397 525 lineto
+4393 521 lineto
+4369 521 lineto
+stroke
+4.193000 setlinewidth
+newpath
+4408 521 moveto
+4408 557 lineto
+4432 557 lineto
+4437 553 lineto
+4437 541 lineto
+4432 537 lineto
+4408 537 lineto
+stroke
+4.193000 setlinewidth
+newpath
+4420 537 moveto
+4437 521 lineto
+stroke
+4.193000 setlinewidth
+newpath
+4278 597 moveto
+4274 593 lineto
+4255 593 lineto
+4250 597 lineto
+4250 625 lineto
+4255 629 lineto
+4274 629 lineto
+4278 625 lineto
+stroke
+4.193000 setlinewidth
+newpath
+4294 593 moveto
+4290 597 lineto
+4290 613 lineto
+4294 617 lineto
+4314 617 lineto
+4318 613 lineto
+4318 597 lineto
+4314 593 lineto
+4294 593 lineto
+stroke
+4.193000 setlinewidth
+newpath
+4329 581 moveto
+4329 617 lineto
+stroke
+4.193000 setlinewidth
+newpath
+4329 613 moveto
+4334 617 lineto
+4353 617 lineto
+4358 613 lineto
+4358 597 lineto
+4353 593 lineto
+4334 593 lineto
+4329 597 lineto
+stroke
+4.193000 setlinewidth
+newpath
+4369 617 moveto
+4369 601 lineto
+4377 593 lineto
+4389 593 lineto
+4397 601 lineto
+stroke
+4.193000 setlinewidth
+newpath
+4397 617 moveto
+4397 585 lineto
+4393 581 lineto
+4373 581 lineto
+4369 585 lineto
+stroke
+4.193000 setlinewidth
+newpath
+4408 593 moveto
+4408 617 lineto
+stroke
+4.193000 setlinewidth
+newpath
+4408 609 moveto
+4417 617 lineto
+4429 617 lineto
+4437 609 lineto
+stroke
+4.193000 setlinewidth
+newpath
+4460 629 moveto
+4460 625 lineto
+stroke
+4.193000 setlinewidth
+newpath
+4460 613 moveto
+4460 597 lineto
+4464 593 lineto
+4468 593 lineto
+stroke
+4.193000 setlinewidth
+newpath
+4488 585 moveto
+4492 581 lineto
+4511 581 lineto
+4516 585 lineto
+4516 613 lineto
+4511 617 lineto
+4492 617 lineto
+4488 613 lineto
+4488 597 lineto
+4492 593 lineto
+4511 593 lineto
+4516 597 lineto
+stroke
+4.193000 setlinewidth
+newpath
+4527 593 moveto
+4527 629 lineto
+stroke
+4.193000 setlinewidth
+newpath
+4527 613 moveto
+4531 617 lineto
+4551 617 lineto
+4555 613 lineto
+4555 593 lineto
+stroke
+4.193000 setlinewidth
+newpath
+4591 597 moveto
+4587 593 lineto
+4575 593 lineto
+4571 597 lineto
+4571 629 lineto
+stroke
+4.193000 setlinewidth
+newpath
+4571 617 moveto
+4583 617 lineto
+stroke
+4.193000 setlinewidth
+newpath
+4674 593 moveto
+4646 593 lineto
+4646 605 lineto
+4650 609 lineto
+4670 609 lineto
+4674 613 lineto
+4674 625 lineto
+4670 629 lineto
+4650 629 lineto
+4646 625 lineto
+stroke
+4.193000 setlinewidth
+newpath
+4685 593 moveto
+4713 629 lineto
+stroke
+4.193000 setlinewidth
+newpath
+4685 597 moveto
+4685 625 lineto
+4689 629 lineto
+4709 629 lineto
+4713 625 lineto
+4713 597 lineto
+4709 593 lineto
+4689 593 lineto
+4685 597 lineto
+stroke
+4.193000 setlinewidth
+newpath
+4725 593 moveto
+4753 629 lineto
+stroke
+4.193000 setlinewidth
+newpath
+4725 597 moveto
+4725 625 lineto
+4729 629 lineto
+4749 629 lineto
+4753 625 lineto
+4753 597 lineto
+4749 593 lineto
+4729 593 lineto
+4725 597 lineto
+stroke
+4.193000 setlinewidth
+newpath
+4768 593 moveto
+4764 597 lineto
+4764 609 lineto
+4768 613 lineto
+4788 613 lineto
+4792 617 lineto
+4792 625 lineto
+4788 629 lineto
+4768 629 lineto
+4764 625 lineto
+4764 617 lineto
+4768 613 lineto
+stroke
+4.193000 setlinewidth
+newpath
+4788 613 moveto
+4792 609 lineto
+4792 597 lineto
+4788 593 lineto
+4768 593 lineto
+stroke
+4.193000 setlinewidth
+newpath
+4843 593 moveto
+4843 629 lineto
+4867 629 lineto
+4871 625 lineto
+4871 613 lineto
+4867 609 lineto
+4843 609 lineto
+stroke
+4.193000 setlinewidth
+newpath
+4855 609 moveto
+4871 593 lineto
+stroke
+4.193000 setlinewidth
+newpath
+4895 629 moveto
+4895 625 lineto
+stroke
+4.193000 setlinewidth
+newpath
+4895 613 moveto
+4895 597 lineto
+4899 593 lineto
+4903 593 lineto
+stroke
+4.193000 setlinewidth
+newpath
+4951 597 moveto
+4946 593 lineto
+4927 593 lineto
+4922 597 lineto
+4922 613 lineto
+4927 617 lineto
+4946 617 lineto
+4951 613 lineto
+stroke
+4.193000 setlinewidth
+newpath
+4962 593 moveto
+4962 629 lineto
+stroke
+4.193000 setlinewidth
+newpath
+4962 613 moveto
+4966 617 lineto
+4986 617 lineto
+4990 613 lineto
+4990 593 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5001 617 moveto
+5025 617 lineto
+5030 613 lineto
+5030 593 lineto
+5006 593 lineto
+5001 597 lineto
+5001 601 lineto
+5006 605 lineto
+5030 605 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5041 593 moveto
+5041 617 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5041 609 moveto
+5049 617 lineto
+5061 617 lineto
+5069 609 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5109 629 moveto
+5109 593 lineto
+5085 593 lineto
+5081 597 lineto
+5081 613 lineto
+5085 617 lineto
+5109 617 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5160 593 moveto
+5160 629 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5188 593 moveto
+5188 629 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5160 609 moveto
+5188 609 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5203 593 moveto
+5199 597 lineto
+5199 613 lineto
+5203 617 lineto
+5223 617 lineto
+5227 613 lineto
+5227 597 lineto
+5223 593 lineto
+5203 593 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5239 597 moveto
+5243 593 lineto
+5263 593 lineto
+5267 597 lineto
+5267 601 lineto
+5263 605 lineto
+5243 605 lineto
+5239 609 lineto
+5239 613 lineto
+5243 617 lineto
+5263 617 lineto
+5267 613 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5282 593 moveto
+5282 629 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5282 605 moveto
+5287 605 lineto
+5306 617 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5287 605 moveto
+5306 593 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5330 629 moveto
+5330 625 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5330 613 moveto
+5330 597 lineto
+5334 593 lineto
+5338 593 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5357 593 moveto
+5357 617 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5357 613 moveto
+5361 617 lineto
+5378 617 lineto
+5381 613 lineto
+5381 593 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5397 585 moveto
+5401 581 lineto
+5421 581 lineto
+5425 585 lineto
+5425 613 lineto
+5421 617 lineto
+5401 617 lineto
+5397 613 lineto
+5397 597 lineto
+5401 593 lineto
+5421 593 lineto
+5425 597 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5476 629 moveto
+5492 593 lineto
+5508 629 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5515 593 moveto
+5515 629 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5539 629 moveto
+5515 613 lineto
+5544 593 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5583 625 moveto
+5579 629 lineto
+5559 629 lineto
+5555 625 lineto
+5555 597 lineto
+5559 593 lineto
+5579 593 lineto
+5583 597 lineto
+5583 609 lineto
+5579 613 lineto
+5559 613 lineto
+5555 609 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5594 593 moveto
+5594 629 lineto
+5618 629 lineto
+5623 625 lineto
+5623 617 lineto
+5618 613 lineto
+5594 613 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5618 613 moveto
+5623 605 lineto
+5623 597 lineto
+5618 593 lineto
+5594 593 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5634 593 moveto
+5634 629 lineto
+5658 629 lineto
+5662 625 lineto
+5662 613 lineto
+5658 609 lineto
+5634 609 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5646 609 moveto
+5662 593 lineto
+stroke
+4.193000 setlinewidth
+newpath
+5678 593 moveto
+5673 597 lineto
+5673 625 lineto
+5678 629 lineto
+5697 629 lineto
+5702 625 lineto
+5702 597 lineto
+5697 593 lineto
+5678 593 lineto
+stroke
+4.193000 setlinewidth
+newpath
+4211 647 moveto
+4211 288 lineto
+stroke
+4.193000 setlinewidth
+newpath
+4211 647 moveto
+6726 647 lineto
+stroke
+4.193000 setlinewidth
+newpath
+4211 503 moveto
+6726 503 lineto
+stroke
+4.193000 setlinewidth
+newpath
+6199 432 moveto
+6199 288 lineto
+stroke
+4.193000 setlinewidth
+newpath
+4211 360 moveto
+6726 360 lineto
+stroke
+4.193000 setlinewidth
+newpath
+4211 432 moveto
+6726 432 lineto
+stroke
+4.193000 setlinewidth
+newpath
+4606 432 moveto
+4606 360 lineto
+stroke
+showpage
