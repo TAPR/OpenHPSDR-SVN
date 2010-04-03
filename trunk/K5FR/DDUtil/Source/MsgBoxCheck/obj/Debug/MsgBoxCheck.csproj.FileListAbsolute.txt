@@ -1,5 +1,0 @@
-C:\Documents and Settings\Steve\Desktop\MsgBoxCheck\bin\Debug\MsgBoxCheck.dll
-C:\Documents and Settings\Steve\Desktop\MsgBoxCheck\bin\Debug\MsgBoxCheck.pdb
-C:\Documents and Settings\Steve\Desktop\MsgBoxCheck\obj\Debug\ResolveAssemblyReference.cache
-C:\Documents and Settings\Steve\Desktop\MsgBoxCheck\obj\Debug\MsgBoxCheck.dll
-C:\Documents and Settings\Steve\Desktop\MsgBoxCheck\obj\Debug\MsgBoxCheck.pdb
