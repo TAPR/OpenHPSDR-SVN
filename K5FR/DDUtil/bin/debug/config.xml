@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<profilerconfig>
+  <items>
+    <item name="port">
+      <value>COM10</value>
+    </item>
+    <item name="radio">
+      <value>FLEX5000</value>
+    </item>
+    <item name="profile">
+      <value>RTTY 20M</value>
+    </item>
+    <item name="path">
+      <value>C:\Documents and Settings\Owner\Desktop\Repos_SDR\bin\Release\command.xml</value>
+    </item>
+  </items>
+</profilerconfig>

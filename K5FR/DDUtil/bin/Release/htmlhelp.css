@@ -1,0 +1,59 @@
+/* Microsoft HTML Help WorkShop CSS*/
+
+body           {  font-size: 75%;
+		font-family: Verdana, Arial, Helvetica, Sans-Serif;	}
+
+
+a:link 	{  background: transparent; 
+		color: #0000FF;		} 
+
+a:visited	{  color: #800080;	}
+
+h1		{  font-weight: bold;
+		font-size: 55%;
+		margin-bottom: -2.2em; }
+
+li		{  margin-top: 4pt;  }
+
+ul li		{ padding-top: 4pt;	}
+
+ol li		{ padding-bottom: 4pt;	}
+
+ul		{  margin-left: -15pt;
+		margin-top: -7em;  }
+
+ol		{  margin-left: -15pt;
+		margin-top: -7em;  }
+
+ol ul		{  margin-top: 0em;  
+		list-style: disc;	}
+		
+code		{  font-family: Courier; 	}
+
+pre		{  font-family: Courier; 	}
+
+table 	{ width: auto; 
+		text-align: left;
+		font-size: 75%; 
+		font-size: +12;	}
+			
+th		{  text-align: left;		}
+
+td		{  margin-right: 0em; 	}
+
+img		{  margin-top: -4pt;  }	
+
+/* Overview heading   */
+h5.overh	{  font-size: 120%;	}           
+
+h5	{  font-size: 100%;	}           
+
+/* Procedure heading  */
+h5.proch	{    font-size: 100%;	}          
+
+/* Decision heading   */
+h5.what     {    font-size: 100%; 
+		color: #993399;		}           
+
+/* Note & Tip heading */
+h5.note	{    font-size: 95%; 	}          
