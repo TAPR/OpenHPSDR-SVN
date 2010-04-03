@@ -1,0 +1,30 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual Studio 2008
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "DDUtil_Setup", "..\DDUtil_Setup\DDUtil_Setup.vdproj", "{3FA8AE0E-7EA1-481D-AD95-ED6AAE9A1D63}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MsgBoxCheck", "MsgBoxCheck\MsgBoxCheck.csproj", "{43D66268-9336-4118-A30E-FC43CED0E62D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataDecoder", "DDUtil\DataDecoder.csproj", "{BCD217AA-A3FD-4A5B-A7EA-D60B0F7F7651}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{3FA8AE0E-7EA1-481D-AD95-ED6AAE9A1D63}.Debug|Any CPU.ActiveCfg = Debug
+		{3FA8AE0E-7EA1-481D-AD95-ED6AAE9A1D63}.Release|Any CPU.ActiveCfg = Release
+		{43D66268-9336-4118-A30E-FC43CED0E62D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{43D66268-9336-4118-A30E-FC43CED0E62D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{43D66268-9336-4118-A30E-FC43CED0E62D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{43D66268-9336-4118-A30E-FC43CED0E62D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BCD217AA-A3FD-4A5B-A7EA-D60B0F7F7651}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BCD217AA-A3FD-4A5B-A7EA-D60B0F7F7651}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BCD217AA-A3FD-4A5B-A7EA-D60B0F7F7651}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BCD217AA-A3FD-4A5B-A7EA-D60B0F7F7651}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
