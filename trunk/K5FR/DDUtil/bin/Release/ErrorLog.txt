@@ -1,0 +1,12 @@
+Source		: DataDecoder
+Method		: GetVars
+Time		: 1:29:40 PM
+Date		: 3/28/2010
+Computer	: i7-940
+Error		: Object reference not set to an instance of an object.
+Stack Trace	: at DataDecoder.Setup.GetVars(String tableName) in C:\Documents and Settings\Steve\Desktop\Repose_DDUtil\Source\Setup.cs:line 10586
+   at DataDecoder.Setup.LoadVars() in C:\Documents and Settings\Steve\Desktop\Repose_DDUtil\Source\Setup.cs:line 10496
+   at DataDecoder.Setup.LoadMacro(String file) in C:\Documents and Settings\Steve\Desktop\Repose_DDUtil\Source\Setup.cs:line 10550
+   at DataDecoder.Setup.DDParse(String cmd) in C:\Documents and Settings\Steve\Desktop\Repose_DDUtil\Source\Setup.cs:line 5274
+   at DataDecoder.Setup.ParseBuffer(String cmd) in C:\Documents and Settings\Steve\Desktop\Repose_DDUtil\Source\Setup.cs:line 5156
+-------------------------------------------------------------------
