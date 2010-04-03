@@ -1,0 +1,843 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<title>DDUtil Online help</title>
+<meta name="description" content="Data Decoder Utility for Flex Radios">
+<link rel="stylesheet" type="text/css" href="coua.css">
+<script language="JavaScript">
+	function doExpand(paraNum,arrowNum)
+	{
+		//expand the paragraph and rotate the arrow; collapse and rotate it back
+		if (paraNum.style.display=="none"){paraNum.style.display="";arrowNum.src="arrowdn.gif"}
+		else{paraNum.style.display="none";arrowNum.src="arrowrt.gif"}
+	}
+</script>
+</head>
+<body>
+	
+<h1 align="center"><font size="5" color="#CC0000">DDUtil Online Help</font></h1>
+<p align="center"><font size="2">A Data Decoding Utility for Flex Radios</font></p>
+<p align="center"><font size="2" color="#0000FF">(Steve Nance - K5FR)</font></p>
+<p align="center">&nbsp;</p>
+<b>Notice:</b> The most up-to-date documentation is always at the
+<a href="http://k5fr.com/ddutilwiki/index.php">Wiki</a>, if you have a choice 
+use it. This file is being depreciated.<p>The <b>Data Decoder</b> <b>Utility</b> <b>(DDUtil) </b>enables you to</font>:</p>
+<ul>
+	<li>Send transmit frequency data to RS-232 passive listener devices such as 
+	SteppIR antenna controllers, linear amplifiers, antenna tuners and other 
+	similar devices. This data is provided on the pc's serial communication port 
+	commonly known as COMx.</li>
+	<li>Send Binary Coded Data (BCD) to frequency sensitive devices based 
+	on the <b>PowerSDR</b> <u><b>transmit</b></u> frequency. These devices can be, linear amplifiers, 
+	antenna switches or any other similar device. This data is provided on the 
+	pc's parallel port commonly known as LPTx.</li>
+	<li>Build and maintain the BCD data file used by the parallel port without 
+	having to use a separate program for creation/editing.</li>
+	<li>Use the program by itself or with another radio control program such as 
+	Ham Radio Deluxe (HRD), DXLab Commander, MixW if desired.</li>
+</ul>
+
+
+<p><a href="#Intro">Introduction</a></font></p>
+<p><a href="#Install">Install</a></p>
+<p><a href="#Instructions">Setup</a></font></p>
+<p><a href="#Scenario">Usage</font></a></p>
+<p><a href="#How">How it Works</a></font></p>
+<p><a href="#Legal">Legal</a></p>
+<h2><u><font color="#800080"><a name="Intro"></a>Introduction</font></font></u></h2>
+<p>This program provides the 
+	automation required to decode and present <b>transmit</b> frequency data to select 
+frequency sensitive devices such as linear amplifiers, antenna controllers (SteppIR), 
+antenna tuners, antenna band switchers, etc. <b>DDUtil</b> may be used in 
+a stand-alone mode or with a radio control program such as DXLab Commander, Ham 
+Radio Deluxe, Mix2W or any other radio control program that can use standard 
+Kenwood CAT commands for communication with <b>PowerSDR</b>. 
+<p><b>DDUtil</b> 
+automatically senses when a radio control program is trying to communicate with 
+<b>PowerSDR</b> and modifies it's mode of operation requiring no user 
+intervention. See the <a href="#How">&quot;How it Works&quot;</a> section for 
+a more detailed description of program design.<p>An XML file is used to 
+provide the reference data needed for the BCD output data. A sample file is 
+included with the distribution files to serve as a guide. This file may be 
+created from scratch or modified from the sample provided and then saved with 
+an appropriate user name. All file modification may be 
+accomplished within the program or may be done in any XML file 
+editor of the users choice. But, unless the user is familiar with XML file 
+editing it is recommended that XML file modification be confined to <b>DDUtil</b> 
+until proficiency is obtained. Please note that this file requires a specific 
+format see the <b>'BCD Data File Format'</b> topic in <a href="#Other">Other Topics</a> for details.<p>The initial release is designed for the Flex 
+family of radios including the SDR-1000 and Flex5000 series, but may well be 
+extended to other radios in the future.<h2><u><font color="#800080">
+<a name="Install"></a>Installation</font></u></h2>
+<ul>
+	<li><u><b>Prerequisites:</b></u><b>&nbsp;&nbsp;&nbsp; DDUtil</b> requires 
+Microsoft .NET 2.0 in order to load and function. The setup file will automatically guide 
+you through this installation if your pc doesn't have it. Just follow the 
+prompts and select x86 when it asks you which one you want to download.</li>
+	<li>Execute the file <b>'DDUtil_Setup.msi'</b>, follow the prompts, accept the defaults and you 
+should get a Icon on your desktop like this one.
+	<img border="0" src="DDUtilicon.JPG" width="32" height="32"> </li>
+	<li>Additionally, there is an entry in your pc's <b>Programs</b> group for
+	<b>DDUtil</b> should 
+the desktop icon be lost This can be reached by selecting Start/All 
+Programs/DDUtil</li>
+	<li>Be advised that <b>DDUtil</b> must be uninstalled before updating to a newer 
+version. The installer will tell you also.</li>
+</ul>
+<h2><u><font color="#800080"><a name="Instructions"></a>
+Setup</font></u></h2>
+<p>For a more in-depth discussion on setting up <b>DDUtil</b> see the
+<a href="http://k5fr.com/ddutilwiki/index.php?title=How_To">How-To</a> section 
+of the web site wiki.</p>
+<ul>
+	<li>
+	<h2><span class="mw-headline">Ports Tab </span></h2></li>
+
+<p style="margin-top: 3px; margin-bottom: 6px"><br>&nbsp;&nbsp;&nbsp;
+	<img border="0" src="DDUtilPorts.jpg" >&nbsp; </p>
+<p>&nbsp;</p>
+<ul>
+	<li>
+	<p style="margin-top: 3px; margin-bottom: 6px"><b>Serial Ports</b><ul>
+		<li>
+		<p style="margin-top: 3px; margin-bottom: 6px">In the <b>Serial Ports</b> group 
+		select the <b>CAT Port</b> you will use to talk to your radio. 
+	This will be one of a virtual port pair like N8VB's VCOM utility provides. 
+			<font color="#800080"><b><u>I</u>n this illustration PowerSDR is set 
+			to port 11 and DDUtil is set to port 10</b></font>. See this Flex Knowledge Base
+			<a href="http://kb.flex-radio.com/Article.aspx?id=10068">article</a> 
+			for how to setup virtual serial ports. </li>
+		<li>
+		<p style="margin-top: 3px; margin-bottom: 6px">Optionally, select from the 
+	drop down box the 
+		<b>Passive Listener Port</b> you will use. Usually COM1, but may be any RS-232 
+		compliant <b>hardware</b> serial port connected to your pc including 
+			add-on cards or USB to serial adapters. </li>
+		<li>
+		<p style="margin-top: 3px; margin-bottom: 6px">Optionally, select from the 
+	drop down box the <b>Radio Control Port</b> you will use. This will be one 
+	of a virtual serial port pair like N8VB's VCOM utility provides. 
+			<font color="#800080"><b>In the example 
+	above the Radio Control program (HRD, etc.) port is set to COM4 and DDUtil is set to COM5</b></font>.
+			</li>
+	</ul>
+	<p style="margin-top: 3px; margin-bottom: 6px"><u><b>Serial Port Notes:<br>
+	<br></b></u>A typical VCOM ports setup for <b>DDUtil</b> could be:<u><b><br>
+	<br></b></u>Pair 10 &lt;-&gt; 11&nbsp;&nbsp;&nbsp; DDUtil CAT (10), PowerSDR CAT 
+		(11)<br><br>Pair&nbsp;&nbsp; 4 &lt;-&gt; 5&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; HRD CAT (4), 
+		DDUtil Radio Control (5)<br>&nbsp;<ul>
+		<li>
+		<p style="margin-top: 3px; margin-bottom: 6px">In the 
+	setup section of the Radio Control Program set the radio type to <b>Kenwood</b>, 
+	the speed parity and stop bits don't matter on virtual serial ports.</li>
+		<li>
+		<p style="margin-top: 3px; margin-bottom: 6px">Set the <b>Cat Polling 
+	Interval</b>. This defaults to 1000 which equates to 1 second. Lower numbers 
+	speed up the polling time, but increase CPU utilization so caution should be exercised when setting this number. 1000 has proven to 
+		be a satisfactory interval.</li>
+	</ul></li>
+	<li>
+	<p style="margin-top: 3px; margin-bottom: 6px"><b>Parallel Port</b><ul>
+		<li>
+		<p style="margin-top: 3px; margin-bottom: 6px">In the <b>Parallel Port</b> 
+		group, optionally, select the parallel port you will use. Usually LPT1, 
+	but may be any parallel port including add-on cards or USB to parallel port adapters.</li>
+		<li>
+		<p style="margin-top: 3px; margin-bottom: 6px">If your not sure what your 
+	port numbers are you can get help <a href="#ports">here</a> finding 
+	out if you have any parallel ports and what their numbers are.</li>
+		<li>
+		<p style="margin-top: 3px; margin-bottom: 6px">If you are using an 
+			<b>add-on 
+	board</b> or <b>USB to Parallel adapter</b> for your parallel port the port 
+	address will have to be entered manually. Click <a href="PortAddr.htm">here</a> 
+	for a guide on how-to find the address for your non-standard parallel port 
+	and enter it into <b>DDUtil</b>.</li>
+	</ul></li>
+	<li>
+	<p style="margin-top: 3px; margin-bottom: 6px"><b>Data Signals</b><ul>
+		<li>
+		<p style="margin-top: 3px; margin-bottom: 6px">In the <b>Data Signals</b> group, select the device you want to use as a 
+	file source for the BCD data. In order to make this selection you will have to go to 
+	one or more of the device tabs and setup a source. See the following section 
+	for advice on this.</li>
+	</ul></li>
+	<li>
+	<p style="margin-top: 3px; margin-bottom: 6px"><b>Other</b><ul>
+		<li>
+		<p style="margin-top: 3px; margin-bottom: 6px"><b>Follow SDR</b> - 
+		Select this check box if you want to <b><i>Slave</i></b> another radio 
+		to <b>PowerSDR </b>in-lieu of a <b>Passive Listener</b> device. This 
+		feature allows another radio to follow <b>PowerSDR's</b> frequency, 
+		which is handy if your SDR is an old three (3) board stack or SoftRock. 
+		Be advised that in this mode receiver muting and antenna switching is 
+		required when transmitting from the slave radio or bad things will 
+		happen to your SDR.</li>
+		<li>
+		<p style="margin-top: 3px; margin-bottom: 6px"><b>Slave Radio Type</b> - 
+		Select the radio type you wish to use as the slave. 
+		<p style="margin-top: 3px; margin-bottom: 6px"><u><b>Note:</b></u> Right-click on the form background to display a 
+		<a href="ShrinkMenu.JPG">menu</a> of options and 
+		select <font color="#CC0000"><i><b>&quot;Slave Radio Info&quot; </b></i>
+		</font>for the radio <a href="SlaveInfo.JPG">models</a> in each 
+		radio type.</li>
+		<li>
+		<p style="margin-top: 3px; margin-bottom: 6px"><b>PL/Radio Comm</b> - 
+		Selects serial communication parameters for the <b>Passive Listener</b> 
+		port. Consult your radio users manual for this if necessary.</li>
+		<li>
+		<p style="margin-top: 3px; margin-bottom: 6px"><b>CI-V Addr</b> - Sets 
+		the appropriate CI-V Hex address if using an ICOM radio. Consult owner's 
+		manual for information on this.</li>
+	</ul></li>
+</ul></ul>
+<ul>
+	<li>
+	<h2><span class="mw-headline">Device Tab </span></h2>
+</li>
+	</ul>
+	<p style="margin-top: 3px; margin-bottom: 6px">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	<img border="0" src="DDUtilDevice.JPG">&nbsp; </p>
+<blockquote>
+	<p style="margin-top: 3px; margin-bottom: 6px">This page of the setup 
+		form is for configuring the BCD data file. This file is needed to set 
+	the parallel port BCD codes for your frequency dependent device and will 
+	vary according to the device's configuration and design criteria. The following is an example of the 
+	codes required for a Yaesu Quadra amplifier to automatically switch bands as 
+	<b>PowerSDR</b> changes frequency.</p>
+	<ul>
+		<li>
+		<p style="margin-top: 3px; margin-bottom: 6px">160 = 1&nbsp;&nbsp;&nbsp; 80 
+	= 2&nbsp;&nbsp;&nbsp; 40 = 3&nbsp;&nbsp;&nbsp; 30 = 4&nbsp;&nbsp;&nbsp; 20 = 
+	5&nbsp;&nbsp;&nbsp; 17 = 6&nbsp;&nbsp;&nbsp; 15 = 7&nbsp;&nbsp;&nbsp; 12 = 8&nbsp;&nbsp;&nbsp; 
+	10 = 9&nbsp;&nbsp;&nbsp; 6 = 10</p></li>
+		<li>
+		<p style="margin-top: 3px; margin-bottom: 6px">You input a digital number 
+	for a specific frequency and the decoder converts it to BCD at the parallel 
+	port (i.e. 7 = 0111).</p></li>
+	</ul>
+	<ul>
+		<li>
+		<p style="margin-top: 3px; margin-bottom: 6px">This page is pretty self 
+	explanatory, here is a description of the controls functions.</p>
+		<ul>
+			<li>
+			<p style="margin-top: 3px; margin-bottom: 6px"><b>Device Name</b> = Give 
+		this device a suitable name to distinguish it in the device list on the 
+		Ports tab. This name will be transferred to the device tab name for easy 
+		recognition.</p></li>
+			<li>
+			<p style="margin-top: 3px; margin-bottom: 6px"><b>Enabled </b>= 
+		indicates the device is available for selection by the Ports page Data 
+			Signals Device selector combo box.</p></li>
+			<li>
+			<p style="margin-top: 3px; margin-bottom: 6px"><b>Data Grid</b> = 
+		Display and/or edit the Frequency / Data pairs. This is the data used by 
+			the BCD converter to output on the parallel port. See
+			<a href="#Other">Other Topics</a> for a discussion on BCD data file 
+			format.</p></li>
+			<li>
+			<p style="margin-top: 3px; margin-bottom: 6px"><b>File Name | Select</b> 
+		= When pressed brings up a file dialog where a file may be selected for 
+		input into the data grid.</p></li>
+			<li>
+			<p style="margin-top: 3px; margin-bottom: 6px"><b>File Name | Re-Load</b> 
+		= Will re-load the displayed file. This is intended to allow 
+		salvaging a file that has been edited and the user decides to abandon it 
+		due to errors or whatever.</p></li>
+			<li>
+			<p style="margin-top: 3px; margin-bottom: 6px"><b>File Name | Save</b> = 
+		After creating or editing a file in the data grid pressing this button 
+		will save it to the file named in the <b>File Name</b> box.</p>
+			<p style="margin-top: 3px; margin-bottom: 6px"><u><b>Note:</b></u> This 
+		will overwrite whatever file is in the file name box. <b>Be careful!</b></p>
+			</li>
+			<li>
+			<p style="margin-top: 3px; margin-bottom: 6px"><b>Help</b> = This help 
+		file.</p></li>
+		</ul></li>
+	</ul>
+</blockquote>
+<ul>
+	<li>
+	<h2><span class="mw-headline">RCP Tab </span></h2>
+	</li>
+</ul>
+<p style="margin-top: 3px; margin-bottom: 6px">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	<img border="0" src="DDUtilRCP.JPG">&nbsp; </p>
+<blockquote>
+	<p>This tab is for configuring and controlling the other <b>Radio Control Programs</b> 
+	(RCP) ports. <b>Radio Control Programs</b>&nbsp; are 
+	programs that communicate with the radio to exchange frequency and mode 
+	data. This is particularly useful for Telnet Spots and Digital programs that 
+	have the ability to control the radio on their own.</p>
+	<p><i><b><span style="color: red;">Warning!</span></b></i> </p>
+</blockquote>
+<blockquote>
+	<dl>
+		<dd><b>DO NOT</b> setup any of these ports without setting up the 
+		Master <b>RCP</b> program on the <b>Ports Tab</b> <i><u>
+		<font color="#FF0000"> <b>first</b></font></u></i>. <u>
+		<font color="#0000FF"><i><b>Instability 
+		will occur!</b></i></font></u></dd>
+	</dl>
+	<ul>
+		<li><b>Enabled</b> indicates the <b>RCP</b> is selected to communicate with 
+	the radio via the radio <b>CAT</b> port. Communication with the radio will 
+		not occur unless this control is selected. </li>
+		<li><b>Serial Port Selection Drop-Down Box</b>, immediately to the right of 
+	the <b>Enabled</b> check box, is used to select the virtual serial port the
+	<b>RCP</b> will use to communicate with the radio.
+		</li>
+		<li><b>IF Only</b> if selected will eliminate all commands except <b>IF</b> 
+		commands from being sent to the <b>RCP</b> port. This control is used 
+		for <b>RCP's</b> that are sensitive to extraneous commands. As an 
+		example<b>, MixW</b> is such a program and requires the control to be 
+		checked in order to keep it's frequency display from erratically 
+		switching back and forth with what appears to be random readings.</li>
+		<li><b>Disable Polling</b> if selected will eliminate any polling for 
+		frequency, mode or any other radio status from this <b>RCP</b>. Any 
+		frequency or mode <b>SET</b>ing commands will be honored though. This 
+		control is intended to be used if there are slow response issues with 
+		the various <b>RCPs</b><p><font color="#800000"><u><b>Notes on Polling:</b></u></font>
+		</p>
+		<p>There are many factors that will influence whether or not you want to 
+		<b>Disable Polling</b> for a specific <b>RCP</b. The best thing to do is just 
+		try it and see if it helps the response. Some programs will not work 
+		properly without polling enabled (i.e., CWSkimmer). It all depends what
+		<b></b>. Many factors can influence performance depending on which programs are running and what their requirements are as 
+		related to polling. With as many as four <b>RCPs</b> running it's 
+		inevitable there will be duplicate polling commands flying around.
+		The whole purpose of this control is to be able to have some control 
+		over these duplicate commands.</li>
+	</ul>
+	<p><u><b>Note:</b></u> For a more in-depth discussion on setting up <b>DDUtil</b> see the
+	<a href="http://k5fr.com/ddutilwiki/index.php?title=How_To">How-To</a> 
+	section of the web site wiki.</p>
+</blockquote>
+<ul>
+	<li>
+	<h2><span class="mw-headline">Other Tab  </span></h2>
+</li>
+	</ul>
+	<p style="margin-top: 3px; margin-bottom: 6px">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	<img border="0" src="DDUtilOther.JPG">&nbsp;</p>
+<blockquote>
+	<p style="margin-top: 3px; margin-bottom: 6px">This page of the setup 
+		form is for configuring <b>Other</b> options that can be used with <b>DDUtil</b 
+	and include: </p>
+	<ul>
+		<li>
+		<p style="margin-top: 3px; margin-bottom: 6px"><b>IC-PW1</b></p></li><br>
+		If you wish to have your <b>ICOM IC-PW1</b> linear amplifier follow the
+		<b>PowerSDR</b> automatically from band to band this control group is 
+		where you set it up.<p>You will need a CT-17 or some knock-off level 
+		converter. The following controls will need to be set for this function to work.<ul>
+		<li><b>Enabled</b> - indicates you wish to use this function.</li>
+		<li><b>Port</b> - Select the hardware port number you wish to use to 
+		connect your <b>IC-PW1 </b>via<b> a CI-V</b> level converter.</li>
+		<li><b>CI-V Address (ta)</b> - This is the hex address used by <b>DDUtil</b> 
+		during the communication with the <b>IC-PW1</b>. It is suggested that 
+		the default address of 33H be used, but any other address may be used.</li>
+		<li><b>CI-V Address (ra)</b> - This is the address of the <b>IC-PW1</b>.
+		<b>DDUtil</b> will automatically pick this address up when the <b>IC-PW1</b> 
+		polls <b>DDUtil</b>. No action is required on the user's part and the <b>
+		ra</b> box is shown for information purposes only.</li>
+
+	</ul>
+		<p>Additionally, The user will need to follow the procedure in the <b>
+		IC-PW1</b> owners manual to <b>&quot;Program the CI-V address&quot;</b>. This is 
+		normally for an exciter, but in this case it will be for<b> DDUtil</b>. 
+		whenever the <b>IC-PW1</b> enters this mode <b>DDUtil</b> will recognize 
+		the query and furnish the appropriate information back to the <b>IC-PW1</b>. 
+		This only takes a minute and only has to be done once, normally.<p>For a 
+		more in-depth discussion on setting up <b>DDUtil</b> see the
+		<a href="http://k5fr.com/ddutilwiki/index.php?title=How_To">How-To</a> 
+		section of the web site wiki.<br>
+
+	</ul>
+	<p style="margin-top: 3px; margin-bottom: 6px"><br></p>
+	<ul>
+		<li>
+		<p style="margin-top: 3px; margin-bottom: 6px"><b>LP-100</b> <br>
+		<br>
+		If you own one of <a href="http://www.telepostinc.com/">Larry Phipps's</a> 
+		(N8LP) excellent <b>Peak Reading Digital Vector Wattmeter's</b> and have an 
+		additional serial port on your PC, this option may be useful for you. 
+		The forward and reverse power readings from the <b>LP-100</b> can be 
+		displayed at the bottom of the <b>DDUtil</b> form. This is useful as you 
+		won't have to look away from the monitor to see the wattmeter.<br>
+		<br>
+		The following controls will need to be set for this function to work.</p>
+	<ul>
+		<li>
+		<p style="margin-top: 3px; margin-bottom: 6px"><b>Enabled</b> = 
+		indicates you want the <b>LP-100</b> Forward and Reverse power readings 
+		to be displayed on the <b>DDUtil</b> form.</p></li>
+		<li>
+		<p style="margin-top: 3px; margin-bottom: 6px"><b>Port</b> = Select the 
+		port number you have the <b>LP-100</b> attached to. Configure this port 
+		to match the <b>LP-100</b> serial requirements.</p></li>
+		<li>
+		<p style="margin-top: 3px; margin-bottom: 6px"><b>Interval</b> = The 
+		interval in milliseconds (ms) <b>DDUtil</b> will use to poll the <b>
+		LP-100</b> for readings. This number needs to be fairly small or there 
+		will be a lag in readings from the <b>LP-100</b>. I have found a range 
+		of 80 - 200 ms to be suitable.</p></li>
+	</ul></li>
+		<li>
+		<p style="margin-top: 3px; margin-bottom: 6px"><b>SteppIR Antenna 
+		Control </b>(version 1.5.6)<b><br>
+&nbsp;</b></p>
+		<p style="margin-top: 3px; margin-bottom: 6px">This group of controls is 
+		designed to offer a higher level of control to the <b>SteppIR Antenna</b> 
+		user than just letting it follow the radio in <b>Passive Listener</b> 
+		mode. This feature queries the <b>SteppIR</b> control box to see if the 
+		antenna is adjusting itself. If it is <b>DDUtil</b> inhibits the 
+		transmit function in <b>PowerSDR</b> until the antenna is finished 
+		adjusting to the new frequency. This feature greatly reduces the 
+		possibility of damage to the Radio and/or Amplifier during the antenna 
+		adjustment period.<br>
+		<br>
+		To use this function take the following steps:</p>
+	<ul>
+		<li>
+		<p style="margin-top: 3px; margin-bottom: 6px"><b>Port</b> - Select the 
+		port number you have the <b>SteppIR</b> controller attached to (data out 
+		[lower] port). Configure this port 
+		to match the <b>LP-100</b> serial requirements.</p></li>
+		<li>
+		<p style="margin-top: 3px; margin-bottom: 6px"><b>Comm</b> - Select the 
+		communication parameters to match how the<b> SteppIR</b> controller is 
+		setup.</p></li>
+		<li>
+		<p style="margin-top: 3px; margin-bottom: 6px"><b>Interval</b> - The 
+		interval in milliseconds (ms) <b>DDUtil</b> will use this number to poll the
+		<b>SteppIR</b> controller for readings. This number needs to be fairly small or there 
+		will be a lag in readings from the <b>SteppIR</b> controller. I have found a 
+		setting 
+		of 200 ms to be suitable.</p></li>
+		<li>
+		<p style="margin-top: 3px; margin-bottom: 6px"><b>Enabled</b> - select 
+		to turn on the function.</p></li>
+		<li>
+		<p style="margin-top: 3px; margin-bottom: 6px"><font color="#FF0000"><b>
+		Xmit Inhibit</b></font> - is displayed at the bottom of the form when <b>
+		PowerSDR</b> is inhibited meaning the antenna is moving.<br>
+&nbsp;</p></li>
+	</ul></li>
+		<li>
+		<p style="margin-top: 3px; margin-bottom: 6px"><b>Flex Profiler<br><br>
+		</b>Bob Tracy's (K5KDN) fabulous <b>Flex Profiler</b> program can be 
+		opened without having to shut down <b>DDUtil</b>. Pressing the
+		<font color="#0000FF"><b>PF Open</b></font> button disables <b>DDUtil</b> 
+		from passing commands to <b>PowerSDR</b> and makes the CAT port 
+		available to <b>Flex Profiler</b>. When finished and after closing <b>Flex Profiler</b>, pressing the 
+		<font color="#0000FF"><b>Re-Start</b></font> 
+		button will re-enable <b>DDUtil</b> to it's normal functionality.</p>
+		<ul>
+			<li>
+			<p style="margin-top: 3px; margin-bottom: 6px"><b>File Location<br>
+			</b>The file location of the FlexProfiler.exe program must be set in 
+		order for <b>DDUtil</b> to know where this file resides. Press the &quot;<b>Select</b>&quot; 
+		button to browse for the file location.</p></li>
+		</ul></li>
+	</ul>
+	<ul>
+		<li>
+		<p style="margin-top: 3px; margin-bottom: 6px"><b>PA Temp Readout<br>
+		<br>
+		</b>The window at the bottom right hand corner of the <b>DDUtil</b> form 
+		gives a constant reading of the <b>Flex-5000</b> PA temperature. This 
+		reading is updated once a second and is displayed in either Celsius or 
+		Fahrenheit which is selectable by clicking the temperature window with 
+		the mouse. The color of the window changes with the temperature in 
+		ranges as follows:</p>
+	<ul>
+		<li>
+		<p style="margin-top: 3px; margin-bottom: 6px">Green:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+		&lt; 50 C</p></li>
+		<li>
+		<p style="margin-top: 3px; margin-bottom: 6px">Yellow:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+		&gt;= 50 C and &lt; 70 C</p></li>
+		<li>
+		<p style="margin-top: 3px; margin-bottom: 6px">Orange:&nbsp;&nbsp;&nbsp; 
+		&gt;= 70 C and &lt; 80 C</p></li>
+		<li>
+		<p style="margin-top: 3px; margin-bottom: 6px">Red:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+		&gt;= 80 C</p></li>
+	</ul>
+		</li>
+	</ul>
+	<p style="margin-top: 3px; margin-bottom: 6px"><u><b>Note:</b></u> 
+	Right-clicking the <b>DDUtil </b>background will cause a context
+	<a href="ShrinkMenu.JPG">menu</a> to display. Selecting the appropriate item 
+	in this menu will provide operational instructions.</p>
+</blockquote>
+<ul>
+	<li>
+	<h2><span class="mw-headline">Macro Tab  </span></h2>
+</li>
+	</ul>
+	<p style="margin-top: 3px; margin-bottom: 6px">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	<img border="0" src="DDUtilMacro.JPG">&nbsp;</p>
+<blockquote>
+	<p style="margin-top: 3px; margin-bottom: 6px">This page is for configuring
+	<b>Macro</b> commands that can be used to instruct the radio to perform 
+	actions remotely. These actions can include setting almost any control or 
+	function on the radio console. Typically, the following commands might be attached 
+	to one of the macro buttons labeled <b>FR Net</b> (Flex Radio Net) as 
+	seen in the screen shot above.<ul>
+		<li>
+		<p style="margin-top: 3px; margin-bottom: 6px">Change frequency to 
+		14,319.000, Set Mode to USB, Set Transmit Profile to PR781+EQ, Set Drive 
+		to 100 watts, Set Filter to 2.7K, etc.</li>
+	</ul>
+	<p style="margin-top: 3px; margin-bottom: 6px">There are a total of twelve 
+	(12) assignable buttons that can be set up with any recognizable <b>PowerSDR 
+	CAT</b> command. Some familiarity with the <b>CAT</b> command structure is required to 
+	use this feature. </p>
+	<p style="margin-top: 3px; margin-bottom: 6px">&nbsp;</p>
+	<p style="margin-top: 3px; margin-bottom: 6px">A dictionary of <b>CAT</b> 
+	commands, in different formats, are available from the <b>Flex </b>svn web site, </p>
+	<p style="margin-top: 3px; margin-bottom: 6px">svn://206.216.146.154/svn/repos_sdr_windows/PowerSDR/trunk/Documentation</p>
+	<p style="margin-top: 3px; margin-bottom: 6px">Also, the <b>CAT</b> documents are 
+	available in PDF format on the <b>DDUtil</b>
+	<a href="http://k5fr.com/ddutilwiki/index.php?title=CAT">web</a> site, but 
+	the latest documents will always be on the svn site.</p>
+	<p style="margin-top: 3px; margin-bottom: 6px">&nbsp;</p>
+	<p style="margin-top: 3px; margin-bottom: 6px">For more information on 
+	setting up and using <b>Macro</b> commands see the <b>DDUtil </b>web site
+	<a href="http://k5fr.com/ddutilwiki/index.php?title=How_To">How-To</a> 
+	section</p>
+	<p style="margin-top: 3px; margin-bottom: 6px">&nbsp;</blockquote>
+<ul>
+	<li>
+	<h2><span class="mw-headline">Rotor Tab</span><b> </b>
+	<span style="font-weight: 400">(version 1.5.6)</span><span class="mw-headline"> </span></h2>
+</li>
+	</ul>
+	<p style="margin-top: 3px; margin-bottom: 6px">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	<img border="0" src="DDUtilRotor.JPG">&nbsp;</p>
+<blockquote>
+	<h3><span class="mw-headline">Setup</span></h3>
+	<p>Before using this feature you must go to the <b>Setup</b> tab and 
+	configure the parameters for your rotor. Otherwise the short path and long 
+	path buttons won't be active until a port is setup. </p>
+	<p>To find the antenna bearing for a country perform one of the following 
+	actions. </p>
+	<p><b>Prefix</b> </p>
+	<ul>
+		<li>Enter a call sign prefix in the <b>Prefix</b> text box. </li>
+		<li>Select a call sign prefix from the drop down list in the <b>Prefix</b> 
+		window. </li>
+	</ul>
+	<p><b>Entity</b> </p>
+	<ul>
+		<li>Enter a entity (country) name in the <b>Entity</b> text box. </li>
+		<li>Select a country name from the drop down list in the <b>Entity</b> 
+		window. </li>
+	</ul>
+	<p>Alternately, entering a <b>Country Code</b> in the <b>Code</b> window and 
+	striking <b>Enter</b> or entering an <b>IOTA</b> number in the <b>IOTA </b>
+	window and striking <b>Enter</b> will also produce a heading if the data is 
+	properly formatted.</p>
+	<p>Press the appropriate <b>Heading</b> button (SP/LP) to start the rotor 
+	turning.&nbsp; </p>
+		<p>The data displayed under the heading buttons shows the last heading 
+		the rotor was set to and whether it was short or long path. </p>
+		<p><b>Location Data</b> is provided for information about the entity 
+		chosen. </p>
+	<p><b><u>Note:</u></b> Double-clicking the <b>Distance</b> window will show 
+	the distance for long path (shown in <font color="#0000FF">blue</font>).</p>
+		<h3><span class="mw-headline">Tips for Entering Data</span></h3>
+		<p>The prefix and entity controls keep track of what has been entered 
+		progressively as you type. This means even though you can't see what you 
+		are typing, in some cases, it's still there. If you didn't find what you 
+		wanted due to entering the wrong data and need to start over one of the 
+		following actions will reset the control buffer. </p>
+		<ul>
+			<li>Press the <b>Enter</b> key </li>
+			<li>Press the <b>Tab</b> key</li>
+			<li>Click on the control</li>
+		</ul>
+</blockquote>
+<ul>
+	<li>
+	<h2><span class="mw-headline">Setup Tab</span><b> </b>
+	<span style="font-weight: 400">(version 1.5.6)</span></h2></li>
+</ul>
+</li>
+<p style="margin-top: 3px; margin-bottom: 6px">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	<img border="0" src="DDUtilSetup.JPG">&nbsp;</p>
+<blockquote>
+	<p>This tab is for configuring the rotor and other station information. </p>
+	<h3><span class="mw-headline">Station info</span></h3>
+	<p>This information is required for the <b>Heading</b> and <b>Location 
+	Information</b> lookup routines to function properly on the <b>Rotor</b> 
+	tab. </p>
+	<ul>
+		<li>Set your station <b>Latitude</b> and <b>Longitude</b> settings in 
+		decimal degrees. If you don't know these settings they can be obtained 
+		from
+		<a class="external text" title="http://www.qrz.com" rel="nofollow" href="http://www.qrz.com">
+		QRZ.com</a> using your call sign and then looking under <b>Detailed Info</b>. 
+		</li>
+		<li>Enter your <b>Grid</b> (optional). </li>
+	</ul>
+	<h3><span class="mw-headline">Rotor Setup</span></h3>
+	<p>If you plan to control a rotor from <b>DDUtil</b> this setup is 
+	mandatory. </p>
+	<p><b>Model</b> </p>
+	<ul>
+		<li>Select the rotor model you are using. </li>
+	</ul>
+	<p><b>Speed</b> </p>
+	<ul>
+		<li>Select a speed setting if your rotor (Orion, Yaesu) is one of the 
+		models that require a speed be set. </li>
+	</ul>
+	<p><b>Serial Port</b> </p>
+	<ul>
+		<li>Select the hardware serial port your rotor control box is connected 
+		to. </li>
+	</ul>
+	<p><b>Com Data</b> </p>
+	<ul>
+		<li>From the drop down list select the proper communication setting to 
+		match your rotor control box. </li>
+	</ul>
+	<p><b>Enable</b></p>
+	<ul>
+		<li>Select the <b>Enable</b> button to make the rotor function available</li>
+	</ul>
+</blockquote>
+<h2><u><font color="#800080"><a name="Scenario"></a>Usage</font></u></h2>
+<p>Using the <b>DDUtil</b> is straight forward and shouldn't require more than a 
+minimal amount of familiarization for the user to be comfortable with it's use. 
+</p>
+<p>All control settings on the <b>DDUtil</b> forms are stored and remembered 
+from session to session.</p>
+<ul>
+	<li><b>Hardware Setup</b><p>The following information is required to connect 
+	<b>DDUtil </b>&nbsp;to your 
+	device.<ul>
+		<li>What kind of device do you want to control (amplifier, antenna 
+		switch, etc.).</li>
+		<li>Is the device RS-232 or BCD driven.</li>
+		<li>If RS-232 driven, set the device receiving the data to a Kenwood or 
+		Yaesu model and speed to match 9600 8-N-1.</li>
+		<li>If BCD driven, you must:<ul>
+			<li>Know the BCD scheme (what codes do what) See the manufactures 
+			user manual for this.</li>
+			<li>Build a cable configured to fit your hardware setup (DB25M to 
+			your device input port). See the cable
+		<a href="Cables.pdf">drawing</a> for example 
+			information.</li>
+		</ul></li>
+	</ul></li>
+</ul>
+<ul>
+	<li><b>Program Operation</b> - The following operations assume the proper 
+	setups have been performed on the Ports and Device tabs.<ul>
+		<li><b>DDUtil</b> as stand-alone.<ul>
+			<li>Start <b>PowerSDR</b>, start <b>DDUtil</b>.</li>
+			<li>If all is setup correctly you should see the frequency and VFO A in the header bar as [7,033.83] (VFO A/B). If instead you see 
+			[not connected] there is a problem and some back tracking is in 
+			order. The most common problem will be wrong port setup for <b>PowerSDR</b> (CAT) port or the CAT Polling Interval is way off, try 1000 
+			for this setting.</li>
+		</ul></li>
+		<li><b>DDUtil</b> used with a radio control/logging program.<ul>
+			<li>Start <b>PowerSDR</b>, start <b>DDUtil</b> and you should now 
+			see connect data in the title bar that looks something like 
+			[7,033.83] (VFO A). </li>
+			<li>Start your radio control/logging program. If everything is 
+			working right you should see something like [RC] [7,033.83] (VFO 
+			A) in the title bar of <b>DDUtil</b> and your radio 
+			control/logging program should show it has control of <b>PowerSDR</b>. 
+			</li>
+			<li><u><b>Note:</b></u> The <b>[RC]</b> stands for Radio Control program is in use. If 
+			the [RC] is not in the title bar the program is in <b>Stand-Alone</b> 
+			mode.</li>
+		</ul></li>
+		<li>Tool Tips (description of control function) are available for all controls by 
+		hovering the mouse over the control momentarily.</li>
+		<li>Once setup, <b>DDUtil</b> can either 
+		be minimized or reduced to a minimal size for normal operation. Shrinking is 
+		accomplished by <b>right</b> clicking anywhere on the form (except the 
+		title bar)&nbsp; where a 
+		<a href="ShrinkMenu.JPG">menu</a> will appear 
+		giving the options of <b>Shrink </b>&amp; <b>Restore</b>. Additionally 
+		the borders of the form may be resized as desired.</li>
+	</ul></li>
+</ul>
+<p>&nbsp;&nbsp;&nbsp; For a more in-depth discussion on setting up <b>DDUtil</b> 
+see the <a href="http://k5fr.com/ddutilwiki/index.php?title=How_To">How-To</a> 
+section of the web site wiki. &nbsp;&nbsp;&nbsp;
+	</p>
+<p>&nbsp;</p>
+<ul>
+	<li><u><font color="#FF0000"><b>Important Notices Please Read</b></font></u><ul>
+		<li>When connecting to a amplifier remember that Flex radios
+		<font color="#FF0000"><u><b>DO NOT</b></u></font> have any
+		<font color="#FF0000"><b>ALC</b></font> control circuitry, 
+		<font color="#800000"><b><i>yet!</i></b></font> It is up 
+		to the operator to make sure the drive power level is adjusted properly 
+		in <b>PowerSDR</b> or the amp may be over driven which could result in 
+		distortion and/or the amp being damaged.</li>
+		<li>Parallel ports can come up in any configuration when the pc is 
+		booted up. My pc defaults to 4 (00000100) which equates to 30 meters 
+		when it boots up. You could quite easily have your BCD device set to the 
+		wrong band if caution is not exercised. It is a good policy to <b>not</b> turn on your BCD device until after
+		<b>DDUtil</b> is up and running as the program will configure the port 
+		based on what <b>transmit</b> frequency it receives from <b>PowerSDR</b>.</li>
+		<li>In it's current state <b>PowerSDR</b> has a timer that will not allow 
+		devices to connect to the CAT port if <b>PowerSDR</b> has been running for 
+		10 
+		minutes or more without a CAT connection. So if it fails to connect 
+		(displays [not connected] in the title bar) close <b>PowerSDR</b> and restart it. 
+		This will reset the CAT timer and <b>DDUtil</b> should now connect.</li>
+	</ul></li>
+	<li><b><a name="Other"></a>Other Topics</b><ul>
+		<li><b>BCD Data File Format</b><ul>
+			<li>The BCD data file has a specific format that must be adhered to. The 
+		frequency must be in multiples of 100 kHz (7000, 7100, 7200) due to the 
+		way the BCD look up algorithm is constructed. The data itself can be any 
+		decimal number from 0 - 255. An example setting 14,100 would be freq = 
+		14100, data= 5 which equates to binary 00000101. </li>
+		</ul></li>
+		<li><b>BCD Data Port</b><ul>
+			<li>Most BCD driven devices I have been associated with only use 3-5 
+			control lines. My Quadra uses four (4). It is entirely conceivable 
+			that two (2) BCD devices could be run off of one (1) port. Hook 
+			device 1 to port pins 2-5 and device 2 to pins 6-9. Set up the data 
+			file for say 20 meters using (14100, 85) instead of (14100, 5) and it 
+			will produce 01010101 instead of 00000101 at the parallel port which 
+			is a binary 5 for each device.</li>
+		</ul></li>
+		<li><b>Inter-Connecting Cables</b><ul>
+			<li>Serial (RS-232) cables can be either purchased or fabricated by the 
+		user as dictated by the device to be controlled.</li>
+			<li>Parallel port cables will have to be fabricated by the user for the 
+		particular hardware setup. I have prepared a sample cable
+			<a href="Cables.pdf">drawing</a> as part of this package to 
+		serve as a guide.</li>
+			<li>If you would like to see how this concept works without setting up a 
+		binary device you can build a small
+		<a href="LEDs.pdf">LED</a> array that can connect to your parallel port 
+		and show the binary code being sent.</li>
+		You can watch the LEDs 
+		change as the frequency changes.
+		</ul></li>
+		<li><a name="ports"></a><b>Port Locator</b><p>If you don't know what ports 
+		are installed on your pc the following procedure will tell you.<ul>
+			<li>From the Start button select Control Panel</li>
+			<li>Select System</li>
+			<li>Select Hardware</li>
+			<li>Select Device Manager</li>
+			<li>Expand the Ports entry</li>
+			<li>If you are using a non-standard parallel port (non-motherboard port), this 
+			<a href="PortAddr.htm">link</a> will help 
+		you get the port address you will need.</li>
+		</ul>
+		<p>All your hardware  ports will be listed 
+		there.<p><img border="0" src="PortsFind.JPG"></li>
+	</ul></li>
+</ul>
+<h2><u><font color="#800080"><a name="How"></a>How it works</font></font></u></h2>
+<p><u><b>General</b></u></p>
+<p>This software extends the users ability to control ancillary 
+frequency sensitive devices such as:</p>
+<ul>
+	<li>Linear Power amplifiers with automatic band switching capabilities.</li>
+	<li>Antenna switches using RS-232 or BCD input.</li>
+	<li>SteppIR antenna controllers.</li>
+	<li>Antenna tuners with automatic band switching capabilities.</li>
+</ul>
+<p><u><b>Philosophy / Design Criteria</b></u></p>
+<ul>
+	<li>Provide a stand alone software program that will deliver <u><b>transmit</b></u> 
+	frequency data, from <b>PowerSDR</b>, in the form of RS-232 serial data and/or BCD 
+	parallel data to passive listener devices. <b>DDUtil</b> does not receive or 
+	acknowledge any communication from the down stream devices it services. It 
+	is a one way communication only. Hence, they are referred to as <i>Passive 
+	Listeners</i>.</li>
+	<li>It was also desired to use <b>DDUtil</b> with other radio 
+	control programs simultaneously. Since most users run a logging program or 
+	other radio control program, this was considered to be a very high priority.</li>
+	<li>Use all current technologies, if appropriate, in the software design. 
+	These include XML files, XPATH, Regular Expressions and Threading, to list a 
+	few. Development was accomplished in the Microsoft Visual Studio 2005 Integrated Development Environment 
+	(IDE).</li>
+</ul>
+<p><u><b>Program Flow</b></u></p>
+<p>Upon program opening the following events occur:</p>
+<ul>
+	<li>Setup variables</li>
+	<li>Restore saved values to form controls</li>
+	<li>Initialize system polling timers for serial ports</li>
+	<li>Open selected serial ports</li>
+	<li>Show main form</li>
+</ul>
+<p>The program is driven by events from either the serial ports receiving data 
+or the polling timers counting down and firing. The following descriptions 
+describe these events.</p>
+<ul>
+	<li><b>Radio Port Data Received</b>
+	<ul>
+		<li>This indicates CAT data has arrived from <b>PowerSDR</b></li>
+		<li>Decode <b>PowerSDR</b> data to see if it is frequency data</li>
+		<li>If yes, send formatted frequency data to the selected passive 
+		listener serial port and call BCD decoding routine to process and output 
+		the BCD data on the selected parallel port</li>
+		<li>If logger is active (log flag = true) send radio data to logger port</li>
+		<li>Reset flags and return</li>
+	</ul></li>
+	<li><b>Logger Port Data Received</b>
+	<ul>
+		<li>This indicates CAT data has arrived from the logger/radio control 
+		program</li>
+		<li>Forward the command on to <b>PowerSDR</b> CAT port</li>
+		<li>Disable the <b>PowerSDR</b> polling timer, which stops<b> DDUtil </b>querying the 
+		radio for frequency data as this is now done by the logger program</li>
+		<li>Set Log flag to true</li>
+	</ul></li>
+	<li><b>Logger Port Polling Timer Elapsed</b>
+	<p>This indicates that logger port polling interval has expired which also 
+	means that <b>NO</b> CAT data has arrived from the logger/radio control 
+	program for 10 seconds</p>
+	<ul>
+		<li>Set radio poll timer to enabled</li>
+		<li>Set the log flag to false</li>
+		<li>Reset the logger polling timer (10 seconds)</li>
+	</ul></li>
+	<li><b>Radio Port Polling Timer Elapsed</b>
+	<p>This indicates the CAT port polling interval has expired which also means 
+	the logger is not active</p>
+	<ul>
+		<li>Send CAT commands to <b>PowerSDR</b> for the VFO status and frequency</li>
+		<li>Check <b>PowerSDR</b> CAT port buffer for messages</li>
+		<li>Decode the buffer message data to see if it is frequency data</li>
+		<li>If yes, send formatted frequency data to the selected passive 
+		listener serial port and call BCD decoding routine to process and output 
+		the BCD data on the selected parallel port</li>
+	</ul></li>
+</ul>
+<h2><u><font color="#800080"><a name="Legal"></a>Legal</font></u></h2>
+<font SIZE="2">
+<p>Copyright (C) 2007 Steve Nance (K5FR)</p>
+<p>This program is free software; you can redistribute it and/or modify it under 
+the terms of the GNU General Public License as published by the Free Software 
+Foundation; either version 2 of the License, or (at your option) any later 
+version. </p>
+<p>This program is distributed in the hope that it will be useful,&nbsp; but 
+WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or 
+FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more 
+details.</p></font><font SIZE="2" COLOR="#008000"></font><font SIZE="2">
+<p>You should have received a copy of the GNU General Public License along with 
+this program; If not, see <a href="http://www.gnu.org/licenses/">http://www.gnu.org/licenses/</a></p>
+</font><font SIZE="2" COLOR="#008000"></font><font SIZE="2">
+<p>You may contact the author via email at: steve@K5FR.com</p></font>
+	
+	</body>
+</html>
