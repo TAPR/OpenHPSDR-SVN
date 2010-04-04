@@ -14973,7 +14973,7 @@ namespace DataDecoder
             this.lblAnt.BackColor = System.Drawing.SystemColors.ControlLight;
             this.lblAnt.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblAnt.ForeColor = System.Drawing.Color.Red;
-            this.lblAnt.Location = new System.Drawing.Point(268, 3);
+            this.lblAnt.Location = new System.Drawing.Point(269, 3);
             this.lblAnt.Name = "lblAnt";
             this.lblAnt.Size = new System.Drawing.Size(141, 18);
             this.lblAnt.TabIndex = 73;
@@ -15028,7 +15028,7 @@ namespace DataDecoder
             this.txtAlcInd.BackColor = System.Drawing.SystemColors.Control;
             this.txtAlcInd.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtAlcInd.Font = new System.Drawing.Font("Microsoft Sans Serif", 4.25F);
-            this.txtAlcInd.Location = new System.Drawing.Point(413, 5);
+            this.txtAlcInd.Location = new System.Drawing.Point(415, 5);
             this.txtAlcInd.Name = "txtAlcInd";
             this.txtAlcInd.Size = new System.Drawing.Size(14, 14);
             this.txtAlcInd.TabIndex = 80;
@@ -15056,7 +15056,7 @@ namespace DataDecoder
             this.lblHighSWR.BackColor = System.Drawing.SystemColors.ControlLight;
             this.lblHighSWR.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblHighSWR.ForeColor = System.Drawing.Color.Red;
-            this.lblHighSWR.Location = new System.Drawing.Point(186, 3);
+            this.lblHighSWR.Location = new System.Drawing.Point(188, 3);
             this.lblHighSWR.Name = "lblHighSWR";
             this.lblHighSWR.Size = new System.Drawing.Size(86, 18);
             this.lblHighSWR.TabIndex = 84;

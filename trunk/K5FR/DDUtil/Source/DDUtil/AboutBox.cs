@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+//using System.Data;
+using System.Data.OleDb;
 using System.Drawing;
 using System.Windows.Forms;
 using System.Reflection;
@@ -13,15 +15,26 @@ namespace DataDecoder
         {
             InitializeComponent();
 
-            //  Initialize the AboutBox to display the product information from the assembly information.
-            //  Change assembly information settings for your application through either:
-            //  - Project->Properties->Application->Assembly Information
-            //  - AssemblyInfo.cs
+            string dbVer = "";
+            string SQL = "Select Value From Settings";
+            OleDbConnection conn = new OleDbConnection(
+                "provider = microsoft.jet.oledb.4.0;data source = DDUtil.mdb;");
+            OleDbCommand thisCommand = new OleDbCommand(SQL, conn);
+            conn.Open();
+            OleDbDataReader thisReader = thisCommand.ExecuteReader();
+            int i = 1;
+            while (thisReader.Read() && i > 0)
+            {
+                dbVer = thisReader.GetValue(0).ToString();
+                i = 0;
+            }
+            conn.Close();
             this.Text = String.Format("About {0}", AssemblyTitle);
-            this.labelProductName.Text = AssemblyProduct;
-            this.labelVersion.Text = "Version: " + Setup.ver;
-            this.labelCopyright.Text = AssemblyCopyright;
-            this.lblDescr.Text = AssemblyDescription;
+            this.lblProductName.Text = AssemblyProduct;
+            this.lblVersion.Text = "Version: " + Setup.ver;
+            this.lblCopyright.Text = AssemblyCopyright;
+            this.lblDescription.Text = "Description: " + AssemblyDescription;
+            this.lblDatabase.Text = "DX Database: " + dbVer;
         }
 
         #region Assembly Attribute Accessors
@@ -110,11 +123,6 @@ namespace DataDecoder
             }
         }
         #endregion
-
-        private void okButton_Click(object sender, EventArgs e)
-        {
-            this.Hide();
-        }
 
     }
 }
