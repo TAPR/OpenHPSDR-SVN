@@ -28,72 +28,60 @@ namespace DataDecoder
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AboutBox));
-            this.lblDescr = new System.Windows.Forms.Label();
-            this.labelCopyright = new System.Windows.Forms.Label();
-            this.labelVersion = new System.Windows.Forms.Label();
-            this.labelProductName = new System.Windows.Forms.Label();
+            this.lblCopyright = new System.Windows.Forms.Label();
+            this.lblVersion = new System.Windows.Forms.Label();
+            this.lblProductName = new System.Windows.Forms.Label();
             this.logoPictureBox = new System.Windows.Forms.PictureBox();
             this.tableLayoutPanel = new System.Windows.Forms.TableLayoutPanel();
+            this.lblDatabase = new System.Windows.Forms.Label();
+            this.lblDescription = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.logoPictureBox)).BeginInit();
             this.tableLayoutPanel.SuspendLayout();
             this.SuspendLayout();
             // 
-            // lblDescr
+            // lblCopyright
             // 
-            this.lblDescr.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.lblDescr.Location = new System.Drawing.Point(152, 96);
-            this.lblDescr.Margin = new System.Windows.Forms.Padding(6, 0, 3, 0);
-            this.lblDescr.MaximumSize = new System.Drawing.Size(0, 17);
-            this.lblDescr.Name = "lblDescr";
-            this.lblDescr.Size = new System.Drawing.Size(210, 17);
-            this.lblDescr.TabIndex = 22;
-            this.lblDescr.Text = "Description";
-            this.lblDescr.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.lblCopyright.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblCopyright.Location = new System.Drawing.Point(152, 64);
+            this.lblCopyright.Margin = new System.Windows.Forms.Padding(6, 0, 3, 0);
+            this.lblCopyright.MaximumSize = new System.Drawing.Size(0, 17);
+            this.lblCopyright.Name = "lblCopyright";
+            this.lblCopyright.Size = new System.Drawing.Size(210, 17);
+            this.lblCopyright.TabIndex = 21;
+            this.lblCopyright.Text = "Copyright";
+            this.lblCopyright.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // labelCopyright
+            // lblVersion
             // 
-            this.labelCopyright.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.labelCopyright.Location = new System.Drawing.Point(152, 64);
-            this.labelCopyright.Margin = new System.Windows.Forms.Padding(6, 0, 3, 0);
-            this.labelCopyright.MaximumSize = new System.Drawing.Size(0, 17);
-            this.labelCopyright.Name = "labelCopyright";
-            this.labelCopyright.Size = new System.Drawing.Size(210, 17);
-            this.labelCopyright.TabIndex = 21;
-            this.labelCopyright.Text = "Copyright";
-            this.labelCopyright.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.lblVersion.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblVersion.Location = new System.Drawing.Point(152, 32);
+            this.lblVersion.Margin = new System.Windows.Forms.Padding(6, 0, 3, 0);
+            this.lblVersion.MaximumSize = new System.Drawing.Size(0, 17);
+            this.lblVersion.Name = "lblVersion";
+            this.lblVersion.Size = new System.Drawing.Size(210, 17);
+            this.lblVersion.TabIndex = 0;
+            this.lblVersion.Text = "Version";
+            this.lblVersion.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
-            // labelVersion
+            // lblProductName
             // 
-            this.labelVersion.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.labelVersion.Location = new System.Drawing.Point(152, 32);
-            this.labelVersion.Margin = new System.Windows.Forms.Padding(6, 0, 3, 0);
-            this.labelVersion.MaximumSize = new System.Drawing.Size(0, 17);
-            this.labelVersion.Name = "labelVersion";
-            this.labelVersion.Size = new System.Drawing.Size(210, 17);
-            this.labelVersion.TabIndex = 0;
-            this.labelVersion.Text = "Version";
-            this.labelVersion.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // labelProductName
-            // 
-            this.labelProductName.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.labelProductName.Location = new System.Drawing.Point(152, 0);
-            this.labelProductName.Margin = new System.Windows.Forms.Padding(6, 0, 3, 0);
-            this.labelProductName.MaximumSize = new System.Drawing.Size(0, 17);
-            this.labelProductName.Name = "labelProductName";
-            this.labelProductName.Size = new System.Drawing.Size(210, 17);
-            this.labelProductName.TabIndex = 19;
-            this.labelProductName.Text = "Product Name";
-            this.labelProductName.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.lblProductName.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblProductName.Location = new System.Drawing.Point(152, 0);
+            this.lblProductName.Margin = new System.Windows.Forms.Padding(6, 0, 3, 0);
+            this.lblProductName.MaximumSize = new System.Drawing.Size(0, 17);
+            this.lblProductName.Name = "lblProductName";
+            this.lblProductName.Size = new System.Drawing.Size(210, 17);
+            this.lblProductName.TabIndex = 19;
+            this.lblProductName.Text = "Product Name";
+            this.lblProductName.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // logoPictureBox
             // 
-            this.logoPictureBox.Dock = System.Windows.Forms.DockStyle.Fill;
             this.logoPictureBox.Image = ((System.Drawing.Image)(resources.GetObject("logoPictureBox.Image")));
             this.logoPictureBox.Location = new System.Drawing.Point(3, 3);
             this.logoPictureBox.Name = "logoPictureBox";
-            this.tableLayoutPanel.SetRowSpan(this.logoPictureBox, 4);
-            this.logoPictureBox.Size = new System.Drawing.Size(140, 147);
+            this.tableLayoutPanel.SetRowSpan(this.logoPictureBox, 5);
+            this.logoPictureBox.Size = new System.Drawing.Size(140, 151);
             this.logoPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
             this.logoPictureBox.TabIndex = 12;
             this.logoPictureBox.TabStop = false;
@@ -103,27 +91,54 @@ namespace DataDecoder
             this.tableLayoutPanel.ColumnCount = 2;
             this.tableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 40F));
             this.tableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 60F));
+            this.tableLayoutPanel.Controls.Add(this.lblDatabase, 0, 4);
+            this.tableLayoutPanel.Controls.Add(this.lblDescription, 0, 3);
+            this.tableLayoutPanel.Controls.Add(this.lblProductName, 1, 0);
+            this.tableLayoutPanel.Controls.Add(this.lblVersion, 1, 1);
+            this.tableLayoutPanel.Controls.Add(this.lblCopyright, 1, 2);
             this.tableLayoutPanel.Controls.Add(this.logoPictureBox, 0, 0);
-            this.tableLayoutPanel.Controls.Add(this.labelProductName, 1, 0);
-            this.tableLayoutPanel.Controls.Add(this.labelVersion, 1, 1);
-            this.tableLayoutPanel.Controls.Add(this.labelCopyright, 1, 2);
-            this.tableLayoutPanel.Controls.Add(this.lblDescr, 1, 3);
             this.tableLayoutPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel.Location = new System.Drawing.Point(9, 9);
             this.tableLayoutPanel.Name = "tableLayoutPanel";
-            this.tableLayoutPanel.RowCount = 4;
-            this.tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20.94862F));
-            this.tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20.94862F));
-            this.tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20.94862F));
-            this.tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 37.15415F));
-            this.tableLayoutPanel.Size = new System.Drawing.Size(365, 153);
+            this.tableLayoutPanel.RowCount = 5;
+            this.tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel.Size = new System.Drawing.Size(365, 161);
             this.tableLayoutPanel.TabIndex = 0;
+            // 
+            // lblDatabase
+            // 
+            this.lblDatabase.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblDatabase.Location = new System.Drawing.Point(152, 128);
+            this.lblDatabase.Margin = new System.Windows.Forms.Padding(6, 0, 3, 0);
+            this.lblDatabase.MaximumSize = new System.Drawing.Size(0, 17);
+            this.lblDatabase.Name = "lblDatabase";
+            this.lblDatabase.Size = new System.Drawing.Size(210, 17);
+            this.lblDatabase.TabIndex = 23;
+            this.lblDatabase.Text = "DX Database  ";
+            this.lblDatabase.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // lblDescription
+            // 
+            this.lblDescription.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblDescription.Location = new System.Drawing.Point(152, 96);
+            this.lblDescription.Margin = new System.Windows.Forms.Padding(6, 0, 3, 0);
+            this.lblDescription.MaximumSize = new System.Drawing.Size(0, 17);
+            this.lblDescription.Name = "lblDescription";
+            this.lblDescription.Size = new System.Drawing.Size(210, 17);
+            this.lblDescription.TabIndex = 22;
+            this.lblDescription.Text = "Description";
+            this.lblDescription.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // AboutBox
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(383, 171);
+            this.ClientSize = new System.Drawing.Size(383, 179);
             this.Controls.Add(this.tableLayoutPanel);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.MaximizeBox = false;
@@ -142,12 +157,13 @@ namespace DataDecoder
 
         #endregion
 
-        private System.Windows.Forms.Label lblDescr;
-        private System.Windows.Forms.Label labelCopyright;
-        private System.Windows.Forms.Label labelVersion;
-        private System.Windows.Forms.Label labelProductName;
+        private System.Windows.Forms.Label lblCopyright;
+        private System.Windows.Forms.Label lblVersion;
+        private System.Windows.Forms.Label lblProductName;
         private System.Windows.Forms.PictureBox logoPictureBox;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel;
+        private System.Windows.Forms.Label lblDatabase;
+        private System.Windows.Forms.Label lblDescription;
 
     }
 }

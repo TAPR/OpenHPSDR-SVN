@@ -117,6 +117,7 @@ namespace DataDecoder
         System.Timers.Timer AlphaTimer;
         System.Timers.Timer AtTimer;
         System.Timers.Timer blinkTimer;
+        System.Timers.Timer comTimer;
         System.Timers.Timer logTimer;
         System.Timers.Timer lpTimer;
         System.Timers.Timer pollTimer;
@@ -440,6 +441,12 @@ namespace DataDecoder
             propTimer.Elapsed += new System.Timers.ElapsedEventHandler(propTimer_Elapsed);
             propTimer.Interval = 600000;
             propTimer.Enabled = true;
+
+            // setup CatCom Timer
+            comTimer = new System.Timers.Timer();
+            comTimer.Elapsed += new System.Timers.ElapsedEventHandler(comTimer_Elapsed);
+            comTimer.Interval = 15000;
+            comTimer.Enabled = false;
 
             mSplashScreen.SetProgress("Initializing Ports", 0.6);
             CreateSerialPort();
@@ -7940,6 +7947,8 @@ namespace DataDecoder
         string pwrVolts = "";
         void sp_CATRxEvent(object source, CATSerialPorts.SerialRXEvent e)
         {
+            comTimer.Stop();
+            comTimer.Start();
             try
             {   // put the port data in the comm buffer
                 CommBuffer += AE.GetString(e.buffer, 0, e.buffer.Length);
@@ -12008,7 +12017,7 @@ namespace DataDecoder
                 catch { }
             }
         }
-
+        // PA Temperature 
         void tempTimer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
         {
             try
@@ -12027,7 +12036,13 @@ namespace DataDecoder
             else txtMsg.BackColor = Color.LightYellow;
             bBlink = !bBlink;
         }
-
+        // Lost CAT activity
+        void comTimer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
+        {
+            comTimer.Stop();
+            SetTitle("DDUtil " + ver + " - CAT Connection Lost ");
+        }
+        
         #endregion Timer Events
 
         #region Test Routines
