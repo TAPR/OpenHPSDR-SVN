@@ -69,7 +69,7 @@
       <Value Profile="(Default)">False</Value>
     </Setting>
     <Setting Name="Sleep" Type="System.String" Scope="User">
-      <Value Profile="(Default)">25</Value>
+      <Value Profile="(Default)">0</Value>
     </Setting>
     <Setting Name="SleepVis" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
@@ -838,6 +838,9 @@ RCP4 - WriteLog</Value>
     </Setting>
     <Setting Name="chkCwTx" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="cboTstep" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">0</Value>
     </Setting>
   </Settings>
 </SettingsFile>

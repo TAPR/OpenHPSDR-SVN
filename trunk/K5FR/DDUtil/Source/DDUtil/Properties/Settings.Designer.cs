@@ -289,7 +289,7 @@ namespace DataDecoder.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("25")]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
         public string Sleep {
             get {
                 return ((string)(this["Sleep"]));
@@ -3356,6 +3356,18 @@ namespace DataDecoder.Properties {
             }
             set {
                 this["chkCwTx"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int cboTstep {
+            get {
+                return ((int)(this["cboTstep"]));
+            }
+            set {
+                this["cboTstep"] = value;
             }
         }
     }
