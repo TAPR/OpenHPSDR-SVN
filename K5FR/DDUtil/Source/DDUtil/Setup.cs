@@ -7980,56 +7980,53 @@ namespace DataDecoder
                             }
                         }
                     }
+                    /*** Get Tune Step ***/
+                    if (rawFreq.Length > 4 && rawFreq.Substring(0, 4) == "ZZAC")
+                    {
+                        stepSize = Convert.ToInt32(rawFreq.Substring(4, 2));
+                    }
                     /*** Get pwr supply volts ***/
                     if (rawFreq.Length > 4 && rawFreq.Substring(0, 4) == "ZZRV")
                     {
                         pwrVolts = rawFreq.Substring(4, 4);
                         SetVolts(pwrVolts);
-//                        return;
                     }
                     /*** Write PA Temperature to window ***/
                     if (rawFreq.Length > 4 && rawFreq.Substring(0, 4) == "ZZTS")
                     {
                         temp = Convert.ToDouble(rawFreq.Substring(4, 5));
                         WriteTemp();
-//                        return;
                     }
                     /*** Get RX1 ant status ***/
                     if (rawFreq.Length > 4 && rawFreq.Substring(0, 4) == "ZZOA")
                     {
                         Rx1 = rawFreq.Substring(4, 1);
-//                        return;
                     }
                     /*** Get RX2 ant status ***/
                     if (rawFreq.Length > 4 && rawFreq.Substring(0, 4) == "ZZOB")
                     {
                         Rx2 = rawFreq.Substring(4, 1);
-//                        return;
                     }
                     /*** Get TX ant status ***/
                     if (rawFreq.Length > 4 && rawFreq.Substring(0, 4) == "ZZOC")
                     {
                         TxA = rawFreq.Substring(4, 1);
-//                        return;
                     }
                     /*** Get TX1-3 status ***/
                     if (rawFreq.Length > 4 && rawFreq.Substring(0, 4) == "ZZOF")
                     {
                         stsTX = rawFreq.Substring(4, 3);
                         set.stsTX = stsTX; set.Save();
-//                        return;
                     }
                     /*** Get RX filter status ***/
                     if (rawFreq.Length > 4 && rawFreq.Substring(0, 4) == "ZZFI")
                     {
                         RxFlt = rawFreq.Substring(4, 2);
-//                        return;
                     }
                     /*** Get PSDR Mode  ***/
                     if (rawFreq.Length > 4 && rawFreq.Substring(0, 4) == "ZZMD")
                     {
                         ZZMD = rawFreq.Substring(4, 2);
-//                        return;
                     }
                     /*** Quick Memory, get the TX Profile & load  ***/
                     if (rawFreq.Length > 4 && rawFreq.Substring(0, 4) == "ZZTP")
@@ -8055,8 +8052,8 @@ namespace DataDecoder
                         mem[idxMem, 2] = ZZSW.ToString(); mem[idxMem, 3] = ZZMD; 
                         mem[idxMem, 4] = Rx1; mem[idxMem, 5] = Rx2;
                         mem[idxMem, 6] = TxA; mem[idxMem, 7] = stsTX; 
-                        mem[idxMem, 8] = RxFlt; mem[idxMem, 9] = TxPro; 
-                        mem[idxMem, 10] = memMode;
+                        mem[idxMem, 8] = RxFlt; mem[idxMem, 9] = TxPro;
+                        mem[idxMem, 10] = memMode; mem[idxMem, 11] = "";
                         // display the stored mem number, freq and mode
                         int xfrq = Convert.ToInt32(vfoA.Substring(0, vfoA.Length - 3).TrimStart('0'));
                         SetMemFreq(xfrq.ToString("N0")); 
@@ -8068,7 +8065,6 @@ namespace DataDecoder
                         SetMemSave("Yellow");
                         Thread.Sleep(500);
                         SetMemSave("");
-//                        return;
                     }
                     /*** Save current Drive setting by band ***/
                     if (rawFreq.Length > 4 && rawFreq.Substring(0, 4) == "ZZPC")
@@ -8087,7 +8083,6 @@ namespace DataDecoder
                             case "006": set.pwr10 = rawFreq.Substring(4, 3); break;
                         }//switch
                         set.Save();
-//                        return;
                     }
                     /*** SO2R active vfo status ***/
                     if (rawFreq.Length > 4 && rawFreq.Substring(0, 4) == "ZZSW")
@@ -8553,7 +8548,6 @@ namespace DataDecoder
                             #endregion ACOM Antenna Switch
 
                         }// if band changed
-//                        return;
                     }// if ZZBS
 
                     /*** send radio's CAT reply back to RCP1 ***/
@@ -8628,7 +8622,6 @@ namespace DataDecoder
                     else if (rawFreq.Length == 3 && rawFreq.Substring(0, 2) == "MD")
                     {   // this is a mode cmd, save it
                         sdrMode = rawFreq.Substring(2, 1);
-//                        return;
                     }
                     else return;
                 SendData:
@@ -12109,7 +12102,7 @@ namespace DataDecoder
         string kCATup = "";     // current CAT Up command 
         string kCATdn = "";     // current CAT Dn command 
         string kCATdcOn = "";   // current DC CAT Up command 
-        string kCATdcOff = "";   // current DC CAT Dn command 
+        string kCATdcOff = "";  // current DC CAT Dn command 
         int kFlags = 0x51;      // knob flag register
         int ActCon = 0;         // Active Control index (1-4)
         int ActConDC = 0;       // Active Control DC index (1-2)
@@ -12117,6 +12110,8 @@ namespace DataDecoder
         int ActIdxDC = 0;       // Active control index for dbl-clk control 
         int RITfrq = 0;         // current RIT offset
         int XITfrq = 0;         // current XIT offset
+        int stepSize = 0;       // PSDR tune step size (default = 10 hz)
+
         // kFlags descr.
         // LSB  0   Mode A = Off, B = On
         //      1   Single Click 
@@ -12354,32 +12349,44 @@ namespace DataDecoder
                                     { ZZSW = 0; SetVfoA(); }
                                 }
                                 break;
-                            case "D": //tune down
-                                if (kCATdn == "ZZSA;" && sCmd.Length > 3)
+                            case "D": //tune something down
+                                if (ActIdx == 0 || ActIdx == 1)// tune vfo a/b
                                 {
-                                    WriteToPort("ZZSU;", iSleep); WriteToPort("ZZSA;", iSleep);
-                                    WriteToPort("ZZSD;", iSleep);
+                                    //Console.WriteLine(sCmd);
+                                    string newSize = "1";
+                                    int tkSize = 0;
+                                    if (sCmd.Length > 3)
+                                    { tkSize = Convert.ToInt32(sCmd.Substring(1, 2)); }
+                                    if (tkSize > stepSize)
+                                    { newSize = (stepSize + (tkSize - 1)).ToString(); }
+                                    else 
+                                    { newSize = stepSize.ToString(); }
+//                                    { newSize = (stepSize - tkSize).ToString(); }
+                                    WriteToPort(kCATdn + newSize.PadLeft(2, '0') + ";", iSleep);
                                 }
-                                if (kCATdn.Substring(0, 4) == "ZZRF")
-                                {
+                                else if (ActIdx == 2)    // tune RIT
+                                {   
                                    int RIT = 0;
                                    RITfrq -= 2;
                                    if (RITfrq < 0) {RIT = (int)Math.Abs(RITfrq);
                                        kCATdn = "ZZRF-" + RIT.ToString().PadLeft(4, '0') + ";";}
                                    else
                                    { kCATdn = "ZZRF+" + RITfrq.ToString().PadLeft(4, '0') + ";"; }
-                                   
+                                    WriteToPort(kCATdn, iSleep);                                  
                                 }
-                                if (kCATdn.Substring(0, 4) == "ZZXF")
+                                else if (ActIdx == 3)   // tune XIT
                                 {
                                     int XIT = 0;
                                     XITfrq -= 2;
-                                    if (XITfrq < 0) { XIT = (int)Math.Abs(XITfrq);
-                                        kCATdn = "ZZXF-" + XIT.ToString().PadLeft(4, '0') + ";";}
+                                    if (XITfrq < 0)
+                                    {
+                                        XIT = (int)Math.Abs(XITfrq);
+                                        kCATdn = "ZZXF-" + XIT.ToString().PadLeft(4, '0') + ";";
+                                    }
                                     else
                                     { kCATdn = "ZZXF+" + XITfrq.ToString().PadLeft(4, '0') + ";"; }
+                                    WriteToPort(kCATdn, iSleep);
                                 }
-                                WriteToPort(kCATdn, iSleep);
                                 break;
                             case "F":   //firm ware revision
                                 grpTKnob.Text = "Tuning Knob Rev. " +
@@ -12395,12 +12402,20 @@ namespace DataDecoder
                                 WriteFlags(); WriteLED();
                                 break;
                             case "U": //tune up
-                                if (kCATup == "ZZSB;" && sCmd.Length > 3)
+                                if (ActIdx == 0 || ActIdx == 1)// tune vfo a/b
                                 {
-                                    WriteToPort("ZZSU;", iSleep); WriteToPort("ZZSB;", iSleep);
-                                    WriteToPort("ZZSD;", iSleep);
+                                    //Console.WriteLine(sCmd);
+                                    string newSize = "1";
+                                    int tkSize = 0;
+                                    if (sCmd.Length > 3)
+                                    { tkSize = Convert.ToInt32(sCmd.Substring(1, 2)); }
+                                    if (tkSize > stepSize)
+                                    { newSize = (stepSize + (tkSize - 1)).ToString(); }
+                                    else
+                                    { newSize = stepSize.ToString(); }
+                                    WriteToPort(kCATup + newSize.PadLeft(2, '0') + ";", iSleep);
                                 }
-                                if (kCATup.Substring(0, 4) == "ZZRF")
+                                else if (ActIdx == 2)    // tune RIT
                                 {
                                     int RIT = 0;
                                     RITfrq += 2;
@@ -12408,8 +12423,9 @@ namespace DataDecoder
                                         kCATup = "ZZRF-" + RIT.ToString().PadLeft(4, '0') + ";"; }
                                     else
                                     { kCATup = "ZZRF+" + RITfrq.ToString().PadLeft(4, '0') + ";"; }
+                                    WriteToPort(kCATup, iSleep);
                                 }
-                                if (kCATup.Substring(0, 4) == "ZZXF")
+                                else if (ActIdx == 3)   // tune XIT
                                 {
                                     int XIT = 0;
                                     XITfrq += 2;
@@ -12417,8 +12433,8 @@ namespace DataDecoder
                                         kCATup = "ZZXF-" + XIT.ToString().PadLeft(4, '0') + ";";}
                                     else
                                     { kCATup = "ZZXF+" + XITfrq.ToString().PadLeft(4, '0') + ";"; }
+                                    WriteToPort(kCATup, iSleep);
                                 }
-                                WriteToPort(kCATup, iSleep);
                                 break;
                             case "Z":   //LED status
                                 if (sCmd.Substring(0, 2) == "ZC")
@@ -12560,6 +12576,13 @@ namespace DataDecoder
             else grpTKnob.Enabled = true;
         }
 
+        private void cboTstep_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            stepSize = cboTstep.SelectedIndex;
+            set.cboTstep = cboTstep.SelectedIndex;
+            set.Save();
+        }
+
         #endregion * Events *
 
         #region * Methods *
@@ -12577,6 +12600,7 @@ namespace DataDecoder
                     cboKnobBOff.SelectedIndex = set.cboKnobBOff;
                     cboKnobADC.SelectedIndex = set.cboKnobADC;
                     cboKnobBDC.SelectedIndex = set.cboKnobBDC;
+                    cboTstep.SelectedIndex = set.cboTstep;
                 }
                 catch { }
 
@@ -12638,17 +12662,20 @@ namespace DataDecoder
         {
             switch (ActIdx) // active single click control
             {
-                case 0: kCATup = "ZZSB;"; kCATdn = "ZZSA;"; //VFO A
+                case 0: kCATup = "ZZAU"; kCATdn = "ZZAD"; //VFO A
                     WriteToPort("ZZXC;ZZXS0;ZZRC;ZZRT0;", iSleep);
                     break;
-                case 1: kCATup = "ZZSH;"; kCATdn = "ZZSG;"; //VFO B
+                case 1: kCATup = "ZZBP"; kCATdn = "ZZBM"; //VFO B
                     WriteToPort("ZZXC;ZZXS0;ZZRC;ZZRT0;", iSleep);
                     break;
                 case 2: kCATup = "ZZRF"; kCATdn = "ZZRF"; //TUNE RIT
-                        RITfrq = 0; WriteToPort("ZZXC;ZZXS0;ZZRT1;", iSleep);
+                    RITfrq = 0; WriteToPort("ZZXC;ZZXS0;ZZRT1;", iSleep);
                     break;
                 case 3: kCATup = "ZZXF"; kCATdn = "ZZXF"; //TUNE XIT
-                        XITfrq = 0; WriteToPort("ZZRC;ZZRT0;ZZXS1;", iSleep);
+                    XITfrq = 0; WriteToPort("ZZRC;ZZRT0;ZZXS1;", iSleep);
+                    break;
+                case 4: kCATup = "ZZSU"; kCATdn = "ZZSD"; //TUNE XIT
+                    WriteToPort("ZZAC;ZZXC;ZZXS0;ZZRC;ZZRT0;", iSleep);
                     break;
             }
             switch (ActIdxDC) // active double click control
@@ -12665,6 +12692,7 @@ namespace DataDecoder
                     break;
             }
         }
+        
         #endregion * Methods *
 
         #endregion Tuning Knob

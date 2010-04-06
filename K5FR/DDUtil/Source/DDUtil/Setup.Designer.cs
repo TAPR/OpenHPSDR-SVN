@@ -131,14 +131,15 @@ namespace DataDecoder
             this.chkDev0 = new System.Windows.Forms.CheckBox();
             this.tabRCP = new System.Windows.Forms.TabPage();
             this.grpTKnob = new System.Windows.Forms.GroupBox();
+            this.label228 = new System.Windows.Forms.Label();
             this.lblZR = new System.Windows.Forms.Label();
+            this.cboTstep = new System.Windows.Forms.ComboBox();
             this.txtZR = new System.Windows.Forms.TextBox();
             this.lblZL = new System.Windows.Forms.Label();
             this.txtZL = new System.Windows.Forms.TextBox();
             this.lblZC = new System.Windows.Forms.Label();
             this.txtZC = new System.Windows.Forms.TextBox();
             this.chkKnobAdv = new System.Windows.Forms.CheckBox();
-            this.button7 = new System.Windows.Forms.Button();
             this.cboKnobBDC = new System.Windows.Forms.ComboBox();
             this.cboKnobBOn = new System.Windows.Forms.ComboBox();
             this.cboKnobBOff = new System.Windows.Forms.ComboBox();
@@ -178,6 +179,7 @@ namespace DataDecoder
             this.cboRCP4 = new System.Windows.Forms.ComboBox();
             this.chkRCP2DisPol = new System.Windows.Forms.CheckBox();
             this.txtRCP = new System.Windows.Forms.TextBox();
+            this.button7 = new System.Windows.Forms.Button();
             this.tabWatt = new System.Windows.Forms.TabPage();
             this.groupBox15 = new System.Windows.Forms.GroupBox();
             this.chkSWR = new System.Windows.Forms.CheckBox();
@@ -1350,7 +1352,7 @@ namespace DataDecoder
             this.tabControl.SelectedIndex = 0;
             this.tabControl.Size = new System.Drawing.Size(439, 337);
             this.tabControl.TabIndex = 31;
-            this.toolTip1.SetToolTip(this.tabControl, "Right-Click for Options");
+            this.toolTip1.SetToolTip(this.tabControl, "Right-Click for Context Menu.");
             // 
             // tabPorts
             // 
@@ -2474,6 +2476,7 @@ namespace DataDecoder
             this.tabRCP.Controls.Add(this.grpTKnob);
             this.tabRCP.Controls.Add(this.groupBox7);
             this.tabRCP.Controls.Add(this.txtRCP);
+            this.tabRCP.Controls.Add(this.button7);
             this.tabRCP.Location = new System.Drawing.Point(4, 22);
             this.tabRCP.Name = "tabRCP";
             this.tabRCP.Size = new System.Drawing.Size(431, 311);
@@ -2484,14 +2487,15 @@ namespace DataDecoder
             // 
             // grpTKnob
             // 
+            this.grpTKnob.Controls.Add(this.label228);
             this.grpTKnob.Controls.Add(this.lblZR);
+            this.grpTKnob.Controls.Add(this.cboTstep);
             this.grpTKnob.Controls.Add(this.txtZR);
             this.grpTKnob.Controls.Add(this.lblZL);
             this.grpTKnob.Controls.Add(this.txtZL);
             this.grpTKnob.Controls.Add(this.lblZC);
             this.grpTKnob.Controls.Add(this.txtZC);
             this.grpTKnob.Controls.Add(this.chkKnobAdv);
-            this.grpTKnob.Controls.Add(this.button7);
             this.grpTKnob.Controls.Add(this.cboKnobBDC);
             this.grpTKnob.Controls.Add(this.cboKnobBOn);
             this.grpTKnob.Controls.Add(this.cboKnobBOff);
@@ -2506,7 +2510,6 @@ namespace DataDecoder
             this.grpTKnob.Controls.Add(this.label216);
             this.grpTKnob.Controls.Add(this.cboKnobPort);
             this.grpTKnob.Controls.Add(this.chkKnobEnab);
-            this.grpTKnob.Enabled = false;
             this.grpTKnob.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.grpTKnob.ForeColor = System.Drawing.Color.Blue;
             this.grpTKnob.Location = new System.Drawing.Point(5, 171);
@@ -2515,6 +2518,18 @@ namespace DataDecoder
             this.grpTKnob.TabIndex = 67;
             this.grpTKnob.TabStop = false;
             this.grpTKnob.Text = "Tuning Knob";
+            // 
+            // label228
+            // 
+            this.label228.AutoSize = true;
+            this.label228.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
+            this.label228.ForeColor = System.Drawing.Color.Navy;
+            this.label228.Location = new System.Drawing.Point(194, 17);
+            this.label228.Name = "label228";
+            this.label228.Size = new System.Drawing.Size(29, 13);
+            this.label228.TabIndex = 100;
+            this.label228.Text = "Step";
+            this.label228.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // lblZR
             // 
@@ -2528,6 +2543,34 @@ namespace DataDecoder
             this.lblZR.Text = "ZR";
             this.lblZR.TextAlign = System.Drawing.ContentAlignment.TopRight;
             this.lblZR.Visible = false;
+            // 
+            // cboTstep
+            // 
+            this.cboTstep.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
+            this.cboTstep.ForeColor = System.Drawing.SystemColors.WindowText;
+            this.cboTstep.FormattingEnabled = true;
+            this.cboTstep.Items.AddRange(new object[] {
+            "1 Hz",
+            "10 Hz",
+            "50 Hz",
+            "100 Hz",
+            "250 Hz",
+            "500Hz",
+            "1 KhZ",
+            "5 KhZ",
+            "9 KhZ",
+            "10 KhZ",
+            "100 KhZ",
+            "250 KhZ",
+            "500 KhZ",
+            "1 MhZ",
+            "10 MhZ"});
+            this.cboTstep.Location = new System.Drawing.Point(224, 13);
+            this.cboTstep.Name = "cboTstep";
+            this.cboTstep.Size = new System.Drawing.Size(69, 21);
+            this.cboTstep.TabIndex = 99;
+            this.toolTip1.SetToolTip(this.cboTstep, "Select base tuning step");
+            this.cboTstep.SelectedIndexChanged += new System.EventHandler(this.cboTstep_SelectedIndexChanged);
             // 
             // txtZR
             // 
@@ -2616,20 +2659,6 @@ namespace DataDecoder
             this.toolTip1.SetToolTip(this.chkKnobAdv, "Check to enable Expert controls");
             this.chkKnobAdv.UseVisualStyleBackColor = true;
             this.chkKnobAdv.CheckedChanged += new System.EventHandler(this.chkKnobAdv_CheckedChanged);
-            // 
-            // button7
-            // 
-            this.button7.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.button7.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold);
-            this.button7.ForeColor = System.Drawing.Color.Teal;
-            this.button7.Location = new System.Drawing.Point(218, 12);
-            this.button7.Name = "button7";
-            this.button7.Size = new System.Drawing.Size(60, 23);
-            this.button7.TabIndex = 91;
-            this.button7.Text = "UpDate";
-            this.toolTip1.SetToolTip(this.button7, "Press to start the Firm Ware UpGrade process.");
-            this.button7.UseVisualStyleBackColor = true;
-            this.button7.Visible = false;
             // 
             // cboKnobBDC
             // 
@@ -2803,7 +2832,7 @@ namespace DataDecoder
             this.label216.AutoSize = true;
             this.label216.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
             this.label216.ForeColor = System.Drawing.Color.Navy;
-            this.label216.Location = new System.Drawing.Point(102, 17);
+            this.label216.Location = new System.Drawing.Point(92, 17);
             this.label216.Name = "label216";
             this.label216.Size = new System.Drawing.Size(26, 13);
             this.label216.TabIndex = 78;
@@ -2815,7 +2844,7 @@ namespace DataDecoder
             this.cboKnobPort.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
             this.cboKnobPort.ForeColor = System.Drawing.SystemColors.WindowText;
             this.cboKnobPort.FormattingEnabled = true;
-            this.cboKnobPort.Location = new System.Drawing.Point(130, 13);
+            this.cboKnobPort.Location = new System.Drawing.Point(120, 13);
             this.cboKnobPort.Name = "cboKnobPort";
             this.cboKnobPort.Size = new System.Drawing.Size(69, 21);
             this.cboKnobPort.TabIndex = 75;
@@ -3150,6 +3179,20 @@ namespace DataDecoder
             this.toolTip1.SetToolTip(this.txtRCP, "Program Notes: Use this to keep track of which port your programs are on.");
             this.txtRCP.WordWrap = false;
             this.txtRCP.TextChanged += new System.EventHandler(this.txtRCP_TextChanged);
+            // 
+            // button7
+            // 
+            this.button7.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.button7.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold);
+            this.button7.ForeColor = System.Drawing.Color.Teal;
+            this.button7.Location = new System.Drawing.Point(347, 201);
+            this.button7.Name = "button7";
+            this.button7.Size = new System.Drawing.Size(60, 23);
+            this.button7.TabIndex = 91;
+            this.button7.Text = "UpDate";
+            this.toolTip1.SetToolTip(this.button7, "Press to start the Firm Ware UpGrade process.");
+            this.button7.UseVisualStyleBackColor = true;
+            this.button7.Visible = false;
             // 
             // tabWatt
             // 
@@ -16500,7 +16543,7 @@ namespace DataDecoder
             this.Name = "Setup";
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "DDUtil - (Not Connected)";
-            this.toolTip1.SetToolTip(this, "Right-Click for Options");
+            this.toolTip1.SetToolTip(this, "Right-Click for Context Menu.");
             this.Load += new System.EventHandler(this.Setup_Load);
             this.Shown += new System.EventHandler(this.Setup_Shown);
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Setup_FormClosing);
@@ -17850,6 +17893,8 @@ namespace DataDecoder
         private ToolStripSeparator toolStripSeparator17;
         private Label label40;
         private TextBox txtCallSign;
+        private Label label228;
+        private ComboBox cboTstep;
 
     }
 }
