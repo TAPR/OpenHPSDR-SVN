@@ -46,7 +46,7 @@ namespace DataDecoder
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Setup));
             this.tabControl = new System.Windows.Forms.TabControl();
             this.tabPorts = new System.Windows.Forms.TabPage();
@@ -179,7 +179,6 @@ namespace DataDecoder
             this.cboRCP4 = new System.Windows.Forms.ComboBox();
             this.chkRCP2DisPol = new System.Windows.Forms.CheckBox();
             this.txtRCP = new System.Windows.Forms.TextBox();
-            this.button7 = new System.Windows.Forms.Button();
             this.tabWatt = new System.Windows.Forms.TabPage();
             this.groupBox15 = new System.Windows.Forms.GroupBox();
             this.chkSWR = new System.Windows.Forms.CheckBox();
@@ -2476,7 +2475,6 @@ namespace DataDecoder
             this.tabRCP.Controls.Add(this.grpTKnob);
             this.tabRCP.Controls.Add(this.groupBox7);
             this.tabRCP.Controls.Add(this.txtRCP);
-            this.tabRCP.Controls.Add(this.button7);
             this.tabRCP.Location = new System.Drawing.Point(4, 22);
             this.tabRCP.Name = "tabRCP";
             this.tabRCP.Size = new System.Drawing.Size(431, 311);
@@ -2512,9 +2510,9 @@ namespace DataDecoder
             this.grpTKnob.Controls.Add(this.chkKnobEnab);
             this.grpTKnob.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.grpTKnob.ForeColor = System.Drawing.Color.Blue;
-            this.grpTKnob.Location = new System.Drawing.Point(5, 171);
+            this.grpTKnob.Location = new System.Drawing.Point(5, 159);
             this.grpTKnob.Name = "grpTKnob";
-            this.grpTKnob.Size = new System.Drawing.Size(299, 134);
+            this.grpTKnob.Size = new System.Drawing.Size(302, 146);
             this.grpTKnob.TabIndex = 67;
             this.grpTKnob.TabStop = false;
             this.grpTKnob.Text = "Tuning Knob";
@@ -2524,19 +2522,18 @@ namespace DataDecoder
             this.label228.AutoSize = true;
             this.label228.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
             this.label228.ForeColor = System.Drawing.Color.Navy;
-            this.label228.Location = new System.Drawing.Point(194, 17);
+            this.label228.Location = new System.Drawing.Point(173, 9);
             this.label228.Name = "label228";
-            this.label228.Size = new System.Drawing.Size(29, 13);
+            this.label228.Size = new System.Drawing.Size(57, 13);
             this.label228.TabIndex = 100;
-            this.label228.Text = "Step";
-            this.label228.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.label228.Text = "Tune Step";
             // 
             // lblZR
             // 
             this.lblZR.AutoSize = true;
             this.lblZR.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
             this.lblZR.ForeColor = System.Drawing.Color.Navy;
-            this.lblZR.Location = new System.Drawing.Point(257, 113);
+            this.lblZR.Location = new System.Drawing.Point(257, 125);
             this.lblZR.Name = "lblZR";
             this.lblZR.Size = new System.Drawing.Size(22, 13);
             this.lblZR.TabIndex = 98;
@@ -2565,11 +2562,11 @@ namespace DataDecoder
             "500 KhZ",
             "1 MhZ",
             "10 MhZ"});
-            this.cboTstep.Location = new System.Drawing.Point(224, 13);
+            this.cboTstep.Location = new System.Drawing.Point(174, 24);
             this.cboTstep.Name = "cboTstep";
             this.cboTstep.Size = new System.Drawing.Size(69, 21);
             this.cboTstep.TabIndex = 99;
-            this.toolTip1.SetToolTip(this.cboTstep, "Select base tuning step");
+            this.toolTip1.SetToolTip(this.cboTstep, "Select base tuning step (ctrl++ up, ctrl+- down).");
             this.cboTstep.SelectedIndexChanged += new System.EventHandler(this.cboTstep_SelectedIndexChanged);
             // 
             // txtZR
@@ -2577,7 +2574,7 @@ namespace DataDecoder
             this.txtZR.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.txtZR.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtZR.ForeColor = System.Drawing.SystemColors.WindowText;
-            this.txtZR.Location = new System.Drawing.Point(227, 109);
+            this.txtZR.Location = new System.Drawing.Point(227, 121);
             this.txtZR.MaxLength = 2;
             this.txtZR.Name = "txtZR";
             this.txtZR.Size = new System.Drawing.Size(28, 20);
@@ -2593,7 +2590,7 @@ namespace DataDecoder
             this.lblZL.AutoSize = true;
             this.lblZL.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
             this.lblZL.ForeColor = System.Drawing.Color.Navy;
-            this.lblZL.Location = new System.Drawing.Point(188, 113);
+            this.lblZL.Location = new System.Drawing.Point(188, 125);
             this.lblZL.Name = "lblZL";
             this.lblZL.Size = new System.Drawing.Size(20, 13);
             this.lblZL.TabIndex = 96;
@@ -2606,7 +2603,7 @@ namespace DataDecoder
             this.txtZL.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.txtZL.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtZL.ForeColor = System.Drawing.SystemColors.WindowText;
-            this.txtZL.Location = new System.Drawing.Point(158, 109);
+            this.txtZL.Location = new System.Drawing.Point(158, 121);
             this.txtZL.MaxLength = 2;
             this.txtZL.Name = "txtZL";
             this.txtZL.Size = new System.Drawing.Size(28, 20);
@@ -2622,7 +2619,7 @@ namespace DataDecoder
             this.lblZC.AutoSize = true;
             this.lblZC.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
             this.lblZC.ForeColor = System.Drawing.Color.Navy;
-            this.lblZC.Location = new System.Drawing.Point(118, 113);
+            this.lblZC.Location = new System.Drawing.Point(118, 125);
             this.lblZC.Name = "lblZC";
             this.lblZC.Size = new System.Drawing.Size(21, 13);
             this.lblZC.TabIndex = 94;
@@ -2635,7 +2632,7 @@ namespace DataDecoder
             this.txtZC.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.txtZC.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtZC.ForeColor = System.Drawing.SystemColors.WindowText;
-            this.txtZC.Location = new System.Drawing.Point(88, 109);
+            this.txtZC.Location = new System.Drawing.Point(88, 121);
             this.txtZC.MaxLength = 2;
             this.txtZC.Name = "txtZC";
             this.txtZC.Size = new System.Drawing.Size(28, 20);
@@ -2651,7 +2648,7 @@ namespace DataDecoder
             this.chkKnobAdv.AutoSize = true;
             this.chkKnobAdv.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
             this.chkKnobAdv.ForeColor = System.Drawing.Color.Navy;
-            this.chkKnobAdv.Location = new System.Drawing.Point(17, 111);
+            this.chkKnobAdv.Location = new System.Drawing.Point(17, 123);
             this.chkKnobAdv.Name = "chkKnobAdv";
             this.chkKnobAdv.Size = new System.Drawing.Size(56, 17);
             this.chkKnobAdv.TabIndex = 92;
@@ -2671,7 +2668,7 @@ namespace DataDecoder
             "Split On/Off",
             "Clear RIT",
             "Clear XIT"});
-            this.cboKnobBDC.Location = new System.Drawing.Point(203, 82);
+            this.cboKnobBDC.Location = new System.Drawing.Point(203, 94);
             this.cboKnobBDC.Name = "cboKnobBDC";
             this.cboKnobBDC.Size = new System.Drawing.Size(90, 21);
             this.cboKnobBDC.TabIndex = 90;
@@ -2688,7 +2685,7 @@ namespace DataDecoder
             "Tune VFO B",
             "Tune RIT",
             "Tune XIT"});
-            this.cboKnobBOn.Location = new System.Drawing.Point(17, 82);
+            this.cboKnobBOn.Location = new System.Drawing.Point(17, 94);
             this.cboKnobBOn.Name = "cboKnobBOn";
             this.cboKnobBOn.Size = new System.Drawing.Size(90, 21);
             this.cboKnobBOn.TabIndex = 89;
@@ -2706,7 +2703,7 @@ namespace DataDecoder
             "Tune VFO B",
             "Tune RIT",
             "Tune XIT"});
-            this.cboKnobBOff.Location = new System.Drawing.Point(110, 82);
+            this.cboKnobBOff.Location = new System.Drawing.Point(110, 94);
             this.cboKnobBOff.Name = "cboKnobBOff";
             this.cboKnobBOff.Size = new System.Drawing.Size(90, 21);
             this.cboKnobBOff.TabIndex = 88;
@@ -2718,7 +2715,7 @@ namespace DataDecoder
             this.label221.AutoSize = true;
             this.label221.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
             this.label221.ForeColor = System.Drawing.Color.Navy;
-            this.label221.Location = new System.Drawing.Point(2, 85);
+            this.label221.Location = new System.Drawing.Point(2, 97);
             this.label221.Name = "label221";
             this.label221.Size = new System.Drawing.Size(14, 13);
             this.label221.TabIndex = 86;
@@ -2730,7 +2727,7 @@ namespace DataDecoder
             this.label220.AutoSize = true;
             this.label220.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
             this.label220.ForeColor = System.Drawing.Color.Navy;
-            this.label220.Location = new System.Drawing.Point(2, 59);
+            this.label220.Location = new System.Drawing.Point(2, 71);
             this.label220.Name = "label220";
             this.label220.Size = new System.Drawing.Size(14, 13);
             this.label220.TabIndex = 85;
@@ -2742,7 +2739,7 @@ namespace DataDecoder
             this.label219.AutoSize = true;
             this.label219.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
             this.label219.ForeColor = System.Drawing.Color.Navy;
-            this.label219.Location = new System.Drawing.Point(221, 40);
+            this.label219.Location = new System.Drawing.Point(221, 52);
             this.label219.Name = "label219";
             this.label219.Size = new System.Drawing.Size(41, 13);
             this.label219.TabIndex = 84;
@@ -2754,7 +2751,7 @@ namespace DataDecoder
             this.label218.AutoSize = true;
             this.label218.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
             this.label218.ForeColor = System.Drawing.Color.Navy;
-            this.label218.Location = new System.Drawing.Point(137, 40);
+            this.label218.Location = new System.Drawing.Point(137, 52);
             this.label218.Name = "label218";
             this.label218.Size = new System.Drawing.Size(21, 13);
             this.label218.TabIndex = 83;
@@ -2766,7 +2763,7 @@ namespace DataDecoder
             this.label217.AutoSize = true;
             this.label217.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
             this.label217.ForeColor = System.Drawing.Color.Navy;
-            this.label217.Location = new System.Drawing.Point(45, 40);
+            this.label217.Location = new System.Drawing.Point(45, 52);
             this.label217.Name = "label217";
             this.label217.Size = new System.Drawing.Size(21, 13);
             this.label217.TabIndex = 82;
@@ -2785,7 +2782,7 @@ namespace DataDecoder
             "Split On/Off",
             "Clear RIT",
             "Clear XIT"});
-            this.cboKnobADC.Location = new System.Drawing.Point(203, 55);
+            this.cboKnobADC.Location = new System.Drawing.Point(203, 67);
             this.cboKnobADC.Name = "cboKnobADC";
             this.cboKnobADC.Size = new System.Drawing.Size(90, 21);
             this.cboKnobADC.TabIndex = 81;
@@ -2802,7 +2799,7 @@ namespace DataDecoder
             "Tune VFO B",
             "Tune RIT",
             "Tune XIT"});
-            this.cboKnobAOn.Location = new System.Drawing.Point(17, 55);
+            this.cboKnobAOn.Location = new System.Drawing.Point(17, 67);
             this.cboKnobAOn.Name = "cboKnobAOn";
             this.cboKnobAOn.Size = new System.Drawing.Size(90, 21);
             this.cboKnobAOn.TabIndex = 80;
@@ -2820,7 +2817,7 @@ namespace DataDecoder
             "Tune VFO B",
             "Tune RIT",
             "Tune XIT"});
-            this.cboKnobAOff.Location = new System.Drawing.Point(110, 55);
+            this.cboKnobAOff.Location = new System.Drawing.Point(110, 67);
             this.cboKnobAOff.Name = "cboKnobAOff";
             this.cboKnobAOff.Size = new System.Drawing.Size(90, 21);
             this.cboKnobAOff.TabIndex = 79;
@@ -2832,7 +2829,7 @@ namespace DataDecoder
             this.label216.AutoSize = true;
             this.label216.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
             this.label216.ForeColor = System.Drawing.Color.Navy;
-            this.label216.Location = new System.Drawing.Point(92, 17);
+            this.label216.Location = new System.Drawing.Point(98, 9);
             this.label216.Name = "label216";
             this.label216.Size = new System.Drawing.Size(26, 13);
             this.label216.TabIndex = 78;
@@ -2844,7 +2841,7 @@ namespace DataDecoder
             this.cboKnobPort.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
             this.cboKnobPort.ForeColor = System.Drawing.SystemColors.WindowText;
             this.cboKnobPort.FormattingEnabled = true;
-            this.cboKnobPort.Location = new System.Drawing.Point(120, 13);
+            this.cboKnobPort.Location = new System.Drawing.Point(86, 24);
             this.cboKnobPort.Name = "cboKnobPort";
             this.cboKnobPort.Size = new System.Drawing.Size(69, 21);
             this.cboKnobPort.TabIndex = 75;
@@ -2856,7 +2853,7 @@ namespace DataDecoder
             this.chkKnobEnab.AutoSize = true;
             this.chkKnobEnab.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
             this.chkKnobEnab.ForeColor = System.Drawing.Color.Navy;
-            this.chkKnobEnab.Location = new System.Drawing.Point(17, 19);
+            this.chkKnobEnab.Location = new System.Drawing.Point(17, 31);
             this.chkKnobEnab.Name = "chkKnobEnab";
             this.chkKnobEnab.Size = new System.Drawing.Size(59, 17);
             this.chkKnobEnab.TabIndex = 76;
@@ -3179,20 +3176,6 @@ namespace DataDecoder
             this.toolTip1.SetToolTip(this.txtRCP, "Program Notes: Use this to keep track of which port your programs are on.");
             this.txtRCP.WordWrap = false;
             this.txtRCP.TextChanged += new System.EventHandler(this.txtRCP_TextChanged);
-            // 
-            // button7
-            // 
-            this.button7.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.button7.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold);
-            this.button7.ForeColor = System.Drawing.Color.Teal;
-            this.button7.Location = new System.Drawing.Point(347, 201);
-            this.button7.Name = "button7";
-            this.button7.Size = new System.Drawing.Size(60, 23);
-            this.button7.TabIndex = 91;
-            this.button7.Text = "UpDate";
-            this.toolTip1.SetToolTip(this.button7, "Press to start the Firm Ware UpGrade process.");
-            this.button7.UseVisualStyleBackColor = true;
-            this.button7.Visible = false;
             // 
             // tabWatt
             // 
@@ -6513,9 +6496,9 @@ namespace DataDecoder
             // 
             this.dgm.AllowUserToAddRows = false;
             this.dgm.AllowUserToDeleteRows = false;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.White;
-            this.dgm.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.White;
+            this.dgm.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle3;
             this.dgm.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.dgm.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgm.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
@@ -17758,7 +17741,6 @@ namespace DataDecoder
         private ComboBox cboKnobBOn;
         private ComboBox cboKnobBOff;
         private TextBox Dev0;
-        private Button button7;
         public CheckBox chkKnobAdv;
         private Label lblZC;
         private TextBox txtZC;
