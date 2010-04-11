@@ -666,8 +666,7 @@ namespace DataDecoder
             autoDriveToolStripMenuItem1.Checked = set.chkAutoDrv;
             SOinit();   // setup SO2R
             AuxBcdInit();
-            cboKnobPort.SelectedIndex = set.cboKnobPort;
-            chkKnobEnab.Checked = set.chkKnobEnab;
+            KnobInit();
             btnReCall_Click(null, null);
 
             if (chkLPenab.Checked) lpTimer.Enabled = true;
@@ -5059,14 +5058,20 @@ namespace DataDecoder
             { btnReCall_Click(null, null); }  
             else if (e.Control && e.KeyCode == Keys.C) // Memory Load
             { btnMemLoad_Click(null, null); }
-            else if (e.Control && e.KeyCode == Keys.N) // Open Memory Note window
-            { txtMemFreq_DoubleClick(null, null); }
             else if (e.Control && e.KeyCode == Keys.V) // Memory Save
             { btnMemSave_Click(null, null); }
+            else if (e.Control && e.KeyCode == Keys.N) // Open Memory Note window
+            { txtMemFreq_DoubleClick(null, null); }
             else if (e.Control && e.KeyCode == Keys.U) // Undo freq move
             { WriteToPort("FA" + prevFreq + ";", iSleep); }
             else if (e.Control && e.Shift && e.KeyCode == Keys.S) // Power On/Off
-            { btnFlexOn_Click(null, null); }    
+            { btnFlexOn_Click(null, null); }
+            // TK tuning rate up
+            else if (e.Control && (e.KeyCode == Keys.Oemplus || e.KeyValue == 107)) 
+            { if (cboTstep.SelectedIndex < 14) cboTstep.SelectedIndex += 1; }
+            // TK tuning rate down
+            else if (e.Control && (e.KeyCode == Keys.OemMinus || e.KeyValue == 109)) 
+            { if (cboTstep.SelectedIndex > 0) cboTstep.SelectedIndex -= 1; }
         }
         // Adds macro number text to the row header
         public void dgm_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
@@ -7983,7 +7988,11 @@ namespace DataDecoder
                     /*** Get Tune Step ***/
                     if (rawFreq.Length > 4 && rawFreq.Substring(0, 4) == "ZZAC")
                     {
-                        stepSize = Convert.ToInt32(rawFreq.Substring(4, 2));
+                        tempTimer.Stop();
+                        int psdrIdx = Convert.ToInt32(rawFreq.Substring(4, 2));
+                        if (psdrIdx != stepSize)
+                        { SetStepSize(rawFreq.Substring(4, 2)); }
+                        tempTimer.Start();
                     }
                     /*** Get pwr supply volts ***/
                     if (rawFreq.Length > 4 && rawFreq.Substring(0, 4) == "ZZRV")
@@ -12019,6 +12028,8 @@ namespace DataDecoder
                 WriteToPort("ZZBS;", iSleep); // BAND
                 WriteToPort("ZZRV;", iSleep); // PS VOLTS
                 WriteToPort("ZZFI;", iSleep); // Filter in use
+                if (chkKnobEnab.Checked)      // Step Size
+                { WriteToPort("ZZAC;", iSleep); }
             }
             catch { }
         }
@@ -12098,19 +12109,20 @@ namespace DataDecoder
 
         #region * Declarations *
 
+        bool sflag = false;
+        int ActCon = 0;         // Active Control index (1-4)
+        int ActConDC = 0;       // Active Control DC index (1-2)
+        int ActIdx = 0;         // Active control index       
+        int ActIdxDC = 0;       // Active control index for dbl-clk control 
+        int kFlags = 0x51;      // knob flag register
+        int RITfrq = 0;         // current RIT offset
+        int stepSize = 0;       // PSDR tune step size (default = 10 hz)
+        int XITfrq = 0;         // current XIT offset
         string KnobBuf = "";    // serial data received buffer
         string kCATup = "";     // current CAT Up command 
         string kCATdn = "";     // current CAT Dn command 
         string kCATdcOn = "";   // current DC CAT Up command 
         string kCATdcOff = "";  // current DC CAT Dn command 
-        int kFlags = 0x51;      // knob flag register
-        int ActCon = 0;         // Active Control index (1-4)
-        int ActConDC = 0;       // Active Control DC index (1-2)
-        int ActIdx = 0;         // Active control index       
-        int ActIdxDC = 0;       // Active control index for dbl-clk control 
-        int RITfrq = 0;         // current RIT offset
-        int XITfrq = 0;         // current XIT offset
-        int stepSize = 0;       // PSDR tune step size (default = 10 hz)
 
         // kFlags descr.
         // LSB  0   Mode A = Off, B = On
@@ -12310,7 +12322,26 @@ namespace DataDecoder
                 catch { }
             }
         }
-        //ZC
+        // Write to StepSize 
+        delegate void SetStepSizeCallback(string text);
+        private void SetStepSize(string text)
+        {
+            if (!closing)
+            {
+                try
+                {
+                    if (this.cboTstep.InvokeRequired)
+                    {
+                        SetStepSizeCallback d = new SetStepSizeCallback(SetStepSize);
+                        this.Invoke(d, new object[] { text });
+                    }
+                    else
+                        cboTstep.SelectedIndex = Convert.ToInt32(text);
+                }
+                catch { }
+            }
+        }
+
         #endregion # Delegates #
 
         #region * Events *
@@ -12352,7 +12383,6 @@ namespace DataDecoder
                             case "D": //tune something down
                                 if (ActIdx == 0 || ActIdx == 1)// tune vfo a/b
                                 {
-                                    //Console.WriteLine(sCmd);
                                     string newSize = "1";
                                     int tkSize = 0;
                                     if (sCmd.Length > 3)
@@ -12361,7 +12391,6 @@ namespace DataDecoder
                                     { newSize = (stepSize + (tkSize - 1)).ToString(); }
                                     else 
                                     { newSize = stepSize.ToString(); }
-//                                    { newSize = (stepSize - tkSize).ToString(); }
                                     WriteToPort(kCATdn + newSize.PadLeft(2, '0') + ";", iSleep);
                                 }
                                 else if (ActIdx == 2)    // tune RIT
@@ -12387,11 +12416,15 @@ namespace DataDecoder
                                     { kCATdn = "ZZXF+" + XITfrq.ToString().PadLeft(4, '0') + ";"; }
                                     WriteToPort(kCATdn, iSleep);
                                 }
-                                break;
+                                //else if (ActIdx == 4)   // tuning step
+                                //{
+                                //    WriteToPort(kCATdn + ";", iSleep);                                    
+                                //}
+                                    break;
                             case "F":   //firm ware revision
-                                grpTKnob.Text = "Tuning Knob Rev. " +
+                                SetgrpTKnob("Tuning Knob Rev. " +
                                     sCmd.Substring(1, 2) + "." +
-                                    sCmd.Substring(3, 2);
+                                    sCmd.Substring(3, 2));
                                 break;
                             case "L": //knob long click
                                 kFlags ^= 0x41;
@@ -12400,11 +12433,15 @@ namespace DataDecoder
                             case "S": //knob single click
                                 kFlags ^= 0x10; // toggle single click bit
                                 WriteFlags(); WriteLED();
+                                //if (!Convert.ToBoolean(kFlags & 0x10)) sflag = true;
+                                //if (ActIdx == 4 && sflag)   // tuning step
+                                //{ KnobPort.Write("ZE14;ZE;"); }
+                                //else
+                                //{ KnobPort.Write("ZE01;ZE;"); }
                                 break;
-                            case "U": //tune up
+                            case "U": //tune something up
                                 if (ActIdx == 0 || ActIdx == 1)// tune vfo a/b
                                 {
-                                    //Console.WriteLine(sCmd);
                                     string newSize = "1";
                                     int tkSize = 0;
                                     if (sCmd.Length > 3)
@@ -12435,10 +12472,16 @@ namespace DataDecoder
                                     { kCATup = "ZZXF+" + XITfrq.ToString().PadLeft(4, '0') + ";"; }
                                     WriteToPort(kCATup, iSleep);
                                 }
+                                //else if (ActIdx == 4)   // tuning step
+                                //{
+                                //    WriteToPort(kCATdn + ";", iSleep);
+                                //}
                                 break;
-                            case "Z":   //LED status
+                            case "Z":   // parameter settings from knob
                                 if (sCmd.Substring(0, 2) == "ZC")
                                 { SetZC(sCmd.Substring(2, 2)); }
+                                //if (sCmd.Substring(0, 2) == "ZE")
+                                //    Console.WriteLine("ZE: " + sCmd);
                                 if (sCmd.Substring(0, 2) == "ZL")
                                 { SetZL(sCmd.Substring(2, 2)); }
                                 if (sCmd.Substring(0, 2) == "ZR")
@@ -12487,6 +12530,7 @@ namespace DataDecoder
                        " cannot be opened!\n", "Port Error",
                        MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     cboKnobPort.SelectedIndex = 0;
+                    chkKnobEnab.Checked = false;
                 }
             }
             set.cboKnobPort = cboKnobPort.SelectedIndex;
@@ -12578,9 +12622,12 @@ namespace DataDecoder
 
         private void cboTstep_SelectedIndexChanged(object sender, EventArgs e)
         {
+            tempTimer.Stop();
             stepSize = cboTstep.SelectedIndex;
+            WriteToPort("ZZAC" + stepSize.ToString().PadLeft(2, '0') + ";", 0);
             set.cboTstep = cboTstep.SelectedIndex;
             set.Save();
+            tempTimer.Start();
         }
 
         #endregion * Events *
@@ -12590,6 +12637,9 @@ namespace DataDecoder
         //initialize controls
         void KnobInit()
         {
+            cboKnobPort.SelectedIndex = set.cboKnobPort;
+            chkKnobEnab.Checked = set.chkKnobEnab;
+
             if (chkKnobEnab.Checked)
             {
                 try
@@ -12601,12 +12651,18 @@ namespace DataDecoder
                     cboKnobADC.SelectedIndex = set.cboKnobADC;
                     cboKnobBDC.SelectedIndex = set.cboKnobBDC;
                     cboTstep.SelectedIndex = set.cboTstep;
+                    KnobPort.Write("ZE01;F;ZC;ZE;ZL;ZR;");
+                    WriteFlags();
+                    WriteLED();
                 }
-                catch { }
+                catch (Exception ex)
+                {
+                    bool bReturnLog = false;
+                    bReturnLog = ErrorLog.ErrorRoutine(false, enableErrorLog, ex);
+                    if (false == bReturnLog) MessageBox.Show("Unable to write to log");
+                    chkKnobEnab.Checked = false;
+                }
 
-                KnobPort.Write("F;ZC;ZL;ZR;");
-                WriteFlags();
-                WriteLED();
             }
         }
 
@@ -12674,8 +12730,7 @@ namespace DataDecoder
                 case 3: kCATup = "ZZXF"; kCATdn = "ZZXF"; //TUNE XIT
                     XITfrq = 0; WriteToPort("ZZRC;ZZRT0;ZZXS1;", iSleep);
                     break;
-                case 4: kCATup = "ZZSU"; kCATdn = "ZZSD"; //TUNE XIT
-                    WriteToPort("ZZAC;ZZXC;ZZXS0;ZZRC;ZZRT0;", iSleep);
+                case 4: kCATup = "ZZSU"; kCATdn = "ZZSD"; //Tuning Step
                     break;
             }
             switch (ActIdxDC) // active double click control
