@@ -46,7 +46,7 @@ namespace DataDecoder
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Setup));
             this.tabControl = new System.Windows.Forms.TabControl();
             this.tabPorts = new System.Windows.Forms.TabPage();
@@ -131,6 +131,10 @@ namespace DataDecoder
             this.chkDev0 = new System.Windows.Forms.CheckBox();
             this.tabRCP = new System.Windows.Forms.TabPage();
             this.grpTKnob = new System.Windows.Forms.GroupBox();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.chkKnobEnab2 = new System.Windows.Forms.CheckBox();
+            this.label229 = new System.Windows.Forms.Label();
+            this.cboKnobPort2 = new System.Windows.Forms.ComboBox();
             this.label228 = new System.Windows.Forms.Label();
             this.lblZR = new System.Windows.Forms.Label();
             this.cboTstep = new System.Windows.Forms.ComboBox();
@@ -322,6 +326,19 @@ namespace DataDecoder
             this.txtBand = new System.Windows.Forms.TextBox();
             this.chkAlpha = new System.Windows.Forms.CheckBox();
             this.btnPwr = new System.Windows.Forms.Button();
+            this.grpAmpBands = new System.Windows.Forms.GroupBox();
+            this.btnClrAll = new System.Windows.Forms.Button();
+            this.chkAmp6 = new System.Windows.Forms.CheckBox();
+            this.chkAmp80 = new System.Windows.Forms.CheckBox();
+            this.chkAmp160 = new System.Windows.Forms.CheckBox();
+            this.chkAmp30 = new System.Windows.Forms.CheckBox();
+            this.btnCkAll = new System.Windows.Forms.Button();
+            this.chkAmp17 = new System.Windows.Forms.CheckBox();
+            this.chkAmp40 = new System.Windows.Forms.CheckBox();
+            this.chkAmp10 = new System.Windows.Forms.CheckBox();
+            this.chkAmp12 = new System.Windows.Forms.CheckBox();
+            this.chkAmp20 = new System.Windows.Forms.CheckBox();
+            this.chkAmp15 = new System.Windows.Forms.CheckBox();
             this.tabOther = new System.Windows.Forms.TabPage();
             this.grpMacSw = new System.Windows.Forms.GroupBox();
             this.txtMacSwMsg = new System.Windows.Forms.TextBox();
@@ -828,25 +845,13 @@ namespace DataDecoder
             this.txtPortB = new System.Windows.Forms.TextBox();
             this.label106 = new System.Windows.Forms.Label();
             this.tabSetup = new System.Windows.Forms.TabPage();
+            this.chkShortCut = new System.Windows.Forms.CheckBox();
             this.chkCwTx = new System.Windows.Forms.CheckBox();
             this.groupBox16 = new System.Windows.Forms.GroupBox();
             this.txtPSDR = new System.Windows.Forms.TextBox();
             this.label68 = new System.Windows.Forms.Label();
             this.label64 = new System.Windows.Forms.Label();
             this.cboPwrPort = new System.Windows.Forms.ComboBox();
-            this.grpAmpBands = new System.Windows.Forms.GroupBox();
-            this.btnClrAll = new System.Windows.Forms.Button();
-            this.btnCkAll = new System.Windows.Forms.Button();
-            this.chkAmp6 = new System.Windows.Forms.CheckBox();
-            this.chkAmp80 = new System.Windows.Forms.CheckBox();
-            this.chkAmp160 = new System.Windows.Forms.CheckBox();
-            this.chkAmp30 = new System.Windows.Forms.CheckBox();
-            this.chkAmp17 = new System.Windows.Forms.CheckBox();
-            this.chkAmp40 = new System.Windows.Forms.CheckBox();
-            this.chkAmp10 = new System.Windows.Forms.CheckBox();
-            this.chkAmp12 = new System.Windows.Forms.CheckBox();
-            this.chkAmp20 = new System.Windows.Forms.CheckBox();
-            this.chkAmp15 = new System.Windows.Forms.CheckBox();
             this.chkOnTop = new System.Windows.Forms.CheckBox();
             this.chkNoBdChg = new System.Windows.Forms.CheckBox();
             this.chkModeChg = new System.Windows.Forms.CheckBox();
@@ -1255,6 +1260,7 @@ namespace DataDecoder
             this.toolStripSeparator8 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripMenuItem25 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem26 = new System.Windows.Forms.ToolStripMenuItem();
+            this.KnobPort2 = new System.IO.Ports.SerialPort(this.components);
             this.tabControl.SuspendLayout();
             this.tabPorts.SuspendLayout();
             this.grpSlave.SuspendLayout();
@@ -1270,6 +1276,7 @@ namespace DataDecoder
             ((System.ComponentModel.ISupportInitialize)(this.dg1)).BeginInit();
             this.tabRCP.SuspendLayout();
             this.grpTKnob.SuspendLayout();
+            this.groupBox3.SuspendLayout();
             this.groupBox7.SuspendLayout();
             this.tabWatt.SuspendLayout();
             this.groupBox15.SuspendLayout();
@@ -1291,6 +1298,7 @@ namespace DataDecoder
             this.grpPTT.SuspendLayout();
             this.groupBox13.SuspendLayout();
             this.grpAmp.SuspendLayout();
+            this.grpAmpBands.SuspendLayout();
             this.tabOther.SuspendLayout();
             this.grpMacSw.SuspendLayout();
             this.groupBox17.SuspendLayout();
@@ -1316,7 +1324,6 @@ namespace DataDecoder
             this.grpPortA.SuspendLayout();
             this.tabSetup.SuspendLayout();
             this.groupBox16.SuspendLayout();
-            this.grpAmpBands.SuspendLayout();
             this.grpDog.SuspendLayout();
             this.groupBox10.SuspendLayout();
             this.grpSpeed.SuspendLayout();
@@ -2485,6 +2492,7 @@ namespace DataDecoder
             // 
             // grpTKnob
             // 
+            this.grpTKnob.Controls.Add(this.groupBox3);
             this.grpTKnob.Controls.Add(this.label228);
             this.grpTKnob.Controls.Add(this.lblZR);
             this.grpTKnob.Controls.Add(this.cboTstep);
@@ -2510,19 +2518,70 @@ namespace DataDecoder
             this.grpTKnob.Controls.Add(this.chkKnobEnab);
             this.grpTKnob.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.grpTKnob.ForeColor = System.Drawing.Color.Blue;
-            this.grpTKnob.Location = new System.Drawing.Point(5, 159);
+            this.grpTKnob.Location = new System.Drawing.Point(5, 149);
             this.grpTKnob.Name = "grpTKnob";
-            this.grpTKnob.Size = new System.Drawing.Size(302, 146);
+            this.grpTKnob.Size = new System.Drawing.Size(415, 156);
             this.grpTKnob.TabIndex = 67;
             this.grpTKnob.TabStop = false;
             this.grpTKnob.Text = "Tuning Knob";
+            // 
+            // groupBox3
+            // 
+            this.groupBox3.Controls.Add(this.chkKnobEnab2);
+            this.groupBox3.Controls.Add(this.label229);
+            this.groupBox3.Controls.Add(this.cboKnobPort2);
+            this.groupBox3.Location = new System.Drawing.Point(239, 7);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(170, 43);
+            this.groupBox3.TabIndex = 104;
+            this.groupBox3.TabStop = false;
+            this.groupBox3.Text = "2nd Knob";
+            this.groupBox3.Visible = false;
+            // 
+            // chkKnobEnab2
+            // 
+            this.chkKnobEnab2.AutoSize = true;
+            this.chkKnobEnab2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
+            this.chkKnobEnab2.ForeColor = System.Drawing.Color.Navy;
+            this.chkKnobEnab2.Location = new System.Drawing.Point(6, 20);
+            this.chkKnobEnab2.Name = "chkKnobEnab2";
+            this.chkKnobEnab2.Size = new System.Drawing.Size(59, 17);
+            this.chkKnobEnab2.TabIndex = 102;
+            this.chkKnobEnab2.Text = "Enable";
+            this.toolTip1.SetToolTip(this.chkKnobEnab2, "Check to enable the Tuning Knob");
+            this.chkKnobEnab2.UseVisualStyleBackColor = true;
+            this.chkKnobEnab2.CheckedChanged += new System.EventHandler(this.chkKnobEnab2_CheckedChanged);
+            // 
+            // label229
+            // 
+            this.label229.AutoSize = true;
+            this.label229.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
+            this.label229.ForeColor = System.Drawing.Color.Navy;
+            this.label229.Location = new System.Drawing.Point(137, 21);
+            this.label229.Name = "label229";
+            this.label229.Size = new System.Drawing.Size(26, 13);
+            this.label229.TabIndex = 103;
+            this.label229.Text = "Port";
+            this.label229.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
+            // cboKnobPort2
+            // 
+            this.cboKnobPort2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
+            this.cboKnobPort2.ForeColor = System.Drawing.SystemColors.WindowText;
+            this.cboKnobPort2.FormattingEnabled = true;
+            this.cboKnobPort2.Location = new System.Drawing.Point(66, 16);
+            this.cboKnobPort2.Name = "cboKnobPort2";
+            this.cboKnobPort2.Size = new System.Drawing.Size(69, 21);
+            this.cboKnobPort2.TabIndex = 101;
+            this.toolTip1.SetToolTip(this.cboKnobPort2, "Serial Port for 2nd knob (see docs).");
+            this.cboKnobPort2.SelectedIndexChanged += new System.EventHandler(this.cboKnobPort2_SelectedIndexChanged);
             // 
             // label228
             // 
             this.label228.AutoSize = true;
             this.label228.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
             this.label228.ForeColor = System.Drawing.Color.Navy;
-            this.label228.Location = new System.Drawing.Point(173, 9);
+            this.label228.Location = new System.Drawing.Point(157, 9);
             this.label228.Name = "label228";
             this.label228.Size = new System.Drawing.Size(57, 13);
             this.label228.TabIndex = 100;
@@ -2533,7 +2592,7 @@ namespace DataDecoder
             this.lblZR.AutoSize = true;
             this.lblZR.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
             this.lblZR.ForeColor = System.Drawing.Color.Navy;
-            this.lblZR.Location = new System.Drawing.Point(257, 125);
+            this.lblZR.Location = new System.Drawing.Point(257, 130);
             this.lblZR.Name = "lblZR";
             this.lblZR.Size = new System.Drawing.Size(22, 13);
             this.lblZR.TabIndex = 98;
@@ -2562,7 +2621,7 @@ namespace DataDecoder
             "500 KhZ",
             "1 MhZ",
             "10 MhZ"});
-            this.cboTstep.Location = new System.Drawing.Point(174, 24);
+            this.cboTstep.Location = new System.Drawing.Point(158, 24);
             this.cboTstep.Name = "cboTstep";
             this.cboTstep.Size = new System.Drawing.Size(69, 21);
             this.cboTstep.TabIndex = 99;
@@ -2574,7 +2633,7 @@ namespace DataDecoder
             this.txtZR.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.txtZR.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtZR.ForeColor = System.Drawing.SystemColors.WindowText;
-            this.txtZR.Location = new System.Drawing.Point(227, 121);
+            this.txtZR.Location = new System.Drawing.Point(227, 126);
             this.txtZR.MaxLength = 2;
             this.txtZR.Name = "txtZR";
             this.txtZR.Size = new System.Drawing.Size(28, 20);
@@ -2590,7 +2649,7 @@ namespace DataDecoder
             this.lblZL.AutoSize = true;
             this.lblZL.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
             this.lblZL.ForeColor = System.Drawing.Color.Navy;
-            this.lblZL.Location = new System.Drawing.Point(188, 125);
+            this.lblZL.Location = new System.Drawing.Point(188, 130);
             this.lblZL.Name = "lblZL";
             this.lblZL.Size = new System.Drawing.Size(20, 13);
             this.lblZL.TabIndex = 96;
@@ -2603,7 +2662,7 @@ namespace DataDecoder
             this.txtZL.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.txtZL.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtZL.ForeColor = System.Drawing.SystemColors.WindowText;
-            this.txtZL.Location = new System.Drawing.Point(158, 121);
+            this.txtZL.Location = new System.Drawing.Point(158, 126);
             this.txtZL.MaxLength = 2;
             this.txtZL.Name = "txtZL";
             this.txtZL.Size = new System.Drawing.Size(28, 20);
@@ -2619,7 +2678,7 @@ namespace DataDecoder
             this.lblZC.AutoSize = true;
             this.lblZC.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
             this.lblZC.ForeColor = System.Drawing.Color.Navy;
-            this.lblZC.Location = new System.Drawing.Point(118, 125);
+            this.lblZC.Location = new System.Drawing.Point(118, 130);
             this.lblZC.Name = "lblZC";
             this.lblZC.Size = new System.Drawing.Size(21, 13);
             this.lblZC.TabIndex = 94;
@@ -2632,7 +2691,7 @@ namespace DataDecoder
             this.txtZC.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.txtZC.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtZC.ForeColor = System.Drawing.SystemColors.WindowText;
-            this.txtZC.Location = new System.Drawing.Point(88, 121);
+            this.txtZC.Location = new System.Drawing.Point(88, 126);
             this.txtZC.MaxLength = 2;
             this.txtZC.Name = "txtZC";
             this.txtZC.Size = new System.Drawing.Size(28, 20);
@@ -2648,7 +2707,7 @@ namespace DataDecoder
             this.chkKnobAdv.AutoSize = true;
             this.chkKnobAdv.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
             this.chkKnobAdv.ForeColor = System.Drawing.Color.Navy;
-            this.chkKnobAdv.Location = new System.Drawing.Point(17, 123);
+            this.chkKnobAdv.Location = new System.Drawing.Point(17, 128);
             this.chkKnobAdv.Name = "chkKnobAdv";
             this.chkKnobAdv.Size = new System.Drawing.Size(56, 17);
             this.chkKnobAdv.TabIndex = 92;
@@ -2668,7 +2727,7 @@ namespace DataDecoder
             "Split On/Off",
             "Clear RIT",
             "Clear XIT"});
-            this.cboKnobBDC.Location = new System.Drawing.Point(203, 94);
+            this.cboKnobBDC.Location = new System.Drawing.Point(203, 99);
             this.cboKnobBDC.Name = "cboKnobBDC";
             this.cboKnobBDC.Size = new System.Drawing.Size(90, 21);
             this.cboKnobBDC.TabIndex = 90;
@@ -2684,8 +2743,9 @@ namespace DataDecoder
             "Tune VFO A",
             "Tune VFO B",
             "Tune RIT",
-            "Tune XIT"});
-            this.cboKnobBOn.Location = new System.Drawing.Point(17, 94);
+            "Tune XIT",
+            "Audio Gain"});
+            this.cboKnobBOn.Location = new System.Drawing.Point(17, 99);
             this.cboKnobBOn.Name = "cboKnobBOn";
             this.cboKnobBOn.Size = new System.Drawing.Size(90, 21);
             this.cboKnobBOn.TabIndex = 89;
@@ -2702,8 +2762,9 @@ namespace DataDecoder
             "Tune VFO A",
             "Tune VFO B",
             "Tune RIT",
-            "Tune XIT"});
-            this.cboKnobBOff.Location = new System.Drawing.Point(110, 94);
+            "Tune XIT",
+            "Audio Gain"});
+            this.cboKnobBOff.Location = new System.Drawing.Point(110, 99);
             this.cboKnobBOff.Name = "cboKnobBOff";
             this.cboKnobBOff.Size = new System.Drawing.Size(90, 21);
             this.cboKnobBOff.TabIndex = 88;
@@ -2715,7 +2776,7 @@ namespace DataDecoder
             this.label221.AutoSize = true;
             this.label221.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
             this.label221.ForeColor = System.Drawing.Color.Navy;
-            this.label221.Location = new System.Drawing.Point(2, 97);
+            this.label221.Location = new System.Drawing.Point(2, 102);
             this.label221.Name = "label221";
             this.label221.Size = new System.Drawing.Size(14, 13);
             this.label221.TabIndex = 86;
@@ -2727,7 +2788,7 @@ namespace DataDecoder
             this.label220.AutoSize = true;
             this.label220.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
             this.label220.ForeColor = System.Drawing.Color.Navy;
-            this.label220.Location = new System.Drawing.Point(2, 71);
+            this.label220.Location = new System.Drawing.Point(2, 76);
             this.label220.Name = "label220";
             this.label220.Size = new System.Drawing.Size(14, 13);
             this.label220.TabIndex = 85;
@@ -2739,7 +2800,7 @@ namespace DataDecoder
             this.label219.AutoSize = true;
             this.label219.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
             this.label219.ForeColor = System.Drawing.Color.Navy;
-            this.label219.Location = new System.Drawing.Point(221, 52);
+            this.label219.Location = new System.Drawing.Point(221, 57);
             this.label219.Name = "label219";
             this.label219.Size = new System.Drawing.Size(41, 13);
             this.label219.TabIndex = 84;
@@ -2751,7 +2812,7 @@ namespace DataDecoder
             this.label218.AutoSize = true;
             this.label218.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
             this.label218.ForeColor = System.Drawing.Color.Navy;
-            this.label218.Location = new System.Drawing.Point(137, 52);
+            this.label218.Location = new System.Drawing.Point(137, 57);
             this.label218.Name = "label218";
             this.label218.Size = new System.Drawing.Size(21, 13);
             this.label218.TabIndex = 83;
@@ -2763,7 +2824,7 @@ namespace DataDecoder
             this.label217.AutoSize = true;
             this.label217.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
             this.label217.ForeColor = System.Drawing.Color.Navy;
-            this.label217.Location = new System.Drawing.Point(45, 52);
+            this.label217.Location = new System.Drawing.Point(45, 57);
             this.label217.Name = "label217";
             this.label217.Size = new System.Drawing.Size(21, 13);
             this.label217.TabIndex = 82;
@@ -2782,7 +2843,7 @@ namespace DataDecoder
             "Split On/Off",
             "Clear RIT",
             "Clear XIT"});
-            this.cboKnobADC.Location = new System.Drawing.Point(203, 67);
+            this.cboKnobADC.Location = new System.Drawing.Point(203, 72);
             this.cboKnobADC.Name = "cboKnobADC";
             this.cboKnobADC.Size = new System.Drawing.Size(90, 21);
             this.cboKnobADC.TabIndex = 81;
@@ -2798,8 +2859,9 @@ namespace DataDecoder
             "Tune VFO A",
             "Tune VFO B",
             "Tune RIT",
-            "Tune XIT"});
-            this.cboKnobAOn.Location = new System.Drawing.Point(17, 67);
+            "Tune XIT",
+            "Audio Gain"});
+            this.cboKnobAOn.Location = new System.Drawing.Point(17, 72);
             this.cboKnobAOn.Name = "cboKnobAOn";
             this.cboKnobAOn.Size = new System.Drawing.Size(90, 21);
             this.cboKnobAOn.TabIndex = 80;
@@ -2816,8 +2878,9 @@ namespace DataDecoder
             "Tune VFO A",
             "Tune VFO B",
             "Tune RIT",
-            "Tune XIT"});
-            this.cboKnobAOff.Location = new System.Drawing.Point(110, 67);
+            "Tune XIT",
+            "Audio Gain"});
+            this.cboKnobAOff.Location = new System.Drawing.Point(110, 72);
             this.cboKnobAOff.Name = "cboKnobAOff";
             this.cboKnobAOff.Size = new System.Drawing.Size(90, 21);
             this.cboKnobAOff.TabIndex = 79;
@@ -2829,7 +2892,7 @@ namespace DataDecoder
             this.label216.AutoSize = true;
             this.label216.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
             this.label216.ForeColor = System.Drawing.Color.Navy;
-            this.label216.Location = new System.Drawing.Point(98, 9);
+            this.label216.Location = new System.Drawing.Point(89, 9);
             this.label216.Name = "label216";
             this.label216.Size = new System.Drawing.Size(26, 13);
             this.label216.TabIndex = 78;
@@ -2841,7 +2904,7 @@ namespace DataDecoder
             this.cboKnobPort.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
             this.cboKnobPort.ForeColor = System.Drawing.SystemColors.WindowText;
             this.cboKnobPort.FormattingEnabled = true;
-            this.cboKnobPort.Location = new System.Drawing.Point(86, 24);
+            this.cboKnobPort.Location = new System.Drawing.Point(77, 24);
             this.cboKnobPort.Name = "cboKnobPort";
             this.cboKnobPort.Size = new System.Drawing.Size(69, 21);
             this.cboKnobPort.TabIndex = 75;
@@ -2853,7 +2916,7 @@ namespace DataDecoder
             this.chkKnobEnab.AutoSize = true;
             this.chkKnobEnab.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
             this.chkKnobEnab.ForeColor = System.Drawing.Color.Navy;
-            this.chkKnobEnab.Location = new System.Drawing.Point(17, 31);
+            this.chkKnobEnab.Location = new System.Drawing.Point(17, 27);
             this.chkKnobEnab.Name = "chkKnobEnab";
             this.chkKnobEnab.Size = new System.Drawing.Size(59, 17);
             this.chkKnobEnab.TabIndex = 76;
@@ -4050,6 +4113,7 @@ namespace DataDecoder
             this.tabAmp.Controls.Add(this.grpPTT);
             this.tabAmp.Controls.Add(this.groupBox13);
             this.tabAmp.Controls.Add(this.grpAmp);
+            this.tabAmp.Controls.Add(this.grpAmpBands);
             this.tabAmp.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.25F);
             this.tabAmp.Location = new System.Drawing.Point(4, 22);
             this.tabAmp.Name = "tabAmp";
@@ -5282,6 +5346,212 @@ namespace DataDecoder
             this.btnPwr.UseVisualStyleBackColor = false;
             this.btnPwr.Click += new System.EventHandler(this.btnPwr_Click);
             // 
+            // grpAmpBands
+            // 
+            this.grpAmpBands.Controls.Add(this.btnClrAll);
+            this.grpAmpBands.Controls.Add(this.chkAmp6);
+            this.grpAmpBands.Controls.Add(this.chkAmp80);
+            this.grpAmpBands.Controls.Add(this.chkAmp160);
+            this.grpAmpBands.Controls.Add(this.chkAmp30);
+            this.grpAmpBands.Controls.Add(this.btnCkAll);
+            this.grpAmpBands.Controls.Add(this.chkAmp17);
+            this.grpAmpBands.Controls.Add(this.chkAmp40);
+            this.grpAmpBands.Controls.Add(this.chkAmp10);
+            this.grpAmpBands.Controls.Add(this.chkAmp12);
+            this.grpAmpBands.Controls.Add(this.chkAmp20);
+            this.grpAmpBands.Controls.Add(this.chkAmp15);
+            this.grpAmpBands.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.grpAmpBands.ForeColor = System.Drawing.Color.Blue;
+            this.grpAmpBands.Location = new System.Drawing.Point(248, 81);
+            this.grpAmpBands.Name = "grpAmpBands";
+            this.grpAmpBands.Size = new System.Drawing.Size(163, 77);
+            this.grpAmpBands.TabIndex = 109;
+            this.grpAmpBands.TabStop = false;
+            this.grpAmpBands.Text = "Amp Bands";
+            this.toolTip1.SetToolTip(this.grpAmpBands, "Select bands to enable amplifier usage (rqd for Oper/Stby button).");
+            // 
+            // btnClrAll
+            // 
+            this.btnClrAll.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnClrAll.BackColor = System.Drawing.SystemColors.Control;
+            this.btnClrAll.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            this.btnClrAll.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnClrAll.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.btnClrAll.Location = new System.Drawing.Point(123, 55);
+            this.btnClrAll.Name = "btnClrAll";
+            this.btnClrAll.Size = new System.Drawing.Size(30, 15);
+            this.btnClrAll.TabIndex = 107;
+            this.btnClrAll.Text = "None";
+            this.toolTip1.SetToolTip(this.btnClrAll, "Clears all bands.");
+            this.btnClrAll.UseVisualStyleBackColor = false;
+            this.btnClrAll.Click += new System.EventHandler(this.btnClrAll_Click);
+            // 
+            // chkAmp6
+            // 
+            this.chkAmp6.AutoSize = true;
+            this.chkAmp6.BackColor = System.Drawing.Color.Transparent;
+            this.chkAmp6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chkAmp6.ForeColor = System.Drawing.Color.Navy;
+            this.chkAmp6.Location = new System.Drawing.Point(49, 52);
+            this.chkAmp6.Name = "chkAmp6";
+            this.chkAmp6.Size = new System.Drawing.Size(32, 17);
+            this.chkAmp6.TabIndex = 105;
+            this.chkAmp6.Text = "6";
+            this.toolTip1.SetToolTip(this.chkAmp6, "Select to enable Amp on this band.");
+            this.chkAmp6.UseVisualStyleBackColor = true;
+            this.chkAmp6.CheckedChanged += new System.EventHandler(this.chkAmp6_CheckedChanged);
+            // 
+            // chkAmp80
+            // 
+            this.chkAmp80.AutoSize = true;
+            this.chkAmp80.BackColor = System.Drawing.Color.Transparent;
+            this.chkAmp80.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chkAmp80.ForeColor = System.Drawing.Color.Navy;
+            this.chkAmp80.Location = new System.Drawing.Point(49, 16);
+            this.chkAmp80.Name = "chkAmp80";
+            this.chkAmp80.Size = new System.Drawing.Size(38, 17);
+            this.chkAmp80.TabIndex = 98;
+            this.chkAmp80.Text = "80";
+            this.toolTip1.SetToolTip(this.chkAmp80, "Select to enable Amp on this band.");
+            this.chkAmp80.UseVisualStyleBackColor = true;
+            this.chkAmp80.CheckedChanged += new System.EventHandler(this.chkAmp80_CheckedChanged);
+            // 
+            // chkAmp160
+            // 
+            this.chkAmp160.AutoSize = true;
+            this.chkAmp160.BackColor = System.Drawing.Color.Transparent;
+            this.chkAmp160.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chkAmp160.ForeColor = System.Drawing.Color.Navy;
+            this.chkAmp160.Location = new System.Drawing.Point(5, 16);
+            this.chkAmp160.Name = "chkAmp160";
+            this.chkAmp160.Size = new System.Drawing.Size(44, 17);
+            this.chkAmp160.TabIndex = 96;
+            this.chkAmp160.Text = "160";
+            this.toolTip1.SetToolTip(this.chkAmp160, "Select to enable Amp on this band.");
+            this.chkAmp160.UseVisualStyleBackColor = true;
+            this.chkAmp160.CheckedChanged += new System.EventHandler(this.chkAmp160_CheckedChanged);
+            // 
+            // chkAmp30
+            // 
+            this.chkAmp30.AutoSize = true;
+            this.chkAmp30.BackColor = System.Drawing.Color.Transparent;
+            this.chkAmp30.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chkAmp30.ForeColor = System.Drawing.Color.Navy;
+            this.chkAmp30.Location = new System.Drawing.Point(125, 16);
+            this.chkAmp30.Name = "chkAmp30";
+            this.chkAmp30.Size = new System.Drawing.Size(38, 17);
+            this.chkAmp30.TabIndex = 103;
+            this.chkAmp30.Text = "30";
+            this.toolTip1.SetToolTip(this.chkAmp30, "Select to enable Amp on this band.");
+            this.chkAmp30.UseVisualStyleBackColor = true;
+            this.chkAmp30.CheckedChanged += new System.EventHandler(this.chkAmp30_CheckedChanged);
+            // 
+            // btnCkAll
+            // 
+            this.btnCkAll.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.btnCkAll.BackColor = System.Drawing.SystemColors.Control;
+            this.btnCkAll.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            this.btnCkAll.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnCkAll.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.btnCkAll.Location = new System.Drawing.Point(87, 55);
+            this.btnCkAll.Name = "btnCkAll";
+            this.btnCkAll.Size = new System.Drawing.Size(30, 15);
+            this.btnCkAll.TabIndex = 108;
+            this.btnCkAll.Text = "All";
+            this.toolTip1.SetToolTip(this.btnCkAll, "Checks all bands.");
+            this.btnCkAll.UseVisualStyleBackColor = false;
+            this.btnCkAll.Click += new System.EventHandler(this.btnCkAll_Click);
+            // 
+            // chkAmp17
+            // 
+            this.chkAmp17.AutoSize = true;
+            this.chkAmp17.BackColor = System.Drawing.Color.Transparent;
+            this.chkAmp17.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chkAmp17.ForeColor = System.Drawing.Color.Navy;
+            this.chkAmp17.Location = new System.Drawing.Point(49, 34);
+            this.chkAmp17.Name = "chkAmp17";
+            this.chkAmp17.Size = new System.Drawing.Size(38, 17);
+            this.chkAmp17.TabIndex = 99;
+            this.chkAmp17.Text = "17";
+            this.toolTip1.SetToolTip(this.chkAmp17, "Select to enable Amp on this band.");
+            this.chkAmp17.UseVisualStyleBackColor = true;
+            this.chkAmp17.CheckedChanged += new System.EventHandler(this.chkAmp17_CheckedChanged);
+            // 
+            // chkAmp40
+            // 
+            this.chkAmp40.AutoSize = true;
+            this.chkAmp40.BackColor = System.Drawing.Color.Transparent;
+            this.chkAmp40.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chkAmp40.ForeColor = System.Drawing.Color.Navy;
+            this.chkAmp40.Location = new System.Drawing.Point(87, 16);
+            this.chkAmp40.Name = "chkAmp40";
+            this.chkAmp40.Size = new System.Drawing.Size(38, 17);
+            this.chkAmp40.TabIndex = 101;
+            this.chkAmp40.Text = "40";
+            this.toolTip1.SetToolTip(this.chkAmp40, "Select to enable Amp on this band.");
+            this.chkAmp40.UseVisualStyleBackColor = true;
+            this.chkAmp40.CheckedChanged += new System.EventHandler(this.chkAmp40_CheckedChanged);
+            // 
+            // chkAmp10
+            // 
+            this.chkAmp10.AutoSize = true;
+            this.chkAmp10.BackColor = System.Drawing.Color.Transparent;
+            this.chkAmp10.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chkAmp10.ForeColor = System.Drawing.Color.Navy;
+            this.chkAmp10.Location = new System.Drawing.Point(5, 52);
+            this.chkAmp10.Name = "chkAmp10";
+            this.chkAmp10.Size = new System.Drawing.Size(38, 17);
+            this.chkAmp10.TabIndex = 104;
+            this.chkAmp10.Text = "10";
+            this.toolTip1.SetToolTip(this.chkAmp10, "Select to enable Amp on this band.");
+            this.chkAmp10.UseVisualStyleBackColor = true;
+            this.chkAmp10.CheckedChanged += new System.EventHandler(this.chkAmp10_CheckedChanged);
+            // 
+            // chkAmp12
+            // 
+            this.chkAmp12.AutoSize = true;
+            this.chkAmp12.BackColor = System.Drawing.Color.Transparent;
+            this.chkAmp12.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chkAmp12.ForeColor = System.Drawing.Color.Navy;
+            this.chkAmp12.Location = new System.Drawing.Point(125, 34);
+            this.chkAmp12.Name = "chkAmp12";
+            this.chkAmp12.Size = new System.Drawing.Size(38, 17);
+            this.chkAmp12.TabIndex = 102;
+            this.chkAmp12.Text = "12";
+            this.toolTip1.SetToolTip(this.chkAmp12, "Select to enable Amp on this band.");
+            this.chkAmp12.UseVisualStyleBackColor = true;
+            this.chkAmp12.CheckedChanged += new System.EventHandler(this.chkAmp12_CheckedChanged);
+            // 
+            // chkAmp20
+            // 
+            this.chkAmp20.AutoSize = true;
+            this.chkAmp20.BackColor = System.Drawing.Color.Transparent;
+            this.chkAmp20.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chkAmp20.ForeColor = System.Drawing.Color.Navy;
+            this.chkAmp20.Location = new System.Drawing.Point(5, 34);
+            this.chkAmp20.Name = "chkAmp20";
+            this.chkAmp20.Size = new System.Drawing.Size(38, 17);
+            this.chkAmp20.TabIndex = 97;
+            this.chkAmp20.Text = "20";
+            this.toolTip1.SetToolTip(this.chkAmp20, "Select to enable Amp on this band.");
+            this.chkAmp20.UseVisualStyleBackColor = true;
+            this.chkAmp20.CheckedChanged += new System.EventHandler(this.chkAmp20_CheckedChanged);
+            // 
+            // chkAmp15
+            // 
+            this.chkAmp15.AutoSize = true;
+            this.chkAmp15.BackColor = System.Drawing.Color.Transparent;
+            this.chkAmp15.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chkAmp15.ForeColor = System.Drawing.Color.Navy;
+            this.chkAmp15.Location = new System.Drawing.Point(87, 34);
+            this.chkAmp15.Name = "chkAmp15";
+            this.chkAmp15.Size = new System.Drawing.Size(38, 17);
+            this.chkAmp15.TabIndex = 100;
+            this.chkAmp15.Text = "15";
+            this.toolTip1.SetToolTip(this.chkAmp15, "Select to enable Amp on this band.");
+            this.chkAmp15.UseVisualStyleBackColor = true;
+            this.chkAmp15.CheckedChanged += new System.EventHandler(this.chkAmp15_CheckedChanged);
+            // 
             // tabOther
             // 
             this.tabOther.Controls.Add(this.grpMacSw);
@@ -6496,9 +6766,9 @@ namespace DataDecoder
             // 
             this.dgm.AllowUserToAddRows = false;
             this.dgm.AllowUserToDeleteRows = false;
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.White;
-            this.dgm.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.White;
+            this.dgm.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle2;
             this.dgm.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.dgm.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgm.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
@@ -11699,9 +11969,9 @@ namespace DataDecoder
             // 
             // tabSetup
             // 
+            this.tabSetup.Controls.Add(this.chkShortCut);
             this.tabSetup.Controls.Add(this.chkCwTx);
             this.tabSetup.Controls.Add(this.groupBox16);
-            this.tabSetup.Controls.Add(this.grpAmpBands);
             this.tabSetup.Controls.Add(this.chkOnTop);
             this.tabSetup.Controls.Add(this.chkNoBdChg);
             this.tabSetup.Controls.Add(this.chkModeChg);
@@ -11718,12 +11988,26 @@ namespace DataDecoder
             this.tabSetup.Text = "Setup";
             this.tabSetup.UseVisualStyleBackColor = true;
             // 
+            // chkShortCut
+            // 
+            this.chkShortCut.AutoSize = true;
+            this.chkShortCut.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
+            this.chkShortCut.ForeColor = System.Drawing.Color.Navy;
+            this.chkShortCut.Location = new System.Drawing.Point(156, 250);
+            this.chkShortCut.Name = "chkShortCut";
+            this.chkShortCut.Size = new System.Drawing.Size(113, 17);
+            this.chkShortCut.TabIndex = 111;
+            this.chkShortCut.Text = "Disable Short-Cuts";
+            this.toolTip1.SetToolTip(this.chkShortCut, "Select to Disable Short-Cut keys.");
+            this.chkShortCut.UseVisualStyleBackColor = true;
+            this.chkShortCut.CheckedChanged += new System.EventHandler(this.chkShortCut_CheckedChanged);
+            // 
             // chkCwTx
             // 
             this.chkCwTx.AutoSize = true;
             this.chkCwTx.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
             this.chkCwTx.ForeColor = System.Drawing.Color.Navy;
-            this.chkCwTx.Location = new System.Drawing.Point(86, 289);
+            this.chkCwTx.Location = new System.Drawing.Point(156, 270);
             this.chkCwTx.Name = "chkCwTx";
             this.chkCwTx.Size = new System.Drawing.Size(91, 17);
             this.chkCwTx.TabIndex = 110;
@@ -11793,212 +12077,6 @@ namespace DataDecoder
             this.cboPwrPort.TabIndex = 34;
             this.toolTip1.SetToolTip(this.cboPwrPort, "Flex On/Off control port (uses RTS line, fixed 9600 8N1).");
             this.cboPwrPort.SelectedIndexChanged += new System.EventHandler(this.cboPwrPort_SelectedIndexChanged);
-            // 
-            // grpAmpBands
-            // 
-            this.grpAmpBands.Controls.Add(this.btnClrAll);
-            this.grpAmpBands.Controls.Add(this.btnCkAll);
-            this.grpAmpBands.Controls.Add(this.chkAmp6);
-            this.grpAmpBands.Controls.Add(this.chkAmp80);
-            this.grpAmpBands.Controls.Add(this.chkAmp160);
-            this.grpAmpBands.Controls.Add(this.chkAmp30);
-            this.grpAmpBands.Controls.Add(this.chkAmp17);
-            this.grpAmpBands.Controls.Add(this.chkAmp40);
-            this.grpAmpBands.Controls.Add(this.chkAmp10);
-            this.grpAmpBands.Controls.Add(this.chkAmp12);
-            this.grpAmpBands.Controls.Add(this.chkAmp20);
-            this.grpAmpBands.Controls.Add(this.chkAmp15);
-            this.grpAmpBands.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.grpAmpBands.ForeColor = System.Drawing.Color.Blue;
-            this.grpAmpBands.Location = new System.Drawing.Point(185, 248);
-            this.grpAmpBands.Name = "grpAmpBands";
-            this.grpAmpBands.Size = new System.Drawing.Size(241, 54);
-            this.grpAmpBands.TabIndex = 109;
-            this.grpAmpBands.TabStop = false;
-            this.grpAmpBands.Text = "Amp Bands";
-            this.toolTip1.SetToolTip(this.grpAmpBands, "Select bands to enable amplifier usage (rqd for Oper/Stby button).");
-            // 
-            // btnClrAll
-            // 
-            this.btnClrAll.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.btnClrAll.BackColor = System.Drawing.SystemColors.Control;
-            this.btnClrAll.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.btnClrAll.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnClrAll.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.btnClrAll.Location = new System.Drawing.Point(205, 33);
-            this.btnClrAll.Name = "btnClrAll";
-            this.btnClrAll.Size = new System.Drawing.Size(30, 15);
-            this.btnClrAll.TabIndex = 107;
-            this.btnClrAll.Text = "None";
-            this.toolTip1.SetToolTip(this.btnClrAll, "Clears all bands.");
-            this.btnClrAll.UseVisualStyleBackColor = false;
-            this.btnClrAll.Click += new System.EventHandler(this.btnClrAll_Click);
-            // 
-            // btnCkAll
-            // 
-            this.btnCkAll.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.btnCkAll.BackColor = System.Drawing.SystemColors.Control;
-            this.btnCkAll.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.btnCkAll.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnCkAll.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.btnCkAll.Location = new System.Drawing.Point(205, 12);
-            this.btnCkAll.Name = "btnCkAll";
-            this.btnCkAll.Size = new System.Drawing.Size(30, 15);
-            this.btnCkAll.TabIndex = 108;
-            this.btnCkAll.Text = "All";
-            this.toolTip1.SetToolTip(this.btnCkAll, "Checks all bands.");
-            this.btnCkAll.UseVisualStyleBackColor = false;
-            this.btnCkAll.Click += new System.EventHandler(this.btnCkAll_Click);
-            // 
-            // chkAmp6
-            // 
-            this.chkAmp6.AutoSize = true;
-            this.chkAmp6.BackColor = System.Drawing.Color.Transparent;
-            this.chkAmp6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chkAmp6.ForeColor = System.Drawing.Color.Navy;
-            this.chkAmp6.Location = new System.Drawing.Point(168, 32);
-            this.chkAmp6.Name = "chkAmp6";
-            this.chkAmp6.Size = new System.Drawing.Size(32, 17);
-            this.chkAmp6.TabIndex = 105;
-            this.chkAmp6.Text = "6";
-            this.toolTip1.SetToolTip(this.chkAmp6, "Select to enable Amp on this band.");
-            this.chkAmp6.UseVisualStyleBackColor = true;
-            this.chkAmp6.CheckedChanged += new System.EventHandler(this.chkAmp6_CheckedChanged);
-            // 
-            // chkAmp80
-            // 
-            this.chkAmp80.AutoSize = true;
-            this.chkAmp80.BackColor = System.Drawing.Color.Transparent;
-            this.chkAmp80.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chkAmp80.ForeColor = System.Drawing.Color.Navy;
-            this.chkAmp80.Location = new System.Drawing.Point(51, 16);
-            this.chkAmp80.Name = "chkAmp80";
-            this.chkAmp80.Size = new System.Drawing.Size(38, 17);
-            this.chkAmp80.TabIndex = 98;
-            this.chkAmp80.Text = "80";
-            this.toolTip1.SetToolTip(this.chkAmp80, "Select to enable Amp on this band.");
-            this.chkAmp80.UseVisualStyleBackColor = true;
-            this.chkAmp80.CheckedChanged += new System.EventHandler(this.chkAmp80_CheckedChanged);
-            // 
-            // chkAmp160
-            // 
-            this.chkAmp160.AutoSize = true;
-            this.chkAmp160.BackColor = System.Drawing.Color.Transparent;
-            this.chkAmp160.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chkAmp160.ForeColor = System.Drawing.Color.Navy;
-            this.chkAmp160.Location = new System.Drawing.Point(5, 16);
-            this.chkAmp160.Name = "chkAmp160";
-            this.chkAmp160.Size = new System.Drawing.Size(44, 17);
-            this.chkAmp160.TabIndex = 96;
-            this.chkAmp160.Text = "160";
-            this.toolTip1.SetToolTip(this.chkAmp160, "Select to enable Amp on this band.");
-            this.chkAmp160.UseVisualStyleBackColor = true;
-            this.chkAmp160.CheckedChanged += new System.EventHandler(this.chkAmp160_CheckedChanged);
-            // 
-            // chkAmp30
-            // 
-            this.chkAmp30.AutoSize = true;
-            this.chkAmp30.BackColor = System.Drawing.Color.Transparent;
-            this.chkAmp30.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chkAmp30.ForeColor = System.Drawing.Color.Navy;
-            this.chkAmp30.Location = new System.Drawing.Point(129, 16);
-            this.chkAmp30.Name = "chkAmp30";
-            this.chkAmp30.Size = new System.Drawing.Size(38, 17);
-            this.chkAmp30.TabIndex = 103;
-            this.chkAmp30.Text = "30";
-            this.toolTip1.SetToolTip(this.chkAmp30, "Select to enable Amp on this band.");
-            this.chkAmp30.UseVisualStyleBackColor = true;
-            this.chkAmp30.CheckedChanged += new System.EventHandler(this.chkAmp30_CheckedChanged);
-            // 
-            // chkAmp17
-            // 
-            this.chkAmp17.AutoSize = true;
-            this.chkAmp17.BackColor = System.Drawing.Color.Transparent;
-            this.chkAmp17.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chkAmp17.ForeColor = System.Drawing.Color.Navy;
-            this.chkAmp17.Location = new System.Drawing.Point(5, 32);
-            this.chkAmp17.Name = "chkAmp17";
-            this.chkAmp17.Size = new System.Drawing.Size(38, 17);
-            this.chkAmp17.TabIndex = 99;
-            this.chkAmp17.Text = "17";
-            this.toolTip1.SetToolTip(this.chkAmp17, "Select to enable Amp on this band.");
-            this.chkAmp17.UseVisualStyleBackColor = true;
-            this.chkAmp17.CheckedChanged += new System.EventHandler(this.chkAmp17_CheckedChanged);
-            // 
-            // chkAmp40
-            // 
-            this.chkAmp40.AutoSize = true;
-            this.chkAmp40.BackColor = System.Drawing.Color.Transparent;
-            this.chkAmp40.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chkAmp40.ForeColor = System.Drawing.Color.Navy;
-            this.chkAmp40.Location = new System.Drawing.Point(90, 16);
-            this.chkAmp40.Name = "chkAmp40";
-            this.chkAmp40.Size = new System.Drawing.Size(38, 17);
-            this.chkAmp40.TabIndex = 101;
-            this.chkAmp40.Text = "40";
-            this.toolTip1.SetToolTip(this.chkAmp40, "Select to enable Amp on this band.");
-            this.chkAmp40.UseVisualStyleBackColor = true;
-            this.chkAmp40.CheckedChanged += new System.EventHandler(this.chkAmp40_CheckedChanged);
-            // 
-            // chkAmp10
-            // 
-            this.chkAmp10.AutoSize = true;
-            this.chkAmp10.BackColor = System.Drawing.Color.Transparent;
-            this.chkAmp10.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chkAmp10.ForeColor = System.Drawing.Color.Navy;
-            this.chkAmp10.Location = new System.Drawing.Point(129, 32);
-            this.chkAmp10.Name = "chkAmp10";
-            this.chkAmp10.Size = new System.Drawing.Size(38, 17);
-            this.chkAmp10.TabIndex = 104;
-            this.chkAmp10.Text = "10";
-            this.toolTip1.SetToolTip(this.chkAmp10, "Select to enable Amp on this band.");
-            this.chkAmp10.UseVisualStyleBackColor = true;
-            this.chkAmp10.CheckedChanged += new System.EventHandler(this.chkAmp10_CheckedChanged);
-            // 
-            // chkAmp12
-            // 
-            this.chkAmp12.AutoSize = true;
-            this.chkAmp12.BackColor = System.Drawing.Color.Transparent;
-            this.chkAmp12.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chkAmp12.ForeColor = System.Drawing.Color.Navy;
-            this.chkAmp12.Location = new System.Drawing.Point(90, 32);
-            this.chkAmp12.Name = "chkAmp12";
-            this.chkAmp12.Size = new System.Drawing.Size(38, 17);
-            this.chkAmp12.TabIndex = 102;
-            this.chkAmp12.Text = "12";
-            this.toolTip1.SetToolTip(this.chkAmp12, "Select to enable Amp on this band.");
-            this.chkAmp12.UseVisualStyleBackColor = true;
-            this.chkAmp12.CheckedChanged += new System.EventHandler(this.chkAmp12_CheckedChanged);
-            // 
-            // chkAmp20
-            // 
-            this.chkAmp20.AutoSize = true;
-            this.chkAmp20.BackColor = System.Drawing.Color.Transparent;
-            this.chkAmp20.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chkAmp20.ForeColor = System.Drawing.Color.Navy;
-            this.chkAmp20.Location = new System.Drawing.Point(168, 16);
-            this.chkAmp20.Name = "chkAmp20";
-            this.chkAmp20.Size = new System.Drawing.Size(38, 17);
-            this.chkAmp20.TabIndex = 97;
-            this.chkAmp20.Text = "20";
-            this.toolTip1.SetToolTip(this.chkAmp20, "Select to enable Amp on this band.");
-            this.chkAmp20.UseVisualStyleBackColor = true;
-            this.chkAmp20.CheckedChanged += new System.EventHandler(this.chkAmp20_CheckedChanged);
-            // 
-            // chkAmp15
-            // 
-            this.chkAmp15.AutoSize = true;
-            this.chkAmp15.BackColor = System.Drawing.Color.Transparent;
-            this.chkAmp15.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chkAmp15.ForeColor = System.Drawing.Color.Navy;
-            this.chkAmp15.Location = new System.Drawing.Point(51, 32);
-            this.chkAmp15.Name = "chkAmp15";
-            this.chkAmp15.Size = new System.Drawing.Size(38, 17);
-            this.chkAmp15.TabIndex = 100;
-            this.chkAmp15.Text = "15";
-            this.toolTip1.SetToolTip(this.chkAmp15, "Select to enable Amp on this band.");
-            this.chkAmp15.UseVisualStyleBackColor = true;
-            this.chkAmp15.CheckedChanged += new System.EventHandler(this.chkAmp15_CheckedChanged);
             // 
             // chkOnTop
             // 
@@ -15714,7 +15792,7 @@ namespace DataDecoder
             this.aboutToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(436, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(435, 24);
             this.menuStrip1.TabIndex = 70;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -16042,7 +16120,7 @@ namespace DataDecoder
             this.StatusBar});
             this.statusStrip1.Location = new System.Drawing.Point(0, 418);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(436, 22);
+            this.statusStrip1.Size = new System.Drawing.Size(435, 22);
             this.statusStrip1.TabIndex = 71;
             this.statusStrip1.Text = "statusStrip1";
             // 
@@ -16485,13 +16563,18 @@ namespace DataDecoder
             this.toolStripMenuItem26.Text = "Exit";
             this.toolStripMenuItem26.ToolTipText = "Exit DDUtil";
             // 
+            // KnobPort2
+            // 
+            this.KnobPort2.RtsEnable = true;
+            this.KnobPort2.DataReceived += new System.IO.Ports.SerialDataReceivedEventHandler(this.KnobPort2_DataReceived);
+            // 
             // Setup
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.ClientSize = new System.Drawing.Size(436, 440);
+            this.ClientSize = new System.Drawing.Size(435, 440);
             this.ContextMenuStrip = this.contextMenuStrip1;
             this.Controls.Add(this.txtMemVfo);
             this.Controls.Add(this.btnMV);
@@ -16559,6 +16642,8 @@ namespace DataDecoder
             this.tabRCP.PerformLayout();
             this.grpTKnob.ResumeLayout(false);
             this.grpTKnob.PerformLayout();
+            this.groupBox3.ResumeLayout(false);
+            this.groupBox3.PerformLayout();
             this.groupBox7.ResumeLayout(false);
             this.groupBox7.PerformLayout();
             this.tabWatt.ResumeLayout(false);
@@ -16594,6 +16679,8 @@ namespace DataDecoder
             this.groupBox13.PerformLayout();
             this.grpAmp.ResumeLayout(false);
             this.grpAmp.PerformLayout();
+            this.grpAmpBands.ResumeLayout(false);
+            this.grpAmpBands.PerformLayout();
             this.tabOther.ResumeLayout(false);
             this.tabOther.PerformLayout();
             this.grpMacSw.ResumeLayout(false);
@@ -16640,8 +16727,6 @@ namespace DataDecoder
             this.tabSetup.PerformLayout();
             this.groupBox16.ResumeLayout(false);
             this.groupBox16.PerformLayout();
-            this.grpAmpBands.ResumeLayout(false);
-            this.grpAmpBands.PerformLayout();
             this.grpDog.ResumeLayout(false);
             this.grpDog.PerformLayout();
             this.groupBox10.ResumeLayout(false);
@@ -17877,6 +17962,12 @@ namespace DataDecoder
         private TextBox txtCallSign;
         private Label label228;
         private ComboBox cboTstep;
+        private CheckBox chkShortCut;
+        private Label label229;
+        private ComboBox cboKnobPort2;
+        public CheckBox chkKnobEnab2;
+        private GroupBox groupBox3;
+        private System.IO.Ports.SerialPort KnobPort2;
 
     }
 }

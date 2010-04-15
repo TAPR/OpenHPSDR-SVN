@@ -3370,5 +3370,41 @@ namespace DataDecoder.Properties {
                 this["cboTstep"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool chkShortCut {
+            get {
+                return ((bool)(this["chkShortCut"]));
+            }
+            set {
+                this["chkShortCut"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int cboKnobPort2 {
+            get {
+                return ((int)(this["cboKnobPort2"]));
+            }
+            set {
+                this["cboKnobPort2"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool chkKnobEnab2 {
+            get {
+                return ((bool)(this["chkKnobEnab2"]));
+            }
+            set {
+                this["chkKnobEnab2"] = value;
+            }
+        }
     }
 }

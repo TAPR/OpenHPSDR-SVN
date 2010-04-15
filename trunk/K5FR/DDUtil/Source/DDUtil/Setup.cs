@@ -677,6 +677,7 @@ namespace DataDecoder
             tempTimer.Enabled = true;
             chkModeChg.Checked = set.ModeChg;
             chkCwTx.Checked = set.chkCwTx;
+            chkShortCut.Checked = set.chkShortCut;
 
             // setup error log parameters
             ErrorLog.LogFilePath = "ErrorLog.txt";
@@ -1124,6 +1125,15 @@ namespace DataDecoder
 
         #region Form Events
 
+        // the enable short-cuts check box has changed
+        private void chkShortCut_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chkShortCut.Checked)
+            { set.chkShortCut = true; }
+            else
+            { set.chkShortCut = false; }
+            set.Save();
+        }
         // the chkCwTx check box has changed
         private void chkCwTx_CheckedChanged(object sender, EventArgs e)
         {
@@ -5006,72 +5016,75 @@ namespace DataDecoder
         // A key was pressed check for "F" key
         private void Setup_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode == Keys.F1 && e.Modifiers == Keys.Shift)
-            { ProcessMacroButton(13); }
-            else if (e.KeyCode == Keys.F2 && e.Modifiers == Keys.Shift)
-            { ProcessMacroButton(14); }
-            else if (e.KeyCode == Keys.F3 && e.Modifiers == Keys.Shift)
-            { ProcessMacroButton(15); }
-            else if (e.KeyCode == Keys.F4 && e.Modifiers == Keys.Shift)
-            { ProcessMacroButton(16); }
-            else if (e.KeyCode == Keys.F1)
-            { ProcessMacroButton(1); }
-            else if (e.KeyCode == Keys.F2)
-            { ProcessMacroButton(2); }
-            else if (e.KeyCode == Keys.F3)
-            { ProcessMacroButton(3); }
-            else if (e.KeyCode == Keys.F4)
-            { ProcessMacroButton(4); }
-            else if (e.KeyCode == Keys.F5)
-            { ProcessMacroButton(5); }
-            else if (e.KeyCode == Keys.F6)
-            { ProcessMacroButton(6); }
-            else if (e.KeyCode == Keys.F7)
-            { ProcessMacroButton(7); }
-            else if (e.KeyCode == Keys.F8)
-            { ProcessMacroButton(8); }
-            else if (e.KeyCode == Keys.F9)
-            { ProcessMacroButton(9); }
-            else if (e.KeyCode == Keys.F10)
-            { ProcessMacroButton(10); }
-            else if (e.KeyCode == Keys.F11)
-            { ProcessMacroButton(11); }
-            else if (e.KeyCode == Keys.F12)
-            { ProcessMacroButton(12); }
-            else if (e.Control && e.KeyCode == Keys.Oemtilde) // Set Split
-            { btnSplit_Click(null, null); }
-            else if (e.Control && e.KeyCode == Keys.A) // Saves Auto Drive setting
-            { btnDrive_Click(null, null); }
-            else if (e.Control && e.KeyCode == Keys.B) // SteppIR to Bi Direction
-            { rbBiDir.Checked = true; }  
-            else if (e.Control && e.KeyCode == Keys.F) // SteppIR to Forward
-            { rbFwd.Checked = true; }  
-            else if (e.Control && e.KeyCode == Keys.L) // Set drive to low power
-            { LowPower(); }                    
-            else if (e.Control && e.KeyCode == Keys.O) // Toggle PTT
-            { btnByp_Click(null, null); }  
-            else if (e.Control && e.KeyCode == Keys.R) // SteppIR to Reverse
-            { rb180.Checked = true; }  
-            else if (e.Control && e.KeyCode == Keys.Z) // Toggle VFO/Memory
-            { btnMV_Click(null, null); }  
-            else if (e.Control && e.KeyCode == Keys.X) // Memory select (1-5)
-            { btnReCall_Click(null, null); }  
-            else if (e.Control && e.KeyCode == Keys.C) // Memory Load
-            { btnMemLoad_Click(null, null); }
-            else if (e.Control && e.KeyCode == Keys.V) // Memory Save
-            { btnMemSave_Click(null, null); }
-            else if (e.Control && e.KeyCode == Keys.N) // Open Memory Note window
-            { txtMemFreq_DoubleClick(null, null); }
-            else if (e.Control && e.KeyCode == Keys.U) // Undo freq move
-            { WriteToPort("FA" + prevFreq + ";", iSleep); }
-            else if (e.Control && e.Shift && e.KeyCode == Keys.S) // Power On/Off
-            { btnFlexOn_Click(null, null); }
-            // TK tuning rate up
-            else if (e.Control && (e.KeyCode == Keys.Oemplus || e.KeyValue == 107)) 
-            { if (cboTstep.SelectedIndex < 14) cboTstep.SelectedIndex += 1; }
-            // TK tuning rate down
-            else if (e.Control && (e.KeyCode == Keys.OemMinus || e.KeyValue == 109)) 
-            { if (cboTstep.SelectedIndex > 0) cboTstep.SelectedIndex -= 1; }
+            if (!chkShortCut.Checked) // Disable Short-Cuts
+            {
+                if (e.KeyCode == Keys.F1 && e.Modifiers == Keys.Shift)
+                { ProcessMacroButton(13); }
+                else if (e.KeyCode == Keys.F2 && e.Modifiers == Keys.Shift)
+                { ProcessMacroButton(14); }
+                else if (e.KeyCode == Keys.F3 && e.Modifiers == Keys.Shift)
+                { ProcessMacroButton(15); }
+                else if (e.KeyCode == Keys.F4 && e.Modifiers == Keys.Shift)
+                { ProcessMacroButton(16); }
+                else if (e.KeyCode == Keys.F1)
+                { ProcessMacroButton(1); }
+                else if (e.KeyCode == Keys.F2)
+                { ProcessMacroButton(2); }
+                else if (e.KeyCode == Keys.F3)
+                { ProcessMacroButton(3); }
+                else if (e.KeyCode == Keys.F4)
+                { ProcessMacroButton(4); }
+                else if (e.KeyCode == Keys.F5)
+                { ProcessMacroButton(5); }
+                else if (e.KeyCode == Keys.F6)
+                { ProcessMacroButton(6); }
+                else if (e.KeyCode == Keys.F7)
+                { ProcessMacroButton(7); }
+                else if (e.KeyCode == Keys.F8)
+                { ProcessMacroButton(8); }
+                else if (e.KeyCode == Keys.F9)
+                { ProcessMacroButton(9); }
+                else if (e.KeyCode == Keys.F10)
+                { ProcessMacroButton(10); }
+                else if (e.KeyCode == Keys.F11)
+                { ProcessMacroButton(11); }
+                else if (e.KeyCode == Keys.F12)
+                { ProcessMacroButton(12); }
+                else if (e.Control && e.KeyCode == Keys.Oemtilde) // Set Split
+                { btnSplit_Click(null, null); }
+                else if (e.Control && e.KeyCode == Keys.A) // Saves Auto Drive setting
+                { btnDrive_Click(null, null); }
+                else if (e.Control && e.KeyCode == Keys.B) // SteppIR to Bi Direction
+                { rbBiDir.Checked = true; }
+                else if (e.Control && e.KeyCode == Keys.F) // SteppIR to Forward
+                { rbFwd.Checked = true; }
+                else if (e.Control && e.KeyCode == Keys.L) // Set drive to low power
+                { LowPower(); }
+                else if (e.Control && e.KeyCode == Keys.O) // Toggle PTT
+                { btnByp_Click(null, null); }
+                else if (e.Control && e.KeyCode == Keys.R) // SteppIR to Reverse
+                { rb180.Checked = true; }
+                else if (e.Control && e.KeyCode == Keys.Z) // Toggle VFO/Memory
+                { btnMV_Click(null, null); }
+                else if (e.Control && e.KeyCode == Keys.X) // Memory select (1-5)
+                { btnReCall_Click(null, null); }
+                else if (e.Control && e.KeyCode == Keys.C) // Memory Load
+                { btnMemLoad_Click(null, null); }
+                else if (e.Control && e.KeyCode == Keys.V) // Memory Save
+                { btnMemSave_Click(null, null); }
+                else if (e.Control && e.KeyCode == Keys.N) // Open Memory Note window
+                { txtMemFreq_DoubleClick(null, null); }
+                else if (e.Control && e.KeyCode == Keys.U) // Undo freq move
+                { WriteToPort("FA" + prevFreq + ";", iSleep); }
+                else if (e.Control && e.Shift && e.KeyCode == Keys.S) // Power On/Off
+                { btnFlexOn_Click(null, null); }
+                // TK tuning rate up
+                else if (e.Control && (e.KeyCode == Keys.Oemplus || e.KeyValue == 107))
+                { if (cboTstep.SelectedIndex < 14) cboTstep.SelectedIndex += 1; }
+                // TK tuning rate down
+                else if (e.Control && (e.KeyCode == Keys.OemMinus || e.KeyValue == 109))
+                { if (cboTstep.SelectedIndex > 0) cboTstep.SelectedIndex -= 1; }
+            }
         }
         // Adds macro number text to the row header
         public void dgm_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
@@ -7994,6 +8007,11 @@ namespace DataDecoder
                         { SetStepSize(rawFreq.Substring(4, 2)); }
                         tempTimer.Start();
                     }
+                    /*** Get Audio Gain ***/
+                    if (rawFreq.Length > 4 && rawFreq.Substring(0, 4) == "ZZAG")
+                    {
+                        volIdx = Convert.ToInt32(rawFreq.Substring(4, 3));
+                    }
                     /*** Get pwr supply volts ***/
                     if (rawFreq.Length > 4 && rawFreq.Substring(0, 4) == "ZZRV")
                     {
@@ -9530,6 +9548,7 @@ namespace DataDecoder
                     cboSPEport.Items.Clear();
                     cboSwPort.Items.Clear();
                     cboKnobPort.Items.Clear();
+                    cboKnobPort2.Items.Clear();
                     cboMacSwPort.Items.Clear();
                     // Add empty entry to port combos
                     cboCAT.Items.Add("");
@@ -9553,6 +9572,7 @@ namespace DataDecoder
                     cboSPEport.Items.Add("");
                     cboSwPort.Items.Add("");
                     cboKnobPort.Items.Add("");
+                    cboKnobPort2.Items.Add("");
                     cboMacSwPort.Items.Add("");
 
                     for (int i = 0; i < port.Length; i++)
@@ -9579,6 +9599,7 @@ namespace DataDecoder
                         cboSPEport.Items.Add("COM" + port[i]);
                         cboSwPort.Items.Add("COM" + port[i]);
                         cboKnobPort.Items.Add("COM" + port[i]);
+                        cboKnobPort2.Items.Add("COM" + port[i]);
                         cboMacSwPort.Items.Add("COM" + port[i]);
                     }
                 }
@@ -12109,7 +12130,6 @@ namespace DataDecoder
 
         #region * Declarations *
 
-        bool sflag = false;
         int ActCon = 0;         // Active Control index (1-4)
         int ActConDC = 0;       // Active Control DC index (1-2)
         int ActIdx = 0;         // Active control index       
@@ -12117,6 +12137,7 @@ namespace DataDecoder
         int kFlags = 0x51;      // knob flag register
         int RITfrq = 0;         // current RIT offset
         int stepSize = 0;       // PSDR tune step size (default = 10 hz)
+        int volIdx = -1;         // psdr volume setting
         int XITfrq = 0;         // current XIT offset
         string KnobBuf = "";    // serial data received buffer
         string kCATup = "";     // current CAT Up command 
@@ -12416,28 +12437,33 @@ namespace DataDecoder
                                     { kCATdn = "ZZXF+" + XITfrq.ToString().PadLeft(4, '0') + ";"; }
                                     WriteToPort(kCATdn, iSleep);
                                 }
-                                //else if (ActIdx == 4)   // tuning step
-                                //{
-                                //    WriteToPort(kCATdn + ";", iSleep);                                    
-                                //}
+                                else if (ActIdx == 4)   // volume
+                                {
+                                    if (volIdx < 0)
+                                    { WriteToPort("ZZAG;", iSleep); }
+                                    else if (volIdx >= 1)
+                                    {
+                                        volIdx -= 1;
+                                        WriteToPort(kCATdn + 
+                                            volIdx.ToString().PadLeft(3, '0') + ";", iSleep);
+                                    }
+                                }
                                     break;
-                            case "F":   //firm ware revision
+                            case "F":   //firmware revision
                                 SetgrpTKnob("Tuning Knob Rev. " +
                                     sCmd.Substring(1, 2) + "." +
                                     sCmd.Substring(3, 2));
                                 break;
                             case "L": //knob long click
-                                kFlags ^= 0x41;
-                                WriteFlags(); WriteLED();
+                                if (!chkKnobEnab2.Checked)
+                                {
+                                    kFlags ^= 0x41;
+                                    WriteFlags(); WriteLED();
+                                }
                                 break;
                             case "S": //knob single click
                                 kFlags ^= 0x10; // toggle single click bit
                                 WriteFlags(); WriteLED();
-                                //if (!Convert.ToBoolean(kFlags & 0x10)) sflag = true;
-                                //if (ActIdx == 4 && sflag)   // tuning step
-                                //{ KnobPort.Write("ZE14;ZE;"); }
-                                //else
-                                //{ KnobPort.Write("ZE01;ZE;"); }
                                 break;
                             case "U": //tune something up
                                 if (ActIdx == 0 || ActIdx == 1)// tune vfo a/b
@@ -12472,10 +12498,17 @@ namespace DataDecoder
                                     { kCATup = "ZZXF+" + XITfrq.ToString().PadLeft(4, '0') + ";"; }
                                     WriteToPort(kCATup, iSleep);
                                 }
-                                //else if (ActIdx == 4)   // tuning step
-                                //{
-                                //    WriteToPort(kCATdn + ";", iSleep);
-                                //}
+                                else if (ActIdx == 4)   // audio volume
+                                {
+                                    if (volIdx < 0)
+                                    { WriteToPort("ZZAG;", iSleep); }
+                                    else if (volIdx < 100)
+                                    {
+                                        volIdx += 1;
+                                        WriteToPort(kCATdn +
+                                            volIdx.ToString().PadLeft(3, '0') + ";", iSleep);
+                                    }
+                                }
                                 break;
                             case "Z":   // parameter settings from knob
                                 if (sCmd.Substring(0, 2) == "ZC")
@@ -12630,6 +12663,195 @@ namespace DataDecoder
             tempTimer.Start();
         }
 
+        private void KnobPort2_DataReceived(object sender, SerialDataReceivedEventArgs e)
+        {
+            try
+            {
+                string sCmd = "";
+                SerialPort port = (SerialPort)sender;
+                byte[] data = new byte[port.BytesToRead];
+                port.Read(data, 0, data.Length);
+                KnobBuf += AE.GetString(data, 0, data.Length);
+                Regex rex = new Regex(".*?;"); //accept any string ending in ;		
+                for (Match m = rex.Match(KnobBuf); m.Success; m = m.NextMatch())
+                {   //loop thru the buffer and find matches
+                    sCmd = m.Value;
+                    KnobBuf = KnobBuf.Replace(m.Value, ""); //remove the match from the buffer
+                    if (chkKnobEnab.Checked)
+                    {
+                        switch (sCmd.Substring(0, 1))
+                        {
+                            case "C": //double click
+                                kFlags ^= 0x20;
+                                WriteFlags(); WriteLED();
+                                if (Convert.ToBoolean(kFlags >> 5 & 0x01)) //led2 lit
+                                {
+                                    WriteToPort(kCATdcOn, iSleep);
+                                    if (kCATdcOn == "ZZSW1;" && chkSoEnab.Checked)
+                                    { ZZSW = 1; SetVfoB(); }
+                                }
+                                else
+                                {
+                                    WriteToPort(kCATdcOff, iSleep);
+                                    if (kCATdcOff == "ZZSW0;" && chkSoEnab.Checked)
+                                    { ZZSW = 0; SetVfoA(); }
+                                }
+                                break;
+                            case "D": //tune something down
+                                if (ActIdx == 0 || ActIdx == 1)// tune vfo a/b
+                                {
+                                    string newSize = "1";
+                                    int tkSize = 0;
+                                    if (sCmd.Length > 3)
+                                    { tkSize = Convert.ToInt32(sCmd.Substring(1, 2)); }
+                                    if (tkSize > stepSize)
+                                    { newSize = (stepSize + (tkSize - 1)).ToString(); }
+                                    else 
+                                    { newSize = stepSize.ToString(); }
+                                    WriteToPort(kCATdn + newSize.PadLeft(2, '0') + ";", iSleep);
+                                }
+                                else if (ActIdx == 2)    // tune RIT
+                                {   
+                                   int RIT = 0;
+                                   RITfrq -= 2;
+                                   if (RITfrq < 0) {RIT = (int)Math.Abs(RITfrq);
+                                       kCATdn = "ZZRF-" + RIT.ToString().PadLeft(4, '0') + ";";}
+                                   else
+                                   { kCATdn = "ZZRF+" + RITfrq.ToString().PadLeft(4, '0') + ";"; }
+                                    WriteToPort(kCATdn, iSleep);                                  
+                                }
+                                else if (ActIdx == 3)   // tune XIT
+                                {
+                                    int XIT = 0;
+                                    XITfrq -= 2;
+                                    if (XITfrq < 0)
+                                    {
+                                        XIT = (int)Math.Abs(XITfrq);
+                                        kCATdn = "ZZXF-" + XIT.ToString().PadLeft(4, '0') + ";";
+                                    }
+                                    else
+                                    { kCATdn = "ZZXF+" + XITfrq.ToString().PadLeft(4, '0') + ";"; }
+                                    WriteToPort(kCATdn, iSleep);
+                                }
+                                else if (ActIdx == 4)   // volume
+                                {
+                                    WriteToPort(kCATdn + ";", iSleep);
+                                }
+                                    break;
+                            //case "F":   //firm ware revision
+                            //    SetgrpTKnob("Tuning Knob Rev. " +
+                            //        sCmd.Substring(1, 2) + "." +
+                            //        sCmd.Substring(3, 2));
+                            //    break;
+                            //case "L": //knob long click
+                            //    if (!chkKnobEnab2.Checked)
+                            //    {
+                            //        kFlags ^= 0x41;
+                            //        WriteFlags(); WriteLED();
+                            //    }
+                            //    break;
+                            case "S": //knob single click
+                                kFlags ^= 0x10; // toggle single click bit
+                                WriteFlags(); WriteLED();
+                                break;
+                            case "U": //tune something up
+                                if (ActIdx == 0 || ActIdx == 1)// tune vfo a/b
+                                {
+                                    string newSize = "1";
+                                    int tkSize = 0;
+                                    if (sCmd.Length > 3)
+                                    { tkSize = Convert.ToInt32(sCmd.Substring(1, 2)); }
+                                    if (tkSize > stepSize)
+                                    { newSize = (stepSize + (tkSize - 1)).ToString(); }
+                                    else
+                                    { newSize = stepSize.ToString(); }
+                                    WriteToPort(kCATup + newSize.PadLeft(2, '0') + ";", iSleep);
+                                }
+                                else if (ActIdx == 2)    // tune RIT
+                                {
+                                    int RIT = 0;
+                                    RITfrq += 2;
+                                    if (RITfrq < 0) { RIT = (int)Math.Abs(RITfrq);
+                                        kCATup = "ZZRF-" + RIT.ToString().PadLeft(4, '0') + ";"; }
+                                    else
+                                    { kCATup = "ZZRF+" + RITfrq.ToString().PadLeft(4, '0') + ";"; }
+                                    WriteToPort(kCATup, iSleep);
+                                }
+                                else if (ActIdx == 3)   // tune XIT
+                                {
+                                    int XIT = 0;
+                                    XITfrq += 2;
+                                    if (XITfrq < 0) { XIT = (int)Math.Abs(XITfrq);
+                                        kCATup = "ZZXF-" + XIT.ToString().PadLeft(4, '0') + ";";}
+                                    else
+                                    { kCATup = "ZZXF+" + XITfrq.ToString().PadLeft(4, '0') + ";"; }
+                                    WriteToPort(kCATup, iSleep);
+                                }
+                                else if (ActIdx == 4)   // tuning step
+                                {
+                                    WriteToPort(kCATdn + ";", iSleep);
+                                }
+                                break;
+                            //case "Z":   // parameter settings from knob
+                            //    if (sCmd.Substring(0, 2) == "ZC")
+                            //    { SetZC(sCmd.Substring(2, 2)); }
+                            //    //if (sCmd.Substring(0, 2) == "ZE")
+                            //    //    Console.WriteLine("ZE: " + sCmd);
+                            //    if (sCmd.Substring(0, 2) == "ZL")
+                            //    { SetZL(sCmd.Substring(2, 2)); }
+                            //    if (sCmd.Substring(0, 2) == "ZR")
+                            //    { SetZR(sCmd.Substring(2, 2)); }
+                            //    break;
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                bool bReturnLog = false;
+                bReturnLog = ErrorLog.ErrorRoutine(false, enableErrorLog, ex);
+                if (false == bReturnLog) MessageBox.Show("Unable to write to log");
+            }
+
+        }
+
+        private void chkKnobEnab2_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chkKnobEnab2.Checked)
+            {
+                set.chkKnobEnab2 = true;
+                //KnobInit2();
+            }
+            else
+            {
+                set.chkKnobEnab2 = false;
+            }
+            set.Save();
+        }
+
+        private void cboKnobPort2_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (KnobPort2.IsOpen) KnobPort2.Close();
+            if (cboKnobPort2.SelectedIndex > 0)
+            {
+                KnobPort2.PortName = cboKnobPort2.SelectedItem.ToString();
+                try
+                {
+                    KnobPort2.Open();
+                }
+                catch
+                {
+                    MessageBox.Show("The Tuning Knob serial port " + KnobPort2.PortName +
+                       " cannot be opened!\n", "Port Error",
+                       MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    cboKnobPort2.SelectedIndex = 0;
+                    chkKnobEnab2.Checked = false;
+                }
+            }
+            set.cboKnobPort2 = cboKnobPort2.SelectedIndex;
+            set.Save();
+        }
+
         #endregion * Events *
 
         #region * Methods *
@@ -12651,7 +12873,7 @@ namespace DataDecoder
                     cboKnobADC.SelectedIndex = set.cboKnobADC;
                     cboKnobBDC.SelectedIndex = set.cboKnobBDC;
                     cboTstep.SelectedIndex = set.cboTstep;
-                    KnobPort.Write("ZE01;F;ZC;ZE;ZL;ZR;");
+                    KnobPort.Write("F;ZC;ZL;ZR;");
                     WriteFlags();
                     WriteLED();
                 }
@@ -12677,10 +12899,10 @@ namespace DataDecoder
 
         void WriteFlags()   // set indicators based on active control
         {
-            if (Convert.ToBoolean(kFlags & 0x10))   // single click on
-            {
-                if (Convert.ToBoolean(kFlags & 0x01)) // mode A
-                {
+            if (Convert.ToBoolean(kFlags & 0x10))
+            {   // single click on
+                if (Convert.ToBoolean(kFlags & 0x01))
+                {   // mode A
                     ActCon = 1; ActConDC = 1;
                     SetModeAOn("True"); SetModeBOn("False");
                     SetModeAOff("False"); SetModeBOff("False");
@@ -12696,8 +12918,8 @@ namespace DataDecoder
             }
             else
             {   // single click off
-                if (Convert.ToBoolean(kFlags & 0x01)) // mode A
-                {
+                if (Convert.ToBoolean(kFlags & 0x01)) 
+                {   // mode A
                     ActCon = 2; ActConDC = 1;
                     SetModeAOn("False"); SetModeBOn("False");
                     SetModeAOff("True"); SetModeBOff("False");
@@ -12730,7 +12952,8 @@ namespace DataDecoder
                 case 3: kCATup = "ZZXF"; kCATdn = "ZZXF"; //TUNE XIT
                     XITfrq = 0; WriteToPort("ZZRC;ZZRT0;ZZXS1;", iSleep);
                     break;
-                case 4: kCATup = "ZZSU"; kCATdn = "ZZSD"; //Tuning Step
+                case 4: kCATup = "ZZAG"; kCATdn = "ZZAG"; //Audio Volume
+                    WriteToPort("ZZAG;", iSleep);
                     break;
             }
             switch (ActIdxDC) // active double click control
