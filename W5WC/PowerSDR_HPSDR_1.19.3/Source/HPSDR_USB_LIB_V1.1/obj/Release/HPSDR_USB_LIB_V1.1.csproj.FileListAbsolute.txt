@@ -1,0 +1,3 @@
+C:\Documents and Settings\w5wc\Desktop\PowerSDR source\PowerSDR 1.19.3 source\Source\HPSDR_USB_LIB_V1.1\bin\Release\HPSDR_USB_LIB_V1.1.dll
+C:\Documents and Settings\w5wc\Desktop\PowerSDR source\PowerSDR 1.19.3 source\Source\HPSDR_USB_LIB_V1.1\obj\Release\ResolveAssemblyReference.cache
+C:\Documents and Settings\w5wc\Desktop\PowerSDR source\PowerSDR 1.19.3 source\Source\HPSDR_USB_LIB_V1.1\obj\Release\HPSDR_USB_LIB_V1.1.dll
