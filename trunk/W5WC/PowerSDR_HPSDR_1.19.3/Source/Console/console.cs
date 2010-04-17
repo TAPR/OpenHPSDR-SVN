@@ -5607,7 +5607,6 @@ namespace PowerSDR
             this.Controls.Add(this.panelOptions);
             this.Controls.Add(this.panelMode);
             this.Controls.Add(this.panelBandHF);
-            this.Controls.Add(this.panelAntenna);
             this.Controls.Add(this.panelRX2Filter);
             this.Controls.Add(this.panelRX2Mode);
             this.Controls.Add(this.panelRX2Display);
@@ -5642,6 +5641,7 @@ namespace PowerSDR
             this.Controls.Add(this.panelModeSpecificCW);
             this.Controls.Add(this.panelModeSpecificPhone);
             this.Controls.Add(this.panelModeSpecificDigital);
+            this.Controls.Add(this.panelAntenna);
             this.KeyPreview = true;
             this.Menu = this.mainMenu1;
             this.Name = "Console";
@@ -10180,7 +10180,9 @@ namespace PowerSDR
 				case Band.B6M:
 					if(current_model == Model.FLEX5000 || current_model == Model.FLEX3000)
 						retval = SetupForm.PAGain10;
-					else retval = 1000;
+                    else if (ModelIsHPSDRorHermes())
+                        retval = SetupForm.PAGain6;
+                    else retval = 1000;
 					break;
 				default:
 					retval = 1000;
@@ -19462,14 +19464,13 @@ namespace PowerSDR
                         SetComboPreampForHPSDR();
                         comboPreamp.Text = "On";
                         chkBCI.Visible = true;
-                        //mnuFWC.Visible = false;
                         mnuMixer.Visible = false;
                         mnuAntenna.Visible = false;
                         mnuRelays.Visible = false;
                         mnuATU.Visible = false;
-                        //grpAntenna.Visible = false;
                         chkFWCATU.Visible = false;
                         chkFWCATUBypass.Visible = false;
+                        panelAntenna.Visible = false; //w5wc
                         int hermes_power_enable;
                         if (current_model == Model.HERMES)
                         {
@@ -29146,7 +29147,8 @@ namespace PowerSDR
             if (rx1_dsp_mode == DSPMode.FMN) new_pwr = (int)(new_pwr * 2.5);
             power_by_band[(int)tx_band] = new_pwr;
 
-            if (pa_present && VFOAFreq < 29.7f || (fwc_init && (current_model == Model.FLEX5000 || current_model == Model.FLEX3000)))
+            if (pa_present && VFOAFreq < 29.7f || (fwc_init && (current_model == Model.FLEX5000 || current_model == Model.FLEX3000) ||
+                ( ModelIsHPSDRorHermes() )))
             {
                 if (val == 0)
                 {
@@ -29167,7 +29169,7 @@ namespace PowerSDR
                         int index2 = 0;
                         while (powers[index2] < pwr) index2++;
 
-                        if (current_model == Model.SDR1000 && pwr < 10)
+                        if (current_model != Model.FLEX5000 && pwr < 10) //w5wc
                         {
                             new_volume = Math.Sqrt(pwr / 10.0 * Math.Pow(power_table[(int)b][3], 2.0)) / audio_volts1;
                         }
@@ -29451,7 +29453,7 @@ namespace PowerSDR
 
 		private void HdwMOXChanged(bool tx, double freq)
 		{
-			if(!fwc_init || current_model == Model.SDR1000)
+			if(!fwc_init || current_model != Model.FLEX5000)
 				Hdw.UpdateHardware = false;
 
 			if(tx)
@@ -29498,7 +29500,16 @@ namespace PowerSDR
 						Hdw.UpdateHardware = false;
 					}
 
-					if(x2_enabled)
+                    if (penny_ext_ctrl_enabled)
+                    {
+                        Penny.getPenny().UpdateExtCtrl(rx1_band, mox);
+                    }
+                    if (alex_ant_ctrl_enabled)
+                    {
+                        Alex.getAlex().UpdateAlexAntSelection(rx1_band, mox);
+                    }
+
+                    if (x2_enabled)
 					{
 						Hdw.UpdateHardware = true;
 						Hdw.X2 = (byte)(Hdw.X2 | 0x40);						
@@ -31787,6 +31798,13 @@ namespace PowerSDR
                     //FWC.SetXVTRSplit(XVTRForm.GetXVTRRF(tx_xvtr_index));
                     FWC.SetXVTRActive(true);
                 }
+            }
+
+            if (penny_ext_ctrl_enabled)
+                Penny.getPenny().UpdateExtCtrl(rx1_band, mox);
+            if (alex_ant_ctrl_enabled)
+            {
+                Alex.getAlex().UpdateAlexAntSelection(rx1_band, mox);
             }
 
 			if(tx_band == Band.B60M)
@@ -36821,7 +36839,7 @@ namespace PowerSDR
 			int x = 0;
 			int width = 0;
 
-			/*if(small_lsd && txtVFOALSD.Visible)
+			/*if( all_lsd && txtVFOALSD.Visible)
 			{
 				x += (vfo_char_width+vfo_char_space)*vfoa_hover_digit;
 				if(vfoa_hover_digit > 3)
