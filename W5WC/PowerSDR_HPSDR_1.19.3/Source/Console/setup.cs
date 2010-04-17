@@ -14549,7 +14549,7 @@ namespace PowerSDR
             this.grpPAGainByBand.Controls.Add(this.chkPA6);
             this.grpPAGainByBand.Location = new System.Drawing.Point(8, 8);
             this.grpPAGainByBand.Name = "grpPAGainByBand";
-            this.grpPAGainByBand.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.grpPAGainByBand.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.grpPAGainByBand.Size = new System.Drawing.Size(312, 272);
             this.grpPAGainByBand.TabIndex = 1;
             this.grpPAGainByBand.TabStop = false;
@@ -14677,7 +14677,7 @@ namespace PowerSDR
             // chkPA20
             // 
             this.chkPA20.Image = null;
-            this.chkPA20.Location = new System.Drawing.Point(16, 248);
+            this.chkPA20.Location = new System.Drawing.Point(8, 248);
             this.chkPA20.Name = "chkPA20";
             this.chkPA20.Size = new System.Drawing.Size(40, 16);
             this.chkPA20.TabIndex = 29;
@@ -14739,7 +14739,7 @@ namespace PowerSDR
             this.radPACalSelBands.Image = null;
             this.radPACalSelBands.Location = new System.Drawing.Point(96, 184);
             this.radPACalSelBands.Name = "radPACalSelBands";
-            this.radPACalSelBands.Size = new System.Drawing.Size(112, 32);
+            this.radPACalSelBands.Size = new System.Drawing.Size(120, 32);
             this.radPACalSelBands.TabIndex = 23;
             this.radPACalSelBands.Text = "Selected Bands (checked below)";
             // 
@@ -22020,6 +22020,12 @@ namespace PowerSDR
 			get { return (float)udPAGain10.Value; }
 			set { udPAGain10.Value = (decimal)value; }
 		}
+
+        public float PAGain6
+        {
+            get { return (float)udPAGain6.Value; }
+            set { udPAGain6.Value = (decimal)value; }
+        }
 
 		public float PAADC160
 		{
