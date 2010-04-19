@@ -22,6 +22,7 @@ public class MonitorFrame extends javax.swing.JFrame implements MonitorUpdateLis
         this.client=client;
         initComponents();
 
+        this.setTitle("JMonitor: "+client.getServer());
         monitorPanel.setClient(client);
         //waterfallPanel.setClient(client);
     }

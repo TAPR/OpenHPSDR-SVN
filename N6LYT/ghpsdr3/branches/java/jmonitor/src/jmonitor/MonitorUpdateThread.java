@@ -28,6 +28,10 @@ public class MonitorUpdateThread extends Thread {
         }
     }
 
+    public void setFps(int fps) {
+        this.fps=fps;
+    }
+
     private Client client;
     private MonitorUpdateListener listener;
     private int fps=10;

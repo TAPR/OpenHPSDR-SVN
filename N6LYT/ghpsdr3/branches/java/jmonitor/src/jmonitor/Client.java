@@ -258,6 +258,10 @@ public class Client extends Thread {
         return connected;
     }
 
+    public String getServer() {
+        return server;
+    }
+
     Audio audio;
     MonitorUpdateListener listener;
 
