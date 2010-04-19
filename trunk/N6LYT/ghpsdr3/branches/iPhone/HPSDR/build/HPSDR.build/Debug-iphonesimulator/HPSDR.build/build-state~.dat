@@ -1,0 +1,604 @@
+THPSDR
+v7
+r0
+t285510771.042276
+cCheck dependencies
+cProcessInfoPlistFile /Users/jm57878/Desktop/HPSDR/build/Debug-iphonesimulator/HPSDR.app/Info.plist HPSDR-Info.plist
+cCompileXIB /Users/jm57878/Desktop/HPSDR/FlipsideView.xib
+cCompileXIB /Users/jm57878/Desktop/HPSDR/MainView.xib
+cCompileXIB /Users/jm57878/Desktop/HPSDR/MainWindow.xib
+cCpResource build/Debug-iphonesimulator/HPSDR.app/Default.png Default.png
+cProcessPCH /var/folders/a-/a-Pvj-ZCGDuhe7wpL7Ciqk+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/HPSDR_Prefix-ebqrgrxfhryojnceqtxsbhgkrndz/HPSDR_Prefix.pch.gch HPSDR_Prefix.pch normal i386 objective-c com.apple.compilers.gcc.4_2
+cProcessPCH /var/folders/a-/a-Pvj-ZCGDuhe7wpL7Ciqk+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/HPSDR_Prefix-deggkzzvmkzexjaijnvdwfzyinqg/HPSDR_Prefix.pch.gch HPSDR_Prefix.pch normal i386 c com.apple.compilers.gcc.4_2
+cCompileC build/HPSDR.build/Debug-iphonesimulator/HPSDR.build/Objects-normal/i386/main.o /Users/jm57878/Desktop/HPSDR/main.m normal i386 objective-c com.apple.compilers.gcc.4_2
+cCompileC build/HPSDR.build/Debug-iphonesimulator/HPSDR.build/Objects-normal/i386/HPSDRAppDelegate.o /Users/jm57878/Desktop/HPSDR/Classes/HPSDRAppDelegate.m normal i386 objective-c com.apple.compilers.gcc.4_2
+cCompileC build/HPSDR.build/Debug-iphonesimulator/HPSDR.build/Objects-normal/i386/FlipsideView.o /Users/jm57878/Desktop/HPSDR/Classes/FlipsideView.m normal i386 objective-c com.apple.compilers.gcc.4_2
+cCompileC build/HPSDR.build/Debug-iphonesimulator/HPSDR.build/Objects-normal/i386/MainView.o /Users/jm57878/Desktop/HPSDR/Classes/MainView.m normal i386 objective-c com.apple.compilers.gcc.4_2
+cCompileC build/HPSDR.build/Debug-iphonesimulator/HPSDR.build/Objects-normal/i386/MainViewController.o /Users/jm57878/Desktop/HPSDR/Classes/MainViewController.m normal i386 objective-c com.apple.compilers.gcc.4_2
+cCompileC build/HPSDR.build/Debug-iphonesimulator/HPSDR.build/Objects-normal/i386/FlipsideViewController.o /Users/jm57878/Desktop/HPSDR/Classes/FlipsideViewController.m normal i386 objective-c com.apple.compilers.gcc.4_2
+cCompileC build/HPSDR.build/Debug-iphonesimulator/HPSDR.build/Objects-normal/i386/connection.o /Users/jm57878/Desktop/HPSDR/connection.c normal i386 c com.apple.compilers.gcc.4_2
+cCompileC build/HPSDR.build/Debug-iphonesimulator/HPSDR.build/Objects-normal/i386/samples.o /Users/jm57878/Desktop/HPSDR/samples.c normal i386 c com.apple.compilers.gcc.4_2
+cCompileC build/HPSDR.build/Debug-iphonesimulator/HPSDR.build/Objects-normal/i386/audiostream.o /Users/jm57878/Desktop/HPSDR/audiostream.c normal i386 c com.apple.compilers.gcc.4_2
+cLd /Users/jm57878/Desktop/HPSDR/build/Debug-iphonesimulator/HPSDR.app/HPSDR normal i386
+cGenerateDSYMFile /Users/jm57878/Desktop/HPSDR/build/Debug-iphonesimulator/HPSDR.app.dSYM /Users/jm57878/Desktop/HPSDR/build/Debug-iphonesimulator/HPSDR.app/HPSDR
+cTouch /Users/jm57878/Desktop/HPSDR/build/Debug-iphonesimulator/HPSDR.app
+
+N/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator3.0.sdk
+c000000004ABE051D00000000000000EE
+t1253967133
+s238
+
+N/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator3.0.sdk/System/Library/Frameworks/AudioToolbox.framework/AudioToolbox
+c000000004A0DADCB0000000000180330
+t1242410443
+s1573680
+
+N/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator3.0.sdk/System/Library/Frameworks/AudioToolbox.framework/Headers/AudioQueue.h
+c000000004A0DADB60000000000011DF0
+t1242410422
+s73200
+
+N/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator3.0.sdk/System/Library/Frameworks/CoreFoundation.framework/Headers/CFSocket.h
+c000000004A0BA8C00000000000002B62
+t1242278080
+s11106
+
+N/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator3.0.sdk/System/Library/Frameworks/CoreGraphics.framework/CoreGraphics
+c000000004A0BAA26000000000026DB00
+t1242278438
+s2546432
+
+N/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator3.0.sdk/System/Library/Frameworks/Foundation.framework/Foundation
+c000000004A0BAB370000000000260C20
+t1242278711
+s2493472
+
+N/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator3.0.sdk/System/Library/Frameworks/Foundation.framework/Headers/Foundation.h
+c000000004A0BAB250000000000001355
+t1242278693
+s4949
+
+N/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator3.0.sdk/System/Library/Frameworks/UIKit.framework/Headers/UIKit.h
+c000000004A0CBEBB000000000000075E
+t1242349243
+s1886
+
+N/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator3.0.sdk/System/Library/Frameworks/UIKit.framework/UIKit
+c000000004A0CBF5F0000000001432D80
+t1242349407
+s21179776
+
+N/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator3.0.sdk/usr/include/Availability.h
+c000000004A0BAC5D00000000000019D8
+t1242279005
+s6616
+
+N/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator3.0.sdk/usr/include/netdb.h
+c00000000464386E20000000000002F2B
+t1178830562
+s12075
+
+N/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator3.0.sdk/usr/include/netinet/in.h
+c00000000476344B700000000000052AA
+t1197687991
+s21162
+
+N/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator3.0.sdk/usr/include/stdio.h
+c000000004748A1330000000000003D1D
+t1195942195
+s15645
+
+N/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator3.0.sdk/usr/include/stdlib.h
+c000000004748A1330000000000002A79
+t1195942195
+s10873
+
+N/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator3.0.sdk/usr/include/string.h
+c000000004748A1330000000000001731
+t1195942195
+s5937
+
+N/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator3.0.sdk/usr/include/sys/socket.h
+c00000000476344C000000000000055F1
+t1197688000
+s22001
+
+N/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator3.0.sdk/usr/include/sys/types.h
+c00000000476344C1000000000000290F
+t1197688001
+s10511
+
+N/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator3.0.sdk/usr/include/unistd.h
+c000000004748A13300000000000053FF
+t1195942195
+s21503
+
+N/Users/jm57878/Desktop/HPSDR/Classes/FlipsideView.h
+c000000004A532601000000000000018B
+t1246963201
+s395
+
+N/Users/jm57878/Desktop/HPSDR/Classes/FlipsideView.m
+c000000004A536406000000000000092E
+t1246979078
+s2350
+i"FlipsideView.h"
+i"connection.h"
+i"samples.h"
+
+N/Users/jm57878/Desktop/HPSDR/Classes/FlipsideViewController.h
+c000000004A530A590000000000000211
+t1246956121
+s529
+
+N/Users/jm57878/Desktop/HPSDR/Classes/FlipsideViewController.m
+c000000004A53260100000000000004DB
+t1246963201
+s1243
+i"FlipsideViewController.h"
+
+N/Users/jm57878/Desktop/HPSDR/Classes/HPSDRAppDelegate.h
+c000000004A52EB3400000000000001B8
+t1246948148
+s440
+
+N/Users/jm57878/Desktop/HPSDR/Classes/HPSDRAppDelegate.m
+c000000004A52EB340000000000000321
+t1246948148
+s801
+i"HPSDRAppDelegate.h"
+i"MainViewController.h"
+
+N/Users/jm57878/Desktop/HPSDR/Classes/MainView.h
+c000000004A53537D00000000000000C9
+t1246974845
+s201
+i<UIKit/UIKit.h>
+
+N/Users/jm57878/Desktop/HPSDR/Classes/MainView.m
+c000000004B523D2400000000000013D4
+t1263680804
+s5076
+i"MainView.h"
+i"samples.h"
+i"connection.h"
+
+N/Users/jm57878/Desktop/HPSDR/Classes/MainViewController.h
+c000000004A6EB979000000000000042F
+t1248770425
+s1071
+i"FlipsideViewController.h"
+
+N/Users/jm57878/Desktop/HPSDR/Classes/MainViewController.m
+c000000004A6EDCBE0000000000001403
+t1248779454
+s5123
+i"MainViewController.h"
+i"MainView.h"
+i"band.h"
+i"samples.h"
+i"connection.h"
+i"audiostream.h"
+
+N/Users/jm57878/Desktop/HPSDR/Default.png
+c000000004A68BF5700000000000085CF
+t1248378711
+s34255
+
+N/Users/jm57878/Desktop/HPSDR/FlipsideView.xib
+c000000004A532940000000000000779C
+t1246964032
+s30620
+
+N/Users/jm57878/Desktop/HPSDR/HPSDR_Prefix.pch
+c000000004A52EB34000000000000013C
+t1246948148
+s316
+i<Availability.h>
+i<Foundation/Foundation.h>
+i<UIKit/UIKit.h>
+
+N/Users/jm57878/Desktop/HPSDR/MainView.xib
+c000000004A6EBAFF0000000000009270
+t1248770815
+s37488
+
+N/Users/jm57878/Desktop/HPSDR/MainWindow.xib
+c000000004A52EB340000000000001DCF
+t1246948148
+s7631
+
+N/Users/jm57878/Desktop/HPSDR/audiostream.c
+c000000004B523CBB000000000000193F
+t1263680699
+s6463
+i<stdio.h>
+i<sys/types.h>
+i<sys/socket.h>
+i<netinet/in.h>
+i<netdb.h>
+i<string.h>
+i<unistd.h>
+i<CoreFoundation/CFSocket.h>
+i<AudioToolbox/AudioQueue.h>
+i"audiostream.h"
+
+N/Users/jm57878/Desktop/HPSDR/audiostream.h
+c000000004A56F64E00000000000001AC
+t1247213134
+s428
+
+N/Users/jm57878/Desktop/HPSDR/band.h
+c000000004A6EC6C200000000000001A0
+t1248773826
+s416
+
+N/Users/jm57878/Desktop/HPSDR/build/Debug-iphonesimulator/HPSDR.app
+t1263817971
+s340
+
+N/Users/jm57878/Desktop/HPSDR/build/Debug-iphonesimulator/HPSDR.app.dSYM
+t1263817970
+s102
+
+N/Users/jm57878/Desktop/HPSDR/build/Debug-iphonesimulator/HPSDR.app/Default.png
+t1248774209
+s34255
+
+N/Users/jm57878/Desktop/HPSDR/build/Debug-iphonesimulator/HPSDR.app/FlipsideView.nib
+t1263817967
+s5352
+
+N/Users/jm57878/Desktop/HPSDR/build/Debug-iphonesimulator/HPSDR.app/HPSDR
+t1263817970
+s50164
+
+N/Users/jm57878/Desktop/HPSDR/build/Debug-iphonesimulator/HPSDR.app/Info.plist
+t1263817958
+s583
+
+N/Users/jm57878/Desktop/HPSDR/build/Debug-iphonesimulator/HPSDR.app/MainView.nib
+t1263817967
+s7141
+
+N/Users/jm57878/Desktop/HPSDR/build/Debug-iphonesimulator/HPSDR.app/MainWindow.nib
+t1263817967
+s1377
+
+N/Users/jm57878/Desktop/HPSDR/build/Debug-iphonesimulator/HPSDR.app/PkgInfo
+t1263817958
+s8
+
+N/Users/jm57878/Desktop/HPSDR/build/HPSDR.build/Debug-iphonesimulator/HPSDR.build/Objects-normal/i386/FlipsideView.o
+t1263817969
+s21308
+
+N/Users/jm57878/Desktop/HPSDR/build/HPSDR.build/Debug-iphonesimulator/HPSDR.build/Objects-normal/i386/FlipsideViewController.o
+t1263817969
+s34380
+
+N/Users/jm57878/Desktop/HPSDR/build/HPSDR.build/Debug-iphonesimulator/HPSDR.build/Objects-normal/i386/HPSDR.LinkFileList
+c000000004A5853D80000000000000414
+t1247302616
+s1044
+
+N/Users/jm57878/Desktop/HPSDR/build/HPSDR.build/Debug-iphonesimulator/HPSDR.build/Objects-normal/i386/HPSDRAppDelegate.o
+t1263817969
+s39160
+
+N/Users/jm57878/Desktop/HPSDR/build/HPSDR.build/Debug-iphonesimulator/HPSDR.build/Objects-normal/i386/MainView.o
+t1263817969
+s25976
+
+N/Users/jm57878/Desktop/HPSDR/build/HPSDR.build/Debug-iphonesimulator/HPSDR.build/Objects-normal/i386/MainViewController.o
+t1263817969
+s47996
+
+N/Users/jm57878/Desktop/HPSDR/build/HPSDR.build/Debug-iphonesimulator/HPSDR.build/Objects-normal/i386/audiostream.o
+t1263817969
+s18052
+
+N/Users/jm57878/Desktop/HPSDR/build/HPSDR.build/Debug-iphonesimulator/HPSDR.build/Objects-normal/i386/connection.o
+t1263817969
+s13148
+
+N/Users/jm57878/Desktop/HPSDR/build/HPSDR.build/Debug-iphonesimulator/HPSDR.build/Objects-normal/i386/main.o
+t1263817969
+s5932
+
+N/Users/jm57878/Desktop/HPSDR/build/HPSDR.build/Debug-iphonesimulator/HPSDR.build/Objects-normal/i386/samples.o
+t1263817969
+s2404
+
+N/Users/jm57878/Desktop/HPSDR/connection.c
+c000000004A6EDB340000000000000F5F
+t1248779060
+s3935
+i<stdio.h>
+i<sys/types.h>
+i<sys/socket.h>
+i<netinet/in.h>
+i<netdb.h>
+i<string.h>
+i<unistd.h>
+i<stdlib.h>
+i<CoreFoundation/CFSocket.h>
+i"connection.h"
+i"samples.h"
+i"band.h"
+
+N/Users/jm57878/Desktop/HPSDR/connection.h
+c000000004A6EC7DD000000000000018A
+t1248774109
+s394
+
+N/Users/jm57878/Desktop/HPSDR/main.m
+c000000004A52EB340000000000000169
+t1246948148
+s361
+i<UIKit/UIKit.h>
+
+N/Users/jm57878/Desktop/HPSDR/samples.c
+c000000004A5B9D5000000000001E0613
+t1247518032
+s1967635
+i"samples.h"
+
+N/Users/jm57878/Desktop/HPSDR/samples.h
+c000000004B523CBB0000000000000164
+t1263680699
+s356
+
+N/var/folders/a-/a-Pvj-ZCGDuhe7wpL7Ciqk+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/HPSDR_Prefix-deggkzzvmkzexjaijnvdwfzyinqg/HPSDR_Prefix.pch.gch
+t1263817968
+s2167216
+
+N/var/folders/a-/a-Pvj-ZCGDuhe7wpL7Ciqk+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/HPSDR_Prefix-ebqrgrxfhryojnceqtxsbhgkrndz/HPSDR_Prefix.pch.gch
+t1263817969
+s12957072
+
+NHPSDR-Info.plist
+c000000004A533DBB00000000000003C2
+t1246969275
+s962
+
+CCheck dependencies
+r0
+lSLF07#2@18"Check dependencies285510757#285510758#0(0"0(0#1#0"7947009927035180032#0"0#
+
+CCompileC build/HPSDR.build/Debug-iphonesimulator/HPSDR.build/Objects-normal/i386/FlipsideView.o /Users/jm57878/Desktop/HPSDR/Classes/FlipsideView.m normal i386 objective-c com.apple.compilers.gcc.4_2
+s285510769.517057
+e285510769.596015
+r1
+xCompileC
+xbuild/HPSDR.build/Debug-iphonesimulator/HPSDR.build/Objects-normal/i386/FlipsideView.o
+x/Users/jm57878/Desktop/HPSDR/Classes/FlipsideView.m
+xnormal
+xi386
+xobjective-c
+xcom.apple.compilers.gcc.4_2
+o/Users/jm57878/Desktop/HPSDR/Classes/FlipsideView.m: In function '-[FlipsideView init]':
+o/Users/jm57878/Desktop/HPSDR/Classes/FlipsideView.m:34: warning: no '+sharedInstance' method found
+o/Users/jm57878/Desktop/HPSDR/Classes/FlipsideView.m:34: warning: (Messages without a matching method signature
+o/Users/jm57878/Desktop/HPSDR/Classes/FlipsideView.m:34: warning: will be assumed to return 'id' and accept
+o/Users/jm57878/Desktop/HPSDR/Classes/FlipsideView.m:34: warning: '...' as arguments.)
+lSLF07#2@59"Compile /Users/jm57878/Desktop/HPSDR/Classes/FlipsideView.m285510769#285510769#0(492"/Users/jm57878/Desktop/HPSDR/Classes/FlipsideView.m: In function '-[FlipsideView init]':/Users/jm57878/Desktop/HPSDR/Classes/FlipsideView.m:34: warning: no '+sharedInstance' method found/Users/jm57878/Desktop/HPSDR/Classes/FlipsideView.m:34: warning: (Messages without a matching method signature/Users/jm57878/Desktop/HPSDR/Classes/FlipsideView.m:34: warning: will be assumed to return 'id' and accept/Users/jm57878/Desktop/HPSDR/Classes/FlipsideView.m:34: warning: '...' as arguments.)2(22@33"No '+sharedInstance' method found285510769#89#99#0(6@51"/Users/jm57878/Desktop/HPSDR/Classes/FlipsideView.m268671878#34#0#34#0#19"no '*' method found0(13@108"(Messages without a matching method signature will be assumed to return 'id' and accept '...' as arguments.)285510769#188#111#0(6@51"/Users/jm57878/Desktop/HPSDR/Classes/FlipsideView.m268671878#34#0#34#0#0"0(0#0#51"/Users/jm57878/Desktop/HPSDR/Classes/FlipsideView.m4300885448#1731"    cd /Users/jm57878/Desktop/HPSDR    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin/gcc-4.2 -x objective-c -arch i386 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -D__IPHONE_OS_VERSION_MIN_REQUIRED=30000 -isysroot /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator3.0.sdk -fvisibility=hidden -mmacosx-version-min=10.5 -gdwarf-2 -iquote /Users/jm57878/Desktop/HPSDR/build/HPSDR.build/Debug-iphonesimulator/HPSDR.build/HPSDR-generated-files.hmap -I/Users/jm57878/Desktop/HPSDR/build/HPSDR.build/Debug-iphonesimulator/HPSDR.build/HPSDR-own-target-headers.hmap -I/Users/jm57878/Desktop/HPSDR/build/HPSDR.build/Debug-iphonesimulator/HPSDR.build/HPSDR-all-target-headers.hmap -iquote /Users/jm57878/Desktop/HPSDR/build/HPSDR.build/Debug-iphonesimulator/HPSDR.build/HPSDR-project-headers.hmap -F/Users/jm57878/Desktop/HPSDR/build/Debug-iphonesimulator -I/Users/jm57878/Desktop/HPSDR/build/Debug-iphonesimulator/include -I/Users/jm57878/Desktop/HPSDR/build/HPSDR.build/Debug-iphonesimulator/HPSDR.build/DerivedSources/i386 -I/Users/jm57878/Desktop/HPSDR/build/HPSDR.build/Debug-iphonesimulator/HPSDR.build/DerivedSources -include /var/folders/a-/a-Pvj-ZCGDuhe7wpL7Ciqk+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/HPSDR_Prefix-ebqrgrxfhryojnceqtxsbhgkrndz/HPSDR_Prefix.pch -c /Users/jm57878/Desktop/HPSDR/Classes/FlipsideView.m -o /Users/jm57878/Desktop/HPSDR/build/HPSDR.build/Debug-iphonesimulator/HPSDR.build/Objects-normal/i386/FlipsideView.o0#
+
+CCompileC build/HPSDR.build/Debug-iphonesimulator/HPSDR.build/Objects-normal/i386/FlipsideViewController.o /Users/jm57878/Desktop/HPSDR/Classes/FlipsideViewController.m normal i386 objective-c com.apple.compilers.gcc.4_2
+s285510769.638184
+e285510769.729411
+r1
+xCompileC
+xbuild/HPSDR.build/Debug-iphonesimulator/HPSDR.build/Objects-normal/i386/FlipsideViewController.o
+x/Users/jm57878/Desktop/HPSDR/Classes/FlipsideViewController.m
+xnormal
+xi386
+xobjective-c
+xcom.apple.compilers.gcc.4_2
+o/Users/jm57878/Desktop/HPSDR/Classes/FlipsideViewController.m: In function '-[FlipsideViewController done]':
+o/Users/jm57878/Desktop/HPSDR/Classes/FlipsideViewController.m:25: warning: 'UIView' may not respond to '-saveState'
+o/Users/jm57878/Desktop/HPSDR/Classes/FlipsideViewController.m:25: warning: (Messages without a matching method signature
+o/Users/jm57878/Desktop/HPSDR/Classes/FlipsideViewController.m:25: warning: will be assumed to return 'id' and accept
+o/Users/jm57878/Desktop/HPSDR/Classes/FlipsideViewController.m:25: warning: '...' as arguments.)
+lSLF07#2@69"Compile /Users/jm57878/Desktop/HPSDR/Classes/FlipsideViewController.m285510769#285510769#0(559"/Users/jm57878/Desktop/HPSDR/Classes/FlipsideViewController.m: In function '-[FlipsideViewController done]':/Users/jm57878/Desktop/HPSDR/Classes/FlipsideViewController.m:25: warning: 'UIView' may not respond to '-saveState'/Users/jm57878/Desktop/HPSDR/Classes/FlipsideViewController.m:25: warning: (Messages without a matching method signature/Users/jm57878/Desktop/HPSDR/Classes/FlipsideViewController.m:25: warning: will be assumed to return 'id' and accept/Users/jm57878/Desktop/HPSDR/Classes/FlipsideViewController.m:25: warning: '...' as arguments.)2(22@40"'UIView' may not respond to '-saveState'285510769#109#116#0(6@61"/Users/jm57878/Desktop/HPSDR/Classes/FlipsideViewController.m268656001#25#0#25#0#26"'*' may not respond to '*'0(13@108"(Messages without a matching method signature will be assumed to return 'id' and accept '...' as arguments.)285510769#225#121#0(6@61"/Users/jm57878/Desktop/HPSDR/Classes/FlipsideViewController.m268656001#25#0#25#0#0"0(0#0#61"/Users/jm57878/Desktop/HPSDR/Classes/FlipsideViewController.m4300885448#1751"    cd /Users/jm57878/Desktop/HPSDR    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin/gcc-4.2 -x objective-c -arch i386 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -D__IPHONE_OS_VERSION_MIN_REQUIRED=30000 -isysroot /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator3.0.sdk -fvisibility=hidden -mmacosx-version-min=10.5 -gdwarf-2 -iquote /Users/jm57878/Desktop/HPSDR/build/HPSDR.build/Debug-iphonesimulator/HPSDR.build/HPSDR-generated-files.hmap -I/Users/jm57878/Desktop/HPSDR/build/HPSDR.build/Debug-iphonesimulator/HPSDR.build/HPSDR-own-target-headers.hmap -I/Users/jm57878/Desktop/HPSDR/build/HPSDR.build/Debug-iphonesimulator/HPSDR.build/HPSDR-all-target-headers.hmap -iquote /Users/jm57878/Desktop/HPSDR/build/HPSDR.build/Debug-iphonesimulator/HPSDR.build/HPSDR-project-headers.hmap -F/Users/jm57878/Desktop/HPSDR/build/Debug-iphonesimulator -I/Users/jm57878/Desktop/HPSDR/build/Debug-iphonesimulator/include -I/Users/jm57878/Desktop/HPSDR/build/HPSDR.build/Debug-iphonesimulator/HPSDR.build/DerivedSources/i386 -I/Users/jm57878/Desktop/HPSDR/build/HPSDR.build/Debug-iphonesimulator/HPSDR.build/DerivedSources -include /var/folders/a-/a-Pvj-ZCGDuhe7wpL7Ciqk+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/HPSDR_Prefix-ebqrgrxfhryojnceqtxsbhgkrndz/HPSDR_Prefix.pch -c /Users/jm57878/Desktop/HPSDR/Classes/FlipsideViewController.m -o /Users/jm57878/Desktop/HPSDR/build/HPSDR.build/Debug-iphonesimulator/HPSDR.build/Objects-normal/i386/FlipsideViewController.o0#
+
+CCompileC build/HPSDR.build/Debug-iphonesimulator/HPSDR.build/Objects-normal/i386/HPSDRAppDelegate.o /Users/jm57878/Desktop/HPSDR/Classes/HPSDRAppDelegate.m normal i386 objective-c com.apple.compilers.gcc.4_2
+s285510769.354940
+e285510769.537079
+r1
+xCompileC
+xbuild/HPSDR.build/Debug-iphonesimulator/HPSDR.build/Objects-normal/i386/HPSDRAppDelegate.o
+x/Users/jm57878/Desktop/HPSDR/Classes/HPSDRAppDelegate.m
+xnormal
+xi386
+xobjective-c
+xcom.apple.compilers.gcc.4_2
+lSLF07#2@63"Compile /Users/jm57878/Desktop/HPSDR/Classes/HPSDRAppDelegate.m285510769#285510769#0(0"0(0#0#55"/Users/jm57878/Desktop/HPSDR/Classes/HPSDRAppDelegate.m4300885448#1739"    cd /Users/jm57878/Desktop/HPSDR    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin/gcc-4.2 -x objective-c -arch i386 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -D__IPHONE_OS_VERSION_MIN_REQUIRED=30000 -isysroot /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator3.0.sdk -fvisibility=hidden -mmacosx-version-min=10.5 -gdwarf-2 -iquote /Users/jm57878/Desktop/HPSDR/build/HPSDR.build/Debug-iphonesimulator/HPSDR.build/HPSDR-generated-files.hmap -I/Users/jm57878/Desktop/HPSDR/build/HPSDR.build/Debug-iphonesimulator/HPSDR.build/HPSDR-own-target-headers.hmap -I/Users/jm57878/Desktop/HPSDR/build/HPSDR.build/Debug-iphonesimulator/HPSDR.build/HPSDR-all-target-headers.hmap -iquote /Users/jm57878/Desktop/HPSDR/build/HPSDR.build/Debug-iphonesimulator/HPSDR.build/HPSDR-project-headers.hmap -F/Users/jm57878/Desktop/HPSDR/build/Debug-iphonesimulator -I/Users/jm57878/Desktop/HPSDR/build/Debug-iphonesimulator/include -I/Users/jm57878/Desktop/HPSDR/build/HPSDR.build/Debug-iphonesimulator/HPSDR.build/DerivedSources/i386 -I/Users/jm57878/Desktop/HPSDR/build/HPSDR.build/Debug-iphonesimulator/HPSDR.build/DerivedSources -include /var/folders/a-/a-Pvj-ZCGDuhe7wpL7Ciqk+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/HPSDR_Prefix-ebqrgrxfhryojnceqtxsbhgkrndz/HPSDR_Prefix.pch -c /Users/jm57878/Desktop/HPSDR/Classes/HPSDRAppDelegate.m -o /Users/jm57878/Desktop/HPSDR/build/HPSDR.build/Debug-iphonesimulator/HPSDR.build/Objects-normal/i386/HPSDRAppDelegate.o0#
+
+CCompileC build/HPSDR.build/Debug-iphonesimulator/HPSDR.build/Objects-normal/i386/MainView.o /Users/jm57878/Desktop/HPSDR/Classes/MainView.m normal i386 objective-c com.apple.compilers.gcc.4_2
+s285510769.537195
+e285510769.638079
+r1
+xCompileC
+xbuild/HPSDR.build/Debug-iphonesimulator/HPSDR.build/Objects-normal/i386/MainView.o
+x/Users/jm57878/Desktop/HPSDR/Classes/MainView.m
+xnormal
+xi386
+xobjective-c
+xcom.apple.compilers.gcc.4_2
+o/Users/jm57878/Desktop/HPSDR/Classes/MainView.m: In function 'updateSamples':
+o/Users/jm57878/Desktop/HPSDR/Classes/MainView.m:175: warning: unused variable 'step'
+o/Users/jm57878/Desktop/HPSDR/Classes/MainView.m:174: warning: unused variable 'j'
+lSLF07#2@55"Compile /Users/jm57878/Desktop/HPSDR/Classes/MainView.m285510769#285510769#0(245"/Users/jm57878/Desktop/HPSDR/Classes/MainView.m: In function 'updateSamples':/Users/jm57878/Desktop/HPSDR/Classes/MainView.m:175: warning: unused variable 'step'/Users/jm57878/Desktop/HPSDR/Classes/MainView.m:174: warning: unused variable 'j'2(22@22"Unused variable 'step'285510769#78#85#0(6@47"/Users/jm57878/Desktop/HPSDR/Classes/MainView.m285373604#175#0#175#0#19"unused variable '*'0(22@19"Unused variable 'j'285510769#163#82#0(6@47"/Users/jm57878/Desktop/HPSDR/Classes/MainView.m285373604#174#0#174#0#19"unused variable '*'0(0#0#47"/Users/jm57878/Desktop/HPSDR/Classes/MainView.m4300885448#1723"    cd /Users/jm57878/Desktop/HPSDR    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin/gcc-4.2 -x objective-c -arch i386 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -D__IPHONE_OS_VERSION_MIN_REQUIRED=30000 -isysroot /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator3.0.sdk -fvisibility=hidden -mmacosx-version-min=10.5 -gdwarf-2 -iquote /Users/jm57878/Desktop/HPSDR/build/HPSDR.build/Debug-iphonesimulator/HPSDR.build/HPSDR-generated-files.hmap -I/Users/jm57878/Desktop/HPSDR/build/HPSDR.build/Debug-iphonesimulator/HPSDR.build/HPSDR-own-target-headers.hmap -I/Users/jm57878/Desktop/HPSDR/build/HPSDR.build/Debug-iphonesimulator/HPSDR.build/HPSDR-all-target-headers.hmap -iquote /Users/jm57878/Desktop/HPSDR/build/HPSDR.build/Debug-iphonesimulator/HPSDR.build/HPSDR-project-headers.hmap -F/Users/jm57878/Desktop/HPSDR/build/Debug-iphonesimulator -I/Users/jm57878/Desktop/HPSDR/build/Debug-iphonesimulator/include -I/Users/jm57878/Desktop/HPSDR/build/HPSDR.build/Debug-iphonesimulator/HPSDR.build/DerivedSources/i386 -I/Users/jm57878/Desktop/HPSDR/build/HPSDR.build/Debug-iphonesimulator/HPSDR.build/DerivedSources -include /var/folders/a-/a-Pvj-ZCGDuhe7wpL7Ciqk+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/HPSDR_Prefix-ebqrgrxfhryojnceqtxsbhgkrndz/HPSDR_Prefix.pch -c /Users/jm57878/Desktop/HPSDR/Classes/MainView.m -o /Users/jm57878/Desktop/HPSDR/build/HPSDR.build/Debug-iphonesimulator/HPSDR.build/Objects-normal/i386/MainView.o0#
+
+CCompileC build/HPSDR.build/Debug-iphonesimulator/HPSDR.build/Objects-normal/i386/MainViewController.o /Users/jm57878/Desktop/HPSDR/Classes/MainViewController.m normal i386 objective-c com.apple.compilers.gcc.4_2
+s285510769.596127
+e285510769.769672
+r1
+xCompileC
+xbuild/HPSDR.build/Debug-iphonesimulator/HPSDR.build/Objects-normal/i386/MainViewController.o
+x/Users/jm57878/Desktop/HPSDR/Classes/MainViewController.m
+xnormal
+xi386
+xobjective-c
+xcom.apple.compilers.gcc.4_2
+o/Users/jm57878/Desktop/HPSDR/Classes/MainViewController.m: In function '-[MainViewController onTimer]':
+o/Users/jm57878/Desktop/HPSDR/Classes/MainViewController.m:30: warning: 'UIView' may not respond to '-dragged'
+o/Users/jm57878/Desktop/HPSDR/Classes/MainViewController.m:30: warning: (Messages without a matching method signature
+o/Users/jm57878/Desktop/HPSDR/Classes/MainViewController.m:30: warning: will be assumed to return 'id' and accept
+o/Users/jm57878/Desktop/HPSDR/Classes/MainViewController.m:30: warning: '...' as arguments.)
+o/Users/jm57878/Desktop/HPSDR/Classes/MainViewController.m:41: warning: 'UIView' may not respond to '-refresh'
+o/Users/jm57878/Desktop/HPSDR/Classes/MainViewController.m: In function '-[MainViewController resetTimer]':
+o/Users/jm57878/Desktop/HPSDR/Classes/MainViewController.m:55: warning: format '%f' expects type 'double', but argument 3 has type 'int'
+lSLF07#2@65"Compile /Users/jm57878/Desktop/HPSDR/Classes/MainViewController.m285510769#285510769#0(889"/Users/jm57878/Desktop/HPSDR/Classes/MainViewController.m: In function '-[MainViewController onTimer]':/Users/jm57878/Desktop/HPSDR/Classes/MainViewController.m:30: warning: 'UIView' may not respond to '-dragged'/Users/jm57878/Desktop/HPSDR/Classes/MainViewController.m:30: warning: (Messages without a matching method signature/Users/jm57878/Desktop/HPSDR/Classes/MainViewController.m:30: warning: will be assumed to return 'id' and accept/Users/jm57878/Desktop/HPSDR/Classes/MainViewController.m:30: warning: '...' as arguments.)/Users/jm57878/Desktop/HPSDR/Classes/MainViewController.m:41: warning: 'UIView' may not respond to '-refresh'/Users/jm57878/Desktop/HPSDR/Classes/MainViewController.m: In function '-[MainViewController resetTimer]':/Users/jm57878/Desktop/HPSDR/Classes/MainViewController.m:55: warning: format '%f' expects type 'double', but argument 3 has type 'int'4(22@38"'UIView' may not respond to '-dragged'285510769#104#110#0(6@57"/Users/jm57878/Desktop/HPSDR/Classes/MainViewController.m270472254#30#0#30#0#26"'*' may not respond to '*'0(13@108"(Messages without a matching method signature will be assumed to return 'id' and accept '...' as arguments.)285510769#214#117#0(6@57"/Users/jm57878/Desktop/HPSDR/Classes/MainViewController.m270472254#30#0#30#0#0"0(22@38"'UIView' may not respond to '-refresh'285510769#536#110#0(6@57"/Users/jm57878/Desktop/HPSDR/Classes/MainViewController.m270472254#41#0#41#0#26"'*' may not respond to '*'0(22@64"Format '%f' expects type 'double', but argument 3 has type 'int'285510769#753#136#0(6@57"/Users/jm57878/Desktop/HPSDR/Classes/MainViewController.m270472254#55#0#55#0#56"format '*' expects type '*', but argument * has type '*'0(0#0#57"/Users/jm57878/Desktop/HPSDR/Classes/MainViewController.m4300885448#1743"    cd /Users/jm57878/Desktop/HPSDR    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin/gcc-4.2 -x objective-c -arch i386 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -D__IPHONE_OS_VERSION_MIN_REQUIRED=30000 -isysroot /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator3.0.sdk -fvisibility=hidden -mmacosx-version-min=10.5 -gdwarf-2 -iquote /Users/jm57878/Desktop/HPSDR/build/HPSDR.build/Debug-iphonesimulator/HPSDR.build/HPSDR-generated-files.hmap -I/Users/jm57878/Desktop/HPSDR/build/HPSDR.build/Debug-iphonesimulator/HPSDR.build/HPSDR-own-target-headers.hmap -I/Users/jm57878/Desktop/HPSDR/build/HPSDR.build/Debug-iphonesimulator/HPSDR.build/HPSDR-all-target-headers.hmap -iquote /Users/jm57878/Desktop/HPSDR/build/HPSDR.build/Debug-iphonesimulator/HPSDR.build/HPSDR-project-headers.hmap -F/Users/jm57878/Desktop/HPSDR/build/Debug-iphonesimulator -I/Users/jm57878/Desktop/HPSDR/build/Debug-iphonesimulator/include -I/Users/jm57878/Desktop/HPSDR/build/HPSDR.build/Debug-iphonesimulator/HPSDR.build/DerivedSources/i386 -I/Users/jm57878/Desktop/HPSDR/build/HPSDR.build/Debug-iphonesimulator/HPSDR.build/DerivedSources -include /var/folders/a-/a-Pvj-ZCGDuhe7wpL7Ciqk+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/HPSDR_Prefix-ebqrgrxfhryojnceqtxsbhgkrndz/HPSDR_Prefix.pch -c /Users/jm57878/Desktop/HPSDR/Classes/MainViewController.m -o /Users/jm57878/Desktop/HPSDR/build/HPSDR.build/Debug-iphonesimulator/HPSDR.build/Objects-normal/i386/MainViewController.o0#
+
+CCompileC build/HPSDR.build/Debug-iphonesimulator/HPSDR.build/Objects-normal/i386/audiostream.o /Users/jm57878/Desktop/HPSDR/audiostream.c normal i386 c com.apple.compilers.gcc.4_2
+s285510769.813241
+e285510769.984696
+r1
+xCompileC
+xbuild/HPSDR.build/Debug-iphonesimulator/HPSDR.build/Objects-normal/i386/audiostream.o
+x/Users/jm57878/Desktop/HPSDR/audiostream.c
+xnormal
+xi386
+xc
+xcom.apple.compilers.gcc.4_2
+o/Users/jm57878/Desktop/HPSDR/audiostream.c: In function 'audiostream_makeConnection':
+o/Users/jm57878/Desktop/HPSDR/audiostream.c:127: warning: format '%d' expects type 'int', but argument 3 has type 'CFSocketError'
+o/Users/jm57878/Desktop/HPSDR/audiostream.c: In function 'aqInit':
+o/Users/jm57878/Desktop/HPSDR/audiostream.c:217: warning: format '%d' expects type 'int', but argument 3 has type 'UInt32'
+o/Users/jm57878/Desktop/HPSDR/audiostream.c:225: warning: format '%d' expects type 'int', but argument 3 has type 'UInt32'
+o/Users/jm57878/Desktop/HPSDR/audiostream.c:234: warning: format '%d' expects type 'int', but argument 3 has type 'UInt32'
+lSLF07#2@50"Compile /Users/jm57878/Desktop/HPSDR/audiostream.c285510769#285510769#0(647"/Users/jm57878/Desktop/HPSDR/audiostream.c: In function 'audiostream_makeConnection':/Users/jm57878/Desktop/HPSDR/audiostream.c:127: warning: format '%d' expects type 'int', but argument 3 has type 'CFSocketError'/Users/jm57878/Desktop/HPSDR/audiostream.c: In function 'aqInit':/Users/jm57878/Desktop/HPSDR/audiostream.c:217: warning: format '%d' expects type 'int', but argument 3 has type 'UInt32'/Users/jm57878/Desktop/HPSDR/audiostream.c:225: warning: format '%d' expects type 'int', but argument 3 has type 'UInt32'/Users/jm57878/Desktop/HPSDR/audiostream.c:234: warning: format '%d' expects type 'int', but argument 3 has type 'UInt32'4(22@71"Format '%d' expects type 'int', but argument 3 has type 'CFSocketError'285510769#86#129#0(6@42"/Users/jm57878/Desktop/HPSDR/audiostream.c285373499#127#0#127#0#56"format '*' expects type '*', but argument * has type '*'0(22@64"Format '%d' expects type 'int', but argument 3 has type 'UInt32'285510769#281#122#0(6@42"/Users/jm57878/Desktop/HPSDR/audiostream.c285373499#217#0#217#0#56"format '*' expects type '*', but argument * has type '*'0(22@64"Format '%d' expects type 'int', but argument 3 has type 'UInt32'285510769#403#122#0(6@42"/Users/jm57878/Desktop/HPSDR/audiostream.c285373499#225#0#225#0#56"format '*' expects type '*', but argument * has type '*'0(22@64"Format '%d' expects type 'int', but argument 3 has type 'UInt32'285510769#525#122#0(6@42"/Users/jm57878/Desktop/HPSDR/audiostream.c285373499#234#0#234#0#56"format '*' expects type '*', but argument * has type '*'0(0#0#42"/Users/jm57878/Desktop/HPSDR/audiostream.c4300885448#1711"    cd /Users/jm57878/Desktop/HPSDR    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin/gcc-4.2 -x c -arch i386 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -D__IPHONE_OS_VERSION_MIN_REQUIRED=30000 -isysroot /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator3.0.sdk -fvisibility=hidden -mmacosx-version-min=10.5 -gdwarf-2 -iquote /Users/jm57878/Desktop/HPSDR/build/HPSDR.build/Debug-iphonesimulator/HPSDR.build/HPSDR-generated-files.hmap -I/Users/jm57878/Desktop/HPSDR/build/HPSDR.build/Debug-iphonesimulator/HPSDR.build/HPSDR-own-target-headers.hmap -I/Users/jm57878/Desktop/HPSDR/build/HPSDR.build/Debug-iphonesimulator/HPSDR.build/HPSDR-all-target-headers.hmap -iquote /Users/jm57878/Desktop/HPSDR/build/HPSDR.build/Debug-iphonesimulator/HPSDR.build/HPSDR-project-headers.hmap -F/Users/jm57878/Desktop/HPSDR/build/Debug-iphonesimulator -I/Users/jm57878/Desktop/HPSDR/build/Debug-iphonesimulator/include -I/Users/jm57878/Desktop/HPSDR/build/HPSDR.build/Debug-iphonesimulator/HPSDR.build/DerivedSources/i386 -I/Users/jm57878/Desktop/HPSDR/build/HPSDR.build/Debug-iphonesimulator/HPSDR.build/DerivedSources -include /var/folders/a-/a-Pvj-ZCGDuhe7wpL7Ciqk+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/HPSDR_Prefix-deggkzzvmkzexjaijnvdwfzyinqg/HPSDR_Prefix.pch -c /Users/jm57878/Desktop/HPSDR/audiostream.c -o /Users/jm57878/Desktop/HPSDR/build/HPSDR.build/Debug-iphonesimulator/HPSDR.build/Objects-normal/i386/audiostream.o0#
+
+CCompileC build/HPSDR.build/Debug-iphonesimulator/HPSDR.build/Objects-normal/i386/connection.o /Users/jm57878/Desktop/HPSDR/connection.c normal i386 c com.apple.compilers.gcc.4_2
+s285510769.729518
+e285510769.985087
+r1
+xCompileC
+xbuild/HPSDR.build/Debug-iphonesimulator/HPSDR.build/Objects-normal/i386/connection.o
+x/Users/jm57878/Desktop/HPSDR/connection.c
+xnormal
+xi386
+xc
+xcom.apple.compilers.gcc.4_2
+o/Users/jm57878/Desktop/HPSDR/connection.c: In function 'makeConnection':
+o/Users/jm57878/Desktop/HPSDR/connection.c:125: warning: format '%d' expects type 'int', but argument 3 has type 'CFSocketError'
+lSLF07#2@49"Compile /Users/jm57878/Desktop/HPSDR/connection.c285510769#285510769#0(201"/Users/jm57878/Desktop/HPSDR/connection.c: In function 'makeConnection':/Users/jm57878/Desktop/HPSDR/connection.c:125: warning: format '%d' expects type 'int', but argument 3 has type 'CFSocketError'1(22@71"Format '%d' expects type 'int', but argument 3 has type 'CFSocketError'285510769#73#128#0(6@41"/Users/jm57878/Desktop/HPSDR/connection.c270471860#125#0#125#0#56"format '*' expects type '*', but argument * has type '*'0(0#0#41"/Users/jm57878/Desktop/HPSDR/connection.c7083932847239164928#1709"    cd /Users/jm57878/Desktop/HPSDR    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin/gcc-4.2 -x c -arch i386 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -D__IPHONE_OS_VERSION_MIN_REQUIRED=30000 -isysroot /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator3.0.sdk -fvisibility=hidden -mmacosx-version-min=10.5 -gdwarf-2 -iquote /Users/jm57878/Desktop/HPSDR/build/HPSDR.build/Debug-iphonesimulator/HPSDR.build/HPSDR-generated-files.hmap -I/Users/jm57878/Desktop/HPSDR/build/HPSDR.build/Debug-iphonesimulator/HPSDR.build/HPSDR-own-target-headers.hmap -I/Users/jm57878/Desktop/HPSDR/build/HPSDR.build/Debug-iphonesimulator/HPSDR.build/HPSDR-all-target-headers.hmap -iquote /Users/jm57878/Desktop/HPSDR/build/HPSDR.build/Debug-iphonesimulator/HPSDR.build/HPSDR-project-headers.hmap -F/Users/jm57878/Desktop/HPSDR/build/Debug-iphonesimulator -I/Users/jm57878/Desktop/HPSDR/build/Debug-iphonesimulator/include -I/Users/jm57878/Desktop/HPSDR/build/HPSDR.build/Debug-iphonesimulator/HPSDR.build/DerivedSources/i386 -I/Users/jm57878/Desktop/HPSDR/build/HPSDR.build/Debug-iphonesimulator/HPSDR.build/DerivedSources -include /var/folders/a-/a-Pvj-ZCGDuhe7wpL7Ciqk+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/HPSDR_Prefix-deggkzzvmkzexjaijnvdwfzyinqg/HPSDR_Prefix.pch -c /Users/jm57878/Desktop/HPSDR/connection.c -o /Users/jm57878/Desktop/HPSDR/build/HPSDR.build/Debug-iphonesimulator/HPSDR.build/Objects-normal/i386/connection.o0#
+
+CCompileC build/HPSDR.build/Debug-iphonesimulator/HPSDR.build/Objects-normal/i386/main.o /Users/jm57878/Desktop/HPSDR/main.m normal i386 objective-c com.apple.compilers.gcc.4_2
+s285510769.353070
+e285510769.516947
+r1
+xCompileC
+xbuild/HPSDR.build/Debug-iphonesimulator/HPSDR.build/Objects-normal/i386/main.o
+x/Users/jm57878/Desktop/HPSDR/main.m
+xnormal
+xi386
+xobjective-c
+xcom.apple.compilers.gcc.4_2
+lSLF07#2@43"Compile /Users/jm57878/Desktop/HPSDR/main.m285510769#285510769#0(0"0(0#0#35"/Users/jm57878/Desktop/HPSDR/main.m4300885448#1707"    cd /Users/jm57878/Desktop/HPSDR    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin/gcc-4.2 -x objective-c -arch i386 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -D__IPHONE_OS_VERSION_MIN_REQUIRED=30000 -isysroot /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator3.0.sdk -fvisibility=hidden -mmacosx-version-min=10.5 -gdwarf-2 -iquote /Users/jm57878/Desktop/HPSDR/build/HPSDR.build/Debug-iphonesimulator/HPSDR.build/HPSDR-generated-files.hmap -I/Users/jm57878/Desktop/HPSDR/build/HPSDR.build/Debug-iphonesimulator/HPSDR.build/HPSDR-own-target-headers.hmap -I/Users/jm57878/Desktop/HPSDR/build/HPSDR.build/Debug-iphonesimulator/HPSDR.build/HPSDR-all-target-headers.hmap -iquote /Users/jm57878/Desktop/HPSDR/build/HPSDR.build/Debug-iphonesimulator/HPSDR.build/HPSDR-project-headers.hmap -F/Users/jm57878/Desktop/HPSDR/build/Debug-iphonesimulator -I/Users/jm57878/Desktop/HPSDR/build/Debug-iphonesimulator/include -I/Users/jm57878/Desktop/HPSDR/build/HPSDR.build/Debug-iphonesimulator/HPSDR.build/DerivedSources/i386 -I/Users/jm57878/Desktop/HPSDR/build/HPSDR.build/Debug-iphonesimulator/HPSDR.build/DerivedSources -include /var/folders/a-/a-Pvj-ZCGDuhe7wpL7Ciqk+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/HPSDR_Prefix-ebqrgrxfhryojnceqtxsbhgkrndz/HPSDR_Prefix.pch -c /Users/jm57878/Desktop/HPSDR/main.m -o /Users/jm57878/Desktop/HPSDR/build/HPSDR.build/Debug-iphonesimulator/HPSDR.build/Objects-normal/i386/main.o0#
+
+CCompileC build/HPSDR.build/Debug-iphonesimulator/HPSDR.build/Objects-normal/i386/samples.o /Users/jm57878/Desktop/HPSDR/samples.c normal i386 c com.apple.compilers.gcc.4_2
+s285510769.769781
+e285510769.813133
+r1
+xCompileC
+xbuild/HPSDR.build/Debug-iphonesimulator/HPSDR.build/Objects-normal/i386/samples.o
+x/Users/jm57878/Desktop/HPSDR/samples.c
+xnormal
+xi386
+xc
+xcom.apple.compilers.gcc.4_2
+lSLF07#2@46"Compile /Users/jm57878/Desktop/HPSDR/samples.c285510769#285510769#0(0"0(0#0#38"/Users/jm57878/Desktop/HPSDR/samples.c4300885448#1703"    cd /Users/jm57878/Desktop/HPSDR    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin/gcc-4.2 -x c -arch i386 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -D__IPHONE_OS_VERSION_MIN_REQUIRED=30000 -isysroot /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator3.0.sdk -fvisibility=hidden -mmacosx-version-min=10.5 -gdwarf-2 -iquote /Users/jm57878/Desktop/HPSDR/build/HPSDR.build/Debug-iphonesimulator/HPSDR.build/HPSDR-generated-files.hmap -I/Users/jm57878/Desktop/HPSDR/build/HPSDR.build/Debug-iphonesimulator/HPSDR.build/HPSDR-own-target-headers.hmap -I/Users/jm57878/Desktop/HPSDR/build/HPSDR.build/Debug-iphonesimulator/HPSDR.build/HPSDR-all-target-headers.hmap -iquote /Users/jm57878/Desktop/HPSDR/build/HPSDR.build/Debug-iphonesimulator/HPSDR.build/HPSDR-project-headers.hmap -F/Users/jm57878/Desktop/HPSDR/build/Debug-iphonesimulator -I/Users/jm57878/Desktop/HPSDR/build/Debug-iphonesimulator/include -I/Users/jm57878/Desktop/HPSDR/build/HPSDR.build/Debug-iphonesimulator/HPSDR.build/DerivedSources/i386 -I/Users/jm57878/Desktop/HPSDR/build/HPSDR.build/Debug-iphonesimulator/HPSDR.build/DerivedSources -include /var/folders/a-/a-Pvj-ZCGDuhe7wpL7Ciqk+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/HPSDR_Prefix-deggkzzvmkzexjaijnvdwfzyinqg/HPSDR_Prefix.pch -c /Users/jm57878/Desktop/HPSDR/samples.c -o /Users/jm57878/Desktop/HPSDR/build/HPSDR.build/Debug-iphonesimulator/HPSDR.build/Objects-normal/i386/samples.o0#
+
+CCompileXIB /Users/jm57878/Desktop/HPSDR/FlipsideView.xib
+s285510758.751504
+e285510767.560744
+r1
+xCompileXIB
+x/Users/jm57878/Desktop/HPSDR/FlipsideView.xib
+lSLF07#2@27"CompileXIB FlipsideView.xib285510758#285510767#0(0"0(0#0#45"/Users/jm57878/Desktop/HPSDR/FlipsideView.xib4300885448#452"    cd /Users/jm57878/Desktop/HPSDR    setenv IBC_MINIMUM_COMPATIBILITY_VERSION 3.0    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/usr/bin/ibtool --errors --warnings --notices --output-format human-readable-text --compile /Users/jm57878/Desktop/HPSDR/build/Debug-iphonesimulator/HPSDR.app/FlipsideView.nib /Users/jm57878/Desktop/HPSDR/FlipsideView.xib0#
+
+CCompileXIB /Users/jm57878/Desktop/HPSDR/MainView.xib
+s285510758.802914
+e285510767.626116
+r1
+xCompileXIB
+x/Users/jm57878/Desktop/HPSDR/MainView.xib
+lSLF07#2@23"CompileXIB MainView.xib285510758#285510767#0(0"0(0#0#41"/Users/jm57878/Desktop/HPSDR/MainView.xib4300885448#444"    cd /Users/jm57878/Desktop/HPSDR    setenv IBC_MINIMUM_COMPATIBILITY_VERSION 3.0    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/usr/bin/ibtool --errors --warnings --notices --output-format human-readable-text --compile /Users/jm57878/Desktop/HPSDR/build/Debug-iphonesimulator/HPSDR.app/MainView.nib /Users/jm57878/Desktop/HPSDR/MainView.xib0#
+
+CCompileXIB /Users/jm57878/Desktop/HPSDR/MainWindow.xib
+s285510767.560919
+e285510767.883689
+r1
+xCompileXIB
+x/Users/jm57878/Desktop/HPSDR/MainWindow.xib
+oCouldn't open shared capabilities memory GSCapabilities (No such file or directory)
+lSLF07#2@25"CompileXIB MainWindow.xib285510767#285510767#0(84"Couldn't open shared capabilities memory GSCapabilities (No such file or directory)0(0#0#43"/Users/jm57878/Desktop/HPSDR/MainWindow.xib4300885448#448"    cd /Users/jm57878/Desktop/HPSDR    setenv IBC_MINIMUM_COMPATIBILITY_VERSION 3.0    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/usr/bin/ibtool --errors --warnings --notices --output-format human-readable-text --compile /Users/jm57878/Desktop/HPSDR/build/Debug-iphonesimulator/HPSDR.app/MainWindow.nib /Users/jm57878/Desktop/HPSDR/MainWindow.xib0#
+
+CCpResource build/Debug-iphonesimulator/HPSDR.app/Default.png Default.png
+r0
+
+CGenerateDSYMFile /Users/jm57878/Desktop/HPSDR/build/Debug-iphonesimulator/HPSDR.app.dSYM /Users/jm57878/Desktop/HPSDR/build/Debug-iphonesimulator/HPSDR.app/HPSDR
+s285510770.805913
+e285510771.001484
+r1
+xGenerateDSYMFile
+x/Users/jm57878/Desktop/HPSDR/build/Debug-iphonesimulator/HPSDR.app.dSYM
+x/Users/jm57878/Desktop/HPSDR/build/Debug-iphonesimulator/HPSDR.app/HPSDR
+lSLF07#2@103"GenerateDSYMFile build/Debug-iphonesimulator/HPSDR.app.dSYM build/Debug-iphonesimulator/HPSDR.app/HPSDR285510770#285510771#0(0"0(0#0#72"/Users/jm57878/Desktop/HPSDR/build/Debug-iphonesimulator/HPSDR.app/HPSDR4300885448#347"    cd /Users/jm57878/Desktop/HPSDR    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/usr/bin/dsymutil /Users/jm57878/Desktop/HPSDR/build/Debug-iphonesimulator/HPSDR.app/HPSDR -o /Users/jm57878/Desktop/HPSDR/build/Debug-iphonesimulator/HPSDR.app.dSYM0#
+
+CLd /Users/jm57878/Desktop/HPSDR/build/Debug-iphonesimulator/HPSDR.app/HPSDR normal i386
+s285510769.985195
+e285510770.805800
+r1
+xLd
+x/Users/jm57878/Desktop/HPSDR/build/Debug-iphonesimulator/HPSDR.app/HPSDR
+xnormal
+xi386
+lSLF07#2@77"Link /Users/jm57878/Desktop/HPSDR/build/Debug-iphonesimulator/HPSDR.app/HPSDR285510769#285510770#0(0"0(0#0#0"4300885448#826"    cd /Users/jm57878/Desktop/HPSDR    setenv MACOSX_DEPLOYMENT_TARGET 10.5    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin/gcc-4.2 -arch i386 -isysroot /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator3.0.sdk -L/Users/jm57878/Desktop/HPSDR/build/Debug-iphonesimulator -F/Users/jm57878/Desktop/HPSDR/build/Debug-iphonesimulator -filelist /Users/jm57878/Desktop/HPSDR/build/HPSDR.build/Debug-iphonesimulator/HPSDR.build/Objects-normal/i386/HPSDR.LinkFileList -mmacosx-version-min=10.5 -framework Foundation -framework UIKit -framework CoreGraphics -framework AudioToolbox -o /Users/jm57878/Desktop/HPSDR/build/Debug-iphonesimulator/HPSDR.app/HPSDR0#
+
+CProcessInfoPlistFile /Users/jm57878/Desktop/HPSDR/build/Debug-iphonesimulator/HPSDR.app/Info.plist HPSDR-Info.plist
+s285510758.682067
+e285510758.751385
+r1
+xProcessInfoPlistFile
+x/Users/jm57878/Desktop/HPSDR/build/Debug-iphonesimulator/HPSDR.app/Info.plist
+xHPSDR-Info.plist
+lSLF07#2@24"Process HPSDR-Info.plist285510758#285510758#0(0"0(0#0#45"/Users/jm57878/Desktop/HPSDR/HPSDR-Info.plist32933040433463412#443"    cd /Users/jm57878/Desktop/HPSDR    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    builtin-infoPlistUtility HPSDR-Info.plist -genpkginfo /Users/jm57878/Desktop/HPSDR/build/Debug-iphonesimulator/HPSDR.app/PkgInfo -expandbuildsettings -format binary -platform iphonesimulator -o /Users/jm57878/Desktop/HPSDR/build/Debug-iphonesimulator/HPSDR.app/Info.plist0#
+
+CProcessPCH /var/folders/a-/a-Pvj-ZCGDuhe7wpL7Ciqk+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/HPSDR_Prefix-deggkzzvmkzexjaijnvdwfzyinqg/HPSDR_Prefix.pch.gch HPSDR_Prefix.pch normal i386 c com.apple.compilers.gcc.4_2
+s285510767.884817
+e285510768.381026
+r1
+xProcessPCH
+x/var/folders/a-/a-Pvj-ZCGDuhe7wpL7Ciqk+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/HPSDR_Prefix-deggkzzvmkzexjaijnvdwfzyinqg/HPSDR_Prefix.pch.gch
+xHPSDR_Prefix.pch
+xnormal
+xi386
+xc
+xcom.apple.compilers.gcc.4_2
+lSLF07#2@27"Precompile HPSDR_Prefix.pch285510767#285510768#0(0"0(0#0#45"/Users/jm57878/Desktop/HPSDR/HPSDR_Prefix.pch4300885448#1601"    cd /Users/jm57878/Desktop/HPSDR    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin/gcc-4.2 -x c-header -arch i386 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -D__IPHONE_OS_VERSION_MIN_REQUIRED=30000 -isysroot /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator3.0.sdk -fvisibility=hidden -mmacosx-version-min=10.5 -gdwarf-2 -iquote /Users/jm57878/Desktop/HPSDR/build/HPSDR.build/Debug-iphonesimulator/HPSDR.build/HPSDR-generated-files.hmap -I/Users/jm57878/Desktop/HPSDR/build/HPSDR.build/Debug-iphonesimulator/HPSDR.build/HPSDR-own-target-headers.hmap -I/Users/jm57878/Desktop/HPSDR/build/HPSDR.build/Debug-iphonesimulator/HPSDR.build/HPSDR-all-target-headers.hmap -iquote /Users/jm57878/Desktop/HPSDR/build/HPSDR.build/Debug-iphonesimulator/HPSDR.build/HPSDR-project-headers.hmap -F/Users/jm57878/Desktop/HPSDR/build/Debug-iphonesimulator -I/Users/jm57878/Desktop/HPSDR/build/Debug-iphonesimulator/include -I/Users/jm57878/Desktop/HPSDR/build/HPSDR.build/Debug-iphonesimulator/HPSDR.build/DerivedSources/i386 -I/Users/jm57878/Desktop/HPSDR/build/HPSDR.build/Debug-iphonesimulator/HPSDR.build/DerivedSources -c /Users/jm57878/Desktop/HPSDR/HPSDR_Prefix.pch -o /var/folders/a-/a-Pvj-ZCGDuhe7wpL7Ciqk+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/HPSDR_Prefix-deggkzzvmkzexjaijnvdwfzyinqg/HPSDR_Prefix.pch.gch0#
+
+CProcessPCH /var/folders/a-/a-Pvj-ZCGDuhe7wpL7Ciqk+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/HPSDR_Prefix-ebqrgrxfhryojnceqtxsbhgkrndz/HPSDR_Prefix.pch.gch HPSDR_Prefix.pch normal i386 objective-c com.apple.compilers.gcc.4_2
+s285510767.883867
+e285510769.352790
+r1
+xProcessPCH
+x/var/folders/a-/a-Pvj-ZCGDuhe7wpL7Ciqk+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/HPSDR_Prefix-ebqrgrxfhryojnceqtxsbhgkrndz/HPSDR_Prefix.pch.gch
+xHPSDR_Prefix.pch
+xnormal
+xi386
+xobjective-c
+xcom.apple.compilers.gcc.4_2
+lSLF07#2@27"Precompile HPSDR_Prefix.pch285510767#285510769#0(0"0(0#0#45"/Users/jm57878/Desktop/HPSDR/HPSDR_Prefix.pch4300885448#1611"    cd /Users/jm57878/Desktop/HPSDR    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin/gcc-4.2 -x objective-c-header -arch i386 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -D__IPHONE_OS_VERSION_MIN_REQUIRED=30000 -isysroot /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator3.0.sdk -fvisibility=hidden -mmacosx-version-min=10.5 -gdwarf-2 -iquote /Users/jm57878/Desktop/HPSDR/build/HPSDR.build/Debug-iphonesimulator/HPSDR.build/HPSDR-generated-files.hmap -I/Users/jm57878/Desktop/HPSDR/build/HPSDR.build/Debug-iphonesimulator/HPSDR.build/HPSDR-own-target-headers.hmap -I/Users/jm57878/Desktop/HPSDR/build/HPSDR.build/Debug-iphonesimulator/HPSDR.build/HPSDR-all-target-headers.hmap -iquote /Users/jm57878/Desktop/HPSDR/build/HPSDR.build/Debug-iphonesimulator/HPSDR.build/HPSDR-project-headers.hmap -F/Users/jm57878/Desktop/HPSDR/build/Debug-iphonesimulator -I/Users/jm57878/Desktop/HPSDR/build/Debug-iphonesimulator/include -I/Users/jm57878/Desktop/HPSDR/build/HPSDR.build/Debug-iphonesimulator/HPSDR.build/DerivedSources/i386 -I/Users/jm57878/Desktop/HPSDR/build/HPSDR.build/Debug-iphonesimulator/HPSDR.build/DerivedSources -c /Users/jm57878/Desktop/HPSDR/HPSDR_Prefix.pch -o /var/folders/a-/a-Pvj-ZCGDuhe7wpL7Ciqk+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/HPSDR_Prefix-ebqrgrxfhryojnceqtxsbhgkrndz/HPSDR_Prefix.pch.gch0#
+
+CTouch /Users/jm57878/Desktop/HPSDR/build/Debug-iphonesimulator/HPSDR.app
+s285510771.001724
+e285510771.042102
+r1
+xTouch
+x/Users/jm57878/Desktop/HPSDR/build/Debug-iphonesimulator/HPSDR.app
+lSLF07#2@72"Touch /Users/jm57878/Desktop/HPSDR/build/Debug-iphonesimulator/HPSDR.app285510771#285510771#0(0"0(0#0#0"4300885448#256"    cd /Users/jm57878/Desktop/HPSDR    setenv PATH "/Developer/Platforms/iPhoneSimulator.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /usr/bin/touch -c /Users/jm57878/Desktop/HPSDR/build/Debug-iphonesimulator/HPSDR.app0#
+

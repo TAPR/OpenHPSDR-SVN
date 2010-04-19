@@ -1,0 +1,5 @@
+In file included from /Users/jm57878/Desktop/HPSDR/BandViewController.m:9:
+/Users/jm57878/Desktop/HPSDR/BandViewController.h:12: error: cannot find protocol declaration for 'BandViewControllerDelegate'
+/Users/jm57878/Desktop/HPSDR/BandViewController.h:15: error: cannot find protocol declaration for 'BandViewControllerDelegate'
+/Users/jm57878/Desktop/HPSDR/BandViewController.m:54: warning: incomplete implementation of class 'BandViewController'
+/Users/jm57878/Desktop/HPSDR/BandViewController.m:54: warning: method definition for '-done' not found
