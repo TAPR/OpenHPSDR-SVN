@@ -1,0 +1,6 @@
+/Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/Classes/MainView.m: In function '-[MainView drawRect:]':
+/Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/Classes/MainView.m:95: error: 'samplesReceived' undeclared (first use in this function)
+/Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/Classes/MainView.m:95: error: (Each undeclared identifier is reported only once
+/Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/Classes/MainView.m:95: error: for each function it appears in.)
+/Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/Classes/MainView.m: In function '-[MainView dragged]':
+/Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/Classes/MainView.m:156: warning: implicit declaration of function 'setFrequency'
