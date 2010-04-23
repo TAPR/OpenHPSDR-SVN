@@ -24,6 +24,8 @@
 *
 */
 
+#define PORTAUDIO
+
 int create_softrock_thread();
 void softrock_set_device(char* d);
 char* softrock_get_device();
@@ -32,3 +34,7 @@ int softrock_get_receivers();
 void softrock_set_sample_rate(int r);
 int softrock_get_sample_rate();
 
+void softrock_set_input(char* d);
+char* softrock_get_input();
+void softrock_set_output(char* d);
+char* softrock_get_output();
