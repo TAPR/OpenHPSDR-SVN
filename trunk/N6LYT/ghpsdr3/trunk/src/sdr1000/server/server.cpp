@@ -90,7 +90,7 @@ int main(int argc,char* argv[]) {
 
     init_receivers();
     create_listener_thread();
-    //create_softrock_thread();
+    create_sdr1000_thread();
 
     while(1) {
         sleep(1000);
