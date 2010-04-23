@@ -26,5 +26,10 @@
 
 int softrock_open(void);
 int softrock_close();
+#ifdef PORTAUDIO
 int softrock_write(float* left_samples,float* right_samples);
 int softrock_read(float* left_samples,float* right_samples);
+#else
+int softrock_write(unsigned char* buffer,int buffer_size);
+int softrock_read(unsigned char* buffer,int buffer_size);
+#endif

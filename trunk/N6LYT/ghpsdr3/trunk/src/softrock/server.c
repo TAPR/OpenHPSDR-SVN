@@ -44,6 +44,8 @@
 static struct option long_options[] = {
     {"samplerate",required_argument, 0, 0},
     {"device",required_argument, 0, 1},
+    {"input",required_argument, 0, 2},
+    {"output",required_argument, 0, 3},
 };
 static char* short_options="sd";
 static int option_index;
@@ -51,6 +53,8 @@ static int option_index;
 void process_args(int argc,char* argv[]);
 
 int main(int argc,char* argv[]) {
+
+    softrock_set_device("/dev/dsp");
 
     process_args(argc,argv);
 
@@ -82,6 +86,14 @@ fprintf(stderr,"process_args: samplerate=%s\n",optarg);
             case 1: // device
 fprintf(stderr,"process_args: device=%s\n",optarg);
                 softrock_set_device(optarg);
+                break;
+            case 2: // input
+fprintf(stderr,"process_args: input=%s\n",optarg);
+                softrock_set_input(optarg);
+                break;
+            case 3: // output
+fprintf(stderr,"process_args: output=%s\n",optarg);
+                softrock_set_output(optarg);
                 break;
         }
     }

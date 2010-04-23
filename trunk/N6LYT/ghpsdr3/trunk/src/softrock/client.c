@@ -108,14 +108,8 @@ fprintf(stderr,"parse_command: '%s'\n",command);
             // set frequency
             token=strtok(NULL," \r\n");
             if(token!=NULL) {
-                int rx=atoi(token);
-                token=strtok(NULL," ");
-                if(token!=NULL) {
-                   long f=atol(token);
-                   return set_frequency(rx,client,f);
-                } else {
-                    return INVALID_COMMAND;
-                }
+               long f=atol(token);
+               return set_frequency(client,f);
             } else {
                 return INVALID_COMMAND;
             }

@@ -121,16 +121,12 @@ char* set_frequency(int rx,CLIENT* client,long frequency) {
         return CLIENT_DETACHED;
     }
 
-    if(rx>=softrock_get_receivers()) {
+    if(client->receiver<0) {
         return RECEIVER_INVALID;
     }
 
-    if(receiver[rx].client!=client) {
-        return RECEIVER_NOT_OWNER;
-    }
-
-    receiver[rx].frequency=frequency;
-    receiver[rx].frequency_changed=1;
+    receiver[client->receiver].frequency=frequency;
+    receiver[client->receiver].frequency_changed=1;
 
     return OK;
 }
