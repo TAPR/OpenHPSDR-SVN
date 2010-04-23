@@ -6085,25 +6085,24 @@ namespace PowerSDR
 
 			current_meter_data = -200.0f;
 
-			/*rx1_preamp_offset = new float[4];
-			rx1_preamp_offset[(int)PreampMode.OFF] = 10.0f;
-			rx1_preamp_offset[(int)PreampMode.LOW] = 0.0f;
-			rx1_preamp_offset[(int)PreampMode.MED] = -16.0f;
-			rx1_preamp_offset[(int)PreampMode.HIGH] = -26.0f;
-
-			rx2_preamp_offset = new float[4];
-			rx2_preamp_offset[(int)PreampMode.OFF] = 0.0f;
-			rx2_preamp_offset[(int)PreampMode.HIGH] = 14.0f;*/
-
-            rx1_preamp_offset = new float[9];            
+            rx1_preamp_offset = new float[9];
+            rx1_preamp_offset[(int)PreampMode.OFF] = 10.0f;
+            rx1_preamp_offset[(int)PreampMode.LOW] = 0.0f;
+            rx1_preamp_offset[(int)PreampMode.MED] = -16.0f;
+            rx1_preamp_offset[(int)PreampMode.HIGH] = -26.0f;
+           
             rx1_preamp_offset[(int)PreampMode.HPSDR_ON] = 20.0f;
             rx1_preamp_offset[(int)PreampMode.HPSDR_OFF] = 0.0f;
             rx1_preamp_offset[(int)PreampMode.HPSDR_MINUS10] = -10.0f;
             rx1_preamp_offset[(int)PreampMode.HPSDR_MINUS20] = -20.0f;
             rx1_preamp_offset[(int)PreampMode.HPSDR_MINUS30] = -30.0f; 
+ 
+            rx2_preamp_offset = new float[4];
+            rx2_preamp_offset[(int)PreampMode.OFF] = 0.0f;
+            rx2_preamp_offset[(int)PreampMode.HIGH] = 14.0f;
 
 
-			this.ActiveControl = chkPower;		// Power has focus initially
+            this.ActiveControl = chkPower;		// Power has focus initially
 
 			Display.Target = picDisplay;
 			Display.Init();						// Initialize Display variables
@@ -33820,6 +33819,8 @@ namespace PowerSDR
 							rx1_freq += (cw_pitch*0.0000010);
 							break;
 						case DSPMode.CWL:
+                            chkANF.Checked = false;
+                            chkANF.Enabled = false;
 							break;
 						default:
 							rx1_freq -= (cw_pitch*0.0000010);
@@ -33840,6 +33841,7 @@ namespace PowerSDR
 						}
 						int pwr = ptbPWR.Value;
 						ptbPWR.Maximum = 100;
+                        chkANF.Enabled = true;
 						//ptbPWR.TickFrequency = 10;
 					
 						if(rx1_xvtr_index < 0) 
@@ -33857,6 +33859,7 @@ namespace PowerSDR
 							chkMON.Enabled = true;
 							chkBIN.Enabled = true;
 						}
+                        chkANF.Enabled = true;
 					}
 					break;
 				case DSPMode.SAM:
@@ -33870,6 +33873,7 @@ namespace PowerSDR
 							chkMON.Enabled = true;
 							chkBIN.Enabled = true;
 						}
+                        chkANF.Enabled = true;
 					}
 					break;
 				case DSPMode.SPEC:
@@ -33882,6 +33886,7 @@ namespace PowerSDR
 						EnableAllFilters();
 					RX1Filter = rx1_filter;
 					if_shift = true;
+                    chkANF.Enabled = true;
 					if(was_panadapter) comboDisplayMode.Text = "Panadapter";
 					else if(was_waterfall) comboDisplayMode.Text = "Waterfall";		
 					switch(Display.CurrentDisplayMode)
@@ -33905,6 +33910,8 @@ namespace PowerSDR
 					{
 						SetupForm.VACEnable = false;
 					}
+                    chkANF.Checked = false;
+                    chkANF.Enabled = false;
 					break;
 				case DSPMode.DIGU:
 					radModeDIGU.BackColor = SystemColors.Control;
@@ -33914,9 +33921,13 @@ namespace PowerSDR
 					{
 						SetupForm.VACEnable = false;
 					}
+                    chkANF.Checked = false;
+                    chkANF.Enabled = false;
 					break;
 				case DSPMode.DRM:
 					radModeDRM.BackColor = SystemColors.Control;
+                    chkANF.Checked = false;
+                    chkANF.Enabled = false;
 					if_shift = true;
 					vfo_offset = 0.0;
 					if(vac_auto_enable &&
@@ -33945,6 +33956,7 @@ namespace PowerSDR
 						radio.GetDSPTX(0).TXOsc = 0.0;
 					}
 					panelModeSpecificPhone.BringToFront();
+                    chkANF.Enabled = true;
 					break;
 				case DSPMode.USB:
 					radModeUSB.BackColor = button_selected_color;
@@ -33957,6 +33969,7 @@ namespace PowerSDR
 						radio.GetDSPTX(0).TXOsc = 0.0;
 					}
                     panelModeSpecificPhone.BringToFront();
+                    chkANF.Enabled = true;
 					break;
 				case DSPMode.DSB:
 					radModeDSB.BackColor = button_selected_color;
@@ -33969,6 +33982,7 @@ namespace PowerSDR
 						radio.GetDSPTX(0).TXOsc = 0.0;
 					}
                     panelModeSpecificPhone.BringToFront();
+                    chkANF.Enabled = true;
 					break;
 				case DSPMode.CWL:
 					radModeCWL.BackColor = button_selected_color;
@@ -33985,7 +33999,8 @@ namespace PowerSDR
 							DttSP.StartKeyer();
 						}
 						cw_key_mode = true;
-					
+                        chkANF.Checked = false;
+                        chkANF.Enabled = false;
 						SetTXFilters(new_mode, tx_filter_low, tx_filter_high);
 					}
 
@@ -34019,6 +34034,8 @@ namespace PowerSDR
 						}
 						cw_key_mode = true;
 						SetTXFilters(new_mode, tx_filter_low, tx_filter_high);
+                        chkANF.Checked = false;
+                        chkANF.Enabled = false;
 					}
 
 					switch(rx1_dsp_mode)
@@ -34059,6 +34076,7 @@ namespace PowerSDR
 						radio.GetDSPTX(0).TXOsc = 11025.0;
 					}
                     panelModeSpecificPhone.BringToFront();
+                    chkANF.Enabled = true;
 					break;
 				case DSPMode.AM:
 					radModeAM.BackColor = button_selected_color;
@@ -34075,6 +34093,7 @@ namespace PowerSDR
 						radio.GetDSPTX(0).TXOsc = 11025.0;
 					}
                     panelModeSpecificPhone.BringToFront();
+                    chkANF.Enabled = true;
 					break;
 				case DSPMode.SAM:
 					radModeSAM.BackColor = button_selected_color;
@@ -34091,6 +34110,7 @@ namespace PowerSDR
 						radio.GetDSPTX(0).TXOsc = 11025.0;
 					}
                     panelModeSpecificPhone.BringToFront();
+                    chkANF.Enabled = true;
 					break;
 				case DSPMode.SPEC:
 					radModeSPEC.BackColor = button_selected_color;
@@ -34113,6 +34133,7 @@ namespace PowerSDR
 					radio.GetDSPRX(0, 0).SpectrumPreFilter = true;
 					Display.RXDisplayLow = -(int)sample_rate1/2;
 					Display.RXDisplayHigh = (int)sample_rate1/2;
+                    chkANF.Enabled = true;
 					break;
 				case DSPMode.DIGL:
 					radModeDIGL.BackColor = button_selected_color;
@@ -34126,6 +34147,8 @@ namespace PowerSDR
 						SetupForm.VACEnable = true;
 
                     panelModeSpecificDigital.BringToFront();
+                    chkANF.Checked = false;
+                    chkANF.Enabled = false;
 					break;
 				case DSPMode.DIGU:
 					radModeDIGU.BackColor = button_selected_color;
@@ -34139,6 +34162,8 @@ namespace PowerSDR
 						SetupForm.VACEnable = true;
 
                     panelModeSpecificDigital.BringToFront();
+                    chkANF.Checked = false;
+                    chkANF.Enabled = false;
 					break;
 				case DSPMode.DRM:
 					if_shift = false;
@@ -34161,6 +34186,8 @@ namespace PowerSDR
 					/*Display.RXDisplayLow = -8000;
 						Display.RXDisplayHigh = 8000;*/
                     panelModeSpecificDigital.BringToFront();
+                    chkANF.Checked = false;
+                    chkANF.Enabled = false;
 					break;
 			}
 
