@@ -1,4 +1,8 @@
-Phil Harman - VK6APH - 21 Nov 2009
+Phil Harman - VK6APH - 25 Arpil 2010
+
+ *******  NOTE:  Altera indicates that their software will run on 32 bit versions of XP and Vista. Support or Win7 or 64 bit vesions is not presently indicated. ******
+
+
 
 Here are the steps requried to progam the EPCS16 on the Mercury board, EPCS4 on Penelope and the EPM240T100 on Janus.
 
@@ -12,9 +16,9 @@ Here are the steps requried to progam the EPCS16 on the Mercury board, EPCS4 on 
 
    https://www.altera.com/support/software/download/programming/quartus2/dnl-quartus2_programmer.jsp
 
-   The latest version is V9.1
+   The latest version is V9.1sp2
    Install in the default directory. If you install in a different directory then edit
-   Program-Mercury-EPCS16.bat and Program-Penelope-EPCS4.bat to reflect the change. 
+   Program-Mercury-EPCS16.bat, Program-Penelope-EPCS4.bat and Program-Janus-EPM240T100.bat to reflect the    change. 
 
    We need to install this application in order to load the large number of
    DLLs requried to run the simple command line  programer (quartus_pgm.exe)
@@ -41,7 +45,7 @@ Here are the steps requried to progam the EPCS16 on the Mercury board, EPCS4 on 
 
    Select: Install from a list or specific location and browse to
 
-   C:/altera/81/qprogrammer/drivers/usb-blaster
+   C:/altera/[version]/qprogrammer/drivers/usb-blaster  where [version] is the version you have downloaded
 
    The Wizard will then install altera USB-Blaster
 
@@ -49,6 +53,7 @@ Here are the steps requried to progam the EPCS16 on the Mercury board, EPCS4 on 
    Check that the drivers have installed correctly by looking in 
 
    Start\Control Panel\System\Hardware\Device Manager\Universal Serial Bus controllers
+
    there should be an entry marked  Altera USB-Blaster
 
 
