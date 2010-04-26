@@ -1,0 +1,158 @@
+Flow report for Mercury
+Thu Oct 29 11:26:43 2009
+Quartus II Version 9.0 Build 132 02/25/2009 SJ Web Edition
+
+
+---------------------
+; Table of Contents ;
+---------------------
+  1. Legal Notice
+  2. Flow Summary
+  3. Flow Settings
+  4. Flow Non-Default Global Settings
+  5. Flow Elapsed Time
+  6. Flow OS Summary
+  7. Flow Log
+
+
+
+----------------
+; Legal Notice ;
+----------------
+Copyright (C) 1991-2009 Altera Corporation
+Your use of Altera Corporation's design tools, logic functions 
+and other software and tools, and its AMPP partner logic 
+functions, and any output files from any of the foregoing 
+(including device programming or simulation files), and any 
+associated documentation or information are expressly subject 
+to the terms and conditions of the Altera Program License 
+Subscription Agreement, Altera MegaCore Function License 
+Agreement, or other applicable license agreement, including, 
+without limitation, that your use is for the sole purpose of 
+programming logic devices manufactured by Altera and sold by 
+Altera or its authorized distributors.  Please refer to the 
+applicable agreement for further details.
+
+
+
++------------------------------------------------------------------------------+
+; Flow Summary                                                                 ;
++------------------------------------+-----------------------------------------+
+; Flow Status                        ; Analyzed - Thu Oct 29 11:26:43 2009     ;
+; Quartus II Version                 ; 9.0 Build 132 02/25/2009 SJ Web Edition ;
+; Revision Name                      ; Mercury                                 ;
+; Top-level Entity Name              ; Mercury                                 ;
+; Family                             ; Cyclone III                             ;
+; Device                             ; EP3C25Q240C8                            ;
+; Timing Models                      ; Final                                   ;
+; Met timing requirements            ; No                                      ;
+; Total logic elements               ; 21,671 / 24,624 ( 88 % )                ;
+;     Total combinational functions  ; 19,918 / 24,624 ( 81 % )                ;
+;     Dedicated logic registers      ; 12,797 / 24,624 ( 52 % )                ;
+; Total registers                    ; 12797                                   ;
+; Total pins                         ; 76 / 149 ( 51 % )                       ;
+; Total virtual pins                 ; 0                                       ;
+; Total memory bits                  ; 193,039 / 608,256 ( 32 % )              ;
+; Embedded Multiplier 9-bit elements ; 110 / 132 ( 83 % )                      ;
+; Total PLLs                         ; 0 / 4 ( 0 % )                           ;
++------------------------------------+-----------------------------------------+
+
+
++-----------------------------------------+
+; Flow Settings                           ;
++-------------------+---------------------+
+; Option            ; Setting             ;
++-------------------+---------------------+
+; Start date & time ; 10/29/2009 10:19:51 ;
+; Main task         ; Compilation         ;
+; Revision Name     ; Mercury             ;
++-------------------+---------------------+
+
+
++--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Flow Non-Default Global Settings                                                                                                                                                     ;
++-------------------------------------------------+------------------------------------------------------------------------------------+--------------------+-------------+------------+
+; Assignment Name                                 ; Value                                                                              ; Default Value      ; Entity Name ; Section Id ;
++-------------------------------------------------+------------------------------------------------------------------------------------+--------------------+-------------+------------+
+; ADV_NETLIST_OPT_SYNTH_WYSIWYG_REMAP             ; On                                                                                 ; Off                ; --          ; --         ;
+; ALLOW_ANY_RAM_SIZE_FOR_RECOGNITION              ; On                                                                                 ; Off                ; --          ; --         ;
+; ALLOW_ANY_ROM_SIZE_FOR_RECOGNITION              ; On                                                                                 ; Off                ; --          ; --         ;
+; ALLOW_ANY_SHIFT_REGISTER_SIZE_FOR_RECOGNITION   ; On                                                                                 ; Off                ; --          ; --         ;
+; AUTO_SHIFT_REGISTER_RECOGNITION                 ; Always                                                                             ; Auto               ; --          ; --         ;
+; COMPILER_SIGNATURE_ID                           ; 621001296458.125683679104196                                                       ; --                 ; --          ; --         ;
+; ENABLE_DRC_SETTINGS                             ; On                                                                                 ; Off                ; --          ; --         ;
+; ENABLE_SIGNALTAP                                ; Off                                                                                ; --                 ; --          ; --         ;
+; FITTER_EFFORT                                   ; Standard Fit                                                                       ; Auto Fit           ; --          ; --         ;
+; FMAX_REQUIREMENT                                ; 122.88 MHz                                                                         ; --                 ; --          ; --         ;
+; IGNORE_CASCADE_BUFFERS                          ; On                                                                                 ; Off                ; --          ; --         ;
+; IGNORE_LCELL_BUFFERS                            ; On                                                                                 ; Off                ; --          ; --         ;
+; IP_TOOL_NAME                                    ; Shift register (RAM-based)                                                         ; --                 ; --          ; --         ;
+; IP_TOOL_VERSION                                 ; 8.1                                                                                ; --                 ; --          ; --         ;
+; MISC_FILE                                       ; C:/Proj/DSP/Mercury/SVN_VE3NEA/Merc_Verilog/Mercury.dpf                            ; --                 ; --          ; --         ;
+; MISC_FILE                                       ; C:/HPSDR/trunk/Mercury V2/Mercury.dpf                                              ; --                 ; --          ; --         ;
+; MISC_FILE                                       ; C:/Documents and Settings/Kirk/Desktop/Mercury/Mercury.dpf                         ; --                 ; --          ; --         ;
+; MISC_FILE                                       ; C:/Documents and Settings/Kirk Weedman/Desktop/HPSDR Verilog/Mercury/Mercury.dpf   ; --                 ; --          ; --         ;
+; MISC_FILE                                       ; C:/Documents and Settings/Kirk/Desktop/HPSDR Verilog/Mercury/Mercury.dpf           ; --                 ; --          ; --         ;
+; MISC_FILE                                       ; C:/Documents and Settings/Kirk/Desktop/openhpsdr/HPSDR Verilog/Mercury/Mercury.dpf ; --                 ; --          ; --         ;
+; MUX_RESTRUCTURE                                 ; Off                                                                                ; Auto               ; --          ; --         ;
+; NOMINAL_CORE_SUPPLY_VOLTAGE                     ; 1.2V                                                                               ; --                 ; --          ; --         ;
+; NUMBER_OF_PATHS_TO_REPORT                       ; 2000                                                                               ; 200                ; --          ; --         ;
+; OPTIMIZE_MULTI_CORNER_TIMING                    ; On                                                                                 ; Off                ; --          ; --         ;
+; OPTIMIZE_POWER_DURING_FITTING                   ; Extra effort                                                                       ; Normal compilation ; --          ; --         ;
+; PHYSICAL_SYNTHESIS_COMBO_LOGIC_FOR_AREA         ; On                                                                                 ; Off                ; --          ; --         ;
+; PHYSICAL_SYNTHESIS_EFFORT                       ; Extra                                                                              ; Normal             ; --          ; --         ;
+; PHYSICAL_SYNTHESIS_MAP_LOGIC_TO_MEMORY_FOR_AREA ; On                                                                                 ; Off                ; --          ; --         ;
+; POWER_BOARD_THERMAL_MODEL                       ; None (CONSERVATIVE)                                                                ; --                 ; --          ; --         ;
+; POWER_PRESET_COOLING_SOLUTION                   ; 23 MM HEAT SINK WITH 200 LFPM AIRFLOW                                              ; --                 ; --          ; --         ;
+; REMOVE_REDUNDANT_LOGIC_CELLS                    ; On                                                                                 ; Off                ; --          ; --         ;
+; SEARCH_PATH                                     ; C:/HPDSDR/trunk/VK6APH/Mercury/megafunctions/                                      ; --                 ; --          ; --         ;
+; SEARCH_PATH                                     ; C:/HPDSDR/trunk/VK6APH/Mercury/db/                                                 ; --                 ; --          ; --         ;
+; SEARCH_PATH                                     ; C:/HPSDR/trunk/VK6APH/Mercury/megafunctions/                                       ; --                 ; --          ; --         ;
+; SEARCH_PATH                                     ; C:/HPSDR/trunk/VK6APH/Mercury/db/                                                  ; --                 ; --          ; --         ;
+; SEARCH_PATH                                     ; C:/FPGA/Mercury/megafunctions/                                                     ; --                 ; --          ; --         ;
+; SEARCH_PATH                                     ; C:/FPGA/Mercury/db/                                                                ; --                 ; --          ; --         ;
+; STATE_MACHINE_PROCESSING                        ; User-Encoded                                                                       ; Auto               ; --          ; --         ;
+; USE_LOGICLOCK_CONSTRAINTS_IN_BALANCING          ; Off                                                                                ; On                 ; --          ; --         ;
+; USE_SIGNALTAP_FILE                              ; Mercury.stp                                                                        ; --                 ; --          ; --         ;
+; USE_TIMEQUEST_TIMING_ANALYZER                   ; Off                                                                                ; On                 ; --          ; --         ;
++-------------------------------------------------+------------------------------------------------------------------------------------+--------------------+-------------+------------+
+
+
++-----------------------------------------------------------------------------------------------------------------------------+
+; Flow Elapsed Time                                                                                                           ;
++-------------------------+--------------+-------------------------+---------------------+------------------------------------+
+; Module Name             ; Elapsed Time ; Average Processors Used ; Peak Virtual Memory ; Total CPU Time (on all processors) ;
++-------------------------+--------------+-------------------------+---------------------+------------------------------------+
+; Analysis & Synthesis    ; 00:05:21     ; 1.0                     ; 249 MB              ; 00:05:14                           ;
+; Fitter                  ; 00:52:55     ; 1.0                     ; 420 MB              ; 00:52:07                           ;
+; Assembler               ; 00:02:35     ; 1.0                     ; 284 MB              ; 00:02:27                           ;
+; Classic Timing Analyzer ; 00:02:09     ; 1.0                     ; 264 MB              ; 00:02:05                           ;
+; Design Assistant        ; 00:02:34     ; 1.0                     ; 254 MB              ; 00:02:30                           ;
+; Total                   ; 01:05:34     ; --                      ; --                  ; 01:04:23                           ;
++-------------------------+--------------+-------------------------+---------------------+------------------------------------+
+
+
++---------------------------------------------------------------------------------------+
+; Flow OS Summary                                                                       ;
++-------------------------+------------------+------------+------------+----------------+
+; Module Name             ; Machine Hostname ; OS Name    ; OS Version ; Processor type ;
++-------------------------+------------------+------------+------------+----------------+
+; Analysis & Synthesis    ; aloha            ; Windows XP ; 5.1        ; i1586          ;
+; Fitter                  ; aloha            ; Windows XP ; 5.1        ; i1586          ;
+; Assembler               ; aloha            ; Windows XP ; 5.1        ; i1586          ;
+; Classic Timing Analyzer ; aloha            ; Windows XP ; 5.1        ; i1586          ;
+; Design Assistant        ; aloha            ; Windows XP ; 5.1        ; i1586          ;
++-------------------------+------------------+------------+------------+----------------+
+
+
+------------
+; Flow Log ;
+------------
+quartus_map --read_settings_files=on --write_settings_files=off Mercury -c Mercury
+quartus_fit --read_settings_files=off --write_settings_files=off Mercury -c Mercury
+quartus_asm --read_settings_files=off --write_settings_files=off Mercury -c Mercury
+quartus_tan --read_settings_files=off --write_settings_files=off Mercury -c Mercury --timing_analysis_only
+quartus_drc --read_settings_files=off --write_settings_files=off Mercury -c Mercury
+
+
+
