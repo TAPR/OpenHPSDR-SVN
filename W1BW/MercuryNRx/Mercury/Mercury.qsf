@@ -28,7 +28,7 @@ set_global_assignment -name DEVICE EP3C25Q240C8
 set_global_assignment -name TOP_LEVEL_ENTITY Mercury
 set_global_assignment -name ORIGINAL_QUARTUS_VERSION 5.1
 set_global_assignment -name PROJECT_CREATION_TIME_DATE "21:19:27  JUNE 09, 2006"
-set_global_assignment -name LAST_QUARTUS_VERSION 9.0
+set_global_assignment -name LAST_QUARTUS_VERSION "9.1 SP2"
 set_global_assignment -name ADD_DEFAULT_PINS_TO_SIMULATION_OUTPUT_WAVEFORMS OFF
 set_global_assignment -name VECTOR_INPUT_SOURCE Mercury.vwf
 set_global_assignment -name GENERATE_RBF_FILE ON
@@ -173,6 +173,16 @@ set_global_assignment -name ALLOW_ANY_SHIFT_REGISTER_SIZE_FOR_RECOGNITION ON
 set_global_assignment -name PHYSICAL_SYNTHESIS_MAP_LOGIC_TO_MEMORY_FOR_AREA ON
 set_global_assignment -name IGNORE_LCELL_BUFFERS ON
 set_global_assignment -name IGNORE_CASCADE_BUFFERS ON
+set_instance_assignment -name MULTICYCLE 2 -from * -to "ram_rcvr:MDC[*].Merc_rcv|ramcic:cic_inst_Q2|wr_data"
+set_location_assignment PIN_55 -to MDOUT[7]
+set_location_assignment PIN_52 -to MDOUT[6]
+set_location_assignment PIN_51 -to MDOUT[5]
+set_location_assignment PIN_50 -to MDOUT[4]
+set_instance_assignment -name MULTICYCLE 4 -from C122_frequency_HZ -to C122_sync_phase_word[*]
+set_global_assignment -name MISC_FILE /home/bruce/ham/repos_sdr_hpsdr/trunk/W1BW/MercuryNRx/Mercury/Mercury.dpf
+set_global_assignment -name VERILOG_FILE ram_rcvr.v
+set_global_assignment -name VERILOG_FILE C122_PLL.v
+set_global_assignment -name VERILOG_FILE C10_PLL.v
 set_global_assignment -name VERILOG_FILE ../common/FIFO.v
 set_global_assignment -name VERILOG_FILE ../common/I2S_xmit.v
 set_global_assignment -name VERILOG_FILE ../common/NWire_rcv.v
@@ -206,11 +216,6 @@ set_global_assignment -name SIGNALTAP_FILE spectrum.stp
 set_global_assignment -name VERILOG_FILE kordic.v
 set_global_assignment -name SIGNALTAP_FILE NWire_rcv.stp
 set_global_assignment -name VERILOG_FILE TestModeChecker.v
-set_instance_assignment -name MULTICYCLE 2 -from * -to "ram_rcvr:MDC[*].Merc_rcv|ramcic:cic_inst_Q2|wr_data"
-set_location_assignment PIN_55 -to MDOUT[7]
-set_location_assignment PIN_52 -to MDOUT[6]
-set_location_assignment PIN_51 -to MDOUT[5]
-set_location_assignment PIN_50 -to MDOUT[4]
-set_instance_assignment -name MULTICYCLE 4 -from C122_frequency_HZ -to C122_sync_phase_word[*]
 set_global_assignment -name SIGNALTAP_FILE ramcic.stp
 set_global_assignment -name SIGNALTAP_FILE TestModeChecker.stp
+set_location_assignment PIN_89 -to AUX_CLK

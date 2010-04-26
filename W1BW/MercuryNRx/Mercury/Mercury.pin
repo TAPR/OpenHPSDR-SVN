@@ -1,4 +1,4 @@
- -- Copyright (C) 1991-2009 Altera Corporation
+ -- Copyright (C) 1991-2010 Altera Corporation
  -- Your use of Altera Corporation's design tools, logic functions 
  -- and other software and tools, and its AMPP partner logic 
  -- functions, and any output files from any of the foregoing 
@@ -48,10 +48,9 @@
  --					This pin should be connected to GND. It may also be connected  to a
  --					valid signal  on the board  (low, high, or toggling)  if that signal
  --					is required for a different revision of the design.
- -- GND*          : Unused  I/O  pin.   For transceiver I/O banks (Bank 13, 14, 15, 16 and 17),
- --           	    connect each pin marked GND* either individually through a 10k Ohm resistor
- --           	    to GND or tie all pins together and connect through a single 10k Ohm resistor
- --           	    to GND.
+ -- GND*          : Unused  I/O  pin.   For transceiver I/O banks, connect each pin marked GND*
+ --           	    either individually through a 10k Ohm resistor to GND or tie all pins
+ --           	    together and connect through a single 10k Ohm resistor to GND.
  --           	    For non-transceiver I/O banks, connect each pin marked GND* directly to GND
  --           	    or leave it unconnected.
  -- RESERVED      : Unused I/O pin, which MUST be left unconnected.
@@ -67,7 +66,7 @@
  -- Pin directions (input, output or bidir) are based on device operating in user mode.
  ---------------------------------------------------------------------------------
 
-Quartus II Version 9.0 Build 132 02/25/2009 SJ Web Edition
+Quartus II Version 9.1 Build 350 03/24/2010 Service Pack 2 SJ Web Edition
 CHIP  "Mercury"  ASSIGNED TO AN: EP3C25Q240C8
 
 Pin Name/Usage               : Location  : Dir.   : I/O Standard      : Voltage : I/O Bank  : User Assignment
@@ -160,7 +159,7 @@ VCCINT                       : 85        : power  :                   : 1.2V    
 GND                          : 86        : gnd    :                   :         :           :                
 RESERVED_INPUT               : 87        :        :                   :         : 3         :                
 RESERVED_INPUT               : 88        :        :                   :         : 3         :                
-GND+                         : 89        :        :                   :         : 3         :                
+AUX_CLK                      : 89        : input  : 3.0-V LVTTL       :         : 3         : Y              
 GND+                         : 90        :        :                   :         : 3         :                
 GND+                         : 91        :        :                   :         : 4         :                
 GND+                         : 92        :        :                   :         : 4         :                

@@ -54,9 +54,15 @@
                    2. Make ext_10MHZ drive dependent on Merc_ID == 3'b000
      6 Oct 2009    1. Implement RAM based CIC filters
                    2. Increase number of recievers to 8 using RAM based CIC filters
+     25 Apr 2010   Back-ported 2.8->2.9->2.9a changes:
+ 	  1 Nov 2009 - Replaced Kordic with Cordic, released as V2.8a	
+ 	 21 Nov 2009 - Added PLL dividers for 122.88MHz to 80kHz and 10MHz AUX_CLK (J8)	
+ 	             - Added PLL lock LEDs for both PLLs
+ 	             - release as V2.9
+ 	 24 Dec 2009 - Fixed bug in SPI clock generation - release as V2.9a 	
 */
 	
-module Mercury(OSC_10MHZ, ext_10MHZ,C122_clk,INA,CC,ATTRLY,A6,A12,C21,C23,C24,MDOUT,CDIN,TLV320_BCLK,TLV320_LRCIN,
+module Mercury(OSC_10MHZ, ext_10MHZ,AUX_CLK, C122_clk,INA,CC,ATTRLY,A6,A12,C21,C23,C24,MDOUT,CDIN,TLV320_BCLK,TLV320_LRCIN,
                TLV320_LRCOUT,TLV320_MCLK,CMODE,MOSI,SCLK,nCS,SPI_data,SPI_clock,Tx_load_strobe,Rx_load_strobe,
                FPGA_PLL,LVDS_TXE,LVDS_RXE_N,OVERFLOW,DITHER,SHDN,PGA,RAND,INIT_DONE,TEST0,TEST1,TEST2,TEST3,
                DEBUG_LED0,DEBUG_LED1,DEBUG_LED2,DEBUG_LED3,DEBUG_LED4,DEBUG_LED5,DEBUG_LED6,DEBUG_LED7, 
@@ -64,6 +70,7 @@ module Mercury(OSC_10MHZ, ext_10MHZ,C122_clk,INA,CC,ATTRLY,A6,A12,C21,C23,C24,MD
 
 input  wire        OSC_10MHZ;      // 10MHz TCXO input 
 inout  tri         ext_10MHZ;      // 10MHz reference to/from Atlas pin C16
+input  wire 	   AUX_CLK;	   // 10MHz reference from Excalibur 
 input  wire        C122_clk;       // 122.88MHz clock from LT2208
 input  wire [15:0] INA;            // samples from LT2208
 input  wire        CC;             // Command & Control from Atlas C20
@@ -114,7 +121,7 @@ input  wire        Channels_8_1;   // GPIO 3
 
 parameter C122_TPD = 2.1;
 
-localparam SERIAL = 8'd28;  // software version serial number - 2.8
+localparam SERIAL = 8'd30;  // software version serial number - 3.0 (wishful thinking?)
 
 reg  [15:0] temp_ADC;
 reg         data_ready;     // set at end of decimation
@@ -328,12 +335,11 @@ clk_lrclk_gen lrgen (.reset(C122_cgen_rst), .CLK_IN(C122_clk), .BCLK(BCLK),  .Sp
 wire      SPI_clk;
 reg       [1:0] spc;
 
-always @(posedge C122_clk)
+always @(posedge C122_cbclk)
 begin
   if (C122_rst)
     spc <= 2'b00;
-  else if (C122_cbclk)
-    spc <= spc + 2'b01;
+  else  spc <= spc + 2'b01;
 end
 
 assign SPI_clk = spc[1];
@@ -372,6 +378,8 @@ assign C23 = (Merc_ID == 3'b000) ? CLRCLK : 1'bz; // M_LR_sync -> so Ozy knows w
 I2S_xmit #(.DATA_BITS(32))  // CLRCLK running at 48KHz
   LR (.rst(C122_rst), .lrclk(CLRCLK), .clk(C122_clk), .CBrise(C122_cbrise),
       .CBfall(C122_cbfall), .sample(C122_LR_data), .outbit(CDIN));
+
+
 //////////////////////////////////////////////////////////////
 //
 //		Convert frequency to phase word 
@@ -382,7 +390,7 @@ I2S_xmit #(.DATA_BITS(32))  // CLRCLK running at 48KHz
 	Calculates  ratio = fo/fs = frequency/122.88Mhz where frequency is in MHz
 	Each calculation should take no more than 1 CBCLK
 */
-localparam NR = 5; // number of receivers to implement
+localparam NR = 3; // number of receivers to implement
 
 reg       [31:0] C122_frequency_HZ [0:NR-1];   // frequency control bits for CORDIC
 reg       [31:0] C122_last_freq [0:NR-1];
@@ -414,10 +422,22 @@ generate
     //------------------------------------------------------------------------------
     //                 block RAM based Receiver module
     //------------------------------------------------------------------------------
-    ram_rcvr Merc_rcv (
+    //ram_rcvr Merc_rcv (
       //control
-      .rst(C122_rst),
-      .clk(C122_clk),
+      //.rst(C122_rst),
+      //.clk(C122_clk),
+      //.rate({C122_DFS1, C122_DFS0}), //00=48, 01=96, 10=192 kHz
+      //.frequency(C122_sync_phase_word[c]),
+      //.out_strobe(strobe[c]),
+      //input
+      //.in_data(temp_ADC),
+      //output
+      //.out_data_I(rx_I[c]),
+      //.out_data_Q(rx_Q[c])
+      //);
+    receiver Merc_rcv (
+      //control
+      .clock(C122_clk),
       .rate({C122_DFS1, C122_DFS0}), //00=48, 01=96, 10=192 kHz
       .frequency(C122_sync_phase_word[c]),
       .out_strobe(strobe[c]),
@@ -427,7 +447,6 @@ generate
       .out_data_I(rx_I[c]),
       .out_data_Q(rx_Q[c])
       );
-
     // If Channels_8_1 is low (default) then all 8 channels from this card are driven onto Atlas
     // otherwise only MDO[0] is driven on the appropriate Atlas line defined by Merc_ID
     assign MDOUT[c] = Channels_8_1 ? ((Merc_ID == c) ? MDO[c] : 1'bz) : MDO[c]; // 1 channel : 8 channels
@@ -768,52 +787,53 @@ SPI Alex_SPI_Tx (.Alex_data(SPI_Alex_data), .SPI_data(SPI_data),
 	set the 122.88MHz VCXO to its nominal frequency.
 	The selection of the internal or external 10MHz reference for the PLL
 	is made using ref_ext.
+	The clock division is made using PLLs to provide the highest performance.
 */
 
-// div 10 MHz ref clock by 125 to get 80 khz 
-
 wire ref_80khz; 
-reg osc_80khz; 
+wire osc_80khz; 
+wire exc_80khz;
+wire ref_clock;
+wire C10_locked;
+wire C122_locked;
 
+// div 10 MHz ref clock on Atlas C16  by 125 to get 80 khz 
 oddClockDivider refClockDivider(reference, ref_80khz); 
 
-// Divide  122.88 MHz by 1536 to get 80 khz 
-reg [9:0] count_12288; 
+// Use a PLL to divide 10MHz clock from AUX_CLK Excalibur) to 80kHz
+C10_PLL PLL2_inst (.inclk0(AUX_CLK), .c0(exc_80khz), .locked(C10_locked));
 
-always @ (posedge C122_clk)
-begin
-  if (count_12288 == 767)
-  begin
-    count_12288 <= 0;
-    osc_80khz   <= ~osc_80khz; 
-  end
-  else
-    count_12288 <= count_12288 + 1'b1;
-end
+// Use a PLL to divide 122.88MHz clock to 80kHz
+C122_PLL PLL_inst (.inclk0(C122_clk), .c0(osc_80khz), .locked(C122_locked));
+
+// If C10_PLL is locked then use its output, else use C16
+assign ref_clock = C10_locked ? exc_80khz : ref_80khz;
+
 
 // NOTE: If external reference is not available then phase detector 
 // will be fed with 80kHz from 122.88MHz clock. Loop filter will 
 // set VCXO control volts to 3.3v/2
 
 // Apply to EXOR phase detector 
-assign FPGA_PLL = ref_80khz ^ osc_80khz; 
+assign FPGA_PLL = ref_clock ^ osc_80khz; 
 
+
+//------------------------------------------------------------------------------
+//                          LEDs
+//------------------------------------------------------------------------------
 
 // LEDs for testing 0 = off, 1 = on
 assign DEBUG_LED0 = OVERFLOW; 		// LED 0 on when ADC Overflow
-
-// check for correct Alex relay selection
-
-assign DEBUG_LED3 = C122_TX_relay[0]; 
-assign DEBUG_LED4 = C122_TX_relay[1];
-assign DEBUG_LED5 = C122_RX_relay[0];
-assign DEBUG_LED6 = C122_RX_relay[1];
-assign DEBUG_LED7 = C122_Rout;
+assign DEBUG_LED3 = C122_locked; 
+assign DEBUG_LED4 = C10_locked;
+assign DEBUG_LED5 = 1'b0;
+assign DEBUG_LED6 = 1'b0;
+assign DEBUG_LED7 = 1'b0;
 
 
 // Test pins
 assign TEST0 = osc_80khz; // 80kHz from 122.88MHz
-assign TEST1 = ref_80khz; // 80kHz from 10MHz
+assign TEST1 = ref_clock; // 80kHz from 10MHz
 assign TEST2 = FPGA_PLL;  // phase detector output
 assign TEST3 = 1'b0; 
 
@@ -822,7 +842,7 @@ assign TEST3 = 1'b0;
 //------------------------------------------------------------------------------
 reg [26:0]counter;
 always @(posedge C122_clk) counter = counter + 1'b1;
-assign {DEBUG_LED2,DEBUG_LED1} = counter[25:24];  // faster flash for this version!
+assign {DEBUG_LED2,DEBUG_LED1} = counter[24:23];  // even faster flash for this version!
 
 endmodule 
 
