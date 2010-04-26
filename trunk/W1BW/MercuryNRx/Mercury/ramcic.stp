@@ -1,0 +1,1025 @@
+<session jtag_chain="ByteBlasterMV [LPT1]" jtag_device="@1: EP3C25 (0x020F30DD)" sof_file="" top_level_entity="Mercury">
+  <display_tree gui_logging_enabled="0">
+    <display_branch instance="auto_signaltap_0" log="USE_GLOBAL_TEMP" signal_set="USE_GLOBAL_TEMP" trigger="USE_GLOBAL_TEMP"/>
+  </display_tree>
+  <instance entity_name="sld_signaltap" is_auto_node="yes" is_expanded="true" name="auto_signaltap_0" source_file="sld_signaltap.vhd">
+    <node_ip_info instance_id="0" mfg_id="110" node_id="0" version="6"/>
+    <signal_set global_temp="1" is_expanded="true" name="signal_set: 2009/10/18 22:33:02  #0">
+      <clock name="ram_rcvr:MDC[0].Merc_rcv|clk" polarity="posedge" tap_mode="classic"/>
+      <config ram_type="M4K" reserved_data_nodes="0" reserved_storage_qualifier_nodes="0" reserved_trigger_nodes="0" sample_depth="128" trigger_in_enable="no" trigger_out_enable="no"/>
+      <top_entity/>
+      <signal_vec>
+        <trigger_input_vec>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|out_strobe" tap_mode="classic" type="combinatorial"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|cic_state.CIC_START" tap_mode="classic" type="combinatorial"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|cic_state.COMB" tap_mode="classic" type="combinatorial"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|cic_state.COMB2" tap_mode="classic" type="combinatorial"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|cic_state.COMB_S2" tap_mode="classic" type="combinatorial"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|cic_state.COMB_START" tap_mode="classic" type="combinatorial"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|cic_state.INT" tap_mode="classic" type="combinatorial"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|cic_state.INT_S2" tap_mode="classic" type="combinatorial"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|cic_state.INT_START" tap_mode="classic" type="combinatorial"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|in_data[0]" tap_mode="classic" type="combinatorial"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|in_data[10]" tap_mode="classic" type="combinatorial"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|in_data[11]" tap_mode="classic" type="combinatorial"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|in_data[12]" tap_mode="classic" type="combinatorial"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|in_data[13]" tap_mode="classic" type="combinatorial"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|in_data[14]" tap_mode="classic" type="combinatorial"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|in_data[15]" tap_mode="classic" type="combinatorial"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|in_data[16]" tap_mode="classic" type="combinatorial"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|in_data[17]" tap_mode="classic" type="combinatorial"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|in_data[18]" tap_mode="classic" type="combinatorial"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|in_data[19]" tap_mode="classic" type="combinatorial"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|in_data[1]" tap_mode="classic" type="combinatorial"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|in_data[20]" tap_mode="classic" type="combinatorial"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|in_data[21]" tap_mode="classic" type="combinatorial"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|in_data[22]" tap_mode="classic" type="combinatorial"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|in_data[23]" tap_mode="classic" type="combinatorial"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|in_data[24]" tap_mode="classic" type="combinatorial"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|in_data[25]" tap_mode="classic" type="combinatorial"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|in_data[26]" tap_mode="classic" type="combinatorial"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|in_data[27]" tap_mode="classic" type="combinatorial"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|in_data[2]" tap_mode="classic" type="combinatorial"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|in_data[3]" tap_mode="classic" type="combinatorial"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|in_data[4]" tap_mode="classic" type="combinatorial"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|in_data[5]" tap_mode="classic" type="combinatorial"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|in_data[6]" tap_mode="classic" type="combinatorial"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|in_data[7]" tap_mode="classic" type="combinatorial"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|in_data[8]" tap_mode="classic" type="combinatorial"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|in_data[9]" tap_mode="classic" type="combinatorial"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|in_strobe" tap_mode="classic" type="combinatorial"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|out_data[0]" tap_mode="classic" type="combinatorial"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|out_data[10]" tap_mode="classic" type="combinatorial"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|out_data[11]" tap_mode="classic" type="combinatorial"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|out_data[12]" tap_mode="classic" type="combinatorial"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|out_data[13]" tap_mode="classic" type="combinatorial"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|out_data[14]" tap_mode="classic" type="combinatorial"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|out_data[15]" tap_mode="classic" type="combinatorial"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|out_data[16]" tap_mode="classic" type="combinatorial"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|out_data[17]" tap_mode="classic" type="combinatorial"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|out_data[18]" tap_mode="classic" type="combinatorial"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|out_data[19]" tap_mode="classic" type="combinatorial"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|out_data[1]" tap_mode="classic" type="combinatorial"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|out_data[20]" tap_mode="classic" type="combinatorial"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|out_data[21]" tap_mode="classic" type="combinatorial"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|out_data[22]" tap_mode="classic" type="combinatorial"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|out_data[23]" tap_mode="classic" type="combinatorial"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|out_data[2]" tap_mode="classic" type="combinatorial"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|out_data[3]" tap_mode="classic" type="combinatorial"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|out_data[4]" tap_mode="classic" type="combinatorial"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|out_data[5]" tap_mode="classic" type="combinatorial"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|out_data[6]" tap_mode="classic" type="combinatorial"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|out_data[7]" tap_mode="classic" type="combinatorial"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|out_data[8]" tap_mode="classic" type="combinatorial"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|out_data[9]" tap_mode="classic" type="combinatorial"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|r_ic" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|rcnt[0]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|rcnt[1]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|rcnt[2]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|rcnt[3]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|rcnt[4]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|rd_data[0]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|rd_data[10]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|rd_data[11]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|rd_data[12]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|rd_data[13]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|rd_data[14]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|rd_data[15]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|rd_data[16]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|rd_data[17]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|rd_data[18]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|rd_data[19]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|rd_data[1]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|rd_data[20]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|rd_data[21]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|rd_data[22]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|rd_data[23]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|rd_data[24]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|rd_data[25]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|rd_data[26]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|rd_data[27]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|rd_data[28]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|rd_data[29]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|rd_data[2]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|rd_data[30]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|rd_data[31]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|rd_data[32]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|rd_data[33]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|rd_data[3]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|rd_data[4]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|rd_data[5]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|rd_data[6]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|rd_data[7]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|rd_data[8]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|rd_data[9]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|sample_no[0]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|sample_no[1]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|sum[0]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|sum[10]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|sum[11]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|sum[12]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|sum[13]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|sum[14]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|sum[15]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|sum[16]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|sum[17]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|sum[18]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|sum[19]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|sum[1]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|sum[20]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|sum[21]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|sum[22]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|sum[23]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|sum[24]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|sum[25]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|sum[26]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|sum[27]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|sum[28]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|sum[29]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|sum[2]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|sum[30]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|sum[31]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|sum[32]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|sum[33]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|sum[3]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|sum[4]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|sum[5]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|sum[6]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|sum[7]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|sum[8]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|sum[9]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|w_ic" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|wcnt[0]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|wcnt[1]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|wcnt[2]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|wcnt[3]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|wcnt[4]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|wr" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|wr_data[0]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|wr_data[10]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|wr_data[11]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|wr_data[12]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|wr_data[13]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|wr_data[14]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|wr_data[15]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|wr_data[16]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|wr_data[17]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|wr_data[18]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|wr_data[19]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|wr_data[1]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|wr_data[20]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|wr_data[21]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|wr_data[22]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|wr_data[23]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|wr_data[24]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|wr_data[25]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|wr_data[26]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|wr_data[27]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|wr_data[28]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|wr_data[29]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|wr_data[2]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|wr_data[30]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|wr_data[31]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|wr_data[32]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|wr_data[33]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|wr_data[3]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|wr_data[4]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|wr_data[5]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|wr_data[6]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|wr_data[7]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|wr_data[8]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|wr_data[9]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|rate[0]" tap_mode="classic" type="combinatorial"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|rate[1]" tap_mode="classic" type="combinatorial"/>
+        </trigger_input_vec>
+        <data_input_vec>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|out_strobe" tap_mode="classic" type="combinatorial"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|cic_state.CIC_START" tap_mode="classic" type="combinatorial"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|cic_state.COMB" tap_mode="classic" type="combinatorial"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|cic_state.COMB2" tap_mode="classic" type="combinatorial"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|cic_state.COMB_S2" tap_mode="classic" type="combinatorial"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|cic_state.COMB_START" tap_mode="classic" type="combinatorial"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|cic_state.INT" tap_mode="classic" type="combinatorial"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|cic_state.INT_S2" tap_mode="classic" type="combinatorial"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|cic_state.INT_START" tap_mode="classic" type="combinatorial"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|in_data[0]" tap_mode="classic" type="combinatorial"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|in_data[10]" tap_mode="classic" type="combinatorial"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|in_data[11]" tap_mode="classic" type="combinatorial"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|in_data[12]" tap_mode="classic" type="combinatorial"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|in_data[13]" tap_mode="classic" type="combinatorial"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|in_data[14]" tap_mode="classic" type="combinatorial"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|in_data[15]" tap_mode="classic" type="combinatorial"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|in_data[16]" tap_mode="classic" type="combinatorial"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|in_data[17]" tap_mode="classic" type="combinatorial"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|in_data[18]" tap_mode="classic" type="combinatorial"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|in_data[19]" tap_mode="classic" type="combinatorial"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|in_data[1]" tap_mode="classic" type="combinatorial"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|in_data[20]" tap_mode="classic" type="combinatorial"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|in_data[21]" tap_mode="classic" type="combinatorial"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|in_data[22]" tap_mode="classic" type="combinatorial"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|in_data[23]" tap_mode="classic" type="combinatorial"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|in_data[24]" tap_mode="classic" type="combinatorial"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|in_data[25]" tap_mode="classic" type="combinatorial"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|in_data[26]" tap_mode="classic" type="combinatorial"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|in_data[27]" tap_mode="classic" type="combinatorial"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|in_data[2]" tap_mode="classic" type="combinatorial"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|in_data[3]" tap_mode="classic" type="combinatorial"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|in_data[4]" tap_mode="classic" type="combinatorial"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|in_data[5]" tap_mode="classic" type="combinatorial"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|in_data[6]" tap_mode="classic" type="combinatorial"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|in_data[7]" tap_mode="classic" type="combinatorial"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|in_data[8]" tap_mode="classic" type="combinatorial"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|in_data[9]" tap_mode="classic" type="combinatorial"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|in_strobe" tap_mode="classic" type="combinatorial"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|out_data[0]" tap_mode="classic" type="combinatorial"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|out_data[10]" tap_mode="classic" type="combinatorial"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|out_data[11]" tap_mode="classic" type="combinatorial"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|out_data[12]" tap_mode="classic" type="combinatorial"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|out_data[13]" tap_mode="classic" type="combinatorial"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|out_data[14]" tap_mode="classic" type="combinatorial"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|out_data[15]" tap_mode="classic" type="combinatorial"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|out_data[16]" tap_mode="classic" type="combinatorial"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|out_data[17]" tap_mode="classic" type="combinatorial"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|out_data[18]" tap_mode="classic" type="combinatorial"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|out_data[19]" tap_mode="classic" type="combinatorial"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|out_data[1]" tap_mode="classic" type="combinatorial"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|out_data[20]" tap_mode="classic" type="combinatorial"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|out_data[21]" tap_mode="classic" type="combinatorial"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|out_data[22]" tap_mode="classic" type="combinatorial"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|out_data[23]" tap_mode="classic" type="combinatorial"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|out_data[2]" tap_mode="classic" type="combinatorial"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|out_data[3]" tap_mode="classic" type="combinatorial"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|out_data[4]" tap_mode="classic" type="combinatorial"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|out_data[5]" tap_mode="classic" type="combinatorial"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|out_data[6]" tap_mode="classic" type="combinatorial"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|out_data[7]" tap_mode="classic" type="combinatorial"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|out_data[8]" tap_mode="classic" type="combinatorial"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|out_data[9]" tap_mode="classic" type="combinatorial"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|r_ic" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|rcnt[0]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|rcnt[1]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|rcnt[2]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|rcnt[3]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|rcnt[4]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|rd_data[0]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|rd_data[10]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|rd_data[11]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|rd_data[12]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|rd_data[13]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|rd_data[14]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|rd_data[15]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|rd_data[16]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|rd_data[17]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|rd_data[18]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|rd_data[19]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|rd_data[1]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|rd_data[20]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|rd_data[21]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|rd_data[22]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|rd_data[23]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|rd_data[24]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|rd_data[25]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|rd_data[26]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|rd_data[27]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|rd_data[28]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|rd_data[29]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|rd_data[2]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|rd_data[30]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|rd_data[31]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|rd_data[32]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|rd_data[33]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|rd_data[3]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|rd_data[4]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|rd_data[5]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|rd_data[6]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|rd_data[7]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|rd_data[8]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|rd_data[9]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|sample_no[0]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|sample_no[1]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|sum[0]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|sum[10]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|sum[11]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|sum[12]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|sum[13]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|sum[14]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|sum[15]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|sum[16]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|sum[17]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|sum[18]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|sum[19]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|sum[1]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|sum[20]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|sum[21]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|sum[22]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|sum[23]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|sum[24]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|sum[25]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|sum[26]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|sum[27]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|sum[28]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|sum[29]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|sum[2]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|sum[30]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|sum[31]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|sum[32]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|sum[33]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|sum[3]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|sum[4]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|sum[5]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|sum[6]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|sum[7]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|sum[8]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|sum[9]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|w_ic" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|wcnt[0]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|wcnt[1]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|wcnt[2]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|wcnt[3]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|wcnt[4]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|wr" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|wr_data[0]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|wr_data[10]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|wr_data[11]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|wr_data[12]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|wr_data[13]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|wr_data[14]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|wr_data[15]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|wr_data[16]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|wr_data[17]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|wr_data[18]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|wr_data[19]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|wr_data[1]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|wr_data[20]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|wr_data[21]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|wr_data[22]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|wr_data[23]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|wr_data[24]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|wr_data[25]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|wr_data[26]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|wr_data[27]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|wr_data[28]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|wr_data[29]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|wr_data[2]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|wr_data[30]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|wr_data[31]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|wr_data[32]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|wr_data[33]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|wr_data[3]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|wr_data[4]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|wr_data[5]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|wr_data[6]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|wr_data[7]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|wr_data[8]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|wr_data[9]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|rate[0]" tap_mode="classic" type="combinatorial"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|rate[1]" tap_mode="classic" type="combinatorial"/>
+        </data_input_vec>
+        <storage_qualifier_input_vec>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|out_strobe" tap_mode="classic" type="combinatorial"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|cic_state.CIC_START" tap_mode="classic" type="combinatorial"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|cic_state.COMB" tap_mode="classic" type="combinatorial"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|cic_state.COMB2" tap_mode="classic" type="combinatorial"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|cic_state.COMB_S2" tap_mode="classic" type="combinatorial"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|cic_state.COMB_START" tap_mode="classic" type="combinatorial"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|cic_state.INT" tap_mode="classic" type="combinatorial"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|cic_state.INT_S2" tap_mode="classic" type="combinatorial"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|cic_state.INT_START" tap_mode="classic" type="combinatorial"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|in_data[0]" tap_mode="classic" type="combinatorial"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|in_data[10]" tap_mode="classic" type="combinatorial"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|in_data[11]" tap_mode="classic" type="combinatorial"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|in_data[12]" tap_mode="classic" type="combinatorial"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|in_data[13]" tap_mode="classic" type="combinatorial"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|in_data[14]" tap_mode="classic" type="combinatorial"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|in_data[15]" tap_mode="classic" type="combinatorial"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|in_data[16]" tap_mode="classic" type="combinatorial"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|in_data[17]" tap_mode="classic" type="combinatorial"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|in_data[18]" tap_mode="classic" type="combinatorial"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|in_data[19]" tap_mode="classic" type="combinatorial"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|in_data[1]" tap_mode="classic" type="combinatorial"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|in_data[20]" tap_mode="classic" type="combinatorial"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|in_data[21]" tap_mode="classic" type="combinatorial"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|in_data[22]" tap_mode="classic" type="combinatorial"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|in_data[23]" tap_mode="classic" type="combinatorial"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|in_data[24]" tap_mode="classic" type="combinatorial"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|in_data[25]" tap_mode="classic" type="combinatorial"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|in_data[26]" tap_mode="classic" type="combinatorial"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|in_data[27]" tap_mode="classic" type="combinatorial"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|in_data[2]" tap_mode="classic" type="combinatorial"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|in_data[3]" tap_mode="classic" type="combinatorial"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|in_data[4]" tap_mode="classic" type="combinatorial"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|in_data[5]" tap_mode="classic" type="combinatorial"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|in_data[6]" tap_mode="classic" type="combinatorial"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|in_data[7]" tap_mode="classic" type="combinatorial"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|in_data[8]" tap_mode="classic" type="combinatorial"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|in_data[9]" tap_mode="classic" type="combinatorial"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|in_strobe" tap_mode="classic" type="combinatorial"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|out_data[0]" tap_mode="classic" type="combinatorial"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|out_data[10]" tap_mode="classic" type="combinatorial"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|out_data[11]" tap_mode="classic" type="combinatorial"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|out_data[12]" tap_mode="classic" type="combinatorial"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|out_data[13]" tap_mode="classic" type="combinatorial"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|out_data[14]" tap_mode="classic" type="combinatorial"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|out_data[15]" tap_mode="classic" type="combinatorial"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|out_data[16]" tap_mode="classic" type="combinatorial"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|out_data[17]" tap_mode="classic" type="combinatorial"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|out_data[18]" tap_mode="classic" type="combinatorial"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|out_data[19]" tap_mode="classic" type="combinatorial"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|out_data[1]" tap_mode="classic" type="combinatorial"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|out_data[20]" tap_mode="classic" type="combinatorial"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|out_data[21]" tap_mode="classic" type="combinatorial"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|out_data[22]" tap_mode="classic" type="combinatorial"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|out_data[23]" tap_mode="classic" type="combinatorial"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|out_data[2]" tap_mode="classic" type="combinatorial"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|out_data[3]" tap_mode="classic" type="combinatorial"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|out_data[4]" tap_mode="classic" type="combinatorial"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|out_data[5]" tap_mode="classic" type="combinatorial"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|out_data[6]" tap_mode="classic" type="combinatorial"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|out_data[7]" tap_mode="classic" type="combinatorial"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|out_data[8]" tap_mode="classic" type="combinatorial"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|out_data[9]" tap_mode="classic" type="combinatorial"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|r_ic" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|rcnt[0]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|rcnt[1]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|rcnt[2]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|rcnt[3]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|rcnt[4]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|rd_data[0]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|rd_data[10]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|rd_data[11]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|rd_data[12]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|rd_data[13]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|rd_data[14]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|rd_data[15]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|rd_data[16]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|rd_data[17]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|rd_data[18]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|rd_data[19]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|rd_data[1]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|rd_data[20]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|rd_data[21]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|rd_data[22]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|rd_data[23]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|rd_data[24]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|rd_data[25]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|rd_data[26]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|rd_data[27]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|rd_data[28]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|rd_data[29]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|rd_data[2]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|rd_data[30]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|rd_data[31]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|rd_data[32]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|rd_data[33]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|rd_data[3]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|rd_data[4]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|rd_data[5]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|rd_data[6]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|rd_data[7]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|rd_data[8]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|rd_data[9]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|sample_no[0]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|sample_no[1]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|sum[0]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|sum[10]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|sum[11]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|sum[12]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|sum[13]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|sum[14]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|sum[15]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|sum[16]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|sum[17]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|sum[18]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|sum[19]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|sum[1]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|sum[20]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|sum[21]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|sum[22]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|sum[23]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|sum[24]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|sum[25]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|sum[26]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|sum[27]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|sum[28]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|sum[29]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|sum[2]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|sum[30]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|sum[31]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|sum[32]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|sum[33]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|sum[3]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|sum[4]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|sum[5]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|sum[6]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|sum[7]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|sum[8]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|sum[9]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|w_ic" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|wcnt[0]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|wcnt[1]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|wcnt[2]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|wcnt[3]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|wcnt[4]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|wr" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|wr_data[0]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|wr_data[10]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|wr_data[11]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|wr_data[12]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|wr_data[13]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|wr_data[14]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|wr_data[15]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|wr_data[16]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|wr_data[17]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|wr_data[18]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|wr_data[19]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|wr_data[1]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|wr_data[20]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|wr_data[21]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|wr_data[22]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|wr_data[23]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|wr_data[24]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|wr_data[25]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|wr_data[26]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|wr_data[27]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|wr_data[28]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|wr_data[29]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|wr_data[2]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|wr_data[30]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|wr_data[31]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|wr_data[32]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|wr_data[33]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|wr_data[3]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|wr_data[4]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|wr_data[5]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|wr_data[6]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|wr_data[7]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|wr_data[8]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|wr_data[9]" tap_mode="classic" type="register"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|rate[0]" tap_mode="classic" type="combinatorial"/>
+          <wire name="ram_rcvr:MDC[0].Merc_rcv|rate[1]" tap_mode="classic" type="combinatorial"/>
+        </storage_qualifier_input_vec>
+      </signal_vec>
+      <presentation>
+        <data_view>
+          <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|out_strobe"/>
+          <bus is_signal_inverted="no" link="all" name="ram_rcvr:MDC[0].Merc_rcv|rate" order="lsb_to_msb" radix="hex" state="collapse" type="combinatorial">
+            <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|rate[0]"/>
+            <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|rate[1]"/>
+          </bus>
+          <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|cic_state.CIC_START"/>
+          <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|cic_state.INT_START"/>
+          <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|cic_state.INT_S2"/>
+          <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|cic_state.INT"/>
+          <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|cic_state.COMB_START"/>
+          <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|cic_state.COMB_S2"/>
+          <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|cic_state.COMB"/>
+          <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|cic_state.COMB2"/>
+          <bus is_signal_inverted="no" link="all" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|in_data" order="lsb_to_msb" radix="hex" state="collapse" type="combinatorial">
+            <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|in_data[0]"/>
+            <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|in_data[1]"/>
+            <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|in_data[2]"/>
+            <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|in_data[3]"/>
+            <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|in_data[4]"/>
+            <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|in_data[5]"/>
+            <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|in_data[6]"/>
+            <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|in_data[7]"/>
+            <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|in_data[8]"/>
+            <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|in_data[9]"/>
+            <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|in_data[10]"/>
+            <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|in_data[11]"/>
+            <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|in_data[12]"/>
+            <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|in_data[13]"/>
+            <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|in_data[14]"/>
+            <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|in_data[15]"/>
+            <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|in_data[16]"/>
+            <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|in_data[17]"/>
+            <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|in_data[18]"/>
+            <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|in_data[19]"/>
+            <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|in_data[20]"/>
+            <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|in_data[21]"/>
+            <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|in_data[22]"/>
+            <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|in_data[23]"/>
+            <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|in_data[24]"/>
+            <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|in_data[25]"/>
+            <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|in_data[26]"/>
+            <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|in_data[27]"/>
+          </bus>
+          <bus is_signal_inverted="no" link="all" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|out_data" order="lsb_to_msb" radix="hex" state="collapse" type="combinatorial">
+            <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|out_data[0]"/>
+            <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|out_data[1]"/>
+            <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|out_data[2]"/>
+            <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|out_data[3]"/>
+            <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|out_data[4]"/>
+            <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|out_data[5]"/>
+            <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|out_data[6]"/>
+            <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|out_data[7]"/>
+            <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|out_data[8]"/>
+            <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|out_data[9]"/>
+            <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|out_data[10]"/>
+            <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|out_data[11]"/>
+            <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|out_data[12]"/>
+            <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|out_data[13]"/>
+            <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|out_data[14]"/>
+            <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|out_data[15]"/>
+            <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|out_data[16]"/>
+            <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|out_data[17]"/>
+            <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|out_data[18]"/>
+            <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|out_data[19]"/>
+            <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|out_data[20]"/>
+            <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|out_data[21]"/>
+            <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|out_data[22]"/>
+            <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|out_data[23]"/>
+          </bus>
+          <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|in_strobe"/>
+          <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|r_ic"/>
+          <bus is_signal_inverted="no" link="all" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|rcnt" order="lsb_to_msb" radix="hex" state="collapse" type="register">
+            <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|rcnt[0]"/>
+            <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|rcnt[1]"/>
+            <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|rcnt[2]"/>
+            <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|rcnt[3]"/>
+            <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|rcnt[4]"/>
+          </bus>
+          <bus is_signal_inverted="no" link="all" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|rd_data" order="lsb_to_msb" radix="hex" state="collapse" type="register">
+            <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|rd_data[0]"/>
+            <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|rd_data[1]"/>
+            <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|rd_data[2]"/>
+            <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|rd_data[3]"/>
+            <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|rd_data[4]"/>
+            <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|rd_data[5]"/>
+            <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|rd_data[6]"/>
+            <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|rd_data[7]"/>
+            <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|rd_data[8]"/>
+            <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|rd_data[9]"/>
+            <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|rd_data[10]"/>
+            <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|rd_data[11]"/>
+            <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|rd_data[12]"/>
+            <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|rd_data[13]"/>
+            <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|rd_data[14]"/>
+            <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|rd_data[15]"/>
+            <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|rd_data[16]"/>
+            <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|rd_data[17]"/>
+            <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|rd_data[18]"/>
+            <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|rd_data[19]"/>
+            <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|rd_data[20]"/>
+            <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|rd_data[21]"/>
+            <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|rd_data[22]"/>
+            <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|rd_data[23]"/>
+            <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|rd_data[24]"/>
+            <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|rd_data[25]"/>
+            <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|rd_data[26]"/>
+            <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|rd_data[27]"/>
+            <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|rd_data[28]"/>
+            <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|rd_data[29]"/>
+            <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|rd_data[30]"/>
+            <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|rd_data[31]"/>
+            <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|rd_data[32]"/>
+            <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|rd_data[33]"/>
+          </bus>
+          <bus is_signal_inverted="no" link="all" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|sample_no" order="lsb_to_msb" radix="hex" state="collapse" type="register">
+            <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|sample_no[0]"/>
+            <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|sample_no[1]"/>
+          </bus>
+          <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|w_ic"/>
+          <bus is_signal_inverted="no" link="all" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|wcnt" order="lsb_to_msb" radix="hex" state="collapse" type="register">
+            <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|wcnt[0]"/>
+            <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|wcnt[1]"/>
+            <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|wcnt[2]"/>
+            <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|wcnt[3]"/>
+            <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|wcnt[4]"/>
+          </bus>
+          <bus is_signal_inverted="no" link="all" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|wr_data" order="lsb_to_msb" radix="hex" state="collapse" type="register">
+            <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|wr_data[0]"/>
+            <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|wr_data[1]"/>
+            <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|wr_data[2]"/>
+            <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|wr_data[3]"/>
+            <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|wr_data[4]"/>
+            <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|wr_data[5]"/>
+            <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|wr_data[6]"/>
+            <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|wr_data[7]"/>
+            <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|wr_data[8]"/>
+            <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|wr_data[9]"/>
+            <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|wr_data[10]"/>
+            <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|wr_data[11]"/>
+            <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|wr_data[12]"/>
+            <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|wr_data[13]"/>
+            <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|wr_data[14]"/>
+            <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|wr_data[15]"/>
+            <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|wr_data[16]"/>
+            <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|wr_data[17]"/>
+            <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|wr_data[18]"/>
+            <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|wr_data[19]"/>
+            <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|wr_data[20]"/>
+            <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|wr_data[21]"/>
+            <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|wr_data[22]"/>
+            <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|wr_data[23]"/>
+            <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|wr_data[24]"/>
+            <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|wr_data[25]"/>
+            <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|wr_data[26]"/>
+            <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|wr_data[27]"/>
+            <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|wr_data[28]"/>
+            <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|wr_data[29]"/>
+            <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|wr_data[30]"/>
+            <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|wr_data[31]"/>
+            <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|wr_data[32]"/>
+            <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|wr_data[33]"/>
+          </bus>
+          <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|wr"/>
+          <bus is_signal_inverted="no" link="all" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|sum" order="lsb_to_msb" radix="hex" state="collapse" type="register">
+            <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|sum[0]"/>
+            <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|sum[1]"/>
+            <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|sum[2]"/>
+            <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|sum[3]"/>
+            <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|sum[4]"/>
+            <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|sum[5]"/>
+            <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|sum[6]"/>
+            <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|sum[7]"/>
+            <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|sum[8]"/>
+            <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|sum[9]"/>
+            <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|sum[10]"/>
+            <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|sum[11]"/>
+            <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|sum[12]"/>
+            <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|sum[13]"/>
+            <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|sum[14]"/>
+            <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|sum[15]"/>
+            <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|sum[16]"/>
+            <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|sum[17]"/>
+            <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|sum[18]"/>
+            <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|sum[19]"/>
+            <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|sum[20]"/>
+            <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|sum[21]"/>
+            <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|sum[22]"/>
+            <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|sum[23]"/>
+            <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|sum[24]"/>
+            <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|sum[25]"/>
+            <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|sum[26]"/>
+            <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|sum[27]"/>
+            <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|sum[28]"/>
+            <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|sum[29]"/>
+            <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|sum[30]"/>
+            <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|sum[31]"/>
+            <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|sum[32]"/>
+            <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|sum[33]"/>
+          </bus>
+        </data_view>
+        <setup_view>
+          <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|out_strobe"/>
+          <bus is_signal_inverted="no" link="all" name="ram_rcvr:MDC[0].Merc_rcv|rate" order="lsb_to_msb" radix="hex" state="collapse" type="combinatorial">
+            <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|rate[0]"/>
+            <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|rate[1]"/>
+          </bus>
+          <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|cic_state.CIC_START"/>
+          <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|cic_state.INT_START"/>
+          <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|cic_state.INT_S2"/>
+          <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|cic_state.INT"/>
+          <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|cic_state.COMB_START"/>
+          <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|cic_state.COMB_S2"/>
+          <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|cic_state.COMB"/>
+          <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|cic_state.COMB2"/>
+          <bus is_signal_inverted="no" link="all" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|in_data" order="lsb_to_msb" radix="hex" state="collapse" type="combinatorial">
+            <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|in_data[0]"/>
+            <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|in_data[1]"/>
+            <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|in_data[2]"/>
+            <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|in_data[3]"/>
+            <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|in_data[4]"/>
+            <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|in_data[5]"/>
+            <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|in_data[6]"/>
+            <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|in_data[7]"/>
+            <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|in_data[8]"/>
+            <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|in_data[9]"/>
+            <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|in_data[10]"/>
+            <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|in_data[11]"/>
+            <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|in_data[12]"/>
+            <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|in_data[13]"/>
+            <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|in_data[14]"/>
+            <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|in_data[15]"/>
+            <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|in_data[16]"/>
+            <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|in_data[17]"/>
+            <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|in_data[18]"/>
+            <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|in_data[19]"/>
+            <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|in_data[20]"/>
+            <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|in_data[21]"/>
+            <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|in_data[22]"/>
+            <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|in_data[23]"/>
+            <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|in_data[24]"/>
+            <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|in_data[25]"/>
+            <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|in_data[26]"/>
+            <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|in_data[27]"/>
+          </bus>
+          <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|in_strobe"/>
+          <bus is_signal_inverted="no" link="all" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|out_data" order="lsb_to_msb" radix="hex" state="collapse" type="combinatorial">
+            <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|out_data[0]"/>
+            <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|out_data[1]"/>
+            <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|out_data[2]"/>
+            <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|out_data[3]"/>
+            <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|out_data[4]"/>
+            <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|out_data[5]"/>
+            <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|out_data[6]"/>
+            <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|out_data[7]"/>
+            <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|out_data[8]"/>
+            <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|out_data[9]"/>
+            <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|out_data[10]"/>
+            <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|out_data[11]"/>
+            <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|out_data[12]"/>
+            <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|out_data[13]"/>
+            <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|out_data[14]"/>
+            <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|out_data[15]"/>
+            <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|out_data[16]"/>
+            <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|out_data[17]"/>
+            <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|out_data[18]"/>
+            <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|out_data[19]"/>
+            <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|out_data[20]"/>
+            <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|out_data[21]"/>
+            <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|out_data[22]"/>
+            <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|out_data[23]"/>
+          </bus>
+          <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|r_ic"/>
+          <bus is_signal_inverted="no" link="all" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|rcnt" order="lsb_to_msb" radix="hex" state="collapse" type="register">
+            <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|rcnt[0]"/>
+            <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|rcnt[1]"/>
+            <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|rcnt[2]"/>
+            <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|rcnt[3]"/>
+            <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|rcnt[4]"/>
+          </bus>
+          <bus is_signal_inverted="no" link="all" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|sample_no" order="lsb_to_msb" radix="hex" state="collapse" type="register">
+            <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|sample_no[0]"/>
+            <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|sample_no[1]"/>
+          </bus>
+          <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|w_ic"/>
+          <bus is_signal_inverted="no" link="all" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|wcnt" order="lsb_to_msb" radix="hex" state="collapse" type="register">
+            <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|wcnt[0]"/>
+            <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|wcnt[1]"/>
+            <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|wcnt[2]"/>
+            <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|wcnt[3]"/>
+            <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|wcnt[4]"/>
+          </bus>
+          <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|wr"/>
+          <bus is_signal_inverted="no" link="all" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|rd_data" order="lsb_to_msb" radix="hex" state="collapse" type="register">
+            <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|rd_data[0]"/>
+            <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|rd_data[1]"/>
+            <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|rd_data[2]"/>
+            <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|rd_data[3]"/>
+            <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|rd_data[4]"/>
+            <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|rd_data[5]"/>
+            <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|rd_data[6]"/>
+            <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|rd_data[7]"/>
+            <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|rd_data[8]"/>
+            <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|rd_data[9]"/>
+            <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|rd_data[10]"/>
+            <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|rd_data[11]"/>
+            <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|rd_data[12]"/>
+            <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|rd_data[13]"/>
+            <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|rd_data[14]"/>
+            <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|rd_data[15]"/>
+            <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|rd_data[16]"/>
+            <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|rd_data[17]"/>
+            <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|rd_data[18]"/>
+            <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|rd_data[19]"/>
+            <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|rd_data[20]"/>
+            <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|rd_data[21]"/>
+            <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|rd_data[22]"/>
+            <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|rd_data[23]"/>
+            <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|rd_data[24]"/>
+            <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|rd_data[25]"/>
+            <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|rd_data[26]"/>
+            <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|rd_data[27]"/>
+            <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|rd_data[28]"/>
+            <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|rd_data[29]"/>
+            <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|rd_data[30]"/>
+            <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|rd_data[31]"/>
+            <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|rd_data[32]"/>
+            <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|rd_data[33]"/>
+          </bus>
+          <bus is_signal_inverted="no" link="all" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|sum" order="lsb_to_msb" radix="hex" state="collapse" type="register">
+            <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|sum[0]"/>
+            <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|sum[1]"/>
+            <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|sum[2]"/>
+            <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|sum[3]"/>
+            <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|sum[4]"/>
+            <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|sum[5]"/>
+            <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|sum[6]"/>
+            <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|sum[7]"/>
+            <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|sum[8]"/>
+            <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|sum[9]"/>
+            <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|sum[10]"/>
+            <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|sum[11]"/>
+            <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|sum[12]"/>
+            <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|sum[13]"/>
+            <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|sum[14]"/>
+            <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|sum[15]"/>
+            <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|sum[16]"/>
+            <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|sum[17]"/>
+            <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|sum[18]"/>
+            <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|sum[19]"/>
+            <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|sum[20]"/>
+            <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|sum[21]"/>
+            <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|sum[22]"/>
+            <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|sum[23]"/>
+            <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|sum[24]"/>
+            <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|sum[25]"/>
+            <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|sum[26]"/>
+            <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|sum[27]"/>
+            <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|sum[28]"/>
+            <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|sum[29]"/>
+            <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|sum[30]"/>
+            <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|sum[31]"/>
+            <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|sum[32]"/>
+            <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|sum[33]"/>
+          </bus>
+          <bus is_signal_inverted="no" link="all" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|wr_data" order="lsb_to_msb" radix="hex" state="collapse" type="register">
+            <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|wr_data[0]"/>
+            <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|wr_data[1]"/>
+            <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|wr_data[2]"/>
+            <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|wr_data[3]"/>
+            <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|wr_data[4]"/>
+            <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|wr_data[5]"/>
+            <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|wr_data[6]"/>
+            <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|wr_data[7]"/>
+            <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|wr_data[8]"/>
+            <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|wr_data[9]"/>
+            <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|wr_data[10]"/>
+            <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|wr_data[11]"/>
+            <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|wr_data[12]"/>
+            <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|wr_data[13]"/>
+            <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|wr_data[14]"/>
+            <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|wr_data[15]"/>
+            <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|wr_data[16]"/>
+            <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|wr_data[17]"/>
+            <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|wr_data[18]"/>
+            <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|wr_data[19]"/>
+            <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|wr_data[20]"/>
+            <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|wr_data[21]"/>
+            <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|wr_data[22]"/>
+            <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|wr_data[23]"/>
+            <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|wr_data[24]"/>
+            <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|wr_data[25]"/>
+            <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|wr_data[26]"/>
+            <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|wr_data[27]"/>
+            <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|wr_data[28]"/>
+            <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|wr_data[29]"/>
+            <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|wr_data[30]"/>
+            <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|wr_data[31]"/>
+            <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|wr_data[32]"/>
+            <net is_signal_inverted="no" name="ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|wr_data[33]"/>
+          </bus>
+        </setup_view>
+      </presentation>
+      <trigger CRC="190CE58" attribute_mem_mode="false" gap_record="true" global_temp="1" is_expanded="true" name="trigger: 2009/10/18 22:33:02  #1" position="pre" power_up_trigger_mode="false" record_data_gap="true" segment_size="1" storage_mode="off" storage_qualifier_disabled="no" storage_qualifier_port_is_pin="true" storage_qualifier_port_name="auto_stp_external_storage_qualifier" storage_qualifier_port_tap_mode="classic" trigger_in="dont_care" trigger_out="active high" trigger_type="circular">
+        <power_up_trigger position="pre" storage_qualifier_disabled="no" trigger_in="dont_care" trigger_out="active high"/>
+        <events use_custom_flow_control="no">
+          <level enabled="yes" name="condition1" type="basic">'ram_rcvr:MDC[0].Merc_rcv|ramcic:cic_inst_I2|cic_state.INT_S2' == rising edge
+            
+            <power_up enabled="yes">
+            </power_up>
+            <op_node/>
+          </level>
+        </events>
+        <storage_qualifier_events>
+          <transitional>0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+            
+            <pwr_up_transitional>0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+            
+            </pwr_up_transitional>
+          </transitional>
+          <storage_qualifier_level type="basic">
+            <power_up>
+            </power_up>
+            <op_node/>
+          </storage_qualifier_level>
+          <storage_qualifier_level type="basic">
+            <power_up>
+            </power_up>
+            <op_node/>
+          </storage_qualifier_level>
+          <storage_qualifier_level type="basic">
+            <power_up>
+            </power_up>
+            <op_node/>
+          </storage_qualifier_level>
+        </storage_qualifier_events>
+        <log>
+          <data global_temp="1" name="log: 2009/10/18 23:50:31  #0" power_up_mode="false" sample_depth="128" trigger_position="16">01000000000010100000000000000011001000011111111110111110100110000000011100011101110011001000000000101111000101011110010100100111001001111001100001101110000111110010001100001110101000100000000001010000000000000001100100001111111111011111010011000000001110001110111001100100000000010111100010101111001010010011100100111100110000110111000011111001000110000111010100010000000000101000000000000000110010000111111111101111101001100000000111000111011100110010000000001011110001010111100101001001110010011110011000011011100001111100100011000011101010001000000000010100000000000000011001000011111111110111110100110000000011100011101110011001000000000101111000101011110010100100111001001111001100001101110000111110010001100001110101000100000000001010000000000000001100100001111111111011111010011000000001110001110111001100100000000010111100010101111001010010011100100111100110000110111000011111001000110000111010100010000000000101000000000000000110010000111111111101111101001100000000111000111011100110010000000001011110001010111100101001001110010011110011000011011100001111100100011000011101010001000000000010100000000000000011001000011111111110111110100110000000011100011101110011001000000000101111000101011110010100100111001001111001100001101110000111110010001100001110101000100000000001010000000000000001100100001111111111011111010011000000001110001110111001100100000000010111100010101111001010010011100100111100110000110111000011111001000110000111010100010000000000101000000000000000110010000111111111101111101001100000000111000111011100110010000000001011110001010111100101001001110010011110011000011011100001111100100011000011101010001000000000010100000000000000011001000011111111110111110100110000000011100011101110011001000000000101111000101011110010100100111001001111001100001101110000111110010001100001110101000100000000001010000000000000001100100001111111111011111010011000000001110001110111001100100000000010111100010101111001010010011100100111100110000110111000011111001000110000111010100010000000000101000000000000000110010000111111111101111101001100000000111000111011100110010000000001011110001010111100101001001110010011110011000011011100001111100100011000011101010001000000000010100000000000000011001000011111111110111110100110000000011100011101110011001000000000101111000101011110010100100111001001111001100001101110000111110010001100001110101000100000000001010000000000000001100100001111111111011111010011000000001110001110111001100100000000010111100010101111001010010011100100111100110000110111000011111001000110000111010100010000000000101000000000000000110010010111111111101111101001100000000111000111011100110010000000001011110001010111100101001001110010011110011000011011100001111100100011000011101010000000000100010100000000000000011001000011111111110111110100110000000011100011101110011001000000000101100000101011110010100100111001001111001100001101110000111110010001100001110101000000000101000110000010000000001001110001111111111011111010011001000001110001110111001100100000000010110000010101111001010010011100100111100110000000101000000000000000000000110010000000000100100011000001000000000100111000111111111101111101001100010001101101101100011111010001101110111000001010111100101001001110010011110000000101101101110111001100100000011011110000000010010001100000100000000010011100011111111110111110100110011000000101011110010100100111001001111000011011011101110011001000000110111101000011100100101010000110101001100100111000000001001000110000010000000001001110001111111111011111010011000010011011100001111100100011000011101010011001001010100001101010011001001110010001101111000101110111110010000011101000000001000100011000001000000000100111000111111111101111101001100101000000000000000000000000000000000000001011110001011101111100100000111010011000100011110011101000100111000001100000000001000010001100000100000000010011100011111111110111110100110100000000000000000000000000000000000000000101111000101110111110010000011101011100000001111001110100010011100000110000000010000001000110000010000000001001110001111111111011111010011011000011010101101001110110101111010011010010111100010111011111001000001110101000001101111000101110111110010000011101000001000000100011000001000000000100111000111111111101111101001101010001011101010111010101000100100000000001011110001011101111100100000111010110000100001001001100110001110000110101010000100000010001100000100000000010011100011111111110111110100110111000011101111110011011001100010010011000101111000101110111110010000011101010100011010110011110110110011000100010101000001000001000110000010000000001001110001111111111011111010011010010010010100110011111111110111100001100010111100010111011111001000001110101110001111000101111111111111101111010001000010000000100011000001000000000100111001111111111111111000101111001000000000000000000000000000000000000001011110001011101111100100000111010111000011100010111111111111110111101000100001000000010001100000100000000010011100111111111111111100010111000000000000000000000000000000000000000000101111000101110111110010000011101001100001110001011111111111111011110100010000100000001000110000010000000001001110011111111111111110001011100000001101101110111001100100000011011110010111100010111011111001000001110100110000111000101111111111111101111010001000010000000100011000001000000000100111001111111111111111000101110000000110110111011100110010000001101111001011110001011101111100100000111010011000011100010111111111111110111101000100001000000010001100000100000000010011100111111111111111100010111000000011011011101110011001000000110111100101111000101110111110010000011101001100001110001011111111111111011110100010000100000001000110000010000000001001110011111111111111110001011100000001101101110111001100100000011011110010111100010111011111001000001110100110000111000101111111111111101111010001000010000000100011000001000000000100111001111111111111111000101110000000110110111011100110010000001101111001011110001011101111100100000111010011000011100010111111111111110111101000100001000000010001100000100000000010011100111111111111111100010111000000011011011101110011001000000110111100101111000101110111110010000011101001100001110001011111111111111011110100010000100000001000110000010000000001001110011111111111111110001011100000001101101110111001100100000011011110010111100010111011111001000001110100110000111000101111111111111101111010001000010000000100011000001000000000100111001111111111111111000101110000000110110111011100110010000001101111001011110001011101111100100000111010011000011100010111111111111110111101000100001000000010001100000100000000010011100111111111111111100010111000000011011011101110011001000000110111100101111000101110111110010000011101001100001110001011111111111111011110100010000100000001000110000010000000001001110011111111111111110001011100000001101101110111001100100000011011110010111100010111011111001000001110100110000111000101111111111111101111010001000010000000100011000001000000000100111001111111111111111000101110000000110110111011100110010000001101111001011110001011101111100100000111010011000011100010111111111111110111101000100001000000010001100000100000000010011100111111111111111100010111000000011011011101110011001000000110111100101111000101110111110010000011101001100001110001011111111111111011110100010000100000001000110000010000000001001110011111111111111110001011100000001101101110111001100100000011011110010111100010111011111001000001110100110000111000101111111111111101111010001000010000000100011000001000000000100111001111111111111111000101110000000110110111011100110010000001101111001011110001011101111100100000111010011000011100010111111111111110111101000100001000000010001100000100000000010011100111111111111111100010111000000011011011101110011001000000110111100101111000101110111110010000011101001100001110001011111111111111011110100010000100000001000110000010000000001001110011111111111111110001011100000001101101110111001100100000011011110010111100010111011111001000001110100110000111000101111111111111101111010001000010000000100011000001000000000100111001111111111111111000101110000000110110111011100110010000001101111001011110001011101111100100000111010011000011100010111111111111110111101000100001000000010001100000100000000010011100111111111111111100010111000000011011011101110011001000000110111100101111000101110111110010000011101001100001110001011111111111111011110100010000100000001000110000010000000001001110011111111111111110001011100000001101101110111001100100000011011110010111100010111011111001000001110100110000111000101111111111111101111010001000010000000100011000001000000000100111001111111111111111000101110000000110110111011100110010000001101111001011110001011101111100100000111010011000011100010111111111111110111101000100001000000010001100000100000000010011100111111111111111100010111000000011011011101110011001000000110111100101111000101110111110010000011101001100001110001011111111111111011110100010000100000001000110000010000000001001110011111111111111110001011100000001101101110111001100100000011011110010111100010111011111001000001110100110000111000101111111111111101111010001000010000000100011000001000000000100111001111111111111111000101110000000110110111011100110010000001101111001011110001011101111100100000111010011000011100010111111111111110111101000100001000000010001100000100000000010011100111111111111111100010111000000011011011101110011001000000110111100101111000101110111110010000011101001100001110001011111111111111011110100010000100000001000110000010000000001001110011111111111111110001011100000001101101110111001100100000011011110010111100010111011111001000001110100110000111000101111111111111101111010001000010000000100011000001000000000100111001111111111111111000101110000000110110111011100110010000001101111001011110001011101111100100000111010011000011100010111111111111110111101000100001000000010001100000100000000010011100111111111111111100010111000000011011011101110011001000000110111100101111000101110111110010000011101001100001110001011111111111111011110100010000100000001000110000010000000001001110011111111111111110001011100000001101101110111001100100000011011110010111100010111011111001000001110100110000111000101111111111111101111010001000010000000100011000001000000000100111001111111111111111000101110000000110110111011100110010000001101111001011110001011101111100100000111010011000011100010111111111111110111101000100001000000010001100000100000000010011100111111111111111100010111000000011011011101110011001000000110111100101111000101110111110010000011101001100001110001011111111111111011110100010000100000001000110000010000000001001110011111111111111110001011100000001101101110111001100100000011011110010111100010111011111001000001110100110000111000101111111111111101111010001000010000000100011000001000000000100111001111111111111111000101110000000110110111011100110010000001101111001011110001011101111100100000111010011000011100010111111111111110111101000100001000000010001100000100000000010011100111111111111111100010111000000011011011101110011001000000110111100101111000101110111110010000011101001100001110001011111111111111011110100010000100000001000110000010000000001001110011111111111111110001011100000001101101110111001100100000011011110010111100010111011111001000001110100110000111000101111111111111101111010001000010000000100011000001000000000100111001111111111111111000101110000000110110111011100110010000001101111001011110001011101111100100000111010011000011100010111111111111110111101000100001000000010001100000100000000010011100111111111111111100010111000000011011011101110011001000000110111100101111000101110111110010000011101001100001110001011111111111111011110100010000100000001000110000010000000001001110011111111111111110001011100000001101101110111001100100000011011110010111100010111011111001000001110100110000111000101111111111111101111010001000010000000100011000001000000000100111001111111111111111000101110000000110110111011100110010000001101111001011110001011101111100100000111010011000011100010111111111111110111101000100001000000010001100000100000000010011100111111111111111100010111000000011011011101110011001000000110111100101111000101110111110010000011101001100001110001011111111111111011110100010000100000001000110000010000000001001110011111111111111110001011100000001101101110111001100100000011011110010111100010111011111001000001110100110000111000101111111111111101111010001000010000000100011000001000000000100111001111111111111111000101110000000110110111011100110010000001101111001011110001011101111100100000111010011000011100010111111111111110111101000100001000000010001100000100000000010011100111111111111111100010111000000011011011101110011001000000110111100101111000101110111110010000011101001100001110001011111111111111011110100010000100000001000110000010000000001001110011111111111111110001011100000001101101110111001100100000011011110010111100010111011111001000001110100110000111000101111111111111101111010001000010000000100011000001000000000100111001111111111111111000101110000000110110111011100110010000001101111001011110001011101111100100000111010011000011100010111111111111110111101000100001000000010001100000100000000010011100111111111111111100010111000000011011011101110011001000000110111100101111000101110111110010000011101001100001110001011111111111111011110100010000100000001000110000010000000001001110011111111111111110001011100000001101101110111001100100000011011110010111100010111011111001000001110100110000111000101111111111111101111010001000010000000100011000001000000000100111001111111111111111000101110000000110110111011100110010000001101111001011110001011101111100100000111010011000011100010111111111111110111101000100001000000010001100000100000000010011100111111111111111100010111000000011011011101110011001000000110111100101111000101110111110010000011101001100001110001011111111111111011110100010000100000001000110000010000000001001110011111111111111110001011100000001101101110111001100100000011011110010111100010111011111001000001110100110000111000101111111111111101111010001000010000000100011000001000000000100111001111111111111111000101110000000110110111011100110010000001101111001011110001011101111100100000111010011000011100010111111111111110111101000100001000000010001100000100000000010011100111111111111111100010111000000011011011101110011001000000110111100101111000101110111110010000011101001100001110001011111111111111011110100010000100000001000110000010000000001001110011111111111111110001011100000001101101110111001100100000011011110010111100010111011111001000001110100110000111000101111111111111101111010001000010000000100011000001000000000100111001111111111111111000101110000000110110111011100110010000001101111001011110001011101111100100000111010011000011100010111111111111110111101000100001000000010001100000100000000010011100111111111111111100010111000000011011011101110011001000000110111100101111000101110111110010000011101001100001110001011111111111111011110100010000100000001000110000010000000001001110011111111111111110001011100000001101101110111001100100000011011110010111100010111011111001000001110100110000111000101111111111111101111010001000010000000100011000001000000000100111001111111111111111000101110000000110110111011100110010000001101111001011110001011101111100100000111010011000011100010111111111111110111101000100001000000010001100000100000000010011100111111111111111100010111000000011011011101110011001000000110111100101111000101110111110010000011101001100001110001011111111111111011110100010000100000001000110000010000000001001110011111111111111110001011100000001101101110111001100100000011011110010111100010111011111001000001110100110000111000101111111111111101111010001000010000000100011000001000000000100111001111111111111111000101110000000110110111011100110010000001101111001011110001011101111100100000111010011000011100010111111111111110111101000100001000000010001100000100000000010011100111111111111111100010111000000011011011101110011001000000110111100101111000101110111110010000011101001100001110001011111111111111011110100010000100000001000110000010000000001001110011111111111111110001011100000001101101110111001100100000011011110010111100010111011111001000001110100110000111000101111111111111101111010001000010000000100011000001000000000100111001111111111111111000101110000000110110111011100110010000001101111001011110001011101111100100000111010011000011100010111111111111110111101000100001000000010001100000100000000010011100111111111111111100010111000000011011011101110011001000000110111100101111000101110111110010000011101001100001110001011111111111111011110100010000100000001000110000010000000001001110011111111111111110001011100000001101101110111001100100000011011110010111100010111011111001000001110100110000111000101111111111111101111010001000010000000100011000001000000000100111001111111111111111000101110000000110110111011100110010000001101111001011110001011101111100100000111010011000011100010111111111111110111101000100001000000010001100000100000000010011100111111111111111100010111000000011011011101110011001000000110111100101111000101110111110010000011101001100001110001011111111111111011110100010000100000001000110000010000000001001110011111111111111110001011100000001101101110111001100100000011011110010111100010111011111001000001110100110000111000101111111111111101111010001000010000000100011000001000000000100111001111111111111111000101110000000110110111011100110010000001101111001011110001011101111100100000111010011000011100010111111111111110111101000100001000000010001100000100000000010011100111111111111111100010111000000011011011101110011001000000110111100101111000101110111110010000011101001100001110001011111111111111011110100010000100000001000110000010000000001001110011111111111111110001011100000001101101110111001100100000011011110010111100010111011111001000001110100110000111000101111111111111101111010001000010000000100011000001000000000100111001111111111111111000101110000000110110111011100110010000001101111001011110001011101111100100000111010011000011100010111111111111110111101000100001000000010001100000100000000010011100111111111111111100010111000000011011011101110011001000000110111100101111000101110111110010000011101001100001110001011111111111111011110100010000100000001000110000010000000001001110011111111111111110001011100000001101101110111001100100000011011110010111100010111011111001000001110100110000111000101111111111111101111010001000010000000100011000001000000000100111001111111111111111000101110000000110110111011100110010000001101111001011110001011101111100100000111010011000011100010111111111111110111101000100001000000010001100000100000000010011100111111111111111100010111000000011011011101110011001000000110111100101111000101110111110010000011101001100001110001011111111111111011110100010000100000001000110000010000000001001110011111111111111110001011100000001101101110111001100100000011011110010111100010111011111001000001110100110000111000101111111111111101111010001000010000000100011000001000000000100111001111111111111111000101110000000110110111011100110010000001101111001011110001011101111100100000111010011000011100010111111111111110111101000100001000000010001100000100000000010011100111111111111111100010111000000011011011101110011001000000110111100101111000101110111110010000011101001100001110001011111111111111011110100010000100000001000110000010000000001001110011111111111111110001011100000001101101110111001100100000011011110010111100010111011111001000001110100110000111000101111111111111101111010001000010000000100011000001000000000100111001111111111111111000101110000000110110111011100110010000001101111001011110001011101111100100000111010011000011100010111111111111110111101000100001000000010001100000100000000010011100111111111111111100010111000000011011011101110011001000000110111100101111000101110111110010000011101001100001110001011111111111111011110100010000100000001000110000010000000001001110011111111111111110001011100000001101101110111001100100000011011110010111100010111011111001000001110100110000111000101111111111111101111010001000010000000100011000001000000000100111001111111111111111000101110000000110110111011100110010000001101111001011110001011101111100100000111010011000011100010111111111111110111101000100001000000010001100000100000000010011100111111111111111100010111000000011011011101110011001000000110111100101111000101110111110010000011101001100001110001011111111111111011110100010000100000001000110000010000000001001110011111111111111110001011100000001101101110111001100100000011011110010111100010111011111001000001110100110000111000101111111111111101111010001000010000000100011000001000000000100111001111111111111111000101110000000110110111011100110010000001101111001011110001011101111100100000111010011000011100010111111111111110111101000100001000000010001100000100000000010011100111111111111111100010111000000011011011101110011001000000110111100101111000101110111110010000011101001100001110001011111111111111011110100010000100000001000110000010000000001001110011111111111111110001011100000001101101110111001100100000011011110010111100010111011111001000001110100110000111000101111111111111101111010001000010000000100011000001000000000100111001111111111111111000101110000000110110111011100110010000001101111001011110001011101111100100000111010011000011100010111111111111110111101000100001000000010001100000100000000010011100111111111111111100010111000000011011011101110011001000000110111100101111000101110111110010000011101001100001110001011111111111111011110100010000100000001000110000010000000001001110011111111111111110001011100000001101101110111001100100000011011110010111100010111011111001000001110100110000111000101111111111111101111010001000010000000100011000001000000000100111001111111111111111000101110000000110110111011100110010000001101111001011110001011101111100100000111010011000011100010111111111111110111101000100001000000010001100000100000000010011100111111111111111100010111000000011011011101110011001000000110111100101111000101110111110010000011101001100001110001011111111111111011110100010000100000001000110000010000000001001110011111111111111110001011100000001101101110111001100100000011011110010111100010111011111001000001110100110000111000101111111111111101111010001000010000000100011000001000000000100111001111111111111111000101110000000110110111011100110010000001101111001011110001011101111100100000111010011000011100010111111111111110111101000100001000000010001100000100000000010011100111111111111111100010111000000011011011101110011001000000110111100101111000101110111110010000011101001100001110001011111111111111011110100010000100000001000110000010000000001001110011111111111111110001011100000001101101110111001100100000011011110010111100010111011111001000001110100110000111000101111111111111101111010001000010000000100011000001000000000100111001111111111111111000101110000000110110111011100110010000001101111001011110001011101111100100000111010011000011100010111111111111110111101000100001000000010001100000100000000010011100111111111111111100010111000000011011011101110011001000000110111100101111000101110111110010000011101001100001110001011111111111111011110100010000100000001000110000010000000001001110011111111111111110001011100000001101101110111001100100000011011110010111100010111011111001000001110100110000111000101111111111111101111010001000</data>
+          <extradata>1111111111111111T111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111</extradata>
+        </log>
+      </trigger>
+    </signal_set>
+    <position_info>
+      <single attribute="active tab" value="0"/>
+      <single attribute="data horizontal scroll position" value="11"/>
+      <single attribute="data vertical scroll position" value="0"/>
+      <single attribute="setup horizontal scroll position" value="0"/>
+      <single attribute="setup vertical scroll position" value="3"/>
+      <single attribute="zoom level denominator" value="1"/>
+      <single attribute="zoom level numerator" value="4096"/>
+      <single attribute="zoom offset denominator" value="1"/>
+      <single attribute="zoom offset numerator" value="13"/>
+    </position_info>
+  </instance>
+  <mnemonics/>
+  <static_plugin_mnemonics/>
+  <global_info>
+    <single attribute="active instance" value="0"/>
+    <single attribute="lock mode" value="36110"/>
+    <multi attribute="column width" size="23" value="34,34,194,74,68,70,88,88,98,98,88,88,110,101,101,101,101,101,101,101,101,107,10"/>
+    <multi attribute="window position" size="9" value="1221,799,398,124,0,50,67,0,0"/>
+  </global_info>
+</session>

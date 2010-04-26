@@ -1,0 +1,51 @@
+<internal_error>
+	<executable>quartus.exe</executable>
+	<sub_system>unknown</sub_system>
+	<file>unknown</file>
+	<line>0</line>
+	<callstack>
+	0x4c05c3f0: AOT803AS + 0x5c3f0 (SECTabControlBase::GetActiveTab + 0x0)
+	0x06271b70: RESR_MSW + 0x1b70 (?set_last_active_view@MSW_MESSAGE_WND@@QAIXPAVMSW_VIEW@@@Z + 0x4c0)
+	0x100062ac: GCL_AFC + 0x62ac (?OnWndMsg@AFC_NESTED_FRAME@@UAEHIIJPAJ@Z + 0x3c)
+	0x7863ba61: mfc90 + 0x5ba61
+	0x7863a655: mfc90 + 0x5a655
+	0x7863a8e1: mfc90 + 0x5a8e1
+	0x786385cc: mfc90 + 0x585cc
+	0x7e418733: USER32 + 0x8733 (GetDC + 0x6c)
+	0x7e418815: USER32 + 0x8815 (GetDC + 0x14e)
+	0x7e428e9f: USER32 + 0x18e9f (DefWindowProcW + 0x17f)
+	0x7e428eeb: USER32 + 0x18eeb (DefWindowProcW + 0x1cb)
+	0x7c90e472: ntdll + 0xe472 (KiUserCallbackDispatcher + 0x12)
+	0x786a323a: mfc90 + 0xc323a
+	0x786a9939: mfc90 + 0xc9939
+	0x786415c1: mfc90 + 0x615c1
+	0x7863be98: mfc90 + 0x5be98
+	0x100062ac: GCL_AFC + 0x62ac (?OnWndMsg@AFC_NESTED_FRAME@@UAEHIIJPAJ@Z + 0x3c)
+	0x7863ba61: mfc90 + 0x5ba61
+	0x7863a655: mfc90 + 0x5a655
+	0x7863a8e1: mfc90 + 0x5a8e1
+	0x786385cc: mfc90 + 0x585cc
+	0x7e418733: USER32 + 0x8733 (GetDC + 0x6c)
+	0x7e418815: USER32 + 0x8815 (GetDC + 0x14e)
+	0x7e42927a: USER32 + 0x1927a (GetParent + 0x16b)
+	0x7e42f40a: USER32 + 0x1f40a (SendMessageA + 0x48)
+	0x0888a526: resr_rpw + 0x2a526 (resr_rpw_dll_get_template_classes + 0x20356)
+	0x0888a5e6: resr_rpw + 0x2a5e6 (resr_rpw_dll_get_template_classes + 0x20416)
+	0x7863c0cd: mfc90 + 0x5c0cd
+	0x7e42a997: USER32 + 0x1a997 (CallWindowProcA + 0x1a)
+	0x7863b160: mfc90 + 0x5b160
+	0x7863ba78: mfc90 + 0x5ba78
+	0x100062ac: GCL_AFC + 0x62ac (?OnWndMsg@AFC_NESTED_FRAME@@UAEHIIJPAJ@Z + 0x3c)
+	0x7863a655: mfc90 + 0x5a655
+	0x7863918f: mfc90 + 0x5918f
+	</callstack>
+	<error>Current editor: STED, STED, RPW
+Current dockable window: TMW</error>
+	<date>Tue Oct 27 13:10:37 2009</date>
+	<version>Quartus II Version 9.0 Build 132 02/25/2009 SJ Web Edition</version>
+	<full_error>Access Violation at 0X4C05C3F0
+Current editor: STED, STED, RPW
+Current dockable window: TMW
+Quartus II Version 9.0 Build 132 02/25/2009 SJ Web Edition </full_error>
+</internal_error>
+

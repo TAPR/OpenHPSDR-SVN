@@ -1,0 +1,896 @@
+<session jtag_chain="ByteBlasterMV [LPT1]" jtag_device="" sof_file="" top_level_entity="Ozy_Janus">
+  <display_tree gui_logging_enabled="0">
+    <display_branch instance="auto_signaltap_0" signal_set="USE_GLOBAL_TEMP" trigger="USE_GLOBAL_TEMP"/>
+  </display_tree>
+  <instance entity_name="sld_signaltap" is_auto_node="yes" is_expanded="true" name="auto_signaltap_0" source_file="sld_signaltap.vhd">
+    <node_ip_info instance_id="0" mfg_id="110" node_id="0" version="6"/>
+    <position_info>
+      <single attribute="active tab" value="0"/>
+      <single attribute="data horizontal scroll position" value="0"/>
+      <single attribute="data vertical scroll position" value="12"/>
+      <single attribute="setup horizontal scroll position" value="0"/>
+      <single attribute="setup vertical scroll position" value="13"/>
+      <single attribute="zoom level denominator" value="1"/>
+      <single attribute="zoom level numerator" value="1"/>
+      <single attribute="zoom offset denominator" value="1"/>
+      <single attribute="zoom offset numerator" value="130944"/>
+    </position_info>
+    <signal_set global_temp="1" name="signal_set: 2009/09/03 22:53:10  #0">
+      <clock name="IF_clk" polarity="posedge" tap_mode="classic"/>
+      <config ram_type="M4K" reserved_data_nodes="0" reserved_storage_qualifier_nodes="0" reserved_trigger_nodes="0" sample_depth="128" trigger_in_enable="no" trigger_out_enable="no"/>
+      <top_entity/>
+      <signal_vec>
+        <trigger_input_vec>
+          <wire name="Tx_fifo_ctrl:TXFC|AD_state.AD_ERR" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|AD_state.AD_IDLE" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|AD_state.AD_LOOP_CHK" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|AD_state.AD_PAD_CHK" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|AD_state.AD_SEND_CTL1_2" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|AD_state.AD_SEND_CTL3_4" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|AD_state.AD_SEND_MJ1" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|AD_state.AD_SEND_MJ2" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|AD_state.AD_SEND_MJ3" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|AD_state.AD_SEND_PJ" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|AD_state.AD_SEND_SYNC1" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|AD_state.AD_SEND_SYNC2" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|AD_state.AD_WAIT" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|AD_state.AD_WAIT_MJ_RDY" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|C1_DATA[1]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|C1_DATA[2]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|C1_DATA[3]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|C3_DATA[0]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|C3_DATA[1]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|C3_DATA[2]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|C3_DATA[3]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|C3_DATA[4]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|C3_DATA[5]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|C3_DATA[6]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|C3_DATA[7]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|C4_DATA[0]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|C4_DATA[1]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|C4_DATA[2]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|C4_DATA[3]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|C4_DATA[4]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|C4_DATA[5]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|C4_DATA[6]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|C4_DATA[7]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|IF_chan[0]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|IF_chan[1]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|IF_chan[2]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|IF_max_chan[0]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|IF_max_chan[1]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|IF_max_chan[2]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|IF_reset" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|Tx_IQ_mic_ack" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|Tx_IQ_mic_data[0]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|Tx_IQ_mic_data[10]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|Tx_IQ_mic_data[11]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|Tx_IQ_mic_data[12]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|Tx_IQ_mic_data[13]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|Tx_IQ_mic_data[14]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|Tx_IQ_mic_data[15]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|Tx_IQ_mic_data[16]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|Tx_IQ_mic_data[17]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|Tx_IQ_mic_data[18]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|Tx_IQ_mic_data[19]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|Tx_IQ_mic_data[1]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|Tx_IQ_mic_data[20]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|Tx_IQ_mic_data[21]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|Tx_IQ_mic_data[22]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|Tx_IQ_mic_data[23]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|Tx_IQ_mic_data[24]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|Tx_IQ_mic_data[25]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|Tx_IQ_mic_data[26]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|Tx_IQ_mic_data[27]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|Tx_IQ_mic_data[28]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|Tx_IQ_mic_data[29]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|Tx_IQ_mic_data[2]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|Tx_IQ_mic_data[30]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|Tx_IQ_mic_data[31]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|Tx_IQ_mic_data[32]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|Tx_IQ_mic_data[33]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|Tx_IQ_mic_data[34]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|Tx_IQ_mic_data[35]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|Tx_IQ_mic_data[36]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|Tx_IQ_mic_data[37]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|Tx_IQ_mic_data[38]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|Tx_IQ_mic_data[39]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|Tx_IQ_mic_data[3]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|Tx_IQ_mic_data[40]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|Tx_IQ_mic_data[41]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|Tx_IQ_mic_data[42]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|Tx_IQ_mic_data[43]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|Tx_IQ_mic_data[44]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|Tx_IQ_mic_data[45]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|Tx_IQ_mic_data[46]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|Tx_IQ_mic_data[47]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|Tx_IQ_mic_data[48]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|Tx_IQ_mic_data[49]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|Tx_IQ_mic_data[4]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|Tx_IQ_mic_data[50]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|Tx_IQ_mic_data[51]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|Tx_IQ_mic_data[52]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|Tx_IQ_mic_data[53]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|Tx_IQ_mic_data[54]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|Tx_IQ_mic_data[55]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|Tx_IQ_mic_data[56]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|Tx_IQ_mic_data[57]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|Tx_IQ_mic_data[58]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|Tx_IQ_mic_data[59]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|Tx_IQ_mic_data[5]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|Tx_IQ_mic_data[60]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|Tx_IQ_mic_data[61]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|Tx_IQ_mic_data[62]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|Tx_IQ_mic_data[63]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|Tx_IQ_mic_data[6]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|Tx_IQ_mic_data[7]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|Tx_IQ_mic_data[8]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|Tx_IQ_mic_data[9]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|Tx_IQ_mic_rdy" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|Tx_fifo_clr" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|Tx_fifo_full" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|Tx_fifo_used[0]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|Tx_fifo_used[10]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|Tx_fifo_used[11]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|Tx_fifo_used[1]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|Tx_fifo_used[2]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|Tx_fifo_used[3]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|Tx_fifo_used[4]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|Tx_fifo_used[5]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|Tx_fifo_used[6]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|Tx_fifo_used[7]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|Tx_fifo_used[8]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|Tx_fifo_used[9]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|Tx_fifo_wdata[0]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|Tx_fifo_wdata[10]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|Tx_fifo_wdata[11]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|Tx_fifo_wdata[12]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|Tx_fifo_wdata[13]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|Tx_fifo_wdata[14]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|Tx_fifo_wdata[15]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|Tx_fifo_wdata[1]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|Tx_fifo_wdata[2]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|Tx_fifo_wdata[3]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|Tx_fifo_wdata[4]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|Tx_fifo_wdata[5]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|Tx_fifo_wdata[6]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|Tx_fifo_wdata[7]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|Tx_fifo_wdata[8]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|Tx_fifo_wdata[9]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|Tx_fifo_wreq" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|loop_cnt[0]" tap_mode="classic" type="register"/>
+          <wire name="Tx_fifo_ctrl:TXFC|loop_cnt[1]" tap_mode="classic" type="register"/>
+          <wire name="Tx_fifo_ctrl:TXFC|loop_cnt[2]" tap_mode="classic" type="register"/>
+          <wire name="Tx_fifo_ctrl:TXFC|loop_cnt[3]" tap_mode="classic" type="register"/>
+          <wire name="Tx_fifo_ctrl:TXFC|loop_cnt[4]" tap_mode="classic" type="register"/>
+          <wire name="Tx_fifo_ctrl:TXFC|loop_cnt[5]" tap_mode="classic" type="register"/>
+          <wire name="Tx_fifo_ctrl:TXFC|loop_cnt[6]" tap_mode="classic" type="register"/>
+          <wire name="Tx_fifo_ctrl:TXFC|pad_cnt[0]" tap_mode="classic" type="register"/>
+          <wire name="Tx_fifo_ctrl:TXFC|pad_cnt[1]" tap_mode="classic" type="register"/>
+          <wire name="Tx_fifo_ctrl:TXFC|pad_cnt[2]" tap_mode="classic" type="register"/>
+          <wire name="Tx_fifo_ctrl:TXFC|pad_cnt[3]" tap_mode="classic" type="register"/>
+          <wire name="Tx_fifo_ctrl:TXFC|pad_cnt[4]" tap_mode="classic" type="register"/>
+          <wire name="Tx_fifo_ctrl:TXFC|pad_cnt[5]" tap_mode="classic" type="register"/>
+          <wire name="Tx_fifo_ctrl:TXFC|tx_addr[0]" tap_mode="classic" type="register"/>
+          <wire name="Tx_fifo_ctrl:TXFC|tx_addr[1]" tap_mode="classic" type="register"/>
+          <wire name="Tx_fifo_ctrl:TXFC|tx_addr[2]" tap_mode="classic" type="register"/>
+          <wire name="Tx_fifo_ctrl:TXFC|tx_addr[3]" tap_mode="classic" type="register"/>
+          <wire name="Tx_fifo_ctrl:TXFC|tx_addr[4]" tap_mode="classic" type="register"/>
+        </trigger_input_vec>
+        <data_input_vec>
+          <wire name="Tx_fifo_ctrl:TXFC|AD_state.AD_ERR" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|AD_state.AD_IDLE" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|AD_state.AD_LOOP_CHK" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|AD_state.AD_PAD_CHK" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|AD_state.AD_SEND_CTL1_2" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|AD_state.AD_SEND_CTL3_4" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|AD_state.AD_SEND_MJ1" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|AD_state.AD_SEND_MJ2" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|AD_state.AD_SEND_MJ3" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|AD_state.AD_SEND_PJ" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|AD_state.AD_SEND_SYNC1" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|AD_state.AD_SEND_SYNC2" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|AD_state.AD_WAIT" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|AD_state.AD_WAIT_MJ_RDY" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|C1_DATA[1]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|C1_DATA[2]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|C1_DATA[3]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|C3_DATA[0]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|C3_DATA[1]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|C3_DATA[2]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|C3_DATA[3]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|C3_DATA[4]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|C3_DATA[5]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|C3_DATA[6]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|C3_DATA[7]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|C4_DATA[0]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|C4_DATA[1]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|C4_DATA[2]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|C4_DATA[3]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|C4_DATA[4]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|C4_DATA[5]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|C4_DATA[6]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|C4_DATA[7]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|IF_chan[0]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|IF_chan[1]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|IF_chan[2]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|IF_max_chan[0]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|IF_max_chan[1]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|IF_max_chan[2]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|IF_reset" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|Tx_IQ_mic_ack" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|Tx_IQ_mic_data[0]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|Tx_IQ_mic_data[10]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|Tx_IQ_mic_data[11]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|Tx_IQ_mic_data[12]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|Tx_IQ_mic_data[13]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|Tx_IQ_mic_data[14]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|Tx_IQ_mic_data[15]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|Tx_IQ_mic_data[16]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|Tx_IQ_mic_data[17]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|Tx_IQ_mic_data[18]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|Tx_IQ_mic_data[19]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|Tx_IQ_mic_data[1]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|Tx_IQ_mic_data[20]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|Tx_IQ_mic_data[21]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|Tx_IQ_mic_data[22]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|Tx_IQ_mic_data[23]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|Tx_IQ_mic_data[24]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|Tx_IQ_mic_data[25]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|Tx_IQ_mic_data[26]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|Tx_IQ_mic_data[27]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|Tx_IQ_mic_data[28]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|Tx_IQ_mic_data[29]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|Tx_IQ_mic_data[2]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|Tx_IQ_mic_data[30]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|Tx_IQ_mic_data[31]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|Tx_IQ_mic_data[32]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|Tx_IQ_mic_data[33]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|Tx_IQ_mic_data[34]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|Tx_IQ_mic_data[35]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|Tx_IQ_mic_data[36]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|Tx_IQ_mic_data[37]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|Tx_IQ_mic_data[38]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|Tx_IQ_mic_data[39]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|Tx_IQ_mic_data[3]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|Tx_IQ_mic_data[40]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|Tx_IQ_mic_data[41]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|Tx_IQ_mic_data[42]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|Tx_IQ_mic_data[43]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|Tx_IQ_mic_data[44]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|Tx_IQ_mic_data[45]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|Tx_IQ_mic_data[46]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|Tx_IQ_mic_data[47]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|Tx_IQ_mic_data[48]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|Tx_IQ_mic_data[49]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|Tx_IQ_mic_data[4]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|Tx_IQ_mic_data[50]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|Tx_IQ_mic_data[51]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|Tx_IQ_mic_data[52]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|Tx_IQ_mic_data[53]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|Tx_IQ_mic_data[54]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|Tx_IQ_mic_data[55]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|Tx_IQ_mic_data[56]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|Tx_IQ_mic_data[57]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|Tx_IQ_mic_data[58]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|Tx_IQ_mic_data[59]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|Tx_IQ_mic_data[5]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|Tx_IQ_mic_data[60]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|Tx_IQ_mic_data[61]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|Tx_IQ_mic_data[62]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|Tx_IQ_mic_data[63]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|Tx_IQ_mic_data[6]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|Tx_IQ_mic_data[7]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|Tx_IQ_mic_data[8]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|Tx_IQ_mic_data[9]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|Tx_IQ_mic_rdy" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|Tx_fifo_clr" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|Tx_fifo_full" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|Tx_fifo_used[0]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|Tx_fifo_used[10]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|Tx_fifo_used[11]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|Tx_fifo_used[1]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|Tx_fifo_used[2]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|Tx_fifo_used[3]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|Tx_fifo_used[4]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|Tx_fifo_used[5]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|Tx_fifo_used[6]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|Tx_fifo_used[7]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|Tx_fifo_used[8]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|Tx_fifo_used[9]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|Tx_fifo_wdata[0]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|Tx_fifo_wdata[10]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|Tx_fifo_wdata[11]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|Tx_fifo_wdata[12]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|Tx_fifo_wdata[13]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|Tx_fifo_wdata[14]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|Tx_fifo_wdata[15]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|Tx_fifo_wdata[1]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|Tx_fifo_wdata[2]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|Tx_fifo_wdata[3]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|Tx_fifo_wdata[4]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|Tx_fifo_wdata[5]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|Tx_fifo_wdata[6]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|Tx_fifo_wdata[7]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|Tx_fifo_wdata[8]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|Tx_fifo_wdata[9]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|Tx_fifo_wreq" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|loop_cnt[0]" tap_mode="classic" type="register"/>
+          <wire name="Tx_fifo_ctrl:TXFC|loop_cnt[1]" tap_mode="classic" type="register"/>
+          <wire name="Tx_fifo_ctrl:TXFC|loop_cnt[2]" tap_mode="classic" type="register"/>
+          <wire name="Tx_fifo_ctrl:TXFC|loop_cnt[3]" tap_mode="classic" type="register"/>
+          <wire name="Tx_fifo_ctrl:TXFC|loop_cnt[4]" tap_mode="classic" type="register"/>
+          <wire name="Tx_fifo_ctrl:TXFC|loop_cnt[5]" tap_mode="classic" type="register"/>
+          <wire name="Tx_fifo_ctrl:TXFC|loop_cnt[6]" tap_mode="classic" type="register"/>
+          <wire name="Tx_fifo_ctrl:TXFC|pad_cnt[0]" tap_mode="classic" type="register"/>
+          <wire name="Tx_fifo_ctrl:TXFC|pad_cnt[1]" tap_mode="classic" type="register"/>
+          <wire name="Tx_fifo_ctrl:TXFC|pad_cnt[2]" tap_mode="classic" type="register"/>
+          <wire name="Tx_fifo_ctrl:TXFC|pad_cnt[3]" tap_mode="classic" type="register"/>
+          <wire name="Tx_fifo_ctrl:TXFC|pad_cnt[4]" tap_mode="classic" type="register"/>
+          <wire name="Tx_fifo_ctrl:TXFC|pad_cnt[5]" tap_mode="classic" type="register"/>
+          <wire name="Tx_fifo_ctrl:TXFC|tx_addr[0]" tap_mode="classic" type="register"/>
+          <wire name="Tx_fifo_ctrl:TXFC|tx_addr[1]" tap_mode="classic" type="register"/>
+          <wire name="Tx_fifo_ctrl:TXFC|tx_addr[2]" tap_mode="classic" type="register"/>
+          <wire name="Tx_fifo_ctrl:TXFC|tx_addr[3]" tap_mode="classic" type="register"/>
+          <wire name="Tx_fifo_ctrl:TXFC|tx_addr[4]" tap_mode="classic" type="register"/>
+        </data_input_vec>
+        <storage_qualifier_input_vec>
+          <wire name="Tx_fifo_ctrl:TXFC|AD_state.AD_ERR" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|AD_state.AD_IDLE" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|AD_state.AD_LOOP_CHK" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|AD_state.AD_PAD_CHK" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|AD_state.AD_SEND_CTL1_2" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|AD_state.AD_SEND_CTL3_4" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|AD_state.AD_SEND_MJ1" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|AD_state.AD_SEND_MJ2" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|AD_state.AD_SEND_MJ3" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|AD_state.AD_SEND_PJ" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|AD_state.AD_SEND_SYNC1" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|AD_state.AD_SEND_SYNC2" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|AD_state.AD_WAIT" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|AD_state.AD_WAIT_MJ_RDY" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|C1_DATA[1]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|C1_DATA[2]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|C1_DATA[3]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|C3_DATA[0]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|C3_DATA[1]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|C3_DATA[2]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|C3_DATA[3]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|C3_DATA[4]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|C3_DATA[5]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|C3_DATA[6]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|C3_DATA[7]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|C4_DATA[0]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|C4_DATA[1]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|C4_DATA[2]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|C4_DATA[3]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|C4_DATA[4]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|C4_DATA[5]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|C4_DATA[6]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|C4_DATA[7]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|IF_chan[0]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|IF_chan[1]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|IF_chan[2]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|IF_max_chan[0]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|IF_max_chan[1]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|IF_max_chan[2]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|IF_reset" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|Tx_IQ_mic_ack" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|Tx_IQ_mic_data[0]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|Tx_IQ_mic_data[10]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|Tx_IQ_mic_data[11]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|Tx_IQ_mic_data[12]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|Tx_IQ_mic_data[13]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|Tx_IQ_mic_data[14]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|Tx_IQ_mic_data[15]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|Tx_IQ_mic_data[16]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|Tx_IQ_mic_data[17]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|Tx_IQ_mic_data[18]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|Tx_IQ_mic_data[19]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|Tx_IQ_mic_data[1]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|Tx_IQ_mic_data[20]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|Tx_IQ_mic_data[21]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|Tx_IQ_mic_data[22]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|Tx_IQ_mic_data[23]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|Tx_IQ_mic_data[24]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|Tx_IQ_mic_data[25]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|Tx_IQ_mic_data[26]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|Tx_IQ_mic_data[27]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|Tx_IQ_mic_data[28]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|Tx_IQ_mic_data[29]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|Tx_IQ_mic_data[2]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|Tx_IQ_mic_data[30]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|Tx_IQ_mic_data[31]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|Tx_IQ_mic_data[32]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|Tx_IQ_mic_data[33]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|Tx_IQ_mic_data[34]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|Tx_IQ_mic_data[35]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|Tx_IQ_mic_data[36]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|Tx_IQ_mic_data[37]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|Tx_IQ_mic_data[38]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|Tx_IQ_mic_data[39]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|Tx_IQ_mic_data[3]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|Tx_IQ_mic_data[40]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|Tx_IQ_mic_data[41]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|Tx_IQ_mic_data[42]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|Tx_IQ_mic_data[43]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|Tx_IQ_mic_data[44]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|Tx_IQ_mic_data[45]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|Tx_IQ_mic_data[46]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|Tx_IQ_mic_data[47]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|Tx_IQ_mic_data[48]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|Tx_IQ_mic_data[49]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|Tx_IQ_mic_data[4]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|Tx_IQ_mic_data[50]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|Tx_IQ_mic_data[51]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|Tx_IQ_mic_data[52]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|Tx_IQ_mic_data[53]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|Tx_IQ_mic_data[54]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|Tx_IQ_mic_data[55]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|Tx_IQ_mic_data[56]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|Tx_IQ_mic_data[57]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|Tx_IQ_mic_data[58]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|Tx_IQ_mic_data[59]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|Tx_IQ_mic_data[5]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|Tx_IQ_mic_data[60]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|Tx_IQ_mic_data[61]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|Tx_IQ_mic_data[62]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|Tx_IQ_mic_data[63]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|Tx_IQ_mic_data[6]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|Tx_IQ_mic_data[7]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|Tx_IQ_mic_data[8]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|Tx_IQ_mic_data[9]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|Tx_IQ_mic_rdy" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|Tx_fifo_clr" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|Tx_fifo_full" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|Tx_fifo_used[0]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|Tx_fifo_used[10]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|Tx_fifo_used[11]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|Tx_fifo_used[1]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|Tx_fifo_used[2]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|Tx_fifo_used[3]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|Tx_fifo_used[4]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|Tx_fifo_used[5]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|Tx_fifo_used[6]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|Tx_fifo_used[7]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|Tx_fifo_used[8]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|Tx_fifo_used[9]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|Tx_fifo_wdata[0]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|Tx_fifo_wdata[10]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|Tx_fifo_wdata[11]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|Tx_fifo_wdata[12]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|Tx_fifo_wdata[13]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|Tx_fifo_wdata[14]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|Tx_fifo_wdata[15]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|Tx_fifo_wdata[1]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|Tx_fifo_wdata[2]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|Tx_fifo_wdata[3]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|Tx_fifo_wdata[4]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|Tx_fifo_wdata[5]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|Tx_fifo_wdata[6]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|Tx_fifo_wdata[7]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|Tx_fifo_wdata[8]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|Tx_fifo_wdata[9]" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|Tx_fifo_wreq" tap_mode="classic" type="combinatorial"/>
+          <wire name="Tx_fifo_ctrl:TXFC|loop_cnt[0]" tap_mode="classic" type="register"/>
+          <wire name="Tx_fifo_ctrl:TXFC|loop_cnt[1]" tap_mode="classic" type="register"/>
+          <wire name="Tx_fifo_ctrl:TXFC|loop_cnt[2]" tap_mode="classic" type="register"/>
+          <wire name="Tx_fifo_ctrl:TXFC|loop_cnt[3]" tap_mode="classic" type="register"/>
+          <wire name="Tx_fifo_ctrl:TXFC|loop_cnt[4]" tap_mode="classic" type="register"/>
+          <wire name="Tx_fifo_ctrl:TXFC|loop_cnt[5]" tap_mode="classic" type="register"/>
+          <wire name="Tx_fifo_ctrl:TXFC|loop_cnt[6]" tap_mode="classic" type="register"/>
+          <wire name="Tx_fifo_ctrl:TXFC|pad_cnt[0]" tap_mode="classic" type="register"/>
+          <wire name="Tx_fifo_ctrl:TXFC|pad_cnt[1]" tap_mode="classic" type="register"/>
+          <wire name="Tx_fifo_ctrl:TXFC|pad_cnt[2]" tap_mode="classic" type="register"/>
+          <wire name="Tx_fifo_ctrl:TXFC|pad_cnt[3]" tap_mode="classic" type="register"/>
+          <wire name="Tx_fifo_ctrl:TXFC|pad_cnt[4]" tap_mode="classic" type="register"/>
+          <wire name="Tx_fifo_ctrl:TXFC|pad_cnt[5]" tap_mode="classic" type="register"/>
+          <wire name="Tx_fifo_ctrl:TXFC|tx_addr[0]" tap_mode="classic" type="register"/>
+          <wire name="Tx_fifo_ctrl:TXFC|tx_addr[1]" tap_mode="classic" type="register"/>
+          <wire name="Tx_fifo_ctrl:TXFC|tx_addr[2]" tap_mode="classic" type="register"/>
+          <wire name="Tx_fifo_ctrl:TXFC|tx_addr[3]" tap_mode="classic" type="register"/>
+          <wire name="Tx_fifo_ctrl:TXFC|tx_addr[4]" tap_mode="classic" type="register"/>
+        </storage_qualifier_input_vec>
+      </signal_vec>
+      <presentation>
+        <data_view>
+          <net is_signal_inverted="no" name="Tx_fifo_ctrl:TXFC|AD_state.AD_ERR"/>
+          <net is_signal_inverted="no" name="Tx_fifo_ctrl:TXFC|AD_state.AD_IDLE"/>
+          <net is_signal_inverted="no" name="Tx_fifo_ctrl:TXFC|AD_state.AD_SEND_SYNC1"/>
+          <net is_signal_inverted="no" name="Tx_fifo_ctrl:TXFC|AD_state.AD_SEND_SYNC2"/>
+          <net is_signal_inverted="no" name="Tx_fifo_ctrl:TXFC|AD_state.AD_SEND_CTL1_2"/>
+          <net is_signal_inverted="no" name="Tx_fifo_ctrl:TXFC|AD_state.AD_SEND_CTL3_4"/>
+          <net is_signal_inverted="no" name="Tx_fifo_ctrl:TXFC|AD_state.AD_WAIT_MJ_RDY"/>
+          <net is_signal_inverted="no" name="Tx_fifo_ctrl:TXFC|AD_state.AD_SEND_MJ1"/>
+          <net is_signal_inverted="no" name="Tx_fifo_ctrl:TXFC|AD_state.AD_SEND_MJ2"/>
+          <net is_signal_inverted="no" name="Tx_fifo_ctrl:TXFC|AD_state.AD_SEND_MJ3"/>
+          <net is_signal_inverted="no" name="Tx_fifo_ctrl:TXFC|AD_state.AD_SEND_PJ"/>
+          <net is_signal_inverted="no" name="Tx_fifo_ctrl:TXFC|AD_state.AD_WAIT"/>
+          <net is_signal_inverted="no" name="Tx_fifo_ctrl:TXFC|AD_state.AD_LOOP_CHK"/>
+          <net is_signal_inverted="no" name="Tx_fifo_ctrl:TXFC|AD_state.AD_PAD_CHK"/>
+          <net is_signal_inverted="no" name="Tx_fifo_ctrl:TXFC|Tx_IQ_mic_rdy"/>
+          <net is_signal_inverted="no" name="Tx_fifo_ctrl:TXFC|Tx_IQ_mic_ack"/>
+          <bus is_signal_inverted="no" link="all" name="Tx_fifo_ctrl:TXFC|Tx_IQ_mic_data" order="lsb_to_msb" radix="hex" state="collapse" type="combinatorial">
+            <net is_signal_inverted="no" name="Tx_fifo_ctrl:TXFC|Tx_IQ_mic_data[0]"/>
+            <net is_signal_inverted="no" name="Tx_fifo_ctrl:TXFC|Tx_IQ_mic_data[1]"/>
+            <net is_signal_inverted="no" name="Tx_fifo_ctrl:TXFC|Tx_IQ_mic_data[2]"/>
+            <net is_signal_inverted="no" name="Tx_fifo_ctrl:TXFC|Tx_IQ_mic_data[3]"/>
+            <net is_signal_inverted="no" name="Tx_fifo_ctrl:TXFC|Tx_IQ_mic_data[4]"/>
+            <net is_signal_inverted="no" name="Tx_fifo_ctrl:TXFC|Tx_IQ_mic_data[5]"/>
+            <net is_signal_inverted="no" name="Tx_fifo_ctrl:TXFC|Tx_IQ_mic_data[6]"/>
+            <net is_signal_inverted="no" name="Tx_fifo_ctrl:TXFC|Tx_IQ_mic_data[7]"/>
+            <net is_signal_inverted="no" name="Tx_fifo_ctrl:TXFC|Tx_IQ_mic_data[8]"/>
+            <net is_signal_inverted="no" name="Tx_fifo_ctrl:TXFC|Tx_IQ_mic_data[9]"/>
+            <net is_signal_inverted="no" name="Tx_fifo_ctrl:TXFC|Tx_IQ_mic_data[10]"/>
+            <net is_signal_inverted="no" name="Tx_fifo_ctrl:TXFC|Tx_IQ_mic_data[11]"/>
+            <net is_signal_inverted="no" name="Tx_fifo_ctrl:TXFC|Tx_IQ_mic_data[12]"/>
+            <net is_signal_inverted="no" name="Tx_fifo_ctrl:TXFC|Tx_IQ_mic_data[13]"/>
+            <net is_signal_inverted="no" name="Tx_fifo_ctrl:TXFC|Tx_IQ_mic_data[14]"/>
+            <net is_signal_inverted="no" name="Tx_fifo_ctrl:TXFC|Tx_IQ_mic_data[15]"/>
+            <net is_signal_inverted="no" name="Tx_fifo_ctrl:TXFC|Tx_IQ_mic_data[16]"/>
+            <net is_signal_inverted="no" name="Tx_fifo_ctrl:TXFC|Tx_IQ_mic_data[17]"/>
+            <net is_signal_inverted="no" name="Tx_fifo_ctrl:TXFC|Tx_IQ_mic_data[18]"/>
+            <net is_signal_inverted="no" name="Tx_fifo_ctrl:TXFC|Tx_IQ_mic_data[19]"/>
+            <net is_signal_inverted="no" name="Tx_fifo_ctrl:TXFC|Tx_IQ_mic_data[20]"/>
+            <net is_signal_inverted="no" name="Tx_fifo_ctrl:TXFC|Tx_IQ_mic_data[21]"/>
+            <net is_signal_inverted="no" name="Tx_fifo_ctrl:TXFC|Tx_IQ_mic_data[22]"/>
+            <net is_signal_inverted="no" name="Tx_fifo_ctrl:TXFC|Tx_IQ_mic_data[23]"/>
+            <net is_signal_inverted="no" name="Tx_fifo_ctrl:TXFC|Tx_IQ_mic_data[24]"/>
+            <net is_signal_inverted="no" name="Tx_fifo_ctrl:TXFC|Tx_IQ_mic_data[25]"/>
+            <net is_signal_inverted="no" name="Tx_fifo_ctrl:TXFC|Tx_IQ_mic_data[26]"/>
+            <net is_signal_inverted="no" name="Tx_fifo_ctrl:TXFC|Tx_IQ_mic_data[27]"/>
+            <net is_signal_inverted="no" name="Tx_fifo_ctrl:TXFC|Tx_IQ_mic_data[28]"/>
+            <net is_signal_inverted="no" name="Tx_fifo_ctrl:TXFC|Tx_IQ_mic_data[29]"/>
+            <net is_signal_inverted="no" name="Tx_fifo_ctrl:TXFC|Tx_IQ_mic_data[30]"/>
+            <net is_signal_inverted="no" name="Tx_fifo_ctrl:TXFC|Tx_IQ_mic_data[31]"/>
+            <net is_signal_inverted="no" name="Tx_fifo_ctrl:TXFC|Tx_IQ_mic_data[32]"/>
+            <net is_signal_inverted="no" name="Tx_fifo_ctrl:TXFC|Tx_IQ_mic_data[33]"/>
+            <net is_signal_inverted="no" name="Tx_fifo_ctrl:TXFC|Tx_IQ_mic_data[34]"/>
+            <net is_signal_inverted="no" name="Tx_fifo_ctrl:TXFC|Tx_IQ_mic_data[35]"/>
+            <net is_signal_inverted="no" name="Tx_fifo_ctrl:TXFC|Tx_IQ_mic_data[36]"/>
+            <net is_signal_inverted="no" name="Tx_fifo_ctrl:TXFC|Tx_IQ_mic_data[37]"/>
+            <net is_signal_inverted="no" name="Tx_fifo_ctrl:TXFC|Tx_IQ_mic_data[38]"/>
+            <net is_signal_inverted="no" name="Tx_fifo_ctrl:TXFC|Tx_IQ_mic_data[39]"/>
+            <net is_signal_inverted="no" name="Tx_fifo_ctrl:TXFC|Tx_IQ_mic_data[40]"/>
+            <net is_signal_inverted="no" name="Tx_fifo_ctrl:TXFC|Tx_IQ_mic_data[41]"/>
+            <net is_signal_inverted="no" name="Tx_fifo_ctrl:TXFC|Tx_IQ_mic_data[42]"/>
+            <net is_signal_inverted="no" name="Tx_fifo_ctrl:TXFC|Tx_IQ_mic_data[43]"/>
+            <net is_signal_inverted="no" name="Tx_fifo_ctrl:TXFC|Tx_IQ_mic_data[44]"/>
+            <net is_signal_inverted="no" name="Tx_fifo_ctrl:TXFC|Tx_IQ_mic_data[45]"/>
+            <net is_signal_inverted="no" name="Tx_fifo_ctrl:TXFC|Tx_IQ_mic_data[46]"/>
+            <net is_signal_inverted="no" name="Tx_fifo_ctrl:TXFC|Tx_IQ_mic_data[47]"/>
+            <net is_signal_inverted="no" name="Tx_fifo_ctrl:TXFC|Tx_IQ_mic_data[48]"/>
+            <net is_signal_inverted="no" name="Tx_fifo_ctrl:TXFC|Tx_IQ_mic_data[49]"/>
+            <net is_signal_inverted="no" name="Tx_fifo_ctrl:TXFC|Tx_IQ_mic_data[50]"/>
+            <net is_signal_inverted="no" name="Tx_fifo_ctrl:TXFC|Tx_IQ_mic_data[51]"/>
+            <net is_signal_inverted="no" name="Tx_fifo_ctrl:TXFC|Tx_IQ_mic_data[52]"/>
+            <net is_signal_inverted="no" name="Tx_fifo_ctrl:TXFC|Tx_IQ_mic_data[53]"/>
+            <net is_signal_inverted="no" name="Tx_fifo_ctrl:TXFC|Tx_IQ_mic_data[54]"/>
+            <net is_signal_inverted="no" name="Tx_fifo_ctrl:TXFC|Tx_IQ_mic_data[55]"/>
+            <net is_signal_inverted="no" name="Tx_fifo_ctrl:TXFC|Tx_IQ_mic_data[56]"/>
+            <net is_signal_inverted="no" name="Tx_fifo_ctrl:TXFC|Tx_IQ_mic_data[57]"/>
+            <net is_signal_inverted="no" name="Tx_fifo_ctrl:TXFC|Tx_IQ_mic_data[58]"/>
+            <net is_signal_inverted="no" name="Tx_fifo_ctrl:TXFC|Tx_IQ_mic_data[59]"/>
+            <net is_signal_inverted="no" name="Tx_fifo_ctrl:TXFC|Tx_IQ_mic_data[60]"/>
+            <net is_signal_inverted="no" name="Tx_fifo_ctrl:TXFC|Tx_IQ_mic_data[61]"/>
+            <net is_signal_inverted="no" name="Tx_fifo_ctrl:TXFC|Tx_IQ_mic_data[62]"/>
+            <net is_signal_inverted="no" name="Tx_fifo_ctrl:TXFC|Tx_IQ_mic_data[63]"/>
+          </bus>
+          <bus is_signal_inverted="no" link="all" name="Tx_fifo_ctrl:TXFC|C1_DATA" order="lsb_to_msb" radix="hex" state="collapse" type="combinatorial">
+            <net is_signal_inverted="no" name="Tx_fifo_ctrl:TXFC|C1_DATA[1]"/>
+            <net is_signal_inverted="no" name="Tx_fifo_ctrl:TXFC|C1_DATA[2]"/>
+            <net is_signal_inverted="no" name="Tx_fifo_ctrl:TXFC|C1_DATA[3]"/>
+          </bus>
+          <bus is_signal_inverted="no" link="all" name="Tx_fifo_ctrl:TXFC|C3_DATA" order="lsb_to_msb" radix="hex" state="collapse" type="combinatorial">
+            <net is_signal_inverted="no" name="Tx_fifo_ctrl:TXFC|C3_DATA[0]"/>
+            <net is_signal_inverted="no" name="Tx_fifo_ctrl:TXFC|C3_DATA[1]"/>
+            <net is_signal_inverted="no" name="Tx_fifo_ctrl:TXFC|C3_DATA[2]"/>
+            <net is_signal_inverted="no" name="Tx_fifo_ctrl:TXFC|C3_DATA[3]"/>
+            <net is_signal_inverted="no" name="Tx_fifo_ctrl:TXFC|C3_DATA[4]"/>
+            <net is_signal_inverted="no" name="Tx_fifo_ctrl:TXFC|C3_DATA[5]"/>
+            <net is_signal_inverted="no" name="Tx_fifo_ctrl:TXFC|C3_DATA[6]"/>
+            <net is_signal_inverted="no" name="Tx_fifo_ctrl:TXFC|C3_DATA[7]"/>
+          </bus>
+          <bus is_signal_inverted="no" link="all" name="Tx_fifo_ctrl:TXFC|C4_DATA" order="lsb_to_msb" radix="hex" state="collapse" type="combinatorial">
+            <net is_signal_inverted="no" name="Tx_fifo_ctrl:TXFC|C4_DATA[0]"/>
+            <net is_signal_inverted="no" name="Tx_fifo_ctrl:TXFC|C4_DATA[1]"/>
+            <net is_signal_inverted="no" name="Tx_fifo_ctrl:TXFC|C4_DATA[2]"/>
+            <net is_signal_inverted="no" name="Tx_fifo_ctrl:TXFC|C4_DATA[3]"/>
+            <net is_signal_inverted="no" name="Tx_fifo_ctrl:TXFC|C4_DATA[4]"/>
+            <net is_signal_inverted="no" name="Tx_fifo_ctrl:TXFC|C4_DATA[5]"/>
+            <net is_signal_inverted="no" name="Tx_fifo_ctrl:TXFC|C4_DATA[6]"/>
+            <net is_signal_inverted="no" name="Tx_fifo_ctrl:TXFC|C4_DATA[7]"/>
+          </bus>
+          <bus is_signal_inverted="no" link="all" name="Tx_fifo_ctrl:TXFC|IF_max_chan" order="lsb_to_msb" radix="hex" state="collapse" type="combinatorial">
+            <net is_signal_inverted="no" name="Tx_fifo_ctrl:TXFC|IF_max_chan[0]"/>
+            <net is_signal_inverted="no" name="Tx_fifo_ctrl:TXFC|IF_max_chan[1]"/>
+            <net is_signal_inverted="no" name="Tx_fifo_ctrl:TXFC|IF_max_chan[2]"/>
+          </bus>
+          <bus is_signal_inverted="no" link="all" name="Tx_fifo_ctrl:TXFC|IF_chan" order="lsb_to_msb" radix="hex" state="collapse" type="combinatorial">
+            <net is_signal_inverted="no" name="Tx_fifo_ctrl:TXFC|IF_chan[0]"/>
+            <net is_signal_inverted="no" name="Tx_fifo_ctrl:TXFC|IF_chan[1]"/>
+            <net is_signal_inverted="no" name="Tx_fifo_ctrl:TXFC|IF_chan[2]"/>
+          </bus>
+          <net is_signal_inverted="no" name="Tx_fifo_ctrl:TXFC|IF_reset"/>
+          <net is_signal_inverted="no" name="Tx_fifo_ctrl:TXFC|Tx_fifo_clr"/>
+          <net is_signal_inverted="no" name="Tx_fifo_ctrl:TXFC|Tx_fifo_full"/>
+          <bus is_signal_inverted="no" link="all" name="Tx_fifo_ctrl:TXFC|Tx_fifo_used" order="lsb_to_msb" radix="hex" state="collapse" type="combinatorial">
+            <net is_signal_inverted="no" name="Tx_fifo_ctrl:TXFC|Tx_fifo_used[0]"/>
+            <net is_signal_inverted="no" name="Tx_fifo_ctrl:TXFC|Tx_fifo_used[1]"/>
+            <net is_signal_inverted="no" name="Tx_fifo_ctrl:TXFC|Tx_fifo_used[2]"/>
+            <net is_signal_inverted="no" name="Tx_fifo_ctrl:TXFC|Tx_fifo_used[3]"/>
+            <net is_signal_inverted="no" name="Tx_fifo_ctrl:TXFC|Tx_fifo_used[4]"/>
+            <net is_signal_inverted="no" name="Tx_fifo_ctrl:TXFC|Tx_fifo_used[5]"/>
+            <net is_signal_inverted="no" name="Tx_fifo_ctrl:TXFC|Tx_fifo_used[6]"/>
+            <net is_signal_inverted="no" name="Tx_fifo_ctrl:TXFC|Tx_fifo_used[7]"/>
+            <net is_signal_inverted="no" name="Tx_fifo_ctrl:TXFC|Tx_fifo_used[8]"/>
+            <net is_signal_inverted="no" name="Tx_fifo_ctrl:TXFC|Tx_fifo_used[9]"/>
+            <net is_signal_inverted="no" name="Tx_fifo_ctrl:TXFC|Tx_fifo_used[10]"/>
+            <net is_signal_inverted="no" name="Tx_fifo_ctrl:TXFC|Tx_fifo_used[11]"/>
+          </bus>
+          <bus is_signal_inverted="no" link="all" name="Tx_fifo_ctrl:TXFC|Tx_fifo_wdata" order="lsb_to_msb" radix="hex" state="collapse" type="combinatorial">
+            <net is_signal_inverted="no" name="Tx_fifo_ctrl:TXFC|Tx_fifo_wdata[0]"/>
+            <net is_signal_inverted="no" name="Tx_fifo_ctrl:TXFC|Tx_fifo_wdata[1]"/>
+            <net is_signal_inverted="no" name="Tx_fifo_ctrl:TXFC|Tx_fifo_wdata[2]"/>
+            <net is_signal_inverted="no" name="Tx_fifo_ctrl:TXFC|Tx_fifo_wdata[3]"/>
+            <net is_signal_inverted="no" name="Tx_fifo_ctrl:TXFC|Tx_fifo_wdata[4]"/>
+            <net is_signal_inverted="no" name="Tx_fifo_ctrl:TXFC|Tx_fifo_wdata[5]"/>
+            <net is_signal_inverted="no" name="Tx_fifo_ctrl:TXFC|Tx_fifo_wdata[6]"/>
+            <net is_signal_inverted="no" name="Tx_fifo_ctrl:TXFC|Tx_fifo_wdata[7]"/>
+            <net is_signal_inverted="no" name="Tx_fifo_ctrl:TXFC|Tx_fifo_wdata[8]"/>
+            <net is_signal_inverted="no" name="Tx_fifo_ctrl:TXFC|Tx_fifo_wdata[9]"/>
+            <net is_signal_inverted="no" name="Tx_fifo_ctrl:TXFC|Tx_fifo_wdata[10]"/>
+            <net is_signal_inverted="no" name="Tx_fifo_ctrl:TXFC|Tx_fifo_wdata[11]"/>
+            <net is_signal_inverted="no" name="Tx_fifo_ctrl:TXFC|Tx_fifo_wdata[12]"/>
+            <net is_signal_inverted="no" name="Tx_fifo_ctrl:TXFC|Tx_fifo_wdata[13]"/>
+            <net is_signal_inverted="no" name="Tx_fifo_ctrl:TXFC|Tx_fifo_wdata[14]"/>
+            <net is_signal_inverted="no" name="Tx_fifo_ctrl:TXFC|Tx_fifo_wdata[15]"/>
+          </bus>
+          <net is_signal_inverted="no" name="Tx_fifo_ctrl:TXFC|Tx_fifo_wreq"/>
+          <bus is_signal_inverted="no" link="all" name="Tx_fifo_ctrl:TXFC|loop_cnt" order="lsb_to_msb" radix="hex" state="collapse" type="register">
+            <net is_signal_inverted="no" name="Tx_fifo_ctrl:TXFC|loop_cnt[0]"/>
+            <net is_signal_inverted="no" name="Tx_fifo_ctrl:TXFC|loop_cnt[1]"/>
+            <net is_signal_inverted="no" name="Tx_fifo_ctrl:TXFC|loop_cnt[2]"/>
+            <net is_signal_inverted="no" name="Tx_fifo_ctrl:TXFC|loop_cnt[3]"/>
+            <net is_signal_inverted="no" name="Tx_fifo_ctrl:TXFC|loop_cnt[4]"/>
+            <net is_signal_inverted="no" name="Tx_fifo_ctrl:TXFC|loop_cnt[5]"/>
+            <net is_signal_inverted="no" name="Tx_fifo_ctrl:TXFC|loop_cnt[6]"/>
+          </bus>
+          <bus is_signal_inverted="no" link="all" name="Tx_fifo_ctrl:TXFC|pad_cnt" order="lsb_to_msb" radix="hex" state="collapse" type="register">
+            <net is_signal_inverted="no" name="Tx_fifo_ctrl:TXFC|pad_cnt[0]"/>
+            <net is_signal_inverted="no" name="Tx_fifo_ctrl:TXFC|pad_cnt[1]"/>
+            <net is_signal_inverted="no" name="Tx_fifo_ctrl:TXFC|pad_cnt[2]"/>
+            <net is_signal_inverted="no" name="Tx_fifo_ctrl:TXFC|pad_cnt[3]"/>
+            <net is_signal_inverted="no" name="Tx_fifo_ctrl:TXFC|pad_cnt[4]"/>
+            <net is_signal_inverted="no" name="Tx_fifo_ctrl:TXFC|pad_cnt[5]"/>
+          </bus>
+          <bus is_signal_inverted="no" link="all" name="Tx_fifo_ctrl:TXFC|tx_addr" order="lsb_to_msb" radix="hex" state="collapse" type="register">
+            <net is_signal_inverted="no" name="Tx_fifo_ctrl:TXFC|tx_addr[0]"/>
+            <net is_signal_inverted="no" name="Tx_fifo_ctrl:TXFC|tx_addr[1]"/>
+            <net is_signal_inverted="no" name="Tx_fifo_ctrl:TXFC|tx_addr[2]"/>
+            <net is_signal_inverted="no" name="Tx_fifo_ctrl:TXFC|tx_addr[3]"/>
+            <net is_signal_inverted="no" name="Tx_fifo_ctrl:TXFC|tx_addr[4]"/>
+          </bus>
+        </data_view>
+        <setup_view>
+          <net is_signal_inverted="no" name="Tx_fifo_ctrl:TXFC|AD_state.AD_ERR"/>
+          <net is_signal_inverted="no" name="Tx_fifo_ctrl:TXFC|AD_state.AD_IDLE"/>
+          <net is_signal_inverted="no" name="Tx_fifo_ctrl:TXFC|AD_state.AD_LOOP_CHK"/>
+          <net is_signal_inverted="no" name="Tx_fifo_ctrl:TXFC|AD_state.AD_PAD_CHK"/>
+          <net is_signal_inverted="no" name="Tx_fifo_ctrl:TXFC|AD_state.AD_SEND_CTL1_2"/>
+          <net is_signal_inverted="no" name="Tx_fifo_ctrl:TXFC|AD_state.AD_SEND_CTL3_4"/>
+          <net is_signal_inverted="no" name="Tx_fifo_ctrl:TXFC|AD_state.AD_SEND_MJ1"/>
+          <net is_signal_inverted="no" name="Tx_fifo_ctrl:TXFC|AD_state.AD_SEND_MJ2"/>
+          <net is_signal_inverted="no" name="Tx_fifo_ctrl:TXFC|AD_state.AD_SEND_MJ3"/>
+          <net is_signal_inverted="no" name="Tx_fifo_ctrl:TXFC|AD_state.AD_SEND_PJ"/>
+          <net is_signal_inverted="no" name="Tx_fifo_ctrl:TXFC|AD_state.AD_SEND_SYNC1"/>
+          <net is_signal_inverted="no" name="Tx_fifo_ctrl:TXFC|AD_state.AD_SEND_SYNC2"/>
+          <net is_signal_inverted="no" name="Tx_fifo_ctrl:TXFC|AD_state.AD_WAIT"/>
+          <bus is_signal_inverted="no" link="all" name="Tx_fifo_ctrl:TXFC|C1_DATA" order="lsb_to_msb" radix="hex" state="collapse" type="combinatorial">
+            <net is_signal_inverted="no" name="Tx_fifo_ctrl:TXFC|C1_DATA[1]"/>
+            <net is_signal_inverted="no" name="Tx_fifo_ctrl:TXFC|C1_DATA[2]"/>
+            <net is_signal_inverted="no" name="Tx_fifo_ctrl:TXFC|C1_DATA[3]"/>
+          </bus>
+          <bus is_signal_inverted="no" link="all" name="Tx_fifo_ctrl:TXFC|C3_DATA" order="lsb_to_msb" radix="hex" state="collapse" type="combinatorial">
+            <net is_signal_inverted="no" name="Tx_fifo_ctrl:TXFC|C3_DATA[0]"/>
+            <net is_signal_inverted="no" name="Tx_fifo_ctrl:TXFC|C3_DATA[1]"/>
+            <net is_signal_inverted="no" name="Tx_fifo_ctrl:TXFC|C3_DATA[2]"/>
+            <net is_signal_inverted="no" name="Tx_fifo_ctrl:TXFC|C3_DATA[3]"/>
+            <net is_signal_inverted="no" name="Tx_fifo_ctrl:TXFC|C3_DATA[4]"/>
+            <net is_signal_inverted="no" name="Tx_fifo_ctrl:TXFC|C3_DATA[5]"/>
+            <net is_signal_inverted="no" name="Tx_fifo_ctrl:TXFC|C3_DATA[6]"/>
+            <net is_signal_inverted="no" name="Tx_fifo_ctrl:TXFC|C3_DATA[7]"/>
+          </bus>
+          <bus is_signal_inverted="no" link="all" name="Tx_fifo_ctrl:TXFC|C4_DATA" order="lsb_to_msb" radix="hex" state="collapse" type="combinatorial">
+            <net is_signal_inverted="no" name="Tx_fifo_ctrl:TXFC|C4_DATA[0]"/>
+            <net is_signal_inverted="no" name="Tx_fifo_ctrl:TXFC|C4_DATA[1]"/>
+            <net is_signal_inverted="no" name="Tx_fifo_ctrl:TXFC|C4_DATA[2]"/>
+            <net is_signal_inverted="no" name="Tx_fifo_ctrl:TXFC|C4_DATA[3]"/>
+            <net is_signal_inverted="no" name="Tx_fifo_ctrl:TXFC|C4_DATA[4]"/>
+            <net is_signal_inverted="no" name="Tx_fifo_ctrl:TXFC|C4_DATA[5]"/>
+            <net is_signal_inverted="no" name="Tx_fifo_ctrl:TXFC|C4_DATA[6]"/>
+            <net is_signal_inverted="no" name="Tx_fifo_ctrl:TXFC|C4_DATA[7]"/>
+          </bus>
+          <bus is_signal_inverted="no" link="all" name="Tx_fifo_ctrl:TXFC|IF_chan" order="lsb_to_msb" radix="hex" state="collapse" type="combinatorial">
+            <net is_signal_inverted="no" name="Tx_fifo_ctrl:TXFC|IF_chan[0]"/>
+            <net is_signal_inverted="no" name="Tx_fifo_ctrl:TXFC|IF_chan[1]"/>
+            <net is_signal_inverted="no" name="Tx_fifo_ctrl:TXFC|IF_chan[2]"/>
+          </bus>
+          <bus is_signal_inverted="no" link="all" name="Tx_fifo_ctrl:TXFC|IF_max_chan" order="lsb_to_msb" radix="hex" state="collapse" type="combinatorial">
+            <net is_signal_inverted="no" name="Tx_fifo_ctrl:TXFC|IF_max_chan[0]"/>
+            <net is_signal_inverted="no" name="Tx_fifo_ctrl:TXFC|IF_max_chan[1]"/>
+            <net is_signal_inverted="no" name="Tx_fifo_ctrl:TXFC|IF_max_chan[2]"/>
+          </bus>
+          <net is_signal_inverted="no" name="Tx_fifo_ctrl:TXFC|IF_reset"/>
+          <net is_signal_inverted="no" name="Tx_fifo_ctrl:TXFC|Tx_IQ_mic_ack"/>
+          <bus is_signal_inverted="no" link="all" name="Tx_fifo_ctrl:TXFC|Tx_IQ_mic_data" order="lsb_to_msb" radix="hex" state="collapse" type="combinatorial">
+            <net is_signal_inverted="no" name="Tx_fifo_ctrl:TXFC|Tx_IQ_mic_data[0]"/>
+            <net is_signal_inverted="no" name="Tx_fifo_ctrl:TXFC|Tx_IQ_mic_data[1]"/>
+            <net is_signal_inverted="no" name="Tx_fifo_ctrl:TXFC|Tx_IQ_mic_data[2]"/>
+            <net is_signal_inverted="no" name="Tx_fifo_ctrl:TXFC|Tx_IQ_mic_data[3]"/>
+            <net is_signal_inverted="no" name="Tx_fifo_ctrl:TXFC|Tx_IQ_mic_data[4]"/>
+            <net is_signal_inverted="no" name="Tx_fifo_ctrl:TXFC|Tx_IQ_mic_data[5]"/>
+            <net is_signal_inverted="no" name="Tx_fifo_ctrl:TXFC|Tx_IQ_mic_data[6]"/>
+            <net is_signal_inverted="no" name="Tx_fifo_ctrl:TXFC|Tx_IQ_mic_data[7]"/>
+            <net is_signal_inverted="no" name="Tx_fifo_ctrl:TXFC|Tx_IQ_mic_data[8]"/>
+            <net is_signal_inverted="no" name="Tx_fifo_ctrl:TXFC|Tx_IQ_mic_data[9]"/>
+            <net is_signal_inverted="no" name="Tx_fifo_ctrl:TXFC|Tx_IQ_mic_data[10]"/>
+            <net is_signal_inverted="no" name="Tx_fifo_ctrl:TXFC|Tx_IQ_mic_data[11]"/>
+            <net is_signal_inverted="no" name="Tx_fifo_ctrl:TXFC|Tx_IQ_mic_data[12]"/>
+            <net is_signal_inverted="no" name="Tx_fifo_ctrl:TXFC|Tx_IQ_mic_data[13]"/>
+            <net is_signal_inverted="no" name="Tx_fifo_ctrl:TXFC|Tx_IQ_mic_data[14]"/>
+            <net is_signal_inverted="no" name="Tx_fifo_ctrl:TXFC|Tx_IQ_mic_data[15]"/>
+            <net is_signal_inverted="no" name="Tx_fifo_ctrl:TXFC|Tx_IQ_mic_data[16]"/>
+            <net is_signal_inverted="no" name="Tx_fifo_ctrl:TXFC|Tx_IQ_mic_data[17]"/>
+            <net is_signal_inverted="no" name="Tx_fifo_ctrl:TXFC|Tx_IQ_mic_data[18]"/>
+            <net is_signal_inverted="no" name="Tx_fifo_ctrl:TXFC|Tx_IQ_mic_data[19]"/>
+            <net is_signal_inverted="no" name="Tx_fifo_ctrl:TXFC|Tx_IQ_mic_data[20]"/>
+            <net is_signal_inverted="no" name="Tx_fifo_ctrl:TXFC|Tx_IQ_mic_data[21]"/>
+            <net is_signal_inverted="no" name="Tx_fifo_ctrl:TXFC|Tx_IQ_mic_data[22]"/>
+            <net is_signal_inverted="no" name="Tx_fifo_ctrl:TXFC|Tx_IQ_mic_data[23]"/>
+            <net is_signal_inverted="no" name="Tx_fifo_ctrl:TXFC|Tx_IQ_mic_data[24]"/>
+            <net is_signal_inverted="no" name="Tx_fifo_ctrl:TXFC|Tx_IQ_mic_data[25]"/>
+            <net is_signal_inverted="no" name="Tx_fifo_ctrl:TXFC|Tx_IQ_mic_data[26]"/>
+            <net is_signal_inverted="no" name="Tx_fifo_ctrl:TXFC|Tx_IQ_mic_data[27]"/>
+            <net is_signal_inverted="no" name="Tx_fifo_ctrl:TXFC|Tx_IQ_mic_data[28]"/>
+            <net is_signal_inverted="no" name="Tx_fifo_ctrl:TXFC|Tx_IQ_mic_data[29]"/>
+            <net is_signal_inverted="no" name="Tx_fifo_ctrl:TXFC|Tx_IQ_mic_data[30]"/>
+            <net is_signal_inverted="no" name="Tx_fifo_ctrl:TXFC|Tx_IQ_mic_data[31]"/>
+            <net is_signal_inverted="no" name="Tx_fifo_ctrl:TXFC|Tx_IQ_mic_data[32]"/>
+            <net is_signal_inverted="no" name="Tx_fifo_ctrl:TXFC|Tx_IQ_mic_data[33]"/>
+            <net is_signal_inverted="no" name="Tx_fifo_ctrl:TXFC|Tx_IQ_mic_data[34]"/>
+            <net is_signal_inverted="no" name="Tx_fifo_ctrl:TXFC|Tx_IQ_mic_data[35]"/>
+            <net is_signal_inverted="no" name="Tx_fifo_ctrl:TXFC|Tx_IQ_mic_data[36]"/>
+            <net is_signal_inverted="no" name="Tx_fifo_ctrl:TXFC|Tx_IQ_mic_data[37]"/>
+            <net is_signal_inverted="no" name="Tx_fifo_ctrl:TXFC|Tx_IQ_mic_data[38]"/>
+            <net is_signal_inverted="no" name="Tx_fifo_ctrl:TXFC|Tx_IQ_mic_data[39]"/>
+            <net is_signal_inverted="no" name="Tx_fifo_ctrl:TXFC|Tx_IQ_mic_data[40]"/>
+            <net is_signal_inverted="no" name="Tx_fifo_ctrl:TXFC|Tx_IQ_mic_data[41]"/>
+            <net is_signal_inverted="no" name="Tx_fifo_ctrl:TXFC|Tx_IQ_mic_data[42]"/>
+            <net is_signal_inverted="no" name="Tx_fifo_ctrl:TXFC|Tx_IQ_mic_data[43]"/>
+            <net is_signal_inverted="no" name="Tx_fifo_ctrl:TXFC|Tx_IQ_mic_data[44]"/>
+            <net is_signal_inverted="no" name="Tx_fifo_ctrl:TXFC|Tx_IQ_mic_data[45]"/>
+            <net is_signal_inverted="no" name="Tx_fifo_ctrl:TXFC|Tx_IQ_mic_data[46]"/>
+            <net is_signal_inverted="no" name="Tx_fifo_ctrl:TXFC|Tx_IQ_mic_data[47]"/>
+            <net is_signal_inverted="no" name="Tx_fifo_ctrl:TXFC|Tx_IQ_mic_data[48]"/>
+            <net is_signal_inverted="no" name="Tx_fifo_ctrl:TXFC|Tx_IQ_mic_data[49]"/>
+            <net is_signal_inverted="no" name="Tx_fifo_ctrl:TXFC|Tx_IQ_mic_data[50]"/>
+            <net is_signal_inverted="no" name="Tx_fifo_ctrl:TXFC|Tx_IQ_mic_data[51]"/>
+            <net is_signal_inverted="no" name="Tx_fifo_ctrl:TXFC|Tx_IQ_mic_data[52]"/>
+            <net is_signal_inverted="no" name="Tx_fifo_ctrl:TXFC|Tx_IQ_mic_data[53]"/>
+            <net is_signal_inverted="no" name="Tx_fifo_ctrl:TXFC|Tx_IQ_mic_data[54]"/>
+            <net is_signal_inverted="no" name="Tx_fifo_ctrl:TXFC|Tx_IQ_mic_data[55]"/>
+            <net is_signal_inverted="no" name="Tx_fifo_ctrl:TXFC|Tx_IQ_mic_data[56]"/>
+            <net is_signal_inverted="no" name="Tx_fifo_ctrl:TXFC|Tx_IQ_mic_data[57]"/>
+            <net is_signal_inverted="no" name="Tx_fifo_ctrl:TXFC|Tx_IQ_mic_data[58]"/>
+            <net is_signal_inverted="no" name="Tx_fifo_ctrl:TXFC|Tx_IQ_mic_data[59]"/>
+            <net is_signal_inverted="no" name="Tx_fifo_ctrl:TXFC|Tx_IQ_mic_data[60]"/>
+            <net is_signal_inverted="no" name="Tx_fifo_ctrl:TXFC|Tx_IQ_mic_data[61]"/>
+            <net is_signal_inverted="no" name="Tx_fifo_ctrl:TXFC|Tx_IQ_mic_data[62]"/>
+            <net is_signal_inverted="no" name="Tx_fifo_ctrl:TXFC|Tx_IQ_mic_data[63]"/>
+          </bus>
+          <net is_signal_inverted="no" name="Tx_fifo_ctrl:TXFC|Tx_IQ_mic_rdy"/>
+          <net is_signal_inverted="no" name="Tx_fifo_ctrl:TXFC|Tx_fifo_clr"/>
+          <net is_signal_inverted="no" name="Tx_fifo_ctrl:TXFC|Tx_fifo_full"/>
+          <bus is_signal_inverted="no" link="all" name="Tx_fifo_ctrl:TXFC|Tx_fifo_used" order="lsb_to_msb" radix="hex" state="collapse" type="combinatorial">
+            <net is_signal_inverted="no" name="Tx_fifo_ctrl:TXFC|Tx_fifo_used[0]"/>
+            <net is_signal_inverted="no" name="Tx_fifo_ctrl:TXFC|Tx_fifo_used[1]"/>
+            <net is_signal_inverted="no" name="Tx_fifo_ctrl:TXFC|Tx_fifo_used[2]"/>
+            <net is_signal_inverted="no" name="Tx_fifo_ctrl:TXFC|Tx_fifo_used[3]"/>
+            <net is_signal_inverted="no" name="Tx_fifo_ctrl:TXFC|Tx_fifo_used[4]"/>
+            <net is_signal_inverted="no" name="Tx_fifo_ctrl:TXFC|Tx_fifo_used[5]"/>
+            <net is_signal_inverted="no" name="Tx_fifo_ctrl:TXFC|Tx_fifo_used[6]"/>
+            <net is_signal_inverted="no" name="Tx_fifo_ctrl:TXFC|Tx_fifo_used[7]"/>
+            <net is_signal_inverted="no" name="Tx_fifo_ctrl:TXFC|Tx_fifo_used[8]"/>
+            <net is_signal_inverted="no" name="Tx_fifo_ctrl:TXFC|Tx_fifo_used[9]"/>
+            <net is_signal_inverted="no" name="Tx_fifo_ctrl:TXFC|Tx_fifo_used[10]"/>
+            <net is_signal_inverted="no" name="Tx_fifo_ctrl:TXFC|Tx_fifo_used[11]"/>
+          </bus>
+          <bus is_signal_inverted="no" link="all" name="Tx_fifo_ctrl:TXFC|Tx_fifo_wdata" order="lsb_to_msb" radix="hex" state="collapse" type="combinatorial">
+            <net is_signal_inverted="no" name="Tx_fifo_ctrl:TXFC|Tx_fifo_wdata[0]"/>
+            <net is_signal_inverted="no" name="Tx_fifo_ctrl:TXFC|Tx_fifo_wdata[1]"/>
+            <net is_signal_inverted="no" name="Tx_fifo_ctrl:TXFC|Tx_fifo_wdata[2]"/>
+            <net is_signal_inverted="no" name="Tx_fifo_ctrl:TXFC|Tx_fifo_wdata[3]"/>
+            <net is_signal_inverted="no" name="Tx_fifo_ctrl:TXFC|Tx_fifo_wdata[4]"/>
+            <net is_signal_inverted="no" name="Tx_fifo_ctrl:TXFC|Tx_fifo_wdata[5]"/>
+            <net is_signal_inverted="no" name="Tx_fifo_ctrl:TXFC|Tx_fifo_wdata[6]"/>
+            <net is_signal_inverted="no" name="Tx_fifo_ctrl:TXFC|Tx_fifo_wdata[7]"/>
+            <net is_signal_inverted="no" name="Tx_fifo_ctrl:TXFC|Tx_fifo_wdata[8]"/>
+            <net is_signal_inverted="no" name="Tx_fifo_ctrl:TXFC|Tx_fifo_wdata[9]"/>
+            <net is_signal_inverted="no" name="Tx_fifo_ctrl:TXFC|Tx_fifo_wdata[10]"/>
+            <net is_signal_inverted="no" name="Tx_fifo_ctrl:TXFC|Tx_fifo_wdata[11]"/>
+            <net is_signal_inverted="no" name="Tx_fifo_ctrl:TXFC|Tx_fifo_wdata[12]"/>
+            <net is_signal_inverted="no" name="Tx_fifo_ctrl:TXFC|Tx_fifo_wdata[13]"/>
+            <net is_signal_inverted="no" name="Tx_fifo_ctrl:TXFC|Tx_fifo_wdata[14]"/>
+            <net is_signal_inverted="no" name="Tx_fifo_ctrl:TXFC|Tx_fifo_wdata[15]"/>
+          </bus>
+          <net is_signal_inverted="no" name="Tx_fifo_ctrl:TXFC|Tx_fifo_wreq"/>
+          <bus is_signal_inverted="no" link="all" name="Tx_fifo_ctrl:TXFC|loop_cnt" order="lsb_to_msb" radix="hex" state="collapse" type="register">
+            <net is_signal_inverted="no" name="Tx_fifo_ctrl:TXFC|loop_cnt[0]"/>
+            <net is_signal_inverted="no" name="Tx_fifo_ctrl:TXFC|loop_cnt[1]"/>
+            <net is_signal_inverted="no" name="Tx_fifo_ctrl:TXFC|loop_cnt[2]"/>
+            <net is_signal_inverted="no" name="Tx_fifo_ctrl:TXFC|loop_cnt[3]"/>
+            <net is_signal_inverted="no" name="Tx_fifo_ctrl:TXFC|loop_cnt[4]"/>
+            <net is_signal_inverted="no" name="Tx_fifo_ctrl:TXFC|loop_cnt[5]"/>
+            <net is_signal_inverted="no" name="Tx_fifo_ctrl:TXFC|loop_cnt[6]"/>
+          </bus>
+          <bus is_signal_inverted="no" link="all" name="Tx_fifo_ctrl:TXFC|pad_cnt" order="lsb_to_msb" radix="hex" state="collapse" type="register">
+            <net is_signal_inverted="no" name="Tx_fifo_ctrl:TXFC|pad_cnt[0]"/>
+            <net is_signal_inverted="no" name="Tx_fifo_ctrl:TXFC|pad_cnt[1]"/>
+            <net is_signal_inverted="no" name="Tx_fifo_ctrl:TXFC|pad_cnt[2]"/>
+            <net is_signal_inverted="no" name="Tx_fifo_ctrl:TXFC|pad_cnt[3]"/>
+            <net is_signal_inverted="no" name="Tx_fifo_ctrl:TXFC|pad_cnt[4]"/>
+            <net is_signal_inverted="no" name="Tx_fifo_ctrl:TXFC|pad_cnt[5]"/>
+          </bus>
+          <bus is_signal_inverted="no" link="all" name="Tx_fifo_ctrl:TXFC|tx_addr" order="lsb_to_msb" radix="hex" state="collapse" type="register">
+            <net is_signal_inverted="no" name="Tx_fifo_ctrl:TXFC|tx_addr[0]"/>
+            <net is_signal_inverted="no" name="Tx_fifo_ctrl:TXFC|tx_addr[1]"/>
+            <net is_signal_inverted="no" name="Tx_fifo_ctrl:TXFC|tx_addr[2]"/>
+            <net is_signal_inverted="no" name="Tx_fifo_ctrl:TXFC|tx_addr[3]"/>
+            <net is_signal_inverted="no" name="Tx_fifo_ctrl:TXFC|tx_addr[4]"/>
+          </bus>
+          <net is_signal_inverted="no" name="Tx_fifo_ctrl:TXFC|AD_state.AD_WAIT_MJ_RDY"/>
+        </setup_view>
+      </presentation>
+      <trigger attribute_mem_mode="false" gap_record="true" global_temp="1" name="trigger: 2009/09/03 22:53:10  #1" position="center" power_up_trigger_mode="false" record_data_gap="true" segment_size="1" storage_mode="off" storage_qualifier_disabled="no" storage_qualifier_port_is_pin="true" storage_qualifier_port_name="auto_stp_external_storage_qualifier" storage_qualifier_port_tap_mode="classic" trigger_in="dont_care" trigger_out="active high" trigger_type="circular">
+        <power_up_trigger position="pre" storage_qualifier_disabled="no" trigger_in="dont_care" trigger_out="active high"/>
+        <events use_custom_flow_control="no">
+          <level enabled="yes" name="condition1" type="basic">'Tx_fifo_ctrl:TXFC|AD_state.AD_SEND_SYNC1' == rising edge
+            <power_up enabled="yes">
+            </power_up>
+            <op_node/>
+          </level>
+        </events>
+        <storage_qualifier_events>
+          <transitional>00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+            <pwr_up_transitional>00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+            </pwr_up_transitional>
+          </transitional>
+          <storage_qualifier_level type="basic">
+            <power_up>
+            </power_up>
+            <op_node/>
+          </storage_qualifier_level>
+          <storage_qualifier_level type="basic">
+            <power_up>
+            </power_up>
+            <op_node/>
+          </storage_qualifier_level>
+          <storage_qualifier_level type="basic">
+            <power_up>
+            </power_up>
+            <op_node/>
+          </storage_qualifier_level>
+        </storage_qualifier_events>
+      </trigger>
+    </signal_set>
+  </instance>
+  <mnemonics/>
+  <static_plugin_mnemonics/>
+  <global_info>
+    <single attribute="active instance" value="0"/>
+    <single attribute="lock mode" value="36110"/>
+    <multi attribute="column width" size="23" value="34,34,250,74,68,70,88,88,98,98,88,88,110,101,101,101,101,101,101,101,101,107,78"/>
+    <multi attribute="window position" size="9" value="1221,799,398,124,0,50,124,0,0"/>
+  </global_info>
+</session>

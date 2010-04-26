@@ -1,0 +1,1133 @@
+<session jtag_chain="ByteBlasterMV [LPT1]" jtag_device="@1: EP3C25 (0x020F30DD)" sof_file="" top_level_entity="Mercury">
+  <display_tree gui_logging_enabled="0">
+    <display_branch instance="auto_signaltap_0" log="USE_GLOBAL_TEMP" signal_set="USE_GLOBAL_TEMP" trigger="USE_GLOBAL_TEMP"/>
+  </display_tree>
+  <instance entity_name="sld_signaltap" is_auto_node="yes" is_expanded="true" name="auto_signaltap_0" source_file="sld_signaltap.vhd">
+    <node_ip_info instance_id="0" mfg_id="110" node_id="0" version="6"/>
+    <signal_set global_temp="1" is_expanded="true" name="signal_set: 2009/10/26 09:30:12  #0">
+      <clock name="C122_clk" polarity="posedge" tap_mode="classic"/>
+      <config ram_type="M4K" reserved_data_nodes="0" reserved_storage_qualifier_nodes="0" reserved_trigger_nodes="0" sample_depth="128" trigger_in_enable="no" trigger_out_enable="no"/>
+      <top_entity/>
+      <signal_vec>
+        <trigger_input_vec>
+          <wire name="C122_DFS0" tap_mode="classic" type="register"/>
+          <wire name="C122_DFS1" tap_mode="classic" type="register"/>
+          <wire name="C122_frequency_HZ[0][0]" tap_mode="classic" type="register"/>
+          <wire name="C122_frequency_HZ[0][10]" tap_mode="classic" type="register"/>
+          <wire name="C122_frequency_HZ[0][11]" tap_mode="classic" type="register"/>
+          <wire name="C122_frequency_HZ[0][12]" tap_mode="classic" type="register"/>
+          <wire name="C122_frequency_HZ[0][13]" tap_mode="classic" type="register"/>
+          <wire name="C122_frequency_HZ[0][14]" tap_mode="classic" type="register"/>
+          <wire name="C122_frequency_HZ[0][15]" tap_mode="classic" type="register"/>
+          <wire name="C122_frequency_HZ[0][16]" tap_mode="classic" type="register"/>
+          <wire name="C122_frequency_HZ[0][17]" tap_mode="classic" type="register"/>
+          <wire name="C122_frequency_HZ[0][18]" tap_mode="classic" type="register"/>
+          <wire name="C122_frequency_HZ[0][19]" tap_mode="classic" type="register"/>
+          <wire name="C122_frequency_HZ[0][1]" tap_mode="classic" type="register"/>
+          <wire name="C122_frequency_HZ[0][20]" tap_mode="classic" type="register"/>
+          <wire name="C122_frequency_HZ[0][21]" tap_mode="classic" type="register"/>
+          <wire name="C122_frequency_HZ[0][22]" tap_mode="classic" type="register"/>
+          <wire name="C122_frequency_HZ[0][23]" tap_mode="classic" type="register"/>
+          <wire name="C122_frequency_HZ[0][24]" tap_mode="classic" type="register"/>
+          <wire name="C122_frequency_HZ[0][25]" tap_mode="classic" type="register"/>
+          <wire name="C122_frequency_HZ[0][26]" tap_mode="classic" type="register"/>
+          <wire name="C122_frequency_HZ[0][27]" tap_mode="classic" type="register"/>
+          <wire name="C122_frequency_HZ[0][28]" tap_mode="classic" type="register"/>
+          <wire name="C122_frequency_HZ[0][29]" tap_mode="classic" type="register"/>
+          <wire name="C122_frequency_HZ[0][2]" tap_mode="classic" type="register"/>
+          <wire name="C122_frequency_HZ[0][30]" tap_mode="classic" type="register"/>
+          <wire name="C122_frequency_HZ[0][31]" tap_mode="classic" type="register"/>
+          <wire name="C122_frequency_HZ[0][3]" tap_mode="classic" type="register"/>
+          <wire name="C122_frequency_HZ[0][4]" tap_mode="classic" type="register"/>
+          <wire name="C122_frequency_HZ[0][5]" tap_mode="classic" type="register"/>
+          <wire name="C122_frequency_HZ[0][6]" tap_mode="classic" type="register"/>
+          <wire name="C122_frequency_HZ[0][7]" tap_mode="classic" type="register"/>
+          <wire name="C122_frequency_HZ[0][8]" tap_mode="classic" type="register"/>
+          <wire name="C122_frequency_HZ[0][9]" tap_mode="classic" type="register"/>
+          <wire name="C122_frequency_HZ[1][0]" tap_mode="classic" type="register"/>
+          <wire name="C122_frequency_HZ[1][10]" tap_mode="classic" type="register"/>
+          <wire name="C122_frequency_HZ[1][11]" tap_mode="classic" type="register"/>
+          <wire name="C122_frequency_HZ[1][12]" tap_mode="classic" type="register"/>
+          <wire name="C122_frequency_HZ[1][13]" tap_mode="classic" type="register"/>
+          <wire name="C122_frequency_HZ[1][14]" tap_mode="classic" type="register"/>
+          <wire name="C122_frequency_HZ[1][15]" tap_mode="classic" type="register"/>
+          <wire name="C122_frequency_HZ[1][16]" tap_mode="classic" type="register"/>
+          <wire name="C122_frequency_HZ[1][17]" tap_mode="classic" type="register"/>
+          <wire name="C122_frequency_HZ[1][18]" tap_mode="classic" type="register"/>
+          <wire name="C122_frequency_HZ[1][19]" tap_mode="classic" type="register"/>
+          <wire name="C122_frequency_HZ[1][1]" tap_mode="classic" type="register"/>
+          <wire name="C122_frequency_HZ[1][20]" tap_mode="classic" type="register"/>
+          <wire name="C122_frequency_HZ[1][21]" tap_mode="classic" type="register"/>
+          <wire name="C122_frequency_HZ[1][22]" tap_mode="classic" type="register"/>
+          <wire name="C122_frequency_HZ[1][23]" tap_mode="classic" type="register"/>
+          <wire name="C122_frequency_HZ[1][24]" tap_mode="classic" type="register"/>
+          <wire name="C122_frequency_HZ[1][25]" tap_mode="classic" type="register"/>
+          <wire name="C122_frequency_HZ[1][26]" tap_mode="classic" type="register"/>
+          <wire name="C122_frequency_HZ[1][27]" tap_mode="classic" type="register"/>
+          <wire name="C122_frequency_HZ[1][28]" tap_mode="classic" type="register"/>
+          <wire name="C122_frequency_HZ[1][29]" tap_mode="classic" type="register"/>
+          <wire name="C122_frequency_HZ[1][2]" tap_mode="classic" type="register"/>
+          <wire name="C122_frequency_HZ[1][30]" tap_mode="classic" type="register"/>
+          <wire name="C122_frequency_HZ[1][31]" tap_mode="classic" type="register"/>
+          <wire name="C122_frequency_HZ[1][3]" tap_mode="classic" type="register"/>
+          <wire name="C122_frequency_HZ[1][4]" tap_mode="classic" type="register"/>
+          <wire name="C122_frequency_HZ[1][5]" tap_mode="classic" type="register"/>
+          <wire name="C122_frequency_HZ[1][6]" tap_mode="classic" type="register"/>
+          <wire name="C122_frequency_HZ[1][7]" tap_mode="classic" type="register"/>
+          <wire name="C122_frequency_HZ[1][8]" tap_mode="classic" type="register"/>
+          <wire name="C122_frequency_HZ[1][9]" tap_mode="classic" type="register"/>
+          <wire name="C122_rst" tap_mode="classic" type="register"/>
+          <wire name="C122_rst_cnt[0]" tap_mode="classic" type="register"/>
+          <wire name="C122_rst_cnt[10]" tap_mode="classic" type="register"/>
+          <wire name="C122_rst_cnt[1]" tap_mode="classic" type="register"/>
+          <wire name="C122_rst_cnt[2]" tap_mode="classic" type="register"/>
+          <wire name="C122_rst_cnt[3]" tap_mode="classic" type="register"/>
+          <wire name="C122_rst_cnt[4]" tap_mode="classic" type="register"/>
+          <wire name="C122_rst_cnt[5]" tap_mode="classic" type="register"/>
+          <wire name="C122_rst_cnt[6]" tap_mode="classic" type="register"/>
+          <wire name="C122_rst_cnt[7]" tap_mode="classic" type="register"/>
+          <wire name="C122_rst_cnt[8]" tap_mode="classic" type="register"/>
+          <wire name="C122_rst_cnt[9]" tap_mode="classic" type="register"/>
+          <wire name="CC" tap_mode="classic" type="input pin"/>
+          <wire name="Channels_8_1" tap_mode="classic" type="input pin"/>
+          <wire name="MDOUT[0]" tap_mode="classic" type="output pin"/>
+          <wire name="MDOUT[1]" tap_mode="classic" type="output pin"/>
+          <wire name="MDOUT[2]" tap_mode="classic" type="output pin"/>
+          <wire name="MDOUT[3]" tap_mode="classic" type="output pin"/>
+          <wire name="MDOUT[4]" tap_mode="classic" type="output pin"/>
+          <wire name="MDOUT[5]" tap_mode="classic" type="output pin"/>
+          <wire name="MDOUT[6]" tap_mode="classic" type="output pin"/>
+          <wire name="MDOUT[7]" tap_mode="classic" type="output pin"/>
+          <wire name="Merc_ID[0]" tap_mode="classic" type="input pin"/>
+          <wire name="Merc_ID[1]" tap_mode="classic" type="input pin"/>
+          <wire name="Merc_ID[2]" tap_mode="classic" type="input pin"/>
+          <wire name="Merc_ID_drv[0]" tap_mode="classic" type="output pin"/>
+          <wire name="Merc_ID_drv[1]" tap_mode="classic" type="output pin"/>
+          <wire name="Merc_ID_drv[2]" tap_mode="classic" type="output pin"/>
+          <wire name="Merc_ID_drv[3]" tap_mode="classic" type="output pin"/>
+          <wire name="SCLK" tap_mode="classic" type="output pin"/>
+          <wire name="TLV320_BCLK" tap_mode="classic" type="output pin"/>
+          <wire name="TLV320_LRCIN" tap_mode="classic" type="output pin"/>
+          <wire name="TLV320_LRCOUT" tap_mode="classic" type="output pin"/>
+          <wire name="TLV320_MCLK" tap_mode="classic" type="output pin"/>
+          <wire name="clock_select[1]" tap_mode="classic" type="register"/>
+          <wire name="clock_select[2]" tap_mode="classic" type="register"/>
+          <wire name="clock_select[3]" tap_mode="classic" type="register"/>
+          <wire name="receiver:MDC[0].Merc_rcv|out_data_I[0]" tap_mode="classic" type="combinatorial"/>
+          <wire name="receiver:MDC[0].Merc_rcv|out_data_I[10]" tap_mode="classic" type="combinatorial"/>
+          <wire name="receiver:MDC[0].Merc_rcv|out_data_I[11]" tap_mode="classic" type="combinatorial"/>
+          <wire name="receiver:MDC[0].Merc_rcv|out_data_I[12]" tap_mode="classic" type="combinatorial"/>
+          <wire name="receiver:MDC[0].Merc_rcv|out_data_I[13]" tap_mode="classic" type="combinatorial"/>
+          <wire name="receiver:MDC[0].Merc_rcv|out_data_I[14]" tap_mode="classic" type="combinatorial"/>
+          <wire name="receiver:MDC[0].Merc_rcv|out_data_I[15]" tap_mode="classic" type="combinatorial"/>
+          <wire name="receiver:MDC[0].Merc_rcv|out_data_I[16]" tap_mode="classic" type="combinatorial"/>
+          <wire name="receiver:MDC[0].Merc_rcv|out_data_I[17]" tap_mode="classic" type="combinatorial"/>
+          <wire name="receiver:MDC[0].Merc_rcv|out_data_I[18]" tap_mode="classic" type="combinatorial"/>
+          <wire name="receiver:MDC[0].Merc_rcv|out_data_I[19]" tap_mode="classic" type="combinatorial"/>
+          <wire name="receiver:MDC[0].Merc_rcv|out_data_I[1]" tap_mode="classic" type="combinatorial"/>
+          <wire name="receiver:MDC[0].Merc_rcv|out_data_I[20]" tap_mode="classic" type="combinatorial"/>
+          <wire name="receiver:MDC[0].Merc_rcv|out_data_I[21]" tap_mode="classic" type="combinatorial"/>
+          <wire name="receiver:MDC[0].Merc_rcv|out_data_I[22]" tap_mode="classic" type="combinatorial"/>
+          <wire name="receiver:MDC[0].Merc_rcv|out_data_I[23]" tap_mode="classic" type="combinatorial"/>
+          <wire name="receiver:MDC[0].Merc_rcv|out_data_I[2]" tap_mode="classic" type="combinatorial"/>
+          <wire name="receiver:MDC[0].Merc_rcv|out_data_I[3]" tap_mode="classic" type="combinatorial"/>
+          <wire name="receiver:MDC[0].Merc_rcv|out_data_I[4]" tap_mode="classic" type="combinatorial"/>
+          <wire name="receiver:MDC[0].Merc_rcv|out_data_I[5]" tap_mode="classic" type="combinatorial"/>
+          <wire name="receiver:MDC[0].Merc_rcv|out_data_I[6]" tap_mode="classic" type="combinatorial"/>
+          <wire name="receiver:MDC[0].Merc_rcv|out_data_I[7]" tap_mode="classic" type="combinatorial"/>
+          <wire name="receiver:MDC[0].Merc_rcv|out_data_I[8]" tap_mode="classic" type="combinatorial"/>
+          <wire name="receiver:MDC[0].Merc_rcv|out_data_I[9]" tap_mode="classic" type="combinatorial"/>
+          <wire name="receiver:MDC[0].Merc_rcv|out_data_Q[0]" tap_mode="classic" type="combinatorial"/>
+          <wire name="receiver:MDC[0].Merc_rcv|out_data_Q[10]" tap_mode="classic" type="combinatorial"/>
+          <wire name="receiver:MDC[0].Merc_rcv|out_data_Q[11]" tap_mode="classic" type="combinatorial"/>
+          <wire name="receiver:MDC[0].Merc_rcv|out_data_Q[12]" tap_mode="classic" type="combinatorial"/>
+          <wire name="receiver:MDC[0].Merc_rcv|out_data_Q[13]" tap_mode="classic" type="combinatorial"/>
+          <wire name="receiver:MDC[0].Merc_rcv|out_data_Q[14]" tap_mode="classic" type="combinatorial"/>
+          <wire name="receiver:MDC[0].Merc_rcv|out_data_Q[15]" tap_mode="classic" type="combinatorial"/>
+          <wire name="receiver:MDC[0].Merc_rcv|out_data_Q[16]" tap_mode="classic" type="combinatorial"/>
+          <wire name="receiver:MDC[0].Merc_rcv|out_data_Q[17]" tap_mode="classic" type="combinatorial"/>
+          <wire name="receiver:MDC[0].Merc_rcv|out_data_Q[18]" tap_mode="classic" type="combinatorial"/>
+          <wire name="receiver:MDC[0].Merc_rcv|out_data_Q[19]" tap_mode="classic" type="combinatorial"/>
+          <wire name="receiver:MDC[0].Merc_rcv|out_data_Q[1]" tap_mode="classic" type="combinatorial"/>
+          <wire name="receiver:MDC[0].Merc_rcv|out_data_Q[20]" tap_mode="classic" type="combinatorial"/>
+          <wire name="receiver:MDC[0].Merc_rcv|out_data_Q[21]" tap_mode="classic" type="combinatorial"/>
+          <wire name="receiver:MDC[0].Merc_rcv|out_data_Q[22]" tap_mode="classic" type="combinatorial"/>
+          <wire name="receiver:MDC[0].Merc_rcv|out_data_Q[23]" tap_mode="classic" type="combinatorial"/>
+          <wire name="receiver:MDC[0].Merc_rcv|out_data_Q[2]" tap_mode="classic" type="combinatorial"/>
+          <wire name="receiver:MDC[0].Merc_rcv|out_data_Q[3]" tap_mode="classic" type="combinatorial"/>
+          <wire name="receiver:MDC[0].Merc_rcv|out_data_Q[4]" tap_mode="classic" type="combinatorial"/>
+          <wire name="receiver:MDC[0].Merc_rcv|out_data_Q[5]" tap_mode="classic" type="combinatorial"/>
+          <wire name="receiver:MDC[0].Merc_rcv|out_data_Q[6]" tap_mode="classic" type="combinatorial"/>
+          <wire name="receiver:MDC[0].Merc_rcv|out_data_Q[7]" tap_mode="classic" type="combinatorial"/>
+          <wire name="receiver:MDC[0].Merc_rcv|out_data_Q[8]" tap_mode="classic" type="combinatorial"/>
+          <wire name="receiver:MDC[0].Merc_rcv|out_data_Q[9]" tap_mode="classic" type="combinatorial"/>
+          <wire name="receiver:MDC[0].Merc_rcv|out_strobe" tap_mode="classic" type="combinatorial"/>
+          <wire name="receiver:MDC[1].Merc_rcv|out_data_I[0]" tap_mode="classic" type="combinatorial"/>
+          <wire name="receiver:MDC[1].Merc_rcv|out_data_I[10]" tap_mode="classic" type="combinatorial"/>
+          <wire name="receiver:MDC[1].Merc_rcv|out_data_I[11]" tap_mode="classic" type="combinatorial"/>
+          <wire name="receiver:MDC[1].Merc_rcv|out_data_I[12]" tap_mode="classic" type="combinatorial"/>
+          <wire name="receiver:MDC[1].Merc_rcv|out_data_I[13]" tap_mode="classic" type="combinatorial"/>
+          <wire name="receiver:MDC[1].Merc_rcv|out_data_I[14]" tap_mode="classic" type="combinatorial"/>
+          <wire name="receiver:MDC[1].Merc_rcv|out_data_I[15]" tap_mode="classic" type="combinatorial"/>
+          <wire name="receiver:MDC[1].Merc_rcv|out_data_I[16]" tap_mode="classic" type="combinatorial"/>
+          <wire name="receiver:MDC[1].Merc_rcv|out_data_I[17]" tap_mode="classic" type="combinatorial"/>
+          <wire name="receiver:MDC[1].Merc_rcv|out_data_I[18]" tap_mode="classic" type="combinatorial"/>
+          <wire name="receiver:MDC[1].Merc_rcv|out_data_I[19]" tap_mode="classic" type="combinatorial"/>
+          <wire name="receiver:MDC[1].Merc_rcv|out_data_I[1]" tap_mode="classic" type="combinatorial"/>
+          <wire name="receiver:MDC[1].Merc_rcv|out_data_I[20]" tap_mode="classic" type="combinatorial"/>
+          <wire name="receiver:MDC[1].Merc_rcv|out_data_I[21]" tap_mode="classic" type="combinatorial"/>
+          <wire name="receiver:MDC[1].Merc_rcv|out_data_I[22]" tap_mode="classic" type="combinatorial"/>
+          <wire name="receiver:MDC[1].Merc_rcv|out_data_I[23]" tap_mode="classic" type="combinatorial"/>
+          <wire name="receiver:MDC[1].Merc_rcv|out_data_I[2]" tap_mode="classic" type="combinatorial"/>
+          <wire name="receiver:MDC[1].Merc_rcv|out_data_I[3]" tap_mode="classic" type="combinatorial"/>
+          <wire name="receiver:MDC[1].Merc_rcv|out_data_I[4]" tap_mode="classic" type="combinatorial"/>
+          <wire name="receiver:MDC[1].Merc_rcv|out_data_I[5]" tap_mode="classic" type="combinatorial"/>
+          <wire name="receiver:MDC[1].Merc_rcv|out_data_I[6]" tap_mode="classic" type="combinatorial"/>
+          <wire name="receiver:MDC[1].Merc_rcv|out_data_I[7]" tap_mode="classic" type="combinatorial"/>
+          <wire name="receiver:MDC[1].Merc_rcv|out_data_I[8]" tap_mode="classic" type="combinatorial"/>
+          <wire name="receiver:MDC[1].Merc_rcv|out_data_I[9]" tap_mode="classic" type="combinatorial"/>
+          <wire name="receiver:MDC[1].Merc_rcv|out_data_Q[0]" tap_mode="classic" type="combinatorial"/>
+          <wire name="receiver:MDC[1].Merc_rcv|out_data_Q[10]" tap_mode="classic" type="combinatorial"/>
+          <wire name="receiver:MDC[1].Merc_rcv|out_data_Q[11]" tap_mode="classic" type="combinatorial"/>
+          <wire name="receiver:MDC[1].Merc_rcv|out_data_Q[12]" tap_mode="classic" type="combinatorial"/>
+          <wire name="receiver:MDC[1].Merc_rcv|out_data_Q[13]" tap_mode="classic" type="combinatorial"/>
+          <wire name="receiver:MDC[1].Merc_rcv|out_data_Q[14]" tap_mode="classic" type="combinatorial"/>
+          <wire name="receiver:MDC[1].Merc_rcv|out_data_Q[15]" tap_mode="classic" type="combinatorial"/>
+          <wire name="receiver:MDC[1].Merc_rcv|out_data_Q[16]" tap_mode="classic" type="combinatorial"/>
+          <wire name="receiver:MDC[1].Merc_rcv|out_data_Q[17]" tap_mode="classic" type="combinatorial"/>
+          <wire name="receiver:MDC[1].Merc_rcv|out_data_Q[18]" tap_mode="classic" type="combinatorial"/>
+          <wire name="receiver:MDC[1].Merc_rcv|out_data_Q[19]" tap_mode="classic" type="combinatorial"/>
+          <wire name="receiver:MDC[1].Merc_rcv|out_data_Q[1]" tap_mode="classic" type="combinatorial"/>
+          <wire name="receiver:MDC[1].Merc_rcv|out_data_Q[20]" tap_mode="classic" type="combinatorial"/>
+          <wire name="receiver:MDC[1].Merc_rcv|out_data_Q[21]" tap_mode="classic" type="combinatorial"/>
+          <wire name="receiver:MDC[1].Merc_rcv|out_data_Q[22]" tap_mode="classic" type="combinatorial"/>
+          <wire name="receiver:MDC[1].Merc_rcv|out_data_Q[23]" tap_mode="classic" type="combinatorial"/>
+          <wire name="receiver:MDC[1].Merc_rcv|out_data_Q[2]" tap_mode="classic" type="combinatorial"/>
+          <wire name="receiver:MDC[1].Merc_rcv|out_data_Q[3]" tap_mode="classic" type="combinatorial"/>
+          <wire name="receiver:MDC[1].Merc_rcv|out_data_Q[4]" tap_mode="classic" type="combinatorial"/>
+          <wire name="receiver:MDC[1].Merc_rcv|out_data_Q[5]" tap_mode="classic" type="combinatorial"/>
+          <wire name="receiver:MDC[1].Merc_rcv|out_data_Q[6]" tap_mode="classic" type="combinatorial"/>
+          <wire name="receiver:MDC[1].Merc_rcv|out_data_Q[7]" tap_mode="classic" type="combinatorial"/>
+          <wire name="receiver:MDC[1].Merc_rcv|out_data_Q[8]" tap_mode="classic" type="combinatorial"/>
+          <wire name="receiver:MDC[1].Merc_rcv|out_data_Q[9]" tap_mode="classic" type="combinatorial"/>
+          <wire name="receiver:MDC[1].Merc_rcv|out_strobe" tap_mode="classic" type="combinatorial"/>
+        </trigger_input_vec>
+        <data_input_vec>
+          <wire name="C122_DFS0" tap_mode="classic" type="register"/>
+          <wire name="C122_DFS1" tap_mode="classic" type="register"/>
+          <wire name="C122_frequency_HZ[0][0]" tap_mode="classic" type="register"/>
+          <wire name="C122_frequency_HZ[0][10]" tap_mode="classic" type="register"/>
+          <wire name="C122_frequency_HZ[0][11]" tap_mode="classic" type="register"/>
+          <wire name="C122_frequency_HZ[0][12]" tap_mode="classic" type="register"/>
+          <wire name="C122_frequency_HZ[0][13]" tap_mode="classic" type="register"/>
+          <wire name="C122_frequency_HZ[0][14]" tap_mode="classic" type="register"/>
+          <wire name="C122_frequency_HZ[0][15]" tap_mode="classic" type="register"/>
+          <wire name="C122_frequency_HZ[0][16]" tap_mode="classic" type="register"/>
+          <wire name="C122_frequency_HZ[0][17]" tap_mode="classic" type="register"/>
+          <wire name="C122_frequency_HZ[0][18]" tap_mode="classic" type="register"/>
+          <wire name="C122_frequency_HZ[0][19]" tap_mode="classic" type="register"/>
+          <wire name="C122_frequency_HZ[0][1]" tap_mode="classic" type="register"/>
+          <wire name="C122_frequency_HZ[0][20]" tap_mode="classic" type="register"/>
+          <wire name="C122_frequency_HZ[0][21]" tap_mode="classic" type="register"/>
+          <wire name="C122_frequency_HZ[0][22]" tap_mode="classic" type="register"/>
+          <wire name="C122_frequency_HZ[0][23]" tap_mode="classic" type="register"/>
+          <wire name="C122_frequency_HZ[0][24]" tap_mode="classic" type="register"/>
+          <wire name="C122_frequency_HZ[0][25]" tap_mode="classic" type="register"/>
+          <wire name="C122_frequency_HZ[0][26]" tap_mode="classic" type="register"/>
+          <wire name="C122_frequency_HZ[0][27]" tap_mode="classic" type="register"/>
+          <wire name="C122_frequency_HZ[0][28]" tap_mode="classic" type="register"/>
+          <wire name="C122_frequency_HZ[0][29]" tap_mode="classic" type="register"/>
+          <wire name="C122_frequency_HZ[0][2]" tap_mode="classic" type="register"/>
+          <wire name="C122_frequency_HZ[0][30]" tap_mode="classic" type="register"/>
+          <wire name="C122_frequency_HZ[0][31]" tap_mode="classic" type="register"/>
+          <wire name="C122_frequency_HZ[0][3]" tap_mode="classic" type="register"/>
+          <wire name="C122_frequency_HZ[0][4]" tap_mode="classic" type="register"/>
+          <wire name="C122_frequency_HZ[0][5]" tap_mode="classic" type="register"/>
+          <wire name="C122_frequency_HZ[0][6]" tap_mode="classic" type="register"/>
+          <wire name="C122_frequency_HZ[0][7]" tap_mode="classic" type="register"/>
+          <wire name="C122_frequency_HZ[0][8]" tap_mode="classic" type="register"/>
+          <wire name="C122_frequency_HZ[0][9]" tap_mode="classic" type="register"/>
+          <wire name="C122_frequency_HZ[1][0]" tap_mode="classic" type="register"/>
+          <wire name="C122_frequency_HZ[1][10]" tap_mode="classic" type="register"/>
+          <wire name="C122_frequency_HZ[1][11]" tap_mode="classic" type="register"/>
+          <wire name="C122_frequency_HZ[1][12]" tap_mode="classic" type="register"/>
+          <wire name="C122_frequency_HZ[1][13]" tap_mode="classic" type="register"/>
+          <wire name="C122_frequency_HZ[1][14]" tap_mode="classic" type="register"/>
+          <wire name="C122_frequency_HZ[1][15]" tap_mode="classic" type="register"/>
+          <wire name="C122_frequency_HZ[1][16]" tap_mode="classic" type="register"/>
+          <wire name="C122_frequency_HZ[1][17]" tap_mode="classic" type="register"/>
+          <wire name="C122_frequency_HZ[1][18]" tap_mode="classic" type="register"/>
+          <wire name="C122_frequency_HZ[1][19]" tap_mode="classic" type="register"/>
+          <wire name="C122_frequency_HZ[1][1]" tap_mode="classic" type="register"/>
+          <wire name="C122_frequency_HZ[1][20]" tap_mode="classic" type="register"/>
+          <wire name="C122_frequency_HZ[1][21]" tap_mode="classic" type="register"/>
+          <wire name="C122_frequency_HZ[1][22]" tap_mode="classic" type="register"/>
+          <wire name="C122_frequency_HZ[1][23]" tap_mode="classic" type="register"/>
+          <wire name="C122_frequency_HZ[1][24]" tap_mode="classic" type="register"/>
+          <wire name="C122_frequency_HZ[1][25]" tap_mode="classic" type="register"/>
+          <wire name="C122_frequency_HZ[1][26]" tap_mode="classic" type="register"/>
+          <wire name="C122_frequency_HZ[1][27]" tap_mode="classic" type="register"/>
+          <wire name="C122_frequency_HZ[1][28]" tap_mode="classic" type="register"/>
+          <wire name="C122_frequency_HZ[1][29]" tap_mode="classic" type="register"/>
+          <wire name="C122_frequency_HZ[1][2]" tap_mode="classic" type="register"/>
+          <wire name="C122_frequency_HZ[1][30]" tap_mode="classic" type="register"/>
+          <wire name="C122_frequency_HZ[1][31]" tap_mode="classic" type="register"/>
+          <wire name="C122_frequency_HZ[1][3]" tap_mode="classic" type="register"/>
+          <wire name="C122_frequency_HZ[1][4]" tap_mode="classic" type="register"/>
+          <wire name="C122_frequency_HZ[1][5]" tap_mode="classic" type="register"/>
+          <wire name="C122_frequency_HZ[1][6]" tap_mode="classic" type="register"/>
+          <wire name="C122_frequency_HZ[1][7]" tap_mode="classic" type="register"/>
+          <wire name="C122_frequency_HZ[1][8]" tap_mode="classic" type="register"/>
+          <wire name="C122_frequency_HZ[1][9]" tap_mode="classic" type="register"/>
+          <wire name="C122_rst" tap_mode="classic" type="register"/>
+          <wire name="C122_rst_cnt[0]" tap_mode="classic" type="register"/>
+          <wire name="C122_rst_cnt[10]" tap_mode="classic" type="register"/>
+          <wire name="C122_rst_cnt[1]" tap_mode="classic" type="register"/>
+          <wire name="C122_rst_cnt[2]" tap_mode="classic" type="register"/>
+          <wire name="C122_rst_cnt[3]" tap_mode="classic" type="register"/>
+          <wire name="C122_rst_cnt[4]" tap_mode="classic" type="register"/>
+          <wire name="C122_rst_cnt[5]" tap_mode="classic" type="register"/>
+          <wire name="C122_rst_cnt[6]" tap_mode="classic" type="register"/>
+          <wire name="C122_rst_cnt[7]" tap_mode="classic" type="register"/>
+          <wire name="C122_rst_cnt[8]" tap_mode="classic" type="register"/>
+          <wire name="C122_rst_cnt[9]" tap_mode="classic" type="register"/>
+          <wire name="CC" tap_mode="classic" type="input pin"/>
+          <wire name="Channels_8_1" tap_mode="classic" type="input pin"/>
+          <wire name="MDOUT[0]" tap_mode="classic" type="output pin"/>
+          <wire name="MDOUT[1]" tap_mode="classic" type="output pin"/>
+          <wire name="MDOUT[2]" tap_mode="classic" type="output pin"/>
+          <wire name="MDOUT[3]" tap_mode="classic" type="output pin"/>
+          <wire name="MDOUT[4]" tap_mode="classic" type="output pin"/>
+          <wire name="MDOUT[5]" tap_mode="classic" type="output pin"/>
+          <wire name="MDOUT[6]" tap_mode="classic" type="output pin"/>
+          <wire name="MDOUT[7]" tap_mode="classic" type="output pin"/>
+          <wire name="Merc_ID[0]" tap_mode="classic" type="input pin"/>
+          <wire name="Merc_ID[1]" tap_mode="classic" type="input pin"/>
+          <wire name="Merc_ID[2]" tap_mode="classic" type="input pin"/>
+          <wire name="Merc_ID_drv[0]" tap_mode="classic" type="output pin"/>
+          <wire name="Merc_ID_drv[1]" tap_mode="classic" type="output pin"/>
+          <wire name="Merc_ID_drv[2]" tap_mode="classic" type="output pin"/>
+          <wire name="Merc_ID_drv[3]" tap_mode="classic" type="output pin"/>
+          <wire name="SCLK" tap_mode="classic" type="output pin"/>
+          <wire name="TLV320_BCLK" tap_mode="classic" type="output pin"/>
+          <wire name="TLV320_LRCIN" tap_mode="classic" type="output pin"/>
+          <wire name="TLV320_LRCOUT" tap_mode="classic" type="output pin"/>
+          <wire name="TLV320_MCLK" tap_mode="classic" type="output pin"/>
+          <wire name="clock_select[1]" tap_mode="classic" type="register"/>
+          <wire name="clock_select[2]" tap_mode="classic" type="register"/>
+          <wire name="clock_select[3]" tap_mode="classic" type="register"/>
+          <wire name="receiver:MDC[0].Merc_rcv|out_data_I[0]" tap_mode="classic" type="combinatorial"/>
+          <wire name="receiver:MDC[0].Merc_rcv|out_data_I[10]" tap_mode="classic" type="combinatorial"/>
+          <wire name="receiver:MDC[0].Merc_rcv|out_data_I[11]" tap_mode="classic" type="combinatorial"/>
+          <wire name="receiver:MDC[0].Merc_rcv|out_data_I[12]" tap_mode="classic" type="combinatorial"/>
+          <wire name="receiver:MDC[0].Merc_rcv|out_data_I[13]" tap_mode="classic" type="combinatorial"/>
+          <wire name="receiver:MDC[0].Merc_rcv|out_data_I[14]" tap_mode="classic" type="combinatorial"/>
+          <wire name="receiver:MDC[0].Merc_rcv|out_data_I[15]" tap_mode="classic" type="combinatorial"/>
+          <wire name="receiver:MDC[0].Merc_rcv|out_data_I[16]" tap_mode="classic" type="combinatorial"/>
+          <wire name="receiver:MDC[0].Merc_rcv|out_data_I[17]" tap_mode="classic" type="combinatorial"/>
+          <wire name="receiver:MDC[0].Merc_rcv|out_data_I[18]" tap_mode="classic" type="combinatorial"/>
+          <wire name="receiver:MDC[0].Merc_rcv|out_data_I[19]" tap_mode="classic" type="combinatorial"/>
+          <wire name="receiver:MDC[0].Merc_rcv|out_data_I[1]" tap_mode="classic" type="combinatorial"/>
+          <wire name="receiver:MDC[0].Merc_rcv|out_data_I[20]" tap_mode="classic" type="combinatorial"/>
+          <wire name="receiver:MDC[0].Merc_rcv|out_data_I[21]" tap_mode="classic" type="combinatorial"/>
+          <wire name="receiver:MDC[0].Merc_rcv|out_data_I[22]" tap_mode="classic" type="combinatorial"/>
+          <wire name="receiver:MDC[0].Merc_rcv|out_data_I[23]" tap_mode="classic" type="combinatorial"/>
+          <wire name="receiver:MDC[0].Merc_rcv|out_data_I[2]" tap_mode="classic" type="combinatorial"/>
+          <wire name="receiver:MDC[0].Merc_rcv|out_data_I[3]" tap_mode="classic" type="combinatorial"/>
+          <wire name="receiver:MDC[0].Merc_rcv|out_data_I[4]" tap_mode="classic" type="combinatorial"/>
+          <wire name="receiver:MDC[0].Merc_rcv|out_data_I[5]" tap_mode="classic" type="combinatorial"/>
+          <wire name="receiver:MDC[0].Merc_rcv|out_data_I[6]" tap_mode="classic" type="combinatorial"/>
+          <wire name="receiver:MDC[0].Merc_rcv|out_data_I[7]" tap_mode="classic" type="combinatorial"/>
+          <wire name="receiver:MDC[0].Merc_rcv|out_data_I[8]" tap_mode="classic" type="combinatorial"/>
+          <wire name="receiver:MDC[0].Merc_rcv|out_data_I[9]" tap_mode="classic" type="combinatorial"/>
+          <wire name="receiver:MDC[0].Merc_rcv|out_data_Q[0]" tap_mode="classic" type="combinatorial"/>
+          <wire name="receiver:MDC[0].Merc_rcv|out_data_Q[10]" tap_mode="classic" type="combinatorial"/>
+          <wire name="receiver:MDC[0].Merc_rcv|out_data_Q[11]" tap_mode="classic" type="combinatorial"/>
+          <wire name="receiver:MDC[0].Merc_rcv|out_data_Q[12]" tap_mode="classic" type="combinatorial"/>
+          <wire name="receiver:MDC[0].Merc_rcv|out_data_Q[13]" tap_mode="classic" type="combinatorial"/>
+          <wire name="receiver:MDC[0].Merc_rcv|out_data_Q[14]" tap_mode="classic" type="combinatorial"/>
+          <wire name="receiver:MDC[0].Merc_rcv|out_data_Q[15]" tap_mode="classic" type="combinatorial"/>
+          <wire name="receiver:MDC[0].Merc_rcv|out_data_Q[16]" tap_mode="classic" type="combinatorial"/>
+          <wire name="receiver:MDC[0].Merc_rcv|out_data_Q[17]" tap_mode="classic" type="combinatorial"/>
+          <wire name="receiver:MDC[0].Merc_rcv|out_data_Q[18]" tap_mode="classic" type="combinatorial"/>
+          <wire name="receiver:MDC[0].Merc_rcv|out_data_Q[19]" tap_mode="classic" type="combinatorial"/>
+          <wire name="receiver:MDC[0].Merc_rcv|out_data_Q[1]" tap_mode="classic" type="combinatorial"/>
+          <wire name="receiver:MDC[0].Merc_rcv|out_data_Q[20]" tap_mode="classic" type="combinatorial"/>
+          <wire name="receiver:MDC[0].Merc_rcv|out_data_Q[21]" tap_mode="classic" type="combinatorial"/>
+          <wire name="receiver:MDC[0].Merc_rcv|out_data_Q[22]" tap_mode="classic" type="combinatorial"/>
+          <wire name="receiver:MDC[0].Merc_rcv|out_data_Q[23]" tap_mode="classic" type="combinatorial"/>
+          <wire name="receiver:MDC[0].Merc_rcv|out_data_Q[2]" tap_mode="classic" type="combinatorial"/>
+          <wire name="receiver:MDC[0].Merc_rcv|out_data_Q[3]" tap_mode="classic" type="combinatorial"/>
+          <wire name="receiver:MDC[0].Merc_rcv|out_data_Q[4]" tap_mode="classic" type="combinatorial"/>
+          <wire name="receiver:MDC[0].Merc_rcv|out_data_Q[5]" tap_mode="classic" type="combinatorial"/>
+          <wire name="receiver:MDC[0].Merc_rcv|out_data_Q[6]" tap_mode="classic" type="combinatorial"/>
+          <wire name="receiver:MDC[0].Merc_rcv|out_data_Q[7]" tap_mode="classic" type="combinatorial"/>
+          <wire name="receiver:MDC[0].Merc_rcv|out_data_Q[8]" tap_mode="classic" type="combinatorial"/>
+          <wire name="receiver:MDC[0].Merc_rcv|out_data_Q[9]" tap_mode="classic" type="combinatorial"/>
+          <wire name="receiver:MDC[0].Merc_rcv|out_strobe" tap_mode="classic" type="combinatorial"/>
+          <wire name="receiver:MDC[1].Merc_rcv|out_data_I[0]" tap_mode="classic" type="combinatorial"/>
+          <wire name="receiver:MDC[1].Merc_rcv|out_data_I[10]" tap_mode="classic" type="combinatorial"/>
+          <wire name="receiver:MDC[1].Merc_rcv|out_data_I[11]" tap_mode="classic" type="combinatorial"/>
+          <wire name="receiver:MDC[1].Merc_rcv|out_data_I[12]" tap_mode="classic" type="combinatorial"/>
+          <wire name="receiver:MDC[1].Merc_rcv|out_data_I[13]" tap_mode="classic" type="combinatorial"/>
+          <wire name="receiver:MDC[1].Merc_rcv|out_data_I[14]" tap_mode="classic" type="combinatorial"/>
+          <wire name="receiver:MDC[1].Merc_rcv|out_data_I[15]" tap_mode="classic" type="combinatorial"/>
+          <wire name="receiver:MDC[1].Merc_rcv|out_data_I[16]" tap_mode="classic" type="combinatorial"/>
+          <wire name="receiver:MDC[1].Merc_rcv|out_data_I[17]" tap_mode="classic" type="combinatorial"/>
+          <wire name="receiver:MDC[1].Merc_rcv|out_data_I[18]" tap_mode="classic" type="combinatorial"/>
+          <wire name="receiver:MDC[1].Merc_rcv|out_data_I[19]" tap_mode="classic" type="combinatorial"/>
+          <wire name="receiver:MDC[1].Merc_rcv|out_data_I[1]" tap_mode="classic" type="combinatorial"/>
+          <wire name="receiver:MDC[1].Merc_rcv|out_data_I[20]" tap_mode="classic" type="combinatorial"/>
+          <wire name="receiver:MDC[1].Merc_rcv|out_data_I[21]" tap_mode="classic" type="combinatorial"/>
+          <wire name="receiver:MDC[1].Merc_rcv|out_data_I[22]" tap_mode="classic" type="combinatorial"/>
+          <wire name="receiver:MDC[1].Merc_rcv|out_data_I[23]" tap_mode="classic" type="combinatorial"/>
+          <wire name="receiver:MDC[1].Merc_rcv|out_data_I[2]" tap_mode="classic" type="combinatorial"/>
+          <wire name="receiver:MDC[1].Merc_rcv|out_data_I[3]" tap_mode="classic" type="combinatorial"/>
+          <wire name="receiver:MDC[1].Merc_rcv|out_data_I[4]" tap_mode="classic" type="combinatorial"/>
+          <wire name="receiver:MDC[1].Merc_rcv|out_data_I[5]" tap_mode="classic" type="combinatorial"/>
+          <wire name="receiver:MDC[1].Merc_rcv|out_data_I[6]" tap_mode="classic" type="combinatorial"/>
+          <wire name="receiver:MDC[1].Merc_rcv|out_data_I[7]" tap_mode="classic" type="combinatorial"/>
+          <wire name="receiver:MDC[1].Merc_rcv|out_data_I[8]" tap_mode="classic" type="combinatorial"/>
+          <wire name="receiver:MDC[1].Merc_rcv|out_data_I[9]" tap_mode="classic" type="combinatorial"/>
+          <wire name="receiver:MDC[1].Merc_rcv|out_data_Q[0]" tap_mode="classic" type="combinatorial"/>
+          <wire name="receiver:MDC[1].Merc_rcv|out_data_Q[10]" tap_mode="classic" type="combinatorial"/>
+          <wire name="receiver:MDC[1].Merc_rcv|out_data_Q[11]" tap_mode="classic" type="combinatorial"/>
+          <wire name="receiver:MDC[1].Merc_rcv|out_data_Q[12]" tap_mode="classic" type="combinatorial"/>
+          <wire name="receiver:MDC[1].Merc_rcv|out_data_Q[13]" tap_mode="classic" type="combinatorial"/>
+          <wire name="receiver:MDC[1].Merc_rcv|out_data_Q[14]" tap_mode="classic" type="combinatorial"/>
+          <wire name="receiver:MDC[1].Merc_rcv|out_data_Q[15]" tap_mode="classic" type="combinatorial"/>
+          <wire name="receiver:MDC[1].Merc_rcv|out_data_Q[16]" tap_mode="classic" type="combinatorial"/>
+          <wire name="receiver:MDC[1].Merc_rcv|out_data_Q[17]" tap_mode="classic" type="combinatorial"/>
+          <wire name="receiver:MDC[1].Merc_rcv|out_data_Q[18]" tap_mode="classic" type="combinatorial"/>
+          <wire name="receiver:MDC[1].Merc_rcv|out_data_Q[19]" tap_mode="classic" type="combinatorial"/>
+          <wire name="receiver:MDC[1].Merc_rcv|out_data_Q[1]" tap_mode="classic" type="combinatorial"/>
+          <wire name="receiver:MDC[1].Merc_rcv|out_data_Q[20]" tap_mode="classic" type="combinatorial"/>
+          <wire name="receiver:MDC[1].Merc_rcv|out_data_Q[21]" tap_mode="classic" type="combinatorial"/>
+          <wire name="receiver:MDC[1].Merc_rcv|out_data_Q[22]" tap_mode="classic" type="combinatorial"/>
+          <wire name="receiver:MDC[1].Merc_rcv|out_data_Q[23]" tap_mode="classic" type="combinatorial"/>
+          <wire name="receiver:MDC[1].Merc_rcv|out_data_Q[2]" tap_mode="classic" type="combinatorial"/>
+          <wire name="receiver:MDC[1].Merc_rcv|out_data_Q[3]" tap_mode="classic" type="combinatorial"/>
+          <wire name="receiver:MDC[1].Merc_rcv|out_data_Q[4]" tap_mode="classic" type="combinatorial"/>
+          <wire name="receiver:MDC[1].Merc_rcv|out_data_Q[5]" tap_mode="classic" type="combinatorial"/>
+          <wire name="receiver:MDC[1].Merc_rcv|out_data_Q[6]" tap_mode="classic" type="combinatorial"/>
+          <wire name="receiver:MDC[1].Merc_rcv|out_data_Q[7]" tap_mode="classic" type="combinatorial"/>
+          <wire name="receiver:MDC[1].Merc_rcv|out_data_Q[8]" tap_mode="classic" type="combinatorial"/>
+          <wire name="receiver:MDC[1].Merc_rcv|out_data_Q[9]" tap_mode="classic" type="combinatorial"/>
+          <wire name="receiver:MDC[1].Merc_rcv|out_strobe" tap_mode="classic" type="combinatorial"/>
+        </data_input_vec>
+        <storage_qualifier_input_vec>
+          <wire name="C122_DFS0" tap_mode="classic" type="register"/>
+          <wire name="C122_DFS1" tap_mode="classic" type="register"/>
+          <wire name="C122_frequency_HZ[0][0]" tap_mode="classic" type="register"/>
+          <wire name="C122_frequency_HZ[0][10]" tap_mode="classic" type="register"/>
+          <wire name="C122_frequency_HZ[0][11]" tap_mode="classic" type="register"/>
+          <wire name="C122_frequency_HZ[0][12]" tap_mode="classic" type="register"/>
+          <wire name="C122_frequency_HZ[0][13]" tap_mode="classic" type="register"/>
+          <wire name="C122_frequency_HZ[0][14]" tap_mode="classic" type="register"/>
+          <wire name="C122_frequency_HZ[0][15]" tap_mode="classic" type="register"/>
+          <wire name="C122_frequency_HZ[0][16]" tap_mode="classic" type="register"/>
+          <wire name="C122_frequency_HZ[0][17]" tap_mode="classic" type="register"/>
+          <wire name="C122_frequency_HZ[0][18]" tap_mode="classic" type="register"/>
+          <wire name="C122_frequency_HZ[0][19]" tap_mode="classic" type="register"/>
+          <wire name="C122_frequency_HZ[0][1]" tap_mode="classic" type="register"/>
+          <wire name="C122_frequency_HZ[0][20]" tap_mode="classic" type="register"/>
+          <wire name="C122_frequency_HZ[0][21]" tap_mode="classic" type="register"/>
+          <wire name="C122_frequency_HZ[0][22]" tap_mode="classic" type="register"/>
+          <wire name="C122_frequency_HZ[0][23]" tap_mode="classic" type="register"/>
+          <wire name="C122_frequency_HZ[0][24]" tap_mode="classic" type="register"/>
+          <wire name="C122_frequency_HZ[0][25]" tap_mode="classic" type="register"/>
+          <wire name="C122_frequency_HZ[0][26]" tap_mode="classic" type="register"/>
+          <wire name="C122_frequency_HZ[0][27]" tap_mode="classic" type="register"/>
+          <wire name="C122_frequency_HZ[0][28]" tap_mode="classic" type="register"/>
+          <wire name="C122_frequency_HZ[0][29]" tap_mode="classic" type="register"/>
+          <wire name="C122_frequency_HZ[0][2]" tap_mode="classic" type="register"/>
+          <wire name="C122_frequency_HZ[0][30]" tap_mode="classic" type="register"/>
+          <wire name="C122_frequency_HZ[0][31]" tap_mode="classic" type="register"/>
+          <wire name="C122_frequency_HZ[0][3]" tap_mode="classic" type="register"/>
+          <wire name="C122_frequency_HZ[0][4]" tap_mode="classic" type="register"/>
+          <wire name="C122_frequency_HZ[0][5]" tap_mode="classic" type="register"/>
+          <wire name="C122_frequency_HZ[0][6]" tap_mode="classic" type="register"/>
+          <wire name="C122_frequency_HZ[0][7]" tap_mode="classic" type="register"/>
+          <wire name="C122_frequency_HZ[0][8]" tap_mode="classic" type="register"/>
+          <wire name="C122_frequency_HZ[0][9]" tap_mode="classic" type="register"/>
+          <wire name="C122_frequency_HZ[1][0]" tap_mode="classic" type="register"/>
+          <wire name="C122_frequency_HZ[1][10]" tap_mode="classic" type="register"/>
+          <wire name="C122_frequency_HZ[1][11]" tap_mode="classic" type="register"/>
+          <wire name="C122_frequency_HZ[1][12]" tap_mode="classic" type="register"/>
+          <wire name="C122_frequency_HZ[1][13]" tap_mode="classic" type="register"/>
+          <wire name="C122_frequency_HZ[1][14]" tap_mode="classic" type="register"/>
+          <wire name="C122_frequency_HZ[1][15]" tap_mode="classic" type="register"/>
+          <wire name="C122_frequency_HZ[1][16]" tap_mode="classic" type="register"/>
+          <wire name="C122_frequency_HZ[1][17]" tap_mode="classic" type="register"/>
+          <wire name="C122_frequency_HZ[1][18]" tap_mode="classic" type="register"/>
+          <wire name="C122_frequency_HZ[1][19]" tap_mode="classic" type="register"/>
+          <wire name="C122_frequency_HZ[1][1]" tap_mode="classic" type="register"/>
+          <wire name="C122_frequency_HZ[1][20]" tap_mode="classic" type="register"/>
+          <wire name="C122_frequency_HZ[1][21]" tap_mode="classic" type="register"/>
+          <wire name="C122_frequency_HZ[1][22]" tap_mode="classic" type="register"/>
+          <wire name="C122_frequency_HZ[1][23]" tap_mode="classic" type="register"/>
+          <wire name="C122_frequency_HZ[1][24]" tap_mode="classic" type="register"/>
+          <wire name="C122_frequency_HZ[1][25]" tap_mode="classic" type="register"/>
+          <wire name="C122_frequency_HZ[1][26]" tap_mode="classic" type="register"/>
+          <wire name="C122_frequency_HZ[1][27]" tap_mode="classic" type="register"/>
+          <wire name="C122_frequency_HZ[1][28]" tap_mode="classic" type="register"/>
+          <wire name="C122_frequency_HZ[1][29]" tap_mode="classic" type="register"/>
+          <wire name="C122_frequency_HZ[1][2]" tap_mode="classic" type="register"/>
+          <wire name="C122_frequency_HZ[1][30]" tap_mode="classic" type="register"/>
+          <wire name="C122_frequency_HZ[1][31]" tap_mode="classic" type="register"/>
+          <wire name="C122_frequency_HZ[1][3]" tap_mode="classic" type="register"/>
+          <wire name="C122_frequency_HZ[1][4]" tap_mode="classic" type="register"/>
+          <wire name="C122_frequency_HZ[1][5]" tap_mode="classic" type="register"/>
+          <wire name="C122_frequency_HZ[1][6]" tap_mode="classic" type="register"/>
+          <wire name="C122_frequency_HZ[1][7]" tap_mode="classic" type="register"/>
+          <wire name="C122_frequency_HZ[1][8]" tap_mode="classic" type="register"/>
+          <wire name="C122_frequency_HZ[1][9]" tap_mode="classic" type="register"/>
+          <wire name="C122_rst" tap_mode="classic" type="register"/>
+          <wire name="C122_rst_cnt[0]" tap_mode="classic" type="register"/>
+          <wire name="C122_rst_cnt[10]" tap_mode="classic" type="register"/>
+          <wire name="C122_rst_cnt[1]" tap_mode="classic" type="register"/>
+          <wire name="C122_rst_cnt[2]" tap_mode="classic" type="register"/>
+          <wire name="C122_rst_cnt[3]" tap_mode="classic" type="register"/>
+          <wire name="C122_rst_cnt[4]" tap_mode="classic" type="register"/>
+          <wire name="C122_rst_cnt[5]" tap_mode="classic" type="register"/>
+          <wire name="C122_rst_cnt[6]" tap_mode="classic" type="register"/>
+          <wire name="C122_rst_cnt[7]" tap_mode="classic" type="register"/>
+          <wire name="C122_rst_cnt[8]" tap_mode="classic" type="register"/>
+          <wire name="C122_rst_cnt[9]" tap_mode="classic" type="register"/>
+          <wire name="CC" tap_mode="classic" type="input pin"/>
+          <wire name="Channels_8_1" tap_mode="classic" type="input pin"/>
+          <wire name="MDOUT[0]" tap_mode="classic" type="output pin"/>
+          <wire name="MDOUT[1]" tap_mode="classic" type="output pin"/>
+          <wire name="MDOUT[2]" tap_mode="classic" type="output pin"/>
+          <wire name="MDOUT[3]" tap_mode="classic" type="output pin"/>
+          <wire name="MDOUT[4]" tap_mode="classic" type="output pin"/>
+          <wire name="MDOUT[5]" tap_mode="classic" type="output pin"/>
+          <wire name="MDOUT[6]" tap_mode="classic" type="output pin"/>
+          <wire name="MDOUT[7]" tap_mode="classic" type="output pin"/>
+          <wire name="Merc_ID[0]" tap_mode="classic" type="input pin"/>
+          <wire name="Merc_ID[1]" tap_mode="classic" type="input pin"/>
+          <wire name="Merc_ID[2]" tap_mode="classic" type="input pin"/>
+          <wire name="Merc_ID_drv[0]" tap_mode="classic" type="output pin"/>
+          <wire name="Merc_ID_drv[1]" tap_mode="classic" type="output pin"/>
+          <wire name="Merc_ID_drv[2]" tap_mode="classic" type="output pin"/>
+          <wire name="Merc_ID_drv[3]" tap_mode="classic" type="output pin"/>
+          <wire name="SCLK" tap_mode="classic" type="output pin"/>
+          <wire name="TLV320_BCLK" tap_mode="classic" type="output pin"/>
+          <wire name="TLV320_LRCIN" tap_mode="classic" type="output pin"/>
+          <wire name="TLV320_LRCOUT" tap_mode="classic" type="output pin"/>
+          <wire name="TLV320_MCLK" tap_mode="classic" type="output pin"/>
+          <wire name="clock_select[1]" tap_mode="classic" type="register"/>
+          <wire name="clock_select[2]" tap_mode="classic" type="register"/>
+          <wire name="clock_select[3]" tap_mode="classic" type="register"/>
+          <wire name="receiver:MDC[0].Merc_rcv|out_data_I[0]" tap_mode="classic" type="combinatorial"/>
+          <wire name="receiver:MDC[0].Merc_rcv|out_data_I[10]" tap_mode="classic" type="combinatorial"/>
+          <wire name="receiver:MDC[0].Merc_rcv|out_data_I[11]" tap_mode="classic" type="combinatorial"/>
+          <wire name="receiver:MDC[0].Merc_rcv|out_data_I[12]" tap_mode="classic" type="combinatorial"/>
+          <wire name="receiver:MDC[0].Merc_rcv|out_data_I[13]" tap_mode="classic" type="combinatorial"/>
+          <wire name="receiver:MDC[0].Merc_rcv|out_data_I[14]" tap_mode="classic" type="combinatorial"/>
+          <wire name="receiver:MDC[0].Merc_rcv|out_data_I[15]" tap_mode="classic" type="combinatorial"/>
+          <wire name="receiver:MDC[0].Merc_rcv|out_data_I[16]" tap_mode="classic" type="combinatorial"/>
+          <wire name="receiver:MDC[0].Merc_rcv|out_data_I[17]" tap_mode="classic" type="combinatorial"/>
+          <wire name="receiver:MDC[0].Merc_rcv|out_data_I[18]" tap_mode="classic" type="combinatorial"/>
+          <wire name="receiver:MDC[0].Merc_rcv|out_data_I[19]" tap_mode="classic" type="combinatorial"/>
+          <wire name="receiver:MDC[0].Merc_rcv|out_data_I[1]" tap_mode="classic" type="combinatorial"/>
+          <wire name="receiver:MDC[0].Merc_rcv|out_data_I[20]" tap_mode="classic" type="combinatorial"/>
+          <wire name="receiver:MDC[0].Merc_rcv|out_data_I[21]" tap_mode="classic" type="combinatorial"/>
+          <wire name="receiver:MDC[0].Merc_rcv|out_data_I[22]" tap_mode="classic" type="combinatorial"/>
+          <wire name="receiver:MDC[0].Merc_rcv|out_data_I[23]" tap_mode="classic" type="combinatorial"/>
+          <wire name="receiver:MDC[0].Merc_rcv|out_data_I[2]" tap_mode="classic" type="combinatorial"/>
+          <wire name="receiver:MDC[0].Merc_rcv|out_data_I[3]" tap_mode="classic" type="combinatorial"/>
+          <wire name="receiver:MDC[0].Merc_rcv|out_data_I[4]" tap_mode="classic" type="combinatorial"/>
+          <wire name="receiver:MDC[0].Merc_rcv|out_data_I[5]" tap_mode="classic" type="combinatorial"/>
+          <wire name="receiver:MDC[0].Merc_rcv|out_data_I[6]" tap_mode="classic" type="combinatorial"/>
+          <wire name="receiver:MDC[0].Merc_rcv|out_data_I[7]" tap_mode="classic" type="combinatorial"/>
+          <wire name="receiver:MDC[0].Merc_rcv|out_data_I[8]" tap_mode="classic" type="combinatorial"/>
+          <wire name="receiver:MDC[0].Merc_rcv|out_data_I[9]" tap_mode="classic" type="combinatorial"/>
+          <wire name="receiver:MDC[0].Merc_rcv|out_data_Q[0]" tap_mode="classic" type="combinatorial"/>
+          <wire name="receiver:MDC[0].Merc_rcv|out_data_Q[10]" tap_mode="classic" type="combinatorial"/>
+          <wire name="receiver:MDC[0].Merc_rcv|out_data_Q[11]" tap_mode="classic" type="combinatorial"/>
+          <wire name="receiver:MDC[0].Merc_rcv|out_data_Q[12]" tap_mode="classic" type="combinatorial"/>
+          <wire name="receiver:MDC[0].Merc_rcv|out_data_Q[13]" tap_mode="classic" type="combinatorial"/>
+          <wire name="receiver:MDC[0].Merc_rcv|out_data_Q[14]" tap_mode="classic" type="combinatorial"/>
+          <wire name="receiver:MDC[0].Merc_rcv|out_data_Q[15]" tap_mode="classic" type="combinatorial"/>
+          <wire name="receiver:MDC[0].Merc_rcv|out_data_Q[16]" tap_mode="classic" type="combinatorial"/>
+          <wire name="receiver:MDC[0].Merc_rcv|out_data_Q[17]" tap_mode="classic" type="combinatorial"/>
+          <wire name="receiver:MDC[0].Merc_rcv|out_data_Q[18]" tap_mode="classic" type="combinatorial"/>
+          <wire name="receiver:MDC[0].Merc_rcv|out_data_Q[19]" tap_mode="classic" type="combinatorial"/>
+          <wire name="receiver:MDC[0].Merc_rcv|out_data_Q[1]" tap_mode="classic" type="combinatorial"/>
+          <wire name="receiver:MDC[0].Merc_rcv|out_data_Q[20]" tap_mode="classic" type="combinatorial"/>
+          <wire name="receiver:MDC[0].Merc_rcv|out_data_Q[21]" tap_mode="classic" type="combinatorial"/>
+          <wire name="receiver:MDC[0].Merc_rcv|out_data_Q[22]" tap_mode="classic" type="combinatorial"/>
+          <wire name="receiver:MDC[0].Merc_rcv|out_data_Q[23]" tap_mode="classic" type="combinatorial"/>
+          <wire name="receiver:MDC[0].Merc_rcv|out_data_Q[2]" tap_mode="classic" type="combinatorial"/>
+          <wire name="receiver:MDC[0].Merc_rcv|out_data_Q[3]" tap_mode="classic" type="combinatorial"/>
+          <wire name="receiver:MDC[0].Merc_rcv|out_data_Q[4]" tap_mode="classic" type="combinatorial"/>
+          <wire name="receiver:MDC[0].Merc_rcv|out_data_Q[5]" tap_mode="classic" type="combinatorial"/>
+          <wire name="receiver:MDC[0].Merc_rcv|out_data_Q[6]" tap_mode="classic" type="combinatorial"/>
+          <wire name="receiver:MDC[0].Merc_rcv|out_data_Q[7]" tap_mode="classic" type="combinatorial"/>
+          <wire name="receiver:MDC[0].Merc_rcv|out_data_Q[8]" tap_mode="classic" type="combinatorial"/>
+          <wire name="receiver:MDC[0].Merc_rcv|out_data_Q[9]" tap_mode="classic" type="combinatorial"/>
+          <wire name="receiver:MDC[0].Merc_rcv|out_strobe" tap_mode="classic" type="combinatorial"/>
+          <wire name="receiver:MDC[1].Merc_rcv|out_data_I[0]" tap_mode="classic" type="combinatorial"/>
+          <wire name="receiver:MDC[1].Merc_rcv|out_data_I[10]" tap_mode="classic" type="combinatorial"/>
+          <wire name="receiver:MDC[1].Merc_rcv|out_data_I[11]" tap_mode="classic" type="combinatorial"/>
+          <wire name="receiver:MDC[1].Merc_rcv|out_data_I[12]" tap_mode="classic" type="combinatorial"/>
+          <wire name="receiver:MDC[1].Merc_rcv|out_data_I[13]" tap_mode="classic" type="combinatorial"/>
+          <wire name="receiver:MDC[1].Merc_rcv|out_data_I[14]" tap_mode="classic" type="combinatorial"/>
+          <wire name="receiver:MDC[1].Merc_rcv|out_data_I[15]" tap_mode="classic" type="combinatorial"/>
+          <wire name="receiver:MDC[1].Merc_rcv|out_data_I[16]" tap_mode="classic" type="combinatorial"/>
+          <wire name="receiver:MDC[1].Merc_rcv|out_data_I[17]" tap_mode="classic" type="combinatorial"/>
+          <wire name="receiver:MDC[1].Merc_rcv|out_data_I[18]" tap_mode="classic" type="combinatorial"/>
+          <wire name="receiver:MDC[1].Merc_rcv|out_data_I[19]" tap_mode="classic" type="combinatorial"/>
+          <wire name="receiver:MDC[1].Merc_rcv|out_data_I[1]" tap_mode="classic" type="combinatorial"/>
+          <wire name="receiver:MDC[1].Merc_rcv|out_data_I[20]" tap_mode="classic" type="combinatorial"/>
+          <wire name="receiver:MDC[1].Merc_rcv|out_data_I[21]" tap_mode="classic" type="combinatorial"/>
+          <wire name="receiver:MDC[1].Merc_rcv|out_data_I[22]" tap_mode="classic" type="combinatorial"/>
+          <wire name="receiver:MDC[1].Merc_rcv|out_data_I[23]" tap_mode="classic" type="combinatorial"/>
+          <wire name="receiver:MDC[1].Merc_rcv|out_data_I[2]" tap_mode="classic" type="combinatorial"/>
+          <wire name="receiver:MDC[1].Merc_rcv|out_data_I[3]" tap_mode="classic" type="combinatorial"/>
+          <wire name="receiver:MDC[1].Merc_rcv|out_data_I[4]" tap_mode="classic" type="combinatorial"/>
+          <wire name="receiver:MDC[1].Merc_rcv|out_data_I[5]" tap_mode="classic" type="combinatorial"/>
+          <wire name="receiver:MDC[1].Merc_rcv|out_data_I[6]" tap_mode="classic" type="combinatorial"/>
+          <wire name="receiver:MDC[1].Merc_rcv|out_data_I[7]" tap_mode="classic" type="combinatorial"/>
+          <wire name="receiver:MDC[1].Merc_rcv|out_data_I[8]" tap_mode="classic" type="combinatorial"/>
+          <wire name="receiver:MDC[1].Merc_rcv|out_data_I[9]" tap_mode="classic" type="combinatorial"/>
+          <wire name="receiver:MDC[1].Merc_rcv|out_data_Q[0]" tap_mode="classic" type="combinatorial"/>
+          <wire name="receiver:MDC[1].Merc_rcv|out_data_Q[10]" tap_mode="classic" type="combinatorial"/>
+          <wire name="receiver:MDC[1].Merc_rcv|out_data_Q[11]" tap_mode="classic" type="combinatorial"/>
+          <wire name="receiver:MDC[1].Merc_rcv|out_data_Q[12]" tap_mode="classic" type="combinatorial"/>
+          <wire name="receiver:MDC[1].Merc_rcv|out_data_Q[13]" tap_mode="classic" type="combinatorial"/>
+          <wire name="receiver:MDC[1].Merc_rcv|out_data_Q[14]" tap_mode="classic" type="combinatorial"/>
+          <wire name="receiver:MDC[1].Merc_rcv|out_data_Q[15]" tap_mode="classic" type="combinatorial"/>
+          <wire name="receiver:MDC[1].Merc_rcv|out_data_Q[16]" tap_mode="classic" type="combinatorial"/>
+          <wire name="receiver:MDC[1].Merc_rcv|out_data_Q[17]" tap_mode="classic" type="combinatorial"/>
+          <wire name="receiver:MDC[1].Merc_rcv|out_data_Q[18]" tap_mode="classic" type="combinatorial"/>
+          <wire name="receiver:MDC[1].Merc_rcv|out_data_Q[19]" tap_mode="classic" type="combinatorial"/>
+          <wire name="receiver:MDC[1].Merc_rcv|out_data_Q[1]" tap_mode="classic" type="combinatorial"/>
+          <wire name="receiver:MDC[1].Merc_rcv|out_data_Q[20]" tap_mode="classic" type="combinatorial"/>
+          <wire name="receiver:MDC[1].Merc_rcv|out_data_Q[21]" tap_mode="classic" type="combinatorial"/>
+          <wire name="receiver:MDC[1].Merc_rcv|out_data_Q[22]" tap_mode="classic" type="combinatorial"/>
+          <wire name="receiver:MDC[1].Merc_rcv|out_data_Q[23]" tap_mode="classic" type="combinatorial"/>
+          <wire name="receiver:MDC[1].Merc_rcv|out_data_Q[2]" tap_mode="classic" type="combinatorial"/>
+          <wire name="receiver:MDC[1].Merc_rcv|out_data_Q[3]" tap_mode="classic" type="combinatorial"/>
+          <wire name="receiver:MDC[1].Merc_rcv|out_data_Q[4]" tap_mode="classic" type="combinatorial"/>
+          <wire name="receiver:MDC[1].Merc_rcv|out_data_Q[5]" tap_mode="classic" type="combinatorial"/>
+          <wire name="receiver:MDC[1].Merc_rcv|out_data_Q[6]" tap_mode="classic" type="combinatorial"/>
+          <wire name="receiver:MDC[1].Merc_rcv|out_data_Q[7]" tap_mode="classic" type="combinatorial"/>
+          <wire name="receiver:MDC[1].Merc_rcv|out_data_Q[8]" tap_mode="classic" type="combinatorial"/>
+          <wire name="receiver:MDC[1].Merc_rcv|out_data_Q[9]" tap_mode="classic" type="combinatorial"/>
+          <wire name="receiver:MDC[1].Merc_rcv|out_strobe" tap_mode="classic" type="combinatorial"/>
+        </storage_qualifier_input_vec>
+      </signal_vec>
+      <presentation>
+        <data_view>
+          <net is_signal_inverted="no" name="CC"/>
+          <net is_signal_inverted="no" name="SCLK"/>
+          <net is_signal_inverted="no" name="TLV320_BCLK"/>
+          <net is_signal_inverted="no" name="TLV320_LRCIN"/>
+          <net is_signal_inverted="no" name="TLV320_LRCOUT"/>
+          <net is_signal_inverted="no" name="TLV320_MCLK"/>
+          <bus is_signal_inverted="no" link="all" name="clock_select" order="lsb_to_msb" radix="hex" state="collapse" type="register">
+            <net is_signal_inverted="no" name="clock_select[1]"/>
+            <net is_signal_inverted="no" name="clock_select[2]"/>
+            <net is_signal_inverted="no" name="clock_select[3]"/>
+          </bus>
+          <net is_signal_inverted="no" name="C122_DFS0"/>
+          <net is_signal_inverted="no" name="C122_DFS1"/>
+          <net is_signal_inverted="no" name="C122_rst"/>
+          <bus is_signal_inverted="no" link="all" name="C122_rst_cnt" order="lsb_to_msb" radix="hex" state="collapse" type="register">
+            <net is_signal_inverted="no" name="C122_rst_cnt[0]"/>
+            <net is_signal_inverted="no" name="C122_rst_cnt[1]"/>
+            <net is_signal_inverted="no" name="C122_rst_cnt[2]"/>
+            <net is_signal_inverted="no" name="C122_rst_cnt[3]"/>
+            <net is_signal_inverted="no" name="C122_rst_cnt[4]"/>
+            <net is_signal_inverted="no" name="C122_rst_cnt[5]"/>
+            <net is_signal_inverted="no" name="C122_rst_cnt[6]"/>
+            <net is_signal_inverted="no" name="C122_rst_cnt[7]"/>
+            <net is_signal_inverted="no" name="C122_rst_cnt[8]"/>
+            <net is_signal_inverted="no" name="C122_rst_cnt[9]"/>
+            <net is_signal_inverted="no" name="C122_rst_cnt[10]"/>
+          </bus>
+          <bus is_signal_inverted="no" link="all" name="C122_frequency_HZ[0]" order="lsb_to_msb" radix="hex" state="collapse" type="register">
+            <net is_signal_inverted="no" name="C122_frequency_HZ[0][0]"/>
+            <net is_signal_inverted="no" name="C122_frequency_HZ[0][1]"/>
+            <net is_signal_inverted="no" name="C122_frequency_HZ[0][2]"/>
+            <net is_signal_inverted="no" name="C122_frequency_HZ[0][3]"/>
+            <net is_signal_inverted="no" name="C122_frequency_HZ[0][4]"/>
+            <net is_signal_inverted="no" name="C122_frequency_HZ[0][5]"/>
+            <net is_signal_inverted="no" name="C122_frequency_HZ[0][6]"/>
+            <net is_signal_inverted="no" name="C122_frequency_HZ[0][7]"/>
+            <net is_signal_inverted="no" name="C122_frequency_HZ[0][8]"/>
+            <net is_signal_inverted="no" name="C122_frequency_HZ[0][9]"/>
+            <net is_signal_inverted="no" name="C122_frequency_HZ[0][10]"/>
+            <net is_signal_inverted="no" name="C122_frequency_HZ[0][11]"/>
+            <net is_signal_inverted="no" name="C122_frequency_HZ[0][12]"/>
+            <net is_signal_inverted="no" name="C122_frequency_HZ[0][13]"/>
+            <net is_signal_inverted="no" name="C122_frequency_HZ[0][14]"/>
+            <net is_signal_inverted="no" name="C122_frequency_HZ[0][15]"/>
+            <net is_signal_inverted="no" name="C122_frequency_HZ[0][16]"/>
+            <net is_signal_inverted="no" name="C122_frequency_HZ[0][17]"/>
+            <net is_signal_inverted="no" name="C122_frequency_HZ[0][18]"/>
+            <net is_signal_inverted="no" name="C122_frequency_HZ[0][19]"/>
+            <net is_signal_inverted="no" name="C122_frequency_HZ[0][20]"/>
+            <net is_signal_inverted="no" name="C122_frequency_HZ[0][21]"/>
+            <net is_signal_inverted="no" name="C122_frequency_HZ[0][22]"/>
+            <net is_signal_inverted="no" name="C122_frequency_HZ[0][23]"/>
+            <net is_signal_inverted="no" name="C122_frequency_HZ[0][24]"/>
+            <net is_signal_inverted="no" name="C122_frequency_HZ[0][25]"/>
+            <net is_signal_inverted="no" name="C122_frequency_HZ[0][26]"/>
+            <net is_signal_inverted="no" name="C122_frequency_HZ[0][27]"/>
+            <net is_signal_inverted="no" name="C122_frequency_HZ[0][28]"/>
+            <net is_signal_inverted="no" name="C122_frequency_HZ[0][29]"/>
+            <net is_signal_inverted="no" name="C122_frequency_HZ[0][30]"/>
+            <net is_signal_inverted="no" name="C122_frequency_HZ[0][31]"/>
+          </bus>
+          <bus is_signal_inverted="no" link="all" name="C122_frequency_HZ[1]" order="lsb_to_msb" radix="hex" state="collapse" type="register">
+            <net is_signal_inverted="no" name="C122_frequency_HZ[1][0]"/>
+            <net is_signal_inverted="no" name="C122_frequency_HZ[1][1]"/>
+            <net is_signal_inverted="no" name="C122_frequency_HZ[1][2]"/>
+            <net is_signal_inverted="no" name="C122_frequency_HZ[1][3]"/>
+            <net is_signal_inverted="no" name="C122_frequency_HZ[1][4]"/>
+            <net is_signal_inverted="no" name="C122_frequency_HZ[1][5]"/>
+            <net is_signal_inverted="no" name="C122_frequency_HZ[1][6]"/>
+            <net is_signal_inverted="no" name="C122_frequency_HZ[1][7]"/>
+            <net is_signal_inverted="no" name="C122_frequency_HZ[1][8]"/>
+            <net is_signal_inverted="no" name="C122_frequency_HZ[1][9]"/>
+            <net is_signal_inverted="no" name="C122_frequency_HZ[1][10]"/>
+            <net is_signal_inverted="no" name="C122_frequency_HZ[1][11]"/>
+            <net is_signal_inverted="no" name="C122_frequency_HZ[1][12]"/>
+            <net is_signal_inverted="no" name="C122_frequency_HZ[1][13]"/>
+            <net is_signal_inverted="no" name="C122_frequency_HZ[1][14]"/>
+            <net is_signal_inverted="no" name="C122_frequency_HZ[1][15]"/>
+            <net is_signal_inverted="no" name="C122_frequency_HZ[1][16]"/>
+            <net is_signal_inverted="no" name="C122_frequency_HZ[1][17]"/>
+            <net is_signal_inverted="no" name="C122_frequency_HZ[1][18]"/>
+            <net is_signal_inverted="no" name="C122_frequency_HZ[1][19]"/>
+            <net is_signal_inverted="no" name="C122_frequency_HZ[1][20]"/>
+            <net is_signal_inverted="no" name="C122_frequency_HZ[1][21]"/>
+            <net is_signal_inverted="no" name="C122_frequency_HZ[1][22]"/>
+            <net is_signal_inverted="no" name="C122_frequency_HZ[1][23]"/>
+            <net is_signal_inverted="no" name="C122_frequency_HZ[1][24]"/>
+            <net is_signal_inverted="no" name="C122_frequency_HZ[1][25]"/>
+            <net is_signal_inverted="no" name="C122_frequency_HZ[1][26]"/>
+            <net is_signal_inverted="no" name="C122_frequency_HZ[1][27]"/>
+            <net is_signal_inverted="no" name="C122_frequency_HZ[1][28]"/>
+            <net is_signal_inverted="no" name="C122_frequency_HZ[1][29]"/>
+            <net is_signal_inverted="no" name="C122_frequency_HZ[1][30]"/>
+            <net is_signal_inverted="no" name="C122_frequency_HZ[1][31]"/>
+          </bus>
+          <bus is_signal_inverted="no" link="all" name="MDOUT" order="lsb_to_msb" radix="hex" state="expand" type="output pin">
+            <net is_signal_inverted="no" name="MDOUT[0]"/>
+            <net is_signal_inverted="no" name="MDOUT[1]"/>
+            <net is_signal_inverted="no" name="MDOUT[2]"/>
+            <net is_signal_inverted="no" name="MDOUT[3]"/>
+            <net is_signal_inverted="no" name="MDOUT[4]"/>
+            <net is_signal_inverted="no" name="MDOUT[5]"/>
+            <net is_signal_inverted="no" name="MDOUT[6]"/>
+            <net is_signal_inverted="no" name="MDOUT[7]"/>
+          </bus>
+          <bus is_signal_inverted="no" link="all" name="Merc_ID_drv" order="lsb_to_msb" radix="hex" state="collapse" type="output pin">
+            <net is_signal_inverted="no" name="Merc_ID_drv[0]"/>
+            <net is_signal_inverted="no" name="Merc_ID_drv[1]"/>
+            <net is_signal_inverted="no" name="Merc_ID_drv[2]"/>
+            <net is_signal_inverted="no" name="Merc_ID_drv[3]"/>
+          </bus>
+          <bus is_signal_inverted="no" link="all" name="Merc_ID" order="lsb_to_msb" radix="hex" state="collapse" type="input pin">
+            <net is_signal_inverted="no" name="Merc_ID[0]"/>
+            <net is_signal_inverted="no" name="Merc_ID[1]"/>
+            <net is_signal_inverted="no" name="Merc_ID[2]"/>
+          </bus>
+          <net is_signal_inverted="no" name="Channels_8_1"/>
+          <net is_signal_inverted="no" name="receiver:MDC[0].Merc_rcv|out_strobe"/>
+          <net is_signal_inverted="no" name="receiver:MDC[1].Merc_rcv|out_strobe"/>
+          <bus is_signal_inverted="no" link="all" name="receiver:MDC[0].Merc_rcv|out_data_I" order="lsb_to_msb" radix="hex" state="collapse" type="combinatorial">
+            <net is_signal_inverted="no" name="receiver:MDC[0].Merc_rcv|out_data_I[0]"/>
+            <net is_signal_inverted="no" name="receiver:MDC[0].Merc_rcv|out_data_I[1]"/>
+            <net is_signal_inverted="no" name="receiver:MDC[0].Merc_rcv|out_data_I[2]"/>
+            <net is_signal_inverted="no" name="receiver:MDC[0].Merc_rcv|out_data_I[3]"/>
+            <net is_signal_inverted="no" name="receiver:MDC[0].Merc_rcv|out_data_I[4]"/>
+            <net is_signal_inverted="no" name="receiver:MDC[0].Merc_rcv|out_data_I[5]"/>
+            <net is_signal_inverted="no" name="receiver:MDC[0].Merc_rcv|out_data_I[6]"/>
+            <net is_signal_inverted="no" name="receiver:MDC[0].Merc_rcv|out_data_I[7]"/>
+            <net is_signal_inverted="no" name="receiver:MDC[0].Merc_rcv|out_data_I[8]"/>
+            <net is_signal_inverted="no" name="receiver:MDC[0].Merc_rcv|out_data_I[9]"/>
+            <net is_signal_inverted="no" name="receiver:MDC[0].Merc_rcv|out_data_I[10]"/>
+            <net is_signal_inverted="no" name="receiver:MDC[0].Merc_rcv|out_data_I[11]"/>
+            <net is_signal_inverted="no" name="receiver:MDC[0].Merc_rcv|out_data_I[12]"/>
+            <net is_signal_inverted="no" name="receiver:MDC[0].Merc_rcv|out_data_I[13]"/>
+            <net is_signal_inverted="no" name="receiver:MDC[0].Merc_rcv|out_data_I[14]"/>
+            <net is_signal_inverted="no" name="receiver:MDC[0].Merc_rcv|out_data_I[15]"/>
+            <net is_signal_inverted="no" name="receiver:MDC[0].Merc_rcv|out_data_I[16]"/>
+            <net is_signal_inverted="no" name="receiver:MDC[0].Merc_rcv|out_data_I[17]"/>
+            <net is_signal_inverted="no" name="receiver:MDC[0].Merc_rcv|out_data_I[18]"/>
+            <net is_signal_inverted="no" name="receiver:MDC[0].Merc_rcv|out_data_I[19]"/>
+            <net is_signal_inverted="no" name="receiver:MDC[0].Merc_rcv|out_data_I[20]"/>
+            <net is_signal_inverted="no" name="receiver:MDC[0].Merc_rcv|out_data_I[21]"/>
+            <net is_signal_inverted="no" name="receiver:MDC[0].Merc_rcv|out_data_I[22]"/>
+            <net is_signal_inverted="no" name="receiver:MDC[0].Merc_rcv|out_data_I[23]"/>
+          </bus>
+          <bus is_signal_inverted="no" link="all" name="receiver:MDC[1].Merc_rcv|out_data_I" order="lsb_to_msb" radix="hex" state="collapse" type="combinatorial">
+            <net is_signal_inverted="no" name="receiver:MDC[1].Merc_rcv|out_data_I[0]"/>
+            <net is_signal_inverted="no" name="receiver:MDC[1].Merc_rcv|out_data_I[1]"/>
+            <net is_signal_inverted="no" name="receiver:MDC[1].Merc_rcv|out_data_I[2]"/>
+            <net is_signal_inverted="no" name="receiver:MDC[1].Merc_rcv|out_data_I[3]"/>
+            <net is_signal_inverted="no" name="receiver:MDC[1].Merc_rcv|out_data_I[4]"/>
+            <net is_signal_inverted="no" name="receiver:MDC[1].Merc_rcv|out_data_I[5]"/>
+            <net is_signal_inverted="no" name="receiver:MDC[1].Merc_rcv|out_data_I[6]"/>
+            <net is_signal_inverted="no" name="receiver:MDC[1].Merc_rcv|out_data_I[7]"/>
+            <net is_signal_inverted="no" name="receiver:MDC[1].Merc_rcv|out_data_I[8]"/>
+            <net is_signal_inverted="no" name="receiver:MDC[1].Merc_rcv|out_data_I[9]"/>
+            <net is_signal_inverted="no" name="receiver:MDC[1].Merc_rcv|out_data_I[10]"/>
+            <net is_signal_inverted="no" name="receiver:MDC[1].Merc_rcv|out_data_I[11]"/>
+            <net is_signal_inverted="no" name="receiver:MDC[1].Merc_rcv|out_data_I[12]"/>
+            <net is_signal_inverted="no" name="receiver:MDC[1].Merc_rcv|out_data_I[13]"/>
+            <net is_signal_inverted="no" name="receiver:MDC[1].Merc_rcv|out_data_I[14]"/>
+            <net is_signal_inverted="no" name="receiver:MDC[1].Merc_rcv|out_data_I[15]"/>
+            <net is_signal_inverted="no" name="receiver:MDC[1].Merc_rcv|out_data_I[16]"/>
+            <net is_signal_inverted="no" name="receiver:MDC[1].Merc_rcv|out_data_I[17]"/>
+            <net is_signal_inverted="no" name="receiver:MDC[1].Merc_rcv|out_data_I[18]"/>
+            <net is_signal_inverted="no" name="receiver:MDC[1].Merc_rcv|out_data_I[19]"/>
+            <net is_signal_inverted="no" name="receiver:MDC[1].Merc_rcv|out_data_I[20]"/>
+            <net is_signal_inverted="no" name="receiver:MDC[1].Merc_rcv|out_data_I[21]"/>
+            <net is_signal_inverted="no" name="receiver:MDC[1].Merc_rcv|out_data_I[22]"/>
+            <net is_signal_inverted="no" name="receiver:MDC[1].Merc_rcv|out_data_I[23]"/>
+          </bus>
+          <bus is_signal_inverted="no" link="all" name="receiver:MDC[0].Merc_rcv|out_data_Q" order="lsb_to_msb" radix="hex" state="collapse" type="combinatorial">
+            <net is_signal_inverted="no" name="receiver:MDC[0].Merc_rcv|out_data_Q[0]"/>
+            <net is_signal_inverted="no" name="receiver:MDC[0].Merc_rcv|out_data_Q[1]"/>
+            <net is_signal_inverted="no" name="receiver:MDC[0].Merc_rcv|out_data_Q[2]"/>
+            <net is_signal_inverted="no" name="receiver:MDC[0].Merc_rcv|out_data_Q[3]"/>
+            <net is_signal_inverted="no" name="receiver:MDC[0].Merc_rcv|out_data_Q[4]"/>
+            <net is_signal_inverted="no" name="receiver:MDC[0].Merc_rcv|out_data_Q[5]"/>
+            <net is_signal_inverted="no" name="receiver:MDC[0].Merc_rcv|out_data_Q[6]"/>
+            <net is_signal_inverted="no" name="receiver:MDC[0].Merc_rcv|out_data_Q[7]"/>
+            <net is_signal_inverted="no" name="receiver:MDC[0].Merc_rcv|out_data_Q[8]"/>
+            <net is_signal_inverted="no" name="receiver:MDC[0].Merc_rcv|out_data_Q[9]"/>
+            <net is_signal_inverted="no" name="receiver:MDC[0].Merc_rcv|out_data_Q[10]"/>
+            <net is_signal_inverted="no" name="receiver:MDC[0].Merc_rcv|out_data_Q[11]"/>
+            <net is_signal_inverted="no" name="receiver:MDC[0].Merc_rcv|out_data_Q[12]"/>
+            <net is_signal_inverted="no" name="receiver:MDC[0].Merc_rcv|out_data_Q[13]"/>
+            <net is_signal_inverted="no" name="receiver:MDC[0].Merc_rcv|out_data_Q[14]"/>
+            <net is_signal_inverted="no" name="receiver:MDC[0].Merc_rcv|out_data_Q[15]"/>
+            <net is_signal_inverted="no" name="receiver:MDC[0].Merc_rcv|out_data_Q[16]"/>
+            <net is_signal_inverted="no" name="receiver:MDC[0].Merc_rcv|out_data_Q[17]"/>
+            <net is_signal_inverted="no" name="receiver:MDC[0].Merc_rcv|out_data_Q[18]"/>
+            <net is_signal_inverted="no" name="receiver:MDC[0].Merc_rcv|out_data_Q[19]"/>
+            <net is_signal_inverted="no" name="receiver:MDC[0].Merc_rcv|out_data_Q[20]"/>
+            <net is_signal_inverted="no" name="receiver:MDC[0].Merc_rcv|out_data_Q[21]"/>
+            <net is_signal_inverted="no" name="receiver:MDC[0].Merc_rcv|out_data_Q[22]"/>
+            <net is_signal_inverted="no" name="receiver:MDC[0].Merc_rcv|out_data_Q[23]"/>
+          </bus>
+          <bus is_signal_inverted="no" link="all" name="receiver:MDC[1].Merc_rcv|out_data_Q" order="lsb_to_msb" radix="hex" state="collapse" type="combinatorial">
+            <net is_signal_inverted="no" name="receiver:MDC[1].Merc_rcv|out_data_Q[0]"/>
+            <net is_signal_inverted="no" name="receiver:MDC[1].Merc_rcv|out_data_Q[1]"/>
+            <net is_signal_inverted="no" name="receiver:MDC[1].Merc_rcv|out_data_Q[2]"/>
+            <net is_signal_inverted="no" name="receiver:MDC[1].Merc_rcv|out_data_Q[3]"/>
+            <net is_signal_inverted="no" name="receiver:MDC[1].Merc_rcv|out_data_Q[4]"/>
+            <net is_signal_inverted="no" name="receiver:MDC[1].Merc_rcv|out_data_Q[5]"/>
+            <net is_signal_inverted="no" name="receiver:MDC[1].Merc_rcv|out_data_Q[6]"/>
+            <net is_signal_inverted="no" name="receiver:MDC[1].Merc_rcv|out_data_Q[7]"/>
+            <net is_signal_inverted="no" name="receiver:MDC[1].Merc_rcv|out_data_Q[8]"/>
+            <net is_signal_inverted="no" name="receiver:MDC[1].Merc_rcv|out_data_Q[9]"/>
+            <net is_signal_inverted="no" name="receiver:MDC[1].Merc_rcv|out_data_Q[10]"/>
+            <net is_signal_inverted="no" name="receiver:MDC[1].Merc_rcv|out_data_Q[11]"/>
+            <net is_signal_inverted="no" name="receiver:MDC[1].Merc_rcv|out_data_Q[12]"/>
+            <net is_signal_inverted="no" name="receiver:MDC[1].Merc_rcv|out_data_Q[13]"/>
+            <net is_signal_inverted="no" name="receiver:MDC[1].Merc_rcv|out_data_Q[14]"/>
+            <net is_signal_inverted="no" name="receiver:MDC[1].Merc_rcv|out_data_Q[15]"/>
+            <net is_signal_inverted="no" name="receiver:MDC[1].Merc_rcv|out_data_Q[16]"/>
+            <net is_signal_inverted="no" name="receiver:MDC[1].Merc_rcv|out_data_Q[17]"/>
+            <net is_signal_inverted="no" name="receiver:MDC[1].Merc_rcv|out_data_Q[18]"/>
+            <net is_signal_inverted="no" name="receiver:MDC[1].Merc_rcv|out_data_Q[19]"/>
+            <net is_signal_inverted="no" name="receiver:MDC[1].Merc_rcv|out_data_Q[20]"/>
+            <net is_signal_inverted="no" name="receiver:MDC[1].Merc_rcv|out_data_Q[21]"/>
+            <net is_signal_inverted="no" name="receiver:MDC[1].Merc_rcv|out_data_Q[22]"/>
+            <net is_signal_inverted="no" name="receiver:MDC[1].Merc_rcv|out_data_Q[23]"/>
+          </bus>
+        </data_view>
+        <setup_view>
+          <net is_signal_inverted="no" name="CC"/>
+          <net is_signal_inverted="no" name="SCLK"/>
+          <net is_signal_inverted="no" name="TLV320_BCLK"/>
+          <net is_signal_inverted="no" name="TLV320_LRCIN"/>
+          <net is_signal_inverted="no" name="TLV320_LRCOUT"/>
+          <net is_signal_inverted="no" name="TLV320_MCLK"/>
+          <bus is_signal_inverted="no" link="all" name="clock_select" order="lsb_to_msb" radix="hex" state="collapse" type="register">
+            <net is_signal_inverted="no" name="clock_select[1]"/>
+            <net is_signal_inverted="no" name="clock_select[2]"/>
+            <net is_signal_inverted="no" name="clock_select[3]"/>
+          </bus>
+          <net is_signal_inverted="no" name="C122_DFS0"/>
+          <net is_signal_inverted="no" name="C122_DFS1"/>
+          <net is_signal_inverted="no" name="C122_rst"/>
+          <bus is_signal_inverted="no" link="all" name="C122_rst_cnt" order="lsb_to_msb" radix="hex" state="collapse" type="register">
+            <net is_signal_inverted="no" name="C122_rst_cnt[0]"/>
+            <net is_signal_inverted="no" name="C122_rst_cnt[1]"/>
+            <net is_signal_inverted="no" name="C122_rst_cnt[2]"/>
+            <net is_signal_inverted="no" name="C122_rst_cnt[3]"/>
+            <net is_signal_inverted="no" name="C122_rst_cnt[4]"/>
+            <net is_signal_inverted="no" name="C122_rst_cnt[5]"/>
+            <net is_signal_inverted="no" name="C122_rst_cnt[6]"/>
+            <net is_signal_inverted="no" name="C122_rst_cnt[7]"/>
+            <net is_signal_inverted="no" name="C122_rst_cnt[8]"/>
+            <net is_signal_inverted="no" name="C122_rst_cnt[9]"/>
+            <net is_signal_inverted="no" name="C122_rst_cnt[10]"/>
+          </bus>
+          <bus is_signal_inverted="no" link="all" name="C122_frequency_HZ[0]" order="lsb_to_msb" radix="hex" state="collapse" type="register">
+            <net is_signal_inverted="no" name="C122_frequency_HZ[0][0]"/>
+            <net is_signal_inverted="no" name="C122_frequency_HZ[0][1]"/>
+            <net is_signal_inverted="no" name="C122_frequency_HZ[0][2]"/>
+            <net is_signal_inverted="no" name="C122_frequency_HZ[0][3]"/>
+            <net is_signal_inverted="no" name="C122_frequency_HZ[0][4]"/>
+            <net is_signal_inverted="no" name="C122_frequency_HZ[0][5]"/>
+            <net is_signal_inverted="no" name="C122_frequency_HZ[0][6]"/>
+            <net is_signal_inverted="no" name="C122_frequency_HZ[0][7]"/>
+            <net is_signal_inverted="no" name="C122_frequency_HZ[0][8]"/>
+            <net is_signal_inverted="no" name="C122_frequency_HZ[0][9]"/>
+            <net is_signal_inverted="no" name="C122_frequency_HZ[0][10]"/>
+            <net is_signal_inverted="no" name="C122_frequency_HZ[0][11]"/>
+            <net is_signal_inverted="no" name="C122_frequency_HZ[0][12]"/>
+            <net is_signal_inverted="no" name="C122_frequency_HZ[0][13]"/>
+            <net is_signal_inverted="no" name="C122_frequency_HZ[0][14]"/>
+            <net is_signal_inverted="no" name="C122_frequency_HZ[0][15]"/>
+            <net is_signal_inverted="no" name="C122_frequency_HZ[0][16]"/>
+            <net is_signal_inverted="no" name="C122_frequency_HZ[0][17]"/>
+            <net is_signal_inverted="no" name="C122_frequency_HZ[0][18]"/>
+            <net is_signal_inverted="no" name="C122_frequency_HZ[0][19]"/>
+            <net is_signal_inverted="no" name="C122_frequency_HZ[0][20]"/>
+            <net is_signal_inverted="no" name="C122_frequency_HZ[0][21]"/>
+            <net is_signal_inverted="no" name="C122_frequency_HZ[0][22]"/>
+            <net is_signal_inverted="no" name="C122_frequency_HZ[0][23]"/>
+            <net is_signal_inverted="no" name="C122_frequency_HZ[0][24]"/>
+            <net is_signal_inverted="no" name="C122_frequency_HZ[0][25]"/>
+            <net is_signal_inverted="no" name="C122_frequency_HZ[0][26]"/>
+            <net is_signal_inverted="no" name="C122_frequency_HZ[0][27]"/>
+            <net is_signal_inverted="no" name="C122_frequency_HZ[0][28]"/>
+            <net is_signal_inverted="no" name="C122_frequency_HZ[0][29]"/>
+            <net is_signal_inverted="no" name="C122_frequency_HZ[0][30]"/>
+            <net is_signal_inverted="no" name="C122_frequency_HZ[0][31]"/>
+          </bus>
+          <bus is_signal_inverted="no" link="all" name="C122_frequency_HZ[1]" order="lsb_to_msb" radix="hex" state="collapse" type="register">
+            <net is_signal_inverted="no" name="C122_frequency_HZ[1][0]"/>
+            <net is_signal_inverted="no" name="C122_frequency_HZ[1][1]"/>
+            <net is_signal_inverted="no" name="C122_frequency_HZ[1][2]"/>
+            <net is_signal_inverted="no" name="C122_frequency_HZ[1][3]"/>
+            <net is_signal_inverted="no" name="C122_frequency_HZ[1][4]"/>
+            <net is_signal_inverted="no" name="C122_frequency_HZ[1][5]"/>
+            <net is_signal_inverted="no" name="C122_frequency_HZ[1][6]"/>
+            <net is_signal_inverted="no" name="C122_frequency_HZ[1][7]"/>
+            <net is_signal_inverted="no" name="C122_frequency_HZ[1][8]"/>
+            <net is_signal_inverted="no" name="C122_frequency_HZ[1][9]"/>
+            <net is_signal_inverted="no" name="C122_frequency_HZ[1][10]"/>
+            <net is_signal_inverted="no" name="C122_frequency_HZ[1][11]"/>
+            <net is_signal_inverted="no" name="C122_frequency_HZ[1][12]"/>
+            <net is_signal_inverted="no" name="C122_frequency_HZ[1][13]"/>
+            <net is_signal_inverted="no" name="C122_frequency_HZ[1][14]"/>
+            <net is_signal_inverted="no" name="C122_frequency_HZ[1][15]"/>
+            <net is_signal_inverted="no" name="C122_frequency_HZ[1][16]"/>
+            <net is_signal_inverted="no" name="C122_frequency_HZ[1][17]"/>
+            <net is_signal_inverted="no" name="C122_frequency_HZ[1][18]"/>
+            <net is_signal_inverted="no" name="C122_frequency_HZ[1][19]"/>
+            <net is_signal_inverted="no" name="C122_frequency_HZ[1][20]"/>
+            <net is_signal_inverted="no" name="C122_frequency_HZ[1][21]"/>
+            <net is_signal_inverted="no" name="C122_frequency_HZ[1][22]"/>
+            <net is_signal_inverted="no" name="C122_frequency_HZ[1][23]"/>
+            <net is_signal_inverted="no" name="C122_frequency_HZ[1][24]"/>
+            <net is_signal_inverted="no" name="C122_frequency_HZ[1][25]"/>
+            <net is_signal_inverted="no" name="C122_frequency_HZ[1][26]"/>
+            <net is_signal_inverted="no" name="C122_frequency_HZ[1][27]"/>
+            <net is_signal_inverted="no" name="C122_frequency_HZ[1][28]"/>
+            <net is_signal_inverted="no" name="C122_frequency_HZ[1][29]"/>
+            <net is_signal_inverted="no" name="C122_frequency_HZ[1][30]"/>
+            <net is_signal_inverted="no" name="C122_frequency_HZ[1][31]"/>
+          </bus>
+          <bus is_signal_inverted="no" link="all" name="MDOUT" order="lsb_to_msb" radix="hex" state="expand" type="output pin">
+            <net is_signal_inverted="no" name="MDOUT[0]"/>
+            <net is_signal_inverted="no" name="MDOUT[1]"/>
+            <net is_signal_inverted="no" name="MDOUT[2]"/>
+            <net is_signal_inverted="no" name="MDOUT[3]"/>
+            <net is_signal_inverted="no" name="MDOUT[4]"/>
+            <net is_signal_inverted="no" name="MDOUT[5]"/>
+            <net is_signal_inverted="no" name="MDOUT[6]"/>
+            <net is_signal_inverted="no" name="MDOUT[7]"/>
+          </bus>
+          <bus is_signal_inverted="no" link="all" name="Merc_ID_drv" order="lsb_to_msb" radix="hex" state="collapse" type="output pin">
+            <net is_signal_inverted="no" name="Merc_ID_drv[0]"/>
+            <net is_signal_inverted="no" name="Merc_ID_drv[1]"/>
+            <net is_signal_inverted="no" name="Merc_ID_drv[2]"/>
+            <net is_signal_inverted="no" name="Merc_ID_drv[3]"/>
+          </bus>
+          <bus is_signal_inverted="no" link="all" name="Merc_ID" order="lsb_to_msb" radix="hex" state="collapse" type="input pin">
+            <net is_signal_inverted="no" name="Merc_ID[0]"/>
+            <net is_signal_inverted="no" name="Merc_ID[1]"/>
+            <net is_signal_inverted="no" name="Merc_ID[2]"/>
+          </bus>
+          <net is_signal_inverted="no" name="Channels_8_1"/>
+          <net is_signal_inverted="no" name="receiver:MDC[0].Merc_rcv|out_strobe"/>
+          <net is_signal_inverted="no" name="receiver:MDC[1].Merc_rcv|out_strobe"/>
+          <bus is_signal_inverted="no" link="all" name="receiver:MDC[0].Merc_rcv|out_data_I" order="lsb_to_msb" radix="hex" state="collapse" type="combinatorial">
+            <net is_signal_inverted="no" name="receiver:MDC[0].Merc_rcv|out_data_I[0]"/>
+            <net is_signal_inverted="no" name="receiver:MDC[0].Merc_rcv|out_data_I[1]"/>
+            <net is_signal_inverted="no" name="receiver:MDC[0].Merc_rcv|out_data_I[2]"/>
+            <net is_signal_inverted="no" name="receiver:MDC[0].Merc_rcv|out_data_I[3]"/>
+            <net is_signal_inverted="no" name="receiver:MDC[0].Merc_rcv|out_data_I[4]"/>
+            <net is_signal_inverted="no" name="receiver:MDC[0].Merc_rcv|out_data_I[5]"/>
+            <net is_signal_inverted="no" name="receiver:MDC[0].Merc_rcv|out_data_I[6]"/>
+            <net is_signal_inverted="no" name="receiver:MDC[0].Merc_rcv|out_data_I[7]"/>
+            <net is_signal_inverted="no" name="receiver:MDC[0].Merc_rcv|out_data_I[8]"/>
+            <net is_signal_inverted="no" name="receiver:MDC[0].Merc_rcv|out_data_I[9]"/>
+            <net is_signal_inverted="no" name="receiver:MDC[0].Merc_rcv|out_data_I[10]"/>
+            <net is_signal_inverted="no" name="receiver:MDC[0].Merc_rcv|out_data_I[11]"/>
+            <net is_signal_inverted="no" name="receiver:MDC[0].Merc_rcv|out_data_I[12]"/>
+            <net is_signal_inverted="no" name="receiver:MDC[0].Merc_rcv|out_data_I[13]"/>
+            <net is_signal_inverted="no" name="receiver:MDC[0].Merc_rcv|out_data_I[14]"/>
+            <net is_signal_inverted="no" name="receiver:MDC[0].Merc_rcv|out_data_I[15]"/>
+            <net is_signal_inverted="no" name="receiver:MDC[0].Merc_rcv|out_data_I[16]"/>
+            <net is_signal_inverted="no" name="receiver:MDC[0].Merc_rcv|out_data_I[17]"/>
+            <net is_signal_inverted="no" name="receiver:MDC[0].Merc_rcv|out_data_I[18]"/>
+            <net is_signal_inverted="no" name="receiver:MDC[0].Merc_rcv|out_data_I[19]"/>
+            <net is_signal_inverted="no" name="receiver:MDC[0].Merc_rcv|out_data_I[20]"/>
+            <net is_signal_inverted="no" name="receiver:MDC[0].Merc_rcv|out_data_I[21]"/>
+            <net is_signal_inverted="no" name="receiver:MDC[0].Merc_rcv|out_data_I[22]"/>
+            <net is_signal_inverted="no" name="receiver:MDC[0].Merc_rcv|out_data_I[23]"/>
+          </bus>
+          <bus is_signal_inverted="no" link="all" name="receiver:MDC[0].Merc_rcv|out_data_Q" order="lsb_to_msb" radix="hex" state="collapse" type="combinatorial">
+            <net is_signal_inverted="no" name="receiver:MDC[0].Merc_rcv|out_data_Q[0]"/>
+            <net is_signal_inverted="no" name="receiver:MDC[0].Merc_rcv|out_data_Q[1]"/>
+            <net is_signal_inverted="no" name="receiver:MDC[0].Merc_rcv|out_data_Q[2]"/>
+            <net is_signal_inverted="no" name="receiver:MDC[0].Merc_rcv|out_data_Q[3]"/>
+            <net is_signal_inverted="no" name="receiver:MDC[0].Merc_rcv|out_data_Q[4]"/>
+            <net is_signal_inverted="no" name="receiver:MDC[0].Merc_rcv|out_data_Q[5]"/>
+            <net is_signal_inverted="no" name="receiver:MDC[0].Merc_rcv|out_data_Q[6]"/>
+            <net is_signal_inverted="no" name="receiver:MDC[0].Merc_rcv|out_data_Q[7]"/>
+            <net is_signal_inverted="no" name="receiver:MDC[0].Merc_rcv|out_data_Q[8]"/>
+            <net is_signal_inverted="no" name="receiver:MDC[0].Merc_rcv|out_data_Q[9]"/>
+            <net is_signal_inverted="no" name="receiver:MDC[0].Merc_rcv|out_data_Q[10]"/>
+            <net is_signal_inverted="no" name="receiver:MDC[0].Merc_rcv|out_data_Q[11]"/>
+            <net is_signal_inverted="no" name="receiver:MDC[0].Merc_rcv|out_data_Q[12]"/>
+            <net is_signal_inverted="no" name="receiver:MDC[0].Merc_rcv|out_data_Q[13]"/>
+            <net is_signal_inverted="no" name="receiver:MDC[0].Merc_rcv|out_data_Q[14]"/>
+            <net is_signal_inverted="no" name="receiver:MDC[0].Merc_rcv|out_data_Q[15]"/>
+            <net is_signal_inverted="no" name="receiver:MDC[0].Merc_rcv|out_data_Q[16]"/>
+            <net is_signal_inverted="no" name="receiver:MDC[0].Merc_rcv|out_data_Q[17]"/>
+            <net is_signal_inverted="no" name="receiver:MDC[0].Merc_rcv|out_data_Q[18]"/>
+            <net is_signal_inverted="no" name="receiver:MDC[0].Merc_rcv|out_data_Q[19]"/>
+            <net is_signal_inverted="no" name="receiver:MDC[0].Merc_rcv|out_data_Q[20]"/>
+            <net is_signal_inverted="no" name="receiver:MDC[0].Merc_rcv|out_data_Q[21]"/>
+            <net is_signal_inverted="no" name="receiver:MDC[0].Merc_rcv|out_data_Q[22]"/>
+            <net is_signal_inverted="no" name="receiver:MDC[0].Merc_rcv|out_data_Q[23]"/>
+          </bus>
+          <bus is_signal_inverted="no" link="all" name="receiver:MDC[1].Merc_rcv|out_data_I" order="lsb_to_msb" radix="hex" state="collapse" type="combinatorial">
+            <net is_signal_inverted="no" name="receiver:MDC[1].Merc_rcv|out_data_I[0]"/>
+            <net is_signal_inverted="no" name="receiver:MDC[1].Merc_rcv|out_data_I[1]"/>
+            <net is_signal_inverted="no" name="receiver:MDC[1].Merc_rcv|out_data_I[2]"/>
+            <net is_signal_inverted="no" name="receiver:MDC[1].Merc_rcv|out_data_I[3]"/>
+            <net is_signal_inverted="no" name="receiver:MDC[1].Merc_rcv|out_data_I[4]"/>
+            <net is_signal_inverted="no" name="receiver:MDC[1].Merc_rcv|out_data_I[5]"/>
+            <net is_signal_inverted="no" name="receiver:MDC[1].Merc_rcv|out_data_I[6]"/>
+            <net is_signal_inverted="no" name="receiver:MDC[1].Merc_rcv|out_data_I[7]"/>
+            <net is_signal_inverted="no" name="receiver:MDC[1].Merc_rcv|out_data_I[8]"/>
+            <net is_signal_inverted="no" name="receiver:MDC[1].Merc_rcv|out_data_I[9]"/>
+            <net is_signal_inverted="no" name="receiver:MDC[1].Merc_rcv|out_data_I[10]"/>
+            <net is_signal_inverted="no" name="receiver:MDC[1].Merc_rcv|out_data_I[11]"/>
+            <net is_signal_inverted="no" name="receiver:MDC[1].Merc_rcv|out_data_I[12]"/>
+            <net is_signal_inverted="no" name="receiver:MDC[1].Merc_rcv|out_data_I[13]"/>
+            <net is_signal_inverted="no" name="receiver:MDC[1].Merc_rcv|out_data_I[14]"/>
+            <net is_signal_inverted="no" name="receiver:MDC[1].Merc_rcv|out_data_I[15]"/>
+            <net is_signal_inverted="no" name="receiver:MDC[1].Merc_rcv|out_data_I[16]"/>
+            <net is_signal_inverted="no" name="receiver:MDC[1].Merc_rcv|out_data_I[17]"/>
+            <net is_signal_inverted="no" name="receiver:MDC[1].Merc_rcv|out_data_I[18]"/>
+            <net is_signal_inverted="no" name="receiver:MDC[1].Merc_rcv|out_data_I[19]"/>
+            <net is_signal_inverted="no" name="receiver:MDC[1].Merc_rcv|out_data_I[20]"/>
+            <net is_signal_inverted="no" name="receiver:MDC[1].Merc_rcv|out_data_I[21]"/>
+            <net is_signal_inverted="no" name="receiver:MDC[1].Merc_rcv|out_data_I[22]"/>
+            <net is_signal_inverted="no" name="receiver:MDC[1].Merc_rcv|out_data_I[23]"/>
+          </bus>
+          <bus is_signal_inverted="no" link="all" name="receiver:MDC[1].Merc_rcv|out_data_Q" order="lsb_to_msb" radix="hex" state="collapse" type="combinatorial">
+            <net is_signal_inverted="no" name="receiver:MDC[1].Merc_rcv|out_data_Q[0]"/>
+            <net is_signal_inverted="no" name="receiver:MDC[1].Merc_rcv|out_data_Q[1]"/>
+            <net is_signal_inverted="no" name="receiver:MDC[1].Merc_rcv|out_data_Q[2]"/>
+            <net is_signal_inverted="no" name="receiver:MDC[1].Merc_rcv|out_data_Q[3]"/>
+            <net is_signal_inverted="no" name="receiver:MDC[1].Merc_rcv|out_data_Q[4]"/>
+            <net is_signal_inverted="no" name="receiver:MDC[1].Merc_rcv|out_data_Q[5]"/>
+            <net is_signal_inverted="no" name="receiver:MDC[1].Merc_rcv|out_data_Q[6]"/>
+            <net is_signal_inverted="no" name="receiver:MDC[1].Merc_rcv|out_data_Q[7]"/>
+            <net is_signal_inverted="no" name="receiver:MDC[1].Merc_rcv|out_data_Q[8]"/>
+            <net is_signal_inverted="no" name="receiver:MDC[1].Merc_rcv|out_data_Q[9]"/>
+            <net is_signal_inverted="no" name="receiver:MDC[1].Merc_rcv|out_data_Q[10]"/>
+            <net is_signal_inverted="no" name="receiver:MDC[1].Merc_rcv|out_data_Q[11]"/>
+            <net is_signal_inverted="no" name="receiver:MDC[1].Merc_rcv|out_data_Q[12]"/>
+            <net is_signal_inverted="no" name="receiver:MDC[1].Merc_rcv|out_data_Q[13]"/>
+            <net is_signal_inverted="no" name="receiver:MDC[1].Merc_rcv|out_data_Q[14]"/>
+            <net is_signal_inverted="no" name="receiver:MDC[1].Merc_rcv|out_data_Q[15]"/>
+            <net is_signal_inverted="no" name="receiver:MDC[1].Merc_rcv|out_data_Q[16]"/>
+            <net is_signal_inverted="no" name="receiver:MDC[1].Merc_rcv|out_data_Q[17]"/>
+            <net is_signal_inverted="no" name="receiver:MDC[1].Merc_rcv|out_data_Q[18]"/>
+            <net is_signal_inverted="no" name="receiver:MDC[1].Merc_rcv|out_data_Q[19]"/>
+            <net is_signal_inverted="no" name="receiver:MDC[1].Merc_rcv|out_data_Q[20]"/>
+            <net is_signal_inverted="no" name="receiver:MDC[1].Merc_rcv|out_data_Q[21]"/>
+            <net is_signal_inverted="no" name="receiver:MDC[1].Merc_rcv|out_data_Q[22]"/>
+            <net is_signal_inverted="no" name="receiver:MDC[1].Merc_rcv|out_data_Q[23]"/>
+          </bus>
+        </setup_view>
+      </presentation>
+      <trigger CRC="EE1CFEAB" attribute_mem_mode="false" gap_record="true" global_temp="1" is_expanded="true" name="trigger: 2009/10/26 12:51:42  #0" position="pre" power_up_trigger_mode="false" record_data_gap="true" segment_size="1" storage_mode="off" storage_qualifier_disabled="no" storage_qualifier_port_is_pin="true" storage_qualifier_port_name="auto_stp_external_storage_qualifier" storage_qualifier_port_tap_mode="classic" trigger_in="dont_care" trigger_out="active high" trigger_type="circular">
+        <power_up_trigger position="pre" storage_qualifier_disabled="no" trigger_in="dont_care" trigger_out="active high"/>
+        <events use_custom_flow_control="no">
+          <level enabled="yes" name="condition1" type="basic">'receiver:MDC[0].Merc_rcv|out_strobe' == rising edge
+            
+            <power_up enabled="yes">
+            </power_up>
+            <op_node/>
+          </level>
+        </events>
+        <storage_qualifier_events>
+          <transitional>000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+            
+            <pwr_up_transitional>000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
+            
+            </pwr_up_transitional>
+          </transitional>
+          <storage_qualifier_level type="basic">
+            <power_up>
+            </power_up>
+            <op_node/>
+          </storage_qualifier_level>
+          <storage_qualifier_level type="basic">
+            <power_up>
+            </power_up>
+            <op_node/>
+          </storage_qualifier_level>
+          <storage_qualifier_level type="basic">
+            <power_up>
+            </power_up>
+            <op_node/>
+          </storage_qualifier_level>
+        </storage_qualifier_events>
+        <log>
+          <data global_temp="1" name="log: 2009/10/26 22:04:28  #0" power_up_mode="false" sample_depth="128" trigger_position="16">000000000101101000000000000100111000000001011010000000000001001110001000000000101100000000011110011111000000000000000000100000000000000000100000010010000111111111111111100001111000000000010000110010000000000000101101000000000000100111000000001011010000000000001001110001000000000101100000000011110011111000000000000000000100000000000000000100000010010000111111111111111100001111000000000010000110010000000000000101101000000000000100111000000001011010000000000001001110001000000000101100000000011110011111000000000000000000100000000000000000100000010010000111111111111111100001111000000000010000110010000000000000101101000000000000100111000000001011010000000000001001110001000000000101100000000011110011111000000000000000000100000000000000000100000010010000111111111111111100001111000000000010000110010000000000000101101000000000000100111000000001011010000000000001001110001000000000101100000000011110011011000000000000000000100000000000000000100000010010000111111111111111100001111000000000010000110010000000000000101101000000000000100111000000001011010000000000001001110001000000000101100000000011110011011000000000000000000100000000000000000100000010010000111111111111111100001111000000000010000110010000000000000101101000000000000100111000000001011010000000000001001110001000000000101100000000011110011011000000000000000000100000000000000000100000010010000111111111111111100001111000000000010000110010000000000000101101000000000000100111000000001011010000000000001001110001000000000101100000000011110011011000000000000000000100000000000000000100000010010000111111111111111100001111000000000010000110010000000000000101101000000000000100111000000001011010000000000001001110001000000000101100000000011110011011000000000000000000100000000000000000100000010010000111111111111111100001111000000000010000110010000000000000101101000000000000100111000000001011010000000000001001110001000000000001100000000011110011111000000000000000000100000000000000000100000010010000111111111111111100001111000000000010000110010000000000000101101000000000000100111000000001011010000000000001001110001000000000001100000000011110011111000000000000000000100000000000000000100000010010000111111111111111100001111000000000010000110010000000000000101101000000000000100111000000001011010000000000001001110001000000000001100000000011110011111000000000000000000100000000000000000100000010010000111111111111111100001111000000000010000110010000000000000101101000000000000100111000000001011010000000000001001110001000000000001100000000011110011111000000000000000000100000000000000000100000010010000111111111111111100001111000000000010000110010000000000000101101000000000000100111000000001011010000000000001001110001000000000001100000000011110011111000000000000000000100000000000000000100000010010000111111111111111100001111000000000010000110010000000000000101101000000000000100111000000001011010000000000001001110001000000000001100000000011110011011000000000000000000100000000000000000100000010010000111111111111111100001111000000000010000110010000000000000101101000000000000100111000000001011010000000000001001110001000000000001100000000011110011011000000000000000000100000000000000000100000010010000111111111111111100001111000000000010000110010000000000000101101000000000000100111000000001011010000000000001001110001000000000001100000000011110011011010000000000000001010000010000000000000001101000011111111111111111000111111000000000000000010100001000000000101101000000000000100111000000001011010000000000001001110001000000000001100000000011110111011010000000000000001010000010000000000000001101000001111111111111111000111111000000000000000010100000000000000101101000000000000100111000000001011010000000000001001110001000000000001100000000011110111011010000000000000001010000010000000000000001101000001111111111111111000111111000000000000000010100000000000000101101000000000000100111000000001011010000000000001001110001000000000001100000000011110111111010000000000000001010000010000000000000001101000001111111111111111000111111000000000000000010100000000000000101101000000000000100111000000001011010000000000001001110001000000000001100000000011110111111010000000000000001010000010000000000000001101000001111111111111111000111111000000000000000010100000000000000101101000000000000100111000000001011010000000000001001110001000000000001100000000011110111111010000000000000001010000010000000000000001101000001111111111111111000111111000000000000000010100000000000000101101000000000000100111000000001011010000000000001001110001000000000001100000000011110111111010000000000000001010000010000000000000001101000001111111111111111000111111000000000000000010100000000000000101101000000000000100111000000001011010000000000001001110001000000000001100000000011110111111010000000000000001010000010000000000000001101000001111111111111111000111111000000000000000010100000000000000101101000000000000100111000000001011010000000000001001110001000000000001100000000011110111011010000000000000001010000010000000000000001101000001111111111111111000111111000000000000000010100000000000000101101000000000000100111000000001011010000000000001001110001000000000001100000000011110111011010000000000000001010000010000000000000001101000001111111111111111000111111000000000000000010100000000000000101101000000000000100111000000001011010000000000001001110001000000000001100000000011110111011010000000000000001010000010000000000000001101000001111111111111111000111111000000000000000010100000000000000101101000000000000100111000000001011010000000000001001110001000000000001100000000011110111011010000000000000001010000010000000000000001101000001111111111111111000111111000000000000000010100000000000000101101000000000000100111000000001011010000000000001001110001000000000001100000000011110111011010000000000000001010000010000000000000001101000001111111111111111000111111000000000000000010100000000000000101101000000000000100111000000001011010000000000001001110001000000000001100000000011110111111010000000000000001010000010000000000000001101000001111111111111111000111111000000000000000010100000000000000101101000000000000100111000000001011010000000000001001110001000000000001100000000011110111111010000000000000001010000010000000000000001101000001111111111111111000111111000000000000000010100000000000000101101000000000000100111000000001011010000000000001001110001000000000001100000000011110111111010000000000000001010000010000000000000001101000001111111111111111000111111000000000000000010100000000000000101101000000000000100111000000001011010000000000001001110001000000000001100000000011110111111010000000000000001010000010000000000000001101000001111111111111111000111111000000000000000010100000000000000101101000000000000100111000000001011010000000000001001110001000000000001100000000011110111111010000000000000001010000010000000000000001101000001111111111111111000111111000000000000000010100000000000000101101000000000000100111000000001011010000000000001001110001000000000001100000000011110111011010000000000000001010000010000000000000001101000001111111111111111000111111000000000000000010100000000000000101101000000000000100111000000001011010000000000001001110001000000000001100000000011110111011010000000000000001010000010000000000000001101000001111111111111111000111111000000000000000010100000000000000101101000000000000100111000000001011010000000000001001110001000000000001100000000011110111011010000000000000001010000010000000000000001101000001111111111111111000111111000000000000000010100000000000000101101000000000000100111000000001011010000000000001001110001000000000001100000000011110011011010000000000000001010000010000000000000001101000001111111111111111000111111000000000000000010100000000000000101101000000000000100111000000001011010000000000001001110001000000000001100000000011110011011010000000000000001010000010000000000000001101000001111111111111111000111111000000000000000010100000000000000101101000000000000100111000000001011010000000000001001110001000000000001100000000011110011111010000000000000001010000010000000000000001101000001111111111111111000111111000000000000000010100000000000000101101000000000000100111000000001011010000000000001001110001000000000001100000000011110011111010000000000000001010000010000000000000001101000001111111111111111000111111000000000000000010100000000000000101101000000000000100111000000001011010000000000001001110001000000000001100000000011110011111010000000000000001010000010000000000000001101000001111111111111111000111111000000000000000010100000000000000101101000000000000100111000000001011010000000000001001110001000000000001100000000011110011111010000000000000001010000010000000000000001101000001111111111111111000111111000000000000000010100000000000000101101000000000000100111000000001011010000000000001001110001000000000001100000000011110011111010000000000000001010000010000000000000001101000001111111111111111000111111000000000000000010100000000000000101101000000000000100111000000001011010000000000001001110001000000000001100000000011110011011010000000000000001010000010000000000000001101000001111111111111111000111111000000000000000010100000000000000101101000000000000100111000000001011010000000000001001110001000000000001100000000011110011011010000000000000001010000010000000000000001101000001111111111111111000111111000000000000000010100000000000000101101000000000000100111000000001011010000000000001001110001000000000001100000000011110011011010000000000000001010000010000000000000001101000001111111111111111000111111000000000000000010100000000000000101101000000000000100111000000001011010000000000001001110001000000000001100000000011110011011010000000000000001010000010000000000000001101000001111111111111111000111111000000000000000010100000000000000101101000000000000100111000000001011010000000000001001110001000000000001100000000011110011011010000000000000001010000010000000000000001101000001111111111111111000111111000000000000000010100000000000000101101000000000000100111000000001011010000000000001001110001000000000001100000000011110011111010000000000000001010000010000000000000001101000001111111111111111000111111000000000000000010100000000000000101101000000000000100111000000001011010000000000001001110001000000000001100000000011110011111010000000000000001010000010000000000000001101000001111111111111111000111111000000000000000010100000000000000101101000000000000100111000000001011010000000000001001110001000000000001100000000011110011111010000000000000001010000010000000000000001101000001111111111111111000111111000000000000000010100000000000000101101000000000000100111000000001011010000000000001001110001000000000001100000000011110011111010000000000000001010000010000000000000001101000001111111111111111000111111000000000000000010100000000000000101101000000000000100111000000001011010000000000001001110001000000000001100000000011110011111010000000000000001010000010000000000000001101000001111111111111111000111111000000000000000010100000000000000101101000000000000100111000000001011010000000000001001110001000000000001100000000011110011011010000000000000001010000010000000000000001101000001111111111111111000111111000000000000000010100000000000000101101000000000000100111000000001011010000000000001001110001000000000001100000000011110011011010000000000000001010000010000000000000001101000001111111111111111000111111000000000000000010100000000000000101101000000000000100111000000001011010000000000001001110001000000000001100000000011110011011010000000000000001010000010000000000000001101000001111111111111111000111111000000000000000010100000000000000101101000000000000100111000000001011010000000000001001110001000000000001100000000011110111011010000000000000001010000010000000000000001101000001111111111111111000111111000000000000000010100000000000000101101000000000000100111000000001011010000000000001001110001000000000001100000000011110111011010000000000000001010000010000000000000001101000001111111111111111000111111000000000000000010100000000000000101101000000000000100111000000001011010000000000001001110001000000000001100000000011110111111010000000000000001010000010000000000000001101000001111111111111111000111111000000000000000010100000000000000101101000000000000100111000000001011010000000000001001110001000000000001100000000011110111111010000000000000001010000010000000000000001101000001111111111111111000111111000000000000000010100000000000000101101000000000000100111000000001011010000000000001001110001000000000001100000000011110111111010000000000000001010000010000000000000001101000001111111111111111000111111000000000000000010100000000000000101101000000000000100111000000001011010000000000001001110001000000000001100000000011110111111010000000000000001010000010000000000000001101000001111111111111111000111111000000000000000010100000000000000101101000000000000100111000000001011010000000000001001110001000000000001100000000011110111111010000000000000001010000010000000000000001101000001111111111111111000111111000000000000000010100000000000000101101000000000000100111000000001011010000000000001001110001000000000001100000000011110111011010000000000000001010000010000000000000001101000001111111111111111000111111000000000000000010100000000000000101101000000000000100111000000001011010000000000001001110001000000000001100000000011110111011010000000000000001010000010000000000000001101000001111111111111111000111111000000000000000010100000000000000101101000000000000100111000000001011010000000000001001110001000000000001100000000011110111011010000000000000001010000010000000000000001101000001111111111111111000111111000000000000000010100000000000000101101000000000000100111000000001011010000000000001001110001000000000001100000000011110111011010000000000000001010000010000000000000001101000001111111111111111000111111000000000000000010100000000000000101101000000000000100111000000001011010000000000001001110001000000000001100000000011110111011010000000000000001010000010000000000000001101000001111111111111111000111111000000000000000010100000000000000101101000000000000100111000000001011010000000000001001110001000000000001100000000011110111111010000000000000001010000010000000000000001101000001111111111111111000111111000000000000000010100000000000000101101000000000000100111000000001011010000000000001001110001000000000001100000000011110111111010000000000000001010000010000000000000001101000001111111111111111000111111000000000000000010100000000000000101101000000000000100111000000001011010000000000001001110001000000000001100000000011110111111010000000000000001010000010000000000000001101000001111111111111111000111111000000000000000010100000000000000101101000000000000100111000000001011010000000000001001110001000000000001100000000011110111111010000000000000001010000010000000000000001101000001111111111111111000111111000000000000000010100000000000000101101000000000000100111000000001011010000000000001001110001000000000001100000000011110111111010000000000000001010000010000000000000001101000001111111111111111000111111000000000000000010100000000000000101101000000000000100111000000001011010000000000001001110001000000000001100000000011110111011010000000000000001010000010000000000000001101000001111111111111111000111111000000000000000010100000000000000101101000000000000100111000000001011010000000000001001110001000000000001100000000011110111011010000000000000001010000010000000000000001101000001111111111111111000111111000000000000000010100000000000000101101000000000000100111000000001011010000000000001001110001000000000001100000000011110111011010000000000000001010000010000000000000001101000001111111111111111000111111000000000000000010100000000000000101101000000000000100111000000001011010000000000001001110001000000000001100000000011110011011010000000000000001010000010000000000000001101000001111111111111111000111111000000000000000010100000000000000101101000000000000100111000000001011010000000000001001110001000000000001100000000011110011011010000000000000001010000010000000000000001101000001111111111111111000111111000000000000000010100000000000000101101000000000000100111000000001011010000000000001001110001000000000001100000000011110011111010000000000000001010000010000000000000001101000001111111111111111000111111000000000000000010100000000000000101101000000000000100111000000001011010000000000001001110001000000000001100000000011110011111010000000000000001010000010000000000000001101000001111111111111111000111111000000000000000010100000000000000101101000000000000100111000000001011010000000000001001110001000000000001100000000011110011111010000000000000001010000010000000000000001101000001111111111111111000111111000000000000000010100000000000000101101000000000000100111000000001011010000000000001001110001000000000001100000000011110011111010000000000000001010000010000000000000001101000001111111111111111000111111000000000000000010100000000000000101101000000000000100111000000001011010000000000001001110001000000000001100000000011110011111010000000000000001010000010000000000000001101000001111111111111111000111111000000000000000010100000000000000101101000000000000100111000000001011010000000000001001110001000000000001100000000011110011011010000000000000001010000010000000000000001101000001111111111111111000111111000000000000000010100000000000000101101000000000000100111000000001011010000000000001001110001000000000001100000000011110011011010000000000000001010000010000000000000001101000001111111111111111000111111000000000000000010100000000000000101101000000000000100111000000001011010000000000001001110001000000000001100000000011110011011010000000000000001010000010000000000000001101000001111111111111111000111111000000000000000010100000000000000101101000000000000100111000000001011010000000000001001110001000000000001100000000011110011011010000000000000001010000010000000000000001101000001111111111111111000111111000000000000000010100000000000000101101000000000000100111000000001011010000000000001001110001000000000001100000000011110011011010000000000000001010000010000000000000001101000001111111111111111000111111000000000000000010100000000000000101101000000000000100111000000001011010000000000001001110001000000000001100000000011110011111010000000000000001010000010000000000000001101000001111111111111111000111111000000000000000010100000000000000101101000000000000100111000000001011010000000000001001110001000000000001100000000011110011111010000000000000001010000010000000000000001101000001111111111111111000111111000000000000000010100000000000000101101000000000000100111000000001011010000000000001001110001000000000001100000000011110011111010000000000000001010000010000000000000001101000001111111111111111000111111000000000000000010100000000000000101101000000000000100111000000001011010000000000001001110001000000000001100000000011110011111010000000000000001010000010000000000000001101000001111111111111111000111111000000000000000010100000000000000101101000000000000100111000000001011010000000000001001110001000000000001100000000011110011111010000000000000001010000010000000000000001101000001111111111111111000111111000000000000000010100000000000000101101000000000000100111000000001011010000000000001001110001000000000001100000000011110011011010000000000000001010000010000000000000001101000001111111111111111000111111000000000000000010100000000000000101101000000000000100111000000001011010000000000001001110001000000000001100000000011110011011010000000000000001010000010000000000000001101000001111111111111111000111111000000000000000010100000000000000101101000000000000100111000000001011010000000000001001110001000000000001100000000011110011011010000000000000001010000010000000000000001101000001111111111111111000111111000000000000000010100000000000000101101000000000000100111000000001011010000000000001001110001000000000001100000000011110111011010000000000000001010000010000000000000001101000001111111111111111000111111000000000000000010100000000000000101101000000000000100111000000001011010000000000001001110001000000000001100000000011110111011010000000000000001010000010000000000000001101000001111111111111111000111111000000000000000010100000000000000101101000000000000100111000000001011010000000000001001110001000000000001100000000011110111111010000000000000001010000010000000000000001101000001111111111111111000111111000000000000000010100000000000000101101000000000000100111000000001011010000000000001001110001000000000001100000000011110111111010000000000000001010000010000000000000001101000001111111111111111000111111000000000000000010100000000000000101101000000000000100111000000001011010000000000001001110001000000000001100000000011110111111010000000000000001010000010000000000000001101000001111111111111111000111111000000000000000010100000000000000101101000000000000100111000000001011010000000000001001110001000000000001100000000011110111111010000000000000001010000010000000000000001101000001111111111111111000111111000000000000000010100000000000000101101000000000000100111000000001011010000000000001001110001000000000001100000000011110111111010000000000000001010000010000000000000001101000001111111111111111000111111000000000000000010100000000000000101101000000000000100111000000001011010000000000001001110001000000000001100000000011110111011010000000000000001010000010000000000000001101000001111111111111111000111111000000000000000010100000000000000101101000000000000100111000000001011010000000000001001110001000000000001100000000011110111011010000000000000001010000010000000000000001101000001111111111111111000111111000000000000000010100000000000000101101000000000000100111000000001011010000000000001001110001000000000001100000000011110111011010000000000000001010000010000000000000001101000001111111111111111000111111000000000000000010100000000000000101101000000000000100111000000001011010000000000001001110001000000000001100000000011110111011010000000000000001010000010000000000000001101000001111111111111111000111111000000000000000010100000000000000101101000000000000100111000000001011010000000000001001110001000000000001100000000011110111011010000000000000001010000010000000000000001101000001111111111111111000111111000000000000000010100000000000000101101000000000000100111000000001011010000000000001001110001000000000001100000000011110111111010000000000000001010000010000000000000001101000001111111111111111000111111000000000000000010100000000000000101101000000000000100111000000001011010000000000001001110001000000000001100000000011110111111010000000000000001010000010000000000000001101000001111111111111111000111111000000000000000010100000000000000101101000000000000100111000000001011010000000000001001110001000000000001100000000011110111111010000000000000001010000010000000000000001101000001111111111111111000111111000000000000000010100000000000000101101000000000000100111000000001011010000000000001001110001000000000001100000000011110111111010000000000000001010000010000000000000001101000001111111111111111000111111000000000000000010100000000000000101101000000000000100111000000001011010000000000001001110001000000000001100000000011110111111010000000000000001010000010000000000000001101000001111111111111111000111111000000000000000010100000000000000101101000000000000100111000000001011010000000000001001110001000000000001100000000011110111011010000000000000001010000010000000000000001101000001111111111111111000111111000000000000000010100000000000000101101000000000000100111000000001011010000000000001001110001000000000001100000000011110111011010000000000000001010000010000000000000001101000001111111111111111000111111000000000000000010100000000000000101101000000000000100111000000001011010000000000001001110001000000000001100000000011110111011010000000000000001010000010000000000000001101000001111111111111111000111111000000000000000010100000000000000101101000000000000100111000000001011010000000000001001110001000000000001100000000011110011011010000000000000001010000010000000000000001101000001111111111111111000111111000000000000000010100000000000000101101000000000000100111000000001011010000000000001001110001000000000001100000000011110011011010000000000000001010000010000000000000001101000001111111111111111000111111000000000000000010100000000000000101101000000000000100111000000001011010000000000001001110001000000000001100000000011110011111010000000000000001010000010000000000000001101000001111111111111111000111111000000000000000010100000000000000101101000000000000100111000000001011010000000000001001110001000000000001100000000011110011111010000000000000001010000010000000000000001101000001111111111111111000111111000000000000000010100000000000000101101000000000000100111000000001011010000000000001001110001000000000001100000000011110011111010000000000000001010000010000000000000001101000001111111111111111000111111000000000000000010100000000000000101101000000000000100111000000001011010000000000001001110001000000000001100000000011110011111010000000000000001010000010000000000000001101000001111111111111111000111111000000000000000010100000000000000101101000000000000100111000000001011010000000000001001110001000000000001100000000011110011111010000000000000001010000010000000000000001101000001111111111111111000111111000000000000000010100000000000000101101000000000000100111000000001011010000000000001001110001000000000001100000000011110011011010000000000000001010000010000000000000001101000001111111111111111000111111000000000000000010100000000000000101101000000000000100111000000001011010000000000001001110001000000000001100000000011110011011010000000000000001010000010000000000000001101000001111111111111111000111111000000000000000010100000000000000101101000000000000100111000000001011010000000000001001110001000000000001100000000011110011011010000000000000001010000010000000000000001101000001111111111111111000111111000000000000000010100000000000000101101000000000000100111000000001011010000000000001001110001000000000001100000000011110011011010000000000000001010000010000000000000001101000001111111111111111000111111000000000000000010100000</data>
+          <extradata>1111111111111111T111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111</extradata>
+        </log>
+      </trigger>
+    </signal_set>
+    <position_info>
+      <single attribute="active tab" value="0"/>
+      <single attribute="data horizontal scroll position" value="0"/>
+      <single attribute="data vertical scroll position" value="7"/>
+      <single attribute="setup horizontal scroll position" value="0"/>
+      <single attribute="setup vertical scroll position" value="8"/>
+      <single attribute="zoom level denominator" value="1"/>
+      <single attribute="zoom level numerator" value="1"/>
+      <single attribute="zoom offset denominator" value="1"/>
+      <single attribute="zoom offset numerator" value="130944"/>
+    </position_info>
+  </instance>
+  <mnemonics/>
+  <static_plugin_mnemonics/>
+  <global_info>
+    <single attribute="active instance" value="0"/>
+    <single attribute="lock mode" value="36110"/>
+    <multi attribute="column width" size="23" value="34,34,235,74,68,70,88,88,98,98,88,88,110,101,101,101,101,101,101,101,101,107,10"/>
+    <multi attribute="window position" size="9" value="1221,799,398,76,0,50,82,0,0"/>
+  </global_info>
+</session>
