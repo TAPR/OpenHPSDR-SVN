@@ -1,6 +1,6 @@
 Assembler report for Mercury
-Thu Oct 29 11:21:25 2009
-Quartus II Version 9.0 Build 132 02/25/2009 SJ Web Edition
+Mon Apr 26 00:09:15 2010
+Quartus II Version 9.1 Build 350 03/24/2010 Service Pack 2 SJ Web Edition
 
 
 ---------------------
@@ -10,9 +10,9 @@ Quartus II Version 9.0 Build 132 02/25/2009 SJ Web Edition
   2. Assembler Summary
   3. Assembler Settings
   4. Assembler Generated Files
-  5. Assembler Device Options: C:/Documents and Settings/Kirk/Desktop/openhpsdr/HPSDR Verilog/Mercury/Mercury.sof
-  6. Assembler Device Options: C:/Documents and Settings/Kirk/Desktop/openhpsdr/HPSDR Verilog/Mercury/Mercury.pof
-  7. Assembler Device Options: C:/Documents and Settings/Kirk/Desktop/openhpsdr/HPSDR Verilog/Mercury/Mercury.rbf
+  5. Assembler Device Options: Mercury.sof
+  6. Assembler Device Options: Mercury.pof
+  7. Assembler Device Options: Mercury.rbf
   8. Assembler Messages
 
 
@@ -20,7 +20,7 @@ Quartus II Version 9.0 Build 132 02/25/2009 SJ Web Edition
 ----------------
 ; Legal Notice ;
 ----------------
-Copyright (C) 1991-2009 Altera Corporation
+Copyright (C) 1991-2010 Altera Corporation
 Your use of Altera Corporation's design tools, logic functions 
 and other software and tools, and its AMPP partner logic 
 functions, and any output files from any of the foregoing 
@@ -39,7 +39,7 @@ applicable agreement for further details.
 +---------------------------------------------------------------+
 ; Assembler Summary                                             ;
 +-----------------------+---------------------------------------+
-; Assembler Status      ; Successful - Thu Oct 29 11:21:25 2009 ;
+; Assembler Status      ; Successful - Mon Apr 26 00:09:15 2010 ;
 ; Revision Name         ; Mercury                               ;
 ; Top-level Entity Name ; Mercury                               ;
 ; Family                ; Cyclone III                           ;
@@ -55,6 +55,8 @@ applicable agreement for further details.
 ; Use configuration device                                                    ; On       ; Off           ;
 ; Generate Raw Binary File (.rbf) For Target Device                           ; On       ; Off           ;
 ; Use smart compilation                                                       ; Off      ; Off           ;
+; Enable parallel Assembler and TimeQuest Timing Analyzer during compilation  ; On       ; On            ;
+; Enable compact report table                                                 ; Off      ; Off           ;
 ; Generate compressed bitstreams                                              ; On       ; On            ;
 ; Compression mode                                                            ; Off      ; Off           ;
 ; Clock source for configuration device                                       ; Internal ; Internal      ;
@@ -77,48 +79,48 @@ applicable agreement for further details.
 +-----------------------------------------------------------------------------+----------+---------------+
 
 
-+------------------------------------------------------------------------------------+
-; Assembler Generated Files                                                          ;
-+------------------------------------------------------------------------------------+
-; File Name                                                                          ;
-+------------------------------------------------------------------------------------+
-; C:/Documents and Settings/Kirk/Desktop/openhpsdr/HPSDR Verilog/Mercury/Mercury.sof ;
-; C:/Documents and Settings/Kirk/Desktop/openhpsdr/HPSDR Verilog/Mercury/Mercury.pof ;
-; C:/Documents and Settings/Kirk/Desktop/openhpsdr/HPSDR Verilog/Mercury/Mercury.rbf ;
-+------------------------------------------------------------------------------------+
++---------------------------+
+; Assembler Generated Files ;
++---------------------------+
+; File Name                 ;
++---------------------------+
+; Mercury.sof               ;
+; Mercury.pof               ;
+; Mercury.rbf               ;
++---------------------------+
 
 
-+--------------------------------------------------------------------------------------------------------------+
-; Assembler Device Options: C:/Documents and Settings/Kirk/Desktop/openhpsdr/HPSDR Verilog/Mercury/Mercury.sof ;
-+----------------+---------------------------------------------------------------------------------------------+
-; Option         ; Setting                                                                                     ;
-+----------------+---------------------------------------------------------------------------------------------+
-; Device         ; EP3C25Q240C8                                                                                ;
-; JTAG usercode  ; 0xFFFFFFFF                                                                                  ;
-; Checksum       ; 0x00F1D4F5                                                                                  ;
-+----------------+---------------------------------------------------------------------------------------------+
++---------------------------------------+
+; Assembler Device Options: Mercury.sof ;
++----------------+----------------------+
+; Option         ; Setting              ;
++----------------+----------------------+
+; Device         ; EP3C25Q240C8         ;
+; JTAG usercode  ; 0xFFFFFFFF           ;
+; Checksum       ; 0x00F5FFE6           ;
++----------------+----------------------+
 
 
-+--------------------------------------------------------------------------------------------------------------+
-; Assembler Device Options: C:/Documents and Settings/Kirk/Desktop/openhpsdr/HPSDR Verilog/Mercury/Mercury.pof ;
-+--------------------+-----------------------------------------------------------------------------------------+
-; Option             ; Setting                                                                                 ;
-+--------------------+-----------------------------------------------------------------------------------------+
-; Device             ; EPCS16                                                                                  ;
-; JTAG usercode      ; 0x00000000                                                                              ;
-; Checksum           ; 0x1BB1C1BA                                                                              ;
-; Compression Ratio  ; 1                                                                                       ;
-+--------------------+-----------------------------------------------------------------------------------------+
++---------------------------------------+
+; Assembler Device Options: Mercury.pof ;
++--------------------+------------------+
+; Option             ; Setting          ;
++--------------------+------------------+
+; Device             ; EPCS16           ;
+; JTAG usercode      ; 0x00000000       ;
+; Checksum           ; 0x1BBA951E       ;
+; Compression Ratio  ; 1                ;
++--------------------+------------------+
 
 
-+--------------------------------------------------------------------------------------------------------------+
-; Assembler Device Options: C:/Documents and Settings/Kirk/Desktop/openhpsdr/HPSDR Verilog/Mercury/Mercury.rbf ;
-+---------------------+----------------------------------------------------------------------------------------+
-; Option              ; Setting                                                                                ;
-+---------------------+----------------------------------------------------------------------------------------+
-; Raw Binary File     ;                                                                                        ;
-;  Compression Ratio  ; 1                                                                                      ;
-+---------------------+----------------------------------------------------------------------------------------+
++---------------------------------------+
+; Assembler Device Options: Mercury.rbf ;
++---------------------+-----------------+
+; Option              ; Setting         ;
++---------------------+-----------------+
+; Raw Binary File     ;                 ;
+;  Compression Ratio  ; 1               ;
++---------------------+-----------------+
 
 
 +--------------------+
@@ -126,19 +128,19 @@ applicable agreement for further details.
 +--------------------+
 Info: *******************************************************************
 Info: Running Quartus II Assembler
-    Info: Version 9.0 Build 132 02/25/2009 SJ Web Edition
-    Info: Processing started: Thu Oct 29 11:18:50 2009
+    Info: Version 9.1 Build 350 03/24/2010 Service Pack 2 SJ Web Edition
+    Info: Processing started: Mon Apr 26 00:08:50 2010
 Info: Command: quartus_asm --read_settings_files=off --write_settings_files=off Mercury -c Mercury
-Info: Fitter is using the Classic Timing Analyzer
+Info: Timing-driven compilation is using the Classic Timing Analyzer
 Info: Detected fmax, tsu, tco, and/or tpd requirements -- optimizing circuit to achieve only the specified requirements
 Info: Starting Vectorless Power Activity Estimation
 Info: Completed Vectorless Power Activity Estimation
 Info: Writing out detailed assembly data for power analysis
 Info: Assembler is generating device programming files
 Info: Quartus II Assembler was successful. 0 errors, 0 warnings
-    Info: Peak virtual memory: 284 megabytes
-    Info: Processing ended: Thu Oct 29 11:21:27 2009
-    Info: Elapsed time: 00:02:37
-    Info: Total CPU time (on all processors): 00:02:29
+    Info: Peak virtual memory: 330 megabytes
+    Info: Processing ended: Mon Apr 26 00:09:15 2010
+    Info: Elapsed time: 00:00:25
+    Info: Total CPU time (on all processors): 00:00:05
 
 
