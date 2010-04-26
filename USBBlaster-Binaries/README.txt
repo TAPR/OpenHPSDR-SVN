@@ -10,7 +10,7 @@ Here are the steps requried to progam the EPCS16 on the Mercury board, EPCS4 on 
 1. Download all the files from here
 
 
-	svn://206.216.146.154/svn/repos_sdr_sdr_hpsdr/trunk/USBBlaster-Binaries
+	svn://64.245.179.219/svn/repos_sdr_sdr_hpsdr/trunk/USBBlaster-Binaries
 
 2. Install the Quartus II Programmer application (112MB) from www.altera.com i.e.
 
