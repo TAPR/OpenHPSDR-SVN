@@ -1,6 +1,6 @@
 Flow report for Ozy_Janus
-Thu Oct 22 09:20:38 2009
-Quartus II Version 9.0 Build 132 02/25/2009 SJ Web Edition
+Mon Apr 26 22:58:59 2010
+Quartus II Version 9.1 Build 350 03/24/2010 Service Pack 2 SJ Web Edition
 
 
 ---------------------
@@ -19,7 +19,7 @@ Quartus II Version 9.0 Build 132 02/25/2009 SJ Web Edition
 ----------------
 ; Legal Notice ;
 ----------------
-Copyright (C) 1991-2009 Altera Corporation
+Copyright (C) 1991-2010 Altera Corporation
 Your use of Altera Corporation's design tools, logic functions 
 and other software and tools, and its AMPP partner logic 
 functions, and any output files from any of the foregoing 
@@ -35,27 +35,27 @@ applicable agreement for further details.
 
 
 
-+------------------------------------------------------------------------------+
-; Flow Summary                                                                 ;
-+------------------------------------+-----------------------------------------+
-; Flow Status                        ; Successful - Thu Oct 22 09:20:38 2009   ;
-; Quartus II Version                 ; 9.0 Build 132 02/25/2009 SJ Web Edition ;
-; Revision Name                      ; Ozy_Janus                               ;
-; Top-level Entity Name              ; Ozy_Janus                               ;
-; Family                             ; Cyclone II                              ;
-; Device                             ; EP2C8Q208C8                             ;
-; Timing Models                      ; Final                                   ;
-; Met timing requirements            ; No                                      ;
-; Total logic elements               ; 5,316 / 8,256 ( 64 % )                  ;
-;     Total combinational functions  ; 4,107 / 8,256 ( 50 % )                  ;
-;     Dedicated logic registers      ; 3,331 / 8,256 ( 40 % )                  ;
-; Total registers                    ; 3331                                    ;
-; Total pins                         ; 89 / 138 ( 64 % )                       ;
-; Total virtual pins                 ; 0                                       ;
-; Total memory bits                  ; 114,715 / 165,888 ( 69 % )              ;
-; Embedded Multiplier 9-bit elements ; 0 / 36 ( 0 % )                          ;
-; Total PLLs                         ; 1 / 2 ( 50 % )                          ;
-+------------------------------------+-----------------------------------------+
++-----------------------------------------------------------------------------------+
+; Flow Summary                                                                      ;
++------------------------------------+----------------------------------------------+
+; Flow Status                        ; Successful - Mon Apr 26 22:58:59 2010        ;
+; Quartus II Version                 ; 9.1 Build 350 03/24/2010 SP 2 SJ Web Edition ;
+; Revision Name                      ; Ozy_Janus                                    ;
+; Top-level Entity Name              ; Ozy_Janus                                    ;
+; Family                             ; Cyclone II                                   ;
+; Device                             ; EP2C8Q208C8                                  ;
+; Timing Models                      ; Final                                        ;
+; Met timing requirements            ; No                                           ;
+; Total logic elements               ; 6,154 / 8,256 ( 75 % )                       ;
+;     Total combinational functions  ; 4,507 / 8,256 ( 55 % )                       ;
+;     Dedicated logic registers      ; 4,127 / 8,256 ( 50 % )                       ;
+; Total registers                    ; 4127                                         ;
+; Total pins                         ; 93 / 138 ( 67 % )                            ;
+; Total virtual pins                 ; 0                                            ;
+; Total memory bits                  ; 114,703 / 165,888 ( 69 % )                   ;
+; Embedded Multiplier 9-bit elements ; 0 / 36 ( 0 % )                               ;
+; Total PLLs                         ; 1 / 2 ( 50 % )                               ;
++------------------------------------+----------------------------------------------+
 
 
 +-----------------------------------------+
@@ -63,7 +63,7 @@ applicable agreement for further details.
 +-------------------+---------------------+
 ; Option            ; Setting             ;
 +-------------------+---------------------+
-; Start date & time ; 10/22/2009 09:13:40 ;
+; Start date & time ; 04/26/2010 22:56:47 ;
 ; Main task         ; Compilation         ;
 ; Revision Name     ; Ozy_Janus           ;
 +-------------------+---------------------+
@@ -79,7 +79,7 @@ applicable agreement for further details.
 ; ALLOW_ANY_ROM_SIZE_FOR_RECOGNITION              ; On                                                                                                                                                                                                                           ; Off                            ; --          ; --                ;
 ; ALLOW_ANY_SHIFT_REGISTER_SIZE_FOR_RECOGNITION   ; On                                                                                                                                                                                                                           ; Off                            ; --          ; --                ;
 ; AUTO_SHIFT_REGISTER_RECOGNITION                 ; Always                                                                                                                                                                                                                       ; Auto                           ; --          ; --                ;
-; COMPILER_SIGNATURE_ID                           ; 621001296458.125622802001472                                                                                                                                                                                                 ; --                             ; --          ; --                ;
+; COMPILER_SIGNATURE_ID                           ; 121382191927.127233700712811                                                                                                                                                                                                 ; --                             ; --          ; --                ;
 ; EDA_DESIGN_INSTANCE_NAME                        ; ozy_janus                                                                                                                                                                                                                    ; --                             ; --          ; Altera simulation ;
 ; EDA_NATIVELINK_SIMULATION_TEST_BENCH            ; Altera simulation                                                                                                                                                                                                            ; --                             ; --          ; eda_simulation    ;
 ; EDA_OUTPUT_DATA_FORMAT                          ; Verilog                                                                                                                                                                                                                      ; --                             ; --          ; eda_simulation    ;
@@ -134,28 +134,28 @@ applicable agreement for further details.
 +-------------------------+--------------+-------------------------+---------------------+------------------------------------+
 ; Module Name             ; Elapsed Time ; Average Processors Used ; Peak Virtual Memory ; Total CPU Time (on all processors) ;
 +-------------------------+--------------+-------------------------+---------------------+------------------------------------+
-; Analysis & Synthesis    ; 00:01:28     ; 1.0                     ; 199 MB              ; 00:01:18                           ;
-; Fitter                  ; 00:03:46     ; 1.0                     ; 219 MB              ; 00:03:19                           ;
-; Assembler               ; 00:00:16     ; 1.0                     ; 180 MB              ; 00:00:13                           ;
-; Classic Timing Analyzer ; 00:00:13     ; 1.0                     ; 159 MB              ; 00:00:11                           ;
-; Design Assistant        ; 00:00:18     ; 1.0                     ; 155 MB              ; 00:00:15                           ;
-; EDA Netlist Writer      ; 00:00:25     ; 1.0                     ; 181 MB              ; 00:00:19                           ;
-; Total                   ; 00:06:26     ; --                      ; --                  ; 00:05:35                           ;
+; Analysis & Synthesis    ; 00:00:30     ; 1.0                     ; --                  ; 00:00:29                           ;
+; Fitter                  ; 00:01:11     ; 1.0                     ; --                  ; 00:01:10                           ;
+; Assembler               ; 00:00:03     ; 1.0                     ; --                  ; 00:00:01                           ;
+; Classic Timing Analyzer ; 00:00:03     ; 1.0                     ; --                  ; 00:00:00                           ;
+; Design Assistant        ; 00:00:06     ; 1.0                     ; --                  ; 00:00:06                           ;
+; EDA Netlist Writer      ; 00:00:07     ; 1.0                     ; --                  ; 00:00:07                           ;
+; Total                   ; 00:02:00     ; --                      ; --                  ; 00:01:53                           ;
 +-------------------------+--------------+-------------------------+---------------------+------------------------------------+
 
 
-+---------------------------------------------------------------------------------------+
-; Flow OS Summary                                                                       ;
-+-------------------------+------------------+------------+------------+----------------+
-; Module Name             ; Machine Hostname ; OS Name    ; OS Version ; Processor type ;
-+-------------------------+------------------+------------+------------+----------------+
-; Analysis & Synthesis    ; aloha            ; Windows XP ; 5.1        ; i1586          ;
-; Fitter                  ; aloha            ; Windows XP ; 5.1        ; i1586          ;
-; Assembler               ; aloha            ; Windows XP ; 5.1        ; i1586          ;
-; Classic Timing Analyzer ; aloha            ; Windows XP ; 5.1        ; i1586          ;
-; Design Assistant        ; aloha            ; Windows XP ; 5.1        ; i1586          ;
-; EDA Netlist Writer      ; aloha            ; Windows XP ; 5.1        ; i1586          ;
-+-------------------------+------------------+------------+------------+----------------+
++----------------------------------------------------------------------------------------+
+; Flow OS Summary                                                                        ;
++-------------------------+------------------+-------------+------------+----------------+
+; Module Name             ; Machine Hostname ; OS Name     ; OS Version ; Processor type ;
++-------------------------+------------------+-------------+------------+----------------+
+; Analysis & Synthesis    ; ubuntu           ; Ubuntu 9.10 ; 9          ; i686           ;
+; Fitter                  ; ubuntu           ; Ubuntu 9.10 ; 9          ; i686           ;
+; Assembler               ; ubuntu           ; Ubuntu 9.10 ; 9          ; i686           ;
+; Classic Timing Analyzer ; ubuntu           ; Ubuntu 9.10 ; 9          ; i686           ;
+; Design Assistant        ; ubuntu           ; Ubuntu 9.10 ; 9          ; i686           ;
+; EDA Netlist Writer      ; ubuntu           ; Ubuntu 9.10 ; 9          ; i686           ;
++-------------------------+------------------+-------------+------------+----------------+
 
 
 ------------
