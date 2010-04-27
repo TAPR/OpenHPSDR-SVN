@@ -390,7 +390,7 @@ I2S_xmit #(.DATA_BITS(32))  // CLRCLK running at 48KHz
 	Calculates  ratio = fo/fs = frequency/122.88Mhz where frequency is in MHz
 	Each calculation should take no more than 1 CBCLK
 */
-localparam NR = 3; // number of receivers to implement
+localparam NR = 5; // number of receivers to implement
 
 reg       [31:0] C122_frequency_HZ [0:NR-1];   // frequency control bits for CORDIC
 reg       [31:0] C122_last_freq [0:NR-1];
@@ -422,20 +422,20 @@ generate
     //------------------------------------------------------------------------------
     //                 block RAM based Receiver module
     //------------------------------------------------------------------------------
-    //ram_rcvr Merc_rcv (
-      //control
-      //.rst(C122_rst),
-      //.clk(C122_clk),
-      //.rate({C122_DFS1, C122_DFS0}), //00=48, 01=96, 10=192 kHz
-      //.frequency(C122_sync_phase_word[c]),
-      //.out_strobe(strobe[c]),
-      //input
-      //.in_data(temp_ADC),
-      //output
-      //.out_data_I(rx_I[c]),
-      //.out_data_Q(rx_Q[c])
-      //);
-    receiver Merc_rcv (
+///   ram_rcvr Merc_rcv (
+ //    //control
+ //     .rst(C122_rst),
+ //     .clk(C122_clk),
+ //     .rate({C122_DFS1, C122_DFS0}), //00=48, 01=96, 10=192 kHz
+ //     .frequency(C122_sync_phase_word[c]),
+ //     .out_strobe(strobe[c]),
+ //     //input
+ //     .in_data(temp_ADC),
+ //     //output
+ //     .out_data_I(rx_I[c]),
+ //     .out_data_Q(rx_Q[c])
+ //     );
+    memreceiver Merc_rcv (
       //control
       .clock(C122_clk),
       .rate({C122_DFS1, C122_DFS0}), //00=48, 01=96, 10=192 kHz
