@@ -1,6 +1,6 @@
 EDA Netlist Writer report for Ozy_Janus
-Thu Oct 22 09:20:38 2009
-Quartus II Version 9.0 Build 132 02/25/2009 SJ Web Edition
+Mon Apr 26 22:58:59 2010
+Quartus II Version 9.1 Build 350 03/24/2010 Service Pack 2 SJ Web Edition
 
 
 ---------------------
@@ -17,7 +17,7 @@ Quartus II Version 9.0 Build 132 02/25/2009 SJ Web Edition
 ----------------
 ; Legal Notice ;
 ----------------
-Copyright (C) 1991-2009 Altera Corporation
+Copyright (C) 1991-2010 Altera Corporation
 Your use of Altera Corporation's design tools, logic functions 
 and other software and tools, and its AMPP partner logic 
 functions, and any output files from any of the foregoing 
@@ -36,7 +36,7 @@ applicable agreement for further details.
 +-------------------------------------------------------------------+
 ; EDA Netlist Writer Summary                                        ;
 +---------------------------+---------------------------------------+
-; EDA Netlist Writer Status ; Successful - Thu Oct 22 09:20:38 2009 ;
+; EDA Netlist Writer Status ; Successful - Mon Apr 26 22:58:59 2010 ;
 ; Revision Name             ; Ozy_Janus                             ;
 ; Top-level Entity Name     ; Ozy_Janus                             ;
 ; Family                    ; Cyclone II                            ;
@@ -66,16 +66,16 @@ applicable agreement for further details.
 +---------------------------------------------------------------------------------------------------+--------------------+
 
 
-+------------------------------------------------------------------------------------------------------------------+
-; Simulation Generated Files                                                                                       ;
-+------------------------------------------------------------------------------------------------------------------+
-; Generated Files                                                                                                  ;
-+------------------------------------------------------------------------------------------------------------------+
-; C:/Documents and Settings/Kirk/Desktop/openhpsdr/HPSDR Verilog/OzyJanus/simulation/modelsim/Ozy_Janus.vo         ;
-; C:/Documents and Settings/Kirk/Desktop/openhpsdr/HPSDR Verilog/OzyJanus/simulation/modelsim/Ozy_Janus_fast.vo    ;
-; C:/Documents and Settings/Kirk/Desktop/openhpsdr/HPSDR Verilog/OzyJanus/simulation/modelsim/Ozy_Janus_v.sdo      ;
-; C:/Documents and Settings/Kirk/Desktop/openhpsdr/HPSDR Verilog/OzyJanus/simulation/modelsim/Ozy_Janus_v_fast.sdo ;
-+------------------------------------------------------------------------------------------------------------------+
++---------------------------------------------------------------------------------------------------------+
+; Simulation Generated Files                                                                              ;
++---------------------------------------------------------------------------------------------------------+
+; Generated Files                                                                                         ;
++---------------------------------------------------------------------------------------------------------+
+; /home/bruce/ham/repos_sdr_hpsdr/trunk/W1BW/MercuryNRx/OzyJanus/simulation/modelsim/Ozy_Janus.vo         ;
+; /home/bruce/ham/repos_sdr_hpsdr/trunk/W1BW/MercuryNRx/OzyJanus/simulation/modelsim/Ozy_Janus_fast.vo    ;
+; /home/bruce/ham/repos_sdr_hpsdr/trunk/W1BW/MercuryNRx/OzyJanus/simulation/modelsim/Ozy_Janus_v.sdo      ;
+; /home/bruce/ham/repos_sdr_hpsdr/trunk/W1BW/MercuryNRx/OzyJanus/simulation/modelsim/Ozy_Janus_v_fast.sdo ;
++---------------------------------------------------------------------------------------------------------+
 
 
 +-----------------------------+
@@ -83,16 +83,16 @@ applicable agreement for further details.
 +-----------------------------+
 Info: *******************************************************************
 Info: Running Quartus II EDA Netlist Writer
-    Info: Version 9.0 Build 132 02/25/2009 SJ Web Edition
-    Info: Processing started: Thu Oct 22 09:20:13 2009
+    Info: Version 9.1 Build 350 03/24/2010 Service Pack 2 SJ Web Edition
+    Info: Processing started: Mon Apr 26 22:58:52 2010
 Info: Command: quartus_eda --read_settings_files=off --write_settings_files=off Ozy_Janus -c Ozy_Janus
 Warning: An incorrect timescale is selected for the Verilog Output (.VO) file of this PLL design. It's required that the timescale should be 1 ps when simulating a PLL design in a third party EDA tool.
 Warning: An incorrect timescale is selected for the Verilog Output (.VO) file of this PLL design. It's required that the timescale should be 1 ps when simulating a PLL design in a third party EDA tool.
-Info: Generated files "Ozy_Janus.vo", "Ozy_Janus_fast.vo", "Ozy_Janus_v.sdo" and "Ozy_Janus_v_fast.sdo" in directory "C:/Documents and Settings/Kirk/Desktop/openhpsdr/HPSDR Verilog/OzyJanus/simulation/modelsim/" for EDA simulation tool
+Info: Generated files "Ozy_Janus.vo", "Ozy_Janus_fast.vo", "Ozy_Janus_v.sdo" and "Ozy_Janus_v_fast.sdo" in directory "/home/bruce/ham/repos_sdr_hpsdr/trunk/W1BW/MercuryNRx/OzyJanus/simulation/modelsim/" for EDA simulation tool
 Info: Quartus II EDA Netlist Writer was successful. 0 errors, 2 warnings
-    Info: Peak virtual memory: 181 megabytes
-    Info: Processing ended: Thu Oct 22 09:20:40 2009
-    Info: Elapsed time: 00:00:27
-    Info: Total CPU time (on all processors): 00:00:21
+    Info: Peak virtual memory: 203 megabytes
+    Info: Processing ended: Mon Apr 26 22:58:59 2010
+    Info: Elapsed time: 00:00:07
+    Info: Total CPU time (on all processors): 00:00:07
 
 
