@@ -158,10 +158,10 @@ fprintf(stderr,"client_thread: listening on port %d\n",port);
             fprintf(stderr,"%02d/%02d/%02d %02d:%02d:%02d client connection from %s:%d\n",tod->tm_mday,tod->tm_mon+1,tod->tm_year+1900,tod->tm_hour,tod->tm_min,tod->tm_sec,inet_ntoa(client.sin_addr),ntohs(client.sin_port));
 
 
+            // set timeout on receive
             struct timeval tv;
             tv.tv_sec=3;
             tv.tv_usec=0;
-
             rc=setsockopt(clientSocket, SOL_SOCKET, SO_RCVTIMEO,(char *)&tv,sizeof tv);
 
             client_terminate=0;
@@ -283,7 +283,7 @@ void client_send_samples(int size) {
     int rc;
     if(clientSocket!=-1) {
         sem_wait(&network_semaphore);
-            rc=send(clientSocket,client_samples,size+PREFIX,0);
+            rc=send(clientSocket,client_samples,size+PREFIX,MSG_NOSIGNAL);
             if(rc<0) {
                 // perror("client_send_samples failed");
             }
