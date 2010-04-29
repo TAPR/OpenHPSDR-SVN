@@ -11,6 +11,7 @@
 
 package jmonitor;
 
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.DecimalFormat;
@@ -28,7 +29,9 @@ public class ControlPanel extends javax.swing.JPanel {
     /** Creates new form ControlPanel */
     public ControlPanel() {
         initComponents();
-        
+
+        vfo.setCaretColor(Color.WHITE);
+    
         createLSBFilterMenu();
         createBandMenu();
         createModeMenu();
@@ -42,11 +45,18 @@ public class ControlPanel extends javax.swing.JPanel {
     }
 
     public void update() {
-        long f=client.getFrequency();
-        String fString=mhzFormat.format(f/1000000)+"."+khzFormat.format(f%1000000);
 
-        vfo.setText(fString);
-        mode.setText(client.getStringMode());
+        if(client.getFrequency()!=frequency) {
+            frequency=client.getFrequency();
+            String fString=mhzFormat.format(frequency/1000000)+"."+khzFormat.format(frequency%1000000);
+            vfo.setText(fString);
+        }
+
+        if(!modeString.equals(client.getStringMode())) {
+            modeString=client.getStringMode();
+            mode.setText(client.getStringMode());
+        }
+        
         digitalMeter.update(client.getMeter());
 
     }
@@ -102,7 +112,6 @@ public class ControlPanel extends javax.swing.JPanel {
         add(modeButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 30, 90, -1));
 
         vfo.setBackground(new java.awt.Color(0, 0, 0));
-        vfo.setEditable(false);
         vfo.setFont(new java.awt.Font("FreeMono", 1, 24)); // NOI18N
         vfo.setForeground(new java.awt.Color(0, 255, 0));
         vfo.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
@@ -549,11 +558,14 @@ public class ControlPanel extends javax.swing.JPanel {
 
     private void vfoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_vfoActionPerformed
         // user has entered a frequency
-        String s=vfo.getText();
-
-        long f=Long.parseLong(s);
-
-        client.setFrequency(f);
+        String s=vfo.getText().replace(".","");
+        try {
+            long f=Long.parseLong(s);
+            client.setFrequency(f);
+        } catch (Exception e) {
+            // force repaint
+            frequency=0L;
+        }
     }//GEN-LAST:event_vfoActionPerformed
 
     private void afgainButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_afgainButtonActionPerformed
@@ -1457,6 +1469,9 @@ public class ControlPanel extends javax.swing.JPanel {
     private JRadioButtonMenuItem am;
     private JRadioButtonMenuItem sam;
 
+    private long frequency;
+    private String modeString="";
+    
     private DecimalFormat mhzFormat=new DecimalFormat("####0");
     private DecimalFormat khzFormat=new DecimalFormat("000000");
 
