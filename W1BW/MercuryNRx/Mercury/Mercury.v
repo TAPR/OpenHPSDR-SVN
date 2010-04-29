@@ -390,7 +390,7 @@ I2S_xmit #(.DATA_BITS(32))  // CLRCLK running at 48KHz
 	Calculates  ratio = fo/fs = frequency/122.88Mhz where frequency is in MHz
 	Each calculation should take no more than 1 CBCLK
 */
-localparam NR = 5; // number of receivers to implement
+localparam NR = 4; // number of receivers to implement
 
 reg       [31:0] C122_frequency_HZ [0:NR-1];   // frequency control bits for CORDIC
 reg       [31:0] C122_last_freq [0:NR-1];
