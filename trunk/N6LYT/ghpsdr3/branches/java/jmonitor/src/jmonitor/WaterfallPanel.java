@@ -57,7 +57,7 @@ public class WaterfallPanel extends javax.swing.JPanel {
         if(v<0) v=0;
         if(v>255) v=255;
 
-        int pixel=(255<<24)+(v<<16)+/*(v<<8)+*/v;
+        int pixel=(255<<24)+(v<<16)+(v<<8)+v;
         return pixel;
     }
 
