@@ -153,9 +153,9 @@ fprintf(stderr,"client_thread: listening on port %d\n",port);
             struct tm *tod;
             time(&tt);
             tod=localtime(&tt);
-            fprintf(stdout,"wget -O - http://api.hostip.info/get_html.php?ip=%s\n",inet_ntoa(client.sin_addr));
+            //fprintf(stdout,"wget -O - http://api.hostip.info/get_html.php?ip=%s\n",inet_ntoa(client.sin_addr));
             fflush(stdout);
-            fprintf(stderr,"%02d/%02d/%02d %02d:%02d:%02d client connection from %s:%d\n",tod->tm_mday,tod->tm_mon+1,tod->tm_year+1900,tod->tm_hour,tod->tm_min,tod->tm_sec,inet_ntoa(client.sin_addr),ntohs(client.sin_port));
+            fprintf(stderr,"%02d/%02d/%02d %02d:%02d:%02d RX%d: client connection from %s:%d\n",tod->tm_mday,tod->tm_mon+1,tod->tm_year+1900,tod->tm_hour,tod->tm_min,tod->tm_sec,receiver,inet_ntoa(client.sin_addr),ntohs(client.sin_port));
 
 
             // set timeout on receive
@@ -186,67 +186,107 @@ fprintf(stderr,"client_thread: listening on port %d\n",port);
                     if(strcmp(token,"getSpectrum")==0) {
                         int samples;
                         token=strtok(NULL," ");
-                        samples=atoi(token);
-                        Process_Panadapter(0,spectrumBuffer);
-                        meter=CalculateRXMeter(0,0,0)+multimeterCalibrationOffset+getFilterSizeCalibrationOffset();
-                        client_samples=malloc(PREFIX+samples);
-                        client_set_samples(spectrumBuffer,samples);
-                        client_send_samples(samples);
-                        free(client_samples);
+                        if(token!=NULL) {
+                            samples=atoi(token);
+                            Process_Panadapter(0,spectrumBuffer);
+                            meter=CalculateRXMeter(0,0,0)+multimeterCalibrationOffset+getFilterSizeCalibrationOffset();
+                            client_samples=malloc(PREFIX+samples);
+                            client_set_samples(spectrumBuffer,samples);
+                            client_send_samples(samples);
+                            free(client_samples);
+                        } else {
+                            fprintf(stderr,"Invalid command: '%s'\n",message);
+                        }
                     } else if(strcmp(token,"setFrequency")==0) {
                         long long frequency;
                         token=strtok(NULL," ");
-                        frequency=atoll(token);
-                        ozySetFrequency(frequency);
+                        if(token!=NULL) {
+                            frequency=atoll(token);
+                            ozySetFrequency(frequency);
+                        } else {
+                            fprintf(stderr,"Invalid command: '%s'\n",message);
+                        }
                     } else if(strcmp(token,"setMode")==0) {
                         int mode;
                         token=strtok(NULL," ");
-                        mode=atoi(token);
-                        SetMode(0,0,mode);
+                        if(token!=NULL) {
+                            mode=atoi(token);
+                            SetMode(0,0,mode);
+                        } else {
+                            fprintf(stderr,"Invalid command: '%s'\n",message);
+                        }
                     } else if(strcmp(token,"setFilter")==0) {
                         int low,high;
                         token=strtok(NULL," ");
-                        low=atoi(token);
-                        token=strtok(NULL," ");
-                        high=atoi(token);
-                        SetRXFilter(0,0,(double)low,(double)high);
+                        if(token!=NULL) {
+                            low=atoi(token);
+                            token=strtok(NULL," ");
+                            if(token!=NULL) {
+                              high=atoi(token);
+                              SetRXFilter(0,0,(double)low,(double)high);
+                            } else {
+                                fprintf(stderr,"Invalid command: '%s'\n",message);
+                            }
+                        } else {
+                            fprintf(stderr,"Invalid command: '%s'\n",message);
+                        }
                     } else if(strcmp(token,"setAGC")==0) {
                         int agc;
                         token=strtok(NULL," ");
-                        agc=atoi(token);
-                        SetRXAGC(0,0,agc);
+                        if(token!=NULL) {
+                            agc=atoi(token);
+                            SetRXAGC(0,0,agc);
+                        } else {
+                            fprintf(stderr,"Invalid command: '%s'\n",message);
+                        }
                     } else if(strcmp(token,"setNR")==0) {
                         int nr;
                         token=strtok(NULL," ");
-                        if(strcmp(token,"true")==0) {
-                            nr=1;
+                        if(token!=NULL) {
+                            if(strcmp(token,"true")==0) {
+                                nr=1;
+                            } else {
+                                nr=0;
+                            }
+                            SetNR(0,0,nr);
                         } else {
-                            nr=0;
+                            fprintf(stderr,"Invalid command: '%s'\n",message);
                         }
-                        SetNR(0,0,nr);
                     } else if(strcmp(token,"setNB")==0) {
                         int nb;
                         token=strtok(NULL," ");
-                        if(strcmp(token,"true")==0) {
-                            nb=1;
+                        if(token!=NULL) {
+                            if(strcmp(token,"true")==0) {
+                                nb=1;
+                            } else {
+                                nb=0;
+                            }
+                            SetNB(0,0,nb);
                         } else {
-                            nb=0;
+                            fprintf(stderr,"Invalid command: '%s'\n",message);
                         }
-                        SetNB(0,0,nb);
                     } else if(strcmp(token,"setANF")==0) {
                         int anf;
                         token=strtok(NULL," ");
-                        if(strcmp(token,"true")==0) {
-                            anf=1;
+                        if(token!=NULL) {
+                            if(strcmp(token,"true")==0) {
+                                anf=1;
+                            } else {
+                                anf=0;
+                            }
+                            SetANF(0,0,anf);
                         } else {
-                            anf=0;
+                            fprintf(stderr,"Invalid command: '%s'\n",message);
                         }
-                        SetANF(0,0,anf);
                     } else if(strcmp(token,"SetRXOutputGain")==0) {
                         int gain;
                         token=strtok(NULL," ");
-                        gain=atoi(token);
-                        SetRXOutputGain(0,0,(double)gain/100.0);
+                        if(token!=NULL) {
+                            gain=atoi(token);
+                            SetRXOutputGain(0,0,(double)gain/100.0);
+                        } else {
+                            fprintf(stderr,"Invalid command: '%s'\n",message);
+                        }
                     } else if(strcmp(token,"startAudioStream")==0) {
                         token=strtok(NULL," ");
                         if(token==NULL) {
@@ -258,23 +298,26 @@ fprintf(stderr,"client_thread: listening on port %d\n",port);
                         audio_buffer=malloc(audio_buffer_size+PREFIX);
                         audio_stream_reset();
                         send_audio=1;
-fprintf(stderr,"startAudioStream %d send_audio=%d\n",audio_buffer_size,send_audio);
+//fprintf(stderr,"startAudioStream %d send_audio=%d\n",audio_buffer_size,send_audio);
                     } else if(strcmp(token,"stopAudioStream")==0) {
                         send_audio=0;
-fprintf(stderr,"stopAudioStream send_audio=%d\n",send_audio);
+//fprintf(stderr,"stopAudioStream send_audio=%d\n",send_audio);
+                    } else {
+                        fprintf(stderr,"Invalid command: '%s'\n",message);
                     }
                 } else {
+                    fprintf(stderr,"Invalid command: '%s'\n",message);
                 }
             }
 
             close(clientSocket);
             time(&tt);
             tod=localtime(&tt);
-            fprintf(stderr,"%02d/%02d/%02d %02d:%02d:%02d client disconnected from %s:%d\n",tod->tm_mday,tod->tm_mon+1,tod->tm_year+1900,tod->tm_hour,tod->tm_min,tod->tm_sec,inet_ntoa(client.sin_addr),ntohs(client.sin_port));
+            fprintf(stderr,"%02d/%02d/%02d %02d:%02d:%02d RX%d: client disconnected from %s:%d\n",tod->tm_mday,tod->tm_mon+1,tod->tm_year+1900,tod->tm_hour,tod->tm_min,tod->tm_sec,receiver,inet_ntoa(client.sin_addr),ntohs(client.sin_port));
         }
         send_audio=0;
         clientSocket=-1;
-fprintf(stderr,"client disconnected send_audio=%d\n",send_audio);
+//fprintf(stderr,"client disconnected send_audio=%d\n",send_audio);
 
     }
 }
