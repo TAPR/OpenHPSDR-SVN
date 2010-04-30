@@ -23,6 +23,7 @@ Boston, MA  02110-1301, USA.
 
 
 module memreceiver(
+
   input clock,                  //122.88 MHz
   input [1:0] rate,             //00=48, 01=96, 10=192 kHz
   input [31:0] frequency,
@@ -34,6 +35,8 @@ module memreceiver(
   output [23:0] out_data_Q
   );
 
+parameter INITIAL_STAGES = 3;
+   
 wire signed [21:0] cordic_outdata_I;
 wire signed [21:0] cordic_outdata_Q;
 
@@ -82,7 +85,7 @@ wire cic_outstrobe_1;
 wire signed [23:0] cic_outdata_I1;
 wire signed [23:0] cic_outdata_Q1;
 // Decimation can be 32, 64, or 128.  Bit growth is log2(128) * 3 stages == 21
-varcic #(.STAGES(3), .DECIMATION(32), .IN_WIDTH(22), .ACC_WIDTH(22+21), .OUT_WIDTH(24))
+varcic #(.STAGES(INITIAL_STAGES), .DECIMATION(32), .IN_WIDTH(22), .ACC_WIDTH(22+7*INITIAL_STAGES), .OUT_WIDTH(24))
   varcic_inst_I1(
     .clock(clock),
     .in_strobe(1'b1),
@@ -94,7 +97,7 @@ varcic #(.STAGES(3), .DECIMATION(32), .IN_WIDTH(22), .ACC_WIDTH(22+21), .OUT_WID
 
 
 //Q channel
-varcic #(.STAGES(3), .DECIMATION(32), .IN_WIDTH(22), .ACC_WIDTH(22+21), .OUT_WIDTH(24))
+varcic #(.STAGES(INITIAL_STAGES), .DECIMATION(32), .IN_WIDTH(22), .ACC_WIDTH(22+7*INITIAL_STAGES), .OUT_WIDTH(24))
   varcic_inst_Q1(
     .clock(clock),
     .in_strobe(1'b1),

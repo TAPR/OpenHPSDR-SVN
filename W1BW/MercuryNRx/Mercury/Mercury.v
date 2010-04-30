@@ -435,7 +435,8 @@ generate
  //     .out_data_I(rx_I[c]),
  //     .out_data_Q(rx_Q[c])
  //     );
-    memreceiver Merc_rcv (
+    memreceiver #(.INITIAL_STAGES(6))
+      Merc_rcv (
       //control
       .clock(C122_clk),
       .rate({C122_DFS1, C122_DFS0}), //00=48, 01=96, 10=192 kHz

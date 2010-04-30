@@ -1,14 +1,14 @@
-Fitter Status : Successful - Wed Apr 28 20:40:35 2010
+Fitter Status : Successful - Wed Apr 28 23:38:00 2010
 Quartus II Version : 9.1 Build 350 03/24/2010 SP 2 SJ Web Edition
 Revision Name : Mercury
 Top-level Entity Name : Mercury
 Family : Cyclone III
 Device : EP3C25Q240C8
 Timing Models : Final
-Total logic elements : 19,050 / 24,624 ( 77 % )
-    Total combinational functions : 16,428 / 24,624 ( 67 % )
-    Dedicated logic registers : 11,308 / 24,624 ( 46 % )
-Total registers : 11308
+Total logic elements : 23,414 / 24,624 ( 95 % )
+    Total combinational functions : 20,508 / 24,624 ( 83 % )
+    Dedicated logic registers : 17,308 / 24,624 ( 70 % )
+Total registers : 17308
 Total pins : 77 / 149 ( 52 % )
 Total virtual pins : 0
 Total memory bits : 157,299 / 608,256 ( 26 % )
