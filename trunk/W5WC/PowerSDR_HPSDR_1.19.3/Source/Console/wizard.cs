@@ -1525,7 +1525,6 @@ namespace PowerSDR
                 case Model.HERMES:
                     break;
                 case Model.HPSDR:
-                    console.SetupForm.CurrentModel = model;
                     console.SetupForm.PenelopePresent = penelope_present;
                     console.SetupForm.MercuryPresent = mercury_present;
                     console.SetupForm.AlexPresent = alex_present;
@@ -1602,7 +1601,7 @@ namespace PowerSDR
 					break;
 			}
 
-
+            console.SetupForm.CurrentModel = model;
 			ArrayList a = new ArrayList();
 			a.Add("SetupWizard/1");
 			DB.SaveVars("State", ref a);
