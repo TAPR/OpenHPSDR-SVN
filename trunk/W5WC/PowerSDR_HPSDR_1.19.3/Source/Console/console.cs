@@ -27,7 +27,7 @@
 //=================================================================
 
 //
-// SoftRock Modifications Copyright (C) 2005, 2006, 2007 Bill Tracey (kd5tfd)
+// SoftRock and HPSDR Modifications Copyright (C) 2005, 2006, 2007, 2008 Bill Tracey (kd5tfd)
 //
 
 //#define INTERLEAVED
@@ -931,8 +931,7 @@ namespace PowerSDR
 		private System.Windows.Forms.CheckBoxTS chkRXEQ;
 		private System.Windows.Forms.CheckBoxTS chkTXEQ;
 		private System.Windows.Forms.Button button1;
-		private System.Windows.Forms.MenuItem mnuMixer;
-		private System.Windows.Forms.CheckBoxTS chkBCI;
+        private System.Windows.Forms.MenuItem mnuMixer;
 		private System.Windows.Forms.MenuItem mnuAntenna;
 		private System.ComponentModel.IContainer components;
 		private System.Windows.Forms.MenuItem mnuATU;
@@ -1105,6 +1104,7 @@ namespace PowerSDR
         private RadioButtonTS radDisplayZoom1x;
         private CheckBoxTS chkFWCATUBypass;
         private CheckBoxTS chkFWCATU;
+        private CheckBoxTS chkBCI;
 		private System.Windows.Forms.CheckBoxTS chkFullDuplex;
 
 		#endregion
@@ -1370,7 +1370,7 @@ namespace PowerSDR
 				}
 			}
 
-			if(this.Text.IndexOf("SVN") >= 0)
+			/*if(this.Text.IndexOf("SVN") >= 0) //w5wc
 			{
 				if(File.Exists(Application.StartupPath+"\\.svn\\entries"))
 				{
@@ -1393,7 +1393,7 @@ namespace PowerSDR
 					{
 						// do nothing
 					}
-				}
+				}*/
 				
 				if(show_alpha_warning)
 				{
@@ -1401,14 +1401,14 @@ namespace PowerSDR
 					form.ShowDialog();				
 				}
 
-                if (show_mobile_warning)
+               /* if (show_mobile_warning)
                 {
                     MobileWarnForm form = new MobileWarnForm(this);
                     form.ShowDialog();
-                }
+                }*/ //w5wc
 
-				mnuReportBug.Visible = false;
-			}
+				mnuReportBug.Visible = false; //w5wc = true;
+			//}
 
 			if(run_setup_wizard)
 			{
@@ -1705,7 +1705,6 @@ namespace PowerSDR
             this.chkFullDuplex = new System.Windows.Forms.CheckBoxTS();
             this.btnTuneStepChangeLarger = new System.Windows.Forms.ButtonTS();
             this.btnTuneStepChangeSmaller = new System.Windows.Forms.ButtonTS();
-            this.chkBCI = new System.Windows.Forms.CheckBoxTS();
             this.chkSplitDisplay = new System.Windows.Forms.CheckBoxTS();
             this.comboDisplayModeTop = new System.Windows.Forms.ComboBoxTS();
             this.comboDisplayModeBottom = new System.Windows.Forms.ComboBoxTS();
@@ -1755,6 +1754,7 @@ namespace PowerSDR
             this.radDisplayZoom4x = new System.Windows.Forms.RadioButtonTS();
             this.radDisplayZoom2x = new System.Windows.Forms.RadioButtonTS();
             this.radDisplayZoom1x = new System.Windows.Forms.RadioButtonTS();
+            this.chkBCI = new System.Windows.Forms.CheckBoxTS();
             this.picSquelch = new System.Windows.Forms.PictureBox();
             this.button1 = new System.Windows.Forms.Button();
             this.picRX2Squelch = new System.Windows.Forms.PictureBox();
@@ -2620,9 +2620,7 @@ namespace PowerSDR
             // chkSR
             // 
             resources.ApplyResources(this.chkSR, "chkSR");
-            this.chkSR.BackColor = System.Drawing.Color.Yellow;
-            this.chkSR.Checked = true;
-            this.chkSR.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkSR.BackColor = System.Drawing.Color.Transparent;
             this.chkSR.FlatAppearance.BorderSize = 0;
             this.chkSR.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.chkSR.Image = null;
@@ -3433,16 +3431,6 @@ namespace PowerSDR
             this.toolTip1.SetToolTip(this.btnTuneStepChangeSmaller, resources.GetString("btnTuneStepChangeSmaller.ToolTip"));
             this.btnTuneStepChangeSmaller.Click += new System.EventHandler(this.btnChangeTuneStepSmaller_Click);
             // 
-            // chkBCI
-            // 
-            resources.ApplyResources(this.chkBCI, "chkBCI");
-            this.chkBCI.FlatAppearance.BorderSize = 0;
-            this.chkBCI.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.chkBCI.Image = null;
-            this.chkBCI.Name = "chkBCI";
-            this.toolTip1.SetToolTip(this.chkBCI, resources.GetString("chkBCI.ToolTip"));
-            this.chkBCI.CheckedChanged += new System.EventHandler(this.chkBCI_CheckedChanged);
-            // 
             // chkSplitDisplay
             // 
             resources.ApplyResources(this.chkSplitDisplay, "chkSplitDisplay");
@@ -4056,6 +4044,18 @@ namespace PowerSDR
             this.radDisplayZoom1x.UseVisualStyleBackColor = true;
             this.radDisplayZoom1x.CheckedChanged += new System.EventHandler(this.radDisplayZoom1x_CheckedChanged);
             // 
+            // chkBCI
+            // 
+            resources.ApplyResources(this.chkBCI, "chkBCI");
+            this.chkBCI.BackColor = System.Drawing.Color.Transparent;
+            this.chkBCI.FlatAppearance.BorderSize = 0;
+            this.chkBCI.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.chkBCI.Image = null;
+            this.chkBCI.Name = "chkBCI";
+            this.toolTip1.SetToolTip(this.chkBCI, resources.GetString("chkBCI.ToolTip"));
+            this.chkBCI.UseVisualStyleBackColor = false;
+            this.chkBCI.CheckedChanged += new System.EventHandler(this.chkBCI_CheckedChanged);
+            // 
             // picSquelch
             // 
             this.picSquelch.BackColor = System.Drawing.SystemColors.ControlText;
@@ -4145,6 +4145,7 @@ namespace PowerSDR
             // 
             resources.ApplyResources(this.panelOptions, "panelOptions");
             this.panelOptions.BackColor = System.Drawing.Color.Transparent;
+            this.panelOptions.Controls.Add(this.chkSR);
             this.panelOptions.Controls.Add(this.chkFWCATU);
             this.panelOptions.Controls.Add(this.ckQuickPlay);
             this.panelOptions.Controls.Add(this.chkMON);
@@ -4441,7 +4442,7 @@ namespace PowerSDR
             // 
             resources.ApplyResources(this.panelDSP, "panelDSP");
             this.panelDSP.BackColor = System.Drawing.Color.Transparent;
-            this.panelDSP.Controls.Add(this.chkSR);
+            this.panelDSP.Controls.Add(this.chkBCI);
             this.panelDSP.Controls.Add(this.chkNR);
             this.panelDSP.Controls.Add(this.chkDSPNB2);
             this.panelDSP.Controls.Add(this.chkBIN);
@@ -5626,7 +5627,6 @@ namespace PowerSDR
             this.Controls.Add(this.lblRX2RF);
             this.Controls.Add(this.grpRX2Meter);
             this.Controls.Add(this.grpDisplaySplit);
-            this.Controls.Add(this.chkBCI);
             this.Controls.Add(this.picSquelch);
             this.Controls.Add(this.grpVFOBetween);
             this.Controls.Add(this.grpMultimeter);
@@ -6339,12 +6339,6 @@ namespace PowerSDR
                         case "--no-firmware-version-check":
                             this.Text = this.Text + " NoFWVerCheck";
                             JanusAudio.forceFWGood = true;
-                            break;
-
-
-                        case "--5kFMxmitDev":
-                            this.Text = this.Text + " 5kFMTX";
-                            radio.GetDSPTX(0).TXFMDeviation = 5000.0;
                             break;
 
                         case "--Atlas10MHz":
@@ -14376,7 +14370,7 @@ namespace PowerSDR
                     num2 += DttSP.CalculateRXMeter(0, 0, DttSP.MeterType.SIGNAL_STRENGTH);
                     Thread.Sleep(50);
                     if (!progress.Visible)
-                        goto end3;
+                        goto end4;
                     else progress.SetPercent((float)((float)++counter / progress_divisor));
                 }
                 avg2 = num2 / 50.0f;
@@ -14398,7 +14392,7 @@ namespace PowerSDR
                         num2 += DttSP.CalculateRXMeter(0, 0, DttSP.MeterType.SIGNAL_STRENGTH);
                         Thread.Sleep(50);
                         if (!progress.Visible)
-                            goto end3;
+                            goto end4;
                         else progress.SetPercent((float)((float)++counter / progress_divisor));
                     }
                     avg2 = num2 / 50.0f;
@@ -14417,7 +14411,7 @@ namespace PowerSDR
                         num2 += DttSP.CalculateRXMeter(0, 0, DttSP.MeterType.SIGNAL_STRENGTH);
                         Thread.Sleep(50);
                         if (!progress.Visible)
-                            goto end3;
+                            goto end4;
                         else progress.SetPercent((float)((float)++counter / progress_divisor));
                     }
                     avg2 = num2 / 50.0f;
@@ -14470,7 +14464,7 @@ namespace PowerSDR
                     Thread.Sleep(100);
 
                     if (!progress.Visible)
-                        goto end;
+                        goto end4;
                     else progress.SetPercent((float)((float)++counter / progress_divisor));
                 }
                 avg2 = num2 / 20.0f;
@@ -14495,7 +14489,7 @@ namespace PowerSDR
 
                 ret_val = true;
 
-            end4: // #1
+            end4: 
                 if (!progress.Visible) progress.Text = "";
             progress.Hide();
             EnableAllFilters();
@@ -14539,913 +14533,13 @@ namespace PowerSDR
 
             break;
 
-                #region SDRX
-                /*case Model.SDRX:
-			
-						if(!fwc_init) return false;
-						rx_only = SetupForm.RXOnly;					// Save RX Only Setting
-						SetupForm.RXOnly = true;
-
-						rit_on = chkRIT.Checked;						// save current RIT On
-						chkRIT.Checked = false;								// turn RIT off
-						rit_val = (int)udRIT.Value;						// save current RIT value
-
-						vfoa = VFOAFreq;								// save current VFOA
-
-						polyphase = SetupForm.Polyphase;				// save current polyphase setting
-						SetupForm.Polyphase = false;						// disable polyphase
-
-						dsp_buf_size = SetupForm.DSPBufferSize;			// save current DSP buffer size
-						SetupForm.DSPBufferSize = 4096;						// set DSP Buffer Size to 2048
-
-						filter = RX1Filter;						// save current filter
-
-						dsp_mode = current_dsp_mode;				// save current DSP demod mode
-						CurrentDSPMode = DSPMode.AM;						// set mode to AM
-
-						VFOAFreq = freq;									// set VFOA frequency
-				
-						am_filter = RX1Filter;					// save current AM filter
-						RX1Filter = Filter.F1;							// set filter to 500Hz
-
-						bool fwc_preamp = fwc_preamp_on;						// save current preamp mode
-						FWCPreampOn = false;								// turn preamp off
-
-						bool att_on = fwc_att_on;							// save current atten on
-						FWCATTOn = false;									// turn atten off
-
-						int att_val = fwc_att_val;							// save current atten val
-						FWCATTVal = 0;										// set atten val to 0dB
-
-						rx_meter = CurrentMeterRXMode;			// save current RX Meter mode
-						CurrentMeterRXMode = MeterRXMode.OFF;				// turn RX Meter off
-
-						display_avg = chkDisplayAVG.Checked;			// save current average state
-						chkDisplayAVG.Checked = false;
-						chkDisplayAVG.Checked = true;						// set average state to off
-
-						old_multimeter_cal = rx1_meter_cal_offset;
-						old_display_cal = display_cal_offset;
-
-						comboPreamp.Enabled = false;
-						comboDisplayMode.Enabled = false;
-						comboMeterRXMode.Enabled = false;
-
-						progress.SetPercent(0.0f);
-						counter = 0;
-
-						Thread.Sleep(2000);
-						btnZeroBeat_Click(this, EventArgs.Empty);
-						RX1Filter = Filter.F6;
-						chkDisplayAVG.Checked = false;
-						Thread.Sleep(200);
-
-						DisableAllFilters();
-						DisableAllModes();
-						VFOLock = true;
-
-						fixed(float* ptr = &a[0])
-							DttSP.GetSpectrum(0, ptr);		// get the spectrum values
-
-						max = float.MinValue;
-						avg = 0;
-						max_index = 0;
-
-						for(int i=0; i<4095; i++)						// find the maximum signal
-						{
-							avg += a[i];
-							if(a[i] > max)
-							{
-								max = a[i];
-								max_index = i;
-							}
-						}
-						avg -= max;
-						avg /= 4095;
-
-						if(max < (avg + 30))
-						{
-							MessageBox.Show("Peak is less than 30dB from the noise floor.  " +
-								"Please use a larger signal for frequency calibration.",
-								"Calibration Error - Weak Signal",
-								MessageBoxButtons.OK,
-								MessageBoxIcon.Error);
-							ret_val = false;
-							goto end;
-						}
-
-						rx1_meter_cal_offset = 0.0f;
-						DisplayCalOffset = 0.0f;
-						num=0.0f; num2=0.0f; avg2=0.0f;
-						avg=0.0f;
-						// get the value of the signal strength meter
-						for(int i=0; i<50; i++)
-						{
-							num += DttSP.CalculateRXMeter(0, 0, DttSP.MeterType.SIGNAL_STRENGTH);
-							Thread.Sleep(50);
-							if(!progress.Visible)
-								goto end;
-							else progress.SetPercent((float)((float)++counter/760));
-						}
-						avg = num / 50.0f;
-
-						FWCPreampOn = true;
-						Thread.Sleep(100);
-									
-						// get the value of the signal strength meter
-						num2=0.0f;
-						for(int i=0; i<50; i++)
-						{
-							num2 += DttSP.CalculateRXMeter(0, 0, DttSP.MeterType.SIGNAL_STRENGTH);
-							Thread.Sleep(50);
-							if(!progress.Visible)
-								goto end3;
-							else progress.SetPercent((float)((float)++counter/760));
-						}
-						avg2 = num2 / 50.0f;
-
-						fwc_preamp_offset = avg2 - avg;
-
-						FWCPreampOn = false;
-						FWCATTOn = true;
-						for(int j=0; j<32; j++)
-						{
-							FWCATTVal = j;
-							Thread.Sleep(100);
-
-							// get the value of the signal strength meter
-							num2=0.0f;
-							for(int i=0; i<20; i++)
-							{
-								num2 += DttSP.CalculateRXMeter(0, 0, DttSP.MeterType.SIGNAL_STRENGTH);
-								Thread.Sleep(50);
-								if(!progress.Visible)
-									goto end3;
-								else progress.SetPercent((float)((float)++counter/760));
-							}
-							avg2 = num2 / 20.0f;
-							fwc_att_offset[j] = avg2 - avg;
-						}
-						FWCATTOn = false;
-
-						num2 = 0.0f;
-						for(int i=0; i<20; i++)
-						{
-							fixed(float* ptr = &a[0])
-								DttSP.GetSpectrum(0, ptr);		// read again to clear out changed DSP
-
-							max = float.MinValue;						// find the max spectrum value
-							for(int j=0; j<Display.BUFFER_SIZE; j++)
-								if(a[j] > max) max = a[j];
-
-							num2 += max;
-
-							Thread.Sleep(100);
-
-							if(!progress.Visible)
-								goto end3;
-							else progress.SetPercent((float)((float)++counter/760));
-						}
-						avg2 = num2 / 20.0f;
-
-						// calculate the difference between the current value and the correct multimeter value
-						diff = level - (avg + rx1_meter_cal_offset);
-						rx1_meter_cal_offset = diff;
-
-						// calculate the difference between the current value and the correct spectrum value
-						diff = level - (avg2 + DisplayCalOffset);
-						DisplayCalOffset = diff - 1.6f;
-
-						UpdateDisplayOffset();
-
-						ret_val = true;
-
-					end3: //#2
-						progress.Hide();
-						EnableAllFilters();
-						EnableAllModes();
-						VFOLock = false;
-						comboPreamp.Enabled = true;
-						comboDisplayMode.Enabled = true;
-						comboMeterRXMode.Enabled = true;
-
-						if(ret_val == false)
-						{
-							rx1_meter_cal_offset = old_multimeter_cal;
-							display_cal_offset = old_display_cal;
-						}
-
-						chkRIT.Checked = rit_on;							// restore RIT on
-						udRIT.Value = rit_val;								// restore RIT value
-						SetupForm.RXOnly = rx_only;							// restore RX Only			
-						DisplayAVG = display_avg;							// restore AVG value
-						FWCPreampOn = fwc_preamp;							// restore preamp value
-						FWCATTOn = att_on;									// restore ATT on
-						FWCATTVal = att_val;								// restore ATT val
-						RX1Filter = am_filter;							// restore AM filter
-						CurrentDSPMode = dsp_mode;							// restore DSP mode
-						RX1Filter = filter;								// restore filter
-						if(dsp_buf_size != 4096)
-							chkPower.Checked = false;						// go to standby
-						SetupForm.DSPBufferSize = dsp_buf_size;				// restore DSP Buffer Size
-						VFOAFreq = vfoa;									// restore vfo frequency
-						if(dsp_buf_size != 4096)
-						{
-							Thread.Sleep(100);
-							chkPower.Checked = true;
-						}
-						CurrentMeterRXMode = rx_meter;						// restore RX Meter mode
-						SetupForm.Polyphase = polyphase;					// restore polyphase
-
-						//			Debug.WriteLine("rx1_meter_cal_offset: "+rx1_meter_cal_offset);
-						//			Debug.WriteLine("display_cal_offset: "+display_cal_offset);
-						//			MessageBox.Show("rx1_meter_cal_offset: "+rx1_meter_cal_offset.ToString()+"\n"+
-						//				"display_cal_offset: "+display_cal_offset.ToString());
-						break;*/
-                #endregion
-
-                case Model.FLEX5000:
-                //rx_only = SetupForm.RXOnly;						// Save RX Only Setting
-                //SetupForm.RXOnly = true;
-
-                bool rx2 = rx2_enabled;
-                RX2Enabled = false;
-
-                vfoa = VFOAFreq;									// save current VFOA
-
-                rit_on = chkRIT.Checked;							// save current RIT On
-                chkRIT.Checked = false;								// turn RIT off
-                rit_val = (int)udRIT.Value;							// save current RIT value					
-
-                display = comboDisplayMode.Text;
-                comboDisplayMode.Text = "Spectrum";
-
-                polyphase = SetupForm.Polyphase;					// save current polyphase setting
-                SetupForm.Polyphase = false;						// disable polyphase
-
-                dsp_buf_size = SetupForm.DSPPhoneRXBuffer;			// save current DSP buffer size
-                SetupForm.DSPPhoneRXBuffer = 4096;					// set DSP Buffer Size to 2048
-
-                filter = RX1Filter;									// save current filter
-
-                preamp = rx1_preamp_mode;
-
-                dsp_mode = rx1_dsp_mode;							// save current DSP demod mode
-                RX1DSPMode = DSPMode.DSB;							// set mode to DSB
-
-                VFOAFreq = freq;									// set VFOA frequency
-                VFOBFreq = freq;
-
-                bool duplex = full_duplex;
-                FullDuplex = true;
-                Thread.Sleep(50);
-                FWC.SetGen(true);
-                Thread.Sleep(50);
-                FWC.SetTest(true);
-                Thread.Sleep(50);
-                FWC.SetSig(true);
-                Thread.Sleep(50);
-
-                am_filter = RX1Filter;								// save current AM filter
-                RX1Filter = Filter.F1;								// set filter to 500Hz
-
-                /*bool p_amp = chkRX1Preamp.Checked;					// save current preamp mode
-                chkRX1Preamp.Checked = false;						// turn preamp off*/
-
-                rx_meter = CurrentMeterRXMode;						// save current RX Meter mode
-                CurrentMeterRXMode = MeterRXMode.OFF;				// turn RX Meter off
-
-                display_avg = chkDisplayAVG.Checked;				// save current average state
-                chkDisplayAVG.Checked = false;
-                chkDisplayAVG.Checked = true;						// set average state to off
-
-                old_multimeter_cal = rx1_meter_cal_offset;
-                old_display_cal = rx1_display_cal_offset;
-
-                chkRX1Preamp.Enabled = false;
-                comboDisplayMode.Enabled = false;
-                comboMeterRXMode.Enabled = false;
-
-                progress.SetPercent(0.0f);
-                counter = 0;
-
-                RX1Filter = Filter.F6;
-                chkDisplayAVG.Checked = false;
-
-                FWC.SetTRXPreamp(false);
-                Thread.Sleep(200);
-
-                DisableAllFilters();
-                DisableAllModes();
-                VFOLock = true;
-
-                calibration_mutex.WaitOne();
-                fixed (float* ptr = &a[0])
-                    DttSP.GetSpectrum(0, ptr);		// get the spectrum values
-                calibration_mutex.ReleaseMutex();
-
-                max = float.MinValue;
-                avg = 0;
-                max_index = 0;
-
-                for (int i = 0; i < 4095; i++)						// find the maximum signal
-                {
-                    avg += a[i];
-                    if (a[i] > max)
-                    {
-                        max = a[i];
-                        max_index = i;
-                    }
-                }
-                avg -= max;
-                avg /= 4095;
-
-                if (max < (avg + 30))
-                {
-                    if (!suppress_errors)
-                    {
-                        MessageBox.Show("Peak is less than 30dB from the noise floor.  " +
-                            "Please use a larger signal for frequency calibration.",
-                            "Calibration Error - Weak Signal",
-                            MessageBoxButtons.OK,
-                            MessageBoxIcon.Error);
-                    }
-                    ret_val = false;
-                    goto end2;
-                }
-
-                rx1_meter_cal_offset = 0.0f;
-                RX1DisplayCalOffset = 0.0f;
-                num = 0.0f; num2 = 0.0f; avg2 = 0.0f;
-                avg = 0.0f;
-                // get the value of the signal strength meter
-                for (int i = 0; i < 50; i++)
-                {
-                    num += DttSP.CalculateRXMeter(0, 0, DttSP.MeterType.SIGNAL_STRENGTH);
-                    Thread.Sleep(50);
-                    if (!progress.Visible)
-                        goto end2;
-                    else progress.SetPercent((float)((float)++counter / 120));
-                }
-                avg = num / 50.0f;
-
-                FWC.SetTRXPreamp(true);
-                Thread.Sleep(200);
-
-                // get the value of the signal strength meter
-                num2 = 0.0f;
-                for (int i = 0; i < 50; i++)
-                {
-                    num2 += DttSP.CalculateRXMeter(0, 0, DttSP.MeterType.SIGNAL_STRENGTH);
-                    Thread.Sleep(50);
-                    if (!progress.Visible)
-                        goto end2;
-                    else progress.SetPercent((float)((float)++counter / 120));
-                }
-                avg2 = num2 / 50.0f;
-
-                fwc_preamp_offset = avg2 - avg;
-                rx1_preamp_offset[(int)PreampMode.OFF] = 0.0f;
-                rx1_preamp_offset[(int)PreampMode.HIGH] = -fwc_preamp_offset;
-
-                Debug.WriteLine("fwc_preamp_offset: " + fwc_preamp_offset.ToString("f6"));
-
-                FWC.SetTRXPreamp(false);
-                Thread.Sleep(200);
-
-                num2 = 0.0f;
-                for (int i = 0; i < 20; i++)
-                {
-                    calibration_mutex.WaitOne();
-                    fixed (float* ptr = &a[0])
-                        DttSP.GetSpectrum(0, ptr);		// read again to clear out changed DSP
-                    calibration_mutex.ReleaseMutex();
-
-                    /*max = float.MinValue;						// find the max spectrum value
-                    for(int j=0; j<Display.BUFFER_SIZE; j++)
-                        if(a[j] > max) max = a[j];*/
-
-                    //num2 += max;
-                    num2 += a[max_index];
-                    Thread.Sleep(100);
-
-                    if (!progress.Visible)
-                        goto end2;
-                    else progress.SetPercent((float)((float)++counter / 120));
-                }
-                avg2 = num2 / 20.0f;
-
-                // calculate the difference between the current value and the correct multimeter value
-                diff = level - (avg + rx1_meter_cal_offset);
-                rx1_meter_cal_offset = diff;
-
-                // calculate the difference between the current value and the correct spectrum value
-                diff = level - (avg2 + RX1DisplayCalOffset);
-                RX1DisplayCalOffset = diff;
-
-                UpdateDisplayOffsets();
-
-                rx1_level_table[(int)rx1_band][0] = (float)Math.Round(rx1_display_cal_offset, 3);
-                rx1_level_table[(int)rx1_band][1] = (float)Math.Round(-fwc_preamp_offset, 3);
-                rx1_level_table[(int)rx1_band][2] = (float)Math.Round(rx1_meter_cal_offset, 3);
-
-                ret_val = true;
-
-            end2:
-                if (!progress.Visible) progress.Text = "";
-            progress.Hide();
-            EnableAllFilters();
-            EnableAllModes();
-            VFOLock = false;
-
-            FullDuplex = duplex;
-            Thread.Sleep(50);
-            FWC.SetGen(false);
-            Thread.Sleep(50);
-            FWC.SetTest(false);
-            Thread.Sleep(50);
-            FWC.SetSig(false);
-            Thread.Sleep(50);
-
-            fwc_rx1_preamp = false;
-            chkRX1Preamp.Enabled = true;            
-            RX1PreampMode = preamp;
-            chkRX1Preamp_CheckedChanged(this, EventArgs.Empty);
-            comboDisplayMode.Enabled = true;
-            comboMeterRXMode.Enabled = true;
-
-            if (ret_val == false)
-            {
-                rx1_meter_cal_offset = old_multimeter_cal;
-                rx1_display_cal_offset = old_display_cal;
-            }
-
-            //RX2Enabled = rx2;
-            comboDisplayMode.Text = display;
-            chkRIT.Checked = rit_on;						// restore RIT on
-            udRIT.Value = rit_val;							// restore RIT value
-            //SetupForm.RXOnly = rx_only					// restore RX Only			
-            DisplayAVG = display_avg;						// restore AVG value
-            RX1Filter = am_filter;							// restore AM filter
-            RX1DSPMode = dsp_mode;							// restore DSP mode
-            RX1Filter = filter;								// restore filter
-            if (dsp_buf_size != 4096)
-                chkPower.Checked = false;					// go to standby
-            SetupForm.DSPPhoneRXBuffer = dsp_buf_size;		// restore DSP Buffer Size
-            VFOAFreq = vfoa;								// restore vfo frequency
-            if (dsp_buf_size != 4096)
-            {
-                Thread.Sleep(100);
-                chkPower.Checked = true;
-            }
-            CurrentMeterRXMode = rx_meter;					// restore RX Meter mode
-            SetupForm.Polyphase = polyphase;				// restore polyphase
-
-            UpdateDisplayOffsets();
-
-            //			Debug.WriteLine("rx1_meter_cal_offset: "+rx1_meter_cal_offset);
-            //			Debug.WriteLine("display_cal_offset: "+display_cal_offset);
-            //			MessageBox.Show("rx1_meter_cal_offset: "+rx1_meter_cal_offset.ToString()+"\n"+
-            //				"display_cal_offset: "+display_cal_offset.ToString());
-            break;
-
- 
-
-        case Model.FLEX3000:
-            vfoa = VFOAFreq;									// save current VFOA
-
-            rit_on = chkRIT.Checked;							// save current RIT On
-            chkRIT.Checked = false;								// turn RIT off
-            rit_val = (int)udRIT.Value;							// save current RIT value					
-
-            display = comboDisplayMode.Text;
-            comboDisplayMode.Text = "Spectrum";
-
-            polyphase = SetupForm.Polyphase;					// save current polyphase setting
-            SetupForm.Polyphase = false;						// disable polyphase
-
-            dsp_buf_size = SetupForm.DSPPhoneRXBuffer;			// save current DSP buffer size
-            SetupForm.DSPPhoneRXBuffer = 4096;					// set DSP Buffer Size to 2048
-
-            filter = RX1Filter;									// save current filter
-
-            dsp_mode = rx1_dsp_mode;							// save current DSP demod mode
-            RX1DSPMode = DSPMode.DSB;							// set mode to DSB
-
-            VFOAFreq = freq;									// set VFOA frequency
-            VFOBFreq = freq;
-
-            duplex = full_duplex;
-            FullDuplex = true;
-            Thread.Sleep(50);
-            FWC.SetGen(true);
-            Thread.Sleep(50);
-            FWC.SetTest(true);
-            Thread.Sleep(50);
-            FWC.SetSig(true);
-            Thread.Sleep(50);
-
-            am_filter = RX1Filter;								// save current AM filter
-            RX1Filter = Filter.F1;								// set filter to 500Hz
-
-            preamp = RX1PreampMode;								// save current preamp mode
-            RX1PreampMode = PreampMode.LOW;						// set to Low (preamp off, attn off)
-
-            rx_meter = CurrentMeterRXMode;						// save current RX Meter mode
-            CurrentMeterRXMode = MeterRXMode.OFF;				// turn RX Meter off
-
-            display_avg = chkDisplayAVG.Checked;				// save current average state
-            chkDisplayAVG.Checked = false;
-            chkDisplayAVG.Checked = true;						// set average state to off
-
-            old_multimeter_cal = rx1_meter_cal_offset;
-            old_display_cal = rx1_display_cal_offset;
-
-            comboPreamp.Enabled = false;
-            comboDisplayMode.Enabled = false;
-            comboMeterRXMode.Enabled = false;
-
-            progress.SetPercent(0.0f);
-            counter = 0;
-
-            //RX1Filter = Filter.F6;					
-            UpdateRX1Filters(-500, 500);
-            chkDisplayAVG.Checked = false;
-
-            /*FWC.SetTRXPreamp(false);
-            FWC.SetRXAttn(false);*/
-            Thread.Sleep(200);
-
-            DisableAllFilters();
-            DisableAllModes();
-            VFOLock = true;
-
-            calibration_mutex.WaitOne();
-            fixed (float* ptr = &a[0])
-                DttSP.GetSpectrum(0, ptr);		// get the spectrum values
-            calibration_mutex.ReleaseMutex();
-
-            max = float.MinValue;
-            avg = 0;
-            max_index = 0;
-
-            for (int i = 0; i < 4095; i++)						// find the maximum signal
-            {
-                avg += a[i];
-                if (a[i] > max)
-                {
-                    max = a[i];
-                    max_index = i;
-                }
-            }
-            avg -= max;
-            avg /= 4095;
-
-            if (max < (avg + 30))
-            {
-                if (!suppress_errors)
-                {
-                    MessageBox.Show("Peak is less than 30dB from the noise floor.  " +
-                        "Please use a larger signal for frequency calibration.",
-                        "Calibration Error - Weak Signal",
-                        MessageBoxButtons.OK,
-                        MessageBoxIcon.Error);
-                }
-                ret_val = false;
-                goto end3;
-            }
-
-            rx1_meter_cal_offset = 0.0f;
-            RX1DisplayCalOffset = 0.0f;
-            num = 0.0f; num2 = 0.0f; avg2 = 0.0f;
-            avg = 0.0f;
-            float avg3 = 0.0f;
-            // get the value of the signal strength meter
-            for (int i = 0; i < 50; i++)
-            {
-                num += DttSP.CalculateRXMeter(0, 0, DttSP.MeterType.SIGNAL_STRENGTH);
-                Thread.Sleep(50);
-                if (!progress.Visible)
-                    goto end3;
-                else progress.SetPercent((float)((float)++counter / 170));
-            }
-            avg = num / 50.0f;
-
-            FWC.SetTRXPreamp(true);
-            Thread.Sleep(200);
-
-            // get the value of the signal strength meter
-            num2 = 0.0f;
-            for (int i = 0; i < 50; i++)
-            {
-                num2 += DttSP.CalculateRXMeter(0, 0, DttSP.MeterType.SIGNAL_STRENGTH);
-                Thread.Sleep(50);
-                if (!progress.Visible)
-                    goto end2;
-                else progress.SetPercent((float)((float)++counter / 170));
-            }
-            avg2 = num2 / 50.0f;
-
-            FWC.SetTRXPreamp(false);
-            FWC.SetRXAttn(true);
-            Thread.Sleep(200);
-
-            // get the value of the signal strength meter
-            num2 = 0.0f;
-            for (int i = 0; i < 50; i++)
-            {
-                num2 += DttSP.CalculateRXMeter(0, 0, DttSP.MeterType.SIGNAL_STRENGTH);
-                Thread.Sleep(50);
-                if (!progress.Visible)
-                    goto end3;
-                else progress.SetPercent((float)((float)++counter / 170));
-            }
-            avg3 = num2 / 50.0f;
-
-            float pre = avg2 - avg;
-            float attn = avg3 - avg;
-
-            rx1_preamp_offset[(int)PreampMode.OFF] = -attn;
-            rx1_preamp_offset[(int)PreampMode.LOW] = 0.0f;
-            rx1_preamp_offset[(int)PreampMode.MED] = attn - pre;
-            rx1_preamp_offset[(int)PreampMode.HIGH] = -pre;
-
-            FWC.SetTRXPreamp(false);
-            FWC.SetRXAttn(false);
-            Thread.Sleep(200);
-
-            num2 = 0.0f;
-            for (int i = 0; i < 20; i++)
-            {
-                calibration_mutex.WaitOne();
-                fixed (float* ptr = &a[0])
-                    DttSP.GetSpectrum(0, ptr);		// read again to clear out changed DSP
-                calibration_mutex.ReleaseMutex();
-
-                /*max = float.MinValue;						// find the max spectrum value
-                for(int j=0; j<Display.BUFFER_SIZE; j++)
-                    if(a[j] > max) max = a[j];*/
-
-                //num2 += max;
-                num2 += a[max_index];
-                Thread.Sleep(100);
-
-                if (!progress.Visible)
-                    goto end3;
-                else progress.SetPercent((float)((float)++counter / 170));
-            }
-            avg2 = num2 / 20.0f;
-
-            // calculate the difference between the current value and the correct multimeter value
-            diff = level - (avg + rx1_meter_cal_offset);
-            rx1_meter_cal_offset = diff;
-
-            // calculate the difference between the current value and the correct spectrum value
-            diff = level - (avg2 + RX1DisplayCalOffset);
-            RX1DisplayCalOffset = diff;
-
-            rx1_level_table[(int)rx1_band][0] = (float)Math.Round(rx1_display_cal_offset, 3);
-            rx1_level_table[(int)rx1_band][1] = (float)Math.Round(rx1_preamp_offset[(int)PreampMode.OFF], 3);
-            rx1_level_table[(int)rx1_band][2] = (float)Math.Round(rx1_preamp_offset[(int)PreampMode.HIGH], 3);
-
-            ret_val = true;
-
-        end3: //#3
-            if (!progress.Visible) progress.Text = "";
-        progress.Hide();
-        EnableAllFilters();
-        EnableAllModes();
-        VFOLock = false;
-
-        //FullDuplex = duplex;
-        Thread.Sleep(50);
-        FWC.SetGen(false);
-        Thread.Sleep(50);
-        FWC.SetTest(false);
-        Thread.Sleep(50);
-        FWC.SetSig(false);
-        Thread.Sleep(50);
-
-        /*FWC.SetTRXPreamp(false);
-        FWC.SetRXAttn(true);*/
-        comboPreamp.Enabled = true;
-        RX1PreampMode = preamp;
-
-        comboDisplayMode.Enabled = true;
-        comboMeterRXMode.Enabled = true;
-
-        if (ret_val == false)
-        {
-            rx1_meter_cal_offset = old_multimeter_cal;
-            rx1_display_cal_offset = old_display_cal;
-        }
-
-        comboDisplayMode.Text = display;
-        chkRIT.Checked = rit_on;						// restore RIT on
-        udRIT.Value = rit_val;							// restore RIT value
-        //SetupForm.RXOnly = rx_only					// restore RX Only			
-        DisplayAVG = display_avg;						// restore AVG value
-        RX1Filter = am_filter;							// restore AM filter
-        RX1DSPMode = dsp_mode;							// restore DSP mode
-        RX1Filter = filter;								// restore filter
-        if (dsp_buf_size != 4096)
-            chkPower.Checked = false;					// go to standby
-        SetupForm.DSPPhoneRXBuffer = dsp_buf_size;		// restore DSP Buffer Size
-        VFOAFreq = vfoa;								// restore vfo frequency
-        if (dsp_buf_size != 4096)
-        {
-            Thread.Sleep(100);
-            chkPower.Checked = true;
-        }
-        CurrentMeterRXMode = rx_meter;					// restore RX Meter mode
-        SetupForm.Polyphase = polyphase;				// restore polyphase
-        UpdateDisplayOffsets();
-
-        //			Debug.WriteLine("rx1_meter_cal_offset: "+rx1_meter_cal_offset);
-        //			Debug.WriteLine("display_cal_offset: "+display_cal_offset);
-        //			MessageBox.Show("rx1_meter_cal_offset: "+rx1_meter_cal_offset.ToString()+"\n"+
-        //				"display_cal_offset: "+display_cal_offset.ToString());
-        break;
-
             }
             calibration_running = false;
             return ret_val;
+        
         }
-
  
-
-
-
-
-		/*public void FLEX5000DetectTapResistor()
-		{
-			Thread t = new Thread(new ThreadStart(RunFLEX5000DetectTapResistor));
-			t.Name = "Run FLEX5000 Detect Tap Resistor Thread";
-			t.IsBackground = true;
-			t.Priority = ThreadPriority.Normal;
-			Application.DoEvents();
-			Thread.Sleep(100);
-			t.Start();
-		}
-
-		public void RunFLEX5000DetectTapResistor()
-		{
-			//bool ret_val = false;
-			calibration_running = true;
-
-			if(!chkPower.Checked || !fwc_init || current_model != Model.FLEX5000)
-			{
-				calibration_running = false;
-				return;
-			}
-
-			bool rx1_sr = SpurReduction;
-			SpurReduction = true;
-
-			bool rx2_sr = RX2SpurReduction;
-			RX2SpurReduction = true;
-
-			bool rit_on = chkRIT.Checked;						// save current RIT On
-			chkRIT.Checked = false;								// turn RIT off
-			int rit_val = (int)udRIT.Value;						// save current RIT value
-
-			double vfoa = VFOAFreq;								// save current VFOA
-
-			int dsp_buf_size = SetupForm.DSPPhoneRXBuffer;		// save current DSP buffer size
-			SetupForm.DSPPhoneRXBuffer = 4096;					// set DSP Buffer Size to 2048
-
-			Filter filter = RX1Filter;						// save current filter
-
-			DSPMode dsp_mode = rx1_dsp_mode;				// save current DSP demod mode
-			DSPMode dsp2_mode = rx2_dsp_mode;				// save current DSP demod mode
-
-			RX1DSPMode = DSPMode.DSB;						// set mode to DSB
-			RX2DSPMode = DSPMode.DSB;						// set mode to DSB
-
-			VFOAFreq = 14.2;								// set VFOA frequency
-			VFOBFreq = 14.2;
-
-			bool duplex = full_duplex;
-			FullDuplex = true;
-			Thread.Sleep(50);
-			FWC.SetGen(true);
-			Thread.Sleep(50);
-			FWC.SetTest(true);
-			Thread.Sleep(50);
-			FWC.SetSig(true);
-			Thread.Sleep(50);
-				
-			bool rx2 = rx2_enabled;
-			RX2Enabled = true;
-
-			FWCAnt rx2_antenna = rx2_ant;
-			RX2Ant = FWCAnt.RX1TAP;
-
-			Filter rx1_filter = RX1Filter;					// save current AM filter
-			UpdateRX1Filters(-500, 500);
-			
-			Filter rx2_filter = RX2Filter;
-			UpdateRX2Filters(-500, 500);
-
-			//string preamp_s = comboPreamp.Text;					// save current preamp mode
-			//comboPreamp.Text = "Off";							// turn preamp off
-			bool preamp = chkRX1Preamp.Checked;
-			chkRX1Preamp.Checked = false;
-
-			MeterRXMode rx_meter = CurrentMeterRXMode;			// save current RX Meter mode
-			CurrentMeterRXMode = MeterRXMode.OFF;				// turn RX Meter off
-
-			MeterRXMode rx2_meter = RX2MeterMode;
-			RX2MeterMode = MeterRXMode.OFF;
-
-			chkRX1Preamp.Enabled = false;
-			chkRX2Preamp.Enabled = false;
-			comboMeterRXMode.Enabled = false;
-			comboRX2MeterMode.Enabled = false;
-
-			//progress.SetPercent(0.0f);
-			//int counter = 0;
-
-			FWC.SetRX2Preamp(false);
-			Thread.Sleep(200);
-
-			float num = 0.0f;
-			// get the value of the signal strength meter
-			for(int i=0; i<50; i++)
-			{
-				num += DttSP.CalculateRXMeter(2, 0, DttSP.MeterType.ADC_REAL);
-				Thread.Sleep(50);
-				//if(!progress.Visible)
-				//	goto end2;
-				//else progress.SetPercent((float)((float)++counter/120));
-			}
-			float avg = num / 50.0f;
-
-			num = 0.0f;
-			for(int i=0; i<50; i++)
-			{
-				num += DttSP.CalculateRXMeter(0, 0, DttSP.MeterType.ADC_REAL);
-				Thread.Sleep(50);
-				//if(!progress.Visible)
-				//	goto end2;
-				//else progress.SetPercent((float)((float)++counter/120));
-			}
-			float avg2 = num / 50.0f;
-
-			rx2_res_offset = avg2-avg;
-			rx2_trx_match_serial = FWCEEPROM.TRXSerial;
-
-			//ret_val = true;
-
-			//end2:
-				//if(!progress.Visible) progress.Text = "";
-			//progress.Hide();
-			EnableAllFilters();
-			EnableAllModes();
-			VFOLock = false;
-
-			FullDuplex = duplex;
-			Thread.Sleep(50);
-			FWC.SetGen(false);
-			Thread.Sleep(50);
-			FWC.SetTest(false);
-			Thread.Sleep(50);
-			FWC.SetSig(false);
-			Thread.Sleep(50);
-
-			chkRX1Preamp.Enabled = true;
-			chkRX2Preamp.Enabled = true;
-			comboMeterRXMode.Enabled = true;
-			comboRX2MeterMode.Enabled = true;
-
-			SpurReduction = rx1_sr;
-			RX2SpurReduction = rx2_sr;
-			RX2Enabled = rx2;
-			RX2Ant = rx2_antenna;
-			chkRIT.Checked = rit_on;							// restore RIT on
-			udRIT.Value = rit_val;								// restore RIT value
-			//SetupForm.RXOnly = rx_only;							// restore RX Only			
-			chkRX1Preamp.Checked = preamp;						// restore preamp value
-			RX1Filter = rx1_filter;							// restore AM filter
-			RX1DSPMode = dsp_mode;							// restore DSP mode
-			RX2DSPMode = dsp2_mode;							// restore DSP mode
-			RX1Filter = filter;								// restore filter
-			if(dsp_buf_size != 4096)
-				chkPower.Checked = false;						// go to standby
-			SetupForm.DSPPhoneRXBuffer = dsp_buf_size;				// restore DSP Buffer Size
-			VFOAFreq = vfoa;									// restore vfo frequency
-			if(dsp_buf_size != 4096)
-			{
-				Thread.Sleep(100);
-				chkPower.Checked = true;
-			}
-			CurrentMeterRXMode = rx_meter;						// restore RX Meter mode
-			RX2MeterMode = rx2_meter;
-
-			calibration_running = false;
-		}*/
-
-		public bool CalibrateRX2Level(float level, float freq, Progress progress, bool suppress_errors)
+		/*public bool CalibrateRX2Level(float level, float freq, Progress progress, bool suppress_errors)
 		{
 			// Calibration routine called by Setup Form.
 			bool ret_val = false;
@@ -15727,7 +14821,7 @@ namespace PowerSDR
 			chkRX2Preamp.Checked = rx2_preamp;
 			FWC.SetRX2Preamp(rx2_preamp);
 			RX1Filter = rx1_filter;							// restore AM filter
-			RX1DSPMode = dsp_mode;							// restore DSP mode
+			RX1DSPMode = dsp_mode;							// restore DSP mode*
 			//Thread.Sleep(50);
 			RX2DSPMode = dsp2_mode;							// restore DSP mode
 			RX1Filter = filter;								// restore filter
@@ -15752,7 +14846,7 @@ namespace PowerSDR
 
 			calibration_running = false;
 			return ret_val;
-		}
+		}*/
 
 		public float[] rx_image_rejection = new float[(int)Band.LAST];
 		public float[] rx_image_from_floor = new float[(int)Band.LAST];
@@ -16015,7 +15109,7 @@ namespace PowerSDR
             return ret_val;
         }
 
-        public bool CalibrateRX2Image(float freq, Progress progress, bool suppress_errors)
+        /*public bool CalibrateRX2Image(float freq, Progress progress, bool suppress_errors)
         {
             if (!fwc_init || current_model != Model.FLEX5000 || !FWCEEPROM.RX2OK) return false;
 
@@ -16092,8 +15186,8 @@ namespace PowerSDR
             int filt2_high = RX1FilterHigh;
             Filter filter2 = rx1_filter;					// save current filter
 
-            /*PreampMode preamp = rx1_preamp_mode;			// save current preamp setting
-            RX1PreampMode = PreampMode.HIGH;				// set preamp to high*/
+            PreampMode preamp = rx1_preamp_mode;			// save current preamp setting
+            RX1PreampMode = PreampMode.HIGH;				// set preamp to high
             bool preamp = fwc_rx2_preamp;
             FWC.SetRX2Preamp(true);
             //Thread.Sleep(50);
@@ -16154,14 +15248,14 @@ namespace PowerSDR
                     DttSP.GetSpectrum(2, ptr);				// get the spectrum values
                 calibration_mutex.ReleaseMutex();
 
-                /*for(int j=0; i==4 && j<Display.BUFFER_SIZE; j++)
+                for(int j=0; i==4 && j<Display.BUFFER_SIZE; j++)
                 {
                     if(a[j] > max_signal)
                     {
                         max_signal = a[j];
                         peak_bin = j;
                     }
-                }*/
+                }
                 max_signal = a[2048];
                 peak_bin = 2048;
 
@@ -16276,7 +15370,7 @@ namespace PowerSDR
             //MessageBox.Show(t1.Duration.ToString());
             Debug.WriteLine("timer: " + t1.Duration);
             return ret_val;
-        }
+        } */
 
 		public float[] tx_image_rejection = new float[(int)Band.LAST];
 		public bool CalibrateTXImage(float freq, Progress progress, bool suppress_errors)
@@ -17194,7 +16288,8 @@ namespace PowerSDR
 
 			for(int i=0; i<band_freqs.Length; i++)
 			{
-				if(i == 10 && current_model == Model.SDR1000)
+				if(i == 10 && current_model == Model.SDR1000 || current_model == Model.HPSDR ||
+                    current_model == Model.HERMES)
 				{
 					// do nothing
 				}
@@ -17225,7 +16320,8 @@ namespace PowerSDR
 					for(int j=0; j<power_table[i].Length; j++)
 					{
 						if(fwc_init && (current_model == Model.FLEX5000 || current_model == Model.FLEX3000) && j==8) tol = 1.0;
-						if(j<3 && current_model == Model.SDR1000)
+                        if (j < 3 && current_model == Model.SDR1000 || current_model == Model.HPSDR ||
+                    current_model == Model.HERMES)
 						{
 							// do nothing
 						}
@@ -30671,14 +29767,14 @@ namespace PowerSDR
 			if(EQForm != null) EQForm.TXEQEnabled = chkTXEQ.Checked;
 		}
 
-		private void chkBCI_CheckedChanged(object sender, System.EventArgs e)
-		{
-			if(chkBCI.Checked)
-				chkBCI.BackColor = button_selected_color;
-			else
-				chkBCI.BackColor = SystemColors.Control;
-			SetHWFilters(dds_freq);
-		}
+        private void chkBCI_CheckedChanged(object sender, System.EventArgs e)
+        {
+            if (chkBCI.Checked)
+                chkBCI.BackColor = button_selected_color;
+            else
+                chkBCI.BackColor = SystemColors.Control;
+            SetHWFilters(dds_freq);
+        }	
 
 		#endregion
 
@@ -36615,7 +35711,6 @@ namespace PowerSDR
 				picSquelch.Location = new Point(pic_sql_basis.X,pic_sql_basis.Y+(v_delta/2));
 				ptbSquelch.Location = new Point(tb_sql_basis.X,tb_sql_basis.Y+(v_delta/2));
                 panelAntenna.Location = new Point(gr_antenna_basis.X, gr_antenna_basis.Y + (v_delta / 8) + (v_delta / 2));
-				chkBCI.Location = new Point(chk_bci_basis.X,chk_bci_basis.Y+(v_delta/8)+(v_delta/2));
 				button1.Location = new Point(button1_basis.X,button1_basis.Y+(v_delta/8)+(v_delta/2));
                 panelDateTime.Location = new Point(gr_date_time_basis.X, gr_date_time_basis.Y + (v_delta / 2) + (v_delta / 4));
 				//lblCPUMeter.Location = new Point(lbl_cpu_meter_basis.X,lbl_cpu_meter_basis.Y+(v_delta/8)+(v_delta/2)+(v_delta/4));
@@ -36714,7 +35809,6 @@ namespace PowerSDR
 			pic_sql_basis = this.picSquelch.Location;
 			tb_sql_basis = this.ptbSquelch.Location;
             gr_antenna_basis = this.panelAntenna.Location;
-			chk_bci_basis = this.chkBCI.Location;
 			button1_basis = this.button1.Location;
             gr_date_time_basis = this.panelDateTime.Location;
 			//lbl_cpu_meter_basis = this.lblCPUMeter.Location;

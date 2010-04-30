@@ -39,7 +39,7 @@ typedef struct _dttspagc
   int mode;
   struct _gain
   {
-    REAL top, now, fastnow, bottom, old, limit, raw, fix;
+    REAL top, now, fastnow, bottom, old, target, raw, fix;
   } gain, fastgain;
   REAL attack;
   REAL one_m_attack;
@@ -57,8 +57,8 @@ typedef struct _dttspagc
   REAL *magvec;
   CXB buff;
   int mask;
-  int indx;
-  int sndx;
+  int slowindx;
+  int out_indx;
   int hangindex;
   int fastindx;
   int fasthang;			

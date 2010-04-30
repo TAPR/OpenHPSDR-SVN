@@ -175,10 +175,10 @@ new_lmsr (CXB signal,
 {
   LMSR lms = (LMSR) safealloc (1, sizeof (_lmsstate), "new_lmsr state");
 
-  lms->signal = signal;
+  lms->signal = newCXB(signal->size,CXBbase(signal),"lmadf CXB");
   lms->signal_size = CXBsize (lms->signal);
   lms->delay = delay;
-  lms->size = 512;
+  lms->size = 4096;
   lms->mask = lms->size - 1;
   lms->delay_line = newvec_COMPLEX (lms->size, "lmsr delay");
   lms->adaptation_rate = adaptation_rate;
@@ -196,6 +196,7 @@ del_lmsr (LMSR lms)
 {
   if (lms)
     {
+	  delCXB(lms->signal);
       delvec_COMPLEX (lms->delay_line);
       delvec_COMPLEX (lms->adaptive_filter);
       safefree ((char *) lms);
@@ -229,8 +230,9 @@ lmsr_adapt_i (LMSR lms)
 		}
 
       error = Csub(cssig(i),accum);
-      ssig_i (i) = error.im;
-	  ssig (i) = error.re;
+	  cssig(i) = error;
+//     ssig_i (i) = error.im;
+//	  ssig (i) = error.re;
 
       scl2 = (REAL) (rate / (sum_sq + 1.19e-7));
       error = Cscl(error,scl2);

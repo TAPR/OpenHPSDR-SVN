@@ -151,6 +151,9 @@ extern struct _rx
     FiltOvSv ovsv;
     COMPLEX *save;
   } filt,filt2;
+
+  DCBlocker dcb;
+
   struct
   {
     REAL thresh;
@@ -231,7 +234,7 @@ extern struct _tx
 {
   struct
   {
-    CXB i, o;
+    CXB i, ic, o, oc;
   } buf;
   IQ iqfix;
 
@@ -249,7 +252,7 @@ extern struct _tx
   struct
   {
     ComplexFIR coef;
-    FiltOvSv ovsv;
+    FiltOvSv ovsv, ovsv_pre;
     COMPLEX *save;
   } filt;
 
