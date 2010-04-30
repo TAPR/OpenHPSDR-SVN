@@ -133,10 +133,10 @@ newFiltOvSv(COMPLEX * coefs, int ncoef, int pbits) {
   COMPLEX *zrvec, *zfvec, *zivec, *zovec;
   p = (FiltOvSv) safealloc(1, sizeof(filt_ov_sv), "new overlap/save filter");
   buflen = nblock2(ncoef - 1), fftlen = 2 * buflen;
-  zrvec = newvec_COMPLEX_fftw(fftlen, "raw signal vec in newFiltOvSv");
-  zfvec = newvec_COMPLEX_fftw(fftlen, "filter z vec in newFiltOvSv");
-  zivec = newvec_COMPLEX_fftw(fftlen, "signal in z vec in newFiltOvSv");
-  zovec = newvec_COMPLEX_fftw(fftlen, "signal out z vec in newFiltOvSv");
+  zrvec = newvec_COMPLEX_16(fftlen, "raw signal vec in newFiltOvSv");
+  zfvec = newvec_COMPLEX_16(fftlen, "filter z vec in newFiltOvSv");
+  zivec = newvec_COMPLEX_16(fftlen, "signal in z vec in newFiltOvSv");
+  zovec = newvec_COMPLEX_16(fftlen, "signal out z vec in newFiltOvSv");
 
   /* prepare frequency response from filter coefs */
   {
@@ -193,10 +193,10 @@ newFiltOvSv(COMPLEX * coefs, int ncoef, int pbits) {
 void
 delFiltOvSv(FiltOvSv p) {
   if (p) {
-    delvec_COMPLEX_fftw(p->zfvec);
-    delvec_COMPLEX_fftw(p->zivec);
-    delvec_COMPLEX_fftw(p->zovec);
-    delvec_COMPLEX_fftw(p->zrvec);
+    delvec_COMPLEX_16(p->zfvec);
+    delvec_COMPLEX_16(p->zivec);
+    delvec_COMPLEX_16(p->zovec);
+    delvec_COMPLEX_16(p->zrvec);
     fftwf_destroy_plan(p->pfwd);
     fftwf_destroy_plan(p->pinv);
     safefree((char *) p);

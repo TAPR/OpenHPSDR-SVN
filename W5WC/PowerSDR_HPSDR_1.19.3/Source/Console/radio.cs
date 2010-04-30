@@ -305,6 +305,7 @@ namespace PowerSDR
             this.Active = rx.active;
             this.Pan = rx.pan;
             this.RXOsc = rx.rx_osc;
+            this.DCBlock = rx.dc_block;
         }
 
 		private void SyncAll()
@@ -352,6 +353,7 @@ namespace PowerSDR
 			Active = active;
 			Pan = pan;
 			RXOsc = rx_osc;
+            DCBlock = dc_block;
 		}
 
 		#region Non-Static Properties & Routines
@@ -515,16 +517,14 @@ namespace PowerSDR
 			}
 		}
 
-		private int nr_taps_dsp = 40;
-		private int nr_taps = 40;
-		private int nr_delay_dsp = 30;
-		private int nr_delay = 30;
-		private double nr_gain_dsp = 0.00015;
-		private double nr_gain = 0.00015;
+		private int nr_taps_dsp = 64;
+		private int nr_taps = 64;
+		private int nr_delay_dsp = 8;
+		private int nr_delay = 8;
+		private double nr_gain_dsp = 0.00016;
+		private double nr_gain = 0.00016;
 		private double nr_leak_dsp = 0.0000010;
 		private double nr_leak = 0.0000010;
-
-
 		public void SetNRVals(int taps, int delay, double gain, double leak)
 		{
 			nr_taps = taps;
@@ -564,12 +564,12 @@ namespace PowerSDR
 			}
 		}
 
-		private int anf_taps_dsp = 65;
-		private int anf_taps = 65;
-		private int anf_delay_dsp = 50;
-		private int anf_delay = 50;
-		private double anf_gain_dsp = 0.00025;
-		private double anf_gain = 0.00025;
+		private int anf_taps_dsp = 64;
+		private int anf_taps = 64;
+		private int anf_delay_dsp = 8;
+		private int anf_delay = 8;
+		private double anf_gain_dsp = 0.00032;
+		private double anf_gain = 0.00032;
 		private double anf_leak_dsp = 0.0000001;
 		private double anf_leak = 0.0000001;
 		public void SetANFVals(int taps, int delay, double gain, double leak)
@@ -1193,7 +1193,24 @@ namespace PowerSDR
 			}
 		}
 
-
+        private bool dc_block_dsp = false;
+        private bool dc_block = false;
+        public bool DCBlock
+        {
+            get { return dc_block; }
+            set
+            {
+                dc_block = value;
+                if (update)
+                {
+                    if (value != dc_block_dsp || force)
+                    {
+                        DttSP.SetRXDCBlock(thread, subrx, value);
+                        dc_block_dsp = value;
+                    }
+                }
+            }
+        }
 
 		#endregion
 	}
@@ -1428,7 +1445,7 @@ namespace PowerSDR
 				{
 					if(value != dc_block_dsp || force)
 					{
-						DttSP.SetDCBlock(thread, value);
+						DttSP.SetTXDCBlock(thread, value);
 						dc_block_dsp = value;
 					}
 				}
@@ -1618,19 +1635,6 @@ namespace PowerSDR
 			}
 		}
 
-        private double tx_fm_deviation = 2500.0;
-        public double TXFMDeviation
-        {
-            get { return tx_fm_deviation; }
-            set
-            {
-                if (value != tx_fm_deviation)
-                {
-                    DttSP.SetTXFMDeviation(thread, value);
-                    tx_fm_deviation = value;
-                }
-            }
-        } 
 
 		private int tx_alc_bottom_dsp = -120;
 		private int tx_alc_bottom = -120;

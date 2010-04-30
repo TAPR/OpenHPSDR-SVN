@@ -106,14 +106,18 @@ read_iambic_key (KeyerState ks, BOOLEAN dash, BOOLEAN dot, KeyerLogic kl,
 
 		j = 0;
 		for (i = 0; i < ks->debounce; i++)
+		{
 			if (dah_debounce_buf[i])
 				j++;
+		}
 		dah = (j > ks->debounce / 2) ? 1 : 0;
 
 		j = 0;
 		for (i = 0; i < ks->debounce; i++)
+		{
 			if (dit_debounce_buf[i])
 				j++;
+		}
 		dit = (j > ks->debounce / 2) ? 1 : 0;
 	}
 

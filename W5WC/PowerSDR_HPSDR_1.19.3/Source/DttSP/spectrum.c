@@ -151,11 +151,11 @@ init_spectrum (SpecBlock * sb)
 	COMPLEX *p;
 	sb->fill = 0;
 
-	p = newvec_COMPLEX_fftw(sb->size*16,"spectrum accum");
+	p = newvec_COMPLEX_16(sb->size*16,"spectrum accum");
 	sb->accum = newCXB (sb->size * 16, p, "spectrum accum");
-	p = newvec_COMPLEX_fftw(sb->size, "spectrum timebuf");
+	p = newvec_COMPLEX_16(sb->size, "spectrum timebuf");
 	sb->timebuf = newCXB (sb->size, p, "spectrum timebuf");
-	p = newvec_COMPLEX_fftw(sb->size, "spectrum timebuf");
+	p = newvec_COMPLEX_16(sb->size, "spectrum timebuf");
 	sb->freqbuf = newCXB (sb->size, p, "spectrum freqbuf");
 	sb->window = newvec_REAL (sb->size * 16, "spectrum window");
 	makewindow (BLACKMANHARRIS_WINDOW, sb->size, sb->window);
@@ -188,11 +188,11 @@ finish_spectrum (SpecBlock * sb)
 {
 	if (sb)
 	{
-		delvec_COMPLEX_fftw(sb->accum->data);
+		delvec_COMPLEX_16(sb->accum->data);
 		delCXB (sb->accum);
-		delvec_COMPLEX_fftw(sb->timebuf->data);
+		delvec_COMPLEX_16(sb->timebuf->data);
 		delCXB (sb->timebuf);
-		delvec_COMPLEX_fftw(sb->freqbuf->data);
+		delvec_COMPLEX_16(sb->freqbuf->data);
 		delCXB (sb->freqbuf);
 		delvec_REAL (sb->window);
 		safefree ((char *) sb->output);

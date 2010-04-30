@@ -146,9 +146,9 @@ delvec_COMPLEX(COMPLEX *vec)
 }
 
 COMPLEX *
-newvec_COMPLEX_fftw(int size, char *tag)
+newvec_COMPLEX_16(int size, char *tag)
 {
-	COMPLEX *p = fftwf_malloc(size*sizeof(COMPLEX));
+	COMPLEX *p = (COMPLEX *)safealloc16(size, sizeof(COMPLEX), tag);
 	if (!p)
 	{
 		if (tag && *tag)
@@ -162,9 +162,10 @@ newvec_COMPLEX_fftw(int size, char *tag)
 }
 
 void
-delvec_COMPLEX_fftw(COMPLEX *vec)
+delvec_COMPLEX_16(COMPLEX *vec)
 {
-	fftwf_free((char *) vec);
+	//fftwf_free((char *) vec);
+	_aligned_free((char *)vec);
 }
 
 //------------------------------------------------------------------------

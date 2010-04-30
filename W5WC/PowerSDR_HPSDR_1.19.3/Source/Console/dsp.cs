@@ -254,8 +254,14 @@ namespace PowerSDR
 		[DllImport("DttSP.dll", EntryPoint="SetTXAGCFFCompression")]///
 		public static extern void SetTXAGCFFCompression(uint thread, double txcompression);
 
-		[DllImport("DttSP.dll", EntryPoint="SetDCBlock")]///
-		public static extern void SetDCBlock(uint thread, bool setit);
+		[DllImport("DttSP.dll", EntryPoint="SetTXDCBlock")]///
+		public static extern void SetTXDCBlock(uint thread, bool setit);
+
+        [DllImport("DttSP.dll", EntryPoint = "SetRXDCBlock")]///
+        public static extern void SetRXDCBlock(uint thread, uint subrx, bool setit);
+
+        [DllImport("DttSP.dll", EntryPoint = "SetRXDCBlockGain")]///
+        public static extern void SetRXDCBlockGain(uint thread, uint subrx,float gain);
 
 		[DllImport("DttSP.dll", EntryPoint="SetTXEQ")]
 		public static extern void SetTXEQ(uint thread, int[] txeq);
@@ -511,9 +517,6 @@ namespace PowerSDR
 
         [DllImport("DttSP.dll", EntryPoint = "SetKeyerHarmonicRemove")]
         public static extern void SetKeyerHarmonicRemove(double harmonic, double phase, double amplitude);
-
-        [DllImport("DttSP.dll", EntryPoint = "SetTXFMDeviation")]///
-        public static extern void SetTXFMDeviation(uint thread, double deviation);
  
         [DllImport("DttSP.dll", EntryPoint = "SetMercuryXmit")]
         public static extern void SetMercuryXmit_DLL(int setit);

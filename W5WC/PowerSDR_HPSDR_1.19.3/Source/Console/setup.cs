@@ -11709,7 +11709,7 @@ namespace PowerSDR
             this.udLMSNRgain.TabIndex = 7;
             this.toolTip1.SetToolTip(this.udLMSNRgain, "Determines the adaptation rate of the filter.");
             this.udLMSNRgain.Value = new decimal(new int[] {
-            15,
+            16,
             0,
             0,
             0});
@@ -11730,7 +11730,7 @@ namespace PowerSDR
             0,
             0});
             this.udLMSNRdelay.Minimum = new decimal(new int[] {
-            16,
+            1,
             0,
             0,
             0});
@@ -11740,7 +11740,7 @@ namespace PowerSDR
             this.toolTip1.SetToolTip(this.udLMSNRdelay, "Determines how far back you look in the signal before you begin to compute a cohe" +
                     "rent signal enhancement filter.  ");
             this.udLMSNRdelay.Value = new decimal(new int[] {
-            30,
+            8,
             0,
             0,
             0});
@@ -11779,7 +11779,7 @@ namespace PowerSDR
             this.udLMSNRtaps.TabIndex = 5;
             this.toolTip1.SetToolTip(this.udLMSNRtaps, "Determines the length of the NR computed filter.  ");
             this.udLMSNRtaps.Value = new decimal(new int[] {
-            40,
+            64,
             0,
             0,
             0});
@@ -11884,7 +11884,7 @@ namespace PowerSDR
             this.udLMSANFgain.TabIndex = 3;
             this.toolTip1.SetToolTip(this.udLMSANFgain, "Determines the adaptation rate of the filter.");
             this.udLMSANFgain.Value = new decimal(new int[] {
-            25,
+            32,
             0,
             0,
             0});
@@ -11914,7 +11914,7 @@ namespace PowerSDR
             0,
             0});
             this.udLMSANFdelay.Minimum = new decimal(new int[] {
-            16,
+            1,
             0,
             0,
             0});
@@ -11924,7 +11924,7 @@ namespace PowerSDR
             this.toolTip1.SetToolTip(this.udLMSANFdelay, "Determines how far back you look in the signal before you begin to compute a canc" +
                     "ellation filter");
             this.udLMSANFdelay.Value = new decimal(new int[] {
-            50,
+            8,
             0,
             0,
             0});
@@ -11963,7 +11963,7 @@ namespace PowerSDR
             this.udLMSANFtaps.TabIndex = 1;
             this.toolTip1.SetToolTip(this.udLMSANFtaps, "Determines the length of the computed notch filter.");
             this.udLMSANFtaps.Value = new decimal(new int[] {
-            65,
+            64,
             0,
             0,
             0});

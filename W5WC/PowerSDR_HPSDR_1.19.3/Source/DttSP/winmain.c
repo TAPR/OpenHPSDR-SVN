@@ -231,10 +231,10 @@ static void reset_system_audio(size_t nframes)
 		ringb_float_reset (top[thread].jack.ring.i.r);
 		ringb_float_reset (top[thread].jack.auxr.i.l);
 		ringb_float_reset (top[thread].jack.auxr.i.r);
-		ringb_float_clear (top[thread].jack.ring.i.l, top[thread].jack.size * loc[thread].mult.ring-1);
-		ringb_float_clear (top[thread].jack.ring.i.l, top[thread].jack.size * loc[thread].mult.ring-1);
-		ringb_float_reset (top[thread].jack.ring.i.l);
-		ringb_float_reset (top[thread].jack.ring.i.r);
+		//ringb_float_clear (top[thread].jack.ring.i.l, top[thread].jack.size * loc[thread].mult.ring-1);
+		//ringb_float_clear (top[thread].jack.ring.i.l, top[thread].jack.size * loc[thread].mult.ring-1);
+		//ringb_float_reset (top[thread].jack.ring.i.l);
+		//ringb_float_reset (top[thread].jack.ring.i.r);
 //		ringb_float_reset (top[thread].jack.auxr.i.l);
 //		ringb_float_reset (top[thread].jack.auxr.i.r);
 	
@@ -344,7 +344,7 @@ DttSP_EXP void
 Audio_Callback2 (float **input, float **output, unsigned int nframes)
 {
 	unsigned int thread;
-	BOOLEAN b = reset_em;//=FALSE;
+	BOOLEAN b = reset_em=FALSE;//=FALSE;
 	BOOLEAN return_empty=FALSE;
 	for(thread=0;thread<threadno;thread++)
 	{
@@ -379,8 +379,8 @@ Audio_Callback2 (float **input, float **output, unsigned int nframes)
 		if ((ringb_float_read_space (top[thread].jack.ring.o.l) >= nframes)
 			&& (ringb_float_read_space (top[thread].jack.ring.o.r) >= nframes))
 		{
-			/*ringb_float_read (top[thread].jack.auxr.o.l, output[l], nframes);
-			ringb_float_read (top[thread].jack.auxr.o.r, output[r], nframes);*/
+			ringb_float_read (top[thread].jack.auxr.o.l, output[l], nframes);//w5wc
+			ringb_float_read (top[thread].jack.auxr.o.r, output[r], nframes);//w5wc
 			ringb_float_read (top[thread].jack.ring.o.l, output[l], nframes);
 			ringb_float_read (top[thread].jack.ring.o.r, output[r], nframes);
 		}
@@ -388,12 +388,13 @@ Audio_Callback2 (float **input, float **output, unsigned int nframes)
 		{	
 			// rb pathology
 			//reset_system_audio(nframes);
-			for(thread=0;thread<threadno;thread++) 
-			{
+			//for(thread=0;thread<threadno;thread++) 
+			//{
+			    reset_em=TRUE;
 				memset (output[2*thread  ], 0, nframes * sizeof (float));
 				memset (output[2*thread+1], 0, nframes * sizeof (float));
-			}
-			return;
+			//}
+			//return;
 		}
 
 		// input: copy from port to ring
@@ -402,24 +403,25 @@ Audio_Callback2 (float **input, float **output, unsigned int nframes)
 		{
 			ringb_float_write (top[thread].jack.ring.i.l, input[l], nframes);
 			ringb_float_write (top[thread].jack.ring.i.r, input[r], nframes);
-			/*ringb_float_write (top[thread].jack.auxr.i.l, input[l], nframes);
-			ringb_float_write (top[thread].jack.auxr.i.r, input[r], nframes);*/
+			ringb_float_write (top[thread].jack.auxr.i.l, input[l], nframes);
+			ringb_float_write (top[thread].jack.auxr.i.r, input[r], nframes);
 		}
 		else
 		{	
 			// rb pathology
 			//reset_system_audio(nframes);
-			for(thread=0;thread<threadno;thread++) 
-			{
+			//for(thread=0;thread<threadno;thread++) 
+			//{
+			    reset_em=TRUE;
 				memset (output[2*thread  ], 0, nframes * sizeof (float));
 				memset (output[2*thread+1], 0, nframes * sizeof (float));
-			}
-			return;
+			//}
+			//return;
 		}
 		
 		// if enough accumulated in ring, fire dsp
-		if ((ringb_float_read_space (top[thread].jack.ring.i.l) >= top[thread].hold.size.frames) &&
-			(ringb_float_read_space (top[thread].jack.ring.i.r) >= top[thread].hold.size.frames))
+		if (ringb_float_read_space (top[thread].jack.ring.i.l) >= top[thread].hold.size.frames) //&&
+			//(ringb_float_read_space (top[thread].jack.ring.i.r) >= top[thread].hold.size.frames))
 			sem_post (&top[thread].sync.buf.sem);
 	}
 }
@@ -626,14 +628,14 @@ setup ()
 	}
 }
 
-BOOLEAN reset_buflen = FALSE;
+//BOOLEAN reset_buflen = FALSE;
 int
 reset_for_buflen (unsigned int thread, int new_buflen)
 {
 	// make sure new size is power of 2
 	if (popcnt (new_buflen) != 1)
 		return -1;
-	reset_buflen = TRUE;
+//	reset_buflen = TRUE;
 	uni[thread].buflen = new_buflen;
 	top[thread].jack.reset_size = new_buflen;
 	safefree ((char *) top[thread].hold.buf.r);
@@ -642,7 +644,7 @@ reset_for_buflen (unsigned int thread, int new_buflen)
 	safefree ((char *) top[thread].hold.aux.l);
 
 	destroy_workspace (thread);
-	reset_buflen = FALSE;
+//	reset_buflen = FALSE;
 	loc[thread].def.size = new_buflen;
 	setup_workspace (loc[thread].def.rate,
 		   loc[thread].def.size,

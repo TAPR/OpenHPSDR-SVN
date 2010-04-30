@@ -157,6 +157,9 @@ setup_rx (int k, unsigned int thread)
 		FiltOvSv_storepoint (rx[thread][k].filt.ovsv),
 		"init rx[thread][k].buf.o");
 
+	rx[thread][k].dcb = newDCBlocker(DCB_SINGLE_POLE,rx[thread][k].buf.i);
+	rx[thread][k].dcb->flag = FALSE;
+
 	/* conversion */
 	rx[thread][k].osc.freq = -9000.0;
 	rx[thread][k].osc.phase = 0.0;
@@ -168,13 +171,13 @@ setup_rx (int k, unsigned int thread)
 
 	rx[thread][k].dttspagc.gen = newDttSPAgc (
 		agcMED,							// mode kept around for control reasons alone
-		CXBbase (rx[thread][k].buf.o),	// input buffer
-		CXBsize (rx[thread][k].buf.o),	// output buffer
+		CXBbase (rx[thread][k].buf.o),	// buffer pointer
+		CXBsize (rx[thread][k].buf.o),	// buffer size
 		1.0f,							// Target output
 		2.0f,							// Attack time constant in ms
 		250,							// Decay time constant in ms
 		1.0,							// Slope
-		250,							//Hangtime in ms
+		250,							// Hangtime in ms
 		uni[thread].samplerate,			// Sample rate
 		31622.8f,						// Maximum gain as a multipler, linear not dB
 		0.00001f,						// Minimum gain as a multipler, linear not dB
@@ -295,6 +298,8 @@ setup_tx (unsigned int thread)
 		uni[thread].samplerate, uni[thread].buflen + 1);
 	tx[thread].filt.ovsv = newFiltOvSv (FIRcoef (tx[thread].filt.coef),
 		FIRsize (tx[thread].filt.coef), uni[thread].wisdom.bits);
+	tx[thread].filt.ovsv_pre = newFiltOvSv (FIRcoef (tx[thread].filt.coef),
+		FIRsize (tx[thread].filt.coef), uni[thread].wisdom.bits);
 	normalize_vec_COMPLEX (tx[thread].filt.ovsv->zfvec, tx[thread].filt.ovsv->fftlen,tx[thread].filt.ovsv->scale);
 
 	// hack for EQ
@@ -308,6 +313,10 @@ setup_tx (unsigned int thread)
 		FiltOvSv_fetchpoint (tx[thread].filt.ovsv), "init tx[thread].buf.i");
 	tx[thread].buf.o = newCXB (FiltOvSv_storesize (tx[thread].filt.ovsv),
 		FiltOvSv_storepoint (tx[thread].filt.ovsv), "init tx[thread].buf.o");
+	tx[thread].buf.ic = newCXB (FiltOvSv_fetchsize (tx[thread].filt.ovsv_pre),
+		FiltOvSv_fetchpoint (tx[thread].filt.ovsv_pre), "init tx[thread].buf.ic");
+	tx[thread].buf.oc = newCXB (FiltOvSv_storesize (tx[thread].filt.ovsv_pre),
+		FiltOvSv_storepoint (tx[thread].filt.ovsv_pre), "init tx[thread].buf.oc");
 
 	tx[thread].dcb.flag = FALSE;
 	tx[thread].dcb.gen = newDCBlocker (DCB_MED, tx[thread].buf.i);
@@ -354,11 +363,11 @@ setup_tx (unsigned int thread)
 		1,								// mode kept around for control reasons alone
 		CXBbase (tx[thread].buf.i),		// input buffer
 		CXBsize (tx[thread].buf.i),		// output buffer
-		1.2f,							// Target output
+		1.08f,							// Target output
 		2,								// Attack time constant in ms
 		10,								// Decay time constant in ms
 		1,								// Slope
-		500,							//Hangtime in ms
+		500,							// Hangtime in ms
 		uni[thread].samplerate, 1.0,	// Maximum gain as a multipler, linear not dB
 		.000001f,						// Minimum gain as a multipler, linear not dB
 		1.0,							// Set the current gain
@@ -567,6 +576,8 @@ do_rx_meter (int k, unsigned int thread, CXB buf, int tap)
 		case RXMETER_POST_AGC:
 			uni[thread].meter.rx.val[k][AGC_GAIN] =
 				(REAL) (20.0 * log10 (rx[thread][k].dttspagc.gen->gain.now + 1e-10));
+			//fprintf(stdout, "rx gain: %15.12f\n", uni[thread].meter.rx.val[k][AGC_GAIN]);
+			//fflush(stdout);
 			break;
 		default:
 			break;
@@ -779,6 +790,8 @@ do_rx_pre (int k, unsigned int thread)
 	// metering for uncorrected values here
 	do_rx_meter (k, thread, rx[thread][k].buf.i, RXMETER_PRE_CONV);
 
+	if (rx[thread][k].dcb->flag) DCBlock(rx[thread][k].dcb);
+
 	correctIQ (rx[thread][k].buf.i, rx[thread][k].iqfix, FALSE, k);
 
 	/* 2nd IF conversion happens here */
@@ -893,16 +906,21 @@ do_rx_post (int k, unsigned int thread)
 		lmsr_adapt (rx[thread][k].anr.gen);
 		//blms_adapt(rx[thread][k].banr.gen);
 
+	/*if(thread == 0 && k == 0)
+		fprintf(stdout, "before: %15f12  ", CXBpeak(rx[thread][k].buf.i));*/
+
 	if (diversity.flag && (k==0) && (thread==2))
 		for (i = 0; i < n; i++) CXBdata(rx[thread][k].buf.o,i) = cxzero;
 	else 
-
 		DttSPAgc (rx[thread][k].dttspagc.gen, rx[thread][k].tick);
+	
+	/*if(thread == 0 && k == 0)
+	{
+		fprintf(stdout, "after: %15f12\n", CXBpeak(rx[thread][k].buf.o));
+		fflush(stdout);
+	}*/
 
-
-
-
-	do_rx_meter(k, thread, rx[thread][k].buf.o,RXMETER_POST_AGC);
+	do_rx_meter(k, thread, rx[thread][k].buf.o, RXMETER_POST_AGC);
 	do_rx_spectrum (k, thread, rx[thread][k].buf.o, SPEC_POST_AGC);
 
 	if (!rx[thread][k].bin.flag)
@@ -1054,6 +1072,8 @@ do_tx_meter (unsigned int thread, CXB buf, TXMETERTYPE mt)
 			alc_pk = CXBpeak(tx[thread].buf.i);
 			uni[thread].meter.tx.val[TX_ALC_PK] = (REAL) (-20.0 * log10 (alc_pk+ 1e-16));
 			uni[thread].meter.tx.val[TX_ALC_G] = (REAL)(20.0*log10(tx[thread].alc.gen->gain.now+1e-16));
+			//fprintf(stdout, "pk: %15.12f  comp: %15.12f\n", uni[thread].meter.tx.val[TX_ALC_PK], uni[thread].meter.tx.val[TX_ALC_G]);
+			//fflush(stdout);
 			break;
 
 		case TX_EQ:
@@ -1130,7 +1150,11 @@ do_tx_pre (unsigned int thread)
 			do_tx_meter (thread, tx[thread].buf.i, TX_EQ);
 			do_tx_meter (thread, tx[thread].buf.i, TX_LVL);
 			do_tx_meter (thread, tx[thread].buf.i, TX_COMP);
+
+			if (tx[thread].alc.flag)
+				DttSPAgc (tx[thread].alc.gen, tx[thread].tick);
 			do_tx_meter (thread, tx[thread].buf.i, TX_ALC);
+
 			do_tx_meter (thread, tx[thread].buf.i, TX_CPDR);
 			break;
 		default:
@@ -1162,10 +1186,6 @@ do_tx_pre (unsigned int thread)
 			break;						
 	}
 }
-// KD5TFD added - experimental support for EER mode transmit, and Mercury transmit
-extern int EerXmit;
-#define SQRT2 (1.414213562f)
-extern int MercuryXmit;
 
 PRIVATE void
 do_tx_post (unsigned int thread)
@@ -1181,38 +1201,9 @@ do_tx_post (unsigned int thread)
 		do_tx_spectrum (thread, tx[thread].buf.o);
 	//fprintf(stderr,"[%.2f,%.2f]  ", peakl(tx[thread].buf.o), peakr(tx[thread].buf.o));
 
-        // kd5tfd added eer support
-        // for envelope elimination restoration xmit we want amgnitude in I and phase in q
-		if ( EerXmit  )
-		{
-			int i, n;
-			switch ( tx[thread].mode )
-			{
-				case USB:
-				case LSB:
-				case CWU:
-				case CWL:
-				case DIGU:
-				case DIGL:
-				case DSB:	            	
-					n = CXBhave(tx[thread].buf.o);
-					for ( i = 0; i < n; i++ ) 
-					{
-						COMPLEX z = Cr2p(CXBdata(tx[thread].buf.o, i));
-						// mag in real, angle in im
-						z.re = z.re / SQRT2;   // normalize -  +1 is max value allowable
-						z.im = z.im  / (REAL)PI;     // normalize - want angle to range -/+ 1;
-						CXBdata(tx[thread].buf.o, i) = z;
-					}
-					break;
-				default:
-					break;
-			}
-		}
-
 	// meter modulated signal
 
-	if (tx[thread].osc.gen->Frequency != 0.0 && MercuryXmit == 0)
+	if (tx[thread].osc.gen->Frequency != 0.0)
 	{
 		int i;
 		ComplexOSC (tx[thread].osc.gen);

@@ -47,6 +47,7 @@ Bridgewater, NJ 08807
 #define DCB_MED (1)
 #define DCB_HIGH (2)
 #define DCB_SUPER (3)
+#define DCB_SINGLE_POLE (4)
 
 typedef struct _dcblocker
 {
@@ -55,7 +56,10 @@ typedef struct _dcblocker
     REAL inp[BLKMEM], out[BLKMEM];
   } old;
   int lev;
+  COMPLEX sigval;
   CXB buf;
+  REAL gain;
+  BOOLEAN flag;
 } DCBlockerInfo, *DCBlocker;
 
 extern void DCBlock (DCBlocker dcb);
