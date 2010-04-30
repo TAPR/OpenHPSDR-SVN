@@ -3406,5 +3406,41 @@ namespace DataDecoder.Properties {
                 this["chkKnobEnab2"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int cboTkSw1 {
+            get {
+                return ((int)(this["cboTkSw1"]));
+            }
+            set {
+                this["cboTkSw1"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int cboTkSw2 {
+            get {
+                return ((int)(this["cboTkSw2"]));
+            }
+            set {
+                this["cboTkSw2"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int cboTkSw3 {
+            get {
+                return ((int)(this["cboTkSw3"]));
+            }
+            set {
+                this["cboTkSw3"] = value;
+            }
+        }
     }
 }

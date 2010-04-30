@@ -583,7 +583,8 @@ namespace DataDecoder
             {
                 bool bReturnLog = false;
                 bReturnLog = ErrorLog.ErrorRoutine(false, enableErrorLog, ex);
-                if (false == bReturnLog) MessageBox.Show("Unable to write to log");
+                if (false == bReturnLog) MessageBox.Show(new Form() { TopMost = true }, 
+                    "Unable to write to log");
             }
 
 
@@ -656,7 +657,7 @@ namespace DataDecoder
             if (set.Temp == 0) temp_format = TempFormat.Celsius;
             else temp_format = TempFormat.Fahrenheit;
 
-            //            FWSetup();  // setup the FW ports
+            //FWSetup();  // setup the FW ports
             X2SetUp();  // setup the X2 Matrix
             WN2SetUp(); // setup the WN2
             PMSetup();  // setup the Power Master
@@ -1023,7 +1024,7 @@ namespace DataDecoder
                             WriteToPort("ZZTI1;", iSleep);
                             lblHighSWR.Visible = true;
                             // Display a message that the SWR alarm value was exceeded.
-                            MessageBox.Show(this,
+                            MessageBox.Show(new Form() { TopMost = true },
                                 "The SWR alarm value setting has been exceeded.\r\r" +
                                 "PowerSDR's transmit ability is now disabled.\r\r" +
                                 "Press OK to dismiss this message and to Reset the SWR Alarm",
@@ -1206,9 +1207,10 @@ namespace DataDecoder
                 if (off > 180 || off < -180)
                 {
                     txtAzOffset.Text = "0";
-                    MessageBox.Show("The Offset value is out of range.\r\r" +
-                    "Please Re-Enter the value to be between +/- 180 degrees",
-                    "Input Error");
+                    MessageBox.Show(new Form() { TopMost = true }, 
+                        "The Offset value is out of range.\r\r" +
+                        "Please Re-Enter the value to be between +/- 180 degrees",
+                        "Input Error");
                     return;
                 }
                 set.AzOffset = Convert.ToInt32(txtAzOffset.Text);
@@ -1562,8 +1564,9 @@ namespace DataDecoder
                 //dg1.DataMember = ("band");
                 if (txtFile0.Text == null || txtFile0.Text == "")
                 {
-                    MessageBox.Show("Please enter a name for the file", "File Name Error",
-                    MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    MessageBox.Show(new Form() { TopMost = true }, 
+                        "Please enter a name for the file", "File Name Error",
+                        MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                     return;
                 }
                 DataSet ds = (DataSet)dg1.DataSource;
@@ -1578,7 +1581,8 @@ namespace DataDecoder
             {
                 bool bReturnLog = false;
                 bReturnLog = ErrorLog.ErrorRoutine(false, enableErrorLog, ex);
-                if (false == bReturnLog) MessageBox.Show("Unable to write to log");
+                if (false == bReturnLog) MessageBox.Show(new Form() { TopMost = true }, 
+                    "Unable to write to log");
             }
         }
         // call the help file
@@ -1592,7 +1596,8 @@ namespace DataDecoder
             {
                 bool bReturnLog = false;
                 bReturnLog = ErrorLog.ErrorRoutine(false, enableErrorLog, ex);
-                if (false == bReturnLog) MessageBox.Show("Unable to write to log");
+                if (false == bReturnLog) MessageBox.Show(new Form() { TopMost = true }, 
+                    "Unable to write to log");
             }
         }
         // Create a random nnumber between min and max
@@ -1616,7 +1621,8 @@ namespace DataDecoder
             {
                 bool bReturnLog = false;
                 bReturnLog = ErrorLog.ErrorRoutine(false, enableErrorLog, ex);
-                if (false == bReturnLog) MessageBox.Show("Unable to write to log");
+                if (false == bReturnLog) MessageBox.Show(new Form() { TopMost = true }, 
+                    "Unable to write to log");
             }
             // go see if there is a later DDUtil version available & tell the user
             try
@@ -1669,7 +1675,7 @@ namespace DataDecoder
             if (bMacChg)    // see if macro was changed and not saved.
             {
                 DialogResult result;
-                result = MessageBox.Show(this,
+                result = MessageBox.Show(new Form() { TopMost = true },
                     "Are you sure you want to exit?\n\n" +
                     "Macro data has been changed and not saved!\n\n" +
                     "If you want to save your work press YES\n" +
@@ -1686,7 +1692,7 @@ namespace DataDecoder
             if (bSo2rChg && chkSoEnab.Checked && !bClosePass1) 
             {
                 DialogResult result;
-                result = MessageBox.Show(this,
+                result = MessageBox.Show(new Form() { TopMost = true },
                     "Are you sure you want to exit?\n\n" +
                     "SO2R data has been changed and has not saved!\n\n" +
                     "If you want to save your work press YES\n" +
@@ -1764,7 +1770,8 @@ namespace DataDecoder
             {
                 bool bReturnLog = false;
                 bReturnLog = ErrorLog.ErrorRoutine(false, enableErrorLog, ex);
-                if (false == bReturnLog) MessageBox.Show("Unable to write to log");
+                if (false == bReturnLog) MessageBox.Show(new Form() { TopMost = true }, 
+                    "Unable to write to log");
             }
         }
 
@@ -1828,7 +1835,8 @@ namespace DataDecoder
             {
                 bool bReturnLog = false;
                 bReturnLog = ErrorLog.ErrorRoutine(false, enableErrorLog, ex);
-                if (false == bReturnLog) MessageBox.Show("Unable to write to log");
+                if (false == bReturnLog) MessageBox.Show(new Form() { TopMost = true }, 
+                    "Unable to write to log");
             }
         }
         // The LPT port has changed
@@ -1949,8 +1957,9 @@ namespace DataDecoder
                 }
                 catch
                 {
-                    MessageBox.Show("The RCP1 serial port " + LogPort.PortName +
-                       " cannot be opened!", "Port Error",
+                    MessageBox.Show(new Form() { TopMost = true }, 
+                        "The RCP1 serial port " + LogPort.PortName +
+                        " cannot be opened!", "Port Error",
                        MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     cboLogPort.SelectedIndex = 0;
                     set.LogPort = 0;
@@ -1975,8 +1984,9 @@ namespace DataDecoder
                 }
                 catch
                 {
-                    MessageBox.Show("The RCP1 Rotor port " + RCP1Rotor.PortName +
-                       " cannot be opened!", "Port Error",
+                    MessageBox.Show(new Form() { TopMost = true }, 
+                        "The RCP1 Rotor port " + RCP1Rotor.PortName +
+                        " cannot be opened!", "Port Error",
                        MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     cboRCP1Rotor.SelectedIndex = 0;
                     set.RCP1RotorPort = 0;
@@ -2001,8 +2011,9 @@ namespace DataDecoder
                 }
                 catch
                 {
-                    MessageBox.Show("The RCP2 Rotor port " + RCP2Rotor.PortName +
-                       " cannot be opened!", "Port Error",
+                    MessageBox.Show(new Form() { TopMost = true }, 
+                        "The RCP2 Rotor port " + RCP2Rotor.PortName +
+                        " cannot be opened!", "Port Error",
                        MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     cboRCP2Rotor.SelectedIndex = 0;
                     set.RCP2RotorPort = 0;
@@ -2027,7 +2038,8 @@ namespace DataDecoder
                 }
                 catch
                 {
-                    MessageBox.Show("The RCP3 Rotor port " + RCP3Rotor.PortName +
+                    MessageBox.Show(new Form() { TopMost = true }, 
+                        "The RCP3 Rotor port " + RCP3Rotor.PortName +
                        " cannot be opened!", "Port Error",
                        MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     cboRCP3Rotor.SelectedIndex = 0;
@@ -2053,8 +2065,9 @@ namespace DataDecoder
                 }
                 catch
                 {
-                    MessageBox.Show("The RCP4 Rotor port " + RCP4Rotor.PortName +
-                       " cannot be opened!", "Port Error",
+                    MessageBox.Show(new Form() { TopMost = true }, 
+                        "The RCP4 Rotor port " + RCP4Rotor.PortName +
+                        " cannot be opened!", "Port Error",
                        MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     cboRCP4Rotor.SelectedIndex = 0;
                     set.RCP4RotorPort = 0;
@@ -2079,8 +2092,9 @@ namespace DataDecoder
                 }
                 catch
                 {
-                    MessageBox.Show("The Passive Listener serial port " + AccPort.PortName +
-                       " cannot be opened!", "Port Error",
+                    MessageBox.Show(new Form() { TopMost = true }, 
+                        "The Passive Listener serial port " + AccPort.PortName +
+                        " cannot be opened!", "Port Error",
                        MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     cboSerAcc.SelectedIndex = 0;
                     set.AccPort = 0;
@@ -2115,8 +2129,9 @@ namespace DataDecoder
             }
             catch
             {
-                MessageBox.Show("The Radio serial port " + sp.Name +
-                   " cannot be opened!\n", "Port Error",
+                MessageBox.Show(new Form() { TopMost = true }, 
+                    "The Radio serial port " + sp.Name +
+                    " cannot be opened!\n", "Port Error",
                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 cboCAT.SelectedIndex = 0; ;
                 set.RadioPort = 0;
@@ -2262,9 +2277,10 @@ namespace DataDecoder
                 }
                 else
                 {
-                    MessageBox.Show("No port has been selected for this RCP.\n\n" +
-                    "Please select a valid port number and try again.", "Port Error",
-                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBox.Show(new Form() { TopMost = true }, 
+                        "No port has been selected for this RCP.\n\n" +
+                        "Please select a valid port number and try again.", "Port Error",
+                        MessageBoxButtons.OK, MessageBoxIcon.Warning);
 
                     chkRCP2.Checked = false;
                     mini.chkRCP2.Checked = false;
@@ -2290,9 +2306,10 @@ namespace DataDecoder
                 }
                 else
                 {
-                    MessageBox.Show("No port has been selected for this RCP.\n\n" +
-                    "Please select a valid port number and try again.", "Port Error",
-                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBox.Show(new Form() { TopMost = true }, 
+                        "No port has been selected for this RCP.\n\n" +
+                        "Please select a valid port number and try again.", "Port Error",
+                        MessageBoxButtons.OK, MessageBoxIcon.Warning);
 
                     chkRCP3.Checked = false;
                     mini.chkRCP3.Checked = false;
@@ -2318,9 +2335,10 @@ namespace DataDecoder
                 }
                 else
                 {
-                    MessageBox.Show("No port has been selected for this RCP.\n\n" +
-                    "Please select a valid port number and try again.", "Port Error",
-                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBox.Show(new Form() { TopMost = true }, 
+                        "No port has been selected for this RCP.\n\n" +
+                        "Please select a valid port number and try again.", "Port Error",
+                        MessageBoxButtons.OK, MessageBoxIcon.Warning);
 
                     chkRCP4.Checked = false;
                     mini.chkRCP4.Checked = false;
@@ -2348,9 +2366,10 @@ namespace DataDecoder
                 }
                 catch
                 {
-                    MessageBox.Show("The RCP2 serial port " + RCP2port.PortName +
-                       " cannot be opened!\n", "Port Error",
-                       MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBox.Show(new Form() { TopMost = true }, 
+                        "The RCP2 serial port " + RCP2port.PortName +
+                        " cannot be opened!\n", "Port Error",
+                        MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     chkRCP2.Checked = false;
                     cboRCP2.SelectedIndex = 0;
                     set.cboRCP2 = 0;
@@ -2381,9 +2400,10 @@ namespace DataDecoder
                 }
                 catch
                 {
-                    MessageBox.Show("The RCP3 serial port " + RCP3port.PortName +
-                       " cannot be opened!\n", "Port Error",
-                       MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBox.Show(new Form() { TopMost = true }, 
+                        "The RCP3 serial port " + RCP3port.PortName +
+                        " cannot be opened!\n", "Port Error",
+                        MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     chkRCP3.Checked = false;
                     cboRCP3.SelectedIndex = 0;
                     set.Save();
@@ -2414,9 +2434,10 @@ namespace DataDecoder
                 }
                 catch
                 {
-                    MessageBox.Show("The RCP4 serial port " + RCP4port.PortName +
-                       " cannot be opened!\n", "Port Error",
-                       MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBox.Show(new Form() { TopMost = true }, 
+                        "The RCP4 serial port " + RCP4port.PortName +
+                        " cannot be opened!\n", "Port Error",
+                        MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     chkRCP4.Checked = false;
                     cboRCP4.SelectedIndex = 0;
                     set.cboRCP4 = 0;
@@ -2444,9 +2465,10 @@ namespace DataDecoder
                 }
                 else
                 {
-                    MessageBox.Show("No port has been selected for PW1.\n\n" +
-                    "Please select a valid port number and try again.", "Port Error",
-                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBox.Show(new Form() { TopMost = true }, 
+                        "No port has been selected for PW1.\n\n" +
+                        "Please select a valid port number and try again.", "Port Error",
+                        MessageBoxButtons.OK, MessageBoxIcon.Warning);
 
                     chkPW1.Checked = false;
                     set.chkPW1 = false;
@@ -2473,9 +2495,10 @@ namespace DataDecoder
                 }
                 catch
                 {
-                    MessageBox.Show("The IC-PW1 serial port " + PW1port.PortName +
-                       " cannot be opened!\n", "Port Error",
-                       MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBox.Show(new Form() { TopMost = true }, 
+                        "The IC-PW1 serial port " + PW1port.PortName +
+                        " cannot be opened!\n", "Port Error",
+                        MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     chkPW1.Checked = false;
                     cboPW1.SelectedIndex = 0;
                     set.cboPW1 = 0;
@@ -2689,7 +2712,8 @@ namespace DataDecoder
             {
                 bool bReturnLog = false;
                 bReturnLog = ErrorLog.ErrorRoutine(false, enableErrorLog, ex);
-                if (false == bReturnLog) MessageBox.Show("Unable to write to log");
+                if (false == bReturnLog) MessageBox.Show(new Form() { TopMost = true }, 
+                    "Unable to write to log");
             }
             // Read in the Band data from the XML file into the hash table
             // Uses format 14080 = 140, 3575 = 35. This placs a different value pair every 100 khz
@@ -2722,7 +2746,8 @@ namespace DataDecoder
             {
                 bool bReturnLog = false;
                 bReturnLog = ErrorLog.ErrorRoutine(false, enableErrorLog, ex);
-                if (false == bReturnLog) MessageBox.Show("Unable to write to log");
+                if (false == bReturnLog) MessageBox.Show(new Form() { TopMost = true }, 
+                    "Unable to write to log");
             }
         }
         // Lookup freq data in hash table & output to LPT port
@@ -3566,7 +3591,8 @@ namespace DataDecoder
             {
                 bool bReturnLog = false;
                 bReturnLog = ErrorLog.ErrorRoutine(false, enableErrorLog, ex);
-                if (false == bReturnLog) MessageBox.Show("Unable to write to log");
+                if (false == bReturnLog) MessageBox.Show(new Form() { TopMost = true }, 
+                    "Unable to write to log");
             }
 
         }
@@ -3621,7 +3647,8 @@ namespace DataDecoder
 
             if (!oneBand)
             {
-                MessageBox.Show("To run the Auto Tune procedure, at\r" +
+                MessageBox.Show(new Form() { TopMost = true }, 
+                    "To run the Auto Tune procedure, at\r" +
                     "least one (1) band must be checked", "Input Error",
                     MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 return;
@@ -4056,9 +4083,10 @@ namespace DataDecoder
                 }
                 catch
                 {
-                    MessageBox.Show("The Amplifier serial port " + AlphaPort.PortName +
-                       " cannot be opened!\n", "Port Error",
-                       MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBox.Show(new Form() { TopMost = true }, 
+                        "The Amplifier serial port " + AlphaPort.PortName +
+                        " cannot be opened!\n", "Port Error",
+                        MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     cboAlpha.SelectedIndex = 0;
                     chkAlpha.Checked = false;
                     set.AlphaPort = 0;
@@ -4215,7 +4243,8 @@ namespace DataDecoder
                 {
                     bool bReturnLog = false;
                     bReturnLog = ErrorLog.ErrorRoutine(false, enableErrorLog, ex);
-                    if (false == bReturnLog) MessageBox.Show("Unable to write to log");
+                    if (false == bReturnLog) MessageBox.Show(new Form() { TopMost = true }, 
+                        "Unable to write to log");
                 }
 
             }//if (chkAlpha.Checked)
@@ -4733,9 +4762,10 @@ namespace DataDecoder
                 }
                 catch
                 {
-                    MessageBox.Show("The LP-100 serial port " + LPport.PortName +
-                       " cannot be opened!\n", "Port Error",
-                       MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBox.Show(new Form() { TopMost = true }, 
+                        "The LP-100 serial port " + LPport.PortName +
+                        " cannot be opened!\n", "Port Error",
+                        MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     chkLPenab.Checked = false; 
                     cboLPport.SelectedIndex = 0;
                     set.LPportNum = 0;
@@ -4780,9 +4810,10 @@ namespace DataDecoder
                 }
                 else
                 {
-                    MessageBox.Show("No port has been selected for the LP-100.\n\n" +
-                    "Please select a valid port number and try again.", "Port Error",
-                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBox.Show(new Form() { TopMost = true }, 
+                        "No port has been selected for the LP-100.\n\n" +
+                        "Please select a valid port number and try again.", "Port Error",
+                        MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     chkLPenab.Checked = false; lpTimer.Enabled = false; set.LPenab = false;
                     txtAvg.Text = ""; txtFwd.Text = ""; txtSWR.Text = "";
                     mini.txtAvg.Text = ""; mini.txtFwd.Text = ""; mini.txtSWR.Text = "";
@@ -4883,8 +4914,9 @@ namespace DataDecoder
             {
                 if (txtMacFile.Text == null || txtMacFile.Text == "")
                 {
-                    MessageBox.Show("Please enter a name for the file", "File Name Error",
-                    MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    MessageBox.Show(new Form() { TopMost = true }, 
+                        "Please enter a name for the file", "File Name Error",
+                        MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                     return;
                 }
                 // Write out the Macro Data from the grid to the XML file
@@ -4902,7 +4934,8 @@ namespace DataDecoder
             {
                 bool bReturnLog = false;
                 bReturnLog = ErrorLog.ErrorRoutine(false, enableErrorLog, ex);
-                if (false == bReturnLog) MessageBox.Show("Unable to write to log");
+                if (false == bReturnLog) MessageBox.Show(new Form() { TopMost = true }, 
+                    "Unable to write to log");
             }
         }
         // Re-Loads the currently open Macro File. Calls GetMacData()
@@ -4933,7 +4966,8 @@ namespace DataDecoder
             {
                 bool bReturnLog = false;
                 bReturnLog = ErrorLog.ErrorRoutine(false, enableErrorLog, ex);
-                if (false == bReturnLog) MessageBox.Show("Unable to write to log");
+                if (false == bReturnLog) MessageBox.Show(new Form() { TopMost = true }, 
+                    "Unable to write to log");
             }
         }
         // If SDR not transmitting and SteppIR is not moving
@@ -4961,7 +4995,8 @@ namespace DataDecoder
             catch (NullReferenceException)
             {
                 int btn = button + 1;
-                MessageBox.Show("There are no commands setup for this Macro " + button);
+                MessageBox.Show(new Form() { TopMost = true }, 
+                    "There are no commands setup for this Macro " + button);
             }
         }
         // Macro button #1 was pressed
@@ -5183,7 +5218,8 @@ namespace DataDecoder
             {
                 bool bReturnLog = false;
                 bReturnLog = ErrorLog.ErrorRoutine(false, enableErrorLog, ex);
-                if (false == bReturnLog) MessageBox.Show("Unable to write to log");
+                if (false == bReturnLog) MessageBox.Show(new Form() { TopMost = true }, 
+                    "Unable to write to log");
             }
         }
         // Macro command is DDUtil specific "DDSP045;"
@@ -5333,7 +5369,8 @@ namespace DataDecoder
                             if (txtMacSwOn.Text.Length > 5)
                                 ParseBuffer(txtMacSwOn.Text);
                             if (txtMacSwMsg.Text.Length > 2)
-                            { MessageBox.Show(txtMacSwMsg.Text, "Macro Switch Event!"); }
+                            { MessageBox.Show(new Form() { TopMost = true },
+                                txtMacSwMsg.Text, "Macro Switch Event!"); }
                         }
                         else if (txtMacSwOff.Text.Length > 5)
                             ParseBuffer(txtMacSwOff.Text);
@@ -5354,7 +5391,8 @@ namespace DataDecoder
                 }
                 catch
                 {
-                    MessageBox.Show("The Macro switch serial port " + MacroPort.PortName +
+                    MessageBox.Show(new Form() { TopMost = true },
+                       "The Macro switch serial port " + MacroPort.PortName +
                        " cannot be opened!\n", "Port Error",
                        MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     cboMacSwPort.SelectedIndex = 0;
@@ -5672,6 +5710,7 @@ namespace DataDecoder
 
         #region Menu Events
 
+        /*********** Main Menu Bar ********************************************/
         // Main Menu|File|Exit
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -5688,7 +5727,7 @@ namespace DataDecoder
         // Main Menu|Options|Auto Drive | Amp Settings
         private void ampSettingsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            MessageBox.Show(
+            MessageBox.Show(new Form() { TopMost = true },
                 "Band  Value\n" +
                 "------   -----\n" +
                 "160    " + set.pwr1.TrimStart('0') + "\n" +
@@ -5818,7 +5857,7 @@ namespace DataDecoder
             }
             catch
             {
-                MessageBox.Show(
+                MessageBox.Show(new Form() { TopMost = true },
                     "There was a problem locating or starting vspMgr.exe!\n\n" +
                     "Please make sure the file location for vspMgr.exe is entered properly\n" +
                     "in the File location window on the 'Other' tab (see tool tips for info).\n" +
@@ -5860,15 +5899,16 @@ namespace DataDecoder
 //                if (String.Compare(ver, tempStr) == 0)
                 if (Convert.ToInt32(newVer) == Convert.ToInt32(oldVer))
                     {
-                    MessageBox.Show("Your current version of DDUtil is up to date!",
-                        "DDUtil rev. " + ver);
+                        MessageBox.Show(new Form() { TopMost = true }, 
+                            "Your current version of DDUtil is up to date!",
+                            "DDUtil rev. " + ver);
                 }
                 else
                 {
                     
                     myWebClient.DownloadFile(myStringWebResource, upDate);
                     process = Process.Start(upDate);
-                    if (MessageBox.Show(
+                    if (MessageBox.Show(new Form() { TopMost = true },
                         "The Zip file should now be downloaded and open on your desktop.\r\r" +
                         "After dismissing this window, double-click the DDUtil_Setup.msi file \r" +
                         "in the open Zip dialog window to start the update process.\r\r" +
@@ -5879,7 +5919,7 @@ namespace DataDecoder
             }
             catch (WebException w)
             {
-                MessageBox.Show(
+                MessageBox.Show(new Form() { TopMost = true },
                     "There has been a problem downloading the new file.\r\r" + w.Message,
                      "Web Site Error!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             }
@@ -5917,7 +5957,7 @@ namespace DataDecoder
         // Context Menu|Help|Slave Radio Info
         private void slaveRadioInfoToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            MessageBox.Show(
+            MessageBox.Show(new Form() { TopMost = true },
                 "Info for selecting a Slave Radio Type\n\n" +
                 "- Select Kenwood for:\n" +
                 "   All Kenwoods, K2, K3, FT9000, FT2000, FT950, FT450\n\n" +
@@ -5931,7 +5971,7 @@ namespace DataDecoder
         // Context Menu|Help|LP-100
         private void lP100ToolStripMenuItem1_Click(object sender, EventArgs e)
         {
-            MessageBox.Show(
+            MessageBox.Show(new Form() { TopMost = true },
                 "- Select the port the LP-100 is connected to.\n\n" +
                 "- Select the polling interval in MS. This needs to\n" +
                 "  be fairly fast or the readings will lag behind. \n" +
@@ -5942,7 +5982,7 @@ namespace DataDecoder
         // Context Menu|Help|ICOM IC-PW1
         private void iCOMICPW1ToolStripMenuItem1_Click(object sender, EventArgs e)
         {
-            MessageBox.Show(
+            MessageBox.Show(new Form() { TopMost = true },
                 "- Select the port to which the IC-PW1 is attached.\n\n" +
                 "- Select the CI-V (ta) address for DDUtil. This address is\n" +
                 "  required to let the IC-PW1 know who is talking to it.\n" +
@@ -5953,7 +5993,7 @@ namespace DataDecoder
         // Context Menu|Help|Macro Commands
         private void macroCommandsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            MessageBox.Show(
+            MessageBox.Show(new Form() { TopMost = true },
             "- To execute a macro command, press either the appropriate form button or desiginated 'F' key\n\n" +
             "- To display the Macro Editor screen, click any open spot on the Macro tab.\n\n" +
             "- To close the Macro Editor screen, click in the open spot at the end of the Data File Group\n\n" +
@@ -5963,7 +6003,7 @@ namespace DataDecoder
         // Context Menu|Help|RCP ports
         private void rCPPortsToolStripMenuItem1_Click(object sender, EventArgs e)
         {
-            MessageBox.Show(
+            MessageBox.Show(new Form() { TopMost = true },
                 "Setup procedure for using the bi-directional RCP ports\n\n" +
                 "These ports are for programs that need to talk to the radio\n" +
                 "in order to change frequency, mode and other radio parameters.\n\n" +
@@ -5974,7 +6014,7 @@ namespace DataDecoder
         // Context Menu|Help|Rotor Control
         private void rotorControlToolStripMenuItem1_Click(object sender, EventArgs e)
         {
-            MessageBox.Show(
+            MessageBox.Show(new Form() { TopMost = true },
                 "Setup procedure for using Rotor Control\n\n" +
                 "- Select the Rotor Model and Speed (if applicable)\n\n" +
                 "- Select the desired Serial Port for your rotor.\n\n" +
@@ -5986,7 +6026,7 @@ namespace DataDecoder
         // Context Menu|Help|WaveNode watt meter
         private void waveNodeToolStripMenuItem1_Click(object sender, EventArgs e)
         {
-            MessageBox.Show(
+            MessageBox.Show(new Form() { TopMost = true },
                 "Setup procedure for using the WN2 watt meter\n\n" +
                 "- Select the Coupler and it's type you want to read.\n\n" +
                 "- If the hardware becomes inoperative, toggle the Enable check box.\n\n" +
@@ -6322,8 +6362,9 @@ namespace DataDecoder
                 }
                 else
                 {
-                    MessageBox.Show("No port has been selected for the Power Master.\n\n" +
-                    "Please select a valid port number and try again.", "Port Error",
+                    MessageBox.Show(new Form() { TopMost = true }, 
+                        "No port has been selected for the Power Master.\n\n" +
+                        "Please select a valid port number and try again.", "Port Error",
                     MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     chkPM.Checked = false; set.chkPM = false;
                     txtAvg.Text = ""; txtFwd.Text = ""; txtSWR.Text = "";
@@ -6362,7 +6403,8 @@ namespace DataDecoder
                 }
                 catch
                 {
-                    MessageBox.Show("The Power Master serial port " + PMport.PortName +
+                    MessageBox.Show(new Form() { TopMost = true }, 
+                       "The Power Master serial port " + PMport.PortName +
                        " cannot be opened!\n", "Port Error",
                        MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     chkPM.Checked = false;
@@ -6589,7 +6631,7 @@ namespace DataDecoder
                 }
                 catch
                 {
-                    MessageBox.Show(
+                    MessageBox.Show(new Form() { TopMost = true },
                     "Aborting Auto Shutdown Sequence!\r\r" +
                     "PowerSDR failed to close properly.\r" +
                     "Please close PowerSDR and THEN click Ok.",
@@ -6663,7 +6705,8 @@ namespace DataDecoder
                 }
                 catch
                 {
-                    MessageBox.Show("The PowerOn serial port " + PwrPort.PortName +
+                    MessageBox.Show(new Form() { TopMost = true },
+                       "The PowerOn serial port " + PwrPort.PortName +
                        " cannot be opened!\n", "Port Error",
                        MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     cboPwrPort.SelectedIndex = 0;
@@ -6769,7 +6812,8 @@ namespace DataDecoder
                 else
                 {
                     chkRepeat.Checked = false;
-                    MessageBox.Show("No port has been selected for the Repeater.\n\n" +
+                    MessageBox.Show(new Form() { TopMost = true }, 
+                       "No port has been selected for the Repeater.\n\n" +
                        "Please select a valid port number and try again.", "Port Error",
                        MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     set.RepeatEnab = false;
@@ -6796,8 +6840,9 @@ namespace DataDecoder
                 }
                 catch
                 {
-                    MessageBox.Show("The Repeater serial port " + RepeatPort.PortName +
-                       " cannot be opened!\n", "Port Error",
+                    MessageBox.Show(new Form() { TopMost = true },
+                        "The Repeater serial port " + RepeatPort.PortName +
+                        " cannot be opened!\n", "Port Error",
                        MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     cboRepeatPort.SelectedIndex = 0;
                     chkRepeat.Checked = false;
@@ -6842,7 +6887,8 @@ namespace DataDecoder
                 {
                     bool bReturnLog = false;
                     bReturnLog = ErrorLog.ErrorRoutine(false, enableErrorLog, ex);
-                    if (false == bReturnLog) MessageBox.Show("Unable to write to log");
+                    if (false == bReturnLog) MessageBox.Show(new Form() { TopMost = true }, 
+                        "Unable to write to log");
                 }
             }
         }
@@ -7084,8 +7130,9 @@ namespace DataDecoder
                 }
                 catch
                 {
-                    MessageBox.Show("The Rotor serial port " + RotorPort.PortName +
-                       " cannot be opened!\n", "Port Error",
+                    MessageBox.Show(new Form() { TopMost = true }, 
+                        "The Rotor serial port " + RotorPort.PortName +
+                        " cannot be opened!\n", "Port Error",
                        MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     cboRotorPort.SelectedIndex = 0;
                     chkRotorEnab.Checked = false;
@@ -7188,8 +7235,9 @@ namespace DataDecoder
                 }
                 else
                 {
-                    MessageBox.Show("No port has been selected for the Rotor.\n\n" +
-                    "Please select a valid port number and try again.", "Port Error",
+                    MessageBox.Show(new Form() { TopMost = true }, 
+                        "No port has been selected for the Rotor.\n\n" +
+                        "Please select a valid port number and try again.", "Port Error",
                     MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     chkRotorEnab.Checked = false;
                     cboRotorPort.SelectedIndex = 0;
@@ -7516,7 +7564,7 @@ namespace DataDecoder
                     }
                     catch (ArgumentOutOfRangeException )
                     {
-                        MessageBox.Show(
+                        MessageBox.Show(new Form() { TopMost = true },
                             "The Call Prefix requires at least two (2) characters to be valid prefix.\r\r" +
                             "Please click Ok and re-enter a prefix.", "Imput Error!",
                         MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
@@ -7792,10 +7840,11 @@ namespace DataDecoder
                     }
                     catch (Exception e)
                     {
-                        MessageBox.Show(e.Data + e.Message + "\n\n" +
-                        "This error is generally due to latitude or\n" +
-                        "longitude not being input on the Setup form\n\n" +
-                        "Please correct and try again.", "Data Error");
+                        MessageBox.Show(new Form() { TopMost = true }, 
+                            e.Data + e.Message + "\n\n" +
+                            "This error is generally due to latitude or\n" +
+                            "longitude not being input on the Setup form\n\n" +
+                            "Please correct and try again.", "Data Error");
                     }
                     i = 0;
                 }
@@ -8826,7 +8875,7 @@ namespace DataDecoder
                         //decode freq data and output to LPT port
                     if (chkDevice.Checked && chkDev0.Checked)
                     { LookUp(freqLook); }
-                    PortSend(logFreq);  // send freq. to PLs
+                    PortSend(logFreq);  // send freq to PLs
                     lastFreq = logFreq; // save this freq
                     LastMode = sdrMode; // save this mode
 
@@ -8838,7 +8887,8 @@ namespace DataDecoder
             {
                 bool bReturnLog = false;
                 bReturnLog = ErrorLog.ErrorRoutine(false, enableErrorLog, ex);
-                if (false == bReturnLog) MessageBox.Show("Unable to write to log");
+                if (false == bReturnLog) MessageBox.Show(new Form() { TopMost = true }, 
+                    "Unable to write to log");
             }
         }//CATRxEvent
 
@@ -8887,7 +8937,8 @@ namespace DataDecoder
             {
                 bool bReturnLog = false;
                 bReturnLog = ErrorLog.ErrorRoutine(false, enableErrorLog, ex);
-                if (false == bReturnLog) MessageBox.Show("Unable to write to log");
+                if (false == bReturnLog) MessageBox.Show(new Form() { TopMost = true }, 
+                    "Unable to write to log");
             }
         }
         // RCP2 CAT port has received
@@ -8930,7 +8981,8 @@ namespace DataDecoder
                 {
                     bool bReturnLog = false;
                     bReturnLog = ErrorLog.ErrorRoutine(false, enableErrorLog, ex);
-                    if (false == bReturnLog) MessageBox.Show("Unable to write to log");
+                    if (false == bReturnLog) MessageBox.Show(new Form() { TopMost = true }, 
+                        "Unable to write to log");
                 }
             }
         }
@@ -8974,7 +9026,8 @@ namespace DataDecoder
                 {
                     bool bReturnLog = false;
                     bReturnLog = ErrorLog.ErrorRoutine(false, enableErrorLog, ex);
-                    if (false == bReturnLog) MessageBox.Show("Unable to write to log");
+                    if (false == bReturnLog) MessageBox.Show(new Form() { TopMost = true }, 
+                        "Unable to write to log");
                 }
             }
         }
@@ -9018,7 +9071,8 @@ namespace DataDecoder
                 {
                     bool bReturnLog = false;
                     bReturnLog = ErrorLog.ErrorRoutine(false, enableErrorLog, ex);
-                    if (false == bReturnLog) MessageBox.Show("Unable to write to log");
+                    if (false == bReturnLog) MessageBox.Show(new Form() { TopMost = true }, 
+                        "Unable to write to log");
                 }
             }
         }
@@ -9052,7 +9106,8 @@ namespace DataDecoder
                 {
                     bool bReturnLog = false;
                     bReturnLog = ErrorLog.ErrorRoutine(false, enableErrorLog, ex);
-                    if (false == bReturnLog) MessageBox.Show("Unable to write to log");
+                    if (false == bReturnLog) MessageBox.Show(new Form() { TopMost = true }, 
+                        "Unable to write to log");
                 }
             }
         }
@@ -9083,7 +9138,8 @@ namespace DataDecoder
                 {
                     bool bReturnLog = false;
                     bReturnLog = ErrorLog.ErrorRoutine(false, enableErrorLog, ex);
-                    if (false == bReturnLog) MessageBox.Show("Unable to write to log");
+                    if (false == bReturnLog) MessageBox.Show(new Form() { TopMost = true }, 
+                        "Unable to write to log");
                 }
             }
         }
@@ -9114,7 +9170,8 @@ namespace DataDecoder
                 {
                     bool bReturnLog = false;
                     bReturnLog = ErrorLog.ErrorRoutine(false, enableErrorLog, ex);
-                    if (false == bReturnLog) MessageBox.Show("Unable to write to log");
+                    if (false == bReturnLog) MessageBox.Show(new Form() { TopMost = true }, 
+                        "Unable to write to log");
                 }
             }
         }
@@ -9145,7 +9202,8 @@ namespace DataDecoder
                 {
                     bool bReturnLog = false;
                     bReturnLog = ErrorLog.ErrorRoutine(false, enableErrorLog, ex);
-                    if (false == bReturnLog) MessageBox.Show("Unable to write to log");
+                    if (false == bReturnLog) MessageBox.Show(new Form() { TopMost = true }, 
+                        "Unable to write to log");
                 }
             }
         }
@@ -9245,7 +9303,8 @@ namespace DataDecoder
                 {
                     bool bReturnLog = false;
                     bReturnLog = ErrorLog.ErrorRoutine(false, enableErrorLog, ex);
-                    if (false == bReturnLog) MessageBox.Show("Unable to write to log");
+                    if (false == bReturnLog) MessageBox.Show(new Form() { TopMost = true }, 
+                        "Unable to write to log");
                 }
             }
         }
@@ -9302,7 +9361,8 @@ namespace DataDecoder
             {
                 bool bReturnLog = false;
                 bReturnLog = ErrorLog.ErrorRoutine(false, enableErrorLog, ex);
-                if (false == bReturnLog) MessageBox.Show("Unable to write to log");
+                if (false == bReturnLog) MessageBox.Show(new Form() { TopMost = true }, 
+                    "Unable to write to log");
             }
             LastFreq = freq;
             // If enabled send freq data to IC-PW1 port
@@ -9333,7 +9393,8 @@ namespace DataDecoder
                 {
                     bool bReturnLog = false;
                     bReturnLog = ErrorLog.ErrorRoutine(false, enableErrorLog, ex);
-                    if (false == bReturnLog) MessageBox.Show("Unable to write to log");
+                    if (false == bReturnLog) MessageBox.Show(new Form() { TopMost = true }, 
+                        "Unable to write to log");
                 }
             }
             if (AccPort.IsOpen)
@@ -9548,7 +9609,6 @@ namespace DataDecoder
                     cboSPEport.Items.Clear();
                     cboSwPort.Items.Clear();
                     cboKnobPort.Items.Clear();
-                    cboKnobPort2.Items.Clear();
                     cboMacSwPort.Items.Clear();
                     // Add empty entry to port combos
                     cboCAT.Items.Add("");
@@ -9572,7 +9632,6 @@ namespace DataDecoder
                     cboSPEport.Items.Add("");
                     cboSwPort.Items.Add("");
                     cboKnobPort.Items.Add("");
-                    cboKnobPort2.Items.Add("");
                     cboMacSwPort.Items.Add("");
 
                     for (int i = 0; i < port.Length; i++)
@@ -9599,13 +9658,12 @@ namespace DataDecoder
                         cboSPEport.Items.Add("COM" + port[i]);
                         cboSwPort.Items.Add("COM" + port[i]);
                         cboKnobPort.Items.Add("COM" + port[i]);
-                        cboKnobPort2.Items.Add("COM" + port[i]);
                         cboMacSwPort.Items.Add("COM" + port[i]);
                     }
                 }
                 else
                 {
-                    MessageBox.Show(
+                    MessageBox.Show(new Form() { TopMost = true },
                         "There are NO serial ports setup on this computer!\r\r" +
                         "For this program to function there has to be at least one\r" +
                         "pair of virtual serial ports so DDUtil can talk to PowerSDR.\r\r" +
@@ -9618,7 +9676,7 @@ namespace DataDecoder
             }
             catch
             {
-                MessageBox.Show(
+                MessageBox.Show(new Form() { TopMost = true },
                     "There is a problem with the serial ports setup on this computer!\r\r" +
                     "DDUtil requires that port names begin with'COM'. If you are using\r" +
                     "com0com as a virtual serial ports manager, open the com0com setup\r" +
@@ -9804,8 +9862,9 @@ namespace DataDecoder
             catch
             {
                 // give a message, if the port is not available:
-                MessageBox.Show("The Radio CAT serial port " + sp.Name +
-                   " cannot be opened!", "Port Error",
+                MessageBox.Show(new Form() { TopMost = true }, 
+                    "The Radio CAT serial port " + sp.Name +
+                    " cannot be opened!", "Port Error",
                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 cboSerAcc.SelectedText = "";
             }
@@ -9831,9 +9890,11 @@ namespace DataDecoder
             {
                 bool bReturnLog = false;
                 bReturnLog = ErrorLog.ErrorRoutine(false, enableErrorLog, ex);
-                if (false == bReturnLog) MessageBox.Show("Unable to write to log");
+                if (false == bReturnLog) MessageBox.Show(new Form() { TopMost = true }, 
+                    "Unable to write to log");
             }
         }
+        
         #endregion Serial Port Methods
 
         #region SO2R
@@ -9843,18 +9904,19 @@ namespace DataDecoder
 
         #region # Enums, Signatures & Vars #
 
-        int solpt1 = 0; 
-        int solpt2 = 0;
         bool bSo2rChg = false;            // SP2R data has changed
         bool bClosePass1 = false;         // 1st pass thru form close routine
-        string dataH = "0", dataL = "0";  // data word for LPT1
-        string ctrlH = "0", ctrlL = "0";  // control word for LPT2
-        string TXa = "0", TXb = "0";      // TX ant for vfo a/b
-        int ZZSW = 0;                     // active tx vfo
-        int LastZZSW = 0;                 // last active tx vfo a/b
         bool inhibA = false;
         bool inhibB = false;
+        bool so2rInit = false;
+        int LastZZSW = 0;                 // last active tx vfo a/b
+        int solpt1 = 0; 
+        int solpt2 = 0;
+        int ZZSW = 0;                     // active tx vfo
+        string dataH = "0", dataL = "0";  // data word for LPT1
+        string ctrlH = "0", ctrlL = "0";  // control word for LPT2
         public static string so2rFile = "";
+        string TXa = "0", TXb = "0";      // TX ant for vfo a/b
 
         public static DataSet dso;
 
@@ -9875,7 +9937,8 @@ namespace DataDecoder
             if (chkSoEnab.Checked)
             {
                 DialogResult result;
-                result = MessageBox.Show("Saving matrix data to file: " + so2rFile + " Is this ok?\r\r" +
+                result = MessageBox.Show(new Form() { TopMost = true }, 
+                    "Saving matrix data to file: " + so2rFile + " Is this ok?\r\r" +
                     "If 'Yes' press Ok to continue saving the file.\r" +
                     "If 'No' press No to select a new file name.\r" +
                     "Press Cancel to abort this operation.", "Information",
@@ -9909,7 +9972,8 @@ namespace DataDecoder
             }
             else
             {
-                MessageBox.Show("The Enable check box must be selected before a file can be saved");
+                MessageBox.Show(new Form() { TopMost = true },
+                    "The Enable check box must be selected before a file can be saved");
             }
 
         }        
@@ -9925,7 +9989,7 @@ namespace DataDecoder
             }
             else
             {
-                MessageBox.Show("The Enable check box must be selected before a file can be loaded");
+                MessageBox.Show(new Form() { TopMost = true },"The Enable check box must be selected before a file can be loaded");
             }
         }
         // The clear matrix button was pressed
@@ -10019,7 +10083,8 @@ namespace DataDecoder
                 }
                 catch
                 {
-                    MessageBox.Show("The VFO switch serial port " + SwitchPort.PortName +
+                    MessageBox.Show(new Form() { TopMost = true },
+                        "The VFO switch serial port " + SwitchPort.PortName +
                        " cannot be opened!\n", "Port Error",
                        MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     cboSwPort.SelectedIndex = 0;
@@ -10061,7 +10126,8 @@ namespace DataDecoder
             }
             catch (Exception)
             {
-                MessageBox.Show("This value can only be a decimal number from 1-3. \n\n" +
+                MessageBox.Show(new Form() { TopMost = true },
+                    "This value can only be a decimal number from 1-3. \n\n" +
                     "Please select a number in this range.", "AmpKey A Input Error",
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
                 if (txtTxB.Text == "3") { txtTxA.Text = "1"; }
@@ -10072,7 +10138,8 @@ namespace DataDecoder
 
             if (txtTxA.Text == txtTxB.Text)
             {
-                MessageBox.Show("TXA and TXB can not use the same TX line. \n\n" +
+                MessageBox.Show(new Form() { TopMost = true },
+                    "TXA and TXB can not use the same TX line. \n\n" +
                     "Please select another TX line (1-3).", "AmpKey A Input Error",
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
                 if (txtTxB.Text == "3") { txtTxA.Text = "1"; }
@@ -10096,7 +10163,8 @@ namespace DataDecoder
             }
             catch (Exception)
             {
-                MessageBox.Show("This value can only be a decimal number from 1-3. \n\n" +
+                MessageBox.Show(new Form() { TopMost = true },
+                    "This value can only be a decimal number from 1-3. \n\n" +
                     "Please select a number in this range.", "AmpKey B Input Error",
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
                 if (txtTxA.Text == "3") { txtTxB.Text = "1"; }
@@ -10107,7 +10175,8 @@ namespace DataDecoder
 
             if (txtTxA.Text == txtTxB.Text)
             {
-                MessageBox.Show("TXA and TXB can not use the same TX line. \n\n" +
+                MessageBox.Show(new Form() { TopMost = true },
+                    "TXA and TXB can not use the same TX line. \n\n" +
                     "Please select another TX line (1-3).", "AmpKey B Input Error",
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
                 if (txtTxA.Text == "3") { txtTxB.Text = "1"; }
@@ -10123,7 +10192,6 @@ namespace DataDecoder
         #region # SO2R Methods #
 
         // Initialization
-        bool so2rInit = false;
         void SOinit()
         {
             chkSoEnab.Checked = set.chkSoEnab;
@@ -10192,7 +10260,8 @@ namespace DataDecoder
             {
                 bool bReturnLog = false;
                 bReturnLog = ErrorLog.ErrorRoutine(false, enableErrorLog, ex);
-                if (false == bReturnLog) MessageBox.Show("Unable to write to log");
+                if (false == bReturnLog) MessageBox.Show(new Form() { TopMost = true },
+                    "Unable to write to log");
             }
         }
         // setup data for vfo a by band
@@ -10679,7 +10748,8 @@ namespace DataDecoder
                             i = chk_list.Count + 1;
                         }
                         if (i == chk_list.Count)
-                            MessageBox.Show("Control not found: " + name, "GetVars Error",
+                            MessageBox.Show(new Form() { TopMost = true },
+                                "Control not found: " + name, "GetVars Error",
                                 MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     }
                 }
@@ -10694,7 +10764,8 @@ namespace DataDecoder
                             i = txt_list.Count + 1;
                         }
                         if (i == txt_list.Count)
-                            MessageBox.Show("Control not found: " + name, "GetVars Error",
+                            MessageBox.Show(new Form() { TopMost = true },
+                                "Control not found: " + name, "GetVars Error",
                                 MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     }
                 }
@@ -11110,7 +11181,8 @@ namespace DataDecoder
                 {
                     bool bReturnLog = false;
                     bReturnLog = ErrorLog.ErrorRoutine(false, enableErrorLog, ex);
-                    if (false == bReturnLog) MessageBox.Show("Unable to write to log");
+                    if (false == bReturnLog) MessageBox.Show(new Form() { TopMost = true },
+                        "Unable to write to log");
                 }
             }
         }
@@ -11266,7 +11338,8 @@ namespace DataDecoder
             {
                 bool bReturnLog = false;
                 bReturnLog = ErrorLog.ErrorRoutine(false, enableErrorLog, ex);
-                if (false == bReturnLog) MessageBox.Show("Unable to write to log");
+                if (false == bReturnLog) MessageBox.Show(new Form() { TopMost = true },
+                "Unable to write to log");
             }
         } // end ProcessBuf()
 
@@ -11282,7 +11355,8 @@ namespace DataDecoder
                 }
                 else
                 {
-                    MessageBox.Show("No port has been selected for the SPE amplifier.\n\n" +
+                    MessageBox.Show(new Form() { TopMost = true },
+                        "No port has been selected for the SPE amplifier.\n\n" +
                     "Please select a valid port number and try again.", "Port Error",
                     MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     chkSPEenab.Checked = false; set.SPEenab = false;
@@ -11314,7 +11388,8 @@ namespace DataDecoder
                 }
                 catch
                 {
-                    MessageBox.Show("The Amplifier serial port " + SPEport.PortName +
+                    MessageBox.Show(new Form() { TopMost = true },
+                        "The Amplifier serial port " + SPEport.PortName +
                        " cannot be opened!\n", "Port Error",
                        MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     chkSPEenab.Checked = false; 
@@ -11619,6 +11694,16 @@ namespace DataDecoder
         #endregion SPE Amp
 
         #region SteppIR
+        
+        #region # Vars #
+        bool b180 = false;
+        bool b34 = false;
+        bool bBiDir = false;
+        bool bCal = false;
+        bool bFwd = false;
+        string StepBufr = "";
+
+        #endregion # Vars #
 
         // The Home SteppIR button was pressed
         public void btnHome_Click(object sender, EventArgs e)
@@ -11645,7 +11730,6 @@ namespace DataDecoder
             }
         }
         // The Calibrate SteppIR button was pressed
-        bool bCal = false;
         public void btnCalib_Click(object sender, EventArgs e)
         {
             StepData.Write("@A\0\0\0\0\0\0V0\r");
@@ -11684,7 +11768,6 @@ namespace DataDecoder
             StepData.Write(bytes, 0, 11);
         }
         // The SteppIR Data Port has received data from timer query
-        string StepBufr = "";
         private void StepData_DataReceived(object sender, SerialDataReceivedEventArgs e)
         {
             string StepMsg = "";
@@ -11773,12 +11856,12 @@ namespace DataDecoder
                 {
                     bool bReturnLog = false;
                     bReturnLog = ErrorLog.ErrorRoutine(false, enableErrorLog, ex);
-                    if (false == bReturnLog) MessageBox.Show("Unable to write to log");
+                    if (false == bReturnLog) MessageBox.Show(new Form() { TopMost = true },
+                        "Unable to write to log");
                 }
             }
         }
         // The Forward radio button was selected
-        bool bFwd = false;
         private void rbFwd_CheckedChanged(object sender, EventArgs e)
         {
             if (rbFwd.Checked)
@@ -11797,7 +11880,6 @@ namespace DataDecoder
             }
         }
         // The 180 radio button was selected
-        bool b180 = false;
         private void rb180_CheckedChanged(object sender, EventArgs e)
         {
             if (rb180.Checked)
@@ -11816,7 +11898,6 @@ namespace DataDecoder
             }
         }
         // The Bi-Directional radio button was selected
-        bool bBiDir = false;
         private void rbBiDir_CheckedChanged(object sender, EventArgs e)
         {
             if (rbBiDir.Checked)
@@ -11835,7 +11916,6 @@ namespace DataDecoder
             }
         }
         // The 3/4 wave length radio button was selected (vertical only)
-        bool b34 = false;
         private void rb34_CheckedChanged(object sender, EventArgs e)
         {
             if (rb34.Checked)
@@ -11879,8 +11959,9 @@ namespace DataDecoder
                     set.StepEnab = true;
                 else
                 {
-                    MessageBox.Show("No port has been selected for the SteppIR.\n\n" +
-                    "Please select a valid port number and try again.", "Port Error",
+                    MessageBox.Show(new Form() { TopMost = true },
+                        "No port has been selected for the SteppIR.\n\n" +
+                        "Please select a valid port number and try again.", "Port Error",
                     MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     chkStep.Checked = false;
                     cboStep.SelectedIndex = 0;
@@ -11906,8 +11987,9 @@ namespace DataDecoder
                 }
                 catch
                 {
-                    MessageBox.Show("The STeppIR serial port " + StepData.PortName +
-                       " cannot be opened!\n", "Port Error",
+                    MessageBox.Show(new Form() { TopMost = true }, 
+                        "The STeppIR serial port " + StepData.PortName +
+                        " cannot be opened!\n", "Port Error",
                        MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     cboStep.SelectedIndex = 0;
                     chkStep.Checked = false;
@@ -12286,6 +12368,25 @@ namespace DataDecoder
                 catch { }
             }
         }
+        // Write to ZE text box
+        delegate void SetZECallback(string text);
+        private void SetZE(string text)
+        {
+            if (!closing)
+            {
+                try
+                {
+                    if (this.lblZE.InvokeRequired)
+                    {
+                        SetZECallback d = new SetZECallback(SetZE);
+                        this.Invoke(d, new object[] { text });
+                    }
+                    else
+                        txtZE.Text = text;
+                }
+                catch { }
+            }
+        }
         // Write to ZL text box
         delegate void SetZLCallback(string text);
         private void SetZL(string text)
@@ -12454,14 +12555,11 @@ namespace DataDecoder
                                     sCmd.Substring(1, 2) + "." +
                                     sCmd.Substring(3, 2));
                                 break;
-                            case "L": //knob long click
-                                if (!chkKnobEnab2.Checked)
-                                {
+                            case "L": //long click
                                     kFlags ^= 0x41;
                                     WriteFlags(); WriteLED();
-                                }
                                 break;
-                            case "S": //knob single click
+                            case "S": //single click
                                 kFlags ^= 0x10; // toggle single click bit
                                 WriteFlags(); WriteLED();
                                 break;
@@ -12513,8 +12611,8 @@ namespace DataDecoder
                             case "Z":   // parameter settings from knob
                                 if (sCmd.Substring(0, 2) == "ZC")
                                 { SetZC(sCmd.Substring(2, 2)); }
-                                //if (sCmd.Substring(0, 2) == "ZE")
-                                //    Console.WriteLine("ZE: " + sCmd);
+                                if (sCmd.Substring(0, 2) == "ZE")
+                                { SetZE(sCmd.Substring(2, 2)); }
                                 if (sCmd.Substring(0, 2) == "ZL")
                                 { SetZL(sCmd.Substring(2, 2)); }
                                 if (sCmd.Substring(0, 2) == "ZR")
@@ -12528,9 +12626,9 @@ namespace DataDecoder
             {
                 bool bReturnLog = false;
                 bReturnLog = ErrorLog.ErrorRoutine(false, enableErrorLog, ex);
-                if (false == bReturnLog) MessageBox.Show("Unable to write to log");
+                if (false == bReturnLog) MessageBox.Show(new Form() { TopMost = true }, 
+                    "Unable to write to log");
             }
-
         }
 
         private void chkKnobEnab_CheckedChanged(object sender, EventArgs e)
@@ -12559,8 +12657,9 @@ namespace DataDecoder
                 }
                 catch
                 {
-                    MessageBox.Show("The Tuning Knob serial port " + KnobPort.PortName +
-                       " cannot be opened!\n", "Port Error",
+                    MessageBox.Show(new Form() { TopMost = true }, 
+                        "The Tuning Knob serial port " + KnobPort.PortName +
+                        " cannot be opened!\n", "Port Error",
                        MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     cboKnobPort.SelectedIndex = 0;
                     chkKnobEnab.Checked = false;
@@ -12602,16 +12701,25 @@ namespace DataDecoder
 
         private void chkKnobAdv_CheckedChanged(object sender, EventArgs e)
         {
-            if (chkKnobAdv.Checked)
+            if (chkKnobExpert.Checked)
             {
-                txtZC.Visible = true; txtZL.Visible = true; txtZR.Visible = true;
-                lblZC.Visible = true; lblZL.Visible = true; lblZR.Visible = true;
+                txtZC.Visible = true; txtZE.Visible = true; 
+                txtZL.Visible = true; txtZR.Visible = true;
+                lblZC.Visible = true; lblZE.Visible = true; 
+                lblZL.Visible = true; lblZR.Visible = true;
             }
             else
             {
-                txtZC.Visible = false; txtZL.Visible = false; txtZR.Visible = false;
-                lblZC.Visible = false; lblZL.Visible = false; lblZR.Visible = false;
+                txtZC.Visible = false; txtZE.Visible = false; 
+                txtZL.Visible = false; txtZR.Visible = false;
+                lblZC.Visible = false; lblZE.Visible = false; 
+                lblZL.Visible = false; lblZR.Visible = false;
             }
+        }
+
+        private void txtZC_DoubleClick(object sender, EventArgs e)
+        {
+            KnobPort.Write("ZC14;" + "ZC;");
         }
 
         private void txtZC_TextChanged(object sender, EventArgs e)
@@ -12620,9 +12728,21 @@ namespace DataDecoder
                 KnobPort.Write("ZC"+txtZC.Text+";" + "ZC;");
         }
 
-        private void txtZC_DoubleClick(object sender, EventArgs e)
+        private void lblZE_DoubleClick(object sender, EventArgs e)
         {
-            KnobPort.Write("ZC14;" + "ZC;");
+            if (txtZE.Enabled) txtZE.Enabled = false;
+            else txtZE.Enabled = true;
+        }
+
+        private void txtZE_DoubleClick(object sender, EventArgs e)
+        {
+            KnobPort.Write("ZE01;" + "ZE;");
+        }
+
+        private void txtZE_TextChanged(object sender, EventArgs e)
+        {
+            if (txtZE.Text.Length == 2)
+                KnobPort.Write("ZE" + txtZE.Text + ";" + "ZE;");
         }
 
         private void txtZL_TextChanged(object sender, EventArgs e)
@@ -12663,193 +12783,19 @@ namespace DataDecoder
             tempTimer.Start();
         }
 
-        private void KnobPort2_DataReceived(object sender, SerialDataReceivedEventArgs e)
+        private void cboTkSw1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            try
-            {
-                string sCmd = "";
-                SerialPort port = (SerialPort)sender;
-                byte[] data = new byte[port.BytesToRead];
-                port.Read(data, 0, data.Length);
-                KnobBuf += AE.GetString(data, 0, data.Length);
-                Regex rex = new Regex(".*?;"); //accept any string ending in ;		
-                for (Match m = rex.Match(KnobBuf); m.Success; m = m.NextMatch())
-                {   //loop thru the buffer and find matches
-                    sCmd = m.Value;
-                    KnobBuf = KnobBuf.Replace(m.Value, ""); //remove the match from the buffer
-                    if (chkKnobEnab.Checked)
-                    {
-                        switch (sCmd.Substring(0, 1))
-                        {
-                            case "C": //double click
-                                kFlags ^= 0x20;
-                                WriteFlags(); WriteLED();
-                                if (Convert.ToBoolean(kFlags >> 5 & 0x01)) //led2 lit
-                                {
-                                    WriteToPort(kCATdcOn, iSleep);
-                                    if (kCATdcOn == "ZZSW1;" && chkSoEnab.Checked)
-                                    { ZZSW = 1; SetVfoB(); }
-                                }
-                                else
-                                {
-                                    WriteToPort(kCATdcOff, iSleep);
-                                    if (kCATdcOff == "ZZSW0;" && chkSoEnab.Checked)
-                                    { ZZSW = 0; SetVfoA(); }
-                                }
-                                break;
-                            case "D": //tune something down
-                                if (ActIdx == 0 || ActIdx == 1)// tune vfo a/b
-                                {
-                                    string newSize = "1";
-                                    int tkSize = 0;
-                                    if (sCmd.Length > 3)
-                                    { tkSize = Convert.ToInt32(sCmd.Substring(1, 2)); }
-                                    if (tkSize > stepSize)
-                                    { newSize = (stepSize + (tkSize - 1)).ToString(); }
-                                    else 
-                                    { newSize = stepSize.ToString(); }
-                                    WriteToPort(kCATdn + newSize.PadLeft(2, '0') + ";", iSleep);
-                                }
-                                else if (ActIdx == 2)    // tune RIT
-                                {   
-                                   int RIT = 0;
-                                   RITfrq -= 2;
-                                   if (RITfrq < 0) {RIT = (int)Math.Abs(RITfrq);
-                                       kCATdn = "ZZRF-" + RIT.ToString().PadLeft(4, '0') + ";";}
-                                   else
-                                   { kCATdn = "ZZRF+" + RITfrq.ToString().PadLeft(4, '0') + ";"; }
-                                    WriteToPort(kCATdn, iSleep);                                  
-                                }
-                                else if (ActIdx == 3)   // tune XIT
-                                {
-                                    int XIT = 0;
-                                    XITfrq -= 2;
-                                    if (XITfrq < 0)
-                                    {
-                                        XIT = (int)Math.Abs(XITfrq);
-                                        kCATdn = "ZZXF-" + XIT.ToString().PadLeft(4, '0') + ";";
-                                    }
-                                    else
-                                    { kCATdn = "ZZXF+" + XITfrq.ToString().PadLeft(4, '0') + ";"; }
-                                    WriteToPort(kCATdn, iSleep);
-                                }
-                                else if (ActIdx == 4)   // volume
-                                {
-                                    WriteToPort(kCATdn + ";", iSleep);
-                                }
-                                    break;
-                            //case "F":   //firm ware revision
-                            //    SetgrpTKnob("Tuning Knob Rev. " +
-                            //        sCmd.Substring(1, 2) + "." +
-                            //        sCmd.Substring(3, 2));
-                            //    break;
-                            //case "L": //knob long click
-                            //    if (!chkKnobEnab2.Checked)
-                            //    {
-                            //        kFlags ^= 0x41;
-                            //        WriteFlags(); WriteLED();
-                            //    }
-                            //    break;
-                            case "S": //knob single click
-                                kFlags ^= 0x10; // toggle single click bit
-                                WriteFlags(); WriteLED();
-                                break;
-                            case "U": //tune something up
-                                if (ActIdx == 0 || ActIdx == 1)// tune vfo a/b
-                                {
-                                    string newSize = "1";
-                                    int tkSize = 0;
-                                    if (sCmd.Length > 3)
-                                    { tkSize = Convert.ToInt32(sCmd.Substring(1, 2)); }
-                                    if (tkSize > stepSize)
-                                    { newSize = (stepSize + (tkSize - 1)).ToString(); }
-                                    else
-                                    { newSize = stepSize.ToString(); }
-                                    WriteToPort(kCATup + newSize.PadLeft(2, '0') + ";", iSleep);
-                                }
-                                else if (ActIdx == 2)    // tune RIT
-                                {
-                                    int RIT = 0;
-                                    RITfrq += 2;
-                                    if (RITfrq < 0) { RIT = (int)Math.Abs(RITfrq);
-                                        kCATup = "ZZRF-" + RIT.ToString().PadLeft(4, '0') + ";"; }
-                                    else
-                                    { kCATup = "ZZRF+" + RITfrq.ToString().PadLeft(4, '0') + ";"; }
-                                    WriteToPort(kCATup, iSleep);
-                                }
-                                else if (ActIdx == 3)   // tune XIT
-                                {
-                                    int XIT = 0;
-                                    XITfrq += 2;
-                                    if (XITfrq < 0) { XIT = (int)Math.Abs(XITfrq);
-                                        kCATup = "ZZXF-" + XIT.ToString().PadLeft(4, '0') + ";";}
-                                    else
-                                    { kCATup = "ZZXF+" + XITfrq.ToString().PadLeft(4, '0') + ";"; }
-                                    WriteToPort(kCATup, iSleep);
-                                }
-                                else if (ActIdx == 4)   // tuning step
-                                {
-                                    WriteToPort(kCATdn + ";", iSleep);
-                                }
-                                break;
-                            //case "Z":   // parameter settings from knob
-                            //    if (sCmd.Substring(0, 2) == "ZC")
-                            //    { SetZC(sCmd.Substring(2, 2)); }
-                            //    //if (sCmd.Substring(0, 2) == "ZE")
-                            //    //    Console.WriteLine("ZE: " + sCmd);
-                            //    if (sCmd.Substring(0, 2) == "ZL")
-                            //    { SetZL(sCmd.Substring(2, 2)); }
-                            //    if (sCmd.Substring(0, 2) == "ZR")
-                            //    { SetZR(sCmd.Substring(2, 2)); }
-                            //    break;
-                        }
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                bool bReturnLog = false;
-                bReturnLog = ErrorLog.ErrorRoutine(false, enableErrorLog, ex);
-                if (false == bReturnLog) MessageBox.Show("Unable to write to log");
-            }
-
+            set.cboTkSw1 = cboTkSw1.SelectedIndex;
         }
 
-        private void chkKnobEnab2_CheckedChanged(object sender, EventArgs e)
+        private void cboTkSw2_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (chkKnobEnab2.Checked)
-            {
-                set.chkKnobEnab2 = true;
-                //KnobInit2();
-            }
-            else
-            {
-                set.chkKnobEnab2 = false;
-            }
-            set.Save();
+            set.cboTkSw2 = cboTkSw2.SelectedIndex;
         }
 
-        private void cboKnobPort2_SelectedIndexChanged(object sender, EventArgs e)
+        private void cboTkSw3_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (KnobPort2.IsOpen) KnobPort2.Close();
-            if (cboKnobPort2.SelectedIndex > 0)
-            {
-                KnobPort2.PortName = cboKnobPort2.SelectedItem.ToString();
-                try
-                {
-                    KnobPort2.Open();
-                }
-                catch
-                {
-                    MessageBox.Show("The Tuning Knob serial port " + KnobPort2.PortName +
-                       " cannot be opened!\n", "Port Error",
-                       MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    cboKnobPort2.SelectedIndex = 0;
-                    chkKnobEnab2.Checked = false;
-                }
-            }
-            set.cboKnobPort2 = cboKnobPort2.SelectedIndex;
-            set.Save();
+            set.cboTkSw3 = cboTkSw3.SelectedIndex;
         }
 
         #endregion * Events *
@@ -12873,7 +12819,10 @@ namespace DataDecoder
                     cboKnobADC.SelectedIndex = set.cboKnobADC;
                     cboKnobBDC.SelectedIndex = set.cboKnobBDC;
                     cboTstep.SelectedIndex = set.cboTstep;
-                    KnobPort.Write("F;ZC;ZL;ZR;");
+                    cboTkSw1.SelectedIndex = set.cboTkSw1;
+                    cboTkSw2.SelectedIndex = set.cboTkSw2;
+                    cboTkSw3.SelectedIndex = set.cboTkSw3;
+                    KnobPort.Write("F;ZC;ZE;ZL;ZR;");
                     WriteFlags();
                     WriteLED();
                 }
@@ -12881,7 +12830,8 @@ namespace DataDecoder
                 {
                     bool bReturnLog = false;
                     bReturnLog = ErrorLog.ErrorRoutine(false, enableErrorLog, ex);
-                    if (false == bReturnLog) MessageBox.Show("Unable to write to log");
+                    if (false == bReturnLog) MessageBox.Show(new Form() { TopMost = true }, 
+                        "Unable to write to log");
                     chkKnobEnab.Checked = false;
                 }
 
@@ -14040,7 +13990,8 @@ namespace DataDecoder
                     }
                     else
                     {
-                        MessageBox.Show("Error listing devices: " +
+                        MessageBox.Show(new Form() { TopMost = true }, 
+                            "Error listing devices: " +
                             Convert.ToString(ftStatus), "Error");
                         return false;
                     }
@@ -14072,7 +14023,8 @@ namespace DataDecoder
                     }
                     else
                     {
-                        MessageBox.Show("Error opening device: " +
+                        MessageBox.Show(new Form() { TopMost = true }, 
+                            "Error opening device: " +
                             Convert.ToString(ftStatus), "Error");
                         return false;
                     }
@@ -14358,8 +14310,24 @@ namespace DataDecoder
 
         #endregion WaveNode Setup
 
-        #endregion WaveNode
+        #endregion WaveNode       
 
+        #region Profiles
+
+        #region # Enums, Declarations and Vars #
+
+        #endregion # Enums, Declarations and Vars #
+
+        #region # Events #
+
+        #endregion # Events #
+
+        #region # Methods #
+
+        #endregion # Methods #
+
+        #endregion Profiles
+                             
     } // end class Setup
 
     #region Helper Classes
