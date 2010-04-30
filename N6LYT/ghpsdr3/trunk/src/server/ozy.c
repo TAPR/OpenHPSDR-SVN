@@ -41,7 +41,7 @@
 
 #define THREAD_STACK 32768
 
-#define OZY_BUFFERS 1
+#define OZY_BUFFERS 16
 #define OZY_BUFFER_SIZE 512
 #define OZY_HEADER_SIZE 8
 
