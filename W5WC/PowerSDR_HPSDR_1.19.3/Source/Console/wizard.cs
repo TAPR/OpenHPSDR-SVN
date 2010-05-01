@@ -1602,6 +1602,7 @@ namespace PowerSDR
 			}
 
             console.SetupForm.CurrentModel = model;
+			
 			ArrayList a = new ArrayList();
 			a.Add("SetupWizard/1");
 			DB.SaveVars("State", ref a);
