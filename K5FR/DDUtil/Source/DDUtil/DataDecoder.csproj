@@ -77,6 +77,7 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\bin\Release\MsgBoxCheck.dll</HintPath>
     </Reference>
+    <Reference Include="NDde, Version=2.1.563.0, Culture=neutral, processorArchitecture=MSIL" />
     <Reference Include="System" />
     <Reference Include="System.configuration" />
     <Reference Include="System.Core">

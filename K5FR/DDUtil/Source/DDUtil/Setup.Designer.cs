@@ -131,6 +131,7 @@ namespace DataDecoder
             this.chkDev0 = new System.Windows.Forms.CheckBox();
             this.tabRCP = new System.Windows.Forms.TabPage();
             this.grpTKnob = new System.Windows.Forms.GroupBox();
+            this.button7 = new System.Windows.Forms.Button();
             this.lblZE = new System.Windows.Forms.Label();
             this.txtZE = new System.Windows.Forms.TextBox();
             this.label232 = new System.Windows.Forms.Label();
@@ -1128,6 +1129,7 @@ namespace DataDecoder
             this.btnMemLoad = new System.Windows.Forms.Button();
             this.txtMemIdx = new System.Windows.Forms.TextBox();
             this.txtMemVfo = new System.Windows.Forms.TextBox();
+            this.TkRed = new System.Windows.Forms.Button();
             this.LogPort = new System.IO.Ports.SerialPort(this.components);
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
@@ -1267,7 +1269,6 @@ namespace DataDecoder
             this.toolStripMenuItem26 = new System.Windows.Forms.ToolStripMenuItem();
             this.TkGrn = new System.Windows.Forms.Button();
             this.TkYel = new System.Windows.Forms.Button();
-            this.TkRed = new System.Windows.Forms.Button();
             this.tabControl.SuspendLayout();
             this.tabPorts.SuspendLayout();
             this.grpSlave.SuspendLayout();
@@ -2498,6 +2499,7 @@ namespace DataDecoder
             // 
             // grpTKnob
             // 
+            this.grpTKnob.Controls.Add(this.button7);
             this.grpTKnob.Controls.Add(this.lblZE);
             this.grpTKnob.Controls.Add(this.txtZE);
             this.grpTKnob.Controls.Add(this.label232);
@@ -2538,6 +2540,17 @@ namespace DataDecoder
             this.grpTKnob.TabIndex = 67;
             this.grpTKnob.TabStop = false;
             this.grpTKnob.Text = "Tuning Knob";
+            // 
+            // button7
+            // 
+            this.button7.BackColor = System.Drawing.SystemColors.Control;
+            this.button7.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button7.Location = new System.Drawing.Point(284, 19);
+            this.button7.Name = "button7";
+            this.button7.Size = new System.Drawing.Size(10, 10);
+            this.button7.TabIndex = 110;
+            this.button7.UseVisualStyleBackColor = false;
+            this.button7.Click += new System.EventHandler(this.button7_Click);
             // 
             // lblZE
             // 
@@ -15592,6 +15605,17 @@ namespace DataDecoder
             this.toolTip1.SetToolTip(this.txtMemVfo, "VFO frequency saved.");
             this.txtMemVfo.WordWrap = false;
             // 
+            // TkRed
+            // 
+            this.TkRed.BackColor = System.Drawing.SystemColors.Control;
+            this.TkRed.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.TkRed.Location = new System.Drawing.Point(371, 422);
+            this.TkRed.Name = "TkRed";
+            this.TkRed.Size = new System.Drawing.Size(10, 10);
+            this.TkRed.TabIndex = 103;
+            this.toolTip1.SetToolTip(this.TkRed, "Tuning Knob Long-Click (On = Mode A, Off = Mode B)");
+            this.TkRed.UseVisualStyleBackColor = false;
+            // 
             // LogPort
             // 
             this.LogPort.ReadTimeout = 500;
@@ -16670,6 +16694,7 @@ namespace DataDecoder
             this.TkGrn.Name = "TkGrn";
             this.TkGrn.Size = new System.Drawing.Size(10, 10);
             this.TkGrn.TabIndex = 102;
+            this.toolTip1.SetToolTip(this.TkGrn, "Tuning Knob Double-Click (On/Off)");
             this.TkGrn.UseVisualStyleBackColor = false;
             // 
             // TkYel
@@ -16680,17 +16705,8 @@ namespace DataDecoder
             this.TkYel.Name = "TkYel";
             this.TkYel.Size = new System.Drawing.Size(10, 10);
             this.TkYel.TabIndex = 74;
+            this.toolTip1.SetToolTip(this.TkYel, "Tuning Knob Short-Click (On/Off)");
             this.TkYel.UseVisualStyleBackColor = false;
-            // 
-            // TkRed
-            // 
-            this.TkRed.BackColor = System.Drawing.SystemColors.Control;
-            this.TkRed.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.TkRed.Location = new System.Drawing.Point(371, 422);
-            this.TkRed.Name = "TkRed";
-            this.TkRed.Size = new System.Drawing.Size(10, 10);
-            this.TkRed.TabIndex = 103;
-            this.TkRed.UseVisualStyleBackColor = false;
             // 
             // Setup
             // 
@@ -18100,6 +18116,7 @@ namespace DataDecoder
         private Button TkGrn;
         private Button TkYel;
         private Button TkRed;
+        private Button button7;
 
     }
 }

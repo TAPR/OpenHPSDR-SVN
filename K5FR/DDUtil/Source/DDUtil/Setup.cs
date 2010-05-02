@@ -44,6 +44,7 @@ using System.Windows.Forms;
 using System.Xml.XPath;
 using DataDecoder.Properties;
 using Logger;
+using NDde.Client;
 using FT_HANDLE = System.UInt32;
 using Microsoft.Win32;              // For RegKey
 
@@ -445,7 +446,7 @@ namespace DataDecoder
             // setup CatCom Timer
             comTimer = new System.Timers.Timer();
             comTimer.Elapsed += new System.Timers.ElapsedEventHandler(comTimer_Elapsed);
-            comTimer.Interval = 15000;
+            comTimer.Interval = 10000;
             comTimer.Enabled = false;
 
             mSplashScreen.SetProgress("Initializing Ports", 0.6);
@@ -5333,6 +5334,12 @@ namespace DataDecoder
                     }
                     else malform(pre); 
                     break;
+                case "WW":  // activate macro in WinWarbler
+                    if (ops.Length >= 1)
+                    {
+                        SendWWmacro(ops.Trim());
+                    }
+                    break;
                 default: malform(cmd); 
                     break;
             }
@@ -8012,6 +8019,7 @@ namespace DataDecoder
         string lastFreqB = "";
         string freqLook = "";
         string pwrVolts = "";
+        int psdrStep = -1;
         void sp_CATRxEvent(object source, CATSerialPorts.SerialRXEvent e)
         {
             comTimer.Stop();
@@ -8052,6 +8060,13 @@ namespace DataDecoder
                     {
                         tempTimer.Stop();
                         int psdrIdx = Convert.ToInt32(rawFreq.Substring(4, 2));
+                        if (psdrStep == -1)
+                        {
+                            WriteToPort("ZZAC" + stepSize.ToString().PadLeft(2, '0') + ";", iSleep);
+                            psdrStep = stepSize;
+                            tempTimer.Start(); 
+                            return;
+                        }
                         if (psdrIdx != stepSize)
                         { SetStepSize(rawFreq.Substring(4, 2)); }
                         tempTimer.Start();
@@ -9207,105 +9222,148 @@ namespace DataDecoder
                 }
             }
         }
+
+        byte[] _pw1Msg = null; // save the unprocessed PW1 request
         // PW1 port has received data (Query from IC-PW1) i.e. FE FE 33 54 [03/04] FD
-        // Reply messages are hard coded as it can only be a request for freq. or mode
+        // this method scan extract the messages one by one and process it.
         private void PW1port_DataReceived(object sender, SerialDataReceivedEventArgs e)
         {
-            if (chkPW1.Checked)                 // If function is enabled proceed
+            try
             {
-                try
-                {
-                    int len = PW1port.BytesToRead;  // How many bytes in port buffer
-                    if (len < 6) return;            // ? is a valid command
-                    byte[] inBuf = new byte[len];   // input message buffer
-                    byte[] outBuf = new byte[11];   // output message buffer
-                    string x = txtPW1ta.Text;       // get DDUtil address
-                    string cn = "";                 // save command from caller
-                    string ra = "";                 // save caller address
-                    string ta = txtPW1ta.Text;      // get DDUtil address
+                if (!chkPW1.Checked) return;  // If function is enabled proceed
 
-                    // read the port message buffer; may be more than one command sequence
-                    PW1port.Read(inBuf, 0, len);
-                    for (int i = 0; i <= len; i++)
-                    {   // look for FE FE 33 sequence indicating message start.
-                        if (inBuf[i].ToString("x2").ToUpper() == "FE")              // ? 1st preamble
-                        {
-                            i++; if (i == 0) return;
-                            if (inBuf[i].ToString("x2").ToUpper() == "FE")          // ? 2nd preamble
-                            {
-                                i++; // increment inBuf position counter
-                                if (inBuf[i].ToString("x2").ToUpper() == x)         // ? DDUtil addr (33h)
-                                {
-                                    i++; // increment inBuf position counter
-                                    ra = inBuf[i].ToString("x2").ToUpper();         // save caller addr
-                                    i++;
-                                    cn = inBuf[i].ToString("x2").ToUpper();         // save command
-                                    i++; // increment inBuf position counter
-                                    if (inBuf[i].ToString("x2").ToUpper() == "FD")  // ? message end
-                                    {
-                                        i++; // increment inBuf position counter
-                                        if (cn == "03")     // is cmd to read Xcvr Frequency
-                                        {   // If yes, assemble reply and send to port
-                                            raSetText(ra);
-                                            string preamble = "FE";
-                                            string EOM = "FD";
-                                            string mystring = "";
-                                            mystring = EOM + LastFreq.Substring(1, 10) +
-                                                        cn + ta + ra + preamble + preamble;
-                                            int j = 20;
-                                            for (int k = 0; k < 11; k++)
-                                            {
-                                                string outtemp = mystring.Substring(j, 2);
-                                                outBuf[k] = byte.Parse(outtemp, NumberStyles.HexNumber);
-                                                j -= 2;
-                                            }
-                                            // send freq read reply for 
-                                            // 14.234.56 Mhz = [FE FE ra ta cn 60 45 23 14 00 FD]
-                                            PW1port.Write(outBuf, 0, 11);
-                                        }
-                                        else if (cn == "04")    // is cmd to read Xcvr Mode
-                                        {   // If yes, assemble reply and send to port
-                                            raSetText(ra);
-                                            string preamble = "FE";
-                                            string EOM = "FD";
-                                            string mystring = "";
-                                            string mode = "";
-                                            switch (sdrMode)
-                                            {   // Lookup PW1 equivalent mode for SDR mode
-                                                case "1": mode = "00"; break;   // LSB
-                                                case "2": mode = "01"; break;   // USB
-                                                case "3": mode = "03"; break;   // CWU
-                                                case "4": mode = "05"; break;   // FMN
-                                                case "5": mode = "02"; break;   // AM
-                                                case "6": mode = "04"; break;   // RTTY (DIGL)
-                                                case "7": mode = "07"; break;   // CWL
-                                                case "9": mode = "08"; break;   // RTTY-R (DIGU)
-                                                default: mode = "01"; break;   // USB
-                                            }
-                                            mystring = EOM + mode + "00" + cn + ta + ra + preamble + preamble;
-                                            int j = 14;
-                                            for (int k = 0; k < 8; k++)
-                                            {
-                                                string outtemp = mystring.Substring(j, 2);
-                                                outBuf[k] = byte.Parse(outtemp, NumberStyles.HexNumber);
-                                                j -= 2;
-                                            }
-                                            // Send mode command [FE FE ra ta cn 00 md FD]
-                                            PW1port.Write(outBuf, 0, 8);
-                                        }
-                                    }
-                                }
-                            }
-                        }
+                int len = PW1port.BytesToRead;
+                int oldLen = 0, next = 0, j = 0; ;
+
+                if (null != _pw1Msg) oldLen = _pw1Msg.Length; // get the saved message length
+                byte[] temp = new byte[len + oldLen]; // allocte buffer to hold all available request
+
+                // copy the old message if any
+                if (oldLen > 0) Buffer.BlockCopy(_pw1Msg, 0, temp, 0, _pw1Msg.Length);
+                _pw1Msg = null;
+
+                // append the new message to the remaining from last time around
+                PW1port.Read(temp, oldLen, len);
+
+                for (int i = 0; i < temp.Length; i++)
+                {
+                    if ((i + 3) > temp.Length) break; //we do not have a preamble
+                    if (temp[i] != 0xFE || temp[i + 1] != 0xFE) continue;// is this is a preamble? 
+
+                    // find EOM and process the request
+                    for (j = i; j < temp.Length; j++)
+                    { // search for the EOM
+                        if (temp[j] != 0xFD) continue; // not EOM
+
+                        // found the EOM, now process the EOM and adjust indexs so that we can 
+                        // skip processed message next time around.
+                        next = j + 1;
+                        ProcessPW1Query(temp, i, next - i); // process the PW1 query
+                        i = j;
+                        break;
                     }
                 }
-                catch (Exception ex)
+
+                // save the remaining message for next time around
+                if (next < temp.Length)
                 {
-                    bool bReturnLog = false;
-                    bReturnLog = ErrorLog.ErrorRoutine(false, enableErrorLog, ex);
-                    if (false == bReturnLog) MessageBox.Show(new Form() { TopMost = true }, 
-                        "Unable to write to log");
+                    _pw1Msg = new byte[temp.Length - next];
+                    Buffer.BlockCopy(temp, next, _pw1Msg, 0, _pw1Msg.Length);
                 }
+            }
+            catch (Exception ex)
+            {
+                bool bReturnLog = false;
+                bReturnLog = ErrorLog.ErrorRoutine(false, enableErrorLog, ex);
+                if (false == bReturnLog) MessageBox.Show(new Form() { TopMost = true },
+                    "Unable to write to log");
+            }
+        }
+
+        // This method process a full PW1 query. i.e. FE FE 33 54 [03/04] FD
+        // Reply messages are hard coded as it can only be a request for freq. or mode
+        private void ProcessPW1Query(byte[] inBuf, int start, int len)
+        {
+            try
+            {
+                byte[] outBuf = new byte[11];   // output message buffer
+                string cn = "";                 // save command from caller
+                string ra = "";                 // save caller address
+                string ta = txtPW1ta.Text;      // get DDUtil address
+
+                //
+                // do a sanity check on the PW1 query
+                //
+                if (len != 6) return;  //for command 03 and 04 the length must be 6
+                // check the message format and target address
+                if (inBuf[start + 0] != 0xFE ||
+                    inBuf[start + 1] != 0xFE ||
+                    inBuf[start + len - 1] != 0xFD ||
+                    inBuf[start + 2].ToString("x2").ToUpper() != txtPW1ta.Text) return;
+
+                // save caller address and the command
+                ra = inBuf[start + 3].ToString("x2").ToUpper();  // save caller addr
+                cn = inBuf[start + 4].ToString("x2").ToUpper(); // save command
+
+                raSetText(ra);
+                string preamble = "FE";
+                string EOM = "FD";
+
+                switch (cn)
+                {
+                    case "03":     // is cmd to read Xcvr Frequency
+                        {   // If yes, assemble reply and send to port
+                            string mystring = EOM + LastFreq.Substring(1, 10) +
+                                        cn + ta + ra + preamble + preamble;
+                            int j = 20;
+                            for (int k = 0; k < 11; k++)
+                            {
+                                string outtemp = mystring.Substring(j, 2);
+                                outBuf[k] = byte.Parse(outtemp, NumberStyles.HexNumber);
+                                j -= 2;
+                            }
+                            // send freq read reply for 
+                            // 14.234.56 Mhz = [FE FE ra ta cn 60 45 23 14 00 FD]
+                            PW1port.Write(outBuf, 0, 11);
+                        }
+                        break;
+                    case "04":    // is cmd to read Xcvr Mode
+                        {   // If yes, assemble reply and send to port
+                            string mode = "";
+                            switch (sdrMode)
+                            {   // Lookup PW1 equivalent mode for SDR mode
+                                case "1": mode = "00"; break;   // LSB
+                                case "2": mode = "01"; break;   // USB
+                                case "3": mode = "03"; break;   // CWU
+                                case "4": mode = "05"; break;   // FMN
+                                case "5": mode = "02"; break;   // AM
+                                case "6": mode = "04"; break;   // RTTY (DIGL)
+                                case "7": mode = "07"; break;   // CWL
+                                case "9": mode = "08"; break;   // RTTY-R (DIGU)
+                                default: mode = "01"; break;   // USB
+                            }
+                            string mystring = EOM + mode + "00" + cn + ta + ra + preamble + preamble;
+                            int j = 14;
+                            for (int k = 0; k < 8; k++)
+                            {
+                                string outtemp = mystring.Substring(j, 2);
+                                outBuf[k] = byte.Parse(outtemp, NumberStyles.HexNumber);
+                                j -= 2;
+                            }
+                            // Send mode command [FE FE ra ta cn 00 md FD]
+                            PW1port.Write(outBuf, 0, 8);
+                        }
+                        break;
+                    default:
+                        break;
+                }
+            }
+            catch (Exception ex)
+            {
+                bool bReturnLog = false;
+                bReturnLog = ErrorLog.ErrorRoutine(false, enableErrorLog, ex);
+                if (false == bReturnLog) MessageBox.Show(new Form() { TopMost = true },
+                    "Unable to write to log");
             }
         }
 
@@ -12253,9 +12311,13 @@ namespace DataDecoder
             else
             {
                 if (text == "True")
-                { this.cboKnobAOn.BackColor = Color.LightGreen; }
+                {
+                    this.cboKnobAOn.BackColor = Color.LightGreen;
+                }
                 else
-                { this.cboKnobAOn.BackColor = Color.Empty; }
+                {
+                    this.cboKnobAOn.BackColor = Color.Empty;
+                }
                 if (ActCon == 1) ActIdx = cboKnobAOn.SelectedIndex;
             }
         }
@@ -12786,16 +12848,19 @@ namespace DataDecoder
         private void cboTkSw1_SelectedIndexChanged(object sender, EventArgs e)
         {
             set.cboTkSw1 = cboTkSw1.SelectedIndex;
+            set.Save();
         }
 
         private void cboTkSw2_SelectedIndexChanged(object sender, EventArgs e)
         {
             set.cboTkSw2 = cboTkSw2.SelectedIndex;
+            set.Save();
         }
 
         private void cboTkSw3_SelectedIndexChanged(object sender, EventArgs e)
         {
             set.cboTkSw3 = cboTkSw3.SelectedIndex;
+            set.Save();
         }
 
         #endregion * Events *
@@ -12840,11 +12905,43 @@ namespace DataDecoder
 
         void WriteLED() // set the knob leds
         {
-            string led2 = (kFlags >> 4 & 1).ToString(); // single click
-            string led3 = (kFlags >> 5 & 1).ToString(); // double click
-            string led1 = (kFlags >> 6 & 1).ToString(); // long click
+            string led1 = (kFlags >> 6 & 1).ToString(); // long click (Ref)
+            string led2 = (kFlags >> 4 & 1).ToString(); // single click (Yellow)
+            string led3 = (kFlags >> 5 & 1).ToString(); // double click (Green)
             string led = "I" + led1 + led2 + led3 + ";";
             KnobPort.Write(led);
+
+            if (led1 == "1")
+            {
+                TkRed.BackColor = Color.Red;
+                mini.TkRed.BackColor = Color.Red;
+            }
+            else
+            { 
+                TkRed.BackColor = Color.Empty;
+                mini.TkRed.BackColor = Color.Empty;
+            }
+            if (led2 == "1")
+            { 
+                TkYel.BackColor = Color.Yellow;
+                mini.TkYel.BackColor = Color.Yellow;
+            }
+            else
+            { 
+                TkYel.BackColor = Color.Empty;
+                mini.TkYel.BackColor = Color.Empty;
+            }
+            if (led3 == "1")
+            {
+                TkGrn.BackColor = Color.Lime;
+                mini.TkGrn.BackColor = Color.Lime;
+            }
+            else
+            {
+                TkGrn.BackColor = Color.Empty;
+                mini.TkGrn.BackColor = Color.Empty;
+            }
+
         }
 
         void WriteFlags()   // set indicators based on active control
@@ -14327,7 +14424,82 @@ namespace DataDecoder
         #endregion # Methods #
 
         #endregion Profiles
-                             
+
+        #region DXLab DDE
+
+        #region # Enums, Declarations and Vars #
+
+        const int LinkMode = 1;
+        const string ModeServer = "6";
+        const string InvokeMacroCommand = "invokemacro";
+        const string LinkItem = "DDECommand";
+        const string LinkTopic = "WinWarbler|DDEServer";
+
+
+        #endregion # Enums, Declarations and Vars #
+
+        #region # Events #
+
+        // Test for sending keys to another app (start notepad 1st)
+        [DllImport("user32.dll", SetLastError = true)]
+        static extern IntPtr FindWindowEx(IntPtr hwndParent, IntPtr hwndChildAfter, string lpszClass, string lpszWindow);
+        [DllImport("User32.Dll", EntryPoint = "PostMessageA")]
+        static extern bool PostMessage(IntPtr hWnd, uint msg, int wParam, int lParam);
+        [DllImport("user32.dll")]
+        static extern byte VkKeyScan(char ch);
+
+        const uint WM_KEYDOWN = 0x100;
+
+        private void button7_Click(object sender, EventArgs e)
+        {
+
+            Process[] procs = Process.GetProcessesByName("Notepad");
+            foreach (Process proc in procs)
+            {
+                // look for untitled notepad window
+                if (proc.MainWindowTitle == "Untitled - Notepad")
+                {
+                    // get handle to Notepad's edit window
+                    IntPtr hWnd = FindWindowEx(proc.MainWindowHandle, IntPtr.Zero, "edit", null);
+                    // post "hello" to notepad
+                    string s = "Hello Radio de K5FR";
+                    for (int i = 0; i < s.Length; i++)
+                    {
+                        PostMessage(hWnd, WM_KEYDOWN, VkKeyScan(s[i]), 0);
+                    }
+                    break;
+                }
+
+            }
+        }
+
+        #endregion # Events #
+
+        #region # Methods #
+
+        private static void SendWWmacro(string index)
+        {
+            try
+            {
+                // Create a client that connects to WinWarbler. 
+                DdeClient client = new DdeClient("WinWarbler", "DDEServer");
+                client.Connect();
+                client.Execute(ModeServer.PadRight(3, '0') + InvokeMacroCommand + index, 60000);
+                client.Disconnect();
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(new Form() { TopMost = true },
+                    "An error ocurred while trying to communicate with WinWarbler\r\r" +
+                    e.ToString(), "DDE Error!");
+            }
+        }
+
+        #endregion # Methods #
+
+        #endregion DXLab DDE
+        
+                                      
     } // end class Setup
 
     #region Helper Classes

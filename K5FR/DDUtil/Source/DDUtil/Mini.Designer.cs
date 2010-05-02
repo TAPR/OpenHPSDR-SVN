@@ -63,22 +63,6 @@ namespace DataDecoder
             this.chkRCP2 = new System.Windows.Forms.CheckBox();
             this.chkRCP3 = new System.Windows.Forms.CheckBox();
             this.chkRCP4 = new System.Windows.Forms.CheckBox();
-            this.btnMacro1 = new System.Windows.Forms.Button();
-            this.btnMacro2 = new System.Windows.Forms.Button();
-            this.btnMacro3 = new System.Windows.Forms.Button();
-            this.btnMacro4 = new System.Windows.Forms.Button();
-            this.btnMacro5 = new System.Windows.Forms.Button();
-            this.btnMacro6 = new System.Windows.Forms.Button();
-            this.btnMacro7 = new System.Windows.Forms.Button();
-            this.btnMacro8 = new System.Windows.Forms.Button();
-            this.btnMacro16 = new System.Windows.Forms.Button();
-            this.btnMacro15 = new System.Windows.Forms.Button();
-            this.btnMacro14 = new System.Windows.Forms.Button();
-            this.btnMacro13 = new System.Windows.Forms.Button();
-            this.btnMacro12 = new System.Windows.Forms.Button();
-            this.btnMacro11 = new System.Windows.Forms.Button();
-            this.btnMacro10 = new System.Windows.Forms.Button();
-            this.btnMacro9 = new System.Windows.Forms.Button();
             this.lblStepFreq = new System.Windows.Forms.Label();
             this.txtVolts = new System.Windows.Forms.TextBox();
             this.txtMemVfo = new System.Windows.Forms.TextBox();
@@ -90,6 +74,39 @@ namespace DataDecoder
             this.btnReCall = new System.Windows.Forms.Button();
             this.txtMemFreq = new System.Windows.Forms.TextBox();
             this.btnMemSave = new System.Windows.Forms.Button();
+            this.grpMacro = new System.Windows.Forms.GroupBox();
+            this.btnMacro16 = new System.Windows.Forms.Button();
+            this.label8 = new System.Windows.Forms.Label();
+            this.btnMacro15 = new System.Windows.Forms.Button();
+            this.label9 = new System.Windows.Forms.Label();
+            this.btnMacro14 = new System.Windows.Forms.Button();
+            this.label10 = new System.Windows.Forms.Label();
+            this.btnMacro13 = new System.Windows.Forms.Button();
+            this.label11 = new System.Windows.Forms.Label();
+            this.btnMacro12 = new System.Windows.Forms.Button();
+            this.label12 = new System.Windows.Forms.Label();
+            this.btnMacro11 = new System.Windows.Forms.Button();
+            this.label13 = new System.Windows.Forms.Label();
+            this.btnMacro10 = new System.Windows.Forms.Button();
+            this.label14 = new System.Windows.Forms.Label();
+            this.btnMacro9 = new System.Windows.Forms.Button();
+            this.label15 = new System.Windows.Forms.Label();
+            this.btnMacro8 = new System.Windows.Forms.Button();
+            this.label7 = new System.Windows.Forms.Label();
+            this.btnMacro7 = new System.Windows.Forms.Button();
+            this.label6 = new System.Windows.Forms.Label();
+            this.btnMacro6 = new System.Windows.Forms.Button();
+            this.label5 = new System.Windows.Forms.Label();
+            this.btnMacro5 = new System.Windows.Forms.Button();
+            this.label4 = new System.Windows.Forms.Label();
+            this.btnMacro4 = new System.Windows.Forms.Button();
+            this.label3 = new System.Windows.Forms.Label();
+            this.btnMacro3 = new System.Windows.Forms.Button();
+            this.label2 = new System.Windows.Forms.Label();
+            this.btnMacro2 = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
+            this.btnMacro1 = new System.Windows.Forms.Button();
+            this.label28 = new System.Windows.Forms.Label();
             this.grpStepCtrl = new System.Windows.Forms.GroupBox();
             this.grpRotor = new System.Windows.Forms.GroupBox();
             this.button4 = new System.Windows.Forms.Button();
@@ -103,27 +120,13 @@ namespace DataDecoder
             this.label77 = new System.Windows.Forms.Label();
             this.label76 = new System.Windows.Forms.Label();
             this.label73 = new System.Windows.Forms.Label();
-            this.label28 = new System.Windows.Forms.Label();
-            this.grpMacro = new System.Windows.Forms.GroupBox();
-            this.label8 = new System.Windows.Forms.Label();
-            this.label9 = new System.Windows.Forms.Label();
-            this.label10 = new System.Windows.Forms.Label();
-            this.label11 = new System.Windows.Forms.Label();
-            this.label12 = new System.Windows.Forms.Label();
-            this.label13 = new System.Windows.Forms.Label();
-            this.label14 = new System.Windows.Forms.Label();
-            this.label15 = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
+            this.TkRed = new System.Windows.Forms.Button();
+            this.TkYel = new System.Windows.Forms.Button();
+            this.TkGrn = new System.Windows.Forms.Button();
+            this.grpMacro.SuspendLayout();
             this.grpStepCtrl.SuspendLayout();
             this.grpRotor.SuspendLayout();
             this.grpAmp.SuspendLayout();
-            this.grpMacro.SuspendLayout();
             this.SuspendLayout();
             // 
             // lblAvg
@@ -303,7 +306,7 @@ namespace DataDecoder
             this.btnCalib.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.btnCalib.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnCalib.ForeColor = System.Drawing.Color.Navy;
-            this.btnCalib.Location = new System.Drawing.Point(278, 13);
+            this.btnCalib.Location = new System.Drawing.Point(275, 13);
             this.btnCalib.Name = "btnCalib";
             this.btnCalib.Size = new System.Drawing.Size(32, 22);
             this.btnCalib.TabIndex = 98;
@@ -322,7 +325,7 @@ namespace DataDecoder
             this.btnHome.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.btnHome.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnHome.ForeColor = System.Drawing.Color.Navy;
-            this.btnHome.Location = new System.Drawing.Point(228, 13);
+            this.btnHome.Location = new System.Drawing.Point(225, 13);
             this.btnHome.Name = "btnHome";
             this.btnHome.Size = new System.Drawing.Size(44, 22);
             this.btnHome.TabIndex = 97;
@@ -552,214 +555,6 @@ namespace DataDecoder
             this.chkRCP4.UseVisualStyleBackColor = true;
             this.chkRCP4.CheckedChanged += new System.EventHandler(this.chkRCP4_CheckedChanged);
             // 
-            // btnMacro1
-            // 
-            this.btnMacro1.BackColor = System.Drawing.SystemColors.Info;
-            this.btnMacro1.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
-            this.btnMacro1.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.btnMacro1.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.btnMacro1.Location = new System.Drawing.Point(5, 24);
-            this.btnMacro1.Name = "btnMacro1";
-            this.btnMacro1.Size = new System.Drawing.Size(20, 12);
-            this.btnMacro1.TabIndex = 140;
-            this.btnMacro1.UseVisualStyleBackColor = false;
-            this.btnMacro1.Click += new System.EventHandler(this.btnMacro1_Click);
-            // 
-            // btnMacro2
-            // 
-            this.btnMacro2.BackColor = System.Drawing.SystemColors.Info;
-            this.btnMacro2.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
-            this.btnMacro2.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.btnMacro2.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.btnMacro2.Location = new System.Drawing.Point(31, 24);
-            this.btnMacro2.Name = "btnMacro2";
-            this.btnMacro2.Size = new System.Drawing.Size(20, 12);
-            this.btnMacro2.TabIndex = 142;
-            this.btnMacro2.UseVisualStyleBackColor = false;
-            this.btnMacro2.Click += new System.EventHandler(this.btnMacro2_Click);
-            // 
-            // btnMacro3
-            // 
-            this.btnMacro3.BackColor = System.Drawing.SystemColors.Info;
-            this.btnMacro3.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
-            this.btnMacro3.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.btnMacro3.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.btnMacro3.Location = new System.Drawing.Point(58, 24);
-            this.btnMacro3.Name = "btnMacro3";
-            this.btnMacro3.Size = new System.Drawing.Size(20, 12);
-            this.btnMacro3.TabIndex = 144;
-            this.btnMacro3.UseVisualStyleBackColor = false;
-            this.btnMacro3.Click += new System.EventHandler(this.btnMacro3_Click);
-            // 
-            // btnMacro4
-            // 
-            this.btnMacro4.BackColor = System.Drawing.SystemColors.Info;
-            this.btnMacro4.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
-            this.btnMacro4.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.btnMacro4.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.btnMacro4.Location = new System.Drawing.Point(85, 24);
-            this.btnMacro4.Name = "btnMacro4";
-            this.btnMacro4.Size = new System.Drawing.Size(20, 12);
-            this.btnMacro4.TabIndex = 146;
-            this.btnMacro4.UseVisualStyleBackColor = false;
-            this.btnMacro4.Click += new System.EventHandler(this.btnMacro4_Click);
-            // 
-            // btnMacro5
-            // 
-            this.btnMacro5.BackColor = System.Drawing.SystemColors.Info;
-            this.btnMacro5.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
-            this.btnMacro5.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.btnMacro5.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.btnMacro5.Location = new System.Drawing.Point(112, 24);
-            this.btnMacro5.Name = "btnMacro5";
-            this.btnMacro5.Size = new System.Drawing.Size(20, 12);
-            this.btnMacro5.TabIndex = 148;
-            this.btnMacro5.UseVisualStyleBackColor = false;
-            this.btnMacro5.Click += new System.EventHandler(this.btnMacro5_Click);
-            // 
-            // btnMacro6
-            // 
-            this.btnMacro6.BackColor = System.Drawing.SystemColors.Info;
-            this.btnMacro6.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
-            this.btnMacro6.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.btnMacro6.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.btnMacro6.Location = new System.Drawing.Point(139, 24);
-            this.btnMacro6.Name = "btnMacro6";
-            this.btnMacro6.Size = new System.Drawing.Size(20, 12);
-            this.btnMacro6.TabIndex = 150;
-            this.btnMacro6.UseVisualStyleBackColor = false;
-            this.btnMacro6.Click += new System.EventHandler(this.btnMacro6_Click);
-            // 
-            // btnMacro7
-            // 
-            this.btnMacro7.BackColor = System.Drawing.SystemColors.Info;
-            this.btnMacro7.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
-            this.btnMacro7.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.btnMacro7.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.btnMacro7.Location = new System.Drawing.Point(165, 24);
-            this.btnMacro7.Name = "btnMacro7";
-            this.btnMacro7.Size = new System.Drawing.Size(20, 12);
-            this.btnMacro7.TabIndex = 152;
-            this.btnMacro7.UseVisualStyleBackColor = false;
-            this.btnMacro7.Click += new System.EventHandler(this.btnMacro7_Click);
-            // 
-            // btnMacro8
-            // 
-            this.btnMacro8.BackColor = System.Drawing.SystemColors.Info;
-            this.btnMacro8.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
-            this.btnMacro8.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.btnMacro8.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.btnMacro8.Location = new System.Drawing.Point(191, 24);
-            this.btnMacro8.Name = "btnMacro8";
-            this.btnMacro8.Size = new System.Drawing.Size(20, 12);
-            this.btnMacro8.TabIndex = 154;
-            this.btnMacro8.UseVisualStyleBackColor = false;
-            this.btnMacro8.Click += new System.EventHandler(this.btnMacro8_Click);
-            // 
-            // btnMacro16
-            // 
-            this.btnMacro16.BackColor = System.Drawing.SystemColors.Info;
-            this.btnMacro16.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
-            this.btnMacro16.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.btnMacro16.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.btnMacro16.Location = new System.Drawing.Point(404, 24);
-            this.btnMacro16.Name = "btnMacro16";
-            this.btnMacro16.Size = new System.Drawing.Size(20, 12);
-            this.btnMacro16.TabIndex = 170;
-            this.btnMacro16.UseVisualStyleBackColor = false;
-            this.btnMacro16.Click += new System.EventHandler(this.btnMacro16_Click);
-            // 
-            // btnMacro15
-            // 
-            this.btnMacro15.BackColor = System.Drawing.SystemColors.Info;
-            this.btnMacro15.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
-            this.btnMacro15.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.btnMacro15.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.btnMacro15.Location = new System.Drawing.Point(378, 24);
-            this.btnMacro15.Name = "btnMacro15";
-            this.btnMacro15.Size = new System.Drawing.Size(20, 12);
-            this.btnMacro15.TabIndex = 168;
-            this.btnMacro15.UseVisualStyleBackColor = false;
-            this.btnMacro15.Click += new System.EventHandler(this.btnMacro15_Click);
-            // 
-            // btnMacro14
-            // 
-            this.btnMacro14.BackColor = System.Drawing.SystemColors.Info;
-            this.btnMacro14.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
-            this.btnMacro14.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.btnMacro14.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.btnMacro14.Location = new System.Drawing.Point(352, 24);
-            this.btnMacro14.Name = "btnMacro14";
-            this.btnMacro14.Size = new System.Drawing.Size(20, 12);
-            this.btnMacro14.TabIndex = 166;
-            this.btnMacro14.UseVisualStyleBackColor = false;
-            this.btnMacro14.Click += new System.EventHandler(this.btnMacro14_Click);
-            // 
-            // btnMacro13
-            // 
-            this.btnMacro13.BackColor = System.Drawing.SystemColors.Info;
-            this.btnMacro13.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
-            this.btnMacro13.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.btnMacro13.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.btnMacro13.Location = new System.Drawing.Point(325, 24);
-            this.btnMacro13.Name = "btnMacro13";
-            this.btnMacro13.Size = new System.Drawing.Size(20, 12);
-            this.btnMacro13.TabIndex = 164;
-            this.btnMacro13.UseVisualStyleBackColor = false;
-            this.btnMacro13.Click += new System.EventHandler(this.btnMacro13_Click);
-            // 
-            // btnMacro12
-            // 
-            this.btnMacro12.BackColor = System.Drawing.SystemColors.Info;
-            this.btnMacro12.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
-            this.btnMacro12.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.btnMacro12.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.btnMacro12.Location = new System.Drawing.Point(297, 24);
-            this.btnMacro12.Name = "btnMacro12";
-            this.btnMacro12.Size = new System.Drawing.Size(20, 12);
-            this.btnMacro12.TabIndex = 162;
-            this.btnMacro12.UseVisualStyleBackColor = false;
-            this.btnMacro12.Click += new System.EventHandler(this.btnMacro12_Click);
-            // 
-            // btnMacro11
-            // 
-            this.btnMacro11.BackColor = System.Drawing.SystemColors.Info;
-            this.btnMacro11.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
-            this.btnMacro11.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.btnMacro11.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.btnMacro11.Location = new System.Drawing.Point(270, 24);
-            this.btnMacro11.Name = "btnMacro11";
-            this.btnMacro11.Size = new System.Drawing.Size(20, 12);
-            this.btnMacro11.TabIndex = 160;
-            this.btnMacro11.UseVisualStyleBackColor = false;
-            this.btnMacro11.Click += new System.EventHandler(this.btnMacro11_Click);
-            // 
-            // btnMacro10
-            // 
-            this.btnMacro10.BackColor = System.Drawing.SystemColors.Info;
-            this.btnMacro10.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
-            this.btnMacro10.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.btnMacro10.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.btnMacro10.Location = new System.Drawing.Point(243, 24);
-            this.btnMacro10.Name = "btnMacro10";
-            this.btnMacro10.Size = new System.Drawing.Size(20, 12);
-            this.btnMacro10.TabIndex = 158;
-            this.btnMacro10.UseVisualStyleBackColor = false;
-            this.btnMacro10.Click += new System.EventHandler(this.btnMacro10_Click);
-            // 
-            // btnMacro9
-            // 
-            this.btnMacro9.BackColor = System.Drawing.SystemColors.Info;
-            this.btnMacro9.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
-            this.btnMacro9.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.btnMacro9.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.btnMacro9.Location = new System.Drawing.Point(217, 24);
-            this.btnMacro9.Name = "btnMacro9";
-            this.btnMacro9.Size = new System.Drawing.Size(20, 12);
-            this.btnMacro9.TabIndex = 156;
-            this.btnMacro9.UseVisualStyleBackColor = false;
-            this.btnMacro9.Click += new System.EventHandler(this.btnMacro9_Click);
-            // 
             // lblStepFreq
             // 
             this.lblStepFreq.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -915,6 +710,433 @@ namespace DataDecoder
             this.btnMemSave.UseVisualStyleBackColor = true;
             this.btnMemSave.Click += new System.EventHandler(this.btnMemSave_Click);
             // 
+            // grpMacro
+            // 
+            this.grpMacro.Controls.Add(this.btnMacro16);
+            this.grpMacro.Controls.Add(this.label8);
+            this.grpMacro.Controls.Add(this.btnMacro15);
+            this.grpMacro.Controls.Add(this.label9);
+            this.grpMacro.Controls.Add(this.btnMacro14);
+            this.grpMacro.Controls.Add(this.label10);
+            this.grpMacro.Controls.Add(this.btnMacro13);
+            this.grpMacro.Controls.Add(this.label11);
+            this.grpMacro.Controls.Add(this.btnMacro12);
+            this.grpMacro.Controls.Add(this.label12);
+            this.grpMacro.Controls.Add(this.btnMacro11);
+            this.grpMacro.Controls.Add(this.label13);
+            this.grpMacro.Controls.Add(this.btnMacro10);
+            this.grpMacro.Controls.Add(this.label14);
+            this.grpMacro.Controls.Add(this.btnMacro9);
+            this.grpMacro.Controls.Add(this.label15);
+            this.grpMacro.Controls.Add(this.btnMacro8);
+            this.grpMacro.Controls.Add(this.label7);
+            this.grpMacro.Controls.Add(this.btnMacro7);
+            this.grpMacro.Controls.Add(this.label6);
+            this.grpMacro.Controls.Add(this.btnMacro6);
+            this.grpMacro.Controls.Add(this.label5);
+            this.grpMacro.Controls.Add(this.btnMacro5);
+            this.grpMacro.Controls.Add(this.label4);
+            this.grpMacro.Controls.Add(this.btnMacro4);
+            this.grpMacro.Controls.Add(this.label3);
+            this.grpMacro.Controls.Add(this.btnMacro3);
+            this.grpMacro.Controls.Add(this.label2);
+            this.grpMacro.Controls.Add(this.btnMacro2);
+            this.grpMacro.Controls.Add(this.label1);
+            this.grpMacro.Controls.Add(this.btnMacro1);
+            this.grpMacro.Controls.Add(this.label28);
+            this.grpMacro.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.25F, System.Drawing.FontStyle.Bold);
+            this.grpMacro.ForeColor = System.Drawing.Color.Firebrick;
+            this.grpMacro.Location = new System.Drawing.Point(3, 90);
+            this.grpMacro.Name = "grpMacro";
+            this.grpMacro.Size = new System.Drawing.Size(430, 43);
+            this.grpMacro.TabIndex = 103;
+            this.grpMacro.TabStop = false;
+            this.toolTip1.SetToolTip(this.grpMacro, "Macro Buttons");
+            // 
+            // btnMacro16
+            // 
+            this.btnMacro16.BackColor = System.Drawing.SystemColors.Info;
+            this.btnMacro16.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
+            this.btnMacro16.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.btnMacro16.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.btnMacro16.Location = new System.Drawing.Point(404, 24);
+            this.btnMacro16.Name = "btnMacro16";
+            this.btnMacro16.Size = new System.Drawing.Size(20, 12);
+            this.btnMacro16.TabIndex = 170;
+            this.btnMacro16.UseVisualStyleBackColor = false;
+            this.btnMacro16.Click += new System.EventHandler(this.btnMacro16_Click);
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label8.ForeColor = System.Drawing.Color.Navy;
+            this.label8.Location = new System.Drawing.Point(402, 8);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(24, 12);
+            this.label8.TabIndex = 169;
+            this.label8.Text = "^F4";
+            // 
+            // btnMacro15
+            // 
+            this.btnMacro15.BackColor = System.Drawing.SystemColors.Info;
+            this.btnMacro15.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
+            this.btnMacro15.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.btnMacro15.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.btnMacro15.Location = new System.Drawing.Point(378, 24);
+            this.btnMacro15.Name = "btnMacro15";
+            this.btnMacro15.Size = new System.Drawing.Size(20, 12);
+            this.btnMacro15.TabIndex = 168;
+            this.btnMacro15.UseVisualStyleBackColor = false;
+            this.btnMacro15.Click += new System.EventHandler(this.btnMacro15_Click);
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label9.ForeColor = System.Drawing.Color.Navy;
+            this.label9.Location = new System.Drawing.Point(376, 8);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(24, 12);
+            this.label9.TabIndex = 167;
+            this.label9.Text = "^F3";
+            // 
+            // btnMacro14
+            // 
+            this.btnMacro14.BackColor = System.Drawing.SystemColors.Info;
+            this.btnMacro14.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
+            this.btnMacro14.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.btnMacro14.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.btnMacro14.Location = new System.Drawing.Point(352, 24);
+            this.btnMacro14.Name = "btnMacro14";
+            this.btnMacro14.Size = new System.Drawing.Size(20, 12);
+            this.btnMacro14.TabIndex = 166;
+            this.btnMacro14.UseVisualStyleBackColor = false;
+            this.btnMacro14.Click += new System.EventHandler(this.btnMacro14_Click);
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label10.ForeColor = System.Drawing.Color.Navy;
+            this.label10.Location = new System.Drawing.Point(350, 8);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(24, 12);
+            this.label10.TabIndex = 165;
+            this.label10.Text = "^F2";
+            // 
+            // btnMacro13
+            // 
+            this.btnMacro13.BackColor = System.Drawing.SystemColors.Info;
+            this.btnMacro13.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
+            this.btnMacro13.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.btnMacro13.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.btnMacro13.Location = new System.Drawing.Point(325, 24);
+            this.btnMacro13.Name = "btnMacro13";
+            this.btnMacro13.Size = new System.Drawing.Size(20, 12);
+            this.btnMacro13.TabIndex = 164;
+            this.btnMacro13.UseVisualStyleBackColor = false;
+            this.btnMacro13.Click += new System.EventHandler(this.btnMacro13_Click);
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label11.ForeColor = System.Drawing.Color.Navy;
+            this.label11.Location = new System.Drawing.Point(323, 8);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(24, 12);
+            this.label11.TabIndex = 163;
+            this.label11.Text = "^F1";
+            // 
+            // btnMacro12
+            // 
+            this.btnMacro12.BackColor = System.Drawing.SystemColors.Info;
+            this.btnMacro12.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
+            this.btnMacro12.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.btnMacro12.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.btnMacro12.Location = new System.Drawing.Point(297, 24);
+            this.btnMacro12.Name = "btnMacro12";
+            this.btnMacro12.Size = new System.Drawing.Size(20, 12);
+            this.btnMacro12.TabIndex = 162;
+            this.btnMacro12.UseVisualStyleBackColor = false;
+            this.btnMacro12.Click += new System.EventHandler(this.btnMacro12_Click);
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label12.ForeColor = System.Drawing.Color.Navy;
+            this.label12.Location = new System.Drawing.Point(296, 8);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(24, 12);
+            this.label12.TabIndex = 161;
+            this.label12.Text = "F12";
+            // 
+            // btnMacro11
+            // 
+            this.btnMacro11.BackColor = System.Drawing.SystemColors.Info;
+            this.btnMacro11.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
+            this.btnMacro11.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.btnMacro11.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.btnMacro11.Location = new System.Drawing.Point(270, 24);
+            this.btnMacro11.Name = "btnMacro11";
+            this.btnMacro11.Size = new System.Drawing.Size(20, 12);
+            this.btnMacro11.TabIndex = 160;
+            this.btnMacro11.UseVisualStyleBackColor = false;
+            this.btnMacro11.Click += new System.EventHandler(this.btnMacro11_Click);
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label13.ForeColor = System.Drawing.Color.Navy;
+            this.label13.Location = new System.Drawing.Point(269, 8);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(24, 12);
+            this.label13.TabIndex = 159;
+            this.label13.Text = "F11";
+            // 
+            // btnMacro10
+            // 
+            this.btnMacro10.BackColor = System.Drawing.SystemColors.Info;
+            this.btnMacro10.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
+            this.btnMacro10.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.btnMacro10.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.btnMacro10.Location = new System.Drawing.Point(243, 24);
+            this.btnMacro10.Name = "btnMacro10";
+            this.btnMacro10.Size = new System.Drawing.Size(20, 12);
+            this.btnMacro10.TabIndex = 158;
+            this.btnMacro10.UseVisualStyleBackColor = false;
+            this.btnMacro10.Click += new System.EventHandler(this.btnMacro10_Click);
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label14.ForeColor = System.Drawing.Color.Navy;
+            this.label14.Location = new System.Drawing.Point(242, 8);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(24, 12);
+            this.label14.TabIndex = 157;
+            this.label14.Text = "F10";
+            // 
+            // btnMacro9
+            // 
+            this.btnMacro9.BackColor = System.Drawing.SystemColors.Info;
+            this.btnMacro9.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
+            this.btnMacro9.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.btnMacro9.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.btnMacro9.Location = new System.Drawing.Point(217, 24);
+            this.btnMacro9.Name = "btnMacro9";
+            this.btnMacro9.Size = new System.Drawing.Size(20, 12);
+            this.btnMacro9.TabIndex = 156;
+            this.btnMacro9.UseVisualStyleBackColor = false;
+            this.btnMacro9.Click += new System.EventHandler(this.btnMacro9_Click);
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label15.ForeColor = System.Drawing.Color.Navy;
+            this.label15.Location = new System.Drawing.Point(218, 8);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(18, 12);
+            this.label15.TabIndex = 155;
+            this.label15.Text = "F9";
+            // 
+            // btnMacro8
+            // 
+            this.btnMacro8.BackColor = System.Drawing.SystemColors.Info;
+            this.btnMacro8.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
+            this.btnMacro8.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.btnMacro8.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.btnMacro8.Location = new System.Drawing.Point(191, 24);
+            this.btnMacro8.Name = "btnMacro8";
+            this.btnMacro8.Size = new System.Drawing.Size(20, 12);
+            this.btnMacro8.TabIndex = 154;
+            this.btnMacro8.UseVisualStyleBackColor = false;
+            this.btnMacro8.Click += new System.EventHandler(this.btnMacro8_Click);
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label7.ForeColor = System.Drawing.Color.Navy;
+            this.label7.Location = new System.Drawing.Point(192, 8);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(18, 12);
+            this.label7.TabIndex = 153;
+            this.label7.Text = "F8";
+            // 
+            // btnMacro7
+            // 
+            this.btnMacro7.BackColor = System.Drawing.SystemColors.Info;
+            this.btnMacro7.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
+            this.btnMacro7.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.btnMacro7.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.btnMacro7.Location = new System.Drawing.Point(165, 24);
+            this.btnMacro7.Name = "btnMacro7";
+            this.btnMacro7.Size = new System.Drawing.Size(20, 12);
+            this.btnMacro7.TabIndex = 152;
+            this.btnMacro7.UseVisualStyleBackColor = false;
+            this.btnMacro7.Click += new System.EventHandler(this.btnMacro7_Click);
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label6.ForeColor = System.Drawing.Color.Navy;
+            this.label6.Location = new System.Drawing.Point(166, 8);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(18, 12);
+            this.label6.TabIndex = 151;
+            this.label6.Text = "F7";
+            // 
+            // btnMacro6
+            // 
+            this.btnMacro6.BackColor = System.Drawing.SystemColors.Info;
+            this.btnMacro6.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
+            this.btnMacro6.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.btnMacro6.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.btnMacro6.Location = new System.Drawing.Point(139, 24);
+            this.btnMacro6.Name = "btnMacro6";
+            this.btnMacro6.Size = new System.Drawing.Size(20, 12);
+            this.btnMacro6.TabIndex = 150;
+            this.btnMacro6.UseVisualStyleBackColor = false;
+            this.btnMacro6.Click += new System.EventHandler(this.btnMacro6_Click);
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.ForeColor = System.Drawing.Color.Navy;
+            this.label5.Location = new System.Drawing.Point(140, 8);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(18, 12);
+            this.label5.TabIndex = 149;
+            this.label5.Text = "F6";
+            // 
+            // btnMacro5
+            // 
+            this.btnMacro5.BackColor = System.Drawing.SystemColors.Info;
+            this.btnMacro5.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
+            this.btnMacro5.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.btnMacro5.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.btnMacro5.Location = new System.Drawing.Point(112, 24);
+            this.btnMacro5.Name = "btnMacro5";
+            this.btnMacro5.Size = new System.Drawing.Size(20, 12);
+            this.btnMacro5.TabIndex = 148;
+            this.btnMacro5.UseVisualStyleBackColor = false;
+            this.btnMacro5.Click += new System.EventHandler(this.btnMacro5_Click);
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.ForeColor = System.Drawing.Color.Navy;
+            this.label4.Location = new System.Drawing.Point(113, 8);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(18, 12);
+            this.label4.TabIndex = 147;
+            this.label4.Text = "F5";
+            // 
+            // btnMacro4
+            // 
+            this.btnMacro4.BackColor = System.Drawing.SystemColors.Info;
+            this.btnMacro4.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
+            this.btnMacro4.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.btnMacro4.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.btnMacro4.Location = new System.Drawing.Point(85, 24);
+            this.btnMacro4.Name = "btnMacro4";
+            this.btnMacro4.Size = new System.Drawing.Size(20, 12);
+            this.btnMacro4.TabIndex = 146;
+            this.btnMacro4.UseVisualStyleBackColor = false;
+            this.btnMacro4.Click += new System.EventHandler(this.btnMacro4_Click);
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.ForeColor = System.Drawing.Color.Navy;
+            this.label3.Location = new System.Drawing.Point(86, 8);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(18, 12);
+            this.label3.TabIndex = 145;
+            this.label3.Text = "F4";
+            // 
+            // btnMacro3
+            // 
+            this.btnMacro3.BackColor = System.Drawing.SystemColors.Info;
+            this.btnMacro3.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
+            this.btnMacro3.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.btnMacro3.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.btnMacro3.Location = new System.Drawing.Point(58, 24);
+            this.btnMacro3.Name = "btnMacro3";
+            this.btnMacro3.Size = new System.Drawing.Size(20, 12);
+            this.btnMacro3.TabIndex = 144;
+            this.btnMacro3.UseVisualStyleBackColor = false;
+            this.btnMacro3.Click += new System.EventHandler(this.btnMacro3_Click);
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.ForeColor = System.Drawing.Color.Navy;
+            this.label2.Location = new System.Drawing.Point(59, 8);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(18, 12);
+            this.label2.TabIndex = 143;
+            this.label2.Text = "F3";
+            // 
+            // btnMacro2
+            // 
+            this.btnMacro2.BackColor = System.Drawing.SystemColors.Info;
+            this.btnMacro2.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
+            this.btnMacro2.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.btnMacro2.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.btnMacro2.Location = new System.Drawing.Point(31, 24);
+            this.btnMacro2.Name = "btnMacro2";
+            this.btnMacro2.Size = new System.Drawing.Size(20, 12);
+            this.btnMacro2.TabIndex = 142;
+            this.btnMacro2.UseVisualStyleBackColor = false;
+            this.btnMacro2.Click += new System.EventHandler(this.btnMacro2_Click);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.ForeColor = System.Drawing.Color.Navy;
+            this.label1.Location = new System.Drawing.Point(32, 8);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(18, 12);
+            this.label1.TabIndex = 141;
+            this.label1.Text = "F2";
+            // 
+            // btnMacro1
+            // 
+            this.btnMacro1.BackColor = System.Drawing.SystemColors.Info;
+            this.btnMacro1.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
+            this.btnMacro1.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.btnMacro1.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.btnMacro1.Location = new System.Drawing.Point(5, 24);
+            this.btnMacro1.Name = "btnMacro1";
+            this.btnMacro1.Size = new System.Drawing.Size(20, 12);
+            this.btnMacro1.TabIndex = 140;
+            this.btnMacro1.UseVisualStyleBackColor = false;
+            this.btnMacro1.Click += new System.EventHandler(this.btnMacro1_Click);
+            // 
+            // label28
+            // 
+            this.label28.AutoSize = true;
+            this.label28.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label28.ForeColor = System.Drawing.Color.Navy;
+            this.label28.Location = new System.Drawing.Point(6, 8);
+            this.label28.Name = "label28";
+            this.label28.Size = new System.Drawing.Size(18, 12);
+            this.label28.TabIndex = 114;
+            this.label28.Text = "F1";
+            // 
             // grpStepCtrl
             // 
             this.grpStepCtrl.Controls.Add(this.lblStepFreq);
@@ -928,7 +1150,7 @@ namespace DataDecoder
             this.grpStepCtrl.ForeColor = System.Drawing.Color.Firebrick;
             this.grpStepCtrl.Location = new System.Drawing.Point(4, 26);
             this.grpStepCtrl.Name = "grpStepCtrl";
-            this.grpStepCtrl.Size = new System.Drawing.Size(319, 40);
+            this.grpStepCtrl.Size = new System.Drawing.Size(311, 40);
             this.grpStepCtrl.TabIndex = 85;
             this.grpStepCtrl.TabStop = false;
             this.grpStepCtrl.Text = "SteppIR";
@@ -942,7 +1164,7 @@ namespace DataDecoder
             this.grpRotor.Controls.Add(this.textBox3);
             this.grpRotor.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.25F, System.Drawing.FontStyle.Bold);
             this.grpRotor.ForeColor = System.Drawing.Color.Firebrick;
-            this.grpRotor.Location = new System.Drawing.Point(330, 26);
+            this.grpRotor.Location = new System.Drawing.Point(320, 26);
             this.grpRotor.Name = "grpRotor";
             this.grpRotor.Size = new System.Drawing.Size(89, 40);
             this.grpRotor.TabIndex = 86;
@@ -1014,7 +1236,7 @@ namespace DataDecoder
             this.grpAmp.Controls.Add(this.btnPwr);
             this.grpAmp.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.25F, System.Drawing.FontStyle.Bold);
             this.grpAmp.ForeColor = System.Drawing.Color.Blue;
-            this.grpAmp.Location = new System.Drawing.Point(431, 5);
+            this.grpAmp.Location = new System.Drawing.Point(437, 5);
             this.grpAmp.Name = "grpAmp";
             this.grpAmp.Size = new System.Drawing.Size(251, 80);
             this.grpAmp.TabIndex = 88;
@@ -1101,231 +1323,48 @@ namespace DataDecoder
             this.label73.TabIndex = 11;
             this.label73.Text = "Tune";
             // 
-            // label28
+            // TkRed
             // 
-            this.label28.AutoSize = true;
-            this.label28.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label28.ForeColor = System.Drawing.Color.Navy;
-            this.label28.Location = new System.Drawing.Point(6, 8);
-            this.label28.Name = "label28";
-            this.label28.Size = new System.Drawing.Size(18, 12);
-            this.label28.TabIndex = 114;
-            this.label28.Text = "F1";
+            this.TkRed.BackColor = System.Drawing.SystemColors.Control;
+            this.TkRed.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.TkRed.Location = new System.Drawing.Point(417, 28);
+            this.TkRed.Name = "TkRed";
+            this.TkRed.Size = new System.Drawing.Size(10, 10);
+            this.TkRed.TabIndex = 116;
+            this.toolTip1.SetToolTip(this.TkRed, "Tuning Knob Long-Click (On = Mode A, Off = Mode B)");
+            this.TkRed.UseVisualStyleBackColor = false;
             // 
-            // grpMacro
+            // TkYel
             // 
-            this.grpMacro.Controls.Add(this.btnMacro16);
-            this.grpMacro.Controls.Add(this.label8);
-            this.grpMacro.Controls.Add(this.btnMacro15);
-            this.grpMacro.Controls.Add(this.label9);
-            this.grpMacro.Controls.Add(this.btnMacro14);
-            this.grpMacro.Controls.Add(this.label10);
-            this.grpMacro.Controls.Add(this.btnMacro13);
-            this.grpMacro.Controls.Add(this.label11);
-            this.grpMacro.Controls.Add(this.btnMacro12);
-            this.grpMacro.Controls.Add(this.label12);
-            this.grpMacro.Controls.Add(this.btnMacro11);
-            this.grpMacro.Controls.Add(this.label13);
-            this.grpMacro.Controls.Add(this.btnMacro10);
-            this.grpMacro.Controls.Add(this.label14);
-            this.grpMacro.Controls.Add(this.btnMacro9);
-            this.grpMacro.Controls.Add(this.label15);
-            this.grpMacro.Controls.Add(this.btnMacro8);
-            this.grpMacro.Controls.Add(this.label7);
-            this.grpMacro.Controls.Add(this.btnMacro7);
-            this.grpMacro.Controls.Add(this.label6);
-            this.grpMacro.Controls.Add(this.btnMacro6);
-            this.grpMacro.Controls.Add(this.label5);
-            this.grpMacro.Controls.Add(this.btnMacro5);
-            this.grpMacro.Controls.Add(this.label4);
-            this.grpMacro.Controls.Add(this.btnMacro4);
-            this.grpMacro.Controls.Add(this.label3);
-            this.grpMacro.Controls.Add(this.btnMacro3);
-            this.grpMacro.Controls.Add(this.label2);
-            this.grpMacro.Controls.Add(this.btnMacro2);
-            this.grpMacro.Controls.Add(this.label1);
-            this.grpMacro.Controls.Add(this.btnMacro1);
-            this.grpMacro.Controls.Add(this.label28);
-            this.grpMacro.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.25F, System.Drawing.FontStyle.Bold);
-            this.grpMacro.ForeColor = System.Drawing.Color.Firebrick;
-            this.grpMacro.Location = new System.Drawing.Point(3, 90);
-            this.grpMacro.Name = "grpMacro";
-            this.grpMacro.Size = new System.Drawing.Size(430, 43);
-            this.grpMacro.TabIndex = 103;
-            this.grpMacro.TabStop = false;
-            this.toolTip1.SetToolTip(this.grpMacro, "Macro Buttons");
+            this.TkYel.BackColor = System.Drawing.SystemColors.Control;
+            this.TkYel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.TkYel.Location = new System.Drawing.Point(417, 43);
+            this.TkYel.Name = "TkYel";
+            this.TkYel.Size = new System.Drawing.Size(10, 10);
+            this.TkYel.TabIndex = 114;
+            this.toolTip1.SetToolTip(this.TkYel, "Tuning Knob Short-Click (On/Off)");
+            this.TkYel.UseVisualStyleBackColor = false;
             // 
-            // label8
+            // TkGrn
             // 
-            this.label8.AutoSize = true;
-            this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label8.ForeColor = System.Drawing.Color.Navy;
-            this.label8.Location = new System.Drawing.Point(402, 8);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(24, 12);
-            this.label8.TabIndex = 169;
-            this.label8.Text = "^F4";
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label9.ForeColor = System.Drawing.Color.Navy;
-            this.label9.Location = new System.Drawing.Point(376, 8);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(24, 12);
-            this.label9.TabIndex = 167;
-            this.label9.Text = "^F3";
-            // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label10.ForeColor = System.Drawing.Color.Navy;
-            this.label10.Location = new System.Drawing.Point(350, 8);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(24, 12);
-            this.label10.TabIndex = 165;
-            this.label10.Text = "^F2";
-            // 
-            // label11
-            // 
-            this.label11.AutoSize = true;
-            this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label11.ForeColor = System.Drawing.Color.Navy;
-            this.label11.Location = new System.Drawing.Point(323, 8);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(24, 12);
-            this.label11.TabIndex = 163;
-            this.label11.Text = "^F1";
-            // 
-            // label12
-            // 
-            this.label12.AutoSize = true;
-            this.label12.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label12.ForeColor = System.Drawing.Color.Navy;
-            this.label12.Location = new System.Drawing.Point(296, 8);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(24, 12);
-            this.label12.TabIndex = 161;
-            this.label12.Text = "F12";
-            // 
-            // label13
-            // 
-            this.label13.AutoSize = true;
-            this.label13.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label13.ForeColor = System.Drawing.Color.Navy;
-            this.label13.Location = new System.Drawing.Point(269, 8);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(24, 12);
-            this.label13.TabIndex = 159;
-            this.label13.Text = "F11";
-            // 
-            // label14
-            // 
-            this.label14.AutoSize = true;
-            this.label14.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label14.ForeColor = System.Drawing.Color.Navy;
-            this.label14.Location = new System.Drawing.Point(242, 8);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(24, 12);
-            this.label14.TabIndex = 157;
-            this.label14.Text = "F10";
-            // 
-            // label15
-            // 
-            this.label15.AutoSize = true;
-            this.label15.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label15.ForeColor = System.Drawing.Color.Navy;
-            this.label15.Location = new System.Drawing.Point(218, 8);
-            this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(18, 12);
-            this.label15.TabIndex = 155;
-            this.label15.Text = "F9";
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.ForeColor = System.Drawing.Color.Navy;
-            this.label7.Location = new System.Drawing.Point(192, 8);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(18, 12);
-            this.label7.TabIndex = 153;
-            this.label7.Text = "F8";
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.ForeColor = System.Drawing.Color.Navy;
-            this.label6.Location = new System.Drawing.Point(166, 8);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(18, 12);
-            this.label6.TabIndex = 151;
-            this.label6.Text = "F7";
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.ForeColor = System.Drawing.Color.Navy;
-            this.label5.Location = new System.Drawing.Point(140, 8);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(18, 12);
-            this.label5.TabIndex = 149;
-            this.label5.Text = "F6";
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.ForeColor = System.Drawing.Color.Navy;
-            this.label4.Location = new System.Drawing.Point(113, 8);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(18, 12);
-            this.label4.TabIndex = 147;
-            this.label4.Text = "F5";
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.ForeColor = System.Drawing.Color.Navy;
-            this.label3.Location = new System.Drawing.Point(86, 8);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(18, 12);
-            this.label3.TabIndex = 145;
-            this.label3.Text = "F4";
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.ForeColor = System.Drawing.Color.Navy;
-            this.label2.Location = new System.Drawing.Point(59, 8);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(18, 12);
-            this.label2.TabIndex = 143;
-            this.label2.Text = "F3";
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.ForeColor = System.Drawing.Color.Navy;
-            this.label1.Location = new System.Drawing.Point(32, 8);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(18, 12);
-            this.label1.TabIndex = 141;
-            this.label1.Text = "F2";
+            this.TkGrn.BackColor = System.Drawing.SystemColors.Control;
+            this.TkGrn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.TkGrn.Location = new System.Drawing.Point(417, 57);
+            this.TkGrn.Name = "TkGrn";
+            this.TkGrn.Size = new System.Drawing.Size(10, 10);
+            this.TkGrn.TabIndex = 115;
+            this.toolTip1.SetToolTip(this.TkGrn, "Tuning Knob Double-Click (On/Off)");
+            this.TkGrn.UseVisualStyleBackColor = false;
             // 
             // Mini
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
-            this.ClientSize = new System.Drawing.Size(694, 160);
+            this.ClientSize = new System.Drawing.Size(703, 160);
+            this.Controls.Add(this.TkRed);
+            this.Controls.Add(this.TkYel);
+            this.Controls.Add(this.TkGrn);
             this.Controls.Add(this.txtMemVfo);
             this.Controls.Add(this.btnMV);
             this.Controls.Add(this.btnMemLoad);
@@ -1368,14 +1407,14 @@ namespace DataDecoder
             this.Closing += new System.ComponentModel.CancelEventHandler(this.Mini_FormClosing);
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Mini_FormClosing);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Mini_KeyDown);
+            this.grpMacro.ResumeLayout(false);
+            this.grpMacro.PerformLayout();
             this.grpStepCtrl.ResumeLayout(false);
             this.grpStepCtrl.PerformLayout();
             this.grpRotor.ResumeLayout(false);
             this.grpRotor.PerformLayout();
             this.grpAmp.ResumeLayout(false);
             this.grpAmp.PerformLayout();
-            this.grpMacro.ResumeLayout(false);
-            this.grpMacro.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1471,5 +1510,8 @@ namespace DataDecoder
         public System.Windows.Forms.Button btnMacro11;
         public System.Windows.Forms.Button btnMacro10;
         public System.Windows.Forms.Button btnMacro9;
+        public System.Windows.Forms.Button TkRed;
+        public System.Windows.Forms.Button TkYel;
+        public System.Windows.Forms.Button TkGrn;
     }
 }
