@@ -341,7 +341,7 @@ void client_send_audio() {
         if(clientSocket!=-1) {
             sem_wait(&network_semaphore);
                 if(send_audio && (clientSocket!=-1)) {
-                    rc=send(clientSocket,audio_buffer,audio_buffer_size+PREFIX,0);
+                    rc=send(clientSocket,audio_buffer,audio_buffer_size+PREFIX,MSG_NOSIGNAL);
                     if(rc!=(audio_buffer_size+PREFIX)) {
                         fprintf(stderr,"client_send_audio sent %d bytes",rc);
                     }

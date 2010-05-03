@@ -104,7 +104,13 @@ static struct timeb end_time;
 static int sample_count=0;
 
 static unsigned char control_in[5]={0x00,0x00,0x00,0x00,0x00};
-static unsigned char control_out[5]={0x00,0x00,0x00,0x00,0x00};
+static unsigned char control_out[5]={
+  MOX_DISABLED,
+  CONFIG_MERCURY | MERCURY_122_88MHZ_SOURCE | MERCURY_10MHZ_SOURCE | MIC_SOURCE_PENELOPE | SPEED_96KHZ,
+  MODE_OTHERS,
+  ALEX_ATTENUATION_0DB | LT2208_GAIN_OFF | LT2208_DITHER_ON | LT2208_RANDOM_ON,
+  DUPLEX
+};
 
 static int ptt=0;
 static int dot=0;
@@ -202,6 +208,8 @@ void ozy_set_receivers(int r) {
         exit(1);
     }
     receivers=r;
+    control_out[4] &= 0xc7;
+    control_out[4] |= (r-1)<<3;
 }
 
 int ozy_get_receivers() {
@@ -230,6 +238,8 @@ void ozy_set_sample_rate(int r) {
             exit(1);
             break;
     }
+    control_out[1] &= 0xfc;
+    control_out[1] |= speed;
 }
 
 int ozy_get_sample_rate() {
@@ -261,11 +271,13 @@ int ozy_init() {
     }
 
     // setup defaults
+/*
     control_out[0] = MOX_DISABLED;
     control_out[1] = CONFIG_MERCURY | MERCURY_122_88MHZ_SOURCE | MERCURY_10MHZ_SOURCE | speed | MIC_SOURCE_PENELOPE;
     control_out[2] = MODE_OTHERS;
     control_out[3] = ALEX_ATTENUATION_0DB | LT2208_GAIN_OFF | LT2208_DITHER_ON | LT2208_RANDOM_ON;
     control_out[4] = DUPLEX | ((receivers-1)<<3);
+*/
 
     // open ozy
     rc = ozy_open();

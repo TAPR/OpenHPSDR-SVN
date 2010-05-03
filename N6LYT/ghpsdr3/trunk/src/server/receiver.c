@@ -167,6 +167,7 @@ void send_IQ_buffer(int rx) {
                 buffer.length=sizeof(receiver[rx].input_buffer)-offset;
                 if(buffer.length>500) buffer.length=500;
                 memcpy((char*)&buffer.data[0],(char*)&receiver[rx].input_buffer[offset/4],buffer.length);
+//fprintf(stderr,"send_IQ: rx:%d: %lld:%d:%d\n",rx,buffer.sequence,buffer.offset,buffer.length);
                 rc=sendto(iq_socket,(char*)&buffer,sizeof(buffer),0,(struct sockaddr*)&client,client_length);
                 if(rc<=0) {
                     perror("sendto failed for iq data");
@@ -176,7 +177,6 @@ void send_IQ_buffer(int rx) {
             }
             sequence++;
 
-            
 #else
             rc=sendto(iq_socket,receiver[rx].input_buffer,sizeof(receiver[rx].input_buffer),0,(struct sockaddr*)&client,client_length);
             if(rc<=0) {
