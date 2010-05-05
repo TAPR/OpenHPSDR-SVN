@@ -378,7 +378,7 @@ void buildMainUI() {
     GtkWidget* label;
     char title[64];
 
-    sprintf(title,"gHPSDR rx:%d",receiver);
+    sprintf(title,"gHPSDR %s rx:%d",server_address,receiver);
     mainWindow = gtk_window_new (GTK_WINDOW_TOPLEVEL);
     gtk_window_set_title((GtkWindow*)mainWindow,title);
     gtk_widget_modify_bg(mainWindow,GTK_STATE_NORMAL,&background);
