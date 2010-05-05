@@ -17,8 +17,10 @@ import java.net.UnknownHostException;
  */
 public class Client extends Thread {
 
-    public Client(String server,int receiver,Audio audio) {
+    public Client(String server,int receiver,Audio audio,int limit) {
+        this.receiver=receiver;
         this.audio=audio;
+        this.limit=limit;
         if(server!=null) {
             this.server=server;
         }
@@ -30,6 +32,11 @@ public class Client extends Thread {
             inputStream=socket.getInputStream();
             outputStream=socket.getOutputStream();
             System.err.println("opened client socket on port "+Integer.toString(port));
+
+            if(limit>0) {
+                ConnectionLimit connectionLimit=new ConnectionLimit(limit);
+                connectionLimit.start();
+            }
         } catch (UnknownHostException e) {
             System.err.println("Client: UnknownHost: "+server);
             status="Unknown host "+server;
@@ -58,8 +65,8 @@ public class Client extends Thread {
                 outputStream.write(buffer);
                 outputStream.flush();
             } catch (IOException e) {
-                System.err.println("sendCommand: IOException: "+e.getMessage());
-                System.exit(1);
+                //System.err.println("sendCommand: IOException: "+e.getMessage());
+                socket=null;
             }
         }
     }
@@ -89,6 +96,7 @@ public class Client extends Thread {
             } catch (IOException e) {
                 System.err.println("Client.run: flush: "+e.getMessage());
             }
+            status=null;
             while(running) {
                 try {
                     bytes=0;
@@ -117,12 +125,15 @@ public class Client extends Thread {
                     }
                 } catch (IOException e) {
                     if(running) {
+                        status="Exceptiion: "+e.getMessage();
                         System.err.println("Client.run exception reading input stream "+e.getMessage());
                         running=false;
                     }
                 }
 
             }
+            //System.err.println("Client.run: status: "+status);
+            listener.updateStatus();
         }
     }
 
@@ -262,11 +273,18 @@ public class Client extends Thread {
         return server;
     }
 
+    public int getReceiver() {
+        return receiver;
+    }
+
     Audio audio;
     MonitorUpdateListener listener;
 
     boolean running=true;
 
+    private int limit;
+
+    private int receiver=0;
     private int port=8000;
     private String server="81.146.61.118";
     private Socket socket;
@@ -306,4 +324,25 @@ public class Client extends Thread {
     private String status;
 
     private boolean connected;
+
+    class ConnectionLimit extends Thread {
+
+        ConnectionLimit(int timeout) {
+            this.timeout=timeout;
+        }
+
+        public void run() {
+            //System.err.println("ConnectionLimit sleeping for "+limit+" seconds");
+            try {
+                sleep(timeout*1000);
+            } catch (InterruptedException e) {
+                System.err.println("ConnectionLimit: InterruptedException: "+e.getMessage());
+            }
+            //System.err.println("ConnectionLimit timedout");
+            status="Time limit exceeded!";
+            close();
+        }
+
+        private int timeout;
+    }
 }

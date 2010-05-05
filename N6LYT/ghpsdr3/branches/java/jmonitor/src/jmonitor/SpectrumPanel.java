@@ -136,6 +136,12 @@ public class SpectrumPanel extends javax.swing.JPanel {
         drawSpectrum();
     }
 
+    public void updateStatus() {
+        //System.err.println("Spectrumpanle.updateStatus");
+        image=null;
+        this.repaint(new Rectangle(WIDTH, HEIGHT));
+    }
+
     private void plotSpectrum(float[] samples,int filterLow,int filterHigh,int sampleRate) {
         this.filterLow=filterLow;
         this.filterHigh=filterHigh;

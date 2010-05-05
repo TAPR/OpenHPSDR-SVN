@@ -12,5 +12,6 @@ package jmonitor;
 public interface MonitorUpdateListener {
 
     public void updateSamples(float[] samples, int filterLow, int filterHigh, int sampleRate);
+    public void updateStatus();
 
 }
