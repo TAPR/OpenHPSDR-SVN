@@ -18,6 +18,7 @@ public class Main {
 
         String server="81.146.61.118";
         int receiver=0;
+        int limit=0;
         int i=0;
         while(i<args.length) {
 
@@ -39,6 +40,13 @@ public class Main {
                 } else {
                     usage("Missing server argument");
                 }
+            } else if (args[i].equalsIgnoreCase("--limit")) {
+                i++;
+                if (i < args.length) {
+                    limit = Integer.parseInt(args[i]);
+                } else {
+                    usage("Missing limit argument");
+                }
             }
 
             i++;
@@ -46,7 +54,7 @@ public class Main {
 
         Audio audio = new Audio(server, receiver);
 
-        Client client=new Client(server,receiver,audio);
+        Client client=new Client(server,receiver,audio,limit);
         client.start();
         client.setFrequency(7048000);
         client.setMode(0);
@@ -63,7 +71,7 @@ public class Main {
 
     private static void usage(String error) {
         System.err.print("Error: "+error);
-        System.err.print("Usage: java -jar jmonitor.jar [--receiver RX]");
+        System.err.print("Usage: java -jar jmonitor.jar [--server a.b.c.d] [--receiver r] [--limit s]");
         System.exit(1);
     }
 }

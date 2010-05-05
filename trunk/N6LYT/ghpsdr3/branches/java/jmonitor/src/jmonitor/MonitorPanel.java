@@ -34,6 +34,11 @@ public class MonitorPanel  extends javax.swing.JPanel implements MonitorUpdateLi
         controlPanel.update();
     }
 
+    public void updateStatus() {
+        //System.err.println("MonitorPanel.updateStatus");
+        spectrumPanel.updateStatus();
+    }
+
     /** This method is called from within the constructor to
      * initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is

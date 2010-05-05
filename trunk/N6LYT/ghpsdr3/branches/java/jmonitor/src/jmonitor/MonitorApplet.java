@@ -67,9 +67,14 @@ public class MonitorApplet extends javax.swing.JApplet {
             receiver=Integer.parseInt(s);
         }
 
+        s=this.getParameter("limit");
+        if(s!=null) {
+            limit=Integer.parseInt(s);
+        }
+
         audio = new Audio(server, receiver);
         
-        client = new Client(server, receiver,audio);
+        client = new Client(server, receiver,audio,limit);
         client.start();
         client.setFrequency(7048000);
         client.setMode(0);
@@ -100,6 +105,7 @@ public class MonitorApplet extends javax.swing.JApplet {
 
     String server = "81.146.61.118";
     int receiver = 0;
+    int limit;
 
     Client client;
     Audio audio;

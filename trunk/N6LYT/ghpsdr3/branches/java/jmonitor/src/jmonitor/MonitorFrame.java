@@ -22,7 +22,7 @@ public class MonitorFrame extends javax.swing.JFrame implements MonitorUpdateLis
         this.client=client;
         initComponents();
 
-        this.setTitle("JMonitor: "+client.getServer());
+        this.setTitle("JMonitor: "+client.getServer()+" Rx"+client.getReceiver());
         monitorPanel.setClient(client);
         //waterfallPanel.setClient(client);
     }
@@ -50,6 +50,10 @@ public class MonitorFrame extends javax.swing.JFrame implements MonitorUpdateLis
     public void updateSamples(float[] samples,int filterLow,int filterHigh,int sampleRate) {
         monitorPanel.updateSamples(samples,filterLow,filterHigh,sampleRate);
         //waterfallPanel.updateWaterfall(samples,filterLow,filterHigh,sampleRate);
+    }
+
+    public void updateStatus() {
+        monitorPanel.updateStatus();
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
