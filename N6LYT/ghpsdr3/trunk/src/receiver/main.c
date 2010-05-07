@@ -182,6 +182,8 @@ char propertyPath[128];
 
 int receiver=0;
 
+int offset=0;
+
 /* --------------------------------------------------------------------------*/
 /** 
 * @brief Save the main GUI State. 
@@ -598,6 +600,7 @@ struct option longOptions[] = {
     {"local-audio",required_argument, 0, 6},
     {"port-audio",required_argument, 0, 7},
     {"debug-udp",no_argument, 0, 8},
+    {"offset",required_argument, 0, 9},
 };
 
 char* shortOptions="";
@@ -643,6 +646,12 @@ void processCommands(int argc,char** argv) {
             case 8:
                 ozy_set_debug(1);
                 break;
+            case 9:
+                offset=atoi(optarg);
+                break;
+            default:
+                fprintf(stderr,"invalid argument\n");
+                exit(1);
         }
     }
 }
@@ -682,6 +691,7 @@ int main(int argc,char* argv[]) {
     Release_Update();
     SetTRX(0,FALSE); // thread 0 is for receive
     SetTRX(1,TRUE);  // thread 1 is for transmit
+    SetRingBufferOffset(0,offset);
     SetThreadProcessingMode(0,2);
     SetThreadProcessingMode(1,2);
     SetSubRXSt(0,0,TRUE);
