@@ -62,6 +62,8 @@ char device[80];
 char input[80];
 char output[80];
 
+static int iq=0;
+
 void* softrock_io_thread(void* arg);
 
 #ifndef PORTAUDIO
@@ -150,6 +152,14 @@ fprintf(stderr,"softrock_set_sample_rate %d\n",r);
 int softrock_get_sample_rate() {
 fprintf(stderr,"softrock_get_sample_rate %d\n",sample_rate);
     return sample_rate;
+}
+
+void softrock_set_iq(int s) {
+    iq=s;
+}
+
+int softrock_get_iq() {
+    return iq;
 }
 
 int softrock_init() {

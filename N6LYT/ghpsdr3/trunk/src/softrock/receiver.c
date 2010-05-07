@@ -116,7 +116,7 @@ char* detach_receiver(int rx,CLIENT* client) {
     return OK;
 }
 
-char* set_frequency(int rx,CLIENT* client,long frequency) {
+char* set_frequency(CLIENT* client,long frequency) {
     if(client->state==RECEIVER_DETACHED) {
         return CLIENT_DETACHED;
     }
