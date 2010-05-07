@@ -95,6 +95,8 @@ int forwardPower;
 
 int receiver;
 
+int offset;
+
 char server_address[64];
 
 /* --------------------------------------------------------------------------*/
