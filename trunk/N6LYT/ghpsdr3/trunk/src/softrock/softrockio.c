@@ -229,10 +229,18 @@ int softrock_read(float* left_samples,float* right_samples) {
     }
 
     // de-interleave samples
-    for(i=0;i<SAMPLES_PER_BUFFER;i++) {
-        left_samples[i]=audio_buffer[i*2];
-        right_samples[i]=audio_buffer[(i*2)+1];
+    if(softrock_get_iq()) {
+        for(i=0;i<SAMPLES_PER_BUFFER;i++) {
+            left_samples[i]=audio_buffer[i*2];
+            right_samples[i]=audio_buffer[(i*2)+1];
 //fprintf(stderr,"%d left=%f right=%f\n",i, left_samples[i],right_samples[i]);
+        }
+    } else {
+        for(i=0;i<SAMPLES_PER_BUFFER;i++) {
+            right_samples[i]=audio_buffer[i*2];
+            left_samples[i]=audio_buffer[(i*2)+1];
+//fprintf(stderr,"%d left=%f right=%f\n",i, left_samples[i],right_samples[i]);
+        }
     }
 
     return rc;

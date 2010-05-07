@@ -46,7 +46,10 @@ static struct option long_options[] = {
     {"device",required_argument, 0, 1},
     {"input",required_argument, 0, 2},
     {"output",required_argument, 0, 3},
+    {"iq",no_argument, 0, 4},
+    {"qi",no_argument, 0, 5}
 };
+
 static char* short_options="sd";
 static int option_index;
 
@@ -95,6 +98,15 @@ fprintf(stderr,"process_args: input=%s\n",optarg);
 fprintf(stderr,"process_args: output=%s\n",optarg);
                 softrock_set_output(optarg);
                 break;
+            case 4: // iq
+                softrock_set_iq(1);
+                break;
+            case 5: // qi
+                softrock_set_iq(0);
+                break;
+            default:
+                fprintf(stderr,"invalid argument\n");
+                exit(1);
         }
     }
 }

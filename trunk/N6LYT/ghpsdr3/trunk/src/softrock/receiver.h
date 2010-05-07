@@ -50,4 +50,4 @@ typedef struct _buffer {
 
 char* attach_receiver(int rx,CLIENT* client);
 char* detach_receiver(int rx,CLIENT* client);
-char* set_frequency(int rx,CLIENT* client,long f);
+char* set_frequency(CLIENT* client,long f);

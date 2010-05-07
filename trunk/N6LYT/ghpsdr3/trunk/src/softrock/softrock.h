@@ -38,3 +38,6 @@ void softrock_set_input(char* d);
 char* softrock_get_input();
 void softrock_set_output(char* d);
 char* softrock_get_output();
+
+void softrock_set_iq(int s);
+int softrock_get_iq();
