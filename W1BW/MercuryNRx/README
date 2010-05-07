@@ -1,10 +1,12 @@
 MercuryNRx
 
 This is a development version of suport for multiple simultaneous
-receivers in Mercury.  This effort was begun by Kerk Weedman KD7IRS
-and John Melton G0ORX/N6LYT in the fall of 2009.
+receivers in Mercury.  This effort was begun by Kirk Weedman KD7IRS
+and John Melton G0ORX/N6LYT in the fall of 2009.  I've also added
+the memcic modules from Alex Shovkoplyas, VE3NEA.
 
-This code should be expected to be in an unstable and generally
-non-working state while under development!
+The current version available for testing implements 4 receivers
+which should be of similar or slightly better quality (in terms of
+decimation filtering) than the Merc V2.9 single receiver.
 
 --Bruce Walker W1BW (bruce@w1bw.us)
