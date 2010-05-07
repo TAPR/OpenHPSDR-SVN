@@ -169,3 +169,5 @@ extern int SetRXOutputGain(unsigned int thread, unsigned subrx, double gain);
 * @return 
 */
 extern int SetRXPan(unsigned int thread, unsigned subrx, float pos);
+
+extern int SetRingBufferOffset(unsigned int thread, int offset);
