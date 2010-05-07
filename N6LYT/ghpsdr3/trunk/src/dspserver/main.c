@@ -105,9 +105,10 @@ struct option longOptions[] = {
     {"soundcard",required_argument, 0, 0},
     {"receiver",required_argument, 0, 1},
     {"server",required_argument, 0, 2},
+    {"offset",required_argument, 0, 3},
 };
 
-char* shortOptions="rs";
+char* shortOptions="";
 
 int optionIndex;
 
@@ -131,6 +132,9 @@ void processCommands(int argc,char** argv) {
                 break;
             case 2:
                 strcpy(server_address,optarg);
+                break;
+            case 3:
+                offset=atoi(optarg);
                 break;
         }
     }
@@ -163,6 +167,7 @@ int main(int argc,char* argv[]) {
     Release_Update();
     SetTRX(0,0); // thread 0 is for receive
     SetTRX(1,1);  // thread 1 is for transmit
+    SetRingBufferOffset(0,offset);
     SetThreadProcessingMode(0,2);
     SetThreadProcessingMode(1,2);
     SetSubRXSt(0,0,1);
