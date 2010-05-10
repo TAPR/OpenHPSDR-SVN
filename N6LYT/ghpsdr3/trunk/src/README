@@ -35,7 +35,10 @@ bandscope - a banscope client.
 
 
 softrock - a simple softrock receiver server.
+sdr1000 - a start of a SDR-1000 receiver server.
 
+Test stuff.
+----------
 ozydriver - Linux device driver for Ozy.
 async_server - a sever implemented using libusb 1.0 async API.
 hpsdrsvr - a server implemented using the ozy device driver (read/write).
