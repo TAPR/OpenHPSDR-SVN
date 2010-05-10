@@ -9,7 +9,7 @@ INCLUDES=-I. -I/usr/include/gtk-2.0 -I/usr/lib/gtk-2.0/include\
          -I/usr/include/pango-1.0 -I/usr/include/glib-2.0\
          -I/usr/lib/glib-2.0/include -I/usr/include/pixman-1\
          -I/usr/include/freetype2 -I/usr/include/libpng12
-LIBS=-L. -LDttSP -lDttSP -lpthread\
+LIBS=-L. -L../DttSP -lDttSP -lpthread\
      -lgtk-x11-2.0 -lgdk-x11-2.0 -latk-1.0 -lpangoft2-1.0 -lgdk_pixbuf-2.0\
      -lm -lpangocairo-1.0 -lgio-2.0 -lcairo -lpango-1.0 -lfreetype -lz\
      -lfontconfig -lgobject-2.0 -lgmodule-2.0 -lglib-2.0 -lfftw3f -lportaudio
@@ -52,10 +52,10 @@ $(BIN)/$(PROGRAM): $(OBJS) $(DTTSP)
 	$(COMPILE) $(OPTIONS) -c -o $@ $<
 
 $(DTTSP):
-	-cd DttSP;make
+	-cd ../DttSP;make
 
 clean:
 	-rm -f *.o
 	-rm -f $(BIN)/$(PROGRAM)
-	-cd DttSP;make clean
+	-cd ../DttSP;make clean
 

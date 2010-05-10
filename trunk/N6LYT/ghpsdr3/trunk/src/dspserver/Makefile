@@ -3,9 +3,10 @@
 #
 CC=gcc 
 LINK=gcc
-OPTIONS=-g -O3 -msse -msse3 -ffast-math -march=core2 -Wall
+#OPTIONS=-g -O3 -msse -msse3 -ffast-math -march=core2 -Wall
+OPTIONS=-g -O3 -Wall
 INCLUDES=-I. 
-LIBS=-L. -LDttSP -lDttSP -lpthread\
+LIBS=-L. -L../DttSP -lDttSP -lpthread\
      -lm -lfftw3f 
 
 BIN=../../bin
@@ -38,10 +39,10 @@ $(BIN)/$(PROGRAM): $(OBJS) $(DTTSP)
 	$(COMPILE) $(OPTIONS) -c -o $@ $<
 
 $(DTTSP):
-	-cd DttSP;make
+	-cd ../DttSP;make
 
 clean:
 	-rm -f *.o
 	-rm -f $(BIN)/$(PROGRAM)
-	-cd DttSP;make clean
+	-cd ../DttSP;make clean
 
