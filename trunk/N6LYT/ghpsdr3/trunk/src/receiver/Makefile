@@ -16,7 +16,7 @@ LIBS=-L. -L../DttSP -lDttSP -lpthread\
 
 BIN=../../bin
 
-DTTSP=DttSP/libDttSP.a
+DTTSP=../DttSP/libDttSP.a
 
 PROGRAM=ghpsdr
 
