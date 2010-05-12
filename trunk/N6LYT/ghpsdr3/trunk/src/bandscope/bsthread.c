@@ -43,7 +43,7 @@ static void (*bs_callback)(void *);
 
 void* bs_thread(void* arg);
 
-void init_bs_thread(int rx) {
+void init_bs_thread() {
 
     bs_length=sizeof(bs_addr);
 
@@ -56,7 +56,7 @@ void init_bs_thread(int rx) {
     memset(&bs_addr,0,bs_length);
     bs_addr.sin_family=AF_INET;
     bs_addr.sin_addr.s_addr=htonl(INADDR_ANY);
-    bs_addr.sin_port=htons(BSPORT+rx);
+    bs_addr.sin_port=htons(BSPORT);
 
     if(bind(bs_socket,(struct sockaddr*)&bs_addr,bs_length)<0) {
         perror("bind socket failed for bs socket");

@@ -81,7 +81,7 @@ char* send_command(char* command) {
     response[bytes_read]='\0';
 
     if(strncmp(response,"OK",2)!=0) {
-        fprintf(stderr,"command error: %s\n",response);
+        fprintf(stderr,"command error: %s: %s\n",command,response);
     }
 
     return response;
