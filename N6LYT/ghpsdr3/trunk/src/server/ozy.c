@@ -88,7 +88,7 @@
 static pthread_t ep6_ep2_io_thread_id;
 static pthread_t ep4_io_thread_id;
 
-static int configure=2;
+static int configure=6;
 static int rx_frame=0;
 static int tx_frame=0;
 static int receivers=2;
@@ -302,16 +302,22 @@ ozy_open();
     rc=ozy_get_firmware_string(ozy_firmware_version,8);
     fprintf(stderr,"Ozy FX2 version: %s\n",ozy_firmware_version);
 
+    memset((char *)&ozy_output_buffer,0,OZY_BUFFER_SIZE);
+    while(configure>0) {
+        write_ozy_output_buffer();
+    }
+
     for(i=0;i<receivers;i++) {
         receiver[i].frequency=7056000L;
         receiver[i].frequency_changed=1;
     }
 
-    memset((char *)&ozy_output_buffer,0,OZY_BUFFER_SIZE);
-    while(configure>0) {
+    for(i=0;i<receivers;i++) {
+        current_receiver=i;
         write_ozy_output_buffer();
-        configure--;
     }
+
+    current_receiver=0;
 
 fprintf(stderr,"server configured for %d receivers at %d\n",receivers,sample_rate);
     return rc;

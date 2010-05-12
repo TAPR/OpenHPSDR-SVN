@@ -43,8 +43,8 @@
 #define WIDTH 480
 #define HEIGHT 100
 
-static int receiver=0;
 static long frequency;
+static int receiver=0;
 static char server[80];
 
 static char command[80];
@@ -125,7 +125,7 @@ int main(int argc,char* argv[]) {
 
     process_args(argc,argv);
 
-    sprintf(property_path,".ghpsdr.rx%d.properties",receiver);
+/*
     properties_load(property_path);
 
     token=property_get("window.x");
@@ -138,13 +138,14 @@ int main(int argc,char* argv[]) {
     if(token) waterfall_high=atof(token);
     token=property_get("waterfall.low");
     if(token) waterfall_low=atof(token);
+*/
 
     init_command(server);
 
     init_bandscope();
 
-
-    sprintf(command,"attach bandscope");
+/*
+    sprintf(command,"attach %d",receiver);
     response=send_command(command);
     token=strtok(response," ");
     if(token==NULL) {
@@ -163,10 +164,11 @@ int main(int argc,char* argv[]) {
         fprintf(stderr,"Error: %s!\n",response);
         exit(1);
     }
+*/
 
     build_ui();
 
-    init_bs_thread(receiver);
+    init_bs_thread();
     start_bs_thread((void*)process_bs_samples);
     sprintf(command,"start bandscope %d",get_bs_port());
     send_command(command);
@@ -184,30 +186,27 @@ void process_args(int argc,char* argv[]) {
     int i;
 
     // set defaults
-    receiver=0;
+    //receiver=2;
     strcpy(server,"127.0.0.1");
     frequency=7056000L;
     
     while((i=getopt_long(argc,argv,short_options,long_options,&option_index))!=EOF) {
         switch(option_index) {
-            case 0: // receiver
-                receiver=atoi(optarg);
-                break;
-            case 1: // frequency
-                frequency=atol(optarg);
-                break;
-            case 2: // server
+            case 0: // server
                 strcpy(server,optarg);
                 break;
-            case 3: // update fps
+            case 1: // update fps
                 fps=atoi(optarg);
                 break;
-            case 4: // waterfall_high
+            case 2: // waterfall_high
                 waterfall_high=(float)atoi(optarg);
                 break;
-            case 5: // waterfall_low
+            case 3: // waterfall_low
                 waterfall_low=(float)atoi(optarg);
                 break;
+            default:
+                fprintf(stderr,"Invalid argument\n");
+                exit(1);
         }
     }
 }
@@ -318,7 +317,10 @@ int quit() {
 void process_bs_samples(float* buffer) {
     int i;
 
+fprintf(stderr,"process_bs_samples\n");
+
     for(i=0;i<BUFFER_SIZE;i++) {
+fprintf(stderr,"    %d: %f\n",i,buffer[i]);
         timebuf[i][0]=buffer[i]*filter[i];
         timebuf[i][1]=buffer[i+BUFFER_SIZE]*filter[i];
     }
