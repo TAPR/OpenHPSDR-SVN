@@ -1,5 +1,6 @@
 using System;
-using System.Diagnostics; 
+using System.Diagnostics;
+using System.Windows.Forms;
 using System.Net;
 using System.IO; 
 using System.Xml;
@@ -211,13 +212,15 @@ private static bool WriteErrorLog(string strPathName,Exception  objException)
 	try
 	{
 		sw = new StreamWriter(strPathName,true);
-		sw.WriteLine("Source		: " + objException.Source.ToString().Trim());  
-		sw.WriteLine("Method		: " + objException.TargetSite.Name.ToString());
-		sw.WriteLine("Time		: " + DateTime.Now.ToLongTimeString());
-		sw.WriteLine("Date		: " + DateTime.Now.ToShortDateString());
-		sw.WriteLine("Computer	: " + Dns.GetHostName().ToString()); 
-		sw.WriteLine("Error		: " +  objException.Message.ToString().Trim());
-		sw.WriteLine("Stack Trace	: " + objException.StackTrace.ToString().Trim());  
+		sw.WriteLine("Source       : " + objException.Source.ToString().Trim());
+        sw.WriteLine("Revision     : " + Setup.ver);
+        sw.WriteLine("Method       : " + objException.TargetSite.Name.ToString());
+		sw.WriteLine("Date         : " + DateTime.Now.ToShortDateString());
+		sw.WriteLine("Time         : " + DateTime.Now.ToLongTimeString());
+		sw.WriteLine("Computer     : " + Dns.GetHostName().ToString()); 
+		sw.WriteLine("OS & Version : " + Environment.OSVersion.ToString());
+        sw.WriteLine("Error        : " + objException.Message.ToString().Trim());
+		sw.WriteLine("Stack Trace  : " + objException.StackTrace.ToString().Trim());  
 		sw.WriteLine("-------------------------------------------------------------------"); 
 		sw.Flush();
 		sw.Close();
@@ -240,12 +243,13 @@ private static string GetLogFilePath()
 	try
 	{
 		// get the base directory
-		string baseDir =  AppDomain.CurrentDomain.BaseDirectory + AppDomain.CurrentDomain.RelativeSearchPath;      
+        string baseDir = AppDomain.CurrentDomain.BaseDirectory + AppDomain.CurrentDomain.RelativeSearchPath;
 
-		// search the file below the current directory
-		string retFilePath = baseDir + "//" + "ErrorLog.txt";
+        // search the file below the current directory
+        string retFilePath = baseDir + "//" + "ErrorLog.txt";
 
-		// if exists, return the path
+
+        // if exists, return the path
 		if (File.Exists(retFilePath) == true)
 			return retFilePath;
 			//create a text file

@@ -111,7 +111,7 @@ namespace DataDecoder
             this.grpRotor = new System.Windows.Forms.GroupBox();
             this.button4 = new System.Windows.Forms.Button();
             this.button5 = new System.Windows.Forms.Button();
-            this.textBox3 = new System.Windows.Forms.TextBox();
+//            this.textBox3 = new System.Windows.Forms.TextBox();
             this.grpAmp = new System.Windows.Forms.GroupBox();
             this.txtTune = new System.Windows.Forms.TextBox();
             this.lblTune = new System.Windows.Forms.Label();
@@ -1209,13 +1209,13 @@ namespace DataDecoder
             // 
             // textBox3
             // 
-            this.textBox3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox3.Location = new System.Drawing.Point(42, -26);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(36, 21);
-            this.textBox3.TabIndex = 77;
-            this.textBox3.Text = "Tmp";
-            this.textBox3.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            //this.textBox3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            //this.textBox3.Location = new System.Drawing.Point(42, -26);
+            //this.textBox3.Name = "textBox3";
+            //this.textBox3.Size = new System.Drawing.Size(36, 21);
+            //this.textBox3.TabIndex = 77;
+            //this.textBox3.Text = "Tmp";
+            //this.textBox3.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // grpAmp
             // 
