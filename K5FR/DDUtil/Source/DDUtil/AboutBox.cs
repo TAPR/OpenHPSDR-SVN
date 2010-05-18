@@ -17,8 +17,10 @@ namespace DataDecoder
 
             string dbVer = "";
             string SQL = "Select Value From Settings";
+            string path = Application.ExecutablePath;
+            path = path.Substring(0, path.LastIndexOf("\\") + 1);
             OleDbConnection conn = new OleDbConnection(
-                "provider = microsoft.jet.oledb.4.0;data source = DDUtil.mdb;");
+                "provider = microsoft.jet.oledb.4.0;data source = " + path + "DDUtil.mdb;");
             OleDbCommand thisCommand = new OleDbCommand(SQL, conn);
             conn.Open();
             OleDbDataReader thisReader = thisCommand.ExecuteReader();

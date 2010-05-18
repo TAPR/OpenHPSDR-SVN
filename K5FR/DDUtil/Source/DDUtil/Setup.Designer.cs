@@ -63,16 +63,16 @@ namespace DataDecoder
             this.cboRadData = new System.Windows.Forms.ComboBox();
             this.txtRadNum = new System.Windows.Forms.TextBox();
             this.label9 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
-            this.cboSerAcc = new System.Windows.Forms.ComboBox();
             this.grpBox1 = new System.Windows.Forms.GroupBox();
             this.label46 = new System.Windows.Forms.Label();
             this.cboRCP1Rotor = new System.Windows.Forms.ComboBox();
             this.label11 = new System.Windows.Forms.Label();
             this.cboLogPort = new System.Windows.Forms.ComboBox();
             this.label6 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
             this.txtInv = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
+            this.cboSerAcc = new System.Windows.Forms.ComboBox();
             this.cboCAT = new System.Windows.Forms.ComboBox();
             this.grpBox2 = new System.Windows.Forms.GroupBox();
             this.lblPortBtn = new System.Windows.Forms.Label();
@@ -130,8 +130,8 @@ namespace DataDecoder
             this.dg1 = new System.Windows.Forms.DataGridView();
             this.chkDev0 = new System.Windows.Forms.CheckBox();
             this.tabRCP = new System.Windows.Forms.TabPage();
-            this.grpTKnob = new System.Windows.Forms.GroupBox();
             this.button7 = new System.Windows.Forms.Button();
+            this.grpTKnob = new System.Windows.Forms.GroupBox();
             this.lblZE = new System.Windows.Forms.Label();
             this.txtZE = new System.Windows.Forms.TextBox();
             this.label232 = new System.Windows.Forms.Label();
@@ -382,9 +382,9 @@ namespace DataDecoder
             this.txtPmsg = new System.Windows.Forms.TextBox();
             this.button1 = new System.Windows.Forms.Button();
             this.label152 = new System.Windows.Forms.Label();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.checkBox2 = new System.Windows.Forms.CheckBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.cboProPort = new System.Windows.Forms.ComboBox();
+            this.chkProEnab = new System.Windows.Forms.CheckBox();
+            this.txtProTmp = new System.Windows.Forms.TextBox();
             this.button2 = new System.Windows.Forms.Button();
             this.button5 = new System.Windows.Forms.Button();
             this.label149 = new System.Windows.Forms.Label();
@@ -536,151 +536,151 @@ namespace DataDecoder
             this.btnClrPortB = new System.Windows.Forms.Button();
             this.btnClrPortA = new System.Windows.Forms.Button();
             this.grpPortB = new System.Windows.Forms.GroupBox();
-            this.cb15t4 = new System.Windows.Forms.CheckBox();
+            this.chk15t4 = new System.Windows.Forms.CheckBox();
             this.label105 = new System.Windows.Forms.Label();
-            this.cb15t7 = new System.Windows.Forms.CheckBox();
-            this.cb13t4 = new System.Windows.Forms.CheckBox();
-            this.cb15t6 = new System.Windows.Forms.CheckBox();
+            this.chk15t7 = new System.Windows.Forms.CheckBox();
+            this.chk13t4 = new System.Windows.Forms.CheckBox();
+            this.chk15t6 = new System.Windows.Forms.CheckBox();
             this.label107 = new System.Windows.Forms.Label();
-            this.cb15t5 = new System.Windows.Forms.CheckBox();
-            this.cb13t7 = new System.Windows.Forms.CheckBox();
-            this.cb15t3 = new System.Windows.Forms.CheckBox();
-            this.cb13t6 = new System.Windows.Forms.CheckBox();
-            this.cb15t2 = new System.Windows.Forms.CheckBox();
-            this.cb0t3 = new System.Windows.Forms.CheckBox();
-            this.cb15t1 = new System.Windows.Forms.CheckBox();
-            this.cb13t5 = new System.Windows.Forms.CheckBox();
-            this.cb15t0 = new System.Windows.Forms.CheckBox();
-            this.cb13t3 = new System.Windows.Forms.CheckBox();
+            this.chk15t5 = new System.Windows.Forms.CheckBox();
+            this.chk13t7 = new System.Windows.Forms.CheckBox();
+            this.chk15t3 = new System.Windows.Forms.CheckBox();
+            this.chk13t6 = new System.Windows.Forms.CheckBox();
+            this.chk15t2 = new System.Windows.Forms.CheckBox();
+            this.chk0t3 = new System.Windows.Forms.CheckBox();
+            this.chk15t1 = new System.Windows.Forms.CheckBox();
+            this.chk13t5 = new System.Windows.Forms.CheckBox();
+            this.chk15t0 = new System.Windows.Forms.CheckBox();
+            this.chk13t3 = new System.Windows.Forms.CheckBox();
             this.label135 = new System.Windows.Forms.Label();
-            this.cb0t0 = new System.Windows.Forms.CheckBox();
+            this.chk0t0 = new System.Windows.Forms.CheckBox();
             this.label136 = new System.Windows.Forms.Label();
-            this.cb13t2 = new System.Windows.Forms.CheckBox();
-            this.cb14t0 = new System.Windows.Forms.CheckBox();
-            this.cb13t1 = new System.Windows.Forms.CheckBox();
-            this.cb14t1 = new System.Windows.Forms.CheckBox();
-            this.cb13t0 = new System.Windows.Forms.CheckBox();
-            this.cb14t2 = new System.Windows.Forms.CheckBox();
-            this.cb0t1 = new System.Windows.Forms.CheckBox();
-            this.cb14t3 = new System.Windows.Forms.CheckBox();
+            this.chk13t2 = new System.Windows.Forms.CheckBox();
+            this.chk14t0 = new System.Windows.Forms.CheckBox();
+            this.chk13t1 = new System.Windows.Forms.CheckBox();
+            this.chk14t1 = new System.Windows.Forms.CheckBox();
+            this.chk13t0 = new System.Windows.Forms.CheckBox();
+            this.chk14t2 = new System.Windows.Forms.CheckBox();
+            this.chk0t1 = new System.Windows.Forms.CheckBox();
+            this.chk14t3 = new System.Windows.Forms.CheckBox();
             this.label108 = new System.Windows.Forms.Label();
-            this.cb14t4 = new System.Windows.Forms.CheckBox();
-            this.cb0t2 = new System.Windows.Forms.CheckBox();
-            this.cb14t5 = new System.Windows.Forms.CheckBox();
-            this.cb14t6 = new System.Windows.Forms.CheckBox();
-            this.cb0t4 = new System.Windows.Forms.CheckBox();
-            this.cb14t7 = new System.Windows.Forms.CheckBox();
-            this.cb0t5 = new System.Windows.Forms.CheckBox();
-            this.cb0t6 = new System.Windows.Forms.CheckBox();
-            this.cb0t7 = new System.Windows.Forms.CheckBox();
+            this.chk14t4 = new System.Windows.Forms.CheckBox();
+            this.chk0t2 = new System.Windows.Forms.CheckBox();
+            this.chk14t5 = new System.Windows.Forms.CheckBox();
+            this.chk14t6 = new System.Windows.Forms.CheckBox();
+            this.chk0t4 = new System.Windows.Forms.CheckBox();
+            this.chk14t7 = new System.Windows.Forms.CheckBox();
+            this.chk0t5 = new System.Windows.Forms.CheckBox();
+            this.chk0t6 = new System.Windows.Forms.CheckBox();
+            this.chk0t7 = new System.Windows.Forms.CheckBox();
             this.label109 = new System.Windows.Forms.Label();
-            this.cb12t0 = new System.Windows.Forms.CheckBox();
-            this.cb12t1 = new System.Windows.Forms.CheckBox();
-            this.cb12t2 = new System.Windows.Forms.CheckBox();
-            this.cb12t3 = new System.Windows.Forms.CheckBox();
-            this.cb12t4 = new System.Windows.Forms.CheckBox();
-            this.cb12t5 = new System.Windows.Forms.CheckBox();
-            this.cb12t6 = new System.Windows.Forms.CheckBox();
-            this.cb12t7 = new System.Windows.Forms.CheckBox();
+            this.chk12t0 = new System.Windows.Forms.CheckBox();
+            this.chk12t1 = new System.Windows.Forms.CheckBox();
+            this.chk12t2 = new System.Windows.Forms.CheckBox();
+            this.chk12t3 = new System.Windows.Forms.CheckBox();
+            this.chk12t4 = new System.Windows.Forms.CheckBox();
+            this.chk12t5 = new System.Windows.Forms.CheckBox();
+            this.chk12t6 = new System.Windows.Forms.CheckBox();
+            this.chk12t7 = new System.Windows.Forms.CheckBox();
             this.label110 = new System.Windows.Forms.Label();
-            this.cb11t0 = new System.Windows.Forms.CheckBox();
-            this.cb11t1 = new System.Windows.Forms.CheckBox();
-            this.cb11t2 = new System.Windows.Forms.CheckBox();
-            this.cb11t3 = new System.Windows.Forms.CheckBox();
-            this.cb11t4 = new System.Windows.Forms.CheckBox();
-            this.cb11t5 = new System.Windows.Forms.CheckBox();
-            this.cb11t6 = new System.Windows.Forms.CheckBox();
-            this.cb11t7 = new System.Windows.Forms.CheckBox();
+            this.chk11t0 = new System.Windows.Forms.CheckBox();
+            this.chk11t1 = new System.Windows.Forms.CheckBox();
+            this.chk11t2 = new System.Windows.Forms.CheckBox();
+            this.chk11t3 = new System.Windows.Forms.CheckBox();
+            this.chk11t4 = new System.Windows.Forms.CheckBox();
+            this.chk11t5 = new System.Windows.Forms.CheckBox();
+            this.chk11t6 = new System.Windows.Forms.CheckBox();
+            this.chk11t7 = new System.Windows.Forms.CheckBox();
             this.label111 = new System.Windows.Forms.Label();
-            this.cb10t0 = new System.Windows.Forms.CheckBox();
-            this.cb10t1 = new System.Windows.Forms.CheckBox();
-            this.cb10t2 = new System.Windows.Forms.CheckBox();
-            this.cb10t3 = new System.Windows.Forms.CheckBox();
-            this.cb10t4 = new System.Windows.Forms.CheckBox();
-            this.cb10t5 = new System.Windows.Forms.CheckBox();
-            this.cb10t6 = new System.Windows.Forms.CheckBox();
-            this.cb10t7 = new System.Windows.Forms.CheckBox();
+            this.chk10t0 = new System.Windows.Forms.CheckBox();
+            this.chk10t1 = new System.Windows.Forms.CheckBox();
+            this.chk10t2 = new System.Windows.Forms.CheckBox();
+            this.chk10t3 = new System.Windows.Forms.CheckBox();
+            this.chk10t4 = new System.Windows.Forms.CheckBox();
+            this.chk10t5 = new System.Windows.Forms.CheckBox();
+            this.chk10t6 = new System.Windows.Forms.CheckBox();
+            this.chk10t7 = new System.Windows.Forms.CheckBox();
             this.label112 = new System.Windows.Forms.Label();
-            this.cb9t0 = new System.Windows.Forms.CheckBox();
-            this.cb9t1 = new System.Windows.Forms.CheckBox();
-            this.cb9t2 = new System.Windows.Forms.CheckBox();
-            this.cb9t3 = new System.Windows.Forms.CheckBox();
-            this.cb9t4 = new System.Windows.Forms.CheckBox();
-            this.cb9t5 = new System.Windows.Forms.CheckBox();
-            this.cb9t6 = new System.Windows.Forms.CheckBox();
-            this.cb9t7 = new System.Windows.Forms.CheckBox();
+            this.chk9t0 = new System.Windows.Forms.CheckBox();
+            this.chk9t1 = new System.Windows.Forms.CheckBox();
+            this.chk9t2 = new System.Windows.Forms.CheckBox();
+            this.chk9t3 = new System.Windows.Forms.CheckBox();
+            this.chk9t4 = new System.Windows.Forms.CheckBox();
+            this.chk9t5 = new System.Windows.Forms.CheckBox();
+            this.chk9t6 = new System.Windows.Forms.CheckBox();
+            this.chk9t7 = new System.Windows.Forms.CheckBox();
             this.label113 = new System.Windows.Forms.Label();
-            this.cb8t0 = new System.Windows.Forms.CheckBox();
-            this.cb8t1 = new System.Windows.Forms.CheckBox();
-            this.cb8t2 = new System.Windows.Forms.CheckBox();
-            this.cb8t3 = new System.Windows.Forms.CheckBox();
-            this.cb8t4 = new System.Windows.Forms.CheckBox();
-            this.cb8t5 = new System.Windows.Forms.CheckBox();
-            this.cb8t6 = new System.Windows.Forms.CheckBox();
-            this.cb8t7 = new System.Windows.Forms.CheckBox();
+            this.chk8t0 = new System.Windows.Forms.CheckBox();
+            this.chk8t1 = new System.Windows.Forms.CheckBox();
+            this.chk8t2 = new System.Windows.Forms.CheckBox();
+            this.chk8t3 = new System.Windows.Forms.CheckBox();
+            this.chk8t4 = new System.Windows.Forms.CheckBox();
+            this.chk8t5 = new System.Windows.Forms.CheckBox();
+            this.chk8t6 = new System.Windows.Forms.CheckBox();
+            this.chk8t7 = new System.Windows.Forms.CheckBox();
             this.label114 = new System.Windows.Forms.Label();
-            this.cb7t0 = new System.Windows.Forms.CheckBox();
-            this.cb7t1 = new System.Windows.Forms.CheckBox();
-            this.cb7t2 = new System.Windows.Forms.CheckBox();
-            this.cb7t3 = new System.Windows.Forms.CheckBox();
-            this.cb7t4 = new System.Windows.Forms.CheckBox();
-            this.cb7t5 = new System.Windows.Forms.CheckBox();
-            this.cb7t6 = new System.Windows.Forms.CheckBox();
-            this.cb7t7 = new System.Windows.Forms.CheckBox();
+            this.chk7t0 = new System.Windows.Forms.CheckBox();
+            this.chk7t1 = new System.Windows.Forms.CheckBox();
+            this.chk7t2 = new System.Windows.Forms.CheckBox();
+            this.chk7t3 = new System.Windows.Forms.CheckBox();
+            this.chk7t4 = new System.Windows.Forms.CheckBox();
+            this.chk7t5 = new System.Windows.Forms.CheckBox();
+            this.chk7t6 = new System.Windows.Forms.CheckBox();
+            this.chk7t7 = new System.Windows.Forms.CheckBox();
             this.label115 = new System.Windows.Forms.Label();
-            this.cb6t0 = new System.Windows.Forms.CheckBox();
-            this.cb6t1 = new System.Windows.Forms.CheckBox();
-            this.cb6t2 = new System.Windows.Forms.CheckBox();
-            this.cb6t3 = new System.Windows.Forms.CheckBox();
-            this.cb6t4 = new System.Windows.Forms.CheckBox();
-            this.cb6t5 = new System.Windows.Forms.CheckBox();
-            this.cb6t6 = new System.Windows.Forms.CheckBox();
-            this.cb6t7 = new System.Windows.Forms.CheckBox();
+            this.chk6t0 = new System.Windows.Forms.CheckBox();
+            this.chk6t1 = new System.Windows.Forms.CheckBox();
+            this.chk6t2 = new System.Windows.Forms.CheckBox();
+            this.chk6t3 = new System.Windows.Forms.CheckBox();
+            this.chk6t4 = new System.Windows.Forms.CheckBox();
+            this.chk6t5 = new System.Windows.Forms.CheckBox();
+            this.chk6t6 = new System.Windows.Forms.CheckBox();
+            this.chk6t7 = new System.Windows.Forms.CheckBox();
             this.label116 = new System.Windows.Forms.Label();
-            this.cb5t0 = new System.Windows.Forms.CheckBox();
-            this.cb5t1 = new System.Windows.Forms.CheckBox();
-            this.cb5t2 = new System.Windows.Forms.CheckBox();
-            this.cb5t3 = new System.Windows.Forms.CheckBox();
-            this.cb5t4 = new System.Windows.Forms.CheckBox();
-            this.cb5t5 = new System.Windows.Forms.CheckBox();
-            this.cb5t6 = new System.Windows.Forms.CheckBox();
-            this.cb5t7 = new System.Windows.Forms.CheckBox();
+            this.chk5t0 = new System.Windows.Forms.CheckBox();
+            this.chk5t1 = new System.Windows.Forms.CheckBox();
+            this.chk5t2 = new System.Windows.Forms.CheckBox();
+            this.chk5t3 = new System.Windows.Forms.CheckBox();
+            this.chk5t4 = new System.Windows.Forms.CheckBox();
+            this.chk5t5 = new System.Windows.Forms.CheckBox();
+            this.chk5t6 = new System.Windows.Forms.CheckBox();
+            this.chk5t7 = new System.Windows.Forms.CheckBox();
             this.label117 = new System.Windows.Forms.Label();
-            this.cb4t0 = new System.Windows.Forms.CheckBox();
-            this.cb4t1 = new System.Windows.Forms.CheckBox();
-            this.cb4t2 = new System.Windows.Forms.CheckBox();
-            this.cb4t3 = new System.Windows.Forms.CheckBox();
-            this.cb4t4 = new System.Windows.Forms.CheckBox();
-            this.cb4t5 = new System.Windows.Forms.CheckBox();
-            this.cb4t6 = new System.Windows.Forms.CheckBox();
-            this.cb4t7 = new System.Windows.Forms.CheckBox();
+            this.chk4t0 = new System.Windows.Forms.CheckBox();
+            this.chk4t1 = new System.Windows.Forms.CheckBox();
+            this.chk4t2 = new System.Windows.Forms.CheckBox();
+            this.chk4t3 = new System.Windows.Forms.CheckBox();
+            this.chk4t4 = new System.Windows.Forms.CheckBox();
+            this.chk4t5 = new System.Windows.Forms.CheckBox();
+            this.chk4t6 = new System.Windows.Forms.CheckBox();
+            this.chk4t7 = new System.Windows.Forms.CheckBox();
             this.label118 = new System.Windows.Forms.Label();
-            this.cb3t0 = new System.Windows.Forms.CheckBox();
-            this.cb3t1 = new System.Windows.Forms.CheckBox();
-            this.cb3t2 = new System.Windows.Forms.CheckBox();
-            this.cb3t3 = new System.Windows.Forms.CheckBox();
-            this.cb3t4 = new System.Windows.Forms.CheckBox();
-            this.cb3t5 = new System.Windows.Forms.CheckBox();
-            this.cb3t6 = new System.Windows.Forms.CheckBox();
-            this.cb3t7 = new System.Windows.Forms.CheckBox();
+            this.chk3t0 = new System.Windows.Forms.CheckBox();
+            this.chk3t1 = new System.Windows.Forms.CheckBox();
+            this.chk3t2 = new System.Windows.Forms.CheckBox();
+            this.chk3t3 = new System.Windows.Forms.CheckBox();
+            this.chk3t4 = new System.Windows.Forms.CheckBox();
+            this.chk3t5 = new System.Windows.Forms.CheckBox();
+            this.chk3t6 = new System.Windows.Forms.CheckBox();
+            this.chk3t7 = new System.Windows.Forms.CheckBox();
             this.label119 = new System.Windows.Forms.Label();
-            this.cb2t0 = new System.Windows.Forms.CheckBox();
-            this.cb2t1 = new System.Windows.Forms.CheckBox();
-            this.cb2t2 = new System.Windows.Forms.CheckBox();
-            this.cb2t3 = new System.Windows.Forms.CheckBox();
-            this.cb2t4 = new System.Windows.Forms.CheckBox();
-            this.cb2t5 = new System.Windows.Forms.CheckBox();
-            this.cb2t6 = new System.Windows.Forms.CheckBox();
-            this.cb2t7 = new System.Windows.Forms.CheckBox();
+            this.chk2t0 = new System.Windows.Forms.CheckBox();
+            this.chk2t1 = new System.Windows.Forms.CheckBox();
+            this.chk2t2 = new System.Windows.Forms.CheckBox();
+            this.chk2t3 = new System.Windows.Forms.CheckBox();
+            this.chk2t4 = new System.Windows.Forms.CheckBox();
+            this.chk2t5 = new System.Windows.Forms.CheckBox();
+            this.chk2t6 = new System.Windows.Forms.CheckBox();
+            this.chk2t7 = new System.Windows.Forms.CheckBox();
             this.label120 = new System.Windows.Forms.Label();
-            this.cb1t0 = new System.Windows.Forms.CheckBox();
-            this.cb1t1 = new System.Windows.Forms.CheckBox();
-            this.cb1t2 = new System.Windows.Forms.CheckBox();
-            this.cb1t3 = new System.Windows.Forms.CheckBox();
-            this.cb1t4 = new System.Windows.Forms.CheckBox();
-            this.cb1t5 = new System.Windows.Forms.CheckBox();
-            this.cb1t6 = new System.Windows.Forms.CheckBox();
-            this.cb1t7 = new System.Windows.Forms.CheckBox();
+            this.chk1t0 = new System.Windows.Forms.CheckBox();
+            this.chk1t1 = new System.Windows.Forms.CheckBox();
+            this.chk1t2 = new System.Windows.Forms.CheckBox();
+            this.chk1t3 = new System.Windows.Forms.CheckBox();
+            this.chk1t4 = new System.Windows.Forms.CheckBox();
+            this.chk1t5 = new System.Windows.Forms.CheckBox();
+            this.chk1t6 = new System.Windows.Forms.CheckBox();
+            this.chk1t7 = new System.Windows.Forms.CheckBox();
             this.label121 = new System.Windows.Forms.Label();
             this.label122 = new System.Windows.Forms.Label();
             this.label123 = new System.Windows.Forms.Label();
@@ -691,151 +691,151 @@ namespace DataDecoder
             this.label128 = new System.Windows.Forms.Label();
             this.label130 = new System.Windows.Forms.Label();
             this.grpPortA = new System.Windows.Forms.GroupBox();
-            this.cb15r4 = new System.Windows.Forms.CheckBox();
-            this.cb15r7 = new System.Windows.Forms.CheckBox();
-            this.cb15r6 = new System.Windows.Forms.CheckBox();
-            this.cb15r5 = new System.Windows.Forms.CheckBox();
-            this.cb15r3 = new System.Windows.Forms.CheckBox();
-            this.cb15r2 = new System.Windows.Forms.CheckBox();
-            this.cb15r1 = new System.Windows.Forms.CheckBox();
-            this.cb15r0 = new System.Windows.Forms.CheckBox();
+            this.chk15r4 = new System.Windows.Forms.CheckBox();
+            this.chk15r7 = new System.Windows.Forms.CheckBox();
+            this.chk15r6 = new System.Windows.Forms.CheckBox();
+            this.chk15r5 = new System.Windows.Forms.CheckBox();
+            this.chk15r3 = new System.Windows.Forms.CheckBox();
+            this.chk15r2 = new System.Windows.Forms.CheckBox();
+            this.chk15r1 = new System.Windows.Forms.CheckBox();
+            this.chk15r0 = new System.Windows.Forms.CheckBox();
             this.label133 = new System.Windows.Forms.Label();
             this.label134 = new System.Windows.Forms.Label();
-            this.cb14r0 = new System.Windows.Forms.CheckBox();
-            this.cb14r1 = new System.Windows.Forms.CheckBox();
-            this.cb14r2 = new System.Windows.Forms.CheckBox();
-            this.cb14r3 = new System.Windows.Forms.CheckBox();
-            this.cb14r4 = new System.Windows.Forms.CheckBox();
-            this.cb14r5 = new System.Windows.Forms.CheckBox();
-            this.cb14r6 = new System.Windows.Forms.CheckBox();
-            this.cb14r7 = new System.Windows.Forms.CheckBox();
+            this.chk14r0 = new System.Windows.Forms.CheckBox();
+            this.chk14r1 = new System.Windows.Forms.CheckBox();
+            this.chk14r2 = new System.Windows.Forms.CheckBox();
+            this.chk14r3 = new System.Windows.Forms.CheckBox();
+            this.chk14r4 = new System.Windows.Forms.CheckBox();
+            this.chk14r5 = new System.Windows.Forms.CheckBox();
+            this.chk14r6 = new System.Windows.Forms.CheckBox();
+            this.chk14r7 = new System.Windows.Forms.CheckBox();
             this.label129 = new System.Windows.Forms.Label();
-            this.cb13r4 = new System.Windows.Forms.CheckBox();
+            this.chk13r4 = new System.Windows.Forms.CheckBox();
             this.label104 = new System.Windows.Forms.Label();
-            this.cb13r7 = new System.Windows.Forms.CheckBox();
-            this.cb13r6 = new System.Windows.Forms.CheckBox();
-            this.cb0r3 = new System.Windows.Forms.CheckBox();
-            this.cb13r5 = new System.Windows.Forms.CheckBox();
-            this.cb13r3 = new System.Windows.Forms.CheckBox();
-            this.cb0r0 = new System.Windows.Forms.CheckBox();
-            this.cb13r2 = new System.Windows.Forms.CheckBox();
-            this.cb13r1 = new System.Windows.Forms.CheckBox();
-            this.cb13r0 = new System.Windows.Forms.CheckBox();
-            this.cb0r1 = new System.Windows.Forms.CheckBox();
+            this.chk13r7 = new System.Windows.Forms.CheckBox();
+            this.chk13r6 = new System.Windows.Forms.CheckBox();
+            this.chk0r3 = new System.Windows.Forms.CheckBox();
+            this.chk13r5 = new System.Windows.Forms.CheckBox();
+            this.chk13r3 = new System.Windows.Forms.CheckBox();
+            this.chk0r0 = new System.Windows.Forms.CheckBox();
+            this.chk13r2 = new System.Windows.Forms.CheckBox();
+            this.chk13r1 = new System.Windows.Forms.CheckBox();
+            this.chk13r0 = new System.Windows.Forms.CheckBox();
+            this.chk0r1 = new System.Windows.Forms.CheckBox();
             this.label102 = new System.Windows.Forms.Label();
-            this.cb0r2 = new System.Windows.Forms.CheckBox();
-            this.cb0r4 = new System.Windows.Forms.CheckBox();
-            this.cb0r5 = new System.Windows.Forms.CheckBox();
-            this.cb0r6 = new System.Windows.Forms.CheckBox();
-            this.cb0r7 = new System.Windows.Forms.CheckBox();
+            this.chk0r2 = new System.Windows.Forms.CheckBox();
+            this.chk0r4 = new System.Windows.Forms.CheckBox();
+            this.chk0r5 = new System.Windows.Forms.CheckBox();
+            this.chk0r6 = new System.Windows.Forms.CheckBox();
+            this.chk0r7 = new System.Windows.Forms.CheckBox();
             this.label101 = new System.Windows.Forms.Label();
-            this.cb12r0 = new System.Windows.Forms.CheckBox();
-            this.cb12r1 = new System.Windows.Forms.CheckBox();
-            this.cb12r2 = new System.Windows.Forms.CheckBox();
-            this.cb12r3 = new System.Windows.Forms.CheckBox();
-            this.cb12r4 = new System.Windows.Forms.CheckBox();
-            this.cb12r5 = new System.Windows.Forms.CheckBox();
-            this.cb12r6 = new System.Windows.Forms.CheckBox();
-            this.cb12r7 = new System.Windows.Forms.CheckBox();
+            this.chk12r0 = new System.Windows.Forms.CheckBox();
+            this.chk12r1 = new System.Windows.Forms.CheckBox();
+            this.chk12r2 = new System.Windows.Forms.CheckBox();
+            this.chk12r3 = new System.Windows.Forms.CheckBox();
+            this.chk12r4 = new System.Windows.Forms.CheckBox();
+            this.chk12r5 = new System.Windows.Forms.CheckBox();
+            this.chk12r6 = new System.Windows.Forms.CheckBox();
+            this.chk12r7 = new System.Windows.Forms.CheckBox();
             this.label100 = new System.Windows.Forms.Label();
-            this.cb11r0 = new System.Windows.Forms.CheckBox();
-            this.cb11r1 = new System.Windows.Forms.CheckBox();
-            this.cb11r2 = new System.Windows.Forms.CheckBox();
-            this.cb11r3 = new System.Windows.Forms.CheckBox();
-            this.cb11r4 = new System.Windows.Forms.CheckBox();
-            this.cb11r5 = new System.Windows.Forms.CheckBox();
-            this.cb11r6 = new System.Windows.Forms.CheckBox();
-            this.cb11r7 = new System.Windows.Forms.CheckBox();
+            this.chk11r0 = new System.Windows.Forms.CheckBox();
+            this.chk11r1 = new System.Windows.Forms.CheckBox();
+            this.chk11r2 = new System.Windows.Forms.CheckBox();
+            this.chk11r3 = new System.Windows.Forms.CheckBox();
+            this.chk11r4 = new System.Windows.Forms.CheckBox();
+            this.chk11r5 = new System.Windows.Forms.CheckBox();
+            this.chk11r6 = new System.Windows.Forms.CheckBox();
+            this.chk11r7 = new System.Windows.Forms.CheckBox();
             this.label99 = new System.Windows.Forms.Label();
-            this.cb10r0 = new System.Windows.Forms.CheckBox();
-            this.cb10r1 = new System.Windows.Forms.CheckBox();
-            this.cb10r2 = new System.Windows.Forms.CheckBox();
-            this.cb10r3 = new System.Windows.Forms.CheckBox();
-            this.cb10r4 = new System.Windows.Forms.CheckBox();
-            this.cb10r5 = new System.Windows.Forms.CheckBox();
-            this.cb10r6 = new System.Windows.Forms.CheckBox();
-            this.cb10r7 = new System.Windows.Forms.CheckBox();
+            this.chk10r0 = new System.Windows.Forms.CheckBox();
+            this.chk10r1 = new System.Windows.Forms.CheckBox();
+            this.chk10r2 = new System.Windows.Forms.CheckBox();
+            this.chk10r3 = new System.Windows.Forms.CheckBox();
+            this.chk10r4 = new System.Windows.Forms.CheckBox();
+            this.chk10r5 = new System.Windows.Forms.CheckBox();
+            this.chk10r6 = new System.Windows.Forms.CheckBox();
+            this.chk10r7 = new System.Windows.Forms.CheckBox();
             this.label98 = new System.Windows.Forms.Label();
-            this.cb9r0 = new System.Windows.Forms.CheckBox();
-            this.cb9r1 = new System.Windows.Forms.CheckBox();
-            this.cb9r2 = new System.Windows.Forms.CheckBox();
-            this.cb9r3 = new System.Windows.Forms.CheckBox();
-            this.cb9r4 = new System.Windows.Forms.CheckBox();
-            this.cb9r5 = new System.Windows.Forms.CheckBox();
-            this.cb9r6 = new System.Windows.Forms.CheckBox();
-            this.cb9r7 = new System.Windows.Forms.CheckBox();
+            this.chk9r0 = new System.Windows.Forms.CheckBox();
+            this.chk9r1 = new System.Windows.Forms.CheckBox();
+            this.chk9r2 = new System.Windows.Forms.CheckBox();
+            this.chk9r3 = new System.Windows.Forms.CheckBox();
+            this.chk9r4 = new System.Windows.Forms.CheckBox();
+            this.chk9r5 = new System.Windows.Forms.CheckBox();
+            this.chk9r6 = new System.Windows.Forms.CheckBox();
+            this.chk9r7 = new System.Windows.Forms.CheckBox();
             this.label97 = new System.Windows.Forms.Label();
-            this.cb8r0 = new System.Windows.Forms.CheckBox();
-            this.cb8r1 = new System.Windows.Forms.CheckBox();
-            this.cb8r2 = new System.Windows.Forms.CheckBox();
-            this.cb8r3 = new System.Windows.Forms.CheckBox();
-            this.cb8r4 = new System.Windows.Forms.CheckBox();
-            this.cb8r5 = new System.Windows.Forms.CheckBox();
-            this.cb8r6 = new System.Windows.Forms.CheckBox();
-            this.cb8r7 = new System.Windows.Forms.CheckBox();
+            this.chk8r0 = new System.Windows.Forms.CheckBox();
+            this.chk8r1 = new System.Windows.Forms.CheckBox();
+            this.chk8r2 = new System.Windows.Forms.CheckBox();
+            this.chk8r3 = new System.Windows.Forms.CheckBox();
+            this.chkb8r4 = new System.Windows.Forms.CheckBox();
+            this.chk8r5 = new System.Windows.Forms.CheckBox();
+            this.chk8r6 = new System.Windows.Forms.CheckBox();
+            this.chk8r7 = new System.Windows.Forms.CheckBox();
             this.label96 = new System.Windows.Forms.Label();
-            this.cb7r0 = new System.Windows.Forms.CheckBox();
-            this.cb7r1 = new System.Windows.Forms.CheckBox();
-            this.cb7r2 = new System.Windows.Forms.CheckBox();
-            this.cb7r3 = new System.Windows.Forms.CheckBox();
-            this.cb7r4 = new System.Windows.Forms.CheckBox();
-            this.cb7r5 = new System.Windows.Forms.CheckBox();
-            this.cb7r6 = new System.Windows.Forms.CheckBox();
-            this.cb7r7 = new System.Windows.Forms.CheckBox();
+            this.chk7r0 = new System.Windows.Forms.CheckBox();
+            this.chk7r1 = new System.Windows.Forms.CheckBox();
+            this.chk7r2 = new System.Windows.Forms.CheckBox();
+            this.chk7r3 = new System.Windows.Forms.CheckBox();
+            this.chk7r4 = new System.Windows.Forms.CheckBox();
+            this.chk7r5 = new System.Windows.Forms.CheckBox();
+            this.chk7r6 = new System.Windows.Forms.CheckBox();
+            this.chk7r7 = new System.Windows.Forms.CheckBox();
             this.label95 = new System.Windows.Forms.Label();
-            this.cb6r0 = new System.Windows.Forms.CheckBox();
-            this.cb6r1 = new System.Windows.Forms.CheckBox();
-            this.cb6r2 = new System.Windows.Forms.CheckBox();
-            this.cb6r3 = new System.Windows.Forms.CheckBox();
-            this.cb6r4 = new System.Windows.Forms.CheckBox();
-            this.cb6r5 = new System.Windows.Forms.CheckBox();
-            this.cb6r6 = new System.Windows.Forms.CheckBox();
-            this.cb6r7 = new System.Windows.Forms.CheckBox();
+            this.chk6r0 = new System.Windows.Forms.CheckBox();
+            this.chk6r1 = new System.Windows.Forms.CheckBox();
+            this.chk6r2 = new System.Windows.Forms.CheckBox();
+            this.chk6r3 = new System.Windows.Forms.CheckBox();
+            this.chk6r4 = new System.Windows.Forms.CheckBox();
+            this.chk6r5 = new System.Windows.Forms.CheckBox();
+            this.chk6r6 = new System.Windows.Forms.CheckBox();
+            this.chk6r7 = new System.Windows.Forms.CheckBox();
             this.label94 = new System.Windows.Forms.Label();
-            this.cb5r0 = new System.Windows.Forms.CheckBox();
-            this.cb5r1 = new System.Windows.Forms.CheckBox();
-            this.cb5r2 = new System.Windows.Forms.CheckBox();
-            this.cb5r3 = new System.Windows.Forms.CheckBox();
-            this.cb5r4 = new System.Windows.Forms.CheckBox();
-            this.cb5r5 = new System.Windows.Forms.CheckBox();
-            this.cb5r6 = new System.Windows.Forms.CheckBox();
-            this.cb5r7 = new System.Windows.Forms.CheckBox();
+            this.chk5r0 = new System.Windows.Forms.CheckBox();
+            this.chk5r1 = new System.Windows.Forms.CheckBox();
+            this.chk5r2 = new System.Windows.Forms.CheckBox();
+            this.chk5r3 = new System.Windows.Forms.CheckBox();
+            this.chk5r4 = new System.Windows.Forms.CheckBox();
+            this.chk5r5 = new System.Windows.Forms.CheckBox();
+            this.chk5r6 = new System.Windows.Forms.CheckBox();
+            this.chk5r7 = new System.Windows.Forms.CheckBox();
             this.label93 = new System.Windows.Forms.Label();
-            this.cb4r0 = new System.Windows.Forms.CheckBox();
-            this.cb4r1 = new System.Windows.Forms.CheckBox();
-            this.cb4r2 = new System.Windows.Forms.CheckBox();
-            this.cb4r3 = new System.Windows.Forms.CheckBox();
-            this.cb4r4 = new System.Windows.Forms.CheckBox();
-            this.cb4r5 = new System.Windows.Forms.CheckBox();
-            this.cb4r6 = new System.Windows.Forms.CheckBox();
-            this.cb4r7 = new System.Windows.Forms.CheckBox();
+            this.chk4r0 = new System.Windows.Forms.CheckBox();
+            this.chk4r1 = new System.Windows.Forms.CheckBox();
+            this.chk4r2 = new System.Windows.Forms.CheckBox();
+            this.chk4r3 = new System.Windows.Forms.CheckBox();
+            this.chk4r4 = new System.Windows.Forms.CheckBox();
+            this.chk4r5 = new System.Windows.Forms.CheckBox();
+            this.chk4r6 = new System.Windows.Forms.CheckBox();
+            this.chk4r7 = new System.Windows.Forms.CheckBox();
             this.label92 = new System.Windows.Forms.Label();
-            this.cb3r0 = new System.Windows.Forms.CheckBox();
-            this.cb3r1 = new System.Windows.Forms.CheckBox();
-            this.cb3r2 = new System.Windows.Forms.CheckBox();
-            this.cb3r3 = new System.Windows.Forms.CheckBox();
-            this.cb3r4 = new System.Windows.Forms.CheckBox();
-            this.cb3r5 = new System.Windows.Forms.CheckBox();
-            this.cb3r6 = new System.Windows.Forms.CheckBox();
-            this.cb3r7 = new System.Windows.Forms.CheckBox();
+            this.chk3r0 = new System.Windows.Forms.CheckBox();
+            this.chk3r1 = new System.Windows.Forms.CheckBox();
+            this.chk3r2 = new System.Windows.Forms.CheckBox();
+            this.chk3r3 = new System.Windows.Forms.CheckBox();
+            this.chk3r4 = new System.Windows.Forms.CheckBox();
+            this.chk3r5 = new System.Windows.Forms.CheckBox();
+            this.chk3r6 = new System.Windows.Forms.CheckBox();
+            this.chk3r7 = new System.Windows.Forms.CheckBox();
             this.label91 = new System.Windows.Forms.Label();
-            this.cb2r0 = new System.Windows.Forms.CheckBox();
-            this.cb2r1 = new System.Windows.Forms.CheckBox();
-            this.cb2r2 = new System.Windows.Forms.CheckBox();
-            this.cb2r3 = new System.Windows.Forms.CheckBox();
-            this.cb2r4 = new System.Windows.Forms.CheckBox();
-            this.cb2r5 = new System.Windows.Forms.CheckBox();
-            this.cb2r6 = new System.Windows.Forms.CheckBox();
-            this.cb2r7 = new System.Windows.Forms.CheckBox();
+            this.chk2r0 = new System.Windows.Forms.CheckBox();
+            this.chk2r1 = new System.Windows.Forms.CheckBox();
+            this.chk2r2 = new System.Windows.Forms.CheckBox();
+            this.chk2r3 = new System.Windows.Forms.CheckBox();
+            this.chk2r4 = new System.Windows.Forms.CheckBox();
+            this.chk2r5 = new System.Windows.Forms.CheckBox();
+            this.chk2r6 = new System.Windows.Forms.CheckBox();
+            this.chk2r7 = new System.Windows.Forms.CheckBox();
             this.label90 = new System.Windows.Forms.Label();
-            this.cb1r0 = new System.Windows.Forms.CheckBox();
-            this.cb1r1 = new System.Windows.Forms.CheckBox();
-            this.cb1r2 = new System.Windows.Forms.CheckBox();
-            this.cb1r3 = new System.Windows.Forms.CheckBox();
-            this.cb1r4 = new System.Windows.Forms.CheckBox();
-            this.cb1r5 = new System.Windows.Forms.CheckBox();
-            this.cb1r6 = new System.Windows.Forms.CheckBox();
-            this.cb1r7 = new System.Windows.Forms.CheckBox();
+            this.chk1r0 = new System.Windows.Forms.CheckBox();
+            this.chk1r1 = new System.Windows.Forms.CheckBox();
+            this.chk1r2 = new System.Windows.Forms.CheckBox();
+            this.chk1r3 = new System.Windows.Forms.CheckBox();
+            this.chk1r4 = new System.Windows.Forms.CheckBox();
+            this.chk1r5 = new System.Windows.Forms.CheckBox();
+            this.chk1r6 = new System.Windows.Forms.CheckBox();
+            this.chk1r7 = new System.Windows.Forms.CheckBox();
             this.label89 = new System.Windows.Forms.Label();
             this.label88 = new System.Windows.Forms.Label();
             this.label87 = new System.Windows.Forms.Label();
@@ -898,7 +898,7 @@ namespace DataDecoder
             this.label51 = new System.Windows.Forms.Label();
             this.label52 = new System.Windows.Forms.Label();
             this.txtLong = new System.Windows.Forms.TextBox();
-            this.tabProp = new System.Windows.Forms.TabPage();
+            this.tabSO2R = new System.Windows.Forms.TabPage();
             this.grpSO2R = new System.Windows.Forms.GroupBox();
             this.btnSO2Rclear = new System.Windows.Forms.Button();
             this.btnLoadSO2R = new System.Windows.Forms.Button();
@@ -1130,6 +1130,8 @@ namespace DataDecoder
             this.txtMemIdx = new System.Windows.Forms.TextBox();
             this.txtMemVfo = new System.Windows.Forms.TextBox();
             this.TkRed = new System.Windows.Forms.Button();
+            this.TkGrn = new System.Windows.Forms.Button();
+            this.TkYel = new System.Windows.Forms.Button();
             this.LogPort = new System.IO.Ports.SerialPort(this.components);
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
@@ -1182,13 +1184,8 @@ namespace DataDecoder
             this.toolStripSeparator16 = new System.Windows.Forms.ToolStripSeparator();
             this.acomAntDefaultToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator17 = new System.Windows.Forms.ToolStripSeparator();
-            this.antToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.recallToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem6 = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem7 = new System.Windows.Forms.ToolStripMenuItem();
-            this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem8 = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem9 = new System.Windows.Forms.ToolStripMenuItem();
+            this.profileSaveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.profileLoadToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.enableErrorLoggingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openErrorLogToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -1267,8 +1264,6 @@ namespace DataDecoder
             this.toolStripSeparator8 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripMenuItem25 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem26 = new System.Windows.Forms.ToolStripMenuItem();
-            this.TkGrn = new System.Windows.Forms.Button();
-            this.TkYel = new System.Windows.Forms.Button();
             this.tabControl.SuspendLayout();
             this.tabPorts.SuspendLayout();
             this.grpSlave.SuspendLayout();
@@ -1336,7 +1331,7 @@ namespace DataDecoder
             this.grpSpeed.SuspendLayout();
             this.grpModel.SuspendLayout();
             this.groupBox14.SuspendLayout();
-            this.tabProp.SuspendLayout();
+            this.tabSO2R.SuspendLayout();
             this.grpSO2R.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numSplit)).BeginInit();
             this.contextMenuStrip1.SuspendLayout();
@@ -1357,7 +1352,7 @@ namespace DataDecoder
             this.tabControl.Controls.Add(this.tabRotor);
             this.tabControl.Controls.Add(this.tabExtCtrl);
             this.tabControl.Controls.Add(this.tabSetup);
-            this.tabControl.Controls.Add(this.tabProp);
+            this.tabControl.Controls.Add(this.tabSO2R);
             this.tabControl.ItemSize = new System.Drawing.Size(42, 18);
             this.tabControl.Location = new System.Drawing.Point(-1, 24);
             this.tabControl.Name = "tabControl";
@@ -1373,8 +1368,6 @@ namespace DataDecoder
             this.tabPorts.Controls.Add(this.chkPSDR);
             this.tabPorts.Controls.Add(this.btnFlexOn);
             this.tabPorts.Controls.Add(this.grpSlave);
-            this.tabPorts.Controls.Add(this.label5);
-            this.tabPorts.Controls.Add(this.cboSerAcc);
             this.tabPorts.Controls.Add(this.grpBox1);
             this.tabPorts.Controls.Add(this.grpBox2);
             this.tabPorts.Location = new System.Drawing.Point(4, 22);
@@ -1391,7 +1384,7 @@ namespace DataDecoder
             this.chkPSDR.AutoSize = true;
             this.chkPSDR.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
             this.chkPSDR.ForeColor = System.Drawing.Color.Navy;
-            this.chkPSDR.Location = new System.Drawing.Point(375, 53);
+            this.chkPSDR.Location = new System.Drawing.Point(375, 55);
             this.chkPSDR.Name = "chkPSDR";
             this.chkPSDR.Size = new System.Drawing.Size(56, 17);
             this.chkPSDR.TabIndex = 70;
@@ -1409,7 +1402,7 @@ namespace DataDecoder
             this.btnFlexOn.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(224)))), ((int)(((byte)(192)))));
             this.btnFlexOn.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnFlexOn.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.btnFlexOn.Location = new System.Drawing.Point(373, 25);
+            this.btnFlexOn.Location = new System.Drawing.Point(373, 27);
             this.btnFlexOn.Name = "btnFlexOn";
             this.btnFlexOn.Size = new System.Drawing.Size(46, 23);
             this.btnFlexOn.TabIndex = 69;
@@ -1547,7 +1540,8 @@ namespace DataDecoder
             "2400 8-N-1",
             "2400 8-N-2",
             "1200 8-N-1",
-            "1200 8-N-2"});
+            "1200 8-N-2",
+            "19200 8-N-1"});
             this.cboRadData.Location = new System.Drawing.Point(197, 19);
             this.cboRadData.Name = "cboRadData";
             this.cboRadData.Size = new System.Drawing.Size(83, 21);
@@ -1577,28 +1571,6 @@ namespace DataDecoder
             this.label9.TabIndex = 27;
             this.label9.Text = "CI-V Addr";
             // 
-            // label5
-            // 
-            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
-            this.label5.ForeColor = System.Drawing.Color.Firebrick;
-            this.label5.Location = new System.Drawing.Point(133, 53);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(62, 15);
-            this.label5.TabIndex = 3;
-            this.label5.Text = "Pass Listen";
-            this.toolTip1.SetToolTip(this.label5, "Select Passive Listener Port (A hardware serial port)");
-            // 
-            // cboSerAcc
-            // 
-            this.cboSerAcc.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cboSerAcc.FormattingEnabled = true;
-            this.cboSerAcc.Location = new System.Drawing.Point(134, 30);
-            this.cboSerAcc.Name = "cboSerAcc";
-            this.cboSerAcc.Size = new System.Drawing.Size(65, 21);
-            this.cboSerAcc.TabIndex = 2;
-            this.toolTip1.SetToolTip(this.cboSerAcc, "Select Passive Listener Port (must be hardware serial port)");
-            this.cboSerAcc.SelectedIndexChanged += new System.EventHandler(this.cboSerAcc_SelectedIndexChanged);
-            // 
             // grpBox1
             // 
             this.grpBox1.Controls.Add(this.label46);
@@ -1606,8 +1578,10 @@ namespace DataDecoder
             this.grpBox1.Controls.Add(this.label11);
             this.grpBox1.Controls.Add(this.cboLogPort);
             this.grpBox1.Controls.Add(this.label6);
+            this.grpBox1.Controls.Add(this.label5);
             this.grpBox1.Controls.Add(this.txtInv);
             this.grpBox1.Controls.Add(this.label3);
+            this.grpBox1.Controls.Add(this.cboSerAcc);
             this.grpBox1.Controls.Add(this.cboCAT);
             this.grpBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.grpBox1.ForeColor = System.Drawing.Color.Blue;
@@ -1623,7 +1597,7 @@ namespace DataDecoder
             // 
             this.label46.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
             this.label46.ForeColor = System.Drawing.Color.Navy;
-            this.label46.Location = new System.Drawing.Point(282, 43);
+            this.label46.Location = new System.Drawing.Point(281, 42);
             this.label46.Name = "label46";
             this.label46.Size = new System.Drawing.Size(67, 15);
             this.label46.TabIndex = 16;
@@ -1646,7 +1620,7 @@ namespace DataDecoder
             // 
             this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
             this.label11.ForeColor = System.Drawing.Color.Navy;
-            this.label11.Location = new System.Drawing.Point(205, 43);
+            this.label11.Location = new System.Drawing.Point(203, 42);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(62, 15);
             this.label11.TabIndex = 14;
@@ -1658,7 +1632,7 @@ namespace DataDecoder
             // 
             this.cboLogPort.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cboLogPort.FormattingEnabled = true;
-            this.cboLogPort.Location = new System.Drawing.Point(205, 20);
+            this.cboLogPort.Location = new System.Drawing.Point(204, 20);
             this.cboLogPort.Name = "cboLogPort";
             this.cboLogPort.Size = new System.Drawing.Size(65, 21);
             this.cboLogPort.TabIndex = 13;
@@ -1669,16 +1643,27 @@ namespace DataDecoder
             // 
             this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
             this.label6.ForeColor = System.Drawing.Color.Navy;
-            this.label6.Location = new System.Drawing.Point(80, 42);
+            this.label6.Location = new System.Drawing.Point(77, 41);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(50, 15);
             this.label6.TabIndex = 12;
             this.label6.Text = "Poll Intvl";
             // 
+            // label5
+            // 
+            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
+            this.label5.ForeColor = System.Drawing.Color.Firebrick;
+            this.label5.Location = new System.Drawing.Point(129, 42);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(62, 15);
+            this.label5.TabIndex = 3;
+            this.label5.Text = "Pass Listen";
+            this.toolTip1.SetToolTip(this.label5, "Select Passive Listener Port (A hardware serial port)");
+            // 
             // txtInv
             // 
             this.txtInv.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtInv.Location = new System.Drawing.Point(87, 20);
+            this.txtInv.Location = new System.Drawing.Point(84, 20);
             this.txtInv.Name = "txtInv";
             this.txtInv.Size = new System.Drawing.Size(34, 20);
             this.txtInv.TabIndex = 11;
@@ -1690,18 +1675,29 @@ namespace DataDecoder
             // 
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
             this.label3.ForeColor = System.Drawing.Color.Navy;
-            this.label3.Location = new System.Drawing.Point(8, 42);
+            this.label3.Location = new System.Drawing.Point(8, 41);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(62, 15);
             this.label3.TabIndex = 1;
             this.label3.Text = "Radio CAT";
             this.toolTip1.SetToolTip(this.label3, "Select Radio CAT Serial Port");
             // 
+            // cboSerAcc
+            // 
+            this.cboSerAcc.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cboSerAcc.FormattingEnabled = true;
+            this.cboSerAcc.Location = new System.Drawing.Point(128, 20);
+            this.cboSerAcc.Name = "cboSerAcc";
+            this.cboSerAcc.Size = new System.Drawing.Size(65, 21);
+            this.cboSerAcc.TabIndex = 2;
+            this.toolTip1.SetToolTip(this.cboSerAcc, "Select Passive Listener Port (must be hardware serial port)");
+            this.cboSerAcc.SelectedIndexChanged += new System.EventHandler(this.cboSerAcc_SelectedIndexChanged);
+            // 
             // cboCAT
             // 
             this.cboCAT.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cboCAT.FormattingEnabled = true;
-            this.cboCAT.Location = new System.Drawing.Point(10, 19);
+            this.cboCAT.Location = new System.Drawing.Point(9, 19);
             this.cboCAT.Name = "cboCAT";
             this.cboCAT.Size = new System.Drawing.Size(65, 21);
             this.cboCAT.TabIndex = 0;
@@ -1720,7 +1716,7 @@ namespace DataDecoder
             this.grpBox2.ForeColor = System.Drawing.Color.Blue;
             this.grpBox2.Location = new System.Drawing.Point(3, 85);
             this.grpBox2.Name = "grpBox2";
-            this.grpBox2.Size = new System.Drawing.Size(405, 139);
+            this.grpBox2.Size = new System.Drawing.Size(358, 139);
             this.grpBox2.TabIndex = 18;
             this.grpBox2.TabStop = false;
             this.grpBox2.Text = "Parallel Port";
@@ -1771,7 +1767,7 @@ namespace DataDecoder
             this.groupBox5.ForeColor = System.Drawing.Color.MediumBlue;
             this.groupBox5.Location = new System.Drawing.Point(149, 17);
             this.groupBox5.Name = "groupBox5";
-            this.groupBox5.Size = new System.Drawing.Size(210, 60);
+            this.groupBox5.Size = new System.Drawing.Size(190, 60);
             this.groupBox5.TabIndex = 3;
             this.groupBox5.TabStop = false;
             this.groupBox5.Text = "Data Signals";
@@ -1780,7 +1776,7 @@ namespace DataDecoder
             // Dev0
             // 
             this.Dev0.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Dev0.Location = new System.Drawing.Point(94, 14);
+            this.Dev0.Location = new System.Drawing.Point(83, 16);
             this.Dev0.Name = "Dev0";
             this.Dev0.Size = new System.Drawing.Size(95, 20);
             this.Dev0.TabIndex = 52;
@@ -1806,7 +1802,7 @@ namespace DataDecoder
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
             this.label1.ForeColor = System.Drawing.Color.Navy;
-            this.label1.Location = new System.Drawing.Point(106, 36);
+            this.label1.Location = new System.Drawing.Point(95, 38);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(72, 13);
             this.label1.TabIndex = 25;
@@ -2486,6 +2482,7 @@ namespace DataDecoder
             // 
             // tabRCP
             // 
+            this.tabRCP.Controls.Add(this.button7);
             this.tabRCP.Controls.Add(this.grpTKnob);
             this.tabRCP.Controls.Add(this.groupBox7);
             this.tabRCP.Controls.Add(this.txtRCP);
@@ -2497,9 +2494,21 @@ namespace DataDecoder
             this.tabRCP.UseVisualStyleBackColor = true;
             this.tabRCP.DoubleClick += new System.EventHandler(this.tabRCP_DoubleClick);
             // 
+            // button7
+            // 
+            this.button7.BackColor = System.Drawing.Color.Cornsilk;
+            this.button7.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button7.Location = new System.Drawing.Point(295, 120);
+            this.button7.Name = "button7";
+            this.button7.Size = new System.Drawing.Size(40, 22);
+            this.button7.TabIndex = 110;
+            this.button7.Text = "Test";
+            this.button7.UseVisualStyleBackColor = false;
+            this.button7.Visible = false;
+            this.button7.Click += new System.EventHandler(this.button7_Click);
+            // 
             // grpTKnob
             // 
-            this.grpTKnob.Controls.Add(this.button7);
             this.grpTKnob.Controls.Add(this.lblZE);
             this.grpTKnob.Controls.Add(this.txtZE);
             this.grpTKnob.Controls.Add(this.label232);
@@ -2539,18 +2548,8 @@ namespace DataDecoder
             this.grpTKnob.Size = new System.Drawing.Size(417, 156);
             this.grpTKnob.TabIndex = 67;
             this.grpTKnob.TabStop = false;
-            this.grpTKnob.Text = "Tuning Knob";
-            // 
-            // button7
-            // 
-            this.button7.BackColor = System.Drawing.SystemColors.Control;
-            this.button7.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button7.Location = new System.Drawing.Point(284, 19);
-            this.button7.Name = "button7";
-            this.button7.Size = new System.Drawing.Size(10, 10);
-            this.button7.TabIndex = 110;
-            this.button7.UseVisualStyleBackColor = false;
-            this.button7.Click += new System.EventHandler(this.button7_Click);
+            this.grpTKnob.Text = "K6TD && K6TU Tuning Knob";
+            this.grpTKnob.Visible = false;
             // 
             // lblZE
             // 
@@ -2640,9 +2639,11 @@ namespace DataDecoder
             this.cboTkSw3.Items.AddRange(new object[] {
             "Tune Step Up",
             "Tune Step Dn",
-            "Macro 1",
-            "Macro 2",
-            "Macro 3"});
+            "Macro 22",
+            "Macro 23",
+            "Macro 24",
+            "Macro 25",
+            "Macro 26"});
             this.cboTkSw3.Location = new System.Drawing.Point(309, 126);
             this.cboTkSw3.Name = "cboTkSw3";
             this.cboTkSw3.Size = new System.Drawing.Size(90, 21);
@@ -2659,9 +2660,11 @@ namespace DataDecoder
             this.cboTkSw1.Items.AddRange(new object[] {
             "Tune Step Up",
             "Tune Step Dn",
-            "Macro 1",
-            "Macro 2",
-            "Macro 3"});
+            "Macro 22",
+            "Macro 23",
+            "Macro 24",
+            "Macro 25",
+            "Macro 26"});
             this.cboTkSw1.Location = new System.Drawing.Point(309, 72);
             this.cboTkSw1.Name = "cboTkSw1";
             this.cboTkSw1.Size = new System.Drawing.Size(90, 21);
@@ -2678,9 +2681,11 @@ namespace DataDecoder
             this.cboTkSw2.Items.AddRange(new object[] {
             "Tune Step Up",
             "Tune Step Dn",
-            "Macro 1",
-            "Macro 2",
-            "Macro 3"});
+            "Macro 22",
+            "Macro 23",
+            "Macro 24",
+            "Macro 25",
+            "Macro 26"});
             this.cboTkSw2.Location = new System.Drawing.Point(309, 99);
             this.cboTkSw2.Name = "cboTkSw2";
             this.cboTkSw2.Size = new System.Drawing.Size(90, 21);
@@ -2693,7 +2698,7 @@ namespace DataDecoder
             this.label228.AutoSize = true;
             this.label228.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
             this.label228.ForeColor = System.Drawing.Color.Navy;
-            this.label228.Location = new System.Drawing.Point(157, 14);
+            this.label228.Location = new System.Drawing.Point(157, 17);
             this.label228.Name = "label228";
             this.label228.Size = new System.Drawing.Size(57, 13);
             this.label228.TabIndex = 100;
@@ -2733,7 +2738,7 @@ namespace DataDecoder
             "500 KhZ",
             "1 MhZ",
             "10 MhZ"});
-            this.cboTstep.Location = new System.Drawing.Point(158, 29);
+            this.cboTstep.Location = new System.Drawing.Point(158, 32);
             this.cboTstep.Name = "cboTstep";
             this.cboTstep.Size = new System.Drawing.Size(69, 21);
             this.cboTstep.TabIndex = 99;
@@ -3004,7 +3009,7 @@ namespace DataDecoder
             this.label216.AutoSize = true;
             this.label216.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
             this.label216.ForeColor = System.Drawing.Color.Navy;
-            this.label216.Location = new System.Drawing.Point(89, 14);
+            this.label216.Location = new System.Drawing.Point(89, 17);
             this.label216.Name = "label216";
             this.label216.Size = new System.Drawing.Size(26, 13);
             this.label216.TabIndex = 78;
@@ -3016,7 +3021,7 @@ namespace DataDecoder
             this.cboKnobPort.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
             this.cboKnobPort.ForeColor = System.Drawing.SystemColors.WindowText;
             this.cboKnobPort.FormattingEnabled = true;
-            this.cboKnobPort.Location = new System.Drawing.Point(77, 29);
+            this.cboKnobPort.Location = new System.Drawing.Point(77, 32);
             this.cboKnobPort.Name = "cboKnobPort";
             this.cboKnobPort.Size = new System.Drawing.Size(69, 21);
             this.cboKnobPort.TabIndex = 75;
@@ -3028,7 +3033,7 @@ namespace DataDecoder
             this.chkKnobEnab.AutoSize = true;
             this.chkKnobEnab.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
             this.chkKnobEnab.ForeColor = System.Drawing.Color.Navy;
-            this.chkKnobEnab.Location = new System.Drawing.Point(17, 31);
+            this.chkKnobEnab.Location = new System.Drawing.Point(17, 34);
             this.chkKnobEnab.Name = "chkKnobEnab";
             this.chkKnobEnab.Size = new System.Drawing.Size(59, 17);
             this.chkKnobEnab.TabIndex = 76;
@@ -6094,9 +6099,9 @@ namespace DataDecoder
             this.grpPro.Controls.Add(this.txtPmsg);
             this.grpPro.Controls.Add(this.button1);
             this.grpPro.Controls.Add(this.label152);
-            this.grpPro.Controls.Add(this.comboBox1);
-            this.grpPro.Controls.Add(this.checkBox2);
-            this.grpPro.Controls.Add(this.textBox2);
+            this.grpPro.Controls.Add(this.cboProPort);
+            this.grpPro.Controls.Add(this.chkProEnab);
+            this.grpPro.Controls.Add(this.txtProTmp);
             this.grpPro.Controls.Add(this.button2);
             this.grpPro.Controls.Add(this.button5);
             this.grpPro.Controls.Add(this.label149);
@@ -6188,42 +6193,42 @@ namespace DataDecoder
             this.label152.TabIndex = 62;
             this.label152.Text = "PA Tmp";
             // 
-            // comboBox1
+            // cboProPort
             // 
-            this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.comboBox1.ForeColor = System.Drawing.Color.Black;
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(4, 55);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(68, 21);
-            this.comboBox1.TabIndex = 61;
-            this.toolTip1.SetToolTip(this.comboBox1, "Hardware serial port connected to amp.");
+            this.cboProPort.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboProPort.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cboProPort.ForeColor = System.Drawing.Color.Black;
+            this.cboProPort.FormattingEnabled = true;
+            this.cboProPort.Location = new System.Drawing.Point(4, 55);
+            this.cboProPort.Name = "cboProPort";
+            this.cboProPort.Size = new System.Drawing.Size(68, 21);
+            this.cboProPort.TabIndex = 61;
+            this.toolTip1.SetToolTip(this.cboProPort, "Hardware serial port connected to amp.");
             // 
-            // checkBox2
+            // chkProEnab
             // 
-            this.checkBox2.AutoSize = true;
-            this.checkBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.5F);
-            this.checkBox2.ForeColor = System.Drawing.Color.Navy;
-            this.checkBox2.Location = new System.Drawing.Point(8, 19);
-            this.checkBox2.Name = "checkBox2";
-            this.checkBox2.Size = new System.Drawing.Size(59, 17);
-            this.checkBox2.TabIndex = 61;
-            this.checkBox2.Text = "Enable";
-            this.toolTip1.SetToolTip(this.checkBox2, "Select to enable amplifier.");
-            this.checkBox2.UseVisualStyleBackColor = true;
+            this.chkProEnab.AutoSize = true;
+            this.chkProEnab.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.5F);
+            this.chkProEnab.ForeColor = System.Drawing.Color.Navy;
+            this.chkProEnab.Location = new System.Drawing.Point(8, 19);
+            this.chkProEnab.Name = "chkProEnab";
+            this.chkProEnab.Size = new System.Drawing.Size(59, 17);
+            this.chkProEnab.TabIndex = 61;
+            this.chkProEnab.Text = "Enable";
+            this.toolTip1.SetToolTip(this.chkProEnab, "Select to enable amplifier.");
+            this.chkProEnab.UseVisualStyleBackColor = true;
             // 
-            // textBox2
+            // txtProTmp
             // 
-            this.textBox2.BackColor = System.Drawing.SystemColors.Window;
-            this.textBox2.Enabled = false;
-            this.textBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.25F);
-            this.textBox2.Location = new System.Drawing.Point(80, 21);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(47, 18);
-            this.textBox2.TabIndex = 61;
-            this.textBox2.Text = "37 C";
-            this.textBox2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.txtProTmp.BackColor = System.Drawing.SystemColors.Window;
+            this.txtProTmp.Enabled = false;
+            this.txtProTmp.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.25F);
+            this.txtProTmp.Location = new System.Drawing.Point(80, 21);
+            this.txtProTmp.Name = "txtProTmp";
+            this.txtProTmp.Size = new System.Drawing.Size(47, 18);
+            this.txtProTmp.TabIndex = 61;
+            this.txtProTmp.Text = "37 C";
+            this.txtProTmp.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // button2
             // 
@@ -7929,12 +7934,11 @@ namespace DataDecoder
             this.label40.AutoSize = true;
             this.label40.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
             this.label40.ForeColor = System.Drawing.Color.Navy;
-            this.label40.Location = new System.Drawing.Point(6, 39);
+            this.label40.Location = new System.Drawing.Point(3, 39);
             this.label40.Name = "label40";
             this.label40.Size = new System.Drawing.Size(53, 13);
             this.label40.TabIndex = 43;
             this.label40.Text = "Call Prefix";
-            this.label40.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // label60
             // 
@@ -8023,11 +8027,11 @@ namespace DataDecoder
             this.label45.AutoSize = true;
             this.label45.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
             this.label45.ForeColor = System.Drawing.Color.Navy;
-            this.label45.Location = new System.Drawing.Point(67, 40);
+            this.label45.Location = new System.Drawing.Point(63, 40);
             this.label45.Name = "label45";
-            this.label45.Size = new System.Drawing.Size(33, 13);
+            this.label45.Size = new System.Drawing.Size(65, 13);
             this.label45.TabIndex = 10;
-            this.label45.Text = "Prefix";
+            this.label45.Text = "DXCC Prefix";
             this.label45.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // label48
@@ -8182,7 +8186,8 @@ namespace DataDecoder
             this.txtSP.Size = new System.Drawing.Size(37, 20);
             this.txtSP.TabIndex = 3;
             this.txtSP.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.toolTip1.SetToolTip(this.txtSP, "Short path bearing to prefix");
+            this.toolTip1.SetToolTip(this.txtSP, "Short path rotator bearing (Click to increase + 5, Ctrl+Click to decrease -5 degr" +
+                    "ees.");
             this.txtSP.TextChanged += new System.EventHandler(this.txtSP_TextChanged);
             // 
             // tabExtCtrl
@@ -8360,151 +8365,151 @@ namespace DataDecoder
             // 
             // grpPortB
             // 
-            this.grpPortB.Controls.Add(this.cb15t4);
+            this.grpPortB.Controls.Add(this.chk15t4);
             this.grpPortB.Controls.Add(this.label105);
-            this.grpPortB.Controls.Add(this.cb15t7);
-            this.grpPortB.Controls.Add(this.cb13t4);
-            this.grpPortB.Controls.Add(this.cb15t6);
+            this.grpPortB.Controls.Add(this.chk15t7);
+            this.grpPortB.Controls.Add(this.chk13t4);
+            this.grpPortB.Controls.Add(this.chk15t6);
             this.grpPortB.Controls.Add(this.label107);
-            this.grpPortB.Controls.Add(this.cb15t5);
-            this.grpPortB.Controls.Add(this.cb13t7);
-            this.grpPortB.Controls.Add(this.cb15t3);
-            this.grpPortB.Controls.Add(this.cb13t6);
-            this.grpPortB.Controls.Add(this.cb15t2);
-            this.grpPortB.Controls.Add(this.cb0t3);
-            this.grpPortB.Controls.Add(this.cb15t1);
-            this.grpPortB.Controls.Add(this.cb13t5);
-            this.grpPortB.Controls.Add(this.cb15t0);
-            this.grpPortB.Controls.Add(this.cb13t3);
+            this.grpPortB.Controls.Add(this.chk15t5);
+            this.grpPortB.Controls.Add(this.chk13t7);
+            this.grpPortB.Controls.Add(this.chk15t3);
+            this.grpPortB.Controls.Add(this.chk13t6);
+            this.grpPortB.Controls.Add(this.chk15t2);
+            this.grpPortB.Controls.Add(this.chk0t3);
+            this.grpPortB.Controls.Add(this.chk15t1);
+            this.grpPortB.Controls.Add(this.chk13t5);
+            this.grpPortB.Controls.Add(this.chk15t0);
+            this.grpPortB.Controls.Add(this.chk13t3);
             this.grpPortB.Controls.Add(this.label135);
-            this.grpPortB.Controls.Add(this.cb0t0);
+            this.grpPortB.Controls.Add(this.chk0t0);
             this.grpPortB.Controls.Add(this.label136);
-            this.grpPortB.Controls.Add(this.cb13t2);
-            this.grpPortB.Controls.Add(this.cb14t0);
-            this.grpPortB.Controls.Add(this.cb13t1);
-            this.grpPortB.Controls.Add(this.cb14t1);
-            this.grpPortB.Controls.Add(this.cb13t0);
-            this.grpPortB.Controls.Add(this.cb14t2);
-            this.grpPortB.Controls.Add(this.cb0t1);
-            this.grpPortB.Controls.Add(this.cb14t3);
+            this.grpPortB.Controls.Add(this.chk13t2);
+            this.grpPortB.Controls.Add(this.chk14t0);
+            this.grpPortB.Controls.Add(this.chk13t1);
+            this.grpPortB.Controls.Add(this.chk14t1);
+            this.grpPortB.Controls.Add(this.chk13t0);
+            this.grpPortB.Controls.Add(this.chk14t2);
+            this.grpPortB.Controls.Add(this.chk0t1);
+            this.grpPortB.Controls.Add(this.chk14t3);
             this.grpPortB.Controls.Add(this.label108);
-            this.grpPortB.Controls.Add(this.cb14t4);
-            this.grpPortB.Controls.Add(this.cb0t2);
-            this.grpPortB.Controls.Add(this.cb14t5);
-            this.grpPortB.Controls.Add(this.cb14t6);
-            this.grpPortB.Controls.Add(this.cb0t4);
-            this.grpPortB.Controls.Add(this.cb14t7);
-            this.grpPortB.Controls.Add(this.cb0t5);
-            this.grpPortB.Controls.Add(this.cb0t6);
-            this.grpPortB.Controls.Add(this.cb0t7);
+            this.grpPortB.Controls.Add(this.chk14t4);
+            this.grpPortB.Controls.Add(this.chk0t2);
+            this.grpPortB.Controls.Add(this.chk14t5);
+            this.grpPortB.Controls.Add(this.chk14t6);
+            this.grpPortB.Controls.Add(this.chk0t4);
+            this.grpPortB.Controls.Add(this.chk14t7);
+            this.grpPortB.Controls.Add(this.chk0t5);
+            this.grpPortB.Controls.Add(this.chk0t6);
+            this.grpPortB.Controls.Add(this.chk0t7);
             this.grpPortB.Controls.Add(this.label109);
-            this.grpPortB.Controls.Add(this.cb12t0);
-            this.grpPortB.Controls.Add(this.cb12t1);
-            this.grpPortB.Controls.Add(this.cb12t2);
-            this.grpPortB.Controls.Add(this.cb12t3);
-            this.grpPortB.Controls.Add(this.cb12t4);
-            this.grpPortB.Controls.Add(this.cb12t5);
-            this.grpPortB.Controls.Add(this.cb12t6);
-            this.grpPortB.Controls.Add(this.cb12t7);
+            this.grpPortB.Controls.Add(this.chk12t0);
+            this.grpPortB.Controls.Add(this.chk12t1);
+            this.grpPortB.Controls.Add(this.chk12t2);
+            this.grpPortB.Controls.Add(this.chk12t3);
+            this.grpPortB.Controls.Add(this.chk12t4);
+            this.grpPortB.Controls.Add(this.chk12t5);
+            this.grpPortB.Controls.Add(this.chk12t6);
+            this.grpPortB.Controls.Add(this.chk12t7);
             this.grpPortB.Controls.Add(this.label110);
-            this.grpPortB.Controls.Add(this.cb11t0);
-            this.grpPortB.Controls.Add(this.cb11t1);
-            this.grpPortB.Controls.Add(this.cb11t2);
-            this.grpPortB.Controls.Add(this.cb11t3);
-            this.grpPortB.Controls.Add(this.cb11t4);
-            this.grpPortB.Controls.Add(this.cb11t5);
-            this.grpPortB.Controls.Add(this.cb11t6);
-            this.grpPortB.Controls.Add(this.cb11t7);
+            this.grpPortB.Controls.Add(this.chk11t0);
+            this.grpPortB.Controls.Add(this.chk11t1);
+            this.grpPortB.Controls.Add(this.chk11t2);
+            this.grpPortB.Controls.Add(this.chk11t3);
+            this.grpPortB.Controls.Add(this.chk11t4);
+            this.grpPortB.Controls.Add(this.chk11t5);
+            this.grpPortB.Controls.Add(this.chk11t6);
+            this.grpPortB.Controls.Add(this.chk11t7);
             this.grpPortB.Controls.Add(this.label111);
-            this.grpPortB.Controls.Add(this.cb10t0);
-            this.grpPortB.Controls.Add(this.cb10t1);
-            this.grpPortB.Controls.Add(this.cb10t2);
-            this.grpPortB.Controls.Add(this.cb10t3);
-            this.grpPortB.Controls.Add(this.cb10t4);
-            this.grpPortB.Controls.Add(this.cb10t5);
-            this.grpPortB.Controls.Add(this.cb10t6);
-            this.grpPortB.Controls.Add(this.cb10t7);
+            this.grpPortB.Controls.Add(this.chk10t0);
+            this.grpPortB.Controls.Add(this.chk10t1);
+            this.grpPortB.Controls.Add(this.chk10t2);
+            this.grpPortB.Controls.Add(this.chk10t3);
+            this.grpPortB.Controls.Add(this.chk10t4);
+            this.grpPortB.Controls.Add(this.chk10t5);
+            this.grpPortB.Controls.Add(this.chk10t6);
+            this.grpPortB.Controls.Add(this.chk10t7);
             this.grpPortB.Controls.Add(this.label112);
-            this.grpPortB.Controls.Add(this.cb9t0);
-            this.grpPortB.Controls.Add(this.cb9t1);
-            this.grpPortB.Controls.Add(this.cb9t2);
-            this.grpPortB.Controls.Add(this.cb9t3);
-            this.grpPortB.Controls.Add(this.cb9t4);
-            this.grpPortB.Controls.Add(this.cb9t5);
-            this.grpPortB.Controls.Add(this.cb9t6);
-            this.grpPortB.Controls.Add(this.cb9t7);
+            this.grpPortB.Controls.Add(this.chk9t0);
+            this.grpPortB.Controls.Add(this.chk9t1);
+            this.grpPortB.Controls.Add(this.chk9t2);
+            this.grpPortB.Controls.Add(this.chk9t3);
+            this.grpPortB.Controls.Add(this.chk9t4);
+            this.grpPortB.Controls.Add(this.chk9t5);
+            this.grpPortB.Controls.Add(this.chk9t6);
+            this.grpPortB.Controls.Add(this.chk9t7);
             this.grpPortB.Controls.Add(this.label113);
-            this.grpPortB.Controls.Add(this.cb8t0);
-            this.grpPortB.Controls.Add(this.cb8t1);
-            this.grpPortB.Controls.Add(this.cb8t2);
-            this.grpPortB.Controls.Add(this.cb8t3);
-            this.grpPortB.Controls.Add(this.cb8t4);
-            this.grpPortB.Controls.Add(this.cb8t5);
-            this.grpPortB.Controls.Add(this.cb8t6);
-            this.grpPortB.Controls.Add(this.cb8t7);
+            this.grpPortB.Controls.Add(this.chk8t0);
+            this.grpPortB.Controls.Add(this.chk8t1);
+            this.grpPortB.Controls.Add(this.chk8t2);
+            this.grpPortB.Controls.Add(this.chk8t3);
+            this.grpPortB.Controls.Add(this.chk8t4);
+            this.grpPortB.Controls.Add(this.chk8t5);
+            this.grpPortB.Controls.Add(this.chk8t6);
+            this.grpPortB.Controls.Add(this.chk8t7);
             this.grpPortB.Controls.Add(this.label114);
-            this.grpPortB.Controls.Add(this.cb7t0);
-            this.grpPortB.Controls.Add(this.cb7t1);
-            this.grpPortB.Controls.Add(this.cb7t2);
-            this.grpPortB.Controls.Add(this.cb7t3);
-            this.grpPortB.Controls.Add(this.cb7t4);
-            this.grpPortB.Controls.Add(this.cb7t5);
-            this.grpPortB.Controls.Add(this.cb7t6);
-            this.grpPortB.Controls.Add(this.cb7t7);
+            this.grpPortB.Controls.Add(this.chk7t0);
+            this.grpPortB.Controls.Add(this.chk7t1);
+            this.grpPortB.Controls.Add(this.chk7t2);
+            this.grpPortB.Controls.Add(this.chk7t3);
+            this.grpPortB.Controls.Add(this.chk7t4);
+            this.grpPortB.Controls.Add(this.chk7t5);
+            this.grpPortB.Controls.Add(this.chk7t6);
+            this.grpPortB.Controls.Add(this.chk7t7);
             this.grpPortB.Controls.Add(this.label115);
-            this.grpPortB.Controls.Add(this.cb6t0);
-            this.grpPortB.Controls.Add(this.cb6t1);
-            this.grpPortB.Controls.Add(this.cb6t2);
-            this.grpPortB.Controls.Add(this.cb6t3);
-            this.grpPortB.Controls.Add(this.cb6t4);
-            this.grpPortB.Controls.Add(this.cb6t5);
-            this.grpPortB.Controls.Add(this.cb6t6);
-            this.grpPortB.Controls.Add(this.cb6t7);
+            this.grpPortB.Controls.Add(this.chk6t0);
+            this.grpPortB.Controls.Add(this.chk6t1);
+            this.grpPortB.Controls.Add(this.chk6t2);
+            this.grpPortB.Controls.Add(this.chk6t3);
+            this.grpPortB.Controls.Add(this.chk6t4);
+            this.grpPortB.Controls.Add(this.chk6t5);
+            this.grpPortB.Controls.Add(this.chk6t6);
+            this.grpPortB.Controls.Add(this.chk6t7);
             this.grpPortB.Controls.Add(this.label116);
-            this.grpPortB.Controls.Add(this.cb5t0);
-            this.grpPortB.Controls.Add(this.cb5t1);
-            this.grpPortB.Controls.Add(this.cb5t2);
-            this.grpPortB.Controls.Add(this.cb5t3);
-            this.grpPortB.Controls.Add(this.cb5t4);
-            this.grpPortB.Controls.Add(this.cb5t5);
-            this.grpPortB.Controls.Add(this.cb5t6);
-            this.grpPortB.Controls.Add(this.cb5t7);
+            this.grpPortB.Controls.Add(this.chk5t0);
+            this.grpPortB.Controls.Add(this.chk5t1);
+            this.grpPortB.Controls.Add(this.chk5t2);
+            this.grpPortB.Controls.Add(this.chk5t3);
+            this.grpPortB.Controls.Add(this.chk5t4);
+            this.grpPortB.Controls.Add(this.chk5t5);
+            this.grpPortB.Controls.Add(this.chk5t6);
+            this.grpPortB.Controls.Add(this.chk5t7);
             this.grpPortB.Controls.Add(this.label117);
-            this.grpPortB.Controls.Add(this.cb4t0);
-            this.grpPortB.Controls.Add(this.cb4t1);
-            this.grpPortB.Controls.Add(this.cb4t2);
-            this.grpPortB.Controls.Add(this.cb4t3);
-            this.grpPortB.Controls.Add(this.cb4t4);
-            this.grpPortB.Controls.Add(this.cb4t5);
-            this.grpPortB.Controls.Add(this.cb4t6);
-            this.grpPortB.Controls.Add(this.cb4t7);
+            this.grpPortB.Controls.Add(this.chk4t0);
+            this.grpPortB.Controls.Add(this.chk4t1);
+            this.grpPortB.Controls.Add(this.chk4t2);
+            this.grpPortB.Controls.Add(this.chk4t3);
+            this.grpPortB.Controls.Add(this.chk4t4);
+            this.grpPortB.Controls.Add(this.chk4t5);
+            this.grpPortB.Controls.Add(this.chk4t6);
+            this.grpPortB.Controls.Add(this.chk4t7);
             this.grpPortB.Controls.Add(this.label118);
-            this.grpPortB.Controls.Add(this.cb3t0);
-            this.grpPortB.Controls.Add(this.cb3t1);
-            this.grpPortB.Controls.Add(this.cb3t2);
-            this.grpPortB.Controls.Add(this.cb3t3);
-            this.grpPortB.Controls.Add(this.cb3t4);
-            this.grpPortB.Controls.Add(this.cb3t5);
-            this.grpPortB.Controls.Add(this.cb3t6);
-            this.grpPortB.Controls.Add(this.cb3t7);
+            this.grpPortB.Controls.Add(this.chk3t0);
+            this.grpPortB.Controls.Add(this.chk3t1);
+            this.grpPortB.Controls.Add(this.chk3t2);
+            this.grpPortB.Controls.Add(this.chk3t3);
+            this.grpPortB.Controls.Add(this.chk3t4);
+            this.grpPortB.Controls.Add(this.chk3t5);
+            this.grpPortB.Controls.Add(this.chk3t6);
+            this.grpPortB.Controls.Add(this.chk3t7);
             this.grpPortB.Controls.Add(this.label119);
-            this.grpPortB.Controls.Add(this.cb2t0);
-            this.grpPortB.Controls.Add(this.cb2t1);
-            this.grpPortB.Controls.Add(this.cb2t2);
-            this.grpPortB.Controls.Add(this.cb2t3);
-            this.grpPortB.Controls.Add(this.cb2t4);
-            this.grpPortB.Controls.Add(this.cb2t5);
-            this.grpPortB.Controls.Add(this.cb2t6);
-            this.grpPortB.Controls.Add(this.cb2t7);
+            this.grpPortB.Controls.Add(this.chk2t0);
+            this.grpPortB.Controls.Add(this.chk2t1);
+            this.grpPortB.Controls.Add(this.chk2t2);
+            this.grpPortB.Controls.Add(this.chk2t3);
+            this.grpPortB.Controls.Add(this.chk2t4);
+            this.grpPortB.Controls.Add(this.chk2t5);
+            this.grpPortB.Controls.Add(this.chk2t6);
+            this.grpPortB.Controls.Add(this.chk2t7);
             this.grpPortB.Controls.Add(this.label120);
-            this.grpPortB.Controls.Add(this.cb1t0);
-            this.grpPortB.Controls.Add(this.cb1t1);
-            this.grpPortB.Controls.Add(this.cb1t2);
-            this.grpPortB.Controls.Add(this.cb1t3);
-            this.grpPortB.Controls.Add(this.cb1t4);
-            this.grpPortB.Controls.Add(this.cb1t5);
-            this.grpPortB.Controls.Add(this.cb1t6);
-            this.grpPortB.Controls.Add(this.cb1t7);
+            this.grpPortB.Controls.Add(this.chk1t0);
+            this.grpPortB.Controls.Add(this.chk1t1);
+            this.grpPortB.Controls.Add(this.chk1t2);
+            this.grpPortB.Controls.Add(this.chk1t3);
+            this.grpPortB.Controls.Add(this.chk1t4);
+            this.grpPortB.Controls.Add(this.chk1t5);
+            this.grpPortB.Controls.Add(this.chk1t6);
+            this.grpPortB.Controls.Add(this.chk1t7);
             this.grpPortB.Controls.Add(this.label121);
             this.grpPortB.Controls.Add(this.label122);
             this.grpPortB.Controls.Add(this.label123);
@@ -8522,16 +8527,16 @@ namespace DataDecoder
             this.grpPortB.TabStop = false;
             this.grpPortB.Text = "Port B";
             // 
-            // cb15t4
+            // chk15t4
             // 
-            this.cb15t4.AutoSize = true;
-            this.cb15t4.Enabled = false;
-            this.cb15t4.Location = new System.Drawing.Point(89, 272);
-            this.cb15t4.Name = "cb15t4";
-            this.cb15t4.Size = new System.Drawing.Size(15, 14);
-            this.cb15t4.TabIndex = 169;
-            this.cb15t4.UseVisualStyleBackColor = true;
-            this.cb15t4.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
+            this.chk15t4.AutoSize = true;
+            this.chk15t4.Enabled = false;
+            this.chk15t4.Location = new System.Drawing.Point(89, 272);
+            this.chk15t4.Name = "chk15t4";
+            this.chk15t4.Size = new System.Drawing.Size(15, 14);
+            this.chk15t4.TabIndex = 169;
+            this.chk15t4.UseVisualStyleBackColor = true;
+            this.chk15t4.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
             // 
             // label105
             // 
@@ -8543,38 +8548,38 @@ namespace DataDecoder
             this.label105.TabIndex = 410;
             this.label105.Text = "VHF+";
             // 
-            // cb15t7
+            // chk15t7
             // 
-            this.cb15t7.AutoSize = true;
-            this.cb15t7.Enabled = false;
-            this.cb15t7.Location = new System.Drawing.Point(40, 272);
-            this.cb15t7.Name = "cb15t7";
-            this.cb15t7.Size = new System.Drawing.Size(15, 14);
-            this.cb15t7.TabIndex = 166;
-            this.cb15t7.UseVisualStyleBackColor = true;
-            this.cb15t7.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
+            this.chk15t7.AutoSize = true;
+            this.chk15t7.Enabled = false;
+            this.chk15t7.Location = new System.Drawing.Point(40, 272);
+            this.chk15t7.Name = "chk15t7";
+            this.chk15t7.Size = new System.Drawing.Size(15, 14);
+            this.chk15t7.TabIndex = 166;
+            this.chk15t7.UseVisualStyleBackColor = true;
+            this.chk15t7.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
             // 
-            // cb13t4
+            // chk13t4
             // 
-            this.cb13t4.AutoSize = true;
-            this.cb13t4.Enabled = false;
-            this.cb13t4.Location = new System.Drawing.Point(89, 238);
-            this.cb13t4.Name = "cb13t4";
-            this.cb13t4.Size = new System.Drawing.Size(15, 14);
-            this.cb13t4.TabIndex = 403;
-            this.cb13t4.UseVisualStyleBackColor = true;
-            this.cb13t4.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
+            this.chk13t4.AutoSize = true;
+            this.chk13t4.Enabled = false;
+            this.chk13t4.Location = new System.Drawing.Point(89, 238);
+            this.chk13t4.Name = "chk13t4";
+            this.chk13t4.Size = new System.Drawing.Size(15, 14);
+            this.chk13t4.TabIndex = 403;
+            this.chk13t4.UseVisualStyleBackColor = true;
+            this.chk13t4.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
             // 
-            // cb15t6
+            // chk15t6
             // 
-            this.cb15t6.AutoSize = true;
-            this.cb15t6.Enabled = false;
-            this.cb15t6.Location = new System.Drawing.Point(57, 272);
-            this.cb15t6.Name = "cb15t6";
-            this.cb15t6.Size = new System.Drawing.Size(15, 14);
-            this.cb15t6.TabIndex = 167;
-            this.cb15t6.UseVisualStyleBackColor = true;
-            this.cb15t6.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
+            this.chk15t6.AutoSize = true;
+            this.chk15t6.Enabled = false;
+            this.chk15t6.Location = new System.Drawing.Point(57, 272);
+            this.chk15t6.Name = "chk15t6";
+            this.chk15t6.Size = new System.Drawing.Size(15, 14);
+            this.chk15t6.TabIndex = 167;
+            this.chk15t6.UseVisualStyleBackColor = true;
+            this.chk15t6.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
             // 
             // label107
             // 
@@ -8586,115 +8591,115 @@ namespace DataDecoder
             this.label107.TabIndex = 409;
             this.label107.Text = "- - - - - - - Port Bits - - - - - - -";
             // 
-            // cb15t5
+            // chk15t5
             // 
-            this.cb15t5.AutoSize = true;
-            this.cb15t5.Enabled = false;
-            this.cb15t5.Location = new System.Drawing.Point(73, 272);
-            this.cb15t5.Name = "cb15t5";
-            this.cb15t5.Size = new System.Drawing.Size(15, 14);
-            this.cb15t5.TabIndex = 168;
-            this.cb15t5.UseVisualStyleBackColor = true;
-            this.cb15t5.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
+            this.chk15t5.AutoSize = true;
+            this.chk15t5.Enabled = false;
+            this.chk15t5.Location = new System.Drawing.Point(73, 272);
+            this.chk15t5.Name = "chk15t5";
+            this.chk15t5.Size = new System.Drawing.Size(15, 14);
+            this.chk15t5.TabIndex = 168;
+            this.chk15t5.UseVisualStyleBackColor = true;
+            this.chk15t5.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
             // 
-            // cb13t7
+            // chk13t7
             // 
-            this.cb13t7.AutoSize = true;
-            this.cb13t7.Enabled = false;
-            this.cb13t7.Location = new System.Drawing.Point(40, 238);
-            this.cb13t7.Name = "cb13t7";
-            this.cb13t7.Size = new System.Drawing.Size(15, 14);
-            this.cb13t7.TabIndex = 400;
-            this.cb13t7.UseVisualStyleBackColor = true;
-            this.cb13t7.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
+            this.chk13t7.AutoSize = true;
+            this.chk13t7.Enabled = false;
+            this.chk13t7.Location = new System.Drawing.Point(40, 238);
+            this.chk13t7.Name = "chk13t7";
+            this.chk13t7.Size = new System.Drawing.Size(15, 14);
+            this.chk13t7.TabIndex = 400;
+            this.chk13t7.UseVisualStyleBackColor = true;
+            this.chk13t7.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
             // 
-            // cb15t3
+            // chk15t3
             // 
-            this.cb15t3.AutoSize = true;
-            this.cb15t3.Enabled = false;
-            this.cb15t3.Location = new System.Drawing.Point(105, 272);
-            this.cb15t3.Name = "cb15t3";
-            this.cb15t3.Size = new System.Drawing.Size(15, 14);
-            this.cb15t3.TabIndex = 170;
-            this.cb15t3.UseVisualStyleBackColor = true;
-            this.cb15t3.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
+            this.chk15t3.AutoSize = true;
+            this.chk15t3.Enabled = false;
+            this.chk15t3.Location = new System.Drawing.Point(105, 272);
+            this.chk15t3.Name = "chk15t3";
+            this.chk15t3.Size = new System.Drawing.Size(15, 14);
+            this.chk15t3.TabIndex = 170;
+            this.chk15t3.UseVisualStyleBackColor = true;
+            this.chk15t3.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
             // 
-            // cb13t6
+            // chk13t6
             // 
-            this.cb13t6.AutoSize = true;
-            this.cb13t6.Enabled = false;
-            this.cb13t6.Location = new System.Drawing.Point(57, 238);
-            this.cb13t6.Name = "cb13t6";
-            this.cb13t6.Size = new System.Drawing.Size(15, 14);
-            this.cb13t6.TabIndex = 401;
-            this.cb13t6.UseVisualStyleBackColor = true;
-            this.cb13t6.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
+            this.chk13t6.AutoSize = true;
+            this.chk13t6.Enabled = false;
+            this.chk13t6.Location = new System.Drawing.Point(57, 238);
+            this.chk13t6.Name = "chk13t6";
+            this.chk13t6.Size = new System.Drawing.Size(15, 14);
+            this.chk13t6.TabIndex = 401;
+            this.chk13t6.UseVisualStyleBackColor = true;
+            this.chk13t6.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
             // 
-            // cb15t2
+            // chk15t2
             // 
-            this.cb15t2.AutoSize = true;
-            this.cb15t2.Enabled = false;
-            this.cb15t2.Location = new System.Drawing.Point(121, 272);
-            this.cb15t2.Name = "cb15t2";
-            this.cb15t2.Size = new System.Drawing.Size(15, 14);
-            this.cb15t2.TabIndex = 171;
-            this.cb15t2.UseVisualStyleBackColor = true;
-            this.cb15t2.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
+            this.chk15t2.AutoSize = true;
+            this.chk15t2.Enabled = false;
+            this.chk15t2.Location = new System.Drawing.Point(121, 272);
+            this.chk15t2.Name = "chk15t2";
+            this.chk15t2.Size = new System.Drawing.Size(15, 14);
+            this.chk15t2.TabIndex = 171;
+            this.chk15t2.UseVisualStyleBackColor = true;
+            this.chk15t2.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
             // 
-            // cb0t3
+            // chk0t3
             // 
-            this.cb0t3.AutoSize = true;
-            this.cb0t3.Enabled = false;
-            this.cb0t3.Location = new System.Drawing.Point(105, 40);
-            this.cb0t3.Name = "cb0t3";
-            this.cb0t3.Size = new System.Drawing.Size(15, 14);
-            this.cb0t3.TabIndex = 278;
-            this.cb0t3.UseVisualStyleBackColor = true;
-            this.cb0t3.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
+            this.chk0t3.AutoSize = true;
+            this.chk0t3.Enabled = false;
+            this.chk0t3.Location = new System.Drawing.Point(105, 40);
+            this.chk0t3.Name = "chk0t3";
+            this.chk0t3.Size = new System.Drawing.Size(15, 14);
+            this.chk0t3.TabIndex = 278;
+            this.chk0t3.UseVisualStyleBackColor = true;
+            this.chk0t3.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
             // 
-            // cb15t1
+            // chk15t1
             // 
-            this.cb15t1.AutoSize = true;
-            this.cb15t1.Enabled = false;
-            this.cb15t1.Location = new System.Drawing.Point(137, 272);
-            this.cb15t1.Name = "cb15t1";
-            this.cb15t1.Size = new System.Drawing.Size(15, 14);
-            this.cb15t1.TabIndex = 172;
-            this.cb15t1.UseVisualStyleBackColor = true;
-            this.cb15t1.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
+            this.chk15t1.AutoSize = true;
+            this.chk15t1.Enabled = false;
+            this.chk15t1.Location = new System.Drawing.Point(137, 272);
+            this.chk15t1.Name = "chk15t1";
+            this.chk15t1.Size = new System.Drawing.Size(15, 14);
+            this.chk15t1.TabIndex = 172;
+            this.chk15t1.UseVisualStyleBackColor = true;
+            this.chk15t1.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
             // 
-            // cb13t5
+            // chk13t5
             // 
-            this.cb13t5.AutoSize = true;
-            this.cb13t5.Enabled = false;
-            this.cb13t5.Location = new System.Drawing.Point(73, 238);
-            this.cb13t5.Name = "cb13t5";
-            this.cb13t5.Size = new System.Drawing.Size(15, 14);
-            this.cb13t5.TabIndex = 402;
-            this.cb13t5.UseVisualStyleBackColor = true;
-            this.cb13t5.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
+            this.chk13t5.AutoSize = true;
+            this.chk13t5.Enabled = false;
+            this.chk13t5.Location = new System.Drawing.Point(73, 238);
+            this.chk13t5.Name = "chk13t5";
+            this.chk13t5.Size = new System.Drawing.Size(15, 14);
+            this.chk13t5.TabIndex = 402;
+            this.chk13t5.UseVisualStyleBackColor = true;
+            this.chk13t5.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
             // 
-            // cb15t0
+            // chk15t0
             // 
-            this.cb15t0.AutoSize = true;
-            this.cb15t0.Enabled = false;
-            this.cb15t0.Location = new System.Drawing.Point(153, 272);
-            this.cb15t0.Name = "cb15t0";
-            this.cb15t0.Size = new System.Drawing.Size(15, 14);
-            this.cb15t0.TabIndex = 173;
-            this.cb15t0.UseVisualStyleBackColor = true;
-            this.cb15t0.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
+            this.chk15t0.AutoSize = true;
+            this.chk15t0.Enabled = false;
+            this.chk15t0.Location = new System.Drawing.Point(153, 272);
+            this.chk15t0.Name = "chk15t0";
+            this.chk15t0.Size = new System.Drawing.Size(15, 14);
+            this.chk15t0.TabIndex = 173;
+            this.chk15t0.UseVisualStyleBackColor = true;
+            this.chk15t0.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
             // 
-            // cb13t3
+            // chk13t3
             // 
-            this.cb13t3.AutoSize = true;
-            this.cb13t3.Enabled = false;
-            this.cb13t3.Location = new System.Drawing.Point(105, 238);
-            this.cb13t3.Name = "cb13t3";
-            this.cb13t3.Size = new System.Drawing.Size(15, 14);
-            this.cb13t3.TabIndex = 404;
-            this.cb13t3.UseVisualStyleBackColor = true;
-            this.cb13t3.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
+            this.chk13t3.AutoSize = true;
+            this.chk13t3.Enabled = false;
+            this.chk13t3.Location = new System.Drawing.Point(105, 238);
+            this.chk13t3.Name = "chk13t3";
+            this.chk13t3.Size = new System.Drawing.Size(15, 14);
+            this.chk13t3.TabIndex = 404;
+            this.chk13t3.UseVisualStyleBackColor = true;
+            this.chk13t3.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
             // 
             // label135
             // 
@@ -8706,16 +8711,16 @@ namespace DataDecoder
             this.label135.TabIndex = 174;
             this.label135.Text = "HF6";
             // 
-            // cb0t0
+            // chk0t0
             // 
-            this.cb0t0.AutoSize = true;
-            this.cb0t0.Enabled = false;
-            this.cb0t0.Location = new System.Drawing.Point(153, 40);
-            this.cb0t0.Name = "cb0t0";
-            this.cb0t0.Size = new System.Drawing.Size(15, 14);
-            this.cb0t0.TabIndex = 275;
-            this.cb0t0.UseVisualStyleBackColor = true;
-            this.cb0t0.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
+            this.chk0t0.AutoSize = true;
+            this.chk0t0.Enabled = false;
+            this.chk0t0.Location = new System.Drawing.Point(153, 40);
+            this.chk0t0.Name = "chk0t0";
+            this.chk0t0.Size = new System.Drawing.Size(15, 14);
+            this.chk0t0.TabIndex = 275;
+            this.chk0t0.UseVisualStyleBackColor = true;
+            this.chk0t0.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
             // 
             // label136
             // 
@@ -8727,93 +8732,93 @@ namespace DataDecoder
             this.label136.TabIndex = 165;
             this.label136.Text = "HF2";
             // 
-            // cb13t2
+            // chk13t2
             // 
-            this.cb13t2.AutoSize = true;
-            this.cb13t2.Enabled = false;
-            this.cb13t2.Location = new System.Drawing.Point(121, 238);
-            this.cb13t2.Name = "cb13t2";
-            this.cb13t2.Size = new System.Drawing.Size(15, 14);
-            this.cb13t2.TabIndex = 405;
-            this.cb13t2.UseVisualStyleBackColor = true;
-            this.cb13t2.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
+            this.chk13t2.AutoSize = true;
+            this.chk13t2.Enabled = false;
+            this.chk13t2.Location = new System.Drawing.Point(121, 238);
+            this.chk13t2.Name = "chk13t2";
+            this.chk13t2.Size = new System.Drawing.Size(15, 14);
+            this.chk13t2.TabIndex = 405;
+            this.chk13t2.UseVisualStyleBackColor = true;
+            this.chk13t2.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
             // 
-            // cb14t0
+            // chk14t0
             // 
-            this.cb14t0.AutoSize = true;
-            this.cb14t0.Enabled = false;
-            this.cb14t0.Location = new System.Drawing.Point(153, 257);
-            this.cb14t0.Name = "cb14t0";
-            this.cb14t0.Size = new System.Drawing.Size(15, 14);
-            this.cb14t0.TabIndex = 164;
-            this.cb14t0.UseVisualStyleBackColor = true;
-            this.cb14t0.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
+            this.chk14t0.AutoSize = true;
+            this.chk14t0.Enabled = false;
+            this.chk14t0.Location = new System.Drawing.Point(153, 257);
+            this.chk14t0.Name = "chk14t0";
+            this.chk14t0.Size = new System.Drawing.Size(15, 14);
+            this.chk14t0.TabIndex = 164;
+            this.chk14t0.UseVisualStyleBackColor = true;
+            this.chk14t0.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
             // 
-            // cb13t1
+            // chk13t1
             // 
-            this.cb13t1.AutoSize = true;
-            this.cb13t1.Enabled = false;
-            this.cb13t1.Location = new System.Drawing.Point(137, 238);
-            this.cb13t1.Name = "cb13t1";
-            this.cb13t1.Size = new System.Drawing.Size(15, 14);
-            this.cb13t1.TabIndex = 406;
-            this.cb13t1.UseVisualStyleBackColor = true;
-            this.cb13t1.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
+            this.chk13t1.AutoSize = true;
+            this.chk13t1.Enabled = false;
+            this.chk13t1.Location = new System.Drawing.Point(137, 238);
+            this.chk13t1.Name = "chk13t1";
+            this.chk13t1.Size = new System.Drawing.Size(15, 14);
+            this.chk13t1.TabIndex = 406;
+            this.chk13t1.UseVisualStyleBackColor = true;
+            this.chk13t1.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
             // 
-            // cb14t1
+            // chk14t1
             // 
-            this.cb14t1.AutoSize = true;
-            this.cb14t1.Enabled = false;
-            this.cb14t1.Location = new System.Drawing.Point(137, 257);
-            this.cb14t1.Name = "cb14t1";
-            this.cb14t1.Size = new System.Drawing.Size(15, 14);
-            this.cb14t1.TabIndex = 163;
-            this.cb14t1.UseVisualStyleBackColor = true;
-            this.cb14t1.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
+            this.chk14t1.AutoSize = true;
+            this.chk14t1.Enabled = false;
+            this.chk14t1.Location = new System.Drawing.Point(137, 257);
+            this.chk14t1.Name = "chk14t1";
+            this.chk14t1.Size = new System.Drawing.Size(15, 14);
+            this.chk14t1.TabIndex = 163;
+            this.chk14t1.UseVisualStyleBackColor = true;
+            this.chk14t1.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
             // 
-            // cb13t0
+            // chk13t0
             // 
-            this.cb13t0.AutoSize = true;
-            this.cb13t0.Enabled = false;
-            this.cb13t0.Location = new System.Drawing.Point(153, 238);
-            this.cb13t0.Name = "cb13t0";
-            this.cb13t0.Size = new System.Drawing.Size(15, 14);
-            this.cb13t0.TabIndex = 407;
-            this.cb13t0.UseVisualStyleBackColor = true;
-            this.cb13t0.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
+            this.chk13t0.AutoSize = true;
+            this.chk13t0.Enabled = false;
+            this.chk13t0.Location = new System.Drawing.Point(153, 238);
+            this.chk13t0.Name = "chk13t0";
+            this.chk13t0.Size = new System.Drawing.Size(15, 14);
+            this.chk13t0.TabIndex = 407;
+            this.chk13t0.UseVisualStyleBackColor = true;
+            this.chk13t0.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
             // 
-            // cb14t2
+            // chk14t2
             // 
-            this.cb14t2.AutoSize = true;
-            this.cb14t2.Enabled = false;
-            this.cb14t2.Location = new System.Drawing.Point(121, 257);
-            this.cb14t2.Name = "cb14t2";
-            this.cb14t2.Size = new System.Drawing.Size(15, 14);
-            this.cb14t2.TabIndex = 162;
-            this.cb14t2.UseVisualStyleBackColor = true;
-            this.cb14t2.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
+            this.chk14t2.AutoSize = true;
+            this.chk14t2.Enabled = false;
+            this.chk14t2.Location = new System.Drawing.Point(121, 257);
+            this.chk14t2.Name = "chk14t2";
+            this.chk14t2.Size = new System.Drawing.Size(15, 14);
+            this.chk14t2.TabIndex = 162;
+            this.chk14t2.UseVisualStyleBackColor = true;
+            this.chk14t2.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
             // 
-            // cb0t1
+            // chk0t1
             // 
-            this.cb0t1.AutoSize = true;
-            this.cb0t1.Enabled = false;
-            this.cb0t1.Location = new System.Drawing.Point(137, 40);
-            this.cb0t1.Name = "cb0t1";
-            this.cb0t1.Size = new System.Drawing.Size(15, 14);
-            this.cb0t1.TabIndex = 276;
-            this.cb0t1.UseVisualStyleBackColor = true;
-            this.cb0t1.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
+            this.chk0t1.AutoSize = true;
+            this.chk0t1.Enabled = false;
+            this.chk0t1.Location = new System.Drawing.Point(137, 40);
+            this.chk0t1.Name = "chk0t1";
+            this.chk0t1.Size = new System.Drawing.Size(15, 14);
+            this.chk0t1.TabIndex = 276;
+            this.chk0t1.UseVisualStyleBackColor = true;
+            this.chk0t1.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
             // 
-            // cb14t3
+            // chk14t3
             // 
-            this.cb14t3.AutoSize = true;
-            this.cb14t3.Enabled = false;
-            this.cb14t3.Location = new System.Drawing.Point(105, 257);
-            this.cb14t3.Name = "cb14t3";
-            this.cb14t3.Size = new System.Drawing.Size(15, 14);
-            this.cb14t3.TabIndex = 161;
-            this.cb14t3.UseVisualStyleBackColor = true;
-            this.cb14t3.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
+            this.chk14t3.AutoSize = true;
+            this.chk14t3.Enabled = false;
+            this.chk14t3.Location = new System.Drawing.Point(105, 257);
+            this.chk14t3.Name = "chk14t3";
+            this.chk14t3.Size = new System.Drawing.Size(15, 14);
+            this.chk14t3.TabIndex = 161;
+            this.chk14t3.UseVisualStyleBackColor = true;
+            this.chk14t3.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
             // 
             // label108
             // 
@@ -8825,104 +8830,104 @@ namespace DataDecoder
             this.label108.TabIndex = 408;
             this.label108.Text = "12";
             // 
-            // cb14t4
+            // chk14t4
             // 
-            this.cb14t4.AutoSize = true;
-            this.cb14t4.Enabled = false;
-            this.cb14t4.Location = new System.Drawing.Point(89, 257);
-            this.cb14t4.Name = "cb14t4";
-            this.cb14t4.Size = new System.Drawing.Size(15, 14);
-            this.cb14t4.TabIndex = 160;
-            this.cb14t4.UseVisualStyleBackColor = true;
-            this.cb14t4.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
+            this.chk14t4.AutoSize = true;
+            this.chk14t4.Enabled = false;
+            this.chk14t4.Location = new System.Drawing.Point(89, 257);
+            this.chk14t4.Name = "chk14t4";
+            this.chk14t4.Size = new System.Drawing.Size(15, 14);
+            this.chk14t4.TabIndex = 160;
+            this.chk14t4.UseVisualStyleBackColor = true;
+            this.chk14t4.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
             // 
-            // cb0t2
+            // chk0t2
             // 
-            this.cb0t2.AutoSize = true;
-            this.cb0t2.Enabled = false;
-            this.cb0t2.Location = new System.Drawing.Point(121, 40);
-            this.cb0t2.Name = "cb0t2";
-            this.cb0t2.Size = new System.Drawing.Size(15, 14);
-            this.cb0t2.TabIndex = 277;
-            this.cb0t2.UseVisualStyleBackColor = true;
-            this.cb0t2.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
+            this.chk0t2.AutoSize = true;
+            this.chk0t2.Enabled = false;
+            this.chk0t2.Location = new System.Drawing.Point(121, 40);
+            this.chk0t2.Name = "chk0t2";
+            this.chk0t2.Size = new System.Drawing.Size(15, 14);
+            this.chk0t2.TabIndex = 277;
+            this.chk0t2.UseVisualStyleBackColor = true;
+            this.chk0t2.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
             // 
-            // cb14t5
+            // chk14t5
             // 
-            this.cb14t5.AutoSize = true;
-            this.cb14t5.Enabled = false;
-            this.cb14t5.Location = new System.Drawing.Point(73, 257);
-            this.cb14t5.Name = "cb14t5";
-            this.cb14t5.Size = new System.Drawing.Size(15, 14);
-            this.cb14t5.TabIndex = 159;
-            this.cb14t5.UseVisualStyleBackColor = true;
-            this.cb14t5.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
+            this.chk14t5.AutoSize = true;
+            this.chk14t5.Enabled = false;
+            this.chk14t5.Location = new System.Drawing.Point(73, 257);
+            this.chk14t5.Name = "chk14t5";
+            this.chk14t5.Size = new System.Drawing.Size(15, 14);
+            this.chk14t5.TabIndex = 159;
+            this.chk14t5.UseVisualStyleBackColor = true;
+            this.chk14t5.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
             // 
-            // cb14t6
+            // chk14t6
             // 
-            this.cb14t6.AutoSize = true;
-            this.cb14t6.Enabled = false;
-            this.cb14t6.Location = new System.Drawing.Point(57, 257);
-            this.cb14t6.Name = "cb14t6";
-            this.cb14t6.Size = new System.Drawing.Size(15, 14);
-            this.cb14t6.TabIndex = 158;
-            this.cb14t6.UseVisualStyleBackColor = true;
-            this.cb14t6.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
+            this.chk14t6.AutoSize = true;
+            this.chk14t6.Enabled = false;
+            this.chk14t6.Location = new System.Drawing.Point(57, 257);
+            this.chk14t6.Name = "chk14t6";
+            this.chk14t6.Size = new System.Drawing.Size(15, 14);
+            this.chk14t6.TabIndex = 158;
+            this.chk14t6.UseVisualStyleBackColor = true;
+            this.chk14t6.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
             // 
-            // cb0t4
+            // chk0t4
             // 
-            this.cb0t4.AutoSize = true;
-            this.cb0t4.Enabled = false;
-            this.cb0t4.Location = new System.Drawing.Point(90, 40);
-            this.cb0t4.Name = "cb0t4";
-            this.cb0t4.Size = new System.Drawing.Size(15, 14);
-            this.cb0t4.TabIndex = 279;
-            this.cb0t4.UseVisualStyleBackColor = true;
-            this.cb0t4.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
+            this.chk0t4.AutoSize = true;
+            this.chk0t4.Enabled = false;
+            this.chk0t4.Location = new System.Drawing.Point(90, 40);
+            this.chk0t4.Name = "chk0t4";
+            this.chk0t4.Size = new System.Drawing.Size(15, 14);
+            this.chk0t4.TabIndex = 279;
+            this.chk0t4.UseVisualStyleBackColor = true;
+            this.chk0t4.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
             // 
-            // cb14t7
+            // chk14t7
             // 
-            this.cb14t7.AutoSize = true;
-            this.cb14t7.Enabled = false;
-            this.cb14t7.Location = new System.Drawing.Point(40, 257);
-            this.cb14t7.Name = "cb14t7";
-            this.cb14t7.Size = new System.Drawing.Size(15, 14);
-            this.cb14t7.TabIndex = 157;
-            this.cb14t7.UseVisualStyleBackColor = true;
-            this.cb14t7.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
+            this.chk14t7.AutoSize = true;
+            this.chk14t7.Enabled = false;
+            this.chk14t7.Location = new System.Drawing.Point(40, 257);
+            this.chk14t7.Name = "chk14t7";
+            this.chk14t7.Size = new System.Drawing.Size(15, 14);
+            this.chk14t7.TabIndex = 157;
+            this.chk14t7.UseVisualStyleBackColor = true;
+            this.chk14t7.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
             // 
-            // cb0t5
+            // chk0t5
             // 
-            this.cb0t5.AutoSize = true;
-            this.cb0t5.Enabled = false;
-            this.cb0t5.Location = new System.Drawing.Point(73, 40);
-            this.cb0t5.Name = "cb0t5";
-            this.cb0t5.Size = new System.Drawing.Size(15, 14);
-            this.cb0t5.TabIndex = 280;
-            this.cb0t5.UseVisualStyleBackColor = true;
-            this.cb0t5.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
+            this.chk0t5.AutoSize = true;
+            this.chk0t5.Enabled = false;
+            this.chk0t5.Location = new System.Drawing.Point(73, 40);
+            this.chk0t5.Name = "chk0t5";
+            this.chk0t5.Size = new System.Drawing.Size(15, 14);
+            this.chk0t5.TabIndex = 280;
+            this.chk0t5.UseVisualStyleBackColor = true;
+            this.chk0t5.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
             // 
-            // cb0t6
+            // chk0t6
             // 
-            this.cb0t6.AutoSize = true;
-            this.cb0t6.Enabled = false;
-            this.cb0t6.Location = new System.Drawing.Point(57, 40);
-            this.cb0t6.Name = "cb0t6";
-            this.cb0t6.Size = new System.Drawing.Size(15, 14);
-            this.cb0t6.TabIndex = 281;
-            this.cb0t6.UseVisualStyleBackColor = true;
-            this.cb0t6.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
+            this.chk0t6.AutoSize = true;
+            this.chk0t6.Enabled = false;
+            this.chk0t6.Location = new System.Drawing.Point(57, 40);
+            this.chk0t6.Name = "chk0t6";
+            this.chk0t6.Size = new System.Drawing.Size(15, 14);
+            this.chk0t6.TabIndex = 281;
+            this.chk0t6.UseVisualStyleBackColor = true;
+            this.chk0t6.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
             // 
-            // cb0t7
+            // chk0t7
             // 
-            this.cb0t7.AutoSize = true;
-            this.cb0t7.Enabled = false;
-            this.cb0t7.Location = new System.Drawing.Point(40, 40);
-            this.cb0t7.Name = "cb0t7";
-            this.cb0t7.Size = new System.Drawing.Size(15, 14);
-            this.cb0t7.TabIndex = 282;
-            this.cb0t7.UseVisualStyleBackColor = true;
-            this.cb0t7.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
+            this.chk0t7.AutoSize = true;
+            this.chk0t7.Enabled = false;
+            this.chk0t7.Location = new System.Drawing.Point(40, 40);
+            this.chk0t7.Name = "chk0t7";
+            this.chk0t7.Size = new System.Drawing.Size(15, 14);
+            this.chk0t7.TabIndex = 282;
+            this.chk0t7.UseVisualStyleBackColor = true;
+            this.chk0t7.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
             // 
             // label109
             // 
@@ -8934,93 +8939,93 @@ namespace DataDecoder
             this.label109.TabIndex = 399;
             this.label109.Text = "13";
             // 
-            // cb12t0
+            // chk12t0
             // 
-            this.cb12t0.AutoSize = true;
-            this.cb12t0.Enabled = false;
-            this.cb12t0.Location = new System.Drawing.Point(153, 223);
-            this.cb12t0.Name = "cb12t0";
-            this.cb12t0.Size = new System.Drawing.Size(15, 14);
-            this.cb12t0.TabIndex = 398;
-            this.cb12t0.UseVisualStyleBackColor = true;
-            this.cb12t0.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
+            this.chk12t0.AutoSize = true;
+            this.chk12t0.Enabled = false;
+            this.chk12t0.Location = new System.Drawing.Point(153, 223);
+            this.chk12t0.Name = "chk12t0";
+            this.chk12t0.Size = new System.Drawing.Size(15, 14);
+            this.chk12t0.TabIndex = 398;
+            this.chk12t0.UseVisualStyleBackColor = true;
+            this.chk12t0.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
             // 
-            // cb12t1
+            // chk12t1
             // 
-            this.cb12t1.AutoSize = true;
-            this.cb12t1.Enabled = false;
-            this.cb12t1.Location = new System.Drawing.Point(137, 223);
-            this.cb12t1.Name = "cb12t1";
-            this.cb12t1.Size = new System.Drawing.Size(15, 14);
-            this.cb12t1.TabIndex = 397;
-            this.cb12t1.UseVisualStyleBackColor = true;
-            this.cb12t1.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
+            this.chk12t1.AutoSize = true;
+            this.chk12t1.Enabled = false;
+            this.chk12t1.Location = new System.Drawing.Point(137, 223);
+            this.chk12t1.Name = "chk12t1";
+            this.chk12t1.Size = new System.Drawing.Size(15, 14);
+            this.chk12t1.TabIndex = 397;
+            this.chk12t1.UseVisualStyleBackColor = true;
+            this.chk12t1.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
             // 
-            // cb12t2
+            // chk12t2
             // 
-            this.cb12t2.AutoSize = true;
-            this.cb12t2.Enabled = false;
-            this.cb12t2.Location = new System.Drawing.Point(121, 223);
-            this.cb12t2.Name = "cb12t2";
-            this.cb12t2.Size = new System.Drawing.Size(15, 14);
-            this.cb12t2.TabIndex = 396;
-            this.cb12t2.UseVisualStyleBackColor = true;
-            this.cb12t2.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
+            this.chk12t2.AutoSize = true;
+            this.chk12t2.Enabled = false;
+            this.chk12t2.Location = new System.Drawing.Point(121, 223);
+            this.chk12t2.Name = "chk12t2";
+            this.chk12t2.Size = new System.Drawing.Size(15, 14);
+            this.chk12t2.TabIndex = 396;
+            this.chk12t2.UseVisualStyleBackColor = true;
+            this.chk12t2.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
             // 
-            // cb12t3
+            // chk12t3
             // 
-            this.cb12t3.AutoSize = true;
-            this.cb12t3.Enabled = false;
-            this.cb12t3.Location = new System.Drawing.Point(105, 223);
-            this.cb12t3.Name = "cb12t3";
-            this.cb12t3.Size = new System.Drawing.Size(15, 14);
-            this.cb12t3.TabIndex = 395;
-            this.cb12t3.UseVisualStyleBackColor = true;
-            this.cb12t3.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
+            this.chk12t3.AutoSize = true;
+            this.chk12t3.Enabled = false;
+            this.chk12t3.Location = new System.Drawing.Point(105, 223);
+            this.chk12t3.Name = "chk12t3";
+            this.chk12t3.Size = new System.Drawing.Size(15, 14);
+            this.chk12t3.TabIndex = 395;
+            this.chk12t3.UseVisualStyleBackColor = true;
+            this.chk12t3.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
             // 
-            // cb12t4
+            // chk12t4
             // 
-            this.cb12t4.AutoSize = true;
-            this.cb12t4.Enabled = false;
-            this.cb12t4.Location = new System.Drawing.Point(89, 223);
-            this.cb12t4.Name = "cb12t4";
-            this.cb12t4.Size = new System.Drawing.Size(15, 14);
-            this.cb12t4.TabIndex = 394;
-            this.cb12t4.UseVisualStyleBackColor = true;
-            this.cb12t4.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
+            this.chk12t4.AutoSize = true;
+            this.chk12t4.Enabled = false;
+            this.chk12t4.Location = new System.Drawing.Point(89, 223);
+            this.chk12t4.Name = "chk12t4";
+            this.chk12t4.Size = new System.Drawing.Size(15, 14);
+            this.chk12t4.TabIndex = 394;
+            this.chk12t4.UseVisualStyleBackColor = true;
+            this.chk12t4.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
             // 
-            // cb12t5
+            // chk12t5
             // 
-            this.cb12t5.AutoSize = true;
-            this.cb12t5.Enabled = false;
-            this.cb12t5.Location = new System.Drawing.Point(73, 223);
-            this.cb12t5.Name = "cb12t5";
-            this.cb12t5.Size = new System.Drawing.Size(15, 14);
-            this.cb12t5.TabIndex = 393;
-            this.cb12t5.UseVisualStyleBackColor = true;
-            this.cb12t5.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
+            this.chk12t5.AutoSize = true;
+            this.chk12t5.Enabled = false;
+            this.chk12t5.Location = new System.Drawing.Point(73, 223);
+            this.chk12t5.Name = "chk12t5";
+            this.chk12t5.Size = new System.Drawing.Size(15, 14);
+            this.chk12t5.TabIndex = 393;
+            this.chk12t5.UseVisualStyleBackColor = true;
+            this.chk12t5.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
             // 
-            // cb12t6
+            // chk12t6
             // 
-            this.cb12t6.AutoSize = true;
-            this.cb12t6.Enabled = false;
-            this.cb12t6.Location = new System.Drawing.Point(57, 223);
-            this.cb12t6.Name = "cb12t6";
-            this.cb12t6.Size = new System.Drawing.Size(15, 14);
-            this.cb12t6.TabIndex = 392;
-            this.cb12t6.UseVisualStyleBackColor = true;
-            this.cb12t6.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
+            this.chk12t6.AutoSize = true;
+            this.chk12t6.Enabled = false;
+            this.chk12t6.Location = new System.Drawing.Point(57, 223);
+            this.chk12t6.Name = "chk12t6";
+            this.chk12t6.Size = new System.Drawing.Size(15, 14);
+            this.chk12t6.TabIndex = 392;
+            this.chk12t6.UseVisualStyleBackColor = true;
+            this.chk12t6.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
             // 
-            // cb12t7
+            // chk12t7
             // 
-            this.cb12t7.AutoSize = true;
-            this.cb12t7.Enabled = false;
-            this.cb12t7.Location = new System.Drawing.Point(40, 223);
-            this.cb12t7.Name = "cb12t7";
-            this.cb12t7.Size = new System.Drawing.Size(15, 14);
-            this.cb12t7.TabIndex = 391;
-            this.cb12t7.UseVisualStyleBackColor = true;
-            this.cb12t7.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
+            this.chk12t7.AutoSize = true;
+            this.chk12t7.Enabled = false;
+            this.chk12t7.Location = new System.Drawing.Point(40, 223);
+            this.chk12t7.Name = "chk12t7";
+            this.chk12t7.Size = new System.Drawing.Size(15, 14);
+            this.chk12t7.TabIndex = 391;
+            this.chk12t7.UseVisualStyleBackColor = true;
+            this.chk12t7.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
             // 
             // label110
             // 
@@ -9032,93 +9037,93 @@ namespace DataDecoder
             this.label110.TabIndex = 390;
             this.label110.Text = "11";
             // 
-            // cb11t0
+            // chk11t0
             // 
-            this.cb11t0.AutoSize = true;
-            this.cb11t0.Enabled = false;
-            this.cb11t0.Location = new System.Drawing.Point(153, 208);
-            this.cb11t0.Name = "cb11t0";
-            this.cb11t0.Size = new System.Drawing.Size(15, 14);
-            this.cb11t0.TabIndex = 389;
-            this.cb11t0.UseVisualStyleBackColor = true;
-            this.cb11t0.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
+            this.chk11t0.AutoSize = true;
+            this.chk11t0.Enabled = false;
+            this.chk11t0.Location = new System.Drawing.Point(153, 208);
+            this.chk11t0.Name = "chk11t0";
+            this.chk11t0.Size = new System.Drawing.Size(15, 14);
+            this.chk11t0.TabIndex = 389;
+            this.chk11t0.UseVisualStyleBackColor = true;
+            this.chk11t0.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
             // 
-            // cb11t1
+            // chk11t1
             // 
-            this.cb11t1.AutoSize = true;
-            this.cb11t1.Enabled = false;
-            this.cb11t1.Location = new System.Drawing.Point(137, 208);
-            this.cb11t1.Name = "cb11t1";
-            this.cb11t1.Size = new System.Drawing.Size(15, 14);
-            this.cb11t1.TabIndex = 388;
-            this.cb11t1.UseVisualStyleBackColor = true;
-            this.cb11t1.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
+            this.chk11t1.AutoSize = true;
+            this.chk11t1.Enabled = false;
+            this.chk11t1.Location = new System.Drawing.Point(137, 208);
+            this.chk11t1.Name = "chk11t1";
+            this.chk11t1.Size = new System.Drawing.Size(15, 14);
+            this.chk11t1.TabIndex = 388;
+            this.chk11t1.UseVisualStyleBackColor = true;
+            this.chk11t1.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
             // 
-            // cb11t2
+            // chk11t2
             // 
-            this.cb11t2.AutoSize = true;
-            this.cb11t2.Enabled = false;
-            this.cb11t2.Location = new System.Drawing.Point(121, 208);
-            this.cb11t2.Name = "cb11t2";
-            this.cb11t2.Size = new System.Drawing.Size(15, 14);
-            this.cb11t2.TabIndex = 387;
-            this.cb11t2.UseVisualStyleBackColor = true;
-            this.cb11t2.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
+            this.chk11t2.AutoSize = true;
+            this.chk11t2.Enabled = false;
+            this.chk11t2.Location = new System.Drawing.Point(121, 208);
+            this.chk11t2.Name = "chk11t2";
+            this.chk11t2.Size = new System.Drawing.Size(15, 14);
+            this.chk11t2.TabIndex = 387;
+            this.chk11t2.UseVisualStyleBackColor = true;
+            this.chk11t2.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
             // 
-            // cb11t3
+            // chk11t3
             // 
-            this.cb11t3.AutoSize = true;
-            this.cb11t3.Enabled = false;
-            this.cb11t3.Location = new System.Drawing.Point(105, 208);
-            this.cb11t3.Name = "cb11t3";
-            this.cb11t3.Size = new System.Drawing.Size(15, 14);
-            this.cb11t3.TabIndex = 386;
-            this.cb11t3.UseVisualStyleBackColor = true;
-            this.cb11t3.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
+            this.chk11t3.AutoSize = true;
+            this.chk11t3.Enabled = false;
+            this.chk11t3.Location = new System.Drawing.Point(105, 208);
+            this.chk11t3.Name = "chk11t3";
+            this.chk11t3.Size = new System.Drawing.Size(15, 14);
+            this.chk11t3.TabIndex = 386;
+            this.chk11t3.UseVisualStyleBackColor = true;
+            this.chk11t3.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
             // 
-            // cb11t4
+            // chk11t4
             // 
-            this.cb11t4.AutoSize = true;
-            this.cb11t4.Enabled = false;
-            this.cb11t4.Location = new System.Drawing.Point(89, 208);
-            this.cb11t4.Name = "cb11t4";
-            this.cb11t4.Size = new System.Drawing.Size(15, 14);
-            this.cb11t4.TabIndex = 385;
-            this.cb11t4.UseVisualStyleBackColor = true;
-            this.cb11t4.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
+            this.chk11t4.AutoSize = true;
+            this.chk11t4.Enabled = false;
+            this.chk11t4.Location = new System.Drawing.Point(89, 208);
+            this.chk11t4.Name = "chk11t4";
+            this.chk11t4.Size = new System.Drawing.Size(15, 14);
+            this.chk11t4.TabIndex = 385;
+            this.chk11t4.UseVisualStyleBackColor = true;
+            this.chk11t4.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
             // 
-            // cb11t5
+            // chk11t5
             // 
-            this.cb11t5.AutoSize = true;
-            this.cb11t5.Enabled = false;
-            this.cb11t5.Location = new System.Drawing.Point(73, 208);
-            this.cb11t5.Name = "cb11t5";
-            this.cb11t5.Size = new System.Drawing.Size(15, 14);
-            this.cb11t5.TabIndex = 384;
-            this.cb11t5.UseVisualStyleBackColor = true;
-            this.cb11t5.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
+            this.chk11t5.AutoSize = true;
+            this.chk11t5.Enabled = false;
+            this.chk11t5.Location = new System.Drawing.Point(73, 208);
+            this.chk11t5.Name = "chk11t5";
+            this.chk11t5.Size = new System.Drawing.Size(15, 14);
+            this.chk11t5.TabIndex = 384;
+            this.chk11t5.UseVisualStyleBackColor = true;
+            this.chk11t5.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
             // 
-            // cb11t6
+            // chk11t6
             // 
-            this.cb11t6.AutoSize = true;
-            this.cb11t6.Enabled = false;
-            this.cb11t6.Location = new System.Drawing.Point(57, 208);
-            this.cb11t6.Name = "cb11t6";
-            this.cb11t6.Size = new System.Drawing.Size(15, 14);
-            this.cb11t6.TabIndex = 383;
-            this.cb11t6.UseVisualStyleBackColor = true;
-            this.cb11t6.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
+            this.chk11t6.AutoSize = true;
+            this.chk11t6.Enabled = false;
+            this.chk11t6.Location = new System.Drawing.Point(57, 208);
+            this.chk11t6.Name = "chk11t6";
+            this.chk11t6.Size = new System.Drawing.Size(15, 14);
+            this.chk11t6.TabIndex = 383;
+            this.chk11t6.UseVisualStyleBackColor = true;
+            this.chk11t6.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
             // 
-            // cb11t7
+            // chk11t7
             // 
-            this.cb11t7.AutoSize = true;
-            this.cb11t7.Enabled = false;
-            this.cb11t7.Location = new System.Drawing.Point(40, 208);
-            this.cb11t7.Name = "cb11t7";
-            this.cb11t7.Size = new System.Drawing.Size(15, 14);
-            this.cb11t7.TabIndex = 382;
-            this.cb11t7.UseVisualStyleBackColor = true;
-            this.cb11t7.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
+            this.chk11t7.AutoSize = true;
+            this.chk11t7.Enabled = false;
+            this.chk11t7.Location = new System.Drawing.Point(40, 208);
+            this.chk11t7.Name = "chk11t7";
+            this.chk11t7.Size = new System.Drawing.Size(15, 14);
+            this.chk11t7.TabIndex = 382;
+            this.chk11t7.UseVisualStyleBackColor = true;
+            this.chk11t7.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
             // 
             // label111
             // 
@@ -9130,93 +9135,93 @@ namespace DataDecoder
             this.label111.TabIndex = 381;
             this.label111.Text = "10";
             // 
-            // cb10t0
+            // chk10t0
             // 
-            this.cb10t0.AutoSize = true;
-            this.cb10t0.Enabled = false;
-            this.cb10t0.Location = new System.Drawing.Point(153, 193);
-            this.cb10t0.Name = "cb10t0";
-            this.cb10t0.Size = new System.Drawing.Size(15, 14);
-            this.cb10t0.TabIndex = 380;
-            this.cb10t0.UseVisualStyleBackColor = true;
-            this.cb10t0.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
+            this.chk10t0.AutoSize = true;
+            this.chk10t0.Enabled = false;
+            this.chk10t0.Location = new System.Drawing.Point(153, 193);
+            this.chk10t0.Name = "chk10t0";
+            this.chk10t0.Size = new System.Drawing.Size(15, 14);
+            this.chk10t0.TabIndex = 380;
+            this.chk10t0.UseVisualStyleBackColor = true;
+            this.chk10t0.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
             // 
-            // cb10t1
+            // chk10t1
             // 
-            this.cb10t1.AutoSize = true;
-            this.cb10t1.Enabled = false;
-            this.cb10t1.Location = new System.Drawing.Point(137, 193);
-            this.cb10t1.Name = "cb10t1";
-            this.cb10t1.Size = new System.Drawing.Size(15, 14);
-            this.cb10t1.TabIndex = 379;
-            this.cb10t1.UseVisualStyleBackColor = true;
-            this.cb10t1.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
+            this.chk10t1.AutoSize = true;
+            this.chk10t1.Enabled = false;
+            this.chk10t1.Location = new System.Drawing.Point(137, 193);
+            this.chk10t1.Name = "chk10t1";
+            this.chk10t1.Size = new System.Drawing.Size(15, 14);
+            this.chk10t1.TabIndex = 379;
+            this.chk10t1.UseVisualStyleBackColor = true;
+            this.chk10t1.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
             // 
-            // cb10t2
+            // chk10t2
             // 
-            this.cb10t2.AutoSize = true;
-            this.cb10t2.Enabled = false;
-            this.cb10t2.Location = new System.Drawing.Point(121, 193);
-            this.cb10t2.Name = "cb10t2";
-            this.cb10t2.Size = new System.Drawing.Size(15, 14);
-            this.cb10t2.TabIndex = 378;
-            this.cb10t2.UseVisualStyleBackColor = true;
-            this.cb10t2.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
+            this.chk10t2.AutoSize = true;
+            this.chk10t2.Enabled = false;
+            this.chk10t2.Location = new System.Drawing.Point(121, 193);
+            this.chk10t2.Name = "chk10t2";
+            this.chk10t2.Size = new System.Drawing.Size(15, 14);
+            this.chk10t2.TabIndex = 378;
+            this.chk10t2.UseVisualStyleBackColor = true;
+            this.chk10t2.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
             // 
-            // cb10t3
+            // chk10t3
             // 
-            this.cb10t3.AutoSize = true;
-            this.cb10t3.Enabled = false;
-            this.cb10t3.Location = new System.Drawing.Point(105, 193);
-            this.cb10t3.Name = "cb10t3";
-            this.cb10t3.Size = new System.Drawing.Size(15, 14);
-            this.cb10t3.TabIndex = 377;
-            this.cb10t3.UseVisualStyleBackColor = true;
-            this.cb10t3.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
+            this.chk10t3.AutoSize = true;
+            this.chk10t3.Enabled = false;
+            this.chk10t3.Location = new System.Drawing.Point(105, 193);
+            this.chk10t3.Name = "chk10t3";
+            this.chk10t3.Size = new System.Drawing.Size(15, 14);
+            this.chk10t3.TabIndex = 377;
+            this.chk10t3.UseVisualStyleBackColor = true;
+            this.chk10t3.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
             // 
-            // cb10t4
+            // chk10t4
             // 
-            this.cb10t4.AutoSize = true;
-            this.cb10t4.Enabled = false;
-            this.cb10t4.Location = new System.Drawing.Point(89, 193);
-            this.cb10t4.Name = "cb10t4";
-            this.cb10t4.Size = new System.Drawing.Size(15, 14);
-            this.cb10t4.TabIndex = 376;
-            this.cb10t4.UseVisualStyleBackColor = true;
-            this.cb10t4.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
+            this.chk10t4.AutoSize = true;
+            this.chk10t4.Enabled = false;
+            this.chk10t4.Location = new System.Drawing.Point(89, 193);
+            this.chk10t4.Name = "chk10t4";
+            this.chk10t4.Size = new System.Drawing.Size(15, 14);
+            this.chk10t4.TabIndex = 376;
+            this.chk10t4.UseVisualStyleBackColor = true;
+            this.chk10t4.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
             // 
-            // cb10t5
+            // chk10t5
             // 
-            this.cb10t5.AutoSize = true;
-            this.cb10t5.Enabled = false;
-            this.cb10t5.Location = new System.Drawing.Point(73, 193);
-            this.cb10t5.Name = "cb10t5";
-            this.cb10t5.Size = new System.Drawing.Size(15, 14);
-            this.cb10t5.TabIndex = 375;
-            this.cb10t5.UseVisualStyleBackColor = true;
-            this.cb10t5.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
+            this.chk10t5.AutoSize = true;
+            this.chk10t5.Enabled = false;
+            this.chk10t5.Location = new System.Drawing.Point(73, 193);
+            this.chk10t5.Name = "chk10t5";
+            this.chk10t5.Size = new System.Drawing.Size(15, 14);
+            this.chk10t5.TabIndex = 375;
+            this.chk10t5.UseVisualStyleBackColor = true;
+            this.chk10t5.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
             // 
-            // cb10t6
+            // chk10t6
             // 
-            this.cb10t6.AutoSize = true;
-            this.cb10t6.Enabled = false;
-            this.cb10t6.Location = new System.Drawing.Point(57, 193);
-            this.cb10t6.Name = "cb10t6";
-            this.cb10t6.Size = new System.Drawing.Size(15, 14);
-            this.cb10t6.TabIndex = 374;
-            this.cb10t6.UseVisualStyleBackColor = true;
-            this.cb10t6.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
+            this.chk10t6.AutoSize = true;
+            this.chk10t6.Enabled = false;
+            this.chk10t6.Location = new System.Drawing.Point(57, 193);
+            this.chk10t6.Name = "chk10t6";
+            this.chk10t6.Size = new System.Drawing.Size(15, 14);
+            this.chk10t6.TabIndex = 374;
+            this.chk10t6.UseVisualStyleBackColor = true;
+            this.chk10t6.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
             // 
-            // cb10t7
+            // chk10t7
             // 
-            this.cb10t7.AutoSize = true;
-            this.cb10t7.Enabled = false;
-            this.cb10t7.Location = new System.Drawing.Point(40, 193);
-            this.cb10t7.Name = "cb10t7";
-            this.cb10t7.Size = new System.Drawing.Size(15, 14);
-            this.cb10t7.TabIndex = 373;
-            this.cb10t7.UseVisualStyleBackColor = true;
-            this.cb10t7.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
+            this.chk10t7.AutoSize = true;
+            this.chk10t7.Enabled = false;
+            this.chk10t7.Location = new System.Drawing.Point(40, 193);
+            this.chk10t7.Name = "chk10t7";
+            this.chk10t7.Size = new System.Drawing.Size(15, 14);
+            this.chk10t7.TabIndex = 373;
+            this.chk10t7.UseVisualStyleBackColor = true;
+            this.chk10t7.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
             // 
             // label112
             // 
@@ -9228,93 +9233,93 @@ namespace DataDecoder
             this.label112.TabIndex = 372;
             this.label112.Text = "9";
             // 
-            // cb9t0
+            // chk9t0
             // 
-            this.cb9t0.AutoSize = true;
-            this.cb9t0.Enabled = false;
-            this.cb9t0.Location = new System.Drawing.Point(153, 178);
-            this.cb9t0.Name = "cb9t0";
-            this.cb9t0.Size = new System.Drawing.Size(15, 14);
-            this.cb9t0.TabIndex = 371;
-            this.cb9t0.UseVisualStyleBackColor = true;
-            this.cb9t0.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
+            this.chk9t0.AutoSize = true;
+            this.chk9t0.Enabled = false;
+            this.chk9t0.Location = new System.Drawing.Point(153, 178);
+            this.chk9t0.Name = "chk9t0";
+            this.chk9t0.Size = new System.Drawing.Size(15, 14);
+            this.chk9t0.TabIndex = 371;
+            this.chk9t0.UseVisualStyleBackColor = true;
+            this.chk9t0.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
             // 
-            // cb9t1
+            // chk9t1
             // 
-            this.cb9t1.AutoSize = true;
-            this.cb9t1.Enabled = false;
-            this.cb9t1.Location = new System.Drawing.Point(137, 178);
-            this.cb9t1.Name = "cb9t1";
-            this.cb9t1.Size = new System.Drawing.Size(15, 14);
-            this.cb9t1.TabIndex = 370;
-            this.cb9t1.UseVisualStyleBackColor = true;
-            this.cb9t1.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
+            this.chk9t1.AutoSize = true;
+            this.chk9t1.Enabled = false;
+            this.chk9t1.Location = new System.Drawing.Point(137, 178);
+            this.chk9t1.Name = "chk9t1";
+            this.chk9t1.Size = new System.Drawing.Size(15, 14);
+            this.chk9t1.TabIndex = 370;
+            this.chk9t1.UseVisualStyleBackColor = true;
+            this.chk9t1.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
             // 
-            // cb9t2
+            // chk9t2
             // 
-            this.cb9t2.AutoSize = true;
-            this.cb9t2.Enabled = false;
-            this.cb9t2.Location = new System.Drawing.Point(121, 178);
-            this.cb9t2.Name = "cb9t2";
-            this.cb9t2.Size = new System.Drawing.Size(15, 14);
-            this.cb9t2.TabIndex = 369;
-            this.cb9t2.UseVisualStyleBackColor = true;
-            this.cb9t2.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
+            this.chk9t2.AutoSize = true;
+            this.chk9t2.Enabled = false;
+            this.chk9t2.Location = new System.Drawing.Point(121, 178);
+            this.chk9t2.Name = "chk9t2";
+            this.chk9t2.Size = new System.Drawing.Size(15, 14);
+            this.chk9t2.TabIndex = 369;
+            this.chk9t2.UseVisualStyleBackColor = true;
+            this.chk9t2.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
             // 
-            // cb9t3
+            // chk9t3
             // 
-            this.cb9t3.AutoSize = true;
-            this.cb9t3.Enabled = false;
-            this.cb9t3.Location = new System.Drawing.Point(105, 178);
-            this.cb9t3.Name = "cb9t3";
-            this.cb9t3.Size = new System.Drawing.Size(15, 14);
-            this.cb9t3.TabIndex = 368;
-            this.cb9t3.UseVisualStyleBackColor = true;
-            this.cb9t3.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
+            this.chk9t3.AutoSize = true;
+            this.chk9t3.Enabled = false;
+            this.chk9t3.Location = new System.Drawing.Point(105, 178);
+            this.chk9t3.Name = "chk9t3";
+            this.chk9t3.Size = new System.Drawing.Size(15, 14);
+            this.chk9t3.TabIndex = 368;
+            this.chk9t3.UseVisualStyleBackColor = true;
+            this.chk9t3.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
             // 
-            // cb9t4
+            // chk9t4
             // 
-            this.cb9t4.AutoSize = true;
-            this.cb9t4.Enabled = false;
-            this.cb9t4.Location = new System.Drawing.Point(89, 178);
-            this.cb9t4.Name = "cb9t4";
-            this.cb9t4.Size = new System.Drawing.Size(15, 14);
-            this.cb9t4.TabIndex = 367;
-            this.cb9t4.UseVisualStyleBackColor = true;
-            this.cb9t4.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
+            this.chk9t4.AutoSize = true;
+            this.chk9t4.Enabled = false;
+            this.chk9t4.Location = new System.Drawing.Point(89, 178);
+            this.chk9t4.Name = "chk9t4";
+            this.chk9t4.Size = new System.Drawing.Size(15, 14);
+            this.chk9t4.TabIndex = 367;
+            this.chk9t4.UseVisualStyleBackColor = true;
+            this.chk9t4.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
             // 
-            // cb9t5
+            // chk9t5
             // 
-            this.cb9t5.AutoSize = true;
-            this.cb9t5.Enabled = false;
-            this.cb9t5.Location = new System.Drawing.Point(73, 178);
-            this.cb9t5.Name = "cb9t5";
-            this.cb9t5.Size = new System.Drawing.Size(15, 14);
-            this.cb9t5.TabIndex = 366;
-            this.cb9t5.UseVisualStyleBackColor = true;
-            this.cb9t5.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
+            this.chk9t5.AutoSize = true;
+            this.chk9t5.Enabled = false;
+            this.chk9t5.Location = new System.Drawing.Point(73, 178);
+            this.chk9t5.Name = "chk9t5";
+            this.chk9t5.Size = new System.Drawing.Size(15, 14);
+            this.chk9t5.TabIndex = 366;
+            this.chk9t5.UseVisualStyleBackColor = true;
+            this.chk9t5.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
             // 
-            // cb9t6
+            // chk9t6
             // 
-            this.cb9t6.AutoSize = true;
-            this.cb9t6.Enabled = false;
-            this.cb9t6.Location = new System.Drawing.Point(57, 178);
-            this.cb9t6.Name = "cb9t6";
-            this.cb9t6.Size = new System.Drawing.Size(15, 14);
-            this.cb9t6.TabIndex = 365;
-            this.cb9t6.UseVisualStyleBackColor = true;
-            this.cb9t6.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
+            this.chk9t6.AutoSize = true;
+            this.chk9t6.Enabled = false;
+            this.chk9t6.Location = new System.Drawing.Point(57, 178);
+            this.chk9t6.Name = "chk9t6";
+            this.chk9t6.Size = new System.Drawing.Size(15, 14);
+            this.chk9t6.TabIndex = 365;
+            this.chk9t6.UseVisualStyleBackColor = true;
+            this.chk9t6.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
             // 
-            // cb9t7
+            // chk9t7
             // 
-            this.cb9t7.AutoSize = true;
-            this.cb9t7.Enabled = false;
-            this.cb9t7.Location = new System.Drawing.Point(40, 178);
-            this.cb9t7.Name = "cb9t7";
-            this.cb9t7.Size = new System.Drawing.Size(15, 14);
-            this.cb9t7.TabIndex = 364;
-            this.cb9t7.UseVisualStyleBackColor = true;
-            this.cb9t7.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
+            this.chk9t7.AutoSize = true;
+            this.chk9t7.Enabled = false;
+            this.chk9t7.Location = new System.Drawing.Point(40, 178);
+            this.chk9t7.Name = "chk9t7";
+            this.chk9t7.Size = new System.Drawing.Size(15, 14);
+            this.chk9t7.TabIndex = 364;
+            this.chk9t7.UseVisualStyleBackColor = true;
+            this.chk9t7.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
             // 
             // label113
             // 
@@ -9326,93 +9331,93 @@ namespace DataDecoder
             this.label113.TabIndex = 363;
             this.label113.Text = "8";
             // 
-            // cb8t0
+            // chk8t0
             // 
-            this.cb8t0.AutoSize = true;
-            this.cb8t0.Enabled = false;
-            this.cb8t0.Location = new System.Drawing.Point(153, 163);
-            this.cb8t0.Name = "cb8t0";
-            this.cb8t0.Size = new System.Drawing.Size(15, 14);
-            this.cb8t0.TabIndex = 362;
-            this.cb8t0.UseVisualStyleBackColor = true;
-            this.cb8t0.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
+            this.chk8t0.AutoSize = true;
+            this.chk8t0.Enabled = false;
+            this.chk8t0.Location = new System.Drawing.Point(153, 163);
+            this.chk8t0.Name = "chk8t0";
+            this.chk8t0.Size = new System.Drawing.Size(15, 14);
+            this.chk8t0.TabIndex = 362;
+            this.chk8t0.UseVisualStyleBackColor = true;
+            this.chk8t0.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
             // 
-            // cb8t1
+            // chk8t1
             // 
-            this.cb8t1.AutoSize = true;
-            this.cb8t1.Enabled = false;
-            this.cb8t1.Location = new System.Drawing.Point(137, 163);
-            this.cb8t1.Name = "cb8t1";
-            this.cb8t1.Size = new System.Drawing.Size(15, 14);
-            this.cb8t1.TabIndex = 361;
-            this.cb8t1.UseVisualStyleBackColor = true;
-            this.cb8t1.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
+            this.chk8t1.AutoSize = true;
+            this.chk8t1.Enabled = false;
+            this.chk8t1.Location = new System.Drawing.Point(137, 163);
+            this.chk8t1.Name = "chk8t1";
+            this.chk8t1.Size = new System.Drawing.Size(15, 14);
+            this.chk8t1.TabIndex = 361;
+            this.chk8t1.UseVisualStyleBackColor = true;
+            this.chk8t1.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
             // 
-            // cb8t2
+            // chk8t2
             // 
-            this.cb8t2.AutoSize = true;
-            this.cb8t2.Enabled = false;
-            this.cb8t2.Location = new System.Drawing.Point(121, 163);
-            this.cb8t2.Name = "cb8t2";
-            this.cb8t2.Size = new System.Drawing.Size(15, 14);
-            this.cb8t2.TabIndex = 360;
-            this.cb8t2.UseVisualStyleBackColor = true;
-            this.cb8t2.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
+            this.chk8t2.AutoSize = true;
+            this.chk8t2.Enabled = false;
+            this.chk8t2.Location = new System.Drawing.Point(121, 163);
+            this.chk8t2.Name = "chk8t2";
+            this.chk8t2.Size = new System.Drawing.Size(15, 14);
+            this.chk8t2.TabIndex = 360;
+            this.chk8t2.UseVisualStyleBackColor = true;
+            this.chk8t2.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
             // 
-            // cb8t3
+            // chk8t3
             // 
-            this.cb8t3.AutoSize = true;
-            this.cb8t3.Enabled = false;
-            this.cb8t3.Location = new System.Drawing.Point(105, 163);
-            this.cb8t3.Name = "cb8t3";
-            this.cb8t3.Size = new System.Drawing.Size(15, 14);
-            this.cb8t3.TabIndex = 359;
-            this.cb8t3.UseVisualStyleBackColor = true;
-            this.cb8t3.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
+            this.chk8t3.AutoSize = true;
+            this.chk8t3.Enabled = false;
+            this.chk8t3.Location = new System.Drawing.Point(105, 163);
+            this.chk8t3.Name = "chk8t3";
+            this.chk8t3.Size = new System.Drawing.Size(15, 14);
+            this.chk8t3.TabIndex = 359;
+            this.chk8t3.UseVisualStyleBackColor = true;
+            this.chk8t3.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
             // 
-            // cb8t4
+            // chk8t4
             // 
-            this.cb8t4.AutoSize = true;
-            this.cb8t4.Enabled = false;
-            this.cb8t4.Location = new System.Drawing.Point(89, 163);
-            this.cb8t4.Name = "cb8t4";
-            this.cb8t4.Size = new System.Drawing.Size(15, 14);
-            this.cb8t4.TabIndex = 358;
-            this.cb8t4.UseVisualStyleBackColor = true;
-            this.cb8t4.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
+            this.chk8t4.AutoSize = true;
+            this.chk8t4.Enabled = false;
+            this.chk8t4.Location = new System.Drawing.Point(89, 163);
+            this.chk8t4.Name = "chk8t4";
+            this.chk8t4.Size = new System.Drawing.Size(15, 14);
+            this.chk8t4.TabIndex = 358;
+            this.chk8t4.UseVisualStyleBackColor = true;
+            this.chk8t4.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
             // 
-            // cb8t5
+            // chk8t5
             // 
-            this.cb8t5.AutoSize = true;
-            this.cb8t5.Enabled = false;
-            this.cb8t5.Location = new System.Drawing.Point(73, 163);
-            this.cb8t5.Name = "cb8t5";
-            this.cb8t5.Size = new System.Drawing.Size(15, 14);
-            this.cb8t5.TabIndex = 357;
-            this.cb8t5.UseVisualStyleBackColor = true;
-            this.cb8t5.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
+            this.chk8t5.AutoSize = true;
+            this.chk8t5.Enabled = false;
+            this.chk8t5.Location = new System.Drawing.Point(73, 163);
+            this.chk8t5.Name = "chk8t5";
+            this.chk8t5.Size = new System.Drawing.Size(15, 14);
+            this.chk8t5.TabIndex = 357;
+            this.chk8t5.UseVisualStyleBackColor = true;
+            this.chk8t5.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
             // 
-            // cb8t6
+            // chk8t6
             // 
-            this.cb8t6.AutoSize = true;
-            this.cb8t6.Enabled = false;
-            this.cb8t6.Location = new System.Drawing.Point(57, 163);
-            this.cb8t6.Name = "cb8t6";
-            this.cb8t6.Size = new System.Drawing.Size(15, 14);
-            this.cb8t6.TabIndex = 356;
-            this.cb8t6.UseVisualStyleBackColor = true;
-            this.cb8t6.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
+            this.chk8t6.AutoSize = true;
+            this.chk8t6.Enabled = false;
+            this.chk8t6.Location = new System.Drawing.Point(57, 163);
+            this.chk8t6.Name = "chk8t6";
+            this.chk8t6.Size = new System.Drawing.Size(15, 14);
+            this.chk8t6.TabIndex = 356;
+            this.chk8t6.UseVisualStyleBackColor = true;
+            this.chk8t6.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
             // 
-            // cb8t7
+            // chk8t7
             // 
-            this.cb8t7.AutoSize = true;
-            this.cb8t7.Enabled = false;
-            this.cb8t7.Location = new System.Drawing.Point(40, 163);
-            this.cb8t7.Name = "cb8t7";
-            this.cb8t7.Size = new System.Drawing.Size(15, 14);
-            this.cb8t7.TabIndex = 355;
-            this.cb8t7.UseVisualStyleBackColor = true;
-            this.cb8t7.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
+            this.chk8t7.AutoSize = true;
+            this.chk8t7.Enabled = false;
+            this.chk8t7.Location = new System.Drawing.Point(40, 163);
+            this.chk8t7.Name = "chk8t7";
+            this.chk8t7.Size = new System.Drawing.Size(15, 14);
+            this.chk8t7.TabIndex = 355;
+            this.chk8t7.UseVisualStyleBackColor = true;
+            this.chk8t7.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
             // 
             // label114
             // 
@@ -9424,93 +9429,93 @@ namespace DataDecoder
             this.label114.TabIndex = 354;
             this.label114.Text = "7";
             // 
-            // cb7t0
+            // chk7t0
             // 
-            this.cb7t0.AutoSize = true;
-            this.cb7t0.Enabled = false;
-            this.cb7t0.Location = new System.Drawing.Point(153, 148);
-            this.cb7t0.Name = "cb7t0";
-            this.cb7t0.Size = new System.Drawing.Size(15, 14);
-            this.cb7t0.TabIndex = 353;
-            this.cb7t0.UseVisualStyleBackColor = true;
-            this.cb7t0.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
+            this.chk7t0.AutoSize = true;
+            this.chk7t0.Enabled = false;
+            this.chk7t0.Location = new System.Drawing.Point(153, 148);
+            this.chk7t0.Name = "chk7t0";
+            this.chk7t0.Size = new System.Drawing.Size(15, 14);
+            this.chk7t0.TabIndex = 353;
+            this.chk7t0.UseVisualStyleBackColor = true;
+            this.chk7t0.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
             // 
-            // cb7t1
+            // chk7t1
             // 
-            this.cb7t1.AutoSize = true;
-            this.cb7t1.Enabled = false;
-            this.cb7t1.Location = new System.Drawing.Point(137, 148);
-            this.cb7t1.Name = "cb7t1";
-            this.cb7t1.Size = new System.Drawing.Size(15, 14);
-            this.cb7t1.TabIndex = 352;
-            this.cb7t1.UseVisualStyleBackColor = true;
-            this.cb7t1.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
+            this.chk7t1.AutoSize = true;
+            this.chk7t1.Enabled = false;
+            this.chk7t1.Location = new System.Drawing.Point(137, 148);
+            this.chk7t1.Name = "chk7t1";
+            this.chk7t1.Size = new System.Drawing.Size(15, 14);
+            this.chk7t1.TabIndex = 352;
+            this.chk7t1.UseVisualStyleBackColor = true;
+            this.chk7t1.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
             // 
-            // cb7t2
+            // chk7t2
             // 
-            this.cb7t2.AutoSize = true;
-            this.cb7t2.Enabled = false;
-            this.cb7t2.Location = new System.Drawing.Point(121, 148);
-            this.cb7t2.Name = "cb7t2";
-            this.cb7t2.Size = new System.Drawing.Size(15, 14);
-            this.cb7t2.TabIndex = 351;
-            this.cb7t2.UseVisualStyleBackColor = true;
-            this.cb7t2.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
+            this.chk7t2.AutoSize = true;
+            this.chk7t2.Enabled = false;
+            this.chk7t2.Location = new System.Drawing.Point(121, 148);
+            this.chk7t2.Name = "chk7t2";
+            this.chk7t2.Size = new System.Drawing.Size(15, 14);
+            this.chk7t2.TabIndex = 351;
+            this.chk7t2.UseVisualStyleBackColor = true;
+            this.chk7t2.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
             // 
-            // cb7t3
+            // chk7t3
             // 
-            this.cb7t3.AutoSize = true;
-            this.cb7t3.Enabled = false;
-            this.cb7t3.Location = new System.Drawing.Point(105, 148);
-            this.cb7t3.Name = "cb7t3";
-            this.cb7t3.Size = new System.Drawing.Size(15, 14);
-            this.cb7t3.TabIndex = 350;
-            this.cb7t3.UseVisualStyleBackColor = true;
-            this.cb7t3.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
+            this.chk7t3.AutoSize = true;
+            this.chk7t3.Enabled = false;
+            this.chk7t3.Location = new System.Drawing.Point(105, 148);
+            this.chk7t3.Name = "chk7t3";
+            this.chk7t3.Size = new System.Drawing.Size(15, 14);
+            this.chk7t3.TabIndex = 350;
+            this.chk7t3.UseVisualStyleBackColor = true;
+            this.chk7t3.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
             // 
-            // cb7t4
+            // chk7t4
             // 
-            this.cb7t4.AutoSize = true;
-            this.cb7t4.Enabled = false;
-            this.cb7t4.Location = new System.Drawing.Point(89, 148);
-            this.cb7t4.Name = "cb7t4";
-            this.cb7t4.Size = new System.Drawing.Size(15, 14);
-            this.cb7t4.TabIndex = 349;
-            this.cb7t4.UseVisualStyleBackColor = true;
-            this.cb7t4.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
+            this.chk7t4.AutoSize = true;
+            this.chk7t4.Enabled = false;
+            this.chk7t4.Location = new System.Drawing.Point(89, 148);
+            this.chk7t4.Name = "chk7t4";
+            this.chk7t4.Size = new System.Drawing.Size(15, 14);
+            this.chk7t4.TabIndex = 349;
+            this.chk7t4.UseVisualStyleBackColor = true;
+            this.chk7t4.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
             // 
-            // cb7t5
+            // chk7t5
             // 
-            this.cb7t5.AutoSize = true;
-            this.cb7t5.Enabled = false;
-            this.cb7t5.Location = new System.Drawing.Point(73, 148);
-            this.cb7t5.Name = "cb7t5";
-            this.cb7t5.Size = new System.Drawing.Size(15, 14);
-            this.cb7t5.TabIndex = 348;
-            this.cb7t5.UseVisualStyleBackColor = true;
-            this.cb7t5.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
+            this.chk7t5.AutoSize = true;
+            this.chk7t5.Enabled = false;
+            this.chk7t5.Location = new System.Drawing.Point(73, 148);
+            this.chk7t5.Name = "chk7t5";
+            this.chk7t5.Size = new System.Drawing.Size(15, 14);
+            this.chk7t5.TabIndex = 348;
+            this.chk7t5.UseVisualStyleBackColor = true;
+            this.chk7t5.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
             // 
-            // cb7t6
+            // chk7t6
             // 
-            this.cb7t6.AutoSize = true;
-            this.cb7t6.Enabled = false;
-            this.cb7t6.Location = new System.Drawing.Point(57, 148);
-            this.cb7t6.Name = "cb7t6";
-            this.cb7t6.Size = new System.Drawing.Size(15, 14);
-            this.cb7t6.TabIndex = 347;
-            this.cb7t6.UseVisualStyleBackColor = true;
-            this.cb7t6.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
+            this.chk7t6.AutoSize = true;
+            this.chk7t6.Enabled = false;
+            this.chk7t6.Location = new System.Drawing.Point(57, 148);
+            this.chk7t6.Name = "chk7t6";
+            this.chk7t6.Size = new System.Drawing.Size(15, 14);
+            this.chk7t6.TabIndex = 347;
+            this.chk7t6.UseVisualStyleBackColor = true;
+            this.chk7t6.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
             // 
-            // cb7t7
+            // chk7t7
             // 
-            this.cb7t7.AutoSize = true;
-            this.cb7t7.Enabled = false;
-            this.cb7t7.Location = new System.Drawing.Point(40, 148);
-            this.cb7t7.Name = "cb7t7";
-            this.cb7t7.Size = new System.Drawing.Size(15, 14);
-            this.cb7t7.TabIndex = 346;
-            this.cb7t7.UseVisualStyleBackColor = true;
-            this.cb7t7.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
+            this.chk7t7.AutoSize = true;
+            this.chk7t7.Enabled = false;
+            this.chk7t7.Location = new System.Drawing.Point(40, 148);
+            this.chk7t7.Name = "chk7t7";
+            this.chk7t7.Size = new System.Drawing.Size(15, 14);
+            this.chk7t7.TabIndex = 346;
+            this.chk7t7.UseVisualStyleBackColor = true;
+            this.chk7t7.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
             // 
             // label115
             // 
@@ -9522,93 +9527,93 @@ namespace DataDecoder
             this.label115.TabIndex = 345;
             this.label115.Text = "6";
             // 
-            // cb6t0
+            // chk6t0
             // 
-            this.cb6t0.AutoSize = true;
-            this.cb6t0.Enabled = false;
-            this.cb6t0.Location = new System.Drawing.Point(153, 133);
-            this.cb6t0.Name = "cb6t0";
-            this.cb6t0.Size = new System.Drawing.Size(15, 14);
-            this.cb6t0.TabIndex = 344;
-            this.cb6t0.UseVisualStyleBackColor = true;
-            this.cb6t0.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
+            this.chk6t0.AutoSize = true;
+            this.chk6t0.Enabled = false;
+            this.chk6t0.Location = new System.Drawing.Point(153, 133);
+            this.chk6t0.Name = "chk6t0";
+            this.chk6t0.Size = new System.Drawing.Size(15, 14);
+            this.chk6t0.TabIndex = 344;
+            this.chk6t0.UseVisualStyleBackColor = true;
+            this.chk6t0.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
             // 
-            // cb6t1
+            // chk6t1
             // 
-            this.cb6t1.AutoSize = true;
-            this.cb6t1.Enabled = false;
-            this.cb6t1.Location = new System.Drawing.Point(137, 133);
-            this.cb6t1.Name = "cb6t1";
-            this.cb6t1.Size = new System.Drawing.Size(15, 14);
-            this.cb6t1.TabIndex = 343;
-            this.cb6t1.UseVisualStyleBackColor = true;
-            this.cb6t1.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
+            this.chk6t1.AutoSize = true;
+            this.chk6t1.Enabled = false;
+            this.chk6t1.Location = new System.Drawing.Point(137, 133);
+            this.chk6t1.Name = "chk6t1";
+            this.chk6t1.Size = new System.Drawing.Size(15, 14);
+            this.chk6t1.TabIndex = 343;
+            this.chk6t1.UseVisualStyleBackColor = true;
+            this.chk6t1.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
             // 
-            // cb6t2
+            // chk6t2
             // 
-            this.cb6t2.AutoSize = true;
-            this.cb6t2.Enabled = false;
-            this.cb6t2.Location = new System.Drawing.Point(121, 133);
-            this.cb6t2.Name = "cb6t2";
-            this.cb6t2.Size = new System.Drawing.Size(15, 14);
-            this.cb6t2.TabIndex = 342;
-            this.cb6t2.UseVisualStyleBackColor = true;
-            this.cb6t2.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
+            this.chk6t2.AutoSize = true;
+            this.chk6t2.Enabled = false;
+            this.chk6t2.Location = new System.Drawing.Point(121, 133);
+            this.chk6t2.Name = "chk6t2";
+            this.chk6t2.Size = new System.Drawing.Size(15, 14);
+            this.chk6t2.TabIndex = 342;
+            this.chk6t2.UseVisualStyleBackColor = true;
+            this.chk6t2.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
             // 
-            // cb6t3
+            // chk6t3
             // 
-            this.cb6t3.AutoSize = true;
-            this.cb6t3.Enabled = false;
-            this.cb6t3.Location = new System.Drawing.Point(105, 133);
-            this.cb6t3.Name = "cb6t3";
-            this.cb6t3.Size = new System.Drawing.Size(15, 14);
-            this.cb6t3.TabIndex = 341;
-            this.cb6t3.UseVisualStyleBackColor = true;
-            this.cb6t3.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
+            this.chk6t3.AutoSize = true;
+            this.chk6t3.Enabled = false;
+            this.chk6t3.Location = new System.Drawing.Point(105, 133);
+            this.chk6t3.Name = "chk6t3";
+            this.chk6t3.Size = new System.Drawing.Size(15, 14);
+            this.chk6t3.TabIndex = 341;
+            this.chk6t3.UseVisualStyleBackColor = true;
+            this.chk6t3.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
             // 
-            // cb6t4
+            // chk6t4
             // 
-            this.cb6t4.AutoSize = true;
-            this.cb6t4.Enabled = false;
-            this.cb6t4.Location = new System.Drawing.Point(89, 133);
-            this.cb6t4.Name = "cb6t4";
-            this.cb6t4.Size = new System.Drawing.Size(15, 14);
-            this.cb6t4.TabIndex = 340;
-            this.cb6t4.UseVisualStyleBackColor = true;
-            this.cb6t4.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
+            this.chk6t4.AutoSize = true;
+            this.chk6t4.Enabled = false;
+            this.chk6t4.Location = new System.Drawing.Point(89, 133);
+            this.chk6t4.Name = "chk6t4";
+            this.chk6t4.Size = new System.Drawing.Size(15, 14);
+            this.chk6t4.TabIndex = 340;
+            this.chk6t4.UseVisualStyleBackColor = true;
+            this.chk6t4.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
             // 
-            // cb6t5
+            // chk6t5
             // 
-            this.cb6t5.AutoSize = true;
-            this.cb6t5.Enabled = false;
-            this.cb6t5.Location = new System.Drawing.Point(73, 133);
-            this.cb6t5.Name = "cb6t5";
-            this.cb6t5.Size = new System.Drawing.Size(15, 14);
-            this.cb6t5.TabIndex = 339;
-            this.cb6t5.UseVisualStyleBackColor = true;
-            this.cb6t5.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
+            this.chk6t5.AutoSize = true;
+            this.chk6t5.Enabled = false;
+            this.chk6t5.Location = new System.Drawing.Point(73, 133);
+            this.chk6t5.Name = "chk6t5";
+            this.chk6t5.Size = new System.Drawing.Size(15, 14);
+            this.chk6t5.TabIndex = 339;
+            this.chk6t5.UseVisualStyleBackColor = true;
+            this.chk6t5.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
             // 
-            // cb6t6
+            // chk6t6
             // 
-            this.cb6t6.AutoSize = true;
-            this.cb6t6.Enabled = false;
-            this.cb6t6.Location = new System.Drawing.Point(57, 133);
-            this.cb6t6.Name = "cb6t6";
-            this.cb6t6.Size = new System.Drawing.Size(15, 14);
-            this.cb6t6.TabIndex = 338;
-            this.cb6t6.UseVisualStyleBackColor = true;
-            this.cb6t6.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
+            this.chk6t6.AutoSize = true;
+            this.chk6t6.Enabled = false;
+            this.chk6t6.Location = new System.Drawing.Point(57, 133);
+            this.chk6t6.Name = "chk6t6";
+            this.chk6t6.Size = new System.Drawing.Size(15, 14);
+            this.chk6t6.TabIndex = 338;
+            this.chk6t6.UseVisualStyleBackColor = true;
+            this.chk6t6.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
             // 
-            // cb6t7
+            // chk6t7
             // 
-            this.cb6t7.AutoSize = true;
-            this.cb6t7.Enabled = false;
-            this.cb6t7.Location = new System.Drawing.Point(40, 133);
-            this.cb6t7.Name = "cb6t7";
-            this.cb6t7.Size = new System.Drawing.Size(15, 14);
-            this.cb6t7.TabIndex = 337;
-            this.cb6t7.UseVisualStyleBackColor = true;
-            this.cb6t7.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
+            this.chk6t7.AutoSize = true;
+            this.chk6t7.Enabled = false;
+            this.chk6t7.Location = new System.Drawing.Point(40, 133);
+            this.chk6t7.Name = "chk6t7";
+            this.chk6t7.Size = new System.Drawing.Size(15, 14);
+            this.chk6t7.TabIndex = 337;
+            this.chk6t7.UseVisualStyleBackColor = true;
+            this.chk6t7.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
             // 
             // label116
             // 
@@ -9620,93 +9625,93 @@ namespace DataDecoder
             this.label116.TabIndex = 336;
             this.label116.Text = "5";
             // 
-            // cb5t0
+            // chk5t0
             // 
-            this.cb5t0.AutoSize = true;
-            this.cb5t0.Enabled = false;
-            this.cb5t0.Location = new System.Drawing.Point(153, 118);
-            this.cb5t0.Name = "cb5t0";
-            this.cb5t0.Size = new System.Drawing.Size(15, 14);
-            this.cb5t0.TabIndex = 335;
-            this.cb5t0.UseVisualStyleBackColor = true;
-            this.cb5t0.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
+            this.chk5t0.AutoSize = true;
+            this.chk5t0.Enabled = false;
+            this.chk5t0.Location = new System.Drawing.Point(153, 118);
+            this.chk5t0.Name = "chk5t0";
+            this.chk5t0.Size = new System.Drawing.Size(15, 14);
+            this.chk5t0.TabIndex = 335;
+            this.chk5t0.UseVisualStyleBackColor = true;
+            this.chk5t0.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
             // 
-            // cb5t1
+            // chk5t1
             // 
-            this.cb5t1.AutoSize = true;
-            this.cb5t1.Enabled = false;
-            this.cb5t1.Location = new System.Drawing.Point(137, 118);
-            this.cb5t1.Name = "cb5t1";
-            this.cb5t1.Size = new System.Drawing.Size(15, 14);
-            this.cb5t1.TabIndex = 334;
-            this.cb5t1.UseVisualStyleBackColor = true;
-            this.cb5t1.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
+            this.chk5t1.AutoSize = true;
+            this.chk5t1.Enabled = false;
+            this.chk5t1.Location = new System.Drawing.Point(137, 118);
+            this.chk5t1.Name = "chk5t1";
+            this.chk5t1.Size = new System.Drawing.Size(15, 14);
+            this.chk5t1.TabIndex = 334;
+            this.chk5t1.UseVisualStyleBackColor = true;
+            this.chk5t1.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
             // 
-            // cb5t2
+            // chk5t2
             // 
-            this.cb5t2.AutoSize = true;
-            this.cb5t2.Enabled = false;
-            this.cb5t2.Location = new System.Drawing.Point(121, 118);
-            this.cb5t2.Name = "cb5t2";
-            this.cb5t2.Size = new System.Drawing.Size(15, 14);
-            this.cb5t2.TabIndex = 333;
-            this.cb5t2.UseVisualStyleBackColor = true;
-            this.cb5t2.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
+            this.chk5t2.AutoSize = true;
+            this.chk5t2.Enabled = false;
+            this.chk5t2.Location = new System.Drawing.Point(121, 118);
+            this.chk5t2.Name = "chk5t2";
+            this.chk5t2.Size = new System.Drawing.Size(15, 14);
+            this.chk5t2.TabIndex = 333;
+            this.chk5t2.UseVisualStyleBackColor = true;
+            this.chk5t2.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
             // 
-            // cb5t3
+            // chk5t3
             // 
-            this.cb5t3.AutoSize = true;
-            this.cb5t3.Enabled = false;
-            this.cb5t3.Location = new System.Drawing.Point(105, 118);
-            this.cb5t3.Name = "cb5t3";
-            this.cb5t3.Size = new System.Drawing.Size(15, 14);
-            this.cb5t3.TabIndex = 332;
-            this.cb5t3.UseVisualStyleBackColor = true;
-            this.cb5t3.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
+            this.chk5t3.AutoSize = true;
+            this.chk5t3.Enabled = false;
+            this.chk5t3.Location = new System.Drawing.Point(105, 118);
+            this.chk5t3.Name = "chk5t3";
+            this.chk5t3.Size = new System.Drawing.Size(15, 14);
+            this.chk5t3.TabIndex = 332;
+            this.chk5t3.UseVisualStyleBackColor = true;
+            this.chk5t3.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
             // 
-            // cb5t4
+            // chk5t4
             // 
-            this.cb5t4.AutoSize = true;
-            this.cb5t4.Enabled = false;
-            this.cb5t4.Location = new System.Drawing.Point(89, 118);
-            this.cb5t4.Name = "cb5t4";
-            this.cb5t4.Size = new System.Drawing.Size(15, 14);
-            this.cb5t4.TabIndex = 331;
-            this.cb5t4.UseVisualStyleBackColor = true;
-            this.cb5t4.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
+            this.chk5t4.AutoSize = true;
+            this.chk5t4.Enabled = false;
+            this.chk5t4.Location = new System.Drawing.Point(89, 118);
+            this.chk5t4.Name = "chk5t4";
+            this.chk5t4.Size = new System.Drawing.Size(15, 14);
+            this.chk5t4.TabIndex = 331;
+            this.chk5t4.UseVisualStyleBackColor = true;
+            this.chk5t4.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
             // 
-            // cb5t5
+            // chk5t5
             // 
-            this.cb5t5.AutoSize = true;
-            this.cb5t5.Enabled = false;
-            this.cb5t5.Location = new System.Drawing.Point(73, 118);
-            this.cb5t5.Name = "cb5t5";
-            this.cb5t5.Size = new System.Drawing.Size(15, 14);
-            this.cb5t5.TabIndex = 330;
-            this.cb5t5.UseVisualStyleBackColor = true;
-            this.cb5t5.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
+            this.chk5t5.AutoSize = true;
+            this.chk5t5.Enabled = false;
+            this.chk5t5.Location = new System.Drawing.Point(73, 118);
+            this.chk5t5.Name = "chk5t5";
+            this.chk5t5.Size = new System.Drawing.Size(15, 14);
+            this.chk5t5.TabIndex = 330;
+            this.chk5t5.UseVisualStyleBackColor = true;
+            this.chk5t5.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
             // 
-            // cb5t6
+            // chk5t6
             // 
-            this.cb5t6.AutoSize = true;
-            this.cb5t6.Enabled = false;
-            this.cb5t6.Location = new System.Drawing.Point(57, 118);
-            this.cb5t6.Name = "cb5t6";
-            this.cb5t6.Size = new System.Drawing.Size(15, 14);
-            this.cb5t6.TabIndex = 329;
-            this.cb5t6.UseVisualStyleBackColor = true;
-            this.cb5t6.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
+            this.chk5t6.AutoSize = true;
+            this.chk5t6.Enabled = false;
+            this.chk5t6.Location = new System.Drawing.Point(57, 118);
+            this.chk5t6.Name = "chk5t6";
+            this.chk5t6.Size = new System.Drawing.Size(15, 14);
+            this.chk5t6.TabIndex = 329;
+            this.chk5t6.UseVisualStyleBackColor = true;
+            this.chk5t6.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
             // 
-            // cb5t7
+            // chk5t7
             // 
-            this.cb5t7.AutoSize = true;
-            this.cb5t7.Enabled = false;
-            this.cb5t7.Location = new System.Drawing.Point(40, 118);
-            this.cb5t7.Name = "cb5t7";
-            this.cb5t7.Size = new System.Drawing.Size(15, 14);
-            this.cb5t7.TabIndex = 328;
-            this.cb5t7.UseVisualStyleBackColor = true;
-            this.cb5t7.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
+            this.chk5t7.AutoSize = true;
+            this.chk5t7.Enabled = false;
+            this.chk5t7.Location = new System.Drawing.Point(40, 118);
+            this.chk5t7.Name = "chk5t7";
+            this.chk5t7.Size = new System.Drawing.Size(15, 14);
+            this.chk5t7.TabIndex = 328;
+            this.chk5t7.UseVisualStyleBackColor = true;
+            this.chk5t7.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
             // 
             // label117
             // 
@@ -9718,93 +9723,93 @@ namespace DataDecoder
             this.label117.TabIndex = 327;
             this.label117.Text = "4";
             // 
-            // cb4t0
+            // chk4t0
             // 
-            this.cb4t0.AutoSize = true;
-            this.cb4t0.Enabled = false;
-            this.cb4t0.Location = new System.Drawing.Point(153, 103);
-            this.cb4t0.Name = "cb4t0";
-            this.cb4t0.Size = new System.Drawing.Size(15, 14);
-            this.cb4t0.TabIndex = 326;
-            this.cb4t0.UseVisualStyleBackColor = true;
-            this.cb4t0.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
+            this.chk4t0.AutoSize = true;
+            this.chk4t0.Enabled = false;
+            this.chk4t0.Location = new System.Drawing.Point(153, 103);
+            this.chk4t0.Name = "chk4t0";
+            this.chk4t0.Size = new System.Drawing.Size(15, 14);
+            this.chk4t0.TabIndex = 326;
+            this.chk4t0.UseVisualStyleBackColor = true;
+            this.chk4t0.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
             // 
-            // cb4t1
+            // chk4t1
             // 
-            this.cb4t1.AutoSize = true;
-            this.cb4t1.Enabled = false;
-            this.cb4t1.Location = new System.Drawing.Point(137, 103);
-            this.cb4t1.Name = "cb4t1";
-            this.cb4t1.Size = new System.Drawing.Size(15, 14);
-            this.cb4t1.TabIndex = 325;
-            this.cb4t1.UseVisualStyleBackColor = true;
-            this.cb4t1.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
+            this.chk4t1.AutoSize = true;
+            this.chk4t1.Enabled = false;
+            this.chk4t1.Location = new System.Drawing.Point(137, 103);
+            this.chk4t1.Name = "chk4t1";
+            this.chk4t1.Size = new System.Drawing.Size(15, 14);
+            this.chk4t1.TabIndex = 325;
+            this.chk4t1.UseVisualStyleBackColor = true;
+            this.chk4t1.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
             // 
-            // cb4t2
+            // chk4t2
             // 
-            this.cb4t2.AutoSize = true;
-            this.cb4t2.Enabled = false;
-            this.cb4t2.Location = new System.Drawing.Point(121, 103);
-            this.cb4t2.Name = "cb4t2";
-            this.cb4t2.Size = new System.Drawing.Size(15, 14);
-            this.cb4t2.TabIndex = 324;
-            this.cb4t2.UseVisualStyleBackColor = true;
-            this.cb4t2.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
+            this.chk4t2.AutoSize = true;
+            this.chk4t2.Enabled = false;
+            this.chk4t2.Location = new System.Drawing.Point(121, 103);
+            this.chk4t2.Name = "chk4t2";
+            this.chk4t2.Size = new System.Drawing.Size(15, 14);
+            this.chk4t2.TabIndex = 324;
+            this.chk4t2.UseVisualStyleBackColor = true;
+            this.chk4t2.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
             // 
-            // cb4t3
+            // chk4t3
             // 
-            this.cb4t3.AutoSize = true;
-            this.cb4t3.Enabled = false;
-            this.cb4t3.Location = new System.Drawing.Point(105, 103);
-            this.cb4t3.Name = "cb4t3";
-            this.cb4t3.Size = new System.Drawing.Size(15, 14);
-            this.cb4t3.TabIndex = 323;
-            this.cb4t3.UseVisualStyleBackColor = true;
-            this.cb4t3.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
+            this.chk4t3.AutoSize = true;
+            this.chk4t3.Enabled = false;
+            this.chk4t3.Location = new System.Drawing.Point(105, 103);
+            this.chk4t3.Name = "chk4t3";
+            this.chk4t3.Size = new System.Drawing.Size(15, 14);
+            this.chk4t3.TabIndex = 323;
+            this.chk4t3.UseVisualStyleBackColor = true;
+            this.chk4t3.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
             // 
-            // cb4t4
+            // chk4t4
             // 
-            this.cb4t4.AutoSize = true;
-            this.cb4t4.Enabled = false;
-            this.cb4t4.Location = new System.Drawing.Point(89, 103);
-            this.cb4t4.Name = "cb4t4";
-            this.cb4t4.Size = new System.Drawing.Size(15, 14);
-            this.cb4t4.TabIndex = 322;
-            this.cb4t4.UseVisualStyleBackColor = true;
-            this.cb4t4.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
+            this.chk4t4.AutoSize = true;
+            this.chk4t4.Enabled = false;
+            this.chk4t4.Location = new System.Drawing.Point(89, 103);
+            this.chk4t4.Name = "chk4t4";
+            this.chk4t4.Size = new System.Drawing.Size(15, 14);
+            this.chk4t4.TabIndex = 322;
+            this.chk4t4.UseVisualStyleBackColor = true;
+            this.chk4t4.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
             // 
-            // cb4t5
+            // chk4t5
             // 
-            this.cb4t5.AutoSize = true;
-            this.cb4t5.Enabled = false;
-            this.cb4t5.Location = new System.Drawing.Point(73, 103);
-            this.cb4t5.Name = "cb4t5";
-            this.cb4t5.Size = new System.Drawing.Size(15, 14);
-            this.cb4t5.TabIndex = 321;
-            this.cb4t5.UseVisualStyleBackColor = true;
-            this.cb4t5.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
+            this.chk4t5.AutoSize = true;
+            this.chk4t5.Enabled = false;
+            this.chk4t5.Location = new System.Drawing.Point(73, 103);
+            this.chk4t5.Name = "chk4t5";
+            this.chk4t5.Size = new System.Drawing.Size(15, 14);
+            this.chk4t5.TabIndex = 321;
+            this.chk4t5.UseVisualStyleBackColor = true;
+            this.chk4t5.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
             // 
-            // cb4t6
+            // chk4t6
             // 
-            this.cb4t6.AutoSize = true;
-            this.cb4t6.Enabled = false;
-            this.cb4t6.Location = new System.Drawing.Point(57, 103);
-            this.cb4t6.Name = "cb4t6";
-            this.cb4t6.Size = new System.Drawing.Size(15, 14);
-            this.cb4t6.TabIndex = 320;
-            this.cb4t6.UseVisualStyleBackColor = true;
-            this.cb4t6.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
+            this.chk4t6.AutoSize = true;
+            this.chk4t6.Enabled = false;
+            this.chk4t6.Location = new System.Drawing.Point(57, 103);
+            this.chk4t6.Name = "chk4t6";
+            this.chk4t6.Size = new System.Drawing.Size(15, 14);
+            this.chk4t6.TabIndex = 320;
+            this.chk4t6.UseVisualStyleBackColor = true;
+            this.chk4t6.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
             // 
-            // cb4t7
+            // chk4t7
             // 
-            this.cb4t7.AutoSize = true;
-            this.cb4t7.Enabled = false;
-            this.cb4t7.Location = new System.Drawing.Point(40, 103);
-            this.cb4t7.Name = "cb4t7";
-            this.cb4t7.Size = new System.Drawing.Size(15, 14);
-            this.cb4t7.TabIndex = 319;
-            this.cb4t7.UseVisualStyleBackColor = true;
-            this.cb4t7.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
+            this.chk4t7.AutoSize = true;
+            this.chk4t7.Enabled = false;
+            this.chk4t7.Location = new System.Drawing.Point(40, 103);
+            this.chk4t7.Name = "chk4t7";
+            this.chk4t7.Size = new System.Drawing.Size(15, 14);
+            this.chk4t7.TabIndex = 319;
+            this.chk4t7.UseVisualStyleBackColor = true;
+            this.chk4t7.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
             // 
             // label118
             // 
@@ -9816,93 +9821,93 @@ namespace DataDecoder
             this.label118.TabIndex = 318;
             this.label118.Text = "3";
             // 
-            // cb3t0
+            // chk3t0
             // 
-            this.cb3t0.AutoSize = true;
-            this.cb3t0.Enabled = false;
-            this.cb3t0.Location = new System.Drawing.Point(153, 87);
-            this.cb3t0.Name = "cb3t0";
-            this.cb3t0.Size = new System.Drawing.Size(15, 14);
-            this.cb3t0.TabIndex = 317;
-            this.cb3t0.UseVisualStyleBackColor = true;
-            this.cb3t0.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
+            this.chk3t0.AutoSize = true;
+            this.chk3t0.Enabled = false;
+            this.chk3t0.Location = new System.Drawing.Point(153, 87);
+            this.chk3t0.Name = "chk3t0";
+            this.chk3t0.Size = new System.Drawing.Size(15, 14);
+            this.chk3t0.TabIndex = 317;
+            this.chk3t0.UseVisualStyleBackColor = true;
+            this.chk3t0.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
             // 
-            // cb3t1
+            // chk3t1
             // 
-            this.cb3t1.AutoSize = true;
-            this.cb3t1.Enabled = false;
-            this.cb3t1.Location = new System.Drawing.Point(137, 87);
-            this.cb3t1.Name = "cb3t1";
-            this.cb3t1.Size = new System.Drawing.Size(15, 14);
-            this.cb3t1.TabIndex = 316;
-            this.cb3t1.UseVisualStyleBackColor = true;
-            this.cb3t1.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
+            this.chk3t1.AutoSize = true;
+            this.chk3t1.Enabled = false;
+            this.chk3t1.Location = new System.Drawing.Point(137, 87);
+            this.chk3t1.Name = "chk3t1";
+            this.chk3t1.Size = new System.Drawing.Size(15, 14);
+            this.chk3t1.TabIndex = 316;
+            this.chk3t1.UseVisualStyleBackColor = true;
+            this.chk3t1.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
             // 
-            // cb3t2
+            // chk3t2
             // 
-            this.cb3t2.AutoSize = true;
-            this.cb3t2.Enabled = false;
-            this.cb3t2.Location = new System.Drawing.Point(121, 87);
-            this.cb3t2.Name = "cb3t2";
-            this.cb3t2.Size = new System.Drawing.Size(15, 14);
-            this.cb3t2.TabIndex = 315;
-            this.cb3t2.UseVisualStyleBackColor = true;
-            this.cb3t2.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
+            this.chk3t2.AutoSize = true;
+            this.chk3t2.Enabled = false;
+            this.chk3t2.Location = new System.Drawing.Point(121, 87);
+            this.chk3t2.Name = "chk3t2";
+            this.chk3t2.Size = new System.Drawing.Size(15, 14);
+            this.chk3t2.TabIndex = 315;
+            this.chk3t2.UseVisualStyleBackColor = true;
+            this.chk3t2.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
             // 
-            // cb3t3
+            // chk3t3
             // 
-            this.cb3t3.AutoSize = true;
-            this.cb3t3.Enabled = false;
-            this.cb3t3.Location = new System.Drawing.Point(105, 87);
-            this.cb3t3.Name = "cb3t3";
-            this.cb3t3.Size = new System.Drawing.Size(15, 14);
-            this.cb3t3.TabIndex = 314;
-            this.cb3t3.UseVisualStyleBackColor = true;
-            this.cb3t3.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
+            this.chk3t3.AutoSize = true;
+            this.chk3t3.Enabled = false;
+            this.chk3t3.Location = new System.Drawing.Point(105, 87);
+            this.chk3t3.Name = "chk3t3";
+            this.chk3t3.Size = new System.Drawing.Size(15, 14);
+            this.chk3t3.TabIndex = 314;
+            this.chk3t3.UseVisualStyleBackColor = true;
+            this.chk3t3.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
             // 
-            // cb3t4
+            // chk3t4
             // 
-            this.cb3t4.AutoSize = true;
-            this.cb3t4.Enabled = false;
-            this.cb3t4.Location = new System.Drawing.Point(89, 87);
-            this.cb3t4.Name = "cb3t4";
-            this.cb3t4.Size = new System.Drawing.Size(15, 14);
-            this.cb3t4.TabIndex = 313;
-            this.cb3t4.UseVisualStyleBackColor = true;
-            this.cb3t4.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
+            this.chk3t4.AutoSize = true;
+            this.chk3t4.Enabled = false;
+            this.chk3t4.Location = new System.Drawing.Point(89, 87);
+            this.chk3t4.Name = "chk3t4";
+            this.chk3t4.Size = new System.Drawing.Size(15, 14);
+            this.chk3t4.TabIndex = 313;
+            this.chk3t4.UseVisualStyleBackColor = true;
+            this.chk3t4.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
             // 
-            // cb3t5
+            // chk3t5
             // 
-            this.cb3t5.AutoSize = true;
-            this.cb3t5.Enabled = false;
-            this.cb3t5.Location = new System.Drawing.Point(73, 87);
-            this.cb3t5.Name = "cb3t5";
-            this.cb3t5.Size = new System.Drawing.Size(15, 14);
-            this.cb3t5.TabIndex = 312;
-            this.cb3t5.UseVisualStyleBackColor = true;
-            this.cb3t5.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
+            this.chk3t5.AutoSize = true;
+            this.chk3t5.Enabled = false;
+            this.chk3t5.Location = new System.Drawing.Point(73, 87);
+            this.chk3t5.Name = "chk3t5";
+            this.chk3t5.Size = new System.Drawing.Size(15, 14);
+            this.chk3t5.TabIndex = 312;
+            this.chk3t5.UseVisualStyleBackColor = true;
+            this.chk3t5.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
             // 
-            // cb3t6
+            // chk3t6
             // 
-            this.cb3t6.AutoSize = true;
-            this.cb3t6.Enabled = false;
-            this.cb3t6.Location = new System.Drawing.Point(57, 87);
-            this.cb3t6.Name = "cb3t6";
-            this.cb3t6.Size = new System.Drawing.Size(15, 14);
-            this.cb3t6.TabIndex = 311;
-            this.cb3t6.UseVisualStyleBackColor = true;
-            this.cb3t6.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
+            this.chk3t6.AutoSize = true;
+            this.chk3t6.Enabled = false;
+            this.chk3t6.Location = new System.Drawing.Point(57, 87);
+            this.chk3t6.Name = "chk3t6";
+            this.chk3t6.Size = new System.Drawing.Size(15, 14);
+            this.chk3t6.TabIndex = 311;
+            this.chk3t6.UseVisualStyleBackColor = true;
+            this.chk3t6.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
             // 
-            // cb3t7
+            // chk3t7
             // 
-            this.cb3t7.AutoSize = true;
-            this.cb3t7.Enabled = false;
-            this.cb3t7.Location = new System.Drawing.Point(40, 87);
-            this.cb3t7.Name = "cb3t7";
-            this.cb3t7.Size = new System.Drawing.Size(15, 14);
-            this.cb3t7.TabIndex = 310;
-            this.cb3t7.UseVisualStyleBackColor = true;
-            this.cb3t7.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
+            this.chk3t7.AutoSize = true;
+            this.chk3t7.Enabled = false;
+            this.chk3t7.Location = new System.Drawing.Point(40, 87);
+            this.chk3t7.Name = "chk3t7";
+            this.chk3t7.Size = new System.Drawing.Size(15, 14);
+            this.chk3t7.TabIndex = 310;
+            this.chk3t7.UseVisualStyleBackColor = true;
+            this.chk3t7.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
             // 
             // label119
             // 
@@ -9914,93 +9919,93 @@ namespace DataDecoder
             this.label119.TabIndex = 309;
             this.label119.Text = "2";
             // 
-            // cb2t0
+            // chk2t0
             // 
-            this.cb2t0.AutoSize = true;
-            this.cb2t0.Enabled = false;
-            this.cb2t0.Location = new System.Drawing.Point(153, 72);
-            this.cb2t0.Name = "cb2t0";
-            this.cb2t0.Size = new System.Drawing.Size(15, 14);
-            this.cb2t0.TabIndex = 308;
-            this.cb2t0.UseVisualStyleBackColor = true;
-            this.cb2t0.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
+            this.chk2t0.AutoSize = true;
+            this.chk2t0.Enabled = false;
+            this.chk2t0.Location = new System.Drawing.Point(153, 72);
+            this.chk2t0.Name = "chk2t0";
+            this.chk2t0.Size = new System.Drawing.Size(15, 14);
+            this.chk2t0.TabIndex = 308;
+            this.chk2t0.UseVisualStyleBackColor = true;
+            this.chk2t0.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
             // 
-            // cb2t1
+            // chk2t1
             // 
-            this.cb2t1.AutoSize = true;
-            this.cb2t1.Enabled = false;
-            this.cb2t1.Location = new System.Drawing.Point(137, 72);
-            this.cb2t1.Name = "cb2t1";
-            this.cb2t1.Size = new System.Drawing.Size(15, 14);
-            this.cb2t1.TabIndex = 307;
-            this.cb2t1.UseVisualStyleBackColor = true;
-            this.cb2t1.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
+            this.chk2t1.AutoSize = true;
+            this.chk2t1.Enabled = false;
+            this.chk2t1.Location = new System.Drawing.Point(137, 72);
+            this.chk2t1.Name = "chk2t1";
+            this.chk2t1.Size = new System.Drawing.Size(15, 14);
+            this.chk2t1.TabIndex = 307;
+            this.chk2t1.UseVisualStyleBackColor = true;
+            this.chk2t1.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
             // 
-            // cb2t2
+            // chk2t2
             // 
-            this.cb2t2.AutoSize = true;
-            this.cb2t2.Enabled = false;
-            this.cb2t2.Location = new System.Drawing.Point(121, 72);
-            this.cb2t2.Name = "cb2t2";
-            this.cb2t2.Size = new System.Drawing.Size(15, 14);
-            this.cb2t2.TabIndex = 306;
-            this.cb2t2.UseVisualStyleBackColor = true;
-            this.cb2t2.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
+            this.chk2t2.AutoSize = true;
+            this.chk2t2.Enabled = false;
+            this.chk2t2.Location = new System.Drawing.Point(121, 72);
+            this.chk2t2.Name = "chk2t2";
+            this.chk2t2.Size = new System.Drawing.Size(15, 14);
+            this.chk2t2.TabIndex = 306;
+            this.chk2t2.UseVisualStyleBackColor = true;
+            this.chk2t2.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
             // 
-            // cb2t3
+            // chk2t3
             // 
-            this.cb2t3.AutoSize = true;
-            this.cb2t3.Enabled = false;
-            this.cb2t3.Location = new System.Drawing.Point(105, 72);
-            this.cb2t3.Name = "cb2t3";
-            this.cb2t3.Size = new System.Drawing.Size(15, 14);
-            this.cb2t3.TabIndex = 305;
-            this.cb2t3.UseVisualStyleBackColor = true;
-            this.cb2t3.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
+            this.chk2t3.AutoSize = true;
+            this.chk2t3.Enabled = false;
+            this.chk2t3.Location = new System.Drawing.Point(105, 72);
+            this.chk2t3.Name = "chk2t3";
+            this.chk2t3.Size = new System.Drawing.Size(15, 14);
+            this.chk2t3.TabIndex = 305;
+            this.chk2t3.UseVisualStyleBackColor = true;
+            this.chk2t3.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
             // 
-            // cb2t4
+            // chk2t4
             // 
-            this.cb2t4.AutoSize = true;
-            this.cb2t4.Enabled = false;
-            this.cb2t4.Location = new System.Drawing.Point(89, 72);
-            this.cb2t4.Name = "cb2t4";
-            this.cb2t4.Size = new System.Drawing.Size(15, 14);
-            this.cb2t4.TabIndex = 304;
-            this.cb2t4.UseVisualStyleBackColor = true;
-            this.cb2t4.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
+            this.chk2t4.AutoSize = true;
+            this.chk2t4.Enabled = false;
+            this.chk2t4.Location = new System.Drawing.Point(89, 72);
+            this.chk2t4.Name = "chk2t4";
+            this.chk2t4.Size = new System.Drawing.Size(15, 14);
+            this.chk2t4.TabIndex = 304;
+            this.chk2t4.UseVisualStyleBackColor = true;
+            this.chk2t4.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
             // 
-            // cb2t5
+            // chk2t5
             // 
-            this.cb2t5.AutoSize = true;
-            this.cb2t5.Enabled = false;
-            this.cb2t5.Location = new System.Drawing.Point(73, 72);
-            this.cb2t5.Name = "cb2t5";
-            this.cb2t5.Size = new System.Drawing.Size(15, 14);
-            this.cb2t5.TabIndex = 303;
-            this.cb2t5.UseVisualStyleBackColor = true;
-            this.cb2t5.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
+            this.chk2t5.AutoSize = true;
+            this.chk2t5.Enabled = false;
+            this.chk2t5.Location = new System.Drawing.Point(73, 72);
+            this.chk2t5.Name = "chk2t5";
+            this.chk2t5.Size = new System.Drawing.Size(15, 14);
+            this.chk2t5.TabIndex = 303;
+            this.chk2t5.UseVisualStyleBackColor = true;
+            this.chk2t5.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
             // 
-            // cb2t6
+            // chk2t6
             // 
-            this.cb2t6.AutoSize = true;
-            this.cb2t6.Enabled = false;
-            this.cb2t6.Location = new System.Drawing.Point(57, 72);
-            this.cb2t6.Name = "cb2t6";
-            this.cb2t6.Size = new System.Drawing.Size(15, 14);
-            this.cb2t6.TabIndex = 302;
-            this.cb2t6.UseVisualStyleBackColor = true;
-            this.cb2t6.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
+            this.chk2t6.AutoSize = true;
+            this.chk2t6.Enabled = false;
+            this.chk2t6.Location = new System.Drawing.Point(57, 72);
+            this.chk2t6.Name = "chk2t6";
+            this.chk2t6.Size = new System.Drawing.Size(15, 14);
+            this.chk2t6.TabIndex = 302;
+            this.chk2t6.UseVisualStyleBackColor = true;
+            this.chk2t6.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
             // 
-            // cb2t7
+            // chk2t7
             // 
-            this.cb2t7.AutoSize = true;
-            this.cb2t7.Enabled = false;
-            this.cb2t7.Location = new System.Drawing.Point(40, 72);
-            this.cb2t7.Name = "cb2t7";
-            this.cb2t7.Size = new System.Drawing.Size(15, 14);
-            this.cb2t7.TabIndex = 301;
-            this.cb2t7.UseVisualStyleBackColor = true;
-            this.cb2t7.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
+            this.chk2t7.AutoSize = true;
+            this.chk2t7.Enabled = false;
+            this.chk2t7.Location = new System.Drawing.Point(40, 72);
+            this.chk2t7.Name = "chk2t7";
+            this.chk2t7.Size = new System.Drawing.Size(15, 14);
+            this.chk2t7.TabIndex = 301;
+            this.chk2t7.UseVisualStyleBackColor = true;
+            this.chk2t7.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
             // 
             // label120
             // 
@@ -10012,93 +10017,93 @@ namespace DataDecoder
             this.label120.TabIndex = 300;
             this.label120.Text = "1";
             // 
-            // cb1t0
+            // chk1t0
             // 
-            this.cb1t0.AutoSize = true;
-            this.cb1t0.Enabled = false;
-            this.cb1t0.Location = new System.Drawing.Point(153, 56);
-            this.cb1t0.Name = "cb1t0";
-            this.cb1t0.Size = new System.Drawing.Size(15, 14);
-            this.cb1t0.TabIndex = 299;
-            this.cb1t0.UseVisualStyleBackColor = true;
-            this.cb1t0.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
+            this.chk1t0.AutoSize = true;
+            this.chk1t0.Enabled = false;
+            this.chk1t0.Location = new System.Drawing.Point(153, 56);
+            this.chk1t0.Name = "chk1t0";
+            this.chk1t0.Size = new System.Drawing.Size(15, 14);
+            this.chk1t0.TabIndex = 299;
+            this.chk1t0.UseVisualStyleBackColor = true;
+            this.chk1t0.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
             // 
-            // cb1t1
+            // chk1t1
             // 
-            this.cb1t1.AutoSize = true;
-            this.cb1t1.Enabled = false;
-            this.cb1t1.Location = new System.Drawing.Point(137, 56);
-            this.cb1t1.Name = "cb1t1";
-            this.cb1t1.Size = new System.Drawing.Size(15, 14);
-            this.cb1t1.TabIndex = 298;
-            this.cb1t1.UseVisualStyleBackColor = true;
-            this.cb1t1.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
+            this.chk1t1.AutoSize = true;
+            this.chk1t1.Enabled = false;
+            this.chk1t1.Location = new System.Drawing.Point(137, 56);
+            this.chk1t1.Name = "chk1t1";
+            this.chk1t1.Size = new System.Drawing.Size(15, 14);
+            this.chk1t1.TabIndex = 298;
+            this.chk1t1.UseVisualStyleBackColor = true;
+            this.chk1t1.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
             // 
-            // cb1t2
+            // chk1t2
             // 
-            this.cb1t2.AutoSize = true;
-            this.cb1t2.Enabled = false;
-            this.cb1t2.Location = new System.Drawing.Point(121, 56);
-            this.cb1t2.Name = "cb1t2";
-            this.cb1t2.Size = new System.Drawing.Size(15, 14);
-            this.cb1t2.TabIndex = 297;
-            this.cb1t2.UseVisualStyleBackColor = true;
-            this.cb1t2.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
+            this.chk1t2.AutoSize = true;
+            this.chk1t2.Enabled = false;
+            this.chk1t2.Location = new System.Drawing.Point(121, 56);
+            this.chk1t2.Name = "chk1t2";
+            this.chk1t2.Size = new System.Drawing.Size(15, 14);
+            this.chk1t2.TabIndex = 297;
+            this.chk1t2.UseVisualStyleBackColor = true;
+            this.chk1t2.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
             // 
-            // cb1t3
+            // chk1t3
             // 
-            this.cb1t3.AutoSize = true;
-            this.cb1t3.Enabled = false;
-            this.cb1t3.Location = new System.Drawing.Point(105, 56);
-            this.cb1t3.Name = "cb1t3";
-            this.cb1t3.Size = new System.Drawing.Size(15, 14);
-            this.cb1t3.TabIndex = 296;
-            this.cb1t3.UseVisualStyleBackColor = true;
-            this.cb1t3.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
+            this.chk1t3.AutoSize = true;
+            this.chk1t3.Enabled = false;
+            this.chk1t3.Location = new System.Drawing.Point(105, 56);
+            this.chk1t3.Name = "chk1t3";
+            this.chk1t3.Size = new System.Drawing.Size(15, 14);
+            this.chk1t3.TabIndex = 296;
+            this.chk1t3.UseVisualStyleBackColor = true;
+            this.chk1t3.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
             // 
-            // cb1t4
+            // chk1t4
             // 
-            this.cb1t4.AutoSize = true;
-            this.cb1t4.Enabled = false;
-            this.cb1t4.Location = new System.Drawing.Point(89, 56);
-            this.cb1t4.Name = "cb1t4";
-            this.cb1t4.Size = new System.Drawing.Size(15, 14);
-            this.cb1t4.TabIndex = 295;
-            this.cb1t4.UseVisualStyleBackColor = true;
-            this.cb1t4.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
+            this.chk1t4.AutoSize = true;
+            this.chk1t4.Enabled = false;
+            this.chk1t4.Location = new System.Drawing.Point(89, 56);
+            this.chk1t4.Name = "chk1t4";
+            this.chk1t4.Size = new System.Drawing.Size(15, 14);
+            this.chk1t4.TabIndex = 295;
+            this.chk1t4.UseVisualStyleBackColor = true;
+            this.chk1t4.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
             // 
-            // cb1t5
+            // chk1t5
             // 
-            this.cb1t5.AutoSize = true;
-            this.cb1t5.Enabled = false;
-            this.cb1t5.Location = new System.Drawing.Point(73, 56);
-            this.cb1t5.Name = "cb1t5";
-            this.cb1t5.Size = new System.Drawing.Size(15, 14);
-            this.cb1t5.TabIndex = 294;
-            this.cb1t5.UseVisualStyleBackColor = true;
-            this.cb1t5.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
+            this.chk1t5.AutoSize = true;
+            this.chk1t5.Enabled = false;
+            this.chk1t5.Location = new System.Drawing.Point(73, 56);
+            this.chk1t5.Name = "chk1t5";
+            this.chk1t5.Size = new System.Drawing.Size(15, 14);
+            this.chk1t5.TabIndex = 294;
+            this.chk1t5.UseVisualStyleBackColor = true;
+            this.chk1t5.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
             // 
-            // cb1t6
+            // chk1t6
             // 
-            this.cb1t6.AutoSize = true;
-            this.cb1t6.Enabled = false;
-            this.cb1t6.Location = new System.Drawing.Point(57, 56);
-            this.cb1t6.Name = "cb1t6";
-            this.cb1t6.Size = new System.Drawing.Size(15, 14);
-            this.cb1t6.TabIndex = 293;
-            this.cb1t6.UseVisualStyleBackColor = true;
-            this.cb1t6.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
+            this.chk1t6.AutoSize = true;
+            this.chk1t6.Enabled = false;
+            this.chk1t6.Location = new System.Drawing.Point(57, 56);
+            this.chk1t6.Name = "chk1t6";
+            this.chk1t6.Size = new System.Drawing.Size(15, 14);
+            this.chk1t6.TabIndex = 293;
+            this.chk1t6.UseVisualStyleBackColor = true;
+            this.chk1t6.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
             // 
-            // cb1t7
+            // chk1t7
             // 
-            this.cb1t7.AutoSize = true;
-            this.cb1t7.Enabled = false;
-            this.cb1t7.Location = new System.Drawing.Point(40, 56);
-            this.cb1t7.Name = "cb1t7";
-            this.cb1t7.Size = new System.Drawing.Size(15, 14);
-            this.cb1t7.TabIndex = 292;
-            this.cb1t7.UseVisualStyleBackColor = true;
-            this.cb1t7.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
+            this.chk1t7.AutoSize = true;
+            this.chk1t7.Enabled = false;
+            this.chk1t7.Location = new System.Drawing.Point(40, 56);
+            this.chk1t7.Name = "chk1t7";
+            this.chk1t7.Size = new System.Drawing.Size(15, 14);
+            this.chk1t7.TabIndex = 292;
+            this.chk1t7.UseVisualStyleBackColor = true;
+            this.chk1t7.CheckedChanged += new System.EventHandler(this.grpPortB_CheckedChanged);
             // 
             // label121
             // 
@@ -10192,151 +10197,151 @@ namespace DataDecoder
             // 
             // grpPortA
             // 
-            this.grpPortA.Controls.Add(this.cb15r4);
-            this.grpPortA.Controls.Add(this.cb15r7);
-            this.grpPortA.Controls.Add(this.cb15r6);
-            this.grpPortA.Controls.Add(this.cb15r5);
-            this.grpPortA.Controls.Add(this.cb15r3);
-            this.grpPortA.Controls.Add(this.cb15r2);
-            this.grpPortA.Controls.Add(this.cb15r1);
-            this.grpPortA.Controls.Add(this.cb15r0);
+            this.grpPortA.Controls.Add(this.chk15r4);
+            this.grpPortA.Controls.Add(this.chk15r7);
+            this.grpPortA.Controls.Add(this.chk15r6);
+            this.grpPortA.Controls.Add(this.chk15r5);
+            this.grpPortA.Controls.Add(this.chk15r3);
+            this.grpPortA.Controls.Add(this.chk15r2);
+            this.grpPortA.Controls.Add(this.chk15r1);
+            this.grpPortA.Controls.Add(this.chk15r0);
             this.grpPortA.Controls.Add(this.label133);
             this.grpPortA.Controls.Add(this.label134);
-            this.grpPortA.Controls.Add(this.cb14r0);
-            this.grpPortA.Controls.Add(this.cb14r1);
-            this.grpPortA.Controls.Add(this.cb14r2);
-            this.grpPortA.Controls.Add(this.cb14r3);
-            this.grpPortA.Controls.Add(this.cb14r4);
-            this.grpPortA.Controls.Add(this.cb14r5);
-            this.grpPortA.Controls.Add(this.cb14r6);
-            this.grpPortA.Controls.Add(this.cb14r7);
+            this.grpPortA.Controls.Add(this.chk14r0);
+            this.grpPortA.Controls.Add(this.chk14r1);
+            this.grpPortA.Controls.Add(this.chk14r2);
+            this.grpPortA.Controls.Add(this.chk14r3);
+            this.grpPortA.Controls.Add(this.chk14r4);
+            this.grpPortA.Controls.Add(this.chk14r5);
+            this.grpPortA.Controls.Add(this.chk14r6);
+            this.grpPortA.Controls.Add(this.chk14r7);
             this.grpPortA.Controls.Add(this.label129);
-            this.grpPortA.Controls.Add(this.cb13r4);
+            this.grpPortA.Controls.Add(this.chk13r4);
             this.grpPortA.Controls.Add(this.label104);
-            this.grpPortA.Controls.Add(this.cb13r7);
-            this.grpPortA.Controls.Add(this.cb13r6);
-            this.grpPortA.Controls.Add(this.cb0r3);
-            this.grpPortA.Controls.Add(this.cb13r5);
-            this.grpPortA.Controls.Add(this.cb13r3);
-            this.grpPortA.Controls.Add(this.cb0r0);
-            this.grpPortA.Controls.Add(this.cb13r2);
-            this.grpPortA.Controls.Add(this.cb13r1);
-            this.grpPortA.Controls.Add(this.cb13r0);
-            this.grpPortA.Controls.Add(this.cb0r1);
+            this.grpPortA.Controls.Add(this.chk13r7);
+            this.grpPortA.Controls.Add(this.chk13r6);
+            this.grpPortA.Controls.Add(this.chk0r3);
+            this.grpPortA.Controls.Add(this.chk13r5);
+            this.grpPortA.Controls.Add(this.chk13r3);
+            this.grpPortA.Controls.Add(this.chk0r0);
+            this.grpPortA.Controls.Add(this.chk13r2);
+            this.grpPortA.Controls.Add(this.chk13r1);
+            this.grpPortA.Controls.Add(this.chk13r0);
+            this.grpPortA.Controls.Add(this.chk0r1);
             this.grpPortA.Controls.Add(this.label102);
-            this.grpPortA.Controls.Add(this.cb0r2);
-            this.grpPortA.Controls.Add(this.cb0r4);
-            this.grpPortA.Controls.Add(this.cb0r5);
-            this.grpPortA.Controls.Add(this.cb0r6);
-            this.grpPortA.Controls.Add(this.cb0r7);
+            this.grpPortA.Controls.Add(this.chk0r2);
+            this.grpPortA.Controls.Add(this.chk0r4);
+            this.grpPortA.Controls.Add(this.chk0r5);
+            this.grpPortA.Controls.Add(this.chk0r6);
+            this.grpPortA.Controls.Add(this.chk0r7);
             this.grpPortA.Controls.Add(this.label101);
-            this.grpPortA.Controls.Add(this.cb12r0);
-            this.grpPortA.Controls.Add(this.cb12r1);
-            this.grpPortA.Controls.Add(this.cb12r2);
-            this.grpPortA.Controls.Add(this.cb12r3);
-            this.grpPortA.Controls.Add(this.cb12r4);
-            this.grpPortA.Controls.Add(this.cb12r5);
-            this.grpPortA.Controls.Add(this.cb12r6);
-            this.grpPortA.Controls.Add(this.cb12r7);
+            this.grpPortA.Controls.Add(this.chk12r0);
+            this.grpPortA.Controls.Add(this.chk12r1);
+            this.grpPortA.Controls.Add(this.chk12r2);
+            this.grpPortA.Controls.Add(this.chk12r3);
+            this.grpPortA.Controls.Add(this.chk12r4);
+            this.grpPortA.Controls.Add(this.chk12r5);
+            this.grpPortA.Controls.Add(this.chk12r6);
+            this.grpPortA.Controls.Add(this.chk12r7);
             this.grpPortA.Controls.Add(this.label100);
-            this.grpPortA.Controls.Add(this.cb11r0);
-            this.grpPortA.Controls.Add(this.cb11r1);
-            this.grpPortA.Controls.Add(this.cb11r2);
-            this.grpPortA.Controls.Add(this.cb11r3);
-            this.grpPortA.Controls.Add(this.cb11r4);
-            this.grpPortA.Controls.Add(this.cb11r5);
-            this.grpPortA.Controls.Add(this.cb11r6);
-            this.grpPortA.Controls.Add(this.cb11r7);
+            this.grpPortA.Controls.Add(this.chk11r0);
+            this.grpPortA.Controls.Add(this.chk11r1);
+            this.grpPortA.Controls.Add(this.chk11r2);
+            this.grpPortA.Controls.Add(this.chk11r3);
+            this.grpPortA.Controls.Add(this.chk11r4);
+            this.grpPortA.Controls.Add(this.chk11r5);
+            this.grpPortA.Controls.Add(this.chk11r6);
+            this.grpPortA.Controls.Add(this.chk11r7);
             this.grpPortA.Controls.Add(this.label99);
-            this.grpPortA.Controls.Add(this.cb10r0);
-            this.grpPortA.Controls.Add(this.cb10r1);
-            this.grpPortA.Controls.Add(this.cb10r2);
-            this.grpPortA.Controls.Add(this.cb10r3);
-            this.grpPortA.Controls.Add(this.cb10r4);
-            this.grpPortA.Controls.Add(this.cb10r5);
-            this.grpPortA.Controls.Add(this.cb10r6);
-            this.grpPortA.Controls.Add(this.cb10r7);
+            this.grpPortA.Controls.Add(this.chk10r0);
+            this.grpPortA.Controls.Add(this.chk10r1);
+            this.grpPortA.Controls.Add(this.chk10r2);
+            this.grpPortA.Controls.Add(this.chk10r3);
+            this.grpPortA.Controls.Add(this.chk10r4);
+            this.grpPortA.Controls.Add(this.chk10r5);
+            this.grpPortA.Controls.Add(this.chk10r6);
+            this.grpPortA.Controls.Add(this.chk10r7);
             this.grpPortA.Controls.Add(this.label98);
-            this.grpPortA.Controls.Add(this.cb9r0);
-            this.grpPortA.Controls.Add(this.cb9r1);
-            this.grpPortA.Controls.Add(this.cb9r2);
-            this.grpPortA.Controls.Add(this.cb9r3);
-            this.grpPortA.Controls.Add(this.cb9r4);
-            this.grpPortA.Controls.Add(this.cb9r5);
-            this.grpPortA.Controls.Add(this.cb9r6);
-            this.grpPortA.Controls.Add(this.cb9r7);
+            this.grpPortA.Controls.Add(this.chk9r0);
+            this.grpPortA.Controls.Add(this.chk9r1);
+            this.grpPortA.Controls.Add(this.chk9r2);
+            this.grpPortA.Controls.Add(this.chk9r3);
+            this.grpPortA.Controls.Add(this.chk9r4);
+            this.grpPortA.Controls.Add(this.chk9r5);
+            this.grpPortA.Controls.Add(this.chk9r6);
+            this.grpPortA.Controls.Add(this.chk9r7);
             this.grpPortA.Controls.Add(this.label97);
-            this.grpPortA.Controls.Add(this.cb8r0);
-            this.grpPortA.Controls.Add(this.cb8r1);
-            this.grpPortA.Controls.Add(this.cb8r2);
-            this.grpPortA.Controls.Add(this.cb8r3);
-            this.grpPortA.Controls.Add(this.cb8r4);
-            this.grpPortA.Controls.Add(this.cb8r5);
-            this.grpPortA.Controls.Add(this.cb8r6);
-            this.grpPortA.Controls.Add(this.cb8r7);
+            this.grpPortA.Controls.Add(this.chk8r0);
+            this.grpPortA.Controls.Add(this.chk8r1);
+            this.grpPortA.Controls.Add(this.chk8r2);
+            this.grpPortA.Controls.Add(this.chk8r3);
+            this.grpPortA.Controls.Add(this.chkb8r4);
+            this.grpPortA.Controls.Add(this.chk8r5);
+            this.grpPortA.Controls.Add(this.chk8r6);
+            this.grpPortA.Controls.Add(this.chk8r7);
             this.grpPortA.Controls.Add(this.label96);
-            this.grpPortA.Controls.Add(this.cb7r0);
-            this.grpPortA.Controls.Add(this.cb7r1);
-            this.grpPortA.Controls.Add(this.cb7r2);
-            this.grpPortA.Controls.Add(this.cb7r3);
-            this.grpPortA.Controls.Add(this.cb7r4);
-            this.grpPortA.Controls.Add(this.cb7r5);
-            this.grpPortA.Controls.Add(this.cb7r6);
-            this.grpPortA.Controls.Add(this.cb7r7);
+            this.grpPortA.Controls.Add(this.chk7r0);
+            this.grpPortA.Controls.Add(this.chk7r1);
+            this.grpPortA.Controls.Add(this.chk7r2);
+            this.grpPortA.Controls.Add(this.chk7r3);
+            this.grpPortA.Controls.Add(this.chk7r4);
+            this.grpPortA.Controls.Add(this.chk7r5);
+            this.grpPortA.Controls.Add(this.chk7r6);
+            this.grpPortA.Controls.Add(this.chk7r7);
             this.grpPortA.Controls.Add(this.label95);
-            this.grpPortA.Controls.Add(this.cb6r0);
-            this.grpPortA.Controls.Add(this.cb6r1);
-            this.grpPortA.Controls.Add(this.cb6r2);
-            this.grpPortA.Controls.Add(this.cb6r3);
-            this.grpPortA.Controls.Add(this.cb6r4);
-            this.grpPortA.Controls.Add(this.cb6r5);
-            this.grpPortA.Controls.Add(this.cb6r6);
-            this.grpPortA.Controls.Add(this.cb6r7);
+            this.grpPortA.Controls.Add(this.chk6r0);
+            this.grpPortA.Controls.Add(this.chk6r1);
+            this.grpPortA.Controls.Add(this.chk6r2);
+            this.grpPortA.Controls.Add(this.chk6r3);
+            this.grpPortA.Controls.Add(this.chk6r4);
+            this.grpPortA.Controls.Add(this.chk6r5);
+            this.grpPortA.Controls.Add(this.chk6r6);
+            this.grpPortA.Controls.Add(this.chk6r7);
             this.grpPortA.Controls.Add(this.label94);
-            this.grpPortA.Controls.Add(this.cb5r0);
-            this.grpPortA.Controls.Add(this.cb5r1);
-            this.grpPortA.Controls.Add(this.cb5r2);
-            this.grpPortA.Controls.Add(this.cb5r3);
-            this.grpPortA.Controls.Add(this.cb5r4);
-            this.grpPortA.Controls.Add(this.cb5r5);
-            this.grpPortA.Controls.Add(this.cb5r6);
-            this.grpPortA.Controls.Add(this.cb5r7);
+            this.grpPortA.Controls.Add(this.chk5r0);
+            this.grpPortA.Controls.Add(this.chk5r1);
+            this.grpPortA.Controls.Add(this.chk5r2);
+            this.grpPortA.Controls.Add(this.chk5r3);
+            this.grpPortA.Controls.Add(this.chk5r4);
+            this.grpPortA.Controls.Add(this.chk5r5);
+            this.grpPortA.Controls.Add(this.chk5r6);
+            this.grpPortA.Controls.Add(this.chk5r7);
             this.grpPortA.Controls.Add(this.label93);
-            this.grpPortA.Controls.Add(this.cb4r0);
-            this.grpPortA.Controls.Add(this.cb4r1);
-            this.grpPortA.Controls.Add(this.cb4r2);
-            this.grpPortA.Controls.Add(this.cb4r3);
-            this.grpPortA.Controls.Add(this.cb4r4);
-            this.grpPortA.Controls.Add(this.cb4r5);
-            this.grpPortA.Controls.Add(this.cb4r6);
-            this.grpPortA.Controls.Add(this.cb4r7);
+            this.grpPortA.Controls.Add(this.chk4r0);
+            this.grpPortA.Controls.Add(this.chk4r1);
+            this.grpPortA.Controls.Add(this.chk4r2);
+            this.grpPortA.Controls.Add(this.chk4r3);
+            this.grpPortA.Controls.Add(this.chk4r4);
+            this.grpPortA.Controls.Add(this.chk4r5);
+            this.grpPortA.Controls.Add(this.chk4r6);
+            this.grpPortA.Controls.Add(this.chk4r7);
             this.grpPortA.Controls.Add(this.label92);
-            this.grpPortA.Controls.Add(this.cb3r0);
-            this.grpPortA.Controls.Add(this.cb3r1);
-            this.grpPortA.Controls.Add(this.cb3r2);
-            this.grpPortA.Controls.Add(this.cb3r3);
-            this.grpPortA.Controls.Add(this.cb3r4);
-            this.grpPortA.Controls.Add(this.cb3r5);
-            this.grpPortA.Controls.Add(this.cb3r6);
-            this.grpPortA.Controls.Add(this.cb3r7);
+            this.grpPortA.Controls.Add(this.chk3r0);
+            this.grpPortA.Controls.Add(this.chk3r1);
+            this.grpPortA.Controls.Add(this.chk3r2);
+            this.grpPortA.Controls.Add(this.chk3r3);
+            this.grpPortA.Controls.Add(this.chk3r4);
+            this.grpPortA.Controls.Add(this.chk3r5);
+            this.grpPortA.Controls.Add(this.chk3r6);
+            this.grpPortA.Controls.Add(this.chk3r7);
             this.grpPortA.Controls.Add(this.label91);
-            this.grpPortA.Controls.Add(this.cb2r0);
-            this.grpPortA.Controls.Add(this.cb2r1);
-            this.grpPortA.Controls.Add(this.cb2r2);
-            this.grpPortA.Controls.Add(this.cb2r3);
-            this.grpPortA.Controls.Add(this.cb2r4);
-            this.grpPortA.Controls.Add(this.cb2r5);
-            this.grpPortA.Controls.Add(this.cb2r6);
-            this.grpPortA.Controls.Add(this.cb2r7);
+            this.grpPortA.Controls.Add(this.chk2r0);
+            this.grpPortA.Controls.Add(this.chk2r1);
+            this.grpPortA.Controls.Add(this.chk2r2);
+            this.grpPortA.Controls.Add(this.chk2r3);
+            this.grpPortA.Controls.Add(this.chk2r4);
+            this.grpPortA.Controls.Add(this.chk2r5);
+            this.grpPortA.Controls.Add(this.chk2r6);
+            this.grpPortA.Controls.Add(this.chk2r7);
             this.grpPortA.Controls.Add(this.label90);
-            this.grpPortA.Controls.Add(this.cb1r0);
-            this.grpPortA.Controls.Add(this.cb1r1);
-            this.grpPortA.Controls.Add(this.cb1r2);
-            this.grpPortA.Controls.Add(this.cb1r3);
-            this.grpPortA.Controls.Add(this.cb1r4);
-            this.grpPortA.Controls.Add(this.cb1r5);
-            this.grpPortA.Controls.Add(this.cb1r6);
-            this.grpPortA.Controls.Add(this.cb1r7);
+            this.grpPortA.Controls.Add(this.chk1r0);
+            this.grpPortA.Controls.Add(this.chk1r1);
+            this.grpPortA.Controls.Add(this.chk1r2);
+            this.grpPortA.Controls.Add(this.chk1r3);
+            this.grpPortA.Controls.Add(this.chk1r4);
+            this.grpPortA.Controls.Add(this.chk1r5);
+            this.grpPortA.Controls.Add(this.chk1r6);
+            this.grpPortA.Controls.Add(this.chk1r7);
             this.grpPortA.Controls.Add(this.label89);
             this.grpPortA.Controls.Add(this.label88);
             this.grpPortA.Controls.Add(this.label87);
@@ -10354,93 +10359,93 @@ namespace DataDecoder
             this.grpPortA.TabStop = false;
             this.grpPortA.Text = "Port A";
             // 
-            // cb15r4
+            // chk15r4
             // 
-            this.cb15r4.AutoSize = true;
-            this.cb15r4.Enabled = false;
-            this.cb15r4.Location = new System.Drawing.Point(90, 272);
-            this.cb15r4.Name = "cb15r4";
-            this.cb15r4.Size = new System.Drawing.Size(15, 14);
-            this.cb15r4.TabIndex = 151;
-            this.cb15r4.UseVisualStyleBackColor = true;
-            this.cb15r4.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
+            this.chk15r4.AutoSize = true;
+            this.chk15r4.Enabled = false;
+            this.chk15r4.Location = new System.Drawing.Point(90, 272);
+            this.chk15r4.Name = "chk15r4";
+            this.chk15r4.Size = new System.Drawing.Size(15, 14);
+            this.chk15r4.TabIndex = 151;
+            this.chk15r4.UseVisualStyleBackColor = true;
+            this.chk15r4.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
             // 
-            // cb15r7
+            // chk15r7
             // 
-            this.cb15r7.AutoSize = true;
-            this.cb15r7.Enabled = false;
-            this.cb15r7.Location = new System.Drawing.Point(41, 272);
-            this.cb15r7.Name = "cb15r7";
-            this.cb15r7.Size = new System.Drawing.Size(15, 14);
-            this.cb15r7.TabIndex = 148;
-            this.cb15r7.UseVisualStyleBackColor = true;
-            this.cb15r7.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
+            this.chk15r7.AutoSize = true;
+            this.chk15r7.Enabled = false;
+            this.chk15r7.Location = new System.Drawing.Point(41, 272);
+            this.chk15r7.Name = "chk15r7";
+            this.chk15r7.Size = new System.Drawing.Size(15, 14);
+            this.chk15r7.TabIndex = 148;
+            this.chk15r7.UseVisualStyleBackColor = true;
+            this.chk15r7.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
             // 
-            // cb15r6
+            // chk15r6
             // 
-            this.cb15r6.AutoSize = true;
-            this.cb15r6.Enabled = false;
-            this.cb15r6.Location = new System.Drawing.Point(58, 272);
-            this.cb15r6.Name = "cb15r6";
-            this.cb15r6.Size = new System.Drawing.Size(15, 14);
-            this.cb15r6.TabIndex = 149;
-            this.cb15r6.UseVisualStyleBackColor = true;
-            this.cb15r6.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
+            this.chk15r6.AutoSize = true;
+            this.chk15r6.Enabled = false;
+            this.chk15r6.Location = new System.Drawing.Point(58, 272);
+            this.chk15r6.Name = "chk15r6";
+            this.chk15r6.Size = new System.Drawing.Size(15, 14);
+            this.chk15r6.TabIndex = 149;
+            this.chk15r6.UseVisualStyleBackColor = true;
+            this.chk15r6.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
             // 
-            // cb15r5
+            // chk15r5
             // 
-            this.cb15r5.AutoSize = true;
-            this.cb15r5.Enabled = false;
-            this.cb15r5.Location = new System.Drawing.Point(74, 272);
-            this.cb15r5.Name = "cb15r5";
-            this.cb15r5.Size = new System.Drawing.Size(15, 14);
-            this.cb15r5.TabIndex = 150;
-            this.cb15r5.UseVisualStyleBackColor = true;
-            this.cb15r5.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
+            this.chk15r5.AutoSize = true;
+            this.chk15r5.Enabled = false;
+            this.chk15r5.Location = new System.Drawing.Point(74, 272);
+            this.chk15r5.Name = "chk15r5";
+            this.chk15r5.Size = new System.Drawing.Size(15, 14);
+            this.chk15r5.TabIndex = 150;
+            this.chk15r5.UseVisualStyleBackColor = true;
+            this.chk15r5.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
             // 
-            // cb15r3
+            // chk15r3
             // 
-            this.cb15r3.AutoSize = true;
-            this.cb15r3.Enabled = false;
-            this.cb15r3.Location = new System.Drawing.Point(106, 272);
-            this.cb15r3.Name = "cb15r3";
-            this.cb15r3.Size = new System.Drawing.Size(15, 14);
-            this.cb15r3.TabIndex = 152;
-            this.cb15r3.UseVisualStyleBackColor = true;
-            this.cb15r3.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
+            this.chk15r3.AutoSize = true;
+            this.chk15r3.Enabled = false;
+            this.chk15r3.Location = new System.Drawing.Point(106, 272);
+            this.chk15r3.Name = "chk15r3";
+            this.chk15r3.Size = new System.Drawing.Size(15, 14);
+            this.chk15r3.TabIndex = 152;
+            this.chk15r3.UseVisualStyleBackColor = true;
+            this.chk15r3.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
             // 
-            // cb15r2
+            // chk15r2
             // 
-            this.cb15r2.AutoSize = true;
-            this.cb15r2.Enabled = false;
-            this.cb15r2.Location = new System.Drawing.Point(122, 272);
-            this.cb15r2.Name = "cb15r2";
-            this.cb15r2.Size = new System.Drawing.Size(15, 14);
-            this.cb15r2.TabIndex = 153;
-            this.cb15r2.UseVisualStyleBackColor = true;
-            this.cb15r2.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
+            this.chk15r2.AutoSize = true;
+            this.chk15r2.Enabled = false;
+            this.chk15r2.Location = new System.Drawing.Point(122, 272);
+            this.chk15r2.Name = "chk15r2";
+            this.chk15r2.Size = new System.Drawing.Size(15, 14);
+            this.chk15r2.TabIndex = 153;
+            this.chk15r2.UseVisualStyleBackColor = true;
+            this.chk15r2.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
             // 
-            // cb15r1
+            // chk15r1
             // 
-            this.cb15r1.AutoSize = true;
-            this.cb15r1.Enabled = false;
-            this.cb15r1.Location = new System.Drawing.Point(138, 272);
-            this.cb15r1.Name = "cb15r1";
-            this.cb15r1.Size = new System.Drawing.Size(15, 14);
-            this.cb15r1.TabIndex = 154;
-            this.cb15r1.UseVisualStyleBackColor = true;
-            this.cb15r1.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
+            this.chk15r1.AutoSize = true;
+            this.chk15r1.Enabled = false;
+            this.chk15r1.Location = new System.Drawing.Point(138, 272);
+            this.chk15r1.Name = "chk15r1";
+            this.chk15r1.Size = new System.Drawing.Size(15, 14);
+            this.chk15r1.TabIndex = 154;
+            this.chk15r1.UseVisualStyleBackColor = true;
+            this.chk15r1.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
             // 
-            // cb15r0
+            // chk15r0
             // 
-            this.cb15r0.AutoSize = true;
-            this.cb15r0.Enabled = false;
-            this.cb15r0.Location = new System.Drawing.Point(154, 272);
-            this.cb15r0.Name = "cb15r0";
-            this.cb15r0.Size = new System.Drawing.Size(15, 14);
-            this.cb15r0.TabIndex = 155;
-            this.cb15r0.UseVisualStyleBackColor = true;
-            this.cb15r0.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
+            this.chk15r0.AutoSize = true;
+            this.chk15r0.Enabled = false;
+            this.chk15r0.Location = new System.Drawing.Point(154, 272);
+            this.chk15r0.Name = "chk15r0";
+            this.chk15r0.Size = new System.Drawing.Size(15, 14);
+            this.chk15r0.TabIndex = 155;
+            this.chk15r0.UseVisualStyleBackColor = true;
+            this.chk15r0.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
             // 
             // label133
             // 
@@ -10462,93 +10467,93 @@ namespace DataDecoder
             this.label134.TabIndex = 147;
             this.label134.Text = "HF2";
             // 
-            // cb14r0
+            // chk14r0
             // 
-            this.cb14r0.AutoSize = true;
-            this.cb14r0.Enabled = false;
-            this.cb14r0.Location = new System.Drawing.Point(154, 257);
-            this.cb14r0.Name = "cb14r0";
-            this.cb14r0.Size = new System.Drawing.Size(15, 14);
-            this.cb14r0.TabIndex = 146;
-            this.cb14r0.UseVisualStyleBackColor = true;
-            this.cb14r0.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
+            this.chk14r0.AutoSize = true;
+            this.chk14r0.Enabled = false;
+            this.chk14r0.Location = new System.Drawing.Point(154, 257);
+            this.chk14r0.Name = "chk14r0";
+            this.chk14r0.Size = new System.Drawing.Size(15, 14);
+            this.chk14r0.TabIndex = 146;
+            this.chk14r0.UseVisualStyleBackColor = true;
+            this.chk14r0.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
             // 
-            // cb14r1
+            // chk14r1
             // 
-            this.cb14r1.AutoSize = true;
-            this.cb14r1.Enabled = false;
-            this.cb14r1.Location = new System.Drawing.Point(138, 257);
-            this.cb14r1.Name = "cb14r1";
-            this.cb14r1.Size = new System.Drawing.Size(15, 14);
-            this.cb14r1.TabIndex = 145;
-            this.cb14r1.UseVisualStyleBackColor = true;
-            this.cb14r1.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
+            this.chk14r1.AutoSize = true;
+            this.chk14r1.Enabled = false;
+            this.chk14r1.Location = new System.Drawing.Point(138, 257);
+            this.chk14r1.Name = "chk14r1";
+            this.chk14r1.Size = new System.Drawing.Size(15, 14);
+            this.chk14r1.TabIndex = 145;
+            this.chk14r1.UseVisualStyleBackColor = true;
+            this.chk14r1.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
             // 
-            // cb14r2
+            // chk14r2
             // 
-            this.cb14r2.AutoSize = true;
-            this.cb14r2.Enabled = false;
-            this.cb14r2.Location = new System.Drawing.Point(122, 257);
-            this.cb14r2.Name = "cb14r2";
-            this.cb14r2.Size = new System.Drawing.Size(15, 14);
-            this.cb14r2.TabIndex = 144;
-            this.cb14r2.UseVisualStyleBackColor = true;
-            this.cb14r2.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
+            this.chk14r2.AutoSize = true;
+            this.chk14r2.Enabled = false;
+            this.chk14r2.Location = new System.Drawing.Point(122, 257);
+            this.chk14r2.Name = "chk14r2";
+            this.chk14r2.Size = new System.Drawing.Size(15, 14);
+            this.chk14r2.TabIndex = 144;
+            this.chk14r2.UseVisualStyleBackColor = true;
+            this.chk14r2.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
             // 
-            // cb14r3
+            // chk14r3
             // 
-            this.cb14r3.AutoSize = true;
-            this.cb14r3.Enabled = false;
-            this.cb14r3.Location = new System.Drawing.Point(106, 257);
-            this.cb14r3.Name = "cb14r3";
-            this.cb14r3.Size = new System.Drawing.Size(15, 14);
-            this.cb14r3.TabIndex = 143;
-            this.cb14r3.UseVisualStyleBackColor = true;
-            this.cb14r3.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
+            this.chk14r3.AutoSize = true;
+            this.chk14r3.Enabled = false;
+            this.chk14r3.Location = new System.Drawing.Point(106, 257);
+            this.chk14r3.Name = "chk14r3";
+            this.chk14r3.Size = new System.Drawing.Size(15, 14);
+            this.chk14r3.TabIndex = 143;
+            this.chk14r3.UseVisualStyleBackColor = true;
+            this.chk14r3.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
             // 
-            // cb14r4
+            // chk14r4
             // 
-            this.cb14r4.AutoSize = true;
-            this.cb14r4.Enabled = false;
-            this.cb14r4.Location = new System.Drawing.Point(90, 257);
-            this.cb14r4.Name = "cb14r4";
-            this.cb14r4.Size = new System.Drawing.Size(15, 14);
-            this.cb14r4.TabIndex = 142;
-            this.cb14r4.UseVisualStyleBackColor = true;
-            this.cb14r4.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
+            this.chk14r4.AutoSize = true;
+            this.chk14r4.Enabled = false;
+            this.chk14r4.Location = new System.Drawing.Point(90, 257);
+            this.chk14r4.Name = "chk14r4";
+            this.chk14r4.Size = new System.Drawing.Size(15, 14);
+            this.chk14r4.TabIndex = 142;
+            this.chk14r4.UseVisualStyleBackColor = true;
+            this.chk14r4.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
             // 
-            // cb14r5
+            // chk14r5
             // 
-            this.cb14r5.AutoSize = true;
-            this.cb14r5.Enabled = false;
-            this.cb14r5.Location = new System.Drawing.Point(74, 257);
-            this.cb14r5.Name = "cb14r5";
-            this.cb14r5.Size = new System.Drawing.Size(15, 14);
-            this.cb14r5.TabIndex = 141;
-            this.cb14r5.UseVisualStyleBackColor = true;
-            this.cb14r5.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
+            this.chk14r5.AutoSize = true;
+            this.chk14r5.Enabled = false;
+            this.chk14r5.Location = new System.Drawing.Point(74, 257);
+            this.chk14r5.Name = "chk14r5";
+            this.chk14r5.Size = new System.Drawing.Size(15, 14);
+            this.chk14r5.TabIndex = 141;
+            this.chk14r5.UseVisualStyleBackColor = true;
+            this.chk14r5.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
             // 
-            // cb14r6
+            // chk14r6
             // 
-            this.cb14r6.AutoSize = true;
-            this.cb14r6.Enabled = false;
-            this.cb14r6.Location = new System.Drawing.Point(58, 257);
-            this.cb14r6.Name = "cb14r6";
-            this.cb14r6.Size = new System.Drawing.Size(15, 14);
-            this.cb14r6.TabIndex = 140;
-            this.cb14r6.UseVisualStyleBackColor = true;
-            this.cb14r6.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
+            this.chk14r6.AutoSize = true;
+            this.chk14r6.Enabled = false;
+            this.chk14r6.Location = new System.Drawing.Point(58, 257);
+            this.chk14r6.Name = "chk14r6";
+            this.chk14r6.Size = new System.Drawing.Size(15, 14);
+            this.chk14r6.TabIndex = 140;
+            this.chk14r6.UseVisualStyleBackColor = true;
+            this.chk14r6.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
             // 
-            // cb14r7
+            // chk14r7
             // 
-            this.cb14r7.AutoSize = true;
-            this.cb14r7.Enabled = false;
-            this.cb14r7.Location = new System.Drawing.Point(41, 257);
-            this.cb14r7.Name = "cb14r7";
-            this.cb14r7.Size = new System.Drawing.Size(15, 14);
-            this.cb14r7.TabIndex = 139;
-            this.cb14r7.UseVisualStyleBackColor = true;
-            this.cb14r7.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
+            this.chk14r7.AutoSize = true;
+            this.chk14r7.Enabled = false;
+            this.chk14r7.Location = new System.Drawing.Point(41, 257);
+            this.chk14r7.Name = "chk14r7";
+            this.chk14r7.Size = new System.Drawing.Size(15, 14);
+            this.chk14r7.TabIndex = 139;
+            this.chk14r7.UseVisualStyleBackColor = true;
+            this.chk14r7.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
             // 
             // label129
             // 
@@ -10560,16 +10565,16 @@ namespace DataDecoder
             this.label129.TabIndex = 138;
             this.label129.Text = "VHF+";
             // 
-            // cb13r4
+            // chk13r4
             // 
-            this.cb13r4.AutoSize = true;
-            this.cb13r4.Enabled = false;
-            this.cb13r4.Location = new System.Drawing.Point(90, 238);
-            this.cb13r4.Name = "cb13r4";
-            this.cb13r4.Size = new System.Drawing.Size(15, 14);
-            this.cb13r4.TabIndex = 128;
-            this.cb13r4.UseVisualStyleBackColor = true;
-            this.cb13r4.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
+            this.chk13r4.AutoSize = true;
+            this.chk13r4.Enabled = false;
+            this.chk13r4.Location = new System.Drawing.Point(90, 238);
+            this.chk13r4.Name = "chk13r4";
+            this.chk13r4.Size = new System.Drawing.Size(15, 14);
+            this.chk13r4.TabIndex = 128;
+            this.chk13r4.UseVisualStyleBackColor = true;
+            this.chk13r4.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
             // 
             // label104
             // 
@@ -10581,115 +10586,115 @@ namespace DataDecoder
             this.label104.TabIndex = 137;
             this.label104.Text = "- - - - - - - Port Bits - - - - - - -";
             // 
-            // cb13r7
+            // chk13r7
             // 
-            this.cb13r7.AutoSize = true;
-            this.cb13r7.Enabled = false;
-            this.cb13r7.Location = new System.Drawing.Point(41, 238);
-            this.cb13r7.Name = "cb13r7";
-            this.cb13r7.Size = new System.Drawing.Size(15, 14);
-            this.cb13r7.TabIndex = 125;
-            this.cb13r7.UseVisualStyleBackColor = true;
-            this.cb13r7.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
+            this.chk13r7.AutoSize = true;
+            this.chk13r7.Enabled = false;
+            this.chk13r7.Location = new System.Drawing.Point(41, 238);
+            this.chk13r7.Name = "chk13r7";
+            this.chk13r7.Size = new System.Drawing.Size(15, 14);
+            this.chk13r7.TabIndex = 125;
+            this.chk13r7.UseVisualStyleBackColor = true;
+            this.chk13r7.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
             // 
-            // cb13r6
+            // chk13r6
             // 
-            this.cb13r6.AutoSize = true;
-            this.cb13r6.Enabled = false;
-            this.cb13r6.Location = new System.Drawing.Point(58, 238);
-            this.cb13r6.Name = "cb13r6";
-            this.cb13r6.Size = new System.Drawing.Size(15, 14);
-            this.cb13r6.TabIndex = 126;
-            this.cb13r6.UseVisualStyleBackColor = true;
-            this.cb13r6.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
+            this.chk13r6.AutoSize = true;
+            this.chk13r6.Enabled = false;
+            this.chk13r6.Location = new System.Drawing.Point(58, 238);
+            this.chk13r6.Name = "chk13r6";
+            this.chk13r6.Size = new System.Drawing.Size(15, 14);
+            this.chk13r6.TabIndex = 126;
+            this.chk13r6.UseVisualStyleBackColor = true;
+            this.chk13r6.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
             // 
-            // cb0r3
+            // chk0r3
             // 
-            this.cb0r3.AutoSize = true;
-            this.cb0r3.Enabled = false;
-            this.cb0r3.Location = new System.Drawing.Point(106, 40);
-            this.cb0r3.Name = "cb0r3";
-            this.cb0r3.Size = new System.Drawing.Size(15, 14);
-            this.cb0r3.TabIndex = 3;
-            this.cb0r3.UseVisualStyleBackColor = true;
-            this.cb0r3.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
+            this.chk0r3.AutoSize = true;
+            this.chk0r3.Enabled = false;
+            this.chk0r3.Location = new System.Drawing.Point(106, 40);
+            this.chk0r3.Name = "chk0r3";
+            this.chk0r3.Size = new System.Drawing.Size(15, 14);
+            this.chk0r3.TabIndex = 3;
+            this.chk0r3.UseVisualStyleBackColor = true;
+            this.chk0r3.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
             // 
-            // cb13r5
+            // chk13r5
             // 
-            this.cb13r5.AutoSize = true;
-            this.cb13r5.Enabled = false;
-            this.cb13r5.Location = new System.Drawing.Point(74, 238);
-            this.cb13r5.Name = "cb13r5";
-            this.cb13r5.Size = new System.Drawing.Size(15, 14);
-            this.cb13r5.TabIndex = 127;
-            this.cb13r5.UseVisualStyleBackColor = true;
-            this.cb13r5.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
+            this.chk13r5.AutoSize = true;
+            this.chk13r5.Enabled = false;
+            this.chk13r5.Location = new System.Drawing.Point(74, 238);
+            this.chk13r5.Name = "chk13r5";
+            this.chk13r5.Size = new System.Drawing.Size(15, 14);
+            this.chk13r5.TabIndex = 127;
+            this.chk13r5.UseVisualStyleBackColor = true;
+            this.chk13r5.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
             // 
-            // cb13r3
+            // chk13r3
             // 
-            this.cb13r3.AutoSize = true;
-            this.cb13r3.Enabled = false;
-            this.cb13r3.Location = new System.Drawing.Point(106, 238);
-            this.cb13r3.Name = "cb13r3";
-            this.cb13r3.Size = new System.Drawing.Size(15, 14);
-            this.cb13r3.TabIndex = 129;
-            this.cb13r3.UseVisualStyleBackColor = true;
-            this.cb13r3.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
+            this.chk13r3.AutoSize = true;
+            this.chk13r3.Enabled = false;
+            this.chk13r3.Location = new System.Drawing.Point(106, 238);
+            this.chk13r3.Name = "chk13r3";
+            this.chk13r3.Size = new System.Drawing.Size(15, 14);
+            this.chk13r3.TabIndex = 129;
+            this.chk13r3.UseVisualStyleBackColor = true;
+            this.chk13r3.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
             // 
-            // cb0r0
+            // chk0r0
             // 
-            this.cb0r0.AutoSize = true;
-            this.cb0r0.Enabled = false;
-            this.cb0r0.Location = new System.Drawing.Point(154, 40);
-            this.cb0r0.Name = "cb0r0";
-            this.cb0r0.Size = new System.Drawing.Size(15, 14);
-            this.cb0r0.TabIndex = 0;
-            this.cb0r0.UseVisualStyleBackColor = true;
-            this.cb0r0.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
+            this.chk0r0.AutoSize = true;
+            this.chk0r0.Enabled = false;
+            this.chk0r0.Location = new System.Drawing.Point(154, 40);
+            this.chk0r0.Name = "chk0r0";
+            this.chk0r0.Size = new System.Drawing.Size(15, 14);
+            this.chk0r0.TabIndex = 0;
+            this.chk0r0.UseVisualStyleBackColor = true;
+            this.chk0r0.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
             // 
-            // cb13r2
+            // chk13r2
             // 
-            this.cb13r2.AutoSize = true;
-            this.cb13r2.Enabled = false;
-            this.cb13r2.Location = new System.Drawing.Point(122, 238);
-            this.cb13r2.Name = "cb13r2";
-            this.cb13r2.Size = new System.Drawing.Size(15, 14);
-            this.cb13r2.TabIndex = 130;
-            this.cb13r2.UseVisualStyleBackColor = true;
-            this.cb13r2.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
+            this.chk13r2.AutoSize = true;
+            this.chk13r2.Enabled = false;
+            this.chk13r2.Location = new System.Drawing.Point(122, 238);
+            this.chk13r2.Name = "chk13r2";
+            this.chk13r2.Size = new System.Drawing.Size(15, 14);
+            this.chk13r2.TabIndex = 130;
+            this.chk13r2.UseVisualStyleBackColor = true;
+            this.chk13r2.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
             // 
-            // cb13r1
+            // chk13r1
             // 
-            this.cb13r1.AutoSize = true;
-            this.cb13r1.Enabled = false;
-            this.cb13r1.Location = new System.Drawing.Point(138, 238);
-            this.cb13r1.Name = "cb13r1";
-            this.cb13r1.Size = new System.Drawing.Size(15, 14);
-            this.cb13r1.TabIndex = 131;
-            this.cb13r1.UseVisualStyleBackColor = true;
-            this.cb13r1.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
+            this.chk13r1.AutoSize = true;
+            this.chk13r1.Enabled = false;
+            this.chk13r1.Location = new System.Drawing.Point(138, 238);
+            this.chk13r1.Name = "chk13r1";
+            this.chk13r1.Size = new System.Drawing.Size(15, 14);
+            this.chk13r1.TabIndex = 131;
+            this.chk13r1.UseVisualStyleBackColor = true;
+            this.chk13r1.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
             // 
-            // cb13r0
+            // chk13r0
             // 
-            this.cb13r0.AutoSize = true;
-            this.cb13r0.Enabled = false;
-            this.cb13r0.Location = new System.Drawing.Point(154, 238);
-            this.cb13r0.Name = "cb13r0";
-            this.cb13r0.Size = new System.Drawing.Size(15, 14);
-            this.cb13r0.TabIndex = 132;
-            this.cb13r0.UseVisualStyleBackColor = true;
-            this.cb13r0.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
+            this.chk13r0.AutoSize = true;
+            this.chk13r0.Enabled = false;
+            this.chk13r0.Location = new System.Drawing.Point(154, 238);
+            this.chk13r0.Name = "chk13r0";
+            this.chk13r0.Size = new System.Drawing.Size(15, 14);
+            this.chk13r0.TabIndex = 132;
+            this.chk13r0.UseVisualStyleBackColor = true;
+            this.chk13r0.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
             // 
-            // cb0r1
+            // chk0r1
             // 
-            this.cb0r1.AutoSize = true;
-            this.cb0r1.Enabled = false;
-            this.cb0r1.Location = new System.Drawing.Point(138, 40);
-            this.cb0r1.Name = "cb0r1";
-            this.cb0r1.Size = new System.Drawing.Size(15, 14);
-            this.cb0r1.TabIndex = 1;
-            this.cb0r1.UseVisualStyleBackColor = true;
-            this.cb0r1.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
+            this.chk0r1.AutoSize = true;
+            this.chk0r1.Enabled = false;
+            this.chk0r1.Location = new System.Drawing.Point(138, 40);
+            this.chk0r1.Name = "chk0r1";
+            this.chk0r1.Size = new System.Drawing.Size(15, 14);
+            this.chk0r1.TabIndex = 1;
+            this.chk0r1.UseVisualStyleBackColor = true;
+            this.chk0r1.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
             // 
             // label102
             // 
@@ -10701,60 +10706,60 @@ namespace DataDecoder
             this.label102.TabIndex = 133;
             this.label102.Text = "12";
             // 
-            // cb0r2
+            // chk0r2
             // 
-            this.cb0r2.AutoSize = true;
-            this.cb0r2.Enabled = false;
-            this.cb0r2.Location = new System.Drawing.Point(122, 40);
-            this.cb0r2.Name = "cb0r2";
-            this.cb0r2.Size = new System.Drawing.Size(15, 14);
-            this.cb0r2.TabIndex = 2;
-            this.cb0r2.UseVisualStyleBackColor = true;
-            this.cb0r2.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
+            this.chk0r2.AutoSize = true;
+            this.chk0r2.Enabled = false;
+            this.chk0r2.Location = new System.Drawing.Point(122, 40);
+            this.chk0r2.Name = "chk0r2";
+            this.chk0r2.Size = new System.Drawing.Size(15, 14);
+            this.chk0r2.TabIndex = 2;
+            this.chk0r2.UseVisualStyleBackColor = true;
+            this.chk0r2.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
             // 
-            // cb0r4
+            // chk0r4
             // 
-            this.cb0r4.AutoSize = true;
-            this.cb0r4.Enabled = false;
-            this.cb0r4.Location = new System.Drawing.Point(91, 40);
-            this.cb0r4.Name = "cb0r4";
-            this.cb0r4.Size = new System.Drawing.Size(15, 14);
-            this.cb0r4.TabIndex = 4;
-            this.cb0r4.UseVisualStyleBackColor = true;
-            this.cb0r4.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
+            this.chk0r4.AutoSize = true;
+            this.chk0r4.Enabled = false;
+            this.chk0r4.Location = new System.Drawing.Point(91, 40);
+            this.chk0r4.Name = "chk0r4";
+            this.chk0r4.Size = new System.Drawing.Size(15, 14);
+            this.chk0r4.TabIndex = 4;
+            this.chk0r4.UseVisualStyleBackColor = true;
+            this.chk0r4.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
             // 
-            // cb0r5
+            // chk0r5
             // 
-            this.cb0r5.AutoSize = true;
-            this.cb0r5.Enabled = false;
-            this.cb0r5.Location = new System.Drawing.Point(74, 40);
-            this.cb0r5.Name = "cb0r5";
-            this.cb0r5.Size = new System.Drawing.Size(15, 14);
-            this.cb0r5.TabIndex = 5;
-            this.cb0r5.UseVisualStyleBackColor = true;
-            this.cb0r5.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
+            this.chk0r5.AutoSize = true;
+            this.chk0r5.Enabled = false;
+            this.chk0r5.Location = new System.Drawing.Point(74, 40);
+            this.chk0r5.Name = "chk0r5";
+            this.chk0r5.Size = new System.Drawing.Size(15, 14);
+            this.chk0r5.TabIndex = 5;
+            this.chk0r5.UseVisualStyleBackColor = true;
+            this.chk0r5.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
             // 
-            // cb0r6
+            // chk0r6
             // 
-            this.cb0r6.AutoSize = true;
-            this.cb0r6.Enabled = false;
-            this.cb0r6.Location = new System.Drawing.Point(58, 40);
-            this.cb0r6.Name = "cb0r6";
-            this.cb0r6.Size = new System.Drawing.Size(15, 14);
-            this.cb0r6.TabIndex = 6;
-            this.cb0r6.UseVisualStyleBackColor = true;
-            this.cb0r6.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
+            this.chk0r6.AutoSize = true;
+            this.chk0r6.Enabled = false;
+            this.chk0r6.Location = new System.Drawing.Point(58, 40);
+            this.chk0r6.Name = "chk0r6";
+            this.chk0r6.Size = new System.Drawing.Size(15, 14);
+            this.chk0r6.TabIndex = 6;
+            this.chk0r6.UseVisualStyleBackColor = true;
+            this.chk0r6.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
             // 
-            // cb0r7
+            // chk0r7
             // 
-            this.cb0r7.AutoSize = true;
-            this.cb0r7.Enabled = false;
-            this.cb0r7.Location = new System.Drawing.Point(41, 40);
-            this.cb0r7.Name = "cb0r7";
-            this.cb0r7.Size = new System.Drawing.Size(15, 14);
-            this.cb0r7.TabIndex = 7;
-            this.cb0r7.UseVisualStyleBackColor = true;
-            this.cb0r7.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
+            this.chk0r7.AutoSize = true;
+            this.chk0r7.Enabled = false;
+            this.chk0r7.Location = new System.Drawing.Point(41, 40);
+            this.chk0r7.Name = "chk0r7";
+            this.chk0r7.Size = new System.Drawing.Size(15, 14);
+            this.chk0r7.TabIndex = 7;
+            this.chk0r7.UseVisualStyleBackColor = true;
+            this.chk0r7.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
             // 
             // label101
             // 
@@ -10766,93 +10771,93 @@ namespace DataDecoder
             this.label101.TabIndex = 124;
             this.label101.Text = "13";
             // 
-            // cb12r0
+            // chk12r0
             // 
-            this.cb12r0.AutoSize = true;
-            this.cb12r0.Enabled = false;
-            this.cb12r0.Location = new System.Drawing.Point(154, 223);
-            this.cb12r0.Name = "cb12r0";
-            this.cb12r0.Size = new System.Drawing.Size(15, 14);
-            this.cb12r0.TabIndex = 123;
-            this.cb12r0.UseVisualStyleBackColor = true;
-            this.cb12r0.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
+            this.chk12r0.AutoSize = true;
+            this.chk12r0.Enabled = false;
+            this.chk12r0.Location = new System.Drawing.Point(154, 223);
+            this.chk12r0.Name = "chk12r0";
+            this.chk12r0.Size = new System.Drawing.Size(15, 14);
+            this.chk12r0.TabIndex = 123;
+            this.chk12r0.UseVisualStyleBackColor = true;
+            this.chk12r0.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
             // 
-            // cb12r1
+            // chk12r1
             // 
-            this.cb12r1.AutoSize = true;
-            this.cb12r1.Enabled = false;
-            this.cb12r1.Location = new System.Drawing.Point(138, 223);
-            this.cb12r1.Name = "cb12r1";
-            this.cb12r1.Size = new System.Drawing.Size(15, 14);
-            this.cb12r1.TabIndex = 122;
-            this.cb12r1.UseVisualStyleBackColor = true;
-            this.cb12r1.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
+            this.chk12r1.AutoSize = true;
+            this.chk12r1.Enabled = false;
+            this.chk12r1.Location = new System.Drawing.Point(138, 223);
+            this.chk12r1.Name = "chk12r1";
+            this.chk12r1.Size = new System.Drawing.Size(15, 14);
+            this.chk12r1.TabIndex = 122;
+            this.chk12r1.UseVisualStyleBackColor = true;
+            this.chk12r1.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
             // 
-            // cb12r2
+            // chk12r2
             // 
-            this.cb12r2.AutoSize = true;
-            this.cb12r2.Enabled = false;
-            this.cb12r2.Location = new System.Drawing.Point(122, 223);
-            this.cb12r2.Name = "cb12r2";
-            this.cb12r2.Size = new System.Drawing.Size(15, 14);
-            this.cb12r2.TabIndex = 121;
-            this.cb12r2.UseVisualStyleBackColor = true;
-            this.cb12r2.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
+            this.chk12r2.AutoSize = true;
+            this.chk12r2.Enabled = false;
+            this.chk12r2.Location = new System.Drawing.Point(122, 223);
+            this.chk12r2.Name = "chk12r2";
+            this.chk12r2.Size = new System.Drawing.Size(15, 14);
+            this.chk12r2.TabIndex = 121;
+            this.chk12r2.UseVisualStyleBackColor = true;
+            this.chk12r2.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
             // 
-            // cb12r3
+            // chk12r3
             // 
-            this.cb12r3.AutoSize = true;
-            this.cb12r3.Enabled = false;
-            this.cb12r3.Location = new System.Drawing.Point(106, 223);
-            this.cb12r3.Name = "cb12r3";
-            this.cb12r3.Size = new System.Drawing.Size(15, 14);
-            this.cb12r3.TabIndex = 120;
-            this.cb12r3.UseVisualStyleBackColor = true;
-            this.cb12r3.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
+            this.chk12r3.AutoSize = true;
+            this.chk12r3.Enabled = false;
+            this.chk12r3.Location = new System.Drawing.Point(106, 223);
+            this.chk12r3.Name = "chk12r3";
+            this.chk12r3.Size = new System.Drawing.Size(15, 14);
+            this.chk12r3.TabIndex = 120;
+            this.chk12r3.UseVisualStyleBackColor = true;
+            this.chk12r3.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
             // 
-            // cb12r4
+            // chk12r4
             // 
-            this.cb12r4.AutoSize = true;
-            this.cb12r4.Enabled = false;
-            this.cb12r4.Location = new System.Drawing.Point(90, 223);
-            this.cb12r4.Name = "cb12r4";
-            this.cb12r4.Size = new System.Drawing.Size(15, 14);
-            this.cb12r4.TabIndex = 119;
-            this.cb12r4.UseVisualStyleBackColor = true;
-            this.cb12r4.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
+            this.chk12r4.AutoSize = true;
+            this.chk12r4.Enabled = false;
+            this.chk12r4.Location = new System.Drawing.Point(90, 223);
+            this.chk12r4.Name = "chk12r4";
+            this.chk12r4.Size = new System.Drawing.Size(15, 14);
+            this.chk12r4.TabIndex = 119;
+            this.chk12r4.UseVisualStyleBackColor = true;
+            this.chk12r4.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
             // 
-            // cb12r5
+            // chk12r5
             // 
-            this.cb12r5.AutoSize = true;
-            this.cb12r5.Enabled = false;
-            this.cb12r5.Location = new System.Drawing.Point(74, 223);
-            this.cb12r5.Name = "cb12r5";
-            this.cb12r5.Size = new System.Drawing.Size(15, 14);
-            this.cb12r5.TabIndex = 118;
-            this.cb12r5.UseVisualStyleBackColor = true;
-            this.cb12r5.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
+            this.chk12r5.AutoSize = true;
+            this.chk12r5.Enabled = false;
+            this.chk12r5.Location = new System.Drawing.Point(74, 223);
+            this.chk12r5.Name = "chk12r5";
+            this.chk12r5.Size = new System.Drawing.Size(15, 14);
+            this.chk12r5.TabIndex = 118;
+            this.chk12r5.UseVisualStyleBackColor = true;
+            this.chk12r5.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
             // 
-            // cb12r6
+            // chk12r6
             // 
-            this.cb12r6.AutoSize = true;
-            this.cb12r6.Enabled = false;
-            this.cb12r6.Location = new System.Drawing.Point(58, 223);
-            this.cb12r6.Name = "cb12r6";
-            this.cb12r6.Size = new System.Drawing.Size(15, 14);
-            this.cb12r6.TabIndex = 117;
-            this.cb12r6.UseVisualStyleBackColor = true;
-            this.cb12r6.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
+            this.chk12r6.AutoSize = true;
+            this.chk12r6.Enabled = false;
+            this.chk12r6.Location = new System.Drawing.Point(58, 223);
+            this.chk12r6.Name = "chk12r6";
+            this.chk12r6.Size = new System.Drawing.Size(15, 14);
+            this.chk12r6.TabIndex = 117;
+            this.chk12r6.UseVisualStyleBackColor = true;
+            this.chk12r6.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
             // 
-            // cb12r7
+            // chk12r7
             // 
-            this.cb12r7.AutoSize = true;
-            this.cb12r7.Enabled = false;
-            this.cb12r7.Location = new System.Drawing.Point(41, 223);
-            this.cb12r7.Name = "cb12r7";
-            this.cb12r7.Size = new System.Drawing.Size(15, 14);
-            this.cb12r7.TabIndex = 116;
-            this.cb12r7.UseVisualStyleBackColor = true;
-            this.cb12r7.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
+            this.chk12r7.AutoSize = true;
+            this.chk12r7.Enabled = false;
+            this.chk12r7.Location = new System.Drawing.Point(41, 223);
+            this.chk12r7.Name = "chk12r7";
+            this.chk12r7.Size = new System.Drawing.Size(15, 14);
+            this.chk12r7.TabIndex = 116;
+            this.chk12r7.UseVisualStyleBackColor = true;
+            this.chk12r7.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
             // 
             // label100
             // 
@@ -10864,93 +10869,93 @@ namespace DataDecoder
             this.label100.TabIndex = 115;
             this.label100.Text = "11";
             // 
-            // cb11r0
+            // chk11r0
             // 
-            this.cb11r0.AutoSize = true;
-            this.cb11r0.Enabled = false;
-            this.cb11r0.Location = new System.Drawing.Point(154, 208);
-            this.cb11r0.Name = "cb11r0";
-            this.cb11r0.Size = new System.Drawing.Size(15, 14);
-            this.cb11r0.TabIndex = 114;
-            this.cb11r0.UseVisualStyleBackColor = true;
-            this.cb11r0.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
+            this.chk11r0.AutoSize = true;
+            this.chk11r0.Enabled = false;
+            this.chk11r0.Location = new System.Drawing.Point(154, 208);
+            this.chk11r0.Name = "chk11r0";
+            this.chk11r0.Size = new System.Drawing.Size(15, 14);
+            this.chk11r0.TabIndex = 114;
+            this.chk11r0.UseVisualStyleBackColor = true;
+            this.chk11r0.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
             // 
-            // cb11r1
+            // chk11r1
             // 
-            this.cb11r1.AutoSize = true;
-            this.cb11r1.Enabled = false;
-            this.cb11r1.Location = new System.Drawing.Point(138, 208);
-            this.cb11r1.Name = "cb11r1";
-            this.cb11r1.Size = new System.Drawing.Size(15, 14);
-            this.cb11r1.TabIndex = 113;
-            this.cb11r1.UseVisualStyleBackColor = true;
-            this.cb11r1.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
+            this.chk11r1.AutoSize = true;
+            this.chk11r1.Enabled = false;
+            this.chk11r1.Location = new System.Drawing.Point(138, 208);
+            this.chk11r1.Name = "chk11r1";
+            this.chk11r1.Size = new System.Drawing.Size(15, 14);
+            this.chk11r1.TabIndex = 113;
+            this.chk11r1.UseVisualStyleBackColor = true;
+            this.chk11r1.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
             // 
-            // cb11r2
+            // chk11r2
             // 
-            this.cb11r2.AutoSize = true;
-            this.cb11r2.Enabled = false;
-            this.cb11r2.Location = new System.Drawing.Point(122, 208);
-            this.cb11r2.Name = "cb11r2";
-            this.cb11r2.Size = new System.Drawing.Size(15, 14);
-            this.cb11r2.TabIndex = 112;
-            this.cb11r2.UseVisualStyleBackColor = true;
-            this.cb11r2.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
+            this.chk11r2.AutoSize = true;
+            this.chk11r2.Enabled = false;
+            this.chk11r2.Location = new System.Drawing.Point(122, 208);
+            this.chk11r2.Name = "chk11r2";
+            this.chk11r2.Size = new System.Drawing.Size(15, 14);
+            this.chk11r2.TabIndex = 112;
+            this.chk11r2.UseVisualStyleBackColor = true;
+            this.chk11r2.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
             // 
-            // cb11r3
+            // chk11r3
             // 
-            this.cb11r3.AutoSize = true;
-            this.cb11r3.Enabled = false;
-            this.cb11r3.Location = new System.Drawing.Point(106, 208);
-            this.cb11r3.Name = "cb11r3";
-            this.cb11r3.Size = new System.Drawing.Size(15, 14);
-            this.cb11r3.TabIndex = 111;
-            this.cb11r3.UseVisualStyleBackColor = true;
-            this.cb11r3.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
+            this.chk11r3.AutoSize = true;
+            this.chk11r3.Enabled = false;
+            this.chk11r3.Location = new System.Drawing.Point(106, 208);
+            this.chk11r3.Name = "chk11r3";
+            this.chk11r3.Size = new System.Drawing.Size(15, 14);
+            this.chk11r3.TabIndex = 111;
+            this.chk11r3.UseVisualStyleBackColor = true;
+            this.chk11r3.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
             // 
-            // cb11r4
+            // chk11r4
             // 
-            this.cb11r4.AutoSize = true;
-            this.cb11r4.Enabled = false;
-            this.cb11r4.Location = new System.Drawing.Point(90, 208);
-            this.cb11r4.Name = "cb11r4";
-            this.cb11r4.Size = new System.Drawing.Size(15, 14);
-            this.cb11r4.TabIndex = 110;
-            this.cb11r4.UseVisualStyleBackColor = true;
-            this.cb11r4.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
+            this.chk11r4.AutoSize = true;
+            this.chk11r4.Enabled = false;
+            this.chk11r4.Location = new System.Drawing.Point(90, 208);
+            this.chk11r4.Name = "chk11r4";
+            this.chk11r4.Size = new System.Drawing.Size(15, 14);
+            this.chk11r4.TabIndex = 110;
+            this.chk11r4.UseVisualStyleBackColor = true;
+            this.chk11r4.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
             // 
-            // cb11r5
+            // chk11r5
             // 
-            this.cb11r5.AutoSize = true;
-            this.cb11r5.Enabled = false;
-            this.cb11r5.Location = new System.Drawing.Point(74, 208);
-            this.cb11r5.Name = "cb11r5";
-            this.cb11r5.Size = new System.Drawing.Size(15, 14);
-            this.cb11r5.TabIndex = 109;
-            this.cb11r5.UseVisualStyleBackColor = true;
-            this.cb11r5.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
+            this.chk11r5.AutoSize = true;
+            this.chk11r5.Enabled = false;
+            this.chk11r5.Location = new System.Drawing.Point(74, 208);
+            this.chk11r5.Name = "chk11r5";
+            this.chk11r5.Size = new System.Drawing.Size(15, 14);
+            this.chk11r5.TabIndex = 109;
+            this.chk11r5.UseVisualStyleBackColor = true;
+            this.chk11r5.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
             // 
-            // cb11r6
+            // chk11r6
             // 
-            this.cb11r6.AutoSize = true;
-            this.cb11r6.Enabled = false;
-            this.cb11r6.Location = new System.Drawing.Point(58, 208);
-            this.cb11r6.Name = "cb11r6";
-            this.cb11r6.Size = new System.Drawing.Size(15, 14);
-            this.cb11r6.TabIndex = 108;
-            this.cb11r6.UseVisualStyleBackColor = true;
-            this.cb11r6.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
+            this.chk11r6.AutoSize = true;
+            this.chk11r6.Enabled = false;
+            this.chk11r6.Location = new System.Drawing.Point(58, 208);
+            this.chk11r6.Name = "chk11r6";
+            this.chk11r6.Size = new System.Drawing.Size(15, 14);
+            this.chk11r6.TabIndex = 108;
+            this.chk11r6.UseVisualStyleBackColor = true;
+            this.chk11r6.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
             // 
-            // cb11r7
+            // chk11r7
             // 
-            this.cb11r7.AutoSize = true;
-            this.cb11r7.Enabled = false;
-            this.cb11r7.Location = new System.Drawing.Point(41, 208);
-            this.cb11r7.Name = "cb11r7";
-            this.cb11r7.Size = new System.Drawing.Size(15, 14);
-            this.cb11r7.TabIndex = 107;
-            this.cb11r7.UseVisualStyleBackColor = true;
-            this.cb11r7.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
+            this.chk11r7.AutoSize = true;
+            this.chk11r7.Enabled = false;
+            this.chk11r7.Location = new System.Drawing.Point(41, 208);
+            this.chk11r7.Name = "chk11r7";
+            this.chk11r7.Size = new System.Drawing.Size(15, 14);
+            this.chk11r7.TabIndex = 107;
+            this.chk11r7.UseVisualStyleBackColor = true;
+            this.chk11r7.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
             // 
             // label99
             // 
@@ -10962,93 +10967,93 @@ namespace DataDecoder
             this.label99.TabIndex = 106;
             this.label99.Text = "10";
             // 
-            // cb10r0
+            // chk10r0
             // 
-            this.cb10r0.AutoSize = true;
-            this.cb10r0.Enabled = false;
-            this.cb10r0.Location = new System.Drawing.Point(154, 193);
-            this.cb10r0.Name = "cb10r0";
-            this.cb10r0.Size = new System.Drawing.Size(15, 14);
-            this.cb10r0.TabIndex = 105;
-            this.cb10r0.UseVisualStyleBackColor = true;
-            this.cb10r0.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
+            this.chk10r0.AutoSize = true;
+            this.chk10r0.Enabled = false;
+            this.chk10r0.Location = new System.Drawing.Point(154, 193);
+            this.chk10r0.Name = "chk10r0";
+            this.chk10r0.Size = new System.Drawing.Size(15, 14);
+            this.chk10r0.TabIndex = 105;
+            this.chk10r0.UseVisualStyleBackColor = true;
+            this.chk10r0.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
             // 
-            // cb10r1
+            // chk10r1
             // 
-            this.cb10r1.AutoSize = true;
-            this.cb10r1.Enabled = false;
-            this.cb10r1.Location = new System.Drawing.Point(138, 193);
-            this.cb10r1.Name = "cb10r1";
-            this.cb10r1.Size = new System.Drawing.Size(15, 14);
-            this.cb10r1.TabIndex = 104;
-            this.cb10r1.UseVisualStyleBackColor = true;
-            this.cb10r1.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
+            this.chk10r1.AutoSize = true;
+            this.chk10r1.Enabled = false;
+            this.chk10r1.Location = new System.Drawing.Point(138, 193);
+            this.chk10r1.Name = "chk10r1";
+            this.chk10r1.Size = new System.Drawing.Size(15, 14);
+            this.chk10r1.TabIndex = 104;
+            this.chk10r1.UseVisualStyleBackColor = true;
+            this.chk10r1.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
             // 
-            // cb10r2
+            // chk10r2
             // 
-            this.cb10r2.AutoSize = true;
-            this.cb10r2.Enabled = false;
-            this.cb10r2.Location = new System.Drawing.Point(122, 193);
-            this.cb10r2.Name = "cb10r2";
-            this.cb10r2.Size = new System.Drawing.Size(15, 14);
-            this.cb10r2.TabIndex = 103;
-            this.cb10r2.UseVisualStyleBackColor = true;
-            this.cb10r2.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
+            this.chk10r2.AutoSize = true;
+            this.chk10r2.Enabled = false;
+            this.chk10r2.Location = new System.Drawing.Point(122, 193);
+            this.chk10r2.Name = "chk10r2";
+            this.chk10r2.Size = new System.Drawing.Size(15, 14);
+            this.chk10r2.TabIndex = 103;
+            this.chk10r2.UseVisualStyleBackColor = true;
+            this.chk10r2.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
             // 
-            // cb10r3
+            // chk10r3
             // 
-            this.cb10r3.AutoSize = true;
-            this.cb10r3.Enabled = false;
-            this.cb10r3.Location = new System.Drawing.Point(106, 193);
-            this.cb10r3.Name = "cb10r3";
-            this.cb10r3.Size = new System.Drawing.Size(15, 14);
-            this.cb10r3.TabIndex = 102;
-            this.cb10r3.UseVisualStyleBackColor = true;
-            this.cb10r3.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
+            this.chk10r3.AutoSize = true;
+            this.chk10r3.Enabled = false;
+            this.chk10r3.Location = new System.Drawing.Point(106, 193);
+            this.chk10r3.Name = "chk10r3";
+            this.chk10r3.Size = new System.Drawing.Size(15, 14);
+            this.chk10r3.TabIndex = 102;
+            this.chk10r3.UseVisualStyleBackColor = true;
+            this.chk10r3.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
             // 
-            // cb10r4
+            // chk10r4
             // 
-            this.cb10r4.AutoSize = true;
-            this.cb10r4.Enabled = false;
-            this.cb10r4.Location = new System.Drawing.Point(90, 193);
-            this.cb10r4.Name = "cb10r4";
-            this.cb10r4.Size = new System.Drawing.Size(15, 14);
-            this.cb10r4.TabIndex = 101;
-            this.cb10r4.UseVisualStyleBackColor = true;
-            this.cb10r4.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
+            this.chk10r4.AutoSize = true;
+            this.chk10r4.Enabled = false;
+            this.chk10r4.Location = new System.Drawing.Point(90, 193);
+            this.chk10r4.Name = "chk10r4";
+            this.chk10r4.Size = new System.Drawing.Size(15, 14);
+            this.chk10r4.TabIndex = 101;
+            this.chk10r4.UseVisualStyleBackColor = true;
+            this.chk10r4.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
             // 
-            // cb10r5
+            // chk10r5
             // 
-            this.cb10r5.AutoSize = true;
-            this.cb10r5.Enabled = false;
-            this.cb10r5.Location = new System.Drawing.Point(74, 193);
-            this.cb10r5.Name = "cb10r5";
-            this.cb10r5.Size = new System.Drawing.Size(15, 14);
-            this.cb10r5.TabIndex = 100;
-            this.cb10r5.UseVisualStyleBackColor = true;
-            this.cb10r5.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
+            this.chk10r5.AutoSize = true;
+            this.chk10r5.Enabled = false;
+            this.chk10r5.Location = new System.Drawing.Point(74, 193);
+            this.chk10r5.Name = "chk10r5";
+            this.chk10r5.Size = new System.Drawing.Size(15, 14);
+            this.chk10r5.TabIndex = 100;
+            this.chk10r5.UseVisualStyleBackColor = true;
+            this.chk10r5.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
             // 
-            // cb10r6
+            // chk10r6
             // 
-            this.cb10r6.AutoSize = true;
-            this.cb10r6.Enabled = false;
-            this.cb10r6.Location = new System.Drawing.Point(58, 193);
-            this.cb10r6.Name = "cb10r6";
-            this.cb10r6.Size = new System.Drawing.Size(15, 14);
-            this.cb10r6.TabIndex = 99;
-            this.cb10r6.UseVisualStyleBackColor = true;
-            this.cb10r6.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
+            this.chk10r6.AutoSize = true;
+            this.chk10r6.Enabled = false;
+            this.chk10r6.Location = new System.Drawing.Point(58, 193);
+            this.chk10r6.Name = "chk10r6";
+            this.chk10r6.Size = new System.Drawing.Size(15, 14);
+            this.chk10r6.TabIndex = 99;
+            this.chk10r6.UseVisualStyleBackColor = true;
+            this.chk10r6.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
             // 
-            // cb10r7
+            // chk10r7
             // 
-            this.cb10r7.AutoSize = true;
-            this.cb10r7.Enabled = false;
-            this.cb10r7.Location = new System.Drawing.Point(41, 193);
-            this.cb10r7.Name = "cb10r7";
-            this.cb10r7.Size = new System.Drawing.Size(15, 14);
-            this.cb10r7.TabIndex = 98;
-            this.cb10r7.UseVisualStyleBackColor = true;
-            this.cb10r7.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
+            this.chk10r7.AutoSize = true;
+            this.chk10r7.Enabled = false;
+            this.chk10r7.Location = new System.Drawing.Point(41, 193);
+            this.chk10r7.Name = "chk10r7";
+            this.chk10r7.Size = new System.Drawing.Size(15, 14);
+            this.chk10r7.TabIndex = 98;
+            this.chk10r7.UseVisualStyleBackColor = true;
+            this.chk10r7.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
             // 
             // label98
             // 
@@ -11060,93 +11065,93 @@ namespace DataDecoder
             this.label98.TabIndex = 97;
             this.label98.Text = "9";
             // 
-            // cb9r0
+            // chk9r0
             // 
-            this.cb9r0.AutoSize = true;
-            this.cb9r0.Enabled = false;
-            this.cb9r0.Location = new System.Drawing.Point(154, 178);
-            this.cb9r0.Name = "cb9r0";
-            this.cb9r0.Size = new System.Drawing.Size(15, 14);
-            this.cb9r0.TabIndex = 96;
-            this.cb9r0.UseVisualStyleBackColor = true;
-            this.cb9r0.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
+            this.chk9r0.AutoSize = true;
+            this.chk9r0.Enabled = false;
+            this.chk9r0.Location = new System.Drawing.Point(154, 178);
+            this.chk9r0.Name = "chk9r0";
+            this.chk9r0.Size = new System.Drawing.Size(15, 14);
+            this.chk9r0.TabIndex = 96;
+            this.chk9r0.UseVisualStyleBackColor = true;
+            this.chk9r0.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
             // 
-            // cb9r1
+            // chk9r1
             // 
-            this.cb9r1.AutoSize = true;
-            this.cb9r1.Enabled = false;
-            this.cb9r1.Location = new System.Drawing.Point(138, 178);
-            this.cb9r1.Name = "cb9r1";
-            this.cb9r1.Size = new System.Drawing.Size(15, 14);
-            this.cb9r1.TabIndex = 95;
-            this.cb9r1.UseVisualStyleBackColor = true;
-            this.cb9r1.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
+            this.chk9r1.AutoSize = true;
+            this.chk9r1.Enabled = false;
+            this.chk9r1.Location = new System.Drawing.Point(138, 178);
+            this.chk9r1.Name = "chk9r1";
+            this.chk9r1.Size = new System.Drawing.Size(15, 14);
+            this.chk9r1.TabIndex = 95;
+            this.chk9r1.UseVisualStyleBackColor = true;
+            this.chk9r1.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
             // 
-            // cb9r2
+            // chk9r2
             // 
-            this.cb9r2.AutoSize = true;
-            this.cb9r2.Enabled = false;
-            this.cb9r2.Location = new System.Drawing.Point(122, 178);
-            this.cb9r2.Name = "cb9r2";
-            this.cb9r2.Size = new System.Drawing.Size(15, 14);
-            this.cb9r2.TabIndex = 94;
-            this.cb9r2.UseVisualStyleBackColor = true;
-            this.cb9r2.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
+            this.chk9r2.AutoSize = true;
+            this.chk9r2.Enabled = false;
+            this.chk9r2.Location = new System.Drawing.Point(122, 178);
+            this.chk9r2.Name = "chk9r2";
+            this.chk9r2.Size = new System.Drawing.Size(15, 14);
+            this.chk9r2.TabIndex = 94;
+            this.chk9r2.UseVisualStyleBackColor = true;
+            this.chk9r2.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
             // 
-            // cb9r3
+            // chk9r3
             // 
-            this.cb9r3.AutoSize = true;
-            this.cb9r3.Enabled = false;
-            this.cb9r3.Location = new System.Drawing.Point(106, 178);
-            this.cb9r3.Name = "cb9r3";
-            this.cb9r3.Size = new System.Drawing.Size(15, 14);
-            this.cb9r3.TabIndex = 93;
-            this.cb9r3.UseVisualStyleBackColor = true;
-            this.cb9r3.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
+            this.chk9r3.AutoSize = true;
+            this.chk9r3.Enabled = false;
+            this.chk9r3.Location = new System.Drawing.Point(106, 178);
+            this.chk9r3.Name = "chk9r3";
+            this.chk9r3.Size = new System.Drawing.Size(15, 14);
+            this.chk9r3.TabIndex = 93;
+            this.chk9r3.UseVisualStyleBackColor = true;
+            this.chk9r3.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
             // 
-            // cb9r4
+            // chk9r4
             // 
-            this.cb9r4.AutoSize = true;
-            this.cb9r4.Enabled = false;
-            this.cb9r4.Location = new System.Drawing.Point(90, 178);
-            this.cb9r4.Name = "cb9r4";
-            this.cb9r4.Size = new System.Drawing.Size(15, 14);
-            this.cb9r4.TabIndex = 92;
-            this.cb9r4.UseVisualStyleBackColor = true;
-            this.cb9r4.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
+            this.chk9r4.AutoSize = true;
+            this.chk9r4.Enabled = false;
+            this.chk9r4.Location = new System.Drawing.Point(90, 178);
+            this.chk9r4.Name = "chk9r4";
+            this.chk9r4.Size = new System.Drawing.Size(15, 14);
+            this.chk9r4.TabIndex = 92;
+            this.chk9r4.UseVisualStyleBackColor = true;
+            this.chk9r4.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
             // 
-            // cb9r5
+            // chk9r5
             // 
-            this.cb9r5.AutoSize = true;
-            this.cb9r5.Enabled = false;
-            this.cb9r5.Location = new System.Drawing.Point(74, 178);
-            this.cb9r5.Name = "cb9r5";
-            this.cb9r5.Size = new System.Drawing.Size(15, 14);
-            this.cb9r5.TabIndex = 91;
-            this.cb9r5.UseVisualStyleBackColor = true;
-            this.cb9r5.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
+            this.chk9r5.AutoSize = true;
+            this.chk9r5.Enabled = false;
+            this.chk9r5.Location = new System.Drawing.Point(74, 178);
+            this.chk9r5.Name = "chk9r5";
+            this.chk9r5.Size = new System.Drawing.Size(15, 14);
+            this.chk9r5.TabIndex = 91;
+            this.chk9r5.UseVisualStyleBackColor = true;
+            this.chk9r5.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
             // 
-            // cb9r6
+            // chk9r6
             // 
-            this.cb9r6.AutoSize = true;
-            this.cb9r6.Enabled = false;
-            this.cb9r6.Location = new System.Drawing.Point(58, 178);
-            this.cb9r6.Name = "cb9r6";
-            this.cb9r6.Size = new System.Drawing.Size(15, 14);
-            this.cb9r6.TabIndex = 90;
-            this.cb9r6.UseVisualStyleBackColor = true;
-            this.cb9r6.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
+            this.chk9r6.AutoSize = true;
+            this.chk9r6.Enabled = false;
+            this.chk9r6.Location = new System.Drawing.Point(58, 178);
+            this.chk9r6.Name = "chk9r6";
+            this.chk9r6.Size = new System.Drawing.Size(15, 14);
+            this.chk9r6.TabIndex = 90;
+            this.chk9r6.UseVisualStyleBackColor = true;
+            this.chk9r6.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
             // 
-            // cb9r7
+            // chk9r7
             // 
-            this.cb9r7.AutoSize = true;
-            this.cb9r7.Enabled = false;
-            this.cb9r7.Location = new System.Drawing.Point(41, 178);
-            this.cb9r7.Name = "cb9r7";
-            this.cb9r7.Size = new System.Drawing.Size(15, 14);
-            this.cb9r7.TabIndex = 89;
-            this.cb9r7.UseVisualStyleBackColor = true;
-            this.cb9r7.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
+            this.chk9r7.AutoSize = true;
+            this.chk9r7.Enabled = false;
+            this.chk9r7.Location = new System.Drawing.Point(41, 178);
+            this.chk9r7.Name = "chk9r7";
+            this.chk9r7.Size = new System.Drawing.Size(15, 14);
+            this.chk9r7.TabIndex = 89;
+            this.chk9r7.UseVisualStyleBackColor = true;
+            this.chk9r7.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
             // 
             // label97
             // 
@@ -11158,93 +11163,93 @@ namespace DataDecoder
             this.label97.TabIndex = 88;
             this.label97.Text = "8";
             // 
-            // cb8r0
+            // chk8r0
             // 
-            this.cb8r0.AutoSize = true;
-            this.cb8r0.Enabled = false;
-            this.cb8r0.Location = new System.Drawing.Point(154, 163);
-            this.cb8r0.Name = "cb8r0";
-            this.cb8r0.Size = new System.Drawing.Size(15, 14);
-            this.cb8r0.TabIndex = 87;
-            this.cb8r0.UseVisualStyleBackColor = true;
-            this.cb8r0.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
+            this.chk8r0.AutoSize = true;
+            this.chk8r0.Enabled = false;
+            this.chk8r0.Location = new System.Drawing.Point(154, 163);
+            this.chk8r0.Name = "chk8r0";
+            this.chk8r0.Size = new System.Drawing.Size(15, 14);
+            this.chk8r0.TabIndex = 87;
+            this.chk8r0.UseVisualStyleBackColor = true;
+            this.chk8r0.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
             // 
-            // cb8r1
+            // chk8r1
             // 
-            this.cb8r1.AutoSize = true;
-            this.cb8r1.Enabled = false;
-            this.cb8r1.Location = new System.Drawing.Point(138, 163);
-            this.cb8r1.Name = "cb8r1";
-            this.cb8r1.Size = new System.Drawing.Size(15, 14);
-            this.cb8r1.TabIndex = 86;
-            this.cb8r1.UseVisualStyleBackColor = true;
-            this.cb8r1.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
+            this.chk8r1.AutoSize = true;
+            this.chk8r1.Enabled = false;
+            this.chk8r1.Location = new System.Drawing.Point(138, 163);
+            this.chk8r1.Name = "chk8r1";
+            this.chk8r1.Size = new System.Drawing.Size(15, 14);
+            this.chk8r1.TabIndex = 86;
+            this.chk8r1.UseVisualStyleBackColor = true;
+            this.chk8r1.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
             // 
-            // cb8r2
+            // chk8r2
             // 
-            this.cb8r2.AutoSize = true;
-            this.cb8r2.Enabled = false;
-            this.cb8r2.Location = new System.Drawing.Point(122, 163);
-            this.cb8r2.Name = "cb8r2";
-            this.cb8r2.Size = new System.Drawing.Size(15, 14);
-            this.cb8r2.TabIndex = 85;
-            this.cb8r2.UseVisualStyleBackColor = true;
-            this.cb8r2.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
+            this.chk8r2.AutoSize = true;
+            this.chk8r2.Enabled = false;
+            this.chk8r2.Location = new System.Drawing.Point(122, 163);
+            this.chk8r2.Name = "chk8r2";
+            this.chk8r2.Size = new System.Drawing.Size(15, 14);
+            this.chk8r2.TabIndex = 85;
+            this.chk8r2.UseVisualStyleBackColor = true;
+            this.chk8r2.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
             // 
-            // cb8r3
+            // chk8r3
             // 
-            this.cb8r3.AutoSize = true;
-            this.cb8r3.Enabled = false;
-            this.cb8r3.Location = new System.Drawing.Point(106, 163);
-            this.cb8r3.Name = "cb8r3";
-            this.cb8r3.Size = new System.Drawing.Size(15, 14);
-            this.cb8r3.TabIndex = 84;
-            this.cb8r3.UseVisualStyleBackColor = true;
-            this.cb8r3.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
+            this.chk8r3.AutoSize = true;
+            this.chk8r3.Enabled = false;
+            this.chk8r3.Location = new System.Drawing.Point(106, 163);
+            this.chk8r3.Name = "chk8r3";
+            this.chk8r3.Size = new System.Drawing.Size(15, 14);
+            this.chk8r3.TabIndex = 84;
+            this.chk8r3.UseVisualStyleBackColor = true;
+            this.chk8r3.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
             // 
-            // cb8r4
+            // chkb8r4
             // 
-            this.cb8r4.AutoSize = true;
-            this.cb8r4.Enabled = false;
-            this.cb8r4.Location = new System.Drawing.Point(90, 163);
-            this.cb8r4.Name = "cb8r4";
-            this.cb8r4.Size = new System.Drawing.Size(15, 14);
-            this.cb8r4.TabIndex = 83;
-            this.cb8r4.UseVisualStyleBackColor = true;
-            this.cb8r4.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
+            this.chkb8r4.AutoSize = true;
+            this.chkb8r4.Enabled = false;
+            this.chkb8r4.Location = new System.Drawing.Point(90, 163);
+            this.chkb8r4.Name = "chkb8r4";
+            this.chkb8r4.Size = new System.Drawing.Size(15, 14);
+            this.chkb8r4.TabIndex = 83;
+            this.chkb8r4.UseVisualStyleBackColor = true;
+            this.chkb8r4.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
             // 
-            // cb8r5
+            // chk8r5
             // 
-            this.cb8r5.AutoSize = true;
-            this.cb8r5.Enabled = false;
-            this.cb8r5.Location = new System.Drawing.Point(74, 163);
-            this.cb8r5.Name = "cb8r5";
-            this.cb8r5.Size = new System.Drawing.Size(15, 14);
-            this.cb8r5.TabIndex = 82;
-            this.cb8r5.UseVisualStyleBackColor = true;
-            this.cb8r5.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
+            this.chk8r5.AutoSize = true;
+            this.chk8r5.Enabled = false;
+            this.chk8r5.Location = new System.Drawing.Point(74, 163);
+            this.chk8r5.Name = "chk8r5";
+            this.chk8r5.Size = new System.Drawing.Size(15, 14);
+            this.chk8r5.TabIndex = 82;
+            this.chk8r5.UseVisualStyleBackColor = true;
+            this.chk8r5.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
             // 
-            // cb8r6
+            // chk8r6
             // 
-            this.cb8r6.AutoSize = true;
-            this.cb8r6.Enabled = false;
-            this.cb8r6.Location = new System.Drawing.Point(58, 163);
-            this.cb8r6.Name = "cb8r6";
-            this.cb8r6.Size = new System.Drawing.Size(15, 14);
-            this.cb8r6.TabIndex = 81;
-            this.cb8r6.UseVisualStyleBackColor = true;
-            this.cb8r6.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
+            this.chk8r6.AutoSize = true;
+            this.chk8r6.Enabled = false;
+            this.chk8r6.Location = new System.Drawing.Point(58, 163);
+            this.chk8r6.Name = "chk8r6";
+            this.chk8r6.Size = new System.Drawing.Size(15, 14);
+            this.chk8r6.TabIndex = 81;
+            this.chk8r6.UseVisualStyleBackColor = true;
+            this.chk8r6.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
             // 
-            // cb8r7
+            // chk8r7
             // 
-            this.cb8r7.AutoSize = true;
-            this.cb8r7.Enabled = false;
-            this.cb8r7.Location = new System.Drawing.Point(41, 163);
-            this.cb8r7.Name = "cb8r7";
-            this.cb8r7.Size = new System.Drawing.Size(15, 14);
-            this.cb8r7.TabIndex = 80;
-            this.cb8r7.UseVisualStyleBackColor = true;
-            this.cb8r7.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
+            this.chk8r7.AutoSize = true;
+            this.chk8r7.Enabled = false;
+            this.chk8r7.Location = new System.Drawing.Point(41, 163);
+            this.chk8r7.Name = "chk8r7";
+            this.chk8r7.Size = new System.Drawing.Size(15, 14);
+            this.chk8r7.TabIndex = 80;
+            this.chk8r7.UseVisualStyleBackColor = true;
+            this.chk8r7.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
             // 
             // label96
             // 
@@ -11256,93 +11261,93 @@ namespace DataDecoder
             this.label96.TabIndex = 79;
             this.label96.Text = "7";
             // 
-            // cb7r0
+            // chk7r0
             // 
-            this.cb7r0.AutoSize = true;
-            this.cb7r0.Enabled = false;
-            this.cb7r0.Location = new System.Drawing.Point(154, 148);
-            this.cb7r0.Name = "cb7r0";
-            this.cb7r0.Size = new System.Drawing.Size(15, 14);
-            this.cb7r0.TabIndex = 78;
-            this.cb7r0.UseVisualStyleBackColor = true;
-            this.cb7r0.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
+            this.chk7r0.AutoSize = true;
+            this.chk7r0.Enabled = false;
+            this.chk7r0.Location = new System.Drawing.Point(154, 148);
+            this.chk7r0.Name = "chk7r0";
+            this.chk7r0.Size = new System.Drawing.Size(15, 14);
+            this.chk7r0.TabIndex = 78;
+            this.chk7r0.UseVisualStyleBackColor = true;
+            this.chk7r0.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
             // 
-            // cb7r1
+            // chk7r1
             // 
-            this.cb7r1.AutoSize = true;
-            this.cb7r1.Enabled = false;
-            this.cb7r1.Location = new System.Drawing.Point(138, 148);
-            this.cb7r1.Name = "cb7r1";
-            this.cb7r1.Size = new System.Drawing.Size(15, 14);
-            this.cb7r1.TabIndex = 77;
-            this.cb7r1.UseVisualStyleBackColor = true;
-            this.cb7r1.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
+            this.chk7r1.AutoSize = true;
+            this.chk7r1.Enabled = false;
+            this.chk7r1.Location = new System.Drawing.Point(138, 148);
+            this.chk7r1.Name = "chk7r1";
+            this.chk7r1.Size = new System.Drawing.Size(15, 14);
+            this.chk7r1.TabIndex = 77;
+            this.chk7r1.UseVisualStyleBackColor = true;
+            this.chk7r1.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
             // 
-            // cb7r2
+            // chk7r2
             // 
-            this.cb7r2.AutoSize = true;
-            this.cb7r2.Enabled = false;
-            this.cb7r2.Location = new System.Drawing.Point(122, 148);
-            this.cb7r2.Name = "cb7r2";
-            this.cb7r2.Size = new System.Drawing.Size(15, 14);
-            this.cb7r2.TabIndex = 76;
-            this.cb7r2.UseVisualStyleBackColor = true;
-            this.cb7r2.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
+            this.chk7r2.AutoSize = true;
+            this.chk7r2.Enabled = false;
+            this.chk7r2.Location = new System.Drawing.Point(122, 148);
+            this.chk7r2.Name = "chk7r2";
+            this.chk7r2.Size = new System.Drawing.Size(15, 14);
+            this.chk7r2.TabIndex = 76;
+            this.chk7r2.UseVisualStyleBackColor = true;
+            this.chk7r2.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
             // 
-            // cb7r3
+            // chk7r3
             // 
-            this.cb7r3.AutoSize = true;
-            this.cb7r3.Enabled = false;
-            this.cb7r3.Location = new System.Drawing.Point(106, 148);
-            this.cb7r3.Name = "cb7r3";
-            this.cb7r3.Size = new System.Drawing.Size(15, 14);
-            this.cb7r3.TabIndex = 75;
-            this.cb7r3.UseVisualStyleBackColor = true;
-            this.cb7r3.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
+            this.chk7r3.AutoSize = true;
+            this.chk7r3.Enabled = false;
+            this.chk7r3.Location = new System.Drawing.Point(106, 148);
+            this.chk7r3.Name = "chk7r3";
+            this.chk7r3.Size = new System.Drawing.Size(15, 14);
+            this.chk7r3.TabIndex = 75;
+            this.chk7r3.UseVisualStyleBackColor = true;
+            this.chk7r3.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
             // 
-            // cb7r4
+            // chk7r4
             // 
-            this.cb7r4.AutoSize = true;
-            this.cb7r4.Enabled = false;
-            this.cb7r4.Location = new System.Drawing.Point(90, 148);
-            this.cb7r4.Name = "cb7r4";
-            this.cb7r4.Size = new System.Drawing.Size(15, 14);
-            this.cb7r4.TabIndex = 74;
-            this.cb7r4.UseVisualStyleBackColor = true;
-            this.cb7r4.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
+            this.chk7r4.AutoSize = true;
+            this.chk7r4.Enabled = false;
+            this.chk7r4.Location = new System.Drawing.Point(90, 148);
+            this.chk7r4.Name = "chk7r4";
+            this.chk7r4.Size = new System.Drawing.Size(15, 14);
+            this.chk7r4.TabIndex = 74;
+            this.chk7r4.UseVisualStyleBackColor = true;
+            this.chk7r4.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
             // 
-            // cb7r5
+            // chk7r5
             // 
-            this.cb7r5.AutoSize = true;
-            this.cb7r5.Enabled = false;
-            this.cb7r5.Location = new System.Drawing.Point(74, 148);
-            this.cb7r5.Name = "cb7r5";
-            this.cb7r5.Size = new System.Drawing.Size(15, 14);
-            this.cb7r5.TabIndex = 73;
-            this.cb7r5.UseVisualStyleBackColor = true;
-            this.cb7r5.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
+            this.chk7r5.AutoSize = true;
+            this.chk7r5.Enabled = false;
+            this.chk7r5.Location = new System.Drawing.Point(74, 148);
+            this.chk7r5.Name = "chk7r5";
+            this.chk7r5.Size = new System.Drawing.Size(15, 14);
+            this.chk7r5.TabIndex = 73;
+            this.chk7r5.UseVisualStyleBackColor = true;
+            this.chk7r5.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
             // 
-            // cb7r6
+            // chk7r6
             // 
-            this.cb7r6.AutoSize = true;
-            this.cb7r6.Enabled = false;
-            this.cb7r6.Location = new System.Drawing.Point(58, 148);
-            this.cb7r6.Name = "cb7r6";
-            this.cb7r6.Size = new System.Drawing.Size(15, 14);
-            this.cb7r6.TabIndex = 72;
-            this.cb7r6.UseVisualStyleBackColor = true;
-            this.cb7r6.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
+            this.chk7r6.AutoSize = true;
+            this.chk7r6.Enabled = false;
+            this.chk7r6.Location = new System.Drawing.Point(58, 148);
+            this.chk7r6.Name = "chk7r6";
+            this.chk7r6.Size = new System.Drawing.Size(15, 14);
+            this.chk7r6.TabIndex = 72;
+            this.chk7r6.UseVisualStyleBackColor = true;
+            this.chk7r6.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
             // 
-            // cb7r7
+            // chk7r7
             // 
-            this.cb7r7.AutoSize = true;
-            this.cb7r7.Enabled = false;
-            this.cb7r7.Location = new System.Drawing.Point(41, 148);
-            this.cb7r7.Name = "cb7r7";
-            this.cb7r7.Size = new System.Drawing.Size(15, 14);
-            this.cb7r7.TabIndex = 71;
-            this.cb7r7.UseVisualStyleBackColor = true;
-            this.cb7r7.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
+            this.chk7r7.AutoSize = true;
+            this.chk7r7.Enabled = false;
+            this.chk7r7.Location = new System.Drawing.Point(41, 148);
+            this.chk7r7.Name = "chk7r7";
+            this.chk7r7.Size = new System.Drawing.Size(15, 14);
+            this.chk7r7.TabIndex = 71;
+            this.chk7r7.UseVisualStyleBackColor = true;
+            this.chk7r7.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
             // 
             // label95
             // 
@@ -11354,93 +11359,93 @@ namespace DataDecoder
             this.label95.TabIndex = 70;
             this.label95.Text = "6";
             // 
-            // cb6r0
+            // chk6r0
             // 
-            this.cb6r0.AutoSize = true;
-            this.cb6r0.Enabled = false;
-            this.cb6r0.Location = new System.Drawing.Point(154, 133);
-            this.cb6r0.Name = "cb6r0";
-            this.cb6r0.Size = new System.Drawing.Size(15, 14);
-            this.cb6r0.TabIndex = 69;
-            this.cb6r0.UseVisualStyleBackColor = true;
-            this.cb6r0.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
+            this.chk6r0.AutoSize = true;
+            this.chk6r0.Enabled = false;
+            this.chk6r0.Location = new System.Drawing.Point(154, 133);
+            this.chk6r0.Name = "chk6r0";
+            this.chk6r0.Size = new System.Drawing.Size(15, 14);
+            this.chk6r0.TabIndex = 69;
+            this.chk6r0.UseVisualStyleBackColor = true;
+            this.chk6r0.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
             // 
-            // cb6r1
+            // chk6r1
             // 
-            this.cb6r1.AutoSize = true;
-            this.cb6r1.Enabled = false;
-            this.cb6r1.Location = new System.Drawing.Point(138, 133);
-            this.cb6r1.Name = "cb6r1";
-            this.cb6r1.Size = new System.Drawing.Size(15, 14);
-            this.cb6r1.TabIndex = 68;
-            this.cb6r1.UseVisualStyleBackColor = true;
-            this.cb6r1.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
+            this.chk6r1.AutoSize = true;
+            this.chk6r1.Enabled = false;
+            this.chk6r1.Location = new System.Drawing.Point(138, 133);
+            this.chk6r1.Name = "chk6r1";
+            this.chk6r1.Size = new System.Drawing.Size(15, 14);
+            this.chk6r1.TabIndex = 68;
+            this.chk6r1.UseVisualStyleBackColor = true;
+            this.chk6r1.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
             // 
-            // cb6r2
+            // chk6r2
             // 
-            this.cb6r2.AutoSize = true;
-            this.cb6r2.Enabled = false;
-            this.cb6r2.Location = new System.Drawing.Point(122, 133);
-            this.cb6r2.Name = "cb6r2";
-            this.cb6r2.Size = new System.Drawing.Size(15, 14);
-            this.cb6r2.TabIndex = 67;
-            this.cb6r2.UseVisualStyleBackColor = true;
-            this.cb6r2.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
+            this.chk6r2.AutoSize = true;
+            this.chk6r2.Enabled = false;
+            this.chk6r2.Location = new System.Drawing.Point(122, 133);
+            this.chk6r2.Name = "chk6r2";
+            this.chk6r2.Size = new System.Drawing.Size(15, 14);
+            this.chk6r2.TabIndex = 67;
+            this.chk6r2.UseVisualStyleBackColor = true;
+            this.chk6r2.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
             // 
-            // cb6r3
+            // chk6r3
             // 
-            this.cb6r3.AutoSize = true;
-            this.cb6r3.Enabled = false;
-            this.cb6r3.Location = new System.Drawing.Point(106, 133);
-            this.cb6r3.Name = "cb6r3";
-            this.cb6r3.Size = new System.Drawing.Size(15, 14);
-            this.cb6r3.TabIndex = 66;
-            this.cb6r3.UseVisualStyleBackColor = true;
-            this.cb6r3.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
+            this.chk6r3.AutoSize = true;
+            this.chk6r3.Enabled = false;
+            this.chk6r3.Location = new System.Drawing.Point(106, 133);
+            this.chk6r3.Name = "chk6r3";
+            this.chk6r3.Size = new System.Drawing.Size(15, 14);
+            this.chk6r3.TabIndex = 66;
+            this.chk6r3.UseVisualStyleBackColor = true;
+            this.chk6r3.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
             // 
-            // cb6r4
+            // chk6r4
             // 
-            this.cb6r4.AutoSize = true;
-            this.cb6r4.Enabled = false;
-            this.cb6r4.Location = new System.Drawing.Point(90, 133);
-            this.cb6r4.Name = "cb6r4";
-            this.cb6r4.Size = new System.Drawing.Size(15, 14);
-            this.cb6r4.TabIndex = 65;
-            this.cb6r4.UseVisualStyleBackColor = true;
-            this.cb6r4.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
+            this.chk6r4.AutoSize = true;
+            this.chk6r4.Enabled = false;
+            this.chk6r4.Location = new System.Drawing.Point(90, 133);
+            this.chk6r4.Name = "chk6r4";
+            this.chk6r4.Size = new System.Drawing.Size(15, 14);
+            this.chk6r4.TabIndex = 65;
+            this.chk6r4.UseVisualStyleBackColor = true;
+            this.chk6r4.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
             // 
-            // cb6r5
+            // chk6r5
             // 
-            this.cb6r5.AutoSize = true;
-            this.cb6r5.Enabled = false;
-            this.cb6r5.Location = new System.Drawing.Point(74, 133);
-            this.cb6r5.Name = "cb6r5";
-            this.cb6r5.Size = new System.Drawing.Size(15, 14);
-            this.cb6r5.TabIndex = 64;
-            this.cb6r5.UseVisualStyleBackColor = true;
-            this.cb6r5.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
+            this.chk6r5.AutoSize = true;
+            this.chk6r5.Enabled = false;
+            this.chk6r5.Location = new System.Drawing.Point(74, 133);
+            this.chk6r5.Name = "chk6r5";
+            this.chk6r5.Size = new System.Drawing.Size(15, 14);
+            this.chk6r5.TabIndex = 64;
+            this.chk6r5.UseVisualStyleBackColor = true;
+            this.chk6r5.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
             // 
-            // cb6r6
+            // chk6r6
             // 
-            this.cb6r6.AutoSize = true;
-            this.cb6r6.Enabled = false;
-            this.cb6r6.Location = new System.Drawing.Point(58, 133);
-            this.cb6r6.Name = "cb6r6";
-            this.cb6r6.Size = new System.Drawing.Size(15, 14);
-            this.cb6r6.TabIndex = 63;
-            this.cb6r6.UseVisualStyleBackColor = true;
-            this.cb6r6.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
+            this.chk6r6.AutoSize = true;
+            this.chk6r6.Enabled = false;
+            this.chk6r6.Location = new System.Drawing.Point(58, 133);
+            this.chk6r6.Name = "chk6r6";
+            this.chk6r6.Size = new System.Drawing.Size(15, 14);
+            this.chk6r6.TabIndex = 63;
+            this.chk6r6.UseVisualStyleBackColor = true;
+            this.chk6r6.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
             // 
-            // cb6r7
+            // chk6r7
             // 
-            this.cb6r7.AutoSize = true;
-            this.cb6r7.Enabled = false;
-            this.cb6r7.Location = new System.Drawing.Point(41, 133);
-            this.cb6r7.Name = "cb6r7";
-            this.cb6r7.Size = new System.Drawing.Size(15, 14);
-            this.cb6r7.TabIndex = 62;
-            this.cb6r7.UseVisualStyleBackColor = true;
-            this.cb6r7.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
+            this.chk6r7.AutoSize = true;
+            this.chk6r7.Enabled = false;
+            this.chk6r7.Location = new System.Drawing.Point(41, 133);
+            this.chk6r7.Name = "chk6r7";
+            this.chk6r7.Size = new System.Drawing.Size(15, 14);
+            this.chk6r7.TabIndex = 62;
+            this.chk6r7.UseVisualStyleBackColor = true;
+            this.chk6r7.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
             // 
             // label94
             // 
@@ -11452,93 +11457,93 @@ namespace DataDecoder
             this.label94.TabIndex = 61;
             this.label94.Text = "5";
             // 
-            // cb5r0
+            // chk5r0
             // 
-            this.cb5r0.AutoSize = true;
-            this.cb5r0.Enabled = false;
-            this.cb5r0.Location = new System.Drawing.Point(154, 118);
-            this.cb5r0.Name = "cb5r0";
-            this.cb5r0.Size = new System.Drawing.Size(15, 14);
-            this.cb5r0.TabIndex = 60;
-            this.cb5r0.UseVisualStyleBackColor = true;
-            this.cb5r0.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
+            this.chk5r0.AutoSize = true;
+            this.chk5r0.Enabled = false;
+            this.chk5r0.Location = new System.Drawing.Point(154, 118);
+            this.chk5r0.Name = "chk5r0";
+            this.chk5r0.Size = new System.Drawing.Size(15, 14);
+            this.chk5r0.TabIndex = 60;
+            this.chk5r0.UseVisualStyleBackColor = true;
+            this.chk5r0.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
             // 
-            // cb5r1
+            // chk5r1
             // 
-            this.cb5r1.AutoSize = true;
-            this.cb5r1.Enabled = false;
-            this.cb5r1.Location = new System.Drawing.Point(138, 118);
-            this.cb5r1.Name = "cb5r1";
-            this.cb5r1.Size = new System.Drawing.Size(15, 14);
-            this.cb5r1.TabIndex = 59;
-            this.cb5r1.UseVisualStyleBackColor = true;
-            this.cb5r1.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
+            this.chk5r1.AutoSize = true;
+            this.chk5r1.Enabled = false;
+            this.chk5r1.Location = new System.Drawing.Point(138, 118);
+            this.chk5r1.Name = "chk5r1";
+            this.chk5r1.Size = new System.Drawing.Size(15, 14);
+            this.chk5r1.TabIndex = 59;
+            this.chk5r1.UseVisualStyleBackColor = true;
+            this.chk5r1.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
             // 
-            // cb5r2
+            // chk5r2
             // 
-            this.cb5r2.AutoSize = true;
-            this.cb5r2.Enabled = false;
-            this.cb5r2.Location = new System.Drawing.Point(122, 118);
-            this.cb5r2.Name = "cb5r2";
-            this.cb5r2.Size = new System.Drawing.Size(15, 14);
-            this.cb5r2.TabIndex = 58;
-            this.cb5r2.UseVisualStyleBackColor = true;
-            this.cb5r2.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
+            this.chk5r2.AutoSize = true;
+            this.chk5r2.Enabled = false;
+            this.chk5r2.Location = new System.Drawing.Point(122, 118);
+            this.chk5r2.Name = "chk5r2";
+            this.chk5r2.Size = new System.Drawing.Size(15, 14);
+            this.chk5r2.TabIndex = 58;
+            this.chk5r2.UseVisualStyleBackColor = true;
+            this.chk5r2.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
             // 
-            // cb5r3
+            // chk5r3
             // 
-            this.cb5r3.AutoSize = true;
-            this.cb5r3.Enabled = false;
-            this.cb5r3.Location = new System.Drawing.Point(106, 118);
-            this.cb5r3.Name = "cb5r3";
-            this.cb5r3.Size = new System.Drawing.Size(15, 14);
-            this.cb5r3.TabIndex = 57;
-            this.cb5r3.UseVisualStyleBackColor = true;
-            this.cb5r3.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
+            this.chk5r3.AutoSize = true;
+            this.chk5r3.Enabled = false;
+            this.chk5r3.Location = new System.Drawing.Point(106, 118);
+            this.chk5r3.Name = "chk5r3";
+            this.chk5r3.Size = new System.Drawing.Size(15, 14);
+            this.chk5r3.TabIndex = 57;
+            this.chk5r3.UseVisualStyleBackColor = true;
+            this.chk5r3.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
             // 
-            // cb5r4
+            // chk5r4
             // 
-            this.cb5r4.AutoSize = true;
-            this.cb5r4.Enabled = false;
-            this.cb5r4.Location = new System.Drawing.Point(90, 118);
-            this.cb5r4.Name = "cb5r4";
-            this.cb5r4.Size = new System.Drawing.Size(15, 14);
-            this.cb5r4.TabIndex = 56;
-            this.cb5r4.UseVisualStyleBackColor = true;
-            this.cb5r4.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
+            this.chk5r4.AutoSize = true;
+            this.chk5r4.Enabled = false;
+            this.chk5r4.Location = new System.Drawing.Point(90, 118);
+            this.chk5r4.Name = "chk5r4";
+            this.chk5r4.Size = new System.Drawing.Size(15, 14);
+            this.chk5r4.TabIndex = 56;
+            this.chk5r4.UseVisualStyleBackColor = true;
+            this.chk5r4.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
             // 
-            // cb5r5
+            // chk5r5
             // 
-            this.cb5r5.AutoSize = true;
-            this.cb5r5.Enabled = false;
-            this.cb5r5.Location = new System.Drawing.Point(74, 118);
-            this.cb5r5.Name = "cb5r5";
-            this.cb5r5.Size = new System.Drawing.Size(15, 14);
-            this.cb5r5.TabIndex = 55;
-            this.cb5r5.UseVisualStyleBackColor = true;
-            this.cb5r5.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
+            this.chk5r5.AutoSize = true;
+            this.chk5r5.Enabled = false;
+            this.chk5r5.Location = new System.Drawing.Point(74, 118);
+            this.chk5r5.Name = "chk5r5";
+            this.chk5r5.Size = new System.Drawing.Size(15, 14);
+            this.chk5r5.TabIndex = 55;
+            this.chk5r5.UseVisualStyleBackColor = true;
+            this.chk5r5.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
             // 
-            // cb5r6
+            // chk5r6
             // 
-            this.cb5r6.AutoSize = true;
-            this.cb5r6.Enabled = false;
-            this.cb5r6.Location = new System.Drawing.Point(58, 118);
-            this.cb5r6.Name = "cb5r6";
-            this.cb5r6.Size = new System.Drawing.Size(15, 14);
-            this.cb5r6.TabIndex = 54;
-            this.cb5r6.UseVisualStyleBackColor = true;
-            this.cb5r6.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
+            this.chk5r6.AutoSize = true;
+            this.chk5r6.Enabled = false;
+            this.chk5r6.Location = new System.Drawing.Point(58, 118);
+            this.chk5r6.Name = "chk5r6";
+            this.chk5r6.Size = new System.Drawing.Size(15, 14);
+            this.chk5r6.TabIndex = 54;
+            this.chk5r6.UseVisualStyleBackColor = true;
+            this.chk5r6.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
             // 
-            // cb5r7
+            // chk5r7
             // 
-            this.cb5r7.AutoSize = true;
-            this.cb5r7.Enabled = false;
-            this.cb5r7.Location = new System.Drawing.Point(41, 118);
-            this.cb5r7.Name = "cb5r7";
-            this.cb5r7.Size = new System.Drawing.Size(15, 14);
-            this.cb5r7.TabIndex = 53;
-            this.cb5r7.UseVisualStyleBackColor = true;
-            this.cb5r7.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
+            this.chk5r7.AutoSize = true;
+            this.chk5r7.Enabled = false;
+            this.chk5r7.Location = new System.Drawing.Point(41, 118);
+            this.chk5r7.Name = "chk5r7";
+            this.chk5r7.Size = new System.Drawing.Size(15, 14);
+            this.chk5r7.TabIndex = 53;
+            this.chk5r7.UseVisualStyleBackColor = true;
+            this.chk5r7.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
             // 
             // label93
             // 
@@ -11550,93 +11555,93 @@ namespace DataDecoder
             this.label93.TabIndex = 52;
             this.label93.Text = "4";
             // 
-            // cb4r0
+            // chk4r0
             // 
-            this.cb4r0.AutoSize = true;
-            this.cb4r0.Enabled = false;
-            this.cb4r0.Location = new System.Drawing.Point(154, 103);
-            this.cb4r0.Name = "cb4r0";
-            this.cb4r0.Size = new System.Drawing.Size(15, 14);
-            this.cb4r0.TabIndex = 51;
-            this.cb4r0.UseVisualStyleBackColor = true;
-            this.cb4r0.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
+            this.chk4r0.AutoSize = true;
+            this.chk4r0.Enabled = false;
+            this.chk4r0.Location = new System.Drawing.Point(154, 103);
+            this.chk4r0.Name = "chk4r0";
+            this.chk4r0.Size = new System.Drawing.Size(15, 14);
+            this.chk4r0.TabIndex = 51;
+            this.chk4r0.UseVisualStyleBackColor = true;
+            this.chk4r0.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
             // 
-            // cb4r1
+            // chk4r1
             // 
-            this.cb4r1.AutoSize = true;
-            this.cb4r1.Enabled = false;
-            this.cb4r1.Location = new System.Drawing.Point(138, 103);
-            this.cb4r1.Name = "cb4r1";
-            this.cb4r1.Size = new System.Drawing.Size(15, 14);
-            this.cb4r1.TabIndex = 50;
-            this.cb4r1.UseVisualStyleBackColor = true;
-            this.cb4r1.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
+            this.chk4r1.AutoSize = true;
+            this.chk4r1.Enabled = false;
+            this.chk4r1.Location = new System.Drawing.Point(138, 103);
+            this.chk4r1.Name = "chk4r1";
+            this.chk4r1.Size = new System.Drawing.Size(15, 14);
+            this.chk4r1.TabIndex = 50;
+            this.chk4r1.UseVisualStyleBackColor = true;
+            this.chk4r1.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
             // 
-            // cb4r2
+            // chk4r2
             // 
-            this.cb4r2.AutoSize = true;
-            this.cb4r2.Enabled = false;
-            this.cb4r2.Location = new System.Drawing.Point(122, 103);
-            this.cb4r2.Name = "cb4r2";
-            this.cb4r2.Size = new System.Drawing.Size(15, 14);
-            this.cb4r2.TabIndex = 49;
-            this.cb4r2.UseVisualStyleBackColor = true;
-            this.cb4r2.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
+            this.chk4r2.AutoSize = true;
+            this.chk4r2.Enabled = false;
+            this.chk4r2.Location = new System.Drawing.Point(122, 103);
+            this.chk4r2.Name = "chk4r2";
+            this.chk4r2.Size = new System.Drawing.Size(15, 14);
+            this.chk4r2.TabIndex = 49;
+            this.chk4r2.UseVisualStyleBackColor = true;
+            this.chk4r2.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
             // 
-            // cb4r3
+            // chk4r3
             // 
-            this.cb4r3.AutoSize = true;
-            this.cb4r3.Enabled = false;
-            this.cb4r3.Location = new System.Drawing.Point(106, 103);
-            this.cb4r3.Name = "cb4r3";
-            this.cb4r3.Size = new System.Drawing.Size(15, 14);
-            this.cb4r3.TabIndex = 48;
-            this.cb4r3.UseVisualStyleBackColor = true;
-            this.cb4r3.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
+            this.chk4r3.AutoSize = true;
+            this.chk4r3.Enabled = false;
+            this.chk4r3.Location = new System.Drawing.Point(106, 103);
+            this.chk4r3.Name = "chk4r3";
+            this.chk4r3.Size = new System.Drawing.Size(15, 14);
+            this.chk4r3.TabIndex = 48;
+            this.chk4r3.UseVisualStyleBackColor = true;
+            this.chk4r3.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
             // 
-            // cb4r4
+            // chk4r4
             // 
-            this.cb4r4.AutoSize = true;
-            this.cb4r4.Enabled = false;
-            this.cb4r4.Location = new System.Drawing.Point(90, 103);
-            this.cb4r4.Name = "cb4r4";
-            this.cb4r4.Size = new System.Drawing.Size(15, 14);
-            this.cb4r4.TabIndex = 47;
-            this.cb4r4.UseVisualStyleBackColor = true;
-            this.cb4r4.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
+            this.chk4r4.AutoSize = true;
+            this.chk4r4.Enabled = false;
+            this.chk4r4.Location = new System.Drawing.Point(90, 103);
+            this.chk4r4.Name = "chk4r4";
+            this.chk4r4.Size = new System.Drawing.Size(15, 14);
+            this.chk4r4.TabIndex = 47;
+            this.chk4r4.UseVisualStyleBackColor = true;
+            this.chk4r4.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
             // 
-            // cb4r5
+            // chk4r5
             // 
-            this.cb4r5.AutoSize = true;
-            this.cb4r5.Enabled = false;
-            this.cb4r5.Location = new System.Drawing.Point(74, 103);
-            this.cb4r5.Name = "cb4r5";
-            this.cb4r5.Size = new System.Drawing.Size(15, 14);
-            this.cb4r5.TabIndex = 46;
-            this.cb4r5.UseVisualStyleBackColor = true;
-            this.cb4r5.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
+            this.chk4r5.AutoSize = true;
+            this.chk4r5.Enabled = false;
+            this.chk4r5.Location = new System.Drawing.Point(74, 103);
+            this.chk4r5.Name = "chk4r5";
+            this.chk4r5.Size = new System.Drawing.Size(15, 14);
+            this.chk4r5.TabIndex = 46;
+            this.chk4r5.UseVisualStyleBackColor = true;
+            this.chk4r5.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
             // 
-            // cb4r6
+            // chk4r6
             // 
-            this.cb4r6.AutoSize = true;
-            this.cb4r6.Enabled = false;
-            this.cb4r6.Location = new System.Drawing.Point(58, 103);
-            this.cb4r6.Name = "cb4r6";
-            this.cb4r6.Size = new System.Drawing.Size(15, 14);
-            this.cb4r6.TabIndex = 45;
-            this.cb4r6.UseVisualStyleBackColor = true;
-            this.cb4r6.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
+            this.chk4r6.AutoSize = true;
+            this.chk4r6.Enabled = false;
+            this.chk4r6.Location = new System.Drawing.Point(58, 103);
+            this.chk4r6.Name = "chk4r6";
+            this.chk4r6.Size = new System.Drawing.Size(15, 14);
+            this.chk4r6.TabIndex = 45;
+            this.chk4r6.UseVisualStyleBackColor = true;
+            this.chk4r6.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
             // 
-            // cb4r7
+            // chk4r7
             // 
-            this.cb4r7.AutoSize = true;
-            this.cb4r7.Enabled = false;
-            this.cb4r7.Location = new System.Drawing.Point(41, 103);
-            this.cb4r7.Name = "cb4r7";
-            this.cb4r7.Size = new System.Drawing.Size(15, 14);
-            this.cb4r7.TabIndex = 44;
-            this.cb4r7.UseVisualStyleBackColor = true;
-            this.cb4r7.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
+            this.chk4r7.AutoSize = true;
+            this.chk4r7.Enabled = false;
+            this.chk4r7.Location = new System.Drawing.Point(41, 103);
+            this.chk4r7.Name = "chk4r7";
+            this.chk4r7.Size = new System.Drawing.Size(15, 14);
+            this.chk4r7.TabIndex = 44;
+            this.chk4r7.UseVisualStyleBackColor = true;
+            this.chk4r7.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
             // 
             // label92
             // 
@@ -11648,93 +11653,93 @@ namespace DataDecoder
             this.label92.TabIndex = 43;
             this.label92.Text = "3";
             // 
-            // cb3r0
+            // chk3r0
             // 
-            this.cb3r0.AutoSize = true;
-            this.cb3r0.Enabled = false;
-            this.cb3r0.Location = new System.Drawing.Point(154, 87);
-            this.cb3r0.Name = "cb3r0";
-            this.cb3r0.Size = new System.Drawing.Size(15, 14);
-            this.cb3r0.TabIndex = 42;
-            this.cb3r0.UseVisualStyleBackColor = true;
-            this.cb3r0.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
+            this.chk3r0.AutoSize = true;
+            this.chk3r0.Enabled = false;
+            this.chk3r0.Location = new System.Drawing.Point(154, 87);
+            this.chk3r0.Name = "chk3r0";
+            this.chk3r0.Size = new System.Drawing.Size(15, 14);
+            this.chk3r0.TabIndex = 42;
+            this.chk3r0.UseVisualStyleBackColor = true;
+            this.chk3r0.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
             // 
-            // cb3r1
+            // chk3r1
             // 
-            this.cb3r1.AutoSize = true;
-            this.cb3r1.Enabled = false;
-            this.cb3r1.Location = new System.Drawing.Point(138, 87);
-            this.cb3r1.Name = "cb3r1";
-            this.cb3r1.Size = new System.Drawing.Size(15, 14);
-            this.cb3r1.TabIndex = 41;
-            this.cb3r1.UseVisualStyleBackColor = true;
-            this.cb3r1.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
+            this.chk3r1.AutoSize = true;
+            this.chk3r1.Enabled = false;
+            this.chk3r1.Location = new System.Drawing.Point(138, 87);
+            this.chk3r1.Name = "chk3r1";
+            this.chk3r1.Size = new System.Drawing.Size(15, 14);
+            this.chk3r1.TabIndex = 41;
+            this.chk3r1.UseVisualStyleBackColor = true;
+            this.chk3r1.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
             // 
-            // cb3r2
+            // chk3r2
             // 
-            this.cb3r2.AutoSize = true;
-            this.cb3r2.Enabled = false;
-            this.cb3r2.Location = new System.Drawing.Point(122, 87);
-            this.cb3r2.Name = "cb3r2";
-            this.cb3r2.Size = new System.Drawing.Size(15, 14);
-            this.cb3r2.TabIndex = 40;
-            this.cb3r2.UseVisualStyleBackColor = true;
-            this.cb3r2.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
+            this.chk3r2.AutoSize = true;
+            this.chk3r2.Enabled = false;
+            this.chk3r2.Location = new System.Drawing.Point(122, 87);
+            this.chk3r2.Name = "chk3r2";
+            this.chk3r2.Size = new System.Drawing.Size(15, 14);
+            this.chk3r2.TabIndex = 40;
+            this.chk3r2.UseVisualStyleBackColor = true;
+            this.chk3r2.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
             // 
-            // cb3r3
+            // chk3r3
             // 
-            this.cb3r3.AutoSize = true;
-            this.cb3r3.Enabled = false;
-            this.cb3r3.Location = new System.Drawing.Point(106, 87);
-            this.cb3r3.Name = "cb3r3";
-            this.cb3r3.Size = new System.Drawing.Size(15, 14);
-            this.cb3r3.TabIndex = 39;
-            this.cb3r3.UseVisualStyleBackColor = true;
-            this.cb3r3.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
+            this.chk3r3.AutoSize = true;
+            this.chk3r3.Enabled = false;
+            this.chk3r3.Location = new System.Drawing.Point(106, 87);
+            this.chk3r3.Name = "chk3r3";
+            this.chk3r3.Size = new System.Drawing.Size(15, 14);
+            this.chk3r3.TabIndex = 39;
+            this.chk3r3.UseVisualStyleBackColor = true;
+            this.chk3r3.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
             // 
-            // cb3r4
+            // chk3r4
             // 
-            this.cb3r4.AutoSize = true;
-            this.cb3r4.Enabled = false;
-            this.cb3r4.Location = new System.Drawing.Point(90, 87);
-            this.cb3r4.Name = "cb3r4";
-            this.cb3r4.Size = new System.Drawing.Size(15, 14);
-            this.cb3r4.TabIndex = 38;
-            this.cb3r4.UseVisualStyleBackColor = true;
-            this.cb3r4.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
+            this.chk3r4.AutoSize = true;
+            this.chk3r4.Enabled = false;
+            this.chk3r4.Location = new System.Drawing.Point(90, 87);
+            this.chk3r4.Name = "chk3r4";
+            this.chk3r4.Size = new System.Drawing.Size(15, 14);
+            this.chk3r4.TabIndex = 38;
+            this.chk3r4.UseVisualStyleBackColor = true;
+            this.chk3r4.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
             // 
-            // cb3r5
+            // chk3r5
             // 
-            this.cb3r5.AutoSize = true;
-            this.cb3r5.Enabled = false;
-            this.cb3r5.Location = new System.Drawing.Point(74, 87);
-            this.cb3r5.Name = "cb3r5";
-            this.cb3r5.Size = new System.Drawing.Size(15, 14);
-            this.cb3r5.TabIndex = 37;
-            this.cb3r5.UseVisualStyleBackColor = true;
-            this.cb3r5.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
+            this.chk3r5.AutoSize = true;
+            this.chk3r5.Enabled = false;
+            this.chk3r5.Location = new System.Drawing.Point(74, 87);
+            this.chk3r5.Name = "chk3r5";
+            this.chk3r5.Size = new System.Drawing.Size(15, 14);
+            this.chk3r5.TabIndex = 37;
+            this.chk3r5.UseVisualStyleBackColor = true;
+            this.chk3r5.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
             // 
-            // cb3r6
+            // chk3r6
             // 
-            this.cb3r6.AutoSize = true;
-            this.cb3r6.Enabled = false;
-            this.cb3r6.Location = new System.Drawing.Point(58, 87);
-            this.cb3r6.Name = "cb3r6";
-            this.cb3r6.Size = new System.Drawing.Size(15, 14);
-            this.cb3r6.TabIndex = 36;
-            this.cb3r6.UseVisualStyleBackColor = true;
-            this.cb3r6.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
+            this.chk3r6.AutoSize = true;
+            this.chk3r6.Enabled = false;
+            this.chk3r6.Location = new System.Drawing.Point(58, 87);
+            this.chk3r6.Name = "chk3r6";
+            this.chk3r6.Size = new System.Drawing.Size(15, 14);
+            this.chk3r6.TabIndex = 36;
+            this.chk3r6.UseVisualStyleBackColor = true;
+            this.chk3r6.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
             // 
-            // cb3r7
+            // chk3r7
             // 
-            this.cb3r7.AutoSize = true;
-            this.cb3r7.Enabled = false;
-            this.cb3r7.Location = new System.Drawing.Point(41, 87);
-            this.cb3r7.Name = "cb3r7";
-            this.cb3r7.Size = new System.Drawing.Size(15, 14);
-            this.cb3r7.TabIndex = 35;
-            this.cb3r7.UseVisualStyleBackColor = true;
-            this.cb3r7.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
+            this.chk3r7.AutoSize = true;
+            this.chk3r7.Enabled = false;
+            this.chk3r7.Location = new System.Drawing.Point(41, 87);
+            this.chk3r7.Name = "chk3r7";
+            this.chk3r7.Size = new System.Drawing.Size(15, 14);
+            this.chk3r7.TabIndex = 35;
+            this.chk3r7.UseVisualStyleBackColor = true;
+            this.chk3r7.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
             // 
             // label91
             // 
@@ -11746,93 +11751,93 @@ namespace DataDecoder
             this.label91.TabIndex = 34;
             this.label91.Text = "2";
             // 
-            // cb2r0
+            // chk2r0
             // 
-            this.cb2r0.AutoSize = true;
-            this.cb2r0.Enabled = false;
-            this.cb2r0.Location = new System.Drawing.Point(154, 72);
-            this.cb2r0.Name = "cb2r0";
-            this.cb2r0.Size = new System.Drawing.Size(15, 14);
-            this.cb2r0.TabIndex = 33;
-            this.cb2r0.UseVisualStyleBackColor = true;
-            this.cb2r0.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
+            this.chk2r0.AutoSize = true;
+            this.chk2r0.Enabled = false;
+            this.chk2r0.Location = new System.Drawing.Point(154, 72);
+            this.chk2r0.Name = "chk2r0";
+            this.chk2r0.Size = new System.Drawing.Size(15, 14);
+            this.chk2r0.TabIndex = 33;
+            this.chk2r0.UseVisualStyleBackColor = true;
+            this.chk2r0.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
             // 
-            // cb2r1
+            // chk2r1
             // 
-            this.cb2r1.AutoSize = true;
-            this.cb2r1.Enabled = false;
-            this.cb2r1.Location = new System.Drawing.Point(138, 72);
-            this.cb2r1.Name = "cb2r1";
-            this.cb2r1.Size = new System.Drawing.Size(15, 14);
-            this.cb2r1.TabIndex = 32;
-            this.cb2r1.UseVisualStyleBackColor = true;
-            this.cb2r1.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
+            this.chk2r1.AutoSize = true;
+            this.chk2r1.Enabled = false;
+            this.chk2r1.Location = new System.Drawing.Point(138, 72);
+            this.chk2r1.Name = "chk2r1";
+            this.chk2r1.Size = new System.Drawing.Size(15, 14);
+            this.chk2r1.TabIndex = 32;
+            this.chk2r1.UseVisualStyleBackColor = true;
+            this.chk2r1.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
             // 
-            // cb2r2
+            // chk2r2
             // 
-            this.cb2r2.AutoSize = true;
-            this.cb2r2.Enabled = false;
-            this.cb2r2.Location = new System.Drawing.Point(122, 72);
-            this.cb2r2.Name = "cb2r2";
-            this.cb2r2.Size = new System.Drawing.Size(15, 14);
-            this.cb2r2.TabIndex = 31;
-            this.cb2r2.UseVisualStyleBackColor = true;
-            this.cb2r2.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
+            this.chk2r2.AutoSize = true;
+            this.chk2r2.Enabled = false;
+            this.chk2r2.Location = new System.Drawing.Point(122, 72);
+            this.chk2r2.Name = "chk2r2";
+            this.chk2r2.Size = new System.Drawing.Size(15, 14);
+            this.chk2r2.TabIndex = 31;
+            this.chk2r2.UseVisualStyleBackColor = true;
+            this.chk2r2.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
             // 
-            // cb2r3
+            // chk2r3
             // 
-            this.cb2r3.AutoSize = true;
-            this.cb2r3.Enabled = false;
-            this.cb2r3.Location = new System.Drawing.Point(106, 72);
-            this.cb2r3.Name = "cb2r3";
-            this.cb2r3.Size = new System.Drawing.Size(15, 14);
-            this.cb2r3.TabIndex = 30;
-            this.cb2r3.UseVisualStyleBackColor = true;
-            this.cb2r3.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
+            this.chk2r3.AutoSize = true;
+            this.chk2r3.Enabled = false;
+            this.chk2r3.Location = new System.Drawing.Point(106, 72);
+            this.chk2r3.Name = "chk2r3";
+            this.chk2r3.Size = new System.Drawing.Size(15, 14);
+            this.chk2r3.TabIndex = 30;
+            this.chk2r3.UseVisualStyleBackColor = true;
+            this.chk2r3.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
             // 
-            // cb2r4
+            // chk2r4
             // 
-            this.cb2r4.AutoSize = true;
-            this.cb2r4.Enabled = false;
-            this.cb2r4.Location = new System.Drawing.Point(90, 72);
-            this.cb2r4.Name = "cb2r4";
-            this.cb2r4.Size = new System.Drawing.Size(15, 14);
-            this.cb2r4.TabIndex = 29;
-            this.cb2r4.UseVisualStyleBackColor = true;
-            this.cb2r4.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
+            this.chk2r4.AutoSize = true;
+            this.chk2r4.Enabled = false;
+            this.chk2r4.Location = new System.Drawing.Point(90, 72);
+            this.chk2r4.Name = "chk2r4";
+            this.chk2r4.Size = new System.Drawing.Size(15, 14);
+            this.chk2r4.TabIndex = 29;
+            this.chk2r4.UseVisualStyleBackColor = true;
+            this.chk2r4.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
             // 
-            // cb2r5
+            // chk2r5
             // 
-            this.cb2r5.AutoSize = true;
-            this.cb2r5.Enabled = false;
-            this.cb2r5.Location = new System.Drawing.Point(74, 72);
-            this.cb2r5.Name = "cb2r5";
-            this.cb2r5.Size = new System.Drawing.Size(15, 14);
-            this.cb2r5.TabIndex = 28;
-            this.cb2r5.UseVisualStyleBackColor = true;
-            this.cb2r5.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
+            this.chk2r5.AutoSize = true;
+            this.chk2r5.Enabled = false;
+            this.chk2r5.Location = new System.Drawing.Point(74, 72);
+            this.chk2r5.Name = "chk2r5";
+            this.chk2r5.Size = new System.Drawing.Size(15, 14);
+            this.chk2r5.TabIndex = 28;
+            this.chk2r5.UseVisualStyleBackColor = true;
+            this.chk2r5.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
             // 
-            // cb2r6
+            // chk2r6
             // 
-            this.cb2r6.AutoSize = true;
-            this.cb2r6.Enabled = false;
-            this.cb2r6.Location = new System.Drawing.Point(58, 72);
-            this.cb2r6.Name = "cb2r6";
-            this.cb2r6.Size = new System.Drawing.Size(15, 14);
-            this.cb2r6.TabIndex = 27;
-            this.cb2r6.UseVisualStyleBackColor = true;
-            this.cb2r6.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
+            this.chk2r6.AutoSize = true;
+            this.chk2r6.Enabled = false;
+            this.chk2r6.Location = new System.Drawing.Point(58, 72);
+            this.chk2r6.Name = "chk2r6";
+            this.chk2r6.Size = new System.Drawing.Size(15, 14);
+            this.chk2r6.TabIndex = 27;
+            this.chk2r6.UseVisualStyleBackColor = true;
+            this.chk2r6.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
             // 
-            // cb2r7
+            // chk2r7
             // 
-            this.cb2r7.AutoSize = true;
-            this.cb2r7.Enabled = false;
-            this.cb2r7.Location = new System.Drawing.Point(41, 72);
-            this.cb2r7.Name = "cb2r7";
-            this.cb2r7.Size = new System.Drawing.Size(15, 14);
-            this.cb2r7.TabIndex = 26;
-            this.cb2r7.UseVisualStyleBackColor = true;
-            this.cb2r7.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
+            this.chk2r7.AutoSize = true;
+            this.chk2r7.Enabled = false;
+            this.chk2r7.Location = new System.Drawing.Point(41, 72);
+            this.chk2r7.Name = "chk2r7";
+            this.chk2r7.Size = new System.Drawing.Size(15, 14);
+            this.chk2r7.TabIndex = 26;
+            this.chk2r7.UseVisualStyleBackColor = true;
+            this.chk2r7.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
             // 
             // label90
             // 
@@ -11844,93 +11849,93 @@ namespace DataDecoder
             this.label90.TabIndex = 25;
             this.label90.Text = "1";
             // 
-            // cb1r0
+            // chk1r0
             // 
-            this.cb1r0.AutoSize = true;
-            this.cb1r0.Enabled = false;
-            this.cb1r0.Location = new System.Drawing.Point(154, 56);
-            this.cb1r0.Name = "cb1r0";
-            this.cb1r0.Size = new System.Drawing.Size(15, 14);
-            this.cb1r0.TabIndex = 24;
-            this.cb1r0.UseVisualStyleBackColor = true;
-            this.cb1r0.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
+            this.chk1r0.AutoSize = true;
+            this.chk1r0.Enabled = false;
+            this.chk1r0.Location = new System.Drawing.Point(154, 56);
+            this.chk1r0.Name = "chk1r0";
+            this.chk1r0.Size = new System.Drawing.Size(15, 14);
+            this.chk1r0.TabIndex = 24;
+            this.chk1r0.UseVisualStyleBackColor = true;
+            this.chk1r0.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
             // 
-            // cb1r1
+            // chk1r1
             // 
-            this.cb1r1.AutoSize = true;
-            this.cb1r1.Enabled = false;
-            this.cb1r1.Location = new System.Drawing.Point(138, 56);
-            this.cb1r1.Name = "cb1r1";
-            this.cb1r1.Size = new System.Drawing.Size(15, 14);
-            this.cb1r1.TabIndex = 23;
-            this.cb1r1.UseVisualStyleBackColor = true;
-            this.cb1r1.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
+            this.chk1r1.AutoSize = true;
+            this.chk1r1.Enabled = false;
+            this.chk1r1.Location = new System.Drawing.Point(138, 56);
+            this.chk1r1.Name = "chk1r1";
+            this.chk1r1.Size = new System.Drawing.Size(15, 14);
+            this.chk1r1.TabIndex = 23;
+            this.chk1r1.UseVisualStyleBackColor = true;
+            this.chk1r1.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
             // 
-            // cb1r2
+            // chk1r2
             // 
-            this.cb1r2.AutoSize = true;
-            this.cb1r2.Enabled = false;
-            this.cb1r2.Location = new System.Drawing.Point(122, 56);
-            this.cb1r2.Name = "cb1r2";
-            this.cb1r2.Size = new System.Drawing.Size(15, 14);
-            this.cb1r2.TabIndex = 22;
-            this.cb1r2.UseVisualStyleBackColor = true;
-            this.cb1r2.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
+            this.chk1r2.AutoSize = true;
+            this.chk1r2.Enabled = false;
+            this.chk1r2.Location = new System.Drawing.Point(122, 56);
+            this.chk1r2.Name = "chk1r2";
+            this.chk1r2.Size = new System.Drawing.Size(15, 14);
+            this.chk1r2.TabIndex = 22;
+            this.chk1r2.UseVisualStyleBackColor = true;
+            this.chk1r2.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
             // 
-            // cb1r3
+            // chk1r3
             // 
-            this.cb1r3.AutoSize = true;
-            this.cb1r3.Enabled = false;
-            this.cb1r3.Location = new System.Drawing.Point(106, 56);
-            this.cb1r3.Name = "cb1r3";
-            this.cb1r3.Size = new System.Drawing.Size(15, 14);
-            this.cb1r3.TabIndex = 21;
-            this.cb1r3.UseVisualStyleBackColor = true;
-            this.cb1r3.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
+            this.chk1r3.AutoSize = true;
+            this.chk1r3.Enabled = false;
+            this.chk1r3.Location = new System.Drawing.Point(106, 56);
+            this.chk1r3.Name = "chk1r3";
+            this.chk1r3.Size = new System.Drawing.Size(15, 14);
+            this.chk1r3.TabIndex = 21;
+            this.chk1r3.UseVisualStyleBackColor = true;
+            this.chk1r3.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
             // 
-            // cb1r4
+            // chk1r4
             // 
-            this.cb1r4.AutoSize = true;
-            this.cb1r4.Enabled = false;
-            this.cb1r4.Location = new System.Drawing.Point(90, 56);
-            this.cb1r4.Name = "cb1r4";
-            this.cb1r4.Size = new System.Drawing.Size(15, 14);
-            this.cb1r4.TabIndex = 20;
-            this.cb1r4.UseVisualStyleBackColor = true;
-            this.cb1r4.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
+            this.chk1r4.AutoSize = true;
+            this.chk1r4.Enabled = false;
+            this.chk1r4.Location = new System.Drawing.Point(90, 56);
+            this.chk1r4.Name = "chk1r4";
+            this.chk1r4.Size = new System.Drawing.Size(15, 14);
+            this.chk1r4.TabIndex = 20;
+            this.chk1r4.UseVisualStyleBackColor = true;
+            this.chk1r4.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
             // 
-            // cb1r5
+            // chk1r5
             // 
-            this.cb1r5.AutoSize = true;
-            this.cb1r5.Enabled = false;
-            this.cb1r5.Location = new System.Drawing.Point(74, 56);
-            this.cb1r5.Name = "cb1r5";
-            this.cb1r5.Size = new System.Drawing.Size(15, 14);
-            this.cb1r5.TabIndex = 19;
-            this.cb1r5.UseVisualStyleBackColor = true;
-            this.cb1r5.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
+            this.chk1r5.AutoSize = true;
+            this.chk1r5.Enabled = false;
+            this.chk1r5.Location = new System.Drawing.Point(74, 56);
+            this.chk1r5.Name = "chk1r5";
+            this.chk1r5.Size = new System.Drawing.Size(15, 14);
+            this.chk1r5.TabIndex = 19;
+            this.chk1r5.UseVisualStyleBackColor = true;
+            this.chk1r5.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
             // 
-            // cb1r6
+            // chk1r6
             // 
-            this.cb1r6.AutoSize = true;
-            this.cb1r6.Enabled = false;
-            this.cb1r6.Location = new System.Drawing.Point(58, 56);
-            this.cb1r6.Name = "cb1r6";
-            this.cb1r6.Size = new System.Drawing.Size(15, 14);
-            this.cb1r6.TabIndex = 18;
-            this.cb1r6.UseVisualStyleBackColor = true;
-            this.cb1r6.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
+            this.chk1r6.AutoSize = true;
+            this.chk1r6.Enabled = false;
+            this.chk1r6.Location = new System.Drawing.Point(58, 56);
+            this.chk1r6.Name = "chk1r6";
+            this.chk1r6.Size = new System.Drawing.Size(15, 14);
+            this.chk1r6.TabIndex = 18;
+            this.chk1r6.UseVisualStyleBackColor = true;
+            this.chk1r6.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
             // 
-            // cb1r7
+            // chk1r7
             // 
-            this.cb1r7.AutoSize = true;
-            this.cb1r7.Enabled = false;
-            this.cb1r7.Location = new System.Drawing.Point(41, 56);
-            this.cb1r7.Name = "cb1r7";
-            this.cb1r7.Size = new System.Drawing.Size(15, 14);
-            this.cb1r7.TabIndex = 17;
-            this.cb1r7.UseVisualStyleBackColor = true;
-            this.cb1r7.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
+            this.chk1r7.AutoSize = true;
+            this.chk1r7.Enabled = false;
+            this.chk1r7.Location = new System.Drawing.Point(41, 56);
+            this.chk1r7.Name = "chk1r7";
+            this.chk1r7.Size = new System.Drawing.Size(15, 14);
+            this.chk1r7.TabIndex = 17;
+            this.chk1r7.UseVisualStyleBackColor = true;
+            this.chk1r7.CheckedChanged += new System.EventHandler(this.grpPortA_CheckedChanged);
             // 
             // label89
             // 
@@ -12745,15 +12750,15 @@ namespace DataDecoder
             this.toolTip1.SetToolTip(this.txtLong, "Home station longitude");
             this.txtLong.TextChanged += new System.EventHandler(this.txtLong_TextChanged);
             // 
-            // tabProp
+            // tabSO2R
             // 
-            this.tabProp.Controls.Add(this.grpSO2R);
-            this.tabProp.Location = new System.Drawing.Point(4, 22);
-            this.tabProp.Name = "tabProp";
-            this.tabProp.Size = new System.Drawing.Size(431, 311);
-            this.tabProp.TabIndex = 10;
-            this.tabProp.Text = "SO2R";
-            this.tabProp.UseVisualStyleBackColor = true;
+            this.tabSO2R.Controls.Add(this.grpSO2R);
+            this.tabSO2R.Location = new System.Drawing.Point(4, 22);
+            this.tabSO2R.Name = "tabSO2R";
+            this.tabSO2R.Size = new System.Drawing.Size(431, 311);
+            this.tabSO2R.TabIndex = 10;
+            this.tabSO2R.Text = "SO2R";
+            this.tabSO2R.UseVisualStyleBackColor = true;
             // 
             // grpSO2R
             // 
@@ -15121,11 +15126,11 @@ namespace DataDecoder
             this.lblBCD.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lblBCD.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblBCD.ForeColor = System.Drawing.Color.Red;
-            this.lblBCD.Location = new System.Drawing.Point(245, 367);
+            this.lblBCD.Location = new System.Drawing.Point(245, 366);
             this.lblBCD.Name = "lblBCD";
             this.lblBCD.Size = new System.Drawing.Size(30, 17);
             this.lblBCD.TabIndex = 26;
-            this.lblBCD.Text = "255";
+            this.lblBCD.Text = "0";
             this.lblBCD.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.toolTip1.SetToolTip(this.lblBCD, "This number indicates the BCD number (decimal) being output. Red = BCD file, Blue" +
                     " = Override, Green = Aux BCD.");
@@ -15243,6 +15248,7 @@ namespace DataDecoder
             // 
             this.txtAlcInd.BackColor = System.Drawing.SystemColors.Control;
             this.txtAlcInd.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.txtAlcInd.Enabled = false;
             this.txtAlcInd.Font = new System.Drawing.Font("Microsoft Sans Serif", 4.25F);
             this.txtAlcInd.Location = new System.Drawing.Point(415, 5);
             this.txtAlcInd.Name = "txtAlcInd";
@@ -15616,6 +15622,28 @@ namespace DataDecoder
             this.toolTip1.SetToolTip(this.TkRed, "Tuning Knob Long-Click (On = Mode A, Off = Mode B)");
             this.TkRed.UseVisualStyleBackColor = false;
             // 
+            // TkGrn
+            // 
+            this.TkGrn.BackColor = System.Drawing.SystemColors.Control;
+            this.TkGrn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.TkGrn.Location = new System.Drawing.Point(407, 422);
+            this.TkGrn.Name = "TkGrn";
+            this.TkGrn.Size = new System.Drawing.Size(10, 10);
+            this.TkGrn.TabIndex = 102;
+            this.toolTip1.SetToolTip(this.TkGrn, "Tuning Knob Double-Click (On/Off)");
+            this.TkGrn.UseVisualStyleBackColor = false;
+            // 
+            // TkYel
+            // 
+            this.TkYel.BackColor = System.Drawing.SystemColors.Control;
+            this.TkYel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.TkYel.Location = new System.Drawing.Point(390, 422);
+            this.TkYel.Name = "TkYel";
+            this.TkYel.Size = new System.Drawing.Size(10, 10);
+            this.TkYel.TabIndex = 74;
+            this.toolTip1.SetToolTip(this.TkYel, "Tuning Knob Short-Click (On/Off)");
+            this.TkYel.UseVisualStyleBackColor = false;
+            // 
             // LogPort
             // 
             this.LogPort.ReadTimeout = 500;
@@ -15915,7 +15943,7 @@ namespace DataDecoder
             this.aboutToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(435, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(437, 24);
             this.menuStrip1.TabIndex = 70;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -15932,7 +15960,7 @@ namespace DataDecoder
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
             this.exitToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.X)));
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(137, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.exitToolStripMenuItem.Text = "Exit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
@@ -15945,7 +15973,8 @@ namespace DataDecoder
             this.toolStripSeparator16,
             this.acomAntDefaultToolStripMenuItem,
             this.toolStripSeparator17,
-            this.antToolStripMenuItem});
+            this.profileSaveToolStripMenuItem,
+            this.profileLoadToolStripMenuItem});
             this.optionsToolStripMenuItem.Name = "optionsToolStripMenuItem";
             this.optionsToolStripMenuItem.Size = new System.Drawing.Size(56, 20);
             this.optionsToolStripMenuItem.Text = "Options";
@@ -15956,7 +15985,7 @@ namespace DataDecoder
             this.ampSettingsToolStripMenuItem,
             this.barefootSettingsToolStripMenuItem});
             this.autoDriveToolStripMenuItem.Name = "autoDriveToolStripMenuItem";
-            this.autoDriveToolStripMenuItem.Size = new System.Drawing.Size(169, 22);
+            this.autoDriveToolStripMenuItem.Size = new System.Drawing.Size(201, 22);
             this.autoDriveToolStripMenuItem.Text = "Auto Drive";
             this.autoDriveToolStripMenuItem.Click += new System.EventHandler(this.autoDriveToolStripMenuItem_Click);
             // 
@@ -15977,7 +16006,7 @@ namespace DataDecoder
             // toolStripSeparator15
             // 
             this.toolStripSeparator15.Name = "toolStripSeparator15";
-            this.toolStripSeparator15.Size = new System.Drawing.Size(166, 6);
+            this.toolStripSeparator15.Size = new System.Drawing.Size(198, 6);
             // 
             // tubeAmpsToolStripMenuItem
             // 
@@ -15986,7 +16015,7 @@ namespace DataDecoder
             this.alpToolStripMenuItem,
             this.alpha9500ToolStripMenuItem});
             this.tubeAmpsToolStripMenuItem.Name = "tubeAmpsToolStripMenuItem";
-            this.tubeAmpsToolStripMenuItem.Size = new System.Drawing.Size(169, 22);
+            this.tubeAmpsToolStripMenuItem.Size = new System.Drawing.Size(201, 22);
             this.tubeAmpsToolStripMenuItem.Text = "Tube Amps";
             // 
             // aCOM2000AToolStripMenuItem
@@ -16016,74 +16045,37 @@ namespace DataDecoder
             // toolStripSeparator16
             // 
             this.toolStripSeparator16.Name = "toolStripSeparator16";
-            this.toolStripSeparator16.Size = new System.Drawing.Size(166, 6);
+            this.toolStripSeparator16.Size = new System.Drawing.Size(198, 6);
             // 
             // acomAntDefaultToolStripMenuItem
             // 
             this.acomAntDefaultToolStripMenuItem.Name = "acomAntDefaultToolStripMenuItem";
-            this.acomAntDefaultToolStripMenuItem.Size = new System.Drawing.Size(169, 22);
+            this.acomAntDefaultToolStripMenuItem.Size = new System.Drawing.Size(201, 22);
             this.acomAntDefaultToolStripMenuItem.Text = "Acom Ant Default";
             this.acomAntDefaultToolStripMenuItem.Click += new System.EventHandler(this.acomAntDefaultToolStripMenuItem_Click);
             // 
             // toolStripSeparator17
             // 
             this.toolStripSeparator17.Name = "toolStripSeparator17";
-            this.toolStripSeparator17.Size = new System.Drawing.Size(166, 6);
+            this.toolStripSeparator17.Size = new System.Drawing.Size(198, 6);
             // 
-            // antToolStripMenuItem
+            // profileSaveToolStripMenuItem
             // 
-            this.antToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.recallToolStripMenuItem,
-            this.saveToolStripMenuItem});
-            this.antToolStripMenuItem.Name = "antToolStripMenuItem";
-            this.antToolStripMenuItem.Size = new System.Drawing.Size(169, 22);
-            this.antToolStripMenuItem.Text = "Ant Profiles";
+            this.profileSaveToolStripMenuItem.Name = "profileSaveToolStripMenuItem";
+            this.profileSaveToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Down)));
+            this.profileSaveToolStripMenuItem.Size = new System.Drawing.Size(201, 22);
+            this.profileSaveToolStripMenuItem.Text = "Profile Save";
+            this.profileSaveToolStripMenuItem.ToolTipText = "Select to save DDUtil state as a profile.";
+            this.profileSaveToolStripMenuItem.Click += new System.EventHandler(this.profileSaveToolStripMenuItem_Click);
             // 
-            // recallToolStripMenuItem
+            // profileLoadToolStripMenuItem
             // 
-            this.recallToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripMenuItem6,
-            this.toolStripMenuItem7});
-            this.recallToolStripMenuItem.Name = "recallToolStripMenuItem";
-            this.recallToolStripMenuItem.Size = new System.Drawing.Size(113, 22);
-            this.recallToolStripMenuItem.Text = "Recall";
-            // 
-            // toolStripMenuItem6
-            // 
-            this.toolStripMenuItem6.Name = "toolStripMenuItem6";
-            this.toolStripMenuItem6.Size = new System.Drawing.Size(124, 22);
-            this.toolStripMenuItem6.Text = "Profile 1";
-            this.toolStripMenuItem6.Click += new System.EventHandler(this.toolStripMenuItem6_Click);
-            // 
-            // toolStripMenuItem7
-            // 
-            this.toolStripMenuItem7.Name = "toolStripMenuItem7";
-            this.toolStripMenuItem7.Size = new System.Drawing.Size(124, 22);
-            this.toolStripMenuItem7.Text = "Profile 2";
-            this.toolStripMenuItem7.Click += new System.EventHandler(this.toolStripMenuItem7_Click);
-            // 
-            // saveToolStripMenuItem
-            // 
-            this.saveToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripMenuItem8,
-            this.toolStripMenuItem9});
-            this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
-            this.saveToolStripMenuItem.Size = new System.Drawing.Size(113, 22);
-            this.saveToolStripMenuItem.Text = "Save";
-            // 
-            // toolStripMenuItem8
-            // 
-            this.toolStripMenuItem8.Name = "toolStripMenuItem8";
-            this.toolStripMenuItem8.Size = new System.Drawing.Size(124, 22);
-            this.toolStripMenuItem8.Text = "Profile 1";
-            this.toolStripMenuItem8.Click += new System.EventHandler(this.toolStripMenuItem8_Click);
-            // 
-            // toolStripMenuItem9
-            // 
-            this.toolStripMenuItem9.Name = "toolStripMenuItem9";
-            this.toolStripMenuItem9.Size = new System.Drawing.Size(124, 22);
-            this.toolStripMenuItem9.Text = "Profile 2";
-            this.toolStripMenuItem9.Click += new System.EventHandler(this.toolStripMenuItem9_Click);
+            this.profileLoadToolStripMenuItem.Name = "profileLoadToolStripMenuItem";
+            this.profileLoadToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Up)));
+            this.profileLoadToolStripMenuItem.Size = new System.Drawing.Size(201, 22);
+            this.profileLoadToolStripMenuItem.Text = "Profile Recall";
+            this.profileLoadToolStripMenuItem.ToolTipText = "Select to load a DDUtil profile.";
+            this.profileLoadToolStripMenuItem.Click += new System.EventHandler(this.profileLoadToolStripMenuItem_Click);
             // 
             // toolsToolStripMenuItem
             // 
@@ -16111,6 +16103,7 @@ namespace DataDecoder
             // openErrorLogToolStripMenuItem
             // 
             this.openErrorLogToolStripMenuItem.Name = "openErrorLogToolStripMenuItem";
+            this.openErrorLogToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.O)));
             this.openErrorLogToolStripMenuItem.Size = new System.Drawing.Size(209, 22);
             this.openErrorLogToolStripMenuItem.Text = "Open Error Log";
             this.openErrorLogToolStripMenuItem.Click += new System.EventHandler(this.openErrorLogToolStripMenuItem_Click);
@@ -16118,6 +16111,7 @@ namespace DataDecoder
             // clearErrorLogToolStripMenuItem
             // 
             this.clearErrorLogToolStripMenuItem.Name = "clearErrorLogToolStripMenuItem";
+            this.clearErrorLogToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.C)));
             this.clearErrorLogToolStripMenuItem.Size = new System.Drawing.Size(209, 22);
             this.clearErrorLogToolStripMenuItem.Text = "Clear Error Log";
             this.clearErrorLogToolStripMenuItem.Click += new System.EventHandler(this.clearErrorLogToolStripMenuItem_Click);
@@ -16243,7 +16237,7 @@ namespace DataDecoder
             this.StatusBar});
             this.statusStrip1.Location = new System.Drawing.Point(0, 416);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(435, 22);
+            this.statusStrip1.Size = new System.Drawing.Size(437, 22);
             this.statusStrip1.TabIndex = 71;
             this.statusStrip1.Text = "statusStrip1";
             // 
@@ -16686,35 +16680,13 @@ namespace DataDecoder
             this.toolStripMenuItem26.Text = "Exit";
             this.toolStripMenuItem26.ToolTipText = "Exit DDUtil";
             // 
-            // TkGrn
-            // 
-            this.TkGrn.BackColor = System.Drawing.SystemColors.Control;
-            this.TkGrn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.TkGrn.Location = new System.Drawing.Point(407, 422);
-            this.TkGrn.Name = "TkGrn";
-            this.TkGrn.Size = new System.Drawing.Size(10, 10);
-            this.TkGrn.TabIndex = 102;
-            this.toolTip1.SetToolTip(this.TkGrn, "Tuning Knob Double-Click (On/Off)");
-            this.TkGrn.UseVisualStyleBackColor = false;
-            // 
-            // TkYel
-            // 
-            this.TkYel.BackColor = System.Drawing.SystemColors.Control;
-            this.TkYel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.TkYel.Location = new System.Drawing.Point(390, 422);
-            this.TkYel.Name = "TkYel";
-            this.TkYel.Size = new System.Drawing.Size(10, 10);
-            this.TkYel.TabIndex = 74;
-            this.toolTip1.SetToolTip(this.TkYel, "Tuning Knob Short-Click (On/Off)");
-            this.TkYel.UseVisualStyleBackColor = false;
-            // 
             // Setup
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.ClientSize = new System.Drawing.Size(435, 438);
+            this.ClientSize = new System.Drawing.Size(437, 438);
             this.ContextMenuStrip = this.contextMenuStrip1;
             this.Controls.Add(this.TkRed);
             this.Controls.Add(this.TkYel);
@@ -16878,7 +16850,7 @@ namespace DataDecoder
             this.grpModel.PerformLayout();
             this.groupBox14.ResumeLayout(false);
             this.groupBox14.PerformLayout();
-            this.tabProp.ResumeLayout(false);
+            this.tabSO2R.ResumeLayout(false);
             this.grpSO2R.ResumeLayout(false);
             this.grpSO2R.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numSplit)).EndInit();
@@ -17221,14 +17193,14 @@ namespace DataDecoder
         private TabPage tabExtCtrl;
         private GroupBox grpPortB;
         private GroupBox grpPortA;
-        private CheckBox cb0r7;
-        private CheckBox cb0r6;
-        private CheckBox cb0r5;
-        private CheckBox cb0r4;
-        private CheckBox cb0r3;
-        private CheckBox cb0r2;
-        private CheckBox cb0r1;
-        private CheckBox cb0r0;
+        private CheckBox chk0r7;
+        private CheckBox chk0r6;
+        private CheckBox chk0r5;
+        private CheckBox chk0r4;
+        private CheckBox chk0r3;
+        private CheckBox chk0r2;
+        private CheckBox chk0r1;
+        private CheckBox chk0r0;
         private Label label89;
         private Label label88;
         private Label label87;
@@ -17239,123 +17211,123 @@ namespace DataDecoder
         private Label label82;
         private Label label81;
         private Label label100;
-        private CheckBox cb11r0;
-        private CheckBox cb11r1;
-        private CheckBox cb11r2;
-        private CheckBox cb11r3;
-        private CheckBox cb11r4;
-        private CheckBox cb11r5;
-        private CheckBox cb11r6;
-        private CheckBox cb11r7;
+        private CheckBox chk11r0;
+        private CheckBox chk11r1;
+        private CheckBox chk11r2;
+        private CheckBox chk11r3;
+        private CheckBox chk11r4;
+        private CheckBox chk11r5;
+        private CheckBox chk11r6;
+        private CheckBox chk11r7;
         private Label label99;
-        private CheckBox cb10r0;
-        private CheckBox cb10r1;
-        private CheckBox cb10r2;
-        private CheckBox cb10r3;
-        private CheckBox cb10r4;
-        private CheckBox cb10r5;
-        private CheckBox cb10r6;
-        private CheckBox cb10r7;
+        private CheckBox chk10r0;
+        private CheckBox chk10r1;
+        private CheckBox chk10r2;
+        private CheckBox chk10r3;
+        private CheckBox chk10r4;
+        private CheckBox chk10r5;
+        private CheckBox chk10r6;
+        private CheckBox chk10r7;
         private Label label98;
-        private CheckBox cb9r0;
-        private CheckBox cb9r1;
-        private CheckBox cb9r2;
-        private CheckBox cb9r3;
-        private CheckBox cb9r4;
-        private CheckBox cb9r5;
-        private CheckBox cb9r6;
-        private CheckBox cb9r7;
+        private CheckBox chk9r0;
+        private CheckBox chk9r1;
+        private CheckBox chk9r2;
+        private CheckBox chk9r3;
+        private CheckBox chk9r4;
+        private CheckBox chk9r5;
+        private CheckBox chk9r6;
+        private CheckBox chk9r7;
         private Label label97;
-        private CheckBox cb8r0;
-        private CheckBox cb8r1;
-        private CheckBox cb8r2;
-        private CheckBox cb8r3;
-        private CheckBox cb8r4;
-        private CheckBox cb8r5;
-        private CheckBox cb8r6;
-        private CheckBox cb8r7;
+        private CheckBox chk8r0;
+        private CheckBox chk8r1;
+        private CheckBox chk8r2;
+        private CheckBox chk8r3;
+        private CheckBox chkb8r4;
+        private CheckBox chk8r5;
+        private CheckBox chk8r6;
+        private CheckBox chk8r7;
         private Label label96;
-        private CheckBox cb7r0;
-        private CheckBox cb7r1;
-        private CheckBox cb7r2;
-        private CheckBox cb7r3;
-        private CheckBox cb7r4;
-        private CheckBox cb7r5;
-        private CheckBox cb7r6;
-        private CheckBox cb7r7;
+        private CheckBox chk7r0;
+        private CheckBox chk7r1;
+        private CheckBox chk7r2;
+        private CheckBox chk7r3;
+        private CheckBox chk7r4;
+        private CheckBox chk7r5;
+        private CheckBox chk7r6;
+        private CheckBox chk7r7;
         private Label label95;
-        private CheckBox cb6r0;
-        private CheckBox cb6r1;
-        private CheckBox cb6r2;
-        private CheckBox cb6r3;
-        private CheckBox cb6r4;
-        private CheckBox cb6r5;
-        private CheckBox cb6r6;
-        private CheckBox cb6r7;
+        private CheckBox chk6r0;
+        private CheckBox chk6r1;
+        private CheckBox chk6r2;
+        private CheckBox chk6r3;
+        private CheckBox chk6r4;
+        private CheckBox chk6r5;
+        private CheckBox chk6r6;
+        private CheckBox chk6r7;
         private Label label94;
-        private CheckBox cb5r0;
-        private CheckBox cb5r1;
-        private CheckBox cb5r2;
-        private CheckBox cb5r3;
-        private CheckBox cb5r4;
-        private CheckBox cb5r5;
-        private CheckBox cb5r6;
-        private CheckBox cb5r7;
+        private CheckBox chk5r0;
+        private CheckBox chk5r1;
+        private CheckBox chk5r2;
+        private CheckBox chk5r3;
+        private CheckBox chk5r4;
+        private CheckBox chk5r5;
+        private CheckBox chk5r6;
+        private CheckBox chk5r7;
         private Label label93;
-        private CheckBox cb4r0;
-        private CheckBox cb4r1;
-        private CheckBox cb4r2;
-        private CheckBox cb4r3;
-        private CheckBox cb4r4;
-        private CheckBox cb4r5;
-        private CheckBox cb4r6;
-        private CheckBox cb4r7;
+        private CheckBox chk4r0;
+        private CheckBox chk4r1;
+        private CheckBox chk4r2;
+        private CheckBox chk4r3;
+        private CheckBox chk4r4;
+        private CheckBox chk4r5;
+        private CheckBox chk4r6;
+        private CheckBox chk4r7;
         private Label label92;
-        private CheckBox cb3r0;
-        private CheckBox cb3r1;
-        private CheckBox cb3r2;
-        private CheckBox cb3r3;
-        private CheckBox cb3r4;
-        private CheckBox cb3r5;
-        private CheckBox cb3r6;
-        private CheckBox cb3r7;
+        private CheckBox chk3r0;
+        private CheckBox chk3r1;
+        private CheckBox chk3r2;
+        private CheckBox chk3r3;
+        private CheckBox chk3r4;
+        private CheckBox chk3r5;
+        private CheckBox chk3r6;
+        private CheckBox chk3r7;
         private Label label91;
-        private CheckBox cb2r0;
-        private CheckBox cb2r1;
-        private CheckBox cb2r2;
-        private CheckBox cb2r3;
-        private CheckBox cb2r4;
-        private CheckBox cb2r5;
-        private CheckBox cb2r6;
-        private CheckBox cb2r7;
+        private CheckBox chk2r0;
+        private CheckBox chk2r1;
+        private CheckBox chk2r2;
+        private CheckBox chk2r3;
+        private CheckBox chk2r4;
+        private CheckBox chk2r5;
+        private CheckBox chk2r6;
+        private CheckBox chk2r7;
         private Label label90;
-        private CheckBox cb1r0;
-        private CheckBox cb1r1;
-        private CheckBox cb1r2;
-        private CheckBox cb1r3;
-        private CheckBox cb1r4;
-        private CheckBox cb1r5;
-        private CheckBox cb1r6;
-        private CheckBox cb1r7;
+        private CheckBox chk1r0;
+        private CheckBox chk1r1;
+        private CheckBox chk1r2;
+        private CheckBox chk1r3;
+        private CheckBox chk1r4;
+        private CheckBox chk1r5;
+        private CheckBox chk1r6;
+        private CheckBox chk1r7;
         private Label label101;
-        private CheckBox cb12r0;
-        private CheckBox cb12r1;
-        private CheckBox cb12r2;
-        private CheckBox cb12r3;
-        private CheckBox cb12r4;
-        private CheckBox cb12r5;
-        private CheckBox cb12r6;
-        private CheckBox cb12r7;
+        private CheckBox chk12r0;
+        private CheckBox chk12r1;
+        private CheckBox chk12r2;
+        private CheckBox chk12r3;
+        private CheckBox chk12r4;
+        private CheckBox chk12r5;
+        private CheckBox chk12r6;
+        private CheckBox chk12r7;
         private Label label103;
         private Label label102;
-        private CheckBox cb13r0;
-        private CheckBox cb13r1;
-        private CheckBox cb13r2;
-        private CheckBox cb13r3;
-        private CheckBox cb13r4;
-        private CheckBox cb13r5;
-        private CheckBox cb13r6;
-        private CheckBox cb13r7;
+        private CheckBox chk13r0;
+        private CheckBox chk13r1;
+        private CheckBox chk13r2;
+        private CheckBox chk13r3;
+        private CheckBox chk13r4;
+        private CheckBox chk13r5;
+        private CheckBox chk13r6;
+        private CheckBox chk13r7;
         private TextBox txtPortA;
         private CheckBox chkPortA;
         private Label label104;
@@ -17363,132 +17335,132 @@ namespace DataDecoder
         private Label label106;
         private Label label129;
         private Label label105;
-        private CheckBox cb13t4;
+        private CheckBox chk13t4;
         private Label label107;
-        private CheckBox cb13t7;
-        private CheckBox cb13t6;
-        private CheckBox cb0t3;
-        private CheckBox cb13t5;
-        private CheckBox cb13t3;
-        private CheckBox cb0t0;
-        private CheckBox cb13t2;
-        private CheckBox cb13t1;
-        private CheckBox cb13t0;
-        private CheckBox cb0t1;
+        private CheckBox chk13t7;
+        private CheckBox chk13t6;
+        private CheckBox chk0t3;
+        private CheckBox chk13t5;
+        private CheckBox chk13t3;
+        private CheckBox chk0t0;
+        private CheckBox chk13t2;
+        private CheckBox chk13t1;
+        private CheckBox chk13t0;
+        private CheckBox chk0t1;
         private Label label108;
-        private CheckBox cb0t2;
-        private CheckBox cb0t4;
-        private CheckBox cb0t5;
-        private CheckBox cb0t6;
-        private CheckBox cb0t7;
+        private CheckBox chk0t2;
+        private CheckBox chk0t4;
+        private CheckBox chk0t5;
+        private CheckBox chk0t6;
+        private CheckBox chk0t7;
         private Label label109;
-        private CheckBox cb12t0;
-        private CheckBox cb12t1;
-        private CheckBox cb12t2;
-        private CheckBox cb12t3;
-        private CheckBox cb12t4;
-        private CheckBox cb12t5;
-        private CheckBox cb12t6;
-        private CheckBox cb12t7;
+        private CheckBox chk12t0;
+        private CheckBox chk12t1;
+        private CheckBox chk12t2;
+        private CheckBox chk12t3;
+        private CheckBox chk12t4;
+        private CheckBox chk12t5;
+        private CheckBox chk12t6;
+        private CheckBox chk12t7;
         private Label label110;
-        private CheckBox cb11t0;
-        private CheckBox cb11t1;
-        private CheckBox cb11t2;
-        private CheckBox cb11t3;
-        private CheckBox cb11t4;
-        private CheckBox cb11t5;
-        private CheckBox cb11t6;
-        private CheckBox cb11t7;
+        private CheckBox chk11t0;
+        private CheckBox chk11t1;
+        private CheckBox chk11t2;
+        private CheckBox chk11t3;
+        private CheckBox chk11t4;
+        private CheckBox chk11t5;
+        private CheckBox chk11t6;
+        private CheckBox chk11t7;
         private Label label111;
-        private CheckBox cb10t0;
-        private CheckBox cb10t1;
-        private CheckBox cb10t2;
-        private CheckBox cb10t3;
-        private CheckBox cb10t4;
-        private CheckBox cb10t5;
-        private CheckBox cb10t6;
-        private CheckBox cb10t7;
+        private CheckBox chk10t0;
+        private CheckBox chk10t1;
+        private CheckBox chk10t2;
+        private CheckBox chk10t3;
+        private CheckBox chk10t4;
+        private CheckBox chk10t5;
+        private CheckBox chk10t6;
+        private CheckBox chk10t7;
         private Label label112;
-        private CheckBox cb9t0;
-        private CheckBox cb9t1;
-        private CheckBox cb9t2;
-        private CheckBox cb9t3;
-        private CheckBox cb9t4;
-        private CheckBox cb9t5;
-        private CheckBox cb9t6;
-        private CheckBox cb9t7;
+        private CheckBox chk9t0;
+        private CheckBox chk9t1;
+        private CheckBox chk9t2;
+        private CheckBox chk9t3;
+        private CheckBox chk9t4;
+        private CheckBox chk9t5;
+        private CheckBox chk9t6;
+        private CheckBox chk9t7;
         private Label label113;
-        private CheckBox cb8t0;
-        private CheckBox cb8t1;
-        private CheckBox cb8t2;
-        private CheckBox cb8t3;
-        private CheckBox cb8t4;
-        private CheckBox cb8t5;
-        private CheckBox cb8t6;
-        private CheckBox cb8t7;
+        private CheckBox chk8t0;
+        private CheckBox chk8t1;
+        private CheckBox chk8t2;
+        private CheckBox chk8t3;
+        private CheckBox chk8t4;
+        private CheckBox chk8t5;
+        private CheckBox chk8t6;
+        private CheckBox chk8t7;
         private Label label114;
-        private CheckBox cb7t0;
-        private CheckBox cb7t1;
-        private CheckBox cb7t2;
-        private CheckBox cb7t3;
-        private CheckBox cb7t4;
-        private CheckBox cb7t5;
-        private CheckBox cb7t6;
-        private CheckBox cb7t7;
+        private CheckBox chk7t0;
+        private CheckBox chk7t1;
+        private CheckBox chk7t2;
+        private CheckBox chk7t3;
+        private CheckBox chk7t4;
+        private CheckBox chk7t5;
+        private CheckBox chk7t6;
+        private CheckBox chk7t7;
         private Label label115;
-        private CheckBox cb6t0;
-        private CheckBox cb6t1;
-        private CheckBox cb6t2;
-        private CheckBox cb6t3;
-        private CheckBox cb6t4;
-        private CheckBox cb6t5;
-        private CheckBox cb6t6;
-        private CheckBox cb6t7;
+        private CheckBox chk6t0;
+        private CheckBox chk6t1;
+        private CheckBox chk6t2;
+        private CheckBox chk6t3;
+        private CheckBox chk6t4;
+        private CheckBox chk6t5;
+        private CheckBox chk6t6;
+        private CheckBox chk6t7;
         private Label label116;
-        private CheckBox cb5t0;
-        private CheckBox cb5t1;
-        private CheckBox cb5t2;
-        private CheckBox cb5t3;
-        private CheckBox cb5t4;
-        private CheckBox cb5t5;
-        private CheckBox cb5t6;
-        private CheckBox cb5t7;
+        private CheckBox chk5t0;
+        private CheckBox chk5t1;
+        private CheckBox chk5t2;
+        private CheckBox chk5t3;
+        private CheckBox chk5t4;
+        private CheckBox chk5t5;
+        private CheckBox chk5t6;
+        private CheckBox chk5t7;
         private Label label117;
-        private CheckBox cb4t0;
-        private CheckBox cb4t1;
-        private CheckBox cb4t2;
-        private CheckBox cb4t3;
-        private CheckBox cb4t4;
-        private CheckBox cb4t5;
-        private CheckBox cb4t6;
-        private CheckBox cb4t7;
+        private CheckBox chk4t0;
+        private CheckBox chk4t1;
+        private CheckBox chk4t2;
+        private CheckBox chk4t3;
+        private CheckBox chk4t4;
+        private CheckBox chk4t5;
+        private CheckBox chk4t6;
+        private CheckBox chk4t7;
         private Label label118;
-        private CheckBox cb3t0;
-        private CheckBox cb3t1;
-        private CheckBox cb3t2;
-        private CheckBox cb3t3;
-        private CheckBox cb3t4;
-        private CheckBox cb3t5;
-        private CheckBox cb3t6;
-        private CheckBox cb3t7;
+        private CheckBox chk3t0;
+        private CheckBox chk3t1;
+        private CheckBox chk3t2;
+        private CheckBox chk3t3;
+        private CheckBox chk3t4;
+        private CheckBox chk3t5;
+        private CheckBox chk3t6;
+        private CheckBox chk3t7;
         private Label label119;
-        private CheckBox cb2t0;
-        private CheckBox cb2t1;
-        private CheckBox cb2t2;
-        private CheckBox cb2t3;
-        private CheckBox cb2t4;
-        private CheckBox cb2t5;
-        private CheckBox cb2t6;
-        private CheckBox cb2t7;
+        private CheckBox chk2t0;
+        private CheckBox chk2t1;
+        private CheckBox chk2t2;
+        private CheckBox chk2t3;
+        private CheckBox chk2t4;
+        private CheckBox chk2t5;
+        private CheckBox chk2t6;
+        private CheckBox chk2t7;
         private Label label120;
-        private CheckBox cb1t0;
-        private CheckBox cb1t1;
-        private CheckBox cb1t2;
-        private CheckBox cb1t3;
-        private CheckBox cb1t4;
-        private CheckBox cb1t5;
-        private CheckBox cb1t6;
-        private CheckBox cb1t7;
+        private CheckBox chk1t0;
+        private CheckBox chk1t1;
+        private CheckBox chk1t2;
+        private CheckBox chk1t3;
+        private CheckBox chk1t4;
+        private CheckBox chk1t5;
+        private CheckBox chk1t6;
+        private CheckBox chk1t7;
         private Label label121;
         private Label label122;
         private Label label123;
@@ -17503,42 +17475,42 @@ namespace DataDecoder
         private CheckBox chkPortB;
         private Label label132;
         private Label label131;
-        private CheckBox cb15t4;
-        private CheckBox cb15t7;
-        private CheckBox cb15t6;
-        private CheckBox cb15t5;
-        private CheckBox cb15t3;
-        private CheckBox cb15t2;
-        private CheckBox cb15t1;
-        private CheckBox cb15t0;
+        private CheckBox chk15t4;
+        private CheckBox chk15t7;
+        private CheckBox chk15t6;
+        private CheckBox chk15t5;
+        private CheckBox chk15t3;
+        private CheckBox chk15t2;
+        private CheckBox chk15t1;
+        private CheckBox chk15t0;
         private Label label135;
         private Label label136;
-        private CheckBox cb14t0;
-        private CheckBox cb14t1;
-        private CheckBox cb14t2;
-        private CheckBox cb14t3;
-        private CheckBox cb14t4;
-        private CheckBox cb14t5;
-        private CheckBox cb14t6;
-        private CheckBox cb14t7;
-        private CheckBox cb15r4;
-        private CheckBox cb15r7;
-        private CheckBox cb15r6;
-        private CheckBox cb15r5;
-        private CheckBox cb15r3;
-        private CheckBox cb15r2;
-        private CheckBox cb15r1;
-        private CheckBox cb15r0;
+        private CheckBox chk14t0;
+        private CheckBox chk14t1;
+        private CheckBox chk14t2;
+        private CheckBox chk14t3;
+        private CheckBox chk14t4;
+        private CheckBox chk14t5;
+        private CheckBox chk14t6;
+        private CheckBox chk14t7;
+        private CheckBox chk15r4;
+        private CheckBox chk15r7;
+        private CheckBox chk15r6;
+        private CheckBox chk15r5;
+        private CheckBox chk15r3;
+        private CheckBox chk15r2;
+        private CheckBox chk15r1;
+        private CheckBox chk15r0;
         private Label label133;
         private Label label134;
-        private CheckBox cb14r0;
-        private CheckBox cb14r1;
-        private CheckBox cb14r2;
-        private CheckBox cb14r3;
-        private CheckBox cb14r4;
-        private CheckBox cb14r5;
-        private CheckBox cb14r6;
-        private CheckBox cb14r7;
+        private CheckBox chk14r0;
+        private CheckBox chk14r1;
+        private CheckBox chk14r2;
+        private CheckBox chk14r3;
+        private CheckBox chk14r4;
+        private CheckBox chk14r5;
+        private CheckBox chk14r6;
+        private CheckBox chk14r7;
         private Label lblVHF;
         private Label label137;
         private CheckBox chkInvertA;
@@ -17630,10 +17602,10 @@ namespace DataDecoder
         private Label label150;
         private GroupBox groupBox13;
         private Label label151;
-        private CheckBox checkBox2;
+        private CheckBox chkProEnab;
         private Button button1;
         private Label label152;
-        private TextBox textBox2;
+        private TextBox txtProTmp;
         private TabPage tabOther;
         private GroupBox grpRepeat;
         private Label label79;
@@ -17647,7 +17619,7 @@ namespace DataDecoder
         private CheckBox chkRepeat;
         public TextBox txtPmsg;
         private Label label153;
-        private ComboBox comboBox1;
+        private ComboBox cboProPort;
         private Button button6;
         private RadioButton rbRptPal;
         private RadioButton rbFW;
@@ -17738,7 +17710,7 @@ namespace DataDecoder
         private Button btnSPEleft;
         private Button btnSPEright;
         private ToolStripMenuItem showTipsToolStripMenuItem;
-        private TabPage tabProp;
+        private TabPage tabSO2R;
         private GroupBox grpSO2R;
         private Label label166;
         private Label label169;
@@ -17994,13 +17966,6 @@ namespace DataDecoder
         private TextBox txtMacSwOn;
         private Label label225;
         private TextBox txtMacSwMsg;
-        private ToolStripMenuItem antToolStripMenuItem;
-        private ToolStripMenuItem recallToolStripMenuItem;
-        private ToolStripMenuItem saveToolStripMenuItem;
-        private ToolStripMenuItem toolStripMenuItem6;
-        private ToolStripMenuItem toolStripMenuItem7;
-        private ToolStripMenuItem toolStripMenuItem8;
-        private ToolStripMenuItem toolStripMenuItem9;
         private TextBox txtVolts;
         public Button btnReCall;
         public Button btnMemSave;
@@ -18117,6 +18082,8 @@ namespace DataDecoder
         private Button TkYel;
         private Button TkRed;
         private Button button7;
+        private ToolStripMenuItem profileSaveToolStripMenuItem;
+        private ToolStripMenuItem profileLoadToolStripMenuItem;
 
     }
 }

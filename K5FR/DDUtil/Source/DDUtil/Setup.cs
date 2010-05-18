@@ -47,6 +47,7 @@ using Logger;
 using NDde.Client;
 using FT_HANDLE = System.UInt32;
 using Microsoft.Win32;              // For RegKey
+using MRG.Controls.UI;
 
 namespace DataDecoder
 {
@@ -682,7 +683,10 @@ namespace DataDecoder
             chkShortCut.Checked = set.chkShortCut;
 
             // setup error log parameters
-            ErrorLog.LogFilePath = "ErrorLog.txt";
+            string path = Application.ExecutablePath;
+            path = path.Substring(0, path.LastIndexOf("\\") + 1);
+            path = path + "ErrorLog.txt";
+            ErrorLog.LogFilePath = path;
             enableErrorLog = set.ErrorLog;
             if (enableErrorLog)
             {
@@ -1127,6 +1131,7 @@ namespace DataDecoder
 
         #region Form Events
 
+
         // the enable short-cuts check box has changed
         private void chkShortCut_CheckedChanged(object sender, EventArgs e)
         {
@@ -1192,8 +1197,11 @@ namespace DataDecoder
         //the PSDR file location textbox was double-clicked
         private void txtVspMgr_DoubleClick(object sender, EventArgs e)
         {
+
+//            OpenFileDialog openFileDialog1 = new OpenFileDialog();
+            openFileDialog1.InitialDirectory = "C:\\vspMgr\\";
             openFileDialog1.Filter = "exe files|*.exe";
-            openFileDialog1.Title = "Select PowerSDR File Location";
+            openFileDialog1.Title = "Select VSP Manager File Location";
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
                 txtVspMgr.Text = openFileDialog1.FileName;
@@ -1539,6 +1547,22 @@ namespace DataDecoder
         // The Select Band Decoder Data File button was pressed
         private void btnFile0_Click(object sender, EventArgs e)
         {
+            // get the App Data Path
+            if (app_data_path == "")
+            {
+                Assembly assembly = Assembly.GetExecutingAssembly();
+                FileVersionInfo fvi = FileVersionInfo.GetVersionInfo(assembly.Location);
+                string version = fvi.FileVersion.Substring(0, fvi.FileVersion.LastIndexOf("."));
+                //AppDataPath = assembly.Location;
+                AppDataPath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData)
+                + "\\DDUtil\\";
+            }
+            string bDataDir = app_data_path + "BandData\\";
+            if (!Directory.Exists(bDataDir))
+                Directory.CreateDirectory(bDataDir);
+
+//            OpenFileDialog openFileDialog1 = new OpenFileDialog();
+            openFileDialog1.InitialDirectory = bDataDir;
             openFileDialog1.Filter = "xml files|*.xml";
             openFileDialog1.Title = "Select a XML File";
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
@@ -2261,6 +2285,12 @@ namespace DataDecoder
                     AccPort.DataBits = 8;
                     AccPort.Parity = System.IO.Ports.Parity.None;
                     AccPort.StopBits = System.IO.Ports.StopBits.Two;
+                    break;
+                case 8: // 19200 8N1
+                    AccPort.BaudRate = 19200;
+                    AccPort.DataBits = 8;
+                    AccPort.Parity = System.IO.Ports.Parity.None;
+                    AccPort.StopBits = System.IO.Ports.StopBits.One;
                     break;
                 default:
                     break;
@@ -4571,6 +4601,80 @@ namespace DataDecoder
 
         #endregion Aux BCD
 
+        #region DXLab DDE
+
+        #region # Enums, Declarations and Vars #
+
+        const int LinkMode = 1;
+        const string ModeServer = "6";
+        const string InvokeMacroCommand = "invokemacro";
+        const string LinkItem = "DDECommand";
+        const string LinkTopic = "WinWarbler|DDEServer";
+
+
+        #endregion # Enums, Declarations and Vars #
+
+        #region # Events #
+
+        // Test for sending keys to another app (start notepad 1st)
+        // then press the small unmarked button in the Tuning Knob group on the RCP tab
+        [DllImport("user32.dll", SetLastError = true)]
+        static extern IntPtr FindWindowEx(IntPtr hwndParent, IntPtr hwndChildAfter, string lpszClass, string lpszWindow);
+        [DllImport("User32.Dll", EntryPoint = "PostMessageA")]
+        static extern bool PostMessage(IntPtr hWnd, uint msg, int wParam, int lParam);
+        [DllImport("user32.dll")]
+        static extern byte VkKeyScan(char ch);
+
+        const uint WM_KEYDOWN = 0x100;
+
+        private void button7_Click(object sender, EventArgs e)
+        {
+            Process[] procs = Process.GetProcessesByName("Notepad");
+            foreach (Process proc in procs)
+            {
+                // look for untitled notepad window
+                if (proc.MainWindowTitle == "Untitled - Notepad")
+                {
+                    // get handle to Notepad's edit window
+                    IntPtr hWnd = FindWindowEx(proc.MainWindowHandle, IntPtr.Zero, "edit", null);
+                    // post "hello" to notepad
+                    string s = "Hello Radio de K5FR";
+                    for (int i = 0; i < s.Length; i++)
+                    {
+                        PostMessage(hWnd, WM_KEYDOWN, VkKeyScan(s[i]), 0);
+                    }
+                    break;
+                }
+
+            }
+        }
+
+        #endregion # Events #
+
+        #region # Methods #
+
+        private static void SendWWmacro(string index)
+        {
+            try
+            {
+                // Create a client that connects to WinWarbler. 
+                DdeClient client = new DdeClient("WinWarbler", "DDEServer");
+                client.Connect();
+                client.Execute(ModeServer.PadRight(3, '0') + InvokeMacroCommand + index, 60000);
+                client.Disconnect();
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(new Form() { TopMost = true },
+                    "An error ocurred while trying to communicate with WinWarbler\r\r" +
+                    e.ToString(), "DDE Error!");
+            }
+        }
+
+        #endregion # Methods #
+
+        #endregion DXLab DDE
+
         #region FlexWire
 
         #region # Enums & Vars #
@@ -4952,6 +5056,22 @@ namespace DataDecoder
         {
             try
             {
+                // get the App Data Path
+                if (app_data_path == "")
+                {
+                    Assembly assembly = Assembly.GetExecutingAssembly();
+                    FileVersionInfo fvi = FileVersionInfo.GetVersionInfo(assembly.Location);
+                    string version = fvi.FileVersion.Substring(0, fvi.FileVersion.LastIndexOf("."));
+                    //AppDataPath = assembly.Location;
+                    AppDataPath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData)
+                    + "\\DDUtil\\";
+                }
+                string MacroFileDir = app_data_path + "Macros\\";
+                if (!Directory.Exists(MacroFileDir))
+                    Directory.CreateDirectory(MacroFileDir);
+
+//                OpenFileDialog openFileDialog1 = new OpenFileDialog();
+                openFileDialog1.InitialDirectory = MacroFileDir;
                 openFileDialog1.Filter = "xml files|*.xml";
                 openFileDialog1.Title = "Select an XML File";
                 if (openFileDialog1.ShowDialog() == DialogResult.OK)
@@ -5052,8 +5172,14 @@ namespace DataDecoder
         // A key was pressed check for "F" key
         private void Setup_KeyDown(object sender, KeyEventArgs e)
         {
-            if (!chkShortCut.Checked) // Disable Short-Cuts
+            if (!chkShortCut.Checked) // If NOT Short-Cuts disabled
             {
+                // Alt+C menu assigned to Clear Error Log
+                // Alt+O menu assigned to Open Error Log
+                // Alt+M menu assigned to Mini window
+                // Ctrl + Down arrow menu assigned to Save Profile
+                // Ctrl + Up arrow menu assigned to Load Profile
+
                 if (e.KeyCode == Keys.F1 && e.Modifiers == Keys.Shift)
                 { ProcessMacroButton(13); }
                 else if (e.KeyCode == Keys.F2 && e.Modifiers == Keys.Shift)
@@ -5092,34 +5218,56 @@ namespace DataDecoder
                 { btnDrive_Click(null, null); }
                 else if (e.Control && e.KeyCode == Keys.B) // SteppIR to Bi Direction
                 { rbBiDir.Checked = true; }
+                else if (e.Control && e.KeyCode == Keys.C) // Memory Load
+                { btnMemLoad_Click(null, null); }
                 else if (e.Control && e.KeyCode == Keys.F) // SteppIR to Forward
                 { rbFwd.Checked = true; }
                 else if (e.Control && e.KeyCode == Keys.L) // Set drive to low power
                 { LowPower(); }
+                else if (e.Control && e.KeyCode == Keys.N) // Open Memory Note window
+                { txtMemFreq_DoubleClick(null, null); }
                 else if (e.Control && e.KeyCode == Keys.O) // Toggle PTT
                 { btnByp_Click(null, null); }
                 else if (e.Control && e.KeyCode == Keys.R) // SteppIR to Reverse
                 { rb180.Checked = true; }
-                else if (e.Control && e.KeyCode == Keys.Z) // Toggle VFO/Memory
-                { btnMV_Click(null, null); }
-                else if (e.Control && e.KeyCode == Keys.X) // Memory select (1-5)
-                { btnReCall_Click(null, null); }
-                else if (e.Control && e.KeyCode == Keys.C) // Memory Load
-                { btnMemLoad_Click(null, null); }
-                else if (e.Control && e.KeyCode == Keys.V) // Memory Save
-                { btnMemSave_Click(null, null); }
-                else if (e.Control && e.KeyCode == Keys.N) // Open Memory Note window
-                { txtMemFreq_DoubleClick(null, null); }
-                else if (e.Control && e.KeyCode == Keys.U) // Undo freq move
-                { WriteToPort("FA" + prevFreq + ";", iSleep); }
                 else if (e.Control && e.Shift && e.KeyCode == Keys.S) // Power On/Off
                 { btnFlexOn_Click(null, null); }
+                else if (e.Control && e.KeyCode == Keys.U) // Undo freq move
+                { WriteToPort("FA" + prevFreq + ";", iSleep); }
+                else if (e.Control && e.KeyCode == Keys.V) // Memory Save
+                { btnMemSave_Click(null, null); }
+                else if (e.Control && e.KeyCode == Keys.X) // Memory select (1-5)
+                { btnReCall_Click(null, null); }
+                else if (e.Control && e.KeyCode == Keys.Z) // Toggle VFO/Memory
+                { btnMV_Click(null, null); }
                 // TK tuning rate up
                 else if (e.Control && (e.KeyCode == Keys.Oemplus || e.KeyValue == 107))
                 { if (cboTstep.SelectedIndex < 14) cboTstep.SelectedIndex += 1; }
                 // TK tuning rate down
                 else if (e.Control && (e.KeyCode == Keys.OemMinus || e.KeyValue == 109))
                 { if (cboTstep.SelectedIndex > 0) cboTstep.SelectedIndex -= 1; }
+                // Rotor bearing Down 5 degrees
+                else if (e.Control && e.Shift && e.KeyCode == Keys.Down)
+                {
+                    int i = Convert.ToInt32(txtSP.Text);
+                    if (i >= 5)
+                    {
+                        i -= 5;
+                        txtSP.Text = i.ToString();
+                        btnSP_Click(null, null);
+                    }
+                }
+                // Rotor bearing Up 5 degrees
+                else if (e.Control && e.Shift && e.KeyCode == Keys.Up)
+                {
+                    int i = Convert.ToInt32(txtSP.Text);
+                    if (i <= 360)
+                    {
+                        i += 5;
+                        txtSP.Text = i.ToString();
+                        btnSP_Click(null, null);
+                    }
+                }
             }
         }
         // Adds macro number text to the row header
@@ -5831,9 +5979,21 @@ namespace DataDecoder
         // Main Menu|Tools|Clear Error Log
         private void clearErrorLogToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            File.Delete("ErrorLog.txt");
-            File.CreateText("ErrorLog.txt");
+            string path = Application.ExecutablePath;
+            path = path.Substring(0, path.LastIndexOf("\\") + 1);
+            path = path + "ErrorLog.txt";
+            File.Delete(path);
             ver = Application.ProductVersion;
+            errCtr = 0;
+            using (StreamWriter sw = File.CreateText(path))
+            {
+                sw.WriteLine("DDUtil Error Log");
+                sw.WriteLine("----------------");
+                sw.WriteLine(" ");
+                sw.Flush();
+                sw.Close();
+            }            
+            ErrorLog.LogFilePath = path;
         }
         // Main Menu|Tools|Reset Don't Ask Me Again (All Forms are Reset)
         private void resetDontAskMeAgainToolStripMenuItem_Click(object sender, EventArgs e)
@@ -5887,7 +6047,7 @@ namespace DataDecoder
         {
             string myStringWebResource = null;
             string remoteUri = "http://k5fr.com/binary/";
-            string fileName = "version.txt";
+            string fileName = Application.StartupPath + "\\version.txt";
             TextReader tr = new StreamReader(fileName);
             string tempStr = tr.ReadLine();
             tr.Close();
@@ -6111,13 +6271,32 @@ namespace DataDecoder
             else
             { btnByp.Text = text; } //mini.btnByp.Text = text; }
         }
+        
         // The Oper/Stby button was pressed
+        bool noBandsChkd = false;
         bool stsOper;
         string stsTX;
         public void btnByp_Click(object sender, EventArgs e)
         {
+            if (!chkAmp160.Checked && !chkAmp80.Checked && !chkAmp40.Checked && 
+                 !chkAmp30.Checked && !chkAmp20.Checked && !chkAmp17.Checked &&
+                 !chkAmp15.Checked && !chkAmp12.Checked && !chkAmp6.Checked)
+            { noBandsChkd = true; }
+            else
+            { noBandsChkd = false; }
+
             if (!stsOper)   // if amp in stand by
             {
+                if (noBandsChkd)
+                {
+                    MessageBox.Show(new Form() { TopMost = true },
+                        "There are no bands checked in the'Amp Bands' group.\r\r" +
+                        "For the 'PTT' feature to work you must check each band you want \r" +
+                        "to use your amplifier on in the 'Amp Bands' group.\r\r" +
+                        "See http://k5fr.com/ddutilwiki/index.php?title=Setup#PTT for documentation.",
+                        "Setup Error!", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    return;
+                }
                 WriteToPort("ZZOF" + stsTX + ";", 50);  // turn PTT (TX) on
                 stsOper = true; btnByp.BackColor = Color.Lime;
                 mini.btnByp.BackColor = Color.Lime;
@@ -6133,6 +6312,7 @@ namespace DataDecoder
                 WriteToPort("ZZOF000;", 50);  // turn TX off
                 txtAlcInd.BackColor = Color.Yellow;
                 SetOperStby("STBY"); set.stsOper = false;
+
             }
             lastBand = "";  // force refresh of drive level.
         }
@@ -6738,6 +6918,8 @@ namespace DataDecoder
         //the PSDR file location textbox was double-clicked
         private void txtPSDR_DoubleClick(object sender, EventArgs e)
         {
+//            OpenFileDialog openFileDialog1 = new OpenFileDialog();
+            openFileDialog1.InitialDirectory = "C:\\Program Files\\FlexRadio Systems\\";
             openFileDialog1.Filter = "exe files|*.exe";
             openFileDialog1.Title = "Select PowerSDR File Location";
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
@@ -7547,10 +7729,12 @@ namespace DataDecoder
                     {
                         string SQL = "SELECT Prefix.Prefix, DX.DXCCPrefix " +
                             "FROM DX INNER JOIN Prefix ON DX.DXCCPrefix = Prefix.DXCCPrefix " +
-                            "WHERE Prefix.Prefix Like '" + txtCallSign.Text.Substring(0, 2) + "%'";
+                            "WHERE Prefix.Prefix Like '" + txtCallSign.Text + "%'";
 
+                        string path = Application.ExecutablePath;
+                        path = path.Substring(0, path.LastIndexOf("\\") + 1);
                         OleDbConnection conn = new OleDbConnection(
-                            "provider = microsoft.jet.oledb.4.0;data source = DDUtil.mdb;");
+                            "provider = microsoft.jet.oledb.4.0;data source = " + path + "DDUtil.mdb;");
                         OleDbCommand thisCommand = new OleDbCommand(SQL, conn);
                         conn.Open();
                         OleDbDataReader thisReader = thisCommand.ExecuteReader();
@@ -7563,13 +7747,13 @@ namespace DataDecoder
                             txtLP.Text = ""; lblLP.Text = "";
                             cboPrefix.Text = "??"; cboEntity.Text = "";
                             txtDxLat.Text = ""; txtDxLong.Text = "";
-                            txtCode.Text = ""; txtRegion.Text = ""; 
+                            txtCode.Text = ""; txtRegion.Text = "";
                             txtDxDist.Text = ""; txtDxCont.Text = "";
-                            txtDxCQ.Text = ""; txtDxITU.Text = ""; 
+                            txtDxCQ.Text = ""; txtDxITU.Text = "";
                             txtDxIOTA.Text = ""; txtDxTime.Text = "";
                         }
                     }
-                    catch (ArgumentOutOfRangeException )
+                    catch (ArgumentOutOfRangeException)
                     {
                         MessageBox.Show(new Form() { TopMost = true },
                             "The Call Prefix requires at least two (2) characters to be valid prefix.\r\r" +
@@ -7757,8 +7941,10 @@ namespace DataDecoder
         // Get DXCC data from the database
         private void GetDXCC(string SQL)
         {
+            string path = Application.ExecutablePath;
+            path = path.Substring(0, path.LastIndexOf("\\") + 1);
             OleDbConnection conn = new OleDbConnection(
-                "provider = microsoft.jet.oledb.4.0;data source = DDUtil.mdb;");
+                "provider = microsoft.jet.oledb.4.0;data source = " + path + "DDUtil.mdb;");
             OleDbCommand thisCommand = new OleDbCommand(SQL, conn);
             conn.Open();
             OleDbDataReader thisReader = thisCommand.ExecuteReader();
@@ -7787,7 +7973,7 @@ namespace DataDecoder
                         string off = currentOffset.ToString();
                         if (off.Substring(0, 1) == "-") off = off.Substring(0, 3);
                         else off = off.Substring(0, 2);
-// not used                        double LocalOffset = Math.Abs(Convert.ToDouble(off));
+                        // double LocalOffset = Math.Abs(Convert.ToDouble(off));
                         double DxOffset = Convert.ToDouble(thisReader.GetValue(8).ToString());
                         double DxOffsetRaw = Convert.ToDouble(thisReader.GetValue(8).ToString());
                         DxOffset = -(DxOffset);
@@ -7961,8 +8147,11 @@ namespace DataDecoder
         //  Initialize Rotor settings and controls (called from Setup())
         private void InitRotor()
         {   //Load DX Prefix and Entity controls from Database
+            string path = Application.ExecutablePath;
+            path = path.Substring(0, path.LastIndexOf("\\") + 1);
+
             OleDbConnection conn = new OleDbConnection(
-             "provider = microsoft.jet.oledb.4.0;data source = DDUtil.mdb;");
+                "provider = microsoft.jet.oledb.4.0;data source = " + path + "DDUtil.mdb;");
             OleDbCommand thisCommand = new OleDbCommand(
                 "SELECT DISTINCT DXCCPrefix, DXCCName FROM DX " +
                 "GROUP BY DXCCPrefix, DXCCName, TimeZone " +
@@ -8019,11 +8208,14 @@ namespace DataDecoder
         string lastFreqB = "";
         string freqLook = "";
         string pwrVolts = "";
-        int psdrStep = -1;
+        bool isFirstPass = true;
+        int model;
         void sp_CATRxEvent(object source, CATSerialPorts.SerialRXEvent e)
         {
             comTimer.Stop();
             comTimer.Start();
+            if (isFirstPass)    // get the radio model
+            { WriteToPort("ZZFM;", iSleep); isFirstPass = false; }
             try
             {   // put the port data in the comm buffer
                 CommBuffer += AE.GetString(e.buffer, 0, e.buffer.Length);
@@ -8060,21 +8252,18 @@ namespace DataDecoder
                     {
                         tempTimer.Stop();
                         int psdrIdx = Convert.ToInt32(rawFreq.Substring(4, 2));
-                        if (psdrStep == -1)
-                        {
-                            WriteToPort("ZZAC" + stepSize.ToString().PadLeft(2, '0') + ";", iSleep);
-                            psdrStep = stepSize;
-                            tempTimer.Start(); 
-                            return;
-                        }
-                        if (psdrIdx != stepSize)
-                        { SetStepSize(rawFreq.Substring(4, 2)); }
+                        SetStepSize(rawFreq.Substring(4, 2));
                         tempTimer.Start();
                     }
                     /*** Get Audio Gain ***/
                     if (rawFreq.Length > 4 && rawFreq.Substring(0, 4) == "ZZAG")
                     {
                         volIdx = Convert.ToInt32(rawFreq.Substring(4, 3));
+                    }
+                    /*** Get Model ***/
+                    if (rawFreq.Length > 4 && rawFreq.Substring(0, 4) == "ZZFM")
+                    {
+                        model = Convert.ToInt32(rawFreq.Substring(4, 1));
                     }
                     /*** Get pwr supply volts ***/
                     if (rawFreq.Length > 4 && rawFreq.Substring(0, 4) == "ZZRV")
@@ -8224,6 +8413,7 @@ namespace DataDecoder
                             /*** Setup Auto Drive for this band ***/
                             if (stsOper)
                             {   // if amp not selected for this band set PTT to ByPass
+
                                 if (!chkAmp160.Checked && band == "160") { btnByp_Click(null, null); }
                                 if (!chkAmp80.Checked && band == "080") { btnByp_Click(null, null); }
                                 if (!chkAmp40.Checked && band == "040") { btnByp_Click(null, null); }
@@ -9974,6 +10164,7 @@ namespace DataDecoder
         string dataH = "0", dataL = "0";  // data word for LPT1
         string ctrlH = "0", ctrlL = "0";  // control word for LPT2
         public static string so2rFile = "";
+        public static string so2rDir = "";
         string TXa = "0", TXb = "0";      // TX ant for vfo a/b
 
         public static DataSet dso;
@@ -10007,10 +10198,10 @@ namespace DataDecoder
                     return;
                 else if (result == DialogResult.No)
                 {
-                    GetFile();
+                    GetSoFile();
                 }
-                if (File.Exists(app_data_path + "\\" + so2rFile))
-                    File.Delete(app_data_path + "\\" + so2rFile);
+                if (File.Exists(app_data_path + "SO2R\\" + so2rFile))
+                    File.Delete(app_data_path + "SO2R\\" + so2rFile);
                 dso.Clear();
                 ArrayList a = new ArrayList();
                 foreach (Control c in this.grpSO2R.Controls)			// For each control
@@ -10040,7 +10231,7 @@ namespace DataDecoder
         {
             if (chkSoEnab.Checked)
             {
-                GetFile();
+                GetSoFile();
                 if (File.Exists(app_data_path + "\\" + so2rFile))
                 { dso.Clear(); dso.ReadXml(app_data_path + "\\" + so2rFile); }
                 LoadVars();
@@ -10266,12 +10457,13 @@ namespace DataDecoder
                     AppDataPath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData)
                     + "\\DDUtil\\";
                 }
-                if (!Directory.Exists(app_data_path))
-                    Directory.CreateDirectory(app_data_path);
+                so2rDir = app_data_path + "SO2R\\";
+                //if (!Directory.Exists(app_data_path))
+                //    Directory.CreateDirectory(app_data_path);
 
                 dso = new DataSet();
-                if (File.Exists(app_data_path + "\\" + so2rFile))
-                    dso.ReadXml(app_data_path + "\\" + so2rFile);
+                if (File.Exists(so2rDir + so2rFile))
+                    dso.ReadXml(so2rDir + so2rFile);
                 grpSO2R.Text = "SO2R - Profile: " + so2rFile;
                 LoadVars(); //load matrix with last used data file
 
@@ -10297,11 +10489,12 @@ namespace DataDecoder
             }
         }
         // call file dialog to set the user file.
-        void GetFile()
+        void GetSoFile()
         {
             try
             {
-                openFileDialog1.InitialDirectory = app_data_path;
+//                OpenFileDialog openFileDialog1 = new OpenFileDialog();
+                openFileDialog1.InitialDirectory = so2rDir;
                 openFileDialog1.Filter = "xml files|*.xml";
                 openFileDialog1.Title = "Select a file";
                 if (openFileDialog1.ShowDialog() == DialogResult.OK)
@@ -10900,7 +11093,7 @@ namespace DataDecoder
         public static void SaveDB()
         {
 //            dso.WriteXml(app_data_path + "\\" + so2rFile , XmlWriteMode.WriteSchema);
-            dso.WriteXml(app_data_path + "\\" + so2rFile);
+            dso.WriteXml(so2rDir + so2rFile);
         }
 
         #endregion # SO2R Methods #
@@ -12180,14 +12373,17 @@ namespace DataDecoder
                 catch { }
             }
         }
-        // PA Temperature 
+        // Get PA Temperature & Volts
         void tempTimer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
         {
             try
             {
-                WriteToPort("ZZTS;", iSleep); // TEMP 
+                if (model < 3)
+                {
+                    WriteToPort("ZZTS;", iSleep); // TEMP
+                    WriteToPort("ZZRV;", iSleep); // PS VOLTS
+                } 
                 WriteToPort("ZZBS;", iSleep); // BAND
-                WriteToPort("ZZRV;", iSleep); // PS VOLTS
                 WriteToPort("ZZFI;", iSleep); // Filter in use
                 if (chkKnobEnab.Checked)      // Step Size
                 { WriteToPort("ZZAC;", iSleep); }
@@ -12205,6 +12401,7 @@ namespace DataDecoder
         void comTimer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
         {
             comTimer.Stop();
+            isFirstPass = true;
             SetTitle("DDUtil " + ver + " - CAT Connection Lost ");
         }
         
@@ -12613,7 +12810,7 @@ namespace DataDecoder
                                 }
                                     break;
                             case "F":   //firmware revision
-                                SetgrpTKnob("Tuning Knob Rev. " +
+                                SetgrpTKnob("K6TD && K6TU Tuning Knob - Rev. " +
                                     sCmd.Substring(1, 2) + "." +
                                     sCmd.Substring(3, 2));
                                 break;
@@ -12669,6 +12866,89 @@ namespace DataDecoder
                                             volIdx.ToString().PadLeft(3, '0') + ";", iSleep);
                                     }
                                 }
+                                break;
+                            case "X":   // Switch closures
+                                if (sCmd.Substring(0, 2) == "X1")
+                                {
+                                    switch (set.cboTkSw1)
+                                    {
+                                        case 0: // Tune Step Up
+                                            WriteToPort("ZZSU;", iSleep);
+                                            break;
+                                        case 1: // Tune Step dWN
+                                            WriteToPort("ZZSD;", iSleep);
+                                            break;
+                                        case 2: // Tune Step Up
+                                            ProcessTkSwMacro(22);
+                                            break;
+                                        case 3: // Tune Step Up
+                                            ProcessTkSwMacro(23);
+                                            break;
+                                        case 4: // Tune Step Up
+                                            ProcessTkSwMacro(24);
+                                            break;
+                                        case 5: // Tune Step Up
+                                            ProcessTkSwMacro(25);
+                                            break;
+                                        case 6: // Tune Step Up
+                                            ProcessTkSwMacro(26);
+                                            break;
+                                    }
+                                }
+                                    if (sCmd.Substring(0, 2) == "X2")
+                                    {
+                                        switch (set.cboTkSw2)
+                                        {
+                                            case 0: // Tune Step Up
+                                                WriteToPort("ZZSU;", iSleep);
+                                                break;
+                                            case 1: // Tune Step dWN
+                                                WriteToPort("ZZSD;", iSleep);
+                                                break;
+                                            case 2: // Tune Step Up
+                                                ProcessTkSwMacro(22);
+                                                break;
+                                            case 3: // Tune Step Up
+                                                ProcessTkSwMacro(23);
+                                                break;
+                                            case 4: // Tune Step Up
+                                                ProcessTkSwMacro(24);
+                                                break;
+                                            case 5: // Tune Step Up
+                                                ProcessTkSwMacro(25);
+                                                break;
+                                            case 6: // Tune Step Up
+                                                ProcessTkSwMacro(26);
+                                                break;
+                                        }
+                                    }
+                                    if (sCmd.Substring(0, 2) == "X3")
+                                    {
+                                        switch (set.cboTkSw3)
+                                        {
+                                            case 0: // Tune Step Up
+                                                WriteToPort("ZZSU;", iSleep);
+                                                break;
+                                            case 1: // Tune Step Dwn
+                                                WriteToPort("ZZSD;", iSleep);
+                                                break;
+                                            case 2: // Tune Step Up
+                                                ProcessTkSwMacro(22);
+                                                break;
+                                            case 3: // Tune Step Up
+                                                ProcessTkSwMacro(23);
+                                                break;
+                                            case 4: // Tune Step Up
+                                                ProcessTkSwMacro(24);
+                                                break;
+                                            case 5: // Tune Step Up
+                                                ProcessTkSwMacro(25);
+                                                break;
+                                            case 6: // Tune Step Up
+                                                ProcessTkSwMacro(26);
+                                                break;
+                                        }
+                                    }
                                 break;
                             case "Z":   // parameter settings from knob
                                 if (sCmd.Substring(0, 2) == "ZC")
@@ -12831,8 +13111,8 @@ namespace DataDecoder
 
         private void tabRCP_DoubleClick(object sender, EventArgs e)
         {
-            if (grpTKnob.Enabled) grpTKnob.Enabled = false;
-            else grpTKnob.Enabled = true;
+            if (grpTKnob.Visible) grpTKnob.Visible = false;
+            else grpTKnob.Visible = true;
         }
 
         private void cboTstep_SelectedIndexChanged(object sender, EventArgs e)
@@ -13017,7 +13297,31 @@ namespace DataDecoder
                     break;
             }
         }
-        
+
+        public void ProcessTkSwMacro(int macro)
+        {
+            try
+            {
+                if (StepCtr == 0)// && (xOn == "0" || xOn == ""))
+                {   // 
+                    if (dgm.Rows[macro - 1].Cells[1].Value.ToString() == "")
+                    {
+                        throw new Exception();
+                    }
+                    string cmds = dgm.Rows[macro - 1].Cells[1].Value.ToString();
+                    ParseBuffer(cmds);
+                }
+            }
+            catch (ArgumentOutOfRangeException)
+            {
+            }
+            catch (NullReferenceException)
+            {
+                MessageBox.Show(new Form() { TopMost = true },
+                    "There are no commands setup for this Macro " + macro.ToString());
+            }
+        }
+
         #endregion * Methods *
 
         #endregion Tuning Knob
@@ -13216,164 +13520,164 @@ namespace DataDecoder
         private void grpPortA_CheckedChanged(object sender, EventArgs e)
         {
             x2a0 = 0;
-            if (cb0r0.Checked) x2a0 += 1;
-            if (cb0r1.Checked) x2a0 += 2;
-            if (cb0r2.Checked) x2a0 += 4;
-            if (cb0r3.Checked) x2a0 += 8;
-            if (cb0r4.Checked) x2a0 += 16;
-            if (cb0r5.Checked) x2a0 += 32;
-            if (cb0r6.Checked) x2a0 += 64;
-            if (cb0r7.Checked) x2a0 += 128;
+            if (chk0r0.Checked) x2a0 += 1;
+            if (chk0r1.Checked) x2a0 += 2;
+            if (chk0r2.Checked) x2a0 += 4;
+            if (chk0r3.Checked) x2a0 += 8;
+            if (chk0r4.Checked) x2a0 += 16;
+            if (chk0r5.Checked) x2a0 += 32;
+            if (chk0r6.Checked) x2a0 += 64;
+            if (chk0r7.Checked) x2a0 += 128;
             set.x2a0 = x2a0;
             x2a1 = 0;
-            if (cb1r0.Checked) x2a1 += 1;
-            if (cb1r1.Checked) x2a1 += 2;
-            if (cb1r2.Checked) x2a1 += 4;
-            if (cb1r3.Checked) x2a1 += 8;
-            if (cb1r4.Checked) x2a1 += 16;
-            if (cb1r5.Checked) x2a1 += 32;
-            if (cb1r6.Checked) x2a1 += 64;
-            if (cb1r7.Checked) x2a1 += 128;
+            if (chk1r0.Checked) x2a1 += 1;
+            if (chk1r1.Checked) x2a1 += 2;
+            if (chk1r2.Checked) x2a1 += 4;
+            if (chk1r3.Checked) x2a1 += 8;
+            if (chk1r4.Checked) x2a1 += 16;
+            if (chk1r5.Checked) x2a1 += 32;
+            if (chk1r6.Checked) x2a1 += 64;
+            if (chk1r7.Checked) x2a1 += 128;
             set.x2a1 = x2a1;
             x2a2 = 0;
-            if (cb2r0.Checked) x2a2 += 1;
-            if (cb2r1.Checked) x2a2 += 2;
-            if (cb2r2.Checked) x2a2 += 4;
-            if (cb2r3.Checked) x2a2 += 8;
-            if (cb2r4.Checked) x2a2 += 16;
-            if (cb2r5.Checked) x2a2 += 32;
-            if (cb2r6.Checked) x2a2 += 64;
-            if (cb2r7.Checked) x2a2 += 128;
+            if (chk2r0.Checked) x2a2 += 1;
+            if (chk2r1.Checked) x2a2 += 2;
+            if (chk2r2.Checked) x2a2 += 4;
+            if (chk2r3.Checked) x2a2 += 8;
+            if (chk2r4.Checked) x2a2 += 16;
+            if (chk2r5.Checked) x2a2 += 32;
+            if (chk2r6.Checked) x2a2 += 64;
+            if (chk2r7.Checked) x2a2 += 128;
             set.x2a2 = x2a2;
             x2a3 = 0;
-            if (cb3r0.Checked) x2a3 += 1;
-            if (cb3r1.Checked) x2a3 += 2;
-            if (cb3r2.Checked) x2a3 += 4;
-            if (cb3r3.Checked) x2a3 += 8;
-            if (cb3r4.Checked) x2a3 += 16;
-            if (cb3r5.Checked) x2a3 += 32;
-            if (cb3r6.Checked) x2a3 += 64;
-            if (cb3r7.Checked) x2a3 += 128;
+            if (chk3r0.Checked) x2a3 += 1;
+            if (chk3r1.Checked) x2a3 += 2;
+            if (chk3r2.Checked) x2a3 += 4;
+            if (chk3r3.Checked) x2a3 += 8;
+            if (chk3r4.Checked) x2a3 += 16;
+            if (chk3r5.Checked) x2a3 += 32;
+            if (chk3r6.Checked) x2a3 += 64;
+            if (chk3r7.Checked) x2a3 += 128;
             set.x2a3 = x2a3;
             x2a4 = 0;
-            if (cb4r0.Checked) x2a4 += 1;
-            if (cb4r1.Checked) x2a4 += 2;
-            if (cb4r2.Checked) x2a4 += 4;
-            if (cb4r3.Checked) x2a4 += 8;
-            if (cb4r4.Checked) x2a4 += 16;
-            if (cb4r5.Checked) x2a4 += 32;
-            if (cb4r6.Checked) x2a4 += 64;
-            if (cb4r7.Checked) x2a4 += 128;
+            if (chk4r0.Checked) x2a4 += 1;
+            if (chk4r1.Checked) x2a4 += 2;
+            if (chk4r2.Checked) x2a4 += 4;
+            if (chk4r3.Checked) x2a4 += 8;
+            if (chk4r4.Checked) x2a4 += 16;
+            if (chk4r5.Checked) x2a4 += 32;
+            if (chk4r6.Checked) x2a4 += 64;
+            if (chk4r7.Checked) x2a4 += 128;
             set.x2a4 = x2a4;
             x2a5 = 0;
-            if (cb5r0.Checked) x2a5 += 1;
-            if (cb5r1.Checked) x2a5 += 2;
-            if (cb5r2.Checked) x2a5 += 4;
-            if (cb5r3.Checked) x2a5 += 8;
-            if (cb5r4.Checked) x2a5 += 16;
-            if (cb5r5.Checked) x2a5 += 32;
-            if (cb5r6.Checked) x2a5 += 64;
-            if (cb5r7.Checked) x2a5 += 128;
+            if (chk5r0.Checked) x2a5 += 1;
+            if (chk5r1.Checked) x2a5 += 2;
+            if (chk5r2.Checked) x2a5 += 4;
+            if (chk5r3.Checked) x2a5 += 8;
+            if (chk5r4.Checked) x2a5 += 16;
+            if (chk5r5.Checked) x2a5 += 32;
+            if (chk5r6.Checked) x2a5 += 64;
+            if (chk5r7.Checked) x2a5 += 128;
             set.x2a5 = x2a5;
             x2a6 = 0;
-            if (cb6r0.Checked) x2a6 += 1;
-            if (cb6r1.Checked) x2a6 += 2;
-            if (cb6r2.Checked) x2a6 += 4;
-            if (cb6r3.Checked) x2a6 += 8;
-            if (cb6r4.Checked) x2a6 += 16;
-            if (cb6r5.Checked) x2a6 += 32;
-            if (cb6r6.Checked) x2a6 += 64;
-            if (cb6r7.Checked) x2a6 += 128;
+            if (chk6r0.Checked) x2a6 += 1;
+            if (chk6r1.Checked) x2a6 += 2;
+            if (chk6r2.Checked) x2a6 += 4;
+            if (chk6r3.Checked) x2a6 += 8;
+            if (chk6r4.Checked) x2a6 += 16;
+            if (chk6r5.Checked) x2a6 += 32;
+            if (chk6r6.Checked) x2a6 += 64;
+            if (chk6r7.Checked) x2a6 += 128;
             set.x2a6 = x2a6;
             x2a7 = 0;
-            if (cb7r0.Checked) x2a7 += 1;
-            if (cb7r1.Checked) x2a7 += 2;
-            if (cb7r2.Checked) x2a7 += 4;
-            if (cb7r3.Checked) x2a7 += 8;
-            if (cb7r4.Checked) x2a7 += 16;
-            if (cb7r5.Checked) x2a7 += 32;
-            if (cb7r6.Checked) x2a7 += 64;
-            if (cb7r7.Checked) x2a7 += 128;
+            if (chk7r0.Checked) x2a7 += 1;
+            if (chk7r1.Checked) x2a7 += 2;
+            if (chk7r2.Checked) x2a7 += 4;
+            if (chk7r3.Checked) x2a7 += 8;
+            if (chk7r4.Checked) x2a7 += 16;
+            if (chk7r5.Checked) x2a7 += 32;
+            if (chk7r6.Checked) x2a7 += 64;
+            if (chk7r7.Checked) x2a7 += 128;
             set.x2a7 = x2a7;
             x2a8 = 0;
-            if (cb8r0.Checked) x2a8 += 1;
-            if (cb8r1.Checked) x2a8 += 2;
-            if (cb8r2.Checked) x2a8 += 4;
-            if (cb8r3.Checked) x2a8 += 8;
-            if (cb8r4.Checked) x2a8 += 16;
-            if (cb8r5.Checked) x2a8 += 32;
-            if (cb8r6.Checked) x2a8 += 64;
-            if (cb8r7.Checked) x2a8 += 128;
+            if (chk8r0.Checked) x2a8 += 1;
+            if (chk8r1.Checked) x2a8 += 2;
+            if (chk8r2.Checked) x2a8 += 4;
+            if (chk8r3.Checked) x2a8 += 8;
+            if (chkb8r4.Checked) x2a8 += 16;
+            if (chk8r5.Checked) x2a8 += 32;
+            if (chk8r6.Checked) x2a8 += 64;
+            if (chk8r7.Checked) x2a8 += 128;
             set.x2a8 = x2a8;
             x2a9 = 0;
-            if (cb9r0.Checked) x2a9 += 1;
-            if (cb9r1.Checked) x2a9 += 2;
-            if (cb9r2.Checked) x2a9 += 4;
-            if (cb9r3.Checked) x2a9 += 8;
-            if (cb9r4.Checked) x2a9 += 16;
-            if (cb9r5.Checked) x2a9 += 32;
-            if (cb9r6.Checked) x2a9 += 64;
-            if (cb9r7.Checked) x2a9 += 128;
+            if (chk9r0.Checked) x2a9 += 1;
+            if (chk9r1.Checked) x2a9 += 2;
+            if (chk9r2.Checked) x2a9 += 4;
+            if (chk9r3.Checked) x2a9 += 8;
+            if (chk9r4.Checked) x2a9 += 16;
+            if (chk9r5.Checked) x2a9 += 32;
+            if (chk9r6.Checked) x2a9 += 64;
+            if (chk9r7.Checked) x2a9 += 128;
             set.x2a9 = x2a9;
             x2a10 = 0;
-            if (cb10r0.Checked) x2a10 += 1;
-            if (cb10r1.Checked) x2a10 += 2;
-            if (cb10r2.Checked) x2a10 += 4;
-            if (cb10r3.Checked) x2a10 += 8;
-            if (cb10r4.Checked) x2a10 += 16;
-            if (cb10r5.Checked) x2a10 += 32;
-            if (cb10r6.Checked) x2a10 += 64;
-            if (cb10r7.Checked) x2a10 += 128;
+            if (chk10r0.Checked) x2a10 += 1;
+            if (chk10r1.Checked) x2a10 += 2;
+            if (chk10r2.Checked) x2a10 += 4;
+            if (chk10r3.Checked) x2a10 += 8;
+            if (chk10r4.Checked) x2a10 += 16;
+            if (chk10r5.Checked) x2a10 += 32;
+            if (chk10r6.Checked) x2a10 += 64;
+            if (chk10r7.Checked) x2a10 += 128;
             set.x2a10 = x2a10;
             x2a11 = 0;
-            if (cb11r0.Checked) x2a11 += 1;
-            if (cb11r1.Checked) x2a11 += 2;
-            if (cb11r2.Checked) x2a11 += 4;
-            if (cb11r3.Checked) x2a11 += 8;
-            if (cb11r4.Checked) x2a11 += 16;
-            if (cb11r5.Checked) x2a11 += 32;
-            if (cb11r6.Checked) x2a11 += 64;
-            if (cb11r7.Checked) x2a11 += 128;
+            if (chk11r0.Checked) x2a11 += 1;
+            if (chk11r1.Checked) x2a11 += 2;
+            if (chk11r2.Checked) x2a11 += 4;
+            if (chk11r3.Checked) x2a11 += 8;
+            if (chk11r4.Checked) x2a11 += 16;
+            if (chk11r5.Checked) x2a11 += 32;
+            if (chk11r6.Checked) x2a11 += 64;
+            if (chk11r7.Checked) x2a11 += 128;
             set.x2a11 = x2a11;
             x2a12 = 0;
-            if (cb12r0.Checked) x2a12 += 1;
-            if (cb12r1.Checked) x2a12 += 2;
-            if (cb12r2.Checked) x2a12 += 4;
-            if (cb12r3.Checked) x2a12 += 8;
-            if (cb12r4.Checked) x2a12 += 16;
-            if (cb12r5.Checked) x2a12 += 32;
-            if (cb12r6.Checked) x2a12 += 64;
-            if (cb12r7.Checked) x2a12 += 128;
+            if (chk12r0.Checked) x2a12 += 1;
+            if (chk12r1.Checked) x2a12 += 2;
+            if (chk12r2.Checked) x2a12 += 4;
+            if (chk12r3.Checked) x2a12 += 8;
+            if (chk12r4.Checked) x2a12 += 16;
+            if (chk12r5.Checked) x2a12 += 32;
+            if (chk12r6.Checked) x2a12 += 64;
+            if (chk12r7.Checked) x2a12 += 128;
             set.x2a12 = x2a12;
             x2a13 = 0;
-            if (cb13r0.Checked) x2a13 += 1;
-            if (cb13r1.Checked) x2a13 += 2;
-            if (cb13r2.Checked) x2a13 += 4;
-            if (cb13r3.Checked) x2a13 += 8;
-            if (cb13r4.Checked) x2a13 += 16;
-            if (cb13r5.Checked) x2a13 += 32;
-            if (cb13r6.Checked) x2a13 += 64;
-            if (cb13r7.Checked) x2a13 += 128;
+            if (chk13r0.Checked) x2a13 += 1;
+            if (chk13r1.Checked) x2a13 += 2;
+            if (chk13r2.Checked) x2a13 += 4;
+            if (chk13r3.Checked) x2a13 += 8;
+            if (chk13r4.Checked) x2a13 += 16;
+            if (chk13r5.Checked) x2a13 += 32;
+            if (chk13r6.Checked) x2a13 += 64;
+            if (chk13r7.Checked) x2a13 += 128;
             set.x2a13 = x2a13;
             x2a14 = 0;
-            if (cb14r0.Checked) x2a14 += 1;
-            if (cb14r1.Checked) x2a14 += 2;
-            if (cb14r2.Checked) x2a14 += 4;
-            if (cb14r3.Checked) x2a14 += 8;
-            if (cb14r4.Checked) x2a14 += 16;
-            if (cb14r5.Checked) x2a14 += 32;
-            if (cb14r6.Checked) x2a14 += 64;
-            if (cb14r7.Checked) x2a14 += 128;
+            if (chk14r0.Checked) x2a14 += 1;
+            if (chk14r1.Checked) x2a14 += 2;
+            if (chk14r2.Checked) x2a14 += 4;
+            if (chk14r3.Checked) x2a14 += 8;
+            if (chk14r4.Checked) x2a14 += 16;
+            if (chk14r5.Checked) x2a14 += 32;
+            if (chk14r6.Checked) x2a14 += 64;
+            if (chk14r7.Checked) x2a14 += 128;
             set.x2a14 = x2a14;
             x2a15 = 0;
-            if (cb15r0.Checked) x2a15 += 1;
-            if (cb15r1.Checked) x2a15 += 2;
-            if (cb15r2.Checked) x2a15 += 4;
-            if (cb15r3.Checked) x2a15 += 8;
-            if (cb15r4.Checked) x2a15 += 16;
-            if (cb15r5.Checked) x2a15 += 32;
-            if (cb15r6.Checked) x2a15 += 64;
-            if (cb15r7.Checked) x2a15 += 128;
+            if (chk15r0.Checked) x2a15 += 1;
+            if (chk15r1.Checked) x2a15 += 2;
+            if (chk15r2.Checked) x2a15 += 4;
+            if (chk15r3.Checked) x2a15 += 8;
+            if (chk15r4.Checked) x2a15 += 16;
+            if (chk15r5.Checked) x2a15 += 32;
+            if (chk15r6.Checked) x2a15 += 64;
+            if (chk15r7.Checked) x2a15 += 128;
             set.x2a15 = x2a15;
 
             set.Save();
@@ -13390,164 +13694,164 @@ namespace DataDecoder
         private void grpPortB_CheckedChanged(object sender, EventArgs e)
         {
             x2b0 = 0;
-            if (cb0t0.Checked) x2b0 += 1;
-            if (cb0t1.Checked) x2b0 += 2;
-            if (cb0t2.Checked) x2b0 += 4;
-            if (cb0t3.Checked) x2b0 += 8;
-            if (cb0t4.Checked) x2b0 += 16;
-            if (cb0t5.Checked) x2b0 += 32;
-            if (cb0t6.Checked) x2b0 += 64;
-            if (cb0t7.Checked) x2b0 += 128;
+            if (chk0t0.Checked) x2b0 += 1;
+            if (chk0t1.Checked) x2b0 += 2;
+            if (chk0t2.Checked) x2b0 += 4;
+            if (chk0t3.Checked) x2b0 += 8;
+            if (chk0t4.Checked) x2b0 += 16;
+            if (chk0t5.Checked) x2b0 += 32;
+            if (chk0t6.Checked) x2b0 += 64;
+            if (chk0t7.Checked) x2b0 += 128;
             set.x2b0 = x2b0;
             x2b1 = 0;
-            if (cb1t0.Checked) x2b1 += 1;
-            if (cb1t1.Checked) x2b1 += 2;
-            if (cb1t2.Checked) x2b1 += 4;
-            if (cb1t3.Checked) x2b1 += 8;
-            if (cb1t4.Checked) x2b1 += 16;
-            if (cb1t5.Checked) x2b1 += 32;
-            if (cb1t6.Checked) x2b1 += 64;
-            if (cb1t7.Checked) x2b1 += 128;
+            if (chk1t0.Checked) x2b1 += 1;
+            if (chk1t1.Checked) x2b1 += 2;
+            if (chk1t2.Checked) x2b1 += 4;
+            if (chk1t3.Checked) x2b1 += 8;
+            if (chk1t4.Checked) x2b1 += 16;
+            if (chk1t5.Checked) x2b1 += 32;
+            if (chk1t6.Checked) x2b1 += 64;
+            if (chk1t7.Checked) x2b1 += 128;
             set.x2b1 = x2b1;
             x2b2 = 0;
-            if (cb2t0.Checked) x2b2 += 1;
-            if (cb2t1.Checked) x2b2 += 2;
-            if (cb2t2.Checked) x2b2 += 4;
-            if (cb2t3.Checked) x2b2 += 8;
-            if (cb2t4.Checked) x2b2 += 16;
-            if (cb2t5.Checked) x2b2 += 32;
-            if (cb2t6.Checked) x2b2 += 64;
-            if (cb2t7.Checked) x2b2 += 128;
+            if (chk2t0.Checked) x2b2 += 1;
+            if (chk2t1.Checked) x2b2 += 2;
+            if (chk2t2.Checked) x2b2 += 4;
+            if (chk2t3.Checked) x2b2 += 8;
+            if (chk2t4.Checked) x2b2 += 16;
+            if (chk2t5.Checked) x2b2 += 32;
+            if (chk2t6.Checked) x2b2 += 64;
+            if (chk2t7.Checked) x2b2 += 128;
             set.x2b2 = x2b2;
             x2b3 = 0;
-            if (cb3t0.Checked) x2b3 += 1;
-            if (cb3t1.Checked) x2b3 += 2;
-            if (cb3t2.Checked) x2b3 += 4;
-            if (cb3t3.Checked) x2b3 += 8;
-            if (cb3t4.Checked) x2b3 += 16;
-            if (cb3t5.Checked) x2b3 += 32;
-            if (cb3t6.Checked) x2b3 += 64;
-            if (cb3t7.Checked) x2b3 += 128;
+            if (chk3t0.Checked) x2b3 += 1;
+            if (chk3t1.Checked) x2b3 += 2;
+            if (chk3t2.Checked) x2b3 += 4;
+            if (chk3t3.Checked) x2b3 += 8;
+            if (chk3t4.Checked) x2b3 += 16;
+            if (chk3t5.Checked) x2b3 += 32;
+            if (chk3t6.Checked) x2b3 += 64;
+            if (chk3t7.Checked) x2b3 += 128;
             set.x2b3 = x2b3;
             x2b4 = 0;
-            if (cb4t0.Checked) x2b4 += 1;
-            if (cb4t1.Checked) x2b4 += 2;
-            if (cb4t2.Checked) x2b4 += 4;
-            if (cb4t3.Checked) x2b4 += 8;
-            if (cb4t4.Checked) x2b4 += 16;
-            if (cb4t5.Checked) x2b4 += 32;
-            if (cb4t6.Checked) x2b4 += 64;
-            if (cb4t7.Checked) x2b4 += 128;
+            if (chk4t0.Checked) x2b4 += 1;
+            if (chk4t1.Checked) x2b4 += 2;
+            if (chk4t2.Checked) x2b4 += 4;
+            if (chk4t3.Checked) x2b4 += 8;
+            if (chk4t4.Checked) x2b4 += 16;
+            if (chk4t5.Checked) x2b4 += 32;
+            if (chk4t6.Checked) x2b4 += 64;
+            if (chk4t7.Checked) x2b4 += 128;
             set.x2b4 = x2b4;
             x2b5 = 0;
-            if (cb5t0.Checked) x2b5 += 1;
-            if (cb5t1.Checked) x2b5 += 2;
-            if (cb5t2.Checked) x2b5 += 4;
-            if (cb5t3.Checked) x2b5 += 8;
-            if (cb5t4.Checked) x2b5 += 16;
-            if (cb5t5.Checked) x2b5 += 32;
-            if (cb5t6.Checked) x2b5 += 64;
-            if (cb5t7.Checked) x2b5 += 128;
+            if (chk5t0.Checked) x2b5 += 1;
+            if (chk5t1.Checked) x2b5 += 2;
+            if (chk5t2.Checked) x2b5 += 4;
+            if (chk5t3.Checked) x2b5 += 8;
+            if (chk5t4.Checked) x2b5 += 16;
+            if (chk5t5.Checked) x2b5 += 32;
+            if (chk5t6.Checked) x2b5 += 64;
+            if (chk5t7.Checked) x2b5 += 128;
             set.x2b5 = x2b5;
             x2b6 = 0;
-            if (cb6t0.Checked) x2b6 += 1;
-            if (cb6t1.Checked) x2b6 += 2;
-            if (cb6t2.Checked) x2b6 += 4;
-            if (cb6t3.Checked) x2b6 += 8;
-            if (cb6t4.Checked) x2b6 += 16;
-            if (cb6t5.Checked) x2b6 += 32;
-            if (cb6t6.Checked) x2b6 += 64;
-            if (cb6t7.Checked) x2b6 += 128;
+            if (chk6t0.Checked) x2b6 += 1;
+            if (chk6t1.Checked) x2b6 += 2;
+            if (chk6t2.Checked) x2b6 += 4;
+            if (chk6t3.Checked) x2b6 += 8;
+            if (chk6t4.Checked) x2b6 += 16;
+            if (chk6t5.Checked) x2b6 += 32;
+            if (chk6t6.Checked) x2b6 += 64;
+            if (chk6t7.Checked) x2b6 += 128;
             set.x2b6 = x2b6;
             x2b7 = 0;
-            if (cb7t0.Checked) x2b7 += 1;
-            if (cb7t1.Checked) x2b7 += 2;
-            if (cb7t2.Checked) x2b7 += 4;
-            if (cb7t3.Checked) x2b7 += 8;
-            if (cb7t4.Checked) x2b7 += 16;
-            if (cb7t5.Checked) x2b7 += 32;
-            if (cb7t6.Checked) x2b7 += 64;
-            if (cb7t7.Checked) x2b7 += 128;
+            if (chk7t0.Checked) x2b7 += 1;
+            if (chk7t1.Checked) x2b7 += 2;
+            if (chk7t2.Checked) x2b7 += 4;
+            if (chk7t3.Checked) x2b7 += 8;
+            if (chk7t4.Checked) x2b7 += 16;
+            if (chk7t5.Checked) x2b7 += 32;
+            if (chk7t6.Checked) x2b7 += 64;
+            if (chk7t7.Checked) x2b7 += 128;
             set.x2b7 = x2b7;
             x2b8 = 0;
-            if (cb8t0.Checked) x2b8 += 1;
-            if (cb8t1.Checked) x2b8 += 2;
-            if (cb8t2.Checked) x2b8 += 4;
-            if (cb8t3.Checked) x2b8 += 8;
-            if (cb8t4.Checked) x2b8 += 16;
-            if (cb8t5.Checked) x2b8 += 32;
-            if (cb8t6.Checked) x2b8 += 64;
-            if (cb8t7.Checked) x2b8 += 128;
+            if (chk8t0.Checked) x2b8 += 1;
+            if (chk8t1.Checked) x2b8 += 2;
+            if (chk8t2.Checked) x2b8 += 4;
+            if (chk8t3.Checked) x2b8 += 8;
+            if (chk8t4.Checked) x2b8 += 16;
+            if (chk8t5.Checked) x2b8 += 32;
+            if (chk8t6.Checked) x2b8 += 64;
+            if (chk8t7.Checked) x2b8 += 128;
             set.x2b8 = x2b8;
             x2b9 = 0;
-            if (cb9t0.Checked) x2b9 += 1;
-            if (cb9t1.Checked) x2b9 += 2;
-            if (cb9t2.Checked) x2b9 += 4;
-            if (cb9t3.Checked) x2b9 += 8;
-            if (cb9t4.Checked) x2b9 += 16;
-            if (cb9t5.Checked) x2b9 += 32;
-            if (cb9t6.Checked) x2b9 += 64;
-            if (cb9t7.Checked) x2b9 += 128;
+            if (chk9t0.Checked) x2b9 += 1;
+            if (chk9t1.Checked) x2b9 += 2;
+            if (chk9t2.Checked) x2b9 += 4;
+            if (chk9t3.Checked) x2b9 += 8;
+            if (chk9t4.Checked) x2b9 += 16;
+            if (chk9t5.Checked) x2b9 += 32;
+            if (chk9t6.Checked) x2b9 += 64;
+            if (chk9t7.Checked) x2b9 += 128;
             set.x2b9 = x2b9;
             x2b10 = 0;
-            if (cb10t0.Checked) x2b10 += 1;
-            if (cb10t1.Checked) x2b10 += 2;
-            if (cb10t2.Checked) x2b10 += 4;
-            if (cb10t3.Checked) x2b10 += 8;
-            if (cb10t4.Checked) x2b10 += 16;
-            if (cb10t5.Checked) x2b10 += 32;
-            if (cb10t6.Checked) x2b10 += 64;
-            if (cb10t7.Checked) x2b10 += 128;
+            if (chk10t0.Checked) x2b10 += 1;
+            if (chk10t1.Checked) x2b10 += 2;
+            if (chk10t2.Checked) x2b10 += 4;
+            if (chk10t3.Checked) x2b10 += 8;
+            if (chk10t4.Checked) x2b10 += 16;
+            if (chk10t5.Checked) x2b10 += 32;
+            if (chk10t6.Checked) x2b10 += 64;
+            if (chk10t7.Checked) x2b10 += 128;
             set.x2b10 = x2b10;
             x2b11 = 0;
-            if (cb11t0.Checked) x2b11 += 1;
-            if (cb11t1.Checked) x2b11 += 2;
-            if (cb11t2.Checked) x2b11 += 4;
-            if (cb11t3.Checked) x2b11 += 8;
-            if (cb11t4.Checked) x2b11 += 16;
-            if (cb11t5.Checked) x2b11 += 32;
-            if (cb11t6.Checked) x2b11 += 64;
-            if (cb11t7.Checked) x2b11 += 128;
+            if (chk11t0.Checked) x2b11 += 1;
+            if (chk11t1.Checked) x2b11 += 2;
+            if (chk11t2.Checked) x2b11 += 4;
+            if (chk11t3.Checked) x2b11 += 8;
+            if (chk11t4.Checked) x2b11 += 16;
+            if (chk11t5.Checked) x2b11 += 32;
+            if (chk11t6.Checked) x2b11 += 64;
+            if (chk11t7.Checked) x2b11 += 128;
             set.x2b11 = x2b11;
             x2b12 = 0;
-            if (cb12t0.Checked) x2b12 += 1;
-            if (cb12t1.Checked) x2b12 += 2;
-            if (cb12t2.Checked) x2b12 += 4;
-            if (cb12t3.Checked) x2b12 += 8;
-            if (cb12t4.Checked) x2b12 += 16;
-            if (cb12t5.Checked) x2b12 += 32;
-            if (cb12t6.Checked) x2b12 += 64;
-            if (cb12t7.Checked) x2b12 += 128;
+            if (chk12t0.Checked) x2b12 += 1;
+            if (chk12t1.Checked) x2b12 += 2;
+            if (chk12t2.Checked) x2b12 += 4;
+            if (chk12t3.Checked) x2b12 += 8;
+            if (chk12t4.Checked) x2b12 += 16;
+            if (chk12t5.Checked) x2b12 += 32;
+            if (chk12t6.Checked) x2b12 += 64;
+            if (chk12t7.Checked) x2b12 += 128;
             set.x2b12 = x2b12;
             x2b13 = 0;
-            if (cb13t0.Checked) x2b13 += 1;
-            if (cb13t1.Checked) x2b13 += 2;
-            if (cb13t2.Checked) x2b13 += 4;
-            if (cb13t3.Checked) x2b13 += 8;
-            if (cb13t4.Checked) x2b13 += 16;
-            if (cb13t5.Checked) x2b13 += 32;
-            if (cb13t6.Checked) x2b13 += 64;
-            if (cb13t7.Checked) x2b13 += 128;
+            if (chk13t0.Checked) x2b13 += 1;
+            if (chk13t1.Checked) x2b13 += 2;
+            if (chk13t2.Checked) x2b13 += 4;
+            if (chk13t3.Checked) x2b13 += 8;
+            if (chk13t4.Checked) x2b13 += 16;
+            if (chk13t5.Checked) x2b13 += 32;
+            if (chk13t6.Checked) x2b13 += 64;
+            if (chk13t7.Checked) x2b13 += 128;
             set.x2b13 = x2b13;
             x2b14 = 0;
-            if (cb14t0.Checked) x2b14 += 1;
-            if (cb14t1.Checked) x2b14 += 2;
-            if (cb14t2.Checked) x2b14 += 4;
-            if (cb14t3.Checked) x2b14 += 8;
-            if (cb14t4.Checked) x2b14 += 16;
-            if (cb14t5.Checked) x2b14 += 32;
-            if (cb14t6.Checked) x2b14 += 64;
-            if (cb14t7.Checked) x2b14 += 128;
+            if (chk14t0.Checked) x2b14 += 1;
+            if (chk14t1.Checked) x2b14 += 2;
+            if (chk14t2.Checked) x2b14 += 4;
+            if (chk14t3.Checked) x2b14 += 8;
+            if (chk14t4.Checked) x2b14 += 16;
+            if (chk14t5.Checked) x2b14 += 32;
+            if (chk14t6.Checked) x2b14 += 64;
+            if (chk14t7.Checked) x2b14 += 128;
             set.x2b14 = x2b14;
             x2b15 = 0;
-            if (cb15t0.Checked) x2b15 += 1;
-            if (cb15t1.Checked) x2b15 += 2;
-            if (cb15t2.Checked) x2b15 += 4;
-            if (cb15t3.Checked) x2b15 += 8;
-            if (cb15t4.Checked) x2b15 += 16;
-            if (cb15t5.Checked) x2b15 += 32;
-            if (cb15t6.Checked) x2b15 += 64;
-            if (cb15t7.Checked) x2b15 += 128;
+            if (chk15t0.Checked) x2b15 += 1;
+            if (chk15t1.Checked) x2b15 += 2;
+            if (chk15t2.Checked) x2b15 += 4;
+            if (chk15t3.Checked) x2b15 += 8;
+            if (chk15t4.Checked) x2b15 += 16;
+            if (chk15t5.Checked) x2b15 += 32;
+            if (chk15t6.Checked) x2b15 += 64;
+            if (chk15t7.Checked) x2b15 += 128;
             set.x2b15 = x2b15;
 
             set.Save();
@@ -14411,95 +14715,438 @@ namespace DataDecoder
 
         #region Profiles
 
-        #region # Enums, Declarations and Vars #
+        #region # Declarations #
 
-        #endregion # Enums, Declarations and Vars #
+        #endregion # Declarations #
+
+        #region # Delegates #
+
+        #endregion # Delegates #
 
         #region # Events #
 
+        // the save profile menu item was selected
+        private void profileSaveToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            SaveProfile();
+        }
+        // the load profile menu item was selected
+        private void profileLoadToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            LoadProfile();
+        }
+        
         #endregion # Events #
 
         #region # Methods #
 
-        #endregion # Methods #
-
-        #endregion Profiles
-
-        #region DXLab DDE
-
-        #region # Enums, Declarations and Vars #
-
-        const int LinkMode = 1;
-        const string ModeServer = "6";
-        const string InvokeMacroCommand = "invokemacro";
-        const string LinkItem = "DDECommand";
-        const string LinkTopic = "WinWarbler|DDEServer";
-
-
-        #endregion # Enums, Declarations and Vars #
-
-        #region # Events #
-
-        // Test for sending keys to another app (start notepad 1st)
-        [DllImport("user32.dll", SetLastError = true)]
-        static extern IntPtr FindWindowEx(IntPtr hwndParent, IntPtr hwndChildAfter, string lpszClass, string lpszWindow);
-        [DllImport("User32.Dll", EntryPoint = "PostMessageA")]
-        static extern bool PostMessage(IntPtr hWnd, uint msg, int wParam, int lParam);
-        [DllImport("user32.dll")]
-        static extern byte VkKeyScan(char ch);
-
-        const uint WM_KEYDOWN = 0x100;
-
-        private void button7_Click(object sender, EventArgs e)
+        // call file dialog get profile name.
+        string GetFileName(string title)
         {
-
-            Process[] procs = Process.GetProcessesByName("Notepad");
-            foreach (Process proc in procs)
+            // get the App Data Path
+            if (app_data_path == "")
             {
-                // look for untitled notepad window
-                if (proc.MainWindowTitle == "Untitled - Notepad")
-                {
-                    // get handle to Notepad's edit window
-                    IntPtr hWnd = FindWindowEx(proc.MainWindowHandle, IntPtr.Zero, "edit", null);
-                    // post "hello" to notepad
-                    string s = "Hello Radio de K5FR";
-                    for (int i = 0; i < s.Length; i++)
-                    {
-                        PostMessage(hWnd, WM_KEYDOWN, VkKeyScan(s[i]), 0);
-                    }
-                    break;
-                }
+                Assembly assembly = Assembly.GetExecutingAssembly();
+                FileVersionInfo fvi = FileVersionInfo.GetVersionInfo(assembly.Location);
+                string version = fvi.FileVersion.Substring(0, fvi.FileVersion.LastIndexOf("."));
+                //AppDataPath = assembly.Location;
+                AppDataPath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData)
+                + "\\DDUtil\\";
+            }
+            string pfileDir = app_data_path + "Profiles\\";
+            if (!Directory.Exists(pfileDir))
+                Directory.CreateDirectory(pfileDir);
 
+//            string ProfileFile = "";
+//            OpenFileDialog openFileDialog1 = new OpenFileDialog();
+            openFileDialog1.InitialDirectory = pfileDir;
+            openFileDialog1.Filter = "xml files|*.xml";
+            openFileDialog1.Title = title;
+            if (openFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                string filename = openFileDialog1.FileName;
+                //int start = openFileDialog1.FileName.LastIndexOf("\\") + 1;
+                //ProfileFile = filename.Substring(start, filename.Length - start);
+                return filename;// ProfileFile;
+            }
+            else
+            {
+                return "";// ProfileFile;
             }
         }
+        // get a list of control values
+        private ArrayList GetCtrlVal()
+        {
+            // enumerate controls and save to array list
+            ArrayList a = new ArrayList();
+            foreach (Control c in this.Controls)	// save only the following types
+            {
+                // if it is a groupbox or panel, check for sub controls
+                if (c.GetType() == typeof(TabControl))
+                {
+                    foreach (Control c2 in c.Controls)
+                    {
+                        if (c2.GetType() == typeof(TabPage))// && (c2.Name != "tabBCD" &&
+                            //c2.Name != "tabRotor" && c2.Name != "tabExtCtrl" &&
+                            //c2.Name != "tabMacro" && c2.Name != "tabSO2R"))
+                        {
+                            foreach (Control c3 in c2.Controls)
+                            {
+                                if (c3.GetType() == typeof(GroupBox) || c.GetType() == typeof(Panel))
+                                {
+                                    foreach (Control c4 in c3.Controls)
+                                    {
+                                        if (c4.GetType() == typeof(GroupBox))
+                                        {
+                                            foreach (Control c5 in c4.Controls)
+                                            {
+                                                if (c5.Enabled)
+                                                {
+                                                    if (c5.GetType() == typeof(CheckBox))
+                                                        a.Add(c5.Name + "/" + ((CheckBox)c5).Checked.ToString());
+                                                    else if (c5.GetType() == typeof(TextBox))
+                                                    {
+                                                        //string xx = ((TextBox)c5).Text;
+                                                        //if (xx == "" || xx == null)
+                                                        //    ((TextBox)c5).Text = "0";
+                                                        a.Add(c5.Name + "/" + ((TextBox)c5).Text);
+                                                    }
+                                                    else if (c5.GetType() == typeof(ComboBox))
+                                                        a.Add(c5.Name + "/" + ((ComboBox)c5).Text);
+                                                    else if (c5.GetType() == typeof(RadioButton))
+                                                        a.Add(c5.Name + "/" + ((RadioButton)c5).Checked.ToString());
+                                                }
+                                            }
+                                        }
+                                        else
+                                        {
+                                            if (c4.Enabled)
+                                            {
+                                                if (c4.GetType() == typeof(CheckBox))
+                                                    a.Add(c4.Name + "/" + ((CheckBox)c4).Checked.ToString());
+                                                else if (c4.GetType() == typeof(TextBox))
+                                                {
+                                                    //string xx = ((TextBox)c4).Text;
+                                                    //if (xx == "" || xx == null)
+                                                    //    ((TextBox)c4).Text = "0";
+                                                    a.Add(c4.Name + "/" + ((TextBox)c4).Text);
+                                                }
+                                                else if (c4.GetType() == typeof(ComboBox))
+                                                    a.Add(c4.Name + "/" + ((ComboBox)c4).Text);
+                                                else if (c4.GetType() == typeof(RadioButton))
+                                                    a.Add(c4.Name + "/" + ((RadioButton)c4).Checked.ToString());
+                                            }
 
-        #endregion # Events #
+                                        }
+                                    }
+                                }
+                                else
+                                {
+                                    if (c3.Enabled)
+                                    {
+                                        if (c3.GetType() == typeof(CheckBox))
+                                            a.Add(c3.Name + "/" + ((CheckBox)c3).Checked.ToString());
+                                        else if (c3.GetType() == typeof(TextBox))
+                                        {
+                                            //string xx = ((TextBox)c3).Text;
+                                            //if (xx == "" || xx == null)
+                                            //    ((TextBox)c3).Text = "0";
+                                            a.Add(c3.Name + "/" + ((TextBox)c3).Text);
+                                        }
+                                        else if (c3.GetType() == typeof(ComboBox))
+                                            a.Add(c3.Name + "/" + ((ComboBox)c3).Text);
+                                        else if (c3.GetType() == typeof(RadioButton))
+                                            a.Add(c3.Name + "/" + ((RadioButton)c3).Checked.ToString());
+                                    }
 
-        #region # Methods #
+                                }
 
-        private static void SendWWmacro(string index)
+                            }
+                        }
+                    }
+                }
+                else
+                {   // if not a Tab Control
+                    if (c.Enabled)
+                    {
+                        if (c.GetType() == typeof(CheckBox))
+                            a.Add(c.Name + "/" + ((CheckBox)c).Checked.ToString());
+                        else if (c.GetType() == typeof(TextBox))
+                        {
+                            string xx = ((TextBox)c).Text;
+                            if (xx == "" || xx == null)
+                                ((TextBox)c).Text = "0";
+                            a.Add(c.Name + "/" + ((TextBox)c).Text);
+                        }
+                        else if (c.GetType() == typeof(ComboBox))
+                            a.Add(c.Name + "/" + ((ComboBox)c).SelectedIndex.ToString());
+                        else if (c.GetType() == typeof(RadioButton))
+                            a.Add(c.Name + "/" + ((RadioButton)c).Checked.ToString());
+                    }
+                }
+            }
+            return a;
+        }
+        // load profile from a file
+        void LoadProfile()
         {
             try
             {
-                // Create a client that connects to WinWarbler. 
-                DdeClient client = new DdeClient("WinWarbler", "DDEServer");
-                client.Connect();
-                client.Execute(ModeServer.PadRight(3, '0') + InvokeMacroCommand + index, 60000);
-                client.Disconnect();
+//                throw new ArgumentNullException();
+
+                ArrayList chk_list = new ArrayList();
+                ArrayList cbo_list = new ArrayList();
+                ArrayList rb_list = new ArrayList();
+                ArrayList txt_list = new ArrayList();
+
+                foreach (Control c in this.Controls)	// save only the following types
+                {
+                    // if it is a groupbox or panel, check for sub controls
+                    if (c.GetType() == typeof(TabControl))
+                    {
+                        foreach (Control c2 in c.Controls)
+                        {
+                            if (c2.GetType() == typeof(TabPage))// && (c2.Name != "tabBCD" &&
+                            //c2.Name != "tabRotor" && c2.Name != "tabExtCtrl" &&
+                            //c2.Name != "tabMacro" && c2.Name != "tabSO2R"))
+                            {
+                                foreach (Control c3 in c2.Controls)
+                                {
+                                    if (c3.GetType() == typeof(GroupBox) || c.GetType() == typeof(Panel))
+                                    {
+                                        foreach (Control c4 in c3.Controls)
+                                        {
+                                            if (c4.GetType() == typeof(GroupBox))
+                                            {
+                                                foreach (Control c5 in c4.Controls)
+                                                {
+                                                    if (c5.Enabled)
+                                                    {
+                                                        if (c5.GetType() == typeof(CheckBox))
+                                                            chk_list.Add(c5);
+                                                        else if (c5.GetType() == typeof(TextBox))
+                                                        {
+                                                            txt_list.Add(c5);
+                                                        }
+                                                        else if (c5.GetType() == typeof(ComboBox))
+                                                            cbo_list.Add(c5);
+                                                        else if (c5.GetType() == typeof(RadioButton))
+                                                            rb_list.Add(c5);
+                                                    }
+                                                }
+                                            }
+                                            else
+                                            {
+                                                if (c4.Enabled)
+                                                {
+                                                    if (c4.GetType() == typeof(CheckBox))
+                                                        chk_list.Add(c4);
+                                                    else if (c4.GetType() == typeof(TextBox))
+                                                    {
+                                                        txt_list.Add(c4);
+                                                    }
+                                                    else if (c4.GetType() == typeof(ComboBox))
+                                                        cbo_list.Add(c4);
+                                                    else if (c4.GetType() == typeof(RadioButton))
+                                                        rb_list.Add(c4);
+                                                }
+                                            }
+                                        }
+                                    }
+                                    else
+                                    {
+                                        if (c3.Enabled)
+                                        {
+                                            if (c3.GetType() == typeof(CheckBox))
+                                                chk_list.Add(c3);
+                                            else if (c3.GetType() == typeof(TextBox))
+                                            {
+                                                txt_list.Add(c3);
+                                            }
+                                            else if (c3.GetType() == typeof(ComboBox))
+                                                cbo_list.Add(c3);
+                                            else if (c3.GetType() == typeof(RadioButton))
+                                                rb_list.Add(c3);
+                                        }
+
+                                    }
+
+                                }
+                            }
+                        }
+                    }
+                    else
+                    {   // if not a Tab Control
+                        if (c.Enabled)
+                        {
+                            if (c.GetType() == typeof(CheckBox))
+                                chk_list.Add(c);
+                            else if (c.GetType() == typeof(TextBox))
+                            {
+                                txt_list.Add(c);
+                            }
+                            else if (c.GetType() == typeof(ComboBox))
+                                cbo_list.Add(c);
+                            else if (c.GetType() == typeof(RadioButton))
+                                rb_list.Add(c);
+                        }
+                    }
+                }
+                string pFile = GetFileName("Select a Profile to Load");
+                if (pFile == null || pFile == "") return;
+
+                dso = new DataSet();
+                if (File.Exists(pFile)) dso.ReadXml(pFile);
+                //if (File.Exists(app_data_path + "Profiles\\" + pFile))
+                //    dso.ReadXml(app_data_path + "Profiles\\" + pFile);
+
+                ArrayList a = GetVars("Profile");	// Get the saved list of controls
+                a.Sort();
+                int num_controls = chk_list.Count + cbo_list.Count + rb_list.Count + txt_list.Count;
+
+                foreach (string s in a)				// string is in the format "name,value"
+                {
+                    string[] vals = s.Split('/');
+                    string name = vals[0];
+                    string val = vals[1];
+
+                    if (s.StartsWith("chk"))	// control is a CheckBox
+                    {
+                        for (int i = 0; i < chk_list.Count; i++)
+                        {	// look through each control to find the matching name
+                            CheckBox c = (CheckBox)chk_list[i];
+                            if (c.Name.Equals(name))		// name found
+                            {
+                                c.Checked = bool.Parse(val);	// restore value
+                                i = chk_list.Count + 1;
+                            }
+                            if (i == chk_list.Count)
+                                MessageBox.Show(new Form() { TopMost = true },
+                                    "Control not found: " + name, "GetVars Error",
+                                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        }
+                    }
+                    else if (s.StartsWith("cbo"))			// control is a ComboBox
+                    {
+                        for (int i = 0; i < cbo_list.Count; i++)
+                        {	// look through each control to find the matching name
+                            ComboBox c = (ComboBox)cbo_list[i];
+                            if (c.Name.Equals(name))		// name found
+                            {
+                                c.Text = val;	// restore value
+                                i = cbo_list.Count + 1;
+                            }
+                            if (i == cbo_list.Count)
+                                MessageBox.Show(new Form() { TopMost = true },
+                                    "Control not found: " + name, "GetVars Error",
+                                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        }
+                    }
+                    if (s.StartsWith("rb"))			// control is a CheckBox
+                    {
+                        for (int i = 0; i < rb_list.Count; i++)
+                        {	// look through each control to find the matching name
+                            RadioButton c = (RadioButton)rb_list[i];
+                            if (c.Name.Equals(name))		// name found
+                            {
+                                c.Checked = bool.Parse(val);	// restore value
+                                i = rb_list.Count + 1;
+                            }
+                            if (i == rb_list.Count)
+                                MessageBox.Show(new Form() { TopMost = true },
+                                    "Control not found: " + name, "GetVars Error",
+                                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        }
+                    }
+                    else if (s.StartsWith("txt"))
+                    {	// look through each control to find the matching name
+                        for (int i = 0; i < txt_list.Count; i++)
+                        {
+                            TextBox c = (TextBox)txt_list[i];
+                            if (c.Name.Equals(name))		// name found
+                            {
+                                c.Text = val;	// restore value
+                                i = txt_list.Count + 1;
+                            }
+                            if (i == txt_list.Count)
+                                MessageBox.Show(new Form() { TopMost = true },
+                                    "Control not found: " + name, "GetVars Error",
+                                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        }
+                    }
+                }
             }
-            catch (Exception e)
+            catch (Exception ex)
             {
-                MessageBox.Show(new Form() { TopMost = true },
-                    "An error ocurred while trying to communicate with WinWarbler\r\r" +
-                    e.ToString(), "DDE Error!");
+                bool bReturnLog = false;
+                bReturnLog = ErrorLog.ErrorRoutine(false, enableErrorLog, ex);
+                if (false == bReturnLog) MessageBox.Show(new Form() { TopMost = true },
+                    "Unable to write to log");
             }
         }
+        // save profile
+        void SaveProfile()
+        {
+            try
+            {
+                string pFile = GetFileName("Select or enter a Profile to Save");
+                if (pFile == null || pFile == "") return;
+                dso = new DataSet();
 
+                if (File.Exists(pFile)) File.Delete(pFile);
+                //if (File.Exists(app_data_path + "Profiles\\" + pFile))
+                //    File.Delete(app_data_path + "Profiles\\" + pFile);
+
+                // enumerate controls and save to array list
+                ArrayList a = new ArrayList();
+                a = GetCtrlVal();
+
+                // save the array list to a DB table
+                //SaveVars("Profile", ref a);
+                if (!dso.Tables.Contains("Profile"))
+                    AddFormTable("Profile");
+
+                foreach (string s in a)
+                {
+                    string[] vals = s.Split('/');
+                    if (vals.Length > 2)
+                    {
+                        for (int i = 2; i < vals.Length; i++)
+                            vals[1] += "/" + vals[i];
+                    }
+                    //                dso.Clear(); 
+                    DataRow[] rows = dso.Tables["Profile"].Select("Key = '" + vals[0] + "'");
+                    if (rows.Length == 0)	// name is not in list
+                    {
+                        DataRow newRow = dso.Tables["Profile"].NewRow();
+                        newRow[0] = vals[0];
+                        newRow[1] = vals[1];
+                        dso.Tables["Profile"].Rows.Add(newRow);
+                    }
+                    else if (rows.Length == 1)
+                    {
+                        rows[0][1] = vals[1];
+                    }
+                }
+
+
+                // write DB table to xml file
+                dso.WriteXml(pFile);
+//                dso.WriteXml(app_data_path + "Profiles\\" + pFile);
+            }
+            catch (Exception ex)
+            {
+                bool bReturnLog = false;
+                bReturnLog = ErrorLog.ErrorRoutine(false, enableErrorLog, ex);
+                if (false == bReturnLog) MessageBox.Show(new Form() { TopMost = true },
+                    "Unable to write to log");
+            }
+        }
+        
         #endregion # Methods #
 
-        #endregion DXLab DDE
-        
-                                      
+        #endregion Profiles
+                                       
     } // end class Setup
 
     #region Helper Classes
