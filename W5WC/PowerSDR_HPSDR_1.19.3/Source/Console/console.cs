@@ -285,6 +285,8 @@ namespace PowerSDR
         Germany = 2,
         UK = 3,
         Italy_Plus = 4,
+        Japan,
+        Australia,
     }
 
 	public enum PreampMode
@@ -10852,6 +10854,34 @@ namespace PowerSDR
                     else if (f >= 50.08 && f <= 51.0) ret_val = true;
                     else ret_val = false;
                     break;
+                case FRSRegion.Japan:
+                    if (f >= 1.81 && f <= 1.9125) ret_val = true;
+                    else if (f >= 3.5 && f <= 3.687) ret_val = true;
+                    else if (f >= 3.702 && f <= 3.805) ret_val = true;
+                    else if (f >= 7.0 && f <= 7.1) ret_val = true;
+                    else if (f >= 10.1 && f <= 10.15) ret_val = true;
+                    else if (f >= 14.0 && f <= 14.35) ret_val = true;
+                    else if (f >= 18.068 && f <= 18.168) ret_val = true;
+                    else if (f >= 21.0 && f <= 21.45) ret_val = true;
+                    else if (f >= 24.89 && f <= 24.99) ret_val = true;
+                    else if (f >= 28.0 && f <= 29.7) ret_val = true;
+                    else if (f >= 50.0 && f <= 54.0) ret_val = true;
+                    else ret_val = false;
+                    break;
+               case FRSRegion.Australia:
+                    if (f >= 1.8 && f <= 1.875) ret_val = true;
+                    else if (f >= 3.5 && f <= 3.7) ret_val = true;
+                    else if (f >= 3.776 && f <= 3.8) ret_val = true;
+                    else if (f >= 7.0 && f <= 7.3) ret_val = true;
+                    else if (f >= 10.1 && f <= 10.15) ret_val = true;
+                    else if (f >= 14.0 && f <= 14.35) ret_val = true;
+                    else if (f >= 18.068 && f <= 18.168) ret_val = true;
+                    else if (f >= 21.0 && f <= 21.45) ret_val = true;
+                    else if (f >= 24.89 && f <= 24.99) ret_val = true;
+                    else if (f >= 28.0 && f <= 29.7) ret_val = true;
+                    else if (f >= 50.0 && f <= 54.0) ret_val = true;
+                    else ret_val = false;
+                    break;
                 default:
                     ret_val = false;
                     break;
@@ -14578,7 +14608,7 @@ namespace PowerSDR
         
         }
  
-		public bool CalibrateRX2Level(float level, float freq, Progress progress, bool suppress_errors)
+		/*public bool CalibrateRX2Level(float level, float freq, Progress progress, bool suppress_errors)
 		{
 			// Calibration routine called by Setup Form.
 			bool ret_val = false;
@@ -14885,7 +14915,7 @@ namespace PowerSDR
 
 			calibration_running = false;
 			return ret_val;
-		}
+		}*/
 
 		public float[] rx_image_rejection = new float[(int)Band.LAST];
 		public float[] rx_image_from_floor = new float[(int)Band.LAST];
@@ -15148,7 +15178,7 @@ namespace PowerSDR
             return ret_val;
         }
 
-        public bool CalibrateRX2Image(float freq, Progress progress, bool suppress_errors)
+        /*public bool CalibrateRX2Image(float freq, Progress progress, bool suppress_errors)
         {
             if (!fwc_init || current_model != Model.FLEX5000 || !FWCEEPROM.RX2OK) return false;
 
@@ -15225,7 +15255,7 @@ namespace PowerSDR
             int filt2_high = RX1FilterHigh;
             Filter filter2 = rx1_filter;					// save current filter
 
-            //PreampMode preamp = rx1_preamp_mode;			// save current preamp setting
+            PreampMode preamp = rx1_preamp_mode;			// save current preamp setting
             RX1PreampMode = PreampMode.HIGH;				// set preamp to high
             bool preamp = fwc_rx2_preamp;
             FWC.SetRX2Preamp(true);
@@ -15409,7 +15439,7 @@ namespace PowerSDR
             //MessageBox.Show(t1.Duration.ToString());
             Debug.WriteLine("timer: " + t1.Duration);
             return ret_val;
-        } 
+        } */
 
 		public float[] tx_image_rejection = new float[(int)Band.LAST];
 		public bool CalibrateTXImage(float freq, Progress progress, bool suppress_errors)
@@ -19259,7 +19289,7 @@ namespace PowerSDR
 			}
 		}*/
 
-        private FRSRegion current_region = FRSRegion.US;
+        private FRSRegion current_region = FRSRegion.US; //w5wc
         public FRSRegion CurrentRegion
         {
             get { return current_region; }
