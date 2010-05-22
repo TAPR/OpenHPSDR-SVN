@@ -15,12 +15,6 @@
     {
         "Entry"
         {
-        "MsmKey" = "8:_27AE6489110A4BDE80395CC02B1A490C"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
         "MsmKey" = "8:_343E83015DF04222B9800260C7967A26"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -106,12 +100,6 @@
         "Entry"
         {
         "MsmKey" = "8:_C7884B824B4848489BC0063503CD45FF"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_D2AD5AA1DF5F4AEEA9855CC7F23E3B1E"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -265,26 +253,6 @@
         }
         "File"
         {
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_27AE6489110A4BDE80395CC02B1A490C"
-            {
-            "SourcePath" = "8:..\\bin\\Release\\BandData.xml"
-            "TargetName" = "8:BandData.xml"
-            "Tag" = "8:"
-            "Folder" = "8:_596F8D908DDC428296063E56F4DF986B"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_343E83015DF04222B9800260C7967A26"
             {
             "AssemblyRegister" = "3:1"
@@ -651,26 +619,6 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_D2AD5AA1DF5F4AEEA9855CC7F23E3B1E"
-            {
-            "SourcePath" = "8:..\\bin\\Release\\MacroData.xml"
-            "TargetName" = "8:MacroData.xml"
-            "Tag" = "8:"
-            "Folder" = "8:_40170F0A660245ED910092200BA8980D"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_DBDB6B907BE8DF73FDB83DEE6B76B706"
             {
             "AssemblyRegister" = "3:1"
@@ -737,48 +685,59 @@
             "Property" = "8:AppDataFolder"
                 "Folders"
                 {
-                    "{9EF0B969-E518-4E46-987F-47570745A589}:_40170F0A660245ED910092200BA8980D"
+                    "{9EF0B969-E518-4E46-987F-47570745A589}:_6D90AEE2C6F84A58867E03EF13343C00"
                     {
-                    "Name" = "8:Macros"
-                    "AlwaysCreate" = "11:FALSE"
+                    "Name" = "8:DDUtil"
+                    "AlwaysCreate" = "11:TRUE"
                     "Condition" = "8:"
                     "Transitive" = "11:FALSE"
-                    "Property" = "8:_BEE4CD5DD68E48DC9DBFD39466D430C3"
+                    "Property" = "8:_86A277CF55FB4BE38C983062C4244EF9"
                         "Folders"
                         {
-                        }
-                    }
-                    "{9EF0B969-E518-4E46-987F-47570745A589}:_596F8D908DDC428296063E56F4DF986B"
-                    {
-                    "Name" = "8:BandData"
-                    "AlwaysCreate" = "11:FALSE"
-                    "Condition" = "8:"
-                    "Transitive" = "11:FALSE"
-                    "Property" = "8:_09B3DF4BE6064F2083A546E055BF3EC9"
-                        "Folders"
-                        {
-                        }
-                    }
-                    "{9EF0B969-E518-4E46-987F-47570745A589}:_766D9C2A5AD84C53B60E0AA2F15CC278"
-                    {
-                    "Name" = "8:SO2R"
-                    "AlwaysCreate" = "11:FALSE"
-                    "Condition" = "8:"
-                    "Transitive" = "11:FALSE"
-                    "Property" = "8:_B2BA4157C39D42268FFF6B8CE0B6E35F"
-                        "Folders"
-                        {
-                        }
-                    }
-                    "{9EF0B969-E518-4E46-987F-47570745A589}:_865704B62548477E979D6B029CB1C13D"
-                    {
-                    "Name" = "8:Profiles"
-                    "AlwaysCreate" = "11:FALSE"
-                    "Condition" = "8:"
-                    "Transitive" = "11:FALSE"
-                    "Property" = "8:_0901145A8549409D9CCB404FE080DD5E"
-                        "Folders"
-                        {
+                            "{9EF0B969-E518-4E46-987F-47570745A589}:_23EE1A208A814D6A98BB6B34B795056D"
+                            {
+                            "Name" = "8:Profiles"
+                            "AlwaysCreate" = "11:TRUE"
+                            "Condition" = "8:"
+                            "Transitive" = "11:FALSE"
+                            "Property" = "8:_0901145A8549409D9CCB404FE080DD5E"
+                                "Folders"
+                                {
+                                }
+                            }
+                            "{9EF0B969-E518-4E46-987F-47570745A589}:_27A0FB5C1F544974845BCB833DF41AF9"
+                            {
+                            "Name" = "8:BandData"
+                            "AlwaysCreate" = "11:TRUE"
+                            "Condition" = "8:"
+                            "Transitive" = "11:FALSE"
+                            "Property" = "8:_09B3DF4BE6064F2083A546E055BF3EC9"
+                                "Folders"
+                                {
+                                }
+                            }
+                            "{9EF0B969-E518-4E46-987F-47570745A589}:_2D74E36953A949A6844C8ACF8EBA4C99"
+                            {
+                            "Name" = "8:SO2R"
+                            "AlwaysCreate" = "11:TRUE"
+                            "Condition" = "8:"
+                            "Transitive" = "11:FALSE"
+                            "Property" = "8:_B2BA4157C39D42268FFF6B8CE0B6E35F"
+                                "Folders"
+                                {
+                                }
+                            }
+                            "{9EF0B969-E518-4E46-987F-47570745A589}:_926B36559E094E1A87CFC23971D8D6C3"
+                            {
+                            "Name" = "8:Macros"
+                            "AlwaysCreate" = "11:TRUE"
+                            "Condition" = "8:"
+                            "Transitive" = "11:FALSE"
+                            "Property" = "8:_BEE4CD5DD68E48DC9DBFD39466D430C3"
+                                "Folders"
+                                {
+                                }
+                            }
                         }
                     }
                 }
@@ -844,14 +803,14 @@
         {
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:DDUtil"
-        "ProductCode" = "8:{20F22A4C-830F-405A-957F-385D14E01612}"
-        "PackageCode" = "8:{A6F91BA2-30D0-4507-9A54-5F5182AA56E8}"
+        "ProductCode" = "8:{084A31AB-6C39-42BE-A9BF-F66AF633B31A}"
+        "PackageCode" = "8:{88A6EFE1-E49A-4255-A0A2-371BBC3992E6}"
         "UpgradeCode" = "8:{E787AEB9-A577-499D-A08E-775DE944A651}"
         "RestartWWWService" = "11:FALSE"
         "RemovePreviousVersions" = "11:TRUE"
         "DetectNewerInstalledVersion" = "11:TRUE"
         "InstallAllUsers" = "11:FALSE"
-        "ProductVersion" = "8:1.8.527"
+        "ProductVersion" = "8:1.8.603"
         "Manufacturer" = "8:Default Company Name"
         "ARPHELPTELEPHONE" = "8:"
         "ARPHELPLINK" = "8:"
@@ -980,7 +939,7 @@
             }
             "{970C0BB2-C7D0-45D7-ABFA-7EC378858BC0}:_B579029AB1364468967207E95A0C4906"
             {
-            "Name" = "8:DDUtil v 1.8.5"
+            "Name" = "8:DDUtil v 1.8.6"
             "Arguments" = "8:"
             "Description" = "8:"
             "ShowCmd" = "3:1"
