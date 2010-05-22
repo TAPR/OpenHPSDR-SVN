@@ -872,9 +872,8 @@ namespace DataDecoder
                         if (mem[idxMem, 11] != "" && mem[idxMem, 11] != null)
                         {
                             this.StatusBar.Text = text + "                    " +
-                                   mem[idxMem, 11];
-                           mini.Text = text + "          " +
-                                mem[idxMem, 11];
+                                    mem[idxMem, 11];
+                            mini.Text = text + "          " + mem[idxMem, 11];
                         }
                         else
                             this.StatusBar.Text = text;
@@ -7115,11 +7114,11 @@ namespace DataDecoder
                 if (rotormod == RotorMod.AlphaSpid) regxVar = @"W.*?\x20";
                 else if (rotormod == RotorMod.GreenHeron || rotormod == RotorMod.Hygain)
                     regxVar = ".*?;";
-                else if (rotormod == RotorMod.M2R2800PA || (rotormod == RotorMod.M2R2800PX))
-                    regxVar = @".*?\n\r";
+                else if (rotormod == RotorMod.M2R2800PA) regxVar = @".*?\n\r";
+                else if (rotormod == RotorMod.M2R2800PX) regxVar = @".*?\r";
                 else if (rotormod == RotorMod.Yaesu) regxVar = @"\x2b0.*?\d\d\d";
                 else if (rotormod == RotorMod.Prosistel)
-                    regxVar = @".*?\r";   //@"\x02A,?,\d{3},.,\r";  // 02 41 2C 3F 2C 31 35 37 2C B 2C 0D
+                    regxVar = @".*?\r"; //@"\x02A,?,\d{3},.,\r";  // 02 41 2C 3F 2C 31 35 37 2C B 2C 0D
                 else regxVar = "";
                 SerialPort port = (SerialPort)sender;
                 byte[] data = new byte[port.BytesToRead];
@@ -7179,7 +7178,7 @@ namespace DataDecoder
                             SetRotor(sCmd.Substring(5, 5));
                             break;
                         case RotorMod.M2R2800PX:
-                            SetRotor(sCmd.Substring(5, 5));
+                            SetRotor(sCmd.Substring(2, 5));
                             break;
                         case RotorMod.Prosistel:
                             if (sCmd.Substring(3, 1) != "?") return;
@@ -7467,7 +7466,6 @@ namespace DataDecoder
                     rotormod = RotorMod.GreenHeron;
                     grpSpeed.Visible = false;
                     suffix = ";";
-                    //                RotorPort.ReceivedBytesThreshold = 1;
                     if (chkRotorEnab.Checked) RotorPort.Write(rtrCmd);
                     chkTenths.Visible = true;
                 }
@@ -7477,7 +7475,6 @@ namespace DataDecoder
                     rotormod = RotorMod.Hygain;
                     grpSpeed.Visible = false;
                     suffix = ";";
-                    //                RotorPort.ReceivedBytesThreshold = 4;
                     if (chkRotorEnab.Checked) RotorPort.Write("AI1;");
                     chkTenths.Visible = false;
                 }
@@ -7496,7 +7493,7 @@ namespace DataDecoder
                     rotormod = RotorMod.M2R2800PX;
                     grpSpeed.Visible = true;
                     suffix = "\r";
-                    if (chkRotorEnab.Checked) RotorPort.Write("U\r");
+                    if (chkRotorEnab.Checked) RotorPort.Write("S\r");
                     chkTenths.Visible = false;
                 }
                 else if (rbRtrMod6.Checked)
@@ -7920,7 +7917,7 @@ namespace DataDecoder
                     break;
                 case RotorMod.M2R2800PX:
                     RotorPort.Write("A" + newhead + "\r");  // start rotor
-                    RotorPort.Write("U\r");                 // request position
+//                    RotorPort.Write("U\r");                 // request position
                     break;
                 case RotorMod.Prosistel:
                     RotorPort.Write("\x02\x41\x47" + newhead + "\r");

@@ -8186,8 +8186,8 @@ namespace DataDecoder
             this.txtSP.Size = new System.Drawing.Size(37, 20);
             this.txtSP.TabIndex = 3;
             this.txtSP.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.toolTip1.SetToolTip(this.txtSP, "Short path rotator bearing (Click to increase + 5, Ctrl+Click to decrease -5 degr" +
-                    "ees.");
+            this.toolTip1.SetToolTip(this.txtSP, "Short path rotator bearing (Ctrl+Shift+Up to increase + 5, Ctrl+Shift+Down to dec" +
+                    "rease -5 degrees.");
             this.txtSP.TextChanged += new System.EventHandler(this.txtSP_TextChanged);
             // 
             // tabExtCtrl
@@ -15960,7 +15960,7 @@ namespace DataDecoder
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
             this.exitToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.X)));
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(137, 22);
             this.exitToolStripMenuItem.Text = "Exit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
