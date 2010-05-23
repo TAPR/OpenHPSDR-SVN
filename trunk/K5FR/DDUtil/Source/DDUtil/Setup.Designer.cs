@@ -16325,6 +16325,7 @@ namespace DataDecoder
             // 
             this.RotorPort.DtrEnable = true;
             this.RotorPort.ReadTimeout = 500;
+            this.RotorPort.RtsEnable = true;
             this.RotorPort.WriteTimeout = 500;
             this.RotorPort.DataReceived += new System.IO.Ports.SerialDataReceivedEventHandler(this.RotorPort_DataReceived);
             // 

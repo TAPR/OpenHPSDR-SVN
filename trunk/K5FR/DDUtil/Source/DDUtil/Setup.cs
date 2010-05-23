@@ -7279,8 +7279,12 @@ namespace DataDecoder
         {
             if (chkRotorEnab.Checked)
             {
-                lblSP.Text = txtSP.Text; lblLP.Text = "SP";
-                TurnRotor(txtSP.Text); lblSP.Focus();
+                string txt = txtSP.Text.PadLeft(3, '0');
+                if (String.Compare(lastMove.TrimStart(), txt) !=0 )
+                {
+                    lblSP.Text = txtSP.Text; lblLP.Text = "SP";
+                    TurnRotor(txtSP.Text); lblSP.Focus();
+                }
             }
         }
         // The SP bearing window has changed, must be a manual entry.
