@@ -10590,7 +10590,7 @@ namespace DataDecoder
                         {
                             inhibA = false;
                             WriteToPort("ZZPC" + txtPwr_6a.Text.PadLeft(3, '0') + ";", iSleep);
-                            WriteToPort("ZZOB" + txtRx_6a.Text + ";", iSleep);
+                            WriteToPort("ZZOA" + txtRx_6a.Text + ";", iSleep);
                             TXa = txtTx_6a.Text;
                             dataH = txtHi1_6a.Text;
                             ctrlH = txtHi2_6a.Text;
@@ -10602,7 +10602,7 @@ namespace DataDecoder
                         {
                             inhibA = false;
                             WriteToPort("ZZPC" + txtPwr_7a.Text.PadLeft(3, '0') + ";", iSleep);
-                            WriteToPort("ZZOB" + txtRx_7a.Text + ";", iSleep);
+                            WriteToPort("ZZOA" + txtRx_7a.Text + ";", iSleep);
                             TXa = txtTx_7a.Text;
                             dataH = txtHi1_7a.Text;
                             ctrlH = txtHi2_7a.Text;
@@ -10614,7 +10614,7 @@ namespace DataDecoder
                         {
                             inhibA = false;
                             WriteToPort("ZZPC" + txtPwr_8a.Text.PadLeft(3, '0') + ";", iSleep);
-                            WriteToPort("ZZOB" + txtRx_8a.Text + ";", iSleep);
+                            WriteToPort("ZZOA" + txtRx_8a.Text + ";", iSleep);
                             TXa = txtTx_8a.Text;
                             dataH = txtHi1_8a.Text;
                             ctrlH = txtHi2_8a.Text;
@@ -10626,7 +10626,7 @@ namespace DataDecoder
                         {
                             inhibA = false;
                             WriteToPort("ZZPC" + txtPwr_9a.Text.PadLeft(3, '0') + ";", iSleep);
-                            WriteToPort("ZZOB" + txtRx_9a.Text + ";", iSleep);
+                            WriteToPort("ZZOA" + txtRx_9a.Text + ";", iSleep);
                             TXa = txtTx_9a.Text;
                             dataH = txtHi1_9a.Text;
                             ctrlH = txtHi2_9a.Text;
@@ -10639,7 +10639,7 @@ namespace DataDecoder
                         {
                             inhibA = false;
                             WriteToPort("ZZPC" + txtPwr_10a.Text.PadLeft(3, '0') + ";", iSleep);
-                            WriteToPort("ZZOB" + txtRx_10a.Text + ";", iSleep);
+                            WriteToPort("ZZOA" + txtRx_10a.Text + ";", iSleep);
                             TXa = txtTx_10a.Text;
                             dataH = txtHi1_10a.Text;
                             ctrlH = txtHi2_10a.Text;
