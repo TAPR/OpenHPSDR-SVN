@@ -112,8 +112,7 @@ namespace PowerSDR
 		private System.Windows.Forms.ComboBoxTS comboKBModeUp;
 		private System.Windows.Forms.ComboBoxTS comboKBModeDown;
 		private System.Windows.Forms.LabelTS lblDisplayFPS;
-		private System.Windows.Forms.NumericUpDownTS udDisplayFPS;
-		private System.Windows.Forms.CheckBoxTS chkGeneralXVTRPresent;
+        private System.Windows.Forms.NumericUpDownTS udDisplayFPS;
 		private System.Windows.Forms.GroupBoxTS grpGeneralDDS;
 		private System.Windows.Forms.LabelTS lblPLLMult;
 		private System.Windows.Forms.NumericUpDownTS udDDSPLLMult;
@@ -157,8 +156,7 @@ namespace PowerSDR
 		private System.Windows.Forms.LabelTS lblDisplayPeakText;
 		private System.Windows.Forms.NumericUpDownTS udDisplayPeakText;
 		private System.Windows.Forms.NumericUpDownTS udDisplayCPUMeter;
-		private System.Windows.Forms.LabelTS lblDisplayCPUMeter;
-		private System.Windows.Forms.ComboBoxTS comboGeneralXVTR;
+        private System.Windows.Forms.LabelTS lblDisplayCPUMeter;
 		private System.Windows.Forms.GroupBoxTS grpDisplayWaterfall;
 		private System.Windows.Forms.NumericUpDownTS udDisplayWaterfallHighLevel;
 		private System.Windows.Forms.LabelTS lblDisplayWaterfallHighLevel;
@@ -1350,6 +1348,8 @@ namespace PowerSDR
         private ButtonTS btnPennyCtrlReset;
         private GroupBoxTS grpFRSRegion;
         private ComboBoxTS comboFRSRegion;
+        private ComboBoxTS comboGeneralXVTR;
+        private CheckBoxTS chkGeneralXVTRPresent;
         private System.ComponentModel.IContainer components;
 
 		#endregion
@@ -1590,6 +1590,10 @@ namespace PowerSDR
             this.btnApply = new System.Windows.Forms.ButtonTS();
             this.btnCancel = new System.Windows.Forms.ButtonTS();
             this.btnOK = new System.Windows.Forms.ButtonTS();
+            this.comboGeneralXVTR = new System.Windows.Forms.ComboBoxTS();
+            this.chkGeneralXVTRPresent = new System.Windows.Forms.CheckBoxTS();
+            this.grpFRSRegion = new System.Windows.Forms.GroupBoxTS();
+            this.comboFRSRegion = new System.Windows.Forms.ComboBoxTS();
             this.chkGeneralUseSi570 = new System.Windows.Forms.CheckBoxTS();
             this.grpGeneralModel = new System.Windows.Forms.GroupBoxTS();
             this.radGenModelHermes = new System.Windows.Forms.RadioButtonTS();
@@ -1606,6 +1610,14 @@ namespace PowerSDR
             this.grpSI570 = new System.Windows.Forms.GroupBoxTS();
             this.labelTS8 = new System.Windows.Forms.LabelTS();
             this.udFXtal = new System.Windows.Forms.NumericUpDownTS();
+            this.grpGeneralDDS = new System.Windows.Forms.GroupBoxTS();
+            this.chkGenDDSExpert = new System.Windows.Forms.CheckBoxTS();
+            this.udDDSCorrection = new System.Windows.Forms.NumericUpDownTS();
+            this.lblClockCorrection = new System.Windows.Forms.LabelTS();
+            this.udDDSIFFreq = new System.Windows.Forms.NumericUpDownTS();
+            this.lblIFFrequency = new System.Windows.Forms.LabelTS();
+            this.udDDSPLLMult = new System.Windows.Forms.NumericUpDownTS();
+            this.lblPLLMult = new System.Windows.Forms.LabelTS();
             this.groupBoxHPSDRHW = new System.Windows.Forms.GroupBoxTS();
             this.chkExcaliburPresent = new System.Windows.Forms.CheckBoxTS();
             this.chkAlexPresent = new System.Windows.Forms.CheckBoxTS();
@@ -1629,22 +1641,10 @@ namespace PowerSDR
             this.chkGeneralUSBPresent = new System.Windows.Forms.CheckBoxTS();
             this.chkGeneralATUPresent = new System.Windows.Forms.CheckBoxTS();
             this.chkGeneralPAPresent = new System.Windows.Forms.CheckBoxTS();
-            this.chkGeneralXVTRPresent = new System.Windows.Forms.CheckBoxTS();
             this.lblGeneralLPTDelay = new System.Windows.Forms.LabelTS();
             this.udGeneralLPTDelay = new System.Windows.Forms.NumericUpDownTS();
             this.lblGeneralLPTAddr = new System.Windows.Forms.LabelTS();
             this.comboGeneralLPTAddr = new System.Windows.Forms.ComboBoxTS();
-            this.comboGeneralXVTR = new System.Windows.Forms.ComboBoxTS();
-            this.grpGeneralDDS = new System.Windows.Forms.GroupBoxTS();
-            this.grpFRSRegion = new System.Windows.Forms.GroupBoxTS();
-            this.comboFRSRegion = new System.Windows.Forms.ComboBoxTS();
-            this.chkGenDDSExpert = new System.Windows.Forms.CheckBoxTS();
-            this.udDDSCorrection = new System.Windows.Forms.NumericUpDownTS();
-            this.lblClockCorrection = new System.Windows.Forms.LabelTS();
-            this.udDDSIFFreq = new System.Windows.Forms.NumericUpDownTS();
-            this.lblIFFrequency = new System.Windows.Forms.LabelTS();
-            this.udDDSPLLMult = new System.Windows.Forms.NumericUpDownTS();
-            this.lblPLLMult = new System.Windows.Forms.LabelTS();
             this.grpGenCustomTitleText = new System.Windows.Forms.GroupBoxTS();
             this.txtGenCustomTitle = new System.Windows.Forms.TextBoxTS();
             this.grpOptMisc = new System.Windows.Forms.GroupBoxTS();
@@ -1665,19 +1665,19 @@ namespace PowerSDR
             this.lblOptClickTuneDIGU = new System.Windows.Forms.LabelTS();
             this.udOptClickTuneOffsetDIGU = new System.Windows.Forms.NumericUpDownTS();
             this.grpGeneralOptions = new System.Windows.Forms.GroupBoxTS();
-            this.chkGenOptionsShowATUPopup = new System.Windows.Forms.CheckBoxTS();
             this.udGenTX1Delay = new System.Windows.Forms.NumericUpDownTS();
             this.lblGenTX1Delay = new System.Windows.Forms.LabelTS();
-            this.chkGenTX1Delay = new System.Windows.Forms.CheckBoxTS();
             this.chkSplitOff = new System.Windows.Forms.CheckBoxTS();
             this.chkGenAllModeMicPTT = new System.Windows.Forms.CheckBoxTS();
-            this.chkGeneralCustomFilter = new System.Windows.Forms.CheckBoxTS();
             this.lblGeneralX2Delay = new System.Windows.Forms.LabelTS();
             this.udGeneralX2Delay = new System.Windows.Forms.NumericUpDownTS();
             this.chkGeneralEnableX2 = new System.Windows.Forms.CheckBoxTS();
             this.chkGeneralSoftwareGainCorr = new System.Windows.Forms.CheckBoxTS();
             this.chkGeneralDisablePTT = new System.Windows.Forms.CheckBoxTS();
             this.chkGeneralSpurRed = new System.Windows.Forms.CheckBoxTS();
+            this.chkGenTX1Delay = new System.Windows.Forms.CheckBoxTS();
+            this.chkGeneralCustomFilter = new System.Windows.Forms.CheckBoxTS();
+            this.chkGenOptionsShowATUPopup = new System.Windows.Forms.CheckBoxTS();
             this.grpGeneralProcessPriority = new System.Windows.Forms.GroupBoxTS();
             this.comboGeneralProcessPriority = new System.Windows.Forms.ComboBoxTS();
             this.grpGeneralUpdates = new System.Windows.Forms.GroupBoxTS();
@@ -2876,21 +2876,21 @@ namespace PowerSDR
             this.tpExtCtrl.SuspendLayout();
             this.tpCAT.SuspendLayout();
             this.tpTests.SuspendLayout();
+            this.grpFRSRegion.SuspendLayout();
             this.grpGeneralModel.SuspendLayout();
             this.grpHWSoftRock.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.udSoftRockCenterFreq)).BeginInit();
             this.grpSI570.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.udFXtal)).BeginInit();
+            this.grpGeneralDDS.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.udDDSCorrection)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.udDDSIFFreq)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.udDDSPLLMult)).BeginInit();
             this.groupBoxHPSDRHW.SuspendLayout();
             this.grpGeneralHardwareFLEX5000.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.udF3KFanTempThresh)).BeginInit();
             this.grpGeneralHardwareSDR1000.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.udGeneralLPTDelay)).BeginInit();
-            this.grpGeneralDDS.SuspendLayout();
-            this.grpFRSRegion.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.udDDSCorrection)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.udDDSIFFreq)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.udDDSPLLMult)).BeginInit();
             this.grpGenCustomTitleText.SuspendLayout();
             this.grpOptMisc.SuspendLayout();
             this.grpOptQuickQSY.SuspendLayout();
@@ -3189,6 +3189,8 @@ namespace PowerSDR
             // tpGeneralHardware
             // 
             this.tpGeneralHardware.BackColor = System.Drawing.SystemColors.Control;
+            this.tpGeneralHardware.Controls.Add(this.comboGeneralXVTR);
+            this.tpGeneralHardware.Controls.Add(this.chkGeneralXVTRPresent);
             this.tpGeneralHardware.Controls.Add(this.grpFRSRegion);
             this.tpGeneralHardware.Controls.Add(this.chkGeneralUseSi570);
             this.tpGeneralHardware.Controls.Add(this.grpGeneralModel);
@@ -3196,10 +3198,10 @@ namespace PowerSDR
             this.tpGeneralHardware.Controls.Add(this.chkGeneralRXOnly);
             this.tpGeneralHardware.Controls.Add(this.grpHWSoftRock);
             this.tpGeneralHardware.Controls.Add(this.grpSI570);
+            this.tpGeneralHardware.Controls.Add(this.grpGeneralDDS);
             this.tpGeneralHardware.Controls.Add(this.groupBoxHPSDRHW);
             this.tpGeneralHardware.Controls.Add(this.grpGeneralHardwareFLEX5000);
             this.tpGeneralHardware.Controls.Add(this.grpGeneralHardwareSDR1000);
-            this.tpGeneralHardware.Controls.Add(this.grpGeneralDDS);
             this.tpGeneralHardware.Location = new System.Drawing.Point(4, 22);
             this.tpGeneralHardware.Name = "tpGeneralHardware";
             this.tpGeneralHardware.Size = new System.Drawing.Size(592, 318);
@@ -3740,6 +3742,64 @@ namespace PowerSDR
             this.toolTip1.SetToolTip(this.btnOK, "Save current settings and close form.");
             this.btnOK.Click += new System.EventHandler(this.btnOK_Click);
             // 
+            // comboGeneralXVTR
+            // 
+            this.comboGeneralXVTR.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboGeneralXVTR.DropDownWidth = 136;
+            this.comboGeneralXVTR.Items.AddRange(new object[] {
+            "No TR Logic",
+            "Negative TR Logic",
+            "Positive TR Logic"});
+            this.comboGeneralXVTR.Location = new System.Drawing.Point(330, 228);
+            this.comboGeneralXVTR.Name = "comboGeneralXVTR";
+            this.comboGeneralXVTR.Size = new System.Drawing.Size(136, 21);
+            this.comboGeneralXVTR.TabIndex = 35;
+            this.toolTip1.SetToolTip(this.comboGeneralXVTR, "XVTR TR Logic Selection -- Negative for XVTR FlexRadio Systems provides.  Positiv" +
+                    "e for 25W version.  No TR logic for other XVTRs.");
+            this.comboGeneralXVTR.Visible = false;
+            // 
+            // chkGeneralXVTRPresent
+            // 
+            this.chkGeneralXVTRPresent.Image = null;
+            this.chkGeneralXVTRPresent.Location = new System.Drawing.Point(330, 202);
+            this.chkGeneralXVTRPresent.Name = "chkGeneralXVTRPresent";
+            this.chkGeneralXVTRPresent.Size = new System.Drawing.Size(104, 16);
+            this.chkGeneralXVTRPresent.TabIndex = 34;
+            this.chkGeneralXVTRPresent.Text = "XVTR Present";
+            this.toolTip1.SetToolTip(this.chkGeneralXVTRPresent, "Check if DEMI XVTR is installed.");
+            this.chkGeneralXVTRPresent.CheckedChanged += new System.EventHandler(this.chkXVTRPresent_CheckedChanged);
+            // 
+            // grpFRSRegion
+            // 
+            this.grpFRSRegion.Controls.Add(this.comboFRSRegion);
+            this.grpFRSRegion.Location = new System.Drawing.Point(467, 152);
+            this.grpFRSRegion.Name = "grpFRSRegion";
+            this.grpFRSRegion.Size = new System.Drawing.Size(110, 55);
+            this.grpFRSRegion.TabIndex = 33;
+            this.grpFRSRegion.TabStop = false;
+            this.grpFRSRegion.Text = "Region";
+            // 
+            // comboFRSRegion
+            // 
+            this.comboFRSRegion.DisplayMember = "United States";
+            this.comboFRSRegion.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboFRSRegion.FormattingEnabled = true;
+            this.comboFRSRegion.Items.AddRange(new object[] {
+            "Australia",
+            "Germany",
+            "Italy",
+            "Japan",
+            "Spain",
+            "United Kingdom",
+            "United States",
+            "Extended"});
+            this.comboFRSRegion.Location = new System.Drawing.Point(3, 20);
+            this.comboFRSRegion.Name = "comboFRSRegion";
+            this.comboFRSRegion.Size = new System.Drawing.Size(100, 21);
+            this.comboFRSRegion.TabIndex = 0;
+            this.toolTip1.SetToolTip(this.comboFRSRegion, "Select Region for your location");
+            this.comboFRSRegion.SelectedIndexChanged += new System.EventHandler(this.comboFRSRegion_SelectedIndexChanged);
+            // 
             // chkGeneralUseSi570
             // 
             this.chkGeneralUseSi570.Image = null;
@@ -3957,6 +4017,155 @@ namespace PowerSDR
             0,
             0,
             0});
+            // 
+            // grpGeneralDDS
+            // 
+            this.grpGeneralDDS.Controls.Add(this.chkGenDDSExpert);
+            this.grpGeneralDDS.Controls.Add(this.udDDSCorrection);
+            this.grpGeneralDDS.Controls.Add(this.lblClockCorrection);
+            this.grpGeneralDDS.Controls.Add(this.udDDSIFFreq);
+            this.grpGeneralDDS.Controls.Add(this.lblIFFrequency);
+            this.grpGeneralDDS.Controls.Add(this.udDDSPLLMult);
+            this.grpGeneralDDS.Controls.Add(this.lblPLLMult);
+            this.grpGeneralDDS.Location = new System.Drawing.Point(328, 8);
+            this.grpGeneralDDS.Name = "grpGeneralDDS";
+            this.grpGeneralDDS.Size = new System.Drawing.Size(176, 136);
+            this.grpGeneralDDS.TabIndex = 4;
+            this.grpGeneralDDS.TabStop = false;
+            this.grpGeneralDDS.Text = "DDS";
+            // 
+            // chkGenDDSExpert
+            // 
+            this.chkGenDDSExpert.Image = null;
+            this.chkGenDDSExpert.Location = new System.Drawing.Point(56, 104);
+            this.chkGenDDSExpert.Name = "chkGenDDSExpert";
+            this.chkGenDDSExpert.Size = new System.Drawing.Size(56, 24);
+            this.chkGenDDSExpert.TabIndex = 8;
+            this.chkGenDDSExpert.Text = "Expert";
+            this.chkGenDDSExpert.CheckedChanged += new System.EventHandler(this.chkGenDDSExpert_CheckedChanged);
+            // 
+            // udDDSCorrection
+            // 
+            this.udDDSCorrection.Increment = new decimal(new int[] {
+            10,
+            0,
+            0,
+            0});
+            this.udDDSCorrection.Location = new System.Drawing.Point(104, 24);
+            this.udDDSCorrection.Maximum = new decimal(new int[] {
+            1000000,
+            0,
+            0,
+            0});
+            this.udDDSCorrection.Minimum = new decimal(new int[] {
+            1000000,
+            0,
+            0,
+            -2147483648});
+            this.udDDSCorrection.Name = "udDDSCorrection";
+            this.udDDSCorrection.Size = new System.Drawing.Size(64, 20);
+            this.udDDSCorrection.TabIndex = 7;
+            this.toolTip1.SetToolTip(this.udDDSCorrection, "Correction for DDS frequency");
+            this.udDDSCorrection.Value = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+            this.udDDSCorrection.Visible = false;
+            this.udDDSCorrection.ValueChanged += new System.EventHandler(this.udDDSCorrection_ValueChanged);
+            this.udDDSCorrection.LostFocus += new System.EventHandler(this.udDDSCorrection_LostFocus);
+            // 
+            // lblClockCorrection
+            // 
+            this.lblClockCorrection.Image = null;
+            this.lblClockCorrection.Location = new System.Drawing.Point(16, 24);
+            this.lblClockCorrection.Name = "lblClockCorrection";
+            this.lblClockCorrection.Size = new System.Drawing.Size(72, 23);
+            this.lblClockCorrection.TabIndex = 6;
+            this.lblClockCorrection.Text = "Clock Offset:";
+            this.lblClockCorrection.Visible = false;
+            // 
+            // udDDSIFFreq
+            // 
+            this.udDDSIFFreq.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.udDDSIFFreq.Location = new System.Drawing.Point(112, 72);
+            this.udDDSIFFreq.Maximum = new decimal(new int[] {
+            20000,
+            0,
+            0,
+            0});
+            this.udDDSIFFreq.Minimum = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+            this.udDDSIFFreq.Name = "udDDSIFFreq";
+            this.udDDSIFFreq.Size = new System.Drawing.Size(56, 20);
+            this.udDDSIFFreq.TabIndex = 5;
+            this.toolTip1.SetToolTip(this.udDDSIFFreq, "Intermediate Frequency");
+            this.udDDSIFFreq.Value = new decimal(new int[] {
+            9000,
+            0,
+            0,
+            0});
+            this.udDDSIFFreq.Visible = false;
+            this.udDDSIFFreq.ValueChanged += new System.EventHandler(this.udDDSIFFreq_ValueChanged);
+            this.udDDSIFFreq.LostFocus += new System.EventHandler(this.udDDSIFFreq_LostFocus);
+            // 
+            // lblIFFrequency
+            // 
+            this.lblIFFrequency.Image = null;
+            this.lblIFFrequency.Location = new System.Drawing.Point(16, 72);
+            this.lblIFFrequency.Name = "lblIFFrequency";
+            this.lblIFFrequency.Size = new System.Drawing.Size(48, 23);
+            this.lblIFFrequency.TabIndex = 4;
+            this.lblIFFrequency.Text = "IF (Hz):";
+            this.lblIFFrequency.Visible = false;
+            // 
+            // udDDSPLLMult
+            // 
+            this.udDDSPLLMult.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.udDDSPLLMult.Location = new System.Drawing.Point(120, 48);
+            this.udDDSPLLMult.Maximum = new decimal(new int[] {
+            20,
+            0,
+            0,
+            0});
+            this.udDDSPLLMult.Minimum = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+            this.udDDSPLLMult.Name = "udDDSPLLMult";
+            this.udDDSPLLMult.Size = new System.Drawing.Size(48, 20);
+            this.udDDSPLLMult.TabIndex = 3;
+            this.toolTip1.SetToolTip(this.udDDSPLLMult, "Multiplier for external clock (1 if using internal clock)");
+            this.udDDSPLLMult.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.udDDSPLLMult.Visible = false;
+            this.udDDSPLLMult.ValueChanged += new System.EventHandler(this.udDDSPLLMult_ValueChanged);
+            this.udDDSPLLMult.LostFocus += new System.EventHandler(this.udDDSPLLMult_LostFocus);
+            // 
+            // lblPLLMult
+            // 
+            this.lblPLLMult.Image = null;
+            this.lblPLLMult.Location = new System.Drawing.Point(16, 48);
+            this.lblPLLMult.Name = "lblPLLMult";
+            this.lblPLLMult.Size = new System.Drawing.Size(80, 23);
+            this.lblPLLMult.TabIndex = 2;
+            this.lblPLLMult.Text = "PLL Multiplier:";
+            this.lblPLLMult.Visible = false;
             // 
             // groupBoxHPSDRHW
             // 
@@ -4182,12 +4391,10 @@ namespace PowerSDR
             this.grpGeneralHardwareSDR1000.Controls.Add(this.chkGeneralUSBPresent);
             this.grpGeneralHardwareSDR1000.Controls.Add(this.chkGeneralATUPresent);
             this.grpGeneralHardwareSDR1000.Controls.Add(this.chkGeneralPAPresent);
-            this.grpGeneralHardwareSDR1000.Controls.Add(this.chkGeneralXVTRPresent);
             this.grpGeneralHardwareSDR1000.Controls.Add(this.lblGeneralLPTDelay);
             this.grpGeneralHardwareSDR1000.Controls.Add(this.udGeneralLPTDelay);
             this.grpGeneralHardwareSDR1000.Controls.Add(this.lblGeneralLPTAddr);
             this.grpGeneralHardwareSDR1000.Controls.Add(this.comboGeneralLPTAddr);
-            this.grpGeneralHardwareSDR1000.Controls.Add(this.comboGeneralXVTR);
             this.grpGeneralHardwareSDR1000.Location = new System.Drawing.Point(160, 8);
             this.grpGeneralHardwareSDR1000.Name = "grpGeneralHardwareSDR1000";
             this.grpGeneralHardwareSDR1000.Size = new System.Drawing.Size(160, 248);
@@ -4239,17 +4446,6 @@ namespace PowerSDR
             this.chkGeneralPAPresent.Text = "PA Present";
             this.toolTip1.SetToolTip(this.chkGeneralPAPresent, "Check if FlexRadio Systems 100W PA is installed.");
             this.chkGeneralPAPresent.CheckedChanged += new System.EventHandler(this.chkGeneralPAPresent_CheckedChanged);
-            // 
-            // chkGeneralXVTRPresent
-            // 
-            this.chkGeneralXVTRPresent.Image = null;
-            this.chkGeneralXVTRPresent.Location = new System.Drawing.Point(16, 136);
-            this.chkGeneralXVTRPresent.Name = "chkGeneralXVTRPresent";
-            this.chkGeneralXVTRPresent.Size = new System.Drawing.Size(104, 16);
-            this.chkGeneralXVTRPresent.TabIndex = 7;
-            this.chkGeneralXVTRPresent.Text = "XVTR Present";
-            this.toolTip1.SetToolTip(this.chkGeneralXVTRPresent, "Check if DEMI XVTR is installed.");
-            this.chkGeneralXVTRPresent.CheckedChanged += new System.EventHandler(this.chkXVTRPresent_CheckedChanged);
             // 
             // lblGeneralLPTDelay
             // 
@@ -4317,203 +4513,6 @@ namespace PowerSDR
             this.comboGeneralLPTAddr.LostFocus += new System.EventHandler(this.comboGeneralLPTAddr_LostFocus);
             this.comboGeneralLPTAddr.SelectedIndexChanged += new System.EventHandler(this.comboGeneralLPTAddr_SelectedIndexChanged);
             this.comboGeneralLPTAddr.KeyDown += new System.Windows.Forms.KeyEventHandler(this.comboGeneralLPTAddr_KeyDown);
-            // 
-            // comboGeneralXVTR
-            // 
-            this.comboGeneralXVTR.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboGeneralXVTR.DropDownWidth = 136;
-            this.comboGeneralXVTR.Items.AddRange(new object[] {
-            "Negative TR Logic",
-            "Positive TR Logic",
-            "No TR Logic"});
-            this.comboGeneralXVTR.Location = new System.Drawing.Point(16, 179);
-            this.comboGeneralXVTR.Name = "comboGeneralXVTR";
-            this.comboGeneralXVTR.Size = new System.Drawing.Size(136, 21);
-            this.comboGeneralXVTR.TabIndex = 5;
-            this.toolTip1.SetToolTip(this.comboGeneralXVTR, "XVTR TR Logic Selection -- Negative for XVTR FlexRadio Systems provides.  Positiv" +
-                    "e for 25W version.  No TR logic for other XVTRs.");
-            this.comboGeneralXVTR.Visible = false;
-            this.comboGeneralXVTR.SelectedIndexChanged += new System.EventHandler(this.comboGeneralXVTR_SelectedIndexChanged);
-            // 
-            // grpGeneralDDS
-            // 
-            this.grpGeneralDDS.Controls.Add(this.chkGenDDSExpert);
-            this.grpGeneralDDS.Controls.Add(this.udDDSCorrection);
-            this.grpGeneralDDS.Controls.Add(this.lblClockCorrection);
-            this.grpGeneralDDS.Controls.Add(this.udDDSIFFreq);
-            this.grpGeneralDDS.Controls.Add(this.lblIFFrequency);
-            this.grpGeneralDDS.Controls.Add(this.udDDSPLLMult);
-            this.grpGeneralDDS.Controls.Add(this.lblPLLMult);
-            this.grpGeneralDDS.Location = new System.Drawing.Point(328, 8);
-            this.grpGeneralDDS.Name = "grpGeneralDDS";
-            this.grpGeneralDDS.Size = new System.Drawing.Size(176, 136);
-            this.grpGeneralDDS.TabIndex = 4;
-            this.grpGeneralDDS.TabStop = false;
-            this.grpGeneralDDS.Text = "DDS";
-            // 
-            // grpFRSRegion
-            // 
-            this.grpFRSRegion.Controls.Add(this.comboFRSRegion);
-            this.grpFRSRegion.Location = new System.Drawing.Point(467, 152);
-            this.grpFRSRegion.Name = "grpFRSRegion";
-            this.grpFRSRegion.Size = new System.Drawing.Size(110, 55);
-            this.grpFRSRegion.TabIndex = 33;
-            this.grpFRSRegion.TabStop = false;
-            this.grpFRSRegion.Text = "Region";
-            // 
-            // comboFRSRegion
-            // 
-            this.comboFRSRegion.DisplayMember = "United States";
-            this.comboFRSRegion.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboFRSRegion.FormattingEnabled = true;
-            this.comboFRSRegion.Items.AddRange(new object[] {
-            "Australia",
-            "Germany",
-            "Italy",
-            "Japan",
-            "Spain",
-            "United Kingdom",
-            "United States",
-            "Extended"});
-            this.comboFRSRegion.Location = new System.Drawing.Point(3, 20);
-            this.comboFRSRegion.Name = "comboFRSRegion";
-            this.comboFRSRegion.Size = new System.Drawing.Size(100, 21);
-            this.comboFRSRegion.TabIndex = 0;
-            this.toolTip1.SetToolTip(this.comboFRSRegion, "Select Region for your location");
-            this.comboFRSRegion.SelectedIndexChanged += new System.EventHandler(this.comboFRSRegion_SelectedIndexChanged);
-            // 
-            // chkGenDDSExpert
-            // 
-            this.chkGenDDSExpert.Image = null;
-            this.chkGenDDSExpert.Location = new System.Drawing.Point(56, 104);
-            this.chkGenDDSExpert.Name = "chkGenDDSExpert";
-            this.chkGenDDSExpert.Size = new System.Drawing.Size(56, 24);
-            this.chkGenDDSExpert.TabIndex = 8;
-            this.chkGenDDSExpert.Text = "Expert";
-            this.chkGenDDSExpert.CheckedChanged += new System.EventHandler(this.chkGenDDSExpert_CheckedChanged);
-            // 
-            // udDDSCorrection
-            // 
-            this.udDDSCorrection.Increment = new decimal(new int[] {
-            10,
-            0,
-            0,
-            0});
-            this.udDDSCorrection.Location = new System.Drawing.Point(104, 24);
-            this.udDDSCorrection.Maximum = new decimal(new int[] {
-            1000000,
-            0,
-            0,
-            0});
-            this.udDDSCorrection.Minimum = new decimal(new int[] {
-            1000000,
-            0,
-            0,
-            -2147483648});
-            this.udDDSCorrection.Name = "udDDSCorrection";
-            this.udDDSCorrection.Size = new System.Drawing.Size(64, 20);
-            this.udDDSCorrection.TabIndex = 7;
-            this.toolTip1.SetToolTip(this.udDDSCorrection, "Correction for DDS frequency");
-            this.udDDSCorrection.Value = new decimal(new int[] {
-            0,
-            0,
-            0,
-            0});
-            this.udDDSCorrection.Visible = false;
-            this.udDDSCorrection.ValueChanged += new System.EventHandler(this.udDDSCorrection_ValueChanged);
-            this.udDDSCorrection.LostFocus += new System.EventHandler(this.udDDSCorrection_LostFocus);
-            // 
-            // lblClockCorrection
-            // 
-            this.lblClockCorrection.Image = null;
-            this.lblClockCorrection.Location = new System.Drawing.Point(16, 24);
-            this.lblClockCorrection.Name = "lblClockCorrection";
-            this.lblClockCorrection.Size = new System.Drawing.Size(72, 23);
-            this.lblClockCorrection.TabIndex = 6;
-            this.lblClockCorrection.Text = "Clock Offset:";
-            this.lblClockCorrection.Visible = false;
-            // 
-            // udDDSIFFreq
-            // 
-            this.udDDSIFFreq.Increment = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.udDDSIFFreq.Location = new System.Drawing.Point(112, 72);
-            this.udDDSIFFreq.Maximum = new decimal(new int[] {
-            20000,
-            0,
-            0,
-            0});
-            this.udDDSIFFreq.Minimum = new decimal(new int[] {
-            0,
-            0,
-            0,
-            0});
-            this.udDDSIFFreq.Name = "udDDSIFFreq";
-            this.udDDSIFFreq.Size = new System.Drawing.Size(56, 20);
-            this.udDDSIFFreq.TabIndex = 5;
-            this.toolTip1.SetToolTip(this.udDDSIFFreq, "Intermediate Frequency");
-            this.udDDSIFFreq.Value = new decimal(new int[] {
-            9000,
-            0,
-            0,
-            0});
-            this.udDDSIFFreq.Visible = false;
-            this.udDDSIFFreq.ValueChanged += new System.EventHandler(this.udDDSIFFreq_ValueChanged);
-            this.udDDSIFFreq.LostFocus += new System.EventHandler(this.udDDSIFFreq_LostFocus);
-            // 
-            // lblIFFrequency
-            // 
-            this.lblIFFrequency.Image = null;
-            this.lblIFFrequency.Location = new System.Drawing.Point(16, 72);
-            this.lblIFFrequency.Name = "lblIFFrequency";
-            this.lblIFFrequency.Size = new System.Drawing.Size(48, 23);
-            this.lblIFFrequency.TabIndex = 4;
-            this.lblIFFrequency.Text = "IF (Hz):";
-            this.lblIFFrequency.Visible = false;
-            // 
-            // udDDSPLLMult
-            // 
-            this.udDDSPLLMult.Increment = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.udDDSPLLMult.Location = new System.Drawing.Point(120, 48);
-            this.udDDSPLLMult.Maximum = new decimal(new int[] {
-            20,
-            0,
-            0,
-            0});
-            this.udDDSPLLMult.Minimum = new decimal(new int[] {
-            0,
-            0,
-            0,
-            0});
-            this.udDDSPLLMult.Name = "udDDSPLLMult";
-            this.udDDSPLLMult.Size = new System.Drawing.Size(48, 20);
-            this.udDDSPLLMult.TabIndex = 3;
-            this.toolTip1.SetToolTip(this.udDDSPLLMult, "Multiplier for external clock (1 if using internal clock)");
-            this.udDDSPLLMult.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.udDDSPLLMult.Visible = false;
-            this.udDDSPLLMult.ValueChanged += new System.EventHandler(this.udDDSPLLMult_ValueChanged);
-            this.udDDSPLLMult.LostFocus += new System.EventHandler(this.udDDSPLLMult_LostFocus);
-            // 
-            // lblPLLMult
-            // 
-            this.lblPLLMult.Image = null;
-            this.lblPLLMult.Location = new System.Drawing.Point(16, 48);
-            this.lblPLLMult.Name = "lblPLLMult";
-            this.lblPLLMult.Size = new System.Drawing.Size(80, 23);
-            this.lblPLLMult.TabIndex = 2;
-            this.lblPLLMult.Text = "PLL Multiplier:";
-            this.lblPLLMult.Visible = false;
             // 
             // grpGenCustomTitleText
             // 
@@ -4771,37 +4770,25 @@ namespace PowerSDR
             // 
             // grpGeneralOptions
             // 
-            this.grpGeneralOptions.Controls.Add(this.chkGenOptionsShowATUPopup);
             this.grpGeneralOptions.Controls.Add(this.udGenTX1Delay);
             this.grpGeneralOptions.Controls.Add(this.lblGenTX1Delay);
-            this.grpGeneralOptions.Controls.Add(this.chkGenTX1Delay);
             this.grpGeneralOptions.Controls.Add(this.chkSplitOff);
             this.grpGeneralOptions.Controls.Add(this.chkGenAllModeMicPTT);
-            this.grpGeneralOptions.Controls.Add(this.chkGeneralCustomFilter);
             this.grpGeneralOptions.Controls.Add(this.lblGeneralX2Delay);
             this.grpGeneralOptions.Controls.Add(this.udGeneralX2Delay);
             this.grpGeneralOptions.Controls.Add(this.chkGeneralEnableX2);
             this.grpGeneralOptions.Controls.Add(this.chkGeneralSoftwareGainCorr);
             this.grpGeneralOptions.Controls.Add(this.chkGeneralDisablePTT);
             this.grpGeneralOptions.Controls.Add(this.chkGeneralSpurRed);
+            this.grpGeneralOptions.Controls.Add(this.chkGenTX1Delay);
+            this.grpGeneralOptions.Controls.Add(this.chkGeneralCustomFilter);
+            this.grpGeneralOptions.Controls.Add(this.chkGenOptionsShowATUPopup);
             this.grpGeneralOptions.Location = new System.Drawing.Point(8, 8);
             this.grpGeneralOptions.Name = "grpGeneralOptions";
             this.grpGeneralOptions.Size = new System.Drawing.Size(248, 144);
             this.grpGeneralOptions.TabIndex = 6;
             this.grpGeneralOptions.TabStop = false;
             this.grpGeneralOptions.Text = "Options";
-            // 
-            // chkGenOptionsShowATUPopup
-            // 
-            this.chkGenOptionsShowATUPopup.Image = null;
-            this.chkGenOptionsShowATUPopup.Location = new System.Drawing.Point(128, 82);
-            this.chkGenOptionsShowATUPopup.Name = "chkGenOptionsShowATUPopup";
-            this.chkGenOptionsShowATUPopup.Size = new System.Drawing.Size(112, 28);
-            this.chkGenOptionsShowATUPopup.TabIndex = 16;
-            this.chkGenOptionsShowATUPopup.Text = "Show ATU Popup";
-            this.toolTip1.SetToolTip(this.chkGenOptionsShowATUPopup, "Check this box to receive feedback popups when running the FLEX-3000 ATU");
-            this.chkGenOptionsShowATUPopup.Visible = false;
-            this.chkGenOptionsShowATUPopup.CheckedChanged += new System.EventHandler(this.chkGenOptionsShowATUPopup_CheckedChanged);
             // 
             // udGenTX1Delay
             // 
@@ -4845,21 +4832,6 @@ namespace PowerSDR
             this.lblGenTX1Delay.Text = "TX Out Delay:";
             this.lblGenTX1Delay.Visible = false;
             // 
-            // chkGenTX1Delay
-            // 
-            this.chkGenTX1Delay.Checked = true;
-            this.chkGenTX1Delay.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkGenTX1Delay.Image = null;
-            this.chkGenTX1Delay.Location = new System.Drawing.Point(126, 20);
-            this.chkGenTX1Delay.Name = "chkGenTX1Delay";
-            this.chkGenTX1Delay.Size = new System.Drawing.Size(96, 32);
-            this.chkGenTX1Delay.TabIndex = 13;
-            this.chkGenTX1Delay.Text = "Enable TX Out Delay";
-            this.toolTip1.SetToolTip(this.chkGenTX1Delay, "Check this box to delay after switching TX Out (before switch TR) with the value " +
-                    "set below.");
-            this.chkGenTX1Delay.Visible = false;
-            this.chkGenTX1Delay.CheckedChanged += new System.EventHandler(this.chkGenTX1Delay_CheckedChanged);
-            // 
             // chkSplitOff
             // 
             this.chkSplitOff.Image = null;
@@ -4883,18 +4855,6 @@ namespace PowerSDR
             this.chkGenAllModeMicPTT.Text = "All Mode Mic PTT";
             this.toolTip1.SetToolTip(this.chkGenAllModeMicPTT, "If checked, the Mic PTT is no longer limited to just voice modes.");
             this.chkGenAllModeMicPTT.CheckedChanged += new System.EventHandler(this.chkGenAllModeMicPTT_CheckedChanged);
-            // 
-            // chkGeneralCustomFilter
-            // 
-            this.chkGeneralCustomFilter.Image = null;
-            this.chkGeneralCustomFilter.Location = new System.Drawing.Point(128, 80);
-            this.chkGeneralCustomFilter.Name = "chkGeneralCustomFilter";
-            this.chkGeneralCustomFilter.Size = new System.Drawing.Size(104, 26);
-            this.chkGeneralCustomFilter.TabIndex = 10;
-            this.chkGeneralCustomFilter.Text = "Enable 300kHz Filter";
-            this.toolTip1.SetToolTip(this.chkGeneralCustomFilter, "If the custom filter bank on the RFE is configured for 300kHz LPF, use this setti" +
-                    "ng.");
-            this.chkGeneralCustomFilter.CheckedChanged += new System.EventHandler(this.chkGeneralCustomFilter_CheckedChanged);
             // 
             // lblGeneralX2Delay
             // 
@@ -4979,6 +4939,45 @@ namespace PowerSDR
             this.chkGeneralSpurRed.Text = "Spur Reduction";
             this.toolTip1.SetToolTip(this.chkGeneralSpurRed, "Enable Spur Reduction/Avoidance Routine");
             this.chkGeneralSpurRed.CheckedChanged += new System.EventHandler(this.chkGeneralSpurRed_CheckedChanged);
+            // 
+            // chkGenTX1Delay
+            // 
+            this.chkGenTX1Delay.Checked = true;
+            this.chkGenTX1Delay.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkGenTX1Delay.Image = null;
+            this.chkGenTX1Delay.Location = new System.Drawing.Point(126, 20);
+            this.chkGenTX1Delay.Name = "chkGenTX1Delay";
+            this.chkGenTX1Delay.Size = new System.Drawing.Size(96, 32);
+            this.chkGenTX1Delay.TabIndex = 13;
+            this.chkGenTX1Delay.Text = "Enable TX Out Delay";
+            this.toolTip1.SetToolTip(this.chkGenTX1Delay, "Check this box to delay after switching TX Out (before switch TR) with the value " +
+                    "set below.");
+            this.chkGenTX1Delay.Visible = false;
+            this.chkGenTX1Delay.CheckedChanged += new System.EventHandler(this.chkGenTX1Delay_CheckedChanged);
+            // 
+            // chkGeneralCustomFilter
+            // 
+            this.chkGeneralCustomFilter.Image = null;
+            this.chkGeneralCustomFilter.Location = new System.Drawing.Point(128, 80);
+            this.chkGeneralCustomFilter.Name = "chkGeneralCustomFilter";
+            this.chkGeneralCustomFilter.Size = new System.Drawing.Size(104, 26);
+            this.chkGeneralCustomFilter.TabIndex = 10;
+            this.chkGeneralCustomFilter.Text = "Enable 300kHz Filter";
+            this.toolTip1.SetToolTip(this.chkGeneralCustomFilter, "If the custom filter bank on the RFE is configured for 300kHz LPF, use this setti" +
+                    "ng.");
+            this.chkGeneralCustomFilter.CheckedChanged += new System.EventHandler(this.chkGeneralCustomFilter_CheckedChanged);
+            // 
+            // chkGenOptionsShowATUPopup
+            // 
+            this.chkGenOptionsShowATUPopup.Image = null;
+            this.chkGenOptionsShowATUPopup.Location = new System.Drawing.Point(128, 82);
+            this.chkGenOptionsShowATUPopup.Name = "chkGenOptionsShowATUPopup";
+            this.chkGenOptionsShowATUPopup.Size = new System.Drawing.Size(112, 28);
+            this.chkGenOptionsShowATUPopup.TabIndex = 16;
+            this.chkGenOptionsShowATUPopup.Text = "Show ATU Popup";
+            this.toolTip1.SetToolTip(this.chkGenOptionsShowATUPopup, "Check this box to receive feedback popups when running the FLEX-3000 ATU");
+            this.chkGenOptionsShowATUPopup.Visible = false;
+            this.chkGenOptionsShowATUPopup.CheckedChanged += new System.EventHandler(this.chkGenOptionsShowATUPopup_CheckedChanged);
             // 
             // grpGeneralProcessPriority
             // 
@@ -20322,22 +20321,22 @@ namespace PowerSDR
             this.tpExtCtrl.ResumeLayout(false);
             this.tpCAT.ResumeLayout(false);
             this.tpTests.ResumeLayout(false);
+            this.grpFRSRegion.ResumeLayout(false);
             this.grpGeneralModel.ResumeLayout(false);
             this.grpHWSoftRock.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.udSoftRockCenterFreq)).EndInit();
             this.grpSI570.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.udFXtal)).EndInit();
+            this.grpGeneralDDS.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.udDDSCorrection)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.udDDSIFFreq)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.udDDSPLLMult)).EndInit();
             this.groupBoxHPSDRHW.ResumeLayout(false);
             this.groupBoxHPSDRHW.PerformLayout();
             this.grpGeneralHardwareFLEX5000.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.udF3KFanTempThresh)).EndInit();
             this.grpGeneralHardwareSDR1000.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.udGeneralLPTDelay)).EndInit();
-            this.grpGeneralDDS.ResumeLayout(false);
-            this.grpFRSRegion.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.udDDSCorrection)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.udDDSIFFreq)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.udDDSPLLMult)).EndInit();
             this.grpGenCustomTitleText.ResumeLayout(false);
             this.grpGenCustomTitleText.PerformLayout();
             this.grpOptMisc.ResumeLayout(false);
@@ -22976,7 +22975,7 @@ namespace PowerSDR
                 btnAudioVoltTest1.Visible = false;
                 // and enable the gain by band page 
                 grpFRSRegion.Visible = true;
-                comboFRSRegion.Text = "United States";
+                //comboFRSRegion.Text = "United States";
                 grpPAGainByBand.Visible = true;
                 grpGeneralHardwareSDR1000.Visible = false;
                 grpGeneralDDS.Visible = false;
@@ -22985,7 +22984,10 @@ namespace PowerSDR
                 chkGeneralRXOnly.Checked = false;
                 chkGeneralRXOnly.Enabled = true;
                 grpHWSoftRock.Visible = false;
-
+                chkGeneralCustomFilter.Visible = false;
+                grpGenAutoMute.Visible = false;
+                grpGenCalRXImage.Visible = false;
+                    
                 if (is_hermes)
                 {
                     groupBoxHPSDRHW.Visible = false;
@@ -22994,13 +22996,14 @@ namespace PowerSDR
                 {
                     groupBoxHPSDRHW.Visible = true;
                 }
+                chkGeneralSpurRed.Visible = false;
                 chkGeneralSpurRed.Checked = false;
                 chkGeneralSpurRed.Enabled = false;
                 chkAudioExpert.Checked = false;
                 chkAudioExpert.Visible = false;
                 console.DisableSR();
                 chkGeneralEnableX2.Checked = false;
-                chkGeneralEnableX2.Enabled = false;
+                chkGeneralEnableX2.Enabled = true;
 
                 // grpGeneralCalibration.Enabled = false; 
                 grpGenCalRXImage.Enabled = false;
@@ -23044,6 +23047,7 @@ namespace PowerSDR
                 grpPAGainByBand.Visible = chkGeneralPAPresent.Checked;
                 grpGeneralHardwareSDR1000.Visible = true;
                 grpGeneralDDS.Visible = true;
+                grpGenCalRXImage.Visible = true;
 
                 groupBoxHPSDRHW.Visible = false;
 
@@ -23060,6 +23064,8 @@ namespace PowerSDR
                 chkGeneralEnableX2.Checked = false;
                 chkGeneralEnableX2.Enabled = true;
 
+                chkGeneralCustomFilter.Visible = true;
+                grpGenAutoMute.Visible = true;
 
                 grpGeneralCalibration.Enabled = true;
                 grpGenCalRXImage.Enabled = true;
@@ -23078,6 +23084,12 @@ namespace PowerSDR
 
         public void AddHPSDRPages()
         {
+            if (tcGeneral.TabPages.Contains(tpRX2))
+            {
+                tcGeneral.TabPages.Remove(tpRX2);
+                tcGeneral.SelectedIndex = 0;
+            }
+
             if (!tcGeneral.TabPages.Contains(tpHPSDR))
             {
                 Common.TabControlInsert(tcGeneral, tpHPSDR, 1);
@@ -23148,6 +23160,18 @@ namespace PowerSDR
             {
                 tcGeneral.TabPages.Remove(tpAlexControl);
                 tcGeneral.SelectedIndex = 0;
+            }
+            if (!tcGeneral.TabPages.Contains(tpRX2))
+            {
+                Common.TabControlInsert(tcGeneral, tpRX2, 4);
+            }
+            else
+            {
+                if (tcGeneral.TabPages.IndexOf(tpRX2) != 4)
+                {
+                    tcGeneral.TabPages.Remove(tpRX2);
+                    Common.TabControlInsert(tcGeneral, tpRX2, 4);
+                }
             }
             console.MaxFreq = 65.0;
         }
