@@ -1739,111 +1739,357 @@ namespace PowerSDR
 				double actual_fgrid = ((double)(vfo_round+fgrid))/1000000;
 				int vgrid = (int)((double)(fgrid-vfo_delta-low)/(high-low)*W);
 
-				if(!show_freq_offset)
-				{
-					if(actual_fgrid == 1.8 || actual_fgrid == 2.0 || 
-						actual_fgrid == 3.5 ||	actual_fgrid == 4.0 || 
-						actual_fgrid == 7.0 || actual_fgrid == 7.3 ||
-						actual_fgrid == 10.1 || actual_fgrid == 10.15 || 
-						actual_fgrid == 14.0 || actual_fgrid == 14.35 || 
-						actual_fgrid == 18.068 || actual_fgrid == 18.168 ||
-						actual_fgrid == 21.0 || actual_fgrid == 21.45 ||
-						actual_fgrid == 24.89 || actual_fgrid == 24.99 || 
-						actual_fgrid == 21.0 || actual_fgrid == 21.45 ||
-						actual_fgrid == 28.0 || actual_fgrid == 29.7 || 
-						actual_fgrid == 50.0 || actual_fgrid == 54.0 ||
-						actual_fgrid == 144.0 || actual_fgrid == 148.0)
-					{
-						if(bottom) g.DrawLine(new Pen(band_edge_color), vgrid, H+top, vgrid, H+H);
-						else g.DrawLine(new Pen(band_edge_color), vgrid, top, vgrid, H);
+                if (!show_freq_offset)
+                {
 
-						label = actual_fgrid.ToString("f3"); 
-						if(actual_fgrid < 10) offsetL = (int)((label.Length+1)*4.1) - 14;
-						else if(actual_fgrid < 100.0) offsetL = (int)((label.Length+1)*4.1) - 11;
-						else offsetL = (int)((label.Length+1)*4.1) - 8;		
+                    switch (console.CurrentRegion)//w5wc
+                    {
+                        case FRSRegion.US:
+                            if (actual_fgrid == 1.8 || actual_fgrid == 2.0 ||
+                                actual_fgrid == 3.5 || actual_fgrid == 4.0 ||
+                                actual_fgrid == 7.0 || actual_fgrid == 7.3 ||
+                                actual_fgrid == 10.1 || actual_fgrid == 10.15 ||
+                                actual_fgrid == 14.0 || actual_fgrid == 14.35 ||
+                                actual_fgrid == 18.068 || actual_fgrid == 18.168 ||
+                                actual_fgrid == 21.0 || actual_fgrid == 21.45 ||
+                                actual_fgrid == 24.89 || actual_fgrid == 24.99 ||
+                                actual_fgrid == 28.0 || actual_fgrid == 29.7 ||
+                                actual_fgrid == 50.0 || actual_fgrid == 54.0)
+                            {
+                                if (bottom) g.DrawLine(new Pen(band_edge_color), vgrid, H + top, vgrid, H + H);
+                                else g.DrawLine(new Pen(band_edge_color), vgrid, top, vgrid, H);
 
-						if(bottom) g.DrawString(label, font, new SolidBrush(band_edge_color), vgrid-offsetL, H+(float)Math.Floor(H*.01));
-						else g.DrawString(label, font, new SolidBrush(band_edge_color), vgrid-offsetL, (float)Math.Floor(H*.01));
+                                label = actual_fgrid.ToString("f3");
+                                if (actual_fgrid < 10) offsetL = (int)((label.Length + 1) * 4.1) - 14;
+                                else if (actual_fgrid < 100.0) offsetL = (int)((label.Length + 1) * 4.1) - 11;
+                                else offsetL = (int)((label.Length + 1) * 4.1) - 8;
 
-                        int fgrid_2 = ((i + 1) * freq_step_size) + (int)((low / freq_step_size) * freq_step_size);
-                        int x_2 = (int)(((float)(fgrid_2 - vfo_delta - low) / width * W));
-                        float scale = (float)(x_2 - vgrid) / inbetweenies;
+                                if (bottom) g.DrawString(label, font, new SolidBrush(band_edge_color), vgrid - offsetL, H + (float)Math.Floor(H * .01));
+                                else g.DrawString(label, font, new SolidBrush(band_edge_color), vgrid - offsetL, (float)Math.Floor(H * .01));
 
-                        for (int j = 1; j < inbetweenies; j++)
-                        {
-                            float x3 = (float)vgrid + (j * scale);
-                            if (bottom) g.DrawLine(grid_pen_dark, x3, H + top, x3, H + H);
-                            else g.DrawLine(grid_pen_dark, x3, top, x3, H);
-                        }
-					}
-					else
-					{
-						if(bottom) g.DrawLine(grid_pen, vgrid, H+top, vgrid, H+H);
-						else g.DrawLine(grid_pen, vgrid, top, vgrid, H);			//wa6ahl
+                                int fgrid_2 = ((i + 1) * freq_step_size) + (int)((low / freq_step_size) * freq_step_size);
+                                int x_2 = (int)(((float)(fgrid_2 - vfo_delta - low) / width * W));
+                                float scale = (float)(x_2 - vgrid) / inbetweenies;
 
-                        int fgrid_2 = ((i + 1) * freq_step_size) + (int)((low / freq_step_size) * freq_step_size);
-                        int x_2 = (int)(((float)(fgrid_2 - vfo_delta - low) / width * W));
-                        float scale = (float)(x_2 - vgrid) / inbetweenies;
+                                for (int j = 1; j < inbetweenies; j++)
+                                {
+                                    float x3 = (float)vgrid + (j * scale);
+                                    if (bottom) g.DrawLine(grid_pen_dark, x3, H + top, x3, H + H);
+                                    else g.DrawLine(grid_pen_dark, x3, top, x3, H);
+                                }
+                                break;
+                            }
+                            else
+                                goto default;
 
-                        for (int j = 1; j < inbetweenies; j++)
-                        {
-                            float x3 = (float)vgrid + (j * scale);
-                            if (bottom) g.DrawLine(grid_pen_dark, x3, H+top, x3, H+H);
-                            else g.DrawLine(grid_pen_dark, x3, top, x3, H);
-                        }
+                        case FRSRegion.Spain:
+                            if (actual_fgrid == 1.81 || actual_fgrid == 2.0 ||
+                                actual_fgrid == 3.5 || actual_fgrid == 3.8 ||
+                                actual_fgrid == 7.0 || actual_fgrid == 7.2 ||
+                                actual_fgrid == 10.1 || actual_fgrid == 10.15 ||
+                                actual_fgrid == 14.0 || actual_fgrid == 14.35 ||
+                                actual_fgrid == 18.068 || actual_fgrid == 18.168 ||
+                                actual_fgrid == 21.0 || actual_fgrid == 21.45 ||
+                                actual_fgrid == 24.89 || actual_fgrid == 24.99 ||
+                                actual_fgrid == 28.0 || actual_fgrid == 29.7 ||
+                                actual_fgrid == 50.0 || actual_fgrid == 54.0)
+                            {
+                                if (bottom) g.DrawLine(new Pen(band_edge_color), vgrid, H + top, vgrid, H + H);
+                                else g.DrawLine(new Pen(band_edge_color), vgrid, top, vgrid, H);
 
-						if ( ((double)((int)(actual_fgrid*1000))) == actual_fgrid * 1000) 
-						{
-							label = actual_fgrid.ToString("f3"); //wa6ahl
-							
-							//if(actual_fgrid > 1300.0)
-							//	label = label.Substring(label.Length-4);
+                                label = actual_fgrid.ToString("f3");
+                                if (actual_fgrid < 10) offsetL = (int)((label.Length + 1) * 4.1) - 14;
+                                else if (actual_fgrid < 100.0) offsetL = (int)((label.Length + 1) * 4.1) - 11;
+                                else offsetL = (int)((label.Length + 1) * 4.1) - 8;
 
-							if(actual_fgrid < 10) offsetL = (int)((label.Length+1)*4.1) - 14;
-							else if(actual_fgrid < 100.0) offsetL = (int)((label.Length+1)*4.1) - 11;
-							else offsetL = (int)((label.Length+1)*4.1) - 8;							
-						}
-						else 
-						{
-							string temp_string;
-							int jper; 
-							label = actual_fgrid.ToString("f4"); 
-							temp_string = label;
-							jper = label.IndexOf('.')+4;
-							label = label.Insert(jper," ");
+                                if (bottom) g.DrawString(label, font, new SolidBrush(band_edge_color), vgrid - offsetL, H + (float)Math.Floor(H * .01));
+                                else g.DrawString(label, font, new SolidBrush(band_edge_color), vgrid - offsetL, (float)Math.Floor(H * .01));
 
-							//if(actual_fgrid > 1300.0)
-							//	label = label.Substring(label.Length-4);
+                                int fgrid_2 = ((i + 1) * freq_step_size) + (int)((low / freq_step_size) * freq_step_size);
+                                int x_2 = (int)(((float)(fgrid_2 - vfo_delta - low) / width * W));
+                                float scale = (float)(x_2 - vgrid) / inbetweenies;
 
-							if(actual_fgrid < 10) offsetL = (int)((label.Length)*4.1) - 14;
-							else if(actual_fgrid < 100.0) offsetL = (int)((label.Length)*4.1) - 11;
-							else offsetL = (int)((label.Length)*4.1) - 8;		
-						}
+                                for (int j = 1; j < inbetweenies; j++)
+                                {
+                                    float x3 = (float)vgrid + (j * scale);
+                                    if (bottom) g.DrawLine(grid_pen_dark, x3, H + top, x3, H + H);
+                                    else g.DrawLine(grid_pen_dark, x3, top, x3, H);
+                                }
+                                break;
+                            }
+                            else
+                                goto default;
 
-						if(bottom) g.DrawString(label, font, grid_text_brush, vgrid-offsetL, H+(float)Math.Floor(H*.01));
-						else g.DrawString(label, font, grid_text_brush, vgrid-offsetL, (float)Math.Floor(H*.01));
-					}
-				}
-				else
-				{
-					vgrid = Convert.ToInt32((double)-(fgrid-low)/(low-high)*W);	//wa6ahl
-					if(bottom) g.DrawLine(grid_pen, vgrid, H+top, vgrid, H+H);
-					else g.DrawLine(grid_pen, vgrid, top, vgrid, H);			//wa6ahl
+                        case FRSRegion.Germany:
+                            if (actual_fgrid == 1.81 || actual_fgrid == 2.0 ||
+                                actual_fgrid == 3.5 || actual_fgrid == 3.8 ||
+                                actual_fgrid == 7.0 || actual_fgrid == 7.2 ||
+                                actual_fgrid == 10.1 || actual_fgrid == 10.15 ||
+                                actual_fgrid == 14.0 || actual_fgrid == 14.35 ||
+                                actual_fgrid == 18.068 || actual_fgrid == 18.168 ||
+                                actual_fgrid == 21.0 || actual_fgrid == 21.45 ||
+                                actual_fgrid == 24.89 || actual_fgrid == 24.99 ||
+                                actual_fgrid == 28.0 || actual_fgrid == 29.7 ||
+                                actual_fgrid == 50.08 || actual_fgrid == 51.0)
+                            {
+                                if (bottom) g.DrawLine(new Pen(band_edge_color), vgrid, H + top, vgrid, H + H);
+                                else g.DrawLine(new Pen(band_edge_color), vgrid, top, vgrid, H);
 
-					double new_fgrid = (vfoa_hz + fgrid) / 1000000;
+                                label = actual_fgrid.ToString("f3");
+                                if (actual_fgrid < 10) offsetL = (int)((label.Length + 1) * 4.1) - 14;
+                                else if (actual_fgrid < 100.0) offsetL = (int)((label.Length + 1) * 4.1) - 11;
+                                else offsetL = (int)((label.Length + 1) * 4.1) - 8;
 
-					label = fgrid.ToString(); 
-					offsetL = (int)((label.Length+1)*4.1);
-					offsetR = (int)(label.Length*4.1);
-					if ((vgrid-offsetL >=0) && (vgrid+offsetR < W) && (fgrid != 0))
-					{
-						if(bottom) g.DrawString(label, font, grid_text_brush, vgrid-offsetL, H+(float)Math.Floor(H*.01));
-						else g.DrawString(label, font, grid_text_brush, vgrid-offsetL, (float)Math.Floor(H*.01));
-					}
-				}
-			}
+                                if (bottom) g.DrawString(label, font, new SolidBrush(band_edge_color), vgrid - offsetL, H + (float)Math.Floor(H * .01));
+                                else g.DrawString(label, font, new SolidBrush(band_edge_color), vgrid - offsetL, (float)Math.Floor(H * .01));
 
-			int[] band_edge_list = { 18068000, 18168000, 1800000, 2000000, 3500000, 4000000,
+                                int fgrid_2 = ((i + 1) * freq_step_size) + (int)((low / freq_step_size) * freq_step_size);
+                                int x_2 = (int)(((float)(fgrid_2 - vfo_delta - low) / width * W));
+                                float scale = (float)(x_2 - vgrid) / inbetweenies;
+
+                                for (int j = 1; j < inbetweenies; j++)
+                                {
+                                    float x3 = (float)vgrid + (j * scale);
+                                    if (bottom) g.DrawLine(grid_pen_dark, x3, H + top, x3, H + H);
+                                    else g.DrawLine(grid_pen_dark, x3, top, x3, H);
+                                }
+                                break;
+                            }
+                            else
+                                goto default;
+
+                        case FRSRegion.UK:
+                            if (actual_fgrid == 1.8 || actual_fgrid == 2.0 ||
+                                actual_fgrid == 3.5 || actual_fgrid == 4.0 ||
+                                actual_fgrid == 7.0 || actual_fgrid == 7.3 ||
+                                actual_fgrid == 10.1 || actual_fgrid == 10.15 ||
+                                actual_fgrid == 14.0 || actual_fgrid == 14.35 ||
+                                actual_fgrid == 18.068 || actual_fgrid == 18.168 ||
+                                actual_fgrid == 21.0 || actual_fgrid == 21.45 ||
+                                actual_fgrid == 24.89 || actual_fgrid == 24.99 ||
+                                actual_fgrid == 28.0 || actual_fgrid == 29.7 ||
+                                actual_fgrid == 50.0 || actual_fgrid == 54.0)
+                            {
+                                if (bottom) g.DrawLine(new Pen(band_edge_color), vgrid, H + top, vgrid, H + H);
+                                else g.DrawLine(new Pen(band_edge_color), vgrid, top, vgrid, H);
+
+                                label = actual_fgrid.ToString("f3");
+                                if (actual_fgrid < 10) offsetL = (int)((label.Length + 1) * 4.1) - 14;
+                                else if (actual_fgrid < 100.0) offsetL = (int)((label.Length + 1) * 4.1) - 11;
+                                else offsetL = (int)((label.Length + 1) * 4.1) - 8;
+
+                                if (bottom) g.DrawString(label, font, new SolidBrush(band_edge_color), vgrid - offsetL, H + (float)Math.Floor(H * .01));
+                                else g.DrawString(label, font, new SolidBrush(band_edge_color), vgrid - offsetL, (float)Math.Floor(H * .01));
+
+                                int fgrid_2 = ((i + 1) * freq_step_size) + (int)((low / freq_step_size) * freq_step_size);
+                                int x_2 = (int)(((float)(fgrid_2 - vfo_delta - low) / width * W));
+                                float scale = (float)(x_2 - vgrid) / inbetweenies;
+
+                                for (int j = 1; j < inbetweenies; j++)
+                                {
+                                    float x3 = (float)vgrid + (j * scale);
+                                    if (bottom) g.DrawLine(grid_pen_dark, x3, H + top, x3, H + H);
+                                    else g.DrawLine(grid_pen_dark, x3, top, x3, H);
+                                }
+                                break;
+                            }
+                            else
+                                goto default;
+
+                        case FRSRegion.Italy_Plus:
+                            if (actual_fgrid == 1.81 || actual_fgrid == 2.0 ||
+                                actual_fgrid == 3.5 || actual_fgrid == 3.8 ||
+                                actual_fgrid == 6.975 || actual_fgrid == 7.2 ||
+                                actual_fgrid == 10.1 || actual_fgrid == 10.15 ||
+                                actual_fgrid == 14.0 || actual_fgrid == 14.35 ||
+                                actual_fgrid == 18.068 || actual_fgrid == 18.168 ||
+                                actual_fgrid == 21.0 || actual_fgrid == 21.45 ||
+                                actual_fgrid == 24.89 || actual_fgrid == 24.99 ||
+                                actual_fgrid == 28.0 || actual_fgrid == 29.7 ||
+                                actual_fgrid == 50.08 || actual_fgrid == 51.0)
+                            {
+                                if (bottom) g.DrawLine(new Pen(band_edge_color), vgrid, H + top, vgrid, H + H);
+                                else g.DrawLine(new Pen(band_edge_color), vgrid, top, vgrid, H);
+
+                                label = actual_fgrid.ToString("f3");
+                                if (actual_fgrid < 10) offsetL = (int)((label.Length + 1) * 4.1) - 14;
+                                else if (actual_fgrid < 100.0) offsetL = (int)((label.Length + 1) * 4.1) - 11;
+                                else offsetL = (int)((label.Length + 1) * 4.1) - 8;
+
+                                if (bottom) g.DrawString(label, font, new SolidBrush(band_edge_color), vgrid - offsetL, H + (float)Math.Floor(H * .01));
+                                else g.DrawString(label, font, new SolidBrush(band_edge_color), vgrid - offsetL, (float)Math.Floor(H * .01));
+
+                                int fgrid_2 = ((i + 1) * freq_step_size) + (int)((low / freq_step_size) * freq_step_size);
+                                int x_2 = (int)(((float)(fgrid_2 - vfo_delta - low) / width * W));
+                                float scale = (float)(x_2 - vgrid) / inbetweenies;
+
+                                for (int j = 1; j < inbetweenies; j++)
+                                {
+                                    float x3 = (float)vgrid + (j * scale);
+                                    if (bottom) g.DrawLine(grid_pen_dark, x3, H + top, x3, H + H);
+                                    else g.DrawLine(grid_pen_dark, x3, top, x3, H);
+                                }
+                                break;
+                            }
+                            else
+                                goto default;
+
+                        case FRSRegion.Japan:
+                            if (actual_fgrid == .137 || actual_fgrid == .138 ||
+                            actual_fgrid == 1.81 || actual_fgrid == 1.825 ||
+                            actual_fgrid == 1.907 || actual_fgrid == 1.913 ||
+                            actual_fgrid == 3.5 || actual_fgrid == 3.575 ||
+                            actual_fgrid == 3.599 || actual_fgrid == 3.612 ||
+                            actual_fgrid == 3.68 || actual_fgrid == 3.687 ||
+                            actual_fgrid == 3.702 || actual_fgrid == 3.716 ||
+                            actual_fgrid == 3.745 || actual_fgrid == 3.77 ||
+                            actual_fgrid == 3.791 || actual_fgrid == 3.805 ||
+                            actual_fgrid == 7.0 || actual_fgrid == 7.2 ||
+                            actual_fgrid == 10.1 || actual_fgrid == 10.15 ||
+                            actual_fgrid == 14.0 || actual_fgrid == 14.35 ||
+                            actual_fgrid == 18.068 || actual_fgrid == 18.168 ||
+                            actual_fgrid == 21.0 || actual_fgrid == 21.45 ||
+                            actual_fgrid == 24.89 || actual_fgrid == 24.99 ||
+                            actual_fgrid == 28.0 || actual_fgrid == 29.7 ||
+                            actual_fgrid == 50.0 || actual_fgrid == 54.0)
+                            {
+                                if (bottom) g.DrawLine(new Pen(band_edge_color), vgrid, H + top, vgrid, H + H);
+                                else g.DrawLine(new Pen(band_edge_color), vgrid, top, vgrid, H);
+
+                                label = actual_fgrid.ToString("f3");
+                                if (actual_fgrid < 10) offsetL = (int)((label.Length + 1) * 4.1) - 14;
+                                else if (actual_fgrid < 100.0) offsetL = (int)((label.Length + 1) * 4.1) - 11;
+                                else offsetL = (int)((label.Length + 1) * 4.1) - 8;
+
+                                if (bottom) g.DrawString(label, font, new SolidBrush(band_edge_color), vgrid - offsetL, H + (float)Math.Floor(H * .01));
+                                else g.DrawString(label, font, new SolidBrush(band_edge_color), vgrid - offsetL, (float)Math.Floor(H * .01));
+
+                                int fgrid_2 = ((i + 1) * freq_step_size) + (int)((low / freq_step_size) * freq_step_size);
+                                int x_2 = (int)(((float)(fgrid_2 - vfo_delta - low) / width * W));
+                                float scale = (float)(x_2 - vgrid) / inbetweenies;
+
+                                for (int j = 1; j < inbetweenies; j++)
+                                {
+                                    float x3 = (float)vgrid + (j * scale);
+                                    if (bottom) g.DrawLine(grid_pen_dark, x3, H + top, x3, H + H);
+                                    else g.DrawLine(grid_pen_dark, x3, top, x3, H);
+                                }
+                                break;
+                            }
+                            else
+                                goto default;
+
+                        case FRSRegion.Australia:
+                            if (actual_fgrid == 1.8 || actual_fgrid == 1.875 ||
+                                actual_fgrid == 3.5 || actual_fgrid == 3.7 ||
+                                actual_fgrid == 3.776 || actual_fgrid == 3.8 ||
+                                actual_fgrid == 7.0 || actual_fgrid == 7.3 ||
+                                actual_fgrid == 10.1 || actual_fgrid == 10.15 ||
+                                actual_fgrid == 14.0 || actual_fgrid == 14.35 ||
+                                actual_fgrid == 18.068 || actual_fgrid == 18.168 ||
+                                actual_fgrid == 21.0 || actual_fgrid == 21.45 ||
+                                actual_fgrid == 24.89 || actual_fgrid == 24.99 ||
+                                actual_fgrid == 28.0 || actual_fgrid == 29.7 ||
+                                actual_fgrid == 50.08 || actual_fgrid == 54.0)
+                            {
+                                if (bottom) g.DrawLine(new Pen(band_edge_color), vgrid, H + top, vgrid, H + H);
+                                else g.DrawLine(new Pen(band_edge_color), vgrid, top, vgrid, H);
+
+                                label = actual_fgrid.ToString("f3");
+                                if (actual_fgrid < 10) offsetL = (int)((label.Length + 1) * 4.1) - 14;
+                                else if (actual_fgrid < 100.0) offsetL = (int)((label.Length + 1) * 4.1) - 11;
+                                else offsetL = (int)((label.Length + 1) * 4.1) - 8;
+
+                                if (bottom) g.DrawString(label, font, new SolidBrush(band_edge_color), vgrid - offsetL, H + (float)Math.Floor(H * .01));
+                                else g.DrawString(label, font, new SolidBrush(band_edge_color), vgrid - offsetL, (float)Math.Floor(H * .01));
+
+                                int fgrid_2 = ((i + 1) * freq_step_size) + (int)((low / freq_step_size) * freq_step_size);
+                                int x_2 = (int)(((float)(fgrid_2 - vfo_delta - low) / width * W));
+                                float scale = (float)(x_2 - vgrid) / inbetweenies;
+
+                                for (int j = 1; j < inbetweenies; j++)
+                                {
+                                    float x3 = (float)vgrid + (j * scale);
+                                    if (bottom) g.DrawLine(grid_pen_dark, x3, H + top, x3, H + H);
+                                    else g.DrawLine(grid_pen_dark, x3, top, x3, H);
+                                }
+                                break;
+                            }
+                            else 
+                               goto default;
+                         default:
+                             {
+                                if (bottom) g.DrawLine(grid_pen, vgrid, H + top, vgrid, H + H);
+                                else g.DrawLine(grid_pen, vgrid, top, vgrid, H);			//wa6ahl
+
+                                int fgrid_2 = ((i + 1) * freq_step_size) + (int)((low / freq_step_size) * freq_step_size);
+                                int x_2 = (int)(((float)(fgrid_2 - vfo_delta - low) / width * W));
+                                float scale = (float)(x_2 - vgrid) / inbetweenies;
+
+                                for (int j = 1; j < inbetweenies; j++)
+                                {
+                                    float x3 = (float)vgrid + (j * scale);
+                                    if (bottom) g.DrawLine(grid_pen_dark, x3, H + top, x3, H + H);
+                                    else g.DrawLine(grid_pen_dark, x3, top, x3, H);
+                                }
+
+                                if (((double)((int)(actual_fgrid * 1000))) == actual_fgrid * 1000)
+                                {
+                                    label = actual_fgrid.ToString("f3"); //wa6ahl
+
+                                    //if(actual_fgrid > 1300.0)
+                                    //	label = label.Substring(label.Length-4);
+
+                                    if (actual_fgrid < 10) offsetL = (int)((label.Length + 1) * 4.1) - 14;
+                                    else if (actual_fgrid < 100.0) offsetL = (int)((label.Length + 1) * 4.1) - 11;
+                                    else offsetL = (int)((label.Length + 1) * 4.1) - 8;
+                                }
+                                else
+                                {
+                                    string temp_string;
+                                    int jper;
+                                    label = actual_fgrid.ToString("f4");
+                                    temp_string = label;
+                                    jper = label.IndexOf('.') + 4;
+                                    label = label.Insert(jper, " ");
+
+                                    //if(actual_fgrid > 1300.0)
+                                    //	label = label.Substring(label.Length-4);
+
+                                    if (actual_fgrid < 10) offsetL = (int)((label.Length) * 4.1) - 14;
+                                    else if (actual_fgrid < 100.0) offsetL = (int)((label.Length) * 4.1) - 11;
+                                    else offsetL = (int)((label.Length) * 4.1) - 8;
+                                }
+
+                                if (bottom) g.DrawString(label, font, grid_text_brush, vgrid - offsetL, H + (float)Math.Floor(H * .01));
+                                else g.DrawString(label, font, grid_text_brush, vgrid - offsetL, (float)Math.Floor(H * .01));
+                            
+                                 break;
+                             } 
+                    }
+                }
+                else
+                {
+                    vgrid = Convert.ToInt32((double)-(fgrid - low) / (low - high) * W);	//wa6ahl
+                    if (bottom) g.DrawLine(grid_pen, vgrid, H + top, vgrid, H + H);
+                    else g.DrawLine(grid_pen, vgrid, top, vgrid, H);			//wa6ahl
+
+                    double new_fgrid = (vfoa_hz + fgrid) / 1000000;
+
+                    label = fgrid.ToString();
+                    offsetL = (int)((label.Length + 1) * 4.1);
+                    offsetR = (int)(label.Length * 4.1);
+                    if ((vgrid - offsetL >= 0) && (vgrid + offsetR < W) && (fgrid != 0))
+                    {
+                        if (bottom) g.DrawString(label, font, grid_text_brush, vgrid - offsetL, H + (float)Math.Floor(H * .01));
+                        else g.DrawString(label, font, grid_text_brush, vgrid - offsetL, (float)Math.Floor(H * .01));
+                    }
+                }
+			
+           }
+
+
+		/*	int[] band_edge_list = { 1800000, 2000000, 3500000, 4000000,
 				7000000, 7300000, 10100000, 10150000, 14000000, 14350000, 21000000, 21450000,
 				24890000, 24990000, 28000000, 29700000, 50000000, 54000000, 144000000, 148000000 };
 			
@@ -1857,7 +2103,7 @@ namespace PowerSDR
 					else g.DrawLine(new Pen(band_edge_color), temp_vline, top, temp_vline, H);//wa6ahl
 				}
 				//if(i == 1 && !show_freq_offset) break;
-			}
+			}*/
 
 			// Draw horizontal lines
 			for(int i=1; i<h_steps; i++)
@@ -2120,131 +2366,316 @@ namespace PowerSDR
 
 				if(!show_freq_offset)
 				{
-					if(actual_fgrid == 1.8 || actual_fgrid == 2.0 || 
-						actual_fgrid == 3.5 ||	actual_fgrid == 4.0 || 
-						actual_fgrid == 7.0 || actual_fgrid == 7.3 ||
-						actual_fgrid == 10.1 || actual_fgrid == 10.15 || 
-						actual_fgrid == 14.0 || actual_fgrid == 14.35 || 
-						actual_fgrid == 18.068 || actual_fgrid == 18.168 ||
-						actual_fgrid == 21.0 || actual_fgrid == 21.45 ||
-						actual_fgrid == 24.89 || actual_fgrid == 24.99 || 
-						actual_fgrid == 21.0 || actual_fgrid == 21.45 ||
-						actual_fgrid == 28.0 || actual_fgrid == 29.7 || 
-						actual_fgrid == 50.0 || actual_fgrid == 54.0 ||
-						actual_fgrid == 144.0 || actual_fgrid == 148.0)
-					{
-						if(bottom) g.DrawLine(new Pen(band_edge_color), vgrid, H+top, vgrid, H+H);
-						else g.DrawLine(new Pen(band_edge_color), vgrid, top, vgrid, H);
+                    switch (console.CurrentRegion)
+                    {
+                       case FRSRegion.US:
+                        if (actual_fgrid == 1.8 || actual_fgrid == 2.0 ||
+                        actual_fgrid == 3.5 || actual_fgrid == 4.0 ||
+                        actual_fgrid == 7.0 || actual_fgrid == 7.3 ||
+                        actual_fgrid == 10.1 || actual_fgrid == 10.15 ||
+                        actual_fgrid == 14.0 || actual_fgrid == 14.35 ||
+                        actual_fgrid == 18.068 || actual_fgrid == 18.168 ||
+                        actual_fgrid == 21.0 || actual_fgrid == 21.45 ||
+                        actual_fgrid == 24.89 || actual_fgrid == 24.99 ||
+                        actual_fgrid == 28.0 || actual_fgrid == 29.7 ||
+                        actual_fgrid == 50.0 || actual_fgrid == 54.0 ||
+                        actual_fgrid == 144.0 || actual_fgrid == 148.0)
+                    {
+                        if (bottom) g.DrawLine(new Pen(band_edge_color), vgrid, H + top, vgrid, H + H);
+                        else g.DrawLine(new Pen(band_edge_color), vgrid, top, vgrid, H);
 
-						label = actual_fgrid.ToString("f3"); 
-						if(actual_fgrid < 10) offsetL = (int)((label.Length+1)*4.1) - 14;
-						else if(actual_fgrid < 100.0) offsetL = (int)((label.Length+1)*4.1) - 11;
-						else offsetL = (int)((label.Length+1)*4.1) - 8;		
+                        label = actual_fgrid.ToString("f3");
+                        if (actual_fgrid < 10) offsetL = (int)((label.Length + 1) * 4.1) - 14;
+                        else if (actual_fgrid < 100.0) offsetL = (int)((label.Length + 1) * 4.1) - 11;
+                        else offsetL = (int)((label.Length + 1) * 4.1) - 8;
 
-						if(bottom) g.DrawString(label, font, new SolidBrush(band_edge_color), vgrid-offsetL, H+(float)Math.Floor(H*.01));
-						else g.DrawString(label, font, new SolidBrush(band_edge_color), vgrid-offsetL, (float)Math.Floor(H*.01));
-					}
-					else
-					{
+                        if (bottom) g.DrawString(label, font, new SolidBrush(band_edge_color), vgrid - offsetL, H + (float)Math.Floor(H * .01));
+                        else g.DrawString(label, font, new SolidBrush(band_edge_color), vgrid - offsetL, (float)Math.Floor(H * .01));
+  
+                            break;
+                    }
+                    else
+                        goto default;
 
-						if (freq_step_size >= 2000)
-						{
-							double t100;
-							double t1000;
-							t100 = (actual_fgrid * 100);
-							t1000 = (actual_fgrid * 1000);
+                       case FRSRegion.Spain:
+                        if (actual_fgrid == 1.81 || actual_fgrid == 2.0 ||
+                            actual_fgrid == 3.5 || actual_fgrid == 3.8 ||
+                            actual_fgrid == 7.0 || actual_fgrid == 7.2 ||
+                            actual_fgrid == 10.1 || actual_fgrid == 10.15 ||
+                            actual_fgrid == 14.0 || actual_fgrid == 14.35 ||
+                            actual_fgrid == 18.068 || actual_fgrid == 18.168 ||
+                            actual_fgrid == 21.0 || actual_fgrid == 21.45 ||
+                            actual_fgrid == 24.89 || actual_fgrid == 24.99 ||
+                            actual_fgrid == 28.0 || actual_fgrid == 29.7 ||
+                            actual_fgrid == 50.0 || actual_fgrid == 54.0)
+                        {
+                            if (bottom) g.DrawLine(new Pen(band_edge_color), vgrid, H + top, vgrid, H + H);
+                            else g.DrawLine(new Pen(band_edge_color), vgrid, top, vgrid, H);
 
-							int it100 = (int)t100;
-							int it1000 = (int)t1000;
+                            label = actual_fgrid.ToString("f3");
+                            if (actual_fgrid < 10) offsetL = (int)((label.Length + 1) * 4.1) - 14;
+                            else if (actual_fgrid < 100.0) offsetL = (int)((label.Length + 1) * 4.1) - 11;
+                            else offsetL = (int)((label.Length + 1) * 4.1) - 8;
 
-							int it100x10 = it100 * 10;
+                            if (bottom) g.DrawString(label, font, new SolidBrush(band_edge_color), vgrid - offsetL, H + (float)Math.Floor(H * .01));
+                            else g.DrawString(label, font, new SolidBrush(band_edge_color), vgrid - offsetL, (float)Math.Floor(H * .01));
 
-							if ( it100x10 == it1000)
-							{
-							}
-							else
-							{
-								grid_pen.DashStyle =  DashStyle.Dot;
-							}
-						}
-						else
-						{
-							if (freq_step_size == 1000)
-							{
-								double t200;
-								double t2000;
-								t200 = (actual_fgrid * 200);
-								t2000 = (actual_fgrid * 2000);
+                            break;
+                        }
+                        else
+                            goto default;
 
-								int it200 = (int)t200;
-								int it2000 = (int)t2000;
+                       case FRSRegion.Germany:
+                        if (actual_fgrid == 1.81 || actual_fgrid == 2.0 ||
+                            actual_fgrid == 3.5 || actual_fgrid == 3.8 ||
+                            actual_fgrid == 7.0 || actual_fgrid == 7.2 ||
+                            actual_fgrid == 10.1 || actual_fgrid == 10.15 ||
+                            actual_fgrid == 14.0 || actual_fgrid == 14.35 ||
+                            actual_fgrid == 18.068 || actual_fgrid == 18.168 ||
+                            actual_fgrid == 21.0 || actual_fgrid == 21.45 ||
+                            actual_fgrid == 24.89 || actual_fgrid == 24.99 ||
+                            actual_fgrid == 28.0 || actual_fgrid == 29.7 ||
+                            actual_fgrid == 50.08 || actual_fgrid == 51.0)
+                        {
+                            if (bottom) g.DrawLine(new Pen(band_edge_color), vgrid, H + top, vgrid, H + H);
+                            else g.DrawLine(new Pen(band_edge_color), vgrid, top, vgrid, H);
 
-								int it200x10 = it200 * 10;
+                            label = actual_fgrid.ToString("f3");
+                            if (actual_fgrid < 10) offsetL = (int)((label.Length + 1) * 4.1) - 14;
+                            else if (actual_fgrid < 100.0) offsetL = (int)((label.Length + 1) * 4.1) - 11;
+                            else offsetL = (int)((label.Length + 1) * 4.1) - 8;
 
-								if ( it200x10 == it2000)
-								{
-								}
-								else
-								{
-									grid_pen.DashStyle =  DashStyle.Dot;
-								}
-							}
-							else
-							{
-								double t1000;
-								double t10000;
-								t1000 = (actual_fgrid * 1000);
-								t10000 = (actual_fgrid * 10000);
+                            if (bottom) g.DrawString(label, font, new SolidBrush(band_edge_color), vgrid - offsetL, H + (float)Math.Floor(H * .01));
+                            else g.DrawString(label, font, new SolidBrush(band_edge_color), vgrid - offsetL, (float)Math.Floor(H * .01));
 
-								int it1000 = (int)t1000;
-								int it10000 = (int)t10000;
+                            break;
+                        }
+                        else
+                            goto default;
 
-								int it1000x10 = it1000 * 10;
-								
-								if ( it1000x10 == it10000)
-								{
-								}
-								else
-								{
-									grid_pen.DashStyle =  DashStyle.Dot;
-								}
-							}
-						}
-						if(bottom) g.DrawLine(grid_pen, vgrid, H+top, vgrid, H+H);
-						else g.DrawLine(grid_pen, vgrid, top, vgrid, H);			//wa6ahl
-						grid_pen.DashStyle =  DashStyle.Solid;
+                       case FRSRegion.UK:
+                        if (actual_fgrid == 1.8 || actual_fgrid == 2.0 ||
+                            actual_fgrid == 3.5 || actual_fgrid == 4.0 ||
+                            actual_fgrid == 7.0 || actual_fgrid == 7.3 ||
+                            actual_fgrid == 10.1 || actual_fgrid == 10.15 ||
+                            actual_fgrid == 14.0 || actual_fgrid == 14.35 ||
+                            actual_fgrid == 18.068 || actual_fgrid == 18.168 ||
+                            actual_fgrid == 21.0 || actual_fgrid == 21.45 ||
+                            actual_fgrid == 24.89 || actual_fgrid == 24.99 ||
+                            actual_fgrid == 28.0 || actual_fgrid == 29.7 ||
+                            actual_fgrid == 50.0 || actual_fgrid == 54.0)
+                        {
+                            if (bottom) g.DrawLine(new Pen(band_edge_color), vgrid, H + top, vgrid, H + H);
+                            else g.DrawLine(new Pen(band_edge_color), vgrid, top, vgrid, H);
 
-						if ( ((double)((int)(actual_fgrid*1000))) == actual_fgrid * 1000) 
-						{
-							label = actual_fgrid.ToString("f3"); //wa6ahl
-							
-							//if(actual_fgrid > 1300.0)
-							//	label = label.Substring(label.Length-4);
+                            label = actual_fgrid.ToString("f3");
+                            if (actual_fgrid < 10) offsetL = (int)((label.Length + 1) * 4.1) - 14;
+                            else if (actual_fgrid < 100.0) offsetL = (int)((label.Length + 1) * 4.1) - 11;
+                            else offsetL = (int)((label.Length + 1) * 4.1) - 8;
 
-							if(actual_fgrid < 10) offsetL = (int)((label.Length+1)*4.1) - 14;
-							else if(actual_fgrid < 100.0) offsetL = (int)((label.Length+1)*4.1) - 11;
-							else offsetL = (int)((label.Length+1)*4.1) - 8;							
-						}
-						else 
-						{
-							string temp_string;
-							int jper; 
-							label = actual_fgrid.ToString("f4"); 
-							temp_string = label;
-							jper = label.IndexOf('.')+4;
-							label = label.Insert(jper," ");
+                            if (bottom) g.DrawString(label, font, new SolidBrush(band_edge_color), vgrid - offsetL, H + (float)Math.Floor(H * .01));
+                            else g.DrawString(label, font, new SolidBrush(band_edge_color), vgrid - offsetL, (float)Math.Floor(H * .01));
 
-							//if(actual_fgrid > 1300.0)
-							//	label = label.Substring(label.Length-4);
+                           break;
+                        }
+                        else
+                            goto default;
 
-							if(actual_fgrid < 10) offsetL = (int)((label.Length)*4.1) - 14;
-							else if(actual_fgrid < 100.0) offsetL = (int)((label.Length)*4.1) - 11;
-							else offsetL = (int)((label.Length)*4.1) - 8;		
-						}
+                       case FRSRegion.Italy_Plus:
+                        if (actual_fgrid == 1.81 || actual_fgrid == 2.0 ||
+                            actual_fgrid == 3.5 || actual_fgrid == 3.8 ||
+                            actual_fgrid == 6.975 || actual_fgrid == 7.2 ||
+                            actual_fgrid == 10.1 || actual_fgrid == 10.15 ||
+                            actual_fgrid == 14.0 || actual_fgrid == 14.35 ||
+                            actual_fgrid == 18.068 || actual_fgrid == 18.168 ||
+                            actual_fgrid == 21.0 || actual_fgrid == 21.45 ||
+                            actual_fgrid == 24.89 || actual_fgrid == 24.99 ||
+                            actual_fgrid == 28.0 || actual_fgrid == 29.7 ||
+                            actual_fgrid == 50.08 || actual_fgrid == 51.0)
+                        {
+                            if (bottom) g.DrawLine(new Pen(band_edge_color), vgrid, H + top, vgrid, H + H);
+                            else g.DrawLine(new Pen(band_edge_color), vgrid, top, vgrid, H);
 
-						if(bottom) g.DrawString(label, font, grid_text_brush, vgrid-offsetL, H+(float)Math.Floor(H*.01));
-						else g.DrawString(label, font, grid_text_brush, vgrid-offsetL, (float)Math.Floor(H*.01));
-					}
+                            label = actual_fgrid.ToString("f3");
+                            if (actual_fgrid < 10) offsetL = (int)((label.Length + 1) * 4.1) - 14;
+                            else if (actual_fgrid < 100.0) offsetL = (int)((label.Length + 1) * 4.1) - 11;
+                            else offsetL = (int)((label.Length + 1) * 4.1) - 8;
+
+                            if (bottom) g.DrawString(label, font, new SolidBrush(band_edge_color), vgrid - offsetL, H + (float)Math.Floor(H * .01));
+                            else g.DrawString(label, font, new SolidBrush(band_edge_color), vgrid - offsetL, (float)Math.Floor(H * .01));
+
+                            break;
+                        }
+                        else
+                            goto default;
+
+                       case FRSRegion.Japan:
+                        if (actual_fgrid == .137 || actual_fgrid == .138 ||
+                        actual_fgrid == 1.81 || actual_fgrid == 1.825 ||
+                        actual_fgrid == 1.907 || actual_fgrid == 1.913 ||
+                        actual_fgrid == 3.5 || actual_fgrid == 3.575 ||
+                        actual_fgrid == 3.599 || actual_fgrid == 3.612 ||
+                        actual_fgrid == 3.68 || actual_fgrid == 3.687 ||
+                        actual_fgrid == 3.702 || actual_fgrid == 3.716 ||
+                        actual_fgrid == 3.745 || actual_fgrid == 3.77 ||
+                        actual_fgrid == 3.791 || actual_fgrid == 3.805 ||
+                        actual_fgrid == 7.0 || actual_fgrid == 7.2 ||
+                        actual_fgrid == 10.1 || actual_fgrid == 10.15 ||
+                        actual_fgrid == 14.0 || actual_fgrid == 14.35 ||
+                        actual_fgrid == 18.068 || actual_fgrid == 18.168 ||
+                        actual_fgrid == 21.0 || actual_fgrid == 21.45 ||
+                        actual_fgrid == 24.89 || actual_fgrid == 24.99 ||
+                        actual_fgrid == 28.0 || actual_fgrid == 29.7 ||
+                        actual_fgrid == 50.0 || actual_fgrid == 54.0)
+                        {
+                            if (bottom) g.DrawLine(new Pen(band_edge_color), vgrid, H + top, vgrid, H + H);
+                            else g.DrawLine(new Pen(band_edge_color), vgrid, top, vgrid, H);
+
+                            label = actual_fgrid.ToString("f3");
+                            if (actual_fgrid < 10) offsetL = (int)((label.Length + 1) * 4.1) - 14;
+                            else if (actual_fgrid < 100.0) offsetL = (int)((label.Length + 1) * 4.1) - 11;
+                            else offsetL = (int)((label.Length + 1) * 4.1) - 8;
+
+                            if (bottom) g.DrawString(label, font, new SolidBrush(band_edge_color), vgrid - offsetL, H + (float)Math.Floor(H * .01));
+                            else g.DrawString(label, font, new SolidBrush(band_edge_color), vgrid - offsetL, (float)Math.Floor(H * .01));
+
+                           break;
+                        }
+                        else
+                            goto default;
+
+                       case FRSRegion.Australia:
+                        if (actual_fgrid == 1.8 || actual_fgrid == 1.875 ||
+                            actual_fgrid == 3.5 || actual_fgrid == 3.7 ||
+                            actual_fgrid == 3.776 || actual_fgrid == 3.8 ||
+                            actual_fgrid == 7.0 || actual_fgrid == 7.3 ||
+                            actual_fgrid == 10.1 || actual_fgrid == 10.15 ||
+                            actual_fgrid == 14.0 || actual_fgrid == 14.35 ||
+                            actual_fgrid == 18.068 || actual_fgrid == 18.168 ||
+                            actual_fgrid == 21.0 || actual_fgrid == 21.45 ||
+                            actual_fgrid == 24.89 || actual_fgrid == 24.99 ||
+                            actual_fgrid == 28.0 || actual_fgrid == 29.7 ||
+                            actual_fgrid == 50.08 || actual_fgrid == 54.0)
+                        {
+                            if (bottom) g.DrawLine(new Pen(band_edge_color), vgrid, H + top, vgrid, H + H);
+                            else g.DrawLine(new Pen(band_edge_color), vgrid, top, vgrid, H);
+
+                            label = actual_fgrid.ToString("f3");
+                            if (actual_fgrid < 10) offsetL = (int)((label.Length + 1) * 4.1) - 14;
+                            else if (actual_fgrid < 100.0) offsetL = (int)((label.Length + 1) * 4.1) - 11;
+                            else offsetL = (int)((label.Length + 1) * 4.1) - 8;
+
+                            if (bottom) g.DrawString(label, font, new SolidBrush(band_edge_color), vgrid - offsetL, H + (float)Math.Floor(H * .01));
+                            else g.DrawString(label, font, new SolidBrush(band_edge_color), vgrid - offsetL, (float)Math.Floor(H * .01));
+
+                            break;
+                        }
+                        else
+                            goto default;
+
+                       default:
+                        {
+
+                            if (freq_step_size >= 2000)
+                            {
+                                double t100;
+                                double t1000;
+                                t100 = (actual_fgrid * 100);
+                                t1000 = (actual_fgrid * 1000);
+
+                                int it100 = (int)t100;
+                                int it1000 = (int)t1000;
+
+                                int it100x10 = it100 * 10;
+
+                                if (it100x10 == it1000)
+                                {
+                                }
+                                else
+                                {
+                                    grid_pen.DashStyle = DashStyle.Dot;
+                                }
+                            }
+                            else
+                            {
+                                if (freq_step_size == 1000)
+                                {
+                                    double t200;
+                                    double t2000;
+                                    t200 = (actual_fgrid * 200);
+                                    t2000 = (actual_fgrid * 2000);
+
+                                    int it200 = (int)t200;
+                                    int it2000 = (int)t2000;
+
+                                    int it200x10 = it200 * 10;
+
+                                    if (it200x10 == it2000)
+                                    {
+                                    }
+                                    else
+                                    {
+                                        grid_pen.DashStyle = DashStyle.Dot;
+                                    }
+                                }
+                                else
+                                {
+                                    double t1000;
+                                    double t10000;
+                                    t1000 = (actual_fgrid * 1000);
+                                    t10000 = (actual_fgrid * 10000);
+
+                                    int it1000 = (int)t1000;
+                                    int it10000 = (int)t10000;
+
+                                    int it1000x10 = it1000 * 10;
+
+                                    if (it1000x10 == it10000)
+                                    {
+                                    }
+                                    else
+                                    {
+                                        grid_pen.DashStyle = DashStyle.Dot;
+                                    }
+                                }
+                            }
+                            if (bottom) g.DrawLine(grid_pen, vgrid, H + top, vgrid, H + H);
+                            else g.DrawLine(grid_pen, vgrid, top, vgrid, H);			//wa6ahl
+                            grid_pen.DashStyle = DashStyle.Solid;
+
+                            if (((double)((int)(actual_fgrid * 1000))) == actual_fgrid * 1000)
+                            {
+                                label = actual_fgrid.ToString("f3"); //wa6ahl
+
+                                //if(actual_fgrid > 1300.0)
+                                //	label = label.Substring(label.Length-4);
+
+                                if (actual_fgrid < 10) offsetL = (int)((label.Length + 1) * 4.1) - 14;
+                                else if (actual_fgrid < 100.0) offsetL = (int)((label.Length + 1) * 4.1) - 11;
+                                else offsetL = (int)((label.Length + 1) * 4.1) - 8;
+                            }
+                            else
+                            {
+                                string temp_string;
+                                int jper;
+                                label = actual_fgrid.ToString("f4");
+                                temp_string = label;
+                                jper = label.IndexOf('.') + 4;
+                                label = label.Insert(jper, " ");
+
+                                //if(actual_fgrid > 1300.0)
+                                //	label = label.Substring(label.Length-4);
+
+                                if (actual_fgrid < 10) offsetL = (int)((label.Length) * 4.1) - 14;
+                                else if (actual_fgrid < 100.0) offsetL = (int)((label.Length) * 4.1) - 11;
+                                else offsetL = (int)((label.Length) * 4.1) - 8;
+                            }
+
+                            if (bottom) g.DrawString(label, font, grid_text_brush, vgrid - offsetL, H + (float)Math.Floor(H * .01));
+                            else g.DrawString(label, font, grid_text_brush, vgrid - offsetL, (float)Math.Floor(H * .01));
+                            break;
+                        }
+                    }
 				}
 				else
 				{
@@ -2265,7 +2696,7 @@ namespace PowerSDR
 				}
 			}
 
-			int[] band_edge_list = { 18068000, 18168000, 1800000, 2000000, 3500000, 4000000,
+          /*  int[] band_edge_list = { 1800000, 2000000, 3500000, 4000000,
 									   7000000, 7300000, 10100000, 10150000, 14000000, 14350000, 21000000, 21450000,
 									   24890000, 24990000, 28000000, 29700000, 50000000, 54000000, 144000000, 148000000 };
 			
@@ -2279,7 +2710,7 @@ namespace PowerSDR
 					else g.DrawLine(new Pen(band_edge_color), temp_vline, 0, temp_vline, top);
 				}
 				if(i == 1 && !show_freq_offset) break;
-			}
+			}*/
 
 			/*// Draw horizontal lines
 			for(int i=1; i<h_steps; i++)
