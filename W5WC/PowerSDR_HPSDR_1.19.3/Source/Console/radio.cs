@@ -1599,8 +1599,8 @@ namespace PowerSDR
 			}
 		}
 
-        private double tx_fm_deviation = 3000.0;
-        private double tx_fm_deviation_dsp = 3000.0;
+        private double tx_fm_deviation = 2500.0;
+        private double tx_fm_deviation_dsp = 2500.0;
         public double TXFMDeviation
         {
             get { return tx_fm_deviation; }

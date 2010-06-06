@@ -933,8 +933,7 @@ namespace PowerSDR
 		private System.Windows.Forms.LabelTS lblDigTXProfile;
 		private System.Windows.Forms.MenuItem mnuReportBug;
 		private System.Windows.Forms.CheckBoxTS chkRXEQ;
-		private System.Windows.Forms.CheckBoxTS chkTXEQ;
-		private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.CheckBoxTS chkTXEQ;
         private System.Windows.Forms.MenuItem mnuMixer;
 		private System.Windows.Forms.MenuItem mnuAntenna;
 		private System.ComponentModel.IContainer components;
@@ -1774,7 +1773,6 @@ namespace PowerSDR
             this.radDisplayZoom1x = new System.Windows.Forms.RadioButtonTS();
             this.chkBCI = new System.Windows.Forms.CheckBoxTS();
             this.picSquelch = new System.Windows.Forms.PictureBox();
-            this.button1 = new System.Windows.Forms.Button();
             this.picRX2Squelch = new System.Windows.Forms.PictureBox();
             this.timer_clock = new System.Windows.Forms.Timer(this.components);
             this.contextMenuStripFilterRX1 = new System.Windows.Forms.ContextMenuStrip(this.components);
@@ -4081,12 +4079,6 @@ namespace PowerSDR
             this.picSquelch.TabStop = false;
             this.picSquelch.Paint += new System.Windows.Forms.PaintEventHandler(this.picSquelch_Paint);
             // 
-            // button1
-            // 
-            resources.ApplyResources(this.button1, "button1");
-            this.button1.Name = "button1";
-            this.button1.Click += new System.EventHandler(this.button1_Click);
-            // 
             // picRX2Squelch
             // 
             this.picRX2Squelch.BackColor = System.Drawing.SystemColors.ControlText;
@@ -4389,19 +4381,10 @@ namespace PowerSDR
             // 
             resources.ApplyResources(this.panelRX2Display, "panelRX2Display");
             this.panelRX2Display.BackColor = System.Drawing.Color.Transparent;
-           // this.panelRX2Display.Controls.Add(this.buttonTS1);
             this.panelRX2Display.Controls.Add(this.chkRX2DisplayPeak);
             this.panelRX2Display.Controls.Add(this.comboRX2DisplayMode);
             this.panelRX2Display.Controls.Add(this.chkRX2DisplayAVG);
             this.panelRX2Display.Name = "panelRX2Display";
-            // 
-            // buttonTS1
-            // 
-           /* this.buttonTS1.Image = null;
-            resources.ApplyResources(this.buttonTS1, "buttonTS1");
-            this.buttonTS1.Name = "buttonTS1";
-            this.buttonTS1.UseVisualStyleBackColor = true;
-            this.buttonTS1.Click += new System.EventHandler(this.buttonTS1_Click);*/
             // 
             // panelRX2Mixer
             // 
@@ -5618,7 +5601,6 @@ namespace PowerSDR
             // 
             resources.ApplyResources(this, "$this");
             this.BackColor = System.Drawing.SystemColors.Control;
-            this.Controls.Add(this.button1);
             this.Controls.Add(this.picRX2Squelch);
             this.Controls.Add(this.ptbRX2Squelch);
             this.Controls.Add(this.ptbRX2RF);
@@ -5868,7 +5850,6 @@ namespace PowerSDR
 		{
 #if(DEBUG)
 			mnuUCB.Visible = true;
-			button1.Visible = true;
 #endif
             // EHR add nav support
             try
@@ -9903,7 +9884,8 @@ namespace PowerSDR
 			if(xvtr_index >= 0)
 				return (Band)(Band.VHF0+xvtr_index);
 
-            if(extended && tx)
+            if (extended) //w5wc
+           // if(extended && tx)
             {
                 if (freq >= 0.0 && freq <= 2.75)
                     return Band.B160M;
@@ -10092,7 +10074,69 @@ namespace PowerSDR
                         return Band.WWV;
                     else
                         return Band.GEN;
-                    
+
+                case FRSRegion.Japan:
+                    if (freq >= 1.81 && freq <= 1.9125)
+                        return Band.B160M;
+                    else if (freq >= 3.5 && freq <= 3.805)
+                        return Band.B80M;
+                    else if (freq >= 5.1 && freq <= 5.5)
+                        return Band.B60M;
+                    else if (freq >= 7.0 && freq <= 7.2)
+                        return Band.B40M;
+                    else if (freq >= 10.1 && freq <= 10.15)
+                        return Band.B30M;
+                    else if (freq >= 14.0 && freq <= 14.35)
+                        return Band.B20M;
+                    else if (freq >= 18.068 && freq <= 18.168)
+                        return Band.B17M;
+                    else if (freq >= 21.0 && freq <= 21.45)
+                        return Band.B15M;
+                    else if (freq >= 24.89 && freq <= 24.99)
+                        return Band.B12M;
+                    else if (freq >= 28.0 && freq <= 29.7)
+                        return Band.B10M;
+                    else if (freq >= 50.0 && freq <= 54.0)
+                        return Band.B6M;
+                    else if (freq >= 144.0 && freq <= 148.0)
+                        return Band.B2M;
+                    else if (freq == 2.5 || freq == 5.0 || freq == 8.0 ||
+                        freq == 10.0 || freq == 15.0 ||
+                        freq == 20.0)
+                        return Band.WWV;
+                    else
+                        return Band.GEN;
+
+                case FRSRegion.Australia:
+                    if (freq >= 1.8 && freq <= 1.875)
+                        return Band.B160M;
+                    else if (freq >= 3.5 && freq <= 3.8)
+                        return Band.B80M;
+                    else if (freq >= 7.0 && freq <= 7.3)
+                        return Band.B40M;
+                    else if (freq >= 10.1 && freq <= 10.15)
+                        return Band.B30M;
+                    else if (freq >= 14.0 && freq <= 14.35)
+                        return Band.B20M;
+                    else if (freq >= 18.068 && freq <= 18.168)
+                        return Band.B17M;
+                    else if (freq >= 21.0 && freq <= 21.45)
+                        return Band.B15M;
+                    else if (freq >= 24.89 && freq <= 24.99)
+                        return Band.B12M;
+                    else if (freq >= 28.0 && freq <= 29.7)
+                        return Band.B10M;
+                    else if (freq >= 50.0 && freq <= 54.0)
+                        return Band.B6M;
+                    else if (freq >= 144.0 && freq <= 148.0)
+                        return Band.B2M;
+                    else if (freq == 2.5 || freq == 5.0 ||
+                        freq == 10.0 || freq == 15.0 ||
+                        freq == 20.0)
+                        return Band.WWV;
+                    else
+                        return Band.GEN;
+
 			}
 			
 			return Band.GEN;
@@ -10730,10 +10774,10 @@ namespace PowerSDR
 
         public bool CheckValidTXFreq(FRSRegion r, double f, DSPMode mode)
         {
-            bool retval = false;
-
             if (extended || tx_xvtr_index > -1)
                 return true;
+
+            bool retval = false;
 
             switch (mode)
             {
@@ -10745,8 +10789,10 @@ namespace PowerSDR
                 case DSPMode.AM:
                 case DSPMode.SAM:
                 case DSPMode.FMN:
-                    retval = (CheckValidTXFreq_Private(r, f + Display.TXFilterLow * 1e-6) &&
-                        CheckValidTXFreq_Private(r, f + Display.TXFilterHigh * 1e-6));
+                    /*retval = (CheckValidTXFreq_Private(r, f + Display.TXFilterLow * 1e-6) &&
+                        CheckValidTXFreq_Private(r, f + Display.TXFilterHigh * 1e-6));*/
+                    retval = (CheckValidTXFreq_Private(r, Math.Round(f + Display.TXFilterLow * 1e-6, 6, MidpointRounding.AwayFromZero)) &&
+                        CheckValidTXFreq_Private(r, Math.Round(f + Display.TXFilterHigh * 1e-6, 6, MidpointRounding.AwayFromZero))); //w5wc
                     break;
                 case DSPMode.CWL:
                 case DSPMode.CWU:
@@ -10855,10 +10901,16 @@ namespace PowerSDR
                     else ret_val = false;
                     break;
                 case FRSRegion.Japan:
-                    if (f >= 1.81 && f <= 1.9125) ret_val = true;
-                    else if (f >= 3.5 && f <= 3.687) ret_val = true;
-                    else if (f >= 3.702 && f <= 3.805) ret_val = true;
-                    else if (f >= 7.0 && f <= 7.1) ret_val = true;
+                    if  (f >= .1357 && f <= .1378) ret_val = true;
+                    else if (f >= 1.81 && f <= 1.825) ret_val = true;
+                    else if (f >= 1.9075 && f <= 1.9125) ret_val = true;
+                    else if (f >= 3.5 && f <= 3.575) ret_val = true;
+                    else if (f >= 3.599 && f <= 3.612) ret_val = true;
+                    else if (f >= 3.680 && f <= 3.687) ret_val = true;
+                    else if (f >= 3.702 && f <= 3.716) ret_val = true;
+                    else if (f >= 3.745 && f <= 3.770) ret_val = true;
+                    else if (f >= 3.791 && f <= 3.805) ret_val = true;                  
+                    else if (f >= 7.0 && f <= 7.2) ret_val = true;
                     else if (f >= 10.1 && f <= 10.15) ret_val = true;
                     else if (f >= 14.0 && f <= 14.35) ret_val = true;
                     else if (f >= 18.068 && f <= 18.168) ret_val = true;
@@ -14608,7 +14660,7 @@ namespace PowerSDR
         
         }
  
-		/*public bool CalibrateRX2Level(float level, float freq, Progress progress, bool suppress_errors)
+		public bool CalibrateRX2Level(float level, float freq, Progress progress, bool suppress_errors)
 		{
 			// Calibration routine called by Setup Form.
 			bool ret_val = false;
@@ -14915,7 +14967,7 @@ namespace PowerSDR
 
 			calibration_running = false;
 			return ret_val;
-		}*/
+		}
 
 		public float[] rx_image_rejection = new float[(int)Band.LAST];
 		public float[] rx_image_from_floor = new float[(int)Band.LAST];
@@ -15178,7 +15230,7 @@ namespace PowerSDR
             return ret_val;
         }
 
-        /*public bool CalibrateRX2Image(float freq, Progress progress, bool suppress_errors)
+        public bool CalibrateRX2Image(float freq, Progress progress, bool suppress_errors)
         {
             if (!fwc_init || current_model != Model.FLEX5000 || !FWCEEPROM.RX2OK) return false;
 
@@ -15257,7 +15309,7 @@ namespace PowerSDR
 
             PreampMode preamp = rx1_preamp_mode;			// save current preamp setting
             RX1PreampMode = PreampMode.HIGH;				// set preamp to high
-            bool preamp = fwc_rx2_preamp;
+            //bool preamp = fwc_rx2_preamp;
             FWC.SetRX2Preamp(true);
             //Thread.Sleep(50);
 
@@ -15400,7 +15452,7 @@ namespace PowerSDR
             EnableAllModes();
             VFOLock = false;
             FullDuplex = duplex;
-            FWC.SetRX2Preamp(preamp);
+            //FWC.SetRX2Preamp(preamp);
             //Thread.Sleep(50);
             comboDisplayMode.Enabled = true;
 
@@ -15439,7 +15491,7 @@ namespace PowerSDR
             //MessageBox.Show(t1.Duration.ToString());
             Debug.WriteLine("timer: " + t1.Duration);
             return ret_val;
-        } */
+        } 
 
 		public float[] tx_image_rejection = new float[(int)Band.LAST];
 		public bool CalibrateTXImage(float freq, Progress progress, bool suppress_errors)
@@ -18623,9 +18675,7 @@ namespace PowerSDR
                     case Model.HPSDR:
                     case Model.HERMES:
                         MinFreq = Math.Max(if_freq, 0.000001);
-                        if (XVTRPresent)
-                            MaxFreq = 146.0;
-                        else MaxFreq = 65.0;
+                        MaxFreq = 65.0;
                         SetComboPreampForHPSDR();
                         comboPreamp.Text = "On";
                         chkBCI.Visible = true;
@@ -18636,6 +18686,7 @@ namespace PowerSDR
                         chkFWCATU.Visible = false;
                         chkFWCATUBypass.Visible = false;
                         panelAntenna.Visible = false; //w5wc
+                        chkX2TR.Visible = false; //w5wc
                        
                         int hermes_power_enable;
                         if (current_model == Model.HERMES)
@@ -19208,7 +19259,7 @@ namespace PowerSDR
 			get { return current_xvtr_tr_mode; }
 			set	
 			{
-                if (current_model != Model.SDR1000) return;
+                //if (current_model != Model.SDR1000) return;//w5wc
 				current_xvtr_tr_mode = value;
 				switch(current_xvtr_tr_mode)
 				{
@@ -19725,7 +19776,7 @@ namespace PowerSDR
 			{
 				x2_enabled = value;
 				X2TR = value;
-                if (current_model == Model.SDR1000)
+                //if (current_model == Model.SDR1000) //w5wc
                 {
                     if (value && mox)
                         Hdw.X2 |= 0x40;
@@ -27789,7 +27840,7 @@ namespace PowerSDR
 
                 if (!(fwc_init && (current_model == Model.FLEX5000 || current_model == Model.FLEX3000)))
                 {
-                    if(current_model == Model.SDR1000)
+                    //if(current_model == Model.SDR1000) //w5wc
                         Hdw.StandBy();
                 }
                 else
@@ -28306,7 +28357,7 @@ namespace PowerSDR
 
 			if(num_channels == 2)
 			{
-				if(current_model == Model.SDR1000)
+				//if(current_model == Model.SDR1000) //w5wc
                     Hdw.MuteRelay = chkMUT.Checked;
 			}
 		
@@ -28631,7 +28682,7 @@ namespace PowerSDR
 			}
 			else
 			{
-				if(chkPower.Checked && mox && current_model == Model.SDR1000)
+				if(chkPower.Checked && mox)// && current_model == Model.SDR1000)
 					Hdw.MuteRelay = !chkMON.Checked;
 			}
 		}
@@ -28822,10 +28873,10 @@ namespace PowerSDR
 					if_shift = true;
 			}
 
-			if(!fwc_init || current_model == Model.SDR1000)
+			if(!fwc_init || current_model != Model.FLEX5000)
 				Hdw.UpdateHardware = true;
 
-			if(!fwc_init || current_model == Model.SDR1000)
+			if(!fwc_init || current_model != Model.FLEX5000)
 			{
 				if(tx && !tuning) 
 				{				
@@ -28875,7 +28926,7 @@ namespace PowerSDR
                 chkPower.BackColor = Color.Red;
             }
 
-			if(!fwc_init || current_model == Model.SDR1000)
+			if(!fwc_init || current_model != Model.FLEX5000)
 				comboPreamp.Enabled = !chkMOX.Checked;
 			SetupForm.MOX = chkMOX.Checked;
 			ResetMultiMeterPeak();
@@ -28929,7 +28980,7 @@ namespace PowerSDR
 			for(int i=0; i<meter_text_history.Length; i++)
 				meter_text_history[i] = 0.0f;
 
-			if(!fwc_init || current_model == Model.SDR1000)
+			if(!fwc_init || current_model != Model.FLEX5000)
 				comboPreamp.Enabled = !chkMOX.Checked;
 			SetupForm.MOX = chkMOX.Checked;
 			ResetMultiMeterPeak();
@@ -30269,7 +30320,7 @@ namespace PowerSDR
                     RX1XVTRGainOffset = XVTRForm.GetRXGain(rx1_xvtr_index);
 					SetupForm.RXOnly = XVTRForm.GetRXOnly(rx1_xvtr_index);
 
-                    if (!fwc_init || current_model == Model.SDR1000)
+                    if (!fwc_init || current_model != Model.FLEX5000)
                     {
                         if (chkPower.Checked)
                             Hdw.X2 = (byte)((Hdw.X2 & 0xF0) | XVTRForm.GetXVTRAddr(rx1_xvtr_index));
@@ -35375,16 +35426,6 @@ namespace PowerSDR
 
 		#endregion
 
-		private void button1_Click(object sender, System.EventArgs e)
-		{
-            p = new Progress("Test TX Spur");
-            Thread t = new Thread(new ThreadStart(CallCalTXSpur));
-            t.Name = "Test TX Spur Thread";
-            t.IsBackground = true;
-            t.Priority = ThreadPriority.Normal;
-            t.Start();
-            p.Show();
-		}
 
         public void CallCalTXSpur()
 		{
@@ -35839,7 +35880,6 @@ namespace PowerSDR
 				picSquelch.Location = new Point(pic_sql_basis.X,pic_sql_basis.Y+(v_delta/2));
 				ptbSquelch.Location = new Point(tb_sql_basis.X,tb_sql_basis.Y+(v_delta/2));
                 panelAntenna.Location = new Point(gr_antenna_basis.X, gr_antenna_basis.Y + (v_delta / 8) + (v_delta / 2));
-				button1.Location = new Point(button1_basis.X,button1_basis.Y+(v_delta/8)+(v_delta/2));
                 panelDateTime.Location = new Point(gr_date_time_basis.X, gr_date_time_basis.Y + (v_delta / 2) + (v_delta / 4));
 				//lblCPUMeter.Location = new Point(lbl_cpu_meter_basis.X,lbl_cpu_meter_basis.Y+(v_delta/8)+(v_delta/2)+(v_delta/4));
 			
@@ -35937,7 +35977,6 @@ namespace PowerSDR
 			pic_sql_basis = this.picSquelch.Location;
 			tb_sql_basis = this.ptbSquelch.Location;
             gr_antenna_basis = this.panelAntenna.Location;
-			button1_basis = this.button1.Location;
             gr_date_time_basis = this.panelDateTime.Location;
 			//lbl_cpu_meter_basis = this.lblCPUMeter.Location;
 
@@ -38003,12 +38042,14 @@ namespace PowerSDR
 
         public void DisableSR()
         {
+            chkSR.Visible = false;
             chkSR.Checked = false;
             chkSR.Enabled = false;
         }
 
         public void EnableSR()
         {
+            chkSR.Visible = true;
             chkSR.Enabled = true;
             chkSR.Checked = true;
         }

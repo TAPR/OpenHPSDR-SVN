@@ -761,7 +761,7 @@ namespace PowerSDR
                     if (c != null)
                     {
                         double dds_tune = c.TuningWordToFreq(dds_tuning_word);
-                        JanusAudio.SetVFOfreq(dds_tune);
+                        JanusAudio.SetVFOfreq(Math.Round(dds_tune, 6));
                     }
 				
 					for(int i=0; i<6; i++)
