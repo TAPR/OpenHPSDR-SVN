@@ -10262,7 +10262,49 @@ namespace PowerSDR
                         retval = SetupForm.PAGain6;
                     else retval = 1000;
 					break;
-				default:
+                case Band.VHF0:
+                    retval = SetupForm.PAGainVHF0;
+                    break;
+                case Band.VHF1:
+                    retval = SetupForm.PAGainVHF1;
+                    break;
+                case Band.VHF2:
+                    retval = SetupForm.PAGainVHF2;
+                    break;
+                case Band.VHF3:
+                    retval = SetupForm.PAGainVHF3;
+                    break;
+                case Band.VHF4:
+                    retval = SetupForm.PAGainVHF4;
+                    break;
+                case Band.VHF5:
+                    retval = SetupForm.PAGainVHF5;
+                    break;
+                case Band.VHF6:
+                    retval = SetupForm.PAGainVHF6;
+                    break;
+                case Band.VHF7:
+                    retval = SetupForm.PAGainVHF7;
+                    break;
+                case Band.VHF8:
+                    retval = SetupForm.PAGainVHF8;
+                    break;
+                case Band.VHF9:
+                    retval = SetupForm.PAGainVHF9;
+                    break;
+                case Band.VHF10:
+                    retval = SetupForm.PAGainVHF10;
+                    break;
+                case Band.VHF11:
+                    retval = SetupForm.PAGainVHF11;
+                    break;
+                case Band.VHF12:
+                    retval = SetupForm.PAGainVHF12;
+                    break;
+                case Band.VHF13:
+                    retval = SetupForm.PAGainVHF13;
+                    break;
+                default:
 					retval = 1000;
 					break;
 			}
@@ -28452,7 +28494,18 @@ namespace PowerSDR
                         /*if(current_dsp_mode == DSPMode.AM ||current_dsp_mode == DSPMode.SAM)
                             val = (float)(Math.Max(1.0f, (float)val*0.4));*/
                         double target_dbm = 10 * (double)Math.Log10((double)val * 1000);
-                        target_dbm -= GainByBand(TXBand);
+
+                        double gbb; //w5wc
+                        if (tx_xvtr_index >= 0)
+                        {
+                            Band lo_band = BandByFreq(XVTRForm.TranslateFreq(VFOAFreq), tx_xvtr_index, true, current_region);
+                            gbb = GainByBand(lo_band);
+                        }
+                        else
+                        {
+                            gbb = GainByBand(TXBand);
+                        }                      
+                        target_dbm -= gbb;
 
                         double target_volts = Math.Sqrt(Math.Pow(10, target_dbm * 0.1) * 0.05);		// E = Sqrt(P * R) 
                         /*if(current_dsp_mode == DSPMode.AM ||current_dsp_mode == DSPMode.SAM)
