@@ -4624,7 +4624,7 @@ namespace PowerSDR
             this.grpHPSDRFreqCalDbg.Size = new System.Drawing.Size(164, 105);
             this.grpHPSDRFreqCalDbg.TabIndex = 11;
             this.grpHPSDRFreqCalDbg.TabStop = false;
-            this.grpHPSDRFreqCalDbg.Text = "HPSDR Freq Cal Diagnosic";
+            this.grpHPSDRFreqCalDbg.Text = "HPSDR Freq Cal Diagnostic";
             // 
             // btnHPSDRFreqCalReset
             // 
@@ -4639,13 +4639,13 @@ namespace PowerSDR
             // 
             // udHPSDRFreqCorrectFactor
             // 
-            this.udHPSDRFreqCorrectFactor.DecimalPlaces = 7;
+            this.udHPSDRFreqCorrectFactor.DecimalPlaces = 14;
             this.udHPSDRFreqCorrectFactor.Increment = new decimal(new int[] {
             1,
             0,
             0,
-            458752});
-            this.udHPSDRFreqCorrectFactor.Location = new System.Drawing.Point(44, 41);
+            524288});
+            this.udHPSDRFreqCorrectFactor.Location = new System.Drawing.Point(20, 41);
             this.udHPSDRFreqCorrectFactor.Maximum = new decimal(new int[] {
             65,
             0,
@@ -4657,7 +4657,7 @@ namespace PowerSDR
             0,
             0});
             this.udHPSDRFreqCorrectFactor.Name = "udHPSDRFreqCorrectFactor";
-            this.udHPSDRFreqCorrectFactor.Size = new System.Drawing.Size(80, 20);
+            this.udHPSDRFreqCorrectFactor.Size = new System.Drawing.Size(115, 20);
             this.udHPSDRFreqCorrectFactor.TabIndex = 1;
             this.toolTip1.SetToolTip(this.udHPSDRFreqCorrectFactor, "Frequency calibration reference frequency");
             this.udHPSDRFreqCorrectFactor.Value = new decimal(new int[] {
@@ -7632,7 +7632,7 @@ namespace PowerSDR
             this.lblRealeaseDate.Name = "lblRealeaseDate";
             this.lblRealeaseDate.Size = new System.Drawing.Size(130, 16);
             this.lblRealeaseDate.TabIndex = 4;
-            this.lblRealeaseDate.Text = "W5WC - 06/05/2010";
+            this.lblRealeaseDate.Text = "W5WC - 06/08/2010";
             // 
             // lblPenelopeFWVer
             // 
