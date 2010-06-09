@@ -34676,11 +34676,13 @@ namespace PowerSDR
 			if(chkXIT.Checked)
 			{
 				chkXIT.BackColor = button_selected_color;
+                chkXIT.ForeColor = Color.Red;
 				Display.XIT = (int)udXIT.Value;
 			}
 			else
 			{
 				chkXIT.BackColor = SystemColors.Control;
+                chkXIT.ForeColor = SystemColors.ControlLightLight;
 				Display.XIT = 0;
 			}
 #if false
@@ -34715,11 +34717,13 @@ namespace PowerSDR
 			if(chkRIT.Checked)
 			{
 				chkRIT.BackColor = button_selected_color;
+                chkRIT.ForeColor = Color.Red;
 				Display.RIT = (int)udRIT.Value;
 			}
 			else
 			{
 				chkRIT.BackColor = SystemColors.Control;
+                chkRIT.ForeColor = SystemColors.ControlLightLight;
 				Display.RIT = 0;
 			}
 
