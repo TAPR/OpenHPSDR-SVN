@@ -7632,7 +7632,7 @@ namespace PowerSDR
             this.lblRealeaseDate.Name = "lblRealeaseDate";
             this.lblRealeaseDate.Size = new System.Drawing.Size(130, 16);
             this.lblRealeaseDate.TabIndex = 4;
-            this.lblRealeaseDate.Text = "W5WC - 06/09/2010";
+            this.lblRealeaseDate.Text = "W5WC - 06/12/2010";
             // 
             // lblPenelopeFWVer
             // 
