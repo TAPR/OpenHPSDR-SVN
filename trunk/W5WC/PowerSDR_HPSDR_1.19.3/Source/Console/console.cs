@@ -21408,7 +21408,7 @@ namespace PowerSDR
 						text = "Leveler";
 						break;
 					case MeterTXMode.LVL_G:
-						text = "Lvl Gain";
+						text = "Lev Gain";
 						break;
 					case MeterTXMode.CPDR:
 						text = "CPDR";
