@@ -1,2 +1,2 @@
 all:
-	gcc -o ../../bin/softrock -lpthread -lportaudio *.c
+	gcc -std=gnu99 -o ../../bin/softrock -lpthread -lportaudio -lusb *.c
