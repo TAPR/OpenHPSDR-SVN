@@ -132,7 +132,7 @@ char* set_frequency(CLIENT* client,long frequency) {
     receiver[client->receiver].frequency=frequency;
     //receiver[client->receiver].frequency_changed=1;
 
-    setFrequency(handle,(double)frequency/100000.0);
+    setFrequency(handle,(double)frequency/1000000.0);
     return OK;
 }
 
