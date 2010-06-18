@@ -1130,7 +1130,6 @@ namespace DataDecoder
 
         #region Form Events
 
-
         // the enable short-cuts check box has changed
         private void chkShortCut_CheckedChanged(object sender, EventArgs e)
         {
@@ -1653,12 +1652,18 @@ namespace DataDecoder
             {
                 string remoteUri = "http://k5fr.com/binary/";
                 string fileName = "version.txt", myStringWebResource = null;
+                string fileName1 = "TkVersion.txt", myStringWebResource1 = null;
+                string fileName2 = "USB Tuning Knob.hex", myStringWebResource2 = null;
                 // Create a new WebClient instance.
                 WebClient myWebClient = new WebClient();
                 // Concatenate the domain with the Web resource filename.
                 myStringWebResource = remoteUri + fileName;
+                myStringWebResource1 = remoteUri + fileName1;
+                myStringWebResource2 = remoteUri + fileName2;
                 // Download the Web resource and save it into the current filesystem folder.
                 myWebClient.DownloadFile(myStringWebResource, fileName);
+                myWebClient.DownloadFile(myStringWebResource1, fileName1);
+                myWebClient.DownloadFile(myStringWebResource2, fileName2);
                 TextReader tr = new StreamReader(fileName);
                 string tempStr = tr.ReadLine();
                 tr.Close();
@@ -2653,6 +2658,7 @@ namespace DataDecoder
 
         #region Helper Methods
 
+        
         // display tip of the day dialog
         private void Setup_Shown(object sender, EventArgs e)
         {
@@ -4921,8 +4927,12 @@ namespace DataDecoder
                     chkLPenab.Checked = false; lpTimer.Enabled = false; set.LPenab = false;
                     txtAvg.Text = ""; txtFwd.Text = ""; txtSWR.Text = "";
                     mini.txtAvg.Text = ""; mini.txtFwd.Text = ""; mini.txtSWR.Text = "";
-                    txtAvg.Enabled = false; txtFwd.Enabled = false; txtSWR.Enabled = false;
-                    mini.txtAvg.Enabled = false; mini.txtFwd.Enabled = false; mini.txtSWR.Enabled = false;
+                    //txtAvg.Enabled = false; 
+                    txtFwd.Enabled = false; 
+                    //txtSWR.Enabled = false;
+                    //mini.txtAvg.Enabled = false; 
+                    mini.txtFwd.Enabled = false; 
+                    //mini.txtSWR.Enabled = false;
                     cboLPport.SelectedIndex = 0;
                 }
             }
@@ -4931,8 +4941,12 @@ namespace DataDecoder
                 lpTimer.Enabled = false; set.LPenab = false;
                 txtAvg.Text = ""; txtFwd.Text = ""; txtSWR.Text = "";
                 mini.txtAvg.Text = ""; mini.txtFwd.Text = ""; mini.txtSWR.Text = "";
-                txtAvg.Enabled = false; txtFwd.Enabled = false; txtSWR.Enabled = false;
-                mini.txtAvg.Enabled = false; mini.txtFwd.Enabled = false; mini.txtSWR.Enabled = false;
+                //txtAvg.Enabled = false; 
+                txtFwd.Enabled = false; 
+                //txtSWR.Enabled = false;
+                //mini.txtAvg.Enabled = false; 
+                mini.txtFwd.Enabled = false; 
+                //mini.txtSWR.Enabled = false;
 
             }
             set.Save();
@@ -6555,9 +6569,12 @@ namespace DataDecoder
                     chkPM.Checked = false; set.chkPM = false;
                     txtAvg.Text = ""; txtFwd.Text = ""; txtSWR.Text = "";
                     mini.txtAvg.Text = ""; mini.txtFwd.Text = ""; mini.txtSWR.Text = "";
-                    txtAvg.Enabled = false; txtFwd.Enabled = false; txtSWR.Enabled = false;
-                    mini.txtAvg.Enabled = false; mini.txtFwd.Enabled = false;
-                    mini.txtSWR.Enabled = false;
+                    //txtAvg.Enabled = false; 
+                    txtFwd.Enabled = false; 
+                    //txtSWR.Enabled = false;
+                    //mini.txtAvg.Enabled = false; 
+                    mini.txtFwd.Enabled = false;
+                    //mini.txtSWR.Enabled = false;
                     if (PMport.IsOpen)
                     { PMport.Write("\x02\x44\x30\x03\x37\x31\r"); }// Stop data broadcast
                     cboPMport.SelectedIndex = 0;
@@ -6568,9 +6585,12 @@ namespace DataDecoder
                 set.chkPM = false;
                 txtAvg.Text = ""; txtFwd.Text = ""; txtSWR.Text = "";
                 mini.txtAvg.Text = ""; mini.txtFwd.Text = ""; mini.txtSWR.Text = "";
-                txtAvg.Enabled = false; txtFwd.Enabled = false; txtSWR.Enabled = false;
-                mini.txtAvg.Enabled = false; mini.txtFwd.Enabled = false;
-                mini.txtSWR.Enabled = false;
+                //txtAvg.Enabled = false; 
+                txtFwd.Enabled = false; 
+                //txtSWR.Enabled = false;
+                //mini.txtAvg.Enabled = false; 
+                mini.txtFwd.Enabled = false;
+                //mini.txtSWR.Enabled = false;
                 if (PMport.IsOpen)
                 { PMport.Write("\x02\x44\x30\x03\x37\x31\r"); }// Stop data broadcast
             }
@@ -6941,8 +6961,11 @@ namespace DataDecoder
 
         void propTimer_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
         {
-            pixBox1.Load();
-
+            try
+            {
+                pixBox1.Load();
+            }
+            catch { }
         }
 
         #endregion Propadex
@@ -8248,6 +8271,28 @@ namespace DataDecoder
                             }
                         }
                     }
+                    // get console meter readings
+                    if (rawFreq.Length > 4 && rawFreq.Substring(0, 4) == "ZZRM")
+                    {
+                        switch (rawFreq.Substring(4, 1))
+                        {
+                            case "5":
+                                SetAvg(rawFreq.Substring(5, rawFreq.LastIndexOf(' ')-5));
+                                mini.SetAvg(rawFreq.Substring(5, rawFreq.LastIndexOf(' ') - 5));
+                                //Console.WriteLine("Fwd: " + rawFreq.Substring(5, rawFreq.Length - 5));
+                                break;
+                            //case "7":
+                            //    Console.WriteLine("Ref: " + rawFreq.Substring(5, rawFreq.Length - 5));
+                            //    break;
+                            case "8":
+                                SetSwr(rawFreq.Substring(5, rawFreq.LastIndexOf(' ') - 6));
+                                mini.SetSwr(rawFreq.Substring(5, rawFreq.LastIndexOf(' ') - 6));
+                                //Console.WriteLine("Swr: " + rawFreq.Substring(5, rawFreq.Length - 5));
+                                break;
+
+                        }
+                    }
+                    
                     /*** Get Tune Step ***/
                     if (rawFreq.Length > 4 && rawFreq.Substring(0, 4) == "ZZAC")
                     {
@@ -8876,9 +8921,18 @@ namespace DataDecoder
                         // if mox is on, start WD timer if enabled
                         if (xOn == "1")
                         {
+                            // send ZZRM commands                            
+                            if (!chkPM.Checked && !chkWNEnab.Checked && !chkLPenab.Checked)
+                            WriteToPort("ZZRM5;ZZRM8;", iSleep);
+
                             if (chkDog.Checked && !WatchDog.Enabled) WatchDog.Start();
                         }
-                        else { WatchDog.Stop(); }
+                        else 
+                        {
+                            if (!chkPM.Checked && !chkWNEnab.Checked && !chkLPenab.Checked)
+                            { SetAvg(""); SetSwr(""); mini.SetAvg(""); mini.SetSwr(""); }
+
+                            WatchDog.Stop(); }
 
                         sdrMode = rawFreq.Substring(rawFreq.Length - 9, 1);
                         // what's the split status
@@ -11356,7 +11410,7 @@ namespace DataDecoder
                 if (chkSPEenab.Checked && !chkLPenab.Checked && 
                     !chkWNEnab.Checked && !chkPM.Checked)
                 {
-                    txtAvg.Enabled = true; txtSWR.Enabled = true;
+                    //txtAvg.Enabled = true; txtSWR.Enabled = true;
                     txtAvg.Text = "0.0"; txtSWR.Text = "0.00";
                     lblAvg.Text = "FWD";
                     wattmtr = true;
@@ -11621,7 +11675,9 @@ namespace DataDecoder
                 SPEon = false;
                 SetSPEon("False"); SetSPEoper("Off"); SetSPEtune("Off");
                 SetSPEpwr("Off"); SetSPEtemp("   "); SPEmsgClr("");
-                SetSPEled("False"); txtAvg.Enabled = false; txtSWR.Enabled = false;
+                SetSPEled("False"); 
+                //txtAvg.Enabled = false; 
+                //txtSWR.Enabled = false;
                 chkSPEenab.Checked = false; set.SPEenab = false;
 //                if (SPEport.IsOpen) SPEport.Close();
             }
@@ -12468,6 +12524,8 @@ namespace DataDecoder
 
         #region * Declarations *
 
+        bool updating = false;  // true if FW update in progress
+        bool TkInit = false;    // true if initializing
         int ActCon = 0;         // Active Control index (1-4)
         int ActConDC = 0;       // Active Control DC index (1-2)
         int ActIdx = 0;         // Active control index       
@@ -12482,6 +12540,8 @@ namespace DataDecoder
         string kCATdn = "";     // current CAT Dn command 
         string kCATdcOn = "";   // current DC CAT Up command 
         string kCATdcOff = "";  // current DC CAT Dn command 
+        string TkVer = "";      // current tk hex file version
+        string TkComNum = "";   // Knob Com port number
 
         // kFlags descr.
         // LSB  0   Mode A = Off, B = On
@@ -12497,6 +12557,33 @@ namespace DataDecoder
 
         #region # Delegates #
 
+        //// Write to Progress Bar control
+        //delegate void SettsProgBarCallback(string text);
+        //private void SettsProgBar(string text)
+        //{
+        //    if (tsProgBar.InvokeRequired)
+        //    {
+        //        SettsProgBarCallback d = new SettsProgBarCallback(SettsProgBar);
+        //        this.Invoke(d, new object[] { text });
+        //    }
+        //    else
+        //    {
+        //        if (text == "setup")
+        //        {
+        //            tsProgBar.Value = 0;
+        //            tsProgBar.Maximum = 225;
+        //            tsProgBar.Visible = true;
+        //            return;
+        //        }
+        //        else if (text == "cleanup")
+        //        {
+        //            tsProgBar.Visible = false;
+        //            return;
+        //        }
+        //        else
+        //        { tsProgBar.Value += 1; }
+        //    }
+        //}
         // Write to ModeAOn control
         delegate void SetModeAOnCallback(string text);
         private void SetModeAOn(string text)
@@ -12746,7 +12833,19 @@ namespace DataDecoder
                     {
                         switch (sCmd.Substring(0, 1))
                         {
-                            case "C": //double click
+                            case "B": //boot loader active
+                                if (sCmd.Substring(0, 3) == "BL!")
+                                {
+                                    KnobPort.DiscardInBuffer();
+                                    KnobPort.DiscardOutBuffer();
+                                    KnobPort.Close();
+                                    KnobPort.Dispose();
+                                    Thread.Sleep(10000);
+                                    ReOpenKnobPort();
+                                    if (KnobPort.IsOpen) KnobPort.Write("F;");
+                                }
+                                break;
+                            case "C": //double-click
                                 kFlags ^= 0x20;
                                 WriteFlags(); WriteLED();
                                 if (Convert.ToBoolean(kFlags >> 5 & 0x01)) //led2 lit
@@ -12771,19 +12870,22 @@ namespace DataDecoder
                                     { tkSize = Convert.ToInt32(sCmd.Substring(1, 2)); }
                                     if (tkSize > stepSize)
                                     { newSize = (stepSize + (tkSize - 1)).ToString(); }
-                                    else 
+                                    else
                                     { newSize = stepSize.ToString(); }
                                     WriteToPort(kCATdn + newSize.PadLeft(2, '0') + ";", iSleep);
                                 }
                                 else if (ActIdx == 2)    // tune RIT
-                                {   
-                                   int RIT = 0;
-                                   RITfrq -= 2;
-                                   if (RITfrq < 0) {RIT = (int)Math.Abs(RITfrq);
-                                       kCATdn = "ZZRF-" + RIT.ToString().PadLeft(4, '0') + ";";}
-                                   else
-                                   { kCATdn = "ZZRF+" + RITfrq.ToString().PadLeft(4, '0') + ";"; }
-                                    WriteToPort(kCATdn, iSleep);                                  
+                                {
+                                    int RIT = 0;
+                                    RITfrq -= 2;
+                                    if (RITfrq < 0)
+                                    {
+                                        RIT = (int)Math.Abs(RITfrq);
+                                        kCATdn = "ZZRF-" + RIT.ToString().PadLeft(4, '0') + ";";
+                                    }
+                                    else
+                                    { kCATdn = "ZZRF+" + RITfrq.ToString().PadLeft(4, '0') + ";"; }
+                                    WriteToPort(kCATdn, iSleep);
                                 }
                                 else if (ActIdx == 3)   // tune XIT
                                 {
@@ -12805,24 +12907,57 @@ namespace DataDecoder
                                     else if (volIdx >= 1)
                                     {
                                         volIdx -= 1;
-                                        WriteToPort(kCATdn + 
+                                        WriteToPort(kCATdn +
                                             volIdx.ToString().PadLeft(3, '0') + ";", iSleep);
                                     }
                                 }
-                                    break;
+                                break;
                             case "F":   //firmware revision
-                                SetgrpTKnob("K6TD && K6TU Tuning Knob - Rev. " +
-                                    sCmd.Substring(1, 2) + "." +
-                                    sCmd.Substring(3, 2));
+                                if (sCmd.Substring(0, 3) == "FFF")
+                                {
+                                    if (!updating)
+                                    {
+                                        SetgrpTKnob("Updating Firmware!");
+                                        SendTkTextFile("USB Tuning Knob.hex");
+                                    }
+                                }
+                                else
+                                {
+                                    SetgrpTKnob("K6TD && K6TU Tuning Knob - Rev. " +
+                                        sCmd.Substring(1, 2) + "." +
+                                        sCmd.Substring(3, 2));
+                                    TkVer = sCmd.Substring(1, 4);
+                                }
                                 break;
-                            case "L": //long click
-                                    kFlags ^= 0x41;
-                                    WriteFlags(); WriteLED();
-                                break;
-                            case "S": //single click
-                                kFlags ^= 0x10; // toggle single click bit
+                            case "L": //long-click
+                                kFlags ^= 0x41;
                                 WriteFlags(); WriteLED();
                                 break;
+                            case "S": //single-click
+                                kFlags ^= 0x10; // toggle single-click bit
+                                WriteFlags(); WriteLED();
+                                break;
+                            case "T": //TKnob active
+                                if (sCmd.Substring(0, 3) == "TK!")
+                                {
+                                    KnobPort.DiscardInBuffer();
+                                    KnobPort.DiscardOutBuffer();
+                                    KnobPort.Close();
+                                    KnobPort.Dispose();
+                                    Thread.Sleep(5000);
+                                    SetgrpTKnob("Rebooting!");
+                                    Thread.Sleep(5000);
+                                    ReOpenKnobPort();
+                                    KnobPort.Write("F;");
+                                    WriteLED();
+                                    updating = false;
+                                }
+                                if (sCmd.Substring(0, 3) == "TK~")
+                                {
+                                    // Bad Load, force re-load
+                                    KnobPort.Write("F;");
+                                }
+                                         break;
                             case "U": //tune something up
                                 if (ActIdx == 0 || ActIdx == 1)// tune vfo a/b
                                 {
@@ -12840,8 +12975,11 @@ namespace DataDecoder
                                 {
                                     int RIT = 0;
                                     RITfrq += 2;
-                                    if (RITfrq < 0) { RIT = (int)Math.Abs(RITfrq);
-                                        kCATup = "ZZRF-" + RIT.ToString().PadLeft(4, '0') + ";"; }
+                                    if (RITfrq < 0)
+                                    {
+                                        RIT = (int)Math.Abs(RITfrq);
+                                        kCATup = "ZZRF-" + RIT.ToString().PadLeft(4, '0') + ";";
+                                    }
                                     else
                                     { kCATup = "ZZRF+" + RITfrq.ToString().PadLeft(4, '0') + ";"; }
                                     WriteToPort(kCATup, iSleep);
@@ -12850,8 +12988,11 @@ namespace DataDecoder
                                 {
                                     int XIT = 0;
                                     XITfrq += 2;
-                                    if (XITfrq < 0) { XIT = (int)Math.Abs(XITfrq);
-                                        kCATup = "ZZXF-" + XIT.ToString().PadLeft(4, '0') + ";";}
+                                    if (XITfrq < 0)
+                                    {
+                                        XIT = (int)Math.Abs(XITfrq);
+                                        kCATup = "ZZXF-" + XIT.ToString().PadLeft(4, '0') + ";";
+                                    }
                                     else
                                     { kCATup = "ZZXF+" + XITfrq.ToString().PadLeft(4, '0') + ";"; }
                                     WriteToPort(kCATup, iSleep);
@@ -12876,6 +13017,39 @@ namespace DataDecoder
                                         case 0: // Tune Step Up
                                             WriteToPort("ZZSU;", iSleep);
                                             break;
+                                        case 1: // Tune Step Down
+                                            WriteToPort("ZZSD;", iSleep);
+                                            break;
+                                        case 2: // Macro #1
+                                            ProcessTkSwMacro(22);
+                                            break;
+                                        case 3: // Macro #2
+                                            ProcessTkSwMacro(23);
+                                            break;
+                                        case 4: // Macro #3
+                                            ProcessTkSwMacro(24);
+                                            break;
+                                        case 5: // Macro #4
+                                            ProcessTkSwMacro(25);
+                                            break;
+                                        case 6: // Macro #5
+                                            ProcessTkSwMacro(26);
+                                            break;
+                                        case 7: // Turn RIT On/Off
+
+                                            break;
+                                        case 8: // Clear RIT
+                                            { WriteToPort("ZZRC;", iSleep); }
+                                            break;
+                                    }
+                                }
+                                if (sCmd.Substring(0, 2) == "X2")
+                                {
+                                    switch (set.cboTkSw2)
+                                    {
+                                        case 0: // Tune Step Up
+                                            WriteToPort("ZZSU;", iSleep);
+                                            break;
                                         case 1: // Tune Step dWN
                                             WriteToPort("ZZSD;", iSleep);
                                             break;
@@ -12896,60 +13070,33 @@ namespace DataDecoder
                                             break;
                                     }
                                 }
-                                    if (sCmd.Substring(0, 2) == "X2")
+                                if (sCmd.Substring(0, 2) == "X3")
+                                {
+                                    switch (set.cboTkSw3)
                                     {
-                                        switch (set.cboTkSw2)
-                                        {
-                                            case 0: // Tune Step Up
-                                                WriteToPort("ZZSU;", iSleep);
-                                                break;
-                                            case 1: // Tune Step dWN
-                                                WriteToPort("ZZSD;", iSleep);
-                                                break;
-                                            case 2: // Tune Step Up
-                                                ProcessTkSwMacro(22);
-                                                break;
-                                            case 3: // Tune Step Up
-                                                ProcessTkSwMacro(23);
-                                                break;
-                                            case 4: // Tune Step Up
-                                                ProcessTkSwMacro(24);
-                                                break;
-                                            case 5: // Tune Step Up
-                                                ProcessTkSwMacro(25);
-                                                break;
-                                            case 6: // Tune Step Up
-                                                ProcessTkSwMacro(26);
-                                                break;
-                                        }
+                                        case 0: // Tune Step Up
+                                            WriteToPort("ZZSU;", iSleep);
+                                            break;
+                                        case 1: // Tune Step Dwn
+                                            WriteToPort("ZZSD;", iSleep);
+                                            break;
+                                        case 2: // Tune Step Up
+                                            ProcessTkSwMacro(22);
+                                            break;
+                                        case 3: // Tune Step Up
+                                            ProcessTkSwMacro(23);
+                                            break;
+                                        case 4: // Tune Step Up
+                                            ProcessTkSwMacro(24);
+                                            break;
+                                        case 5: // Tune Step Up
+                                            ProcessTkSwMacro(25);
+                                            break;
+                                        case 6: // Tune Step Up
+                                            ProcessTkSwMacro(26);
+                                            break;
                                     }
-                                    if (sCmd.Substring(0, 2) == "X3")
-                                    {
-                                        switch (set.cboTkSw3)
-                                        {
-                                            case 0: // Tune Step Up
-                                                WriteToPort("ZZSU;", iSleep);
-                                                break;
-                                            case 1: // Tune Step Dwn
-                                                WriteToPort("ZZSD;", iSleep);
-                                                break;
-                                            case 2: // Tune Step Up
-                                                ProcessTkSwMacro(22);
-                                                break;
-                                            case 3: // Tune Step Up
-                                                ProcessTkSwMacro(23);
-                                                break;
-                                            case 4: // Tune Step Up
-                                                ProcessTkSwMacro(24);
-                                                break;
-                                            case 5: // Tune Step Up
-                                                ProcessTkSwMacro(25);
-                                                break;
-                                            case 6: // Tune Step Up
-                                                ProcessTkSwMacro(26);
-                                                break;
-                                        }
-                                    }
+                                }
                                 break;
                             case "Z":   // parameter settings from knob
                                 if (sCmd.Substring(0, 2) == "ZC")
@@ -12962,6 +13109,29 @@ namespace DataDecoder
                                 { SetZR(sCmd.Substring(2, 2)); }
                                 break;
                         }
+                        if (sCmd.Contains("!OK!")) // got a good load
+                        {
+                            SetgrpTKnob("Update Complete!");
+                            KnobPort.Write("TK!;"); // switch to knob mode
+                        }
+                        else if (sCmd.Contains("!BAD!")) // got bad load
+                        {
+                            SetgrpTKnob("Update Failed!");
+                            DialogResult result;
+                            result = MessageBox.Show(new Form() { TopMost = true },
+                                "There was an error updating the Tuning Knob firmware.\r\r" +
+                                "Press YES to try the update again OR, Press NO to abort\r" +
+                                "the operation and then consult the wiki documentation \r" +
+                                "listed below for instructions for resolution.\r\r" +
+                                "http://k5fr.com/ddutilwiki/index.php?title=Tuning_Knob#Updating_Firmware",
+                                "Tuning Knob Update Failure",
+                                MessageBoxButtons.YesNo, MessageBoxIcon.Information);
+                            if (result == DialogResult.No)
+                            { return; }
+                            // try the update again
+                            SendTkTextFile("USB Tuning Knob.hex");
+                        }
+//                        Console.WriteLine(sCmd); // print every thing coming into the knob port
                     }
                 }
             }
@@ -12993,6 +13163,7 @@ namespace DataDecoder
             if (KnobPort.IsOpen) KnobPort.Close();
             if (cboKnobPort.SelectedIndex > 0)
             {
+                TkComNum = cboKnobPort.SelectedItem.ToString();
                 KnobPort.PortName = cboKnobPort.SelectedItem.ToString();
                 try
                 {
@@ -13158,6 +13329,8 @@ namespace DataDecoder
             {
                 try
                 {
+                    TkInit = true;
+                    TkUpDate.Enabled = true;
                     cboKnobAOn.SelectedIndex = set.cboKnobAOn;
                     cboKnobAOff.SelectedIndex = set.cboKnobAOff;
                     cboKnobBOn.SelectedIndex = set.cboKnobBOn;
@@ -13180,7 +13353,6 @@ namespace DataDecoder
                         "Unable to write to log");
                     chkKnobEnab.Checked = false;
                 }
-
             }
         }
 
@@ -13321,6 +13493,68 @@ namespace DataDecoder
                 MessageBox.Show(new Form() { TopMost = true },
                     "There are no commands setup for this Macro " + macro.ToString());
             }
+        }
+
+        // The knob update button was pressed.
+        private void TkUpDate_Click(object sender, EventArgs e)
+        {
+            TextReader tr = new StreamReader("TkVersion.txt");
+            string tempStr = tr.ReadLine();
+            tr.Close();
+            
+            // display alert message if new version is avail
+            if (Convert.ToInt32(tempStr) > Convert.ToInt32(TkVer))
+            {
+                DialogResult result;
+                result = MessageBox.Show(new Form() { TopMost = true },
+                    "There is a new version of the Tuning Knob Firmware available.\r\r" +
+                    "Press 'Yes' to start the update process or press 'No' to abort.\r\r" +
+                    "Please wait until the operation is finished before touching any keys",
+                    "Tuning Knob Firmware Update",
+                    MessageBoxButtons.YesNo, MessageBoxIcon.Information);
+                if (result == DialogResult.No)
+                { return; }
+                KnobPort.Write("BL!;");
+                SetgrpTKnob("Preparing to Update!");
+            }
+            else
+            {
+                MessageBox.Show(new Form() { TopMost = true },
+                "Your Tuning Knob Firmware is up to date.");
+            }
+        }
+        // send TK update file
+        private void SendTkTextFile(string file)
+        {
+            using (StreamReader sr = new StreamReader(file))
+            {
+                while (sr.Peek() >= 0)
+                {
+                    KnobPort.WriteLine(sr.ReadLine());
+                    Thread.Sleep(20);
+                }
+            }
+            KnobPort.Write("F;");
+
+        }
+        // re-initialize knob port after closing during firmware update.
+        void ReOpenKnobPort()
+        {
+            this.KnobPort = new System.IO.Ports.SerialPort(this.components);
+            this.KnobPort.RtsEnable = true;
+            this.KnobPort.DataReceived += new System.IO.Ports.SerialDataReceivedEventHandler(this.KnobPort_DataReceived);
+                if (KnobPort.IsOpen) KnobPort.Close();
+                KnobPort.PortName = TkComNum;
+                try
+                {
+                    KnobPort.Open();
+                }
+                catch (Exception e)
+                {
+                    MessageBox.Show(new Form() { TopMost = true },
+                        e.Message + "\r\r" + e.StackTrace, "ReOpenKnobPort Error",
+                       MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
         }
 
         #endregion * Methods *
@@ -14249,10 +14483,8 @@ namespace DataDecoder
                     WN2Timer.Enabled = false; set.WnEnab = false;
                     txtFwd.Visible = false; lblFwd.Visible = false;
                     mini.txtFwd.Visible = false; mini.lblFwd.Visible = false;
-                    txtAvg.Enabled = false; txtSWR.Enabled = false;
-                    txtAvg.Enabled = false; txtSWR.Enabled = false;
-                    mini.txtAvg.Text = ""; mini.txtSWR.Text = "";
-                    mini.txtAvg.Text = ""; mini.txtSWR.Text = "";
+                    //txtAvg.Enabled = false; txtSWR.Enabled = false;
+                    //mini.txtAvg.Text = ""; mini.txtSWR.Text = "";
                 }
             }
             else
@@ -14261,8 +14493,8 @@ namespace DataDecoder
                 FT_Close(m_hPort); m_hPort = 0;
                 txtFwd.Visible = false; lblFwd.Visible = false;
                 mini.txtFwd.Visible = false; mini.lblFwd.Visible = false;
-                txtAvg.Enabled = false; txtSWR.Enabled = false;
-                mini.txtAvg.Enabled = false; mini.txtSWR.Enabled = false;
+                // txtSWR.Enabled = false;
+                //mini.txtAvg.Enabled = false; mini.txtSWR.Enabled = false;
                 txtAvg.Text = ""; txtSWR.Text = "";
                 mini.txtAvg.Text = ""; mini.txtSWR.Text = "";
             }
