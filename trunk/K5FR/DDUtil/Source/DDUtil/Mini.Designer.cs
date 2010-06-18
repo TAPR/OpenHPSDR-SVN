@@ -107,11 +107,13 @@ namespace DataDecoder
             this.label1 = new System.Windows.Forms.Label();
             this.btnMacro1 = new System.Windows.Forms.Button();
             this.label28 = new System.Windows.Forms.Label();
+            this.TkRed = new System.Windows.Forms.Button();
+            this.TkYel = new System.Windows.Forms.Button();
+            this.TkGrn = new System.Windows.Forms.Button();
             this.grpStepCtrl = new System.Windows.Forms.GroupBox();
             this.grpRotor = new System.Windows.Forms.GroupBox();
             this.button4 = new System.Windows.Forms.Button();
             this.button5 = new System.Windows.Forms.Button();
-//            this.textBox3 = new System.Windows.Forms.TextBox();
             this.grpAmp = new System.Windows.Forms.GroupBox();
             this.txtTune = new System.Windows.Forms.TextBox();
             this.lblTune = new System.Windows.Forms.Label();
@@ -120,9 +122,6 @@ namespace DataDecoder
             this.label77 = new System.Windows.Forms.Label();
             this.label76 = new System.Windows.Forms.Label();
             this.label73 = new System.Windows.Forms.Label();
-            this.TkRed = new System.Windows.Forms.Button();
-            this.TkYel = new System.Windows.Forms.Button();
-            this.TkGrn = new System.Windows.Forms.Button();
             this.grpMacro.SuspendLayout();
             this.grpStepCtrl.SuspendLayout();
             this.grpRotor.SuspendLayout();
@@ -136,9 +135,9 @@ namespace DataDecoder
             this.lblAvg.ForeColor = System.Drawing.Color.Navy;
             this.lblAvg.Location = new System.Drawing.Point(125, 9);
             this.lblAvg.Name = "lblAvg";
-            this.lblAvg.Size = new System.Drawing.Size(23, 12);
+            this.lblAvg.Size = new System.Drawing.Size(24, 12);
             this.lblAvg.TabIndex = 83;
-            this.lblAvg.Text = "Avg";
+            this.lblAvg.Text = "Fwd";
             this.lblAvg.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // txtAvg
@@ -1137,6 +1136,39 @@ namespace DataDecoder
             this.label28.TabIndex = 114;
             this.label28.Text = "F1";
             // 
+            // TkRed
+            // 
+            this.TkRed.BackColor = System.Drawing.SystemColors.Control;
+            this.TkRed.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.TkRed.Location = new System.Drawing.Point(417, 28);
+            this.TkRed.Name = "TkRed";
+            this.TkRed.Size = new System.Drawing.Size(10, 10);
+            this.TkRed.TabIndex = 116;
+            this.toolTip1.SetToolTip(this.TkRed, "Tuning Knob Long-Click (On = Mode A, Off = Mode B)");
+            this.TkRed.UseVisualStyleBackColor = false;
+            // 
+            // TkYel
+            // 
+            this.TkYel.BackColor = System.Drawing.SystemColors.Control;
+            this.TkYel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.TkYel.Location = new System.Drawing.Point(417, 43);
+            this.TkYel.Name = "TkYel";
+            this.TkYel.Size = new System.Drawing.Size(10, 10);
+            this.TkYel.TabIndex = 114;
+            this.toolTip1.SetToolTip(this.TkYel, "Tuning Knob Short-Click (On/Off)");
+            this.TkYel.UseVisualStyleBackColor = false;
+            // 
+            // TkGrn
+            // 
+            this.TkGrn.BackColor = System.Drawing.SystemColors.Control;
+            this.TkGrn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.TkGrn.Location = new System.Drawing.Point(417, 57);
+            this.TkGrn.Name = "TkGrn";
+            this.TkGrn.Size = new System.Drawing.Size(10, 10);
+            this.TkGrn.TabIndex = 115;
+            this.toolTip1.SetToolTip(this.TkGrn, "Tuning Knob Double-Click (On/Off)");
+            this.TkGrn.UseVisualStyleBackColor = false;
+            // 
             // grpStepCtrl
             // 
             this.grpStepCtrl.Controls.Add(this.lblStepFreq);
@@ -1161,7 +1193,6 @@ namespace DataDecoder
             this.grpRotor.Controls.Add(this.txtSP);
             this.grpRotor.Controls.Add(this.button4);
             this.grpRotor.Controls.Add(this.button5);
-            this.grpRotor.Controls.Add(this.textBox3);
             this.grpRotor.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.25F, System.Drawing.FontStyle.Bold);
             this.grpRotor.ForeColor = System.Drawing.Color.Firebrick;
             this.grpRotor.Location = new System.Drawing.Point(320, 26);
@@ -1206,16 +1237,6 @@ namespace DataDecoder
             this.button5.TabIndex = 82;
             this.button5.Text = "PC";
             this.button5.UseVisualStyleBackColor = false;
-            // 
-            // textBox3
-            // 
-            //this.textBox3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            //this.textBox3.Location = new System.Drawing.Point(42, -26);
-            //this.textBox3.Name = "textBox3";
-            //this.textBox3.Size = new System.Drawing.Size(36, 21);
-            //this.textBox3.TabIndex = 77;
-            //this.textBox3.Text = "Tmp";
-            //this.textBox3.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // grpAmp
             // 
@@ -1322,39 +1343,6 @@ namespace DataDecoder
             this.label73.Size = new System.Drawing.Size(30, 13);
             this.label73.TabIndex = 11;
             this.label73.Text = "Tune";
-            // 
-            // TkRed
-            // 
-            this.TkRed.BackColor = System.Drawing.SystemColors.Control;
-            this.TkRed.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.TkRed.Location = new System.Drawing.Point(417, 28);
-            this.TkRed.Name = "TkRed";
-            this.TkRed.Size = new System.Drawing.Size(10, 10);
-            this.TkRed.TabIndex = 116;
-            this.toolTip1.SetToolTip(this.TkRed, "Tuning Knob Long-Click (On = Mode A, Off = Mode B)");
-            this.TkRed.UseVisualStyleBackColor = false;
-            // 
-            // TkYel
-            // 
-            this.TkYel.BackColor = System.Drawing.SystemColors.Control;
-            this.TkYel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.TkYel.Location = new System.Drawing.Point(417, 43);
-            this.TkYel.Name = "TkYel";
-            this.TkYel.Size = new System.Drawing.Size(10, 10);
-            this.TkYel.TabIndex = 114;
-            this.toolTip1.SetToolTip(this.TkYel, "Tuning Knob Short-Click (On/Off)");
-            this.TkYel.UseVisualStyleBackColor = false;
-            // 
-            // TkGrn
-            // 
-            this.TkGrn.BackColor = System.Drawing.SystemColors.Control;
-            this.TkGrn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.TkGrn.Location = new System.Drawing.Point(417, 57);
-            this.TkGrn.Name = "TkGrn";
-            this.TkGrn.Size = new System.Drawing.Size(10, 10);
-            this.TkGrn.TabIndex = 115;
-            this.toolTip1.SetToolTip(this.TkGrn, "Tuning Knob Double-Click (On/Off)");
-            this.TkGrn.UseVisualStyleBackColor = false;
             // 
             // Mini
             // 

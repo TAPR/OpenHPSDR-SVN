@@ -132,6 +132,7 @@ namespace DataDecoder
             this.tabRCP = new System.Windows.Forms.TabPage();
             this.button7 = new System.Windows.Forms.Button();
             this.grpTKnob = new System.Windows.Forms.GroupBox();
+            this.TkUpDate = new System.Windows.Forms.Button();
             this.lblZE = new System.Windows.Forms.Label();
             this.txtZE = new System.Windows.Forms.TextBox();
             this.label232 = new System.Windows.Forms.Label();
@@ -2509,6 +2510,7 @@ namespace DataDecoder
             // 
             // grpTKnob
             // 
+            this.grpTKnob.Controls.Add(this.TkUpDate);
             this.grpTKnob.Controls.Add(this.lblZE);
             this.grpTKnob.Controls.Add(this.txtZE);
             this.grpTKnob.Controls.Add(this.label232);
@@ -2549,7 +2551,21 @@ namespace DataDecoder
             this.grpTKnob.TabIndex = 67;
             this.grpTKnob.TabStop = false;
             this.grpTKnob.Text = "K6TD && K6TU Tuning Knob";
-            this.grpTKnob.Visible = false;
+            // 
+            // TkUpDate
+            // 
+            this.TkUpDate.AutoSize = true;
+            this.TkUpDate.BackColor = System.Drawing.SystemColors.Control;
+            this.TkUpDate.Enabled = false;
+            this.TkUpDate.ForeColor = System.Drawing.Color.Navy;
+            this.TkUpDate.Location = new System.Drawing.Point(304, 17);
+            this.TkUpDate.Name = "TkUpDate";
+            this.TkUpDate.Size = new System.Drawing.Size(66, 25);
+            this.TkUpDate.TabIndex = 111;
+            this.TkUpDate.Text = "UpDate";
+            this.toolTip1.SetToolTip(this.TkUpDate, "Press to update the Tuning Knob firmware.");
+            this.TkUpDate.UseVisualStyleBackColor = false;
+            this.TkUpDate.Click += new System.EventHandler(this.TkUpDate_Click);
             // 
             // lblZE
             // 
@@ -15167,7 +15183,7 @@ namespace DataDecoder
             // txtSWR
             // 
             this.txtSWR.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtSWR.ForeColor = System.Drawing.SystemColors.WindowText;
+            this.txtSWR.ForeColor = System.Drawing.Color.Red;
             this.txtSWR.Location = new System.Drawing.Point(141, 365);
             this.txtSWR.Name = "txtSWR";
             this.txtSWR.Size = new System.Drawing.Size(45, 20);
@@ -16360,9 +16376,9 @@ namespace DataDecoder
             this.lblAvg.ForeColor = System.Drawing.Color.Navy;
             this.lblAvg.Location = new System.Drawing.Point(116, 369);
             this.lblAvg.Name = "lblAvg";
-            this.lblAvg.Size = new System.Drawing.Size(23, 12);
+            this.lblAvg.Size = new System.Drawing.Size(24, 12);
             this.lblAvg.TabIndex = 74;
-            this.lblAvg.Text = "Avg";
+            this.lblAvg.Text = "Fwd";
             this.lblAvg.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // WN2Timer
@@ -16476,6 +16492,7 @@ namespace DataDecoder
             // 
             // KnobPort
             // 
+            this.KnobPort.ReadTimeout = 75;
             this.KnobPort.RtsEnable = true;
             this.KnobPort.DataReceived += new System.IO.Ports.SerialDataReceivedEventHandler(this.KnobPort_DataReceived);
             // 
@@ -18085,6 +18102,7 @@ namespace DataDecoder
         private Button button7;
         private ToolStripMenuItem profileSaveToolStripMenuItem;
         private ToolStripMenuItem profileLoadToolStripMenuItem;
+        private Button TkUpDate;
 
     }
 }
