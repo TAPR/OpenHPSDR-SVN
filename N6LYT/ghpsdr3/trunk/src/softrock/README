@@ -47,4 +47,14 @@ To use the X-F1 Extreme use:
 
 
 
+To allow user access to the USB device you need to set the device permissions.  Create a file in /etc/udev/rules.d called 90-softrock.rules containing the following line (you will need to be root):
+
+ 
+SUBSYSTEMS=="usb",ATTRS{idVendor}=="16c0",ATTRS{idProduct}=="05dc",SYMLINK+="softrock",MODE="666"
+
+Now when you plug the usb cable into the computer it will create a /dev/softrock and it will have the permissions set to allow any user to read/write to it.
+
+
+
+
 
