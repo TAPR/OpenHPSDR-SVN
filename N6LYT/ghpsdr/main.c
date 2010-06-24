@@ -177,6 +177,8 @@ gint mainRootY;
 
 char propertyPath[128];
 
+extern int timing;
+
 /* --------------------------------------------------------------------------*/
 /** 
 * @brief Save the main GUI State. 
@@ -581,6 +583,7 @@ struct option longOptions[] = {
     {"sound-card",required_argument, 0, 0},
     {"sample-rate",required_argument, 0, 1},
     {"property-path",required_argument, 0, 2},
+    {"timing",no_argument, 0, 3},
 };
 
 char* shortOptions="";
@@ -607,6 +610,9 @@ void processCommands(int argc,char** argv) {
                 break;
             case 2:
                 strcpy(propertyPath,optarg);
+                break;
+            case 3:
+                timing=1;
                 break;
         }
     }
