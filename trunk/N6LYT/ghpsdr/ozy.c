@@ -11,6 +11,7 @@
 #include <string.h>
 #include <semaphore.h>
 #include <time.h>
+#include <sys/timeb.h>
 
 #include <gtk/gtk.h>
 
@@ -120,6 +121,13 @@ int ptt=0;
 int dot=0;
 int dash=0;
 
+
+int timing=0;
+static struct timeb start_time;
+static struct timeb end_time;
+static int sample_count=0;
+
+
 /* --------------------------------------------------------------------------*/
 /** 
 * @brief Process the ozy input buffer
@@ -200,6 +208,16 @@ void process_ozy_input_buffer(char* buffer) {
             mic_left_buffer[samples]=mic_sample_float;
             mic_right_buffer[samples]=0.0f;
             samples++;
+
+            if(timing) {
+                sample_count++;
+                if(sample_count==sampleRate) {
+                    ftime(&end_time);
+                    fprintf(stderr,"%d samples in %ld ms\n",sample_count,((end_time.time*1000)+end_time.millitm)-((start_time.time*1000)+start_time.millitm));
+                    sample_count=0;
+                    ftime(&start_time);
+                }
+            }
 
             // when we have enough samples give them to DttSP and get the results
             if(samples==buffer_size) {
