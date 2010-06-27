@@ -3442,5 +3442,17 @@ namespace DataDecoder.Properties {
                 this["cboTkSw3"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool chkStartMacro {
+            get {
+                return ((bool)(this["chkStartMacro"]));
+            }
+            set {
+                this["chkStartMacro"] = value;
+            }
+        }
     }
 }

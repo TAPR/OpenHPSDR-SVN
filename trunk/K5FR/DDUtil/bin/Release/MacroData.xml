@@ -104,4 +104,8 @@
     <Button>TkSw5</Button>
     <Command>DDWW4;</Command>
   </macro>
+  <macro>
+    <Button>StartUp</Button>
+    <Command>DDMW;</Command>
+  </macro>
 </macroData>

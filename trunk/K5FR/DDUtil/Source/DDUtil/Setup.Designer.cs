@@ -1265,6 +1265,7 @@ namespace DataDecoder
             this.toolStripSeparator8 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripMenuItem25 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem26 = new System.Windows.Forms.ToolStripMenuItem();
+            this.chkStartMacro = new System.Windows.Forms.CheckBox();
             this.tabControl.SuspendLayout();
             this.tabPorts.SuspendLayout();
             this.grpSlave.SuspendLayout();
@@ -12102,6 +12103,7 @@ namespace DataDecoder
             // 
             // tabSetup
             // 
+            this.tabSetup.Controls.Add(this.chkStartMacro);
             this.tabSetup.Controls.Add(this.chkShortCut);
             this.tabSetup.Controls.Add(this.chkCwTx);
             this.tabSetup.Controls.Add(this.groupBox16);
@@ -16698,6 +16700,20 @@ namespace DataDecoder
             this.toolStripMenuItem26.Text = "Exit";
             this.toolStripMenuItem26.ToolTipText = "Exit DDUtil";
             // 
+            // chkStartMacro
+            // 
+            this.chkStartMacro.AutoSize = true;
+            this.chkStartMacro.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
+            this.chkStartMacro.ForeColor = System.Drawing.Color.Navy;
+            this.chkStartMacro.Location = new System.Drawing.Point(269, 250);
+            this.chkStartMacro.Name = "chkStartMacro";
+            this.chkStartMacro.Size = new System.Drawing.Size(93, 17);
+            this.chkStartMacro.TabIndex = 112;
+            this.chkStartMacro.Text = "Startup Macro";
+            this.toolTip1.SetToolTip(this.chkStartMacro, "Select to Enable Startup Macro (M27)");
+            this.chkStartMacro.UseVisualStyleBackColor = true;
+            this.chkStartMacro.CheckedChanged += new System.EventHandler(this.chkStartMacro_CheckedChanged);
+            // 
             // Setup
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -18103,6 +18119,7 @@ namespace DataDecoder
         private ToolStripMenuItem profileSaveToolStripMenuItem;
         private ToolStripMenuItem profileLoadToolStripMenuItem;
         private Button TkUpDate;
+        private CheckBox chkStartMacro;
 
     }
 }
