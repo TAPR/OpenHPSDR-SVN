@@ -681,6 +681,7 @@ namespace DataDecoder
             chkModeChg.Checked = set.ModeChg;
             chkCwTx.Checked = set.chkCwTx;
             chkShortCut.Checked = set.chkShortCut;
+            chkStartMacro.Checked = set.chkStartMacro;
 
             // setup error log parameters
             string path = Application.ExecutablePath;
@@ -701,6 +702,9 @@ namespace DataDecoder
 
             mSplashScreen.SetProgress("Loading Main Form", 1.0);
             COBC = lastBand;
+
+            if (chkStartMacro.Checked)
+            StartMacro(27); // send startup macro M27
 
         }// Setup
         #endregion Initialization
@@ -1130,6 +1134,13 @@ namespace DataDecoder
 
         #region Form Events
 
+        // the enable startup macro check box has changed
+        private void chkStartMacro_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chkStartMacro.Checked) set.chkStartMacro = true;
+            else set.chkStartMacro = false;
+            set.Save();
+        }
         // the enable short-cuts check box has changed
         private void chkShortCut_CheckedChanged(object sender, EventArgs e)
         {
@@ -2658,6 +2669,29 @@ namespace DataDecoder
 
         #region Helper Methods
 
+        public void StartMacro(int macro)
+        {
+            try
+            {
+                if (StepCtr == 0)// && (xOn == "0" || xOn == ""))
+                {   // 
+                    if (dgm.Rows[macro - 1].Cells[1].Value.ToString() == "")
+                    {
+                        throw new Exception();
+                    }
+                    string cmds = dgm.Rows[macro - 1].Cells[1].Value.ToString();
+                    ParseBuffer(cmds);
+                }
+            }
+            catch (ArgumentOutOfRangeException)
+            {
+            }
+            catch (NullReferenceException)
+            {
+                MessageBox.Show(new Form() { TopMost = true },
+                    "There are no commands setup for this Macro " + macro.ToString());
+            }
+        }
         
         // display tip of the day dialog
         private void Setup_Shown(object sender, EventArgs e)
@@ -5462,7 +5496,10 @@ namespace DataDecoder
                     byte[] b = { 0xFE, 0xFE, 0xE0, 0x3A, 0x07, 0x01, 0xFD };
                     RepeatPort.Write(b, 0, 7); 
                     break;
-                case "RE":  // Enable Rotor Control
+                case "MW": // Open Mini Window
+                    ShowMini();
+                    break;
+                case "RE": // Enable Rotor Control
                     if (ops.Length == 1)
                     {
                         if (ops == "1") chkRotorEnab.Checked = true;
@@ -6829,7 +6866,7 @@ namespace DataDecoder
             {
                 try
                 {   // close PSDR and wait for PSDR to close
-                    process.Kill();
+                    process.CloseMainWindow();
                     process.WaitForExit();
                     Thread.Sleep(2500);
                     //WriteToPort("ZZBY;", 2500);
@@ -6951,6 +6988,440 @@ namespace DataDecoder
         }
 
         #endregion PSDR PowerOn
+
+        #region Profiles
+
+        #region # Declarations #
+
+        #endregion # Declarations #
+
+        #region # Delegates #
+
+        #endregion # Delegates #
+
+        #region # Events #
+
+        // the save profile menu item was selected
+        private void profileSaveToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            SaveProfile();
+        }
+        // the load profile menu item was selected
+        private void profileLoadToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            LoadProfile();
+        }
+        
+        #endregion # Events #
+
+        #region # Methods #
+
+        // call file dialog get profile name.
+        string GetFileName(string title)
+        {
+            // get the App Data Path
+            if (app_data_path == "")
+            {
+                Assembly assembly = Assembly.GetExecutingAssembly();
+                FileVersionInfo fvi = FileVersionInfo.GetVersionInfo(assembly.Location);
+                string version = fvi.FileVersion.Substring(0, fvi.FileVersion.LastIndexOf("."));
+                //AppDataPath = assembly.Location;
+                AppDataPath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData)
+                + "\\DDUtil\\";
+            }
+            string pfileDir = app_data_path + "Profiles\\";
+            if (!Directory.Exists(pfileDir))
+                Directory.CreateDirectory(pfileDir);
+
+//            string ProfileFile = "";
+//            OpenFileDialog openFileDialog1 = new OpenFileDialog();
+            openFileDialog1.InitialDirectory = pfileDir;
+            openFileDialog1.Filter = "xml files|*.xml";
+            openFileDialog1.Title = title;
+            if (openFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                string filename = openFileDialog1.FileName;
+                //int start = openFileDialog1.FileName.LastIndexOf("\\") + 1;
+                //ProfileFile = filename.Substring(start, filename.Length - start);
+                return filename;// ProfileFile;
+            }
+            else
+            {
+                return "";// ProfileFile;
+            }
+        }
+        // get a list of control values
+        private ArrayList GetCtrlVal()
+        {
+            // enumerate controls and save to array list
+            ArrayList a = new ArrayList();
+            foreach (Control c in this.Controls)	// save only the following types
+            {
+                // if it is a groupbox or panel, check for sub controls
+                if (c.GetType() == typeof(TabControl))
+                {
+                    foreach (Control c2 in c.Controls)
+                    {
+                        if (c2.GetType() == typeof(TabPage))// && (c2.Name != "tabBCD" &&
+                            //c2.Name != "tabRotor" && c2.Name != "tabExtCtrl" &&
+                            //c2.Name != "tabMacro" && c2.Name != "tabSO2R"))
+                        {
+                            foreach (Control c3 in c2.Controls)
+                            {
+                                if (c3.GetType() == typeof(GroupBox) || c.GetType() == typeof(Panel))
+                                {
+                                    foreach (Control c4 in c3.Controls)
+                                    {
+                                        if (c4.GetType() == typeof(GroupBox))
+                                        {
+                                            foreach (Control c5 in c4.Controls)
+                                            {
+                                                if (c5.Enabled)
+                                                {
+                                                    if (c5.GetType() == typeof(CheckBox))
+                                                        a.Add(c5.Name + "/" + ((CheckBox)c5).Checked.ToString());
+                                                    else if (c5.GetType() == typeof(TextBox))
+                                                    {
+                                                        //string xx = ((TextBox)c5).Text;
+                                                        //if (xx == "" || xx == null)
+                                                        //    ((TextBox)c5).Text = "0";
+                                                        a.Add(c5.Name + "/" + ((TextBox)c5).Text);
+                                                    }
+                                                    else if (c5.GetType() == typeof(ComboBox))
+                                                        a.Add(c5.Name + "/" + ((ComboBox)c5).Text);
+                                                    else if (c5.GetType() == typeof(RadioButton))
+                                                        a.Add(c5.Name + "/" + ((RadioButton)c5).Checked.ToString());
+                                                }
+                                            }
+                                        }
+                                        else
+                                        {
+                                            if (c4.Enabled)
+                                            {
+                                                if (c4.GetType() == typeof(CheckBox))
+                                                    a.Add(c4.Name + "/" + ((CheckBox)c4).Checked.ToString());
+                                                else if (c4.GetType() == typeof(TextBox))
+                                                {
+                                                    //string xx = ((TextBox)c4).Text;
+                                                    //if (xx == "" || xx == null)
+                                                    //    ((TextBox)c4).Text = "0";
+                                                    a.Add(c4.Name + "/" + ((TextBox)c4).Text);
+                                                }
+                                                else if (c4.GetType() == typeof(ComboBox))
+                                                    a.Add(c4.Name + "/" + ((ComboBox)c4).Text);
+                                                else if (c4.GetType() == typeof(RadioButton))
+                                                    a.Add(c4.Name + "/" + ((RadioButton)c4).Checked.ToString());
+                                            }
+
+                                        }
+                                    }
+                                }
+                                else
+                                {
+                                    if (c3.Enabled)
+                                    {
+                                        if (c3.GetType() == typeof(CheckBox))
+                                            a.Add(c3.Name + "/" + ((CheckBox)c3).Checked.ToString());
+                                        else if (c3.GetType() == typeof(TextBox))
+                                        {
+                                            //string xx = ((TextBox)c3).Text;
+                                            //if (xx == "" || xx == null)
+                                            //    ((TextBox)c3).Text = "0";
+                                            a.Add(c3.Name + "/" + ((TextBox)c3).Text);
+                                        }
+                                        else if (c3.GetType() == typeof(ComboBox))
+                                            a.Add(c3.Name + "/" + ((ComboBox)c3).Text);
+                                        else if (c3.GetType() == typeof(RadioButton))
+                                            a.Add(c3.Name + "/" + ((RadioButton)c3).Checked.ToString());
+                                    }
+
+                                }
+
+                            }
+                        }
+                    }
+                }
+                else
+                {   // if not a Tab Control
+                    if (c.Enabled)
+                    {
+                        if (c.GetType() == typeof(CheckBox))
+                            a.Add(c.Name + "/" + ((CheckBox)c).Checked.ToString());
+                        else if (c.GetType() == typeof(TextBox))
+                        {
+                            string xx = ((TextBox)c).Text;
+                            if (xx == "" || xx == null)
+                                ((TextBox)c).Text = "0";
+                            a.Add(c.Name + "/" + ((TextBox)c).Text);
+                        }
+                        else if (c.GetType() == typeof(ComboBox))
+                            a.Add(c.Name + "/" + ((ComboBox)c).SelectedIndex.ToString());
+                        else if (c.GetType() == typeof(RadioButton))
+                            a.Add(c.Name + "/" + ((RadioButton)c).Checked.ToString());
+                    }
+                }
+            }
+            return a;
+        }
+        // load profile from a file
+        void LoadProfile()
+        {
+            try
+            {
+//                throw new ArgumentNullException();
+
+                ArrayList chk_list = new ArrayList();
+                ArrayList cbo_list = new ArrayList();
+                ArrayList rb_list = new ArrayList();
+                ArrayList txt_list = new ArrayList();
+
+                foreach (Control c in this.Controls)	// save only the following types
+                {
+                    // if it is a groupbox or panel, check for sub controls
+                    if (c.GetType() == typeof(TabControl))
+                    {
+                        foreach (Control c2 in c.Controls)
+                        {
+                            if (c2.GetType() == typeof(TabPage))// && (c2.Name != "tabBCD" &&
+                            //c2.Name != "tabRotor" && c2.Name != "tabExtCtrl" &&
+                            //c2.Name != "tabMacro" && c2.Name != "tabSO2R"))
+                            {
+                                foreach (Control c3 in c2.Controls)
+                                {
+                                    if (c3.GetType() == typeof(GroupBox) || c.GetType() == typeof(Panel))
+                                    {
+                                        foreach (Control c4 in c3.Controls)
+                                        {
+                                            if (c4.GetType() == typeof(GroupBox))
+                                            {
+                                                foreach (Control c5 in c4.Controls)
+                                                {
+                                                    if (c5.Enabled)
+                                                    {
+                                                        if (c5.GetType() == typeof(CheckBox))
+                                                            chk_list.Add(c5);
+                                                        else if (c5.GetType() == typeof(TextBox))
+                                                        {
+                                                            txt_list.Add(c5);
+                                                        }
+                                                        else if (c5.GetType() == typeof(ComboBox))
+                                                            cbo_list.Add(c5);
+                                                        else if (c5.GetType() == typeof(RadioButton))
+                                                            rb_list.Add(c5);
+                                                    }
+                                                }
+                                            }
+                                            else
+                                            {
+                                                if (c4.Enabled)
+                                                {
+                                                    if (c4.GetType() == typeof(CheckBox))
+                                                        chk_list.Add(c4);
+                                                    else if (c4.GetType() == typeof(TextBox))
+                                                    {
+                                                        txt_list.Add(c4);
+                                                    }
+                                                    else if (c4.GetType() == typeof(ComboBox))
+                                                        cbo_list.Add(c4);
+                                                    else if (c4.GetType() == typeof(RadioButton))
+                                                        rb_list.Add(c4);
+                                                }
+                                            }
+                                        }
+                                    }
+                                    else
+                                    {
+                                        if (c3.Enabled)
+                                        {
+                                            if (c3.GetType() == typeof(CheckBox))
+                                                chk_list.Add(c3);
+                                            else if (c3.GetType() == typeof(TextBox))
+                                            {
+                                                txt_list.Add(c3);
+                                            }
+                                            else if (c3.GetType() == typeof(ComboBox))
+                                                cbo_list.Add(c3);
+                                            else if (c3.GetType() == typeof(RadioButton))
+                                                rb_list.Add(c3);
+                                        }
+
+                                    }
+
+                                }
+                            }
+                        }
+                    }
+                    else
+                    {   // if not a Tab Control
+                        if (c.Enabled)
+                        {
+                            if (c.GetType() == typeof(CheckBox))
+                                chk_list.Add(c);
+                            else if (c.GetType() == typeof(TextBox))
+                            {
+                                txt_list.Add(c);
+                            }
+                            else if (c.GetType() == typeof(ComboBox))
+                                cbo_list.Add(c);
+                            else if (c.GetType() == typeof(RadioButton))
+                                rb_list.Add(c);
+                        }
+                    }
+                }
+                string pFile = GetFileName("Select a Profile to Load");
+                if (pFile == null || pFile == "") return;
+
+                dso = new DataSet();
+                if (File.Exists(pFile)) dso.ReadXml(pFile);
+                //if (File.Exists(app_data_path + "Profiles\\" + pFile))
+                //    dso.ReadXml(app_data_path + "Profiles\\" + pFile);
+
+                ArrayList a = GetVars("Profile");	// Get the saved list of controls
+                a.Sort();
+                int num_controls = chk_list.Count + cbo_list.Count + rb_list.Count + txt_list.Count;
+
+                foreach (string s in a)				// string is in the format "name,value"
+                {
+                    string[] vals = s.Split('/');
+                    string name = vals[0];
+                    string val = vals[1];
+
+                    if (s.StartsWith("chk"))	// control is a CheckBox
+                    {
+                        for (int i = 0; i < chk_list.Count; i++)
+                        {	// look through each control to find the matching name
+                            CheckBox c = (CheckBox)chk_list[i];
+                            if (c.Name.Equals(name))		// name found
+                            {
+                                c.Checked = bool.Parse(val);	// restore value
+                                i = chk_list.Count + 1;
+                            }
+                            if (i == chk_list.Count)
+                                MessageBox.Show(new Form() { TopMost = true },
+                                    "Control not found: " + name, "GetVars Error",
+                                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        }
+                    }
+                    else if (s.StartsWith("cbo"))			// control is a ComboBox
+                    {
+                        for (int i = 0; i < cbo_list.Count; i++)
+                        {	// look through each control to find the matching name
+                            ComboBox c = (ComboBox)cbo_list[i];
+                            if (c.Name.Equals(name))		// name found
+                            {
+                                c.Text = val;	// restore value
+                                i = cbo_list.Count + 1;
+                            }
+                            if (i == cbo_list.Count)
+                                MessageBox.Show(new Form() { TopMost = true },
+                                    "Control not found: " + name, "GetVars Error",
+                                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        }
+                    }
+                    if (s.StartsWith("rb"))			// control is a CheckBox
+                    {
+                        for (int i = 0; i < rb_list.Count; i++)
+                        {	// look through each control to find the matching name
+                            RadioButton c = (RadioButton)rb_list[i];
+                            if (c.Name.Equals(name))		// name found
+                            {
+                                c.Checked = bool.Parse(val);	// restore value
+                                i = rb_list.Count + 1;
+                            }
+                            if (i == rb_list.Count)
+                                MessageBox.Show(new Form() { TopMost = true },
+                                    "Control not found: " + name, "GetVars Error",
+                                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        }
+                    }
+                    else if (s.StartsWith("txt"))
+                    {	// look through each control to find the matching name
+                        for (int i = 0; i < txt_list.Count; i++)
+                        {
+                            TextBox c = (TextBox)txt_list[i];
+                            if (c.Name.Equals(name))		// name found
+                            {
+                                c.Text = val;	// restore value
+                                i = txt_list.Count + 1;
+                            }
+                            if (i == txt_list.Count)
+                                MessageBox.Show(new Form() { TopMost = true },
+                                    "Control not found: " + name, "GetVars Error",
+                                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                bool bReturnLog = false;
+                bReturnLog = ErrorLog.ErrorRoutine(false, enableErrorLog, ex);
+                if (false == bReturnLog) MessageBox.Show(new Form() { TopMost = true },
+                    "Unable to write to log");
+            }
+        }
+        // save profile
+        void SaveProfile()
+        {
+            try
+            {
+                string pFile = GetFileName("Select or enter a Profile to Save");
+                if (pFile == null || pFile == "") return;
+                dso = new DataSet();
+
+                if (File.Exists(pFile)) File.Delete(pFile);
+                //if (File.Exists(app_data_path + "Profiles\\" + pFile))
+                //    File.Delete(app_data_path + "Profiles\\" + pFile);
+
+                // enumerate controls and save to array list
+                ArrayList a = new ArrayList();
+                a = GetCtrlVal();
+
+                // save the array list to a DB table
+                //SaveVars("Profile", ref a);
+                if (!dso.Tables.Contains("Profile"))
+                    AddFormTable("Profile");
+
+                foreach (string s in a)
+                {
+                    string[] vals = s.Split('/');
+                    if (vals.Length > 2)
+                    {
+                        for (int i = 2; i < vals.Length; i++)
+                            vals[1] += "/" + vals[i];
+                    }
+                    //                dso.Clear(); 
+                    DataRow[] rows = dso.Tables["Profile"].Select("Key = '" + vals[0] + "'");
+                    if (rows.Length == 0)	// name is not in list
+                    {
+                        DataRow newRow = dso.Tables["Profile"].NewRow();
+                        newRow[0] = vals[0];
+                        newRow[1] = vals[1];
+                        dso.Tables["Profile"].Rows.Add(newRow);
+                    }
+                    else if (rows.Length == 1)
+                    {
+                        rows[0][1] = vals[1];
+                    }
+                }
+
+
+                // write DB table to xml file
+                dso.WriteXml(pFile);
+//                dso.WriteXml(app_data_path + "Profiles\\" + pFile);
+            }
+            catch (Exception ex)
+            {
+                bool bReturnLog = false;
+                bReturnLog = ErrorLog.ErrorRoutine(false, enableErrorLog, ex);
+                if (false == bReturnLog) MessageBox.Show(new Form() { TopMost = true },
+                    "Unable to write to log");
+            }
+        }
+        
+        #endregion # Methods #
+
+        #endregion Profiles
 
         #region Propadex
         // Propadex forecast UI
@@ -14946,9 +15417,13 @@ namespace DataDecoder
 
         #endregion WaveNode       
 
-        #region Profiles
+        #region State Machine
 
         #region # Declarations #
+
+        Hashtable Cat = new Hashtable(); 
+        Hashtable kwCat = new Hashtable();
+        Hashtable rState = new Hashtable();
 
         #endregion # Declarations #
 
@@ -14958,429 +15433,279 @@ namespace DataDecoder
 
         #region # Events #
 
-        // the save profile menu item was selected
-        private void profileSaveToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            SaveProfile();
-        }
-        // the load profile menu item was selected
-        private void profileLoadToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            LoadProfile();
-        }
-        
         #endregion # Events #
 
         #region # Methods #
 
-        // call file dialog get profile name.
-        string GetFileName(string title)
-        {
-            // get the App Data Path
-            if (app_data_path == "")
-            {
-                Assembly assembly = Assembly.GetExecutingAssembly();
-                FileVersionInfo fvi = FileVersionInfo.GetVersionInfo(assembly.Location);
-                string version = fvi.FileVersion.Substring(0, fvi.FileVersion.LastIndexOf("."));
-                //AppDataPath = assembly.Location;
-                AppDataPath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData)
-                + "\\DDUtil\\";
-            }
-            string pfileDir = app_data_path + "Profiles\\";
-            if (!Directory.Exists(pfileDir))
-                Directory.CreateDirectory(pfileDir);
+        // initialize state vars/table
+        void rStateInit()
+        {   
+            #region Cat hash
+            // Cat commands serviced
+            Cat.Add("ZZAC", null); // Sets or reads the Tune Step
+            Cat.Add("ZZAD", null); // Moves VFO A down by a selected step
+            Cat.Add("ZZAG", null); // Sets or reads the Audio Gain 
+            Cat.Add("ZZAI", null); // Reads or sets the Auto Information function
+            Cat.Add("ZZAR", null); // Sets or reads the AGC Threshold
+            Cat.Add("ZZAU", null); // Moves VFO A up by a selected step
+            Cat.Add("ZZBC", null); // Reads PowerSDR state
+            Cat.Add("ZZBD", null); // Moves the bandswitch down one band
+            Cat.Add("ZZBG", null); // Sets or reads the Band Group (HF/VHF)
+            Cat.Add("ZZBI", null); // Sets or reads the Binaural (BIN) status
+            Cat.Add("ZZBM", null); // Moves VFO B down by a selected step
+            Cat.Add("ZZBP", null); // Moves VFO B up by a selected step
+            Cat.Add("ZZBR", null); // Sets or reads the BCI Rejection button
+            Cat.Add("ZZBS", null); // Sets or reads the Bandswitch
+            Cat.Add("ZZBU", null); // Moves the bandswitch up one band
+            Cat.Add("ZZBY", null); // Closes the console
+            Cat.Add("ZZCB", null); // Sets or reads the Break-In checkbox status
+            Cat.Add("ZZCD", null); // Sets or reads the Break-In Delay value
+            Cat.Add("ZZCF", null); // Sets or reads the Show CW TX Filter checkbox
+            Cat.Add("ZZCI", null); // Sets or reads the CW Iambic checkbox status
+            Cat.Add("ZZCL", null); // Sets or reads the CW Pitch 
+            Cat.Add("ZZCM", null); // Sets or reads the CW Monitor checkbox status
+            Cat.Add("ZZCP", null); // Sets or reads the Compander (CPDR) status
+            Cat.Add("ZZCS", null); // Sets or reads the CW Speed
+            Cat.Add("ZZCT", null); // Sets or reads the Compander threshold
+            Cat.Add("ZZCU", null); // Reads the CPU usage
+            Cat.Add("ZZDA", null); // Sets or reads the Display Average (AVG) status
+            Cat.Add("ZZDM", null); // Sets or reads the Display Mode
+            Cat.Add("ZZDX", null); // Sets or reads the Phone DX button status
+            Cat.Add("ZZEA", null); // Sets or reads the RX EQ values
+            Cat.Add("ZZEB", null); // Sets or reads the TX EQ values
+            Cat.Add("ZZER", null); // Sets or reads the RX EQ status
+            Cat.Add("ZZET", null); // Sets or reads the TX EQ button status
+            Cat.Add("ZZFA", null); // Sets or reads VFO A frequency
+            Cat.Add("ZZFB", null); // Sets or reads VFO B frequency
+            Cat.Add("ZZFH", null); // Sets or reads the DSP High Filter
+            Cat.Add("ZZFI", null); // Sets or reads the current DSP receive filter
+            Cat.Add("ZZFL", null); // Sets or reads the DSP Low Filter
+            Cat.Add("ZZFM", null); // Reads the FlexRadio Model Number
+            Cat.Add("ZZFV", null); // Reads FlexWire single byte data
+            Cat.Add("ZZFW", null); // Reads FlexWire double byte data
+            Cat.Add("ZZFX", null); // Sends FlexWire single data byte command
+            Cat.Add("ZZFY", null); // Sends FlexWire double data byte command
+            Cat.Add("ZZGE", null); // Sets or reads the Noise Gate button status
+            Cat.Add("ZZGL", null); // Sets or reads the Noise Gate threshold
+            Cat.Add("ZZGT", null); // Sets or reads the AGC Mode Selector
+            Cat.Add("ZZHA", null); // Sets or reads the Audio Filter Size
+            Cat.Add("ZZHR", null); // Sets or reads the DSP RX Filter Phone Size
+            Cat.Add("ZZHT", null); // Sets or reads the DSP TX Filter Phone Size
+            Cat.Add("ZZHU", null); // Sets or reads the DSP RX Filter CW Size
+            Cat.Add("ZZHV", null); // Sets or reads the DSP TX Filter CW Size
+            Cat.Add("ZZHW", null); // Sets or reads the DSP RX Filter Digital Size
+            Cat.Add("ZZHX", null); // Sets or reads the DSP TX Filter Digital Size
+            Cat.Add("ZZID", null); // Sets or reads the transceiver ID number
+            Cat.Add("ZZIF", null); // Reads the transceiver status word
+            Cat.Add("ZZIS", null); // Sets or reads the variable filter width slider
+            Cat.Add("ZZIT", null); // Sets or reads the variable filter shift slider
+            Cat.Add("ZZIU", null); // Resets the variable filter shift slider
+            Cat.Add("ZZKM", null); // Sends a CWX macro
+            Cat.Add("ZZKS", null); // Sets or reads CWX CW speed
+            Cat.Add("ZZKY", null); // Sends text to CWX for conversion to Morse
+            Cat.Add("ZZMA", null); // Sets or reads the Mute (MUT) status
+            Cat.Add("ZZMD", null); // Sets or reads the current mode
+            Cat.Add("ZZMG", null); // Sets or reads the Mic Gain
+            Cat.Add("ZZMN", null); // Sets or reads the DSP filter names and values
+            Cat.Add("ZZMO", null); // Sets or reads the Monitor (MON) status
+            Cat.Add("ZZMR", null); // Sets or reads the RX Meter mode
+            Cat.Add("ZZMS", null); // Sets or reads the MultiRX Swap checkbox
+            Cat.Add("ZZMT", null); // Sets or reads the TX Meter mode
+            Cat.Add("ZZMU", null); // Sets or reads the MultiRX button status
+            Cat.Add("ZZNA", null); // Sets or reads Noise Blanker 1 (NB) status
+            Cat.Add("ZZNB", null); // Sets or reads Noise Blanker 2 (NB2) status
+            Cat.Add("ZZNL", null); // Sets or reads Noise Blanker 1 threshold
+            Cat.Add("ZZNM", null); // Sets or reads the Noise Blanker 2 threshold
+            Cat.Add("ZZNR", null); // Sets or reads the Noise Reduction (NR) status
+            Cat.Add("ZZNT", null); // Sets or reads the Auto Notch Filter (ANF) status
+            Cat.Add("ZZOA", null); // Sets or reads the antenna connected to RX1
+            Cat.Add("ZZOB", null); // Sets or reads the antenna connected to RX2
+            Cat.Add("ZZOC", null); // Sets or reads the antenna connected to the transmitter
+            Cat.Add("ZZOD", null); // Sets or reads the Antenna Mode (Simple/Complex)
+            Cat.Add("ZZOE", null); // Sets or reads the RX1 Loop
+            Cat.Add("ZZOF", null); // Sets or reads the RCA TX relay jacks
+            Cat.Add("ZZOG", null); // Sets or reads the TX relay enables
+            Cat.Add("ZZOH", null); // Sets or reads the TX relay delays
+            Cat.Add("ZZOJ", null); // Sets or reads the Antenna Lock Checkbox
+            Cat.Add("ZZPA", null); // Sets or reads the Preamp Gain setting
+            Cat.Add("ZZPC", null); // Sets or reads the Drive Level
+            Cat.Add("ZZPD", null); // Sets the Display Pan Center button
+            Cat.Add("ZZPO", null); // Sets or reads the Display Peak button
+            Cat.Add("ZZPS", null); // Sets or reads the Start button status
+            Cat.Add("ZZPZ", null); // Sets or reads the Display Zoom buttons
+            Cat.Add("ZZQM", null); // Reads the Quick Save Memory value
+            Cat.Add("ZZQR", null); // Restores the Quick Save Memory value
+            Cat.Add("ZZQS", null); // Saves VFO A to Quick Memory
+            Cat.Add("ZZRA", null); // Sets or reads the RTTY Offset Enable VFO A
+            Cat.Add("ZZRB", null); // Sets or reads the RTTY Offset Enable VFO B
+            Cat.Add("ZZRC", null); // Clears the RIT frequency
+            Cat.Add("ZZRD", null); // Decrements the RIT frequency
+            Cat.Add("ZZRF", null); // Sets or reads the RIT frequency
+            Cat.Add("ZZRH", null); // Sets or reads the RTTY DIGH Offset Frequency
+            Cat.Add("ZZRL", null); // Sets or reads the RTTY DIGL Offset Frequency
+            Cat.Add("ZZRM", null); // Reads the Console Meter value
+            Cat.Add("ZZRS", null); // Sets or reads the RX2 button status
+            Cat.Add("ZZRT", null); // Sets or reads the RIT button status
+            Cat.Add("ZZRU", null); // Increments the RIT frequency
+            Cat.Add("ZZRV", null); // Reads the primary input voltage
+            Cat.Add("ZZSA", null); // Moves VFO A down one Tune Step
+            Cat.Add("ZZSB", null); // Moves VFO A up one Tune Step
+            Cat.Add("ZZSD", null); // Decrements the Tune Step
+            Cat.Add("ZZSF", null); // Sets the variable filter width and center frequency
+            Cat.Add("ZZSG", null); // Moves VFO B down one Tune Step
+            Cat.Add("ZZSH", null); // Moves VFO B up one Tune Step
+            Cat.Add("ZZSM", null); // Reads the S Meter
+            Cat.Add("ZZSO", null); // Sets or reads the Squelch on/off status
+            Cat.Add("ZZSP", null); // Sets or reads the VFO Split button status
+            Cat.Add("ZZSQ", null); // Sets or reads the Squelch level
+            Cat.Add("ZZSR", null); // Sets or reads the Spur Reduction (SR) status
+            Cat.Add("ZZSS", null); // Stops CWX sending (immediate)
+            Cat.Add("ZZST", null); // Reads the frequency step size (Deprecated)
+            Cat.Add("ZZSU", null); // Increments the Tune Step
+            Cat.Add("ZZSW", null); // Sets or reads VFO A TX/VFO B TX buttons
+            Cat.Add("ZZTF", null); // Sets or reads the Show TX Filter checkbox
+            Cat.Add("ZZTH", null); // Sets or reads the TX Filter High setting
+            Cat.Add("ZZTI", null); // Transmit Inhibit
+            Cat.Add("ZZTL", null); // Sets or reads the TX Filter Low setting
+            Cat.Add("ZZTO", null); // Sets or reads the TUN Power Level
+            Cat.Add("ZZTP", null); // Sets or reads the Transmit Profile
+            Cat.Add("ZZTS", null); // Reads the Flex5000 Temperature Sensor
+            Cat.Add("ZZTU", null); // Sets or reads the Tune (TUN) status
+            Cat.Add("ZZTX", null); // Sets or reads the MOX button status
+            Cat.Add("ZZUA", null); // Reads the XVTR Band Button Names
+            Cat.Add("ZZVA", null); // Sets or reads the VAC button status
+            Cat.Add("ZZVB", null); // Sets or reads the VAC RX Gain
+            Cat.Add("ZZVC", null); // Sets or reads the VAC TX Gain
+            Cat.Add("ZZVD", null); // Sets or reads the VAC Sample Rate
+            Cat.Add("ZZVE", null); // Sets or reads the VOX button status
+            Cat.Add("ZZVF", null); // Sets or reads the VAC Stereo button status
+            Cat.Add("ZZVG", null); // Sets or reads the VOX gain 
+            Cat.Add("ZZVG", null); // Sets or reads the I/Q to VAC Checkbox 
+            Cat.Add("ZZVI", null); // Sets or reads the VAC input cable
+            Cat.Add("ZZVL", null); // Sets or reads the VFO Lock status
+            Cat.Add("ZZVM", null); // Sets or reads the VAC driver
+            Cat.Add("ZZVN", null); // Reads the PowerSDR software version number
+            Cat.Add("ZZVO", null); // Sets or reads the VAC output cable
+            Cat.Add("ZZVS", null); // Sets the VFO Swap status
+            Cat.Add("ZZWA", null); // Sets or reads the Mixer Mic Level
+            Cat.Add("ZZWB", null); // Sets or reads the Mixer Line In RCA Level
+            Cat.Add("ZZWC", null); // Sets or reads the Mixer Line In Phono Level
+            Cat.Add("ZZWD", null); // Sets or reads the Mixer Line In DB9 Level
+            Cat.Add("ZZWE", null); // Sets or reads the Mixer Mic Select Checkbox
+            Cat.Add("ZZWF", null); // Sets or reads the Mixer Line In RCA Select Checkbox
+            Cat.Add("ZZWG", null); // Sets or reads the Mixer Line In Phono Select Checkbox
+            Cat.Add("ZZWH", null); // Sets or reads the Mixer Line In DB9 Select Checkbox
+            Cat.Add("ZZWJ", null); // Sets or reads the Mixer Input Mute All Button
+            Cat.Add("ZZWK", null); // Sets or reads the Mixer Internal Speaker Level
+            Cat.Add("ZZWL", null); // Sets or reads the Mixer External Speaker Level
+            Cat.Add("ZZWM", null); // Sets or reads the Mixer Headphone Level
+            Cat.Add("ZZWN", null); // Sets or reads the Mixer Line Out RCA Level
+            Cat.Add("ZZWO", null); // Sets or reads the Mixer Internal Speaker Select Checkbox
+            Cat.Add("ZZWP", null); // Sets or reads the Mixer External Speaker Select Checkbox
+            Cat.Add("ZZWQ", null); // Sets or reads the Mixer Headphone Select Checkbox
+            Cat.Add("ZZWR", null); // Sets or reads the Mixer Line Out RCA Select Checkbox
+            Cat.Add("ZZWS", null); // Sets or reads the Mixer Output Mute All Button
+            Cat.Add("ZZXC", null); // Clears the XIT frequency
+            Cat.Add("ZZXF", null); // Sets or reads the XIT frequency
+            Cat.Add("ZZXS", null); // Sets or reads the XIT button status
+            Cat.Add("ZZXT", null); // Sets or reads the X2TR button status
+            Cat.Add("ZZZB", null); // Sets the Zero Beat button
+            #endregion Cat hash
 
-//            string ProfileFile = "";
-//            OpenFileDialog openFileDialog1 = new OpenFileDialog();
-            openFileDialog1.InitialDirectory = pfileDir;
-            openFileDialog1.Filter = "xml files|*.xml";
-            openFileDialog1.Title = title;
-            if (openFileDialog1.ShowDialog() == DialogResult.OK)
-            {
-                string filename = openFileDialog1.FileName;
-                //int start = openFileDialog1.FileName.LastIndexOf("\\") + 1;
-                //ProfileFile = filename.Substring(start, filename.Length - start);
-                return filename;// ProfileFile;
-            }
-            else
-            {
-                return "";// ProfileFile;
-            }
+            #region rState hash
+            // radio state
+            rState.Add("vfoa", null);    //vfo a freq
+            rState.Add("vfob", null);    //vfo b freq
+            rState.Add("vfotx", null);   //tx vfo a/b
+            rState.Add("rx1ant", null);  //ant rx1
+            rState.Add("rx2ant", null);  //ant rx2
+            rState.Add("txant", null);   //ant for xmit
+            rState.Add("txline", null);  //tx ptt lines
+            rState.Add("rx1band", null); //rx1 active band
+            rState.Add("rx2band", null); //rx2 active band
+            rState.Add("rx1mode", null); //rx1 mode
+            rState.Add("rx2mode", null); //rx2 mode
+            rState.Add("rx1dsp", null);  //rx1 rec filter
+            rState.Add("rx2dsp", null);  //rx2 rec filter
+            rState.Add("temp", null);    //pa temp
+            rState.Add("volts", null);   //radio primary voltage
+            rState.Add("tunstep", null); //tuning step size
+            rState.Add("txvfo", null);   //xmit vfo selected
+            rState.Add("drive", null);   //pa drive level
+            rState.Add("split", null);   //vfo split status    
+            rState.Add("tunsts", null);  //tune status on/off
+            rState.Add("moxsts", null);  //mox status on/off
+            rState.Add("meter", null);   //console meter readings
+            rState.Add("ritfreq", null); //vfo a rit freq
+            rState.Add("ritsts", null);  //vfo a rit status on/off
+            #endregion rState hash
+
+            #region Kenwood CAT hash
+            // equiv old kw command reassignments
+            kwCat.Add("AG", "ZZAG");
+            kwCat.Add("AI", "ZZAI");
+            kwCat.Add("BD", "ZZBD");
+            kwCat.Add("BU", "ZZBU");
+            kwCat.Add("DN", "ZZSA");
+            kwCat.Add("FA", "ZZFA");
+            kwCat.Add("FB", "ZZFB");
+            kwCat.Add("FT", "ZZSP");
+            kwCat.Add("GT", "ZZGT");
+            kwCat.Add("ID", "ZZID");
+            kwCat.Add("IF", "ZZIF");
+            kwCat.Add("KS", "ZZKS");
+            kwCat.Add("KY", "ZZKY");
+            kwCat.Add("MD", "ZZMD");
+            kwCat.Add("MG", "ZZMG");
+            kwCat.Add("MO", "ZZMO");
+            kwCat.Add("NB", "ZZNB");
+            kwCat.Add("NT", "ZZNT");
+            kwCat.Add("PC", "ZZPC");
+            kwCat.Add("PS", "ZZPS");
+            kwCat.Add("QI", "ZZQS");
+            kwCat.Add("RC", "ZZRC");
+            kwCat.Add("RD", "ZZRD");
+            kwCat.Add("RT", "ZZRT");
+            kwCat.Add("RU", "ZZRU");
+            kwCat.Add("RX", "ZZTX");
+            kwCat.Add("TX", "ZZTX");
+            kwCat.Add("SM", "ZZSM");
+            kwCat.Add("SQ", "ZZSQ");
+            kwCat.Add("UP", "ZZSB");
+            kwCat.Add("XS", "ZZXT");
+            #endregion Old CAT hash
+
         }
-        // get a list of control values
-        private ArrayList GetCtrlVal()
+
+        // decode cmd and return value to caller
+        // cmd = raw data from port (ZZIF)
+        // caller is client port name (logPort, RCP2port)
+        string catParse(string cmd, string caller)
         {
-            // enumerate controls and save to array list
-            ArrayList a = new ArrayList();
-            foreach (Control c in this.Controls)	// save only the following types
+            string rCmd = cmd.Substring(0, 4);
+            string nCmd = "";
+            if (cmd.Substring(0, 2) == "ZZ" && cmd.Length >= 4)
             {
-                // if it is a groupbox or panel, check for sub controls
-                if (c.GetType() == typeof(TabControl))
-                {
-                    foreach (Control c2 in c.Controls)
-                    {
-                        if (c2.GetType() == typeof(TabPage))// && (c2.Name != "tabBCD" &&
-                            //c2.Name != "tabRotor" && c2.Name != "tabExtCtrl" &&
-                            //c2.Name != "tabMacro" && c2.Name != "tabSO2R"))
-                        {
-                            foreach (Control c3 in c2.Controls)
-                            {
-                                if (c3.GetType() == typeof(GroupBox) || c.GetType() == typeof(Panel))
-                                {
-                                    foreach (Control c4 in c3.Controls)
-                                    {
-                                        if (c4.GetType() == typeof(GroupBox))
-                                        {
-                                            foreach (Control c5 in c4.Controls)
-                                            {
-                                                if (c5.Enabled)
-                                                {
-                                                    if (c5.GetType() == typeof(CheckBox))
-                                                        a.Add(c5.Name + "/" + ((CheckBox)c5).Checked.ToString());
-                                                    else if (c5.GetType() == typeof(TextBox))
-                                                    {
-                                                        //string xx = ((TextBox)c5).Text;
-                                                        //if (xx == "" || xx == null)
-                                                        //    ((TextBox)c5).Text = "0";
-                                                        a.Add(c5.Name + "/" + ((TextBox)c5).Text);
-                                                    }
-                                                    else if (c5.GetType() == typeof(ComboBox))
-                                                        a.Add(c5.Name + "/" + ((ComboBox)c5).Text);
-                                                    else if (c5.GetType() == typeof(RadioButton))
-                                                        a.Add(c5.Name + "/" + ((RadioButton)c5).Checked.ToString());
-                                                }
-                                            }
-                                        }
-                                        else
-                                        {
-                                            if (c4.Enabled)
-                                            {
-                                                if (c4.GetType() == typeof(CheckBox))
-                                                    a.Add(c4.Name + "/" + ((CheckBox)c4).Checked.ToString());
-                                                else if (c4.GetType() == typeof(TextBox))
-                                                {
-                                                    //string xx = ((TextBox)c4).Text;
-                                                    //if (xx == "" || xx == null)
-                                                    //    ((TextBox)c4).Text = "0";
-                                                    a.Add(c4.Name + "/" + ((TextBox)c4).Text);
-                                                }
-                                                else if (c4.GetType() == typeof(ComboBox))
-                                                    a.Add(c4.Name + "/" + ((ComboBox)c4).Text);
-                                                else if (c4.GetType() == typeof(RadioButton))
-                                                    a.Add(c4.Name + "/" + ((RadioButton)c4).Checked.ToString());
-                                            }
-
-                                        }
-                                    }
-                                }
-                                else
-                                {
-                                    if (c3.Enabled)
-                                    {
-                                        if (c3.GetType() == typeof(CheckBox))
-                                            a.Add(c3.Name + "/" + ((CheckBox)c3).Checked.ToString());
-                                        else if (c3.GetType() == typeof(TextBox))
-                                        {
-                                            //string xx = ((TextBox)c3).Text;
-                                            //if (xx == "" || xx == null)
-                                            //    ((TextBox)c3).Text = "0";
-                                            a.Add(c3.Name + "/" + ((TextBox)c3).Text);
-                                        }
-                                        else if (c3.GetType() == typeof(ComboBox))
-                                            a.Add(c3.Name + "/" + ((ComboBox)c3).Text);
-                                        else if (c3.GetType() == typeof(RadioButton))
-                                            a.Add(c3.Name + "/" + ((RadioButton)c3).Checked.ToString());
-                                    }
-
-                                }
-
-                            }
-                        }
-                    }
-                }
+                if (rState.ContainsKey(cmd))
+                    return rState[cmd].ToString();
+                else if (kwCat.ContainsKey(cmd))
+                    nCmd = kwCat[cmd].ToString(); // sub ZZ cmd for old kw cmd
+                if (rState.ContainsKey(nCmd))
+                    return rState[nCmd].ToString();
                 else
-                {   // if not a Tab Control
-                    if (c.Enabled)
-                    {
-                        if (c.GetType() == typeof(CheckBox))
-                            a.Add(c.Name + "/" + ((CheckBox)c).Checked.ToString());
-                        else if (c.GetType() == typeof(TextBox))
-                        {
-                            string xx = ((TextBox)c).Text;
-                            if (xx == "" || xx == null)
-                                ((TextBox)c).Text = "0";
-                            a.Add(c.Name + "/" + ((TextBox)c).Text);
-                        }
-                        else if (c.GetType() == typeof(ComboBox))
-                            a.Add(c.Name + "/" + ((ComboBox)c).SelectedIndex.ToString());
-                        else if (c.GetType() == typeof(RadioButton))
-                            a.Add(c.Name + "/" + ((RadioButton)c).Checked.ToString());
-                    }
+                { //Save caller id and cmd in queue
+                    return "sent to radio";
                 }
             }
-            return a;
+            return "";
         }
-        // load profile from a file
-        void LoadProfile()
-        {
-            try
-            {
-//                throw new ArgumentNullException();
 
-                ArrayList chk_list = new ArrayList();
-                ArrayList cbo_list = new ArrayList();
-                ArrayList rb_list = new ArrayList();
-                ArrayList txt_list = new ArrayList();
-
-                foreach (Control c in this.Controls)	// save only the following types
-                {
-                    // if it is a groupbox or panel, check for sub controls
-                    if (c.GetType() == typeof(TabControl))
-                    {
-                        foreach (Control c2 in c.Controls)
-                        {
-                            if (c2.GetType() == typeof(TabPage))// && (c2.Name != "tabBCD" &&
-                            //c2.Name != "tabRotor" && c2.Name != "tabExtCtrl" &&
-                            //c2.Name != "tabMacro" && c2.Name != "tabSO2R"))
-                            {
-                                foreach (Control c3 in c2.Controls)
-                                {
-                                    if (c3.GetType() == typeof(GroupBox) || c.GetType() == typeof(Panel))
-                                    {
-                                        foreach (Control c4 in c3.Controls)
-                                        {
-                                            if (c4.GetType() == typeof(GroupBox))
-                                            {
-                                                foreach (Control c5 in c4.Controls)
-                                                {
-                                                    if (c5.Enabled)
-                                                    {
-                                                        if (c5.GetType() == typeof(CheckBox))
-                                                            chk_list.Add(c5);
-                                                        else if (c5.GetType() == typeof(TextBox))
-                                                        {
-                                                            txt_list.Add(c5);
-                                                        }
-                                                        else if (c5.GetType() == typeof(ComboBox))
-                                                            cbo_list.Add(c5);
-                                                        else if (c5.GetType() == typeof(RadioButton))
-                                                            rb_list.Add(c5);
-                                                    }
-                                                }
-                                            }
-                                            else
-                                            {
-                                                if (c4.Enabled)
-                                                {
-                                                    if (c4.GetType() == typeof(CheckBox))
-                                                        chk_list.Add(c4);
-                                                    else if (c4.GetType() == typeof(TextBox))
-                                                    {
-                                                        txt_list.Add(c4);
-                                                    }
-                                                    else if (c4.GetType() == typeof(ComboBox))
-                                                        cbo_list.Add(c4);
-                                                    else if (c4.GetType() == typeof(RadioButton))
-                                                        rb_list.Add(c4);
-                                                }
-                                            }
-                                        }
-                                    }
-                                    else
-                                    {
-                                        if (c3.Enabled)
-                                        {
-                                            if (c3.GetType() == typeof(CheckBox))
-                                                chk_list.Add(c3);
-                                            else if (c3.GetType() == typeof(TextBox))
-                                            {
-                                                txt_list.Add(c3);
-                                            }
-                                            else if (c3.GetType() == typeof(ComboBox))
-                                                cbo_list.Add(c3);
-                                            else if (c3.GetType() == typeof(RadioButton))
-                                                rb_list.Add(c3);
-                                        }
-
-                                    }
-
-                                }
-                            }
-                        }
-                    }
-                    else
-                    {   // if not a Tab Control
-                        if (c.Enabled)
-                        {
-                            if (c.GetType() == typeof(CheckBox))
-                                chk_list.Add(c);
-                            else if (c.GetType() == typeof(TextBox))
-                            {
-                                txt_list.Add(c);
-                            }
-                            else if (c.GetType() == typeof(ComboBox))
-                                cbo_list.Add(c);
-                            else if (c.GetType() == typeof(RadioButton))
-                                rb_list.Add(c);
-                        }
-                    }
-                }
-                string pFile = GetFileName("Select a Profile to Load");
-                if (pFile == null || pFile == "") return;
-
-                dso = new DataSet();
-                if (File.Exists(pFile)) dso.ReadXml(pFile);
-                //if (File.Exists(app_data_path + "Profiles\\" + pFile))
-                //    dso.ReadXml(app_data_path + "Profiles\\" + pFile);
-
-                ArrayList a = GetVars("Profile");	// Get the saved list of controls
-                a.Sort();
-                int num_controls = chk_list.Count + cbo_list.Count + rb_list.Count + txt_list.Count;
-
-                foreach (string s in a)				// string is in the format "name,value"
-                {
-                    string[] vals = s.Split('/');
-                    string name = vals[0];
-                    string val = vals[1];
-
-                    if (s.StartsWith("chk"))	// control is a CheckBox
-                    {
-                        for (int i = 0; i < chk_list.Count; i++)
-                        {	// look through each control to find the matching name
-                            CheckBox c = (CheckBox)chk_list[i];
-                            if (c.Name.Equals(name))		// name found
-                            {
-                                c.Checked = bool.Parse(val);	// restore value
-                                i = chk_list.Count + 1;
-                            }
-                            if (i == chk_list.Count)
-                                MessageBox.Show(new Form() { TopMost = true },
-                                    "Control not found: " + name, "GetVars Error",
-                                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                        }
-                    }
-                    else if (s.StartsWith("cbo"))			// control is a ComboBox
-                    {
-                        for (int i = 0; i < cbo_list.Count; i++)
-                        {	// look through each control to find the matching name
-                            ComboBox c = (ComboBox)cbo_list[i];
-                            if (c.Name.Equals(name))		// name found
-                            {
-                                c.Text = val;	// restore value
-                                i = cbo_list.Count + 1;
-                            }
-                            if (i == cbo_list.Count)
-                                MessageBox.Show(new Form() { TopMost = true },
-                                    "Control not found: " + name, "GetVars Error",
-                                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                        }
-                    }
-                    if (s.StartsWith("rb"))			// control is a CheckBox
-                    {
-                        for (int i = 0; i < rb_list.Count; i++)
-                        {	// look through each control to find the matching name
-                            RadioButton c = (RadioButton)rb_list[i];
-                            if (c.Name.Equals(name))		// name found
-                            {
-                                c.Checked = bool.Parse(val);	// restore value
-                                i = rb_list.Count + 1;
-                            }
-                            if (i == rb_list.Count)
-                                MessageBox.Show(new Form() { TopMost = true },
-                                    "Control not found: " + name, "GetVars Error",
-                                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                        }
-                    }
-                    else if (s.StartsWith("txt"))
-                    {	// look through each control to find the matching name
-                        for (int i = 0; i < txt_list.Count; i++)
-                        {
-                            TextBox c = (TextBox)txt_list[i];
-                            if (c.Name.Equals(name))		// name found
-                            {
-                                c.Text = val;	// restore value
-                                i = txt_list.Count + 1;
-                            }
-                            if (i == txt_list.Count)
-                                MessageBox.Show(new Form() { TopMost = true },
-                                    "Control not found: " + name, "GetVars Error",
-                                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                        }
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                bool bReturnLog = false;
-                bReturnLog = ErrorLog.ErrorRoutine(false, enableErrorLog, ex);
-                if (false == bReturnLog) MessageBox.Show(new Form() { TopMost = true },
-                    "Unable to write to log");
-            }
-        }
-        // save profile
-        void SaveProfile()
-        {
-            try
-            {
-                string pFile = GetFileName("Select or enter a Profile to Save");
-                if (pFile == null || pFile == "") return;
-                dso = new DataSet();
-
-                if (File.Exists(pFile)) File.Delete(pFile);
-                //if (File.Exists(app_data_path + "Profiles\\" + pFile))
-                //    File.Delete(app_data_path + "Profiles\\" + pFile);
-
-                // enumerate controls and save to array list
-                ArrayList a = new ArrayList();
-                a = GetCtrlVal();
-
-                // save the array list to a DB table
-                //SaveVars("Profile", ref a);
-                if (!dso.Tables.Contains("Profile"))
-                    AddFormTable("Profile");
-
-                foreach (string s in a)
-                {
-                    string[] vals = s.Split('/');
-                    if (vals.Length > 2)
-                    {
-                        for (int i = 2; i < vals.Length; i++)
-                            vals[1] += "/" + vals[i];
-                    }
-                    //                dso.Clear(); 
-                    DataRow[] rows = dso.Tables["Profile"].Select("Key = '" + vals[0] + "'");
-                    if (rows.Length == 0)	// name is not in list
-                    {
-                        DataRow newRow = dso.Tables["Profile"].NewRow();
-                        newRow[0] = vals[0];
-                        newRow[1] = vals[1];
-                        dso.Tables["Profile"].Rows.Add(newRow);
-                    }
-                    else if (rows.Length == 1)
-                    {
-                        rows[0][1] = vals[1];
-                    }
-                }
-
-
-                // write DB table to xml file
-                dso.WriteXml(pFile);
-//                dso.WriteXml(app_data_path + "Profiles\\" + pFile);
-            }
-            catch (Exception ex)
-            {
-                bool bReturnLog = false;
-                bReturnLog = ErrorLog.ErrorRoutine(false, enableErrorLog, ex);
-                if (false == bReturnLog) MessageBox.Show(new Form() { TopMost = true },
-                    "Unable to write to log");
-            }
-        }
-        
         #endregion # Methods #
 
-        #endregion Profiles
-                                       
-    } // end class Setup
+        #endregion State Machine
+        
+                                                
+    } // end Setup class
 
     #region Helper Classes
 
