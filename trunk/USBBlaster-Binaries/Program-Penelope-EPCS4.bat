@@ -21,6 +21,7 @@ ECHO  3. Quartus V9.0sp1
 ECHO  4. Quartus V9.0sp2
 ECHO  5. Quartus V9.1
 ECHO  6. Quartus V9.1sp1
+ECHO  7. Quartus V9.1sp2
 ECHO  Q. Quit
 ECHO.
 SET Choice=
