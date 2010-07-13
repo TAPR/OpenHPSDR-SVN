@@ -682,6 +682,7 @@ namespace DataDecoder
             chkCwTx.Checked = set.chkCwTx;
             chkShortCut.Checked = set.chkShortCut;
             chkStartMacro.Checked = set.chkStartMacro;
+            txtStartMacroNum.Text = set.txtStartMacroNum;
 
             // setup error log parameters
             string path = Application.ExecutablePath;
@@ -703,8 +704,9 @@ namespace DataDecoder
             mSplashScreen.SetProgress("Loading Main Form", 1.0);
             COBC = lastBand;
 
+            // execute startup macro if selected.
             if (chkStartMacro.Checked)
-            StartMacro(27); // send startup macro M27
+            StartMacro(Convert.ToInt32(txtStartMacroNum.Text)); 
 
         }// Setup
         #endregion Initialization
@@ -1140,6 +1142,31 @@ namespace DataDecoder
             if (chkStartMacro.Checked) set.chkStartMacro = true;
             else set.chkStartMacro = false;
             set.Save();
+        }
+        // the txtStartMacroNum text box has changed
+        private void txtStartMacroNum_TextChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                if (Convert.ToInt32(txtStartMacroNum.Text) > 0 &&
+                    Convert.ToInt32(txtStartMacroNum.Text) < 100)
+                {
+                    set.txtStartMacroNum = txtStartMacroNum.Text;
+                    set.Save();
+                }
+                else
+                    throw new Exception();
+            }
+            catch
+            {
+                MessageBox.Show(new Form() { TopMost = true },
+                    "The macro number value can only be a decimal number from 1-99. \r\r" +
+                    "Please select a number in this range.", "Input Error",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                txtStartMacroNum.Text = "1";
+                set.txtStartMacroNum = "1";
+            }
         }
         // the enable short-cuts check box has changed
         private void chkShortCut_CheckedChanged(object sender, EventArgs e)
@@ -15625,8 +15652,8 @@ namespace DataDecoder
             rState.Add("rx2band", null); //rx2 active band
             rState.Add("rx1mode", null); //rx1 mode
             rState.Add("rx2mode", null); //rx2 mode
-            rState.Add("rx1dsp", null);  //rx1 rec filter
-            rState.Add("rx2dsp", null);  //rx2 rec filter
+            rState.Add("rx1dsp", null);  //rx1 recv filter
+            rState.Add("rx2dsp", null);  //rx2 recv filter
             rState.Add("temp", null);    //pa temp
             rState.Add("volts", null);   //radio primary voltage
             rState.Add("tunstep", null); //tuning step size

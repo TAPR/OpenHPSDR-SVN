@@ -863,5 +863,8 @@ RCP4 - WriteLog</Value>
     <Setting Name="chkStartMacro" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
+    <Setting Name="txtStartMacroNum" Type="System.String" Scope="User">
+      <Value Profile="(Default)">1</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

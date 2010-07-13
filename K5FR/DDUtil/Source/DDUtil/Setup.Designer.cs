@@ -46,7 +46,7 @@ namespace DataDecoder
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Setup));
             this.tabControl = new System.Windows.Forms.TabControl();
             this.tabPorts = new System.Windows.Forms.TabPage();
@@ -852,6 +852,8 @@ namespace DataDecoder
             this.txtPortB = new System.Windows.Forms.TextBox();
             this.label106 = new System.Windows.Forms.Label();
             this.tabSetup = new System.Windows.Forms.TabPage();
+            this.txtStartMacroNum = new System.Windows.Forms.TextBox();
+            this.chkStartMacro = new System.Windows.Forms.CheckBox();
             this.chkShortCut = new System.Windows.Forms.CheckBox();
             this.chkCwTx = new System.Windows.Forms.CheckBox();
             this.groupBox16 = new System.Windows.Forms.GroupBox();
@@ -1265,7 +1267,6 @@ namespace DataDecoder
             this.toolStripSeparator8 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripMenuItem25 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem26 = new System.Windows.Forms.ToolStripMenuItem();
-            this.chkStartMacro = new System.Windows.Forms.CheckBox();
             this.tabControl.SuspendLayout();
             this.tabPorts.SuspendLayout();
             this.grpSlave.SuspendLayout();
@@ -6900,9 +6901,9 @@ namespace DataDecoder
             // 
             this.dgm.AllowUserToAddRows = false;
             this.dgm.AllowUserToDeleteRows = false;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.White;
-            this.dgm.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.Color.White;
+            this.dgm.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle4;
             this.dgm.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.dgm.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgm.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
@@ -12103,6 +12104,7 @@ namespace DataDecoder
             // 
             // tabSetup
             // 
+            this.tabSetup.Controls.Add(this.txtStartMacroNum);
             this.tabSetup.Controls.Add(this.chkStartMacro);
             this.tabSetup.Controls.Add(this.chkShortCut);
             this.tabSetup.Controls.Add(this.chkCwTx);
@@ -12123,12 +12125,39 @@ namespace DataDecoder
             this.tabSetup.Text = "Setup";
             this.tabSetup.UseVisualStyleBackColor = true;
             // 
+            // txtStartMacroNum
+            // 
+            this.txtStartMacroNum.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.25F);
+            this.txtStartMacroNum.ForeColor = System.Drawing.SystemColors.WindowText;
+            this.txtStartMacroNum.Location = new System.Drawing.Point(367, 249);
+            this.txtStartMacroNum.Name = "txtStartMacroNum";
+            this.txtStartMacroNum.Size = new System.Drawing.Size(25, 18);
+            this.txtStartMacroNum.TabIndex = 77;
+            this.txtStartMacroNum.Text = "1";
+            this.txtStartMacroNum.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.toolTip1.SetToolTip(this.txtStartMacroNum, "Macro to execute at startup.");
+            this.txtStartMacroNum.TextChanged += new System.EventHandler(this.txtStartMacroNum_TextChanged);
+            // 
+            // chkStartMacro
+            // 
+            this.chkStartMacro.AutoSize = true;
+            this.chkStartMacro.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
+            this.chkStartMacro.ForeColor = System.Drawing.Color.Navy;
+            this.chkStartMacro.Location = new System.Drawing.Point(275, 250);
+            this.chkStartMacro.Name = "chkStartMacro";
+            this.chkStartMacro.Size = new System.Drawing.Size(93, 17);
+            this.chkStartMacro.TabIndex = 112;
+            this.chkStartMacro.Text = "Startup Macro";
+            this.toolTip1.SetToolTip(this.chkStartMacro, "Select to Enable Startup Macro.");
+            this.chkStartMacro.UseVisualStyleBackColor = true;
+            this.chkStartMacro.CheckedChanged += new System.EventHandler(this.chkStartMacro_CheckedChanged);
+            // 
             // chkShortCut
             // 
             this.chkShortCut.AutoSize = true;
             this.chkShortCut.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
             this.chkShortCut.ForeColor = System.Drawing.Color.Navy;
-            this.chkShortCut.Location = new System.Drawing.Point(156, 250);
+            this.chkShortCut.Location = new System.Drawing.Point(158, 250);
             this.chkShortCut.Name = "chkShortCut";
             this.chkShortCut.Size = new System.Drawing.Size(113, 17);
             this.chkShortCut.TabIndex = 111;
@@ -12142,12 +12171,12 @@ namespace DataDecoder
             this.chkCwTx.AutoSize = true;
             this.chkCwTx.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
             this.chkCwTx.ForeColor = System.Drawing.Color.Navy;
-            this.chkCwTx.Location = new System.Drawing.Point(156, 270);
+            this.chkCwTx.Location = new System.Drawing.Point(158, 270);
             this.chkCwTx.Name = "chkCwTx";
             this.chkCwTx.Size = new System.Drawing.Size(91, 17);
             this.chkCwTx.TabIndex = 110;
             this.chkCwTx.Text = "Show CW TX";
-            this.toolTip1.SetToolTip(this.chkCwTx, "Select to show CW Tx filter when in Split.");
+            this.toolTip1.SetToolTip(this.chkCwTx, "Select to show CW Tx filter when in Split mode.");
             this.chkCwTx.UseVisualStyleBackColor = true;
             this.chkCwTx.CheckedChanged += new System.EventHandler(this.chkCwTx_CheckedChanged);
             // 
@@ -12223,7 +12252,7 @@ namespace DataDecoder
             this.chkOnTop.Size = new System.Drawing.Size(62, 17);
             this.chkOnTop.TabIndex = 88;
             this.chkOnTop.Text = "On Top";
-            this.toolTip1.SetToolTip(this.chkOnTop, "When selected causes this window to be on top of all other windows.");
+            this.toolTip1.SetToolTip(this.chkOnTop, "When selected causes DDUtil to be on top of all other windows.");
             this.chkOnTop.UseVisualStyleBackColor = true;
             this.chkOnTop.CheckedChanged += new System.EventHandler(this.chkOnTop_CheckedChanged);
             // 
@@ -12251,7 +12280,7 @@ namespace DataDecoder
             this.chkModeChg.Size = new System.Drawing.Size(75, 17);
             this.chkModeChg.TabIndex = 79;
             this.chkModeChg.Text = "Mode Chg";
-            this.toolTip1.SetToolTip(this.chkModeChg, "Select to enable Macro execution when Mode changes.");
+            this.toolTip1.SetToolTip(this.chkModeChg, "Select to enable Mode specificMacro execution when mode changes.");
             this.chkModeChg.UseVisualStyleBackColor = true;
             this.chkModeChg.CheckedChanged += new System.EventHandler(this.chkModeChg_CheckedChanged);
             // 
@@ -12260,7 +12289,7 @@ namespace DataDecoder
             this.chkAudio.AutoSize = true;
             this.chkAudio.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.chkAudio.ForeColor = System.Drawing.Color.Navy;
-            this.chkAudio.Location = new System.Drawing.Point(85, 250);
+            this.chkAudio.Location = new System.Drawing.Point(86, 250);
             this.chkAudio.Name = "chkAudio";
             this.chkAudio.Size = new System.Drawing.Size(70, 17);
             this.chkAudio.TabIndex = 34;
@@ -12298,11 +12327,11 @@ namespace DataDecoder
             // 
             // txtTimer
             // 
-            this.txtTimer.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtTimer.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.25F);
             this.txtTimer.ForeColor = System.Drawing.SystemColors.WindowText;
             this.txtTimer.Location = new System.Drawing.Point(64, 22);
             this.txtTimer.Name = "txtTimer";
-            this.txtTimer.Size = new System.Drawing.Size(20, 20);
+            this.txtTimer.Size = new System.Drawing.Size(20, 18);
             this.txtTimer.TabIndex = 76;
             this.txtTimer.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.toolTip1.SetToolTip(this.txtTimer, "WatchDog timer minutes.");
@@ -16700,20 +16729,6 @@ namespace DataDecoder
             this.toolStripMenuItem26.Text = "Exit";
             this.toolStripMenuItem26.ToolTipText = "Exit DDUtil";
             // 
-            // chkStartMacro
-            // 
-            this.chkStartMacro.AutoSize = true;
-            this.chkStartMacro.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
-            this.chkStartMacro.ForeColor = System.Drawing.Color.Navy;
-            this.chkStartMacro.Location = new System.Drawing.Point(269, 250);
-            this.chkStartMacro.Name = "chkStartMacro";
-            this.chkStartMacro.Size = new System.Drawing.Size(93, 17);
-            this.chkStartMacro.TabIndex = 112;
-            this.chkStartMacro.Text = "Startup Macro";
-            this.toolTip1.SetToolTip(this.chkStartMacro, "Select to Enable Startup Macro (M27)");
-            this.chkStartMacro.UseVisualStyleBackColor = true;
-            this.chkStartMacro.CheckedChanged += new System.EventHandler(this.chkStartMacro_CheckedChanged);
-            // 
             // Setup
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -18120,6 +18135,7 @@ namespace DataDecoder
         private ToolStripMenuItem profileLoadToolStripMenuItem;
         private Button TkUpDate;
         private CheckBox chkStartMacro;
+        private TextBox txtStartMacroNum;
 
     }
 }
