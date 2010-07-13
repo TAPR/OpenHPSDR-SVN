@@ -3454,5 +3454,17 @@ namespace DataDecoder.Properties {
                 this["chkStartMacro"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("1")]
+        public string txtStartMacroNum {
+            get {
+                return ((string)(this["txtStartMacroNum"]));
+            }
+            set {
+                this["txtStartMacroNum"] = value;
+            }
+        }
     }
 }
