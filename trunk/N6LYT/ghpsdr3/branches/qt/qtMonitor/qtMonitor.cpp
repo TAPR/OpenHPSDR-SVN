@@ -10,8 +10,6 @@
 #define BUFFER_SIZE 480
 #define HEADER_SIZE 48
 
-
-
 qtMonitor::qtMonitor() {
 
     sem.release(1);
@@ -62,7 +60,8 @@ qtMonitor::qtMonitor() {
 
     connect(widget.spectrumFrame,SIGNAL(frequencyMoved(int)),
             this, SLOT(moveFrequency(int)));
-    //audio_device.initialize_audio();
+
+    audio_device.initialize_audio();
 
 }
 
@@ -345,7 +344,7 @@ void qtMonitor::socketData() {
             widget.spectrumFrame->updateSpectrum(buffer);
         } else if(buffer[0]==1) {
             // audio data
-            //port_audio.process_audio(&buffer[48]);
+            audio_device.process_audio(&buffer[48]);
         } else {
             qDebug() << "unknown data: " << buffer[0];
         }

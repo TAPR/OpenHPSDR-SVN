@@ -81,7 +81,6 @@ void spectrum::paintEvent(QPaintEvent*) {
     // plot horizontal grid
     int V = spectrumHigh - spectrumLow;
     int numSteps = V / 20;
-    int pixelStepSize = 180 / numSteps;
     for (int i = 1; i < numSteps; i++) {
         int num = spectrumHigh - i * 20;
         int y = (int) floor((spectrumHigh - num) * 180 / V);
@@ -117,10 +116,8 @@ void spectrum::setFilter(int low, int high) {
 
 void spectrum::updateSpectrum(char* buffer) {
     int i;
-    int j;
     
     sampleRate = atoi(&buffer[32]);
-    
     
     for(i=0;i<480;i++) {
         samples[i] = -(buffer[i + 48] & 0xFF) - 30;

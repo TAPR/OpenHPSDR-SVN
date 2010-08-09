@@ -13,7 +13,6 @@
 #include <QSemaphore>
 
 #include <audio.h>
-#include <Port_Audio.h>
 #include "ui_qtMonitor.h"
 
 class qtMonitor : public QMainWindow {
@@ -64,7 +63,6 @@ private:
 
     QSemaphore sem;
     audio audio_device;
-    Port_Audio port_audio;
 
     int mode;
 

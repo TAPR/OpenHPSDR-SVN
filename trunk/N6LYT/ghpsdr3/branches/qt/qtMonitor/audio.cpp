@@ -18,8 +18,12 @@ audio::~audio() {
 
 void audio::initialize_audio() {
     qDebug() << "initializ_audio";
+
+    decoded_buffer.resize(480*2*6);
+
     init_decodetable();
-    audio_format.setFrequency(8000);
+
+    audio_format.setFrequency(48000);
     audio_format.setChannels(1);
     audio_format.setSampleSize(16);
     audio_format.setCodec("audio/pcm");
@@ -48,21 +52,33 @@ void audio::initialize_audio() {
 }
 
 void audio::process_audio(char* buffer) {
-    char decoded_buffer[480*2];
-    aLawDecode(buffer,decoded_buffer);
+    //qDebug() << "process audio";
+    aLawDecode(buffer,decoded_buffer,6);
+    
 
-    audio_out->write(decoded_buffer);
+    if(audio_out) {
+        //qDebug() << "write audio data: " <<  audio_out->bytesToWrite();
+        audio_out->write(decoded_buffer.data(),(long long)480*2*6);
+    }
 }
 
-void audio::aLawDecode(char* buffer,char*decoded_buffer) {
+void audio::aLawDecode(char* buffer,QByteArray decoded_buffer,int replications) {
     int i;
+    int j;
     short v;
+
+    //qDebug() << "aLawDecode";
+
+    unsigned char *ptr = reinterpret_cast<unsigned char *> (decoded_buffer.data());
+
     for (int inIx=48, outIx=0; inIx < 48+480; inIx++) {
         i=buffer[inIx]&0xFF;
         v=decodetable[i];
         // assumes BIGENDIAN
-        decoded_buffer[outIx++]=(char)((v>>8)&0xFF);
-        decoded_buffer[outIx++]=(char)(v&0xFF);
+        for(j=0;j<replications;j++) {
+            *ptr++=(char)((v>>8)&0xFF);
+            *ptr++=(char)(v&0xFF);
+        }
     }
 
 }
