@@ -22,12 +22,13 @@ public:
     void initialize_audio();
     void process_audio(char* buffer);
 private:
-    void aLawDecode(char* buffer, char*decoded_buffer);
+    void aLawDecode(char* buffer, QByteArray decoded_buffer, int replications);
     void init_decodetable();
     QAudioFormat     audio_format;
     QAudioOutput*    audio_output;
     QAudioDeviceInfo audio_device;
     QIODevice*       audio_out;
+    QByteArray       decoded_buffer;
     short decodetable[256];
 
 

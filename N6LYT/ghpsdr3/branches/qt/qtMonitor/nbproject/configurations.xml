@@ -18,8 +18,6 @@
                    displayName="Source Files"
                    projectFiles="true"
                    kind="SOURCE_LOGICAL_FOLDER">
-      <itemPath>Port_Audio.cpp</itemPath>
-      <itemPath>Port_Audio.h</itemPath>
       <itemPath>audio.cpp</itemPath>
       <itemPath>audio.h</itemPath>
       <itemPath>main.cpp</itemPath>
