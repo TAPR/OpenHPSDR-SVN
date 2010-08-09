@@ -9,9 +9,9 @@
 #define	AUDIO_H
 
 #include <QtCore>
-#include <qt4/QtMultimedia/QAudioFormat>
-#include <qt4/QtMultimedia/QAudioOutput>
-#include <qt4/QtMultimedia/QAudioDeviceInfo>
+#include <QtMultimedia/QAudioFormat>
+#include <QtMultimedia/QAudioOutput>
+#include <QtMultimedia/QAudioDeviceInfo>
 
 class audio : public QObject {
     Q_OBJECT
