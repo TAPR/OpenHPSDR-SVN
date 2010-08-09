@@ -53,8 +53,8 @@ public slots:
     void setMode(int mode);
     void setFilter(int low,int high);
     void setFrequency(long long frequency);
-
     void moveFrequency(int f);
+    void setGain(int gain);
 
 private:
     Ui::qtMonitor widget;

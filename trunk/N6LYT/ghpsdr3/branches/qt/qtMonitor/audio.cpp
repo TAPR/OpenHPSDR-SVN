@@ -16,27 +16,42 @@ audio::audio(const audio& orig) {
 audio::~audio() {
 }
 
-void audio::initialize_audio() {
-    qDebug() << "initializ_audio";
+void audio::initialize_audio(int buffer_size) {
+    qDebug() << "initializ_audio " << buffer_size;
 
-    decoded_buffer.resize(480*2*6);
+    decoded_buffer.resize(buffer_size*2);
 
     init_decodetable();
 
-    audio_format.setFrequency(48000);
+    audio_format.setFrequency(8000);
     audio_format.setChannels(1);
     audio_format.setSampleSize(16);
     audio_format.setCodec("audio/pcm");
     audio_format.setByteOrder(QAudioFormat::BigEndian);
     audio_format.setSampleType(QAudioFormat::SignedInt);
 
-    QAudioDeviceInfo info(QAudioDeviceInfo::defaultOutputDevice());
-    if (!info.isFormatSupported(audio_format)) {
-        qWarning() << "Default format not supported - trying to use nearest";
-        audio_format = info.nearestFormat(audio_format);
+    //QAudioDeviceInfo info(QAudioDeviceInfo::availableDevices(QAudio::AudioOutput));
+
+    foreach(const QAudioDeviceInfo &deviceInfo,QAudioDeviceInfo::availableDevices(QAudio::AudioOutput)) {
+        qDebug() << deviceInfo.deviceName();
+        if(deviceInfo.deviceName()=="pulse") {
+            qDebug() << "found pulse";
+            audio_device=deviceInfo;
+        }
     }
 
-    qDebug() << info.deviceName();
+    //QAudioDeviceInfo info(QAudioDeviceInfo::defaultOutputDevice());
+    if (!audio_device.isFormatSupported(audio_format)) {
+        qWarning() << "Default format not supported - trying to use nearest";
+        audio_format = audio_device.nearestFormat(audio_format);
+
+        qDebug() << "channels: " << audio_format.channels();
+        qDebug() << "frequency: " << audio_format.frequency();
+        qDebug() << "byteorder: " << audio_format.byteOrder();
+        qDebug() << "samplesize: " << audio_format.sampleSize();
+    }
+
+    qDebug() << audio_device.deviceName();
     
     qDebug() << "delete";
     //delete audio_output;
@@ -52,33 +67,30 @@ void audio::initialize_audio() {
 }
 
 void audio::process_audio(char* buffer) {
-    //qDebug() << "process audio";
-    aLawDecode(buffer,decoded_buffer,6);
-    
-
+    qDebug() << "process audio";
+    aLawDecode(buffer);
     if(audio_out) {
         //qDebug() << "write audio data: " <<  audio_out->bytesToWrite();
-        audio_out->write(decoded_buffer.data(),(long long)480*2*6);
+        audio_out->write(decoded_buffer.data(),decoded_buffer.length());
     }
 }
 
-void audio::aLawDecode(char* buffer,QByteArray decoded_buffer,int replications) {
+void audio::aLawDecode(char* buffer) {
     int i;
     int j;
     short v;
 
-    //qDebug() << "aLawDecode";
+    qDebug() << "aLawDecode " << decoded_buffer.length();
 
     unsigned char *ptr = reinterpret_cast<unsigned char *> (decoded_buffer.data());
 
-    for (int inIx=48, outIx=0; inIx < 48+480; inIx++) {
+    for (int inIx=48, outIx=0; inIx < 48+decoded_buffer.length(); inIx++) {
         i=buffer[inIx]&0xFF;
         v=decodetable[i];
+
         // assumes BIGENDIAN
-        for(j=0;j<replications;j++) {
-            *ptr++=(char)((v>>8)&0xFF);
-            *ptr++=(char)(v&0xFF);
-        }
+        *ptr++=(unsigned char)((v>>8)&0xFF);
+        *ptr++=(unsigned char)(v&0xFF);
     }
 
 }
@@ -101,5 +113,7 @@ void audio::init_decodetable() {
             value = -value;
         }
         decodetable[i] = (short) value;
+
+        qDebug() << "decodetable[" << i <<"]=" << decodetable[i];
     }
 }
