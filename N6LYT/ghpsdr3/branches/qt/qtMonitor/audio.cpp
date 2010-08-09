@@ -67,7 +67,7 @@ void audio::initialize_audio(int buffer_size) {
 }
 
 void audio::process_audio(char* buffer) {
-    qDebug() << "process audio";
+    //qDebug() << "process audio";
     aLawDecode(buffer);
     if(audio_out) {
         //qDebug() << "write audio data: " <<  audio_out->bytesToWrite();
@@ -80,7 +80,7 @@ void audio::aLawDecode(char* buffer) {
     int j;
     short v;
 
-    qDebug() << "aLawDecode " << decoded_buffer.length();
+    //qDebug() << "aLawDecode " << decoded_buffer.length();
 
     unsigned char *ptr = reinterpret_cast<unsigned char *> (decoded_buffer.data());
 
