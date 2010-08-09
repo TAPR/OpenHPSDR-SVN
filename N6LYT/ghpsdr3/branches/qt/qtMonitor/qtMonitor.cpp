@@ -61,7 +61,7 @@ qtMonitor::qtMonitor() {
     connect(widget.spectrumFrame,SIGNAL(frequencyMoved(int)),
             this, SLOT(moveFrequency(int)));
 
-    audio_device.initialize_audio();
+    audio_device.initialize_audio(BUFFER_SIZE);
 
 }
 
@@ -256,6 +256,8 @@ void qtMonitor::connected() {
     setMode(0);
     setFilter(-3450,-150);
     setFrequency(7056000);
+    setGain(50);
+
 
     sendCommand("startAudioStream 480");
 
@@ -333,6 +335,12 @@ void qtMonitor::moveFrequency(int f) {
     setFrequency(frequency+((long)f*100L));
 }
 
+void qtMonitor::setGain(int gain) {
+    QString command;
+    command.sprintf("SetRXOutputGain %d",gain);
+    sendCommand(command);
+}
+
 void qtMonitor::socketData() {
     char buffer[HEADER_SIZE+BUFFER_SIZE];
 
@@ -344,7 +352,7 @@ void qtMonitor::socketData() {
             widget.spectrumFrame->updateSpectrum(buffer);
         } else if(buffer[0]==1) {
             // audio data
-            audio_device.process_audio(&buffer[48]);
+            audio_device.process_audio(buffer);
         } else {
             qDebug() << "unknown data: " << buffer[0];
         }
