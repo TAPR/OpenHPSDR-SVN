@@ -12,7 +12,10 @@
 
 #include <QFrame>
 #include <QPainter>
+#include <QMouseEvent>
 
+#define WIDTH 480
+#define HEIGHT 180
 
 class spectrum: public QFrame {
     Q_OBJECT
@@ -20,23 +23,44 @@ public:
     spectrum();
     spectrum(QWidget*& widget);
     virtual ~spectrum();
-    void updateSpectrum(char* buffer);
     void setObjectName(QString name);
     void setGeometry(QRect rect);
-    void setVisible(bool visible);
-    
+    void initialize();  
+    void setFrequency(long long f);
+    void setFilter(int low,int high);
+    void updateSpectrum(char* buffer);
+
+signals:
+    void frequencyMoved(int step);
+
 protected:
     void paintEvent(QPaintEvent*);
 
+    void mousePressEvent(QMouseEvent* event);
+    void mouseMoveEvent(QMouseEvent* event);
+    void mouseReleaseEvent(QMouseEvent* event);
+
+    void wheelEvent(QWheelEvent *event);
+    
 private:
-    float samples[480];
-    int   X[480];
-    int   Y[480];
+    float samples[WIDTH];
+    int   X[WIDTH];
+    int   Y[WIDTH];
     int spectrumHigh;
     int spectrumLow;
-};
 
-static QVector <QPoint> plot(480);
+    int startX;
+    int lastX;
+    int moved;
+
+    int sampleRate;
+
+    int filterLow;
+    int filterHigh;
+    long long frequency;
+
+    QVector <QPoint> plot;
+};
 
 
 #endif	/* SPECTRUM_H */

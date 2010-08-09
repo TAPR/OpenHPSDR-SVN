@@ -18,6 +18,8 @@
                    displayName="Source Files"
                    projectFiles="true"
                    kind="SOURCE_LOGICAL_FOLDER">
+      <itemPath>Port_Audio.cpp</itemPath>
+      <itemPath>Port_Audio.h</itemPath>
       <itemPath>audio.cpp</itemPath>
       <itemPath>audio.h</itemPath>
       <itemPath>main.cpp</itemPath>
@@ -45,9 +47,14 @@
         <platform>2</platform>
       </toolsSet>
       <qt>
-        <modules>core gui network phonon</modules>
+        <modules>core gui network</modules>
       </qt>
       <compileType>
+        <linkerTool>
+          <linkerLibItems>
+            <linkerLibLibItem>QtMultimedia</linkerLibLibItem>
+          </linkerLibItems>
+        </linkerTool>
       </compileType>
     </conf>
     <conf name="Release" type="4">

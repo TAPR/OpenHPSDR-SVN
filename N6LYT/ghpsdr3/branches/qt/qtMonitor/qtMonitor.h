@@ -13,6 +13,7 @@
 #include <QSemaphore>
 
 #include <audio.h>
+#include <Port_Audio.h>
 #include "ui_qtMonitor.h"
 
 class qtMonitor : public QMainWindow {
@@ -20,7 +21,7 @@ class qtMonitor : public QMainWindow {
 public:
     qtMonitor();
     virtual ~qtMonitor();
-    void sendCommand(char* command);
+    void sendCommand(QString command);
 public slots:
     void band_160_buttonPressed();
     void band_80_buttonPressed();
@@ -50,6 +51,12 @@ public slots:
 
     void update();
 
+    void setMode(int mode);
+    void setFilter(int low,int high);
+    void setFrequency(long long frequency);
+
+    void moveFrequency(int f);
+
 private:
     Ui::qtMonitor widget;
 
@@ -57,6 +64,14 @@ private:
 
     QSemaphore sem;
     audio audio_device;
+    Port_Audio port_audio;
+
+    int mode;
+
+    int filterLow;
+    int filterHigh;
+
+    long long frequency;
 };
 
 #endif	/* _QTMONITOR_H */
