@@ -70,23 +70,23 @@ void spectrum::wheelEvent(QWheelEvent *event) {
 void spectrum::paintEvent(QPaintEvent*) {
     QPainter painter(this);
 
-    painter.fillRect(0, 0, 480, 180, Qt::black);
+    painter.fillRect(0, 0, WIDTH, HEIGHT, Qt::black);
 
     // plot the filter
-    int filterLeft = (filterLow - (-sampleRate / 2)) * 480 / sampleRate;
-    int filterRight = (filterHigh - (-sampleRate / 2)) * 480 / sampleRate;
+    int filterLeft = (filterLow - (-sampleRate / 2)) * WIDTH / sampleRate;
+    int filterRight = (filterHigh - (-sampleRate / 2)) * WIDTH / sampleRate;
     painter.setBrush(Qt::SolidPattern);
-    painter.fillRect(filterLeft,0,filterRight-filterLeft,180,Qt::gray);
+    painter.fillRect(filterLeft,0,filterRight-filterLeft,HEIGHT,Qt::gray);
     
     // plot horizontal grid
     int V = spectrumHigh - spectrumLow;
     int numSteps = V / 20;
     for (int i = 1; i < numSteps; i++) {
         int num = spectrumHigh - i * 20;
-        int y = (int) floor((spectrumHigh - num) * 180 / V);
+        int y = (int) floor((spectrumHigh - num) * HEIGHT / V);
 
         painter.setPen(QPen(Qt::yellow, 1));
-        painter.drawLine(0, y, 480, y);
+        painter.drawLine(0, y, WIDTH, y);
 
         painter.setPen(QPen(Qt::green, 1));
         painter.drawText(3,y+2,QString::number(num));
@@ -95,12 +95,12 @@ void spectrum::paintEvent(QPaintEvent*) {
 
     // draw cursor
     painter.setPen(QPen(Qt::red, 1));
-    painter.drawLine(240,0,240,180);
+    painter.drawLine(WIDTH/2,0,WIDTH/2,HEIGHT);
 
     // plot spectrum
     painter.setPen(QPen(Qt::white, 1));
-    if(plot.count()==480) {
-        painter.drawPolyline(plot.constData(),480);
+    if(plot.count()==WIDTH) {
+        painter.drawPolyline(plot.constData(),WIDTH);
     }
 
 }
@@ -119,8 +119,8 @@ void spectrum::updateSpectrum(char* buffer) {
     
     sampleRate = atoi(&buffer[32]);
     
-    for(i=0;i<480;i++) {
-        samples[i] = -(buffer[i + 48] & 0xFF) - 30;
+    for(i=0;i<WIDTH;i++) {
+        samples[i] = -(buffer[i + 48] & 0xFF);
     }
 
     plot.clear();

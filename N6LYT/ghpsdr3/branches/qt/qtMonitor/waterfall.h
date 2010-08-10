@@ -5,8 +5,8 @@
  * Created on 05 August 2010, 16:12
  */
 
-#ifndef SPECTRUM_H
-#define	SPECTRUM_H
+#ifndef WATERFALL_H
+#define	WATERFALL_H
 
 #include <QtCore>
 
@@ -17,18 +17,19 @@
 #define WIDTH 480
 #define HEIGHT 90
 
-class spectrum: public QFrame {
+class waterfall: public QFrame {
     Q_OBJECT
 public:
-    spectrum();
-    spectrum(QWidget*& widget);
-    virtual ~spectrum();
+    waterfall();
+    waterfall(QWidget*& widget);
+    virtual ~waterfall();
     void setObjectName(QString name);
     void setGeometry(QRect rect);
     void initialize();  
     void setFrequency(long long f);
     void setFilter(int low,int high);
-    void updateSpectrum(char* buffer);
+    void updateWaterfall(char* buffer);
+    
 
 signals:
     void frequencyMoved(int step);
@@ -43,25 +44,21 @@ protected:
     void wheelEvent(QWheelEvent *event);
     
 private:
+    uint calculatePixel(int sample);
+    
     float samples[WIDTH];
     int   X[WIDTH];
     int   Y[WIDTH];
-    int spectrumHigh;
-    int spectrumLow;
+    int waterfallHigh;
+    int waterfallLow;
 
     int startX;
     int lastX;
     int moved;
 
-    int sampleRate;
-
-    int filterLow;
-    int filterHigh;
-    long long frequency;
-
-    QVector <QPoint> plot;
+    QImage image;
 };
 
 
-#endif	/* SPECTRUM_H */
+#endif	/* WATERFALL_H */
 

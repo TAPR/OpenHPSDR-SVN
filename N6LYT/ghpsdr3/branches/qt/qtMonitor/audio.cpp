@@ -10,9 +10,6 @@
 audio::audio() {
 }
 
-audio::audio(const audio& orig) {
-}
-
 audio::~audio() {
 }
 
@@ -77,14 +74,13 @@ void audio::process_audio(char* buffer) {
 
 void audio::aLawDecode(char* buffer) {
     int i;
-    int j;
     short v;
 
     //qDebug() << "aLawDecode " << decoded_buffer.length();
 
     unsigned char *ptr = reinterpret_cast<unsigned char *> (decoded_buffer.data());
 
-    for (int inIx=48, outIx=0; inIx < 48+decoded_buffer.length(); inIx++) {
+    for (int inIx=48; inIx < 48+decoded_buffer.length(); inIx++) {
         i=buffer[inIx]&0xFF;
         v=decodetable[i];
 

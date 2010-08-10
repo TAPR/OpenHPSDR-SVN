@@ -23,6 +23,8 @@
       <itemPath>main.cpp</itemPath>
       <itemPath>spectrum.cpp</itemPath>
       <itemPath>spectrum.h</itemPath>
+      <itemPath>waterfall.cpp</itemPath>
+      <itemPath>waterfall.h</itemPath>
     </logicalFolder>
     <logicalFolder name="TestFiles"
                    displayName="Test Files"
