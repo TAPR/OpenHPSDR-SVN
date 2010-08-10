@@ -5,6 +5,8 @@
  * Created on 06 August 2010, 16:17
  */
 
+
+
 #include "audio.h"
 
 audio::audio() {
@@ -27,39 +29,36 @@ void audio::initialize_audio(int buffer_size) {
     audio_format.setByteOrder(QAudioFormat::BigEndian);
     audio_format.setSampleType(QAudioFormat::SignedInt);
 
-    //QAudioDeviceInfo info(QAudioDeviceInfo::availableDevices(QAudio::AudioOutput));
+}
 
-    foreach(const QAudioDeviceInfo &deviceInfo,QAudioDeviceInfo::availableDevices(QAudio::AudioOutput)) {
-        qDebug() << deviceInfo.deviceName();
-        if(deviceInfo.deviceName()=="pulse") {
-            qDebug() << "found pulse";
-            audio_device=deviceInfo;
+void audio::get_audio_devices(QComboBox* comboBox) {
+    int i=0;
+    foreach(const QAudioDeviceInfo &device_info, QAudioDeviceInfo::availableDevices(QAudio::AudioOutput)) {
+        qDebug() << device_info.deviceName();
+        comboBox->addItem(device_info.deviceName(),qVariantFromValue(device_info));
+        if(i==0) {
+            audio_device=device_info;
         }
+        i++;
     }
 
-    //QAudioDeviceInfo info(QAudioDeviceInfo::defaultOutputDevice());
-    if (!audio_device.isFormatSupported(audio_format)) {
-        qWarning() << "Default format not supported - trying to use nearest";
-        audio_format = audio_device.nearestFormat(audio_format);
-
-        qDebug() << "channels: " << audio_format.channels();
-        qDebug() << "frequency: " << audio_format.frequency();
-        qDebug() << "byteorder: " << audio_format.byteOrder();
-        qDebug() << "samplesize: " << audio_format.sampleSize();
-    }
-
-    qDebug() << audio_device.deviceName();
-    
-    qDebug() << "delete";
-    //delete audio_output;
-    audio_output = 0;
-    qDebug() << "new QAudiiOutput";
     audio_output = new QAudioOutput(audio_device, audio_format, this);
-    //connect(audio_output, SIGNAL(notify()), SLOT(notified()));
-    //connect(audio_output, SIGNAL(stateChanged(QAudio::State)), SLOT(stateChanged(QAudio::State)));
-    qDebug() << "start";
-    audio_out=audio_output->start();
+    audio_out = audio_output->start();
+}
 
+void audio::select_audio(QAudioDeviceInfo info) {
+
+    qDebug() << "selected audio " << info.deviceName();
+
+    if(audio_output!=0) {
+        audio_output->stop();
+        audio_output->disconnect(this);
+    }
+    
+    audio_device=info;
+    audio_output=0;
+    audio_output = new QAudioOutput(audio_device, audio_format, this);
+    audio_out = audio_output->start();
 
 }
 
@@ -110,6 +109,5 @@ void audio::init_decodetable() {
         }
         decodetable[i] = (short) value;
 
-        qDebug() << "decodetable[" << i <<"]=" << decodetable[i];
     }
 }

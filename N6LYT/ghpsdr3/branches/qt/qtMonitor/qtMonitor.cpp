@@ -66,6 +66,11 @@ qtMonitor::qtMonitor() {
 
     audio_device.initialize_audio(BUFFER_SIZE);
 
+    audio_device.get_audio_devices(widget.audioComboBox);
+
+    connect(widget.audioComboBox,SIGNAL(currentIndexChanged(int)),
+            this, SLOT(audioChanged(int)));
+
 }
 
 qtMonitor::~qtMonitor() {
@@ -76,163 +81,102 @@ void qtMonitor::band_160_buttonPressed() {
     setFrequency(1845000);
     setFilter(-3450, -150);
     setMode(0);
-
-//    widget.vfo_lcdNumber->display(1.845);
-//    sendCommand("setFrequency 1845000");
-//    sendCommand("setFilter -3440 -150");
-//    sendCommand("setMode 0");
 }
 
 void qtMonitor::band_80_buttonPressed() {
     setFrequency(3750000);
     setFilter(-3450, -150);
     setMode(0);
-//    widget.vfo_lcdNumber->display(3.75);
-//    sendCommand("setFrequency 3750000");
-//    sendCommand("setFilter -3440 -150");
-//    sendCommand("setMode 0");
 }
 
 void qtMonitor::band_60_buttonPressed() {
     setFrequency(5330500);
     setFilter(-3450, -150);
     setMode(0);
-//    widget.vfo_lcdNumber->display(5.3305);
-//    sendCommand("setFrequency 5330500");
-//    sendCommand("setFilter -3440 -150");
-//    sendCommand("setMode 0");
 }
 
 void qtMonitor::band_40_buttonPressed() {
     setFrequency(7056000);
     setFilter(-3450, -150);
     setMode(0);
-//    widget.vfo_lcdNumber->display(7.056);
-//    sendCommand("setFrequency 7056000");
-//    sendCommand("setFilter -3440 -150");
-//    sendCommand("setMode 0");
 }
 
 void qtMonitor::band_30_buttonPressed() {
     setFrequency(10120000);
     setFilter(150, 3450);
     setMode(1);
-//    widget.vfo_lcdNumber->display(10.120);
-//    sendCommand("setFrequency 10120000");
-//    sendCommand("setFilter 150 3440");
-//    sendCommand("setMode 1");
 }
 
 void qtMonitor::band_20_buttonPressed() {
     setFrequency(14230000);
     setFilter(150, 3450);
     setMode(1);
-//    widget.vfo_lcdNumber->display(14.230);
-//    sendCommand("setFrequency 14230000");
-//    sendCommand("setFilter 150 3440");
-//    sendCommand("setMode 1");
 }
 
 void qtMonitor::band_17_buttonPressed() {
     setFrequency(18068600);
     setFilter(150, 3450);
     setMode(1);
-//    widget.vfo_lcdNumber->display(18.0686);
-//    sendCommand("setFrequency 18068600");
-//    sendCommand("setFilter 150 3440");
-//    sendCommand("setMode 1");
 }
 
 void qtMonitor::band_15_buttonPressed() {
     setFrequency(21255000);
     setFilter(150, 3450);
     setMode(1);
-//    widget.vfo_lcdNumber->display(21.255);
-//    sendCommand("setFrequency 21255000");
-//    sendCommand("setFilter 150 3440");
-//    sendCommand("setMode 1");
 }
 
 void qtMonitor::band_12_buttonPressed() {
     setFrequency(24895000);
     setFilter(150, -3450);
     setMode(1);
-//    widget.vfo_lcdNumber->display(24.895);
-//    sendCommand("setFrequency 24895000");
-//    sendCommand("setFilter 150 3440");
-//    sendCommand("setMode 1");
 }
 
 void qtMonitor::band_10_buttonPressed() {
     setFrequency(28500000);
     setFilter(150, 3450);
     setMode(1);
-//    widget.vfo_lcdNumber->display(28.500);
-//    sendCommand("setFrequency 28500000");
-//    sendCommand("setFilter 150 3440");
-//    sendCommand("setMode 1");
 }
 
 void qtMonitor::band_6_buttonPressed() {
     setFrequency(50125000);
     setFilter(150, 3450);
     setMode(1);
-//    widget.vfo_lcdNumber->display(50.125);
-//    sendCommand("setFrequency 50125000");
-//    sendCommand("setFilter 150 3440");
-//    sendCommand("setMode 1");
 }
 
 void qtMonitor::band_gen_buttonPressed() {
     setFrequency(909000);
     setFilter(-4000, 4000);
     setMode(6);
-//    widget.vfo_lcdNumber->display(0.909);
-//    sendCommand("setFrequency 909000");
-//    sendCommand("setFilter -4000 4000");
-//    sendCommand("setMode 6");
 }
 
 void qtMonitor::mode_lsb_buttonPressed() {
     setMode(0);
     setFilter(-3450,-150);
-//    sendCommand("setMode 0");
-//    sendCommand("setFilter -3440 -150");
 }
 
 void qtMonitor::mode_usb_buttonPressed() {
     setMode(1);
     setFilter(150,3440);
-//    sendCommand("setMode 1");
-//    sendCommand("setFilter 150 3440");
 }
 
 void qtMonitor::mode_dsb_buttonPressed() {
     setMode(2);
     setFilter(-3300,3300);
-//    sendCommand("setMode 2");
-//    sendCommand("setFilter -3440 3440");
 }
 
 void qtMonitor::mode_cwl_buttonPressed() {
     setMode(3);
     setFilter(-800,400);
-//    sendCommand("setMode 3");
-//    sendCommand("setFilter  -800 -400");
 }
 
 void qtMonitor::mode_cwu_buttonPressed() {
     setMode(4);
     setFilter(400,800);
-//    sendCommand("setMode 4");
-//    sendCommand("setFilter 400 800");
 }
 
 void qtMonitor::mode_am_buttonPressed() {
     setMode(6);
     setFilter(-4000,4000);
-//    sendCommand("setMode 6");
-//    sendCommand("setFilter -4000 4000");
 }
 
 void qtMonitor::socketError(QAbstractSocket::SocketError socketError) {
@@ -252,6 +196,11 @@ void qtMonitor::socketError(QAbstractSocket::SocketError socketError) {
 
 }
 
+void qtMonitor::audioChanged(int choice) {
+    qDebug() << "audioChanged " << choice;
+    audio_device.select_audio(widget.audioComboBox->itemData(choice).value<QAudioDeviceInfo>());
+}
+
 void qtMonitor::connected() {
 
     qDebug() << "Connected";
@@ -260,7 +209,6 @@ void qtMonitor::connected() {
     setFilter(-3450,-150);
     setFrequency(7056000);
     setGain(50);
-
 
     sendCommand("startAudioStream 480");
 
@@ -287,6 +235,8 @@ void qtMonitor::connect_buttonPressed() {
             this, SLOT(socketData()));
 
     tcpSocket->connectToHost(widget.server_lineEdit->text(),widget.rx_spinBox->value()+8000);
+
+    widget.audioComboBox->setDisabled(TRUE);
     
 }
 

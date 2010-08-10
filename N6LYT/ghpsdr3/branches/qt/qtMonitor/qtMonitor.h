@@ -56,6 +56,8 @@ public slots:
     void moveFrequency(int f);
     void setGain(int gain);
 
+    void audioChanged(int choice);
+
 private:
     Ui::qtMonitor widget;
 
