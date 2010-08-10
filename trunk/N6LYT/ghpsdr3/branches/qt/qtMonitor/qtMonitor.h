@@ -64,12 +64,15 @@ private:
     QSemaphore sem;
     audio audio_device;
 
+    int fps;
+
     int mode;
 
     int filterLow;
     int filterHigh;
 
     long long frequency;
+
 };
 
 #endif	/* _QTMONITOR_H */

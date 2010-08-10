@@ -13,6 +13,8 @@
 qtMonitor::qtMonitor() {
 
     sem.release(1);
+
+    fps=15;
     
     widget.setupUi(this);
     connect(widget.band_160_pushButton, SIGNAL(pressed()),
@@ -57,6 +59,7 @@ qtMonitor::qtMonitor() {
             this, SLOT(connect_buttonPressed()));
 
     widget.spectrumFrame->initialize();
+    widget.waterfallFrame->initialize();
 
     connect(widget.spectrumFrame,SIGNAL(frequencyMoved(int)),
             this, SLOT(moveFrequency(int)));
@@ -263,7 +266,9 @@ void qtMonitor::connected() {
 
     QTimer* qTimer=new QTimer(this);
     connect(qTimer, SIGNAL(timeout()), this, SLOT(update()));
-    qTimer->start(1000/15); /* 15 fps */
+    qTimer->start(1000/fps);
+
+
 
 }
 
@@ -350,6 +355,7 @@ void qtMonitor::socketData() {
         if(buffer[0]==0) {
             // spectrum data
             widget.spectrumFrame->updateSpectrum(buffer);
+            widget.waterfallFrame->updateWaterfall(buffer);
         } else if(buffer[0]==1) {
             // audio data
             audio_device.process_audio(buffer);
