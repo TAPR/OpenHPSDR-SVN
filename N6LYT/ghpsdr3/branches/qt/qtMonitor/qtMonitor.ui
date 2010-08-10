@@ -193,7 +193,7 @@
      </rect>
     </property>
     <property name="title">
-     <string>GroupBox</string>
+     <string>Mode</string>
     </property>
     <widget class="QPushButton" name="mode_lsb_pushButton">
      <property name="geometry">
