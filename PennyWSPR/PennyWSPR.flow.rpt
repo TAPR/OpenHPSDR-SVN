@@ -1,0 +1,142 @@
+Flow report for PennyWSPR
+Tue Aug 10 22:49:51 2010
+Quartus II Version 9.1 Build 304 01/25/2010 Service Pack 1 SJ Web Edition
+
+
+---------------------
+; Table of Contents ;
+---------------------
+  1. Legal Notice
+  2. Flow Summary
+  3. Flow Settings
+  4. Flow Non-Default Global Settings
+  5. Flow Elapsed Time
+  6. Flow OS Summary
+  7. Flow Log
+
+
+
+----------------
+; Legal Notice ;
+----------------
+Copyright (C) 1991-2010 Altera Corporation
+Your use of Altera Corporation's design tools, logic functions 
+and other software and tools, and its AMPP partner logic 
+functions, and any output files from any of the foregoing 
+(including device programming or simulation files), and any 
+associated documentation or information are expressly subject 
+to the terms and conditions of the Altera Program License 
+Subscription Agreement, Altera MegaCore Function License 
+Agreement, or other applicable license agreement, including, 
+without limitation, that your use is for the sole purpose of 
+programming logic devices manufactured by Altera and sold by 
+Altera or its authorized distributors.  Please refer to the 
+applicable agreement for further details.
+
+
+
++-----------------------------------------------------------------------------------+
+; Flow Summary                                                                      ;
++------------------------------------+----------------------------------------------+
+; Flow Status                        ; Successful - Tue Aug 10 22:49:50 2010        ;
+; Quartus II Version                 ; 9.1 Build 304 01/25/2010 SP 1 SJ Web Edition ;
+; Revision Name                      ; PennyWSPR                                    ;
+; Top-level Entity Name              ; PennyWSPR                                    ;
+; Family                             ; Cyclone II                                   ;
+; Device                             ; EP2C8Q208C8                                  ;
+; Timing Models                      ; Final                                        ;
+; Met timing requirements            ; Yes                                          ;
+; Total logic elements               ; 1,869 / 8,256 ( 23 % )                       ;
+;     Total combinational functions  ; 1,831 / 8,256 ( 22 % )                       ;
+;     Dedicated logic registers      ; 1,195 / 8,256 ( 14 % )                       ;
+; Total registers                    ; 1195                                         ;
+; Total pins                         ; 43 / 138 ( 31 % )                            ;
+; Total virtual pins                 ; 0                                            ;
+; Total memory bits                  ; 324 / 165,888 ( < 1 % )                      ;
+; Embedded Multiplier 9-bit elements ; 0 / 36 ( 0 % )                               ;
+; Total PLLs                         ; 0 / 2 ( 0 % )                                ;
++------------------------------------+----------------------------------------------+
+
+
++-----------------------------------------+
+; Flow Settings                           ;
++-------------------+---------------------+
+; Option            ; Setting             ;
++-------------------+---------------------+
+; Start date & time ; 08/10/2010 22:49:13 ;
+; Main task         ; Compilation         ;
+; Revision Name     ; PennyWSPR           ;
++-------------------+---------------------+
+
+
++----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Flow Non-Default Global Settings                                                                                                                                                             ;
++---------------------------------------------+------------------------------------------------------------------------------------+--------------------------------+-------------+------------+
+; Assignment Name                             ; Value                                                                              ; Default Value                  ; Entity Name ; Section Id ;
++---------------------------------------------+------------------------------------------------------------------------------------+--------------------------------+-------------+------------+
+; ALLOW_POWER_UP_DONT_CARE                    ; Off                                                                                ; On                             ; --          ; --         ;
+; COMPILER_SIGNATURE_ID                       ; 136638506683.128149855302524                                                       ; --                             ; --          ; --         ;
+; ENABLE_SIGNALTAP                            ; Off                                                                                ; --                             ; --          ; --         ;
+; FMAX_REQUIREMENT                            ; 123 MHz                                                                            ; --                             ; --          ; --         ;
+; IP_TOOL_NAME                                ; ROM: 1-PORT                                                                        ; --                             ; --          ; --         ;
+; IP_TOOL_NAME                                ; PARALLEL_ADD                                                                       ; --                             ; --          ; --         ;
+; IP_TOOL_VERSION                             ; 9.1                                                                                ; --                             ; --          ; --         ;
+; IP_TOOL_VERSION                             ; 9.1                                                                                ; --                             ; --          ; --         ;
+; MESSAGE_SUPPRESSION_RULE_FILE               ; PennyWSPR.srf                                                                      ; --                             ; --          ; --         ;
+; MISC_FILE                                   ; C:/Documents and Settings/Kirk Weedman/Desktop/HPSDR Verilog/Penelope/Penelope.dpf ; --                             ; --          ; --         ;
+; MISC_FILE                                   ; C:/HPSDR/trunk/Penelope/Penelope.dpf                                               ; --                             ; --          ; --         ;
+; MISC_FILE                                   ; C:/Documents and Settings/Kirk/Desktop/HPSDR Verilog/Penelope/Penelope.dpf         ; --                             ; --          ; --         ;
+; MISC_FILE                                   ; symrom_bb.v                                                                        ; --                             ; --          ; --         ;
+; MISC_FILE                                   ; sigadder_bb.v                                                                      ; --                             ; --          ; --         ;
+; NUMBER_OF_DESTINATION_TO_REPORT             ; 50                                                                                 ; 10                             ; --          ; --         ;
+; NUMBER_OF_PATHS_TO_REPORT                   ; 1000                                                                               ; 200                            ; --          ; --         ;
+; NUMBER_OF_SOURCES_PER_DESTINATION_TO_REPORT ; 50                                                                                 ; 10                             ; --          ; --         ;
+; OPTIMIZE_HOLD_TIMING                        ; Off                                                                                ; IO Paths and Minimum TPD Paths ; --          ; --         ;
+; PARTITION_COLOR                             ; 14622752                                                                           ; --                             ; --          ; Top        ;
+; PARTITION_NETLIST_TYPE                      ; SOURCE                                                                             ; --                             ; --          ; Top        ;
+; PHYSICAL_SYNTHESIS_COMBO_LOGIC              ; On                                                                                 ; Off                            ; --          ; --         ;
+; PHYSICAL_SYNTHESIS_REGISTER_DUPLICATION     ; On                                                                                 ; Off                            ; --          ; --         ;
+; PHYSICAL_SYNTHESIS_REGISTER_RETIMING        ; On                                                                                 ; Off                            ; --          ; --         ;
+; REMOVE_REDUNDANT_LOGIC_CELLS                ; On                                                                                 ; Off                            ; --          ; --         ;
+; ROUTER_TIMING_OPTIMIZATION_LEVEL            ; MAXIMUM                                                                            ; Normal                         ; --          ; --         ;
+; STATE_MACHINE_PROCESSING                    ; User-Encoded                                                                       ; Auto                           ; --          ; --         ;
+; VERILOG_INPUT_VERSION                       ; SystemVerilog_2005                                                                 ; Verilog_2001                   ; --          ; --         ;
+; VERILOG_SHOW_LMF_MAPPING_MESSAGES           ; Off                                                                                ; --                             ; --          ; --         ;
++---------------------------------------------+------------------------------------------------------------------------------------+--------------------------------+-------------+------------+
+
+
++-----------------------------------------------------------------------------------------------------------------------------+
+; Flow Elapsed Time                                                                                                           ;
++-------------------------+--------------+-------------------------+---------------------+------------------------------------+
+; Module Name             ; Elapsed Time ; Average Processors Used ; Peak Virtual Memory ; Total CPU Time (on all processors) ;
++-------------------------+--------------+-------------------------+---------------------+------------------------------------+
+; Analysis & Synthesis    ; 00:00:06     ; 1.0                     ; 215 MB              ; 00:00:06                           ;
+; Fitter                  ; 00:00:25     ; 1.0                     ; 242 MB              ; 00:00:27                           ;
+; Assembler               ; 00:00:01     ; 1.0                     ; 195 MB              ; 00:00:01                           ;
+; Classic Timing Analyzer ; 00:00:01     ; 1.0                     ; 172 MB              ; 00:00:01                           ;
+; Total                   ; 00:00:33     ; --                      ; --                  ; 00:00:35                           ;
++-------------------------+--------------+-------------------------+---------------------+------------------------------------+
+
+
++------------------------------------------------------------------------------------------+
+; Flow OS Summary                                                                          ;
++-------------------------+------------------+---------------+------------+----------------+
+; Module Name             ; Machine Hostname ; OS Name       ; OS Version ; Processor type ;
++-------------------------+------------------+---------------+------------+----------------+
+; Analysis & Synthesis    ; wjt-vista        ; Windows Vista ; 6.0        ; i686           ;
+; Fitter                  ; wjt-vista        ; Windows Vista ; 6.0        ; i686           ;
+; Assembler               ; wjt-vista        ; Windows Vista ; 6.0        ; i686           ;
+; Classic Timing Analyzer ; wjt-vista        ; Windows Vista ; 6.0        ; i686           ;
++-------------------------+------------------+---------------+------------+----------------+
+
+
+------------
+; Flow Log ;
+------------
+quartus_map --read_settings_files=on --write_settings_files=off PennyWSPR -c PennyWSPR
+quartus_fit --read_settings_files=off --write_settings_files=off PennyWSPR -c PennyWSPR
+quartus_asm --read_settings_files=off --write_settings_files=off PennyWSPR -c PennyWSPR
+quartus_tan --read_settings_files=off --write_settings_files=off PennyWSPR -c PennyWSPR --timing_analysis_only
+
+
+

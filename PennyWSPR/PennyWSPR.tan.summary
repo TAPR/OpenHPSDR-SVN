@@ -1,0 +1,96 @@
+--------------------------------------------------------------------------------------
+Timing Analyzer Summary
+--------------------------------------------------------------------------------------
+
+Type           : Worst-case tco
+Slack          : N/A
+Required Time  : None
+Actual Time    : 12.059 ns
+From           : oddClockDivider:refClockDivider|clk_o
+To             : FPGA_PLL
+From Clock     : ext_10MHZ
+To Clock       : --
+Failed Paths   : 0
+
+Type           : Worst-case tpd
+Slack          : N/A
+Required Time  : None
+Actual Time    : 10.826 ns
+From           : PTT
+To             : PTT_in
+From Clock     : --
+To Clock       : --
+Failed Paths   : 0
+
+Type           : Clock Setup: 'C122_clk'
+Slack          : 1.274 ns
+Required Time  : 122.88 MHz ( period = 8.138 ns )
+Actual Time    : 145.69 MHz ( period = 6.864 ns )
+From           : c122_two_min_counter[24]~_Duplicate_106
+To             : c122_current_symbol[3]
+From Clock     : C122_clk
+To Clock       : C122_clk
+Failed Paths   : 0
+
+Type           : Clock Setup: 'clk_lrclk_gen:clrgen|BCLK'
+Slack          : 78.302 ns
+Required Time  : 12.29 MHz ( period = 81.380 ns )
+Actual Time    : 324.89 MHz ( period = 3.078 ns )
+From           : ADC:ADC_SPI|bit_cnt[1]
+To             : ADC:ADC_SPI|bit_cnt[1]
+From Clock     : clk_lrclk_gen:clrgen|BCLK
+To Clock       : clk_lrclk_gen:clrgen|BCLK
+Failed Paths   : 0
+
+Type           : Clock Setup: 'ext_10MHZ'
+Slack          : 96.520 ns
+Required Time  : 10.00 MHz ( period = 100.000 ns )
+Actual Time    : Restricted to 250.00 MHz ( period = 4.000 ns )
+From           : oddClockDivider:refClockDivider|count[0]
+To             : oddClockDivider:refClockDivider|count[6]
+From Clock     : ext_10MHZ
+To Clock       : ext_10MHZ
+Failed Paths   : 0
+
+Type           : Clock Hold: 'C122_clk'
+Slack          : 0.499 ns
+Required Time  : 122.88 MHz ( period = 8.138 ns )
+Actual Time    : N/A
+From           : osc_80khz
+To             : osc_80khz
+From Clock     : C122_clk
+To Clock       : C122_clk
+Failed Paths   : 0
+
+Type           : Clock Hold: 'ext_10MHZ'
+Slack          : 0.499 ns
+Required Time  : 10.00 MHz ( period = 100.000 ns )
+Actual Time    : N/A
+From           : oddClockDivider:refClockDivider|count[0]
+To             : oddClockDivider:refClockDivider|count[0]
+From Clock     : ext_10MHZ
+To Clock       : ext_10MHZ
+Failed Paths   : 0
+
+Type           : Clock Hold: 'clk_lrclk_gen:clrgen|BCLK'
+Slack          : 0.499 ns
+Required Time  : 12.29 MHz ( period = 81.380 ns )
+Actual Time    : N/A
+From           : ADC:ADC_SPI|nCS
+To             : ADC:ADC_SPI|nCS
+From Clock     : clk_lrclk_gen:clrgen|BCLK
+To Clock       : clk_lrclk_gen:clrgen|BCLK
+Failed Paths   : 0
+
+Type           : Total number of failed paths
+Slack          : 
+Required Time  : 
+Actual Time    : 
+From           : 
+To             : 
+From Clock     : 
+To Clock       : 
+Failed Paths   : 0
+
+--------------------------------------------------------------------------------------
+

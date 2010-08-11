@@ -1,0 +1,1277 @@
+Fitter report for PennyWSPR
+Tue Aug 10 22:49:45 2010
+Quartus II Version 9.1 Build 304 01/25/2010 Service Pack 1 SJ Web Edition
+
+
+---------------------
+; Table of Contents ;
+---------------------
+  1. Legal Notice
+  2. Fitter Summary
+  3. Fitter Settings
+  4. Parallel Compilation
+  5. Fitter Netlist Optimizations
+  6. Ignored Assignments
+  7. Incremental Compilation Preservation Summary
+  8. Incremental Compilation Partition Settings
+  9. Incremental Compilation Placement Preservation
+ 10. Pin-Out File
+ 11. Fitter Resource Usage Summary
+ 12. Input Pins
+ 13. Output Pins
+ 14. Bidir Pins
+ 15. I/O Bank Usage
+ 16. All Package Pins
+ 17. Output Pin Default Load For Reported TCO
+ 18. Fitter Resource Utilization by Entity
+ 19. Delay Chain Summary
+ 20. Pad To Core Delay Chain Fanout
+ 21. Control Signals
+ 22. Global & Other Fast Signals
+ 23. Non-Global High Fan-Out Signals
+ 24. Fitter RAM Summary
+ 25. Interconnect Usage Summary
+ 26. LAB Logic Elements
+ 27. LAB-wide Signals
+ 28. LAB Signals Sourced
+ 29. LAB Signals Sourced Out
+ 30. LAB Distinct Inputs
+ 31. Fitter Device Options
+ 32. Operating Settings and Conditions
+ 33. Estimated Delay Added for Hold Timing
+ 34. Fitter Messages
+
+
+
+----------------
+; Legal Notice ;
+----------------
+Copyright (C) 1991-2010 Altera Corporation
+Your use of Altera Corporation's design tools, logic functions 
+and other software and tools, and its AMPP partner logic 
+functions, and any output files from any of the foregoing 
+(including device programming or simulation files), and any 
+associated documentation or information are expressly subject 
+to the terms and conditions of the Altera Program License 
+Subscription Agreement, Altera MegaCore Function License 
+Agreement, or other applicable license agreement, including, 
+without limitation, that your use is for the sole purpose of 
+programming logic devices manufactured by Altera and sold by 
+Altera or its authorized distributors.  Please refer to the 
+applicable agreement for further details.
+
+
+
++-----------------------------------------------------------------------------------+
+; Fitter Summary                                                                    ;
++------------------------------------+----------------------------------------------+
+; Fitter Status                      ; Successful - Tue Aug 10 22:49:45 2010        ;
+; Quartus II Version                 ; 9.1 Build 304 01/25/2010 SP 1 SJ Web Edition ;
+; Revision Name                      ; PennyWSPR                                    ;
+; Top-level Entity Name              ; PennyWSPR                                    ;
+; Family                             ; Cyclone II                                   ;
+; Device                             ; EP2C8Q208C8                                  ;
+; Timing Models                      ; Final                                        ;
+; Total logic elements               ; 1,869 / 8,256 ( 23 % )                       ;
+;     Total combinational functions  ; 1,831 / 8,256 ( 22 % )                       ;
+;     Dedicated logic registers      ; 1,195 / 8,256 ( 14 % )                       ;
+; Total registers                    ; 1195                                         ;
+; Total pins                         ; 43 / 138 ( 31 % )                            ;
+; Total virtual pins                 ; 0                                            ;
+; Total memory bits                  ; 324 / 165,888 ( < 1 % )                      ;
+; Embedded Multiplier 9-bit elements ; 0 / 36 ( 0 % )                               ;
+; Total PLLs                         ; 0 / 2 ( 0 % )                                ;
++------------------------------------+----------------------------------------------+
+
+
++----------------------------------------------------------------------------------------------------------------------------------+
+; Fitter Settings                                                                                                                  ;
++----------------------------------------------------------------------------+--------------------+--------------------------------+
+; Option                                                                     ; Setting            ; Default Value                  ;
++----------------------------------------------------------------------------+--------------------+--------------------------------+
+; Device                                                                     ; EP2C8Q208C8        ;                                ;
+; Maximum processors allowed for parallel compilation                        ; 1                  ;                                ;
+; Router Timing Optimization Level                                           ; MAXIMUM            ; Normal                         ;
+; Fit Attempts to Skip                                                       ; 0                  ; 0.0                            ;
+; Device I/O Standard                                                        ; 3.3-V LVTTL        ;                                ;
+; Optimize Hold Timing                                                       ; Off                ; IO Paths and Minimum TPD Paths ;
+; Perform Physical Synthesis for Combinational Logic for Performance         ; On                 ; Off                            ;
+; Perform Register Duplication for Performance                               ; On                 ; Off                            ;
+; Perform Register Retiming for Performance                                  ; On                 ; Off                            ;
+; Use smart compilation                                                      ; Off                ; Off                            ;
+; Enable parallel Assembler and TimeQuest Timing Analyzer during compilation ; On                 ; On                             ;
+; Enable compact report table                                                ; Off                ; Off                            ;
+; Use TimeQuest Timing Analyzer                                              ; Off                ; Off                            ;
+; Placement Effort Multiplier                                                ; 1.0                ; 1.0                            ;
+; Router Effort Multiplier                                                   ; 1.0                ; 1.0                            ;
+; Always Enable Input Buffers                                                ; Off                ; Off                            ;
+; Optimize Multi-Corner Timing                                               ; Off                ; Off                            ;
+; PowerPlay Power Optimization                                               ; Normal compilation ; Normal compilation             ;
+; Optimize Timing                                                            ; Normal compilation ; Normal compilation             ;
+; Optimize Timing for ECOs                                                   ; Off                ; Off                            ;
+; Regenerate full fit report during ECO compiles                             ; Off                ; Off                            ;
+; Optimize IOC Register Placement for Timing                                 ; On                 ; On                             ;
+; Limit to One Fitting Attempt                                               ; Off                ; Off                            ;
+; Final Placement Optimizations                                              ; Automatically      ; Automatically                  ;
+; Fitter Aggressive Routability Optimizations                                ; Automatically      ; Automatically                  ;
+; Fitter Initial Placement Seed                                              ; 1                  ; 1                              ;
+; PCI I/O                                                                    ; Off                ; Off                            ;
+; Weak Pull-Up Resistor                                                      ; Off                ; Off                            ;
+; Enable Bus-Hold Circuitry                                                  ; Off                ; Off                            ;
+; Auto Global Memory Control Signals                                         ; Off                ; Off                            ;
+; Auto Packed Registers                                                      ; Auto               ; Auto                           ;
+; Auto Delay Chains                                                          ; On                 ; On                             ;
+; Auto Merge PLLs                                                            ; On                 ; On                             ;
+; Ignore PLL Mode When Merging PLLs                                          ; Off                ; Off                            ;
+; Perform Physical Synthesis for Combinational Logic for Fitting             ; Off                ; Off                            ;
+; Perform Logic to Memory Mapping for Fitting                                ; Off                ; Off                            ;
+; Perform Asynchronous Signal Pipelining                                     ; Off                ; Off                            ;
+; Fitter Effort                                                              ; Auto Fit           ; Auto Fit                       ;
+; Physical Synthesis Effort Level                                            ; Normal             ; Normal                         ;
+; Auto Global Clock                                                          ; On                 ; On                             ;
+; Auto Global Register Control Signals                                       ; On                 ; On                             ;
+; Stop After Congestion Map Generation                                       ; Off                ; Off                            ;
+; Save Intermediate Fitting Results                                          ; Off                ; Off                            ;
+; Force Fitter to Avoid Periphery Placement Warnings                         ; Off                ; Off                            ;
+; Use Best Effort Settings for Compilation                                   ; Off                ; Off                            ;
++----------------------------------------------------------------------------+--------------------+--------------------------------+
+
+
+Parallel compilation was disabled, but you have multiple processors available. Enable parallel compilation to reduce compilation time.
++-------------------------------------+
+; Parallel Compilation                ;
++----------------------------+--------+
+; Processors                 ; Number ;
++----------------------------+--------+
+; Number detected on machine ; 4      ;
+; Maximum allowed            ; 1      ;
++----------------------------+--------+
+
+
++-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Fitter Netlist Optimizations                                                                                                                                                                                                                                    ;
++---------------------------------------------------------+------------------+--------------------+---------------------+-----------+----------------+-----------------------------------------------------------------+------------------+-----------------------+
+; Node                                                    ; Action           ; Operation          ; Reason              ; Node Port ; Node Port Name ; Destination Node                                                ; Destination Port ; Destination Port Name ;
++---------------------------------------------------------+------------------+--------------------+---------------------+-----------+----------------+-----------------------------------------------------------------+------------------+-----------------------+
+; C122_pps_count[0]_OTERM71                               ; Retimed Register ; Physical Synthesis ; Timing optimization ;           ;                ;                                                                 ;                  ;                       ;
+; C122_pps_count[0]~27                                    ; Modified         ; Physical Synthesis ; Timing optimization ;           ;                ;                                                                 ;                  ;                       ;
+; C122_pps_count[1]_OTERM85                               ; Retimed Register ; Physical Synthesis ; Timing optimization ;           ;                ;                                                                 ;                  ;                       ;
+; C122_pps_count[2]_OTERM83                               ; Retimed Register ; Physical Synthesis ; Timing optimization ;           ;                ;                                                                 ;                  ;                       ;
+; C122_pps_count[3]_OTERM81                               ; Retimed Register ; Physical Synthesis ; Timing optimization ;           ;                ;                                                                 ;                  ;                       ;
+; C122_pps_count[4]_OTERM79                               ; Retimed Register ; Physical Synthesis ; Timing optimization ;           ;                ;                                                                 ;                  ;                       ;
+; C122_pps_count[5]_OTERM77                               ; Retimed Register ; Physical Synthesis ; Timing optimization ;           ;                ;                                                                 ;                  ;                       ;
+; C122_pps_count[6]_OTERM75                               ; Retimed Register ; Physical Synthesis ; Timing optimization ;           ;                ;                                                                 ;                  ;                       ;
+; C122_pps_count[7]_OTERM73                               ; Retimed Register ; Physical Synthesis ; Timing optimization ;           ;                ;                                                                 ;                  ;                       ;
+; C122_pps_count[8]_OTERM99                               ; Retimed Register ; Physical Synthesis ; Timing optimization ;           ;                ;                                                                 ;                  ;                       ;
+; C122_pps_count[9]_OTERM97                               ; Retimed Register ; Physical Synthesis ; Timing optimization ;           ;                ;                                                                 ;                  ;                       ;
+; C122_pps_count[10]_OTERM95                              ; Retimed Register ; Physical Synthesis ; Timing optimization ;           ;                ;                                                                 ;                  ;                       ;
+; C122_pps_count[11]_OTERM93                              ; Retimed Register ; Physical Synthesis ; Timing optimization ;           ;                ;                                                                 ;                  ;                       ;
+; C122_pps_count[12]_OTERM89                              ; Retimed Register ; Physical Synthesis ; Timing optimization ;           ;                ;                                                                 ;                  ;                       ;
+; C122_pps_count[13]_OTERM87                              ; Retimed Register ; Physical Synthesis ; Timing optimization ;           ;                ;                                                                 ;                  ;                       ;
+; C122_pps_count[14]_OTERM101                             ; Retimed Register ; Physical Synthesis ; Timing optimization ;           ;                ;                                                                 ;                  ;                       ;
+; C122_pps_count[15]_OTERM91                              ; Retimed Register ; Physical Synthesis ; Timing optimization ;           ;                ;                                                                 ;                  ;                       ;
+; C122_pps_count[16]_OTERM103                             ; Retimed Register ; Physical Synthesis ; Timing optimization ;           ;                ;                                                                 ;                  ;                       ;
+; C122_pps_count[17]_OTERM107                             ; Retimed Register ; Physical Synthesis ; Timing optimization ;           ;                ;                                                                 ;                  ;                       ;
+; C122_pps_count[18]_OTERM105                             ; Retimed Register ; Physical Synthesis ; Timing optimization ;           ;                ;                                                                 ;                  ;                       ;
+; C122_pps_count[19]_OTERM109                             ; Retimed Register ; Physical Synthesis ; Timing optimization ;           ;                ;                                                                 ;                  ;                       ;
+; C122_pps_count[20]_OTERM113                             ; Retimed Register ; Physical Synthesis ; Timing optimization ;           ;                ;                                                                 ;                  ;                       ;
+; C122_pps_count[21]_OTERM111                             ; Retimed Register ; Physical Synthesis ; Timing optimization ;           ;                ;                                                                 ;                  ;                       ;
+; C122_pps_count[22]_OTERM121                             ; Retimed Register ; Physical Synthesis ; Timing optimization ;           ;                ;                                                                 ;                  ;                       ;
+; C122_pps_count[23]_OTERM119                             ; Retimed Register ; Physical Synthesis ; Timing optimization ;           ;                ;                                                                 ;                  ;                       ;
+; C122_pps_count[24]_OTERM117                             ; Retimed Register ; Physical Synthesis ; Timing optimization ;           ;                ;                                                                 ;                  ;                       ;
+; C122_pps_count[25]_OTERM115                             ; Retimed Register ; Physical Synthesis ; Timing optimization ;           ;                ;                                                                 ;                  ;                       ;
+; Equal1~0                                                ; Deleted          ; Physical Synthesis ; Timing optimization ;           ;                ;                                                                 ;                  ;                       ;
+; Equal1~0_OTERM65                                        ; Retimed Register ; Physical Synthesis ; Timing optimization ;           ;                ;                                                                 ;                  ;                       ;
+; Equal1~0_RTM067                                         ; Modified         ; Physical Synthesis ; Timing optimization ;           ;                ;                                                                 ;                  ;                       ;
+; Equal1~0_RTM067                                         ; Retimed Register ; Physical Synthesis ; Timing optimization ;           ;                ;                                                                 ;                  ;                       ;
+; Equal1~1                                                ; Deleted          ; Physical Synthesis ; Timing optimization ;           ;                ;                                                                 ;                  ;                       ;
+; Equal1~1_OTERM61                                        ; Retimed Register ; Physical Synthesis ; Timing optimization ;           ;                ;                                                                 ;                  ;                       ;
+; Equal1~1_RTM063                                         ; Modified         ; Physical Synthesis ; Timing optimization ;           ;                ;                                                                 ;                  ;                       ;
+; Equal1~1_RTM063                                         ; Retimed Register ; Physical Synthesis ; Timing optimization ;           ;                ;                                                                 ;                  ;                       ;
+; Equal1~2                                                ; Deleted          ; Physical Synthesis ; Timing optimization ;           ;                ;                                                                 ;                  ;                       ;
+; Equal1~3                                                ; Deleted          ; Physical Synthesis ; Timing optimization ;           ;                ;                                                                 ;                  ;                       ;
+; Equal1~4                                                ; Modified         ; Physical Synthesis ; Timing optimization ;           ;                ;                                                                 ;                  ;                       ;
+; Equal1~4_RESYN472_BDD473                                ; Created          ; Physical Synthesis ; Timing optimization ;           ;                ;                                                                 ;                  ;                       ;
+; Equal1~4_RESYN474_BDD475                                ; Created          ; Physical Synthesis ; Timing optimization ;           ;                ;                                                                 ;                  ;                       ;
+; Equal1~4_RTM062                                         ; Modified         ; Physical Synthesis ; Timing optimization ;           ;                ;                                                                 ;                  ;                       ;
+; Equal1~4_RTM066                                         ; Modified         ; Physical Synthesis ; Timing optimization ;           ;                ;                                                                 ;                  ;                       ;
+; Equal1~6                                                ; Deleted          ; Physical Synthesis ; Timing optimization ;           ;                ;                                                                 ;                  ;                       ;
+; Equal1~6_OTERM57                                        ; Retimed Register ; Physical Synthesis ; Timing optimization ;           ;                ;                                                                 ;                  ;                       ;
+; Equal1~6_RTM059                                         ; Modified         ; Physical Synthesis ; Timing optimization ;           ;                ;                                                                 ;                  ;                       ;
+; Equal1~6_RTM059                                         ; Retimed Register ; Physical Synthesis ; Timing optimization ;           ;                ;                                                                 ;                  ;                       ;
+; Equal1~10                                               ; Modified         ; Physical Synthesis ; Timing optimization ;           ;                ;                                                                 ;                  ;                       ;
+; Equal1~10_RTM058                                        ; Modified         ; Physical Synthesis ; Timing optimization ;           ;                ;                                                                 ;                  ;                       ;
+; Equal6~2                                                ; Modified         ; Physical Synthesis ; Timing optimization ;           ;                ;                                                                 ;                  ;                       ;
+; Equal6~2_RESYN464_BDD465                                ; Created          ; Physical Synthesis ; Timing optimization ;           ;                ;                                                                 ;                  ;                       ;
+; Equal6~2_RESYN466_BDD467                                ; Created          ; Physical Synthesis ; Timing optimization ;           ;                ;                                                                 ;                  ;                       ;
+; LessThan0~1                                             ; Deleted          ; Physical Synthesis ; Timing optimization ;           ;                ;                                                                 ;                  ;                       ;
+; LessThan0~2                                             ; Deleted          ; Physical Synthesis ; Timing optimization ;           ;                ;                                                                 ;                  ;                       ;
+; LessThan0~3                                             ; Deleted          ; Physical Synthesis ; Timing optimization ;           ;                ;                                                                 ;                  ;                       ;
+; LessThan0~4                                             ; Deleted          ; Physical Synthesis ; Timing optimization ;           ;                ;                                                                 ;                  ;                       ;
+; LessThan0~4_RESYN448_BDD449                             ; Created          ; Physical Synthesis ; Timing optimization ;           ;                ;                                                                 ;                  ;                       ;
+; LessThan0~4_RESYN450_BDD451                             ; Created          ; Physical Synthesis ; Timing optimization ;           ;                ;                                                                 ;                  ;                       ;
+; LessThan0~5                                             ; Deleted          ; Physical Synthesis ; Timing optimization ;           ;                ;                                                                 ;                  ;                       ;
+; LessThan0~6                                             ; Modified         ; Physical Synthesis ; Timing optimization ;           ;                ;                                                                 ;                  ;                       ;
+; LessThan0~6_RESYN456_BDD457                             ; Created          ; Physical Synthesis ; Timing optimization ;           ;                ;                                                                 ;                  ;                       ;
+; LessThan0~6_RESYN458_BDD459                             ; Created          ; Physical Synthesis ; Timing optimization ;           ;                ;                                                                 ;                  ;                       ;
+; LessThan0~6_RESYN460_BDD461                             ; Created          ; Physical Synthesis ; Timing optimization ;           ;                ;                                                                 ;                  ;                       ;
+; LessThan0~6_RESYN462_BDD463                             ; Created          ; Physical Synthesis ; Timing optimization ;           ;                ;                                                                 ;                  ;                       ;
+; LessThan0~7                                             ; Deleted          ; Physical Synthesis ; Timing optimization ;           ;                ;                                                                 ;                  ;                       ;
+; LessThan0~8                                             ; Modified         ; Physical Synthesis ; Timing optimization ;           ;                ;                                                                 ;                  ;                       ;
+; LessThan0~8_RESYN468_BDD469                             ; Created          ; Physical Synthesis ; Timing optimization ;           ;                ;                                                                 ;                  ;                       ;
+; LessThan0~8_RESYN470_BDD471                             ; Created          ; Physical Synthesis ; Timing optimization ;           ;                ;                                                                 ;                  ;                       ;
+; c122_current_symbol[0]_OTERM149                         ; Retimed Register ; Physical Synthesis ; Timing optimization ;           ;                ;                                                                 ;                  ;                       ;
+; c122_current_symbol[0]~9                                ; Modified         ; Physical Synthesis ; Timing optimization ;           ;                ;                                                                 ;                  ;                       ;
+; c122_current_symbol[1]_OTERM147                         ; Retimed Register ; Physical Synthesis ; Timing optimization ;           ;                ;                                                                 ;                  ;                       ;
+; c122_current_symbol[2]_OTERM145                         ; Retimed Register ; Physical Synthesis ; Timing optimization ;           ;                ;                                                                 ;                  ;                       ;
+; c122_current_symbol[3]_OTERM143                         ; Retimed Register ; Physical Synthesis ; Timing optimization ;           ;                ;                                                                 ;                  ;                       ;
+; c122_current_symbol[4]_OTERM141                         ; Retimed Register ; Physical Synthesis ; Timing optimization ;           ;                ;                                                                 ;                  ;                       ;
+; c122_current_symbol[5]_OTERM139                         ; Retimed Register ; Physical Synthesis ; Timing optimization ;           ;                ;                                                                 ;                  ;                       ;
+; c122_current_symbol[6]_OTERM137                         ; Retimed Register ; Physical Synthesis ; Timing optimization ;           ;                ;                                                                 ;                  ;                       ;
+; c122_current_symbol[7]_OTERM135                         ; Retimed Register ; Physical Synthesis ; Timing optimization ;           ;                ;                                                                 ;                  ;                       ;
+; c122_two_min_counter[0]~34                              ; Modified         ; Physical Synthesis ; Timing optimization ;           ;                ;                                                                 ;                  ;                       ;
+; oddClockDivider:refClockDivider|Add0~1                  ; Modified         ; Physical Synthesis ; Timing optimization ;           ;                ;                                                                 ;                  ;                       ;
+; oddClockDivider:refClockDivider|count~4                 ; Modified         ; Physical Synthesis ; Timing optimization ;           ;                ;                                                                 ;                  ;                       ;
+; phase_words[0][0]_OTERM123                              ; Retimed Register ; Physical Synthesis ; Timing optimization ;           ;                ;                                                                 ;                  ;                       ;
+; phase_words[0][1]_OTERM69                               ; Retimed Register ; Physical Synthesis ; Timing optimization ;           ;                ;                                                                 ;                  ;                       ;
+; phase_words[0][2]_OTERM133                              ; Retimed Register ; Physical Synthesis ; Timing optimization ;           ;                ;                                                                 ;                  ;                       ;
+; phase_words[0][4]_OTERM129                              ; Retimed Register ; Physical Synthesis ; Timing optimization ;           ;                ;                                                                 ;                  ;                       ;
+; phase_words[0][6]_OTERM125                              ; Retimed Register ; Physical Synthesis ; Timing optimization ;           ;                ;                                                                 ;                  ;                       ;
+; phase_words[0][10]_OTERM127                             ; Retimed Register ; Physical Synthesis ; Timing optimization ;           ;                ;                                                                 ;                  ;                       ;
+; phase_words[0][13]_OTERM131                             ; Retimed Register ; Physical Synthesis ; Timing optimization ;           ;                ;                                                                 ;                  ;                       ;
+; wspr_xmit:xmit|cpl_cordic:cordic_inst|Add37~1           ; Modified         ; Physical Synthesis ; Timing optimization ;           ;                ;                                                                 ;                  ;                       ;
+; wspr_xmit:xmit|cpl_cordic:cordic_inst|Add81~1           ; Modified         ; Physical Synthesis ; Timing optimization ;           ;                ;                                                                 ;                  ;                       ;
+; wspr_xmit:xmit|cpl_cordic:cordic_inst|Add92~1           ; Modified         ; Physical Synthesis ; Timing optimization ;           ;                ;                                                                 ;                  ;                       ;
+; wspr_xmit:xmit|cpl_cordic:cordic_inst|Add103~1          ; Modified         ; Physical Synthesis ; Timing optimization ;           ;                ;                                                                 ;                  ;                       ;
+; wspr_xmit:xmit|cpl_cordic:cordic_inst|Add114~1          ; Modified         ; Physical Synthesis ; Timing optimization ;           ;                ;                                                                 ;                  ;                       ;
+; wspr_xmit:xmit|cpl_cordic:cordic_inst|X[0][14]~1206     ; Modified         ; Physical Synthesis ; Timing optimization ;           ;                ;                                                                 ;                  ;                       ;
+; wspr_xmit:xmit|cpl_cordic:cordic_inst|Z~251             ; Modified         ; Physical Synthesis ; Timing optimization ;           ;                ;                                                                 ;                  ;                       ;
+; wspr_xmit:xmit|cpl_cordic:cordic_inst|Z~254             ; Modified         ; Physical Synthesis ; Timing optimization ;           ;                ;                                                                 ;                  ;                       ;
+; wspr_xmit:xmit|cpl_cordic:cordic_inst|Z~269             ; Modified         ; Physical Synthesis ; Timing optimization ;           ;                ;                                                                 ;                  ;                       ;
+; wspr_xmit:xmit|cpl_cordic:cordic_inst|Z~302             ; Modified         ; Physical Synthesis ; Timing optimization ;           ;                ;                                                                 ;                  ;                       ;
+; wspr_xmit:xmit|cpl_cordic:cordic_inst|Z~395             ; Modified         ; Physical Synthesis ; Timing optimization ;           ;                ;                                                                 ;                  ;                       ;
+; wspr_xmit:xmit|cpl_cordic:cordic_inst|phase[0]          ; Deleted          ; Physical Synthesis ; Timing optimization ;           ;                ;                                                                 ;                  ;                       ;
+; wspr_xmit:xmit|cpl_cordic:cordic_inst|phase[0]_OTERM27  ; Retimed Register ; Physical Synthesis ; Timing optimization ;           ;                ;                                                                 ;                  ;                       ;
+; wspr_xmit:xmit|cpl_cordic:cordic_inst|phase[0]_OTERM55  ; Retimed Register ; Physical Synthesis ; Timing optimization ;           ;                ;                                                                 ;                  ;                       ;
+; wspr_xmit:xmit|cpl_cordic:cordic_inst|phase[1]          ; Deleted          ; Physical Synthesis ; Timing optimization ;           ;                ;                                                                 ;                  ;                       ;
+; wspr_xmit:xmit|cpl_cordic:cordic_inst|phase[1]_OTERM25  ; Retimed Register ; Physical Synthesis ; Timing optimization ;           ;                ;                                                                 ;                  ;                       ;
+; wspr_xmit:xmit|cpl_cordic:cordic_inst|phase[1]_OTERM53  ; Retimed Register ; Physical Synthesis ; Timing optimization ;           ;                ;                                                                 ;                  ;                       ;
+; wspr_xmit:xmit|cpl_cordic:cordic_inst|phase[2]          ; Deleted          ; Physical Synthesis ; Timing optimization ;           ;                ;                                                                 ;                  ;                       ;
+; wspr_xmit:xmit|cpl_cordic:cordic_inst|phase[2]_OTERM23  ; Retimed Register ; Physical Synthesis ; Timing optimization ;           ;                ;                                                                 ;                  ;                       ;
+; wspr_xmit:xmit|cpl_cordic:cordic_inst|phase[2]_OTERM51  ; Retimed Register ; Physical Synthesis ; Timing optimization ;           ;                ;                                                                 ;                  ;                       ;
+; wspr_xmit:xmit|cpl_cordic:cordic_inst|phase[3]          ; Deleted          ; Physical Synthesis ; Timing optimization ;           ;                ;                                                                 ;                  ;                       ;
+; wspr_xmit:xmit|cpl_cordic:cordic_inst|phase[3]_OTERM21  ; Retimed Register ; Physical Synthesis ; Timing optimization ;           ;                ;                                                                 ;                  ;                       ;
+; wspr_xmit:xmit|cpl_cordic:cordic_inst|phase[3]_OTERM49  ; Retimed Register ; Physical Synthesis ; Timing optimization ;           ;                ;                                                                 ;                  ;                       ;
+; wspr_xmit:xmit|cpl_cordic:cordic_inst|phase[4]          ; Deleted          ; Physical Synthesis ; Timing optimization ;           ;                ;                                                                 ;                  ;                       ;
+; wspr_xmit:xmit|cpl_cordic:cordic_inst|phase[4]_OTERM19  ; Retimed Register ; Physical Synthesis ; Timing optimization ;           ;                ;                                                                 ;                  ;                       ;
+; wspr_xmit:xmit|cpl_cordic:cordic_inst|phase[4]_OTERM47  ; Retimed Register ; Physical Synthesis ; Timing optimization ;           ;                ;                                                                 ;                  ;                       ;
+; wspr_xmit:xmit|cpl_cordic:cordic_inst|phase[5]          ; Deleted          ; Physical Synthesis ; Timing optimization ;           ;                ;                                                                 ;                  ;                       ;
+; wspr_xmit:xmit|cpl_cordic:cordic_inst|phase[5]_OTERM17  ; Retimed Register ; Physical Synthesis ; Timing optimization ;           ;                ;                                                                 ;                  ;                       ;
+; wspr_xmit:xmit|cpl_cordic:cordic_inst|phase[5]_OTERM45  ; Retimed Register ; Physical Synthesis ; Timing optimization ;           ;                ;                                                                 ;                  ;                       ;
+; wspr_xmit:xmit|cpl_cordic:cordic_inst|phase[6]          ; Deleted          ; Physical Synthesis ; Timing optimization ;           ;                ;                                                                 ;                  ;                       ;
+; wspr_xmit:xmit|cpl_cordic:cordic_inst|phase[6]_OTERM15  ; Retimed Register ; Physical Synthesis ; Timing optimization ;           ;                ;                                                                 ;                  ;                       ;
+; wspr_xmit:xmit|cpl_cordic:cordic_inst|phase[6]_OTERM43  ; Retimed Register ; Physical Synthesis ; Timing optimization ;           ;                ;                                                                 ;                  ;                       ;
+; wspr_xmit:xmit|cpl_cordic:cordic_inst|phase[7]          ; Deleted          ; Physical Synthesis ; Timing optimization ;           ;                ;                                                                 ;                  ;                       ;
+; wspr_xmit:xmit|cpl_cordic:cordic_inst|phase[7]_OTERM13  ; Retimed Register ; Physical Synthesis ; Timing optimization ;           ;                ;                                                                 ;                  ;                       ;
+; wspr_xmit:xmit|cpl_cordic:cordic_inst|phase[7]_OTERM41  ; Retimed Register ; Physical Synthesis ; Timing optimization ;           ;                ;                                                                 ;                  ;                       ;
+; wspr_xmit:xmit|cpl_cordic:cordic_inst|phase[8]          ; Deleted          ; Physical Synthesis ; Timing optimization ;           ;                ;                                                                 ;                  ;                       ;
+; wspr_xmit:xmit|cpl_cordic:cordic_inst|phase[8]_OTERM11  ; Retimed Register ; Physical Synthesis ; Timing optimization ;           ;                ;                                                                 ;                  ;                       ;
+; wspr_xmit:xmit|cpl_cordic:cordic_inst|phase[9]          ; Deleted          ; Physical Synthesis ; Timing optimization ;           ;                ;                                                                 ;                  ;                       ;
+; wspr_xmit:xmit|cpl_cordic:cordic_inst|phase[9]_OTERM9   ; Retimed Register ; Physical Synthesis ; Timing optimization ;           ;                ;                                                                 ;                  ;                       ;
+; wspr_xmit:xmit|cpl_cordic:cordic_inst|phase[9]_OTERM39  ; Retimed Register ; Physical Synthesis ; Timing optimization ;           ;                ;                                                                 ;                  ;                       ;
+; wspr_xmit:xmit|cpl_cordic:cordic_inst|phase[10]         ; Deleted          ; Physical Synthesis ; Timing optimization ;           ;                ;                                                                 ;                  ;                       ;
+; wspr_xmit:xmit|cpl_cordic:cordic_inst|phase[10]_OTERM7  ; Retimed Register ; Physical Synthesis ; Timing optimization ;           ;                ;                                                                 ;                  ;                       ;
+; wspr_xmit:xmit|cpl_cordic:cordic_inst|phase[11]         ; Deleted          ; Physical Synthesis ; Timing optimization ;           ;                ;                                                                 ;                  ;                       ;
+; wspr_xmit:xmit|cpl_cordic:cordic_inst|phase[12]         ; Deleted          ; Physical Synthesis ; Timing optimization ;           ;                ;                                                                 ;                  ;                       ;
+; wspr_xmit:xmit|cpl_cordic:cordic_inst|phase[13]         ; Deleted          ; Physical Synthesis ; Timing optimization ;           ;                ;                                                                 ;                  ;                       ;
+; wspr_xmit:xmit|cpl_cordic:cordic_inst|phase[14]         ; Deleted          ; Physical Synthesis ; Timing optimization ;           ;                ;                                                                 ;                  ;                       ;
+; wspr_xmit:xmit|cpl_cordic:cordic_inst|phase[15]         ; Deleted          ; Physical Synthesis ; Timing optimization ;           ;                ;                                                                 ;                  ;                       ;
+; wspr_xmit:xmit|cpl_cordic:cordic_inst|phase[16]         ; Deleted          ; Physical Synthesis ; Timing optimization ;           ;                ;                                                                 ;                  ;                       ;
+; wspr_xmit:xmit|cpl_cordic:cordic_inst|phase[17]         ; Deleted          ; Physical Synthesis ; Timing optimization ;           ;                ;                                                                 ;                  ;                       ;
+; wspr_xmit:xmit|cpl_cordic:cordic_inst|phase[18]         ; Deleted          ; Physical Synthesis ; Timing optimization ;           ;                ;                                                                 ;                  ;                       ;
+; wspr_xmit:xmit|cpl_cordic:cordic_inst|phase[19]         ; Deleted          ; Physical Synthesis ; Timing optimization ;           ;                ;                                                                 ;                  ;                       ;
+; wspr_xmit:xmit|cpl_cordic:cordic_inst|phase[20]         ; Deleted          ; Physical Synthesis ; Timing optimization ;           ;                ;                                                                 ;                  ;                       ;
+; wspr_xmit:xmit|cpl_cordic:cordic_inst|phase[21]         ; Deleted          ; Physical Synthesis ; Timing optimization ;           ;                ;                                                                 ;                  ;                       ;
+; wspr_xmit:xmit|cpl_cordic:cordic_inst|phase[21]_OTERM37 ; Retimed Register ; Physical Synthesis ; Timing optimization ;           ;                ;                                                                 ;                  ;                       ;
+; wspr_xmit:xmit|cpl_cordic:cordic_inst|phase[22]         ; Deleted          ; Physical Synthesis ; Timing optimization ;           ;                ;                                                                 ;                  ;                       ;
+; wspr_xmit:xmit|cpl_cordic:cordic_inst|phase[22]_OTERM35 ; Retimed Register ; Physical Synthesis ; Timing optimization ;           ;                ;                                                                 ;                  ;                       ;
+; wspr_xmit:xmit|cpl_cordic:cordic_inst|phase[23]         ; Deleted          ; Physical Synthesis ; Timing optimization ;           ;                ;                                                                 ;                  ;                       ;
+; wspr_xmit:xmit|cpl_cordic:cordic_inst|phase[24]         ; Deleted          ; Physical Synthesis ; Timing optimization ;           ;                ;                                                                 ;                  ;                       ;
+; wspr_xmit:xmit|cpl_cordic:cordic_inst|phase[25]         ; Deleted          ; Physical Synthesis ; Timing optimization ;           ;                ;                                                                 ;                  ;                       ;
+; wspr_xmit:xmit|cpl_cordic:cordic_inst|phase[25]_OTERM33 ; Retimed Register ; Physical Synthesis ; Timing optimization ;           ;                ;                                                                 ;                  ;                       ;
+; wspr_xmit:xmit|cpl_cordic:cordic_inst|phase[26]         ; Deleted          ; Physical Synthesis ; Timing optimization ;           ;                ;                                                                 ;                  ;                       ;
+; wspr_xmit:xmit|cpl_cordic:cordic_inst|phase[26]_OTERM5  ; Retimed Register ; Physical Synthesis ; Timing optimization ;           ;                ;                                                                 ;                  ;                       ;
+; wspr_xmit:xmit|cpl_cordic:cordic_inst|phase[27]         ; Deleted          ; Physical Synthesis ; Timing optimization ;           ;                ;                                                                 ;                  ;                       ;
+; wspr_xmit:xmit|cpl_cordic:cordic_inst|phase[27]_OTERM31 ; Retimed Register ; Physical Synthesis ; Timing optimization ;           ;                ;                                                                 ;                  ;                       ;
+; wspr_xmit:xmit|cpl_cordic:cordic_inst|phase[28]         ; Deleted          ; Physical Synthesis ; Timing optimization ;           ;                ;                                                                 ;                  ;                       ;
+; wspr_xmit:xmit|cpl_cordic:cordic_inst|phase[28]_OTERM29 ; Retimed Register ; Physical Synthesis ; Timing optimization ;           ;                ;                                                                 ;                  ;                       ;
+; wspr_xmit:xmit|cpl_cordic:cordic_inst|phase[29]         ; Deleted          ; Physical Synthesis ; Timing optimization ;           ;                ;                                                                 ;                  ;                       ;
+; wspr_xmit:xmit|cpl_cordic:cordic_inst|phase[29]_OTERM1  ; Retimed Register ; Physical Synthesis ; Timing optimization ;           ;                ;                                                                 ;                  ;                       ;
+; wspr_xmit:xmit|cpl_cordic:cordic_inst|phase[30]         ; Deleted          ; Physical Synthesis ; Timing optimization ;           ;                ;                                                                 ;                  ;                       ;
+; wspr_xmit:xmit|cpl_cordic:cordic_inst|phase[30]_OTERM3  ; Retimed Register ; Physical Synthesis ; Timing optimization ;           ;                ;                                                                 ;                  ;                       ;
+; wspr_xmit:xmit|cpl_cordic:cordic_inst|phase[31]         ; Deleted          ; Physical Synthesis ; Timing optimization ;           ;                ;                                                                 ;                  ;                       ;
+; C122_pps_count[16]                                      ; Duplicated       ; Physical Synthesis ; Timing optimization ; REGOUT    ;                ; C122_pps_count[16]~_Duplicate_79                                ; REGOUT           ;                       ;
+; Equal4~3                                                ; Duplicated       ; Physical Synthesis ; Timing optimization ; COMBOUT   ;                ; Equal4~3_Duplicate_9                                            ; COMBOUT          ;                       ;
+; Equal4~3                                                ; Deleted          ; Physical Synthesis ; Timing optimization ;           ;                ;                                                                 ;                  ;                       ;
+; c122_two_min_counter[13]                                ; Duplicated       ; Physical Synthesis ; Timing optimization ; REGOUT    ;                ; c122_two_min_counter[13]~_Duplicate_104                         ; REGOUT           ;                       ;
+; c122_two_min_counter[14]                                ; Duplicated       ; Physical Synthesis ; Timing optimization ; REGOUT    ;                ; c122_two_min_counter[14]~_Duplicate_105                         ; REGOUT           ;                       ;
+; c122_two_min_counter[24]                                ; Duplicated       ; Physical Synthesis ; Timing optimization ; REGOUT    ;                ; c122_two_min_counter[24]~_Duplicate_106                         ; REGOUT           ;                       ;
+; wspr_xmit:xmit|cpl_cordic:cordic_inst|Add51~17          ; Duplicated       ; Physical Synthesis ; Timing optimization ; COMBOUT   ;                ; wspr_xmit:xmit|cpl_cordic:cordic_inst|Add51~17_Duplicate_20     ; COMBOUT          ;                       ;
+; wspr_xmit:xmit|cpl_cordic:cordic_inst|Add51~17          ; Deleted          ; Physical Synthesis ; Timing optimization ;           ;                ;                                                                 ;                  ;                       ;
+; wspr_xmit:xmit|cpl_cordic:cordic_inst|Add167~7          ; Duplicated       ; Physical Synthesis ; Timing optimization ; COMBOUT   ;                ; wspr_xmit:xmit|cpl_cordic:cordic_inst|Add167~7_Duplicate_10     ; COMBOUT          ;                       ;
+; wspr_xmit:xmit|cpl_cordic:cordic_inst|Add167~7          ; Deleted          ; Physical Synthesis ; Timing optimization ;           ;                ;                                                                 ;                  ;                       ;
+; wspr_xmit:xmit|cpl_cordic:cordic_inst|Add172~7          ; Duplicated       ; Physical Synthesis ; Timing optimization ; COMBOUT   ;                ; wspr_xmit:xmit|cpl_cordic:cordic_inst|Add172~7_Duplicate_9      ; COMBOUT          ;                       ;
+; wspr_xmit:xmit|cpl_cordic:cordic_inst|Add172~7          ; Deleted          ; Physical Synthesis ; Timing optimization ;           ;                ;                                                                 ;                  ;                       ;
+; wspr_xmit:xmit|cpl_cordic:cordic_inst|Y[4][6]           ; Duplicated       ; Physical Synthesis ; Timing optimization ; REGOUT    ;                ; wspr_xmit:xmit|cpl_cordic:cordic_inst|Y[4][6]~_Duplicate_1136   ; REGOUT           ;                       ;
+; wspr_xmit:xmit|cpl_cordic:cordic_inst|Y[7][8]           ; Duplicated       ; Physical Synthesis ; Timing optimization ; REGOUT    ;                ; wspr_xmit:xmit|cpl_cordic:cordic_inst|Y[7][8]~_Duplicate_1133   ; REGOUT           ;                       ;
+; wspr_xmit:xmit|cpl_cordic:cordic_inst|Y[8][9]           ; Duplicated       ; Physical Synthesis ; Timing optimization ; REGOUT    ;                ; wspr_xmit:xmit|cpl_cordic:cordic_inst|Y[8][9]~_Duplicate_1135   ; REGOUT           ;                       ;
+; wspr_xmit:xmit|cpl_cordic:cordic_inst|Y[12][13]         ; Duplicated       ; Physical Synthesis ; Timing optimization ; REGOUT    ;                ; wspr_xmit:xmit|cpl_cordic:cordic_inst|Y[12][13]~_Duplicate_1134 ; REGOUT           ;                       ;
+; wspr_xmit:xmit|cpl_cordic:cordic_inst|Z[12][7]          ; Duplicated       ; Physical Synthesis ; Timing optimization ; REGOUT    ;                ; wspr_xmit:xmit|cpl_cordic:cordic_inst|Z[12][7]~_Duplicate_503   ; REGOUT           ;                       ;
+; wspr_xmit:xmit|cpl_cordic:cordic_inst|Z[13][6]          ; Duplicated       ; Physical Synthesis ; Timing optimization ; REGOUT    ;                ; wspr_xmit:xmit|cpl_cordic:cordic_inst|Z[13][6]~_Duplicate_504   ; REGOUT           ;                       ;
+; wspr_xmit:xmit|cpl_cordic:cordic_inst|Z[14][5]          ; Duplicated       ; Physical Synthesis ; Timing optimization ; REGOUT    ;                ; wspr_xmit:xmit|cpl_cordic:cordic_inst|Z[14][5]~_Duplicate_505   ; REGOUT           ;                       ;
+; wspr_xmit:xmit|cpl_cordic:cordic_inst|Z[14][5]          ; Duplicated       ; Physical Synthesis ; Timing optimization ; REGOUT    ;                ; wspr_xmit:xmit|cpl_cordic:cordic_inst|Z[14][5]~_Duplicate_507   ; REGOUT           ;                       ;
+; wspr_xmit:xmit|cpl_cordic:cordic_inst|Z[15][4]          ; Duplicated       ; Physical Synthesis ; Timing optimization ; REGOUT    ;                ; wspr_xmit:xmit|cpl_cordic:cordic_inst|Z[15][4]~_Duplicate_502   ; REGOUT           ;                       ;
++---------------------------------------------------------+------------------+--------------------+---------------------+-----------+----------------+-----------------------------------------------------------------+------------------+-----------------------+
+
+
++--------------------------------------------------------------------------------------------+
+; Ignored Assignments                                                                        ;
++----------+----------------+--------------+----------------+---------------+----------------+
+; Name     ; Ignored Entity ; Ignored From ; Ignored To     ; Ignored Value ; Ignored Source ;
++----------+----------------+--------------+----------------+---------------+----------------+
+; Location ;                ;              ; A11            ; PIN_97        ; QSF Assignment ;
+; Location ;                ;              ; C12            ; PIN_94        ; QSF Assignment ;
+; Location ;                ;              ; C19            ; PIN_74        ; QSF Assignment ;
+; Location ;                ;              ; C22            ; PIN_64        ; QSF Assignment ;
+; Location ;                ;              ; CC             ; PIN_70        ; QSF Assignment ;
+; Location ;                ;              ; PWM0           ; PIN_149       ; QSF Assignment ;
+; Location ;                ;              ; PWM1           ; PIN_150       ; QSF Assignment ;
+; Location ;                ;              ; PWM2           ; PIN_151       ; QSF Assignment ;
+; Location ;                ;              ; TLV320_CBCLK   ; PIN_163       ; QSF Assignment ;
+; Location ;                ;              ; TLV320_CDIN    ; PIN_162       ; QSF Assignment ;
+; Location ;                ;              ; TLV320_CDOUT   ; PIN_160       ; QSF Assignment ;
+; Location ;                ;              ; TLV320_CLRCIN  ; PIN_161       ; QSF Assignment ;
+; Location ;                ;              ; TLV320_CLRCOUT ; PIN_152       ; QSF Assignment ;
+; Location ;                ;              ; TLV320_CMCLK   ; PIN_164       ; QSF Assignment ;
++----------+----------------+--------------+----------------+---------------+----------------+
+
+
++-----------------------------------------------+
+; Incremental Compilation Preservation Summary  ;
++-------------------------+---------------------+
+; Type                    ; Value               ;
++-------------------------+---------------------+
+; Placement               ;                     ;
+;     -- Requested        ; 0 / 3062 ( 0.00 % ) ;
+;     -- Achieved         ; 0 / 3062 ( 0.00 % ) ;
+;                         ;                     ;
+; Routing (by Connection) ;                     ;
+;     -- Requested        ; 0 / 0 ( 0.00 % )    ;
+;     -- Achieved         ; 0 / 0 ( 0.00 % )    ;
++-------------------------+---------------------+
+
+
++--------------------------------------------------------------------------------------------------------------------------------------------------+
+; Incremental Compilation Partition Settings                                                                                                       ;
++----------------+----------------+-------------------+-------------------------+------------------------+------------------------------+----------+
+; Partition Name ; Partition Type ; Netlist Type Used ; Preservation Level Used ; Netlist Type Requested ; Preservation Level Requested ; Contents ;
++----------------+----------------+-------------------+-------------------------+------------------------+------------------------------+----------+
+; Top            ; User-created   ; Source File       ; N/A                     ; Source File            ; N/A                          ;          ;
++----------------+----------------+-------------------+-------------------------+------------------------+------------------------------+----------+
+
+
++--------------------------------------------------------------------------------------------+
+; Incremental Compilation Placement Preservation                                             ;
++----------------+---------+-------------------+-------------------------+-------------------+
+; Partition Name ; # Nodes ; # Preserved Nodes ; Preservation Level Used ; Netlist Type Used ;
++----------------+---------+-------------------+-------------------------+-------------------+
+; Top            ; 3062    ; 0                 ; N/A                     ; Source File       ;
++----------------+---------+-------------------+-------------------------+-------------------+
+
+
++--------------+
+; Pin-Out File ;
++--------------+
+The pin-out file can be found in E:/wjtsrc/hpsdr-repos-eclispe341/PennyWSPR/PennyWSPR.pin.
+
+
++----------------------------------------------------------------------------------------------+
+; Fitter Resource Usage Summary                                                                ;
++---------------------------------------------+------------------------------------------------+
+; Resource                                    ; Usage                                          ;
++---------------------------------------------+------------------------------------------------+
+; Total logic elements                        ; 1,869 / 8,256 ( 23 % )                         ;
+;     -- Combinational with no register       ; 674                                            ;
+;     -- Register only                        ; 38                                             ;
+;     -- Combinational with a register        ; 1157                                           ;
+;                                             ;                                                ;
+; Logic element usage by number of LUT inputs ;                                                ;
+;     -- 4 input functions                    ; 103                                            ;
+;     -- 3 input functions                    ; 963                                            ;
+;     -- <=2 input functions                  ; 765                                            ;
+;     -- Register only                        ; 38                                             ;
+;                                             ;                                                ;
+; Logic elements by mode                      ;                                                ;
+;     -- normal mode                          ; 622                                            ;
+;     -- arithmetic mode                      ; 1209                                           ;
+;                                             ;                                                ;
+; Total registers*                            ; 1,195 / 8,646 ( 14 % )                         ;
+;     -- Dedicated logic registers            ; 1,195 / 8,256 ( 14 % )                         ;
+;     -- I/O registers                        ; 0 / 390 ( 0 % )                                ;
+;                                             ;                                                ;
+; Total LABs:  partially or completely used   ; 145 / 516 ( 28 % )                             ;
+; User inserted logic elements                ; 0                                              ;
+; Virtual pins                                ; 0                                              ;
+; I/O pins                                    ; 43 / 138 ( 31 % )                              ;
+;     -- Clock pins                           ; 1 / 4 ( 25 % )                                 ;
+; Global signals                              ; 2                                              ;
+; M4Ks                                        ; 1 / 36 ( 3 % )                                 ;
+; Total block memory bits                     ; 324 / 165,888 ( < 1 % )                        ;
+; Total block memory implementation bits      ; 4,608 / 165,888 ( 3 % )                        ;
+; Embedded Multiplier 9-bit elements          ; 0 / 36 ( 0 % )                                 ;
+; PLLs                                        ; 0 / 2 ( 0 % )                                  ;
+; Global clocks                               ; 2 / 8 ( 25 % )                                 ;
+; JTAGs                                       ; 0 / 1 ( 0 % )                                  ;
+; ASMI blocks                                 ; 0 / 1 ( 0 % )                                  ;
+; CRC blocks                                  ; 0 / 1 ( 0 % )                                  ;
+; Average interconnect usage (total/H/V)      ; 5% / 5% / 5%                                   ;
+; Peak interconnect usage (total/H/V)         ; 12% / 12% / 13%                                ;
+; Maximum fan-out node                        ; C122_clk~clkctrl                               ;
+; Maximum fan-out                             ; 1178                                           ;
+; Highest non-global fan-out signal           ; wspr_xmit:xmit|cpl_cordic:cordic_inst|Z[2][17] ;
+; Highest non-global fan-out                  ; 56                                             ;
+; Total fan-out                               ; 7684                                           ;
+; Average fan-out                             ; 2.48                                           ;
++---------------------------------------------+------------------------------------------------+
+*  Register count does not include registers inside RAM blocks or DSP blocks.
+
+
+
++----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Input Pins                                                                                                                                                                                                                                                     ;
++----------+-------+----------+--------------+--------------+-------------+-----------------------+--------------------+--------+----------------+---------------+-----------------+----------+--------------+--------------+-------------+----------------------+
+; Name     ; Pin # ; I/O Bank ; X coordinate ; Y coordinate ; Cell number ; Combinational Fan-Out ; Registered Fan-Out ; Global ; Input Register ; Power Up High ; PCI I/O Enabled ; Bus Hold ; Weak Pull Up ; I/O Standard ; Termination ; Location assigned by ;
++----------+-------+----------+--------------+--------------+-------------+-----------------------+--------------------+--------+----------------+---------------+-----------------+----------+--------------+--------------+-------------+----------------------+
+; ADCMISO  ; 146   ; 3        ; 34           ; 15           ; 1           ; 0                     ; 0                  ; no     ; no             ; no            ; no              ; no       ; Off          ; 3.3-V LVTTL  ; Off         ; User                 ;
+; C122_clk ; 132   ; 3        ; 34           ; 10           ; 0           ; 1                     ; 0                  ; yes    ; no             ; no            ; no              ; no       ; Off          ; 3.3-V LVTTL  ; Off         ; User                 ;
+; PTT      ; 171   ; 2        ; 28           ; 19           ; 3           ; 1                     ; 0                  ; no     ; no             ; no            ; no              ; no       ; Off          ; 3.3-V LVTTL  ; Off         ; User                 ;
+; _10MHZ   ; 131   ; 3        ; 34           ; 10           ; 1           ; 1                     ; 0                  ; no     ; no             ; no            ; no              ; no       ; Off          ; 3.3-V LVTTL  ; Off         ; User                 ;
++----------+-------+----------+--------------+--------------+-------------+-----------------------+--------------------+--------+----------------+---------------+-----------------+----------+--------------+--------------+-------------+----------------------+
+
+
++----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Output Pins                                                                                                                                                                                                                                                                                                                            ;
++----------+-------+----------+--------------+--------------+-------------+-----------------+------------------------+---------------+-----------------+------------+---------------+----------+--------------+--------------+------------------+-------------+----------------------+------+----------------------+---------------------+
+; Name     ; Pin # ; I/O Bank ; X coordinate ; Y coordinate ; Cell number ; Output Register ; Output Enable Register ; Power Up High ; PCI I/O Enabled ; Open Drain ; TRI Primitive ; Bus Hold ; Weak Pull Up ; I/O Standard ; Current Strength ; Termination ; Location assigned by ; Load ; Output Enable Source ; Output Enable Group ;
++----------+-------+----------+--------------+--------------+-------------+-----------------+------------------------+---------------+-----------------+------------+---------------+----------+--------------+--------------+------------------+-------------+----------------------+------+----------------------+---------------------+
+; A5       ; 115   ; 3        ; 34           ; 4            ; 0           ; no              ; no                     ; no            ; no              ; no         ; no            ; no       ; Off          ; 3.3-V LVTTL  ; 24mA             ; Off         ; User                 ; 0 pF ; -                    ; -                   ;
+; ADCCLK   ; 145   ; 3        ; 34           ; 14           ; 4           ; no              ; no                     ; no            ; no              ; no         ; no            ; no       ; Off          ; 3.3-V LVTTL  ; 24mA             ; Off         ; User                 ; 0 pF ; -                    ; -                   ;
+; ADCMOSI  ; 147   ; 3        ; 34           ; 15           ; 0           ; no              ; no                     ; no            ; no              ; no         ; no            ; no       ; Off          ; 3.3-V LVTTL  ; 24mA             ; Off         ; User                 ; 0 pF ; -                    ; -                   ;
+; CMODE    ; 169   ; 2        ; 28           ; 19           ; 1           ; no              ; no                     ; no            ; no              ; no         ; no            ; no       ; Off          ; 3.3-V LVTTL  ; 24mA             ; Off         ; User                 ; 0 pF ; -                    ; -                   ;
+; DAC[0]   ; 173   ; 2        ; 25           ; 19           ; 0           ; no              ; no                     ; no            ; no              ; no         ; no            ; no       ; Off          ; 3.3-V LVTTL  ; 24mA             ; Off         ; User                 ; 0 pF ; -                    ; -                   ;
+; DAC[10]  ; 189   ; 2        ; 12           ; 19           ; 1           ; no              ; no                     ; no            ; no              ; no         ; no            ; no       ; Off          ; 3.3-V LVTTL  ; 24mA             ; Off         ; User                 ; 0 pF ; -                    ; -                   ;
+; DAC[11]  ; 191   ; 2        ; 12           ; 19           ; 2           ; no              ; no                     ; no            ; no              ; no         ; no            ; no       ; Off          ; 3.3-V LVTTL  ; 24mA             ; Off         ; User                 ; 0 pF ; -                    ; -                   ;
+; DAC[12]  ; 192   ; 2        ; 9            ; 19           ; 0           ; no              ; no                     ; no            ; no              ; no         ; no            ; no       ; Off          ; 3.3-V LVTTL  ; 24mA             ; Off         ; User                 ; 0 pF ; -                    ; -                   ;
+; DAC[13]  ; 193   ; 2        ; 9            ; 19           ; 1           ; no              ; no                     ; no            ; no              ; no         ; no            ; no       ; Off          ; 3.3-V LVTTL  ; 24mA             ; Off         ; User                 ; 0 pF ; -                    ; -                   ;
+; DAC[1]   ; 175   ; 2        ; 23           ; 19           ; 0           ; no              ; no                     ; no            ; no              ; no         ; no            ; no       ; Off          ; 3.3-V LVTTL  ; 24mA             ; Off         ; User                 ; 0 pF ; -                    ; -                   ;
+; DAC[2]   ; 176   ; 2        ; 23           ; 19           ; 1           ; no              ; no                     ; no            ; no              ; no         ; no            ; no       ; Off          ; 3.3-V LVTTL  ; 24mA             ; Off         ; User                 ; 0 pF ; -                    ; -                   ;
+; DAC[3]   ; 179   ; 2        ; 18           ; 19           ; 0           ; no              ; no                     ; no            ; no              ; no         ; no            ; no       ; Off          ; 3.3-V LVTTL  ; 24mA             ; Off         ; User                 ; 0 pF ; -                    ; -                   ;
+; DAC[4]   ; 180   ; 2        ; 18           ; 19           ; 1           ; no              ; no                     ; no            ; no              ; no         ; no            ; no       ; Off          ; 3.3-V LVTTL  ; 24mA             ; Off         ; User                 ; 0 pF ; -                    ; -                   ;
+; DAC[5]   ; 181   ; 2        ; 18           ; 19           ; 2           ; no              ; no                     ; no            ; no              ; no         ; no            ; no       ; Off          ; 3.3-V LVTTL  ; 24mA             ; Off         ; User                 ; 0 pF ; -                    ; -                   ;
+; DAC[6]   ; 182   ; 2        ; 18           ; 19           ; 3           ; no              ; no                     ; no            ; no              ; no         ; no            ; no       ; Off          ; 3.3-V LVTTL  ; 24mA             ; Off         ; User                 ; 0 pF ; -                    ; -                   ;
+; DAC[7]   ; 185   ; 2        ; 14           ; 19           ; 1           ; no              ; no                     ; no            ; no              ; no         ; no            ; no       ; Off          ; 3.3-V LVTTL  ; 24mA             ; Off         ; User                 ; 0 pF ; -                    ; -                   ;
+; DAC[8]   ; 187   ; 2        ; 14           ; 19           ; 2           ; no              ; no                     ; no            ; no              ; no         ; no            ; no       ; Off          ; 3.3-V LVTTL  ; 24mA             ; Off         ; User                 ; 0 pF ; -                    ; -                   ;
+; DAC[9]   ; 188   ; 2        ; 12           ; 19           ; 0           ; no              ; no                     ; no            ; no              ; no         ; no            ; no       ; Off          ; 3.3-V LVTTL  ; 24mA             ; Off         ; User                 ; 0 pF ; -                    ; -                   ;
+; FPGA_PLL ; 197   ; 2        ; 5            ; 19           ; 0           ; no              ; no                     ; no            ; no              ; no         ; no            ; no       ; Off          ; 3.3-V LVTTL  ; 24mA             ; Off         ; User                 ; 0 pF ; -                    ; -                   ;
+; FPGA_PTT ; 134   ; 3        ; 34           ; 11           ; 2           ; no              ; no                     ; no            ; no              ; no         ; no            ; no       ; Off          ; 3.3-V LVTTL  ; 24mA             ; Off         ; User                 ; 0 pF ; -                    ; -                   ;
+; LED2     ; 208   ; 2        ; 1            ; 19           ; 3           ; no              ; no                     ; no            ; no              ; no         ; no            ; no       ; Off          ; 3.3-V LVTTL  ; 24mA             ; Off         ; User                 ; 0 pF ; -                    ; -                   ;
+; LED3     ; 206   ; 2        ; 1            ; 19           ; 1           ; no              ; no                     ; no            ; no              ; no         ; no            ; no       ; Off          ; 3.3-V LVTTL  ; 24mA             ; Off         ; User                 ; 0 pF ; -                    ; -                   ;
+; LED4     ; 205   ; 2        ; 1            ; 19           ; 0           ; no              ; no                     ; no            ; no              ; no         ; no            ; no       ; Off          ; 3.3-V LVTTL  ; 24mA             ; Off         ; User                 ; 0 pF ; -                    ; -                   ;
+; LED5     ; 203   ; 2        ; 3            ; 19           ; 3           ; no              ; no                     ; no            ; no              ; no         ; no            ; no       ; Off          ; 3.3-V LVTTL  ; 24mA             ; Off         ; User                 ; 0 pF ; -                    ; -                   ;
+; LED6     ; 107   ; 3        ; 34           ; 2            ; 1           ; no              ; no                     ; no            ; no              ; no         ; no            ; no       ; Off          ; 3.3-V LVTTL  ; 24mA             ; Off         ; User                 ; 0 pF ; -                    ; -                   ;
+; LED7     ; 108   ; 3        ; 34           ; 2            ; 0           ; no              ; no                     ; no            ; no              ; no         ; no            ; no       ; Off          ; 3.3-V LVTTL  ; 24mA             ; Off         ; User                 ; 0 pF ; -                    ; -                   ;
+; LVDSTXE  ; 199   ; 2        ; 3            ; 19           ; 0           ; no              ; no                     ; no            ; no              ; no         ; no            ; no       ; Off          ; 3.3-V LVTTL  ; 24mA             ; Off         ; User                 ; 0 pF ; -                    ; -                   ;
+; PTT_in   ; 86    ; 4        ; 25           ; 0            ; 2           ; no              ; no                     ; no            ; no              ; no         ; yes           ; no       ; Off          ; 3.3-V LVTTL  ; 24mA             ; Off         ; User                 ; 0 pF ; -                    ; -                   ;
+; USEROUT0 ; 143   ; 3        ; 34           ; 13           ; 1           ; no              ; no                     ; no            ; no              ; no         ; no            ; no       ; Off          ; 3.3-V LVTTL  ; 24mA             ; Off         ; User                 ; 0 pF ; -                    ; -                   ;
+; USEROUT1 ; 142   ; 3        ; 34           ; 12           ; 0           ; no              ; no                     ; no            ; no              ; no         ; no            ; no       ; Off          ; 3.3-V LVTTL  ; 24mA             ; Off         ; User                 ; 0 pF ; -                    ; -                   ;
+; USEROUT2 ; 141   ; 3        ; 34           ; 12           ; 1           ; no              ; no                     ; no            ; no              ; no         ; no            ; no       ; Off          ; 3.3-V LVTTL  ; 24mA             ; Off         ; User                 ; 0 pF ; -                    ; -                   ;
+; USEROUT3 ; 139   ; 3        ; 34           ; 12           ; 2           ; no              ; no                     ; no            ; no              ; no         ; no            ; no       ; Off          ; 3.3-V LVTTL  ; 24mA             ; Off         ; User                 ; 0 pF ; -                    ; -                   ;
+; USEROUT4 ; 138   ; 3        ; 34           ; 12           ; 3           ; no              ; no                     ; no            ; no              ; no         ; no            ; no       ; Off          ; 3.3-V LVTTL  ; 24mA             ; Off         ; User                 ; 0 pF ; -                    ; -                   ;
+; USEROUT5 ; 137   ; 3        ; 34           ; 11           ; 0           ; no              ; no                     ; no            ; no              ; no         ; no            ; no       ; Off          ; 3.3-V LVTTL  ; 24mA             ; Off         ; User                 ; 0 pF ; -                    ; -                   ;
+; USEROUT6 ; 135   ; 3        ; 34           ; 11           ; 1           ; no              ; no                     ; no            ; no              ; no         ; no            ; no       ; Off          ; 3.3-V LVTTL  ; 24mA             ; Off         ; User                 ; 0 pF ; -                    ; -                   ;
+; nADCCS   ; 144   ; 3        ; 34           ; 13           ; 0           ; no              ; no                     ; no            ; no              ; no         ; no            ; no       ; Off          ; 3.3-V LVTTL  ; 24mA             ; Off         ; User                 ; 0 pF ; -                    ; -                   ;
+; nCS      ; 170   ; 2        ; 28           ; 19           ; 2           ; no              ; no                     ; no            ; no              ; no         ; no            ; no       ; Off          ; 3.3-V LVTTL  ; 24mA             ; Off         ; User                 ; 0 pF ; -                    ; -                   ;
+; nLVDSRXE ; 200   ; 2        ; 3            ; 19           ; 1           ; no              ; no                     ; no            ; no              ; no         ; no            ; no       ; Off          ; 3.3-V LVTTL  ; 24mA             ; Off         ; User                 ; 0 pF ; -                    ; -                   ;
++----------+-------+----------+--------------+--------------+-------------+-----------------+------------------------+---------------+-----------------+------------+---------------+----------+--------------+--------------+------------------+-------------+----------------------+------+----------------------+---------------------+
+
+
++------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Bidir Pins                                                                                                                                                                                                                                                                                                                                                                                     ;
++-----------+-------+----------+--------------+--------------+-------------+-----------------------+--------------------+--------+----------------+-----------------+------------------------+---------------+-----------------+------------+----------+--------------+--------------+------------------+-------------+----------------------+------+----------------------+---------------------+
+; Name      ; Pin # ; I/O Bank ; X coordinate ; Y coordinate ; Cell number ; Combinational Fan-Out ; Registered Fan-Out ; Global ; Input Register ; Output Register ; Output Enable Register ; Power Up High ; PCI I/O Enabled ; Open Drain ; Bus Hold ; Weak Pull Up ; I/O Standard ; Current Strength ; Termination ; Location assigned by ; Load ; Output Enable Source ; Output Enable Group ;
++-----------+-------+----------+--------------+--------------+-------------+-----------------------+--------------------+--------+----------------+-----------------+------------------------+---------------+-----------------+------------+----------+--------------+--------------+------------------+-------------+----------------------+------+----------------------+---------------------+
+; ext_10MHZ ; 82    ; 4        ; 23           ; 0            ; 0           ; 8                     ; 0                  ; no     ; no             ; no              ; no                     ; no            ; no              ; no         ; no       ; Off          ; 3.3-V LVTTL  ; 24mA             ; Off         ; User                 ; 0 pF ; -                    ; -                   ;
++-----------+-------+----------+--------------+--------------+-------------+-----------------------+--------------------+--------+----------------+-----------------+------------------------+---------------+-----------------+------------+----------+--------------+--------------+------------------+-------------+----------------------+------+----------------------+---------------------+
+
+
++------------------------------------------------------------+
+; I/O Bank Usage                                             ;
++----------+------------------+---------------+--------------+
+; I/O Bank ; Usage            ; VCCIO Voltage ; VREF Voltage ;
++----------+------------------+---------------+--------------+
+; 1        ; 2 / 32 ( 6 % )   ; 3.3V          ; --           ;
+; 2        ; 24 / 35 ( 69 % ) ; 3.3V          ; --           ;
+; 3        ; 17 / 35 ( 49 % ) ; 3.3V          ; --           ;
+; 4        ; 2 / 36 ( 6 % )   ; 3.3V          ; --           ;
++----------+------------------+---------------+--------------+
+
+
++------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; All Package Pins                                                                                                                                                       ;
++----------+------------+----------+------------------------------------------+--------+--------------+---------+------------+-----------------+----------+--------------+
+; Location ; Pad Number ; I/O Bank ; Pin Name/Usage                           ; Dir.   ; I/O Standard ; Voltage ; I/O Type   ; User Assignment ; Bus Hold ; Weak Pull Up ;
++----------+------------+----------+------------------------------------------+--------+--------------+---------+------------+-----------------+----------+--------------+
+; 1        ; 0          ; 1        ; ~ASDO~ / RESERVED_INPUT_WITH_WEAK_PULLUP ; input  ; 3.3-V LVTTL  ;         ; Row I/O    ; N               ; no       ; On           ;
+; 2        ; 1          ; 1        ; ~nCSO~ / RESERVED_INPUT_WITH_WEAK_PULLUP ; input  ; 3.3-V LVTTL  ;         ; Row I/O    ; N               ; no       ; On           ;
+; 3        ; 2          ; 1        ; RESERVED_INPUT                           ;        ;              ;         ; Row I/O    ;                 ; no       ; Off          ;
+; 4        ; 3          ; 1        ; RESERVED_INPUT                           ;        ;              ;         ; Row I/O    ;                 ; no       ; Off          ;
+; 5        ; 4          ; 1        ; RESERVED_INPUT                           ;        ;              ;         ; Row I/O    ;                 ; no       ; Off          ;
+; 6        ; 5          ; 1        ; RESERVED_INPUT                           ;        ;              ;         ; Row I/O    ;                 ; no       ; Off          ;
+; 7        ;            ; 1        ; VCCIO1                                   ; power  ;              ; 3.3V    ; --         ;                 ; --       ; --           ;
+; 8        ; 6          ; 1        ; RESERVED_INPUT                           ;        ;              ;         ; Row I/O    ;                 ; no       ; Off          ;
+; 9        ;            ;          ; GND                                      ; gnd    ;              ;         ; --         ;                 ; --       ; --           ;
+; 10       ; 7          ; 1        ; RESERVED_INPUT                           ;        ;              ;         ; Row I/O    ;                 ; no       ; Off          ;
+; 11       ; 8          ; 1        ; RESERVED_INPUT                           ;        ;              ;         ; Row I/O    ;                 ; no       ; Off          ;
+; 12       ; 9          ; 1        ; RESERVED_INPUT                           ;        ;              ;         ; Row I/O    ;                 ; no       ; Off          ;
+; 13       ; 10         ; 1        ; RESERVED_INPUT                           ;        ;              ;         ; Row I/O    ;                 ; no       ; Off          ;
+; 14       ; 18         ; 1        ; RESERVED_INPUT                           ;        ;              ;         ; Row I/O    ;                 ; no       ; Off          ;
+; 15       ; 19         ; 1        ; RESERVED_INPUT                           ;        ;              ;         ; Row I/O    ;                 ; no       ; Off          ;
+; 16       ; 20         ; 1        ; #TDO                                     ; output ;              ;         ; --         ;                 ; --       ; --           ;
+; 17       ; 21         ; 1        ; #TMS                                     ; input  ;              ;         ; --         ;                 ; --       ; --           ;
+; 18       ; 22         ; 1        ; #TCK                                     ; input  ;              ;         ; --         ;                 ; --       ; --           ;
+; 19       ; 23         ; 1        ; #TDI                                     ; input  ;              ;         ; --         ;                 ; --       ; --           ;
+; 20       ; 24         ; 1        ; ^DATA0                                   ; input  ;              ;         ; --         ;                 ; --       ; --           ;
+; 21       ; 25         ; 1        ; ^DCLK                                    ;        ;              ;         ; --         ;                 ; --       ; --           ;
+; 22       ; 26         ; 1        ; ^nCE                                     ;        ;              ;         ; --         ;                 ; --       ; --           ;
+; 23       ; 27         ; 1        ; GND+                                     ;        ;              ;         ; Row I/O    ;                 ; --       ; --           ;
+; 24       ; 28         ; 1        ; GND+                                     ;        ;              ;         ; Row I/O    ;                 ; --       ; --           ;
+; 25       ;            ;          ; GND                                      ; gnd    ;              ;         ; --         ;                 ; --       ; --           ;
+; 26       ; 29         ; 1        ; ^nCONFIG                                 ;        ;              ;         ; --         ;                 ; --       ; --           ;
+; 27       ; 30         ; 1        ; GND+                                     ;        ;              ;         ; Row I/O    ;                 ; --       ; --           ;
+; 28       ; 31         ; 1        ; GND+                                     ;        ;              ;         ; Row I/O    ;                 ; --       ; --           ;
+; 29       ;            ; 1        ; VCCIO1                                   ; power  ;              ; 3.3V    ; --         ;                 ; --       ; --           ;
+; 30       ; 32         ; 1        ; RESERVED_INPUT                           ;        ;              ;         ; Row I/O    ;                 ; no       ; Off          ;
+; 31       ; 33         ; 1        ; RESERVED_INPUT                           ;        ;              ;         ; Row I/O    ;                 ; no       ; Off          ;
+; 32       ;            ;          ; VCCINT                                   ; power  ;              ; 1.2V    ; --         ;                 ; --       ; --           ;
+; 33       ; 35         ; 1        ; RESERVED_INPUT                           ;        ;              ;         ; Row I/O    ;                 ; no       ; Off          ;
+; 34       ; 36         ; 1        ; RESERVED_INPUT                           ;        ;              ;         ; Row I/O    ;                 ; no       ; Off          ;
+; 35       ; 37         ; 1        ; RESERVED_INPUT                           ;        ;              ;         ; Row I/O    ;                 ; no       ; Off          ;
+; 36       ;            ;          ; GND                                      ; gnd    ;              ;         ; --         ;                 ; --       ; --           ;
+; 37       ; 39         ; 1        ; RESERVED_INPUT                           ;        ;              ;         ; Row I/O    ;                 ; no       ; Off          ;
+; 38       ;            ;          ; GND                                      ; gnd    ;              ;         ; --         ;                 ; --       ; --           ;
+; 39       ; 43         ; 1        ; RESERVED_INPUT                           ;        ;              ;         ; Row I/O    ;                 ; no       ; Off          ;
+; 40       ; 44         ; 1        ; RESERVED_INPUT                           ;        ;              ;         ; Row I/O    ;                 ; no       ; Off          ;
+; 41       ; 45         ; 1        ; RESERVED_INPUT                           ;        ;              ;         ; Row I/O    ;                 ; no       ; Off          ;
+; 42       ;            ; 1        ; VCCIO1                                   ; power  ;              ; 3.3V    ; --         ;                 ; --       ; --           ;
+; 43       ; 48         ; 1        ; RESERVED_INPUT                           ;        ;              ;         ; Row I/O    ;                 ; no       ; Off          ;
+; 44       ; 49         ; 1        ; RESERVED_INPUT                           ;        ;              ;         ; Row I/O    ;                 ; no       ; Off          ;
+; 45       ; 50         ; 1        ; RESERVED_INPUT                           ;        ;              ;         ; Row I/O    ;                 ; no       ; Off          ;
+; 46       ; 51         ; 1        ; RESERVED_INPUT                           ;        ;              ;         ; Row I/O    ;                 ; no       ; Off          ;
+; 47       ; 52         ; 1        ; RESERVED_INPUT                           ;        ;              ;         ; Row I/O    ;                 ; no       ; Off          ;
+; 48       ; 53         ; 1        ; RESERVED_INPUT                           ;        ;              ;         ; Row I/O    ;                 ; no       ; Off          ;
+; 49       ;            ;          ; GND                                      ; gnd    ;              ;         ; --         ;                 ; --       ; --           ;
+; 50       ;            ;          ; GND_PLL1                                 ; gnd    ;              ;         ; --         ;                 ; --       ; --           ;
+; 51       ;            ;          ; VCCD_PLL1                                ; power  ;              ; 1.2V    ; --         ;                 ; --       ; --           ;
+; 52       ;            ;          ; GND_PLL1                                 ; gnd    ;              ;         ; --         ;                 ; --       ; --           ;
+; 53       ;            ;          ; VCCA_PLL1                                ; power  ;              ; 1.2V    ; --         ;                 ; --       ; --           ;
+; 54       ;            ;          ; GNDA_PLL1                                ; gnd    ;              ;         ; --         ;                 ; --       ; --           ;
+; 55       ;            ;          ; GND                                      ; gnd    ;              ;         ; --         ;                 ; --       ; --           ;
+; 56       ; 54         ; 4        ; RESERVED_INPUT                           ;        ;              ;         ; Column I/O ;                 ; no       ; Off          ;
+; 57       ; 55         ; 4        ; RESERVED_INPUT                           ;        ;              ;         ; Column I/O ;                 ; no       ; Off          ;
+; 58       ; 56         ; 4        ; RESERVED_INPUT                           ;        ;              ;         ; Column I/O ;                 ; no       ; Off          ;
+; 59       ; 57         ; 4        ; RESERVED_INPUT                           ;        ;              ;         ; Column I/O ;                 ; no       ; Off          ;
+; 60       ; 58         ; 4        ; RESERVED_INPUT                           ;        ;              ;         ; Column I/O ;                 ; no       ; Off          ;
+; 61       ; 59         ; 4        ; RESERVED_INPUT                           ;        ;              ;         ; Column I/O ;                 ; no       ; Off          ;
+; 62       ;            ; 4        ; VCCIO4                                   ; power  ;              ; 3.3V    ; --         ;                 ; --       ; --           ;
+; 63       ; 60         ; 4        ; RESERVED_INPUT                           ;        ;              ;         ; Column I/O ;                 ; no       ; Off          ;
+; 64       ; 61         ; 4        ; RESERVED_INPUT                           ;        ;              ;         ; Column I/O ;                 ; no       ; Off          ;
+; 65       ;            ;          ; GND                                      ; gnd    ;              ;         ; --         ;                 ; --       ; --           ;
+; 66       ;            ;          ; VCCINT                                   ; power  ;              ; 1.2V    ; --         ;                 ; --       ; --           ;
+; 67       ; 69         ; 4        ; RESERVED_INPUT                           ;        ;              ;         ; Column I/O ;                 ; no       ; Off          ;
+; 68       ; 70         ; 4        ; RESERVED_INPUT                           ;        ;              ;         ; Column I/O ;                 ; no       ; Off          ;
+; 69       ; 71         ; 4        ; RESERVED_INPUT                           ;        ;              ;         ; Column I/O ;                 ; no       ; Off          ;
+; 70       ; 74         ; 4        ; RESERVED_INPUT                           ;        ;              ;         ; Column I/O ;                 ; no       ; Off          ;
+; 71       ;            ; 4        ; VCCIO4                                   ; power  ;              ; 3.3V    ; --         ;                 ; --       ; --           ;
+; 72       ; 75         ; 4        ; RESERVED_INPUT                           ;        ;              ;         ; Column I/O ;                 ; no       ; Off          ;
+; 73       ;            ;          ; GND                                      ; gnd    ;              ;         ; --         ;                 ; --       ; --           ;
+; 74       ; 76         ; 4        ; RESERVED_INPUT                           ;        ;              ;         ; Column I/O ;                 ; no       ; Off          ;
+; 75       ; 77         ; 4        ; RESERVED_INPUT                           ;        ;              ;         ; Column I/O ;                 ; no       ; Off          ;
+; 76       ; 78         ; 4        ; RESERVED_INPUT                           ;        ;              ;         ; Column I/O ;                 ; no       ; Off          ;
+; 77       ; 79         ; 4        ; RESERVED_INPUT                           ;        ;              ;         ; Column I/O ;                 ; no       ; Off          ;
+; 78       ;            ;          ; GND                                      ; gnd    ;              ;         ; --         ;                 ; --       ; --           ;
+; 79       ;            ;          ; VCCINT                                   ; power  ;              ; 1.2V    ; --         ;                 ; --       ; --           ;
+; 80       ; 82         ; 4        ; RESERVED_INPUT                           ;        ;              ;         ; Column I/O ;                 ; no       ; Off          ;
+; 81       ; 83         ; 4        ; RESERVED_INPUT                           ;        ;              ;         ; Column I/O ;                 ; no       ; Off          ;
+; 82       ; 84         ; 4        ; ext_10MHZ                                ; bidir  ; 3.3-V LVTTL  ;         ; Column I/O ; Y               ; no       ; Off          ;
+; 83       ;            ; 4        ; VCCIO4                                   ; power  ;              ; 3.3V    ; --         ;                 ; --       ; --           ;
+; 84       ; 85         ; 4        ; RESERVED_INPUT                           ;        ;              ;         ; Column I/O ;                 ; no       ; Off          ;
+; 85       ;            ;          ; GND                                      ; gnd    ;              ;         ; --         ;                 ; --       ; --           ;
+; 86       ; 86         ; 4        ; PTT_in                                   ; output ; 3.3-V LVTTL  ;         ; Column I/O ; Y               ; no       ; Off          ;
+; 87       ; 87         ; 4        ; RESERVED_INPUT                           ;        ;              ;         ; Column I/O ;                 ; no       ; Off          ;
+; 88       ; 88         ; 4        ; RESERVED_INPUT                           ;        ;              ;         ; Column I/O ;                 ; no       ; Off          ;
+; 89       ; 89         ; 4        ; RESERVED_INPUT                           ;        ;              ;         ; Column I/O ;                 ; no       ; Off          ;
+; 90       ; 90         ; 4        ; RESERVED_INPUT                           ;        ;              ;         ; Column I/O ;                 ; no       ; Off          ;
+; 91       ;            ; 4        ; VCCIO4                                   ; power  ;              ; 3.3V    ; --         ;                 ; --       ; --           ;
+; 92       ; 91         ; 4        ; RESERVED_INPUT                           ;        ;              ;         ; Column I/O ;                 ; no       ; Off          ;
+; 93       ;            ;          ; GND                                      ; gnd    ;              ;         ; --         ;                 ; --       ; --           ;
+; 94       ; 92         ; 4        ; RESERVED_INPUT                           ;        ;              ;         ; Column I/O ;                 ; no       ; Off          ;
+; 95       ; 93         ; 4        ; RESERVED_INPUT                           ;        ;              ;         ; Column I/O ;                 ; no       ; Off          ;
+; 96       ; 94         ; 4        ; RESERVED_INPUT                           ;        ;              ;         ; Column I/O ;                 ; no       ; Off          ;
+; 97       ; 95         ; 4        ; RESERVED_INPUT                           ;        ;              ;         ; Column I/O ;                 ; no       ; Off          ;
+; 98       ;            ; 4        ; VCCIO4                                   ; power  ;              ; 3.3V    ; --         ;                 ; --       ; --           ;
+; 99       ; 96         ; 4        ; RESERVED_INPUT                           ;        ;              ;         ; Column I/O ;                 ; no       ; Off          ;
+; 100      ;            ;          ; GND                                      ; gnd    ;              ;         ; --         ;                 ; --       ; --           ;
+; 101      ; 97         ; 4        ; RESERVED_INPUT                           ;        ;              ;         ; Column I/O ;                 ; no       ; Off          ;
+; 102      ; 98         ; 4        ; RESERVED_INPUT                           ;        ;              ;         ; Column I/O ;                 ; no       ; Off          ;
+; 103      ; 99         ; 4        ; RESERVED_INPUT                           ;        ;              ;         ; Column I/O ;                 ; no       ; Off          ;
+; 104      ; 100        ; 4        ; RESERVED_INPUT                           ;        ;              ;         ; Column I/O ;                 ; no       ; Off          ;
+; 105      ; 101        ; 3        ; RESERVED_INPUT                           ;        ;              ;         ; Row I/O    ;                 ; no       ; Off          ;
+; 106      ; 102        ; 3        ; RESERVED_INPUT                           ;        ;              ;         ; Row I/O    ;                 ; no       ; Off          ;
+; 107      ; 105        ; 3        ; LED6                                     ; output ; 3.3-V LVTTL  ;         ; Row I/O    ; Y               ; no       ; Off          ;
+; 108      ; 106        ; 3        ; LED7                                     ; output ; 3.3-V LVTTL  ;         ; Row I/O    ; Y               ; no       ; Off          ;
+; 109      ;            ; 3        ; VCCIO3                                   ; power  ;              ; 3.3V    ; --         ;                 ; --       ; --           ;
+; 110      ; 107        ; 3        ; RESERVED_INPUT                           ;        ;              ;         ; Row I/O    ;                 ; no       ; Off          ;
+; 111      ;            ;          ; GND                                      ; gnd    ;              ;         ; --         ;                 ; --       ; --           ;
+; 112      ; 108        ; 3        ; RESERVED_INPUT                           ;        ;              ;         ; Row I/O    ;                 ; no       ; Off          ;
+; 113      ; 109        ; 3        ; RESERVED_INPUT                           ;        ;              ;         ; Row I/O    ;                 ; no       ; Off          ;
+; 114      ; 110        ; 3        ; RESERVED_INPUT                           ;        ;              ;         ; Row I/O    ;                 ; no       ; Off          ;
+; 115      ; 112        ; 3        ; A5                                       ; output ; 3.3-V LVTTL  ;         ; Row I/O    ; Y               ; no       ; Off          ;
+; 116      ; 113        ; 3        ; RESERVED_INPUT                           ;        ;              ;         ; Row I/O    ;                 ; no       ; Off          ;
+; 117      ; 114        ; 3        ; RESERVED_INPUT                           ;        ;              ;         ; Row I/O    ;                 ; no       ; Off          ;
+; 118      ; 117        ; 3        ; RESERVED_INPUT                           ;        ;              ;         ; Row I/O    ;                 ; no       ; Off          ;
+; 119      ;            ;          ; GND                                      ; gnd    ;              ;         ; --         ;                 ; --       ; --           ;
+; 120      ;            ;          ; VCCINT                                   ; power  ;              ; 1.2V    ; --         ;                 ; --       ; --           ;
+; 121      ; 121        ; 3        ; ^nSTATUS                                 ;        ;              ;         ; --         ;                 ; --       ; --           ;
+; 122      ;            ; 3        ; VCCIO3                                   ; power  ;              ; 3.3V    ; --         ;                 ; --       ; --           ;
+; 123      ; 122        ; 3        ; ^CONF_DONE                               ;        ;              ;         ; --         ;                 ; --       ; --           ;
+; 124      ;            ;          ; GND                                      ; gnd    ;              ;         ; --         ;                 ; --       ; --           ;
+; 125      ; 123        ; 3        ; ^MSEL1                                   ;        ;              ;         ; --         ;                 ; --       ; --           ;
+; 126      ; 124        ; 3        ; ^MSEL0                                   ;        ;              ;         ; --         ;                 ; --       ; --           ;
+; 127      ; 125        ; 3        ; RESERVED_INPUT                           ;        ;              ;         ; Row I/O    ;                 ; no       ; Off          ;
+; 128      ; 126        ; 3        ; RESERVED_INPUT                           ;        ;              ;         ; Row I/O    ;                 ; no       ; Off          ;
+; 129      ; 127        ; 3        ; GND+                                     ;        ;              ;         ; Row I/O    ;                 ; --       ; --           ;
+; 130      ; 128        ; 3        ; GND+                                     ;        ;              ;         ; Row I/O    ;                 ; --       ; --           ;
+; 131      ; 129        ; 3        ; _10MHZ                                   ; input  ; 3.3-V LVTTL  ;         ; Row I/O    ; Y               ; no       ; Off          ;
+; 132      ; 130        ; 3        ; C122_clk                                 ; input  ; 3.3-V LVTTL  ;         ; Row I/O    ; Y               ; no       ; Off          ;
+; 133      ; 131        ; 3        ; RESERVED_INPUT                           ;        ;              ;         ; Row I/O    ;                 ; no       ; Off          ;
+; 134      ; 132        ; 3        ; FPGA_PTT                                 ; output ; 3.3-V LVTTL  ;         ; Row I/O    ; Y               ; no       ; Off          ;
+; 135      ; 133        ; 3        ; USEROUT6                                 ; output ; 3.3-V LVTTL  ;         ; Row I/O    ; Y               ; no       ; Off          ;
+; 136      ;            ; 3        ; VCCIO3                                   ; power  ;              ; 3.3V    ; --         ;                 ; --       ; --           ;
+; 137      ; 134        ; 3        ; USEROUT5                                 ; output ; 3.3-V LVTTL  ;         ; Row I/O    ; Y               ; no       ; Off          ;
+; 138      ; 135        ; 3        ; USEROUT4                                 ; output ; 3.3-V LVTTL  ;         ; Row I/O    ; Y               ; no       ; Off          ;
+; 139      ; 136        ; 3        ; USEROUT3                                 ; output ; 3.3-V LVTTL  ;         ; Row I/O    ; Y               ; no       ; Off          ;
+; 140      ;            ;          ; GND                                      ; gnd    ;              ;         ; --         ;                 ; --       ; --           ;
+; 141      ; 137        ; 3        ; USEROUT2                                 ; output ; 3.3-V LVTTL  ;         ; Row I/O    ; Y               ; no       ; Off          ;
+; 142      ; 138        ; 3        ; USEROUT1                                 ; output ; 3.3-V LVTTL  ;         ; Row I/O    ; Y               ; no       ; Off          ;
+; 143      ; 141        ; 3        ; USEROUT0                                 ; output ; 3.3-V LVTTL  ;         ; Row I/O    ; Y               ; no       ; Off          ;
+; 144      ; 142        ; 3        ; nADCCS                                   ; output ; 3.3-V LVTTL  ;         ; Row I/O    ; Y               ; no       ; Off          ;
+; 145      ; 143        ; 3        ; ADCCLK                                   ; output ; 3.3-V LVTTL  ;         ; Row I/O    ; Y               ; no       ; Off          ;
+; 146      ; 149        ; 3        ; ADCMISO                                  ; input  ; 3.3-V LVTTL  ;         ; Row I/O    ; Y               ; no       ; Off          ;
+; 147      ; 150        ; 3        ; ADCMOSI                                  ; output ; 3.3-V LVTTL  ;         ; Row I/O    ; Y               ; no       ; Off          ;
+; 148      ;            ; 3        ; VCCIO3                                   ; power  ;              ; 3.3V    ; --         ;                 ; --       ; --           ;
+; 149      ; 151        ; 3        ; RESERVED_INPUT                           ;        ;              ;         ; Row I/O    ;                 ; no       ; Off          ;
+; 150      ; 152        ; 3        ; RESERVED_INPUT                           ;        ;              ;         ; Row I/O    ;                 ; no       ; Off          ;
+; 151      ; 153        ; 3        ; RESERVED_INPUT                           ;        ;              ;         ; Row I/O    ;                 ; no       ; Off          ;
+; 152      ; 154        ; 3        ; RESERVED_INPUT                           ;        ;              ;         ; Row I/O    ;                 ; no       ; Off          ;
+; 153      ;            ;          ; GND                                      ; gnd    ;              ;         ; --         ;                 ; --       ; --           ;
+; 154      ;            ;          ; GND_PLL2                                 ; gnd    ;              ;         ; --         ;                 ; --       ; --           ;
+; 155      ;            ;          ; VCCD_PLL2                                ; power  ;              ; 1.2V    ; --         ;                 ; --       ; --           ;
+; 156      ;            ;          ; GND_PLL2                                 ; gnd    ;              ;         ; --         ;                 ; --       ; --           ;
+; 157      ;            ;          ; VCCA_PLL2                                ; power  ;              ; 1.2V    ; --         ;                 ; --       ; --           ;
+; 158      ;            ;          ; GNDA_PLL2                                ; gnd    ;              ;         ; --         ;                 ; --       ; --           ;
+; 159      ;            ;          ; GND                                      ; gnd    ;              ;         ; --         ;                 ; --       ; --           ;
+; 160      ; 155        ; 2        ; RESERVED_INPUT                           ;        ;              ;         ; Column I/O ;                 ; no       ; Off          ;
+; 161      ; 156        ; 2        ; RESERVED_INPUT                           ;        ;              ;         ; Column I/O ;                 ; no       ; Off          ;
+; 162      ; 157        ; 2        ; RESERVED_INPUT                           ;        ;              ;         ; Column I/O ;                 ; no       ; Off          ;
+; 163      ; 158        ; 2        ; RESERVED_INPUT                           ;        ;              ;         ; Column I/O ;                 ; no       ; Off          ;
+; 164      ; 159        ; 2        ; RESERVED_INPUT                           ;        ;              ;         ; Column I/O ;                 ; no       ; Off          ;
+; 165      ; 160        ; 2        ; RESERVED_INPUT                           ;        ;              ;         ; Column I/O ;                 ; no       ; Off          ;
+; 166      ;            ; 2        ; VCCIO2                                   ; power  ;              ; 3.3V    ; --         ;                 ; --       ; --           ;
+; 167      ;            ;          ; GND                                      ; gnd    ;              ;         ; --         ;                 ; --       ; --           ;
+; 168      ; 161        ; 2        ; RESERVED_INPUT                           ;        ;              ;         ; Column I/O ;                 ; no       ; Off          ;
+; 169      ; 162        ; 2        ; CMODE                                    ; output ; 3.3-V LVTTL  ;         ; Column I/O ; Y               ; no       ; Off          ;
+; 170      ; 163        ; 2        ; nCS                                      ; output ; 3.3-V LVTTL  ;         ; Column I/O ; Y               ; no       ; Off          ;
+; 171      ; 164        ; 2        ; PTT                                      ; input  ; 3.3-V LVTTL  ;         ; Column I/O ; Y               ; no       ; Off          ;
+; 172      ;            ; 2        ; VCCIO2                                   ; power  ;              ; 3.3V    ; --         ;                 ; --       ; --           ;
+; 173      ; 165        ; 2        ; DAC[0]                                   ; output ; 3.3-V LVTTL  ;         ; Column I/O ; Y               ; no       ; Off          ;
+; 174      ;            ;          ; GND                                      ; gnd    ;              ;         ; --         ;                 ; --       ; --           ;
+; 175      ; 168        ; 2        ; DAC[1]                                   ; output ; 3.3-V LVTTL  ;         ; Column I/O ; Y               ; no       ; Off          ;
+; 176      ; 169        ; 2        ; DAC[2]                                   ; output ; 3.3-V LVTTL  ;         ; Column I/O ; Y               ; no       ; Off          ;
+; 177      ;            ;          ; GND                                      ; gnd    ;              ;         ; --         ;                 ; --       ; --           ;
+; 178      ;            ;          ; VCCINT                                   ; power  ;              ; 1.2V    ; --         ;                 ; --       ; --           ;
+; 179      ; 173        ; 2        ; DAC[3]                                   ; output ; 3.3-V LVTTL  ;         ; Column I/O ; Y               ; no       ; Off          ;
+; 180      ; 174        ; 2        ; DAC[4]                                   ; output ; 3.3-V LVTTL  ;         ; Column I/O ; Y               ; no       ; Off          ;
+; 181      ; 175        ; 2        ; DAC[5]                                   ; output ; 3.3-V LVTTL  ;         ; Column I/O ; Y               ; no       ; Off          ;
+; 182      ; 176        ; 2        ; DAC[6]                                   ; output ; 3.3-V LVTTL  ;         ; Column I/O ; Y               ; no       ; Off          ;
+; 183      ;            ; 2        ; VCCIO2                                   ; power  ;              ; 3.3V    ; --         ;                 ; --       ; --           ;
+; 184      ;            ;          ; GND                                      ; gnd    ;              ;         ; --         ;                 ; --       ; --           ;
+; 185      ; 180        ; 2        ; DAC[7]                                   ; output ; 3.3-V LVTTL  ;         ; Column I/O ; Y               ; no       ; Off          ;
+; 186      ;            ;          ; GND                                      ; gnd    ;              ;         ; --         ;                 ; --       ; --           ;
+; 187      ; 181        ; 2        ; DAC[8]                                   ; output ; 3.3-V LVTTL  ;         ; Column I/O ; Y               ; no       ; Off          ;
+; 188      ; 182        ; 2        ; DAC[9]                                   ; output ; 3.3-V LVTTL  ;         ; Column I/O ; Y               ; no       ; Off          ;
+; 189      ; 183        ; 2        ; DAC[10]                                  ; output ; 3.3-V LVTTL  ;         ; Column I/O ; Y               ; no       ; Off          ;
+; 190      ;            ;          ; VCCINT                                   ; power  ;              ; 1.2V    ; --         ;                 ; --       ; --           ;
+; 191      ; 184        ; 2        ; DAC[11]                                  ; output ; 3.3-V LVTTL  ;         ; Column I/O ; Y               ; no       ; Off          ;
+; 192      ; 185        ; 2        ; DAC[12]                                  ; output ; 3.3-V LVTTL  ;         ; Column I/O ; Y               ; no       ; Off          ;
+; 193      ; 186        ; 2        ; DAC[13]                                  ; output ; 3.3-V LVTTL  ;         ; Column I/O ; Y               ; no       ; Off          ;
+; 194      ;            ; 2        ; VCCIO2                                   ; power  ;              ; 3.3V    ; --         ;                 ; --       ; --           ;
+; 195      ; 187        ; 2        ; RESERVED_INPUT                           ;        ;              ;         ; Column I/O ;                 ; no       ; Off          ;
+; 196      ;            ;          ; GND                                      ; gnd    ;              ;         ; --         ;                 ; --       ; --           ;
+; 197      ; 191        ; 2        ; FPGA_PLL                                 ; output ; 3.3-V LVTTL  ;         ; Column I/O ; Y               ; no       ; Off          ;
+; 198      ; 192        ; 2        ; RESERVED_INPUT                           ;        ;              ;         ; Column I/O ;                 ; no       ; Off          ;
+; 199      ; 195        ; 2        ; LVDSTXE                                  ; output ; 3.3-V LVTTL  ;         ; Column I/O ; Y               ; no       ; Off          ;
+; 200      ; 196        ; 2        ; nLVDSRXE                                 ; output ; 3.3-V LVTTL  ;         ; Column I/O ; Y               ; no       ; Off          ;
+; 201      ; 197        ; 2        ; RESERVED_INPUT                           ;        ;              ;         ; Column I/O ;                 ; no       ; Off          ;
+; 202      ;            ; 2        ; VCCIO2                                   ; power  ;              ; 3.3V    ; --         ;                 ; --       ; --           ;
+; 203      ; 198        ; 2        ; LED5                                     ; output ; 3.3-V LVTTL  ;         ; Column I/O ; Y               ; no       ; Off          ;
+; 204      ;            ;          ; GND                                      ; gnd    ;              ;         ; --         ;                 ; --       ; --           ;
+; 205      ; 199        ; 2        ; LED4                                     ; output ; 3.3-V LVTTL  ;         ; Column I/O ; Y               ; no       ; Off          ;
+; 206      ; 200        ; 2        ; LED3                                     ; output ; 3.3-V LVTTL  ;         ; Column I/O ; Y               ; no       ; Off          ;
+; 207      ; 201        ; 2        ; RESERVED_INPUT                           ;        ;              ;         ; Column I/O ;                 ; no       ; Off          ;
+; 208      ; 202        ; 2        ; LED2                                     ; output ; 3.3-V LVTTL  ;         ; Column I/O ; Y               ; no       ; Off          ;
++----------+------------+----------+------------------------------------------+--------+--------------+---------+------------+-----------------+----------+--------------+
+Note: Pin directions (input, output or bidir) are based on device operating in user mode.
+
+
++-------------------------------------------------------------------------------+
+; Output Pin Default Load For Reported TCO                                      ;
++----------------------------------+-------+------------------------------------+
+; I/O Standard                     ; Load  ; Termination Resistance             ;
++----------------------------------+-------+------------------------------------+
+; 3.3-V LVTTL                      ; 0 pF  ; Not Available                      ;
+; 3.3-V LVCMOS                     ; 0 pF  ; Not Available                      ;
+; 2.5 V                            ; 0 pF  ; Not Available                      ;
+; 1.8 V                            ; 0 pF  ; Not Available                      ;
+; 1.5 V                            ; 0 pF  ; Not Available                      ;
+; 3.3-V PCI                        ; 10 pF ; 25 Ohm (Parallel)                  ;
+; 3.3-V PCI-X                      ; 10 pF ; 25 Ohm (Parallel)                  ;
+; SSTL-2 Class I                   ; 0 pF  ; 50 Ohm (Parallel), 25 Ohm (Serial) ;
+; SSTL-2 Class II                  ; 0 pF  ; 25 Ohm (Parallel), 25 Ohm (Serial) ;
+; SSTL-18 Class I                  ; 0 pF  ; 50 Ohm (Parallel), 25 Ohm (Serial) ;
+; SSTL-18 Class II                 ; 0 pF  ; 25 Ohm (Parallel), 25 Ohm (Serial) ;
+; 1.5-V HSTL Class I               ; 0 pF  ; 50 Ohm (Parallel)                  ;
+; 1.5-V HSTL Class II              ; 0 pF  ; 25 Ohm (Parallel)                  ;
+; 1.8-V HSTL Class I               ; 0 pF  ; 50 Ohm (Parallel)                  ;
+; 1.8-V HSTL Class II              ; 0 pF  ; 25 Ohm (Parallel)                  ;
+; Differential SSTL-2              ; 0 pF  ; (See SSTL-2)                       ;
+; Differential 2.5-V SSTL Class II ; 0 pF  ; (See SSTL-2 Class II)              ;
+; Differential 1.8-V SSTL Class I  ; 0 pF  ; (See 1.8-V SSTL Class I)           ;
+; Differential 1.8-V SSTL Class II ; 0 pF  ; (See 1.8-V SSTL Class II)          ;
+; Differential 1.5-V HSTL Class I  ; 0 pF  ; (See 1.5-V HSTL Class I)           ;
+; Differential 1.5-V HSTL Class II ; 0 pF  ; (See 1.5-V HSTL Class II)          ;
+; Differential 1.8-V HSTL Class I  ; 0 pF  ; (See 1.8-V HSTL Class I)           ;
+; Differential 1.8-V HSTL Class II ; 0 pF  ; (See 1.8-V HSTL Class II)          ;
+; LVDS                             ; 0 pF  ; 100 Ohm (Differential)             ;
+; mini-LVDS                        ; 0 pF  ; 100 Ohm (Differential)             ;
+; RSDS                             ; 0 pF  ; 100 Ohm (Differential)             ;
+; Simple RSDS                      ; 0 pF  ; Not Available                      ;
+; Differential LVPECL              ; 0 pF  ; 100 Ohm (Differential)             ;
++----------------------------------+-------+------------------------------------+
+Note: User assignments will override these defaults. The user specified values are listed in the Output Pins and Bidir Pins tables.
+
+
++----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Fitter Resource Utilization by Entity                                                                                                                                                                                                                                                                                                                    ;
++-------------------------------------------+-------------+---------------------------+---------------+-------------+------+--------------+---------+-----------+------+--------------+--------------+-------------------+------------------+-----------------------------------------------------------------------------------------------+--------------+
+; Compilation Hierarchy Node                ; Logic Cells ; Dedicated Logic Registers ; I/O Registers ; Memory Bits ; M4Ks ; DSP Elements ; DSP 9x9 ; DSP 18x18 ; Pins ; Virtual Pins ; LUT-Only LCs ; Register-Only LCs ; LUT/Register LCs ; Full Hierarchy Name                                                                           ; Library Name ;
++-------------------------------------------+-------------+---------------------------+---------------+-------------+------+--------------+---------+-----------+------+--------------+--------------+-------------------+------------------+-----------------------------------------------------------------------------------------------+--------------+
+; |PennyWSPR                                ; 1869 (239)  ; 1195 (152)                ; 0 (0)         ; 324         ; 1    ; 0            ; 0       ; 0         ; 43   ; 0            ; 674 (87)     ; 38 (5)            ; 1157 (147)       ; |PennyWSPR                                                                                    ; work         ;
+;    |ADC:ADC_SPI|                          ; 16 (16)     ; 10 (10)                   ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 6 (6)        ; 0 (0)             ; 10 (10)          ; |PennyWSPR|ADC:ADC_SPI                                                                        ;              ;
+;    |clk_lrclk_gen:clrgen|                 ; 27 (27)     ; 19 (19)                   ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 8 (8)        ; 0 (0)             ; 19 (19)          ; |PennyWSPR|clk_lrclk_gen:clrgen                                                               ;              ;
+;    |oddClockDivider:refClockDivider|      ; 16 (16)     ; 8 (8)                     ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 8 (8)        ; 0 (0)             ; 8 (8)            ; |PennyWSPR|oddClockDivider:refClockDivider                                                    ;              ;
+;    |symrom:message_syms|                  ; 0 (0)       ; 0 (0)                     ; 0 (0)         ; 324         ; 1    ; 0            ; 0       ; 0         ; 0    ; 0            ; 0 (0)        ; 0 (0)             ; 0 (0)            ; |PennyWSPR|symrom:message_syms                                                                ;              ;
+;       |altsyncram:altsyncram_component|   ; 0 (0)       ; 0 (0)                     ; 0 (0)         ; 324         ; 1    ; 0            ; 0       ; 0         ; 0    ; 0            ; 0 (0)        ; 0 (0)             ; 0 (0)            ; |PennyWSPR|symrom:message_syms|altsyncram:altsyncram_component                                ;              ;
+;          |altsyncram_s371:auto_generated| ; 0 (0)       ; 0 (0)                     ; 0 (0)         ; 324         ; 1    ; 0            ; 0       ; 0         ; 0    ; 0            ; 0 (0)        ; 0 (0)             ; 0 (0)            ; |PennyWSPR|symrom:message_syms|altsyncram:altsyncram_component|altsyncram_s371:auto_generated ;              ;
+;    |wspr_xmit:xmit|                       ; 1571 (12)   ; 1006 (0)                  ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 565 (4)      ; 33 (0)            ; 973 (8)          ; |PennyWSPR|wspr_xmit:xmit                                                                     ;              ;
+;       |cpl_cordic:cordic_inst|            ; 1567 (1567) ; 1006 (1006)               ; 0 (0)         ; 0           ; 0    ; 0            ; 0       ; 0         ; 0    ; 0            ; 561 (561)    ; 33 (33)           ; 973 (973)        ; |PennyWSPR|wspr_xmit:xmit|cpl_cordic:cordic_inst                                              ;              ;
++-------------------------------------------+-------------+---------------------------+---------------+-------------+------+--------------+---------+-----------+------+--------------+--------------+-------------------+------------------+-----------------------------------------------------------------------------------------------+--------------+
+Note: For table entries with two numbers listed, the numbers in parentheses indicate the number of resources of the given type used by the specific entity alone. The numbers listed outside of parentheses indicate the total resources of the given type used by the specific entity and all of its sub-entities in the hierarchy.
+
+
++------------------------------------------------------------------------------------+
+; Delay Chain Summary                                                                ;
++-----------+----------+---------------+---------------+-----------------------+-----+
+; Name      ; Pin Type ; Pad to Core 0 ; Pad to Core 1 ; Pad to Input Register ; TCO ;
++-----------+----------+---------------+---------------+-----------------------+-----+
+; PTT_in    ; Output   ; --            ; --            ; --                    ; --  ;
+; ext_10MHZ ; Bidir    ; (0) 337 ps    ; (0) 337 ps    ; --                    ; --  ;
+; LED2      ; Output   ; --            ; --            ; --                    ; --  ;
+; LED3      ; Output   ; --            ; --            ; --                    ; --  ;
+; LED4      ; Output   ; --            ; --            ; --                    ; --  ;
+; LED5      ; Output   ; --            ; --            ; --                    ; --  ;
+; LED6      ; Output   ; --            ; --            ; --                    ; --  ;
+; LED7      ; Output   ; --            ; --            ; --                    ; --  ;
+; USEROUT0  ; Output   ; --            ; --            ; --                    ; --  ;
+; USEROUT1  ; Output   ; --            ; --            ; --                    ; --  ;
+; USEROUT2  ; Output   ; --            ; --            ; --                    ; --  ;
+; USEROUT3  ; Output   ; --            ; --            ; --                    ; --  ;
+; USEROUT4  ; Output   ; --            ; --            ; --                    ; --  ;
+; USEROUT5  ; Output   ; --            ; --            ; --                    ; --  ;
+; USEROUT6  ; Output   ; --            ; --            ; --                    ; --  ;
+; DAC[0]    ; Output   ; --            ; --            ; --                    ; --  ;
+; DAC[1]    ; Output   ; --            ; --            ; --                    ; --  ;
+; DAC[2]    ; Output   ; --            ; --            ; --                    ; --  ;
+; DAC[3]    ; Output   ; --            ; --            ; --                    ; --  ;
+; DAC[4]    ; Output   ; --            ; --            ; --                    ; --  ;
+; DAC[5]    ; Output   ; --            ; --            ; --                    ; --  ;
+; DAC[6]    ; Output   ; --            ; --            ; --                    ; --  ;
+; DAC[7]    ; Output   ; --            ; --            ; --                    ; --  ;
+; DAC[8]    ; Output   ; --            ; --            ; --                    ; --  ;
+; DAC[9]    ; Output   ; --            ; --            ; --                    ; --  ;
+; DAC[10]   ; Output   ; --            ; --            ; --                    ; --  ;
+; DAC[11]   ; Output   ; --            ; --            ; --                    ; --  ;
+; DAC[12]   ; Output   ; --            ; --            ; --                    ; --  ;
+; DAC[13]   ; Output   ; --            ; --            ; --                    ; --  ;
+; nLVDSRXE  ; Output   ; --            ; --            ; --                    ; --  ;
+; LVDSTXE   ; Output   ; --            ; --            ; --                    ; --  ;
+; FPGA_PLL  ; Output   ; --            ; --            ; --                    ; --  ;
+; nCS       ; Output   ; --            ; --            ; --                    ; --  ;
+; CMODE     ; Output   ; --            ; --            ; --                    ; --  ;
+; ADCMOSI   ; Output   ; --            ; --            ; --                    ; --  ;
+; ADCCLK    ; Output   ; --            ; --            ; --                    ; --  ;
+; ADCMISO   ; Input    ; (0) 351 ps    ; (0) 351 ps    ; --                    ; --  ;
+; nADCCS    ; Output   ; --            ; --            ; --                    ; --  ;
+; FPGA_PTT  ; Output   ; --            ; --            ; --                    ; --  ;
+; A5        ; Output   ; --            ; --            ; --                    ; --  ;
+; C122_clk  ; Input    ; (0) 351 ps    ; (0) 351 ps    ; --                    ; --  ;
+; PTT       ; Input    ; (6) 4686 ps   ; (6) 4686 ps   ; --                    ; --  ;
+; _10MHZ    ; Input    ; (0) 351 ps    ; (0) 351 ps    ; --                    ; --  ;
++-----------+----------+---------------+---------------+-----------------------+-----+
+
+
++-------------------------------------------------------------------------------+
+; Pad To Core Delay Chain Fanout                                                ;
++-------------------------------------------------+-------------------+---------+
+; Source Pin / Fanout                             ; Pad To Core Index ; Setting ;
++-------------------------------------------------+-------------------+---------+
+; ext_10MHZ                                       ;                   ;         ;
+;      - oddClockDivider:refClockDivider|clk_o    ; 0                 ; 0       ;
+;      - oddClockDivider:refClockDivider|count[3] ; 0                 ; 0       ;
+;      - oddClockDivider:refClockDivider|count[2] ; 0                 ; 0       ;
+;      - oddClockDivider:refClockDivider|count[4] ; 0                 ; 0       ;
+;      - oddClockDivider:refClockDivider|count[5] ; 0                 ; 0       ;
+;      - oddClockDivider:refClockDivider|count[1] ; 0                 ; 0       ;
+;      - oddClockDivider:refClockDivider|count[0] ; 0                 ; 0       ;
+;      - oddClockDivider:refClockDivider|count[6] ; 0                 ; 0       ;
+; ADCMISO                                         ;                   ;         ;
+; C122_clk                                        ;                   ;         ;
+; PTT                                             ;                   ;         ;
+;      - PTT_in                                   ; 0                 ; 6       ;
+; _10MHZ                                          ;                   ;         ;
++-------------------------------------------------+-------------------+---------+
+
+
++------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Control Signals                                                                                                                                                              ;
++------------------------------------------------+--------------------+---------+---------------+--------+----------------------+------------------+---------------------------+
+; Name                                           ; Location           ; Fan-Out ; Usage         ; Global ; Global Resource Used ; Global Line Name ; Enable Signal Source Name ;
++------------------------------------------------+--------------------+---------+---------------+--------+----------------------+------------------+---------------------------+
+; C122_clk                                       ; PIN_132            ; 1178    ; Clock         ; yes    ; Global Clock         ; GCLK6            ; --                        ;
+; C122_rst_cnt[10]                               ; LCFF_X15_Y17_N1    ; 13      ; Clock enable  ; no     ; --                   ; --               ; --                        ;
+; PTT                                            ; PIN_171            ; 1       ; Output enable ; no     ; --                   ; --               ; --                        ;
+; c122_current_symbol[6]~10                      ; LCCOMB_X13_Y17_N6  ; 35      ; Sync. clear   ; no     ; --                   ; --               ; --                        ;
+; c122_two_min_counter[17]~36                    ; LCCOMB_X13_Y17_N2  ; 49      ; Sync. clear   ; no     ; --                   ; --               ; --                        ;
+; clk_lrclk_gen:clrgen|BCLK                      ; LCFF_X1_Y9_N21     ; 10      ; Clock         ; yes    ; Global Clock         ; GCLK1            ; --                        ;
+; clk_lrclk_gen:clrgen|BCLK_cnt[9]~24            ; LCCOMB_X1_Y9_N18   ; 16      ; Sync. clear   ; no     ; --                   ; --               ; --                        ;
+; ext_10MHZ~0                                    ; PIN_82             ; 8       ; Clock         ; no     ; --                   ; --               ; --                        ;
+; two_min_count[0]~1                             ; LCCOMB_X13_Y17_N16 ; 3       ; Clock enable  ; no     ; --                   ; --               ; --                        ;
+; wspr_xmit:xmit|cpl_cordic:cordic_inst|Z[0][18] ; LCFF_X16_Y15_N29   ; 45      ; Sync. load    ; no     ; --                   ; --               ; --                        ;
+; wspr_xmit:xmit|cpl_cordic:cordic_inst|Z[13][6] ; LCFF_X15_Y5_N1     ; 24      ; Sync. load    ; no     ; --                   ; --               ; --                        ;
+; wspr_xmit:xmit|cpl_cordic:cordic_inst|Z[14][5] ; LCFF_X14_Y6_N1     ; 18      ; Sync. load    ; no     ; --                   ; --               ; --                        ;
+; wspr_xmit:xmit|cpl_cordic:cordic_inst|Z[1][18] ; LCFF_X16_Y15_N19   ; 52      ; Sync. load    ; no     ; --                   ; --               ; --                        ;
+; wspr_xmit:xmit|cpl_cordic:cordic_inst|Z[2][17] ; LCFF_X22_Y15_N17   ; 56      ; Sync. load    ; no     ; --                   ; --               ; --                        ;
+; wspr_xmit:xmit|cpl_cordic:cordic_inst|Z[3][16] ; LCFF_X22_Y13_N31   ; 55      ; Sync. load    ; no     ; --                   ; --               ; --                        ;
+; wspr_xmit:xmit|cpl_cordic:cordic_inst|Z[6][13] ; LCFF_X22_Y10_N27   ; 42      ; Sync. load    ; no     ; --                   ; --               ; --                        ;
+; wspr_xmit:xmit|cpl_cordic:cordic_inst|Z[7][12] ; LCFF_X24_Y10_N25   ; 40      ; Sync. load    ; no     ; --                   ; --               ; --                        ;
+; wspr_xmit:xmit|cpl_cordic:cordic_inst|Z[8][11] ; LCFF_X25_Y7_N25    ; 38      ; Sync. load    ; no     ; --                   ; --               ; --                        ;
+; wspr_xmit:xmit|cpl_cordic:cordic_inst|Z[9][10] ; LCFF_X22_Y7_N21    ; 36      ; Sync. load    ; no     ; --                   ; --               ; --                        ;
++------------------------------------------------+--------------------+---------+---------------+--------+----------------------+------------------+---------------------------+
+
+
++----------------------------------------------------------------------------------------------------------------------------+
+; Global & Other Fast Signals                                                                                                ;
++---------------------------+----------------+---------+----------------------+------------------+---------------------------+
+; Name                      ; Location       ; Fan-Out ; Global Resource Used ; Global Line Name ; Enable Signal Source Name ;
++---------------------------+----------------+---------+----------------------+------------------+---------------------------+
+; C122_clk                  ; PIN_132        ; 1178    ; Global Clock         ; GCLK6            ; --                        ;
+; clk_lrclk_gen:clrgen|BCLK ; LCFF_X1_Y9_N21 ; 10      ; Global Clock         ; GCLK1            ; --                        ;
++---------------------------+----------------+---------+----------------------+------------------+---------------------------+
+
+
++-----------------------------------------------------------------------------------------------------+
+; Non-Global High Fan-Out Signals                                                                     ;
++-------------------------------------------------------------------------------------------+---------+
+; Name                                                                                      ; Fan-Out ;
++-------------------------------------------------------------------------------------------+---------+
+; wspr_xmit:xmit|cpl_cordic:cordic_inst|Z[2][17]                                            ; 56      ;
+; wspr_xmit:xmit|cpl_cordic:cordic_inst|Z[3][16]                                            ; 55      ;
+; wspr_xmit:xmit|cpl_cordic:cordic_inst|Z[1][18]                                            ; 52      ;
+; wspr_xmit:xmit|cpl_cordic:cordic_inst|Z[4][15]                                            ; 52      ;
+; c122_two_min_counter[17]~36                                                               ; 49      ;
+; wspr_xmit:xmit|cpl_cordic:cordic_inst|Z[5][14]                                            ; 49      ;
+; wspr_xmit:xmit|cpl_cordic:cordic_inst|Z[0][18]                                            ; 45      ;
+; wspr_xmit:xmit|cpl_cordic:cordic_inst|Z[6][13]                                            ; 42      ;
+; wspr_xmit:xmit|cpl_cordic:cordic_inst|Z[7][12]                                            ; 40      ;
+; wspr_xmit:xmit|cpl_cordic:cordic_inst|Z[8][11]                                            ; 38      ;
+; wspr_xmit:xmit|cpl_cordic:cordic_inst|Z[9][10]                                            ; 36      ;
+; wspr_xmit:xmit|cpl_cordic:cordic_inst|Y[0][9]                                             ; 35      ;
+; c122_current_symbol[6]~10                                                                 ; 35      ;
+; wspr_xmit:xmit|cpl_cordic:cordic_inst|X[0][9]                                             ; 34      ;
+; wspr_xmit:xmit|cpl_cordic:cordic_inst|Z[10][9]                                            ; 34      ;
+; wspr_xmit:xmit|cpl_cordic:cordic_inst|Z[11][8]                                            ; 31      ;
+; LessThan0~8                                                                               ; 26      ;
+; wspr_xmit:xmit|cpl_cordic:cordic_inst|Z[12][7]                                            ; 24      ;
+; wspr_xmit:xmit|cpl_cordic:cordic_inst|Z[13][6]                                            ; 24      ;
+; wspr_xmit:xmit|cpl_cordic:cordic_inst|Add189~1                                            ; 18      ;
+; wspr_xmit:xmit|cpl_cordic:cordic_inst|Add193~1                                            ; 18      ;
+; wspr_xmit:xmit|cpl_cordic:cordic_inst|Z[14][5]                                            ; 18      ;
+; wspr_xmit:xmit|cpl_cordic:cordic_inst|Z[15][4]                                            ; 18      ;
+; wspr_xmit:xmit|cpl_cordic:cordic_inst|Add178~1                                            ; 17      ;
+; wspr_xmit:xmit|cpl_cordic:cordic_inst|Add172~1                                            ; 17      ;
+; wspr_xmit:xmit|cpl_cordic:cordic_inst|Add185~1                                            ; 17      ;
+; wspr_xmit:xmit|cpl_cordic:cordic_inst|Add161~1                                            ; 16      ;
+; wspr_xmit:xmit|cpl_cordic:cordic_inst|Add167~1                                            ; 16      ;
+; clk_lrclk_gen:clrgen|BCLK_cnt[9]~24                                                       ; 16      ;
+; wspr_xmit:xmit|cpl_cordic:cordic_inst|Add156~1                                            ; 15      ;
+; wspr_xmit:xmit|cpl_cordic:cordic_inst|Add150~1                                            ; 15      ;
+; xmit_active~0                                                                             ; 15      ;
+; wspr_xmit:xmit|cpl_cordic:cordic_inst|Z[16][3]                                            ; 15      ;
+; wspr_xmit:xmit|cpl_cordic:cordic_inst|Add139~1                                            ; 14      ;
+; wspr_xmit:xmit|cpl_cordic:cordic_inst|Add145~1                                            ; 14      ;
+; Equal6~1                                                                                  ; 14      ;
+; Equal6~0                                                                                  ; 14      ;
+; wspr_xmit:xmit|cpl_cordic:cordic_inst|Y[0][14]                                            ; 13      ;
+; wspr_xmit:xmit|cpl_cordic:cordic_inst|X[0][14]                                            ; 13      ;
+; wspr_xmit:xmit|cpl_cordic:cordic_inst|Add134~1                                            ; 13      ;
+; wspr_xmit:xmit|cpl_cordic:cordic_inst|Add128~1                                            ; 13      ;
+; C122_rst_cnt[10]                                                                          ; 13      ;
+; wspr_xmit:xmit|cpl_cordic:cordic_inst|Add117~1                                            ; 12      ;
+; wspr_xmit:xmit|cpl_cordic:cordic_inst|Add123~1                                            ; 12      ;
+; C122_rst                                                                                  ; 12      ;
+; wspr_xmit:xmit|cpl_cordic:cordic_inst|Y[1][21]                                            ; 12      ;
+; wspr_xmit:xmit|cpl_cordic:cordic_inst|X[1][21]                                            ; 12      ;
+; symrom:message_syms|altsyncram:altsyncram_component|altsyncram_s371:auto_generated|q_a[0] ; 12      ;
+; wspr_xmit:xmit|cpl_cordic:cordic_inst|Add112~1                                            ; 11      ;
+; wspr_xmit:xmit|cpl_cordic:cordic_inst|Add106~1                                            ; 11      ;
++-------------------------------------------------------------------------------------------+---------+
+
+
++-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Fitter RAM Summary                                                                                                                                                                                                                                                                                                                                                                                                                                                                  ;
++-----------------------------------------------------------------------------------------------+------+------+--------------+--------------+--------------+--------------+--------------+------------------------+-------------------------+------------------------+-------------------------+------+-----------------------------+-----------------------------+-----------------------------+-----------------------------+---------------------+------+------------+-------------+
+; Name                                                                                          ; Type ; Mode ; Clock Mode   ; Port A Depth ; Port A Width ; Port B Depth ; Port B Width ; Port A Input Registers ; Port A Output Registers ; Port B Input Registers ; Port B Output Registers ; Size ; Implementation Port A Depth ; Implementation Port A Width ; Implementation Port B Depth ; Implementation Port B Width ; Implementation Bits ; M4Ks ; MIF        ; Location    ;
++-----------------------------------------------------------------------------------------------+------+------+--------------+--------------+--------------+--------------+--------------+------------------------+-------------------------+------------------------+-------------------------+------+-----------------------------+-----------------------------+-----------------------------+-----------------------------+---------------------+------+------------+-------------+
+; symrom:message_syms|altsyncram:altsyncram_component|altsyncram_s371:auto_generated|ALTSYNCRAM ; AUTO ; ROM  ; Single Clock ; 162          ; 2            ; --           ; --           ; yes                    ; yes                     ; --                     ; --                      ; 324  ; 162                         ; 2                           ; --                          ; --                          ; 324                 ; 1    ; symtab.mif ; M4K_X11_Y17 ;
++-----------------------------------------------------------------------------------------------+------+------+--------------+--------------+--------------+--------------+--------------+------------------------+-------------------------+------------------------+-------------------------+------+-----------------------------+-----------------------------+-----------------------------+-----------------------------+---------------------+------+------------+-------------+
+Note: Fitter may spread logical memories into multiple blocks to improve timing. The actual required RAM blocks can be found in the Fitter Resource Usage section.
+
+
++-----------------------------------------------------+
+; Interconnect Usage Summary                          ;
++----------------------------+------------------------+
+; Interconnect Resource Type ; Usage                  ;
++----------------------------+------------------------+
+; Block interconnects        ; 2,368 / 26,052 ( 9 % ) ;
+; C16 interconnects          ; 3 / 1,156 ( < 1 % )    ;
+; C4 interconnects           ; 1,015 / 17,952 ( 6 % ) ;
+; Direct links               ; 526 / 26,052 ( 2 % )   ;
+; Global clocks              ; 2 / 8 ( 25 % )         ;
+; Local interconnects        ; 434 / 8,256 ( 5 % )    ;
+; R24 interconnects          ; 6 / 1,020 ( < 1 % )    ;
+; R4 interconnects           ; 1,278 / 22,440 ( 6 % ) ;
++----------------------------+------------------------+
+
+
++-----------------------------------------------------------------------------+
+; LAB Logic Elements                                                          ;
++---------------------------------------------+-------------------------------+
+; Number of Logic Elements  (Average = 12.89) ; Number of LABs  (Total = 145) ;
++---------------------------------------------+-------------------------------+
+; 1                                           ; 7                             ;
+; 2                                           ; 4                             ;
+; 3                                           ; 1                             ;
+; 4                                           ; 3                             ;
+; 5                                           ; 1                             ;
+; 6                                           ; 2                             ;
+; 7                                           ; 1                             ;
+; 8                                           ; 2                             ;
+; 9                                           ; 7                             ;
+; 10                                          ; 8                             ;
+; 11                                          ; 6                             ;
+; 12                                          ; 8                             ;
+; 13                                          ; 3                             ;
+; 14                                          ; 4                             ;
+; 15                                          ; 9                             ;
+; 16                                          ; 79                            ;
++---------------------------------------------+-------------------------------+
+
+
++--------------------------------------------------------------------+
+; LAB-wide Signals                                                   ;
++------------------------------------+-------------------------------+
+; LAB-wide Signals  (Average = 1.02) ; Number of LABs  (Total = 145) ;
++------------------------------------+-------------------------------+
+; 1 Clock                            ; 120                           ;
+; 1 Clock enable                     ; 1                             ;
+; 1 Sync. clear                      ; 7                             ;
+; 1 Sync. load                       ; 20                            ;
++------------------------------------+-------------------------------+
+
+
++------------------------------------------------------------------------------+
+; LAB Signals Sourced                                                          ;
++----------------------------------------------+-------------------------------+
+; Number of Signals Sourced  (Average = 20.62) ; Number of LABs  (Total = 145) ;
++----------------------------------------------+-------------------------------+
+; 0                                            ; 0                             ;
+; 1                                            ; 7                             ;
+; 2                                            ; 3                             ;
+; 3                                            ; 1                             ;
+; 4                                            ; 4                             ;
+; 5                                            ; 1                             ;
+; 6                                            ; 1                             ;
+; 7                                            ; 2                             ;
+; 8                                            ; 1                             ;
+; 9                                            ; 5                             ;
+; 10                                           ; 1                             ;
+; 11                                           ; 1                             ;
+; 12                                           ; 3                             ;
+; 13                                           ; 1                             ;
+; 14                                           ; 1                             ;
+; 15                                           ; 5                             ;
+; 16                                           ; 6                             ;
+; 17                                           ; 3                             ;
+; 18                                           ; 3                             ;
+; 19                                           ; 4                             ;
+; 20                                           ; 2                             ;
+; 21                                           ; 5                             ;
+; 22                                           ; 3                             ;
+; 23                                           ; 3                             ;
+; 24                                           ; 6                             ;
+; 25                                           ; 2                             ;
+; 26                                           ; 26                            ;
+; 27                                           ; 6                             ;
+; 28                                           ; 20                            ;
+; 29                                           ; 7                             ;
+; 30                                           ; 7                             ;
+; 31                                           ; 1                             ;
+; 32                                           ; 4                             ;
++----------------------------------------------+-------------------------------+
+
+
++----------------------------------------------------------------------------------+
+; LAB Signals Sourced Out                                                          ;
++--------------------------------------------------+-------------------------------+
+; Number of Signals Sourced Out  (Average = 10.48) ; Number of LABs  (Total = 145) ;
++--------------------------------------------------+-------------------------------+
+; 0                                                ; 0                             ;
+; 1                                                ; 13                            ;
+; 2                                                ; 4                             ;
+; 3                                                ; 2                             ;
+; 4                                                ; 6                             ;
+; 5                                                ; 2                             ;
+; 6                                                ; 4                             ;
+; 7                                                ; 3                             ;
+; 8                                                ; 5                             ;
+; 9                                                ; 9                             ;
+; 10                                               ; 7                             ;
+; 11                                               ; 17                            ;
+; 12                                               ; 18                            ;
+; 13                                               ; 11                            ;
+; 14                                               ; 7                             ;
+; 15                                               ; 16                            ;
+; 16                                               ; 19                            ;
+; 17                                               ; 2                             ;
++--------------------------------------------------+-------------------------------+
+
+
++------------------------------------------------------------------------------+
+; LAB Distinct Inputs                                                          ;
++----------------------------------------------+-------------------------------+
+; Number of Distinct Inputs  (Average = 16.46) ; Number of LABs  (Total = 145) ;
++----------------------------------------------+-------------------------------+
+; 0                                            ; 0                             ;
+; 1                                            ; 5                             ;
+; 2                                            ; 8                             ;
+; 3                                            ; 3                             ;
+; 4                                            ; 2                             ;
+; 5                                            ; 5                             ;
+; 6                                            ; 2                             ;
+; 7                                            ; 5                             ;
+; 8                                            ; 3                             ;
+; 9                                            ; 3                             ;
+; 10                                           ; 6                             ;
+; 11                                           ; 4                             ;
+; 12                                           ; 1                             ;
+; 13                                           ; 3                             ;
+; 14                                           ; 1                             ;
+; 15                                           ; 8                             ;
+; 16                                           ; 9                             ;
+; 17                                           ; 6                             ;
+; 18                                           ; 7                             ;
+; 19                                           ; 7                             ;
+; 20                                           ; 3                             ;
+; 21                                           ; 5                             ;
+; 22                                           ; 5                             ;
+; 23                                           ; 8                             ;
+; 24                                           ; 4                             ;
+; 25                                           ; 11                            ;
+; 26                                           ; 3                             ;
+; 27                                           ; 5                             ;
+; 28                                           ; 4                             ;
+; 29                                           ; 2                             ;
+; 30                                           ; 3                             ;
+; 31                                           ; 1                             ;
+; 32                                           ; 1                             ;
+; 33                                           ; 2                             ;
++----------------------------------------------+-------------------------------+
+
+
++--------------------------------------------------------------------+
+; Fitter Device Options                                              ;
++----------------------------------------------+---------------------+
+; Option                                       ; Setting             ;
++----------------------------------------------+---------------------+
+; Enable user-supplied start-up clock (CLKUSR) ; Off                 ;
+; Enable device-wide reset (DEV_CLRn)          ; Off                 ;
+; Enable device-wide output enable (DEV_OE)    ; Off                 ;
+; Enable INIT_DONE output                      ; Off                 ;
+; Configuration scheme                         ; Active Serial       ;
+; Error detection CRC                          ; Off                 ;
+; nCEO                                         ; Unreserved          ;
+; ASDO,nCSO                                    ; As input tri-stated ;
+; Reserve all unused pins                      ; As input tri-stated ;
+; Base pin-out file on sameframe device        ; Off                 ;
++----------------------------------------------+---------------------+
+
+
++------------------------------------+
+; Operating Settings and Conditions  ;
++---------------------------+--------+
+; Setting                   ; Value  ;
++---------------------------+--------+
+; Nominal Core Voltage      ; 1.20 V ;
+; Low Junction Temperature  ; 0 °C   ;
+; High Junction Temperature ; 85 °C  ;
++---------------------------+--------+
+
+
++------------------------------------------------------------+
+; Estimated Delay Added for Hold Timing                      ;
++-----------------+----------------------+-------------------+
+; Source Clock(s) ; Destination Clock(s) ; Delay Added in ns ;
++-----------------+----------------------+-------------------+
+
+
++-----------------+
+; Fitter Messages ;
++-----------------+
+Info: *******************************************************************
+Info: Running Quartus II Fitter
+    Info: Version 9.1 Build 304 01/25/2010 Service Pack 1 SJ Web Edition
+    Info: Processing started: Tue Aug 10 22:49:20 2010
+Info: Command: quartus_fit --read_settings_files=off --write_settings_files=off PennyWSPR -c PennyWSPR
+Info: Selected device EP2C8Q208C8 for design "PennyWSPR"
+Info: Fitter is performing an Auto Fit compilation, which may decrease Fitter effort to reduce compilation time
+Warning: Feature LogicLock is only available with a valid subscription license. Please purchase a software subscription to gain full access to this feature.
+Info: Device migration not selected. If you intend to use device migration later, you may need to change the pin assignments as they may be incompatible with other devices
+    Info: Device EP2C5Q208C8 is compatible
+    Info: Device EP2C5Q208I8 is compatible
+    Info: Device EP2C8Q208I8 is compatible
+Info: Fitter converted 2 user pins into dedicated programming pins
+    Info: Pin ~ASDO~ is reserved at location 1
+    Info: Pin ~nCSO~ is reserved at location 2
+Info: Design uses memory blocks. Violating setup or hold times of memory block address registers for either read or write operations could cause memory contents to be corrupted. Make sure that all memory block address registers meet the setup and hold time requirements.
+Info: Timing-driven compilation is using the Classic Timing Analyzer
+Info: Detected fmax, tsu, tco, and/or tpd requirements -- optimizing circuit to achieve only the specified requirements
+Info: Promoted node C122_clk (placed in PIN 132 (CLK4, LVDSCLK2p, Input))
+    Info: Promoted destinations to use location or clock signal Global Clock CLKCTRL_G6
+Info: Automatically promoted node clk_lrclk_gen:clrgen|BCLK 
+    Info: Automatically promoted destinations to use location or clock signal Global Clock
+    Info: Following destination nodes may be non-global or may not use global or regional clocks
+        Info: Destination node clk_lrclk_gen:clrgen|BCLK~0
+Info: Starting register packing
+Extra Info: Performing register packing on registers with non-logic cell location assignments
+Extra Info: Completed register packing on registers with non-logic cell location assignments
+Extra Info: Started Fast Input/Output/OE register processing
+Extra Info: Finished Fast Input/Output/OE register processing
+Extra Info: Moving registers into I/O cells, Multiplier Blocks, and RAM blocks to improve timing and density
+Extra Info: Finished moving registers into I/O cells, Multiplier Blocks, and RAM blocks
+Info: Finished register packing
+    Extra Info: No registers were packed into other blocks
+Info: Starting physical synthesis optimizations for speed
+Info: Starting physical synthesis algorithm register retiming
+Info: Physical synthesis algorithm register retiming complete: estimated slack improvement of 7 ps
+Info: Starting physical synthesis algorithm combinational resynthesis using boolean division
+Info: Physical synthesis algorithm combinational resynthesis using boolean division complete: estimated slack improvement of 3 ps
+Info: Physical synthesis optimizations for speed complete: elapsed CPU time is 00:00:06
+Warning: Ignored locations or region assignments to the following nodes
+    Warning: Node "A11" is assigned to location or region, but does not exist in design
+    Warning: Node "C12" is assigned to location or region, but does not exist in design
+    Warning: Node "C19" is assigned to location or region, but does not exist in design
+    Warning: Node "C22" is assigned to location or region, but does not exist in design
+    Warning: Node "CC" is assigned to location or region, but does not exist in design
+    Warning: Node "PWM0" is assigned to location or region, but does not exist in design
+    Warning: Node "PWM1" is assigned to location or region, but does not exist in design
+    Warning: Node "PWM2" is assigned to location or region, but does not exist in design
+    Warning: Node "TLV320_CBCLK" is assigned to location or region, but does not exist in design
+    Warning: Node "TLV320_CDIN" is assigned to location or region, but does not exist in design
+    Warning: Node "TLV320_CDOUT" is assigned to location or region, but does not exist in design
+    Warning: Node "TLV320_CLRCIN" is assigned to location or region, but does not exist in design
+    Warning: Node "TLV320_CLRCOUT" is assigned to location or region, but does not exist in design
+    Warning: Node "TLV320_CMCLK" is assigned to location or region, but does not exist in design
+Info: Fitter preparation operations ending: elapsed time is 00:00:07
+Info: Fitter placement preparation operations beginning
+Info: Fitter placement preparation operations ending: elapsed time is 00:00:01
+Info: Fitter placement operations beginning
+Info: Fitter placement was successful
+Info: Fitter placement operations ending: elapsed time is 00:00:05
+Info: Starting physical synthesis optimizations for speed
+Info: Starting physical synthesis algorithm register retiming
+Info: Physical synthesis algorithm register retiming complete: estimated slack improvement of 0 ps
+Info: Starting physical synthesis algorithm combinational resynthesis using boolean division
+Info: Physical synthesis algorithm combinational resynthesis using boolean division complete: estimated slack improvement of 0 ps
+Info: Starting physical synthesis algorithm logic and register replication
+Info: Physical synthesis algorithm logic and register replication complete: estimated slack improvement of 1 ps
+Info: Starting physical synthesis algorithm fanout splitting
+Info: Physical synthesis algorithm fanout splitting complete: estimated slack improvement of 0 ps
+Info: Physical synthesis optimizations for speed complete: elapsed CPU time is 00:00:08
+Info: Estimated most critical path is register to register delay of 6.451 ns
+    Info: 1: + IC(0.000 ns) + CELL(0.000 ns) = 0.000 ns; Loc. = LAB_X12_Y17; Fanout = 3; REG Node = 'c122_two_min_counter[9]'
+    Info: 2: + IC(1.391 ns) + CELL(0.206 ns) = 1.597 ns; Loc. = LAB_X13_Y18; Fanout = 1; COMB Node = 'Equal1~4_RESYN474_BDD475'
+    Info: 3: + IC(1.322 ns) + CELL(0.206 ns) = 3.125 ns; Loc. = LAB_X13_Y17; Fanout = 3; COMB Node = 'Equal1~4'
+    Info: 4: + IC(0.160 ns) + CELL(0.615 ns) = 3.900 ns; Loc. = LAB_X13_Y17; Fanout = 49; COMB Node = 'c122_two_min_counter[17]~36'
+    Info: 5: + IC(0.160 ns) + CELL(0.651 ns) = 4.711 ns; Loc. = LAB_X13_Y17; Fanout = 35; COMB Node = 'c122_current_symbol[6]~10'
+    Info: 6: + IC(1.080 ns) + CELL(0.660 ns) = 6.451 ns; Loc. = LAB_X14_Y18; Fanout = 3; REG Node = 'c122_symbol_counter[0]'
+    Info: Total cell delay = 2.338 ns ( 36.24 % )
+    Info: Total interconnect delay = 4.113 ns ( 63.76 % )
+Info: Fitter routing operations beginning
+Info: Average interconnect usage is 4% of the available device resources
+    Info: Peak interconnect usage is 10% of the available device resources in the region that extends from location X11_Y10 to location X22_Y19
+Info: Fitter routing operations ending: elapsed time is 00:00:01
+Info: The Fitter performed an Auto Fit compilation.  Optimizations were skipped to reduce compilation time.
+    Info: Optimizations that may affect the design's routability were skipped
+    Info: Optimizations that may affect the design's timing were skipped
+Info: Started post-fitting delay annotation
+Info: Delay annotation completed successfully
+Info: Design uses memory blocks. Violating setup or hold times of memory block address registers for either read or write operations could cause memory contents to be corrupted. Make sure that all memory block address registers meet the setup and hold time requirements.
+Warning: Found invalid Fitter assignments. See the Ignored Assignments panel in the Fitter Compilation Report for more information.
+Warning: Following 1 pins have no output enable or a GND or VCC output enable - later changes to this connectivity may change fitting results
+    Info: Pin ext_10MHZ has a permanently disabled output enable
+Info: Quartus II Fitter was successful. 0 errors, 18 warnings
+    Info: Peak virtual memory: 242 megabytes
+    Info: Processing ended: Tue Aug 10 22:49:46 2010
+    Info: Elapsed time: 00:00:26
+    Info: Total CPU time (on all processors): 00:00:28
+
+
