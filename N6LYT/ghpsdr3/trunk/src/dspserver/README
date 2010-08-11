@@ -28,3 +28,35 @@ From the ghpsdr3 bin directory run the command:
 
 ./dspserver --receiver R --server a.b.c.d
 
+command line options:
+
+    --receiver rx
+
+       default 0
+       for HPSDR running multiple receivers this should be 0..3
+       for softrock only 0 is supported.
+
+    --server a.b.c.d
+
+       default 127.0.0.1
+       IP address of hardware server.
+
+    -- soundcard cardname
+
+       default HPSDR
+       SANTA_CRUZ
+       AUDIGY_2_ZS
+       MP3_PLUS
+       EXTIGY
+       DELTA_44
+       FIREBOX
+       EDIROL_FA_66
+       HPSDR
+       UNDEFINED
+
+    -- offset x
+
+       default 0
+       sets the I/Q offset. Needed for some cards such as some SoundBlaster
+       card where the samples are delayed by 1 sample between the 2 channels.
+       (i.e. --offset -1).
