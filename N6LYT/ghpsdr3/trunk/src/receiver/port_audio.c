@@ -15,6 +15,7 @@ static PaStream *stream;
 static int insert=0;
 static float audio_buffer[SAMPLES_PER_BUFFER*CHANNELS*2];
 static sem_t audio_sem;
+static int audio_device=0;
 
 static int write_port_audio_thread_id;
 
@@ -37,7 +38,15 @@ static void write_port_audio_thread(void* arg) {
 
 }
 
+void set_port_audio_device(int device) {
+    audio_device=device;
+}
+
 void open_port_audio() {
+    int devices;
+    int i;
+    PaDeviceInfo* deviceInfo;
+    PaStreamParameters outputParameters;
 
     fprintf(stderr,"open_port_audio\n");
 
@@ -47,13 +56,40 @@ void open_port_audio() {
         exit(1);
     }
 
+    devices=Pa_GetDeviceCount();
+    if(devices<0) {
+        fprintf(stderr,"Px_GetDeviceCount failed: %s\n",Pa_GetErrorText(devices));
+    } else {
+        fprintf(stderr,"default input=%d output=%d devices=%d\n",Pa_GetDefaultInputDevice(),Pa_GetDefaultOutputDevice(),devices);
+        for(i=0;i<devices;i++) {
+            deviceInfo=Pa_GetDeviceInfo(i);
+            fprintf(stderr,"%d - %s\n",i,deviceInfo->name);
+            fprintf(stderr,"maxInputChannels: %d\n",deviceInfo->maxInputChannels);
+            fprintf(stderr,"maxOututChannels: %d\n",deviceInfo->maxOutputChannels);
+        }
+    }
+
+    
+    outputParameters.device=atoi(audio_device);
+    outputParameters.channelCount=2;
+    outputParameters.sampleFormat=paFloat32;
+    outputParameters.suggestedLatency=Pa_GetDeviceInfo(outputParameters.device)->defaultLowOutputLatency;
+    outputParameters.hostApiSpecificStreamInfo=NULL;
+
+    rc=Pa_OpenStream(&stream,NULL,&outputParameters,SAMPLE_RATE,SAMPLES_PER_BUFFER,paNoFlag,NULL,NULL);
+    if(rc!=paNoError) {
+        fprintf(stderr,"Pa_OpenStream failed: %s\n",Pa_GetErrorText(rc));
+        exit(1);
+    }
+
+/*
     rc=Pa_OpenDefaultStream(&stream,0,CHANNELS,paFloat32,SAMPLE_RATE,SAMPLES_PER_BUFFER,
                             NULL, NULL);
     if(rc!=paNoError) {
         fprintf(stderr,"Pa_OpenDefaultStream failed: %s\n",Pa_GetErrorText(rc));
         exit(1);
     }
-
+*/
     sem_init (&audio_sem, 0, 0);
     rc=pthread_create(&write_port_audio_thread_id,NULL,write_port_audio_thread,NULL);
     if(rc!=0) {
