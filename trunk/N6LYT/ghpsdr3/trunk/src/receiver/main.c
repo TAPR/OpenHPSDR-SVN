@@ -599,8 +599,9 @@ struct option longOptions[] = {
     {"audio-device",required_argument, 0, 5},
     {"local-audio",required_argument, 0, 6},
     {"port-audio",required_argument, 0, 7},
-    {"debug-udp",no_argument, 0, 8},
-    {"offset",required_argument, 0, 9},
+    {"port-audio-device",required_argument, 0, 8},
+    {"debug-udp",no_argument, 0, 9},
+    {"offset",required_argument, 0, 10},
 };
 
 char* shortOptions="";
@@ -644,9 +645,12 @@ void processCommands(int argc,char** argv) {
                 ozy_set_port_audio(atoi(optarg));
                 break;
             case 8:
-                ozy_set_debug(1);
+                set_port_audio_device(atoi(optarg));
                 break;
             case 9:
+                ozy_set_debug(1);
+                break;
+            case 10:
                 offset=atoi(optarg);
                 break;
             default:
