@@ -70,7 +70,7 @@ void open_port_audio() {
     }
 
     
-    outputParameters.device=atoi(audio_device);
+    outputParameters.device=audio_device;
     outputParameters.channelCount=2;
     outputParameters.sampleFormat=paFloat32;
     outputParameters.suggestedLatency=Pa_GetDeviceInfo(outputParameters.device)->defaultLowOutputLatency;
