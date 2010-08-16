@@ -31,6 +31,23 @@ Spectrum::Spectrum(QWidget*& widget) {
 Spectrum::~Spectrum() {
 }
 
+void Spectrum::setHigh(int high) {
+    spectrumHigh=high;
+}
+
+void Spectrum::setLow(int low) {
+    spectrumLow=low;
+}
+
+int Spectrum::getHigh() {
+    return spectrumHigh;
+}
+
+int Spectrum::getLow() {
+    return spectrumLow;
+}
+
+
 void Spectrum::initialize() {
     QFrame::setVisible(true);
 }
@@ -96,6 +113,7 @@ void Spectrum::paintEvent(QPaintEvent*) {
         filterLeft = (filterLow - (-sampleRate / 2) + (subRxFrequency-frequency)) * width() / sampleRate;
         filterRight = (filterHigh - (-sampleRate / 2) + (subRxFrequency-frequency)) * width() / sampleRate;
         painter.setBrush(Qt::SolidPattern);
+        painter.setOpacity(0.5);
         painter.fillRect(filterLeft, 0, filterRight - filterLeft, height(), Qt::lightGray);
     }
 
@@ -103,8 +121,11 @@ void Spectrum::paintEvent(QPaintEvent*) {
     filterLeft = (filterLow - (-sampleRate / 2)) * width() / sampleRate;
     filterRight = (filterHigh - (-sampleRate / 2)) * width() / sampleRate;
     painter.setBrush(Qt::SolidPattern);
+    painter.setOpacity(0.5);
     painter.fillRect(filterLeft,0,filterRight-filterLeft,height(),Qt::gray);
 
+    painter.setOpacity(1.0);
+    
     // plot horizontal grid
     int V = spectrumHigh - spectrumLow;
     int numSteps = V / 20;

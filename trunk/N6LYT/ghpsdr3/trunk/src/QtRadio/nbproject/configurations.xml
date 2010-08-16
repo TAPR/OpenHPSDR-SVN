@@ -10,6 +10,9 @@
                    displayName="Resource Files"
                    projectFiles="true"
                    kind="SOURCE_LOGICAL_FOLDER">
+      <itemPath>Configure.cpp</itemPath>
+      <itemPath>Configure.h</itemPath>
+      <itemPath>Configure.ui</itemPath>
       <itemPath>UI.cpp</itemPath>
       <itemPath>UI.h</itemPath>
       <itemPath>UI.ui</itemPath>

@@ -303,6 +303,15 @@
     <addaction name="actionFast"/>
     <addaction name="actionLong"/>
    </widget>
+   <widget class="QMenu" name="menuFile">
+    <property name="title">
+     <string>File</string>
+    </property>
+    <addaction name="actionConfigure"/>
+    <addaction name="separator"/>
+    <addaction name="actionQuit"/>
+   </widget>
+   <addaction name="menuFile"/>
    <addaction name="menuBand"/>
    <addaction name="menuMode"/>
    <addaction name="menuFilter"/>
@@ -607,6 +616,16 @@
    </property>
    <property name="text">
     <string>DIGU</string>
+   </property>
+  </action>
+  <action name="actionConfigure">
+   <property name="text">
+    <string>Configure</string>
+   </property>
+  </action>
+  <action name="actionQuit">
+   <property name="text">
+    <string>Quit</string>
    </property>
   </action>
  </widget>

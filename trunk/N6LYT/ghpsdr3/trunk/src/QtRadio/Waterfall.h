@@ -27,6 +27,10 @@ public:
     void setFilter(int low,int high);
     void updateWaterfall(char* header,char* buffer);
 
+    void setLow(int low);
+    void setHigh(int high);
+    int getLow();
+    int getHigh();
 
 signals:
     void frequencyMoved(int step);

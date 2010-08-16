@@ -34,6 +34,22 @@ void Waterfall::initialize() {
     QFrame::setVisible(true);
 }
 
+int Waterfall::getHigh() {
+    return waterfallHigh;
+}
+
+int Waterfall::getLow() {
+    return waterfallLow;
+}
+
+void Waterfall::setHigh(int high) {
+    waterfallHigh=high;
+}
+
+void Waterfall::setLow(int low) {
+    waterfallLow=low;
+}
+
 void Waterfall::setObjectName(QString name) {
     QFrame::setObjectName(name);
 }

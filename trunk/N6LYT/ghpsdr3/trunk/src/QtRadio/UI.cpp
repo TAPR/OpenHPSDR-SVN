@@ -9,6 +9,7 @@
 #include <QSettings>
 
 #include "UI.h"
+#include "Configure.h"
 #include "Band.h"
 #include "Mode.h"
 #include "FiltersBase.h"
@@ -32,6 +33,8 @@ UI::UI() {
     connect(&connection,SIGNAL(isConnected()),this,SLOT(connected()));
     connect(&connection,SIGNAL(disconnected(QString)),this,SLOT(disconnected(QString)));
     connect(&connection,SIGNAL(header(char*)),this,SLOT(receivedHeader(char*)));
+
+    connect(widget.actionConfigure,SIGNAL(triggered()),this,SLOT(actionConfigure()));
 
     connect(widget.action160, SIGNAL(triggered()),this,SLOT(action160()));
     connect(widget.action80, SIGNAL(triggered()),this,SLOT(action80()));
@@ -104,12 +107,12 @@ UI::~UI() {
 }
 
 void UI::loadSettings() {
-    QSettings settings("G0ORX", "qtRadio");
+    QSettings settings("G0ORX", "QtRadio");
     band.loadSettings(&settings);
 }
 
 void UI::saveSettings() {
-    QSettings settings("G0ORX","qtRadio");
+    QSettings settings("G0ORX","QtRadio");
 
     qDebug() << "closeEvent: " << settings.fileName();
     band.saveSettings(&settings);
@@ -118,6 +121,59 @@ void UI::saveSettings() {
 
 void UI::closeEvent(QCloseEvent* event) {
     saveSettings();
+}
+
+void UI::actionConfigure() {
+    Configure* configure = new Configure();
+
+    QSpinBox* spectrumHighSpinBox=configure->findChild<QSpinBox*>("spectrumHighSpinBox");
+    if(spectrumHighSpinBox==NULL) {
+        qDebug() << "spectrumHighSpinBox id NULL";
+    } else {
+        spectrumHighSpinBox->setValue(widget.spectrumFrame->getHigh());
+        connect(spectrumHighSpinBox,SIGNAL(valueChanged(int)),this,SLOT(spectrumHighChanged(int)));
+    }
+
+    QSpinBox* spectrumLowSpinBox=configure->findChild<QSpinBox*>("spectrumLowSpinBox");
+    if(spectrumLowSpinBox==NULL) {
+        qDebug() << "spectrumLowSpinBox id NULL";
+    } else {
+        spectrumLowSpinBox->setValue(widget.spectrumFrame->getLow());
+        connect(spectrumLowSpinBox,SIGNAL(valueChanged(int)),this,SLOT(spectrumLowChanged(int)));
+    }
+
+    QSpinBox* waterfallHighSpinBox=configure->findChild<QSpinBox*>("waterfallHighSpinBox");
+    if(waterfallHighSpinBox==NULL) {
+        qDebug() << "waterfallHighSpinBox id NULL";
+    } else {
+        waterfallHighSpinBox->setValue(widget.waterfallFrame->getHigh());
+        connect(waterfallHighSpinBox,SIGNAL(valueChanged(int)),this,SLOT(waterfallHighChanged(int)));
+    }
+
+    QSpinBox* waterfallLowSpinBox=configure->findChild<QSpinBox*>("waterfallLowSpinBox");
+    if(waterfallLowSpinBox==NULL) {
+        qDebug() << "waterfallLowSpinBox id NULL";
+    } else {
+        waterfallLowSpinBox->setValue(widget.waterfallFrame->getLow());
+        connect(waterfallLowSpinBox,SIGNAL(valueChanged(int)),this,SLOT(waterfallLowChanged(int)));
+    }
+    configure->show();
+}
+
+void UI::spectrumHighChanged(int high) {
+    widget.spectrumFrame->setHigh(high);
+}
+
+void UI::spectrumLowChanged(int low) {
+    widget.spectrumFrame->setLow(low);
+}
+
+void UI::waterfallHighChanged(int high) {
+    widget.waterfallFrame->setHigh(high);
+}
+
+void UI::waterfallLowChanged(int low) {
+    widget.waterfallFrame->setLow(low);
 }
 
 void UI::audioChanged(int choice) {

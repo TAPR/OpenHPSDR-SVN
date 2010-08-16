@@ -14,6 +14,7 @@
 
 #include "Audio.h"
 #include "Connection.h"
+#include "Spectrum.h"
 #include "Band.h"
 #include "Mode.h"
 #include "Filters.h"
@@ -40,6 +41,8 @@ public:
     void sendCommand(QString command);
 
 public slots:
+    void actionConfigure();
+
     void actionConnect();
     void action160();
     void action80();
@@ -96,6 +99,11 @@ public slots:
     void setSubRxGain(int gain);
 
     void frequencyMoved(int increment);
+
+    void spectrumHighChanged(int high);
+    void spectrumLowChanged(int low);
+    void waterfallHighChanged(int high);
+    void waterfallLowChanged(int low);
 
 private:
     
