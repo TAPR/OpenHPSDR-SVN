@@ -1,0 +1,7 @@
+The beginnings of a more feature rich Qt 4 radio.
+
+Warning - this is an in progress development so may not even compile and not all menus, buttons may be implemented yet.
+
+This works connecting to the dspserver.  There is a new dspserver to support
+the added functions. Alwasy use the latest dspserver with this code.
+
