@@ -1,0 +1,18 @@
+USBFilters 
+Spectrum::Spectrum  640 : 480 
+Spectrum:setGeometry: width= 961  height= 231 
+Waterfall::setGeometry: width= 961  height= 231 
+Waterfall::Waterfall  961 : 231 
+initializ_audio  480 
+init_decodetable 
+"pulse" 
+"front:CARD=Intel,DEV=0" 
+"surround40:CARD=Intel,DEV=0" 
+"surround41:CARD=Intel,DEV=0" 
+"surround50:CARD=Intel,DEV=0" 
+"surround51:CARD=Intel,DEV=0" 
+"surround71:CARD=Intel,DEV=0" 
+"iec958:CARD=Intel,DEV=0" 
+"hdmi:CARD=Intel,DEV=0" 
+bandChanged:  1 , 1 
+modeChanged:  0 , 0 
