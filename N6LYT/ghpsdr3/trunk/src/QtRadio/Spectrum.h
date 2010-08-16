@@ -29,6 +29,10 @@ public:
     void updateSpectrum(char* header,char* buffer);
     int samplerate();
 
+    int getHigh();
+    int getLow();
+    void setHigh(int high);
+    void setLow(int low);
 
 
 signals:

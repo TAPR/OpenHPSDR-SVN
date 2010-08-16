@@ -82,49 +82,99 @@ Band::Band() {
     bandstack[BAND_20][0].setMode(MODE_CWU);
     bandstack[BAND_20][0].setFilter(4);
     bandstack[BAND_20][1].setFrequency(14230000LL);
-    bandstack[BAND_20][0].setMode(MODE_USB);
-    bandstack[BAND_20][0].setFilter(3);
+    bandstack[BAND_20][1].setMode(MODE_USB);
+    bandstack[BAND_20][1].setFilter(3);
     bandstack[BAND_20][2].setFrequency(14336000LL);
-    bandstack[BAND_20][0].setMode(MODE_USB);
-    bandstack[BAND_20][0].setFilter(3);
+    bandstack[BAND_20][2].setMode(MODE_USB);
+    bandstack[BAND_20][2].setFilter(3);
     bandstack[BAND_20][3].setFrequency(0LL);
 
     bandstack[BAND_17][0].setFrequency(18068600LL);
+    bandstack[BAND_17][0].setMode(MODE_CWU);
+    bandstack[BAND_17][0].setFilter(4);
     bandstack[BAND_17][1].setFrequency(18125000LL);
+    bandstack[BAND_17][1].setMode(MODE_USB);
+    bandstack[BAND_17][1].setFilter(3);
     bandstack[BAND_17][2].setFrequency(18140000LL);
+    bandstack[BAND_17][2].setMode(MODE_USB);
+    bandstack[BAND_17][2].setFilter(3);
     bandstack[BAND_17][3].setFrequency(0LL);
 
     bandstack[BAND_15][0].setFrequency(21001000LL);
+    bandstack[BAND_15][0].setMode(MODE_CWU);
+    bandstack[BAND_15][0].setFilter(4);
     bandstack[BAND_15][1].setFrequency(21255000LL);
+    bandstack[BAND_15][1].setMode(MODE_USB);
+    bandstack[BAND_15][1].setFilter(3);
     bandstack[BAND_15][2].setFrequency(21300000LL);
+    bandstack[BAND_15][2].setMode(MODE_USB);
+    bandstack[BAND_15][2].setFilter(3);
     bandstack[BAND_15][3].setFrequency(0LL);
 
     bandstack[BAND_12][0].setFrequency(24895000LL);
+    bandstack[BAND_12][0].setMode(MODE_CWU);
+    bandstack[BAND_12][0].setFilter(4);
     bandstack[BAND_12][1].setFrequency(24900000LL);
+    bandstack[BAND_12][1].setMode(MODE_CWU);
+    bandstack[BAND_12][1].setFilter(4);
     bandstack[BAND_12][2].setFrequency(24910000LL);
+    bandstack[BAND_12][2].setMode(MODE_CWU);
+    bandstack[BAND_12][2].setFilter(4);
     bandstack[BAND_12][3].setFrequency(0LL);
 
     bandstack[BAND_10][0].setFrequency(28010000LL);
+    bandstack[BAND_10][0].setMode(MODE_CWU);
+    bandstack[BAND_10][0].setFilter(4);
     bandstack[BAND_10][1].setFrequency(28300000LL);
+    bandstack[BAND_10][1].setMode(MODE_USB);
+    bandstack[BAND_10][1].setFilter(3);
     bandstack[BAND_10][2].setFrequency(28400000LL);
+    bandstack[BAND_10][2].setMode(MODE_USB);
+    bandstack[BAND_10][2].setFilter(3);
     bandstack[BAND_10][3].setFrequency(0LL);
 
     bandstack[BAND_6][0].setFrequency(50010000LL);
+    bandstack[BAND_6][0].setMode(MODE_CWU);
+    bandstack[BAND_6][0].setFilter(4);
     bandstack[BAND_6][1].setFrequency(50125000LL);
+    bandstack[BAND_6][1].setMode(MODE_USB);
+    bandstack[BAND_6][1].setFilter(3);
     bandstack[BAND_6][2].setFrequency(50200000LL);
+    bandstack[BAND_6][2].setMode(MODE_USB);
+    bandstack[BAND_6][2].setFilter(3);
     bandstack[BAND_6][3].setFrequency(0LL);
 
     bandstack[BAND_GEN][0].setFrequency(909000LL);
+    bandstack[BAND_GEN][0].setMode(MODE_AM);
+    bandstack[BAND_GEN][0].setFilter(3);
     bandstack[BAND_GEN][1].setFrequency(6145000LL);
+    bandstack[BAND_GEN][1].setMode(MODE_AM);
+    bandstack[BAND_GEN][1].setFilter(3);
     bandstack[BAND_GEN][2].setFrequency(11765000LL);
+    bandstack[BAND_GEN][2].setMode(MODE_AM);
+    bandstack[BAND_GEN][2].setFilter(3);
     bandstack[BAND_GEN][3].setFrequency(15400000LL);
+    bandstack[BAND_GEN][3].setMode(MODE_AM);
+    bandstack[BAND_GEN][3].setFilter(3);
     bandstack[BAND_GEN][4].setFrequency(17795000LL);
+    bandstack[BAND_GEN][4].setMode(MODE_AM);
+    bandstack[BAND_GEN][4].setFilter(3);
 
     bandstack[BAND_WWV][0].setFrequency(2500000LL);
+    bandstack[BAND_WWV][0].setMode(MODE_AM);
+    bandstack[BAND_WWV][0].setFilter(3);
     bandstack[BAND_WWV][1].setFrequency(5000000LL);
+    bandstack[BAND_WWV][1].setMode(MODE_AM);
+    bandstack[BAND_WWV][1].setFilter(3);
     bandstack[BAND_WWV][2].setFrequency(10000000LL);
+    bandstack[BAND_WWV][2].setMode(MODE_AM);
+    bandstack[BAND_WWV][2].setFilter(3);
     bandstack[BAND_WWV][3].setFrequency(15000000LL);
+    bandstack[BAND_WWV][3].setMode(MODE_AM);
+    bandstack[BAND_WWV][3].setFilter(3);
     bandstack[BAND_WWV][4].setFrequency(20000000LL);
+    bandstack[BAND_WWV][4].setMode(MODE_AM);
+    bandstack[BAND_WWV][4].setFilter(3);
 }
 
 Band::~Band() {
@@ -146,7 +196,7 @@ void Band::saveSettings(QSettings* settings) {
     settings->setValue("currentBand",currentBand);
     settings->setValue("currentStack",currentStack);
 
-    for(i=0;i<BAND_60/*BAND_LAST*/;i++) {
+    for(i=0;i<BAND_LAST;i++) {
         s.sprintf("%d",i);
         settings->beginGroup(s);
         for(j=0;j<BANDSTACK_ENTRIES;j++) {
@@ -154,6 +204,7 @@ void Band::saveSettings(QSettings* settings) {
             settings->beginGroup(s);
             settings->setValue("frequency",bandstack[i][j].getFrequency());
             settings->setValue("filter",bandstack[currentBand][currentStack].getFilter());
+            settings->setValue("mode",bandstack[currentBand][currentStack].getMode());
 //            settings->setValue("step",bandstack[currentBand][currentStack].getStep());
 //            settings->setValue("spectrumLow",bandstack[currentBand][currentStack].getSpectrumLow());
 //            settings->setValue("spectrumHigh",bandstack[currentBand][currentStack].getSpectrumHigh());
