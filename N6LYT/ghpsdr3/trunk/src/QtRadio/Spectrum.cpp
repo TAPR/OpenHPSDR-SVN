@@ -5,7 +5,6 @@
  * Created on 16 August 2010, 10:03
  */
 
-#include <qt4/QtCore/qnamespace.h>
 
 #include "Spectrum.h"
 
