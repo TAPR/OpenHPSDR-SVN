@@ -212,6 +212,7 @@ fprintf(stderr,"client_thread: listening on port %d\n",port);
                         if(token!=NULL) {
                             mode=atoi(token);
                             SetMode(0,0,mode);
+                            SetMode(0,1,mode);
                         } else {
                             fprintf(stderr,"Invalid command: '%s'\n",message);
                         }
@@ -224,6 +225,7 @@ fprintf(stderr,"client_thread: listening on port %d\n",port);
                             if(token!=NULL) {
                               high=atoi(token);
                               SetRXFilter(0,0,(double)low,(double)high);
+                              SetRXFilter(0,1,(double)low,(double)high);
                             } else {
                                 fprintf(stderr,"Invalid command: '%s'\n",message);
                             }
@@ -236,6 +238,7 @@ fprintf(stderr,"client_thread: listening on port %d\n",port);
                         if(token!=NULL) {
                             agc=atoi(token);
                             SetRXAGC(0,0,agc);
+                            SetRXAGC(0,1,agc);
                         } else {
                             fprintf(stderr,"Invalid command: '%s'\n",message);
                         }
@@ -249,6 +252,7 @@ fprintf(stderr,"client_thread: listening on port %d\n",port);
                                 nr=0;
                             }
                             SetNR(0,0,nr);
+                            SetNR(0,1,nr);
                         } else {
                             fprintf(stderr,"Invalid command: '%s'\n",message);
                         }
@@ -262,6 +266,7 @@ fprintf(stderr,"client_thread: listening on port %d\n",port);
                                 nb=0;
                             }
                             SetNB(0,0,nb);
+                            SetNB(0,1,nb);
                         } else {
                             fprintf(stderr,"Invalid command: '%s'\n",message);
                         }
@@ -275,6 +280,7 @@ fprintf(stderr,"client_thread: listening on port %d\n",port);
                                 anf=0;
                             }
                             SetANF(0,0,anf);
+                            SetANF(0,1,anf);
                         } else {
                             fprintf(stderr,"Invalid command: '%s'\n",message);
                         }
@@ -284,6 +290,15 @@ fprintf(stderr,"client_thread: listening on port %d\n",port);
                         if(token!=NULL) {
                             gain=atoi(token);
                             SetRXOutputGain(0,0,(double)gain/100.0);
+                        } else {
+                            fprintf(stderr,"Invalid command: '%s'\n",message);
+                        }
+                    } else if(strcmp(token,"SetSubRXOutputGain")==0) {
+                        int gain;
+                        token=strtok(NULL," ");
+                        if(token!=NULL) {
+                            gain=atoi(token);
+                            SetRXOutputGain(0,1,(double)gain/100.0);
                         } else {
                             fprintf(stderr,"Invalid command: '%s'\n",message);
                         }
@@ -302,6 +317,24 @@ fprintf(stderr,"client_thread: listening on port %d\n",port);
                     } else if(strcmp(token,"stopAudioStream")==0) {
                         send_audio=0;
 //fprintf(stderr,"stopAudioStream send_audio=%d\n",send_audio);
+                    } else if(strcmp(token,"SetSubRX")==0) {
+                        int state;
+                        token=strtok(NULL," ");
+                        if(token!=NULL) {
+                            state=atoi(token);
+                            SetSubRXSt(0,1,state);
+                        } else {
+                            fprintf(stderr,"Invalid command: '%s'\n",message);
+                        }
+                    } else if(strcmp(token,"SetSubRXFrequency")==0) {
+                        int offset;
+                        token=strtok(NULL," ");
+                        if(token!=NULL) {
+                            offset=atoi(token);
+                            SetRXOsc(0,1,offset);
+                        } else {
+                            fprintf(stderr,"Invalid command: '%s'\n",message);
+                        }
                     } else {
                         fprintf(stderr,"Invalid command: '%s'\n",message);
                     }
