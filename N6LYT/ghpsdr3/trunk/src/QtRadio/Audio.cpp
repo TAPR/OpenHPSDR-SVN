@@ -8,13 +8,15 @@
 #include "Audio.h"
 
 Audio::Audio() {
+    audio_output=NULL;
+    audio_out=NULL;
 }
 
 Audio::~Audio() {
 }
 
 void Audio::initialize_audio(int buffer_size) {
-    qDebug() << "initializ_audio " << buffer_size;
+    qDebug() << "initialize_audio " << buffer_size;
 
     decoded_buffer.resize(buffer_size*2);
 
@@ -48,13 +50,14 @@ void Audio::select_audio(QAudioDeviceInfo info) {
 
     qDebug() << "selected audio " << info.deviceName();
 
-    if(audio_output!=0) {
+    if(audio_output!=NULL) {
         audio_output->stop();
         audio_output->disconnect(this);
+        audio_output=NULL;
+        audio_out=NULL;
     }
 
     audio_device=info;
-    audio_output=0;
     audio_output = new QAudioOutput(audio_device, audio_format, this);
     audio_out = audio_output->start();
 
@@ -63,10 +66,10 @@ void Audio::select_audio(QAudioDeviceInfo info) {
 void Audio::process_audio(char* header,char* buffer) {
     //qDebug() << "process audio";
     aLawDecode(buffer);
-    if(audio_out) {
-        //qDebug() << "write audio data: " <<  audio_out->bytesToWrite();
-        audio_out->write(decoded_buffer.data(),decoded_buffer.length());
-    }
+//    if(audio_out) {
+//        qDebug() << "writing audio data length=: " <<  decoded_buffer.length();
+//        audio_out->write(decoded_buffer.data(),decoded_buffer.length());
+//    }
 }
 
 void Audio::aLawDecode(char* buffer) {

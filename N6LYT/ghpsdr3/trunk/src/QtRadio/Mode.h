@@ -31,6 +31,7 @@ public:
     virtual ~Mode();
     void setMode(int m);
     int getMode();
+    QString getStringMode();
 
 signals:
     void modeChanged(int oldMode, int newMode);

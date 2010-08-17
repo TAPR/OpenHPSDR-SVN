@@ -21,10 +21,13 @@ Spectrum::Spectrum(QWidget*& widget) {
     spectrumLow=-160;
     filterLow=-3450;
     filterHigh=-150;
+    mode="LSB";
 
     subRxFrequency=0LL;
     subRx=FALSE;
 
+    samples=NULL;
+    
     plot.clear();
 }
 
@@ -150,6 +153,10 @@ void Spectrum::paintEvent(QPaintEvent*) {
     painter.setFont(QFont("Arial", 30));
     painter.drawText(width()/2,30,QString::number(frequency));
 
+    // show the mode
+    painter.setFont(QFont("Arial", 12));
+    painter.drawText((width()/2)+200,30,mode);
+
     // show the subrx frequency
     if(subRx) {
         filterLeft = (filterLow - (-sampleRate / 2) + (subRxFrequency-frequency)) * width() / sampleRate;
@@ -187,23 +194,35 @@ void Spectrum::setFilter(int low, int high) {
     filterHigh=high;
 }
 
+void Spectrum::setMode(QString m) {
+    mode=m;
+}
+
 void Spectrum::updateSpectrum(char* header,char* buffer) {
     int i;
 
-    //qDebug() << "updateSpectrum: width=" << width() << " height=" << height();
+    qDebug() << "updateSpectrum: width=" << width() << " height=" << height();
     
     sampleRate = atoi(&header[32]);
+
+    qDebug() << "updateSpectrum: samplerate=" << sampleRate;
+
+    if(samples==NULL) {
+        samples = (float*) malloc(width() * sizeof (float));
+    }
 
     for(i=0;i<width();i++) {
         samples[i] = -(buffer[i] & 0xFF);
     }
 
+    qDebug() << "updateSpectrum: create plot points";
     plot.clear();
     for (i = 0; i < width(); i++) {
 
         plot << QPoint(i, (int) floor(((float) spectrumHigh - samples[i])*(float) height() / (float) (spectrumHigh - spectrumLow)));
     }
 
+    qDebug() << "updateSpectrum: repaint";
     this->repaint();
 }
 
