@@ -128,7 +128,7 @@ void Spectrum::paintEvent(QPaintEvent*) {
     painter.fillRect(filterLeft,0,filterRight-filterLeft,height(),Qt::gray);
 
     painter.setOpacity(1.0);
-    
+
     // plot horizontal grid
     int V = spectrumHigh - spectrumLow;
     int numSteps = V / 20;
@@ -169,7 +169,7 @@ void Spectrum::paintEvent(QPaintEvent*) {
     // plot Spectrum
     painter.setPen(QPen(Qt::yellow, 1));
     if(plot.count()==width()) {
-        painter.drawPolyline(plot.constData(),width());
+        painter.drawPolyline(plot.constData(),plot.count());
     }
 }
 
@@ -198,31 +198,33 @@ void Spectrum::setMode(QString m) {
     mode=m;
 }
 
-void Spectrum::updateSpectrum(char* header,char* buffer) {
+void Spectrum::updateSpectrum(char* header,char* buffer,int width) {
     int i;
 
-    qDebug() << "updateSpectrum: width=" << width() << " height=" << height();
+
+    //qDebug() << "updateSpectrum: width=" << width() << " height=" << height();
     
     sampleRate = atoi(&header[32]);
 
-    qDebug() << "updateSpectrum: samplerate=" << sampleRate;
+    //qDebug() << "updateSpectrum: samplerate=" << sampleRate;
 
-    if(samples==NULL) {
-        samples = (float*) malloc(width() * sizeof (float));
+    if(samples!=NULL) {
+        free(samples);
     }
+    samples = (float*) malloc(width * sizeof (float));
 
-    for(i=0;i<width();i++) {
+    for(i=0;i<width;i++) {
         samples[i] = -(buffer[i] & 0xFF);
     }
 
-    qDebug() << "updateSpectrum: create plot points";
+    //qDebug() << "updateSpectrum: create plot points";
     plot.clear();
-    for (i = 0; i < width(); i++) {
+    for (i = 0; i < width; i++) {
 
         plot << QPoint(i, (int) floor(((float) spectrumHigh - samples[i])*(float) height() / (float) (spectrumHigh - spectrumLow)));
     }
 
-    qDebug() << "updateSpectrum: repaint";
+    //qDebug() << "updateSpectrum: repaint";
     this->repaint();
 }
 

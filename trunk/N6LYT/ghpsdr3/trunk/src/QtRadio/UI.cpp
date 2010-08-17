@@ -261,33 +261,38 @@ void UI::disconnected(QString message) {
 }
 
 void UI::updateSpectrum() {
-    qDebug() << "UI::updateSpectrum width=" << widget.spectrumFrame->width();
+    //qDebug() << "UI::updateSpectrum width=" << widget.spectrumFrame->width();
     command.clear(); QTextStream(&command) << "getSpectrum " << widget.spectrumFrame->width();
     connection.sendCommand(command);
 }
 
 void UI::receivedHeader(char* header) {
-    char spectrumSamples[widget.spectrumFrame->width()];
-    char audioSamples[AUDIO_BUFFER_SIZE];
+    int length;
+    char* samples;
+  
+    length = atoi(&header[26]);
+    samples=(char*)malloc(length);
     
-    //qDebug() << "UI::receivedHeader: " << (int)header[0];
+    //qDebug() << "UI::receivedHeader: " << (int)header[0] << " length=" << length;
 
     switch(header[0]) {
         case 0:
             // spectrum data
-            connection.read(&spectrumSamples[0],widget.spectrumFrame->width());
+            connection.read(samples,length);
             //qDebug() << "read spectrum samples";
-            widget.spectrumFrame->updateSpectrum(header,&spectrumSamples[0]);
-            widget.waterfallFrame->updateWaterfall(header,&spectrumSamples[0]);
+            widget.spectrumFrame->updateSpectrum(header,samples,length);
+            widget.waterfallFrame->updateWaterfall(header,samples,length);
+            
             break;
         case 1:
             // audio data
-            connection.read(&audioSamples[0],AUDIO_BUFFER_SIZE);
+            connection.read(samples,length);
             //qDebug() << "read audio samples";
-            audio.process_audio(header,&audioSamples[0]);
+            audio.process_audio(header,samples,length);
 
             break;
     }
+    free(samples);
 }
 
 void UI::setGain(int g) {

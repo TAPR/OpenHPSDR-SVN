@@ -24,11 +24,11 @@ public:
     virtual ~Audio();
     void initialize_audio(int buffer_size);
     void select_audio(QAudioDeviceInfo info);
-    void process_audio(char* header,char* buffer);
+    void process_audio(char* header,char* buffer,int length);
     void get_audio_devices(QComboBox* comboBox);
 
 private:
-    void aLawDecode(char* buffer);
+    void aLawDecode(char* buffer,int length);
     void init_decodetable();
     QAudioFormat     audio_format;
     QAudioOutput*    audio_output;

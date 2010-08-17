@@ -28,6 +28,8 @@ Waterfall::Waterfall(QWidget*& widget) {
 
     samples=NULL;
 
+    image = QImage(961, 231, QImage::Format_RGB32);
+
 }
 
 Waterfall::~Waterfall() {
@@ -118,34 +120,48 @@ void Waterfall::paintEvent(QPaintEvent*) {
 }
 
 
-void Waterfall::updateWaterfall(char*header,char* buffer) {
+void Waterfall::updateWaterfall(char*header,char* buffer,int size) {
     int x,y;
     int sample;
 
     //qDebug() << "updateWaterfall: " << width() << ":" << height();
-    if(samples==NULL) {
-        samples = (float*) malloc(width() * sizeof (float));
+//    if(samples==NULL) {
+//        samples = (float*) malloc(width() * sizeof (float));
+//
+//        image = QImage(width(), height(), QImage::Format_RGB32);
+//
+//        qDebug() << "Waterfall::Waterfall " << width() << ":" << height();
+//
+//        int x, y;
+//        for (x = 0; x < width(); x++) {
+//            for (y = 0; x < height(); x++) {
+//                image.setPixel(x, y, 0xFF000000);
+//            }
+//        }
+//    }
 
-        image = QImage(width(), height(), QImage::Format_RGB32);
+    if(image.width()!=size) {
 
-        qDebug() << "Waterfall::Waterfall " << width() << ":" << height();
+        // qDebug() << "Waterfall::updateWaterfall " << size << "(" << width() << ")," << height();
+        image = QImage(size, height(), QImage::Format_RGB32);
 
         int x, y;
-        for (x = 0; x < width(); x++) {
+        for (x = 0; x < size; x++) {
             for (y = 0; x < height(); x++) {
                 image.setPixel(x, y, 0xFF000000);
             }
         }
     }
+
     // move the pixel array down
     for(y=height()-1;y>0;y--) {
-        for(x=0;x<width();x++) {
+        for(x=0;x<size;x++) {
             image.setPixel(x,y,image.pixel(x,y-1));
         }
     }
 
     // draw the new line
-    for(x=0;x<width();x++) {
+    for(x=0;x<size;x++) {
         sample=0-(buffer[x]&0xFF);
         image.setPixel(x,0,this->calculatePixel(sample));
     }
