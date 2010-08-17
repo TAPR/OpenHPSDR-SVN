@@ -113,6 +113,7 @@ fprintf(stderr,"client_init audio_buffer_size=%d audio_buffer=%ld\n",audio_buffe
 void* client_thread(void* arg) {
     int rc;
     char *token;
+    int i;
     int bytesRead;
     char message[32];
     int on=1;
@@ -179,11 +180,15 @@ fprintf(stderr,"client_thread: listening on port %d\n",port);
                 }
 
                 message[bytesRead]=0;
-//fprintf(stderr,"client message: %s\n",message);
-
                 token=strtok(message," ");
                     if(token!=NULL) {
-                    if(strcmp(token,"getSpectrum")==0) {
+                    i=0;
+                    while(token[i]!=0) {
+                       token[i]=tolower(token[i]);
+                       i++;
+                    }
+                    
+                    if(strcmp(token,"getspectrum")==0) {
                         int samples;
                         token=strtok(NULL," ");
                         if(token!=NULL) {
@@ -197,7 +202,7 @@ fprintf(stderr,"client_thread: listening on port %d\n",port);
                         } else {
                             fprintf(stderr,"Invalid command: '%s'\n",message);
                         }
-                    } else if(strcmp(token,"setFrequency")==0) {
+                    } else if(strcmp(token,"setfrequency")==0) {
                         long long frequency;
                         token=strtok(NULL," ");
                         if(token!=NULL) {
@@ -206,7 +211,7 @@ fprintf(stderr,"client_thread: listening on port %d\n",port);
                         } else {
                             fprintf(stderr,"Invalid command: '%s'\n",message);
                         }
-                    } else if(strcmp(token,"setMode")==0) {
+                    } else if(strcmp(token,"setmode")==0) {
                         int mode;
                         token=strtok(NULL," ");
                         if(token!=NULL) {
@@ -216,7 +221,7 @@ fprintf(stderr,"client_thread: listening on port %d\n",port);
                         } else {
                             fprintf(stderr,"Invalid command: '%s'\n",message);
                         }
-                    } else if(strcmp(token,"setFilter")==0) {
+                    } else if(strcmp(token,"setfilter")==0) {
                         int low,high;
                         token=strtok(NULL," ");
                         if(token!=NULL) {
@@ -232,7 +237,7 @@ fprintf(stderr,"client_thread: listening on port %d\n",port);
                         } else {
                             fprintf(stderr,"Invalid command: '%s'\n",message);
                         }
-                    } else if(strcmp(token,"setAGC")==0) {
+                    } else if(strcmp(token,"setagc")==0) {
                         int agc;
                         token=strtok(NULL," ");
                         if(token!=NULL) {
@@ -242,7 +247,7 @@ fprintf(stderr,"client_thread: listening on port %d\n",port);
                         } else {
                             fprintf(stderr,"Invalid command: '%s'\n",message);
                         }
-                    } else if(strcmp(token,"setNR")==0) {
+                    } else if(strcmp(token,"setnr")==0) {
                         int nr;
                         token=strtok(NULL," ");
                         if(token!=NULL) {
@@ -256,7 +261,7 @@ fprintf(stderr,"client_thread: listening on port %d\n",port);
                         } else {
                             fprintf(stderr,"Invalid command: '%s'\n",message);
                         }
-                    } else if(strcmp(token,"setNB")==0) {
+                    } else if(strcmp(token,"setnb")==0) {
                         int nb;
                         token=strtok(NULL," ");
                         if(token!=NULL) {
@@ -270,7 +275,7 @@ fprintf(stderr,"client_thread: listening on port %d\n",port);
                         } else {
                             fprintf(stderr,"Invalid command: '%s'\n",message);
                         }
-                    } else if(strcmp(token,"setANF")==0) {
+                    } else if(strcmp(token,"setanf")==0) {
                         int anf;
                         token=strtok(NULL," ");
                         if(token!=NULL) {
@@ -284,7 +289,7 @@ fprintf(stderr,"client_thread: listening on port %d\n",port);
                         } else {
                             fprintf(stderr,"Invalid command: '%s'\n",message);
                         }
-                    } else if(strcmp(token,"SetRXOutputGain")==0) {
+                    } else if(strcmp(token,"setrxoutputgain")==0) {
                         int gain;
                         token=strtok(NULL," ");
                         if(token!=NULL) {
@@ -293,7 +298,7 @@ fprintf(stderr,"client_thread: listening on port %d\n",port);
                         } else {
                             fprintf(stderr,"Invalid command: '%s'\n",message);
                         }
-                    } else if(strcmp(token,"SetSubRXOutputGain")==0) {
+                    } else if(strcmp(token,"setsubrxoutputgain")==0) {
                         int gain;
                         token=strtok(NULL," ");
                         if(token!=NULL) {
@@ -302,7 +307,7 @@ fprintf(stderr,"client_thread: listening on port %d\n",port);
                         } else {
                             fprintf(stderr,"Invalid command: '%s'\n",message);
                         }
-                    } else if(strcmp(token,"startAudioStream")==0) {
+                    } else if(strcmp(token,"startaudiostream")==0) {
                         token=strtok(NULL," ");
                         if(token==NULL) {
                             audio_buffer_size=480;
@@ -313,11 +318,9 @@ fprintf(stderr,"client_thread: listening on port %d\n",port);
                         audio_buffer=malloc(audio_buffer_size+PREFIX);
                         audio_stream_reset();
                         send_audio=1;
-//fprintf(stderr,"startAudioStream %d send_audio=%d\n",audio_buffer_size,send_audio);
-                    } else if(strcmp(token,"stopAudioStream")==0) {
+                    } else if(strcmp(token,"stopaudiostream")==0) {
                         send_audio=0;
-//fprintf(stderr,"stopAudioStream send_audio=%d\n",send_audio);
-                    } else if(strcmp(token,"SetSubRX")==0) {
+                    } else if(strcmp(token,"setsubrx")==0) {
                         int state;
                         token=strtok(NULL," ");
                         if(token!=NULL) {
@@ -326,7 +329,7 @@ fprintf(stderr,"client_thread: listening on port %d\n",port);
                         } else {
                             fprintf(stderr,"Invalid command: '%s'\n",message);
                         }
-                    } else if(strcmp(token,"SetSubRXFrequency")==0) {
+                    } else if(strcmp(token,"setsubrxfrequency")==0) {
                         int offset;
                         token=strtok(NULL," ");
                         if(token!=NULL) {
