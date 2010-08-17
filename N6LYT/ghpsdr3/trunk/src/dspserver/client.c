@@ -406,8 +406,8 @@ void client_set_samples(float* samples,int size) {
     // next 6 bytes contain the filter high
     //sprintf(&client_samples[20],"%d",filterHigh);
 
-    // next 6 bytes contain the mode
-    //sprintf(&client_samples[26],"%s",modeToString());
+    // next 6 bytes contain the size
+    sprintf(&client_samples[26],"%d",size);
 
     // next 8 bytes contain the sample rate
     sprintf(&client_samples[32],"%d",sampleRate);
