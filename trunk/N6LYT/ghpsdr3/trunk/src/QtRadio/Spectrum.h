@@ -34,6 +34,7 @@ public:
     void setHigh(int high);
     void setLow(int low);
 
+    void setSubRxState(bool state);
 
 signals:
     void frequencyMoved(int step);
@@ -62,6 +63,7 @@ private:
     int filterHigh;
     long long frequency;
     long long subRxFrequency;
+    bool subRx;
 
     QVector <QPoint> plot;
 };
