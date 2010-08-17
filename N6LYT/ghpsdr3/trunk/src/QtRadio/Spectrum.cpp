@@ -23,6 +23,7 @@ Spectrum::Spectrum(QWidget*& widget) {
     filterHigh=-150;
 
     subRxFrequency=0LL;
+    subRx=FALSE;
 
     plot.clear();
 }
@@ -108,7 +109,7 @@ void Spectrum::paintEvent(QPaintEvent*) {
     painter.fillRect(0, 0, width(), height(), Qt::black);
 
     // draw sub rx filter
-    if(subRxFrequency!=frequency) {
+    if(subRx) {
         filterLeft = (filterLow - (-sampleRate / 2) + (subRxFrequency-frequency)) * width() / sampleRate;
         filterRight = (filterHigh - (-sampleRate / 2) + (subRxFrequency-frequency)) * width() / sampleRate;
         painter.setBrush(Qt::SolidPattern);
@@ -150,13 +151,14 @@ void Spectrum::paintEvent(QPaintEvent*) {
     painter.drawText(width()/2,30,QString::number(frequency));
 
     // show the subrx frequency
-    if(subRxFrequency!=frequency) {
+    if(subRx) {
         filterLeft = (filterLow - (-sampleRate / 2) + (subRxFrequency-frequency)) * width() / sampleRate;
         filterRight = (filterHigh - (-sampleRate / 2) + (subRxFrequency-frequency)) * width() / sampleRate;
         painter.setPen(QPen(Qt::green,1));
         painter.setFont(QFont("Arial", 12));
         painter.drawText(filterRight,height()-20,QString::number(subRxFrequency));
     }
+
     // plot Spectrum
     painter.setPen(QPen(Qt::yellow, 1));
     if(plot.count()==width()) {
@@ -174,6 +176,10 @@ void Spectrum::setFrequency(long long f) {
 void Spectrum::setSubRxFrequency(long long f) {
     subRxFrequency=f;
     qDebug() << "Spectrum:setSubRxFrequency: " << f;
+}
+
+void Spectrum::setSubRxState(bool state) {
+    subRx=state;
 }
 
 void Spectrum::setFilter(int low, int high) {

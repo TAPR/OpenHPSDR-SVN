@@ -268,14 +268,21 @@ void UI::actionSubRx() {
         // on, so turn off
         subRx=FALSE;
         widget.subRxPushButton->setText("Switch On");
-        widget.spectrumFrame->setSubRxFrequency(0LL);
+        widget.spectrumFrame->setSubRxState(FALSE);
     } else {
         subRx=TRUE;
-        subRxFrequency=band.getFrequency();
+
+        // check frequency in range
+        int samplerate = widget.spectrumFrame->samplerate();
+        long long frequency=band.getFrequency();
+        if ((subRxFrequency < (frequency - (samplerate / 2))) || (subRxFrequency > (frequency + (samplerate / 2)))) {
+            subRxFrequency=band.getFrequency();
+        }
         widget.subRxPushButton->setText("Switch Off");
+        widget.spectrumFrame->setSubRxState(TRUE);
         connection.sendCommand(command.sprintf("SetSubRXOutputGain %d", subRxGain));
         connection.sendCommand(command.sprintf("SetSubRXFrequency 0"));
-    }
+    }        
     connection.sendCommand(command.sprintf("SetSubRX %d",subRx));
 
 }
@@ -782,7 +789,7 @@ void UI::filterChanged(int previousFilter,int newFilter) {
 }
 
 void UI::frequencyChanged(long long frequency) {
-    connection.sendCommand(command.sprintf("SetFrequency %lld",frequency));
+    connection.sendCommand(command.sprintf("setFrequency %lld",frequency));
     widget.spectrumFrame->setFrequency(frequency);
 }
 
