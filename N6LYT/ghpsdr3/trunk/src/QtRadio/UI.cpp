@@ -142,6 +142,14 @@ void UI::actionConfigure() {
         connect(spectrumLowSpinBox,SIGNAL(valueChanged(int)),this,SLOT(spectrumLowChanged(int)));
     }
 
+    QSpinBox* fpsSpinBox=configure->findChild<QSpinBox*>("fpsSpinBox");
+    if(fpsSpinBox==NULL) {
+        qDebug() << "fpsSpinBox id NULL";
+    } else {
+        fpsSpinBox->setValue(fps);
+        connect(fpsSpinBox,SIGNAL(valueChanged(int)),this,SLOT(fpsChanged(int)));
+    }
+
     QSpinBox* waterfallHighSpinBox=configure->findChild<QSpinBox*>("waterfallHighSpinBox");
     if(waterfallHighSpinBox==NULL) {
         qDebug() << "waterfallHighSpinBox id NULL";
@@ -166,6 +174,17 @@ void UI::spectrumHighChanged(int high) {
 
 void UI::spectrumLowChanged(int low) {
     widget.spectrumFrame->setLow(low);
+}
+
+void UI::fpsChanged(int f) {
+    fps=f;
+    if(qTimer!=NULL) {
+        qTimer->stop();
+        qTimer=NULL;
+        qTimer = new QTimer(this);
+        connect(qTimer, SIGNAL(timeout()), this, SLOT(update()));
+        qTimer->start(1000 / fps);
+    }
 }
 
 void UI::waterfallHighChanged(int high) {
@@ -225,6 +244,9 @@ void UI::disconnected(QString message) {
     widget.serverConnectPushButton->setText("Connect");
     widget.serverConnectPushButton->setDisabled(FALSE);
     widget.audioComboBox->setDisabled(FALSE);
+
+    qTimer->stop();
+    qTimer=NULL;
 }
 
 void UI::update() {
