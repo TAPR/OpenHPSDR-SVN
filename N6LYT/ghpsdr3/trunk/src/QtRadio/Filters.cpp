@@ -34,9 +34,13 @@ int Filters:: getFilter() {
 }
 
 int Filters::getLow() {
-    currentFilters->getLow();
+    return currentFilters->getLow();
 }
 
 int Filters::getHigh() {
-    currentFilters->getHigh();
+    return currentFilters->getHigh();
+}
+
+QString Filters::getText() {
+    return currentFilters->getText();
 }

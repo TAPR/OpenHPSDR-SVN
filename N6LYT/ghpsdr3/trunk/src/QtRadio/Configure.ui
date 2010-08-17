@@ -39,12 +39,22 @@
     </rect>
    </property>
    <property name="currentIndex">
-    <number>1</number>
+    <number>0</number>
    </property>
    <widget class="QWidget" name="Audio">
     <attribute name="title">
      <string>Audio</string>
     </attribute>
+    <widget class="QComboBox" name="audioDeviceComboBox">
+     <property name="geometry">
+      <rect>
+       <x>30</x>
+       <y>20</y>
+       <width>171</width>
+       <height>29</height>
+      </rect>
+     </property>
+    </widget>
    </widget>
    <widget class="QWidget" name="Display">
     <attribute name="title">
@@ -246,6 +256,66 @@
      </property>
      <property name="text">
       <string>FPS:</string>
+     </property>
+    </widget>
+   </widget>
+   <widget class="QWidget" name="tab">
+    <attribute name="title">
+     <string>Server</string>
+    </attribute>
+    <widget class="QLabel" name="label_6">
+     <property name="geometry">
+      <rect>
+       <x>40</x>
+       <y>30</y>
+       <width>41</width>
+       <height>17</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Host:</string>
+     </property>
+    </widget>
+    <widget class="QComboBox" name="hostComboBox">
+     <property name="geometry">
+      <rect>
+       <x>90</x>
+       <y>20</y>
+       <width>221</width>
+       <height>29</height>
+      </rect>
+     </property>
+     <property name="editable">
+      <bool>true</bool>
+     </property>
+     <property name="insertPolicy">
+      <enum>QComboBox::InsertAtTop</enum>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_7">
+     <property name="geometry">
+      <rect>
+       <x>40</x>
+       <y>80</y>
+       <width>62</width>
+       <height>17</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Receiver:</string>
+     </property>
+    </widget>
+    <widget class="QSpinBox" name="rxSpinBox">
+     <property name="geometry">
+      <rect>
+       <x>110</x>
+       <y>70</y>
+       <width>50</width>
+       <height>25</height>
+      </rect>
+     </property>
+     <property name="maximum">
+      <number>3</number>
      </property>
     </widget>
    </widget>
