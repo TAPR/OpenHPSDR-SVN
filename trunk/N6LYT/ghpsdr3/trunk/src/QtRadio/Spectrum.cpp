@@ -153,9 +153,10 @@ void Spectrum::paintEvent(QPaintEvent*) {
     painter.setFont(QFont("Arial", 30));
     painter.drawText(width()/2,30,QString::number(frequency));
 
-    // show the mode
+    // show the band and mode and filter
     painter.setFont(QFont("Arial", 12));
-    painter.drawText((width()/2)+200,30,mode);
+    QString text=band+" "+mode+" "+filter;
+    painter.drawText((width()/2)+200,30,text);
 
     // show the subrx frequency
     if(subRx) {
@@ -196,6 +197,14 @@ void Spectrum::setFilter(int low, int high) {
 
 void Spectrum::setMode(QString m) {
     mode=m;
+}
+
+void Spectrum::setBand(QString b) {
+    band=b;
+}
+
+void Spectrum::setFilter(QString f) {
+    filter=f;
 }
 
 void Spectrum::updateSpectrum(char* header,char* buffer,int width) {

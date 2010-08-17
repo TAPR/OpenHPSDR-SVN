@@ -31,7 +31,7 @@ UI::UI() {
     //int left,top,right,bottom;
     //widget.gridLayout->getContentsMargins(&left,&top,&right,&bottom);
     //qDebug() << "gridlayout margins " << left << "," << top << "," << right << "," << bottom;
-    //widget.gridLayout->setContentsMargins(0,0,0,0);
+    widget.gridLayout->setContentsMargins(2,2,2,2);
 
     //qDebug() << "vertical spacing " <<  widget.gridLayout->verticalSpacing();
     widget.gridLayout->setVerticalSpacing(0);
@@ -331,8 +331,9 @@ void UI::actionSubRx() {
         widget.spectrumFrame->setSubRxState(TRUE);
         command.clear(); QTextStream(&command) << "SetSubRXOutputGain " << subRxGain;
         connection.sendCommand(command);
-        command.clear(); QTextStream(&command) << "SetSubRXFrequency " << 0;
+        command.clear(); QTextStream(&command) << "SetSubRXFrequency " << frequency - subRxFrequency;
         connection.sendCommand(command);
+        
     }
     command.clear(); QTextStream(&command) << "SetSubRX " << subRx;
     connection.sendCommand(command);
@@ -489,6 +490,7 @@ void UI::bandChanged(int previousBand,int newBand) {
 
     // get the current mode
     mode.setMode(band.getMode());
+    widget.spectrumFrame->setBand(band.getStringBand());
     
 }
 
@@ -665,6 +667,7 @@ void UI::filtersChanged(FiltersBase* previousFilters,FiltersBase* newFilters) {
         }
     }
 
+    widget.spectrumFrame->setFilter(filters.getText());
     filters.selectFilter(filters.getFilter());
     
 

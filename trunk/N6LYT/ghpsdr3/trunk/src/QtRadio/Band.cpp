@@ -252,13 +252,56 @@ int Band::getBand() {
     return currentBand;
 }
 
+QString Band::getStringBand() {
+    QString b="Gen";
+
+    switch(currentBand) {
+        case BAND_160:
+            b="160 Mtrs";
+            break;
+        case BAND_80:
+            b="80 Mtrs";
+            break;
+        case BAND_60:
+            b="60 Mtrs";
+            break;
+        case BAND_40:
+            b="40 Mtrs";
+            break;
+        case BAND_30:
+            b="30 Mtrs";
+            break;
+        case BAND_20:
+            b="20 Mtrs";
+            break;
+        case BAND_17:
+            b="17 Mtrs";
+            break;
+        case BAND_15:
+            b="15 Mtrs";
+            break;
+        case BAND_12:
+            b="12 Mtrs";
+            break;
+        case BAND_10:
+            b="10 Mtrs";
+            break;
+        case BAND_6:
+            b="6 Mtrs";
+            break;
+        case BAND_GEN:
+            b="Gen";
+            break;
+        case BAND_WWV:
+            b="WWV";
+            break;
+    }
+
+    return b;
+}
+
 long long Band::bandSelected(int b,long long currentFrequency) {
     long long f;
-    int previousBand=currentBand;
-
-    qDebug() << "bandSelected " << b;
-    qDebug() << "currentBand " << currentBand;
-    qDebug() << "currentStack " << currentStack;
 
     // save the current frequency in the current bandstack entry
     bandstack[currentBand][currentStack].setFrequency(currentFrequency);

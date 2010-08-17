@@ -37,6 +37,8 @@ public:
     void setSubRxState(bool state);
 
     void setMode(QString m);
+    void setBand(QString b);
+    void setFilter(QString f);
 
 signals:
     void frequencyMoved(int step);
@@ -55,7 +57,9 @@ private:
     int spectrumHigh;
     int spectrumLow;
 
+    QString band;
     QString mode;
+    QString filter;
 
     int startX;
     int lastX;

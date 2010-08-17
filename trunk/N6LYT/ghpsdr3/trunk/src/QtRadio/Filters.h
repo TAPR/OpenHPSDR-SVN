@@ -26,6 +26,7 @@ public:
     int getFilter();
     int getLow();
     int getHigh();
+    QString getText();
 
 signals:
     void filtersChanged(FiltersBase* previousFilters, FiltersBase* newFilters);

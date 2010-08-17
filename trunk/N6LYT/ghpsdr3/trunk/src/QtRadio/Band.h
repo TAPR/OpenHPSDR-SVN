@@ -44,6 +44,7 @@ public:
     void setFrequency(long long f);
     long long getFrequency();
     int getBand();
+    QString getStringBand();
     int getMode();
     int getFilter();
     int getStep();
