@@ -27,7 +27,15 @@
 
 UI::UI() {
     widget.setupUi(this);
+    
+    //int left,top,right,bottom;
+    //widget.gridLayout->getContentsMargins(&left,&top,&right,&bottom);
+    //qDebug() << "gridlayout margins " << left << "," << top << "," << right << "," << bottom;
+    //widget.gridLayout->setContentsMargins(0,0,0,0);
 
+    //qDebug() << "vertical spacing " <<  widget.gridLayout->verticalSpacing();
+    widget.gridLayout->setVerticalSpacing(0);
+    
     // connect up all the components
     connect(widget.serverConnectPushButton,SIGNAL(clicked()),this,SLOT(actionConnect()));
     connect(&connection,SIGNAL(isConnected()),this,SLOT(connected()));
