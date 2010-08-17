@@ -25,7 +25,7 @@ public:
     void initialize();
     void setFrequency(long long f);
     void setFilter(int low,int high);
-    void updateWaterfall(char* header,char* buffer);
+    void updateWaterfall(char* header,char* buffer,int width);
 
     void setLow(int low);
     void setHigh(int high);

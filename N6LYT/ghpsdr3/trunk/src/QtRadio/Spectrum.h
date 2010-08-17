@@ -26,7 +26,7 @@ public:
     void setFrequency(long long f);
     void setSubRxFrequency(long long f);
     void setFilter(int low,int high);
-    void updateSpectrum(char* header,char* buffer);
+    void updateSpectrum(char* header,char* buffer,int width);
     int samplerate();
 
     int getHigh();

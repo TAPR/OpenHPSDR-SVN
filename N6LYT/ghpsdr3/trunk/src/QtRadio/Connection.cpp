@@ -55,8 +55,8 @@ void Connection::socketError(QAbstractSocket::SocketError socketError) {
             qDebug() << "Socket Error: " << tcpSocket->errorString();
     }
 
-    tcpSocket=NULL;
     emit disconnected(tcpSocket->errorString());
+    tcpSocket=NULL;
 }
 
 void Connection::connected() {
@@ -67,7 +67,7 @@ void Connection::connected() {
 void Connection::sendCommand(QString command) {
     char buffer[32];
 
-    qDebug() << "Connection::sendCommand: " << command;
+    //qDebug() << "Connection::sendCommand: " << command;
     if(tcpSocket!=NULL) {
         sem.acquire(1);
         //qDebug() << "sendCommand:" << command;
