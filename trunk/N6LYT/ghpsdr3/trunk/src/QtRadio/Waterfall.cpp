@@ -25,6 +25,9 @@ Waterfall::Waterfall(QWidget*& widget) {
     colorHighR=255;
     colorHighG=255;
     colorHighB=0;
+
+    samples=NULL;
+
 }
 
 Waterfall::~Waterfall() {
@@ -120,7 +123,20 @@ void Waterfall::updateWaterfall(char*header,char* buffer) {
     int sample;
 
     //qDebug() << "updateWaterfall: " << width() << ":" << height();
-    
+    if(samples==NULL) {
+        samples = (float*) malloc(width() * sizeof (float));
+
+        image = QImage(width(), height(), QImage::Format_RGB32);
+
+        qDebug() << "Waterfall::Waterfall " << width() << ":" << height();
+
+        int x, y;
+        for (x = 0; x < width(); x++) {
+            for (y = 0; x < height(); x++) {
+                image.setPixel(x, y, 0xFF000000);
+            }
+        }
+    }
     // move the pixel array down
     for(y=height()-1;y>0;y--) {
         for(x=0;x<width();x++) {

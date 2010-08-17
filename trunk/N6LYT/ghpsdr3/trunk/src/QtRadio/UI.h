@@ -90,7 +90,7 @@ public slots:
     void filterChanged(int previousFilter,int newFilter);
     void frequencyChanged(long long frequency);
 
-    void update();
+    void updateSpectrum();
 
     void audioChanged(int choice);
     void setGain(int gain);
@@ -139,6 +139,7 @@ private:
     QTimer* qTimer;
 
     QString command;
+
 };
 
 #endif	/* _UI_H */
