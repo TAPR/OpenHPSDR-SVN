@@ -152,10 +152,10 @@ UI::UI() {
                 this, SLOT(hostChanged(int)));
     }
 
-    gain=30;
+    gain=100;
 
     subRx=FALSE;
-    subRxGain=30;
+    subRxGain=100;
 
     cwPitch=600;
 

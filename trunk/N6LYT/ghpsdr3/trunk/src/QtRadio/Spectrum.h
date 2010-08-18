@@ -71,6 +71,9 @@ private:
     int moved;
 
     int sampleRate;
+    int meter;
+    int maxMeter;
+    int meterCount;
 
     int filterLow;
     int filterHigh;
