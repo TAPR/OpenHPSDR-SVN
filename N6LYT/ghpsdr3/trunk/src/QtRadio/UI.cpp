@@ -313,11 +313,16 @@ void UI::disconnected(QString message) {
     //widget.serverConnectPushButton->setDisabled(FALSE);
     //widget.audioComboBox->setDisabled(FALSE);
 
-    widget.spectrumFrame->setHost("");
-    widget.spectrumFrame->setReceiver(0);
+    widget.actionConnectToServer->setDisabled(FALSE);
+    widget.actionDisconnectFromServer->setDisabled(TRUE);
 
-    qTimer->stop();
-    qTimer=NULL;
+    //widget.spectrumFrame->setHost("");
+    //widget.spectrumFrame->setReceiver(0);
+
+    if(qTimer!=NULL) {
+        qTimer->stop();
+        qTimer=NULL;
+    }
 }
 
 void UI::updateSpectrum() {
