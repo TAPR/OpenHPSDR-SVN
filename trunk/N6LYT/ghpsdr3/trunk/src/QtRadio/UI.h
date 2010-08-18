@@ -10,8 +10,11 @@
 
 #include "ui_UI.h"
 
+#include <QDebug>
+#include <QSettings>
 #include <QTimer>
 
+#include "Configure.h"
 #include "Audio.h"
 #include "Connection.h"
 #include "Spectrum.h"
@@ -44,6 +47,7 @@ public slots:
     void actionConfigure();
 
     void actionConnect();
+    void actionDisconnect();
     void action160();
     void action80();
     void action60();
@@ -106,6 +110,12 @@ public slots:
     void waterfallHighChanged(int high);
     void waterfallLowChanged(int low);
 
+    void hostChanged(int choice);
+    void rxChanged(int rx);
+
+signals:
+    void subRxStateChanged(bool state);
+
 private:
     
     Ui::UI widget;
@@ -139,6 +149,8 @@ private:
     QTimer* qTimer;
 
     QString command;
+
+    Configure configure;
 
 };
 

@@ -40,6 +40,9 @@ public:
     void setBand(QString b);
     void setFilter(QString f);
 
+    void setHost(QString h);
+    void setReceiver(int r);
+
 signals:
     void frequencyMoved(int step);
 
@@ -57,6 +60,8 @@ private:
     int spectrumHigh;
     int spectrumLow;
 
+    QString host;
+    int receiver;
     QString band;
     QString mode;
     QString filter;
