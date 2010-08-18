@@ -294,9 +294,10 @@ void UI::connected() {
 
 
     // start the audio
+    audio_buffers=0;
     command.clear(); QTextStream(&command) << "SetRXOutputGain " << gain;
     connection.sendCommand(command);
-    command.clear(); QTextStream(&command) << "startAudioStream " << 480;
+    command.clear(); QTextStream(&command) << "startAudioStream " << 400;
     connection.sendCommand(command);
     //widget.serverConnectPushButton->setText("Disconnect");
     //widget.serverConnectPushButton->setDisabled(FALSE);
@@ -351,10 +352,21 @@ void UI::receivedHeader(char* header) {
             break;
         case 1:
             // audio data
-            connection.read(samples,length);
             //qDebug() << "read audio samples";
-            audio.process_audio(header,samples,length);
 
+            if(audio_buffers==0) {
+                first_audio_buffer=(char*)malloc(length);
+                connection.read(first_audio_buffer,length);
+                audio_buffers++;
+            } else if(audio_buffers==1) {
+                connection.read(samples,length);
+                audio_buffers++;
+                audio.process_audio(header,first_audio_buffer,length);
+                audio.process_audio(header,samples,length);
+            } else {
+                connection.read(samples,length);
+                audio.process_audio(header,samples,length);
+            }
             break;
     }
     free(samples);
@@ -385,6 +397,8 @@ void UI::actionSubRx() {
         }
         widget.spectrumFrame->setSubRxState(TRUE);
         command.clear(); QTextStream(&command) << "SetSubRXOutputGain " << subRxGain;
+        connection.sendCommand(command);
+        command.clear(); QTextStream(&command) << "SetRXOutputGain " << 0;
         connection.sendCommand(command);
         command.clear(); QTextStream(&command) << "SetSubRXFrequency " << frequency - subRxFrequency;
         connection.sendCommand(command);

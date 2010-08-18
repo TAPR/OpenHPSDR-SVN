@@ -124,6 +124,11 @@ void Spectrum::paintEvent(QPaintEvent*) {
     painter.setBrush(gradient);
     painter.drawRect(0, 0, width(), height());
 
+    if(sampleRate==0) {
+        qDebug() << "sampleRate is 0";
+        return;
+    }
+
     // draw sub rx filter
     if(subRx) {
         filterLeft = (filterLow - (-sampleRate / 2) + (subRxFrequency-frequency)) * width() / sampleRate;

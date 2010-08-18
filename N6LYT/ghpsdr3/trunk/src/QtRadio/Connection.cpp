@@ -85,7 +85,17 @@ void Connection::sendCommand(QString command) {
 void Connection::socketData() {
     char buffer[HEADER_SIZE];
 
-    tcpSocket->read(buffer,HEADER_SIZE);
+//    if (tcpSocket->bytesAvailable() < HEADER_SIZE) {
+//        qDebug() << "Connection::read want " << HEADER_SIZE << " available " << tcpSocket->bytesAvailable();
+//        tcpSocket->waitForReadyRead(1000);
+//    } else {
+//        qDebug() << "Connection::read want " << HEADER_SIZE << " available " << tcpSocket->bytesAvailable();
+//    }
+    //tcpSocket->read(buffer,HEADER_SIZE);
+    int bytes=0;
+    while(bytes<HEADER_SIZE) {
+        bytes+=tcpSocket->read(&buffer[bytes],HEADER_SIZE-bytes);
+    }
 
     //qDebug() << "Connection::socketData: " << (int)buffer[0];
 
@@ -93,8 +103,19 @@ void Connection::socketData() {
 }
 
 void Connection::read(char* buffer,int length) {
+
+    //qDebug() << "Connection::read " << length;
     if(tcpSocket!=NULL) {
-        tcpSocket->read(buffer,length);
+//        if(tcpSocket->bytesAvailable()<length) {
+//            qDebug() << "Connection::read want " << length << " available " << tcpSocket->bytesAvailable();
+//            tcpSocket->waitForReadyRead(1000);
+//        } else {
+//            qDebug() << "Connection::read want " << HEADER_SIZE << " available " << tcpSocket->bytesAvailable();
+//        }
+        int bytes=0;
+        while(bytes<length) {
+            bytes+=tcpSocket->read(&buffer[bytes],length-bytes);
+        }
     }
 }
 
