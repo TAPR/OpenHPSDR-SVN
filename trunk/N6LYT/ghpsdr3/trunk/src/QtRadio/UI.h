@@ -121,6 +121,8 @@ private:
     Ui::UI widget;
     Audio audio;
     int audio_device;
+    int audio_buffers;
+    char* first_audio_buffer;
     int gain;
     int subRxGain;
     bool subRx;
