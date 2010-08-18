@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>963</width>
-    <height>680</height>
+    <height>518</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -15,7 +15,7 @@
   </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QGridLayout" name="gridLayout">
-    <item row="0" column="0" colspan="3">
+    <item row="0" column="0" colspan="2">
      <widget class="Spectrum" name="spectrumFrame">
       <property name="frameShape">
        <enum>QFrame::StyledPanel</enum>
@@ -25,7 +25,7 @@
       </property>
      </widget>
     </item>
-    <item row="1" column="0" colspan="3">
+    <item row="1" column="0" colspan="2">
      <widget class="Waterfall" name="waterfallFrame">
       <property name="frameShape">
        <enum>QFrame::StyledPanel</enum>
@@ -33,170 +33,6 @@
       <property name="frameShadow">
        <enum>QFrame::Raised</enum>
       </property>
-     </widget>
-    </item>
-    <item row="2" column="0">
-     <widget class="QGroupBox" name="groupBox">
-      <property name="title">
-       <string>Audio:</string>
-      </property>
-      <widget class="QComboBox" name="audioComboBox">
-       <property name="geometry">
-        <rect>
-         <x>60</x>
-         <y>10</y>
-         <width>161</width>
-         <height>29</height>
-        </rect>
-       </property>
-      </widget>
-      <widget class="QLabel" name="label">
-       <property name="geometry">
-        <rect>
-         <x>0</x>
-         <y>50</y>
-         <width>62</width>
-         <height>17</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string>AF Gain</string>
-       </property>
-      </widget>
-      <widget class="QSlider" name="afGainHorizontalSlider">
-       <property name="geometry">
-        <rect>
-         <x>60</x>
-         <y>50</y>
-         <width>160</width>
-         <height>18</height>
-        </rect>
-       </property>
-       <property name="value">
-        <number>30</number>
-       </property>
-       <property name="orientation">
-        <enum>Qt::Horizontal</enum>
-       </property>
-      </widget>
-     </widget>
-    </item>
-    <item row="2" column="1">
-     <widget class="QGroupBox" name="groupBox_2">
-      <property name="title">
-       <string>Sub RX</string>
-      </property>
-      <widget class="QPushButton" name="subRxPushButton">
-       <property name="geometry">
-        <rect>
-         <x>70</x>
-         <y>10</y>
-         <width>91</width>
-         <height>27</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string>Switch On</string>
-       </property>
-      </widget>
-      <widget class="QLabel" name="label_3">
-       <property name="geometry">
-        <rect>
-         <x>0</x>
-         <y>50</y>
-         <width>62</width>
-         <height>17</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string>AF Gain</string>
-       </property>
-      </widget>
-      <widget class="QSlider" name="subRxAfGainHorizontalSlider">
-       <property name="geometry">
-        <rect>
-         <x>60</x>
-         <y>50</y>
-         <width>160</width>
-         <height>18</height>
-        </rect>
-       </property>
-       <property name="value">
-        <number>30</number>
-       </property>
-       <property name="orientation">
-        <enum>Qt::Horizontal</enum>
-       </property>
-      </widget>
-     </widget>
-    </item>
-    <item row="2" column="2">
-     <widget class="QGroupBox" name="groupBox_3">
-      <property name="title">
-       <string>Server</string>
-      </property>
-      <widget class="QComboBox" name="serverHostComboBox">
-       <property name="geometry">
-        <rect>
-         <x>40</x>
-         <y>50</y>
-         <width>191</width>
-         <height>21</height>
-        </rect>
-       </property>
-       <property name="editable">
-        <bool>true</bool>
-       </property>
-      </widget>
-      <widget class="QLabel" name="label_5">
-       <property name="geometry">
-        <rect>
-         <x>0</x>
-         <y>50</y>
-         <width>62</width>
-         <height>17</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string>Host</string>
-       </property>
-      </widget>
-      <widget class="QLabel" name="label_6">
-       <property name="geometry">
-        <rect>
-         <x>250</x>
-         <y>50</y>
-         <width>62</width>
-         <height>17</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string>Receiver</string>
-       </property>
-      </widget>
-      <widget class="QSpinBox" name="serverRxSpinBox">
-       <property name="geometry">
-        <rect>
-         <x>310</x>
-         <y>50</y>
-         <width>50</width>
-         <height>25</height>
-        </rect>
-       </property>
-      </widget>
-      <widget class="QPushButton" name="serverConnectPushButton">
-       <property name="geometry">
-        <rect>
-         <x>70</x>
-         <y>10</y>
-         <width>91</width>
-         <height>27</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string>Connect</string>
-       </property>
-      </widget>
      </widget>
     </item>
    </layout>
@@ -283,7 +119,17 @@
     <addaction name="separator"/>
     <addaction name="actionQuit"/>
    </widget>
+   <widget class="QMenu" name="menuReceiver">
+    <property name="title">
+     <string>Start</string>
+    </property>
+    <addaction name="actionConnectToServer"/>
+    <addaction name="actionDisconnectFromServer"/>
+    <addaction name="separator"/>
+    <addaction name="actionSubrx"/>
+   </widget>
    <addaction name="menuFile"/>
+   <addaction name="menuReceiver"/>
    <addaction name="menuBand"/>
    <addaction name="menuMode"/>
    <addaction name="menuFilter"/>
@@ -291,17 +137,6 @@
    <addaction name="menuAGC"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
-  <widget class="QToolBar" name="toolBar">
-   <property name="windowTitle">
-    <string>toolBar</string>
-   </property>
-   <attribute name="toolBarArea">
-    <enum>TopToolBarArea</enum>
-   </attribute>
-   <attribute name="toolBarBreak">
-    <bool>false</bool>
-   </attribute>
-  </widget>
   <action name="action160">
    <property name="checkable">
     <bool>true</bool>
@@ -609,6 +444,47 @@
   <action name="actionQuit">
    <property name="text">
     <string>Quit</string>
+   </property>
+  </action>
+  <action name="actionRx">
+   <property name="text">
+    <string>rx 0</string>
+   </property>
+  </action>
+  <action name="actionConnect">
+   <property name="text">
+    <string>Connect</string>
+   </property>
+  </action>
+  <action name="action127_0_0_1">
+   <property name="text">
+    <string>127.0.0.1</string>
+   </property>
+  </action>
+  <action name="actionEdit">
+   <property name="text">
+    <string>Edit</string>
+   </property>
+  </action>
+  <action name="actionConnectToServer">
+   <property name="text">
+    <string>Connect</string>
+   </property>
+  </action>
+  <action name="actionDisconnectFromServer">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="text">
+    <string>Disconnect</string>
+   </property>
+  </action>
+  <action name="actionSubrx">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Subrx</string>
    </property>
   </action>
  </widget>

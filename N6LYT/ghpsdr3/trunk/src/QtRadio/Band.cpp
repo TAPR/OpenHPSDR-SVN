@@ -186,6 +186,7 @@ void Band::loadSettings(QSettings* settings) {
     settings->beginGroup("Band");
     currentBand=settings->value("currentBand").toInt();
     currentStack=settings->value("currentStack").toInt();
+    settings->endGroup();
 }
 
 void Band::saveSettings(QSettings* settings) {
@@ -200,23 +201,25 @@ void Band::saveSettings(QSettings* settings) {
         s.sprintf("%d",i);
         settings->beginGroup(s);
         for(j=0;j<BANDSTACK_ENTRIES;j++) {
-            s.sprintf("%d",j);
-            settings->beginGroup(s);
-            settings->setValue("frequency",bandstack[i][j].getFrequency());
-            settings->setValue("filter",bandstack[currentBand][currentStack].getFilter());
-            settings->setValue("mode",bandstack[currentBand][currentStack].getMode());
-//            settings->setValue("step",bandstack[currentBand][currentStack].getStep());
-//            settings->setValue("spectrumLow",bandstack[currentBand][currentStack].getSpectrumLow());
-//            settings->setValue("spectrumHigh",bandstack[currentBand][currentStack].getSpectrumHigh());
-//            settings->setValue("waterfallHigh",bandstack[currentBand][currentStack].getWaterfallHigh());
-//            settings->setValue("waterfallLow",bandstack[currentBand][currentStack].getWaterfallLow());
-            settings->endGroup();
+            if(bandstack[i][j].getFrequency()!=0LL) {
+                s.sprintf("%d",j);
+                settings->beginGroup(s);
+                settings->setValue("frequency",bandstack[i][j].getFrequency());
+                settings->setValue("filter",bandstack[currentBand][currentStack].getFilter());
+                settings->setValue("mode",bandstack[currentBand][currentStack].getMode());
+    //            settings->setValue("step",bandstack[currentBand][currentStack].getStep());
+    //            settings->setValue("spectrumLow",bandstack[currentBand][currentStack].getSpectrumLow());
+    //            settings->setValue("spectrumHigh",bandstack[currentBand][currentStack].getSpectrumHigh());
+    //            settings->setValue("waterfallHigh",bandstack[currentBand][currentStack].getWaterfallHigh());
+    //            settings->setValue("waterfallLow",bandstack[currentBand][currentStack].getWaterfallLow());
+                settings->endGroup();
+            }
         }
         settings->endGroup();
 
     }
     
-    
+    settings->endGroup();
 }
 
 void Band::initBand(int b) {

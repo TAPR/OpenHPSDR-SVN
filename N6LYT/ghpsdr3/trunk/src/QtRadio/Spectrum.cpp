@@ -28,6 +28,8 @@ Spectrum::Spectrum(QWidget*& widget) {
 
     samples=NULL;
     
+    receiver=0;
+    
     plot.clear();
 }
 
@@ -36,10 +38,12 @@ Spectrum::~Spectrum() {
 
 void Spectrum::setHigh(int high) {
     spectrumHigh=high;
+    repaint();
 }
 
 void Spectrum::setLow(int low) {
     spectrumLow=low;
+    repaint();
 }
 
 int Spectrum::getHigh() {
@@ -109,7 +113,12 @@ void Spectrum::paintEvent(QPaintEvent*) {
     int filterLeft;
     int filterRight;
 
-    painter.fillRect(0, 0, width(), height(), Qt::black);
+
+    QLinearGradient gradient(0, 0, 0,height());
+    gradient.setColorAt(0, Qt::black);
+    gradient.setColorAt(1, Qt::gray);
+    painter.setBrush(gradient);
+    painter.drawRect(0, 0, width(), height());
 
     // draw sub rx filter
     if(subRx) {
@@ -136,11 +145,12 @@ void Spectrum::paintEvent(QPaintEvent*) {
         int num = spectrumHigh - i * 20;
         int y = (int) floor((spectrumHigh - num) * height() / V);
 
-        painter.setPen(QPen(Qt::white, 1));
+        painter.setPen(QPen(Qt::white, 1,Qt::DotLine));
         painter.drawLine(0, y, width(), y);
 
         painter.setPen(QPen(Qt::green, 1));
-        painter.drawText(3,y+2,QString::number(num));
+        painter.setFont(QFont("Arial", 10));
+        painter.drawText(3,y,QString::number(num)+" dBm");
 
     }
 
@@ -157,6 +167,8 @@ void Spectrum::paintEvent(QPaintEvent*) {
     painter.setFont(QFont("Arial", 12));
     QString text=band+" "+mode+" "+filter;
     painter.drawText((width()/2)+200,30,text);
+    text=host+" Rx"+QString::number(receiver);
+    painter.drawText(5,15,text);
 
     // show the subrx frequency
     if(subRx) {
@@ -195,16 +207,29 @@ void Spectrum::setFilter(int low, int high) {
     filterHigh=high;
 }
 
+void Spectrum::setHost(QString h) {
+    host=h;
+    repaint();
+}
+
+void Spectrum::setReceiver(int r) {
+    receiver=r;
+    repaint();
+}
+
 void Spectrum::setMode(QString m) {
     mode=m;
+    repaint();
 }
 
 void Spectrum::setBand(QString b) {
     band=b;
+    repaint();
 }
 
 void Spectrum::setFilter(QString f) {
     filter=f;
+    repaint();
 }
 
 void Spectrum::updateSpectrum(char* header,char* buffer,int width) {

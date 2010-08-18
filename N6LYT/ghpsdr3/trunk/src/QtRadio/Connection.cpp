@@ -19,7 +19,9 @@ Connection::Connection(const Connection& orig) {
 Connection::~Connection() {
 }
 
-void Connection::connect(QString host,int receiver) {
+void Connection::connect(QString h,int r) {
+    host=h;
+    receiver=r;
     tcpSocket=new QTcpSocket(this);
 
     QObject::connect(tcpSocket, SIGNAL(error(QAbstractSocket::SocketError)),
@@ -37,6 +39,7 @@ void Connection::connect(QString host,int receiver) {
 
 void Connection::disconnect() {
 
+    tcpSocket->close();
     tcpSocket=NULL;
 }
 
@@ -93,4 +96,12 @@ void Connection::read(char* buffer,int length) {
     if(tcpSocket!=NULL) {
         tcpSocket->read(buffer,length);
     }
+}
+
+QString Connection::getHost() {
+    return host;
+}
+
+int Connection::getReceiver() {
+    return receiver;
 }

@@ -8,6 +8,8 @@
 #ifndef _CONFIGURE_H
 #define	_CONFIGURE_H
 
+#include <QSettings>
+
 #include "ui_Configure.h"
 
 class Configure : public QDialog {
@@ -15,6 +17,19 @@ class Configure : public QDialog {
 public:
     Configure();
     virtual ~Configure();
+    void loadSettings(QSettings* settings);
+    void saveSettings(QSettings* settings);
+    
+    QString getHost();
+    int getReceiver();
+    
+    int getSpectrumHigh();
+    int getSpectrumLow();
+    int getFps();
+
+    int getWaterfallHigh();
+    int getWaterfallLow();
+    
 private:
     Ui::Configure widget;
 };

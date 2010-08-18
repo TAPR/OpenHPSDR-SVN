@@ -27,6 +27,8 @@ public:
     void disconnect();
     void sendCommand(QString command);
     void read(char* buffer,int length);
+    QString getHost();
+    int getReceiver();
 public slots:
     void connected();
     void socketError(QAbstractSocket::SocketError socketError);
@@ -38,6 +40,9 @@ signals:
 private:
     QTcpSocket* tcpSocket;
     QSemaphore sem;
+
+    QString host;
+    int receiver;
 };
 
 #endif	/* CONNECTION_H */
