@@ -191,8 +191,6 @@ fprintf(stderr,"client_thread: listening on port %d\n",port);
                             Process_Panadapter(0,spectrumBuffer);
                             meter=CalculateRXMeter(0,0,0)+multimeterCalibrationOffset+getFilterSizeCalibrationOffset();
                             subrx_meter=CalculateRXMeter(0,1,0)+multimeterCalibrationOffset+getFilterSizeCalibrationOffset();
-
-fprintf(stderr,"meter=%f subrx_meter=%f\n",meter,subrx_meter);
                             client_samples=malloc(BUFFER_HEADER_SIZE+samples);
                             client_set_samples(spectrumBuffer,samples);
                             client_send_samples(samples);
