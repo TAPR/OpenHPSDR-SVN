@@ -41,6 +41,7 @@
 extern int audio_buffer_size;
 extern unsigned char* audio_buffer;
 extern int send_audio;
+extern int audio_sample_rate;
 
 static int sample_count=0;
 
@@ -74,7 +75,7 @@ void audio_stream_reset() {
 void audio_stream_put_samples(short left_sample,short right_sample) {
 
     // samples are delivered at 48K
-    // output to stream at 8K (1 in 6)
+    // output to stream at 8K (1 in 6) or 48K (1 in 1)
     if(sample_count==0) {
         // use this sample and convert to a-law (mono)
             audio_buffer[audio_stream_buffer_insert+48]=alaw((left_sample+right_sample)/2);
@@ -87,8 +88,12 @@ void audio_stream_put_samples(short left_sample,short right_sample) {
             }
     }
     sample_count++;
-    if(sample_count==6) {
+    if(audio_sample_rate==48000 ) {
         sample_count=0;
+    } else {
+        if(sample_count==6) {
+            sample_count=0;
+        }
     }
 }
 

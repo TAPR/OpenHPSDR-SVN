@@ -39,6 +39,7 @@ void Connection::connect(QString h,int r) {
 
 void Connection::disconnect() {
 
+    qDebug() << "Connection::disconnect";
     tcpSocket->close();
     tcpSocket=NULL;
 }
@@ -114,6 +115,8 @@ void Connection::read(char* buffer,int length) {
 //        }
         int bytes=0;
         while(bytes<length) {
+            if(tcpSocket->bytesAvailable()==0) tcpSocket->waitForReadyRead(1000);
+            //qDebug() << "Connection::read want " << (length-bytes) << " available " << tcpSocket->bytesAvailable();
             bytes+=tcpSocket->read(&buffer[bytes],length-bytes);
         }
     }

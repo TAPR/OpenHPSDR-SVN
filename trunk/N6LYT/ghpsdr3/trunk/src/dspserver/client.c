@@ -66,6 +66,7 @@ static socklen_t addrlen;
 static float spectrumBuffer[SAMPLE_BUFFER_SIZE];
 
 int audio_buffer_size;
+int audio_sample_rate;
 unsigned char* audio_buffer;
 int send_audio=0;
 
@@ -97,6 +98,7 @@ void client_init(int receiver) {
     signal(SIGPIPE, SIG_IGN);
 
     audio_buffer_size=2000;
+    audio_sample_rate=8000;
     audio_buffer=malloc(audio_buffer_size+PREFIX);
 
 fprintf(stderr,"client_init audio_buffer_size=%d audio_buffer=%ld\n",audio_buffer_size,audio_buffer);
@@ -316,6 +318,18 @@ fprintf(stderr,"client_thread: listening on port %d\n",port);
                         }
                         free(audio_buffer);
                         audio_buffer=malloc(audio_buffer_size+PREFIX);
+                        token=strtok(NULL," ");
+                        if(token==NULL) {
+                            audio_sample_rate=8000;
+                        } else {
+                            audio_sample_rate=atoi(token);
+                            if(audio_sample_rate!=8000 &&
+                               audio_sample_rate!=48000) {
+                                fprintf(stderr,"Invalid audio sample rate: %d\n",audio_sample_rate);
+                                audio_sample_rate=8000;
+                            }
+                        }
+                        fprintf(stderr,"starting audio stream at %d\n",audio_sample_rate);
                         audio_stream_reset();
                         send_audio=1;
                     } else if(strcmp(token,"stopaudiostream")==0) {
