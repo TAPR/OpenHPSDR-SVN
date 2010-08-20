@@ -66,6 +66,7 @@ static socklen_t addrlen;
 static float spectrumBuffer[SAMPLE_BUFFER_SIZE];
 
 static float meter;
+static float subrx_meter;
 
 static sem_t network_semaphore;
 
@@ -189,6 +190,7 @@ fprintf(stderr,"client_thread: listening on port %d\n",port);
                             samples=atoi(token);
                             Process_Panadapter(0,spectrumBuffer);
                             meter=CalculateRXMeter(0,0,0)+multimeterCalibrationOffset+getFilterSizeCalibrationOffset();
+                            subrx_meter=CalculateRXMeter(0,1,0)+multimeterCalibrationOffset+getFilterSizeCalibrationOffset();
                             client_samples=malloc(BUFFER_HEADER_SIZE+samples);
                             client_set_samples(spectrumBuffer,samples);
                             client_send_samples(samples);
@@ -439,16 +441,16 @@ void client_set_samples(float* samples,int size) {
     // next 6 bytes contain the filter low
     //sprintf(&client_samples[14],"%d",filterLow);
 
-    // next 6 bytes contain the filter high
-    //sprintf(&client_samples[20],"%d",filterHigh);
+    // next 6 bytes contain the main rx s meter
+    sprintf(&client_samples[20],"%d",meter);
 
-    // next 6 bytes contain the size
-    sprintf(&client_samples[26],"%d",size);
+    // next 6 bytes contain the subrx s meter
+    sprintf(&client_samples[26],"%d",subrx_meter);
 
     // next 8 bytes contain the sample rate
     sprintf(&client_samples[32],"%d",sampleRate);
 
-    // next 8 bytes contain the meter
+    // next 8 bytes contain the meter - c$for compatability
     sprintf(&client_samples[40],"%d",(int)meter);
 
     slope=(float)SAMPLE_BUFFER_SIZE/(float)size;
