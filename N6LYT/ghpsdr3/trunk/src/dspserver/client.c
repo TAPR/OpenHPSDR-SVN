@@ -191,6 +191,8 @@ fprintf(stderr,"client_thread: listening on port %d\n",port);
                             Process_Panadapter(0,spectrumBuffer);
                             meter=CalculateRXMeter(0,0,0)+multimeterCalibrationOffset+getFilterSizeCalibrationOffset();
                             subrx_meter=CalculateRXMeter(0,1,0)+multimeterCalibrationOffset+getFilterSizeCalibrationOffset();
+
+fprintf(stderr,"meter=%f subrx_meter=%f\n",meter,subrx_meter);
                             client_samples=malloc(BUFFER_HEADER_SIZE+samples);
                             client_set_samples(spectrumBuffer,samples);
                             client_send_samples(samples);
@@ -438,19 +440,20 @@ void client_set_samples(float* samples,int size) {
     // first 14 bytes contain the frequency
     //sprintf(client_samples,"% 4lld.%03lld.%03lld",frequencyA/1000000LL,(frequencyA%1000000LL)/1000LL,frequencyA%1000LL);
 
-    // next 6 bytes contain the filter low
-    //sprintf(&client_samples[14],"%d",filterLow);
 
     // next 6 bytes contain the main rx s meter
-    sprintf(&client_samples[20],"%d",meter);
+    sprintf(&client_samples[14],"%d",(int)meter);
 
     // next 6 bytes contain the subrx s meter
-    sprintf(&client_samples[26],"%d",subrx_meter);
+    sprintf(&client_samples[20],"%d",(int)subrx_meter);
+
+    // next 6 bytes contain data length
+    sprintf(&client_samples[26],"%d",size);
 
     // next 8 bytes contain the sample rate
     sprintf(&client_samples[32],"%d",sampleRate);
 
-    // next 8 bytes contain the meter - c$for compatability
+    // next 8 bytes contain the meter - for compatability
     sprintf(&client_samples[40],"%d",(int)meter);
 
     slope=(float)SAMPLE_BUFFER_SIZE/(float)size;

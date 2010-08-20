@@ -34,6 +34,10 @@ Spectrum::Spectrum(QWidget*& widget) {
     maxMeter=-121;
     meterCount=0;
     
+    subrx_meter=-121;
+    subrx_maxMeter=-121;
+    subrx_meterCount=0;
+
     plot.clear();
 }
 
@@ -251,7 +255,7 @@ void Spectrum::paintEvent(QPaintEvent*) {
     painter.setPen(QPen(Qt::white,1));
     painter.drawText(width()-16,20,"+60");
 
-    // now plot the meter
+    // now plot the main s meter
     painter.setPen(QPen(Qt::black,2));
     painter.drawLine(width()-120+(meter+121),0,width()-120+(meter+121),10);
     meterCount++;
@@ -264,6 +268,62 @@ void Spectrum::paintEvent(QPaintEvent*) {
     painter.setPen(QPen(Qt::yellow,2));
     painter.drawLine(width()-120+(maxMeter+121),0,width()-120+(maxMeter+121),10);
 
+    // now plot the subrx s meter
+    if(subRx) {
+
+        // plot the s-meter
+        painter.setBrush(Qt::SolidPattern);
+        painter.fillRect(width()-120,30,54,10,Qt::green);
+        painter.fillRect(width()-66,30,60,10,Qt::red);
+
+        painter.setFont(QFont("Arial", 6));
+        painter.setPen(QPen(Qt::gray,1));
+        painter.drawLine(width()-120,30,width()-120,40); // 0
+        painter.drawLine(width()-114,35,width()-114,40); // 1
+        painter.drawLine(width()-108,35,width()-108,40); // 2
+        painter.drawLine(width()-102,30,width()-102,40); // 3
+        painter.setPen(QPen(Qt::white,1));
+        painter.drawText(width()-104,50,"3");
+        painter.setPen(QPen(Qt::gray,1));
+        painter.drawLine(width()-96,35,width()-96,40); // 4
+        painter.drawLine(width()-90,35,width()-90,40); // 5
+        painter.drawLine(width()-84,30,width()-84,40); // 6
+        painter.setPen(QPen(Qt::white,1));
+        painter.drawText(width()-86,50,"6");
+        painter.setPen(QPen(Qt::gray,1));
+        painter.drawLine(width()-78,35,width()-78,40); // 7
+        painter.drawLine(width()-72,35,width()-72,40); // 8
+        painter.drawLine(width()-66,30,width()-66,40); // 9
+        painter.setPen(QPen(Qt::white,1));
+        painter.drawText(width()-68,50,"9");
+        painter.setPen(QPen(Qt::gray,1));
+        painter.drawLine(width()-56,35,width()-56,40); // +10
+        painter.drawLine(width()-46,30,width()-46,40); // +20
+        painter.setPen(QPen(Qt::white,1));
+        painter.drawText(width()-56,50,"+20");
+        painter.setPen(QPen(Qt::gray,1));
+        painter.drawLine(width()-36,35,width()-36,40); // +30
+        painter.drawLine(width()-26,30,width()-26,40); // +40
+        painter.setPen(QPen(Qt::white,1));
+        painter.drawText(width()-36,50,"+40");
+        painter.setPen(QPen(Qt::gray,1));
+        painter.drawLine(width()-16,35,width()-16,40); // +50
+        painter.drawLine(width()-6,30,width()-6,40); // +60
+        painter.setPen(QPen(Qt::white,1));
+        painter.drawText(width()-16,50,"+60");
+        painter.setPen(QPen(Qt::black,2));
+
+        painter.drawLine(width()-120+(subrx_meter+121),30,width()-120+(subrx_meter+121),40);
+        subrx_meterCount++;
+        if (subrx_meterCount == 10) {
+            subrx_maxMeter = subrx_meter;
+            subrx_meterCount = 0;
+        } else if(subrx_meter > subrx_maxMeter) {
+            subrx_maxMeter = subrx_meter;
+        }
+        painter.setPen(QPen(Qt::yellow,2));
+        painter.drawLine(width()-120+(subrx_maxMeter+121),30,width()-120+(subrx_maxMeter+121),40);
+    }
 
     // plot Spectrum
     painter.setPen(QPen(Qt::yellow, 1));
@@ -321,11 +381,11 @@ void Spectrum::setFilter(QString f) {
 void Spectrum::updateSpectrum(char* header,char* buffer,int width) {
     int i;
 
-
     //qDebug() << "updateSpectrum: width=" << width() << " height=" << height();
-    
+    //meter = atoi(&header[40]);
+    meter = atoi(&header[14]);
+    subrx_meter = atoi(&header[20]);
     sampleRate = atoi(&header[32]);
-    meter = atoi(&header[40]);
 
     //qDebug() << "updateSpectrum: samplerate=" << sampleRate;
 
