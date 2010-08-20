@@ -231,7 +231,8 @@ if(ozy_debug) {
         // process the output
         for(j=0,c=0;j<buffer_size;j+=output_sample_increment) {
             left_rx_sample=(short)(output_buffer[j]*32767.0);
-            audio_stream_put_samples(left_rx_sample,left_rx_sample);
+            right_rx_sample=(short)(output_buffer[j+BUFFER_SIZE]*32767.0);
+            audio_stream_put_samples(left_rx_sample,right_rx_sample);
         }
 
         // send the audio back to the server

@@ -65,11 +65,6 @@ static socklen_t addrlen;
 #define SAMPLE_BUFFER_SIZE 4096
 static float spectrumBuffer[SAMPLE_BUFFER_SIZE];
 
-int audio_buffer_size;
-int audio_sample_rate;
-unsigned char* audio_buffer;
-int send_audio=0;
-
 static float meter;
 
 static sem_t network_semaphore;
@@ -79,7 +74,6 @@ void* client_thread(void* arg);
 void client_send_samples(int size);
 void client_set_samples(float* samples,int size);
 
-#define PREFIX 48
 static unsigned char* client_samples;
 
 
@@ -97,9 +91,7 @@ void client_init(int receiver) {
 
     signal(SIGPIPE, SIG_IGN);
 
-    audio_buffer_size=2000;
-    audio_sample_rate=8000;
-    audio_buffer=malloc(audio_buffer_size+PREFIX);
+    audio_buffer=malloc((audio_buffer_size*audio_channels)+BUFFER_HEADER_SIZE);
 
 fprintf(stderr,"client_init audio_buffer_size=%d audio_buffer=%ld\n",audio_buffer_size,audio_buffer);
 
@@ -197,7 +189,7 @@ fprintf(stderr,"client_thread: listening on port %d\n",port);
                             samples=atoi(token);
                             Process_Panadapter(0,spectrumBuffer);
                             meter=CalculateRXMeter(0,0,0)+multimeterCalibrationOffset+getFilterSizeCalibrationOffset();
-                            client_samples=malloc(PREFIX+samples);
+                            client_samples=malloc(BUFFER_HEADER_SIZE+samples);
                             client_set_samples(spectrumBuffer,samples);
                             client_send_samples(samples);
                             free(client_samples);
@@ -316,8 +308,6 @@ fprintf(stderr,"client_thread: listening on port %d\n",port);
                         } else {
                             audio_buffer_size=atoi(token);
                         }
-                        free(audio_buffer);
-                        audio_buffer=malloc(audio_buffer_size+PREFIX);
                         token=strtok(NULL," ");
                         if(token==NULL) {
                             audio_sample_rate=8000;
@@ -329,7 +319,20 @@ fprintf(stderr,"client_thread: listening on port %d\n",port);
                                 audio_sample_rate=8000;
                             }
                         }
-                        fprintf(stderr,"starting audio stream at %d\n",audio_sample_rate);
+                        token=strtok(NULL," ");
+                        if(token==NULL) {
+                            audio_channels=1;
+                        } else {
+                            audio_channels=atoi(token);
+                            if(audio_channels!=1 &&
+                               audio_channels!=2) {
+                                fprintf(stderr,"Invalid audio channels: %d\n",audio_channels);
+                                audio_channels=1;
+                            }
+                        }
+                        fprintf(stderr,"starting audio stream at %d with %d channels and buffer size %d\n",audio_sample_rate,audio_channels,audio_buffer_size);
+                        free(audio_buffer);
+                        audio_buffer=malloc((audio_buffer_size*audio_channels)+BUFFER_HEADER_SIZE);
                         audio_stream_reset();
                         send_audio=1;
                     } else if(strcmp(token,"stopaudiostream")==0) {
@@ -349,6 +352,24 @@ fprintf(stderr,"client_thread: listening on port %d\n",port);
                         if(token!=NULL) {
                             offset=atoi(token);
                             SetRXOsc(0,1,offset);
+                        } else {
+                            fprintf(stderr,"Invalid command: '%s'\n",message);
+                        }
+                    } else if(strcmp(token,"setpan")==0) {
+                        float pan;
+                        token=strtok(NULL," ");
+                        if(token!=NULL) {
+                            pan=atof(token);
+                            SetRXPan(0,0,pan);
+                        } else {
+                            fprintf(stderr,"Invalid command: '%s'\n",message);
+                        }
+                    } else if(strcmp(token,"setsubrxpan")==0) {
+                        float pan;
+                        token=strtok(NULL," ");
+                        if(token!=NULL) {
+                            pan=atof(token);
+                            SetRXPan(0,1,pan);
                         } else {
                             fprintf(stderr,"Invalid command: '%s'\n",message);
                         }
@@ -376,7 +397,7 @@ void client_send_samples(int size) {
     int rc;
     if(clientSocket!=-1) {
         sem_wait(&network_semaphore);
-            rc=send(clientSocket,client_samples,size+PREFIX,MSG_NOSIGNAL);
+            rc=send(clientSocket,client_samples,size+BUFFER_HEADER_SIZE,MSG_NOSIGNAL);
             if(rc<0) {
                 // perror("client_send_samples failed");
             }
@@ -388,11 +409,12 @@ void client_send_samples(int size) {
 
 void client_send_audio() {
     int rc;
+
         if(clientSocket!=-1) {
             sem_wait(&network_semaphore);
                 if(send_audio && (clientSocket!=-1)) {
-                    rc=send(clientSocket,audio_buffer,audio_buffer_size+PREFIX,MSG_NOSIGNAL);
-                    if(rc!=(audio_buffer_size+PREFIX)) {
+                    rc=send(clientSocket,audio_buffer,(audio_buffer_size*audio_channels)+BUFFER_HEADER_SIZE,MSG_NOSIGNAL);
+                    if(rc!=((audio_buffer_size*audio_channels)+BUFFER_HEADER_SIZE)) {
                         fprintf(stderr,"client_send_audio sent %d bytes",rc);
                     }
                 }
@@ -438,7 +460,7 @@ void client_set_samples(float* samples,int size) {
         for(j=lindex;j<rindex;j++) {
             if(samples[j]>max) max=samples[j];
         }
-        client_samples[i+PREFIX]=(unsigned char)-(max+displayCalibrationOffset+preampOffset);
+        client_samples[i+BUFFER_HEADER_SIZE]=(unsigned char)-(max+displayCalibrationOffset+preampOffset);
     }
 
 }

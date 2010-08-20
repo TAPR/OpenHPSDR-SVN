@@ -171,6 +171,7 @@ int main(int argc,char* argv[]) {
     SetThreadProcessingMode(0,2);
     SetThreadProcessingMode(1,2);
     SetSubRXSt(0,0,1);
+    SetRXOutputGain(0,0,0.20);
 
     reset_for_buflen(0,1024);
     reset_for_buflen(1,1024);
