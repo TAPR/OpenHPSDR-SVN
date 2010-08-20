@@ -116,12 +116,12 @@ void Audio::select_audio(QAudioDeviceInfo info,int rate,int channels) {
 
 void Audio::process_audio(char* header,char* buffer,int length) {
     //qDebug() << "process audio";
-    int bytes;
+    int written=0;
     aLawDecode(buffer,length);
     if(audio_out) {
         //qDebug() << "writing audio data length=: " <<  decoded_buffer.length();
-        if((bytes=audio_out->write(decoded_buffer.data(),decoded_buffer.length()))!=decoded_buffer.length()) {
-            qDebug() << "audio_out tried to write " << decoded_buffer.length() << " bytes but wrote " << bytes << " bytes";
+        while(written<decoded_buffer.length()) {
+            written+=audio_out->write(&decoded_buffer.data()[written],decoded_buffer.length()-written);
         }
 
     }
