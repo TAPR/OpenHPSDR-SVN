@@ -23,7 +23,7 @@ public:
     Audio(const Audio& orig);
     virtual ~Audio();
     void initialize_audio(int buffer_size);
-    void select_audio(QAudioDeviceInfo info,int rate);
+    void select_audio(QAudioDeviceInfo info,int rate,int channels);
     void process_audio(char* header,char* buffer,int length);
     void get_audio_devices(QComboBox* comboBox);
 
@@ -38,6 +38,7 @@ private:
     short decodetable[256];
 
     int sampleRate;
+    int audio_channels;
 
 };
 

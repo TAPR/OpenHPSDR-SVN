@@ -15,6 +15,7 @@ Configure::Configure() {
 
     widget.sampleRateComboBox->addItem("8000");
     widget.sampleRateComboBox->addItem("48000");
+    widget.audioChannelsSpinBox->setValue(1);
     widget.hostComboBox->addItem("192.168.1.82");
     widget.hostComboBox->addItem("127.0.0.1");
     widget.spectrumHighSpinBox->setValue(-40);
@@ -47,6 +48,11 @@ void Configure::loadSettings(QSettings* settings) {
     if(settings->contains("waterfallHigh"))widget.waterfallHighSpinBox->setValue(settings->value("waterfallHigh").toInt());
     if(settings->contains("waterfallLow"))widget.waterfallLowSpinBox->setValue(settings->value("waterfallLow").toInt());
     settings->endGroup();
+    settings->beginGroup("Audio");
+    if(settings->contains("device")) widget.audioDeviceComboBox->setCurrentIndex(settings->value("device").toInt());
+    if(settings->contains("channels"))widget.audioChannelsSpinBox->setValue(settings->value("channels").toInt());
+    if(settings->contains("samplerate")) widget.sampleRateComboBox->setCurrentIndex(settings->value("samplerate").toInt());
+    settings->endGroup();
 }
 
 void Configure::saveSettings(QSettings* settings) {
@@ -64,6 +70,11 @@ void Configure::saveSettings(QSettings* settings) {
     settings->setValue("fps",widget.fpsSpinBox->value());
     settings->setValue("waterfallHigh",widget.waterfallHighSpinBox->value());
     settings->setValue("waterfallLow",widget.waterfallLowSpinBox->value());
+    settings->endGroup();
+    settings->beginGroup("Audio");
+    settings->setValue("device",widget.audioDeviceComboBox->currentIndex());
+    settings->setValue("channels",widget.audioChannelsSpinBox->value());
+    settings->setValue("samplerate",widget.sampleRateComboBox->currentIndex());
     settings->endGroup();
 }
 
