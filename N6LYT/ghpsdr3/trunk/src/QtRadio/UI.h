@@ -98,6 +98,7 @@ public slots:
 
     void audioChanged(int choice);
     void sampleRateChanged(int choice);
+    void audioChannelsChanged(int channels);
     void setGain(int gain);
 
     void actionSubRx();
@@ -123,6 +124,7 @@ private:
     Audio audio;
     int audio_device;
     int audio_sample_rate;
+    int audio_channels;
     int audio_buffers;
     char* first_audio_buffer;
     int gain;

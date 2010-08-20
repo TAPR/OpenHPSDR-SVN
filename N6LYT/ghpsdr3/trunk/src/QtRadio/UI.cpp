@@ -152,6 +152,13 @@ UI::UI() {
                 this, SLOT(sampleRateChanged(int)));
     }
 
+    QSpinBox* audioChannelsSpinBox=configure.findChild<QSpinBox*>("audioChannelsSpinBox");
+    if(audioChannelsSpinBox==NULL) {
+        qDebug() << "audioChannelsSpinBox id NULL";
+    } else {
+        connect(audioChannelsSpinBox,SIGNAL(valueChanged(int)),this,SLOT(audioChannelsChanged(int)));
+    }
+
     QComboBox* hostComboBox=configure.findChild<QComboBox*>("hostComboBox");
     if(hostComboBox==NULL) {
         qDebug() << "hostComboBox id NULL";
@@ -169,6 +176,7 @@ UI::UI() {
 
     audio_device=0;
     audio_sample_rate=8000;
+    audio_channels=1;
 
     // load any saved settings
     loadSettings();
@@ -257,7 +265,7 @@ void UI::audioChanged(int choice) {
         return;
     }
 
-    audio.select_audio(audioDeviceComboBox->itemData(audio_device).value<QAudioDeviceInfo >(),audio_sample_rate);
+    audio.select_audio(audioDeviceComboBox->itemData(audio_device).value<QAudioDeviceInfo >(),audio_sample_rate,audio_channels);
 }
 
 void UI::sampleRateChanged(int choice) {
@@ -275,7 +283,17 @@ void UI::sampleRateChanged(int choice) {
         return;
     }
     audio_sample_rate=sampleRateComboBox->itemText(choice).toInt();
-    audio.select_audio(audioDeviceComboBox->itemData(audio_device).value<QAudioDeviceInfo >(),audio_sample_rate);
+    audio.select_audio(audioDeviceComboBox->itemData(audio_device).value<QAudioDeviceInfo>(),audio_sample_rate,audio_channels);
+}
+
+void UI::audioChannelsChanged(int channels) {
+    QComboBox* audioDeviceComboBox=configure.findChild<QComboBox*>("audioDeviceComboBox");
+    if(audioDeviceComboBox==NULL) {
+        qDebug() << "UI::audioChanged: audioDeviceComboBox is NULL";
+        return;
+    }
+    audio_channels=channels;
+    audio.select_audio(audioDeviceComboBox->itemData(audio_device).value<QAudioDeviceInfo>(),audio_sample_rate,audio_channels);
 }
 
 void UI::actionConnect() {
@@ -345,7 +363,7 @@ void UI::connected() {
     audio_buffers=0;
     command.clear(); QTextStream(&command) << "SetRXOutputGain " << gain;
     connection.sendCommand(command);
-    command.clear(); QTextStream(&command) << "startAudioStream " << (400*(audio_sample_rate/8000)) << " " << audio_sample_rate;
+    command.clear(); QTextStream(&command) << "startAudioStream " << (400*(audio_sample_rate/8000)) << " " << audio_sample_rate << " " << audio_channels;
     connection.sendCommand(command);
     //widget.serverConnectPushButton->setText("Disconnect");
     //widget.serverConnectPushButton->setDisabled(FALSE);
@@ -434,6 +452,17 @@ void UI::actionSubRx() {
         // on, so turn off
         subRx=FALSE;
         widget.spectrumFrame->setSubRxState(FALSE);
+
+        //command.clear(); QTextStream(&command) << "SetSubRXOutputGain " << 0;
+        //connection.sendCommand(command);
+        //command.clear(); QTextStream(&command) << "SetRXOutputGain " << gain;
+        //connection.sendCommand(command);
+
+        command.clear(); QTextStream(&command) << "SetPan 0.5";
+        connection.sendCommand(command);
+        command.clear(); QTextStream(&command) << "SetSubRxPan 0.5";
+        connection.sendCommand(command);
+
     } else {
         subRx=TRUE;
 
@@ -444,9 +473,13 @@ void UI::actionSubRx() {
             subRxFrequency=band.getFrequency();
         }
         widget.spectrumFrame->setSubRxState(TRUE);
-        command.clear(); QTextStream(&command) << "SetSubRXOutputGain " << subRxGain;
+        //command.clear(); QTextStream(&command) << "SetSubRXOutputGain " << subRxGain;
+        //connection.sendCommand(command);
+        //command.clear(); QTextStream(&command) << "SetRXOutputGain " << 0;
+        //connection.sendCommand(command);
+        command.clear(); QTextStream(&command) << "SetPan 0.0"; // left
         connection.sendCommand(command);
-        command.clear(); QTextStream(&command) << "SetRXOutputGain " << 0;
+        command.clear(); QTextStream(&command) << "SetSubRxPan 1.0"; // right
         connection.sendCommand(command);
         command.clear(); QTextStream(&command) << "SetSubRXFrequency " << frequency - subRxFrequency;
         connection.sendCommand(command);

@@ -11,6 +11,7 @@ Audio::Audio() {
     audio_output=NULL;
     audio_out=NULL;
     sampleRate=8000;
+    audio_channels=1;
 }
 
 Audio::~Audio() {
@@ -23,8 +24,8 @@ void Audio::initialize_audio(int buffer_size) {
 
     init_decodetable();
 
-    audio_format.setFrequency(8000);
-    audio_format.setChannels(1);
+    audio_format.setFrequency(sampleRate);
+    audio_format.setChannels(audio_channels);
     audio_format.setSampleSize(16);
     audio_format.setCodec("audio/pcm");
     audio_format.setByteOrder(QAudioFormat::BigEndian);
@@ -51,10 +52,11 @@ void Audio::get_audio_devices(QComboBox* comboBox) {
     audio_out = audio_output->start();
 }
 
-void Audio::select_audio(QAudioDeviceInfo info,int rate) {
+void Audio::select_audio(QAudioDeviceInfo info,int rate,int channels) {
     qDebug() << "selected audio " << info.deviceName() <<  "sampleRate " << rate;
 
     sampleRate=rate;
+    audio_channels=channels;
 
     if(audio_output!=NULL) {
         audio_output->stop();
@@ -67,6 +69,7 @@ void Audio::select_audio(QAudioDeviceInfo info,int rate) {
 
     audio_device=info;
     audio_format.setFrequency(rate);
+    audio_format.setChannels(audio_channels);
     audio_output = new QAudioOutput(audio_device, audio_format, this);
     audio_out = audio_output->start();
 
@@ -86,7 +89,6 @@ void Audio::aLawDecode(char* buffer,int length) {
     short v;
 
     //qDebug() << "aLawDecode " << decoded_buffer.length();
-    //decoded_buffer.resize(length*2);
     decoded_buffer.clear();
 
     for (i=0; i < length; i++) {

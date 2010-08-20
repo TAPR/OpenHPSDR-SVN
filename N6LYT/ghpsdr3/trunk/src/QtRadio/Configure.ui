@@ -32,8 +32,8 @@
   <widget class="QTabWidget" name="tabWidget">
    <property name="geometry">
     <rect>
-     <x>10</x>
-     <y>10</y>
+     <x>0</x>
+     <y>0</y>
      <width>631</width>
      <height>341</height>
     </rect>
@@ -48,7 +48,7 @@
     <widget class="QComboBox" name="audioDeviceComboBox">
      <property name="geometry">
       <rect>
-       <x>30</x>
+       <x>130</x>
        <y>20</y>
        <width>171</width>
        <height>29</height>
@@ -76,6 +76,48 @@
        <width>131</width>
        <height>31</height>
       </rect>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_9">
+     <property name="geometry">
+      <rect>
+       <x>30</x>
+       <y>120</y>
+       <width>71</width>
+       <height>17</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Channels:</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_10">
+     <property name="geometry">
+      <rect>
+       <x>30</x>
+       <y>30</y>
+       <width>62</width>
+       <height>17</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Device:</string>
+     </property>
+    </widget>
+    <widget class="QSpinBox" name="audioChannelsSpinBox">
+     <property name="geometry">
+      <rect>
+       <x>130</x>
+       <y>110</y>
+       <width>55</width>
+       <height>27</height>
+      </rect>
+     </property>
+     <property name="minimum">
+      <number>1</number>
+     </property>
+     <property name="maximum">
+      <number>2</number>
      </property>
     </widget>
    </widget>
