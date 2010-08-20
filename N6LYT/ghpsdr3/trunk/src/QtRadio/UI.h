@@ -32,6 +32,11 @@
 #include "DIGLFilters.h"
 #include "DIGUFilters.h"
 
+#define AGC_LONG 1
+#define AGC_SLOW 2
+#define AGC_MEDIUM 3
+#define AGC_FAST 4
+
 class UI : public QMainWindow {
     Q_OBJECT
 public:
@@ -83,6 +88,15 @@ public slots:
     void actionFilter7();
     void actionFilter8();
     void actionFilter9();
+
+    void actionANF();
+    void actionNR();
+    void actionNB();
+
+    void actionSlow();
+    void actionMedium();
+    void actionFast();
+    void actionLong();
 
     void connected();
     void disconnected(QString message);
@@ -145,6 +159,8 @@ private:
     FMNFilters fmnFilters;
     DIGUFilters diguFilters;
     DIGLFilters diglFilters;
+
+    int agc;
 
     int cwPitch;
 

@@ -43,7 +43,7 @@
      <x>0</x>
      <y>0</y>
      <width>963</width>
-     <height>27</height>
+     <height>23</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuBand">
@@ -378,36 +378,57 @@
    </property>
   </action>
   <action name="actionANF">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
    <property name="text">
     <string>ANF</string>
    </property>
   </action>
   <action name="actionNR">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
    <property name="text">
     <string>NR</string>
    </property>
   </action>
   <action name="actionNB">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
    <property name="text">
     <string>NB</string>
    </property>
   </action>
   <action name="actionSlow">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
    <property name="text">
     <string>Slow</string>
    </property>
   </action>
   <action name="actionMedium">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
    <property name="text">
     <string>Medium</string>
    </property>
   </action>
   <action name="actionFast">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
    <property name="text">
     <string>Fast</string>
    </property>
   </action>
   <action name="actionLong">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
    <property name="text">
     <string>Long</string>
    </property>
