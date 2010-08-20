@@ -74,6 +74,9 @@ private:
     int meter;
     int maxMeter;
     int meterCount;
+    int subrx_meter;
+    int subrx_maxMeter;
+    int subrx_meterCount;
 
     int filterLow;
     int filterHigh;
