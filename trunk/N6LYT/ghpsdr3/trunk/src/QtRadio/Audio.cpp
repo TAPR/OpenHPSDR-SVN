@@ -66,6 +66,18 @@ void Audio::get_audio_devices(QComboBox* comboBox) {
             }
         }
 
+        qDebug() << "    Sample Rates";
+        QList<int> sampleRates=device_info.supportedFrequencies();
+        for(int j=0;j<sampleRates.size();j++) {
+            qDebug() << "        " << sampleRates.at(j);
+        }
+
+        qDebug() << "    Sample Sizes";
+        QList<int> sampleSizes=device_info.supportedSampleSizes();
+        for(int j=0;j<sampleSizes.size();j++) {
+            qDebug() << "        " << sampleSizes.at(j);
+        }
+
         comboBox->addItem(device_info.deviceName(),qVariantFromValue(device_info));
         if(i==0) {
             audio_device=device_info;
