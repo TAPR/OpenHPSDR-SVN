@@ -72,6 +72,25 @@ UI::UI() {
     connect(widget.actionDIGL,SIGNAL(triggered()),this,SLOT(actionDIGL()));
     connect(widget.actionDIGU,SIGNAL(triggered()),this,SLOT(actionDIGU()));
 
+    connect(widget.actionFilter_0,SIGNAL(triggered()),this,SLOT(actionFilter0()));
+    connect(widget.actionFilter_1,SIGNAL(triggered()),this,SLOT(actionFilter1()));
+    connect(widget.actionFilter_2,SIGNAL(triggered()),this,SLOT(actionFilter2()));
+    connect(widget.actionFilter_3,SIGNAL(triggered()),this,SLOT(actionFilter3()));
+    connect(widget.actionFilter_4,SIGNAL(triggered()),this,SLOT(actionFilter4()));
+    connect(widget.actionFilter_5,SIGNAL(triggered()),this,SLOT(actionFilter5()));
+    connect(widget.actionFilter_6,SIGNAL(triggered()),this,SLOT(actionFilter6()));
+    connect(widget.actionFilter_7,SIGNAL(triggered()),this,SLOT(actionFilter7()));
+    connect(widget.actionFilter_8,SIGNAL(triggered()),this,SLOT(actionFilter8()));
+
+    connect(widget.actionANF,SIGNAL(triggered()),this,SLOT(actionANF()));
+    connect(widget.actionNR,SIGNAL(triggered()),this,SLOT(actionNR()));
+    connect(widget.actionNB,SIGNAL(triggered()),this,SLOT(actionNB()));
+
+    connect(widget.actionLong,SIGNAL(triggered()),this,SLOT(actionLong()));
+    connect(widget.actionSlow,SIGNAL(triggered()),this,SLOT(actionSlow()));
+    connect(widget.actionMedium,SIGNAL(triggered()),this,SLOT(actionMedium()));
+    connect(widget.actionFast,SIGNAL(triggered()),this,SLOT(actionFast()));
+
     //connect(widget.afGainHorizontalSlider,SIGNAL(valueChanged(int)),this,SLOT(setGain(int)));
 
     //connect(widget.subRxAfGainHorizontalSlider,SIGNAL(valueChanged(int)),this,SLOT(setSubRxGain(int)));
@@ -167,10 +186,13 @@ UI::UI() {
                 this, SLOT(hostChanged(int)));
     }
 
-    gain=100;
+    gain=30;
 
     subRx=FALSE;
-    subRxGain=100;
+    subRxGain=30;
+
+    agc=AGC_SLOW;
+    widget.actionSlow->setChecked(TRUE);
 
     cwPitch=600;
 
@@ -369,6 +391,16 @@ void UI::connected() {
     //widget.serverConnectPushButton->setDisabled(FALSE);
     //widget.audioComboBox->setDisabled(TRUE);
 
+    command.clear(); QTextStream(&command) << "SetAGC " << agc;
+    connection.sendCommand(command);
+
+    command.clear(); QTextStream(&command) << "SetANF " << (widget.actionANF->isChecked()?"true":"false");
+    connection.sendCommand(command);
+    command.clear(); QTextStream(&command) << "SetNR " << (widget.actionNR->isChecked()?"true":"false");
+    connection.sendCommand(command);
+    command.clear(); QTextStream(&command) << "SetNB " << (widget.actionNB->isChecked()?"true":"false");
+    connection.sendCommand(command);
+
 }
 
 void UI::disconnected(QString message) {
@@ -473,8 +505,8 @@ void UI::actionSubRx() {
             subRxFrequency=band.getFrequency();
         }
         widget.spectrumFrame->setSubRxState(TRUE);
-        //command.clear(); QTextStream(&command) << "SetSubRXOutputGain " << subRxGain;
-        //connection.sendCommand(command);
+        command.clear(); QTextStream(&command) << "SetSubRXOutputGain " << subRxGain;
+        connection.sendCommand(command);
         //command.clear(); QTextStream(&command) << "SetRXOutputGain " << 0;
         //connection.sendCommand(command);
         command.clear(); QTextStream(&command) << "SetPan 0.0"; // left
@@ -1033,4 +1065,109 @@ void UI::frequencyMoved(int increment) {
         command.clear(); QTextStream(&command) << "setFrequency " << band.getFrequency();
         connection.sendCommand(command);
     }
+}
+
+void UI::actionANF() {
+    command.clear(); QTextStream(&command) << "SetANF " << (widget.actionANF->isChecked()?"true":"false");
+    connection.sendCommand(command);
+}
+
+void UI::actionNR() {
+    command.clear(); QTextStream(&command) << "SetNR " << (widget.actionNR->isChecked()?"true":"false");
+    connection.sendCommand(command);
+}
+
+void UI::actionNB() {
+    command.clear(); QTextStream(&command) << "SetNB " << (widget.actionNB->isChecked()?"true":"false");
+    connection.sendCommand(command);
+}
+
+void UI::actionSlow() {
+    // reset the current selection
+    switch(agc) {
+    case AGC_LONG:
+        widget.actionLong->setChecked(FALSE);
+        break;
+    case AGC_SLOW:
+        widget.actionSlow->setChecked(FALSE);
+        break;
+    case AGC_MEDIUM:
+        widget.actionMedium->setChecked(FALSE);
+        break;
+    case AGC_FAST:
+        widget.actionFast->setChecked(FALSE);
+        break;
+    }
+    agc=AGC_SLOW;
+
+    command.clear(); QTextStream(&command) << "SetAGC " << agc;
+    connection.sendCommand(command);
+
+}
+
+void UI::actionMedium() {
+
+    // reset the current selection
+    switch(agc) {
+    case AGC_LONG:
+        widget.actionLong->setChecked(FALSE);
+        break;
+    case AGC_SLOW:
+        widget.actionSlow->setChecked(FALSE);
+        break;
+    case AGC_MEDIUM:
+        widget.actionMedium->setChecked(FALSE);
+        break;
+    case AGC_FAST:
+        widget.actionFast->setChecked(FALSE);
+        break;
+    }
+    agc=AGC_MEDIUM;
+
+    command.clear(); QTextStream(&command) << "SetAGC " << agc;
+    connection.sendCommand(command);
+
+}
+
+void UI::actionFast() {
+    // reset the current selection
+    switch(agc) {
+    case AGC_LONG:
+        widget.actionLong->setChecked(FALSE);
+        break;
+    case AGC_SLOW:
+        widget.actionSlow->setChecked(FALSE);
+        break;
+    case AGC_MEDIUM:
+        widget.actionMedium->setChecked(FALSE);
+        break;
+    case AGC_FAST:
+        widget.actionFast->setChecked(FALSE);
+        break;
+    }
+    agc=AGC_FAST;
+
+    command.clear(); QTextStream(&command) << "SetAGC " << agc;
+    connection.sendCommand(command);
+}
+
+void UI::actionLong() {
+    // reset the current selection
+    switch(agc) {
+    case AGC_LONG:
+        widget.actionLong->setChecked(FALSE);
+        break;
+    case AGC_SLOW:
+        widget.actionSlow->setChecked(FALSE);
+        break;
+    case AGC_MEDIUM:
+        widget.actionMedium->setChecked(FALSE);
+        break;
+    case AGC_FAST:
+        widget.actionFast->setChecked(FALSE);
+        break;
+    }
+    agc=AGC_LONG;
+    command.clear(); QTextStream(&command) << "SetAGC " << agc;
+    connection.sendCommand(command);
 }
