@@ -39,6 +39,33 @@ void Audio::get_audio_devices(QComboBox* comboBox) {
     int i=0;
     foreach(const QAudioDeviceInfo &device_info, QAudioDeviceInfo::availableDevices(QAudio::AudioOutput)) {
         qDebug() << "Audio::get_audio_devices: " << device_info.deviceName();
+
+        qDebug() << "    Codecs:";
+        QStringList codecs=device_info.supportedCodecs();
+        for(int j=0;j<codecs.size();j++) {
+            qDebug() << "        " << codecs.at(j).toLocal8Bit().constData();
+        }
+
+        qDebug() << "    Byte Orders";
+        QList<QAudioFormat::Endian> byteOrders=device_info.supportedByteOrders();
+        for(int j=0;j<byteOrders.size();j++) {
+            qDebug() << "        " << (byteOrders.at(j)==QAudioFormat::BigEndian?"BigEndian":"LittleEndian");
+        }
+
+        qDebug() << "    Sample Type";
+        QList<QAudioFormat::SampleType> sampleTypes=device_info.supportedSampleTypes();
+        for(int j=0;j<sampleTypes.size();j++) {
+            if(sampleTypes.at(j)==QAudioFormat::Unknown) {
+                qDebug() << "        Unknown";
+            } else if(sampleTypes.at(j)==QAudioFormat::SignedInt) {
+                qDebug() << "        SignedInt";
+            } else if(sampleTypes.at(j)==QAudioFormat::UnSignedInt) {
+                qDebug() << "        UnSignedInt";
+            } else if(sampleTypes.at(j)==QAudioFormat::Float) {
+                qDebug() << "        Float";
+            }
+        }
+
         comboBox->addItem(device_info.deviceName(),qVariantFromValue(device_info));
         if(i==0) {
             audio_device=device_info;
