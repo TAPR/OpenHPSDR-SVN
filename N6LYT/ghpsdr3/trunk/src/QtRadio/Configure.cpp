@@ -13,6 +13,8 @@
 Configure::Configure() {
     widget.setupUi(this);
 
+    widget.sampleRateComboBox->addItem("8000");
+    widget.sampleRateComboBox->addItem("48000");
     widget.hostComboBox->addItem("192.168.1.82");
     widget.hostComboBox->addItem("127.0.0.1");
     widget.spectrumHighSpinBox->setValue(-40);

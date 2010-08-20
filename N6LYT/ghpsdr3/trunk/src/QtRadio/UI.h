@@ -97,6 +97,7 @@ public slots:
     void updateSpectrum();
 
     void audioChanged(int choice);
+    void sampleRateChanged(int choice);
     void setGain(int gain);
 
     void actionSubRx();
@@ -121,6 +122,7 @@ private:
     Ui::UI widget;
     Audio audio;
     int audio_device;
+    int audio_sample_rate;
     int audio_buffers;
     char* first_audio_buffer;
     int gain;

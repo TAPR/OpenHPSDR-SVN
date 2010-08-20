@@ -10,6 +10,7 @@
 Audio::Audio() {
     audio_output=NULL;
     audio_out=NULL;
+    sampleRate=8000;
 }
 
 Audio::~Audio() {
@@ -50,9 +51,10 @@ void Audio::get_audio_devices(QComboBox* comboBox) {
     audio_out = audio_output->start();
 }
 
-void Audio::select_audio(QAudioDeviceInfo info) {
+void Audio::select_audio(QAudioDeviceInfo info,int rate) {
+    qDebug() << "selected audio " << info.deviceName() <<  "sampleRate " << rate;
 
-    qDebug() << "selected audio " << info.deviceName();
+    sampleRate=rate;
 
     if(audio_output!=NULL) {
         audio_output->stop();
@@ -61,7 +63,10 @@ void Audio::select_audio(QAudioDeviceInfo info) {
         audio_out=NULL;
     }
 
+
+
     audio_device=info;
+    audio_format.setFrequency(rate);
     audio_output = new QAudioOutput(audio_device, audio_format, this);
     audio_out = audio_output->start();
 

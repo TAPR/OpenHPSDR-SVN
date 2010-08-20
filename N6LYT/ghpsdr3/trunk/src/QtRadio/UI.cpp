@@ -144,7 +144,15 @@ UI::UI() {
                 this, SLOT(audioChanged(int)));
     }
 
-    QComboBox* hostComboBox=configure.findChild<QComboBox*>("jostComboBox");
+    QComboBox* sampleRateComboBox=configure.findChild<QComboBox*>("sampleRateComboBox");
+    if(sampleRateComboBox==NULL) {
+        qDebug() << "sampleRateComboBox id NULL";
+    } else {
+        connect(sampleRateComboBox, SIGNAL(currentIndexChanged(int)),
+                this, SLOT(sampleRateChanged(int)));
+    }
+
+    QComboBox* hostComboBox=configure.findChild<QComboBox*>("hostComboBox");
     if(hostComboBox==NULL) {
         qDebug() << "hostComboBox id NULL";
     } else {
@@ -158,6 +166,9 @@ UI::UI() {
     subRxGain=100;
 
     cwPitch=600;
+
+    audio_device=0;
+    audio_sample_rate=8000;
 
     // load any saved settings
     loadSettings();
@@ -235,7 +246,36 @@ void UI::waterfallLowChanged(int low) {
 void UI::audioChanged(int choice) {
     qDebug() << "audioChanged " << choice;
     audio_device=choice;
-    //audio.select_audio(widget.audioComboBox->itemData(choice).value<QAudioDeviceInfo > ());
+    QComboBox* audioDeviceComboBox=configure.findChild<QComboBox*>("audioDeviceComboBox");
+    if(audioDeviceComboBox==NULL) {
+        qDebug() << "UI::audioChanged: audioDeviceComboBox is NULL";
+        return;
+    }
+    QComboBox* sampleRateComboBox=configure.findChild<QComboBox*>("sampleRateComboBox");
+    if(sampleRateComboBox==NULL) {
+        qDebug() << "UI::audioChanged: sampleRateComboBox is NULL";
+        return;
+    }
+
+    audio.select_audio(audioDeviceComboBox->itemData(audio_device).value<QAudioDeviceInfo >(),audio_sample_rate);
+}
+
+void UI::sampleRateChanged(int choice) {
+    qDebug() << "sampleRateChanged " << choice;
+
+
+    QComboBox* audioDeviceComboBox=configure.findChild<QComboBox*>("audioDeviceComboBox");
+    if(audioDeviceComboBox==NULL) {
+        qDebug() << "UI::audioChanged: audioDeviceComboBox is NULL";
+        return;
+    }
+    QComboBox* sampleRateComboBox=configure.findChild<QComboBox*>("sampleRateComboBox");
+    if(sampleRateComboBox==NULL) {
+        qDebug() << "UI::audioChanged: sampleRateComboBox is NULL";
+        return;
+    }
+    audio_sample_rate=sampleRateComboBox->itemText(choice).toInt();
+    audio.select_audio(audioDeviceComboBox->itemData(audio_device).value<QAudioDeviceInfo >(),audio_sample_rate);
 }
 
 void UI::actionConnect() {
@@ -261,10 +301,18 @@ void UI::actionConnect() {
 }
 
 void UI::actionDisconnect() {
-    qDebug() << "UI::actionDonnect";
+    qDebug() << "UI::actionDisconnect";
+
+    if(qTimer!=NULL) {
+        qTimer->stop();
+        qTimer=NULL;
+    }
+
     connection.disconnect();
     widget.actionConnectToServer->setDisabled(FALSE);
     widget.actionDisconnectFromServer->setDisabled(TRUE);
+
+
 }
 
 void UI::connected() {
@@ -282,7 +330,7 @@ void UI::connected() {
     widget.spectrumFrame->setFilter(filters.getLow(),filters.getHigh());
 
     // select the audio
-    //audio.select_audio(widget.audioComboBox->itemData(audio_device).value<QAudioDeviceInfo > ());
+    //audio.select_audio(widget.audioComboBox->itemData(audio_device).value<QAudioDeviceInfo >);
 
     
 
@@ -297,7 +345,7 @@ void UI::connected() {
     audio_buffers=0;
     command.clear(); QTextStream(&command) << "SetRXOutputGain " << gain;
     connection.sendCommand(command);
-    command.clear(); QTextStream(&command) << "startAudioStream " << 400;
+    command.clear(); QTextStream(&command) << "startAudioStream " << (400*(audio_sample_rate/8000)) << " " << audio_sample_rate;
     connection.sendCommand(command);
     //widget.serverConnectPushButton->setText("Disconnect");
     //widget.serverConnectPushButton->setDisabled(FALSE);
