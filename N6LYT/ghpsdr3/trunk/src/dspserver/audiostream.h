@@ -31,6 +31,13 @@
 * @return
 */
 
+int audio_buffer_size;
+int audio_sample_rate;
+int audio_channels;
+unsigned char* audio_buffer;
+int send_audio;
+
+
 void audio_stream_reset();
 void audio_stream_put_samples(short left_sample,short right_sample);
 

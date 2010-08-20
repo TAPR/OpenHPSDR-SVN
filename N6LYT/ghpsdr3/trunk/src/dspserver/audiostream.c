@@ -38,10 +38,12 @@
 #include "client.h"
 #include "buffer.h"
 
-extern int audio_buffer_size;
-extern unsigned char* audio_buffer;
-extern int send_audio;
-extern int audio_sample_rate;
+int audio_buffer_size=480;
+int audio_sample_rate=8000;
+int audio_channels=1;
+unsigned char* audio_buffer=NULL;
+int send_audio=0;
+
 
 static int sample_count=0;
 
@@ -69,6 +71,10 @@ void audio_stream_init(int receiver) {
 */
 
 void audio_stream_reset() {
+    if(audio_buffer!=NULL) {
+        free(audio_buffer);
+    }
+    audio_buffer=(char*)malloc((audio_buffer_size*audio_channels)+BUFFER_HEADER_SIZE);
     audio_stream_buffer_insert=0;
 }
 
@@ -77,15 +83,20 @@ void audio_stream_put_samples(short left_sample,short right_sample) {
     // samples are delivered at 48K
     // output to stream at 8K (1 in 6) or 48K (1 in 1)
     if(sample_count==0) {
-        // use this sample and convert to a-law (mono)
+        // use this sample and convert to a-law
+        if(audio_channels==1) {
             audio_buffer[audio_stream_buffer_insert+48]=alaw((left_sample+right_sample)/2);
-            audio_stream_buffer_insert++;
-            if(audio_stream_buffer_insert==audio_buffer_size) {
-                audio_buffer[0]=AUDIO_BUFFER;
-                sprintf(&audio_buffer[26],"%d",audio_buffer_size);
-                client_send_audio();
-                audio_stream_buffer_insert=0;
-            }
+        } else {
+            audio_buffer[(audio_stream_buffer_insert*2)+48]=alaw(left_sample);
+            audio_buffer[(audio_stream_buffer_insert*2)+1+48]=alaw(right_sample);
+        }
+        audio_stream_buffer_insert++;
+        if(audio_stream_buffer_insert==audio_buffer_size) {
+            audio_buffer[0]=AUDIO_BUFFER;
+            sprintf(&audio_buffer[26],"%d",audio_buffer_size*audio_channels);
+            client_send_audio();
+            audio_stream_buffer_insert=0;
+        }
     }
     sample_count++;
     if(audio_sample_rate==48000 ) {
