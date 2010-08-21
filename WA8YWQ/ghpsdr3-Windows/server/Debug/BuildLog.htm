@@ -1,0 +1,85 @@
+<html>
+<head>
+<META HTTP-EQUIV="Content-Type" content="text/html; charset=Windows-1252">
+</head>
+<body>
+<pre>
+<table width=100% bgcolor=#CFCFE5><tr> <td> <font face=arial size=+3>
+Build Log
+</font></table><table width=* cellspacing=0 cellpadding=0><tr><td width=0 bgcolor=#EDEDF5>&nbsp;</td><td width=0 bgcolor=#FFFFFF>&nbsp;</td><td width=*><pre>
+<h3>------- Build started: Project: server, Configuration: Debug|Win32 -------
+</h3>
+</pre></table><table width=100% bgcolor=#DFDFE5><tr><td><font face=arial size=+2>
+Command Lines
+</font></table><table width=* cellspacing=0 cellpadding=0><tr><td width=0 bgcolor=#EDEDF5>&nbsp;</td><td width=0 bgcolor=#FFFFFF>&nbsp;</td><td width=*><pre>Creating temporary file "e:\Documents and Settings\David\My Documents\C\Vs2003\merged\server\Debug\RSP000001.rsp" with contents
+[
+/Od /D "WIN32" /D "_DEBUG" /D "_CONSOLE" /D "_MBCS" /FD /EHsc /RTC1 /MLd /YX"stdafx.h" /Fp".\Debug/server.pch" /Fo".\Debug/" /Fd".\Debug/" /W3 /c /ZI /TC
+".\util.c"
+".\server.c"
+".\receiver.c"
+".\OzyInit.c"
+".\ozy.c"
+".\listener.c"
+".\getopt_long.c"
+".\getopt.c"
+".\client.c"
+".\bandscope.c"
+]
+Creating command line "cl.exe @"e:\Documents and Settings\David\My Documents\C\Vs2003\merged\server\Debug\RSP000001.rsp" /nologo"
+Creating temporary file "e:\Documents and Settings\David\My Documents\C\Vs2003\merged\server\Debug\RSP000002.rsp" with contents
+[
+/OUT:".\Debug/server.exe" /INCREMENTAL:NO /NOLOGO /DEBUG /PDB:".\Debug/server.pdb" /SUBSYSTEM:CONSOLE /MACHINE:X86 odbc32.lib odbccp32.lib wsock32.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib
+".\libusb.lib"
+".\pthreadVC2.lib"
+".\Debug\bandscope.obj"
+".\Debug\client.obj"
+".\Debug\getopt.obj"
+".\Debug\getopt_long.obj"
+".\Debug\listener.obj"
+".\Debug\ozy.obj"
+".\Debug\OzyInit.obj"
+".\Debug\receiver.obj"
+".\Debug\server.obj"
+".\Debug\util.obj"
+]
+Creating command line "link.exe @"e:\Documents and Settings\David\My Documents\C\Vs2003\merged\server\Debug\RSP000002.rsp""
+</pre></table><table width=100% bgcolor=#DFDFE5><tr><td><font face=arial size=+2>
+Output Window
+</font></table><table width=* cellspacing=0 cellpadding=0><tr><td width=0 bgcolor=#EDEDF5>&nbsp;</td><td width=0 bgcolor=#FFFFFF>&nbsp;</td><td width=*><pre>Compiling...
+util.c
+server.c
+receiver.c
+e:\Documents and Settings\David\My Documents\C\VS2003\merged\server\receiver.c(143) : warning C4101: 'length' : unreferenced local variable
+OzyInit.c
+ozy.c
+e:\Documents and Settings\David\My Documents\C\VS2003\merged\server\ozy.c(373) : warning C4013: 'ozy_read' undefined; assuming extern returning int
+e:\Documents and Settings\David\My Documents\C\VS2003\merged\server\ozy.c(420) : warning C4244: '=' : conversion from 'long' to 'unsigned char', possible loss of data
+e:\Documents and Settings\David\My Documents\C\VS2003\merged\server\ozy.c(421) : warning C4244: '=' : conversion from 'long' to 'unsigned char', possible loss of data
+e:\Documents and Settings\David\My Documents\C\VS2003\merged\server\ozy.c(422) : warning C4244: '=' : conversion from 'long' to 'unsigned char', possible loss of data
+e:\Documents and Settings\David\My Documents\C\VS2003\merged\server\ozy.c(423) : warning C4244: '=' : conversion from 'long' to 'unsigned char', possible loss of data
+e:\Documents and Settings\David\My Documents\C\VS2003\merged\server\ozy.c(434) : warning C4013: 'ozy_write' undefined; assuming extern returning int
+e:\Documents and Settings\David\My Documents\C\VS2003\merged\server\ozy.c(542) : warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
+e:\Documents and Settings\David\My Documents\C\VS2003\merged\server\ozy.c(543) : warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
+e:\Documents and Settings\David\My Documents\C\VS2003\merged\server\ozy.c(560) : warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
+e:\Documents and Settings\David\My Documents\C\VS2003\merged\server\ozy.c(793) : warning C4244: '=' : conversion from 'double' to 'float', possible loss of data
+e:\Documents and Settings\David\My Documents\C\VS2003\merged\server\ozy.c(819) : warning C4244: '=' : conversion from 'short' to 'unsigned char', possible loss of data
+e:\Documents and Settings\David\My Documents\C\VS2003\merged\server\ozy.c(821) : warning C4244: '=' : conversion from 'short' to 'unsigned char', possible loss of data
+e:\Documents and Settings\David\My Documents\C\VS2003\merged\server\ozy.c(823) : warning C4244: '=' : conversion from 'short' to 'unsigned char', possible loss of data
+e:\Documents and Settings\David\My Documents\C\VS2003\merged\server\ozy.c(825) : warning C4244: '=' : conversion from 'short' to 'unsigned char', possible loss of data
+e:\Documents and Settings\David\My Documents\C\VS2003\merged\server\ozy.c(802) : warning C4101: 'ozy_samples' : unreferenced local variable
+listener.c
+e:\Documents and Settings\David\My Documents\C\VS2003\merged\server\listener.c(81) : warning C4133: 'function' : incompatible types - from 'int *' to 'const char *'
+e:\Documents and Settings\David\My Documents\C\VS2003\merged\server\listener.c(68) : warning C4101: 'address_length' : unreferenced local variable
+getopt_long.c
+getopt.c
+client.c
+e:\Documents and Settings\David\My Documents\C\VS2003\merged\server\client.c(207) : warning C4133: 'function' : incompatible types - from 'int *' to 'const char *'
+bandscope.c
+Linking...
+LINK : warning LNK4075: ignoring '/EDITANDCONTINUE' due to '/INCREMENTAL:NO' specification
+</pre></table><table width=100% bgcolor=#DFDFE5><tr><td><font face=arial size=+2>
+Results
+</font></table><table width=* cellspacing=0 cellpadding=0><tr><td width=0 bgcolor=#EDEDF5>&nbsp;</td><td width=0 bgcolor=#FFFFFF>&nbsp;</td><td width=*><pre>
+Build log was saved at "file://e:\Documents and Settings\David\My Documents\C\Vs2003\merged\server\Debug\BuildLog.htm"
+server - 0 error(s), 20 warning(s)</pre></table><table   width=100% height=20 bgcolor=#CFCFE5><tr><td><font face=arial size=+2>
+</font></table></body></html>
