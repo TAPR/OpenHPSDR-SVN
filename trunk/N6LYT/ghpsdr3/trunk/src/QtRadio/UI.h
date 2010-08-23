@@ -113,6 +113,7 @@ public slots:
     void audioChanged(int choice);
     void sampleRateChanged(int choice);
     void audioChannelsChanged(int channels);
+    void encodingChanged(int choice);
     void setGain(int gain);
 
     void actionSubRx();

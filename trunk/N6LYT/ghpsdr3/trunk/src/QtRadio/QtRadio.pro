@@ -4,7 +4,7 @@
 #
 #-------------------------------------------------
 
-QT       += core gui network multimedia
+QT       += core gui network multimedia  opengl
 
 TARGET = QtRadio
 TEMPLATE = app

@@ -23,6 +23,8 @@ Configure::Configure() {
     widget.waterfallHighSpinBox->setValue(-60);
     widget.waterfallLowSpinBox->setValue(-120);
     widget.fpsSpinBox->setValue(15);
+    widget.encodingComboBox->addItem("aLaw");
+    widget.encodingComboBox->addItem("16 bit pcm");
 
 }
 
