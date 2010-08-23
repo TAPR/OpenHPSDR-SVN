@@ -9,6 +9,7 @@
 #define	_CONFIGURE_H
 
 #include <QSettings>
+#include <QDebug>
 
 #include "ui_Configure.h"
 

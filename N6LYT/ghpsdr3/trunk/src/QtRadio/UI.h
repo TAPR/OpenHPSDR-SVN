@@ -119,7 +119,7 @@ public slots:
     void actionSubRx();
     void setSubRxGain(int gain);
 
-    void frequencyMoved(int increment);
+    void frequencyMoved(int increment,int step);
 
     void spectrumHighChanged(int high);
     void spectrumLowChanged(int low);
