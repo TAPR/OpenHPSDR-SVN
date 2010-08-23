@@ -103,8 +103,20 @@ UI::UI() {
     //connect(&connection,SIGNAL(disconnected(QString)),this,SLOT(disconnected(QString)));
 
 
-    connect(widget.spectrumFrame, SIGNAL(frequencyMoved(int)),
-            this, SLOT(frequencyMoved(int)));
+    connect(widget.spectrumFrame, SIGNAL(frequencyMoved(int,int)),
+            this, SLOT(frequencyMoved(int,int)));
+    connect(widget.spectrumFrame, SIGNAL(frequencyChanged(long long)),
+            this, SLOT(frequencyChanged(long long)));
+
+    connect(widget.spectrumFrame, SIGNAL(spectrumHighChanged(int)),
+            this,SLOT(spectrumHighChanged(int)));
+    connect(widget.spectrumFrame, SIGNAL(spectrumLowChanged(int)),
+            this,SLOT(spectrumLowChanged(int)));
+
+    connect(widget.spectrumFrame, SIGNAL(waterfallHighChanged(int)),
+            this,SLOT(waterfallHighChanged(int)));
+    connect(widget.spectrumFrame, SIGNAL(waterfallLowChanged(int)),
+            this,SLOT(waterfallLowChanged(int)));
 
     fps=15;
 
@@ -255,11 +267,21 @@ void UI::actionConfigure() {
 }
 
 void UI::spectrumHighChanged(int high) {
+    qDebug() << __FUNCTION__ << ": " << high;
+
     widget.spectrumFrame->setHigh(high);
+
+    QSpinBox* spectrumHighSpinBox=configure.findChild<QSpinBox*>("spectrumHighSpinBox");
+    spectrumHighSpinBox->setValue(high);
 }
 
 void UI::spectrumLowChanged(int low) {
+    qDebug() << __FUNCTION__ << ": " << low;
+
     widget.spectrumFrame->setLow(low);
+
+    QSpinBox* spectrumLowSpinBox=configure.findChild<QSpinBox*>("spectrumLowSpinBox");
+    spectrumLowSpinBox->setValue(low);
 }
 
 void UI::fpsChanged(int f) {
@@ -276,11 +298,21 @@ void UI::fpsChanged(int f) {
 }
 
 void UI::waterfallHighChanged(int high) {
+    qDebug() << __LINE__ << __FUNCTION__ << ": " << high;
+
     widget.waterfallFrame->setHigh(high);
+
+    QSpinBox* waterfallHighSpinBox=configure.findChild<QSpinBox*>("waterfallHighSpinBox");
+    waterfallHighSpinBox->setValue(high);
 }
 
 void UI::waterfallLowChanged(int low) {
+    qDebug() << __FUNCTION__ << ": " << low;
+
     widget.waterfallFrame->setLow(low);
+
+    QSpinBox* waterfallLowSpinBox=configure.findChild<QSpinBox*>("waterfallLowSpinBox");
+    waterfallLowSpinBox->setValue(low);
 }
 
 void UI::audioChanged(int choice) {
@@ -399,8 +431,11 @@ void UI::connected() {
     audio_buffers=0;
     command.clear(); QTextStream(&command) << "SetRXOutputGain " << gain;
     connection.sendCommand(command);
-    command.clear(); QTextStream(&command) << "startAudioStream " << (400*(audio_sample_rate/8000)) << " " << audio_sample_rate << " " << audio_channels;
-    connection.sendCommand(command);
+
+    if (!getenv("QT_RADIO_NO_LOCAL_AUDIO")) {
+       command.clear(); QTextStream(&command) << "startAudioStream " << (400*(audio_sample_rate/8000)) << " " << audio_sample_rate << " " << audio_channels;
+       connection.sendCommand(command);
+    }
     //widget.serverConnectPushButton->setText("Disconnect");
     //widget.serverConnectPushButton->setDisabled(FALSE);
     //widget.audioComboBox->setDisabled(TRUE);
@@ -1046,22 +1081,23 @@ void UI::filterChanged(int previousFilter,int newFilter) {
 }
 
 void UI::frequencyChanged(long long frequency) {
+    qDebug() << __FUNCTION__ << ": " << frequency;
+
     command.clear(); QTextStream(&command) << "setFrequency " << frequency;
+
     connection.sendCommand(command);
     widget.spectrumFrame->setFrequency(frequency);
 }
 
-void UI::frequencyMoved(int increment) {
-
-    qDebug() << "frequencyMoved " << increment;
+void UI::frequencyMoved(int increment,int step) {
+    qDebug() << __FUNCTION__ << ": increment=" << increment << " step=" << step;
 
     long long f;
-
 
     if(subRx) {
         long long diff;
         long long frequency = band.getFrequency();
-        f=subRxFrequency+((long long)increment*100LL);
+        f=subRxFrequency+(long long)(increment*step);
         int samplerate = widget.spectrumFrame->samplerate();
         if ((f >= (frequency - (samplerate / 2))) && (f <= (frequency + (samplerate / 2)))) {
             subRxFrequency = f;
@@ -1075,7 +1111,7 @@ void UI::frequencyMoved(int increment) {
 
 
     } else {
-        band.setFrequency(band.getFrequency()-((long long)increment*100LL));
+        band.setFrequency(band.getFrequency()-(long long)(increment*step));
         command.clear(); QTextStream(&command) << "setFrequency " << band.getFrequency();
         connection.sendCommand(command);
     }

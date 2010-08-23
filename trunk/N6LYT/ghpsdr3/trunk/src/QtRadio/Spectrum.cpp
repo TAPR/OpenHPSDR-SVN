@@ -14,7 +14,7 @@ Spectrum::Spectrum() {
 Spectrum::Spectrum(QWidget*& widget) {
     QFrame::setParent(widget);
 
-    qDebug() << "Spectrum::Spectrum " << width() << ":" << height();
+    //qDebug() << "Spectrum::Spectrum " << width() << ":" << height();
 
     sampleRate=96000;
     spectrumHigh=-40;
@@ -78,15 +78,18 @@ void Spectrum::setObjectName(QString name) {
 void Spectrum::setGeometry(QRect rect) {
     QFrame::setGeometry(rect);
 
-    qDebug() << "Spectrum:setGeometry: width=" << rect.width() << " height=" << rect.height();
+    //qDebug() << "Spectrum:setGeometry: width=" << rect.width() << " height=" << rect.height();
 
     samples=(float*)malloc(rect.width()*sizeof(float));
 }
 
 void Spectrum::mousePressEvent(QMouseEvent* event) {
 
-    //qDebug() << "mousePressEvent " << event->pos().x();
+    //qDebug() << __FUNCTION__ << ": " << event->pos().x();
 
+    //qDebug() << "mousePressEvent: event->button(): " << event->button();
+
+    button=event->button();
     startX=lastX=event->pos().x();
     moved=0;
 }
@@ -94,26 +97,99 @@ void Spectrum::mousePressEvent(QMouseEvent* event) {
 void Spectrum::mouseMoveEvent(QMouseEvent* event){
     int move=event->pos().x()-lastX;
     lastX=event->pos().x();
-    //qDebug() << "mouseMoveEvent " << event->pos().x() << " move:" << move;
+    qDebug() << __FUNCTION__ << ": " << event->pos().x() << " move:" << move;
 
-    emit frequencyMoved(move);
+    moved=1;
 
+    if (! move==0) emit frequencyMoved(move,100);
 }
 
 void Spectrum::mouseReleaseEvent(QMouseEvent* event) {
     int move=event->pos().x()-lastX;
     lastX=event->pos().x();
-    //qDebug() << "mouseReleaseEvent " << event->pos().x() << " move:" << move;
+    //qDebug() << __FUNCTION__ << ": " << event->pos().x() << " move:" << move;
 
     if(moved) {
-        emit frequencyMoved(move);
+        emit frequencyMoved(move,100);
     } else {
+
+
+        float hzPixel = sampleRate/width();  // spectrum resolution: Hz/pixel
+
+        long freqOffsetPixel;
+
+        if(subRx) {
+            long long f = frequency - (sampleRate/2) + (event->pos().x()*hzPixel);
+            freqOffsetPixel = (subRxFrequency-f)/hzPixel;
+        } else {
+            freqOffsetPixel = event->pos().x() - (width()/2); // compute the offset from the central frequency, in pixel
+        }
+
+        if (button == Qt::LeftButton) {
+            // set frequency to center of filter
+            if(filterLow<0 && filterHigh<0) {
+                freqOffsetPixel+=(((filterLow-filterHigh)/2)+filterHigh)/hzPixel;
+            } else if(filterLow>0 && filterHigh > 0){
+                freqOffsetPixel-=(((filterHigh-filterLow)/2)-filterHigh)/hzPixel;
+            } else {
+                // no adjustment
+            }
+        }
+
+        emit frequencyMoved(-(long long)(freqOffsetPixel*hzPixel)/100,100);
 
     }
 }
 
 void Spectrum::wheelEvent(QWheelEvent *event) {
-    emit frequencyMoved(event->delta()/8/15);
+    //qDebug() << __FUNCTION__ << "Delta: " << event->delta() << "y: " << event->pos().y() << " heigth:" << height();
+
+    if (event->pos().x() > 50) {
+       // wheel event on the right side
+       // change frequency
+       float vOfs = (float)event->pos().y() / (float)height();
+       //qDebug() << "wheelEvent vOfs: " << vOfs;
+
+       if (vOfs > 0.80)
+          // mouse pointer below the 80% of y axis
+          // retrieve # of steps
+          // see http://doc.qt.nokia.com/4.6/qwheelevent.html#delta
+          emit frequencyMoved(event->delta()/8/15,100);
+       else {
+          // mouse pointer between top and 80%, the amount is proportional to distance
+          // from top
+          // compute absolute value of frequency change
+          //float nf = vOfs * event->delta()/8/15 * 10;
+          //qDebug() << "wheelEvent changed: " << nf;
+          //emit frequencyChanged((long long )nf + frequency);
+          emit frequencyMoved(event->delta()/8/15,(int)(vOfs*80));
+       }
+    } else {
+       // wheel event on the left side, change the vertical axis values
+
+       float shift =  (float)(event->delta()/8/15 * 5)                    // phy steps of wheel * 5
+                    * ((float)(spectrumHigh - spectrumLow) / height());   // dBm / pixel on vertical axis
+       //qDebug() << __FUNCTION__ << " spectrum high: " << spectrumHigh;
+       //qDebug() << __FUNCTION__ << " spectrum low:  " << spectrumLow;
+       
+       if (event->buttons() == Qt::MidButton) {
+          // change the vertical axis range
+          //qDebug() << __FUNCTION__ << " change vertical axis scale: " << shift;
+          emit spectrumHighChanged (spectrumHigh+(int)shift);
+          emit spectrumLowChanged  (spectrumLow-(int)shift);
+          emit waterfallHighChanged (spectrumHigh+(int)shift);
+          emit waterfallLowChanged  (spectrumLow-(int)shift);
+
+       } else {
+          // if middle mouse button pressed shift the spectrum scale
+          //qDebug() << __FUNCTION__ << " shift on vertical axis scale: " << shift;
+          emit spectrumHighChanged (spectrumHigh+(int)shift);
+          emit spectrumLowChanged  (spectrumLow+(int)shift);
+          emit waterfallHighChanged (spectrumHigh+(int)shift);
+          emit waterfallLowChanged  (spectrumLow+(int)shift);
+
+       }
+    }
 }
 
 void Spectrum::paintEvent(QPaintEvent*) {
@@ -195,7 +271,7 @@ void Spectrum::paintEvent(QPaintEvent*) {
 
     // show the frequency
     painter.setPen(QPen(Qt::green,1));
-    painter.setFont(QFont("Arial", 30));
+    painter.setFont(QFont("Verdana", 30));
     painter.drawText(width()/2,30,QString::number(frequency));
 
     // show the band and mode and filter

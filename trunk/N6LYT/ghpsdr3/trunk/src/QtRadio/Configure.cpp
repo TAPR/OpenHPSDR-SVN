@@ -16,8 +16,8 @@ Configure::Configure() {
     widget.sampleRateComboBox->addItem("8000");
     widget.sampleRateComboBox->addItem("48000");
     widget.audioChannelsSpinBox->setValue(1);
-    widget.hostComboBox->addItem("192.168.1.82");
     widget.hostComboBox->addItem("127.0.0.1");
+    widget.hostComboBox->addItem("192.168.1.82");
     widget.spectrumHighSpinBox->setValue(-40);
     widget.spectrumLowSpinBox->setValue(-160);
     widget.waterfallHighSpinBox->setValue(-60);
@@ -33,14 +33,19 @@ Configure::~Configure() {
 
 void Configure::loadSettings(QSettings* settings) {
     int i;
+
     settings->beginGroup("Servers");
     if(settings->contains("entries")) {
+        widget.hostComboBox->clear();
         int entries=settings->value("entries").toInt();
         for(i=0;i<entries;i++) {
             widget.hostComboBox->addItem(settings->value(QString::number(i)).toString());
         }
         widget.hostComboBox->setCurrentIndex(settings->value("selected").toInt());
     }
+    qDebug() << "server count=" << widget.hostComboBox->count();
+    qDebug() << "server selected: " << widget.hostComboBox->currentIndex();
+
     if(settings->contains("rx")) widget.rxSpinBox->setValue(settings->value("rx").toInt());
     settings->endGroup();
     settings->beginGroup("Display");
@@ -60,10 +65,14 @@ void Configure::loadSettings(QSettings* settings) {
 void Configure::saveSettings(QSettings* settings) {
     int i;
     settings->beginGroup("Servers");
+    qDebug() << "server count=" << widget.hostComboBox->count();
+    settings->setValue("entries",widget.hostComboBox->count());
     for(i=0;i<widget.hostComboBox->count();i++) {
+        qDebug() << "server: " << widget.hostComboBox->itemText(i);
         settings->setValue(QString::number(i),widget.hostComboBox->itemText(i));
     }
     settings->setValue("selected",widget.hostComboBox->currentIndex());
+    qDebug() << "server selected: " << widget.hostComboBox->currentIndex();
     settings->setValue("rx",widget.rxSpinBox->value());
     settings->endGroup();
     settings->beginGroup("Display");

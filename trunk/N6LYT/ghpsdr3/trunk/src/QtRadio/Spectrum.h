@@ -1,4 +1,4 @@
-/*
+   /*
  * File:   Spectrum.h
  * Author: john
  *
@@ -45,7 +45,12 @@ public:
     void setReceiver(int r);
 
 signals:
-    void frequencyMoved(int step);
+    void frequencyMoved(int steps,int step);
+    void frequencyChanged(long long frequency);
+    void spectrumHighChanged(int high);
+    void spectrumLowChanged(int low);
+    void waterfallHighChanged(int high);
+    void waterfallLowChanged(int low);
 
 protected:
     void paintEvent(QPaintEvent*);
@@ -53,6 +58,9 @@ protected:
     void mousePressEvent(QMouseEvent* event);
     void mouseMoveEvent(QMouseEvent* event);
     void mouseReleaseEvent(QMouseEvent* event);
+    /*
+    void mouseDoubleClickEvent ( QMouseEvent * event );
+    */
 
     void wheelEvent(QWheelEvent *event);
 
@@ -67,6 +75,7 @@ private:
     QString mode;
     QString filter;
 
+    int button;
     int startX;
     int lastX;
     int moved;
