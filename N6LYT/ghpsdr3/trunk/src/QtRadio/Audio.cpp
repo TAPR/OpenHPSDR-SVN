@@ -109,6 +109,21 @@ void Audio::select_audio(QAudioDeviceInfo info,int rate,int channels) {
     audio_device=info;
     audio_format.setFrequency(rate);
     audio_format.setChannels(audio_channels);
+
+    if (!audio_device.isFormatSupported(audio_format)) {
+        qDebug()<<"Audio format not supported by device.";
+
+        QAudioFormat nearest_format=audio_device.nearestFormat(audio_format);
+        qDebug() << "Nearest Format:";
+        qDebug() << "    sample rate: " << nearest_format.frequency();
+        qDebug() << "    codec: " << nearest_format.codec();
+        qDebug() << "    byte order: " << nearest_format.byteOrder();
+        qDebug() << "    sample size: " << nearest_format.sampleSize();
+        qDebug() << "    sample type: " << nearest_format.sampleType();
+
+        audio_format=nearest_format;
+    }
+
     audio_output = new QAudioOutput(audio_device, audio_format, this);
     audio_out = audio_output->start();
 

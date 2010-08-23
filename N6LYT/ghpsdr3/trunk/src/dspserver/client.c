@@ -434,10 +434,7 @@ void client_set_samples(float* samples,int size) {
 
     // first byte is the buffer type
     client_samples[0]=SPECTRUM_BUFFER;
-
-    // first 14 bytes contain the frequency
-    //sprintf(client_samples,"% 4lld.%03lld.%03lld",frequencyA/1000000LL,(frequencyA%1000000LL)/1000LL,frequencyA%1000LL);
-
+    sprintf(&client_samples[1],"%f",HEADER_VERSION);
 
     // next 6 bytes contain the main rx s meter
     sprintf(&client_samples[14],"%d",(int)meter);

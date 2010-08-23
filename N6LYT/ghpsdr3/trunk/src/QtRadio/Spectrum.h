@@ -13,6 +13,7 @@
 #include <QFrame>
 #include <QPainter>
 #include <QMouseEvent>
+#include <QGLWidget>
 
 class Spectrum: public QFrame {
     Q_OBJECT

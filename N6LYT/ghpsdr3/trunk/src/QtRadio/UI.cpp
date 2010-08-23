@@ -29,12 +29,8 @@ UI::UI() {
     widget.setupUi(this);
 
     qTimer=NULL;
-    //int left,top,right,bottom;
-    //widget.gridLayout->getContentsMargins(&left,&top,&right,&bottom);
-    //qDebug() << "gridlayout margins " << left << "," << top << "," << right << "," << bottom;
-    widget.gridLayout->setContentsMargins(2,2,2,2);
 
-    //qDebug() << "vertical spacing " <<  widget.gridLayout->verticalSpacing();
+    widget.gridLayout->setContentsMargins(2,2,2,2);
     widget.gridLayout->setVerticalSpacing(0);
     
     // connect up all the components
@@ -45,7 +41,7 @@ UI::UI() {
     connect(&connection,SIGNAL(disconnected(QString)),this,SLOT(disconnected(QString)));
     connect(&connection,SIGNAL(header(char*)),this,SLOT(receivedHeader(char*)));
 
-    connect(widget.actionConfigure,SIGNAL(triggered()),this,SLOT(actionConfigure()));
+    connect(widget.actionConfig,SIGNAL(triggered()),this,SLOT(actionConfigure()));
 
     connect(widget.action160, SIGNAL(triggered()),this,SLOT(action160()));
     connect(widget.action80, SIGNAL(triggered()),this,SLOT(action80()));
@@ -171,6 +167,14 @@ UI::UI() {
                 this, SLOT(sampleRateChanged(int)));
     }
 
+    QComboBox* encodingComboBox=configure.findChild<QComboBox*>("encodingComboBox");
+    if(encodingComboBox==NULL) {
+        qDebug() << "encodingComboBox id NULL";
+    } else {
+        connect(encodingComboBox, SIGNAL(currentIndexChanged(int)),
+                this, SLOT(encodingChanged(int)));
+    }
+
     QSpinBox* audioChannelsSpinBox=configure.findChild<QSpinBox*>("audioChannelsSpinBox");
     if(audioChannelsSpinBox==NULL) {
         qDebug() << "audioChannelsSpinBox id NULL";
@@ -212,6 +216,12 @@ UI::UI() {
 }
 
 UI::~UI() {
+    if(qTimer!=NULL) {
+        qTimer->stop();
+        qTimer=NULL;
+    }
+
+    connection.disconnect();
 }
 
 void UI::loadSettings() {
@@ -316,6 +326,10 @@ void UI::audioChannelsChanged(int channels) {
     }
     audio_channels=channels;
     audio.select_audio(audioDeviceComboBox->itemData(audio_device).value<QAudioDeviceInfo>(),audio_sample_rate,audio_channels);
+}
+
+void UI::encodingChanged(int choice) {
+
 }
 
 void UI::actionConnect() {

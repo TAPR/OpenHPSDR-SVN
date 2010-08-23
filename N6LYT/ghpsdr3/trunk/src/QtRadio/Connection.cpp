@@ -40,8 +40,10 @@ void Connection::connect(QString h,int r) {
 void Connection::disconnect() {
 
     qDebug() << "Connection::disconnect";
-    tcpSocket->close();
-    tcpSocket=NULL;
+    if(tcpSocket!=NULL) {
+        tcpSocket->close();
+        tcpSocket=NULL;
+    }
 }
 
 void Connection::socketError(QAbstractSocket::SocketError socketError) {
