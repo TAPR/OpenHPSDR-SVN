@@ -54,6 +54,11 @@ public slots:
 
     void actionConnect();
     void actionDisconnect();
+    void actionSubRx();
+
+    void actionMuteMainRx();
+    void actionMuteSubRx();
+
     void action160();
     void action80();
     void action60();
@@ -118,7 +123,7 @@ public slots:
     void byteOrderChanged(int choice);
     void setGain(int gain);
 
-    void actionSubRx();
+
     void setSubRxGain(int gain);
 
     void frequencyMoved(int increment,int step);

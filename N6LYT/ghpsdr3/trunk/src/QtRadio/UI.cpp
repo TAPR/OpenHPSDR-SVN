@@ -43,6 +43,9 @@ UI::UI() {
 
     connect(widget.actionConfig,SIGNAL(triggered()),this,SLOT(actionConfigure()));
 
+    connect(widget.actionMuteMainRx,SIGNAL(triggered()),this,SLOT(actionMuteMainRx()));
+    connect(widget.actionMuteSubRx,SIGNAL(triggered()),this,SLOT(actionMuteSubRx()));
+
     connect(widget.action160, SIGNAL(triggered()),this,SLOT(action160()));
     connect(widget.action80, SIGNAL(triggered()),this,SLOT(action80()));
     connect(widget.action60, SIGNAL(triggered()),this,SLOT(action60()));
@@ -235,6 +238,7 @@ UI::UI() {
     widget.spectrumFrame->setReceiver(configure.getReceiver());
 
     widget.actionSubrx->setDisabled(TRUE);
+    widget.actionMuteSubRx->setDisabled(TRUE);
 
     band.initBand(band.getBand());
 
@@ -422,6 +426,7 @@ void UI::actionDisconnect() {
     widget.actionConnectToServer->setDisabled(FALSE);
     widget.actionDisconnectFromServer->setDisabled(TRUE);
     widget.actionSubrx->setDisabled(TRUE);
+    widget.actionMuteSubRx->setDisabled(TRUE);
 
 
     configure.connected(FALSE);
@@ -446,6 +451,7 @@ void UI::connected() {
     widget.actionConnectToServer->setDisabled(TRUE);
     widget.actionDisconnectFromServer->setDisabled(FALSE);
     widget.actionSubrx->setDisabled(FALSE);
+    widget.actionMuteSubRx->setDisabled(FALSE);
 
     // select the audio
     //audio.select_audio(widget.audioComboBox->itemData(audio_device).value<QAudioDeviceInfo >);
@@ -499,6 +505,7 @@ void UI::disconnected(QString message) {
     widget.actionConnectToServer->setDisabled(FALSE);
     widget.actionDisconnectFromServer->setDisabled(TRUE);
     widget.actionSubrx->setDisabled(TRUE);
+    widget.actionMuteSubRx->setDisabled(TRUE);
 
     //widget.spectrumFrame->setHost("");
     //widget.spectrumFrame->setReceiver(0);
@@ -572,7 +579,7 @@ void UI::actionSubRx() {
         // on, so turn off
         subRx=FALSE;
         widget.spectrumFrame->setSubRxState(FALSE);
-
+        widget.actionMuteSubRx->setChecked(FALSE);
     } else {
         subRx=TRUE;
 
@@ -1269,3 +1276,25 @@ void UI::setSubRxPan() {
     connection.sendCommand(command);
 }
 
+void UI::actionMuteMainRx() {
+    int g=gain;
+
+    if(widget.actionMuteMainRx->isChecked()) {
+        g=0;
+    }
+
+    command.clear(); QTextStream(&command) << "SetRXOutputGain " << g;
+    connection.sendCommand(command);
+}
+
+void UI::actionMuteSubRx() {
+    int g=subRxGain;
+
+    if(widget.actionMuteSubRx->isChecked()) {
+        g=0;
+    }
+
+    command.clear(); QTextStream(&command) << "SetSubRXOutputGain " << g;
+    connection.sendCommand(command);
+
+}

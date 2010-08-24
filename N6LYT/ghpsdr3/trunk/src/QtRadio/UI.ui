@@ -122,7 +122,15 @@
     <addaction name="separator"/>
     <addaction name="actionConfig"/>
    </widget>
+   <widget class="QMenu" name="menuAudio">
+    <property name="title">
+     <string>Audio</string>
+    </property>
+    <addaction name="actionMuteMainRx"/>
+    <addaction name="actionMuteSubRx"/>
+   </widget>
    <addaction name="menuReceiver"/>
+   <addaction name="menuAudio"/>
    <addaction name="menuBand"/>
    <addaction name="menuMode"/>
    <addaction name="menuFilter"/>
@@ -515,6 +523,22 @@
   <action name="actionConfig">
    <property name="text">
     <string>Configure</string>
+   </property>
+  </action>
+  <action name="actionMuteMainRx">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Mute Main Rx</string>
+   </property>
+  </action>
+  <action name="actionMuteSubRx">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Mute Sub Rx</string>
    </property>
   </action>
  </widget>
