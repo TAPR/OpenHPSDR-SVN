@@ -16,6 +16,8 @@
 
 #define AUDIO_BUFFER_SIZE 480
 
+#define BIGENDIAN
+
 class Audio : public QObject {
     Q_OBJECT
 public:
@@ -23,7 +25,7 @@ public:
     Audio(const Audio& orig);
     virtual ~Audio();
     void initialize_audio(int buffer_size);
-    void select_audio(QAudioDeviceInfo info,int rate,int channels);
+    void select_audio(QAudioDeviceInfo info,int rate,int channels,QAudioFormat::Endian byteOrder);
     void process_audio(char* header,char* buffer,int length);
     void get_audio_devices(QComboBox* comboBox);
 
@@ -39,6 +41,7 @@ private:
 
     int sampleRate;
     int audio_channels;
+    QAudioFormat::Endian audio_byte_order;
 
 };
 

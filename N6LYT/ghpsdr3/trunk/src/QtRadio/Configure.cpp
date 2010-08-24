@@ -25,7 +25,8 @@ Configure::Configure() {
     widget.fpsSpinBox->setValue(15);
     widget.encodingComboBox->addItem("aLaw");
     widget.encodingComboBox->addItem("16 bit pcm");
-
+    widget.byteOrderComboBox->addItem("LittleEndian");
+    widget.byteOrderComboBox->addItem("BigEndian");
 }
 
 Configure::~Configure() {
@@ -36,6 +37,7 @@ void Configure::connected(bool state) {
     widget.sampleRateComboBox->setDisabled(state);
     widget.audioChannelsSpinBox->setDisabled(state);
     widget.encodingComboBox->setDisabled(state);
+    widget.byteOrderComboBox->setDisabled(state);
 
     widget.hostComboBox->setDisabled(state);
     widget.rxSpinBox->setDisabled(state);
@@ -69,6 +71,7 @@ void Configure::loadSettings(QSettings* settings) {
     if(settings->contains("device")) widget.audioDeviceComboBox->setCurrentIndex(settings->value("device").toInt());
     if(settings->contains("channels"))widget.audioChannelsSpinBox->setValue(settings->value("channels").toInt());
     if(settings->contains("samplerate")) widget.sampleRateComboBox->setCurrentIndex(settings->value("samplerate").toInt());
+    if(settings->contains("byteorder")) widget.byteOrderComboBox->setCurrentIndex(settings->value("byteorder").toInt());
     settings->endGroup();
 }
 
@@ -96,6 +99,7 @@ void Configure::saveSettings(QSettings* settings) {
     settings->setValue("device",widget.audioDeviceComboBox->currentIndex());
     settings->setValue("channels",widget.audioChannelsSpinBox->value());
     settings->setValue("samplerate",widget.sampleRateComboBox->currentIndex());
+    settings->setValue("byteorder",widget.byteOrderComboBox->currentIndex());
     settings->endGroup();
 }
 
@@ -125,4 +129,15 @@ int Configure::getWaterfallHigh() {
 
 int Configure::getWaterfallLow() {
     return widget.waterfallLowSpinBox->value();
+}
+
+QAudioFormat::Endian Configure::getByteOrder() {
+    QAudioFormat::Endian order=QAudioFormat::BigEndian;
+
+    if(widget.byteOrderComboBox->currentText()=="LittleEndian") {
+        order=QAudioFormat::LittleEndian;
+    }
+
+    qDebug() << "getByteOrder: " << widget.byteOrderComboBox->currentText() << " order:" << order;
+    return order;
 }

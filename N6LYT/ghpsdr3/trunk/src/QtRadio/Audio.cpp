@@ -12,6 +12,8 @@ Audio::Audio() {
     audio_out=NULL;
     sampleRate=8000;
     audio_channels=1;
+    audio_byte_order=QAudioFormat::LittleEndian;
+
 }
 
 Audio::~Audio() {
@@ -28,9 +30,7 @@ void Audio::initialize_audio(int buffer_size) {
     audio_format.setChannels(audio_channels);
     audio_format.setSampleSize(16);
     audio_format.setCodec("audio/pcm");
-    audio_format.setByteOrder(QAudioFormat::BigEndian);
-    audio_format.setSampleType(QAudioFormat::SignedInt);
-
+    audio_format.setByteOrder(audio_byte_order);
 }
 
 void Audio::get_audio_devices(QComboBox* comboBox) {
@@ -91,11 +91,12 @@ void Audio::get_audio_devices(QComboBox* comboBox) {
     audio_out = audio_output->start();
 }
 
-void Audio::select_audio(QAudioDeviceInfo info,int rate,int channels) {
-    qDebug() << "selected audio " << info.deviceName() <<  "sampleRate " << rate;
+void Audio::select_audio(QAudioDeviceInfo info,int rate,int channels,QAudioFormat::Endian byteOrder) {
+    qDebug() << "selected audio " << info.deviceName() <<  " sampleRate:" << rate << " Endian:" << byteOrder;
 
     sampleRate=rate;
     audio_channels=channels;
+    audio_byte_order=byteOrder;
 
     if(audio_output!=NULL) {
         audio_output->stop();
@@ -107,8 +108,9 @@ void Audio::select_audio(QAudioDeviceInfo info,int rate,int channels) {
 
 
     audio_device=info;
-    audio_format.setFrequency(rate);
+    audio_format.setFrequency(sampleRate);
     audio_format.setChannels(audio_channels);
+    audio_format.setByteOrder(audio_byte_order);
 
     if (!audio_device.isFormatSupported(audio_format)) {
         qDebug()<<"Audio format not supported by device.";
@@ -152,10 +154,13 @@ void Audio::aLawDecode(char* buffer,int length) {
     for (i=0; i < length; i++) {
         v=decodetable[buffer[i]&0xFF];
 
-        // assumes BIGENDIAN
-        decoded_buffer.append((char)((v>>8)&0xFF));
-        decoded_buffer.append((char)(v&0xFF));
-
+        if(audio_byte_order==QAudioFormat::BigEndian) {
+            decoded_buffer.append((char)((v>>8)&0xFF));
+            decoded_buffer.append((char)(v&0xFF));
+        } else {
+            decoded_buffer.append((char)(v&0xFF));
+            decoded_buffer.append((char)((v>>8)&0xFF));
+        }
     }
 
 }

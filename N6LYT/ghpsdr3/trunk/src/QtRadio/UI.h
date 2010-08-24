@@ -13,6 +13,7 @@
 #include <QDebug>
 #include <QSettings>
 #include <QTimer>
+#include <QtMultimedia/QAudioFormat>
 
 #include "Configure.h"
 #include "Audio.h"
@@ -114,6 +115,7 @@ public slots:
     void sampleRateChanged(int choice);
     void audioChannelsChanged(int channels);
     void encodingChanged(int choice);
+    void byteOrderChanged(int choice);
     void setGain(int gain);
 
     void actionSubRx();
@@ -142,6 +144,7 @@ private:
     int audio_sample_rate;
     int audio_channels;
     int audio_buffers;
+    QAudioFormat::Endian audio_byte_order;
     char* first_audio_buffer;
     int gain;
     int subRxGain;
