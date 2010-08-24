@@ -194,6 +194,14 @@ UI::UI() {
         connect(audioChannelsSpinBox,SIGNAL(valueChanged(int)),this,SLOT(audioChannelsChanged(int)));
     }
 
+    QComboBox* byteOrderComboBox=configure.findChild<QComboBox*>("byteOrderComboBox");
+    if(byteOrderComboBox==NULL) {
+        qDebug() << "byteOrderComboBox id NULL";
+    } else {
+        connect(byteOrderComboBox, SIGNAL(currentIndexChanged(int)),
+                this, SLOT(byteOrderChanged(int)));
+    }
+
     QComboBox* hostComboBox=configure.findChild<QComboBox*>("hostComboBox");
     if(hostComboBox==NULL) {
         qDebug() << "hostComboBox id NULL";
@@ -215,6 +223,7 @@ UI::UI() {
     audio_device=0;
     audio_sample_rate=8000;
     audio_channels=1;
+    audio_byte_order=QAudioFormat::BigEndian;
 
     // load any saved settings
     loadSettings();
@@ -331,7 +340,7 @@ void UI::audioChanged(int choice) {
         return;
     }
 
-    audio.select_audio(audioDeviceComboBox->itemData(audio_device).value<QAudioDeviceInfo >(),audio_sample_rate,audio_channels);
+    audio.select_audio(audioDeviceComboBox->itemData(audio_device).value<QAudioDeviceInfo >(),audio_sample_rate,audio_channels,audio_byte_order);
 }
 
 void UI::sampleRateChanged(int choice) {
@@ -349,7 +358,7 @@ void UI::sampleRateChanged(int choice) {
         return;
     }
     audio_sample_rate=sampleRateComboBox->itemText(choice).toInt();
-    audio.select_audio(audioDeviceComboBox->itemData(audio_device).value<QAudioDeviceInfo>(),audio_sample_rate,audio_channels);
+    audio.select_audio(audioDeviceComboBox->itemData(audio_device).value<QAudioDeviceInfo>(),audio_sample_rate,audio_channels,audio_byte_order);
 }
 
 void UI::audioChannelsChanged(int channels) {
@@ -359,11 +368,22 @@ void UI::audioChannelsChanged(int channels) {
         return;
     }
     audio_channels=channels;
-    audio.select_audio(audioDeviceComboBox->itemData(audio_device).value<QAudioDeviceInfo>(),audio_sample_rate,audio_channels);
+    audio.select_audio(audioDeviceComboBox->itemData(audio_device).value<QAudioDeviceInfo>(),audio_sample_rate,audio_channels,audio_byte_order);
 }
 
 void UI::encodingChanged(int choice) {
 
+}
+
+void UI::byteOrderChanged(int choice) {
+    QComboBox* audioDeviceComboBox=configure.findChild<QComboBox*>("audioDeviceComboBox");
+    if(audioDeviceComboBox==NULL) {
+        qDebug() << "UI::audioChanged: audioDeviceComboBox is NULL";
+        return;
+    }
+    audio_byte_order=configure.getByteOrder();
+    qDebug() << "byteOrderChanged: " << audio_byte_order;
+    audio.select_audio(audioDeviceComboBox->itemData(audio_device).value<QAudioDeviceInfo>(),audio_sample_rate,audio_channels,audio_byte_order);
 }
 
 void UI::actionConnect() {

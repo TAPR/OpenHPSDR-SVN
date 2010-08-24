@@ -10,6 +10,7 @@
 
 #include <QSettings>
 #include <QDebug>
+#include <QtMultimedia/QAudioFormat>
 
 #include "ui_Configure.h"
 
@@ -33,6 +34,8 @@ public:
 
     int getWaterfallHigh();
     int getWaterfallLow();
+
+    QAudioFormat::Endian getByteOrder();
     
 
 private:
