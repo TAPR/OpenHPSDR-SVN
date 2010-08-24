@@ -13,6 +13,9 @@ Audio::Audio() {
     sampleRate=8000;
     audio_channels=1;
     audio_byte_order=QAudioFormat::LittleEndian;
+
+    qDebug() << "Audio: LittleEndian=" << QAudioFormat::LittleEndian << " BigEndian=" << QAudioFormat::BigEndian;
+
 }
 
 Audio::~Audio() {
@@ -91,7 +94,7 @@ void Audio::get_audio_devices(QComboBox* comboBox) {
 }
 
 void Audio::select_audio(QAudioDeviceInfo info,int rate,int channels,QAudioFormat::Endian byteOrder) {
-    qDebug() << "selected audio " << info.deviceName() <<  " sampleRate:" << rate << " Endian:" << byteOrder;
+    qDebug() << "selected audio " << info.deviceName() <<  " sampleRate:" << rate << " Channels: " << channels << " Endian:" << byteOrder;
 
     sampleRate=rate;
     audio_channels=channels;
@@ -126,7 +129,16 @@ void Audio::select_audio(QAudioDeviceInfo info,int rate,int channels,QAudioForma
     }
 
     audio_output = new QAudioOutput(audio_device, audio_format, this);
+
+    qDebug() << "QAudioOutput: error=" << audio_output->error() << " state=" << audio_output->state();
+
     audio_out = audio_output->start();
+
+    qDebug() << "QAudioOutput: after start error=" << audio_output->error() << " state=" << audio_output->state();
+
+    if(audio_out==NULL) {
+        qDebug() << "Audio::selectAudio: audio_out is NULL!";
+    }
 
 }
 

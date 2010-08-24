@@ -164,8 +164,6 @@ UI::UI() {
     if(audioDeviceComboBox==NULL) {
         qDebug() << "audioDeviceComboBox id NULL";
     } else {
-        audio_device=0;
-        audio.initialize_audio(AUDIO_BUFFER_SIZE);
         audio.get_audio_devices(audioDeviceComboBox);
         connect(audioDeviceComboBox, SIGNAL(currentIndexChanged(int)),
                 this, SLOT(audioChanged(int)));
@@ -202,6 +200,10 @@ UI::UI() {
                 this, SLOT(byteOrderChanged(int)));
     }
 
+
+
+
+
     QComboBox* hostComboBox=configure.findChild<QComboBox*>("hostComboBox");
     if(hostComboBox==NULL) {
         qDebug() << "hostComboBox id NULL";
@@ -221,9 +223,10 @@ UI::UI() {
     cwPitch=600;
 
     audio_device=0;
-    audio_sample_rate=8000;
-    audio_channels=1;
-    audio_byte_order=QAudioFormat::BigEndian;
+    audio_sample_rate=configure.getSampleRate();
+    audio_channels=configure.getChannels();
+    audio_byte_order=configure.getByteOrder();
+    audio.initialize_audio(AUDIO_BUFFER_SIZE);
 
     // load any saved settings
     loadSettings();
