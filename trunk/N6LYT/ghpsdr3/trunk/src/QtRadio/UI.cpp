@@ -215,10 +215,10 @@ UI::UI() {
                 this, SLOT(hostChanged(int)));
     }
 
-    gain=30;
+    gain=40;
 
     subRx=FALSE;
-    subRxGain=30;
+    subRxGain=40;
 
     agc=AGC_SLOW;
     widget.actionSlow->setChecked(TRUE);
@@ -451,7 +451,7 @@ void UI::connected() {
     widget.actionConnectToServer->setDisabled(TRUE);
     widget.actionDisconnectFromServer->setDisabled(FALSE);
     widget.actionSubrx->setDisabled(FALSE);
-    widget.actionMuteSubRx->setDisabled(FALSE);
+    widget.actionMuteSubRx->setDisabled(TRUE);
 
     // select the audio
     //audio.select_audio(widget.audioComboBox->itemData(audio_device).value<QAudioDeviceInfo >);
@@ -580,6 +580,7 @@ void UI::actionSubRx() {
         subRx=FALSE;
         widget.spectrumFrame->setSubRxState(FALSE);
         widget.actionMuteSubRx->setChecked(FALSE);
+        widget.actionMuteSubRx->setDisabled(TRUE);
     } else {
         subRx=TRUE;
 
@@ -594,7 +595,10 @@ void UI::actionSubRx() {
         connection.sendCommand(command);
         command.clear(); QTextStream(&command) << "SetSubRXFrequency " << frequency - subRxFrequency;
         connection.sendCommand(command);
+
         setSubRxPan();
+
+        widget.actionMuteSubRx->setDisabled(FALSE);
     }
 
     //widget.actionSubrx.setChecked(subRx);
