@@ -36,6 +36,8 @@ public:
     int getWaterfallLow();
 
     QAudioFormat::Endian getByteOrder();
+    int getSampleRate();
+    int getChannels();
     
 
 private:

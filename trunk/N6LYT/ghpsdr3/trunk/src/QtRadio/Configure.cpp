@@ -133,7 +133,7 @@ int Configure::getWaterfallLow() {
 }
 
 QAudioFormat::Endian Configure::getByteOrder() {
-    QAudioFormat::Endian order=QAudioFormat::BigEndian;
+    QAudioFormat::Endian order=QAudioFormat::LittleEndian;
 
     switch(widget.byteOrderComboBox->currentIndex()) {
     case 0:
@@ -145,6 +145,14 @@ QAudioFormat::Endian Configure::getByteOrder() {
 
     }
 
-    qDebug() << "getByteOrder: " << widget.byteOrderComboBox->currentText() << " order:" << order;
+    qDebug() << "getByteOrder: " << widget.byteOrderComboBox->currentIndex() << widget.byteOrderComboBox->currentText() << " order:" << order;
     return order;
+}
+
+int Configure::getChannels() {
+    return widget.audioChannelsSpinBox->value();
+}
+
+int Configure::getSampleRate() {
+    return widget.sampleRateComboBox->currentText().toInt();
 }
