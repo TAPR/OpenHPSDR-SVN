@@ -97,7 +97,7 @@ void Spectrum::mousePressEvent(QMouseEvent* event) {
 void Spectrum::mouseMoveEvent(QMouseEvent* event){
     int move=event->pos().x()-lastX;
     lastX=event->pos().x();
-    qDebug() << __FUNCTION__ << ": " << event->pos().x() << " move:" << move;
+    //qDebug() << __FUNCTION__ << ": " << event->pos().x() << " move:" << move;
 
     moved=1;
 
@@ -256,7 +256,7 @@ void Spectrum::paintEvent(QPaintEvent*) {
                 painter.drawLine(i, 0, i, height());
 
                 painter.setOpacity(1.0);
-                painter.setPen(QPen(Qt::green, 1));
+                painter.setPen(QPen(Qt::black, 1));
                 painter.setFont(QFont("Arial", 10));
                 painter.drawText(i,height(),QString::number(f/1000));
             }
@@ -285,7 +285,7 @@ void Spectrum::paintEvent(QPaintEvent*) {
     if(subRx) {
         filterLeft = (filterLow - (-sampleRate / 2) + (subRxFrequency-frequency)) * width() / sampleRate;
         filterRight = (filterHigh - (-sampleRate / 2) + (subRxFrequency-frequency)) * width() / sampleRate;
-        painter.setPen(QPen(Qt::green,1));
+        painter.setPen(QPen(Qt::black,1));
         painter.setFont(QFont("Arial", 12));
         painter.drawText(filterRight,height()-20,QString::number(subRxFrequency));
     }
@@ -412,12 +412,12 @@ void Spectrum::setFrequency(long long f) {
     frequency=f;
     subRxFrequency=f;
 
-    qDebug() << "Spectrum:setFrequency: " << f;
+    //qDebug() << "Spectrum:setFrequency: " << f;
 }
 
 void Spectrum::setSubRxFrequency(long long f) {
     subRxFrequency=f;
-    qDebug() << "Spectrum:setSubRxFrequency: " << f;
+    //qDebug() << "Spectrum:setSubRxFrequency: " << f;
 }
 
 void Spectrum::setSubRxState(bool state) {

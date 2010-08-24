@@ -222,6 +222,8 @@ UI::UI() {
     widget.spectrumFrame->setHost(configure.getHost());
     widget.spectrumFrame->setReceiver(configure.getReceiver());
 
+    widget.actionSubrx->setDisabled(TRUE);
+
     band.initBand(band.getBand());
 
     
@@ -365,7 +367,7 @@ void UI::encodingChanged(int choice) {
 }
 
 void UI::actionConnect() {
-    qDebug() << "UI::actionConnect";
+    //qDebug() << "UI::actionConnect";
     QComboBox* hostComboBox=configure.findChild<QComboBox*>("hostComboBox");
     if(hostComboBox==NULL) {
         qDebug() << "hostComboBox id NULL";
@@ -381,13 +383,12 @@ void UI::actionConnect() {
     connection.connect(hostComboBox->currentText(), rxSpinBox->value());
     widget.spectrumFrame->setHost(connection.getHost());
     widget.spectrumFrame->setReceiver(connection.getReceiver());
-    widget.actionConnectToServer->setDisabled(TRUE);
-    widget.actionDisconnectFromServer->setDisabled(FALSE);
+
 
 }
 
 void UI::actionDisconnect() {
-    qDebug() << "UI::actionDisconnect";
+    //qDebug() << "UI::actionDisconnect";
 
     if(qTimer!=NULL) {
         qTimer->stop();
@@ -397,15 +398,18 @@ void UI::actionDisconnect() {
     connection.disconnect();
     widget.actionConnectToServer->setDisabled(FALSE);
     widget.actionDisconnectFromServer->setDisabled(TRUE);
+    widget.actionSubrx->setDisabled(TRUE);
 
 
+    configure.connected(FALSE);
 }
 
 void UI::connected() {
     qDebug() << "UI::connected";
 
+    configure.connected(TRUE);
+
     // send initial settings
-    
     frequency=band.getFrequency();
     command.clear(); QTextStream(&command) << "setFrequency " << frequency;
     connection.sendCommand(command);
@@ -415,6 +419,10 @@ void UI::connected() {
     command.clear(); QTextStream(&command) << "setFilter " << filters.getLow() << " " << filters.getHigh();
     connection.sendCommand(command);
     widget.spectrumFrame->setFilter(filters.getLow(),filters.getHigh());
+
+    widget.actionConnectToServer->setDisabled(TRUE);
+    widget.actionDisconnectFromServer->setDisabled(FALSE);
+    widget.actionSubrx->setDisabled(FALSE);
 
     // select the audio
     //audio.select_audio(widget.audioComboBox->itemData(audio_device).value<QAudioDeviceInfo >);
@@ -467,6 +475,7 @@ void UI::disconnected(QString message) {
 
     widget.actionConnectToServer->setDisabled(FALSE);
     widget.actionDisconnectFromServer->setDisabled(TRUE);
+    widget.actionSubrx->setDisabled(TRUE);
 
     //widget.spectrumFrame->setHost("");
     //widget.spectrumFrame->setReceiver(0);
@@ -475,6 +484,8 @@ void UI::disconnected(QString message) {
         qTimer->stop();
         qTimer=NULL;
     }
+
+    configure.connected(FALSE);
 }
 
 void UI::updateSpectrum() {
@@ -539,16 +550,6 @@ void UI::actionSubRx() {
         subRx=FALSE;
         widget.spectrumFrame->setSubRxState(FALSE);
 
-        //command.clear(); QTextStream(&command) << "SetSubRXOutputGain " << 0;
-        //connection.sendCommand(command);
-        //command.clear(); QTextStream(&command) << "SetRXOutputGain " << gain;
-        //connection.sendCommand(command);
-
-        //command.clear(); QTextStream(&command) << "SetPan 0.5";
-        //connection.sendCommand(command);
-        //command.clear(); QTextStream(&command) << "SetSubRxPan 0.5";
-        //connection.sendCommand(command);
-
     } else {
         subRx=TRUE;
 
@@ -561,15 +562,9 @@ void UI::actionSubRx() {
         widget.spectrumFrame->setSubRxState(TRUE);
         command.clear(); QTextStream(&command) << "SetSubRXOutputGain " << subRxGain;
         connection.sendCommand(command);
-        //command.clear(); QTextStream(&command) << "SetPan 0.0"; // left
-        //connection.sendCommand(command);
-        //command.clear(); QTextStream(&command) << "SetSubRxPan 1.0"; // right
-        //connection.sendCommand(command);
         command.clear(); QTextStream(&command) << "SetSubRXFrequency " << frequency - subRxFrequency;
         connection.sendCommand(command);
-
         setSubRxPan();
-        
     }
 
     //widget.actionSubrx.setChecked(subRx);
@@ -729,6 +724,15 @@ void UI::bandChanged(int previousBand,int newBand) {
     // get the current mode
     mode.setMode(band.getMode());
     widget.spectrumFrame->setBand(band.getStringBand());
+
+    if(subRx) {
+
+        int samplerate = widget.spectrumFrame->samplerate();
+        long long frequency=band.getFrequency();
+        if ((subRxFrequency < (frequency - (samplerate / 2))) || (subRxFrequency > (frequency + (samplerate / 2)))) {
+            subRxFrequency=band.getFrequency();
+        }
+    }
     
 }
 
@@ -1086,7 +1090,7 @@ void UI::filterChanged(int previousFilter,int newFilter) {
 }
 
 void UI::frequencyChanged(long long f) {
-    qDebug() << __FUNCTION__ << ": " << f;
+    //qDebug() << __FUNCTION__ << ": " << f;
 
     frequency=f;
     command.clear(); QTextStream(&command) << "setFrequency " << f;
@@ -1096,7 +1100,7 @@ void UI::frequencyChanged(long long f) {
 }
 
 void UI::frequencyMoved(int increment,int step) {
-    qDebug() << __FUNCTION__ << ": increment=" << increment << " step=" << step;
+    //qDebug() << __FUNCTION__ << ": increment=" << increment << " step=" << step;
 
     long long f;
 
@@ -1111,7 +1115,7 @@ void UI::frequencyMoved(int increment,int step) {
         diff = frequency - subRxFrequency;
         command.clear(); QTextStream(&command) << "SetSubRXFrequency " << diff;
         connection.sendCommand(command);
-        qDebug() << "frequencyMoved:subrx: " << increment << "," << subRxFrequency;
+        //qDebug() << "frequencyMoved:subrx: " << increment << "," << subRxFrequency;
         widget.spectrumFrame->setSubRxFrequency(subRxFrequency);
         setSubRxPan();
         qDebug() << command;
@@ -1238,6 +1242,7 @@ void UI::setSubRxPan() {
 
     if(pan<0.0) pan=0.0;
     if(pan>1.0) pan=1.0;
-    command.clear(); QTextStream(&command) << "SetSubRxPan " << pan;
+    command.clear(); QTextStream(&command) << "SetSubRXPan " << pan;
     connection.sendCommand(command);
 }
+
