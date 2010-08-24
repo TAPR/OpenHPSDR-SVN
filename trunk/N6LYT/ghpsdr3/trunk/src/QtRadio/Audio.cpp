@@ -13,7 +13,6 @@ Audio::Audio() {
     sampleRate=8000;
     audio_channels=1;
     audio_byte_order=QAudioFormat::LittleEndian;
-
 }
 
 Audio::~Audio() {
@@ -154,12 +153,12 @@ void Audio::aLawDecode(char* buffer,int length) {
     for (i=0; i < length; i++) {
         v=decodetable[buffer[i]&0xFF];
 
-        if(audio_byte_order==QAudioFormat::BigEndian) {
-            decoded_buffer.append((char)((v>>8)&0xFF));
+        if(audio_byte_order==QAudioFormat::LittleEndian) {
             decoded_buffer.append((char)(v&0xFF));
+            decoded_buffer.append((char)((v>>8)&0xFF));
         } else {
-            decoded_buffer.append((char)(v&0xFF));
             decoded_buffer.append((char)((v>>8)&0xFF));
+            decoded_buffer.append((char)(v&0xFF));
         }
     }
 
