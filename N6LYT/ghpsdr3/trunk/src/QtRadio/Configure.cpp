@@ -27,6 +27,7 @@ Configure::Configure() {
     widget.encodingComboBox->addItem("16 bit pcm");
     widget.byteOrderComboBox->addItem("LittleEndian");
     widget.byteOrderComboBox->addItem("BigEndian");
+    widget.byteOrderComboBox->setCurrentIndex(0);
 }
 
 Configure::~Configure() {
@@ -134,8 +135,14 @@ int Configure::getWaterfallLow() {
 QAudioFormat::Endian Configure::getByteOrder() {
     QAudioFormat::Endian order=QAudioFormat::BigEndian;
 
-    if(widget.byteOrderComboBox->currentText()=="LittleEndian") {
+    switch(widget.byteOrderComboBox->currentIndex()) {
+    case 0:
         order=QAudioFormat::LittleEndian;
+        break;
+    case 1:
+        order=QAudioFormat::BigEndian;
+        break;
+
     }
 
     qDebug() << "getByteOrder: " << widget.byteOrderComboBox->currentText() << " order:" << order;
