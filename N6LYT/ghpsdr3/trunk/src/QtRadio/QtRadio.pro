@@ -6,7 +6,7 @@
 
 QT       += core gui network multimedia  opengl
 
-TARGET = QtRadio
+TARGET = ../../bin/QtRadio
 TEMPLATE = app
 
 

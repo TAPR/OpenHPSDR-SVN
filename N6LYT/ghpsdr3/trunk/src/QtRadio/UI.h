@@ -134,7 +134,8 @@ signals:
     void subRxStateChanged(bool state);
 
 private:
-    
+    void setSubRxPan();
+
     Ui::UI widget;
     Audio audio;
     int audio_device;
@@ -165,7 +166,7 @@ private:
 
     int cwPitch;
 
-    long long currentFrequency;
+    long long frequency;
 
     int fps;
 
@@ -174,6 +175,7 @@ private:
     QString command;
 
     Configure configure;
+    int sampleRate;
 
 };
 
