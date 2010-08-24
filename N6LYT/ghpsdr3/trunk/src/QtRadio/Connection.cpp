@@ -8,7 +8,7 @@
 #include "Connection.h"
 
 Connection::Connection() {
-    qDebug() << "Connection::Connection";
+    //qDebug() << "Connection::Connection";
     tcpSocket=NULL;
     sem.release(1);
 }
@@ -33,13 +33,13 @@ void Connection::connect(QString h,int r) {
     QObject::connect(tcpSocket, SIGNAL(readyRead()),
             this, SLOT(socketData()));
 
-    qDebug() << "Connection::connect: connectToHost";
+    //qDebug() << "Connection::connect: connectToHost";
     tcpSocket->connectToHost(host,receiver+DSPSERVER_BASE_PORT);
 }
 
 void Connection::disconnect() {
 
-    qDebug() << "Connection::disconnect";
+    //qDebug() << "Connection::disconnect";
     if(tcpSocket!=NULL) {
         tcpSocket->close();
         tcpSocket=NULL;
@@ -66,7 +66,7 @@ void Connection::socketError(QAbstractSocket::SocketError socketError) {
 }
 
 void Connection::connected() {
-    qDebug() << "Connected" << tcpSocket->isValid();
+    //qDebug() << "Connected" << tcpSocket->isValid();
     emit isConnected();
 }
 

@@ -31,6 +31,16 @@ Configure::Configure() {
 Configure::~Configure() {
 }
 
+void Configure::connected(bool state) {
+    widget.audioDeviceComboBox->setDisabled(state);
+    widget.sampleRateComboBox->setDisabled(state);
+    widget.audioChannelsSpinBox->setDisabled(state);
+    widget.encodingComboBox->setDisabled(state);
+
+    widget.hostComboBox->setDisabled(state);
+    widget.rxSpinBox->setDisabled(state);
+}
+
 void Configure::loadSettings(QSettings* settings) {
     int i;
 

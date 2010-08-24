@@ -18,9 +18,12 @@ class Configure : public QDialog {
 public:
     Configure();
     virtual ~Configure();
+
     void loadSettings(QSettings* settings);
     void saveSettings(QSettings* settings);
-    
+
+    void connected(bool state);
+
     QString getHost();
     int getReceiver();
     
@@ -31,6 +34,7 @@ public:
     int getWaterfallHigh();
     int getWaterfallLow();
     
+
 private:
     Ui::Configure widget;
 };
