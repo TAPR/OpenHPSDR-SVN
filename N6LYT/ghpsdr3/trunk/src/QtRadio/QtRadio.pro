@@ -32,7 +32,10 @@ SOURCES += main.cpp\
     BandStackEntry.cpp \
     Band.cpp \
     Audio.cpp \
-    AMFilters.cpp
+    AMFilters.cpp \
+    BandLimit.cpp \
+    FrequencyInfo.cpp \
+    Frequency.cpp
         
 
 HEADERS  += \ 
@@ -57,7 +60,10 @@ HEADERS  += \
     BandStackEntry.h \
     Band.h \
     Audio.h \
-    AMFilters.h
+    AMFilters.h \
+    BandLimit.h \
+    FrequencyInfo.h \
+    Frequency.h
 
 FORMS    += \   
     UI.ui \

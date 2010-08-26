@@ -28,12 +28,32 @@ Configure::Configure() {
     widget.byteOrderComboBox->addItem("LittleEndian");
     widget.byteOrderComboBox->addItem("BigEndian");
     widget.byteOrderComboBox->setCurrentIndex(0);
+
+    connect(widget.spectrumHighSpinBox,SIGNAL(valueChanged(int)),this,SLOT(slotSpectrumHighChanged(int)));
+    connect(widget.spectrumLowSpinBox,SIGNAL(valueChanged(int)),this,SLOT(slotSpectrumLowChanged(int)));
+    connect(widget.fpsSpinBox,SIGNAL(valueChanged(int)),this,SLOT(slotFpsChanged(int)));
+    connect(widget.waterfallHighSpinBox,SIGNAL(valueChanged(int)),this,SLOT(slotWaterfallHighChanged(int)));
+    connect(widget.waterfallLowSpinBox,SIGNAL(valueChanged(int)),this,SLOT(slotWaterfallLowChanged(int)));
+
+    connect(widget.audioDeviceComboBox,SIGNAL(currentIndexChanged(int)),this,SLOT(slotAudioDeviceChanged(int)));
+    connect(widget.audioChannelsSpinBox,SIGNAL(valueChanged(int)),this,SLOT(slotChannelsChanged(int)));
+    connect(widget.byteOrderComboBox,SIGNAL(currentIndexChanged(int)),this,SLOT(slotByteOrderChanged(int)));
+    connect(widget.sampleRateComboBox,SIGNAL(currentIndexChanged(int)),this,SLOT(slotSampleRateChanged(int)));
+
+    connect(widget.hostComboBox,SIGNAL(currentIndexChanged(int)),this,SLOT(slotHostChanged(int)));
+    connect(widget.rxSpinBox,SIGNAL(valueChanged(int)),this,SLOT(slotReceiverChanged(int)));
+
 }
 
 Configure::~Configure() {
 }
 
+void Configure::initAudioDevices(Audio* audio) {
+    audio->get_audio_devices(widget.audioDeviceComboBox);
+}
+
 void Configure::connected(bool state) {
+    // set configuration options enabled/disabled based on connection state
     widget.audioDeviceComboBox->setDisabled(state);
     widget.sampleRateComboBox->setDisabled(state);
     widget.audioChannelsSpinBox->setDisabled(state);
@@ -103,6 +123,69 @@ void Configure::saveSettings(QSettings* settings) {
     settings->setValue("byteorder",widget.byteOrderComboBox->currentIndex());
     settings->endGroup();
 }
+
+void Configure::slotHostChanged(int selection) {
+    emit hostChanged(widget.hostComboBox->currentText());
+}
+
+void Configure::slotReceiverChanged(int receiver) {
+    emit receiverChanged(receiver);
+}
+
+void Configure::slotSpectrumHighChanged(int high) {
+    emit spectrumHighChanged(high);
+}
+
+void Configure::slotSpectrumLowChanged(int low) {
+    emit spectrumLowChanged(low);
+}
+
+void Configure::slotFpsChanged(int fps) {
+    emit fpsChanged(fps);
+}
+
+void Configure::slotWaterfallHighChanged(int high) {
+    emit waterfallHighChanged(high);
+}
+
+void Configure::slotWaterfallLowChanged(int low) {
+    emit waterfallLowChanged(low);
+}
+
+void Configure::slotAudioDeviceChanged(int selection) {
+    emit audioDeviceChanged(widget.audioDeviceComboBox->itemData(selection).value<QAudioDeviceInfo >(),
+                            widget.sampleRateComboBox->currentText().toInt(),
+                            widget.audioChannelsSpinBox->value(),
+                            widget.byteOrderComboBox->currentText()=="LittleEndian"?QAudioFormat::LittleEndian:QAudioFormat::BigEndian
+                            );
+}
+
+void Configure::slotSampleRateChanged(int selection) {
+    emit audioDeviceChanged(widget.audioDeviceComboBox->itemData(widget.audioDeviceComboBox->currentIndex()).value<QAudioDeviceInfo >(),
+                            widget.sampleRateComboBox->currentText().toInt(),
+                            widget.audioChannelsSpinBox->value(),
+                            widget.byteOrderComboBox->currentText()=="LittleEndian"?QAudioFormat::LittleEndian:QAudioFormat::BigEndian
+                            );
+}
+
+void Configure::slotChannelsChanged(int channels) {
+    emit audioDeviceChanged(widget.audioDeviceComboBox->itemData(widget.audioDeviceComboBox->currentIndex()).value<QAudioDeviceInfo >(),
+                            widget.sampleRateComboBox->currentText().toInt(),
+                            widget.audioChannelsSpinBox->value(),
+                            widget.byteOrderComboBox->currentText()=="LittleEndian"?QAudioFormat::LittleEndian:QAudioFormat::BigEndian
+                            );
+}
+
+void Configure::slotByteOrderChanged(int selection) {
+    emit audioDeviceChanged(widget.audioDeviceComboBox->itemData(widget.audioDeviceComboBox->currentIndex()).value<QAudioDeviceInfo >(),
+                            widget.sampleRateComboBox->currentText().toInt(),
+                            widget.audioChannelsSpinBox->value(),
+                            widget.byteOrderComboBox->currentText()=="LittleEndian"?QAudioFormat::LittleEndian:QAudioFormat::BigEndian
+                            );
+}
+
+
+
 
 QString Configure::getHost() {
     return widget.hostComboBox->currentText();

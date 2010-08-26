@@ -32,8 +32,8 @@ UI::UI() {
 
     widget.gridLayout->setContentsMargins(2,2,2,2);
     widget.gridLayout->setVerticalSpacing(0);
-    
-    // connect up all the components
+
+    // connect up all the menus
     connect(widget.actionConnectToServer,SIGNAL(triggered()),this,SLOT(actionConnect()));
     connect(widget.actionDisconnectFromServer,SIGNAL(triggered()),this,SLOT(actionDisconnect()));
 
@@ -89,140 +89,54 @@ UI::UI() {
     connect(widget.actionSlow,SIGNAL(triggered()),this,SLOT(actionSlow()));
     connect(widget.actionMedium,SIGNAL(triggered()),this,SLOT(actionMedium()));
     connect(widget.actionFast,SIGNAL(triggered()),this,SLOT(actionFast()));
-
-    //connect(widget.afGainHorizontalSlider,SIGNAL(valueChanged(int)),this,SLOT(setGain(int)));
-
-    //connect(widget.subRxAfGainHorizontalSlider,SIGNAL(valueChanged(int)),this,SLOT(setSubRxGain(int)));
     connect(widget.actionSubrx,SIGNAL(triggered()),this,SLOT(actionSubRx()));
 
+    // connect up band and frequency changes
     connect(&band,SIGNAL(bandChanged(int,int)),this,SLOT(bandChanged(int,int)));
     connect(&band,SIGNAL(frequencyChanged(long long)),this,SLOT(frequencyChanged(long long)));
-    connect(&mode,SIGNAL(modeChanged(int,int)),this,SLOT(modeChanged(int,int)));
-    connect(&filters,SIGNAL(filtersChanged(FiltersBase*,FiltersBase*)),this,SLOT(filtersChanged(FiltersBase*,FiltersBase*)));
 
+    // connect up mode changes
+    connect(&mode,SIGNAL(modeChanged(int,int)),this,SLOT(modeChanged(int,int)));
+
+    // connect up filter changes
+    connect(&filters,SIGNAL(filtersChanged(FiltersBase*,FiltersBase*)),this,SLOT(filtersChanged(FiltersBase*,FiltersBase*)));
     connect(&filters,SIGNAL(filterChanged(int,int)),this,SLOT(filterChanged(int,int)));
 
-    //connect(&connection,SIGNAL(isConnected()),this,SLOT(connected()));
-    //connect(&connection,SIGNAL(disconnected(QString)),this,SLOT(disconnected(QString)));
-
-
+    // connect up spectrum frame
     connect(widget.spectrumFrame, SIGNAL(frequencyMoved(int,int)),
             this, SLOT(frequencyMoved(int,int)));
     connect(widget.spectrumFrame, SIGNAL(frequencyChanged(long long)),
             this, SLOT(frequencyChanged(long long)));
-
     connect(widget.spectrumFrame, SIGNAL(spectrumHighChanged(int)),
             this,SLOT(spectrumHighChanged(int)));
     connect(widget.spectrumFrame, SIGNAL(spectrumLowChanged(int)),
             this,SLOT(spectrumLowChanged(int)));
-
     connect(widget.spectrumFrame, SIGNAL(waterfallHighChanged(int)),
             this,SLOT(waterfallHighChanged(int)));
     connect(widget.spectrumFrame, SIGNAL(waterfallLowChanged(int)),
             this,SLOT(waterfallLowChanged(int)));
 
+
+
+    // connect up configuration changes
+    connect(&configure,SIGNAL(spectrumHighChanged(int)),this,SLOT(spectrumHighChanged(int)));
+    connect(&configure,SIGNAL(spectrumLowChanged(int)),this,SLOT(spectrumLowChanged(int)));
+    connect(&configure,SIGNAL(fpsChanged(int)),this,SLOT(fpsChanged(int)));
+    connect(&configure,SIGNAL(waterfallHighChanged(int)),this,SLOT(waterfallHighChanged(int)));
+    connect(&configure,SIGNAL(waterfallLowChanged(int)),this,SLOT(waterfallLowChanged(int)));
+
+    configure.initAudioDevices(&audio);
+    connect(&configure,SIGNAL(audioDeviceChanged(QAudioDeviceInfo,int,int,QAudioFormat::Endian)),this,SLOT(audioDeviceChanged(QAudioDeviceInfo,int,int,QAudioFormat::Endian)));
+
+    connect(&configure,SIGNAL(hostChanged(QString)),this,SLOT(hostChanged(QString)));
+    connect(&configure,SIGNAL(receiverChanged(int)),this,SLOT(receiverChanged(int)));
+
     fps=15;
-
-    QSpinBox* spectrumHighSpinBox=configure.findChild<QSpinBox*>("spectrumHighSpinBox");
-    if(spectrumHighSpinBox==NULL) {
-        qDebug() << "spectrumHighSpinBox id NULL";
-    } else {
-        spectrumHighSpinBox->setValue(widget.spectrumFrame->getHigh());
-        connect(spectrumHighSpinBox,SIGNAL(valueChanged(int)),this,SLOT(spectrumHighChanged(int)));
-    }
-
-    QSpinBox* spectrumLowSpinBox=configure.findChild<QSpinBox*>("spectrumLowSpinBox");
-    if(spectrumLowSpinBox==NULL) {
-        qDebug() << "spectrumLowSpinBox id NULL";
-    } else {
-        spectrumLowSpinBox->setValue(widget.spectrumFrame->getLow());
-        connect(spectrumLowSpinBox,SIGNAL(valueChanged(int)),this,SLOT(spectrumLowChanged(int)));
-    }
-
-    QSpinBox* fpsSpinBox=configure.findChild<QSpinBox*>("fpsSpinBox");
-    if(fpsSpinBox==NULL) {
-        qDebug() << "fpsSpinBox id NULL";
-    } else {
-        fpsSpinBox->setValue(fps);
-        connect(fpsSpinBox,SIGNAL(valueChanged(int)),this,SLOT(fpsChanged(int)));
-    }
-
-    QSpinBox* waterfallHighSpinBox=configure.findChild<QSpinBox*>("waterfallHighSpinBox");
-    if(waterfallHighSpinBox==NULL) {
-        qDebug() << "waterfallHighSpinBox id NULL";
-    } else {
-        waterfallHighSpinBox->setValue(widget.waterfallFrame->getHigh());
-        connect(waterfallHighSpinBox,SIGNAL(valueChanged(int)),this,SLOT(waterfallHighChanged(int)));
-    }
-
-    QSpinBox* waterfallLowSpinBox=configure.findChild<QSpinBox*>("waterfallLowSpinBox");
-    if(waterfallLowSpinBox==NULL) {
-        qDebug() << "waterfallLowSpinBox id NULL";
-    } else {
-        waterfallLowSpinBox->setValue(widget.waterfallFrame->getLow());
-        connect(waterfallLowSpinBox,SIGNAL(valueChanged(int)),this,SLOT(waterfallLowChanged(int)));
-    }
-
-    QComboBox* audioDeviceComboBox=configure.findChild<QComboBox*>("audioDeviceComboBox");
-    if(audioDeviceComboBox==NULL) {
-        qDebug() << "audioDeviceComboBox id NULL";
-    } else {
-        audio.get_audio_devices(audioDeviceComboBox);
-        connect(audioDeviceComboBox, SIGNAL(currentIndexChanged(int)),
-                this, SLOT(audioChanged(int)));
-    }
-
-    QComboBox* sampleRateComboBox=configure.findChild<QComboBox*>("sampleRateComboBox");
-    if(sampleRateComboBox==NULL) {
-        qDebug() << "sampleRateComboBox id NULL";
-    } else {
-        connect(sampleRateComboBox, SIGNAL(currentIndexChanged(int)),
-                this, SLOT(sampleRateChanged(int)));
-    }
-
-    QComboBox* encodingComboBox=configure.findChild<QComboBox*>("encodingComboBox");
-    if(encodingComboBox==NULL) {
-        qDebug() << "encodingComboBox id NULL";
-    } else {
-        connect(encodingComboBox, SIGNAL(currentIndexChanged(int)),
-                this, SLOT(encodingChanged(int)));
-    }
-
-    QSpinBox* audioChannelsSpinBox=configure.findChild<QSpinBox*>("audioChannelsSpinBox");
-    if(audioChannelsSpinBox==NULL) {
-        qDebug() << "audioChannelsSpinBox id NULL";
-    } else {
-        connect(audioChannelsSpinBox,SIGNAL(valueChanged(int)),this,SLOT(audioChannelsChanged(int)));
-    }
-
-    QComboBox* byteOrderComboBox=configure.findChild<QComboBox*>("byteOrderComboBox");
-    if(byteOrderComboBox==NULL) {
-        qDebug() << "byteOrderComboBox id NULL";
-    } else {
-        connect(byteOrderComboBox, SIGNAL(currentIndexChanged(int)),
-                this, SLOT(byteOrderChanged(int)));
-    }
-
-
-
-
-
-    QComboBox* hostComboBox=configure.findChild<QComboBox*>("hostComboBox");
-    if(hostComboBox==NULL) {
-        qDebug() << "hostComboBox id NULL";
-    } else {
-        connect(hostComboBox, SIGNAL(currentIndexChanged(int)),
-                this, SLOT(hostChanged(int)));
-    }
-
     gain=40;
-
     subRx=FALSE;
     subRxGain=40;
-
     agc=AGC_SLOW;
     widget.actionSlow->setChecked(TRUE);
-
     cwPitch=600;
 
     audio_device=0;
@@ -241,7 +155,6 @@ UI::UI() {
     widget.actionMuteSubRx->setDisabled(TRUE);
 
     band.initBand(band.getBand());
-
     
 }
 
@@ -256,24 +169,26 @@ UI::~UI() {
 
 void UI::loadSettings() {
     QSettings settings("G0ORX", "QtRadio");
+    qDebug() << "saveSettings: " << settings.fileName();
+
     band.loadSettings(&settings);
     configure.loadSettings(&settings);
 }
 
 void UI::saveSettings() {
     QSettings settings("G0ORX","QtRadio");
+    qDebug() << "saveSettings: " << settings.fileName();
 
-    qDebug() << "closeEvent: " << settings.fileName();
     configure.saveSettings(&settings);
     band.saveSettings(&settings);
 }
 
-void UI::hostChanged(int choice) {
-    widget.spectrumFrame->setHost(configure.getHost());
+void UI::hostChanged(QString host) {
+    widget.spectrumFrame->setHost(host);
 }
 
-void UI::rxChanged(int rx) {
-    widget.spectrumFrame->setReceiver(configure.getReceiver());
+void UI::receiverChanged(int rx) {
+    widget.spectrumFrame->setReceiver(rx);
 }
 
 void UI::closeEvent(QCloseEvent* event) {
@@ -289,8 +204,8 @@ void UI::spectrumHighChanged(int high) {
 
     widget.spectrumFrame->setHigh(high);
 
-    QSpinBox* spectrumHighSpinBox=configure.findChild<QSpinBox*>("spectrumHighSpinBox");
-    spectrumHighSpinBox->setValue(high);
+//    QSpinBox* spectrumHighSpinBox=configure.findChild<QSpinBox*>("spectrumHighSpinBox");
+//    spectrumHighSpinBox->setValue(high);
 }
 
 void UI::spectrumLowChanged(int low) {
@@ -298,8 +213,8 @@ void UI::spectrumLowChanged(int low) {
 
     widget.spectrumFrame->setLow(low);
 
-    QSpinBox* spectrumLowSpinBox=configure.findChild<QSpinBox*>("spectrumLowSpinBox");
-    spectrumLowSpinBox->setValue(low);
+//    QSpinBox* spectrumLowSpinBox=configure.findChild<QSpinBox*>("spectrumLowSpinBox");
+//    spectrumLowSpinBox->setValue(low);
 }
 
 void UI::fpsChanged(int f) {
@@ -319,78 +234,20 @@ void UI::waterfallHighChanged(int high) {
     qDebug() << __LINE__ << __FUNCTION__ << ": " << high;
 
     widget.waterfallFrame->setHigh(high);
-
-    QSpinBox* waterfallHighSpinBox=configure.findChild<QSpinBox*>("waterfallHighSpinBox");
-    waterfallHighSpinBox->setValue(high);
 }
 
 void UI::waterfallLowChanged(int low) {
     qDebug() << __FUNCTION__ << ": " << low;
 
     widget.waterfallFrame->setLow(low);
-
-    QSpinBox* waterfallLowSpinBox=configure.findChild<QSpinBox*>("waterfallLowSpinBox");
-    waterfallLowSpinBox->setValue(low);
 }
 
-void UI::audioChanged(int choice) {
-    qDebug() << "audioChanged " << choice;
-    audio_device=choice;
-    QComboBox* audioDeviceComboBox=configure.findChild<QComboBox*>("audioDeviceComboBox");
-    if(audioDeviceComboBox==NULL) {
-        qDebug() << "UI::audioChanged: audioDeviceComboBox is NULL";
-        return;
-    }
-    QComboBox* sampleRateComboBox=configure.findChild<QComboBox*>("sampleRateComboBox");
-    if(sampleRateComboBox==NULL) {
-        qDebug() << "UI::audioChanged: sampleRateComboBox is NULL";
-        return;
-    }
-
-    audio.select_audio(audioDeviceComboBox->itemData(audio_device).value<QAudioDeviceInfo >(),audio_sample_rate,audio_channels,audio_byte_order);
-}
-
-void UI::sampleRateChanged(int choice) {
-    qDebug() << "sampleRateChanged " << choice;
-
-
-    QComboBox* audioDeviceComboBox=configure.findChild<QComboBox*>("audioDeviceComboBox");
-    if(audioDeviceComboBox==NULL) {
-        qDebug() << "UI::audioChanged: audioDeviceComboBox is NULL";
-        return;
-    }
-    QComboBox* sampleRateComboBox=configure.findChild<QComboBox*>("sampleRateComboBox");
-    if(sampleRateComboBox==NULL) {
-        qDebug() << "UI::audioChanged: sampleRateComboBox is NULL";
-        return;
-    }
-    audio_sample_rate=sampleRateComboBox->itemText(choice).toInt();
-    audio.select_audio(audioDeviceComboBox->itemData(audio_device).value<QAudioDeviceInfo>(),audio_sample_rate,audio_channels,audio_byte_order);
-}
-
-void UI::audioChannelsChanged(int channels) {
-    QComboBox* audioDeviceComboBox=configure.findChild<QComboBox*>("audioDeviceComboBox");
-    if(audioDeviceComboBox==NULL) {
-        qDebug() << "UI::audioChanged: audioDeviceComboBox is NULL";
-        return;
-    }
-    audio_channels=channels;
-    audio.select_audio(audioDeviceComboBox->itemData(audio_device).value<QAudioDeviceInfo>(),audio_sample_rate,audio_channels,audio_byte_order);
+void UI::audioDeviceChanged(QAudioDeviceInfo info,int rate,int channels,QAudioFormat::Endian byteOrder) {
+    audio.select_audio(info,rate,channels,byteOrder);
 }
 
 void UI::encodingChanged(int choice) {
-
-}
-
-void UI::byteOrderChanged(int choice) {
-    QComboBox* audioDeviceComboBox=configure.findChild<QComboBox*>("audioDeviceComboBox");
-    if(audioDeviceComboBox==NULL) {
-        qDebug() << "UI::audioChanged: audioDeviceComboBox is NULL";
-        return;
-    }
-    audio_byte_order=configure.getByteOrder();
-    qDebug() << "byteOrderChanged: " << audio_byte_order;
-    audio.select_audio(audioDeviceComboBox->itemData(audio_device).value<QAudioDeviceInfo>(),audio_sample_rate,audio_channels,audio_byte_order);
+    // not supported yet
 }
 
 void UI::actionConnect() {
@@ -453,11 +310,6 @@ void UI::connected() {
     widget.actionSubrx->setDisabled(FALSE);
     widget.actionMuteSubRx->setDisabled(TRUE);
 
-    // select the audio
-    //audio.select_audio(widget.audioComboBox->itemData(audio_device).value<QAudioDeviceInfo >);
-
-    
-
     // start the spectrum
     qDebug() << "starting spectrum timer";
     qTimer= new QTimer(this);
@@ -471,12 +323,9 @@ void UI::connected() {
     connection.sendCommand(command);
 
     if (!getenv("QT_RADIO_NO_LOCAL_AUDIO")) {
-       command.clear(); QTextStream(&command) << "startAudioStream " << (400*(audio_sample_rate/8000)) << " " << audio_sample_rate << " " << audio_channels;
+       command.clear(); QTextStream(&command) << "startAudioStream " << (400*(audio.get_sample_rate()/8000)) << " " << audio.get_sample_rate() << " " << audio.get_channels();
        connection.sendCommand(command);
     }
-    //widget.serverConnectPushButton->setText("Disconnect");
-    //widget.serverConnectPushButton->setDisabled(FALSE);
-    //widget.audioComboBox->setDisabled(TRUE);
 
     command.clear(); QTextStream(&command) << "SetPan 0.5"; // center
     connection.sendCommand(command);
@@ -498,17 +347,10 @@ void UI::disconnected(QString message) {
 
     widget.statusbar->showMessage(message,5000);
 
-    //widget.serverConnectPushButton->setText("Connect");
-    //widget.serverConnectPushButton->setDisabled(FALSE);
-    //widget.audioComboBox->setDisabled(FALSE);
-
     widget.actionConnectToServer->setDisabled(FALSE);
     widget.actionDisconnectFromServer->setDisabled(TRUE);
     widget.actionSubrx->setDisabled(TRUE);
     widget.actionMuteSubRx->setDisabled(TRUE);
-
-    //widget.spectrumFrame->setHost("");
-    //widget.spectrumFrame->setReceiver(0);
 
     if(qTimer!=NULL) {
         qTimer->stop();
@@ -758,10 +600,11 @@ void UI::bandChanged(int previousBand,int newBand) {
     // get the current mode
     mode.setMode(band.getMode());
     widget.spectrumFrame->setBand(band.getStringBand());
+    int samplerate = widget.spectrumFrame->samplerate();
+    BandLimit limits=band.getBandLimits(band.getFrequency()-(samplerate/2),band.getFrequency()+(samplerate/2));
+    widget.spectrumFrame->setBandLimits(limits.min(),limits.max());
 
     if(subRx) {
-
-        int samplerate = widget.spectrumFrame->samplerate();
         long long frequency=band.getFrequency();
         if ((subRxFrequency < (frequency - (samplerate / 2))) || (subRxFrequency > (frequency + (samplerate / 2)))) {
             subRxFrequency=band.getFrequency();

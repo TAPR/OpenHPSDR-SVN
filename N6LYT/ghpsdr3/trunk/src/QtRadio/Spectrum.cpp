@@ -26,6 +26,9 @@ Spectrum::Spectrum(QWidget*& widget) {
     subRxFrequency=0LL;
     subRx=FALSE;
 
+    band_min=0LL;
+    band_max=0LL;
+
     samples=NULL;
     
     receiver=0;
@@ -69,6 +72,13 @@ void Spectrum::initialize() {
 
 int Spectrum::samplerate() {
     return sampleRate;
+}
+
+void Spectrum::setBandLimits(long long min,long long max) {
+
+    qDebug() << "Spectrum::setBandLimits: " << min << "," << max;
+    band_min=min;
+    band_max=max;
 }
 
 void Spectrum::setObjectName(QString name) {
@@ -264,6 +274,22 @@ void Spectrum::paintEvent(QPaintEvent*) {
         f+=(long long)hzPerPixel;
     }
 
+    // draw the band limits
+    long long min_display=frequency-(sampleRate/2);
+    long long max_display=frequency+(sampleRate/2);
+    if(band_min!=0LL && band_max!=0LL) {
+        int i;
+        painter.setPen(QPen(Qt::red, 2));
+        if((min_display<band_min)&&(max_display>band_min)) {
+            i=(band_min-min_display)/(long long)hzPerPixel;
+            painter.drawLine(i,0,i,height());
+        }
+        if((min_display<band_max)&&(max_display>band_max)) {
+            i=(band_max-min_display)/(long long)hzPerPixel;
+            painter.drawLine(i+1,0,i+1,height());
+        }
+
+    }
 
     // draw cursor
     painter.setPen(QPen(Qt::red, 1));

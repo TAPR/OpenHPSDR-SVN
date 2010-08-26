@@ -13,6 +13,7 @@
 #include <QDebug>
 
 #include "BandStackEntry.h"
+#include "BandLimit.h"
 
 
 #define BAND_160 0
@@ -54,6 +55,7 @@ public:
     int getWaterfallLow();
     void loadSettings(QSettings* settings);
     void saveSettings(QSettings* settings);
+    BandLimit getBandLimits(long long min, long long max);
 
 signals:
     void bandChanged(int previousBand,int newBand);
@@ -64,6 +66,7 @@ private:
     int currentStack;
     int stack[BAND_LAST];
     BandStackEntry bandstack[BAND_LAST][BANDSTACK_ENTRIES];
+    QVector <BandLimit> limits;
 };
 
 #endif	/* BAND_H */
