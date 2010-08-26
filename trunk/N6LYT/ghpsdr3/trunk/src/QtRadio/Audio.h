@@ -29,6 +29,9 @@ public:
     void process_audio(char* header,char* buffer,int length);
     void get_audio_devices(QComboBox* comboBox);
 
+    int get_sample_rate();
+    int get_channels();
+
 private:
     void aLawDecode(char* buffer,int length);
     void init_decodetable();

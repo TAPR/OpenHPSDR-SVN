@@ -175,6 +175,33 @@ Band::Band() {
     bandstack[BAND_WWV][4].setFrequency(20000000LL);
     bandstack[BAND_WWV][4].setMode(MODE_AM);
     bandstack[BAND_WWV][4].setFilter(3);
+
+    limits.clear();
+    limits << BandLimit(1800000LL,2000000LL);
+    limits << BandLimit(3500000LL,4000000LL);
+    limits << BandLimit(5330500LL,5403500LL);
+    limits << BandLimit(7000000LL,7300000LL);
+    limits << BandLimit(10100000LL,10150000LL);
+    limits << BandLimit(14000000LL,14350000LL);
+    limits << BandLimit(18068000LL,18168000LL);
+    limits << BandLimit(21000000LL,21450000LL);
+    limits << BandLimit(24890000LL,24990000LL);
+    limits << BandLimit(28000000LL,29700000LL);
+    limits << BandLimit(50000000LL,54000000LL);
+    limits << BandLimit(144000000LL,148000000LL);
+    limits << BandLimit(222000000LL,224980000LL);
+    limits << BandLimit(420000000LL,450000000LL);
+    limits << BandLimit(902000000LL,928000000LL);
+    limits << BandLimit(1240000000LL,1300000000LL);
+    limits << BandLimit(2300000000LL,2450000000LL);
+    limits << BandLimit(3456000000LL,3456400000LL);
+    limits << BandLimit(5760000000LL,5760400000LL);
+    limits << BandLimit(10368000000LL,10368400000LL);
+    limits << BandLimit(24192000000LL,24192400000LL);
+    limits << BandLimit(47088000000LL,47088400000LL);
+    limits << BandLimit(0l,0L);
+
+
 }
 
 Band::~Band() {
@@ -378,4 +405,22 @@ int Band::getWaterfallHigh() {
 
 int Band::getWaterfallLow() {
     return bandstack[currentBand][currentStack].getWaterfallLow();
+}
+
+BandLimit Band::getBandLimits(long long minDisplay, long long maxDisplay) {
+    BandLimit result=limits.at(limits.size()-1);
+
+    qDebug() << "Band::getBandLimits: " << minDisplay << "," << maxDisplay;
+    for(int i=0;i<limits.size();i++) {
+        result=limits.at(i);
+
+        if((result.min()>=minDisplay&&result.min()<=maxDisplay) || // band min within the display
+           (result.max()<=maxDisplay&&result.max()>=minDisplay) || // band max within the display
+           (minDisplay>=result.min()&&maxDisplay<=result.max())) { // display within a band
+            break;
+        }
+    }
+
+    return result;
+
 }

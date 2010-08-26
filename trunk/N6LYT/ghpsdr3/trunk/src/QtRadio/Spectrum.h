@@ -44,6 +44,8 @@ public:
     void setHost(QString h);
     void setReceiver(int r);
 
+    void setBandLimits(long long min,long long max);
+
 signals:
     void frequencyMoved(int steps,int step);
     void frequencyChanged(long long frequency);
@@ -93,6 +95,9 @@ private:
     long long frequency;
     long long subRxFrequency;
     bool subRx;
+
+    long long band_min;
+    long long band_max;
 
     QVector <QPoint> plot;
 };

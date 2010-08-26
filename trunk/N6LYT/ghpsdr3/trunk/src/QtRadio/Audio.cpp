@@ -27,6 +27,14 @@ Audio::Audio() {
 Audio::~Audio() {
 }
 
+int Audio::get_sample_rate() {
+    return sampleRate;
+}
+
+int Audio::get_channels() {
+    return audio_channels;
+}
+
 void Audio::initialize_audio(int buffer_size) {
     qDebug() << "initialize_audio " << buffer_size;
 
@@ -198,12 +206,15 @@ void Audio::aLawDecode(char* buffer,int length) {
     for (i=0; i < length; i++) {
         v=decodetable[buffer[i]&0xFF];
 
-        if(audio_byte_order==QAudioFormat::LittleEndian) {
+        switch(audio_byte_order) {
+        case QAudioFormat::LittleEndian:
             decoded_buffer.append((char)(v&0xFF));
             decoded_buffer.append((char)((v>>8)&0xFF));
-        } else {
+            break;
+        case QAudioFormat::BigEndian:
             decoded_buffer.append((char)((v>>8)&0xFF));
             decoded_buffer.append((char)(v&0xFF));
+            break;
         }
     }
 

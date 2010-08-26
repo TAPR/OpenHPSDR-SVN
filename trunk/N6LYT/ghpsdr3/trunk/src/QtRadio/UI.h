@@ -20,6 +20,7 @@
 #include "Connection.h"
 #include "Spectrum.h"
 #include "Band.h"
+#include "BandLimit.h"
 #include "Mode.h"
 #include "Filters.h"
 #include "CWLFilters.h"
@@ -116,11 +117,11 @@ public slots:
 
     void updateSpectrum();
 
-    void audioChanged(int choice);
-    void sampleRateChanged(int choice);
-    void audioChannelsChanged(int channels);
+    void audioDeviceChanged(QAudioDeviceInfo info,int rate,int channels,QAudioFormat::Endian byteOrder);
+    //void sampleRateChanged(int choice);
+    //void audioChannelsChanged(int channels);
     void encodingChanged(int choice);
-    void byteOrderChanged(int choice);
+    //void byteOrderChanged(int choice);
     void setGain(int gain);
 
 
@@ -134,8 +135,8 @@ public slots:
     void waterfallHighChanged(int high);
     void waterfallLowChanged(int low);
 
-    void hostChanged(int choice);
-    void rxChanged(int rx);
+    void hostChanged(QString host);
+    void receiverChanged(int rx);
 
 signals:
     void subRxStateChanged(bool state);
