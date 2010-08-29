@@ -24,7 +24,9 @@
 *
 */
 
-#define PORTAUDIO
+#define PULSEAUDIO
+//#define PORTAUDIO
+//#define DIRECTAUDIO
 
 int create_softrock_thread();
 void softrock_set_device(char* d);

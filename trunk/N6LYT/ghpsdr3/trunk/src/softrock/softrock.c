@@ -62,7 +62,7 @@ char device[80];
 char input[80];
 char output[80];
 
-static int iq=0;
+static int iq=1;
 
 void* softrock_io_thread(void* arg);
 
@@ -150,7 +150,6 @@ fprintf(stderr,"softrock_set_sample_rate %d\n",r);
 }
 
 int softrock_get_sample_rate() {
-fprintf(stderr,"softrock_get_sample_rate %d\n",sample_rate);
     return sample_rate;
 }
 
@@ -200,6 +199,10 @@ fprintf(stderr,"server configured for %d receivers at %d\n",receivers,sample_rat
 }
 
 void* softrock_io_thread(void* arg) {
+#ifndef PULSEAUDIO
+    unsigned char input_buffer[BUFFER_SIZE*2]; // samples * 2 * 2
+    int bytes;
+#endif
 #ifndef PORTAUDIO
     unsigned char input_buffer[BUFFER_SIZE*2]; // samples * 2 * 2
     int bytes;
@@ -209,6 +212,18 @@ void* softrock_io_thread(void* arg) {
 
     while(1) {
 
+#ifdef PULSEAUDIO
+        // read an input buffer (blocks until all bytes read)
+        rc=softrock_read(receiver[current_receiver].input_buffer,&receiver[current_receiver].input_buffer[BUFFER_SIZE]);
+        if(rc==0) {
+            // process input buffer
+            rx_frame++;
+            input_buffers++;
+            send_IQ_buffer(current_receiver);
+        } else {
+            fprintf(stderr,"softrock_read returned %d\n",rc);
+        }
+#endif
 #ifdef PORTAUDIO
         // read an input buffer (blocks until all bytes read)
         rc=softrock_read(receiver[current_receiver].input_buffer,&receiver[current_receiver].input_buffer[BUFFER_SIZE]);
@@ -220,7 +235,8 @@ void* softrock_io_thread(void* arg) {
         } else {
             fprintf(stderr,"softrock_read returned %d\n",rc);
         }
-#else
+#endif
+#ifdef DIRECTAUDIO
         // read an input buffer (blocks until all bytes read)
         bytes=softrock_read(input_buffer,sizeof(input_buffer));
         if (bytes < 0) {
@@ -242,7 +258,7 @@ void* softrock_io_thread(void* arg) {
     }
 }
 
-#ifndef PORTAUDIO
+#ifdef DIRECTAUDIO
 void process_softrock_input_buffer(char* buffer) {
     int b=0;
     int r;
@@ -291,13 +307,21 @@ void process_softrock_input_buffer(char* buffer) {
 }
 #endif
 
+#ifdef PULSEAUDIO
+void process_softrock_output_buffer(float* left_output_buffer,float* right_output_buffer) {
+
+    softrock_write(left_output_buffer,right_output_buffer);
+    
+}
+#endif
 #ifdef PORTAUDIO
 void process_softrock_output_buffer(float* left_output_buffer,float* right_output_buffer) {
 
     softrock_write(left_output_buffer,right_output_buffer);
     
 }
-#else
+#endif
+#ifdef DIRECTAUDIO
 void process_softrock_output_buffer(float* left_output_buffer,float* right_output_buffer) {
     int i;
     unsigned char output_buffer[BUFFER_SIZE*2*2];

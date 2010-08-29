@@ -31,29 +31,45 @@
 #include <stdlib.h>
 #include <sys/types.h>
 #include <sys/ioctl.h>
+#include <sys/timeb.h>
 
 #include "softrock.h"
 #include "softrockio.h"
 
+#ifdef PULSEAUDIO
+#include <pulse/simple.h>
+#include <pulse/error.h>
+#include <pulse/gccmacro.h>
+#endif
 #ifdef PORTAUDIO
 #include <portaudio.h>
-#else
+#endif
+#ifdef DIRECTAUDIO
 #include <linux/soundcard.h>
 #endif
+
+static int timing=0;
+static struct timeb start_time;
+static struct timeb end_time;
+static int sample_count=0;
 
 
 #define SAMPLE_RATE 48000   /* the sampling rate */
 #define CHANNELS 2  /* 1 = mono 2 = stereo */
 #define SAMPLES_PER_BUFFER 1024
 
-#ifndef PORTAUDIO
+#ifdef DIRECTAUDIO
 #define SAMPLE_SIZE 16
 #endif
 
 
+#ifdef PULSEAUDIO
+static pa_simple* stream;
+#endif
 #ifdef PORTAUDIO
 static PaStream* stream;
-#else
+#endif
+#ifdef DIRECTAUDIO
 static int fd;
 #endif
 
@@ -62,6 +78,11 @@ int softrock_open(void) {
     int arg;
     int status;
     int rc;
+#ifdef PULSEAUDIO
+    int error;
+    pa_sample_spec params; 
+    pa_buffer_attr attrs;
+#endif
 #ifdef PORTAUDIO
     PaStreamParameters inputParameters;
     PaStreamParameters outputParameters;
@@ -69,14 +90,38 @@ int softrock_open(void) {
     int devices;
     int i;
     PaDeviceInfo* deviceInfo;
-
 fprintf(stderr,"softrock_open: portaudio\n");
-#else
+#endif
+#ifdef DIRECTAUDIO
 fprintf(stderr,"softrock_open: %s\n",softrock_get_device());
 #endif
 
 
+#ifdef PULSEAUDIO
+    fprintf(stderr,"Using PulseAudio\n");
+
+    params.format=PA_SAMPLE_FLOAT32LE;
+    params.rate=softrock_get_sample_rate();
+    params.channels=2;
+
+
+    attrs.maxlength=attrs.minreq=attrs.prebuf=attrs.tlength=(uint32_t)-1;
+    attrs.fragsize=attrs.maxlength=attrs.minreq=attrs.prebuf=(uint32_t)-1;
+    attrs.fragsize=SAMPLES_PER_BUFFER*2 * sizeof(float);
+    attrs.tlength=SAMPLES_PER_BUFFER*2 * sizeof(float);
+
+fprintf(stderr,"params.rate=%d\n",params.rate);
+
+    stream=pa_simple_new("localhost","Softrock", PA_STREAM_RECORD, NULL, "IQ", &params, NULL, &attrs, &error);
+    if(stream==NULL) {
+        fprintf(stderr, __FILE__": pa_simple_new() failed: %s\n", pa_strerror(error));
+        exit(0);
+    }
+    ftime(&start_time);
+#endif
 #ifdef PORTAUDIO
+    fprintf(stderr,"Using PortAudio\n");
+
     rc=Pa_Initialize();
     if(rc!=paNoError) {
         fprintf(stderr,"Pa_Initialize failed: %s\n",Pa_GetErrorText(rc));
@@ -135,8 +180,10 @@ fprintf(stderr,"input device=%d output device=%d\n",inputParameters.device,outpu
     } else {
         fprintf(stderr,"Pa_GetStreamInfo returned NULL\n");
     }
+#endif
+#ifdef DIRECTAUDIO
 
-#else
+    fprintf(stderr,"Using direct audio\n");
     /* open sound device */
     fd = open(softrock_get_device(), O_RDWR);
     if (fd < 0) {
@@ -182,17 +229,77 @@ fprintf(stderr,"sample_rate: %d\n",arg);
 }
 
 int softrock_close() {
+#ifdef PULSEAUDIO
+    pa_simple_free(stream);
+#endif
 #ifdef PORTAUDIO
     int rc=Pa_Terminate();
     if(rc!=paNoError) {
         fprintf(stderr,"Pa_Terminate failed: %s\n",Pa_GetErrorText(rc));
         exit(1);
     }
-#else
+#endif
+#ifdef DIRECTAUDIO
     close(fd);
 #endif
 }
 
+#ifdef PULSEAUDIO
+int softrock_write(float* left_samples,float* right_samples) {
+    int rc;
+    int i;
+    float audio_buffer[SAMPLES_PER_BUFFER*2];
+
+    rc=0;
+
+    // interleave samples
+    for(i=0;i<SAMPLES_PER_BUFFER;i++) {
+        audio_buffer[i*2]=right_samples[i];
+        audio_buffer[(i*2)+1]=left_samples[i];
+    }
+
+    // need to add writing
+    return rc;
+}
+
+int softrock_read(float* left_samples,float* right_samples) {
+    int rc;
+    int error;
+    int i;
+    float audio_buffer[SAMPLES_PER_BUFFER*2];
+
+    //fprintf(stderr,"read available=%ld\n",Pa_GetStreamReadAvailable(stream));
+    //ftime(&start_time);
+    rc=pa_simple_read(stream,&audio_buffer[0],sizeof(audio_buffer),&error);
+    if(rc<0) {
+        fprintf(stderr,"error reading audio_buffer %s (rc=%d)\n", pa_strerror(error),rc);
+    }
+    //ftime(&end_time);
+    //fprintf(stderr,"read %d bytes in %ld ms\n",sizeof(audio_buffer),((end_time.time*1000)+end_time.millitm)-((start_time.time*1000)+start_time.millitm));
+
+    // de-interleave samples
+    for(i=0;i<SAMPLES_PER_BUFFER;i++) {
+        if(softrock_get_iq()) {
+            left_samples[i]=audio_buffer[i*2];
+            right_samples[i]=audio_buffer[(i*2)+1];
+        } else {
+            right_samples[i]=audio_buffer[i*2];
+            left_samples[i]=audio_buffer[(i*2)+1];
+        }
+        if(timing) {
+            sample_count++;
+            if(sample_count==softrock_get_sample_rate()) {
+                ftime(&end_time);
+                fprintf(stderr,"%d samples in %ld ms\n",sample_count,((end_time.time*1000)+end_time.millitm)-((start_time.time*1000)+start_time.millitm));
+                sample_count=0;
+                ftime(&start_time);
+            }
+        }
+    }
+
+    return rc;
+}
+#endif
 #ifdef PORTAUDIO
 int softrock_write(float* left_samples,float* right_samples) {
     int rc;
@@ -224,7 +331,7 @@ int softrock_read(float* left_samples,float* right_samples) {
 
     //fprintf(stderr,"read available=%ld\n",Pa_GetStreamReadAvailable(stream));
     rc=Pa_ReadStream(stream,audio_buffer,SAMPLES_PER_BUFFER);
-    if(rc!=0) {
+    if(rc<0) {
         fprintf(stderr,"error reading audio_buffer %s (rc=%d)\n",Pa_GetErrorText(rc),rc);
     }
 
@@ -245,7 +352,8 @@ int softrock_read(float* left_samples,float* right_samples) {
 
     return rc;
 }
-#else
+#endif
+#ifdef DIRECTAUDIO
 int softrock_write(unsigned char* buffer,int buffer_size) {
     int rc;
     int bytes;
