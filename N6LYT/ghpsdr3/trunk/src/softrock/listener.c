@@ -64,6 +64,7 @@ void* listener_thread(void* arg) {
     struct sockaddr_in address;
     CLIENT* client;
     int rc;
+    int on=1;
 
     // create TCP socket to listen on
     s=socket(AF_INET,SOCK_STREAM,0);
@@ -71,6 +72,8 @@ void* listener_thread(void* arg) {
         perror("Listen socket failed");
         exit(1);
     }
+
+    setsockopt(s, SOL_SOCKET, SO_REUSEADDR, &on, sizeof(on));
 
     // bind to listening port
     memset(&address,0,sizeof(address));

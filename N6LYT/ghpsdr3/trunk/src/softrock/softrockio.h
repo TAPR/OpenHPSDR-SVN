@@ -26,10 +26,15 @@
 
 int softrock_open(void);
 int softrock_close();
+#ifdef PULSEAUDIO
+int softrock_write(float* left_samples,float* right_samples);
+int softrock_read(float* left_samples,float* right_samples);
+#endif
 #ifdef PORTAUDIO
 int softrock_write(float* left_samples,float* right_samples);
 int softrock_read(float* left_samples,float* right_samples);
-#else
+#endif
+#ifdef DIRECTAUDIO
 int softrock_write(unsigned char* buffer,int buffer_size);
 int softrock_read(unsigned char* buffer,int buffer_size);
 #endif

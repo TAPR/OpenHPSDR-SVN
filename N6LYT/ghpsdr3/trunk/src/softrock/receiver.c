@@ -185,8 +185,6 @@ void send_IQ_buffer(int rx) {
                 offset+=buffer.length;
             }
             sequence++;
-
-
 #else
 
             rc=sendto(iq_socket,receiver[rx].input_buffer,sizeof(receiver[rx].input_buffer),0,(struct sockaddr*)&client,client_length);
