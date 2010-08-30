@@ -992,11 +992,8 @@ void UI::frequencyMoved(int increment,int step) {
         diff = frequency - subRxFrequency;
         command.clear(); QTextStream(&command) << "SetSubRXFrequency " << diff;
         connection.sendCommand(command);
-        //qDebug() << "frequencyMoved:subrx: " << increment << "," << subRxFrequency;
         widget.spectrumFrame->setSubRxFrequency(subRxFrequency);
         setSubRxPan();
-        qDebug() << command;
-
 
     } else {
         band.setFrequency(band.getFrequency()-(long long)(increment*step));
