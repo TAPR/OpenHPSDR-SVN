@@ -73,7 +73,6 @@ void Connection::connected() {
 void Connection::sendCommand(QString command) {
     char buffer[32];
 
-    //qDebug() << "Connection::sendCommand: " << command;
     if(tcpSocket!=NULL) {
         sem.acquire(1);
         //qDebug() << "sendCommand:" << command;
