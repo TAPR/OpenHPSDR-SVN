@@ -16,6 +16,7 @@ Audio::Audio() {
 
     qDebug() << "Audio: LittleEndian=" << QAudioFormat::LittleEndian << " BigEndian=" << QAudioFormat::BigEndian;
 
+    audio_format.setSampleType(QAudioFormat::SignedInt);
     audio_format.setFrequency(sampleRate);
     audio_format.setChannels(audio_channels);
     audio_format.setSampleSize(16);
