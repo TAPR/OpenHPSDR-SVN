@@ -30,6 +30,7 @@
 #include <string.h>
 #include <arpa/inet.h>
 #include <netdb.h>
+#include <unistd.h>
 
 #include "client.h"
 #include "softrock.h"
@@ -63,6 +64,13 @@ char input[80];
 char output[80];
 
 static int iq=1;
+
+
+static char filename[256];
+static int record=0;
+static int playback=0;
+static int playback_sleep=0;
+static FILE* recording;
 
 void* softrock_io_thread(void* arg);
 
@@ -147,6 +155,9 @@ fprintf(stderr,"softrock_set_sample_rate %d\n",r);
             exit(1);
             break;
     }
+    playback_sleep=(int)(1024.0/(float)sample_rate*1000000.0);
+    fprintf(stderr,"sample_rate=%d playback_sleep=%d\n",sample_rate,playback_sleep);
+
 }
 
 int softrock_get_sample_rate() {
@@ -159,6 +170,26 @@ void softrock_set_iq(int s) {
 
 int softrock_get_iq() {
     return iq;
+}
+
+int softrock_get_record() {
+    return record;
+}
+
+int softrock_get_playback() {
+    return playback;
+}
+
+void softrock_set_record(char* f) {
+    strcpy(filename,f);
+    record=1;
+    playback=0;
+}
+
+void softrock_set_playback(char* f) {
+    strcpy(filename,f);
+    record=0;
+    playback=1;
 }
 
 int softrock_init() {
@@ -182,6 +213,13 @@ int softrock_init() {
         exit(1);
     }
 
+    if(record) {
+        recording=fopen(filename,"w");
+    } else if(playback) {
+        recording=fopen(filename,"r");
+fprintf(stderr,"opening %s\n",filename);
+    }
+
     // open softrock audio
     rc = softrock_open();
     if (rc != 0) {
@@ -198,6 +236,31 @@ fprintf(stderr,"server configured for %d receivers at %d\n",receivers,sample_rat
     return rc;
 }
 
+void softrock_record_buffer(char* buffer,int length) {
+    int bytes;
+
+    if(record) {
+        bytes=fwrite(buffer,sizeof(char),length,recording);
+    }
+}
+
+void softrock_playback_buffer(char* buffer,int length) {
+    int bytes;
+
+    if(playback) {
+        usleep(playback_sleep);
+        bytes=fread(buffer,sizeof(char),length,recording);
+        if(bytes<=0) {
+            // assumes eof
+            fclose(recording);
+            recording=fopen(filename,"r");
+fprintf(stderr,"playback: re-opening %s\n",filename);
+            bytes=fread(buffer,sizeof(char),length,recording);
+        } else {
+//fprintf(stderr,"playback: read %d bytes\n",bytes);
+        }
+    }
+}
 void* softrock_io_thread(void* arg) {
 #ifndef PULSEAUDIO
     unsigned char input_buffer[BUFFER_SIZE*2]; // samples * 2 * 2

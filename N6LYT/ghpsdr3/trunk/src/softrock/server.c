@@ -55,7 +55,9 @@ static struct option long_options[] = {
     {"startupfreq",required_argument, 0, 8},
     {"multiplier",required_argument, 0, 9},
     {"correctedfreq",required_argument, 0, 10},
-    {"serialid",required_argument, 0, 11}
+    {"serialid",required_argument, 0, 11},
+    {"record",required_argument, 0, 12},
+    {"playback",required_argument, 0, 13}
 };
 
 static char* short_options="sd";
@@ -111,7 +113,7 @@ void process_args(int argc,char* argv[]) {
 
     while((i=getopt_long(argc,argv,short_options,long_options,&option_index))!=EOF) {
         switch(option_index) {
-            case 0: // samile rate
+            case 0: // sample rate
 fprintf(stderr,"process_args: samplerate=%s\n",optarg);
                 softrock_set_sample_rate(atoi(optarg));
                 break;
@@ -150,6 +152,12 @@ fprintf(stderr,"process_args: output=%s\n",optarg);
                 break;
             case 11: // serial ID
                 usbSerialID=optarg;
+                break;
+            case 12: // record
+                softrock_set_record(optarg);
+                break;
+            case 13: // playback
+                softrock_set_playback(optarg);
                 break;
             default:
                 fprintf(stderr,"invalid argument\n");

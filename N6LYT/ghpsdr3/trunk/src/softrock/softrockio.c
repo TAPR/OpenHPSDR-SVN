@@ -73,7 +73,6 @@ static PaStream* stream;
 static int fd;
 #endif
 
-
 int softrock_open(void) {
     int arg;
     int status;
@@ -96,6 +95,9 @@ fprintf(stderr,"softrock_open: portaudio\n");
 fprintf(stderr,"softrock_open: %s\n",softrock_get_device());
 #endif
 
+    if(softrock_get_playback()) {
+        return 0;
+    }
 
 #ifdef PULSEAUDIO
     fprintf(stderr,"Using PulseAudio\n");
@@ -229,6 +231,11 @@ fprintf(stderr,"sample_rate: %d\n",arg);
 }
 
 int softrock_close() {
+
+    if(softrock_get_playback()) {
+        return 0;
+    }
+
 #ifdef PULSEAUDIO
     pa_simple_free(stream);
 #endif
@@ -242,6 +249,7 @@ int softrock_close() {
 #ifdef DIRECTAUDIO
     close(fd);
 #endif
+    return 0;
 }
 
 #ifdef PULSEAUDIO
@@ -268,14 +276,25 @@ int softrock_read(float* left_samples,float* right_samples) {
     int i;
     float audio_buffer[SAMPLES_PER_BUFFER*2];
 
-    //fprintf(stderr,"read available=%ld\n",Pa_GetStreamReadAvailable(stream));
-    //ftime(&start_time);
-    rc=pa_simple_read(stream,&audio_buffer[0],sizeof(audio_buffer),&error);
-    if(rc<0) {
-        fprintf(stderr,"error reading audio_buffer %s (rc=%d)\n", pa_strerror(error),rc);
+
+    if(softrock_get_playback()) {
+        softrock_playback_buffer(audio_buffer,sizeof(audio_buffer));
+    } else {
+        //fprintf(stderr,"read available=%ld\n",Pa_GetStreamReadAvailable(stream));
+        //ftime(&start_time);
+        rc=pa_simple_read(stream,&audio_buffer[0],sizeof(audio_buffer),&error);
+        if(rc<0) {
+            fprintf(stderr,"error reading audio_buffer %s (rc=%d)\n", pa_strerror(error),rc);
+        }
+        //ftime(&end_time);
+        //fprintf(stderr,"read %d bytes in %ld ms\n",sizeof(audio_buffer),((end_time.time*1000)+end_time.millitm)-((start_time.time*1000)+start_time.millitm));
     }
-    //ftime(&end_time);
-    //fprintf(stderr,"read %d bytes in %ld ms\n",sizeof(audio_buffer),((end_time.time*1000)+end_time.millitm)-((start_time.time*1000)+start_time.millitm));
+
+
+    // record the I/Q samples
+    if(softrock_get_record()) {
+        softrock_record_buffer(audio_buffer,sizeof(audio_buffer));
+    }
 
     // de-interleave samples
     for(i=0;i<SAMPLES_PER_BUFFER;i++) {
