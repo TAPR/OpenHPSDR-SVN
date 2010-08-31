@@ -43,3 +43,11 @@ char* softrock_get_output();
 
 void softrock_set_iq(int s);
 int softrock_get_iq();
+
+void softrock_set_record(char* filename);
+void softrock_set_playback(char* filename);
+void softrock_record_buffer(char* buffer,int length);
+void softrock_playback_buffer(char* buffer,int length);
+
+int softrock_get_record();
+int softrock_get_playback();
