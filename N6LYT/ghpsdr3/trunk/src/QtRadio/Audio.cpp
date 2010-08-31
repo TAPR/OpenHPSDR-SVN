@@ -17,7 +17,7 @@ Audio::Audio() {
     qDebug() << "Audio: LittleEndian=" << QAudioFormat::LittleEndian << " BigEndian=" << QAudioFormat::BigEndian;
 
     audio_format.setSampleType(QAudioFormat::SignedInt);
-    audio_format.setFrequency(sampleRate);
+    audio_format.setFrequency(sampleRate+(sampleRate==8000?SAMPLE_RATE_FUDGE:0));
     audio_format.setChannels(audio_channels);
     audio_format.setSampleSize(16);
     audio_format.setCodec("audio/pcm");
@@ -43,7 +43,7 @@ void Audio::initialize_audio(int buffer_size) {
 
     init_decodetable();
 
-    audio_format.setFrequency(sampleRate);
+    audio_format.setFrequency(sampleRate+(sampleRate==8000?SAMPLE_RATE_FUDGE:0));
     audio_format.setChannels(audio_channels);
     audio_format.setSampleSize(16);
     audio_format.setCodec("audio/pcm");
@@ -152,7 +152,7 @@ void Audio::select_audio(QAudioDeviceInfo info,int rate,int channels,QAudioForma
 
 
     audio_device=info;
-    audio_format.setFrequency(sampleRate);
+    audio_format.setFrequency(sampleRate+(sampleRate==8000?SAMPLE_RATE_FUDGE:0));
     audio_format.setChannels(audio_channels);
     audio_format.setByteOrder(audio_byte_order);
 
