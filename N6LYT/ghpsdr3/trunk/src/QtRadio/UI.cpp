@@ -24,11 +24,8 @@
 #include "DIGLFilters.h"
 #include "DIGUFilters.h"
 
-
 UI::UI() {
     widget.setupUi(this);
-
-    qTimer=NULL;
 
     widget.gridLayout->setContentsMargins(2,2,2,2);
     widget.gridLayout->setVerticalSpacing(0);
@@ -159,11 +156,6 @@ UI::UI() {
 }
 
 UI::~UI() {
-    if(qTimer!=NULL) {
-        qTimer->stop();
-        qTimer=NULL;
-    }
-
     connection.disconnect();
 }
 
@@ -200,46 +192,42 @@ void UI::actionConfigure() {
 }
 
 void UI::spectrumHighChanged(int high) {
-    qDebug() << __FUNCTION__ << ": " << high;
+    //qDebug() << __FUNCTION__ << ": " << high;
 
     widget.spectrumFrame->setHigh(high);
+    configure.setSpectrumHigh(high);
 
 //    QSpinBox* spectrumHighSpinBox=configure.findChild<QSpinBox*>("spectrumHighSpinBox");
 //    spectrumHighSpinBox->setValue(high);
 }
 
 void UI::spectrumLowChanged(int low) {
-    qDebug() << __FUNCTION__ << ": " << low;
+    //qDebug() << __FUNCTION__ << ": " << low;
 
     widget.spectrumFrame->setLow(low);
+    configure.setSpectrumLow(low);
 
 //    QSpinBox* spectrumLowSpinBox=configure.findChild<QSpinBox*>("spectrumLowSpinBox");
 //    spectrumLowSpinBox->setValue(low);
 }
 
 void UI::fpsChanged(int f) {
-    qDebug() << "fpsChanged:" << f;
+    //qDebug() << "fpsChanged:" << f;
     fps=f;
-    if(qTimer!=NULL) {
-        qTimer->stop();
-        qTimer=NULL;
-    }
-    qTimer = new QTimer(this);
-    connect(qTimer, SIGNAL(timeout()), this, SLOT(updateSpectrum()));
-    qTimer->start(1000 / fps);
-
 }
 
 void UI::waterfallHighChanged(int high) {
-    qDebug() << __LINE__ << __FUNCTION__ << ": " << high;
+    //qDebug() << __LINE__ << __FUNCTION__ << ": " << high;
 
     widget.waterfallFrame->setHigh(high);
+    configure.setWaterfallHigh(high);
 }
 
 void UI::waterfallLowChanged(int low) {
-    qDebug() << __FUNCTION__ << ": " << low;
+    //qDebug() << __FUNCTION__ << ": " << low;
 
     widget.waterfallFrame->setLow(low);
+    configure.setWaterfallLow(low);
 }
 
 void UI::audioDeviceChanged(QAudioDeviceInfo info,int rate,int channels,QAudioFormat::Endian byteOrder) {
@@ -274,11 +262,6 @@ void UI::actionConnect() {
 void UI::actionDisconnect() {
     //qDebug() << "UI::actionDisconnect";
 
-    if(qTimer!=NULL) {
-        qTimer->stop();
-        qTimer=NULL;
-    }
-
     connection.disconnect();
     widget.actionConnectToServer->setDisabled(FALSE);
     widget.actionDisconnectFromServer->setDisabled(TRUE);
@@ -312,10 +295,7 @@ void UI::connected() {
 
     // start the spectrum
     qDebug() << "starting spectrum timer";
-    qTimer= new QTimer(this);
-    connect(qTimer, SIGNAL(timeout()), this, SLOT(updateSpectrum()));
-    qTimer->start(1000 / fps);
-
+    QTimer::singleShot(1000/fps, this, SLOT(updateSpectrum()));
 
     // start the audio
     audio_buffers=0;
@@ -352,16 +332,10 @@ void UI::disconnected(QString message) {
     widget.actionSubrx->setDisabled(TRUE);
     widget.actionMuteSubRx->setDisabled(TRUE);
 
-    if(qTimer!=NULL) {
-        qTimer->stop();
-        qTimer=NULL;
-    }
-
     configure.connected(FALSE);
 }
 
 void UI::updateSpectrum() {
-    //qDebug() << "UI::updateSpectrum width=" << widget.spectrumFrame->width();
     command.clear(); QTextStream(&command) << "getSpectrum " << widget.spectrumFrame->width();
     connection.sendCommand(command);
 }
@@ -384,6 +358,8 @@ void UI::receivedHeader(char* header) {
             widget.spectrumFrame->updateSpectrum(header,samples,length);
             widget.waterfallFrame->updateWaterfall(header,samples,length);
             
+            // get the next sample
+            QTimer::singleShot(1000/fps, this, SLOT(updateSpectrum()));
             break;
         case 1:
             // audio data
@@ -402,6 +378,9 @@ void UI::receivedHeader(char* header) {
                 connection.read(samples,length);
                 audio.process_audio(header,samples,length);
             }
+            break;
+        default:
+            qDebug() << "invalid header received " << header[0];
             break;
     }
     free(samples);

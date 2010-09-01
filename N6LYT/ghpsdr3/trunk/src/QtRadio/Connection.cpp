@@ -5,7 +5,12 @@
  * Created on 16 August 2010, 07:40
  */
 
+#include <sys/timeb.h>
+
 #include "Connection.h"
+
+static struct timeb start_time;
+static struct timeb end_time;
 
 Connection::Connection() {
     //qDebug() << "Connection::Connection";
@@ -74,6 +79,7 @@ void Connection::sendCommand(QString command) {
     char buffer[32];
 
     if(tcpSocket!=NULL) {
+ftime(&start_time);
         sem.acquire(1);
         //qDebug() << "sendCommand:" << command;
         strcpy(buffer,command.toUtf8().constData());
@@ -81,6 +87,9 @@ void Connection::sendCommand(QString command) {
         tcpSocket->write(buffer,32);
         tcpSocket->flush();
         sem.release(1);
+ftime(&end_time);
+if((((end_time.time*1000)+end_time.millitm)-((start_time.time*1000)+start_time.millitm)) > 1)
+    qDebug() << "sendCommand took " << (((end_time.time*1000)+end_time.millitm)-((start_time.time*1000)+start_time.millitm)) << " ms";
     }
 }
 

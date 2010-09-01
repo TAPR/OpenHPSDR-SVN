@@ -179,8 +179,6 @@ private:
 
     int fps;
 
-    QTimer* qTimer;
-
     QString command;
 
     Configure configure;
