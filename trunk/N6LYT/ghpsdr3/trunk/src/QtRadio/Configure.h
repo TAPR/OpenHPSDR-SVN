@@ -36,8 +36,14 @@ public:
     int getSpectrumLow();
     int getFps();
 
+    void setSpectrumHigh(int high);
+    void setSpectrumLow(int low);
+
     int getWaterfallHigh();
     int getWaterfallLow();
+
+    void setWaterfallHigh(int high);
+    void setWaterfallLow(int low);
 
     QAudioFormat::Endian getByteOrder();
     int getSampleRate();

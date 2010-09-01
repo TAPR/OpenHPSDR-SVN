@@ -239,3 +239,19 @@ int Configure::getChannels() {
 int Configure::getSampleRate() {
     return widget.sampleRateComboBox->currentText().toInt();
 }
+
+void Configure::setSpectrumLow(int low) {
+    widget.spectrumLowSpinBox->setValue(low);
+}
+
+void Configure::setSpectrumHigh(int high) {
+    widget.spectrumHighSpinBox->setValue(high);
+}
+
+void Configure::setWaterfallLow(int low) {
+    widget.waterfallLowSpinBox->setValue(low);
+}
+
+void Configure::setWaterfallHigh(int high) {
+    widget.waterfallHighSpinBox->setValue(high);
+}

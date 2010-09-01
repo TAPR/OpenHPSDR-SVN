@@ -141,7 +141,6 @@ void Waterfall::updateWaterfall(char*header,char* buffer,int size) {
     }
 
     if(size==width()) {
-
         // move the pixel array down
         for(y=height()-1;y>0;y--) {
             for(x=0;x<size;x++) {
