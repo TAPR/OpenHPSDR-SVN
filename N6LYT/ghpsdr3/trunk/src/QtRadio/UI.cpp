@@ -1,9 +1,27 @@
 /*
  * File:   UI.cpp
- * Author: john
+ * Author: John Melton, G0ORX/N6LYT
  *
  * Created on 13 August 2010, 14:28
  */
+
+/* Copyright (C)
+* 2009 - John Melton, G0ORX/N6LYT
+* This program is free software; you can redistribute it and/or
+* modify it under the terms of the GNU General Public License
+* as published by the Free Software Foundation; either version 2
+* of the License, or (at your option) any later version.
+*
+* This program is distributed in the hope that it will be useful,
+* but WITHOUT ANY WARRANTY; without even the implied warranty of
+* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+* GNU General Public License for more details.
+*
+* You should have received a copy of the GNU General Public License
+* along with this program; if not, write to the Free Software
+* Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+*
+*/
 
 #include <QDebug>
 #include <QSettings>
@@ -36,7 +54,8 @@ UI::UI() {
 
     connect(&connection,SIGNAL(isConnected()),this,SLOT(connected()));
     connect(&connection,SIGNAL(disconnected(QString)),this,SLOT(disconnected(QString)));
-    connect(&connection,SIGNAL(header(char*)),this,SLOT(receivedHeader(char*)));
+    connect(&connection,SIGNAL(audioBuffer(char*,char*)),this,SLOT(audioBuffer(char*,char*)));
+    connect(&connection,SIGNAL(spectrumBuffer(char*,char*)),this,SLOT(spectrumBuffer(char*,char*)));
 
     connect(widget.actionConfig,SIGNAL(triggered()),this,SLOT(actionConfigure()));
 
@@ -90,7 +109,7 @@ UI::UI() {
 
     // connect up band and frequency changes
     connect(&band,SIGNAL(bandChanged(int,int)),this,SLOT(bandChanged(int,int)));
-    connect(&band,SIGNAL(frequencyChanged(long long)),this,SLOT(frequencyChanged(long long)));
+//    connect(&band,SIGNAL(frequencyChanged(long long)),this,SLOT(frequencyChanged(long long)));
 
     // connect up mode changes
     connect(&mode,SIGNAL(modeChanged(int,int)),this,SLOT(modeChanged(int,int)));
@@ -145,6 +164,8 @@ UI::UI() {
     // load any saved settings
     loadSettings();
 
+    fps=configure.getFps();
+
     widget.spectrumFrame->setHost(configure.getHost());
     widget.spectrumFrame->setReceiver(configure.getReceiver());
 
@@ -196,9 +217,7 @@ void UI::spectrumHighChanged(int high) {
 
     widget.spectrumFrame->setHigh(high);
     configure.setSpectrumHigh(high);
-
-//    QSpinBox* spectrumHighSpinBox=configure.findChild<QSpinBox*>("spectrumHighSpinBox");
-//    spectrumHighSpinBox->setValue(high);
+    band.setSpectrumHigh(high);
 }
 
 void UI::spectrumLowChanged(int low) {
@@ -206,9 +225,7 @@ void UI::spectrumLowChanged(int low) {
 
     widget.spectrumFrame->setLow(low);
     configure.setSpectrumLow(low);
-
-//    QSpinBox* spectrumLowSpinBox=configure.findChild<QSpinBox*>("spectrumLowSpinBox");
-//    spectrumLowSpinBox->setValue(low);
+    band.setSpectrumLow(low);
 }
 
 void UI::fpsChanged(int f) {
@@ -221,6 +238,7 @@ void UI::waterfallHighChanged(int high) {
 
     widget.waterfallFrame->setHigh(high);
     configure.setWaterfallHigh(high);
+    band.setWaterfallHigh(high);
 }
 
 void UI::waterfallLowChanged(int low) {
@@ -228,6 +246,7 @@ void UI::waterfallLowChanged(int low) {
 
     widget.waterfallFrame->setLow(low);
     configure.setWaterfallLow(low);
+    band.setWaterfallLow(low);
 }
 
 void UI::audioDeviceChanged(QAudioDeviceInfo info,int rate,int channels,QAudioFormat::Endian byteOrder) {
@@ -240,6 +259,7 @@ void UI::encodingChanged(int choice) {
 
 void UI::actionConnect() {
     //qDebug() << "UI::actionConnect";
+    widget.statusbar->clearMessage();
     QComboBox* hostComboBox=configure.findChild<QComboBox*>("hostComboBox");
     if(hostComboBox==NULL) {
         qDebug() << "hostComboBox id NULL";
@@ -262,17 +282,20 @@ void UI::actionConnect() {
 void UI::actionDisconnect() {
     //qDebug() << "UI::actionDisconnect";
 
+//    qTimer->stop();
+
     connection.disconnect();
     widget.actionConnectToServer->setDisabled(FALSE);
     widget.actionDisconnectFromServer->setDisabled(TRUE);
     widget.actionSubrx->setDisabled(TRUE);
     widget.actionMuteSubRx->setDisabled(TRUE);
 
-
     configure.connected(FALSE);
 }
 
 void UI::connected() {
+    QString command;
+
     qDebug() << "UI::connected";
 
     configure.connected(TRUE);
@@ -293,9 +316,6 @@ void UI::connected() {
     widget.actionSubrx->setDisabled(FALSE);
     widget.actionMuteSubRx->setDisabled(TRUE);
 
-    // start the spectrum
-    qDebug() << "starting spectrum timer";
-    QTimer::singleShot(1000/fps, this, SLOT(updateSpectrum()));
 
     // start the audio
     audio_buffers=0;
@@ -320,12 +340,16 @@ void UI::connected() {
     command.clear(); QTextStream(&command) << "SetNB " << (widget.actionNB->isChecked()?"true":"false");
     connection.sendCommand(command);
 
+
+    // start the spectrum
+    qDebug() << "starting spectrum timer";
+    QTimer::singleShot(1000/fps,this,SLOT(updateSpectrum()));
 }
 
 void UI::disconnected(QString message) {
     qDebug() << "UI::disconnected: " << message;
 
-    widget.statusbar->showMessage(message,5000);
+    widget.statusbar->showMessage(message,0);
 
     widget.actionConnectToServer->setDisabled(FALSE);
     widget.actionDisconnectFromServer->setDisabled(TRUE);
@@ -336,58 +360,41 @@ void UI::disconnected(QString message) {
 }
 
 void UI::updateSpectrum() {
+    QString command;
     command.clear(); QTextStream(&command) << "getSpectrum " << widget.spectrumFrame->width();
     connection.sendCommand(command);
 }
 
-void UI::receivedHeader(char* header) {
-    int length;
-    char* samples;
-  
-    length = atoi(&header[26]);
-    samples=(char*)malloc(length);
-    
-    //qDebug() << "UI::receivedHeader: " << (int)header[0] << " length=" << length;
+void UI::audioBuffer(char* header,char* buffer) {
+    int length=atoi(&header[26]);
+    sampleRate=atoi(&header[32]);
+    widget.spectrumFrame->updateSpectrum(header,buffer,length);
+    widget.waterfallFrame->updateWaterfall(header,buffer,length);
+    QTimer::singleShot(1000/fps,this,SLOT(updateSpectrum()));
+    connection.freeBuffers(header,buffer);
+}
 
-    switch(header[0]) {
-        case 0:
-            // spectrum data
-            connection.read(samples,length);
-            //qDebug() << "read spectrum samples";
-            sampleRate = atoi(&header[32]);
-            widget.spectrumFrame->updateSpectrum(header,samples,length);
-            widget.waterfallFrame->updateWaterfall(header,samples,length);
-            
-            // get the next sample
-            QTimer::singleShot(1000/fps, this, SLOT(updateSpectrum()));
-            break;
-        case 1:
-            // audio data
-            //qDebug() << "read audio samples";
-
-            if(audio_buffers==0) {
-                first_audio_buffer=(char*)malloc(length);
-                connection.read(first_audio_buffer,length);
-                audio_buffers++;
-            } else if(audio_buffers==1) {
-                connection.read(samples,length);
-                audio_buffers++;
-                audio.process_audio(header,first_audio_buffer,length);
-                audio.process_audio(header,samples,length);
-            } else {
-                connection.read(samples,length);
-                audio.process_audio(header,samples,length);
-            }
-            break;
-        default:
-            qDebug() << "invalid header received " << header[0];
-            break;
+void UI::spectrumBuffer(char* header,char* buffer) {
+    int length=atoi(&header[26]);
+    if(audio_buffers==0) {
+        first_audio_header=header;
+        first_audio_buffer=buffer;
+        audio_buffers++;
+    } else if(audio_buffers==1) {
+        audio_buffers++;
+        audio.process_audio(first_audio_header,first_audio_buffer,length);
+        connection.freeBuffers(first_audio_header,first_audio_buffer);
+        audio.process_audio(header,buffer,length);
+        connection.freeBuffers(header,buffer);
+    } else {
+        audio.process_audio(header,buffer,length);
+        connection.freeBuffers(header,buffer);
     }
-    free(samples);
 }
 
 void UI::setGain(int g) {
     // remember the gain
+    QString command;
     gain=g;
     command.clear(); QTextStream(&command) << "SetRXOutputGain " << gain;
     connection.sendCommand(command);
@@ -396,6 +403,7 @@ void UI::setGain(int g) {
 }
 
 void UI::actionSubRx() {
+    QString command;
     if(subRx) {
         // on, so turn off
         subRx=FALSE;
@@ -429,6 +437,7 @@ void UI::actionSubRx() {
 }
 
 void UI::setSubRxGain(int gain) {
+    QString command;
     subRxGain=gain;
     command.clear(); QTextStream(&command) << "SetSubRXOutputGain " << subRxGain;
     connection.sendCommand(command);
@@ -489,7 +498,7 @@ void UI::actionWWV() {
 }
 
 void UI::bandChanged(int previousBand,int newBand) {
-    qDebug() << "bandChanged: " << previousBand << "," << newBand;
+    qDebug() << "UI::bandChanged: " << previousBand << "," << newBand;
     // uncheck previous band
     switch(previousBand) {
         case BAND_160:
@@ -576,25 +585,40 @@ void UI::bandChanged(int previousBand,int newBand) {
             break;
     }
 
-    // get the current mode
+    // get the band setting
     mode.setMode(band.getMode());
-    widget.spectrumFrame->setBand(band.getStringBand());
+    frequency=band.getFrequency();
     int samplerate = widget.spectrumFrame->samplerate();
+    if(subRx) {
+        if ((subRxFrequency < (frequency - (samplerate / 2))) || (subRxFrequency > (frequency + (samplerate / 2)))) {
+            subRxFrequency=frequency;
+        }
+    }
+
+    QString command;
+    command.clear();
+    QTextStream(&command) << "setFrequency " << frequency;
+    connection.sendCommand(command);
+
+    widget.spectrumFrame->setFrequency(frequency);
+    widget.spectrumFrame->setSubRxFrequency(subRxFrequency);
+    widget.spectrumFrame->setHigh(band.getSpectrumHigh());
+    widget.spectrumFrame->setLow(band.getSpectrumLow());
+    widget.waterfallFrame->setHigh(band.getWaterfallHigh());
+    widget.waterfallFrame->setLow(band.getWaterfallLow());
+
+
+    widget.spectrumFrame->setBand(band.getStringBand());
     BandLimit limits=band.getBandLimits(band.getFrequency()-(samplerate/2),band.getFrequency()+(samplerate/2));
     widget.spectrumFrame->setBandLimits(limits.min(),limits.max());
 
-    if(subRx) {
-        long long frequency=band.getFrequency();
-        if ((subRxFrequency < (frequency - (samplerate / 2))) || (subRxFrequency > (frequency + (samplerate / 2)))) {
-            subRxFrequency=band.getFrequency();
-        }
-    }
-    
 }
 
 void UI::modeChanged(int previousMode,int newMode) {
 
-    qDebug() << "modeChanged: " << previousMode << "," << newMode;
+    QString command;
+
+    qDebug() << "UI::modeChanged: " << previousMode << "," << newMode;
     // uncheck previous mode
     switch(previousMode) {
         case MODE_CWL:
@@ -681,6 +705,7 @@ void UI::modeChanged(int previousMode,int newMode) {
 
 void UI::filtersChanged(FiltersBase* previousFilters,FiltersBase* newFilters) {
 
+    qDebug() << "UI::filtersChanged";
     // uncheck old filter
     if(previousFilters!=NULL) {
         switch (previousFilters->getSelected()) {
@@ -774,51 +799,61 @@ void UI::filtersChanged(FiltersBase* previousFilters,FiltersBase* newFilters) {
 void UI::actionCWL() {
     mode.setMode(MODE_CWL);
     filters.selectFilters(&cwlFilters);
+    band.setMode(MODE_CWL);
 }
 
 void UI::actionCWU() {
     mode.setMode(MODE_CWU);
     filters.selectFilters(&cwuFilters);
+    band.setMode(MODE_CWU);
 }
 
 void UI::actionLSB() {
     mode.setMode(MODE_LSB);
     filters.selectFilters(&lsbFilters);
+    band.setMode(MODE_LSB);
 }
 
 void UI::actionUSB() {
     mode.setMode(MODE_USB);
     filters.selectFilters(&usbFilters);
+    band.setMode(MODE_USB);
 }
 
 void UI::actionDSB() {
     mode.setMode(MODE_DSB);
     filters.selectFilters(&dsbFilters);
+    band.setMode(MODE_DSB);
 }
 
 void UI::actionAM() {
     mode.setMode(MODE_AM);
     filters.selectFilters(&amFilters);
+    band.setMode(MODE_AM);
 }
 
 void UI::actionSAM() {
     mode.setMode(MODE_SAM);
     filters.selectFilters(&samFilters);
+    band.setMode(MODE_SAM);
 }
 
 void UI::actionFMN() {
     mode.setMode(MODE_FMN);
     filters.selectFilters(&fmnFilters);
+    band.setMode(MODE_FMN);
 }
 
 void UI::actionDIGL() {
     mode.setMode(MODE_DIGL);
     filters.selectFilters(&diglFilters);
+    band.setMode(MODE_DIGL);
 }
 
 void UI::actionDIGU() {
     mode.setMode(MODE_DIGU);
     filters.selectFilters(&diguFilters);
+    band.setMode(MODE_DIGU);
 }
 
 void UI::actionFilter0() {
@@ -862,6 +897,10 @@ void UI::actionFilter9() {
 }
 
 void UI::filterChanged(int previousFilter,int newFilter) {
+    QString command;
+
+    qDebug() << "UI::filterChanged: " << previousFilter << ":" << newFilter;
+
     int low,high;
     switch(previousFilter) {
         case 0:
@@ -943,19 +982,24 @@ void UI::filterChanged(int previousFilter,int newFilter) {
     command.clear(); QTextStream(&command) << "setFilter " << low << " " << high;
     connection.sendCommand(command);
     widget.spectrumFrame->setFilter(low,high);
+    band.setFilter(newFilter);
 }
 
 void UI::frequencyChanged(long long f) {
+    QString command;
     //qDebug() << __FUNCTION__ << ": " << f;
 
     frequency=f;
-    command.clear(); QTextStream(&command) << "setFrequency " << f;
+    command.clear();
+    QTextStream(&command) << "setFrequency " << f;
 
     connection.sendCommand(command);
-    widget.spectrumFrame->setFrequency(frequency);
+    widget.spectrumFrame->setFrequency(f);
 }
 
 void UI::frequencyMoved(int increment,int step) {
+    QString command;
+
     //qDebug() << __FUNCTION__ << ": increment=" << increment << " step=" << step;
 
     long long f;
@@ -978,26 +1022,31 @@ void UI::frequencyMoved(int increment,int step) {
         band.setFrequency(band.getFrequency()-(long long)(increment*step));
         frequency=band.getFrequency();
         command.clear(); QTextStream(&command) << "setFrequency " << frequency;
+        widget.spectrumFrame->setFrequency(frequency);
         connection.sendCommand(command);
     }
 }
 
 void UI::actionANF() {
+    QString command;
     command.clear(); QTextStream(&command) << "SetANF " << (widget.actionANF->isChecked()?"true":"false");
     connection.sendCommand(command);
 }
 
 void UI::actionNR() {
+    QString command;
     command.clear(); QTextStream(&command) << "SetNR " << (widget.actionNR->isChecked()?"true":"false");
     connection.sendCommand(command);
 }
 
 void UI::actionNB() {
+    QString command;
     command.clear(); QTextStream(&command) << "SetNB " << (widget.actionNB->isChecked()?"true":"false");
     connection.sendCommand(command);
 }
 
 void UI::actionSlow() {
+    QString command;
     // reset the current selection
     switch(agc) {
     case AGC_LONG:
@@ -1021,6 +1070,7 @@ void UI::actionSlow() {
 }
 
 void UI::actionMedium() {
+    QString command;
 
     // reset the current selection
     switch(agc) {
@@ -1045,6 +1095,7 @@ void UI::actionMedium() {
 }
 
 void UI::actionFast() {
+    QString command;
     // reset the current selection
     switch(agc) {
     case AGC_LONG:
@@ -1067,6 +1118,7 @@ void UI::actionFast() {
 }
 
 void UI::actionLong() {
+    QString command;
     // reset the current selection
     switch(agc) {
     case AGC_LONG:
@@ -1088,6 +1140,7 @@ void UI::actionLong() {
 }
 
 void UI::setSubRxPan() {
+    QString command;
     float pan;
 
     // set the pan relative to frequency position (only works when in stereo)
@@ -1100,6 +1153,7 @@ void UI::setSubRxPan() {
 }
 
 void UI::actionMuteMainRx() {
+    QString command;
     int g=gain;
 
     if(widget.actionMuteMainRx->isChecked()) {
@@ -1111,6 +1165,7 @@ void UI::actionMuteMainRx() {
 }
 
 void UI::actionMuteSubRx() {
+    QString command;
     int g=subRxGain;
 
     if(widget.actionMuteSubRx->isChecked()) {
