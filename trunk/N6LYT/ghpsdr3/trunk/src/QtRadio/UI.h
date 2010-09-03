@@ -1,9 +1,27 @@
 /* 
  * File:   UI.h
- * Author: john
+ * Author: John Melton, G0ORX/N6LYT
  *
  * Created on 13 August 2010, 14:28
  */
+
+/* Copyright (C)
+* 2009 - John Melton, G0ORX/N6LYT
+* This program is free software; you can redistribute it and/or
+* modify it under the terms of the GNU General Public License
+* as published by the Free Software Foundation; either version 2
+* of the License, or (at your option) any later version.
+*
+* This program is distributed in the hope that it will be useful,
+* but WITHOUT ANY WARRANTY; without even the implied warranty of
+* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+* GNU General Public License for more details.
+*
+* You should have received a copy of the GNU General Public License
+* along with this program; if not, write to the Free Software
+* Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+*
+*/
 
 #ifndef _UI_H
 #define	_UI_H
@@ -107,7 +125,8 @@ public slots:
 
     void connected();
     void disconnected(QString message);
-    void receivedHeader(char* header);
+    void audioBuffer(char* header,char* buffer);
+    void spectrumBuffer(char* header,char* buffer);
 
     void bandChanged(int previousBand,int newBand);
     void modeChanged(int previousMode,int newMode);
@@ -145,6 +164,7 @@ private:
     void setSubRxPan();
 
     Ui::UI widget;
+
     Audio audio;
     int audio_device;
     int audio_sample_rate;
@@ -152,9 +172,11 @@ private:
     int audio_buffers;
     QAudioFormat::Endian audio_byte_order;
     char* first_audio_buffer;
+    char* first_audio_header;
     int gain;
     int subRxGain;
     bool subRx;
+
     long long subRxFrequency;
     Connection connection;
     Band band;
@@ -178,8 +200,6 @@ private:
     long long frequency;
 
     int fps;
-
-    QString command;
 
     Configure configure;
     int sampleRate;

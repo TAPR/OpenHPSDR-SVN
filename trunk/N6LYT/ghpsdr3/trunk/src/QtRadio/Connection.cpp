@@ -1,21 +1,33 @@
 /* 
  * File:   Connection.cpp
- * Author: john
+ * Author: John Melton, G0ORX/N6LYT
  * 
  * Created on 16 August 2010, 07:40
  */
 
-#include <sys/timeb.h>
+/* Copyright (C)
+* 2009 - John Melton, G0ORX/N6LYT
+* This program is free software; you can redistribute it and/or
+* modify it under the terms of the GNU General Public License
+* as published by the Free Software Foundation; either version 2
+* of the License, or (at your option) any later version.
+*
+* This program is distributed in the hope that it will be useful,
+* but WITHOUT ANY WARRANTY; without even the implied warranty of
+* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+* GNU General Public License for more details.
+*
+* You should have received a copy of the GNU General Public License
+* along with this program; if not, write to the Free Software
+* Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+*
+*/
 
 #include "Connection.h"
-
-static struct timeb start_time;
-static struct timeb end_time;
 
 Connection::Connection() {
     //qDebug() << "Connection::Connection";
     tcpSocket=NULL;
-    sem.release(1);
 }
 
 Connection::Connection(const Connection& orig) {
@@ -35,11 +47,20 @@ void Connection::connect(QString h,int r) {
     QObject::connect(tcpSocket, SIGNAL(connected()),
             this, SLOT(connected()));
 
+    QObject::connect(tcpSocket, SIGNAL(disconnected()),
+            this, SLOT(disconnected()));
+
     QObject::connect(tcpSocket, SIGNAL(readyRead()),
             this, SLOT(socketData()));
 
     //qDebug() << "Connection::connect: connectToHost";
     tcpSocket->connectToHost(host,receiver+DSPSERVER_BASE_PORT);
+
+
+}
+
+void Connection::disconnected() {
+    emit disconnected("Remote disconnected");
 }
 
 void Connection::disconnect() {
@@ -79,57 +100,49 @@ void Connection::sendCommand(QString command) {
     char buffer[32];
 
     if(tcpSocket!=NULL) {
-ftime(&start_time);
-        sem.acquire(1);
+        mutex.lock();
         //qDebug() << "sendCommand:" << command;
         strcpy(buffer,command.toUtf8().constData());
-        //qDebug() << "sendCommand: buffer:" << buffer;
         tcpSocket->write(buffer,32);
         tcpSocket->flush();
-        sem.release(1);
-ftime(&end_time);
-if((((end_time.time*1000)+end_time.millitm)-((start_time.time*1000)+start_time.millitm)) > 1)
-    qDebug() << "sendCommand took " << (((end_time.time*1000)+end_time.millitm)-((start_time.time*1000)+start_time.millitm)) << " ms";
+        mutex.unlock();
     }
 }
 
 void Connection::socketData() {
-    char buffer[HEADER_SIZE];
+    char* header;
+    char* buffer;
+    int bytes;
+    int length;
 
-//    if (tcpSocket->bytesAvailable() < HEADER_SIZE) {
-//        qDebug() << "Connection::read want " << HEADER_SIZE << " available " << tcpSocket->bytesAvailable();
-//        tcpSocket->waitForReadyRead(1000);
-//    } else {
-//        qDebug() << "Connection::read want " << HEADER_SIZE << " available " << tcpSocket->bytesAvailable();
-//    }
-    //tcpSocket->read(buffer,HEADER_SIZE);
-    int bytes=0;
-    while(bytes<HEADER_SIZE) {
-        bytes+=tcpSocket->read(&buffer[bytes],HEADER_SIZE-bytes);
-    }
-
-    //qDebug() << "Connection::socketData: " << (int)buffer[0];
-
-    emit header(&buffer[0]);
-}
-
-void Connection::read(char* buffer,int length) {
-
-    //qDebug() << "Connection::read " << length;
-    if(tcpSocket!=NULL) {
-//        if(tcpSocket->bytesAvailable()<length) {
-//            qDebug() << "Connection::read want " << length << " available " << tcpSocket->bytesAvailable();
-//            tcpSocket->waitForReadyRead(1000);
-//        } else {
-//            qDebug() << "Connection::read want " << HEADER_SIZE << " available " << tcpSocket->bytesAvailable();
-//        }
-        int bytes=0;
+    while(tcpSocket->bytesAvailable()>=HEADER_SIZE) {
+        // read the header
+        header=(char*)malloc(HEADER_SIZE);
+        bytes=0;
+        while(bytes<HEADER_SIZE) {
+            bytes+=tcpSocket->read(&header[bytes],HEADER_SIZE-bytes);
+        }
+        // read the data
+        length = atoi(&header[26]);
+        buffer=(char*)malloc(length);
+        bytes=0;
         while(bytes<length) {
-            if(tcpSocket->bytesAvailable()==0) tcpSocket->waitForReadyRead(1000);
-            //qDebug() << "Connection::read want " << (length-bytes) << " available " << tcpSocket->bytesAvailable();
             bytes+=tcpSocket->read(&buffer[bytes],length-bytes);
         }
+        // emit a signal to show what buffer we have
+        if(header[0]==0) {
+            emit audioBuffer(header,buffer);
+        } else if(header[0]==1) {
+            emit spectrumBuffer(header,buffer);
+        } else {
+            qDebug() << "Connection::socketData: invalid header: " << header[0];
+        }
     }
+}
+
+void Connection::freeBuffers(char* header,char* buffer) {
+    free(header);
+    free(buffer);
 }
 
 QString Connection::getHost() {
