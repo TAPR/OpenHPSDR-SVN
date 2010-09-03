@@ -126,9 +126,12 @@ void Connection::socketData() {
         length = atoi(&header[26]);
         buffer=(char*)malloc(length);
         bytes=0;
-        while(bytes<length) {
-            bytes+=tcpSocket->read(&buffer[bytes],length-bytes);
+
+        while(tcpSocket->bytesAvailable()<length) {
+            tcpSocket->waitForReadyRead();
         }
+        tcpSocket->read(&buffer[0],length);
+
         // emit a signal to show what buffer we have
         if(header[0]==0) {
             emit audioBuffer(header,buffer);
