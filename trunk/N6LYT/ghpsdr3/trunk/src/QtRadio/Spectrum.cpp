@@ -285,6 +285,7 @@ void Spectrum::paintEvent(QPaintEvent*) {
     long long f=frequency-(sampleRate/2);
 
     for(int i=0;i<width();i++) {
+        f=frequency-(sampleRate/2)+(long long)(hzPerPixel*(float)i);
         if(f>0) {
             if((f%10000)<(long long)hzPerPixel) {
                 painter.setOpacity(0.5);
@@ -297,7 +298,6 @@ void Spectrum::paintEvent(QPaintEvent*) {
                 painter.drawText(i,height(),QString::number(f/1000));
             }
         }
-        f+=(long long)hzPerPixel;
     }
 
     // draw the band limits
