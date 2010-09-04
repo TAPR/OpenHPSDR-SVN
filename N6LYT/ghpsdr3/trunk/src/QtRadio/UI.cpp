@@ -96,6 +96,7 @@ UI::UI() {
     connect(widget.actionFilter_6,SIGNAL(triggered()),this,SLOT(actionFilter6()));
     connect(widget.actionFilter_7,SIGNAL(triggered()),this,SLOT(actionFilter7()));
     connect(widget.actionFilter_8,SIGNAL(triggered()),this,SLOT(actionFilter8()));
+    connect(widget.actionFilter_9,SIGNAL(triggered()),this,SLOT(actionFilter9()));
 
     connect(widget.actionANF,SIGNAL(triggered()),this,SLOT(actionANF()));
     connect(widget.actionNR,SIGNAL(triggered()),this,SLOT(actionNR()));
@@ -790,9 +791,8 @@ void UI::filtersChanged(FiltersBase* previousFilters,FiltersBase* newFilters) {
         }
     }
 
-    widget.spectrumFrame->setFilter(filters.getText());
     filters.selectFilter(filters.getFilter());
-    
+    widget.spectrumFrame->setFilter(filters.getText());
 
 }
 
@@ -982,6 +982,7 @@ void UI::filterChanged(int previousFilter,int newFilter) {
     command.clear(); QTextStream(&command) << "setFilter " << low << " " << high;
     connection.sendCommand(command);
     widget.spectrumFrame->setFilter(low,high);
+    widget.spectrumFrame->setFilter(filters.getText());
     band.setFilter(newFilter);
 }
 
