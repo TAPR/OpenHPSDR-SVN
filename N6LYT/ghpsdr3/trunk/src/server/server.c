@@ -163,7 +163,15 @@ void process_args(int argc,char* argv[]) {
 
             default:
                 fprintf(stderr,"Usage: \n");
-                fprintf(stderr,"  server --receivers N --samplerate 48000|96000|192000\n");
+                fprintf(stderr,"  server --receivers N (default 1)\n");
+                fprintf(stderr,"         --dither off|on\n");
+                fprintf(stderr,"         --random off|on\n");
+                fprintf(stderr,"         --preamp off|on\n");
+                fprintf(stderr,"         --10mhzsource atlas|penelope|mercury\n");
+                fprintf(stderr,"         --122.88mhzsource atlas|penelope|mercury\n");
+                fprintf(stderr,"         --micsource janus|penelope\n");
+                fprintf(stderr,"         --class other|E\n");
+                fprintf(stderr,"         --timing 1\n");
                 exit(1);
                 break;
                
