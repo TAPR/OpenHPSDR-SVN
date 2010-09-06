@@ -106,6 +106,7 @@ struct option longOptions[] = {
     {"receiver",required_argument, 0, 1},
     {"server",required_argument, 0, 2},
     {"offset",required_argument, 0, 3},
+    {"timing",no_argument, 0, 4},
 };
 
 char* shortOptions="";
@@ -135,6 +136,9 @@ void processCommands(int argc,char** argv) {
                 break;
             case 3:
                 offset=atoi(optarg);
+                break;
+            case 4:
+                client_set_timing();
                 break;
         }
     }

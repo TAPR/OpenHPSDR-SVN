@@ -40,6 +40,8 @@
 #include <semaphore.h>
 #include <math.h>
 #include <time.h>
+#include <sys/timeb.h>
+
 #include "client.h"
 #include "ozy.h"
 #include "audiostream.h"
@@ -47,6 +49,10 @@
 #include "soundcard.h"
 #include "dttsp.h"
 #include "buffer.h"
+
+static int timing=0;
+static struct timeb start_time;
+static struct timeb end_time;
 
 static pthread_t client_thread_id;
 
@@ -105,6 +111,10 @@ fprintf(stderr,"client_init audio_buffer_size=%d audio_buffer=%ld\n",audio_buffe
 
 }
 
+void client_set_timing() {
+    timing=1;
+}
+
 void* client_thread(void* arg) {
     int rc;
     char *token;
@@ -161,6 +171,7 @@ fprintf(stderr,"client_thread: listening on port %d\n",port);
             rc=setsockopt(clientSocket, SOL_SOCKET, SO_RCVTIMEO,(char *)&tv,sizeof tv);
 
             client_terminate=0;
+if(timing) ftime(&start_time);
             while(client_terminate==0) {
                 bytesRead=recv(clientSocket, message, sizeof(message), 0);
                 if(bytesRead==0) {
@@ -173,7 +184,11 @@ fprintf(stderr,"client_thread: listening on port %d\n",port);
                     }
                     break;
                 }
-
+if(timing) {
+    ftime(&end_time);
+    fprintf(stderr,"command after %ld ms\n",((end_time.time*1000)+end_time.millitm)-((start_time.time*1000)+start_time.millitm));
+    ftime(&start_time);
+}
                 message[bytesRead]=0;
                 token=strtok(message," ");
                     if(token!=NULL) {
@@ -381,6 +396,11 @@ fprintf(stderr,"client_thread: listening on port %d\n",port);
                 } else {
                     fprintf(stderr,"Invalid command: '%s'\n",message);
                 }
+if(timing) {
+    ftime(&end_time);
+    fprintf(stderr,"command processing %ld ms\n",((end_time.time*1000)+end_time.millitm)-((start_time.time*1000)+start_time.millitm));
+    ftime(&start_time);
+}
             }
 
             close(clientSocket);
