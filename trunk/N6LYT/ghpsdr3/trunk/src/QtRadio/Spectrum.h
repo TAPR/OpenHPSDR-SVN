@@ -33,6 +33,8 @@
 #include <QMouseEvent>
 #include <QGLWidget>
 
+#include <Meter.h>
+
 class Spectrum: public QFrame {
     Q_OBJECT
 public:
@@ -118,6 +120,9 @@ private:
     long long band_max;
 
     QVector <QPoint> plot;
+
+    Meter* sMeterMain;
+    Meter* sMeterSub;
 };
 
 
