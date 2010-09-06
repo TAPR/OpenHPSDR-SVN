@@ -105,6 +105,7 @@ static struct option long_options[] = {
     {"update",required_argument, 0, 3},
     {"high",required_argument, 0, 4},
     {"low",required_argument, 0, 5},
+    {0,0,0,0}
 };
 static char* short_options="";
 static int option_index;
@@ -225,6 +226,16 @@ void process_args(int argc,char* argv[]) {
             case 5: // waterfall_low
                 waterfall_low=(float)atoi(optarg);
                 break;
+	    default:
+                fprintf(stderr,"Usage: \n");
+                fprintf(stderr,"  monitor --receivers N (default 1)\n");
+                fprintf(stderr,"          --server 0.0.0.0 (default 127.0.0.1)\n");
+                fprintf(stderr,"          --frequency 0 (default 705600)\n");
+                fprintf(stderr,"          --update 15 (default 15) \n");
+                fprintf(stderr,"          --high -60 (default -60) \n");
+                fprintf(stderr,"          --update -130 (default -130) \n");
+                exit(1);
+
         }
     }
 }
