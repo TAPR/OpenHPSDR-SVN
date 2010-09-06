@@ -35,7 +35,8 @@ SOURCES += main.cpp\
     AMFilters.cpp \
     BandLimit.cpp \
     FrequencyInfo.cpp \
-    Frequency.cpp
+    Frequency.cpp \
+    Meter.cpp
         
 
 HEADERS  += \ 
@@ -63,7 +64,8 @@ HEADERS  += \
     AMFilters.h \
     BandLimit.h \
     FrequencyInfo.h \
-    Frequency.h
+    Frequency.h \
+    Meter.h
 
 FORMS    += \   
     UI.ui \
