@@ -107,6 +107,7 @@ struct option longOptions[] = {
     {"server",required_argument, 0, 2},
     {"offset",required_argument, 0, 3},
     {"timing",no_argument, 0, 4},
+    {0,0,0,0}
 };
 
 char* shortOptions="";
@@ -140,6 +141,14 @@ void processCommands(int argc,char** argv) {
             case 4:
                 client_set_timing();
                 break;
+	    default:
+                fprintf(stderr,"Usage: \n");
+                fprintf(stderr,"  dspserver --receivers N (default 1)\n");
+                fprintf(stderr,"            --server 0.0.0.0 (default 127.0.0.1)\n");
+                fprintf(stderr,"            --soundcard (machine dependent)\n");
+                fprintf(stderr,"            --offset 0 \n");
+                exit(1);
+
         }
     }
 }
