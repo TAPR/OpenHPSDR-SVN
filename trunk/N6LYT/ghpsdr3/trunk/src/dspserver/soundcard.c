@@ -71,8 +71,10 @@ fprintf(stderr,"setSoundcard: %d\n",card);
             displayCalibrationOffset=-82.62103f;
             break;
         case HPSDR:
-            multimeterCalibrationOffset=-11.0f;
-            displayCalibrationOffset=-25.0f;
+            //multimeterCalibrationOffset=-11.0f;
+            //displayCalibrationOffset=-25.0f;
+            multimeterCalibrationOffset=-41.0f;
+            displayCalibrationOffset=-48.0f;
             break;
     }
 
