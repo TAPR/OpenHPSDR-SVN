@@ -36,7 +36,9 @@ SOURCES += main.cpp\
     BandLimit.cpp \
     FrequencyInfo.cpp \
     Frequency.cpp \
-    Meter.cpp
+    Meter.cpp \
+    Bandscope.cpp \
+    About.cpp
         
 
 HEADERS  += \ 
@@ -65,10 +67,16 @@ HEADERS  += \
     BandLimit.h \
     FrequencyInfo.h \
     Frequency.h \
-    Meter.h
+    Meter.h \
+    Bandscope.h \
+    About.h
 
 FORMS    += \   
     UI.ui \
-    Configure.ui
+    Configure.ui \
+    Bandscope.ui \
+    About.ui
 
 OTHER_FILES +=
+
+RESOURCES +=

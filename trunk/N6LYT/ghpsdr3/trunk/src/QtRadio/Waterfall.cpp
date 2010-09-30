@@ -31,6 +31,11 @@ Waterfall::Waterfall() {
 Waterfall::Waterfall(QWidget*& widget) {
     QFrame::setParent(widget);
     
+    sampleRate=96000;
+
+    subRxFrequency=0LL;
+    subRx=FALSE;
+
     waterfallHigh=-60;
     waterfallLow=-125;
 
@@ -96,6 +101,91 @@ void Waterfall::setGeometry(QRect rect) {
     }
 }
 
+
+void Waterfall::mousePressEvent(QMouseEvent* event) {
+
+    //qDebug() << __FUNCTION__ << ": " << event->pos().x();
+
+    //qDebug() << "mousePressEvent: event->button(): " << event->button();
+
+    button=event->button();
+    startX=lastX=event->pos().x();
+    moved=0;
+}
+
+void Waterfall::mouseMoveEvent(QMouseEvent* event){
+    int move=event->pos().x()-lastX;
+    lastX=event->pos().x();
+//    qDebug() << __FUNCTION__ << ": " << event->pos().x() << " move:" << move;
+
+    moved=1;
+
+    if (! move==0) emit frequencyMoved(move,100);
+}
+
+void Waterfall::mouseReleaseEvent(QMouseEvent* event) {
+    int move=event->pos().x()-lastX;
+    lastX=event->pos().x();
+    //qDebug() << __FUNCTION__ << ": " << event->pos().x() << " move:" << move;
+
+    if(moved) {
+        emit frequencyMoved(move,100);
+    } else {
+        float hzPixel = sampleRate/width();  // spectrum resolution: Hz/pixel
+
+        long freqOffsetPixel;
+        long long f = frequency - (sampleRate/2) + (event->pos().x()*hzPixel);
+        if(subRx) {
+            freqOffsetPixel = (subRxFrequency-f)/hzPixel;
+            if (button == Qt::LeftButton) {
+                // set frequency to center of filter
+                if(filterLow<0 && filterHigh<0) {
+                    freqOffsetPixel+=(((filterLow-filterHigh)/2)+filterHigh)/hzPixel;
+                } else if(filterLow>0 && filterHigh>0){
+                    freqOffsetPixel-=(((filterHigh-filterLow)/2)-filterHigh)/hzPixel;
+                } else {
+                    // no adjustment
+                }
+            }
+        } else {
+            freqOffsetPixel = (f-frequency)/hzPixel; // compute the offset from the central frequency, in pixel
+            if (button == Qt::LeftButton) {
+                // set frequency to center of filter
+                if(filterLow<0 && filterHigh<0) {
+                    freqOffsetPixel-=(((filterLow-filterHigh)/2)+filterHigh)/hzPixel;
+                } else if(filterLow>0 && filterHigh>0){
+                    freqOffsetPixel+=(((filterHigh-filterLow)/2)-filterHigh)/hzPixel;
+                } else {
+                    // no adjustment
+                }
+            }
+        }
+
+        emit frequencyMoved(-(long long)(freqOffsetPixel*hzPixel)/100,100);
+
+    }
+}
+
+void Waterfall::wheelEvent(QWheelEvent *event) {
+    //qDebug() << __FUNCTION__ << "Delta: " << event->delta() << "y: " << event->pos().y() << " heigth:" << height();
+
+    // change frequency
+    float vOfs = (float)event->pos().y() / (float)height();
+    //qDebug() << "wheelEvent vOfs: " << vOfs;
+
+    if (vOfs > 0.75) {
+        emit frequencyMoved(event->delta()/8/15,100);
+    } else if (vOfs > 0.50) {
+        emit frequencyMoved(event->delta()/8/15,50);
+    } else if (vOfs > 0.25) {
+        emit frequencyMoved(event->delta()/8/15,25);
+    } else {
+        emit frequencyMoved(event->delta()/8/15,10);
+    }
+
+}
+
+/*
 void Waterfall::mousePressEvent(QMouseEvent* event) {
 
     //qDebug() << "mousePressEvent " << event->pos().x();
@@ -109,7 +199,7 @@ void Waterfall::mouseMoveEvent(QMouseEvent* event){
     lastX=event->pos().x();
     //qDebug() << "mouseMoveEvent " << event->pos().x() << " move:" << move;
 
-    emit frequencyMoved(move);
+    emit frequencyMoved(move,100);
 
 }
 
@@ -119,15 +209,16 @@ void Waterfall::mouseReleaseEvent(QMouseEvent* event) {
     //qDebug() << "mouseReleaseEvent " << event->pos().x() << " move:" << move;
 
     if(moved) {
-        emit frequencyMoved(move);
+        emit frequencyMoved(move,100);
     } else {
 
     }
 }
 
 void Waterfall::wheelEvent(QWheelEvent *event) {
-    emit frequencyMoved(event->delta()/8/15);
+    emit frequencyMoved(event->delta()/8/15,100);
 }
+*/
 
 void Waterfall::paintEvent(QPaintEvent*) {
     QPainter painter(this);
@@ -143,6 +234,8 @@ void Waterfall::updateWaterfall(char*header,char* buffer,int size) {
     int sample;
 
     //qDebug() << "updateWaterfall: " << width() << ":" << height();
+
+    sampleRate = atoi(&header[32]);
 
     if(image.width()!=width() ||
        image.height()!=height()) {
@@ -241,4 +334,29 @@ uint Waterfall::calculatePixel(int sample) {
     int pixel = (255 << 24)+(R << 16)+(G << 8) + B;
     return pixel;
 
+}
+
+void Waterfall::setSampleRate(int r) {
+    sampleRate=r;
+}
+
+void Waterfall::setFrequency(long long f) {
+    frequency=f;
+    subRxFrequency=f;
+
+    //qDebug() << "Spectrum:setFrequency: " << f;
+}
+
+void Waterfall::setSubRxFrequency(long long f) {
+    subRxFrequency=f;
+    //qDebug() << "Spectrum:setSubRxFrequency: " << f;
+}
+
+void Waterfall::setSubRxState(bool state) {
+    subRx=state;
+}
+
+void Waterfall::setFilter(int low, int high) {
+    filterLow=low;
+    filterHigh=high;
 }

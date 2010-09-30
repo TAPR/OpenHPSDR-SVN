@@ -41,8 +41,6 @@ public:
     void setObjectName(QString name);
     void setGeometry(QRect rect);
     void initialize();
-    void setFrequency(long long f);
-    void setFilter(int low,int high);
     void updateWaterfall(char* header,char* buffer,int width);
 
     void setLow(int low);
@@ -50,8 +48,14 @@ public:
     int getLow();
     int getHigh();
 
+    void setSampleRate(int r);
+    void setFrequency(long long f);
+    void setSubRxFrequency(long long f);
+    void setFilter(int low,int high);
+    void setSubRxState(bool state);
+
 signals:
-    void frequencyMoved(int step);
+    void frequencyMoved(int steps,int step);
 
 protected:
     void paintEvent(QPaintEvent*);
@@ -69,6 +73,7 @@ private:
     int waterfallHigh;
     int waterfallLow;
 
+    int button;
     int startX;
     int lastX;
     int moved;
@@ -83,6 +88,13 @@ private:
     int colorHighG;
     int colorHighB;
     QImage image;
+
+    int sampleRate;
+    int filterLow;
+    int filterHigh;
+    long long frequency;
+    long long subRxFrequency;
+    bool subRx;
 };
 
 

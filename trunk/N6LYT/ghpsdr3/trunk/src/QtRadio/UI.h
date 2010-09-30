@@ -33,6 +33,7 @@
 #include <QTimer>
 #include <QtMultimedia/QAudioFormat>
 
+#include "About.h"
 #include "Configure.h"
 #include "Audio.h"
 #include "Connection.h"
@@ -51,6 +52,9 @@
 #include "FMNFilters.h"
 #include "DIGLFilters.h"
 #include "DIGUFilters.h"
+#include "Bandscope.h"
+
+#define DSPSERVER_BASE_PORT 8000
 
 #define AGC_LONG 1
 #define AGC_SLOW 2
@@ -70,13 +74,26 @@ public:
 
 public slots:
     void actionConfigure();
-
+    void actionAbout();
     void actionConnect();
     void actionDisconnect();
     void actionSubRx();
+    void actionBandscope();
+    void actionRecord();
 
     void actionMuteMainRx();
     void actionMuteSubRx();
+
+    void actionGain_10();
+    void actionGain_20();
+    void actionGain_30();
+    void actionGain_40();
+    void actionGain_50();
+    void actionGain_60();
+    void actionGain_70();
+    void actionGain_80();
+    void actionGain_90();
+    void actionGain_100();
 
     void action160();
     void action80();
@@ -123,6 +140,8 @@ public slots:
     void actionFast();
     void actionLong();
 
+    void actionPreamp();
+
     void connected();
     void disconnected(QString message);
     void audioBuffer(char* header,char* buffer);
@@ -141,7 +160,6 @@ public slots:
     //void audioChannelsChanged(int channels);
     void encodingChanged(int choice);
     //void byteOrderChanged(int choice);
-    void setGain(int gain);
 
 
     void setSubRxGain(int gain);
@@ -162,6 +180,8 @@ signals:
 
 private:
     void setSubRxPan();
+    void actionGain(int g);
+    void setGain(bool state);
 
     Ui::UI widget;
 
@@ -201,8 +221,11 @@ private:
 
     int fps;
 
+    About about;
     Configure configure;
     int sampleRate;
+
+    Bandscope* bandscope;
 
 };
 

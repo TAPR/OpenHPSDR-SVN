@@ -120,7 +120,10 @@
     <addaction name="separator"/>
     <addaction name="actionSubrx"/>
     <addaction name="separator"/>
+    <addaction name="actionBandscope"/>
+    <addaction name="actionRecord"/>
     <addaction name="actionConfig"/>
+    <addaction name="separator"/>
    </widget>
    <widget class="QMenu" name="menuAudio">
     <property name="title">
@@ -128,6 +131,31 @@
     </property>
     <addaction name="actionMuteMainRx"/>
     <addaction name="actionMuteSubRx"/>
+    <addaction name="actionGain_10"/>
+    <addaction name="actionGain_20"/>
+    <addaction name="actionGain_30"/>
+    <addaction name="actionGain_40"/>
+    <addaction name="actionGain_50"/>
+    <addaction name="actionGain_60"/>
+    <addaction name="actionGain_70"/>
+    <addaction name="actionGain_80"/>
+    <addaction name="actionGain_90"/>
+    <addaction name="actionGain_100"/>
+   </widget>
+   <widget class="QMenu" name="menuHardware">
+    <property name="title">
+     <string>Hardware</string>
+    </property>
+    <addaction name="actionPreamp"/>
+    <addaction name="separator"/>
+    <addaction name="actionDither"/>
+    <addaction name="actionRandom"/>
+   </widget>
+   <widget class="QMenu" name="menuHelp">
+    <property name="title">
+     <string>Help</string>
+    </property>
+    <addaction name="actionAbout"/>
    </widget>
    <addaction name="menuReceiver"/>
    <addaction name="menuAudio"/>
@@ -136,6 +164,8 @@
    <addaction name="menuFilter"/>
    <addaction name="menuNoise_Reduction"/>
    <addaction name="menuAGC"/>
+   <addaction name="menuHardware"/>
+   <addaction name="menuHelp"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
   <action name="action160">
@@ -531,6 +561,125 @@
    </property>
    <property name="text">
     <string>Mute Sub Rx</string>
+   </property>
+  </action>
+  <action name="actionPreamp">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Preamp</string>
+   </property>
+  </action>
+  <action name="actionDither">
+   <property name="text">
+    <string>Dither</string>
+   </property>
+  </action>
+  <action name="actionRandom">
+   <property name="text">
+    <string>Random</string>
+   </property>
+  </action>
+  <action name="actionBandscope">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Bandscope</string>
+   </property>
+  </action>
+  <action name="actionAbout">
+   <property name="text">
+    <string>About</string>
+   </property>
+  </action>
+  <action name="actionRecord">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Record</string>
+   </property>
+  </action>
+  <action name="actionGain_10">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Gain 10</string>
+   </property>
+  </action>
+  <action name="actionGain_20">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Gain 20</string>
+   </property>
+  </action>
+  <action name="actionGain_30">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Gain 30</string>
+   </property>
+  </action>
+  <action name="actionGain_40">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Gain 40</string>
+   </property>
+  </action>
+  <action name="actionGain_50">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Gain 50</string>
+   </property>
+  </action>
+  <action name="actionGain_60">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Gain 60</string>
+   </property>
+  </action>
+  <action name="actionGain_70">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Gain 70</string>
+   </property>
+  </action>
+  <action name="actionGain_80">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Gain 80</string>
+   </property>
+  </action>
+  <action name="actionGain_90">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Gain 90</string>
+   </property>
+  </action>
+  <action name="actionGain_100">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Gain 100</string>
    </property>
   </action>
  </widget>

@@ -31,7 +31,10 @@
 #include <QTcpSocket>
 #include <QMutex>
 
-#define DSPSERVER_BASE_PORT 8000
+
+#define SPECTRUM_BUFFER     0
+#define AUDIO_BUFFER        1
+#define BANDSCOPE_BUFFER    2
 
 #define HEADER_SIZE 48
 
@@ -44,8 +47,6 @@ public:
     void connect(QString host,int receiver);
     void disconnect();
     void sendCommand(QString command);
-    QString getHost();
-    int getReceiver();
     void freeBuffers(char* header,char* buffer);
 
 public slots:
@@ -60,13 +61,14 @@ signals:
     void header(char* header);
     void audioBuffer(char* header,char* buffer);
     void spectrumBuffer(char* header,char* buffer);
+    void bandscopeBuffer(char* header,char* buffer);
 
 private:
     QTcpSocket* tcpSocket;
     QMutex mutex;
 
     QString host;
-    int receiver;
+    int port;
 };
 
 #endif	/* CONNECTION_H */
