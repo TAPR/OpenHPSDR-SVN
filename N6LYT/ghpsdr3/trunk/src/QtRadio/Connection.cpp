@@ -36,9 +36,9 @@ Connection::Connection(const Connection& orig) {
 Connection::~Connection() {
 }
 
-void Connection::connect(QString h,int r) {
+void Connection::connect(QString h,int p) {
     host=h;
-    receiver=r;
+    port=p;
     tcpSocket=new QTcpSocket(this);
 
     QObject::connect(tcpSocket, SIGNAL(error(QAbstractSocket::SocketError)),
@@ -53,8 +53,8 @@ void Connection::connect(QString h,int r) {
     QObject::connect(tcpSocket, SIGNAL(readyRead()),
             this, SLOT(socketData()));
 
-    //qDebug() << "Connection::connect: connectToHost";
-    tcpSocket->connectToHost(host,receiver+DSPSERVER_BASE_PORT);
+    qDebug() << "Connection::connect: connectToHost: " << host << ":" << port;
+    tcpSocket->connectToHost(host,port);
 
 
 }
@@ -116,6 +116,8 @@ void Connection::socketData() {
     int length;
 
     while(tcpSocket->bytesAvailable()>=HEADER_SIZE) {
+
+        //qDebug() << "socketData: read header";
         // read the header
         header=(char*)malloc(HEADER_SIZE);
         bytes=0;
@@ -127,16 +129,20 @@ void Connection::socketData() {
         buffer=(char*)malloc(length);
         bytes=0;
 
+        //qDebug() << "socketData: read data: " << length;
         while(tcpSocket->bytesAvailable()<length) {
             tcpSocket->waitForReadyRead();
         }
         tcpSocket->read(&buffer[0],length);
 
         // emit a signal to show what buffer we have
-        if(header[0]==0) {
-            emit audioBuffer(header,buffer);
-        } else if(header[0]==1) {
+        if(header[0]==SPECTRUM_BUFFER) {
             emit spectrumBuffer(header,buffer);
+        } else if(header[0]==AUDIO_BUFFER) {
+            emit audioBuffer(header,buffer);
+        } else if(header[0]==BANDSCOPE_BUFFER) {
+            //qDebug() << "socketData: bandscope";
+            emit bandscopeBuffer(header,buffer);
         } else {
             qDebug() << "Connection::socketData: invalid header: " << header[0];
         }
@@ -146,12 +152,4 @@ void Connection::socketData() {
 void Connection::freeBuffers(char* header,char* buffer) {
     free(header);
     free(buffer);
-}
-
-QString Connection::getHost() {
-    return host;
-}
-
-int Connection::getReceiver() {
-    return receiver;
 }

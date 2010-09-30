@@ -89,6 +89,10 @@ void Spectrum::initialize() {
     QFrame::setVisible(true);
 }
 
+void Spectrum::setSampleRate(int r) {
+    sampleRate=r;
+}
+
 int Spectrum::samplerate() {
     return sampleRate;
 }
@@ -193,22 +197,11 @@ void Spectrum::wheelEvent(QWheelEvent *event) {
             emit frequencyMoved(event->delta()/8/15,25);
         } else {
             emit frequencyMoved(event->delta()/8/15,10);
-//        } else {
-//            // mouse pointer between top and 80%, the amount is proportional to distance
-//            // from top
-//            // compute absolute value of frequency change
-//            //float nf = vOfs * event->delta()/8/15 * 10;
-//            //qDebug() << "wheelEvent changed: " << nf;
-//            //emit frequencyChanged((long long )nf + frequency);
-//            emit frequencyMoved(event->delta()/8/15,(int)(vOfs*80));
         }
     } else {
         // wheel event on the left side, change the vertical axis values
-
         float shift =  (float)(event->delta()/8/15 * 5)                    // phy steps of wheel * 5
                      * ((float)(spectrumHigh - spectrumLow) / height());   // dBm / pixel on vertical axis
-        //qDebug() << __FUNCTION__ << " spectrum high: " << spectrumHigh;
-        //qDebug() << __FUNCTION__ << " spectrum low:  " << spectrumLow;
        
         if (event->buttons() == Qt::MidButton) {
            // change the vertical axis range
@@ -234,6 +227,7 @@ void Spectrum::paintEvent(QPaintEvent*) {
     QPainter painter(this);
     int filterLeft;
     int filterRight;
+    QString text;
 
 
     QLinearGradient gradient(0, 0, 0,height());
@@ -324,11 +318,14 @@ void Spectrum::paintEvent(QPaintEvent*) {
     // show the frequency
     painter.setPen(QPen(Qt::green,1));
     painter.setFont(QFont("Verdana", 30));
-    painter.drawText(width()/2,30,QString::number(frequency));
+    //text=QString::number(frequency/1000000)+"."+QString::number(frequency%1000000);
+    text.sprintf("%lld.%03lld.%03lld",frequency/1000000,frequency%1000000/1000,frequency%1000);
+    //painter.drawText(width()/2,30,QString::number(frequency));
+    painter.drawText(width()/2,30,text);
 
     // show the band and mode and filter
     painter.setFont(QFont("Arial", 12));
-    QString text=band+" "+mode+" "+filter+"Hz";
+    text=band+" "+mode+" "+filter+"Hz";
     painter.drawText((width()/2),50,text);
 
     // show the server and receiver

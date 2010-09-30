@@ -44,6 +44,7 @@ public:
     void setObjectName(QString name);
     void setGeometry(QRect rect);
     void initialize();
+    void setSampleRate(int r);
     void setFrequency(long long f);
     void setSubRxFrequency(long long f);
     void setFilter(int low,int high);

@@ -15,15 +15,14 @@ Meter::Meter(QString title) {
     painter.setPen(QPen(Qt::red, 1));
     painter.drawArc(5, 15, 140, 140, -260*16, -60*16);
 
-    painter.setPen(QPen(Qt::green, 1));
+    painter.setPen(QPen(Qt::black, 1));
     painter.drawArc(5, 15, 140, 140, -212*16, -48*16);
 
     // put in the markers
-    painter.setPen(Qt::green);
+    painter.setPen(Qt::black);
     calculateLine(-121, 60, 75); // 1
     painter.drawLine(dxmin, dymin, dxmax, dymax);
     painter.drawText(dxmax-5, dymax,"1");
-    painter.setPen(Qt::green);
     calculateLine(-115, 65, 70); // 2
     painter.drawLine(dxmin, dymin, dxmax, dymax);
     calculateLine(-109, 60, 75); // 3
@@ -84,8 +83,8 @@ QImage Meter::getImage(int dbm) {
     QImage qImage(*image);
     QPainter painter(&qImage);
 
-    painter.setPen(Qt::black);
-    calculateLine(dbm,0,70);
+    painter.setPen(Qt::blue);
+    calculateLine(dbm,0,75);
     painter.drawLine(dxmin, dymin, dxmax, dymax);
 
     return qImage;
