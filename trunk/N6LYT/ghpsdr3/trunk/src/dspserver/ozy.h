@@ -162,7 +162,7 @@ extern void setDuplex(int d);
 * 
 * @return 
 */
-extern void setPreamp();
+extern int ozySetPreamp(char* state);
 
 /* --------------------------------------------------------------------------*/
 /** 
@@ -247,6 +247,9 @@ void ozyRestoreState();
 */
 void setSpeed(int s);
 
+
+int ozySetRecord(char* state);
+
 #ifdef	__cplusplus
 }
 #endif
@@ -257,6 +260,7 @@ int set_frequency();
 void ozy_set_local_audio(int state);
 void ozy_set_port_audio(int state);
 void ozy_set_debug(int state);
+
 
 #endif	/* _OZY_H */
 

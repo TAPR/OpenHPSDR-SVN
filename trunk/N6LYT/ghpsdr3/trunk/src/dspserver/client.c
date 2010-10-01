@@ -222,6 +222,13 @@ if(timing) {
                         } else {
                             fprintf(stderr,"Invalid command: '%s'\n",message);
                         }
+                    } else if(strcmp(token,"setpreamp")==0) {
+                        token=strtok(NULL," ");
+                        if(token!=NULL) {
+                            ozySetPreamp(token);
+                        } else {
+                            fprintf(stderr,"Invalid command: '%s'\n",message);
+                        }
                     } else if(strcmp(token,"setmode")==0) {
                         int mode;
                         token=strtok(NULL," ");
@@ -387,6 +394,13 @@ if(timing) {
                         if(token!=NULL) {
                             pan=atof(token);
                             SetRXPan(0,1,pan);
+                        } else {
+                            fprintf(stderr,"Invalid command: '%s'\n",message);
+                        }
+                    } else if(strcmp(token,"record")==0) {
+                        token=strtok(NULL," ");
+                        if(token!=NULL) {
+                            ozySetRecord(token);
                         } else {
                             fprintf(stderr,"Invalid command: '%s'\n",message);
                         }
