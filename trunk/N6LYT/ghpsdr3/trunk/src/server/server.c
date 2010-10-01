@@ -40,6 +40,7 @@
 #include "listener.h"
 #include "ozy.h"
 #include "receiver.h"
+#include "bandscope.h"
 
 static struct option long_options[] = {
     {"receivers",required_argument, 0, 0},
@@ -52,6 +53,9 @@ static struct option long_options[] = {
     {"micsource",required_argument, 0, 7},
     {"class",required_argument, 0, 8},
     {"timing",no_argument, 0, 9},
+    {"record",required_argument,0,10},
+    {"playback",required_argument,0,11},
+    {"sleep",required_argument,0,12},
     {0,0, 0, 0},
 };
 static char* short_options="";
@@ -64,6 +68,7 @@ int main(int argc,char* argv[]) {
     process_args(argc,argv);
 
     init_receivers();
+    init_bandscope();
 
     create_listener_thread();
 
@@ -159,6 +164,18 @@ void process_args(int argc,char* argv[]) {
 
             case 9: // timing
                 ozy_set_timing(1);
+                break;
+
+            case 10: // record
+                ozy_set_record(optarg);
+                break;
+
+            case 11: // playback
+                ozy_set_playback(optarg);
+                break;
+
+            case 12: // sleep
+                ozy_set_playback_sleep(atoi(optarg));
                 break;
 
             default:

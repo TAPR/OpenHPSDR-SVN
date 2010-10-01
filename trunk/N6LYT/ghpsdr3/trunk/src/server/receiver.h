@@ -41,13 +41,6 @@ typedef struct _receiver {
 
 RECEIVER receiver[MAX_RECEIVERS];
 
-typedef struct _buffer {
-    unsigned long long sequence;
-    unsigned short offset;
-    unsigned short length;
-    unsigned char data[500];
-} BUFFER;
-
 char* attach_receiver(int rx,CLIENT* client);
 char* detach_receiver(int rx,CLIENT* client);
 char* set_frequency(CLIENT* client,long f);
