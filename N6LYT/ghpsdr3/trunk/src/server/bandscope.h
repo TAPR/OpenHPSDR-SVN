@@ -33,5 +33,7 @@ typedef struct _bandscope {
 
 BANDSCOPE bandscope;
 
+void init_bandscope();
 char* attach_bandscope(CLIENT* client);
 char* detach_bandscope(CLIENT* client);
+void send_bandscope_buffer();

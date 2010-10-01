@@ -89,7 +89,7 @@ fprintf(stderr,"Listening for TCP connections on port %d\n",LISTEN_PORT);
 
     while(1) {
 
-        if(listen(s,5)<0) {
+        if(listen(s,6)<0) {
             perror("Command listen failed");
             exit(1);
         }

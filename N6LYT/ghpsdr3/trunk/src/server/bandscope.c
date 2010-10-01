@@ -32,6 +32,7 @@
 #include <netdb.h>
 #include <string.h>
 
+#include "buffer.h"
 #include "client.h"
 #include "bandscope.h"
 #include "messages.h"
@@ -41,6 +42,8 @@ BANDSCOPE bandscope;
 static int bs_socket;
 static struct sockaddr_in bs_addr;
 static int bs_length;
+
+static unsigned long sequence=0L;
 
 static char response[80];
 
@@ -91,6 +94,9 @@ char* detach_bandscope(CLIENT* client) {
 void send_bandscope_buffer() {
     struct sockaddr_in client;
     int client_length;
+    unsigned short offset;
+    unsigned short length;
+    BUFFER buffer;
     int rc;
 
     if(bandscope.client!=(CLIENT*)NULL) {
@@ -103,14 +109,26 @@ void send_bandscope_buffer() {
             client.sin_addr.s_addr=bandscope.client->address.sin_addr.s_addr;
             client.sin_port=htons(bandscope.client->bs_port);
 
-            rc=sendto(bs_socket,bandscope.buffer,sizeof(bandscope.buffer),0,(struct sockaddr*)&client,client_length);
-
-            if(rc<=0) {
-                perror("sendto failed for bandscope data");
-                exit(1);
+            // keep UDP packets to 512 bytes or less
+            //     8 bytes sequency number
+            //     2 byte offset
+            //     2 byte length
+            offset=0;
+            while(offset<sizeof(bandscope.buffer)) {
+                buffer.sequence=sequence;
+                buffer.offset=offset;
+                buffer.length=sizeof(bandscope.buffer)-offset;
+                if(buffer.length>500) buffer.length=500;
+                memcpy((char*)&buffer.data[0],(char*)&bandscope.buffer[offset/4],buffer.length);
+                rc=sendto(bs_socket,(char*)&buffer,sizeof(buffer),0,(struct sockaddr*)&client,client_length);
+                if(rc<=0) {
+                    perror("sendto failed for bandscope data");
+                    exit(1);
+                }
+                offset+=buffer.length;
             }
- 
+            sequence++;
+
         }
     }
 }
-

@@ -33,6 +33,7 @@
 #include <netdb.h>
 #include <string.h>
 
+#include "buffer.h"
 #include "client.h"
 #include "receiver.h"
 #include "messages.h"

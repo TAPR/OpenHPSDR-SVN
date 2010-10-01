@@ -35,6 +35,7 @@
 #include <pthread.h>
 #include <string.h>
 
+#include "ozy.h"
 #include "client.h"
 #include "receiver.h"
 #include "messages.h"
@@ -53,6 +54,7 @@ void* client_thread(void* arg) {
 fprintf(stderr,"client connected: %s:%d\n",inet_ntoa(client->address.sin_addr),ntohs(client->address.sin_port));
 
     client->state=RECEIVER_DETACHED;
+    client->receiver=-1;
 
     while(1) {
         bytes_read=recv(client->socket,command,sizeof(command),0);
@@ -70,6 +72,9 @@ fprintf(stderr,"response(Rx%d): '%s'\n",client->receiver,response);
         receiver[client->receiver].client=(CLIENT*)NULL;
         client->state=RECEIVER_DETACHED;
     }
+
+    client->bs_port=-1;
+    detach_bandscope(client);
 
     close(client->socket);
 
@@ -132,6 +137,7 @@ fprintf(stderr,"parse_command(Rx%d): '%s'\n",client->receiver,command);
                     if(token!=NULL) {
                         client->bs_port=atoi(token);
                     }
+                    attach_bandscope(client);
                     return OK;
                 } else {
                     // invalid command string
@@ -152,6 +158,41 @@ fprintf(stderr,"parse_command(Rx%d): '%s'\n",client->receiver,command);
                     return OK;
                 } else if(strcmp(token,"bandscope")==0) {
                     client->bs_port=-1;
+                    detach_bandscope(client);
+                } else {
+                    // invalid command string
+                    return INVALID_COMMAND;
+                }
+            } else {
+                // invalid command string
+                return INVALID_COMMAND;
+            }
+        } else if(strcmp(token,"preamp")==0) {
+            token=strtok(NULL," \r\n");
+            if(token!=NULL) {
+                if(strcmp(token,"off")==0) {
+                    ozy_set_preamp(0);
+                    return OK;
+                } else if(strcmp(token,"on")==0) {
+                    ozy_set_preamp(1);
+                    return OK;
+                } else {
+                    // invalid command string
+                    return INVALID_COMMAND;
+                }
+            } else {
+                // invalid command string
+                return INVALID_COMMAND;
+            }
+        } else if(strcmp(token,"record")==0) {
+            token=strtok(NULL," \r\n");
+            if(token!=NULL) {
+                if(strcmp(token,"on")==0) {
+                    ozy_set_record("hpsdr.iq");
+                    return OK;
+                } else if(strcmp(token,"off")==0) {
+                    ozy_stop_record();
+                    return OK;
                 } else {
                     // invalid command string
                     return INVALID_COMMAND;
