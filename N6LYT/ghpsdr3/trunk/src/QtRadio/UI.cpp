@@ -176,7 +176,6 @@ UI::UI() {
     subRx=FALSE;
     subRxGain=100;
     agc=AGC_SLOW;
-    widget.actionSlow->setChecked(TRUE);
     cwPitch=600;
 
     audio_device=0;
@@ -187,6 +186,20 @@ UI::UI() {
 
     // load any saved settings
     loadSettings();
+    switch(agc) {
+        case AGC_SLOW:
+            widget.actionSlow->setChecked(TRUE);
+            break;
+        case AGC_MEDIUM:
+            widget.actionMedium->setChecked(TRUE);
+            break;
+        case AGC_FAST:
+            widget.actionFast->setChecked(TRUE);
+            break;
+        case AGC_LONG:
+            widget.actionLong->setChecked(TRUE);
+            break;
+    }
 
     fps=configure.getFps();
 
@@ -214,6 +227,11 @@ void UI::loadSettings() {
 
     band.loadSettings(&settings);
     configure.loadSettings(&settings);
+
+    settings.beginGroup("UI");
+    if(settings.contains("gain")) gain=subRxGain=settings.value("gain").toInt();
+    if(settings.contains("agc")) agc=settings.value("agc").toInt();
+    settings.endGroup();
 }
 
 void UI::saveSettings() {
@@ -222,6 +240,12 @@ void UI::saveSettings() {
 
     configure.saveSettings(&settings);
     band.saveSettings(&settings);
+
+    settings.beginGroup("UI");
+    settings.setValue("gain",gain);
+    settings.setValue("subRxGain",subRxGain);
+    settings.setValue("agc",agc);
+    settings.endGroup();
 }
 
 void UI::hostChanged(QString host) {

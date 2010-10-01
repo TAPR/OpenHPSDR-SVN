@@ -174,51 +174,17 @@ void Waterfall::wheelEvent(QWheelEvent *event) {
     //qDebug() << "wheelEvent vOfs: " << vOfs;
 
     if (vOfs > 0.75) {
-        emit frequencyMoved(event->delta()/8/15,100);
-    } else if (vOfs > 0.50) {
-        emit frequencyMoved(event->delta()/8/15,50);
-    } else if (vOfs > 0.25) {
-        emit frequencyMoved(event->delta()/8/15,25);
-    } else {
         emit frequencyMoved(event->delta()/8/15,10);
-    }
-
-}
-
-/*
-void Waterfall::mousePressEvent(QMouseEvent* event) {
-
-    //qDebug() << "mousePressEvent " << event->pos().x();
-
-    startX=lastX=event->pos().x();
-    moved=0;
-}
-
-void Waterfall::mouseMoveEvent(QMouseEvent* event){
-    int move=lastX - event->pos().x();
-    lastX=event->pos().x();
-    //qDebug() << "mouseMoveEvent " << event->pos().x() << " move:" << move;
-
-    emit frequencyMoved(move,100);
-
-}
-
-void Waterfall::mouseReleaseEvent(QMouseEvent* event) {
-    int move=lastX - event->pos().x();
-    lastX=event->pos().x();
-    //qDebug() << "mouseReleaseEvent " << event->pos().x() << " move:" << move;
-
-    if(moved) {
-        emit frequencyMoved(move,100);
+    } else if (vOfs > 0.50) {
+        emit frequencyMoved(event->delta()/8/15,25);
+    } else if (vOfs > 0.25) {
+        emit frequencyMoved(event->delta()/8/15,50);
     } else {
-
+        emit frequencyMoved(event->delta()/8/15,100);
     }
+
 }
 
-void Waterfall::wheelEvent(QWheelEvent *event) {
-    emit frequencyMoved(event->delta()/8/15,100);
-}
-*/
 
 void Waterfall::paintEvent(QPaintEvent*) {
     QPainter painter(this);
