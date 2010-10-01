@@ -357,6 +357,50 @@ int ozySetFrequency(long long ddsAFrequency) {
     return result;
 }
 
+int ozySetPreamp(char* state) {
+    char *token;
+    int result;
+
+    result=0;
+    sprintf(command,"preamp %s",state);
+    send_command(command);
+    token=strtok(response," ");
+    if(token!=NULL) {
+        if(strcmp(token,"OK")==0) {
+            result=0;
+        } else if (strcmp(token,"ERROR")==0) {
+            result=1;
+        } else {
+            fprintf(stderr,"invalid response to set preamp: %s\n",response);
+            result=1;
+        }
+    }
+
+    return result;
+}
+
+int ozySetRecord(char* state) {
+    char *token;
+    int result;
+
+    result=0;
+    sprintf(command,"record %s",state);
+    send_command(command);
+    token=strtok(response," ");
+    if(token!=NULL) {
+        if(strcmp(token,"OK")==0) {
+            result=0;
+        } else if (strcmp(token,"ERROR")==0) {
+            result=1;
+        } else {
+            fprintf(stderr,"invalid response to record: %s\n",response);
+            result=1;
+        }
+    }
+
+    return result;
+}
+
 /* --------------------------------------------------------------------------*/
 /** 
 * @brief Process the ozy input buffer
@@ -443,8 +487,6 @@ int ozy_init() {
     }
 
     fprintf(stderr,"ozy_init: command bound to port %d socket %d\n",ntohs(command_addr.sin_port),command_socket);
-
-    
 
     // create a socket to send audio to the server
     audio_socket=socket(PF_INET,SOCK_DGRAM,IPPROTO_UDP);
