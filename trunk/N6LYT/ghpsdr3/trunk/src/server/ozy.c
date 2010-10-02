@@ -37,7 +37,7 @@
 #include "ozyio.h"
 #include "bandscope.h"
 #include "receiver.h"
-#include "transmitter.h"
+//#include "transmitter.h"
 #include "util.h"
 
 #define THREAD_STACK 32768
