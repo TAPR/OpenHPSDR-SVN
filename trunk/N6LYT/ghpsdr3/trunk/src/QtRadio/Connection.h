@@ -31,7 +31,6 @@
 #include <QTcpSocket>
 #include <QMutex>
 
-
 #define SPECTRUM_BUFFER     0
 #define AUDIO_BUFFER        1
 #define BANDSCOPE_BUFFER    2
@@ -64,11 +63,12 @@ signals:
     void bandscopeBuffer(char* header,char* buffer);
 
 private:
-    QTcpSocket* tcpSocket;
-    QMutex mutex;
-
     QString host;
     int port;
+    QTcpSocket* tcpSocket;
+    QMutex mutex;
+    char* hdr;
+    char* buffer;
 };
 
 #endif	/* CONNECTION_H */

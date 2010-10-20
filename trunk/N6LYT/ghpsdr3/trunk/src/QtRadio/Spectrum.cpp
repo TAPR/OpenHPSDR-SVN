@@ -229,7 +229,6 @@ void Spectrum::paintEvent(QPaintEvent*) {
     int filterRight;
     QString text;
 
-
     QLinearGradient gradient(0, 0, 0,height());
     gradient.setColorAt(0, Qt::black);
     gradient.setColorAt(1, Qt::gray);
@@ -241,15 +240,6 @@ void Spectrum::paintEvent(QPaintEvent*) {
         return;
     }
 
-    // draw sub rx filter
-    if(subRx) {
-        filterLeft = (filterLow - (-sampleRate / 2) + (subRxFrequency-frequency)) * width() / sampleRate;
-        filterRight = (filterHigh - (-sampleRate / 2) + (subRxFrequency-frequency)) * width() / sampleRate;
-        painter.setBrush(Qt::SolidPattern);
-        painter.setOpacity(0.5);
-        painter.fillRect(filterLeft, 0, filterRight - filterLeft, height(), Qt::lightGray);
-    }
-
     // draw filter
     filterLeft = (filterLow - (-sampleRate / 2)) * width() / sampleRate;
     filterRight = (filterHigh - (-sampleRate / 2)) * width() / sampleRate;
@@ -257,6 +247,18 @@ void Spectrum::paintEvent(QPaintEvent*) {
     painter.setOpacity(0.5);
     painter.fillRect(filterLeft,0,filterRight-filterLeft,height(),Qt::gray);
 
+    // draw sub rx filter and cursor
+    if(subRx) {
+        int cursor=(subRxFrequency-(frequency-(sampleRate/2))) * width() / sampleRate;
+        filterLeft = (filterLow - (-sampleRate / 2) + (subRxFrequency-frequency)) * width() / sampleRate;
+        filterRight = (filterHigh - (-sampleRate / 2) + (subRxFrequency-frequency)) * width() / sampleRate;
+        painter.setBrush(Qt::SolidPattern);
+        painter.setOpacity(0.5);
+        painter.fillRect(filterLeft, 0, filterRight - filterLeft, height(), Qt::lightGray);
+
+        painter.setPen(QPen(Qt::red, 1));
+        painter.drawLine(cursor,0,cursor,height());
+    }
 
     // plot horizontal dBm lines
     int V = spectrumHigh - spectrumLow;
@@ -290,7 +292,8 @@ void Spectrum::paintEvent(QPaintEvent*) {
                 painter.setOpacity(1.0);
                 painter.setPen(QPen(Qt::black, 1));
                 painter.setFont(QFont("Arial", 10));
-                painter.drawText(i,height(),QString::number(f/1000));
+                text.sprintf("%lld.%02lld",f/1000000,f%1000000/10000);
+                painter.drawText(i,height(),text);
             }
         }
     }
@@ -319,9 +322,9 @@ void Spectrum::paintEvent(QPaintEvent*) {
     painter.setPen(QPen(Qt::green,1));
     painter.setFont(QFont("Verdana", 30));
     //text=QString::number(frequency/1000000)+"."+QString::number(frequency%1000000);
-    text.sprintf("%lld.%03lld.%03lld",frequency/1000000,frequency%1000000/1000,frequency%1000);
+    //text.sprintf("%lld.%03lld.%03lld",frequency/1000000,frequency%1000000/1000,frequency%1000);
     //painter.drawText(width()/2,30,QString::number(frequency));
-    painter.drawText(width()/2,30,text);
+    painter.drawText(width()/2,30,strFrequency);
 
     // show the band and mode and filter
     painter.setFont(QFont("Arial", 12));
@@ -332,14 +335,7 @@ void Spectrum::paintEvent(QPaintEvent*) {
     text="Server:"+host+" Rx:"+QString::number(receiver);
     painter.drawText(5,15,text);
 
-    // show the subrx frequency
-    if(subRx) {
-        filterLeft = (filterLow - (-sampleRate / 2) + (subRxFrequency-frequency)) * width() / sampleRate;
-        filterRight = (filterHigh - (-sampleRate / 2) + (subRxFrequency-frequency)) * width() / sampleRate;
-        painter.setPen(QPen(Qt::black,1));
-        painter.setFont(QFont("Arial", 12));
-        painter.drawText(filterRight,height()-20,QString::number(subRxFrequency));
-    }
+
 
     // draw the analog meters
     painter.setOpacity(0.8);
@@ -353,22 +349,35 @@ void Spectrum::paintEvent(QPaintEvent*) {
     }
 
     // plot Spectrum
-    painter.setOpacity(1.0);
+    painter.setOpacity(0.9);
     painter.setPen(QPen(Qt::yellow, 1));
     if(plot.count()==width()) {
         painter.drawPolyline(plot.constData(),plot.count());
+    }
+
+    // show the subrx frequency
+    if(subRx) {
+        //filterLeft = (filterLow - (-sampleRate / 2) + (subRxFrequency-frequency)) * width() / sampleRate;
+        filterRight = (filterHigh - (-sampleRate / 2) + (subRxFrequency-frequency)) * width() / sampleRate;
+        painter.setPen(QPen(Qt::black,1));
+        painter.setFont(QFont("Arial", 12));
+        //painter.drawText(filterRight,height()-20,QString::number(subRxFrequency));
+        painter.drawText(filterRight,height()-20,strSubRxFrequency);
     }
 }
 
 void Spectrum::setFrequency(long long f) {
     frequency=f;
     subRxFrequency=f;
-
+    strFrequency.sprintf("%lld.%03lld.%03lld",f/1000000,f%1000000/1000,f%1000);
+    strSubRxFrequency.sprintf("%lld.%03lld.%03lld",f/1000000,f%1000000/1000,f%1000);
     //qDebug() << "Spectrum:setFrequency: " << f;
 }
 
 void Spectrum::setSubRxFrequency(long long f) {
     subRxFrequency=f;
+    strSubRxFrequency.sprintf("%lld.%03lld.%03lld",f/1000000,f%1000000/1000,f%1000);
+
     //qDebug() << "Spectrum:setSubRxFrequency: " << f;
 }
 
@@ -377,6 +386,7 @@ void Spectrum::setSubRxState(bool state) {
 }
 
 void Spectrum::setFilter(int low, int high) {
+    qDebug() << "Spectrum::setFilter " << low << "," << high;
     filterLow=low;
     filterHigh=high;
 }

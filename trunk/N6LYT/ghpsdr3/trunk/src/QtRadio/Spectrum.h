@@ -31,7 +31,7 @@
 #include <QFrame>
 #include <QPainter>
 #include <QMouseEvent>
-#include <QGLWidget>
+//#include <QGLWidget>
 
 #include <Meter.h>
 
@@ -114,7 +114,9 @@ private:
     int filterLow;
     int filterHigh;
     long long frequency;
+    QString strFrequency;
     long long subRxFrequency;
+    QString strSubRxFrequency;
     bool subRx;
 
     long long band_min;

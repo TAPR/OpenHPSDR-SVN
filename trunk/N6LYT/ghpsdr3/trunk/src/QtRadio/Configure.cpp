@@ -47,6 +47,17 @@ Configure::Configure() {
     widget.byteOrderComboBox->addItem("BigEndian");
     widget.byteOrderComboBox->setCurrentIndex(0);
 
+    widget.nrTapsSpinBox->setValue(64);
+    widget.nrDelaySpinBox->setValue(8);
+    widget.nrGainSpinBox->setValue(16);
+    widget.nrLeakSpinBox->setValue(10);
+    widget.anfTapsSpinBox->setValue(64);
+    widget.anfDelaySpinBox->setValue(8);
+    widget.anfGainSpinBox->setValue(32);
+    widget.anfLeakSpinBox->setValue(1);
+    widget.nbThresholdSpinBox->setValue(20);
+
+
     connect(widget.spectrumHighSpinBox,SIGNAL(valueChanged(int)),this,SLOT(slotSpectrumHighChanged(int)));
     connect(widget.spectrumLowSpinBox,SIGNAL(valueChanged(int)),this,SLOT(slotSpectrumLowChanged(int)));
     connect(widget.fpsSpinBox,SIGNAL(valueChanged(int)),this,SLOT(slotFpsChanged(int)));
@@ -61,6 +72,17 @@ Configure::Configure() {
     connect(widget.hostComboBox,SIGNAL(currentIndexChanged(int)),this,SLOT(slotHostChanged(int)));
     connect(widget.rxSpinBox,SIGNAL(valueChanged(int)),this,SLOT(slotReceiverChanged(int)));
 
+    connect(widget.nrTapsSpinBox,SIGNAL(valueChanged(int)),this,SLOT(slotNrTapsChanged(int)));
+    connect(widget.nrDelaySpinBox,SIGNAL(valueChanged(int)),this,SLOT(slotNrDelayChanged(int)));
+    connect(widget.nrGainSpinBox,SIGNAL(valueChanged(int)),this,SLOT(slotNrGainChanged(int)));
+    connect(widget.nrLeakSpinBox,SIGNAL(valueChanged(int)),this,SLOT(slotNrLeakChanged(int)));
+
+    connect(widget.anfTapsSpinBox,SIGNAL(valueChanged(int)),this,SLOT(slotAnfTapsChanged(int)));
+    connect(widget.anfDelaySpinBox,SIGNAL(valueChanged(int)),this,SLOT(slotAnfDelayChanged(int)));
+    connect(widget.anfGainSpinBox,SIGNAL(valueChanged(int)),this,SLOT(slotAnfGainChanged(int)));
+    connect(widget.anfLeakSpinBox,SIGNAL(valueChanged(int)),this,SLOT(slotAnfLeakChanged(int)));
+
+    connect(widget.nbThresholdSpinBox,SIGNAL(valueChanged(int)),this,SLOT(slotNbThresholdChanged(int)));
 }
 
 Configure::~Configure() {
@@ -112,6 +134,21 @@ void Configure::loadSettings(QSettings* settings) {
     if(settings->contains("samplerate")) widget.sampleRateComboBox->setCurrentIndex(settings->value("samplerate").toInt());
     if(settings->contains("byteorder")) widget.byteOrderComboBox->setCurrentIndex(settings->value("byteorder").toInt());
     settings->endGroup();
+    settings->beginGroup("NR");
+    if(settings->contains("taps")) widget.nrGainSpinBox->setValue(settings->value("taps").toInt());
+    if(settings->contains("delay"))widget.nrDelaySpinBox->setValue(settings->value("delay").toInt());
+    if(settings->contains("gain")) widget.nrGainSpinBox->setValue(settings->value("gain").toInt());
+    if(settings->contains("leak")) widget.nrLeakSpinBox->setValue(settings->value("leak").toInt());
+    settings->endGroup();
+    settings->beginGroup("ANF");
+    if(settings->contains("taps")) widget.anfGainSpinBox->setValue(settings->value("taps").toInt());
+    if(settings->contains("delay"))widget.anfDelaySpinBox->setValue(settings->value("delay").toInt());
+    if(settings->contains("gain")) widget.anfGainSpinBox->setValue(settings->value("gain").toInt());
+    if(settings->contains("leak")) widget.anfLeakSpinBox->setValue(settings->value("leak").toInt());
+    settings->endGroup();
+    settings->beginGroup("ANB");
+    if(settings->contains("threshold")) widget.nbThresholdSpinBox->setValue(settings->value("threshold").toInt());
+    settings->endGroup();
 }
 
 void Configure::saveSettings(QSettings* settings) {
@@ -139,6 +176,21 @@ void Configure::saveSettings(QSettings* settings) {
     settings->setValue("channels",widget.audioChannelsSpinBox->value());
     settings->setValue("samplerate",widget.sampleRateComboBox->currentIndex());
     settings->setValue("byteorder",widget.byteOrderComboBox->currentIndex());
+    settings->endGroup();
+    settings->beginGroup("NR");
+    settings->setValue("taps",widget.nrTapsSpinBox->value());
+    settings->setValue("delay",widget.nrDelaySpinBox->value());
+    settings->setValue("gain",widget.nrGainSpinBox->value());
+    settings->setValue("leak",widget.nrLeakSpinBox->value());
+    settings->endGroup();
+    settings->beginGroup("ANF");
+    settings->setValue("taps",widget.anfTapsSpinBox->value());
+    settings->setValue("delay",widget.anfDelaySpinBox->value());
+    settings->setValue("gain",widget.anfGainSpinBox->value());
+    settings->setValue("leak",widget.anfLeakSpinBox->value());
+    settings->endGroup();
+    settings->beginGroup("ANB");
+    settings->setValue("threshold",widget.nbThresholdSpinBox->value());
     settings->endGroup();
 }
 
@@ -202,7 +254,41 @@ void Configure::slotByteOrderChanged(int selection) {
                             );
 }
 
+void Configure::slotNrTapsChanged(int taps) {
+    emit nrValuesChanged(widget.nrTapsSpinBox->value(),widget.nrDelaySpinBox->value(),(double)widget.nrGainSpinBox->value()*0.00001,(double)widget.nrLeakSpinBox->value()*0.0000001);
+}
 
+void Configure::slotNrDelayChanged(int delay) {
+    emit nrValuesChanged(widget.nrTapsSpinBox->value(),widget.nrDelaySpinBox->value(),(double)widget.nrGainSpinBox->value()*0.00001,(double)widget.nrLeakSpinBox->value()*0.0000001);
+}
+
+void Configure::slotNrGainChanged(int gain) {
+    emit nrValuesChanged(widget.nrTapsSpinBox->value(),widget.nrDelaySpinBox->value(),(double)widget.nrGainSpinBox->value()*0.00001,(double)widget.nrLeakSpinBox->value()*0.0000001);
+}
+
+void Configure::slotNrLeakChanged(int leak) {
+    emit nrValuesChanged(widget.nrTapsSpinBox->value(),widget.nrDelaySpinBox->value(),(double)widget.nrGainSpinBox->value()*0.00001,(double)widget.nrLeakSpinBox->value()*0.0000001);
+}
+
+void Configure::slotAnfTapsChanged(int taps) {
+    emit anfValuesChanged(widget.anfTapsSpinBox->value(),widget.anfDelaySpinBox->value(),(double)widget.anfGainSpinBox->value()*0.00001,(double)widget.anfLeakSpinBox->value()*0.0000001);
+}
+
+void Configure::slotAnfDelayChanged(int delay) {
+    emit anfValuesChanged(widget.anfTapsSpinBox->value(),widget.anfDelaySpinBox->value(),(double)widget.anfGainSpinBox->value()*0.00001,(double)widget.anfLeakSpinBox->value()*0.0000001);
+}
+
+void Configure::slotAnfGainChanged(int gain) {
+    emit anfValuesChanged(widget.anfTapsSpinBox->value(),widget.anfDelaySpinBox->value(),(double)widget.anfGainSpinBox->value()*0.00001,(double)widget.anfLeakSpinBox->value()*0.0000001);
+}
+
+void Configure::slotAnfLeakChanged(int leak) {
+    emit anfValuesChanged(widget.anfTapsSpinBox->value(),widget.anfDelaySpinBox->value(),(double)widget.anfGainSpinBox->value()*0.00001,(double)widget.anfLeakSpinBox->value()*0.0000001);
+}
+
+void Configure::slotNbThresholdChanged(int threshold) {
+    emit nbThresholdChanged((double)widget.nbThresholdSpinBox->value()*0.165);
+}
 
 
 QString Configure::getHost() {
@@ -272,4 +358,40 @@ void Configure::setWaterfallLow(int low) {
 
 void Configure::setWaterfallHigh(int high) {
     widget.waterfallHighSpinBox->setValue(high);
+}
+
+int Configure::getNrTaps() {
+    return widget.nrTapsSpinBox->value();
+}
+
+int Configure::getNrDelay(){
+    return widget.nrDelaySpinBox->value();
+}
+
+double Configure::getNrGain() {
+    return (double)widget.nrGainSpinBox->value()*0.00001;
+}
+
+double Configure::getNrLeak() {
+    return (double)widget.nrLeakSpinBox->value()*0.0000001;
+}
+
+int Configure::getAnfTaps() {
+    return widget.anfTapsSpinBox->value();
+}
+
+int Configure::getAnfDelay() {
+    return widget.anfDelaySpinBox->value();
+}
+
+double Configure::getAnfGain() {
+    return (double)widget.anfGainSpinBox->value()*0.00001;
+}
+
+double Configure::getAnfLeak() {
+    return (double)widget.anfLeakSpinBox->value()*0.0000001;
+}
+
+double Configure::getNbThreshold() {
+    return (double)widget.nbThresholdSpinBox->value()*0.165;
 }

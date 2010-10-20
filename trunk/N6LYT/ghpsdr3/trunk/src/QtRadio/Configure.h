@@ -67,6 +67,18 @@ public:
     int getSampleRate();
     int getChannels();
     
+    int getNrTaps();
+    int getNrDelay();
+    double getNrGain();
+    double getNrLeak();
+
+    int getAnfTaps();
+    int getAnfDelay();
+    double getAnfGain();
+    double getAnfLeak();
+
+    double getNbThreshold();
+
 signals:
     void hostChanged(QString host);
     void receiverChanged(int receiver);
@@ -80,6 +92,20 @@ signals:
 //    void channelsChanged(int channels);
 //    void byteOrderChanged(QAudioFormat::Endian order);
 
+//    void nrTapsChanged(int taps);
+//    void nrDelayChanged(int delay);
+//    void nrGainChanged(double gain);
+//    void nrLeakChanged(double leak);
+    void nrValuesChanged(int taps,int delay,double gain,double leak);
+
+//    void anfTapsChanged(int taps);
+//    void anfDelayChanged(int delay);
+//    void anfGainChanged(double gain);
+//    void anfLeakChanged(double leak);
+    void anfValuesChanged(int taps,int delay,double gain,double leak);
+
+    void nbThresholdChanged(double threshold);
+
 public slots:
     void slotHostChanged(int selection);
     void slotReceiverChanged(int receiver);
@@ -92,6 +118,18 @@ public slots:
     void slotSampleRateChanged(int rate);
     void slotChannelsChanged(int channels);
     void slotByteOrderChanged(int selection);
+
+    void slotNrTapsChanged(int taps);
+    void slotNrDelayChanged(int delay);
+    void slotNrGainChanged(int gain);
+    void slotNrLeakChanged(int leak);
+
+    void slotAnfTapsChanged(int taps);
+    void slotAnfDelayChanged(int delay);
+    void slotAnfGainChanged(int gain);
+    void slotAnfLeakChanged(int leak);
+
+    void slotNbThresholdChanged(int threshold);
 
 private:
     Ui::Configure widget;
