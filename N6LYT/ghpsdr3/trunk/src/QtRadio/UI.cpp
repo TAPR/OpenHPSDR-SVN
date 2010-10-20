@@ -169,6 +169,11 @@ UI::UI() {
     connect(&configure,SIGNAL(hostChanged(QString)),this,SLOT(hostChanged(QString)));
     connect(&configure,SIGNAL(receiverChanged(int)),this,SLOT(receiverChanged(int)));
 
+    connect(&configure,SIGNAL(nrValuesChanged(int,int,double,double)),this,SLOT(nrValuesChanged(int,int,double,double)));
+    connect(&configure,SIGNAL(anfValuesChanged(int,int,double,double)),this,SLOT(anfValuesChanged(int,int,double,double)));
+    connect(&configure,SIGNAL(nbValuesChanged(double)),this,SLOT(nbValuesChanged(double)));
+
+
     bandscope=NULL;
 
     fps=15;
@@ -344,12 +349,28 @@ void UI::connected() {
     connection.sendCommand(command);
     widget.spectrumFrame->setFrequency(frequency);
     widget.waterfallFrame->setFrequency(frequency);
+
     command.clear(); QTextStream(&command) << "setMode " << band.getMode();
     connection.sendCommand(command);
-    command.clear(); QTextStream(&command) << "setFilter " << filters.getLow() << " " << filters.getHigh();
+
+    int low,high;
+    if(mode.getMode()==MODE_CWL) {
+        low=-cwPitch-filters.getLow();
+        high=-cwPitch+filters.getHigh();
+    } else if(mode.getMode()==MODE_CWU) {
+        low=cwPitch-filters.getLow();
+        high=cwPitch+filters.getHigh();
+    } else {
+        low=filters.getLow();
+        high=filters.getHigh();
+    }
+    command.clear(); QTextStream(&command) << "setFilter " << low << " " << high;
     connection.sendCommand(command);
-    widget.spectrumFrame->setFilter(filters.getLow(),filters.getHigh());
-    widget.waterfallFrame->setFilter(filters.getLow(),filters.getHigh());
+
+    qDebug() << "connected calling widget.spectrumFrame.setFilter";
+
+    widget.spectrumFrame->setFilter(low,high);
+    widget.waterfallFrame->setFilter(low,high);
 
     widget.actionConnectToServer->setDisabled(TRUE);
     widget.actionDisconnectFromServer->setDisabled(FALSE);
@@ -373,6 +394,17 @@ void UI::connected() {
     command.clear(); QTextStream(&command) << "SetAGC " << agc;
     connection.sendCommand(command);
 
+    command.clear(); QTextStream(&command) << "SetANFVals " << configure.getAnfTaps() << " " << configure.getAnfDelay() << " "
+                                           << configure.getAnfGain() << " " << configure.getAnfLeak();
+    connection.sendCommand(command);
+
+    command.clear(); QTextStream(&command) << "SetNRVals " << configure.getNrTaps() << " " << configure.getNrDelay() << " "
+                                           << configure.getNrGain() << " " << configure.getNrLeak();
+    connection.sendCommand(command);
+
+    command.clear(); QTextStream(&command) << "SetNBVals " << configure.getNbThreshold();
+    connection.sendCommand(command);
+
     command.clear(); QTextStream(&command) << "SetANF " << (widget.actionANF->isChecked()?"true":"false");
     connection.sendCommand(command);
     command.clear(); QTextStream(&command) << "SetNR " << (widget.actionNR->isChecked()?"true":"false");
@@ -380,6 +412,8 @@ void UI::connected() {
     command.clear(); QTextStream(&command) << "SetNB " << (widget.actionNB->isChecked()?"true":"false");
     connection.sendCommand(command);
 
+    //command.clear(); QTextStream(&command) << "SetDCBlock 1";
+    //connection.sendCommand(command);
 
     // start the spectrum
     //qDebug() << "starting spectrum timer";
@@ -407,6 +441,7 @@ void UI::updateSpectrum() {
 }
 
 void UI::spectrumBuffer(char* header,char* buffer) {
+    //qDebug() << "spectrumBuffer";
     int length=atoi(&header[26]);
     sampleRate=atoi(&header[32]);
     widget.spectrumFrame->updateSpectrum(header,buffer,length);
@@ -416,6 +451,7 @@ void UI::spectrumBuffer(char* header,char* buffer) {
 }
 
 void UI::audioBuffer(char* header,char* buffer) {
+    //qDebug() << "audioBuffer";
     int length=atoi(&header[26]);
     if(audio_buffers==0) {
         first_audio_header=header;
@@ -627,8 +663,7 @@ void UI::bandChanged(int previousBand,int newBand) {
     }
 
     QString command;
-    command.clear();
-    QTextStream(&command) << "setFrequency " << frequency;
+    command.clear(); QTextStream(&command) << "setFrequency " << frequency;
     connection.sendCommand(command);
 
     widget.spectrumFrame->setFrequency(frequency);
@@ -738,7 +773,7 @@ void UI::modeChanged(int previousMode,int newMode) {
 
 void UI::filtersChanged(FiltersBase* previousFilters,FiltersBase* newFilters) {
 
-    qDebug() << "UI::filtersChanged";
+    qDebug() << "UI::filtersChanged to " << newFilters->getText();
     // uncheck old filter
     if(previousFilters!=NULL) {
         switch (previousFilters->getSelected()) {
@@ -1325,4 +1360,26 @@ void UI::setGain(bool state) {
         widget.actionGain_100->setChecked(state);
         break;
     }
+}
+
+void UI::nrValuesChanged(int taps,int delay,double gain,double leakage) {
+    QString command;
+    command.clear(); QTextStream(&command) << "SetNRVals " << taps << " " << delay << " "
+                                           << gain << " " << leakage;
+    connection.sendCommand(command);
+
+
+}
+
+void UI::anfValuesChanged(int taps,int delay,double gain,double leakage) {
+    QString command;
+    command.clear(); QTextStream(&command) << "SetANFVals " << taps<< " " << delay << " "
+                                           << gain << " " << leakage;
+    connection.sendCommand(command);
+}
+
+void UI::nbValuesChanged(double threshold) {
+    QString command;
+    command.clear(); QTextStream(&command) << "SetNBVals " << threshold;
+    connection.sendCommand(command);
 }

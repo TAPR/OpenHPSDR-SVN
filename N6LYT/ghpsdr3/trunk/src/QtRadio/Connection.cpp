@@ -97,10 +97,11 @@ void Connection::connected() {
 }
 
 void Connection::sendCommand(QString command) {
-    char buffer[32];
 
     if(tcpSocket!=NULL) {
         mutex.lock();
+        char buffer[32];
+        if(command.length()>=32) qDebug() << "command too long: " << command;
         //qDebug() << "sendCommand:" << command;
         strcpy(buffer,command.toUtf8().constData());
         tcpSocket->write(buffer,32);
@@ -110,8 +111,7 @@ void Connection::sendCommand(QString command) {
 }
 
 void Connection::socketData() {
-    char* header;
-    char* buffer;
+
     int bytes;
     int length;
 
@@ -119,13 +119,13 @@ void Connection::socketData() {
 
         //qDebug() << "socketData: read header";
         // read the header
-        header=(char*)malloc(HEADER_SIZE);
+        hdr=(char*)malloc(HEADER_SIZE);
         bytes=0;
         while(bytes<HEADER_SIZE) {
-            bytes+=tcpSocket->read(&header[bytes],HEADER_SIZE-bytes);
+            bytes+=tcpSocket->read(&hdr[bytes],HEADER_SIZE-bytes);
         }
         // read the data
-        length = atoi(&header[26]);
+        length = atoi(&hdr[26]);
         buffer=(char*)malloc(length);
         bytes=0;
 
@@ -136,15 +136,15 @@ void Connection::socketData() {
         tcpSocket->read(&buffer[0],length);
 
         // emit a signal to show what buffer we have
-        if(header[0]==SPECTRUM_BUFFER) {
-            emit spectrumBuffer(header,buffer);
-        } else if(header[0]==AUDIO_BUFFER) {
-            emit audioBuffer(header,buffer);
-        } else if(header[0]==BANDSCOPE_BUFFER) {
+        if(hdr[0]==SPECTRUM_BUFFER) {
+            emit spectrumBuffer(hdr,buffer);
+        } else if(hdr[0]==AUDIO_BUFFER) {
+            emit audioBuffer(hdr,buffer);
+        } else if(hdr[0]==BANDSCOPE_BUFFER) {
             //qDebug() << "socketData: bandscope";
-            emit bandscopeBuffer(header,buffer);
+            emit bandscopeBuffer(hdr,buffer);
         } else {
-            qDebug() << "Connection::socketData: invalid header: " << header[0];
+            qDebug() << "Connection::socketData: invalid header: " << hdr[0];
         }
     }
 }

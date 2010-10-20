@@ -560,6 +560,10 @@ QString Band::getStringBand() {
             break;
     }
 
+    b.append("(");
+    b.append(QString::number(currentStack));
+    b.append(")");
+
     return b;
 }
 

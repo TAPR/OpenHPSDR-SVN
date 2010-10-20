@@ -175,6 +175,10 @@ public slots:
     void hostChanged(QString host);
     void receiverChanged(int rx);
 
+    void nrValuesChanged(int,int,double,double);
+    void anfValuesChanged(int,int,double,double);
+    void nbValuesChanged(double);
+
 signals:
     void subRxStateChanged(bool state);
 
