@@ -42,7 +42,8 @@ SOURCES += main.cpp\
     Buffer.cpp \
     Bookmark.cpp \
     BookmarkDialog.cpp \
-    BookmarksDialog.cpp
+    BookmarksDialog.cpp \
+    bookmarksEditDialog.cpp
         
 
 HEADERS  += \ 
@@ -77,7 +78,8 @@ HEADERS  += \
     Buffer.h \
     Bookmark.h \
     BookmarkDialog.h \
-    BookmarksDialog.h
+    BookmarksDialog.h \
+    bookmarksEditDialog.h
 
 FORMS    += \   
     UI.ui \
@@ -85,7 +87,8 @@ FORMS    += \
     Bandscope.ui \
     About.ui \
     Bookmark.ui \
-    BookmarksDialog.ui
+    BookmarksDialog.ui \
+    bookmarksEditDialog.ui
 
 OTHER_FILES +=
 
