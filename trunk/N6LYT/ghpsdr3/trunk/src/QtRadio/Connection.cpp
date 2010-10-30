@@ -28,6 +28,9 @@
 Connection::Connection() {
     //qDebug() << "Connection::Connection";
     tcpSocket=NULL;
+    state=READ_HEADER;
+    bytes=0;
+    hdr=(char*)malloc(HEADER_SIZE);
 }
 
 Connection::Connection(const Connection& orig) {
@@ -112,40 +115,61 @@ void Connection::sendCommand(QString command) {
 
 void Connection::socketData() {
 
-    int bytes;
-    int length;
+    int toRead;
+    int bytesRead=0;
+    int thisRead;
 
-    while(tcpSocket->bytesAvailable()>=HEADER_SIZE) {
-
-        //qDebug() << "socketData: read header";
-        // read the header
-        hdr=(char*)malloc(HEADER_SIZE);
-        bytes=0;
-        while(bytes<HEADER_SIZE) {
-            bytes+=tcpSocket->read(&hdr[bytes],HEADER_SIZE-bytes);
+    toRead=tcpSocket->bytesAvailable();
+    while(bytesRead<toRead) {
+        switch(state) {
+        case READ_HEADER:
+            thisRead=tcpSocket->read(&hdr[bytes],HEADER_SIZE-bytes);
+            bytes+=thisRead;
+            //qDebug() << "READ_HEADER: read " << bytes << " of " << HEADER_SIZE;
+            if(bytes==HEADER_SIZE) {
+                length=atoi(&hdr[26]);
+                buffer=(char*)malloc(length);
+                bytes=0;
+                state=READ_BUFFER;
+            }
+            break;
+        case READ_BUFFER:
+            thisRead=tcpSocket->read(&buffer[bytes],length-bytes);
+            bytes+=thisRead;
+            //qDebug() << "READ_BUFFER: read " << bytes << " of " << length;
+            if(bytes==length) {
+                queue.enqueue(new Buffer(hdr,buffer));
+                QTimer::singleShot(0,this,SLOT(processBuffer()));
+                hdr=(char*)malloc(HEADER_SIZE);
+                bytes=0;
+                state=READ_HEADER;
+            }
+            break;
         }
-        // read the data
-        length = atoi(&hdr[26]);
-        buffer=(char*)malloc(length);
-        bytes=0;
+        bytesRead+=thisRead;
+    }
+}
 
-        //qDebug() << "socketData: read data: " << length;
-        while(tcpSocket->bytesAvailable()<length) {
-            tcpSocket->waitForReadyRead();
-        }
-        tcpSocket->read(&buffer[0],length);
+void Connection::processBuffer() {
+    Buffer* buffer;
+    char* nextHeader;
+    char* nextBuffer;
 
-        // emit a signal to show what buffer we have
-        if(hdr[0]==SPECTRUM_BUFFER) {
-            emit spectrumBuffer(hdr,buffer);
-        } else if(hdr[0]==AUDIO_BUFFER) {
-            emit audioBuffer(hdr,buffer);
-        } else if(hdr[0]==BANDSCOPE_BUFFER) {
-            //qDebug() << "socketData: bandscope";
-            emit bandscopeBuffer(hdr,buffer);
-        } else {
-            qDebug() << "Connection::socketData: invalid header: " << hdr[0];
-        }
+    buffer=queue.dequeue();
+    nextHeader=buffer->getHeader();
+    nextBuffer=buffer->getBuffer();
+
+    //qDebug() << "processBuffer " << nextHeader[0];
+    // emit a signal to show what buffer we have
+    if(nextHeader[0]==SPECTRUM_BUFFER) {
+        emit spectrumBuffer(nextHeader,nextBuffer);
+    } else if(nextHeader[0]==AUDIO_BUFFER) {
+        emit audioBuffer(nextHeader,nextBuffer);
+    } else if(nextHeader[0]==BANDSCOPE_BUFFER) {
+        //qDebug() << "socketData: bandscope";
+        emit bandscopeBuffer(nextHeader,nextBuffer);
+    } else {
+        qDebug() << "Connection::socketData: invalid header: " << nextHeader[0];
     }
 }
 

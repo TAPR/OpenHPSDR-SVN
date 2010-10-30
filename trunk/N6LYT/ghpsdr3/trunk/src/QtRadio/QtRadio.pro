@@ -38,7 +38,11 @@ SOURCES += main.cpp\
     Frequency.cpp \
     Meter.cpp \
     Bandscope.cpp \
-    About.cpp
+    About.cpp \
+    Buffer.cpp \
+    Bookmark.cpp \
+    BookmarkDialog.cpp \
+    BookmarksDialog.cpp
         
 
 HEADERS  += \ 
@@ -69,13 +73,20 @@ HEADERS  += \
     Frequency.h \
     Meter.h \
     Bandscope.h \
-    About.h
+    About.h \
+    Buffer.h \
+    Bookmark.h \
+    BookmarkDialog.h \
+    BookmarksDialog.h
 
 FORMS    += \   
     UI.ui \
     Configure.ui \
     Bandscope.ui \
-    About.ui
+    About.ui \
+    Bookmark.ui \
+    Bookmark.ui \
+    BookmarksDialog.ui
 
 OTHER_FILES +=
 

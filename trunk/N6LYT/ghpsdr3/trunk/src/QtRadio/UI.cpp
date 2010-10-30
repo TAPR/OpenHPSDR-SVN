@@ -127,6 +127,10 @@ UI::UI() {
 
     connect(widget.actionPreamp,SIGNAL(triggered()),this,SLOT(actionPreamp()));
 
+    connect(widget.actionBookmarkThisFrequency,SIGNAL(triggered()),this,SLOT(actionBookmark()));
+
+
+
     // connect up band and frequency changes
     connect(&band,SIGNAL(bandChanged(int,int)),this,SLOT(bandChanged(int,int)));
 //    connect(&band,SIGNAL(frequencyChanged(long long)),this,SLOT(frequencyChanged(long long)));
@@ -171,8 +175,9 @@ UI::UI() {
 
     connect(&configure,SIGNAL(nrValuesChanged(int,int,double,double)),this,SLOT(nrValuesChanged(int,int,double,double)));
     connect(&configure,SIGNAL(anfValuesChanged(int,int,double,double)),this,SLOT(anfValuesChanged(int,int,double,double)));
-    connect(&configure,SIGNAL(nbValuesChanged(double)),this,SLOT(nbValuesChanged(double)));
+    connect(&configure,SIGNAL(nbThresholdChanged(double)),this,SLOT(nbThresholdChanged(double)));
 
+    connect(&bookmarkDialog,SIGNAL(accepted()),this,SLOT(addBookmark()));
 
     bandscope=NULL;
 
@@ -237,10 +242,37 @@ void UI::loadSettings() {
     if(settings.contains("gain")) gain=subRxGain=settings.value("gain").toInt();
     if(settings.contains("agc")) agc=settings.value("agc").toInt();
     settings.endGroup();
+
+    settings.beginGroup("Bookmarks");
+    if(settings.contains("entries")) {
+        int entries=settings.value("entries").toInt();
+        QString s;
+        Bookmark* bookmark;
+        for(int i=0;i<entries;i++) {
+            s.sprintf("title.%d",i);
+            if(settings.contains(s)) {
+                bookmark=new Bookmark();
+                bookmark->setTitle(settings.value(s).toString());
+                s.sprintf("band.%d",i);
+                bookmark->setBand(settings.value(s).toLongLong());
+                s.sprintf("frequency.%d",i);
+                bookmark->setFrequency(settings.value(s).toLongLong());
+                s.sprintf("mode.%d",i);
+                bookmark->setMode(settings.value(s).toInt());
+                s.sprintf("filter.%d",i);
+                bookmark->setFilter(settings.value(s).toInt());
+                appendBookmark(bookmark);
+            }
+        }
+    }
 }
 
 void UI::saveSettings() {
+    QString s;
+    Bookmark* bookmark;
+
     QSettings settings("G0ORX","QtRadio");
+
     qDebug() << "saveSettings: " << settings.fileName();
 
     configure.saveSettings(&settings);
@@ -250,6 +282,23 @@ void UI::saveSettings() {
     settings.setValue("gain",gain);
     settings.setValue("subRxGain",subRxGain);
     settings.setValue("agc",agc);
+    settings.endGroup();
+
+    settings.beginGroup("Bookmarks");
+    settings.setValue("entries",bookmarks.count());
+    for(int i=0;i<bookmarks.count();i++) {
+        bookmark=bookmarks.at(i);
+        s.sprintf("title.%d",i);
+        settings.setValue(s,bookmark->getTitle());
+        s.sprintf("band.%d",i);
+        settings.setValue(s,bookmark->getBand());
+        s.sprintf("frequency.%d",i);
+        settings.setValue(s,bookmark->getFrequency());
+        s.sprintf("mode.%d",i);
+        settings.setValue(s,bookmark->getMode());
+        s.sprintf("filter.%d",i);
+        settings.setValue(s,bookmark->getFilter());
+    }
     settings.endGroup();
 }
 
@@ -1378,8 +1427,156 @@ void UI::anfValuesChanged(int taps,int delay,double gain,double leakage) {
     connection.sendCommand(command);
 }
 
-void UI::nbValuesChanged(double threshold) {
+void UI::nbThresholdChanged(double threshold) {
     QString command;
     command.clear(); QTextStream(&command) << "SetNBVals " << threshold;
     connection.sendCommand(command);
+}
+
+void UI::actionBookmark() {
+    QString strFrequency;
+    strFrequency.sprintf("%lld.%03lld.%03lld",frequency/1000000,frequency%1000000/1000,frequency%1000);
+    bookmarkDialog.setTitle(strFrequency);
+    bookmarkDialog.setBand(band.getStringBand());
+    bookmarkDialog.setFrequency(strFrequency);
+    bookmarkDialog.setMode(mode.getStringMode());
+    bookmarkDialog.setFilter(filters.getText());
+    bookmarkDialog.show();
+}
+
+void UI::addBookmark() {
+    qDebug() << "addBookmark";
+    Bookmark* bookmark=new Bookmark();
+    bookmark->setTitle(bookmarkDialog.getTitle());
+    bookmark->setBand(band.getBand());
+    bookmark->setFrequency(band.getFrequency());
+    bookmark->setMode(mode.getMode());
+    bookmark->setFilter(filters.getFilter());
+
+    appendBookmark(bookmark);
+
+}
+
+void UI::appendBookmark(Bookmark* bookmark) {
+
+    bookmarks.append(bookmark);
+
+    if(bookmarks.count()<=10) {
+        QAction* action=widget.menuBookmarks->addAction(bookmark->getTitle());
+        switch(bookmarks.count()) {
+        case 1:
+            connect(action,SIGNAL(triggered()),this,SLOT(actionBookmark0()));
+            break;
+        case 2:
+            connect(action,SIGNAL(triggered()),this,SLOT(actionBookmark1()));
+            break;
+        case 3:
+            connect(action,SIGNAL(triggered()),this,SLOT(actionBookmark2()));
+            break;
+        case 4:
+            connect(action,SIGNAL(triggered()),this,SLOT(actionBookmark3()));
+            break;
+        case 5:
+            connect(action,SIGNAL(triggered()),this,SLOT(actionBookmark4()));
+            break;
+        case 6:
+            connect(action,SIGNAL(triggered()),this,SLOT(actionBookmark5()));
+            break;
+        case 7:
+            connect(action,SIGNAL(triggered()),this,SLOT(actionBookmark6()));
+            break;
+        case 8:
+            connect(action,SIGNAL(triggered()),this,SLOT(actionBookmark7()));
+            break;
+        case 9:
+            connect(action,SIGNAL(triggered()),this,SLOT(actionBookmark8()));
+            break;
+        case 10:
+            connect(action,SIGNAL(triggered()),this,SLOT(actionBookmark9()));
+            break;
+        }
+    } else if(bookmarks.count()==11) {
+        QAction* action=widget.menuBookmarks->addAction("More ...");
+        connect(action,SIGNAL(triggered()),this,SLOT(actionMore()));
+    }
+}
+
+void UI::actionBookmark0() {
+    selectBookmark(0);
+}
+
+void UI::actionBookmark1() {
+    selectBookmark(1);
+}
+
+void UI::actionBookmark2() {
+    selectBookmark(2);
+}
+
+void UI::actionBookmark3() {
+    selectBookmark(3);
+}
+
+void UI::actionBookmark4() {
+    selectBookmark(4);
+}
+
+void UI::actionBookmark5() {
+    selectBookmark(5);
+}
+
+void UI::actionBookmark6() {
+    selectBookmark(6);
+}
+
+void UI::actionBookmark7() {
+    selectBookmark(7);
+}
+
+void UI::actionBookmark8() {
+    selectBookmark(8);
+}
+
+void UI::actionBookmark9() {
+    selectBookmark(9);
+}
+
+
+void UI::selectBookmark(int entry) {
+    QString command;
+
+    qDebug() << "bookmark " << entry << ":" << bookmarks.at(entry)->getTitle();
+
+    Bookmark* bookmark=bookmarks.at(entry);
+
+    band.selectBand(bookmark->getBand());
+
+
+
+    frequency=bookmark->getFrequency();
+    band.setFrequency(frequency);
+    command.clear(); QTextStream(&command) << "setFrequency " << frequency;
+    connection.sendCommand(command);
+
+    widget.spectrumFrame->setFrequency(frequency);
+    widget.waterfallFrame->setFrequency(frequency);
+
+    mode.setMode(bookmark->getMode());
+
+    filters.selectFilter(bookmark->getFilter());
+
+}
+
+void UI::actionMore() {
+    // bring up dialog box with list of bookmarks to select from
+    bookmarksDialog=new BookmarksDialog(this,bookmarks);
+    bookmarksDialog->setVisible(true);
+    connect(bookmarksDialog,SIGNAL(accepted()),this,SLOT(selectABookmark()));
+}
+
+void UI::selectABookmark() {
+    int entry=bookmarksDialog->getSelected();
+    if(entry>=0 && entry<bookmarks.count()) {
+        selectBookmark(entry);
+    }
 }

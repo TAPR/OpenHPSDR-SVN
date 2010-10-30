@@ -43,7 +43,7 @@
      <x>0</x>
      <y>0</y>
      <width>978</width>
-     <height>23</height>
+     <height>25</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuBand">
@@ -157,6 +157,13 @@
     </property>
     <addaction name="actionAbout"/>
    </widget>
+   <widget class="QMenu" name="menuBookmarks">
+    <property name="title">
+     <string>Bookmarks</string>
+    </property>
+    <addaction name="actionBookmarkThisFrequency"/>
+    <addaction name="separator"/>
+   </widget>
    <addaction name="menuReceiver"/>
    <addaction name="menuAudio"/>
    <addaction name="menuBand"/>
@@ -165,6 +172,7 @@
    <addaction name="menuNoise_Reduction"/>
    <addaction name="menuAGC"/>
    <addaction name="menuHardware"/>
+   <addaction name="menuBookmarks"/>
    <addaction name="menuHelp"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
@@ -680,6 +688,21 @@
    </property>
    <property name="text">
     <string>Gain 100</string>
+   </property>
+  </action>
+  <action name="actionBookmark">
+   <property name="text">
+    <string>Bookmark this frequency</string>
+   </property>
+  </action>
+  <action name="actionEditBookmarks">
+   <property name="text">
+    <string>Edit Bookmarks</string>
+   </property>
+  </action>
+  <action name="actionBookmarkThisFrequency">
+   <property name="text">
+    <string>Bookmark This Frequency</string>
    </property>
   </action>
  </widget>

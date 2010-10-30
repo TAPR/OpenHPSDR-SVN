@@ -29,13 +29,20 @@
 #include <QObject>
 #include <QDebug>
 #include <QTcpSocket>
+#include <QTimer>
 #include <QMutex>
+#include <QQueue>
+
+#include "Buffer.h"
 
 #define SPECTRUM_BUFFER     0
 #define AUDIO_BUFFER        1
 #define BANDSCOPE_BUFFER    2
 
 #define HEADER_SIZE 48
+
+#define READ_HEADER 0
+#define READ_BUFFER 1
 
 class Connection : public QObject {
     Q_OBJECT
@@ -53,6 +60,7 @@ public slots:
     void disconnected();
     void socketError(QAbstractSocket::SocketError socketError);
     void socketData();
+    void processBuffer();
 
 signals:
     void isConnected();
@@ -67,8 +75,13 @@ private:
     int port;
     QTcpSocket* tcpSocket;
     QMutex mutex;
+    int state;
     char* hdr;
     char* buffer;
+    int length;
+    int bytes;
+
+    QQueue<Buffer*> queue;
 };
 
 #endif	/* CONNECTION_H */

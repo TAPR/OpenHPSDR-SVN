@@ -51,7 +51,13 @@ Waterfall::Waterfall(QWidget*& widget) {
 
     samples=NULL;
 
-    image = QImage(961, 231, QImage::Format_RGB32);
+    image = QImage(974, 279, QImage::Format_RGB32);
+    int x, y;
+    for (x = 0; x < image.width(); x++) {
+        for (y = 0; y < image.height(); y++) {
+            image.setPixel(x, y, 0xFF000000);
+        }
+    }
 
 }
 
@@ -189,7 +195,7 @@ void Waterfall::wheelEvent(QWheelEvent *event) {
 void Waterfall::paintEvent(QPaintEvent*) {
     QPainter painter(this);
 
-    painter.fillRect(0, 0, width(), height(), Qt::black);
+    //painter.fillRect(0, 0, width(), height(), Qt::black);
 
     painter.drawImage(QPoint(0,0),image);
 }
@@ -206,12 +212,12 @@ void Waterfall::updateWaterfall(char*header,char* buffer,int size) {
     if(image.width()!=width() ||
        image.height()!=height()) {
 
-        // qDebug() << "Waterfall::updateWaterfall " << size << "(" << width() << ")," << height();
+        //qDebug() << "Waterfall::updateWaterfall " << size << "(" << width() << ")," << height();
         image = QImage(width(), height(), QImage::Format_RGB32);
 
         int x, y;
         for (x = 0; x < width(); x++) {
-            for (y = 0; x < height(); x++) {
+            for (y = 0; y < height(); y++) {
                 image.setPixel(x, y, 0xFF000000);
             }
         }
@@ -326,3 +332,5 @@ void Waterfall::setFilter(int low, int high) {
     filterLow=low;
     filterHigh=high;
 }
+
+
