@@ -85,7 +85,6 @@ FORMS    += \
     Bandscope.ui \
     About.ui \
     Bookmark.ui \
-    Bookmark.ui \
     BookmarksDialog.ui
 
 OTHER_FILES +=
