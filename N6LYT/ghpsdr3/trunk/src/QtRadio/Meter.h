@@ -8,9 +8,6 @@
 class Meter {
 public:
     Meter(QString title);
-    void calculateLine(int dbm,double minRadius,double maxRadius);
-    int getX();
-    int getY();
     QImage getImage(int dbm);
 
 private:
@@ -18,6 +15,7 @@ private:
     int x,y;
     int dxmin,dymin,dxmax,dymax;
 
+    void calculateLine(int dbm,double minRadius,double maxRadius);
 };
 
 #endif // METER_H

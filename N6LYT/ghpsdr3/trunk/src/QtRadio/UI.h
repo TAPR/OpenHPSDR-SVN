@@ -32,6 +32,7 @@
 #include <QSettings>
 #include <QTimer>
 #include <QtMultimedia/QAudioFormat>
+#include <QList>
 
 #include "About.h"
 #include "Configure.h"
@@ -53,6 +54,9 @@
 #include "DIGLFilters.h"
 #include "DIGUFilters.h"
 #include "Bandscope.h"
+#include "BookmarkDialog.h"
+#include "Bookmark.h"
+#include "BookmarksDialog.h"
 
 #define DSPSERVER_BASE_PORT 8000
 
@@ -142,6 +146,19 @@ public slots:
 
     void actionPreamp();
 
+    void actionBookmark();
+    void actionBookmark0();
+    void actionBookmark1();
+    void actionBookmark2();
+    void actionBookmark3();
+    void actionBookmark4();
+    void actionBookmark5();
+    void actionBookmark6();
+    void actionBookmark7();
+    void actionBookmark8();
+    void actionBookmark9();
+    void actionMore();
+
     void connected();
     void disconnected(QString message);
     void audioBuffer(char* header,char* buffer);
@@ -177,7 +194,10 @@ public slots:
 
     void nrValuesChanged(int,int,double,double);
     void anfValuesChanged(int,int,double,double);
-    void nbValuesChanged(double);
+    void nbThresholdChanged(double);
+
+    void addBookmark();
+    void selectABookmark();
 
 signals:
     void subRxStateChanged(bool state);
@@ -186,6 +206,9 @@ private:
     void setSubRxPan();
     void actionGain(int g);
     void setGain(bool state);
+
+    void selectBookmark(int entry);
+    void appendBookmark(Bookmark* bookmark);
 
     Ui::UI widget;
 
@@ -230,6 +253,11 @@ private:
     int sampleRate;
 
     Bandscope* bandscope;
+
+    BookmarkDialog bookmarkDialog;
+    QList <Bookmark*> bookmarks;
+
+    BookmarksDialog* bookmarksDialog;
 
 };
 

@@ -71,14 +71,6 @@ void Meter::calculateLine(int dbm, double minRadius, double maxRadius) {
 
 }
 
-int Meter::getX() {
-    return x;
-}
-
-int Meter::getY() {
-    return y;
-}
-
 QImage Meter::getImage(int dbm) {
     QImage qImage(*image);
     QPainter painter(&qImage);

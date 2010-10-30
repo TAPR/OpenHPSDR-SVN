@@ -335,8 +335,6 @@ void Spectrum::paintEvent(QPaintEvent*) {
     text="Server:"+host+" Rx:"+QString::number(receiver);
     painter.drawText(5,15,text);
 
-
-
     // draw the analog meters
     painter.setOpacity(0.8);
     QImage image=sMeterMain->getImage(meter);
