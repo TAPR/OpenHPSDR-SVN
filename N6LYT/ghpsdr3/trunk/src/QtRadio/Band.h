@@ -64,6 +64,7 @@ public:
     long long getFrequency();
     int getBand();
     QString getStringBand();
+    QString getStringBand(int band);
     int getMode();
     int getFilter();
     int getStep();

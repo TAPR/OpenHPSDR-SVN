@@ -518,7 +518,19 @@ int Band::getBand() {
 QString Band::getStringBand() {
     QString b="Gen";
 
-    switch(currentBand) {
+    b=getStringBand(currentBand);
+
+    b.append("(");
+    b.append(QString::number(currentStack));
+    b.append(")");
+
+    return b;
+}
+
+QString Band::getStringBand(int band) {
+    QString b="Gen";
+
+    switch(band) {
         case BAND_160:
             b="160 Mtrs";
             break;
@@ -559,10 +571,6 @@ QString Band::getStringBand() {
             b="WWV";
             break;
     }
-
-    b.append("(");
-    b.append(QString::number(currentStack));
-    b.append(")");
 
     return b;
 }

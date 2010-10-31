@@ -44,9 +44,13 @@ int Mode::getMode() {
 }
 
 QString Mode::getStringMode() {
+    return getStringMode(currentMode);
+}
+
+QString Mode::getStringMode(int mode) {
     QString m="INV";
 
-    switch(currentMode) {
+    switch(mode) {
         case MODE_LSB:
             m="LSB";
             break;

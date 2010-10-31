@@ -2,7 +2,7 @@
 #define BOOKMARKSDIALOG_H
 
 #include <QDialog>
-#include <QList>
+#include <QVector>
 
 #include "Bookmark.h"
 
@@ -15,7 +15,7 @@ class BookmarksDialog : public QDialog
     Q_OBJECT
 
 public:
-    explicit BookmarksDialog(QWidget *parent,QList<Bookmark*> bookmarks);
+    explicit BookmarksDialog(QWidget *parent,QVector<Bookmark*> bookmarks);
     ~BookmarksDialog();
 
     int getSelected();

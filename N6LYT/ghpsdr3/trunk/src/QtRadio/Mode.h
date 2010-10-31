@@ -50,6 +50,7 @@ public:
     void setMode(int m);
     int getMode();
     QString getStringMode();
+    QString getStringMode(int mode);
 
 signals:
     void modeChanged(int oldMode, int newMode);

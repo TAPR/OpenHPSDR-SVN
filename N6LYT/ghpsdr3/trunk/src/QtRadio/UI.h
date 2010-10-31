@@ -32,7 +32,7 @@
 #include <QSettings>
 #include <QTimer>
 #include <QtMultimedia/QAudioFormat>
-#include <QList>
+#include <QVector>
 
 #include "About.h"
 #include "Configure.h"
@@ -57,6 +57,7 @@
 #include "BookmarkDialog.h"
 #include "Bookmark.h"
 #include "BookmarksDialog.h"
+#include "BookmarksEditDialog.h"
 
 #define DSPSERVER_BASE_PORT 8000
 
@@ -198,6 +199,10 @@ public slots:
 
     void addBookmark();
     void selectABookmark();
+    void editBookmarks();
+    void bookmarkDeleted(int);
+    void bookmarkUpdated(int,QString);
+    void bookmarkSelected(int);
 
 signals:
     void subRxStateChanged(bool state);
@@ -209,6 +214,8 @@ private:
 
     void selectBookmark(int entry);
     void appendBookmark(Bookmark* bookmark);
+
+    QString stringFrequency(long long frequency);
 
     Ui::UI widget;
 
@@ -255,9 +262,10 @@ private:
     Bandscope* bandscope;
 
     BookmarkDialog bookmarkDialog;
-    QList <Bookmark*> bookmarks;
-
     BookmarksDialog* bookmarksDialog;
+    BookmarksEditDialog* bookmarksEditDialog;
+
+    QVector<Bookmark*> bookmarks;
 
 };
 
