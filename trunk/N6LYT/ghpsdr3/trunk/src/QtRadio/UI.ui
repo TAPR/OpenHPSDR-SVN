@@ -163,6 +163,10 @@
     </property>
     <addaction name="actionBookmarkThisFrequency"/>
     <addaction name="separator"/>
+    <addaction name="actionViewBookmarks"/>
+    <addaction name="separator"/>
+    <addaction name="actionEditBookmarks"/>
+    <addaction name="separator"/>
    </widget>
    <addaction name="menuReceiver"/>
    <addaction name="menuAudio"/>
@@ -703,6 +707,11 @@
   <action name="actionBookmarkThisFrequency">
    <property name="text">
     <string>Bookmark This Frequency</string>
+   </property>
+  </action>
+  <action name="actionViewBookmarks">
+   <property name="text">
+    <string>View Bookmarks</string>
    </property>
   </action>
  </widget>

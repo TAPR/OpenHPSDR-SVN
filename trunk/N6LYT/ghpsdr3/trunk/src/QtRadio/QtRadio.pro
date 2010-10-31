@@ -43,7 +43,7 @@ SOURCES += main.cpp\
     Bookmark.cpp \
     BookmarkDialog.cpp \
     BookmarksDialog.cpp \
-    bookmarksEditDialog.cpp
+    BookmarksEditDialog.cpp
         
 
 HEADERS  += \ 
@@ -79,7 +79,7 @@ HEADERS  += \
     Bookmark.h \
     BookmarkDialog.h \
     BookmarksDialog.h \
-    bookmarksEditDialog.h
+    BookmarksEditDialog.h
 
 FORMS    += \   
     UI.ui \
@@ -88,7 +88,7 @@ FORMS    += \
     About.ui \
     Bookmark.ui \
     BookmarksDialog.ui \
-    bookmarksEditDialog.ui
+    BookmarksEditDialog.ui
 
 OTHER_FILES +=
 

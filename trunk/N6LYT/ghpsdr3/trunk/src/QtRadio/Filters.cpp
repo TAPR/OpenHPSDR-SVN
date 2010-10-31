@@ -23,7 +23,10 @@
 *
 */
 
+
 #include "Filters.h"
+#include "Mode.h"
+#include "FiltersBase.h"
 
 Filters::Filters() {
     currentFilters=NULL;

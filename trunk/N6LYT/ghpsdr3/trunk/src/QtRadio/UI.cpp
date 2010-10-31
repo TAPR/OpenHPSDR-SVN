@@ -128,6 +128,8 @@ UI::UI() {
     connect(widget.actionPreamp,SIGNAL(triggered()),this,SLOT(actionPreamp()));
 
     connect(widget.actionBookmarkThisFrequency,SIGNAL(triggered()),this,SLOT(actionBookmark()));
+    connect(widget.actionViewBookmarks,SIGNAL(triggered()),this,SLOT(actionMore()));
+    connect(widget.actionEditBookmarks,SIGNAL(triggered()),this,SLOT(editBookmarks()));
 
 
 
@@ -1434,8 +1436,7 @@ void UI::nbThresholdChanged(double threshold) {
 }
 
 void UI::actionBookmark() {
-    QString strFrequency;
-    strFrequency.sprintf("%lld.%03lld.%03lld",frequency/1000000,frequency%1000000/1000,frequency%1000);
+    QString strFrequency=stringFrequency(frequency);
     bookmarkDialog.setTitle(strFrequency);
     bookmarkDialog.setBand(band.getStringBand());
     bookmarkDialog.setFrequency(strFrequency);
@@ -1461,6 +1462,7 @@ void UI::appendBookmark(Bookmark* bookmark) {
 
     bookmarks.append(bookmark);
 
+    /*
     if(bookmarks.count()<=10) {
         QAction* action=widget.menuBookmarks->addAction(bookmark->getTitle());
         switch(bookmarks.count()) {
@@ -1499,6 +1501,7 @@ void UI::appendBookmark(Bookmark* bookmark) {
         QAction* action=widget.menuBookmarks->addAction("More ...");
         connect(action,SIGNAL(triggered()),this,SLOT(actionMore()));
     }
+    */
 }
 
 void UI::actionBookmark0() {
@@ -1545,8 +1548,6 @@ void UI::actionBookmark9() {
 void UI::selectBookmark(int entry) {
     QString command;
 
-    qDebug() << "bookmark " << entry << ":" << bookmarks.at(entry)->getTitle();
-
     Bookmark* bookmark=bookmarks.at(entry);
 
     band.selectBand(bookmark->getBand());
@@ -1579,4 +1580,85 @@ void UI::selectABookmark() {
     if(entry>=0 && entry<bookmarks.count()) {
         selectBookmark(entry);
     }
+}
+
+void UI::editBookmarks() {
+    bookmarksEditDialog=new BookmarksEditDialog(this,bookmarks);
+    bookmarksEditDialog->setVisible(true);
+    connect(bookmarksEditDialog,SIGNAL(bookmarkDeleted(int)),this,SLOT(bookmarkDeleted(int)));
+    connect(bookmarksEditDialog,SIGNAL(bookmarkUpdated(int,QString)),this,SLOT(bookmarkUpdated(int,QString)));
+    connect(bookmarksEditDialog,SIGNAL(bookmarkSelected(int)),this,SLOT(bookmarkSelected(int)));
+}
+
+void UI::bookmarkDeleted(int entry) {
+    //qDebug() << "UI::bookmarkDeleted: " << entry;
+    bookmarks.remove(entry);
+}
+
+void UI::bookmarkUpdated(int entry,QString title) {
+    if(entry>=0 && entry<bookmarks.count()) {
+        Bookmark* bookmark=bookmarks.at(entry);
+        bookmark->setTitle(title);
+    }
+}
+
+void UI::bookmarkSelected(int entry) {
+
+
+    //qDebug() << "UI::bookmarkSelected " << entry;
+    if(entry>=0 && entry<bookmarks.count()) {
+        Bookmark* bookmark=bookmarks.at(entry);
+        FiltersBase* filters;
+
+        bookmarksEditDialog->setTitle(bookmark->getTitle());
+        bookmarksEditDialog->setBand(band.getStringBand(bookmark->getBand()));
+        bookmarksEditDialog->setFrequency(stringFrequency(bookmark->getFrequency()));
+        bookmarksEditDialog->setMode(mode.getStringMode(bookmark->getMode()));
+
+        switch(bookmark->getMode()) {
+        case MODE_CWL:
+            filters=&cwlFilters;
+            break;
+        case MODE_CWU:
+            filters=&cwuFilters;
+            break;
+        case MODE_LSB:
+            filters=&lsbFilters;
+            break;
+        case MODE_USB:
+            filters=&usbFilters;
+            break;
+        case MODE_DSB:
+            filters=&dsbFilters;
+            break;
+        case MODE_AM:
+            filters=&amFilters;
+            break;
+        case MODE_SAM:
+            filters=&samFilters;
+            break;
+        case MODE_FMN:
+            filters=&fmnFilters;
+            break;
+        case MODE_DIGL:
+            filters=&diglFilters;
+            break;
+        case MODE_DIGU:
+            filters=&diguFilters;
+            break;
+        }
+        bookmarksEditDialog->setFilter(filters->getText(bookmark->getFilter()));
+    } else {
+        bookmarksEditDialog->setTitle("");
+        bookmarksEditDialog->setBand("");
+        bookmarksEditDialog->setFrequency("");
+        bookmarksEditDialog->setMode("");
+        bookmarksEditDialog->setFilter("");
+    }
+}
+
+QString UI::stringFrequency(long long frequency) {
+    QString strFrequency;
+    strFrequency.sprintf("%lld.%03lld.%03lld",frequency/1000000,frequency%1000000/1000,frequency%1000);
+    return strFrequency;
 }

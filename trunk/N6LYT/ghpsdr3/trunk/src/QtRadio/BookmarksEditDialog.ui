@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>bookmarksEditDialog</class>
- <widget class="QDialog" name="bookmarksEditDialog">
+ <class>BookmarksEditDialog</class>
+ <widget class="QDialog" name="BookmarksEditDialog">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Dialog</string>
+   <string>Edit Bookmarks</string>
   </property>
   <widget class="QDialogButtonBox" name="buttonBox">
    <property name="geometry">
@@ -29,7 +29,7 @@
     <set>QDialogButtonBox::Ok</set>
    </property>
   </widget>
-  <widget class="QListWidget" name="listWidget">
+  <widget class="QListWidget" name="bookmarksListWidget">
    <property name="geometry">
     <rect>
      <x>10</x>
@@ -157,8 +157,8 @@
   <widget class="QPushButton" name="deletePushButton">
    <property name="geometry">
     <rect>
-     <x>250</x>
-     <y>230</y>
+     <x>420</x>
+     <y>250</y>
      <width>98</width>
      <height>27</height>
     </rect>
@@ -167,13 +167,26 @@
     <string>Delete</string>
    </property>
   </widget>
+  <widget class="QPushButton" name="updatePushButton">
+   <property name="geometry">
+    <rect>
+     <x>230</x>
+     <y>250</y>
+     <width>98</width>
+     <height>27</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Update</string>
+   </property>
+  </widget>
  </widget>
  <resources/>
  <connections>
   <connection>
    <sender>buttonBox</sender>
    <signal>accepted()</signal>
-   <receiver>bookmarksEditDialog</receiver>
+   <receiver>BookmarksEditDialog</receiver>
    <slot>accept()</slot>
    <hints>
     <hint type="sourcelabel">
@@ -189,7 +202,7 @@
   <connection>
    <sender>buttonBox</sender>
    <signal>rejected()</signal>
-   <receiver>bookmarksEditDialog</receiver>
+   <receiver>BookmarksEditDialog</receiver>
    <slot>reject()</slot>
    <hints>
     <hint type="sourcelabel">
