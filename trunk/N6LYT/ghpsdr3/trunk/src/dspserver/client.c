@@ -184,12 +184,13 @@ if(timing) ftime(&start_time);
                     }
                     break;
                 }
+                message[bytesRead]=0;
 if(timing) {
     ftime(&end_time);
+    fprintf(stderr,"%s\n",message);
     fprintf(stderr,"command after %ld ms\n",((end_time.time*1000)+end_time.millitm)-((start_time.time*1000)+start_time.millitm));
     ftime(&start_time);
 }
-                message[bytesRead]=0;
                 token=strtok(message," ");
                     if(token!=NULL) {
                     i=0;
@@ -401,6 +402,121 @@ if(timing) {
                         token=strtok(NULL," ");
                         if(token!=NULL) {
                             ozySetRecord(token);
+                        } else {
+                            fprintf(stderr,"Invalid command: '%s'\n",message);
+                        }
+                    } else if(strcmp(token,"setanfvals")==0) {
+                        int taps;
+                        int delay;
+                        double gain;
+                        double leakage;
+                        int error;
+
+                        error=0;
+                        token=strtok(NULL," ");
+                        if(token!=NULL) {
+                            taps=atoi(token);
+                        } else {
+                            error=1;
+                        }
+                        token=strtok(NULL," ");
+                        if(token!=NULL) {
+                            delay=atoi(token);
+                        } else {
+                            error=1;
+                        }
+                        token=strtok(NULL," ");
+                        if(token!=NULL) {
+                            gain=atof(token);
+                        } else {
+                            error=1;
+                        }
+                        token=strtok(NULL," ");
+                        if(token!=NULL) {
+                            leakage=atof(token);
+                        } else {
+                            error=1;
+                        }
+                        if(error) {
+                            fprintf(stderr,"Invalid command: '%s'\n",message);
+                        } else {
+                            SetANFvals(0,0,taps,delay,gain,leakage);
+                            SetANFvals(0,1,taps,delay,gain,leakage);
+                        }
+                    } else if(strcmp(token,"setnrvals")==0) {
+                        int taps;
+                        int delay;
+                        double gain;
+                        double leakage;
+                        int error;
+
+                        error=0;
+                        token=strtok(NULL," ");
+                        if(token!=NULL) {
+                            taps=atoi(token);
+                        } else {
+                            error=1;
+                        }
+                        token=strtok(NULL," ");
+                        if(token!=NULL) {
+                            delay=atoi(token);
+                        } else {
+                            error=1;
+                        }
+                        token=strtok(NULL," ");
+                        if(token!=NULL) {
+                            gain=atof(token);
+                        } else {
+                            error=1;
+                        }
+                        token=strtok(NULL," ");
+                        if(token!=NULL) {
+                            leakage=atof(token);
+                        } else {
+                            error=1;
+                        }
+                        if(error) {
+                            fprintf(stderr,"Invalid command: '%s'\n",message);
+                        } else {
+                            SetNRvals(0,0,taps,delay,gain,leakage);
+                            SetNRvals(0,1,taps,delay,gain,leakage);
+                        }
+                    } else if(strcmp(token,"setnbvals")==0) {
+                        double threshold;
+                        int error;
+
+                        error=0;
+                        token=strtok(NULL," ");
+                        if(token!=NULL) {
+                            threshold=atof(token);
+                        } else {
+                            error=1;
+                        }
+                        if(error) {
+                            fprintf(stderr,"Invalid command: '%s'\n",message);
+                        } else {
+                            SetNBvals(0,0,threshold);
+                            SetNRvals(0,1,threshold);
+                        }
+                    } else if(strcmp(token,"setdcblock")==0) {
+                        int state;
+                        token=strtok(NULL," ");
+                        if(token!=NULL) {
+                            state=atoi(token);
+                            SetDCBlock(0,state);
+                        } else {
+                            fprintf(stderr,"Invalid command: '%s'\n",message);
+                        }
+                    } else if(strcmp(token,"mox")==0) {
+                        token=strtok(NULL," ");
+                        if(token!=NULL) {
+                            if(strcmp(token,"on")==0) {
+                                ozySetMox(1);
+                            } else if(strcmp(token,"off")==0) {
+                                ozySetMox(0);
+                            } else {
+                                fprintf(stderr,"Invalid command: '%s'\n",message);
+                            }
                         } else {
                             fprintf(stderr,"Invalid command: '%s'\n",message);
                         }
