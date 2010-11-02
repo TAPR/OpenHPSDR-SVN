@@ -28,17 +28,23 @@
 
 typedef enum {
     RECEIVER_DETACHED, RECEIVER_ATTACHED
-} CLIENT_STATE;
+} RECEIVER_STATE;
+
+typedef enum {
+    TRANSMITTER_DETACHED, TRANSMITTER_ATTACHED
+} TRANSMITTER_STATE;
 
 typedef struct _client {
     int socket;
     int address_length;
     struct sockaddr_in address;
     pthread_t thread_id;
-    CLIENT_STATE state;
+    RECEIVER_STATE receiver_state;
+    TRANSMITTER_STATE transmitter_state;
     int receiver;
     int iq_port;
     int bs_port;
+    int mox;
 } CLIENT;
 
 

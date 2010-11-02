@@ -38,6 +38,7 @@
 #include "ozy.h"
 #include "client.h"
 #include "receiver.h"
+#include "transmitter.h"
 #include "messages.h"
 
 short audio_port=AUDIO_PORT;
@@ -53,8 +54,10 @@ void* client_thread(void* arg) {
 
 fprintf(stderr,"client connected: %s:%d\n",inet_ntoa(client->address.sin_addr),ntohs(client->address.sin_port));
 
-    client->state=RECEIVER_DETACHED;
+    client->receiver_state=RECEIVER_DETACHED;
+    client->transmitter_state=TRANSMITTER_DETACHED;
     client->receiver=-1;
+    client->mox=0;
 
     while(1) {
         bytes_read=recv(client->socket,command,sizeof(command),0);
@@ -68,11 +71,16 @@ fprintf(stderr,"client connected: %s:%d\n",inet_ntoa(client->address.sin_addr),n
 fprintf(stderr,"response(Rx%d): '%s'\n",client->receiver,response);
     }
 
-    if(client->state==RECEIVER_ATTACHED) {
+    if(client->receiver_state==RECEIVER_ATTACHED) {
         receiver[client->receiver].client=(CLIENT*)NULL;
-        client->state=RECEIVER_DETACHED;
+        client->receiver_state=RECEIVER_DETACHED;
     }
 
+    if(client->transmitter_state==TRANSMITTER_ATTACHED) {
+        client->transmitter_state=TRANSMITTER_DETACHED;
+    }
+
+    client->mox=0;
     client->bs_port=-1;
     detach_bandscope(client);
 
@@ -95,8 +103,12 @@ fprintf(stderr,"parse_command(Rx%d): '%s'\n",client->receiver,command);
             // select receiver
             token=strtok(NULL," \r\n");
             if(token!=NULL) {
-                int rx=atoi(token);
-                return attach_receiver(rx,client);
+                if(strcmp(token,"tx")==0) {
+                    return attach_transmitter(client);
+                } else {
+                    int rx=atoi(token);
+                    return attach_receiver(rx,client);
+                }
             } else {
                 return INVALID_COMMAND;
             }
@@ -127,7 +139,8 @@ fprintf(stderr,"parse_command(Rx%d): '%s'\n",client->receiver,command);
                         client->iq_port=atoi(token);
                     }
 
-                    if(pthread_create(&receiver[client->receiver].audio_thread_id,NULL,audio_thread,&receiver[client->receiver])!=0) {
+                    //if(pthread_create(&receiver[client->receiver].audio_thread_id,NULL,audio_thread,&receiver[client->receiver])!=0) {
+                    if(pthread_create(&receiver[client->receiver].audio_thread_id,NULL,audio_thread,client)!=0) {
                         fprintf(stderr,"failed to create audio thread for rx %d\n",client->receiver);
                         exit(1);
                     }
@@ -201,6 +214,18 @@ fprintf(stderr,"parse_command(Rx%d): '%s'\n",client->receiver,command);
                 // invalid command string
                 return INVALID_COMMAND;
             }
+        } else if(strcmp(token,"mox")==0) {
+            if(client->transmitter_state==TRANSMITTER_ATTACHED) {
+                token=strtok(NULL," \r\n");
+                if(token!=NULL) {
+                    client->mox=atoi(token);
+                } else {
+                    // invalid command string
+                    return INVALID_COMMAND;
+                }
+            } else {
+                return TRANSMITTER_NOT_ATTACHED;
+            }
         } else {
             // invalid command string
             return INVALID_COMMAND;
@@ -213,7 +238,8 @@ fprintf(stderr,"parse_command(Rx%d): '%s'\n",client->receiver,command);
 }
 
 void* audio_thread(void* arg) {
-    RECEIVER *rx=(RECEIVER*)arg;
+    CLIENT *client=(CLIENT*)arg;
+    RECEIVER *rx=&receiver[client->receiver];
     struct sockaddr_in audio;
     int audio_length;
     int old_state, old_type;
@@ -254,7 +280,7 @@ fprintf(stderr,"audio_thread port=%d\n",audio_port+(rx->id*2));
             exit(1);
         }
 
-        process_ozy_output_buffer(rx->output_buffer,&rx->output_buffer[BUFFER_SIZE]);
+        process_ozy_output_buffer(rx->output_buffer,&rx->output_buffer[BUFFER_SIZE],client->mox);
 
     }
 }
