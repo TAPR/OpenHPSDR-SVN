@@ -36,5 +36,10 @@
 
 #define INVALID_COMMAND "Error: Invalid Command"
 
+#define RECEIVER_NOT_ATTACHED "Error: Client does not have a receiver attached"
+#define RECEIVER_NOT_ZERO "Error: Client not attached to receiver 0"
+
+#define TRANSMITTER_NOT_ATTACHED "Error: Client does not have a transmitter attached"
+
 #define OK "OK"
 

@@ -123,7 +123,16 @@ static int mercury_software_version=0;
 static int penelope_software_version=0;
 static int ozy_software_version=0;
 
-static int forward_power=0;
+static int forwardPower=0;
+static int alexForwardPower=0;
+static int alexReversePower=0;
+static int AIN3=0;
+static int AIN4=0;
+static int AIN6=0;
+static int IO1=1; // 1 is inactive
+static int IO2=1;
+static int IO3=1;
+
 
 static int samples=0;
 
@@ -467,24 +476,39 @@ if(rx_frame<10) {
         dash=(control_in[0]&0x02)==0x02;
         dot=(control_in[0]&0x04)==0x04;
 
-        if((control_in[0]&0x08)==0) {
-            if(control_in[1]&0x01) {
-                lt2208ADCOverflow=1;
-            }
+        switch((control_in[0]>>3)&0x1F) {
+
+        case 0:
+            lt2208ADCOverflow=control_in[1]&0x01;
+            IO1=(control_in[1]&0x02)?0:1;
+            IO2=(control_in[1]&0x04)?0:1;
+            IO3=(control_in[1]&0x08)?0:1;
             if(mercury_software_version!=control_in[2]) {
                 mercury_software_version=control_in[2];
-                fprintf(stderr,"Mercury Software version: %d (0x%0X)\n",mercury_software_version,mercury_software_version);
+                fprintf(stderr,"  Mercury Software version: %d (0x%0X)\n",mercury_software_version,mercury_software_version);
             }
             if(penelope_software_version!=control_in[3]) {
                 penelope_software_version=control_in[3];
-                fprintf(stderr,"Penelope Software version: %d (0x%0X)\n",penelope_software_version,penelope_software_version);
+                fprintf(stderr,"  Penelope Software version: %d (0x%0X)\n",penelope_software_version,penelope_software_version);
             }
             if(ozy_software_version!=control_in[4]) {
                 ozy_software_version=control_in[4];
-                fprintf(stderr,"Ozy Software version: %d (0x%0X)\n",ozy_software_version,ozy_software_version);
+                fprintf(stderr,"  Ozy Software version: %d (0x%0X)\n",ozy_software_version,ozy_software_version);
             }
-        } else if(control_in[0]&0x08) {
-            forward_power=(control_in[1]<<8)+control_in[2];
+            break;
+        case 1:
+            forwardPower=(control_in[1]<<8)+control_in[2]; // from Penelope or Hermes
+
+            alexForwardPower=(control_in[3]<<8)+control_in[4]; // from Alex or Apollo
+            break;
+        case 2:
+            alexForwardPower=(control_in[1]<<8)+control_in[2]; // from Alex or Apollo
+            AIN3=(control_in[3]<<8)+control_in[4]; // from Pennelope or Hermes
+            break;
+        case 3:
+            AIN4=(control_in[1]<<8)+control_in[2]; // from Pennelope or Hermes
+            AIN6=(control_in[3]<<8)+control_in[4]; // from Pennelope or Hermes
+            break;
         }
 
         switch(receivers) {
@@ -535,9 +559,9 @@ if(rx_frame<10) {
 
             // when we have enough samples send them to the clients
             if(samples==BUFFER_SIZE) {
-                if(ptt||mox) {
-                    process_microphone_samples(mic_left_buffer);
-                }
+                //if(ptt||mox) {
+                //    process_microphone_samples(mic_left_buffer);
+                //}
                 // send I/Q data to clients
                 for(r=0;r<receivers;r++) {
                     send_IQ_buffer(r);
@@ -591,7 +615,7 @@ void process_bandscope_buffer(char* buffer) {
     send_bandscope_buffer();
 }
 
-void process_ozy_output_buffer(float *left_output_buffer,float *right_output_buffer) {
+void process_ozy_output_buffer(float *left_output_buffer,float *right_output_buffer,int mox) {
     unsigned char ozy_samples[1024*8];
     int j,c;
     short left_rx_sample;
@@ -600,28 +624,35 @@ void process_ozy_output_buffer(float *left_output_buffer,float *right_output_buf
     short right_tx_sample;
 
     if(!playback) {
-    // process the output
-    for(j=0,c=0;j<BUFFER_SIZE;j+=output_sample_increment) {
-        left_rx_sample=(short)(left_output_buffer[j]*32767.0);
-        right_rx_sample=(short)(right_output_buffer[j]*32767.0);
+        // process the output
+        for(j=0,c=0;j<BUFFER_SIZE;j+=output_sample_increment) {
 
-        left_tx_sample=0;
-        right_tx_sample=0;
+            if(mox) {
+                left_tx_sample=(short)(left_output_buffer[j]*32767.0);
+                right_tx_sample=(short)(right_output_buffer[j]*32767.0);
+                left_rx_sample=0;
+                right_rx_sample=0;
+            } else {
+                left_rx_sample=(short)(left_output_buffer[j]*32767.0);
+                right_rx_sample=(short)(right_output_buffer[j]*32767.0);
+                left_tx_sample=0;
+                right_tx_sample=0;
+            }
 
-        ozy_output_buffer[ozy_output_buffer_index++]=left_rx_sample>>8;
-        ozy_output_buffer[ozy_output_buffer_index++]=left_rx_sample;
-        ozy_output_buffer[ozy_output_buffer_index++]=right_rx_sample>>8;
-        ozy_output_buffer[ozy_output_buffer_index++]=right_rx_sample;
-        ozy_output_buffer[ozy_output_buffer_index++]=left_tx_sample>>8;
-        ozy_output_buffer[ozy_output_buffer_index++]=left_tx_sample;
-        ozy_output_buffer[ozy_output_buffer_index++]=right_tx_sample>>8;
-        ozy_output_buffer[ozy_output_buffer_index++]=right_tx_sample;
+            ozy_output_buffer[ozy_output_buffer_index++]=left_rx_sample>>8;
+            ozy_output_buffer[ozy_output_buffer_index++]=left_rx_sample;
+            ozy_output_buffer[ozy_output_buffer_index++]=right_rx_sample>>8;
+            ozy_output_buffer[ozy_output_buffer_index++]=right_rx_sample;
+            ozy_output_buffer[ozy_output_buffer_index++]=left_tx_sample>>8;
+            ozy_output_buffer[ozy_output_buffer_index++]=left_tx_sample;
+            ozy_output_buffer[ozy_output_buffer_index++]=right_tx_sample>>8;
+            ozy_output_buffer[ozy_output_buffer_index++]=right_tx_sample;
 
-        if(ozy_output_buffer_index==OZY_BUFFER_SIZE) {
-            write_ozy_output_buffer();
-            ozy_output_buffer_index=OZY_HEADER_SIZE;
+            if(ozy_output_buffer_index==OZY_BUFFER_SIZE) {
+                write_ozy_output_buffer();
+                ozy_output_buffer_index=OZY_HEADER_SIZE;
+            }
         }
-    }
     }
 
 }

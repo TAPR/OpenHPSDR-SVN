@@ -78,7 +78,7 @@ void init_receivers() {
 
 char* attach_receiver(int rx,CLIENT* client) {
 
-    if(client->state==RECEIVER_ATTACHED) {
+    if(client->receiver_state==RECEIVER_ATTACHED) {
         return CLIENT_ATTACHED;
     }
 
@@ -90,7 +90,7 @@ char* attach_receiver(int rx,CLIENT* client) {
         return RECEIVER_IN_USE;
     }
     
-    client->state=RECEIVER_ATTACHED;
+    client->receiver_state=RECEIVER_ATTACHED;
     receiver[rx].client=client;
     client->receiver=rx;;
 
@@ -100,7 +100,7 @@ char* attach_receiver(int rx,CLIENT* client) {
 }
 
 char* detach_receiver(int rx,CLIENT* client) {
-    if(client->state==RECEIVER_DETACHED) {
+    if(client->receiver_state==RECEIVER_DETACHED) {
         return CLIENT_DETACHED;
     }
 
@@ -112,14 +112,14 @@ char* detach_receiver(int rx,CLIENT* client) {
         return RECEIVER_NOT_OWNER;
     }
 
-    client->state=RECEIVER_DETACHED;
+    client->receiver_state=RECEIVER_DETACHED;
     receiver[rx].client=(CLIENT*)NULL;
 
     return OK;
 }
 
 char* set_frequency(CLIENT* client,long frequency) {
-    if(client->state==RECEIVER_DETACHED) {
+    if(client->receiver_state==RECEIVER_DETACHED) {
         return CLIENT_DETACHED;
     }
 
