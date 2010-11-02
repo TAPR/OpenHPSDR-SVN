@@ -45,6 +45,14 @@ int penelope_software_version=0;
 int ozy_software_version=0;
 
 int forwardPower=0;
+int alexForwardPower=0;
+int alexReversePower=0;
+int AIN3=0;
+int AIN4=0;
+int AIN6=0;
+int IO1=1; // 1 is inactive
+int IO2=1;
+int IO3=1;
 
 static pthread_t ep6_ep2_io_thread_id;
 static pthread_t ep4_io_thread_id;
@@ -166,10 +174,13 @@ void process_ozy_input_buffer(char* buffer) {
             g_idle_add(vfoTransmit,(gpointer)vfoState);
         }
 
-        if((control_in[0]&0x08)==0) {
-            if(control_in[1]&0x01) {
-                lt2208ADCOverflow=1;
-            }
+        switch((control_in[0]>>3)&0x1F) {
+
+        case 0:
+            lt2208ADCOverflow=control_in[1]&0x01;
+            IO1=(control_in[1]&0x02)?0:1;
+            IO2=(control_in[1]&0x04)?0:1;
+            IO3=(control_in[1]&0x08)?0:1;
             if(mercury_software_version!=control_in[2]) {
                 mercury_software_version=control_in[2];
                 fprintf(stderr,"  Mercury Software version: %d (0x%0X)\n",mercury_software_version,mercury_software_version);
@@ -182,8 +193,20 @@ void process_ozy_input_buffer(char* buffer) {
                 ozy_software_version=control_in[4];
                 fprintf(stderr,"  Ozy Software version: %d (0x%0X)\n",ozy_software_version,ozy_software_version);
             }
-        } else if(control_in[0]&0x08) {
-            forwardPower=(control_in[1]<<8)+control_in[2];
+            break;
+        case 1:
+            forwardPower=(control_in[1]<<8)+control_in[2]; // from Penelope or Hermes
+            
+            alexForwardPower=(control_in[3]<<8)+control_in[4]; // from Alex or Apollo
+            break;
+        case 2:
+            alexForwardPower=(control_in[1]<<8)+control_in[2]; // from Alex or Apollo
+            AIN3=(control_in[3]<<8)+control_in[4]; // from Pennelope or Hermes
+            break;
+        case 3:
+            AIN4=(control_in[1]<<8)+control_in[2]; // from Pennelope or Hermes
+            AIN6=(control_in[3]<<8)+control_in[4]; // from Pennelope or Hermes
+            break;
         }
 
         // extract the 63 samples
