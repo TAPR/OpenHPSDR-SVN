@@ -41,6 +41,7 @@
 #include "ozy.h"
 #include "receiver.h"
 #include "bandscope.h"
+#include "metis.h"
 
 static struct option long_options[] = {
     {"receivers",required_argument, 0, 0},
@@ -56,10 +57,15 @@ static struct option long_options[] = {
     {"record",required_argument,0,10},
     {"playback",required_argument,0,11},
     {"sleep",required_argument,0,12},
-    {0,0, 0, 0},
+    {"metis",no_argument,0,13},
+    {"interface",required_argument,0,14},
+    {0,0,0,0},
 };
 static char* short_options="";
 static int option_index;
+
+static int metis=0;
+static char* interface="eth0";
 
 void process_args(int argc,char* argv[]);
 
@@ -67,12 +73,27 @@ int main(int argc,char* argv[]) {
 
     process_args(argc,argv);
 
+    if(metis) {
+        metis_discover(interface);
+        sleep(5);
+        // see if we have any Metis boards
+        fprintf(stderr,"Found %d Metis cards\n",metis_found());
+        if(metis_found()==0) {
+            exit(1);
+        }
+        ozy_set_buffers(2);
+    }
+
     init_receivers();
     init_bandscope();
 
     create_listener_thread();
 
-    create_ozy_thread();
+    if(metis) {
+        metis_start_receive_thread();
+    } else {
+        create_ozy_thread();
+    }
 
     while(1) {
         sleep(10);
@@ -82,9 +103,6 @@ int main(int argc,char* argv[]) {
 void process_args(int argc,char* argv[]) {
     int i;
 
-    // set defaults
-    ozy_set_receivers(1);
-    ozy_set_sample_rate(96000);
 
     while((i=getopt_long(argc,argv,short_options,long_options,&option_index))!=EOF) {
 
@@ -178,6 +196,15 @@ void process_args(int argc,char* argv[]) {
                 ozy_set_playback_sleep(atoi(optarg));
                 break;
 
+            case 13: // metis
+                metis=1;
+                ozy_set_metis(metis);
+                break;
+
+            case 14: // interface
+                interface=optarg;
+                break;
+
             default:
                 fprintf(stderr,"Usage: \n");
                 fprintf(stderr,"  server --receivers N (default 1)\n");
@@ -189,6 +216,8 @@ void process_args(int argc,char* argv[]) {
                 fprintf(stderr,"         --micsource janus|penelope\n");
                 fprintf(stderr,"         --class other|E\n");
                 fprintf(stderr,"         --timing 1\n");
+                fprintf(stderr,"         --metis\n");
+                fprintf(stderr,"         --interface if\n");
                 exit(1);
                 break;
                
