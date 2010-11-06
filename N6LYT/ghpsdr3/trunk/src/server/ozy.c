@@ -39,12 +39,15 @@
 #include "receiver.h"
 //#include "transmitter.h"
 #include "util.h"
+#include "metis.h"
 
 #define THREAD_STACK 32768
 
-#define OZY_BUFFERS 16
+#define DEFAULT_OZY_BUFFERS 16
 #define OZY_BUFFER_SIZE 512
 #define OZY_HEADER_SIZE 8
+
+static int ozy_buffers=DEFAULT_OZY_BUFFERS;
 
 #define SYNC 0x7F
 
@@ -90,7 +93,7 @@ static pthread_t playback_thread_id;
 static int configure=6;
 static int rx_frame=0;
 static int tx_frame=0;
-static int receivers=2;
+static int receivers=1;
 static int current_receiver=0;
 
 static int speed=1;
@@ -153,6 +156,7 @@ static int playback=0;
 static int playback_sleep=0;
 static FILE* recording;
 
+int metis=0;
 
 void* ozy_ep6_ep2_io_thread(void* arg);
 void* ozy_ep4_io_thread(void* arg);
@@ -161,6 +165,14 @@ void* playback_thread(void* arg);
 void process_ozy_input_buffer(char* buffer);
 void write_ozy_output_buffer();
 void process_bandscope_buffer(char* buffer);
+
+void ozy_set_buffers(int buffers) {
+    ozy_buffers=buffers;
+}
+
+void ozy_set_metis(int state) {
+    metis=state;
+}
 
 int create_ozy_thread() {
     int i;
@@ -347,25 +359,24 @@ fprintf(stderr,"server configured for %d receivers at %d\n",receivers,sample_rat
 }
 
 void* ozy_ep6_ep2_io_thread(void* arg) {
-    unsigned char input_buffer[OZY_BUFFER_SIZE*OZY_BUFFERS];
+    unsigned char input_buffer[OZY_BUFFER_SIZE*ozy_buffers];
     int bytes;
     int i;
 
     while(1) {
         // read an input buffer (blocks until all bytes read)
-        bytes=ozy_read(0x86,input_buffer,OZY_BUFFER_SIZE*OZY_BUFFERS);
+        bytes=ozy_read(0x86,input_buffer,OZY_BUFFER_SIZE*ozy_buffers);
         if (bytes < 0) {
             fprintf(stderr,"ozy_ep6_ep2_io_thread: OzyBulkRead read failed %d\n",bytes);
-        } else if (bytes != OZY_BUFFER_SIZE*OZY_BUFFERS) {
+        } else if (bytes != OZY_BUFFER_SIZE*ozy_buffers) {
             fprintf(stderr,"ozy_ep6_ep2_io_thread: OzyBulkRead only read %d bytes\n",bytes);
         } else {
             // process input buffers
-            for(i=0;i<OZY_BUFFERS;i++) {
-                rx_frame++;
+            for(i=0;i<ozy_buffers;i++) {
                 process_ozy_input_buffer(&input_buffer[i*OZY_BUFFER_SIZE]);
             }
             if(record) {
-                bytes=fwrite(input_buffer,sizeof(char),OZY_BUFFER_SIZE*OZY_BUFFERS,recording);
+                bytes=fwrite(input_buffer,sizeof(char),OZY_BUFFER_SIZE*ozy_buffers,recording);
             }
         }
 
@@ -378,22 +389,21 @@ void* ozy_ep6_ep2_io_thread(void* arg) {
 }
 
 void* playback_thread(void* arg) {
-    static unsigned char input_buffer[OZY_BUFFER_SIZE*OZY_BUFFERS];
+    unsigned char input_buffer[OZY_BUFFER_SIZE*ozy_buffers];
     int bytes;
     int i;
 
     while(1) {
         // read an input buffer (blocks until all bytes read)
-        bytes=fread(input_buffer,sizeof(char), OZY_BUFFER_SIZE*OZY_BUFFERS,recording);
+        bytes=fread(input_buffer,sizeof(char), OZY_BUFFER_SIZE*ozy_buffers,recording);
         if (bytes <= 0) {
             fclose(recording);
 fprintf(stderr,"restarting playback: %s\n",filename);
             recording=fopen(filename,"r");
-            bytes=fread(input_buffer,sizeof(char), OZY_BUFFER_SIZE*OZY_BUFFERS,recording);
+            bytes=fread(input_buffer,sizeof(char), OZY_BUFFER_SIZE*ozy_buffers,recording);
         }
         // process input buffers
-        for(i=0;i<OZY_BUFFERS;i++) {
-            rx_frame++;
+        for(i=0;i<ozy_buffers;i++) {
             process_ozy_input_buffer(&input_buffer[i*OZY_BUFFER_SIZE]);
         }
 
@@ -435,10 +445,16 @@ void write_ozy_output_buffer() {
         ozy_output_buffer[7]=control_out[4];
     }
 
-
-    bytes=ozy_write(0x02,ozy_output_buffer,OZY_BUFFER_SIZE);
-    if(bytes!=OZY_BUFFER_SIZE) {
-        perror("OzyBulkWrite failed");
+    if(metis) {
+        bytes=metis_write(0x02,ozy_output_buffer,OZY_BUFFER_SIZE);
+        if(bytes!=OZY_BUFFER_SIZE) {
+            perror("OzyBulkWrite failed");
+        }
+    } else {
+        bytes=ozy_write(0x02,ozy_output_buffer,OZY_BUFFER_SIZE);
+        if(bytes!=OZY_BUFFER_SIZE) {
+            perror("OzyBulkWrite failed");
+        }
     }
 
 if(tx_frame<10) {
@@ -575,6 +591,9 @@ if(rx_frame<10) {
         dump_ozy_buffer("SYNC ERROR",rx_frame,buffer);
         exit(1);
     }
+
+
+    rx_frame++;
 }
 
 void* ozy_ep4_io_thread(void* arg) {

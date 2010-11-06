@@ -1,6 +1,7 @@
+
 /**
-* @file ozy.h
-* @brief Ozy protocol implementation
+* @file metis.h
+* @brief Metis protocol implementation
 * @author John Melton, G0ORX/N6LYT
 * @version 0.1
 * @date 2009-10-13
@@ -24,26 +25,15 @@
 *
 */
 
-void ozy_set_buffers(int buffers);
-int create_ozy_thread();
-void ozy_set_receivers(int r);
-int ozy_get_receivers();
-void ozy_set_sample_rate(int r);
-int ozy_get_sample_rate();
-void ozy_set_preamp(int p);
-void ozy_set_dither(int dither);
-void ozy_set_random(int random);
-void ozy_set_10mhzsource(int source);
-void ozy_set_122_88mhzsource(int source);
-void ozy_set_micsource(int source);
+typedef struct _METIS_CARD {
+    char ip_address[16];
+    char mac_address[18];
+} METIS_CARD;
 
-void ozy_set_timing(int t);
+void metis_discover(char* interface);
+int metis_found();
+char* metis_ip_address(int entry);
+char* metis_mac_address(int entry);
+void metis_start_receive_thread();
 
-void ozy_set_record(char* filename);
-void ozy_set_playback(char* filename);
-int ozy_set_playback_sleep(int sleep);
-
-
-void process_ozy_input_buffer(char* buffer);
-
-void ozy_set_metis(int state);
+int metis_write(unsigned char ep,char* buffer,int length);

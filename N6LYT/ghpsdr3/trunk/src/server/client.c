@@ -68,7 +68,7 @@ fprintf(stderr,"client connected: %s:%d\n",inet_ntoa(client->address.sin_addr),n
         response=parse_command(client,command);
         send(client->socket,response,strlen(response),0);
 
-fprintf(stderr,"response(Rx%d): '%s'\n",client->receiver,response);
+//fprintf(stderr,"response(Rx%d): '%s'\n",client->receiver,response);
     }
 
     if(client->receiver_state==RECEIVER_ATTACHED) {
@@ -95,7 +95,7 @@ char* parse_command(CLIENT* client,char* command) {
     
     char* token;
 
-fprintf(stderr,"parse_command(Rx%d): '%s'\n",client->receiver,command);
+//fprintf(stderr,"parse_command(Rx%d): '%s'\n",client->receiver,command);
 
     token=strtok(command," \r\n");
     if(token!=NULL) {
