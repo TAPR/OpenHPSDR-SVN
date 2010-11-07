@@ -1,657 +1,0 @@
-THPSDR
-v7
-r0
-t287659445.152010
-cCheck dependencies
-cCpResource build/Release-iphoneos/HPSDR.app/ResourceRules.plist /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS3.0.sdk/ResourceRules.plist
-cProcessInfoPlistFile /Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/build/Release-iphoneos/HPSDR.app/Info.plist HPSDR-Info.plist
-cCompileXIB /Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/FlipsideView.xib
-cCompileXIB /Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/MainView.xib
-cCompileXIB /Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/MainWindow.xib
-cCopyPNGFile /Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/build/Release-iphoneos/HPSDR.app/Default.png Default.png
-cProcessPCH /var/folders/a-/a-Pvj-ZCGDuhe7wpL7Ciqk+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/HPSDR_Prefix-bvhczmahtvoacccmjizlqtiqxdfq/HPSDR_Prefix.pch.gch HPSDR_Prefix.pch normal armv6 objective-c com.apple.compilers.gcc.4_2
-cProcessPCH /var/folders/a-/a-Pvj-ZCGDuhe7wpL7Ciqk+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/HPSDR_Prefix-dprvehxaymbzogbidseintbzcaun/HPSDR_Prefix.pch.gch HPSDR_Prefix.pch normal armv6 c com.apple.compilers.gcc.4_2
-cCompileC build/HPSDR.build/Release-iphoneos/HPSDR.build/Objects-normal/armv6/main.o /Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/main.m normal armv6 objective-c com.apple.compilers.gcc.4_2
-cCompileC build/HPSDR.build/Release-iphoneos/HPSDR.build/Objects-normal/armv6/HPSDRAppDelegate.o /Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/Classes/HPSDRAppDelegate.m normal armv6 objective-c com.apple.compilers.gcc.4_2
-cCompileC build/HPSDR.build/Release-iphoneos/HPSDR.build/Objects-normal/armv6/FlipsideView.o /Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/Classes/FlipsideView.m normal armv6 objective-c com.apple.compilers.gcc.4_2
-cCompileC build/HPSDR.build/Release-iphoneos/HPSDR.build/Objects-normal/armv6/MainView.o /Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/Classes/MainView.m normal armv6 objective-c com.apple.compilers.gcc.4_2
-cCompileC build/HPSDR.build/Release-iphoneos/HPSDR.build/Objects-normal/armv6/MainViewController.o /Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/Classes/MainViewController.m normal armv6 objective-c com.apple.compilers.gcc.4_2
-cCompileC build/HPSDR.build/Release-iphoneos/HPSDR.build/Objects-normal/armv6/FlipsideViewController.o /Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/Classes/FlipsideViewController.m normal armv6 objective-c com.apple.compilers.gcc.4_2
-cCompileC build/HPSDR.build/Release-iphoneos/HPSDR.build/Objects-normal/armv6/connection.o /Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/connection.c normal armv6 c com.apple.compilers.gcc.4_2
-cCompileC build/HPSDR.build/Release-iphoneos/HPSDR.build/Objects-normal/armv6/samples.o /Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/samples.c normal armv6 c com.apple.compilers.gcc.4_2
-cCompileC build/HPSDR.build/Release-iphoneos/HPSDR.build/Objects-normal/armv6/audiostream.o /Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/audiostream.c normal armv6 c com.apple.compilers.gcc.4_2
-cProcessProductPackaging "/Users/jm57878/Library/MobileDevice/Provisioning Profiles/5EB84E6E-3B61-4015-A1E5-89E942B54E58.mobileprovision" /Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/build/Release-iphoneos/HPSDR.app/embedded.mobileprovision
-cProcessProductPackaging /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS3.0.sdk/Entitlements.plist /Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/build/HPSDR.build/Release-iphoneos/HPSDR.build/HPSDR.xcent
-
-N/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS3.0.sdk
-c000000004ABDAC790000000000000110
-t1253944441
-s272
-
-N/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS3.0.sdk/Entitlements.plist
-c000000004A0BA04000000000000000DD
-t1242275904
-s221
-
-N/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS3.0.sdk/ResourceRules.plist
-c000000004A0BA04000000000000001E5
-t1242275904
-s485
-
-N/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS3.0.sdk/System/Library/Frameworks/AudioToolbox.framework/AudioToolbox
-c000000004A12212500000000002CE5F0
-t1242702117
-s2942448
-
-N/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS3.0.sdk/System/Library/Frameworks/AudioToolbox.framework/Headers/AudioQueue.h
-c000000004A0DADB90000000000011DF0
-t1242410425
-s73200
-
-N/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS3.0.sdk/System/Library/Frameworks/CoreFoundation.framework/Headers/CFSocket.h
-c000000004A0BABFA0000000000002B62
-t1242278906
-s11106
-
-N/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS3.0.sdk/System/Library/Frameworks/CoreGraphics.framework/CoreGraphics
-c000000004A121EB900000000003D72A0
-t1242701497
-s4027040
-
-N/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS3.0.sdk/System/Library/Frameworks/Foundation.framework/Foundation
-c000000004A121FF90000000000396540
-t1242701817
-s3761472
-
-N/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS3.0.sdk/System/Library/Frameworks/Foundation.framework/Headers/Foundation.h
-c000000004A0BAECB0000000000001355
-t1242279627
-s4949
-
-N/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS3.0.sdk/System/Library/Frameworks/UIKit.framework/Headers/UIKit.h
-c000000004A0CBEBD000000000000075E
-t1242349245
-s1886
-
-N/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS3.0.sdk/System/Library/Frameworks/UIKit.framework/UIKit
-c000000004A1221FD00000000019A6110
-t1242702333
-s26894608
-
-N/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS3.0.sdk/usr/include/Availability.h
-c000000004A0BB10100000000000019D8
-t1242280193
-s6616
-
-N/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS3.0.sdk/usr/include/netdb.h
-c000000004A0BA3060000000000003057
-t1242276614
-s12375
-
-N/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS3.0.sdk/usr/include/netinet/in.h
-c000000004A0BA77A000000000000535B
-t1242277754
-s21339
-
-N/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS3.0.sdk/usr/include/stdio.h
-c000000004A0BA3140000000000003D1D
-t1242276628
-s15645
-
-N/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS3.0.sdk/usr/include/stdlib.h
-c000000004A0BA3140000000000002AA4
-t1242276628
-s10916
-
-N/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS3.0.sdk/usr/include/string.h
-c000000004A0BA3140000000000001731
-t1242276628
-s5937
-
-N/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS3.0.sdk/usr/include/sys/socket.h
-c000000004A0BA7810000000000005660
-t1242277761
-s22112
-
-N/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS3.0.sdk/usr/include/sys/types.h
-c000000004A0BA781000000000000290F
-t1242277761
-s10511
-
-N/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS3.0.sdk/usr/include/unistd.h
-c000000004A0BA31400000000000053FF
-t1242276628
-s21503
-
-N/Users/jm57878/Library/MobileDevice/Provisioning Profiles/5EB84E6E-3B61-4015-A1E5-89E942B54E58.mobileprovision
-c000000004B545DD90000000000001BF7
-t1263820249
-s7159
-
-N/Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/Classes/FlipsideView.h
-c000000004B6F28E8000000000000018B
-t1265576168
-s395
-
-N/Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/Classes/FlipsideView.m
-c000000004B6F28E8000000000000092E
-t1265576168
-s2350
-i"FlipsideView.h"
-i"connection.h"
-i"samples.h"
-
-N/Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/Classes/FlipsideViewController.h
-c000000004B6F28E80000000000000211
-t1265576168
-s529
-
-N/Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/Classes/FlipsideViewController.m
-c000000004B6F28E800000000000004DB
-t1265576168
-s1243
-i"FlipsideViewController.h"
-
-N/Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/Classes/HPSDRAppDelegate.h
-c000000004B6F28E800000000000001B8
-t1265576168
-s440
-
-N/Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/Classes/HPSDRAppDelegate.m
-c000000004B6F28E80000000000000321
-t1265576168
-s801
-i"HPSDRAppDelegate.h"
-i"MainViewController.h"
-
-N/Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/Classes/MainView.h
-c000000004B6F28E800000000000000C9
-t1265576168
-s201
-i<UIKit/UIKit.h>
-
-N/Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/Classes/MainView.m
-c000000004B6F28E800000000000013B6
-t1265576168
-s5046
-i"MainView.h"
-i"samples.h"
-i"connection.h"
-
-N/Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/Classes/MainViewController.h
-c000000004B6F28E8000000000000042F
-t1265576168
-s1071
-i"FlipsideViewController.h"
-
-N/Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/Classes/MainViewController.m
-c000000004B751E310000000000001420
-t1265966641
-s5152
-i<AudioToolbox/AudioQueue.h>
-i"MainViewController.h"
-i"MainView.h"
-i"band.h"
-i"samples.h"
-i"connection.h"
-i"audiostream.h"
-
-N/Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/Default.png
-c000000004B6F28EE00000000000085CF
-t1265576174
-s34255
-
-N/Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/FlipsideView.xib
-c000000004B6F28EE000000000000779C
-t1265576174
-s30620
-
-N/Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/HPSDR_Prefix.pch
-c000000004B6F28EE000000000000013C
-t1265576174
-s316
-i<Availability.h>
-i<Foundation/Foundation.h>
-i<UIKit/UIKit.h>
-
-N/Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/MainView.xib
-c000000004B6F28EE0000000000009270
-t1265576174
-s37488
-
-N/Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/MainWindow.xib
-c000000004B6F28EE0000000000001DCF
-t1265576174
-s7631
-
-N/Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/audiostream.c
-c000000004B751E310000000000000B1E
-t1265966641
-s2846
-i<stdio.h>
-i<sys/types.h>
-i<sys/socket.h>
-i<netinet/in.h>
-i<netdb.h>
-i<string.h>
-i<unistd.h>
-i<CoreFoundation/CFSocket.h>
-i<AudioToolbox/AudioQueue.h>
-i"audiostream.h"
-
-N/Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/audiostream.h
-c000000004B751E31000000000000021B
-t1265966641
-s539
-
-N/Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/band.h
-c000000004B6F28EE00000000000001A0
-t1265576174
-s416
-
-N/Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/build/HPSDR.build/Release-iphoneos/HPSDR.build/HPSDR.xcent
-t1265966645
-s318
-
-N/Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/build/HPSDR.build/Release-iphoneos/HPSDR.build/Objects-normal/armv6/FlipsideView.o
-t1265966644
-s22252
-
-N/Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/build/HPSDR.build/Release-iphoneos/HPSDR.build/Objects-normal/armv6/FlipsideViewController.o
-t1265966644
-s35212
-
-N/Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/build/HPSDR.build/Release-iphoneos/HPSDR.build/Objects-normal/armv6/HPSDR.LinkFileList
-c000000004B751E3100000000000004B6
-t1265966641
-s1206
-
-N/Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/build/HPSDR.build/Release-iphoneos/HPSDR.build/Objects-normal/armv6/HPSDRAppDelegate.o
-t1265966644
-s42016
-
-N/Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/build/HPSDR.build/Release-iphoneos/HPSDR.build/Objects-normal/armv6/MainView.o
-t1265966644
-s26716
-
-N/Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/build/HPSDR.build/Release-iphoneos/HPSDR.build/Objects-normal/armv6/MainViewController.o
-t2
-s0
-
-N/Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/build/HPSDR.build/Release-iphoneos/HPSDR.build/Objects-normal/armv6/audiostream.o
-t2
-s0
-
-N/Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/build/HPSDR.build/Release-iphoneos/HPSDR.build/Objects-normal/armv6/connection.o
-t2
-s0
-
-N/Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/build/HPSDR.build/Release-iphoneos/HPSDR.build/Objects-normal/armv6/main.o
-t1265966644
-s6656
-
-N/Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/build/HPSDR.build/Release-iphoneos/HPSDR.build/Objects-normal/armv6/samples.o
-t1265966645
-s2580
-
-N/Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/build/Release-iphoneos/HPSDR.app
-t2
-s0
-
-N/Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/build/Release-iphoneos/HPSDR.app.dSYM
-t2
-s0
-
-N/Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/build/Release-iphoneos/HPSDR.app/Default.png
-t1265966642
-s26451
-
-N/Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/build/Release-iphoneos/HPSDR.app/FlipsideView.nib
-t1265966642
-s5352
-
-N/Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/build/Release-iphoneos/HPSDR.app/HPSDR
-t2
-s0
-
-N/Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/build/Release-iphoneos/HPSDR.app/Info.plist
-t1265966641
-s645
-
-N/Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/build/Release-iphoneos/HPSDR.app/MainView.nib
-t1265966642
-s7141
-
-N/Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/build/Release-iphoneos/HPSDR.app/MainWindow.nib
-t1265966642
-s1377
-
-N/Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/build/Release-iphoneos/HPSDR.app/PkgInfo
-t1265966641
-s8
-
-N/Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/build/Release-iphoneos/HPSDR.app/ResourceRules.plist
-t1265966641
-s485
-
-N/Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/build/Release-iphoneos/HPSDR.app/embedded.mobileprovision
-t1265966645
-s7159
-
-N/Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/connection.c
-c000000004B751E31000000000000105D
-t1265966641
-s4189
-i<stdio.h>
-i<sys/types.h>
-i<sys/socket.h>
-i<netinet/in.h>
-i<netdb.h>
-i<string.h>
-i<unistd.h>
-i<stdlib.h>
-i<CoreFoundation/CFSocket.h>
-i"connection.h"
-i"audiostream.h"
-i"samples.h"
-i"band.h"
-
-N/Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/connection.h
-c000000004B751E3100000000000001E7
-t1265966641
-s487
-
-N/Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/main.m
-c000000004B6F28EE0000000000000169
-t1265576174
-s361
-i<UIKit/UIKit.h>
-
-N/Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/samples.c
-c000000004B6F28EE00000000001E0612
-t1265576174
-s1967634
-i"samples.h"
-
-N/Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/samples.h
-c000000004B6F28EE0000000000000164
-t1265576174
-s356
-
-N/var/folders/a-/a-Pvj-ZCGDuhe7wpL7Ciqk+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/HPSDR_Prefix-bvhczmahtvoacccmjizlqtiqxdfq/HPSDR_Prefix.pch.gch
-t1265966644
-s7651456
-
-N/var/folders/a-/a-Pvj-ZCGDuhe7wpL7Ciqk+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/HPSDR_Prefix-dprvehxaymbzogbidseintbzcaun/HPSDR_Prefix.pch.gch
-t1265966643
-s1143068
-
-NHPSDR-Info.plist
-c000000004B6F28EE00000000000003C2
-t1265576174
-s962
-
-CCheck dependencies
-r0
-lSLF07#2@18"Check dependencies287659441#287659441#0(0"0(0#1#0"7947009927035180032#0"0#
-
-CCodeSign /Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/build/Release-iphoneos/HPSDR.app
-r0
-
-CCompileC build/HPSDR.build/Release-iphoneos/HPSDR.build/Objects-normal/armv6/FlipsideView.o /Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/Classes/FlipsideView.m normal armv6 objective-c com.apple.compilers.gcc.4_2
-s287659444.664515
-e287659444.802486
-r1
-xCompileC
-xbuild/HPSDR.build/Release-iphoneos/HPSDR.build/Objects-normal/armv6/FlipsideView.o
-x/Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/Classes/FlipsideView.m
-xnormal
-xarmv6
-xobjective-c
-xcom.apple.compilers.gcc.4_2
-o/Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/Classes/FlipsideView.m: In function '-[FlipsideView init]':
-o/Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/Classes/FlipsideView.m:34: warning: no '+sharedInstance' method found
-o/Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/Classes/FlipsideView.m:34: warning: (Messages without a matching method signature
-o/Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/Classes/FlipsideView.m:34: warning: will be assumed to return 'id' and accept
-o/Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/Classes/FlipsideView.m:34: warning: '...' as arguments.)
-lSLF07#2@81"Compile /Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/Classes/FlipsideView.m287659444#287659444#0(602"/Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/Classes/FlipsideView.m: In function '-[FlipsideView init]':/Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/Classes/FlipsideView.m:34: warning: no '+sharedInstance' method found/Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/Classes/FlipsideView.m:34: warning: (Messages without a matching method signature/Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/Classes/FlipsideView.m:34: warning: will be assumed to return 'id' and accept/Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/Classes/FlipsideView.m:34: warning: '...' as arguments.)2(22@33"No '+sharedInstance' method found287659444#111#121#0(6@73"/Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/Classes/FlipsideView.m287268968#34#0#34#0#19"no '*' method found0(13@108"(Messages without a matching method signature will be assumed to return 'id' and accept '...' as arguments.)287659444#232#133#0(6@73"/Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/Classes/FlipsideView.m287268968#34#0#34#0#0"0(0#0#73"/Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/Classes/FlipsideView.m4300885448#1875"    cd /Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/gcc-4.2 -x objective-c -arch armv6 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -Os -mdynamic-no-pic -Wreturn-type -Wunused-variable -isysroot /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS3.0.sdk -fvisibility=hidden -gdwarf-2 -mthumb -miphoneos-version-min=3.0 -iquote /Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/build/HPSDR.build/Release-iphoneos/HPSDR.build/HPSDR-generated-files.hmap -I/Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/build/HPSDR.build/Release-iphoneos/HPSDR.build/HPSDR-own-target-headers.hmap -I/Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/build/HPSDR.build/Release-iphoneos/HPSDR.build/HPSDR-all-target-headers.hmap -iquote /Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/build/HPSDR.build/Release-iphoneos/HPSDR.build/HPSDR-project-headers.hmap -F/Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/build/Release-iphoneos -I/Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/build/Release-iphoneos/include -I/Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/build/HPSDR.build/Release-iphoneos/HPSDR.build/DerivedSources/armv6 -I/Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/build/HPSDR.build/Release-iphoneos/HPSDR.build/DerivedSources -include /var/folders/a-/a-Pvj-ZCGDuhe7wpL7Ciqk+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/HPSDR_Prefix-bvhczmahtvoacccmjizlqtiqxdfq/HPSDR_Prefix.pch -c /Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/Classes/FlipsideView.m -o /Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/build/HPSDR.build/Release-iphoneos/HPSDR.build/Objects-normal/armv6/FlipsideView.o0#
-
-CCompileC build/HPSDR.build/Release-iphoneos/HPSDR.build/Objects-normal/armv6/FlipsideViewController.o /Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/Classes/FlipsideViewController.m normal armv6 objective-c com.apple.compilers.gcc.4_2
-s287659444.874376
-e287659445.018696
-r1
-xCompileC
-xbuild/HPSDR.build/Release-iphoneos/HPSDR.build/Objects-normal/armv6/FlipsideViewController.o
-x/Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/Classes/FlipsideViewController.m
-xnormal
-xarmv6
-xobjective-c
-xcom.apple.compilers.gcc.4_2
-o/Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/Classes/FlipsideViewController.m: In function '-[FlipsideViewController done]':
-o/Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/Classes/FlipsideViewController.m:25: warning: 'UIView' may not respond to '-saveState'
-o/Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/Classes/FlipsideViewController.m:25: warning: (Messages without a matching method signature
-o/Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/Classes/FlipsideViewController.m:25: warning: will be assumed to return 'id' and accept
-o/Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/Classes/FlipsideViewController.m:25: warning: '...' as arguments.)
-lSLF07#2@91"Compile /Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/Classes/FlipsideViewController.m287659444#287659445#0(669"/Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/Classes/FlipsideViewController.m: In function '-[FlipsideViewController done]':/Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/Classes/FlipsideViewController.m:25: warning: 'UIView' may not respond to '-saveState'/Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/Classes/FlipsideViewController.m:25: warning: (Messages without a matching method signature/Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/Classes/FlipsideViewController.m:25: warning: will be assumed to return 'id' and accept/Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/Classes/FlipsideViewController.m:25: warning: '...' as arguments.)2(22@40"'UIView' may not respond to '-saveState'287659444#131#138#0(6@83"/Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/Classes/FlipsideViewController.m287268968#25#0#25#0#26"'*' may not respond to '*'0(13@108"(Messages without a matching method signature will be assumed to return 'id' and accept '...' as arguments.)287659444#269#143#0(6@83"/Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/Classes/FlipsideViewController.m287268968#25#0#25#0#0"0(0#0#83"/Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/Classes/FlipsideViewController.m4300885448#1895"    cd /Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/gcc-4.2 -x objective-c -arch armv6 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -Os -mdynamic-no-pic -Wreturn-type -Wunused-variable -isysroot /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS3.0.sdk -fvisibility=hidden -gdwarf-2 -mthumb -miphoneos-version-min=3.0 -iquote /Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/build/HPSDR.build/Release-iphoneos/HPSDR.build/HPSDR-generated-files.hmap -I/Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/build/HPSDR.build/Release-iphoneos/HPSDR.build/HPSDR-own-target-headers.hmap -I/Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/build/HPSDR.build/Release-iphoneos/HPSDR.build/HPSDR-all-target-headers.hmap -iquote /Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/build/HPSDR.build/Release-iphoneos/HPSDR.build/HPSDR-project-headers.hmap -F/Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/build/Release-iphoneos -I/Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/build/Release-iphoneos/include -I/Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/build/HPSDR.build/Release-iphoneos/HPSDR.build/DerivedSources/armv6 -I/Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/build/HPSDR.build/Release-iphoneos/HPSDR.build/DerivedSources -include /var/folders/a-/a-Pvj-ZCGDuhe7wpL7Ciqk+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/HPSDR_Prefix-bvhczmahtvoacccmjizlqtiqxdfq/HPSDR_Prefix.pch -c /Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/Classes/FlipsideViewController.m -o /Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/build/HPSDR.build/Release-iphoneos/HPSDR.build/Objects-normal/armv6/FlipsideViewController.o0#
-
-CCompileC build/HPSDR.build/Release-iphoneos/HPSDR.build/Objects-normal/armv6/HPSDRAppDelegate.o /Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/Classes/HPSDRAppDelegate.m normal armv6 objective-c com.apple.compilers.gcc.4_2
-s287659444.437956
-e287659444.687912
-r1
-xCompileC
-xbuild/HPSDR.build/Release-iphoneos/HPSDR.build/Objects-normal/armv6/HPSDRAppDelegate.o
-x/Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/Classes/HPSDRAppDelegate.m
-xnormal
-xarmv6
-xobjective-c
-xcom.apple.compilers.gcc.4_2
-lSLF07#2@85"Compile /Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/Classes/HPSDRAppDelegate.m287659444#287659444#0(0"0(0#0#77"/Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/Classes/HPSDRAppDelegate.m4300885448#1883"    cd /Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/gcc-4.2 -x objective-c -arch armv6 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -Os -mdynamic-no-pic -Wreturn-type -Wunused-variable -isysroot /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS3.0.sdk -fvisibility=hidden -gdwarf-2 -mthumb -miphoneos-version-min=3.0 -iquote /Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/build/HPSDR.build/Release-iphoneos/HPSDR.build/HPSDR-generated-files.hmap -I/Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/build/HPSDR.build/Release-iphoneos/HPSDR.build/HPSDR-own-target-headers.hmap -I/Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/build/HPSDR.build/Release-iphoneos/HPSDR.build/HPSDR-all-target-headers.hmap -iquote /Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/build/HPSDR.build/Release-iphoneos/HPSDR.build/HPSDR-project-headers.hmap -F/Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/build/Release-iphoneos -I/Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/build/Release-iphoneos/include -I/Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/build/HPSDR.build/Release-iphoneos/HPSDR.build/DerivedSources/armv6 -I/Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/build/HPSDR.build/Release-iphoneos/HPSDR.build/DerivedSources -include /var/folders/a-/a-Pvj-ZCGDuhe7wpL7Ciqk+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/HPSDR_Prefix-bvhczmahtvoacccmjizlqtiqxdfq/HPSDR_Prefix.pch -c /Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/Classes/HPSDRAppDelegate.m -o /Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/build/HPSDR.build/Release-iphoneos/HPSDR.build/Objects-normal/armv6/HPSDRAppDelegate.o0#
-
-CCompileC build/HPSDR.build/Release-iphoneos/HPSDR.build/Objects-normal/armv6/MainView.o /Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/Classes/MainView.m normal armv6 objective-c com.apple.compilers.gcc.4_2
-s287659444.688006
-e287659444.897128
-r1
-xCompileC
-xbuild/HPSDR.build/Release-iphoneos/HPSDR.build/Objects-normal/armv6/MainView.o
-x/Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/Classes/MainView.m
-xnormal
-xarmv6
-xobjective-c
-xcom.apple.compilers.gcc.4_2
-lSLF07#2@77"Compile /Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/Classes/MainView.m287659444#287659444#0(0"0(0#0#69"/Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/Classes/MainView.m4300885448#1867"    cd /Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/gcc-4.2 -x objective-c -arch armv6 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -Os -mdynamic-no-pic -Wreturn-type -Wunused-variable -isysroot /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS3.0.sdk -fvisibility=hidden -gdwarf-2 -mthumb -miphoneos-version-min=3.0 -iquote /Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/build/HPSDR.build/Release-iphoneos/HPSDR.build/HPSDR-generated-files.hmap -I/Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/build/HPSDR.build/Release-iphoneos/HPSDR.build/HPSDR-own-target-headers.hmap -I/Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/build/HPSDR.build/Release-iphoneos/HPSDR.build/HPSDR-all-target-headers.hmap -iquote /Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/build/HPSDR.build/Release-iphoneos/HPSDR.build/HPSDR-project-headers.hmap -F/Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/build/Release-iphoneos -I/Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/build/Release-iphoneos/include -I/Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/build/HPSDR.build/Release-iphoneos/HPSDR.build/DerivedSources/armv6 -I/Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/build/HPSDR.build/Release-iphoneos/HPSDR.build/DerivedSources -include /var/folders/a-/a-Pvj-ZCGDuhe7wpL7Ciqk+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/HPSDR_Prefix-bvhczmahtvoacccmjizlqtiqxdfq/HPSDR_Prefix.pch -c /Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/Classes/MainView.m -o /Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/build/HPSDR.build/Release-iphoneos/HPSDR.build/Objects-normal/armv6/MainView.o0#
-
-CCompileC build/HPSDR.build/Release-iphoneos/HPSDR.build/Objects-normal/armv6/MainViewController.o /Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/Classes/MainViewController.m normal armv6 objective-c com.apple.compilers.gcc.4_2
-s287659444.802594
-e287659444.874178
-r0
-xCompileC
-xbuild/HPSDR.build/Release-iphoneos/HPSDR.build/Objects-normal/armv6/MainViewController.o
-x/Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/Classes/MainViewController.m
-xnormal
-xarmv6
-xobjective-c
-xcom.apple.compilers.gcc.4_2
-o/Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/Classes/MainViewController.m: In function '-[MainViewController onTimer]':
-o/Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/Classes/MainViewController.m:32: warning: 'UIView' may not respond to '-dragged'
-o/Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/Classes/MainViewController.m:32: warning: (Messages without a matching method signature
-o/Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/Classes/MainViewController.m:32: warning: will be assumed to return 'id' and accept
-o/Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/Classes/MainViewController.m:32: warning: '...' as arguments.)
-o/Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/Classes/MainViewController.m:44: warning: 'UIView' may not respond to '-refresh'
-o/Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/Classes/MainViewController.m: In function '-[MainViewController viewDidLoad]':
-o/Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/Classes/MainViewController.m:53: error: expected ';' before 'makeConnection'
-lSLF07#2@87"Compile /Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/Classes/MainViewController.m287659444#287659444#0(1036"/Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/Classes/MainViewController.m: In function '-[MainViewController onTimer]':/Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/Classes/MainViewController.m:32: warning: 'UIView' may not respond to '-dragged'/Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/Classes/MainViewController.m:32: warning: (Messages without a matching method signature/Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/Classes/MainViewController.m:32: warning: will be assumed to return 'id' and accept/Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/Classes/MainViewController.m:32: warning: '...' as arguments.)/Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/Classes/MainViewController.m:44: warning: 'UIView' may not respond to '-refresh'/Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/Classes/MainViewController.m: In function '-[MainViewController viewDidLoad]':/Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/Classes/MainViewController.m:53: error: expected ';' before 'makeConnection'4(22@38"'UIView' may not respond to '-dragged'287659444#126#132#0(6@79"/Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/Classes/MainViewController.m287659441#32#0#32#0#26"'*' may not respond to '*'0(13@108"(Messages without a matching method signature will be assumed to return 'id' and accept '...' as arguments.)287659444#258#139#0(6@79"/Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/Classes/MainViewController.m287659441#32#0#32#0#0"0(22@38"'UIView' may not respond to '-refresh'287659444#646#132#0(6@79"/Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/Classes/MainViewController.m287659441#44#0#44#0#26"'*' may not respond to '*'0(4@36"Expected ';' before 'makeConnection'287659444#908#128#0(6@79"/Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/Classes/MainViewController.m287659441#53#0#53#0#19"expected * before *0(0#0#79"/Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/Classes/MainViewController.m4300885448#1887"    cd /Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/gcc-4.2 -x objective-c -arch armv6 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -Os -mdynamic-no-pic -Wreturn-type -Wunused-variable -isysroot /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS3.0.sdk -fvisibility=hidden -gdwarf-2 -mthumb -miphoneos-version-min=3.0 -iquote /Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/build/HPSDR.build/Release-iphoneos/HPSDR.build/HPSDR-generated-files.hmap -I/Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/build/HPSDR.build/Release-iphoneos/HPSDR.build/HPSDR-own-target-headers.hmap -I/Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/build/HPSDR.build/Release-iphoneos/HPSDR.build/HPSDR-all-target-headers.hmap -iquote /Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/build/HPSDR.build/Release-iphoneos/HPSDR.build/HPSDR-project-headers.hmap -F/Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/build/Release-iphoneos -I/Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/build/Release-iphoneos/include -I/Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/build/HPSDR.build/Release-iphoneos/HPSDR.build/DerivedSources/armv6 -I/Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/build/HPSDR.build/Release-iphoneos/HPSDR.build/DerivedSources -include /var/folders/a-/a-Pvj-ZCGDuhe7wpL7Ciqk+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/HPSDR_Prefix-bvhczmahtvoacccmjizlqtiqxdfq/HPSDR_Prefix.pch -c /Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/Classes/MainViewController.m -o /Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/build/HPSDR.build/Release-iphoneos/HPSDR.build/Objects-normal/armv6/MainViewController.o1#
-
-CCompileC build/HPSDR.build/Release-iphoneos/HPSDR.build/Objects-normal/armv6/audiostream.o /Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/audiostream.c normal armv6 c com.apple.compilers.gcc.4_2
-s287659445.018792
-e287659445.127688
-r0
-xCompileC
-xbuild/HPSDR.build/Release-iphoneos/HPSDR.build/Objects-normal/armv6/audiostream.o
-x/Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/audiostream.c
-xnormal
-xarmv6
-xc
-xcom.apple.compilers.gcc.4_2
-o/Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/audiostream.c: In function 'processAudioBuffer':
-o/Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/audiostream.c:54: error: array subscript is not an integer
-o/Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/audiostream.c:55: error: array subscript is not an integer
-o/Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/audiostream.c:56: error: 'err' undeclared (first use in this function)
-o/Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/audiostream.c:56: error: (Each undeclared identifier is reported only once
-o/Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/audiostream.c:56: error: for each function it appears in.)
-o/Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/audiostream.c:56: error: array subscript is not an integer
-o/Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/audiostream.c:61: warning: comparison between pointer and integer
-lSLF07#2@72"Compile /Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/audiostream.c287659445#287659445#0(905"/Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/audiostream.c: In function 'processAudioBuffer':/Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/audiostream.c:54: error: array subscript is not an integer/Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/audiostream.c:55: error: array subscript is not an integer/Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/audiostream.c:56: error: 'err' undeclared (first use in this function)/Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/audiostream.c:56: error: (Each undeclared identifier is reported only once/Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/audiostream.c:56: error: for each function it appears in.)/Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/audiostream.c:56: error: array subscript is not an integer/Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/audiostream.c:61: warning: comparison between pointer and integer5(4@33"Array subscript is not an integer287659445#100#110#0(6@64"/Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/audiostream.c287659441#54#0#54#0#0"0(4@33"Array subscript is not an integer287659445#210#110#0(6@64"/Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/audiostream.c287659441#55#0#55#0#0"0(4@45"'err' undeclared (first use in this function)287659445#320#122#0(6@64"/Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/audiostream.c287659441#56#0#56#0#43"'*' undeclared (first use in this function)0(4@33"Array subscript is not an integer287659445#678#110#0(6@64"/Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/audiostream.c287659441#56#0#56#0#0"0(22@38"Comparison between pointer and integer287659445#788#117#0(6@64"/Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/audiostream.c287659441#61#0#61#0#0"0(0#0#64"/Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/audiostream.c4300885448#1855"    cd /Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/gcc-4.2 -x c -arch armv6 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -Os -mdynamic-no-pic -Wreturn-type -Wunused-variable -isysroot /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS3.0.sdk -fvisibility=hidden -gdwarf-2 -mthumb -miphoneos-version-min=3.0 -iquote /Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/build/HPSDR.build/Release-iphoneos/HPSDR.build/HPSDR-generated-files.hmap -I/Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/build/HPSDR.build/Release-iphoneos/HPSDR.build/HPSDR-own-target-headers.hmap -I/Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/build/HPSDR.build/Release-iphoneos/HPSDR.build/HPSDR-all-target-headers.hmap -iquote /Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/build/HPSDR.build/Release-iphoneos/HPSDR.build/HPSDR-project-headers.hmap -F/Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/build/Release-iphoneos -I/Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/build/Release-iphoneos/include -I/Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/build/HPSDR.build/Release-iphoneos/HPSDR.build/DerivedSources/armv6 -I/Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/build/HPSDR.build/Release-iphoneos/HPSDR.build/DerivedSources -include /var/folders/a-/a-Pvj-ZCGDuhe7wpL7Ciqk+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/HPSDR_Prefix-dprvehxaymbzogbidseintbzcaun/HPSDR_Prefix.pch -c /Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/audiostream.c -o /Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/build/HPSDR.build/Release-iphoneos/HPSDR.build/Objects-normal/armv6/audiostream.o1#
-
-CCompileC build/HPSDR.build/Release-iphoneos/HPSDR.build/Objects-normal/armv6/connection.o /Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/connection.c normal armv6 c com.apple.compilers.gcc.4_2
-s287659444.897239
-e287659445.017427
-r0
-xCompileC
-xbuild/HPSDR.build/Release-iphoneos/HPSDR.build/Objects-normal/armv6/connection.o
-x/Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/connection.c
-xnormal
-xarmv6
-xc
-xcom.apple.compilers.gcc.4_2
-oIn file included from /Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/connection.c:20:
-o/Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/audiostream.h:14: error: expected specifier-qualifier-list before 'AudioQueueRef'
-o/Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/connection.c: In function 'socketCallback':
-o/Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/connection.c:58: error: 'BUFFER' undeclared (first use in this function)
-o/Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/connection.c:58: error: (Each undeclared identifier is reported only once
-o/Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/connection.c:58: error: for each function it appears in.)
-o/Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/connection.c:63: error: expected ')' before '{' token
-o/Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/connection.c:77: error: expected expression before '}' token
-o/Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/connection.c:49: warning: unused variable 'i'
-lSLF07#2@71"Compile /Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/connection.c287659444#287659445#0(990"In file included from /Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/connection.c:20:/Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/audiostream.h:14: error: expected specifier-qualifier-list before 'AudioQueueRef'/Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/connection.c: In function 'socketCallback':/Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/connection.c:58: error: 'BUFFER' undeclared (first use in this function)/Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/connection.c:58: error: (Each undeclared identifier is reported only once/Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/connection.c:58: error: for each function it appears in.)/Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/connection.c:63: error: expected ')' before '{' token/Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/connection.c:77: error: expected expression before '}' token/Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/connection.c:49: warning: unused variable 'i'5(4@56"Expected specifier-qualifier-list before 'AudioQueueRef'287659445#90#133#2(7@85"In file included from /Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/connection.c287659445#18446744073709551615#0#0(6@63"/Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/connection.c287659441#20#0#20#0#0"0(13@124"Expected specifier-qualifier-list before 'AudioQueueRef' in /Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/audiostream.h287659445#18446744073709551615#0#0(6@64"/Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/audiostream.h287659441#14#0#14#0#0"0(6@64"/Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/audiostream.h287659441#14#0#14#0#19"expected * before *0(4@48"'BUFFER' undeclared (first use in this function)287659445#318#124#0(6@63"/Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/connection.c287659441#58#0#58#0#43"'*' undeclared (first use in this function)0(4@29"Expected ')' before '{' token287659445#676#105#0(6@63"/Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/connection.c287659441#63#0#63#0#19"expected * before *0(4@36"Expected expression before '}' token287659445#781#112#0(6@63"/Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/connection.c287659441#77#0#77#0#19"expected * before *0(22@19"Unused variable 'i'287659445#893#97#0(6@63"/Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/connection.c287659441#49#0#49#0#19"unused variable '*'0(0#0#63"/Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/connection.c4300885448#1853"    cd /Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/gcc-4.2 -x c -arch armv6 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -Os -mdynamic-no-pic -Wreturn-type -Wunused-variable -isysroot /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS3.0.sdk -fvisibility=hidden -gdwarf-2 -mthumb -miphoneos-version-min=3.0 -iquote /Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/build/HPSDR.build/Release-iphoneos/HPSDR.build/HPSDR-generated-files.hmap -I/Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/build/HPSDR.build/Release-iphoneos/HPSDR.build/HPSDR-own-target-headers.hmap -I/Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/build/HPSDR.build/Release-iphoneos/HPSDR.build/HPSDR-all-target-headers.hmap -iquote /Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/build/HPSDR.build/Release-iphoneos/HPSDR.build/HPSDR-project-headers.hmap -F/Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/build/Release-iphoneos -I/Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/build/Release-iphoneos/include -I/Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/build/HPSDR.build/Release-iphoneos/HPSDR.build/DerivedSources/armv6 -I/Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/build/HPSDR.build/Release-iphoneos/HPSDR.build/DerivedSources -include /var/folders/a-/a-Pvj-ZCGDuhe7wpL7Ciqk+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/HPSDR_Prefix-dprvehxaymbzogbidseintbzcaun/HPSDR_Prefix.pch -c /Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/connection.c -o /Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/build/HPSDR.build/Release-iphoneos/HPSDR.build/Objects-normal/armv6/connection.o1#
-
-CCompileC build/HPSDR.build/Release-iphoneos/HPSDR.build/Objects-normal/armv6/main.o /Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/main.m normal armv6 objective-c com.apple.compilers.gcc.4_2
-s287659444.436930
-e287659444.664406
-r1
-xCompileC
-xbuild/HPSDR.build/Release-iphoneos/HPSDR.build/Objects-normal/armv6/main.o
-x/Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/main.m
-xnormal
-xarmv6
-xobjective-c
-xcom.apple.compilers.gcc.4_2
-lSLF07#2@65"Compile /Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/main.m287659444#287659444#0(0"0(0#0#57"/Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/main.m4300885448#1851"    cd /Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/gcc-4.2 -x objective-c -arch armv6 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -Os -mdynamic-no-pic -Wreturn-type -Wunused-variable -isysroot /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS3.0.sdk -fvisibility=hidden -gdwarf-2 -mthumb -miphoneos-version-min=3.0 -iquote /Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/build/HPSDR.build/Release-iphoneos/HPSDR.build/HPSDR-generated-files.hmap -I/Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/build/HPSDR.build/Release-iphoneos/HPSDR.build/HPSDR-own-target-headers.hmap -I/Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/build/HPSDR.build/Release-iphoneos/HPSDR.build/HPSDR-all-target-headers.hmap -iquote /Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/build/HPSDR.build/Release-iphoneos/HPSDR.build/HPSDR-project-headers.hmap -F/Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/build/Release-iphoneos -I/Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/build/Release-iphoneos/include -I/Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/build/HPSDR.build/Release-iphoneos/HPSDR.build/DerivedSources/armv6 -I/Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/build/HPSDR.build/Release-iphoneos/HPSDR.build/DerivedSources -include /var/folders/a-/a-Pvj-ZCGDuhe7wpL7Ciqk+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/HPSDR_Prefix-bvhczmahtvoacccmjizlqtiqxdfq/HPSDR_Prefix.pch -c /Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/main.m -o /Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/build/HPSDR.build/Release-iphoneos/HPSDR.build/Objects-normal/armv6/main.o0#
-
-CCompileC build/HPSDR.build/Release-iphoneos/HPSDR.build/Objects-normal/armv6/samples.o /Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/samples.c normal armv6 c com.apple.compilers.gcc.4_2
-s287659445.017523
-e287659445.090242
-r1
-xCompileC
-xbuild/HPSDR.build/Release-iphoneos/HPSDR.build/Objects-normal/armv6/samples.o
-x/Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/samples.c
-xnormal
-xarmv6
-xc
-xcom.apple.compilers.gcc.4_2
-lSLF07#2@68"Compile /Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/samples.c287659445#287659445#0(0"0(0#0#60"/Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/samples.c8319383698887823360#1847"    cd /Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/gcc-4.2 -x c -arch armv6 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -Os -mdynamic-no-pic -Wreturn-type -Wunused-variable -isysroot /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS3.0.sdk -fvisibility=hidden -gdwarf-2 -mthumb -miphoneos-version-min=3.0 -iquote /Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/build/HPSDR.build/Release-iphoneos/HPSDR.build/HPSDR-generated-files.hmap -I/Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/build/HPSDR.build/Release-iphoneos/HPSDR.build/HPSDR-own-target-headers.hmap -I/Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/build/HPSDR.build/Release-iphoneos/HPSDR.build/HPSDR-all-target-headers.hmap -iquote /Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/build/HPSDR.build/Release-iphoneos/HPSDR.build/HPSDR-project-headers.hmap -F/Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/build/Release-iphoneos -I/Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/build/Release-iphoneos/include -I/Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/build/HPSDR.build/Release-iphoneos/HPSDR.build/DerivedSources/armv6 -I/Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/build/HPSDR.build/Release-iphoneos/HPSDR.build/DerivedSources -include /var/folders/a-/a-Pvj-ZCGDuhe7wpL7Ciqk+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/HPSDR_Prefix-dprvehxaymbzogbidseintbzcaun/HPSDR_Prefix.pch -c /Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/samples.c -o /Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/build/HPSDR.build/Release-iphoneos/HPSDR.build/Objects-normal/armv6/samples.o0#
-
-CCompileXIB /Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/FlipsideView.xib
-s287659441.484304
-e287659442.269260
-r1
-xCompileXIB
-x/Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/FlipsideView.xib
-lSLF07#2@27"CompileXIB FlipsideView.xib287659441#287659442#0(0"0(0#0#67"/Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/FlipsideView.xib21955250050564152#506"    cd /Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR    setenv IBC_MINIMUM_COMPATIBILITY_VERSION 3.0    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/usr/bin/ibtool --errors --warnings --notices --output-format human-readable-text --compile /Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/build/Release-iphoneos/HPSDR.app/FlipsideView.nib /Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/FlipsideView.xib0#
-
-CCompileXIB /Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/MainView.xib
-s287659441.485130
-e287659442.295063
-r1
-xCompileXIB
-x/Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/MainView.xib
-lSLF07#2@23"CompileXIB MainView.xib287659441#287659442#0(0"0(0#0#63"/Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/MainView.xib4300885448#498"    cd /Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR    setenv IBC_MINIMUM_COMPATIBILITY_VERSION 3.0    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/usr/bin/ibtool --errors --warnings --notices --output-format human-readable-text --compile /Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/build/Release-iphoneos/HPSDR.app/MainView.nib /Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/MainView.xib0#
-
-CCompileXIB /Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/MainWindow.xib
-s287659442.269357
-e287659442.639719
-r1
-xCompileXIB
-x/Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/MainWindow.xib
-oCouldn't open shared capabilities memory GSCapabilities (No such file or directory)
-lSLF07#2@25"CompileXIB MainWindow.xib287659442#287659442#0(84"Couldn't open shared capabilities memory GSCapabilities (No such file or directory)0(0#0#65"/Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/MainWindow.xib4300885448#502"    cd /Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR    setenv IBC_MINIMUM_COMPATIBILITY_VERSION 3.0    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/usr/bin/ibtool --errors --warnings --notices --output-format human-readable-text --compile /Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/build/Release-iphoneos/HPSDR.app/MainWindow.nib /Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/MainWindow.xib0#
-
-CCopyPNGFile /Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/build/Release-iphoneos/HPSDR.app/Default.png Default.png
-s287659442.295208
-e287659443.367120
-r1
-xCopyPNGFile
-x/Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/build/Release-iphoneos/HPSDR.app/Default.png
-xDefault.png
-lSLF07#2@68"CopyPNGFile build/Release-iphoneos/HPSDR.app/Default.png Default.png287659442#287659443#0(0"0(0#0#62"/Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/Default.png4300885448#598"    cd /Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR    setenv COPY_COMMAND /Developer/Library/PrivateFrameworks/DevToolsCore.framework/Resources/pbxcp    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    "/Developer/Platforms/iPhoneOS.platform/Developer/Library/Xcode/Plug-ins/iPhoneOS Build System Support.xcplugin/Contents/Resources/copypng" -compress "" /Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/Default.png /Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/build/Release-iphoneos/HPSDR.app/Default.png0#
-
-CCpResource build/Release-iphoneos/HPSDR.app/ResourceRules.plist /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS3.0.sdk/ResourceRules.plist
-s287659441.352280
-e287659441.484221
-r1
-xCpResource
-xbuild/Release-iphoneos/HPSDR.app/ResourceRules.plist
-x/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS3.0.sdk/ResourceRules.plist
-lSLF07#2@94"Copy /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS3.0.sdk/ResourceRules.plist287659441#287659441#0(0"0(0#0#89"/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS3.0.sdk/ResourceRules.plist3698387016064395264#525"    cd /Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Library/PrivateFrameworks/DevToolsCore.framework/Resources/pbxcp -exclude .DS_Store -exclude CVS -exclude .svn -strip-debug-symbols -resolve-src-symlinks /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS3.0.sdk/ResourceRules.plist /Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/build/Release-iphoneos/HPSDR.app0#
-
-CGenerateDSYMFile /Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/build/Release-iphoneos/HPSDR.app.dSYM /Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/build/Release-iphoneos/HPSDR.app/HPSDR
-r0
-
-CLd /Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/build/Release-iphoneos/HPSDR.app/HPSDR normal armv6
-r0
-
-CProcessInfoPlistFile /Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/build/Release-iphoneos/HPSDR.app/Info.plist HPSDR-Info.plist
-s287659441.402204
-e287659441.410621
-r1
-xProcessInfoPlistFile
-x/Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/build/Release-iphoneos/HPSDR.app/Info.plist
-xHPSDR-Info.plist
-lSLF07#2@24"Process HPSDR-Info.plist287659441#287659441#0(0"0(0#0#67"/Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/HPSDR-Info.plist4300885448#608"    cd /Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    builtin-infoPlistUtility HPSDR-Info.plist -genpkginfo /Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/build/Release-iphoneos/HPSDR.app/PkgInfo -expandbuildsettings -format binary -platform iphoneos -resourcerulesfile /Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/build/Release-iphoneos/HPSDR.app/ResourceRules.plist -o /Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/build/Release-iphoneos/HPSDR.app/Info.plist0#
-
-CProcessPCH /var/folders/a-/a-Pvj-ZCGDuhe7wpL7Ciqk+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/HPSDR_Prefix-bvhczmahtvoacccmjizlqtiqxdfq/HPSDR_Prefix.pch.gch HPSDR_Prefix.pch normal armv6 objective-c com.apple.compilers.gcc.4_2
-s287659443.367424
-e287659444.436823
-r1
-xProcessPCH
-x/var/folders/a-/a-Pvj-ZCGDuhe7wpL7Ciqk+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/HPSDR_Prefix-bvhczmahtvoacccmjizlqtiqxdfq/HPSDR_Prefix.pch.gch
-xHPSDR_Prefix.pch
-xnormal
-xarmv6
-xobjective-c
-xcom.apple.compilers.gcc.4_2
-lSLF07#2@27"Precompile HPSDR_Prefix.pch287659443#287659444#0(0"0(0#0#67"/Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/HPSDR_Prefix.pch4300885448#1737"    cd /Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/gcc-4.2 -x objective-c-header -arch armv6 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -Os -mdynamic-no-pic -Wreturn-type -Wunused-variable -isysroot /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS3.0.sdk -fvisibility=hidden -gdwarf-2 -mthumb -miphoneos-version-min=3.0 -iquote /Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/build/HPSDR.build/Release-iphoneos/HPSDR.build/HPSDR-generated-files.hmap -I/Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/build/HPSDR.build/Release-iphoneos/HPSDR.build/HPSDR-own-target-headers.hmap -I/Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/build/HPSDR.build/Release-iphoneos/HPSDR.build/HPSDR-all-target-headers.hmap -iquote /Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/build/HPSDR.build/Release-iphoneos/HPSDR.build/HPSDR-project-headers.hmap -F/Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/build/Release-iphoneos -I/Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/build/Release-iphoneos/include -I/Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/build/HPSDR.build/Release-iphoneos/HPSDR.build/DerivedSources/armv6 -I/Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/build/HPSDR.build/Release-iphoneos/HPSDR.build/DerivedSources -c /Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/HPSDR_Prefix.pch -o /var/folders/a-/a-Pvj-ZCGDuhe7wpL7Ciqk+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/HPSDR_Prefix-bvhczmahtvoacccmjizlqtiqxdfq/HPSDR_Prefix.pch.gch0#
-
-CProcessPCH /var/folders/a-/a-Pvj-ZCGDuhe7wpL7Ciqk+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/HPSDR_Prefix-dprvehxaymbzogbidseintbzcaun/HPSDR_Prefix.pch.gch HPSDR_Prefix.pch normal armv6 c com.apple.compilers.gcc.4_2
-s287659443.368395
-e287659443.811438
-r1
-xProcessPCH
-x/var/folders/a-/a-Pvj-ZCGDuhe7wpL7Ciqk+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/HPSDR_Prefix-dprvehxaymbzogbidseintbzcaun/HPSDR_Prefix.pch.gch
-xHPSDR_Prefix.pch
-xnormal
-xarmv6
-xc
-xcom.apple.compilers.gcc.4_2
-lSLF07#2@27"Precompile HPSDR_Prefix.pch287659443#287659443#0(0"0(0#0#67"/Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/HPSDR_Prefix.pch4300885448#1727"    cd /Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR    setenv LANG en_US.US-ASCII    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    /Developer/Platforms/iPhoneOS.platform/Developer/usr/bin/gcc-4.2 -x c-header -arch armv6 -fmessage-length=0 -pipe -std=c99 -Wno-trigraphs -fpascal-strings -Os -mdynamic-no-pic -Wreturn-type -Wunused-variable -isysroot /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS3.0.sdk -fvisibility=hidden -gdwarf-2 -mthumb -miphoneos-version-min=3.0 -iquote /Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/build/HPSDR.build/Release-iphoneos/HPSDR.build/HPSDR-generated-files.hmap -I/Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/build/HPSDR.build/Release-iphoneos/HPSDR.build/HPSDR-own-target-headers.hmap -I/Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/build/HPSDR.build/Release-iphoneos/HPSDR.build/HPSDR-all-target-headers.hmap -iquote /Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/build/HPSDR.build/Release-iphoneos/HPSDR.build/HPSDR-project-headers.hmap -F/Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/build/Release-iphoneos -I/Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/build/Release-iphoneos/include -I/Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/build/HPSDR.build/Release-iphoneos/HPSDR.build/DerivedSources/armv6 -I/Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/build/HPSDR.build/Release-iphoneos/HPSDR.build/DerivedSources -c /Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/HPSDR_Prefix.pch -o /var/folders/a-/a-Pvj-ZCGDuhe7wpL7Ciqk+++TI/-Caches-/com.apple.Xcode.501/SharedPrecompiledHeaders/HPSDR_Prefix-dprvehxaymbzogbidseintbzcaun/HPSDR_Prefix.pch.gch0#
-
-CProcessProductPackaging "/Users/jm57878/Library/MobileDevice/Provisioning Profiles/5EB84E6E-3B61-4015-A1E5-89E942B54E58.mobileprovision" /Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/build/Release-iphoneos/HPSDR.app/embedded.mobileprovision
-s287659445.127807
-e287659445.129667
-r1
-xProcessProductPackaging
-x/Users/jm57878/Library/MobileDevice/Provisioning Profiles/5EB84E6E-3B61-4015-A1E5-89E942B54E58.mobileprovision
-x/Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/build/Release-iphoneos/HPSDR.app/embedded.mobileprovision
-lSLF07#2@194"ProcessProductPackaging "/Users/jm57878/Library/MobileDevice/Provisioning Profiles/5EB84E6E-3B61-4015-A1E5-89E942B54E58.mobileprovision" build/Release-iphoneos/HPSDR.app/embedded.mobileprovision287659445#287659445#0(0"0(0#0#108"/Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/build/Release-iphoneos/HPSDR.app/embedded.mobileprovision4300885448#449"    cd /Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    <com.apple.tools.product-pkg-utility> "/Users/jm57878/Library/MobileDevice/Provisioning Profiles/5EB84E6E-3B61-4015-A1E5-89E942B54E58.mobileprovision" -o /Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/build/Release-iphoneos/HPSDR.app/embedded.mobileprovision0#
-
-CProcessProductPackaging /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS3.0.sdk/Entitlements.plist /Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/build/HPSDR.build/Release-iphoneos/HPSDR.build/HPSDR.xcent
-s287659445.129849
-e287659445.151927
-r1
-xProcessProductPackaging
-x/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS3.0.sdk/Entitlements.plist
-x/Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/build/HPSDR.build/Release-iphoneos/HPSDR.build/HPSDR.xcent
-lSLF07#2@171"ProcessProductPackaging /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS3.0.sdk/Entitlements.plist build/HPSDR.build/Release-iphoneos/HPSDR.build/HPSDR.xcent287659445#287659445#0(0"0(0#0#109"/Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/build/HPSDR.build/Release-iphoneos/HPSDR.build/HPSDR.xcent4300885448#452"    cd /Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR    setenv PATH "/Developer/Platforms/iPhoneOS.platform/Developer/usr/bin:/Developer/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin"    <com.apple.tools.product-pkg-utility> /Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS3.0.sdk/Entitlements.plist -entitlements -format xml -o /Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/build/HPSDR.build/Release-iphoneos/HPSDR.build/HPSDR.xcent0#
-
-CTouch /Users/jm57878/N6LYT/ghpsdr3/branches/iPhone/HPSDR/build/Release-iphoneos/HPSDR.app
-r0
-
