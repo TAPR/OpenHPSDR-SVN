@@ -29,6 +29,8 @@
 #include <math.h>
 #include <stdio.h>
 #include <stdlib.h>
+
+#include "screensize.h"
 #include "bandstack.h"
 #include "command.h"
 #include "transmit.h"
@@ -205,14 +207,18 @@ GtkWidget* buildTransmitUI() {
     gtk_widget_modify_bg(transmitFrame,GTK_STATE_NORMAL,&background);
     gtk_widget_modify_fg(gtk_frame_get_label_widget(GTK_FRAME(transmitFrame)),GTK_STATE_NORMAL,&white);
 
+#ifdef NETBOOK
+    transmitTable=gtk_table_new(1,6,TRUE);
+#else
     transmitTable=gtk_table_new(1,8,TRUE);
+#endif
 
     // transmit settings
     buttonMOX = gtk_button_new_with_label ("MOX");
     gtk_widget_modify_bg(buttonMOX, GTK_STATE_NORMAL, &buttonBackground);
     label=gtk_bin_get_child((GtkBin*)buttonMOX);
     gtk_widget_modify_fg(label, GTK_STATE_NORMAL, &white);
-    gtk_widget_set_size_request(GTK_WIDGET(buttonMOX),50,25);
+    gtk_widget_set_size_request(GTK_WIDGET(buttonMOX),BUTTON_WIDTH,BUTTON_HEIGHT);
     g_signal_connect(G_OBJECT(buttonMOX),"clicked",G_CALLBACK(moxButtonCallback),NULL);
     gtk_widget_show(buttonMOX);
     gtk_table_attach_defaults(GTK_TABLE(transmitTable),buttonMOX,0,1,0,1);
@@ -222,7 +228,7 @@ GtkWidget* buildTransmitUI() {
     gtk_widget_modify_bg(buttonTune, GTK_STATE_NORMAL, &buttonBackground);
     label=gtk_bin_get_child((GtkBin*)buttonTune);
     gtk_widget_modify_fg(label, GTK_STATE_NORMAL, &white);
-    gtk_widget_set_size_request(GTK_WIDGET(buttonTune),50,25);
+    gtk_widget_set_size_request(GTK_WIDGET(buttonTune),BUTTON_WIDTH,BUTTON_HEIGHT);
     g_signal_connect(G_OBJECT(buttonTune),"clicked",G_CALLBACK(tuneButtonCallback),NULL);
     gtk_widget_show(buttonTune);
     gtk_table_attach_defaults(GTK_TABLE(transmitTable),buttonTune,1,2,0,1);
@@ -237,11 +243,19 @@ GtkWidget* buildTransmitUI() {
 
     g_signal_connect(G_OBJECT(rfGainScale),"value-changed",G_CALLBACK(rfGainChanged),NULL);
     gtk_range_set_value((GtkRange*)rfGainScale,rfGain);
+#ifdef NETBOOK
+    gtk_widget_set_size_request(GTK_WIDGET(rfGainScale),80,37);
+#else
     gtk_widget_set_size_request(GTK_WIDGET(rfGainScale),150,30);
+#endif
     gtk_widget_show(rfGainScale);
     gtk_container_add(GTK_CONTAINER(rfGainFrame),rfGainScale);
     gtk_widget_show(rfGainFrame);
+#ifdef NETBOOK
+    gtk_table_attach_defaults(GTK_TABLE(transmitTable),rfGainFrame,2,4,0,1);
+#else
     gtk_table_attach_defaults(GTK_TABLE(transmitTable),rfGainFrame,2,5,0,1);
+#endif
 
     // mic gain
 
@@ -253,11 +267,19 @@ GtkWidget* buildTransmitUI() {
 
     g_signal_connect(G_OBJECT(micGainScale),"value-changed",G_CALLBACK(micGainChanged),NULL);
     gtk_range_set_value((GtkRange*)micGainScale,micGain);
+#ifdef NETBOOK
+    gtk_widget_set_size_request(GTK_WIDGET(micGainScale),80,37);
+#else
     gtk_widget_set_size_request(GTK_WIDGET(micGainScale),150,30);
+#endif
     gtk_widget_show(micGainScale);
     gtk_container_add(GTK_CONTAINER(micGainFrame),micGainScale);
     gtk_widget_show(micGainFrame);
+#ifdef NETBOOK
+    gtk_table_attach_defaults(GTK_TABLE(transmitTable),micGainFrame,4,6,0,1);
+#else
     gtk_table_attach_defaults(GTK_TABLE(transmitTable),micGainFrame,5,8,0,1);
+#endif
 
     gtk_container_add(GTK_CONTAINER(transmitFrame),transmitTable);
     gtk_widget_show(transmitTable);

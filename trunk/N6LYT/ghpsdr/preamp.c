@@ -28,6 +28,8 @@
 #include <gtk/gtk.h>
 #include <math.h>
 #include <stdio.h>
+
+#include "screensize.h"
 #include "bandstack.h"
 #include "command.h"
 #include "preamp.h"
@@ -91,7 +93,7 @@ GtkWidget* buildPreampUI() {
     gtk_widget_modify_bg(buttonOn, GTK_STATE_NORMAL, &buttonBackground);
     label=gtk_bin_get_child((GtkBin*)buttonOn);
     gtk_widget_modify_fg(label, GTK_STATE_NORMAL, &white);
-    gtk_widget_set_size_request(GTK_WIDGET(buttonOn),50,25);
+    gtk_widget_set_size_request(GTK_WIDGET(buttonOn),BUTTON_WIDTH,BUTTON_HEIGHT);
     g_signal_connect(G_OBJECT(buttonOn),"clicked",G_CALLBACK(preampButtonCallback),NULL);
     gtk_widget_show(buttonOn);
     gtk_table_attach_defaults(GTK_TABLE(preampTable),buttonOn,0,1,0,1);

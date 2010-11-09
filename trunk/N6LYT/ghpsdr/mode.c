@@ -35,6 +35,7 @@
 #include <math.h>
 #include <getopt.h>
 
+#include "screensize.h"
 #include "bandstack.h"
 #include "command.h"
 #include "cw.h"
@@ -210,7 +211,7 @@ GtkWidget* buildModeUI() {
     gtk_widget_modify_bg(buttonLSB, GTK_STATE_NORMAL, &buttonBackground);
     label=gtk_bin_get_child((GtkBin*)buttonLSB);
     gtk_widget_modify_fg(label, GTK_STATE_NORMAL, &white);
-    gtk_widget_set_size_request(GTK_WIDGET(buttonLSB),50,25);
+    gtk_widget_set_size_request(GTK_WIDGET(buttonLSB),BUTTON_WIDTH,BUTTON_HEIGHT);
     g_signal_connect(G_OBJECT(buttonLSB),"clicked",G_CALLBACK(modeCallback),NULL);
     gtk_widget_show(buttonLSB);
     gtk_table_attach_defaults(GTK_TABLE(modeTable),buttonLSB,0,1,0,1);
@@ -219,7 +220,7 @@ GtkWidget* buildModeUI() {
     gtk_widget_modify_bg(buttonUSB, GTK_STATE_NORMAL, &buttonBackground);
     label=gtk_bin_get_child((GtkBin*)buttonUSB);
     gtk_widget_modify_fg(label, GTK_STATE_NORMAL, &white);
-    gtk_widget_set_size_request(GTK_WIDGET(buttonUSB),50,25);
+    gtk_widget_set_size_request(GTK_WIDGET(buttonUSB),BUTTON_WIDTH,BUTTON_HEIGHT);
     g_signal_connect(G_OBJECT(buttonUSB),"clicked",G_CALLBACK(modeCallback),NULL);
     gtk_widget_show(buttonUSB);
     gtk_table_attach_defaults(GTK_TABLE(modeTable),buttonUSB,0,1,1,2);
@@ -228,7 +229,7 @@ GtkWidget* buildModeUI() {
     gtk_widget_modify_bg(buttonCWL, GTK_STATE_NORMAL, &buttonBackground);
     label=gtk_bin_get_child((GtkBin*)buttonCWL);
     gtk_widget_modify_fg(label, GTK_STATE_NORMAL, &white);
-    gtk_widget_set_size_request(GTK_WIDGET(buttonCWL),50,25);
+    gtk_widget_set_size_request(GTK_WIDGET(buttonCWL),BUTTON_WIDTH,BUTTON_HEIGHT);
     g_signal_connect(G_OBJECT(buttonCWL),"clicked",G_CALLBACK(modeCallback),NULL);
     gtk_widget_show(buttonCWL);
     gtk_table_attach_defaults(GTK_TABLE(modeTable),buttonCWL,1,2,0,1);
@@ -237,7 +238,7 @@ GtkWidget* buildModeUI() {
     gtk_widget_modify_bg(buttonCWU, GTK_STATE_NORMAL, &buttonBackground);
     label=gtk_bin_get_child((GtkBin*)buttonCWU);
     gtk_widget_modify_fg(label, GTK_STATE_NORMAL, &white);
-    gtk_widget_set_size_request(GTK_WIDGET(buttonCWU),50,25);
+    gtk_widget_set_size_request(GTK_WIDGET(buttonCWU),BUTTON_WIDTH,BUTTON_HEIGHT);
     g_signal_connect(G_OBJECT(buttonCWU),"clicked",G_CALLBACK(modeCallback),NULL);
     gtk_widget_show(buttonCWU);
     gtk_table_attach_defaults(GTK_TABLE(modeTable),buttonCWU,1,2,1,2);
@@ -246,7 +247,7 @@ GtkWidget* buildModeUI() {
     gtk_widget_modify_bg(buttonDSB, GTK_STATE_NORMAL, &buttonBackground);
     label=gtk_bin_get_child((GtkBin*)buttonDSB);
     gtk_widget_modify_fg(label, GTK_STATE_NORMAL, &white);
-    gtk_widget_set_size_request(GTK_WIDGET(buttonDSB),50,25);
+    gtk_widget_set_size_request(GTK_WIDGET(buttonDSB),BUTTON_WIDTH,BUTTON_HEIGHT);
     g_signal_connect(G_OBJECT(buttonDSB),"clicked",G_CALLBACK(modeCallback),NULL);
     gtk_widget_show(buttonDSB);
     gtk_table_attach_defaults(GTK_TABLE(modeTable),buttonDSB,0,1,2,3);
@@ -256,7 +257,7 @@ GtkWidget* buildModeUI() {
     gtk_widget_modify_bg(buttonFMN, GTK_STATE_NORMAL, &buttonBackground);
     label=gtk_bin_get_child((GtkBin*)buttonFMN);
     gtk_widget_modify_fg(label, GTK_STATE_NORMAL, &white);
-    gtk_widget_set_size_request(GTK_WIDGET(buttonFMN),50,25);
+    gtk_widget_set_size_request(GTK_WIDGET(buttonFMN),BUTTON_WIDTH,BUTTON_HEIGHT);
     g_signal_connect(G_OBJECT(buttonFMN),"clicked",G_CALLBACK(modeCallback),NULL);
     gtk_widget_show(buttonFMN);
     gtk_table_attach_defaults(GTK_TABLE(modeTable),buttonFMN,3,4,2,3);
@@ -265,7 +266,7 @@ GtkWidget* buildModeUI() {
     gtk_widget_modify_bg(buttonAM, GTK_STATE_NORMAL, &buttonBackground);
     label=gtk_bin_get_child((GtkBin*)buttonAM);
     gtk_widget_modify_fg(label, GTK_STATE_NORMAL, &white);
-    gtk_widget_set_size_request(GTK_WIDGET(buttonAM),50,25);
+    gtk_widget_set_size_request(GTK_WIDGET(buttonAM),BUTTON_WIDTH,BUTTON_HEIGHT);
     g_signal_connect(G_OBJECT(buttonAM),"clicked",G_CALLBACK(modeCallback),NULL);
     gtk_widget_show(buttonAM);
     gtk_table_attach_defaults(GTK_TABLE(modeTable),buttonAM,3,4,0,1);
@@ -274,7 +275,7 @@ GtkWidget* buildModeUI() {
     gtk_widget_modify_bg(buttonSAM, GTK_STATE_NORMAL, &buttonBackground);
     label=gtk_bin_get_child((GtkBin*)buttonSAM);
     gtk_widget_modify_fg(label, GTK_STATE_NORMAL, &white);
-    gtk_widget_set_size_request(GTK_WIDGET(buttonSAM),50,25);
+    gtk_widget_set_size_request(GTK_WIDGET(buttonSAM),BUTTON_WIDTH,BUTTON_HEIGHT);
     g_signal_connect(G_OBJECT(buttonSAM),"clicked",G_CALLBACK(modeCallback),NULL);
     gtk_widget_show(buttonSAM);
     gtk_table_attach_defaults(GTK_TABLE(modeTable),buttonSAM,3,4,1,2);
@@ -283,7 +284,7 @@ GtkWidget* buildModeUI() {
     gtk_widget_modify_bg(buttonDIGL, GTK_STATE_NORMAL, &buttonBackground);
     label=gtk_bin_get_child((GtkBin*)buttonDIGL);
     gtk_widget_modify_fg(label, GTK_STATE_NORMAL, &white);
-    gtk_widget_set_size_request(GTK_WIDGET(buttonDIGL),50,25);
+    gtk_widget_set_size_request(GTK_WIDGET(buttonDIGL),BUTTON_WIDTH,BUTTON_HEIGHT);
     g_signal_connect(G_OBJECT(buttonDIGL),"clicked",G_CALLBACK(modeCallback),NULL);
     gtk_widget_show(buttonDIGL);
     gtk_table_attach_defaults(GTK_TABLE(modeTable),buttonDIGL,2,3,0,1);
@@ -292,7 +293,7 @@ GtkWidget* buildModeUI() {
     gtk_widget_modify_bg(buttonDIGU, GTK_STATE_NORMAL, &buttonBackground);
     label=gtk_bin_get_child((GtkBin*)buttonDIGU);
     gtk_widget_modify_fg(label, GTK_STATE_NORMAL, &white);
-    gtk_widget_set_size_request(GTK_WIDGET(buttonDIGU),50,25);
+    gtk_widget_set_size_request(GTK_WIDGET(buttonDIGU),BUTTON_WIDTH,BUTTON_HEIGHT);
     g_signal_connect(G_OBJECT(buttonDIGU),"clicked",G_CALLBACK(modeCallback),NULL);
     gtk_widget_show(buttonDIGU);
     gtk_table_attach_defaults(GTK_TABLE(modeTable),buttonDIGU,2,3,1,2);
@@ -301,7 +302,7 @@ GtkWidget* buildModeUI() {
     gtk_widget_modify_bg(buttonSPEC, GTK_STATE_NORMAL, &buttonBackground);
     label=gtk_bin_get_child((GtkBin*)buttonSPEC);
     gtk_widget_modify_fg(label, GTK_STATE_NORMAL, &white);
-    gtk_widget_set_size_request(GTK_WIDGET(buttonSPEC),50,25);
+    gtk_widget_set_size_request(GTK_WIDGET(buttonSPEC),BUTTON_WIDTH,BUTTON_HEIGHT);
     g_signal_connect(G_OBJECT(buttonSPEC),"clicked",G_CALLBACK(modeCallback),NULL);
     gtk_widget_show(buttonSPEC);
     gtk_table_attach_defaults(GTK_TABLE(modeTable),buttonSPEC,1,2,2,3);
@@ -310,7 +311,7 @@ GtkWidget* buildModeUI() {
     gtk_widget_modify_bg(buttonDRM, GTK_STATE_NORMAL, &buttonBackground);
     label=gtk_bin_get_child((GtkBin*)buttonDRM);
     gtk_widget_modify_fg(label, GTK_STATE_NORMAL, &white);
-    gtk_widget_set_size_request(GTK_WIDGET(buttonDRM),50,25);
+    gtk_widget_set_size_request(GTK_WIDGET(buttonDRM),BUTTON_WIDTH,BUTTON_HEIGHT);
     g_signal_connect(G_OBJECT(buttonDRM),"clicked",G_CALLBACK(modeCallback),NULL);
     gtk_widget_show(buttonDRM);
     gtk_table_attach_defaults(GTK_TABLE(modeTable),buttonDRM,2,3,2,3);

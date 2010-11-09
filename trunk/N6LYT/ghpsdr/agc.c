@@ -37,6 +37,7 @@
 #include <math.h>
 #include <getopt.h>
 
+#include "screensize.h"
 #include "agc.h"
 #include "bandstack.h"
 #include "command.h"
@@ -152,7 +153,7 @@ GtkWidget* buildAgcUI() {
     gtk_widget_modify_bg(buttonSLOW, GTK_STATE_NORMAL, &buttonBackground);
     label=gtk_bin_get_child((GtkBin*)buttonSLOW);
     gtk_widget_modify_fg(label, GTK_STATE_NORMAL, &white);
-    gtk_widget_set_size_request(GTK_WIDGET(buttonSLOW),50,25);
+    gtk_widget_set_size_request(GTK_WIDGET(buttonSLOW),BUTTON_WIDTH,BUTTON_HEIGHT);
     g_signal_connect(G_OBJECT(buttonSLOW),"clicked",G_CALLBACK(agcCallback),NULL);
     gtk_widget_show(buttonSLOW);
     gtk_table_attach_defaults(GTK_TABLE(agcTable),buttonSLOW,0,1,0,1);
@@ -161,7 +162,7 @@ GtkWidget* buildAgcUI() {
     gtk_widget_modify_bg(buttonMEDIUM, GTK_STATE_NORMAL, &buttonBackground);
     label=gtk_bin_get_child((GtkBin*)buttonMEDIUM);
     gtk_widget_modify_fg(label, GTK_STATE_NORMAL, &white);
-    gtk_widget_set_size_request(GTK_WIDGET(buttonMEDIUM),50,25);
+    gtk_widget_set_size_request(GTK_WIDGET(buttonMEDIUM),BUTTON_WIDTH,BUTTON_HEIGHT);
     g_signal_connect(G_OBJECT(buttonMEDIUM),"clicked",G_CALLBACK(agcCallback),NULL);
     gtk_widget_show(buttonMEDIUM);
     gtk_table_attach_defaults(GTK_TABLE(agcTable),buttonMEDIUM,1,2,0,1);
@@ -170,7 +171,7 @@ GtkWidget* buildAgcUI() {
     gtk_widget_modify_bg(buttonFAST, GTK_STATE_NORMAL, &buttonBackground);
     label=gtk_bin_get_child((GtkBin*)buttonFAST);
     gtk_widget_modify_fg(label, GTK_STATE_NORMAL, &white);
-    gtk_widget_set_size_request(GTK_WIDGET(buttonFAST),50,25);
+    gtk_widget_set_size_request(GTK_WIDGET(buttonFAST),BUTTON_WIDTH,BUTTON_HEIGHT);
     g_signal_connect(G_OBJECT(buttonFAST),"clicked",G_CALLBACK(agcCallback),NULL);
     gtk_widget_show(buttonFAST);
     gtk_table_attach_defaults(GTK_TABLE(agcTable),buttonFAST,2,3,0,1);
@@ -179,7 +180,7 @@ GtkWidget* buildAgcUI() {
     gtk_widget_modify_bg(buttonLONG, GTK_STATE_NORMAL, &buttonBackground);
     label=gtk_bin_get_child((GtkBin*)buttonLONG);
     gtk_widget_modify_fg(label, GTK_STATE_NORMAL, &white);
-    gtk_widget_set_size_request(GTK_WIDGET(buttonLONG),50,25);
+    gtk_widget_set_size_request(GTK_WIDGET(buttonLONG),BUTTON_WIDTH,BUTTON_HEIGHT);
     g_signal_connect(G_OBJECT(buttonLONG),"clicked",G_CALLBACK(agcCallback),NULL);
     gtk_widget_show(buttonLONG);
     gtk_table_attach_defaults(GTK_TABLE(agcTable),buttonLONG,3,4,0,1);

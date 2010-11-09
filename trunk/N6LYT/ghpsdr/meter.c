@@ -35,6 +35,7 @@
 #include <string.h>
 #include <math.h>
 
+#include "screensize.h"
 #include "main.h"
 #include "meter.h"
 #include "meter_update.h"
@@ -290,9 +291,17 @@ void meterDbmDrawSignal() {
         pango_layout_set_width(layout,120*PANGO_SCALE);
         pango_layout_set_alignment(layout,PANGO_ALIGN_RIGHT);
         if(mox) {
+#ifdef NETBOOK
+            sprintf(temp,"<span foreground='#FF0000' background='#000000' font_desc='Sans Bold 8'>%0.3f Watts</span>",(float)forwardPower/5000.0);
+#else
             sprintf(temp,"<span foreground='#FF0000' background='#000000' font_desc='Sans Bold 12'>%0.3f Watts</span>",(float)forwardPower/5000.0);
+#endif
         } else {
+#ifdef NETBOOK
+            sprintf(temp,"<span foreground='#7AAA6E' background='#000000' font_desc='Sans Bold 8'>%d dBm    </span>",meterDbm);
+#else
             sprintf(temp,"<span foreground='#7AAA6E' background='#000000' font_desc='Sans Bold 12'>%d dBm    </span>",meterDbm);
+#endif
         }
         pango_layout_set_markup(layout,temp,-1);
         gdk_draw_layout(GDK_DRAWABLE(dbmPixmap),gc,20,0,layout);
@@ -414,7 +423,11 @@ GtkWidget* buildMeterUI() {
 
     // meter
     meter=gtk_drawing_area_new();
+#ifdef NETBOOK
+    gtk_widget_set_size_request(GTK_WIDGET(meter),145,28);
+#else
     gtk_widget_set_size_request(GTK_WIDGET(meter),160,30);
+#endif
     g_signal_connect(G_OBJECT (meter),"configure_event",G_CALLBACK(meter_configure_event),NULL);
     g_signal_connect(G_OBJECT (meter),"expose_event",G_CALLBACK(meter_expose_event),NULL);
     gtk_widget_show(meter);
@@ -422,13 +435,25 @@ GtkWidget* buildMeterUI() {
 
     // dbm
     dbm=gtk_drawing_area_new();
+#ifdef NETBOOK
+    gtk_widget_set_size_request(GTK_WIDGET(dbm),145,12);
+#else
     gtk_widget_set_size_request(GTK_WIDGET(dbm),160,20);
+#endif
     g_signal_connect(G_OBJECT (dbm),"configure_event",G_CALLBACK(dbm_configure_event),NULL);
     g_signal_connect(G_OBJECT (dbm),"expose_event",G_CALLBACK(dbm_expose_event),NULL);
     gtk_widget_show(dbm);
+#ifdef NETBOOK
+    gtk_fixed_put((GtkFixed*)meterFixed,dbm,0,228);
+#else
     gtk_fixed_put((GtkFixed*)meterFixed,dbm,0,30);
+#endif
 
+#ifdef NETBOOK
+    gtk_widget_set_size_request(GTK_WIDGET(meterFixed),145,40);
+#else
     gtk_widget_set_size_request(GTK_WIDGET(meterFixed),160,60);
+#endif
     gtk_widget_show(meterFixed);
 
     return meterFixed;

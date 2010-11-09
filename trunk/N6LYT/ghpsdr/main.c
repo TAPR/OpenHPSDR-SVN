@@ -97,6 +97,7 @@
 #include <math.h>
 #include <getopt.h>
 
+#include "screensize.h"
 #include "audio.h"
 #include "agc.h"
 #include "bandstack.h"
@@ -382,81 +383,153 @@ void buildMainUI() {
     gtk_widget_modify_bg(buttonExit, GTK_STATE_NORMAL, &buttonBackground);
     label=gtk_bin_get_child((GtkBin*)buttonExit);
     gtk_widget_modify_fg(label, GTK_STATE_NORMAL, &white);
-    gtk_widget_set_size_request(GTK_WIDGET(buttonExit),100,25);
+    gtk_widget_set_size_request(GTK_WIDGET(buttonExit),LARGE_BUTTON_WIDTH,BUTTON_HEIGHT);
     g_signal_connect(G_OBJECT(buttonExit),"clicked",G_CALLBACK(exitCallback),NULL);
     gtk_widget_show(buttonExit);
+#ifdef NETBOOK
+    gtk_fixed_put((GtkFixed*)mainFixed,buttonExit,2,0);
+#else
     gtk_fixed_put((GtkFixed*)mainFixed,buttonExit,5,0);
+#endif
 
     buttonSetup = gtk_button_new_with_label ("Setup");
     gtk_widget_modify_bg(buttonSetup, GTK_STATE_NORMAL, &buttonBackground);
     label=gtk_bin_get_child((GtkBin*)buttonSetup);
     gtk_widget_modify_fg(label, GTK_STATE_NORMAL, &white);
-    gtk_widget_set_size_request(GTK_WIDGET(buttonSetup),100,25);
+    gtk_widget_set_size_request(GTK_WIDGET(buttonSetup),LARGE_BUTTON_WIDTH,BUTTON_HEIGHT);
     g_signal_connect(G_OBJECT(buttonSetup),"clicked",G_CALLBACK(setupCallback),NULL);
     gtk_widget_show(buttonSetup);
+#ifdef NETBOOK
+    gtk_fixed_put((GtkFixed*)mainFixed,buttonSetup,82,0);
+#else
     gtk_fixed_put((GtkFixed*)mainFixed,buttonSetup,105,0);
+#endif
 
     // add the vfo window
     gtk_widget_show(vfoWindow);
+#ifdef NETBOOK
+    gtk_fixed_put((GtkFixed*)mainFixed,vfoWindow,164,0);
+#else
     gtk_fixed_put((GtkFixed*)mainFixed,vfoWindow,210,0);
+#endif
 
     // add the meter window
     gtk_widget_show(meterWindow);
+#ifdef NETBOOK
+    gtk_fixed_put((GtkFixed*)mainFixed,meterWindow,878,0);
+#else
     gtk_fixed_put((GtkFixed*)mainFixed,meterWindow,1010,0);
+#endif
 
     // add the band window
     gtk_widget_show(bandWindow);
+#ifdef NETBOOK
+    gtk_fixed_put((GtkFixed*)mainFixed,bandWindow,1,23);
+#else
     gtk_fixed_put((GtkFixed*)mainFixed,bandWindow,5,25);
+#endif
 
     // add the mode window
     gtk_widget_show(modeWindow);
+#ifdef NETBOOK
+    gtk_fixed_put((GtkFixed*)mainFixed,modeWindow,1,136);
+#else
     gtk_fixed_put((GtkFixed*)mainFixed,modeWindow,5,150);
+#endif
 
     // add the filter window
     gtk_widget_show(filterWindow);
+#ifdef NETBOOK
+    gtk_fixed_put((GtkFixed*)mainFixed,filterWindow,1,230);
+#else
     gtk_fixed_put((GtkFixed*)mainFixed,filterWindow,5,250);
+#endif
 
     // add the audio window
     gtk_widget_show(audioWindow);
+#ifdef NETBOOK
+    gtk_fixed_put((GtkFixed*)mainFixed,audioWindow,1,368);
+#else
     gtk_fixed_put((GtkFixed*)mainFixed,audioWindow,5,400);
+#endif
 
     // add the agc window
     gtk_widget_show(agcWindow);
+#ifdef NETBOOK
+    gtk_fixed_put((GtkFixed*)mainFixed,agcWindow,1,437);
+#else
     gtk_fixed_put((GtkFixed*)mainFixed,agcWindow,5,475);
+#endif
 
     // add the preamp window
     gtk_widget_show(preampWindow);
+#ifdef NETBOOK
+    gtk_fixed_put((GtkFixed*)mainFixed,preampWindow,1,483);
+#else
     gtk_fixed_put((GtkFixed*)mainFixed,preampWindow,5,525);
+#endif
 
     // add the volume window
     gtk_widget_show(volumeWindow);
+#ifdef NETBOOK
+    gtk_fixed_put((GtkFixed*)mainFixed,volumeWindow,164,483);
+#else
     gtk_fixed_put((GtkFixed*)mainFixed,volumeWindow,5,575);
+#endif
 
     // add the receiver window
     gtk_widget_show(receiverWindow);
+#ifdef NETBOOK
+    gtk_fixed_put((GtkFixed*)mainFixed,receiverWindow,254,483);
+#else
     gtk_fixed_put((GtkFixed*)mainFixed,receiverWindow,5,635);
+#endif
 
 
     // add the display window
     gtk_widget_show(displayWindow);
+#ifdef NETBOOK
+    gtk_fixed_put((GtkFixed*)mainFixed,displayWindow,164,40);
+#else
     gtk_fixed_put((GtkFixed*)mainFixed,displayWindow,210,50);
+#endif
 
 
     // add the bandscope display
     gtk_widget_show(bandscopeWindow);
+#ifdef NETBOOK
+    gtk_fixed_put((GtkFixed*)mainFixed,bandscopeWindow,164,364);
+#else
     gtk_fixed_put((GtkFixed*)mainFixed,bandscopeWindow,210,475);
+#endif
     gtk_widget_show(bandscope_controlWindow);
+#ifdef NETBOOK
+    gtk_fixed_put((GtkFixed*)mainFixed,bandscope_controlWindow,164,454);
+#else
     gtk_fixed_put((GtkFixed*)mainFixed,bandscope_controlWindow,210,575);
+#endif
 
     // add the transmit window
     gtk_widget_show(transmitWindow);
+#ifdef NETBOOK
+    gtk_fixed_put((GtkFixed*)mainFixed,transmitWindow,344,483);
+#else
     gtk_fixed_put((GtkFixed*)mainFixed,transmitWindow,210,625);
+#endif
 
     // add the subrx window
     gtk_widget_show(subrxWindow);
+#ifdef NETBOOK
+    gtk_fixed_put((GtkFixed*)mainFixed,subrxWindow,616,483);
+#else
     gtk_fixed_put((GtkFixed*)mainFixed,subrxWindow,710,575);
+#endif
 
+#ifdef NETBOOK
+    gtk_widget_set_size_request(GTK_WIDGET(mainFixed),1024,576);
+#else
     gtk_widget_set_size_request(GTK_WIDGET(mainFixed),1180,700);
+#endif
     gtk_widget_show(mainFixed);
     gtk_container_add(GTK_CONTAINER(mainWindow), mainFixed);
 

@@ -24,9 +24,15 @@
 * 
 */
 
+#include "screensize.h"
 
+#ifdef NETBOOK
+#define bandscopeWIDTH 857
+#define bandscopeHEIGHT 90
+#else
 #define bandscopeWIDTH 960
 #define bandscopeHEIGHT 100
+#endif
 
 #define BANDSCOPE_BUFFER_SIZE 4096
 #define BANDSCOPE_MULTIPLIER 2
