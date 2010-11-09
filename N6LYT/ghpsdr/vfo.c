@@ -35,6 +35,7 @@
 #include <math.h>
 #include <getopt.h>
 
+#include "screensize.h"
 #include "command.h"
 #include "dttsp.h"
 #include "main.h"
@@ -123,7 +124,11 @@ void updateVfoADisplay() {
         layout = pango_layout_new (context);
         pango_layout_set_width(layout,vfoAFrequency->allocation.width*PANGO_SCALE);
         pango_layout_set_alignment(layout,PANGO_ALIGN_RIGHT);
+#ifdef NETBOOK
+        sprintf(temp,"<span foreground='%s' background='#2C2C2C' font_desc='Sans Bold 12'>% 7lld.%03lld.%03lld </span>",aTransmitting?"#FF0000":"#00FF00",frequencyA/1000000LL,(frequencyA%1000000LL)/1000LL,frequencyA%1000LL);
+#else
         sprintf(temp,"<span foreground='%s' background='#2C2C2C' font_desc='Sans Bold 24'>% 7lld.%03lld.%03lld </span>",aTransmitting?"#FF0000":"#00FF00",frequencyA/1000000LL,(frequencyA%1000000LL)/1000LL,frequencyA%1000LL);
+#endif
         pango_layout_set_markup(layout,temp,-1);
         gdk_draw_layout(GDK_DRAWABLE(vfoAPixmap),gc,0,0,layout);
 
@@ -172,7 +177,11 @@ void updateVfoBDisplay() {
         layout = pango_layout_new (context);
         pango_layout_set_width(layout,vfoBFrequency->allocation.width*PANGO_SCALE);
         pango_layout_set_alignment(layout,PANGO_ALIGN_RIGHT);
+#ifdef NETBOOK
+        sprintf(temp,"<span foreground='%s' background='#2C2C2C' font_desc='Sans Bold 12'>% 7lld.%03lld.%03lld </span>",bTransmitting?"#FF0000":"#C0C0C0",frequencyB/1000000LL,(frequencyB%1000000LL)/1000LL,frequencyB%1000LL);
+#else
         sprintf(temp,"<span foreground='%s' background='#2C2C2C' font_desc='Sans Bold 24'>% 7lld.%03lld.%03lld </span>",bTransmitting?"#FF0000":"#C0C0C0",frequencyB/1000000LL,(frequencyB%1000000LL)/1000LL,frequencyB%1000LL);
+#endif
 
         pango_layout_set_markup(layout,temp,-1);
         gdk_draw_layout(GDK_DRAWABLE(vfoBPixmap),gc,0,0,layout);
@@ -225,7 +234,11 @@ gboolean vfoAFrequency_configure_event(GtkWidget* widget,GdkEventConfigure* even
     layout = pango_layout_new(context);
     pango_layout_set_width(layout,widget->allocation.width*PANGO_SCALE);
     pango_layout_set_alignment(layout,PANGO_ALIGN_RIGHT);
+#ifdef NETBOOK
+    sprintf(temp,"<span foreground='%s' background='#2C2C2C' font_desc='Sans Bold 12'>% 7lld.%03lld.%03lld </span>",aTransmitting?"#FF0000":"#00FF00",frequencyA/1000000LL,(frequencyA%1000000LL)/1000LL,frequencyA%1000LL);
+#else
     sprintf(temp,"<span foreground='%s' background='#2C2C2C' font_desc='Sans Bold 24'>% 7lld.%03lld.%03lld </span>",aTransmitting?"#FF0000":"#00FF00",frequencyA/1000000LL,(frequencyA%1000000LL)/1000LL,frequencyA%1000LL);
+#endif
     pango_layout_set_markup(layout,temp,-1);
     gdk_draw_layout(GDK_DRAWABLE(vfoAPixmap),gc,0,0,layout);
 
@@ -295,7 +308,12 @@ gboolean vfoBFrequency_configure_event(GtkWidget* widget,GdkEventConfigure* even
     layout = pango_layout_new (context);
     pango_layout_set_width(layout,widget->allocation.width*PANGO_SCALE);
     pango_layout_set_alignment(layout,PANGO_ALIGN_RIGHT);
+#ifdef NETBOOK
+    sprintf(temp,"<span foreground='#C0C0C0' background='#2C2C2C' font_desc='Sans Bold 12'>% 7lld.%03lld.%03lld </span>",frequencyB/1000000LL,(frequencyB%1000000LL)/1000LL,frequencyB%1000LL);
+#else
     sprintf(temp,"<span foreground='#C0C0C0' background='#2C2C2C' font_desc='Sans Bold 24'>% 7lld.%03lld.%03lld </span>",frequencyB/1000000LL,(frequencyB%1000000LL)/1000LL,frequencyB%1000LL);
+#endif
+
     pango_layout_set_markup(layout,temp,-1);
     gdk_draw_layout(GDK_DRAWABLE(vfoBPixmap),gc,0,0,layout);
 
@@ -844,9 +862,17 @@ GtkWidget* buildVfoUI() {
     label=gtk_frame_get_label_widget((GtkFrame*)vfoAFrame);
     gtk_widget_modify_fg(label, GTK_STATE_NORMAL, &white);
     
+#ifdef NETBOOK
+    gtk_widget_set_size_request(GTK_WIDGET(vfoAFrame),258,40);
+#else
     gtk_widget_set_size_request(GTK_WIDGET(vfoAFrame),300,50);
+#endif
     vfoAFrequency=gtk_drawing_area_new();
+#ifdef NETBOOK
+    gtk_widget_set_size_request(GTK_WIDGET(vfoAFrequency),240,35);
+#else
     gtk_widget_set_size_request(GTK_WIDGET(vfoAFrequency),250,35);
+#endif
     g_signal_connect(G_OBJECT (vfoAFrequency),"configure_event",G_CALLBACK(vfoAFrequency_configure_event),NULL);
     g_signal_connect(G_OBJECT (vfoAFrequency),"expose_event",G_CALLBACK(vfoAFrequency_expose_event),NULL);
     g_signal_connect(G_OBJECT(vfoAFrequency),"scroll_event",G_CALLBACK(frequency_scroll_event),NULL);
@@ -860,9 +886,17 @@ GtkWidget* buildVfoUI() {
     vfoBFrame=gtk_frame_new("VFO B");
     label=gtk_frame_get_label_widget((GtkFrame*)vfoBFrame);
     gtk_widget_modify_fg(label, GTK_STATE_NORMAL, &white);
+#ifdef NETBOOK
+    gtk_widget_set_size_request(GTK_WIDGET(vfoBFrame),258,40);
+#else
     gtk_widget_set_size_request(GTK_WIDGET(vfoBFrame),300,50);
+#endif
     vfoBFrequency=gtk_drawing_area_new();
+#ifdef NETBOOK
+    gtk_widget_set_size_request(GTK_WIDGET(vfoBFrequency),240,35);
+#else
     gtk_widget_set_size_request(GTK_WIDGET(vfoBFrequency),300,35);
+#endif
     g_signal_connect(G_OBJECT (vfoBFrequency),"configure_event",G_CALLBACK(vfoBFrequency_configure_event),NULL);
     g_signal_connect(G_OBJECT (vfoBFrequency),"expose_event",G_CALLBACK(vfoBFrequency_expose_event),NULL);
     g_signal_connect(G_OBJECT(vfoBFrequency),"scroll_event",G_CALLBACK(frequency_scroll_event),NULL);
@@ -870,7 +904,11 @@ GtkWidget* buildVfoUI() {
     gtk_widget_show(vfoBFrequency);
     gtk_widget_show(vfoBFrame);
     gtk_container_add((GtkContainer*)vfoBFrame,vfoBFrequency);
+#ifdef NETBOOK
+    gtk_fixed_put((GtkFixed*)vfoFixed,vfoBFrame,456,0);
+#else
     gtk_fixed_put((GtkFixed*)vfoFixed,vfoBFrame,500,0);
+#endif
 
     // vfo control
     vfoControlFrame=gtk_frame_new(NULL);
@@ -879,87 +917,163 @@ GtkWidget* buildVfoUI() {
     gtk_widget_modify_bg(buttonAtoB, GTK_STATE_NORMAL, &buttonBackground);
     label=gtk_bin_get_child((GtkBin*)buttonAtoB);
     gtk_widget_modify_fg(label, GTK_STATE_NORMAL, &white);
+#ifdef NETBOOK
+    gtk_widget_set_size_request(GTK_WIDGET(buttonAtoB),50,20);
+#else
     gtk_widget_set_size_request(GTK_WIDGET(buttonAtoB),45,25);
+#endif
     g_signal_connect(G_OBJECT(buttonAtoB),"clicked",G_CALLBACK(vfoCallback),NULL);
     gtk_widget_show(buttonAtoB);
+#ifdef NETBOOK
+    gtk_fixed_put((GtkFixed*)vfoFixed,buttonAtoB,258,0);
+#else
     gtk_fixed_put((GtkFixed*)vfoFixed,buttonAtoB,300,0);
+#endif
 
     buttonAswapB = gtk_button_new_with_label ("A<>B");
     gtk_widget_modify_bg(buttonAswapB, GTK_STATE_NORMAL, &buttonBackground);
     label=gtk_bin_get_child((GtkBin*)buttonAswapB);
     gtk_widget_modify_fg(label, GTK_STATE_NORMAL, &white);
+#ifdef NETBOOK
+    gtk_widget_set_size_request(GTK_WIDGET(buttonAswapB),49,20);
+#else
     gtk_widget_set_size_request(GTK_WIDGET(buttonAswapB),60,25);
+#endif
     g_signal_connect(G_OBJECT(buttonAswapB),"clicked",G_CALLBACK(vfoCallback),NULL);
     gtk_widget_show(buttonAswapB);
+#ifdef NETBOOK
+    gtk_fixed_put((GtkFixed*)vfoFixed,buttonAswapB,308,0);
+#else
     gtk_fixed_put((GtkFixed*)vfoFixed,buttonAswapB,345,0);
+#endif
 
     buttonBtoA = gtk_button_new_with_label ("A<B");
     gtk_widget_modify_bg(buttonBtoA, GTK_STATE_NORMAL, &buttonBackground);
     label=gtk_bin_get_child((GtkBin*)buttonBtoA);
     gtk_widget_modify_fg(label, GTK_STATE_NORMAL, &white);
+#ifdef NETBOOK
+    gtk_widget_set_size_request(GTK_WIDGET(buttonBtoA),49,20);
+#else
     gtk_widget_set_size_request(GTK_WIDGET(buttonBtoA),45,25);
+#endif
     g_signal_connect(G_OBJECT(buttonBtoA),"clicked",G_CALLBACK(vfoCallback),NULL);
     gtk_widget_show(buttonBtoA);
+#ifdef NETBOOK
+    gtk_fixed_put((GtkFixed*)vfoFixed,buttonBtoA,357,0);
+#else
     gtk_fixed_put((GtkFixed*)vfoFixed,buttonBtoA,405,0);
+#endif
 
     buttonSplit = gtk_button_new_with_label ("Split");
     gtk_widget_modify_bg(buttonSplit, GTK_STATE_NORMAL, &buttonBackground);
     label=gtk_bin_get_child((GtkBin*)buttonSplit);
     gtk_widget_modify_fg(label, GTK_STATE_NORMAL, &white);
+#ifdef NETBOOK
+    gtk_widget_set_size_request(GTK_WIDGET(buttonSplit),50,20);
+#else
     gtk_widget_set_size_request(GTK_WIDGET(buttonSplit),50,25);
+#endif
     g_signal_connect(G_OBJECT(buttonSplit),"clicked",G_CALLBACK(vfoCallback),NULL);
     gtk_widget_show(buttonSplit);
+#ifdef NETBOOK
+    gtk_fixed_put((GtkFixed*)vfoFixed,buttonSplit,406,0);
+#else
     gtk_fixed_put((GtkFixed*)vfoFixed,buttonSplit,450,0);
+#endif
 
     buttonFrequencyUp = gtk_button_new_with_label ("^");
     gtk_widget_modify_bg(buttonFrequencyUp, GTK_STATE_NORMAL, &buttonBackground);
     label=gtk_bin_get_child((GtkBin*)buttonFrequencyUp);
     gtk_widget_modify_fg(label, GTK_STATE_NORMAL, &white);
+#ifdef NETBOOK
+    gtk_widget_set_size_request(GTK_WIDGET(buttonFrequencyUp),30,20);
+#else
     gtk_widget_set_size_request(GTK_WIDGET(buttonFrequencyUp),30,25);
+#endif
     g_signal_connect(G_OBJECT(buttonFrequencyUp),"pressed",G_CALLBACK(frequencyUpCallback),NULL);
     g_signal_connect(G_OBJECT(buttonFrequencyUp),"released",G_CALLBACK(frequencyReleasedCallback),NULL);
     gtk_widget_show(buttonFrequencyUp);
+#ifdef NETBOOK
+    gtk_fixed_put((GtkFixed*)vfoFixed,buttonFrequencyUp,258,25);
+#else
     gtk_fixed_put((GtkFixed*)vfoFixed,buttonFrequencyUp,300,25);
+#endif
 
     buttonIncrementPlus = gtk_button_new_with_label ("+");
     gtk_widget_modify_bg(buttonIncrementPlus, GTK_STATE_NORMAL, &buttonBackground);
     label=gtk_bin_get_child((GtkBin*)buttonIncrementPlus);
     gtk_widget_modify_fg(label, GTK_STATE_NORMAL, &white);
+#ifdef NETBOOK
+    gtk_widget_set_size_request(GTK_WIDGET(buttonIncrementPlus),20,20);
+#else
     gtk_widget_set_size_request(GTK_WIDGET(buttonIncrementPlus),20,25);
+#endif
     g_signal_connect(G_OBJECT(buttonIncrementPlus),"clicked",G_CALLBACK(buttonIncrementPlusCallback),NULL);
     gtk_widget_show(buttonIncrementPlus);
+#ifdef NETBOOK
+    gtk_fixed_put((GtkFixed*)vfoFixed,buttonIncrementPlus,288,20);
+#else
     gtk_fixed_put((GtkFixed*)vfoFixed,buttonIncrementPlus,330,25);
+#endif
 
     incrementDisplay=gtk_drawing_area_new();
+#ifdef NETBOOK
+    gtk_widget_set_size_request(GTK_WIDGET(incrementDisplay),98,20);
+#else
     gtk_widget_set_size_request(GTK_WIDGET(incrementDisplay),100,25);
+#endif
     gtk_widget_show(incrementDisplay);
     g_signal_connect(G_OBJECT (incrementDisplay),"configure_event",G_CALLBACK(incrementDisplay_configure_event),NULL);
     g_signal_connect(G_OBJECT (incrementDisplay),"expose_event",G_CALLBACK(incrementDisplay_expose_event),NULL);
     g_signal_connect(G_OBJECT(incrementDisplay),"scroll_event",G_CALLBACK(increment_scroll_event),NULL);
     gtk_widget_set_events(incrementDisplay,GDK_EXPOSURE_MASK|GDK_SCROLL_MASK);
     gtk_widget_show(incrementDisplay);
+#ifdef NETBOOK
+    gtk_fixed_put((GtkFixed*)vfoFixed,incrementDisplay,308,20);
+#else
     gtk_fixed_put((GtkFixed*)vfoFixed,incrementDisplay,350,25);
+#endif
 
     buttonIncrementMinus = gtk_button_new_with_label ("-");
     gtk_widget_modify_bg(buttonIncrementMinus, GTK_STATE_NORMAL, &buttonBackground);
     label=gtk_bin_get_child((GtkBin*)buttonIncrementMinus);
     gtk_widget_modify_fg(label, GTK_STATE_NORMAL, &white);
+#ifdef NETBOOK
+    gtk_widget_set_size_request(GTK_WIDGET(buttonIncrementMinus),20,20);
+#else
     gtk_widget_set_size_request(GTK_WIDGET(buttonIncrementMinus),20,25);
+#endif
     g_signal_connect(G_OBJECT(buttonIncrementMinus),"clicked",G_CALLBACK(buttonIncrementMinusCallback),NULL);
     gtk_widget_show(buttonIncrementMinus);
+#ifdef NETBOOK
+    gtk_fixed_put((GtkFixed*)vfoFixed,buttonIncrementMinus,406,20);
+#else
     gtk_fixed_put((GtkFixed*)vfoFixed,buttonIncrementMinus,450,25);
+#endif
 
     buttonFrequencyDown = gtk_button_new_with_label ("v");
     gtk_widget_modify_bg(buttonFrequencyDown, GTK_STATE_NORMAL, &buttonBackground);
     label=gtk_bin_get_child((GtkBin*)buttonFrequencyDown);
     gtk_widget_modify_fg(label, GTK_STATE_NORMAL, &white);
+#ifdef NETBOOK
+    gtk_widget_set_size_request(GTK_WIDGET(buttonFrequencyDown),30,20);
+#else
     gtk_widget_set_size_request(GTK_WIDGET(buttonFrequencyDown),30,25);
+#endif
     g_signal_connect(G_OBJECT(buttonFrequencyDown),"pressed",G_CALLBACK(frequencyDownCallback),NULL);
     g_signal_connect(G_OBJECT(buttonFrequencyDown),"released",G_CALLBACK(frequencyReleasedCallback),NULL);
     gtk_widget_show(buttonFrequencyDown);
+#ifdef NETBOOK
+    gtk_fixed_put((GtkFixed*)vfoFixed,buttonFrequencyDown,426,20);
+#else
     gtk_fixed_put((GtkFixed*)vfoFixed,buttonFrequencyDown,470,25);
+#endif
 
+#ifdef NETBOOK
+    gtk_widget_set_size_request(GTK_WIDGET(vfoFixed),714,40);
+#else
     gtk_widget_set_size_request(GTK_WIDGET(vfoFixed),800,50);
+#endif
     gtk_widget_show(vfoFixed);
 
     return vfoFixed;

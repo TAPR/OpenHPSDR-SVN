@@ -36,6 +36,7 @@
 #include <getopt.h>
 #include "property.h"
 
+#include "screensize.h"
 #include "command.h"
 #include "dttsp.h"
 #include "main.h"
@@ -85,11 +86,19 @@ GtkWidget* buildVolumeUI() {
     volumeScale=gtk_hscale_new_with_range(0.0,100.0,10.0);
     g_signal_connect(G_OBJECT(volumeScale),"value-changed",G_CALLBACK(volumeChanged),NULL);
     gtk_range_set_value((GtkRange*)volumeScale,volume);
+#ifdef NETBOOK
+    gtk_widget_set_size_request(GTK_WIDGET(volumeScale),75,25);
+#else
     gtk_widget_set_size_request(GTK_WIDGET(volumeScale),150,25);
+#endif
     gtk_widget_show(volumeScale);
     gtk_container_add(GTK_CONTAINER(volumeFrame),volumeScale);
 
+#ifdef NETBOOK
+    gtk_widget_set_size_request(volumeFrame,89,70);
+#else
     gtk_widget_set_size_request(volumeFrame,200,55);
+#endif
     gtk_widget_show(volumeFrame);
 
     SetRXOutputGain(0,0,volume/100.0);

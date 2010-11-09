@@ -35,6 +35,7 @@
 #include <math.h>
 #include <getopt.h>
 
+#include "screensize.h"
 #include "xvtr.h"
 #include "band.h"
 #include "bandstack.h"
@@ -681,7 +682,7 @@ GtkWidget* buildBandUI() {
     gtk_widget_modify_bg(buttonBand1, GTK_STATE_NORMAL, &bandButtonBackground);
     label=gtk_bin_get_child((GtkBin*)buttonBand1);
     gtk_widget_modify_fg(label, GTK_STATE_NORMAL, &black);
-    gtk_widget_set_size_request(GTK_WIDGET(buttonBand1),50,25);
+    gtk_widget_set_size_request(GTK_WIDGET(buttonBand1),BUTTON_WIDTH,BUTTON_HEIGHT);
     g_signal_connect(G_OBJECT(buttonBand1),"clicked",G_CALLBACK(bandCallback),NULL);
     gtk_widget_show(buttonBand1);
     gtk_table_attach_defaults(GTK_TABLE(bandTable),buttonBand1,0,1,0,1);
@@ -690,7 +691,7 @@ GtkWidget* buildBandUI() {
     gtk_widget_modify_bg(buttonBand2, GTK_STATE_NORMAL, &bandButtonBackground);
     label=gtk_bin_get_child((GtkBin*)buttonBand2);
     gtk_widget_modify_fg(label, GTK_STATE_NORMAL, &black);
-    gtk_widget_set_size_request(GTK_WIDGET(buttonBand2),50,25);
+    gtk_widget_set_size_request(GTK_WIDGET(buttonBand2),BUTTON_WIDTH,BUTTON_HEIGHT);
     g_signal_connect(G_OBJECT(buttonBand2),"clicked",G_CALLBACK(bandCallback),NULL);
     gtk_widget_show(buttonBand2);
     gtk_table_attach_defaults(GTK_TABLE(bandTable),buttonBand2,1,2,0,1);
@@ -699,7 +700,7 @@ GtkWidget* buildBandUI() {
     gtk_widget_modify_bg(buttonBand3, GTK_STATE_NORMAL, &bandButtonBackground);
     label=gtk_bin_get_child((GtkBin*)buttonBand3);
     gtk_widget_modify_fg(label, GTK_STATE_NORMAL, &black);
-    gtk_widget_set_size_request(GTK_WIDGET(buttonBand3),50,25);
+    gtk_widget_set_size_request(GTK_WIDGET(buttonBand3),BUTTON_WIDTH,BUTTON_HEIGHT);
     g_signal_connect(G_OBJECT(buttonBand3),"clicked",G_CALLBACK(bandCallback),NULL);
     gtk_widget_show(buttonBand3);
     gtk_table_attach_defaults(GTK_TABLE(bandTable),buttonBand3,2,3,0,1);
@@ -708,7 +709,7 @@ GtkWidget* buildBandUI() {
     gtk_widget_modify_bg(buttonBand4, GTK_STATE_NORMAL, &bandButtonBackground);
     label=gtk_bin_get_child((GtkBin*)buttonBand4);
     gtk_widget_modify_fg(label, GTK_STATE_NORMAL, &black);
-    gtk_widget_set_size_request(GTK_WIDGET(buttonBand4),50,25);
+    gtk_widget_set_size_request(GTK_WIDGET(buttonBand4),BUTTON_WIDTH,BUTTON_HEIGHT);
     g_signal_connect(G_OBJECT(buttonBand4),"clicked",G_CALLBACK(bandCallback),NULL);
     gtk_widget_show(buttonBand4);
     gtk_table_attach_defaults(GTK_TABLE(bandTable),buttonBand4,3,4,0,1);
@@ -717,7 +718,7 @@ GtkWidget* buildBandUI() {
     gtk_widget_modify_bg(buttonBand5, GTK_STATE_NORMAL, &bandButtonBackground);
     label=gtk_bin_get_child((GtkBin*)buttonBand5);
     gtk_widget_modify_fg(label, GTK_STATE_NORMAL, &black);
-    gtk_widget_set_size_request(GTK_WIDGET(buttonBand5),50,25);
+    gtk_widget_set_size_request(GTK_WIDGET(buttonBand5),BUTTON_WIDTH,BUTTON_HEIGHT);
     g_signal_connect(G_OBJECT(buttonBand5),"clicked",G_CALLBACK(bandCallback),NULL);
     gtk_widget_show(buttonBand5);
     gtk_table_attach_defaults(GTK_TABLE(bandTable),buttonBand5,0,1,1,2);
@@ -726,7 +727,7 @@ GtkWidget* buildBandUI() {
     gtk_widget_modify_bg(buttonBand6, GTK_STATE_NORMAL, &bandButtonBackground);
     label=gtk_bin_get_child((GtkBin*)buttonBand6);
     gtk_widget_modify_fg(label, GTK_STATE_NORMAL, &black);
-    gtk_widget_set_size_request(GTK_WIDGET(buttonBand6),50,25);
+    gtk_widget_set_size_request(GTK_WIDGET(buttonBand6),BUTTON_WIDTH,BUTTON_HEIGHT);
     g_signal_connect(G_OBJECT(buttonBand6),"clicked",G_CALLBACK(bandCallback),NULL);
     gtk_widget_show(buttonBand6);
     gtk_table_attach_defaults(GTK_TABLE(bandTable),buttonBand6,1,2,1,2);
@@ -735,7 +736,7 @@ GtkWidget* buildBandUI() {
     gtk_widget_modify_bg(buttonBand7, GTK_STATE_NORMAL, &bandButtonBackground);
     label=gtk_bin_get_child((GtkBin*)buttonBand7);
     gtk_widget_modify_fg(label, GTK_STATE_NORMAL, &black);
-    gtk_widget_set_size_request(GTK_WIDGET(buttonBand7),50,25);
+    gtk_widget_set_size_request(GTK_WIDGET(buttonBand7),BUTTON_WIDTH,BUTTON_HEIGHT);
     g_signal_connect(G_OBJECT(buttonBand7),"clicked",G_CALLBACK(bandCallback),NULL);
     gtk_widget_show(buttonBand7);
     gtk_table_attach_defaults(GTK_TABLE(bandTable),buttonBand7,2,3,1,2);
@@ -744,7 +745,7 @@ GtkWidget* buildBandUI() {
     gtk_widget_modify_bg(buttonBand8, GTK_STATE_NORMAL, &bandButtonBackground);
     label=gtk_bin_get_child((GtkBin*)buttonBand8);
     gtk_widget_modify_fg(label, GTK_STATE_NORMAL, &black);
-    gtk_widget_set_size_request(GTK_WIDGET(buttonBand8),50,25);
+    gtk_widget_set_size_request(GTK_WIDGET(buttonBand8),BUTTON_WIDTH,BUTTON_HEIGHT);
     g_signal_connect(G_OBJECT(buttonBand8),"clicked",G_CALLBACK(bandCallback),NULL);
     gtk_widget_show(buttonBand8);
     gtk_table_attach_defaults(GTK_TABLE(bandTable),buttonBand8,3,4,1,2);
@@ -753,7 +754,7 @@ GtkWidget* buildBandUI() {
     gtk_widget_modify_bg(buttonBand9, GTK_STATE_NORMAL, &bandButtonBackground);
     label=gtk_bin_get_child((GtkBin*)buttonBand9);
     gtk_widget_modify_fg(label, GTK_STATE_NORMAL, &black);
-    gtk_widget_set_size_request(GTK_WIDGET(buttonBand9),50,25);
+    gtk_widget_set_size_request(GTK_WIDGET(buttonBand9),BUTTON_WIDTH,BUTTON_HEIGHT);
     g_signal_connect(G_OBJECT(buttonBand9),"clicked",G_CALLBACK(bandCallback),NULL);
     gtk_widget_show(buttonBand9);
     gtk_table_attach_defaults(GTK_TABLE(bandTable),buttonBand9,0,1,2,3);
@@ -762,7 +763,7 @@ GtkWidget* buildBandUI() {
     gtk_widget_modify_bg(buttonBand10, GTK_STATE_NORMAL, &bandButtonBackground);
     label=gtk_bin_get_child((GtkBin*)buttonBand10);
     gtk_widget_modify_fg(label, GTK_STATE_NORMAL, &black);
-    gtk_widget_set_size_request(GTK_WIDGET(buttonBand10),50,25);
+    gtk_widget_set_size_request(GTK_WIDGET(buttonBand10),BUTTON_WIDTH,BUTTON_HEIGHT);
     g_signal_connect(G_OBJECT(buttonBand10),"clicked",G_CALLBACK(bandCallback),NULL);
     gtk_widget_show(buttonBand10);
     gtk_table_attach_defaults(GTK_TABLE(bandTable),buttonBand10,1,2,2,3);
@@ -771,7 +772,7 @@ GtkWidget* buildBandUI() {
     gtk_widget_modify_bg(buttonBand11, GTK_STATE_NORMAL, &bandButtonBackground);
     label=gtk_bin_get_child((GtkBin*)buttonBand11);
     gtk_widget_modify_fg(label, GTK_STATE_NORMAL, &black);
-    gtk_widget_set_size_request(GTK_WIDGET(buttonBand11),50,25);
+    gtk_widget_set_size_request(GTK_WIDGET(buttonBand11),BUTTON_WIDTH,BUTTON_HEIGHT);
     g_signal_connect(G_OBJECT(buttonBand11),"clicked",G_CALLBACK(bandCallback),NULL);
     gtk_widget_show(buttonBand11);
     gtk_table_attach_defaults(GTK_TABLE(bandTable),buttonBand11,2,3,2,3);
@@ -780,7 +781,7 @@ GtkWidget* buildBandUI() {
     gtk_widget_modify_bg(buttonBand12, GTK_STATE_NORMAL, &bandButtonBackground);
     label=gtk_bin_get_child((GtkBin*)buttonBand12);
     gtk_widget_modify_fg(label, GTK_STATE_NORMAL, &black);
-    gtk_widget_set_size_request(GTK_WIDGET(buttonBand12),50,25);
+    gtk_widget_set_size_request(GTK_WIDGET(buttonBand12),BUTTON_WIDTH,BUTTON_HEIGHT);
     g_signal_connect(G_OBJECT(buttonBand12),"clicked",G_CALLBACK(bandCallback),NULL);
     gtk_widget_show(buttonBand12);
     gtk_table_attach_defaults(GTK_TABLE(bandTable),buttonBand12,3,4,2,3);
@@ -789,7 +790,7 @@ GtkWidget* buildBandUI() {
     gtk_widget_modify_bg(buttonBand13, GTK_STATE_NORMAL, &bandButtonBackground);
     label=gtk_bin_get_child((GtkBin*)buttonBand13);
     gtk_widget_modify_fg(label, GTK_STATE_NORMAL, &black);
-    gtk_widget_set_size_request(GTK_WIDGET(buttonBand13),50,25);
+    gtk_widget_set_size_request(GTK_WIDGET(buttonBand13),BUTTON_WIDTH,BUTTON_HEIGHT);
     g_signal_connect(G_OBJECT(buttonBand13),"clicked",G_CALLBACK(bandCallback),NULL);
     gtk_widget_show(buttonBand13);
     gtk_table_attach_defaults(GTK_TABLE(bandTable),buttonBand13,0,1,3,4);
@@ -798,7 +799,7 @@ GtkWidget* buildBandUI() {
     gtk_widget_modify_bg(buttonBand14, GTK_STATE_NORMAL, &bandButtonBackground);
     label=gtk_bin_get_child((GtkBin*)buttonBand14);
     gtk_widget_modify_fg(label, GTK_STATE_NORMAL, &black);
-    gtk_widget_set_size_request(GTK_WIDGET(buttonBand14),50,25);
+    gtk_widget_set_size_request(GTK_WIDGET(buttonBand14),BUTTON_WIDTH,BUTTON_HEIGHT);
     g_signal_connect(G_OBJECT(buttonBand14),"clicked",G_CALLBACK(bandCallback),NULL);
     gtk_widget_show(buttonBand14);
     gtk_table_attach_defaults(GTK_TABLE(bandTable),buttonBand14,1,2,3,4);

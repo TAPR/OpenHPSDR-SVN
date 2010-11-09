@@ -36,6 +36,7 @@
 #include <getopt.h>
 #include "property.h"
 
+#include "screensize.h"
 #include "command.h"
 #include "dttsp.h"
 #include "main.h"
@@ -87,11 +88,18 @@ GtkWidget* buildReceiverUI() {
     panScale=gtk_hscale_new_with_range(0.0,1.0,0.1);
     g_signal_connect(G_OBJECT(panScale),"value-changed",G_CALLBACK(panChanged),NULL);
     gtk_range_set_value((GtkRange*)panScale,pan);
+#ifdef NETBOOK
+    gtk_widget_set_size_request(GTK_WIDGET(panScale),75,25);
+#else
     gtk_widget_set_size_request(GTK_WIDGET(panScale),150,25);
+#endif
     gtk_widget_show(panScale);
     gtk_container_add(GTK_CONTAINER(receiverFrame),panScale);
-
+#ifdef NETBOOK
+    gtk_widget_set_size_request(GTK_WIDGET(receiverFrame),89,70);
+#else
     gtk_widget_set_size_request(GTK_WIDGET(receiverFrame),200,55);
+#endif
     gtk_widget_show(receiverFrame);
 
     SetRXPan(0,0,pan);

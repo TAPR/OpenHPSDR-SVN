@@ -1,11 +1,11 @@
-/** 
-* @file spectrum.h
-* @brief Header files for the spectrum functions
+/*
+* @file screensize.h
+* @brief  definition of netbbok screensize
 * @author John Melton, G0ORX/N6LYT, Doxygen Comments Dave Larsen, KV0S
 * @version 0.1
-* @date 2009-04-12
+* @date 2009-04-11
 */
-// spectrum.h
+// screensize.h
 
 /* Copyright (C) 
 * 2009 - John Melton, G0ORX/N6LYT, Doxygen Comments Dave Larsen, KV0S
@@ -25,37 +25,16 @@
 * 
 */
 
-#include "screensize.h"
-
-#define spectrumSPECTRUM 0
-#define spectrumPANADAPTER 1
-#define spectrumSCOPE 2
-#define spectrumPHASE 3
-#define spectrumPHASE2 4
-#define spectrumPANWATER 5
-#define spectrumHISTOGRAM 6
-#define spectrumNONE 7
+// netbook screen size changes from Erich Heinzle vk5hse
+// uncomment the following line to build to fit a netbook screen
+//#define NETBOOK
 
 #ifdef NETBOOK
-#define spectrumWIDTH 858
-#define spectrumHEIGHT 300
+#define BUTTON_WIDTH 40
+#define BUTTON_HEIGHT 23
+#define LARGE_BUTTON_WIDTH 80
 #else
-#define spectrumWIDTH 960
-#define spectrumHEIGHT 400
+#define BUTTON_WIDTH 50
+#define BUTTON_HEIGHT 25
+#define LARGE_BUTTON_WIDTH 100
 #endif
-
-int spectrumMAX;
-int spectrumMIN;
-int spectrumSTEP;
-
-float waterfallHighThreshold;
-float waterfallLowThreshold;
-
-int spectrumMode;
-gboolean spectrumAverage;
-float spectrumAverageSmoothing;
-
-GtkWidget* newSpectrumDisplay();
-void setSpectrumMode(int mode);
-void updateSpectrum(float* samples);
-

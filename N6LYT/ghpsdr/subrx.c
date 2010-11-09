@@ -29,6 +29,8 @@
 #include <math.h>
 #include <stdio.h>
 #include <stdlib.h>
+
+#include "screensize.h"
 #include "bandstack.h"
 #include "command.h"
 #include "subrx.h"
@@ -94,7 +96,11 @@ gboolean subrxFrequencyDisplayConfigure(GtkWidget* widget,GdkEventConfigure* eve
     layout = pango_layout_new(context);
     pango_layout_set_width(layout,widget->allocation.width*PANGO_SCALE);
     pango_layout_set_alignment(layout,PANGO_ALIGN_RIGHT);
+#ifdef NETBOOK
+    sprintf(temp,"<span foreground='%s' background='#2C2C2C' font_desc='Sans Bold 12'>% 7lld.%03lld.%03lld </span>",subrx?"#00FF00":"#C0C0C0",subrxFrequency/1000000LL,(subrxFrequency%1000000LL)/1000LL,subrxFrequency%1000LL);
+#else
     sprintf(temp,"<span foreground='%s' background='#2C2C2C' font_desc='Sans Bold 24'>% 7lld.%03lld.%03lld </span>",subrx?"#00FF00":"#C0C0C0",subrxFrequency/1000000LL,(subrxFrequency%1000000LL)/1000LL,subrxFrequency%1000LL);
+#endif
     pango_layout_set_markup(layout,temp,-1);
     gdk_draw_layout(GDK_DRAWABLE(subrxPixmap),gc,0,0,layout);
 
@@ -161,7 +167,11 @@ void updateSubrxDisplay() {
         layout = pango_layout_new (context);
         pango_layout_set_width(layout,subrxFrequencyDisplay->allocation.width*PANGO_SCALE);
         pango_layout_set_alignment(layout,PANGO_ALIGN_RIGHT);
+#ifdef NETBOOK
+        sprintf(temp,"<span foreground='%s' background='#2C2C2C' font_desc='Sans Bold 12'>% 7lld.%03lld.%03lld </span>",subrx?"#00FF00":"#C0C0C0",subrxFrequency/1000000LL,(subrxFrequency%1000000LL)/1000LL,subrxFrequency%1000LL);
+#else
         sprintf(temp,"<span foreground='%s' background='#2C2C2C' font_desc='Sans Bold 24'>% 7lld.%03lld.%03lld </span>",subrx?"#00FF00":"#C0C0C0",subrxFrequency/1000000LL,(subrxFrequency%1000000LL)/1000LL,subrxFrequency%1000LL);
+#endif
         pango_layout_set_markup(layout,temp,-1);
         gdk_draw_layout(GDK_DRAWABLE(subrxPixmap),gc,0,0,layout);
 
@@ -288,7 +298,11 @@ GtkWidget* buildSubRxUI() {
     gtk_widget_modify_bg(subrxFrame,GTK_STATE_NORMAL,&background);
     gtk_widget_modify_fg(gtk_frame_get_label_widget(GTK_FRAME(subrxFrame)),GTK_STATE_NORMAL,&white);
 
+#ifdef NETBOOK
+    subrxTable=gtk_table_new(1,9,TRUE);
+#else
     subrxTable=gtk_table_new(2,8,TRUE);
+#endif
 
     // subrx settings
 
@@ -299,7 +313,11 @@ GtkWidget* buildSubRxUI() {
     g_signal_connect(G_OBJECT(subrxFrequencyDisplay),"scroll_event",G_CALLBACK(subrx_frequency_scroll_event),NULL);
     gtk_widget_set_events(subrxFrequencyDisplay,GDK_EXPOSURE_MASK|GDK_SCROLL_MASK);
     gtk_widget_show(subrxFrequencyDisplay);
+#ifdef NETBOOK
+    gtk_table_attach_defaults(GTK_TABLE(subrxTable),subrxFrequencyDisplay,5,9,0,1);
+#else
     gtk_table_attach_defaults(GTK_TABLE(subrxTable),subrxFrequencyDisplay,1,8,0,1);
+#endif
 
 
     subrxEnabled = gtk_button_new_with_label ("SubRX");
@@ -314,7 +332,7 @@ GtkWidget* buildSubRxUI() {
         gtk_widget_modify_fg(label, GTK_STATE_PRELIGHT, &black);
     }
 
-    gtk_widget_set_size_request(GTK_WIDGET(subrxEnabled),50,25);
+    gtk_widget_set_size_request(GTK_WIDGET(subrxEnabled),BUTTON_WIDTH,BUTTON_HEIGHT);
     g_signal_connect(G_OBJECT(subrxEnabled),"clicked",G_CALLBACK(subrxEnabledButtonCallback),NULL);
     gtk_widget_show(subrxEnabled);
     gtk_table_attach_defaults(GTK_TABLE(subrxTable),subrxEnabled,0,1,0,1);
@@ -327,11 +345,19 @@ GtkWidget* buildSubRxUI() {
     subrxGainScale=gtk_hscale_new_with_range(0.0,100.0,10.0);
     g_signal_connect(G_OBJECT(subrxGainScale),"value-changed",G_CALLBACK(subrxGainChanged),NULL);
     gtk_range_set_value((GtkRange*)subrxGainScale,subrxGain);
+#ifdef NETBOOK
+    gtk_widget_set_size_request(GTK_WIDGET(subrxGainScale),80,37);
+#else
     gtk_widget_set_size_request(GTK_WIDGET(subrxGainScale),150,30);
+#endif
     gtk_widget_show(subrxGainScale);
     gtk_container_add(GTK_CONTAINER(subrxGainFrame),subrxGainScale);
     gtk_widget_show(subrxGainFrame);
+#ifdef NETBOOK
+    gtk_table_attach_defaults(GTK_TABLE(subrxTable),subrxGainFrame,1,3,0,1);
+#else
     gtk_table_attach_defaults(GTK_TABLE(subrxTable),subrxGainFrame,0,4,1,2);
+#endif
 
     SetRXOutputGain(0,1,subrxGain/100.0);
 
@@ -343,11 +369,19 @@ GtkWidget* buildSubRxUI() {
     subrxPanScale=gtk_hscale_new_with_range(0.0,1.0,0.1);
     g_signal_connect(G_OBJECT(subrxPanScale),"value-changed",G_CALLBACK(subrxPanChanged),NULL);
     gtk_range_set_value((GtkRange*)subrxPanScale,subrxPan);
+#ifdef NETBOOK
+    gtk_widget_set_size_request(GTK_WIDGET(subrxPanScale),80,37);
+#else
     gtk_widget_set_size_request(GTK_WIDGET(subrxPanScale),150,30);
+#endif
     gtk_widget_show(subrxPanScale);
     gtk_container_add(GTK_CONTAINER(subrxPanFrame),subrxPanScale);
     gtk_widget_show(subrxPanFrame);
+#ifdef NETBOOK
+    gtk_table_attach_defaults(GTK_TABLE(subrxTable),subrxPanFrame,3,5,0,1);
+#else
     gtk_table_attach_defaults(GTK_TABLE(subrxTable),subrxPanFrame,4,8,1,2);
+#endif
 
     SetRXPan(0,1,subrxPan);
 
