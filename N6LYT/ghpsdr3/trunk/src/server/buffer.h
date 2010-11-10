@@ -25,7 +25,12 @@
 */
 
 typedef struct _buffer {
+#ifdef __linux__
     unsigned long long sequence;
+#else
+    unsigned long sequence;
+    unsigned long sequenceHi;
+#endif
     unsigned short offset;
     unsigned short length;
     unsigned char data[500];

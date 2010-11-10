@@ -1,9 +1,11 @@
 #include <stdlib.h>
 #include <stdio.h>
+#ifdef __linux__
 #include <sys/socket.h>
 #include <netinet/in.h>
 #include <arpa/inet.h>
 #include <netdb.h>
+#endif
 #include <string.h>
 
 #include <fftw3.h>

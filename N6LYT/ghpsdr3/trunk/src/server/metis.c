@@ -26,6 +26,7 @@
 
 #include <stdlib.h>
 #include <stdio.h>
+#ifdef __linux
 #include <sys/types.h>
 #include <sys/socket.h>
 #include <sys/ioctl.h>
@@ -35,8 +36,12 @@
 #include <net/if_arp.h>
 #include <net/if.h>
 #include <ifaddrs.h>
-#include <string.h>
 #include <pthread.h>
+#else
+#include "pthread.h"
+#endif
+
+#include <string.h>
 #include <errno.h>
 
 #include "metis.h"

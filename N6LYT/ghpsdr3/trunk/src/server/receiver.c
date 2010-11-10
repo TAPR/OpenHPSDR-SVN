@@ -27,10 +27,13 @@
 
 #include <stdlib.h>
 #include <stdio.h>
+
+#ifdef __linux__
 #include <sys/socket.h>
 #include <netinet/in.h>
 #include <arpa/inet.h>
 #include <netdb.h>
+#endif 
 #include <string.h>
 
 #include "buffer.h"
@@ -164,6 +167,9 @@ void send_IQ_buffer(int rx) {
             offset=0;
             while(offset<sizeof(receiver[rx].input_buffer)) {
                 buffer.sequence=sequence;
+#ifndef __linux__
+                buffer.sequenceHi = 0L;
+#endif
                 buffer.offset=offset;
                 buffer.length=sizeof(receiver[rx].input_buffer)-offset;
                 if(buffer.length>500) buffer.length=500;

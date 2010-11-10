@@ -27,14 +27,21 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
+#ifdef __linux__
 #include <sys/types.h>
 #include <sys/socket.h>
 #include <netinet/in.h>
 #include <arpa/inet.h>
 #include <netdb.h>
 #include <pthread.h>
-#include <string.h>
 #include <getopt.h>
+#else // Windows
+#include "pthread.h"
+#include <winsock.h>
+#include "getopt.h"
+#endif
+
 
 #include "client.h"
 #include "listener.h"
@@ -71,11 +78,20 @@ void process_args(int argc,char* argv[]);
 
 int main(int argc,char* argv[]) {
 
+#ifndef __linux__
+        WORD wVersionRequested;
+        WSADATA wsaData;
+        int err;
+
+        wVersionRequested = MAKEWORD(1, 1);
+        err = WSAStartup(wVersionRequested, &wsaData);          // initialize Windows sockets
+#endif
+
     process_args(argc,argv);
 
     if(metis) {
         metis_discover(interface);
-        sleep(5);
+        sleep(1);
         // see if we have any Metis boards
         fprintf(stderr,"Found %d Metis cards\n",metis_found());
         if(metis_found()==0) {
@@ -96,7 +112,11 @@ int main(int argc,char* argv[]) {
     }
 
     while(1) {
+#ifdef __linux__
         sleep(10);
+#else   // Windows
+        Sleep(10);
+#endif
     }
 }
 
