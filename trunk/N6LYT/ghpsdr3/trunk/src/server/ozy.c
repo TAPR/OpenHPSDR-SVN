@@ -28,10 +28,15 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
+
+#ifdef __linux__
 #include <arpa/inet.h>
 #include <netdb.h>
 #include <sys/timeb.h>
 #include <pthread.h>
+#else
+#include "pthread.h"
+#endif
 
 #include "client.h"
 #include "ozyio.h"
@@ -166,6 +171,11 @@ void process_ozy_input_buffer(char* buffer);
 void write_ozy_output_buffer();
 void process_bandscope_buffer(char* buffer);
 
+#ifndef __linux__
+#define bool int
+bool init_hpsdr();
+#endif
+
 void ozy_set_buffers(int buffers) {
     ozy_buffers=buffers;
 }
@@ -177,6 +187,10 @@ void ozy_set_metis(int state) {
 int create_ozy_thread() {
     int i;
     int rc;
+
+#ifndef __linux__
+    if (init_hpsdr() == 0) exit(9);
+#endif
 
     for(i=0;i<receivers;i++) {
         receiver[i].frequency=7056000L;
@@ -318,6 +332,9 @@ int ozy_init() {
     control_out[4] = DUPLEX | ((receivers-1)<<3);
 */
 
+        // On Windows, the following is replaced by init_hpsdr() in OzyInit.c
+#ifdef __linux__
+
     // open ozy
     rc = ozy_open();
     if (rc != 0) {
@@ -340,6 +357,7 @@ ozy_open();
     ozy_open();
     rc=ozy_get_firmware_string(ozy_firmware_version,8);
     fprintf(stderr,"Ozy FX2 version: %s\n",ozy_firmware_version);
+#endif
 
     memset((char *)&ozy_output_buffer,0,OZY_BUFFER_SIZE);
     while(configure>0) {

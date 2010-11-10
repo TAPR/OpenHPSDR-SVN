@@ -28,12 +28,17 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#ifdef __linux__
 #include <sys/types.h>
 #include <sys/socket.h>
 #include <netinet/in.h>
 #include <arpa/inet.h>
 #include <netdb.h>
 #include <pthread.h>
+#else
+#include "pthread.h"
+#endif
+
 #include <string.h>
 
 #include "client.h"
