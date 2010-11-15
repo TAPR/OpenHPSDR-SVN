@@ -520,6 +520,48 @@ if(timing) {
                         } else {
                             fprintf(stderr,"Invalid command: '%s'\n",message);
                         }
+                    } else if(strcmp(token,"setsquelchval")==0) {
+                        token=strtok(NULL," ");
+                        if(token!=NULL) {
+                            float value=atof(token);
+                            SetSquelchVal(0,0,value);
+                        } else {
+                            fprintf(stderr,"Invalid command: '%s'\n",message);
+                        }
+                    } else if(strcmp(token,"setsubrxquelchval")==0) {
+                        token=strtok(NULL," ");
+                        if(token!=NULL) {
+                            float value=atof(token);
+                            SetSquelchVal(0,1,value);
+                        } else {
+                            fprintf(stderr,"Invalid command: '%s'\n",message);
+                        }
+                    } else if(strcmp(token,"setsquelchstate")==0) {
+                        token=strtok(NULL," ");
+                        if(token!=NULL) {
+                            if(strcmp(token,"on")==0) {
+                                SetSquelchState(0,0,1);
+                            } else if(strcmp(token,"off")==0) {
+                                SetSquelchState(0,0,0);
+                            } else {
+                                fprintf(stderr,"Invalid command: '%s'\n",message);
+                            }
+                        } else {
+                            fprintf(stderr,"Invalid command: '%s'\n",message);
+                        }
+                    } else if(strcmp(token,"setsubrxquelchstate")==0) {
+                        token=strtok(NULL," ");
+                        if(token!=NULL) {
+                            if(strcmp(token,"on")==0) {
+                                SetSquelchState(0,1,1);
+                            } else if(strcmp(token,"off")==0) {
+                                SetSquelchState(0,1,0);
+                            } else {
+                                fprintf(stderr,"Invalid command: '%s'\n",message);
+                            }
+                        } else {
+                            fprintf(stderr,"Invalid command: '%s'\n",message);
+                        }
                     } else {
                         fprintf(stderr,"Invalid command: '%s'\n",message);
                     }
