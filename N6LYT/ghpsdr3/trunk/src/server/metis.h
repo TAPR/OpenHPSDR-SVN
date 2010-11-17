@@ -30,7 +30,7 @@ typedef struct _METIS_CARD {
     char mac_address[18];
 } METIS_CARD;
 
-void metis_discover(char* interface);
+void metis_discover(char* interface,char* metisip);
 int metis_found();
 char* metis_ip_address(int entry);
 char* metis_mac_address(int entry);

@@ -101,7 +101,7 @@ static int get_addr(int sock, char * ifname) {
     return -1;
   }
 
-  ip_address=inaddrr(ifr_addr.sa_data).s_addr;;
+  ip_address=inaddrr(ifr_addr.sa_data).s_addr;
 
   if (ioctl(sock, SIOCGIFHWADDR, ifr) < 0) {
     printf("No %s interface.\n", ifname);
@@ -117,11 +117,12 @@ static int get_addr(int sock, char * ifname) {
   return 0;
 }
 
-void metis_discover(char* interface) {
+void metis_discover(char* interface,char* metisip) {
     int rc;
     int on=1;
+    struct ifreq ifr;
 
-    fprintf(stderr,"Looking for Metis cards on interface %s\n",interface);
+    fprintf(stderr,"Looking for Metis card on interface %s\n",interface);
     
     // send a broadcast to locate metis boards on the network
     discovery_socket=socket(PF_INET,SOCK_DGRAM,IPPROTO_UDP);
@@ -135,13 +136,15 @@ void metis_discover(char* interface) {
         exit(1);
     }
 
-    printf("IP Address: %ld.%ld.%ld.%ld\n",
+    printf("%s IP Address: %ld.%ld.%ld.%ld\n",
+              interface,
               ip_address&0xFF,
               (ip_address>>8)&0xFF,
               (ip_address>>16)&0xFF,
               (ip_address>>24)&0xFF);
 
-    printf("HW Address: %02x:%02x:%02x:%02x:%02x:%02x\n",
+    printf("%s HW Address: %02x:%02x:%02x:%02x:%02x:%02x\n",
+         interface,
          hw_address[0], hw_address[1], hw_address[2], hw_address[3], hw_address[4], hw_address[5]);
 
 
@@ -152,8 +155,20 @@ void metis_discover(char* interface) {
         exit(1);
     }
 
+    // bind to this interface
+    struct sockaddr_in name={0};
+    name.sin_family = AF_INET;
+    name.sin_addr.s_addr = ip_address;
+    name.sin_port = htons(DISCOVERY_SEND_PORT);
+    bind(discovery_socket,(struct sockaddr*)&name,sizeof(name));
+
+
     // allow broadcast on the socket
-    setsockopt(discovery_socket, SOL_SOCKET, SO_BROADCAST, &on, sizeof(on));
+    rc=setsockopt(discovery_socket, SOL_SOCKET, SO_BROADCAST, &on, sizeof(on));
+    if(rc != 0) {
+        fprintf(stderr,"cannot set SO_BROADCAST: rc=%d\n", rc);
+        exit(1);
+    }
 
     discovery_length=sizeof(discovery_addr);
     memset(&discovery_addr,0,discovery_length);
@@ -174,11 +189,13 @@ void metis_discover(char* interface) {
     buffer[10]=hw_address[3];
     buffer[11]=hw_address[4];
     buffer[12]=hw_address[5];
-    buffer[13]=0x00; // use DHCP address
-    buffer[14]=0x00;
-    buffer[15]=0x00;
-    buffer[17]=0x00;
-     
+
+    long addr=inet_addr(metisip);
+    buffer[13]=addr&0xFF; // metis IP address or 0L for DHCP
+    buffer[14]=(addr>>8)&0xFF;
+    buffer[15]=(addr>>16)&0xFF;
+    buffer[16]=(addr>>24)&0xFF;
+
     if(sendto(discovery_socket,buffer,sizeof(buffer),0,(struct sockaddr*)&discovery_addr,discovery_length)<0) {
         perror("sendto socket failed for discovery_socket\n");
         exit(1);
@@ -201,7 +218,7 @@ void* metis_discovery_thread(void* arg) {
     memset(&addr,0,length);
     addr.sin_family=AF_INET;
     addr.sin_port=htons(DISCOVERY_RECEIVE_PORT);
-    addr.sin_addr.s_addr=htonl(INADDR_ANY);
+    addr.sin_addr.s_addr = ip_address;
 
     if(bind(s,(struct sockaddr*)&addr,length)<0) {
         perror("bind socket failed for discovery_thread");
@@ -215,6 +232,7 @@ void* metis_discovery_thread(void* arg) {
             exit(1);
         }
 
+//fprintf(stderr,"DISCOVERY_RECEIVE_PORT read %d bytes\n",bytes_read);
         if(bytes_read>=13) {
             if(buffer[0]==0xEF && buffer[1]==0xFE) {
                 switch(buffer[2]) {
@@ -273,15 +291,10 @@ void metis_start_receive_thread() {
 
     h=gethostbyname(metis_cards[0].ip_address);
     if(h==NULL) {
-        fprintf(stderr,"metis_send_buffer: unknown host %s\n",metis_cards[0].ip_address);
+        fprintf(stderr,"metis_start_receiver_thread: unknown host %s\n",metis_cards[0].ip_address);
         exit(1);
     }
 
-    data_socket=socket(PF_INET,SOCK_DGRAM,IPPROTO_UDP);
-    if(data_socket<0) {
-        perror("create socket failed for data\n");
-        exit(1);
-    }
     data_addr_length=sizeof(data_addr);
     memset(&data_addr,0,data_addr_length);
     data_addr.sin_family=AF_INET;
@@ -297,34 +310,19 @@ void metis_start_receive_thread() {
 }
 
 void* metis_receive_thread(void* arg) {
-    int s;
     struct sockaddr_in addr;
     int length;
     unsigned char buffer[2048];
     int bytes_read;
 
-    s=socket(PF_INET,SOCK_DGRAM,IPPROTO_UDP);
-    if(s<0) {
-        perror("create socket failed for receive_thread\n");
-        exit(1);
-    }
-    length=sizeof(addr);
-    memset(&addr,0,length);
-    addr.sin_family=AF_INET;
-    addr.sin_port=htons(DATA_PORT);
-    addr.sin_addr.s_addr=htonl(INADDR_ANY);
-
-    if(bind(s,(struct sockaddr*)&addr,length)<0) {
-        perror("bind socket failed for receive_thread");
-        exit(1);
-    }
-
     while(1) {
-   	bytes_read=recvfrom(s,buffer,sizeof(buffer),0,(struct sockaddr*)&addr,&length);
+   	bytes_read=recvfrom(discovery_socket,buffer,sizeof(buffer),0,(struct sockaddr*)&addr,&length);
         if(bytes_read<0) {
             perror("recvfrom socket failed for receive_thread");
             exit(1);
         }
+
+//fprintf(stderr,"DATA_PORT read %d bytes\n",bytes_read);
 
         if(bytes_read==1032) {
             if(buffer[0]==0xEF && buffer[1]==0xFE) {
@@ -347,7 +345,7 @@ void* metis_receive_thread(void* arg) {
                             fprintf(stderr,"EP4 data\n");
                             break;
                         default:
-                            fprintf(stderr,"unexpected EP %d\n",ep);
+                            fprintf(stderr,"unexpected EP %d length=%d\n",ep,bytes_read);
                             break;
                     }
                     break;
@@ -408,7 +406,7 @@ int metis_write(unsigned char ep,char* buffer,int length) {
 
 void metis_send_buffer(char* buffer,int length) {
 //fprintf(stderr,"metis_send_buffer\n");
-    if(sendto(data_socket,buffer,length,0,(struct sockaddr*)&data_addr,data_addr_length)<0) {
+    if(sendto(discovery_socket,buffer,length,0,(struct sockaddr*)&data_addr,data_addr_length)<0) {
         perror("sendto socket failed for metis_send_data\n");
         exit(1);
     }
