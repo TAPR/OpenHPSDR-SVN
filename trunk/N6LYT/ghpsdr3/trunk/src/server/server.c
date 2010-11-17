@@ -66,6 +66,7 @@ static struct option long_options[] = {
     {"sleep",required_argument,0,12},
     {"metis",no_argument,0,13},
     {"interface",required_argument,0,14},
+    {"metisip",required_argument,0,15},
     {0,0,0,0},
 };
 static char* short_options="";
@@ -73,6 +74,7 @@ static int option_index;
 
 static int metis=0;
 static char* interface="eth0";
+static char* metisip="0.0.0.0";
 
 void process_args(int argc,char* argv[]);
 
@@ -90,7 +92,7 @@ int main(int argc,char* argv[]) {
     process_args(argc,argv);
 
     if(metis) {
-        metis_discover(interface);
+        metis_discover(interface,metisip);
         sleep(1);
         // see if we have any Metis boards
         fprintf(stderr,"Found %d Metis cards\n",metis_found());
@@ -223,6 +225,11 @@ void process_args(int argc,char* argv[]) {
 
             case 14: // interface
                 interface=optarg;
+                break;
+
+            case 15: // metisip
+                metisip=optarg;
+fprintf(stderr,"metisip=%s\n",metisip);
                 break;
 
             default:
