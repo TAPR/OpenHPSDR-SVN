@@ -69,7 +69,7 @@ static int data_socket;
 static struct sockaddr_in data_addr;
 static int data_addr_length;
 
-static unsigned char buffer[17];
+static unsigned char buffer[70];
 
 static pthread_t discovery_thread_id;
 static pthread_t receive_thread_id;
@@ -119,6 +119,7 @@ static int get_addr(int sock, char * ifname) {
 
 void metis_discover(char* interface,char* metisip) {
     int rc;
+    int i;
     int on=1;
     struct ifreq ifr;
 
@@ -143,7 +144,7 @@ void metis_discover(char* interface,char* metisip) {
               (ip_address>>16)&0xFF,
               (ip_address>>24)&0xFF);
 
-    printf("%s HW Address: %02x:%02x:%02x:%02x:%02x:%02x\n",
+    printf("%s MAC Address: %02x:%02x:%02x:%02x:%02x:%02x\n",
          interface,
          hw_address[0], hw_address[1], hw_address[2], hw_address[3], hw_address[4], hw_address[5]);
 
@@ -179,6 +180,10 @@ void metis_discover(char* interface,char* metisip) {
     buffer[0]=0xEF;
     buffer[1]=0xFE;
     buffer[2]=0x02;
+    for(i=0;i<60;i++) {
+        buffer[i+3]=0x00;
+    }
+/*
     buffer[3]=ip_address&0xFF; // my IP address
     buffer[4]=(ip_address>>8)&0xFF;
     buffer[5]=(ip_address>>16)&0xFF;
@@ -195,8 +200,9 @@ void metis_discover(char* interface,char* metisip) {
     buffer[14]=(addr>>8)&0xFF;
     buffer[15]=(addr>>16)&0xFF;
     buffer[16]=(addr>>24)&0xFF;
+*/
 
-    if(sendto(discovery_socket,buffer,sizeof(buffer),0,(struct sockaddr*)&discovery_addr,discovery_length)<0) {
+    if(sendto(discovery_socket,buffer,63,0,(struct sockaddr*)&discovery_addr,discovery_length)<0) {
         perror("sendto socket failed for discovery_socket\n");
         exit(1);
     }
@@ -238,6 +244,7 @@ void* metis_discovery_thread(void* arg) {
                 switch(buffer[2]) {
                     case 2:  // response to a discovery packet
                         if(found<MAX_METIS_CARDS) {
+/*
                             // ip address is next 4 bytes
                             sprintf(metis_cards[found].ip_address,"%d.%d.%d.%d",
                                        buffer[3]&0xFF,buffer[4]&0xFF,buffer[5]&0xFF,buffer[6]&0xFF);
@@ -245,7 +252,20 @@ void* metis_discovery_thread(void* arg) {
     
                             sprintf(metis_cards[found].mac_address,"%02X:%02X:%02X:%02X:%02X:%02X",
                                        buffer[7]&0xFF,buffer[8]&0xFF,buffer[9]&0xFF,buffer[10]&0xFF,buffer[11]&0xFF,buffer[12]&0xFF);
-                            fprintf(stderr,"Metis Mac address %s\n",metis_cards[found].mac_address);
+                            fprintf(stderr,"Metis MAC address %s\n",metis_cards[found].mac_address);
+*/
+                            // get MAC address from reply
+                            sprintf(metis_cards[found].mac_address,"%02X:%02X:%02X:%02X:%02X:%02X",
+                                       buffer[3]&0xFF,buffer[4]&0xFF,buffer[5]&0xFF,buffer[6]&0xFF,buffer[7]&0xFF,buffer[8]&0xFF);
+                            fprintf(stderr,"Metis MAC address %s\n",metis_cards[found].mac_address);
+
+                            // get ip address from packet header
+                            sprintf(metis_cards[found].ip_address,"%d.%d.%d.%d",
+                                       addr.sin_addr.s_addr&0xFF,
+                                       (addr.sin_addr.s_addr>>8)&0xFF,
+                                       (addr.sin_addr.s_addr>>16)&0xFF,
+                                       (addr.sin_addr.s_addr>>24)&0xFF);
+                            fprintf(stderr,"Metis IP address %s\n",metis_cards[found].ip_address);
                             found++;
                         } else {
                             fprintf(stderr,"too many metis cards!\n");
@@ -284,6 +304,7 @@ char* metis_mac_address(int entry) {
 }
 
 void metis_start_receive_thread() {
+    int i;
     int rc;
     struct hostent *h;
 
@@ -305,6 +326,21 @@ void metis_start_receive_thread() {
     rc=pthread_create(&receive_thread_id,NULL,metis_receive_thread,NULL);
     if(rc != 0) {
         fprintf(stderr,"pthread_create failed on discovery_thread: rc=%d\n", rc);
+        exit(1);
+    }
+
+    // send a packet to start the stream
+    buffer[0]=0xEF;
+    buffer[1]=0xFE;
+    buffer[2]=0x04;    // data send state
+    buffer[3]=0x01;    // send (0x00=stop)
+
+    for(i=0;i<60;i++) {
+        buffer[i+4]=0x00;
+    }
+
+    if(sendto(discovery_socket,buffer,64,0,(struct sockaddr*)&data_addr,data_addr_length)<0) {
+        perror("sendto socket failed for start\n");
         exit(1);
     }
 }
