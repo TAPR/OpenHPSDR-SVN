@@ -1,0 +1,5 @@
+C:\Documents and Settings\Steve\Desktop\DDUtil 2.0\bin\Release\RIOX.dll
+C:\Documents and Settings\Steve\Desktop\DDUtil 2.0\bin\Release\RIOX.pdb
+C:\Documents and Settings\Steve\Desktop\DDUtil 2.0\Source\RIOX\obj\Release\ResolveAssemblyReference.cache
+C:\Documents and Settings\Steve\Desktop\DDUtil 2.0\Source\RIOX\obj\Release\RIOX.dll
+C:\Documents and Settings\Steve\Desktop\DDUtil 2.0\Source\RIOX\obj\Release\RIOX.pdb

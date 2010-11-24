@@ -1,0 +1,83 @@
+<?xml version="1.0" standalone="yes"?>
+<macroData>
+  <macro>
+    <Button>Test</Button>
+    <Command>DDAD0;</Command>
+  </macro>
+  <macro>
+    <Button>20 RTTY</Button>
+    <Command>ZZFA00014080000;ZZMD09;ZZPC075;ZZMT02;</Command>
+  </macro>
+  <macro>
+    <Button>20 CW</Button>
+    <Command>ZZFA00014010000;ZZMD04;ZZPC100;ZZMT00;</Command>
+  </macro>
+  <macro>
+    <Button>20 PSK</Button>
+    <Command>ZZFA00014070000;ZZMD07;ZZPC050;ZZMT02;</Command>
+  </macro>
+  <macro>
+    <Button>IQ&gt; VAC</Button>
+    <Command>ZZVH1;ZZRS1;ZZSR0;</Command>
+  </macro>
+  <macro>
+    <Button>IQ&lt; VAC</Button>
+    <Command>ZZVH0;ZZRS0;ZZSR1;</Command>
+  </macro>
+  <macro>
+    <Button>Ant1</Button>
+    <Command>ZZOA1;</Command>
+  </macro>
+  <macro>
+    <Button>Rx1</Button>
+    <Command>ZZOA4;</Command>
+  </macro>
+  <macro>
+    <Button>Ant2</Button>
+    <Command>ZZOA2;</Command>
+  </macro>
+  <macro>
+    <Button>Ant3</Button>
+    <Command>ZZOA3;</Command>
+  </macro>
+  <macro>
+    <Button>M11</Button>
+    <Command>ZZPS1;</Command>
+  </macro>
+  <macro>
+    <Button>North</Button>
+    <Command>DDFA18;</Command>
+  </macro>
+  <macro>
+    <Button>South</Button>
+    <Command>DDFA24;</Command>
+  </macro>
+  <macro>
+    <Button>Port66</Button>
+    <Command>DDLP0063266;</Command>
+  </macro>
+  <macro>
+    <Button>Port77</Button>
+    <Command>DDLP0063277;</Command>
+  </macro>
+  <macro>
+    <Button>PortFF</Button>
+    <Command>DDLP00632FF;</Command>
+  </macro>
+  <macro>
+    <Button>AM</Button>
+    <Command>ZZFI06;ZZMT02;ZZPC050;</Command>
+  </macro>
+  <macro>
+    <Button>SSB</Button>
+    <Command>ZZFI06;ZZMT02;ZZPC050;</Command>
+  </macro>
+  <macro>
+    <Button>CW</Button>
+    <Command>ZZFI05;ZZMT00;ZZPC050;</Command>
+  </macro>
+  <macro>
+    <Button>DIGI</Button>
+    <Command>ZZFI10;ZZMT02;ZZPC050;</Command>
+  </macro>
+</macroData>

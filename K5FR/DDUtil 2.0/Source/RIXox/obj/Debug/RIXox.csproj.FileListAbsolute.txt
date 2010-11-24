@@ -1,0 +1,10 @@
+C:\Documents and Settings\Steve\Desktop\RIXox-d0194fc\RIXox\bin\Debug\RIXox.dll
+C:\Documents and Settings\Steve\Desktop\RIXox-d0194fc\RIXox\bin\Debug\RIXox.pdb
+C:\Documents and Settings\Steve\Desktop\RIXox-d0194fc\RIXox\obj\Debug\ResolveAssemblyReference.cache
+C:\Documents and Settings\Steve\Desktop\RIXox-d0194fc\RIXox\obj\Debug\RIXox.dll
+C:\Documents and Settings\Steve\Desktop\RIXox-d0194fc\RIXox\obj\Debug\RIXox.pdb
+C:\Documents and Settings\Steve\Desktop\RIXox Test Client for DDUtil\RIXox\bin\Debug\RIXox.dll
+C:\Documents and Settings\Steve\Desktop\RIXox Test Client for DDUtil\RIXox\bin\Debug\RIXox.pdb
+C:\Documents and Settings\Steve\Desktop\RIXox Test Client for DDUtil\RIXox\obj\Debug\ResolveAssemblyReference.cache
+C:\Documents and Settings\Steve\Desktop\RIXox Test Client for DDUtil\RIXox\obj\Debug\RIXox.dll
+C:\Documents and Settings\Steve\Desktop\RIXox Test Client for DDUtil\RIXox\obj\Debug\RIXox.pdb

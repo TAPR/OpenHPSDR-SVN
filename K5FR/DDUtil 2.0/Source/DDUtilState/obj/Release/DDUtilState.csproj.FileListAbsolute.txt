@@ -1,0 +1,12 @@
+C:\Documents and Settings\Steve\Desktop\Repose_DDUtil\Source\DDUtilState\bin\Release\DDUtilState.dll
+C:\Documents and Settings\Steve\Desktop\Repose_DDUtil\Source\DDUtilState\bin\Release\DDUtilState.pdb
+C:\Documents and Settings\Steve\Desktop\Repose_DDUtil\Source\DDUtilState\obj\Release\ResolveAssemblyReference.cache
+C:\Documents and Settings\Steve\Desktop\Repose_DDUtil\Source\DDUtilState\obj\Release\DDUtilState.dll
+C:\Documents and Settings\Steve\Desktop\Repose_DDUtil\Source\DDUtilState\obj\Release\DDUtilState.pdb
+C:\Documents and Settings\Steve\Desktop\DDUtil 2.0\Source\DDUtilState\bin\Release\DDUtilState.dll
+C:\Documents and Settings\Steve\Desktop\DDUtil 2.0\Source\DDUtilState\bin\Release\DDUtilState.pdb
+C:\Documents and Settings\Steve\Desktop\DDUtil 2.0\Source\DDUtilState\obj\Release\ResolveAssemblyReference.cache
+C:\Documents and Settings\Steve\Desktop\DDUtil 2.0\Source\DDUtilState\obj\Release\DDUtilState.dll
+C:\Documents and Settings\Steve\Desktop\DDUtil 2.0\Source\DDUtilState\obj\Release\DDUtilState.pdb
+C:\Documents and Settings\Steve\Desktop\DDUtil 2.0\bin\Release\DDUtilState.dll
+C:\Documents and Settings\Steve\Desktop\DDUtil 2.0\bin\Release\DDUtilState.pdb
