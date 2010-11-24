@@ -1,0 +1,139 @@
+<?xml version="1.0" standalone="yes"?>
+<macroData>
+  <macro>
+    <Button>WW#3</Button>
+    <Command>DDWW3;</Command>
+  </macro>
+  <macro>
+    <Button>20 RTTY</Button>
+    <Command>ZZMD09;ZZFA00014080000;ZZPC075;ZZMT02;</Command>
+  </macro>
+  <macro>
+    <Button>20 CW</Button>
+    <Command>ZZMD04;ZZFA00014010000;ZZPC100;ZZMT00;</Command>
+  </macro>
+  <macro>
+    <Button>20 PSK</Button>
+    <Command>ZZMD07;ZZFA00014070000;ZZPC050;ZZMT02;</Command>
+  </macro>
+  <macro>
+    <Button>So2r1</Button>
+    <Command>DDSRSO2R.XML;</Command>
+  </macro>
+  <macro>
+    <Button>So2r2</Button>
+    <Command>DDSR5BAND.XML;</Command>
+  </macro>
+  <macro>
+    <Button>Tune On</Button>
+    <Command>ZZTU1;</Command>
+  </macro>
+  <macro>
+    <Button>Tune Off</Button>
+    <Command>ZZTU0;</Command>
+  </macro>
+  <macro>
+    <Button>TX Ant 1</Button>
+    <Command>ZZOC1;</Command>
+  </macro>
+  <macro>
+    <Button>TX Ant 3</Button>
+    <Command>ZZOC3;</Command>
+  </macro>
+  <macro>
+    <Button>ZZPS</Button>
+    <Command>ZZPS1;</Command>
+  </macro>
+  <macro>
+    <Button>North</Button>
+    <Command>DDFA18;</Command>
+  </macro>
+  <macro>
+    <Button>Port33</Button>
+    <Command>DDLP5632033;</Command>
+  </macro>
+  <macro>
+    <Button>Port66</Button>
+    <Command>DDLP5632066;</Command>
+  </macro>
+  <macro>
+    <Button>Port77</Button>
+    <Command>DDLP0063277;</Command>
+  </macro>
+  <macro>
+    <Button>PortFF</Button>
+    <Command>DDLP00632FF;</Command>
+  </macro>
+  <macro>
+    <Button>M17</Button>
+    <Command />
+  </macro>
+  <macro>
+    <Button>M18</Button>
+    <Command />
+  </macro>
+  <macro>
+    <Button>M19</Button>
+    <Command />
+  </macro>
+  <macro>
+    <Button>PSDR On</Button>
+    <Command>ZZPS1;</Command>
+  </macro>
+  <macro>
+    <Button>PSDR Off</Button>
+    <Command>ZZPS0;</Command>
+  </macro>
+  <macro>
+    <Button>M22</Button>
+    <Command />
+  </macro>
+  <macro>
+    <Button>M23</Button>
+    <Command>ZZPS1;</Command>
+  </macro>
+  <macro>
+    <Button>M24</Button>
+    <Command>ZZPS0;</Command>
+  </macro>
+  <macro>
+    <Button>Mode AM</Button>
+    <Command>ZZWE1;ZZFI06;ZZMT02;</Command>
+  </macro>
+  <macro>
+    <Button>Mode SSB</Button>
+    <Command>ZZWE1;ZZFI06;ZZMT02;</Command>
+  </macro>
+  <macro>
+    <Button>Mode CW</Button>
+    <Command>ZZWF1;ZZFI05;ZZMT00;</Command>
+  </macro>
+  <macro>
+    <Button>Mode DIGI</Button>
+    <Command>ZZWF1;ZZFI10;ZZMT02;</Command>
+  </macro>
+  <macro>
+    <Button>SO2R Exit</Button>
+    <Command>DDAD1;ZZOA1;ZZOB6;ZZOC1;ZZOF100;ZZRS0;</Command>
+  </macro>
+  <macro>
+    <Button>TkSw1</Button>
+    <Command>ZZKM2;</Command>
+  </macro>
+  <macro>
+    <Button>TkSw2</Button>
+    <Command>ZZKM3;</Command>
+  </macro>
+  <macro>
+    <Button>TkSw3</Button>
+    <Command>DDWW2;</Command>
+  </macro>
+  <macro>
+    <Button>TkSw4</Button>
+    <Command>DDWW3;</Command>
+  </macro>
+  <macro>
+    <Button>TkSw5</Button>
+    <Command>DDWW4;</Command>
+  </macro>
+</macroData>

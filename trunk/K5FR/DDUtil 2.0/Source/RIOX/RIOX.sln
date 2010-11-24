@@ -1,0 +1,32 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual Studio 2008
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RIOX", "RIOX.csproj", "{EB2C16E8-EC7C-46C2-BC75-3716315D7378}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RIXoxTestClient", "..\RIXoxTestClient\RIXoxTestClient.csproj", "{D4644B13-71BE-48A9-B047-DEF99B8885E9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RIXoxTestServer", "..\RIXoxTestServer\RIXoxTestServer.csproj", "{8DBE0B82-2874-4746-99CB-4FE369F75985}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{EB2C16E8-EC7C-46C2-BC75-3716315D7378}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EB2C16E8-EC7C-46C2-BC75-3716315D7378}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EB2C16E8-EC7C-46C2-BC75-3716315D7378}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EB2C16E8-EC7C-46C2-BC75-3716315D7378}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D4644B13-71BE-48A9-B047-DEF99B8885E9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D4644B13-71BE-48A9-B047-DEF99B8885E9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D4644B13-71BE-48A9-B047-DEF99B8885E9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D4644B13-71BE-48A9-B047-DEF99B8885E9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8DBE0B82-2874-4746-99CB-4FE369F75985}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8DBE0B82-2874-4746-99CB-4FE369F75985}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8DBE0B82-2874-4746-99CB-4FE369F75985}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8DBE0B82-2874-4746-99CB-4FE369F75985}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
