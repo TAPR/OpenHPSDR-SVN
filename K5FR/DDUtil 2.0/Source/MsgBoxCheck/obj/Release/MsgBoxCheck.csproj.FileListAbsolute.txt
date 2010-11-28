@@ -1,9 +1,0 @@
-C:\Documents and Settings\Steve\Desktop\Repose_DDUtil\Source\MsgBoxCheck\bin\Release\MsgBoxCheck.dll
-C:\Documents and Settings\Steve\Desktop\Repose_DDUtil\Source\MsgBoxCheck\bin\Release\CbtHook.dll
-C:\Documents and Settings\Steve\Desktop\Repose_DDUtil\Source\MsgBoxCheck\bin\Release\WindowsHook.dll
-C:\Documents and Settings\Steve\Desktop\Repose_DDUtil\Source\MsgBoxCheck\obj\Release\ResolveAssemblyReference.cache
-C:\Documents and Settings\Steve\Desktop\Repose_DDUtil\Source\MsgBoxCheck\obj\Release\MsgBoxCheck.dll
-C:\Documents and Settings\Steve\Desktop\Repose_DDUtil\bin\Release\MsgBoxCheck.dll
-C:\Documents and Settings\Steve\Desktop\DDUtil 2.0\bin\Release\MsgBoxCheck.dll
-C:\Documents and Settings\Steve\Desktop\DDUtil 2.0\Source\MsgBoxCheck\obj\Release\ResolveAssemblyReference.cache
-C:\Documents and Settings\Steve\Desktop\DDUtil 2.0\Source\MsgBoxCheck\obj\Release\MsgBoxCheck.dll
