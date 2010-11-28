@@ -71,6 +71,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\bin\Release\CATSerialPorts.dll</HintPath>
     </Reference>
+    <Reference Include="DDUtilState, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\DDUtilState\bin\Release\DDUtilState.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.VisualBasic" />
     <Reference Include="Microsoft.VisualBasic.PowerPacks.Vs, Version=9.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
     <Reference Include="MsgBoxCheck, Version=1.0.3740.17721, Culture=neutral, processorArchitecture=MSIL">
@@ -78,6 +82,7 @@
       <HintPath>..\..\bin\Release\MsgBoxCheck.dll</HintPath>
     </Reference>
     <Reference Include="NDde, Version=2.1.563.0, Culture=neutral, processorArchitecture=MSIL" />
+    <Reference Include="RIXox, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL" />
     <Reference Include="System" />
     <Reference Include="System.configuration" />
     <Reference Include="System.Core">
@@ -254,6 +259,9 @@
     <None Include="Resources\DDU.ico" />
     <Content Include="Resources\image_load_progress_texture.png" />
     <Content Include="Resources\image_logo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

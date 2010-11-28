@@ -46,7 +46,7 @@ namespace DataDecoder
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Setup));
             this.tabControl = new System.Windows.Forms.TabControl();
             this.tabPorts = new System.Windows.Forms.TabPage();
@@ -460,6 +460,8 @@ namespace DataDecoder
             this.txtKm = new System.Windows.Forms.TextBox();
             this.txtSm = new System.Windows.Forms.TextBox();
             this.txtLoc = new System.Windows.Forms.TextBox();
+            this.btnElev = new System.Windows.Forms.Button();
+            this.txtElev = new System.Windows.Forms.TextBox();
             this.grpPreset = new System.Windows.Forms.GroupBox();
             this.rbPre16 = new System.Windows.Forms.RadioButton();
             this.rbPre8 = new System.Windows.Forms.RadioButton();
@@ -1501,7 +1503,8 @@ namespace DataDecoder
             "Kenwood",
             "Yaesu Type 1",
             "Yaesu Type 2",
-            "Icom"});
+            "Icom",
+            "SO2Rxlat"});
             this.cboRadio.Location = new System.Drawing.Point(96, 19);
             this.cboRadio.Name = "cboRadio";
             this.cboRadio.Size = new System.Drawing.Size(89, 21);
@@ -6901,9 +6904,9 @@ namespace DataDecoder
             // 
             this.dgm.AllowUserToAddRows = false;
             this.dgm.AllowUserToDeleteRows = false;
-            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.Color.White;
-            this.dgm.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.White;
+            this.dgm.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             this.dgm.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.dgm.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgm.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
@@ -7219,6 +7222,8 @@ namespace DataDecoder
             // tabRotor
             // 
             this.tabRotor.Controls.Add(this.groupBox12);
+            this.tabRotor.Controls.Add(this.btnElev);
+            this.tabRotor.Controls.Add(this.txtElev);
             this.tabRotor.Controls.Add(this.grpPreset);
             this.tabRotor.Controls.Add(this.grpStepCtrl);
             this.tabRotor.Controls.Add(this.groupBox11);
@@ -7286,6 +7291,31 @@ namespace DataDecoder
             this.txtLoc.Click += new System.EventHandler(this.grpC4_CheckedChanged);
             this.txtLoc.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtLoc_KeyDown);
             // 
+            // btnElev
+            // 
+            this.btnElev.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnElev.ForeColor = System.Drawing.Color.Blue;
+            this.btnElev.Location = new System.Drawing.Point(379, 141);
+            this.btnElev.Name = "btnElev";
+            this.btnElev.Size = new System.Drawing.Size(40, 19);
+            this.btnElev.TabIndex = 74;
+            this.btnElev.Text = "Elev";
+            this.btnElev.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.toolTip1.SetToolTip(this.btnElev, "Press to set elevation position.");
+            this.btnElev.UseVisualStyleBackColor = true;
+            this.btnElev.Click += new System.EventHandler(this.btnElev_Click);
+            // 
+            // txtElev
+            // 
+            this.txtElev.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtElev.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.txtElev.Location = new System.Drawing.Point(380, 116);
+            this.txtElev.Name = "txtElev";
+            this.txtElev.Size = new System.Drawing.Size(37, 20);
+            this.txtElev.TabIndex = 75;
+            this.txtElev.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.toolTip1.SetToolTip(this.txtElev, "Enter elevation degrees.");
+            // 
             // grpPreset
             // 
             this.grpPreset.Controls.Add(this.rbPre16);
@@ -7308,7 +7338,7 @@ namespace DataDecoder
             this.grpPreset.ForeColor = System.Drawing.Color.Blue;
             this.grpPreset.Location = new System.Drawing.Point(7, 110);
             this.grpPreset.Name = "grpPreset";
-            this.grpPreset.Size = new System.Drawing.Size(399, 50);
+            this.grpPreset.Size = new System.Drawing.Size(364, 50);
             this.grpPreset.TabIndex = 14;
             this.grpPreset.TabStop = false;
             this.grpPreset.Text = "Rotor Presets";
@@ -7320,7 +7350,7 @@ namespace DataDecoder
             this.rbPre16.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.rbPre16.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
             this.rbPre16.ForeColor = System.Drawing.Color.Navy;
-            this.rbPre16.Location = new System.Drawing.Point(355, 30);
+            this.rbPre16.Location = new System.Drawing.Point(319, 30);
             this.rbPre16.Name = "rbPre16";
             this.rbPre16.Size = new System.Drawing.Size(44, 17);
             this.rbPre16.TabIndex = 118;
@@ -7336,7 +7366,7 @@ namespace DataDecoder
             this.rbPre8.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.rbPre8.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
             this.rbPre8.ForeColor = System.Drawing.Color.Navy;
-            this.rbPre8.Location = new System.Drawing.Point(355, 15);
+            this.rbPre8.Location = new System.Drawing.Point(319, 15);
             this.rbPre8.Name = "rbPre8";
             this.rbPre8.Size = new System.Drawing.Size(44, 17);
             this.rbPre8.TabIndex = 117;
@@ -7352,7 +7382,7 @@ namespace DataDecoder
             this.rbPre15.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.rbPre15.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
             this.rbPre15.ForeColor = System.Drawing.Color.Navy;
-            this.rbPre15.Location = new System.Drawing.Point(305, 30);
+            this.rbPre15.Location = new System.Drawing.Point(274, 30);
             this.rbPre15.Name = "rbPre15";
             this.rbPre15.Size = new System.Drawing.Size(44, 17);
             this.rbPre15.TabIndex = 116;
@@ -7368,7 +7398,7 @@ namespace DataDecoder
             this.rbPre7.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.rbPre7.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
             this.rbPre7.ForeColor = System.Drawing.Color.Navy;
-            this.rbPre7.Location = new System.Drawing.Point(305, 15);
+            this.rbPre7.Location = new System.Drawing.Point(274, 15);
             this.rbPre7.Name = "rbPre7";
             this.rbPre7.Size = new System.Drawing.Size(44, 17);
             this.rbPre7.TabIndex = 115;
@@ -7384,7 +7414,7 @@ namespace DataDecoder
             this.rbPre14.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.rbPre14.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
             this.rbPre14.ForeColor = System.Drawing.Color.Navy;
-            this.rbPre14.Location = new System.Drawing.Point(255, 30);
+            this.rbPre14.Location = new System.Drawing.Point(229, 30);
             this.rbPre14.Name = "rbPre14";
             this.rbPre14.Size = new System.Drawing.Size(44, 17);
             this.rbPre14.TabIndex = 114;
@@ -7400,7 +7430,7 @@ namespace DataDecoder
             this.rbPre6.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.rbPre6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
             this.rbPre6.ForeColor = System.Drawing.Color.Navy;
-            this.rbPre6.Location = new System.Drawing.Point(255, 15);
+            this.rbPre6.Location = new System.Drawing.Point(229, 15);
             this.rbPre6.Name = "rbPre6";
             this.rbPre6.Size = new System.Drawing.Size(44, 17);
             this.rbPre6.TabIndex = 113;
@@ -7416,7 +7446,7 @@ namespace DataDecoder
             this.rbPre13.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.rbPre13.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
             this.rbPre13.ForeColor = System.Drawing.Color.Navy;
-            this.rbPre13.Location = new System.Drawing.Point(205, 30);
+            this.rbPre13.Location = new System.Drawing.Point(184, 30);
             this.rbPre13.Name = "rbPre13";
             this.rbPre13.Size = new System.Drawing.Size(44, 17);
             this.rbPre13.TabIndex = 112;
@@ -7432,7 +7462,7 @@ namespace DataDecoder
             this.rbPre5.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.rbPre5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
             this.rbPre5.ForeColor = System.Drawing.Color.Navy;
-            this.rbPre5.Location = new System.Drawing.Point(205, 15);
+            this.rbPre5.Location = new System.Drawing.Point(184, 15);
             this.rbPre5.Name = "rbPre5";
             this.rbPre5.Size = new System.Drawing.Size(44, 17);
             this.rbPre5.TabIndex = 111;
@@ -7448,7 +7478,7 @@ namespace DataDecoder
             this.rbPre12.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.rbPre12.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
             this.rbPre12.ForeColor = System.Drawing.Color.Navy;
-            this.rbPre12.Location = new System.Drawing.Point(155, 30);
+            this.rbPre12.Location = new System.Drawing.Point(139, 30);
             this.rbPre12.Name = "rbPre12";
             this.rbPre12.Size = new System.Drawing.Size(44, 17);
             this.rbPre12.TabIndex = 110;
@@ -7464,7 +7494,7 @@ namespace DataDecoder
             this.rbPre4.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.rbPre4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
             this.rbPre4.ForeColor = System.Drawing.Color.Navy;
-            this.rbPre4.Location = new System.Drawing.Point(155, 15);
+            this.rbPre4.Location = new System.Drawing.Point(139, 15);
             this.rbPre4.Name = "rbPre4";
             this.rbPre4.Size = new System.Drawing.Size(44, 17);
             this.rbPre4.TabIndex = 109;
@@ -7480,7 +7510,7 @@ namespace DataDecoder
             this.rbPre11.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.rbPre11.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
             this.rbPre11.ForeColor = System.Drawing.Color.Navy;
-            this.rbPre11.Location = new System.Drawing.Point(105, 30);
+            this.rbPre11.Location = new System.Drawing.Point(94, 30);
             this.rbPre11.Name = "rbPre11";
             this.rbPre11.Size = new System.Drawing.Size(44, 17);
             this.rbPre11.TabIndex = 108;
@@ -7496,7 +7526,7 @@ namespace DataDecoder
             this.rbPre3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.rbPre3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
             this.rbPre3.ForeColor = System.Drawing.Color.Navy;
-            this.rbPre3.Location = new System.Drawing.Point(105, 15);
+            this.rbPre3.Location = new System.Drawing.Point(94, 15);
             this.rbPre3.Name = "rbPre3";
             this.rbPre3.Size = new System.Drawing.Size(44, 17);
             this.rbPre3.TabIndex = 107;
@@ -7512,7 +7542,7 @@ namespace DataDecoder
             this.rbPre10.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.rbPre10.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
             this.rbPre10.ForeColor = System.Drawing.Color.Navy;
-            this.rbPre10.Location = new System.Drawing.Point(55, 30);
+            this.rbPre10.Location = new System.Drawing.Point(49, 30);
             this.rbPre10.Name = "rbPre10";
             this.rbPre10.Size = new System.Drawing.Size(44, 17);
             this.rbPre10.TabIndex = 106;
@@ -7528,7 +7558,7 @@ namespace DataDecoder
             this.rbPre2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.rbPre2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
             this.rbPre2.ForeColor = System.Drawing.Color.Navy;
-            this.rbPre2.Location = new System.Drawing.Point(55, 15);
+            this.rbPre2.Location = new System.Drawing.Point(49, 15);
             this.rbPre2.Name = "rbPre2";
             this.rbPre2.Size = new System.Drawing.Size(44, 17);
             this.rbPre2.TabIndex = 105;
@@ -16869,6 +16899,7 @@ namespace DataDecoder
             this.grpMacro.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgm)).EndInit();
             this.tabRotor.ResumeLayout(false);
+            this.tabRotor.PerformLayout();
             this.groupBox12.ResumeLayout(false);
             this.groupBox12.PerformLayout();
             this.grpPreset.ResumeLayout(false);
@@ -18136,6 +18167,8 @@ namespace DataDecoder
         private Button TkUpDate;
         private CheckBox chkStartMacro;
         private TextBox txtStartMacroNum;
+        private Button btnElev;
+        public TextBox txtElev;
 
     }
 }

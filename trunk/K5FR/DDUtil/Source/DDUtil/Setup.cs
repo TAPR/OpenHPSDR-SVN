@@ -48,6 +48,8 @@ using NDde.Client;
 using FT_HANDLE = System.UInt32;
 using Microsoft.Win32;              // For RegKey
 using MRG.Controls.UI;
+using RIXox;
+using DDUtilState;
 
 namespace DataDecoder
 {
@@ -62,7 +64,7 @@ namespace DataDecoder
         { Frame, Overrun, RXOver, RXParity, TXFull };
 
         public enum PortMode
-        { None, Kenwood, YaesuTypeI, YaesuTypeII, Icom };
+        { None, Kenwood, YaesuTypeI, YaesuTypeII, Icom, SO2Rxlat };
 
         public enum Parity
         { Even, Mark, None, Odd, Space };
@@ -683,7 +685,6 @@ namespace DataDecoder
             chkShortCut.Checked = set.chkShortCut;
             chkStartMacro.Checked = set.chkStartMacro;
             txtStartMacroNum.Text = set.txtStartMacroNum;
-
             // setup error log parameters
             string path = Application.ExecutablePath;
             path = path.Substring(0, path.LastIndexOf("\\") + 1);
@@ -840,6 +841,28 @@ namespace DataDecoder
                     {
                         this.lblSP.Text = text;
                         mini.txtSP.Text = text;
+                    }
+                }
+                catch { }
+
+            }
+        }
+        // Update the Elevation window
+        delegate void SetElevCallback(string text);
+        private void SetElev(string text)
+        {
+            if (!closing)
+            {
+                try
+                {
+                    if (this.txtElev.InvokeRequired)
+                    {
+                        SetElevCallback d = new SetElevCallback(SetElev);
+                        this.Invoke(d, new object[] { text });
+                    }
+                    else
+                    {
+                        this.txtElev.Text = text;
                     }
                 }
                 catch { }
@@ -1873,6 +1896,8 @@ namespace DataDecoder
         {
             try
             {
+                Debug.WriteLine("Closed -- stopping server");
+
                 set.TabOpen = tabControl.SelectedIndex;
                 set.Save();
                 PortAccess.Output(LPTnum, 0);
@@ -2270,6 +2295,10 @@ namespace DataDecoder
                 case 4: // Icom
                     portmode = PortMode.Icom;
                     txtRadNum.Enabled = true;
+                    break;
+                case 5: // SO2Rxlat
+                    portmode = PortMode.SO2Rxlat;
+                    txtRadNum.Enabled = false;
                     break;
                 default:
                     break;
@@ -7699,7 +7728,10 @@ namespace DataDecoder
                             SetRotor(sCmd.Substring(5, 5));
                             break;
                         case RotorMod.M2R2800PX:
-                            SetRotor(sCmd.Substring(2, 5));
+                            if (sCmd.Substring(0, 1) == "A")
+                                SetRotor(sCmd.Substring(2, 5));
+                            else if (sCmd.Substring(0, 1) == "E")
+                                SetElev(sCmd.Substring(2, 4));
                             break;
                         case RotorMod.Prosistel:
                             if (sCmd.Substring(3, 1) != "?") return;
@@ -8009,7 +8041,12 @@ namespace DataDecoder
                     rotormod = RotorMod.M2R2800PA;
                     grpSpeed.Visible = true;
                     suffix = "\r";
-                    if (chkRotorEnab.Checked) RotorPort.Write("U\r");
+                    if (chkRotorEnab.Checked) 
+                    {
+                        RotorPort.Write("S\r");
+                        RotorPort.Write("A\r");
+                        RotorPort.Write("U\r");
+                    }
                     chkTenths.Visible = false;
                 }
                 else if (rbRtrMod5.Checked)
@@ -8018,7 +8055,11 @@ namespace DataDecoder
                     rotormod = RotorMod.M2R2800PX;
                     grpSpeed.Visible = true;
                     suffix = "\r";
-                    if (chkRotorEnab.Checked) RotorPort.Write("S\r");
+                    if (chkRotorEnab.Checked)
+                    {
+                        RotorPort.Write("S\r");
+                        RotorPort.Write("A\r");
+                    }
                     chkTenths.Visible = false;
                 }
                 else if (rbRtrMod6.Checked)
@@ -8043,6 +8084,7 @@ namespace DataDecoder
                     chkTenths.Visible = false;
                 }
                 set.Save();
+                InitRotor();
             }
         }
         // the rotor speed selection has changed
@@ -8294,6 +8336,16 @@ namespace DataDecoder
                 }
             }
         }
+        // The rotor elevation button was pressed
+        private void btnElev_Click(object sender, EventArgs e)
+        {
+            if (txtElev.Text != null && txtElev.Text != "")
+            {
+                RotorPort.Write("E\r");
+                RotorPort.Write("S\r");
+                RotorPort.Write("E" + txtElev.Text + "\r");
+            }
+        }
 
         #endregion Rotor Events
 
@@ -8318,11 +8370,11 @@ namespace DataDecoder
                 case 1: rbRtrMod2.Checked = true; break;  // Green Heron
                 case 2: rbRtrMod3.Checked = true; break;  // HyGain
 
-                case 3: rbRtrMod4.Checked = true;         // M2RC2800A-P
+                case 3: rbRtrMod4.Checked = true;         // M2RC2800PA
                     if (cboRotorPort.SelectedIndex > 0 && chkRotorEnab.Checked)
                         RotorPort.Write("S" + rtrSpd + "\r");
                     break;
-                case 4: rbRtrMod5.Checked = true;         // M2RC2800AX
+                case 4: rbRtrMod5.Checked = true;         // M2RC2800PX
                     if (cboRotorPort.SelectedIndex > 0 && chkRotorEnab.Checked)
                         RotorPort.Write("S" + rtrSpd + "\r");
                     break;
@@ -8441,6 +8493,7 @@ namespace DataDecoder
                     RotorPort.Write("U\r");                 // request position
                     break;
                 case RotorMod.M2R2800PX:
+                    RotorPort.Write("S\r");                 // stop rotor
                     RotorPort.Write("A" + newhead + "\r");  // start rotor
 //                    RotorPort.Write("U\r");                 // request position
                     break;
@@ -8706,6 +8759,17 @@ namespace DataDecoder
             try { cboRotorPort.SelectedIndex = set.RotorPort; }
             catch { cboRotorPort.SelectedIndex = 0; BadPort("Rotor"); return; }
             chkRotorEnab.Checked = set.RotorEnab;
+            if (rotormod == RotorMod.M2R2800PX)
+            {
+                txtElev.Visible = true;
+                btnElev.Visible = true;
+            }
+            else
+            {
+                txtElev.Visible = false;
+                btnElev.Visible = false;
+            }
+
         }
 
         #endregion Rotor Setup
@@ -8717,21 +8781,21 @@ namespace DataDecoder
         // Radio CAT data has arrived
         string CommBuffer = "";
         string rawFreq = "";
-        string sdrMode = "";
+        string sdrMode = "";        // radio mode
         string xOn = "";            // 1 = xmit on, 0 = xmit off
         string lastFreq = "";       // freq from last CATRxEvent
         string prevFreq = "";       // undo freq
-        string memMode = "";
-        string lastBand = "";
+        string memMode = "";        // sdrmode converted to text (usb/cw)
+        string lastBand = "";       // last band reported from the radio
         string COBC = "";           // Chk on band change last band setting
         int vfoFreq = 0;            // VFO B freq, used for SO2R calcs
         int bBand, LastB = 0;       // current and last vfoB band
         double modeFactor = 1;      // holds expert auto drive mode factor
-        string lastFreqB = "";
-        string freqLook = "";
-        string pwrVolts = "";
+        string lastFreqB = "";      // last freq for vfo b
+        string freqLook = "";       // freq to be looked up and sent to BCD
+        string pwrVolts = "";       // primary radio volts
         bool isFirstPass = true;
-        int model;
+        int model;                  // model of this radio
         void sp_CATRxEvent(object source, CATSerialPorts.SerialRXEvent e)
         {
             comTimer.Stop();
@@ -8835,6 +8899,7 @@ namespace DataDecoder
                     if (rawFreq.Length > 4 && rawFreq.Substring(0, 4) == "ZZOC")
                     {
                         TxA = rawFreq.Substring(4, 1);
+
                     }
                     /*** Get TX1-3 status ***/
                     if (rawFreq.Length > 4 && rawFreq.Substring(0, 4) == "ZZOF")
@@ -8851,6 +8916,7 @@ namespace DataDecoder
                     if (rawFreq.Length > 4 && rawFreq.Substring(0, 4) == "ZZMD")
                     {
                         ZZMD = rawFreq.Substring(4, 2);
+                        //_radio.moder1 = ZZMD;
                     }
                     /*** Quick Memory, get the TX Profile & load  ***/
                     if (rawFreq.Length > 4 && rawFreq.Substring(0, 4) == "ZZTP")
@@ -9433,6 +9499,7 @@ namespace DataDecoder
                             WatchDog.Stop(); }
 
                         sdrMode = rawFreq.Substring(rawFreq.Length - 9, 1);
+                        //_radio.moder1 = sdrMode;
                         // what's the split status
                         if (rawFreq.Substring(rawFreq.Length - 6, 1) == "0")
                         {   // if xmit vfo is "A" then send passive listener commands now
@@ -10162,7 +10229,7 @@ namespace DataDecoder
             {
                 bool bReturnLog = false;
                 bReturnLog = ErrorLog.ErrorRoutine(false, enableErrorLog, ex);
-                if (false == bReturnLog) MessageBox.Show(new Form() { TopMost = true }, 
+                if (false == bReturnLog) MessageBox.Show(new Form() { TopMost = true },
                     "Unable to write to log");
             }
             LastFreq = freq;
@@ -10194,7 +10261,7 @@ namespace DataDecoder
                 {
                     bool bReturnLog = false;
                     bReturnLog = ErrorLog.ErrorRoutine(false, enableErrorLog, ex);
-                    if (false == bReturnLog) MessageBox.Show(new Form() { TopMost = true }, 
+                    if (false == bReturnLog) MessageBox.Show(new Form() { TopMost = true },
                         "Unable to write to log");
                 }
             }
@@ -10205,162 +10272,185 @@ namespace DataDecoder
                 string mystring = "";
                 string mode = "";
                 int j;
-                switch (portmode)
-                {   // for a list of the radio types referenced below see 
-                    // toolStripMenuItem4_Click() event handeler
-                    case PortMode.None:
-                        //                        AccPort.Write("AI3;");
-                        AccPort.Write("IF" + freq + ";");
-                        // 14.234.56 Mhz = IF00014234560;
-                        break;
-                    case PortMode.Kenwood: // K2,K3,FT(9K,2K,950,450)
-                        if (lastFreq != freq)
-                        {
-                            //                            AccPort.Write("FA" + freq.Substring(3, 8) + ";");
-                            AccPort.Write("FA" + freq + ";");
-                            // 14.234.56 Mhz = FA00014234560;
-                        }
-                        if (LastMode != sdrMode && chkMode.Checked)
-                        {
-                            Thread.Sleep(50);
-                            // LastMode = sdrMode;
-                            AccPort.Write("MD" + sdrMode + ";");
-                        }
-                        break;
-                    case PortMode.YaesuTypeI: // FT1K - FT100
-                        if (lastFreq != freq)
-                        {
-                            mystring = "0A0" + freq.Substring(3, 7);
-                            j = 8;
-                            for (int i = 0; i < 5; i++)
+                try
+                {
+                    switch (portmode)
+                    {   // for a list of the radio types referenced below see 
+                        // toolStripMenuItem4_Click() event handeler
+                        case PortMode.SO2Rxlat:
+                            string xlat = "";
+                            switch (band)
                             {
-                                string temp = mystring.Substring(j, 2);
-                                bytes[i] = byte.Parse(temp, NumberStyles.HexNumber);
-                                j -= 2;
+                                case "160": xlat = "01"; break;
+                                case "080": xlat = "02"; break;
+                                case "040": xlat = "03"; break;
+                                case "030": xlat = "04"; break;
+                                case "020": xlat = "05"; break;
+                                case "017": xlat = "06"; break;
+                                case "015": xlat = "07"; break;
+                                case "012": xlat = "08"; break;
+                                case "010": xlat = "09"; break;
                             }
-                            AccPort.Write(bytes, 0, 5);
-                            // 14.234.56 Mhz = 56 34 42 01 0A
-                        }
-                        if (LastMode != sdrMode && chkMode.Checked)
-                        {
-                            Thread.Sleep(50);
-                            // LastMode = sdrMode;
-                            switch (sdrMode)
-                            {   // Lookup Yaesu Type I equivalent mode
-                                case "1": mode = "00"; break;   // LSB
-                                case "2": mode = "01"; break;   // USB
-                                case "3": mode = "02"; break;   // CWU
-                                case "4": mode = "06"; break;   // FMN
-                                case "5": mode = "04"; break;   // AM
-                                case "6": mode = "08"; break;   // RTTY (DIGL)
-                                case "7": mode = "03"; break;   // CWL
-                                case "9": mode = "09"; break;   // RTTY-R (DIGU)
-                                default: mode = "01"; break;   // USB
-                            }
-                            mystring = "0C" + mode + "000000";
-                            j = 8;
-                            for (int i = 0; i < 5; i++)
+                            AccPort.Write("AS1" + xlat + "\r");
+                            // AS105;
+                            break;
+                        case PortMode.None:
+                            //                        AccPort.Write("AI3;");
+                            AccPort.Write("IF" + freq + ";");
+                            // 14.234.56 Mhz = IF00014234560;
+                            break;
+                        case PortMode.Kenwood: // K2,K3,FT(9K,2K,950,450)
+                            if (lastFreq != freq)
                             {
-                                string temp = mystring.Substring(j, 2);
-                                bytes[i] = byte.Parse(temp, NumberStyles.HexNumber);
-                                j -= 2;
+                                //AccPort.Write("FA" + freq.Substring(3, 8) + ";");
+                                AccPort.Write("FA" + freq + ";");
+                                // 14.234.56 Mhz = FA00014234560;
                             }
-                            AccPort.Write(bytes, 0, 5);
-                            // send mode  USB = 00 00 00 01 0C
-                        }
-                        break;
-                    case PortMode.YaesuTypeII: //FT(897,857,847,817)
-                        if (lastFreq != freq)
-                        {
-                            mystring = "0" + freq.Substring(3, 7) + "01";
-                            j = 0;
-                            for (int i = 0; i < 5; i++)
+                            if (LastMode != sdrMode && chkMode.Checked)
                             {
-                                string temp = mystring.Substring(j, 2);
-                                bytes[i] = byte.Parse(temp, NumberStyles.HexNumber);
-                                j += 2;
+                                Thread.Sleep(50);
+                                // LastMode = sdrMode;
+                                AccPort.Write("MD" + sdrMode + ";");
                             }
-                            AccPort.Write(bytes, 0, 5);
-                            // 14.234.56 Mhz = 01 42 34 56 01
-                        }
-                        if (LastMode != sdrMode && chkMode.Checked)
-                        {
-                            Thread.Sleep(50);
-                            // LastMode = sdrMode;
-                            switch (sdrMode)
-                            {   // Lookup Yaesu Type II equivalent mode
-                                case "1": mode = "00"; break;   // LSB
-                                case "2": mode = "01"; break;   // USB
-                                case "3": mode = "02"; break;   // CWU
-                                case "4": mode = "08"; break;   // FMN
-                                case "5": mode = "04"; break;   // AM
-                                case "6": mode = "0A"; break;   // RTTY (DIGL)
-                                case "7": mode = "03"; break;   // CWL
-                                case "9": mode = "0A"; break;   // RTTY-R (DIGU)
-                                default: mode = "01"; break;   // USB
-                            }
-                            mystring = mode + "00000007";
-                            j = 0;
-                            for (int i = 0; i < 5; i++)
+                            break;
+                        case PortMode.YaesuTypeI: // FT1K - FT100
+                            if (lastFreq != freq)
                             {
-                                string temp = mystring.Substring(j, 2);
-                                bytes[i] = byte.Parse(temp, NumberStyles.HexNumber);
-                                j += 2;
+                                mystring = "0A0" + freq.Substring(3, 7);
+                                j = 8;
+                                for (int i = 0; i < 5; i++)
+                                {
+                                    string temp = mystring.Substring(j, 2);
+                                    bytes[i] = byte.Parse(temp, NumberStyles.HexNumber);
+                                    j -= 2;
+                                }
+                                AccPort.Write(bytes, 0, 5);
+                                // 14.234.56 Mhz = 56 34 42 01 0A
                             }
-                            AccPort.Write(bytes, 0, 5);
-                        }
-                        break;
-                    case PortMode.Icom:
-                        string preamble = "FE";
-                        string radNum = txtRadNum.Text;
-                        string EOM = "FD";
-                        string ctrlAddr = "64";
-                        if (lastFreq != freq)
-                        {
-                            mystring = EOM + "00" + freq.Substring(3, 8) + "05" +
-                                       ctrlAddr + radNum + preamble + preamble;
-                            j = 20;
-                            for (int i = 0; i < 11; i++)
+                            if (LastMode != sdrMode && chkMode.Checked)
                             {
-                                string temp = mystring.Substring(j, 2);
-                                bytes[i] = byte.Parse(temp, NumberStyles.HexNumber);
-                                j -= 2;
+                                Thread.Sleep(50);
+                                // LastMode = sdrMode;
+                                switch (sdrMode)
+                                {   // Lookup Yaesu Type I equivalent mode
+                                    case "1": mode = "00"; break;   // LSB
+                                    case "2": mode = "01"; break;   // USB
+                                    case "3": mode = "02"; break;   // CWU
+                                    case "4": mode = "06"; break;   // FMN
+                                    case "5": mode = "04"; break;   // AM
+                                    case "6": mode = "08"; break;   // RTTY (DIGL)
+                                    case "7": mode = "03"; break;   // CWL
+                                    case "9": mode = "09"; break;   // RTTY-R (DIGU)
+                                    default: mode = "01"; break;   // USB
+                                }
+                                mystring = "0C" + mode + "000000";
+                                j = 8;
+                                for (int i = 0; i < 5; i++)
+                                {
+                                    string temp = mystring.Substring(j, 2);
+                                    bytes[i] = byte.Parse(temp, NumberStyles.HexNumber);
+                                    j -= 2;
+                                }
+                                AccPort.Write(bytes, 0, 5);
+                                // send mode  USB = 00 00 00 01 0C
                             }
-                            // send freq 14.234.56 Mhz = FE FE 1E E0 05 60 45 23 14 00 FD
-                            AccPort.Write(bytes, 0, 11);
-                        }
-                        // send mode info
-                        if (LastMode != sdrMode && chkMode.Checked)
-                        {
-                            Thread.Sleep(50);
-                            // LastMode = sdrMode;
-                            byte[] outBuf = new byte[8];
-                            string cn = "06";
-                            switch (sdrMode)
-                            {   // Lookup ICOM equivalent mode
-                                case "1": mode = "00"; break;   // LSB
-                                case "2": mode = "01"; break;   // USB
-                                case "3": mode = "03"; break;   // CWU
-                                case "4": mode = "05"; break;   // FMN
-                                case "5": mode = "02"; break;   // AM
-                                case "6": mode = "04"; break;   // RTTY (DIGL)
-                                case "7": mode = "07"; break;   // CWL
-                                case "9": mode = "08"; break;   // RTTY-R (DIGU)
-                                default: mode = "01"; break;   // USB
-                            }
-                            mystring = EOM + mode + cn + ctrlAddr +
-                                       radNum + preamble + preamble;
-                            j = 12;
-                            for (int k = 0; k < 7; k++)
+                            break;
+                        case PortMode.YaesuTypeII: //FT(897,857,847,817)
+                            if (lastFreq != freq)
                             {
-                                string outtemp = mystring.Substring(j, 2);
-                                outBuf[k] = byte.Parse(outtemp, NumberStyles.HexNumber);
-                                j -= 2;
+                                mystring = "0" + freq.Substring(3, 7) + "01";
+                                j = 0;
+                                for (int i = 0; i < 5; i++)
+                                {
+                                    string temp = mystring.Substring(j, 2);
+                                    bytes[i] = byte.Parse(temp, NumberStyles.HexNumber);
+                                    j += 2;
+                                }
+                                AccPort.Write(bytes, 0, 5);
+                                // 14.234.56 Mhz = 01 42 34 56 01
                             }
-                            // Send mode command [FE FE ra ta cn md FD]
-                            AccPort.Write(outBuf, 0, 7);
-                        }
-                        break;
+                            if (LastMode != sdrMode && chkMode.Checked)
+                            {
+                                Thread.Sleep(50);
+                                // LastMode = sdrMode;
+                                switch (sdrMode)
+                                {   // Lookup Yaesu Type II equivalent mode
+                                    case "1": mode = "00"; break;   // LSB
+                                    case "2": mode = "01"; break;   // USB
+                                    case "3": mode = "02"; break;   // CWU
+                                    case "4": mode = "08"; break;   // FMN
+                                    case "5": mode = "04"; break;   // AM
+                                    case "6": mode = "0A"; break;   // RTTY (DIGL)
+                                    case "7": mode = "03"; break;   // CWL
+                                    case "9": mode = "0A"; break;   // RTTY-R (DIGU)
+                                    default: mode = "01"; break;   // USB
+                                }
+                                mystring = mode + "00000007";
+                                j = 0;
+                                for (int i = 0; i < 5; i++)
+                                {
+                                    string temp = mystring.Substring(j, 2);
+                                    bytes[i] = byte.Parse(temp, NumberStyles.HexNumber);
+                                    j += 2;
+                                }
+                                AccPort.Write(bytes, 0, 5);
+                            }
+                            break;
+                        case PortMode.Icom:
+                            string preamble = "FE";
+                            string radNum = txtRadNum.Text;
+                            string EOM = "FD";
+                            string ctrlAddr = "64";
+                            if (lastFreq != freq)
+                            {
+                                mystring = EOM + "00" + freq.Substring(3, 8) + "05" +
+                                           ctrlAddr + radNum + preamble + preamble;
+                                j = 20;
+                                for (int i = 0; i < 11; i++)
+                                {
+                                    string temp = mystring.Substring(j, 2);
+                                    bytes[i] = byte.Parse(temp, NumberStyles.HexNumber);
+                                    j -= 2;
+                                }
+                                // send freq 14.234.56 Mhz = FE FE 1E E0 05 60 45 23 14 00 FD
+                                AccPort.Write(bytes, 0, 11);
+                            }
+                            // send mode info
+                            if (LastMode != sdrMode && chkMode.Checked)
+                            {
+                                Thread.Sleep(50);
+                                // LastMode = sdrMode;
+                                byte[] outBuf = new byte[8];
+                                string cn = "06";
+                                switch (sdrMode)
+                                {   // Lookup ICOM equivalent mode
+                                    case "1": mode = "00"; break;   // LSB
+                                    case "2": mode = "01"; break;   // USB
+                                    case "3": mode = "03"; break;   // CWU
+                                    case "4": mode = "05"; break;   // FMN
+                                    case "5": mode = "02"; break;   // AM
+                                    case "6": mode = "04"; break;   // RTTY (DIGL)
+                                    case "7": mode = "07"; break;   // CWL
+                                    case "9": mode = "08"; break;   // RTTY-R (DIGU)
+                                    default: mode = "01"; break;   // USB
+                                }
+                                mystring = EOM + mode + cn + ctrlAddr +
+                                           radNum + preamble + preamble;
+                                j = 12;
+                                for (int k = 0; k < 7; k++)
+                                {
+                                    string outtemp = mystring.Substring(j, 2);
+                                    outBuf[k] = byte.Parse(outtemp, NumberStyles.HexNumber);
+                                    j -= 2;
+                                }
+                                // Send mode command [FE FE ra ta cn md FD]
+                                AccPort.Write(outBuf, 0, 7);
+                            }
+                            break;
+                    }// end switch
+                }
+                catch
+                {
                 }
             }
         }// end PortSend
@@ -13820,12 +13910,12 @@ namespace DataDecoder
         //initialize controls
         void KnobInit()
         {
-            cboKnobPort.SelectedIndex = set.cboKnobPort;
-            chkKnobEnab.Checked = set.chkKnobEnab;
-
-            if (chkKnobEnab.Checked)
+            try
             {
-                try
+                cboKnobPort.SelectedIndex = set.cboKnobPort;
+                chkKnobEnab.Checked = set.chkKnobEnab;
+
+                if (chkKnobEnab.Checked)
                 {
                     TkInit = true;
                     TkUpDate.Enabled = true;
@@ -13843,15 +13933,16 @@ namespace DataDecoder
                     WriteFlags();
                     WriteLED();
                 }
-                catch (Exception ex)
-                {
-                    bool bReturnLog = false;
-                    bReturnLog = ErrorLog.ErrorRoutine(false, enableErrorLog, ex);
-                    if (false == bReturnLog) MessageBox.Show(new Form() { TopMost = true }, 
-                        "Unable to write to log");
-                    chkKnobEnab.Checked = false;
-                }
             }
+            catch (Exception ex)
+            {
+                bool bReturnLog = false;
+                bReturnLog = ErrorLog.ErrorRoutine(false, enableErrorLog, ex);
+                if (false == bReturnLog) MessageBox.Show(new Form() { TopMost = true },
+                    "Unable to write to log");
+                chkKnobEnab.Checked = false;
+            }
+
         }
 
         void WriteLED() // set the knob leds
@@ -15443,294 +15534,6 @@ namespace DataDecoder
         #endregion WaveNode Setup
 
         #endregion WaveNode       
-
-        #region State Machine
-
-        #region # Declarations #
-
-        Hashtable Cat = new Hashtable(); 
-        Hashtable kwCat = new Hashtable();
-        Hashtable rState = new Hashtable();
-
-        #endregion # Declarations #
-
-        #region # Delegates #
-
-        #endregion # Delegates #
-
-        #region # Events #
-
-        #endregion # Events #
-
-        #region # Methods #
-
-        // initialize state vars/table
-        void rStateInit()
-        {   
-            #region Cat hash
-            // Cat commands serviced
-            Cat.Add("ZZAC", null); // Sets or reads the Tune Step
-            Cat.Add("ZZAD", null); // Moves VFO A down by a selected step
-            Cat.Add("ZZAG", null); // Sets or reads the Audio Gain 
-            Cat.Add("ZZAI", null); // Reads or sets the Auto Information function
-            Cat.Add("ZZAR", null); // Sets or reads the AGC Threshold
-            Cat.Add("ZZAU", null); // Moves VFO A up by a selected step
-            Cat.Add("ZZBC", null); // Reads PowerSDR state
-            Cat.Add("ZZBD", null); // Moves the bandswitch down one band
-            Cat.Add("ZZBG", null); // Sets or reads the Band Group (HF/VHF)
-            Cat.Add("ZZBI", null); // Sets or reads the Binaural (BIN) status
-            Cat.Add("ZZBM", null); // Moves VFO B down by a selected step
-            Cat.Add("ZZBP", null); // Moves VFO B up by a selected step
-            Cat.Add("ZZBR", null); // Sets or reads the BCI Rejection button
-            Cat.Add("ZZBS", null); // Sets or reads the Bandswitch
-            Cat.Add("ZZBU", null); // Moves the bandswitch up one band
-            Cat.Add("ZZBY", null); // Closes the console
-            Cat.Add("ZZCB", null); // Sets or reads the Break-In checkbox status
-            Cat.Add("ZZCD", null); // Sets or reads the Break-In Delay value
-            Cat.Add("ZZCF", null); // Sets or reads the Show CW TX Filter checkbox
-            Cat.Add("ZZCI", null); // Sets or reads the CW Iambic checkbox status
-            Cat.Add("ZZCL", null); // Sets or reads the CW Pitch 
-            Cat.Add("ZZCM", null); // Sets or reads the CW Monitor checkbox status
-            Cat.Add("ZZCP", null); // Sets or reads the Compander (CPDR) status
-            Cat.Add("ZZCS", null); // Sets or reads the CW Speed
-            Cat.Add("ZZCT", null); // Sets or reads the Compander threshold
-            Cat.Add("ZZCU", null); // Reads the CPU usage
-            Cat.Add("ZZDA", null); // Sets or reads the Display Average (AVG) status
-            Cat.Add("ZZDM", null); // Sets or reads the Display Mode
-            Cat.Add("ZZDX", null); // Sets or reads the Phone DX button status
-            Cat.Add("ZZEA", null); // Sets or reads the RX EQ values
-            Cat.Add("ZZEB", null); // Sets or reads the TX EQ values
-            Cat.Add("ZZER", null); // Sets or reads the RX EQ status
-            Cat.Add("ZZET", null); // Sets or reads the TX EQ button status
-            Cat.Add("ZZFA", null); // Sets or reads VFO A frequency
-            Cat.Add("ZZFB", null); // Sets or reads VFO B frequency
-            Cat.Add("ZZFH", null); // Sets or reads the DSP High Filter
-            Cat.Add("ZZFI", null); // Sets or reads the current DSP receive filter
-            Cat.Add("ZZFL", null); // Sets or reads the DSP Low Filter
-            Cat.Add("ZZFM", null); // Reads the FlexRadio Model Number
-            Cat.Add("ZZFV", null); // Reads FlexWire single byte data
-            Cat.Add("ZZFW", null); // Reads FlexWire double byte data
-            Cat.Add("ZZFX", null); // Sends FlexWire single data byte command
-            Cat.Add("ZZFY", null); // Sends FlexWire double data byte command
-            Cat.Add("ZZGE", null); // Sets or reads the Noise Gate button status
-            Cat.Add("ZZGL", null); // Sets or reads the Noise Gate threshold
-            Cat.Add("ZZGT", null); // Sets or reads the AGC Mode Selector
-            Cat.Add("ZZHA", null); // Sets or reads the Audio Filter Size
-            Cat.Add("ZZHR", null); // Sets or reads the DSP RX Filter Phone Size
-            Cat.Add("ZZHT", null); // Sets or reads the DSP TX Filter Phone Size
-            Cat.Add("ZZHU", null); // Sets or reads the DSP RX Filter CW Size
-            Cat.Add("ZZHV", null); // Sets or reads the DSP TX Filter CW Size
-            Cat.Add("ZZHW", null); // Sets or reads the DSP RX Filter Digital Size
-            Cat.Add("ZZHX", null); // Sets or reads the DSP TX Filter Digital Size
-            Cat.Add("ZZID", null); // Sets or reads the transceiver ID number
-            Cat.Add("ZZIF", null); // Reads the transceiver status word
-            Cat.Add("ZZIS", null); // Sets or reads the variable filter width slider
-            Cat.Add("ZZIT", null); // Sets or reads the variable filter shift slider
-            Cat.Add("ZZIU", null); // Resets the variable filter shift slider
-            Cat.Add("ZZKM", null); // Sends a CWX macro
-            Cat.Add("ZZKS", null); // Sets or reads CWX CW speed
-            Cat.Add("ZZKY", null); // Sends text to CWX for conversion to Morse
-            Cat.Add("ZZMA", null); // Sets or reads the Mute (MUT) status
-            Cat.Add("ZZMD", null); // Sets or reads the current mode
-            Cat.Add("ZZMG", null); // Sets or reads the Mic Gain
-            Cat.Add("ZZMN", null); // Sets or reads the DSP filter names and values
-            Cat.Add("ZZMO", null); // Sets or reads the Monitor (MON) status
-            Cat.Add("ZZMR", null); // Sets or reads the RX Meter mode
-            Cat.Add("ZZMS", null); // Sets or reads the MultiRX Swap checkbox
-            Cat.Add("ZZMT", null); // Sets or reads the TX Meter mode
-            Cat.Add("ZZMU", null); // Sets or reads the MultiRX button status
-            Cat.Add("ZZNA", null); // Sets or reads Noise Blanker 1 (NB) status
-            Cat.Add("ZZNB", null); // Sets or reads Noise Blanker 2 (NB2) status
-            Cat.Add("ZZNL", null); // Sets or reads Noise Blanker 1 threshold
-            Cat.Add("ZZNM", null); // Sets or reads the Noise Blanker 2 threshold
-            Cat.Add("ZZNR", null); // Sets or reads the Noise Reduction (NR) status
-            Cat.Add("ZZNT", null); // Sets or reads the Auto Notch Filter (ANF) status
-            Cat.Add("ZZOA", null); // Sets or reads the antenna connected to RX1
-            Cat.Add("ZZOB", null); // Sets or reads the antenna connected to RX2
-            Cat.Add("ZZOC", null); // Sets or reads the antenna connected to the transmitter
-            Cat.Add("ZZOD", null); // Sets or reads the Antenna Mode (Simple/Complex)
-            Cat.Add("ZZOE", null); // Sets or reads the RX1 Loop
-            Cat.Add("ZZOF", null); // Sets or reads the RCA TX relay jacks
-            Cat.Add("ZZOG", null); // Sets or reads the TX relay enables
-            Cat.Add("ZZOH", null); // Sets or reads the TX relay delays
-            Cat.Add("ZZOJ", null); // Sets or reads the Antenna Lock Checkbox
-            Cat.Add("ZZPA", null); // Sets or reads the Preamp Gain setting
-            Cat.Add("ZZPC", null); // Sets or reads the Drive Level
-            Cat.Add("ZZPD", null); // Sets the Display Pan Center button
-            Cat.Add("ZZPO", null); // Sets or reads the Display Peak button
-            Cat.Add("ZZPS", null); // Sets or reads the Start button status
-            Cat.Add("ZZPZ", null); // Sets or reads the Display Zoom buttons
-            Cat.Add("ZZQM", null); // Reads the Quick Save Memory value
-            Cat.Add("ZZQR", null); // Restores the Quick Save Memory value
-            Cat.Add("ZZQS", null); // Saves VFO A to Quick Memory
-            Cat.Add("ZZRA", null); // Sets or reads the RTTY Offset Enable VFO A
-            Cat.Add("ZZRB", null); // Sets or reads the RTTY Offset Enable VFO B
-            Cat.Add("ZZRC", null); // Clears the RIT frequency
-            Cat.Add("ZZRD", null); // Decrements the RIT frequency
-            Cat.Add("ZZRF", null); // Sets or reads the RIT frequency
-            Cat.Add("ZZRH", null); // Sets or reads the RTTY DIGH Offset Frequency
-            Cat.Add("ZZRL", null); // Sets or reads the RTTY DIGL Offset Frequency
-            Cat.Add("ZZRM", null); // Reads the Console Meter value
-            Cat.Add("ZZRS", null); // Sets or reads the RX2 button status
-            Cat.Add("ZZRT", null); // Sets or reads the RIT button status
-            Cat.Add("ZZRU", null); // Increments the RIT frequency
-            Cat.Add("ZZRV", null); // Reads the primary input voltage
-            Cat.Add("ZZSA", null); // Moves VFO A down one Tune Step
-            Cat.Add("ZZSB", null); // Moves VFO A up one Tune Step
-            Cat.Add("ZZSD", null); // Decrements the Tune Step
-            Cat.Add("ZZSF", null); // Sets the variable filter width and center frequency
-            Cat.Add("ZZSG", null); // Moves VFO B down one Tune Step
-            Cat.Add("ZZSH", null); // Moves VFO B up one Tune Step
-            Cat.Add("ZZSM", null); // Reads the S Meter
-            Cat.Add("ZZSO", null); // Sets or reads the Squelch on/off status
-            Cat.Add("ZZSP", null); // Sets or reads the VFO Split button status
-            Cat.Add("ZZSQ", null); // Sets or reads the Squelch level
-            Cat.Add("ZZSR", null); // Sets or reads the Spur Reduction (SR) status
-            Cat.Add("ZZSS", null); // Stops CWX sending (immediate)
-            Cat.Add("ZZST", null); // Reads the frequency step size (Deprecated)
-            Cat.Add("ZZSU", null); // Increments the Tune Step
-            Cat.Add("ZZSW", null); // Sets or reads VFO A TX/VFO B TX buttons
-            Cat.Add("ZZTF", null); // Sets or reads the Show TX Filter checkbox
-            Cat.Add("ZZTH", null); // Sets or reads the TX Filter High setting
-            Cat.Add("ZZTI", null); // Transmit Inhibit
-            Cat.Add("ZZTL", null); // Sets or reads the TX Filter Low setting
-            Cat.Add("ZZTO", null); // Sets or reads the TUN Power Level
-            Cat.Add("ZZTP", null); // Sets or reads the Transmit Profile
-            Cat.Add("ZZTS", null); // Reads the Flex5000 Temperature Sensor
-            Cat.Add("ZZTU", null); // Sets or reads the Tune (TUN) status
-            Cat.Add("ZZTX", null); // Sets or reads the MOX button status
-            Cat.Add("ZZUA", null); // Reads the XVTR Band Button Names
-            Cat.Add("ZZVA", null); // Sets or reads the VAC button status
-            Cat.Add("ZZVB", null); // Sets or reads the VAC RX Gain
-            Cat.Add("ZZVC", null); // Sets or reads the VAC TX Gain
-            Cat.Add("ZZVD", null); // Sets or reads the VAC Sample Rate
-            Cat.Add("ZZVE", null); // Sets or reads the VOX button status
-            Cat.Add("ZZVF", null); // Sets or reads the VAC Stereo button status
-            Cat.Add("ZZVG", null); // Sets or reads the VOX gain 
-            Cat.Add("ZZVG", null); // Sets or reads the I/Q to VAC Checkbox 
-            Cat.Add("ZZVI", null); // Sets or reads the VAC input cable
-            Cat.Add("ZZVL", null); // Sets or reads the VFO Lock status
-            Cat.Add("ZZVM", null); // Sets or reads the VAC driver
-            Cat.Add("ZZVN", null); // Reads the PowerSDR software version number
-            Cat.Add("ZZVO", null); // Sets or reads the VAC output cable
-            Cat.Add("ZZVS", null); // Sets the VFO Swap status
-            Cat.Add("ZZWA", null); // Sets or reads the Mixer Mic Level
-            Cat.Add("ZZWB", null); // Sets or reads the Mixer Line In RCA Level
-            Cat.Add("ZZWC", null); // Sets or reads the Mixer Line In Phono Level
-            Cat.Add("ZZWD", null); // Sets or reads the Mixer Line In DB9 Level
-            Cat.Add("ZZWE", null); // Sets or reads the Mixer Mic Select Checkbox
-            Cat.Add("ZZWF", null); // Sets or reads the Mixer Line In RCA Select Checkbox
-            Cat.Add("ZZWG", null); // Sets or reads the Mixer Line In Phono Select Checkbox
-            Cat.Add("ZZWH", null); // Sets or reads the Mixer Line In DB9 Select Checkbox
-            Cat.Add("ZZWJ", null); // Sets or reads the Mixer Input Mute All Button
-            Cat.Add("ZZWK", null); // Sets or reads the Mixer Internal Speaker Level
-            Cat.Add("ZZWL", null); // Sets or reads the Mixer External Speaker Level
-            Cat.Add("ZZWM", null); // Sets or reads the Mixer Headphone Level
-            Cat.Add("ZZWN", null); // Sets or reads the Mixer Line Out RCA Level
-            Cat.Add("ZZWO", null); // Sets or reads the Mixer Internal Speaker Select Checkbox
-            Cat.Add("ZZWP", null); // Sets or reads the Mixer External Speaker Select Checkbox
-            Cat.Add("ZZWQ", null); // Sets or reads the Mixer Headphone Select Checkbox
-            Cat.Add("ZZWR", null); // Sets or reads the Mixer Line Out RCA Select Checkbox
-            Cat.Add("ZZWS", null); // Sets or reads the Mixer Output Mute All Button
-            Cat.Add("ZZXC", null); // Clears the XIT frequency
-            Cat.Add("ZZXF", null); // Sets or reads the XIT frequency
-            Cat.Add("ZZXS", null); // Sets or reads the XIT button status
-            Cat.Add("ZZXT", null); // Sets or reads the X2TR button status
-            Cat.Add("ZZZB", null); // Sets the Zero Beat button
-            #endregion Cat hash
-
-            #region rState hash
-            // radio state
-            rState.Add("vfoa", null);    //vfo a freq
-            rState.Add("vfob", null);    //vfo b freq
-            rState.Add("vfotx", null);   //tx vfo a/b
-            rState.Add("rx1ant", null);  //ant rx1
-            rState.Add("rx2ant", null);  //ant rx2
-            rState.Add("txant", null);   //ant for xmit
-            rState.Add("txline", null);  //tx ptt lines
-            rState.Add("rx1band", null); //rx1 active band
-            rState.Add("rx2band", null); //rx2 active band
-            rState.Add("rx1mode", null); //rx1 mode
-            rState.Add("rx2mode", null); //rx2 mode
-            rState.Add("rx1dsp", null);  //rx1 recv filter
-            rState.Add("rx2dsp", null);  //rx2 recv filter
-            rState.Add("temp", null);    //pa temp
-            rState.Add("volts", null);   //radio primary voltage
-            rState.Add("tunstep", null); //tuning step size
-            rState.Add("txvfo", null);   //xmit vfo selected
-            rState.Add("drive", null);   //pa drive level
-            rState.Add("split", null);   //vfo split status    
-            rState.Add("tunsts", null);  //tune status on/off
-            rState.Add("moxsts", null);  //mox status on/off
-            rState.Add("meter", null);   //console meter readings
-            rState.Add("ritfreq", null); //vfo a rit freq
-            rState.Add("ritsts", null);  //vfo a rit status on/off
-            #endregion rState hash
-
-            #region Kenwood CAT hash
-            // equiv old kw command reassignments
-            kwCat.Add("AG", "ZZAG");
-            kwCat.Add("AI", "ZZAI");
-            kwCat.Add("BD", "ZZBD");
-            kwCat.Add("BU", "ZZBU");
-            kwCat.Add("DN", "ZZSA");
-            kwCat.Add("FA", "ZZFA");
-            kwCat.Add("FB", "ZZFB");
-            kwCat.Add("FT", "ZZSP");
-            kwCat.Add("GT", "ZZGT");
-            kwCat.Add("ID", "ZZID");
-            kwCat.Add("IF", "ZZIF");
-            kwCat.Add("KS", "ZZKS");
-            kwCat.Add("KY", "ZZKY");
-            kwCat.Add("MD", "ZZMD");
-            kwCat.Add("MG", "ZZMG");
-            kwCat.Add("MO", "ZZMO");
-            kwCat.Add("NB", "ZZNB");
-            kwCat.Add("NT", "ZZNT");
-            kwCat.Add("PC", "ZZPC");
-            kwCat.Add("PS", "ZZPS");
-            kwCat.Add("QI", "ZZQS");
-            kwCat.Add("RC", "ZZRC");
-            kwCat.Add("RD", "ZZRD");
-            kwCat.Add("RT", "ZZRT");
-            kwCat.Add("RU", "ZZRU");
-            kwCat.Add("RX", "ZZTX");
-            kwCat.Add("TX", "ZZTX");
-            kwCat.Add("SM", "ZZSM");
-            kwCat.Add("SQ", "ZZSQ");
-            kwCat.Add("UP", "ZZSB");
-            kwCat.Add("XS", "ZZXT");
-            #endregion Old CAT hash
-
-        }
-
-        // decode cmd and return value to caller
-        // cmd = raw data from port (ZZIF)
-        // caller is client port name (logPort, RCP2port)
-        string catParse(string cmd, string caller)
-        {
-            string rCmd = cmd.Substring(0, 4);
-            string nCmd = "";
-            if (cmd.Substring(0, 2) == "ZZ" && cmd.Length >= 4)
-            {
-                if (rState.ContainsKey(cmd))
-                    return rState[cmd].ToString();
-                else if (kwCat.ContainsKey(cmd))
-                    nCmd = kwCat[cmd].ToString(); // sub ZZ cmd for old kw cmd
-                if (rState.ContainsKey(nCmd))
-                    return rState[nCmd].ToString();
-                else
-                { //Save caller id and cmd in queue
-                    return "sent to radio";
-                }
-            }
-            return "";
-        }
-
-        #endregion # Methods #
-
-        #endregion State Machine
-        
                                                 
     } // end Setup class
 
