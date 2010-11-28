@@ -1,5 +1,0 @@
-C:\Documents and Settings\Steve\Desktop\RIOX-b0e88b7\RIOX\bin\Debug\RIOX.dll
-C:\Documents and Settings\Steve\Desktop\RIOX-b0e88b7\RIOX\bin\Debug\RIOX.pdb
-C:\Documents and Settings\Steve\Desktop\RIOX-b0e88b7\RIOX\obj\Debug\ResolveAssemblyReference.cache
-C:\Documents and Settings\Steve\Desktop\RIOX-b0e88b7\RIOX\obj\Debug\RIOX.dll
-C:\Documents and Settings\Steve\Desktop\RIOX-b0e88b7\RIOX\obj\Debug\RIOX.pdb
