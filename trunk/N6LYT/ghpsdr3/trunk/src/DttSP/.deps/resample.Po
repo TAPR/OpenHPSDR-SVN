@@ -3,7 +3,7 @@ resample.o: resample.c common.h fromsys.h /usr/include/sys/types.h \
  /usr/include/sys/cdefs.h /usr/include/bits/wordsize.h \
  /usr/include/gnu/stubs.h /usr/include/gnu/stubs-64.h \
  /usr/include/bits/types.h /usr/include/bits/typesizes.h \
- /usr/include/time.h /usr/lib/gcc/x86_64-linux-gnu/4.4.3/include/stddef.h \
+ /usr/include/time.h /usr/lib/gcc/x86_64-linux-gnu/4.4.5/include/stddef.h \
  /usr/include/endian.h /usr/include/bits/endian.h \
  /usr/include/bits/byteswap.h /usr/include/sys/select.h \
  /usr/include/bits/select.h /usr/include/bits/sigset.h \
@@ -11,10 +11,11 @@ resample.o: resample.c common.h fromsys.h /usr/include/sys/types.h \
  /usr/include/bits/pthreadtypes.h /usr/include/sys/stat.h \
  /usr/include/bits/stat.h /usr/include/xlocale.h /usr/include/fcntl.h \
  /usr/include/bits/fcntl.h /usr/include/bits/fcntl2.h \
- /usr/include/stdlib.h /usr/include/alloca.h /usr/include/bits/stdlib.h \
- /usr/include/stdio.h /usr/include/libio.h /usr/include/_G_config.h \
- /usr/include/wchar.h \
- /usr/lib/gcc/x86_64-linux-gnu/4.4.3/include/stdarg.h \
+ /usr/include/stdlib.h /usr/include/bits/waitflags.h \
+ /usr/include/bits/waitstatus.h /usr/include/alloca.h \
+ /usr/include/bits/stdlib.h /usr/include/stdio.h /usr/include/libio.h \
+ /usr/include/_G_config.h /usr/include/wchar.h \
+ /usr/lib/gcc/x86_64-linux-gnu/4.4.5/include/stdarg.h \
  /usr/include/bits/stdio_lim.h /usr/include/bits/sys_errlist.h \
  /usr/include/bits/stdio.h /usr/include/bits/stdio2.h \
  /usr/include/ctype.h /usr/include/string.h /usr/include/bits/string.h \
@@ -29,7 +30,7 @@ resample.o: resample.c common.h fromsys.h /usr/include/sys/types.h \
  oscillator.h dttspagc.h am_demod.h fm_demod.h resample.h resampleF.h \
  noiseblanker.h correctIQ.h dcblock.h speechproc.h wscompand.h spottone.h \
  meter.h spectrum.h isoband.h graphiceq.h /usr/include/pthread.h \
- /usr/include/sched.h /usr/include/bits/sched.h /usr/include/signal.h \
+ /usr/include/sched.h /usr/include/bits/sched.h \
  /usr/include/bits/setjmp.h /usr/include/semaphore.h \
  /usr/include/bits/semaphore.h sdrexport.h hilbert.h local.h
 
@@ -57,7 +58,7 @@ fromsys.h:
 
 /usr/include/time.h:
 
-/usr/lib/gcc/x86_64-linux-gnu/4.4.3/include/stddef.h:
+/usr/lib/gcc/x86_64-linux-gnu/4.4.5/include/stddef.h:
 
 /usr/include/endian.h:
 
@@ -91,6 +92,10 @@ fromsys.h:
 
 /usr/include/stdlib.h:
 
+/usr/include/bits/waitflags.h:
+
+/usr/include/bits/waitstatus.h:
+
 /usr/include/alloca.h:
 
 /usr/include/bits/stdlib.h:
@@ -103,7 +108,7 @@ fromsys.h:
 
 /usr/include/wchar.h:
 
-/usr/lib/gcc/x86_64-linux-gnu/4.4.3/include/stdarg.h:
+/usr/lib/gcc/x86_64-linux-gnu/4.4.5/include/stdarg.h:
 
 /usr/include/bits/stdio_lim.h:
 
@@ -214,8 +219,6 @@ graphiceq.h:
 /usr/include/sched.h:
 
 /usr/include/bits/sched.h:
-
-/usr/include/signal.h:
 
 /usr/include/bits/setjmp.h:
 
