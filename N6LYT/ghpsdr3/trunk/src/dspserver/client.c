@@ -185,6 +185,8 @@ if(timing) ftime(&start_time);
                     break;
                 }
                 message[bytesRead]=0;
+
+//fprintf(stderr,"Message: %s\n",message);
 if(timing) {
     ftime(&end_time);
     fprintf(stderr,"%s\n",message);
@@ -563,10 +565,10 @@ if(timing) {
                             fprintf(stderr,"Invalid command: '%s'\n",message);
                         }
                     } else {
-                        fprintf(stderr,"Invalid command: '%s'\n",message);
+                        fprintf(stderr,"Invalid command: token: '%s'\n",token);
                     }
                 } else {
-                    fprintf(stderr,"Invalid command: '%s'\n",message);
+                    fprintf(stderr,"Invalid command: message: '%s'\n",message);
                 }
 if(timing) {
     ftime(&end_time);
