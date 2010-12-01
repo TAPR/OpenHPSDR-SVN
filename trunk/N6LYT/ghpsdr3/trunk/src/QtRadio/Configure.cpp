@@ -35,7 +35,7 @@ Configure::Configure() {
     widget.sampleRateComboBox->addItem("48000");
     widget.audioChannelsSpinBox->setValue(1);
     widget.hostComboBox->addItem("127.0.0.1");
-    widget.hostComboBox->addItem("192.168.1.82");
+    widget.hostComboBox->addItem("g0orx.homelinux.net");
     widget.spectrumHighSpinBox->setValue(-40);
     widget.spectrumLowSpinBox->setValue(-160);
     widget.waterfallHighSpinBox->setValue(-60);
