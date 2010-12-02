@@ -42,6 +42,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
     for(i=0,nInterfaces=0;i<interfaces.getInterfaces();i++) {
         hwAddress=interfaces.getInterfaceHardwareAddress(i);
+        ip=interfaces.getInterfaceIPAddress(i);
         if((hwAddress==NULL) || (hwAddress=="00:00:00:00:00:00")) {
             // interface has no harwdare address so ignore it
         } else {
@@ -574,8 +575,7 @@ void MainWindow::commandCompleted() {
         break;
     case ERASING_ONLY:
         status("Device erased successfully");
-        pcap_close(handle);
-        state=IDLE;
+        idle();
         break;
     case READ_MAC:
         break;
@@ -583,8 +583,7 @@ void MainWindow::commandCompleted() {
         break;
     case WRITE_IP:
         status("Metis IP written successfully");
-        pcap_close(handle);
-        state=IDLE;
+        idle();
         break;
     }
 }
@@ -630,9 +629,6 @@ void MainWindow::idle() {
     //qDebug()<<"idle";
     if(rawReceiveThread!=NULL) {
         rawReceiveThread->stop();
-        if(handle!=NULL) {
-            pcap_close(handle);
-        }
     }
     state=IDLE;
 }

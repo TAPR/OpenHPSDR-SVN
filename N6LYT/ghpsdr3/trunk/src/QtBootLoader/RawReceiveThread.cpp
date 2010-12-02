@@ -105,4 +105,8 @@ void RawReceiveThread::run() {
             }
         }
     }
+
+    if(handle!=NULL) {
+        pcap_close(handle);
+    }
 }
