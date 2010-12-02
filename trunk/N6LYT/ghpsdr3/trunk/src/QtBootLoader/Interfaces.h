@@ -38,21 +38,27 @@
 
 #include <pcap.h>
 
+#include <QList>
+#include <QtNetwork/QNetworkInterface>
+#include <QtNetwork/QNetworkAddressEntry>
+
 class Interfaces
 {
 public:
     Interfaces();
     int getInterfaces();
     QString getInterfaceNameAt(int index);
-    unsigned char* getInterfaceHardwareAddress(QString ifname);
-    long getInterfaceIPAddress(QString ifname);
+    QString getInterfaceHardwareAddress(int index);
+    long getInterfaceIPAddress(int index);
 private:
-    int interfaces;
+    int nInterfaces;
     struct ifconf ifconf;
     struct ifreq ifreqs[20];
 
     pcap_if_t* alldevs;
     pcap_if_t* dev;
+
+    QList<QNetworkInterface> interfaces;
 };
 
 #endif // INTERFACES_H

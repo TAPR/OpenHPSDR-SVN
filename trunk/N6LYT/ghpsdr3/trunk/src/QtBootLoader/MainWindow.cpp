@@ -41,8 +41,8 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->setupUi(this);
 
     for(i=0,nInterfaces=0;i<interfaces.getInterfaces();i++) {
-        hw=interfaces.getInterfaceHardwareAddress(interfaces.getInterfaceNameAt(i));
-        if((hw==NULL) || (hw[0]==0 && hw[1]==0 && hw[2]==0 && hw[3]==0 && hw[4]==0 && hw[5]==0)) {
+        hwAddress=interfaces.getInterfaceHardwareAddress(i);
+        if((hwAddress==NULL) || (hwAddress=="00:00:00:00:00:00")) {
             // interface has no harwdare address so ignore it
         } else {
             ui->interfaceComboBox->addItem(interfaces.getInterfaceNameAt(i));
@@ -64,24 +64,31 @@ MainWindow::MainWindow(QWidget *parent) :
     QObject::connect(ui->writeIPPushButton,SIGNAL(clicked()),this,SLOT(setIP()));
 }
 
-MainWindow::~MainWindow()
-{
+MainWindow::~MainWindow() {
     delete ui;
 }
 
 // SLOTS
 void MainWindow::interfaceSelected(int index) {
-    long ip=interfaces.getInterfaceIPAddress(ui->interfaceComboBox->currentText());
-    unsigned char* hw=interfaces.getInterfaceHardwareAddress(ui->interfaceComboBox->currentText());
-    if(hw==NULL) {
+    bool ok;
+    ip=interfaces.getInterfaceIPAddress(index);
+    hwAddress=interfaces.getInterfaceHardwareAddress(index);
+    if(hwAddress==NULL) {
         ui->interfaceLabel->setText("");
         status("Inteface is not a valid network device");
     } else {
         QString text;
-        text.sprintf("MAC=%02X:%02X:%02X:%02X:%02X:%02X   IP=%ld.%ld.%ld.%ld",
-                     hw[0],hw[1],hw[2],hw[3],hw[4],hw[5],
-                     ip&0xFF,(ip>>8)&0xFF,(ip>>16)&0xFF,(ip>>24)&0xFF);
+        text.sprintf("MAC=%s  IP=%ld.%ld.%ld.%ld",
+                     hwAddress.toAscii().constData(),
+                     (ip>>24)&0xFF,(ip>>16)&0xFF,(ip>>8)&0xFF,ip&0xFF);
         ui->interfaceLabel->setText(text);
+
+        hw[0]=(unsigned char)hwAddress.mid(0,2).toInt(&ok,16);
+        hw[1]=(unsigned char)hwAddress.mid(3,2).toInt(&ok,16);
+        hw[2]=(unsigned char)hwAddress.mid(6,2).toInt(&ok,16);
+        hw[3]=(unsigned char)hwAddress.mid(9,2).toInt(&ok,16);
+        hw[4]=(unsigned char)hwAddress.mid(12,2).toInt(&ok,16);
+        hw[5]=(unsigned char)hwAddress.mid(15,2).toInt(&ok,16);
     }
 }
 
@@ -104,9 +111,6 @@ void MainWindow::program() {
     if(ui->interfaceComboBox->currentIndex()!=-1) {
         // check that a pof file has been selected
         if(ui->fileLineEdit->text().endsWith(".pof")) {
-
-            hw=interfaces.getInterfaceHardwareAddress(ui->interfaceComboBox->currentText());
-            ip=interfaces.getInterfaceIPAddress(ui->interfaceComboBox->currentText());
 
             // load the pof file and convert to rpd
             QFile pofFile(ui->fileLineEdit->text());
@@ -141,7 +145,7 @@ void MainWindow::program() {
 
                 qDebug() <<"start="<<start<<" end="<<end;
 
-                handle=pcap_open_live(ui->interfaceComboBox->currentText().toAscii().constData(),1024,1,1000,errbuf);
+                handle=pcap_open_live(ui->interfaceComboBox->currentText().toAscii().constData(),1024,1,TIMEOUT,errbuf);
                 if (handle == NULL) {
                     qDebug()<<"Couldn't open device "<<ui->interfaceComboBox->currentText().toAscii().constData()<<errbuf;
                     status("Error: cannot open interface (are you running as root)");
@@ -171,16 +175,16 @@ void MainWindow::program() {
 void MainWindow::erase() {
     char errbuf[PCAP_ERRBUF_SIZE];
 
+    //qDebug()<<"erase";
+
     ui->statusListWidget->clear();
     ui->statusListWidget->addItem("");
     percent=0;
 
     // check that an interface has been selected
     if(ui->interfaceComboBox->currentIndex()!=-1) {
-        hw=interfaces.getInterfaceHardwareAddress(ui->interfaceComboBox->currentText());
-        ip=interfaces.getInterfaceIPAddress(ui->interfaceComboBox->currentText());
 
-        handle=pcap_open_live(ui->interfaceComboBox->currentText().toAscii().constData(),1024,1,1000,errbuf);
+        handle=pcap_open_live(ui->interfaceComboBox->currentText().toAscii().constData(),1024,1,TIMEOUT,errbuf);
         if (handle == NULL) {
             qDebug()<<"Couldn't open device "<<ui->interfaceComboBox->currentText().toAscii().constData()<<errbuf;
             status("Error: cannot open interface (are you running as root)");
@@ -209,10 +213,10 @@ void MainWindow::getMAC() {
 
     // check that an interface has been selected
     if(ui->interfaceComboBox->currentIndex()!=-1) {
-        hw=interfaces.getInterfaceHardwareAddress(ui->interfaceComboBox->currentText());
-        ip=interfaces.getInterfaceIPAddress(ui->interfaceComboBox->currentText());
+        //hw=interfaces.getInterfaceHardwareAddress(ui->interfaceComboBox->currentText());
+        //ip=interfaces.getInterfaceIPAddress(ui->interfaceComboBox->currentText());
 
-        handle=pcap_open_live(ui->interfaceComboBox->currentText().toAscii().constData(),1024,1,1000,errbuf);
+        handle=pcap_open_live(ui->interfaceComboBox->currentText().toAscii().constData(),1024,1,TIMEOUT,errbuf);
         if (handle == NULL) {
             qDebug()<<"Couldn't open device "<<ui->interfaceComboBox->currentText().toAscii().constData()<<errbuf;
             status("Error: cannot open interface (are you running as root)");
@@ -238,12 +242,13 @@ void MainWindow::macAddress(unsigned char* mac) {
     text.sprintf("%02X:%02X:%02X:%02X:%02X:%02X",mac[0],mac[1],mac[2],mac[3],mac[4],mac[5]);
     ui->macLineEdit->setText(text);
     status("Metis MAC address read successfully");
+    idle();
 }
 
 void MainWindow::getIP() {
     char errbuf[PCAP_ERRBUF_SIZE];
 
-    qDebug()<<"getIP";
+    //qDebug()<<"getIP";
 
     ui->statusListWidget->clear();
     ui->statusListWidget->addItem("");
@@ -251,10 +256,8 @@ void MainWindow::getIP() {
 
     // check that an interface has been selected
     if(ui->interfaceComboBox->currentIndex()!=-1) {
-        hw=interfaces.getInterfaceHardwareAddress(ui->interfaceComboBox->currentText());
-        ip=interfaces.getInterfaceIPAddress(ui->interfaceComboBox->currentText());
 
-        handle=pcap_open_live(ui->interfaceComboBox->currentText().toAscii().constData(),1024,1,1000,errbuf);
+        handle=pcap_open_live(ui->interfaceComboBox->currentText().toAscii().constData(),1024,1,TIMEOUT,errbuf);
         if (handle == NULL) {
             qDebug()<<"Couldn't open device "<<ui->interfaceComboBox->currentText().toAscii().constData()<<errbuf;
             status("Error: cannot open interface (are you running as root)");
@@ -285,6 +288,7 @@ void MainWindow::ipAddress(unsigned char* ip) {
     text.sprintf("%d",ip[3]);
     ui->ipDLineEdit->setText(text);
     status("Metis IP address read successfully");
+    idle();
 }
 
 void MainWindow::setIP() {
@@ -304,7 +308,7 @@ void MainWindow::setIP() {
         status("Error: invalid IP address");
     } else {
 
-        handle=pcap_open_live(ui->interfaceComboBox->currentText().toAscii().constData(),1024,1,1000,errbuf);
+        handle=pcap_open_live(ui->interfaceComboBox->currentText().toAscii().constData(),1024,1,TIMEOUT,errbuf);
         if (handle == NULL) {
             qDebug()<<"Couldn't open device "<<ui->interfaceComboBox->currentText().toAscii().constData()<<errbuf;
             status("Error: cannot open interface (are you running as root)");
@@ -362,7 +366,10 @@ void MainWindow::eraseData() {
     int i;
     unsigned char buffer[62];
 
+    //qDebug()<<"eraseData";
+
     eraseTimeouts=0;
+
     if(handle!=NULL) {
 
         /*set the frame header*/
@@ -452,7 +459,7 @@ void MainWindow::readIP() {
     int i;
     unsigned char buffer[62];
 
-    qDebug()<<"readIP";
+    //qDebug()<<"readIP";
 
     eraseTimeouts=0;
     if(handle!=NULL) {
@@ -502,6 +509,8 @@ void MainWindow::sendData() {
     unsigned char buffer[272];
     int i;
 
+    //qDebug()<<"sendData offset="<<offset<<"start="<<start<<"end="<<end;
+
     if(handle!=NULL) {
         /*set the frame header*/
         buffer[0]=0x11; // dest address
@@ -541,7 +550,7 @@ void MainWindow::sendData() {
             if(p!=percent) {
                 if((p%20)==0) {
                     percent=p;
-                    text.sprintf("%d%% written",percent);
+                    text.sprintf("Programming device %d%% written ...",percent);
                     status(text);
                 }
             }
@@ -557,12 +566,14 @@ void MainWindow::commandCompleted() {
         // ignore
         break;
     case ERASING:
-        status("Device Erased successfully");
+        status("Device erased successfully");
+        state=PROGRAMMING;
         offset=start;
+        status("Programming device ...");
         sendData();
         break;
     case ERASING_ONLY:
-        status("Device Erased successfully");
+        status("Device erased successfully");
         pcap_close(handle);
         state=IDLE;
         break;
@@ -590,19 +601,21 @@ void MainWindow::nextBuffer() {
 }
 
 void MainWindow::timeout() {
-    qDebug()<<"timeout";
+    //qDebug()<<"timeout";
     switch(state) {
     case IDLE:
         // ignore
         break;
     case ERASING:
     case ERASING_ONLY:
-        //status("Erasing device ...");
         eraseTimeouts++;
         if(eraseTimeouts==MAX_ERASE_TIMEOUTS) {
             status("Error: erase timeout - have you set the jumper at JP1 and power cycled?");
             idle();
         }
+        break;
+    case PROGRAMMING:
+        //qDebug()<<"timeout";
         break;
     case READ_MAC:
         break;
@@ -614,6 +627,7 @@ void MainWindow::timeout() {
 }
 
 void MainWindow::idle() {
+    //qDebug()<<"idle";
     if(rawReceiveThread!=NULL) {
         rawReceiveThread->stop();
         if(handle!=NULL) {
@@ -624,6 +638,7 @@ void MainWindow::idle() {
 }
 
 void MainWindow::status(QString text) {
+    qDebug()<<"status:"<<text;
     ui->statusListWidget->insertItem(ui->statusListWidget->count()-1,text);
     ui->statusListWidget->setCurrentRow(ui->statusListWidget->count()-1);
 }

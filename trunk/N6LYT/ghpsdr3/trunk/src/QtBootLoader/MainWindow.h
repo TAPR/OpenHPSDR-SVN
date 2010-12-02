@@ -41,7 +41,8 @@
 #define READ_IP 5
 #define WRITE_IP 6
 
-#define MAX_ERASE_TIMEOUTS 20
+#define TIMEOUT 10 // ms
+#define MAX_ERASE_TIMEOUTS (20*(1000/TIMEOUT)) // 20 seconds
 
 namespace Ui {
     class MainWindow;
@@ -85,7 +86,8 @@ private:
 
     Interfaces interfaces;
     long ip;
-    unsigned char* hw;
+    QString hwAddress;
+    unsigned char hw[6];
 
     char* data;
     int offset;
