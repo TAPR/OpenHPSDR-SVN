@@ -29,82 +29,69 @@
 #include "Interfaces.h"
 
 // get a list of the interfaces on the system
-Interfaces::Interfaces()
-{
-    char errbuf[PCAP_ERRBUF_SIZE];
-    pcap_addr_t* addr;
-    struct sockaddr* sa;
-    struct sockaddr_in* sa_in;
-
-    interfaces=0;
-    if (pcap_findalldevs(&alldevs, errbuf) == -1) {
-        qDebug()<<"Error in pcap_findalldevs:" << errbuf;
-    } else {
-        /* Print the list */
-        for(dev=alldevs; dev; dev=dev->next) {
-            interfaces++;
-            qDebug() << dev->name;
-            for(addr=dev->addresses; addr; addr=addr->next) {
-                sa=addr->addr;
-                if(sa->sa_family==AF_INET) {
-                    sa_in=(sockaddr_in*)sa;
-                    qDebug() << "AF_INET" << inet_ntoa(sa_in->sin_addr);
-                }
+Interfaces::Interfaces() {
+    nInterfaces=0;
+    QList<QNetworkInterface> list = QNetworkInterface::allInterfaces();
+    foreach (QNetworkInterface iface, list) {
+        //qDebug() << iface.name() <<"="<< iface.hardwareAddress();
+        QList<QNetworkAddressEntry> addressEntries=iface.addressEntries();
+        foreach(QNetworkAddressEntry addr,addressEntries) {
+            if((addr.ip().toIPv4Address() != 0) && (addr.ip().toIPv4Address() != 0x7f000001)) {
+                qDebug()<<iface.name()<<iface.hardwareAddress()<<addr.ip().toIPv4Address();
+                interfaces.append(iface);
+                nInterfaces++;
             }
         }
     }
-
-    qDebug() << "Interfaces found " << interfaces;
+    qDebug() << "Interfaces found " << nInterfaces;
 }
 
 int Interfaces::getInterfaces() {
-    return interfaces;
+    return nInterfaces;
 }
 
 QString Interfaces::getInterfaceNameAt(int index) {
-    char *name;
-    int i;
-    for(dev=alldevs,i=0; dev; dev=dev->next,i++) {
+    QString name;
+    int i=0;
+    foreach (QNetworkInterface iface, interfaces) {
         if(i==index) {
-            name=dev->name;
+            name=iface.name();
             break;
         }
+        i++;
     }
-    return QString(name);
+    return name;
 }
 
-unsigned char* Interfaces::getInterfaceHardwareAddress(QString ifname) {
-    static unsigned char* u;
-    static struct ifreq iface;
-    int rc;
-    int sock=socket(AF_INET,SOCK_DGRAM,0);
-
-    iface.ifr_addr.sa_family=AF_INET;
-    strncpy(iface.ifr_name,ifname.toAscii(),sizeof(iface.ifr_name));
-    if((rc=ioctl(sock,SIOCGIFHWADDR,&iface))<0) {
-        u=NULL;
-        qDebug()<<"No interface found for"<<ifname<<"rc="<<rc;
-    } else {
-        u=(unsigned char*)&(iface.ifr_addr.sa_data);
+QString Interfaces::getInterfaceHardwareAddress(int index) {
+    QString addr=0L;
+    int i=0;
+    foreach (QNetworkInterface iface, interfaces) {
+        if(i==index) {
+            addr=iface.hardwareAddress();
+            break;
+        }
+        i++;
     }
-    close(sock);
-    return u;
+    return addr;
 }
 
-long Interfaces::getInterfaceIPAddress(QString ifname) {
-    long ipAddress=0;
-    int rc;
-    int sock=socket(AF_INET,SOCK_DGRAM,0);
-    struct ifreq iface;
-    iface.ifr_addr.sa_family=AF_INET;
-    strncpy(iface.ifr_name,ifname.toAscii(),sizeof(iface.ifr_name));
-    if((rc=ioctl(sock,SIOCGIFADDR,&iface))<0) {
-        qDebug()<<"No interface found for"<<ifname<<"rc="<<rc;
-    } else {
-        struct sockaddr_in *sin = (struct sockaddr_in *)&iface.ifr_addr;
-        ipAddress=sin->sin_addr.s_addr;
+long Interfaces::getInterfaceIPAddress(int index) {
+    long a=0L;
+    int i;
+    foreach (QNetworkInterface iface, interfaces) {
+        if(i==index) {
+            QList<QNetworkAddressEntry> addressEntries=iface.addressEntries();
+            foreach(QNetworkAddressEntry addr,addressEntries) {
+                if((addr.ip().toIPv4Address() != 0) && (addr.ip().toIPv4Address() != 0x7f000001)) {
+                    a=addr.ip().toIPv4Address();
+                    break;
+                }
+            }
+            break;
+        }
+        i++;
     }
-    close(sock);
-    return ipAddress;
+    return a;
 }
 
