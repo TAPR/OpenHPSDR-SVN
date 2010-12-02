@@ -69,7 +69,7 @@ MainWindow::~MainWindow() {
     delete ui;
 }
 
-// SLOTS
+// SLOT - interfaceSelected - called when the interface selection is changed
 void MainWindow::interfaceSelected(int index) {
     bool ok;
     ip=interfaces.getInterfaceIPAddress(index);
@@ -93,11 +93,13 @@ void MainWindow::interfaceSelected(int index) {
     }
 }
 
+// SLOT - browse - called when the "Browse ..." button on the Program tab is pressed.
 void MainWindow::browse() {
     QString fileName=QFileDialog::getOpenFileName(this,tr("Select File"),"",tr("pof Files (*.pof)"));
     ui->fileLineEdit->setText(fileName);
 }
 
+// SLOT - program - called when the "Program" button on the Program tab is pressed.
 void MainWindow::program() {
     char errbuf[PCAP_ERRBUF_SIZE];
     int length;
@@ -173,9 +175,9 @@ void MainWindow::program() {
     }
 }
 
+// SLOT - erase - called when the "Erase" button on the Erase taqb is pressed
 void MainWindow::erase() {
     char errbuf[PCAP_ERRBUF_SIZE];
-
     //qDebug()<<"erase";
 
     ui->statusListWidget->clear();
@@ -205,6 +207,7 @@ void MainWindow::erase() {
     }
 }
 
+// SLOT - getMac - called when the "Read" button on the MAC Address tab is pressed.
 void MainWindow::getMAC() {
     char errbuf[PCAP_ERRBUF_SIZE];
 
@@ -238,6 +241,7 @@ void MainWindow::getMAC() {
 
 }
 
+// SLOT - macAddress - called when the reply packet is received containg the Metis MAC address.
 void MainWindow::macAddress(unsigned char* mac) {
     QString text;
     text.sprintf("%02X:%02X:%02X:%02X:%02X:%02X",mac[0],mac[1],mac[2],mac[3],mac[4],mac[5]);
@@ -246,6 +250,7 @@ void MainWindow::macAddress(unsigned char* mac) {
     idle();
 }
 
+// SLOT - getIP - called whent he "Read" button on the IP Address tab is pressed.
 void MainWindow::getIP() {
     char errbuf[PCAP_ERRBUF_SIZE];
 
@@ -278,6 +283,7 @@ void MainWindow::getIP() {
     }
 }
 
+// SLOT - ipAddress - called when the reply packet is received containing Metis IP address.
 void MainWindow::ipAddress(unsigned char* ip) {
     QString text;
     text.sprintf("%d",ip[0]);
@@ -292,6 +298,7 @@ void MainWindow::ipAddress(unsigned char* ip) {
     idle();
 }
 
+// SLOT - setIP - called when the "Write" button on the IP Address tab is pressed.
 void MainWindow::setIP() {
     char errbuf[PCAP_ERRBUF_SIZE];
     unsigned char buffer[66];
@@ -363,6 +370,7 @@ void MainWindow::setIP() {
     }
 }
 
+// private function to send the command to erase
 void MainWindow::eraseData() {
     int i;
     unsigned char buffer[62];
@@ -411,6 +419,7 @@ void MainWindow::eraseData() {
     }
 }
 
+// private function to send command to read MAC address from Metis
 void MainWindow::readMAC() {
     int i;
     unsigned char buffer[62];
@@ -456,6 +465,7 @@ void MainWindow::readMAC() {
     }
 }
 
+// private function to read the IP address from Metis.
 void MainWindow::readIP() {
     int i;
     unsigned char buffer[62];
@@ -506,6 +516,7 @@ void MainWindow::readIP() {
     }
 }
 
+// private function to send 256 byte block of the pof file.
 void MainWindow::sendData() {
     unsigned char buffer[272];
     int i;
@@ -561,6 +572,7 @@ void MainWindow::sendData() {
     }
 }
 
+// SLOT - commandCompleted - called when a command completed reply packet received
 void MainWindow::commandCompleted() {
     switch(state) {
     case IDLE:
@@ -588,6 +600,7 @@ void MainWindow::commandCompleted() {
     }
 }
 
+// SLOT - called when a ready for next buffer reply packet is received.
 void MainWindow::nextBuffer() {
     offset+=256;
     if(offset<end) {
@@ -599,6 +612,7 @@ void MainWindow::nextBuffer() {
     }
 }
 
+// SLOT - called when a packet read times out (especially when erasing)
 void MainWindow::timeout() {
     //qDebug()<<"timeout";
     switch(state) {
@@ -625,6 +639,7 @@ void MainWindow::timeout() {
     }
 }
 
+// private function to set state to idle
 void MainWindow::idle() {
     //qDebug()<<"idle";
     if(rawReceiveThread!=NULL) {
@@ -633,6 +648,7 @@ void MainWindow::idle() {
     state=IDLE;
 }
 
+// private function to display message in the status window
 void MainWindow::status(QString text) {
     qDebug()<<"status:"<<text;
     ui->statusListWidget->insertItem(ui->statusListWidget->count()-1,text);
