@@ -29,7 +29,7 @@
 #include "QDebug"
 #include "QFile"
 #include "QFileDialog"
-
+#include "pcap.h"
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -40,6 +40,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
     ui->setupUi(this);
 
+#if 0
     for(i=0,nInterfaces=0;i<interfaces.getInterfaces();i++) {
         hwAddress=interfaces.getInterfaceHardwareAddress(i);
         ip=interfaces.getInterfaceIPAddress(i);
@@ -50,6 +51,12 @@ MainWindow::MainWindow(QWidget *parent) :
             nInterfaces++;
         }
     }
+#endif
+    for (i = 0; i < interfaces.getInterfaces(); ++i)
+    {   ui->interfaceComboBox->addItem(interfaces.getInterfaceNameAt(i));
+        ++nInterfaces;
+    }
+
 
     if(nInterfaces>0) {
         ui->interfaceComboBox->setCurrentIndex(0);
@@ -219,8 +226,9 @@ void MainWindow::getMAC() {
     if(ui->interfaceComboBox->currentIndex()!=-1) {
         //hw=interfaces.getInterfaceHardwareAddress(ui->interfaceComboBox->currentText());
         //ip=interfaces.getInterfaceIPAddress(ui->interfaceComboBox->currentText());
-
-        handle=pcap_open_live(ui->interfaceComboBox->currentText().toAscii().constData(),1024,1,TIMEOUT,errbuf);
+//    QString x = ui->interfaceComboBox->currentText().toAscii().constData();
+    QString x = ui->interfaceComboBox->currentText();
+        handle=pcap_open_live(x.toAscii(),1024,1,TIMEOUT,errbuf);
         if (handle == NULL) {
             qDebug()<<"Couldn't open device "<<ui->interfaceComboBox->currentText().toAscii().constData()<<errbuf;
             status("Error: cannot open interface (are you running as root)");
@@ -231,7 +239,7 @@ void MainWindow::getMAC() {
             QObject::connect(rawReceiveThread,SIGNAL(macAddress(unsigned char*)),this,SLOT(macAddress(unsigned char*)));
             QObject::connect(rawReceiveThread,SIGNAL(timeout()),this,SLOT(timeout()));
 
-            // start by erasing
+
             state=READ_MAC;
             readMAC();
         }
@@ -274,7 +282,7 @@ void MainWindow::getIP() {
             QObject::connect(rawReceiveThread,SIGNAL(ipAddress(unsigned char*)),this,SLOT(ipAddress(unsigned char*)));
             QObject::connect(rawReceiveThread,SIGNAL(timeout()),this,SLOT(timeout()));
 
-            // start by erasing
+
             state=READ_IP;
             readIP();
         }
@@ -355,10 +363,8 @@ void MainWindow::setIP() {
                 buffer[i+20]=(unsigned char)0x00;
             }
 
-            int bytes=0;
-            bytes=pcap_inject(handle,buffer,66);
-            if(bytes!=66) {
-                qDebug() << "pcap_inject returned:" << bytes;
+           if(pcap_sendpacket(handle,buffer,62)!=0) {
+                qDebug()<<"pcap_sendpacket failed";
                 status("send write ip command failed");
                 idle();
             } else {
@@ -407,10 +413,8 @@ void MainWindow::eraseData() {
                 buffer[i+16]=(unsigned char)0x00;
         }
 
-        int bytes=0;
-        bytes=pcap_inject(handle,buffer,62);
-        if(bytes!=62) {
-            qDebug() << "pcap_inject returned:" << bytes;
+        if(pcap_sendpacket(handle,buffer,62)!=0) {
+            qDebug()<<"pcap_sendpacket failed";
             status("send erase command failed");
             idle();
         } else {
@@ -453,10 +457,8 @@ void MainWindow::readMAC() {
                 buffer[i+16]=(unsigned char)0x00;
         }
 
-        int bytes=0;
-        bytes=pcap_inject(handle,buffer,62);
-        if(bytes!=62) {
-            qDebug() << "pcap_inject returned:" << bytes;
+        if(pcap_sendpacket(handle,buffer,62)!=0) {
+            qDebug()<<"pcap_sendpacket failed";
             status("send erase command failed");
             idle();
         } else {
@@ -502,11 +504,9 @@ void MainWindow::readIP() {
         }
 
         if(handle!=NULL) {
-            qDebug() << "pcap_inject";
-            int bytes=0;
-            bytes=pcap_inject(handle,buffer,62);
-            if(bytes!=62) {
-                qDebug() << "pcap_inject returned:" << bytes;
+            //qDebug() << "pcap_sendpacket";
+            if(pcap_sendpacket(handle,buffer,62)!=0) {
+                qDebug()<<"pcap_sendpacket failed";
                 status("send erase command failed");
                 idle();
             } else {
@@ -550,10 +550,8 @@ void MainWindow::sendData() {
                 buffer[i+16]=(unsigned char)data[i+offset];
         }
 
-        int bytes=0;
-        bytes=pcap_inject(handle,buffer,272);
-        if(bytes!=(272)) {
-            qDebug() << "pcap_inject returned:" << bytes;
+        if(pcap_sendpacket(handle,buffer,272)!=0) {
+            qDebug()<<"pcap_sendpacket failed";
             status("send data command failed");
             idle();
         } else {
@@ -631,10 +629,15 @@ void MainWindow::timeout() {
         //qDebug()<<"timeout";
         break;
     case READ_MAC:
+        status("Error: timeout reading MAC address!");
+        idle();
         break;
     case READ_IP:
+        status("Error: timeout reading IP address!");
+        idle();
         break;
     case WRITE_IP:
+        // should not happen as there is no repsonse
         break;
     }
 }
