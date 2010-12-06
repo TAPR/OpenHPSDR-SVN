@@ -27,14 +27,10 @@
 #define INTERFACES_H
 
 #include <sys/types.h>
+#ifndef __WIN32
 #include <sys/socket.h>
-#include <sys/ioctl.h>
 #include <netinet/in.h>
-#include <arpa/inet.h>
-#include <netdb.h>
-#include <net/if_arp.h>
-#include <net/if.h>
-#include <ifaddrs.h>
+#endif
 
 #include <pcap.h>
 
@@ -52,13 +48,12 @@ public:
     long getInterfaceIPAddress(int index);
 private:
     int nInterfaces;
-    struct ifconf ifconf;
-    struct ifreq ifreqs[20];
 
     pcap_if_t* alldevs;
     pcap_if_t* dev;
 
     QList<QNetworkInterface> interfaces;
+    QList<QString> interfaceNames;
 };
 
 #endif // INTERFACES_H

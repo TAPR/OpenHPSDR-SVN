@@ -55,13 +55,13 @@
     <property name="geometry">
      <rect>
       <x>20</x>
-      <y>130</y>
+      <y>160</y>
       <width>711</width>
-      <height>131</height>
+      <height>111</height>
      </rect>
     </property>
     <property name="currentIndex">
-     <number>3</number>
+     <number>0</number>
     </property>
     <widget class="QWidget" name="tab">
      <attribute name="title">
@@ -172,34 +172,6 @@
       </property>
      </widget>
     </widget>
-    <widget class="QWidget" name="tab_3">
-     <attribute name="title">
-      <string>MAC Address</string>
-     </attribute>
-     <widget class="QPushButton" name="readMACPushButton">
-      <property name="geometry">
-       <rect>
-        <x>30</x>
-        <y>30</y>
-        <width>98</width>
-        <height>27</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Read</string>
-      </property>
-     </widget>
-     <widget class="QLineEdit" name="macLineEdit">
-      <property name="geometry">
-       <rect>
-        <x>180</x>
-        <y>30</y>
-        <width>251</width>
-        <height>27</height>
-       </rect>
-      </property>
-     </widget>
-    </widget>
     <widget class="QWidget" name="tab_4">
      <attribute name="title">
       <string>IP Address</string>
@@ -307,6 +279,34 @@
       </property>
       <property name="text">
        <string>.</string>
+      </property>
+     </widget>
+    </widget>
+    <widget class="QWidget" name="tab_3">
+     <attribute name="title">
+      <string>MAC Address</string>
+     </attribute>
+     <widget class="QPushButton" name="readMACPushButton">
+      <property name="geometry">
+       <rect>
+        <x>30</x>
+        <y>30</y>
+        <width>98</width>
+        <height>27</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Read</string>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="macLineEdit">
+      <property name="geometry">
+       <rect>
+        <x>180</x>
+        <y>30</y>
+        <width>251</width>
+        <height>27</height>
+       </rect>
       </property>
      </widget>
     </widget>
@@ -503,9 +503,9 @@
    <widget class="QComboBox" name="interfaceComboBox">
     <property name="geometry">
      <rect>
-      <x>100</x>
+      <x>90</x>
       <y>100</y>
-      <width>85</width>
+      <width>91</width>
       <height>27</height>
      </rect>
     </property>
@@ -550,9 +550,9 @@
    <widget class="QLabel" name="interfaceLabel">
     <property name="geometry">
      <rect>
-      <x>200</x>
+      <x>190</x>
       <y>100</y>
-      <width>431</width>
+      <width>541</width>
       <height>31</height>
      </rect>
     </property>
@@ -575,9 +575,9 @@
     <property name="geometry">
      <rect>
       <x>20</x>
-      <y>270</y>
+      <y>280</y>
       <width>711</width>
-      <height>181</height>
+      <height>211</height>
      </rect>
     </property>
     <property name="palette">

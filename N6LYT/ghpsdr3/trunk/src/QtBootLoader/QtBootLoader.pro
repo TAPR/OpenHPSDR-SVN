@@ -9,7 +9,11 @@ QT       += core gui network
 TARGET = QtBootLoader
 TEMPLATE = app
 
-LIBS += -lpcap
+win32 {
+    LIBS += wpcap.lib
+} else {
+    LIBS += -lpcap
+}
 
 SOURCES += main.cpp\
         MainWindow.cpp \
