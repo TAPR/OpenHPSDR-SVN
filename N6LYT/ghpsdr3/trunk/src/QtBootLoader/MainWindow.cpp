@@ -29,6 +29,7 @@
 #include "QDebug"
 #include "QFile"
 #include "QFileDialog"
+#include "QRect"
 #include "pcap.h"
 
 MainWindow::MainWindow(QWidget *parent) :
@@ -40,18 +41,15 @@ MainWindow::MainWindow(QWidget *parent) :
 
     ui->setupUi(this);
 
-#if 0
-    for(i=0,nInterfaces=0;i<interfaces.getInterfaces();i++) {
-        hwAddress=interfaces.getInterfaceHardwareAddress(i);
-        ip=interfaces.getInterfaceIPAddress(i);
-        if((hwAddress==NULL) || (hwAddress=="00:00:00:00:00:00")) {
-            // interface has no harwdare address so ignore it
-        } else {
-            ui->interfaceComboBox->addItem(interfaces.getInterfaceNameAt(i));
-            nInterfaces++;
-        }
-    }
+#ifdef __WIN32
+    ui->privilegesLabel->setText("You must be running with Administrator privileges to be able to read/write raw ethernet frames.");
+    QRect rect=ui->interfaceComboBox->geometry();
+    rect.setWidth(ui->interfaceLabel->width());
+    ui->interfaceComboBox->setGeometry(rect);
+#else
+    ui->privilegesLabel->setText("You must be running as root to be able to read/write raw ethernet frames.");
 #endif
+
     for (i = 0; i < interfaces.getInterfaces(); ++i)
     {   ui->interfaceComboBox->addItem(interfaces.getInterfaceNameAt(i));
         ++nInterfaces;
@@ -378,105 +376,33 @@ void MainWindow::setIP() {
 
 // private function to send the command to erase
 void MainWindow::eraseData() {
-    int i;
-    unsigned char buffer[62];
-
-    //qDebug()<<"eraseData";
-
     eraseTimeouts=0;
-
-    if(handle!=NULL) {
-
-        /*set the frame header*/
-        buffer[0]=0x11; // dest address
-        buffer[1]=0x22;
-        buffer[2]=0x33;
-        buffer[3]=0x44;
-        buffer[4]=0x55;
-        buffer[5]=0x66;
-
-        buffer[6]=hw[0]; // src address
-        buffer[7]=hw[1];
-        buffer[8]=hw[2];
-        buffer[9]=hw[3];
-        buffer[10]=hw[4];
-        buffer[11]=hw[5];
-
-        buffer[12]=0xEF; // protocol
-        buffer[13]=0xFE;
-
-        buffer[14]=0x03; //
-        buffer[15]=0x02; // erase
-
-        /*fill the frame with 0x00*/
-        for(i=0;i<46;i++) {
-                buffer[i+16]=(unsigned char)0x00;
-        }
-
-        if(pcap_sendpacket(handle,buffer,62)!=0) {
-            qDebug()<<"pcap_sendpacket failed";
-            status("send erase command failed");
-            idle();
-        } else {
-            status("Erasing device ... (takes several seconds)");
-        }
-    }
+    status("Erasing device ... (takes several seconds)");
+    sendCommand(0x02);
 }
 
 // private function to send command to read MAC address from Metis
 void MainWindow::readMAC() {
-    int i;
-    unsigned char buffer[62];
-
     eraseTimeouts=0;
-    if(handle!=NULL) {
-
-        /*set the frame header*/
-        buffer[0]=0x11; // dest address
-        buffer[1]=0x22;
-        buffer[2]=0x33;
-        buffer[3]=0x44;
-        buffer[4]=0x55;
-        buffer[5]=0x66;
-
-        buffer[6]=hw[0]; // src address
-        buffer[7]=hw[1];
-        buffer[8]=hw[2];
-        buffer[9]=hw[3];
-        buffer[10]=hw[4];
-        buffer[11]=hw[5];
-
-        buffer[12]=0xEF; // protocol
-        buffer[13]=0xFE;
-
-        buffer[14]=0x03; //
-        buffer[15]=0x03; // read MAC
-
-        /*fill the frame with 0x00*/
-        for(i=0;i<46;i++) {
-                buffer[i+16]=(unsigned char)0x00;
-        }
-
-        if(pcap_sendpacket(handle,buffer,62)!=0) {
-            qDebug()<<"pcap_sendpacket failed";
-            status("send erase command failed");
-            idle();
-        } else {
-            status("Reading Metis MAC Address ...");
-        }
-    }
+    status("Reading Metis MAC Address ...");
+    sendCommand(0x03);
 }
 
 // private function to read the IP address from Metis.
 void MainWindow::readIP() {
-    int i;
-    unsigned char buffer[62];
-
-    //qDebug()<<"readIP";
-
     eraseTimeouts=0;
-    if(handle!=NULL) {
+    status("Reading Metis IP address ...");
+    sendCommand(0x04);
+}
 
+// private function to send a command.
+void MainWindow::sendCommand(unsigned char command) {
+    unsigned char buffer[62];
+    int i;
+
+    //qDebug()<<"sendCommand "<<command;
+
+    if(handle!=NULL) {
         /*set the frame header*/
         buffer[0]=0x11; // dest address
         buffer[1]=0x22;
@@ -495,8 +421,8 @@ void MainWindow::readIP() {
         buffer[12]=0xEF; // protocol
         buffer[13]=0xFE;
 
-        buffer[14]=0x03; //
-        buffer[15]=0x04; // read IP
+        buffer[14]=0x03;
+        buffer[15]=command;
 
         /*fill the frame with 0x00*/
         for(i=0;i<46;i++) {
@@ -507,10 +433,8 @@ void MainWindow::readIP() {
             //qDebug() << "pcap_sendpacket";
             if(pcap_sendpacket(handle,buffer,62)!=0) {
                 qDebug()<<"pcap_sendpacket failed";
-                status("send erase command failed");
+                status("send command failed");
                 idle();
-            } else {
-                status("Reading Metis IP address ...");
             }
         }
     }

@@ -79,6 +79,7 @@ private:
     void readMAC();
     void readIP();
     void writeIP();
+    void sendCommand(unsigned char command);
     void sendData();
 
     void idle();

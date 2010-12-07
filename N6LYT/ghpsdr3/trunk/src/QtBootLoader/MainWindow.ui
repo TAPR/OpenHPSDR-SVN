@@ -390,7 +390,7 @@
      </font>
     </property>
     <property name="frameShape">
-     <enum>QFrame::Panel</enum>
+     <enum>QFrame::NoFrame</enum>
     </property>
     <property name="frameShadow">
      <enum>QFrame::Raised</enum>
@@ -399,7 +399,7 @@
      <string>Check that there is a jumper on JP1 of Metis and that it has been power cycled.</string>
     </property>
    </widget>
-   <widget class="QLabel" name="label_4">
+   <widget class="QLabel" name="privilegesLabel">
     <property name="geometry">
      <rect>
       <x>20</x>
@@ -478,20 +478,20 @@
      </font>
     </property>
     <property name="frameShape">
-     <enum>QFrame::Panel</enum>
+     <enum>QFrame::NoFrame</enum>
     </property>
     <property name="frameShadow">
      <enum>QFrame::Raised</enum>
     </property>
     <property name="text">
-     <string>You must be running as root to be able to read/write raw ethernet frames.</string>
+     <string>You must be running with Administrator privileges to be able to read/write raw ethernet frames.</string>
     </property>
    </widget>
    <widget class="QLabel" name="label_2">
     <property name="geometry">
      <rect>
       <x>20</x>
-      <y>110</y>
+      <y>100</y>
       <width>67</width>
       <height>17</height>
      </rect>
@@ -504,7 +504,7 @@
     <property name="geometry">
      <rect>
       <x>90</x>
-      <y>100</y>
+      <y>90</y>
       <width>91</width>
       <height>27</height>
      </rect>
@@ -550,8 +550,8 @@
    <widget class="QLabel" name="interfaceLabel">
     <property name="geometry">
      <rect>
-      <x>190</x>
-      <y>100</y>
+      <x>90</x>
+      <y>120</y>
       <width>541</width>
       <height>31</height>
      </rect>
@@ -562,7 +562,7 @@
      </font>
     </property>
     <property name="frameShape">
-     <enum>QFrame::Panel</enum>
+     <enum>QFrame::NoFrame</enum>
     </property>
     <property name="frameShadow">
      <enum>QFrame::Raised</enum>
@@ -636,7 +636,6 @@
    </widget>
    <addaction name="menuFile"/>
   </widget>
-  <widget class="QStatusBar" name="statusBar"/>
   <action name="actionQuit">
    <property name="text">
     <string>Quit</string>
