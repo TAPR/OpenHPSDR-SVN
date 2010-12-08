@@ -57,7 +57,6 @@ Configure::Configure() {
     widget.anfLeakSpinBox->setValue(1);
     widget.nbThresholdSpinBox->setValue(20);
 
-
     connect(widget.spectrumHighSpinBox,SIGNAL(valueChanged(int)),this,SLOT(slotSpectrumHighChanged(int)));
     connect(widget.spectrumLowSpinBox,SIGNAL(valueChanged(int)),this,SLOT(slotSpectrumLowChanged(int)));
     connect(widget.fpsSpinBox,SIGNAL(valueChanged(int)),this,SLOT(slotFpsChanged(int)));

@@ -50,6 +50,11 @@
     <property name="title">
      <string>Band</string>
     </property>
+    <widget class="QMenu" name="menuXVTR">
+     <property name="title">
+      <string>XVTR</string>
+     </property>
+    </widget>
     <addaction name="action160"/>
     <addaction name="action80"/>
     <addaction name="action60"/>
@@ -61,8 +66,12 @@
     <addaction name="action12"/>
     <addaction name="action10"/>
     <addaction name="action6"/>
+    <addaction name="separator"/>
     <addaction name="actionGen"/>
     <addaction name="actionWWV"/>
+    <addaction name="separator"/>
+    <addaction name="menuXVTR"/>
+    <addaction name="separator"/>
    </widget>
    <widget class="QMenu" name="menuMode">
     <property name="title">
@@ -712,6 +721,11 @@
   <action name="actionViewBookmarks">
    <property name="text">
     <string>View Bookmarks</string>
+   </property>
+  </action>
+  <action name="actionXVTRConfigure">
+   <property name="text">
+    <string>Configure</string>
    </property>
   </action>
  </widget>
