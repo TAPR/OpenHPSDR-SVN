@@ -505,7 +505,8 @@ if(timing) {
                         token=strtok(NULL," ");
                         if(token!=NULL) {
                             state=atoi(token);
-                            SetDCBlock(0,state);
+                            SetRXDCBlock(0,0,state);
+                            SetRXDCBlock(0,1,state);
                         } else {
                             fprintf(stderr,"Invalid command: '%s'\n",message);
                         }
