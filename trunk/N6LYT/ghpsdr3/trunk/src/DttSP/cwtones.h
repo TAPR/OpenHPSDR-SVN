@@ -57,6 +57,7 @@ typedef struct _cw_tone_gen
     REAL freq;
     OSC gen;
   } osc;
+  double harmonic, amplitude, phase;
   struct
   {
     REAL dur, incr;

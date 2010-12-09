@@ -33,6 +33,27 @@ Bridgewater, NJ 08807
 
 #include <cwtones.h>
 
+void
+CWComplexOSC (OSC p, double harmonic, double phase, double amplitude)
+{
+	int i;
+
+	if(OSCphase (p) > TWOPI)
+		OSCphase (p) -= TWOPI;
+	else if (OSCphase (p) < -TWOPI)
+		OSCphase (p) += TWOPI;
+	  
+	for (i = 0; i < OSCsize (p); i++)
+	{
+		double harm_phase;
+
+		harm_phase = harmonic*OSCphase(p);
+		CXBdata((CXB)OSCbase(p), i) = Cmplx ((REAL) (cos (OSCphase (p)) + amplitude*cos(harm_phase+phase)) ,
+											 (IMAG) (sin (OSCphase (p)) + amplitude*sin(harm_phase+phase)));
+		OSCphase (p) += OSCfreq (p);
+  }
+}
+
 //------------------------------------------------------------------------
 // An ASR envelope on a complex phasor,
 // with asynchronous trigger for R stage.
@@ -44,7 +65,7 @@ CWTone (CWToneGen cwt)
 {
 	int i, n = cwt->size;
 
-	ComplexOSC (cwt->osc.gen);
+	CWComplexOSC (cwt->osc.gen, cwt->harmonic, cwt->phase, cwt->amplitude);
 
 	for (i = 0; i < n; i++)
 	{

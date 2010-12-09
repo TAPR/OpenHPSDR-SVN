@@ -76,7 +76,7 @@ klogic (KeyerLogic kl,
 	}
 
 	/* Decrement the timeouts */
-	kl->timeout.dlay -= kl->timeout.dlay > 0 ? ticklen : 0;
+	kl->timeout.dlay -= (kl->timeout.dlay > 0 ? ticklen : 0);
 	if (kl->timeout.dlay <= 0)
 	{
 		/* If nothing is scheduled to play, and we just did a character
@@ -118,11 +118,9 @@ klogic (KeyerLogic kl,
 		kl->element.last = kl->element.curr;
 
 		/* Should we insert an inverted element? */
-		if (((dit && dah) ||
-			(kl->element.invtd &&
-			kl->element.iamb != PADDLES_RELEASED) ||
-			(kl->element.iamb == PADDLES_RELEASED &&
-			iambicmode == MODE_B && (!midelementmodeB || kl->element.psqam))))
+		if ((dit && dah) ||
+			(kl->element.invtd && kl->element.iamb != PADDLES_RELEASED) ||
+			(kl->element.iamb == PADDLES_RELEASED && iambicmode == MODE_B && (!midelementmodeB || kl->element.psqam)))
 		{
 			if (kl->element.last == DAH)
 				set_element_timeouts = kl->element.curr = DIT;
@@ -137,7 +135,7 @@ klogic (KeyerLogic kl,
 			/* Do we do automatic character spacing? */
 			if (autocharspacing && !dit && !dah)
 			{
-				kl->timeout.dlay = ditlen * 2;
+				kl->timeout.dlay = ditlen * 2; 
 				kl->dlay_type = CHAR_SPACING_DELAY;
 			}
 		}
@@ -147,7 +145,7 @@ klogic (KeyerLogic kl,
 		kl->element.psqam = 0;
 	}
 
-	/* Is an element currently being played? */
+	/* Is no element currently being played? */
 	if (kl->element.curr == NO_ELEMENT)
 	{
 		if (dah)			/* Dah paddle down ? */

@@ -199,6 +199,7 @@ libDttSP_a_SOURCES = \
 	dcblock.c \
 	dcblock.h \
 	defs.h \
+	diversity.h \
 	dttspagc.c \
 	dttspagc.h \
 	fastrig.c \
@@ -206,6 +207,8 @@ libDttSP_a_SOURCES = \
 	fftw3_fix.h \
 	fftw3.h \
 	fftw.h \
+	filterbank.c \
+	filterbank.h \
 	filter.c \
 	filter.h \
 	fm_demod.c \

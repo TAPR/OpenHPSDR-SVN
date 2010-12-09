@@ -60,15 +60,12 @@ Bridgewater, NJ 08807
 #include <local.h>
 #include <meter.h>
 #include <spectrum.h>
+#include <diversity.h>
+
 //------------------------------------------------------------------------
-// max no receiver and transmitter threads
-#ifndef MAX_THREADS
-#define MAX_THREADS (2)
-#endif
-//------------------------------------------------------------------------
-// max no. simultaneous receivers (main and sub)
+// max no. simultaneous receivers
 #ifndef MAXRX
-#define MAXRX (2)
+#define MAXRX (4)
 #endif
 //------------------------------------------------------------------------
 /* modulation types, modes */
@@ -76,6 +73,9 @@ Bridgewater, NJ 08807
 //========================================================================
 /* RX/TX both */
 //------------------------------------------------------------------------
+
+DiversityControl diversity;
+
 extern struct _uni
 {
   REAL samplerate;
@@ -119,8 +119,8 @@ extern struct _uni
   } mix;
   int cpdlen;
   long tick,oldtick;
-
-} uni[MAX_THREADS];
+  WBIR_STATE wbir_state;
+} uni[3];
 
 //------------------------------------------------------------------------
 /* RX */
@@ -150,7 +150,10 @@ extern struct _rx
     ComplexFIR coef;
     FiltOvSv ovsv;
     COMPLEX *save;
-  } filt;
+  } filt,filt2;
+
+  DCBlocker dcb;
+
   struct
   {
     REAL thresh;
@@ -163,6 +166,7 @@ extern struct _rx
     NB gen;
     BOOLEAN flag;
   } nb_sdrom;
+
   struct
   {
     LMSR gen;
@@ -195,9 +199,10 @@ extern struct _rx
   } spot;
   struct
   {
-    REAL thresh, power;
+    REAL thresh, atten, power;
     BOOLEAN flag, running, set;
     int num;
+	int phase;
   } squelch;
 
   struct
@@ -220,7 +225,7 @@ extern struct _rx
   REAL norm;
   COMPLEX azim;
   long tick;
-} rx[MAX_THREADS][MAXRX];
+} rx[3][MAXRX];
 
 //------------------------------------------------------------------------
 /* TX */
@@ -229,7 +234,7 @@ extern struct _tx
 {
   struct
   {
-    CXB i, o;
+    CXB i, ic, o, oc;
   } buf;
   IQ iqfix;
 
@@ -247,7 +252,7 @@ extern struct _tx
   struct
   {
     ComplexFIR coef;
-    FiltOvSv ovsv;
+    FiltOvSv ovsv, ovsv_pre;
     COMPLEX *save;
   } filt;
 
@@ -263,7 +268,7 @@ extern struct _tx
 
   struct
   {
-    REAL thresh, power;
+    REAL thresh, atten, power;
     BOOLEAN flag, running, set;
     int num;
   } squelch;
@@ -304,7 +309,7 @@ extern struct _tx
 
   long tick;
   REAL norm;
-} tx[MAX_THREADS];
+} tx[3];
 
 //------------------------------------------------------------------------
 
@@ -454,7 +459,7 @@ extern struct _top
   BOOLEAN susp;
   int offset;
 
-} top[MAX_THREADS];
+} top[3];
 
 
 #endif

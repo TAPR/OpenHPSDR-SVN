@@ -32,7 +32,7 @@ winmain.o: winmain.c common.h fromsys.h /usr/include/sys/types.h \
  meter.h spectrum.h isoband.h graphiceq.h /usr/include/pthread.h \
  /usr/include/sched.h /usr/include/bits/sched.h \
  /usr/include/bits/setjmp.h /usr/include/semaphore.h \
- /usr/include/bits/semaphore.h sdrexport.h hilbert.h local.h
+ /usr/include/bits/semaphore.h sdrexport.h hilbert.h local.h diversity.h
 
 common.h:
 
@@ -231,3 +231,5 @@ sdrexport.h:
 hilbert.h:
 
 local.h:
+
+diversity.h:
