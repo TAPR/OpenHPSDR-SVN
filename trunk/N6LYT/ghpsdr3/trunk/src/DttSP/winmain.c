@@ -719,6 +719,7 @@ setup_threading (unsigned int thread)
 	top[thread].susp = FALSE;
 	sem_init (&top[thread].sync.upd.sem, 0, 0);
 	sem_init (&top[thread].sync.buf.sem, 0, 0);	
+	pthread_create(&top[thread].pid, 0, (void *) process_samples_thread, thread);
 }
 
 //========================================================================
