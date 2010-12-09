@@ -165,6 +165,7 @@ void processCommands(int argc,char** argv) {
 /* ----------------------------------------------------------------------------*/
 int main(int argc,char* argv[]) {
     int i;
+    char directory[1024];
 
     strcpy(soundCardName,"HPSDR");
     strcpy(server_address,"127.0.0.1"); // localhost
@@ -176,7 +177,11 @@ int main(int argc,char* argv[]) {
     setSoundcard(getSoundcardId(soundCardName));
 
     // initialize DttSP
-    Setup_SDR();
+    if(getcwd(directory, sizeof(directory))==NULL) {
+        fprintf(stderr,"current working directory path is > 1024 bytes!");
+        exit(1);
+    }
+    Setup_SDR(directory);
     Release_Update();
     SetTRX(0,0); // thread 0 is for receive
     SetTRX(1,1);  // thread 1 is for transmit
