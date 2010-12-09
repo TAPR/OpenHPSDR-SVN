@@ -26,6 +26,7 @@
 #ifndef BAND_H
 #define	BAND_H
 
+#include <QAction>
 #include <QObject>
 #include <QSettings>
 #include <QDebug>
@@ -48,6 +49,7 @@
 #define BAND_GEN 11
 #define BAND_WWV 12
 #define BAND_LAST 13
+#define BAND_XVTR BAND_LAST
 
 #define BANDSTACK_ENTRIES 5
 

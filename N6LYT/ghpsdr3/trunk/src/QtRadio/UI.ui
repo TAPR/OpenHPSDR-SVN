@@ -170,9 +170,14 @@
     <property name="title">
      <string>Bookmarks</string>
     </property>
+    <widget class="QMenu" name="menuView_Bookmarks">
+     <property name="title">
+      <string>View Bookmarks</string>
+     </property>
+    </widget>
     <addaction name="actionBookmarkThisFrequency"/>
     <addaction name="separator"/>
-    <addaction name="actionViewBookmarks"/>
+    <addaction name="menuView_Bookmarks"/>
     <addaction name="separator"/>
     <addaction name="actionEditBookmarks"/>
     <addaction name="separator"/>
@@ -718,14 +723,14 @@
     <string>Bookmark This Frequency</string>
    </property>
   </action>
-  <action name="actionViewBookmarks">
-   <property name="text">
-    <string>View Bookmarks</string>
-   </property>
-  </action>
   <action name="actionXVTRConfigure">
    <property name="text">
     <string>Configure</string>
+   </property>
+  </action>
+  <action name="action123">
+   <property name="text">
+    <string>123</string>
    </property>
   </action>
  </widget>

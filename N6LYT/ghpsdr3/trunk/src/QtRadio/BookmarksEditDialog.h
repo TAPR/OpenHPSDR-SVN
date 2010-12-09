@@ -6,6 +6,7 @@
 #include <QDebug>
 
 #include "Bookmark.h"
+#include "Bookmarks.h"
 
 namespace Ui {
     class BookmarksEditDialog;
@@ -16,7 +17,7 @@ class BookmarksEditDialog : public QDialog
     Q_OBJECT
 
 public:
-    explicit BookmarksEditDialog(QWidget *parent,QVector<Bookmark*> bookmarks);
+    explicit BookmarksEditDialog(QWidget *parent,Bookmarks* bookmarks);
     ~BookmarksEditDialog();
 
     void setTitle(QString t);

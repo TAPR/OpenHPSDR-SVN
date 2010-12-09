@@ -34,6 +34,7 @@
 #include "ui_Configure.h"
 
 #include "Audio.h"
+#include "Xvtr.h"
 
 class Configure : public QDialog {
     Q_OBJECT
@@ -41,11 +42,12 @@ public:
     Configure();
     virtual ~Configure();
     void initAudioDevices(Audio* audio);
-
+    void initXvtr(Xvtr* xvtr);
     void loadSettings(QSettings* settings);
     void saveSettings(QSettings* settings);
 
     void connected(bool state);
+    void updateXvtrList(Xvtr* xvtr);
 
     QString getHost();
     int getReceiver();
@@ -106,6 +108,10 @@ signals:
 
     void nbThresholdChanged(double threshold);
 
+    void addXVTR(QString title,long long minFrequency,long long maxFrequency,long long ifFrequency);
+    void deleteXVTR(int index);
+
+
 public slots:
     void slotHostChanged(int selection);
     void slotReceiverChanged(int receiver);
@@ -130,6 +136,9 @@ public slots:
     void slotAnfLeakChanged(int leak);
 
     void slotNbThresholdChanged(int threshold);
+
+    void slotXVTRAdd();
+    void slotXVTRDelete();
 
 private:
     Ui::Configure widget;
