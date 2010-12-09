@@ -60,6 +60,7 @@ extern void destroy_workspace (unsigned int thread);
 
 
 BOOLEAN reset_em;
+char *APP_DATA_PATH;
 
 PRIVATE BOOLEAN
 gethold (unsigned int proc_thread)
@@ -224,12 +225,19 @@ static void reset_system_audio(size_t nframes)
 	int i;
 
 	reset_em = FALSE;
-	for(thread = 0; thread < threadno; thread++) {
+	for(thread = 0; thread < threadno; thread++) 
+	{
 		reset_size = max (top[thread].jack.reset_size, nframes);
 		ringb_float_reset (top[thread].jack.ring.i.l);
 		ringb_float_reset (top[thread].jack.ring.i.r);
 		ringb_float_reset (top[thread].jack.auxr.i.l);
 		ringb_float_reset (top[thread].jack.auxr.i.r);
+		ringb_float_clear (top[thread].jack.ring.i.l, top[thread].jack.size * loc[thread].mult.ring-1);
+		ringb_float_clear (top[thread].jack.ring.i.l, top[thread].jack.size * loc[thread].mult.ring-1);
+		ringb_float_reset (top[thread].jack.ring.i.l);
+		ringb_float_reset (top[thread].jack.ring.i.r);
+//		ringb_float_reset (top[thread].jack.auxr.i.l);
+//		ringb_float_reset (top[thread].jack.auxr.i.r);
 	
 		if (top[thread].offset < 0)
 		{
@@ -237,6 +245,7 @@ static void reset_system_audio(size_t nframes)
 			{
 				ringb_float_write(top[thread].jack.ring.i.l,&zero,1);
 				ringb_float_write(top[thread].jack.auxr.i.l,&zero,1);
+				//ringb_float_write(top[thread].jack.auxr.i.l,&zero,1);
 			}
 		}
 		else
@@ -245,6 +254,7 @@ static void reset_system_audio(size_t nframes)
 			{
 				ringb_float_write(top[thread].jack.ring.i.r,&zero,1);
 				ringb_float_write(top[thread].jack.auxr.i.r,&zero,1);
+				//ringb_float_write(top[thread].jack.auxr.i.r,&zero,1);
 			}
 		}
 
@@ -252,47 +262,47 @@ static void reset_system_audio(size_t nframes)
 		ringb_float_restart (top[thread].jack.ring.o.l, reset_size);
 		ringb_float_restart (top[thread].jack.auxr.o.r, reset_size);
 		ringb_float_restart (top[thread].jack.auxr.o.l, reset_size);
+		//ringb_float_restart (top[thread].jack.auxr.o.r, reset_size);
+		//ringb_float_restart (top[thread].jack.auxr.o.l, reset_size);
 	}
 }
 
 DttSP_EXP void
 Audio_Callback (float *input_l, float *input_r, float *output_l,
-	float *output_r, unsigned int nframes, int thread)
+	float *output_r, unsigned int nframes)
 {
 	BOOLEAN b = reset_em;
 	int i;
-
-        i=thread;
-
-	if (top[i].susp)
+	if (top[0].susp)
 	{
 		memset (output_l, 0, nframes * sizeof (float));
 		memset (output_r, 0, nframes * sizeof (float));
-//fprintf(stderr,"Audio_Callback: top[%d].susp!!! Ouput flushed!\n",i);
 		return;
 	}
 
 	if (b)
 	{
+		//fprintf(stdout,"Audio_Callback: call reset_system_audio\n"), fflush(stdout);
 		reset_system_audio(nframes);
 		memset (output_l, 0, nframes * sizeof (float));
 		memset (output_r, 0, nframes * sizeof (float));
-//fprintf(stderr,"Audio_Callback: reset_em!!! Ouput flushed!\n");
 		return;
-        }
+    }
 
-	//for (i=0;i<1;i++) {
+	for (i=0; i<2; i++) 
+	{
 		if ((ringb_float_read_space (top[i].jack.ring.o.l) >= nframes)
 			&& (ringb_float_read_space (top[i].jack.ring.o.r) >= nframes))
 		{
-			if (top[i].state == RUN_PLAY) {
-//fprintf(stderr,"copying to ouput (thread=%d) (RUN_PLAY)\n",i);
+			if (top[i].state == RUN_PLAY)
+			{
 				ringb_float_read (top[i].jack.auxr.o.l, output_l, nframes);
 				ringb_float_read (top[i].jack.auxr.o.r, output_r, nframes);
 				ringb_float_read (top[i].jack.ring.o.l, output_l, nframes);
 				ringb_float_read (top[i].jack.ring.o.r, output_r, nframes);
-			} else {
-//fprintf(stderr,"copying to ouput (thread=%d) (NOT RUN_PLAY)\n",i);
+			}
+			else
+			{
 				ringb_float_read_advance (top[i].jack.auxr.o.l, nframes);
 				ringb_float_read_advance (top[i].jack.auxr.o.r, nframes);
 				ringb_float_read_advance (top[i].jack.ring.o.l, nframes);
@@ -302,10 +312,10 @@ Audio_Callback (float *input_l, float *input_r, float *output_l,
 		}
 		else
 		{	// rb pathology
-//fprintf(stderr,"rb pathology1: (rx=%d)reset_em=TRUE!!!! (%d,%d)\n",i,ringb_float_read_space (top[i].jack.ring.o.l),top[i].hold.size.frames);
-//			reset_em=TRUE;
-//			memset (output_l, 0, nframes * sizeof (float));
-//			memset (output_r, 0, nframes * sizeof (float));
+			//fprintf(stdout,"Audio_Callback-2: rb out pathology\n"), fflush(stdout);
+			reset_system_audio(nframes);
+			memset (output_l, 0, nframes * sizeof (float));
+			memset (output_r, 0, nframes * sizeof (float));
 		}
 
 		// input: copy from port to ring
@@ -319,40 +329,44 @@ Audio_Callback (float *input_l, float *input_r, float *output_l,
 		}
 		else
 		{	// rb pathology
-//fprintf(stderr,"rb pathology2: reset_em=TRUE!!!! Ouput flushed!\n");
-//			reset_em=TRUE;
-//			memset (output_l, 0, nframes * sizeof (float));
-//			memset (output_r, 0, nframes * sizeof (float));
+			//fprintf(stdout,"Audio_Callback-3: rb in pathology\n"), fflush(stdout);
+			reset_system_audio(nframes);
+			memset (output_l, 0, nframes * sizeof (float));
+			memset (output_r, 0, nframes * sizeof (float));
 		}
 
 		// if enough accumulated in ring, fire dsp
 		if (ringb_float_read_space (top[i].jack.ring.i.l) >= top[i].hold.size.frames)
-                {
-//fprintf(stderr,"fire dsp thread=%d\n",thread);
 			sem_post (&top[i].sync.buf.sem);
-                }
-	//}
+	}
 }
 
 DttSP_EXP void
 Audio_Callback2 (float **input, float **output, unsigned int nframes)
 {
 	unsigned int thread;
-	BOOLEAN b = reset_em=FALSE;
+	BOOLEAN b = reset_em;
 	BOOLEAN return_empty=FALSE;
-	for(thread=0;thread<threadno;thread++) {
+	unsigned int i;
+	for(thread=0;thread<threadno;thread++)
+	{
 		if (top[thread].susp) return_empty = TRUE;
 	}
+
 	if (return_empty)
 	{
-			for(thread=0;thread<threadno;thread++)  {
-				memset (output[2*thread], 0, nframes * sizeof (float));
-				memset (output[2*thread+1], 0, nframes * sizeof (float));
-			}
-			return;
+		for(thread=0;thread<threadno;thread++) 
+		{
+			memset (output[2*thread], 0, nframes * sizeof (float));
+			memset (output[2*thread+1], 0, nframes * sizeof (float));
+		}
+		return;
 	}
+
 	if (b)
 	{
+		//fprintf(stderr, "reset_em!\n"); fflush(stderr);
+		//fprintf(stdout,"Audio_Callback2: reset_em = TRUE\n"), fflush(stdout);
 		reset_system_audio(nframes);
 		for(thread=0;thread<threadno;thread++) {
 			memset (output[2*thread], 0, nframes * sizeof (float));
@@ -360,43 +374,240 @@ Audio_Callback2 (float **input, float **output, unsigned int nframes)
 		}
 		return;
     }
-	for(thread=0;thread<threadno;thread++) {
-		int l=2*thread,r = 2*thread+1;
+#if 0
+	if (diversity.flag) {
+		// Deal with the transmitter first
+		if ((ringb_float_read_space (top[1].jack.ring.o.l) >= nframes)
+			&& (ringb_float_read_space (top[1].jack.ring.o.r) >= nframes))
+		{
+			ringb_float_read (top[1].jack.ring.o.l, output[2], nframes);
+			ringb_float_read (top[1].jack.ring.o.r, output[3], nframes);
+		}
+		else
+		{	
+			// rb pathology
+			//reset_system_audio(nframes);
+			for(thread=0;thread<threadno;thread++) 
+			{
+				memset (output[thread], 0, nframes * sizeof (float));
+				memset (output[thread], 0, nframes * sizeof (float));
+			}
+			return;
+		}
+
+		// input: copy from port to ring
+		if ((ringb_float_write_space (top[1].jack.ring.i.l) >= nframes)
+			&& (ringb_float_write_space (top[1].jack.ring.i.r) >= nframes))
+		{
+			ringb_float_write (top[1].jack.ring.i.l, input[2], nframes);
+			ringb_float_write (top[1].jack.ring.i.r, input[3], nframes);
+		}
+		else
+		{	
+			// rb pathology
+			for(thread=0;thread<threadno;thread++) 
+			{
+				memset (output[thread], 0, nframes * sizeof (float));
+				memset (output[thread], 0, nframes * sizeof (float));
+			}
+			return;
+		}
+		
+		// if enough accumulated in ring, fire dsp
+		if ((ringb_float_read_space (top[1].jack.ring.i.l) >= top[1].hold.size.frames) &&
+			(ringb_float_read_space (top[1].jack.ring.i.r) >= top[1].hold.size.frames))
+			sem_post (&top[1].sync.buf.sem);
+
+		//		
+		// Deal with the diversity channel next
+		//
+		if ((ringb_float_read_space (top[0].jack.ring.o.l) >= nframes)
+			&& (ringb_float_read_space (top[0].jack.ring.o.r) >= nframes))
+		{
+			/*ringb_float_read (top[thread].jack.auxr.o.l, output[l], nframes);
+			ringb_float_read (top[thread].jack.auxr.o.r, output[r], nframes);*/
+			ringb_float_read (top[0].jack.ring.o.l, output[2], nframes);
+			ringb_float_read (top[0].jack.ring.o.r, output[3], nframes);
+		}
+		else
+		{	
+			// rb pathology
+			//reset_system_audio(nframes);
+			for(thread=0;thread<threadno;thread++) 
+			{
+				memset (output[thread], 0, nframes * sizeof (float));
+				memset (output[thread], 0, nframes * sizeof (float));
+			}
+			return;
+		}
+
+		// Deal with the diversity/phased array channel next
+
+		// input: copy from port to ring
+		if ((ringb_float_write_space (top[0].jack.ring.i.l) >= nframes)
+			&& (ringb_float_write_space (top[0].jack.ring.i.r) >= nframes) &&
+			(ringb_float_write_space (top[2].jack.ring.i.l) >= nframes)
+			&& (ringb_float_write_space (top[2].jack.ring.i.r) >= nframes))
+		{
+			REAL *l0 = input[0];
+			REAL *r0 = input[1];
+			REAL *l2 = input[4];
+			REAL *r2 = input[5];
+			for (i=0;i<nframes;i++) {
+				COMPLEX A = Cmplx(l0[i],r0[i]);
+				COMPLEX B = Cmplx(l2[i],r2[i]);
+				A = Cscl(Cadd(A,Cmul(B,diversity.scalar)),diversity.gain);
+				ringb_float_write (top[0].jack.ring.i.l, &A.re, 1);
+				ringb_float_write (top[0].jack.ring.i.r, &A.im, 1);
+			}
+			/*ringb_float_write (top[thread].jack.auxr.i.l, input[l], nframes);
+			ringb_float_write (top[thread].jack.auxr.i.r, input[r], nframes);*/
+		}
+		else
+		{	
+			// rb pathology
+			//reset_system_audio(nframes);
+			for(thread=0;thread<threadno;thread++) 
+			{
+				memset (output[thread], 0, nframes * sizeof (float));
+				memset (output[thread], 0, nframes * sizeof (float));
+			}
+			return;
+		}
+		
+		// if enough accumulated in ring, fire dsp
+		if ((ringb_float_read_space (top[0].jack.ring.i.l) >= top[0].hold.size.frames) &&
+			(ringb_float_read_space (top[0].jack.ring.i.r) >= top[0].hold.size.frames))
+			sem_post (&top[0].sync.buf.sem);
+
+
+		//
+		//  Deal with 2nd receiver channel now
+		//
+
+		if ((ringb_float_read_space (top[2].jack.ring.o.l) >= nframes)
+			&& (ringb_float_read_space (top[2].jack.ring.o.r) >= nframes))
+		{
+			/*ringb_float_read (top[thread].jack.auxr.o.l, output[l], nframes);
+			ringb_float_read (top[thread].jack.auxr.o.r, output[r], nframes);*/
+			ringb_float_read (top[2].jack.ring.o.l, output[4], nframes);
+			ringb_float_read (top[2].jack.ring.o.r, output[5], nframes);
+		}
+		else
+		{	
+			// rb pathology
+			//reset_system_audio(nframes);
+			for(thread=0;thread<threadno;thread++) 
+			{
+				memset (output[thread], 0, nframes * sizeof (float));
+				memset (output[thread], 0, nframes * sizeof (float));
+			}
+			return;
+		}
+
+		// input: copy from port to ring
+		if ((ringb_float_write_space (top[2].jack.ring.i.l) >= nframes)
+			&& (ringb_float_write_space (top[2].jack.ring.i.r) >= nframes))
+		{
+			ringb_float_write (top[2].jack.ring.i.l, input[4], nframes);
+			ringb_float_write (top[2].jack.ring.i.r, input[5], nframes);
+		}
+		else
+		{	
+			// rb pathology
+			for(thread=0;thread<threadno;thread++) 
+			{
+				memset (output[thread], 0, nframes * sizeof (float));
+				memset (output[thread], 0, nframes * sizeof (float));
+			}
+			return;
+		}
+		
+		// if enough accumulated in ring, fire dsp
+		if ((ringb_float_read_space (top[2].jack.ring.i.l) >= top[2].hold.size.frames) &&
+			(ringb_float_read_space (top[2].jack.ring.i.r) >= top[2].hold.size.frames))
+			sem_post (&top[2].sync.buf.sem);
+
+	} else
+#endif
+	for(thread=0; thread<threadno; thread++) 
+	{
+		int l=2*thread, r = 2*thread+1;
 		if ((ringb_float_read_space (top[thread].jack.ring.o.l) >= nframes)
 			&& (ringb_float_read_space (top[thread].jack.ring.o.r) >= nframes))
 		{
-			ringb_float_read (top[thread].jack.auxr.o.l, output[l], nframes);
-			ringb_float_read (top[thread].jack.auxr.o.r, output[r], nframes);
+			/*ringb_float_read (top[thread].jack.auxr.o.l, output[l], nframes);
+			ringb_float_read (top[thread].jack.auxr.o.r, output[r], nframes);*/
 			ringb_float_read (top[thread].jack.ring.o.l, output[l], nframes);
 			ringb_float_read (top[thread].jack.ring.o.r, output[r], nframes);
 		}
 		else
-		{	// rb pathology
-			reset_em=TRUE;//reset_system_audio(nframes);
-			memset (output[2*thread  ], 0, nframes * sizeof (float));
-			memset (output[2*thread+1], 0, nframes * sizeof (float));
+		{	
+			// rb pathology
+			//reset_system_audio(nframes);
+			for(thread=0;thread<threadno;thread++) 
+			{
+				memset (output[2*thread  ], 0, nframes * sizeof (float));
+				memset (output[2*thread+1], 0, nframes * sizeof (float));
+			}
+			return;
 		}
 
 		// input: copy from port to ring
 		if ((ringb_float_write_space (top[thread].jack.ring.i.l) >= nframes)
 			&& (ringb_float_write_space (top[thread].jack.ring.i.r) >= nframes))
 		{
-			ringb_float_write (top[thread].jack.ring.i.l, input[l], nframes);
-			ringb_float_write (top[thread].jack.ring.i.r, input[r], nframes);
-			ringb_float_write (top[thread].jack.auxr.i.l, input[l], nframes);
-			ringb_float_write (top[thread].jack.auxr.i.r, input[r], nframes);
+			if (diversity.flag && (thread == 0)) {
+				if ((ringb_float_write_space (top[2].jack.ring.i.l) >= nframes)
+					&& (ringb_float_write_space (top[2].jack.ring.i.r) >= nframes))
+				{
+					REAL *l0 = input[0];
+					REAL *r0 = input[1];
+					REAL *l2 = input[4];
+					REAL *r2 = input[5];
+					for (i=0;i<nframes;i++) {
+						COMPLEX A = Cmplx(l0[i],r0[i]);
+						COMPLEX B = Cmplx(l2[i],r2[i]);
+						A = Cscl(Cadd(A,Cmul(B,diversity.scalar)),diversity.gain);
+						ringb_float_write (top[0].jack.ring.i.l, &A.re, 1);
+						ringb_float_write (top[0].jack.ring.i.r, &A.im, 1);
+					}
+					/*ringb_float_write (top[thread].jack.auxr.i.l, input[l], nframes);
+					ringb_float_write (top[thread].jack.auxr.i.r, input[r], nframes);*/
+				} else {
+					// rb pathology
+					//reset_system_audio(nframes);
+					for(thread=0;thread<threadno;thread++) 
+					{
+						memset (output[2*thread  ], 0, nframes * sizeof (float));
+						memset (output[2*thread+1], 0, nframes * sizeof (float));
+					}
+					return;
+				}
+			} else {
+				ringb_float_write (top[thread].jack.ring.i.l, input[l], nframes);
+				ringb_float_write (top[thread].jack.ring.i.r, input[r], nframes);
+				/*ringb_float_write (top[thread].jack.auxr.i.l, input[l], nframes);
+				ringb_float_write (top[thread].jack.auxr.i.r, input[r], nframes);*/
+			}
 		}
 		else
-		{	// rb pathology
-			reset_em=TRUE;
-			memset (output[2*thread  ], 0, nframes * sizeof (float));
-			memset (output[2*thread+1], 0, nframes * sizeof (float));
+		{	
+			// rb pathology
+			//reset_system_audio(nframes);
+			for(thread=0;thread<threadno;thread++) 
+			{
+				memset (output[2*thread  ], 0, nframes * sizeof (float));
+				memset (output[2*thread+1], 0, nframes * sizeof (float));
+			}
+			return;
 		}
-			// if enough accumulated in ring, fire dsp
-		sem_post (&top[thread].sync.buf.sem);
-
+		
+		// if enough accumulated in ring, fire dsp
+		if ((ringb_float_read_space (top[thread].jack.ring.i.l) >= top[thread].hold.size.frames) &&
+			(ringb_float_read_space (top[thread].jack.ring.i.r) >= top[thread].hold.size.frames))
+			sem_post (&top[thread].sync.buf.sem);
 	}
-
 }
 
 
@@ -409,7 +620,8 @@ process_samples_thread (unsigned int proc_thread)
 	while (top[proc_thread].running)
 	{
 		sem_wait (&top[proc_thread].sync.buf.sem);
-		while (gethold(proc_thread)) {
+		while (gethold(proc_thread)) 
+		{
 			sem_wait (&top[proc_thread].sync.upd.sem);
 			switch (top[proc_thread].state)
 			{
@@ -438,7 +650,8 @@ void
 closeup ()
 {
 	unsigned int thread;
-	for(thread = 0; thread<MAX_THREADS;thread++) {
+	for(thread = 0; thread<3;thread++) 
+	{
 		top[thread].running = FALSE;
 		top[thread].susp = TRUE;
 		//Sleep (96);
@@ -485,9 +698,7 @@ setup_system_audio (unsigned int thread)
 {
 
 	sprintf (top[thread].jack.name, "sdr-%d-%0u", top[thread].pid,thread);
-
-fprintf(stderr,"setup_system_audio: %s\n",top[thread].jack.name);
-	top[thread].jack.size = 1024;
+	top[thread].jack.size = 2048;
 
 	memset ((char *) &top[thread].jack.blow, 0, sizeof (top[thread].jack.blow));
 	top[thread].jack.ring.i.l = ringb_float_create (top[thread].jack.size * loc[thread].mult.ring);
@@ -505,12 +716,9 @@ fprintf(stderr,"setup_system_audio: %s\n",top[thread].jack.name);
 PRIVATE void
 setup_threading (unsigned int thread)
 {
-
-		top[thread].susp = FALSE;
-		sem_init (&top[thread].sync.upd.sem, 0, 0);
-		sem_init (&top[thread].sync.buf.sem, 0, 0);	
-                pthread_create(&top[thread].pid, 0, (void *) process_samples_thread, thread);
-
+	top[thread].susp = FALSE;
+	sem_init (&top[thread].sync.upd.sem, 0, 0);
+	sem_init (&top[thread].sync.buf.sem, 0, 0);	
 }
 
 //========================================================================
@@ -519,30 +727,36 @@ setup_threading (unsigned int thread)
 PRIVATE void
 setup_defaults (unsigned int thread)
 {
-  //fprintf(stderr,"I am inside setup defaults thread: %0u\n",thread),fflush(stderr);
-  loc[thread].name[0] = 0;		// no default name for jack client
-  sprintf (loc[thread].path.rcfile, "%s%0lu_%0u", RCBASE, top[thread].pid,thread);
-  sprintf (loc[thread].path.parm, "%s%0lu_%0u", PARMPATH, top[thread].pid,thread);
-  sprintf (loc[thread].path.meter, "%s%0lu_%0u", METERPATH, top[thread].pid,thread);
-  sprintf (loc[thread].path.spec, "%s%0lu_%0u", SPECPATH, top[thread].pid,thread);
-  sprintf (loc[thread].path.wisdom, "%s%0lu_%0u", WISDOMPATH, top[thread].pid,thread);
-  loc[thread].def.rate = DEFRATE;
-  loc[thread].def.size = DEFSIZE;
-  loc[thread].def.nrx = MAXRX;
-  loc[thread].def.mode = DEFMODE;
-  loc[thread].def.spec = DEFSPEC;
-  loc[thread].mult.ring = RINGMULT;
-  loc[thread].def.comp = DEFCOMP;
+	//fprintf(stderr,"I am inside setup defaults thread: %0u\n",thread),fflush(stderr);
+	loc[thread].name[0] = 0;		// no default name for jack client
+	sprintf (loc[thread].path.rcfile, "%s%0lu_%0u", RCBASE, top[thread].pid,thread);
+	sprintf (loc[thread].path.parm, "%s%0lu_%0u", PARMPATH, top[thread].pid,thread);
+	sprintf (loc[thread].path.meter, "%s%0lu_%0u", METERPATH, top[thread].pid,thread);
+	sprintf (loc[thread].path.spec, "%s%0lu_%0u", SPECPATH, top[thread].pid,thread);
+	sprintf (loc[thread].path.wisdom, "%s%0lu_%0u", WISDOMPATH, top[thread].pid,thread);
+	loc[thread].def.rate = DEFRATE;
+	loc[thread].def.size = DEFSIZE;
+	loc[thread].def.nrx = MAXRX;
+	loc[thread].def.mode = DEFMODE;
+	loc[thread].def.spec = DEFSPEC;
+	loc[thread].mult.ring = RINGMULT;
+	loc[thread].def.comp = DEFCOMP;
 }
 
 //========================================================================
 void
-setup ()
+setup (char *app_data_path)
 {
 	unsigned int thread;
 	//fprintf(stderr,"I am inside setup\n"),fflush(stderr);
-	for (thread=0;thread<MAX_THREADS;thread++) {
-		top[thread].pid = getpid(); //GetCurrentThreadId ();
+	diversity.gain = 1;
+	diversity.flag = FALSE;
+	diversity.scalar = cxzero;
+
+	APP_DATA_PATH=app_data_path;
+	for (thread=0;thread<3;thread++) 
+	{
+		top[thread].pid = getpid(); // GetCurrentThreadId ();
 		top[thread].uid = 0L;
 		top[thread].start_tv = now_tv ();
 		top[thread].running = TRUE;
@@ -550,9 +764,10 @@ setup ()
 		if (thread != 1) top[thread].state = RUN_PLAY;
 		else top[thread].state = RUN_PASS;
 		top[thread].offset = 0;
-		top[thread].jack.reset_size = 1024;
+		top[thread].jack.reset_size = 2048;
 		reset_em =TRUE;
 		setup_defaults (thread);
+		strcpy(loc[thread].path.wisdom,app_data_path);
 		
 		//fprintf(stderr,"setup: defaults done thread %u\n", thread),fflush(stderr);
 		uni[thread].meter.flag = TRUE;
@@ -571,7 +786,7 @@ setup ()
 		setup_workspace (loc[thread].def.rate,
 				loc[thread].def.size,
 				loc[thread].def.mode,
-				loc[thread].path.wisdom, loc[thread].def.spec, loc[thread].def.nrx, loc[thread].def.comp, thread);
+				app_data_path, loc[thread].def.spec, loc[thread].def.nrx, loc[thread].def.comp, thread);
 		//fprintf(stderr,"setup: workspace done thread %u\n", thread),fflush(stderr);
 
 		setup_local_audio (thread);
@@ -594,73 +809,68 @@ setup ()
 	}
 }
 
-BOOLEAN reset_buflen = FALSE;
+//BOOLEAN reset_buflen = FALSE;
 int
 reset_for_buflen (unsigned int thread, int new_buflen)
 {
-	
+	// make sure new size is power of 2
+	if (popcnt (new_buflen) != 1)
+		return -1;
+//	reset_buflen = TRUE;
+	uni[thread].buflen = new_buflen;
+	top[thread].jack.reset_size = new_buflen;
+	safefree ((char *) top[thread].hold.buf.r);
+	safefree ((char *) top[thread].hold.buf.l);
+	safefree ((char *) top[thread].hold.aux.r);
+	safefree ((char *) top[thread].hold.aux.l);
 
-  // make sure new size is power of 2
-  if (popcnt (new_buflen) != 1)
-    return -1;
-  reset_buflen = TRUE;
-  uni[thread].buflen = new_buflen;
-  top[thread].jack.reset_size = new_buflen;
-  safefree ((char *) top[thread].hold.buf.r);
-  safefree ((char *) top[thread].hold.buf.l);
-  safefree ((char *) top[thread].hold.aux.r);
-  safefree ((char *) top[thread].hold.aux.l);
-  
-
-  destroy_workspace (thread);
-  reset_buflen = FALSE;
-  loc[thread].def.size = new_buflen;
-  setup_workspace (loc[thread].def.rate,
+	destroy_workspace (thread);
+//	reset_buflen = FALSE;
+	loc[thread].def.size = new_buflen;
+	setup_workspace (loc[thread].def.rate,
 		   loc[thread].def.size,
 		   loc[thread].def.mode,
-		   loc[thread].path.wisdom, loc[thread].def.spec, loc[thread].def.nrx, loc[thread].def.size, thread);
+		   APP_DATA_PATH, loc[thread].def.spec, loc[thread].def.nrx, loc[thread].def.size, thread);
 
-  setup_local_audio (thread);
-
-  reset_meters (thread);
-  reset_spectrum (thread);
-  reset_counters (thread);
-
-  return 0;
-}
-
-int
-reset_for_samplerate (REAL new_samplerate)
-{
-
-
-  unsigned int thread;
-
-  for(thread=0; thread<MAX_THREADS; thread++) {
-	
-	safefree ((char *) top[thread].hold.buf.r);
-    safefree ((char *) top[thread].hold.buf.l);
-    safefree ((char *) top[thread].hold.aux.r);
-    safefree ((char *) top[thread].hold.aux.l);
-	destroy_workspace (thread);
-
-	loc[thread].def.rate = uni[thread].samplerate = new_samplerate;
-	top[thread].swch.env.fall.size = (int)(loc[thread].def.rate * 0.005);
-	top[thread].swch.env.stdy.size = (int)(loc[thread].def.rate * 0.050);
-	top[thread].swch.env.rise.size = (int)(loc[thread].def.rate * 0.005);
-	top[thread].swch.env.curr.val = 0.0;
-	top[thread].swch.env.curr.cnt = 0;
-	top[thread].swch.env.fall.incr = 1.0f/(float)top[thread].swch.env.fall.size;
-	top[thread].swch.env.rise.incr = 1.0f/(float)top[thread].swch.env.rise.size;
-	setup_workspace (loc[thread].def.rate,
-			loc[thread].def.size,
-			loc[thread].def.mode,
-			loc[thread].path.wisdom, loc[thread].def.spec, loc[thread].def.nrx, loc[thread].def.size,thread);
 	setup_local_audio (thread);
 
 	reset_meters (thread);
 	reset_spectrum (thread);
 	reset_counters (thread);
-  }
-  return 0;
+
+	return 0;
+}
+
+int
+reset_for_samplerate (REAL new_samplerate)
+{
+	unsigned int thread;
+
+	for(thread=0; thread<3; thread++) 
+	{	
+		safefree ((char *) top[thread].hold.buf.r);
+		safefree ((char *) top[thread].hold.buf.l);
+		safefree ((char *) top[thread].hold.aux.r);
+		safefree ((char *) top[thread].hold.aux.l);
+		destroy_workspace (thread);
+
+		loc[thread].def.rate = uni[thread].samplerate = new_samplerate;
+		top[thread].swch.env.fall.size = (int)(loc[thread].def.rate * 0.005);
+		top[thread].swch.env.stdy.size = (int)(loc[thread].def.rate * 0.050);
+		top[thread].swch.env.rise.size = (int)(loc[thread].def.rate * 0.005);
+		top[thread].swch.env.curr.val = 0.0;
+		top[thread].swch.env.curr.cnt = 0;
+		top[thread].swch.env.fall.incr = 1.0f/(float)top[thread].swch.env.fall.size;
+		top[thread].swch.env.rise.incr = 1.0f/(float)top[thread].swch.env.rise.size;
+		setup_workspace (loc[thread].def.rate,
+				loc[thread].def.size,
+				loc[thread].def.mode,
+				APP_DATA_PATH, loc[thread].def.spec, loc[thread].def.nrx, loc[thread].def.size,thread);
+		setup_local_audio (thread);
+
+		reset_meters (thread);
+		reset_spectrum (thread);
+		reset_counters (thread);
+	}
+	return 0;
 }

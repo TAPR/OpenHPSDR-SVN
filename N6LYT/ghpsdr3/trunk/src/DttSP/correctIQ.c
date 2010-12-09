@@ -36,28 +36,80 @@ Bridgewater, NJ 08807
 
 #include <common.h>
 
+
+
 IQ
-newCorrectIQ (REAL phase, REAL gain)
+newCorrectIQ (REAL phase, REAL gain, REAL mu)
 {
 	IQ iq = (IQ) safealloc (1, sizeof (iqstate), "IQ state");
 	iq->phase = phase;
 	iq->gain = gain;
+	iq->mu = mu;
+	iq->leakage = 0.000000f;
+	iq->MASK=15;
+	iq->index=0;
+	iq->w = (COMPLEX *)safealloc(16,sizeof(COMPLEX),"correctIQ w");
+	iq->y = (COMPLEX *)safealloc(16,sizeof(COMPLEX),"correctIQ y");
+	iq->del = (COMPLEX *)safealloc(16,sizeof(COMPLEX),"correctIQ del");
+	memset((void *)iq->w,0,16*sizeof(COMPLEX));
+	iq->wbir_tuned = TRUE;
+	iq->wbir_state = FastAdapt;
 	return iq;
 }
 
 void
 delCorrectIQ (IQ iq)
 {
+	safefree((char *)iq->w);
+	safefree((char *)iq->y);
+	safefree((char *)iq->del);
 	safefree ((char *) iq);
 }
 
+int IQdoit = 1;
+
 void
-correctIQ (CXB sigbuf, IQ iq)
+correctIQ (CXB sigbuf, IQ iq, BOOLEAN isTX, int subchan)
 {
 	int i;
-	for (i = 0; i < CXBhave (sigbuf); i++)
+	REAL doit;
+	if (IQdoit == 0) return;
+	if (subchan == 0) doit = iq->mu;
+	else doit = 0;
+	if(!isTX)
 	{
-		CXBimag (sigbuf, i) += iq->phase * CXBreal (sigbuf, i);
-		CXBreal (sigbuf, i) *= iq->gain;
+
+		// if (subchan == 0) // removed so that sub rx's will get IQ correction
+		switch (iq->wbir_state) {
+			case FastAdapt:
+				break;
+			case SlowAdapt:
+				break;
+			case NoAdapt:
+				break;
+			default:
+				break;
+		}
+
+		for (i = 0; i < CXBhave (sigbuf); i++)
+		{
+			iq->del[iq->index] = CXBdata(sigbuf, i);
+			iq->y[iq->index] = Cadd(iq->del[iq->index], Cmul(iq->w[0], Conjg(iq->del[iq->index])));
+			iq->y[iq->index] = Cadd(iq->y[iq->index], Cmul(iq->w[1], Conjg(iq->y[iq->index])));
+			iq->w[1] = Csub(iq->w[1], Cscl(Cmul(iq->y[iq->index], iq->y[iq->index]), doit));  // this is where the adaption happens
+
+			CXBdata(sigbuf, i) = iq->y[iq->index];
+			iq->index = (iq->index + iq->MASK) & iq->MASK;
+		}
+		//fprintf(stderr, "w1 real: %g, w1 imag: %g\n", iq->w[1].re, iq->w[1].im); fflush(stderr); 
 	}
+	else
+	{
+		for (i = 0; i < CXBhave (sigbuf); i++)
+		{
+			CXBimag (sigbuf, i) += iq->phase * CXBreal (sigbuf, i);
+			CXBreal (sigbuf, i) *= iq->gain;
+		}
+	}
+
 }

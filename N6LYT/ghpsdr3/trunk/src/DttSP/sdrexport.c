@@ -33,7 +33,7 @@ Bridgewater, NJ 08807
 
 #include <common.h>
 
-struct _uni uni[MAX_THREADS];
-struct _rx rx[MAX_THREADS][MAXRX];
-struct _tx tx[MAX_THREADS];
-struct _top top[MAX_THREADS];
+struct _uni uni[3];
+struct _rx rx[3][MAXRX];
+struct _tx tx[3];
+struct _top top[3];
