@@ -269,11 +269,13 @@ static void reset_system_audio(size_t nframes)
 
 DttSP_EXP void
 Audio_Callback (float *input_l, float *input_r, float *output_l,
-	float *output_r, unsigned int nframes)
+	float *output_r, unsigned int nframes, int thread)
 {
 	BOOLEAN b = reset_em;
 	int i;
-	if (top[0].susp)
+
+        i=thread;
+	if (top[i].susp)
 	{
 		memset (output_l, 0, nframes * sizeof (float));
 		memset (output_r, 0, nframes * sizeof (float));
@@ -289,8 +291,8 @@ Audio_Callback (float *input_l, float *input_r, float *output_l,
 		return;
     }
 
-	for (i=0; i<2; i++) 
-	{
+	//for (i=0; i<2; i++) 
+	//{
 		if ((ringb_float_read_space (top[i].jack.ring.o.l) >= nframes)
 			&& (ringb_float_read_space (top[i].jack.ring.o.r) >= nframes))
 		{
@@ -313,9 +315,9 @@ Audio_Callback (float *input_l, float *input_r, float *output_l,
 		else
 		{	// rb pathology
 			//fprintf(stdout,"Audio_Callback-2: rb out pathology\n"), fflush(stdout);
-			reset_system_audio(nframes);
-			memset (output_l, 0, nframes * sizeof (float));
-			memset (output_r, 0, nframes * sizeof (float));
+//			reset_system_audio(nframes);
+//			memset (output_l, 0, nframes * sizeof (float));
+//			memset (output_r, 0, nframes * sizeof (float));
 		}
 
 		// input: copy from port to ring
@@ -330,15 +332,15 @@ Audio_Callback (float *input_l, float *input_r, float *output_l,
 		else
 		{	// rb pathology
 			//fprintf(stdout,"Audio_Callback-3: rb in pathology\n"), fflush(stdout);
-			reset_system_audio(nframes);
-			memset (output_l, 0, nframes * sizeof (float));
-			memset (output_r, 0, nframes * sizeof (float));
+//			reset_system_audio(nframes);
+//			memset (output_l, 0, nframes * sizeof (float));
+//			memset (output_r, 0, nframes * sizeof (float));
 		}
 
 		// if enough accumulated in ring, fire dsp
 		if (ringb_float_read_space (top[i].jack.ring.i.l) >= top[i].hold.size.frames)
 			sem_post (&top[i].sync.buf.sem);
-	}
+	//}
 }
 
 DttSP_EXP void
@@ -698,7 +700,7 @@ setup_system_audio (unsigned int thread)
 {
 
 	sprintf (top[thread].jack.name, "sdr-%d-%0u", top[thread].pid,thread);
-	top[thread].jack.size = 2048;
+	top[thread].jack.size = 1024;
 
 	memset ((char *) &top[thread].jack.blow, 0, sizeof (top[thread].jack.blow));
 	top[thread].jack.ring.i.l = ringb_float_create (top[thread].jack.size * loc[thread].mult.ring);
@@ -765,7 +767,7 @@ setup (char *app_data_path)
 		if (thread != 1) top[thread].state = RUN_PLAY;
 		else top[thread].state = RUN_PASS;
 		top[thread].offset = 0;
-		top[thread].jack.reset_size = 2048;
+		top[thread].jack.reset_size = 1024;
 		reset_em =TRUE;
 		setup_defaults (thread);
 		strcpy(loc[thread].path.wisdom,app_data_path);
@@ -810,14 +812,14 @@ setup (char *app_data_path)
 	}
 }
 
-//BOOLEAN reset_buflen = FALSE;
+BOOLEAN reset_buflen = FALSE;
 int
 reset_for_buflen (unsigned int thread, int new_buflen)
 {
 	// make sure new size is power of 2
 	if (popcnt (new_buflen) != 1)
 		return -1;
-//	reset_buflen = TRUE;
+	reset_buflen = TRUE;
 	uni[thread].buflen = new_buflen;
 	top[thread].jack.reset_size = new_buflen;
 	safefree ((char *) top[thread].hold.buf.r);
@@ -826,7 +828,7 @@ reset_for_buflen (unsigned int thread, int new_buflen)
 	safefree ((char *) top[thread].hold.aux.l);
 
 	destroy_workspace (thread);
-//	reset_buflen = FALSE;
+	reset_buflen = FALSE;
 	loc[thread].def.size = new_buflen;
 	setup_workspace (loc[thread].def.rate,
 		   loc[thread].def.size,
