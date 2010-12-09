@@ -216,16 +216,6 @@
       <string>Add</string>
      </property>
     </widget>
-    <widget class="QTableView" name="XVTRTableView">
-     <property name="geometry">
-      <rect>
-       <x>20</x>
-       <y>100</y>
-       <width>511</width>
-       <height>191</height>
-      </rect>
-     </property>
-    </widget>
     <widget class="QPushButton" name="deletePushButton">
      <property name="geometry">
       <rect>
@@ -238,6 +228,36 @@
      <property name="text">
       <string>Delete</string>
      </property>
+    </widget>
+    <widget class="QTableWidget" name="XVTRTableWidget">
+     <property name="geometry">
+      <rect>
+       <x>20</x>
+       <y>90</y>
+       <width>511</width>
+       <height>201</height>
+      </rect>
+     </property>
+     <column>
+      <property name="text">
+       <string>Title</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>Min Frequency</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>Max Frequency</string>
+      </property>
+     </column>
+     <column>
+      <property name="text">
+       <string>IF Frequency</string>
+      </property>
+     </column>
     </widget>
    </widget>
    <widget class="QWidget" name="Audio">

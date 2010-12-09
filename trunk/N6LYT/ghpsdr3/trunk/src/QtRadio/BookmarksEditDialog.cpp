@@ -1,7 +1,7 @@
 #include "BookmarksEditDialog.h"
 #include "ui_BookmarksEditDialog.h"
 
-BookmarksEditDialog::BookmarksEditDialog(QWidget *parent,QVector<Bookmark*> bookmarks) :
+BookmarksEditDialog::BookmarksEditDialog(QWidget *parent,Bookmarks* bookmarks) :
     QDialog(parent),
     ui(new Ui::BookmarksEditDialog)
 {
@@ -14,8 +14,8 @@ BookmarksEditDialog::BookmarksEditDialog(QWidget *parent,QVector<Bookmark*> book
 
     // load the bookmarks
     Bookmark* bookmark;
-    for(int i=0;i<bookmarks.count();i++) {
-        bookmark=bookmarks.at(i);
+    for(int i=0;i<bookmarks->count();i++) {
+        bookmark=bookmarks->at(i);
 
         ui->bookmarksListWidget->addItem(bookmark->getTitle());
     }

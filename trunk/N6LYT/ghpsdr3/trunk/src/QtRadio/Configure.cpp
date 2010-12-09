@@ -26,6 +26,7 @@
 #include <QSettings>
 #include <QComboBox>
 
+#include "Xvtr.h"
 #include "Configure.h"
 
 Configure::Configure() {
@@ -57,6 +58,8 @@ Configure::Configure() {
     widget.anfLeakSpinBox->setValue(1);
     widget.nbThresholdSpinBox->setValue(20);
 
+    widget.ifFrequencyLineEdit->setText("28000000");
+
     connect(widget.spectrumHighSpinBox,SIGNAL(valueChanged(int)),this,SLOT(slotSpectrumHighChanged(int)));
     connect(widget.spectrumLowSpinBox,SIGNAL(valueChanged(int)),this,SLOT(slotSpectrumLowChanged(int)));
     connect(widget.fpsSpinBox,SIGNAL(valueChanged(int)),this,SLOT(slotFpsChanged(int)));
@@ -82,6 +85,10 @@ Configure::Configure() {
     connect(widget.anfLeakSpinBox,SIGNAL(valueChanged(int)),this,SLOT(slotAnfLeakChanged(int)));
 
     connect(widget.nbThresholdSpinBox,SIGNAL(valueChanged(int)),this,SLOT(slotNbThresholdChanged(int)));
+
+    connect(widget.addPushButton,SIGNAL(clicked()),this,SLOT(slotXVTRAdd()));
+    connect(widget.deletePushButton,SIGNAL(clicked()),this,SLOT(slotXVTRDelete()));
+
 }
 
 Configure::~Configure() {
@@ -89,6 +96,43 @@ Configure::~Configure() {
 
 void Configure::initAudioDevices(Audio* audio) {
     audio->get_audio_devices(widget.audioDeviceComboBox);
+}
+
+void Configure::updateXvtrList(Xvtr* xvtr) {
+    // update the list of XVTR entries
+    XvtrEntry* entry;
+    QStringList headings;
+    QString title;
+    QString minFrequency;
+    QString maxFrequency;
+    QString ifFrequency;
+
+    widget.XVTRTableWidget->clear();
+    widget.XVTRTableWidget->setRowCount(xvtr->count());
+    widget.XVTRTableWidget->setColumnCount(4);
+    headings<< "Title" << "Min Frequency" << "Max Frequency" << "IF Frequency";
+    widget.XVTRTableWidget->setHorizontalHeaderLabels(headings);
+
+    for(int i=0;i<xvtr->count();i++) {
+        entry=xvtr->getXvtrAt(i);
+        QTableWidgetItem *titleItem=new QTableWidgetItem(entry->getTitle());
+        titleItem->setFlags(Qt::ItemIsSelectable | Qt::ItemIsEnabled);
+        widget.XVTRTableWidget->setItem(i, 0, titleItem);
+        minFrequency.sprintf("%lld",entry->getMinFrequency());
+        QTableWidgetItem *minFrequencyItem=new QTableWidgetItem(minFrequency);
+        minFrequencyItem->setFlags(Qt::ItemIsSelectable | Qt::ItemIsEnabled);
+        widget.XVTRTableWidget->setItem(i, 1, minFrequencyItem);
+        maxFrequency.sprintf("%lld",entry->getMaxFrequency());
+        QTableWidgetItem *maxFrequencyItem=new QTableWidgetItem(maxFrequency);
+        maxFrequencyItem->setFlags(Qt::ItemIsSelectable | Qt::ItemIsEnabled);
+        widget.XVTRTableWidget->setItem(i, 2, maxFrequencyItem);
+        ifFrequency.sprintf("%lld",entry->getIFFrequency());
+        QTableWidgetItem *ifFrequencyItem=new QTableWidgetItem(ifFrequency);
+        ifFrequencyItem->setFlags(Qt::ItemIsSelectable | Qt::ItemIsEnabled);
+        widget.XVTRTableWidget->setItem(i, 3, ifFrequencyItem);
+    }
+    widget.XVTRTableWidget->resizeColumnsToContents();
+
 }
 
 void Configure::connected(bool state) {
@@ -101,6 +145,8 @@ void Configure::connected(bool state) {
 
     widget.hostComboBox->setDisabled(state);
     widget.rxSpinBox->setDisabled(state);
+
+
 }
 
 void Configure::loadSettings(QSettings* settings) {
@@ -393,4 +439,61 @@ double Configure::getAnfLeak() {
 
 double Configure::getNbThreshold() {
     return (double)widget.nbThresholdSpinBox->value()*0.165;
+}
+
+void Configure::slotXVTRAdd() {
+
+    QString title;
+    long long minFrequency;
+    long long maxFrequency;
+    long long ifFrequency;
+
+    // check name is present
+    title=widget.titleLineEdit->text();
+
+    // check min frequency
+    minFrequency=widget.minFrequencyLineEdit->text().toLongLong();
+    maxFrequency=widget.maxFrequencyLineEdit->text().toLongLong();
+    ifFrequency=widget.ifFrequencyLineEdit->text().toLongLong();
+
+    if(title==QString("")) {
+        // must have a title
+        qDebug()<<"XVTR entry must hava a title";
+        return;
+    }
+
+    if(minFrequency<=0LL) {
+        // must not be zero or negative
+        qDebug()<<"XVTR min frequency must be > 0";
+        return;
+    }
+
+    if(maxFrequency<=0LL) {
+        // must not be zero or negative
+        qDebug()<<"XVTR max frequency must be > 0";
+        return;
+    }
+
+    if(minFrequency>=maxFrequency) {
+        // max must be greater than min
+        qDebug()<<"XVTR min frequency must be < max frequency";
+        return;
+    }
+
+    // all looks OK so save it
+    emit addXVTR(title,minFrequency,maxFrequency,ifFrequency);
+
+    // update the list
+}
+
+void Configure::slotXVTRDelete() {
+
+    int index=widget.XVTRTableWidget->currentRow();
+    if(index==-1) {
+        qDebug()<<"XVTR Delete but nothing selected";
+        return;
+    }
+
+    qDebug()<<"Configure::slotXVTRDelete"<<index;
+    emit deleteXVTR(index);
 }

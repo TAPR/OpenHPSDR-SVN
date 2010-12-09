@@ -56,8 +56,11 @@
 #include "Bandscope.h"
 #include "BookmarkDialog.h"
 #include "Bookmark.h"
+#include "Bookmarks.h"
 #include "BookmarksDialog.h"
 #include "BookmarksEditDialog.h"
+#include "Xvtr.h"
+#include "XvtrEntry.h"
 
 #define DSPSERVER_BASE_PORT 8000
 
@@ -147,19 +150,6 @@ public slots:
 
     void actionPreamp();
 
-    void actionBookmark();
-    void actionBookmark0();
-    void actionBookmark1();
-    void actionBookmark2();
-    void actionBookmark3();
-    void actionBookmark4();
-    void actionBookmark5();
-    void actionBookmark6();
-    void actionBookmark7();
-    void actionBookmark8();
-    void actionBookmark9();
-    void actionMore();
-
     void connected();
     void disconnected(QString message);
     void audioBuffer(char* header,char* buffer);
@@ -197,12 +187,18 @@ public slots:
     void anfValuesChanged(int,int,double,double);
     void nbThresholdChanged(double);
 
+    void actionBookmark();
     void addBookmark();
     void selectABookmark();
     void editBookmarks();
     void bookmarkDeleted(int);
     void bookmarkUpdated(int,QString);
-    void bookmarkSelected(int);
+    void bookmarkSelected(int entry);
+
+    void addXVTR(QString,long long,long long,long long);
+    void deleteXVTR(int index);
+    void selectXVTR(QAction* action);
+    void selectBookmark(QAction* action);
 
 signals:
     void subRxStateChanged(bool state);
@@ -212,7 +208,7 @@ private:
     void actionGain(int g);
     void setGain(bool state);
 
-    void selectBookmark(int entry);
+
     void appendBookmark(Bookmark* bookmark);
 
     QString stringFrequency(long long frequency);
@@ -247,6 +243,8 @@ private:
     DIGUFilters diguFilters;
     DIGLFilters diglFilters;
 
+    Xvtr xvtr;
+
     int agc;
 
     int cwPitch;
@@ -265,7 +263,7 @@ private:
     BookmarksDialog* bookmarksDialog;
     BookmarksEditDialog* bookmarksEditDialog;
 
-    QVector<Bookmark*> bookmarks;
+    Bookmarks bookmarks;
 
 };
 

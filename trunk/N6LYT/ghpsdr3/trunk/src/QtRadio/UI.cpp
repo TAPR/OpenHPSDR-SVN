@@ -42,6 +42,7 @@
 #include "FMNFilters.h"
 #include "DIGLFilters.h"
 #include "DIGUFilters.h"
+#include "XvtrEntry.h"
 
 UI::UI() {
     widget.setupUi(this);
@@ -128,7 +129,6 @@ UI::UI() {
     connect(widget.actionPreamp,SIGNAL(triggered()),this,SLOT(actionPreamp()));
 
     connect(widget.actionBookmarkThisFrequency,SIGNAL(triggered()),this,SLOT(actionBookmark()));
-    connect(widget.actionViewBookmarks,SIGNAL(triggered()),this,SLOT(actionMore()));
     connect(widget.actionEditBookmarks,SIGNAL(triggered()),this,SLOT(editBookmarks()));
 
 
@@ -179,7 +179,15 @@ UI::UI() {
     connect(&configure,SIGNAL(anfValuesChanged(int,int,double,double)),this,SLOT(anfValuesChanged(int,int,double,double)));
     connect(&configure,SIGNAL(nbThresholdChanged(double)),this,SLOT(nbThresholdChanged(double)));
 
+    connect(&bookmarks,SIGNAL(bookmarkSelected(QAction*)),this,SLOT(selectBookmark(QAction*)));
     connect(&bookmarkDialog,SIGNAL(accepted()),this,SLOT(addBookmark()));
+
+    connect(&configure,SIGNAL(addXVTR(QString,long long,long long,long long)),this,SLOT(addXVTR(QString,long long,long long,long long)));
+    connect(&configure,SIGNAL(deleteXVTR(int)),this,SLOT(deleteXVTR(int)));
+
+
+    connect(&xvtr,SIGNAL(xvtrSelected(QAction*)),this,SLOT(selectXVTR(QAction*)));
+
 
     bandscope=NULL;
 
@@ -215,6 +223,9 @@ UI::UI() {
 
     fps=configure.getFps();
 
+    configure.updateXvtrList(&xvtr);
+    xvtr.buildMenu(widget.menuXVTR);
+
     widget.spectrumFrame->setHost(configure.getHost());
     widget.spectrumFrame->setReceiver(configure.getReceiver());
 
@@ -238,35 +249,16 @@ void UI::loadSettings() {
     qDebug() << "saveSettings: " << settings.fileName();
 
     band.loadSettings(&settings);
+    xvtr.loadSettings(&settings);
     configure.loadSettings(&settings);
+    configure.updateXvtrList(&xvtr);
+    bookmarks.loadSettings(&settings);
+    bookmarks.buildMenu(widget.menuView_Bookmarks);
 
     settings.beginGroup("UI");
     if(settings.contains("gain")) gain=subRxGain=settings.value("gain").toInt();
     if(settings.contains("agc")) agc=settings.value("agc").toInt();
     settings.endGroup();
-
-    settings.beginGroup("Bookmarks");
-    if(settings.contains("entries")) {
-        int entries=settings.value("entries").toInt();
-        QString s;
-        Bookmark* bookmark;
-        for(int i=0;i<entries;i++) {
-            s.sprintf("title.%d",i);
-            if(settings.contains(s)) {
-                bookmark=new Bookmark();
-                bookmark->setTitle(settings.value(s).toString());
-                s.sprintf("band.%d",i);
-                bookmark->setBand(settings.value(s).toLongLong());
-                s.sprintf("frequency.%d",i);
-                bookmark->setFrequency(settings.value(s).toLongLong());
-                s.sprintf("mode.%d",i);
-                bookmark->setMode(settings.value(s).toInt());
-                s.sprintf("filter.%d",i);
-                bookmark->setFilter(settings.value(s).toInt());
-                appendBookmark(bookmark);
-            }
-        }
-    }
 }
 
 void UI::saveSettings() {
@@ -277,8 +269,12 @@ void UI::saveSettings() {
 
     qDebug() << "saveSettings: " << settings.fileName();
 
+    settings.clear();
+
     configure.saveSettings(&settings);
     band.saveSettings(&settings);
+    xvtr.saveSettings(&settings);
+    bookmarks.saveSettings(&settings);
 
     settings.beginGroup("UI");
     settings.setValue("gain",gain);
@@ -286,22 +282,6 @@ void UI::saveSettings() {
     settings.setValue("agc",agc);
     settings.endGroup();
 
-    settings.beginGroup("Bookmarks");
-    settings.setValue("entries",bookmarks.count());
-    for(int i=0;i<bookmarks.count();i++) {
-        bookmark=bookmarks.at(i);
-        s.sprintf("title.%d",i);
-        settings.setValue(s,bookmark->getTitle());
-        s.sprintf("band.%d",i);
-        settings.setValue(s,bookmark->getBand());
-        s.sprintf("frequency.%d",i);
-        settings.setValue(s,bookmark->getFrequency());
-        s.sprintf("mode.%d",i);
-        settings.setValue(s,bookmark->getMode());
-        s.sprintf("filter.%d",i);
-        settings.setValue(s,bookmark->getFilter());
-    }
-    settings.endGroup();
 }
 
 void UI::hostChanged(QString host) {
@@ -1453,108 +1433,18 @@ void UI::addBookmark() {
     bookmark->setFrequency(band.getFrequency());
     bookmark->setMode(mode.getMode());
     bookmark->setFilter(filters.getFilter());
-
-    appendBookmark(bookmark);
-
+    bookmarks.add(bookmark);
+    bookmarks.buildMenu(widget.menuView_Bookmarks);
 }
 
-void UI::appendBookmark(Bookmark* bookmark) {
-
-    bookmarks.append(bookmark);
-
-    /*
-    if(bookmarks.count()<=10) {
-        QAction* action=widget.menuBookmarks->addAction(bookmark->getTitle());
-        switch(bookmarks.count()) {
-        case 1:
-            connect(action,SIGNAL(triggered()),this,SLOT(actionBookmark0()));
-            break;
-        case 2:
-            connect(action,SIGNAL(triggered()),this,SLOT(actionBookmark1()));
-            break;
-        case 3:
-            connect(action,SIGNAL(triggered()),this,SLOT(actionBookmark2()));
-            break;
-        case 4:
-            connect(action,SIGNAL(triggered()),this,SLOT(actionBookmark3()));
-            break;
-        case 5:
-            connect(action,SIGNAL(triggered()),this,SLOT(actionBookmark4()));
-            break;
-        case 6:
-            connect(action,SIGNAL(triggered()),this,SLOT(actionBookmark5()));
-            break;
-        case 7:
-            connect(action,SIGNAL(triggered()),this,SLOT(actionBookmark6()));
-            break;
-        case 8:
-            connect(action,SIGNAL(triggered()),this,SLOT(actionBookmark7()));
-            break;
-        case 9:
-            connect(action,SIGNAL(triggered()),this,SLOT(actionBookmark8()));
-            break;
-        case 10:
-            connect(action,SIGNAL(triggered()),this,SLOT(actionBookmark9()));
-            break;
-        }
-    } else if(bookmarks.count()==11) {
-        QAction* action=widget.menuBookmarks->addAction("More ...");
-        connect(action,SIGNAL(triggered()),this,SLOT(actionMore()));
-    }
-    */
-}
-
-void UI::actionBookmark0() {
-    selectBookmark(0);
-}
-
-void UI::actionBookmark1() {
-    selectBookmark(1);
-}
-
-void UI::actionBookmark2() {
-    selectBookmark(2);
-}
-
-void UI::actionBookmark3() {
-    selectBookmark(3);
-}
-
-void UI::actionBookmark4() {
-    selectBookmark(4);
-}
-
-void UI::actionBookmark5() {
-    selectBookmark(5);
-}
-
-void UI::actionBookmark6() {
-    selectBookmark(6);
-}
-
-void UI::actionBookmark7() {
-    selectBookmark(7);
-}
-
-void UI::actionBookmark8() {
-    selectBookmark(8);
-}
-
-void UI::actionBookmark9() {
-    selectBookmark(9);
-}
-
-
-void UI::selectBookmark(int entry) {
+void UI::selectBookmark(QAction* action) {
     QString command;
 
-    Bookmark* bookmark=bookmarks.at(entry);
+    bookmarks.select(action);
 
-    band.selectBand(bookmark->getBand());
+    band.selectBand(bookmarks.getBand());
 
-
-
-    frequency=bookmark->getFrequency();
+    frequency=bookmarks.getFrequency();
     band.setFrequency(frequency);
     command.clear(); QTextStream(&command) << "setFrequency " << frequency;
     connection.sendCommand(command);
@@ -1562,28 +1452,23 @@ void UI::selectBookmark(int entry) {
     widget.spectrumFrame->setFrequency(frequency);
     widget.waterfallFrame->setFrequency(frequency);
 
-    mode.setMode(bookmark->getMode());
+    mode.setMode(bookmarks.getMode());
 
-    filters.selectFilter(bookmark->getFilter());
+    filters.selectFilter(bookmarks.getFilter());
 
-}
-
-void UI::actionMore() {
-    // bring up dialog box with list of bookmarks to select from
-    bookmarksDialog=new BookmarksDialog(this,bookmarks);
-    bookmarksDialog->setVisible(true);
-    connect(bookmarksDialog,SIGNAL(accepted()),this,SLOT(selectABookmark()));
 }
 
 void UI::selectABookmark() {
+/*
     int entry=bookmarksDialog->getSelected();
     if(entry>=0 && entry<bookmarks.count()) {
         selectBookmark(entry);
     }
+*/
 }
 
 void UI::editBookmarks() {
-    bookmarksEditDialog=new BookmarksEditDialog(this,bookmarks);
+    bookmarksEditDialog=new BookmarksEditDialog(this,&bookmarks);
     bookmarksEditDialog->setVisible(true);
     connect(bookmarksEditDialog,SIGNAL(bookmarkDeleted(int)),this,SLOT(bookmarkDeleted(int)));
     connect(bookmarksEditDialog,SIGNAL(bookmarkUpdated(int,QString)),this,SLOT(bookmarkUpdated(int,QString)));
@@ -1593,6 +1478,7 @@ void UI::editBookmarks() {
 void UI::bookmarkDeleted(int entry) {
     //qDebug() << "UI::bookmarkDeleted: " << entry;
     bookmarks.remove(entry);
+    bookmarks.buildMenu(widget.menuView_Bookmarks);
 }
 
 void UI::bookmarkUpdated(int entry,QString title) {
@@ -1603,7 +1489,6 @@ void UI::bookmarkUpdated(int entry,QString title) {
 }
 
 void UI::bookmarkSelected(int entry) {
-
 
     //qDebug() << "UI::bookmarkSelected " << entry;
     if(entry>=0 && entry<bookmarks.count()) {
@@ -1661,4 +1546,26 @@ QString UI::stringFrequency(long long frequency) {
     QString strFrequency;
     strFrequency.sprintf("%lld.%03lld.%03lld",frequency/1000000,frequency%1000000/1000,frequency%1000);
     return strFrequency;
+}
+
+void UI::addXVTR(QString title,long long minFrequency,long long maxFrequency,long long ifFrequency) {
+
+    qDebug()<<"UI::addXVTR"<<title;
+    xvtr.add(title,minFrequency,maxFrequency,ifFrequency);
+
+    // update the menu
+    xvtr.buildMenu(widget.menuXVTR);
+    configure.updateXvtrList(&xvtr);
+}
+
+void UI::deleteXVTR(int index) {
+    xvtr.del(index);
+
+    // update the menu
+    xvtr.buildMenu(widget.menuXVTR);
+    configure.updateXvtrList(&xvtr);
+}
+
+void UI::selectXVTR(QAction* action) {
+    xvtr.select(action);
 }

@@ -5,6 +5,7 @@
 #include <QVector>
 
 #include "Bookmark.h"
+#include "Bookmarks.h"
 
 namespace Ui {
     class BookmarksDialog;
@@ -15,7 +16,7 @@ class BookmarksDialog : public QDialog
     Q_OBJECT
 
 public:
-    explicit BookmarksDialog(QWidget *parent,QVector<Bookmark*> bookmarks);
+    explicit BookmarksDialog(QWidget *parent,Bookmarks* bookmarks);
     ~BookmarksDialog();
 
     int getSelected();
