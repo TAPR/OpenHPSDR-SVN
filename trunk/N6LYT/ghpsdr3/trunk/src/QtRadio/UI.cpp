@@ -119,6 +119,7 @@ UI::UI() {
     connect(widget.actionANF,SIGNAL(triggered()),this,SLOT(actionANF()));
     connect(widget.actionNR,SIGNAL(triggered()),this,SLOT(actionNR()));
     connect(widget.actionNB,SIGNAL(triggered()),this,SLOT(actionNB()));
+    connect(widget.actionSDROM,SIGNAL(triggered()),this,SLOT(actionSDROM()));
 
     connect(widget.actionLong,SIGNAL(triggered()),this,SLOT(actionLong()));
     connect(widget.actionSlow,SIGNAL(triggered()),this,SLOT(actionSlow()));
@@ -178,6 +179,7 @@ UI::UI() {
     connect(&configure,SIGNAL(nrValuesChanged(int,int,double,double)),this,SLOT(nrValuesChanged(int,int,double,double)));
     connect(&configure,SIGNAL(anfValuesChanged(int,int,double,double)),this,SLOT(anfValuesChanged(int,int,double,double)));
     connect(&configure,SIGNAL(nbThresholdChanged(double)),this,SLOT(nbThresholdChanged(double)));
+    connect(&configure,SIGNAL(sdromThresholdChanged(double)),this,SLOT(sdromThresholdChanged(double)));
 
     connect(&bookmarks,SIGNAL(bookmarkSelected(QAction*)),this,SLOT(selectBookmark(QAction*)));
     connect(&bookmarkDialog,SIGNAL(accepted()),this,SLOT(addBookmark()));
@@ -1148,6 +1150,12 @@ void UI::actionNB() {
     connection.sendCommand(command);
 }
 
+void UI::actionSDROM() {
+    QString command;
+    command.clear(); QTextStream(&command) << "SetSDROM " << (widget.actionSDROM->isChecked()?"true":"false");
+    connection.sendCommand(command);
+}
+
 void UI::actionSlow() {
     QString command;
     // reset the current selection
@@ -1412,6 +1420,12 @@ void UI::anfValuesChanged(int taps,int delay,double gain,double leakage) {
 void UI::nbThresholdChanged(double threshold) {
     QString command;
     command.clear(); QTextStream(&command) << "SetNBVals " << threshold;
+    connection.sendCommand(command);
+}
+
+void UI::sdromThresholdChanged(double threshold) {
+    QString command;
+    command.clear(); QTextStream(&command) << "SetSDROMVals " << threshold;
     connection.sendCommand(command);
 }
 

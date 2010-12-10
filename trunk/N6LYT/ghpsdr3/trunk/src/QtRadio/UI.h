@@ -142,6 +142,7 @@ public slots:
     void actionANF();
     void actionNR();
     void actionNB();
+    void actionSDROM();
 
     void actionSlow();
     void actionMedium();
@@ -186,6 +187,7 @@ public slots:
     void nrValuesChanged(int,int,double,double);
     void anfValuesChanged(int,int,double,double);
     void nbThresholdChanged(double);
+    void sdromThresholdChanged(double);
 
     void actionBookmark();
     void addBookmark();
