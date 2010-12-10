@@ -296,6 +296,20 @@ if(timing) {
                         } else {
                             fprintf(stderr,"Invalid command: '%s'\n",message);
                         }
+                    } else if(strcmp(token,"setsdrom")==0) {
+                        int state;
+                        token=strtok(NULL," ");
+                        if(token!=NULL) {
+                            if(strcmp(token,"true")==0) {
+                                state=1;
+                            } else {
+                                state=0;
+                            }
+                            SetSDROM(0,0,state);
+                            SetSDROM(0,1,state);
+                        } else {
+                            fprintf(stderr,"Invalid command: '%s'\n",message);
+                        }
                     } else if(strcmp(token,"setanf")==0) {
                         int anf;
                         token=strtok(NULL," ");
@@ -499,6 +513,23 @@ if(timing) {
                         } else {
                             SetNBvals(0,0,threshold);
                             SetNRvals(0,1,threshold);
+                        }
+                    } else if(strcmp(token,"setsdromvals")==0) {
+                        double threshold;
+                        int error;
+
+                        error=0;
+                        token=strtok(NULL," ");
+                        if(token!=NULL) {
+                            threshold=atof(token);
+                        } else {
+                            error=1;
+                        }
+                        if(error) {
+                            fprintf(stderr,"Invalid command: '%s'\n",message);
+                        } else {
+                            SetSDROMvals(0,0,threshold);
+                            SetSDROMvals(0,1,threshold);
                         }
                     } else if(strcmp(token,"setdcblock")==0) {
                         int state;
