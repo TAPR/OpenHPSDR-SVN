@@ -57,6 +57,7 @@ Configure::Configure() {
     widget.anfGainSpinBox->setValue(32);
     widget.anfLeakSpinBox->setValue(1);
     widget.nbThresholdSpinBox->setValue(20);
+    widget.sdromThresholdSpinBox->setValue(20);
 
     widget.ifFrequencyLineEdit->setText("28000000");
 
@@ -85,6 +86,7 @@ Configure::Configure() {
     connect(widget.anfLeakSpinBox,SIGNAL(valueChanged(int)),this,SLOT(slotAnfLeakChanged(int)));
 
     connect(widget.nbThresholdSpinBox,SIGNAL(valueChanged(int)),this,SLOT(slotNbThresholdChanged(int)));
+    connect(widget.sdromThresholdSpinBox,SIGNAL(valueChanged(int)),this,SLOT(slotSdromThresholdChanged(int)));
 
     connect(widget.addPushButton,SIGNAL(clicked()),this,SLOT(slotXVTRAdd()));
     connect(widget.deletePushButton,SIGNAL(clicked()),this,SLOT(slotXVTRDelete()));
@@ -191,7 +193,10 @@ void Configure::loadSettings(QSettings* settings) {
     if(settings->contains("gain")) widget.anfGainSpinBox->setValue(settings->value("gain").toInt());
     if(settings->contains("leak")) widget.anfLeakSpinBox->setValue(settings->value("leak").toInt());
     settings->endGroup();
-    settings->beginGroup("ANB");
+    settings->beginGroup("NB");
+    if(settings->contains("threshold")) widget.nbThresholdSpinBox->setValue(settings->value("threshold").toInt());
+    settings->endGroup();
+    settings->beginGroup("SDROM");
     if(settings->contains("threshold")) widget.nbThresholdSpinBox->setValue(settings->value("threshold").toInt());
     settings->endGroup();
 }
@@ -234,7 +239,10 @@ void Configure::saveSettings(QSettings* settings) {
     settings->setValue("gain",widget.anfGainSpinBox->value());
     settings->setValue("leak",widget.anfLeakSpinBox->value());
     settings->endGroup();
-    settings->beginGroup("ANB");
+    settings->beginGroup("NB");
+    settings->setValue("threshold",widget.nbThresholdSpinBox->value());
+    settings->endGroup();
+    settings->beginGroup("SDROM");
     settings->setValue("threshold",widget.nbThresholdSpinBox->value());
     settings->endGroup();
 }
@@ -335,6 +343,9 @@ void Configure::slotNbThresholdChanged(int threshold) {
     emit nbThresholdChanged((double)widget.nbThresholdSpinBox->value()*0.165);
 }
 
+void Configure::slotSdromThresholdChanged(int threshold) {
+    emit sdromThresholdChanged((double)widget.sdromThresholdSpinBox->value()*0.165);
+}
 
 QString Configure::getHost() {
     return widget.hostComboBox->currentText();

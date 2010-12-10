@@ -80,6 +80,7 @@ public:
     double getAnfLeak();
 
     double getNbThreshold();
+    double getSdromThreshold();
 
 signals:
     void hostChanged(QString host);
@@ -107,6 +108,7 @@ signals:
     void anfValuesChanged(int taps,int delay,double gain,double leak);
 
     void nbThresholdChanged(double threshold);
+    void sdromThresholdChanged(double threshold);
 
     void addXVTR(QString title,long long minFrequency,long long maxFrequency,long long ifFrequency);
     void deleteXVTR(int index);
@@ -136,6 +138,7 @@ public slots:
     void slotAnfLeakChanged(int leak);
 
     void slotNbThresholdChanged(int threshold);
+    void slotSdromThresholdChanged(int threshold);
 
     void slotXVTRAdd();
     void slotXVTRDelete();
