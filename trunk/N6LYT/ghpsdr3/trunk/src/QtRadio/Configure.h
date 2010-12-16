@@ -110,7 +110,7 @@ signals:
     void nbThresholdChanged(double threshold);
     void sdromThresholdChanged(double threshold);
 
-    void addXVTR(QString title,long long minFrequency,long long maxFrequency,long long ifFrequency);
+    void addXVTR(QString title,long long minFrequency,long long maxFrequency,long long ifFrequency,long long freq,int m,int filt);
     void deleteXVTR(int index);
 
 

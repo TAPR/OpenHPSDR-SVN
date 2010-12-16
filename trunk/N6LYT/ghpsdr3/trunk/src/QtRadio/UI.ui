@@ -111,6 +111,7 @@
     <addaction name="actionNR"/>
     <addaction name="actionNB"/>
     <addaction name="actionSDROM"/>
+    <addaction name="separator"/>
    </widget>
    <widget class="QMenu" name="menuAGC">
     <property name="title">
@@ -183,6 +184,12 @@
     <addaction name="actionEditBookmarks"/>
     <addaction name="separator"/>
    </widget>
+   <widget class="QMenu" name="menuSpectrum">
+    <property name="title">
+     <string>Spectrum</string>
+    </property>
+    <addaction name="actionPolyphase"/>
+   </widget>
    <addaction name="menuReceiver"/>
    <addaction name="menuAudio"/>
    <addaction name="menuBand"/>
@@ -190,6 +197,7 @@
    <addaction name="menuFilter"/>
    <addaction name="menuNoise_Reduction"/>
    <addaction name="menuAGC"/>
+   <addaction name="menuSpectrum"/>
    <addaction name="menuHardware"/>
    <addaction name="menuBookmarks"/>
    <addaction name="menuHelp"/>
@@ -740,6 +748,14 @@
    </property>
    <property name="text">
     <string>NB2</string>
+   </property>
+  </action>
+  <action name="actionPolyphase">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Polyphase</string>
    </property>
   </action>
  </widget>

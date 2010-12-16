@@ -4,6 +4,7 @@
 #include <QMenu>
 
 #include "Xvtr.h"
+#include "Mode.h"
 
 Xvtr::Xvtr() {
     currentXvtr=NULL;
@@ -24,6 +25,9 @@ void Xvtr::loadSettings(QSettings* settings) {
     long long minFrequency;
     long long maxFrequency;
     long long ifFrequency;
+    long long frequency;
+    int mode;
+    int filter;
 
     settings->beginGroup("XVTR");
     if(settings->contains("count")) {
@@ -37,8 +41,28 @@ void Xvtr::loadSettings(QSettings* settings) {
             maxFrequency=settings->value(s).toLongLong();
             s.sprintf("ifFrequency.%d",i);
             ifFrequency=settings->value(s).toLongLong();
+            s.sprintf("frequency.%d",i);
+            if(settings->contains(s)) {
+                frequency=settings->value(s).toLongLong();
+            } else {
+                frequency=minFrequency;
+            }
+            s.sprintf("mode.%d",i);
+            if(settings->contains(s)) {
+                mode=settings->value(s).toLongLong();
+            } else {
+                mode=MODE_USB;
+            }
+            s.sprintf("filter.%d",i);
+            if(settings->contains(s)) {
+                filter=settings->value(s).toLongLong();
+            } else {
+                filter=5;
+            }
 
-            add(title,minFrequency,maxFrequency,ifFrequency);
+
+
+            add(title,minFrequency,maxFrequency,ifFrequency,frequency,mode,filter);
         }
     }
     settings->endGroup();
@@ -78,9 +102,9 @@ void Xvtr::buildMenu(QMenu* menu) {
     }
 }
 
-void Xvtr::add(QString title, long long minFrequency, long long maxFrequency, long long ifFrequency) {
+void Xvtr::add(QString title, long long minFrequency, long long maxFrequency, long long ifFrequency,long long frequency,int mode,int filter) {
     qDebug()<<"Xvtr::add"<<title;
-    xvtrs.append(new XvtrEntry(title,minFrequency,maxFrequency,ifFrequency));
+    xvtrs.append(new XvtrEntry(title,minFrequency,maxFrequency,ifFrequency,frequency,mode,filter));
 }
 
 void Xvtr::del(int index) {
@@ -131,4 +155,28 @@ int Xvtr::count() {
 
 XvtrEntry* Xvtr::getXvtrAt(int index) {
     return xvtrs.at(index);
+}
+
+long long Xvtr::getFrequency() {
+    return currentXvtr->getFrequency();
+}
+
+int Xvtr::getMode() {
+    return currentXvtr->getMode();
+}
+
+int Xvtr::getFilter() {
+    return currentXvtr->getFilter();
+}
+
+void Xvtr::setFrequency(long long f) {
+    currentXvtr->setFrequency(f);
+}
+
+void Xvtr::setMode(int m) {
+    currentXvtr->setMode(m);
+}
+
+void Xvtr::setFilter(int f) {
+    currentXvtr->setFilter(f);
 }

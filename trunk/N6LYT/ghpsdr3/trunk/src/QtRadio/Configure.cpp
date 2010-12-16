@@ -28,6 +28,7 @@
 
 #include "Xvtr.h"
 #include "Configure.h"
+#include "Mode.h"
 
 Configure::Configure() {
     widget.setupUi(this);
@@ -492,7 +493,7 @@ void Configure::slotXVTRAdd() {
     }
 
     // all looks OK so save it
-    emit addXVTR(title,minFrequency,maxFrequency,ifFrequency);
+    emit addXVTR(title,minFrequency,maxFrequency,ifFrequency,minFrequency,MODE_USB,5);
 
     // update the list
 }
