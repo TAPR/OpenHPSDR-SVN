@@ -144,6 +144,8 @@ public slots:
     void actionNB();
     void actionSDROM();
 
+    void actionPolyphase();
+
     void actionSlow();
     void actionMedium();
     void actionFast();
@@ -197,7 +199,7 @@ public slots:
     void bookmarkUpdated(int,QString);
     void bookmarkSelected(int entry);
 
-    void addXVTR(QString,long long,long long,long long);
+    void addXVTR(QString,long long,long long,long long,long long,int,int);
     void deleteXVTR(int index);
     void selectXVTR(QAction* action);
     void selectBookmark(QAction* action);

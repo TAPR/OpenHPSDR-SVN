@@ -14,13 +14,20 @@ class Xvtr : public QObject {
 public:
     Xvtr();
     void buildMenu(QMenu* menu);
-    void add(QString,long long,long long,long long);
+    void add(QString,long long,long long,long long,long long,int,int);
     void del(int index);
     void select(QAction* action);
     QString getTitle();
     long long getMinFrequency();
     long long getMaxFrequency();
     long long getIFFrequency();
+
+    long long getFrequency();
+    int getMode();
+    int getFilter();
+    void setFrequency(long long f);
+    void setMode(int m);
+    void setFilter(int f);
 
     int count();
     XvtrEntry* getXvtrAt(int index);

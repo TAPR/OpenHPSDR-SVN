@@ -321,9 +321,6 @@ void Spectrum::paintEvent(QPaintEvent*) {
     // show the frequency
     painter.setPen(QPen(Qt::green,1));
     painter.setFont(QFont("Verdana", 30));
-    //text=QString::number(frequency/1000000)+"."+QString::number(frequency%1000000);
-    //text.sprintf("%lld.%03lld.%03lld",frequency/1000000,frequency%1000000/1000,frequency%1000);
-    //painter.drawText(width()/2,30,QString::number(frequency));
     painter.drawText(width()/2,30,strFrequency);
 
     // show the band and mode and filter
@@ -355,12 +352,16 @@ void Spectrum::paintEvent(QPaintEvent*) {
 
     // show the subrx frequency
     if(subRx) {
-        //filterLeft = (filterLow - (-sampleRate / 2) + (subRxFrequency-frequency)) * width() / sampleRate;
+        /*
         filterRight = (filterHigh - (-sampleRate / 2) + (subRxFrequency-frequency)) * width() / sampleRate;
         painter.setPen(QPen(Qt::black,1));
         painter.setFont(QFont("Arial", 12));
-        //painter.drawText(filterRight,height()-20,QString::number(subRxFrequency));
         painter.drawText(filterRight,height()-20,strSubRxFrequency);
+        */
+        // show the frequency
+        painter.setPen(QPen(Qt::green,1));
+        painter.setFont(QFont("Verdana", 30));
+        painter.drawText(width()/2,image.height()+5+30,strSubRxFrequency);
     }
 }
 

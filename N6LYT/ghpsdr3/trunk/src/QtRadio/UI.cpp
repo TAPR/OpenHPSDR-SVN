@@ -121,6 +121,8 @@ UI::UI() {
     connect(widget.actionNB,SIGNAL(triggered()),this,SLOT(actionNB()));
     connect(widget.actionSDROM,SIGNAL(triggered()),this,SLOT(actionSDROM()));
 
+    connect(widget.actionPolyphase,SIGNAL(triggered()),this,SLOT(actionPolyphase()));
+
     connect(widget.actionLong,SIGNAL(triggered()),this,SLOT(actionLong()));
     connect(widget.actionSlow,SIGNAL(triggered()),this,SLOT(actionSlow()));
     connect(widget.actionMedium,SIGNAL(triggered()),this,SLOT(actionMedium()));
@@ -184,7 +186,7 @@ UI::UI() {
     connect(&bookmarks,SIGNAL(bookmarkSelected(QAction*)),this,SLOT(selectBookmark(QAction*)));
     connect(&bookmarkDialog,SIGNAL(accepted()),this,SLOT(addBookmark()));
 
-    connect(&configure,SIGNAL(addXVTR(QString,long long,long long,long long)),this,SLOT(addXVTR(QString,long long,long long,long long)));
+    connect(&configure,SIGNAL(addXVTR(QString,long long,long long,long long,long long,int,int)),this,SLOT(addXVTR(QString,long long,long long,long long,long long,int,int)));
     connect(&configure,SIGNAL(deleteXVTR(int)),this,SLOT(deleteXVTR(int)));
 
 
@@ -1156,6 +1158,12 @@ void UI::actionSDROM() {
     connection.sendCommand(command);
 }
 
+void UI::actionPolyphase() {
+    QString command;
+    command.clear(); QTextStream(&command) << "SetSpectrumPolyphase " << (widget.actionPolyphase->isChecked()?"true":"false");
+    connection.sendCommand(command);
+}
+
 void UI::actionSlow() {
     QString command;
     // reset the current selection
@@ -1562,10 +1570,10 @@ QString UI::stringFrequency(long long frequency) {
     return strFrequency;
 }
 
-void UI::addXVTR(QString title,long long minFrequency,long long maxFrequency,long long ifFrequency) {
+void UI::addXVTR(QString title,long long minFrequency,long long maxFrequency,long long ifFrequency,long long freq,int m,int filt) {
 
     qDebug()<<"UI::addXVTR"<<title;
-    xvtr.add(title,minFrequency,maxFrequency,ifFrequency);
+    xvtr.add(title,minFrequency,maxFrequency,ifFrequency,freq,m,filt);
 
     // update the menu
     xvtr.buildMenu(widget.menuXVTR);
