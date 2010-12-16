@@ -1,0 +1,42 @@
+#ifndef RECEIVETHREAD_H
+#define RECEIVETHREAD_H
+
+#include <sys/types.h>
+#include <sys/socket.h>
+#include <sys/ioctl.h>
+#include <netinet/in.h>
+#include <arpa/inet.h>
+#include <netdb.h>
+#include <net/if_arp.h>
+#include <net/if.h>
+#include <ifaddrs.h>
+
+#include <QThread>
+
+
+class ReceiveThread : public QThread {
+    Q_OBJECT
+public:
+    ReceiveThread(long metisIP);
+    void run();
+    void stop();
+    void setIPAddress(long ip);
+signals:
+    void commandCompleted();
+    void nextBuffer();
+    void timeout();
+private:
+    long metisIPAddress;
+    bool stopped;
+    long myIPAddress;
+    int s;
+    struct sockaddr_in addr;
+    int length;
+    unsigned char buffer[2048];
+    int bytes_read;
+
+    struct sockaddr_in metis_addr;
+    int metis_length;
+};
+
+#endif // RECEIVETHREAD_H
