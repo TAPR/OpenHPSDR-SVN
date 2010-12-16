@@ -596,6 +596,19 @@ if(timing) {
                         } else {
                             fprintf(stderr,"Invalid command: '%s'\n",message);
                         }
+                    } else if(strcmp(token,"setspectrumpolyphase")==0) {
+                        token=strtok(NULL," ");
+                        if(token!=NULL) {
+                            if(strcmp(token,"true")==0) {
+                                SetSpectrumPolyphase(0,1);
+                            } else if(strcmp(token,"false")==0) {
+                                SetSpectrumPolyphase(0,0);
+                            } else {
+                                fprintf(stderr,"Invalid command: '%s'\n",message);
+                            }
+                        } else {
+                            fprintf(stderr,"Invalid command: '%s'\n",message);
+                        }
                     } else {
                         fprintf(stderr,"Invalid command: token: '%s'\n",token);
                     }
