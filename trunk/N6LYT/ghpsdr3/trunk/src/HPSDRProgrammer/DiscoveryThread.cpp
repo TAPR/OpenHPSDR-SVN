@@ -4,11 +4,17 @@
 
 
 DiscoveryThread::DiscoveryThread() {
+    qDebug()<<"DiscoveryThread";
 }
 
 void DiscoveryThread::stop() {
+    qDebug()<<"DiscoveryThread::stop";
     stopped=true;
+#ifdef __WIN32
+    closesocket(s);
+#else
     close(s);
+#endif
 }
 
 void DiscoveryThread::setIPAddress(long ip) {
@@ -24,7 +30,7 @@ void DiscoveryThread::run() {
         exit(1);
     }
 
-    setsockopt(s,SOL_SOCKET,SO_REUSEADDR,&on,sizeof(on));
+    setsockopt(s,SOL_SOCKET,SO_REUSEADDR,(char*)&on,sizeof(on));
 
     length=sizeof(addr);
     memset(&addr,0,length);
@@ -37,14 +43,16 @@ void DiscoveryThread::run() {
         exit(1);
     }
 
-
-
     qDebug() << "Discovery thread";
 
     stopped=false;
 
+#ifdef WIN32
+#define socklen_t int
+#endif
+
     while(!stopped) {
-        bytes_read=recvfrom(s,buffer,sizeof(buffer),0,(struct sockaddr*)&addr,(socklen_t*)&length);
+        bytes_read=recvfrom(s,(char*)buffer,sizeof(buffer),0,(struct sockaddr*)&addr,(socklen_t*)&length);
         if(bytes_read<0) {
             qDebug() << "recvfrom socket failed for discovery_thread";
             exit(1);
@@ -71,7 +79,12 @@ void DiscoveryThread::run() {
         }
     }
 
-    //close(s);
+
+#ifdef WIN32
+    closesocket(s);
+#else
+    close(s);
+#endif
 
     qDebug()<<"DiscoveryThread stopped";
 }

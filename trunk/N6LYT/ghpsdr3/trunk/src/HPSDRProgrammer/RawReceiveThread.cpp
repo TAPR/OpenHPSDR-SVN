@@ -35,6 +35,7 @@ RawReceiveThread::RawReceiveThread(unsigned char* hwAddress,pcap_t* hdl) {
 }
 
 void RawReceiveThread::stop() {
+    qDebug()<<"RawReceiveThread::stop";
     stopped=true;
 }
 

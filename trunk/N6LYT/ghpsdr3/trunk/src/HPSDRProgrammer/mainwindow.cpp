@@ -41,6 +41,10 @@ MainWindow::MainWindow(QWidget *parent) :
 
     ui->setupUi(this);
 
+    receiveThread=NULL;
+    rawReceiveThread=NULL;
+    discoveryThread=NULL;
+
 #ifdef __WIN32
     ui->privilegesLabel->setText("You must be running with Administrator privileges to be able to read/write raw ethernet frames.");
     QRect rect=ui->interfaceComboBox->geometry();
@@ -159,7 +163,7 @@ void MainWindow::program() {
 
                 end=length-ffCount+36; // trim the FF's but keep at least 36
                 end+=(256-((end-start)%256)); // must be multiple of 256 bytes
-                blocks=((end-start)+255)/256;
+                blocks=(end-start)/256;
 
                 qDebug() <<"start="<<start<<" end="<<end<<" blocks="<<blocks;
 
@@ -483,7 +487,7 @@ void MainWindow::sendCommand(unsigned char command) {
         exit(1);
     }
 
-    setsockopt(s, SOL_SOCKET, SO_REUSEADDR, &on, sizeof(on));
+    setsockopt(s, SOL_SOCKET, SO_REUSEADDR, (const char*)&on, sizeof(on));
 
     // bind to the selected interface
     struct sockaddr_in name={0,0,{0},{0}};
@@ -501,7 +505,7 @@ void MainWindow::sendCommand(unsigned char command) {
     addr.sin_addr.s_addr = metisIP;
     addr.sin_port = htons(1024);
 
-    if(sendto(s,buffer,sizeof(buffer),0,(struct sockaddr*)&addr,sizeof(addr))<0) {
+    if(sendto(s,(char*)buffer,sizeof(buffer),0,(struct sockaddr*)&addr,sizeof(addr))<0) {
         perror("sendto socket failed for sendCommand\n");
         exit(1);
     }
@@ -557,6 +561,8 @@ void MainWindow::sendRawCommand(unsigned char command) {
 void MainWindow::sendData() {
     unsigned char buffer[264];
 
+    qDebug()<<"sendData offset="<<offset;
+
     buffer[0]=0xEF;
     buffer[1]=0xFE;
     buffer[2]=0x03;
@@ -568,7 +574,7 @@ void MainWindow::sendData() {
 
     /*fill the frame with some data*/
     for(int i=0;i<256;i++) {
-            buffer[i+8]=(unsigned char)data[i+offset];
+        buffer[i+8]=(unsigned char)data[i+offset];
     }
 
     //
@@ -582,7 +588,7 @@ void MainWindow::sendData() {
     addr.sin_addr.s_addr=metisIP;
 
     qDebug("sendto");
-    if(sendto(s,buffer,sizeof(buffer),0,(struct sockaddr*)&addr,length)<0) {
+    if(sendto(s,(char*)&buffer[0],sizeof(buffer),0,(struct sockaddr*)&addr,length)<0) {
         perror("sendto socket failed for sendCommand\n");
         exit(1);
     }
@@ -597,17 +603,13 @@ void MainWindow::sendData() {
         }
     }
 
-    if((offset+256)>=end) {
-        status("Programming device completed successfully");
-        status("Metis should reset automatically");
-    }
 }
 
 // private function to send 256 byte block of the pof file.
 void MainWindow::sendRawData() {
     unsigned char buffer[272];
 
-    //qDebug()<<"sendData offset="<<offset<<"start="<<start<<"end="<<end;
+    qDebug()<<"sendRawData offset="<<offset;
 
     if(handle!=NULL) {
         /*set the frame header*/
@@ -743,6 +745,11 @@ void MainWindow::idle() {
     //qDebug()<<"idle";
     if(rawReceiveThread!=NULL) {
         rawReceiveThread->stop();
+        rawReceiveThread=NULL;
+    }
+    if(receiveThread!=NULL) {
+        receiveThread->stop();
+        receiveThread=NULL;
     }
     state=IDLE;
 }
@@ -758,6 +765,7 @@ void MainWindow::discover() {
     // using raw sockets as unable to get Qt UDP sockets to bind to a specific interface
 
     ui->statusListWidget->clear();
+    status("");
     status("Metis Discovery");
 
     ui->metisComboBox->clear();
@@ -784,7 +792,7 @@ void MainWindow::discover() {
         exit(1);
     }
 
-    setsockopt(discovery_socket, SOL_SOCKET, SO_REUSEADDR, &on, sizeof(on));
+    setsockopt(discovery_socket, SOL_SOCKET, SO_REUSEADDR, (char*)&on, sizeof(on));
 
     // bind to the selected interface
     struct sockaddr_in name={0,0,{0},{0}};
@@ -797,7 +805,7 @@ void MainWindow::discover() {
         exit(1);
     }
 
-    rc=setsockopt(discovery_socket, SOL_SOCKET, SO_BROADCAST, &on, sizeof(on));
+    rc=setsockopt(discovery_socket, SOL_SOCKET, SO_BROADCAST, (char*)&on, sizeof(on));
     if(rc != 0) {
         fprintf(stderr,"cannot set SO_BROADCAST: rc=%d\n", rc);
         exit(1);
@@ -827,37 +835,48 @@ void MainWindow::discover() {
     discovery_addr.sin_port=htons(1024);
     discovery_addr.sin_addr.s_addr=htonl(INADDR_BROADCAST);
 
-    if(sendto(discovery_socket,buffer,sizeof(buffer),0,(struct sockaddr*)&discovery_addr,discovery_length)<0) {
+    if(sendto(discovery_socket,(char*)buffer,sizeof(buffer),0,(struct sockaddr*)&discovery_addr,discovery_length)<0) {
         perror("sendto socket failed for discovery_socket\n");
         exit(1);
     }
 
-    // wait 2 seconds
+    // disable the Discovery button
+    ui->discoverPushButton->setDisabled(true);
+
+    // wait 2 seconds to allow replys
+#ifdef WIN32
+    Sleep(2000);
+#else
     sleep(2);
+#endif
 
+    // stop the discovery listening thread
     discoveryThread->stop();
-
-    QString text;
-    text.sprintf("Discovery completed. Found %d cards.",ui->metisComboBox->count());
-    status(text);
 
     if(ui->metisComboBox->count()>0) {
         ui->metisComboBox->setCurrentIndex(0);
         metisSelected(0);
     }
 
-
+    // enable the Discovery button
+    ui->discoverPushButton->setDisabled(false);
 }
 
 void MainWindow::metis_found(unsigned char* hw,long ip) {
-    qDebug() << "metis_found";
-    metis.append(new Metis(ip,hw));
-    ui->metisComboBox->addItem(metis.at(metis.count()-1)->toString());
-    status(metis.at(metis.count()-1)->toString());
+    Metis* m;
+
+    m=new Metis(ip,hw);
+
+    //qDebug() << "metis_found";
+    metis.append(m);
+    ui->metisComboBox->addItem(m->toString());
+    status(m->toString());
 }
 
 void MainWindow::metisSelected(int index) {
-    metisIP=metis.at(index)->getIpAddress();
+    if(index>=0) {
+        metisIP=metis.at(index)->getIpAddress();
+    }
 }
 
 void MainWindow::tabChanged(int index) {
