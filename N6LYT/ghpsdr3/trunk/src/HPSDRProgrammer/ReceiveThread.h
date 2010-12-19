@@ -2,6 +2,9 @@
 #define RECEIVETHREAD_H
 
 #include <sys/types.h>
+#ifdef __WIN32
+#include <winsock2.h>
+#else
 #include <sys/socket.h>
 #include <sys/ioctl.h>
 #include <netinet/in.h>
@@ -10,7 +13,7 @@
 #include <net/if_arp.h>
 #include <net/if.h>
 #include <ifaddrs.h>
-
+#endif
 #include <QThread>
 
 

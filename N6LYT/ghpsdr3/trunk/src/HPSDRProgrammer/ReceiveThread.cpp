@@ -1,6 +1,9 @@
+#include <errno.h>
+
 #include "QDebug"
 
 #include "ReceiveThread.h"
+#include "mainwindow.h"
 
 ReceiveThread::ReceiveThread(long metisIP) {
 
@@ -23,10 +26,12 @@ void ReceiveThread::setIPAddress(long ip) {
 }
 
 void ReceiveThread::stop() {
+    qDebug()<<"ReceiveThread::stop";
     stopped=true;
 }
 
 void ReceiveThread::run() {
+    struct timeval t;
     int on=1;
 
     qDebug() << "ReceiveThread::run";
@@ -37,8 +42,16 @@ void ReceiveThread::run() {
         exit(1);
     }
 
-    setsockopt(s,SOL_SOCKET,SO_REUSEADDR,&on,sizeof(on));
+    // set timeout on the socket
+    t.tv_sec = TIMEOUT / 1000 ;
+    t.tv_usec = ( TIMEOUT % 1000) * 1000  ;
+    setsockopt (s, SOL_SOCKET, SO_RCVTIMEO, (char *)&t, sizeof t);
 
+    // set the reuse flag so we do not have to wait for a close to complete
+    setsockopt(s,SOL_SOCKET,SO_REUSEADDR,(char*)&on,sizeof(on));
+
+
+    // bind to the selected interface
     length=sizeof(addr);
     memset(&addr,0,length);
     addr.sin_family=AF_INET;
@@ -63,14 +76,20 @@ void ReceiveThread::run() {
     metis_addr.sin_addr.s_addr=metisIPAddress;
     */
 
+#ifdef WIN32
+#define socklen_t int
+#endif
+
     while(!stopped) {
-        bytes_read=recvfrom(s,buffer,sizeof(buffer),0,(struct sockaddr*)&metis_addr,(socklen_t*)&metis_length);
-        qDebug()<<"ReceiveThread: read "<<bytes_read<<"bytes";
+        bytes_read=recvfrom(s,(char*)buffer,sizeof(buffer),0,(struct sockaddr*)&metis_addr,(socklen_t*)&metis_length);
         if(bytes_read<0) {
-            qDebug() << "recvfrom socket failed for ReceiveThread";
-            exit(1);
-        }
-        if(bytes_read>=60) {
+            if (errno!=EWOULDBLOCK) {
+                qDebug() << "recvfrom socket failed for ReceiveThread";
+                exit(1);
+            } else {
+                emit timeout();
+            }
+        } else if(bytes_read>=60) {
             if(buffer[0]==0xEF && buffer[1]==0xFE) {
                 switch(buffer[2]) {
                     case 3:  // erase completed
@@ -93,5 +112,9 @@ void ReceiveThread::run() {
         }
     }
 
+#ifdef WIN32
+    closesocket(s);
+#else
     close(s);
+#endif
 }
