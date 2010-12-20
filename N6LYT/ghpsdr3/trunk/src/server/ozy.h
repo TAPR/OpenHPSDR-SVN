@@ -51,3 +51,5 @@ int ozy_set_playback_sleep(int sleep);
 void process_ozy_input_buffer(char* buffer);
 
 void ozy_set_metis(int state);
+
+void ozy_set_open_collector_outputs(int oc);
