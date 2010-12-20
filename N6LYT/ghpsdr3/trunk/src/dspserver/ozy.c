@@ -423,6 +423,29 @@ int ozySetMox(int state) {
     return result;
 }
 
+int ozySetOpenCollectorOutputs(char* state) {
+    char *token;
+    int result;
+
+    result=0;
+    sprintf(command,"setocoutputs %s",state);
+    send_command(command);
+    token=strtok(response," ");
+    if(token!=NULL) {
+        if(strcmp(token,"OK")==0) {
+            result=0;
+        } else if (strcmp(token,"ERROR")==0) {
+            result=1;
+        } else {
+            fprintf(stderr,"invalid response to set oc outputs: %s\n",response);
+            result=1;
+        }
+    }
+
+    return result;
+}
+
+
 /* --------------------------------------------------------------------------*/
 /** 
 * @brief Process the ozy input buffer
