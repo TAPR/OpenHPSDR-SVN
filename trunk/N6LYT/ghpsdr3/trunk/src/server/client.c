@@ -236,6 +236,13 @@ char* parse_command(CLIENT* client,char* command) {
             } else {
                 return TRANSMITTER_NOT_ATTACHED;
             }
+        } else if(strcmp(token,"ocoutput")==0) {
+            token=strtok(NULL," \r\n");
+            if(token!=NULL) {
+                ozy_set_open_collector_outputs(atoi(token));
+            } else {
+                return INVALID_COMMAND;
+            }
         } else {
             // invalid command string
             return INVALID_COMMAND;

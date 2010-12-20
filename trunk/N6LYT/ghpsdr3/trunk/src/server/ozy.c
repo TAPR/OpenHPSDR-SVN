@@ -91,6 +91,7 @@ static int ozy_buffers=DEFAULT_OZY_BUFFERS;
 
 #define DUPLEX                    0x04
 
+
 static pthread_t ep6_ep2_io_thread_id;
 static pthread_t ep4_io_thread_id;
 static pthread_t playback_thread_id;
@@ -322,15 +323,6 @@ int ozy_init() {
 
     strcpy(ozy_firmware,"ozyfw-sdr1k.hex");
     strcpy(ozy_fpga,"Ozy_Janus.rbf");
-
-    // setup defaults
-/*
-    control_out[0] = MOX_DISABLED;
-    control_out[1] = CONFIG_MERCURY | MERCURY_122_88MHZ_SOURCE | MERCURY_10MHZ_SOURCE | speed | MIC_SOURCE_PENELOPE;
-    control_out[2] = MODE_OTHERS;
-    control_out[3] = ALEX_ATTENUATION_0DB | LT2208_GAIN_OFF | LT2208_DITHER_ON | LT2208_RANDOM_ON;
-    control_out[4] = DUPLEX | ((receivers-1)<<3);
-*/
 
         // On Windows, the following is replaced by init_hpsdr() in OzyInit.c
 #ifdef __linux__
@@ -733,3 +725,7 @@ void ozy_set_timing(int t) {
     timing=t;
 }
 
+void ozy_set_open_collector_outputs(int oc) {
+    control_out[2]=control_out[2]&0x01;
+    control_out[2]=control_out[2]|(oc<<1);
+}
