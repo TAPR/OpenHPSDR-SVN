@@ -609,6 +609,13 @@ if(timing) {
                         } else {
                             fprintf(stderr,"Invalid command: '%s'\n",message);
                         }
+                    } else if(strcmp(token,"setocoutputs")==0) {
+                        token=strtok(NULL," ");
+                        if(token!=NULL) {
+                            ozySetOpenCollectorOutputs(token);
+                        } else {
+                            fprintf(stderr,"Invalid command: '%s'\n",message);
+                        }
                     } else {
                         fprintf(stderr,"Invalid command: token: '%s'\n",token);
                     }
