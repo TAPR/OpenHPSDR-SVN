@@ -10,7 +10,8 @@ TARGET = HPSDRProgrammer
 TEMPLATE = app
 
 win32 {
-    LIBS += wpcap.lib /Qt/2010.04/mingw/lib/libws2_32.a
+    INCLUDEPATH += "\Documents and Settings\john\Desktop\WpdPack\Include"
+    LIBS += "\Documents and Settings\john\Desktop\WpdPack\Lib\wpcap.lib" /Qt/2010.05/mingw/lib/libws2_32.a
 } else {
     LIBS += -lpcap
 }

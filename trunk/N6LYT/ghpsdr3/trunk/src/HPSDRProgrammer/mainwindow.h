@@ -69,6 +69,7 @@ public slots:
     void setIP();
 
     void discover();
+    void discovery_timeout();
 
     // SLOTS for RawReceiveThread
     void commandCompleted();

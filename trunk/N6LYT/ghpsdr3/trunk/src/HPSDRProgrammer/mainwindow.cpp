@@ -30,6 +30,8 @@
 #include "QFile"
 #include "QFileDialog"
 #include "QRect"
+#include "QTimer"
+
 #include "pcap.h"
 
 MainWindow::MainWindow(QWidget *parent) :
@@ -844,11 +846,10 @@ void MainWindow::discover() {
     ui->discoverPushButton->setDisabled(true);
 
     // wait 2 seconds to allow replys
-#ifdef WIN32
-    Sleep(2000);
-#else
-    sleep(2);
-#endif
+    QTimer::singleShot(2000,this,SLOT(discovery_timeout()));
+}
+
+void MainWindow::discovery_timeout() {
 
     // stop the discovery listening thread
     discoveryThread->stop();
@@ -860,6 +861,10 @@ void MainWindow::discover() {
 
     // enable the Discovery button
     ui->discoverPushButton->setDisabled(false);
+
+    QString text;
+    text.sprintf("Discovery found %d Metis card(s)",ui->metisComboBox->count());
+    status(text);
 }
 
 void MainWindow::metis_found(unsigned char* hw,long ip) {
