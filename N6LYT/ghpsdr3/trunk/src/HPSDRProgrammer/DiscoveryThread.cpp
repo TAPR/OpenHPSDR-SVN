@@ -18,10 +18,6 @@ void DiscoveryThread::stop() {
 }
 
 void DiscoveryThread::setIPAddress(long ip) {
-    ipAddress=ip;
-}
-
-void DiscoveryThread::run() {
     int on=1;
 
     s=socket(PF_INET,SOCK_DGRAM,IPPROTO_UDP);
@@ -36,12 +32,16 @@ void DiscoveryThread::run() {
     memset(&addr,0,length);
     addr.sin_family=AF_INET;
     addr.sin_port=htons(1025);
-    addr.sin_addr.s_addr = htonl(ipAddress);
+    addr.sin_addr.s_addr = htonl(ip);
     if(bind(s,(struct sockaddr*)&addr,length)<0) {
         qDebug() << "bind socket failed for discovery_thread ";
         perror("bind failed");
         exit(1);
     }
+}
+
+void DiscoveryThread::run() {
+
 
     qDebug() << "Discovery thread";
 
