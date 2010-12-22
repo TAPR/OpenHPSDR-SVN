@@ -9,6 +9,8 @@ QT       += core gui network
 TARGET = HPSDRProgrammer
 TEMPLATE = app
 
+CONFIG += static
+
 win32 {
     INCLUDEPATH += "\Documents and Settings\john\Desktop\WpdPack\Include"
     LIBS += "\Documents and Settings\john\Desktop\WpdPack\Lib\wpcap.lib" /Qt/2010.05/mingw/lib/libws2_32.a
