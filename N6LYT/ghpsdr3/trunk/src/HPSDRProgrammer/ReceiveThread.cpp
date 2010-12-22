@@ -83,7 +83,11 @@ void ReceiveThread::run() {
     while(!stopped) {
         bytes_read=recvfrom(s,(char*)buffer,sizeof(buffer),0,(struct sockaddr*)&metis_addr,(socklen_t*)&metis_length);
         if(bytes_read<0) {
+#ifdef WIN32
+            if (errno!=WSAEWOULDBLOCK) {
+#else
             if (errno!=EWOULDBLOCK) {
+#endif
                 qDebug() << "recvfrom socket failed for ReceiveThread";
                 exit(1);
             } else {

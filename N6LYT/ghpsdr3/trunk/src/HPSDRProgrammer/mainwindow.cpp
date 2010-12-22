@@ -250,9 +250,9 @@ void MainWindow::bootloaderErase() {
         status("Error: cannot open interface (are you running as root)");
     } else {
         rawReceiveThread=new RawReceiveThread(hw,handle);
-        rawReceiveThread->start();
         QObject::connect(rawReceiveThread,SIGNAL(commandCompleted()),this,SLOT(commandCompleted()));
         QObject::connect(rawReceiveThread,SIGNAL(timeout()),this,SLOT(timeout()));
+        rawReceiveThread->start();
 
         // start by erasing
         state=ERASING_ONLY;
@@ -263,7 +263,11 @@ void MainWindow::bootloaderErase() {
 void MainWindow::flashErase() {
     receiveThread=new ReceiveThread(metisIP);
     receiveThread->setIPAddress(ip);
+    QObject::connect(receiveThread,SIGNAL(commandCompleted()),this,SLOT(commandCompleted()));
+    QObject::connect(receiveThread,SIGNAL(timeout()),this,SLOT(timeout()));
     receiveThread->start();
+
+    // start erasing
     state=ERASING_ONLY;
     eraseData();
 }
