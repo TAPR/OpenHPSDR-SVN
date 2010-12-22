@@ -27,6 +27,7 @@
 #include "ui_mainwindow.h"
 
 #include "QDebug"
+#include "QCursor"
 #include "QFile"
 #include "QFileDialog"
 #include "QRect"
@@ -135,6 +136,9 @@ void MainWindow::program() {
         // check that a pof file has been selected
         if(ui->fileLineEdit->text().endsWith(".pof")) {
 
+
+            QApplication::setOverrideCursor(QCursor(Qt::BusyCursor));
+
             // load the pof file and convert to rpd
             QFile pofFile(ui->fileLineEdit->text());
             pofFile.open(QIODevice::ReadOnly);
@@ -145,6 +149,8 @@ void MainWindow::program() {
             status("reading file...");
             if(in.readRawData(data,length)!=length) {
                 status("Error: could not read pof file");
+                pofFile.close();
+                QApplication::restoreOverrideCursor();
             } else {
                 pofFile.close();
                 status("file read successfully");
@@ -231,6 +237,7 @@ void MainWindow::erase() {
 
     // check that an interface has been selected
     if(ui->interfaceComboBox->currentIndex()!=-1) {
+        QApplication::setOverrideCursor(QCursor(Qt::BusyCursor));
         if(bootloader) {
             bootloaderErase();
         } else {
@@ -684,6 +691,7 @@ void MainWindow::commandCompleted() {
     case ERASING_ONLY:
         status("Device erased successfully");
         idle();
+        QApplication::restoreOverrideCursor();
         break;
     case READ_MAC:
         break;
@@ -711,6 +719,7 @@ void MainWindow::nextBuffer() {
             status("Remember to remove JP1 when you power cycle");
         }
         idle();
+        QApplication::restoreOverrideCursor();
     }
 }
 
@@ -727,6 +736,7 @@ void MainWindow::timeout() {
         if(eraseTimeouts==MAX_ERASE_TIMEOUTS) {
             status("Error: erase timeout - have you set the jumper at JP1 and power cycled?");
             idle();
+            QApplication::restoreOverrideCursor();
         }
         break;
     case PROGRAMMING:
@@ -817,6 +827,8 @@ void MainWindow::discover() {
         exit(1);
     }
 
+    QApplication::setOverrideCursor(QCursor(Qt::BusyCursor));
+
     buffer[0]=(char)0xEF; //header
     buffer[1]=(char)0XFE;
     buffer[2]=(char)0x02;
@@ -869,6 +881,7 @@ void MainWindow::discovery_timeout() {
     QString text;
     text.sprintf("Discovery found %d Metis card(s)",ui->metisComboBox->count());
     status(text);
+    QApplication::restoreOverrideCursor();
 }
 
 void MainWindow::metis_found(unsigned char* hw,long ip) {
