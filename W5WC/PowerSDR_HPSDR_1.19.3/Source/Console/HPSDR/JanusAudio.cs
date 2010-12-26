@@ -22,6 +22,7 @@ using System;
 using System.Threading;
 using System.Runtime.InteropServices;
 using System.Diagnostics; 
+using System.Text;
 using HPSDR_USB_LIB_V1;
 
 namespace PowerSDR
@@ -164,6 +165,7 @@ namespace PowerSDR
 		{ 
 			return fx2_fw_version; 
 		} 
+			
 
 
 		[DllImport("JanusAudio.dll")]
@@ -184,15 +186,56 @@ namespace PowerSDR
 			} 
 
 			int i = (int)(255*f); 
+			System.Console.WriteLine("output power i: " + i); 
 			SetOutputPowerFactor(i); 
 		} 
 
+		// [DllImport("JanusAudio.dll")]
+		// public static extern int getNetworkAddrs(Int32[] addrs, Int32 count); 
+
+		
+		
+		[DllImport("JanusAudio.dll")]
+		public static extern void DeInitMetisSockets();
+
+		[DllImport("JanusAudio.dll", CharSet = CharSet.Ansi) ]
+		unsafe public static extern int nativeInitMetis(String netaddr);
+
+		
+
+//		private static bool MetisInitialized = false;
 		// returns 0 on success, !0 on failure 
+		public static int initMetis() 
+		{ 
+//			if( MetisInitialized ) 
+//			{ 
+//				return 0; 
+//			} 
+			int rc; 
+			System.Console.WriteLine("MetisNetIPAddr: " + Console.getConsole().MetisNetworkIPAddr); 
+			rc = nativeInitMetis(Console.getConsole().MetisNetworkIPAddr); 
+//			if  ( rc == 0 ) 
+//			{
+//				MetisInitialized = true;
+//			}
+			System.Console.WriteLine("nativeInitMetis returned: " + rc); 			
+			return -rc; 
+		} 
+
+		
 		public static int initOzy()  
 		{
 
+			Console c = Console.getConsole();
+
+			if  ( c != null && c.HPSDRisMetis ) 
+			{
+				return initMetis(); 
+			}
+			
 			if ( !isOzyAttached() ) 
 			{ 
+				System.Console.WriteLine("Ozy not attached!!"); 
 				return 1; 
 			} 
 
@@ -202,8 +245,12 @@ namespace PowerSDR
 			{ 
 				ProcessStartInfo start_info = new ProcessStartInfo(); 
 				start_info.FileName = "initozy11.bat"; 
-				Console c = Console.getConsole();
-				if ( c != null && c.CurrentModel != Model.HPSDR )  
+				
+				if ( c != null && c.CurrentModel == Model.HERMES ) 
+				{ 
+					start_info.FileName = "initHermes.bat";
+				}			
+				else if ( c != null && c.CurrentModel != Model.HPSDR && c.CurrentModel != Model.HERMES )  
 				{ 
 					start_info.FileName = "initozy-janus.bat";
 				} 
@@ -290,6 +337,15 @@ namespace PowerSDR
 		// and set fwVersionmsg to point to an appropriate message
 		private static bool fwVersionsGood() 
 		{ 
+
+			Console c = Console.getConsole(); 
+			
+			if  ( c != null && c.HPSDRisMetis )  
+			{ 
+				System.Console.WriteLine("!! METIS TODO firmware check stubbed"); 
+				return true; 
+			} 
+			
 			bool result = true; 
 			int ozy_ver = getOzyFWVersion(); 
 			if ( ozy_ver <= 15 ) 
@@ -301,7 +357,7 @@ namespace PowerSDR
 			int merc_ver = getMercuryFWVersion();
 			int penny_ver = getPenelopeFWVersion(); 
 			string fx2_version_string = getFX2FirmwareVersionString(); 
-			Console c = Console.getConsole(); 
+			
 			System.Console.WriteLine("fx2: " + fx2_version_string); 
 			System.Console.WriteLine("ozy: " + ozy_ver); 
 			System.Console.WriteLine("merc: " + merc_ver); 
@@ -320,7 +376,7 @@ namespace PowerSDR
 			       ) 
 				{ 
 					result = false; 
-					fwVersionMsg = "Invalid Firmware Level.  Ozy >= 1.6, Penelope >= 1.2 and Mercury >= 2.7 required\n"; 
+					fwVersionMsg = "Invalid Firmware Level.  Ozy >= 16, Penelope >= 12 and Mercury >= 27 required\n"; 
 				}								
 			} 
 			else  
@@ -331,7 +387,7 @@ namespace PowerSDR
 					) 
 				{
 					result = false; 
-					fwVersionMsg = "Invalid Firmware Level.  Ozy < 1.3, Penelope < 1.2 and Mercury < 2.7 required\n"; 
+					fwVersionMsg = "Invalid Firmware Level.  Ozy < 13, Penelope < 12 and Mercury < 27 required\n"; 
 				}				
 		    }						
 			return result; 
@@ -342,6 +398,9 @@ namespace PowerSDR
 		// returns -101 for firmware version error 
 		unsafe public static int StartAudio(int sample_rate, int samples_per_block, PA19.PaStreamCallback cb, int sample_bits, int no_send) 
 		{ 			
+
+			
+
 			if ( initOzy() != 0 )  
 			{ 
 				return 1; 
@@ -362,6 +421,14 @@ namespace PowerSDR
 			return result; 
 				
 		} 
+
+		[DllImport("JanusAudio.dll")]
+		public static extern int GetMetisIPAddr(); 
+
+		
+		[DllImport("JanusAudio.dll")]
+		public static extern void GetMetisMACAddr(byte[] addr_bytes); 
+
 
 
 		[DllImport("JanusAudio.dll")]

@@ -35,887 +35,888 @@ using System.ComponentModel;
 using System.Threading;
 using System.Windows.Forms;
 using SDRSerialSupportII;
+using System.Text;
 using System.IO;
 using System.IO.Ports;
 using TDxInput;
 
 namespace PowerSDR
 {
-	public class Setup : System.Windows.Forms.Form
-	{
-		#region Variable Declaration
-		
-		private Console console;
-		private Progress progress;
-		private ArrayList KeyList;
-		private int sound_card;
-		private bool initializing;
+    public class Setup : System.Windows.Forms.Form
+    {
+        #region Variable Declaration
 
-		private System.Windows.Forms.TabPage tpDSP;
-		private System.Windows.Forms.TabPage tpDisplay;
-		private System.Windows.Forms.NumericUpDownTS udDisplayGridStep;
-		private System.Windows.Forms.NumericUpDownTS udDisplayGridMin;
-		private System.Windows.Forms.NumericUpDownTS udDisplayGridMax;
-		private System.Windows.Forms.LabelTS lblDisplayGridStep;
-		private System.Windows.Forms.LabelTS lblDisplayGridMin;
-		private System.Windows.Forms.LabelTS lblDisplayGridMax;
-		private System.Windows.Forms.TabPage tpGeneral;
-		private System.Windows.Forms.ComboBoxTS comboGeneralLPTAddr;
-		private System.Windows.Forms.GroupBoxTS grpDisplaySpectrumGrid;
-		private System.Windows.Forms.ButtonTS btnOK;
-		private System.Windows.Forms.ButtonTS btnCancel;
-		private System.Windows.Forms.ButtonTS btnApply;
-		public System.Windows.Forms.CheckBoxTS chkGeneralSpurRed;
-		private System.Windows.Forms.LabelTS lblGeneralLPTAddr;
-		private System.Windows.Forms.NumericUpDownTS udGeneralLPTDelay;
-		private System.Windows.Forms.LabelTS lblGeneralLPTDelay;
-		public System.Windows.Forms.TabControl tcSetup;
-		private System.Windows.Forms.TabPage tpKeyboard;
-		private System.Windows.Forms.LabelTS lblKBTuneDown;
-		private System.Windows.Forms.LabelTS lblKBTuneUp;
-		private System.Windows.Forms.ComboBoxTS comboKBTuneDown1;
-		private System.Windows.Forms.ComboBoxTS comboKBTuneDown3;
-		private System.Windows.Forms.ComboBoxTS comboKBTuneDown2;
-		private System.Windows.Forms.ComboBoxTS comboKBTuneUp1;
-		private System.Windows.Forms.ComboBoxTS comboKBTuneUp2;
-		private System.Windows.Forms.ComboBoxTS comboKBTuneUp3;
-		private System.Windows.Forms.ComboBoxTS comboKBTuneUp4;
-		private System.Windows.Forms.ComboBoxTS comboKBTuneDown4;
-		private System.Windows.Forms.ComboBoxTS comboKBTuneUp5;
-		private System.Windows.Forms.ComboBoxTS comboKBTuneDown5;
-		private System.Windows.Forms.ComboBoxTS comboKBTuneDown6;
-		private System.Windows.Forms.ComboBoxTS comboKBTuneUp7;
-		private System.Windows.Forms.ComboBoxTS comboKBTuneDown7;
-		private System.Windows.Forms.ComboBoxTS comboKBTuneUp6;
-		private System.Windows.Forms.GroupBoxTS grpKBTune;
-		private System.Windows.Forms.LabelTS lblKBTuneDigit;
-		private System.Windows.Forms.LabelTS lblKBTune7;
-		private System.Windows.Forms.LabelTS lblKBTune6;
-		private System.Windows.Forms.LabelTS lblKBTune5;
-		private System.Windows.Forms.LabelTS lblKBTune4;
-		private System.Windows.Forms.LabelTS lblKBTune3;
-		private System.Windows.Forms.LabelTS lblKBTune2;
-		private System.Windows.Forms.LabelTS lblKBTune1;
-		private System.Windows.Forms.GroupBoxTS grpKBBand;
-		private System.Windows.Forms.LabelTS lblKBBandUp;
-		private System.Windows.Forms.LabelTS lblKBBandDown;
-		private System.Windows.Forms.GroupBoxTS grpKBFilter;
-		private System.Windows.Forms.LabelTS lblKBFilterUp;
-		private System.Windows.Forms.LabelTS lblKBFilterDown;
-		private System.Windows.Forms.GroupBoxTS grpKBMode;
-		private System.Windows.Forms.LabelTS lblKBModeUp;
-		private System.Windows.Forms.LabelTS lblKBModeDown;
-		private System.Windows.Forms.ComboBoxTS comboKBBandUp;
-		private System.Windows.Forms.ComboBoxTS comboKBBandDown;
-		private System.Windows.Forms.ComboBoxTS comboKBFilterUp;
-		private System.Windows.Forms.ComboBoxTS comboKBFilterDown;
-		private System.Windows.Forms.ComboBoxTS comboKBModeUp;
-		private System.Windows.Forms.ComboBoxTS comboKBModeDown;
-		private System.Windows.Forms.LabelTS lblDisplayFPS;
+        private Console console;
+        private Progress progress;
+        private ArrayList KeyList;
+        private int sound_card;
+        private bool initializing;
+
+        private System.Windows.Forms.TabPage tpDSP;
+        private System.Windows.Forms.TabPage tpDisplay;
+        private System.Windows.Forms.NumericUpDownTS udDisplayGridStep;
+        private System.Windows.Forms.NumericUpDownTS udDisplayGridMin;
+        private System.Windows.Forms.NumericUpDownTS udDisplayGridMax;
+        private System.Windows.Forms.LabelTS lblDisplayGridStep;
+        private System.Windows.Forms.LabelTS lblDisplayGridMin;
+        private System.Windows.Forms.LabelTS lblDisplayGridMax;
+        private System.Windows.Forms.TabPage tpGeneral;
+        private System.Windows.Forms.ComboBoxTS comboGeneralLPTAddr;
+        private System.Windows.Forms.GroupBoxTS grpDisplaySpectrumGrid;
+        private System.Windows.Forms.ButtonTS btnOK;
+        private System.Windows.Forms.ButtonTS btnCancel;
+        private System.Windows.Forms.ButtonTS btnApply;
+        public System.Windows.Forms.CheckBoxTS chkGeneralSpurRed;
+        private System.Windows.Forms.LabelTS lblGeneralLPTAddr;
+        private System.Windows.Forms.NumericUpDownTS udGeneralLPTDelay;
+        private System.Windows.Forms.LabelTS lblGeneralLPTDelay;
+        public System.Windows.Forms.TabControl tcSetup;
+        private System.Windows.Forms.TabPage tpKeyboard;
+        private System.Windows.Forms.LabelTS lblKBTuneDown;
+        private System.Windows.Forms.LabelTS lblKBTuneUp;
+        private System.Windows.Forms.ComboBoxTS comboKBTuneDown1;
+        private System.Windows.Forms.ComboBoxTS comboKBTuneDown3;
+        private System.Windows.Forms.ComboBoxTS comboKBTuneDown2;
+        private System.Windows.Forms.ComboBoxTS comboKBTuneUp1;
+        private System.Windows.Forms.ComboBoxTS comboKBTuneUp2;
+        private System.Windows.Forms.ComboBoxTS comboKBTuneUp3;
+        private System.Windows.Forms.ComboBoxTS comboKBTuneUp4;
+        private System.Windows.Forms.ComboBoxTS comboKBTuneDown4;
+        private System.Windows.Forms.ComboBoxTS comboKBTuneUp5;
+        private System.Windows.Forms.ComboBoxTS comboKBTuneDown5;
+        private System.Windows.Forms.ComboBoxTS comboKBTuneDown6;
+        private System.Windows.Forms.ComboBoxTS comboKBTuneUp7;
+        private System.Windows.Forms.ComboBoxTS comboKBTuneDown7;
+        private System.Windows.Forms.ComboBoxTS comboKBTuneUp6;
+        private System.Windows.Forms.GroupBoxTS grpKBTune;
+        private System.Windows.Forms.LabelTS lblKBTuneDigit;
+        private System.Windows.Forms.LabelTS lblKBTune7;
+        private System.Windows.Forms.LabelTS lblKBTune6;
+        private System.Windows.Forms.LabelTS lblKBTune5;
+        private System.Windows.Forms.LabelTS lblKBTune4;
+        private System.Windows.Forms.LabelTS lblKBTune3;
+        private System.Windows.Forms.LabelTS lblKBTune2;
+        private System.Windows.Forms.LabelTS lblKBTune1;
+        private System.Windows.Forms.GroupBoxTS grpKBBand;
+        private System.Windows.Forms.LabelTS lblKBBandUp;
+        private System.Windows.Forms.LabelTS lblKBBandDown;
+        private System.Windows.Forms.GroupBoxTS grpKBFilter;
+        private System.Windows.Forms.LabelTS lblKBFilterUp;
+        private System.Windows.Forms.LabelTS lblKBFilterDown;
+        private System.Windows.Forms.GroupBoxTS grpKBMode;
+        private System.Windows.Forms.LabelTS lblKBModeUp;
+        private System.Windows.Forms.LabelTS lblKBModeDown;
+        private System.Windows.Forms.ComboBoxTS comboKBBandUp;
+        private System.Windows.Forms.ComboBoxTS comboKBBandDown;
+        private System.Windows.Forms.ComboBoxTS comboKBFilterUp;
+        private System.Windows.Forms.ComboBoxTS comboKBFilterDown;
+        private System.Windows.Forms.ComboBoxTS comboKBModeUp;
+        private System.Windows.Forms.ComboBoxTS comboKBModeDown;
+        private System.Windows.Forms.LabelTS lblDisplayFPS;
         private System.Windows.Forms.NumericUpDownTS udDisplayFPS;
-		private System.Windows.Forms.GroupBoxTS grpGeneralDDS;
-		private System.Windows.Forms.LabelTS lblPLLMult;
-		private System.Windows.Forms.NumericUpDownTS udDDSPLLMult;
-		private System.Windows.Forms.LabelTS lblIFFrequency;
-		private System.Windows.Forms.NumericUpDownTS udDDSIFFreq;
-		private System.Windows.Forms.LabelTS lblClockCorrection;
-		private System.Windows.Forms.NumericUpDownTS udDDSCorrection;
-		public System.Windows.Forms.TabPage tpAudio;
-		private System.Windows.Forms.TabPage tpTransmit;
-		private System.Windows.Forms.NumericUpDownTS udTXFilterHigh;
-		private System.Windows.Forms.LabelTS lblTXFilterLow;
-		private System.Windows.Forms.LabelTS lblTXFilterHigh;
-		private System.Windows.Forms.NumericUpDownTS udTXFilterLow;
-		private System.Windows.Forms.GroupBoxTS grpTXFilter;
-		private System.Windows.Forms.GroupBoxTS grpDisplayPhase;
-		private System.Windows.Forms.NumericUpDownTS udDisplayPhasePts;
-		private System.Windows.Forms.GroupBoxTS grpDisplayAverage;
-		private System.Windows.Forms.LabelTS lblDisplayPhasePts;
-		private System.Windows.Forms.GroupBoxTS grpGeneralCalibration;
-		private System.Windows.Forms.LabelTS lblGeneralCalFrequency;
-		private System.Windows.Forms.LabelTS lblGeneralCalLevel;
-		private System.Windows.Forms.NumericUpDownTS udGeneralCalLevel;
-		private System.Windows.Forms.GroupBoxTS grpDisplayRefreshRates;
-		private System.Windows.Forms.LabelTS lblDisplayMeterDelay;
-		private System.Windows.Forms.NumericUpDownTS udDisplayMeterDelay;
-		private System.Windows.Forms.TabPage tpAppearance;
-		private System.Windows.Forms.LabelTS lblDisplayFilterColor;
-		private System.Windows.Forms.LabelTS lblDisplayLineWidth;
-		private System.Windows.Forms.NumericUpDownTS udDisplayLineWidth;
-		private System.Windows.Forms.LabelTS lblDisplayDataLineColor;
-		private System.Windows.Forms.LabelTS lblDisplayTextColor;
-		private System.Windows.Forms.LabelTS lblDisplayZeroLineColor;
-		private System.Windows.Forms.LabelTS lblDisplayGridColor;
-		private System.Windows.Forms.LabelTS lblDisplayBackgroundColor;
-		private System.Windows.Forms.GroupBoxTS grpAppearanceMeter;
-		private System.Windows.Forms.LabelTS lblAppearanceMeterRight;
-		private System.Windows.Forms.LabelTS lblAppearanceMeterLeft;
-		private System.Windows.Forms.LabelTS lblAppearanceGenBtnSel;
-		private System.Windows.Forms.GroupBoxTS grpGeneralOptions;
-		private System.Windows.Forms.CheckBoxTS chkGeneralDisablePTT;
-		private System.Windows.Forms.LabelTS lblDisplayPeakText;
-		private System.Windows.Forms.NumericUpDownTS udDisplayPeakText;
-		private System.Windows.Forms.NumericUpDownTS udDisplayCPUMeter;
+        private System.Windows.Forms.GroupBoxTS grpGeneralDDS;
+        private System.Windows.Forms.LabelTS lblPLLMult;
+        private System.Windows.Forms.NumericUpDownTS udDDSPLLMult;
+        private System.Windows.Forms.LabelTS lblIFFrequency;
+        private System.Windows.Forms.NumericUpDownTS udDDSIFFreq;
+        private System.Windows.Forms.LabelTS lblClockCorrection;
+        private System.Windows.Forms.NumericUpDownTS udDDSCorrection;
+        public System.Windows.Forms.TabPage tpAudio;
+        private System.Windows.Forms.TabPage tpTransmit;
+        private System.Windows.Forms.NumericUpDownTS udTXFilterHigh;
+        private System.Windows.Forms.LabelTS lblTXFilterLow;
+        private System.Windows.Forms.LabelTS lblTXFilterHigh;
+        private System.Windows.Forms.NumericUpDownTS udTXFilterLow;
+        private System.Windows.Forms.GroupBoxTS grpTXFilter;
+        private System.Windows.Forms.GroupBoxTS grpDisplayPhase;
+        private System.Windows.Forms.NumericUpDownTS udDisplayPhasePts;
+        private System.Windows.Forms.GroupBoxTS grpDisplayAverage;
+        private System.Windows.Forms.LabelTS lblDisplayPhasePts;
+        private System.Windows.Forms.GroupBoxTS grpGeneralCalibration;
+        private System.Windows.Forms.LabelTS lblGeneralCalFrequency;
+        private System.Windows.Forms.LabelTS lblGeneralCalLevel;
+        private System.Windows.Forms.NumericUpDownTS udGeneralCalLevel;
+        private System.Windows.Forms.GroupBoxTS grpDisplayRefreshRates;
+        private System.Windows.Forms.LabelTS lblDisplayMeterDelay;
+        private System.Windows.Forms.NumericUpDownTS udDisplayMeterDelay;
+        private System.Windows.Forms.TabPage tpAppearance;
+        private System.Windows.Forms.LabelTS lblDisplayFilterColor;
+        private System.Windows.Forms.LabelTS lblDisplayLineWidth;
+        private System.Windows.Forms.NumericUpDownTS udDisplayLineWidth;
+        private System.Windows.Forms.LabelTS lblDisplayDataLineColor;
+        private System.Windows.Forms.LabelTS lblDisplayTextColor;
+        private System.Windows.Forms.LabelTS lblDisplayZeroLineColor;
+        private System.Windows.Forms.LabelTS lblDisplayGridColor;
+        private System.Windows.Forms.LabelTS lblDisplayBackgroundColor;
+        private System.Windows.Forms.GroupBoxTS grpAppearanceMeter;
+        private System.Windows.Forms.LabelTS lblAppearanceMeterRight;
+        private System.Windows.Forms.LabelTS lblAppearanceMeterLeft;
+        private System.Windows.Forms.LabelTS lblAppearanceGenBtnSel;
+        private System.Windows.Forms.GroupBoxTS grpGeneralOptions;
+        private System.Windows.Forms.CheckBoxTS chkGeneralDisablePTT;
+        private System.Windows.Forms.LabelTS lblDisplayPeakText;
+        private System.Windows.Forms.NumericUpDownTS udDisplayPeakText;
+        private System.Windows.Forms.NumericUpDownTS udDisplayCPUMeter;
         private System.Windows.Forms.LabelTS lblDisplayCPUMeter;
-		private System.Windows.Forms.GroupBoxTS grpDisplayWaterfall;
-		private System.Windows.Forms.NumericUpDownTS udDisplayWaterfallHighLevel;
-		private System.Windows.Forms.LabelTS lblDisplayWaterfallHighLevel;
-		private System.Windows.Forms.LabelTS lblDisplayWaterfallLowLevel;
-		private System.Windows.Forms.NumericUpDownTS udDisplayWaterfallLowLevel;
-		private System.Windows.Forms.LabelTS lblDisplayWaterfallLowColor;
-		private System.Windows.Forms.CheckBoxTS chkGeneralPAPresent;
-		private System.Windows.Forms.ButtonTS btnGeneralCalLevelStart;
-		private System.Windows.Forms.ButtonTS btnGeneralCalFreqStart;
-		private System.Windows.Forms.ButtonTS btnGeneralCalImageStart;
-		private System.Windows.Forms.CheckBoxTS chkGeneralSoftwareGainCorr;
-		private System.Windows.Forms.LabelTS lblBandLight;
-		private System.Windows.Forms.LabelTS lblBandDark;
-		private System.Windows.Forms.LabelTS lblPeakText;
-		private System.Windows.Forms.ButtonTS btnWizard;
-		private System.Windows.Forms.ButtonTS btnImportDB;
-		private System.Windows.Forms.OpenFileDialog openFileDialog1;
-		private System.Windows.Forms.TabPage tpTests;
-		private System.Windows.Forms.LabelTS lblPAGainByBand160;
-		private System.Windows.Forms.LabelTS lblPAGainByBand80;
-		private System.Windows.Forms.LabelTS lblPAGainByBand60;
-		private System.Windows.Forms.LabelTS lblPAGainByBand40;
-		private System.Windows.Forms.LabelTS lblPAGainByBand30;
-		private System.Windows.Forms.LabelTS lblPAGainByBand10;
-		private System.Windows.Forms.LabelTS lblPAGainByBand12;
-		private System.Windows.Forms.LabelTS lblPAGainByBand15;
-		private System.Windows.Forms.LabelTS lblPAGainByBand17;
-		private System.Windows.Forms.LabelTS lblPAGainByBand20;
-		private System.Windows.Forms.TabPage tpPowerAmplifier;
-		private System.Windows.Forms.ToolTip toolTip1;
-		private System.Windows.Forms.NumericUpDownTS udPAGain10;
-		private System.Windows.Forms.NumericUpDownTS udPAGain12;
-		private System.Windows.Forms.NumericUpDownTS udPAGain15;
-		private System.Windows.Forms.NumericUpDownTS udPAGain17;
-		private System.Windows.Forms.NumericUpDownTS udPAGain20;
-		private System.Windows.Forms.NumericUpDownTS udPAGain30;
-		private System.Windows.Forms.NumericUpDownTS udPAGain40;
-		private System.Windows.Forms.NumericUpDownTS udPAGain60;
-		private System.Windows.Forms.NumericUpDownTS udPAGain80;
-		private System.Windows.Forms.NumericUpDownTS udPAGain160;
-		private System.Windows.Forms.GroupBoxTS grpPAGainByBand;
-		private System.Windows.Forms.ButtonTS btnPAGainCalibration;
-		private System.Windows.Forms.CheckBoxTS chkGeneralEnableX2;
-		private System.Windows.Forms.LabelTS lblGeneralX2Delay;
-		private System.Windows.Forms.NumericUpDownTS udGeneralX2Delay;
-		private System.Windows.Forms.GroupBoxTS grpPABandOffset;
-		private System.Windows.Forms.LabelTS lblPABandOffset30;
-		private System.Windows.Forms.LabelTS lblPABandOffset40;
-		private System.Windows.Forms.LabelTS lblPABandOffset60;
-		private System.Windows.Forms.LabelTS lblPABandOffset80;
-		private System.Windows.Forms.LabelTS lblPABandOffset160;
-		private System.Windows.Forms.LabelTS lblPABandOffset10;
-		private System.Windows.Forms.LabelTS lblPABandOffset12;
-		private System.Windows.Forms.LabelTS lblPABandOffset15;
-		private System.Windows.Forms.LabelTS lblPABandOffset17;
-		private System.Windows.Forms.LabelTS lblPABandOffset20;
-		private System.Windows.Forms.CheckBoxTS chkGeneralATUPresent;
-		private System.Windows.Forms.ButtonTS btnPAGainReset;
-		private System.Windows.Forms.ComboBoxTS comboGeneralProcessPriority;
-		private System.Windows.Forms.GroupBoxTS grpGeneralProcessPriority;
-		private System.Windows.Forms.GroupBoxTS grpTestTXIMD;
-		private ColorButton clrbtnBtnSel;
-		private ColorButton clrbtnVFODark;
-		private ColorButton clrbtnVFOLight;
-		private ColorButton clrbtnBandDark;
-		private ColorButton clrbtnBandLight;
-		private ColorButton clrbtnPeakText;
-		private ColorButton clrbtnBackground;
-		private ColorButton clrbtnGrid;
-		private ColorButton clrbtnZeroLine;
-		private ColorButton clrbtnFilter;
-		private ColorButton clrbtnText;
-		private ColorButton clrbtnDataLine;
-		private ColorButton clrbtnMeterLeft;
-		private ColorButton clrbtnMeterRight;
-		private ColorButton clrbtnWaterfallLow;
-		private System.Windows.Forms.LabelTS lblTestIMDPower;
-		private System.Windows.Forms.NumericUpDownTS udTestIMDPower;
-		private System.Windows.Forms.CheckBoxTS chkGeneralCustomFilter;
-		private System.Windows.Forms.NumericUpDownTS udTestIMDFreq1;
-		private System.Windows.Forms.NumericUpDownTS udTestIMDFreq2;
-		private System.Windows.Forms.ButtonTS btnTestAudioBalStart;
-		private System.Windows.Forms.CheckBoxTS chkTestX2Pin1;
-		private System.Windows.Forms.CheckBoxTS chkTestX2Pin2;
-		private System.Windows.Forms.CheckBoxTS chkTestX2Pin3;
-		private System.Windows.Forms.CheckBoxTS chkTestX2Pin4;
-		private System.Windows.Forms.CheckBoxTS chkTestX2Pin5;
-		private System.Windows.Forms.CheckBoxTS chkTestX2Pin6;
-		private System.Windows.Forms.NumericUpDownTS udDisplayAVGTime;
-		private System.Windows.Forms.LabelTS lblDisplayAVGTime;
-		private System.Windows.Forms.GroupBoxTS grpTestX2;
-		private System.Windows.Forms.GroupBoxTS grpTestAudioBalance;
-		private System.Windows.Forms.NumericUpDownTS udPAADC17;
-		private System.Windows.Forms.NumericUpDownTS udPAADC15;
-		private System.Windows.Forms.NumericUpDownTS udPAADC20;
-		private System.Windows.Forms.NumericUpDownTS udPAADC12;
-		private System.Windows.Forms.NumericUpDownTS udPAADC10;
-		private System.Windows.Forms.NumericUpDownTS udPAADC160;
-		private System.Windows.Forms.NumericUpDownTS udPAADC80;
-		private System.Windows.Forms.NumericUpDownTS udPAADC60;
-		private System.Windows.Forms.NumericUpDownTS udPAADC40;
-		private System.Windows.Forms.NumericUpDownTS udPAADC30;
-		private System.Windows.Forms.CheckBoxTS chkGeneralUSBPresent;
-		private System.Windows.Forms.GroupBoxTS grpPATune;
-		private System.Windows.Forms.LabelTS lblTransmitTunePower;
-		private System.Windows.Forms.NumericUpDownTS udTXTunePower;
-		private System.Windows.Forms.GroupBoxTS grpDisplayMultimeter;
-		private System.Windows.Forms.LabelTS lblDisplayMultiPeakHoldTime;
-		private System.Windows.Forms.NumericUpDownTS udDisplayMultiPeakHoldTime;
-		private System.Windows.Forms.NumericUpDownTS udDisplayMultiTextHoldTime;
-		private System.Windows.Forms.LabelTS lblDisplayMeterTextHoldTime;
-		private System.Windows.Forms.GroupBoxTS grpGeneralUpdates;
-		private System.Windows.Forms.CheckBoxTS chkGeneralUpdateRelease;
-		private System.Windows.Forms.CheckBoxTS chkGeneralUpdateBeta;
-		private System.Windows.Forms.CheckBoxTS chkGeneralRXOnly;
-		private System.Windows.Forms.LabelTS lblTestX2;
-		private System.Windows.Forms.LabelTS lblTestToneFreq2;
-		private System.Windows.Forms.LabelTS lblTestToneFreq1;
-		private System.Windows.Forms.TabPage tpCAT;
-		private System.Windows.Forms.GroupBoxTS grpPTTBitBang;
-		private System.Windows.Forms.LabelTS lblCATPTTPort;
-		private System.Windows.Forms.CheckBoxTS chkCATPTT_RTS;
-		private System.Windows.Forms.CheckBoxTS chkCATPTT_DTR;
-		private System.Windows.Forms.GroupBoxTS grpCatControlBox;
-		private System.Windows.Forms.ComboBoxTS comboCATbaud;
-		private System.Windows.Forms.LabelTS lblCATBaud;
-		private System.Windows.Forms.CheckBoxTS chkCATEnable;
-		private System.Windows.Forms.LabelTS lblCATParity;
-		private System.Windows.Forms.LabelTS lblCATData;
-		private System.Windows.Forms.LabelTS lblCATStop;
-		private System.Windows.Forms.ComboBoxTS comboCATparity;
-		private System.Windows.Forms.ComboBoxTS comboCATdatabits;
-		private System.Windows.Forms.ComboBoxTS comboCATstopbits;
-		private System.Windows.Forms.GroupBoxTS grpKBCW;
-		private System.Windows.Forms.LabelTS lblKBCWDot;
-		private System.Windows.Forms.LabelTS lblKBCWDash;
-		private System.Windows.Forms.ComboBoxTS comboKBCWDot;
-		private System.Windows.Forms.ComboBoxTS comboKBCWDash;
-		private System.Windows.Forms.GroupBoxTS grpKBRIT;
-		private System.Windows.Forms.LabelTS lblKBRitUp;
-		private System.Windows.Forms.LabelTS lblKBRITDown;
-		private System.Windows.Forms.ComboBoxTS comboKBRITUp;
-		private System.Windows.Forms.ComboBoxTS comboKBRITDown;
-		private System.Windows.Forms.GroupBoxTS grpKBXIT;
-		private System.Windows.Forms.LabelTS lblKBXITUp;
-		private System.Windows.Forms.LabelTS lblKBXITDown;
-		private System.Windows.Forms.ComboBoxTS comboKBXITUp;
-		private System.Windows.Forms.ComboBoxTS comboKBXITDown;
-		private System.Windows.Forms.CheckBoxTS chkDCBlock;
-		private System.Windows.Forms.TabPage tpExtCtrl;
-		private System.Windows.Forms.GroupBoxTS grpExtTX;
-		private System.Windows.Forms.LabelTS lblExtTXX25;
-		private System.Windows.Forms.LabelTS lblExtTXX24;
-		private System.Windows.Forms.LabelTS lblExtTXX23;
-		private System.Windows.Forms.LabelTS lblExtTXX22;
-		private System.Windows.Forms.LabelTS lblExtTX2;
-		private System.Windows.Forms.LabelTS lblExtTX6;
-		private System.Windows.Forms.LabelTS lblExtTX10;
-		private System.Windows.Forms.LabelTS lblExtTX12;
-		private System.Windows.Forms.LabelTS lblExtTX15;
-		private System.Windows.Forms.LabelTS lblExtTX17;
-		private System.Windows.Forms.LabelTS lblExtTX20;
-		private System.Windows.Forms.LabelTS lblExtTX30;
-		private System.Windows.Forms.LabelTS lblExtTX40;
-		private System.Windows.Forms.LabelTS lblExtTX60;
-		private System.Windows.Forms.LabelTS lblExtTX80;
-		private System.Windows.Forms.LabelTS lblExtTXX2Pins;
-		private System.Windows.Forms.LabelTS lblExtTXBand;
-		private System.Windows.Forms.LabelTS lblExtTX160;
-		private System.Windows.Forms.CheckBoxTS chkExtTX1603;
-		private System.Windows.Forms.CheckBoxTS chkExtTX1602;
-		private System.Windows.Forms.CheckBoxTS chkExtTX1601;
-		private System.Windows.Forms.LabelTS lblExtTXX21;
-		private System.Windows.Forms.CheckBoxTS chkExtTX1605;
-		private System.Windows.Forms.CheckBoxTS chkExtTX1604;
-		private System.Windows.Forms.GroupBoxTS grpExtRX;
-		private System.Windows.Forms.LabelTS lblExtRXX25;
-		private System.Windows.Forms.LabelTS lblExtRXX24;
-		private System.Windows.Forms.LabelTS lblExtRXX23;
-		private System.Windows.Forms.LabelTS lblExtRXX22;
-		private System.Windows.Forms.LabelTS lblExtRX2;
-		private System.Windows.Forms.LabelTS lblExtRX6;
-		private System.Windows.Forms.LabelTS lblExtRX10;
-		private System.Windows.Forms.LabelTS lblExtRX12;
-		private System.Windows.Forms.LabelTS lblExtRX15;
-		private System.Windows.Forms.LabelTS lblExtRX17;
-		private System.Windows.Forms.LabelTS lblExtRX20;
-		private System.Windows.Forms.LabelTS lblExtRX30;
-		private System.Windows.Forms.LabelTS lblExtRX40;
-		private System.Windows.Forms.LabelTS lblExtRX60;
-		private System.Windows.Forms.LabelTS lblExtRX80;
-		private System.Windows.Forms.LabelTS lblExtRXX2Pins;
-		private System.Windows.Forms.LabelTS lblExtRXBand;
-		private System.Windows.Forms.LabelTS lblExtRX160;
-		private System.Windows.Forms.CheckBoxTS chkExtRX1603;
-		private System.Windows.Forms.CheckBoxTS chkExtRX1602;
-		private System.Windows.Forms.CheckBoxTS chkExtRX1601;
-		private System.Windows.Forms.LabelTS lblExtRXX21;
-		private System.Windows.Forms.CheckBoxTS chkExtRX1605;
-		private System.Windows.Forms.CheckBoxTS chkExtRX1604;
-		private System.Windows.Forms.CheckBoxTS chkExtTX23;
-		private System.Windows.Forms.CheckBoxTS chkExtTX22;
-		private System.Windows.Forms.CheckBoxTS chkExtTX21;
-		private System.Windows.Forms.CheckBoxTS chkExtTX25;
-		private System.Windows.Forms.CheckBoxTS chkExtTX24;
-		private System.Windows.Forms.CheckBoxTS chkExtTX63;
-		private System.Windows.Forms.CheckBoxTS chkExtTX62;
-		private System.Windows.Forms.CheckBoxTS chkExtTX61;
-		private System.Windows.Forms.CheckBoxTS chkExtTX65;
-		private System.Windows.Forms.CheckBoxTS chkExtTX64;
-		private System.Windows.Forms.CheckBoxTS chkExtTX103;
-		private System.Windows.Forms.CheckBoxTS chkExtTX102;
-		private System.Windows.Forms.CheckBoxTS chkExtTX101;
-		private System.Windows.Forms.CheckBoxTS chkExtTX105;
-		private System.Windows.Forms.CheckBoxTS chkExtTX104;
-		private System.Windows.Forms.CheckBoxTS chkExtTX123;
-		private System.Windows.Forms.CheckBoxTS chkExtTX122;
-		private System.Windows.Forms.CheckBoxTS chkExtTX121;
-		private System.Windows.Forms.CheckBoxTS chkExtTX125;
-		private System.Windows.Forms.CheckBoxTS chkExtTX124;
-		private System.Windows.Forms.CheckBoxTS chkExtTX153;
-		private System.Windows.Forms.CheckBoxTS chkExtTX152;
-		private System.Windows.Forms.CheckBoxTS chkExtTX151;
-		private System.Windows.Forms.CheckBoxTS chkExtTX155;
-		private System.Windows.Forms.CheckBoxTS chkExtTX154;
-		private System.Windows.Forms.CheckBoxTS chkExtTX173;
-		private System.Windows.Forms.CheckBoxTS chkExtTX172;
-		private System.Windows.Forms.CheckBoxTS chkExtTX171;
-		private System.Windows.Forms.CheckBoxTS chkExtTX175;
-		private System.Windows.Forms.CheckBoxTS chkExtTX174;
-		private System.Windows.Forms.CheckBoxTS chkExtTX203;
-		private System.Windows.Forms.CheckBoxTS chkExtTX202;
-		private System.Windows.Forms.CheckBoxTS chkExtTX201;
-		private System.Windows.Forms.CheckBoxTS chkExtTX205;
-		private System.Windows.Forms.CheckBoxTS chkExtTX204;
-		private System.Windows.Forms.CheckBoxTS chkExtTX303;
-		private System.Windows.Forms.CheckBoxTS chkExtTX302;
-		private System.Windows.Forms.CheckBoxTS chkExtTX301;
-		private System.Windows.Forms.CheckBoxTS chkExtTX305;
-		private System.Windows.Forms.CheckBoxTS chkExtTX304;
-		private System.Windows.Forms.CheckBoxTS chkExtTX403;
-		private System.Windows.Forms.CheckBoxTS chkExtTX402;
-		private System.Windows.Forms.CheckBoxTS chkExtTX401;
-		private System.Windows.Forms.CheckBoxTS chkExtTX405;
-		private System.Windows.Forms.CheckBoxTS chkExtTX404;
-		private System.Windows.Forms.CheckBoxTS chkExtTX603;
-		private System.Windows.Forms.CheckBoxTS chkExtTX602;
-		private System.Windows.Forms.CheckBoxTS chkExtTX601;
-		private System.Windows.Forms.CheckBoxTS chkExtTX605;
-		private System.Windows.Forms.CheckBoxTS chkExtTX604;
-		private System.Windows.Forms.CheckBoxTS chkExtTX803;
-		private System.Windows.Forms.CheckBoxTS chkExtTX802;
-		private System.Windows.Forms.CheckBoxTS chkExtTX801;
-		private System.Windows.Forms.CheckBoxTS chkExtTX805;
-		private System.Windows.Forms.CheckBoxTS chkExtTX804;
-		private System.Windows.Forms.CheckBoxTS chkExtRX23;
-		private System.Windows.Forms.CheckBoxTS chkExtRX22;
-		private System.Windows.Forms.CheckBoxTS chkExtRX21;
-		private System.Windows.Forms.CheckBoxTS chkExtRX25;
-		private System.Windows.Forms.CheckBoxTS chkExtRX24;
-		private System.Windows.Forms.CheckBoxTS chkExtRX63;
-		private System.Windows.Forms.CheckBoxTS chkExtRX62;
-		private System.Windows.Forms.CheckBoxTS chkExtRX61;
-		private System.Windows.Forms.CheckBoxTS chkExtRX65;
-		private System.Windows.Forms.CheckBoxTS chkExtRX64;
-		private System.Windows.Forms.CheckBoxTS chkExtRX103;
-		private System.Windows.Forms.CheckBoxTS chkExtRX102;
-		private System.Windows.Forms.CheckBoxTS chkExtRX101;
-		private System.Windows.Forms.CheckBoxTS chkExtRX105;
-		private System.Windows.Forms.CheckBoxTS chkExtRX104;
-		private System.Windows.Forms.CheckBoxTS chkExtRX123;
-		private System.Windows.Forms.CheckBoxTS chkExtRX122;
-		private System.Windows.Forms.CheckBoxTS chkExtRX121;
-		private System.Windows.Forms.CheckBoxTS chkExtRX125;
-		private System.Windows.Forms.CheckBoxTS chkExtRX124;
-		private System.Windows.Forms.CheckBoxTS chkExtRX153;
-		private System.Windows.Forms.CheckBoxTS chkExtRX152;
-		private System.Windows.Forms.CheckBoxTS chkExtRX151;
-		private System.Windows.Forms.CheckBoxTS chkExtRX155;
-		private System.Windows.Forms.CheckBoxTS chkExtRX154;
-		private System.Windows.Forms.CheckBoxTS chkExtRX173;
-		private System.Windows.Forms.CheckBoxTS chkExtRX172;
-		private System.Windows.Forms.CheckBoxTS chkExtRX171;
-		private System.Windows.Forms.CheckBoxTS chkExtRX175;
-		private System.Windows.Forms.CheckBoxTS chkExtRX174;
-		private System.Windows.Forms.CheckBoxTS chkExtRX203;
-		private System.Windows.Forms.CheckBoxTS chkExtRX202;
-		private System.Windows.Forms.CheckBoxTS chkExtRX201;
-		private System.Windows.Forms.CheckBoxTS chkExtRX205;
-		private System.Windows.Forms.CheckBoxTS chkExtRX204;
-		private System.Windows.Forms.CheckBoxTS chkExtRX303;
-		private System.Windows.Forms.CheckBoxTS chkExtRX302;
-		private System.Windows.Forms.CheckBoxTS chkExtRX301;
-		private System.Windows.Forms.CheckBoxTS chkExtRX305;
-		private System.Windows.Forms.CheckBoxTS chkExtRX304;
-		private System.Windows.Forms.CheckBoxTS chkExtRX403;
-		private System.Windows.Forms.CheckBoxTS chkExtRX402;
-		private System.Windows.Forms.CheckBoxTS chkExtRX401;
-		private System.Windows.Forms.CheckBoxTS chkExtRX405;
-		private System.Windows.Forms.CheckBoxTS chkExtRX404;
-		private System.Windows.Forms.CheckBoxTS chkExtRX603;
-		private System.Windows.Forms.CheckBoxTS chkExtRX602;
-		private System.Windows.Forms.CheckBoxTS chkExtRX601;
-		private System.Windows.Forms.CheckBoxTS chkExtRX605;
-		private System.Windows.Forms.CheckBoxTS chkExtRX604;
-		private System.Windows.Forms.CheckBoxTS chkExtRX803;
-		private System.Windows.Forms.CheckBoxTS chkExtRX802;
-		private System.Windows.Forms.CheckBoxTS chkExtRX801;
-		private System.Windows.Forms.CheckBoxTS chkExtRX805;
-		private System.Windows.Forms.CheckBoxTS chkExtRX804;
-		private System.Windows.Forms.ButtonTS btnCATTest;
-		private System.Windows.Forms.TabControl tcAudio;
-		private System.Windows.Forms.NumericUpDownTS udAudioLineIn1;
-		private System.Windows.Forms.ButtonTS btnAudioVoltTest1;
-		private System.Windows.Forms.NumericUpDownTS udAudioVoltage1;
-		public System.Windows.Forms.GroupBoxTS grpAudioDetails1;
-		private System.Windows.Forms.ComboBoxTS comboAudioTransmit1;
-		private System.Windows.Forms.LabelTS lblAudioMixer1;
-		public System.Windows.Forms.LabelTS lblAudioOutput1;
-		private System.Windows.Forms.ComboBoxTS comboAudioOutput1;
-		public System.Windows.Forms.LabelTS lblAudioInput1;
-		public System.Windows.Forms.LabelTS lblAudioDriver1;
-		private System.Windows.Forms.ComboBoxTS comboAudioInput1;
-		private System.Windows.Forms.ComboBoxTS comboAudioDriver1;
-		private System.Windows.Forms.ComboBoxTS comboAudioMixer1;
-		private System.Windows.Forms.LabelTS lblAudioTransmit1;
-		private System.Windows.Forms.LabelTS lblAudioReceive1;
-		private System.Windows.Forms.ComboBoxTS comboAudioReceive1;
-		private System.Windows.Forms.NumericUpDownTS udAudioLatency1;
-		private System.Windows.Forms.GroupBoxTS grpAudioCard;
-		private System.Windows.Forms.ComboBoxTS comboAudioSoundCard;
-		private System.Windows.Forms.ComboBoxTS comboAudioBuffer1;
-		private System.Windows.Forms.ComboBoxTS comboAudioSampleRate1;
-		private System.Windows.Forms.GroupBoxTS grpAudioLineInGain1;
-		private System.Windows.Forms.GroupBoxTS grpAudioLatency1;
-		private System.Windows.Forms.CheckBoxTS chkAudioLatencyManual1;
-		private System.Windows.Forms.GroupBoxTS grpAudioBufferSize1;
-		private System.Windows.Forms.GroupBoxTS grpAudioSampleRate1;
-		private System.Windows.Forms.GroupBoxTS grpAudioDetails2;
-		public System.Windows.Forms.LabelTS lblAudioOutput2;
-		private System.Windows.Forms.ComboBoxTS comboAudioOutput2;
-		public System.Windows.Forms.LabelTS lblAudioInput2;
-		public System.Windows.Forms.LabelTS lblAudioDriver2;
-		private System.Windows.Forms.ComboBoxTS comboAudioInput2;
-		private System.Windows.Forms.ComboBoxTS comboAudioDriver2;
-		private System.Windows.Forms.NumericUpDownTS udAudioLatency2;
-		private System.Windows.Forms.ComboBoxTS comboAudioBuffer2;
-		private System.Windows.Forms.ComboBoxTS comboAudioSampleRate2;
-		private System.Windows.Forms.GroupBoxTS grpAudioMicInGain1;
-		private System.Windows.Forms.NumericUpDownTS udAudioMicGain1;
-		private System.Windows.Forms.GroupBoxTS grpAudioBuffer2;
-		private System.Windows.Forms.GroupBoxTS grpAudioSampleRate2;
-		private System.Windows.Forms.GroupBoxTS grpAudioLatency2;
-		private System.Windows.Forms.CheckBoxTS chkAudioLatencyManual2;
-		private System.Windows.Forms.GroupBoxTS grpAudioVolts1;
-		private System.Windows.Forms.ComboBoxTS comboCATRigType;
-		private System.Windows.Forms.ComboBoxTS comboDisplayLabelAlign;
-		private System.Windows.Forms.LabelTS lblDisplayAlign;
-		private System.Windows.Forms.LabelTS lblCATRigType;
-		private System.Windows.Forms.TabPage tpAudioCard1;
-		private System.Windows.Forms.TabPage tpDSPKeyer;
-		private System.Windows.Forms.NumericUpDownTS udCWKeyerRamp;
-		private System.Windows.Forms.LabelTS lblCWRamp;
-		private System.Windows.Forms.CheckBoxTS chkCWKeyerIambic;
-		private System.Windows.Forms.GroupBoxTS grpDSPKeyerSignalShaping;
-		private System.Windows.Forms.NumericUpDownTS udCWKeyerWeight;
-		private System.Windows.Forms.LabelTS lblCWWeight;
-		private System.Windows.Forms.GroupBoxTS grpDSPKeyerOptions;
-		private System.Windows.Forms.GroupBoxTS grpDSPKeyerSemiBreakIn;
-		private System.Windows.Forms.GroupBoxTS grpDSPCWPitch;
-		private System.Windows.Forms.LabelTS lblDSPCWPitchFreq;
-		private System.Windows.Forms.NumericUpDownTS udDSPCWPitch;
-		private System.Windows.Forms.CheckBoxTS chkDSPKeyerDisableMonitor;
-		private System.Windows.Forms.TabControl tcDSP;
-		private System.Windows.Forms.TabPage tpDSPImageReject;
-		private System.Windows.Forms.GroupBoxTS grpDSPImageRejectTX;
-		private System.Windows.Forms.LabelTS lblDSPGainValTX;
-		private System.Windows.Forms.LabelTS lblDSPPhaseValTX;
-		private System.Windows.Forms.NumericUpDownTS udDSPImageGainTX;
-		private System.Windows.Forms.NumericUpDownTS udDSPImagePhaseTX;
-		private System.Windows.Forms.LabelTS lblDSPImageGainTX;
-		private System.Windows.Forms.TrackBarTS tbDSPImagePhaseTX;
-		private System.Windows.Forms.LabelTS lblDSPImagePhaseTX;
+        private System.Windows.Forms.GroupBoxTS grpDisplayWaterfall;
+        private System.Windows.Forms.NumericUpDownTS udDisplayWaterfallHighLevel;
+        private System.Windows.Forms.LabelTS lblDisplayWaterfallHighLevel;
+        private System.Windows.Forms.LabelTS lblDisplayWaterfallLowLevel;
+        private System.Windows.Forms.NumericUpDownTS udDisplayWaterfallLowLevel;
+        private System.Windows.Forms.LabelTS lblDisplayWaterfallLowColor;
+        private System.Windows.Forms.CheckBoxTS chkGeneralPAPresent;
+        private System.Windows.Forms.ButtonTS btnGeneralCalLevelStart;
+        private System.Windows.Forms.ButtonTS btnGeneralCalFreqStart;
+        private System.Windows.Forms.ButtonTS btnGeneralCalImageStart;
+        private System.Windows.Forms.CheckBoxTS chkGeneralSoftwareGainCorr;
+        private System.Windows.Forms.LabelTS lblBandLight;
+        private System.Windows.Forms.LabelTS lblBandDark;
+        private System.Windows.Forms.LabelTS lblPeakText;
+        private System.Windows.Forms.ButtonTS btnWizard;
+        private System.Windows.Forms.ButtonTS btnImportDB;
+        private System.Windows.Forms.OpenFileDialog openFileDialog1;
+        private System.Windows.Forms.TabPage tpTests;
+        private System.Windows.Forms.LabelTS lblPAGainByBand160;
+        private System.Windows.Forms.LabelTS lblPAGainByBand80;
+        private System.Windows.Forms.LabelTS lblPAGainByBand60;
+        private System.Windows.Forms.LabelTS lblPAGainByBand40;
+        private System.Windows.Forms.LabelTS lblPAGainByBand30;
+        private System.Windows.Forms.LabelTS lblPAGainByBand10;
+        private System.Windows.Forms.LabelTS lblPAGainByBand12;
+        private System.Windows.Forms.LabelTS lblPAGainByBand15;
+        private System.Windows.Forms.LabelTS lblPAGainByBand17;
+        private System.Windows.Forms.LabelTS lblPAGainByBand20;
+        private System.Windows.Forms.TabPage tpPowerAmplifier;
+        private System.Windows.Forms.ToolTip toolTip1;
+        private System.Windows.Forms.NumericUpDownTS udPAGain10;
+        private System.Windows.Forms.NumericUpDownTS udPAGain12;
+        private System.Windows.Forms.NumericUpDownTS udPAGain15;
+        private System.Windows.Forms.NumericUpDownTS udPAGain17;
+        private System.Windows.Forms.NumericUpDownTS udPAGain20;
+        private System.Windows.Forms.NumericUpDownTS udPAGain30;
+        private System.Windows.Forms.NumericUpDownTS udPAGain40;
+        private System.Windows.Forms.NumericUpDownTS udPAGain60;
+        private System.Windows.Forms.NumericUpDownTS udPAGain80;
+        private System.Windows.Forms.NumericUpDownTS udPAGain160;
+        private System.Windows.Forms.GroupBoxTS grpPAGainByBand;
+        private System.Windows.Forms.ButtonTS btnPAGainCalibration;
+        private System.Windows.Forms.CheckBoxTS chkGeneralEnableX2;
+        private System.Windows.Forms.LabelTS lblGeneralX2Delay;
+        private System.Windows.Forms.NumericUpDownTS udGeneralX2Delay;
+        private System.Windows.Forms.GroupBoxTS grpPABandOffset;
+        private System.Windows.Forms.LabelTS lblPABandOffset30;
+        private System.Windows.Forms.LabelTS lblPABandOffset40;
+        private System.Windows.Forms.LabelTS lblPABandOffset60;
+        private System.Windows.Forms.LabelTS lblPABandOffset80;
+        private System.Windows.Forms.LabelTS lblPABandOffset160;
+        private System.Windows.Forms.LabelTS lblPABandOffset10;
+        private System.Windows.Forms.LabelTS lblPABandOffset12;
+        private System.Windows.Forms.LabelTS lblPABandOffset15;
+        private System.Windows.Forms.LabelTS lblPABandOffset17;
+        private System.Windows.Forms.LabelTS lblPABandOffset20;
+        private System.Windows.Forms.CheckBoxTS chkGeneralATUPresent;
+        private System.Windows.Forms.ButtonTS btnPAGainReset;
+        private System.Windows.Forms.ComboBoxTS comboGeneralProcessPriority;
+        private System.Windows.Forms.GroupBoxTS grpGeneralProcessPriority;
+        private System.Windows.Forms.GroupBoxTS grpTestTXIMD;
+        private ColorButton clrbtnBtnSel;
+        private ColorButton clrbtnVFODark;
+        private ColorButton clrbtnVFOLight;
+        private ColorButton clrbtnBandDark;
+        private ColorButton clrbtnBandLight;
+        private ColorButton clrbtnPeakText;
+        private ColorButton clrbtnBackground;
+        private ColorButton clrbtnGrid;
+        private ColorButton clrbtnZeroLine;
+        private ColorButton clrbtnFilter;
+        private ColorButton clrbtnText;
+        private ColorButton clrbtnDataLine;
+        private ColorButton clrbtnMeterLeft;
+        private ColorButton clrbtnMeterRight;
+        private ColorButton clrbtnWaterfallLow;
+        private System.Windows.Forms.LabelTS lblTestIMDPower;
+        private System.Windows.Forms.NumericUpDownTS udTestIMDPower;
+        private System.Windows.Forms.CheckBoxTS chkGeneralCustomFilter;
+        private System.Windows.Forms.NumericUpDownTS udTestIMDFreq1;
+        private System.Windows.Forms.NumericUpDownTS udTestIMDFreq2;
+        private System.Windows.Forms.ButtonTS btnTestAudioBalStart;
+        private System.Windows.Forms.CheckBoxTS chkTestX2Pin1;
+        private System.Windows.Forms.CheckBoxTS chkTestX2Pin2;
+        private System.Windows.Forms.CheckBoxTS chkTestX2Pin3;
+        private System.Windows.Forms.CheckBoxTS chkTestX2Pin4;
+        private System.Windows.Forms.CheckBoxTS chkTestX2Pin5;
+        private System.Windows.Forms.CheckBoxTS chkTestX2Pin6;
+        private System.Windows.Forms.NumericUpDownTS udDisplayAVGTime;
+        private System.Windows.Forms.LabelTS lblDisplayAVGTime;
+        private System.Windows.Forms.GroupBoxTS grpTestX2;
+        private System.Windows.Forms.GroupBoxTS grpTestAudioBalance;
+        private System.Windows.Forms.NumericUpDownTS udPAADC17;
+        private System.Windows.Forms.NumericUpDownTS udPAADC15;
+        private System.Windows.Forms.NumericUpDownTS udPAADC20;
+        private System.Windows.Forms.NumericUpDownTS udPAADC12;
+        private System.Windows.Forms.NumericUpDownTS udPAADC10;
+        private System.Windows.Forms.NumericUpDownTS udPAADC160;
+        private System.Windows.Forms.NumericUpDownTS udPAADC80;
+        private System.Windows.Forms.NumericUpDownTS udPAADC60;
+        private System.Windows.Forms.NumericUpDownTS udPAADC40;
+        private System.Windows.Forms.NumericUpDownTS udPAADC30;
+        private System.Windows.Forms.CheckBoxTS chkGeneralUSBPresent;
+        private System.Windows.Forms.GroupBoxTS grpPATune;
+        private System.Windows.Forms.LabelTS lblTransmitTunePower;
+        private System.Windows.Forms.NumericUpDownTS udTXTunePower;
+        private System.Windows.Forms.GroupBoxTS grpDisplayMultimeter;
+        private System.Windows.Forms.LabelTS lblDisplayMultiPeakHoldTime;
+        private System.Windows.Forms.NumericUpDownTS udDisplayMultiPeakHoldTime;
+        private System.Windows.Forms.NumericUpDownTS udDisplayMultiTextHoldTime;
+        private System.Windows.Forms.LabelTS lblDisplayMeterTextHoldTime;
+        private System.Windows.Forms.GroupBoxTS grpGeneralUpdates;
+        private System.Windows.Forms.CheckBoxTS chkGeneralUpdateRelease;
+        private System.Windows.Forms.CheckBoxTS chkGeneralUpdateBeta;
+        private System.Windows.Forms.CheckBoxTS chkGeneralRXOnly;
+        private System.Windows.Forms.LabelTS lblTestX2;
+        private System.Windows.Forms.LabelTS lblTestToneFreq2;
+        private System.Windows.Forms.LabelTS lblTestToneFreq1;
+        private System.Windows.Forms.TabPage tpCAT;
+        private System.Windows.Forms.GroupBoxTS grpPTTBitBang;
+        private System.Windows.Forms.LabelTS lblCATPTTPort;
+        private System.Windows.Forms.CheckBoxTS chkCATPTT_RTS;
+        private System.Windows.Forms.CheckBoxTS chkCATPTT_DTR;
+        private System.Windows.Forms.GroupBoxTS grpCatControlBox;
+        private System.Windows.Forms.ComboBoxTS comboCATbaud;
+        private System.Windows.Forms.LabelTS lblCATBaud;
+        private System.Windows.Forms.CheckBoxTS chkCATEnable;
+        private System.Windows.Forms.LabelTS lblCATParity;
+        private System.Windows.Forms.LabelTS lblCATData;
+        private System.Windows.Forms.LabelTS lblCATStop;
+        private System.Windows.Forms.ComboBoxTS comboCATparity;
+        private System.Windows.Forms.ComboBoxTS comboCATdatabits;
+        private System.Windows.Forms.ComboBoxTS comboCATstopbits;
+        private System.Windows.Forms.GroupBoxTS grpKBCW;
+        private System.Windows.Forms.LabelTS lblKBCWDot;
+        private System.Windows.Forms.LabelTS lblKBCWDash;
+        private System.Windows.Forms.ComboBoxTS comboKBCWDot;
+        private System.Windows.Forms.ComboBoxTS comboKBCWDash;
+        private System.Windows.Forms.GroupBoxTS grpKBRIT;
+        private System.Windows.Forms.LabelTS lblKBRitUp;
+        private System.Windows.Forms.LabelTS lblKBRITDown;
+        private System.Windows.Forms.ComboBoxTS comboKBRITUp;
+        private System.Windows.Forms.ComboBoxTS comboKBRITDown;
+        private System.Windows.Forms.GroupBoxTS grpKBXIT;
+        private System.Windows.Forms.LabelTS lblKBXITUp;
+        private System.Windows.Forms.LabelTS lblKBXITDown;
+        private System.Windows.Forms.ComboBoxTS comboKBXITUp;
+        private System.Windows.Forms.ComboBoxTS comboKBXITDown;
+        private System.Windows.Forms.CheckBoxTS chkDCBlock;
+        private System.Windows.Forms.TabPage tpExtCtrl;
+        private System.Windows.Forms.GroupBoxTS grpExtTX;
+        private System.Windows.Forms.LabelTS lblExtTXX25;
+        private System.Windows.Forms.LabelTS lblExtTXX24;
+        private System.Windows.Forms.LabelTS lblExtTXX23;
+        private System.Windows.Forms.LabelTS lblExtTXX22;
+        private System.Windows.Forms.LabelTS lblExtTX2;
+        private System.Windows.Forms.LabelTS lblExtTX6;
+        private System.Windows.Forms.LabelTS lblExtTX10;
+        private System.Windows.Forms.LabelTS lblExtTX12;
+        private System.Windows.Forms.LabelTS lblExtTX15;
+        private System.Windows.Forms.LabelTS lblExtTX17;
+        private System.Windows.Forms.LabelTS lblExtTX20;
+        private System.Windows.Forms.LabelTS lblExtTX30;
+        private System.Windows.Forms.LabelTS lblExtTX40;
+        private System.Windows.Forms.LabelTS lblExtTX60;
+        private System.Windows.Forms.LabelTS lblExtTX80;
+        private System.Windows.Forms.LabelTS lblExtTXX2Pins;
+        private System.Windows.Forms.LabelTS lblExtTXBand;
+        private System.Windows.Forms.LabelTS lblExtTX160;
+        private System.Windows.Forms.CheckBoxTS chkExtTX1603;
+        private System.Windows.Forms.CheckBoxTS chkExtTX1602;
+        private System.Windows.Forms.CheckBoxTS chkExtTX1601;
+        private System.Windows.Forms.LabelTS lblExtTXX21;
+        private System.Windows.Forms.CheckBoxTS chkExtTX1605;
+        private System.Windows.Forms.CheckBoxTS chkExtTX1604;
+        private System.Windows.Forms.GroupBoxTS grpExtRX;
+        private System.Windows.Forms.LabelTS lblExtRXX25;
+        private System.Windows.Forms.LabelTS lblExtRXX24;
+        private System.Windows.Forms.LabelTS lblExtRXX23;
+        private System.Windows.Forms.LabelTS lblExtRXX22;
+        private System.Windows.Forms.LabelTS lblExtRX2;
+        private System.Windows.Forms.LabelTS lblExtRX6;
+        private System.Windows.Forms.LabelTS lblExtRX10;
+        private System.Windows.Forms.LabelTS lblExtRX12;
+        private System.Windows.Forms.LabelTS lblExtRX15;
+        private System.Windows.Forms.LabelTS lblExtRX17;
+        private System.Windows.Forms.LabelTS lblExtRX20;
+        private System.Windows.Forms.LabelTS lblExtRX30;
+        private System.Windows.Forms.LabelTS lblExtRX40;
+        private System.Windows.Forms.LabelTS lblExtRX60;
+        private System.Windows.Forms.LabelTS lblExtRX80;
+        private System.Windows.Forms.LabelTS lblExtRXX2Pins;
+        private System.Windows.Forms.LabelTS lblExtRXBand;
+        private System.Windows.Forms.LabelTS lblExtRX160;
+        private System.Windows.Forms.CheckBoxTS chkExtRX1603;
+        private System.Windows.Forms.CheckBoxTS chkExtRX1602;
+        private System.Windows.Forms.CheckBoxTS chkExtRX1601;
+        private System.Windows.Forms.LabelTS lblExtRXX21;
+        private System.Windows.Forms.CheckBoxTS chkExtRX1605;
+        private System.Windows.Forms.CheckBoxTS chkExtRX1604;
+        private System.Windows.Forms.CheckBoxTS chkExtTX23;
+        private System.Windows.Forms.CheckBoxTS chkExtTX22;
+        private System.Windows.Forms.CheckBoxTS chkExtTX21;
+        private System.Windows.Forms.CheckBoxTS chkExtTX25;
+        private System.Windows.Forms.CheckBoxTS chkExtTX24;
+        private System.Windows.Forms.CheckBoxTS chkExtTX63;
+        private System.Windows.Forms.CheckBoxTS chkExtTX62;
+        private System.Windows.Forms.CheckBoxTS chkExtTX61;
+        private System.Windows.Forms.CheckBoxTS chkExtTX65;
+        private System.Windows.Forms.CheckBoxTS chkExtTX64;
+        private System.Windows.Forms.CheckBoxTS chkExtTX103;
+        private System.Windows.Forms.CheckBoxTS chkExtTX102;
+        private System.Windows.Forms.CheckBoxTS chkExtTX101;
+        private System.Windows.Forms.CheckBoxTS chkExtTX105;
+        private System.Windows.Forms.CheckBoxTS chkExtTX104;
+        private System.Windows.Forms.CheckBoxTS chkExtTX123;
+        private System.Windows.Forms.CheckBoxTS chkExtTX122;
+        private System.Windows.Forms.CheckBoxTS chkExtTX121;
+        private System.Windows.Forms.CheckBoxTS chkExtTX125;
+        private System.Windows.Forms.CheckBoxTS chkExtTX124;
+        private System.Windows.Forms.CheckBoxTS chkExtTX153;
+        private System.Windows.Forms.CheckBoxTS chkExtTX152;
+        private System.Windows.Forms.CheckBoxTS chkExtTX151;
+        private System.Windows.Forms.CheckBoxTS chkExtTX155;
+        private System.Windows.Forms.CheckBoxTS chkExtTX154;
+        private System.Windows.Forms.CheckBoxTS chkExtTX173;
+        private System.Windows.Forms.CheckBoxTS chkExtTX172;
+        private System.Windows.Forms.CheckBoxTS chkExtTX171;
+        private System.Windows.Forms.CheckBoxTS chkExtTX175;
+        private System.Windows.Forms.CheckBoxTS chkExtTX174;
+        private System.Windows.Forms.CheckBoxTS chkExtTX203;
+        private System.Windows.Forms.CheckBoxTS chkExtTX202;
+        private System.Windows.Forms.CheckBoxTS chkExtTX201;
+        private System.Windows.Forms.CheckBoxTS chkExtTX205;
+        private System.Windows.Forms.CheckBoxTS chkExtTX204;
+        private System.Windows.Forms.CheckBoxTS chkExtTX303;
+        private System.Windows.Forms.CheckBoxTS chkExtTX302;
+        private System.Windows.Forms.CheckBoxTS chkExtTX301;
+        private System.Windows.Forms.CheckBoxTS chkExtTX305;
+        private System.Windows.Forms.CheckBoxTS chkExtTX304;
+        private System.Windows.Forms.CheckBoxTS chkExtTX403;
+        private System.Windows.Forms.CheckBoxTS chkExtTX402;
+        private System.Windows.Forms.CheckBoxTS chkExtTX401;
+        private System.Windows.Forms.CheckBoxTS chkExtTX405;
+        private System.Windows.Forms.CheckBoxTS chkExtTX404;
+        private System.Windows.Forms.CheckBoxTS chkExtTX603;
+        private System.Windows.Forms.CheckBoxTS chkExtTX602;
+        private System.Windows.Forms.CheckBoxTS chkExtTX601;
+        private System.Windows.Forms.CheckBoxTS chkExtTX605;
+        private System.Windows.Forms.CheckBoxTS chkExtTX604;
+        private System.Windows.Forms.CheckBoxTS chkExtTX803;
+        private System.Windows.Forms.CheckBoxTS chkExtTX802;
+        private System.Windows.Forms.CheckBoxTS chkExtTX801;
+        private System.Windows.Forms.CheckBoxTS chkExtTX805;
+        private System.Windows.Forms.CheckBoxTS chkExtTX804;
+        private System.Windows.Forms.CheckBoxTS chkExtRX23;
+        private System.Windows.Forms.CheckBoxTS chkExtRX22;
+        private System.Windows.Forms.CheckBoxTS chkExtRX21;
+        private System.Windows.Forms.CheckBoxTS chkExtRX25;
+        private System.Windows.Forms.CheckBoxTS chkExtRX24;
+        private System.Windows.Forms.CheckBoxTS chkExtRX63;
+        private System.Windows.Forms.CheckBoxTS chkExtRX62;
+        private System.Windows.Forms.CheckBoxTS chkExtRX61;
+        private System.Windows.Forms.CheckBoxTS chkExtRX65;
+        private System.Windows.Forms.CheckBoxTS chkExtRX64;
+        private System.Windows.Forms.CheckBoxTS chkExtRX103;
+        private System.Windows.Forms.CheckBoxTS chkExtRX102;
+        private System.Windows.Forms.CheckBoxTS chkExtRX101;
+        private System.Windows.Forms.CheckBoxTS chkExtRX105;
+        private System.Windows.Forms.CheckBoxTS chkExtRX104;
+        private System.Windows.Forms.CheckBoxTS chkExtRX123;
+        private System.Windows.Forms.CheckBoxTS chkExtRX122;
+        private System.Windows.Forms.CheckBoxTS chkExtRX121;
+        private System.Windows.Forms.CheckBoxTS chkExtRX125;
+        private System.Windows.Forms.CheckBoxTS chkExtRX124;
+        private System.Windows.Forms.CheckBoxTS chkExtRX153;
+        private System.Windows.Forms.CheckBoxTS chkExtRX152;
+        private System.Windows.Forms.CheckBoxTS chkExtRX151;
+        private System.Windows.Forms.CheckBoxTS chkExtRX155;
+        private System.Windows.Forms.CheckBoxTS chkExtRX154;
+        private System.Windows.Forms.CheckBoxTS chkExtRX173;
+        private System.Windows.Forms.CheckBoxTS chkExtRX172;
+        private System.Windows.Forms.CheckBoxTS chkExtRX171;
+        private System.Windows.Forms.CheckBoxTS chkExtRX175;
+        private System.Windows.Forms.CheckBoxTS chkExtRX174;
+        private System.Windows.Forms.CheckBoxTS chkExtRX203;
+        private System.Windows.Forms.CheckBoxTS chkExtRX202;
+        private System.Windows.Forms.CheckBoxTS chkExtRX201;
+        private System.Windows.Forms.CheckBoxTS chkExtRX205;
+        private System.Windows.Forms.CheckBoxTS chkExtRX204;
+        private System.Windows.Forms.CheckBoxTS chkExtRX303;
+        private System.Windows.Forms.CheckBoxTS chkExtRX302;
+        private System.Windows.Forms.CheckBoxTS chkExtRX301;
+        private System.Windows.Forms.CheckBoxTS chkExtRX305;
+        private System.Windows.Forms.CheckBoxTS chkExtRX304;
+        private System.Windows.Forms.CheckBoxTS chkExtRX403;
+        private System.Windows.Forms.CheckBoxTS chkExtRX402;
+        private System.Windows.Forms.CheckBoxTS chkExtRX401;
+        private System.Windows.Forms.CheckBoxTS chkExtRX405;
+        private System.Windows.Forms.CheckBoxTS chkExtRX404;
+        private System.Windows.Forms.CheckBoxTS chkExtRX603;
+        private System.Windows.Forms.CheckBoxTS chkExtRX602;
+        private System.Windows.Forms.CheckBoxTS chkExtRX601;
+        private System.Windows.Forms.CheckBoxTS chkExtRX605;
+        private System.Windows.Forms.CheckBoxTS chkExtRX604;
+        private System.Windows.Forms.CheckBoxTS chkExtRX803;
+        private System.Windows.Forms.CheckBoxTS chkExtRX802;
+        private System.Windows.Forms.CheckBoxTS chkExtRX801;
+        private System.Windows.Forms.CheckBoxTS chkExtRX805;
+        private System.Windows.Forms.CheckBoxTS chkExtRX804;
+        private System.Windows.Forms.ButtonTS btnCATTest;
+        private System.Windows.Forms.TabControl tcAudio;
+        private System.Windows.Forms.NumericUpDownTS udAudioLineIn1;
+        private System.Windows.Forms.ButtonTS btnAudioVoltTest1;
+        private System.Windows.Forms.NumericUpDownTS udAudioVoltage1;
+        public System.Windows.Forms.GroupBoxTS grpAudioDetails1;
+        private System.Windows.Forms.ComboBoxTS comboAudioTransmit1;
+        private System.Windows.Forms.LabelTS lblAudioMixer1;
+        public System.Windows.Forms.LabelTS lblAudioOutput1;
+        private System.Windows.Forms.ComboBoxTS comboAudioOutput1;
+        public System.Windows.Forms.LabelTS lblAudioInput1;
+        public System.Windows.Forms.LabelTS lblAudioDriver1;
+        private System.Windows.Forms.ComboBoxTS comboAudioInput1;
+        private System.Windows.Forms.ComboBoxTS comboAudioDriver1;
+        private System.Windows.Forms.ComboBoxTS comboAudioMixer1;
+        private System.Windows.Forms.LabelTS lblAudioTransmit1;
+        private System.Windows.Forms.LabelTS lblAudioReceive1;
+        private System.Windows.Forms.ComboBoxTS comboAudioReceive1;
+        private System.Windows.Forms.NumericUpDownTS udAudioLatency1;
+        private System.Windows.Forms.GroupBoxTS grpAudioCard;
+        private System.Windows.Forms.ComboBoxTS comboAudioSoundCard;
+        private System.Windows.Forms.ComboBoxTS comboAudioBuffer1;
+        private System.Windows.Forms.ComboBoxTS comboAudioSampleRate1;
+        private System.Windows.Forms.GroupBoxTS grpAudioLineInGain1;
+        private System.Windows.Forms.GroupBoxTS grpAudioLatency1;
+        private System.Windows.Forms.CheckBoxTS chkAudioLatencyManual1;
+        private System.Windows.Forms.GroupBoxTS grpAudioBufferSize1;
+        private System.Windows.Forms.GroupBoxTS grpAudioSampleRate1;
+        private System.Windows.Forms.GroupBoxTS grpAudioDetails2;
+        public System.Windows.Forms.LabelTS lblAudioOutput2;
+        private System.Windows.Forms.ComboBoxTS comboAudioOutput2;
+        public System.Windows.Forms.LabelTS lblAudioInput2;
+        public System.Windows.Forms.LabelTS lblAudioDriver2;
+        private System.Windows.Forms.ComboBoxTS comboAudioInput2;
+        private System.Windows.Forms.ComboBoxTS comboAudioDriver2;
+        private System.Windows.Forms.NumericUpDownTS udAudioLatency2;
+        private System.Windows.Forms.ComboBoxTS comboAudioBuffer2;
+        private System.Windows.Forms.ComboBoxTS comboAudioSampleRate2;
+        private System.Windows.Forms.GroupBoxTS grpAudioMicInGain1;
+        private System.Windows.Forms.NumericUpDownTS udAudioMicGain1;
+        private System.Windows.Forms.GroupBoxTS grpAudioBuffer2;
+        private System.Windows.Forms.GroupBoxTS grpAudioSampleRate2;
+        private System.Windows.Forms.GroupBoxTS grpAudioLatency2;
+        private System.Windows.Forms.CheckBoxTS chkAudioLatencyManual2;
+        private System.Windows.Forms.GroupBoxTS grpAudioVolts1;
+        private System.Windows.Forms.ComboBoxTS comboCATRigType;
+        private System.Windows.Forms.ComboBoxTS comboDisplayLabelAlign;
+        private System.Windows.Forms.LabelTS lblDisplayAlign;
+        private System.Windows.Forms.LabelTS lblCATRigType;
+        private System.Windows.Forms.TabPage tpAudioCard1;
+        private System.Windows.Forms.TabPage tpDSPKeyer;
+        private System.Windows.Forms.NumericUpDownTS udCWKeyerRamp;
+        private System.Windows.Forms.LabelTS lblCWRamp;
+        private System.Windows.Forms.CheckBoxTS chkCWKeyerIambic;
+        private System.Windows.Forms.GroupBoxTS grpDSPKeyerSignalShaping;
+        private System.Windows.Forms.NumericUpDownTS udCWKeyerWeight;
+        private System.Windows.Forms.LabelTS lblCWWeight;
+        private System.Windows.Forms.GroupBoxTS grpDSPKeyerOptions;
+        private System.Windows.Forms.GroupBoxTS grpDSPKeyerSemiBreakIn;
+        private System.Windows.Forms.GroupBoxTS grpDSPCWPitch;
+        private System.Windows.Forms.LabelTS lblDSPCWPitchFreq;
+        private System.Windows.Forms.NumericUpDownTS udDSPCWPitch;
+        private System.Windows.Forms.CheckBoxTS chkDSPKeyerDisableMonitor;
+        private System.Windows.Forms.TabControl tcDSP;
+        private System.Windows.Forms.TabPage tpDSPImageReject;
+        private System.Windows.Forms.GroupBoxTS grpDSPImageRejectTX;
+        private System.Windows.Forms.LabelTS lblDSPGainValTX;
+        private System.Windows.Forms.LabelTS lblDSPPhaseValTX;
+        private System.Windows.Forms.NumericUpDownTS udDSPImageGainTX;
+        private System.Windows.Forms.NumericUpDownTS udDSPImagePhaseTX;
+        private System.Windows.Forms.LabelTS lblDSPImageGainTX;
+        private System.Windows.Forms.TrackBarTS tbDSPImagePhaseTX;
+        private System.Windows.Forms.LabelTS lblDSPImagePhaseTX;
         private System.Windows.Forms.TrackBarTS tbDSPImageGainTX;
-		private System.Windows.Forms.TabPage tpDSPOptions;
-		private System.Windows.Forms.GroupBoxTS grpDSPBufferSize;
-		private System.Windows.Forms.GroupBoxTS grpDSPNB;
-		private System.Windows.Forms.NumericUpDownTS udDSPNB;
-		private System.Windows.Forms.LabelTS lblDSPNBThreshold;
-		private System.Windows.Forms.GroupBoxTS grpDSPLMSNR;
-		private System.Windows.Forms.LabelTS lblLMSNRgain;
-		private System.Windows.Forms.NumericUpDownTS udLMSNRgain;
-		private System.Windows.Forms.NumericUpDownTS udLMSNRdelay;
-		private System.Windows.Forms.LabelTS lblLMSNRdelay;
-		private System.Windows.Forms.NumericUpDownTS udLMSNRtaps;
-		private System.Windows.Forms.LabelTS lblLMSNRtaps;
-		private System.Windows.Forms.GroupBoxTS grpDSPLMSANF;
-		private System.Windows.Forms.LabelTS lblLMSANFgain;
-		private System.Windows.Forms.NumericUpDownTS udLMSANFgain;
-		private System.Windows.Forms.LabelTS lblLMSANFdelay;
-		private System.Windows.Forms.NumericUpDownTS udLMSANFdelay;
-		private System.Windows.Forms.LabelTS lblLMSANFTaps;
-		private System.Windows.Forms.NumericUpDownTS udLMSANFtaps;
-		private System.Windows.Forms.GroupBoxTS grpDSPAGC;
-		private System.Windows.Forms.LabelTS lblDSPAGCMaxGain;
-		private System.Windows.Forms.NumericUpDownTS udDSPAGCMaxGaindB;
-		private System.Windows.Forms.NumericUpDownTS udDSPAGCFixedGaindB;
-		private System.Windows.Forms.LabelTS lblDSPAGCFixed;
-		private System.Windows.Forms.GroupBoxTS grpDSPWindow;
-		private System.Windows.Forms.ComboBoxTS comboDSPWindow;
-		private System.Windows.Forms.GroupBoxTS grpDSPNB2;
-		private System.Windows.Forms.LabelTS lblDSPNB2Threshold;
-		private System.Windows.Forms.NumericUpDownTS udDSPNB2;
-		private System.Windows.Forms.LabelTS lblKeyerDeBounce;
-		private System.Windows.Forms.NumericUpDownTS udCWKeyerDeBounce;
+        private System.Windows.Forms.TabPage tpDSPOptions;
+        private System.Windows.Forms.GroupBoxTS grpDSPBufferSize;
+        private System.Windows.Forms.GroupBoxTS grpDSPNB;
+        private System.Windows.Forms.NumericUpDownTS udDSPNB;
+        private System.Windows.Forms.LabelTS lblDSPNBThreshold;
+        private System.Windows.Forms.GroupBoxTS grpDSPLMSNR;
+        private System.Windows.Forms.LabelTS lblLMSNRgain;
+        private System.Windows.Forms.NumericUpDownTS udLMSNRgain;
+        private System.Windows.Forms.NumericUpDownTS udLMSNRdelay;
+        private System.Windows.Forms.LabelTS lblLMSNRdelay;
+        private System.Windows.Forms.NumericUpDownTS udLMSNRtaps;
+        private System.Windows.Forms.LabelTS lblLMSNRtaps;
+        private System.Windows.Forms.GroupBoxTS grpDSPLMSANF;
+        private System.Windows.Forms.LabelTS lblLMSANFgain;
+        private System.Windows.Forms.NumericUpDownTS udLMSANFgain;
+        private System.Windows.Forms.LabelTS lblLMSANFdelay;
+        private System.Windows.Forms.NumericUpDownTS udLMSANFdelay;
+        private System.Windows.Forms.LabelTS lblLMSANFTaps;
+        private System.Windows.Forms.NumericUpDownTS udLMSANFtaps;
+        private System.Windows.Forms.GroupBoxTS grpDSPAGC;
+        private System.Windows.Forms.LabelTS lblDSPAGCMaxGain;
+        private System.Windows.Forms.NumericUpDownTS udDSPAGCMaxGaindB;
+        private System.Windows.Forms.NumericUpDownTS udDSPAGCFixedGaindB;
+        private System.Windows.Forms.LabelTS lblDSPAGCFixed;
+        private System.Windows.Forms.GroupBoxTS grpDSPWindow;
+        private System.Windows.Forms.ComboBoxTS comboDSPWindow;
+        private System.Windows.Forms.GroupBoxTS grpDSPNB2;
+        private System.Windows.Forms.LabelTS lblDSPNB2Threshold;
+        private System.Windows.Forms.NumericUpDownTS udDSPNB2;
+        private System.Windows.Forms.LabelTS lblKeyerDeBounce;
+        private System.Windows.Forms.NumericUpDownTS udCWKeyerDeBounce;
         private System.Windows.Forms.CheckBoxTS chkCWKeyerRevPdl;
-		private System.Windows.Forms.CheckBoxTS chkExtEnable;
-		private System.Windows.Forms.CheckBoxTS chkExtRX26;
-		private System.Windows.Forms.CheckBoxTS chkExtRX66;
-		private System.Windows.Forms.CheckBoxTS chkExtRX106;
-		private System.Windows.Forms.CheckBoxTS chkExtRX126;
-		private System.Windows.Forms.CheckBoxTS chkExtRX156;
-		private System.Windows.Forms.CheckBoxTS chkExtRX176;
-		private System.Windows.Forms.CheckBoxTS chkExtRX206;
-		private System.Windows.Forms.CheckBoxTS chkExtRX306;
-		private System.Windows.Forms.CheckBoxTS chkExtRX406;
-		private System.Windows.Forms.CheckBoxTS chkExtRX606;
-		private System.Windows.Forms.CheckBoxTS chkExtRX806;
-		private System.Windows.Forms.CheckBoxTS chkExtRX1606;
-		private System.Windows.Forms.LabelTS lblExtRXX26;
-		private System.Windows.Forms.LabelTS lblExtTXX26;
-		private System.Windows.Forms.CheckBoxTS chkExtTX26;
-		private System.Windows.Forms.CheckBoxTS chkExtTX66;
-		private System.Windows.Forms.CheckBoxTS chkExtTX106;
-		private System.Windows.Forms.CheckBoxTS chkExtTX126;
-		private System.Windows.Forms.CheckBoxTS chkExtTX156;
-		private System.Windows.Forms.CheckBoxTS chkExtTX176;
-		private System.Windows.Forms.CheckBoxTS chkExtTX206;
-		private System.Windows.Forms.CheckBoxTS chkExtTX306;
-		private System.Windows.Forms.CheckBoxTS chkExtTX406;
-		private System.Windows.Forms.CheckBoxTS chkExtTX606;
-		private System.Windows.Forms.CheckBoxTS chkExtTX806;
-		private System.Windows.Forms.CheckBoxTS chkExtTX1606;
-		private System.Windows.Forms.GroupBoxTS grpTXProfile;
-		private System.Windows.Forms.ButtonTS btnTXProfileSave;
-		private System.Windows.Forms.ComboBoxTS comboTXProfileName;
-		private System.Windows.Forms.ButtonTS btnTXProfileDelete;
-		private System.Windows.Forms.Timer timer_sweep;
-		private System.Windows.Forms.LabelTS lblTestGenLow;
-		private System.Windows.Forms.LabelTS lblTestGenHigh;
-		private System.Windows.Forms.LabelTS lblTestGenHzSec;
-		private System.Windows.Forms.LabelTS lblDSPAGCAttack;
-		private System.Windows.Forms.LabelTS lblDSPAGCDecay;
-		private System.Windows.Forms.NumericUpDownTS udDSPAGCAttack;
-		private System.Windows.Forms.LabelTS lblDSPAGCSlope;
-		private System.Windows.Forms.NumericUpDownTS udDSPAGCDecay;
-		private System.Windows.Forms.NumericUpDownTS udDSPAGCSlope;
-		private System.Windows.Forms.NumericUpDownTS udDSPALCThreshold;
-		private System.Windows.Forms.NumericUpDownTS udDSPALCSlope;
-		private System.Windows.Forms.NumericUpDownTS udDSPALCDecay;
-		private System.Windows.Forms.LabelTS lblDSPALCSlope;
-		private System.Windows.Forms.NumericUpDownTS udDSPALCAttack;
-		private System.Windows.Forms.LabelTS lblDSPALCDecay;
-		private System.Windows.Forms.LabelTS lblDSPALCAttack;
-		private System.Windows.Forms.LabelTS lblDSPALCThreshold;
-		private System.Windows.Forms.GroupBoxTS grpDSPALC;
-		private System.Windows.Forms.GroupBoxTS grpDSPLeveler;
-		private System.Windows.Forms.NumericUpDownTS udDSPLevelerThreshold;
-		private System.Windows.Forms.NumericUpDownTS udDSPLevelerSlope;
-		private System.Windows.Forms.NumericUpDownTS udDSPLevelerDecay;
-		private System.Windows.Forms.LabelTS lblDSPLevelerSlope;
-		private System.Windows.Forms.NumericUpDownTS udDSPLevelerAttack;
-		private System.Windows.Forms.LabelTS lblDSPLevelerDecay;
-		private System.Windows.Forms.LabelTS lblDSPLevelerAttack;
-		private System.Windows.Forms.LabelTS lblDSPLevelerThreshold;
-		private System.Windows.Forms.GroupBoxTS grpTXNoiseGate;
-		private System.Windows.Forms.LabelTS lblTXNoiseGateThreshold;
-		private System.Windows.Forms.NumericUpDownTS udTXNoiseGate;
-		private System.Windows.Forms.CheckBoxTS chkTXNoiseGateEnabled;
-		private System.Windows.Forms.TabPage tpDSPAGCALC;
-		private System.Windows.Forms.TrackBarTS tbDSPLevelerHangThreshold;
-		private System.Windows.Forms.LabelTS lblDSPLevelerHangThreshold;
-		private System.Windows.Forms.LabelTS lblDSPALCHangThreshold;
-		private System.Windows.Forms.TrackBarTS tbDSPALCHangThreshold;
-		private System.Windows.Forms.NumericUpDownTS udDSPLevelerHangTime;
-		private System.Windows.Forms.LabelTS lblDSPLevelerHangTime;
-		private System.Windows.Forms.NumericUpDownTS udDSPALCHangTime;
-		private System.Windows.Forms.LabelTS lblDSPALCHangTime;
-		private System.Windows.Forms.GroupBoxTS grpTXVOX;
-		private System.Windows.Forms.LabelTS lblTXVOXThreshold;
-		private System.Windows.Forms.NumericUpDownTS udTXVOXThreshold;
-		private System.Windows.Forms.CheckBoxTS chkTXVOXEnabled;
-		private System.Windows.Forms.LabelTS lblTXVOXHangTime;
-		private System.Windows.Forms.NumericUpDownTS udTXVOXHangTime;
-		private System.Windows.Forms.TrackBarTS tbDSPAGCHangThreshold;
-		private System.Windows.Forms.LabelTS lblDSPAGCHangThreshold;
-		private System.Windows.Forms.LabelTS lblDSPAGCHangTime;
-		private System.Windows.Forms.NumericUpDownTS udDSPAGCHangTime;
-		private System.Windows.Forms.CheckBoxTS chkDSPLevelerEnabled;
-		private System.Windows.Forms.ButtonTS btnImpulse;
-		private System.Windows.Forms.NumericUpDownTS udImpulseNum;
-		private System.Windows.Forms.GroupBoxTS grpTXMonitor;
-		private System.Windows.Forms.LabelTS lblTXAF;
-		private System.Windows.Forms.NumericUpDownTS udTXAF;
-		private System.Windows.Forms.GroupBoxTS grpGeneralModel;
-		private System.Windows.Forms.TabControl tcGeneral;
-		private System.Windows.Forms.TabPage tpGeneralHardware;
-		private System.Windows.Forms.TabPage tpGeneralOptions;
-		private System.Windows.Forms.TabPage tpGeneralCalibration;
-		private System.Windows.Forms.RadioButtonTS radGenModelSDR1000;
-		private System.Windows.Forms.RadioButtonTS radGenModelSoftRock40;
-		private System.Windows.Forms.RadioButtonTS radGenModelDemoNone;
-		private System.Windows.Forms.NumericUpDownTS udGeneralCalFreq1;
-		private System.Windows.Forms.NumericUpDownTS udGeneralCalFreq3;
-		private System.Windows.Forms.NumericUpDownTS udGeneralCalFreq2;
-		private System.Windows.Forms.NumericUpDownTS udSoftRockCenterFreq;
-		private System.Windows.Forms.GroupBoxTS grpHWSoftRock;
-		private System.Windows.Forms.TabPage tpVAC;
-		public System.Windows.Forms.CheckBoxTS chkAudioEnableVAC;
-		private System.Windows.Forms.GroupBoxTS grpAudio2Stereo;
-		private System.Windows.Forms.GroupBoxTS grpBoxTS1;
-		private System.Windows.Forms.TrackBarTS tkbarTestGenFreq;
-		private System.Windows.Forms.LabelTS lblKeyerConnPrimary;
-		private System.Windows.Forms.ComboBoxTS comboKeyerConnPrimary;
-		private System.Windows.Forms.ComboBoxTS comboKeyerConnKeyLine;
-		private System.Windows.Forms.ComboBoxTS comboKeyerConnSecondary;
-		private System.Windows.Forms.LabelTS lblKeyerConnSecondary;
-		private System.Windows.Forms.ComboBoxTS comboKeyerConnPTTLine;
-		private System.Windows.Forms.LabelTS lblKeyerConnPTTLine;
-		private System.Windows.Forms.LabelTS lblKeyerConnKeyLine;
-		private System.Windows.Forms.LabelTS lblCATPort;
-		private System.Windows.Forms.ComboBoxTS comboCATPort;
-		private System.Windows.Forms.ComboBoxTS comboCATPTTPort;
-		private System.Windows.Forms.CheckBoxTS chkCATPTTEnabled;
-		private System.Windows.Forms.CheckBoxTS checkboxTXImagCal;
-		private System.Windows.Forms.GroupBoxTS grpAudioChannels;
-		private System.Windows.Forms.ComboBoxTS comboAudioChannels1;
-		private System.Windows.Forms.GroupBoxTS grpAudioVACGain;
-		private System.Windows.Forms.NumericUpDownTS udAudioVACGainRX;
-		public System.Windows.Forms.LabelTS lblAudioVACGainRX;
-		public System.Windows.Forms.LabelTS lblAudioVACGainTX;
-		private System.Windows.Forms.NumericUpDownTS udAudioVACGainTX;
-		private System.Windows.Forms.LabelTS lblTestGenScale;
-		private System.Windows.Forms.GroupBoxTS grpGenTuningOptions;
-		private System.Windows.Forms.GroupBoxTS grpAudioVACAutoEnable;
-		private System.Windows.Forms.CheckBoxTS chkAudioVACAutoEnable;
-		private System.Windows.Forms.CheckBoxTS chkSpectrumPolyphase;
-		private System.Windows.Forms.GroupBoxTS grpImpulseTest;
-		private System.Windows.Forms.GroupBoxTS grpDisplayScopeMode;
-		private System.Windows.Forms.NumericUpDownTS udDisplayScopeTime;
-		private System.Windows.Forms.LabelTS lblDisplayScopeTime;
-		private System.Windows.Forms.NumericUpDownTS udDisplayMeterAvg;
-		private System.Windows.Forms.LabelTS lblDisplayMeterAvg;
-		private System.Windows.Forms.GroupBoxTS grpDisplayPolyPhase;
-		private System.Windows.Forms.ComboBoxTS comboDisplayDriver;
-		private System.Windows.Forms.GroupBoxTS grpDisplayDriverEngine;
-		private System.Windows.Forms.GroupBoxTS grpGenAutoMute;
-		private System.Windows.Forms.CheckBoxTS chkGenAutoMute;
-		private PowerSDR.ColorButton clrbtnOutOfBand;
-		private System.Windows.Forms.LabelTS lblOutOfBand;
-		private System.Windows.Forms.LabelTS lblGenSoftRockCenterFreq;
-		private System.Windows.Forms.LabelTS lblTestSigGenFreqCallout;
-		private System.Windows.Forms.NumericUpDownTS udTestGenHzSec;
-		private System.Windows.Forms.NumericUpDownTS udTestGenHigh;
-		private System.Windows.Forms.NumericUpDownTS udTestGenLow;
-		private System.Windows.Forms.ButtonTS btnTestGenSweep;
-		private System.Windows.Forms.NumericUpDownTS udTestGenScale;
-		private System.Windows.Forms.CheckBoxTS chkAudio2Stereo;
-		private System.Windows.Forms.GroupBoxTS grpTXAM;
-		private System.Windows.Forms.LabelTS lblTXAMCarrierLevel;
-		private System.Windows.Forms.NumericUpDownTS udTXAMCarrierLevel;
-		private System.Windows.Forms.GroupBoxTS grpOptQuickQSY;
-		private System.Windows.Forms.CheckBoxTS chkOptQuickQSY;
-		private System.Windows.Forms.CheckBoxTS chkOptAlwaysOnTop;
-		private System.Windows.Forms.NumericUpDownTS udOptClickTuneOffsetDIGL;
-		private System.Windows.Forms.NumericUpDownTS udOptClickTuneOffsetDIGU;
-		private System.Windows.Forms.LabelTS lblOptClickTuneDIGL;
-		private System.Windows.Forms.LabelTS lblOptClickTuneDIGU;
-		private System.Windows.Forms.GroupBoxTS grpAudioMicBoost;
-		private System.Windows.Forms.CheckBoxTS chkAudioMicBoost;
-		private System.Windows.Forms.GroupBoxTS grpOptFilterControls;
-		private System.Windows.Forms.LabelTS lblOptMaxFilter;
-		private System.Windows.Forms.NumericUpDownTS udOptMaxFilterWidth;
-		private System.Windows.Forms.LabelTS lblOptWidthSliderMode;
-		private System.Windows.Forms.ComboBoxTS comboOptFilterWidthMode;
-		private System.Windows.Forms.NumericUpDownTS udOptMaxFilterShift;
-		private System.Windows.Forms.LabelTS lblOptMaxFilterShift;
-		private System.Windows.Forms.CheckBoxTS chkOptFilterSaveChanges;
-		private System.Windows.Forms.CheckBoxTS chkOptEnableKBShortcuts;
-		private System.Windows.Forms.TabControl tcAppearance;
-		private System.Windows.Forms.TabPage tpAppearanceGeneral;
-		private System.Windows.Forms.TabPage tpAppearanceDisplay;
-		private System.Windows.Forms.TabPage tpAppearanceMeter;
-		private System.Windows.Forms.GroupBoxTS grpAppearanceVFO;
-		private System.Windows.Forms.LabelTS lblVFOPowerOn;
-		private System.Windows.Forms.LabelTS lblVFOPowerOff;
-		private System.Windows.Forms.GroupBoxTS grpAppearanceBand;
-		private System.Windows.Forms.TabPage tpFilters;
-		private System.Windows.Forms.LabelTS lblDefaultLowCut;
-		private System.Windows.Forms.NumericUpDownTS udFilterDefaultLowCut;
-		private System.Windows.Forms.CheckBoxTS chkVFOSmallLSD;
-		private PowerSDR.ColorButton clrbtnVFOSmallColor;
-		private PowerSDR.ColorButton clrbtnBandBackground;
-		private System.Windows.Forms.LabelTS lblBandBackground;
-		private PowerSDR.ColorButton clrbtnVFOBackground;
-		private System.Windows.Forms.LabelTS lblVFOBackground;
-		private System.Windows.Forms.GroupBoxTS grpDisplayPeakCursor;
-		private PowerSDR.ColorButton clrbtnPeakBackground;
-		private System.Windows.Forms.LabelTS lblPeakBackground;
-		private PowerSDR.ColorButton clrbtnMeterBackground;
-		private System.Windows.Forms.LabelTS lblMeterBackground;
-		private PowerSDR.ColorButton clrbtnTXFilter;
-		private System.Windows.Forms.GroupBoxTS grpAppPanadapter;
-		private PowerSDR.ColorButton clrbtnBandEdge;
-		private System.Windows.Forms.LabelTS lblBandEdge;
-		private System.Windows.Forms.CheckBoxTS chkShowFreqOffset;
-		private System.Windows.Forms.ComboBoxTS comboMeterType;
-		private PowerSDR.ColorButton clrbtnMeterEdgeBackground;
-		private PowerSDR.ColorButton clrbtnMeterEdgeHigh;
-		private PowerSDR.ColorButton clrbtnMeterEdgeLow;
-		private System.Windows.Forms.GroupBoxTS grpGenCalRXImage;
-		private System.Windows.Forms.LabelTS lblGenCalRXImageFreq;
-		private System.Windows.Forms.GroupBoxTS grpGenCalLevel;
-		private System.Windows.Forms.LabelTS lblGenCalLevelFreq;
-		private System.Windows.Forms.GroupBoxTS grpKeyerConnections;
-		private System.Windows.Forms.LabelTS lblVFOSmallColor;
-		private System.Windows.Forms.LabelTS lblTXFilterColor;
-		private System.Windows.Forms.LabelTS lblMeterType;
-		private System.Windows.Forms.CheckBoxTS chekTestIMD;
-		private System.Windows.Forms.GroupBoxTS grpMeterEdge;
-		private System.Windows.Forms.LabelTS lblMeterEdgeBackground;
-		private System.Windows.Forms.LabelTS lblMeterEdgeHigh;
-		private System.Windows.Forms.LabelTS lblMeterEdgeLow;
-		private PowerSDR.ColorButton clrbtnEdgeIndicator;
-		private System.Windows.Forms.LabelTS labelTS1;
-		private System.Windows.Forms.LabelTS lblMeterDigitalText;
-		private PowerSDR.ColorButton clrbtnMeterDigText;
-		private System.Windows.Forms.LabelTS labelTS2;
-		private PowerSDR.ColorButton clrbtnMeterDigBackground;
-		private PowerSDR.ColorButton clrbtnSubRXFilter;
-		private System.Windows.Forms.LabelTS lblSubRXFilterColor;
-		private PowerSDR.ColorButton clrbtnSubRXZero;
-		private System.Windows.Forms.LabelTS lblSubRXZeroLine;
-		private System.Windows.Forms.CheckBoxTS chkCWKeyerMode;
-		private System.Windows.Forms.CheckBoxTS chkCWBreakInEnabled;
-		private System.Windows.Forms.LabelTS lblCWBreakInDelay;
-		private System.Windows.Forms.NumericUpDownTS udCWBreakInDelay;
-		private System.Windows.Forms.GroupBoxTS grpOptMisc;
-		private System.Windows.Forms.CheckBoxTS chkDisableToolTips;
-		private System.Windows.Forms.RichTextBox rtxtPACalReq;
-		private System.Windows.Forms.NumericUpDownTS udDisplayWaterfallAvgTime;
-		private System.Windows.Forms.LabelTS lblDisplayWaterfallAverageTime;
-		private System.Windows.Forms.NumericUpDownTS udDisplayWaterfallUpdatePeriod;
-		private System.Windows.Forms.LabelTS lblDisplayWaterfallUpdatePeriod;
-		private System.Windows.Forms.CheckBoxTS chkSnapClickTune;
-		private System.Windows.Forms.RadioButtonTS radPACalAllBands;
-		private System.Windows.Forms.CheckBoxTS chkPA160;
-		private System.Windows.Forms.CheckBoxTS chkPA80;
-		private System.Windows.Forms.CheckBoxTS chkPA60;
-		private System.Windows.Forms.CheckBoxTS chkPA40;
-		private System.Windows.Forms.CheckBoxTS chkPA30;
-		private System.Windows.Forms.CheckBoxTS chkPA20;
-		private System.Windows.Forms.CheckBoxTS chkPA17;
-		private System.Windows.Forms.CheckBoxTS chkPA15;
-		private System.Windows.Forms.CheckBoxTS chkPA12;
-		private System.Windows.Forms.CheckBoxTS chkPA10;
-		private System.Windows.Forms.RadioButtonTS radPACalSelBands;
-		private System.Windows.Forms.NumericUpDownTS udPACalPower;
-		private System.Windows.Forms.CheckBoxTS chkZeroBeatRIT;
-		private System.Windows.Forms.CheckBoxTS chkPANewCal;
-		private System.Windows.Forms.LabelTS lblPACalTarget;
-		private System.Windows.Forms.CheckBoxTS chkAudioExpert;
-		private System.Windows.Forms.ComboBoxTS cmboSigGenRXMode;
-		private System.Windows.Forms.LabelTS lblSigGenRXMode;
-		private System.Windows.Forms.RadioButtonTS radSigGenRXInput;
-		private System.Windows.Forms.RadioButtonTS radSigGenRXOutput;
-		private System.Windows.Forms.GroupBoxTS grpSigGenReceive;
-		private System.Windows.Forms.GroupBoxTS grpSigGenTransmit;
-		private System.Windows.Forms.LabelTS lblSigGenTXMode;
-		private System.Windows.Forms.ComboBoxTS cmboSigGenTXMode;
-		private System.Windows.Forms.RadioButtonTS radSigGenTXInput;
-		private System.Windows.Forms.RadioButtonTS radSigGenTXOutput;
-		private System.Windows.Forms.NumericUpDownTS udMeterDigitalDelay;
-		private System.Windows.Forms.LabelTS lblMultimeterDigitalDelay;
-		private System.Windows.Forms.RadioButtonTS radGenModelFLEX5000;
-		private System.Windows.Forms.GroupBoxTS grpGeneralHardwareSDR1000;
-		private System.Windows.Forms.GroupBoxTS grpGeneralHardwareFLEX5000;
-		private System.Windows.Forms.CheckBoxTS chkPA6;
-		private System.Windows.Forms.CheckBoxTS chkMouseTuneStep;
-		private System.Windows.Forms.LabelTS lblModel;
-		private System.Windows.Forms.LabelTS lblSerialNum;
-		private System.Windows.Forms.LabelTS lblTRXRev;
-		private System.Windows.Forms.LabelTS lblPARev;
-		private System.Windows.Forms.LabelTS lblRFIORev;
-		private System.Windows.Forms.LabelTS lblATURev;
-		private System.Windows.Forms.LabelTS lblRX2Rev;
-		private System.Windows.Forms.LabelTS lblFirmwareRev;
+        private System.Windows.Forms.CheckBoxTS chkExtEnable;
+        private System.Windows.Forms.CheckBoxTS chkExtRX26;
+        private System.Windows.Forms.CheckBoxTS chkExtRX66;
+        private System.Windows.Forms.CheckBoxTS chkExtRX106;
+        private System.Windows.Forms.CheckBoxTS chkExtRX126;
+        private System.Windows.Forms.CheckBoxTS chkExtRX156;
+        private System.Windows.Forms.CheckBoxTS chkExtRX176;
+        private System.Windows.Forms.CheckBoxTS chkExtRX206;
+        private System.Windows.Forms.CheckBoxTS chkExtRX306;
+        private System.Windows.Forms.CheckBoxTS chkExtRX406;
+        private System.Windows.Forms.CheckBoxTS chkExtRX606;
+        private System.Windows.Forms.CheckBoxTS chkExtRX806;
+        private System.Windows.Forms.CheckBoxTS chkExtRX1606;
+        private System.Windows.Forms.LabelTS lblExtRXX26;
+        private System.Windows.Forms.LabelTS lblExtTXX26;
+        private System.Windows.Forms.CheckBoxTS chkExtTX26;
+        private System.Windows.Forms.CheckBoxTS chkExtTX66;
+        private System.Windows.Forms.CheckBoxTS chkExtTX106;
+        private System.Windows.Forms.CheckBoxTS chkExtTX126;
+        private System.Windows.Forms.CheckBoxTS chkExtTX156;
+        private System.Windows.Forms.CheckBoxTS chkExtTX176;
+        private System.Windows.Forms.CheckBoxTS chkExtTX206;
+        private System.Windows.Forms.CheckBoxTS chkExtTX306;
+        private System.Windows.Forms.CheckBoxTS chkExtTX406;
+        private System.Windows.Forms.CheckBoxTS chkExtTX606;
+        private System.Windows.Forms.CheckBoxTS chkExtTX806;
+        private System.Windows.Forms.CheckBoxTS chkExtTX1606;
+        private System.Windows.Forms.GroupBoxTS grpTXProfile;
+        private System.Windows.Forms.ButtonTS btnTXProfileSave;
+        private System.Windows.Forms.ComboBoxTS comboTXProfileName;
+        private System.Windows.Forms.ButtonTS btnTXProfileDelete;
+        private System.Windows.Forms.Timer timer_sweep;
+        private System.Windows.Forms.LabelTS lblTestGenLow;
+        private System.Windows.Forms.LabelTS lblTestGenHigh;
+        private System.Windows.Forms.LabelTS lblTestGenHzSec;
+        private System.Windows.Forms.LabelTS lblDSPAGCAttack;
+        private System.Windows.Forms.LabelTS lblDSPAGCDecay;
+        private System.Windows.Forms.NumericUpDownTS udDSPAGCAttack;
+        private System.Windows.Forms.LabelTS lblDSPAGCSlope;
+        private System.Windows.Forms.NumericUpDownTS udDSPAGCDecay;
+        private System.Windows.Forms.NumericUpDownTS udDSPAGCSlope;
+        private System.Windows.Forms.NumericUpDownTS udDSPALCThreshold;
+        private System.Windows.Forms.NumericUpDownTS udDSPALCSlope;
+        private System.Windows.Forms.NumericUpDownTS udDSPALCDecay;
+        private System.Windows.Forms.LabelTS lblDSPALCSlope;
+        private System.Windows.Forms.NumericUpDownTS udDSPALCAttack;
+        private System.Windows.Forms.LabelTS lblDSPALCDecay;
+        private System.Windows.Forms.LabelTS lblDSPALCAttack;
+        private System.Windows.Forms.LabelTS lblDSPALCThreshold;
+        private System.Windows.Forms.GroupBoxTS grpDSPALC;
+        private System.Windows.Forms.GroupBoxTS grpDSPLeveler;
+        private System.Windows.Forms.NumericUpDownTS udDSPLevelerThreshold;
+        private System.Windows.Forms.NumericUpDownTS udDSPLevelerSlope;
+        private System.Windows.Forms.NumericUpDownTS udDSPLevelerDecay;
+        private System.Windows.Forms.LabelTS lblDSPLevelerSlope;
+        private System.Windows.Forms.NumericUpDownTS udDSPLevelerAttack;
+        private System.Windows.Forms.LabelTS lblDSPLevelerDecay;
+        private System.Windows.Forms.LabelTS lblDSPLevelerAttack;
+        private System.Windows.Forms.LabelTS lblDSPLevelerThreshold;
+        private System.Windows.Forms.GroupBoxTS grpTXNoiseGate;
+        private System.Windows.Forms.LabelTS lblTXNoiseGateThreshold;
+        private System.Windows.Forms.NumericUpDownTS udTXNoiseGate;
+        private System.Windows.Forms.CheckBoxTS chkTXNoiseGateEnabled;
+        private System.Windows.Forms.TabPage tpDSPAGCALC;
+        private System.Windows.Forms.TrackBarTS tbDSPLevelerHangThreshold;
+        private System.Windows.Forms.LabelTS lblDSPLevelerHangThreshold;
+        private System.Windows.Forms.LabelTS lblDSPALCHangThreshold;
+        private System.Windows.Forms.TrackBarTS tbDSPALCHangThreshold;
+        private System.Windows.Forms.NumericUpDownTS udDSPLevelerHangTime;
+        private System.Windows.Forms.LabelTS lblDSPLevelerHangTime;
+        private System.Windows.Forms.NumericUpDownTS udDSPALCHangTime;
+        private System.Windows.Forms.LabelTS lblDSPALCHangTime;
+        private System.Windows.Forms.GroupBoxTS grpTXVOX;
+        private System.Windows.Forms.LabelTS lblTXVOXThreshold;
+        private System.Windows.Forms.NumericUpDownTS udTXVOXThreshold;
+        private System.Windows.Forms.CheckBoxTS chkTXVOXEnabled;
+        private System.Windows.Forms.LabelTS lblTXVOXHangTime;
+        private System.Windows.Forms.NumericUpDownTS udTXVOXHangTime;
+        private System.Windows.Forms.TrackBarTS tbDSPAGCHangThreshold;
+        private System.Windows.Forms.LabelTS lblDSPAGCHangThreshold;
+        private System.Windows.Forms.LabelTS lblDSPAGCHangTime;
+        private System.Windows.Forms.NumericUpDownTS udDSPAGCHangTime;
+        private System.Windows.Forms.CheckBoxTS chkDSPLevelerEnabled;
+        private System.Windows.Forms.ButtonTS btnImpulse;
+        private System.Windows.Forms.NumericUpDownTS udImpulseNum;
+        private System.Windows.Forms.GroupBoxTS grpTXMonitor;
+        private System.Windows.Forms.LabelTS lblTXAF;
+        private System.Windows.Forms.NumericUpDownTS udTXAF;
+        private System.Windows.Forms.GroupBoxTS grpGeneralModel;
+        private System.Windows.Forms.TabControl tcGeneral;
+        private System.Windows.Forms.TabPage tpGeneralHardware;
+        private System.Windows.Forms.TabPage tpGeneralOptions;
+        private System.Windows.Forms.TabPage tpGeneralCalibration;
+        private System.Windows.Forms.RadioButtonTS radGenModelSDR1000;
+        private System.Windows.Forms.RadioButtonTS radGenModelSoftRock40;
+        private System.Windows.Forms.RadioButtonTS radGenModelDemoNone;
+        private System.Windows.Forms.NumericUpDownTS udGeneralCalFreq1;
+        private System.Windows.Forms.NumericUpDownTS udGeneralCalFreq3;
+        private System.Windows.Forms.NumericUpDownTS udGeneralCalFreq2;
+        private System.Windows.Forms.NumericUpDownTS udSoftRockCenterFreq;
+        private System.Windows.Forms.GroupBoxTS grpHWSoftRock;
+        private System.Windows.Forms.TabPage tpVAC;
+        public System.Windows.Forms.CheckBoxTS chkAudioEnableVAC;
+        private System.Windows.Forms.GroupBoxTS grpAudio2Stereo;
+        private System.Windows.Forms.GroupBoxTS grpBoxTS1;
+        private System.Windows.Forms.TrackBarTS tkbarTestGenFreq;
+        private System.Windows.Forms.LabelTS lblKeyerConnPrimary;
+        private System.Windows.Forms.ComboBoxTS comboKeyerConnPrimary;
+        private System.Windows.Forms.ComboBoxTS comboKeyerConnKeyLine;
+        private System.Windows.Forms.ComboBoxTS comboKeyerConnSecondary;
+        private System.Windows.Forms.LabelTS lblKeyerConnSecondary;
+        private System.Windows.Forms.ComboBoxTS comboKeyerConnPTTLine;
+        private System.Windows.Forms.LabelTS lblKeyerConnPTTLine;
+        private System.Windows.Forms.LabelTS lblKeyerConnKeyLine;
+        private System.Windows.Forms.LabelTS lblCATPort;
+        private System.Windows.Forms.ComboBoxTS comboCATPort;
+        private System.Windows.Forms.ComboBoxTS comboCATPTTPort;
+        private System.Windows.Forms.CheckBoxTS chkCATPTTEnabled;
+        private System.Windows.Forms.CheckBoxTS checkboxTXImagCal;
+        private System.Windows.Forms.GroupBoxTS grpAudioChannels;
+        private System.Windows.Forms.ComboBoxTS comboAudioChannels1;
+        private System.Windows.Forms.GroupBoxTS grpAudioVACGain;
+        private System.Windows.Forms.NumericUpDownTS udAudioVACGainRX;
+        public System.Windows.Forms.LabelTS lblAudioVACGainRX;
+        public System.Windows.Forms.LabelTS lblAudioVACGainTX;
+        private System.Windows.Forms.NumericUpDownTS udAudioVACGainTX;
+        private System.Windows.Forms.LabelTS lblTestGenScale;
+        private System.Windows.Forms.GroupBoxTS grpGenTuningOptions;
+        private System.Windows.Forms.GroupBoxTS grpAudioVACAutoEnable;
+        private System.Windows.Forms.CheckBoxTS chkAudioVACAutoEnable;
+        private System.Windows.Forms.CheckBoxTS chkSpectrumPolyphase;
+        private System.Windows.Forms.GroupBoxTS grpImpulseTest;
+        private System.Windows.Forms.GroupBoxTS grpDisplayScopeMode;
+        private System.Windows.Forms.NumericUpDownTS udDisplayScopeTime;
+        private System.Windows.Forms.LabelTS lblDisplayScopeTime;
+        private System.Windows.Forms.NumericUpDownTS udDisplayMeterAvg;
+        private System.Windows.Forms.LabelTS lblDisplayMeterAvg;
+        private System.Windows.Forms.GroupBoxTS grpDisplayPolyPhase;
+        private System.Windows.Forms.ComboBoxTS comboDisplayDriver;
+        private System.Windows.Forms.GroupBoxTS grpDisplayDriverEngine;
+        private System.Windows.Forms.GroupBoxTS grpGenAutoMute;
+        private System.Windows.Forms.CheckBoxTS chkGenAutoMute;
+        private PowerSDR.ColorButton clrbtnOutOfBand;
+        private System.Windows.Forms.LabelTS lblOutOfBand;
+        private System.Windows.Forms.LabelTS lblGenSoftRockCenterFreq;
+        private System.Windows.Forms.LabelTS lblTestSigGenFreqCallout;
+        private System.Windows.Forms.NumericUpDownTS udTestGenHzSec;
+        private System.Windows.Forms.NumericUpDownTS udTestGenHigh;
+        private System.Windows.Forms.NumericUpDownTS udTestGenLow;
+        private System.Windows.Forms.ButtonTS btnTestGenSweep;
+        private System.Windows.Forms.NumericUpDownTS udTestGenScale;
+        private System.Windows.Forms.CheckBoxTS chkAudio2Stereo;
+        private System.Windows.Forms.GroupBoxTS grpTXAM;
+        private System.Windows.Forms.LabelTS lblTXAMCarrierLevel;
+        private System.Windows.Forms.NumericUpDownTS udTXAMCarrierLevel;
+        private System.Windows.Forms.GroupBoxTS grpOptQuickQSY;
+        private System.Windows.Forms.CheckBoxTS chkOptQuickQSY;
+        private System.Windows.Forms.CheckBoxTS chkOptAlwaysOnTop;
+        private System.Windows.Forms.NumericUpDownTS udOptClickTuneOffsetDIGL;
+        private System.Windows.Forms.NumericUpDownTS udOptClickTuneOffsetDIGU;
+        private System.Windows.Forms.LabelTS lblOptClickTuneDIGL;
+        private System.Windows.Forms.LabelTS lblOptClickTuneDIGU;
+        private System.Windows.Forms.GroupBoxTS grpAudioMicBoost;
+        private System.Windows.Forms.CheckBoxTS chkAudioMicBoost;
+        private System.Windows.Forms.GroupBoxTS grpOptFilterControls;
+        private System.Windows.Forms.LabelTS lblOptMaxFilter;
+        private System.Windows.Forms.NumericUpDownTS udOptMaxFilterWidth;
+        private System.Windows.Forms.LabelTS lblOptWidthSliderMode;
+        private System.Windows.Forms.ComboBoxTS comboOptFilterWidthMode;
+        private System.Windows.Forms.NumericUpDownTS udOptMaxFilterShift;
+        private System.Windows.Forms.LabelTS lblOptMaxFilterShift;
+        private System.Windows.Forms.CheckBoxTS chkOptFilterSaveChanges;
+        private System.Windows.Forms.CheckBoxTS chkOptEnableKBShortcuts;
+        private System.Windows.Forms.TabControl tcAppearance;
+        private System.Windows.Forms.TabPage tpAppearanceGeneral;
+        private System.Windows.Forms.TabPage tpAppearanceDisplay;
+        private System.Windows.Forms.TabPage tpAppearanceMeter;
+        private System.Windows.Forms.GroupBoxTS grpAppearanceVFO;
+        private System.Windows.Forms.LabelTS lblVFOPowerOn;
+        private System.Windows.Forms.LabelTS lblVFOPowerOff;
+        private System.Windows.Forms.GroupBoxTS grpAppearanceBand;
+        private System.Windows.Forms.TabPage tpFilters;
+        private System.Windows.Forms.LabelTS lblDefaultLowCut;
+        private System.Windows.Forms.NumericUpDownTS udFilterDefaultLowCut;
+        private System.Windows.Forms.CheckBoxTS chkVFOSmallLSD;
+        private PowerSDR.ColorButton clrbtnVFOSmallColor;
+        private PowerSDR.ColorButton clrbtnBandBackground;
+        private System.Windows.Forms.LabelTS lblBandBackground;
+        private PowerSDR.ColorButton clrbtnVFOBackground;
+        private System.Windows.Forms.LabelTS lblVFOBackground;
+        private System.Windows.Forms.GroupBoxTS grpDisplayPeakCursor;
+        private PowerSDR.ColorButton clrbtnPeakBackground;
+        private System.Windows.Forms.LabelTS lblPeakBackground;
+        private PowerSDR.ColorButton clrbtnMeterBackground;
+        private System.Windows.Forms.LabelTS lblMeterBackground;
+        private PowerSDR.ColorButton clrbtnTXFilter;
+        private System.Windows.Forms.GroupBoxTS grpAppPanadapter;
+        private PowerSDR.ColorButton clrbtnBandEdge;
+        private System.Windows.Forms.LabelTS lblBandEdge;
+        private System.Windows.Forms.CheckBoxTS chkShowFreqOffset;
+        private System.Windows.Forms.ComboBoxTS comboMeterType;
+        private PowerSDR.ColorButton clrbtnMeterEdgeBackground;
+        private PowerSDR.ColorButton clrbtnMeterEdgeHigh;
+        private PowerSDR.ColorButton clrbtnMeterEdgeLow;
+        private System.Windows.Forms.GroupBoxTS grpGenCalRXImage;
+        private System.Windows.Forms.LabelTS lblGenCalRXImageFreq;
+        private System.Windows.Forms.GroupBoxTS grpGenCalLevel;
+        private System.Windows.Forms.LabelTS lblGenCalLevelFreq;
+        private System.Windows.Forms.GroupBoxTS grpKeyerConnections;
+        private System.Windows.Forms.LabelTS lblVFOSmallColor;
+        private System.Windows.Forms.LabelTS lblTXFilterColor;
+        private System.Windows.Forms.LabelTS lblMeterType;
+        private System.Windows.Forms.CheckBoxTS chekTestIMD;
+        private System.Windows.Forms.GroupBoxTS grpMeterEdge;
+        private System.Windows.Forms.LabelTS lblMeterEdgeBackground;
+        private System.Windows.Forms.LabelTS lblMeterEdgeHigh;
+        private System.Windows.Forms.LabelTS lblMeterEdgeLow;
+        private PowerSDR.ColorButton clrbtnEdgeIndicator;
+        private System.Windows.Forms.LabelTS labelTS1;
+        private System.Windows.Forms.LabelTS lblMeterDigitalText;
+        private PowerSDR.ColorButton clrbtnMeterDigText;
+        private System.Windows.Forms.LabelTS labelTS2;
+        private PowerSDR.ColorButton clrbtnMeterDigBackground;
+        private PowerSDR.ColorButton clrbtnSubRXFilter;
+        private System.Windows.Forms.LabelTS lblSubRXFilterColor;
+        private PowerSDR.ColorButton clrbtnSubRXZero;
+        private System.Windows.Forms.LabelTS lblSubRXZeroLine;
+        private System.Windows.Forms.CheckBoxTS chkCWKeyerMode;
+        private System.Windows.Forms.CheckBoxTS chkCWBreakInEnabled;
+        private System.Windows.Forms.LabelTS lblCWBreakInDelay;
+        private System.Windows.Forms.NumericUpDownTS udCWBreakInDelay;
+        private System.Windows.Forms.GroupBoxTS grpOptMisc;
+        private System.Windows.Forms.CheckBoxTS chkDisableToolTips;
+        private System.Windows.Forms.RichTextBox rtxtPACalReq;
+        private System.Windows.Forms.NumericUpDownTS udDisplayWaterfallAvgTime;
+        private System.Windows.Forms.LabelTS lblDisplayWaterfallAverageTime;
+        private System.Windows.Forms.NumericUpDownTS udDisplayWaterfallUpdatePeriod;
+        private System.Windows.Forms.LabelTS lblDisplayWaterfallUpdatePeriod;
+        private System.Windows.Forms.CheckBoxTS chkSnapClickTune;
+        private System.Windows.Forms.RadioButtonTS radPACalAllBands;
+        private System.Windows.Forms.CheckBoxTS chkPA160;
+        private System.Windows.Forms.CheckBoxTS chkPA80;
+        private System.Windows.Forms.CheckBoxTS chkPA60;
+        private System.Windows.Forms.CheckBoxTS chkPA40;
+        private System.Windows.Forms.CheckBoxTS chkPA30;
+        private System.Windows.Forms.CheckBoxTS chkPA20;
+        private System.Windows.Forms.CheckBoxTS chkPA17;
+        private System.Windows.Forms.CheckBoxTS chkPA15;
+        private System.Windows.Forms.CheckBoxTS chkPA12;
+        private System.Windows.Forms.CheckBoxTS chkPA10;
+        private System.Windows.Forms.RadioButtonTS radPACalSelBands;
+        private System.Windows.Forms.NumericUpDownTS udPACalPower;
+        private System.Windows.Forms.CheckBoxTS chkZeroBeatRIT;
+        private System.Windows.Forms.CheckBoxTS chkPANewCal;
+        private System.Windows.Forms.LabelTS lblPACalTarget;
+        private System.Windows.Forms.CheckBoxTS chkAudioExpert;
+        private System.Windows.Forms.ComboBoxTS cmboSigGenRXMode;
+        private System.Windows.Forms.LabelTS lblSigGenRXMode;
+        private System.Windows.Forms.RadioButtonTS radSigGenRXInput;
+        private System.Windows.Forms.RadioButtonTS radSigGenRXOutput;
+        private System.Windows.Forms.GroupBoxTS grpSigGenReceive;
+        private System.Windows.Forms.GroupBoxTS grpSigGenTransmit;
+        private System.Windows.Forms.LabelTS lblSigGenTXMode;
+        private System.Windows.Forms.ComboBoxTS cmboSigGenTXMode;
+        private System.Windows.Forms.RadioButtonTS radSigGenTXInput;
+        private System.Windows.Forms.RadioButtonTS radSigGenTXOutput;
+        private System.Windows.Forms.NumericUpDownTS udMeterDigitalDelay;
+        private System.Windows.Forms.LabelTS lblMultimeterDigitalDelay;
+        private System.Windows.Forms.RadioButtonTS radGenModelFLEX5000;
+        private System.Windows.Forms.GroupBoxTS grpGeneralHardwareSDR1000;
+        private System.Windows.Forms.GroupBoxTS grpGeneralHardwareFLEX5000;
+        private System.Windows.Forms.CheckBoxTS chkPA6;
+        private System.Windows.Forms.CheckBoxTS chkMouseTuneStep;
+        private System.Windows.Forms.LabelTS lblModel;
+        private System.Windows.Forms.LabelTS lblSerialNum;
+        private System.Windows.Forms.LabelTS lblTRXRev;
+        private System.Windows.Forms.LabelTS lblPARev;
+        private System.Windows.Forms.LabelTS lblRFIORev;
+        private System.Windows.Forms.LabelTS lblATURev;
+        private System.Windows.Forms.LabelTS lblRX2Rev;
+        private System.Windows.Forms.LabelTS lblFirmwareRev;
         private System.Windows.Forms.CheckBoxTS ckEnableSigGen;
-		private System.Windows.Forms.CheckBoxTS chkGenDDSExpert;
+        private System.Windows.Forms.CheckBoxTS chkGenDDSExpert;
         private System.Windows.Forms.CheckBoxTS chkBoxJanusOzyControl;
         private System.Windows.Forms.CheckBoxTS chkCalExpert;
         private System.Windows.Forms.CheckBoxTS chkDSPImageExpert;
-		private System.Windows.Forms.CheckBoxTS chkGenAllModeMicPTT;
-		private System.Windows.Forms.CheckBoxTS chkDigUIsUSB;
-		private System.Windows.Forms.GroupBoxTS grpGenCustomTitleText;
-		private System.Windows.Forms.TextBoxTS txtGenCustomTitle;
-		private System.Windows.Forms.CheckBoxTS chkGenFLEX5000ExtRef;
-		private System.Windows.Forms.CheckBoxTS chkFPInstalled;
-		private System.Windows.Forms.NumericUpDownTS udLMSNRLeak;
-		private System.Windows.Forms.NumericUpDownTS udLMSANFLeak;
-		private System.Windows.Forms.LabelTS lblLMSNRLeak;
-		private System.Windows.Forms.LabelTS lblLMSANFLeak;
-		private System.Windows.Forms.MainMenu mainMenu1;
-		private System.Windows.Forms.CheckBoxTS chkKWAI;
-		private System.Windows.Forms.CheckBoxTS chkSplitOff;
-		private System.Windows.Forms.CheckBoxTS chkEnableRFEPATR;
-		private System.Windows.Forms.CheckBoxTS chkVACAllowBypass;
-		private System.Windows.Forms.CheckBoxTS chkDSPTXMeterPeak;
-		private System.Windows.Forms.CheckBoxTS chkVACCombine;
-		private System.Windows.Forms.CheckBoxTS chkCWAutoSwitchMode;
-		private System.Windows.Forms.CheckBoxTS chkSigGenRX2;
-		private System.Windows.Forms.LabelTS lblGenBackground;
-		private PowerSDR.ColorButton clrbtnGenBackground;
-		private System.Windows.Forms.ComboBoxTS comboTXTUNMeter;
-		private System.Windows.Forms.LabelTS lblTXTUNMeter;
-		private System.Windows.Forms.ButtonTS btnResetDB;
-		private System.Windows.Forms.GroupBoxTS grpDSPBufPhone;
-		private System.Windows.Forms.GroupBoxTS grpDSPBufCW;
-		private System.Windows.Forms.ComboBoxTS comboDSPPhoneTXBuf;
-		private System.Windows.Forms.ComboBoxTS comboDSPPhoneRXBuf;
-		private System.Windows.Forms.ComboBoxTS comboDSPCWTXBuf;
-		private System.Windows.Forms.ComboBoxTS comboDSPCWRXBuf;
-		private System.Windows.Forms.ComboBoxTS comboDSPDigTXBuf;
-		private System.Windows.Forms.ComboBoxTS comboDSPDigRXBuf;
-		private System.Windows.Forms.LabelTS lblDSPPhoneBufferTX;
-		private System.Windows.Forms.LabelTS lblDSPPhoneBufferRX;
-		private System.Windows.Forms.LabelTS lblDSPCWBufferRX;
-		private System.Windows.Forms.LabelTS lblDSPCWBufferTX;
-		private System.Windows.Forms.GroupBoxTS grpDSPBufDig;
-		private System.Windows.Forms.LabelTS lblDSPDigBufferRX;
-		private System.Windows.Forms.LabelTS lblDSPDigBufferTX;
-		private System.Windows.Forms.CheckBoxTS chkDisplayMeterShowDecimal;
-		private System.Windows.Forms.GroupBoxTS grpRTTYOffset;
-		private System.Windows.Forms.CheckBoxTS chkRTTYOffsetEnableA;
-		private System.Windows.Forms.CheckBoxTS chkRTTYOffsetEnableB;
-		private System.Windows.Forms.NumericUpDownTS udRTTYL;
-		private System.Windows.Forms.NumericUpDownTS udRTTYU;
-		private System.Windows.Forms.LabelTS labelTS3;
-		private System.Windows.Forms.LabelTS labelTS4;
-		private System.Windows.Forms.TabPage tpRX2;
-		private System.Windows.Forms.CheckBoxTS chkRX2AutoMuteTX;
-		private System.Windows.Forms.GroupBoxTS grpDirectIQOutput;
-		private System.Windows.Forms.CheckBoxTS chkAudioCorrectIQ;
-		private System.Windows.Forms.CheckBoxTS chkAudioIQtoVAC;
-		private System.Windows.Forms.CheckBoxTS chkRX2AutoMuteRX1OnVFOBTX;
-		private System.Windows.Forms.ListBox lstTXProfileDef;
-		private System.Windows.Forms.GroupBoxTS grpTXProfileDef;
-		private System.Windows.Forms.CheckBoxTS chkTXExpert;
-		private System.Windows.Forms.ButtonTS btnTXProfileDefImport;
+        private System.Windows.Forms.CheckBoxTS chkGenAllModeMicPTT;
+        private System.Windows.Forms.CheckBoxTS chkDigUIsUSB;
+        private System.Windows.Forms.GroupBoxTS grpGenCustomTitleText;
+        private System.Windows.Forms.TextBoxTS txtGenCustomTitle;
+        private System.Windows.Forms.CheckBoxTS chkGenFLEX5000ExtRef;
+        private System.Windows.Forms.CheckBoxTS chkFPInstalled;
+        private System.Windows.Forms.NumericUpDownTS udLMSNRLeak;
+        private System.Windows.Forms.NumericUpDownTS udLMSANFLeak;
+        private System.Windows.Forms.LabelTS lblLMSNRLeak;
+        private System.Windows.Forms.LabelTS lblLMSANFLeak;
+        private System.Windows.Forms.MainMenu mainMenu1;
+        private System.Windows.Forms.CheckBoxTS chkKWAI;
+        private System.Windows.Forms.CheckBoxTS chkSplitOff;
+        private System.Windows.Forms.CheckBoxTS chkEnableRFEPATR;
+        private System.Windows.Forms.CheckBoxTS chkVACAllowBypass;
+        private System.Windows.Forms.CheckBoxTS chkDSPTXMeterPeak;
+        private System.Windows.Forms.CheckBoxTS chkVACCombine;
+        private System.Windows.Forms.CheckBoxTS chkCWAutoSwitchMode;
+        private System.Windows.Forms.CheckBoxTS chkSigGenRX2;
+        private System.Windows.Forms.LabelTS lblGenBackground;
+        private PowerSDR.ColorButton clrbtnGenBackground;
+        private System.Windows.Forms.ComboBoxTS comboTXTUNMeter;
+        private System.Windows.Forms.LabelTS lblTXTUNMeter;
+        private System.Windows.Forms.ButtonTS btnResetDB;
+        private System.Windows.Forms.GroupBoxTS grpDSPBufPhone;
+        private System.Windows.Forms.GroupBoxTS grpDSPBufCW;
+        private System.Windows.Forms.ComboBoxTS comboDSPPhoneTXBuf;
+        private System.Windows.Forms.ComboBoxTS comboDSPPhoneRXBuf;
+        private System.Windows.Forms.ComboBoxTS comboDSPCWTXBuf;
+        private System.Windows.Forms.ComboBoxTS comboDSPCWRXBuf;
+        private System.Windows.Forms.ComboBoxTS comboDSPDigTXBuf;
+        private System.Windows.Forms.ComboBoxTS comboDSPDigRXBuf;
+        private System.Windows.Forms.LabelTS lblDSPPhoneBufferTX;
+        private System.Windows.Forms.LabelTS lblDSPPhoneBufferRX;
+        private System.Windows.Forms.LabelTS lblDSPCWBufferRX;
+        private System.Windows.Forms.LabelTS lblDSPCWBufferTX;
+        private System.Windows.Forms.GroupBoxTS grpDSPBufDig;
+        private System.Windows.Forms.LabelTS lblDSPDigBufferRX;
+        private System.Windows.Forms.LabelTS lblDSPDigBufferTX;
+        private System.Windows.Forms.CheckBoxTS chkDisplayMeterShowDecimal;
+        private System.Windows.Forms.GroupBoxTS grpRTTYOffset;
+        private System.Windows.Forms.CheckBoxTS chkRTTYOffsetEnableA;
+        private System.Windows.Forms.CheckBoxTS chkRTTYOffsetEnableB;
+        private System.Windows.Forms.NumericUpDownTS udRTTYL;
+        private System.Windows.Forms.NumericUpDownTS udRTTYU;
+        private System.Windows.Forms.LabelTS labelTS3;
+        private System.Windows.Forms.LabelTS labelTS4;
+        private System.Windows.Forms.TabPage tpRX2;
+        private System.Windows.Forms.CheckBoxTS chkRX2AutoMuteTX;
+        private System.Windows.Forms.GroupBoxTS grpDirectIQOutput;
+        private System.Windows.Forms.CheckBoxTS chkAudioCorrectIQ;
+        private System.Windows.Forms.CheckBoxTS chkAudioIQtoVAC;
+        private System.Windows.Forms.CheckBoxTS chkRX2AutoMuteRX1OnVFOBTX;
+        private System.Windows.Forms.ListBox lstTXProfileDef;
+        private System.Windows.Forms.GroupBoxTS grpTXProfileDef;
+        private System.Windows.Forms.CheckBoxTS chkTXExpert;
+        private System.Windows.Forms.ButtonTS btnTXProfileDefImport;
         private NumericUpDownTS udF3KFanTempThresh;
         private LabelTS lblF3KFanTempThresh;
         private LabelTS lblGenTX1Delay;
@@ -1379,78 +1380,88 @@ namespace PowerSDR
         private NumericUpDownTS udPAGainVHF11;
         private LabelTS lblPAGainByBandVHF10;
         private NumericUpDownTS udPAGainVHF10;
+        private GroupBoxTS grpOzyType;
+        private GroupBoxTS grpMetisAddr;
+        private RadioButtonTS radMetis;
+        private RadioButtonTS radOzyUSB;
+        private LabelTS lblMetisIP;
+        private LabelTS lblMetisMAC;
+        private LabelTS labelTS9;
+        private LabelTS labelTS16;
         private System.ComponentModel.IContainer components;
 
-		#endregion
+        #endregion
 
-		#region Constructor and Destructor
+        #region Constructor and Destructor
 
-		public Setup(Console c)
-		{            
-			InitializeComponent();
+        public Setup(Console c)
+        {
+            InitializeComponent();
             console = c;
             openFileDialog1.InitialDirectory = console.AppDataPath;
 
 #if(!DEBUG)
-			comboGeneralProcessPriority.Items.Remove("Idle");
-			comboGeneralProcessPriority.Items.Remove("Below Normal");
+            comboGeneralProcessPriority.Items.Remove("Idle");
+            comboGeneralProcessPriority.Items.Remove("Below Normal");
 #endif
-			initializing = true;
+            initializing = true;
 
-			InitWindowTypes();
-			GetMixerDevices();
-			GetHosts();			
-			
-			KeyList = new ArrayList();
-			SetupKeyMap();
+            InitWindowTypes();
+            GetMixerDevices();
+            GetHosts();
+            InitAlexAntTables();
 
-			GetTxProfiles();
-			GetTxProfileDefs();
+            KeyList = new ArrayList();
+            SetupKeyMap();
 
-			RefreshCOMPortLists();
+            GetTxProfiles();
+            GetTxProfileDefs();
+
+            RefreshCOMPortLists();
 
             RefreshSkinList();
 
-			comboGeneralLPTAddr.SelectedIndex = -1;
-			comboGeneralXVTR.SelectedIndex = (int)XVTRTRMode.POSITIVE;
-			comboGeneralProcessPriority.Text = "Normal";
-			comboOptFilterWidthMode.Text = "Linear";
-			comboAudioSoundCard.Text = "Unsupported Card";
-			comboAudioSampleRate1.SelectedIndex = 0;
-			comboAudioSampleRate2.Text = "48000";
-			comboAudioBuffer1.Text = "2048";
-			comboAudioBuffer2.Text = "512";
-			comboAudioChannels1.Text = "2";
-			Audio.IN_RX1_L = 0;
-			Audio.IN_RX1_R = 1;
-			Audio.IN_RX2_L = 2;
-			Audio.IN_RX2_R = 3;
-			Audio.IN_TX_L = 4;
-			Audio.IN_TX_R = 5;
-			comboDisplayLabelAlign.Text = "Auto";
-			comboDisplayDriver.Text = "GDI+";
-			comboDSPPhoneRXBuf.Text = "4096";
-			comboDSPPhoneTXBuf.Text = "2048";
-			comboDSPCWRXBuf.Text = "4096";
-			comboDSPCWTXBuf.Text = "2048";
-			comboDSPDigRXBuf.Text = "4096";
-			comboDSPDigTXBuf.Text = "2048";
-			comboDSPWindow.SelectedIndex = (int)Window.BLKHARRIS;
-			comboKeyerConnKeyLine.SelectedIndex = 0;
-			comboKeyerConnSecondary.SelectedIndex = 0;
-			comboKeyerConnPTTLine.SelectedIndex = 0;
-			comboKeyerConnPrimary.SelectedIndex = 0;
-			comboTXTUNMeter.SelectedIndex = 0;
-			comboMeterType.Text = "Edge";
-			if(comboCATPort.Items.Count > 0) comboCATPort.SelectedIndex = 0;
-			if(comboCATPTTPort.Items.Count > 0) comboCATPTTPort.SelectedIndex = 0;
-			comboCATbaud.Text = "1200";
-			comboCATparity.Text = "none";
-			comboCATdatabits.Text = "8";
-			comboCATstopbits.Text = "1";
-			comboCATRigType.Text = "TS-2000";
+            comboGeneralLPTAddr.SelectedIndex = -1;
+            comboGeneralXVTR.SelectedIndex = (int)XVTRTRMode.POSITIVE;
+            comboGeneralProcessPriority.Text = "Normal";
+            comboOptFilterWidthMode.Text = "Linear";
+            comboAudioSoundCard.Text = "Unsupported Card";
+            comboAudioSampleRate1.SelectedIndex = 0;
+            comboAudioSampleRate2.Text = "48000";
+            comboAudioBuffer1.Text = "2048";
+            comboAudioBuffer2.Text = "512";
+            comboAudioChannels1.Text = "2";
+            Audio.IN_RX1_L = 0;
+            Audio.IN_RX1_R = 1;
+            Audio.IN_RX2_L = 2;
+            Audio.IN_RX2_R = 3;
+            Audio.IN_TX_L = 4;
+            Audio.IN_TX_R = 5;
+            comboDisplayLabelAlign.Text = "Auto";
+            comboDisplayDriver.Text = "GDI+";
+            comboDSPPhoneRXBuf.Text = "4096";
+            comboDSPPhoneTXBuf.Text = "2048";
+            comboDSPCWRXBuf.Text = "4096";
+            comboDSPCWTXBuf.Text = "2048";
+            comboDSPDigRXBuf.Text = "4096";
+            comboDSPDigTXBuf.Text = "2048";
+            comboDSPWindow.SelectedIndex = (int)Window.BLKHARRIS;
+            comboKeyerConnKeyLine.SelectedIndex = 0;
+            comboKeyerConnSecondary.SelectedIndex = 0;
+            comboKeyerConnPTTLine.SelectedIndex = 0;
+            comboKeyerConnPrimary.SelectedIndex = 0;
+            comboTXTUNMeter.SelectedIndex = 0;
+            comboMeterType.Text = "Edge";
+            if (comboCATPort.Items.Count > 0) comboCATPort.SelectedIndex = 0;
+            if (comboCATPTTPort.Items.Count > 0) comboCATPTTPort.SelectedIndex = 0;
+            comboCATbaud.Text = "1200";
+            comboCATparity.Text = "none";
+            comboCATdatabits.Text = "8";
+            comboCATstopbits.Text = "1";
+            comboCATRigType.Text = "TS-2000";
+            //fillMetisIPAddrCombo();  /* must happen before GetOptions is called */ 
 
-			GetOptions();
+            GetOptions();
 
             if (comboDSPPhoneRXBuf.SelectedIndex < 0 || comboDSPPhoneRXBuf.SelectedIndex >= comboDSPPhoneRXBuf.Items.Count)
                 comboDSPPhoneRXBuf.SelectedIndex = comboDSPPhoneRXBuf.Items.Count - 1;
@@ -1476,105 +1487,113 @@ namespace PowerSDR
                 }
             }
 
-			cmboSigGenRXMode.Text = "Radio";
-			cmboSigGenTXMode.Text = "Radio";
+            cmboSigGenRXMode.Text = "Radio";
+            cmboSigGenTXMode.Text = "Radio";
 
-			if(comboAudioDriver1.SelectedIndex < 0 &&
-				comboAudioDriver1.Items.Count > 0)
-				comboAudioDriver1.SelectedIndex = 0;
+            if (comboAudioDriver1.SelectedIndex < 0 &&
+                comboAudioDriver1.Items.Count > 0)
+                comboAudioDriver1.SelectedIndex = 0;
 
-			if(comboAudioDriver2.SelectedIndex < 0 &&
-				comboAudioDriver2.Items.Count > 0)
-				comboAudioDriver2.SelectedIndex = 0;
+            if (comboAudioDriver2.SelectedIndex < 0 &&
+                comboAudioDriver2.Items.Count > 0)
+                comboAudioDriver2.SelectedIndex = 0;
 
-			if(comboAudioMixer1.SelectedIndex < 0 &&
-				comboAudioMixer1.Items.Count > 0)
-				comboAudioMixer1.SelectedIndex = 0;
+            if (comboAudioMixer1.SelectedIndex < 0 &&
+                comboAudioMixer1.Items.Count > 0)
+                comboAudioMixer1.SelectedIndex = 0;
 
             comboAudioBuffer1_SelectedIndexChanged(this, EventArgs.Empty);
 
-			initializing = false;
-			udDisplayScopeTime_ValueChanged(this, EventArgs.Empty);
+            initializing = false;
+            udDisplayScopeTime_ValueChanged(this, EventArgs.Empty);
 
-			if(comboTXProfileName.SelectedIndex < 0 &&
-				comboTXProfileName.Items.Count > 0)
-				comboTXProfileName.SelectedIndex = 0;
-			current_profile = comboTXProfileName.Text;
+            if (comboTXProfileName.SelectedIndex < 0 &&
+                comboTXProfileName.Items.Count > 0)
+                comboTXProfileName.SelectedIndex = 0;
+            current_profile = comboTXProfileName.Text;
 
-			if(chkCATEnable.Checked)
-			{
-				chkCATEnable_CheckedChanged(this, EventArgs.Empty);
-			}
+            if (chkCATEnable.Checked)
+            {
+                chkCATEnable_CheckedChanged(this, EventArgs.Empty);
+            }
 
-			if(chkCATPTTEnabled.Checked)
-			{
-				chkCATPTTEnabled_CheckedChanged(this, EventArgs.Empty);
-			}
+            if (chkCATPTTEnabled.Checked)
+            {
+                chkCATPTTEnabled_CheckedChanged(this, EventArgs.Empty);
+            }
 
-			comboKeyerConnSecondary_SelectedIndexChanged(this, EventArgs.Empty);
+            comboKeyerConnSecondary_SelectedIndexChanged(this, EventArgs.Empty);
 
-			if(radGenModelFLEX5000.Checked && DB.GetVars("Options").Count != 0)
-				radGenModelFLEX5000_CheckedChanged(this, EventArgs.Empty);
+            if (radGenModelFLEX5000.Checked && DB.GetVars("Options").Count != 0)
+                radGenModelFLEX5000_CheckedChanged(this, EventArgs.Empty);
 
-			//ForceAllEvents();
-			EventArgs e = EventArgs.Empty;
-			comboGeneralLPTAddr_LostFocus(this, e);
-			chkGeneralSpurRed_CheckedChanged(this, e);
-			udDDSCorrection_ValueChanged(this, e);
-			chkAudioLatencyManual1_CheckedChanged(this, e);
-			udAudioLineIn1_ValueChanged(this, e);
-			comboAudioReceive1_SelectedIndexChanged(this, e);
-			udLMSANF_ValueChanged(this, e);
-			udLMSNR_ValueChanged(this, e);			
-			udDSPImagePhaseTX_ValueChanged(this, e);
-			udDSPImageGainTX_ValueChanged(this, e);
-			udDSPCWPitch_ValueChanged(this, e);
-			tbDSPAGCHangThreshold_Scroll(this, e);
-			udTXFilterHigh_ValueChanged(this, e);
-			udTXFilterLow_ValueChanged(this, e);
+            //ForceAllEvents();
+            EventArgs e = EventArgs.Empty;
+            comboGeneralLPTAddr_LostFocus(this, e);
+            chkGeneralSpurRed_CheckedChanged(this, e);
+            udDDSCorrection_ValueChanged(this, e);
+            chkAudioLatencyManual1_CheckedChanged(this, e);
+            udAudioLineIn1_ValueChanged(this, e);
+            comboAudioReceive1_SelectedIndexChanged(this, e);
+            udLMSANF_ValueChanged(this, e);
+            udLMSNR_ValueChanged(this, e);
+            udDSPImagePhaseTX_ValueChanged(this, e);
+            udDSPImageGainTX_ValueChanged(this, e);
+            udDSPCWPitch_ValueChanged(this, e);
+            tbDSPAGCHangThreshold_Scroll(this, e);
+            udTXFilterHigh_ValueChanged(this, e);
+            udTXFilterLow_ValueChanged(this, e);
             tbRX1FilterAlpha_Scroll(this, e);
             tbMultiRXFilterAlpha_Scroll(this, e);
 
-			for(int i=0; i<2; i++)
-				for(int j=0; j<2; j++)
-					console.radio.GetDSPRX(i, j).Update = true;
-			comboDSPPhoneRXBuf_SelectedIndexChanged(this, EventArgs.Empty);
-			comboDSPPhoneTXBuf_SelectedIndexChanged(this, EventArgs.Empty);
-			
-			openFileDialog1.Filter = "PowerSDR Database Files (*.xml) | *.xml";
+            for (int i = 0; i < 2; i++)
+                for (int j = 0; j < 2; j++)
+                    console.radio.GetDSPRX(i, j).Update = true;
+            comboDSPPhoneRXBuf_SelectedIndexChanged(this, EventArgs.Empty);
+            comboDSPPhoneTXBuf_SelectedIndexChanged(this, EventArgs.Empty);
 
-			if(chkKWAI.Checked)
-				AllowFreqBroadcast = true;
-			else
-				AllowFreqBroadcast = false;
+            openFileDialog1.Filter = "PowerSDR Database Files (*.xml) | *.xml";
 
-			tkbarTestGenFreq.Value = console.CWPitch;
-		}
+            if (chkKWAI.Checked)
+                AllowFreqBroadcast = true;
+            else
+                AllowFreqBroadcast = false;
 
-		protected override void Dispose( bool disposing )
-		{
-			if( disposing )
-			{
-				if(components != null)
-				{
-					components.Dispose();
-				}
-			}
-			base.Dispose( disposing );
-		}
+            tkbarTestGenFreq.Value = console.CWPitch;
+        }
 
-		#endregion
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                if (components != null)
+                {
+                    components.Dispose();
+                }
+            }
+            base.Dispose(disposing);
+        }
 
-		#region Windows Form Designer generated code
+        #endregion
 
-		private void InitializeComponent()
-		{
+        #region Windows Form Designer generated code
+
+        private void InitializeComponent()
+        {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Setup));
             this.tcSetup = new System.Windows.Forms.TabControl();
             this.tpGeneral = new System.Windows.Forms.TabPage();
             this.tcGeneral = new System.Windows.Forms.TabControl();
             this.tpGeneralHardware = new System.Windows.Forms.TabPage();
+            this.grpMetisAddr = new System.Windows.Forms.GroupBoxTS();
+            this.labelTS16 = new System.Windows.Forms.LabelTS();
+            this.labelTS9 = new System.Windows.Forms.LabelTS();
+            this.lblMetisMAC = new System.Windows.Forms.LabelTS();
+            this.lblMetisIP = new System.Windows.Forms.LabelTS();
+            this.grpOzyType = new System.Windows.Forms.GroupBoxTS();
+            this.radMetis = new System.Windows.Forms.RadioButtonTS();
+            this.radOzyUSB = new System.Windows.Forms.RadioButtonTS();
             this.grpFRSRegion = new System.Windows.Forms.GroupBoxTS();
             this.comboFRSRegion = new System.Windows.Forms.ComboBoxTS();
             this.chkGeneralUseSi570 = new System.Windows.Forms.CheckBoxTS();
@@ -1593,14 +1612,6 @@ namespace PowerSDR
             this.grpSI570 = new System.Windows.Forms.GroupBoxTS();
             this.labelTS8 = new System.Windows.Forms.LabelTS();
             this.udFXtal = new System.Windows.Forms.NumericUpDownTS();
-            this.grpGeneralDDS = new System.Windows.Forms.GroupBoxTS();
-            this.chkGenDDSExpert = new System.Windows.Forms.CheckBoxTS();
-            this.udDDSCorrection = new System.Windows.Forms.NumericUpDownTS();
-            this.lblClockCorrection = new System.Windows.Forms.LabelTS();
-            this.udDDSIFFreq = new System.Windows.Forms.NumericUpDownTS();
-            this.lblIFFrequency = new System.Windows.Forms.LabelTS();
-            this.udDDSPLLMult = new System.Windows.Forms.NumericUpDownTS();
-            this.lblPLLMult = new System.Windows.Forms.LabelTS();
             this.groupBoxHPSDRHW = new System.Windows.Forms.GroupBoxTS();
             this.chkExcaliburPresent = new System.Windows.Forms.CheckBoxTS();
             this.chkAlexPresent = new System.Windows.Forms.CheckBoxTS();
@@ -1630,6 +1641,14 @@ namespace PowerSDR
             this.udGeneralLPTDelay = new System.Windows.Forms.NumericUpDownTS();
             this.lblGeneralLPTAddr = new System.Windows.Forms.LabelTS();
             this.comboGeneralLPTAddr = new System.Windows.Forms.ComboBoxTS();
+            this.grpGeneralDDS = new System.Windows.Forms.GroupBoxTS();
+            this.chkGenDDSExpert = new System.Windows.Forms.CheckBoxTS();
+            this.udDDSCorrection = new System.Windows.Forms.NumericUpDownTS();
+            this.lblClockCorrection = new System.Windows.Forms.LabelTS();
+            this.udDDSIFFreq = new System.Windows.Forms.NumericUpDownTS();
+            this.lblIFFrequency = new System.Windows.Forms.LabelTS();
+            this.udDDSPLLMult = new System.Windows.Forms.NumericUpDownTS();
+            this.lblPLLMult = new System.Windows.Forms.LabelTS();
             this.tpGeneralOptions = new System.Windows.Forms.TabPage();
             this.grpGenCustomTitleText = new System.Windows.Forms.GroupBoxTS();
             this.txtGenCustomTitle = new System.Windows.Forms.TextBoxTS();
@@ -2903,21 +2922,23 @@ namespace PowerSDR
             this.tpGeneral.SuspendLayout();
             this.tcGeneral.SuspendLayout();
             this.tpGeneralHardware.SuspendLayout();
+            this.grpMetisAddr.SuspendLayout();
+            this.grpOzyType.SuspendLayout();
             this.grpFRSRegion.SuspendLayout();
             this.grpGeneralModel.SuspendLayout();
             this.grpHWSoftRock.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.udSoftRockCenterFreq)).BeginInit();
             this.grpSI570.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.udFXtal)).BeginInit();
-            this.grpGeneralDDS.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.udDDSCorrection)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.udDDSIFFreq)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.udDDSPLLMult)).BeginInit();
             this.groupBoxHPSDRHW.SuspendLayout();
             this.grpGeneralHardwareFLEX5000.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.udF3KFanTempThresh)).BeginInit();
             this.grpGeneralHardwareSDR1000.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.udGeneralLPTDelay)).BeginInit();
+            this.grpGeneralDDS.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.udDDSCorrection)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.udDDSIFFreq)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.udDDSPLLMult)).BeginInit();
             this.tpGeneralOptions.SuspendLayout();
             this.grpGenCustomTitleText.SuspendLayout();
             this.grpOptMisc.SuspendLayout();
@@ -3261,6 +3282,8 @@ namespace PowerSDR
             // tpGeneralHardware
             // 
             this.tpGeneralHardware.BackColor = System.Drawing.SystemColors.Control;
+            this.tpGeneralHardware.Controls.Add(this.grpMetisAddr);
+            this.tpGeneralHardware.Controls.Add(this.grpOzyType);
             this.tpGeneralHardware.Controls.Add(this.grpFRSRegion);
             this.tpGeneralHardware.Controls.Add(this.chkGeneralUseSi570);
             this.tpGeneralHardware.Controls.Add(this.grpGeneralModel);
@@ -3268,20 +3291,110 @@ namespace PowerSDR
             this.tpGeneralHardware.Controls.Add(this.chkGeneralRXOnly);
             this.tpGeneralHardware.Controls.Add(this.grpHWSoftRock);
             this.tpGeneralHardware.Controls.Add(this.grpSI570);
-            this.tpGeneralHardware.Controls.Add(this.grpGeneralDDS);
             this.tpGeneralHardware.Controls.Add(this.groupBoxHPSDRHW);
             this.tpGeneralHardware.Controls.Add(this.grpGeneralHardwareFLEX5000);
             this.tpGeneralHardware.Controls.Add(this.grpGeneralHardwareSDR1000);
+            this.tpGeneralHardware.Controls.Add(this.grpGeneralDDS);
             this.tpGeneralHardware.Location = new System.Drawing.Point(4, 22);
             this.tpGeneralHardware.Name = "tpGeneralHardware";
             this.tpGeneralHardware.Size = new System.Drawing.Size(592, 318);
             this.tpGeneralHardware.TabIndex = 0;
             this.tpGeneralHardware.Text = "Hardware Config";
             // 
+            // grpMetisAddr
+            // 
+            this.grpMetisAddr.Controls.Add(this.labelTS16);
+            this.grpMetisAddr.Controls.Add(this.labelTS9);
+            this.grpMetisAddr.Controls.Add(this.lblMetisMAC);
+            this.grpMetisAddr.Controls.Add(this.lblMetisIP);
+            this.grpMetisAddr.Location = new System.Drawing.Point(326, 91);
+            this.grpMetisAddr.Name = "grpMetisAddr";
+            this.grpMetisAddr.Size = new System.Drawing.Size(216, 56);
+            this.grpMetisAddr.TabIndex = 35;
+            this.grpMetisAddr.TabStop = false;
+            this.grpMetisAddr.Text = "Metis  Address";
+            this.grpMetisAddr.Visible = false;
+            // 
+            // labelTS16
+            // 
+            this.labelTS16.Image = null;
+            this.labelTS16.Location = new System.Drawing.Point(8, 16);
+            this.labelTS16.Name = "labelTS16";
+            this.labelTS16.Size = new System.Drawing.Size(20, 16);
+            this.labelTS16.TabIndex = 3;
+            this.labelTS16.Text = "IP:";
+            // 
+            // labelTS9
+            // 
+            this.labelTS9.Image = null;
+            this.labelTS9.Location = new System.Drawing.Point(8, 34);
+            this.labelTS9.Name = "labelTS9";
+            this.labelTS9.Size = new System.Drawing.Size(34, 16);
+            this.labelTS9.TabIndex = 2;
+            this.labelTS9.Text = "MAC:";
+            // 
+            // lblMetisMAC
+            // 
+            this.lblMetisMAC.Image = null;
+            this.lblMetisMAC.Location = new System.Drawing.Point(46, 34);
+            this.lblMetisMAC.Name = "lblMetisMAC";
+            this.lblMetisMAC.Size = new System.Drawing.Size(128, 16);
+            this.lblMetisMAC.TabIndex = 1;
+            this.lblMetisMAC.Text = "00:00:00:00:00:00";
+            // 
+            // lblMetisIP
+            // 
+            this.lblMetisIP.Image = null;
+            this.lblMetisIP.Location = new System.Drawing.Point(46, 16);
+            this.lblMetisIP.Name = "lblMetisIP";
+            this.lblMetisIP.Size = new System.Drawing.Size(128, 16);
+            this.lblMetisIP.TabIndex = 0;
+            this.lblMetisIP.Text = "0.0.0.0";
+            // 
+            // grpOzyType
+            // 
+            this.grpOzyType.Controls.Add(this.radMetis);
+            this.grpOzyType.Controls.Add(this.radOzyUSB);
+            this.grpOzyType.Location = new System.Drawing.Point(326, 8);
+            this.grpOzyType.Name = "grpOzyType";
+            this.grpOzyType.Size = new System.Drawing.Size(150, 77);
+            this.grpOzyType.TabIndex = 34;
+            this.grpOzyType.TabStop = false;
+            this.grpOzyType.Text = "Connection Type";
+            this.grpOzyType.Visible = false;
+            // 
+            // radMetis
+            // 
+            this.radMetis.AutoSize = true;
+            this.radMetis.Image = null;
+            this.radMetis.Location = new System.Drawing.Point(16, 40);
+            this.radMetis.Name = "radMetis";
+            this.radMetis.Size = new System.Drawing.Size(99, 17);
+            this.radMetis.TabIndex = 1;
+            this.radMetis.TabStop = true;
+            this.radMetis.Text = "Metis (Ethernet)";
+            this.toolTip1.SetToolTip(this.radMetis, "Select if using Ozy Board");
+            this.radMetis.UseVisualStyleBackColor = true;
+            this.radMetis.CheckedChanged += new System.EventHandler(this.radMetis_CheckedChanged);
+            // 
+            // radOzyUSB
+            // 
+            this.radOzyUSB.AutoSize = true;
+            this.radOzyUSB.Image = null;
+            this.radOzyUSB.Location = new System.Drawing.Point(16, 20);
+            this.radOzyUSB.Name = "radOzyUSB";
+            this.radOzyUSB.Size = new System.Drawing.Size(74, 17);
+            this.radOzyUSB.TabIndex = 0;
+            this.radOzyUSB.TabStop = true;
+            this.radOzyUSB.Text = "Ozy (USB)";
+            this.toolTip1.SetToolTip(this.radOzyUSB, "Select if using Ozy Board");
+            this.radOzyUSB.UseVisualStyleBackColor = true;
+            this.radOzyUSB.CheckedChanged += new System.EventHandler(this.radOzyUSB_CheckedChanged);
+            // 
             // grpFRSRegion
             // 
             this.grpFRSRegion.Controls.Add(this.comboFRSRegion);
-            this.grpFRSRegion.Location = new System.Drawing.Point(467, 152);
+            this.grpFRSRegion.Location = new System.Drawing.Point(455, 160);
             this.grpFRSRegion.Name = "grpFRSRegion";
             this.grpFRSRegion.Size = new System.Drawing.Size(110, 55);
             this.grpFRSRegion.TabIndex = 33;
@@ -3343,7 +3456,7 @@ namespace PowerSDR
             this.radGenModelHermes.Name = "radGenModelHermes";
             this.radGenModelHermes.Size = new System.Drawing.Size(88, 24);
             this.radGenModelHermes.TabIndex = 5;
-            this.radGenModelHermes.Text = "Hermes";
+            this.radGenModelHermes.Text = "HERMES";
             this.radGenModelHermes.UseVisualStyleBackColor = true;
             this.radGenModelHermes.CheckedChanged += new System.EventHandler(this.radGenModelHermes_CheckedChanged);
             // 
@@ -3526,155 +3639,6 @@ namespace PowerSDR
             0,
             0,
             0});
-            // 
-            // grpGeneralDDS
-            // 
-            this.grpGeneralDDS.Controls.Add(this.chkGenDDSExpert);
-            this.grpGeneralDDS.Controls.Add(this.udDDSCorrection);
-            this.grpGeneralDDS.Controls.Add(this.lblClockCorrection);
-            this.grpGeneralDDS.Controls.Add(this.udDDSIFFreq);
-            this.grpGeneralDDS.Controls.Add(this.lblIFFrequency);
-            this.grpGeneralDDS.Controls.Add(this.udDDSPLLMult);
-            this.grpGeneralDDS.Controls.Add(this.lblPLLMult);
-            this.grpGeneralDDS.Location = new System.Drawing.Point(328, 8);
-            this.grpGeneralDDS.Name = "grpGeneralDDS";
-            this.grpGeneralDDS.Size = new System.Drawing.Size(176, 136);
-            this.grpGeneralDDS.TabIndex = 4;
-            this.grpGeneralDDS.TabStop = false;
-            this.grpGeneralDDS.Text = "DDS";
-            // 
-            // chkGenDDSExpert
-            // 
-            this.chkGenDDSExpert.Image = null;
-            this.chkGenDDSExpert.Location = new System.Drawing.Point(56, 104);
-            this.chkGenDDSExpert.Name = "chkGenDDSExpert";
-            this.chkGenDDSExpert.Size = new System.Drawing.Size(56, 24);
-            this.chkGenDDSExpert.TabIndex = 8;
-            this.chkGenDDSExpert.Text = "Expert";
-            this.chkGenDDSExpert.CheckedChanged += new System.EventHandler(this.chkGenDDSExpert_CheckedChanged);
-            // 
-            // udDDSCorrection
-            // 
-            this.udDDSCorrection.Increment = new decimal(new int[] {
-            10,
-            0,
-            0,
-            0});
-            this.udDDSCorrection.Location = new System.Drawing.Point(104, 24);
-            this.udDDSCorrection.Maximum = new decimal(new int[] {
-            1000000,
-            0,
-            0,
-            0});
-            this.udDDSCorrection.Minimum = new decimal(new int[] {
-            1000000,
-            0,
-            0,
-            -2147483648});
-            this.udDDSCorrection.Name = "udDDSCorrection";
-            this.udDDSCorrection.Size = new System.Drawing.Size(64, 20);
-            this.udDDSCorrection.TabIndex = 7;
-            this.toolTip1.SetToolTip(this.udDDSCorrection, "Correction for DDS frequency");
-            this.udDDSCorrection.Value = new decimal(new int[] {
-            0,
-            0,
-            0,
-            0});
-            this.udDDSCorrection.Visible = false;
-            this.udDDSCorrection.ValueChanged += new System.EventHandler(this.udDDSCorrection_ValueChanged);
-            this.udDDSCorrection.LostFocus += new System.EventHandler(this.udDDSCorrection_LostFocus);
-            // 
-            // lblClockCorrection
-            // 
-            this.lblClockCorrection.Image = null;
-            this.lblClockCorrection.Location = new System.Drawing.Point(16, 24);
-            this.lblClockCorrection.Name = "lblClockCorrection";
-            this.lblClockCorrection.Size = new System.Drawing.Size(72, 23);
-            this.lblClockCorrection.TabIndex = 6;
-            this.lblClockCorrection.Text = "Clock Offset:";
-            this.lblClockCorrection.Visible = false;
-            // 
-            // udDDSIFFreq
-            // 
-            this.udDDSIFFreq.Increment = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.udDDSIFFreq.Location = new System.Drawing.Point(112, 72);
-            this.udDDSIFFreq.Maximum = new decimal(new int[] {
-            20000,
-            0,
-            0,
-            0});
-            this.udDDSIFFreq.Minimum = new decimal(new int[] {
-            0,
-            0,
-            0,
-            0});
-            this.udDDSIFFreq.Name = "udDDSIFFreq";
-            this.udDDSIFFreq.Size = new System.Drawing.Size(56, 20);
-            this.udDDSIFFreq.TabIndex = 5;
-            this.toolTip1.SetToolTip(this.udDDSIFFreq, "Intermediate Frequency");
-            this.udDDSIFFreq.Value = new decimal(new int[] {
-            9000,
-            0,
-            0,
-            0});
-            this.udDDSIFFreq.Visible = false;
-            this.udDDSIFFreq.ValueChanged += new System.EventHandler(this.udDDSIFFreq_ValueChanged);
-            this.udDDSIFFreq.LostFocus += new System.EventHandler(this.udDDSIFFreq_LostFocus);
-            // 
-            // lblIFFrequency
-            // 
-            this.lblIFFrequency.Image = null;
-            this.lblIFFrequency.Location = new System.Drawing.Point(16, 72);
-            this.lblIFFrequency.Name = "lblIFFrequency";
-            this.lblIFFrequency.Size = new System.Drawing.Size(48, 23);
-            this.lblIFFrequency.TabIndex = 4;
-            this.lblIFFrequency.Text = "IF (Hz):";
-            this.lblIFFrequency.Visible = false;
-            // 
-            // udDDSPLLMult
-            // 
-            this.udDDSPLLMult.Increment = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.udDDSPLLMult.Location = new System.Drawing.Point(120, 48);
-            this.udDDSPLLMult.Maximum = new decimal(new int[] {
-            20,
-            0,
-            0,
-            0});
-            this.udDDSPLLMult.Minimum = new decimal(new int[] {
-            0,
-            0,
-            0,
-            0});
-            this.udDDSPLLMult.Name = "udDDSPLLMult";
-            this.udDDSPLLMult.Size = new System.Drawing.Size(48, 20);
-            this.udDDSPLLMult.TabIndex = 3;
-            this.toolTip1.SetToolTip(this.udDDSPLLMult, "Multiplier for external clock (1 if using internal clock)");
-            this.udDDSPLLMult.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.udDDSPLLMult.Visible = false;
-            this.udDDSPLLMult.ValueChanged += new System.EventHandler(this.udDDSPLLMult_ValueChanged);
-            this.udDDSPLLMult.LostFocus += new System.EventHandler(this.udDDSPLLMult_LostFocus);
-            // 
-            // lblPLLMult
-            // 
-            this.lblPLLMult.Image = null;
-            this.lblPLLMult.Location = new System.Drawing.Point(16, 48);
-            this.lblPLLMult.Name = "lblPLLMult";
-            this.lblPLLMult.Size = new System.Drawing.Size(80, 23);
-            this.lblPLLMult.TabIndex = 2;
-            this.lblPLLMult.Text = "PLL Multiplier:";
-            this.lblPLLMult.Visible = false;
             // 
             // groupBoxHPSDRHW
             // 
@@ -4051,6 +4015,155 @@ namespace PowerSDR
             this.comboGeneralLPTAddr.LostFocus += new System.EventHandler(this.comboGeneralLPTAddr_LostFocus);
             this.comboGeneralLPTAddr.SelectedIndexChanged += new System.EventHandler(this.comboGeneralLPTAddr_SelectedIndexChanged);
             this.comboGeneralLPTAddr.KeyDown += new System.Windows.Forms.KeyEventHandler(this.comboGeneralLPTAddr_KeyDown);
+            // 
+            // grpGeneralDDS
+            // 
+            this.grpGeneralDDS.Controls.Add(this.chkGenDDSExpert);
+            this.grpGeneralDDS.Controls.Add(this.udDDSCorrection);
+            this.grpGeneralDDS.Controls.Add(this.lblClockCorrection);
+            this.grpGeneralDDS.Controls.Add(this.udDDSIFFreq);
+            this.grpGeneralDDS.Controls.Add(this.lblIFFrequency);
+            this.grpGeneralDDS.Controls.Add(this.udDDSPLLMult);
+            this.grpGeneralDDS.Controls.Add(this.lblPLLMult);
+            this.grpGeneralDDS.Location = new System.Drawing.Point(328, 8);
+            this.grpGeneralDDS.Name = "grpGeneralDDS";
+            this.grpGeneralDDS.Size = new System.Drawing.Size(176, 136);
+            this.grpGeneralDDS.TabIndex = 4;
+            this.grpGeneralDDS.TabStop = false;
+            this.grpGeneralDDS.Text = "DDS";
+            // 
+            // chkGenDDSExpert
+            // 
+            this.chkGenDDSExpert.Image = null;
+            this.chkGenDDSExpert.Location = new System.Drawing.Point(56, 104);
+            this.chkGenDDSExpert.Name = "chkGenDDSExpert";
+            this.chkGenDDSExpert.Size = new System.Drawing.Size(56, 24);
+            this.chkGenDDSExpert.TabIndex = 8;
+            this.chkGenDDSExpert.Text = "Expert";
+            this.chkGenDDSExpert.CheckedChanged += new System.EventHandler(this.chkGenDDSExpert_CheckedChanged);
+            // 
+            // udDDSCorrection
+            // 
+            this.udDDSCorrection.Increment = new decimal(new int[] {
+            10,
+            0,
+            0,
+            0});
+            this.udDDSCorrection.Location = new System.Drawing.Point(104, 24);
+            this.udDDSCorrection.Maximum = new decimal(new int[] {
+            1000000,
+            0,
+            0,
+            0});
+            this.udDDSCorrection.Minimum = new decimal(new int[] {
+            1000000,
+            0,
+            0,
+            -2147483648});
+            this.udDDSCorrection.Name = "udDDSCorrection";
+            this.udDDSCorrection.Size = new System.Drawing.Size(64, 20);
+            this.udDDSCorrection.TabIndex = 7;
+            this.toolTip1.SetToolTip(this.udDDSCorrection, "Correction for DDS frequency");
+            this.udDDSCorrection.Value = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+            this.udDDSCorrection.Visible = false;
+            this.udDDSCorrection.ValueChanged += new System.EventHandler(this.udDDSCorrection_ValueChanged);
+            this.udDDSCorrection.LostFocus += new System.EventHandler(this.udDDSCorrection_LostFocus);
+            // 
+            // lblClockCorrection
+            // 
+            this.lblClockCorrection.Image = null;
+            this.lblClockCorrection.Location = new System.Drawing.Point(16, 24);
+            this.lblClockCorrection.Name = "lblClockCorrection";
+            this.lblClockCorrection.Size = new System.Drawing.Size(72, 23);
+            this.lblClockCorrection.TabIndex = 6;
+            this.lblClockCorrection.Text = "Clock Offset:";
+            this.lblClockCorrection.Visible = false;
+            // 
+            // udDDSIFFreq
+            // 
+            this.udDDSIFFreq.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.udDDSIFFreq.Location = new System.Drawing.Point(112, 72);
+            this.udDDSIFFreq.Maximum = new decimal(new int[] {
+            20000,
+            0,
+            0,
+            0});
+            this.udDDSIFFreq.Minimum = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+            this.udDDSIFFreq.Name = "udDDSIFFreq";
+            this.udDDSIFFreq.Size = new System.Drawing.Size(56, 20);
+            this.udDDSIFFreq.TabIndex = 5;
+            this.toolTip1.SetToolTip(this.udDDSIFFreq, "Intermediate Frequency");
+            this.udDDSIFFreq.Value = new decimal(new int[] {
+            9000,
+            0,
+            0,
+            0});
+            this.udDDSIFFreq.Visible = false;
+            this.udDDSIFFreq.ValueChanged += new System.EventHandler(this.udDDSIFFreq_ValueChanged);
+            this.udDDSIFFreq.LostFocus += new System.EventHandler(this.udDDSIFFreq_LostFocus);
+            // 
+            // lblIFFrequency
+            // 
+            this.lblIFFrequency.Image = null;
+            this.lblIFFrequency.Location = new System.Drawing.Point(16, 72);
+            this.lblIFFrequency.Name = "lblIFFrequency";
+            this.lblIFFrequency.Size = new System.Drawing.Size(48, 23);
+            this.lblIFFrequency.TabIndex = 4;
+            this.lblIFFrequency.Text = "IF (Hz):";
+            this.lblIFFrequency.Visible = false;
+            // 
+            // udDDSPLLMult
+            // 
+            this.udDDSPLLMult.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.udDDSPLLMult.Location = new System.Drawing.Point(120, 48);
+            this.udDDSPLLMult.Maximum = new decimal(new int[] {
+            20,
+            0,
+            0,
+            0});
+            this.udDDSPLLMult.Minimum = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+            this.udDDSPLLMult.Name = "udDDSPLLMult";
+            this.udDDSPLLMult.Size = new System.Drawing.Size(48, 20);
+            this.udDDSPLLMult.TabIndex = 3;
+            this.toolTip1.SetToolTip(this.udDDSPLLMult, "Multiplier for external clock (1 if using internal clock)");
+            this.udDDSPLLMult.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.udDDSPLLMult.Visible = false;
+            this.udDDSPLLMult.ValueChanged += new System.EventHandler(this.udDDSPLLMult_ValueChanged);
+            this.udDDSPLLMult.LostFocus += new System.EventHandler(this.udDDSPLLMult_LostFocus);
+            // 
+            // lblPLLMult
+            // 
+            this.lblPLLMult.Image = null;
+            this.lblPLLMult.Location = new System.Drawing.Point(16, 48);
+            this.lblPLLMult.Name = "lblPLLMult";
+            this.lblPLLMult.Size = new System.Drawing.Size(80, 23);
+            this.lblPLLMult.TabIndex = 2;
+            this.lblPLLMult.Text = "PLL Multiplier:";
+            this.lblPLLMult.Visible = false;
             // 
             // tpGeneralOptions
             // 
@@ -7632,7 +7745,7 @@ namespace PowerSDR
             this.lblRealeaseDate.Name = "lblRealeaseDate";
             this.lblRealeaseDate.Size = new System.Drawing.Size(130, 16);
             this.lblRealeaseDate.TabIndex = 4;
-            this.lblRealeaseDate.Text = "W5WC - 06/12/2010";
+            this.lblRealeaseDate.Text = "W5WC - 12/26/2010";
             // 
             // lblPenelopeFWVer
             // 
@@ -20966,22 +21079,25 @@ namespace PowerSDR
             this.tpGeneral.ResumeLayout(false);
             this.tcGeneral.ResumeLayout(false);
             this.tpGeneralHardware.ResumeLayout(false);
+            this.grpMetisAddr.ResumeLayout(false);
+            this.grpOzyType.ResumeLayout(false);
+            this.grpOzyType.PerformLayout();
             this.grpFRSRegion.ResumeLayout(false);
             this.grpGeneralModel.ResumeLayout(false);
             this.grpHWSoftRock.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.udSoftRockCenterFreq)).EndInit();
             this.grpSI570.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.udFXtal)).EndInit();
-            this.grpGeneralDDS.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.udDDSCorrection)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.udDDSIFFreq)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.udDDSPLLMult)).EndInit();
             this.groupBoxHPSDRHW.ResumeLayout(false);
             this.groupBoxHPSDRHW.PerformLayout();
             this.grpGeneralHardwareFLEX5000.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.udF3KFanTempThresh)).EndInit();
             this.grpGeneralHardwareSDR1000.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.udGeneralLPTDelay)).EndInit();
+            this.grpGeneralDDS.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.udDDSCorrection)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.udDDSIFFreq)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.udDDSPLLMult)).EndInit();
             this.tpGeneralOptions.ResumeLayout(false);
             this.grpGenCustomTitleText.ResumeLayout(false);
             this.grpGenCustomTitleText.PerformLayout();
@@ -21284,197 +21400,197 @@ namespace PowerSDR
             this.grpTestAudioBalance.ResumeLayout(false);
             this.ResumeLayout(false);
 
-		}
-		#endregion
+        }
+        #endregion
 
-		#region Init Routines
-		// ======================================================
-		// Init Routines
-		// ======================================================
+        #region Init Routines
+        // ======================================================
+        // Init Routines
+        // ======================================================
 
-		private void InitGeneralTab()
-		{
-			if(console.Hdw != null)
+        private void InitGeneralTab()
+        {
+            if (console.Hdw != null)
                 comboGeneralLPTAddr.Text = Convert.ToString(console.Hdw.LPTAddr, 16);
-			udGeneralLPTDelay.Value = console.LatchDelay;
-			chkGeneralRXOnly.Checked = console.RXOnly;
-			chkGeneralUSBPresent.Checked = console.USBPresent;
+            udGeneralLPTDelay.Value = console.LatchDelay;
+            chkGeneralRXOnly.Checked = console.RXOnly;
+            chkGeneralUSBPresent.Checked = console.USBPresent;
             chkBoxJanusOzyControl.Checked = console.OzyControl;
-			chkGeneralPAPresent.Checked = console.PAPresent;
-			chkGeneralXVTRPresent.Checked = console.XVTRPresent;
-			comboGeneralXVTR.SelectedItem = (int)console.CurrentXVTRTRMode;
-			chkGeneralSpurRed.Checked = true;
-			chkGeneralDisablePTT.Checked = console.DisablePTT;
-			chkGeneralSoftwareGainCorr.Checked = console.NoHardwareOffset;
-			chkGeneralEnableX2.Checked = console.X2Enabled;
-			chkGeneralCustomFilter.Checked = console.EnableLPF0;
-			chkGeneralUpdateRelease.Checked = console.NotifyOnRelease;
-			chkGeneralUpdateBeta.Checked = console.NotifyOnBeta;
-		}
+            chkGeneralPAPresent.Checked = console.PAPresent;
+            chkGeneralXVTRPresent.Checked = console.XVTRPresent;
+            comboGeneralXVTR.SelectedItem = (int)console.CurrentXVTRTRMode;
+            chkGeneralSpurRed.Checked = true;
+            chkGeneralDisablePTT.Checked = console.DisablePTT;
+            chkGeneralSoftwareGainCorr.Checked = console.NoHardwareOffset;
+            chkGeneralEnableX2.Checked = console.X2Enabled;
+            chkGeneralCustomFilter.Checked = console.EnableLPF0;
+            chkGeneralUpdateRelease.Checked = console.NotifyOnRelease;
+            chkGeneralUpdateBeta.Checked = console.NotifyOnBeta;
+        }
 
-		private void InitAudioTab()
-		{
-			// set driver type
-			if(comboAudioDriver1.SelectedIndex < 0 &&
-				comboAudioDriver1.Items.Count > 0)
-			{
-				foreach(PADeviceInfo p in comboAudioDriver1.Items)
-				{
-					if(p.Name == "ASIO")
-					{
-						comboAudioDriver1.SelectedItem = p;
-						break;
-					}
-				}
+        private void InitAudioTab()
+        {
+            // set driver type
+            if (comboAudioDriver1.SelectedIndex < 0 &&
+                comboAudioDriver1.Items.Count > 0)
+            {
+                foreach (PADeviceInfo p in comboAudioDriver1.Items)
+                {
+                    if (p.Name == "ASIO")
+                    {
+                        comboAudioDriver1.SelectedItem = p;
+                        break;
+                    }
+                }
 
-				if(comboAudioDriver1.Text != "ASIO")
-					comboAudioDriver1.Text = "MME";
-			}
+                if (comboAudioDriver1.Text != "ASIO")
+                    comboAudioDriver1.Text = "MME";
+            }
 
-			// set Input device
-			if(comboAudioInput1.Items.Count > 0)
-				comboAudioInput1.SelectedIndex = 0;
+            // set Input device
+            if (comboAudioInput1.Items.Count > 0)
+                comboAudioInput1.SelectedIndex = 0;
 
-			// set Output device
-			if(comboAudioOutput1.Items.Count > 0)
-				comboAudioOutput1.SelectedIndex = 0;
-			
-			// set sample rate
-			comboAudioSampleRate1.Text = "96000";
+            // set Output device
+            if (comboAudioOutput1.Items.Count > 0)
+                comboAudioOutput1.SelectedIndex = 0;
 
-			if(comboAudioReceive1.Enabled == true)
-			{
-				for(int i=0; i<comboAudioReceive1.Items.Count; i++)
-				{
-					if(((string)comboAudioReceive1.Items[i]).StartsWith("Line"))
-					{
-						comboAudioReceive1.SelectedIndex = i;
-						i = comboAudioReceive1.Items.Count;
-					}
-				}
-			}
+            // set sample rate
+            comboAudioSampleRate1.Text = "96000";
 
-			if(comboAudioTransmit1.Enabled == true)
-			{
-				for(int i=0; i<comboAudioTransmit1.Items.Count; i++)
-				{
-					if(((string)comboAudioTransmit1.Items[i]).StartsWith("Mic"))
-					{
-						comboAudioTransmit1.SelectedIndex = i;
-						i = comboAudioTransmit1.Items.Count;
-					}
-				}
-			}
+            if (comboAudioReceive1.Enabled == true)
+            {
+                for (int i = 0; i < comboAudioReceive1.Items.Count; i++)
+                {
+                    if (((string)comboAudioReceive1.Items[i]).StartsWith("Line"))
+                    {
+                        comboAudioReceive1.SelectedIndex = i;
+                        i = comboAudioReceive1.Items.Count;
+                    }
+                }
+            }
 
-			comboAudioBuffer1.Text = "2048";
-			udAudioLatency1.Value = Audio.Latency1;
-		}
+            if (comboAudioTransmit1.Enabled == true)
+            {
+                for (int i = 0; i < comboAudioTransmit1.Items.Count; i++)
+                {
+                    if (((string)comboAudioTransmit1.Items[i]).StartsWith("Mic"))
+                    {
+                        comboAudioTransmit1.SelectedIndex = i;
+                        i = comboAudioTransmit1.Items.Count;
+                    }
+                }
+            }
 
-		private void InitDisplayTab()
-		{
-			udDisplayGridMax.Value = Display.SpectrumGridMax;
-			udDisplayGridMin.Value = Display.SpectrumGridMin;
-			udDisplayGridStep.Value = Display.SpectrumGridStep;
-			udDisplayFPS.Value = console.DisplayFPS;
-			clrbtnWaterfallLow.Color = Display.WaterfallLowColor;
-			udDisplayWaterfallLowLevel.Value = (decimal)Display.WaterfallLowThreshold;
-			udDisplayWaterfallHighLevel.Value = (decimal)Display.WaterfallHighThreshold;
-			udDisplayMeterDelay.Value = console.MeterDelay;
-			udDisplayPeakText.Value = console.PeakTextDelay;
-			udDisplayCPUMeter.Value = console.CPUMeterDelay;
-			udDisplayPhasePts.Value = Display.PhaseNumPts;
-			udDisplayMultiPeakHoldTime.Value = console.MultimeterPeakHoldTime;
-			udDisplayMultiTextHoldTime.Value = console.MultimeterTextPeakTime;
-		}
+            comboAudioBuffer1.Text = "2048";
+            udAudioLatency1.Value = Audio.Latency1;
+        }
 
-		private void InitDSPTab()
-		{
-			udDSPCWPitch.Value = console.CWPitch;
-			comboDSPWindow.SelectedIndex = (int)console.radio.GetDSPRX(0, 0).CurrentWindow;
-		}
+        private void InitDisplayTab()
+        {
+            udDisplayGridMax.Value = Display.SpectrumGridMax;
+            udDisplayGridMin.Value = Display.SpectrumGridMin;
+            udDisplayGridStep.Value = Display.SpectrumGridStep;
+            udDisplayFPS.Value = console.DisplayFPS;
+            clrbtnWaterfallLow.Color = Display.WaterfallLowColor;
+            udDisplayWaterfallLowLevel.Value = (decimal)Display.WaterfallLowThreshold;
+            udDisplayWaterfallHighLevel.Value = (decimal)Display.WaterfallHighThreshold;
+            udDisplayMeterDelay.Value = console.MeterDelay;
+            udDisplayPeakText.Value = console.PeakTextDelay;
+            udDisplayCPUMeter.Value = console.CPUMeterDelay;
+            udDisplayPhasePts.Value = Display.PhaseNumPts;
+            udDisplayMultiPeakHoldTime.Value = console.MultimeterPeakHoldTime;
+            udDisplayMultiTextHoldTime.Value = console.MultimeterTextPeakTime;
+        }
 
-		private void InitKeyboardTab()
-		{
-			// set tune keys
-			comboKBTuneUp1.Text = KeyToString(console.KeyTuneUp1);
-			comboKBTuneUp2.Text = KeyToString(console.KeyTuneUp2);
-			comboKBTuneUp3.Text = KeyToString(console.KeyTuneUp3);
-			comboKBTuneUp4.Text = KeyToString(console.KeyTuneUp4);
-			comboKBTuneUp5.Text = KeyToString(console.KeyTuneUp5);
-			comboKBTuneUp6.Text = KeyToString(console.KeyTuneUp6);
-			comboKBTuneUp7.Text = KeyToString(console.KeyTuneUp7);
-			comboKBTuneDown1.Text = KeyToString(console.KeyTuneDown1);
-			comboKBTuneDown2.Text = KeyToString(console.KeyTuneDown2);
-			comboKBTuneDown3.Text = KeyToString(console.KeyTuneDown3);
-			comboKBTuneDown4.Text = KeyToString(console.KeyTuneDown4);
-			comboKBTuneDown5.Text = KeyToString(console.KeyTuneDown5);
-			comboKBTuneDown6.Text = KeyToString(console.KeyTuneDown6);
-			comboKBTuneDown7.Text = KeyToString(console.KeyTuneDown7);
+        private void InitDSPTab()
+        {
+            udDSPCWPitch.Value = console.CWPitch;
+            comboDSPWindow.SelectedIndex = (int)console.radio.GetDSPRX(0, 0).CurrentWindow;
+        }
 
-			// set band keys
-			comboKBBandDown.Text = KeyToString(console.KeyBandDown);
-			comboKBBandUp.Text = KeyToString(console.KeyBandUp);			
+        private void InitKeyboardTab()
+        {
+            // set tune keys
+            comboKBTuneUp1.Text = KeyToString(console.KeyTuneUp1);
+            comboKBTuneUp2.Text = KeyToString(console.KeyTuneUp2);
+            comboKBTuneUp3.Text = KeyToString(console.KeyTuneUp3);
+            comboKBTuneUp4.Text = KeyToString(console.KeyTuneUp4);
+            comboKBTuneUp5.Text = KeyToString(console.KeyTuneUp5);
+            comboKBTuneUp6.Text = KeyToString(console.KeyTuneUp6);
+            comboKBTuneUp7.Text = KeyToString(console.KeyTuneUp7);
+            comboKBTuneDown1.Text = KeyToString(console.KeyTuneDown1);
+            comboKBTuneDown2.Text = KeyToString(console.KeyTuneDown2);
+            comboKBTuneDown3.Text = KeyToString(console.KeyTuneDown3);
+            comboKBTuneDown4.Text = KeyToString(console.KeyTuneDown4);
+            comboKBTuneDown5.Text = KeyToString(console.KeyTuneDown5);
+            comboKBTuneDown6.Text = KeyToString(console.KeyTuneDown6);
+            comboKBTuneDown7.Text = KeyToString(console.KeyTuneDown7);
 
-			// set filter keys
-			comboKBFilterDown.Text = KeyToString(console.KeyFilterDown);
-			comboKBFilterUp.Text = KeyToString(console.KeyFilterUp);			
+            // set band keys
+            comboKBBandDown.Text = KeyToString(console.KeyBandDown);
+            comboKBBandUp.Text = KeyToString(console.KeyBandUp);
 
-			// set mode keys
-			comboKBModeDown.Text = KeyToString(console.KeyModeDown);
-			comboKBModeUp.Text = KeyToString(console.KeyModeUp);
+            // set filter keys
+            comboKBFilterDown.Text = KeyToString(console.KeyFilterDown);
+            comboKBFilterUp.Text = KeyToString(console.KeyFilterUp);
 
-			// set RIT keys
-			comboKBRITDown.Text = KeyToString(console.KeyRITDown);
-			comboKBRITUp.Text = KeyToString(console.KeyRITUp);
+            // set mode keys
+            comboKBModeDown.Text = KeyToString(console.KeyModeDown);
+            comboKBModeUp.Text = KeyToString(console.KeyModeUp);
 
-			// set XIT keys
-			comboKBXITDown.Text = KeyToString(console.KeyXITDown);
-			comboKBXITUp.Text = KeyToString(console.KeyXITUp);
+            // set RIT keys
+            comboKBRITDown.Text = KeyToString(console.KeyRITDown);
+            comboKBRITUp.Text = KeyToString(console.KeyRITUp);
 
-			// set CW keys
-			comboKBCWDot.Text = KeyToString(console.KeyCWDot);
-			comboKBCWDash.Text = KeyToString(console.KeyCWDash);
-		}
+            // set XIT keys
+            comboKBXITDown.Text = KeyToString(console.KeyXITDown);
+            comboKBXITUp.Text = KeyToString(console.KeyXITUp);
 
-		private void InitAppearanceTab()
-		{
-			clrbtnBackground.Color = Display.DisplayBackgroundColor;
-			clrbtnGrid.Color = Display.GridColor;
-			clrbtnZeroLine.Color = Display.GridZeroColor;
-			clrbtnText.Color = Display.GridTextColor;
-			clrbtnDataLine.Color = Display.DataLineColor;
-			clrbtnFilter.Color = Display.DisplayFilterColor;
-			clrbtnMeterLeft.Color = console.MeterLeftColor;
-			clrbtnMeterRight.Color = console.MeterRightColor;
-			clrbtnBtnSel.Color = console.ButtonSelectedColor;
-			clrbtnVFODark.Color = console.VFOTextDarkColor;
-			clrbtnVFOLight.Color = console.VFOTextLightColor;
-			clrbtnBandDark.Color = console.BandTextDarkColor;
-			clrbtnBandLight.Color = console.BandTextLightColor;
-			clrbtnPeakText.Color = console.PeakTextColor;
-			clrbtnOutOfBand.Color = console.OutOfBandColor;
-		}
+            // set CW keys
+            comboKBCWDot.Text = KeyToString(console.KeyCWDot);
+            comboKBCWDash.Text = KeyToString(console.KeyCWDash);
+        }
 
-		#endregion
+        private void InitAppearanceTab()
+        {
+            clrbtnBackground.Color = Display.DisplayBackgroundColor;
+            clrbtnGrid.Color = Display.GridColor;
+            clrbtnZeroLine.Color = Display.GridZeroColor;
+            clrbtnText.Color = Display.GridTextColor;
+            clrbtnDataLine.Color = Display.DataLineColor;
+            clrbtnFilter.Color = Display.DisplayFilterColor;
+            clrbtnMeterLeft.Color = console.MeterLeftColor;
+            clrbtnMeterRight.Color = console.MeterRightColor;
+            clrbtnBtnSel.Color = console.ButtonSelectedColor;
+            clrbtnVFODark.Color = console.VFOTextDarkColor;
+            clrbtnVFOLight.Color = console.VFOTextLightColor;
+            clrbtnBandDark.Color = console.BandTextDarkColor;
+            clrbtnBandLight.Color = console.BandTextLightColor;
+            clrbtnPeakText.Color = console.PeakTextColor;
+            clrbtnOutOfBand.Color = console.OutOfBandColor;
+        }
 
-		#region Misc Routines
-		// ======================================================
-		// Misc Routines
-		// ======================================================
+        #endregion
 
-		private void InitDelta44()
-		{
-			int retval = DeltaCP.Init();
-			if(retval != 0) return;
-			DeltaCP.SetLevels();
-			DeltaCP.Close();
-		}
+        #region Misc Routines
+        // ======================================================
+        // Misc Routines
+        // ======================================================
 
-		private void RefreshCOMPortLists()
-		{
-			string[] com_ports = SerialPort.GetPortNames();
+        private void InitDelta44()
+        {
+            int retval = DeltaCP.Init();
+            if (retval != 0) return;
+            DeltaCP.SetLevels();
+            DeltaCP.Close();
+        }
 
-			comboKeyerConnPrimary.Items.Clear();
+        private void RefreshCOMPortLists()
+        {
+            string[] com_ports = SerialPort.GetPortNames();
+
+            comboKeyerConnPrimary.Items.Clear();
             switch (console.CurrentModel)
             {
                 case Model.FLEX3000:
@@ -21486,21 +21602,21 @@ namespace PowerSDR
                     break;
             }
 
-			comboKeyerConnSecondary.Items.Clear();
-			comboKeyerConnSecondary.Items.Add("None");
-			comboKeyerConnSecondary.Items.Add("CAT");
+            comboKeyerConnSecondary.Items.Clear();
+            comboKeyerConnSecondary.Items.Add("None");
+            comboKeyerConnSecondary.Items.Add("CAT");
 
-			comboCATPort.Items.Clear();
-			comboCATPTTPort.Items.Clear();
+            comboCATPort.Items.Clear();
+            comboCATPTTPort.Items.Clear();
 
-			foreach(string s in com_ports)
-			{
-				comboKeyerConnPrimary.Items.Add(s);
-				comboKeyerConnSecondary.Items.Add(s);
-				comboCATPort.Items.Add(s);
-				comboCATPTTPort.Items.Add(s);
-			}
-		}
+            foreach (string s in com_ports)
+            {
+                comboKeyerConnPrimary.Items.Add(s);
+                comboKeyerConnSecondary.Items.Add(s);
+                comboCATPort.Items.Add(s);
+                comboCATPTTPort.Items.Add(s);
+            }
+        }
 
         private void RefreshSkinList()
         {
@@ -21523,7 +21639,7 @@ namespace PowerSDR
             foreach (string d in Directory.GetDirectories(path))
             {
                 string s = d.Substring(d.LastIndexOf("\\") + 1);
-                if(!s.StartsWith("."))
+                if (!s.StartsWith("."))
                     comboAppSkin.Items.Add(d.Substring(d.LastIndexOf("\\") + 1));
             }
 
@@ -21545,116 +21661,116 @@ namespace PowerSDR
             else comboAppSkin.Text = "Default";
         }
 
-		private void InitWindowTypes()
-		{
-			for(Window w = Window.FIRST+1; w<Window.LAST; w++)
-			{
-				string s = w.ToString().ToLower();
-				s = s.Substring(0, 1).ToUpper() + s.Substring(1, s.Length-1);
-				comboDSPWindow.Items.Add(s);
-			}
-		}
+        private void InitWindowTypes()
+        {
+            for (Window w = Window.FIRST + 1; w < Window.LAST; w++)
+            {
+                string s = w.ToString().ToLower();
+                s = s.Substring(0, 1).ToUpper() + s.Substring(1, s.Length - 1);
+                comboDSPWindow.Items.Add(s);
+            }
+        }
 
-		private void GetHosts()
-		{
-			comboAudioDriver1.Items.Clear();
-			comboAudioDriver2.Items.Clear();
-			int host_index = 0;
-			foreach(string PAHostName in Audio.GetPAHosts())
-			{
-				if(Audio.GetPAInputDevices(host_index).Count > 0 ||
-					Audio.GetPAOutputDevices(host_index).Count > 0)
-				{
-					comboAudioDriver1.Items.Add(new PADeviceInfo(PAHostName, host_index));
-					comboAudioDriver2.Items.Add(new PADeviceInfo(PAHostName, host_index));
-				}
-				host_index++; //Increment host index
-			}	
-		}
+        private void GetHosts()
+        {
+            comboAudioDriver1.Items.Clear();
+            comboAudioDriver2.Items.Clear();
+            int host_index = 0;
+            foreach (string PAHostName in Audio.GetPAHosts())
+            {
+                if (Audio.GetPAInputDevices(host_index).Count > 0 ||
+                    Audio.GetPAOutputDevices(host_index).Count > 0)
+                {
+                    comboAudioDriver1.Items.Add(new PADeviceInfo(PAHostName, host_index));
+                    comboAudioDriver2.Items.Add(new PADeviceInfo(PAHostName, host_index));
+                }
+                host_index++; //Increment host index
+            }
+        }
 
-		private void GetDevices1()
-		{
-			comboAudioInput1.Items.Clear();
-			comboAudioOutput1.Items.Clear();
-			int host = ((PADeviceInfo)comboAudioDriver1.SelectedItem).Index;
-			ArrayList a = Audio.GetPAInputDevices(host);
-			foreach(PADeviceInfo p in a)
-				comboAudioInput1.Items.Add(p);
+        private void GetDevices1()
+        {
+            comboAudioInput1.Items.Clear();
+            comboAudioOutput1.Items.Clear();
+            int host = ((PADeviceInfo)comboAudioDriver1.SelectedItem).Index;
+            ArrayList a = Audio.GetPAInputDevices(host);
+            foreach (PADeviceInfo p in a)
+                comboAudioInput1.Items.Add(p);
 
-			a = Audio.GetPAOutputDevices(host);
-			foreach(PADeviceInfo p in a)
-				comboAudioOutput1.Items.Add(p);
-		}
+            a = Audio.GetPAOutputDevices(host);
+            foreach (PADeviceInfo p in a)
+                comboAudioOutput1.Items.Add(p);
+        }
 
-		private void GetDevices2()
-		{
-			comboAudioInput2.Items.Clear();
-			comboAudioOutput2.Items.Clear();
-			int host = ((PADeviceInfo)comboAudioDriver2.SelectedItem).Index;
-			ArrayList a = Audio.GetPAInputDevices(host);
-			foreach(PADeviceInfo p in a)
-				comboAudioInput2.Items.Add(p);
+        private void GetDevices2()
+        {
+            comboAudioInput2.Items.Clear();
+            comboAudioOutput2.Items.Clear();
+            int host = ((PADeviceInfo)comboAudioDriver2.SelectedItem).Index;
+            ArrayList a = Audio.GetPAInputDevices(host);
+            foreach (PADeviceInfo p in a)
+                comboAudioInput2.Items.Add(p);
 
-			a = Audio.GetPAOutputDevices(host);
-			foreach(PADeviceInfo p in a)
-				comboAudioOutput2.Items.Add(p);
-		}
+            a = Audio.GetPAOutputDevices(host);
+            foreach (PADeviceInfo p in a)
+                comboAudioOutput2.Items.Add(p);
+        }
 
-		private void ControlList(Control c, ref ArrayList a)
-		{
-			if(c.Controls.Count > 0)
-			{
-				foreach(Control c2 in c.Controls)
-					ControlList(c2, ref a);
-			}
+        private void ControlList(Control c, ref ArrayList a)
+        {
+            if (c.Controls.Count > 0)
+            {
+                foreach (Control c2 in c.Controls)
+                    ControlList(c2, ref a);
+            }
 
-			if(c.GetType() == typeof(CheckBoxTS) || c.GetType() == typeof(CheckBox) ||
-				c.GetType() == typeof(ComboBoxTS) || c.GetType() == typeof(ComboBox) ||
-				c.GetType() == typeof(NumericUpDownTS) || c.GetType() == typeof(NumericUpDown) ||
-				c.GetType() == typeof(RadioButtonTS) || c.GetType() == typeof(RadioButton) ||
-				c.GetType() == typeof(TextBoxTS) || c.GetType() == typeof(TextBox) ||
-				c.GetType() == typeof(TrackBarTS) || c.GetType() == typeof(TrackBar) ||
-				c.GetType() == typeof(ColorButton))
-				a.Add(c);
-		}
+            if (c.GetType() == typeof(CheckBoxTS) || c.GetType() == typeof(CheckBox) ||
+                c.GetType() == typeof(ComboBoxTS) || c.GetType() == typeof(ComboBox) ||
+                c.GetType() == typeof(NumericUpDownTS) || c.GetType() == typeof(NumericUpDown) ||
+                c.GetType() == typeof(RadioButtonTS) || c.GetType() == typeof(RadioButton) ||
+                c.GetType() == typeof(TextBoxTS) || c.GetType() == typeof(TextBox) ||
+                c.GetType() == typeof(TrackBarTS) || c.GetType() == typeof(TrackBar) ||
+                c.GetType() == typeof(ColorButton))
+                a.Add(c);
+        }
 
-		private static bool saving = false;
+        private static bool saving = false;
 
-		public void SaveOptions()
-		{
-			// Automatically saves all control settings to the database in the tab
-			// pages on this form of the following types: CheckBoxTS, ComboBoxTS,
-			// NumericUpDownTS, RadioButtonTS, TextBox, and TrackBar (slider)
+        public void SaveOptions()
+        {
+            // Automatically saves all control settings to the database in the tab
+            // pages on this form of the following types: CheckBoxTS, ComboBoxTS,
+            // NumericUpDownTS, RadioButtonTS, TextBox, and TrackBar (slider)
 
-			saving = true;
+            saving = true;
 
-			ArrayList a = new ArrayList();
-			ArrayList temp = new ArrayList();
+            ArrayList a = new ArrayList();
+            ArrayList temp = new ArrayList();
 
-			ControlList(this, ref temp);
+            ControlList(this, ref temp);
 
-			foreach(Control c in temp)				// For each control
-			{
-				if(c.GetType() == typeof(CheckBoxTS))
-					a.Add(c.Name+"/"+((CheckBoxTS)c).Checked.ToString());
-				else if(c.GetType() == typeof(ComboBoxTS))
-				{
-					//if(((ComboBoxTS)c).SelectedIndex >= 0)
-					a.Add(c.Name+"/"+((ComboBoxTS)c).Text);
-				}
-				else if(c.GetType() == typeof(NumericUpDownTS))
-					a.Add(c.Name+"/"+((NumericUpDownTS)c).Value.ToString());
-				else if(c.GetType() == typeof(RadioButtonTS))
-					a.Add(c.Name+"/"+((RadioButtonTS)c).Checked.ToString());
-				else if(c.GetType() == typeof(TextBoxTS))
-					a.Add(c.Name+"/"+((TextBoxTS)c).Text);
-				else if(c.GetType() == typeof(TrackBarTS))
-					a.Add(c.Name+"/"+((TrackBarTS)c).Value.ToString());
-				else if(c.GetType() == typeof(ColorButton))
-				{
-					Color clr = ((ColorButton)c).Color;
-					a.Add(c.Name+"/"+clr.R+"."+clr.G+"."+clr.B+"."+clr.A);
-				}
+            foreach (Control c in temp)				// For each control
+            {
+                if (c.GetType() == typeof(CheckBoxTS))
+                    a.Add(c.Name + "/" + ((CheckBoxTS)c).Checked.ToString());
+                else if (c.GetType() == typeof(ComboBoxTS))
+                {
+                    //if(((ComboBoxTS)c).SelectedIndex >= 0)
+                    a.Add(c.Name + "/" + ((ComboBoxTS)c).Text);
+                }
+                else if (c.GetType() == typeof(NumericUpDownTS))
+                    a.Add(c.Name + "/" + ((NumericUpDownTS)c).Value.ToString());
+                else if (c.GetType() == typeof(RadioButtonTS))
+                    a.Add(c.Name + "/" + ((RadioButtonTS)c).Checked.ToString());
+                else if (c.GetType() == typeof(TextBoxTS))
+                    a.Add(c.Name + "/" + ((TextBoxTS)c).Text);
+                else if (c.GetType() == typeof(TrackBarTS))
+                    a.Add(c.Name + "/" + ((TrackBarTS)c).Value.ToString());
+                else if (c.GetType() == typeof(ColorButton))
+                {
+                    Color clr = ((ColorButton)c).Color;
+                    a.Add(c.Name + "/" + clr.R + "." + clr.G + "." + clr.B + "." + clr.A);
+                }
 #if(DEBUG)
 				else if(c.GetType() == typeof(GroupBox) ||
 					c.GetType() == typeof(CheckBox) ||
@@ -21665,614 +21781,614 @@ namespace PowerSDR
 					c.GetType() == typeof(TrackBar))
 					Debug.WriteLine(c.Name+" needs to be converted to a Thread Safe control.");
 #endif
-			}
+            }
 
-			DB.SaveVars("Options", ref a);		// save the values to the DB
-			saving = false;
-		}
+            DB.SaveVars("Options", ref a);		// save the values to the DB
+            saving = false;
+        }
 
-		public void GetOptions()
-		{
-			// Automatically restores all controls from the database in the
-			// tab pages on this form of the following types: CheckBoxTS, ComboBoxTS,
-			// NumericUpDownTS, RadioButtonTS, TextBox, and TrackBar (slider)
+        public void GetOptions()
+        {
+            // Automatically restores all controls from the database in the
+            // tab pages on this form of the following types: CheckBoxTS, ComboBoxTS,
+            // NumericUpDownTS, RadioButtonTS, TextBox, and TrackBar (slider)
 
-			// get list of live controls
-			ArrayList temp = new ArrayList();		// list of all first level controls
-			ControlList(this, ref temp);
+            // get list of live controls
+            ArrayList temp = new ArrayList();		// list of all first level controls
+            ControlList(this, ref temp);
 
-			ArrayList checkbox_list = new ArrayList();
-			ArrayList combobox_list = new ArrayList();
-			ArrayList numericupdown_list = new ArrayList();
-			ArrayList radiobutton_list = new ArrayList();
-			ArrayList textbox_list = new ArrayList();
-			ArrayList trackbar_list = new ArrayList();
-			ArrayList colorbutton_list = new ArrayList();
+            ArrayList checkbox_list = new ArrayList();
+            ArrayList combobox_list = new ArrayList();
+            ArrayList numericupdown_list = new ArrayList();
+            ArrayList radiobutton_list = new ArrayList();
+            ArrayList textbox_list = new ArrayList();
+            ArrayList trackbar_list = new ArrayList();
+            ArrayList colorbutton_list = new ArrayList();
 
-			//ArrayList controls = new ArrayList();	// list of controls to restore
-			foreach(Control c in temp)
-			{
-				if(c.GetType() == typeof(CheckBoxTS))			// the control is a CheckBoxTS
-					checkbox_list.Add(c);
-				else if(c.GetType() == typeof(ComboBoxTS))		// the control is a ComboBoxTS
-					combobox_list.Add(c);
-				else if(c.GetType() == typeof(NumericUpDownTS))	// the control is a NumericUpDownTS
-					numericupdown_list.Add(c);
-				else if(c.GetType() == typeof(RadioButtonTS))	// the control is a RadioButtonTS
-					radiobutton_list.Add(c);
-				else if(c.GetType() == typeof(TextBoxTS))		// the control is a TextBox
-					textbox_list.Add(c);
-				else if(c.GetType() == typeof(TrackBarTS))		// the control is a TrackBar (slider)
-					trackbar_list.Add(c);
-				else if(c.GetType() == typeof(ColorButton))
-					colorbutton_list.Add(c);
-			}
-			temp.Clear();	// now that we have the controls we want, delete first list 
+            //ArrayList controls = new ArrayList();	// list of controls to restore
+            foreach (Control c in temp)
+            {
+                if (c.GetType() == typeof(CheckBoxTS))			// the control is a CheckBoxTS
+                    checkbox_list.Add(c);
+                else if (c.GetType() == typeof(ComboBoxTS))		// the control is a ComboBoxTS
+                    combobox_list.Add(c);
+                else if (c.GetType() == typeof(NumericUpDownTS))	// the control is a NumericUpDownTS
+                    numericupdown_list.Add(c);
+                else if (c.GetType() == typeof(RadioButtonTS))	// the control is a RadioButtonTS
+                    radiobutton_list.Add(c);
+                else if (c.GetType() == typeof(TextBoxTS))		// the control is a TextBox
+                    textbox_list.Add(c);
+                else if (c.GetType() == typeof(TrackBarTS))		// the control is a TrackBar (slider)
+                    trackbar_list.Add(c);
+                else if (c.GetType() == typeof(ColorButton))
+                    colorbutton_list.Add(c);
+            }
+            temp.Clear();	// now that we have the controls we want, delete first list 
 
-			ArrayList a = DB.GetVars("Options");						// Get the saved list of controls
-			a.Sort();
-			int num_controls = checkbox_list.Count + combobox_list.Count +
-				numericupdown_list.Count + radiobutton_list.Count +
-				textbox_list.Count + trackbar_list.Count +
-				colorbutton_list.Count;
+            ArrayList a = DB.GetVars("Options");						// Get the saved list of controls
+            a.Sort();
+            int num_controls = checkbox_list.Count + combobox_list.Count +
+                numericupdown_list.Count + radiobutton_list.Count +
+                textbox_list.Count + trackbar_list.Count +
+                colorbutton_list.Count;
 
-			if(a.Count < num_controls)		// some control values are not in the database
-			{								// so set all of them to the defaults
-				InitGeneralTab();
-				InitAudioTab();
-				InitDSPTab();
-				InitDisplayTab();
-				InitKeyboardTab();
-				InitAppearanceTab();
-			}
-			
-			// restore saved values to the controls
-			foreach(string s in a)				// string is in the format "name,value"
-			{
-				string[] vals = s.Split('/');
-				if(vals.Length > 2)
-				{
-					for(int i=2; i<vals.Length; i++)
-						vals[1] += "/"+vals[i];
-				}
+            if (a.Count < num_controls)		// some control values are not in the database
+            {								// so set all of them to the defaults
+                InitGeneralTab();
+                InitAudioTab();
+                InitDSPTab();
+                InitDisplayTab();
+                InitKeyboardTab();
+                InitAppearanceTab();
+            }
 
-				string name = vals[0];
-				string val = vals[1];
+            // restore saved values to the controls
+            foreach (string s in a)				// string is in the format "name,value"
+            {
+                string[] vals = s.Split('/');
+                if (vals.Length > 2)
+                {
+                    for (int i = 2; i < vals.Length; i++)
+                        vals[1] += "/" + vals[i];
+                }
 
-				if(s.StartsWith("chk"))			// control is a CheckBoxTS
-				{
-					for(int i=0; i<checkbox_list.Count; i++)
-					{	// look through each control to find the matching name
-						CheckBoxTS c = (CheckBoxTS)checkbox_list[i];
-						if(c.Name.Equals(name))		// name found
-						{
-							c.Checked = bool.Parse(val);	// restore value
-							i = checkbox_list.Count+1;
-						}
-						if(i == checkbox_list.Count)
-							MessageBox.Show("Control not found: "+name);
-					}
-				}
-				else if(s.StartsWith("combo"))	// control is a ComboBox
-				{
-					for(int i=0; i<combobox_list.Count; i++)
-					{	// look through each control to find the matching name
-						ComboBoxTS c = (ComboBoxTS)combobox_list[i];
-						if(c.Name.Equals(name))		// name found
-						{
-							if(c.Items.Count > 0 && c.Items[0].GetType() == typeof(string))
-							{
-								c.Text = val;
-							}
-							else
-							{
-								foreach(object o in c.Items)
-								{
-									if(o.ToString() == val)
-										c.Text = val;	// restore value
-								}
-							}
-							i = combobox_list.Count+1;
-						}
-						if(i == combobox_list.Count)
-							MessageBox.Show("Control not found: "+name);
-					}
-				}
-				else if(s.StartsWith("ud"))
-				{
-					for(int i=0; i<numericupdown_list.Count; i++)
-					{	// look through each control to find the matching name
-						NumericUpDownTS c = (NumericUpDownTS)numericupdown_list[i];
-						if(c.Name.Equals(name))		// name found
-						{
-							decimal num = decimal.Parse(val);
+                string name = vals[0];
+                string val = vals[1];
 
-							if(num > c.Maximum) num = c.Maximum;		// check endpoints
-							else if(num < c.Minimum) num = c.Minimum;
-							c.Value = num;			// restore value
-							i = numericupdown_list.Count+1;
-						}
-						if(i == numericupdown_list.Count)
-							MessageBox.Show("Control not found: "+name);	
-					}
-				}
-				else if(s.StartsWith("rad"))
-				{	// look through each control to find the matching name
-					for(int i=0; i<radiobutton_list.Count; i++)
-					{
-						RadioButtonTS c = (RadioButtonTS)radiobutton_list[i];
-						if(c.Name.Equals(name))		// name found
-						{
-							c.Checked = bool.Parse(val);	// restore value
-							i = radiobutton_list.Count+1;
-						}
-						if(i == radiobutton_list.Count)
-							MessageBox.Show("Control not found: "+name);
-					}
-				}
-				else if(s.StartsWith("txt"))
-				{	// look through each control to find the matching name
-					for(int i=0; i<textbox_list.Count; i++)
-					{
-						TextBoxTS c = (TextBoxTS)textbox_list[i];
-						if(c.Name.Equals(name))		// name found
-						{
-							c.Text = val;	// restore value
-							i = textbox_list.Count+1;
-						}
-						if(i == textbox_list.Count)
-							MessageBox.Show("Control not found: "+name);
-					}
-				}
-				else if(s.StartsWith("tb"))
-				{
-					// look through each control to find the matching name
-					for(int i=0; i<trackbar_list.Count; i++)
-					{
-						TrackBarTS c = (TrackBarTS)trackbar_list[i];
-						if(c.Name.Equals(name))		// name found
-						{
-							c.Value = Int32.Parse(val);
-							i = trackbar_list.Count+1;
-						}
-						if(i == trackbar_list.Count)
-							MessageBox.Show("Control not found: "+name);
-					}
-				}
-				else if(s.StartsWith("clrbtn"))
-				{
-					string[] colors = val.Split('.');
-					if(colors.Length == 4)
-					{
-						int R,G,B,A;
-						R = Int32.Parse(colors[0]);
-						G = Int32.Parse(colors[1]);
-						B = Int32.Parse(colors[2]);
-						A = Int32.Parse(colors[3]);
+                if (s.StartsWith("chk"))			// control is a CheckBoxTS
+                {
+                    for (int i = 0; i < checkbox_list.Count; i++)
+                    {	// look through each control to find the matching name
+                        CheckBoxTS c = (CheckBoxTS)checkbox_list[i];
+                        if (c.Name.Equals(name))		// name found
+                        {
+                            c.Checked = bool.Parse(val);	// restore value
+                            i = checkbox_list.Count + 1;
+                        }
+                        if (i == checkbox_list.Count)
+                            MessageBox.Show("Control not found: " + name);
+                    }
+                }
+                else if (s.StartsWith("combo"))	// control is a ComboBox
+                {
+                    for (int i = 0; i < combobox_list.Count; i++)
+                    {	// look through each control to find the matching name
+                        ComboBoxTS c = (ComboBoxTS)combobox_list[i];
+                        if (c.Name.Equals(name))		// name found
+                        {
+                            if (c.Items.Count > 0 && c.Items[0].GetType() == typeof(string))
+                            {
+                                c.Text = val;
+                            }
+                            else
+                            {
+                                foreach (object o in c.Items)
+                                {
+                                    if (o.ToString() == val)
+                                        c.Text = val;	// restore value
+                                }
+                            }
+                            i = combobox_list.Count + 1;
+                        }
+                        if (i == combobox_list.Count)
+                            MessageBox.Show("Control not found: " + name);
+                    }
+                }
+                else if (s.StartsWith("ud"))
+                {
+                    for (int i = 0; i < numericupdown_list.Count; i++)
+                    {	// look through each control to find the matching name
+                        NumericUpDownTS c = (NumericUpDownTS)numericupdown_list[i];
+                        if (c.Name.Equals(name))		// name found
+                        {
+                            decimal num = decimal.Parse(val);
 
-						for(int i=0; i<colorbutton_list.Count; i++)
-						{
-							ColorButton c = (ColorButton)colorbutton_list[i];
-							if(c.Name.Equals(name))		// name found
-							{
-								c.Color = Color.FromArgb(A, R, G, B);
-								i = colorbutton_list.Count+1;
-							}
-							if(i == colorbutton_list.Count)
-								MessageBox.Show("Control not found: "+name);
-						}
-					}
-				}
-			}
+                            if (num > c.Maximum) num = c.Maximum;		// check endpoints
+                            else if (num < c.Minimum) num = c.Minimum;
+                            c.Value = num;			// restore value
+                            i = numericupdown_list.Count + 1;
+                        }
+                        if (i == numericupdown_list.Count)
+                            MessageBox.Show("Control not found: " + name);
+                    }
+                }
+                else if (s.StartsWith("rad"))
+                {	// look through each control to find the matching name
+                    for (int i = 0; i < radiobutton_list.Count; i++)
+                    {
+                        RadioButtonTS c = (RadioButtonTS)radiobutton_list[i];
+                        if (c.Name.Equals(name))		// name found
+                        {
+                            c.Checked = bool.Parse(val);	// restore value
+                            i = radiobutton_list.Count + 1;
+                        }
+                        if (i == radiobutton_list.Count)
+                            MessageBox.Show("Control not found: " + name);
+                    }
+                }
+                else if (s.StartsWith("txt"))
+                {	// look through each control to find the matching name
+                    for (int i = 0; i < textbox_list.Count; i++)
+                    {
+                        TextBoxTS c = (TextBoxTS)textbox_list[i];
+                        if (c.Name.Equals(name))		// name found
+                        {
+                            c.Text = val;	// restore value
+                            i = textbox_list.Count + 1;
+                        }
+                        if (i == textbox_list.Count)
+                            MessageBox.Show("Control not found: " + name);
+                    }
+                }
+                else if (s.StartsWith("tb"))
+                {
+                    // look through each control to find the matching name
+                    for (int i = 0; i < trackbar_list.Count; i++)
+                    {
+                        TrackBarTS c = (TrackBarTS)trackbar_list[i];
+                        if (c.Name.Equals(name))		// name found
+                        {
+                            c.Value = Int32.Parse(val);
+                            i = trackbar_list.Count + 1;
+                        }
+                        if (i == trackbar_list.Count)
+                            MessageBox.Show("Control not found: " + name);
+                    }
+                }
+                else if (s.StartsWith("clrbtn"))
+                {
+                    string[] colors = val.Split('.');
+                    if (colors.Length == 4)
+                    {
+                        int R, G, B, A;
+                        R = Int32.Parse(colors[0]);
+                        G = Int32.Parse(colors[1]);
+                        B = Int32.Parse(colors[2]);
+                        A = Int32.Parse(colors[3]);
 
-			foreach(ColorButton c in colorbutton_list)
-				c.Automatic = "";
-		}
+                        for (int i = 0; i < colorbutton_list.Count; i++)
+                        {
+                            ColorButton c = (ColorButton)colorbutton_list[i];
+                            if (c.Name.Equals(name))		// name found
+                            {
+                                c.Color = Color.FromArgb(A, R, G, B);
+                                i = colorbutton_list.Count + 1;
+                            }
+                            if (i == colorbutton_list.Count)
+                                MessageBox.Show("Control not found: " + name);
+                        }
+                    }
+                }
+            }
 
-		private string KeyToString(Keys k)
-		{
-			if(!k.ToString().StartsWith("Oem"))
-				return k.ToString();
+            foreach (ColorButton c in colorbutton_list)
+                c.Automatic = "";
+        }
 
-			string s = "";
-			switch(k)
-			{
-				case Keys.OemOpenBrackets:
-					s = "[";
-					break;
-				case Keys.OemCloseBrackets:
-					s = "]";
-					break;
-				case Keys.OemQuestion:
-					s = "/";
-					break;
-				case Keys.OemPeriod:
-					s = ".";
-					break;
-				case Keys.OemPipe:
-					if((k & Keys.Shift) == 0)
-						s = "\\";
-					else s = "|";
-					break;
-			}
-			return s;
-		}
+        private string KeyToString(Keys k)
+        {
+            if (!k.ToString().StartsWith("Oem"))
+                return k.ToString();
 
-		private void SetupKeyMap()
-		{
-			KeyList.Add(Keys.None);
-			KeyList.Add(Keys.A);
-			KeyList.Add(Keys.B);
-			KeyList.Add(Keys.C);
-			KeyList.Add(Keys.D);
-			KeyList.Add(Keys.E);
-			KeyList.Add(Keys.F);
-			KeyList.Add(Keys.G);
-			KeyList.Add(Keys.H);
-			KeyList.Add(Keys.I);
-			KeyList.Add(Keys.J);
-			KeyList.Add(Keys.K);
-			KeyList.Add(Keys.L);
-			KeyList.Add(Keys.M);
-			KeyList.Add(Keys.N);
-			KeyList.Add(Keys.O);
-			KeyList.Add(Keys.P);
-			KeyList.Add(Keys.Q);
-			KeyList.Add(Keys.R);
-			KeyList.Add(Keys.S);
-			KeyList.Add(Keys.T);
-			KeyList.Add(Keys.U);
-			KeyList.Add(Keys.V);
-			KeyList.Add(Keys.W);
-			KeyList.Add(Keys.X);
-			KeyList.Add(Keys.Y);
-			KeyList.Add(Keys.Z);
-			KeyList.Add(Keys.F1);
-			KeyList.Add(Keys.F2);
-			KeyList.Add(Keys.F3);
-			KeyList.Add(Keys.F4);
-			KeyList.Add(Keys.F5);
-			KeyList.Add(Keys.F6);
-			KeyList.Add(Keys.F7);
-			KeyList.Add(Keys.F8);
-			KeyList.Add(Keys.F9);
-			KeyList.Add(Keys.F10);
-			KeyList.Add(Keys.Insert);
-			KeyList.Add(Keys.Delete);
-			KeyList.Add(Keys.Home);
-			KeyList.Add(Keys.End);
-			KeyList.Add(Keys.PageUp);
-			KeyList.Add(Keys.PageDown);
-			KeyList.Add(Keys.Up);
-			KeyList.Add(Keys.Down);
-			KeyList.Add(Keys.Left);
-			KeyList.Add(Keys.Right);
-			KeyList.Add(Keys.OemOpenBrackets);
-			KeyList.Add(Keys.OemCloseBrackets);
-			KeyList.Add(Keys.OemPeriod);
-			KeyList.Add(Keys.OemQuestion);
-			//			KeyList.Add(Keys.OemSemicolon);
-			//			KeyList.Add(Keys.OemQuotes);
-			//			KeyList.Add(Keys.Oemcomma);
-			//			KeyList.Add(Keys.OemPeriod);
-			//			KeyList.Add(Keys.OemBackslash);
-			//			KeyList.Add(Keys.OemQuestion);
-
-			foreach(Control c in tpKeyboard.Controls)
-			{
-				if(c.GetType() == typeof(GroupBoxTS))
-				{
-					foreach(Control c2 in c.Controls)
-					{
-						if(c2.GetType() == typeof(ComboBoxTS))
-						{
-							ComboBoxTS combo = (ComboBoxTS)c2;
-							combo.Items.Clear();
-							foreach(Keys k in KeyList)
-							{
-								if(k.ToString().StartsWith("Oem"))
-									combo.Items.Add(KeyToString(k));
-								else
-									combo.Items.Add(k.ToString());
-							}
-						}
-					}
-				}
-				else if(c.GetType() == typeof(ComboBoxTS))
-				{
-					ComboBoxTS combo = (ComboBoxTS)c;
-					combo.Items.Clear();
-					foreach(Keys k in KeyList)
-						combo.Items.Add(k.ToString());
-				}
-			}
-		}
-
-		private void UpdateMixerControls1()
-		{
-			if(comboAudioMixer1.SelectedIndex >= 0 &&
-				comboAudioMixer1.Items.Count > 0)
-			{
-				int i = -1;
-
-				i = Mixer.GetMux(comboAudioMixer1.SelectedIndex);
-				if(i < 0 || i >= Mixer.MIXERR_BASE)
-				{
-					comboAudioReceive1.Enabled = false;
-					comboAudioReceive1.Items.Clear();
-					comboAudioTransmit1.Enabled = false;
-					comboAudioTransmit1.Items.Clear();
-				}
-				else
-				{
-					comboAudioReceive1.Enabled = true;
-					comboAudioTransmit1.Enabled = true;
-					GetMuxLineNames1();
-					for(int j=0; j<comboAudioReceive1.Items.Count; j++)
-					{
-						if(((string)comboAudioReceive1.Items[j]).StartsWith("Line"))
-						{
-							comboAudioReceive1.SelectedIndex = j;
-							j = comboAudioReceive1.Items.Count;
-						}							
-					}
-
-					if(comboAudioReceive1.SelectedIndex < 0)
-					{
-						for(int j=0; j<comboAudioReceive1.Items.Count; j++)
-						{
-							if(((string)comboAudioReceive1.Items[j]).StartsWith("Analog"))
-							{
-								comboAudioReceive1.SelectedIndex = j;
-								j = comboAudioReceive1.Items.Count;
-							}							
-						}
-					}
-
-					for(int j=0; j<comboAudioTransmit1.Items.Count; j++)
-					{
-						if(((string)comboAudioTransmit1.Items[j]).StartsWith("Mic"))
-						{
-							comboAudioTransmit1.SelectedIndex = j;
-							j = comboAudioTransmit1.Items.Count;
-						}
-					}
-				}				
-			}
-		}
-
-		private void GetMixerDevices()
-		{
-			comboAudioMixer1.Items.Clear();
-			int num = Mixer.mixerGetNumDevs();
-			for(int i=0; i<num; i++)
-			{
-				comboAudioMixer1.Items.Add(Mixer.GetDevName(i));
-			}
-			comboAudioMixer1.Items.Add("None");
-		}
-
-		private void GetMuxLineNames1()
-		{
-			if(comboAudioMixer1.SelectedIndex >= 0 &&
-				comboAudioMixer1.Items.Count > 0)
-			{
-				comboAudioReceive1.Items.Clear();
-				comboAudioTransmit1.Items.Clear();
-
-				ArrayList a;
-				bool good = Mixer.GetMuxLineNames(comboAudioMixer1.SelectedIndex, out a);
-				if(good)
-				{					
-					foreach(string s in a)
-					{
-						comboAudioReceive1.Items.Add(s);
-						comboAudioTransmit1.Items.Add(s);
-					}
-				}
-			}
-		}
-
-		private void ForceAllEvents()
-		{
-			EventArgs e = EventArgs.Empty;
-
-			// General Tab
-			comboGeneralLPTAddr_SelectedIndexChanged(this, e);
-			udGeneralLPTDelay_ValueChanged(this, e);
-			chkGeneralRXOnly_CheckedChanged(this, e);
-            chkGeneralUSBPresent_CheckedChanged(this, e);
-			chkGeneralPAPresent_CheckedChanged(this, e);
-			chkGeneralATUPresent_CheckedChanged(this, e);
-			chkXVTRPresent_CheckedChanged(this, e);
-			comboGeneralXVTR_SelectedIndexChanged(this, e);
-			udDDSCorrection_ValueChanged(this, e);
-			udDDSPLLMult_ValueChanged(this, e);
-			udDDSIFFreq_ValueChanged(this, e);
-			chkGeneralSpurRed_CheckedChanged(this, e);
-			chkGeneralDisablePTT_CheckedChanged(this, e);
-			chkGeneralSoftwareGainCorr_CheckedChanged(this, e);
-			chkGeneralEnableX2_CheckedChanged(this, e);
-			udGeneralX2Delay_ValueChanged(this, e);
-			chkGeneralCustomFilter_CheckedChanged(this, e);
-			comboGeneralProcessPriority_SelectedIndexChanged(this, e);
-			chkGeneralUpdateRelease_CheckedChanged(this, e);
-			chkGeneralUpdateBeta_CheckedChanged(this, e);
-
-			// Audio Tab
-			comboAudioSoundCard_SelectedIndexChanged(this, e);
-			comboAudioDriver1_SelectedIndexChanged(this, e);
-			comboAudioInput1_SelectedIndexChanged(this, e);
-			comboAudioOutput1_SelectedIndexChanged(this, e);
-			comboAudioMixer1_SelectedIndexChanged(this, e);
-			comboAudioReceive1_SelectedIndexChanged(this, e);
-			comboAudioTransmit1_SelectedIndexChanged(this, e);
-			//			comboAudioDriver2_SelectedIndexChanged(this, e);
-			//			comboAudioInput2_SelectedIndexChanged(this, e);
-			//			comboAudioOutput2_SelectedIndexChanged(this, e);
-			//			comboAudioMixer2_SelectedIndexChanged(this, e);
-			//			comboAudioReceive2_SelectedIndexChanged(this, e);
-			//			comboAudioTransmit2_SelectedIndexChanged(this, e);
-			comboAudioBuffer1_SelectedIndexChanged(this, e);
-			comboAudioBuffer2_SelectedIndexChanged(this, e);
-			comboAudioSampleRate1_SelectedIndexChanged(this, e);
-			comboAudioSampleRate2_SelectedIndexChanged(this, e);
-			udAudioLatency1_ValueChanged(this, e);
-			udAudioLatency2_ValueChanged(this, e);
-			udAudioLineIn1_ValueChanged(this, e);
-			udAudioVoltage1_ValueChanged(this, e);
-			chkAudioLatencyManual1_CheckedChanged(this, e);
-
-			// Display Tab
-			udDisplayGridMax_ValueChanged(this, e);
-			udDisplayGridMin_ValueChanged(this, e);
-			udDisplayGridStep_ValueChanged(this, e);
-			udDisplayFPS_ValueChanged(this, e);
-			udDisplayMeterDelay_ValueChanged(this, e);
-			udDisplayPeakText_ValueChanged(this, e);
-			udDisplayCPUMeter_ValueChanged(this, e);
-			udDisplayPhasePts_ValueChanged(this, e);
-			udDisplayAVGTime_ValueChanged(this, e);
-			udDisplayWaterfallLowLevel_ValueChanged(this, e);
-			udDisplayWaterfallHighLevel_ValueChanged(this, e);
-			clrbtnWaterfallLow_Changed(this, e);
-			udDisplayMultiPeakHoldTime_ValueChanged(this, e);
-			udDisplayMultiTextHoldTime_ValueChanged(this, e);
-
-			// DSP Tab
-			udLMSANF_ValueChanged(this, e);
-			udLMSNR_ValueChanged(this, e);
-			udDSPImagePhaseTX_ValueChanged(this, e);
-			udDSPImageGainTX_ValueChanged(this, e);
-			udDSPAGCFixedGaindB_ValueChanged(this, e);
-			udDSPAGCMaxGaindB_ValueChanged(this, e);
-			udDSPCWPitch_ValueChanged(this, e);
-			comboDSPWindow_SelectedIndexChanged(this, e);
-			udDSPNB_ValueChanged(this, e);
-			udDSPNB2_ValueChanged(this, e);
-
-			// Transmit Tab
-			udTXFilterHigh_ValueChanged(this, e);
-			udTXFilterLow_ValueChanged(this, e);
-			udTransmitTunePower_ValueChanged(this, e);
-			udPAGain_ValueChanged(this, e);
-
-			// Keyboard Tab
-			comboKBTuneUp1_SelectedIndexChanged(this, e);
-			comboKBTuneUp2_SelectedIndexChanged(this, e);
-			comboKBTuneUp3_SelectedIndexChanged(this, e);
-			comboKBTuneUp4_SelectedIndexChanged(this, e);
-			comboKBTuneUp5_SelectedIndexChanged(this, e);
-			comboKBTuneUp6_SelectedIndexChanged(this, e);
-			comboKBTuneDown1_SelectedIndexChanged(this, e);
-			comboKBTuneDown2_SelectedIndexChanged(this, e);
-			comboKBTuneDown3_SelectedIndexChanged(this, e);
-			comboKBTuneDown4_SelectedIndexChanged(this, e);
-			comboKBTuneDown5_SelectedIndexChanged(this, e);
-			comboKBTuneDown6_SelectedIndexChanged(this, e);
-			comboKBBandUp_SelectedIndexChanged(this, e);
-			comboKBBandDown_SelectedIndexChanged(this, e);
-			comboKBFilterUp_SelectedIndexChanged(this, e);
-			comboKBFilterDown_SelectedIndexChanged(this, e);
-			comboKBModeUp_SelectedIndexChanged(this, e);
-			comboKBModeDown_SelectedIndexChanged(this, e);
-            
-			// Appearance Tab
-			clrbtnBtnSel_Changed(this, e);
-			clrbtnVFODark_Changed(this, e);
-			clrbtnVFOLight_Changed(this, e);
-			clrbtnBandDark_Changed(this, e);
-			clrbtnBandLight_Changed(this, e);
-			clrbtnPeakText_Changed(this, e);
-			clrbtnBackground_Changed(this, e);
-			clrbtnGrid_Changed(this, e);
-			clrbtnZeroLine_Changed(this, e);
-			clrbtnFilter_Changed(this, e);
-			clrbtnText_Changed(this, e);
-			clrbtnDataLine_Changed(this, e);
-			udDisplayLineWidth_ValueChanged(this, e);
-			clrbtnMeterLeft_Changed(this, e);
-			clrbtnMeterRight_Changed(this, e);
-		}
-
-		public string[] GetTXProfileStrings()
-		{
-			string[] s = new string[comboTXProfileName.Items.Count];
-			for(int i=0; i<comboTXProfileName.Items.Count; i++)
-				s[i] = (string)comboTXProfileName.Items[i];
+            string s = "";
+            switch (k)
+            {
+                case Keys.OemOpenBrackets:
+                    s = "[";
+                    break;
+                case Keys.OemCloseBrackets:
+                    s = "]";
+                    break;
+                case Keys.OemQuestion:
+                    s = "/";
+                    break;
+                case Keys.OemPeriod:
+                    s = ".";
+                    break;
+                case Keys.OemPipe:
+                    if ((k & Keys.Shift) == 0)
+                        s = "\\";
+                    else s = "|";
+                    break;
+            }
             return s;
-		}
+        }
 
-		public string TXProfile
-		{
-			get 
-			{
-				if(comboTXProfileName != null) return comboTXProfileName.Text;
-				else return "";
-			}
-			set { if(comboTXProfileName != null) comboTXProfileName.Text = value; }
-		}
+        private void SetupKeyMap()
+        {
+            KeyList.Add(Keys.None);
+            KeyList.Add(Keys.A);
+            KeyList.Add(Keys.B);
+            KeyList.Add(Keys.C);
+            KeyList.Add(Keys.D);
+            KeyList.Add(Keys.E);
+            KeyList.Add(Keys.F);
+            KeyList.Add(Keys.G);
+            KeyList.Add(Keys.H);
+            KeyList.Add(Keys.I);
+            KeyList.Add(Keys.J);
+            KeyList.Add(Keys.K);
+            KeyList.Add(Keys.L);
+            KeyList.Add(Keys.M);
+            KeyList.Add(Keys.N);
+            KeyList.Add(Keys.O);
+            KeyList.Add(Keys.P);
+            KeyList.Add(Keys.Q);
+            KeyList.Add(Keys.R);
+            KeyList.Add(Keys.S);
+            KeyList.Add(Keys.T);
+            KeyList.Add(Keys.U);
+            KeyList.Add(Keys.V);
+            KeyList.Add(Keys.W);
+            KeyList.Add(Keys.X);
+            KeyList.Add(Keys.Y);
+            KeyList.Add(Keys.Z);
+            KeyList.Add(Keys.F1);
+            KeyList.Add(Keys.F2);
+            KeyList.Add(Keys.F3);
+            KeyList.Add(Keys.F4);
+            KeyList.Add(Keys.F5);
+            KeyList.Add(Keys.F6);
+            KeyList.Add(Keys.F7);
+            KeyList.Add(Keys.F8);
+            KeyList.Add(Keys.F9);
+            KeyList.Add(Keys.F10);
+            KeyList.Add(Keys.Insert);
+            KeyList.Add(Keys.Delete);
+            KeyList.Add(Keys.Home);
+            KeyList.Add(Keys.End);
+            KeyList.Add(Keys.PageUp);
+            KeyList.Add(Keys.PageDown);
+            KeyList.Add(Keys.Up);
+            KeyList.Add(Keys.Down);
+            KeyList.Add(Keys.Left);
+            KeyList.Add(Keys.Right);
+            KeyList.Add(Keys.OemOpenBrackets);
+            KeyList.Add(Keys.OemCloseBrackets);
+            KeyList.Add(Keys.OemPeriod);
+            KeyList.Add(Keys.OemQuestion);
+            //			KeyList.Add(Keys.OemSemicolon);
+            //			KeyList.Add(Keys.OemQuotes);
+            //			KeyList.Add(Keys.Oemcomma);
+            //			KeyList.Add(Keys.OemPeriod);
+            //			KeyList.Add(Keys.OemBackslash);
+            //			KeyList.Add(Keys.OemQuestion);
 
-		public void GetTxProfiles()
-		{
-			comboTXProfileName.Items.Clear();
+            foreach (Control c in tpKeyboard.Controls)
+            {
+                if (c.GetType() == typeof(GroupBoxTS))
+                {
+                    foreach (Control c2 in c.Controls)
+                    {
+                        if (c2.GetType() == typeof(ComboBoxTS))
+                        {
+                            ComboBoxTS combo = (ComboBoxTS)c2;
+                            combo.Items.Clear();
+                            foreach (Keys k in KeyList)
+                            {
+                                if (k.ToString().StartsWith("Oem"))
+                                    combo.Items.Add(KeyToString(k));
+                                else
+                                    combo.Items.Add(k.ToString());
+                            }
+                        }
+                    }
+                }
+                else if (c.GetType() == typeof(ComboBoxTS))
+                {
+                    ComboBoxTS combo = (ComboBoxTS)c;
+                    combo.Items.Clear();
+                    foreach (Keys k in KeyList)
+                        combo.Items.Add(k.ToString());
+                }
+            }
+        }
+
+        private void UpdateMixerControls1()
+        {
+            if (comboAudioMixer1.SelectedIndex >= 0 &&
+                comboAudioMixer1.Items.Count > 0)
+            {
+                int i = -1;
+
+                i = Mixer.GetMux(comboAudioMixer1.SelectedIndex);
+                if (i < 0 || i >= Mixer.MIXERR_BASE)
+                {
+                    comboAudioReceive1.Enabled = false;
+                    comboAudioReceive1.Items.Clear();
+                    comboAudioTransmit1.Enabled = false;
+                    comboAudioTransmit1.Items.Clear();
+                }
+                else
+                {
+                    comboAudioReceive1.Enabled = true;
+                    comboAudioTransmit1.Enabled = true;
+                    GetMuxLineNames1();
+                    for (int j = 0; j < comboAudioReceive1.Items.Count; j++)
+                    {
+                        if (((string)comboAudioReceive1.Items[j]).StartsWith("Line"))
+                        {
+                            comboAudioReceive1.SelectedIndex = j;
+                            j = comboAudioReceive1.Items.Count;
+                        }
+                    }
+
+                    if (comboAudioReceive1.SelectedIndex < 0)
+                    {
+                        for (int j = 0; j < comboAudioReceive1.Items.Count; j++)
+                        {
+                            if (((string)comboAudioReceive1.Items[j]).StartsWith("Analog"))
+                            {
+                                comboAudioReceive1.SelectedIndex = j;
+                                j = comboAudioReceive1.Items.Count;
+                            }
+                        }
+                    }
+
+                    for (int j = 0; j < comboAudioTransmit1.Items.Count; j++)
+                    {
+                        if (((string)comboAudioTransmit1.Items[j]).StartsWith("Mic"))
+                        {
+                            comboAudioTransmit1.SelectedIndex = j;
+                            j = comboAudioTransmit1.Items.Count;
+                        }
+                    }
+                }
+            }
+        }
+
+        private void GetMixerDevices()
+        {
+            comboAudioMixer1.Items.Clear();
+            int num = Mixer.mixerGetNumDevs();
+            for (int i = 0; i < num; i++)
+            {
+                comboAudioMixer1.Items.Add(Mixer.GetDevName(i));
+            }
+            comboAudioMixer1.Items.Add("None");
+        }
+
+        private void GetMuxLineNames1()
+        {
+            if (comboAudioMixer1.SelectedIndex >= 0 &&
+                comboAudioMixer1.Items.Count > 0)
+            {
+                comboAudioReceive1.Items.Clear();
+                comboAudioTransmit1.Items.Clear();
+
+                ArrayList a;
+                bool good = Mixer.GetMuxLineNames(comboAudioMixer1.SelectedIndex, out a);
+                if (good)
+                {
+                    foreach (string s in a)
+                    {
+                        comboAudioReceive1.Items.Add(s);
+                        comboAudioTransmit1.Items.Add(s);
+                    }
+                }
+            }
+        }
+
+        private void ForceAllEvents()
+        {
+            EventArgs e = EventArgs.Empty;
+
+            // General Tab
+            comboGeneralLPTAddr_SelectedIndexChanged(this, e);
+            udGeneralLPTDelay_ValueChanged(this, e);
+            chkGeneralRXOnly_CheckedChanged(this, e);
+            chkGeneralUSBPresent_CheckedChanged(this, e);
+            chkGeneralPAPresent_CheckedChanged(this, e);
+            chkGeneralATUPresent_CheckedChanged(this, e);
+            chkXVTRPresent_CheckedChanged(this, e);
+            comboGeneralXVTR_SelectedIndexChanged(this, e);
+            udDDSCorrection_ValueChanged(this, e);
+            udDDSPLLMult_ValueChanged(this, e);
+            udDDSIFFreq_ValueChanged(this, e);
+            chkGeneralSpurRed_CheckedChanged(this, e);
+            chkGeneralDisablePTT_CheckedChanged(this, e);
+            chkGeneralSoftwareGainCorr_CheckedChanged(this, e);
+            chkGeneralEnableX2_CheckedChanged(this, e);
+            udGeneralX2Delay_ValueChanged(this, e);
+            chkGeneralCustomFilter_CheckedChanged(this, e);
+            comboGeneralProcessPriority_SelectedIndexChanged(this, e);
+            chkGeneralUpdateRelease_CheckedChanged(this, e);
+            chkGeneralUpdateBeta_CheckedChanged(this, e);
+
+            // Audio Tab
+            comboAudioSoundCard_SelectedIndexChanged(this, e);
+            comboAudioDriver1_SelectedIndexChanged(this, e);
+            comboAudioInput1_SelectedIndexChanged(this, e);
+            comboAudioOutput1_SelectedIndexChanged(this, e);
+            comboAudioMixer1_SelectedIndexChanged(this, e);
+            comboAudioReceive1_SelectedIndexChanged(this, e);
+            comboAudioTransmit1_SelectedIndexChanged(this, e);
+            //			comboAudioDriver2_SelectedIndexChanged(this, e);
+            //			comboAudioInput2_SelectedIndexChanged(this, e);
+            //			comboAudioOutput2_SelectedIndexChanged(this, e);
+            //			comboAudioMixer2_SelectedIndexChanged(this, e);
+            //			comboAudioReceive2_SelectedIndexChanged(this, e);
+            //			comboAudioTransmit2_SelectedIndexChanged(this, e);
+            comboAudioBuffer1_SelectedIndexChanged(this, e);
+            comboAudioBuffer2_SelectedIndexChanged(this, e);
+            comboAudioSampleRate1_SelectedIndexChanged(this, e);
+            comboAudioSampleRate2_SelectedIndexChanged(this, e);
+            udAudioLatency1_ValueChanged(this, e);
+            udAudioLatency2_ValueChanged(this, e);
+            udAudioLineIn1_ValueChanged(this, e);
+            udAudioVoltage1_ValueChanged(this, e);
+            chkAudioLatencyManual1_CheckedChanged(this, e);
+
+            // Display Tab
+            udDisplayGridMax_ValueChanged(this, e);
+            udDisplayGridMin_ValueChanged(this, e);
+            udDisplayGridStep_ValueChanged(this, e);
+            udDisplayFPS_ValueChanged(this, e);
+            udDisplayMeterDelay_ValueChanged(this, e);
+            udDisplayPeakText_ValueChanged(this, e);
+            udDisplayCPUMeter_ValueChanged(this, e);
+            udDisplayPhasePts_ValueChanged(this, e);
+            udDisplayAVGTime_ValueChanged(this, e);
+            udDisplayWaterfallLowLevel_ValueChanged(this, e);
+            udDisplayWaterfallHighLevel_ValueChanged(this, e);
+            clrbtnWaterfallLow_Changed(this, e);
+            udDisplayMultiPeakHoldTime_ValueChanged(this, e);
+            udDisplayMultiTextHoldTime_ValueChanged(this, e);
+
+            // DSP Tab
+            udLMSANF_ValueChanged(this, e);
+            udLMSNR_ValueChanged(this, e);
+            udDSPImagePhaseTX_ValueChanged(this, e);
+            udDSPImageGainTX_ValueChanged(this, e);
+            udDSPAGCFixedGaindB_ValueChanged(this, e);
+            udDSPAGCMaxGaindB_ValueChanged(this, e);
+            udDSPCWPitch_ValueChanged(this, e);
+            comboDSPWindow_SelectedIndexChanged(this, e);
+            udDSPNB_ValueChanged(this, e);
+            udDSPNB2_ValueChanged(this, e);
+
+            // Transmit Tab
+            udTXFilterHigh_ValueChanged(this, e);
+            udTXFilterLow_ValueChanged(this, e);
+            udTransmitTunePower_ValueChanged(this, e);
+            udPAGain_ValueChanged(this, e);
+
+            // Keyboard Tab
+            comboKBTuneUp1_SelectedIndexChanged(this, e);
+            comboKBTuneUp2_SelectedIndexChanged(this, e);
+            comboKBTuneUp3_SelectedIndexChanged(this, e);
+            comboKBTuneUp4_SelectedIndexChanged(this, e);
+            comboKBTuneUp5_SelectedIndexChanged(this, e);
+            comboKBTuneUp6_SelectedIndexChanged(this, e);
+            comboKBTuneDown1_SelectedIndexChanged(this, e);
+            comboKBTuneDown2_SelectedIndexChanged(this, e);
+            comboKBTuneDown3_SelectedIndexChanged(this, e);
+            comboKBTuneDown4_SelectedIndexChanged(this, e);
+            comboKBTuneDown5_SelectedIndexChanged(this, e);
+            comboKBTuneDown6_SelectedIndexChanged(this, e);
+            comboKBBandUp_SelectedIndexChanged(this, e);
+            comboKBBandDown_SelectedIndexChanged(this, e);
+            comboKBFilterUp_SelectedIndexChanged(this, e);
+            comboKBFilterDown_SelectedIndexChanged(this, e);
+            comboKBModeUp_SelectedIndexChanged(this, e);
+            comboKBModeDown_SelectedIndexChanged(this, e);
+
+            // Appearance Tab
+            clrbtnBtnSel_Changed(this, e);
+            clrbtnVFODark_Changed(this, e);
+            clrbtnVFOLight_Changed(this, e);
+            clrbtnBandDark_Changed(this, e);
+            clrbtnBandLight_Changed(this, e);
+            clrbtnPeakText_Changed(this, e);
+            clrbtnBackground_Changed(this, e);
+            clrbtnGrid_Changed(this, e);
+            clrbtnZeroLine_Changed(this, e);
+            clrbtnFilter_Changed(this, e);
+            clrbtnText_Changed(this, e);
+            clrbtnDataLine_Changed(this, e);
+            udDisplayLineWidth_ValueChanged(this, e);
+            clrbtnMeterLeft_Changed(this, e);
+            clrbtnMeterRight_Changed(this, e);
+        }
+
+        public string[] GetTXProfileStrings()
+        {
+            string[] s = new string[comboTXProfileName.Items.Count];
+            for (int i = 0; i < comboTXProfileName.Items.Count; i++)
+                s[i] = (string)comboTXProfileName.Items[i];
+            return s;
+        }
+
+        public string TXProfile
+        {
+            get
+            {
+                if (comboTXProfileName != null) return comboTXProfileName.Text;
+                else return "";
+            }
+            set { if (comboTXProfileName != null) comboTXProfileName.Text = value; }
+        }
+
+        public void GetTxProfiles()
+        {
+            comboTXProfileName.Items.Clear();
             foreach (DataRow dr in DB.ds.Tables["TxProfile"].Rows)
-			{
-				if(dr.RowState != DataRowState.Deleted)
-				{
-					if(!comboTXProfileName.Items.Contains(dr["Name"]))
-						comboTXProfileName.Items.Add(dr["Name"]);
-				}
-			}
-		}
+            {
+                if (dr.RowState != DataRowState.Deleted)
+                {
+                    if (!comboTXProfileName.Items.Contains(dr["Name"]))
+                        comboTXProfileName.Items.Add(dr["Name"]);
+                }
+            }
+        }
 
-		public void GetTxProfileDefs()
-		{
-			lstTXProfileDef.Items.Clear();
-			foreach(DataRow dr in DB.ds.Tables["TxProfileDef"].Rows)
-			{
-				if(dr.RowState != DataRowState.Deleted)
-				{
-					if(!lstTXProfileDef.Items.Contains(dr["Name"]))
-						lstTXProfileDef.Items.Add(dr["name"]);
-				}
-			}
-		}
+        public void GetTxProfileDefs()
+        {
+            lstTXProfileDef.Items.Clear();
+            foreach (DataRow dr in DB.ds.Tables["TxProfileDef"].Rows)
+            {
+                if (dr.RowState != DataRowState.Deleted)
+                {
+                    if (!lstTXProfileDef.Items.Contains(dr["Name"]))
+                        lstTXProfileDef.Items.Add(dr["name"]);
+                }
+            }
+        }
 
-		private bool CheckTXProfileChanged()
-		{
-			DataRow[] rows = DB.ds.Tables["TxProfile"].Select(
-				"'"+current_profile+"' = Name");
+        private bool CheckTXProfileChanged()
+        {
+            DataRow[] rows = DB.ds.Tables["TxProfile"].Select(
+                "'" + current_profile + "' = Name");
 
-			if(rows.Length != 1)
-				return false;
+            if (rows.Length != 1)
+                return false;
 
-			int[] eq = console.EQForm.TXEQ;
-			if(eq[0] != (int)rows[0]["TXEQPreamp"])
-				return true;
+            int[] eq = console.EQForm.TXEQ;
+            if (eq[0] != (int)rows[0]["TXEQPreamp"])
+                return true;
 
-			if(console.EQForm.TXEQEnabled != (bool)rows[0]["TXEQEnabled"])
-				return true;
-				
-			for(int i=1; i<eq.Length; i++)
-			{
-				if(eq[i] != (int)rows[0]["TXEQ"+i.ToString()])
-					return true;
-			}
-			
-			if(udTXFilterLow.Value != (int)rows[0]["FilterLow"] ||
-				udTXFilterHigh.Value != (int)rows[0]["FilterHigh"] ||
-				console.CPDR != (bool)rows[0]["CompanderOn"] ||
-				console.CPDRLevel != (int)rows[0]["CompanderLevel"] ||
-				console.Mic != (int)rows[0]["MicGain"])
-				return true;
+            if (console.EQForm.TXEQEnabled != (bool)rows[0]["TXEQEnabled"])
+                return true;
 
-			return false;
-		}
+            for (int i = 1; i < eq.Length; i++)
+            {
+                if (eq[i] != (int)rows[0]["TXEQ" + i.ToString()])
+                    return true;
+            }
 
-		#endregion
+            if (udTXFilterLow.Value != (int)rows[0]["FilterLow"] ||
+                udTXFilterHigh.Value != (int)rows[0]["FilterHigh"] ||
+                console.CPDR != (bool)rows[0]["CompanderOn"] ||
+                console.CPDRLevel != (int)rows[0]["CompanderLevel"] ||
+                console.Mic != (int)rows[0]["MicGain"])
+                return true;
 
-		#region Properties
+            return false;
+        }
+
+        #endregion
+
+        #region Properties
 
         public bool CATEnabled
         {
@@ -22287,437 +22403,437 @@ namespace PowerSDR
             }
         }
 
-		public int RXAGCAttack
-		{
-			get
-			{
-				if(udDSPAGCAttack != null) return (int)udDSPAGCAttack.Value;
-				else return 0;
-			}
-			set
-			{
-				if(udDSPAGCAttack != null) udDSPAGCAttack.Value = value;
-			}
-		}
+        public int RXAGCAttack
+        {
+            get
+            {
+                if (udDSPAGCAttack != null) return (int)udDSPAGCAttack.Value;
+                else return 0;
+            }
+            set
+            {
+                if (udDSPAGCAttack != null) udDSPAGCAttack.Value = value;
+            }
+        }
 
-		public int RXAGCHang
-		{
-			get 
-			{
-				if(udDSPAGCHangTime != null) return (int)udDSPAGCHangTime.Value;
-				else return 0;
-			}
-			set
-			{
-				if(udDSPAGCHangTime != null) udDSPAGCHangTime.Value = value;
-			}
-		}
+        public int RXAGCHang
+        {
+            get
+            {
+                if (udDSPAGCHangTime != null) return (int)udDSPAGCHangTime.Value;
+                else return 0;
+            }
+            set
+            {
+                if (udDSPAGCHangTime != null) udDSPAGCHangTime.Value = value;
+            }
+        }
 
-		public int RXAGCDecay
-		{
-			get 
-			{
-				if(udDSPAGCDecay != null) return (int)udDSPAGCDecay.Value;
-				else return 0;
-			}
-			set
-			{
-				if(udDSPAGCDecay != null) udDSPAGCDecay.Value = value;
-			}
-		}
+        public int RXAGCDecay
+        {
+            get
+            {
+                if (udDSPAGCDecay != null) return (int)udDSPAGCDecay.Value;
+                else return 0;
+            }
+            set
+            {
+                if (udDSPAGCDecay != null) udDSPAGCDecay.Value = value;
+            }
+        }
 
-		public double IFFreq
-		{
-			get 
-			{
-				if(udDDSIFFreq != null) return (double)udDDSIFFreq.Value*1e-6;
-				else return 0.0;
-			}
-			set
-			{
-				if(udDDSIFFreq != null) udDDSIFFreq.Value = (int)(value*1e6);
-			}
-		}
+        public double IFFreq
+        {
+            get
+            {
+                if (udDDSIFFreq != null) return (double)udDDSIFFreq.Value * 1e-6;
+                else return 0.0;
+            }
+            set
+            {
+                if (udDDSIFFreq != null) udDDSIFFreq.Value = (int)(value * 1e6);
+            }
+        }
 
-		public bool X2TR
-		{
-			get 
-			{
-				if(chkGeneralEnableX2 != null) return chkGeneralEnableX2.Checked;
-				else return false;
-			}
-			set
-			{
-				if(chkGeneralEnableX2 != null) chkGeneralEnableX2.Checked = value;
-			}
-		}
+        public bool X2TR
+        {
+            get
+            {
+                if (chkGeneralEnableX2 != null) return chkGeneralEnableX2.Checked;
+                else return false;
+            }
+            set
+            {
+                if (chkGeneralEnableX2 != null) chkGeneralEnableX2.Checked = value;
+            }
+        }
 
-		public int BreakInDelay
-		{
-			get
-			{
-				if(udCWBreakInDelay != null) return (int)udCWBreakInDelay.Value;
-				else return -1;
-			}
-			set
-			{
-				if(udCWBreakInDelay != null) udCWBreakInDelay.Value = value;
-			}
-		}
+        public int BreakInDelay
+        {
+            get
+            {
+                if (udCWBreakInDelay != null) return (int)udCWBreakInDelay.Value;
+                else return -1;
+            }
+            set
+            {
+                if (udCWBreakInDelay != null) udCWBreakInDelay.Value = value;
+            }
+        }
 
-		public int CWPitch
-		{
-			get
-			{
-				if(udDSPCWPitch != null) return (int)udDSPCWPitch.Value;
-				else return -1;
-			}
-			set
-			{
-				if(udDSPCWPitch != null) udDSPCWPitch.Value = value;
-			}
-		}
+        public int CWPitch
+        {
+            get
+            {
+                if (udDSPCWPitch != null) return (int)udDSPCWPitch.Value;
+                else return -1;
+            }
+            set
+            {
+                if (udDSPCWPitch != null) udDSPCWPitch.Value = value;
+            }
+        }
 
-		public bool CWDisableMonitor
-		{
-			get 
-			{
-				if(chkDSPKeyerDisableMonitor != null) return chkDSPKeyerDisableMonitor.Checked;
-				else return false;
-			}
-			set
-			{
-				if(chkDSPKeyerDisableMonitor != null) chkDSPKeyerDisableMonitor.Checked = value;
-			}
-		}
+        public bool CWDisableMonitor
+        {
+            get
+            {
+                if (chkDSPKeyerDisableMonitor != null) return chkDSPKeyerDisableMonitor.Checked;
+                else return false;
+            }
+            set
+            {
+                if (chkDSPKeyerDisableMonitor != null) chkDSPKeyerDisableMonitor.Checked = value;
+            }
+        }
 
-		public bool CWIambic
-		{
-			get 
-			{
-				if(chkCWKeyerIambic != null) return chkCWKeyerIambic.Checked;
-				else return false;
-			}
-			set
-			{
-				if(chkCWKeyerIambic != null) chkCWKeyerIambic.Checked = value;
-			}
-		}
+        public bool CWIambic
+        {
+            get
+            {
+                if (chkCWKeyerIambic != null) return chkCWKeyerIambic.Checked;
+                else return false;
+            }
+            set
+            {
+                if (chkCWKeyerIambic != null) chkCWKeyerIambic.Checked = value;
+            }
+        }
 
-		public string VACSampleRate
-		{
-			get
-			{
-				if(comboAudioSampleRate2 != null) return comboAudioSampleRate2.Text;
-				else return "";
-			}
-			set
-			{
-				if(comboAudioSampleRate2 != null) comboAudioSampleRate2.Text = value;
-			}
-		}
+        public string VACSampleRate
+        {
+            get
+            {
+                if (comboAudioSampleRate2 != null) return comboAudioSampleRate2.Text;
+                else return "";
+            }
+            set
+            {
+                if (comboAudioSampleRate2 != null) comboAudioSampleRate2.Text = value;
+            }
+        }
 
-		public bool IQOutToVAC
-		{
-			get
-			{
-				if(chkAudioIQtoVAC != null) return chkAudioIQtoVAC.Checked;
-				else return false;
-			}
-			set
-			{
-				if(chkAudioIQtoVAC != null) chkAudioIQtoVAC.Checked = value;
-			}
-		}
+        public bool IQOutToVAC
+        {
+            get
+            {
+                if (chkAudioIQtoVAC != null) return chkAudioIQtoVAC.Checked;
+                else return false;
+            }
+            set
+            {
+                if (chkAudioIQtoVAC != null) chkAudioIQtoVAC.Checked = value;
+            }
+        }
 
-		public bool VACStereo
-		{
-			get 
-			{
-				if(chkAudio2Stereo != null) return chkAudio2Stereo.Checked;
-				else return false;
-			}
-			set
-			{
-				if(chkAudio2Stereo != null) chkAudio2Stereo.Checked = value;
-			}
-		}
+        public bool VACStereo
+        {
+            get
+            {
+                if (chkAudio2Stereo != null) return chkAudio2Stereo.Checked;
+                else return false;
+            }
+            set
+            {
+                if (chkAudio2Stereo != null) chkAudio2Stereo.Checked = value;
+            }
+        }
 
-		public bool SpurReduction
-		{
-			get
-			{
-				if(chkGeneralSpurRed != null) return chkGeneralSpurRed.Checked;
-				else return true;
-			}
-			set
-			{
-				if(chkGeneralSpurRed != null) chkGeneralSpurRed.Checked = value;
-			}
-		}
+        public bool SpurReduction
+        {
+            get
+            {
+                if (chkGeneralSpurRed != null) return chkGeneralSpurRed.Checked;
+                else return true;
+            }
+            set
+            {
+                if (chkGeneralSpurRed != null) chkGeneralSpurRed.Checked = value;
+            }
+        }
 
-		public int NoiseGate
-		{
-			get
-			{
-				if(udTXNoiseGate != null) return (int)udTXNoiseGate.Value;
-				else return -1;
-			}
-			set
-			{
-				if(udTXNoiseGate != null) udTXNoiseGate.Value = value;
-			}
-		}
+        public int NoiseGate
+        {
+            get
+            {
+                if (udTXNoiseGate != null) return (int)udTXNoiseGate.Value;
+                else return -1;
+            }
+            set
+            {
+                if (udTXNoiseGate != null) udTXNoiseGate.Value = value;
+            }
+        }
 
-		public int VOXSens
-		{
-			get 
-			{
-				if(udTXVOXThreshold != null) return (int)udTXVOXThreshold.Value;
-				else return -1;
-			}
-			set
-			{
-				if(udTXVOXThreshold != null) udTXVOXThreshold.Value = value; 
-			}
-		}
+        public int VOXSens
+        {
+            get
+            {
+                if (udTXVOXThreshold != null) return (int)udTXVOXThreshold.Value;
+                else return -1;
+            }
+            set
+            {
+                if (udTXVOXThreshold != null) udTXVOXThreshold.Value = value;
+            }
+        }
 
-		public bool NoiseGateEnabled
-		{
-			get 
-			{
-				if(chkTXNoiseGateEnabled != null) return chkTXNoiseGateEnabled.Checked;
-				else return false;
-			}
-			set
-			{
-				if(chkTXNoiseGateEnabled != null) chkTXNoiseGateEnabled.Checked = value;
-			}
-		}
+        public bool NoiseGateEnabled
+        {
+            get
+            {
+                if (chkTXNoiseGateEnabled != null) return chkTXNoiseGateEnabled.Checked;
+                else return false;
+            }
+            set
+            {
+                if (chkTXNoiseGateEnabled != null) chkTXNoiseGateEnabled.Checked = value;
+            }
+        }
 
-		public int VACRXGain
-		{
-			get
-			{
-				if(udAudioVACGainRX != null) return (int)udAudioVACGainRX.Value;
-				else return -99;
-			}
-			set
-			{
-				if(udAudioVACGainRX != null) udAudioVACGainRX.Value = value;
-			}
-		}
+        public int VACRXGain
+        {
+            get
+            {
+                if (udAudioVACGainRX != null) return (int)udAudioVACGainRX.Value;
+                else return -99;
+            }
+            set
+            {
+                if (udAudioVACGainRX != null) udAudioVACGainRX.Value = value;
+            }
+        }
 
-		public int VACTXGain
-		{
-			get
-			{
-				if(udAudioVACGainTX != null) return (int)udAudioVACGainTX.Value;
-				else return -99;
-			}
-			set
-			{
-				if(udAudioVACGainTX != null) udAudioVACGainTX.Value = value;
-			}
-		}
+        public int VACTXGain
+        {
+            get
+            {
+                if (udAudioVACGainTX != null) return (int)udAudioVACGainTX.Value;
+                else return -99;
+            }
+            set
+            {
+                if (udAudioVACGainTX != null) udAudioVACGainTX.Value = value;
+            }
+        }
 
-		public bool BreakInEnabled
-		{
-			get 
-			{
-				if(chkCWBreakInEnabled != null)
-					return chkCWBreakInEnabled.Checked;
-				else return false;
-			}
-			set
-			{
-				if(chkCWBreakInEnabled != null)
-					chkCWBreakInEnabled.Checked = value;
-			}
-		}
+        public bool BreakInEnabled
+        {
+            get
+            {
+                if (chkCWBreakInEnabled != null)
+                    return chkCWBreakInEnabled.Checked;
+                else return false;
+            }
+            set
+            {
+                if (chkCWBreakInEnabled != null)
+                    chkCWBreakInEnabled.Checked = value;
+            }
+        }
 
-		private SoundCard current_sound_card = SoundCard.UNSUPPORTED_CARD;
-		public SoundCard CurrentSoundCard
-		{
-			get { return current_sound_card; }
-			set
-			{
-				current_sound_card = value;
-				switch(value)
-				{
-					case SoundCard.DELTA_44:
-						comboAudioSoundCard.Text = "M-Audio Delta 44 (PCI)";
-						break;
-					case SoundCard.FIREBOX:
-						comboAudioSoundCard.Text = "PreSonus FireBox (FireWire)";
-						break;
-					case SoundCard.EDIROL_FA_66:
-						comboAudioSoundCard.Text = "Edirol FA-66 (FireWire)";
-						break;
-					case SoundCard.AUDIGY:
-						comboAudioSoundCard.Text = "SB Audigy (PCI)";
-						break;
-					case SoundCard.AUDIGY_2:
-						comboAudioSoundCard.Text = "SB Audigy 2 (PCI)";
-						break;
-					case SoundCard.AUDIGY_2_ZS:
-						comboAudioSoundCard.Text = "SB Audigy 2 ZS (PCI)";
-						break;
-					case SoundCard.EXTIGY:
-						comboAudioSoundCard.Text = "Sound Blaster Extigy (USB)";
-						break;
-					case SoundCard.MP3_PLUS:
-						comboAudioSoundCard.Text = "Sound Blaster MP3+ (USB)";
-						break;
-					case SoundCard.SANTA_CRUZ:
-						comboAudioSoundCard.Text = "Turtle Beach Santa Cruz (PCI)";
-						break;
-					case SoundCard.UNSUPPORTED_CARD:
-						comboAudioSoundCard.Text = "Unsupported Card";
-						break;
+        private SoundCard current_sound_card = SoundCard.UNSUPPORTED_CARD;
+        public SoundCard CurrentSoundCard
+        {
+            get { return current_sound_card; }
+            set
+            {
+                current_sound_card = value;
+                switch (value)
+                {
+                    case SoundCard.DELTA_44:
+                        comboAudioSoundCard.Text = "M-Audio Delta 44 (PCI)";
+                        break;
+                    case SoundCard.FIREBOX:
+                        comboAudioSoundCard.Text = "PreSonus FireBox (FireWire)";
+                        break;
+                    case SoundCard.EDIROL_FA_66:
+                        comboAudioSoundCard.Text = "Edirol FA-66 (FireWire)";
+                        break;
+                    case SoundCard.AUDIGY:
+                        comboAudioSoundCard.Text = "SB Audigy (PCI)";
+                        break;
+                    case SoundCard.AUDIGY_2:
+                        comboAudioSoundCard.Text = "SB Audigy 2 (PCI)";
+                        break;
+                    case SoundCard.AUDIGY_2_ZS:
+                        comboAudioSoundCard.Text = "SB Audigy 2 ZS (PCI)";
+                        break;
+                    case SoundCard.EXTIGY:
+                        comboAudioSoundCard.Text = "Sound Blaster Extigy (USB)";
+                        break;
+                    case SoundCard.MP3_PLUS:
+                        comboAudioSoundCard.Text = "Sound Blaster MP3+ (USB)";
+                        break;
+                    case SoundCard.SANTA_CRUZ:
+                        comboAudioSoundCard.Text = "Turtle Beach Santa Cruz (PCI)";
+                        break;
+                    case SoundCard.UNSUPPORTED_CARD:
+                        comboAudioSoundCard.Text = "Unsupported Card";
+                        break;
                     case SoundCard.JANUS_OZY:
                         comboAudioSoundCard.Text = "HPSDR Janus/Ozy (USB2)";
                         break;
                 }
-			}
-		}
+            }
+        }
 
-		public bool VOXEnable
-		{
-			get
-			{
-				if(chkTXVOXEnabled != null) return chkTXVOXEnabled.Checked;
-				else return false;
-			}
-			set
-			{
-				if(chkTXVOXEnabled != null) chkTXVOXEnabled.Checked = value;
-			}
-		}
+        public bool VOXEnable
+        {
+            get
+            {
+                if (chkTXVOXEnabled != null) return chkTXVOXEnabled.Checked;
+                else return false;
+            }
+            set
+            {
+                if (chkTXVOXEnabled != null) chkTXVOXEnabled.Checked = value;
+            }
+        }
 
-		public int AGCMaxGain
-		{
-			get
-			{
-				if(udDSPAGCMaxGaindB != null) return (int)udDSPAGCMaxGaindB.Value;
-				else return -1;
-			}
-			set
-			{
-				if(udDSPAGCMaxGaindB != null) udDSPAGCMaxGaindB.Value = value;
-			}
-		}
+        public int AGCMaxGain
+        {
+            get
+            {
+                if (udDSPAGCMaxGaindB != null) return (int)udDSPAGCMaxGaindB.Value;
+                else return -1;
+            }
+            set
+            {
+                if (udDSPAGCMaxGaindB != null) udDSPAGCMaxGaindB.Value = value;
+            }
+        }
 
-		public int AGCFixedGain
-		{
-			get
-			{
-				if(udDSPAGCFixedGaindB != null) return (int)udDSPAGCFixedGaindB.Value;
-				else return -1;
-			}
-			set
-			{
-				if(udDSPAGCFixedGaindB != null) udDSPAGCFixedGaindB.Value = value;
-			}
-		}
+        public int AGCFixedGain
+        {
+            get
+            {
+                if (udDSPAGCFixedGaindB != null) return (int)udDSPAGCFixedGaindB.Value;
+                else return -1;
+            }
+            set
+            {
+                if (udDSPAGCFixedGaindB != null) udDSPAGCFixedGaindB.Value = value;
+            }
+        }
 
-		public int TXFilterHigh
-		{
-			get { return (int)udTXFilterHigh.Value; }
+        public int TXFilterHigh
+        {
+            get { return (int)udTXFilterHigh.Value; }
             set
             {
                 if (value > udTXFilterHigh.Maximum) value = (int)udTXFilterHigh.Maximum;
                 if (value < udTXFilterHigh.Minimum) value = (int)udTXFilterHigh.Minimum;
                 udTXFilterHigh.Value = value;
             }
-		}
+        }
 
-		public int TXFilterLow
-		{
-			get { return (int)udTXFilterLow.Value; }
+        public int TXFilterLow
+        {
+            get { return (int)udTXFilterLow.Value; }
             set
             {
                 if (value > udTXFilterLow.Maximum) value = (int)udTXFilterLow.Maximum;
                 if (value < udTXFilterLow.Minimum) value = (int)udTXFilterLow.Minimum;
                 udTXFilterLow.Value = value;
             }
-		}
+        }
 
-		public bool Polyphase
-		{
-			get { return chkSpectrumPolyphase.Checked; }
-			set { chkSpectrumPolyphase.Checked = value; }
-		}
+        public bool Polyphase
+        {
+            get { return chkSpectrumPolyphase.Checked; }
+            set { chkSpectrumPolyphase.Checked = value; }
+        }
 
-		public bool CustomRXAGCEnabled
-		{
-			set
-			{
-				udDSPAGCAttack.Enabled = value;
-				udDSPAGCDecay.Enabled = value;
-				udDSPAGCHangTime.Enabled = value;
+        public bool CustomRXAGCEnabled
+        {
+            set
+            {
+                udDSPAGCAttack.Enabled = value;
+                udDSPAGCDecay.Enabled = value;
+                udDSPAGCHangTime.Enabled = value;
 
-				if(value)
-				{
-					udDSPAGCAttack_ValueChanged(this, EventArgs.Empty);
-					udDSPAGCDecay_ValueChanged(this, EventArgs.Empty);
-					udDSPAGCHangTime_ValueChanged(this, EventArgs.Empty);
-				}
-			}
-		}
+                if (value)
+                {
+                    udDSPAGCAttack_ValueChanged(this, EventArgs.Empty);
+                    udDSPAGCDecay_ValueChanged(this, EventArgs.Empty);
+                    udDSPAGCHangTime_ValueChanged(this, EventArgs.Empty);
+                }
+            }
+        }
 
-		public bool DirectX
-		{
-			set
-			{
-				if(value)
-				{
-					if(!comboDisplayDriver.Items.Contains("DirectX"))
-						comboDisplayDriver.Items.Add("DirectX");
-				}
-				else
-				{
-					if(comboDisplayDriver.Items.Contains("DirectX"))
-					{
-						comboDisplayDriver.Items.Remove("DirectX");
-						if(comboDisplayDriver.SelectedIndex < 0)
-							comboDisplayDriver.SelectedIndex = 0;
-					}
-				}
-			}
-		}
+        public bool DirectX
+        {
+            set
+            {
+                if (value)
+                {
+                    if (!comboDisplayDriver.Items.Contains("DirectX"))
+                        comboDisplayDriver.Items.Add("DirectX");
+                }
+                else
+                {
+                    if (comboDisplayDriver.Items.Contains("DirectX"))
+                    {
+                        comboDisplayDriver.Items.Remove("DirectX");
+                        if (comboDisplayDriver.SelectedIndex < 0)
+                            comboDisplayDriver.SelectedIndex = 0;
+                    }
+                }
+            }
+        }
 
-		public bool VACEnable
-		{
-			get { return chkAudioEnableVAC.Checked; }
-			set { chkAudioEnableVAC.Checked = value; }
-		}
+        public bool VACEnable
+        {
+            get { return chkAudioEnableVAC.Checked; }
+            set { chkAudioEnableVAC.Checked = value; }
+        }
 
-		public int SoundCardIndex
-		{
-			get { return comboAudioSoundCard.SelectedIndex; }
-			set { comboAudioSoundCard.SelectedIndex = value; }
-		}
+        public int SoundCardIndex
+        {
+            get { return comboAudioSoundCard.SelectedIndex; }
+            set { comboAudioSoundCard.SelectedIndex = value; }
+        }
 
-		private bool force_model = false;
-		public Model CurrentModel
-		{
-			set
-			{
-				switch(value)
-				{
-					case Model.SDR1000:
-						force_model = true;
-						radGenModelSDR1000.Checked = true;
-						break;
-					case Model.SOFTROCK40:
-						force_model = true;
-						radGenModelSoftRock40.Checked = true;
-						break;
-					case Model.DEMO:
-						force_model = true;
-						radGenModelDemoNone.Checked = true;
-						break;
+        private bool force_model = false;
+        public Model CurrentModel
+        {
+            set
+            {
+                switch (value)
+                {
+                    case Model.SDR1000:
+                        force_model = true;
+                        radGenModelSDR1000.Checked = true;
+                        break;
+                    case Model.SOFTROCK40:
+                        force_model = true;
+                        radGenModelSoftRock40.Checked = true;
+                        break;
+                    case Model.DEMO:
+                        force_model = true;
+                        radGenModelDemoNone.Checked = true;
+                        break;
                     case Model.HPSDR:
                         force_model = true;
                         radGenModelHPSDR.Checked = true;
@@ -22727,80 +22843,80 @@ namespace PowerSDR
                         radGenModelHermes.Checked = true;
                         break;
 
-				}
-			}
-		}
+                }
+            }
+        }
 
-		public void ResetFLEX5000()
-		{
-			radGenModelFLEX5000_CheckedChanged(this, EventArgs.Empty);
-		}
+        public void ResetFLEX5000()
+        {
+            radGenModelFLEX5000_CheckedChanged(this, EventArgs.Empty);
+        }
 
-		public bool RXOnly
-		{
-			get { return chkGeneralRXOnly.Checked; }
-			set { chkGeneralRXOnly.Checked = value; }
-		}
+        public bool RXOnly
+        {
+            get { return chkGeneralRXOnly.Checked; }
+            set { chkGeneralRXOnly.Checked = value; }
+        }
 
-		private bool mox;
-		public bool MOX
-		{
-			get { return mox; }
-			set
-			{
-				mox = value;
-				grpGeneralHardwareSDR1000.Enabled = !mox;
-				if(comboAudioSoundCard.SelectedIndex == (int)SoundCard.UNSUPPORTED_CARD)
-					grpAudioDetails1.Enabled = !mox;
-				grpAudioCard.Enabled = !mox;
-				grpAudioBufferSize1.Enabled = !mox;
-				grpAudioVolts1.Enabled = !mox;
-				grpAudioLatency1.Enabled = !mox;
-				chkAudioEnableVAC.Enabled = !mox;
-				if(chkAudioEnableVAC.Checked)
-				{
-					grpAudioDetails2.Enabled = !mox;
-					grpAudioBuffer2.Enabled = !mox;
-					grpAudioLatency2.Enabled = !mox;
-					grpAudioSampleRate2.Enabled = !mox;
-					grpAudio2Stereo.Enabled = !mox;
-				}
-				else
-				{
-					grpAudioDetails2.Enabled = true;
-					grpAudioBuffer2.Enabled = true;
-					grpAudioLatency2.Enabled = true;
-					grpAudioSampleRate2.Enabled = true;
-					grpAudio2Stereo.Enabled = true;
-				}
-				grpDSPBufferSize.Enabled = !mox;
-				grpTestAudioBalance.Enabled = !mox;
-				if(!mox && !chekTestIMD.Checked && !chkGeneralRXOnly.Checked)
-					grpTestTXIMD.Enabled = !mox;
-			}
-		}
+        private bool mox;
+        public bool MOX
+        {
+            get { return mox; }
+            set
+            {
+                mox = value;
+                grpGeneralHardwareSDR1000.Enabled = !mox;
+                if (comboAudioSoundCard.SelectedIndex == (int)SoundCard.UNSUPPORTED_CARD)
+                    grpAudioDetails1.Enabled = !mox;
+                grpAudioCard.Enabled = !mox;
+                grpAudioBufferSize1.Enabled = !mox;
+                grpAudioVolts1.Enabled = !mox;
+                grpAudioLatency1.Enabled = !mox;
+                chkAudioEnableVAC.Enabled = !mox;
+                if (chkAudioEnableVAC.Checked)
+                {
+                    grpAudioDetails2.Enabled = !mox;
+                    grpAudioBuffer2.Enabled = !mox;
+                    grpAudioLatency2.Enabled = !mox;
+                    grpAudioSampleRate2.Enabled = !mox;
+                    grpAudio2Stereo.Enabled = !mox;
+                }
+                else
+                {
+                    grpAudioDetails2.Enabled = true;
+                    grpAudioBuffer2.Enabled = true;
+                    grpAudioLatency2.Enabled = true;
+                    grpAudioSampleRate2.Enabled = true;
+                    grpAudio2Stereo.Enabled = true;
+                }
+                grpDSPBufferSize.Enabled = !mox;
+                grpTestAudioBalance.Enabled = !mox;
+                if (!mox && !chekTestIMD.Checked && !chkGeneralRXOnly.Checked)
+                    grpTestTXIMD.Enabled = !mox;
+            }
+        }
 
-		public int TXAF
-		{
-			get { return (int)udTXAF.Value; }
-			set { udTXAF.Value = value; }
-		}
-			
-		public int AudioReceiveMux1
-		{
-			get { return comboAudioReceive1.SelectedIndex; }
-			set
-			{
-				comboAudioReceive1.SelectedIndex = value;
-				comboAudioReceive1_SelectedIndexChanged(this, EventArgs.Empty);
-			}
-		}
+        public int TXAF
+        {
+            get { return (int)udTXAF.Value; }
+            set { udTXAF.Value = value; }
+        }
 
-		public bool USBPresent
-		{
-			get { return chkGeneralUSBPresent.Checked; }
-			set	{ chkGeneralUSBPresent.Checked = value; }
-		}
+        public int AudioReceiveMux1
+        {
+            get { return comboAudioReceive1.SelectedIndex; }
+            set
+            {
+                comboAudioReceive1.SelectedIndex = value;
+                comboAudioReceive1_SelectedIndexChanged(this, EventArgs.Empty);
+            }
+        }
+
+        public bool USBPresent
+        {
+            get { return chkGeneralUSBPresent.Checked; }
+            set { chkGeneralUSBPresent.Checked = value; }
+        }
 
         public bool OzyControl
         {
@@ -22808,47 +22924,47 @@ namespace PowerSDR
             set { chkBoxJanusOzyControl.Checked = value; }
         }
 
-		public bool XVTRPresent
-		{
-			get { return chkGeneralXVTRPresent.Checked; }
-			set	{ chkGeneralXVTRPresent.Checked = value; }
-		}
+        public bool XVTRPresent
+        {
+            get { return chkGeneralXVTRPresent.Checked; }
+            set { chkGeneralXVTRPresent.Checked = value; }
+        }
 
-		public int XVTRSelection
-		{
-			get { return comboGeneralXVTR.SelectedIndex; }
-			set { comboGeneralXVTR.SelectedIndex = value; }
-		}
+        public int XVTRSelection
+        {
+            get { return comboGeneralXVTR.SelectedIndex; }
+            set { comboGeneralXVTR.SelectedIndex = value; }
+        }
 
-		public bool PAPresent
-		{
-			get { return chkGeneralPAPresent.Checked; }
-			set { chkGeneralPAPresent.Checked = value; }
-		}
+        public bool PAPresent
+        {
+            get { return chkGeneralPAPresent.Checked; }
+            set { chkGeneralPAPresent.Checked = value; }
+        }
 
-		public bool ATUPresent
-		{
-			get { return chkGeneralATUPresent.Checked; }
-			set	{ chkGeneralATUPresent.Checked = value; }
-		}
+        public bool ATUPresent
+        {
+            get { return chkGeneralATUPresent.Checked; }
+            set { chkGeneralATUPresent.Checked = value; }
+        }
 
-		public bool SpurRedEnabled
-		{
-			get { return chkGeneralSpurRed.Enabled; }
-			set { chkGeneralSpurRed.Enabled = value; }
-		}
+        public bool SpurRedEnabled
+        {
+            get { return chkGeneralSpurRed.Enabled; }
+            set { chkGeneralSpurRed.Enabled = value; }
+        }
 
-		public int PllMult
-		{
-			get { return (int)udDDSPLLMult.Value; }
-			set	{ udDDSPLLMult.Value = value; }
-		}
+        public int PllMult
+        {
+            get { return (int)udDDSPLLMult.Value; }
+            set { udDDSPLLMult.Value = value; }
+        }
 
-		public int ClockOffset
-		{
-			get { return (int)udDDSCorrection.Value; }
-			set { udDDSCorrection.Value = value; }
-		}
+        public int ClockOffset
+        {
+            get { return (int)udDDSCorrection.Value; }
+            set { udDDSCorrection.Value = value; }
+        }
 
         public double HPSDRFreqCorrectFactor
         {
@@ -22881,97 +22997,97 @@ namespace PowerSDR
             set { chkPennyPresent.Checked = value; }
         }
 
-		public float ImageGainTX
-		{
-			get { return (float)udDSPImageGainTX.Value; }
-			set
-			{
-				try
-				{
-					udDSPImageGainTX.Value = (decimal)value;
-				}
-				catch(Exception)
-				{
-					MessageBox.Show("Error setting TX Image Gain ("+value.ToString("f2")+")");
-				}
-			}
-		}
+        public float ImageGainTX
+        {
+            get { return (float)udDSPImageGainTX.Value; }
+            set
+            {
+                try
+                {
+                    udDSPImageGainTX.Value = (decimal)value;
+                }
+                catch (Exception)
+                {
+                    MessageBox.Show("Error setting TX Image Gain (" + value.ToString("f2") + ")");
+                }
+            }
+        }
 
-		public float ImagePhaseTX
-		{
-			get { return (float)udDSPImagePhaseTX.Value; }
-			set	
-			{
-				try
-				{
-					udDSPImagePhaseTX.Value = (decimal)value;
-				}
-				catch(Exception)
-				{
-					MessageBox.Show("Error setting TX Image Phase ("+value.ToString("f2")+")");
-				}
-			}
-		}
+        public float ImagePhaseTX
+        {
+            get { return (float)udDSPImagePhaseTX.Value; }
+            set
+            {
+                try
+                {
+                    udDSPImagePhaseTX.Value = (decimal)value;
+                }
+                catch (Exception)
+                {
+                    MessageBox.Show("Error setting TX Image Phase (" + value.ToString("f2") + ")");
+                }
+            }
+        }
 
-		public float PAGain160
-		{
-			get { return (float)udPAGain160.Value; }
-			set	{ udPAGain160.Value = (decimal)value; }
-		}
+        public float PAGain160
+        {
+            get { return (float)udPAGain160.Value; }
+            set { udPAGain160.Value = (decimal)value; }
+        }
 
-		public float PAGain80
-		{
-			get { return (float)udPAGain80.Value; }
-			set	{ udPAGain80.Value = (decimal)value; }
-		}
+        public float PAGain80
+        {
+            get { return (float)udPAGain80.Value; }
+            set { udPAGain80.Value = (decimal)value; }
+        }
 
-		public float PAGain60
-		{
-			get { return (float)udPAGain60.Value; }
-			set	{ udPAGain60.Value = (decimal)value; }
-		}
+        public float PAGain60
+        {
+            get { return (float)udPAGain60.Value; }
+            set { udPAGain60.Value = (decimal)value; }
+        }
 
-		public float PAGain40
-		{
-			get { return (float)udPAGain40.Value; }
-			set	{ udPAGain40.Value = (decimal)value; }
-		}
+        public float PAGain40
+        {
+            get { return (float)udPAGain40.Value; }
+            set { udPAGain40.Value = (decimal)value; }
+        }
 
-		public float PAGain30
-		{
-			get { return (float)udPAGain30.Value; }
-			set	{ udPAGain30.Value = (decimal)value; }
-		}
+        public float PAGain30
+        {
+            get { return (float)udPAGain30.Value; }
+            set { udPAGain30.Value = (decimal)value; }
+        }
 
-		public float PAGain20
-		{
-			get { return (float)udPAGain20.Value; }
-			set { udPAGain20.Value = (decimal)value; }
-		}
+        public float PAGain20
+        {
+            get { return (float)udPAGain20.Value; }
+            set { udPAGain20.Value = (decimal)value; }
+        }
 
-		public float PAGain17
-		{
-			get { return (float)udPAGain17.Value; }
-			set	{ udPAGain17.Value = (decimal)value; }
-		}
+        public float PAGain17
+        {
+            get { return (float)udPAGain17.Value; }
+            set { udPAGain17.Value = (decimal)value; }
+        }
 
-		public float PAGain15
-		{
-			get { return (float)udPAGain15.Value; }
-			set	{ udPAGain15.Value = (decimal)value; }
-		}
+        public float PAGain15
+        {
+            get { return (float)udPAGain15.Value; }
+            set { udPAGain15.Value = (decimal)value; }
+        }
 
-		public float PAGain12
-		{
-			get { return (float)udPAGain12.Value; }
-			set { udPAGain12.Value = (decimal)value; }
-		}
+        public float PAGain12
+        {
+            get { return (float)udPAGain12.Value; }
+            set { udPAGain12.Value = (decimal)value; }
+        }
 
-		public float PAGain10
-		{
-			get { return (float)udPAGain10.Value; }
-			set { udPAGain10.Value = (decimal)value; }
-		}
+        public float PAGain10
+        {
+            get { return (float)udPAGain10.Value; }
+            set { udPAGain10.Value = (decimal)value; }
+        }
 
         public float PAGain6
         {
@@ -23063,287 +23179,287 @@ namespace PowerSDR
         }
 
         public float PAADC160
-		{
-			get { return (float)udPAADC160.Value; }
-			set { udPAADC160.Value = (decimal)value; }
-		}
+        {
+            get { return (float)udPAADC160.Value; }
+            set { udPAADC160.Value = (decimal)value; }
+        }
 
-		public float PAADC80
-		{
-			get { return (float)udPAADC80.Value; }
-			set	{ udPAADC80.Value = (decimal)value; }
-		}
+        public float PAADC80
+        {
+            get { return (float)udPAADC80.Value; }
+            set { udPAADC80.Value = (decimal)value; }
+        }
 
-		public float PAADC60
-		{
-			get { return (float)udPAADC60.Value; }
-			set { udPAADC60.Value = (decimal)value;	}
-		}
+        public float PAADC60
+        {
+            get { return (float)udPAADC60.Value; }
+            set { udPAADC60.Value = (decimal)value; }
+        }
 
-		public float PAADC40
-		{
-			get { return (float)udPAADC40.Value; }
-			set { udPAADC40.Value = (decimal)value; }
-		}
+        public float PAADC40
+        {
+            get { return (float)udPAADC40.Value; }
+            set { udPAADC40.Value = (decimal)value; }
+        }
 
-		public float PAADC30
-		{
-			get { return (float)udPAADC30.Value; }
-			set { udPAADC30.Value = (decimal)value; }
-		}
+        public float PAADC30
+        {
+            get { return (float)udPAADC30.Value; }
+            set { udPAADC30.Value = (decimal)value; }
+        }
 
-		public float PAADC20
-		{
-			get { return (float)udPAADC20.Value; }
-			set { udPAADC20.Value = (decimal)value; }
-		}
+        public float PAADC20
+        {
+            get { return (float)udPAADC20.Value; }
+            set { udPAADC20.Value = (decimal)value; }
+        }
 
-		public float PAADC17
-		{
-			get { return (float)udPAADC17.Value; }
-			set { udPAADC17.Value = (decimal)value; }
-		}
+        public float PAADC17
+        {
+            get { return (float)udPAADC17.Value; }
+            set { udPAADC17.Value = (decimal)value; }
+        }
 
-		public float PAADC15
-		{
-			get { return (float)udPAADC15.Value; }
-			set { udPAADC15.Value = (decimal)value; }
-		}
+        public float PAADC15
+        {
+            get { return (float)udPAADC15.Value; }
+            set { udPAADC15.Value = (decimal)value; }
+        }
 
-		public float PAADC12
-		{
-			get { return (float)udPAADC12.Value; }
-			set { udPAADC12.Value = (decimal)value; }
-		}
+        public float PAADC12
+        {
+            get { return (float)udPAADC12.Value; }
+            set { udPAADC12.Value = (decimal)value; }
+        }
 
-		public float PAADC10
-		{
-			get { return (float)udPAADC10.Value; }
-			set { udPAADC10.Value = (decimal)value; }
-		}
+        public float PAADC10
+        {
+            get { return (float)udPAADC10.Value; }
+            set { udPAADC10.Value = (decimal)value; }
+        }
 
-		public int TunePower
-		{
-			get { return (int)udTXTunePower.Value; }
-			set { udTXTunePower.Value = (decimal)value; }
-		}
+        public int TunePower
+        {
+            get { return (int)udTXTunePower.Value; }
+            set { udTXTunePower.Value = (decimal)value; }
+        }
 
-		public bool DigUIsUSB
-		{
-			get { return chkDigUIsUSB.Checked; }
-		}
+        public bool DigUIsUSB
+        {
+            get { return chkDigUIsUSB.Checked; }
+        }
 
-		// Added 06/21/05 BT for CAT commands
+        // Added 06/21/05 BT for CAT commands
 
-		public int CATNB1Threshold
-		{
-			get{ return Convert.ToInt32(udDSPNB.Value); }
-			set
-			{
-				value = (int)Math.Max(udDSPNB.Minimum, value);			// lower bound
-				value = (int)Math.Min(udDSPNB.Maximum, value);			// upper bound
-				udDSPNB.Value = value;
-			}
-		}
+        public int CATNB1Threshold
+        {
+            get { return Convert.ToInt32(udDSPNB.Value); }
+            set
+            {
+                value = (int)Math.Max(udDSPNB.Minimum, value);			// lower bound
+                value = (int)Math.Min(udDSPNB.Maximum, value);			// upper bound
+                udDSPNB.Value = value;
+            }
+        }
 
-		// Added 06/21/05 BT for CAT commands
-		public int CATNB2Threshold
-		{
-			get{return Convert.ToInt32(udDSPNB2.Value);}
-			set
-			{
-				value = (int)Math.Max(udDSPNB2.Minimum, value);
-				value = (int)Math.Min(udDSPNB2.Maximum, value);
-				udDSPNB2.Value = value;
-			}
-		}
+        // Added 06/21/05 BT for CAT commands
+        public int CATNB2Threshold
+        {
+            get { return Convert.ToInt32(udDSPNB2.Value); }
+            set
+            {
+                value = (int)Math.Max(udDSPNB2.Minimum, value);
+                value = (int)Math.Min(udDSPNB2.Maximum, value);
+                udDSPNB2.Value = value;
+            }
+        }
 
-		// Added 06/21/05 BT for CAT commands
-		/*public int CATCompThreshold
-		{
-			get{return Convert.ToInt32(udTXFFCompression.Value);}
-			set
-			{
-				value = (int)Math.Max(udTXFFCompression.Minimum, value);
-				value = (int)Math.Min(udTXFFCompression.Maximum, value);
-				udTXFFCompression.Value = value;
-			}
-		}*/
+        // Added 06/21/05 BT for CAT commands
+        /*public int CATCompThreshold
+        {
+            get{return Convert.ToInt32(udTXFFCompression.Value);}
+            set
+            {
+                value = (int)Math.Max(udTXFFCompression.Minimum, value);
+                value = (int)Math.Min(udTXFFCompression.Maximum, value);
+                udTXFFCompression.Value = value;
+            }
+        }*/
 
-		// Added 06/30/05 BT for CAT commands
-		public int CATCWPitch
-		{
-			get{return (int) udDSPCWPitch.Value;}
-			set
-			{
-				value = (int)Math.Max(udDSPCWPitch.Minimum, value);
-				value = (int)Math.Min(udDSPCWPitch.Maximum, value);
-				udDSPCWPitch.Value = value;
-			}
-		}
+        // Added 06/30/05 BT for CAT commands
+        public int CATCWPitch
+        {
+            get { return (int)udDSPCWPitch.Value; }
+            set
+            {
+                value = (int)Math.Max(udDSPCWPitch.Minimum, value);
+                value = (int)Math.Min(udDSPCWPitch.Maximum, value);
+                udDSPCWPitch.Value = value;
+            }
+        }
 
-		// Added 07/07/05 BT for CAT commands
-		public void CATSetRig(string rig)
-		{
-			comboCATRigType.Text = rig;
-		}
-
-
-		// Added 06/30/05 BT for CAT commands
-		//		public int CATTXPreGain
-		//		{
-		//			get{return (int) udTXPreGain.Value;}
-		//			set
-		//			{
-		//				value = Math.Max(-30, value);
-		//				value = Math.Min(70, value);
-		//				udTXPreGain.Value = value;
-		//			}
-		//		}
-
-		public int DSPPhoneRXBuffer
-		{
-			get { return Int32.Parse(comboDSPPhoneRXBuf.Text); }
-			set
-			{
-				string temp = value.ToString();
-				if(comboDSPPhoneRXBuf.Items.Contains(temp))
-					comboDSPPhoneRXBuf.SelectedItem = temp;
-			}
-		}
-
-		public int DSPPhoneTXBuffer
-		{
-			get{return Int32.Parse(comboDSPPhoneTXBuf.Text);}
-			set
-			{
-				string temp = value.ToString();
-				if(comboDSPPhoneTXBuf.Items.Contains(temp))
-					comboDSPPhoneTXBuf.SelectedItem = temp;
-			}
-		}
-
-		public int DSPCWRXBuffer
-		{
-			get { return Int32.Parse(comboDSPCWRXBuf.Text); }
-			set
-			{
-				string temp = value.ToString();
-				if(comboDSPCWRXBuf.Items.Contains(temp))
-					comboDSPCWRXBuf.SelectedItem = temp;
-			}
-		}
-
-		public int DSPCWTXBuffer
-		{
-			get{return Int32.Parse(comboDSPCWTXBuf.Text);}
-			set
-			{
-				string temp = value.ToString();
-				if(comboDSPCWTXBuf.Items.Contains(temp))
-					comboDSPCWTXBuf.SelectedItem = temp;
-			}
-		}
-
-		public int DSPDigRXBuffer
-		{
-			get { return Int32.Parse(comboDSPDigRXBuf.Text); }
-			set
-			{
-				string temp = value.ToString();
-				if(comboDSPDigRXBuf.Items.Contains(temp))
-					comboDSPDigRXBuf.SelectedItem = temp;
-			}
-		}
-
-		public int DSPDigTXBuffer
-		{
-			get{return Int32.Parse(comboDSPDigTXBuf.Text);}
-			set
-			{
-				string temp = value.ToString();
-				if(comboDSPDigTXBuf.Items.Contains(temp))
-					comboDSPDigTXBuf.SelectedItem = temp;
-			}
-		}
-
-		public int AudioBufferSize
-		{
-			get{return Int32.Parse(comboAudioBuffer1.Text);}
-			set
-			{
-				string temp = value.ToString();
-				if(comboAudioBuffer1.Items.Contains(temp))
-					comboAudioBuffer1.SelectedItem = temp;
-			}
-		}
-
-		private bool flex_profiler_installed = false;
-		public bool FlexProfilerInstalled
-		{
-			get{return flex_profiler_installed;}
-			set{flex_profiler_installed = value;}
-		}
-
-		private bool allow_freq_broadcast = false;
-		public bool AllowFreqBroadcast
-		{
-			get{return allow_freq_broadcast;}
-			set
-			{
-				allow_freq_broadcast = value;
-				if(value)
-					console.KWAutoInformation = true;
-				else
-					console.KWAutoInformation = false;
-			}
-		}
-
-		private bool rtty_offset_enabled_a;
-		public bool RttyOffsetEnabledA
-		{
-			get{return rtty_offset_enabled_a;}
-			set{chkRTTYOffsetEnableA.Checked = value;}
-		}
-
-		private bool rtty_offset_enabled_b;
-		public bool RttyOffsetEnabledB
-		{
-			get{return rtty_offset_enabled_b;}
-			set{chkRTTYOffsetEnableB.Checked = value;}
-		}
-
-		private int rtty_offset_high = 2125;
-		public int RttyOffsetHigh
-		{
-			get{return rtty_offset_high;}
-			set
-			{
-				value = (int)Math.Max(udRTTYU.Minimum, value);
-				value = (int)Math.Min(udRTTYU.Maximum, value);
-				udRTTYU.Value = value;
-			}
-		}
-
-		private int rtty_offset_low = 2125;
-		public int RttyOffsetLow
-		{
-			get{return rtty_offset_low;}
-			set
-			{
-				value = (int)Math.Max(udRTTYL.Minimum, value);
-				value = (int)Math.Min(udRTTYL.Maximum, value);
-				udRTTYL.Value = value;
-			}
-		}
+        // Added 07/07/05 BT for CAT commands
+        public void CATSetRig(string rig)
+        {
+            comboCATRigType.Text = rig;
+        }
 
 
-		#endregion
+        // Added 06/30/05 BT for CAT commands
+        //		public int CATTXPreGain
+        //		{
+        //			get{return (int) udTXPreGain.Value;}
+        //			set
+        //			{
+        //				value = Math.Max(-30, value);
+        //				value = Math.Min(70, value);
+        //				udTXPreGain.Value = value;
+        //			}
+        //		}
 
-		#region General Tab Event Handlers
-		// ======================================================
-		// General Tab Event Handlers
-		// ======================================================
+        public int DSPPhoneRXBuffer
+        {
+            get { return Int32.Parse(comboDSPPhoneRXBuf.Text); }
+            set
+            {
+                string temp = value.ToString();
+                if (comboDSPPhoneRXBuf.Items.Contains(temp))
+                    comboDSPPhoneRXBuf.SelectedItem = temp;
+            }
+        }
+
+        public int DSPPhoneTXBuffer
+        {
+            get { return Int32.Parse(comboDSPPhoneTXBuf.Text); }
+            set
+            {
+                string temp = value.ToString();
+                if (comboDSPPhoneTXBuf.Items.Contains(temp))
+                    comboDSPPhoneTXBuf.SelectedItem = temp;
+            }
+        }
+
+        public int DSPCWRXBuffer
+        {
+            get { return Int32.Parse(comboDSPCWRXBuf.Text); }
+            set
+            {
+                string temp = value.ToString();
+                if (comboDSPCWRXBuf.Items.Contains(temp))
+                    comboDSPCWRXBuf.SelectedItem = temp;
+            }
+        }
+
+        public int DSPCWTXBuffer
+        {
+            get { return Int32.Parse(comboDSPCWTXBuf.Text); }
+            set
+            {
+                string temp = value.ToString();
+                if (comboDSPCWTXBuf.Items.Contains(temp))
+                    comboDSPCWTXBuf.SelectedItem = temp;
+            }
+        }
+
+        public int DSPDigRXBuffer
+        {
+            get { return Int32.Parse(comboDSPDigRXBuf.Text); }
+            set
+            {
+                string temp = value.ToString();
+                if (comboDSPDigRXBuf.Items.Contains(temp))
+                    comboDSPDigRXBuf.SelectedItem = temp;
+            }
+        }
+
+        public int DSPDigTXBuffer
+        {
+            get { return Int32.Parse(comboDSPDigTXBuf.Text); }
+            set
+            {
+                string temp = value.ToString();
+                if (comboDSPDigTXBuf.Items.Contains(temp))
+                    comboDSPDigTXBuf.SelectedItem = temp;
+            }
+        }
+
+        public int AudioBufferSize
+        {
+            get { return Int32.Parse(comboAudioBuffer1.Text); }
+            set
+            {
+                string temp = value.ToString();
+                if (comboAudioBuffer1.Items.Contains(temp))
+                    comboAudioBuffer1.SelectedItem = temp;
+            }
+        }
+
+        private bool flex_profiler_installed = false;
+        public bool FlexProfilerInstalled
+        {
+            get { return flex_profiler_installed; }
+            set { flex_profiler_installed = value; }
+        }
+
+        private bool allow_freq_broadcast = false;
+        public bool AllowFreqBroadcast
+        {
+            get { return allow_freq_broadcast; }
+            set
+            {
+                allow_freq_broadcast = value;
+                if (value)
+                    console.KWAutoInformation = true;
+                else
+                    console.KWAutoInformation = false;
+            }
+        }
+
+        private bool rtty_offset_enabled_a;
+        public bool RttyOffsetEnabledA
+        {
+            get { return rtty_offset_enabled_a; }
+            set { chkRTTYOffsetEnableA.Checked = value; }
+        }
+
+        private bool rtty_offset_enabled_b;
+        public bool RttyOffsetEnabledB
+        {
+            get { return rtty_offset_enabled_b; }
+            set { chkRTTYOffsetEnableB.Checked = value; }
+        }
+
+        private int rtty_offset_high = 2125;
+        public int RttyOffsetHigh
+        {
+            get { return rtty_offset_high; }
+            set
+            {
+                value = (int)Math.Max(udRTTYU.Minimum, value);
+                value = (int)Math.Min(udRTTYU.Maximum, value);
+                udRTTYU.Value = value;
+            }
+        }
+
+        private int rtty_offset_low = 2125;
+        public int RttyOffsetLow
+        {
+            get { return rtty_offset_low; }
+            set
+            {
+                value = (int)Math.Max(udRTTYL.Minimum, value);
+                value = (int)Math.Min(udRTTYL.Maximum, value);
+                udRTTYL.Value = value;
+            }
+        }
+
+
+        #endregion
+
+        #region General Tab Event Handlers
+        // ======================================================
+        // General Tab Event Handlers
+        // ======================================================
 
         private void radGenModelFLEX5000_CheckedChanged(object sender, System.EventArgs e)
         {
@@ -23353,7 +23469,7 @@ namespace PowerSDR
                 {
                     console.fwc_init = Pal.Init();
                     if (console.fwc_init)
-                    {                        
+                    {
                         FWCEEPROM.Init();
                         console.CurrentRegion = FWCEEPROM.Region;
                         FWC.SetPalCallback();
@@ -23596,11 +23712,11 @@ namespace PowerSDR
             grpTestX2.Visible = !b;
         }
 
-		private void radGenModelSDR1000_CheckedChanged(object sender, System.EventArgs e)
-		{
-			if(radGenModelSDR1000.Checked)
-			{
-				console.CurrentModel = Model.SDR1000;
+        private void radGenModelSDR1000_CheckedChanged(object sender, System.EventArgs e)
+        {
+            if (radGenModelSDR1000.Checked)
+            {
+                console.CurrentModel = Model.SDR1000;
                 comboGeneralLPTAddr_SelectedIndexChanged(this, EventArgs.Empty);
                 chkGeneralUSBPresent_CheckedChanged(this, EventArgs.Empty);
                 chkGeneralPAPresent_CheckedChanged(this, EventArgs.Empty);
@@ -23608,31 +23724,31 @@ namespace PowerSDR
                 chkXVTRPresent_CheckedChanged(this, EventArgs.Empty);
                 comboGeneralXVTR_SelectedIndexChanged(this, EventArgs.Empty);
 
-				if(radGenModelSDR1000.Focused || force_model)
-				{
-					chkGeneralRXOnly.Checked = false;
-					chkGeneralDisablePTT.Checked = false;
-					force_model = false;
-				}
-				chkGeneralRXOnly.Enabled = true;
+                if (radGenModelSDR1000.Focused || force_model)
+                {
+                    chkGeneralRXOnly.Checked = false;
+                    chkGeneralDisablePTT.Checked = false;
+                    force_model = false;
+                }
+                chkGeneralRXOnly.Enabled = true;
 
-				string key = comboKeyerConnPrimary.Text;
-				if(comboKeyerConnPrimary.Items.Contains("Radio"))
+                string key = comboKeyerConnPrimary.Text;
+                if (comboKeyerConnPrimary.Items.Contains("Radio"))
                     comboKeyerConnPrimary.Items.Remove("Radio");
-				if(!comboKeyerConnPrimary.Items.Contains("SDR"))
-					comboKeyerConnPrimary.Items.Insert(0, "SDR");
+                if (!comboKeyerConnPrimary.Items.Contains("SDR"))
+                    comboKeyerConnPrimary.Items.Insert(0, "SDR");
                 if (key == "Radio") comboKeyerConnPrimary.Text = "SDR";
-				else comboKeyerConnPrimary.Text = key;
-				comboKeyerConnPrimary_SelectedIndexChanged(this, EventArgs.Empty);
+                else comboKeyerConnPrimary.Text = key;
+                comboKeyerConnPrimary_SelectedIndexChanged(this, EventArgs.Empty);
                 lblF3KFanTempThresh.Visible = false;
                 udF3KFanTempThresh.Visible = false;
                 chkGenTX1Delay.Visible = false;
                 lblGenTX1Delay.Visible = false;
                 udGenTX1Delay.Visible = false;
                 grpHWSoftRock.Visible = false;
-			}
-			else console.XVTRPresent = false;
-		}
+            }
+            else console.XVTRPresent = false;
+        }
 
         private void radGenModelHermes_CheckedChanged(object sender, System.EventArgs e)
         {
@@ -23640,23 +23756,39 @@ namespace PowerSDR
             {
                 console.CurrentModel = Model.HERMES;
                 chkPennyPresent.Checked = true;
+                chkPennyPresent.Enabled = false;
                 chkMercuryPresent.Checked = true;
+                chkMercuryPresent.Enabled = false;
+                chkJanusPresent.Checked = false;
+                chkJanusPresent.Enabled = false;
+                chkExcaliburPresent.Checked = false;
+                chkExcaliburPresent.Enabled = false;
             }
             radGenModelHPSDR_or_Hermes_CheckedChanged(sender, e, true);
         }
-
 
         private void radGenModelHPSDR_CheckedChanged(object sender, System.EventArgs e)
         {
             if (radGenModelHPSDR.Checked)
             {
                 console.CurrentModel = Model.HPSDR;
+                chkPennyPresent.Enabled = true;
+                chkMercuryPresent.Enabled = true;
+                chkJanusPresent.Enabled = true;
+                chkExcaliburPresent.Enabled = true;
             }
             radGenModelHPSDR_or_Hermes_CheckedChanged(sender, e, false);
+
+            if (radMetis.Checked)
+            {
+                console.HPSDRisMetis = true;
+                grpMetisAddr.Visible = true;
+            }
+
         }
 
-		private void radGenModelSoftRock40_CheckedChanged(object sender, System.EventArgs e)
-		{
+        private void radGenModelSoftRock40_CheckedChanged(object sender, System.EventArgs e)
+        {
             if (radGenModelSoftRock40.Checked)
             {
                 chkGeneralDisablePTT.Checked = true;
@@ -23676,18 +23808,18 @@ namespace PowerSDR
                 udGenTX1Delay.Visible = false;
 
                 grpHWSoftRock.Visible = !console.si570_used;  // modif F8CHK
-                grpSI570.Visible = console.si570_used ;
+                grpSI570.Visible = console.si570_used;
             }
             else
             {
                 chkGeneralUseSi570.Visible = false; // modif F8CHK    
                 grpSI570.Visible = false;
             }
-		}
+        }
 
-		private void radGenModelDemoNone_CheckedChanged(object sender, System.EventArgs e)
-		{
-			if(radGenModelDemoNone.Checked)
+        private void radGenModelDemoNone_CheckedChanged(object sender, System.EventArgs e)
+        {
+            if (radGenModelDemoNone.Checked)
             {
                 console.CurrentModel = Model.DEMO;
                 //if(radGenModelDemoNone.Focused || force_model)
@@ -23711,7 +23843,7 @@ namespace PowerSDR
                 chkGeneralRXOnly.Enabled = true;
                 RadioDSP.SetThreadNumber(1);
             }
-		}
+        }
 
         private void radGenModelHPSDR_or_Hermes_CheckedChanged(object sender, System.EventArgs e, bool is_hermes)
         {
@@ -23769,15 +23901,30 @@ namespace PowerSDR
                 lblGeneralX2Delay.Visible = false;
                 udGeneralX2Delay.Visible = false;
                 rtxtPACalReq.Visible = false;
-                    
+
                 if (is_hermes)
                 {
-                    groupBoxHPSDRHW.Visible = false;
+                    groupBoxHPSDRHW.Visible = true;
+                    grpOzyType.Visible = true;
+                    grpOzyType.Enabled = true;
+                    // make sure one of these is checked 
+                    if (radOzyUSB.Checked == false && radMetis.Checked == false)
+                    {
+                        radMetis.Checked = true;
+                        grpMetisAddr.Visible = true;
+                    }
                 }
                 else
                 {
                     groupBoxHPSDRHW.Visible = true;
+                    grpOzyType.Visible = true;
+                    grpOzyType.Enabled = true;
+                    if (radOzyUSB.Checked == false && radMetis.Checked == false)
+                    {
+                        radOzyUSB.Checked = true;
+                    }
                 }
+
                 chkGeneralSpurRed.Visible = false;
                 chkGeneralSpurRed.Checked = false;
                 chkGeneralSpurRed.Enabled = false;
@@ -23818,8 +23965,12 @@ namespace PowerSDR
             }
             else
             {
-                RemoveHPSDRPages();             
+                RemoveHPSDRPages();
                 grpDSPImageRejectTX.Enabled = true;
+
+                grpOzyType.Visible = false;
+                grpOzyType.Enabled = false;
+                grpMetisAddr.Visible = false;
 
                 comboAudioSoundCard.Enabled = true;
                 comboAudioSampleRate1.Enabled = true;
@@ -23959,448 +24110,448 @@ namespace PowerSDR
         }
 
 
-		private void udSoftRockCenterFreq_ValueChanged(object sender, System.EventArgs e)
-		{
-			console.SoftRockCenterFreq = (double)udSoftRockCenterFreq.Value;
-		}
+        private void udSoftRockCenterFreq_ValueChanged(object sender, System.EventArgs e)
+        {
+            console.SoftRockCenterFreq = (double)udSoftRockCenterFreq.Value;
+        }
 
-		private void comboGeneralLPTAddr_SelectedIndexChanged(object sender, System.EventArgs e)
-		{
-			if(comboGeneralLPTAddr.Text == "" || console.CurrentModel != Model.SDR1000)
-				return;
+        private void comboGeneralLPTAddr_SelectedIndexChanged(object sender, System.EventArgs e)
+        {
+            if (comboGeneralLPTAddr.Text == "" || console.CurrentModel != Model.SDR1000)
+                return;
             console.Hdw.LPTAddr = Convert.ToUInt16(comboGeneralLPTAddr.Text, 16);
-		}
+        }
 
-		private void comboGeneralLPTAddr_KeyDown(object sender, System.Windows.Forms.KeyEventArgs e)
-		{
+        private void comboGeneralLPTAddr_KeyDown(object sender, System.Windows.Forms.KeyEventArgs e)
+        {
             if (console.CurrentModel != Model.SDR1000) return;
             if (comboGeneralLPTAddr.Text == "") return;
-			if(e.KeyData == Keys.Enter)
-			{
-				if(comboGeneralLPTAddr.Text.Length > 4)
-				{
-					MessageBox.Show("Invalid Parallel Port Address ("+comboGeneralLPTAddr.Text+")");
-					comboGeneralLPTAddr.Text = "378";
-					return;
-				}
+            if (e.KeyData == Keys.Enter)
+            {
+                if (comboGeneralLPTAddr.Text.Length > 4)
+                {
+                    MessageBox.Show("Invalid Parallel Port Address (" + comboGeneralLPTAddr.Text + ")");
+                    comboGeneralLPTAddr.Text = "378";
+                    return;
+                }
 
-				foreach(Char c in comboGeneralLPTAddr.Text)
-				{
-					if(!Char.IsDigit(c) &&
-						Char.ToLower(c) < 'a' &&
-						Char.ToLower(c) > 'f')
-					{
-						MessageBox.Show("Invalid Parallel Port Address ("+comboGeneralLPTAddr.Text+")");
-						comboGeneralLPTAddr.Text = "378";
-						return;
-					}
-				}
+                foreach (Char c in comboGeneralLPTAddr.Text)
+                {
+                    if (!Char.IsDigit(c) &&
+                        Char.ToLower(c) < 'a' &&
+                        Char.ToLower(c) > 'f')
+                    {
+                        MessageBox.Show("Invalid Parallel Port Address (" + comboGeneralLPTAddr.Text + ")");
+                        comboGeneralLPTAddr.Text = "378";
+                        return;
+                    }
+                }
 
-				console.Hdw.LPTAddr = Convert.ToUInt16(comboGeneralLPTAddr.Text, 16);
-			}
-					
-		}
+                console.Hdw.LPTAddr = Convert.ToUInt16(comboGeneralLPTAddr.Text, 16);
+            }
 
-		private void comboGeneralLPTAddr_LostFocus(object sender, System.EventArgs e)
-		{
-			comboGeneralLPTAddr_KeyDown(sender, new KeyEventArgs(Keys.Enter));
-		}
-		
-		private void chkGeneralRXOnly_CheckedChanged(object sender, System.EventArgs e)
-		{
-			if(chkGeneralRXOnly.Focused && 
-				comboAudioSoundCard.Text == "Unsupported Card" &&
-				!chkGeneralRXOnly.Checked &&
-				radGenModelSDR1000.Checked)
-			{
-				DialogResult dr = MessageBox.Show(
-					"Unchecking Receive Only while in Unsupported Card mode may \n"+
-					"cause damage to your SDR-1000 hardware.  Are you sure you want \n"+
-					"to enable transmit?",
-					"Warning: Enable Transmit?",
-					MessageBoxButtons.YesNo,
-					MessageBoxIcon.Warning);
-				if(dr == DialogResult.No)
-				{
-					chkGeneralRXOnly.Checked = true;
-					return;
-				}
-			}
-			console.RXOnly = chkGeneralRXOnly.Checked;
-			tpTransmit.Enabled = !chkGeneralRXOnly.Checked;
-			tpPowerAmplifier.Enabled = !chkGeneralRXOnly.Checked;
-			grpTestTXIMD.Enabled = !chkGeneralRXOnly.Checked;
-		}
+        }
 
-		private void chkGeneralUSBPresent_CheckedChanged(object sender, System.EventArgs e)
-		{
-			try
-			{
-				console.USBPresent = chkGeneralUSBPresent.Checked;
-				if(chkGeneralUSBPresent.Checked)
-				{
-					if(!USB.Init(true, chkGeneralPAPresent.Checked))
-						chkGeneralUSBPresent.Checked = false;
-					else USB.Console = console;
-				}
-				else
-					USB.Exit();
-				
-				if(console.PowerOn)
-				{
-					console.PowerOn = false;
-					Thread.Sleep(100);
-					console.PowerOn = true;
-				}				
-			}
-			catch(Exception)
-			{
-				MessageBox.Show("A required DLL was not found (Sdr1kUsb.dll).  Please download the\n"+
-					"installer from the FlexRadio private download page and try again.",
-					"Error: Missing DLL",
-					MessageBoxButtons.OK,
-					MessageBoxIcon.Error);
-				chkGeneralUSBPresent.Checked = false;
-			}
-		}
+        private void comboGeneralLPTAddr_LostFocus(object sender, System.EventArgs e)
+        {
+            comboGeneralLPTAddr_KeyDown(sender, new KeyEventArgs(Keys.Enter));
+        }
 
-		private void chkGeneralPAPresent_CheckedChanged(object sender, System.EventArgs e)
-		{
-			console.PAPresent = chkGeneralPAPresent.Checked;
-			chkGeneralATUPresent.Visible = chkGeneralPAPresent.Checked;
-			grpPAGainByBand.Visible = chkGeneralPAPresent.Checked;
-			rtxtPACalReq.Visible = chkGeneralPAPresent.Checked;
+        private void chkGeneralRXOnly_CheckedChanged(object sender, System.EventArgs e)
+        {
+            if (chkGeneralRXOnly.Focused &&
+                comboAudioSoundCard.Text == "Unsupported Card" &&
+                !chkGeneralRXOnly.Checked &&
+                radGenModelSDR1000.Checked)
+            {
+                DialogResult dr = MessageBox.Show(
+                    "Unchecking Receive Only while in Unsupported Card mode may \n" +
+                    "cause damage to your SDR-1000 hardware.  Are you sure you want \n" +
+                    "to enable transmit?",
+                    "Warning: Enable Transmit?",
+                    MessageBoxButtons.YesNo,
+                    MessageBoxIcon.Warning);
+                if (dr == DialogResult.No)
+                {
+                    chkGeneralRXOnly.Checked = true;
+                    return;
+                }
+            }
+            console.RXOnly = chkGeneralRXOnly.Checked;
+            tpTransmit.Enabled = !chkGeneralRXOnly.Checked;
+            tpPowerAmplifier.Enabled = !chkGeneralRXOnly.Checked;
+            grpTestTXIMD.Enabled = !chkGeneralRXOnly.Checked;
+        }
 
-			if(!chkGeneralPAPresent.Checked)
-				chkGeneralATUPresent.Checked = false;
-			else if(console.PowerOn)
-			{
-				console.PowerOn = false;
-				Thread.Sleep(100);
-				console.PowerOn = true;
-			}
+        private void chkGeneralUSBPresent_CheckedChanged(object sender, System.EventArgs e)
+        {
+            try
+            {
+                console.USBPresent = chkGeneralUSBPresent.Checked;
+                if (chkGeneralUSBPresent.Checked)
+                {
+                    if (!USB.Init(true, chkGeneralPAPresent.Checked))
+                        chkGeneralUSBPresent.Checked = false;
+                    else USB.Console = console;
+                }
+                else
+                    USB.Exit();
 
-			if(chkGeneralUSBPresent.Checked)
-			{
-				chkGeneralUSBPresent.Checked = false;
-				chkGeneralUSBPresent.Checked = true;
-			}
-		}
+                if (console.PowerOn)
+                {
+                    console.PowerOn = false;
+                    Thread.Sleep(100);
+                    console.PowerOn = true;
+                }
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("A required DLL was not found (Sdr1kUsb.dll).  Please download the\n" +
+                    "installer from the FlexRadio private download page and try again.",
+                    "Error: Missing DLL",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
+                chkGeneralUSBPresent.Checked = false;
+            }
+        }
 
-		private void chkGeneralATUPresent_CheckedChanged(object sender, System.EventArgs e)
-		{
-			console.ATUPresent = chkGeneralATUPresent.Checked;
-		}
+        private void chkGeneralPAPresent_CheckedChanged(object sender, System.EventArgs e)
+        {
+            console.PAPresent = chkGeneralPAPresent.Checked;
+            chkGeneralATUPresent.Visible = chkGeneralPAPresent.Checked;
+            grpPAGainByBand.Visible = chkGeneralPAPresent.Checked;
+            rtxtPACalReq.Visible = chkGeneralPAPresent.Checked;
 
-		private void chkXVTRPresent_CheckedChanged(object sender, System.EventArgs e)
-		{
-			console.XVTRPresent = chkGeneralXVTRPresent.Checked;
-			comboGeneralXVTR.Visible = chkGeneralXVTRPresent.Checked;
-			if(chkGeneralXVTRPresent.Checked)
-			{
-				if(comboGeneralXVTR.SelectedIndex == (int)XVTRTRMode.POSITIVE)
-					comboGeneralXVTR_SelectedIndexChanged(this, EventArgs.Empty);
-				else
-					comboGeneralXVTR.SelectedIndex = (int)XVTRTRMode.POSITIVE;
-			}
-		}
+            if (!chkGeneralPAPresent.Checked)
+                chkGeneralATUPresent.Checked = false;
+            else if (console.PowerOn)
+            {
+                console.PowerOn = false;
+                Thread.Sleep(100);
+                console.PowerOn = true;
+            }
 
-		private void chkGeneralSpurRed_CheckedChanged(object sender, System.EventArgs e)
-		{
-			console.SpurReduction = chkGeneralSpurRed.Checked;
-		}
+            if (chkGeneralUSBPresent.Checked)
+            {
+                chkGeneralUSBPresent.Checked = false;
+                chkGeneralUSBPresent.Checked = true;
+            }
+        }
 
-		private void udDDSCorrection_ValueChanged(object sender, System.EventArgs e)
-		{
-			console.DDSClockCorrection = (double)(udDDSCorrection.Value / 1000000);
-		}
+        private void chkGeneralATUPresent_CheckedChanged(object sender, System.EventArgs e)
+        {
+            console.ATUPresent = chkGeneralATUPresent.Checked;
+        }
 
-		private void udDDSPLLMult_ValueChanged(object sender, System.EventArgs e)
-		{
-			console.Hdw.PLLMult = (int)udDDSPLLMult.Value;
-		}
+        private void chkXVTRPresent_CheckedChanged(object sender, System.EventArgs e)
+        {
+            console.XVTRPresent = chkGeneralXVTRPresent.Checked;
+            comboGeneralXVTR.Visible = chkGeneralXVTRPresent.Checked;
+            if (chkGeneralXVTRPresent.Checked)
+            {
+                if (comboGeneralXVTR.SelectedIndex == (int)XVTRTRMode.POSITIVE)
+                    comboGeneralXVTR_SelectedIndexChanged(this, EventArgs.Empty);
+                else
+                    comboGeneralXVTR.SelectedIndex = (int)XVTRTRMode.POSITIVE;
+            }
+        }
 
-		private void udDDSIFFreq_ValueChanged(object sender, System.EventArgs e)
-		{
-			console.IFFreq = (double)udDDSIFFreq.Value * 1e-6;
-		}
+        private void chkGeneralSpurRed_CheckedChanged(object sender, System.EventArgs e)
+        {
+            console.SpurReduction = chkGeneralSpurRed.Checked;
+        }
 
-		private void btnGeneralCalFreqStart_Click(object sender, System.EventArgs e)
-		{
-			btnGeneralCalFreqStart.Enabled = false;
-			Thread t = new Thread(new ThreadStart(CalibrateFreq));
-			t.Name = "Freq Calibration Thread";
-			t.IsBackground = true;
-			t.Priority = ThreadPriority.AboveNormal;
-			t.Start();
-		}
+        private void udDDSCorrection_ValueChanged(object sender, System.EventArgs e)
+        {
+            console.DDSClockCorrection = (double)(udDDSCorrection.Value / 1000000);
+        }
 
-		private void btnGeneralCalLevelStart_Click(object sender, System.EventArgs e)
-		{
-			btnGeneralCalLevelStart.Enabled = false;
-			progress = new Progress("Calibrate RX Level");
+        private void udDDSPLLMult_ValueChanged(object sender, System.EventArgs e)
+        {
+            console.Hdw.PLLMult = (int)udDDSPLLMult.Value;
+        }
 
-			Thread t = new Thread(new ThreadStart(CalibrateLevel));
-			t.Name = "Level Calibration Thread";
-			t.IsBackground = true;
-			t.Priority = ThreadPriority.AboveNormal;
-			t.Start();
+        private void udDDSIFFreq_ValueChanged(object sender, System.EventArgs e)
+        {
+            console.IFFreq = (double)udDDSIFFreq.Value * 1e-6;
+        }
 
-			if(console.PowerOn)
-				progress.Show();
-		}
+        private void btnGeneralCalFreqStart_Click(object sender, System.EventArgs e)
+        {
+            btnGeneralCalFreqStart.Enabled = false;
+            Thread t = new Thread(new ThreadStart(CalibrateFreq));
+            t.Name = "Freq Calibration Thread";
+            t.IsBackground = true;
+            t.Priority = ThreadPriority.AboveNormal;
+            t.Start();
+        }
 
-		private void btnGeneralCalImageStart_Click(object sender, System.EventArgs e)
-		{
-			btnGeneralCalImageStart.Enabled = false;
-			progress = new Progress("Calibrate RX Image Rejection");
+        private void btnGeneralCalLevelStart_Click(object sender, System.EventArgs e)
+        {
+            btnGeneralCalLevelStart.Enabled = false;
+            progress = new Progress("Calibrate RX Level");
 
-			Thread t = new Thread(new ThreadStart(CalibrateRXImage));
-			t.Name = "RX Image Calibration Thread";
-			t.IsBackground = true;
-			t.Priority = ThreadPriority.AboveNormal;
-			t.Start();
+            Thread t = new Thread(new ThreadStart(CalibrateLevel));
+            t.Name = "Level Calibration Thread";
+            t.IsBackground = true;
+            t.Priority = ThreadPriority.AboveNormal;
+            t.Start();
 
-			if(console.PowerOn)
-				progress.Show();
-		}
+            if (console.PowerOn)
+                progress.Show();
+        }
 
-		private void CalibrateFreq()
-		{
-			bool done = console.CalibrateFreq((float)udGeneralCalFreq1.Value);
-			if(done) MessageBox.Show("Frequency Calibration complete.");
-			btnGeneralCalFreqStart.Enabled = true;
-		}
+        private void btnGeneralCalImageStart_Click(object sender, System.EventArgs e)
+        {
+            btnGeneralCalImageStart.Enabled = false;
+            progress = new Progress("Calibrate RX Image Rejection");
 
-		private void CalibrateLevel()
-		{
-			bool done = console.CalibrateLevel(
-				(float)udGeneralCalLevel.Value,
-				(float)udGeneralCalFreq2.Value,
-				progress,
-				false);
-			if(done) MessageBox.Show("Level Calibration complete.");
-			btnGeneralCalLevelStart.Enabled = true;
-		}
+            Thread t = new Thread(new ThreadStart(CalibrateRXImage));
+            t.Name = "RX Image Calibration Thread";
+            t.IsBackground = true;
+            t.Priority = ThreadPriority.AboveNormal;
+            t.Start();
 
-		private void CalibrateRXImage()
-		{
-			bool done = console.CalibrateRXImage((float)udGeneralCalFreq3.Value, progress, false);
-			if(done) MessageBox.Show("RX Image Rejection Calibration complete.");
-			btnGeneralCalImageStart.Enabled = true;
-		}
+            if (console.PowerOn)
+                progress.Show();
+        }
 
-		private void chkGeneralDisablePTT_CheckedChanged(object sender, System.EventArgs e)
-		{
-			console.DisablePTT = chkGeneralDisablePTT.Checked;
-		}
+        private void CalibrateFreq()
+        {
+            bool done = console.CalibrateFreq((float)udGeneralCalFreq1.Value);
+            if (done) MessageBox.Show("Frequency Calibration complete.");
+            btnGeneralCalFreqStart.Enabled = true;
+        }
 
-		private void comboGeneralXVTR_SelectedIndexChanged(object sender, System.EventArgs e)
-		{
-			switch(comboGeneralXVTR.SelectedIndex)
-			{
-				case (int)XVTRTRMode.NEGATIVE:
-					if(comboGeneralXVTR.Focused)
-					{
-						MessageBox.Show("The default TR Mode for the DEMI144-28FRS sold by FlexRadio Systems is\n"+
-							"Postive TR Logic.  Please use caution when using other TR modes.", "Warning");
-					}
-					break;
-				case (int)XVTRTRMode.POSITIVE:
-				case (int)XVTRTRMode.NONE:
-					break;
-			}
+        private void CalibrateLevel()
+        {
+            bool done = console.CalibrateLevel(
+                (float)udGeneralCalLevel.Value,
+                (float)udGeneralCalFreq2.Value,
+                progress,
+                false);
+            if (done) MessageBox.Show("Level Calibration complete.");
+            btnGeneralCalLevelStart.Enabled = true;
+        }
 
-			console.CurrentXVTRTRMode = (XVTRTRMode)comboGeneralXVTR.SelectedIndex;
-		}
+        private void CalibrateRXImage()
+        {
+            bool done = console.CalibrateRXImage((float)udGeneralCalFreq3.Value, progress, false);
+            if (done) MessageBox.Show("RX Image Rejection Calibration complete.");
+            btnGeneralCalImageStart.Enabled = true;
+        }
 
-		private void chkGeneralSoftwareGainCorr_CheckedChanged(object sender, System.EventArgs e)
-		{
-			console.NoHardwareOffset = chkGeneralSoftwareGainCorr.Checked;
-		}
+        private void chkGeneralDisablePTT_CheckedChanged(object sender, System.EventArgs e)
+        {
+            console.DisablePTT = chkGeneralDisablePTT.Checked;
+        }
 
-		private void chkGeneralEnableX2_CheckedChanged(object sender, System.EventArgs e)
-		{
-			console.X2Enabled = chkGeneralEnableX2.Checked;
-			udGeneralX2Delay.Enabled = chkGeneralEnableX2.Checked;
-		}
+        private void comboGeneralXVTR_SelectedIndexChanged(object sender, System.EventArgs e)
+        {
+            switch (comboGeneralXVTR.SelectedIndex)
+            {
+                case (int)XVTRTRMode.NEGATIVE:
+                    if (comboGeneralXVTR.Focused)
+                    {
+                        MessageBox.Show("The default TR Mode for the DEMI144-28FRS sold by FlexRadio Systems is\n" +
+                            "Postive TR Logic.  Please use caution when using other TR modes.", "Warning");
+                    }
+                    break;
+                case (int)XVTRTRMode.POSITIVE:
+                case (int)XVTRTRMode.NONE:
+                    break;
+            }
 
-		private void udGeneralX2Delay_ValueChanged(object sender, System.EventArgs e)
-		{
-			console.X2Delay = (int)udGeneralX2Delay.Value;
-		}
+            console.CurrentXVTRTRMode = (XVTRTRMode)comboGeneralXVTR.SelectedIndex;
+        }
 
-		private void comboGeneralProcessPriority_SelectedIndexChanged(object sender, System.EventArgs e)
-		{
-			Process p = Process.GetCurrentProcess();
+        private void chkGeneralSoftwareGainCorr_CheckedChanged(object sender, System.EventArgs e)
+        {
+            console.NoHardwareOffset = chkGeneralSoftwareGainCorr.Checked;
+        }
 
-			if(comboGeneralProcessPriority.Text == "Real Time" &&
-				comboGeneralProcessPriority.Focused)
-			{
-				DialogResult dr = MessageBox.Show(
-					"Setting the Process Priority to Realtime can cause the system to become unresponsive.\n"+
-					"This setting is not recommended.\n"+
-					"Are you sure you want to change to Realtime?",
-					"Warning: Realtime Not Recommended",
-					MessageBoxButtons.YesNo,
-					MessageBoxIcon.Warning);
-				if(dr == DialogResult.No)
-				{
-					switch(p.PriorityClass)
-					{
-						case ProcessPriorityClass.Idle:
-							comboGeneralProcessPriority.Text = "Idle";
-							break;
-						case ProcessPriorityClass.BelowNormal:
-							comboGeneralProcessPriority.Text = "Below Normal";
-							break;
-						case ProcessPriorityClass.AboveNormal:
-							comboGeneralProcessPriority.Text = "Above Normal";
-							break;
-						case ProcessPriorityClass.High:
-							comboGeneralProcessPriority.Text = "Highest";
-							break;
-						default:
-							comboGeneralProcessPriority.Text = "Normal";
-							break;
-					}
-					return;
-				}
-			}
-			
-			switch(comboGeneralProcessPriority.Text)
-			{
-				case "Idle":
-					p.PriorityClass = ProcessPriorityClass.Idle;
-					break;
-				case "Below Normal":
-					p.PriorityClass = ProcessPriorityClass.BelowNormal;
-					break;
-				case "Normal":
-					p.PriorityClass = ProcessPriorityClass.Normal;
-					break;
-				case "Above Normal":
-					p.PriorityClass = ProcessPriorityClass.AboveNormal;
-					break;
-				case "High":
-					p.PriorityClass = ProcessPriorityClass.High;
-					break;
-				case "Real Time":
-					p.PriorityClass = ProcessPriorityClass.RealTime;
-					break;
-			}
-		}
+        private void chkGeneralEnableX2_CheckedChanged(object sender, System.EventArgs e)
+        {
+            console.X2Enabled = chkGeneralEnableX2.Checked;
+            udGeneralX2Delay.Enabled = chkGeneralEnableX2.Checked;
+        }
 
-		private void chkGeneralCustomFilter_CheckedChanged(object sender, System.EventArgs e)
-		{
-			console.EnableLPF0 = chkGeneralCustomFilter.Checked;
-		}
+        private void udGeneralX2Delay_ValueChanged(object sender, System.EventArgs e)
+        {
+            console.X2Delay = (int)udGeneralX2Delay.Value;
+        }
 
-		private void chkGeneralUpdateRelease_CheckedChanged(object sender, System.EventArgs e)
-		{
-			console.NotifyOnRelease = chkGeneralUpdateRelease.Checked;
-		}
+        private void comboGeneralProcessPriority_SelectedIndexChanged(object sender, System.EventArgs e)
+        {
+            Process p = Process.GetCurrentProcess();
 
-		private void chkGeneralUpdateBeta_CheckedChanged(object sender, System.EventArgs e)
-		{
-			console.NotifyOnBeta = chkGeneralUpdateBeta.Checked;
-		}
+            if (comboGeneralProcessPriority.Text == "Real Time" &&
+                comboGeneralProcessPriority.Focused)
+            {
+                DialogResult dr = MessageBox.Show(
+                    "Setting the Process Priority to Realtime can cause the system to become unresponsive.\n" +
+                    "This setting is not recommended.\n" +
+                    "Are you sure you want to change to Realtime?",
+                    "Warning: Realtime Not Recommended",
+                    MessageBoxButtons.YesNo,
+                    MessageBoxIcon.Warning);
+                if (dr == DialogResult.No)
+                {
+                    switch (p.PriorityClass)
+                    {
+                        case ProcessPriorityClass.Idle:
+                            comboGeneralProcessPriority.Text = "Idle";
+                            break;
+                        case ProcessPriorityClass.BelowNormal:
+                            comboGeneralProcessPriority.Text = "Below Normal";
+                            break;
+                        case ProcessPriorityClass.AboveNormal:
+                            comboGeneralProcessPriority.Text = "Above Normal";
+                            break;
+                        case ProcessPriorityClass.High:
+                            comboGeneralProcessPriority.Text = "Highest";
+                            break;
+                        default:
+                            comboGeneralProcessPriority.Text = "Normal";
+                            break;
+                    }
+                    return;
+                }
+            }
 
-		private void chkGenAutoMute_CheckedChanged(object sender, System.EventArgs e)
-		{
-			console.AutoMute = chkGenAutoMute.Checked;
-		}
+            switch (comboGeneralProcessPriority.Text)
+            {
+                case "Idle":
+                    p.PriorityClass = ProcessPriorityClass.Idle;
+                    break;
+                case "Below Normal":
+                    p.PriorityClass = ProcessPriorityClass.BelowNormal;
+                    break;
+                case "Normal":
+                    p.PriorityClass = ProcessPriorityClass.Normal;
+                    break;
+                case "Above Normal":
+                    p.PriorityClass = ProcessPriorityClass.AboveNormal;
+                    break;
+                case "High":
+                    p.PriorityClass = ProcessPriorityClass.High;
+                    break;
+                case "Real Time":
+                    p.PriorityClass = ProcessPriorityClass.RealTime;
+                    break;
+            }
+        }
 
-		private void chkOptQuickQSY_CheckedChanged(object sender, System.EventArgs e)
-		{
-			console.QuickQSY = chkOptQuickQSY.Checked;
-		}
+        private void chkGeneralCustomFilter_CheckedChanged(object sender, System.EventArgs e)
+        {
+            console.EnableLPF0 = chkGeneralCustomFilter.Checked;
+        }
 
-		private void chkOptAlwaysOnTop_CheckedChanged(object sender, System.EventArgs e)
-		{
-			console.AlwaysOnTop = chkOptAlwaysOnTop.Checked;
-		}
+        private void chkGeneralUpdateRelease_CheckedChanged(object sender, System.EventArgs e)
+        {
+            console.NotifyOnRelease = chkGeneralUpdateRelease.Checked;
+        }
 
-		private void udOptClickTuneOffsetDIGL_ValueChanged(object sender, System.EventArgs e)
-		{
-			console.DIGLClickTuneOffset = (int)udOptClickTuneOffsetDIGL.Value;
-		}
+        private void chkGeneralUpdateBeta_CheckedChanged(object sender, System.EventArgs e)
+        {
+            console.NotifyOnBeta = chkGeneralUpdateBeta.Checked;
+        }
 
-		private void udOptClickTuneOffsetDIGU_ValueChanged(object sender, System.EventArgs e)
-		{
-			console.DIGUClickTuneOffset = (int)udOptClickTuneOffsetDIGU.Value;
-		}
+        private void chkGenAutoMute_CheckedChanged(object sender, System.EventArgs e)
+        {
+            console.AutoMute = chkGenAutoMute.Checked;
+        }
 
-		private void udOptMaxFilterWidth_ValueChanged(object sender, System.EventArgs e)
-		{
-			console.MaxFilterWidth = (int)udOptMaxFilterWidth.Value;
-		}
+        private void chkOptQuickQSY_CheckedChanged(object sender, System.EventArgs e)
+        {
+            console.QuickQSY = chkOptQuickQSY.Checked;
+        }
 
-		private void comboOptFilterWidthMode_SelectedIndexChanged(object sender, System.EventArgs e)
-		{
-			switch(comboOptFilterWidthMode.Text)
-			{
-				case "Linear":
-					console.CurrentFilterWidthMode = FilterWidthMode.Linear;
-					break;
-				case "Log":
-					console.CurrentFilterWidthMode = FilterWidthMode.Log;
-					break;
-				case "Log10":
-					console.CurrentFilterWidthMode = FilterWidthMode.Log10;
-					break;
-			}
-		}
+        private void chkOptAlwaysOnTop_CheckedChanged(object sender, System.EventArgs e)
+        {
+            console.AlwaysOnTop = chkOptAlwaysOnTop.Checked;
+        }
 
-		private void udOptMaxFilterShift_ValueChanged(object sender, System.EventArgs e)
-		{
-			console.MaxFilterShift = (int)udOptMaxFilterShift.Value;
-		}
+        private void udOptClickTuneOffsetDIGL_ValueChanged(object sender, System.EventArgs e)
+        {
+            console.DIGLClickTuneOffset = (int)udOptClickTuneOffsetDIGL.Value;
+        }
 
-		private void chkOptFilterSaveChanges_CheckedChanged(object sender, System.EventArgs e)
-		{
-			console.SaveFilterChanges = chkOptFilterSaveChanges.Checked;
-		}
+        private void udOptClickTuneOffsetDIGU_ValueChanged(object sender, System.EventArgs e)
+        {
+            console.DIGUClickTuneOffset = (int)udOptClickTuneOffsetDIGU.Value;
+        }
 
-		private void chkOptEnableKBShortcuts_CheckedChanged(object sender, System.EventArgs e)
-		{
-			console.EnableKBShortcuts = chkOptEnableKBShortcuts.Checked;
-			chkOptQuickQSY.Enabled = chkOptEnableKBShortcuts.Checked;
-		}
+        private void udOptMaxFilterWidth_ValueChanged(object sender, System.EventArgs e)
+        {
+            console.MaxFilterWidth = (int)udOptMaxFilterWidth.Value;
+        }
 
-		private void udFilterDefaultLowCut_ValueChanged(object sender, System.EventArgs e)
-		{
-			console.DefaultLowCut = (int)udFilterDefaultLowCut.Value;
-		}
+        private void comboOptFilterWidthMode_SelectedIndexChanged(object sender, System.EventArgs e)
+        {
+            switch (comboOptFilterWidthMode.Text)
+            {
+                case "Linear":
+                    console.CurrentFilterWidthMode = FilterWidthMode.Linear;
+                    break;
+                case "Log":
+                    console.CurrentFilterWidthMode = FilterWidthMode.Log;
+                    break;
+                case "Log10":
+                    console.CurrentFilterWidthMode = FilterWidthMode.Log10;
+                    break;
+            }
+        }
 
-		#endregion
+        private void udOptMaxFilterShift_ValueChanged(object sender, System.EventArgs e)
+        {
+            console.MaxFilterShift = (int)udOptMaxFilterShift.Value;
+        }
 
-		#region Audio Tab Event Handlers
-		// ======================================================
-		// Audio Tab Event Handlers
-		// ======================================================
+        private void chkOptFilterSaveChanges_CheckedChanged(object sender, System.EventArgs e)
+        {
+            console.SaveFilterChanges = chkOptFilterSaveChanges.Checked;
+        }
 
-		private void comboAudioDriver1_SelectedIndexChanged(object sender, System.EventArgs e)
-		{
-			if(comboAudioDriver1.SelectedIndex < 0) return;
+        private void chkOptEnableKBShortcuts_CheckedChanged(object sender, System.EventArgs e)
+        {
+            console.EnableKBShortcuts = chkOptEnableKBShortcuts.Checked;
+            chkOptQuickQSY.Enabled = chkOptEnableKBShortcuts.Checked;
+        }
 
-			int old_host = Audio.Host1;
-			int new_host = ((PADeviceInfo)comboAudioDriver1.SelectedItem).Index;
-			bool power = console.PowerOn;
+        private void udFilterDefaultLowCut_ValueChanged(object sender, System.EventArgs e)
+        {
+            console.DefaultLowCut = (int)udFilterDefaultLowCut.Value;
+        }
 
-			if(power && old_host != new_host)
-			{
-				console.PowerOn = false;
-				Thread.Sleep(100);
-			}
-			console.AudioDriverIndex1 = new_host;
-			Audio.Host1 = new_host;
-			GetDevices1();
-			if(comboAudioInput1.Items.Count != 0)
-				comboAudioInput1.SelectedIndex = 0;
-			if(comboAudioOutput1.Items.Count != 0)
-				comboAudioOutput1.SelectedIndex = 0;
-			if(power && old_host != new_host) console.PowerOn = true;
+        #endregion
+
+        #region Audio Tab Event Handlers
+        // ======================================================
+        // Audio Tab Event Handlers
+        // ======================================================
+
+        private void comboAudioDriver1_SelectedIndexChanged(object sender, System.EventArgs e)
+        {
+            if (comboAudioDriver1.SelectedIndex < 0) return;
+
+            int old_host = Audio.Host1;
+            int new_host = ((PADeviceInfo)comboAudioDriver1.SelectedItem).Index;
+            bool power = console.PowerOn;
+
+            if (power && old_host != new_host)
+            {
+                console.PowerOn = false;
+                Thread.Sleep(100);
+            }
+            console.AudioDriverIndex1 = new_host;
+            Audio.Host1 = new_host;
+            GetDevices1();
+            if (comboAudioInput1.Items.Count != 0)
+                comboAudioInput1.SelectedIndex = 0;
+            if (comboAudioOutput1.Items.Count != 0)
+                comboAudioOutput1.SelectedIndex = 0;
+            if (power && old_host != new_host) console.PowerOn = true;
 
             if (!chkAudioLatencyManual1.Checked)
             {
@@ -24408,207 +24559,207 @@ namespace PowerSDR
                     Audio.Latency1 = 200;
                 else Audio.Latency1 = 0;
             }
-		}
+        }
 
-		private void comboAudioInput1_SelectedIndexChanged(object sender, System.EventArgs e)
-		{
-			if(comboAudioInput1.SelectedIndex < 0) return;
+        private void comboAudioInput1_SelectedIndexChanged(object sender, System.EventArgs e)
+        {
+            if (comboAudioInput1.SelectedIndex < 0) return;
 
-			int old_input = Audio.Input1;
-			int new_input = ((PADeviceInfo)comboAudioInput1.SelectedItem).Index;
-			bool power = console.PowerOn;
+            int old_input = Audio.Input1;
+            int new_input = ((PADeviceInfo)comboAudioInput1.SelectedItem).Index;
+            bool power = console.PowerOn;
 
-			if(power && old_input != new_input)
-			{
-				console.PowerOn = false;
-				Thread.Sleep(100);
-			}
+            if (power && old_input != new_input)
+            {
+                console.PowerOn = false;
+                Thread.Sleep(100);
+            }
 
-			console.AudioInputIndex1 = new_input;
-			Audio.Input1 = new_input;
-			if(comboAudioInput1.SelectedIndex == 0 &&
-				comboAudioDriver1.SelectedIndex < 2)
-			{
-				comboAudioMixer1.SelectedIndex = 0;
-			}
-			else
-			{
-				for(int i=0; i<comboAudioMixer1.Items.Count; i++)
-				{
-					string s = (string)comboAudioMixer1.Items[i];
-					if(s.StartsWith(comboAudioInput1.Text.Substring(0, 5)))
-						comboAudioMixer1.Text = s;
-				}
-				comboAudioMixer1.Text = comboAudioInput1.Text;
-			}
+            console.AudioInputIndex1 = new_input;
+            Audio.Input1 = new_input;
+            if (comboAudioInput1.SelectedIndex == 0 &&
+                comboAudioDriver1.SelectedIndex < 2)
+            {
+                comboAudioMixer1.SelectedIndex = 0;
+            }
+            else
+            {
+                for (int i = 0; i < comboAudioMixer1.Items.Count; i++)
+                {
+                    string s = (string)comboAudioMixer1.Items[i];
+                    if (s.StartsWith(comboAudioInput1.Text.Substring(0, 5)))
+                        comboAudioMixer1.Text = s;
+                }
+                comboAudioMixer1.Text = comboAudioInput1.Text;
+            }
 
-			if(power && old_input != new_input) console.PowerOn = true;
-		}
+            if (power && old_input != new_input) console.PowerOn = true;
+        }
 
-		private void comboAudioOutput1_SelectedIndexChanged(object sender, System.EventArgs e)
-		{
-			if(comboAudioOutput1.SelectedIndex < 0) return;
+        private void comboAudioOutput1_SelectedIndexChanged(object sender, System.EventArgs e)
+        {
+            if (comboAudioOutput1.SelectedIndex < 0) return;
 
-			int old_output = Audio.Output1;
-			int new_output = ((PADeviceInfo)comboAudioOutput1.SelectedItem).Index;
-			bool power = console.PowerOn;
+            int old_output = Audio.Output1;
+            int new_output = ((PADeviceInfo)comboAudioOutput1.SelectedItem).Index;
+            bool power = console.PowerOn;
 
-			if(power && new_output != old_output)
-			{
-				console.PowerOn = false;
-				Thread.Sleep(100);
-			}
+            if (power && new_output != old_output)
+            {
+                console.PowerOn = false;
+                Thread.Sleep(100);
+            }
 
-			console.AudioOutputIndex1 = new_output;
-			Audio.Output1 = new_output;
+            console.AudioOutputIndex1 = new_output;
+            Audio.Output1 = new_output;
 
-			if(power && new_output != old_output) console.PowerOn = true;
-		}
+            if (power && new_output != old_output) console.PowerOn = true;
+        }
 
-		private void comboAudioMixer1_SelectedIndexChanged(object sender, System.EventArgs e)
-		{
-			if(comboAudioMixer1.SelectedIndex < 0) return;
-			UpdateMixerControls1();
-			console.MixerID1 = comboAudioMixer1.SelectedIndex;
-		}	
+        private void comboAudioMixer1_SelectedIndexChanged(object sender, System.EventArgs e)
+        {
+            if (comboAudioMixer1.SelectedIndex < 0) return;
+            UpdateMixerControls1();
+            console.MixerID1 = comboAudioMixer1.SelectedIndex;
+        }
 
-		private void comboAudioReceive1_SelectedIndexChanged(object sender, System.EventArgs e)
-		{
-			if(comboAudioReceive1.SelectedIndex < 0) return;
-			console.MixerRXMuxID1 = comboAudioReceive1.SelectedIndex;
-			if(!initializing && console.PowerOn)
-				Mixer.SetMux(comboAudioMixer1.SelectedIndex, comboAudioReceive1.SelectedIndex);
-		}
+        private void comboAudioReceive1_SelectedIndexChanged(object sender, System.EventArgs e)
+        {
+            if (comboAudioReceive1.SelectedIndex < 0) return;
+            console.MixerRXMuxID1 = comboAudioReceive1.SelectedIndex;
+            if (!initializing && console.PowerOn)
+                Mixer.SetMux(comboAudioMixer1.SelectedIndex, comboAudioReceive1.SelectedIndex);
+        }
 
-		private void comboAudioTransmit1_SelectedIndexChanged(object sender, System.EventArgs e)
-		{
-			if(comboAudioTransmit1.SelectedIndex < 0) return;
-			console.MixerTXMuxID1 = comboAudioTransmit1.SelectedIndex;
-		}
+        private void comboAudioTransmit1_SelectedIndexChanged(object sender, System.EventArgs e)
+        {
+            if (comboAudioTransmit1.SelectedIndex < 0) return;
+            console.MixerTXMuxID1 = comboAudioTransmit1.SelectedIndex;
+        }
 
-		private void chkAudioEnableVAC_CheckedChanged(object sender, System.EventArgs e)
-		{
-			bool val = chkAudioEnableVAC.Checked;
-			bool old_val = console.VACEnabled;
+        private void chkAudioEnableVAC_CheckedChanged(object sender, System.EventArgs e)
+        {
+            bool val = chkAudioEnableVAC.Checked;
+            bool old_val = console.VACEnabled;
 
-			if(val)
-			{
-				if(comboAudioDriver2.SelectedIndex < 0 && 
-					comboAudioDriver2.Items.Count > 0)
-					comboAudioDriver2.SelectedIndex = 0;
-			}
+            if (val)
+            {
+                if (comboAudioDriver2.SelectedIndex < 0 &&
+                    comboAudioDriver2.Items.Count > 0)
+                    comboAudioDriver2.SelectedIndex = 0;
+            }
 
-			bool power = console.PowerOn;
-			if(power && val != old_val)
-			{
-				console.PowerOn = false;
-				Thread.Sleep(100);
-			}
-				
-			console.VACEnabled = val;
-			if(power && val != old_val)console.PowerOn = true;
-		}
+            bool power = console.PowerOn;
+            if (power && val != old_val)
+            {
+                console.PowerOn = false;
+                Thread.Sleep(100);
+            }
 
-		private void comboAudioChannels1_SelectedIndexChanged(object sender, System.EventArgs e)
-		{
-			if(comboAudioChannels1.SelectedIndex < 0) return;
+            console.VACEnabled = val;
+            if (power && val != old_val) console.PowerOn = true;
+        }
 
-			int old_chan = Audio.NumChannels;
-			int new_chan = Int32.Parse(comboAudioChannels1.Text);
-			bool power = console.PowerOn;
+        private void comboAudioChannels1_SelectedIndexChanged(object sender, System.EventArgs e)
+        {
+            if (comboAudioChannels1.SelectedIndex < 0) return;
 
-			if(power && chkAudioEnableVAC.Checked && old_chan != new_chan) 
-			{
-				console.PowerOn = false;
-				Thread.Sleep(100);
-			}
+            int old_chan = Audio.NumChannels;
+            int new_chan = Int32.Parse(comboAudioChannels1.Text);
+            bool power = console.PowerOn;
 
-			console.NumChannels = new_chan;
-			Audio.NumChannels = new_chan;
+            if (power && chkAudioEnableVAC.Checked && old_chan != new_chan)
+            {
+                console.PowerOn = false;
+                Thread.Sleep(100);
+            }
 
-			//RadioDSP.SetThreadNumber((uint)new_chan/2);
-			if(power && chkAudioEnableVAC.Checked && old_chan != new_chan)
-				console.PowerOn = true;
-		}
+            console.NumChannels = new_chan;
+            Audio.NumChannels = new_chan;
 
-		private void comboAudioDriver2_SelectedIndexChanged(object sender, System.EventArgs e)
-		{
-			if(comboAudioDriver2.SelectedIndex < 0) return;
+            //RadioDSP.SetThreadNumber((uint)new_chan/2);
+            if (power && chkAudioEnableVAC.Checked && old_chan != new_chan)
+                console.PowerOn = true;
+        }
 
-			int old_driver = Audio.Host2;
-			int new_driver = ((PADeviceInfo)comboAudioDriver2.SelectedItem).Index;
-			bool power = console.PowerOn;
+        private void comboAudioDriver2_SelectedIndexChanged(object sender, System.EventArgs e)
+        {
+            if (comboAudioDriver2.SelectedIndex < 0) return;
 
-			if(power && chkAudioEnableVAC.Checked && old_driver != new_driver) 
-			{
-				console.PowerOn = false;
-				Thread.Sleep(100);
-			}
+            int old_driver = Audio.Host2;
+            int new_driver = ((PADeviceInfo)comboAudioDriver2.SelectedItem).Index;
+            bool power = console.PowerOn;
 
-			console.AudioDriverIndex2 = new_driver;
-			Audio.Host2 = new_driver;
-			GetDevices2();
-			if(comboAudioInput2.Items.Count != 0)
-				comboAudioInput2.SelectedIndex = 0;
-			if(comboAudioOutput2.Items.Count != 0)
-				comboAudioOutput2.SelectedIndex = 0;
+            if (power && chkAudioEnableVAC.Checked && old_driver != new_driver)
+            {
+                console.PowerOn = false;
+                Thread.Sleep(100);
+            }
 
-			if(power && chkAudioEnableVAC.Checked && old_driver != new_driver) 
-				console.PowerOn = true;
-		}
+            console.AudioDriverIndex2 = new_driver;
+            Audio.Host2 = new_driver;
+            GetDevices2();
+            if (comboAudioInput2.Items.Count != 0)
+                comboAudioInput2.SelectedIndex = 0;
+            if (comboAudioOutput2.Items.Count != 0)
+                comboAudioOutput2.SelectedIndex = 0;
 
-		private void comboAudioInput2_SelectedIndexChanged(object sender, System.EventArgs e)
-		{
-			if(comboAudioInput2.SelectedIndex < 0) return;
+            if (power && chkAudioEnableVAC.Checked && old_driver != new_driver)
+                console.PowerOn = true;
+        }
 
-			int old_input = Audio.Input2;
-			int new_input = ((PADeviceInfo)comboAudioInput2.SelectedItem).Index;
-			bool power = console.PowerOn;
+        private void comboAudioInput2_SelectedIndexChanged(object sender, System.EventArgs e)
+        {
+            if (comboAudioInput2.SelectedIndex < 0) return;
 
-			if(power && chkAudioEnableVAC.Checked && old_input != new_input) 
-			{
-				console.PowerOn = false;
-				Thread.Sleep(100);
-			}
+            int old_input = Audio.Input2;
+            int new_input = ((PADeviceInfo)comboAudioInput2.SelectedItem).Index;
+            bool power = console.PowerOn;
 
-			console.AudioInputIndex2 = new_input;
-			Audio.Input2 = new_input;
+            if (power && chkAudioEnableVAC.Checked && old_input != new_input)
+            {
+                console.PowerOn = false;
+                Thread.Sleep(100);
+            }
 
-			if(power && chkAudioEnableVAC.Checked && old_input != new_input) 
-				console.PowerOn = true;
-		}
+            console.AudioInputIndex2 = new_input;
+            Audio.Input2 = new_input;
 
-		private void comboAudioOutput2_SelectedIndexChanged(object sender, System.EventArgs e)
-		{
-			if(comboAudioOutput2.SelectedIndex < 0) return;
+            if (power && chkAudioEnableVAC.Checked && old_input != new_input)
+                console.PowerOn = true;
+        }
 
-			int old_output = Audio.Output2;
-			int new_output = ((PADeviceInfo)comboAudioOutput2.SelectedItem).Index;
-			bool power = console.PowerOn;
-			if(power && chkAudioEnableVAC.Checked && old_output != new_output) 
-			{
-				console.PowerOn = false;
-				Thread.Sleep(100);
-			}
+        private void comboAudioOutput2_SelectedIndexChanged(object sender, System.EventArgs e)
+        {
+            if (comboAudioOutput2.SelectedIndex < 0) return;
 
-			console.AudioOutputIndex2 = new_output;
-			Audio.Output2 = new_output;
+            int old_output = Audio.Output2;
+            int new_output = ((PADeviceInfo)comboAudioOutput2.SelectedItem).Index;
+            bool power = console.PowerOn;
+            if (power && chkAudioEnableVAC.Checked && old_output != new_output)
+            {
+                console.PowerOn = false;
+                Thread.Sleep(100);
+            }
 
-			if(power && chkAudioEnableVAC.Checked && old_output != new_output) 
-				console.PowerOn = true;
-		}
+            console.AudioOutputIndex2 = new_output;
+            Audio.Output2 = new_output;
+
+            if (power && chkAudioEnableVAC.Checked && old_output != new_output)
+                console.PowerOn = true;
+        }
 
         public void forceAudioSampleRate1(String rate)
         {
             comboAudioSampleRate1.Text = rate;
         }
 
-		private void comboAudioSampleRate1_SelectedIndexChanged(object sender, System.EventArgs e)
-		{
-			if(comboAudioSampleRate1.SelectedIndex < 0) return;
+        private void comboAudioSampleRate1_SelectedIndexChanged(object sender, System.EventArgs e)
+        {
+            if (comboAudioSampleRate1.SelectedIndex < 0) return;
 
-			int old_rate = console.SampleRate1;
-			int new_rate = Int32.Parse(comboAudioSampleRate1.Text);
+            int old_rate = console.SampleRate1;
+            int new_rate = Int32.Parse(comboAudioSampleRate1.Text);
 
             if (console.CurrentModel == Model.FLEX3000 && new_rate == 192000)
             {
@@ -24616,89 +24767,89 @@ namespace PowerSDR
                 new_rate = 96000;
             }
 
-			bool power = console.PowerOn;
+            bool power = console.PowerOn;
 
-			if(power && new_rate != old_rate)
-			{
-				console.PowerOn = false;
-				Thread.Sleep(100);
-			}
+            if (power && new_rate != old_rate)
+            {
+                console.PowerOn = false;
+                Thread.Sleep(100);
+            }
 
-			console.SampleRate1 = new_rate;
+            console.SampleRate1 = new_rate;
 
-			Display.DrawBackground();
-			console.SoftRockCenterFreq  = console.SoftRockCenterFreq; // warning -- this appears to do nothing - not true, these are
-			                                                          // properties and the assignment is needed due to side effects!   
-			                                                          // We need the soft rock  code to recalc  its tuning limits -- 
-			                                                          // setting the center freq does this as a side effect
-			    
-			if(!initializing)
-			{       
-                RadioDSP.SyncStatic();       
-				
-				for(int i=0; i<2; i++)
-				{
-					for(int j=0; j<2; j++)
-					{
-						RadioDSPRX dsp_rx = console.radio.GetDSPRX(i, j);
-						dsp_rx.Update = false;
-						dsp_rx.Force = true;
-						dsp_rx.Update = true;
-						dsp_rx.Force = false;
-					}
-				}
-				
-				for(int i=0; i<1; i++)
-				{
-					RadioDSPTX dsp_tx = console.radio.GetDSPTX(i);
-					dsp_tx.Update = false;
-					dsp_tx.Force = true;
-					dsp_tx.Update = true;
-					dsp_tx.Force = false;
-				}
-			}
+            Display.DrawBackground();
+            console.SoftRockCenterFreq = console.SoftRockCenterFreq; // warning -- this appears to do nothing - not true, these are
+            // properties and the assignment is needed due to side effects!   
+            // We need the soft rock  code to recalc  its tuning limits -- 
+            // setting the center freq does this as a side effect
 
-			if(power && new_rate != old_rate)
-			{
-				if(console.CurrentModel == Model.FLEX5000)
-				{
-					console.PowerOn = true;
-					Thread.Sleep(5000);
-					console.PowerOn = false;
-					console.PowerOn = true;
-				}
-				else console.PowerOn = true;		
-			}
-		}
+            if (!initializing)
+            {
+                RadioDSP.SyncStatic();
 
-		private void comboAudioSampleRate2_SelectedIndexChanged(object sender, System.EventArgs e)
-		{
-			if(comboAudioSampleRate2.SelectedIndex < 0) return;
+                for (int i = 0; i < 2; i++)
+                {
+                    for (int j = 0; j < 2; j++)
+                    {
+                        RadioDSPRX dsp_rx = console.radio.GetDSPRX(i, j);
+                        dsp_rx.Update = false;
+                        dsp_rx.Force = true;
+                        dsp_rx.Update = true;
+                        dsp_rx.Force = false;
+                    }
+                }
 
-			int old_rate = console.SampleRate2;
-			int new_rate = Int32.Parse(comboAudioSampleRate2.Text);
-			bool poweron = console.PowerOn;
+                for (int i = 0; i < 1; i++)
+                {
+                    RadioDSPTX dsp_tx = console.radio.GetDSPTX(i);
+                    dsp_tx.Update = false;
+                    dsp_tx.Force = true;
+                    dsp_tx.Update = true;
+                    dsp_tx.Force = false;
+                }
+            }
 
-			if(poweron && chkAudioEnableVAC.Checked && new_rate != old_rate)
-			{
-				console.PowerOn = false;
-				Thread.Sleep(100);
-			}
+            if (power && new_rate != old_rate)
+            {
+                if (console.CurrentModel == Model.FLEX5000)
+                {
+                    console.PowerOn = true;
+                    Thread.Sleep(5000);
+                    console.PowerOn = false;
+                    console.PowerOn = true;
+                }
+                else console.PowerOn = true;
+            }
+        }
 
-			console.SampleRate2 = new_rate;
-			console.VACSampleRate = comboAudioSampleRate2.Text;
+        private void comboAudioSampleRate2_SelectedIndexChanged(object sender, System.EventArgs e)
+        {
+            if (comboAudioSampleRate2.SelectedIndex < 0) return;
 
-			if(poweron && chkAudioEnableVAC.Checked && new_rate != old_rate)
-				console.PowerOn = true;	
-		}
-	
-		private void comboAudioBuffer1_SelectedIndexChanged(object sender, System.EventArgs e)
-		{
-			if(comboAudioBuffer1.SelectedIndex < 0) return;
+            int old_rate = console.SampleRate2;
+            int new_rate = Int32.Parse(comboAudioSampleRate2.Text);
+            bool poweron = console.PowerOn;
 
-			int old_size = console.BlockSize1;
-			int new_size = Int32.Parse(comboAudioBuffer1.Text);
-			bool power = console.PowerOn;
+            if (poweron && chkAudioEnableVAC.Checked && new_rate != old_rate)
+            {
+                console.PowerOn = false;
+                Thread.Sleep(100);
+            }
+
+            console.SampleRate2 = new_rate;
+            console.VACSampleRate = comboAudioSampleRate2.Text;
+
+            if (poweron && chkAudioEnableVAC.Checked && new_rate != old_rate)
+                console.PowerOn = true;
+        }
+
+        private void comboAudioBuffer1_SelectedIndexChanged(object sender, System.EventArgs e)
+        {
+            if (comboAudioBuffer1.SelectedIndex < 0) return;
+
+            int old_size = console.BlockSize1;
+            int new_size = Int32.Parse(comboAudioBuffer1.Text);
+            bool power = console.PowerOn;
 
             if (console.fwc_init &&
                 (console.CurrentModel == Model.FLEX3000 || console.CurrentModel == Model.FLEX5000))
@@ -24712,176 +24863,176 @@ namespace PowerSDR
                     // ignore exceptions in case version of PAL dll doesn't support this function
                 }
             }
-			
-			if(power && old_size != new_size)
-			{
-				console.PowerOn = false;
-				Thread.Sleep(100);
-			}
 
-			console.BlockSize1 = new_size;
-			RadioDSP.KeyerResetSize = console.BlockSize1*3/2;
-			
-			if(power && old_size != new_size) console.PowerOn = true;
-		}
+            if (power && old_size != new_size)
+            {
+                console.PowerOn = false;
+                Thread.Sleep(100);
+            }
 
-		private void comboAudioBuffer2_SelectedIndexChanged(object sender, System.EventArgs e)
-		{
-			if(comboAudioBuffer2.SelectedIndex < 0) return;
+            console.BlockSize1 = new_size;
+            RadioDSP.KeyerResetSize = console.BlockSize1 * 3 / 2;
 
-			int old_size = console.BlockSize2;
-			int new_size = Int32.Parse(comboAudioBuffer2.Text);
-			bool power = console.PowerOn;
+            if (power && old_size != new_size) console.PowerOn = true;
+        }
 
-			if(power && chkAudioEnableVAC.Checked && old_size != new_size)
-			{
-				console.PowerOn = false;
-				Thread.Sleep(100);
-			}
+        private void comboAudioBuffer2_SelectedIndexChanged(object sender, System.EventArgs e)
+        {
+            if (comboAudioBuffer2.SelectedIndex < 0) return;
 
-			console.BlockSize2 = new_size;
-			
-			if(power && chkAudioEnableVAC.Checked && old_size != new_size)
-				console.PowerOn = true;
-		}
+            int old_size = console.BlockSize2;
+            int new_size = Int32.Parse(comboAudioBuffer2.Text);
+            bool power = console.PowerOn;
 
-		private void udAudioLatency1_ValueChanged(object sender, System.EventArgs e)
-		{
-			bool power = console.PowerOn;
-			if(power)
-			{
-				console.PowerOn = false;
-				Thread.Sleep(100);
-			}
+            if (power && chkAudioEnableVAC.Checked && old_size != new_size)
+            {
+                console.PowerOn = false;
+                Thread.Sleep(100);
+            }
 
-			Audio.Latency1 = (int)udAudioLatency1.Value;
-			
-			if(power) console.PowerOn = true;
-		}
+            console.BlockSize2 = new_size;
 
-		private void udAudioLatency2_ValueChanged(object sender, System.EventArgs e)
-		{
-			bool power = console.PowerOn;
-			if(power && chkAudioEnableVAC.Checked)
-			{
-				console.PowerOn = false;
-				Thread.Sleep(100);
-			}
+            if (power && chkAudioEnableVAC.Checked && old_size != new_size)
+                console.PowerOn = true;
+        }
 
-			Audio.Latency2 = (int)udAudioLatency2.Value;
+        private void udAudioLatency1_ValueChanged(object sender, System.EventArgs e)
+        {
+            bool power = console.PowerOn;
+            if (power)
+            {
+                console.PowerOn = false;
+                Thread.Sleep(100);
+            }
 
-			if(power && chkAudioEnableVAC.Checked)
-				console.PowerOn = true;
-		}
+            Audio.Latency1 = (int)udAudioLatency1.Value;
 
-		private void udAudioVoltage1_ValueChanged(object sender, System.EventArgs e)
-		{
-			if(udAudioVoltage1.Focused &&
-				comboAudioSoundCard.SelectedIndex > 0 &&
-				current_sound_card != SoundCard.UNSUPPORTED_CARD)
-			{
-				DialogResult dr = MessageBox.Show("Are you sure you want to change the Max RMS Voltage for this \n"+
-					"supported sound card?  The largest measured difference in supported cards \n"+
-					"was 40mV.  Note that we will only allow a 100mV difference from our measured default.",
-					"Change Voltage?",
-					MessageBoxButtons.YesNo,
-					MessageBoxIcon.Warning);
-				if(dr == DialogResult.No)
-				{
-					udAudioVoltage1.Value = (decimal)console.AudioVolts1;
-					return;
-				}
-			}
-			/*double def_volt = 0.0;
-			switch(current_sound_card)
-			{
-				case SoundCard.SANTA_CRUZ:
-					def_volt = 1.27;
-					break;
-				case SoundCard.AUDIGY:
-				case SoundCard.AUDIGY_2:
-				case SoundCard.AUDIGY_2_ZS:
-					def_volt = 2.23;
-					break;
-				case SoundCard.EXTIGY:
-					def_volt = 1.96;
-					break;
-				case SoundCard.MP3_PLUS:
-					def_volt = 0.98;
-					break;
-				case SoundCard.DELTA_44:
-					def_volt = 0.98;
-					break;
-				case SoundCard.FIREBOX:
-					def_volt = 6.39;
-					break;
-			}
+            if (power) console.PowerOn = true;
+        }
 
-			if(current_sound_card != SoundCard.UNSUPPORTED_CARD)
-			{
-				if(Math.Abs(def_volt - (double)udAudioVoltage1.Value) > 0.1)
-				{
-					udAudioVoltage1.Value = (decimal)def_volt;
-					return;
-				}
-			}*/
-			console.AudioVolts1 = (double)udAudioVoltage1.Value;
-		}
+        private void udAudioLatency2_ValueChanged(object sender, System.EventArgs e)
+        {
+            bool power = console.PowerOn;
+            if (power && chkAudioEnableVAC.Checked)
+            {
+                console.PowerOn = false;
+                Thread.Sleep(100);
+            }
 
-		private void chkAudio2Stereo_CheckedChanged(object sender, System.EventArgs e)
-		{
-			bool power = console.PowerOn;
-			if(power && chkAudioEnableVAC.Checked)
-			{
-				console.PowerOn = false;
-				Thread.Sleep(100);
-			}
+            Audio.Latency2 = (int)udAudioLatency2.Value;
 
-			console.SecondSoundCardStereo = chkAudio2Stereo.Checked;
-			console.VACStereo = chkAudio2Stereo.Checked;
-			chkVACCombine.Enabled = chkAudio2Stereo.Checked;
+            if (power && chkAudioEnableVAC.Checked)
+                console.PowerOn = true;
+        }
 
-			if(power && chkAudioEnableVAC.Checked)
-				console.PowerOn = true;
-		}
+        private void udAudioVoltage1_ValueChanged(object sender, System.EventArgs e)
+        {
+            if (udAudioVoltage1.Focused &&
+                comboAudioSoundCard.SelectedIndex > 0 &&
+                current_sound_card != SoundCard.UNSUPPORTED_CARD)
+            {
+                DialogResult dr = MessageBox.Show("Are you sure you want to change the Max RMS Voltage for this \n" +
+                    "supported sound card?  The largest measured difference in supported cards \n" +
+                    "was 40mV.  Note that we will only allow a 100mV difference from our measured default.",
+                    "Change Voltage?",
+                    MessageBoxButtons.YesNo,
+                    MessageBoxIcon.Warning);
+                if (dr == DialogResult.No)
+                {
+                    udAudioVoltage1.Value = (decimal)console.AudioVolts1;
+                    return;
+                }
+            }
+            /*double def_volt = 0.0;
+            switch(current_sound_card)
+            {
+                case SoundCard.SANTA_CRUZ:
+                    def_volt = 1.27;
+                    break;
+                case SoundCard.AUDIGY:
+                case SoundCard.AUDIGY_2:
+                case SoundCard.AUDIGY_2_ZS:
+                    def_volt = 2.23;
+                    break;
+                case SoundCard.EXTIGY:
+                    def_volt = 1.96;
+                    break;
+                case SoundCard.MP3_PLUS:
+                    def_volt = 0.98;
+                    break;
+                case SoundCard.DELTA_44:
+                    def_volt = 0.98;
+                    break;
+                case SoundCard.FIREBOX:
+                    def_volt = 6.39;
+                    break;
+            }
 
-		private void udAudioVACGainRX_ValueChanged(object sender, System.EventArgs e)
-		{
-			Audio.VACRXScale = Math.Pow(10.0, (int)udAudioVACGainRX.Value/20.0);
-			console.VACRXGain = (int)udAudioVACGainRX.Value;
-		}
+            if(current_sound_card != SoundCard.UNSUPPORTED_CARD)
+            {
+                if(Math.Abs(def_volt - (double)udAudioVoltage1.Value) > 0.1)
+                {
+                    udAudioVoltage1.Value = (decimal)def_volt;
+                    return;
+                }
+            }*/
+            console.AudioVolts1 = (double)udAudioVoltage1.Value;
+        }
 
-		private void udAudioVACGainTX_ValueChanged(object sender, System.EventArgs e)
-		{
-			Audio.VACPreamp = Math.Pow(10.0, (int)udAudioVACGainTX.Value/20.0);
-			console.VACTXGain = (int)udAudioVACGainTX.Value;
-		}
+        private void chkAudio2Stereo_CheckedChanged(object sender, System.EventArgs e)
+        {
+            bool power = console.PowerOn;
+            if (power && chkAudioEnableVAC.Checked)
+            {
+                console.PowerOn = false;
+                Thread.Sleep(100);
+            }
 
-		private void chkAudioVACAutoEnable_CheckedChanged(object sender, System.EventArgs e)
-		{
-			console.VACAutoEnable = chkAudioVACAutoEnable.Checked;
-		}
+            console.SecondSoundCardStereo = chkAudio2Stereo.Checked;
+            console.VACStereo = chkAudio2Stereo.Checked;
+            chkVACCombine.Enabled = chkAudio2Stereo.Checked;
 
-		private void udAudioLineIn1_ValueChanged(object sender, System.EventArgs e)
-		{
-			Mixer.SetLineInRecordVolume(comboAudioMixer1.SelectedIndex, (int)udAudioLineIn1.Value);
-		}
+            if (power && chkAudioEnableVAC.Checked)
+                console.PowerOn = true;
+        }
 
-		private void udAudioMicGain1_ValueChanged(object sender, System.EventArgs e)
-		{
-			Mixer.SetMicRecordVolume(comboAudioMixer1.SelectedIndex, (int)udAudioMicGain1.Value);
-		}
+        private void udAudioVACGainRX_ValueChanged(object sender, System.EventArgs e)
+        {
+            Audio.VACRXScale = Math.Pow(10.0, (int)udAudioVACGainRX.Value / 20.0);
+            console.VACRXGain = (int)udAudioVACGainRX.Value;
+        }
 
-		private void chkAudioLatencyManual1_CheckedChanged(object sender, System.EventArgs e)
-		{
-			bool power = console.PowerOn;
-			if(power)
-			{
-				console.PowerOn = false;
-				Thread.Sleep(100);
-			}
+        private void udAudioVACGainTX_ValueChanged(object sender, System.EventArgs e)
+        {
+            Audio.VACPreamp = Math.Pow(10.0, (int)udAudioVACGainTX.Value / 20.0);
+            console.VACTXGain = (int)udAudioVACGainTX.Value;
+        }
 
-			udAudioLatency1.Enabled = chkAudioLatencyManual1.Checked;
+        private void chkAudioVACAutoEnable_CheckedChanged(object sender, System.EventArgs e)
+        {
+            console.VACAutoEnable = chkAudioVACAutoEnable.Checked;
+        }
+
+        private void udAudioLineIn1_ValueChanged(object sender, System.EventArgs e)
+        {
+            Mixer.SetLineInRecordVolume(comboAudioMixer1.SelectedIndex, (int)udAudioLineIn1.Value);
+        }
+
+        private void udAudioMicGain1_ValueChanged(object sender, System.EventArgs e)
+        {
+            Mixer.SetMicRecordVolume(comboAudioMixer1.SelectedIndex, (int)udAudioMicGain1.Value);
+        }
+
+        private void chkAudioLatencyManual1_CheckedChanged(object sender, System.EventArgs e)
+        {
+            bool power = console.PowerOn;
+            if (power)
+            {
+                console.PowerOn = false;
+                Thread.Sleep(100);
+            }
+
+            udAudioLatency1.Enabled = chkAudioLatencyManual1.Checked;
 
             if (!chkAudioLatencyManual1.Checked)
             {
@@ -24890,770 +25041,770 @@ namespace PowerSDR
                 else Audio.Latency1 = 0;
             }
 
-			if(power) console.PowerOn = true;
-		}
+            if (power) console.PowerOn = true;
+        }
 
-		private void chkAudioLatencyManual2_CheckedChanged(object sender, System.EventArgs e)
-		{
-			bool power = console.PowerOn;
-			if(power && chkAudioEnableVAC.Checked)
-			{
-				console.PowerOn = false;
-				Thread.Sleep(100);
-			}
+        private void chkAudioLatencyManual2_CheckedChanged(object sender, System.EventArgs e)
+        {
+            bool power = console.PowerOn;
+            if (power && chkAudioEnableVAC.Checked)
+            {
+                console.PowerOn = false;
+                Thread.Sleep(100);
+            }
 
-			udAudioLatency2.Enabled = chkAudioLatencyManual2.Checked;
+            udAudioLatency2.Enabled = chkAudioLatencyManual2.Checked;
 
-			if(!chkAudioLatencyManual2.Checked)
-				Audio.Latency2 = 120;
+            if (!chkAudioLatencyManual2.Checked)
+                Audio.Latency2 = 120;
 
-			if(power && chkAudioEnableVAC.Checked)
-				console.PowerOn = true;
-		}
+            if (power && chkAudioEnableVAC.Checked)
+                console.PowerOn = true;
+        }
 
-		private void chkAudioMicBoost_CheckedChanged(object sender, System.EventArgs e)
-		{
-			console.MicBoost = chkAudioMicBoost.Checked;
-		}
+        private void chkAudioMicBoost_CheckedChanged(object sender, System.EventArgs e)
+        {
+            console.MicBoost = chkAudioMicBoost.Checked;
+        }
 
-		private void btnAudioVoltTest1_Click(object sender, System.EventArgs e)
-		{
-			sound_card = 1;
+        private void btnAudioVoltTest1_Click(object sender, System.EventArgs e)
+        {
+            sound_card = 1;
 
-			DialogResult dr = MessageBox.Show(
-				"Is the Line Out Cable unplugged?  Running this test with the plug in the \n"+
-				"normal position plugged into the SDR-1000 could cause damage to the device.",
-				"Warning: Cable unplugged from SDR-1000?",
-				MessageBoxButtons.YesNo,
-				MessageBoxIcon.Warning);
+            DialogResult dr = MessageBox.Show(
+                "Is the Line Out Cable unplugged?  Running this test with the plug in the \n" +
+                "normal position plugged into the SDR-1000 could cause damage to the device.",
+                "Warning: Cable unplugged from SDR-1000?",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Warning);
 
-			if(dr == DialogResult.No) return;															 
+            if (dr == DialogResult.No) return;
 
-			progress = new Progress("Calibrate Sound Card");
-			if(console.PowerOn)
-				progress.Show();
+            progress = new Progress("Calibrate Sound Card");
+            if (console.PowerOn)
+                progress.Show();
 
-			Thread t = new Thread(new ThreadStart(CalibrateSoundCard));
-			t.Name = "Sound Card Calibration Thread";
-			t.IsBackground = true;
-			t.Priority = ThreadPriority.AboveNormal;
-			t.Start();
-		}
+            Thread t = new Thread(new ThreadStart(CalibrateSoundCard));
+            t.Name = "Sound Card Calibration Thread";
+            t.IsBackground = true;
+            t.Priority = ThreadPriority.AboveNormal;
+            t.Start();
+        }
 
-		private void CalibrateSoundCard()
-		{
-			bool done = console.CalibrateSoundCard(progress, sound_card);
-			if(done) MessageBox.Show("Sound Card Calibration complete.");
-		}
+        private void CalibrateSoundCard()
+        {
+            bool done = console.CalibrateSoundCard(progress, sound_card);
+            if (done) MessageBox.Show("Sound Card Calibration complete.");
+        }
 
-		private void FireBoxMixerFix()
-		{
-			try
-			{
-				Process p = Process.Start("c:\\Program Files\\PreSonus\\1394AudioDriver_FIREBox\\FireBox Mixer.exe");
-				Thread.Sleep(2000);
-				p.Kill();
-			}
-			catch(Exception)
-			{
+        private void FireBoxMixerFix()
+        {
+            try
+            {
+                Process p = Process.Start("c:\\Program Files\\PreSonus\\1394AudioDriver_FIREBox\\FireBox Mixer.exe");
+                Thread.Sleep(2000);
+                p.Kill();
+            }
+            catch (Exception)
+            {
 
-			}
-		}
+            }
+        }
 
-		private void comboAudioSoundCard_SelectedIndexChanged(object sender, System.EventArgs e)
-		{
-			if(comboAudioSoundCard.SelectedIndex < 0) return;
-			bool on = console.PowerOn;
-			if(on)
-			{
-				console.PowerOn = false;
-				Thread.Sleep(100);
-			}
+        private void comboAudioSoundCard_SelectedIndexChanged(object sender, System.EventArgs e)
+        {
+            if (comboAudioSoundCard.SelectedIndex < 0) return;
+            bool on = console.PowerOn;
+            if (on)
+            {
+                console.PowerOn = false;
+                Thread.Sleep(100);
+            }
 
-			SoundCard card = SoundCard.FIRST;
-			switch(comboAudioSoundCard.Text)
-			{
-				case "M-Audio Delta 44 (PCI)":
-					card = SoundCard.DELTA_44;
-					break;
-				case "PreSonus FireBox (FireWire)":
-					card = SoundCard.FIREBOX;
-					break;
-				case "Edirol FA-66 (FireWire)":
-					card = SoundCard.EDIROL_FA_66;
-					break;
-				case "SB Audigy (PCI)":
-					card = SoundCard.AUDIGY;
-					break;
-				case "SB Audigy 2 (PCI)":
-					card = SoundCard.AUDIGY_2;
-					break;
-				case "SB Audigy 2 ZS (PCI)":
-					card = SoundCard.AUDIGY_2_ZS;
-					break;
-				case "Sound Blaster Extigy (USB)":
-					card = SoundCard.EXTIGY;
-					break;
-				case "Sound Blaster MP3+ (USB)":
-					card = SoundCard.MP3_PLUS;
-					break;
-				case "Turtle Beach Santa Cruz (PCI)":
-					card = SoundCard.SANTA_CRUZ;
-					break;
+            SoundCard card = SoundCard.FIRST;
+            switch (comboAudioSoundCard.Text)
+            {
+                case "M-Audio Delta 44 (PCI)":
+                    card = SoundCard.DELTA_44;
+                    break;
+                case "PreSonus FireBox (FireWire)":
+                    card = SoundCard.FIREBOX;
+                    break;
+                case "Edirol FA-66 (FireWire)":
+                    card = SoundCard.EDIROL_FA_66;
+                    break;
+                case "SB Audigy (PCI)":
+                    card = SoundCard.AUDIGY;
+                    break;
+                case "SB Audigy 2 (PCI)":
+                    card = SoundCard.AUDIGY_2;
+                    break;
+                case "SB Audigy 2 ZS (PCI)":
+                    card = SoundCard.AUDIGY_2_ZS;
+                    break;
+                case "Sound Blaster Extigy (USB)":
+                    card = SoundCard.EXTIGY;
+                    break;
+                case "Sound Blaster MP3+ (USB)":
+                    card = SoundCard.MP3_PLUS;
+                    break;
+                case "Turtle Beach Santa Cruz (PCI)":
+                    card = SoundCard.SANTA_CRUZ;
+                    break;
                 case "HPSDR Janus/Ozy (USB2)":
                     card = SoundCard.JANUS_OZY;
                     break;
                 case "Unsupported Card":
-					card = SoundCard.UNSUPPORTED_CARD;
-					break;
-			}
+                    card = SoundCard.UNSUPPORTED_CARD;
+                    break;
+            }
 
-			if(card == SoundCard.FIRST) return;
-			
-			console.CurrentSoundCard = card;
-			current_sound_card = card;
+            if (card == SoundCard.FIRST) return;
 
-			switch(card)
-			{
-				case SoundCard.SANTA_CRUZ:
-					grpAudioDetails1.Enabled = false;
-					grpAudioVolts1.Visible = chkAudioExpert.Checked;
-					udAudioVoltage1.Value = 1.274M;					
-					if(comboAudioSampleRate1.Items.Contains(96000))
-						comboAudioSampleRate1.Items.Remove(96000);
-					if(comboAudioSampleRate1.Items.Contains(192000))
-						comboAudioSampleRate1.Items.Remove(192000);
-					comboAudioSampleRate1.Text = "48000";
-					foreach(PADeviceInfo p in comboAudioDriver1.Items)
-					{
-						if(p.Name == "ASIO")
-						{
-							comboAudioDriver1.SelectedItem = p;
-							break;
-						}
-					}
+            console.CurrentSoundCard = card;
+            current_sound_card = card;
 
-					foreach(PADeviceInfo dev in comboAudioInput1.Items)
-					{
-						if(dev.Name == "Wuschel's ASIO4ALL")
-						{
-							comboAudioInput1.Text = "Wuschel's ASIO4ALL";
-							comboAudioOutput1.Text = "Wuschel's ASIO4ALL";
-						}
-					}
-					if(comboAudioInput1.Text != "Wuschel's ASIO4ALL")
-					{
-						foreach(PADeviceInfo dev in comboAudioInput1.Items)
-						{
-							if(dev.Name == "ASIO4ALL v2")
-							{
-								comboAudioInput1.Text = "ASIO4ALL v2";
-								comboAudioOutput1.Text = "ASIO4ALL v2";
-							}
-						}
-					}
+            switch (card)
+            {
+                case SoundCard.SANTA_CRUZ:
+                    grpAudioDetails1.Enabled = false;
+                    grpAudioVolts1.Visible = chkAudioExpert.Checked;
+                    udAudioVoltage1.Value = 1.274M;
+                    if (comboAudioSampleRate1.Items.Contains(96000))
+                        comboAudioSampleRate1.Items.Remove(96000);
+                    if (comboAudioSampleRate1.Items.Contains(192000))
+                        comboAudioSampleRate1.Items.Remove(192000);
+                    comboAudioSampleRate1.Text = "48000";
+                    foreach (PADeviceInfo p in comboAudioDriver1.Items)
+                    {
+                        if (p.Name == "ASIO")
+                        {
+                            comboAudioDriver1.SelectedItem = p;
+                            break;
+                        }
+                    }
 
-					comboAudioMixer1.Text = "Santa Cruz(tm)";
-					comboAudioReceive1.Text = "Line In";
-					
-					for(int i=0; i<comboAudioTransmit1.Items.Count; i++)
-					{
-						if(((string)comboAudioTransmit1.Items[i]).StartsWith("Mi"))
-						{
-							comboAudioTransmit1.SelectedIndex = i;
-							break;
-						}
-					}
+                    foreach (PADeviceInfo dev in comboAudioInput1.Items)
+                    {
+                        if (dev.Name == "Wuschel's ASIO4ALL")
+                        {
+                            comboAudioInput1.Text = "Wuschel's ASIO4ALL";
+                            comboAudioOutput1.Text = "Wuschel's ASIO4ALL";
+                        }
+                    }
+                    if (comboAudioInput1.Text != "Wuschel's ASIO4ALL")
+                    {
+                        foreach (PADeviceInfo dev in comboAudioInput1.Items)
+                        {
+                            if (dev.Name == "ASIO4ALL v2")
+                            {
+                                comboAudioInput1.Text = "ASIO4ALL v2";
+                                comboAudioOutput1.Text = "ASIO4ALL v2";
+                            }
+                        }
+                    }
 
-					if(comboAudioMixer1.SelectedIndex < 0 || 
-						comboAudioMixer1.Text != "Santa Cruz(tm)")
-					{
-						MessageBox.Show(comboAudioSoundCard.Text+" not found.\n "+
-							"Please verify that this specific sound card is installed " +
-							"and functioning and try again.  \nIf your sound card is not " +
-							"a "+comboAudioSoundCard.Text+" and your card is not in the "+
-							"list, use the Unsupported Card selection.  \nFor more support, "+
-							"email support@flex-radio.com.",
-							comboAudioSoundCard.Text+" Not Found",
-							MessageBoxButtons.OK,
-							MessageBoxIcon.Exclamation);
-						console.PowerEnabled = false;
-					}
-					else if(!Mixer.InitSantaCruz(console.MixerID1))
-					{
-						MessageBox.Show("The "+comboAudioSoundCard.Text+" mixer initialization "+
-							"failed.  Please install the latest drivers from www.turtlebeach.com " +
-							" and try again.  For more support, email support@flex-radio.com.",
-							comboAudioSoundCard.Text+" Mixer Initialization Failed",
-							MessageBoxButtons.OK,
-							MessageBoxIcon.Exclamation);
-						console.PowerEnabled = false;
-					}
-					else if(comboAudioInput1.Text != "ASIO4ALL v2" &&
-						comboAudioInput1.Text != "Wuschel's ASIO4ALL")
-					{
-						MessageBox.Show("ASIO4ALL driver not found.  Please visit " +
-							"www.asio4all.com, download and install the driver, "+
-							"and try again.  Alternatively, you can use the Unsupported "+
-							"Card selection and setup the sound interface manually.  For "+
-							"more support, email support@flex-radio.com.",
-							"ASIO4ALL Not Found",
-							MessageBoxButtons.OK,
-							MessageBoxIcon.Exclamation);
-						console.PowerEnabled = false;
-					}
-					else 
-					{
-						udAudioLineIn1.Value = 20;
-						console.PowerEnabled = true;
-						grpAudioMicInGain1.Enabled = true;
-						grpAudioLineInGain1.Enabled = true;
-						comboAudioChannels1.Text = "2";
-						comboAudioChannels1.Enabled = false;
-						Audio.IN_RX1_L = 0;
-						Audio.IN_RX1_R = 1;
-						Audio.IN_TX_L = 0;
-						Audio.IN_TX_R = 1;
-					}
-					break;
-				case SoundCard.AUDIGY:
-				case SoundCard.AUDIGY_2:
-					grpAudioDetails1.Enabled = false;
-					grpAudioVolts1.Visible = chkAudioExpert.Checked;
-					udAudioVoltage1.Value = 2.23M;
-					if(comboAudioSampleRate1.Items.Contains(96000))
-						comboAudioSampleRate1.Items.Remove(96000);
-					if(comboAudioSampleRate1.Items.Contains(192000))
-						comboAudioSampleRate1.Items.Remove(192000);
-					comboAudioSampleRate1.Text = "48000";
-					foreach(PADeviceInfo p in comboAudioDriver1.Items)
-					{
-						if(p.Name == "ASIO")
-						{
-							comboAudioDriver1.SelectedItem = p;
-							break;
-						}
-					}
-					
-					foreach(PADeviceInfo dev in comboAudioInput1.Items)
-					{
-						if(dev.Name == "Wuschel's ASIO4ALL")
-						{
-							comboAudioInput1.Text = "Wuschel's ASIO4ALL";
-							comboAudioOutput1.Text = "Wuschel's ASIO4ALL";
-						}
-					}
-					if(comboAudioInput1.Text != "Wuschel's ASIO4ALL")
-					{
-						foreach(PADeviceInfo dev in comboAudioInput1.Items)
-						{
-							if(dev.Name == "ASIO4ALL v2")
-							{
-								comboAudioInput1.Text = "ASIO4ALL v2";
-								comboAudioOutput1.Text = "ASIO4ALL v2";
-							}
-						}
-					}
+                    comboAudioMixer1.Text = "Santa Cruz(tm)";
+                    comboAudioReceive1.Text = "Line In";
 
-					for(int i=0; i<comboAudioMixer1.Items.Count; i++)
-					{
-						if(((string)comboAudioMixer1.Items[i]).StartsWith("SB Audigy"))
-						{
-							comboAudioMixer1.SelectedIndex = i;
-							break;
-						}
-					}
+                    for (int i = 0; i < comboAudioTransmit1.Items.Count; i++)
+                    {
+                        if (((string)comboAudioTransmit1.Items[i]).StartsWith("Mi"))
+                        {
+                            comboAudioTransmit1.SelectedIndex = i;
+                            break;
+                        }
+                    }
 
-					for(int i=0; i<comboAudioReceive1.Items.Count; i++)
-					{
-						if(((string)comboAudioReceive1.Items[i]).StartsWith("Analog"))
-						{
-							comboAudioReceive1.SelectedIndex = i;
-							break;
-						}
-					}
+                    if (comboAudioMixer1.SelectedIndex < 0 ||
+                        comboAudioMixer1.Text != "Santa Cruz(tm)")
+                    {
+                        MessageBox.Show(comboAudioSoundCard.Text + " not found.\n " +
+                            "Please verify that this specific sound card is installed " +
+                            "and functioning and try again.  \nIf your sound card is not " +
+                            "a " + comboAudioSoundCard.Text + " and your card is not in the " +
+                            "list, use the Unsupported Card selection.  \nFor more support, " +
+                            "email support@flex-radio.com.",
+                            comboAudioSoundCard.Text + " Not Found",
+                            MessageBoxButtons.OK,
+                            MessageBoxIcon.Exclamation);
+                        console.PowerEnabled = false;
+                    }
+                    else if (!Mixer.InitSantaCruz(console.MixerID1))
+                    {
+                        MessageBox.Show("The " + comboAudioSoundCard.Text + " mixer initialization " +
+                            "failed.  Please install the latest drivers from www.turtlebeach.com " +
+                            " and try again.  For more support, email support@flex-radio.com.",
+                            comboAudioSoundCard.Text + " Mixer Initialization Failed",
+                            MessageBoxButtons.OK,
+                            MessageBoxIcon.Exclamation);
+                        console.PowerEnabled = false;
+                    }
+                    else if (comboAudioInput1.Text != "ASIO4ALL v2" &&
+                        comboAudioInput1.Text != "Wuschel's ASIO4ALL")
+                    {
+                        MessageBox.Show("ASIO4ALL driver not found.  Please visit " +
+                            "www.asio4all.com, download and install the driver, " +
+                            "and try again.  Alternatively, you can use the Unsupported " +
+                            "Card selection and setup the sound interface manually.  For " +
+                            "more support, email support@flex-radio.com.",
+                            "ASIO4ALL Not Found",
+                            MessageBoxButtons.OK,
+                            MessageBoxIcon.Exclamation);
+                        console.PowerEnabled = false;
+                    }
+                    else
+                    {
+                        udAudioLineIn1.Value = 20;
+                        console.PowerEnabled = true;
+                        grpAudioMicInGain1.Enabled = true;
+                        grpAudioLineInGain1.Enabled = true;
+                        comboAudioChannels1.Text = "2";
+                        comboAudioChannels1.Enabled = false;
+                        Audio.IN_RX1_L = 0;
+                        Audio.IN_RX1_R = 1;
+                        Audio.IN_TX_L = 0;
+                        Audio.IN_TX_R = 1;
+                    }
+                    break;
+                case SoundCard.AUDIGY:
+                case SoundCard.AUDIGY_2:
+                    grpAudioDetails1.Enabled = false;
+                    grpAudioVolts1.Visible = chkAudioExpert.Checked;
+                    udAudioVoltage1.Value = 2.23M;
+                    if (comboAudioSampleRate1.Items.Contains(96000))
+                        comboAudioSampleRate1.Items.Remove(96000);
+                    if (comboAudioSampleRate1.Items.Contains(192000))
+                        comboAudioSampleRate1.Items.Remove(192000);
+                    comboAudioSampleRate1.Text = "48000";
+                    foreach (PADeviceInfo p in comboAudioDriver1.Items)
+                    {
+                        if (p.Name == "ASIO")
+                        {
+                            comboAudioDriver1.SelectedItem = p;
+                            break;
+                        }
+                    }
 
-					if(comboAudioReceive1.SelectedIndex < 0 ||
-						!comboAudioReceive1.Text.StartsWith("Analog"))
-					{
-						for(int i=0; i<comboAudioReceive1.Items.Count; i++)
-						{
-							if(((string)comboAudioReceive1.Items[i]).StartsWith("Mix ana"))
-							{
-								comboAudioReceive1.SelectedIndex = i;
-								break;
-							}
-						}
-					}
+                    foreach (PADeviceInfo dev in comboAudioInput1.Items)
+                    {
+                        if (dev.Name == "Wuschel's ASIO4ALL")
+                        {
+                            comboAudioInput1.Text = "Wuschel's ASIO4ALL";
+                            comboAudioOutput1.Text = "Wuschel's ASIO4ALL";
+                        }
+                    }
+                    if (comboAudioInput1.Text != "Wuschel's ASIO4ALL")
+                    {
+                        foreach (PADeviceInfo dev in comboAudioInput1.Items)
+                        {
+                            if (dev.Name == "ASIO4ALL v2")
+                            {
+                                comboAudioInput1.Text = "ASIO4ALL v2";
+                                comboAudioOutput1.Text = "ASIO4ALL v2";
+                            }
+                        }
+                    }
 
-					for(int i=0; i<comboAudioTransmit1.Items.Count; i++)
-					{
-						if(((string)comboAudioTransmit1.Items[i]).StartsWith("Mi"))
-						{
-							comboAudioTransmit1.SelectedIndex = i;
-							break;
-						}
-					}
+                    for (int i = 0; i < comboAudioMixer1.Items.Count; i++)
+                    {
+                        if (((string)comboAudioMixer1.Items[i]).StartsWith("SB Audigy"))
+                        {
+                            comboAudioMixer1.SelectedIndex = i;
+                            break;
+                        }
+                    }
 
-					if(comboAudioMixer1.SelectedIndex < 0 ||
-						!comboAudioMixer1.Text.StartsWith("SB Audigy"))
-					{
-						MessageBox.Show(comboAudioSoundCard.Text+" not found.\n "+
-							"Please verify that this specific sound card is installed " +
-							"and functioning and try again.  \nIf your sound card is not " +
-							"a "+comboAudioSoundCard.Text+" and your card is not in the "+
-							"list, use the Unsupported Card selection.  \nFor more support, "+
-							"email support@flex-radio.com.",
-							comboAudioSoundCard.Text+" Not Found",
-							MessageBoxButtons.OK,
-							MessageBoxIcon.Exclamation);
-						console.PowerEnabled = false;
-					}
-					else if(!Mixer.InitAudigy2(console.MixerID1))
-					{
-						MessageBox.Show("The "+comboAudioSoundCard.Text+" mixer initialization "+
-							"failed.  Please install the latest drivers from www.creativelabs.com " +
-							" and try again.  For more support, email support@flex-radio.com.",
-							comboAudioSoundCard.Text+" Mixer Initialization Failed",
-							MessageBoxButtons.OK,
-							MessageBoxIcon.Exclamation);
-						console.PowerEnabled = false;
-					}
-					else if(comboAudioInput1.Text != "ASIO4ALL v2" &&
-						comboAudioInput1.Text != "Wuschel's ASIO4ALL")
-					{
-						MessageBox.Show("ASIO4ALL driver not found.  Please visit " +
-							"www.asio4all.com, download and install the driver, "+
-							"and try again.  Alternatively, you can use the Unsupported "+
-							"Card selection and setup the sound interface manually.  For "+
-							"more support, email support@flex-radio.com.",
-							"ASIO4ALL Not Found",
-							MessageBoxButtons.OK,
-							MessageBoxIcon.Exclamation);
-						console.PowerEnabled = false;
-					}
-					else 
-					{
-						udAudioLineIn1.Value = 1;
-						console.PowerEnabled = true;
-						grpAudioMicInGain1.Enabled = true;
-						grpAudioLineInGain1.Enabled = true;
-						comboAudioChannels1.Text = "2";
-						comboAudioChannels1.Enabled = false;
-						Audio.IN_RX1_L = 0;
-						Audio.IN_RX1_R = 1;
-						Audio.IN_TX_L = 0;
-						Audio.IN_TX_R = 1;
-					}
-					break;
-				case SoundCard.AUDIGY_2_ZS:
-					grpAudioDetails1.Enabled = false;
-					grpAudioVolts1.Visible = chkAudioExpert.Checked;
-					udAudioVoltage1.Value = 2.23M;
-					if(comboAudioSampleRate1.Items.Contains(96000))
-						comboAudioSampleRate1.Items.Remove(96000);
-					if(comboAudioSampleRate1.Items.Contains(192000))
-						comboAudioSampleRate1.Items.Remove(192000);
-					comboAudioSampleRate1.Text = "48000";
-					foreach(PADeviceInfo p in comboAudioDriver1.Items)
-					{
-						if(p.Name == "ASIO")
-						{
-							comboAudioDriver1.SelectedItem = p;
-							break;
-						}
-					}
-					
-					foreach(PADeviceInfo dev in comboAudioInput1.Items)
-					{
-						if(dev.Name == "Wuschel's ASIO4ALL")
-						{
-							comboAudioInput1.Text = "Wuschel's ASIO4ALL";
-							comboAudioOutput1.Text = "Wuschel's ASIO4ALL";
-						}
-					}
-					if(comboAudioInput1.Text != "Wuschel's ASIO4ALL")
-					{
-						foreach(PADeviceInfo dev in comboAudioInput1.Items)
-						{
-							if(dev.Name == "ASIO4ALL v2")
-							{
-								comboAudioInput1.Text = "ASIO4ALL v2";
-								comboAudioOutput1.Text = "ASIO4ALL v2";
-							}
-						}
-					}
+                    for (int i = 0; i < comboAudioReceive1.Items.Count; i++)
+                    {
+                        if (((string)comboAudioReceive1.Items[i]).StartsWith("Analog"))
+                        {
+                            comboAudioReceive1.SelectedIndex = i;
+                            break;
+                        }
+                    }
 
-					for(int i=0; i<comboAudioMixer1.Items.Count; i++)
-					{
-						if(((string)comboAudioMixer1.Items[i]).StartsWith("SB Audigy"))
-						{
-							comboAudioMixer1.SelectedIndex = i;
-							break;
-						}
-					}
+                    if (comboAudioReceive1.SelectedIndex < 0 ||
+                        !comboAudioReceive1.Text.StartsWith("Analog"))
+                    {
+                        for (int i = 0; i < comboAudioReceive1.Items.Count; i++)
+                        {
+                            if (((string)comboAudioReceive1.Items[i]).StartsWith("Mix ana"))
+                            {
+                                comboAudioReceive1.SelectedIndex = i;
+                                break;
+                            }
+                        }
+                    }
 
-					for(int i=0; i<comboAudioReceive1.Items.Count; i++)
-					{
-						if(((string)comboAudioReceive1.Items[i]).StartsWith("Analog"))
-						{
-							comboAudioReceive1.SelectedIndex = i;
-							break;
-						}
-					}
+                    for (int i = 0; i < comboAudioTransmit1.Items.Count; i++)
+                    {
+                        if (((string)comboAudioTransmit1.Items[i]).StartsWith("Mi"))
+                        {
+                            comboAudioTransmit1.SelectedIndex = i;
+                            break;
+                        }
+                    }
 
-					if(comboAudioReceive1.SelectedIndex < 0 ||
-						!comboAudioReceive1.Text.StartsWith("Analog"))
-					{
-						for(int i=0; i<comboAudioReceive1.Items.Count; i++)
-						{
-							if(((string)comboAudioReceive1.Items[i]).StartsWith("Mix ana"))
-							{
-								comboAudioReceive1.SelectedIndex = i;
-								break;
-							}
-						}
-					}
+                    if (comboAudioMixer1.SelectedIndex < 0 ||
+                        !comboAudioMixer1.Text.StartsWith("SB Audigy"))
+                    {
+                        MessageBox.Show(comboAudioSoundCard.Text + " not found.\n " +
+                            "Please verify that this specific sound card is installed " +
+                            "and functioning and try again.  \nIf your sound card is not " +
+                            "a " + comboAudioSoundCard.Text + " and your card is not in the " +
+                            "list, use the Unsupported Card selection.  \nFor more support, " +
+                            "email support@flex-radio.com.",
+                            comboAudioSoundCard.Text + " Not Found",
+                            MessageBoxButtons.OK,
+                            MessageBoxIcon.Exclamation);
+                        console.PowerEnabled = false;
+                    }
+                    else if (!Mixer.InitAudigy2(console.MixerID1))
+                    {
+                        MessageBox.Show("The " + comboAudioSoundCard.Text + " mixer initialization " +
+                            "failed.  Please install the latest drivers from www.creativelabs.com " +
+                            " and try again.  For more support, email support@flex-radio.com.",
+                            comboAudioSoundCard.Text + " Mixer Initialization Failed",
+                            MessageBoxButtons.OK,
+                            MessageBoxIcon.Exclamation);
+                        console.PowerEnabled = false;
+                    }
+                    else if (comboAudioInput1.Text != "ASIO4ALL v2" &&
+                        comboAudioInput1.Text != "Wuschel's ASIO4ALL")
+                    {
+                        MessageBox.Show("ASIO4ALL driver not found.  Please visit " +
+                            "www.asio4all.com, download and install the driver, " +
+                            "and try again.  Alternatively, you can use the Unsupported " +
+                            "Card selection and setup the sound interface manually.  For " +
+                            "more support, email support@flex-radio.com.",
+                            "ASIO4ALL Not Found",
+                            MessageBoxButtons.OK,
+                            MessageBoxIcon.Exclamation);
+                        console.PowerEnabled = false;
+                    }
+                    else
+                    {
+                        udAudioLineIn1.Value = 1;
+                        console.PowerEnabled = true;
+                        grpAudioMicInGain1.Enabled = true;
+                        grpAudioLineInGain1.Enabled = true;
+                        comboAudioChannels1.Text = "2";
+                        comboAudioChannels1.Enabled = false;
+                        Audio.IN_RX1_L = 0;
+                        Audio.IN_RX1_R = 1;
+                        Audio.IN_TX_L = 0;
+                        Audio.IN_TX_R = 1;
+                    }
+                    break;
+                case SoundCard.AUDIGY_2_ZS:
+                    grpAudioDetails1.Enabled = false;
+                    grpAudioVolts1.Visible = chkAudioExpert.Checked;
+                    udAudioVoltage1.Value = 2.23M;
+                    if (comboAudioSampleRate1.Items.Contains(96000))
+                        comboAudioSampleRate1.Items.Remove(96000);
+                    if (comboAudioSampleRate1.Items.Contains(192000))
+                        comboAudioSampleRate1.Items.Remove(192000);
+                    comboAudioSampleRate1.Text = "48000";
+                    foreach (PADeviceInfo p in comboAudioDriver1.Items)
+                    {
+                        if (p.Name == "ASIO")
+                        {
+                            comboAudioDriver1.SelectedItem = p;
+                            break;
+                        }
+                    }
 
-					for(int i=0; i<comboAudioTransmit1.Items.Count; i++)
-					{
-						if(((string)comboAudioTransmit1.Items[i]).StartsWith("Mi"))
-						{
-							comboAudioTransmit1.SelectedIndex = i;
-							break;
-						}
-					}
+                    foreach (PADeviceInfo dev in comboAudioInput1.Items)
+                    {
+                        if (dev.Name == "Wuschel's ASIO4ALL")
+                        {
+                            comboAudioInput1.Text = "Wuschel's ASIO4ALL";
+                            comboAudioOutput1.Text = "Wuschel's ASIO4ALL";
+                        }
+                    }
+                    if (comboAudioInput1.Text != "Wuschel's ASIO4ALL")
+                    {
+                        foreach (PADeviceInfo dev in comboAudioInput1.Items)
+                        {
+                            if (dev.Name == "ASIO4ALL v2")
+                            {
+                                comboAudioInput1.Text = "ASIO4ALL v2";
+                                comboAudioOutput1.Text = "ASIO4ALL v2";
+                            }
+                        }
+                    }
 
-					if(comboAudioMixer1.SelectedIndex < 0 || 
-						!comboAudioMixer1.Text.StartsWith("SB Audigy"))
-					{
-						MessageBox.Show(comboAudioSoundCard.Text+" not found.\n "+
-							"Please verify that this specific sound card is installed " +
-							"and functioning and try again.  \nIf your sound card is not " +
-							"a "+comboAudioSoundCard.Text+" and your card is not in the "+
-							"list, use the Unsupported Card selection.  \nFor more support, "+
-							"email support@flex-radio.com.",
-							comboAudioSoundCard.Text+" Not Found",
-							MessageBoxButtons.OK,
-							MessageBoxIcon.Exclamation);
-						console.PowerEnabled = false;
-					}
-					else if(!Mixer.InitAudigy2ZS(console.MixerID1))
-					{
-						MessageBox.Show("The "+comboAudioSoundCard.Text+" mixer initialization "+
-							"failed.  Please install the latest drivers from www.creativelabs.com " +
-							" and try again.  For more support, email support@flex-radio.com.",
-							comboAudioSoundCard.Text+" Mixer Initialization Failed",
-							MessageBoxButtons.OK,
-							MessageBoxIcon.Exclamation);
-						console.PowerEnabled = false;
-					}
-					else if(comboAudioInput1.Text != "ASIO4ALL v2" &&
-						comboAudioInput1.Text != "Wuschel's ASIO4ALL")
-					{
-						MessageBox.Show("ASIO4ALL driver not found.  Please visit " +
-							"www.asio4all.com, download and install the driver, "+
-							"and try again.  Alternatively, you can use the Unsupported "+
-							"Card selection and setup the sound interface manually.  For "+
-							"more support, email support@flex-radio.com.",
-							"ASIO4ALL Not Found",
-							MessageBoxButtons.OK,
-							MessageBoxIcon.Exclamation);
-						console.PowerEnabled = false;
-					}
-					else 
-					{
-						udAudioLineIn1.Value = 1;
-						console.PowerEnabled = true;
-						grpAudioMicInGain1.Enabled = true;
-						grpAudioLineInGain1.Enabled = true;
-						comboAudioChannels1.Text = "2";
-						comboAudioChannels1.Enabled = false;
-						Audio.IN_RX1_L = 0;
-						Audio.IN_RX1_R = 1;
-						Audio.IN_TX_L = 0;
-						Audio.IN_TX_R = 1;
-					}
-					break;
-				case SoundCard.EXTIGY:
-					grpAudioDetails1.Enabled = false;
-					grpAudioVolts1.Visible = chkAudioExpert.Checked;
-					udAudioVoltage1.Value = 1.96M;
-					if(!comboAudioSampleRate1.Items.Contains(96000))
-						comboAudioSampleRate1.Items.Add(96000);
-					if(comboAudioSampleRate1.Items.Contains(192000))
-						comboAudioSampleRate1.Items.Remove(192000);
-					comboAudioSampleRate1.Text = "48000";
-					foreach(PADeviceInfo p in comboAudioDriver1.Items)
-					{
-						if(p.Name == "ASIO")
-						{
-							comboAudioDriver1.SelectedItem = p;
-							break;
-						}
-					}
-					
-					foreach(PADeviceInfo dev in comboAudioInput1.Items)
-					{
-						if(dev.Name == "Wuschel's ASIO4ALL")
-						{
-							comboAudioInput1.Text = "Wuschel's ASIO4ALL";
-							comboAudioOutput1.Text = "Wuschel's ASIO4ALL";
-						}
-					}
-					if(comboAudioInput1.Text != "Wuschel's ASIO4ALL")
-					{
-						foreach(PADeviceInfo dev in comboAudioInput1.Items)
-						{
-							if(dev.Name == "ASIO4ALL v2")
-							{
-								comboAudioInput1.Text = "ASIO4ALL v2";
-								comboAudioOutput1.Text = "ASIO4ALL v2";
-							}
-						}
-					}
+                    for (int i = 0; i < comboAudioMixer1.Items.Count; i++)
+                    {
+                        if (((string)comboAudioMixer1.Items[i]).StartsWith("SB Audigy"))
+                        {
+                            comboAudioMixer1.SelectedIndex = i;
+                            break;
+                        }
+                    }
 
-					for(int i=0; i<comboAudioMixer1.Items.Count; i++)
-					{
-						if(((string)comboAudioMixer1.Items[i]).StartsWith("Creative SB Extigy"))
-						{
-							comboAudioMixer1.SelectedIndex = i;
-							break;
-						}
-					}
+                    for (int i = 0; i < comboAudioReceive1.Items.Count; i++)
+                    {
+                        if (((string)comboAudioReceive1.Items[i]).StartsWith("Analog"))
+                        {
+                            comboAudioReceive1.SelectedIndex = i;
+                            break;
+                        }
+                    }
 
-					comboAudioReceive1.Text = "Line In";
-					comboAudioTransmit1.Text = "Microphone";
+                    if (comboAudioReceive1.SelectedIndex < 0 ||
+                        !comboAudioReceive1.Text.StartsWith("Analog"))
+                    {
+                        for (int i = 0; i < comboAudioReceive1.Items.Count; i++)
+                        {
+                            if (((string)comboAudioReceive1.Items[i]).StartsWith("Mix ana"))
+                            {
+                                comboAudioReceive1.SelectedIndex = i;
+                                break;
+                            }
+                        }
+                    }
 
-					if(comboAudioMixer1.SelectedIndex < 0 ||
-						comboAudioMixer1.Text != "Creative SB Extigy")
-					{
-						MessageBox.Show(comboAudioSoundCard.Text+" not found.\n "+
-							"Please verify that this specific sound card is installed " +
-							"and functioning and try again.  \nIf your sound card is not " +
-							"a "+comboAudioSoundCard.Text+" and your card is not in the "+
-							"list, use the Unsupported Card selection.  \nFor more support, "+
-							"email support@flex-radio.com.",
-							comboAudioSoundCard.Text+" Not Found",
-							MessageBoxButtons.OK,
-							MessageBoxIcon.Exclamation);
-						console.PowerEnabled = false;
-					}
-					else if(!Mixer.InitExtigy(console.MixerID1))
-					{
-						MessageBox.Show("The "+comboAudioSoundCard.Text+" mixer initialization "+
-							"failed.  Please install the latest drivers from www.creativelabs.com " +
-							" and try again.  For more support, email support@flex-radio.com.",
-							comboAudioSoundCard.Text+" Mixer Initialization Failed",
-							MessageBoxButtons.OK,
-							MessageBoxIcon.Exclamation);
-						console.PowerEnabled = false;
-					}
-					else if(comboAudioInput1.Text != "ASIO4ALL v2" &&
-						comboAudioInput1.Text != "Wuschel's ASIO4ALL")
-					{
-						MessageBox.Show("ASIO4ALL driver not found.  Please visit " +
-							"www.asio4all.com, download and install the driver, "+
-							"and try again.  Alternatively, you can use the Unsupported "+
-							"Card selection and setup the sound interface manually.  For "+
-							"more support, email support@flex-radio.com.",
-							"ASIO4ALL Not Found",
-							MessageBoxButtons.OK,
-							MessageBoxIcon.Exclamation);
-						console.PowerEnabled = false;
-					}
-					else
-					{
-						udAudioLineIn1.Value = 20;
-						console.PowerEnabled = true;
-						grpAudioMicInGain1.Enabled = true;
-						grpAudioLineInGain1.Enabled = true;
-						comboAudioChannels1.Text = "2";
-						comboAudioChannels1.Enabled = false;
-						Audio.IN_RX1_L = 0;
-						Audio.IN_RX1_R = 1;
-						Audio.IN_TX_L = 0;
-						Audio.IN_TX_R = 1;
-					}
-					break;
-				case SoundCard.MP3_PLUS:
-					grpAudioDetails1.Enabled = false;
-					grpAudioVolts1.Visible = chkAudioExpert.Checked;
-					udAudioVoltage1.Value = 0.982M;
-					if(comboAudioSampleRate1.Items.Contains(96000))
-						comboAudioSampleRate1.Items.Remove(96000);
-					if(comboAudioSampleRate1.Items.Contains(192000))
-						comboAudioSampleRate1.Items.Remove(192000);
-					comboAudioSampleRate1.Text = "48000";
-					foreach(PADeviceInfo p in comboAudioDriver1.Items)
-					{
-						if(p.Name == "ASIO")
-						{
-							comboAudioDriver1.SelectedItem = p;
-							break;
-						}
-					}
+                    for (int i = 0; i < comboAudioTransmit1.Items.Count; i++)
+                    {
+                        if (((string)comboAudioTransmit1.Items[i]).StartsWith("Mi"))
+                        {
+                            comboAudioTransmit1.SelectedIndex = i;
+                            break;
+                        }
+                    }
 
-					for(int i=0; i<comboAudioMixer1.Items.Count; i++)
-					{
-						if(((string)comboAudioMixer1.Items[i]).StartsWith("Sound Blaster"))
-						{
-							comboAudioMixer1.SelectedIndex = i;
-							break;
-						}
-					}
+                    if (comboAudioMixer1.SelectedIndex < 0 ||
+                        !comboAudioMixer1.Text.StartsWith("SB Audigy"))
+                    {
+                        MessageBox.Show(comboAudioSoundCard.Text + " not found.\n " +
+                            "Please verify that this specific sound card is installed " +
+                            "and functioning and try again.  \nIf your sound card is not " +
+                            "a " + comboAudioSoundCard.Text + " and your card is not in the " +
+                            "list, use the Unsupported Card selection.  \nFor more support, " +
+                            "email support@flex-radio.com.",
+                            comboAudioSoundCard.Text + " Not Found",
+                            MessageBoxButtons.OK,
+                            MessageBoxIcon.Exclamation);
+                        console.PowerEnabled = false;
+                    }
+                    else if (!Mixer.InitAudigy2ZS(console.MixerID1))
+                    {
+                        MessageBox.Show("The " + comboAudioSoundCard.Text + " mixer initialization " +
+                            "failed.  Please install the latest drivers from www.creativelabs.com " +
+                            " and try again.  For more support, email support@flex-radio.com.",
+                            comboAudioSoundCard.Text + " Mixer Initialization Failed",
+                            MessageBoxButtons.OK,
+                            MessageBoxIcon.Exclamation);
+                        console.PowerEnabled = false;
+                    }
+                    else if (comboAudioInput1.Text != "ASIO4ALL v2" &&
+                        comboAudioInput1.Text != "Wuschel's ASIO4ALL")
+                    {
+                        MessageBox.Show("ASIO4ALL driver not found.  Please visit " +
+                            "www.asio4all.com, download and install the driver, " +
+                            "and try again.  Alternatively, you can use the Unsupported " +
+                            "Card selection and setup the sound interface manually.  For " +
+                            "more support, email support@flex-radio.com.",
+                            "ASIO4ALL Not Found",
+                            MessageBoxButtons.OK,
+                            MessageBoxIcon.Exclamation);
+                        console.PowerEnabled = false;
+                    }
+                    else
+                    {
+                        udAudioLineIn1.Value = 1;
+                        console.PowerEnabled = true;
+                        grpAudioMicInGain1.Enabled = true;
+                        grpAudioLineInGain1.Enabled = true;
+                        comboAudioChannels1.Text = "2";
+                        comboAudioChannels1.Enabled = false;
+                        Audio.IN_RX1_L = 0;
+                        Audio.IN_RX1_R = 1;
+                        Audio.IN_TX_L = 0;
+                        Audio.IN_TX_R = 1;
+                    }
+                    break;
+                case SoundCard.EXTIGY:
+                    grpAudioDetails1.Enabled = false;
+                    grpAudioVolts1.Visible = chkAudioExpert.Checked;
+                    udAudioVoltage1.Value = 1.96M;
+                    if (!comboAudioSampleRate1.Items.Contains(96000))
+                        comboAudioSampleRate1.Items.Add(96000);
+                    if (comboAudioSampleRate1.Items.Contains(192000))
+                        comboAudioSampleRate1.Items.Remove(192000);
+                    comboAudioSampleRate1.Text = "48000";
+                    foreach (PADeviceInfo p in comboAudioDriver1.Items)
+                    {
+                        if (p.Name == "ASIO")
+                        {
+                            comboAudioDriver1.SelectedItem = p;
+                            break;
+                        }
+                    }
 
-					if(comboAudioMixer1.SelectedIndex < 0 ||
-						(string)comboAudioMixer1.SelectedItem != "Sound Blaster")
-					{
-						for(int i=0; i<comboAudioMixer1.Items.Count; i++)
-						{
-							if(((string)comboAudioMixer1.Items[i]).StartsWith("USB Audio"))
-							{
-								comboAudioMixer1.SelectedIndex = i;
-								break;
-							}
-						}
-					}
+                    foreach (PADeviceInfo dev in comboAudioInput1.Items)
+                    {
+                        if (dev.Name == "Wuschel's ASIO4ALL")
+                        {
+                            comboAudioInput1.Text = "Wuschel's ASIO4ALL";
+                            comboAudioOutput1.Text = "Wuschel's ASIO4ALL";
+                        }
+                    }
+                    if (comboAudioInput1.Text != "Wuschel's ASIO4ALL")
+                    {
+                        foreach (PADeviceInfo dev in comboAudioInput1.Items)
+                        {
+                            if (dev.Name == "ASIO4ALL v2")
+                            {
+                                comboAudioInput1.Text = "ASIO4ALL v2";
+                                comboAudioOutput1.Text = "ASIO4ALL v2";
+                            }
+                        }
+                    }
 
-					foreach(PADeviceInfo dev in comboAudioInput1.Items)
-					{
-						if(dev.Name == "Wuschel's ASIO4ALL")
-						{
-							comboAudioInput1.Text = "Wuschel's ASIO4ALL";
-							comboAudioOutput1.Text = "Wuschel's ASIO4ALL";
-						}
-					}
-					if(comboAudioInput1.Text != "Wuschel's ASIO4ALL")
-					{
-						foreach(PADeviceInfo dev in comboAudioInput1.Items)
-						{
-							if(dev.Name == "ASIO4ALL v2")
-							{
-								comboAudioInput1.Text = "ASIO4ALL v2";
-								comboAudioOutput1.Text = "ASIO4ALL v2";
-							}
-						}
-					}
+                    for (int i = 0; i < comboAudioMixer1.Items.Count; i++)
+                    {
+                        if (((string)comboAudioMixer1.Items[i]).StartsWith("Creative SB Extigy"))
+                        {
+                            comboAudioMixer1.SelectedIndex = i;
+                            break;
+                        }
+                    }
 
-					comboAudioReceive1.Text = "Line In";
-					
-					for(int i=0; i<comboAudioTransmit1.Items.Count; i++)
-					{
-						if(((string)comboAudioTransmit1.Items[i]).StartsWith("Mi"))
-						{
-							comboAudioTransmit1.SelectedIndex = i;
-							break;
-						}
-					}
+                    comboAudioReceive1.Text = "Line In";
+                    comboAudioTransmit1.Text = "Microphone";
 
-					if(comboAudioMixer1.SelectedIndex < 0 ||
-						(comboAudioMixer1.Text != "Sound Blaster" &&
-						comboAudioMixer1.Text != "USB Audio"))
-					{
-						MessageBox.Show(comboAudioSoundCard.Text+" not found.\n "+
-							"Please verify that this specific sound card is installed " +
-							"and functioning and try again.  \nIf your sound card is not " +
-							"a "+comboAudioSoundCard.Text+" and your card is not in the "+
-							"list, use the Unsupported Card selection.  \nFor more support, "+
-							"email support@flex-radio.com.",
-							comboAudioSoundCard.Text+" Not Found",
-							MessageBoxButtons.OK,
-							MessageBoxIcon.Exclamation);
-						console.PowerEnabled = false;
-					}
-					else if(!Mixer.InitMP3Plus(console.MixerID1))
-					{
-						MessageBox.Show("The "+comboAudioSoundCard.Text+" mixer initialization "+
-							"failed.  Please install the latest drivers from www.creativelabs.com " +
-							" and try again.  For more support, email support@flex-radio.com.",
-							comboAudioSoundCard.Text+" Mixer Initialization Failed",
-							MessageBoxButtons.OK,
-							MessageBoxIcon.Exclamation);
-						console.PowerEnabled = false;
-					}
-					else if(comboAudioInput1.Text != "ASIO4ALL v2" &&
-						comboAudioInput1.Text != "Wuschel's ASIO4ALL")
-					{
-						MessageBox.Show("ASIO4ALL driver not found.  Please visit " +
-							"www.asio4all.com, download and install the driver, "+
-							"and try again.  Alternatively, you can use the Unsupported "+
-							"Card selection and setup the sound interface manually.  For "+
-							"more support, email support@flex-radio.com.",
-							"ASIO4ALL Not Found",
-							MessageBoxButtons.OK,
-							MessageBoxIcon.Exclamation);
-						console.PowerEnabled = false;
-					}
-					else 
-					{
-						udAudioLineIn1.Value = 6;
-						console.PowerEnabled = true;
-						grpAudioMicInGain1.Enabled = true;
-						grpAudioLineInGain1.Enabled = true;
-						comboAudioChannels1.Text = "2";
-						comboAudioChannels1.Enabled = false;
-						Audio.IN_RX1_L = 0;
-						Audio.IN_RX1_R = 1;
-						Audio.IN_TX_L = 0;
-						Audio.IN_TX_R = 1;
-					}
-					break;
-				case SoundCard.DELTA_44:
-					grpAudioDetails1.Enabled = false;
-					grpAudioVolts1.Visible = chkAudioExpert.Checked;
-					udAudioVoltage1.Value = 0.98M;
-					if(!comboAudioSampleRate1.Items.Contains(96000))
-						comboAudioSampleRate1.Items.Add(96000);
-					if(comboAudioSampleRate1.Items.Contains(192000))
-						comboAudioSampleRate1.Items.Remove(192000);
-					if(comboAudioSoundCard.Focused || comboAudioSampleRate1.SelectedIndex < 0)
-						comboAudioSampleRate1.Text = "48000";
-					foreach(PADeviceInfo p in comboAudioDriver1.Items)
-					{
-						if(p.Name == "ASIO")
-						{
-							comboAudioDriver1.SelectedItem = p;
-							break;
-						}
-					}
+                    if (comboAudioMixer1.SelectedIndex < 0 ||
+                        comboAudioMixer1.Text != "Creative SB Extigy")
+                    {
+                        MessageBox.Show(comboAudioSoundCard.Text + " not found.\n " +
+                            "Please verify that this specific sound card is installed " +
+                            "and functioning and try again.  \nIf your sound card is not " +
+                            "a " + comboAudioSoundCard.Text + " and your card is not in the " +
+                            "list, use the Unsupported Card selection.  \nFor more support, " +
+                            "email support@flex-radio.com.",
+                            comboAudioSoundCard.Text + " Not Found",
+                            MessageBoxButtons.OK,
+                            MessageBoxIcon.Exclamation);
+                        console.PowerEnabled = false;
+                    }
+                    else if (!Mixer.InitExtigy(console.MixerID1))
+                    {
+                        MessageBox.Show("The " + comboAudioSoundCard.Text + " mixer initialization " +
+                            "failed.  Please install the latest drivers from www.creativelabs.com " +
+                            " and try again.  For more support, email support@flex-radio.com.",
+                            comboAudioSoundCard.Text + " Mixer Initialization Failed",
+                            MessageBoxButtons.OK,
+                            MessageBoxIcon.Exclamation);
+                        console.PowerEnabled = false;
+                    }
+                    else if (comboAudioInput1.Text != "ASIO4ALL v2" &&
+                        comboAudioInput1.Text != "Wuschel's ASIO4ALL")
+                    {
+                        MessageBox.Show("ASIO4ALL driver not found.  Please visit " +
+                            "www.asio4all.com, download and install the driver, " +
+                            "and try again.  Alternatively, you can use the Unsupported " +
+                            "Card selection and setup the sound interface manually.  For " +
+                            "more support, email support@flex-radio.com.",
+                            "ASIO4ALL Not Found",
+                            MessageBoxButtons.OK,
+                            MessageBoxIcon.Exclamation);
+                        console.PowerEnabled = false;
+                    }
+                    else
+                    {
+                        udAudioLineIn1.Value = 20;
+                        console.PowerEnabled = true;
+                        grpAudioMicInGain1.Enabled = true;
+                        grpAudioLineInGain1.Enabled = true;
+                        comboAudioChannels1.Text = "2";
+                        comboAudioChannels1.Enabled = false;
+                        Audio.IN_RX1_L = 0;
+                        Audio.IN_RX1_R = 1;
+                        Audio.IN_TX_L = 0;
+                        Audio.IN_TX_R = 1;
+                    }
+                    break;
+                case SoundCard.MP3_PLUS:
+                    grpAudioDetails1.Enabled = false;
+                    grpAudioVolts1.Visible = chkAudioExpert.Checked;
+                    udAudioVoltage1.Value = 0.982M;
+                    if (comboAudioSampleRate1.Items.Contains(96000))
+                        comboAudioSampleRate1.Items.Remove(96000);
+                    if (comboAudioSampleRate1.Items.Contains(192000))
+                        comboAudioSampleRate1.Items.Remove(192000);
+                    comboAudioSampleRate1.Text = "48000";
+                    foreach (PADeviceInfo p in comboAudioDriver1.Items)
+                    {
+                        if (p.Name == "ASIO")
+                        {
+                            comboAudioDriver1.SelectedItem = p;
+                            break;
+                        }
+                    }
 
-					foreach(PADeviceInfo dev in comboAudioInput1.Items)
-					{
-						if(dev.Name == "M-Audio Delta ASIO")
-						{
-							comboAudioInput1.Text = "M-Audio Delta ASIO";
-							comboAudioOutput1.Text = "M-Audio Delta ASIO";
-						}
-					}
-					
-					comboAudioMixer1.Text = "None";
+                    for (int i = 0; i < comboAudioMixer1.Items.Count; i++)
+                    {
+                        if (((string)comboAudioMixer1.Items[i]).StartsWith("Sound Blaster"))
+                        {
+                            comboAudioMixer1.SelectedIndex = i;
+                            break;
+                        }
+                    }
 
-					if(comboAudioInput1.Text != "M-Audio Delta ASIO")
-					{
-						MessageBox.Show("M-Audio Delta ASIO driver not found.  Please visit " +
-							"www.m-audio.com, download and install the latest driver, "+
-							"and try again.  For more support, email support@flex-radio.com.",
-							"Delta 44 Driver Not Found",
-							MessageBoxButtons.OK,
-							MessageBoxIcon.Exclamation);
-						console.PowerEnabled = false;
-					}
-					else 
-					{
-						InitDelta44();
-						chkAudioEnableVAC.Enabled = true;
-						grpAudioMicInGain1.Enabled = false;
-						grpAudioLineInGain1.Enabled = false;
-						console.PowerEnabled = true;
-						comboAudioChannels1.Text = "4";
-						comboAudioChannels1.Enabled = false;
-						Audio.IN_RX1_L = 0;
-						Audio.IN_RX1_R = 1;
-						Audio.IN_TX_L = 2;
-						Audio.IN_TX_R = 3;
-					}
-					break;
+                    if (comboAudioMixer1.SelectedIndex < 0 ||
+                        (string)comboAudioMixer1.SelectedItem != "Sound Blaster")
+                    {
+                        for (int i = 0; i < comboAudioMixer1.Items.Count; i++)
+                        {
+                            if (((string)comboAudioMixer1.Items[i]).StartsWith("USB Audio"))
+                            {
+                                comboAudioMixer1.SelectedIndex = i;
+                                break;
+                            }
+                        }
+                    }
+
+                    foreach (PADeviceInfo dev in comboAudioInput1.Items)
+                    {
+                        if (dev.Name == "Wuschel's ASIO4ALL")
+                        {
+                            comboAudioInput1.Text = "Wuschel's ASIO4ALL";
+                            comboAudioOutput1.Text = "Wuschel's ASIO4ALL";
+                        }
+                    }
+                    if (comboAudioInput1.Text != "Wuschel's ASIO4ALL")
+                    {
+                        foreach (PADeviceInfo dev in comboAudioInput1.Items)
+                        {
+                            if (dev.Name == "ASIO4ALL v2")
+                            {
+                                comboAudioInput1.Text = "ASIO4ALL v2";
+                                comboAudioOutput1.Text = "ASIO4ALL v2";
+                            }
+                        }
+                    }
+
+                    comboAudioReceive1.Text = "Line In";
+
+                    for (int i = 0; i < comboAudioTransmit1.Items.Count; i++)
+                    {
+                        if (((string)comboAudioTransmit1.Items[i]).StartsWith("Mi"))
+                        {
+                            comboAudioTransmit1.SelectedIndex = i;
+                            break;
+                        }
+                    }
+
+                    if (comboAudioMixer1.SelectedIndex < 0 ||
+                        (comboAudioMixer1.Text != "Sound Blaster" &&
+                        comboAudioMixer1.Text != "USB Audio"))
+                    {
+                        MessageBox.Show(comboAudioSoundCard.Text + " not found.\n " +
+                            "Please verify that this specific sound card is installed " +
+                            "and functioning and try again.  \nIf your sound card is not " +
+                            "a " + comboAudioSoundCard.Text + " and your card is not in the " +
+                            "list, use the Unsupported Card selection.  \nFor more support, " +
+                            "email support@flex-radio.com.",
+                            comboAudioSoundCard.Text + " Not Found",
+                            MessageBoxButtons.OK,
+                            MessageBoxIcon.Exclamation);
+                        console.PowerEnabled = false;
+                    }
+                    else if (!Mixer.InitMP3Plus(console.MixerID1))
+                    {
+                        MessageBox.Show("The " + comboAudioSoundCard.Text + " mixer initialization " +
+                            "failed.  Please install the latest drivers from www.creativelabs.com " +
+                            " and try again.  For more support, email support@flex-radio.com.",
+                            comboAudioSoundCard.Text + " Mixer Initialization Failed",
+                            MessageBoxButtons.OK,
+                            MessageBoxIcon.Exclamation);
+                        console.PowerEnabled = false;
+                    }
+                    else if (comboAudioInput1.Text != "ASIO4ALL v2" &&
+                        comboAudioInput1.Text != "Wuschel's ASIO4ALL")
+                    {
+                        MessageBox.Show("ASIO4ALL driver not found.  Please visit " +
+                            "www.asio4all.com, download and install the driver, " +
+                            "and try again.  Alternatively, you can use the Unsupported " +
+                            "Card selection and setup the sound interface manually.  For " +
+                            "more support, email support@flex-radio.com.",
+                            "ASIO4ALL Not Found",
+                            MessageBoxButtons.OK,
+                            MessageBoxIcon.Exclamation);
+                        console.PowerEnabled = false;
+                    }
+                    else
+                    {
+                        udAudioLineIn1.Value = 6;
+                        console.PowerEnabled = true;
+                        grpAudioMicInGain1.Enabled = true;
+                        grpAudioLineInGain1.Enabled = true;
+                        comboAudioChannels1.Text = "2";
+                        comboAudioChannels1.Enabled = false;
+                        Audio.IN_RX1_L = 0;
+                        Audio.IN_RX1_R = 1;
+                        Audio.IN_TX_L = 0;
+                        Audio.IN_TX_R = 1;
+                    }
+                    break;
+                case SoundCard.DELTA_44:
+                    grpAudioDetails1.Enabled = false;
+                    grpAudioVolts1.Visible = chkAudioExpert.Checked;
+                    udAudioVoltage1.Value = 0.98M;
+                    if (!comboAudioSampleRate1.Items.Contains(96000))
+                        comboAudioSampleRate1.Items.Add(96000);
+                    if (comboAudioSampleRate1.Items.Contains(192000))
+                        comboAudioSampleRate1.Items.Remove(192000);
+                    if (comboAudioSoundCard.Focused || comboAudioSampleRate1.SelectedIndex < 0)
+                        comboAudioSampleRate1.Text = "48000";
+                    foreach (PADeviceInfo p in comboAudioDriver1.Items)
+                    {
+                        if (p.Name == "ASIO")
+                        {
+                            comboAudioDriver1.SelectedItem = p;
+                            break;
+                        }
+                    }
+
+                    foreach (PADeviceInfo dev in comboAudioInput1.Items)
+                    {
+                        if (dev.Name == "M-Audio Delta ASIO")
+                        {
+                            comboAudioInput1.Text = "M-Audio Delta ASIO";
+                            comboAudioOutput1.Text = "M-Audio Delta ASIO";
+                        }
+                    }
+
+                    comboAudioMixer1.Text = "None";
+
+                    if (comboAudioInput1.Text != "M-Audio Delta ASIO")
+                    {
+                        MessageBox.Show("M-Audio Delta ASIO driver not found.  Please visit " +
+                            "www.m-audio.com, download and install the latest driver, " +
+                            "and try again.  For more support, email support@flex-radio.com.",
+                            "Delta 44 Driver Not Found",
+                            MessageBoxButtons.OK,
+                            MessageBoxIcon.Exclamation);
+                        console.PowerEnabled = false;
+                    }
+                    else
+                    {
+                        InitDelta44();
+                        chkAudioEnableVAC.Enabled = true;
+                        grpAudioMicInGain1.Enabled = false;
+                        grpAudioLineInGain1.Enabled = false;
+                        console.PowerEnabled = true;
+                        comboAudioChannels1.Text = "4";
+                        comboAudioChannels1.Enabled = false;
+                        Audio.IN_RX1_L = 0;
+                        Audio.IN_RX1_R = 1;
+                        Audio.IN_TX_L = 2;
+                        Audio.IN_TX_R = 3;
+                    }
+                    break;
 
                 case SoundCard.JANUS_OZY:
                     grpAudioDetails1.Enabled = false;
@@ -25696,478 +25847,478 @@ namespace PowerSDR
 
 
                 case SoundCard.FIREBOX:
-					grpAudioDetails1.Enabled = false;
-					grpAudioVolts1.Visible = chkAudioExpert.Checked;
-					udAudioVoltage1.Value = 6.39M;
-					if(!comboAudioSampleRate1.Items.Contains(96000))
-						comboAudioSampleRate1.Items.Add(96000);
-					if(comboAudioSampleRate1.Items.Contains(192000))
-						comboAudioSampleRate1.Items.Remove(192000);
-					if(comboAudioSoundCard.Focused || comboAudioSampleRate1.SelectedIndex < 0)
-						comboAudioSampleRate1.Text = "48000";
-					foreach(PADeviceInfo p in comboAudioDriver1.Items)
-					{
-						if(p.Name == "ASIO")
-						{
-							comboAudioDriver1.SelectedItem = p;
-							break;
-						}
-					}
+                    grpAudioDetails1.Enabled = false;
+                    grpAudioVolts1.Visible = chkAudioExpert.Checked;
+                    udAudioVoltage1.Value = 6.39M;
+                    if (!comboAudioSampleRate1.Items.Contains(96000))
+                        comboAudioSampleRate1.Items.Add(96000);
+                    if (comboAudioSampleRate1.Items.Contains(192000))
+                        comboAudioSampleRate1.Items.Remove(192000);
+                    if (comboAudioSoundCard.Focused || comboAudioSampleRate1.SelectedIndex < 0)
+                        comboAudioSampleRate1.Text = "48000";
+                    foreach (PADeviceInfo p in comboAudioDriver1.Items)
+                    {
+                        if (p.Name == "ASIO")
+                        {
+                            comboAudioDriver1.SelectedItem = p;
+                            break;
+                        }
+                    }
 
-					foreach(PADeviceInfo dev in comboAudioInput1.Items)
-					{
-						if(dev.Name.IndexOf("FireBox") >= 0)
-						{
-							comboAudioInput1.Text = dev.Name;
-							comboAudioOutput1.Text = dev.Name;
-						}
-					}
-					
-					comboAudioMixer1.Text = "None";
+                    foreach (PADeviceInfo dev in comboAudioInput1.Items)
+                    {
+                        if (dev.Name.IndexOf("FireBox") >= 0)
+                        {
+                            comboAudioInput1.Text = dev.Name;
+                            comboAudioOutput1.Text = dev.Name;
+                        }
+                    }
 
-					if(comboAudioInput1.Text.IndexOf("FireBox") < 0)
-					{
-						MessageBox.Show("PreSonus FireBox ASIO driver not found.  Please visit " +
-							"www.presonus.com, download and install the latest driver, "+
-							"and try again.  For more support, email support@flex-radio.com.",
-							"PreSonus FireBox Driver Not Found",
-							MessageBoxButtons.OK,
-							MessageBoxIcon.Exclamation);
-						console.PowerEnabled = false;
-					}
-					else 
-					{
-						chkAudioEnableVAC.Enabled = true;
-						grpAudioMicInGain1.Enabled = false;
-						grpAudioLineInGain1.Enabled = false;
-						console.PowerEnabled = true;
-						comboAudioChannels1.Text = "4";
-						comboAudioChannels1.Enabled = false;
-						Audio.IN_RX1_L = 2;
-						Audio.IN_RX1_R = 3;
-						Audio.IN_TX_L = 0;
-						Audio.IN_TX_R = 1;
-						Thread t = new Thread(new ThreadStart(FireBoxMixerFix));
-						t.Name = "FireBoxMixerFix";
-						t.Priority = ThreadPriority.Normal;
-						t.IsBackground = true;
-						t.Start();
-					}
-					break;
-				case SoundCard.EDIROL_FA_66:
-					grpAudioDetails1.Enabled = false;
-					grpAudioVolts1.Visible = chkAudioExpert.Checked;
-					udAudioVoltage1.Value = 2.27M;
-					if(!comboAudioSampleRate1.Items.Contains(96000))
-						comboAudioSampleRate1.Items.Add(96000);
-					if(!comboAudioSampleRate1.Items.Contains(192000))
-						comboAudioSampleRate1.Items.Add(192000);
-					if(comboAudioSoundCard.Focused || comboAudioSampleRate1.SelectedIndex < 0)
-						comboAudioSampleRate1.Text = "192000";
-					foreach(PADeviceInfo p in comboAudioDriver1.Items)
-					{
-						if(p.Name == "ASIO")
-						{
-							comboAudioDriver1.SelectedItem = p;
-							break;
-						}
-					}
+                    comboAudioMixer1.Text = "None";
 
-					foreach(PADeviceInfo dev in comboAudioInput1.Items)
-					{
-						if(dev.Name == "EDIROL FA-66")
-						{
-							comboAudioInput1.Text = "EDIROL FA-66";
-							comboAudioOutput1.Text = "EDIROL FA-66";
-						}
-					}
-					
-					comboAudioMixer1.Text = "None";
+                    if (comboAudioInput1.Text.IndexOf("FireBox") < 0)
+                    {
+                        MessageBox.Show("PreSonus FireBox ASIO driver not found.  Please visit " +
+                            "www.presonus.com, download and install the latest driver, " +
+                            "and try again.  For more support, email support@flex-radio.com.",
+                            "PreSonus FireBox Driver Not Found",
+                            MessageBoxButtons.OK,
+                            MessageBoxIcon.Exclamation);
+                        console.PowerEnabled = false;
+                    }
+                    else
+                    {
+                        chkAudioEnableVAC.Enabled = true;
+                        grpAudioMicInGain1.Enabled = false;
+                        grpAudioLineInGain1.Enabled = false;
+                        console.PowerEnabled = true;
+                        comboAudioChannels1.Text = "4";
+                        comboAudioChannels1.Enabled = false;
+                        Audio.IN_RX1_L = 2;
+                        Audio.IN_RX1_R = 3;
+                        Audio.IN_TX_L = 0;
+                        Audio.IN_TX_R = 1;
+                        Thread t = new Thread(new ThreadStart(FireBoxMixerFix));
+                        t.Name = "FireBoxMixerFix";
+                        t.Priority = ThreadPriority.Normal;
+                        t.IsBackground = true;
+                        t.Start();
+                    }
+                    break;
+                case SoundCard.EDIROL_FA_66:
+                    grpAudioDetails1.Enabled = false;
+                    grpAudioVolts1.Visible = chkAudioExpert.Checked;
+                    udAudioVoltage1.Value = 2.27M;
+                    if (!comboAudioSampleRate1.Items.Contains(96000))
+                        comboAudioSampleRate1.Items.Add(96000);
+                    if (!comboAudioSampleRate1.Items.Contains(192000))
+                        comboAudioSampleRate1.Items.Add(192000);
+                    if (comboAudioSoundCard.Focused || comboAudioSampleRate1.SelectedIndex < 0)
+                        comboAudioSampleRate1.Text = "192000";
+                    foreach (PADeviceInfo p in comboAudioDriver1.Items)
+                    {
+                        if (p.Name == "ASIO")
+                        {
+                            comboAudioDriver1.SelectedItem = p;
+                            break;
+                        }
+                    }
 
-					if(comboAudioInput1.Text != "EDIROL FA-66")
-					{
-						MessageBox.Show("Edirol FA-66 ASIO driver not found.  Please visit " +
-							"www.rolandus.com, download and install the latest driver, "+
-							"and try again.  For more support, email support@flex-radio.com.",
-							"Edirol FA-66 Driver Not Found",
-							MessageBoxButtons.OK,
-							MessageBoxIcon.Exclamation);
-						console.PowerEnabled = false;
-					}
-					else 
-					{
-						chkAudioEnableVAC.Enabled = true;
-						grpAudioMicInGain1.Enabled = false;
-						grpAudioLineInGain1.Enabled = false;
-						console.PowerEnabled = true;
-						comboAudioChannels1.Text = "4";
-						comboAudioChannels1.Enabled = false;
-						Audio.IN_RX1_L = 2;
-						Audio.IN_RX1_R = 3;
-						Audio.IN_TX_L = 0;
-						Audio.IN_TX_R = 1;
-					}
-					break;
-				case SoundCard.UNSUPPORTED_CARD:
-					if(comboAudioSoundCard.Focused)
-					{
-						MessageBox.Show("Proper operation of the SDR-1000 depends on the use of a sound card that is\n"+
-							"officially recommended by FlexRadio Systems.  Refer to the Specifications page on\n"+
-							"www.flex-radio.com to determine which sound cards are currently recommended.  Use only\n"+
-							"the specific model numbers stated on the website because other models within the same\n"+
-							"family may not work properly with the radio.  Officially supported sound cards may be\n"+
-							"updated on the website without notice.  If you have any question about the sound card\n"+
-							"you would like to use with the radio, please email support@flex-radio.com or call us at\n"+
-							"512-250-8595.\n\n"+
+                    foreach (PADeviceInfo dev in comboAudioInput1.Items)
+                    {
+                        if (dev.Name == "EDIROL FA-66")
+                        {
+                            comboAudioInput1.Text = "EDIROL FA-66";
+                            comboAudioOutput1.Text = "EDIROL FA-66";
+                        }
+                    }
 
-							"NO WARRANTY IS IMPLIED WHEN THE SDR-1000 IS USED WITH ANY SOUND CARD OTHER\n"+
-							"THAN THOSE CURRENTLY RECOMMENDED AS STATED ON THE FLEXRADIO SYSTEMS WEBSITE.\n"+
-							"UNSUPPORTED SOUND CARDS MAY OR MAY NOT WORK WITH THE SDR-1000.  USE OF\n"+
-							"UNSUPPORTED SOUND CARDS IS AT THE CUSTOMERS OWN RISK.",
-							"Warning: Unsupported Card",
-							MessageBoxButtons.OK,
-							MessageBoxIcon.Warning);
-					}
-					grpAudioVolts1.Visible = true;
-					if(comboAudioSoundCard.Focused)
-						chkGeneralRXOnly.Checked = true;
-					if(!comboAudioSampleRate1.Items.Contains(96000))
-						comboAudioSampleRate1.Items.Add(96000);
-					if(!comboAudioSampleRate1.Items.Contains(192000))
-						comboAudioSampleRate1.Items.Add(192000);
-					if(comboAudioSoundCard.Focused || comboAudioSampleRate1.SelectedIndex < 0)
-						comboAudioSampleRate1.Text = "48000";
-					grpAudioDetails1.Enabled = true;
-					grpAudioMicInGain1.Enabled = true;
-					grpAudioLineInGain1.Enabled = true;
-					console.PowerEnabled = true;
-					comboAudioChannels1.Text = "2";
-					comboAudioChannels1.Enabled = true;
-					Audio.IN_RX1_L = 0;
-					Audio.IN_RX1_R = 1;
-					Audio.IN_TX_L = 0;
-					Audio.IN_TX_R = 1;
-					break;				
-			}
+                    comboAudioMixer1.Text = "None";
 
-			console.PWR = console.PWR;
-			console.AF = console.AF;
-			if(on) console.PowerOn = true;
-		}
+                    if (comboAudioInput1.Text != "EDIROL FA-66")
+                    {
+                        MessageBox.Show("Edirol FA-66 ASIO driver not found.  Please visit " +
+                            "www.rolandus.com, download and install the latest driver, " +
+                            "and try again.  For more support, email support@flex-radio.com.",
+                            "Edirol FA-66 Driver Not Found",
+                            MessageBoxButtons.OK,
+                            MessageBoxIcon.Exclamation);
+                        console.PowerEnabled = false;
+                    }
+                    else
+                    {
+                        chkAudioEnableVAC.Enabled = true;
+                        grpAudioMicInGain1.Enabled = false;
+                        grpAudioLineInGain1.Enabled = false;
+                        console.PowerEnabled = true;
+                        comboAudioChannels1.Text = "4";
+                        comboAudioChannels1.Enabled = false;
+                        Audio.IN_RX1_L = 2;
+                        Audio.IN_RX1_R = 3;
+                        Audio.IN_TX_L = 0;
+                        Audio.IN_TX_R = 1;
+                    }
+                    break;
+                case SoundCard.UNSUPPORTED_CARD:
+                    if (comboAudioSoundCard.Focused)
+                    {
+                        MessageBox.Show("Proper operation of the SDR-1000 depends on the use of a sound card that is\n" +
+                            "officially recommended by FlexRadio Systems.  Refer to the Specifications page on\n" +
+                            "www.flex-radio.com to determine which sound cards are currently recommended.  Use only\n" +
+                            "the specific model numbers stated on the website because other models within the same\n" +
+                            "family may not work properly with the radio.  Officially supported sound cards may be\n" +
+                            "updated on the website without notice.  If you have any question about the sound card\n" +
+                            "you would like to use with the radio, please email support@flex-radio.com or call us at\n" +
+                            "512-250-8595.\n\n" +
 
-		#endregion
+                            "NO WARRANTY IS IMPLIED WHEN THE SDR-1000 IS USED WITH ANY SOUND CARD OTHER\n" +
+                            "THAN THOSE CURRENTLY RECOMMENDED AS STATED ON THE FLEXRADIO SYSTEMS WEBSITE.\n" +
+                            "UNSUPPORTED SOUND CARDS MAY OR MAY NOT WORK WITH THE SDR-1000.  USE OF\n" +
+                            "UNSUPPORTED SOUND CARDS IS AT THE CUSTOMERS OWN RISK.",
+                            "Warning: Unsupported Card",
+                            MessageBoxButtons.OK,
+                            MessageBoxIcon.Warning);
+                    }
+                    grpAudioVolts1.Visible = true;
+                    if (comboAudioSoundCard.Focused)
+                        chkGeneralRXOnly.Checked = true;
+                    if (!comboAudioSampleRate1.Items.Contains(96000))
+                        comboAudioSampleRate1.Items.Add(96000);
+                    if (!comboAudioSampleRate1.Items.Contains(192000))
+                        comboAudioSampleRate1.Items.Add(192000);
+                    if (comboAudioSoundCard.Focused || comboAudioSampleRate1.SelectedIndex < 0)
+                        comboAudioSampleRate1.Text = "48000";
+                    grpAudioDetails1.Enabled = true;
+                    grpAudioMicInGain1.Enabled = true;
+                    grpAudioLineInGain1.Enabled = true;
+                    console.PowerEnabled = true;
+                    comboAudioChannels1.Text = "2";
+                    comboAudioChannels1.Enabled = true;
+                    Audio.IN_RX1_L = 0;
+                    Audio.IN_RX1_R = 1;
+                    Audio.IN_TX_L = 0;
+                    Audio.IN_TX_R = 1;
+                    break;
+            }
 
-		#region Display Tab Event Handlers
-		// ======================================================
-		// Display Tab Event Handlers
-		// ======================================================
+            console.PWR = console.PWR;
+            console.AF = console.AF;
+            if (on) console.PowerOn = true;
+        }
 
-		private void udDisplayGridMax_LostFocus(object sender, System.EventArgs e)
-		{
-			Display.SpectrumGridMax = (int)udDisplayGridMax.Value;
-		}
+        #endregion
 
-		private void udDisplayGridMax_Click(object sender, System.EventArgs e)
-		{
-			udDisplayGridMax_LostFocus(sender, e);
-		}
+        #region Display Tab Event Handlers
+        // ======================================================
+        // Display Tab Event Handlers
+        // ======================================================
 
-		private void udDisplayGridMax_MouseWheel(object sender, System.Windows.Forms.MouseEventArgs e)
-		{
-			udDisplayGridMax_LostFocus(sender, new System.EventArgs());
-		}
+        private void udDisplayGridMax_LostFocus(object sender, System.EventArgs e)
+        {
+            Display.SpectrumGridMax = (int)udDisplayGridMax.Value;
+        }
 
-		private void udDisplayFPS_ValueChanged(object sender, System.EventArgs e)
-		{
-			console.DisplayFPS = (int)udDisplayFPS.Value;
-			udDisplayAVGTime_ValueChanged(this, EventArgs.Empty);
-		}
+        private void udDisplayGridMax_Click(object sender, System.EventArgs e)
+        {
+            udDisplayGridMax_LostFocus(sender, e);
+        }
 
-		private void udDisplayGridMax_ValueChanged(object sender, System.EventArgs e)
-		{
-			if(udDisplayGridMax.Value <= udDisplayGridMin.Value)
-				udDisplayGridMax.Value = udDisplayGridMin.Value + 10;
-			Display.SpectrumGridMax = (int)udDisplayGridMax.Value;
-		}
+        private void udDisplayGridMax_MouseWheel(object sender, System.Windows.Forms.MouseEventArgs e)
+        {
+            udDisplayGridMax_LostFocus(sender, new System.EventArgs());
+        }
 
-		private void udDisplayGridMin_ValueChanged(object sender, System.EventArgs e)
-		{
-			if(udDisplayGridMin.Value >= udDisplayGridMax.Value)
-				udDisplayGridMin.Value = udDisplayGridMax.Value - 10;
-			Display.SpectrumGridMin = (int)udDisplayGridMin.Value;
-		}
+        private void udDisplayFPS_ValueChanged(object sender, System.EventArgs e)
+        {
+            console.DisplayFPS = (int)udDisplayFPS.Value;
+            udDisplayAVGTime_ValueChanged(this, EventArgs.Empty);
+        }
 
-		private void udDisplayGridStep_ValueChanged(object sender, System.EventArgs e)
-		{
-			Display.SpectrumGridStep = (int)udDisplayGridStep.Value;
-		}
+        private void udDisplayGridMax_ValueChanged(object sender, System.EventArgs e)
+        {
+            if (udDisplayGridMax.Value <= udDisplayGridMin.Value)
+                udDisplayGridMax.Value = udDisplayGridMin.Value + 10;
+            Display.SpectrumGridMax = (int)udDisplayGridMax.Value;
+        }
 
-		private void comboDisplayLabelAlign_SelectedIndexChanged(object sender, System.EventArgs e)
-		{
-			switch(comboDisplayLabelAlign.Text)
-			{
-				case "Left":
-					Display.DisplayLabelAlign = DisplayLabelAlignment.LEFT;
-					break;
-				case "Cntr":
-					Display.DisplayLabelAlign = DisplayLabelAlignment.CENTER;
-					break;
-				case "Right":
-					Display.DisplayLabelAlign = DisplayLabelAlignment.RIGHT;
-					break;
-				case "Auto":
-					Display.DisplayLabelAlign = DisplayLabelAlignment.AUTO;
-					break;
-				case "Off":
-					Display.DisplayLabelAlign = DisplayLabelAlignment.OFF;
-					break;
-				default:
-					Display.DisplayLabelAlign = DisplayLabelAlignment.LEFT;
-					break;
-			}
-		}
+        private void udDisplayGridMin_ValueChanged(object sender, System.EventArgs e)
+        {
+            if (udDisplayGridMin.Value >= udDisplayGridMax.Value)
+                udDisplayGridMin.Value = udDisplayGridMax.Value - 10;
+            Display.SpectrumGridMin = (int)udDisplayGridMin.Value;
+        }
 
-		private void udDisplayPhasePts_ValueChanged(object sender, System.EventArgs e)
-		{
-			Display.PhaseNumPts = (int)udDisplayPhasePts.Value;
-		}
+        private void udDisplayGridStep_ValueChanged(object sender, System.EventArgs e)
+        {
+            Display.SpectrumGridStep = (int)udDisplayGridStep.Value;
+        }
 
-		private void udDisplayAVGTime_ValueChanged(object sender, System.EventArgs e)
-		{
-			double display_time = 1/(double)udDisplayFPS.Value;
-			int buffersToAvg = (int)((float)udDisplayAVGTime.Value * 0.001 / display_time);
-			Display.DisplayAvgBlocks = (int)Math.Max(2, buffersToAvg);
-		}
+        private void comboDisplayLabelAlign_SelectedIndexChanged(object sender, System.EventArgs e)
+        {
+            switch (comboDisplayLabelAlign.Text)
+            {
+                case "Left":
+                    Display.DisplayLabelAlign = DisplayLabelAlignment.LEFT;
+                    break;
+                case "Cntr":
+                    Display.DisplayLabelAlign = DisplayLabelAlignment.CENTER;
+                    break;
+                case "Right":
+                    Display.DisplayLabelAlign = DisplayLabelAlignment.RIGHT;
+                    break;
+                case "Auto":
+                    Display.DisplayLabelAlign = DisplayLabelAlignment.AUTO;
+                    break;
+                case "Off":
+                    Display.DisplayLabelAlign = DisplayLabelAlignment.OFF;
+                    break;
+                default:
+                    Display.DisplayLabelAlign = DisplayLabelAlignment.LEFT;
+                    break;
+            }
+        }
 
-		private void udDisplayMeterDelay_ValueChanged(object sender, System.EventArgs e)
-		{
-			console.MeterDelay = (int)udDisplayMeterDelay.Value;
-		}
+        private void udDisplayPhasePts_ValueChanged(object sender, System.EventArgs e)
+        {
+            Display.PhaseNumPts = (int)udDisplayPhasePts.Value;
+        }
 
-		private void udDisplayPeakText_ValueChanged(object sender, System.EventArgs e)
-		{
-			console.PeakTextDelay = (int)udDisplayPeakText.Value;
-		}
+        private void udDisplayAVGTime_ValueChanged(object sender, System.EventArgs e)
+        {
+            double display_time = 1 / (double)udDisplayFPS.Value;
+            int buffersToAvg = (int)((float)udDisplayAVGTime.Value * 0.001 / display_time);
+            Display.DisplayAvgBlocks = (int)Math.Max(2, buffersToAvg);
+        }
 
-		private void udDisplayCPUMeter_ValueChanged(object sender, System.EventArgs e)
-		{
-			console.CPUMeterDelay = (int)udDisplayCPUMeter.Value;
-		}
+        private void udDisplayMeterDelay_ValueChanged(object sender, System.EventArgs e)
+        {
+            console.MeterDelay = (int)udDisplayMeterDelay.Value;
+        }
 
-		private void clrbtnWaterfallLow_Changed(object sender, System.EventArgs e)
-		{
-			Display.WaterfallLowColor = clrbtnWaterfallLow.Color;
-		}
+        private void udDisplayPeakText_ValueChanged(object sender, System.EventArgs e)
+        {
+            console.PeakTextDelay = (int)udDisplayPeakText.Value;
+        }
 
-		private void udDisplayWaterfallLowLevel_ValueChanged(object sender, System.EventArgs e)
-		{
-			Display.WaterfallLowThreshold = (float)udDisplayWaterfallLowLevel.Value;
-		}
+        private void udDisplayCPUMeter_ValueChanged(object sender, System.EventArgs e)
+        {
+            console.CPUMeterDelay = (int)udDisplayCPUMeter.Value;
+        }
 
-		private void udDisplayWaterfallHighLevel_ValueChanged(object sender, System.EventArgs e)
-		{
-			Display.WaterfallHighThreshold = (float)udDisplayWaterfallHighLevel.Value;
-		}
+        private void clrbtnWaterfallLow_Changed(object sender, System.EventArgs e)
+        {
+            Display.WaterfallLowColor = clrbtnWaterfallLow.Color;
+        }
 
-		private void udDisplayMultiPeakHoldTime_ValueChanged(object sender, System.EventArgs e)
-		{
-			console.MultimeterPeakHoldTime = (int)udDisplayMultiPeakHoldTime.Value;
-		}
+        private void udDisplayWaterfallLowLevel_ValueChanged(object sender, System.EventArgs e)
+        {
+            Display.WaterfallLowThreshold = (float)udDisplayWaterfallLowLevel.Value;
+        }
 
-		private void udDisplayMultiTextHoldTime_ValueChanged(object sender, System.EventArgs e)
-		{
-			console.MultimeterTextPeakTime = (int)udDisplayMultiTextHoldTime.Value;
-		}
+        private void udDisplayWaterfallHighLevel_ValueChanged(object sender, System.EventArgs e)
+        {
+            Display.WaterfallHighThreshold = (float)udDisplayWaterfallHighLevel.Value;
+        }
 
-		private void chkSpectrumPolyphase_CheckedChanged(object sender, System.EventArgs e)
-		{
-			console.radio.GetDSPRX(0, 0).SpectrumPolyphase = chkSpectrumPolyphase.Checked;
+        private void udDisplayMultiPeakHoldTime_ValueChanged(object sender, System.EventArgs e)
+        {
+            console.MultimeterPeakHoldTime = (int)udDisplayMultiPeakHoldTime.Value;
+        }
+
+        private void udDisplayMultiTextHoldTime_ValueChanged(object sender, System.EventArgs e)
+        {
+            console.MultimeterTextPeakTime = (int)udDisplayMultiTextHoldTime.Value;
+        }
+
+        private void chkSpectrumPolyphase_CheckedChanged(object sender, System.EventArgs e)
+        {
+            console.radio.GetDSPRX(0, 0).SpectrumPolyphase = chkSpectrumPolyphase.Checked;
             console.radio.GetDSPRX(1, 0).SpectrumPolyphase = chkSpectrumPolyphase.Checked;
-		}
+        }
 
-		private void udDisplayScopeTime_ValueChanged(object sender, System.EventArgs e)
-		{
-			//console.ScopeTime = (int)udDisplayScopeTime.Value;
-			int samples = (int)((double)udDisplayScopeTime.Value*console.SampleRate1/1000000.0);
-			//Debug.WriteLine("sample: "+samples);
-			Audio.ScopeSamplesPerPixel = samples;
-		}
+        private void udDisplayScopeTime_ValueChanged(object sender, System.EventArgs e)
+        {
+            //console.ScopeTime = (int)udDisplayScopeTime.Value;
+            int samples = (int)((double)udDisplayScopeTime.Value * console.SampleRate1 / 1000000.0);
+            //Debug.WriteLine("sample: "+samples);
+            Audio.ScopeSamplesPerPixel = samples;
+        }
 
-		private void udDisplayMeterAvg_ValueChanged(object sender, System.EventArgs e)
-		{
-			double block_time = (double)udDisplayMeterDelay.Value * 0.001;
-			int blocksToAvg = (int)((float)udDisplayMeterAvg.Value * 0.001 / block_time);
-			blocksToAvg = Math.Max(2, blocksToAvg);
-			console.MultiMeterAvgBlocks = blocksToAvg;	
-		}
+        private void udDisplayMeterAvg_ValueChanged(object sender, System.EventArgs e)
+        {
+            double block_time = (double)udDisplayMeterDelay.Value * 0.001;
+            int blocksToAvg = (int)((float)udDisplayMeterAvg.Value * 0.001 / block_time);
+            blocksToAvg = Math.Max(2, blocksToAvg);
+            console.MultiMeterAvgBlocks = blocksToAvg;
+        }
 
-		private void comboDisplayDriver_SelectedIndexChanged(object sender, System.EventArgs e)
-		{
-			switch(comboDisplayDriver.Text)
-			{
-				case "GDI+":
-					console.CurrentDisplayEngine = DisplayEngine.GDI_PLUS;
-					break;
-				/*case "DirectX":
-					console.CurrentDisplayEngine = DisplayEngine.DIRECT_X;
-					break;*/
-			}
-		}
+        private void comboDisplayDriver_SelectedIndexChanged(object sender, System.EventArgs e)
+        {
+            switch (comboDisplayDriver.Text)
+            {
+                case "GDI+":
+                    console.CurrentDisplayEngine = DisplayEngine.GDI_PLUS;
+                    break;
+                /*case "DirectX":
+                    console.CurrentDisplayEngine = DisplayEngine.DIRECT_X;
+                    break;*/
+            }
+        }
 
-		#endregion
+        #endregion
 
-		#region DSP Tab Event Handlers
-		// ======================================================
-		// DSP Tab Event Handlers
-		// ======================================================
+        #region DSP Tab Event Handlers
+        // ======================================================
+        // DSP Tab Event Handlers
+        // ======================================================
 
-		private void udLMSNR_ValueChanged(object sender, System.EventArgs e)
-		{
-			console.radio.GetDSPRX(0, 0).SetNRVals(
-				(int)udLMSNRtaps.Value,
-				(int)udLMSNRdelay.Value,
-				0.00001*(double)udLMSNRgain.Value,
-				0.0000001*(double)udLMSNRLeak.Value);
-			console.radio.GetDSPRX(0, 1).SetNRVals(
-				(int)udLMSNRtaps.Value,
-				(int)udLMSNRdelay.Value,
-				0.00001*(double)udLMSNRgain.Value,
-				0.0000001*(double)udLMSNRLeak.Value);
-		}
+        private void udLMSNR_ValueChanged(object sender, System.EventArgs e)
+        {
+            console.radio.GetDSPRX(0, 0).SetNRVals(
+                (int)udLMSNRtaps.Value,
+                (int)udLMSNRdelay.Value,
+                0.00001 * (double)udLMSNRgain.Value,
+                0.0000001 * (double)udLMSNRLeak.Value);
+            console.radio.GetDSPRX(0, 1).SetNRVals(
+                (int)udLMSNRtaps.Value,
+                (int)udLMSNRdelay.Value,
+                0.00001 * (double)udLMSNRgain.Value,
+                0.0000001 * (double)udLMSNRLeak.Value);
+        }
 
-		private void udDSPNB_ValueChanged(object sender, System.EventArgs e)
-		{
-			console.radio.GetDSPRX(0, 0).NBThreshold = 0.165*(double)(udDSPNB.Value);
-			console.radio.GetDSPRX(0, 1).NBThreshold = 0.165*(double)(udDSPNB.Value);
-		}
+        private void udDSPNB_ValueChanged(object sender, System.EventArgs e)
+        {
+            console.radio.GetDSPRX(0, 0).NBThreshold = 0.165 * (double)(udDSPNB.Value);
+            console.radio.GetDSPRX(0, 1).NBThreshold = 0.165 * (double)(udDSPNB.Value);
+        }
 
-		private void udDSPNB2_ValueChanged(object sender, System.EventArgs e)
-		{
-			console.radio.GetDSPRX(0, 0).SDROMThreshold = 0.165*(double)(udDSPNB2.Value);
-			console.radio.GetDSPRX(0, 1).SDROMThreshold = 0.165*(double)(udDSPNB2.Value);
-		}
+        private void udDSPNB2_ValueChanged(object sender, System.EventArgs e)
+        {
+            console.radio.GetDSPRX(0, 0).SDROMThreshold = 0.165 * (double)(udDSPNB2.Value);
+            console.radio.GetDSPRX(0, 1).SDROMThreshold = 0.165 * (double)(udDSPNB2.Value);
+        }
 
-		private void comboDSPWindow_SelectedIndexChanged(object sender, System.EventArgs e)
-		{
-			console.radio.GetDSPRX(0, 0).CurrentWindow = (Window)comboDSPWindow.SelectedIndex;
-			console.radio.GetDSPRX(0, 1).CurrentWindow = (Window)comboDSPWindow.SelectedIndex;
-		}
+        private void comboDSPWindow_SelectedIndexChanged(object sender, System.EventArgs e)
+        {
+            console.radio.GetDSPRX(0, 0).CurrentWindow = (Window)comboDSPWindow.SelectedIndex;
+            console.radio.GetDSPRX(0, 1).CurrentWindow = (Window)comboDSPWindow.SelectedIndex;
+        }
 
-		private void comboDSPPhoneRXBuf_SelectedIndexChanged(object sender, System.EventArgs e)
-		{				
-			console.DSPBufPhoneRX = int.Parse(comboDSPPhoneRXBuf.Text);
-		}
+        private void comboDSPPhoneRXBuf_SelectedIndexChanged(object sender, System.EventArgs e)
+        {
+            console.DSPBufPhoneRX = int.Parse(comboDSPPhoneRXBuf.Text);
+        }
 
-		private void comboDSPPhoneTXBuf_SelectedIndexChanged(object sender, System.EventArgs e)
-		{
-			console.DSPBufPhoneTX = int.Parse(comboDSPPhoneTXBuf.Text);
-		}
+        private void comboDSPPhoneTXBuf_SelectedIndexChanged(object sender, System.EventArgs e)
+        {
+            console.DSPBufPhoneTX = int.Parse(comboDSPPhoneTXBuf.Text);
+        }
 
-		private void comboDSPCWRXBuf_SelectedIndexChanged(object sender, System.EventArgs e)
-		{
-			console.DSPBufCWRX = int.Parse(comboDSPCWRXBuf.Text);
-		}
+        private void comboDSPCWRXBuf_SelectedIndexChanged(object sender, System.EventArgs e)
+        {
+            console.DSPBufCWRX = int.Parse(comboDSPCWRXBuf.Text);
+        }
 
-		private void comboDSPCWTXBuf_SelectedIndexChanged(object sender, System.EventArgs e)
-		{
-			console.DSPBufCWTX = int.Parse(comboDSPCWTXBuf.Text);
-		}
+        private void comboDSPCWTXBuf_SelectedIndexChanged(object sender, System.EventArgs e)
+        {
+            console.DSPBufCWTX = int.Parse(comboDSPCWTXBuf.Text);
+        }
 
-		private void comboDSPDigRXBuf_SelectedIndexChanged(object sender, System.EventArgs e)
-		{
-			console.DSPBufDigRX = int.Parse(comboDSPDigRXBuf.Text);
-		}
+        private void comboDSPDigRXBuf_SelectedIndexChanged(object sender, System.EventArgs e)
+        {
+            console.DSPBufDigRX = int.Parse(comboDSPDigRXBuf.Text);
+        }
 
-		private void comboDSPDigTXBuf_SelectedIndexChanged(object sender, System.EventArgs e)
-		{
-			console.DSPBufDigTX = int.Parse(comboDSPDigTXBuf.Text);
-		}
+        private void comboDSPDigTXBuf_SelectedIndexChanged(object sender, System.EventArgs e)
+        {
+            console.DSPBufDigTX = int.Parse(comboDSPDigTXBuf.Text);
+        }
 
 
-		#region Image Reject
+        #region Image Reject
 
-		private void udDSPImagePhaseTX_ValueChanged(object sender, System.EventArgs e)
-		{
-			try
-			{
-				console.radio.GetDSPTX(0).TXCorrectIQPhase = (double)udDSPImagePhaseTX.Value;
-			}
-			catch(Exception)
-			{
-				MessageBox.Show("Error setting TX Image Phase ("+udDSPImagePhaseTX.Value+")");
-				udDSPImagePhaseTX.Value = 0;
-			}
-			if(tbDSPImagePhaseTX.Value != (int)udDSPImagePhaseTX.Value)
-				tbDSPImagePhaseTX.Value = (int)udDSPImagePhaseTX.Value;
-		
-		}
+        private void udDSPImagePhaseTX_ValueChanged(object sender, System.EventArgs e)
+        {
+            try
+            {
+                console.radio.GetDSPTX(0).TXCorrectIQPhase = (double)udDSPImagePhaseTX.Value;
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Error setting TX Image Phase (" + udDSPImagePhaseTX.Value + ")");
+                udDSPImagePhaseTX.Value = 0;
+            }
+            if (tbDSPImagePhaseTX.Value != (int)udDSPImagePhaseTX.Value)
+                tbDSPImagePhaseTX.Value = (int)udDSPImagePhaseTX.Value;
 
-		private void tbDSPImagePhaseTX_Scroll(object sender, System.EventArgs e)
-		{
-			udDSPImagePhaseTX.Value = tbDSPImagePhaseTX.Value;		
-		}
+        }
 
-		private void udDSPImageGainTX_ValueChanged(object sender, System.EventArgs e)
-		{
-			try
-			{
-				console.radio.GetDSPTX(0).TXCorrectIQGain = (double)udDSPImageGainTX.Value;
-			}
-			catch(Exception)
-			{
-				MessageBox.Show("Error setting TX Image Gain ("+udDSPImageGainTX.Value+")");
-				udDSPImageGainTX.Value = 0;
-			}
-			if(tbDSPImageGainTX.Value != (int)udDSPImageGainTX.Value)
-				tbDSPImageGainTX.Value = (int)udDSPImageGainTX.Value;
-		}
+        private void tbDSPImagePhaseTX_Scroll(object sender, System.EventArgs e)
+        {
+            udDSPImagePhaseTX.Value = tbDSPImagePhaseTX.Value;
+        }
 
-		private void tbDSPImageGainTX_Scroll(object sender, System.EventArgs e)
-		{
-			udDSPImageGainTX.Value = tbDSPImageGainTX.Value;
-		}
-		
-		private void udLMSANF_ValueChanged(object sender, System.EventArgs e)
-		{
-			console.radio.GetDSPRX(0, 0).SetANFVals(
-				(int)udLMSANFtaps.Value,
-				(int)udLMSANFdelay.Value,
-				0.00001*(double)udLMSANFgain.Value,
-				0.00005);
-		}
+        private void udDSPImageGainTX_ValueChanged(object sender, System.EventArgs e)
+        {
+            try
+            {
+                console.radio.GetDSPTX(0).TXCorrectIQGain = (double)udDSPImageGainTX.Value;
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Error setting TX Image Gain (" + udDSPImageGainTX.Value + ")");
+                udDSPImageGainTX.Value = 0;
+            }
+            if (tbDSPImageGainTX.Value != (int)udDSPImageGainTX.Value)
+                tbDSPImageGainTX.Value = (int)udDSPImageGainTX.Value;
+        }
 
-		private bool old_cpdr = false;
-		private void chkTXImagCal_CheckedChanged(object sender, System.EventArgs e)
-		{
-			if(checkboxTXImagCal.Checked)
-			{
-				old_cpdr = console.CPDR;
-				console.CPDR = false;
-				
-				Audio.SineFreq1 = console.CWPitch;
-				Audio.TXInputSignal = Audio.SignalSource.SINE;
-				Audio.SourceScale = 1.0;
-			}
-			else
-			{
-				Audio.TXInputSignal = Audio.SignalSource.RADIO;
-				old_cpdr = console.CPDR;
-			}
-		}
+        private void tbDSPImageGainTX_Scroll(object sender, System.EventArgs e)
+        {
+            udDSPImageGainTX.Value = tbDSPImageGainTX.Value;
+        }
 
-		#endregion
+        private void udLMSANF_ValueChanged(object sender, System.EventArgs e)
+        {
+            console.radio.GetDSPRX(0, 0).SetANFVals(
+                (int)udLMSANFtaps.Value,
+                (int)udLMSANFdelay.Value,
+                0.00001 * (double)udLMSANFgain.Value,
+                0.00005);
+        }
 
-		#region Keyer
+        private bool old_cpdr = false;
+        private void chkTXImagCal_CheckedChanged(object sender, System.EventArgs e)
+        {
+            if (checkboxTXImagCal.Checked)
+            {
+                old_cpdr = console.CPDR;
+                console.CPDR = false;
 
-		private void udDSPCWPitch_ValueChanged(object sender, System.EventArgs e)
-		{
-			console.CWPitch = (int)udDSPCWPitch.Value;
-		}
+                Audio.SineFreq1 = console.CWPitch;
+                Audio.TXInputSignal = Audio.SignalSource.SINE;
+                Audio.SourceScale = 1.0;
+            }
+            else
+            {
+                Audio.TXInputSignal = Audio.SignalSource.RADIO;
+                old_cpdr = console.CPDR;
+            }
+        }
 
-		private void chkCWKeyerIambic_CheckedChanged(object sender, System.EventArgs e)
-		{
-			RadioDSP.KeyerIambic = chkCWKeyerIambic.Checked;
-			console.CWIambic = chkCWKeyerIambic.Checked;
+        #endregion
+
+        #region Keyer
+
+        private void udDSPCWPitch_ValueChanged(object sender, System.EventArgs e)
+        {
+            console.CWPitch = (int)udDSPCWPitch.Value;
+        }
+
+        private void chkCWKeyerIambic_CheckedChanged(object sender, System.EventArgs e)
+        {
+            RadioDSP.KeyerIambic = chkCWKeyerIambic.Checked;
+            console.CWIambic = chkCWKeyerIambic.Checked;
             switch (console.CurrentModel)
             {
                 case Model.FLEX3000:
@@ -26176,1826 +26327,1826 @@ namespace PowerSDR
                         FWC.SetIambic(chkCWKeyerIambic.Checked);
                     break;
             }
-		}
+        }
 
-		private void udCWKeyerWeight_ValueChanged(object sender, System.EventArgs e)
-		{
-			RadioDSP.KeyerWeight = (int)udCWKeyerWeight.Value;
-		}
-
-		private void udCWKeyerRamp_ValueChanged(object sender, System.EventArgs e)
-		{
-			RadioDSP.KeyerRamp = (int)udCWKeyerRamp.Value;
-		}
-
-		private void udCWKeyerSemiBreakInDelay_ValueChanged(object sender, System.EventArgs e)
-		{
-			console.BreakInDelay = (double)udCWBreakInDelay.Value;
-		}
-
-		private void chkDSPKeyerSemiBreakInEnabled_CheckedChanged(object sender, System.EventArgs e)
-		{
-			console.CWSemiBreakInEnabled = chkCWBreakInEnabled.Checked;
-			console.BreakInEnabled = chkCWBreakInEnabled.Checked;
-			udCWBreakInDelay.Enabled = chkCWBreakInEnabled.Checked;
-		}
-
-		private void chkDSPKeyerDisableMonitor_CheckedChanged(object sender, System.EventArgs e)
-		{
-			console.CWDisableMonitor = chkDSPKeyerDisableMonitor.Checked;
-		}
-
-		private void udCWKeyerDeBounce_ValueChanged(object sender, System.EventArgs e)
-		{
-			RadioDSP.KeyerDebounce = (int)udCWKeyerDeBounce.Value;
-		}
-
-		private void chkCWKeyerRevPdl_CheckedChanged(object sender, System.EventArgs e)
-		{
-			RadioDSP.KeyerReversePaddle = chkCWKeyerRevPdl.Checked;
-		}
-
-		private void comboKeyerConnPrimary_SelectedIndexChanged(object sender, System.EventArgs e)
-		{
-			bool running = System.Convert.ToBoolean(DttSP.KeyerRunning());
-			if (running) DttSP.StopKeyer();
-			Thread.Sleep(40);
-			console.Keyer.PrimaryConnPort = comboKeyerConnPrimary.Text;
-			if(console.Keyer.PrimaryConnPort == "SDR" && comboKeyerConnPrimary.Text != "SDR")
-				comboKeyerConnPrimary.Text = "SDR";
-			if (running) DttSP.StartKeyer();
-		}
-
-		private void comboKeyerConnSecondary_SelectedIndexChanged(object sender, System.EventArgs e)
-		{
-			if(initializing) return;
-			bool running = System.Convert.ToBoolean(DttSP.KeyerRunning());
-			if (running) DttSP.StopKeyer();
-			Thread.Sleep(10);
-			if(comboKeyerConnSecondary.Text == "CAT" && !chkCATEnable.Checked)
-			{
-				MessageBox.Show("CAT is not Enabled.  Please enable the CAT interface before selecting this option.",
-					"CAT not enabled",
-					MessageBoxButtons.OK,
-					MessageBoxIcon.Hand);
-				comboKeyerConnSecondary.Text = "None";
-				return;
-			}
-
-			console.Keyer.SecondaryConnPort = comboKeyerConnSecondary.Text;
-			switch(comboKeyerConnSecondary.Text)
-			{
-				case "None":
-					lblKeyerConnPTTLine.Visible = false;
-					comboKeyerConnPTTLine.Visible = false;
-					lblKeyerConnKeyLine.Visible = false;
-					comboKeyerConnKeyLine.Visible = false;
-					break;
-				case "CAT":
-					lblKeyerConnPTTLine.Visible = true;
-					comboKeyerConnPTTLine.Visible = true;
-					lblKeyerConnKeyLine.Visible = true;
-					comboKeyerConnKeyLine.Visible = true;
-					break;
-				default: // COMx
-					lblKeyerConnPTTLine.Visible = true;
-					comboKeyerConnPTTLine.Visible = true;
-					lblKeyerConnKeyLine.Visible = true;
-					comboKeyerConnKeyLine.Visible = true;
-					break;
-			}
-			if(console.Keyer.SecondaryConnPort == "None" && comboKeyerConnSecondary.Text != "None")
-				comboKeyerConnSecondary.Text = "None";
-			if (running) DttSP.StartKeyer();
-		}
-
-		private void comboKeyerConnKeyLine_SelectedIndexChanged(object sender, System.EventArgs e)
-		{
-			if(comboKeyerConnKeyLine.SelectedIndex < 0) return;
-			console.Keyer.SecondaryKeyLine = (KeyerLine)comboKeyerConnKeyLine.SelectedIndex;
-		}
-
-		private void comboKeyerConnPTTLine_SelectedIndexChanged(object sender, System.EventArgs e)
-		{
-			if(comboKeyerConnPTTLine.SelectedIndex < 0) return;
-			console.Keyer.SecondaryPTTLine = (KeyerLine)comboKeyerConnPTTLine.SelectedIndex;
-		}
-
-		#endregion
-
-		#region AGC
-
-		private void udDSPAGCFixedGaindB_ValueChanged(object sender, System.EventArgs e)
-		{
-			console.radio.GetDSPRX(0, 0).RXFixedAGC = (double)udDSPAGCFixedGaindB.Value;
-			console.radio.GetDSPRX(0, 1).RXFixedAGC = (double)udDSPAGCFixedGaindB.Value;
-
-			if(console.RX1AGCMode == AGCMode.FIXD)
-				console.RF = (int)udDSPAGCFixedGaindB.Value;
-		}
-
-		private void udDSPAGCMaxGaindB_ValueChanged(object sender, System.EventArgs e)
-		{
-			console.radio.GetDSPRX(0, 0).RXAGCMaxGain = (double)udDSPAGCMaxGaindB.Value;
-			console.radio.GetDSPRX(0, 1).RXAGCMaxGain = (double)udDSPAGCMaxGaindB.Value;
-
-			if(console.RX1AGCMode != AGCMode.FIXD)
-				console.RF = (int)udDSPAGCMaxGaindB.Value;
-		}
-
-		private void udDSPAGCAttack_ValueChanged(object sender, System.EventArgs e)
-		{
-			if(udDSPAGCAttack.Enabled)
-			{
-				console.radio.GetDSPRX(0, 0).RXAGCAttack = (int)udDSPAGCAttack.Value;
-				console.radio.GetDSPRX(0, 1).RXAGCAttack = (int)udDSPAGCAttack.Value;
-			}
-		}
-
-		private void udDSPAGCDecay_ValueChanged(object sender, System.EventArgs e)
-		{
-			if(udDSPAGCDecay.Enabled)
-			{
-				console.radio.GetDSPRX(0, 0).RXAGCDecay = (int)udDSPAGCDecay.Value;
-				console.radio.GetDSPRX(0, 1).RXAGCDecay = (int)udDSPAGCDecay.Value;
-			}
-		}
-
-		private void udDSPAGCSlope_ValueChanged(object sender, System.EventArgs e)
-		{
-			console.radio.GetDSPRX(0, 0).RXAGCSlope = 10*(int)(udDSPAGCSlope.Value);
-			console.radio.GetDSPRX(0, 1).RXAGCSlope = 10*(int)(udDSPAGCSlope.Value);
-		}
-
-		private void udDSPAGCHangTime_ValueChanged(object sender, System.EventArgs e)
-		{
-			if(udDSPAGCHangTime.Enabled)
-			{
-				console.radio.GetDSPRX(0, 0).RXAGCHang = (int)udDSPAGCHangTime.Value;
-				console.radio.GetDSPRX(0, 1).RXAGCHang = (int)udDSPAGCHangTime.Value;
-			}
-		}
-
-		private void tbDSPAGCHangThreshold_Scroll(object sender, System.EventArgs e)
-		{
-			console.radio.GetDSPRX(0, 0).RXAGCHangThreshold = (int)tbDSPAGCHangThreshold.Value;
-			console.radio.GetDSPRX(0, 1).RXAGCHangThreshold = (int)tbDSPAGCHangThreshold.Value;
-		}
-
-		#endregion
-
-		#region Leveler
-
-		private void udDSPLevelerHangTime_ValueChanged(object sender, System.EventArgs e)
-		{
-			console.radio.GetDSPTX(0).TXLevelerHang = (int)udDSPLevelerHangTime.Value;
-		}
-
-		private void tbDSPLevelerHangThreshold_Scroll(object sender, System.EventArgs e)
-		{
-		
-		}
-
-		private void udDSPLevelerSlope_ValueChanged(object sender, System.EventArgs e)
-		{
-		
-		}
-
-		private void udDSPLevelerThreshold_ValueChanged(object sender, System.EventArgs e)
-		{
-			console.radio.GetDSPTX(0).TXLevelerMaxGain = (double)udDSPLevelerThreshold.Value;
-		}
-
-		private void udDSPLevelerAttack_ValueChanged(object sender, System.EventArgs e)
-		{
-			console.radio.GetDSPTX(0).TXLevelerAttack = (int)udDSPLevelerAttack.Value;
-		}
-
-		private void udDSPLevelerDecay_ValueChanged(object sender, System.EventArgs e)
-		{
-			console.radio.GetDSPTX(0).TXLevelerDecay = (int)udDSPLevelerDecay.Value;
-		}
-
-		private void chkDSPLevelerEnabled_CheckedChanged(object sender, System.EventArgs e)
-		{
-			console.radio.GetDSPTX(0).TXLevelerOn = chkDSPLevelerEnabled.Checked;
-		}
-
-		#endregion
-
-		#region ALC
-
-		private void udDSPALCHangTime_ValueChanged(object sender, System.EventArgs e)
-		{
-			console.radio.GetDSPTX(0).TXALCHang = (int)udDSPALCHangTime.Value;
-		}
-
-		private void udDSPALCThreshold_ValueChanged(object sender, System.EventArgs e)
-		{
-			//DttSP.SetTXALCBot((double)udDSPALCThreshold.Value);
-		}
-
-		private void udDSPALCAttack_ValueChanged(object sender, System.EventArgs e)
-		{
-			console.radio.GetDSPTX(0).TXALCAttack = (int)udDSPALCAttack.Value;
-		}
-
-		private void udDSPALCDecay_ValueChanged(object sender, System.EventArgs e)
-		{
-			console.radio.GetDSPTX(0).TXALCDecay = (int)udDSPALCDecay.Value;
-		}
-
-		#endregion
-
-		#endregion
-
-		#region Transmit Tab Event Handlers
-
-		private void udTXFilterHigh_ValueChanged(object sender, System.EventArgs e)
-		{
-			if(udTXFilterHigh.Value < udTXFilterLow.Value + 100)
-			{
-				udTXFilterHigh.Value = udTXFilterLow.Value + 100;
-				return;
-			}
-
-			if(udTXFilterHigh.Focused &&
-				(udTXFilterHigh.Value - udTXFilterLow.Value) > 3000 &&
-				(console.TXFilterHigh - console.TXFilterLow) <= 3000)
-			{
-				(new Thread(new ThreadStart(TXBW))).Start();
-			}
-
-			console.TXFilterHigh = (int)udTXFilterHigh.Value;
-			
-		}
-
-		private void TXBW()
-		{
-			MessageBox.Show("The transmit bandwidth is being increased beyond 3kHz.\n\n"+
-				"As the control operator, you are responsible for compliance with current "+
-				"rules and good operating practice.",
-				"Warning: Transmit Bandwidth",
-				MessageBoxButtons.OK,
-				MessageBoxIcon.Warning);
-		}
-
-		private void udTXFilterLow_ValueChanged(object sender, System.EventArgs e)
-		{
-			if(udTXFilterLow.Value > udTXFilterHigh.Value - 100)
-			{
-				udTXFilterLow.Value = udTXFilterHigh.Value - 100;
-				return;
-			}
-
-			if(udTXFilterLow.Focused &&
-				(udTXFilterHigh.Value - udTXFilterLow.Value) > 3000 &&
-				(console.TXFilterHigh - console.TXFilterLow) <= 3000)
-			{
-				(new Thread(new ThreadStart(TXBW))).Start();
-			}
-
-			console.TXFilterLow = (int)udTXFilterLow.Value;
-		}
-
-		private void udTransmitTunePower_ValueChanged(object sender, System.EventArgs e)
-		{
-			console.TunePower = (int)udTXTunePower.Value;
-		}
-
-		private string current_profile = "";
-		private void comboTXProfileName_SelectedIndexChanged(object sender, System.EventArgs e)
-		{
-			if(comboTXProfileName.SelectedIndex < 0 || initializing)
-				return;
-
-			if(CheckTXProfileChanged() && comboTXProfileName.Focused)
-			{
-				DialogResult result = MessageBox.Show("The current profile has changed.  "+
-					"Would you like to save the current profile?",
-					"Save Current Profile?",
-					MessageBoxButtons.YesNoCancel,
-					MessageBoxIcon.Question);
-				
-				if(result == DialogResult.Yes)
-				{
-					btnTXProfileSave_Click(this, EventArgs.Empty);
-					//return;
-				}
-				else if(result == DialogResult.Cancel)
-					return;
-			}
-
-			console.TXProfile = comboTXProfileName.Text;
-			DataRow[] rows = DB.ds.Tables["TxProfile"].Select(
-				"'"+comboTXProfileName.Text+"' = Name");
-
-			if(rows.Length != 1)
-			{
-				MessageBox.Show("Database error reading TxProfile Table.",
-					"Database error",
-					MessageBoxButtons.OK,
-					MessageBoxIcon.Error);
-				return;
-			}
-			
-			DataRow dr = rows[0];
-			int[] eq = null;
-			eq = new int[11];
-
-			console.EQForm.TXEQEnabled = (bool)dr["TXEQEnabled"];
-			console.EQForm.NumBands = (int)dr["TXEQNumBands"];
-			
-			eq[0] = (int)dr["TXEQPreamp"];
-			for(int i=1; i<eq.Length; i++)
-				eq[i] = (int)dr["TXEQ"+i.ToString()];
-			console.EQForm.TXEQ = eq;
-
-			udTXFilterLow.Value = Math.Min(Math.Max((int)dr["FilterLow"], udTXFilterLow.Minimum), udTXFilterLow.Maximum);
-			udTXFilterHigh.Value = Math.Min(Math.Max((int)dr["FilterHigh"], udTXFilterHigh.Minimum), udTXFilterHigh.Maximum);
-			
-			console.DX = (bool)dr["DXOn"];
-			console.DXLevel = (int)dr["DXLevel"];
-
-			console.CPDR = (bool)dr["CompanderOn"];			
-			console.CPDRLevel = (int)dr["CompanderLevel"];
-			
-			console.Mic = (int)dr["MicGain"];
-
-			chkDSPLevelerEnabled.Checked = (bool)dr["Lev_On"];
-			udDSPLevelerSlope.Value = (int)dr["Lev_Slope"];
-			udDSPLevelerThreshold.Value = (int)dr["Lev_MaxGain"];
-			udDSPLevelerAttack.Value = (int)dr["Lev_Attack"];
-			udDSPLevelerDecay.Value = (int)dr["Lev_Decay"];
-			udDSPLevelerHangTime.Value = (int)dr["Lev_Hang"];
-			tbDSPLevelerHangThreshold.Value = (int)dr["Lev_HangThreshold"];
-
-			udDSPALCSlope.Value = (int)dr["ALC_Slope"];
-			udDSPALCThreshold.Value = (int)dr["ALC_MaxGain"];
-			udDSPALCAttack.Value = (int)dr["ALC_Attack"];
-			udDSPALCDecay.Value = (int)dr["ALC_Decay"];
-			udDSPALCHangTime.Value = (int)dr["ALC_Hang"];
-			tbDSPALCHangThreshold.Value = (int)dr["ALC_HangThreshold"];
-
-			console.PWR = (int)dr["Power"];
-
-			current_profile = comboTXProfileName.Text;
-		}
-
-		private void btnTXProfileSave_Click(object sender, System.EventArgs e)
-		{
-			string name = InputBox.Show("Save Profile", "Please enter a profile name:",
-				current_profile);
-
-			if(name == "" || name == null)
-			{
-				MessageBox.Show("TX Profile Save cancelled",
-					"TX Profile",
-					MessageBoxButtons.OK,
-					MessageBoxIcon.Information);
-				return;
-			}
-
-			DataRow dr = null;
-			if(comboTXProfileName.Items.Contains(name))
-			{
-				DialogResult result = MessageBox.Show(
-					"Are you sure you want to overwrite the "+name+" TX Profile?",
-					"Overwrite Profile?",
-					MessageBoxButtons.YesNo,
-					MessageBoxIcon.Question);
-				
-				if(result == DialogResult.No)
-					return;
-
-				foreach(DataRow d in DB.ds.Tables["TxProfile"].Rows)
-				{
-					if((string)d["Name"] == name) 
-					{
-						dr = d;
-						break;
-					}
-				}
-			}
-			else
-			{
-				dr = DB.ds.Tables["TxProfile"].NewRow();
-				dr["Name"] = name;
-			}
-			
-			dr["FilterLow"] = (int)udTXFilterLow.Value;
-			dr["FilterHigh"] = (int)udTXFilterHigh.Value;
-			dr["TXEQEnabled"] = console.EQForm.TXEQEnabled;
-			dr["TXEQNumBands"] = console.EQForm.NumBands;
-			int[] eq = console.EQForm.TXEQ;
-			dr["TXEQPreamp"] = eq[0];
-			for(int i=1; i<eq.Length; i++)
-				dr["TXEQ"+i.ToString()] = eq[i];
-			for(int i=eq.Length; i<11; i++)
-				dr["TXEQ"+i.ToString()] = 0;
-
-			dr["DXOn"] = console.DX;
-			dr["DXLevel"] = console.DXLevel;
-			dr["CompanderOn"] = console.CPDR;
-			dr["CompanderLevel"] = console.CPDRLevel;
-			dr["MicGain"] = console.Mic;
-
-			dr["Lev_On"] = chkDSPLevelerEnabled.Checked;
-			dr["Lev_Slope"] = (int)udDSPLevelerSlope.Value;
-			dr["Lev_MaxGain"] = (int)udDSPLevelerThreshold.Value;
-			dr["Lev_Attack"] = (int)udDSPLevelerAttack.Value;
-			dr["Lev_Decay"] = (int)udDSPLevelerDecay.Value;
-			dr["Lev_Hang"] = (int)udDSPLevelerHangTime.Value;
-			dr["Lev_HangThreshold"] = tbDSPLevelerHangThreshold.Value;
-
-			dr["ALC_Slope"] = (int)udDSPALCSlope.Value;
-			dr["ALC_MaxGain"] = (int)udDSPALCThreshold.Value;
-			dr["ALC_Attack"] = (int)udDSPALCAttack.Value;
-			dr["ALC_Decay"] = (int)udDSPALCDecay.Value;
-			dr["ALC_Hang"] = (int)udDSPALCHangTime.Value;
-			dr["ALC_HangThreshold"] = tbDSPALCHangThreshold.Value;
-
-			dr["Power"] = console.PWR;
-
-			if(!comboTXProfileName.Items.Contains(name))
-			{
-				DB.ds.Tables["TxProfile"].Rows.Add(dr);
-				comboTXProfileName.Items.Add(name);
-				comboTXProfileName.Text = name;
-			}
-
-			console.UpdateTXProfile(name);
-		}
-
-		private void btnTXProfileDelete_Click(object sender, System.EventArgs e)
-		{
-			DialogResult dr = MessageBox.Show(
-				"Are you sure you want to delete the "+comboTXProfileName.Text+" TX Profile?",
-				"Delete Profile?",
-				MessageBoxButtons.YesNo,
-				MessageBoxIcon.Warning);
-
-			if(dr == DialogResult.No)
-				return;
-
-			DataRow[] rows = DB.ds.Tables["TxProfile"].Select(
-				"'"+comboTXProfileName.Text+"' = Name");
-
-			if(rows.Length == 1)
-				rows[0].Delete();
-
-			int index = comboTXProfileName.SelectedIndex;
-			comboTXProfileName.Items.Remove(comboTXProfileName.Text);
-			if(comboTXProfileName.Items.Count > 0)
-			{
-				if(index > comboTXProfileName.Items.Count-1)
-					index = comboTXProfileName.Items.Count-1;
-				comboTXProfileName.SelectedIndex = index;
-			}
-
-			console.UpdateTXProfile(comboTXProfileName.Text);
-		}
-
-		private void chkDCBlock_CheckedChanged(object sender, System.EventArgs e)
-		{
-			console.radio.GetDSPTX(0).DCBlock = chkDCBlock.Checked;
-		}
-
-		private void chkTXVOXEnabled_CheckedChanged(object sender, System.EventArgs e)
-		{
-			Audio.VOXEnabled = chkTXVOXEnabled.Checked;
-			console.VOXEnable = chkTXVOXEnabled.Checked;
-		}
-
-		private void udTXVOXThreshold_ValueChanged(object sender, System.EventArgs e)
-		{
-			Audio.VOXThreshold = (float)udTXVOXThreshold.Value / 10000.0f;
-			console.VOXSens = (int)udTXVOXThreshold.Value;
-		}
-
-		private void udTXVOXHangTime_ValueChanged(object sender, System.EventArgs e)
-		{
-			console.VOXHangTime = (int)udTXVOXHangTime.Value;
-		}
-
-		private void udTXNoiseGate_ValueChanged(object sender, System.EventArgs e)
-		{
-			console.radio.GetDSPTX(0).TXSquelchThreshold = (float)udTXNoiseGate.Value;
-			console.NoiseGate = (int)udTXNoiseGate.Value;
-		}
-
-		private void chkTXNoiseGateEnabled_CheckedChanged(object sender, System.EventArgs e)
-		{
-			console.radio.GetDSPTX(0).TXSquelchOn = chkTXNoiseGateEnabled.Checked;
-			console.NoiseGateEnabled = chkTXNoiseGateEnabled.Checked;
-		}
-
-		private void udTXAF_ValueChanged(object sender, System.EventArgs e)
-		{
-			console.TXAF = (int)udTXAF.Value;
-		}
-
-		private void udTXAMCarrierLevel_ValueChanged(object sender, System.EventArgs e)
-		{
-			console.radio.GetDSPTX(0).TXAMCarrierLevel = Math.Sqrt(0.01*(double)udTXAMCarrierLevel.Value)*0.5;
-		}
-
-		#endregion
-
-		#region PA Settings Tab Event Handlers
-
-		private void btnPAGainCalibration_Click(object sender, System.EventArgs e)
-		{
-			string s = "Is a 50 Ohm dummy load connected to the amplifier?\n"+
-				"Failure to use a dummy load with this routine could cause damage to the amplifier.";
-			if(radGenModelFLEX5000.Checked)
-			{
-				s = "Is a 50 Ohm dummy load connected to the correct antenna port (";
-				switch(FWCAnt.ANT1)
-				{
-					case FWCAnt.ANT1: s += "ANT 1"; break;
-					/*case FWCAnt.ANT2: s += "ANT 2"; break;
-					case FWCAnt.ANT3: s += "ANT 3"; break;*/
-				}
-				s += ")?\nFailure to connect a dummy load properly could cause damage to the radio.";
-			}
-			DialogResult dr = MessageBox.Show(s,
-				"Warning: Is dummy load properly connected?",
-				MessageBoxButtons.YesNo,
-				MessageBoxIcon.Warning);
-
-			if(dr == DialogResult.No)
-				return;
-
-			btnPAGainCalibration.Enabled = false;
-			progress = new Progress("Calibrate PA Gain");
-
-			Thread t = new Thread(new ThreadStart(CalibratePAGain));
-			t.Name = "PA Gain Calibration Thread";
-			t.IsBackground = true;
-			t.Priority = ThreadPriority.AboveNormal;
-			t.Start();
-
-			if(console.PowerOn)
-				progress.Show();
-		}
-
-		private void CalibratePAGain()
-		{
-			bool[] run = new bool[11];
-
-			if(radPACalAllBands.Checked)
-			{
-				for(int i=0; i<11; i++) run[i] = true;
-			}
-			else
-			{
-				run[0] = chkPA160.Checked;
-				run[1] = chkPA80.Checked;
-				run[2] = chkPA60.Checked;
-				run[3] = chkPA40.Checked;
-				run[4] = chkPA30.Checked;
-				run[5] = chkPA20.Checked;
-				run[6] = chkPA17.Checked;
-				run[7] = chkPA15.Checked;
-				run[8] = chkPA12.Checked;
-				run[9] = chkPA10.Checked;
-				run[10] = chkPA6.Checked;
-			}
-			bool done = false;
-			if(chkPANewCal.Checked) done = console.CalibratePAGain2(progress, run, false);
-			else done = console.CalibratePAGain(progress, run, (int)udPACalPower.Value);
-			if(done) MessageBox.Show("PA Gain Calibration complete.");
-			btnPAGainCalibration.Enabled = true;
-		}
-
-		private void udPAGain_ValueChanged(object sender, System.EventArgs e)
-		{
-			console.PWR = console.PWR;
-		}
-
-		private void btnPAGainReset_Click(object sender, System.EventArgs e)
-		{
-			udPAGain160.Value = 48.0M;
-			udPAGain80.Value = 48.0M;
-			udPAGain60.Value = 48.0M;
-			udPAGain40.Value = 48.0M;
-			udPAGain30.Value = 48.0M;
-			udPAGain20.Value = 48.0M;
-			udPAGain17.Value = 48.0M;
-			udPAGain15.Value = 48.0M;
-			udPAGain12.Value = 48.0M;
-			udPAGain10.Value = 48.0M;
-            udPAGain6.Value = 48.0M;
-		}
-
-		#endregion
-
-		#region Appearance Tab Event Handlers
-
-		private void clrbtnBackground_Changed(object sender, System.EventArgs e)
-		{
-			Display.DisplayBackgroundColor = clrbtnBackground.Color;
-		}
-
-		private void clrbtnGrid_Changed(object sender, System.EventArgs e)
-		{
-			Display.GridColor = clrbtnGrid.Color;
-		}
-
-		private void clrbtnZeroLine_Changed(object sender, System.EventArgs e)
-		{
-			Display.GridZeroColor = clrbtnZeroLine.Color;
-		}
-
-		private void clrbtnText_Changed(object sender, System.EventArgs e)
-		{
-			Display.GridTextColor = clrbtnText.Color;
-		}
-
-		private void clrbtnDataLine_Changed(object sender, System.EventArgs e)
-		{
-			Display.DataLineColor = clrbtnDataLine.Color;
-		}
-
-		private void clrbtnFilter_Changed(object sender, System.EventArgs e)
-		{
-			Display.DisplayFilterColor = Color.FromArgb(tbRX1FilterAlpha.Value, clrbtnFilter.Color);
-		}
-
-		private void udDisplayLineWidth_ValueChanged(object sender, System.EventArgs e)
-		{
-			Display.DisplayLineWidth = (float)udDisplayLineWidth.Value;
-		}
-
-		private void clrbtnMeterLeft_Changed(object sender, System.EventArgs e)
-		{
-			console.MeterLeftColor = clrbtnMeterLeft.Color;
-		}
-
-		private void clrbtnMeterRight_Changed(object sender, System.EventArgs e)
-		{
-			console.MeterRightColor = clrbtnMeterRight.Color;
-		}
-
-		private void clrbtnBtnSel_Changed(object sender, System.EventArgs e)
-		{
-			console.ButtonSelectedColor = clrbtnBtnSel.Color;
-		}
-
-		private void clrbtnVFODark_Changed(object sender, System.EventArgs e)
-		{
-			console.VFOTextDarkColor = clrbtnVFODark.Color;
-		}
-
-		private void clrbtnVFOLight_Changed(object sender, System.EventArgs e)
-		{
-			console.VFOTextLightColor = clrbtnVFOLight.Color;
-		}
-
-		private void clrbtnBandDark_Changed(object sender, System.EventArgs e)
-		{
-			console.BandTextDarkColor = clrbtnBandDark.Color;
-		}
-
-		private void clrbtnBandLight_Changed(object sender, System.EventArgs e)
-		{
-			console.BandTextLightColor = clrbtnBandLight.Color;
-		}
-
-		private void clrbtnPeakText_Changed(object sender, System.EventArgs e)
-		{
-			console.PeakTextColor = clrbtnPeakText.Color;
-		}
-
-		private void clrbtnOutOfBand_Changed(object sender, System.EventArgs e)
-		{
-			console.OutOfBandColor = clrbtnOutOfBand.Color;
-		}
-
-		private void chkVFOSmallLSD_CheckedChanged(object sender, System.EventArgs e)
-		{
-			console.SmallLSD = chkVFOSmallLSD.Checked;
-		}
-
-		private void clrbtnVFOSmallColor_Changed(object sender, System.EventArgs e)
-		{
-			console.SmallVFOColor = clrbtnVFOSmallColor.Color;
-		}
-
-		private void clrbtnPeakBackground_Changed(object sender, System.EventArgs e)
-		{
-			console.PeakBackgroundColor = clrbtnPeakBackground.Color;
-		}
-
-		private void clrbtnMeterBackground_Changed(object sender, System.EventArgs e)
-		{
-			console.MeterBackgroundColor = clrbtnMeterBackground.Color;
-		}
-
-		private void clrbtnBandBackground_Changed(object sender, System.EventArgs e)
-		{
-			console.BandBackgroundColor = clrbtnBandBackground.Color;
-		}
-
-		private void clrbtnVFOBackground_Changed(object sender, System.EventArgs e)
-		{
-			console.VFOBackgroundColor = clrbtnVFOBackground.Color;
-		}
-
-		#endregion
-
-		#region Keyboard Tab Event Handlers
-
-		private void comboKBTuneUp1_SelectedIndexChanged(object sender, System.EventArgs e)
-		{
-			console.KeyTuneUp1 = (Keys)KeyList[comboKBTuneUp1.SelectedIndex];
-		}
-
-		private void comboKBTuneDown1_SelectedIndexChanged(object sender, System.EventArgs e)
-		{
-			console.KeyTuneDown1 = (Keys)KeyList[comboKBTuneDown1.SelectedIndex];
-		}
-
-		private void comboKBTuneUp2_SelectedIndexChanged(object sender, System.EventArgs e)
-		{
-			console.KeyTuneUp2 = (Keys)KeyList[comboKBTuneUp2.SelectedIndex];
-		}
-
-		private void comboKBTuneDown2_SelectedIndexChanged(object sender, System.EventArgs e)
-		{
-			console.KeyTuneDown2 = (Keys)KeyList[comboKBTuneDown2.SelectedIndex];
-		}
-
-		private void comboKBTuneUp3_SelectedIndexChanged(object sender, System.EventArgs e)
-		{
-			console.KeyTuneUp3 = (Keys)KeyList[comboKBTuneUp3.SelectedIndex];
-		}
-
-		private void comboKBTuneDown3_SelectedIndexChanged(object sender, System.EventArgs e)
-		{
-			console.KeyTuneDown3 = (Keys)KeyList[comboKBTuneDown3.SelectedIndex];
-		}
-
-		private void comboKBTuneUp4_SelectedIndexChanged(object sender, System.EventArgs e)
-		{
-			console.KeyTuneUp4 = (Keys)KeyList[comboKBTuneUp4.SelectedIndex];
-		}
-
-		private void comboKBTuneDown4_SelectedIndexChanged(object sender, System.EventArgs e)
-		{
-			console.KeyTuneDown4 = (Keys)KeyList[comboKBTuneDown4.SelectedIndex];
-		}
-
-		private void comboKBTuneUp5_SelectedIndexChanged(object sender, System.EventArgs e)
-		{
-			console.KeyTuneUp5 = (Keys)KeyList[comboKBTuneUp5.SelectedIndex];
-		}
-
-		private void comboKBTuneDown5_SelectedIndexChanged(object sender, System.EventArgs e)
-		{
-			console.KeyTuneDown5 = (Keys)KeyList[comboKBTuneDown5.SelectedIndex];
-		}
-
-		private void comboKBTuneUp6_SelectedIndexChanged(object sender, System.EventArgs e)
-		{
-			console.KeyTuneUp6 = (Keys)KeyList[comboKBTuneUp6.SelectedIndex];
-		}
-
-		private void comboKBTuneDown6_SelectedIndexChanged(object sender, System.EventArgs e)
-		{
-			console.KeyTuneDown6 = (Keys)KeyList[comboKBTuneDown6.SelectedIndex];
-		}
-
-		private void comboKBTuneUp7_SelectedIndexChanged(object sender, System.EventArgs e)
-		{
-			console.KeyTuneUp7 = (Keys)KeyList[comboKBTuneUp7.SelectedIndex];
-		}
-
-		private void comboKBTuneDown7_SelectedIndexChanged(object sender, System.EventArgs e)
-		{
-			console.KeyTuneDown7 = (Keys)KeyList[comboKBTuneDown7.SelectedIndex];
-		}
-
-		private void comboKBBandUp_SelectedIndexChanged(object sender, System.EventArgs e)
-		{
-			console.KeyBandUp = (Keys)KeyList[comboKBBandUp.SelectedIndex];
-		}
-
-		private void comboKBBandDown_SelectedIndexChanged(object sender, System.EventArgs e)
-		{
-			console.KeyBandDown = (Keys)KeyList[comboKBBandDown.SelectedIndex];
-		}
-
-		private void comboKBFilterUp_SelectedIndexChanged(object sender, System.EventArgs e)
-		{
-			console.KeyFilterUp = (Keys)KeyList[comboKBFilterUp.SelectedIndex];
-		}
-
-		private void comboKBFilterDown_SelectedIndexChanged(object sender, System.EventArgs e)
-		{
-			console.KeyFilterDown = (Keys)KeyList[comboKBFilterDown.SelectedIndex];
-		}
-
-		private void comboKBModeUp_SelectedIndexChanged(object sender, System.EventArgs e)
-		{
-			console.KeyModeUp = (Keys)KeyList[comboKBModeUp.SelectedIndex];
-		}
-
-		private void comboKBModeDown_SelectedIndexChanged(object sender, System.EventArgs e)
-		{
-			console.KeyModeDown = (Keys)KeyList[comboKBModeDown.SelectedIndex];
-		}
-
-		private void comboKBCWDot_SelectedIndexChanged(object sender, System.EventArgs e)
-		{
-			console.KeyCWDot = (Keys)KeyList[comboKBCWDot.SelectedIndex];
-		}
-
-		private void comboKBCWDash_SelectedIndexChanged(object sender, System.EventArgs e)
-		{
-			console.KeyCWDash = (Keys)KeyList[comboKBCWDash.SelectedIndex];
-		}
-
-		private void comboKBRITUp_SelectedIndexChanged(object sender, System.EventArgs e)
-		{
-			console.KeyRITUp = (Keys)KeyList[comboKBRITUp.SelectedIndex];
-		}
-
-		private void comboKBRITDown_SelectedIndexChanged(object sender, System.EventArgs e)
-		{
-			console.KeyRITDown = (Keys)KeyList[comboKBRITDown.SelectedIndex];
-		}
-
-		private void comboKBXITUp_SelectedIndexChanged(object sender, System.EventArgs e)
-		{
-			console.KeyXITUp = (Keys)KeyList[comboKBXITUp.SelectedIndex];
-		}
-
-		private void comboKBXITDown_SelectedIndexChanged(object sender, System.EventArgs e)
-		{
-			console.KeyXITDown = (Keys)KeyList[comboKBXITDown.SelectedIndex];
-		}
-
-		#endregion
-
-		#region Ext Ctrl Tab Event Handlers
-
-		private void chkExtRX160_CheckedChanged(object sender, System.EventArgs e)
-		{
-			int val = 0;
-			if(chkExtRX1601.Checked) val += 1<<0;
-			if(chkExtRX1602.Checked) val += 1<<1;
-			if(chkExtRX1603.Checked) val += 1<<2;
-			if(chkExtRX1604.Checked) val += 1<<3;
-			if(chkExtRX1605.Checked) val += 1<<4;
-			if(chkExtRX1606.Checked) val += 1<<5;
-
-			console.X2160RX = (byte)val;
-		}
-
-		private void chkExtTX160_CheckedChanged(object sender, System.EventArgs e)
-		{
-			int val = 0;
-			if(chkExtTX1601.Checked) val += 1<<0;
-			if(chkExtTX1602.Checked) val += 1<<1;
-			if(chkExtTX1603.Checked) val += 1<<2;
-			if(chkExtTX1604.Checked) val += 1<<3;
-			if(chkExtTX1605.Checked) val += 1<<4;
-			if(chkExtTX1606.Checked) val += 1<<5;
-
-			console.X2160TX = (byte)val;
-		}
-
-		private void chkExtRX80_CheckedChanged(object sender, System.EventArgs e)
-		{
-			int val = 0;
-			if(chkExtRX801.Checked) val += 1<<0;
-			if(chkExtRX802.Checked) val += 1<<1;
-			if(chkExtRX803.Checked) val += 1<<2;
-			if(chkExtRX804.Checked) val += 1<<3;
-			if(chkExtRX805.Checked) val += 1<<4;
-			if(chkExtRX806.Checked) val += 1<<5;
-
-			console.X280RX = (byte)val;
-		}
-
-		private void chkExtTX80_CheckedChanged(object sender, System.EventArgs e)
-		{
-			int val = 0;
-			if(chkExtTX801.Checked) val += 1<<0;
-			if(chkExtTX802.Checked) val += 1<<1;
-			if(chkExtTX803.Checked) val += 1<<2;
-			if(chkExtTX804.Checked) val += 1<<3;
-			if(chkExtTX805.Checked) val += 1<<4;
-			if(chkExtTX806.Checked) val += 1<<5;
-
-			console.X280TX = (byte)val;
-		}
-
-		private void chkExtRX60_CheckedChanged(object sender, System.EventArgs e)
-		{
-			int val = 0;
-			if(chkExtRX601.Checked) val += 1<<0;
-			if(chkExtRX602.Checked) val += 1<<1;
-			if(chkExtRX603.Checked) val += 1<<2;
-			if(chkExtRX604.Checked) val += 1<<3;
-			if(chkExtRX605.Checked) val += 1<<4;
-			if(chkExtRX606.Checked) val += 1<<5;
-
-			console.X260RX = (byte)val;
-		}
-
-		private void chkExtTX60_CheckedChanged(object sender, System.EventArgs e)
-		{
-			int val = 0;
-			if(chkExtTX601.Checked) val += 1<<0;
-			if(chkExtTX602.Checked) val += 1<<1;
-			if(chkExtTX603.Checked) val += 1<<2;
-			if(chkExtTX604.Checked) val += 1<<3;
-			if(chkExtTX605.Checked) val += 1<<4;
-			if(chkExtTX606.Checked) val += 1<<5;
-
-			console.X260TX = (byte)val;
-		}
-
-		private void chkExtRX40_CheckedChanged(object sender, System.EventArgs e)
-		{
-			int val = 0;
-			if(chkExtRX401.Checked) val += 1<<0;
-			if(chkExtRX402.Checked) val += 1<<1;
-			if(chkExtRX403.Checked) val += 1<<2;
-			if(chkExtRX404.Checked) val += 1<<3;
-			if(chkExtRX405.Checked) val += 1<<4;
-			if(chkExtRX406.Checked) val += 1<<5;
-
-			console.X240RX = (byte)val;
-		}
-
-		private void chkExtTX40_CheckedChanged(object sender, System.EventArgs e)
-		{
-			int val = 0;
-			if(chkExtTX401.Checked) val += 1<<0;
-			if(chkExtTX402.Checked) val += 1<<1;
-			if(chkExtTX403.Checked) val += 1<<2;
-			if(chkExtTX404.Checked) val += 1<<3;
-			if(chkExtTX405.Checked) val += 1<<4;
-			if(chkExtTX406.Checked) val += 1<<5;
-
-			console.X240TX = (byte)val;
-		}
-
-		private void chkExtRX30_CheckedChanged(object sender, System.EventArgs e)
-		{
-			int val = 0;
-			if(chkExtRX301.Checked) val += 1<<0;
-			if(chkExtRX302.Checked) val += 1<<1;
-			if(chkExtRX303.Checked) val += 1<<2;
-			if(chkExtRX304.Checked) val += 1<<3;
-			if(chkExtRX305.Checked) val += 1<<4;
-			if(chkExtRX306.Checked) val += 1<<5;
-
-			console.X230RX = (byte)val;
-		}
-
-		private void chkExtTX30_CheckedChanged(object sender, System.EventArgs e)
-		{
-			int val = 0;
-			if(chkExtTX301.Checked) val += 1<<0;
-			if(chkExtTX302.Checked) val += 1<<1;
-			if(chkExtTX303.Checked) val += 1<<2;
-			if(chkExtTX304.Checked) val += 1<<3;
-			if(chkExtTX305.Checked) val += 1<<4;
-			if(chkExtTX306.Checked) val += 1<<5;
-
-			console.X230TX = (byte)val;
-		}
-
-		private void chkExtRX20_CheckedChanged(object sender, System.EventArgs e)
-		{
-			int val = 0;
-			if(chkExtRX201.Checked) val += 1<<0;
-			if(chkExtRX202.Checked) val += 1<<1;
-			if(chkExtRX203.Checked) val += 1<<2;
-			if(chkExtRX204.Checked) val += 1<<3;
-			if(chkExtRX205.Checked) val += 1<<4;
-			if(chkExtRX306.Checked) val += 1<<5;
-
-			console.X220RX = (byte)val;
-		}
-
-		private void chkExtTX20_CheckedChanged(object sender, System.EventArgs e)
-		{
-			int val = 0;
-			if(chkExtTX201.Checked) val += 1<<0;
-			if(chkExtTX202.Checked) val += 1<<1;
-			if(chkExtTX203.Checked) val += 1<<2;
-			if(chkExtTX204.Checked) val += 1<<3;
-			if(chkExtTX205.Checked) val += 1<<4;
-			if(chkExtTX306.Checked) val += 1<<5;
-
-			console.X220TX = (byte)val;
-		}
-
-		private void chkExtRX17_CheckedChanged(object sender, System.EventArgs e)
-		{
-			int val = 0;
-			if(chkExtRX171.Checked) val += 1<<0;
-			if(chkExtRX172.Checked) val += 1<<1;
-			if(chkExtRX173.Checked) val += 1<<2;
-			if(chkExtRX174.Checked) val += 1<<3;
-			if(chkExtRX175.Checked) val += 1<<4;
-			if(chkExtRX176.Checked) val += 1<<5;
-
-			console.X217RX = (byte)val;
-		}
-
-		private void chkExtTX17_CheckedChanged(object sender, System.EventArgs e)
-		{
-			int val = 0;
-			if(chkExtTX171.Checked) val += 1<<0;
-			if(chkExtTX172.Checked) val += 1<<1;
-			if(chkExtTX173.Checked) val += 1<<2;
-			if(chkExtTX174.Checked) val += 1<<3;
-			if(chkExtTX175.Checked) val += 1<<4;
-			if(chkExtTX176.Checked) val += 1<<5;
-
-			console.X217TX = (byte)val;
-		}
-
-		private void chkExtRX15_CheckedChanged(object sender, System.EventArgs e)
-		{
-			int val = 0;
-			if(chkExtRX151.Checked) val += 1<<0;
-			if(chkExtRX152.Checked) val += 1<<1;
-			if(chkExtRX153.Checked) val += 1<<2;
-			if(chkExtRX154.Checked) val += 1<<3;
-			if(chkExtRX155.Checked) val += 1<<4;
-			if(chkExtRX156.Checked) val += 1<<5;
-
-			console.X215RX = (byte)val;
-		}
-
-		private void chkExtTX15_CheckedChanged(object sender, System.EventArgs e)
-		{
-			int val = 0;
-			if(chkExtTX151.Checked) val += 1<<0;
-			if(chkExtTX152.Checked) val += 1<<1;
-			if(chkExtTX153.Checked) val += 1<<2;
-			if(chkExtTX154.Checked) val += 1<<3;
-			if(chkExtTX155.Checked) val += 1<<4;
-			if(chkExtTX156.Checked) val += 1<<5;
-
-			console.X215TX = (byte)val;
-		}
-
-		private void chkExtRX12_CheckedChanged(object sender, System.EventArgs e)
-		{
-			int val = 0;
-			if(chkExtRX121.Checked) val += 1<<0;
-			if(chkExtRX122.Checked) val += 1<<1;
-			if(chkExtRX123.Checked) val += 1<<2;
-			if(chkExtRX124.Checked) val += 1<<3;
-			if(chkExtRX125.Checked) val += 1<<4;
-			if(chkExtRX126.Checked) val += 1<<5;
-
-			console.X212RX = (byte)val;
-		}
-
-		private void chkExtTX12_CheckedChanged(object sender, System.EventArgs e)
-		{
-			int val = 0;
-			if(chkExtTX121.Checked) val += 1<<0;
-			if(chkExtTX122.Checked) val += 1<<1;
-			if(chkExtTX123.Checked) val += 1<<2;
-			if(chkExtTX124.Checked) val += 1<<3;
-			if(chkExtTX125.Checked) val += 1<<4;
-			if(chkExtTX126.Checked) val += 1<<5;
-
-			console.X212TX = (byte)val;
-		}
-
-		private void chkExtRX10_CheckedChanged(object sender, System.EventArgs e)
-		{
-			int val = 0;
-			if(chkExtRX101.Checked) val += 1<<0;
-			if(chkExtRX102.Checked) val += 1<<1;
-			if(chkExtRX103.Checked) val += 1<<2;
-			if(chkExtRX104.Checked) val += 1<<3;
-			if(chkExtRX105.Checked) val += 1<<4;
-			if(chkExtRX106.Checked) val += 1<<5;
-
-			console.X210RX = (byte)val;
-		}
-
-		private void chkExtTX10_CheckedChanged(object sender, System.EventArgs e)
-		{
-			int val = 0;
-			if(chkExtTX101.Checked) val += 1<<0;
-			if(chkExtTX102.Checked) val += 1<<1;
-			if(chkExtTX103.Checked) val += 1<<2;
-			if(chkExtTX104.Checked) val += 1<<3;
-			if(chkExtTX105.Checked) val += 1<<4;
-			if(chkExtTX106.Checked) val += 1<<5;
-
-			console.X210TX = (byte)val;
-		}
-
-		private void chkExtRX6_CheckedChanged(object sender, System.EventArgs e)
-		{
-			int val = 0;
-			if(chkExtRX61.Checked) val += 1<<0;
-			if(chkExtRX62.Checked) val += 1<<1;
-			if(chkExtRX63.Checked) val += 1<<2;
-			if(chkExtRX64.Checked) val += 1<<3;
-			if(chkExtRX65.Checked) val += 1<<4;
-			if(chkExtRX66.Checked) val += 1<<5;
-
-			console.X26RX = (byte)val;
-		}
-
-		private void chkExtTX6_CheckedChanged(object sender, System.EventArgs e)
-		{
-			int val = 0;
-			if(chkExtTX61.Checked) val += 1<<0;
-			if(chkExtTX62.Checked) val += 1<<1;
-			if(chkExtTX63.Checked) val += 1<<2;
-			if(chkExtTX64.Checked) val += 1<<3;
-			if(chkExtTX65.Checked) val += 1<<4;
-			if(chkExtTX66.Checked) val += 1<<5;
-
-			console.X26TX = (byte)val;
-		}
-
-		private void chkExtRX2_CheckedChanged(object sender, System.EventArgs e)
-		{
-			int val = 0;
-			if(chkExtRX21.Checked) val += 1<<0;
-			if(chkExtRX22.Checked) val += 1<<1;
-			if(chkExtRX23.Checked) val += 1<<2;
-			if(chkExtRX24.Checked) val += 1<<3;
-			if(chkExtRX25.Checked) val += 1<<4;
-			if(chkExtRX26.Checked) val += 1<<5;
-
-			console.X22RX = (byte)val;
-		}
-
-		private void chkExtTX2_CheckedChanged(object sender, System.EventArgs e)
-		{
-			int val = 0;
-			if(chkExtTX21.Checked) val += 1<<0;
-			if(chkExtTX22.Checked) val += 1<<1;
-			if(chkExtTX23.Checked) val += 1<<2;
-			if(chkExtTX24.Checked) val += 1<<3;
-			if(chkExtTX25.Checked) val += 1<<4;
-			if(chkExtTX26.Checked) val += 1<<5;
-
-			console.X22TX = (byte)val;
-		}
-
-		private void chkExtEnable_CheckedChanged(object sender, System.EventArgs e)
-		{
-			grpExtRX.Enabled = chkExtEnable.Checked;
-			grpExtTX.Enabled = chkExtEnable.Checked;
-			console.ExtCtrlEnabled = chkExtEnable.Checked;
-		}
-
-		#endregion
-
-		#region CAT Setup event handlers 
-
-		public void initCATandPTTprops() 
-		{ 
-			console.CATEnabled = chkCATEnable.Checked;
-			if(comboCATPort.Text.StartsWith("COM"))
-				console.CATPort = Int32.Parse(comboCATPort.Text.Substring(3));
-			console.CATPTTRTS = chkCATPTT_RTS.Checked; 
-			console.CATPTTDTR = chkCATPTT_DTR.Checked;
-			//console.PTTBitBangEnabled = chkCATPTTEnabled.Checked; 
-			if(comboCATPTTPort.Text.StartsWith("COM"))
-				console.CATPTTBitBangPort = Int32.Parse(comboCATPTTPort.Text.Substring(3)); 
-			console.CATBaudRate = Convert.ToInt32((string)comboCATbaud.SelectedItem, 10); 
-			console.CATParity = SDRSerialPort.stringToParity((string)comboCATparity.SelectedItem);
-			console.CATDataBits = SDRSerialPort.stringToDataBits((string)comboCATdatabits.SelectedItem); 
-			console.CATStopBits = SDRSerialPort.stringToStopBits((string)comboCATstopbits.SelectedItem); 
-
-			// make sure the enabled state of bitbang ptt is correct 
-			if ( chkCATPTT_RTS.Checked || chkCATPTT_DTR.Checked ) 
-			{
-				chkCATPTTEnabled.Enabled = true; 
-			}
-			else 
-			{
-				chkCATPTTEnabled.Enabled = false; 
-				chkCATPTTEnabled.Checked = false; 
-			}
-		} 
-
-		// called in error cases to set the dialiog vars from 
-		// the console properties -- sort of ugly, we should only have 1 copy 
-		// of this stuff 
-		public void copyCATPropsToDialogVars() 
-		{ 
-			chkCATEnable.Checked = console.CATEnabled; 
-			string port = "COM"+console.CATPort.ToString();
-			if(comboCATPort.Items.Contains(port))
-				comboCATPort.Text = port; 
-			chkCATPTT_RTS.Checked = console.CATPTTRTS;
-			chkCATPTT_DTR.Checked = console.CATPTTDTR; 
-			chkCATPTTEnabled.Checked = console.PTTBitBangEnabled; 
-			port = "COM"+console.CATPTTBitBangPort.ToString();
-			if(comboCATPTTPort.Items.Contains(port))
-				comboCATPTTPort.Text = port; 
-
-			// wjt fixme -- need to hand baudrate, parity, data, stop -- see initCATandPTTprops 
-		}
-
-
-		private void chkCATEnable_CheckedChanged(object sender, System.EventArgs e) 
-		{
-			if(initializing) return;
-
-			if(comboCATPort.Text == "" || !comboCATPort.Text.StartsWith("COM"))
-			{
-				if(chkCATEnable.Focused)
-				{
-					MessageBox.Show("The CAT port \""+comboCATPort.Text+"\" is not a valid port.  Please select another port.");
-					chkCATEnable.Checked = false;
-				}
-				return;
-			}
-
-			// make sure we're not using the same comm port as the bit banger 
-			if ( chkCATEnable.Checked && console.PTTBitBangEnabled && 
-				( comboCATPort.Text == comboCATPTTPort.Text ) )
-			{
-				MessageBox.Show("CAT port cannot be the same as Bit Bang Port", "Port Selection Error",
-					MessageBoxButtons.OK, MessageBoxIcon.Error);
-				chkCATEnable.Checked = false; 
-			}
-			
-			// if enabled, disable changing of serial port 
-			bool enable_sub_fields = !chkCATEnable.Checked; 
-			comboCATPort.Enabled = enable_sub_fields; 
-
-			enableCAT_HardwareFields(enable_sub_fields); 
-			
-			if ( chkCATEnable.Checked ) 
-			{ 
-				try
-				{
-					console.CATEnabled = true; 
-				}
-				catch(Exception ex)
-				{
-					console.CATEnabled = false; 
-					chkCATEnable.Checked = false; 
-					MessageBox.Show("Could not initialize CAT control.  Exception was:\n\n " + ex.Message + 
-						"\n\nCAT control has been disabled.", "Error Initializing CAT control", 
-						MessageBoxButtons.OK, MessageBoxIcon.Error);
-				}
-			}
-			else 
-			{
-				if(comboKeyerConnSecondary.Text == "CAT" && chkCATEnable.Focused)
-				{
-					MessageBox.Show("The Secondary Keyer option has been changed to None since CAT has been disabled.",
-						"CAT Disabled",
-						MessageBoxButtons.OK,
-						MessageBoxIcon.Information);
-					comboKeyerConnSecondary.Text = "None";
-				}
-				console.CATEnabled = false;
-			}			
-		}
-
-		private void enableCAT_HardwareFields(bool enable) 
-		{ 
-			comboCATbaud.Enabled = enable;
-			comboCATparity.Enabled = enable;
-			comboCATdatabits.Enabled = enable;
-			comboCATstopbits.Enabled = enable;
-		} 
-
-		private void doEnablementOnBitBangEnable() 
-		{
-			if ( console.CATPTTRTS || console.CATPTTDTR )  // if RTS or DTR is selectment, enable is ok 
-			{
-				chkCATPTTEnabled.Enabled = true; 
-			}
-			else 
-			{
-				chkCATPTTEnabled.Enabled = false; 
-				chkCATPTTEnabled.Checked = false; // make sure it is not checked 
-			}				 				    
-		}
-
-		private void chkCATPTT_RTS_CheckedChanged(object sender, System.EventArgs e)
-		{
-			console.CATPTTRTS = chkCATPTT_RTS.Checked; 
-			doEnablementOnBitBangEnable(); 
-		}
-
-		private void chkCATPTT_DTR_CheckedChanged(object sender, System.EventArgs e)
-		{
-			console.CATPTTDTR = chkCATPTT_DTR.Checked; 		
-			doEnablementOnBitBangEnable(); 
-		}
-
-		private void chkCATPTTEnabled_CheckedChanged(object sender, System.EventArgs e)
-		{
-			if(initializing) return;
-
-			bool enable_sub_fields; 
-
-			if(comboCATPTTPort.Text == "" || !comboCATPTTPort.Text.StartsWith("COM"))
-			{
-				if(chkCATPTTEnabled.Focused)
-				{
-					MessageBox.Show("The PTT port \""+comboCATPTTPort.Text+"\" is not a valid port.  Please select another port.");
-					chkCATPTTEnabled.Checked = false;
-				}				
-				return;
-			}
-
-			if ( chkCATPTTEnabled.Checked && console.CATEnabled && 
-				comboCATPort.Text == comboCATPTTPort.Text )  
-			{
-				if(chkCATPTTEnabled.Focused)
-				{
-					MessageBox.Show("CAT port cannot be the same as Bit Bang Port", "Port Selection Error",
-						MessageBoxButtons.OK, MessageBoxIcon.Error);
-					chkCATPTTEnabled.Checked = false; 
-				}
-				return;
-			}
-
-			console.PTTBitBangEnabled = chkCATPTTEnabled.Checked; 	
-			if ( chkCATPTTEnabled.Checked ) // if it's enabled don't allow changing settings on port 
-			{ 
-				enable_sub_fields = false; 
-			}
-			else 
-			{ 
-				enable_sub_fields = true; 
-			} 
-			chkCATPTT_RTS.Enabled = enable_sub_fields; 
-			chkCATPTT_DTR.Enabled = enable_sub_fields; 
-			comboCATPTTPort.Enabled = enable_sub_fields; 
-		}					
-
-		private void comboCATparity_SelectedIndexChanged(object sender, System.EventArgs e)
-		{
-			string selection = comboCATparity.SelectedText; 
-			if ( selection != null ) 
-			{ 
-				System.IO.Ports.Parity p = SDRSerialPort.stringToParity(selection); 
-				console.CATParity = p; 
-			}			
-		}
-
-		private void comboCATPort_SelectedIndexChanged(object sender, System.EventArgs e)
-		{
-			if(comboCATPort.Text.StartsWith("COM"))
-				console.CATPort = Int32.Parse(comboCATPort.Text.Substring(3));
-		}
-
-		private void comboCATPTTPort_SelectedIndexChanged(object sender, System.EventArgs e)
-		{
-			if(comboCATPTTPort.Text.StartsWith("COM"))
-				console.CATPTTBitBangPort = Int32.Parse(comboCATPTTPort.Text.Substring(3));
-		}
-
-		private void comboCATbaud_SelectedIndexChanged(object sender, System.EventArgs e)
-		{			
-			if ( comboCATbaud.SelectedIndex >= 0 ) 
-				console.CATBaudRate =  Int32.Parse(comboCATbaud.Text); 			
-		}
-
-		private void comboCATdatabits_SelectedIndexChanged(object sender, System.EventArgs e)
-		{
-			if ( comboCATdatabits.SelectedIndex >= 0 )
-				console.CATDataBits = SDRSerialPort.stringToDataBits(comboCATdatabits.Text); 
-		}
-
-		private void comboCATstopbits_SelectedIndexChanged(object sender, System.EventArgs e)
-		{
-			if ( comboCATstopbits.SelectedIndex >= 0 ) 
-				console.CATStopBits = SDRSerialPort.stringToStopBits(comboCATstopbits.Text); 
-		}
-
-		private void btnCATTest_Click(object sender, System.EventArgs e)
-		{
-			CATTester cat = new CATTester(console);
-			//this.Close();
-			cat.Show();
-			cat.Focus();
-		}
-
-		//Modified 10/12/08 BT to change "SDR-1000" to "PowerSDR"
-		private void comboCATRigType_SelectedIndexChanged(object sender, System.EventArgs e)
-		{
-			switch(comboCATRigType.Text)
-			{
-				case "PowerSDR":
-					console.CATRigType = 900;
-					break;
-				case "TS-2000":
-					console.CATRigType = 19;
-					break;
-				case "TS-50S":
-					console.CATRigType = 13;
-					break;
-				case "TS-440":
-					console.CATRigType = 20;
-					break;
-				default:
-					console.CATRigType = 19;
-					break;
-			}
-		}
-
-		#endregion
-
-		#region Test Tab Event Handlers
-
-		private void chkTestIMD_CheckedChanged(object sender, System.EventArgs e)
-		{
-			if(chekTestIMD.Checked)
-			{
-				if(!console.PowerOn)
-				{
-					MessageBox.Show("Power must be on to run this test.",
-						"Power is off",
-						MessageBoxButtons.OK,
-						MessageBoxIcon.Hand);
-					chekTestIMD.Checked = false;
-					return;
-				}
-				console.PreviousPWR = console.PWR;
-				console.PWR = (int)udTestIMDPower.Value;
-				console.MOX = true;
-				
-				if(!console.MOX)
-				{
-					chekTestIMD.Checked = false;
-					return;
-				}
-
-				Audio.MOX = true;
-				chekTestIMD.BackColor = console.ButtonSelectedColor;
-				Audio.SineFreq1 = (double)udTestIMDFreq1.Value;
-				Audio.SineFreq2 = (double)udTestIMDFreq2.Value;
-				Audio.two_tone = true;
-				Audio.TXInputSignal = Audio.SignalSource.SINE_TWO_TONE;
-				Audio.SourceScale = 1.0;
-			}
-			else
-			{
-				udTestIMDPower.Value = console.PWR;
-				console.PWR = console.PreviousPWR;
-				Audio.TXInputSignal = Audio.SignalSource.RADIO;
-				Audio.MOX = false;
-				console.MOX = false;
-				Audio.SineFreq1 = (double)udDSPCWPitch.Value;
-				Audio.two_tone = false;
-				chekTestIMD.BackColor = SystemColors.Control;
-			}
-		}
-
-		private void chkTestX2_CheckedChanged(object sender, System.EventArgs e)
-		{
-			byte val = 0;
-			if(chkTestX2Pin1.Checked) val |= 1<<0;
-			if(chkTestX2Pin2.Checked) val |= 1<<1;
-			if(chkTestX2Pin3.Checked) val |= 1<<2;
-			if(chkTestX2Pin4.Checked) val |= 1<<3;
-			if(chkTestX2Pin5.Checked) val |= 1<<4;
-			if(chkTestX2Pin6.Checked) val |= 1<<5;
-
-			console.Hdw.X2 = val;
-		}
-
-		private void btnTestAudioBalStart_Click(object sender, System.EventArgs e)
-		{
-			if(!console.PowerOn)
-			{
-				MessageBox.Show("Power must be on to run this test.",
-					"Power is off",
-					MessageBoxButtons.OK,
-					MessageBoxIcon.Hand);
-				return;
-			}
-
-			DialogResult dr = DialogResult.No;
-			Audio.two_tone = false;
-			Audio.SineFreq1 = 600.0;
-
-			do
-			{
-				Audio.RX1OutputSignal = Audio.SignalSource.SINE_LEFT_ONLY;
-				dr = MessageBox.Show("Do you hear a tone in the left channel?",
-					"Tone in left channel?",
-					MessageBoxButtons.YesNoCancel,
-					MessageBoxIcon.Question);
-
-				Audio.RX1OutputSignal = Audio.SignalSource.RADIO;
-
-				if(dr == DialogResult.No)
-				{
-					DialogResult dr2 = MessageBox.Show("Please double check cable and speaker connections.\n"+
-						"Click OK to try again (cancel to abort).",
-						"Check connections",
-						MessageBoxButtons.OKCancel,
-						MessageBoxIcon.Asterisk);
-					if(dr2 == DialogResult.Cancel)
-					{
-						MessageBox.Show("Test Failed",
-							"Failed",
-							MessageBoxButtons.OK,
-							MessageBoxIcon.Stop);
-						btnTestAudioBalStart.BackColor = Color.Red;
-						return;
-					}
-				}
-				else if(dr == DialogResult.Cancel)
-				{
-					MessageBox.Show("Test Failed",
-						"Failed",
-						MessageBoxButtons.OK,
-						MessageBoxIcon.Stop);
-					btnTestAudioBalStart.BackColor = Color.Red;
-					return;
-				}
-			} while(dr != DialogResult.Yes);
-
-			do
-			{
-				Audio.RX1OutputSignal = Audio.SignalSource.SINE_RIGHT_ONLY;
-				dr = MessageBox.Show("Do you hear a tone in the right channel?",
-					"Tone in right channel?",
-					MessageBoxButtons.YesNoCancel,
-					MessageBoxIcon.Question);
-
-				Audio.RX1OutputSignal = Audio.SignalSource.RADIO;
-
-				if(dr == DialogResult.No)
-				{
-					DialogResult dr2 = MessageBox.Show("Please double check cable and speaker connections.\n"+
-						"Click OK to try again (cancel to abort).",
-						"Check connections",
-						MessageBoxButtons.OKCancel,
-						MessageBoxIcon.Asterisk);
-					if(dr2 == DialogResult.Cancel)
-					{
-						MessageBox.Show("Test Failed",
-							"Failed",
-							MessageBoxButtons.OK,
-							MessageBoxIcon.Stop);
-						btnTestAudioBalStart.BackColor = Color.Red;
-						return;
-					}
-				}
-				else if(dr == DialogResult.Cancel)
-				{
-					MessageBox.Show("Test Failed",
-						"Failed",
-						MessageBoxButtons.OK,
-						MessageBoxIcon.Stop);
-					btnTestAudioBalStart.BackColor = Color.Red;
-					return;
-				}
-			} while(dr != DialogResult.Yes);
-
-			MessageBox.Show("Test was successful.",
-				"Success",
-				MessageBoxButtons.OK,
-				MessageBoxIcon.Information);
-
-			btnTestAudioBalStart.BackColor = Color.Green;
-		}
-
-		private void timer_sweep_Tick(object sender, System.EventArgs e)
-		{
-			if(tkbarTestGenFreq.Value >= udTestGenHigh.Value)
-			{
-				timer_sweep.Enabled = false;
-				btnTestGenSweep.BackColor = SystemColors.Control;
-			}
-			else
-			{
-				tkbarTestGenFreq.Value += (int)(udTestGenHzSec.Value / 10);
-				tkbarTestGenFreq_Scroll(this, EventArgs.Empty);
-			}
-		}
-
-		private void buttonTestGenSweep_Click(object sender, System.EventArgs e)
-		{
-			if(timer_sweep.Enabled)
-			{
-				timer_sweep.Enabled = false;
-				btnTestGenSweep.BackColor = SystemColors.Control;
-			}
-			else
-			{
-				btnTestGenSweep.BackColor = console.ButtonSelectedColor;
-				tkbarTestGenFreq.Value = (int)udTestGenLow.Value;
-				timer_sweep.Enabled = true;
-			}
-		}
-
-		private void tkbarTestGenFreq_Scroll(object sender, System.EventArgs e)
-		{
-			Audio.SineFreq1 = tkbarTestGenFreq.Value;
-		}
-
-		private void cmboSigGenRXMode_SelectedIndexChanged(object sender, System.EventArgs e)
-		{
-			if(cmboSigGenRXMode.SelectedIndex < 0) return;
-
-			Audio.SignalSource source = Audio.SignalSource.RADIO;
-
-			switch(cmboSigGenRXMode.Text)
-			{
-				case "Radio":
-					source = Audio.SignalSource.RADIO;
-					break;
-				case "Tone":
-					source = Audio.SignalSource.SINE;
-					break;
-				case "Noise":
-					source = Audio.SignalSource.NOISE;
-					break;
-				case "Triangle":
-					source = Audio.SignalSource.TRIANGLE;
-					break;
-				case "Sawtooth":
-					source = Audio.SignalSource.SAWTOOTH;
-					break;
-				case "Silence":
-					source = Audio.SignalSource.SILENCE;
-					break;
-			}
-
-			if(chkSigGenRX2.Checked)
-			{
-				if(radSigGenRXInput.Checked)
-					Audio.RX2InputSignal = source;
-				else Audio.RX2OutputSignal = source;
-			}
-			else
-			{
-				if(radSigGenRXInput.Checked)
-					Audio.RX1InputSignal = source;
-				else Audio.RX1OutputSignal = source;
-			}
-
-			UpdateSigGenScaleVisible();
-		}
-
-		private void radSigGenRXInput_CheckedChanged(object sender, System.EventArgs e)
-		{
-			if(radSigGenRXInput.Checked)
-			{
-				Audio.RX1OutputSignal = Audio.SignalSource.RADIO;
-				Audio.RX2OutputSignal = Audio.SignalSource.RADIO;
-				cmboSigGenRXMode_SelectedIndexChanged(this, EventArgs.Empty);
-			}
-		}
-
-		private void radSigGenRXOutput_CheckedChanged(object sender, System.EventArgs e)
-		{
-			if(radSigGenRXOutput.Checked)
-			{
-				Audio.RX1InputSignal = Audio.SignalSource.RADIO;
-				Audio.RX2InputSignal = Audio.SignalSource.RADIO;
-				cmboSigGenRXMode_SelectedIndexChanged(this, EventArgs.Empty);
-			}
-		}
-
-		private void chkSigGenRX2_CheckedChanged(object sender, System.EventArgs e)
-		{
-			if(chkSigGenRX2.Checked) Audio.RX1InputSignal = Audio.RX1OutputSignal = Audio.SignalSource.RADIO;
-			else Audio.RX2InputSignal = Audio.RX2OutputSignal = Audio.SignalSource.RADIO;
-			cmboSigGenRXMode_SelectedIndexChanged(this, EventArgs.Empty);
-		}
-
-		private void UpdateSigGenScaleVisible()
-		{
-			bool b = false;
-			switch(cmboSigGenRXMode.Text)
-			{
-				case "Tone": b = true; break;
-			}
-
-			switch(cmboSigGenTXMode.Text)
-			{
-				case "Tone": b = true; break;
-			}
-
-			lblTestGenScale.Visible = b;
-			udTestGenScale.Visible = b;
-		}
-
-		private void cmboSigGenTXMode_SelectedIndexChanged(object sender, System.EventArgs e)
-		{
-			if(cmboSigGenTXMode.SelectedIndex < 0) return;
-
-			Audio.SignalSource source = Audio.SignalSource.RADIO;
-
-			switch(cmboSigGenTXMode.Text)
-			{
-				case "Radio":
-					source = Audio.SignalSource.RADIO;
-					break;
-				case "Tone":
-					source = Audio.SignalSource.SINE;
-					break;
-				case "Noise":
-					source = Audio.SignalSource.NOISE;
-					break;
-				case "Triangle":
-					source = Audio.SignalSource.TRIANGLE;
-					break;
-				case "Sawtooth":
-					source = Audio.SignalSource.SAWTOOTH;
-					break;
-				case "Silence":
-					source = Audio.SignalSource.SILENCE;
-					break;
-			}
-
-			if(radSigGenTXInput.Checked)
-				Audio.TXInputSignal = source;
-			else Audio.TXOutputSignal = source;
-
-			UpdateSigGenScaleVisible();
-		}
-
-		private void radSigGenTXInput_CheckedChanged(object sender, System.EventArgs e)
-		{
-			if(radSigGenTXInput.Checked)
-			{
-				Audio.TXOutputSignal = Audio.SignalSource.RADIO;
-				cmboSigGenTXMode_SelectedIndexChanged(this, EventArgs.Empty);
-			}
-		}
-
-		private void radSigGenTXOutput_CheckedChanged(object sender, System.EventArgs e)
-		{
-			if(radSigGenTXOutput.Checked)
-			{
-				Audio.TXInputSignal = Audio.SignalSource.RADIO;
-				cmboSigGenTXMode_SelectedIndexChanged(this, EventArgs.Empty);
-			}
-		}
-
-		private void updnTestGenScale_ValueChanged(object sender, System.EventArgs e)
-		{
-			Audio.SourceScale = (double)udTestGenScale.Value;
-		}
-
-		private void btnImpulse_Click(object sender, System.EventArgs e)
-		{
-			Thread t = new Thread(new ThreadStart(ImpulseFunction));
-			t.Name = "Impulse";
-			t.Priority = ThreadPriority.Highest;
-			t.IsBackground = true;
-			t.Start();
-		}
-
-		private void ImpulseFunction()
-		{
-			console.Hdw.ImpulseEnable = true;
-			Thread.Sleep(500);
-			for(int i=0; i<(int)udImpulseNum.Value; i++)
-			{
-				console.Hdw.Impulse();
-				Thread.Sleep(45);
-			}
-			Thread.Sleep(500);
-			console.Hdw.ImpulseEnable = false;
-		}
-
-		#endregion
-
-		#region Other Event Handlers
-		// ======================================================
-		// Display Tab Event Handlers
-		// ======================================================
-
-		private void btnWizard_Click(object sender, System.EventArgs e)
-		{
-			SetupWizard w = new SetupWizard(console, comboAudioSoundCard.SelectedIndex);
-			w.Show();
-			w.Focus();
-		}
-
-		private void btnOK_Click(object sender, System.EventArgs e)
+        private void udCWKeyerWeight_ValueChanged(object sender, System.EventArgs e)
         {
-            if (saving) 
-            { 
-                this.Hide(); 
+            RadioDSP.KeyerWeight = (int)udCWKeyerWeight.Value;
+        }
+
+        private void udCWKeyerRamp_ValueChanged(object sender, System.EventArgs e)
+        {
+            RadioDSP.KeyerRamp = (int)udCWKeyerRamp.Value;
+        }
+
+        private void udCWKeyerSemiBreakInDelay_ValueChanged(object sender, System.EventArgs e)
+        {
+            console.BreakInDelay = (double)udCWBreakInDelay.Value;
+        }
+
+        private void chkDSPKeyerSemiBreakInEnabled_CheckedChanged(object sender, System.EventArgs e)
+        {
+            console.CWSemiBreakInEnabled = chkCWBreakInEnabled.Checked;
+            console.BreakInEnabled = chkCWBreakInEnabled.Checked;
+            udCWBreakInDelay.Enabled = chkCWBreakInEnabled.Checked;
+        }
+
+        private void chkDSPKeyerDisableMonitor_CheckedChanged(object sender, System.EventArgs e)
+        {
+            console.CWDisableMonitor = chkDSPKeyerDisableMonitor.Checked;
+        }
+
+        private void udCWKeyerDeBounce_ValueChanged(object sender, System.EventArgs e)
+        {
+            RadioDSP.KeyerDebounce = (int)udCWKeyerDeBounce.Value;
+        }
+
+        private void chkCWKeyerRevPdl_CheckedChanged(object sender, System.EventArgs e)
+        {
+            RadioDSP.KeyerReversePaddle = chkCWKeyerRevPdl.Checked;
+        }
+
+        private void comboKeyerConnPrimary_SelectedIndexChanged(object sender, System.EventArgs e)
+        {
+            bool running = System.Convert.ToBoolean(DttSP.KeyerRunning());
+            if (running) DttSP.StopKeyer();
+            Thread.Sleep(40);
+            console.Keyer.PrimaryConnPort = comboKeyerConnPrimary.Text;
+            if (console.Keyer.PrimaryConnPort == "SDR" && comboKeyerConnPrimary.Text != "SDR")
+                comboKeyerConnPrimary.Text = "SDR";
+            if (running) DttSP.StartKeyer();
+        }
+
+        private void comboKeyerConnSecondary_SelectedIndexChanged(object sender, System.EventArgs e)
+        {
+            if (initializing) return;
+            bool running = System.Convert.ToBoolean(DttSP.KeyerRunning());
+            if (running) DttSP.StopKeyer();
+            Thread.Sleep(10);
+            if (comboKeyerConnSecondary.Text == "CAT" && !chkCATEnable.Checked)
+            {
+                MessageBox.Show("CAT is not Enabled.  Please enable the CAT interface before selecting this option.",
+                    "CAT not enabled",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Hand);
+                comboKeyerConnSecondary.Text = "None";
+                return;
+            }
+
+            console.Keyer.SecondaryConnPort = comboKeyerConnSecondary.Text;
+            switch (comboKeyerConnSecondary.Text)
+            {
+                case "None":
+                    lblKeyerConnPTTLine.Visible = false;
+                    comboKeyerConnPTTLine.Visible = false;
+                    lblKeyerConnKeyLine.Visible = false;
+                    comboKeyerConnKeyLine.Visible = false;
+                    break;
+                case "CAT":
+                    lblKeyerConnPTTLine.Visible = true;
+                    comboKeyerConnPTTLine.Visible = true;
+                    lblKeyerConnKeyLine.Visible = true;
+                    comboKeyerConnKeyLine.Visible = true;
+                    break;
+                default: // COMx
+                    lblKeyerConnPTTLine.Visible = true;
+                    comboKeyerConnPTTLine.Visible = true;
+                    lblKeyerConnKeyLine.Visible = true;
+                    comboKeyerConnKeyLine.Visible = true;
+                    break;
+            }
+            if (console.Keyer.SecondaryConnPort == "None" && comboKeyerConnSecondary.Text != "None")
+                comboKeyerConnSecondary.Text = "None";
+            if (running) DttSP.StartKeyer();
+        }
+
+        private void comboKeyerConnKeyLine_SelectedIndexChanged(object sender, System.EventArgs e)
+        {
+            if (comboKeyerConnKeyLine.SelectedIndex < 0) return;
+            console.Keyer.SecondaryKeyLine = (KeyerLine)comboKeyerConnKeyLine.SelectedIndex;
+        }
+
+        private void comboKeyerConnPTTLine_SelectedIndexChanged(object sender, System.EventArgs e)
+        {
+            if (comboKeyerConnPTTLine.SelectedIndex < 0) return;
+            console.Keyer.SecondaryPTTLine = (KeyerLine)comboKeyerConnPTTLine.SelectedIndex;
+        }
+
+        #endregion
+
+        #region AGC
+
+        private void udDSPAGCFixedGaindB_ValueChanged(object sender, System.EventArgs e)
+        {
+            console.radio.GetDSPRX(0, 0).RXFixedAGC = (double)udDSPAGCFixedGaindB.Value;
+            console.radio.GetDSPRX(0, 1).RXFixedAGC = (double)udDSPAGCFixedGaindB.Value;
+
+            if (console.RX1AGCMode == AGCMode.FIXD)
+                console.RF = (int)udDSPAGCFixedGaindB.Value;
+        }
+
+        private void udDSPAGCMaxGaindB_ValueChanged(object sender, System.EventArgs e)
+        {
+            console.radio.GetDSPRX(0, 0).RXAGCMaxGain = (double)udDSPAGCMaxGaindB.Value;
+            console.radio.GetDSPRX(0, 1).RXAGCMaxGain = (double)udDSPAGCMaxGaindB.Value;
+
+            if (console.RX1AGCMode != AGCMode.FIXD)
+                console.RF = (int)udDSPAGCMaxGaindB.Value;
+        }
+
+        private void udDSPAGCAttack_ValueChanged(object sender, System.EventArgs e)
+        {
+            if (udDSPAGCAttack.Enabled)
+            {
+                console.radio.GetDSPRX(0, 0).RXAGCAttack = (int)udDSPAGCAttack.Value;
+                console.radio.GetDSPRX(0, 1).RXAGCAttack = (int)udDSPAGCAttack.Value;
+            }
+        }
+
+        private void udDSPAGCDecay_ValueChanged(object sender, System.EventArgs e)
+        {
+            if (udDSPAGCDecay.Enabled)
+            {
+                console.radio.GetDSPRX(0, 0).RXAGCDecay = (int)udDSPAGCDecay.Value;
+                console.radio.GetDSPRX(0, 1).RXAGCDecay = (int)udDSPAGCDecay.Value;
+            }
+        }
+
+        private void udDSPAGCSlope_ValueChanged(object sender, System.EventArgs e)
+        {
+            console.radio.GetDSPRX(0, 0).RXAGCSlope = 10 * (int)(udDSPAGCSlope.Value);
+            console.radio.GetDSPRX(0, 1).RXAGCSlope = 10 * (int)(udDSPAGCSlope.Value);
+        }
+
+        private void udDSPAGCHangTime_ValueChanged(object sender, System.EventArgs e)
+        {
+            if (udDSPAGCHangTime.Enabled)
+            {
+                console.radio.GetDSPRX(0, 0).RXAGCHang = (int)udDSPAGCHangTime.Value;
+                console.radio.GetDSPRX(0, 1).RXAGCHang = (int)udDSPAGCHangTime.Value;
+            }
+        }
+
+        private void tbDSPAGCHangThreshold_Scroll(object sender, System.EventArgs e)
+        {
+            console.radio.GetDSPRX(0, 0).RXAGCHangThreshold = (int)tbDSPAGCHangThreshold.Value;
+            console.radio.GetDSPRX(0, 1).RXAGCHangThreshold = (int)tbDSPAGCHangThreshold.Value;
+        }
+
+        #endregion
+
+        #region Leveler
+
+        private void udDSPLevelerHangTime_ValueChanged(object sender, System.EventArgs e)
+        {
+            console.radio.GetDSPTX(0).TXLevelerHang = (int)udDSPLevelerHangTime.Value;
+        }
+
+        private void tbDSPLevelerHangThreshold_Scroll(object sender, System.EventArgs e)
+        {
+
+        }
+
+        private void udDSPLevelerSlope_ValueChanged(object sender, System.EventArgs e)
+        {
+
+        }
+
+        private void udDSPLevelerThreshold_ValueChanged(object sender, System.EventArgs e)
+        {
+            console.radio.GetDSPTX(0).TXLevelerMaxGain = (double)udDSPLevelerThreshold.Value;
+        }
+
+        private void udDSPLevelerAttack_ValueChanged(object sender, System.EventArgs e)
+        {
+            console.radio.GetDSPTX(0).TXLevelerAttack = (int)udDSPLevelerAttack.Value;
+        }
+
+        private void udDSPLevelerDecay_ValueChanged(object sender, System.EventArgs e)
+        {
+            console.radio.GetDSPTX(0).TXLevelerDecay = (int)udDSPLevelerDecay.Value;
+        }
+
+        private void chkDSPLevelerEnabled_CheckedChanged(object sender, System.EventArgs e)
+        {
+            console.radio.GetDSPTX(0).TXLevelerOn = chkDSPLevelerEnabled.Checked;
+        }
+
+        #endregion
+
+        #region ALC
+
+        private void udDSPALCHangTime_ValueChanged(object sender, System.EventArgs e)
+        {
+            console.radio.GetDSPTX(0).TXALCHang = (int)udDSPALCHangTime.Value;
+        }
+
+        private void udDSPALCThreshold_ValueChanged(object sender, System.EventArgs e)
+        {
+            //DttSP.SetTXALCBot((double)udDSPALCThreshold.Value);
+        }
+
+        private void udDSPALCAttack_ValueChanged(object sender, System.EventArgs e)
+        {
+            console.radio.GetDSPTX(0).TXALCAttack = (int)udDSPALCAttack.Value;
+        }
+
+        private void udDSPALCDecay_ValueChanged(object sender, System.EventArgs e)
+        {
+            console.radio.GetDSPTX(0).TXALCDecay = (int)udDSPALCDecay.Value;
+        }
+
+        #endregion
+
+        #endregion
+
+        #region Transmit Tab Event Handlers
+
+        private void udTXFilterHigh_ValueChanged(object sender, System.EventArgs e)
+        {
+            if (udTXFilterHigh.Value < udTXFilterLow.Value + 100)
+            {
+                udTXFilterHigh.Value = udTXFilterLow.Value + 100;
+                return;
+            }
+
+            if (udTXFilterHigh.Focused &&
+                (udTXFilterHigh.Value - udTXFilterLow.Value) > 3000 &&
+                (console.TXFilterHigh - console.TXFilterLow) <= 3000)
+            {
+                (new Thread(new ThreadStart(TXBW))).Start();
+            }
+
+            console.TXFilterHigh = (int)udTXFilterHigh.Value;
+
+        }
+
+        private void TXBW()
+        {
+            MessageBox.Show("The transmit bandwidth is being increased beyond 3kHz.\n\n" +
+                "As the control operator, you are responsible for compliance with current " +
+                "rules and good operating practice.",
+                "Warning: Transmit Bandwidth",
+                MessageBoxButtons.OK,
+                MessageBoxIcon.Warning);
+        }
+
+        private void udTXFilterLow_ValueChanged(object sender, System.EventArgs e)
+        {
+            if (udTXFilterLow.Value > udTXFilterHigh.Value - 100)
+            {
+                udTXFilterLow.Value = udTXFilterHigh.Value - 100;
+                return;
+            }
+
+            if (udTXFilterLow.Focused &&
+                (udTXFilterHigh.Value - udTXFilterLow.Value) > 3000 &&
+                (console.TXFilterHigh - console.TXFilterLow) <= 3000)
+            {
+                (new Thread(new ThreadStart(TXBW))).Start();
+            }
+
+            console.TXFilterLow = (int)udTXFilterLow.Value;
+        }
+
+        private void udTransmitTunePower_ValueChanged(object sender, System.EventArgs e)
+        {
+            console.TunePower = (int)udTXTunePower.Value;
+        }
+
+        private string current_profile = "";
+        private void comboTXProfileName_SelectedIndexChanged(object sender, System.EventArgs e)
+        {
+            if (comboTXProfileName.SelectedIndex < 0 || initializing)
+                return;
+
+            if (CheckTXProfileChanged() && comboTXProfileName.Focused)
+            {
+                DialogResult result = MessageBox.Show("The current profile has changed.  " +
+                    "Would you like to save the current profile?",
+                    "Save Current Profile?",
+                    MessageBoxButtons.YesNoCancel,
+                    MessageBoxIcon.Question);
+
+                if (result == DialogResult.Yes)
+                {
+                    btnTXProfileSave_Click(this, EventArgs.Empty);
+                    //return;
+                }
+                else if (result == DialogResult.Cancel)
+                    return;
+            }
+
+            console.TXProfile = comboTXProfileName.Text;
+            DataRow[] rows = DB.ds.Tables["TxProfile"].Select(
+                "'" + comboTXProfileName.Text + "' = Name");
+
+            if (rows.Length != 1)
+            {
+                MessageBox.Show("Database error reading TxProfile Table.",
+                    "Database error",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
+                return;
+            }
+
+            DataRow dr = rows[0];
+            int[] eq = null;
+            eq = new int[11];
+
+            console.EQForm.TXEQEnabled = (bool)dr["TXEQEnabled"];
+            console.EQForm.NumBands = (int)dr["TXEQNumBands"];
+
+            eq[0] = (int)dr["TXEQPreamp"];
+            for (int i = 1; i < eq.Length; i++)
+                eq[i] = (int)dr["TXEQ" + i.ToString()];
+            console.EQForm.TXEQ = eq;
+
+            udTXFilterLow.Value = Math.Min(Math.Max((int)dr["FilterLow"], udTXFilterLow.Minimum), udTXFilterLow.Maximum);
+            udTXFilterHigh.Value = Math.Min(Math.Max((int)dr["FilterHigh"], udTXFilterHigh.Minimum), udTXFilterHigh.Maximum);
+
+            console.DX = (bool)dr["DXOn"];
+            console.DXLevel = (int)dr["DXLevel"];
+
+            console.CPDR = (bool)dr["CompanderOn"];
+            console.CPDRLevel = (int)dr["CompanderLevel"];
+
+            console.Mic = (int)dr["MicGain"];
+
+            chkDSPLevelerEnabled.Checked = (bool)dr["Lev_On"];
+            udDSPLevelerSlope.Value = (int)dr["Lev_Slope"];
+            udDSPLevelerThreshold.Value = (int)dr["Lev_MaxGain"];
+            udDSPLevelerAttack.Value = (int)dr["Lev_Attack"];
+            udDSPLevelerDecay.Value = (int)dr["Lev_Decay"];
+            udDSPLevelerHangTime.Value = (int)dr["Lev_Hang"];
+            tbDSPLevelerHangThreshold.Value = (int)dr["Lev_HangThreshold"];
+
+            udDSPALCSlope.Value = (int)dr["ALC_Slope"];
+            udDSPALCThreshold.Value = (int)dr["ALC_MaxGain"];
+            udDSPALCAttack.Value = (int)dr["ALC_Attack"];
+            udDSPALCDecay.Value = (int)dr["ALC_Decay"];
+            udDSPALCHangTime.Value = (int)dr["ALC_Hang"];
+            tbDSPALCHangThreshold.Value = (int)dr["ALC_HangThreshold"];
+
+            console.PWR = (int)dr["Power"];
+
+            current_profile = comboTXProfileName.Text;
+        }
+
+        private void btnTXProfileSave_Click(object sender, System.EventArgs e)
+        {
+            string name = InputBox.Show("Save Profile", "Please enter a profile name:",
+                current_profile);
+
+            if (name == "" || name == null)
+            {
+                MessageBox.Show("TX Profile Save cancelled",
+                    "TX Profile",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Information);
+                return;
+            }
+
+            DataRow dr = null;
+            if (comboTXProfileName.Items.Contains(name))
+            {
+                DialogResult result = MessageBox.Show(
+                    "Are you sure you want to overwrite the " + name + " TX Profile?",
+                    "Overwrite Profile?",
+                    MessageBoxButtons.YesNo,
+                    MessageBoxIcon.Question);
+
+                if (result == DialogResult.No)
+                    return;
+
+                foreach (DataRow d in DB.ds.Tables["TxProfile"].Rows)
+                {
+                    if ((string)d["Name"] == name)
+                    {
+                        dr = d;
+                        break;
+                    }
+                }
+            }
+            else
+            {
+                dr = DB.ds.Tables["TxProfile"].NewRow();
+                dr["Name"] = name;
+            }
+
+            dr["FilterLow"] = (int)udTXFilterLow.Value;
+            dr["FilterHigh"] = (int)udTXFilterHigh.Value;
+            dr["TXEQEnabled"] = console.EQForm.TXEQEnabled;
+            dr["TXEQNumBands"] = console.EQForm.NumBands;
+            int[] eq = console.EQForm.TXEQ;
+            dr["TXEQPreamp"] = eq[0];
+            for (int i = 1; i < eq.Length; i++)
+                dr["TXEQ" + i.ToString()] = eq[i];
+            for (int i = eq.Length; i < 11; i++)
+                dr["TXEQ" + i.ToString()] = 0;
+
+            dr["DXOn"] = console.DX;
+            dr["DXLevel"] = console.DXLevel;
+            dr["CompanderOn"] = console.CPDR;
+            dr["CompanderLevel"] = console.CPDRLevel;
+            dr["MicGain"] = console.Mic;
+
+            dr["Lev_On"] = chkDSPLevelerEnabled.Checked;
+            dr["Lev_Slope"] = (int)udDSPLevelerSlope.Value;
+            dr["Lev_MaxGain"] = (int)udDSPLevelerThreshold.Value;
+            dr["Lev_Attack"] = (int)udDSPLevelerAttack.Value;
+            dr["Lev_Decay"] = (int)udDSPLevelerDecay.Value;
+            dr["Lev_Hang"] = (int)udDSPLevelerHangTime.Value;
+            dr["Lev_HangThreshold"] = tbDSPLevelerHangThreshold.Value;
+
+            dr["ALC_Slope"] = (int)udDSPALCSlope.Value;
+            dr["ALC_MaxGain"] = (int)udDSPALCThreshold.Value;
+            dr["ALC_Attack"] = (int)udDSPALCAttack.Value;
+            dr["ALC_Decay"] = (int)udDSPALCDecay.Value;
+            dr["ALC_Hang"] = (int)udDSPALCHangTime.Value;
+            dr["ALC_HangThreshold"] = tbDSPALCHangThreshold.Value;
+
+            dr["Power"] = console.PWR;
+
+            if (!comboTXProfileName.Items.Contains(name))
+            {
+                DB.ds.Tables["TxProfile"].Rows.Add(dr);
+                comboTXProfileName.Items.Add(name);
+                comboTXProfileName.Text = name;
+            }
+
+            console.UpdateTXProfile(name);
+        }
+
+        private void btnTXProfileDelete_Click(object sender, System.EventArgs e)
+        {
+            DialogResult dr = MessageBox.Show(
+                "Are you sure you want to delete the " + comboTXProfileName.Text + " TX Profile?",
+                "Delete Profile?",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Warning);
+
+            if (dr == DialogResult.No)
+                return;
+
+            DataRow[] rows = DB.ds.Tables["TxProfile"].Select(
+                "'" + comboTXProfileName.Text + "' = Name");
+
+            if (rows.Length == 1)
+                rows[0].Delete();
+
+            int index = comboTXProfileName.SelectedIndex;
+            comboTXProfileName.Items.Remove(comboTXProfileName.Text);
+            if (comboTXProfileName.Items.Count > 0)
+            {
+                if (index > comboTXProfileName.Items.Count - 1)
+                    index = comboTXProfileName.Items.Count - 1;
+                comboTXProfileName.SelectedIndex = index;
+            }
+
+            console.UpdateTXProfile(comboTXProfileName.Text);
+        }
+
+        private void chkDCBlock_CheckedChanged(object sender, System.EventArgs e)
+        {
+            console.radio.GetDSPTX(0).DCBlock = chkDCBlock.Checked;
+        }
+
+        private void chkTXVOXEnabled_CheckedChanged(object sender, System.EventArgs e)
+        {
+            Audio.VOXEnabled = chkTXVOXEnabled.Checked;
+            console.VOXEnable = chkTXVOXEnabled.Checked;
+        }
+
+        private void udTXVOXThreshold_ValueChanged(object sender, System.EventArgs e)
+        {
+            Audio.VOXThreshold = (float)udTXVOXThreshold.Value / 10000.0f;
+            console.VOXSens = (int)udTXVOXThreshold.Value;
+        }
+
+        private void udTXVOXHangTime_ValueChanged(object sender, System.EventArgs e)
+        {
+            console.VOXHangTime = (int)udTXVOXHangTime.Value;
+        }
+
+        private void udTXNoiseGate_ValueChanged(object sender, System.EventArgs e)
+        {
+            console.radio.GetDSPTX(0).TXSquelchThreshold = (float)udTXNoiseGate.Value;
+            console.NoiseGate = (int)udTXNoiseGate.Value;
+        }
+
+        private void chkTXNoiseGateEnabled_CheckedChanged(object sender, System.EventArgs e)
+        {
+            console.radio.GetDSPTX(0).TXSquelchOn = chkTXNoiseGateEnabled.Checked;
+            console.NoiseGateEnabled = chkTXNoiseGateEnabled.Checked;
+        }
+
+        private void udTXAF_ValueChanged(object sender, System.EventArgs e)
+        {
+            console.TXAF = (int)udTXAF.Value;
+        }
+
+        private void udTXAMCarrierLevel_ValueChanged(object sender, System.EventArgs e)
+        {
+            console.radio.GetDSPTX(0).TXAMCarrierLevel = Math.Sqrt(0.01 * (double)udTXAMCarrierLevel.Value) * 0.5;
+        }
+
+        #endregion
+
+        #region PA Settings Tab Event Handlers
+
+        private void btnPAGainCalibration_Click(object sender, System.EventArgs e)
+        {
+            string s = "Is a 50 Ohm dummy load connected to the amplifier?\n" +
+                "Failure to use a dummy load with this routine could cause damage to the amplifier.";
+            if (radGenModelFLEX5000.Checked)
+            {
+                s = "Is a 50 Ohm dummy load connected to the correct antenna port (";
+                switch (FWCAnt.ANT1)
+                {
+                    case FWCAnt.ANT1: s += "ANT 1"; break;
+                    /*case FWCAnt.ANT2: s += "ANT 2"; break;
+                    case FWCAnt.ANT3: s += "ANT 3"; break;*/
+                }
+                s += ")?\nFailure to connect a dummy load properly could cause damage to the radio.";
+            }
+            DialogResult dr = MessageBox.Show(s,
+                "Warning: Is dummy load properly connected?",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Warning);
+
+            if (dr == DialogResult.No)
+                return;
+
+            btnPAGainCalibration.Enabled = false;
+            progress = new Progress("Calibrate PA Gain");
+
+            Thread t = new Thread(new ThreadStart(CalibratePAGain));
+            t.Name = "PA Gain Calibration Thread";
+            t.IsBackground = true;
+            t.Priority = ThreadPriority.AboveNormal;
+            t.Start();
+
+            if (console.PowerOn)
+                progress.Show();
+        }
+
+        private void CalibratePAGain()
+        {
+            bool[] run = new bool[11];
+
+            if (radPACalAllBands.Checked)
+            {
+                for (int i = 0; i < 11; i++) run[i] = true;
+            }
+            else
+            {
+                run[0] = chkPA160.Checked;
+                run[1] = chkPA80.Checked;
+                run[2] = chkPA60.Checked;
+                run[3] = chkPA40.Checked;
+                run[4] = chkPA30.Checked;
+                run[5] = chkPA20.Checked;
+                run[6] = chkPA17.Checked;
+                run[7] = chkPA15.Checked;
+                run[8] = chkPA12.Checked;
+                run[9] = chkPA10.Checked;
+                run[10] = chkPA6.Checked;
+            }
+            bool done = false;
+            if (chkPANewCal.Checked) done = console.CalibratePAGain2(progress, run, false);
+            else done = console.CalibratePAGain(progress, run, (int)udPACalPower.Value);
+            if (done) MessageBox.Show("PA Gain Calibration complete.");
+            btnPAGainCalibration.Enabled = true;
+        }
+
+        private void udPAGain_ValueChanged(object sender, System.EventArgs e)
+        {
+            console.PWR = console.PWR;
+        }
+
+        private void btnPAGainReset_Click(object sender, System.EventArgs e)
+        {
+            udPAGain160.Value = 48.0M;
+            udPAGain80.Value = 48.0M;
+            udPAGain60.Value = 48.0M;
+            udPAGain40.Value = 48.0M;
+            udPAGain30.Value = 48.0M;
+            udPAGain20.Value = 48.0M;
+            udPAGain17.Value = 48.0M;
+            udPAGain15.Value = 48.0M;
+            udPAGain12.Value = 48.0M;
+            udPAGain10.Value = 48.0M;
+            udPAGain6.Value = 48.0M;
+        }
+
+        #endregion
+
+        #region Appearance Tab Event Handlers
+
+        private void clrbtnBackground_Changed(object sender, System.EventArgs e)
+        {
+            Display.DisplayBackgroundColor = clrbtnBackground.Color;
+        }
+
+        private void clrbtnGrid_Changed(object sender, System.EventArgs e)
+        {
+            Display.GridColor = clrbtnGrid.Color;
+        }
+
+        private void clrbtnZeroLine_Changed(object sender, System.EventArgs e)
+        {
+            Display.GridZeroColor = clrbtnZeroLine.Color;
+        }
+
+        private void clrbtnText_Changed(object sender, System.EventArgs e)
+        {
+            Display.GridTextColor = clrbtnText.Color;
+        }
+
+        private void clrbtnDataLine_Changed(object sender, System.EventArgs e)
+        {
+            Display.DataLineColor = clrbtnDataLine.Color;
+        }
+
+        private void clrbtnFilter_Changed(object sender, System.EventArgs e)
+        {
+            Display.DisplayFilterColor = Color.FromArgb(tbRX1FilterAlpha.Value, clrbtnFilter.Color);
+        }
+
+        private void udDisplayLineWidth_ValueChanged(object sender, System.EventArgs e)
+        {
+            Display.DisplayLineWidth = (float)udDisplayLineWidth.Value;
+        }
+
+        private void clrbtnMeterLeft_Changed(object sender, System.EventArgs e)
+        {
+            console.MeterLeftColor = clrbtnMeterLeft.Color;
+        }
+
+        private void clrbtnMeterRight_Changed(object sender, System.EventArgs e)
+        {
+            console.MeterRightColor = clrbtnMeterRight.Color;
+        }
+
+        private void clrbtnBtnSel_Changed(object sender, System.EventArgs e)
+        {
+            console.ButtonSelectedColor = clrbtnBtnSel.Color;
+        }
+
+        private void clrbtnVFODark_Changed(object sender, System.EventArgs e)
+        {
+            console.VFOTextDarkColor = clrbtnVFODark.Color;
+        }
+
+        private void clrbtnVFOLight_Changed(object sender, System.EventArgs e)
+        {
+            console.VFOTextLightColor = clrbtnVFOLight.Color;
+        }
+
+        private void clrbtnBandDark_Changed(object sender, System.EventArgs e)
+        {
+            console.BandTextDarkColor = clrbtnBandDark.Color;
+        }
+
+        private void clrbtnBandLight_Changed(object sender, System.EventArgs e)
+        {
+            console.BandTextLightColor = clrbtnBandLight.Color;
+        }
+
+        private void clrbtnPeakText_Changed(object sender, System.EventArgs e)
+        {
+            console.PeakTextColor = clrbtnPeakText.Color;
+        }
+
+        private void clrbtnOutOfBand_Changed(object sender, System.EventArgs e)
+        {
+            console.OutOfBandColor = clrbtnOutOfBand.Color;
+        }
+
+        private void chkVFOSmallLSD_CheckedChanged(object sender, System.EventArgs e)
+        {
+            console.SmallLSD = chkVFOSmallLSD.Checked;
+        }
+
+        private void clrbtnVFOSmallColor_Changed(object sender, System.EventArgs e)
+        {
+            console.SmallVFOColor = clrbtnVFOSmallColor.Color;
+        }
+
+        private void clrbtnPeakBackground_Changed(object sender, System.EventArgs e)
+        {
+            console.PeakBackgroundColor = clrbtnPeakBackground.Color;
+        }
+
+        private void clrbtnMeterBackground_Changed(object sender, System.EventArgs e)
+        {
+            console.MeterBackgroundColor = clrbtnMeterBackground.Color;
+        }
+
+        private void clrbtnBandBackground_Changed(object sender, System.EventArgs e)
+        {
+            console.BandBackgroundColor = clrbtnBandBackground.Color;
+        }
+
+        private void clrbtnVFOBackground_Changed(object sender, System.EventArgs e)
+        {
+            console.VFOBackgroundColor = clrbtnVFOBackground.Color;
+        }
+
+        #endregion
+
+        #region Keyboard Tab Event Handlers
+
+        private void comboKBTuneUp1_SelectedIndexChanged(object sender, System.EventArgs e)
+        {
+            console.KeyTuneUp1 = (Keys)KeyList[comboKBTuneUp1.SelectedIndex];
+        }
+
+        private void comboKBTuneDown1_SelectedIndexChanged(object sender, System.EventArgs e)
+        {
+            console.KeyTuneDown1 = (Keys)KeyList[comboKBTuneDown1.SelectedIndex];
+        }
+
+        private void comboKBTuneUp2_SelectedIndexChanged(object sender, System.EventArgs e)
+        {
+            console.KeyTuneUp2 = (Keys)KeyList[comboKBTuneUp2.SelectedIndex];
+        }
+
+        private void comboKBTuneDown2_SelectedIndexChanged(object sender, System.EventArgs e)
+        {
+            console.KeyTuneDown2 = (Keys)KeyList[comboKBTuneDown2.SelectedIndex];
+        }
+
+        private void comboKBTuneUp3_SelectedIndexChanged(object sender, System.EventArgs e)
+        {
+            console.KeyTuneUp3 = (Keys)KeyList[comboKBTuneUp3.SelectedIndex];
+        }
+
+        private void comboKBTuneDown3_SelectedIndexChanged(object sender, System.EventArgs e)
+        {
+            console.KeyTuneDown3 = (Keys)KeyList[comboKBTuneDown3.SelectedIndex];
+        }
+
+        private void comboKBTuneUp4_SelectedIndexChanged(object sender, System.EventArgs e)
+        {
+            console.KeyTuneUp4 = (Keys)KeyList[comboKBTuneUp4.SelectedIndex];
+        }
+
+        private void comboKBTuneDown4_SelectedIndexChanged(object sender, System.EventArgs e)
+        {
+            console.KeyTuneDown4 = (Keys)KeyList[comboKBTuneDown4.SelectedIndex];
+        }
+
+        private void comboKBTuneUp5_SelectedIndexChanged(object sender, System.EventArgs e)
+        {
+            console.KeyTuneUp5 = (Keys)KeyList[comboKBTuneUp5.SelectedIndex];
+        }
+
+        private void comboKBTuneDown5_SelectedIndexChanged(object sender, System.EventArgs e)
+        {
+            console.KeyTuneDown5 = (Keys)KeyList[comboKBTuneDown5.SelectedIndex];
+        }
+
+        private void comboKBTuneUp6_SelectedIndexChanged(object sender, System.EventArgs e)
+        {
+            console.KeyTuneUp6 = (Keys)KeyList[comboKBTuneUp6.SelectedIndex];
+        }
+
+        private void comboKBTuneDown6_SelectedIndexChanged(object sender, System.EventArgs e)
+        {
+            console.KeyTuneDown6 = (Keys)KeyList[comboKBTuneDown6.SelectedIndex];
+        }
+
+        private void comboKBTuneUp7_SelectedIndexChanged(object sender, System.EventArgs e)
+        {
+            console.KeyTuneUp7 = (Keys)KeyList[comboKBTuneUp7.SelectedIndex];
+        }
+
+        private void comboKBTuneDown7_SelectedIndexChanged(object sender, System.EventArgs e)
+        {
+            console.KeyTuneDown7 = (Keys)KeyList[comboKBTuneDown7.SelectedIndex];
+        }
+
+        private void comboKBBandUp_SelectedIndexChanged(object sender, System.EventArgs e)
+        {
+            console.KeyBandUp = (Keys)KeyList[comboKBBandUp.SelectedIndex];
+        }
+
+        private void comboKBBandDown_SelectedIndexChanged(object sender, System.EventArgs e)
+        {
+            console.KeyBandDown = (Keys)KeyList[comboKBBandDown.SelectedIndex];
+        }
+
+        private void comboKBFilterUp_SelectedIndexChanged(object sender, System.EventArgs e)
+        {
+            console.KeyFilterUp = (Keys)KeyList[comboKBFilterUp.SelectedIndex];
+        }
+
+        private void comboKBFilterDown_SelectedIndexChanged(object sender, System.EventArgs e)
+        {
+            console.KeyFilterDown = (Keys)KeyList[comboKBFilterDown.SelectedIndex];
+        }
+
+        private void comboKBModeUp_SelectedIndexChanged(object sender, System.EventArgs e)
+        {
+            console.KeyModeUp = (Keys)KeyList[comboKBModeUp.SelectedIndex];
+        }
+
+        private void comboKBModeDown_SelectedIndexChanged(object sender, System.EventArgs e)
+        {
+            console.KeyModeDown = (Keys)KeyList[comboKBModeDown.SelectedIndex];
+        }
+
+        private void comboKBCWDot_SelectedIndexChanged(object sender, System.EventArgs e)
+        {
+            console.KeyCWDot = (Keys)KeyList[comboKBCWDot.SelectedIndex];
+        }
+
+        private void comboKBCWDash_SelectedIndexChanged(object sender, System.EventArgs e)
+        {
+            console.KeyCWDash = (Keys)KeyList[comboKBCWDash.SelectedIndex];
+        }
+
+        private void comboKBRITUp_SelectedIndexChanged(object sender, System.EventArgs e)
+        {
+            console.KeyRITUp = (Keys)KeyList[comboKBRITUp.SelectedIndex];
+        }
+
+        private void comboKBRITDown_SelectedIndexChanged(object sender, System.EventArgs e)
+        {
+            console.KeyRITDown = (Keys)KeyList[comboKBRITDown.SelectedIndex];
+        }
+
+        private void comboKBXITUp_SelectedIndexChanged(object sender, System.EventArgs e)
+        {
+            console.KeyXITUp = (Keys)KeyList[comboKBXITUp.SelectedIndex];
+        }
+
+        private void comboKBXITDown_SelectedIndexChanged(object sender, System.EventArgs e)
+        {
+            console.KeyXITDown = (Keys)KeyList[comboKBXITDown.SelectedIndex];
+        }
+
+        #endregion
+
+        #region Ext Ctrl Tab Event Handlers
+
+        private void chkExtRX160_CheckedChanged(object sender, System.EventArgs e)
+        {
+            int val = 0;
+            if (chkExtRX1601.Checked) val += 1 << 0;
+            if (chkExtRX1602.Checked) val += 1 << 1;
+            if (chkExtRX1603.Checked) val += 1 << 2;
+            if (chkExtRX1604.Checked) val += 1 << 3;
+            if (chkExtRX1605.Checked) val += 1 << 4;
+            if (chkExtRX1606.Checked) val += 1 << 5;
+
+            console.X2160RX = (byte)val;
+        }
+
+        private void chkExtTX160_CheckedChanged(object sender, System.EventArgs e)
+        {
+            int val = 0;
+            if (chkExtTX1601.Checked) val += 1 << 0;
+            if (chkExtTX1602.Checked) val += 1 << 1;
+            if (chkExtTX1603.Checked) val += 1 << 2;
+            if (chkExtTX1604.Checked) val += 1 << 3;
+            if (chkExtTX1605.Checked) val += 1 << 4;
+            if (chkExtTX1606.Checked) val += 1 << 5;
+
+            console.X2160TX = (byte)val;
+        }
+
+        private void chkExtRX80_CheckedChanged(object sender, System.EventArgs e)
+        {
+            int val = 0;
+            if (chkExtRX801.Checked) val += 1 << 0;
+            if (chkExtRX802.Checked) val += 1 << 1;
+            if (chkExtRX803.Checked) val += 1 << 2;
+            if (chkExtRX804.Checked) val += 1 << 3;
+            if (chkExtRX805.Checked) val += 1 << 4;
+            if (chkExtRX806.Checked) val += 1 << 5;
+
+            console.X280RX = (byte)val;
+        }
+
+        private void chkExtTX80_CheckedChanged(object sender, System.EventArgs e)
+        {
+            int val = 0;
+            if (chkExtTX801.Checked) val += 1 << 0;
+            if (chkExtTX802.Checked) val += 1 << 1;
+            if (chkExtTX803.Checked) val += 1 << 2;
+            if (chkExtTX804.Checked) val += 1 << 3;
+            if (chkExtTX805.Checked) val += 1 << 4;
+            if (chkExtTX806.Checked) val += 1 << 5;
+
+            console.X280TX = (byte)val;
+        }
+
+        private void chkExtRX60_CheckedChanged(object sender, System.EventArgs e)
+        {
+            int val = 0;
+            if (chkExtRX601.Checked) val += 1 << 0;
+            if (chkExtRX602.Checked) val += 1 << 1;
+            if (chkExtRX603.Checked) val += 1 << 2;
+            if (chkExtRX604.Checked) val += 1 << 3;
+            if (chkExtRX605.Checked) val += 1 << 4;
+            if (chkExtRX606.Checked) val += 1 << 5;
+
+            console.X260RX = (byte)val;
+        }
+
+        private void chkExtTX60_CheckedChanged(object sender, System.EventArgs e)
+        {
+            int val = 0;
+            if (chkExtTX601.Checked) val += 1 << 0;
+            if (chkExtTX602.Checked) val += 1 << 1;
+            if (chkExtTX603.Checked) val += 1 << 2;
+            if (chkExtTX604.Checked) val += 1 << 3;
+            if (chkExtTX605.Checked) val += 1 << 4;
+            if (chkExtTX606.Checked) val += 1 << 5;
+
+            console.X260TX = (byte)val;
+        }
+
+        private void chkExtRX40_CheckedChanged(object sender, System.EventArgs e)
+        {
+            int val = 0;
+            if (chkExtRX401.Checked) val += 1 << 0;
+            if (chkExtRX402.Checked) val += 1 << 1;
+            if (chkExtRX403.Checked) val += 1 << 2;
+            if (chkExtRX404.Checked) val += 1 << 3;
+            if (chkExtRX405.Checked) val += 1 << 4;
+            if (chkExtRX406.Checked) val += 1 << 5;
+
+            console.X240RX = (byte)val;
+        }
+
+        private void chkExtTX40_CheckedChanged(object sender, System.EventArgs e)
+        {
+            int val = 0;
+            if (chkExtTX401.Checked) val += 1 << 0;
+            if (chkExtTX402.Checked) val += 1 << 1;
+            if (chkExtTX403.Checked) val += 1 << 2;
+            if (chkExtTX404.Checked) val += 1 << 3;
+            if (chkExtTX405.Checked) val += 1 << 4;
+            if (chkExtTX406.Checked) val += 1 << 5;
+
+            console.X240TX = (byte)val;
+        }
+
+        private void chkExtRX30_CheckedChanged(object sender, System.EventArgs e)
+        {
+            int val = 0;
+            if (chkExtRX301.Checked) val += 1 << 0;
+            if (chkExtRX302.Checked) val += 1 << 1;
+            if (chkExtRX303.Checked) val += 1 << 2;
+            if (chkExtRX304.Checked) val += 1 << 3;
+            if (chkExtRX305.Checked) val += 1 << 4;
+            if (chkExtRX306.Checked) val += 1 << 5;
+
+            console.X230RX = (byte)val;
+        }
+
+        private void chkExtTX30_CheckedChanged(object sender, System.EventArgs e)
+        {
+            int val = 0;
+            if (chkExtTX301.Checked) val += 1 << 0;
+            if (chkExtTX302.Checked) val += 1 << 1;
+            if (chkExtTX303.Checked) val += 1 << 2;
+            if (chkExtTX304.Checked) val += 1 << 3;
+            if (chkExtTX305.Checked) val += 1 << 4;
+            if (chkExtTX306.Checked) val += 1 << 5;
+
+            console.X230TX = (byte)val;
+        }
+
+        private void chkExtRX20_CheckedChanged(object sender, System.EventArgs e)
+        {
+            int val = 0;
+            if (chkExtRX201.Checked) val += 1 << 0;
+            if (chkExtRX202.Checked) val += 1 << 1;
+            if (chkExtRX203.Checked) val += 1 << 2;
+            if (chkExtRX204.Checked) val += 1 << 3;
+            if (chkExtRX205.Checked) val += 1 << 4;
+            if (chkExtRX306.Checked) val += 1 << 5;
+
+            console.X220RX = (byte)val;
+        }
+
+        private void chkExtTX20_CheckedChanged(object sender, System.EventArgs e)
+        {
+            int val = 0;
+            if (chkExtTX201.Checked) val += 1 << 0;
+            if (chkExtTX202.Checked) val += 1 << 1;
+            if (chkExtTX203.Checked) val += 1 << 2;
+            if (chkExtTX204.Checked) val += 1 << 3;
+            if (chkExtTX205.Checked) val += 1 << 4;
+            if (chkExtTX306.Checked) val += 1 << 5;
+
+            console.X220TX = (byte)val;
+        }
+
+        private void chkExtRX17_CheckedChanged(object sender, System.EventArgs e)
+        {
+            int val = 0;
+            if (chkExtRX171.Checked) val += 1 << 0;
+            if (chkExtRX172.Checked) val += 1 << 1;
+            if (chkExtRX173.Checked) val += 1 << 2;
+            if (chkExtRX174.Checked) val += 1 << 3;
+            if (chkExtRX175.Checked) val += 1 << 4;
+            if (chkExtRX176.Checked) val += 1 << 5;
+
+            console.X217RX = (byte)val;
+        }
+
+        private void chkExtTX17_CheckedChanged(object sender, System.EventArgs e)
+        {
+            int val = 0;
+            if (chkExtTX171.Checked) val += 1 << 0;
+            if (chkExtTX172.Checked) val += 1 << 1;
+            if (chkExtTX173.Checked) val += 1 << 2;
+            if (chkExtTX174.Checked) val += 1 << 3;
+            if (chkExtTX175.Checked) val += 1 << 4;
+            if (chkExtTX176.Checked) val += 1 << 5;
+
+            console.X217TX = (byte)val;
+        }
+
+        private void chkExtRX15_CheckedChanged(object sender, System.EventArgs e)
+        {
+            int val = 0;
+            if (chkExtRX151.Checked) val += 1 << 0;
+            if (chkExtRX152.Checked) val += 1 << 1;
+            if (chkExtRX153.Checked) val += 1 << 2;
+            if (chkExtRX154.Checked) val += 1 << 3;
+            if (chkExtRX155.Checked) val += 1 << 4;
+            if (chkExtRX156.Checked) val += 1 << 5;
+
+            console.X215RX = (byte)val;
+        }
+
+        private void chkExtTX15_CheckedChanged(object sender, System.EventArgs e)
+        {
+            int val = 0;
+            if (chkExtTX151.Checked) val += 1 << 0;
+            if (chkExtTX152.Checked) val += 1 << 1;
+            if (chkExtTX153.Checked) val += 1 << 2;
+            if (chkExtTX154.Checked) val += 1 << 3;
+            if (chkExtTX155.Checked) val += 1 << 4;
+            if (chkExtTX156.Checked) val += 1 << 5;
+
+            console.X215TX = (byte)val;
+        }
+
+        private void chkExtRX12_CheckedChanged(object sender, System.EventArgs e)
+        {
+            int val = 0;
+            if (chkExtRX121.Checked) val += 1 << 0;
+            if (chkExtRX122.Checked) val += 1 << 1;
+            if (chkExtRX123.Checked) val += 1 << 2;
+            if (chkExtRX124.Checked) val += 1 << 3;
+            if (chkExtRX125.Checked) val += 1 << 4;
+            if (chkExtRX126.Checked) val += 1 << 5;
+
+            console.X212RX = (byte)val;
+        }
+
+        private void chkExtTX12_CheckedChanged(object sender, System.EventArgs e)
+        {
+            int val = 0;
+            if (chkExtTX121.Checked) val += 1 << 0;
+            if (chkExtTX122.Checked) val += 1 << 1;
+            if (chkExtTX123.Checked) val += 1 << 2;
+            if (chkExtTX124.Checked) val += 1 << 3;
+            if (chkExtTX125.Checked) val += 1 << 4;
+            if (chkExtTX126.Checked) val += 1 << 5;
+
+            console.X212TX = (byte)val;
+        }
+
+        private void chkExtRX10_CheckedChanged(object sender, System.EventArgs e)
+        {
+            int val = 0;
+            if (chkExtRX101.Checked) val += 1 << 0;
+            if (chkExtRX102.Checked) val += 1 << 1;
+            if (chkExtRX103.Checked) val += 1 << 2;
+            if (chkExtRX104.Checked) val += 1 << 3;
+            if (chkExtRX105.Checked) val += 1 << 4;
+            if (chkExtRX106.Checked) val += 1 << 5;
+
+            console.X210RX = (byte)val;
+        }
+
+        private void chkExtTX10_CheckedChanged(object sender, System.EventArgs e)
+        {
+            int val = 0;
+            if (chkExtTX101.Checked) val += 1 << 0;
+            if (chkExtTX102.Checked) val += 1 << 1;
+            if (chkExtTX103.Checked) val += 1 << 2;
+            if (chkExtTX104.Checked) val += 1 << 3;
+            if (chkExtTX105.Checked) val += 1 << 4;
+            if (chkExtTX106.Checked) val += 1 << 5;
+
+            console.X210TX = (byte)val;
+        }
+
+        private void chkExtRX6_CheckedChanged(object sender, System.EventArgs e)
+        {
+            int val = 0;
+            if (chkExtRX61.Checked) val += 1 << 0;
+            if (chkExtRX62.Checked) val += 1 << 1;
+            if (chkExtRX63.Checked) val += 1 << 2;
+            if (chkExtRX64.Checked) val += 1 << 3;
+            if (chkExtRX65.Checked) val += 1 << 4;
+            if (chkExtRX66.Checked) val += 1 << 5;
+
+            console.X26RX = (byte)val;
+        }
+
+        private void chkExtTX6_CheckedChanged(object sender, System.EventArgs e)
+        {
+            int val = 0;
+            if (chkExtTX61.Checked) val += 1 << 0;
+            if (chkExtTX62.Checked) val += 1 << 1;
+            if (chkExtTX63.Checked) val += 1 << 2;
+            if (chkExtTX64.Checked) val += 1 << 3;
+            if (chkExtTX65.Checked) val += 1 << 4;
+            if (chkExtTX66.Checked) val += 1 << 5;
+
+            console.X26TX = (byte)val;
+        }
+
+        private void chkExtRX2_CheckedChanged(object sender, System.EventArgs e)
+        {
+            int val = 0;
+            if (chkExtRX21.Checked) val += 1 << 0;
+            if (chkExtRX22.Checked) val += 1 << 1;
+            if (chkExtRX23.Checked) val += 1 << 2;
+            if (chkExtRX24.Checked) val += 1 << 3;
+            if (chkExtRX25.Checked) val += 1 << 4;
+            if (chkExtRX26.Checked) val += 1 << 5;
+
+            console.X22RX = (byte)val;
+        }
+
+        private void chkExtTX2_CheckedChanged(object sender, System.EventArgs e)
+        {
+            int val = 0;
+            if (chkExtTX21.Checked) val += 1 << 0;
+            if (chkExtTX22.Checked) val += 1 << 1;
+            if (chkExtTX23.Checked) val += 1 << 2;
+            if (chkExtTX24.Checked) val += 1 << 3;
+            if (chkExtTX25.Checked) val += 1 << 4;
+            if (chkExtTX26.Checked) val += 1 << 5;
+
+            console.X22TX = (byte)val;
+        }
+
+        private void chkExtEnable_CheckedChanged(object sender, System.EventArgs e)
+        {
+            grpExtRX.Enabled = chkExtEnable.Checked;
+            grpExtTX.Enabled = chkExtEnable.Checked;
+            console.ExtCtrlEnabled = chkExtEnable.Checked;
+        }
+
+        #endregion
+
+        #region CAT Setup event handlers
+
+        public void initCATandPTTprops()
+        {
+            console.CATEnabled = chkCATEnable.Checked;
+            if (comboCATPort.Text.StartsWith("COM"))
+                console.CATPort = Int32.Parse(comboCATPort.Text.Substring(3));
+            console.CATPTTRTS = chkCATPTT_RTS.Checked;
+            console.CATPTTDTR = chkCATPTT_DTR.Checked;
+            //console.PTTBitBangEnabled = chkCATPTTEnabled.Checked; 
+            if (comboCATPTTPort.Text.StartsWith("COM"))
+                console.CATPTTBitBangPort = Int32.Parse(comboCATPTTPort.Text.Substring(3));
+            console.CATBaudRate = Convert.ToInt32((string)comboCATbaud.SelectedItem, 10);
+            console.CATParity = SDRSerialPort.stringToParity((string)comboCATparity.SelectedItem);
+            console.CATDataBits = SDRSerialPort.stringToDataBits((string)comboCATdatabits.SelectedItem);
+            console.CATStopBits = SDRSerialPort.stringToStopBits((string)comboCATstopbits.SelectedItem);
+
+            // make sure the enabled state of bitbang ptt is correct 
+            if (chkCATPTT_RTS.Checked || chkCATPTT_DTR.Checked)
+            {
+                chkCATPTTEnabled.Enabled = true;
+            }
+            else
+            {
+                chkCATPTTEnabled.Enabled = false;
+                chkCATPTTEnabled.Checked = false;
+            }
+        }
+
+        // called in error cases to set the dialiog vars from 
+        // the console properties -- sort of ugly, we should only have 1 copy 
+        // of this stuff 
+        public void copyCATPropsToDialogVars()
+        {
+            chkCATEnable.Checked = console.CATEnabled;
+            string port = "COM" + console.CATPort.ToString();
+            if (comboCATPort.Items.Contains(port))
+                comboCATPort.Text = port;
+            chkCATPTT_RTS.Checked = console.CATPTTRTS;
+            chkCATPTT_DTR.Checked = console.CATPTTDTR;
+            chkCATPTTEnabled.Checked = console.PTTBitBangEnabled;
+            port = "COM" + console.CATPTTBitBangPort.ToString();
+            if (comboCATPTTPort.Items.Contains(port))
+                comboCATPTTPort.Text = port;
+
+            // wjt fixme -- need to hand baudrate, parity, data, stop -- see initCATandPTTprops 
+        }
+
+
+        private void chkCATEnable_CheckedChanged(object sender, System.EventArgs e)
+        {
+            if (initializing) return;
+
+            if (comboCATPort.Text == "" || !comboCATPort.Text.StartsWith("COM"))
+            {
+                if (chkCATEnable.Focused)
+                {
+                    MessageBox.Show("The CAT port \"" + comboCATPort.Text + "\" is not a valid port.  Please select another port.");
+                    chkCATEnable.Checked = false;
+                }
+                return;
+            }
+
+            // make sure we're not using the same comm port as the bit banger 
+            if (chkCATEnable.Checked && console.PTTBitBangEnabled &&
+                (comboCATPort.Text == comboCATPTTPort.Text))
+            {
+                MessageBox.Show("CAT port cannot be the same as Bit Bang Port", "Port Selection Error",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+                chkCATEnable.Checked = false;
+            }
+
+            // if enabled, disable changing of serial port 
+            bool enable_sub_fields = !chkCATEnable.Checked;
+            comboCATPort.Enabled = enable_sub_fields;
+
+            enableCAT_HardwareFields(enable_sub_fields);
+
+            if (chkCATEnable.Checked)
+            {
+                try
+                {
+                    console.CATEnabled = true;
+                }
+                catch (Exception ex)
+                {
+                    console.CATEnabled = false;
+                    chkCATEnable.Checked = false;
+                    MessageBox.Show("Could not initialize CAT control.  Exception was:\n\n " + ex.Message +
+                        "\n\nCAT control has been disabled.", "Error Initializing CAT control",
+                        MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            else
+            {
+                if (comboKeyerConnSecondary.Text == "CAT" && chkCATEnable.Focused)
+                {
+                    MessageBox.Show("The Secondary Keyer option has been changed to None since CAT has been disabled.",
+                        "CAT Disabled",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Information);
+                    comboKeyerConnSecondary.Text = "None";
+                }
+                console.CATEnabled = false;
+            }
+        }
+
+        private void enableCAT_HardwareFields(bool enable)
+        {
+            comboCATbaud.Enabled = enable;
+            comboCATparity.Enabled = enable;
+            comboCATdatabits.Enabled = enable;
+            comboCATstopbits.Enabled = enable;
+        }
+
+        private void doEnablementOnBitBangEnable()
+        {
+            if (console.CATPTTRTS || console.CATPTTDTR)  // if RTS or DTR is selectment, enable is ok 
+            {
+                chkCATPTTEnabled.Enabled = true;
+            }
+            else
+            {
+                chkCATPTTEnabled.Enabled = false;
+                chkCATPTTEnabled.Checked = false; // make sure it is not checked 
+            }
+        }
+
+        private void chkCATPTT_RTS_CheckedChanged(object sender, System.EventArgs e)
+        {
+            console.CATPTTRTS = chkCATPTT_RTS.Checked;
+            doEnablementOnBitBangEnable();
+        }
+
+        private void chkCATPTT_DTR_CheckedChanged(object sender, System.EventArgs e)
+        {
+            console.CATPTTDTR = chkCATPTT_DTR.Checked;
+            doEnablementOnBitBangEnable();
+        }
+
+        private void chkCATPTTEnabled_CheckedChanged(object sender, System.EventArgs e)
+        {
+            if (initializing) return;
+
+            bool enable_sub_fields;
+
+            if (comboCATPTTPort.Text == "" || !comboCATPTTPort.Text.StartsWith("COM"))
+            {
+                if (chkCATPTTEnabled.Focused)
+                {
+                    MessageBox.Show("The PTT port \"" + comboCATPTTPort.Text + "\" is not a valid port.  Please select another port.");
+                    chkCATPTTEnabled.Checked = false;
+                }
+                return;
+            }
+
+            if (chkCATPTTEnabled.Checked && console.CATEnabled &&
+                comboCATPort.Text == comboCATPTTPort.Text)
+            {
+                if (chkCATPTTEnabled.Focused)
+                {
+                    MessageBox.Show("CAT port cannot be the same as Bit Bang Port", "Port Selection Error",
+                        MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    chkCATPTTEnabled.Checked = false;
+                }
+                return;
+            }
+
+            console.PTTBitBangEnabled = chkCATPTTEnabled.Checked;
+            if (chkCATPTTEnabled.Checked) // if it's enabled don't allow changing settings on port 
+            {
+                enable_sub_fields = false;
+            }
+            else
+            {
+                enable_sub_fields = true;
+            }
+            chkCATPTT_RTS.Enabled = enable_sub_fields;
+            chkCATPTT_DTR.Enabled = enable_sub_fields;
+            comboCATPTTPort.Enabled = enable_sub_fields;
+        }
+
+        private void comboCATparity_SelectedIndexChanged(object sender, System.EventArgs e)
+        {
+            string selection = comboCATparity.SelectedText;
+            if (selection != null)
+            {
+                System.IO.Ports.Parity p = SDRSerialPort.stringToParity(selection);
+                console.CATParity = p;
+            }
+        }
+
+        private void comboCATPort_SelectedIndexChanged(object sender, System.EventArgs e)
+        {
+            if (comboCATPort.Text.StartsWith("COM"))
+                console.CATPort = Int32.Parse(comboCATPort.Text.Substring(3));
+        }
+
+        private void comboCATPTTPort_SelectedIndexChanged(object sender, System.EventArgs e)
+        {
+            if (comboCATPTTPort.Text.StartsWith("COM"))
+                console.CATPTTBitBangPort = Int32.Parse(comboCATPTTPort.Text.Substring(3));
+        }
+
+        private void comboCATbaud_SelectedIndexChanged(object sender, System.EventArgs e)
+        {
+            if (comboCATbaud.SelectedIndex >= 0)
+                console.CATBaudRate = Int32.Parse(comboCATbaud.Text);
+        }
+
+        private void comboCATdatabits_SelectedIndexChanged(object sender, System.EventArgs e)
+        {
+            if (comboCATdatabits.SelectedIndex >= 0)
+                console.CATDataBits = SDRSerialPort.stringToDataBits(comboCATdatabits.Text);
+        }
+
+        private void comboCATstopbits_SelectedIndexChanged(object sender, System.EventArgs e)
+        {
+            if (comboCATstopbits.SelectedIndex >= 0)
+                console.CATStopBits = SDRSerialPort.stringToStopBits(comboCATstopbits.Text);
+        }
+
+        private void btnCATTest_Click(object sender, System.EventArgs e)
+        {
+            CATTester cat = new CATTester(console);
+            //this.Close();
+            cat.Show();
+            cat.Focus();
+        }
+
+        //Modified 10/12/08 BT to change "SDR-1000" to "PowerSDR"
+        private void comboCATRigType_SelectedIndexChanged(object sender, System.EventArgs e)
+        {
+            switch (comboCATRigType.Text)
+            {
+                case "PowerSDR":
+                    console.CATRigType = 900;
+                    break;
+                case "TS-2000":
+                    console.CATRigType = 19;
+                    break;
+                case "TS-50S":
+                    console.CATRigType = 13;
+                    break;
+                case "TS-440":
+                    console.CATRigType = 20;
+                    break;
+                default:
+                    console.CATRigType = 19;
+                    break;
+            }
+        }
+
+        #endregion
+
+        #region Test Tab Event Handlers
+
+        private void chkTestIMD_CheckedChanged(object sender, System.EventArgs e)
+        {
+            if (chekTestIMD.Checked)
+            {
+                if (!console.PowerOn)
+                {
+                    MessageBox.Show("Power must be on to run this test.",
+                        "Power is off",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Hand);
+                    chekTestIMD.Checked = false;
+                    return;
+                }
+                console.PreviousPWR = console.PWR;
+                console.PWR = (int)udTestIMDPower.Value;
+                console.MOX = true;
+
+                if (!console.MOX)
+                {
+                    chekTestIMD.Checked = false;
+                    return;
+                }
+
+                Audio.MOX = true;
+                chekTestIMD.BackColor = console.ButtonSelectedColor;
+                Audio.SineFreq1 = (double)udTestIMDFreq1.Value;
+                Audio.SineFreq2 = (double)udTestIMDFreq2.Value;
+                Audio.two_tone = true;
+                Audio.TXInputSignal = Audio.SignalSource.SINE_TWO_TONE;
+                Audio.SourceScale = 1.0;
+            }
+            else
+            {
+                udTestIMDPower.Value = console.PWR;
+                console.PWR = console.PreviousPWR;
+                Audio.TXInputSignal = Audio.SignalSource.RADIO;
+                Audio.MOX = false;
+                console.MOX = false;
+                Audio.SineFreq1 = (double)udDSPCWPitch.Value;
+                Audio.two_tone = false;
+                chekTestIMD.BackColor = SystemColors.Control;
+            }
+        }
+
+        private void chkTestX2_CheckedChanged(object sender, System.EventArgs e)
+        {
+            byte val = 0;
+            if (chkTestX2Pin1.Checked) val |= 1 << 0;
+            if (chkTestX2Pin2.Checked) val |= 1 << 1;
+            if (chkTestX2Pin3.Checked) val |= 1 << 2;
+            if (chkTestX2Pin4.Checked) val |= 1 << 3;
+            if (chkTestX2Pin5.Checked) val |= 1 << 4;
+            if (chkTestX2Pin6.Checked) val |= 1 << 5;
+
+            console.Hdw.X2 = val;
+        }
+
+        private void btnTestAudioBalStart_Click(object sender, System.EventArgs e)
+        {
+            if (!console.PowerOn)
+            {
+                MessageBox.Show("Power must be on to run this test.",
+                    "Power is off",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Hand);
+                return;
+            }
+
+            DialogResult dr = DialogResult.No;
+            Audio.two_tone = false;
+            Audio.SineFreq1 = 600.0;
+
+            do
+            {
+                Audio.RX1OutputSignal = Audio.SignalSource.SINE_LEFT_ONLY;
+                dr = MessageBox.Show("Do you hear a tone in the left channel?",
+                    "Tone in left channel?",
+                    MessageBoxButtons.YesNoCancel,
+                    MessageBoxIcon.Question);
+
+                Audio.RX1OutputSignal = Audio.SignalSource.RADIO;
+
+                if (dr == DialogResult.No)
+                {
+                    DialogResult dr2 = MessageBox.Show("Please double check cable and speaker connections.\n" +
+                        "Click OK to try again (cancel to abort).",
+                        "Check connections",
+                        MessageBoxButtons.OKCancel,
+                        MessageBoxIcon.Asterisk);
+                    if (dr2 == DialogResult.Cancel)
+                    {
+                        MessageBox.Show("Test Failed",
+                            "Failed",
+                            MessageBoxButtons.OK,
+                            MessageBoxIcon.Stop);
+                        btnTestAudioBalStart.BackColor = Color.Red;
+                        return;
+                    }
+                }
+                else if (dr == DialogResult.Cancel)
+                {
+                    MessageBox.Show("Test Failed",
+                        "Failed",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Stop);
+                    btnTestAudioBalStart.BackColor = Color.Red;
+                    return;
+                }
+            } while (dr != DialogResult.Yes);
+
+            do
+            {
+                Audio.RX1OutputSignal = Audio.SignalSource.SINE_RIGHT_ONLY;
+                dr = MessageBox.Show("Do you hear a tone in the right channel?",
+                    "Tone in right channel?",
+                    MessageBoxButtons.YesNoCancel,
+                    MessageBoxIcon.Question);
+
+                Audio.RX1OutputSignal = Audio.SignalSource.RADIO;
+
+                if (dr == DialogResult.No)
+                {
+                    DialogResult dr2 = MessageBox.Show("Please double check cable and speaker connections.\n" +
+                        "Click OK to try again (cancel to abort).",
+                        "Check connections",
+                        MessageBoxButtons.OKCancel,
+                        MessageBoxIcon.Asterisk);
+                    if (dr2 == DialogResult.Cancel)
+                    {
+                        MessageBox.Show("Test Failed",
+                            "Failed",
+                            MessageBoxButtons.OK,
+                            MessageBoxIcon.Stop);
+                        btnTestAudioBalStart.BackColor = Color.Red;
+                        return;
+                    }
+                }
+                else if (dr == DialogResult.Cancel)
+                {
+                    MessageBox.Show("Test Failed",
+                        "Failed",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Stop);
+                    btnTestAudioBalStart.BackColor = Color.Red;
+                    return;
+                }
+            } while (dr != DialogResult.Yes);
+
+            MessageBox.Show("Test was successful.",
+                "Success",
+                MessageBoxButtons.OK,
+                MessageBoxIcon.Information);
+
+            btnTestAudioBalStart.BackColor = Color.Green;
+        }
+
+        private void timer_sweep_Tick(object sender, System.EventArgs e)
+        {
+            if (tkbarTestGenFreq.Value >= udTestGenHigh.Value)
+            {
+                timer_sweep.Enabled = false;
+                btnTestGenSweep.BackColor = SystemColors.Control;
+            }
+            else
+            {
+                tkbarTestGenFreq.Value += (int)(udTestGenHzSec.Value / 10);
+                tkbarTestGenFreq_Scroll(this, EventArgs.Empty);
+            }
+        }
+
+        private void buttonTestGenSweep_Click(object sender, System.EventArgs e)
+        {
+            if (timer_sweep.Enabled)
+            {
+                timer_sweep.Enabled = false;
+                btnTestGenSweep.BackColor = SystemColors.Control;
+            }
+            else
+            {
+                btnTestGenSweep.BackColor = console.ButtonSelectedColor;
+                tkbarTestGenFreq.Value = (int)udTestGenLow.Value;
+                timer_sweep.Enabled = true;
+            }
+        }
+
+        private void tkbarTestGenFreq_Scroll(object sender, System.EventArgs e)
+        {
+            Audio.SineFreq1 = tkbarTestGenFreq.Value;
+        }
+
+        private void cmboSigGenRXMode_SelectedIndexChanged(object sender, System.EventArgs e)
+        {
+            if (cmboSigGenRXMode.SelectedIndex < 0) return;
+
+            Audio.SignalSource source = Audio.SignalSource.RADIO;
+
+            switch (cmboSigGenRXMode.Text)
+            {
+                case "Radio":
+                    source = Audio.SignalSource.RADIO;
+                    break;
+                case "Tone":
+                    source = Audio.SignalSource.SINE;
+                    break;
+                case "Noise":
+                    source = Audio.SignalSource.NOISE;
+                    break;
+                case "Triangle":
+                    source = Audio.SignalSource.TRIANGLE;
+                    break;
+                case "Sawtooth":
+                    source = Audio.SignalSource.SAWTOOTH;
+                    break;
+                case "Silence":
+                    source = Audio.SignalSource.SILENCE;
+                    break;
+            }
+
+            if (chkSigGenRX2.Checked)
+            {
+                if (radSigGenRXInput.Checked)
+                    Audio.RX2InputSignal = source;
+                else Audio.RX2OutputSignal = source;
+            }
+            else
+            {
+                if (radSigGenRXInput.Checked)
+                    Audio.RX1InputSignal = source;
+                else Audio.RX1OutputSignal = source;
+            }
+
+            UpdateSigGenScaleVisible();
+        }
+
+        private void radSigGenRXInput_CheckedChanged(object sender, System.EventArgs e)
+        {
+            if (radSigGenRXInput.Checked)
+            {
+                Audio.RX1OutputSignal = Audio.SignalSource.RADIO;
+                Audio.RX2OutputSignal = Audio.SignalSource.RADIO;
+                cmboSigGenRXMode_SelectedIndexChanged(this, EventArgs.Empty);
+            }
+        }
+
+        private void radSigGenRXOutput_CheckedChanged(object sender, System.EventArgs e)
+        {
+            if (radSigGenRXOutput.Checked)
+            {
+                Audio.RX1InputSignal = Audio.SignalSource.RADIO;
+                Audio.RX2InputSignal = Audio.SignalSource.RADIO;
+                cmboSigGenRXMode_SelectedIndexChanged(this, EventArgs.Empty);
+            }
+        }
+
+        private void chkSigGenRX2_CheckedChanged(object sender, System.EventArgs e)
+        {
+            if (chkSigGenRX2.Checked) Audio.RX1InputSignal = Audio.RX1OutputSignal = Audio.SignalSource.RADIO;
+            else Audio.RX2InputSignal = Audio.RX2OutputSignal = Audio.SignalSource.RADIO;
+            cmboSigGenRXMode_SelectedIndexChanged(this, EventArgs.Empty);
+        }
+
+        private void UpdateSigGenScaleVisible()
+        {
+            bool b = false;
+            switch (cmboSigGenRXMode.Text)
+            {
+                case "Tone": b = true; break;
+            }
+
+            switch (cmboSigGenTXMode.Text)
+            {
+                case "Tone": b = true; break;
+            }
+
+            lblTestGenScale.Visible = b;
+            udTestGenScale.Visible = b;
+        }
+
+        private void cmboSigGenTXMode_SelectedIndexChanged(object sender, System.EventArgs e)
+        {
+            if (cmboSigGenTXMode.SelectedIndex < 0) return;
+
+            Audio.SignalSource source = Audio.SignalSource.RADIO;
+
+            switch (cmboSigGenTXMode.Text)
+            {
+                case "Radio":
+                    source = Audio.SignalSource.RADIO;
+                    break;
+                case "Tone":
+                    source = Audio.SignalSource.SINE;
+                    break;
+                case "Noise":
+                    source = Audio.SignalSource.NOISE;
+                    break;
+                case "Triangle":
+                    source = Audio.SignalSource.TRIANGLE;
+                    break;
+                case "Sawtooth":
+                    source = Audio.SignalSource.SAWTOOTH;
+                    break;
+                case "Silence":
+                    source = Audio.SignalSource.SILENCE;
+                    break;
+            }
+
+            if (radSigGenTXInput.Checked)
+                Audio.TXInputSignal = source;
+            else Audio.TXOutputSignal = source;
+
+            UpdateSigGenScaleVisible();
+        }
+
+        private void radSigGenTXInput_CheckedChanged(object sender, System.EventArgs e)
+        {
+            if (radSigGenTXInput.Checked)
+            {
+                Audio.TXOutputSignal = Audio.SignalSource.RADIO;
+                cmboSigGenTXMode_SelectedIndexChanged(this, EventArgs.Empty);
+            }
+        }
+
+        private void radSigGenTXOutput_CheckedChanged(object sender, System.EventArgs e)
+        {
+            if (radSigGenTXOutput.Checked)
+            {
+                Audio.TXInputSignal = Audio.SignalSource.RADIO;
+                cmboSigGenTXMode_SelectedIndexChanged(this, EventArgs.Empty);
+            }
+        }
+
+        private void updnTestGenScale_ValueChanged(object sender, System.EventArgs e)
+        {
+            Audio.SourceScale = (double)udTestGenScale.Value;
+        }
+
+        private void btnImpulse_Click(object sender, System.EventArgs e)
+        {
+            Thread t = new Thread(new ThreadStart(ImpulseFunction));
+            t.Name = "Impulse";
+            t.Priority = ThreadPriority.Highest;
+            t.IsBackground = true;
+            t.Start();
+        }
+
+        private void ImpulseFunction()
+        {
+            console.Hdw.ImpulseEnable = true;
+            Thread.Sleep(500);
+            for (int i = 0; i < (int)udImpulseNum.Value; i++)
+            {
+                console.Hdw.Impulse();
+                Thread.Sleep(45);
+            }
+            Thread.Sleep(500);
+            console.Hdw.ImpulseEnable = false;
+        }
+
+        #endregion
+
+        #region Other Event Handlers
+        // ======================================================
+        // Display Tab Event Handlers
+        // ======================================================
+
+        private void btnWizard_Click(object sender, System.EventArgs e)
+        {
+            SetupWizard w = new SetupWizard(console, comboAudioSoundCard.SelectedIndex);
+            w.Show();
+            w.Focus();
+        }
+
+        private void btnOK_Click(object sender, System.EventArgs e)
+        {
+            if (saving)
+            {
+                this.Hide();
             }//w5wc
             else
             {
@@ -28006,912 +28157,912 @@ namespace PowerSDR
                 t.Start();
                 this.Hide();
             }
-            
-		}
 
-		private void btnCancel_Click(object sender, System.EventArgs e)
-		{
-			Thread t = new Thread(new ThreadStart(GetOptions));
-			t.Name = "Save Options Thread";
-			t.IsBackground = true;
-			t.Priority = ThreadPriority.Lowest;
-			t.Start();
-			this.Hide();
-		}
+        }
 
-		private void btnApply_Click(object sender, System.EventArgs e)
-		{
-			Thread t = new Thread(new ThreadStart(ApplyOptions));
-			t.Name = "Save Options Thread";
-			t.IsBackground = true;
-			t.Priority = ThreadPriority.Normal;
-			t.Start();
-		}
+        private void btnCancel_Click(object sender, System.EventArgs e)
+        {
+            Thread t = new Thread(new ThreadStart(GetOptions));
+            t.Name = "Save Options Thread";
+            t.IsBackground = true;
+            t.Priority = ThreadPriority.Lowest;
+            t.Start();
+            this.Hide();
+        }
 
-		private void ApplyOptions()
-		{
-			if(saving) return;
-			SaveOptions();
-			DB.Update();
-		}
+        private void btnApply_Click(object sender, System.EventArgs e)
+        {
+            Thread t = new Thread(new ThreadStart(ApplyOptions));
+            t.Name = "Save Options Thread";
+            t.IsBackground = true;
+            t.Priority = ThreadPriority.Normal;
+            t.Start();
+        }
 
-		private void udGeneralLPTDelay_ValueChanged(object sender, System.EventArgs e)
-		{
-			console.LatchDelay = (int)udGeneralLPTDelay.Value;
-		}
+        private void ApplyOptions()
+        {
+            if (saving) return;
+            SaveOptions();
+            DB.Update();
+        }
 
-		private void Setup_Closing(object sender, System.ComponentModel.CancelEventArgs e)
-		{
-			this.Hide();
-			e.Cancel = true;
-		}
+        private void udGeneralLPTDelay_ValueChanged(object sender, System.EventArgs e)
+        {
+            console.LatchDelay = (int)udGeneralLPTDelay.Value;
+        }
 
-		private void btnImportDB_Click(object sender, System.EventArgs e)
-		{
+        private void Setup_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            this.Hide();
+            e.Cancel = true;
+        }
+
+        private void btnImportDB_Click(object sender, System.EventArgs e)
+        {
             string path = console.AppDataPath;
-			path = path.Substring(0, path.LastIndexOf("\\"));
-			openFileDialog1.InitialDirectory = path;
-			openFileDialog1.ShowDialog();
-		}
-
-		private void openFileDialog1_FileOk(object sender, System.ComponentModel.CancelEventArgs e)
-		{
-			CompleteImport();
-		}
-
-		private void CompleteImport()
-		{
-			if(DB.ImportDatabase(openFileDialog1.FileName))
-				MessageBox.Show("Database Imported Successfully");
-
-			GetTxProfiles();
-			console.UpdateTXProfile(TXProfile);
-
-			GetOptions();					// load all database values
-			console.GetState();				
-			if(console.EQForm != null) Common.RestoreForm(console.EQForm, "EQForm", false);
-			if(console.XVTRForm != null) Common.RestoreForm(console.XVTRForm, "XVTR", false);
-			if(console.ProdTestForm != null) Common.RestoreForm(console.ProdTestForm, "ProdTest", false);
-
-			SaveOptions();					// save all database values
-			console.SaveState();
-			if(console.EQForm != null) Common.SaveForm(console.EQForm, "EQForm");
-			if(console.XVTRForm != null) Common.SaveForm(console.XVTRForm, "XVTR");
-			if(console.ProdTestForm != null) Common.SaveForm(console.ProdTestForm, "ProdTest");
-
-			udTransmitTunePower_ValueChanged(this, EventArgs.Empty);
-			console.ResetMemForm();
-		}
-
-		#endregion				
-
-		private bool shift_key = false;
-		private bool ctrl_key = false;
-		private bool alt_key = false;		
-		private bool windows_key = false;
-		private bool menu_key = false;
-
-		private void txtKB_KeyDown(object sender, System.Windows.Forms.KeyEventArgs e)
-		{
-			Debug.WriteLine("KeyCode: "+e.KeyCode+" KeyData: "+e.KeyData+" KeyValue: "+e.KeyValue);
-			shift_key = e.Shift;
-			ctrl_key = e.Control;
-			alt_key = e.Alt;
-
-			if(e.KeyCode == Keys.LWin ||
-				e.KeyCode == Keys.RWin)
-				windows_key = true;
-
-			if(e.KeyCode == Keys.Apps)
-				menu_key = true;
-
-			TextBoxTS txtbox = (TextBoxTS)sender;
-
-			string s = "";
-			
-			if(ctrl_key) s+="Ctrl+";
-			if(alt_key) s+="Alt+";	
-			if(shift_key) s+="Shift+";
-			if(windows_key)
-				s+="Win+";
-			if(menu_key)
-				s+="Menu+";
-
-			if(e.KeyCode != Keys.ShiftKey &&
-				e.KeyCode != Keys.ControlKey &&
-				e.KeyCode != Keys.Menu &&
-				e.KeyCode != Keys.RMenu &&
-				e.KeyCode != Keys.LWin &&
-				e.KeyCode != Keys.RWin &&
-				e.KeyCode != Keys.Apps)
-				s += KeyToString(e.KeyCode);
-			
-			txtbox.Text = s;
-			e.Handled = true;
-		}
-
-		private void txtKB_KeyPress(object sender, System.Windows.Forms.KeyPressEventArgs e)
-		{
-			e.Handled = true;
-		}
-
-		private void txtKB_KeyUp(object sender, System.Windows.Forms.KeyEventArgs e)
-		{
-			//Debug.WriteLine("KeyUp: "+e.KeyCode.ToString());
-			shift_key = e.Shift;
-			ctrl_key = e.Control;
-			alt_key = e.Alt;
-
-			if(e.KeyCode == Keys.LWin ||
-				e.KeyCode == Keys.RWin)
-				windows_key = false;
-
-			if(e.KeyCode == Keys.Apps)
-				menu_key = false;
-
-
-			TextBoxTS txtbox = (TextBoxTS)sender;
-
-			if(txtbox.Text.EndsWith("+"))
-			{
-				if(shift_key || ctrl_key || alt_key ||
-					windows_key || menu_key)
-				{
-					string s = "";
-
-					if(ctrl_key) s+="Ctrl+";
-					if(alt_key) s+="Alt+";
-					if(shift_key) s+="Shift+";
-					if(windows_key)
-						s+="Win+";
-					if(menu_key)
-						s+="Menu+";
-
-					txtbox.Text = s;
-				}
-				else
-					txtbox.Text = "Not Assigned";
-			}
-		}
-
-		private void clrbtnTXFilter_Changed(object sender, System.EventArgs e)
-		{
-			Display.DisplayFilterTXColor = clrbtnTXFilter.Color;
-		}
-
-		#region Lost Focus Event Handlers
-
-		private void udGeneralCalFreq1_LostFocus(object sender, EventArgs e)
-		{
-			udGeneralCalFreq1.Value = udGeneralCalFreq1.Value;
-		}
-
-		private void udSoftRockCenterFreq_LostFocus(object sender, EventArgs e)
-		{
-			udSoftRockCenterFreq.Value = udSoftRockCenterFreq.Value;
-		}
-
-		private void udDDSCorrection_LostFocus(object sender, EventArgs e)
-		{
-			udDDSCorrection.Value = udDDSCorrection.Value;
-		}
-
-		private void udDDSIFFreq_LostFocus(object sender, EventArgs e)
-		{
-			udDDSIFFreq.Value = udDDSIFFreq.Value;
-		}
-
-		private void udDDSPLLMult_LostFocus(object sender, EventArgs e)
-		{
-			udDDSPLLMult.Value = udDDSPLLMult.Value;
-		}
-
-		private void udGeneralLPTDelay_LostFocus(object sender, EventArgs e)
-		{
-			udGeneralLPTDelay.Value = udGeneralLPTDelay.Value;
-		}
-
-		private void udOptClickTuneOffsetDIGL_LostFocus(object sender, EventArgs e)
-		{
-			udOptClickTuneOffsetDIGL.Value = udOptClickTuneOffsetDIGL.Value;
-		}
-
-		private void udOptClickTuneOffsetDIGU_LostFocus(object sender, EventArgs e)
-		{
-			udOptClickTuneOffsetDIGU.Value = udOptClickTuneOffsetDIGU.Value;
-		}
-
-		private void udGeneralX2Delay_LostFocus(object sender, EventArgs e)
-		{
-			udGeneralX2Delay.Value = udGeneralX2Delay.Value;
-		}
-
-		private void udGeneralCalFreq3_LostFocus(object sender, EventArgs e)
-		{
-			udGeneralCalFreq3.Value = udGeneralCalFreq3.Value;
-		}
-
-		private void udGeneralCalLevel_LostFocus(object sender, EventArgs e)
-		{
-			udGeneralCalLevel.Value = udGeneralCalLevel.Value;
-		}
-
-		private void udGeneralCalFreq2_LostFocus(object sender, EventArgs e)
-		{
-			udGeneralCalFreq2.Value = udGeneralCalFreq2.Value;
-		}
-
-		private void udFilterDefaultLowCut_LostFocus(object sender, EventArgs e)
-		{
-			udFilterDefaultLowCut.Value = udFilterDefaultLowCut.Value;
-		}
-
-		private void udOptMaxFilterShift_LostFocus(object sender, EventArgs e)
-		{
-			udOptMaxFilterShift.Value = udOptMaxFilterShift.Value;
-		}
-
-		private void udOptMaxFilterWidth_LostFocus(object sender, EventArgs e)
-		{
-			udOptMaxFilterWidth.Value = udOptMaxFilterWidth.Value;
-		}
-
-		private void udAudioMicGain1_LostFocus(object sender, EventArgs e)
-		{
-			udAudioMicGain1.Value = udAudioMicGain1.Value;
-		}
-
-		private void udAudioLineIn1_LostFocus(object sender, EventArgs e)
-		{
-			udAudioLineIn1.Value = udAudioLineIn1.Value;
-		}
-
-		private void udAudioVoltage1_LostFocus(object sender, EventArgs e)
-		{
-			udAudioVoltage1.Value = udAudioVoltage1.Value;
-		}
-
-		private void udAudioLatency1_LostFocus(object sender, EventArgs e)
-		{
-			udAudioLatency1.Value = udAudioLatency1.Value;
-		}
-
-		private void udAudioVACGainTX_LostFocus(object sender, EventArgs e)
-		{
-			udAudioVACGainTX.Value = udAudioVACGainTX.Value;
-		}
-
-		private void udAudioVACGainRX_LostFocus(object sender, EventArgs e)
-		{
-			udAudioVACGainRX.Value = udAudioVACGainRX.Value;
-		}
-
-		private void udAudioLatency2_LostFocus(object sender, EventArgs e)
-		{
-			udAudioLatency2.Value = udAudioLatency2.Value;
-		}
-
-		private void udDisplayScopeTime_LostFocus(object sender, EventArgs e)
-		{
-			udDisplayScopeTime.Value = udDisplayScopeTime.Value;
-		}
-
-		private void udDisplayMeterAvg_LostFocus(object sender, EventArgs e)
-		{
-			udDisplayMeterAvg.Value = udDisplayMeterAvg.Value;
-		}
-
-		private void udDisplayMultiTextHoldTime_LostFocus(object sender, EventArgs e)
-		{
-			udDisplayMultiTextHoldTime.Value = udDisplayMultiTextHoldTime.Value;
-		}
-
-		private void udDisplayMultiPeakHoldTime_LostFocus(object sender, EventArgs e)
-		{
-			udDisplayMultiPeakHoldTime.Value = udDisplayMultiPeakHoldTime.Value;
-		}
-
-		private void udDisplayWaterfallLowLevel_LostFocus(object sender, EventArgs e)
-		{
-			udDisplayWaterfallLowLevel.Value = udDisplayWaterfallLowLevel.Value;
-		}
-
-		private void udDisplayWaterfallHighLevel_LostFocus(object sender, EventArgs e)
-		{
-			udDisplayWaterfallHighLevel.Value = udDisplayWaterfallHighLevel.Value;
-		}
-
-		private void udDisplayCPUMeter_LostFocus(object sender, EventArgs e)
-		{
-			udDisplayCPUMeter.Value = udDisplayCPUMeter.Value;
-		}
-
-		private void udDisplayPeakText_LostFocus(object sender, EventArgs e)
-		{
-			udDisplayPeakText.Value = udDisplayPeakText.Value;
-		}
-
-		private void udDisplayMeterDelay_LostFocus(object sender, EventArgs e)
-		{
-			udDisplayMeterDelay.Value = udDisplayMeterDelay.Value;
-		}
-
-		private void udDisplayFPS_LostFocus(object sender, EventArgs e)
-		{
-			udDisplayFPS.Value = udDisplayFPS.Value;
-		}
-
-		private void udDisplayAVGTime_LostFocus(object sender, EventArgs e)
-		{
-			udDisplayAVGTime.Value = udDisplayAVGTime.Value;
-		}
-
-		private void udDisplayPhasePts_LostFocus(object sender, EventArgs e)
-		{
-			udDisplayPhasePts.Value = udDisplayPhasePts.Value;
-		}
-
-		private void udDisplayGridStep_LostFocus(object sender, EventArgs e)
-		{
-			udDisplayGridStep.Value = udDisplayGridStep.Value;
-		}
-
-		private void udDisplayGridMin_LostFocus(object sender, EventArgs e)
-		{
-			udDisplayGridMin.Value = udDisplayGridMin.Value;
-		}
-
-		private void udDSPNB_LostFocus(object sender, EventArgs e)
-		{
-			udDSPNB.Value = udDSPNB.Value;
-		}
-
-		private void udLMSNRgain_LostFocus(object sender, EventArgs e)
-		{
-			udLMSNRgain.Value = udLMSNRgain.Value;
-		}
-
-		private void udLMSNRdelay_LostFocus(object sender, EventArgs e)
-		{
-			udLMSNRdelay.Value = udLMSNRdelay.Value;
-		}
-
-		private void udLMSNRtaps_LostFocus(object sender, EventArgs e)
-		{
-			udLMSNRtaps.Value = udLMSNRtaps.Value;
-		}
-
-		private void udLMSANFgain_LostFocus(object sender, EventArgs e)
-		{
-			udLMSANFgain.Value = udLMSANFgain.Value;
-		}
-
-		private void udLMSANFdelay_LostFocus(object sender, EventArgs e)
-		{
-			udLMSANFdelay.Value = udLMSANFdelay.Value;
-		}
-
-		private void udLMSANFtaps_LostFocus(object sender, EventArgs e)
-		{
-			udLMSANFtaps.Value = udLMSANFtaps.Value;
-		}
-
-		private void udDSPNB2_LostFocus(object sender, EventArgs e)
-		{
-			udDSPNB2.Value = udDSPNB2.Value;
-		}
-
-		private void udDSPImageGainTX_LostFocus(object sender, EventArgs e)
-		{
-			udDSPImageGainTX.Value = udDSPImageGainTX.Value;
-		}
-
-		private void udDSPImagePhaseTX_LostFocus(object sender, EventArgs e)
-		{
-			udDSPImagePhaseTX.Value = udDSPImagePhaseTX.Value;
-		}
-
-		private void udDSPCWPitch_LostFocus(object sender, EventArgs e)
-		{
-			udDSPCWPitch.Value = udDSPCWPitch.Value;
-		}
-
-		private void udCWKeyerDeBounce_LostFocus(object sender, EventArgs e)
-		{
-			udCWKeyerDeBounce.Value = udCWKeyerDeBounce.Value;
-		}
-
-		private void udCWKeyerWeight_LostFocus(object sender, EventArgs e)
-		{
-			udCWKeyerWeight.Value = udCWKeyerWeight.Value;
-		}
-
-		private void udCWKeyerRamp_LostFocus(object sender, EventArgs e)
-		{
-			udCWKeyerRamp.Value = udCWKeyerRamp.Value;
-		}
-
-		private void udCWBreakInDelay_LostFocus(object sender, EventArgs e)
-		{
-			udCWBreakInDelay.Value = udCWBreakInDelay.Value;
-		}
-
-		private void udDSPLevelerHangTime_LostFocus(object sender, EventArgs e)
-		{
-			udDSPLevelerHangTime.Value = udDSPLevelerHangTime.Value;
-		}
-
-		private void udDSPLevelerThreshold_LostFocus(object sender, EventArgs e)
-		{
-			udDSPLevelerThreshold.Value = udDSPLevelerThreshold.Value;
-		}
-
-		private void udDSPLevelerSlope_LostFocus(object sender, EventArgs e)
-		{
-			udDSPLevelerSlope.Value = udDSPLevelerSlope.Value;
-		}
-
-		private void udDSPLevelerDecay_LostFocus(object sender, EventArgs e)
-		{
-			udDSPLevelerDecay.Value = udDSPLevelerDecay.Value;
-		}
-
-		private void udDSPLevelerAttack_LostFocus(object sender, EventArgs e)
-		{
-			udDSPLevelerAttack.Value = udDSPLevelerAttack.Value;
-		}
-
-		private void udDSPALCHangTime_LostFocus(object sender, EventArgs e)
-		{
-			udDSPALCHangTime.Value = udDSPALCHangTime.Value;
-		}
-
-		private void udDSPALCThreshold_LostFocus(object sender, EventArgs e)
-		{
-			udDSPALCThreshold.Value = udDSPALCThreshold.Value;
-		}
-
-		private void udDSPALCSlope_LostFocus(object sender, EventArgs e)
-		{
-			udDSPALCSlope.Value = udDSPALCSlope.Value;
-		}
-
-		private void udDSPALCDecay_LostFocus(object sender, EventArgs e)
-		{
-			udDSPALCDecay.Value = udDSPALCDecay.Value;
-		}
-
-		private void udDSPALCAttack_LostFocus(object sender, EventArgs e)
-		{
-			udDSPALCAttack.Value = udDSPALCAttack.Value;
-		}
-
-		private void udDSPAGCHangTime_LostFocus(object sender, EventArgs e)
-		{
-			udDSPAGCHangTime.Value = udDSPAGCHangTime.Value;
-		}
-
-		private void udDSPAGCMaxGaindB_LostFocus(object sender, EventArgs e)
-		{
-			udDSPAGCMaxGaindB.Value = udDSPAGCMaxGaindB.Value;
-		}
-
-		private void udDSPAGCSlope_LostFocus(object sender, EventArgs e)
-		{
-			udDSPAGCSlope.Value = udDSPAGCSlope.Value;
-		}
-
-		private void udDSPAGCDecay_LostFocus(object sender, EventArgs e)
-		{
-			udDSPAGCDecay.Value = udDSPAGCDecay.Value;
-		}
-
-		private void udDSPAGCAttack_LostFocus(object sender, EventArgs e)
-		{
-			udDSPAGCAttack.Value = udDSPAGCAttack.Value;
-		}
-
-		private void udDSPAGCFixedGaindB_LostFocus(object sender, EventArgs e)
-		{
-			udDSPAGCFixedGaindB.Value = udDSPAGCFixedGaindB.Value;
-		}
-
-		private void udTXAMCarrierLevel_LostFocus(object sender, EventArgs e)
-		{
-			udTXAMCarrierLevel.Value = udTXAMCarrierLevel.Value;
-		}
-
-		private void udTXAF_LostFocus(object sender, EventArgs e)
-		{
-			udTXAF.Value = udTXAF.Value;
-		}
-
-		private void udTXVOXHangTime_LostFocus(object sender, EventArgs e)
-		{
-			udTXVOXHangTime.Value = udTXVOXHangTime.Value;
-		}
-
-		private void udTXVOXThreshold_LostFocus(object sender, EventArgs e)
-		{
-			udTXVOXThreshold.Value = udTXVOXThreshold.Value;
-		}
-
-		private void udTXNoiseGate_LostFocus(object sender, EventArgs e)
-		{
-			udTXNoiseGate.Value = udTXNoiseGate.Value;
-		}
-
-		private void udTXTunePower_LostFocus(object sender, EventArgs e)
-		{
-			udTXTunePower.Value = udTXTunePower.Value;
-		}
-
-		private void udTXFilterLow_LostFocus(object sender, EventArgs e)
-		{
-			udTXFilterLow.Value = udTXFilterLow.Value;
-		}
-
-		private void udTXFilterHigh_LostFocus(object sender, EventArgs e)
-		{
-			udTXFilterHigh.Value = udTXFilterHigh.Value;
-		}
-
-		private void udPAADC17_LostFocus(object sender, EventArgs e)
-		{
-			udPAADC17.Value = udPAADC17.Value;
-		}
-
-		private void udPAADC15_LostFocus(object sender, EventArgs e)
-		{
-			udPAADC15.Value = udPAADC15.Value;
-		}
-
-		private void udPAADC20_LostFocus(object sender, EventArgs e)
-		{
-			udPAADC20.Value = udPAADC20.Value;
-		}
-
-		private void udPAADC12_LostFocus(object sender, EventArgs e)
-		{
-			udPAADC12.Value = udPAADC12.Value;
-		}
-
-		private void udPAADC10_LostFocus(object sender, EventArgs e)
-		{
-			udPAADC10.Value = udPAADC10.Value;
-		}
-
-		private void udPAADC160_LostFocus(object sender, EventArgs e)
-		{
-			udPAADC160.Value = udPAADC160.Value;
-		}
-
-		private void udPAADC80_LostFocus(object sender, EventArgs e)
-		{
-			udPAADC80.Value = udPAADC80.Value;
-		}
-
-		private void udPAADC60_LostFocus(object sender, EventArgs e)
-		{
-			udPAADC60.Value = udPAADC60.Value;
-		}
-
-		private void udPAADC40_LostFocus(object sender, EventArgs e)
-		{
-			udPAADC40.Value = udPAADC40.Value;
-		}
-
-		private void udPAADC30_LostFocus(object sender, EventArgs e)
-		{
-			udPAADC30.Value = udPAADC30.Value;
-		}
-
-		private void udPAGain10_LostFocus(object sender, EventArgs e)
-		{
-			udPAGain10.Value = udPAGain10.Value;
-		}
-
-		private void udPAGain12_LostFocus(object sender, EventArgs e)
-		{
-			udPAGain12.Value = udPAGain12.Value;
-		}
-
-		private void udPAGain15_LostFocus(object sender, EventArgs e)
-		{
-			udPAGain15.Value = udPAGain15.Value;
-		}
-
-		private void udPAGain17_LostFocus(object sender, EventArgs e)
-		{
-			udPAGain17.Value = udPAGain17.Value;
-		}
-
-		private void udPAGain20_LostFocus(object sender, EventArgs e)
-		{
-			udPAGain20.Value = udPAGain20.Value;
-		}
-
-		private void udPAGain30_LostFocus(object sender, EventArgs e)
-		{
-			udPAGain30.Value = udPAGain30.Value;
-		}
-
-		private void udPAGain40_LostFocus(object sender, EventArgs e)
-		{
-			udPAGain40.Value = udPAGain40.Value;
-		}
-
-		private void udPAGain60_LostFocus(object sender, EventArgs e)
-		{
-			udPAGain60.Value = udPAGain60.Value;
-		}
-
-		private void udPAGain80_LostFocus(object sender, EventArgs e)
-		{
-			udPAGain80.Value = udPAGain80.Value;
-		}
-
-		private void udPAGain160_LostFocus(object sender, EventArgs e)
-		{
-			udPAGain160.Value = udPAGain160.Value;
-		}
-
-		private void udPACalPower_LostFocus(object sender, EventArgs e)
-		{
-			udPACalPower.Value = udPACalPower.Value;
-		}
-
-		private void udDisplayLineWidth_LostFocus(object sender, EventArgs e)
-		{
-			udDisplayLineWidth.Value = udDisplayLineWidth.Value;
-		}
-
-		private void udTestGenScale_LostFocus(object sender, EventArgs e)
-		{
-			udTestGenScale.Value = udTestGenScale.Value;
-		}
-
-		private void udTestGenHzSec_LostFocus(object sender, EventArgs e)
-		{
-			udTestGenHzSec.Value = udTestGenHzSec.Value;
-		}
-
-		private void udTestGenHigh_LostFocus(object sender, EventArgs e)
-		{
-			udTestGenHigh.Value = udTestGenHigh.Value;
-		}
-
-		private void udTestGenLow_LostFocus(object sender, EventArgs e)
-		{
-			udTestGenLow.Value = udTestGenLow.Value;
-		}
-
-		private void udTestIMDFreq2_LostFocus(object sender, EventArgs e)
-		{
-			udTestIMDFreq2.Value = udTestIMDFreq2.Value;
-		}
-
-		private void udTestIMDPower_LostFocus(object sender, EventArgs e)
-		{
-			udTestIMDPower.Value = udTestIMDPower.Value;
-		}
-
-		private void udTestIMDFreq1_LostFocus(object sender, EventArgs e)
-		{
-			udTestIMDFreq1.Value = udTestIMDFreq1.Value;
-		}
-
-		private void udImpulseNum_LostFocus(object sender, EventArgs e)
-		{
-			udImpulseNum.Value = udImpulseNum.Value;
-		}
-
-		#endregion
-
-		private void chkShowFreqOffset_CheckedChanged(object sender, System.EventArgs e)
-		{
-			Display.ShowFreqOffset = chkShowFreqOffset.Checked;
-		}
-
-		private void clrbtnBandEdge_Changed(object sender, System.EventArgs e)
-		{
-			Display.BandEdgeColor = clrbtnBandEdge.Color;
-		}
-
-		private void comboMeterType_SelectedIndexChanged(object sender, System.EventArgs e)
-		{
-			if(comboMeterType.Text == "") return;
-			switch(comboMeterType.Text)
-			{
-				case "Original":
-					console.CurrentMeterDisplayMode = MultiMeterDisplayMode.Original;
-					break;
-				case "Edge":
-					console.CurrentMeterDisplayMode = MultiMeterDisplayMode.Edge;
-					break;
-				case "Analog":
-					console.CurrentMeterDisplayMode = MultiMeterDisplayMode.Analog;
-					break;
-			}
-		}
-
-		private void clrbtnMeterEdgeLow_Changed(object sender, System.EventArgs e)
-		{
-			console.EdgeLowColor = clrbtnMeterEdgeLow.Color;
-		}
-
-		private void clrbtnMeterEdgeHigh_Changed(object sender, System.EventArgs e)
-		{
-			console.EdgeHighColor = clrbtnMeterEdgeHigh.Color;
-		}
-
-		private void clrbtnMeterEdgeBackground_Changed(object sender, System.EventArgs e)
-		{
-			console.EdgeMeterBackgroundColor = clrbtnMeterEdgeBackground.Color;
-		}
-
-		private void clrbtnEdgeIndicator_Changed(object sender, System.EventArgs e)
-		{
-			console.EdgeAVGColor = clrbtnEdgeIndicator.Color;
-		}
-
-		private void clrbtnMeterDigText_Changed(object sender, System.EventArgs e)
-		{
-			console.MeterDigitalTextColor = clrbtnMeterDigText.Color;
-		}
-
-		private void clrbtnMeterDigBackground_Changed(object sender, System.EventArgs e)
-		{
-			console.MeterDigitalBackgroundColor = clrbtnMeterDigBackground.Color;
-		}
-
-		private void clrbtnSubRXFilter_Changed(object sender, System.EventArgs e)
-		{
-			Display.SubRXFilterColor = Color.FromArgb(tbMultiRXFilterAlpha.Value, clrbtnSubRXFilter.Color);
-		}
-
-		private void clrbtnSubRXZero_Changed(object sender, System.EventArgs e)
-		{
-			Display.SubRXZeroLine = clrbtnSubRXZero.Color;
-		}
-
-		private void chkCWKeyerMode_CheckedChanged(object sender, System.EventArgs e)
-		{
-			if (chkCWKeyerMode.Checked) console.Keyer.KeyerMode = 1;
-			else console.Keyer.KeyerMode = 0;
-		}
-
-		private void chkDisableToolTips_CheckedChanged(object sender, System.EventArgs e)
-		{
-			toolTip1.Active = !chkDisableToolTips.Checked;
-			console.DisableToolTips = chkDisableToolTips.Checked;
-		}
-
-		private void udDisplayWaterfallAvgTime_ValueChanged(object sender, System.EventArgs e)
-		{
-			double buffer_time = double.Parse(comboAudioBuffer1.Text) / (double)console.SampleRate1;
-			int buffersToAvg = (int)((float)udDisplayWaterfallAvgTime.Value * 0.001 / buffer_time);
-			buffersToAvg = Math.Max(2, buffersToAvg);
-			Display.WaterfallAvgBlocks = buffersToAvg;
-		}
-
-		private void udDisplayWaterfallUpdatePeriod_ValueChanged(object sender, System.EventArgs e)
-		{
-			Display.WaterfallUpdatePeriod = (int)udDisplayWaterfallUpdatePeriod.Value;
-		}
-
-		private void chkSnapClickTune_CheckedChanged(object sender, System.EventArgs e)
-		{
-			console.SnapToClickTuning = chkSnapClickTune.Checked;
-		}
-
-		private void radPACalAllBands_CheckedChanged(object sender, System.EventArgs e)
-		{
-			foreach(Control c in grpPAGainByBand.Controls)
-			{
-				if(c.Name.StartsWith("chkPA"))
-				{
-					c.Visible = !radPACalAllBands.Checked;
-				}
-			}
-			/*if(radGenModelFLEX5000.Checked && !radPACalAllBands.Checked) //w5wc
-				chkPA6.Visible = true;
-			else chkPA6.Visible = false;*/
-		}
-
-		private void chkZeroBeatRIT_CheckedChanged(object sender, System.EventArgs e)
-		{
-			console.ZeroBeatRIT = chkZeroBeatRIT.Checked;
-		}
-
-		private FWCAnt old_ant = FWCAnt.ANT1;
-		private void ckEnableSigGen_CheckedChanged(object sender, System.EventArgs e)
-		{
-			if(console.fwc_init)
-			{
-				if(ckEnableSigGen.Checked)
-				{
-					old_ant = console.RX1Ant;
-					console.RX1Ant = FWCAnt.SIG_GEN;
-				}
-				else console.RX1Ant = old_ant;
-				FWC.SetTest(ckEnableSigGen.Checked);
-				FWC.SetGen(ckEnableSigGen.Checked);
-				FWC.SetSig(ckEnableSigGen.Checked);
-			}
-
-			if(!console.FullDuplex)
-				FWC.SetFullDuplex(ckEnableSigGen.Checked);
-		}
-
-		private void chkPANewCal_CheckedChanged(object sender, System.EventArgs e)
-		{
-			bool b = chkPANewCal.Checked;
-
-			console.NewPowerCal = b;
-
-			lblPAGainByBand160.Visible = !b;
-			lblPAGainByBand80.Visible = !b;
-			lblPAGainByBand60.Visible = !b;
-			lblPAGainByBand40.Visible = !b;
-			lblPAGainByBand30.Visible = !b;
-			lblPAGainByBand20.Visible = !b;
-			lblPAGainByBand17.Visible = !b;
-			lblPAGainByBand15.Visible = !b;
-			lblPAGainByBand12.Visible = !b;
-			lblPAGainByBand10.Visible = !b;
-
-			udPAGain160.Visible = !b;
-			udPAGain80.Visible = !b;
-			udPAGain60.Visible = !b;
-			udPAGain40.Visible = !b;
-			udPAGain30.Visible = !b;
-			udPAGain20.Visible = !b;
-			udPAGain17.Visible = !b;
-			udPAGain15.Visible = !b;
-			udPAGain12.Visible = !b;
-			udPAGain10.Visible = !b;
+            path = path.Substring(0, path.LastIndexOf("\\"));
+            openFileDialog1.InitialDirectory = path;
+            openFileDialog1.ShowDialog();
+        }
+
+        private void openFileDialog1_FileOk(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            CompleteImport();
+        }
+
+        private void CompleteImport()
+        {
+            if (DB.ImportDatabase(openFileDialog1.FileName))
+                MessageBox.Show("Database Imported Successfully");
+
+            GetTxProfiles();
+            console.UpdateTXProfile(TXProfile);
+
+            GetOptions();					// load all database values
+            console.GetState();
+            if (console.EQForm != null) Common.RestoreForm(console.EQForm, "EQForm", false);
+            if (console.XVTRForm != null) Common.RestoreForm(console.XVTRForm, "XVTR", false);
+            if (console.ProdTestForm != null) Common.RestoreForm(console.ProdTestForm, "ProdTest", false);
+
+            SaveOptions();					// save all database values
+            console.SaveState();
+            if (console.EQForm != null) Common.SaveForm(console.EQForm, "EQForm");
+            if (console.XVTRForm != null) Common.SaveForm(console.XVTRForm, "XVTR");
+            if (console.ProdTestForm != null) Common.SaveForm(console.ProdTestForm, "ProdTest");
+
+            udTransmitTunePower_ValueChanged(this, EventArgs.Empty);
+            console.ResetMemForm();
+        }
+
+        #endregion
+
+        private bool shift_key = false;
+        private bool ctrl_key = false;
+        private bool alt_key = false;
+        private bool windows_key = false;
+        private bool menu_key = false;
+
+        private void txtKB_KeyDown(object sender, System.Windows.Forms.KeyEventArgs e)
+        {
+            Debug.WriteLine("KeyCode: " + e.KeyCode + " KeyData: " + e.KeyData + " KeyValue: " + e.KeyValue);
+            shift_key = e.Shift;
+            ctrl_key = e.Control;
+            alt_key = e.Alt;
+
+            if (e.KeyCode == Keys.LWin ||
+                e.KeyCode == Keys.RWin)
+                windows_key = true;
+
+            if (e.KeyCode == Keys.Apps)
+                menu_key = true;
+
+            TextBoxTS txtbox = (TextBoxTS)sender;
+
+            string s = "";
+
+            if (ctrl_key) s += "Ctrl+";
+            if (alt_key) s += "Alt+";
+            if (shift_key) s += "Shift+";
+            if (windows_key)
+                s += "Win+";
+            if (menu_key)
+                s += "Menu+";
+
+            if (e.KeyCode != Keys.ShiftKey &&
+                e.KeyCode != Keys.ControlKey &&
+                e.KeyCode != Keys.Menu &&
+                e.KeyCode != Keys.RMenu &&
+                e.KeyCode != Keys.LWin &&
+                e.KeyCode != Keys.RWin &&
+                e.KeyCode != Keys.Apps)
+                s += KeyToString(e.KeyCode);
+
+            txtbox.Text = s;
+            e.Handled = true;
+        }
+
+        private void txtKB_KeyPress(object sender, System.Windows.Forms.KeyPressEventArgs e)
+        {
+            e.Handled = true;
+        }
+
+        private void txtKB_KeyUp(object sender, System.Windows.Forms.KeyEventArgs e)
+        {
+            //Debug.WriteLine("KeyUp: "+e.KeyCode.ToString());
+            shift_key = e.Shift;
+            ctrl_key = e.Control;
+            alt_key = e.Alt;
+
+            if (e.KeyCode == Keys.LWin ||
+                e.KeyCode == Keys.RWin)
+                windows_key = false;
+
+            if (e.KeyCode == Keys.Apps)
+                menu_key = false;
+
+
+            TextBoxTS txtbox = (TextBoxTS)sender;
+
+            if (txtbox.Text.EndsWith("+"))
+            {
+                if (shift_key || ctrl_key || alt_key ||
+                    windows_key || menu_key)
+                {
+                    string s = "";
+
+                    if (ctrl_key) s += "Ctrl+";
+                    if (alt_key) s += "Alt+";
+                    if (shift_key) s += "Shift+";
+                    if (windows_key)
+                        s += "Win+";
+                    if (menu_key)
+                        s += "Menu+";
+
+                    txtbox.Text = s;
+                }
+                else
+                    txtbox.Text = "Not Assigned";
+            }
+        }
+
+        private void clrbtnTXFilter_Changed(object sender, System.EventArgs e)
+        {
+            Display.DisplayFilterTXColor = clrbtnTXFilter.Color;
+        }
+
+        #region Lost Focus Event Handlers
+
+        private void udGeneralCalFreq1_LostFocus(object sender, EventArgs e)
+        {
+            udGeneralCalFreq1.Value = udGeneralCalFreq1.Value;
+        }
+
+        private void udSoftRockCenterFreq_LostFocus(object sender, EventArgs e)
+        {
+            udSoftRockCenterFreq.Value = udSoftRockCenterFreq.Value;
+        }
+
+        private void udDDSCorrection_LostFocus(object sender, EventArgs e)
+        {
+            udDDSCorrection.Value = udDDSCorrection.Value;
+        }
+
+        private void udDDSIFFreq_LostFocus(object sender, EventArgs e)
+        {
+            udDDSIFFreq.Value = udDDSIFFreq.Value;
+        }
+
+        private void udDDSPLLMult_LostFocus(object sender, EventArgs e)
+        {
+            udDDSPLLMult.Value = udDDSPLLMult.Value;
+        }
+
+        private void udGeneralLPTDelay_LostFocus(object sender, EventArgs e)
+        {
+            udGeneralLPTDelay.Value = udGeneralLPTDelay.Value;
+        }
+
+        private void udOptClickTuneOffsetDIGL_LostFocus(object sender, EventArgs e)
+        {
+            udOptClickTuneOffsetDIGL.Value = udOptClickTuneOffsetDIGL.Value;
+        }
+
+        private void udOptClickTuneOffsetDIGU_LostFocus(object sender, EventArgs e)
+        {
+            udOptClickTuneOffsetDIGU.Value = udOptClickTuneOffsetDIGU.Value;
+        }
+
+        private void udGeneralX2Delay_LostFocus(object sender, EventArgs e)
+        {
+            udGeneralX2Delay.Value = udGeneralX2Delay.Value;
+        }
+
+        private void udGeneralCalFreq3_LostFocus(object sender, EventArgs e)
+        {
+            udGeneralCalFreq3.Value = udGeneralCalFreq3.Value;
+        }
+
+        private void udGeneralCalLevel_LostFocus(object sender, EventArgs e)
+        {
+            udGeneralCalLevel.Value = udGeneralCalLevel.Value;
+        }
+
+        private void udGeneralCalFreq2_LostFocus(object sender, EventArgs e)
+        {
+            udGeneralCalFreq2.Value = udGeneralCalFreq2.Value;
+        }
+
+        private void udFilterDefaultLowCut_LostFocus(object sender, EventArgs e)
+        {
+            udFilterDefaultLowCut.Value = udFilterDefaultLowCut.Value;
+        }
+
+        private void udOptMaxFilterShift_LostFocus(object sender, EventArgs e)
+        {
+            udOptMaxFilterShift.Value = udOptMaxFilterShift.Value;
+        }
+
+        private void udOptMaxFilterWidth_LostFocus(object sender, EventArgs e)
+        {
+            udOptMaxFilterWidth.Value = udOptMaxFilterWidth.Value;
+        }
+
+        private void udAudioMicGain1_LostFocus(object sender, EventArgs e)
+        {
+            udAudioMicGain1.Value = udAudioMicGain1.Value;
+        }
+
+        private void udAudioLineIn1_LostFocus(object sender, EventArgs e)
+        {
+            udAudioLineIn1.Value = udAudioLineIn1.Value;
+        }
+
+        private void udAudioVoltage1_LostFocus(object sender, EventArgs e)
+        {
+            udAudioVoltage1.Value = udAudioVoltage1.Value;
+        }
+
+        private void udAudioLatency1_LostFocus(object sender, EventArgs e)
+        {
+            udAudioLatency1.Value = udAudioLatency1.Value;
+        }
+
+        private void udAudioVACGainTX_LostFocus(object sender, EventArgs e)
+        {
+            udAudioVACGainTX.Value = udAudioVACGainTX.Value;
+        }
+
+        private void udAudioVACGainRX_LostFocus(object sender, EventArgs e)
+        {
+            udAudioVACGainRX.Value = udAudioVACGainRX.Value;
+        }
+
+        private void udAudioLatency2_LostFocus(object sender, EventArgs e)
+        {
+            udAudioLatency2.Value = udAudioLatency2.Value;
+        }
+
+        private void udDisplayScopeTime_LostFocus(object sender, EventArgs e)
+        {
+            udDisplayScopeTime.Value = udDisplayScopeTime.Value;
+        }
+
+        private void udDisplayMeterAvg_LostFocus(object sender, EventArgs e)
+        {
+            udDisplayMeterAvg.Value = udDisplayMeterAvg.Value;
+        }
+
+        private void udDisplayMultiTextHoldTime_LostFocus(object sender, EventArgs e)
+        {
+            udDisplayMultiTextHoldTime.Value = udDisplayMultiTextHoldTime.Value;
+        }
+
+        private void udDisplayMultiPeakHoldTime_LostFocus(object sender, EventArgs e)
+        {
+            udDisplayMultiPeakHoldTime.Value = udDisplayMultiPeakHoldTime.Value;
+        }
+
+        private void udDisplayWaterfallLowLevel_LostFocus(object sender, EventArgs e)
+        {
+            udDisplayWaterfallLowLevel.Value = udDisplayWaterfallLowLevel.Value;
+        }
+
+        private void udDisplayWaterfallHighLevel_LostFocus(object sender, EventArgs e)
+        {
+            udDisplayWaterfallHighLevel.Value = udDisplayWaterfallHighLevel.Value;
+        }
+
+        private void udDisplayCPUMeter_LostFocus(object sender, EventArgs e)
+        {
+            udDisplayCPUMeter.Value = udDisplayCPUMeter.Value;
+        }
+
+        private void udDisplayPeakText_LostFocus(object sender, EventArgs e)
+        {
+            udDisplayPeakText.Value = udDisplayPeakText.Value;
+        }
+
+        private void udDisplayMeterDelay_LostFocus(object sender, EventArgs e)
+        {
+            udDisplayMeterDelay.Value = udDisplayMeterDelay.Value;
+        }
+
+        private void udDisplayFPS_LostFocus(object sender, EventArgs e)
+        {
+            udDisplayFPS.Value = udDisplayFPS.Value;
+        }
+
+        private void udDisplayAVGTime_LostFocus(object sender, EventArgs e)
+        {
+            udDisplayAVGTime.Value = udDisplayAVGTime.Value;
+        }
+
+        private void udDisplayPhasePts_LostFocus(object sender, EventArgs e)
+        {
+            udDisplayPhasePts.Value = udDisplayPhasePts.Value;
+        }
+
+        private void udDisplayGridStep_LostFocus(object sender, EventArgs e)
+        {
+            udDisplayGridStep.Value = udDisplayGridStep.Value;
+        }
+
+        private void udDisplayGridMin_LostFocus(object sender, EventArgs e)
+        {
+            udDisplayGridMin.Value = udDisplayGridMin.Value;
+        }
+
+        private void udDSPNB_LostFocus(object sender, EventArgs e)
+        {
+            udDSPNB.Value = udDSPNB.Value;
+        }
+
+        private void udLMSNRgain_LostFocus(object sender, EventArgs e)
+        {
+            udLMSNRgain.Value = udLMSNRgain.Value;
+        }
+
+        private void udLMSNRdelay_LostFocus(object sender, EventArgs e)
+        {
+            udLMSNRdelay.Value = udLMSNRdelay.Value;
+        }
+
+        private void udLMSNRtaps_LostFocus(object sender, EventArgs e)
+        {
+            udLMSNRtaps.Value = udLMSNRtaps.Value;
+        }
+
+        private void udLMSANFgain_LostFocus(object sender, EventArgs e)
+        {
+            udLMSANFgain.Value = udLMSANFgain.Value;
+        }
+
+        private void udLMSANFdelay_LostFocus(object sender, EventArgs e)
+        {
+            udLMSANFdelay.Value = udLMSANFdelay.Value;
+        }
+
+        private void udLMSANFtaps_LostFocus(object sender, EventArgs e)
+        {
+            udLMSANFtaps.Value = udLMSANFtaps.Value;
+        }
+
+        private void udDSPNB2_LostFocus(object sender, EventArgs e)
+        {
+            udDSPNB2.Value = udDSPNB2.Value;
+        }
+
+        private void udDSPImageGainTX_LostFocus(object sender, EventArgs e)
+        {
+            udDSPImageGainTX.Value = udDSPImageGainTX.Value;
+        }
+
+        private void udDSPImagePhaseTX_LostFocus(object sender, EventArgs e)
+        {
+            udDSPImagePhaseTX.Value = udDSPImagePhaseTX.Value;
+        }
+
+        private void udDSPCWPitch_LostFocus(object sender, EventArgs e)
+        {
+            udDSPCWPitch.Value = udDSPCWPitch.Value;
+        }
+
+        private void udCWKeyerDeBounce_LostFocus(object sender, EventArgs e)
+        {
+            udCWKeyerDeBounce.Value = udCWKeyerDeBounce.Value;
+        }
+
+        private void udCWKeyerWeight_LostFocus(object sender, EventArgs e)
+        {
+            udCWKeyerWeight.Value = udCWKeyerWeight.Value;
+        }
+
+        private void udCWKeyerRamp_LostFocus(object sender, EventArgs e)
+        {
+            udCWKeyerRamp.Value = udCWKeyerRamp.Value;
+        }
+
+        private void udCWBreakInDelay_LostFocus(object sender, EventArgs e)
+        {
+            udCWBreakInDelay.Value = udCWBreakInDelay.Value;
+        }
+
+        private void udDSPLevelerHangTime_LostFocus(object sender, EventArgs e)
+        {
+            udDSPLevelerHangTime.Value = udDSPLevelerHangTime.Value;
+        }
+
+        private void udDSPLevelerThreshold_LostFocus(object sender, EventArgs e)
+        {
+            udDSPLevelerThreshold.Value = udDSPLevelerThreshold.Value;
+        }
+
+        private void udDSPLevelerSlope_LostFocus(object sender, EventArgs e)
+        {
+            udDSPLevelerSlope.Value = udDSPLevelerSlope.Value;
+        }
+
+        private void udDSPLevelerDecay_LostFocus(object sender, EventArgs e)
+        {
+            udDSPLevelerDecay.Value = udDSPLevelerDecay.Value;
+        }
+
+        private void udDSPLevelerAttack_LostFocus(object sender, EventArgs e)
+        {
+            udDSPLevelerAttack.Value = udDSPLevelerAttack.Value;
+        }
+
+        private void udDSPALCHangTime_LostFocus(object sender, EventArgs e)
+        {
+            udDSPALCHangTime.Value = udDSPALCHangTime.Value;
+        }
+
+        private void udDSPALCThreshold_LostFocus(object sender, EventArgs e)
+        {
+            udDSPALCThreshold.Value = udDSPALCThreshold.Value;
+        }
+
+        private void udDSPALCSlope_LostFocus(object sender, EventArgs e)
+        {
+            udDSPALCSlope.Value = udDSPALCSlope.Value;
+        }
+
+        private void udDSPALCDecay_LostFocus(object sender, EventArgs e)
+        {
+            udDSPALCDecay.Value = udDSPALCDecay.Value;
+        }
+
+        private void udDSPALCAttack_LostFocus(object sender, EventArgs e)
+        {
+            udDSPALCAttack.Value = udDSPALCAttack.Value;
+        }
+
+        private void udDSPAGCHangTime_LostFocus(object sender, EventArgs e)
+        {
+            udDSPAGCHangTime.Value = udDSPAGCHangTime.Value;
+        }
+
+        private void udDSPAGCMaxGaindB_LostFocus(object sender, EventArgs e)
+        {
+            udDSPAGCMaxGaindB.Value = udDSPAGCMaxGaindB.Value;
+        }
+
+        private void udDSPAGCSlope_LostFocus(object sender, EventArgs e)
+        {
+            udDSPAGCSlope.Value = udDSPAGCSlope.Value;
+        }
+
+        private void udDSPAGCDecay_LostFocus(object sender, EventArgs e)
+        {
+            udDSPAGCDecay.Value = udDSPAGCDecay.Value;
+        }
+
+        private void udDSPAGCAttack_LostFocus(object sender, EventArgs e)
+        {
+            udDSPAGCAttack.Value = udDSPAGCAttack.Value;
+        }
+
+        private void udDSPAGCFixedGaindB_LostFocus(object sender, EventArgs e)
+        {
+            udDSPAGCFixedGaindB.Value = udDSPAGCFixedGaindB.Value;
+        }
+
+        private void udTXAMCarrierLevel_LostFocus(object sender, EventArgs e)
+        {
+            udTXAMCarrierLevel.Value = udTXAMCarrierLevel.Value;
+        }
+
+        private void udTXAF_LostFocus(object sender, EventArgs e)
+        {
+            udTXAF.Value = udTXAF.Value;
+        }
+
+        private void udTXVOXHangTime_LostFocus(object sender, EventArgs e)
+        {
+            udTXVOXHangTime.Value = udTXVOXHangTime.Value;
+        }
+
+        private void udTXVOXThreshold_LostFocus(object sender, EventArgs e)
+        {
+            udTXVOXThreshold.Value = udTXVOXThreshold.Value;
+        }
+
+        private void udTXNoiseGate_LostFocus(object sender, EventArgs e)
+        {
+            udTXNoiseGate.Value = udTXNoiseGate.Value;
+        }
+
+        private void udTXTunePower_LostFocus(object sender, EventArgs e)
+        {
+            udTXTunePower.Value = udTXTunePower.Value;
+        }
+
+        private void udTXFilterLow_LostFocus(object sender, EventArgs e)
+        {
+            udTXFilterLow.Value = udTXFilterLow.Value;
+        }
+
+        private void udTXFilterHigh_LostFocus(object sender, EventArgs e)
+        {
+            udTXFilterHigh.Value = udTXFilterHigh.Value;
+        }
+
+        private void udPAADC17_LostFocus(object sender, EventArgs e)
+        {
+            udPAADC17.Value = udPAADC17.Value;
+        }
+
+        private void udPAADC15_LostFocus(object sender, EventArgs e)
+        {
+            udPAADC15.Value = udPAADC15.Value;
+        }
+
+        private void udPAADC20_LostFocus(object sender, EventArgs e)
+        {
+            udPAADC20.Value = udPAADC20.Value;
+        }
+
+        private void udPAADC12_LostFocus(object sender, EventArgs e)
+        {
+            udPAADC12.Value = udPAADC12.Value;
+        }
+
+        private void udPAADC10_LostFocus(object sender, EventArgs e)
+        {
+            udPAADC10.Value = udPAADC10.Value;
+        }
+
+        private void udPAADC160_LostFocus(object sender, EventArgs e)
+        {
+            udPAADC160.Value = udPAADC160.Value;
+        }
+
+        private void udPAADC80_LostFocus(object sender, EventArgs e)
+        {
+            udPAADC80.Value = udPAADC80.Value;
+        }
+
+        private void udPAADC60_LostFocus(object sender, EventArgs e)
+        {
+            udPAADC60.Value = udPAADC60.Value;
+        }
+
+        private void udPAADC40_LostFocus(object sender, EventArgs e)
+        {
+            udPAADC40.Value = udPAADC40.Value;
+        }
+
+        private void udPAADC30_LostFocus(object sender, EventArgs e)
+        {
+            udPAADC30.Value = udPAADC30.Value;
+        }
+
+        private void udPAGain10_LostFocus(object sender, EventArgs e)
+        {
+            udPAGain10.Value = udPAGain10.Value;
+        }
+
+        private void udPAGain12_LostFocus(object sender, EventArgs e)
+        {
+            udPAGain12.Value = udPAGain12.Value;
+        }
+
+        private void udPAGain15_LostFocus(object sender, EventArgs e)
+        {
+            udPAGain15.Value = udPAGain15.Value;
+        }
+
+        private void udPAGain17_LostFocus(object sender, EventArgs e)
+        {
+            udPAGain17.Value = udPAGain17.Value;
+        }
+
+        private void udPAGain20_LostFocus(object sender, EventArgs e)
+        {
+            udPAGain20.Value = udPAGain20.Value;
+        }
+
+        private void udPAGain30_LostFocus(object sender, EventArgs e)
+        {
+            udPAGain30.Value = udPAGain30.Value;
+        }
+
+        private void udPAGain40_LostFocus(object sender, EventArgs e)
+        {
+            udPAGain40.Value = udPAGain40.Value;
+        }
+
+        private void udPAGain60_LostFocus(object sender, EventArgs e)
+        {
+            udPAGain60.Value = udPAGain60.Value;
+        }
+
+        private void udPAGain80_LostFocus(object sender, EventArgs e)
+        {
+            udPAGain80.Value = udPAGain80.Value;
+        }
+
+        private void udPAGain160_LostFocus(object sender, EventArgs e)
+        {
+            udPAGain160.Value = udPAGain160.Value;
+        }
+
+        private void udPACalPower_LostFocus(object sender, EventArgs e)
+        {
+            udPACalPower.Value = udPACalPower.Value;
+        }
+
+        private void udDisplayLineWidth_LostFocus(object sender, EventArgs e)
+        {
+            udDisplayLineWidth.Value = udDisplayLineWidth.Value;
+        }
+
+        private void udTestGenScale_LostFocus(object sender, EventArgs e)
+        {
+            udTestGenScale.Value = udTestGenScale.Value;
+        }
+
+        private void udTestGenHzSec_LostFocus(object sender, EventArgs e)
+        {
+            udTestGenHzSec.Value = udTestGenHzSec.Value;
+        }
+
+        private void udTestGenHigh_LostFocus(object sender, EventArgs e)
+        {
+            udTestGenHigh.Value = udTestGenHigh.Value;
+        }
+
+        private void udTestGenLow_LostFocus(object sender, EventArgs e)
+        {
+            udTestGenLow.Value = udTestGenLow.Value;
+        }
+
+        private void udTestIMDFreq2_LostFocus(object sender, EventArgs e)
+        {
+            udTestIMDFreq2.Value = udTestIMDFreq2.Value;
+        }
+
+        private void udTestIMDPower_LostFocus(object sender, EventArgs e)
+        {
+            udTestIMDPower.Value = udTestIMDPower.Value;
+        }
+
+        private void udTestIMDFreq1_LostFocus(object sender, EventArgs e)
+        {
+            udTestIMDFreq1.Value = udTestIMDFreq1.Value;
+        }
+
+        private void udImpulseNum_LostFocus(object sender, EventArgs e)
+        {
+            udImpulseNum.Value = udImpulseNum.Value;
+        }
+
+        #endregion
+
+        private void chkShowFreqOffset_CheckedChanged(object sender, System.EventArgs e)
+        {
+            Display.ShowFreqOffset = chkShowFreqOffset.Checked;
+        }
+
+        private void clrbtnBandEdge_Changed(object sender, System.EventArgs e)
+        {
+            Display.BandEdgeColor = clrbtnBandEdge.Color;
+        }
+
+        private void comboMeterType_SelectedIndexChanged(object sender, System.EventArgs e)
+        {
+            if (comboMeterType.Text == "") return;
+            switch (comboMeterType.Text)
+            {
+                case "Original":
+                    console.CurrentMeterDisplayMode = MultiMeterDisplayMode.Original;
+                    break;
+                case "Edge":
+                    console.CurrentMeterDisplayMode = MultiMeterDisplayMode.Edge;
+                    break;
+                case "Analog":
+                    console.CurrentMeterDisplayMode = MultiMeterDisplayMode.Analog;
+                    break;
+            }
+        }
+
+        private void clrbtnMeterEdgeLow_Changed(object sender, System.EventArgs e)
+        {
+            console.EdgeLowColor = clrbtnMeterEdgeLow.Color;
+        }
+
+        private void clrbtnMeterEdgeHigh_Changed(object sender, System.EventArgs e)
+        {
+            console.EdgeHighColor = clrbtnMeterEdgeHigh.Color;
+        }
+
+        private void clrbtnMeterEdgeBackground_Changed(object sender, System.EventArgs e)
+        {
+            console.EdgeMeterBackgroundColor = clrbtnMeterEdgeBackground.Color;
+        }
+
+        private void clrbtnEdgeIndicator_Changed(object sender, System.EventArgs e)
+        {
+            console.EdgeAVGColor = clrbtnEdgeIndicator.Color;
+        }
+
+        private void clrbtnMeterDigText_Changed(object sender, System.EventArgs e)
+        {
+            console.MeterDigitalTextColor = clrbtnMeterDigText.Color;
+        }
+
+        private void clrbtnMeterDigBackground_Changed(object sender, System.EventArgs e)
+        {
+            console.MeterDigitalBackgroundColor = clrbtnMeterDigBackground.Color;
+        }
+
+        private void clrbtnSubRXFilter_Changed(object sender, System.EventArgs e)
+        {
+            Display.SubRXFilterColor = Color.FromArgb(tbMultiRXFilterAlpha.Value, clrbtnSubRXFilter.Color);
+        }
+
+        private void clrbtnSubRXZero_Changed(object sender, System.EventArgs e)
+        {
+            Display.SubRXZeroLine = clrbtnSubRXZero.Color;
+        }
+
+        private void chkCWKeyerMode_CheckedChanged(object sender, System.EventArgs e)
+        {
+            if (chkCWKeyerMode.Checked) console.Keyer.KeyerMode = 1;
+            else console.Keyer.KeyerMode = 0;
+        }
+
+        private void chkDisableToolTips_CheckedChanged(object sender, System.EventArgs e)
+        {
+            toolTip1.Active = !chkDisableToolTips.Checked;
+            console.DisableToolTips = chkDisableToolTips.Checked;
+        }
+
+        private void udDisplayWaterfallAvgTime_ValueChanged(object sender, System.EventArgs e)
+        {
+            double buffer_time = double.Parse(comboAudioBuffer1.Text) / (double)console.SampleRate1;
+            int buffersToAvg = (int)((float)udDisplayWaterfallAvgTime.Value * 0.001 / buffer_time);
+            buffersToAvg = Math.Max(2, buffersToAvg);
+            Display.WaterfallAvgBlocks = buffersToAvg;
+        }
+
+        private void udDisplayWaterfallUpdatePeriod_ValueChanged(object sender, System.EventArgs e)
+        {
+            Display.WaterfallUpdatePeriod = (int)udDisplayWaterfallUpdatePeriod.Value;
+        }
+
+        private void chkSnapClickTune_CheckedChanged(object sender, System.EventArgs e)
+        {
+            console.SnapToClickTuning = chkSnapClickTune.Checked;
+        }
+
+        private void radPACalAllBands_CheckedChanged(object sender, System.EventArgs e)
+        {
+            foreach (Control c in grpPAGainByBand.Controls)
+            {
+                if (c.Name.StartsWith("chkPA"))
+                {
+                    c.Visible = !radPACalAllBands.Checked;
+                }
+            }
+            /*if(radGenModelFLEX5000.Checked && !radPACalAllBands.Checked) //w5wc
+                chkPA6.Visible = true;
+            else chkPA6.Visible = false;*/
+        }
+
+        private void chkZeroBeatRIT_CheckedChanged(object sender, System.EventArgs e)
+        {
+            console.ZeroBeatRIT = chkZeroBeatRIT.Checked;
+        }
+
+        private FWCAnt old_ant = FWCAnt.ANT1;
+        private void ckEnableSigGen_CheckedChanged(object sender, System.EventArgs e)
+        {
+            if (console.fwc_init)
+            {
+                if (ckEnableSigGen.Checked)
+                {
+                    old_ant = console.RX1Ant;
+                    console.RX1Ant = FWCAnt.SIG_GEN;
+                }
+                else console.RX1Ant = old_ant;
+                FWC.SetTest(ckEnableSigGen.Checked);
+                FWC.SetGen(ckEnableSigGen.Checked);
+                FWC.SetSig(ckEnableSigGen.Checked);
+            }
+
+            if (!console.FullDuplex)
+                FWC.SetFullDuplex(ckEnableSigGen.Checked);
+        }
+
+        private void chkPANewCal_CheckedChanged(object sender, System.EventArgs e)
+        {
+            bool b = chkPANewCal.Checked;
+
+            console.NewPowerCal = b;
+
+            lblPAGainByBand160.Visible = !b;
+            lblPAGainByBand80.Visible = !b;
+            lblPAGainByBand60.Visible = !b;
+            lblPAGainByBand40.Visible = !b;
+            lblPAGainByBand30.Visible = !b;
+            lblPAGainByBand20.Visible = !b;
+            lblPAGainByBand17.Visible = !b;
+            lblPAGainByBand15.Visible = !b;
+            lblPAGainByBand12.Visible = !b;
+            lblPAGainByBand10.Visible = !b;
+
+            udPAGain160.Visible = !b;
+            udPAGain80.Visible = !b;
+            udPAGain60.Visible = !b;
+            udPAGain40.Visible = !b;
+            udPAGain30.Visible = !b;
+            udPAGain20.Visible = !b;
+            udPAGain17.Visible = !b;
+            udPAGain15.Visible = !b;
+            udPAGain12.Visible = !b;
+            udPAGain10.Visible = !b;
             udPAGain6.Visible = !b;
 
-			if(!radGenModelFLEX5000.Checked)
-			{
-				lblPACalTarget.Visible = !b;
-				udPACalPower.Visible = !b;
-				btnPAGainReset.Visible = !b;
-			}
-		}
+            if (!radGenModelFLEX5000.Checked)
+            {
+                lblPACalTarget.Visible = !b;
+                udPACalPower.Visible = !b;
+                btnPAGainReset.Visible = !b;
+            }
+        }
 
-		private void chkAudioExpert_CheckedChanged(object sender, System.EventArgs e)
-		{
-			if(chkAudioExpert.Checked && chkAudioExpert.Focused)
-			{
-				DialogResult dr = MessageBox.Show("The Expert mode allows the user to control advanced controls that only \n"+
-					"experienced PowerSDR users should use.  These controls may allow the user\n"+
-					"to cause damage to the radio.  Are you sure you want to enable Expert mode?",
-					"Warning: Enable Expert Mode?",
-					MessageBoxButtons.YesNo,
-					MessageBoxIcon.Warning);
-				if(dr == DialogResult.No)
-				{
-					chkAudioExpert.Checked = false;
-					return;
-				}
-			}
+        private void chkAudioExpert_CheckedChanged(object sender, System.EventArgs e)
+        {
+            if (chkAudioExpert.Checked && chkAudioExpert.Focused)
+            {
+                DialogResult dr = MessageBox.Show("The Expert mode allows the user to control advanced controls that only \n" +
+                    "experienced PowerSDR users should use.  These controls may allow the user\n" +
+                    "to cause damage to the radio.  Are you sure you want to enable Expert mode?",
+                    "Warning: Enable Expert Mode?",
+                    MessageBoxButtons.YesNo,
+                    MessageBoxIcon.Warning);
+                if (dr == DialogResult.No)
+                {
+                    chkAudioExpert.Checked = false;
+                    return;
+                }
+            }
 
-			bool b = chkAudioExpert.Checked;
-			grpAudioLatency1.Visible = b;
-			grpAudioVolts1.Visible = ((b && !radGenModelFLEX5000.Checked) || (comboAudioSoundCard.Text == "Unsupported Card" && !radGenModelFLEX5000.Checked));
-		}
+            bool b = chkAudioExpert.Checked;
+            grpAudioLatency1.Visible = b;
+            grpAudioVolts1.Visible = ((b && !radGenModelFLEX5000.Checked) || (comboAudioSoundCard.Text == "Unsupported Card" && !radGenModelFLEX5000.Checked));
+        }
 
-		private void udMeterDigitalDelay_ValueChanged(object sender, System.EventArgs e)
-		{
-			console.MeterDigDelay = (int)udMeterDigitalDelay.Value;
-		}
+        private void udMeterDigitalDelay_ValueChanged(object sender, System.EventArgs e)
+        {
+            console.MeterDigDelay = (int)udMeterDigitalDelay.Value;
+        }
 
-		private void chkMouseTuneStep_CheckedChanged(object sender, System.EventArgs e)
-		{
-			console.MouseTuneStep = chkMouseTuneStep.Checked;
-		}
+        private void chkMouseTuneStep_CheckedChanged(object sender, System.EventArgs e)
+        {
+            console.MouseTuneStep = chkMouseTuneStep.Checked;
+        }
 
         private void chkBoxJanusOzyControl_CheckedChanged(object sender, System.EventArgs e)
         {
@@ -28920,11 +29071,11 @@ namespace PowerSDR
                 console.OzyControl = chkBoxJanusOzyControl.Checked;
                 if (chkBoxJanusOzyControl.Checked)
                 {
-                        chkBoxJanusOzyControl.Checked = false;
-                        MessageBox.Show("Error initializing Ozy; Ozy Control has been disabled. ", "Ozy Initialization Error",
-                            MessageBoxButtons.OK,
-                            MessageBoxIcon.Error);
-                    
+                    chkBoxJanusOzyControl.Checked = false;
+                    MessageBox.Show("Error initializing Ozy; Ozy Control has been disabled. ", "Ozy Initialization Error",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Error);
+
                 }
                 else
                 {
@@ -28948,64 +29099,64 @@ namespace PowerSDR
             }
         }
 
-		private void chkGenDDSExpert_CheckedChanged(object sender, System.EventArgs e)
-		{
-			if(chkGenDDSExpert.Checked && chkGenDDSExpert.Focused)
-			{
-				DialogResult dr = MessageBox.Show("The Expert mode allows the user to control advanced controls that only \n"+
-					"experienced PowerSDR users should use.  These controls may allow the user\n"+
-					"to change important calibration parameters.\n"+
-					"Are you sure you want to enable Expert mode?",
-					"Warning: Enable Expert Mode?",
-					MessageBoxButtons.YesNo,
-					MessageBoxIcon.Warning);
-				if(dr == DialogResult.No)
-				{
-					chkGenDDSExpert.Checked = false;
-					return;
-				}
-			}
+        private void chkGenDDSExpert_CheckedChanged(object sender, System.EventArgs e)
+        {
+            if (chkGenDDSExpert.Checked && chkGenDDSExpert.Focused)
+            {
+                DialogResult dr = MessageBox.Show("The Expert mode allows the user to control advanced controls that only \n" +
+                    "experienced PowerSDR users should use.  These controls may allow the user\n" +
+                    "to change important calibration parameters.\n" +
+                    "Are you sure you want to enable Expert mode?",
+                    "Warning: Enable Expert Mode?",
+                    MessageBoxButtons.YesNo,
+                    MessageBoxIcon.Warning);
+                if (dr == DialogResult.No)
+                {
+                    chkGenDDSExpert.Checked = false;
+                    return;
+                }
+            }
 
-			bool b = chkGenDDSExpert.Checked;
-			switch(console.CurrentModel)
-			{
-				case Model.FLEX5000:
+            bool b = chkGenDDSExpert.Checked;
+            switch (console.CurrentModel)
+            {
+                case Model.FLEX5000:
                 case Model.FLEX3000:
-					lblClockCorrection.Visible = b;
-					udDDSCorrection.Visible = b;
-					lblIFFrequency.Visible = b;
-					udDDSIFFreq.Visible = b;
-					break;
-				default:
-					lblClockCorrection.Visible = b;
-					udDDSCorrection.Visible = b;
-					lblPLLMult.Visible = b;
-					udDDSPLLMult.Visible = b;
-					lblIFFrequency.Visible = b;
-					udDDSIFFreq.Visible = b;
-					break;
-			}
-		}
+                    lblClockCorrection.Visible = b;
+                    udDDSCorrection.Visible = b;
+                    lblIFFrequency.Visible = b;
+                    udDDSIFFreq.Visible = b;
+                    break;
+                default:
+                    lblClockCorrection.Visible = b;
+                    udDDSCorrection.Visible = b;
+                    lblPLLMult.Visible = b;
+                    udDDSPLLMult.Visible = b;
+                    lblIFFrequency.Visible = b;
+                    udDDSIFFreq.Visible = b;
+                    break;
+            }
+        }
 
-		private void chkCalExpert_CheckedChanged(object sender, System.EventArgs e)
-		{
-			if(radGenModelFLEX5000.Checked)
-			{
-				if(chkCalExpert.Checked && chkCalExpert.Focused)
-				{
-					DialogResult dr = MessageBox.Show("The Expert mode allows the user to control advanced controls that only \n"+
-						"experienced PowerSDR users should use.  These controls may allow the user\n"+
-						"to change important calibration parameters.\n"+
-						"Are you sure you want to enable Expert mode?",
-						"Warning: Enable Expert Mode?",
-						MessageBoxButtons.YesNo,
-						MessageBoxIcon.Warning);
-					if(dr == DialogResult.No)
-					{
-						chkCalExpert.Checked = false;
-						return;
-					}
-				}
+        private void chkCalExpert_CheckedChanged(object sender, System.EventArgs e)
+        {
+            if (radGenModelFLEX5000.Checked)
+            {
+                if (chkCalExpert.Checked && chkCalExpert.Focused)
+                {
+                    DialogResult dr = MessageBox.Show("The Expert mode allows the user to control advanced controls that only \n" +
+                        "experienced PowerSDR users should use.  These controls may allow the user\n" +
+                        "to change important calibration parameters.\n" +
+                        "Are you sure you want to enable Expert mode?",
+                        "Warning: Enable Expert Mode?",
+                        MessageBoxButtons.YesNo,
+                        MessageBoxIcon.Warning);
+                    if (dr == DialogResult.No)
+                    {
+                        chkCalExpert.Checked = false;
+                        return;
+                    }
+                }
 
                 bool b = chkCalExpert.Checked;
                 switch (console.CurrentModel)
@@ -29022,346 +29173,346 @@ namespace PowerSDR
                         grpGenCalRXImage.Visible = b;
                         break;
                 }
-			}
-		}
+            }
+        }
 
-		private void chkDSPImageExpert_CheckedChanged(object sender, System.EventArgs e)
-		{
-			if(radGenModelFLEX5000.Checked)
-			{
-				if(chkDSPImageExpert.Checked && chkDSPImageExpert.Focused)
-				{
-					DialogResult dr = MessageBox.Show("The Expert mode allows the user to control advanced controls that only \n"+
-						"experienced PowerSDR users should use.  These controls may allow the user\n"+
-						"to cause damage to the radio or change important calibration parameters.\n"+
-						"Are you sure you want to enable Expert mode?",
-						"Warning: Enable Expert Mode?",
-						MessageBoxButtons.YesNo,
-						MessageBoxIcon.Warning);
-					if(dr == DialogResult.No)
-					{
-						chkDSPImageExpert.Checked = false;
-						return;
-					}
-				}
+        private void chkDSPImageExpert_CheckedChanged(object sender, System.EventArgs e)
+        {
+            if (radGenModelFLEX5000.Checked)
+            {
+                if (chkDSPImageExpert.Checked && chkDSPImageExpert.Focused)
+                {
+                    DialogResult dr = MessageBox.Show("The Expert mode allows the user to control advanced controls that only \n" +
+                        "experienced PowerSDR users should use.  These controls may allow the user\n" +
+                        "to cause damage to the radio or change important calibration parameters.\n" +
+                        "Are you sure you want to enable Expert mode?",
+                        "Warning: Enable Expert Mode?",
+                        MessageBoxButtons.YesNo,
+                        MessageBoxIcon.Warning);
+                    if (dr == DialogResult.No)
+                    {
+                        chkDSPImageExpert.Checked = false;
+                        return;
+                    }
+                }
 
-				bool b = chkDSPImageExpert.Checked;
-				grpDSPImageRejectTX.Visible = b;
-			}
-		}
+                bool b = chkDSPImageExpert.Checked;
+                grpDSPImageRejectTX.Visible = b;
+            }
+        }
 
-		private void txtGenCustomTitle_TextChanged(object sender, System.EventArgs e)
-		{
-			string title = console.Text;
-			int index = title.IndexOf("   --   ");
-			if(index >= 0) title = title.Substring(0, index);
-			if(txtGenCustomTitle.Text != "" && txtGenCustomTitle.Text != null)
-	            title += "   --   "+txtGenCustomTitle.Text;
-			console.Text = title;
-		}
+        private void txtGenCustomTitle_TextChanged(object sender, System.EventArgs e)
+        {
+            string title = console.Text;
+            int index = title.IndexOf("   --   ");
+            if (index >= 0) title = title.Substring(0, index);
+            if (txtGenCustomTitle.Text != "" && txtGenCustomTitle.Text != null)
+                title += "   --   " + txtGenCustomTitle.Text;
+            console.Text = title;
+        }
 
-		private void chkGenFLEX5000ExtRef_CheckedChanged(object sender, System.EventArgs e)
-		{
-			if(radGenModelFLEX5000.Checked)
-				FWC.SetXREF(chkGenFLEX5000ExtRef.Checked);
-		}
+        private void chkGenFLEX5000ExtRef_CheckedChanged(object sender, System.EventArgs e)
+        {
+            if (radGenModelFLEX5000.Checked)
+                FWC.SetXREF(chkGenFLEX5000ExtRef.Checked);
+        }
 
-		private void chkFPInstalled_CheckedChanged(object sender, System.EventArgs e)
-		{
-			if(chkFPInstalled.Checked)
-			{
-				flex_profiler_installed = true;
-				console.ShowRemoteProfileMenu(true);
-			}
-			else
-			{
-				flex_profiler_installed = false;
-				console.ShowRemoteProfileMenu(false);
-			}
-				
-		}
+        private void chkFPInstalled_CheckedChanged(object sender, System.EventArgs e)
+        {
+            if (chkFPInstalled.Checked)
+            {
+                flex_profiler_installed = true;
+                console.ShowRemoteProfileMenu(true);
+            }
+            else
+            {
+                flex_profiler_installed = false;
+                console.ShowRemoteProfileMenu(false);
+            }
 
-		private void chkGenAllModeMicPTT_CheckedChanged(object sender, System.EventArgs e)
-		{
-			console.AllModeMicPTT = chkGenAllModeMicPTT.Checked;
-		}
+        }
 
-		private void udLMSNRLeak_ValueChanged(object sender, System.EventArgs e)
-		{
-			console.radio.GetDSPRX(0, 0).SetNRVals(
-				(int)udLMSNRtaps.Value,
-				(int)udLMSNRdelay.Value,
-				0.00001*(double)udLMSNRgain.Value,
-				0.0000001*(double)udLMSNRLeak.Value);
-			console.radio.GetDSPRX(0, 1).SetNRVals(
-				(int)udLMSNRtaps.Value,
-				(int)udLMSNRdelay.Value,
-				0.00001*(double)udLMSNRgain.Value,
-				0.0000001*(double)udLMSNRLeak.Value);
-		
-		}
+        private void chkGenAllModeMicPTT_CheckedChanged(object sender, System.EventArgs e)
+        {
+            console.AllModeMicPTT = chkGenAllModeMicPTT.Checked;
+        }
 
-		private void udLMSANFLeak_ValueChanged(object sender, System.EventArgs e)
-		{
-			console.radio.GetDSPRX(0, 0).SetANFVals(
-				(int)udLMSANFtaps.Value,
-				(int)udLMSANFdelay.Value,
-				0.00001*(double)udLMSANFgain.Value,
-				0.0000001*(double)udLMSANFLeak.Value);
-			console.radio.GetDSPRX(0, 1).SetANFVals(
-				(int)udLMSANFtaps.Value,
-				(int)udLMSANFdelay.Value,
-				0.00001*(double)udLMSANFgain.Value,
-				0.0000001*(double)udLMSANFLeak.Value);
-		
-		}
+        private void udLMSNRLeak_ValueChanged(object sender, System.EventArgs e)
+        {
+            console.radio.GetDSPRX(0, 0).SetNRVals(
+                (int)udLMSNRtaps.Value,
+                (int)udLMSNRdelay.Value,
+                0.00001 * (double)udLMSNRgain.Value,
+                0.0000001 * (double)udLMSNRLeak.Value);
+            console.radio.GetDSPRX(0, 1).SetNRVals(
+                (int)udLMSNRtaps.Value,
+                (int)udLMSNRdelay.Value,
+                0.00001 * (double)udLMSNRgain.Value,
+                0.0000001 * (double)udLMSNRLeak.Value);
 
-		private void chkKWAI_CheckedChanged(object sender, System.EventArgs e)
-		{
-			if(chkKWAI.Checked)
-				AllowFreqBroadcast = true;
-			else
-				AllowFreqBroadcast = false;
-		}
+        }
 
-		private void chkSplitOff_CheckedChanged(object sender, System.EventArgs e)
-		{
-			if(chkSplitOff.Checked)
-				console.DisableSplitOnBandchange = true;
-			else
-				console.DisableSplitOnBandchange = false;
-		}
+        private void udLMSANFLeak_ValueChanged(object sender, System.EventArgs e)
+        {
+            console.radio.GetDSPRX(0, 0).SetANFVals(
+                (int)udLMSANFtaps.Value,
+                (int)udLMSANFdelay.Value,
+                0.00001 * (double)udLMSANFgain.Value,
+                0.0000001 * (double)udLMSANFLeak.Value);
+            console.radio.GetDSPRX(0, 1).SetANFVals(
+                (int)udLMSANFtaps.Value,
+                (int)udLMSANFdelay.Value,
+                0.00001 * (double)udLMSANFgain.Value,
+                0.0000001 * (double)udLMSANFLeak.Value);
 
-		public bool RFE_PA_TR
-		{
-			get { return chkEnableRFEPATR.Checked; }
-			set	{ chkEnableRFEPATR.Checked = value;	}
-		}
+        }
 
-		private void chkEnableRFEPATR_CheckedChanged(object sender, System.EventArgs e)
-		{
-			if(chkEnableRFEPATR.Checked) 
-				console.RFE_PA_TR_enable = true;
-			else 
-				console.RFE_PA_TR_enable = false;
-		}
+        private void chkKWAI_CheckedChanged(object sender, System.EventArgs e)
+        {
+            if (chkKWAI.Checked)
+                AllowFreqBroadcast = true;
+            else
+                AllowFreqBroadcast = false;
+        }
 
-		private void chkVACAllowBypass_CheckedChanged(object sender, System.EventArgs e)
-		{
-			console.AllowVACBypass = chkVACAllowBypass.Checked;
-		}
+        private void chkSplitOff_CheckedChanged(object sender, System.EventArgs e)
+        {
+            if (chkSplitOff.Checked)
+                console.DisableSplitOnBandchange = true;
+            else
+                console.DisableSplitOnBandchange = false;
+        }
 
-		private void chkDSPTXMeterPeak_CheckedChanged(object sender, System.EventArgs e)
-		{
-			console.PeakTXMeter = chkDSPTXMeterPeak.Checked;
-		}
+        public bool RFE_PA_TR
+        {
+            get { return chkEnableRFEPATR.Checked; }
+            set { chkEnableRFEPATR.Checked = value; }
+        }
 
-		private void chkVACCombine_CheckedChanged(object sender, System.EventArgs e)
-		{
-			Audio.VACCombineInput = chkVACCombine.Checked;
-		}
+        private void chkEnableRFEPATR_CheckedChanged(object sender, System.EventArgs e)
+        {
+            if (chkEnableRFEPATR.Checked)
+                console.RFE_PA_TR_enable = true;
+            else
+                console.RFE_PA_TR_enable = false;
+        }
 
-		private void chkCWAutoSwitchMode_CheckedChanged(object sender, System.EventArgs e)
-		{
-			console.Keyer.AutoSwitchMode = chkCWAutoSwitchMode.Checked;
-		}
+        private void chkVACAllowBypass_CheckedChanged(object sender, System.EventArgs e)
+        {
+            console.AllowVACBypass = chkVACAllowBypass.Checked;
+        }
 
-		private void clrbtnGenBackground_Changed(object sender, System.EventArgs e)//k6jca 1/13/08
-		{
-			//console.GenBackgroundColor = clrbtnGenBackground.Color;
-		}
+        private void chkDSPTXMeterPeak_CheckedChanged(object sender, System.EventArgs e)
+        {
+            console.PeakTXMeter = chkDSPTXMeterPeak.Checked;
+        }
 
-		public MeterTXMode TuneMeterTXMode
-		{
-			set
-			{
-				switch(value)
-				{
-					case MeterTXMode.FORWARD_POWER:
-						comboTXTUNMeter.Text = "Fwd Pwr";
-						break;
-					case MeterTXMode.REVERSE_POWER:
-						comboTXTUNMeter.Text = "Ref Pwr";
-						break;
-					case MeterTXMode.SWR:
-						comboTXTUNMeter.Text = "SWR";
-						break;
-					case MeterTXMode.OFF:
-						comboTXTUNMeter.Text = "Off";
-						break;
-				}
-			}
-		}
+        private void chkVACCombine_CheckedChanged(object sender, System.EventArgs e)
+        {
+            Audio.VACCombineInput = chkVACCombine.Checked;
+        }
 
-		private void comboTXTUNMeter_SelectedIndexChanged(object sender, System.EventArgs e)
-		{
-			switch(comboTXTUNMeter.Text)
-			{
-				case "Fwd Pwr":
-					console.TuneTXMeterMode = MeterTXMode.FORWARD_POWER;
-					break;
-				case "Ref Pwr":
-					console.TuneTXMeterMode = MeterTXMode.REVERSE_POWER;
-					break;
-				case "SWR":
-					console.TuneTXMeterMode = MeterTXMode.SWR;
-					break;
-				case "Off":
-					console.TuneTXMeterMode = MeterTXMode.OFF;
-					break;
-			}
-		}
+        private void chkCWAutoSwitchMode_CheckedChanged(object sender, System.EventArgs e)
+        {
+            console.Keyer.AutoSwitchMode = chkCWAutoSwitchMode.Checked;
+        }
 
-		private void btnResetDB_Click(object sender, System.EventArgs e)
-		{
-			DialogResult dr = MessageBox.Show("This will close the program, make a copy of the current\n"+
-				"database to your desktop, and reset the active database\n"+
-				"the next time PowerSDR is launched.\n\n"+
-				"Are you sure you want to reset the database?",
-				"Reset Database?",
-				MessageBoxButtons.YesNo,
-				MessageBoxIcon.Warning);
+        private void clrbtnGenBackground_Changed(object sender, System.EventArgs e)//k6jca 1/13/08
+        {
+            //console.GenBackgroundColor = clrbtnGenBackground.Color;
+        }
 
-			if(dr == DialogResult.No) return;
+        public MeterTXMode TuneMeterTXMode
+        {
+            set
+            {
+                switch (value)
+                {
+                    case MeterTXMode.FORWARD_POWER:
+                        comboTXTUNMeter.Text = "Fwd Pwr";
+                        break;
+                    case MeterTXMode.REVERSE_POWER:
+                        comboTXTUNMeter.Text = "Ref Pwr";
+                        break;
+                    case MeterTXMode.SWR:
+                        comboTXTUNMeter.Text = "SWR";
+                        break;
+                    case MeterTXMode.OFF:
+                        comboTXTUNMeter.Text = "Off";
+                        break;
+                }
+            }
+        }
 
-			console.reset_db = true;
-			console.Close();
-		}
+        private void comboTXTUNMeter_SelectedIndexChanged(object sender, System.EventArgs e)
+        {
+            switch (comboTXTUNMeter.Text)
+            {
+                case "Fwd Pwr":
+                    console.TuneTXMeterMode = MeterTXMode.FORWARD_POWER;
+                    break;
+                case "Ref Pwr":
+                    console.TuneTXMeterMode = MeterTXMode.REVERSE_POWER;
+                    break;
+                case "SWR":
+                    console.TuneTXMeterMode = MeterTXMode.SWR;
+                    break;
+                case "Off":
+                    console.TuneTXMeterMode = MeterTXMode.OFF;
+                    break;
+            }
+        }
 
-		private void chkDisplayMeterShowDecimal_CheckedChanged(object sender, System.EventArgs e)
-		{
-			console.MeterDetail = chkDisplayMeterShowDecimal.Checked;
-		}
+        private void btnResetDB_Click(object sender, System.EventArgs e)
+        {
+            DialogResult dr = MessageBox.Show("This will close the program, make a copy of the current\n" +
+                "database to your desktop, and reset the active database\n" +
+                "the next time PowerSDR is launched.\n\n" +
+                "Are you sure you want to reset the database?",
+                "Reset Database?",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Warning);
 
-		private void chkRTTYOffsetEnableA_CheckedChanged(object sender, System.EventArgs e)
-		{
-			rtty_offset_enabled_a = chkRTTYOffsetEnableA.Checked;
-		}
+            if (dr == DialogResult.No) return;
 
-		private void chkRTTYOffsetEnableB_CheckedChanged(object sender, System.EventArgs e)
-		{
-			rtty_offset_enabled_b = chkRTTYOffsetEnableB.Checked;
-		}
+            console.reset_db = true;
+            console.Close();
+        }
 
-		private void udRTTYL_ValueChanged(object sender, System.EventArgs e)
-		{
-			rtty_offset_low = (int)udRTTYL.Value;
-		}
+        private void chkDisplayMeterShowDecimal_CheckedChanged(object sender, System.EventArgs e)
+        {
+            console.MeterDetail = chkDisplayMeterShowDecimal.Checked;
+        }
 
-		private void udRTTYU_ValueChanged(object sender, System.EventArgs e)
-		{
-			rtty_offset_high = (int)udRTTYU.Value;
-		}
+        private void chkRTTYOffsetEnableA_CheckedChanged(object sender, System.EventArgs e)
+        {
+            rtty_offset_enabled_a = chkRTTYOffsetEnableA.Checked;
+        }
 
-		private void chkRX2AutoMuteTX_CheckedChanged(object sender, System.EventArgs e)
-		{
-			Audio.RX2AutoMuteTX = chkRX2AutoMuteTX.Checked;
-		}
+        private void chkRTTYOffsetEnableB_CheckedChanged(object sender, System.EventArgs e)
+        {
+            rtty_offset_enabled_b = chkRTTYOffsetEnableB.Checked;
+        }
 
-		private void chkAudioIQtoVAC_CheckedChanged(object sender, System.EventArgs e)
-		{
-			bool power = console.PowerOn;
-			if(power && chkAudioEnableVAC.Checked)
-			{
-				console.PowerOn = false;
-				Thread.Sleep(100);
-			}
+        private void udRTTYL_ValueChanged(object sender, System.EventArgs e)
+        {
+            rtty_offset_low = (int)udRTTYL.Value;
+        }
 
-			Audio.VACOutputIQ = chkAudioIQtoVAC.Checked;
+        private void udRTTYU_ValueChanged(object sender, System.EventArgs e)
+        {
+            rtty_offset_high = (int)udRTTYU.Value;
+        }
 
-			if(power && chkAudioEnableVAC.Checked)
-				console.PowerOn = true;
+        private void chkRX2AutoMuteTX_CheckedChanged(object sender, System.EventArgs e)
+        {
+            Audio.RX2AutoMuteTX = chkRX2AutoMuteTX.Checked;
+        }
 
-			chkAudioCorrectIQ.Enabled = chkAudioIQtoVAC.Checked;
+        private void chkAudioIQtoVAC_CheckedChanged(object sender, System.EventArgs e)
+        {
+            bool power = console.PowerOn;
+            if (power && chkAudioEnableVAC.Checked)
+            {
+                console.PowerOn = false;
+                Thread.Sleep(100);
+            }
+
+            Audio.VACOutputIQ = chkAudioIQtoVAC.Checked;
+
+            if (power && chkAudioEnableVAC.Checked)
+                console.PowerOn = true;
+
+            chkAudioCorrectIQ.Enabled = chkAudioIQtoVAC.Checked;
             chkAudioRX2toVAC.Enabled = chkAudioIQtoVAC.Checked;
-		}
+        }
 
-		private void chkAudioCorrectIQ_CheckChanged(object sender, System.EventArgs e)
-		{
-			Audio.VACCorrectIQ = chkAudioCorrectIQ.Checked;
-		}
+        private void chkAudioCorrectIQ_CheckChanged(object sender, System.EventArgs e)
+        {
+            Audio.VACCorrectIQ = chkAudioCorrectIQ.Checked;
+        }
 
-		private void chkRX2AutoMuteRX1OnVFOBTX_CheckedChanged(object sender, System.EventArgs e)
-		{
-			console.MuteRX1OnVFOBTX = chkRX2AutoMuteRX1OnVFOBTX.Checked;
-		}
+        private void chkRX2AutoMuteRX1OnVFOBTX_CheckedChanged(object sender, System.EventArgs e)
+        {
+            console.MuteRX1OnVFOBTX = chkRX2AutoMuteRX1OnVFOBTX.Checked;
+        }
 
-		private void chkTXExpert_CheckedChanged(object sender, System.EventArgs e)
-		{
-			grpTXProfileDef.Visible = chkTXExpert.Checked;
-		}
+        private void chkTXExpert_CheckedChanged(object sender, System.EventArgs e)
+        {
+            grpTXProfileDef.Visible = chkTXExpert.Checked;
+        }
 
-		private void btnTXProfileDefImport_Click(object sender, System.EventArgs e)
-		{
-			if(lstTXProfileDef.SelectedIndex < 0) return;
+        private void btnTXProfileDefImport_Click(object sender, System.EventArgs e)
+        {
+            if (lstTXProfileDef.SelectedIndex < 0) return;
 
-			DialogResult result = MessageBox.Show("Import profile from defaults?",
-				"Import?",
-				MessageBoxButtons.YesNo,
-				MessageBoxIcon.Question);
+            DialogResult result = MessageBox.Show("Import profile from defaults?",
+                "Import?",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Question);
 
-			if(result == DialogResult.No)
-				return;
+            if (result == DialogResult.No)
+                return;
 
-			string name = lstTXProfileDef.Text;
+            string name = lstTXProfileDef.Text;
             DataRow[] rows = DB.ds.Tables["TxProfileDef"].Select(
-				"'"+name+"' = Name");
+                "'" + name + "' = Name");
 
-			if(rows.Length != 1)
-			{
-				MessageBox.Show("Database error reading TXProfileDef Table.",
-					"Database error",
-					MessageBoxButtons.OK,
-					MessageBoxIcon.Error);
-				return;
-			}
+            if (rows.Length != 1)
+            {
+                MessageBox.Show("Database error reading TXProfileDef Table.",
+                    "Database error",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
+                return;
+            }
 
-			DataRow dr = null;
-			if(comboTXProfileName.Items.Contains(name))
-			{
-				result = MessageBox.Show(
-					"Are you sure you want to overwrite the "+name+" TX Profile?",
-					"Overwrite Profile?",
-					MessageBoxButtons.YesNo,
-					MessageBoxIcon.Question);
-				
-				if(result == DialogResult.No)
-					return;
+            DataRow dr = null;
+            if (comboTXProfileName.Items.Contains(name))
+            {
+                result = MessageBox.Show(
+                    "Are you sure you want to overwrite the " + name + " TX Profile?",
+                    "Overwrite Profile?",
+                    MessageBoxButtons.YesNo,
+                    MessageBoxIcon.Question);
+
+                if (result == DialogResult.No)
+                    return;
 
                 foreach (DataRow d in DB.ds.Tables["TxProfile"].Rows)
-				{
-					if((string)d["Name"] == name) 
-					{
-						dr = d;
-						break;
-					}
-				}
-			}
-			else
-			{
+                {
+                    if ((string)d["Name"] == name)
+                    {
+                        dr = d;
+                        break;
+                    }
+                }
+            }
+            else
+            {
                 dr = DB.ds.Tables["TxProfile"].NewRow();
-				dr["Name"] = name;
-			}
+                dr["Name"] = name;
+            }
 
-			for(int i=0; i<dr.ItemArray.Length; i++)
-				dr[i] = rows[0][i];
+            for (int i = 0; i < dr.ItemArray.Length; i++)
+                dr[i] = rows[0][i];
 
-			if(!comboTXProfileName.Items.Contains(name))
-			{
+            if (!comboTXProfileName.Items.Contains(name))
+            {
                 DB.ds.Tables["TxProfile"].Rows.Add(dr);
-				comboTXProfileName.Items.Add(name);
-				comboTXProfileName.Text = name;
-			}
+                comboTXProfileName.Items.Add(name);
+                comboTXProfileName.Text = name;
+            }
 
-			console.UpdateTXProfile(name);
-		}
+            console.UpdateTXProfile(name);
+        }
 
-		private void Setup_KeyDown(object sender, System.Windows.Forms.KeyEventArgs e)
-		{
-			if(e.Control == true && e.Alt == true)
-			{
-				switch(e.KeyCode)
-				{
+        private void Setup_KeyDown(object sender, System.Windows.Forms.KeyEventArgs e)
+        {
+            if (e.Control == true && e.Alt == true)
+            {
+                switch (e.KeyCode)
+                {
                     case Keys.A:
                         chkPANewCal.Visible = true;
                         grpPAGainByBand.Visible = true;
@@ -29369,9 +29520,9 @@ namespace PowerSDR
                     case Keys.O:
                         radSigGenTXOutput.Visible = true;
                         break;
-				}
-			}
-		}
+                }
+            }
+        }
 
         private void chkDisplayPanFill_CheckedChanged(object sender, System.EventArgs e)
         {
@@ -29398,7 +29549,7 @@ namespace PowerSDR
 
         private void comboAppSkin_SelectedIndexChanged(object sender, EventArgs e)
         {
-            string path = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + 
+            string path = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) +
                 "\\FlexRadio Systems\\PowerSDR\\Skins\\";
             if (Directory.Exists(path + comboAppSkin.Text))
                 Skin.Restore(comboAppSkin.Text, path, console);
@@ -29406,7 +29557,7 @@ namespace PowerSDR
 
         private void btnSkinExport_Click(object sender, EventArgs e)
         {
-            string path = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + 
+            string path = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) +
                 "\\FlexRadio Systems\\PowerSDR\\Skins\\";
             if (Directory.Exists(path + comboAppSkin.Text))
                 Skin.Save(comboAppSkin.Text, path, console);
@@ -29470,10 +29621,10 @@ namespace PowerSDR
 
         private void btnExportDB_Click(object sender, EventArgs e)
         {
-            string desktop = Environment.GetFolderPath(Environment.SpecialFolder.Desktop); 
-            string datetime = DateTime.Now.ToShortDateString().Replace("/", "-")+"_"+
-					DateTime.Now.ToShortTimeString().Replace(":", ".");
-            saveFileDialog1.FileName = desktop+"\\PowerSDR_database_export_" + datetime + ".xml";
+            string desktop = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+            string datetime = DateTime.Now.ToShortDateString().Replace("/", "-") + "_" +
+                    DateTime.Now.ToShortTimeString().Replace(":", ".");
+            saveFileDialog1.FileName = desktop + "\\PowerSDR_database_export_" + datetime + ".xml";
             saveFileDialog1.ShowDialog();
         }
 
@@ -29499,7 +29650,7 @@ namespace PowerSDR
 
         private void tbFMDev_Scroll(object sender, EventArgs e)
         {
- 			udFMDev.Value = tbFMDev.Value;		
+            udFMDev.Value = tbFMDev.Value;
         }
 
         private void chkPennyPresent_CheckedChanged(object sender, System.EventArgs e)
@@ -30510,13 +30661,18 @@ namespace PowerSDR
                 lblOzyFWVer.Text = JanusAudio.getOzyFWVersion().ToString("Ozy: 0\\.0"); //w5wc
                 lblMercuryFWVer.Text = JanusAudio.getMercuryFWVersion().ToString("Mercury: 0\\.0"); //w5wc
                 lblPenelopeFWVer.Text = JanusAudio.getPenelopeFWVersion().ToString("Penelope: 0\\.0"); //w5wc
-
-                //lblOzyFX2.Text = "Ozy FX2: " + JanusAudio.getFX2FirmwareVersionString();
-                //lblOzyFWVer.Text = "Ozy: " + JanusAudio.getOzyFWVersion();
-                //lblMercuryFWVer.Text = "MercuryPresent: " + JanusAudio.getMercuryFWVersion();
-                //lblPenelopeFWVer.Text = "Penelope: " + JanusAudio.getPenelopeFWVersion();
                 return;
             }
+        }
+
+        private void tpGeneralHardware_Paint(object sender, System.Windows.Forms.PaintEventArgs e)
+        {
+            int metis_ip_addr = JanusAudio.GetMetisIPAddr();
+            lblMetisIP.Text = IPStringFromInt(metis_ip_addr);
+            byte[] mac_bytes = new byte[6];
+            JanusAudio.GetMetisMACAddr(mac_bytes);
+            lblMetisMAC.Text = BitConverter.ToString(mac_bytes).Replace("-", ":").ToLower();
+            return;
         }
 
         private void udMaxFreq_ValueChanged(object sender, System.EventArgs e)
@@ -30543,58 +30699,59 @@ namespace PowerSDR
 
         private void chkHERCULES_CheckedChanged(object sender, EventArgs e)
         {
-            if (chkHERCULES.Checked == true) {
-            chkPenOCrcv1601.Checked = true;
-            chkPenOCxmit1601.Checked = true;
+            if (chkHERCULES.Checked == true)
+            {
+                chkPenOCrcv1601.Checked = true;
+                chkPenOCxmit1601.Checked = true;
 
-            chkPenOCrcv802.Checked = true;
-            chkPenOCxmit802.Checked = true;
+                chkPenOCrcv802.Checked = true;
+                chkPenOCxmit802.Checked = true;
 
-            chkPenOCrcv601.Checked = true;
-            chkPenOCxmit601.Checked = true;
-            chkPenOCrcv602.Checked = true;
-            chkPenOCxmit602.Checked = true;
+                chkPenOCrcv601.Checked = true;
+                chkPenOCxmit601.Checked = true;
+                chkPenOCrcv602.Checked = true;
+                chkPenOCxmit602.Checked = true;
 
-            chkPenOCrcv403.Checked = true;
-            chkPenOCxmit403.Checked = true;
+                chkPenOCrcv403.Checked = true;
+                chkPenOCxmit403.Checked = true;
 
-            chkPenOCrcv301.Checked = true;
-            chkPenOCxmit301.Checked = true;
-            chkPenOCrcv303.Checked = true;
-            chkPenOCxmit303.Checked = true;
+                chkPenOCrcv301.Checked = true;
+                chkPenOCxmit301.Checked = true;
+                chkPenOCrcv303.Checked = true;
+                chkPenOCxmit303.Checked = true;
 
-            chkPenOCrcv202.Checked = true;
-            chkPenOCxmit202.Checked = true;
-            chkPenOCrcv203.Checked = true;
-            chkPenOCxmit203.Checked = true;
+                chkPenOCrcv202.Checked = true;
+                chkPenOCxmit202.Checked = true;
+                chkPenOCrcv203.Checked = true;
+                chkPenOCxmit203.Checked = true;
 
-            chkPenOCrcv171.Checked = true;
-            chkPenOCxmit171.Checked = true;
-            chkPenOCrcv172.Checked = true;
-            chkPenOCxmit172.Checked = true;
-            chkPenOCrcv173.Checked = true;
-            chkPenOCxmit173.Checked = true;
+                chkPenOCrcv171.Checked = true;
+                chkPenOCxmit171.Checked = true;
+                chkPenOCrcv172.Checked = true;
+                chkPenOCxmit172.Checked = true;
+                chkPenOCrcv173.Checked = true;
+                chkPenOCxmit173.Checked = true;
 
-            chkPenOCrcv154.Checked = true;
-            chkPenOCxmit154.Checked = true;
+                chkPenOCrcv154.Checked = true;
+                chkPenOCxmit154.Checked = true;
 
-            chkPenOCrcv121.Checked = true;
-            chkPenOCxmit121.Checked = true;
-            chkPenOCrcv124.Checked = true;
-            chkPenOCxmit124.Checked = true;
+                chkPenOCrcv121.Checked = true;
+                chkPenOCxmit121.Checked = true;
+                chkPenOCrcv124.Checked = true;
+                chkPenOCxmit124.Checked = true;
 
-            chkPenOCrcv102.Checked = true;
-            chkPenOCxmit102.Checked = true;
-            chkPenOCrcv104.Checked = true;
-            chkPenOCxmit104.Checked = true;
+                chkPenOCrcv102.Checked = true;
+                chkPenOCxmit102.Checked = true;
+                chkPenOCrcv104.Checked = true;
+                chkPenOCxmit104.Checked = true;
 
-            chkPenOCrcv61.Checked = true;
-            chkPenOCxmit61.Checked = true;
-            chkPenOCrcv62.Checked = true;
-            chkPenOCxmit62.Checked = true;
-            chkPenOCrcv64.Checked = true;
-            chkPenOCxmit64.Checked = true;
-            chkPenOCrcv66.Checked = true; 
+                chkPenOCrcv61.Checked = true;
+                chkPenOCxmit61.Checked = true;
+                chkPenOCrcv62.Checked = true;
+                chkPenOCxmit62.Checked = true;
+                chkPenOCrcv64.Checked = true;
+                chkPenOCxmit64.Checked = true;
+                chkPenOCrcv66.Checked = true;
             }
             else if (chkHERCULES.Checked == false)
             {
@@ -30650,7 +30807,7 @@ namespace PowerSDR
                 chkPenOCxmit64.Checked = false;
                 chkPenOCrcv66.Checked = false;
             }
-       
+
         }
 
         private void btnPennyCtrlReset_Click(object sender, EventArgs e)
@@ -30838,7 +30995,7 @@ namespace PowerSDR
                 chkPenOCxmit27.Checked = false;
             }
         }
-        
+
         private void comboFRSRegion_SelectedIndexChanged(object sender, EventArgs e) //w5wc
         {
             FRSRegion CurrentRegion = FRSRegion.US;
@@ -30880,7 +31037,62 @@ namespace PowerSDR
 
             console.CurrentRegion = CurrentRegion;
         }
-	}
+
+        private void radOzyUSB_CheckedChanged(object sender, EventArgs e)
+        {
+            if (radOzyUSB.Checked)
+            {
+                radMetis.Checked = false;
+                console.HPSDRisMetis = false;
+                grpMetisAddr.Visible = false;
+            }
+            else
+            {
+                radMetis.Checked = true;
+                console.HPSDRisMetis = true;
+                grpMetisAddr.Visible = true;
+            }
+        }
+
+        private void radMetis_CheckedChanged(object sender, EventArgs e)
+        {
+            if (radMetis.Checked)
+            {
+                radOzyUSB.Checked = false;
+                console.HPSDRisMetis = true;
+                grpMetisAddr.Visible = true;
+            }
+            else
+            {
+                radOzyUSB.Checked = true;
+                console.HPSDRisMetis = false;
+                grpMetisAddr.Visible = false;
+            }
+        }
+
+
+        private string IPStringFromInt(Int32 addr, StringBuilder sb)
+        {
+            sb.Length = 0;
+            for (int i = 0; i < 4; i++)
+            {
+                int j = addr & 0xff;
+                addr = addr >> 8;
+                sb.Append(j);
+                if (i != 3)
+                {
+                    sb.Append(".");
+                }
+            }
+            return sb.ToString();
+        }
+
+
+        private string IPStringFromInt(Int32 addr)
+        {
+            return IPStringFromInt(addr, new StringBuilder());
+        }
+    }
 
 	#region PADeviceInfo Helper Class
 

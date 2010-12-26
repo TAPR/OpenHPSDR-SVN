@@ -698,7 +698,12 @@ void ForceCandCFrames(int count) {
 		memcpy(buf+8+512, fpga_test_buf+8, 512-8); 
 	} 
 	for	( i	= 0; i < count;	i++	) {	
-		numwritten = OzyBulkWrite(OzyH,	0x02, buf, sizeof(buf));
+		if ( isMetis ) { 
+			numwritten = MetisBulkWrite(2, buf, sizeof(buf)); 
+		} 
+		else { 
+			numwritten = OzyBulkWrite(OzyH,	0x02, buf, sizeof(buf));
+		}
 	}
 } 
 
@@ -718,6 +723,7 @@ void processOverloadBit(int bit) {
 #if 0
 int last_xmit_bit = 0;
 #endif
+
 
 // main loop of the iothread -- real work happens here
 // read data out of the xylo, block it, and put it into a fifo  to go to the callback thread
@@ -775,8 +781,12 @@ void IOThreadMainLoop(void) {
         int buf_num = 0;
         unsigned char RxOverrun = 0;
         unsigned char TxOverrun = 0;
+		int zero_read_count = 0; 		
 #if PRINTF_C_AND_C
         int dbggate = 0;
+#endif
+#if 0 
+		int wdbg_gate = 0; 
 #endif
 
         sample_bufp_size = 4*sizeof(int)*BlockSize;
@@ -800,13 +810,28 @@ void IOThreadMainLoop(void) {
                 // if we wrote a frame last time (saying we may still have data waiting to be written) around
                 // and there is space in the fifo, skip the read and write another frame
                 //
+				
+			if ( !isMetis || !wrote_frame ) { /* if not metis write, or if we did not write frame last time, time to read */ 				
+				
 #ifdef WRITE_MULTI_PER_READ
                 if ( !wrote_frame || (RxFifoAvail - (frames_written_this_read * 512)) < 512 ) { /* should we write */
                         printf("read top: fw: %d fa:%d\n", frames_written_this_read, RxFifoAvail); fflush(stdout);
 
-                        frames_written_this_read = 0;
 #endif
 
+
+#if 0 						
+						++wdbg_gate; 
+						if (  wdbg_gate > 1000 ) { 
+							fprintf(stdout, "---> fwtr: %d\n", frames_written_this_read); 
+							if ( wdbg_gate > 1020 ) { 
+								wdbg_gate = 0; 
+								fprintf(stdout, "\n", frames_written_this_read); 
+								fflush(stdout); 
+							} 
+						} 
+#endif 											
+                        frames_written_this_read = 0;
                         // first read data and process it
 #ifdef PERF_DEBUG
                         read_start_t = getPerfTicks();
@@ -817,8 +842,22 @@ void IOThreadMainLoop(void) {
                         numread = XyloBulkRead(XyloH, 4, FPGAReadBufp, FPGAReadBufSize);
 #endif
 #ifdef OZY
-                        numread = OzyBulkRead(OzyH, 0x86, FPGAReadBufp, FPGAReadBufSize);
-                        if ( numread <= 0 ) {
+						if ( isMetis ) { 
+							//numread = MetisBulkRead(6, FPGAReadBufp, FPGAReadBufSize);
+							numread = MetisReadDirect(FPGAReadBufp, FPGAReadBufSize); 
+							if ( numread > 0 ) { 
+								zero_read_count = 0; 
+							} 
+							else { 
+								++zero_read_count; 
+								// printf("MetisRead: nr: %d zc: %d\n", numread, zero_read_count); fflush(stdout); 
+							} 													
+						}
+						else { 
+							numread = OzyBulkRead(OzyH, 0x86, FPGAReadBufp, FPGAReadBufSize);
+						}
+                        if ( (!isMetis && numread <= 0 ) ||  (isMetis && zero_read_count >= 1000 )  ) {											
+                       // if ( numread <= 0 ) {
 #ifndef LINUX
                                 Sleep(10); /* this sleep is here to keep us from sucking all the CPU
                                                       on the machine when the USB cable is pullled out of the
@@ -1131,6 +1170,7 @@ void IOThreadMainLoop(void) {
                                 last_byte = FPGAReadBufp[i];
 
                         } /* for numread = ... */
+					}	/* metis or write frame */
 #ifdef WRITE_MULTI_PER_READ
                 }/* should we write */
 #endif
@@ -1424,7 +1464,12 @@ void IOThreadMainLoop(void) {
 												memcpy(FPGAWriteBufp + 8 + (512*j), fpga_test_buf+8, 512-8); 
 											} 
 										} 
-                                        numwritten = OzyBulkWrite(OzyH, 0x02, FPGAWriteBufp, FPGAWriteBufSize);
+ 										if ( isMetis ) { 
+											numwritten = MetisBulkWrite(0x02, FPGAWriteBufp, FPGAWriteBufSize);
+										}
+										else { 
+											numwritten = OzyBulkWrite(OzyH, 0x02, FPGAWriteBufp, FPGAWriteBufSize);
+										}
 
 
 #endif
@@ -1459,6 +1504,7 @@ void IOThreadMainLoop(void) {
 #ifdef WRITE_MULTI_PER_READ
                                 ++frames_written_this_read;
 #endif
+                                ++frames_written_this_read;
 //                              printf("buffer write: out_sync: %d out_state: %d total_written: %d\n", out_stream_sync_count, out_state, total_written); fflush(stdout);
 
                                 if ( numwritten != FPGAWriteBufSize ) {

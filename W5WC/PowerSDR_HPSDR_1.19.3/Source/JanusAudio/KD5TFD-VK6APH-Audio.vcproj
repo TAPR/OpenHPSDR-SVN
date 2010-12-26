@@ -2,8 +2,9 @@
 <VisualStudioProject
 	ProjectType="Visual C++"
 	Version="9.00"
-	Name="KD5TFD-VK6APH-Audio"
+	Name="JanusAudio"
 	ProjectGUID="{501522F9-17B4-4259-973D-0CEB6341A64B}"
+	RootNamespace="JanusAudio"
 	Keyword="Win32Proj"
 	TargetFrameworkVersion="131072"
 	>
@@ -209,6 +210,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\Metis.c"
+				>
+			</File>
+			<File
 				RelativePath=".\nanotime.c"
 				>
 			</File>
@@ -218,6 +223,10 @@
 			</File>
 			<File
 				RelativePath=".\PowerSDR-Interface.c"
+				>
+			</File>
+			<File
+				RelativePath=".\ringbuf.c"
 				>
 			</File>
 			<File

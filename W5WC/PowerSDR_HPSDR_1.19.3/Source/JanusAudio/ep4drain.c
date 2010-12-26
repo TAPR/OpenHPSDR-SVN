@@ -86,8 +86,9 @@ void *EP4DrainThreadMain(void *argp) {
 
                 ep4_keep_running = 1;
                 EP4DrainThreadRunning = 1;	            
-         
-                EP4DrainThreadMainLoop();
+				if ( !isMetis ) {         
+					EP4DrainThreadMainLoop();
+				}
 
                 EP4DrainThreadRunning = 0;
 				fprintf(stderr, "EP4 main thread dies\n");  fflush(stderr); 
