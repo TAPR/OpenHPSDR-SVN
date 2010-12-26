@@ -98,6 +98,9 @@ int SavedOzyHandleUseCount = 0;
 KD5TFDVK6APHAUDIO_API int IsOzyAttached(void) { 
 	struct usb_bus *busp; 
 	struct usb_device *ozydevp; 
+
+	isMetis = 0; 
+
 	if ( !OzyUSBinitialized ) { 
 		usb_init(); 
 		OzyUSBinitialized = 1; 

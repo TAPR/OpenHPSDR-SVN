@@ -250,13 +250,55 @@
     <value>ptbRX2RF</value>
   </data>
   <data name="&gt;&gt;ptbRX2RF.Type" xml:space="preserve">
-    <value>PowerSDR.PrettyTrackBar, PowerSDR, Version=1.19.3.1, Culture=neutral, PublicKeyToken=null</value>
+    <value>PowerSDR.PrettyTrackBar, PowerSDR, Version=1.19.3.2, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;ptbRX2RF.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ptbRX2RF.ZOrder" xml:space="preserve">
     <value>4</value>
+  </data>
+  <data name="chkSR.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
+    <value>Button</value>
+  </data>
+  <data name="chkSR.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
+    <value>Flat</value>
+  </data>
+  <data name="chkSR.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 8.25pt, style=Bold</value>
+  </data>
+  <data name="chkSR.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="chkSR.Location" type="System.Drawing.Point, System.Drawing">
+    <value>59, 30</value>
+  </data>
+  <data name="chkSR.Size" type="System.Drawing.Size, System.Drawing">
+    <value>50, 23</value>
+  </data>
+  <data name="chkSR.TabIndex" type="System.Int32, mscorlib">
+    <value>35</value>
+  </data>
+  <data name="chkSR.Text" xml:space="preserve">
+    <value>SR</value>
+  </data>
+  <data name="chkSR.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>TopCenter</value>
+  </data>
+  <data name="chkSR.ToolTip" xml:space="preserve">
+    <value>Spur Reduction</value>
+  </data>
+  <data name="&gt;&gt;chkSR.Name" xml:space="preserve">
+    <value>chkSR</value>
+  </data>
+  <data name="&gt;&gt;chkSR.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBoxTS, PowerSDR, Version=1.19.3.2, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;chkSR.Parent" xml:space="preserve">
+    <value>panelOptions</value>
+  </data>
+  <data name="&gt;&gt;chkSR.ZOrder" xml:space="preserve">
+    <value>0</value>
   </data>
   <data name="chkFWCATU.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
     <value>Button</value>
@@ -292,7 +334,7 @@
     <value>chkFWCATU</value>
   </data>
   <data name="&gt;&gt;chkFWCATU.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBoxTS, PowerSDR, Version=1.19.3.1, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.CheckBoxTS, PowerSDR, Version=1.19.3.2, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;chkFWCATU.Parent" xml:space="preserve">
     <value>panelOptions</value>
@@ -334,7 +376,7 @@
     <value>ckQuickPlay</value>
   </data>
   <data name="&gt;&gt;ckQuickPlay.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBoxTS, PowerSDR, Version=1.19.3.1, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.CheckBoxTS, PowerSDR, Version=1.19.3.2, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;ckQuickPlay.Parent" xml:space="preserve">
     <value>panelOptions</value>
@@ -376,7 +418,7 @@
     <value>chkMON</value>
   </data>
   <data name="&gt;&gt;chkMON.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBoxTS, PowerSDR, Version=1.19.3.1, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.CheckBoxTS, PowerSDR, Version=1.19.3.2, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;chkMON.Parent" xml:space="preserve">
     <value>panelOptions</value>
@@ -415,7 +457,7 @@
     <value>ckQuickRec</value>
   </data>
   <data name="&gt;&gt;ckQuickRec.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBoxTS, PowerSDR, Version=1.19.3.1, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.CheckBoxTS, PowerSDR, Version=1.19.3.2, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;ckQuickRec.Parent" xml:space="preserve">
     <value>panelOptions</value>
@@ -457,7 +499,7 @@
     <value>chkMUT</value>
   </data>
   <data name="&gt;&gt;chkMUT.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBoxTS, PowerSDR, Version=1.19.3.1, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.CheckBoxTS, PowerSDR, Version=1.19.3.2, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;chkMUT.Parent" xml:space="preserve">
     <value>panelOptions</value>
@@ -502,7 +544,7 @@
     <value>chkMOX</value>
   </data>
   <data name="&gt;&gt;chkMOX.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBoxTS, PowerSDR, Version=1.19.3.1, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.CheckBoxTS, PowerSDR, Version=1.19.3.2, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;chkMOX.Parent" xml:space="preserve">
     <value>panelOptions</value>
@@ -547,7 +589,7 @@
     <value>chkTUN</value>
   </data>
   <data name="&gt;&gt;chkTUN.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBoxTS, PowerSDR, Version=1.19.3.1, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.CheckBoxTS, PowerSDR, Version=1.19.3.2, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;chkTUN.Parent" xml:space="preserve">
     <value>panelOptions</value>
@@ -586,7 +628,7 @@
     <value>chkX2TR</value>
   </data>
   <data name="&gt;&gt;chkX2TR.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBoxTS, PowerSDR, Version=1.19.3.1, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.CheckBoxTS, PowerSDR, Version=1.19.3.2, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;chkX2TR.Parent" xml:space="preserve">
     <value>panelOptions</value>
@@ -628,7 +670,7 @@
     <value>comboTuneMode</value>
   </data>
   <data name="&gt;&gt;comboTuneMode.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ComboBoxTS, PowerSDR, Version=1.19.3.1, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.ComboBoxTS, PowerSDR, Version=1.19.3.2, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;comboTuneMode.Parent" xml:space="preserve">
     <value>panelOptions</value>
@@ -667,7 +709,7 @@
     <value>chkFWCATUBypass</value>
   </data>
   <data name="&gt;&gt;chkFWCATUBypass.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBoxTS, PowerSDR, Version=1.19.3.1, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.CheckBoxTS, PowerSDR, Version=1.19.3.2, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;chkFWCATUBypass.Parent" xml:space="preserve">
     <value>panelOptions</value>
@@ -703,7 +745,7 @@
     <value>ptbCWSpeed</value>
   </data>
   <data name="&gt;&gt;ptbCWSpeed.Type" xml:space="preserve">
-    <value>PowerSDR.PrettyTrackBar, PowerSDR, Version=1.19.3.1, Culture=neutral, PublicKeyToken=null</value>
+    <value>PowerSDR.PrettyTrackBar, PowerSDR, Version=1.19.3.2, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;ptbCWSpeed.Parent" xml:space="preserve">
     <value>panelModeSpecificCW</value>
@@ -727,7 +769,7 @@
     <value>udCWPitch</value>
   </data>
   <data name="&gt;&gt;udCWPitch.Type" xml:space="preserve">
-    <value>System.Windows.Forms.NumericUpDownTS, PowerSDR, Version=1.19.3.1, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.NumericUpDownTS, PowerSDR, Version=1.19.3.2, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;udCWPitch.Parent" xml:space="preserve">
     <value>panelModeSpecificCW</value>
@@ -751,7 +793,7 @@
     <value>udCWBreakInDelay</value>
   </data>
   <data name="&gt;&gt;udCWBreakInDelay.Type" xml:space="preserve">
-    <value>System.Windows.Forms.NumericUpDownTS, PowerSDR, Version=1.19.3.1, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.NumericUpDownTS, PowerSDR, Version=1.19.3.2, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;udCWBreakInDelay.Parent" xml:space="preserve">
     <value>grpSemiBreakIn</value>
@@ -784,7 +826,7 @@
     <value>chkCWBreakInEnabled</value>
   </data>
   <data name="&gt;&gt;chkCWBreakInEnabled.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBoxTS, PowerSDR, Version=1.19.3.1, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.CheckBoxTS, PowerSDR, Version=1.19.3.2, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;chkCWBreakInEnabled.Parent" xml:space="preserve">
     <value>grpSemiBreakIn</value>
@@ -814,7 +856,7 @@
     <value>chkShowTXCWFreq</value>
   </data>
   <data name="&gt;&gt;chkShowTXCWFreq.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBoxTS, PowerSDR, Version=1.19.3.1, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.CheckBoxTS, PowerSDR, Version=1.19.3.2, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;chkShowTXCWFreq.Parent" xml:space="preserve">
     <value>panelModeSpecificCW</value>
@@ -856,7 +898,7 @@
     <value>chkCWVAC</value>
   </data>
   <data name="&gt;&gt;chkCWVAC.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBoxTS, PowerSDR, Version=1.19.3.1, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.CheckBoxTS, PowerSDR, Version=1.19.3.2, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;chkCWVAC.Parent" xml:space="preserve">
     <value>panelModeSpecificCW</value>
@@ -889,7 +931,7 @@
     <value>chkCWDisableMonitor</value>
   </data>
   <data name="&gt;&gt;chkCWDisableMonitor.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBoxTS, PowerSDR, Version=1.19.3.1, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.CheckBoxTS, PowerSDR, Version=1.19.3.2, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;chkCWDisableMonitor.Parent" xml:space="preserve">
     <value>panelModeSpecificCW</value>
@@ -922,7 +964,7 @@
     <value>chkCWIambic</value>
   </data>
   <data name="&gt;&gt;chkCWIambic.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBoxTS, PowerSDR, Version=1.19.3.1, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.CheckBoxTS, PowerSDR, Version=1.19.3.2, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;chkCWIambic.Parent" xml:space="preserve">
     <value>panelModeSpecificCW</value>
@@ -949,7 +991,7 @@
     <value>udRX2FilterHigh</value>
   </data>
   <data name="&gt;&gt;udRX2FilterHigh.Type" xml:space="preserve">
-    <value>System.Windows.Forms.NumericUpDownTS, PowerSDR, Version=1.19.3.1, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.NumericUpDownTS, PowerSDR, Version=1.19.3.2, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;udRX2FilterHigh.Parent" xml:space="preserve">
     <value>panelRX2Filter</value>
@@ -976,7 +1018,7 @@
     <value>udRX2FilterLow</value>
   </data>
   <data name="&gt;&gt;udRX2FilterLow.Type" xml:space="preserve">
-    <value>System.Windows.Forms.NumericUpDownTS, PowerSDR, Version=1.19.3.1, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.NumericUpDownTS, PowerSDR, Version=1.19.3.2, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;udRX2FilterLow.Parent" xml:space="preserve">
     <value>panelRX2Filter</value>
@@ -1018,7 +1060,7 @@
     <value>radRX2ModeAM</value>
   </data>
   <data name="&gt;&gt;radRX2ModeAM.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RadioButtonTS, PowerSDR, Version=1.19.3.1, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.RadioButtonTS, PowerSDR, Version=1.19.3.2, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;radRX2ModeAM.Parent" xml:space="preserve">
     <value>panelRX2Mode</value>
@@ -1060,7 +1102,7 @@
     <value>radRX2ModeLSB</value>
   </data>
   <data name="&gt;&gt;radRX2ModeLSB.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RadioButtonTS, PowerSDR, Version=1.19.3.1, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.RadioButtonTS, PowerSDR, Version=1.19.3.2, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;radRX2ModeLSB.Parent" xml:space="preserve">
     <value>panelRX2Mode</value>
@@ -1102,7 +1144,7 @@
     <value>radRX2ModeSAM</value>
   </data>
   <data name="&gt;&gt;radRX2ModeSAM.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RadioButtonTS, PowerSDR, Version=1.19.3.1, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.RadioButtonTS, PowerSDR, Version=1.19.3.2, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;radRX2ModeSAM.Parent" xml:space="preserve">
     <value>panelRX2Mode</value>
@@ -1144,7 +1186,7 @@
     <value>radRX2ModeCWL</value>
   </data>
   <data name="&gt;&gt;radRX2ModeCWL.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RadioButtonTS, PowerSDR, Version=1.19.3.1, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.RadioButtonTS, PowerSDR, Version=1.19.3.2, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;radRX2ModeCWL.Parent" xml:space="preserve">
     <value>panelRX2Mode</value>
@@ -1186,7 +1228,7 @@
     <value>radRX2ModeDSB</value>
   </data>
   <data name="&gt;&gt;radRX2ModeDSB.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RadioButtonTS, PowerSDR, Version=1.19.3.1, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.RadioButtonTS, PowerSDR, Version=1.19.3.2, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;radRX2ModeDSB.Parent" xml:space="preserve">
     <value>panelRX2Mode</value>
@@ -1228,7 +1270,7 @@
     <value>radRX2ModeUSB</value>
   </data>
   <data name="&gt;&gt;radRX2ModeUSB.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RadioButtonTS, PowerSDR, Version=1.19.3.1, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.RadioButtonTS, PowerSDR, Version=1.19.3.2, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;radRX2ModeUSB.Parent" xml:space="preserve">
     <value>panelRX2Mode</value>
@@ -1270,7 +1312,7 @@
     <value>radRX2ModeCWU</value>
   </data>
   <data name="&gt;&gt;radRX2ModeCWU.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RadioButtonTS, PowerSDR, Version=1.19.3.1, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.RadioButtonTS, PowerSDR, Version=1.19.3.2, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;radRX2ModeCWU.Parent" xml:space="preserve">
     <value>panelRX2Mode</value>
@@ -1312,7 +1354,7 @@
     <value>radRX2ModeFMN</value>
   </data>
   <data name="&gt;&gt;radRX2ModeFMN.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RadioButtonTS, PowerSDR, Version=1.19.3.1, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.RadioButtonTS, PowerSDR, Version=1.19.3.2, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;radRX2ModeFMN.Parent" xml:space="preserve">
     <value>panelRX2Mode</value>
@@ -1354,7 +1396,7 @@
     <value>radRX2ModeDIGU</value>
   </data>
   <data name="&gt;&gt;radRX2ModeDIGU.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RadioButtonTS, PowerSDR, Version=1.19.3.1, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.RadioButtonTS, PowerSDR, Version=1.19.3.2, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;radRX2ModeDIGU.Parent" xml:space="preserve">
     <value>panelRX2Mode</value>
@@ -1396,7 +1438,7 @@
     <value>radRX2ModeDRM</value>
   </data>
   <data name="&gt;&gt;radRX2ModeDRM.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RadioButtonTS, PowerSDR, Version=1.19.3.1, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.RadioButtonTS, PowerSDR, Version=1.19.3.2, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;radRX2ModeDRM.Parent" xml:space="preserve">
     <value>panelRX2Mode</value>
@@ -1438,7 +1480,7 @@
     <value>radRX2ModeDIGL</value>
   </data>
   <data name="&gt;&gt;radRX2ModeDIGL.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RadioButtonTS, PowerSDR, Version=1.19.3.1, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.RadioButtonTS, PowerSDR, Version=1.19.3.2, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;radRX2ModeDIGL.Parent" xml:space="preserve">
     <value>panelRX2Mode</value>
@@ -1480,7 +1522,7 @@
     <value>radRX2ModeSPEC</value>
   </data>
   <data name="&gt;&gt;radRX2ModeSPEC.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RadioButtonTS, PowerSDR, Version=1.19.3.1, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.RadioButtonTS, PowerSDR, Version=1.19.3.2, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;radRX2ModeSPEC.Parent" xml:space="preserve">
     <value>panelRX2Mode</value>
@@ -1522,7 +1564,7 @@
     <value>chkRX2DisplayPeak</value>
   </data>
   <data name="&gt;&gt;chkRX2DisplayPeak.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBoxTS, PowerSDR, Version=1.19.3.1, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.CheckBoxTS, PowerSDR, Version=1.19.3.2, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;chkRX2DisplayPeak.Parent" xml:space="preserve">
     <value>panelRX2Display</value>
@@ -1558,7 +1600,7 @@
     <value>comboRX2DisplayMode</value>
   </data>
   <data name="&gt;&gt;comboRX2DisplayMode.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ComboBoxTS, PowerSDR, Version=1.19.3.1, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.ComboBoxTS, PowerSDR, Version=1.19.3.2, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;comboRX2DisplayMode.Parent" xml:space="preserve">
     <value>panelRX2Display</value>
@@ -1594,7 +1636,7 @@
     <value>chkRX2Mute</value>
   </data>
   <data name="&gt;&gt;chkRX2Mute.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBoxTS, PowerSDR, Version=1.19.3.1, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.CheckBoxTS, PowerSDR, Version=1.19.3.2, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;chkRX2Mute.Parent" xml:space="preserve">
     <value>panelRX2Mixer</value>
@@ -1636,7 +1678,7 @@
     <value>chkPanSwap</value>
   </data>
   <data name="&gt;&gt;chkPanSwap.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBoxTS, PowerSDR, Version=1.19.3.1, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.CheckBoxTS, PowerSDR, Version=1.19.3.2, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;chkPanSwap.Parent" xml:space="preserve">
     <value>panelMultiRX</value>
@@ -1678,7 +1720,7 @@
     <value>chkEnableMultiRX</value>
   </data>
   <data name="&gt;&gt;chkEnableMultiRX.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBoxTS, PowerSDR, Version=1.19.3.1, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.CheckBoxTS, PowerSDR, Version=1.19.3.2, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;chkEnableMultiRX.Parent" xml:space="preserve">
     <value>panelMultiRX</value>
@@ -1717,7 +1759,7 @@
     <value>chkDisplayPeak</value>
   </data>
   <data name="&gt;&gt;chkDisplayPeak.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBoxTS, PowerSDR, Version=1.19.3.1, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.CheckBoxTS, PowerSDR, Version=1.19.3.2, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;chkDisplayPeak.Parent" xml:space="preserve">
     <value>panelDisplay2</value>
@@ -1750,7 +1792,7 @@
     <value>comboDisplayMode</value>
   </data>
   <data name="&gt;&gt;comboDisplayMode.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ComboBoxTS, PowerSDR, Version=1.19.3.1, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.ComboBoxTS, PowerSDR, Version=1.19.3.2, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;comboDisplayMode.Parent" xml:space="preserve">
     <value>panelDisplay2</value>
@@ -1789,55 +1831,13 @@
     <value>chkDisplayAVG</value>
   </data>
   <data name="&gt;&gt;chkDisplayAVG.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBoxTS, PowerSDR, Version=1.19.3.1, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.CheckBoxTS, PowerSDR, Version=1.19.3.2, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;chkDisplayAVG.Parent" xml:space="preserve">
     <value>panelDisplay2</value>
   </data>
   <data name="&gt;&gt;chkDisplayAVG.ZOrder" xml:space="preserve">
     <value>2</value>
-  </data>
-  <data name="chkSR.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
-    <value>Button</value>
-  </data>
-  <data name="chkSR.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
-    <value>Flat</value>
-  </data>
-  <data name="chkSR.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 8.25pt, style=Bold</value>
-  </data>
-  <data name="chkSR.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="chkSR.Location" type="System.Drawing.Point, System.Drawing">
-    <value>59, 30</value>
-  </data>
-  <data name="chkSR.Size" type="System.Drawing.Size, System.Drawing">
-    <value>50, 23</value>
-  </data>
-  <data name="chkSR.TabIndex" type="System.Int32, mscorlib">
-    <value>35</value>
-  </data>
-  <data name="chkSR.Text" xml:space="preserve">
-    <value>SR</value>
-  </data>
-  <data name="chkSR.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>TopCenter</value>
-  </data>
-  <data name="chkSR.ToolTip" xml:space="preserve">
-    <value>Spur Reduction</value>
-  </data>
-  <data name="&gt;&gt;chkSR.Name" xml:space="preserve">
-    <value>chkSR</value>
-  </data>
-  <data name="&gt;&gt;chkSR.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBoxTS, PowerSDR, Version=1.19.3.1, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;chkSR.Parent" xml:space="preserve">
-    <value>panelOptions</value>
-  </data>
-  <data name="&gt;&gt;chkSR.ZOrder" xml:space="preserve">
-    <value>0</value>
   </data>
   <data name="chkNR.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
     <value>Button</value>
@@ -1873,7 +1873,7 @@
     <value>chkNR</value>
   </data>
   <data name="&gt;&gt;chkNR.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBoxTS, PowerSDR, Version=1.19.3.1, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.CheckBoxTS, PowerSDR, Version=1.19.3.2, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;chkNR.Parent" xml:space="preserve">
     <value>panelDSP</value>
@@ -1915,7 +1915,7 @@
     <value>chkDSPNB2</value>
   </data>
   <data name="&gt;&gt;chkDSPNB2.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBoxTS, PowerSDR, Version=1.19.3.1, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.CheckBoxTS, PowerSDR, Version=1.19.3.2, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;chkDSPNB2.Parent" xml:space="preserve">
     <value>panelDSP</value>
@@ -1957,7 +1957,7 @@
     <value>chkBIN</value>
   </data>
   <data name="&gt;&gt;chkBIN.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBoxTS, PowerSDR, Version=1.19.3.1, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.CheckBoxTS, PowerSDR, Version=1.19.3.2, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;chkBIN.Parent" xml:space="preserve">
     <value>panelDSP</value>
@@ -1999,7 +1999,7 @@
     <value>chkNB</value>
   </data>
   <data name="&gt;&gt;chkNB.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBoxTS, PowerSDR, Version=1.19.3.1, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.CheckBoxTS, PowerSDR, Version=1.19.3.2, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;chkNB.Parent" xml:space="preserve">
     <value>panelDSP</value>
@@ -2041,7 +2041,7 @@
     <value>chkANF</value>
   </data>
   <data name="&gt;&gt;chkANF.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBoxTS, PowerSDR, Version=1.19.3.1, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.CheckBoxTS, PowerSDR, Version=1.19.3.2, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;chkANF.Parent" xml:space="preserve">
     <value>panelDSP</value>
@@ -2083,7 +2083,7 @@
     <value>btnZeroBeat</value>
   </data>
   <data name="&gt;&gt;btnZeroBeat.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ButtonTS, PowerSDR, Version=1.19.3.1, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.ButtonTS, PowerSDR, Version=1.19.3.2, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;btnZeroBeat.Parent" xml:space="preserve">
     <value>panelVFO</value>
@@ -2125,7 +2125,7 @@
     <value>chkVFOSplit</value>
   </data>
   <data name="&gt;&gt;chkVFOSplit.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBoxTS, PowerSDR, Version=1.19.3.1, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.CheckBoxTS, PowerSDR, Version=1.19.3.2, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;chkVFOSplit.Parent" xml:space="preserve">
     <value>panelVFO</value>
@@ -2158,7 +2158,7 @@
     <value>btnRITReset</value>
   </data>
   <data name="&gt;&gt;btnRITReset.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ButtonTS, PowerSDR, Version=1.19.3.1, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.ButtonTS, PowerSDR, Version=1.19.3.2, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;btnRITReset.Parent" xml:space="preserve">
     <value>panelVFO</value>
@@ -2191,7 +2191,7 @@
     <value>btnXITReset</value>
   </data>
   <data name="&gt;&gt;btnXITReset.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ButtonTS, PowerSDR, Version=1.19.3.1, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.ButtonTS, PowerSDR, Version=1.19.3.2, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;btnXITReset.Parent" xml:space="preserve">
     <value>panelVFO</value>
@@ -2215,7 +2215,7 @@
     <value>udRIT</value>
   </data>
   <data name="&gt;&gt;udRIT.Type" xml:space="preserve">
-    <value>System.Windows.Forms.NumericUpDownTS, PowerSDR, Version=1.19.3.1, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.NumericUpDownTS, PowerSDR, Version=1.19.3.2, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;udRIT.Parent" xml:space="preserve">
     <value>panelVFO</value>
@@ -2254,7 +2254,7 @@
     <value>btnIFtoVFO</value>
   </data>
   <data name="&gt;&gt;btnIFtoVFO.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ButtonTS, PowerSDR, Version=1.19.3.1, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.ButtonTS, PowerSDR, Version=1.19.3.2, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;btnIFtoVFO.Parent" xml:space="preserve">
     <value>panelVFO</value>
@@ -2293,7 +2293,7 @@
     <value>chkRIT</value>
   </data>
   <data name="&gt;&gt;chkRIT.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBoxTS, PowerSDR, Version=1.19.3.1, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.CheckBoxTS, PowerSDR, Version=1.19.3.2, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;chkRIT.Parent" xml:space="preserve">
     <value>panelVFO</value>
@@ -2332,7 +2332,7 @@
     <value>btnVFOSwap</value>
   </data>
   <data name="&gt;&gt;btnVFOSwap.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ButtonTS, PowerSDR, Version=1.19.3.1, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.ButtonTS, PowerSDR, Version=1.19.3.2, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;btnVFOSwap.Parent" xml:space="preserve">
     <value>panelVFO</value>
@@ -2371,7 +2371,7 @@
     <value>chkXIT</value>
   </data>
   <data name="&gt;&gt;chkXIT.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBoxTS, PowerSDR, Version=1.19.3.1, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.CheckBoxTS, PowerSDR, Version=1.19.3.2, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;chkXIT.Parent" xml:space="preserve">
     <value>panelVFO</value>
@@ -2410,7 +2410,7 @@
     <value>btnVFOBtoA</value>
   </data>
   <data name="&gt;&gt;btnVFOBtoA.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ButtonTS, PowerSDR, Version=1.19.3.1, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.ButtonTS, PowerSDR, Version=1.19.3.2, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;btnVFOBtoA.Parent" xml:space="preserve">
     <value>panelVFO</value>
@@ -2434,7 +2434,7 @@
     <value>udXIT</value>
   </data>
   <data name="&gt;&gt;udXIT.Type" xml:space="preserve">
-    <value>System.Windows.Forms.NumericUpDownTS, PowerSDR, Version=1.19.3.1, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.NumericUpDownTS, PowerSDR, Version=1.19.3.2, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;udXIT.Parent" xml:space="preserve">
     <value>panelVFO</value>
@@ -2473,7 +2473,7 @@
     <value>btnVFOAtoB</value>
   </data>
   <data name="&gt;&gt;btnVFOAtoB.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ButtonTS, PowerSDR, Version=1.19.3.1, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.ButtonTS, PowerSDR, Version=1.19.3.2, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;btnVFOAtoB.Parent" xml:space="preserve">
     <value>panelVFO</value>
@@ -2518,7 +2518,7 @@
     <value>chkRX1Preamp</value>
   </data>
   <data name="&gt;&gt;chkRX1Preamp.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBoxTS, PowerSDR, Version=1.19.3.1, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.CheckBoxTS, PowerSDR, Version=1.19.3.2, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;chkRX1Preamp.Parent" xml:space="preserve">
     <value>panelSoundControls</value>
@@ -2545,7 +2545,7 @@
     <value>comboAGC</value>
   </data>
   <data name="&gt;&gt;comboAGC.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ComboBoxTS, PowerSDR, Version=1.19.3.1, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.ComboBoxTS, PowerSDR, Version=1.19.3.2, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;comboAGC.Parent" xml:space="preserve">
     <value>panelSoundControls</value>
@@ -2578,7 +2578,7 @@
     <value>lblAGC</value>
   </data>
   <data name="&gt;&gt;lblAGC.Type" xml:space="preserve">
-    <value>System.Windows.Forms.LabelTS, PowerSDR, Version=1.19.3.1, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.LabelTS, PowerSDR, Version=1.19.3.2, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;lblAGC.Parent" xml:space="preserve">
     <value>panelSoundControls</value>
@@ -2617,7 +2617,7 @@
     <value>comboPreamp</value>
   </data>
   <data name="&gt;&gt;comboPreamp.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ComboBoxTS, PowerSDR, Version=1.19.3.1, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.ComboBoxTS, PowerSDR, Version=1.19.3.2, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;comboPreamp.Parent" xml:space="preserve">
     <value>panelSoundControls</value>
@@ -2650,7 +2650,7 @@
     <value>lblRF</value>
   </data>
   <data name="&gt;&gt;lblRF.Type" xml:space="preserve">
-    <value>System.Windows.Forms.LabelTS, PowerSDR, Version=1.19.3.1, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.LabelTS, PowerSDR, Version=1.19.3.2, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;lblRF.Parent" xml:space="preserve">
     <value>panelSoundControls</value>
@@ -2680,7 +2680,7 @@
     <value>chkShowTXFilter</value>
   </data>
   <data name="&gt;&gt;chkShowTXFilter.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBoxTS, PowerSDR, Version=1.19.3.1, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.CheckBoxTS, PowerSDR, Version=1.19.3.2, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;chkShowTXFilter.Parent" xml:space="preserve">
     <value>panelModeSpecificPhone</value>
@@ -2722,7 +2722,7 @@
     <value>chkDX</value>
   </data>
   <data name="&gt;&gt;chkDX.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBoxTS, PowerSDR, Version=1.19.3.1, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.CheckBoxTS, PowerSDR, Version=1.19.3.2, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;chkDX.Parent" xml:space="preserve">
     <value>panelModeSpecificPhone</value>
@@ -2764,7 +2764,7 @@
     <value>chkTXEQ</value>
   </data>
   <data name="&gt;&gt;chkTXEQ.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBoxTS, PowerSDR, Version=1.19.3.1, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.CheckBoxTS, PowerSDR, Version=1.19.3.2, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;chkTXEQ.Parent" xml:space="preserve">
     <value>panelModeSpecificPhone</value>
@@ -2791,7 +2791,7 @@
     <value>comboTXProfile</value>
   </data>
   <data name="&gt;&gt;comboTXProfile.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ComboBoxTS, PowerSDR, Version=1.19.3.1, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.ComboBoxTS, PowerSDR, Version=1.19.3.2, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;comboTXProfile.Parent" xml:space="preserve">
     <value>panelModeSpecificPhone</value>
@@ -2833,7 +2833,7 @@
     <value>chkRXEQ</value>
   </data>
   <data name="&gt;&gt;chkRXEQ.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBoxTS, PowerSDR, Version=1.19.3.1, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.CheckBoxTS, PowerSDR, Version=1.19.3.2, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;chkRXEQ.Parent" xml:space="preserve">
     <value>panelModeSpecificPhone</value>
@@ -2875,7 +2875,7 @@
     <value>chkCPDR</value>
   </data>
   <data name="&gt;&gt;chkCPDR.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBoxTS, PowerSDR, Version=1.19.3.1, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.CheckBoxTS, PowerSDR, Version=1.19.3.2, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;chkCPDR.Parent" xml:space="preserve">
     <value>panelModeSpecificPhone</value>
@@ -2917,7 +2917,7 @@
     <value>chkPhoneVAC</value>
   </data>
   <data name="&gt;&gt;chkPhoneVAC.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBoxTS, PowerSDR, Version=1.19.3.1, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.CheckBoxTS, PowerSDR, Version=1.19.3.2, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;chkPhoneVAC.Parent" xml:space="preserve">
     <value>panelModeSpecificPhone</value>
@@ -2959,7 +2959,7 @@
     <value>chkVOX</value>
   </data>
   <data name="&gt;&gt;chkVOX.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBoxTS, PowerSDR, Version=1.19.3.1, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.CheckBoxTS, PowerSDR, Version=1.19.3.2, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;chkVOX.Parent" xml:space="preserve">
     <value>panelModeSpecificPhone</value>
@@ -3001,7 +3001,7 @@
     <value>chkNoiseGate</value>
   </data>
   <data name="&gt;&gt;chkNoiseGate.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBoxTS, PowerSDR, Version=1.19.3.1, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.CheckBoxTS, PowerSDR, Version=1.19.3.2, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;chkNoiseGate.Parent" xml:space="preserve">
     <value>panelModeSpecificPhone</value>
@@ -3028,7 +3028,7 @@
     <value>comboDigTXProfile</value>
   </data>
   <data name="&gt;&gt;comboDigTXProfile.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ComboBoxTS, PowerSDR, Version=1.19.3.1, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.ComboBoxTS, PowerSDR, Version=1.19.3.2, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;comboDigTXProfile.Parent" xml:space="preserve">
     <value>panelModeSpecificDigital</value>
@@ -3067,7 +3067,7 @@
     <value>chkVACEnabled</value>
   </data>
   <data name="&gt;&gt;chkVACEnabled.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBoxTS, PowerSDR, Version=1.19.3.1, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.CheckBoxTS, PowerSDR, Version=1.19.3.2, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;chkVACEnabled.Parent" xml:space="preserve">
     <value>panelModeSpecificDigital</value>
@@ -3097,7 +3097,7 @@
     <value>chkVACStereo</value>
   </data>
   <data name="&gt;&gt;chkVACStereo.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBoxTS, PowerSDR, Version=1.19.3.1, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.CheckBoxTS, PowerSDR, Version=1.19.3.2, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;chkVACStereo.Parent" xml:space="preserve">
     <value>grpVACStereo</value>
@@ -3148,7 +3148,7 @@
     <value>comboVACSampleRate</value>
   </data>
   <data name="&gt;&gt;comboVACSampleRate.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ComboBoxTS, PowerSDR, Version=1.19.3.1, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.ComboBoxTS, PowerSDR, Version=1.19.3.2, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;comboVACSampleRate.Parent" xml:space="preserve">
     <value>grpDIGSampleRate</value>
@@ -3187,7 +3187,7 @@
     <value>btnDisplayPanCenter</value>
   </data>
   <data name="&gt;&gt;btnDisplayPanCenter.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ButtonTS, PowerSDR, Version=1.19.3.1, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.ButtonTS, PowerSDR, Version=1.19.3.2, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;btnDisplayPanCenter.Parent" xml:space="preserve">
     <value>panelDisplay</value>
@@ -3217,7 +3217,7 @@
     <value>udFilterHigh</value>
   </data>
   <data name="&gt;&gt;udFilterHigh.Type" xml:space="preserve">
-    <value>System.Windows.Forms.NumericUpDownTS, PowerSDR, Version=1.19.3.1, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.NumericUpDownTS, PowerSDR, Version=1.19.3.2, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;udFilterHigh.Parent" xml:space="preserve">
     <value>panelFilter</value>
@@ -3247,7 +3247,7 @@
     <value>udFilterLow</value>
   </data>
   <data name="&gt;&gt;udFilterLow.Type" xml:space="preserve">
-    <value>System.Windows.Forms.NumericUpDownTS, PowerSDR, Version=1.19.3.1, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.NumericUpDownTS, PowerSDR, Version=1.19.3.2, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;udFilterLow.Parent" xml:space="preserve">
     <value>panelFilter</value>
@@ -3283,7 +3283,7 @@
     <value>btnFilterShiftReset</value>
   </data>
   <data name="&gt;&gt;btnFilterShiftReset.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ButtonTS, PowerSDR, Version=1.19.3.1, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.ButtonTS, PowerSDR, Version=1.19.3.2, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;btnFilterShiftReset.Parent" xml:space="preserve">
     <value>panelFilter</value>
@@ -3325,7 +3325,7 @@
     <value>radModeAM</value>
   </data>
   <data name="&gt;&gt;radModeAM.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RadioButtonTS, PowerSDR, Version=1.19.3.1, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.RadioButtonTS, PowerSDR, Version=1.19.3.2, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;radModeAM.Parent" xml:space="preserve">
     <value>panelMode</value>
@@ -3367,7 +3367,7 @@
     <value>radModeLSB</value>
   </data>
   <data name="&gt;&gt;radModeLSB.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RadioButtonTS, PowerSDR, Version=1.19.3.1, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.RadioButtonTS, PowerSDR, Version=1.19.3.2, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;radModeLSB.Parent" xml:space="preserve">
     <value>panelMode</value>
@@ -3409,7 +3409,7 @@
     <value>radModeSAM</value>
   </data>
   <data name="&gt;&gt;radModeSAM.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RadioButtonTS, PowerSDR, Version=1.19.3.1, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.RadioButtonTS, PowerSDR, Version=1.19.3.2, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;radModeSAM.Parent" xml:space="preserve">
     <value>panelMode</value>
@@ -3451,7 +3451,7 @@
     <value>radModeCWL</value>
   </data>
   <data name="&gt;&gt;radModeCWL.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RadioButtonTS, PowerSDR, Version=1.19.3.1, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.RadioButtonTS, PowerSDR, Version=1.19.3.2, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;radModeCWL.Parent" xml:space="preserve">
     <value>panelMode</value>
@@ -3493,7 +3493,7 @@
     <value>radModeDSB</value>
   </data>
   <data name="&gt;&gt;radModeDSB.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RadioButtonTS, PowerSDR, Version=1.19.3.1, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.RadioButtonTS, PowerSDR, Version=1.19.3.2, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;radModeDSB.Parent" xml:space="preserve">
     <value>panelMode</value>
@@ -3535,7 +3535,7 @@
     <value>radModeUSB</value>
   </data>
   <data name="&gt;&gt;radModeUSB.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RadioButtonTS, PowerSDR, Version=1.19.3.1, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.RadioButtonTS, PowerSDR, Version=1.19.3.2, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;radModeUSB.Parent" xml:space="preserve">
     <value>panelMode</value>
@@ -3577,7 +3577,7 @@
     <value>radModeCWU</value>
   </data>
   <data name="&gt;&gt;radModeCWU.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RadioButtonTS, PowerSDR, Version=1.19.3.1, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.RadioButtonTS, PowerSDR, Version=1.19.3.2, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;radModeCWU.Parent" xml:space="preserve">
     <value>panelMode</value>
@@ -3619,7 +3619,7 @@
     <value>radModeFMN</value>
   </data>
   <data name="&gt;&gt;radModeFMN.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RadioButtonTS, PowerSDR, Version=1.19.3.1, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.RadioButtonTS, PowerSDR, Version=1.19.3.2, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;radModeFMN.Parent" xml:space="preserve">
     <value>panelMode</value>
@@ -3661,7 +3661,7 @@
     <value>radModeDIGU</value>
   </data>
   <data name="&gt;&gt;radModeDIGU.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RadioButtonTS, PowerSDR, Version=1.19.3.1, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.RadioButtonTS, PowerSDR, Version=1.19.3.2, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;radModeDIGU.Parent" xml:space="preserve">
     <value>panelMode</value>
@@ -3703,7 +3703,7 @@
     <value>radModeDRM</value>
   </data>
   <data name="&gt;&gt;radModeDRM.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RadioButtonTS, PowerSDR, Version=1.19.3.1, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.RadioButtonTS, PowerSDR, Version=1.19.3.2, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;radModeDRM.Parent" xml:space="preserve">
     <value>panelMode</value>
@@ -3745,7 +3745,7 @@
     <value>radModeDIGL</value>
   </data>
   <data name="&gt;&gt;radModeDIGL.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RadioButtonTS, PowerSDR, Version=1.19.3.1, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.RadioButtonTS, PowerSDR, Version=1.19.3.2, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;radModeDIGL.Parent" xml:space="preserve">
     <value>panelMode</value>
@@ -3787,7 +3787,7 @@
     <value>radModeSPEC</value>
   </data>
   <data name="&gt;&gt;radModeSPEC.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RadioButtonTS, PowerSDR, Version=1.19.3.1, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.RadioButtonTS, PowerSDR, Version=1.19.3.2, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;radModeSPEC.Parent" xml:space="preserve">
     <value>panelMode</value>
@@ -3826,7 +3826,7 @@
     <value>btnBandVHF</value>
   </data>
   <data name="&gt;&gt;btnBandVHF.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ButtonTS, PowerSDR, Version=1.19.3.1, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.ButtonTS, PowerSDR, Version=1.19.3.2, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;btnBandVHF.Parent" xml:space="preserve">
     <value>panelBandHF</value>
@@ -3895,7 +3895,7 @@
     <value>comboRX2Band</value>
   </data>
   <data name="&gt;&gt;comboRX2Band.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ComboBoxTS, PowerSDR, Version=1.19.3.1, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.ComboBoxTS, PowerSDR, Version=1.19.3.2, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;comboRX2Band.Parent" xml:space="preserve">
     <value>$this</value>
@@ -3907,7 +3907,7 @@
     <value>Button</value>
   </data>
   <data name="chkVFOATX.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
-    <value>Flat</value>
+    <value>Popup</value>
   </data>
   <data name="chkVFOATX.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 8.25pt, style=Bold</value>
@@ -3916,19 +3916,16 @@
     <value>Off</value>
   </data>
   <data name="chkVFOATX.Location" type="System.Drawing.Point, System.Drawing">
-    <value>201, 56</value>
+    <value>199, 56</value>
   </data>
   <data name="chkVFOATX.Size" type="System.Drawing.Size, System.Drawing">
-    <value>27, 24</value>
+    <value>27, 26</value>
   </data>
   <data name="chkVFOATX.TabIndex" type="System.Int32, mscorlib">
     <value>120</value>
   </data>
   <data name="chkVFOATX.Text" xml:space="preserve">
     <value>TX</value>
-  </data>
-  <data name="chkVFOATX.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>TopLeft</value>
   </data>
   <data name="chkVFOATX.ToolTip" xml:space="preserve">
     <value>Transmit on VFO A frequency</value>
@@ -3937,7 +3934,7 @@
     <value>chkVFOATX</value>
   </data>
   <data name="&gt;&gt;chkVFOATX.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBoxTS, PowerSDR, Version=1.19.3.1, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.CheckBoxTS, PowerSDR, Version=1.19.3.2, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;chkVFOATX.Parent" xml:space="preserve">
     <value>grpVFOA</value>
@@ -3967,7 +3964,7 @@
     <value>txtWheelTune</value>
   </data>
   <data name="&gt;&gt;txtWheelTune.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBoxTS, PowerSDR, Version=1.19.3.1, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.TextBoxTS, PowerSDR, Version=1.19.3.2, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;txtWheelTune.Parent" xml:space="preserve">
     <value>grpVFOBetween</value>
@@ -3979,7 +3976,7 @@
     <value>Button</value>
   </data>
   <data name="chkVFOBTX.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
-    <value>Flat</value>
+    <value>Popup</value>
   </data>
   <data name="chkVFOBTX.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 8.25pt, style=Bold</value>
@@ -3991,16 +3988,13 @@
     <value>8, 56</value>
   </data>
   <data name="chkVFOBTX.Size" type="System.Drawing.Size, System.Drawing">
-    <value>27, 24</value>
+    <value>27, 26</value>
   </data>
   <data name="chkVFOBTX.TabIndex" type="System.Int32, mscorlib">
     <value>119</value>
   </data>
   <data name="chkVFOBTX.Text" xml:space="preserve">
     <value>TX</value>
-  </data>
-  <data name="chkVFOBTX.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>TopLeft</value>
   </data>
   <data name="chkVFOBTX.ToolTip" xml:space="preserve">
     <value>Transmit on VFO B frequency</value>
@@ -4009,7 +4003,7 @@
     <value>chkVFOBTX</value>
   </data>
   <data name="&gt;&gt;chkVFOBTX.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBoxTS, PowerSDR, Version=1.19.3.1, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.CheckBoxTS, PowerSDR, Version=1.19.3.2, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;chkVFOBTX.Parent" xml:space="preserve">
     <value>grpVFOB</value>
@@ -4045,7 +4039,7 @@
     <value>chkPower</value>
   </data>
   <data name="&gt;&gt;chkPower.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBoxTS, PowerSDR, Version=1.19.3.1, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.CheckBoxTS, PowerSDR, Version=1.19.3.2, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;chkPower.Parent" xml:space="preserve">
     <value>$this</value>
@@ -4075,7 +4069,7 @@
     <value>comboMeterTXMode</value>
   </data>
   <data name="&gt;&gt;comboMeterTXMode.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ComboBoxTS, PowerSDR, Version=1.19.3.1, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.ComboBoxTS, PowerSDR, Version=1.19.3.2, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;comboMeterTXMode.Parent" xml:space="preserve">
     <value>grpMultimeter</value>
@@ -4102,7 +4096,7 @@
     <value>comboMeterRXMode</value>
   </data>
   <data name="&gt;&gt;comboMeterRXMode.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ComboBoxTS, PowerSDR, Version=1.19.3.1, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.ComboBoxTS, PowerSDR, Version=1.19.3.2, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;comboMeterRXMode.Parent" xml:space="preserve">
     <value>grpMultimeter</value>
@@ -4141,7 +4135,7 @@
     <value>chkSquelch</value>
   </data>
   <data name="&gt;&gt;chkSquelch.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBoxTS, PowerSDR, Version=1.19.3.1, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.CheckBoxTS, PowerSDR, Version=1.19.3.2, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;chkSquelch.Parent" xml:space="preserve">
     <value>$this</value>
@@ -4177,7 +4171,7 @@
     <value>btnMemoryQuickRestore</value>
   </data>
   <data name="&gt;&gt;btnMemoryQuickRestore.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ButtonTS, PowerSDR, Version=1.19.3.1, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.ButtonTS, PowerSDR, Version=1.19.3.2, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;btnMemoryQuickRestore.Parent" xml:space="preserve">
     <value>grpVFOBetween</value>
@@ -4216,7 +4210,7 @@
     <value>btnMemoryQuickSave</value>
   </data>
   <data name="&gt;&gt;btnMemoryQuickSave.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ButtonTS, PowerSDR, Version=1.19.3.1, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.ButtonTS, PowerSDR, Version=1.19.3.2, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;btnMemoryQuickSave.Parent" xml:space="preserve">
     <value>grpVFOBetween</value>
@@ -4243,7 +4237,7 @@
     <value>txtMemoryQuick</value>
   </data>
   <data name="&gt;&gt;txtMemoryQuick.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBoxTS, PowerSDR, Version=1.19.3.1, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.TextBoxTS, PowerSDR, Version=1.19.3.2, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;txtMemoryQuick.Parent" xml:space="preserve">
     <value>grpVFOBetween</value>
@@ -4288,7 +4282,7 @@
     <value>chkVFOLock</value>
   </data>
   <data name="&gt;&gt;chkVFOLock.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBoxTS, PowerSDR, Version=1.19.3.1, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.CheckBoxTS, PowerSDR, Version=1.19.3.2, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;chkVFOLock.Parent" xml:space="preserve">
     <value>grpVFOBetween</value>
@@ -4330,7 +4324,7 @@
     <value>chkVFOSync</value>
   </data>
   <data name="&gt;&gt;chkVFOSync.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBoxTS, PowerSDR, Version=1.19.3.1, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.CheckBoxTS, PowerSDR, Version=1.19.3.2, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;chkVFOSync.Parent" xml:space="preserve">
     <value>grpVFOBetween</value>
@@ -4375,7 +4369,7 @@
     <value>chkFullDuplex</value>
   </data>
   <data name="&gt;&gt;chkFullDuplex.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBoxTS, PowerSDR, Version=1.19.3.1, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.CheckBoxTS, PowerSDR, Version=1.19.3.2, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;chkFullDuplex.Parent" xml:space="preserve">
     <value>grpVFOBetween</value>
@@ -4411,7 +4405,7 @@
     <value>btnTuneStepChangeLarger</value>
   </data>
   <data name="&gt;&gt;btnTuneStepChangeLarger.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ButtonTS, PowerSDR, Version=1.19.3.1, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.ButtonTS, PowerSDR, Version=1.19.3.2, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;btnTuneStepChangeLarger.Parent" xml:space="preserve">
     <value>grpVFOBetween</value>
@@ -4447,7 +4441,7 @@
     <value>btnTuneStepChangeSmaller</value>
   </data>
   <data name="&gt;&gt;btnTuneStepChangeSmaller.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ButtonTS, PowerSDR, Version=1.19.3.1, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.ButtonTS, PowerSDR, Version=1.19.3.2, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;btnTuneStepChangeSmaller.Parent" xml:space="preserve">
     <value>grpVFOBetween</value>
@@ -4483,7 +4477,7 @@
     <value>chkSplitDisplay</value>
   </data>
   <data name="&gt;&gt;chkSplitDisplay.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBoxTS, PowerSDR, Version=1.19.3.1, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.CheckBoxTS, PowerSDR, Version=1.19.3.2, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;chkSplitDisplay.Parent" xml:space="preserve">
     <value>grpDisplaySplit</value>
@@ -4519,7 +4513,7 @@
     <value>comboDisplayModeTop</value>
   </data>
   <data name="&gt;&gt;comboDisplayModeTop.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ComboBoxTS, PowerSDR, Version=1.19.3.1, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.ComboBoxTS, PowerSDR, Version=1.19.3.2, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;comboDisplayModeTop.Parent" xml:space="preserve">
     <value>grpDisplaySplit</value>
@@ -4555,7 +4549,7 @@
     <value>comboDisplayModeBottom</value>
   </data>
   <data name="&gt;&gt;comboDisplayModeBottom.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ComboBoxTS, PowerSDR, Version=1.19.3.1, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.ComboBoxTS, PowerSDR, Version=1.19.3.2, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;comboDisplayModeBottom.Parent" xml:space="preserve">
     <value>grpDisplaySplit</value>
@@ -4597,7 +4591,7 @@
     <value>chkRX2SR</value>
   </data>
   <data name="&gt;&gt;chkRX2SR.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBoxTS, PowerSDR, Version=1.19.3.1, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.CheckBoxTS, PowerSDR, Version=1.19.3.2, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;chkRX2SR.Parent" xml:space="preserve">
     <value>panelRX2DSP</value>
@@ -4639,7 +4633,7 @@
     <value>chkRX2NB2</value>
   </data>
   <data name="&gt;&gt;chkRX2NB2.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBoxTS, PowerSDR, Version=1.19.3.1, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.CheckBoxTS, PowerSDR, Version=1.19.3.2, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;chkRX2NB2.Parent" xml:space="preserve">
     <value>panelRX2DSP</value>
@@ -4681,7 +4675,7 @@
     <value>chkRX2NB</value>
   </data>
   <data name="&gt;&gt;chkRX2NB.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBoxTS, PowerSDR, Version=1.19.3.1, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.CheckBoxTS, PowerSDR, Version=1.19.3.2, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;chkRX2NB.Parent" xml:space="preserve">
     <value>panelRX2DSP</value>
@@ -4723,7 +4717,7 @@
     <value>chkRX2ANF</value>
   </data>
   <data name="&gt;&gt;chkRX2ANF.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBoxTS, PowerSDR, Version=1.19.3.1, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.CheckBoxTS, PowerSDR, Version=1.19.3.2, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;chkRX2ANF.Parent" xml:space="preserve">
     <value>panelRX2DSP</value>
@@ -4765,7 +4759,7 @@
     <value>chkRX2NR</value>
   </data>
   <data name="&gt;&gt;chkRX2NR.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBoxTS, PowerSDR, Version=1.19.3.1, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.CheckBoxTS, PowerSDR, Version=1.19.3.2, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;chkRX2NR.Parent" xml:space="preserve">
     <value>panelRX2DSP</value>
@@ -4807,7 +4801,7 @@
     <value>chkRX2BIN</value>
   </data>
   <data name="&gt;&gt;chkRX2BIN.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBoxTS, PowerSDR, Version=1.19.3.1, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.CheckBoxTS, PowerSDR, Version=1.19.3.2, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;chkRX2BIN.Parent" xml:space="preserve">
     <value>panelRX2DSP</value>
@@ -4834,7 +4828,7 @@
     <value>comboRX2AGC</value>
   </data>
   <data name="&gt;&gt;comboRX2AGC.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ComboBoxTS, PowerSDR, Version=1.19.3.1, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.ComboBoxTS, PowerSDR, Version=1.19.3.2, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;comboRX2AGC.Parent" xml:space="preserve">
     <value>panelRX2DSP</value>
@@ -4867,7 +4861,7 @@
     <value>lblRX2AGC</value>
   </data>
   <data name="&gt;&gt;lblRX2AGC.Type" xml:space="preserve">
-    <value>System.Windows.Forms.LabelTS, PowerSDR, Version=1.19.3.1, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.LabelTS, PowerSDR, Version=1.19.3.2, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;lblRX2AGC.Parent" xml:space="preserve">
     <value>panelRX2DSP</value>
@@ -4894,7 +4888,7 @@
     <value>comboRX2MeterMode</value>
   </data>
   <data name="&gt;&gt;comboRX2MeterMode.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ComboBoxTS, PowerSDR, Version=1.19.3.1, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.ComboBoxTS, PowerSDR, Version=1.19.3.2, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;comboRX2MeterMode.Parent" xml:space="preserve">
     <value>grpRX2Meter</value>
@@ -4927,7 +4921,7 @@
     <value>lblRX2RF</value>
   </data>
   <data name="&gt;&gt;lblRX2RF.Type" xml:space="preserve">
-    <value>System.Windows.Forms.LabelTS, PowerSDR, Version=1.19.3.1, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.LabelTS, PowerSDR, Version=1.19.3.2, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;lblRX2RF.Parent" xml:space="preserve">
     <value>$this</value>
@@ -4963,7 +4957,7 @@
     <value>chkRX2Squelch</value>
   </data>
   <data name="&gt;&gt;chkRX2Squelch.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBoxTS, PowerSDR, Version=1.19.3.1, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.CheckBoxTS, PowerSDR, Version=1.19.3.2, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;chkRX2Squelch.Parent" xml:space="preserve">
     <value>$this</value>
@@ -5002,7 +4996,7 @@
     <value>chkRX2Preamp</value>
   </data>
   <data name="&gt;&gt;chkRX2Preamp.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBoxTS, PowerSDR, Version=1.19.3.1, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.CheckBoxTS, PowerSDR, Version=1.19.3.2, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;chkRX2Preamp.Parent" xml:space="preserve">
     <value>$this</value>
@@ -5044,7 +5038,7 @@
     <value>chkRX2DisplayAVG</value>
   </data>
   <data name="&gt;&gt;chkRX2DisplayAVG.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBoxTS, PowerSDR, Version=1.19.3.1, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.CheckBoxTS, PowerSDR, Version=1.19.3.2, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;chkRX2DisplayAVG.Parent" xml:space="preserve">
     <value>panelRX2Display</value>
@@ -5086,7 +5080,7 @@
     <value>radBand160</value>
   </data>
   <data name="&gt;&gt;radBand160.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RadioButtonTS, PowerSDR, Version=1.19.3.1, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.RadioButtonTS, PowerSDR, Version=1.19.3.2, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;radBand160.Parent" xml:space="preserve">
     <value>panelBandHF</value>
@@ -5128,7 +5122,7 @@
     <value>radBandGEN</value>
   </data>
   <data name="&gt;&gt;radBandGEN.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RadioButtonTS, PowerSDR, Version=1.19.3.1, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.RadioButtonTS, PowerSDR, Version=1.19.3.2, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;radBandGEN.Parent" xml:space="preserve">
     <value>panelBandHF</value>
@@ -5170,7 +5164,7 @@
     <value>radBandWWV</value>
   </data>
   <data name="&gt;&gt;radBandWWV.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RadioButtonTS, PowerSDR, Version=1.19.3.1, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.RadioButtonTS, PowerSDR, Version=1.19.3.2, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;radBandWWV.Parent" xml:space="preserve">
     <value>panelBandHF</value>
@@ -5215,7 +5209,7 @@
     <value>radBand2</value>
   </data>
   <data name="&gt;&gt;radBand2.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RadioButtonTS, PowerSDR, Version=1.19.3.1, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.RadioButtonTS, PowerSDR, Version=1.19.3.2, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;radBand2.Parent" xml:space="preserve">
     <value>panelBandHF</value>
@@ -5257,7 +5251,7 @@
     <value>radBand6</value>
   </data>
   <data name="&gt;&gt;radBand6.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RadioButtonTS, PowerSDR, Version=1.19.3.1, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.RadioButtonTS, PowerSDR, Version=1.19.3.2, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;radBand6.Parent" xml:space="preserve">
     <value>panelBandHF</value>
@@ -5299,7 +5293,7 @@
     <value>radBand10</value>
   </data>
   <data name="&gt;&gt;radBand10.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RadioButtonTS, PowerSDR, Version=1.19.3.1, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.RadioButtonTS, PowerSDR, Version=1.19.3.2, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;radBand10.Parent" xml:space="preserve">
     <value>panelBandHF</value>
@@ -5341,7 +5335,7 @@
     <value>radBand12</value>
   </data>
   <data name="&gt;&gt;radBand12.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RadioButtonTS, PowerSDR, Version=1.19.3.1, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.RadioButtonTS, PowerSDR, Version=1.19.3.2, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;radBand12.Parent" xml:space="preserve">
     <value>panelBandHF</value>
@@ -5383,7 +5377,7 @@
     <value>radBand15</value>
   </data>
   <data name="&gt;&gt;radBand15.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RadioButtonTS, PowerSDR, Version=1.19.3.1, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.RadioButtonTS, PowerSDR, Version=1.19.3.2, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;radBand15.Parent" xml:space="preserve">
     <value>panelBandHF</value>
@@ -5425,7 +5419,7 @@
     <value>radBand17</value>
   </data>
   <data name="&gt;&gt;radBand17.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RadioButtonTS, PowerSDR, Version=1.19.3.1, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.RadioButtonTS, PowerSDR, Version=1.19.3.2, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;radBand17.Parent" xml:space="preserve">
     <value>panelBandHF</value>
@@ -5467,7 +5461,7 @@
     <value>radBand20</value>
   </data>
   <data name="&gt;&gt;radBand20.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RadioButtonTS, PowerSDR, Version=1.19.3.1, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.RadioButtonTS, PowerSDR, Version=1.19.3.2, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;radBand20.Parent" xml:space="preserve">
     <value>panelBandHF</value>
@@ -5509,7 +5503,7 @@
     <value>radBand30</value>
   </data>
   <data name="&gt;&gt;radBand30.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RadioButtonTS, PowerSDR, Version=1.19.3.1, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.RadioButtonTS, PowerSDR, Version=1.19.3.2, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;radBand30.Parent" xml:space="preserve">
     <value>panelBandHF</value>
@@ -5551,7 +5545,7 @@
     <value>radBand40</value>
   </data>
   <data name="&gt;&gt;radBand40.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RadioButtonTS, PowerSDR, Version=1.19.3.1, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.RadioButtonTS, PowerSDR, Version=1.19.3.2, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;radBand40.Parent" xml:space="preserve">
     <value>panelBandHF</value>
@@ -5593,7 +5587,7 @@
     <value>radBand60</value>
   </data>
   <data name="&gt;&gt;radBand60.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RadioButtonTS, PowerSDR, Version=1.19.3.1, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.RadioButtonTS, PowerSDR, Version=1.19.3.2, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;radBand60.Parent" xml:space="preserve">
     <value>panelBandHF</value>
@@ -5635,7 +5629,7 @@
     <value>radBand80</value>
   </data>
   <data name="&gt;&gt;radBand80.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RadioButtonTS, PowerSDR, Version=1.19.3.1, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.RadioButtonTS, PowerSDR, Version=1.19.3.2, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;radBand80.Parent" xml:space="preserve">
     <value>panelBandHF</value>
@@ -5668,7 +5662,7 @@
     <value>ptbDisplayZoom</value>
   </data>
   <data name="&gt;&gt;ptbDisplayZoom.Type" xml:space="preserve">
-    <value>PowerSDR.PrettyTrackBar, PowerSDR, Version=1.19.3.1, Culture=neutral, PublicKeyToken=null</value>
+    <value>PowerSDR.PrettyTrackBar, PowerSDR, Version=1.19.3.2, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;ptbDisplayZoom.Parent" xml:space="preserve">
     <value>panelDisplay</value>
@@ -5701,7 +5695,7 @@
     <value>ptbDisplayPan</value>
   </data>
   <data name="&gt;&gt;ptbDisplayPan.Type" xml:space="preserve">
-    <value>PowerSDR.PrettyTrackBar, PowerSDR, Version=1.19.3.1, Culture=neutral, PublicKeyToken=null</value>
+    <value>PowerSDR.PrettyTrackBar, PowerSDR, Version=1.19.3.2, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;ptbDisplayPan.Parent" xml:space="preserve">
     <value>panelDisplay</value>
@@ -5737,7 +5731,7 @@
     <value>ptbPWR</value>
   </data>
   <data name="&gt;&gt;ptbPWR.Type" xml:space="preserve">
-    <value>PowerSDR.PrettyTrackBar, PowerSDR, Version=1.19.3.1, Culture=neutral, PublicKeyToken=null</value>
+    <value>PowerSDR.PrettyTrackBar, PowerSDR, Version=1.19.3.2, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;ptbPWR.Parent" xml:space="preserve">
     <value>panelSoundControls</value>
@@ -5773,7 +5767,7 @@
     <value>ptbRF</value>
   </data>
   <data name="&gt;&gt;ptbRF.Type" xml:space="preserve">
-    <value>PowerSDR.PrettyTrackBar, PowerSDR, Version=1.19.3.1, Culture=neutral, PublicKeyToken=null</value>
+    <value>PowerSDR.PrettyTrackBar, PowerSDR, Version=1.19.3.2, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;ptbRF.Parent" xml:space="preserve">
     <value>panelSoundControls</value>
@@ -5809,7 +5803,7 @@
     <value>ptbAF</value>
   </data>
   <data name="&gt;&gt;ptbAF.Type" xml:space="preserve">
-    <value>PowerSDR.PrettyTrackBar, PowerSDR, Version=1.19.3.1, Culture=neutral, PublicKeyToken=null</value>
+    <value>PowerSDR.PrettyTrackBar, PowerSDR, Version=1.19.3.2, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;ptbAF.Parent" xml:space="preserve">
     <value>panelSoundControls</value>
@@ -5845,7 +5839,7 @@
     <value>ptbFilterWidth</value>
   </data>
   <data name="&gt;&gt;ptbFilterWidth.Type" xml:space="preserve">
-    <value>PowerSDR.PrettyTrackBar, PowerSDR, Version=1.19.3.1, Culture=neutral, PublicKeyToken=null</value>
+    <value>PowerSDR.PrettyTrackBar, PowerSDR, Version=1.19.3.2, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;ptbFilterWidth.Parent" xml:space="preserve">
     <value>panelFilter</value>
@@ -5881,7 +5875,7 @@
     <value>ptbFilterShift</value>
   </data>
   <data name="&gt;&gt;ptbFilterShift.Type" xml:space="preserve">
-    <value>PowerSDR.PrettyTrackBar, PowerSDR, Version=1.19.3.1, Culture=neutral, PublicKeyToken=null</value>
+    <value>PowerSDR.PrettyTrackBar, PowerSDR, Version=1.19.3.2, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;ptbFilterShift.Parent" xml:space="preserve">
     <value>panelFilter</value>
@@ -5917,7 +5911,7 @@
     <value>ptbPanMainRX</value>
   </data>
   <data name="&gt;&gt;ptbPanMainRX.Type" xml:space="preserve">
-    <value>PowerSDR.PrettyTrackBar, PowerSDR, Version=1.19.3.1, Culture=neutral, PublicKeyToken=null</value>
+    <value>PowerSDR.PrettyTrackBar, PowerSDR, Version=1.19.3.2, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;ptbPanMainRX.Parent" xml:space="preserve">
     <value>panelMultiRX</value>
@@ -5953,7 +5947,7 @@
     <value>ptbPanSubRX</value>
   </data>
   <data name="&gt;&gt;ptbPanSubRX.Type" xml:space="preserve">
-    <value>PowerSDR.PrettyTrackBar, PowerSDR, Version=1.19.3.1, Culture=neutral, PublicKeyToken=null</value>
+    <value>PowerSDR.PrettyTrackBar, PowerSDR, Version=1.19.3.2, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;ptbPanSubRX.Parent" xml:space="preserve">
     <value>panelMultiRX</value>
@@ -5986,7 +5980,7 @@
     <value>ptbRX2Gain</value>
   </data>
   <data name="&gt;&gt;ptbRX2Gain.Type" xml:space="preserve">
-    <value>PowerSDR.PrettyTrackBar, PowerSDR, Version=1.19.3.1, Culture=neutral, PublicKeyToken=null</value>
+    <value>PowerSDR.PrettyTrackBar, PowerSDR, Version=1.19.3.2, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;ptbRX2Gain.Parent" xml:space="preserve">
     <value>panelRX2Mixer</value>
@@ -6019,7 +6013,7 @@
     <value>ptbRX2Pan</value>
   </data>
   <data name="&gt;&gt;ptbRX2Pan.Type" xml:space="preserve">
-    <value>PowerSDR.PrettyTrackBar, PowerSDR, Version=1.19.3.1, Culture=neutral, PublicKeyToken=null</value>
+    <value>PowerSDR.PrettyTrackBar, PowerSDR, Version=1.19.3.2, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;ptbRX2Pan.Parent" xml:space="preserve">
     <value>panelRX2Mixer</value>
@@ -6052,7 +6046,7 @@
     <value>ptbRX0Gain</value>
   </data>
   <data name="&gt;&gt;ptbRX0Gain.Type" xml:space="preserve">
-    <value>PowerSDR.PrettyTrackBar, PowerSDR, Version=1.19.3.1, Culture=neutral, PublicKeyToken=null</value>
+    <value>PowerSDR.PrettyTrackBar, PowerSDR, Version=1.19.3.2, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;ptbRX0Gain.Parent" xml:space="preserve">
     <value>panelMultiRX</value>
@@ -6085,7 +6079,7 @@
     <value>ptbRX1Gain</value>
   </data>
   <data name="&gt;&gt;ptbRX1Gain.Type" xml:space="preserve">
-    <value>PowerSDR.PrettyTrackBar, PowerSDR, Version=1.19.3.1, Culture=neutral, PublicKeyToken=null</value>
+    <value>PowerSDR.PrettyTrackBar, PowerSDR, Version=1.19.3.2, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;ptbRX1Gain.Parent" xml:space="preserve">
     <value>panelMultiRX</value>
@@ -6118,7 +6112,7 @@
     <value>ptbVACRXGain</value>
   </data>
   <data name="&gt;&gt;ptbVACRXGain.Type" xml:space="preserve">
-    <value>PowerSDR.PrettyTrackBar, PowerSDR, Version=1.19.3.1, Culture=neutral, PublicKeyToken=null</value>
+    <value>PowerSDR.PrettyTrackBar, PowerSDR, Version=1.19.3.2, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;ptbVACRXGain.Parent" xml:space="preserve">
     <value>panelModeSpecificDigital</value>
@@ -6151,7 +6145,7 @@
     <value>ptbVACTXGain</value>
   </data>
   <data name="&gt;&gt;ptbVACTXGain.Type" xml:space="preserve">
-    <value>PowerSDR.PrettyTrackBar, PowerSDR, Version=1.19.3.1, Culture=neutral, PublicKeyToken=null</value>
+    <value>PowerSDR.PrettyTrackBar, PowerSDR, Version=1.19.3.2, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;ptbVACTXGain.Parent" xml:space="preserve">
     <value>panelModeSpecificDigital</value>
@@ -6193,7 +6187,7 @@
     <value>radDisplayZoom05</value>
   </data>
   <data name="&gt;&gt;radDisplayZoom05.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RadioButtonTS, PowerSDR, Version=1.19.3.1, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.RadioButtonTS, PowerSDR, Version=1.19.3.2, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;radDisplayZoom05.Parent" xml:space="preserve">
     <value>panelDisplay</value>
@@ -6235,7 +6229,7 @@
     <value>radDisplayZoom4x</value>
   </data>
   <data name="&gt;&gt;radDisplayZoom4x.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RadioButtonTS, PowerSDR, Version=1.19.3.1, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.RadioButtonTS, PowerSDR, Version=1.19.3.2, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;radDisplayZoom4x.Parent" xml:space="preserve">
     <value>panelDisplay</value>
@@ -6277,7 +6271,7 @@
     <value>radDisplayZoom2x</value>
   </data>
   <data name="&gt;&gt;radDisplayZoom2x.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RadioButtonTS, PowerSDR, Version=1.19.3.1, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.RadioButtonTS, PowerSDR, Version=1.19.3.2, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;radDisplayZoom2x.Parent" xml:space="preserve">
     <value>panelDisplay</value>
@@ -6319,7 +6313,7 @@
     <value>radDisplayZoom1x</value>
   </data>
   <data name="&gt;&gt;radDisplayZoom1x.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RadioButtonTS, PowerSDR, Version=1.19.3.1, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.RadioButtonTS, PowerSDR, Version=1.19.3.2, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;radDisplayZoom1x.Parent" xml:space="preserve">
     <value>panelDisplay</value>
@@ -6361,7 +6355,7 @@
     <value>chkBCI</value>
   </data>
   <data name="&gt;&gt;chkBCI.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBoxTS, PowerSDR, Version=1.19.3.1, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.CheckBoxTS, PowerSDR, Version=1.19.3.2, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;chkBCI.Parent" xml:space="preserve">
     <value>panelDSP</value>
@@ -6499,7 +6493,7 @@
     <value>ptbRX2Squelch</value>
   </data>
   <data name="&gt;&gt;ptbRX2Squelch.Type" xml:space="preserve">
-    <value>PowerSDR.PrettyTrackBar, PowerSDR, Version=1.19.3.1, Culture=neutral, PublicKeyToken=null</value>
+    <value>PowerSDR.PrettyTrackBar, PowerSDR, Version=1.19.3.2, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;ptbRX2Squelch.Parent" xml:space="preserve">
     <value>$this</value>
@@ -6529,7 +6523,7 @@
     <value>panelOptions</value>
   </data>
   <data name="&gt;&gt;panelOptions.Type" xml:space="preserve">
-    <value>System.Windows.Forms.PanelTS, PowerSDR, Version=1.19.3.1, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.PanelTS, PowerSDR, Version=1.19.3.2, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;panelOptions.Parent" xml:space="preserve">
     <value>$this</value>
@@ -6562,7 +6556,7 @@
     <value>lblCWSpeed</value>
   </data>
   <data name="&gt;&gt;lblCWSpeed.Type" xml:space="preserve">
-    <value>System.Windows.Forms.LabelTS, PowerSDR, Version=1.19.3.1, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.LabelTS, PowerSDR, Version=1.19.3.2, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;lblCWSpeed.Parent" xml:space="preserve">
     <value>panelModeSpecificCW</value>
@@ -6589,7 +6583,7 @@
     <value>lblCWBreakInDelay</value>
   </data>
   <data name="&gt;&gt;lblCWBreakInDelay.Type" xml:space="preserve">
-    <value>System.Windows.Forms.LabelTS, PowerSDR, Version=1.19.3.1, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.LabelTS, PowerSDR, Version=1.19.3.2, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;lblCWBreakInDelay.Parent" xml:space="preserve">
     <value>grpSemiBreakIn</value>
@@ -6613,7 +6607,7 @@
     <value>grpSemiBreakIn</value>
   </data>
   <data name="&gt;&gt;grpSemiBreakIn.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBoxTS, PowerSDR, Version=1.19.3.1, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.GroupBoxTS, PowerSDR, Version=1.19.3.2, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;grpSemiBreakIn.Parent" xml:space="preserve">
     <value>panelModeSpecificCW</value>
@@ -6640,7 +6634,7 @@
     <value>lblCWPitchFreq</value>
   </data>
   <data name="&gt;&gt;lblCWPitchFreq.Type" xml:space="preserve">
-    <value>System.Windows.Forms.LabelTS, PowerSDR, Version=1.19.3.1, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.LabelTS, PowerSDR, Version=1.19.3.2, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;lblCWPitchFreq.Parent" xml:space="preserve">
     <value>panelModeSpecificCW</value>
@@ -6661,7 +6655,7 @@
     <value>panelModeSpecificCW</value>
   </data>
   <data name="&gt;&gt;panelModeSpecificCW.Type" xml:space="preserve">
-    <value>System.Windows.Forms.PanelTS, PowerSDR, Version=1.19.3.1, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.PanelTS, PowerSDR, Version=1.19.3.2, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;panelModeSpecificCW.Parent" xml:space="preserve">
     <value>$this</value>
@@ -6700,7 +6694,7 @@
     <value>lblAntRX2</value>
   </data>
   <data name="&gt;&gt;lblAntRX2.Type" xml:space="preserve">
-    <value>System.Windows.Forms.LabelTS, PowerSDR, Version=1.19.3.1, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.LabelTS, PowerSDR, Version=1.19.3.2, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;lblAntRX2.Parent" xml:space="preserve">
     <value>panelAntenna</value>
@@ -6730,7 +6724,7 @@
     <value>lblAntRX1</value>
   </data>
   <data name="&gt;&gt;lblAntRX1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.LabelTS, PowerSDR, Version=1.19.3.1, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.LabelTS, PowerSDR, Version=1.19.3.2, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;lblAntRX1.Parent" xml:space="preserve">
     <value>panelAntenna</value>
@@ -6760,7 +6754,7 @@
     <value>lblAntTX</value>
   </data>
   <data name="&gt;&gt;lblAntTX.Type" xml:space="preserve">
-    <value>System.Windows.Forms.LabelTS, PowerSDR, Version=1.19.3.1, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.LabelTS, PowerSDR, Version=1.19.3.2, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;lblAntTX.Parent" xml:space="preserve">
     <value>panelAntenna</value>
@@ -6781,7 +6775,7 @@
     <value>panelAntenna</value>
   </data>
   <data name="&gt;&gt;panelAntenna.Type" xml:space="preserve">
-    <value>System.Windows.Forms.PanelTS, PowerSDR, Version=1.19.3.1, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.PanelTS, PowerSDR, Version=1.19.3.2, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;panelAntenna.Parent" xml:space="preserve">
     <value>$this</value>
@@ -6826,7 +6820,7 @@
     <value>radRX2Filter1</value>
   </data>
   <data name="&gt;&gt;radRX2Filter1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RadioButtonTS, PowerSDR, Version=1.19.3.1, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.RadioButtonTS, PowerSDR, Version=1.19.3.2, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;radRX2Filter1.Parent" xml:space="preserve">
     <value>panelRX2Filter</value>
@@ -6856,7 +6850,7 @@
     <value>lblRX2FilterHigh</value>
   </data>
   <data name="&gt;&gt;lblRX2FilterHigh.Type" xml:space="preserve">
-    <value>System.Windows.Forms.LabelTS, PowerSDR, Version=1.19.3.1, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.LabelTS, PowerSDR, Version=1.19.3.2, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;lblRX2FilterHigh.Parent" xml:space="preserve">
     <value>panelRX2Filter</value>
@@ -6886,7 +6880,7 @@
     <value>lblRX2FilterLow</value>
   </data>
   <data name="&gt;&gt;lblRX2FilterLow.Type" xml:space="preserve">
-    <value>System.Windows.Forms.LabelTS, PowerSDR, Version=1.19.3.1, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.LabelTS, PowerSDR, Version=1.19.3.2, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;lblRX2FilterLow.Parent" xml:space="preserve">
     <value>panelRX2Filter</value>
@@ -6925,7 +6919,7 @@
     <value>radRX2Filter2</value>
   </data>
   <data name="&gt;&gt;radRX2Filter2.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RadioButtonTS, PowerSDR, Version=1.19.3.1, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.RadioButtonTS, PowerSDR, Version=1.19.3.2, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;radRX2Filter2.Parent" xml:space="preserve">
     <value>panelRX2Filter</value>
@@ -6964,7 +6958,7 @@
     <value>radRX2FilterVar2</value>
   </data>
   <data name="&gt;&gt;radRX2FilterVar2.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RadioButtonTS, PowerSDR, Version=1.19.3.1, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.RadioButtonTS, PowerSDR, Version=1.19.3.2, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;radRX2FilterVar2.Parent" xml:space="preserve">
     <value>panelRX2Filter</value>
@@ -7003,7 +6997,7 @@
     <value>radRX2Filter3</value>
   </data>
   <data name="&gt;&gt;radRX2Filter3.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RadioButtonTS, PowerSDR, Version=1.19.3.1, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.RadioButtonTS, PowerSDR, Version=1.19.3.2, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;radRX2Filter3.Parent" xml:space="preserve">
     <value>panelRX2Filter</value>
@@ -7042,7 +7036,7 @@
     <value>radRX2FilterVar1</value>
   </data>
   <data name="&gt;&gt;radRX2FilterVar1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RadioButtonTS, PowerSDR, Version=1.19.3.1, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.RadioButtonTS, PowerSDR, Version=1.19.3.2, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;radRX2FilterVar1.Parent" xml:space="preserve">
     <value>panelRX2Filter</value>
@@ -7081,7 +7075,7 @@
     <value>radRX2Filter4</value>
   </data>
   <data name="&gt;&gt;radRX2Filter4.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RadioButtonTS, PowerSDR, Version=1.19.3.1, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.RadioButtonTS, PowerSDR, Version=1.19.3.2, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;radRX2Filter4.Parent" xml:space="preserve">
     <value>panelRX2Filter</value>
@@ -7120,7 +7114,7 @@
     <value>radRX2Filter7</value>
   </data>
   <data name="&gt;&gt;radRX2Filter7.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RadioButtonTS, PowerSDR, Version=1.19.3.1, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.RadioButtonTS, PowerSDR, Version=1.19.3.2, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;radRX2Filter7.Parent" xml:space="preserve">
     <value>panelRX2Filter</value>
@@ -7159,7 +7153,7 @@
     <value>radRX2Filter5</value>
   </data>
   <data name="&gt;&gt;radRX2Filter5.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RadioButtonTS, PowerSDR, Version=1.19.3.1, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.RadioButtonTS, PowerSDR, Version=1.19.3.2, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;radRX2Filter5.Parent" xml:space="preserve">
     <value>panelRX2Filter</value>
@@ -7198,7 +7192,7 @@
     <value>radRX2Filter6</value>
   </data>
   <data name="&gt;&gt;radRX2Filter6.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RadioButtonTS, PowerSDR, Version=1.19.3.1, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.RadioButtonTS, PowerSDR, Version=1.19.3.2, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;radRX2Filter6.Parent" xml:space="preserve">
     <value>panelRX2Filter</value>
@@ -7219,7 +7213,7 @@
     <value>panelRX2Filter</value>
   </data>
   <data name="&gt;&gt;panelRX2Filter.Type" xml:space="preserve">
-    <value>System.Windows.Forms.PanelTS, PowerSDR, Version=1.19.3.1, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.PanelTS, PowerSDR, Version=1.19.3.2, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;panelRX2Filter.Parent" xml:space="preserve">
     <value>$this</value>
@@ -7246,7 +7240,7 @@
     <value>panelRX2Mode</value>
   </data>
   <data name="&gt;&gt;panelRX2Mode.Type" xml:space="preserve">
-    <value>System.Windows.Forms.PanelTS, PowerSDR, Version=1.19.3.1, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.PanelTS, PowerSDR, Version=1.19.3.2, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;panelRX2Mode.Parent" xml:space="preserve">
     <value>$this</value>
@@ -7273,7 +7267,7 @@
     <value>panelRX2Display</value>
   </data>
   <data name="&gt;&gt;panelRX2Display.Type" xml:space="preserve">
-    <value>System.Windows.Forms.PanelTS, PowerSDR, Version=1.19.3.1, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.PanelTS, PowerSDR, Version=1.19.3.2, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;panelRX2Display.Parent" xml:space="preserve">
     <value>$this</value>
@@ -7390,7 +7384,7 @@
     <value>panelRX2Mixer</value>
   </data>
   <data name="&gt;&gt;panelRX2Mixer.Type" xml:space="preserve">
-    <value>System.Windows.Forms.PanelTS, PowerSDR, Version=1.19.3.1, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.PanelTS, PowerSDR, Version=1.19.3.2, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;panelRX2Mixer.Parent" xml:space="preserve">
     <value>$this</value>
@@ -7417,7 +7411,7 @@
     <value>panelMultiRX</value>
   </data>
   <data name="&gt;&gt;panelMultiRX.Type" xml:space="preserve">
-    <value>System.Windows.Forms.PanelTS, PowerSDR, Version=1.19.3.1, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.PanelTS, PowerSDR, Version=1.19.3.2, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;panelMultiRX.Parent" xml:space="preserve">
     <value>$this</value>
@@ -7447,7 +7441,7 @@
     <value>panelDisplay2</value>
   </data>
   <data name="&gt;&gt;panelDisplay2.Type" xml:space="preserve">
-    <value>System.Windows.Forms.PanelTS, PowerSDR, Version=1.19.3.1, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.PanelTS, PowerSDR, Version=1.19.3.2, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;panelDisplay2.Parent" xml:space="preserve">
     <value>$this</value>
@@ -7477,7 +7471,7 @@
     <value>panelDSP</value>
   </data>
   <data name="&gt;&gt;panelDSP.Type" xml:space="preserve">
-    <value>System.Windows.Forms.PanelTS, PowerSDR, Version=1.19.3.1, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.PanelTS, PowerSDR, Version=1.19.3.2, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;panelDSP.Parent" xml:space="preserve">
     <value>$this</value>
@@ -7516,7 +7510,7 @@
     <value>lblCPUMeter</value>
   </data>
   <data name="&gt;&gt;lblCPUMeter.Type" xml:space="preserve">
-    <value>System.Windows.Forms.LabelTS, PowerSDR, Version=1.19.3.1, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.LabelTS, PowerSDR, Version=1.19.3.2, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;lblCPUMeter.Parent" xml:space="preserve">
     <value>panelVFO</value>
@@ -7540,7 +7534,7 @@
     <value>panelVFO</value>
   </data>
   <data name="&gt;&gt;panelVFO.Type" xml:space="preserve">
-    <value>System.Windows.Forms.PanelTS, PowerSDR, Version=1.19.3.1, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.PanelTS, PowerSDR, Version=1.19.3.2, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;panelVFO.Parent" xml:space="preserve">
     <value>$this</value>
@@ -7573,7 +7567,7 @@
     <value>txtTime</value>
   </data>
   <data name="&gt;&gt;txtTime.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBoxTS, PowerSDR, Version=1.19.3.1, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.TextBoxTS, PowerSDR, Version=1.19.3.2, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;txtTime.Parent" xml:space="preserve">
     <value>panelDateTime</value>
@@ -7600,7 +7594,7 @@
     <value>txtDate</value>
   </data>
   <data name="&gt;&gt;txtDate.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBoxTS, PowerSDR, Version=1.19.3.1, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.TextBoxTS, PowerSDR, Version=1.19.3.2, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;txtDate.Parent" xml:space="preserve">
     <value>panelDateTime</value>
@@ -7621,7 +7615,7 @@
     <value>panelDateTime</value>
   </data>
   <data name="&gt;&gt;panelDateTime.Type" xml:space="preserve">
-    <value>System.Windows.Forms.PanelTS, PowerSDR, Version=1.19.3.1, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.PanelTS, PowerSDR, Version=1.19.3.2, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;panelDateTime.Parent" xml:space="preserve">
     <value>$this</value>
@@ -7657,7 +7651,7 @@
     <value>lblAF</value>
   </data>
   <data name="&gt;&gt;lblAF.Type" xml:space="preserve">
-    <value>System.Windows.Forms.LabelTS, PowerSDR, Version=1.19.3.1, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.LabelTS, PowerSDR, Version=1.19.3.2, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;lblAF.Parent" xml:space="preserve">
     <value>panelSoundControls</value>
@@ -7687,7 +7681,7 @@
     <value>lblPreamp</value>
   </data>
   <data name="&gt;&gt;lblPreamp.Type" xml:space="preserve">
-    <value>System.Windows.Forms.LabelTS, PowerSDR, Version=1.19.3.1, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.LabelTS, PowerSDR, Version=1.19.3.2, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;lblPreamp.Parent" xml:space="preserve">
     <value>panelSoundControls</value>
@@ -7717,7 +7711,7 @@
     <value>lblPWR</value>
   </data>
   <data name="&gt;&gt;lblPWR.Type" xml:space="preserve">
-    <value>System.Windows.Forms.LabelTS, PowerSDR, Version=1.19.3.1, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.LabelTS, PowerSDR, Version=1.19.3.2, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;lblPWR.Parent" xml:space="preserve">
     <value>panelSoundControls</value>
@@ -7738,7 +7732,7 @@
     <value>panelSoundControls</value>
   </data>
   <data name="&gt;&gt;panelSoundControls.Type" xml:space="preserve">
-    <value>System.Windows.Forms.PanelTS, PowerSDR, Version=1.19.3.1, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.PanelTS, PowerSDR, Version=1.19.3.2, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;panelSoundControls.Parent" xml:space="preserve">
     <value>$this</value>
@@ -7801,7 +7795,7 @@
     <value>lblNoiseGateVal</value>
   </data>
   <data name="&gt;&gt;lblNoiseGateVal.Type" xml:space="preserve">
-    <value>System.Windows.Forms.LabelTS, PowerSDR, Version=1.19.3.1, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.LabelTS, PowerSDR, Version=1.19.3.2, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;lblNoiseGateVal.Parent" xml:space="preserve">
     <value>panelModeSpecificPhone</value>
@@ -7834,7 +7828,7 @@
     <value>ptbNoiseGate</value>
   </data>
   <data name="&gt;&gt;ptbNoiseGate.Type" xml:space="preserve">
-    <value>PowerSDR.PrettyTrackBar, PowerSDR, Version=1.19.3.1, Culture=neutral, PublicKeyToken=null</value>
+    <value>PowerSDR.PrettyTrackBar, PowerSDR, Version=1.19.3.2, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;ptbNoiseGate.Parent" xml:space="preserve">
     <value>panelModeSpecificPhone</value>
@@ -7891,7 +7885,7 @@
     <value>ptbVOX</value>
   </data>
   <data name="&gt;&gt;ptbVOX.Type" xml:space="preserve">
-    <value>PowerSDR.PrettyTrackBar, PowerSDR, Version=1.19.3.1, Culture=neutral, PublicKeyToken=null</value>
+    <value>PowerSDR.PrettyTrackBar, PowerSDR, Version=1.19.3.2, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;ptbVOX.Parent" xml:space="preserve">
     <value>panelModeSpecificPhone</value>
@@ -7924,7 +7918,7 @@
     <value>lblVOXVal</value>
   </data>
   <data name="&gt;&gt;lblVOXVal.Type" xml:space="preserve">
-    <value>System.Windows.Forms.LabelTS, PowerSDR, Version=1.19.3.1, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.LabelTS, PowerSDR, Version=1.19.3.2, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;lblVOXVal.Parent" xml:space="preserve">
     <value>panelModeSpecificPhone</value>
@@ -7957,7 +7951,7 @@
     <value>ptbCPDR</value>
   </data>
   <data name="&gt;&gt;ptbCPDR.Type" xml:space="preserve">
-    <value>PowerSDR.PrettyTrackBar, PowerSDR, Version=1.19.3.1, Culture=neutral, PublicKeyToken=null</value>
+    <value>PowerSDR.PrettyTrackBar, PowerSDR, Version=1.19.3.2, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;ptbCPDR.Parent" xml:space="preserve">
     <value>panelModeSpecificPhone</value>
@@ -7990,7 +7984,7 @@
     <value>lblCPDRVal</value>
   </data>
   <data name="&gt;&gt;lblCPDRVal.Type" xml:space="preserve">
-    <value>System.Windows.Forms.LabelTS, PowerSDR, Version=1.19.3.1, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.LabelTS, PowerSDR, Version=1.19.3.2, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;lblCPDRVal.Parent" xml:space="preserve">
     <value>panelModeSpecificPhone</value>
@@ -8023,7 +8017,7 @@
     <value>ptbDX</value>
   </data>
   <data name="&gt;&gt;ptbDX.Type" xml:space="preserve">
-    <value>PowerSDR.PrettyTrackBar, PowerSDR, Version=1.19.3.1, Culture=neutral, PublicKeyToken=null</value>
+    <value>PowerSDR.PrettyTrackBar, PowerSDR, Version=1.19.3.2, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;ptbDX.Parent" xml:space="preserve">
     <value>panelModeSpecificPhone</value>
@@ -8056,7 +8050,7 @@
     <value>lblDXVal</value>
   </data>
   <data name="&gt;&gt;lblDXVal.Type" xml:space="preserve">
-    <value>System.Windows.Forms.LabelTS, PowerSDR, Version=1.19.3.1, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.LabelTS, PowerSDR, Version=1.19.3.2, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;lblDXVal.Parent" xml:space="preserve">
     <value>panelModeSpecificPhone</value>
@@ -8089,7 +8083,7 @@
     <value>lblMicVal</value>
   </data>
   <data name="&gt;&gt;lblMicVal.Type" xml:space="preserve">
-    <value>System.Windows.Forms.LabelTS, PowerSDR, Version=1.19.3.1, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.LabelTS, PowerSDR, Version=1.19.3.2, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;lblMicVal.Parent" xml:space="preserve">
     <value>panelModeSpecificPhone</value>
@@ -8122,7 +8116,7 @@
     <value>ptbMic</value>
   </data>
   <data name="&gt;&gt;ptbMic.Type" xml:space="preserve">
-    <value>PowerSDR.PrettyTrackBar, PowerSDR, Version=1.19.3.1, Culture=neutral, PublicKeyToken=null</value>
+    <value>PowerSDR.PrettyTrackBar, PowerSDR, Version=1.19.3.2, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;ptbMic.Parent" xml:space="preserve">
     <value>panelModeSpecificPhone</value>
@@ -8155,7 +8149,7 @@
     <value>lblMIC</value>
   </data>
   <data name="&gt;&gt;lblMIC.Type" xml:space="preserve">
-    <value>System.Windows.Forms.LabelTS, PowerSDR, Version=1.19.3.1, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.LabelTS, PowerSDR, Version=1.19.3.2, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;lblMIC.Parent" xml:space="preserve">
     <value>panelModeSpecificPhone</value>
@@ -8185,7 +8179,7 @@
     <value>lblTransmitProfile</value>
   </data>
   <data name="&gt;&gt;lblTransmitProfile.Type" xml:space="preserve">
-    <value>System.Windows.Forms.LabelTS, PowerSDR, Version=1.19.3.1, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.LabelTS, PowerSDR, Version=1.19.3.2, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;lblTransmitProfile.Parent" xml:space="preserve">
     <value>panelModeSpecificPhone</value>
@@ -8206,7 +8200,7 @@
     <value>panelModeSpecificPhone</value>
   </data>
   <data name="&gt;&gt;panelModeSpecificPhone.Type" xml:space="preserve">
-    <value>System.Windows.Forms.PanelTS, PowerSDR, Version=1.19.3.1, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.PanelTS, PowerSDR, Version=1.19.3.2, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;panelModeSpecificPhone.Parent" xml:space="preserve">
     <value>$this</value>
@@ -8242,7 +8236,7 @@
     <value>lblDigTXProfile</value>
   </data>
   <data name="&gt;&gt;lblDigTXProfile.Type" xml:space="preserve">
-    <value>System.Windows.Forms.LabelTS, PowerSDR, Version=1.19.3.1, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.LabelTS, PowerSDR, Version=1.19.3.2, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;lblDigTXProfile.Parent" xml:space="preserve">
     <value>panelModeSpecificDigital</value>
@@ -8269,7 +8263,7 @@
     <value>lblRXGain</value>
   </data>
   <data name="&gt;&gt;lblRXGain.Type" xml:space="preserve">
-    <value>System.Windows.Forms.LabelTS, PowerSDR, Version=1.19.3.1, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.LabelTS, PowerSDR, Version=1.19.3.2, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;lblRXGain.Parent" xml:space="preserve">
     <value>panelModeSpecificDigital</value>
@@ -8293,7 +8287,7 @@
     <value>grpVACStereo</value>
   </data>
   <data name="&gt;&gt;grpVACStereo.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBoxTS, PowerSDR, Version=1.19.3.1, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.GroupBoxTS, PowerSDR, Version=1.19.3.2, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;grpVACStereo.Parent" xml:space="preserve">
     <value>panelModeSpecificDigital</value>
@@ -8320,7 +8314,7 @@
     <value>lblTXGain</value>
   </data>
   <data name="&gt;&gt;lblTXGain.Type" xml:space="preserve">
-    <value>System.Windows.Forms.LabelTS, PowerSDR, Version=1.19.3.1, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.LabelTS, PowerSDR, Version=1.19.3.2, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;lblTXGain.Parent" xml:space="preserve">
     <value>panelModeSpecificDigital</value>
@@ -8344,7 +8338,7 @@
     <value>grpDIGSampleRate</value>
   </data>
   <data name="&gt;&gt;grpDIGSampleRate.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBoxTS, PowerSDR, Version=1.19.3.1, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.GroupBoxTS, PowerSDR, Version=1.19.3.2, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;grpDIGSampleRate.Parent" xml:space="preserve">
     <value>panelModeSpecificDigital</value>
@@ -8368,7 +8362,7 @@
     <value>panelModeSpecificDigital</value>
   </data>
   <data name="&gt;&gt;panelModeSpecificDigital.Type" xml:space="preserve">
-    <value>System.Windows.Forms.PanelTS, PowerSDR, Version=1.19.3.1, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.PanelTS, PowerSDR, Version=1.19.3.2, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;panelModeSpecificDigital.Parent" xml:space="preserve">
     <value>$this</value>
@@ -8428,7 +8422,7 @@
     <value>txtDisplayPeakOffset</value>
   </data>
   <data name="&gt;&gt;txtDisplayPeakOffset.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBoxTS, PowerSDR, Version=1.19.3.1, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.TextBoxTS, PowerSDR, Version=1.19.3.2, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;txtDisplayPeakOffset.Parent" xml:space="preserve">
     <value>panelDisplay</value>
@@ -8455,7 +8449,7 @@
     <value>txtDisplayCursorOffset</value>
   </data>
   <data name="&gt;&gt;txtDisplayCursorOffset.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBoxTS, PowerSDR, Version=1.19.3.1, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.TextBoxTS, PowerSDR, Version=1.19.3.2, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;txtDisplayCursorOffset.Parent" xml:space="preserve">
     <value>panelDisplay</value>
@@ -8509,7 +8503,7 @@
     <value>txtDisplayCursorPower</value>
   </data>
   <data name="&gt;&gt;txtDisplayCursorPower.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBoxTS, PowerSDR, Version=1.19.3.1, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.TextBoxTS, PowerSDR, Version=1.19.3.2, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;txtDisplayCursorPower.Parent" xml:space="preserve">
     <value>panelDisplay</value>
@@ -8539,7 +8533,7 @@
     <value>lblDisplayZoom</value>
   </data>
   <data name="&gt;&gt;lblDisplayZoom.Type" xml:space="preserve">
-    <value>System.Windows.Forms.LabelTS, PowerSDR, Version=1.19.3.1, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.LabelTS, PowerSDR, Version=1.19.3.2, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;lblDisplayZoom.Parent" xml:space="preserve">
     <value>panelDisplay</value>
@@ -8566,7 +8560,7 @@
     <value>txtDisplayCursorFreq</value>
   </data>
   <data name="&gt;&gt;txtDisplayCursorFreq.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBoxTS, PowerSDR, Version=1.19.3.1, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.TextBoxTS, PowerSDR, Version=1.19.3.2, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;txtDisplayCursorFreq.Parent" xml:space="preserve">
     <value>panelDisplay</value>
@@ -8593,7 +8587,7 @@
     <value>txtDisplayPeakPower</value>
   </data>
   <data name="&gt;&gt;txtDisplayPeakPower.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBoxTS, PowerSDR, Version=1.19.3.1, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.TextBoxTS, PowerSDR, Version=1.19.3.2, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;txtDisplayPeakPower.Parent" xml:space="preserve">
     <value>panelDisplay</value>
@@ -8620,7 +8614,7 @@
     <value>txtDisplayPeakFreq</value>
   </data>
   <data name="&gt;&gt;txtDisplayPeakFreq.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBoxTS, PowerSDR, Version=1.19.3.1, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.TextBoxTS, PowerSDR, Version=1.19.3.2, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;txtDisplayPeakFreq.Parent" xml:space="preserve">
     <value>panelDisplay</value>
@@ -8650,7 +8644,7 @@
     <value>lblDisplayPan</value>
   </data>
   <data name="&gt;&gt;lblDisplayPan.Type" xml:space="preserve">
-    <value>System.Windows.Forms.LabelTS, PowerSDR, Version=1.19.3.1, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.LabelTS, PowerSDR, Version=1.19.3.2, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;lblDisplayPan.Parent" xml:space="preserve">
     <value>panelDisplay</value>
@@ -8671,7 +8665,7 @@
     <value>panelDisplay</value>
   </data>
   <data name="&gt;&gt;panelDisplay.Type" xml:space="preserve">
-    <value>System.Windows.Forms.PanelTS, PowerSDR, Version=1.19.3.1, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.PanelTS, PowerSDR, Version=1.19.3.2, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;panelDisplay.Parent" xml:space="preserve">
     <value>$this</value>
@@ -8716,7 +8710,7 @@
     <value>radFilter1</value>
   </data>
   <data name="&gt;&gt;radFilter1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RadioButtonTS, PowerSDR, Version=1.19.3.1, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.RadioButtonTS, PowerSDR, Version=1.19.3.2, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;radFilter1.Parent" xml:space="preserve">
     <value>panelFilter</value>
@@ -8746,7 +8740,7 @@
     <value>lblFilterHigh</value>
   </data>
   <data name="&gt;&gt;lblFilterHigh.Type" xml:space="preserve">
-    <value>System.Windows.Forms.LabelTS, PowerSDR, Version=1.19.3.1, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.LabelTS, PowerSDR, Version=1.19.3.2, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;lblFilterHigh.Parent" xml:space="preserve">
     <value>panelFilter</value>
@@ -8776,7 +8770,7 @@
     <value>lblFilterLow</value>
   </data>
   <data name="&gt;&gt;lblFilterLow.Type" xml:space="preserve">
-    <value>System.Windows.Forms.LabelTS, PowerSDR, Version=1.19.3.1, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.LabelTS, PowerSDR, Version=1.19.3.2, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;lblFilterLow.Parent" xml:space="preserve">
     <value>panelFilter</value>
@@ -8803,7 +8797,7 @@
     <value>lblFilterWidth</value>
   </data>
   <data name="&gt;&gt;lblFilterWidth.Type" xml:space="preserve">
-    <value>System.Windows.Forms.LabelTS, PowerSDR, Version=1.19.3.1, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.LabelTS, PowerSDR, Version=1.19.3.2, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;lblFilterWidth.Parent" xml:space="preserve">
     <value>panelFilter</value>
@@ -8842,7 +8836,7 @@
     <value>radFilterVar2</value>
   </data>
   <data name="&gt;&gt;radFilterVar2.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RadioButtonTS, PowerSDR, Version=1.19.3.1, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.RadioButtonTS, PowerSDR, Version=1.19.3.2, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;radFilterVar2.Parent" xml:space="preserve">
     <value>panelFilter</value>
@@ -8881,7 +8875,7 @@
     <value>radFilterVar1</value>
   </data>
   <data name="&gt;&gt;radFilterVar1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RadioButtonTS, PowerSDR, Version=1.19.3.1, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.RadioButtonTS, PowerSDR, Version=1.19.3.2, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;radFilterVar1.Parent" xml:space="preserve">
     <value>panelFilter</value>
@@ -8920,7 +8914,7 @@
     <value>radFilter10</value>
   </data>
   <data name="&gt;&gt;radFilter10.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RadioButtonTS, PowerSDR, Version=1.19.3.1, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.RadioButtonTS, PowerSDR, Version=1.19.3.2, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;radFilter10.Parent" xml:space="preserve">
     <value>panelFilter</value>
@@ -8947,7 +8941,7 @@
     <value>lblFilterShift</value>
   </data>
   <data name="&gt;&gt;lblFilterShift.Type" xml:space="preserve">
-    <value>System.Windows.Forms.LabelTS, PowerSDR, Version=1.19.3.1, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.LabelTS, PowerSDR, Version=1.19.3.2, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;lblFilterShift.Parent" xml:space="preserve">
     <value>panelFilter</value>
@@ -8986,7 +8980,7 @@
     <value>radFilter9</value>
   </data>
   <data name="&gt;&gt;radFilter9.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RadioButtonTS, PowerSDR, Version=1.19.3.1, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.RadioButtonTS, PowerSDR, Version=1.19.3.2, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;radFilter9.Parent" xml:space="preserve">
     <value>panelFilter</value>
@@ -9025,7 +9019,7 @@
     <value>radFilter8</value>
   </data>
   <data name="&gt;&gt;radFilter8.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RadioButtonTS, PowerSDR, Version=1.19.3.1, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.RadioButtonTS, PowerSDR, Version=1.19.3.2, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;radFilter8.Parent" xml:space="preserve">
     <value>panelFilter</value>
@@ -9064,7 +9058,7 @@
     <value>radFilter2</value>
   </data>
   <data name="&gt;&gt;radFilter2.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RadioButtonTS, PowerSDR, Version=1.19.3.1, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.RadioButtonTS, PowerSDR, Version=1.19.3.2, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;radFilter2.Parent" xml:space="preserve">
     <value>panelFilter</value>
@@ -9103,7 +9097,7 @@
     <value>radFilter7</value>
   </data>
   <data name="&gt;&gt;radFilter7.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RadioButtonTS, PowerSDR, Version=1.19.3.1, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.RadioButtonTS, PowerSDR, Version=1.19.3.2, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;radFilter7.Parent" xml:space="preserve">
     <value>panelFilter</value>
@@ -9142,7 +9136,7 @@
     <value>radFilter3</value>
   </data>
   <data name="&gt;&gt;radFilter3.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RadioButtonTS, PowerSDR, Version=1.19.3.1, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.RadioButtonTS, PowerSDR, Version=1.19.3.2, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;radFilter3.Parent" xml:space="preserve">
     <value>panelFilter</value>
@@ -9181,7 +9175,7 @@
     <value>radFilter6</value>
   </data>
   <data name="&gt;&gt;radFilter6.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RadioButtonTS, PowerSDR, Version=1.19.3.1, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.RadioButtonTS, PowerSDR, Version=1.19.3.2, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;radFilter6.Parent" xml:space="preserve">
     <value>panelFilter</value>
@@ -9220,7 +9214,7 @@
     <value>radFilter4</value>
   </data>
   <data name="&gt;&gt;radFilter4.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RadioButtonTS, PowerSDR, Version=1.19.3.1, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.RadioButtonTS, PowerSDR, Version=1.19.3.2, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;radFilter4.Parent" xml:space="preserve">
     <value>panelFilter</value>
@@ -9259,7 +9253,7 @@
     <value>radFilter5</value>
   </data>
   <data name="&gt;&gt;radFilter5.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RadioButtonTS, PowerSDR, Version=1.19.3.1, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.RadioButtonTS, PowerSDR, Version=1.19.3.2, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;radFilter5.Parent" xml:space="preserve">
     <value>panelFilter</value>
@@ -9283,7 +9277,7 @@
     <value>panelFilter</value>
   </data>
   <data name="&gt;&gt;panelFilter.Type" xml:space="preserve">
-    <value>System.Windows.Forms.PanelTS, PowerSDR, Version=1.19.3.1, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.PanelTS, PowerSDR, Version=1.19.3.2, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;panelFilter.Parent" xml:space="preserve">
     <value>$this</value>
@@ -9313,7 +9307,7 @@
     <value>panelMode</value>
   </data>
   <data name="&gt;&gt;panelMode.Type" xml:space="preserve">
-    <value>System.Windows.Forms.PanelTS, PowerSDR, Version=1.19.3.1, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.PanelTS, PowerSDR, Version=1.19.3.2, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;panelMode.Parent" xml:space="preserve">
     <value>$this</value>
@@ -9343,7 +9337,7 @@
     <value>panelBandHF</value>
   </data>
   <data name="&gt;&gt;panelBandHF.Type" xml:space="preserve">
-    <value>System.Windows.Forms.PanelTS, PowerSDR, Version=1.19.3.1, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.PanelTS, PowerSDR, Version=1.19.3.2, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;panelBandHF.Parent" xml:space="preserve">
     <value>$this</value>
@@ -9373,7 +9367,7 @@
     <value>txtVFOAFreq</value>
   </data>
   <data name="&gt;&gt;txtVFOAFreq.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBoxTS, PowerSDR, Version=1.19.3.1, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.TextBoxTS, PowerSDR, Version=1.19.3.2, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;txtVFOAFreq.Parent" xml:space="preserve">
     <value>grpVFOA</value>
@@ -9430,7 +9424,7 @@
     <value>Microsoft Sans Serif, 15.75pt</value>
   </data>
   <data name="txtVFOALSD.Location" type="System.Drawing.Point, System.Drawing">
-    <value>175, 25</value>
+    <value>178, 25</value>
   </data>
   <data name="txtVFOALSD.Size" type="System.Drawing.Size, System.Drawing">
     <value>44, 24</value>
@@ -9448,7 +9442,7 @@
     <value>txtVFOALSD</value>
   </data>
   <data name="&gt;&gt;txtVFOALSD.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBoxTS, PowerSDR, Version=1.19.3.1, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.TextBoxTS, PowerSDR, Version=1.19.3.2, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;txtVFOALSD.Parent" xml:space="preserve">
     <value>grpVFOA</value>
@@ -9463,7 +9457,7 @@
     <value>8, 16</value>
   </data>
   <data name="txtVFOAMSD.Size" type="System.Drawing.Size, System.Drawing">
-    <value>216, 38</value>
+    <value>218, 38</value>
   </data>
   <data name="txtVFOAMSD.TabIndex" type="System.Int32, mscorlib">
     <value>116</value>
@@ -9478,7 +9472,7 @@
     <value>txtVFOAMSD</value>
   </data>
   <data name="&gt;&gt;txtVFOAMSD.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBoxTS, PowerSDR, Version=1.19.3.1, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.TextBoxTS, PowerSDR, Version=1.19.3.2, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;txtVFOAMSD.Parent" xml:space="preserve">
     <value>grpVFOA</value>
@@ -9493,7 +9487,7 @@
     <value>8, 56</value>
   </data>
   <data name="txtVFOABand.Size" type="System.Drawing.Size, System.Drawing">
-    <value>192, 26</value>
+    <value>188, 26</value>
   </data>
   <data name="txtVFOABand.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -9508,7 +9502,7 @@
     <value>txtVFOABand</value>
   </data>
   <data name="&gt;&gt;txtVFOABand.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBoxTS, PowerSDR, Version=1.19.3.1, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.TextBoxTS, PowerSDR, Version=1.19.3.2, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;txtVFOABand.Parent" xml:space="preserve">
     <value>grpVFOA</value>
@@ -9535,7 +9529,7 @@
     <value>btnHidden</value>
   </data>
   <data name="&gt;&gt;btnHidden.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ButtonTS, PowerSDR, Version=1.19.3.1, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.ButtonTS, PowerSDR, Version=1.19.3.2, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;btnHidden.Parent" xml:space="preserve">
     <value>grpVFOA</value>
@@ -9544,7 +9538,7 @@
     <value>7</value>
   </data>
   <data name="grpVFOA.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 8.25pt</value>
+    <value>Microsoft Sans Serif, 8.25pt, style=Bold</value>
   </data>
   <data name="grpVFOA.Location" type="System.Drawing.Point, System.Drawing">
     <value>125, 0</value>
@@ -9562,7 +9556,7 @@
     <value>grpVFOA</value>
   </data>
   <data name="&gt;&gt;grpVFOA.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBoxTS, PowerSDR, Version=1.19.3.1, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.GroupBoxTS, PowerSDR, Version=1.19.3.2, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;grpVFOA.Parent" xml:space="preserve">
     <value>$this</value>
@@ -9574,7 +9568,7 @@
     <value>Microsoft Sans Serif, 15.75pt</value>
   </data>
   <data name="txtVFOBLSD.Location" type="System.Drawing.Point, System.Drawing">
-    <value>175, 25</value>
+    <value>178, 25</value>
   </data>
   <data name="txtVFOBLSD.Size" type="System.Drawing.Size, System.Drawing">
     <value>44, 24</value>
@@ -9592,7 +9586,7 @@
     <value>txtVFOBLSD</value>
   </data>
   <data name="&gt;&gt;txtVFOBLSD.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBoxTS, PowerSDR, Version=1.19.3.1, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.TextBoxTS, PowerSDR, Version=1.19.3.2, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;txtVFOBLSD.Parent" xml:space="preserve">
     <value>grpVFOB</value>
@@ -9628,7 +9622,7 @@
     <value>8, 16</value>
   </data>
   <data name="txtVFOBMSD.Size" type="System.Drawing.Size, System.Drawing">
-    <value>216, 38</value>
+    <value>218, 38</value>
   </data>
   <data name="txtVFOBMSD.TabIndex" type="System.Int32, mscorlib">
     <value>117</value>
@@ -9643,7 +9637,7 @@
     <value>txtVFOBMSD</value>
   </data>
   <data name="&gt;&gt;txtVFOBMSD.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBoxTS, PowerSDR, Version=1.19.3.1, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.TextBoxTS, PowerSDR, Version=1.19.3.2, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;txtVFOBMSD.Parent" xml:space="preserve">
     <value>grpVFOB</value>
@@ -9682,7 +9676,7 @@
     <value>lblVFOBLSD</value>
   </data>
   <data name="&gt;&gt;lblVFOBLSD.Type" xml:space="preserve">
-    <value>System.Windows.Forms.LabelTS, PowerSDR, Version=1.19.3.1, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.LabelTS, PowerSDR, Version=1.19.3.2, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;lblVFOBLSD.Parent" xml:space="preserve">
     <value>grpVFOB</value>
@@ -9694,10 +9688,10 @@
     <value>Arial, 12pt</value>
   </data>
   <data name="txtVFOBBand.Location" type="System.Drawing.Point, System.Drawing">
-    <value>32, 56</value>
+    <value>38, 56</value>
   </data>
   <data name="txtVFOBBand.Size" type="System.Drawing.Size, System.Drawing">
-    <value>192, 26</value>
+    <value>188, 26</value>
   </data>
   <data name="txtVFOBBand.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -9712,7 +9706,7 @@
     <value>txtVFOBBand</value>
   </data>
   <data name="&gt;&gt;txtVFOBBand.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBoxTS, PowerSDR, Version=1.19.3.1, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.TextBoxTS, PowerSDR, Version=1.19.3.2, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;txtVFOBBand.Parent" xml:space="preserve">
     <value>grpVFOB</value>
@@ -9742,13 +9736,16 @@
     <value>txtVFOBFreq</value>
   </data>
   <data name="&gt;&gt;txtVFOBFreq.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBoxTS, PowerSDR, Version=1.19.3.1, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.TextBoxTS, PowerSDR, Version=1.19.3.2, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;txtVFOBFreq.Parent" xml:space="preserve">
     <value>grpVFOB</value>
   </data>
   <data name="&gt;&gt;txtVFOBFreq.ZOrder" xml:space="preserve">
     <value>6</value>
+  </data>
+  <data name="grpVFOB.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 8.25pt, style=Bold</value>
   </data>
   <data name="grpVFOB.Location" type="System.Drawing.Point, System.Drawing">
     <value>603, 0</value>
@@ -9766,7 +9763,7 @@
     <value>grpVFOB</value>
   </data>
   <data name="&gt;&gt;grpVFOB.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBoxTS, PowerSDR, Version=1.19.3.1, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.GroupBoxTS, PowerSDR, Version=1.19.3.2, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;grpVFOB.Parent" xml:space="preserve">
     <value>$this</value>
@@ -9799,7 +9796,7 @@
     <value>btnBandHF</value>
   </data>
   <data name="&gt;&gt;btnBandHF.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ButtonTS, PowerSDR, Version=1.19.3.1, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.ButtonTS, PowerSDR, Version=1.19.3.2, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;btnBandHF.Parent" xml:space="preserve">
     <value>panelBandVHF</value>
@@ -9853,7 +9850,7 @@
     <value>lblMultiSMeter</value>
   </data>
   <data name="&gt;&gt;lblMultiSMeter.Type" xml:space="preserve">
-    <value>System.Windows.Forms.LabelTS, PowerSDR, Version=1.19.3.1, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.LabelTS, PowerSDR, Version=1.19.3.2, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;lblMultiSMeter.Parent" xml:space="preserve">
     <value>grpMultimeter</value>
@@ -9880,7 +9877,7 @@
     <value>txtMultiText</value>
   </data>
   <data name="&gt;&gt;txtMultiText.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBoxTS, PowerSDR, Version=1.19.3.1, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.TextBoxTS, PowerSDR, Version=1.19.3.2, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;txtMultiText.Parent" xml:space="preserve">
     <value>grpMultimeter</value>
@@ -9904,7 +9901,7 @@
     <value>grpMultimeter</value>
   </data>
   <data name="&gt;&gt;grpMultimeter.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBoxTS, PowerSDR, Version=1.19.3.1, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.GroupBoxTS, PowerSDR, Version=1.19.3.2, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;grpMultimeter.Parent" xml:space="preserve">
     <value>$this</value>
@@ -9931,7 +9928,7 @@
     <value>lblTuneStep</value>
   </data>
   <data name="&gt;&gt;lblTuneStep.Type" xml:space="preserve">
-    <value>System.Windows.Forms.LabelTS, PowerSDR, Version=1.19.3.1, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.LabelTS, PowerSDR, Version=1.19.3.2, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;lblTuneStep.Parent" xml:space="preserve">
     <value>grpVFOBetween</value>
@@ -9952,7 +9949,7 @@
     <value>grpVFOBetween</value>
   </data>
   <data name="&gt;&gt;grpVFOBetween.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBoxTS, PowerSDR, Version=1.19.3.1, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.GroupBoxTS, PowerSDR, Version=1.19.3.2, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;grpVFOBetween.Parent" xml:space="preserve">
     <value>$this</value>
@@ -9979,7 +9976,7 @@
     <value>lblDisplayModeTop</value>
   </data>
   <data name="&gt;&gt;lblDisplayModeTop.Type" xml:space="preserve">
-    <value>System.Windows.Forms.LabelTS, PowerSDR, Version=1.19.3.1, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.LabelTS, PowerSDR, Version=1.19.3.2, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;lblDisplayModeTop.Parent" xml:space="preserve">
     <value>grpDisplaySplit</value>
@@ -10006,7 +10003,7 @@
     <value>lblDisplayModeBottom</value>
   </data>
   <data name="&gt;&gt;lblDisplayModeBottom.Type" xml:space="preserve">
-    <value>System.Windows.Forms.LabelTS, PowerSDR, Version=1.19.3.1, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.LabelTS, PowerSDR, Version=1.19.3.2, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;lblDisplayModeBottom.Parent" xml:space="preserve">
     <value>grpDisplaySplit</value>
@@ -10033,7 +10030,7 @@
     <value>grpDisplaySplit</value>
   </data>
   <data name="&gt;&gt;grpDisplaySplit.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBoxTS, PowerSDR, Version=1.19.3.1, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.GroupBoxTS, PowerSDR, Version=1.19.3.2, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;grpDisplaySplit.Parent" xml:space="preserve">
     <value>$this</value>
@@ -10069,7 +10066,7 @@
     <value>chkRX2</value>
   </data>
   <data name="&gt;&gt;chkRX2.Type" xml:space="preserve">
-    <value>System.Windows.Forms.CheckBoxTS, PowerSDR, Version=1.19.3.1, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.CheckBoxTS, PowerSDR, Version=1.19.3.2, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;chkRX2.Parent" xml:space="preserve">
     <value>$this</value>
@@ -10123,7 +10120,7 @@
     <value>lblRX2Meter</value>
   </data>
   <data name="&gt;&gt;lblRX2Meter.Type" xml:space="preserve">
-    <value>System.Windows.Forms.LabelTS, PowerSDR, Version=1.19.3.1, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.LabelTS, PowerSDR, Version=1.19.3.2, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;lblRX2Meter.Parent" xml:space="preserve">
     <value>grpRX2Meter</value>
@@ -10150,7 +10147,7 @@
     <value>txtRX2Meter</value>
   </data>
   <data name="&gt;&gt;txtRX2Meter.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TextBoxTS, PowerSDR, Version=1.19.3.1, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.TextBoxTS, PowerSDR, Version=1.19.3.2, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;txtRX2Meter.Parent" xml:space="preserve">
     <value>grpRX2Meter</value>
@@ -10174,7 +10171,7 @@
     <value>grpRX2Meter</value>
   </data>
   <data name="&gt;&gt;grpRX2Meter.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBoxTS, PowerSDR, Version=1.19.3.1, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.GroupBoxTS, PowerSDR, Version=1.19.3.2, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;grpRX2Meter.Parent" xml:space="preserve">
     <value>$this</value>
@@ -10204,7 +10201,7 @@
     <value>lblRX2Band</value>
   </data>
   <data name="&gt;&gt;lblRX2Band.Type" xml:space="preserve">
-    <value>System.Windows.Forms.LabelTS, PowerSDR, Version=1.19.3.1, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.LabelTS, PowerSDR, Version=1.19.3.2, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;lblRX2Band.Parent" xml:space="preserve">
     <value>$this</value>
@@ -10252,7 +10249,7 @@
     <value>radBandVHF13</value>
   </data>
   <data name="&gt;&gt;radBandVHF13.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RadioButtonTS, PowerSDR, Version=1.19.3.1, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.RadioButtonTS, PowerSDR, Version=1.19.3.2, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;radBandVHF13.Parent" xml:space="preserve">
     <value>panelBandVHF</value>
@@ -10294,7 +10291,7 @@
     <value>radBandVHF12</value>
   </data>
   <data name="&gt;&gt;radBandVHF12.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RadioButtonTS, PowerSDR, Version=1.19.3.1, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.RadioButtonTS, PowerSDR, Version=1.19.3.2, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;radBandVHF12.Parent" xml:space="preserve">
     <value>panelBandVHF</value>
@@ -10336,7 +10333,7 @@
     <value>radBandVHF11</value>
   </data>
   <data name="&gt;&gt;radBandVHF11.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RadioButtonTS, PowerSDR, Version=1.19.3.1, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.RadioButtonTS, PowerSDR, Version=1.19.3.2, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;radBandVHF11.Parent" xml:space="preserve">
     <value>panelBandVHF</value>
@@ -10378,7 +10375,7 @@
     <value>radBandVHF10</value>
   </data>
   <data name="&gt;&gt;radBandVHF10.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RadioButtonTS, PowerSDR, Version=1.19.3.1, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.RadioButtonTS, PowerSDR, Version=1.19.3.2, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;radBandVHF10.Parent" xml:space="preserve">
     <value>panelBandVHF</value>
@@ -10420,7 +10417,7 @@
     <value>radBandVHF9</value>
   </data>
   <data name="&gt;&gt;radBandVHF9.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RadioButtonTS, PowerSDR, Version=1.19.3.1, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.RadioButtonTS, PowerSDR, Version=1.19.3.2, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;radBandVHF9.Parent" xml:space="preserve">
     <value>panelBandVHF</value>
@@ -10462,7 +10459,7 @@
     <value>radBandVHF8</value>
   </data>
   <data name="&gt;&gt;radBandVHF8.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RadioButtonTS, PowerSDR, Version=1.19.3.1, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.RadioButtonTS, PowerSDR, Version=1.19.3.2, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;radBandVHF8.Parent" xml:space="preserve">
     <value>panelBandVHF</value>
@@ -10504,7 +10501,7 @@
     <value>radBandVHF7</value>
   </data>
   <data name="&gt;&gt;radBandVHF7.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RadioButtonTS, PowerSDR, Version=1.19.3.1, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.RadioButtonTS, PowerSDR, Version=1.19.3.2, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;radBandVHF7.Parent" xml:space="preserve">
     <value>panelBandVHF</value>
@@ -10546,7 +10543,7 @@
     <value>radBandVHF6</value>
   </data>
   <data name="&gt;&gt;radBandVHF6.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RadioButtonTS, PowerSDR, Version=1.19.3.1, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.RadioButtonTS, PowerSDR, Version=1.19.3.2, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;radBandVHF6.Parent" xml:space="preserve">
     <value>panelBandVHF</value>
@@ -10588,7 +10585,7 @@
     <value>radBandVHF5</value>
   </data>
   <data name="&gt;&gt;radBandVHF5.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RadioButtonTS, PowerSDR, Version=1.19.3.1, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.RadioButtonTS, PowerSDR, Version=1.19.3.2, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;radBandVHF5.Parent" xml:space="preserve">
     <value>panelBandVHF</value>
@@ -10630,7 +10627,7 @@
     <value>radBandVHF4</value>
   </data>
   <data name="&gt;&gt;radBandVHF4.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RadioButtonTS, PowerSDR, Version=1.19.3.1, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.RadioButtonTS, PowerSDR, Version=1.19.3.2, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;radBandVHF4.Parent" xml:space="preserve">
     <value>panelBandVHF</value>
@@ -10672,7 +10669,7 @@
     <value>radBandVHF3</value>
   </data>
   <data name="&gt;&gt;radBandVHF3.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RadioButtonTS, PowerSDR, Version=1.19.3.1, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.RadioButtonTS, PowerSDR, Version=1.19.3.2, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;radBandVHF3.Parent" xml:space="preserve">
     <value>panelBandVHF</value>
@@ -10714,7 +10711,7 @@
     <value>radBandVHF2</value>
   </data>
   <data name="&gt;&gt;radBandVHF2.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RadioButtonTS, PowerSDR, Version=1.19.3.1, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.RadioButtonTS, PowerSDR, Version=1.19.3.2, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;radBandVHF2.Parent" xml:space="preserve">
     <value>panelBandVHF</value>
@@ -10756,7 +10753,7 @@
     <value>radBandVHF1</value>
   </data>
   <data name="&gt;&gt;radBandVHF1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RadioButtonTS, PowerSDR, Version=1.19.3.1, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.RadioButtonTS, PowerSDR, Version=1.19.3.2, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;radBandVHF1.Parent" xml:space="preserve">
     <value>panelBandVHF</value>
@@ -10798,7 +10795,7 @@
     <value>radBandVHF0</value>
   </data>
   <data name="&gt;&gt;radBandVHF0.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RadioButtonTS, PowerSDR, Version=1.19.3.1, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.RadioButtonTS, PowerSDR, Version=1.19.3.2, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;radBandVHF0.Parent" xml:space="preserve">
     <value>panelBandVHF</value>
@@ -10819,7 +10816,7 @@
     <value>panelBandVHF</value>
   </data>
   <data name="&gt;&gt;panelBandVHF.Type" xml:space="preserve">
-    <value>System.Windows.Forms.PanelTS, PowerSDR, Version=1.19.3.1, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.PanelTS, PowerSDR, Version=1.19.3.2, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;panelBandVHF.Parent" xml:space="preserve">
     <value>$this</value>
@@ -10846,7 +10843,7 @@
     <value>panelRX2DSP</value>
   </data>
   <data name="&gt;&gt;panelRX2DSP.Type" xml:space="preserve">
-    <value>System.Windows.Forms.PanelTS, PowerSDR, Version=1.19.3.1, Culture=neutral, PublicKeyToken=null</value>
+    <value>System.Windows.Forms.PanelTS, PowerSDR, Version=1.19.3.2, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;panelRX2DSP.Parent" xml:space="preserve">
     <value>$this</value>
@@ -10879,7 +10876,7 @@
     <value>ptbSquelch</value>
   </data>
   <data name="&gt;&gt;ptbSquelch.Type" xml:space="preserve">
-    <value>PowerSDR.PrettyTrackBar, PowerSDR, Version=1.19.3.1, Culture=neutral, PublicKeyToken=null</value>
+    <value>PowerSDR.PrettyTrackBar, PowerSDR, Version=1.19.3.2, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;ptbSquelch.Parent" xml:space="preserve">
     <value>$this</value>
@@ -10948,7 +10945,7 @@
     <value>Off</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
-    <value>PowerSDR™/HPSDR v1.19.3.1   baseSVN 3444</value>
+    <value>PowerSDR™/HPSDR v1.19.3.2   baseSVN 3444 (W5WC - 12/26/10)</value>
   </data>
   <data name="&gt;&gt;mainMenu1.Name" xml:space="preserve">
     <value>mainMenu1</value>

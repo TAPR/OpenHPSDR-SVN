@@ -30,8 +30,8 @@
 
 #undef XYLO 
 #define OZY 1 
-//#define EP4DRAIN_ENABLED (1) //w5wc
-//#define EP6FILEDUMP (1) //w5wc
+//#define EP4DRAIN_ENABLED (1)
+//#define EP6FILEDUMP (1) 
 
 #ifndef LINUX 
 #if 1
@@ -122,6 +122,21 @@ extern int putFIFO(void *fifoh, void *datap, int dlen);
 extern void freeFIFOdata(void *p);
 extern void *getFIFO(void *fifoh, int *dlenp, int wait);
 extern void destroyFIFO(void *fifoh);
+
+
+// ringbuffer routines 
+extern void *createRingBuffer(int size);
+extern void destroyRingBuffer(void *p); 	
+extern int getRingBuffer(void *rbh, char *bufp, int dlen, int wait);
+extern int putRingBuffer(void *rbh, char *datap, int dlen);
+extern int resetRingBuffer(void *rbh); 
+
+// metis stuff 
+extern int MetisStartReadThread(void); 
+extern void MetisStopReadThread(void);
+extern int MetisBulkRead(int endpoint, char *bufp, int buflen);
+extern int MetisBulkWrite(int endpoint, char *bufp, int buflen);
+extern int MetisReadDirect(char *bufp, int buflen);
 
 // all extern declarations need to be above this point 
 
@@ -257,6 +272,14 @@ int CandCFwdPowerBit = 0x8;
 int DotDashMask = 0x7; 
 #endif 
 
+/* Metis stuff */ 
+extern int isMetis; 
+extern SOCKET listenSock; 
+extern SOCKET discoverySock; 
+extern WSADATA WSAdata; 
+extern int WSAinitialized; 
+// extern int MetisReadThreadRunning; 
+
 #if 0 
 // dbg buffer 
 extern char wjtDbgBuf[80]; 
@@ -266,3 +289,4 @@ extern char wjtDbgBuf[80];
 #undef extern
 #endif
 #endif 
+

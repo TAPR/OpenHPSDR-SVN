@@ -638,6 +638,7 @@ void Callback_ProcessBuffer(int *bufp, int buflen) {
 		*sp = (short)floatToInt16(CallbackMonOutLbufp[i]); ++sp; 		
 		*sp = (short)floatToInt16(CallbackMonOutRbufp[i]); ++sp; 
 #else 
+		
 		CBSampleOutBufp[4*outidx] = (short)(CallbackOutLbufp[i] * 32767.0); 
 		CBSampleOutBufp[(4*outidx)+1] = (short)(CallbackOutRbufp[i] * 32767.0); 
 #if 1 

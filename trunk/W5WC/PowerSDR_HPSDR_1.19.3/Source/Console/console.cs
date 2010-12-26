@@ -1613,6 +1613,7 @@ namespace PowerSDR
             this.timer_peak_text = new System.Windows.Forms.Timer(this.components);
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.ptbRX2RF = new PowerSDR.PrettyTrackBar();
+            this.chkSR = new System.Windows.Forms.CheckBoxTS();
             this.chkFWCATU = new System.Windows.Forms.CheckBoxTS();
             this.ckQuickPlay = new System.Windows.Forms.CheckBoxTS();
             this.chkMON = new System.Windows.Forms.CheckBoxTS();
@@ -1653,7 +1654,6 @@ namespace PowerSDR
             this.chkDisplayPeak = new System.Windows.Forms.CheckBoxTS();
             this.comboDisplayMode = new System.Windows.Forms.ComboBoxTS();
             this.chkDisplayAVG = new System.Windows.Forms.CheckBoxTS();
-            this.chkSR = new System.Windows.Forms.CheckBoxTS();
             this.chkNR = new System.Windows.Forms.CheckBoxTS();
             this.chkDSPNB2 = new System.Windows.Forms.CheckBoxTS();
             this.chkBIN = new System.Windows.Forms.CheckBoxTS();
@@ -2141,6 +2141,18 @@ namespace PowerSDR
             this.toolTip1.SetToolTip(this.ptbRX2RF, resources.GetString("ptbRX2RF.ToolTip"));
             this.ptbRX2RF.Value = 90;
             this.ptbRX2RF.Scroll += new PowerSDR.PrettyTrackBar.ScrollHandler(this.ptbRX2RF_Scroll);
+            // 
+            // chkSR
+            // 
+            resources.ApplyResources(this.chkSR, "chkSR");
+            this.chkSR.BackColor = System.Drawing.Color.Transparent;
+            this.chkSR.FlatAppearance.BorderSize = 0;
+            this.chkSR.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.chkSR.Image = null;
+            this.chkSR.Name = "chkSR";
+            this.toolTip1.SetToolTip(this.chkSR, resources.GetString("chkSR.ToolTip"));
+            this.chkSR.UseVisualStyleBackColor = false;
+            this.chkSR.CheckedChanged += new System.EventHandler(this.chkSR_CheckedChanged);
             // 
             // chkFWCATU
             // 
@@ -2631,18 +2643,6 @@ namespace PowerSDR
             this.chkDisplayAVG.Name = "chkDisplayAVG";
             this.toolTip1.SetToolTip(this.chkDisplayAVG, resources.GetString("chkDisplayAVG.ToolTip"));
             this.chkDisplayAVG.CheckedChanged += new System.EventHandler(this.chkDisplayAVG_CheckedChanged);
-            // 
-            // chkSR
-            // 
-            resources.ApplyResources(this.chkSR, "chkSR");
-            this.chkSR.BackColor = System.Drawing.Color.Transparent;
-            this.chkSR.FlatAppearance.BorderSize = 0;
-            this.chkSR.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.chkSR.Image = null;
-            this.chkSR.Name = "chkSR";
-            this.toolTip1.SetToolTip(this.chkSR, resources.GetString("chkSR.ToolTip"));
-            this.chkSR.UseVisualStyleBackColor = false;
-            this.chkSR.CheckedChanged += new System.EventHandler(this.chkSR_CheckedChanged);
             // 
             // chkNR
             // 
@@ -3317,6 +3317,7 @@ namespace PowerSDR
             // 
             resources.ApplyResources(this.chkVFOBTX, "chkVFOBTX");
             this.chkVFOBTX.FlatAppearance.BorderSize = 0;
+            this.chkVFOBTX.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.chkVFOBTX.Image = null;
             this.chkVFOBTX.Name = "chkVFOBTX";
             this.toolTip1.SetToolTip(this.chkVFOBTX, resources.GetString("chkVFOBTX.ToolTip"));
@@ -5114,7 +5115,7 @@ namespace PowerSDR
             this.grpVFOA.Controls.Add(this.txtVFOAFreq);
             this.grpVFOA.Controls.Add(this.btnHidden);
             resources.ApplyResources(this.grpVFOA, "grpVFOA");
-            this.grpVFOA.ForeColor = System.Drawing.Color.White;
+            this.grpVFOA.ForeColor = System.Drawing.Color.Red;
             this.grpVFOA.Name = "grpVFOA";
             this.grpVFOA.TabStop = false;
             // 
@@ -5153,6 +5154,7 @@ namespace PowerSDR
             resources.ApplyResources(this.txtVFOAMSD, "txtVFOAMSD");
             this.txtVFOAMSD.ForeColor = System.Drawing.Color.Olive;
             this.txtVFOAMSD.Name = "txtVFOAMSD";
+            this.txtVFOAMSD.ShortcutsEnabled = false;
             this.txtVFOAMSD.MouseLeave += new System.EventHandler(this.txtVFOAMSD_MouseLeave);
             this.txtVFOAMSD.MouseMove += new System.Windows.Forms.MouseEventHandler(this.txtVFOAMSD_MouseMove);
             this.txtVFOAMSD.MouseDown += new System.Windows.Forms.MouseEventHandler(this.txtVFOAMSD_MouseDown);
@@ -5185,8 +5187,8 @@ namespace PowerSDR
             this.grpVFOB.Controls.Add(this.lblVFOBLSD);
             this.grpVFOB.Controls.Add(this.txtVFOBBand);
             this.grpVFOB.Controls.Add(this.txtVFOBFreq);
-            this.grpVFOB.ForeColor = System.Drawing.Color.White;
             resources.ApplyResources(this.grpVFOB, "grpVFOB");
+            this.grpVFOB.ForeColor = System.Drawing.Color.White;
             this.grpVFOB.Name = "grpVFOB";
             this.grpVFOB.TabStop = false;
             // 
@@ -9058,7 +9060,7 @@ namespace PowerSDR
 					}
 					else
 					{
-						if(freq == 5.3305 || freq == 5.3465 || freq == 5.3665 || freq == 5.3715 || freq == 5.4035)
+						if(freq == 5.3305 || freq == 5.3465 || freq == 5.2585 || freq == 5.2785 || freq == 5.2885 || freq == 5.3665 || freq == 5.3715 || freq == 5.3985 || freq == 5.4035)
 							DB.SaveBandStack("60M", band_60m_index, "USB", filter, freq);
 					}
 					break;
@@ -9922,36 +9924,39 @@ namespace PowerSDR
 			switch(region)
             {
                 case FRSRegion.US:
-				    if(freq >= 1.8 && freq <= 2.0)
-					    return Band.B160M;
-				    else if(freq >= 3.5 && freq <= 4.0)
-					    return Band.B80M;
-				    else if(freq >= 5.1 && freq <= 5.5)
-					    return Band.B60M;
-				    else if(freq >= 7.0 && freq <= 7.3)
-					    return Band.B40M;
-				    else if(freq >= 10.1 && freq <= 10.15)
-					    return Band.B30M;
-				    else if(freq >= 14.0 && freq <= 14.35)
-					    return Band.B20M;
-				    else if(freq >= 18.068 && freq <= 18.168)
-					    return Band.B17M;
-				    else if(freq >= 21.0 && freq <= 21.450)
-					    return Band.B15M;
-				    else if(freq >= 24.89 && freq <= 24.99)
-					    return Band.B12M;
-				    else if(freq >= 28.0 && freq <= 29.7)
-					    return Band.B10M;
-				    else if(freq >= 50.0 && freq <= 54.0)
-					    return Band.B6M;
-				    else if(freq >= 144.0 && freq <= 148.0)
-					   return Band.B2M;
-				    else if(freq == 2.5 || freq == 5.0 ||
-					    freq == 10.0 || freq == 15.0 || 
-					    freq == 20.0)
-					    return Band.WWV;
-				    else
-					    return Band.GEN;
+                    if (freq >= 1.8 && freq <= 2.0)
+                        return Band.B160M;
+                    else if (freq >= 3.5 && freq <= 4.0)
+                        return Band.B80M;
+                    else if (freq == 5.3305 || freq == 5.3465 ||
+                        freq == 5.3665 || freq == 5.3715 ||
+                        freq == 5.4035)
+                    //else if (freq >= 5.1 && freq <= 5.5)
+                        return Band.B60M;
+                    else if (freq >= 7.0 && freq <= 7.3)
+                        return Band.B40M;
+                    else if (freq >= 10.1 && freq <= 10.15)
+                        return Band.B30M;
+                    else if (freq >= 14.0 && freq <= 14.35)
+                        return Band.B20M;
+                    else if (freq >= 18.068 && freq <= 18.168)
+                        return Band.B17M;
+                    else if (freq >= 21.0 && freq <= 21.450)
+                        return Band.B15M;
+                    else if (freq >= 24.89 && freq <= 24.99)
+                        return Band.B12M;
+                    else if (freq >= 28.0 && freq <= 29.7)
+                        return Band.B10M;
+                    else if (freq >= 50.0 && freq <= 54.0)
+                        return Band.B6M;
+                    else if (freq >= 144.0 && freq <= 148.0)
+                        return Band.B2M;
+                    else if (freq == 2.5 || freq == 5.0 ||
+                        freq == 10.0 || freq == 15.0 ||
+                        freq == 20.0)
+                        return Band.WWV;
+                    else
+                        return Band.GEN;
                     
                 case FRSRegion.Spain:
                     if (freq >= 1.81 && freq <= 2.0)
@@ -10018,7 +10023,11 @@ namespace PowerSDR
                         return Band.B160M;
                     else if (freq >= 3.5 && freq <= 4.0)
                         return Band.B80M;
-                    else if (freq >= 5.25 && freq <= 5.41)
+                    else if (freq == 5.2585 || freq == 5.2785 ||
+                        freq == 5.2885 || freq == 5.3665 || 
+                        freq == 5.3715 || freq == 5.3985 || 
+                        freq == 5.4035)
+                   // else if (freq >= 5.25 && freq <= 5.41)
                         return Band.B60M;
                     else if (freq >= 7.0 && freq <= 7.3)
                         return Band.B40M;
@@ -21718,330 +21727,32 @@ namespace PowerSDR
 			get { return ptbFilterShift.Value; }
 			set	{ ptbFilterShift.Value = value; }
 		}
-
-        /*	private PreampMode rx1_preamp_mode = PreampMode.HIGH;
-            public PreampMode RX1PreampMode
-            {
-                get { return rx1_preamp_mode; }
-                set
-                {
-                    rx1_preamp_mode = value;
-                    if (initializing) return;
-                    switch (current_model)
-                    {
-                        case Model.FLEX5000:
-                            if (!fwc_init) return;
-                            switch (rx1_preamp_mode)
-                            {
-                                case PreampMode.OFF:
-                                case PreampMode.LOW:
-                                    FWCRX1Preamp = false;
-                                    chkRX1Preamp.Checked = false;
-                                    break;
-                                case PreampMode.MED:
-                                case PreampMode.HIGH:
-                                    FWCRX1Preamp = true;
-                                    chkRX1Preamp.Checked = true;
-                                    break;
-                            }
-                            break;
-                        case Model.FLEX3000:
-                            if (!fwc_init) return;
-                            switch (rx1_preamp_mode)
-                            {
-                                case PreampMode.OFF: // -20dB
-                                    FWCRX1Preamp = false;
-                                    FWCRX1Attn = true;
-                                    break;
-                                case PreampMode.LOW: // 0dB
-                                    FWCRX1Preamp = false;
-                                    FWCRX1Attn = false;
-                                    break;
-                                case PreampMode.MED:
-                                    FWCRX1Preamp = true;
-                                    FWCRX1Attn = true;
-                                    break;
-                                case PreampMode.HIGH: // +26dB
-                                    FWCRX1Preamp = true;
-                                    FWCRX1Attn = false;
-                                    break;
-                            }
-                            break;
-                        case Model.SDR1000:
-                            switch (rx1_preamp_mode)
-                            {
-                                case PreampMode.OFF:
-                                    Hdw.Attn = true;
-                                    Hdw.GainRelay = true;	// 0dB
-                                    break;
-                                case PreampMode.LOW:
-                                    Hdw.Attn = false;
-                                    Hdw.GainRelay = true;	// +6dB
-                                    break;
-                                case PreampMode.MED:
-                                    Hdw.Attn = true;
-                                    Hdw.GainRelay = false;	// 26dB
-                                    break;
-                                case PreampMode.HIGH:
-                                    Hdw.Attn = false;
-                                    Hdw.GainRelay = false;
-                                    break;
-                            }
-                            break;
-                    }
-
-                    switch (current_model)
-                    {
-                        case Model.FLEX5000: // do nothing here -- handled above
-                            break;
-                        case Model.FLEX3000:
-                            switch (rx1_preamp_mode)
-                            {
-                                case PreampMode.OFF:
-                                    comboPreamp.Text = "Attn";
-                                    break;
-                                case PreampMode.LOW:
-                                    comboPreamp.Text = "Off";
-                                    break;
-                                case PreampMode.MED:
-                                    comboPreamp.Text = "Pre1";
-                                    break;
-                                case PreampMode.HIGH:
-                                    comboPreamp.Text = "Pre2";
-                                    break;
-                            }
-                            break;
-                        default:
-                            switch (rx1_preamp_mode)
-                            {
-                                case PreampMode.OFF:
-                                    comboPreamp.Text = "Off";
-                                    break;
-                                case PreampMode.LOW:
-                                    comboPreamp.Text = "Low";
-                                    break;
-                                case PreampMode.MED:
-                                    comboPreamp.Text = "Med";
-                                    break;
-                                case PreampMode.HIGH:
-                                    comboPreamp.Text = "High";
-                                    break;
-                            }
-                            break;
-                    }
-
-                    Display.RX1PreampOffset = rx1_preamp_offset[(int)rx1_preamp_mode];
-
-                    if (chkSquelch.Checked)
-                        ptbSquelch_Scroll(this, EventArgs.Empty);
-                }
-            } */
-         
-    	/*public bool PennyPresent = false;
+		
+		public bool PennyPresent = false;
 		public bool AlexPresent = false; 
 		public bool MercuryPresent = false; 
 		public bool JanusPresent = false; 
-		
-      	private PreampMode rx1_preamp_mode = PreampMode.HIGH;
-            public PreampMode RX1PreampMode
+		public bool HPSDRisMetis = false; 
+
+		private string metis_network_ip_addr; 
+		public string MetisNetworkIPAddr 
+		{
+			get { return metis_network_ip_addr; }
+            set
             {
-                get { return rx1_preamp_mode; }
-                set
+                bool changed = false;
+                if (metis_network_ip_addr != null && !metis_network_ip_addr.Equals(value))
                 {
-                    rx1_preamp_mode = value;
-                    if (initializing) return;
-                    switch (current_model)
-                    {
-						case Model.HERMES:
-						case Model.HPSDR:
-							switch (rx1_preamp_mode)
-							{
-								case PreampMode.OFF:
-                                case PreampMode.LOW:
-                                case PreampMode.MED:
-                                case PreampMode.HIGH:
-                                    rx1_preamp_mode = PreampMode.HPSDR_ON;
-                                    break;
-								case PreampMode.HPSDR_ON:
-								case PreampMode.HPSDR_OFF:
-								case PreampMode.HPSDR_MINUS10:
-								case PreampMode.HPSDR_MINUS20:
-								case PreampMode.HPSDR_MINUS30:
-									rx1_preamp_mode = PreampMode.HPSDR_ON;
-									break;
-							}
-							break;
-							case Model.FLEX5000:
-                            if (!fwc_init) return;
-                            switch (rx1_preamp_mode)
-                            {
-                                case PreampMode.OFF:
-                                case PreampMode.LOW:
-                                    FWCRX1Preamp = false;
-                                    chkRX1Preamp.Checked = false;
-                                    break;
-                                case PreampMode.MED:
-                                case PreampMode.HIGH:
-                                    FWCRX1Preamp = true;
-                                    chkRX1Preamp.Checked = true;
-                                    break;
-                            }
-                            break;
-                        case Model.FLEX3000:
-                            if (!fwc_init) return;
-                            switch (rx1_preamp_mode)
-                            {
-                                case PreampMode.OFF: // -20dB
-                                    FWCRX1Preamp = false;
-                                    FWCRX1Attn = true;
-                                    break;
-                                case PreampMode.LOW: // 0dB
-                                    FWCRX1Preamp = false;
-                                    FWCRX1Attn = false;
-                                    break;
-                                case PreampMode.MED:
-                                    FWCRX1Preamp = true;
-                                    FWCRX1Attn = true;
-                                    break;
-                                case PreampMode.HIGH: // +26dB
-                                    FWCRX1Preamp = true;
-                                    FWCRX1Attn = false;
-                                    break;
-                            }
-                            break;
-                        case Model.SDR1000:
-                            switch (rx1_preamp_mode)
-                            {
-                                case PreampMode.OFF:
-                                    Hdw.Attn = true;
-                                    Hdw.GainRelay = true;	// 0dB
-                                    break;
-                                case PreampMode.LOW:
-                                    Hdw.Attn = false;
-                                    Hdw.GainRelay = true;	// +6dB
-                                    break;
-                                case PreampMode.MED:
-                                    Hdw.Attn = true;
-                                    Hdw.GainRelay = false;	// 26dB
-                                    break;
-                                case PreampMode.HIGH:
-                                    Hdw.Attn = false;
-                                    Hdw.GainRelay = false;
-                                    break;
-                            }
-                            break;							
-                    }
-
-                    switch (current_model)
-                    {
-                        case Model.FLEX5000: // do nothing here -- handled above
-                            break;
-                        case Model.FLEX3000:
-                            switch (rx1_preamp_mode)
-                            {
-                                case PreampMode.OFF:
-                                    comboPreamp.Text = "Attn";
-                                    break;
-                                case PreampMode.LOW:
-                                    comboPreamp.Text = "Off";
-                                    break;
-                                case PreampMode.MED:
-                                    comboPreamp.Text = "Pre1";
-                                    break;
-                                case PreampMode.HIGH:
-                                    comboPreamp.Text = "Pre2";
-                                    break;
-                            }
-                            break;
-						case Model.HERMES:
-						case Model.HPSDR:
-						{
-							//int alex_atten = 0;
-							//int merc_preamp = 0;
-							switch (rx1_preamp_mode)
-							{
-								case PreampMode.HPSDR_ON:
-                                    JanusAudio.SetMercPreamp(1);
-                                    //merc_preamp = 1;
-									comboPreamp.Text = "On";
-									break;
-								case PreampMode.HPSDR_OFF:
-                                    JanusAudio.SetMercPreamp(0);
-                                    //merc_preamp = 0;
-									comboPreamp.Text = "Off";
-									break;
-								case PreampMode.HPSDR_MINUS10:
-									//merc_preamp = 1;
-                                    JanusAudio.SetAlexAtten(1);
-                                    comboPreamp.Text = "-10db";
-									break;
-								case PreampMode.HPSDR_MINUS20:
-                                    JanusAudio.SetAlexAtten(2);
-                                    //merc_preamp = 2;
-									comboPreamp.Text = "-20db";
-									break;
-								case PreampMode.HPSDR_MINUS30:
-                                    JanusAudio.SetAlexAtten(3);
-                                    //merc_preamp = 3;
-									comboPreamp.Text = "-30db";
-									break;
-							}
-							//JanusAudio.SetMercPreamp(merc_preamp);
-							//JanusAudio.SetAlexAtten(alex_atten);
-						}
-							break; 
-                        default:
-                            switch (rx1_preamp_mode)
-                            {
-                                case PreampMode.OFF:
-                                    comboPreamp.Text = "Off";
-                                    break;
-                                case PreampMode.LOW:
-                                    comboPreamp.Text = "Low";
-                                    break;
-                                case PreampMode.MED:
-                                    comboPreamp.Text = "Med";
-                                    break;
-                                case PreampMode.HIGH:
-                                    comboPreamp.Text = "High";
-                                    break;
-                            }
-                            break;
-                    }
-
-                    Display.RX1PreampOffset = rx1_preamp_offset[(int)rx1_preamp_mode];
-
-                    if (chkSquelch.Checked)
-                        ptbSquelch_Scroll(this, EventArgs.Empty);
+                    changed = true;
+                }
+                metis_network_ip_addr = value;
+                if (changed)
+                {
+                    JanusAudio.DeInitMetisSockets();
+                    JanusAudio.initMetis();
                 }
             }
-  
-
-		private PreampMode rx2_preamp_mode = PreampMode.HIGH;
-		public PreampMode RX2PreampMode
-		{
-			get { return rx2_preamp_mode; }
-			set
-			{
-				if(!fwc_init || current_model != Model.FLEX5000) return;
-				rx2_preamp_mode = value;
-                if (initializing) return;
-				switch(rx2_preamp_mode)
-				{
-					case PreampMode.OFF:
-						FWCRX2Preamp = false;
-						chkRX2Preamp.Checked = false;
-						break;
-					case PreampMode.HIGH:
-						FWCRX2Preamp = true;
-						chkRX2Preamp.Checked = true;
-						break;
-				}*/
-
-        public bool PennyPresent = false;
-        public bool AlexPresent = false;
-        public bool MercuryPresent = false;
-        public bool JanusPresent = false;
+		}
 
 
         private PreampMode rx1_preamp_mode = PreampMode.HIGH;
@@ -34616,6 +34327,8 @@ namespace PowerSDR
 					TXBand = BandByFreq(VFOBFreq, tx_xvtr_index, true, current_region);
 					grpVFOB.Font = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold);
 					grpVFOB.ForeColor = Color.Red;
+                    grpVFOA.Font = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold);
+                    grpVFOA.ForeColor = SystemColors.ControlLightLight;
 					chkVFOBTX.Checked = true;
 					//chkVFOBTX.ForeColor = Color.Black;
 					if(chkPower.Checked)
@@ -34632,8 +34345,10 @@ namespace PowerSDR
 				else
 				{
 				
-					grpVFOB.Font = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Regular);
+					grpVFOB.Font = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold);
 					grpVFOB.ForeColor = SystemColors.ControlLightLight;
+                    grpVFOA.Font = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold);
+                    grpVFOA.ForeColor = Color.Red;
 					chkVFOATX.Checked = true;
 					if(chkPower.Checked)
 					{
@@ -37787,7 +37502,7 @@ namespace PowerSDR
                 swap_vfo_ab_tx = false;
                 if (KWAutoInformation)
                     BroadcastVFOChange("0");
-				chkVFOATX.BackColor = Color.Red;//button_selected_color;
+				chkVFOATX.BackColor = button_selected_color;
 				txtVFOAFreq_LostFocus(this, EventArgs.Empty);
 			}
 			else
@@ -37814,7 +37529,7 @@ namespace PowerSDR
 			if(chkVFOBTX.Checked)
 			{
 				if(chkVFOATX.Checked) chkVFOATX.Checked = false;
-				chkVFOBTX.BackColor = Color.Red;//button_selected_color;
+				chkVFOBTX.BackColor = button_selected_color;
                 swap_vfo_ab_tx = true;
                 if (KWAutoInformation)
                     BroadcastVFOChange("1");

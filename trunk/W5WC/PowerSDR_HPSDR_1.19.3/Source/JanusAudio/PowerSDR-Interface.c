@@ -1,4 +1,4 @@
-/*
+/*A
  * JanusAudio.dll - Support library for HPSDR.org's Janus/Ozy Audio card
  * Copyright (C) 2006,2007  Bill Tracey (bill@ejwt.com) (KD5TFD)
  *
@@ -88,12 +88,18 @@ KD5TFDVK6APHAUDIO_API int StartAudioNative(int sample_rate, int samples_per_bloc
         /* right size our buffers -- if the dsp is running small bufs, we need to
          * do the same.
          */
+
         if ( samples_per_block < 1024 ) {
                 FPGAWriteBufSize = 1024;
         }
         else {
                 FPGAWriteBufSize = 2048;
         }
+
+		if ( isMetis ) {  // force write buf size on Mets -- we can only send 2x512 usb frames in an enet frame for Metis so lock this down 
+						  // 
+			FPGAWriteBufSize = 1024; 
+		} 
 
         // setup sampling rate, buffer sizes  create resampler if needed
         switch ( SampleRate ) {
@@ -138,7 +144,7 @@ KD5TFDVK6APHAUDIO_API int StartAudioNative(int sample_rate, int samples_per_bloc
         if ( XyloH != NULL || IOThreadRunning ) {
 #endif
 #ifdef OZY
-        if ( OzyH != NULL || IOThreadRunning ) {
+        if ( OzyH != NULL || IOThreadRunning  ) {
 #endif
                 return 3;
         }
@@ -192,23 +198,35 @@ KD5TFDVK6APHAUDIO_API int StartAudioNative(int sample_rate, int samples_per_bloc
                 }
                 /*else*/
                 FPGAWriteBufp = FPGAReadBufp + FPGAReadBufSize;
+
+				if ( !isMetis ) { 
 #ifdef XYLO
-                // go open the xylo usb device
-                XyloH = XyloOpen();
-                if ( XyloH == NULL ) {
-                        myrc =  2;
-                        break;
-                }
+					// go open the xylo usb device
+					XyloH = XyloOpen();
+					if ( XyloH == NULL ) {
+							myrc =  2;
+							break;
+					}
 #endif
 #ifdef OZY
-                // go open the ozy
-                OzyH = OzyOpen();
-                if ( OzyH == NULL ) {
-                        myrc =  2;
-                        break;
-                }
-                // printf("Ozy openend!\n");
+					// go open the ozy
+					OzyH = OzyOpen();
+					if ( OzyH == NULL ) {
+						    myrc =  2;
+							break;
+					}
+					// printf("Ozy openend!\n");				
+				
+				
 #endif
+				}
+				else { // is Metis 
+					
+
+
+					MetisStartReadThread(); 
+				} 
+
                 // create FIFO for inbound samples
                 InSampleFIFOp = createFIFO();
                 if ( InSampleFIFOp == NULL ) {
@@ -308,6 +326,9 @@ KD5TFDVK6APHAUDIO_API int StartAudioNative(int sample_rate, int samples_per_bloc
                         OzyH = NULL;
                 }
 #endif
+				if ( isMetis ) { 
+					MetisStopReadThread(); /* is a no op if not running */ 
+				}
         }
         DotDashBits = 0;
         // printf("StartAudioNative - myrc: %d\n", myrc);
@@ -336,6 +357,10 @@ KD5TFDVK6APHAUDIO_API void StopAudio() {
                 fprintf(stderr, "Warning: IOThreadStop failed with rc=%d\n", rc);
         }
         printf("iothread stopped\n");   fflush(stdout);
+
+		if ( isMetis ) { 
+			MetisStopReadThread(); 
+		} 
         if ( InSampleFIFOp != NULL ) {
                 destroyFIFO(InSampleFIFOp);
                 InSampleFIFOp = NULL;
