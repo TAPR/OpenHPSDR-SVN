@@ -7745,7 +7745,7 @@ namespace PowerSDR
             this.lblRealeaseDate.Name = "lblRealeaseDate";
             this.lblRealeaseDate.Size = new System.Drawing.Size(130, 16);
             this.lblRealeaseDate.TabIndex = 4;
-            this.lblRealeaseDate.Text = "W5WC - 12/26/2010";
+            this.lblRealeaseDate.Text = "W5WC - 12/28/2010";
             // 
             // lblPenelopeFWVer
             // 
@@ -30653,15 +30653,33 @@ namespace PowerSDR
             }
         }
 
+        //private void tpHPSDR_Paint(object sender, System.Windows.Forms.PaintEventArgs e)
+        //{
+        //    if (console.PowerOn)
+        //    {
+        //        lblOzyFX2.Text = Convert.ToUInt32(JanusAudio.getFX2FirmwareVersionString()).ToString("Ozy FX2: 0000 00 00"); //w5wc
+        //        lblOzyFWVer.Text = JanusAudio.getOzyFWVersion().ToString("Ozy: 0\\.0"); //w5wc
+        //        lblMercuryFWVer.Text = JanusAudio.getMercuryFWVersion().ToString("Mercury: 0\\.0"); //w5wc
+        //        lblPenelopeFWVer.Text = JanusAudio.getPenelopeFWVersion().ToString("Penelope: 0\\.0"); //w5wc
+        //        return;
+        //    }
+        //}
+
         private void tpHPSDR_Paint(object sender, System.Windows.Forms.PaintEventArgs e)
         {
             if (console.PowerOn)
             {
-                lblOzyFX2.Text = Convert.ToUInt32(JanusAudio.getFX2FirmwareVersionString()).ToString("Ozy FX2: 0000 00 00"); //w5wc
+                try // this will take an exception in the conversion for Metis .. 
+                {
+                    lblOzyFX2.Text = Convert.ToUInt32(JanusAudio.getFX2FirmwareVersionString()).ToString("Ozy FX2: 0000 00 00"); //w5wc
+                }
+                catch (Exception)
+                {
+                    lblOzyFX2.Text = "Ozy FX2: n/a";
+                }
                 lblOzyFWVer.Text = JanusAudio.getOzyFWVersion().ToString("Ozy: 0\\.0"); //w5wc
                 lblMercuryFWVer.Text = JanusAudio.getMercuryFWVersion().ToString("Mercury: 0\\.0"); //w5wc
                 lblPenelopeFWVer.Text = JanusAudio.getPenelopeFWVersion().ToString("Penelope: 0\\.0"); //w5wc
-                return;
             }
         }
 
