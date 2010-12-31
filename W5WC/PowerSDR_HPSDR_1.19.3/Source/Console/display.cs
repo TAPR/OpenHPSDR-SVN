@@ -1990,7 +1990,7 @@ namespace PowerSDR
                                 actual_fgrid == 21.0 || actual_fgrid == 21.45 ||
                                 actual_fgrid == 24.89 || actual_fgrid == 24.99 ||
                                 actual_fgrid == 28.0 || actual_fgrid == 29.7 ||
-                                actual_fgrid == 50.08 || actual_fgrid == 54.0)
+                                actual_fgrid == 50.0 || actual_fgrid == 54.0)
                             {
                                 if (bottom) g.DrawLine(new Pen(band_edge_color), vgrid, H + top, vgrid, H + H);
                                 else g.DrawLine(new Pen(band_edge_color), vgrid, top, vgrid, H);
@@ -2089,7 +2089,7 @@ namespace PowerSDR
            }
 
 
-		/*	int[] band_edge_list = { 1800000, 2000000, 3500000, 4000000,
+            int[] band_edge_list = { 18068000, 18168000, 1800000, 2000000, 3500000, 4000000,
 				7000000, 7300000, 10100000, 10150000, 14000000, 14350000, 21000000, 21450000,
 				24890000, 24990000, 28000000, 29700000, 50000000, 54000000, 144000000, 148000000 };
 			
@@ -2103,7 +2103,7 @@ namespace PowerSDR
 					else g.DrawLine(new Pen(band_edge_color), temp_vline, top, temp_vline, H);//wa6ahl
 				}
 				//if(i == 1 && !show_freq_offset) break;
-			}*/
+			}
 
 			// Draw horizontal lines
 			for(int i=1; i<h_steps; i++)
@@ -2555,7 +2555,7 @@ namespace PowerSDR
                             actual_fgrid == 21.0 || actual_fgrid == 21.45 ||
                             actual_fgrid == 24.89 || actual_fgrid == 24.99 ||
                             actual_fgrid == 28.0 || actual_fgrid == 29.7 ||
-                            actual_fgrid == 50.08 || actual_fgrid == 54.0)
+                            actual_fgrid == 50.0 || actual_fgrid == 54.0)
                         {
                             if (bottom) g.DrawLine(new Pen(band_edge_color), vgrid, H + top, vgrid, H + H);
                             else g.DrawLine(new Pen(band_edge_color), vgrid, top, vgrid, H);
