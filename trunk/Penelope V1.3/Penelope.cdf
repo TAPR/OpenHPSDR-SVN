@@ -1,10 +1,10 @@
-/* Quartus II Version 9.0 Build 132 02/25/2009 SJ Web Edition */
+/* Quartus II Version 10.1 Build 153 11/29/2010 SJ Web Edition */
 JedecChain;
 	FileRevision(JESD32A);
 	DefaultMfr(6E);
 
-	P ActionCode(Cfg)
-		Device PartName(EPCS4) Path("C:/HPSDR/trunk/Kirks Code/HPSDR Apr 13 2009/Penelope/") File("Penelope.pof") MfrSpec(OpMask(1) Child_OpMask(1 1));
+	P ActionCode(Ign)
+		Device PartName(EPCS4) MfrSpec(OpMask(0) Child_OpMask(1 1) FullPath("O:/HPSDR/trunk/Penelope V1.3/Penelope.pof"));
 
 ChainEnd;
 
