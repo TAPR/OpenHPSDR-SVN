@@ -43,16 +43,23 @@
   
   12 Apr 2009 - Modified to use NWirwe - Kirk Weedman, KD7IRS
   18 May 2009 - Released as V1.2
-   4 Jan 1010 - Added support for PennyLane, common code for both boards. Penelope
+  6  Jun 2010 - Modifed 122.88MHz clock selection to use external clock if PLL not locked.
+				This overcomes the problem with not being able to select the correct clock
+				if one is not already present.
+  7           - Force source_122MHZ = 1'b0 at reset as an alternative to the PLL locked solution.
+			  - Change DAC to DAC[13:0] = C122_i_out[16:3];
+
+
+  4 Jan 1011 - Added support for PennyLane, common code for both boards. Penelope
                 will ignore the signal on DAC_ALC.
-                IF_Drive_Level is set to 128 for testing.
+                Tx_level is set to 128 for testing.
   
 */
 
 
 /*
   IMPORTANT:  In Analysis and Synthesis Settings make sure Power-Up Don't Care is NOT checked.
-  Built with Quartus V9.1 sp2
+  Built with Quartus V10.1
 */
 
 //    Atlas bus
@@ -190,12 +197,20 @@ assign TLV320_CLRCOUT = CLRCLK;
 wire LRfall;
 clk_lrclk_gen lrgen (.reset(C122_cgen_rst), .CLK_IN(C122_clk), .BCLK(), .LRCLK(),
                      .LRfall(LRfall), .Speed({C122_DFS1,C122_DFS0}));
+                     
+// detect on board 122.88MHz clock using PLL locked signal so we can select external LVDS 122.88MHz clock if
+// local clock not fitted to Penny.
 
-// Select 122.88MHz source. If source_122MHZ set then use Penelope's 122.88MHz clock and send to LVDS
+wire PLL_locked;
+PLL_clock_detector PLL_inst(.inclk0(C122_clk),.c0(),.locked(PLL_locked));    
+
+
+// Select 122.88MHz source. If source_122MHZ set and PLL locked  then use Penelope's 122.88MHz clock and send to LVDS
 // Otherwise get external clock from LVDS
 
-assign nLVDSRXE = source_122MHZ ? 1'b1 : 1'b0;  // enable LVDS receiver if clock is external
-assign LVDSTXE  = source_122MHZ ? 1'b1 : 1'b0;  // enable LVDS transmitter if Penny is the source 
+assign nLVDSRXE = (source_122MHZ && PLL_locked) ? 1'b1 : 1'b0;  // enable LVDS receiver if clock is external
+assign LVDSTXE  = (source_122MHZ && PLL_locked) ? 1'b1 : 1'b0;  // enable LVDS transmitter if Penny is the source 
+
 
 
 // select 10MHz reference source. If ref_ext is set use Penelope's 10MHz ref and send to Atlas C16
@@ -476,8 +491,8 @@ cordic_16 tx_cordic
 // Add some gain  before we feed the DAC so we can drive to 1/2W on 6m. This is necessary since the 
 // interpolating CIC has a loss since it does not interpolate by 2^n. 
 
-assign  DAC[13:0] = {C122_i_out[17], C122_i_out[15:3]};   // use q_out if 90 degree phase shift required by EER Tx etc
-
+// assign  DAC[13:0] = {C122_i_out[17], C122_i_out[15:3]};   // use q_out if 90 degree phase shift required by EER Tx etc
+assign DAC[13:0] = C122_i_out[16:3]; // gain of 2, use q_out if 90 degree phase shift required by EER Tx etc 
 
 /////////////////////////////////////////////////////////////////
 //
@@ -514,7 +529,7 @@ assign PWM2 = PWM2_accumulator[16];
 //  Set Power Output (PennyLane only)
 //------------------------------------------------------------
 
-// PWM DAC to set drive current to DAC. PWM_count increments 
+// PWM DAC to set drive current to DAC on PennyLane. PWM_count increments 
 // using C122_clk. If the count is less than the drive 
 // level set by the PC then DAC_ALC will be high, otherwise low.  
 
@@ -522,7 +537,7 @@ reg [7:0] PWM_count;
 always @ (posedge C122_clk)
 begin 
 	PWM_count <= PWM_count + 1'b1;
-	if (IF_Drive_Level >= PWM_count)
+	if (Tx_level >= PWM_count)
 		DAC_ALC <= 1'b1;
 	else 
 		DAC_ALC <= 1'b0;
@@ -530,8 +545,8 @@ end
 
 
 //for testing set the drive control to mid way.
-wire [7:0] IF_Drive_Level; // Tx drive level
-assign IF_Drive_Level = 8'd128;
+wire [7:0] Tx_level; // Tx drive level
+assign Tx_level = 8'd128;
 
 ///////////////////////////////////////////////////////////
 //
@@ -546,10 +561,17 @@ assign IF_Drive_Level = 8'd128;
 	
 	<[60:59]DFS1,DFS0><[58]PTT><[57:54]address><[53:22]frequency><[21:18]clock_select><[17:11]OC>
 	<[10]Mode><[9]PGA><[8]DITHER><[7]RAND><[6:5]ATTEN><[4:3]TX_relay><[2]Rout><[1:0]RX_relay> 
+	
+	****new format for PennyLane support
+	
+	<[68:67]DFS1,DFS0><[66]PTT><[65:62]address><[61:30]frequency><[29:26]clock_select><[25:19]OC>
+	<[18]Mode><[17]PGA><[16]DITHER><[15]RAND><[14:13]ATTEN><[12:11]TX_relay><[10]Rout><[9:8]RX_relay><[7:0]Tx_level>
+	
 		
-	for a total of 61 bits. Frequency is in Hz and 32 bit binary format and 
+	for a total of 69 bits. Frequency is in Hz and 32 bit binary format and 
 	OC is the open collector data on Penelope. Mode is for a future Class E PA,
-	PGA, DITHER and RAND are ADC settings and ATTEN the attenuator on Alex
+	PGA, DITHER and RAND are ADC settings and ATTEN the attenuator on Alex. 
+	Tx_level is used by PennyLane only and sets the output power level.
 	
 	The clock source (clock_select) decodes as follows:
 	
@@ -595,14 +617,55 @@ begin
   end
 end
 
+// new version for PennyLane
+
+//reg         PTT_out;       // PTT to Penelope
+//reg   [3:0] C122_clock_select;  // 10MHz and 122.88MHz clock selection
+//reg   [6:0] OC;            // Open Collector outputs data
+//reg   [7:0] Tx_level;		 // PennyLane power output level
+//parameter PENNY_ADDR = 4'b0; // set C&C address that Penny will respond to
+//
+//always @ (posedge C122_clk)
+//begin
+//  if (C122_rst)
+//  begin
+//    C122_DFS1         <= 1'b0;   // I/Q sampling rate selection
+//    C122_DFS0         <= 1'b0;
+//    PTT_out           <= 1'b0; 
+//    C122_frequency_HZ <= 32'b0;
+//    C122_clock_select <= 4'b0000;     
+//    OC                <= 7'b0;   // Penelope Open Collectors
+//    Tx_level 			<= 8'b0;	// PennyLane power output level
+//  end
+//  else if (rcv_rdy)
+//  begin
+//    C122_DFS1    <= rcv_data[68];
+//    C122_DFS0    <= rcv_data[67];
+//    PTT_out      <= rcv_data[66];
+//    if (rcv_data[57:54] == PENNY_ADDR) // check that the C&C data is for this board
+//    begin
+//      C122_frequency_HZ <= rcv_data[61:30];
+//      C122_clock_select <= rcv_data[29:26];     
+//      OC                <= rcv_data[25:19]; 	// Penelope Open Collectors
+//      Tx_level	    	<= rcv_data[7:0];	// PennyLane power level
+//    end
+//  end
+//end
+
+//NWire_rcv  #(.DATA_BITS(69), .ICLK_FREQ(122880000), .XCLK_FREQ(122880000), .SLOWEST_FREQ(500)) 
+//      CCrcv (.irst(C122_rst), .iclk(C122_clk), .xrst(C122_rst), .xclk(C122_clk),
+//             .xrcv_data(rcv_data), .xrcv_rdy(rcv_rdy), .xrcv_ack(rcv_rdy), .din(CC));
+
+
+
 NWire_rcv  #(.DATA_BITS(61), .ICLK_FREQ(122880000), .XCLK_FREQ(122880000), .SLOWEST_FREQ(500)) 
       CCrcv (.irst(C122_rst), .iclk(C122_clk), .xrst(C122_rst), .xclk(C122_clk),
              .xrcv_data(rcv_data), .xrcv_rdy(rcv_rdy), .xrcv_ack(rcv_rdy), .din(CC));
 
 // if set use internal 10MHz TCXO and send to C16 else get from C16
 assign ref_ext        = C122_clock_select[0];
-// if set use internally and send to LVDS else get from LVDS 
-assign source_122MHZ  = (C122_clock_select[3:2] == 2'b00);
+// if set use internally and send to LVDS else get from LVDS. Force to 0 during reset 
+assign source_122MHZ  = C122_rst ? 1'b0 : (C122_clock_select[3:2] == 2'b00);
 
 ////////////////////////////////////////////////////////////////
 //

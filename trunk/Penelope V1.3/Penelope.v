@@ -43,7 +43,14 @@
   
   12 Apr 2009 - Modified to use NWirwe - Kirk Weedman, KD7IRS
   18 May 2009 - Released as V1.2
-   4 Jan 1011 - Added support for PennyLane, common code for both boards. Penelope
+  6  Jun 2010 - Modifed 122.88MHz clock selection to use external clock if PLL not locked.
+				This overcomes the problem with not being able to select the correct clock
+				if one is not already present.
+  7           - Force source_122MHZ = 1'b0 at reset as an alternative to the PLL locked solution.
+			  - Change DAC to DAC[13:0] = C122_i_out[16:3];
+
+
+  4 Jan 1011 - Added support for PennyLane, common code for both boards. Penelope
                 will ignore the signal on DAC_ALC.
                 Tx_level is set to 128 for testing.
   
@@ -190,12 +197,20 @@ assign TLV320_CLRCOUT = CLRCLK;
 wire LRfall;
 clk_lrclk_gen lrgen (.reset(C122_cgen_rst), .CLK_IN(C122_clk), .BCLK(), .LRCLK(),
                      .LRfall(LRfall), .Speed({C122_DFS1,C122_DFS0}));
+                     
+// detect on board 122.88MHz clock using PLL locked signal so we can select external LVDS 122.88MHz clock if
+// local clock not fitted to Penny.
 
-// Select 122.88MHz source. If source_122MHZ set then use Penelope's 122.88MHz clock and send to LVDS
+wire PLL_locked;
+PLL_clock_detector PLL_inst(.inclk0(C122_clk),.c0(),.locked(PLL_locked));    
+
+
+// Select 122.88MHz source. If source_122MHZ set and PLL locked  then use Penelope's 122.88MHz clock and send to LVDS
 // Otherwise get external clock from LVDS
 
-assign nLVDSRXE = source_122MHZ ? 1'b1 : 1'b0;  // enable LVDS receiver if clock is external
-assign LVDSTXE  = source_122MHZ ? 1'b1 : 1'b0;  // enable LVDS transmitter if Penny is the source 
+assign nLVDSRXE = (source_122MHZ && PLL_locked) ? 1'b1 : 1'b0;  // enable LVDS receiver if clock is external
+assign LVDSTXE  = (source_122MHZ && PLL_locked) ? 1'b1 : 1'b0;  // enable LVDS transmitter if Penny is the source 
+
 
 
 // select 10MHz reference source. If ref_ext is set use Penelope's 10MHz ref and send to Atlas C16
@@ -476,8 +491,8 @@ cordic_16 tx_cordic
 // Add some gain  before we feed the DAC so we can drive to 1/2W on 6m. This is necessary since the 
 // interpolating CIC has a loss since it does not interpolate by 2^n. 
 
-assign  DAC[13:0] = {C122_i_out[17], C122_i_out[15:3]};   // use q_out if 90 degree phase shift required by EER Tx etc
-
+// assign  DAC[13:0] = {C122_i_out[17], C122_i_out[15:3]};   // use q_out if 90 degree phase shift required by EER Tx etc
+assign DAC[13:0] = C122_i_out[16:3]; // gain of 2, use q_out if 90 degree phase shift required by EER Tx etc 
 
 /////////////////////////////////////////////////////////////////
 //
@@ -649,8 +664,8 @@ NWire_rcv  #(.DATA_BITS(61), .ICLK_FREQ(122880000), .XCLK_FREQ(122880000), .SLOW
 
 // if set use internal 10MHz TCXO and send to C16 else get from C16
 assign ref_ext        = C122_clock_select[0];
-// if set use internally and send to LVDS else get from LVDS 
-assign source_122MHZ  = (C122_clock_select[3:2] == 2'b00);
+// if set use internally and send to LVDS else get from LVDS. Force to 0 during reset 
+assign source_122MHZ  = C122_rst ? 1'b0 : (C122_clock_select[3:2] == 2'b00);
 
 ////////////////////////////////////////////////////////////////
 //
@@ -785,7 +800,23 @@ assign LED4 = (AIN5 > 1000)? 1'b0 : 1'b1;
 assign LED5 = (AIN5 > 2000)? 1'b0 : 1'b1;  
 assign LED6 = (AIN5 > 3000)? 1'b0 : 1'b1;  
 
-assign LED7 = 0;    // LED7 ON so we can see code has loaded OK 
+//assign LED7 = 0;    // LED7 ON so we can see code has loaded OK 
+// blink - fast when PTT active
+//assign LED2 = source_122MHZ; //LVDSTXE;
+//assign LED3 = C122_clock_select[2]; //nLVDSRXE;
+//assign LED4 = LVDSTXE; //C122_clock_select[1];
+//assign LED5 = PLL_locked; //C122_clock_select[0]; //source_122MHZ;
+
+
+reg[26:0]counter;
+always @(posedge C122_clk) counter = counter + 1'b1;
+assign LED7 = PTT_out ? counter[24] : counter[26];  // LED 7 flashes twice as fast when PTT active.
+
+//reg[22:0]count_10;
+//always @(posedge ext_10MHZ) count_10 = count_10 + 1'b1;
+//assign LED6 = count_10[22];
+
+
 
 // User open collector outputs 
 assign USEROUT0 = OC[0];

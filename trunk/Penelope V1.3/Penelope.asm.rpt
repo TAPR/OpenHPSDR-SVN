@@ -1,6 +1,6 @@
 Assembler report for Penelope
-Wed Jan 05 14:34:36 2011
-Quartus II Version 10.1 Build 153 11/29/2010 SJ Web Edition
+Wed Jan 05 19:23:10 2011
+Quartus II Version 9.1 Build 350 03/24/2010 Service Pack 2 SJ Web Edition
 
 
 ---------------------
@@ -10,8 +10,8 @@ Quartus II Version 10.1 Build 153 11/29/2010 SJ Web Edition
   2. Assembler Summary
   3. Assembler Settings
   4. Assembler Generated Files
-  5. Assembler Device Options: O:/HPSDR/trunk/Penelope V1.3/Penelope.sof
-  6. Assembler Device Options: O:/HPSDR/trunk/Penelope V1.3/Penelope.pof
+  5. Assembler Device Options: C:/HPSDR/trunk/Penelope V1.3/Penelope.sof
+  6. Assembler Device Options: C:/HPSDR/trunk/Penelope V1.3/Penelope.pof
   7. Assembler Messages
 
 
@@ -38,7 +38,7 @@ applicable agreement for further details.
 +---------------------------------------------------------------+
 ; Assembler Summary                                             ;
 +-----------------------+---------------------------------------+
-; Assembler Status      ; Successful - Wed Jan 05 14:34:36 2011 ;
+; Assembler Status      ; Successful - Wed Jan 05 19:23:10 2011 ;
 ; Revision Name         ; Penelope                              ;
 ; Top-level Entity Name ; Penelope                              ;
 ; Family                ; Cyclone II                            ;
@@ -52,10 +52,10 @@ applicable agreement for further details.
 ; Option                                                                      ; Setting  ; Default Value ;
 +-----------------------------------------------------------------------------+----------+---------------+
 ; Maximum processors allowed for parallel compilation                         ; 1        ;               ;
+; Generate compressed bitstreams                                              ; Off      ; On            ;
 ; Use smart compilation                                                       ; Off      ; Off           ;
 ; Enable parallel Assembler and TimeQuest Timing Analyzer during compilation  ; On       ; On            ;
 ; Enable compact report table                                                 ; Off      ; Off           ;
-; Generate compressed bitstreams                                              ; On       ; On            ;
 ; Compression mode                                                            ; Off      ; Off           ;
 ; Clock source for configuration device                                       ; Internal ; Internal      ;
 ; Clock frequency of the configuration device                                 ; 10 MHZ   ; 10 MHz        ;
@@ -84,31 +84,31 @@ applicable agreement for further details.
 +-------------------------------------------+
 ; File Name                                 ;
 +-------------------------------------------+
-; O:/HPSDR/trunk/Penelope V1.3/Penelope.sof ;
-; O:/HPSDR/trunk/Penelope V1.3/Penelope.pof ;
+; C:/HPSDR/trunk/Penelope V1.3/Penelope.sof ;
+; C:/HPSDR/trunk/Penelope V1.3/Penelope.pof ;
 +-------------------------------------------+
 
 
 +---------------------------------------------------------------------+
-; Assembler Device Options: O:/HPSDR/trunk/Penelope V1.3/Penelope.sof ;
+; Assembler Device Options: C:/HPSDR/trunk/Penelope V1.3/Penelope.sof ;
 +----------------+----------------------------------------------------+
 ; Option         ; Setting                                            ;
 +----------------+----------------------------------------------------+
 ; Device         ; EP2C8Q208C8                                        ;
 ; JTAG usercode  ; 0xFFFFFFFF                                         ;
-; Checksum       ; 0x0030786F                                         ;
+; Checksum       ; 0x003063BB                                         ;
 +----------------+----------------------------------------------------+
 
 
 +---------------------------------------------------------------------+
-; Assembler Device Options: O:/HPSDR/trunk/Penelope V1.3/Penelope.pof ;
+; Assembler Device Options: C:/HPSDR/trunk/Penelope V1.3/Penelope.pof ;
 +--------------------+------------------------------------------------+
 ; Option             ; Setting                                        ;
 +--------------------+------------------------------------------------+
 ; Device             ; EPCS4                                          ;
 ; JTAG usercode      ; 0x00000000                                     ;
-; Checksum           ; 0x06BC7A26                                     ;
-; Compression Ratio  ; 2                                              ;
+; Checksum           ; 0x046B1646                                     ;
+; Compression Ratio  ; 1                                              ;
 +--------------------+------------------------------------------------+
 
 
@@ -117,15 +117,15 @@ applicable agreement for further details.
 +--------------------+
 Info: *******************************************************************
 Info: Running Quartus II Assembler
-    Info: Version 10.1 Build 153 11/29/2010 SJ Web Edition
-    Info: Processing started: Wed Jan 05 14:34:32 2011
+    Info: Version 9.1 Build 350 03/24/2010 Service Pack 2 SJ Web Edition
+    Info: Processing started: Wed Jan 05 19:23:09 2011
 Info: Command: quartus_asm --read_settings_files=off --write_settings_files=off Penelope -c Penelope
 Info: Writing out detailed assembly data for power analysis
 Info: Assembler is generating device programming files
 Info: Quartus II Assembler was successful. 0 errors, 0 warnings
-    Info: Peak virtual memory: 209 megabytes
-    Info: Processing ended: Wed Jan 05 14:34:36 2011
-    Info: Elapsed time: 00:00:04
-    Info: Total CPU time (on all processors): 00:00:03
+    Info: Peak virtual memory: 166 megabytes
+    Info: Processing ended: Wed Jan 05 19:23:10 2011
+    Info: Elapsed time: 00:00:01
+    Info: Total CPU time (on all processors): 00:00:01
 
 
