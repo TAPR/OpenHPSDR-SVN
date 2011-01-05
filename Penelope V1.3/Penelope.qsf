@@ -119,19 +119,6 @@ set_location_assignment PIN_164 -to TLV320_CMCLK
 set_location_assignment PIN_163 -to TLV320_CBCLK
 set_location_assignment PIN_160 -to TLV320_CDOUT
 set_location_assignment PIN_162 -to TLV320_CDIN
-set_global_assignment -name VERILOG_FILE ../common/I2S_xmit.v
-set_global_assignment -name VERILOG_FILE ../common/NWire_rcv.v
-set_global_assignment -name VERILOG_FILE ../common/NWire_xmit.v
-set_global_assignment -name VERILOG_FILE ../common/clk_lrclk_gen.v
-set_global_assignment -name VERILOG_FILE ../common/clk_div.v
-set_global_assignment -name VERILOG_FILE ALC.v
-set_global_assignment -name VERILOG_FILE oddClockDiv.v
-set_global_assignment -name VERILOG_FILE cordic.v
-set_global_assignment -name VERILOG_FILE ADC.v
-set_global_assignment -name VERILOG_FILE phase_accumulator.v
-set_global_assignment -name VERILOG_FILE cicint.v
-set_global_assignment -name VERILOG_FILE Penelope.v
-set_global_assignment -name VERILOG_FILE ../common/I2S_rcv.v
 set_global_assignment -name FMAX_REQUIREMENT "48 kHz" -section_id CLRCLK
 set_global_assignment -name FMAX_REQUIREMENT "12.288 MHz" -section_id CBCLK
 set_global_assignment -name FMAX_REQUIREMENT "122.88 MHz" -section_id CLK_122MHz
@@ -151,7 +138,6 @@ set_location_assignment PIN_64 -to C22
 set_location_assignment PIN_201 -to DAC_ALC
 set_global_assignment -name MISC_FILE "O:/HPSDR/trunk/Penelope V1.3/Penelope.dpf"
 set_global_assignment -name PARTITION_FITTER_PRESERVATION_LEVEL PLACEMENT_AND_ROUTING -section_id Top
-set_instance_assignment -name PARTITION_HIERARCHY root_partition -to | -section_id Top
 set_global_assignment -name EDA_SIMULATION_TOOL "ModelSim-Altera (Verilog)"
 set_global_assignment -name EDA_OUTPUT_DATA_FORMAT "VERILOG HDL" -section_id eda_simulation
 set_global_assignment -name EDA_TIME_SCALE "1 ps" -section_id eda_simulation
@@ -159,3 +145,19 @@ set_global_assignment -name MIN_CORE_JUNCTION_TEMP 0
 set_global_assignment -name MAX_CORE_JUNCTION_TEMP 85
 set_global_assignment -name POWER_PRESET_COOLING_SOLUTION "23 MM HEAT SINK WITH 200 LFPM AIRFLOW"
 set_global_assignment -name POWER_BOARD_THERMAL_MODEL "NONE (CONSERVATIVE)"
+set_global_assignment -name SDC_FILE Penelope.sdc
+set_global_assignment -name VERILOG_FILE ../common/I2S_xmit.v
+set_global_assignment -name VERILOG_FILE ../common/NWire_rcv.v
+set_global_assignment -name VERILOG_FILE ../common/NWire_xmit.v
+set_global_assignment -name VERILOG_FILE ../common/clk_lrclk_gen.v
+set_global_assignment -name VERILOG_FILE ../common/clk_div.v
+set_global_assignment -name VERILOG_FILE ALC.v
+set_global_assignment -name VERILOG_FILE oddClockDiv.v
+set_global_assignment -name VERILOG_FILE cordic.v
+set_global_assignment -name VERILOG_FILE ADC.v
+set_global_assignment -name VERILOG_FILE phase_accumulator.v
+set_global_assignment -name VERILOG_FILE cicint.v
+set_global_assignment -name VERILOG_FILE Penelope.v
+set_global_assignment -name VERILOG_FILE ../common/I2S_rcv.v
+set_global_assignment -name EDA_NETLIST_WRITER_OUTPUT_DIR "O:/HPSDR/trunk/Penelope V1.3" -section_id eda_simulation
+set_instance_assignment -name PARTITION_HIERARCHY root_partition -to | -section_id Top

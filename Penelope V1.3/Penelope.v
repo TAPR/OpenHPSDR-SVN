@@ -43,7 +43,7 @@
   
   12 Apr 2009 - Modified to use NWirwe - Kirk Weedman, KD7IRS
   18 May 2009 - Released as V1.2
-   4 Jan 1010 - Added support for PennyLane, common code for both boards. Penelope
+   4 Jan 1011 - Added support for PennyLane, common code for both boards. Penelope
                 will ignore the signal on DAC_ALC.
                 Tx_level is set to 128 for testing.
   
@@ -52,7 +52,7 @@
 
 /*
   IMPORTANT:  In Analysis and Synthesis Settings make sure Power-Up Don't Care is NOT checked.
-  Built with Quartus V9.1 sp2
+  Built with Quartus V10.1
 */
 
 //    Atlas bus
