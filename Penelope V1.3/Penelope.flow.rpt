@@ -1,6 +1,6 @@
 Flow report for Penelope
-Wed Jan 05 16:17:02 2011
-Quartus II Version 10.1 Build 153 11/29/2010 SJ Web Edition
+Wed Jan 05 19:23:17 2011
+Quartus II Version 9.1 Build 350 03/24/2010 Service Pack 2 SJ Web Edition
 
 
 ---------------------
@@ -35,26 +35,27 @@ applicable agreement for further details.
 
 
 
-+-------------------------------------------------------------------------------+
-; Flow Summary                                                                  ;
-+------------------------------------+------------------------------------------+
-; Flow Status                        ; Successful - Wed Jan 05 14:34:36 2011    ;
-; Quartus II Version                 ; 10.1 Build 153 11/29/2010 SJ Web Edition ;
-; Revision Name                      ; Penelope                                 ;
-; Top-level Entity Name              ; Penelope                                 ;
-; Family                             ; Cyclone II                               ;
-; Device                             ; EP2C8Q208C8                              ;
-; Timing Models                      ; Final                                    ;
-; Total logic elements               ; 4,061 / 8,256 ( 49 % )                   ;
-;     Total combinational functions  ; 3,538 / 8,256 ( 43 % )                   ;
-;     Dedicated logic registers      ; 2,785 / 8,256 ( 34 % )                   ;
-; Total registers                    ; 2785                                     ;
-; Total pins                         ; 57 / 138 ( 41 % )                        ;
-; Total virtual pins                 ; 0                                        ;
-; Total memory bits                  ; 0 / 165,888 ( 0 % )                      ;
-; Embedded Multiplier 9-bit elements ; 12 / 36 ( 33 % )                         ;
-; Total PLLs                         ; 0 / 2 ( 0 % )                            ;
-+------------------------------------+------------------------------------------+
++-----------------------------------------------------------------------------------+
+; Flow Summary                                                                      ;
++------------------------------------+----------------------------------------------+
+; Flow Status                        ; Successful - Wed Jan 05 19:23:17 2011        ;
+; Quartus II Version                 ; 9.1 Build 350 03/24/2010 SP 2 SJ Web Edition ;
+; Revision Name                      ; Penelope                                     ;
+; Top-level Entity Name              ; Penelope                                     ;
+; Family                             ; Cyclone II                                   ;
+; Device                             ; EP2C8Q208C8                                  ;
+; Timing Models                      ; Final                                        ;
+; Met timing requirements            ; No                                           ;
+; Total logic elements               ; 4,010 / 8,256 ( 49 % )                       ;
+;     Total combinational functions  ; 3,541 / 8,256 ( 43 % )                       ;
+;     Dedicated logic registers      ; 2,715 / 8,256 ( 33 % )                       ;
+; Total registers                    ; 2715                                         ;
+; Total pins                         ; 57 / 138 ( 41 % )                            ;
+; Total virtual pins                 ; 0                                            ;
+; Total memory bits                  ; 0 / 165,888 ( 0 % )                          ;
+; Embedded Multiplier 9-bit elements ; 12 / 36 ( 33 % )                             ;
+; Total PLLs                         ; 1 / 2 ( 50 % )                               ;
++------------------------------------+----------------------------------------------+
 
 
 +-----------------------------------------+
@@ -62,79 +63,75 @@ applicable agreement for further details.
 +-------------------+---------------------+
 ; Option            ; Setting             ;
 +-------------------+---------------------+
-; Start date & time ; 01/05/2011 14:31:36 ;
+; Start date & time ; 01/05/2011 19:21:45 ;
 ; Main task         ; Compilation         ;
 ; Revision Name     ; Penelope            ;
 +-------------------+---------------------+
 
 
-+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-; Flow Non-Default Global Settings                                                                                                                                                             ;
-+---------------------------------------------+------------------------------------------------------------------------------------+--------------------------------+-------------+------------+
-; Assignment Name                             ; Value                                                                              ; Default Value                  ; Entity Name ; Section Id ;
-+---------------------------------------------+------------------------------------------------------------------------------------+--------------------------------+-------------+------------+
-; ALLOW_POWER_UP_DONT_CARE                    ; Off                                                                                ; On                             ; --          ; --         ;
-; COMPILER_SIGNATURE_ID                       ; 85160415004.129420909607012                                                        ; --                             ; --          ; --         ;
-; ENABLE_SIGNALTAP                            ; Off                                                                                ; --                             ; --          ; --         ;
-; FMAX_REQUIREMENT                            ; 123 MHz                                                                            ; --                             ; --          ; --         ;
-; MESSAGE_SUPPRESSION_RULE_FILE               ; Penelope.srf                                                                       ; --                             ; --          ; --         ;
-; MISC_FILE                                   ; C:/Documents and Settings/Kirk Weedman/Desktop/HPSDR Verilog/Penelope/Penelope.dpf ; --                             ; --          ; --         ;
-; MISC_FILE                                   ; C:/HPSDR/trunk/Penelope/Penelope.dpf                                               ; --                             ; --          ; --         ;
-; MISC_FILE                                   ; C:/Documents and Settings/Kirk/Desktop/HPSDR Verilog/Penelope/Penelope.dpf         ; --                             ; --          ; --         ;
-; MISC_FILE                                   ; O:/HPSDR/trunk/Penelope V1.3/Penelope.dpf                                          ; --                             ; --          ; --         ;
-; NUMBER_OF_DESTINATION_TO_REPORT             ; 50                                                                                 ; 10                             ; --          ; --         ;
-; NUMBER_OF_PATHS_TO_REPORT                   ; 1000                                                                               ; 200                            ; --          ; --         ;
-; NUMBER_OF_SOURCES_PER_DESTINATION_TO_REPORT ; 50                                                                                 ; 10                             ; --          ; --         ;
-; OPTIMIZE_HOLD_TIMING                        ; Off                                                                                ; IO Paths and Minimum TPD Paths ; --          ; --         ;
-; PARTITION_COLOR                             ; 14622752                                                                           ; --                             ; --          ; Top        ;
-; PARTITION_FITTER_PRESERVATION_LEVEL         ; PLACEMENT_AND_ROUTING                                                              ; --                             ; --          ; Top        ;
-; PARTITION_NETLIST_TYPE                      ; SOURCE                                                                             ; --                             ; --          ; Top        ;
-; PHYSICAL_SYNTHESIS_COMBO_LOGIC              ; On                                                                                 ; Off                            ; --          ; --         ;
-; PHYSICAL_SYNTHESIS_REGISTER_DUPLICATION     ; On                                                                                 ; Off                            ; --          ; --         ;
-; PHYSICAL_SYNTHESIS_REGISTER_RETIMING        ; On                                                                                 ; Off                            ; --          ; --         ;
-; REMOVE_REDUNDANT_LOGIC_CELLS                ; On                                                                                 ; Off                            ; --          ; --         ;
-; ROUTER_TIMING_OPTIMIZATION_LEVEL            ; MAXIMUM                                                                            ; Normal                         ; --          ; --         ;
-; STATE_MACHINE_PROCESSING                    ; User-Encoded                                                                       ; Auto                           ; --          ; --         ;
-+---------------------------------------------+------------------------------------------------------------------------------------+--------------------------------+-------------+------------+
++--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Flow Non-Default Global Settings                                                                                                                                                                 ;
++---------------------------------------------+------------------------------------------------------------------------------------+--------------------------------+-------------+----------------+
+; Assignment Name                             ; Value                                                                              ; Default Value                  ; Entity Name ; Section Id     ;
++---------------------------------------------+------------------------------------------------------------------------------------+--------------------------------+-------------+----------------+
+; ALLOW_POWER_UP_DONT_CARE                    ; Off                                                                                ; On                             ; --          ; --             ;
+; COMPILER_SIGNATURE_ID                       ; 123483488765.129422650504784                                                       ; --                             ; --          ; --             ;
+; EDA_NETLIST_WRITER_OUTPUT_DIR               ; O:/HPSDR/trunk/Penelope V1.3                                                       ; --                             ; --          ; eda_simulation ;
+; EDA_OUTPUT_DATA_FORMAT                      ; Verilog Hdl                                                                        ; --                             ; --          ; eda_simulation ;
+; EDA_SIMULATION_TOOL                         ; ModelSim-Altera (Verilog)                                                          ; <None>                         ; --          ; --             ;
+; EDA_TIME_SCALE                              ; 1 ps                                                                               ; --                             ; --          ; eda_simulation ;
+; ENABLE_SIGNALTAP                            ; Off                                                                                ; --                             ; --          ; --             ;
+; FMAX_REQUIREMENT                            ; 123 MHz                                                                            ; --                             ; --          ; --             ;
+; MAX_CORE_JUNCTION_TEMP                      ; 85                                                                                 ; --                             ; --          ; --             ;
+; MESSAGE_SUPPRESSION_RULE_FILE               ; Penelope.srf                                                                       ; --                             ; --          ; --             ;
+; MIN_CORE_JUNCTION_TEMP                      ; 0                                                                                  ; --                             ; --          ; --             ;
+; MISC_FILE                                   ; C:/Documents and Settings/Kirk Weedman/Desktop/HPSDR Verilog/Penelope/Penelope.dpf ; --                             ; --          ; --             ;
+; MISC_FILE                                   ; C:/HPSDR/trunk/Penelope/Penelope.dpf                                               ; --                             ; --          ; --             ;
+; MISC_FILE                                   ; C:/Documents and Settings/Kirk/Desktop/HPSDR Verilog/Penelope/Penelope.dpf         ; --                             ; --          ; --             ;
+; MISC_FILE                                   ; O:/HPSDR/trunk/Penelope V1.3/Penelope.dpf                                          ; --                             ; --          ; --             ;
+; NUMBER_OF_DESTINATION_TO_REPORT             ; 50                                                                                 ; 10                             ; --          ; --             ;
+; NUMBER_OF_PATHS_TO_REPORT                   ; 1000                                                                               ; 200                            ; --          ; --             ;
+; NUMBER_OF_SOURCES_PER_DESTINATION_TO_REPORT ; 50                                                                                 ; 10                             ; --          ; --             ;
+; OPTIMIZE_HOLD_TIMING                        ; Off                                                                                ; IO Paths and Minimum TPD Paths ; --          ; --             ;
+; PARTITION_COLOR                             ; 14622752                                                                           ; --                             ; --          ; Top            ;
+; PARTITION_FITTER_PRESERVATION_LEVEL         ; PLACEMENT_AND_ROUTING                                                              ; --                             ; --          ; Top            ;
+; PARTITION_NETLIST_TYPE                      ; SOURCE                                                                             ; --                             ; --          ; Top            ;
+; PHYSICAL_SYNTHESIS_COMBO_LOGIC              ; On                                                                                 ; Off                            ; --          ; --             ;
+; PHYSICAL_SYNTHESIS_REGISTER_DUPLICATION     ; On                                                                                 ; Off                            ; --          ; --             ;
+; PHYSICAL_SYNTHESIS_REGISTER_RETIMING        ; On                                                                                 ; Off                            ; --          ; --             ;
+; POWER_BOARD_THERMAL_MODEL                   ; None (CONSERVATIVE)                                                                ; --                             ; --          ; --             ;
+; POWER_PRESET_COOLING_SOLUTION               ; 23 MM HEAT SINK WITH 200 LFPM AIRFLOW                                              ; --                             ; --          ; --             ;
+; REMOVE_REDUNDANT_LOGIC_CELLS                ; On                                                                                 ; Off                            ; --          ; --             ;
+; ROUTER_TIMING_OPTIMIZATION_LEVEL            ; MAXIMUM                                                                            ; Normal                         ; --          ; --             ;
+; STATE_MACHINE_PROCESSING                    ; User-Encoded                                                                       ; Auto                           ; --          ; --             ;
++---------------------------------------------+------------------------------------------------------------------------------------+--------------------------------+-------------+----------------+
 
 
-+-------------------------------------------------------------------------------------------------------------------------------+
-; Flow Elapsed Time                                                                                                             ;
-+---------------------------+--------------+-------------------------+---------------------+------------------------------------+
-; Module Name               ; Elapsed Time ; Average Processors Used ; Peak Virtual Memory ; Total CPU Time (on all processors) ;
-+---------------------------+--------------+-------------------------+---------------------+------------------------------------+
-; Analysis & Synthesis      ; 00:00:36     ; 1.0                     ; 217 MB              ; 00:00:24                           ;
-; Fitter                    ; 00:02:07     ; 1.0                     ; 292 MB              ; 00:01:54                           ;
-; Assembler                 ; 00:00:04     ; 1.0                     ; 209 MB              ; 00:00:02                           ;
-; TimeQuest Timing Analyzer ; 00:00:15     ; 1.0                     ; 219 MB              ; 00:00:10                           ;
-; TimeQuest Timing Analyzer ; 00:00:09     ; 1.0                     ; 210 MB              ; 00:00:06                           ;
-; TimeQuest Timing Analyzer ; 00:00:07     ; 1.0                     ; 210 MB              ; 00:00:06                           ;
-; TimeQuest Timing Analyzer ; 00:00:08     ; 1.0                     ; 210 MB              ; 00:00:06                           ;
-; TimeQuest Timing Analyzer ; 00:00:08     ; 1.0                     ; 210 MB              ; 00:00:06                           ;
-; TimeQuest Timing Analyzer ; 00:00:09     ; 1.0                     ; 210 MB              ; 00:00:05                           ;
-; TimeQuest Timing Analyzer ; 00:00:08     ; 1.0                     ; 210 MB              ; 00:00:05                           ;
-; TimeQuest Timing Analyzer ; 00:00:11     ; 1.0                     ; 210 MB              ; 00:00:05                           ;
-; Total                     ; 00:04:02     ; --                      ; --                  ; 00:03:09                           ;
-+---------------------------+--------------+-------------------------+---------------------+------------------------------------+
++-----------------------------------------------------------------------------------------------------------------------------+
+; Flow Elapsed Time                                                                                                           ;
++-------------------------+--------------+-------------------------+---------------------+------------------------------------+
+; Module Name             ; Elapsed Time ; Average Processors Used ; Peak Virtual Memory ; Total CPU Time (on all processors) ;
++-------------------------+--------------+-------------------------+---------------------+------------------------------------+
+; Analysis & Synthesis    ; 00:00:12     ; 1.0                     ; 183 MB              ; 00:00:12                           ;
+; Fitter                  ; 00:01:07     ; 1.0                     ; 223 MB              ; 00:01:07                           ;
+; Assembler               ; 00:00:01     ; 1.0                     ; 166 MB              ; 00:00:01                           ;
+; Classic Timing Analyzer ; 00:00:02     ; 1.0                     ; 153 MB              ; 00:00:02                           ;
+; EDA Netlist Writer      ; 00:00:01     ; 1.0                     ; 167 MB              ; 00:00:01                           ;
+; Total                   ; 00:01:23     ; --                      ; --                  ; 00:01:23                           ;
++-------------------------+--------------+-------------------------+---------------------+------------------------------------+
 
 
-+-----------------------------------------------------------------------------------------+
-; Flow OS Summary                                                                         ;
-+---------------------------+------------------+------------+------------+----------------+
-; Module Name               ; Machine Hostname ; OS Name    ; OS Version ; Processor type ;
-+---------------------------+------------------+------------+------------+----------------+
-; Analysis & Synthesis      ; pcphil           ; Windows XP ; 5.1        ; i1586          ;
-; Fitter                    ; pcphil           ; Windows XP ; 5.1        ; i1586          ;
-; Assembler                 ; pcphil           ; Windows XP ; 5.1        ; i1586          ;
-; TimeQuest Timing Analyzer ; pcphil           ; Windows XP ; 5.1        ; i1586          ;
-; TimeQuest Timing Analyzer ; pcphil           ; Windows XP ; 5.1        ; i1586          ;
-; TimeQuest Timing Analyzer ; pcphil           ; Windows XP ; 5.1        ; i1586          ;
-; TimeQuest Timing Analyzer ; pcphil           ; Windows XP ; 5.1        ; i1586          ;
-; TimeQuest Timing Analyzer ; pcphil           ; Windows XP ; 5.1        ; i1586          ;
-; TimeQuest Timing Analyzer ; pcphil           ; Windows XP ; 5.1        ; i1586          ;
-; TimeQuest Timing Analyzer ; pcphil           ; Windows XP ; 5.1        ; i1586          ;
-; TimeQuest Timing Analyzer ; pcphil           ; Windows XP ; 5.1        ; i1586          ;
-+---------------------------+------------------+------------+------------+----------------+
++---------------------------------------------------------------------------------------+
+; Flow OS Summary                                                                       ;
++-------------------------+------------------+------------+------------+----------------+
+; Module Name             ; Machine Hostname ; OS Name    ; OS Version ; Processor type ;
++-------------------------+------------------+------------+------------+----------------+
+; Analysis & Synthesis    ; phil             ; Windows XP ; 5.1        ; i686           ;
+; Fitter                  ; phil             ; Windows XP ; 5.1        ; i686           ;
+; Assembler               ; phil             ; Windows XP ; 5.1        ; i686           ;
+; Classic Timing Analyzer ; phil             ; Windows XP ; 5.1        ; i686           ;
+; EDA Netlist Writer      ; phil             ; Windows XP ; 5.1        ; i686           ;
++-------------------------+------------------+------------+------------+----------------+
 
 
 ------------
@@ -143,14 +140,8 @@ applicable agreement for further details.
 quartus_map --read_settings_files=on --write_settings_files=off Penelope -c Penelope
 quartus_fit --read_settings_files=off --write_settings_files=off Penelope -c Penelope
 quartus_asm --read_settings_files=off --write_settings_files=off Penelope -c Penelope
-quartus_sta Penelope -c Penelope
-quartus_sta Penelope -c Penelope
-quartus_sta Penelope -c Penelope
-quartus_sta Penelope -c Penelope
-quartus_sta Penelope -c Penelope
-quartus_sta Penelope -c Penelope
-quartus_sta Penelope -c Penelope
-quartus_sta Penelope -c Penelope
+quartus_tan --read_settings_files=off --write_settings_files=off Penelope -c Penelope --timing_analysis_only
+quartus_eda --read_settings_files=off --write_settings_files=off Penelope -c Penelope
 
 
 
