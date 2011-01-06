@@ -3300,6 +3300,7 @@ namespace PowerSDR
             this.tpGeneralHardware.Size = new System.Drawing.Size(592, 318);
             this.tpGeneralHardware.TabIndex = 0;
             this.tpGeneralHardware.Text = "Hardware Config";
+            this.tpGeneralHardware.Paint += new System.Windows.Forms.PaintEventHandler(this.tpGeneralHardware_Paint);
             // 
             // grpMetisAddr
             // 
@@ -7745,7 +7746,7 @@ namespace PowerSDR
             this.lblRealeaseDate.Name = "lblRealeaseDate";
             this.lblRealeaseDate.Size = new System.Drawing.Size(130, 16);
             this.lblRealeaseDate.TabIndex = 4;
-            this.lblRealeaseDate.Text = "W5WC - 12/31/2010";
+            this.lblRealeaseDate.Text = "W5WC - 1/5/2011";
             // 
             // lblPenelopeFWVer
             // 

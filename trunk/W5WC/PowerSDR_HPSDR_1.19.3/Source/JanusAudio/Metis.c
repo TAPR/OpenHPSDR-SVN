@@ -543,6 +543,7 @@ int SendStartToMetis(void) 	 {
 		if ( MetisLastRecvSeq != starting_seq ) { 
 			break; 
 		} 
+		ForceCandCFrame(); 
 		Sleep(10); 
 		if ( MetisLastRecvSeq != starting_seq ) { 
 			break; 
