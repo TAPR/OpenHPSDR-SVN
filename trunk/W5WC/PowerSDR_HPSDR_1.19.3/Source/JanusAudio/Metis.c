@@ -309,10 +309,10 @@ SOCKET createSocket(int portnum) {
 		printf("getsockname failed\n");
 	} 
 	
-	rc = setsockopt(sock, SOL_SOCKET, SO_BROADCAST, (const char *)&btrue, sizeof(int)); 
-	if ( rc == SOCKET_ERROR ) { 
-		printf("CreateSockets Warning: setsockopt SO_BROADCAST failed!\n"); 
-	}
+	//rc = setsockopt(sock, SOL_SOCKET, SO_BROADCAST, (const char *)&btrue, sizeof(int)); 
+	//if ( rc == SOCKET_ERROR ) { 
+	//	printf("CreateSockets Warning: setsockopt SO_BROADCAST failed!\n"); 
+	//}
 
 	rcv_timeo = 500; 
 	rc = setsockopt(sock, SOL_SOCKET, SO_RCVTIMEO, (const char *)&rcv_timeo, sizeof(int)); 
@@ -361,7 +361,10 @@ SOCKET createSocket(int portnum) {
 	 struct sockaddr_in dest_addr; 
 	 struct sockaddr_in disc_reply_addr; 
 	 int disc_reply_addr_len = sizeof(disc_reply_addr);
+	 int j;	
 	 int btrue = 1; 
+	 unsigned char sigbuf[6] = { 0xba, 0xba, 0xba, 
+								 0xba, 0xba, 0xba }; 
 	 
 
 	 for ( i = 0; i < 250; i++ ) { 
@@ -379,31 +382,36 @@ SOCKET createSocket(int portnum) {
 	 outsock = socket(AF_INET, SOCK_DGRAM, IPPROTO_UDP); 
 	 rc = setsockopt(outsock, SOL_SOCKET, SO_BROADCAST, (const char *)&btrue, sizeof(int)); 
 	 if ( rc == SOCKET_ERROR ) { 
-		printf("CreateSockets Warning: setsockopt SO_BROADCAST failed!\n"); 
+     	printf("CreateSockets Warning: setsockopt SO_BROADCAST failed!\n"); 
 	 }
 
 	 for ( i = 0; i < 5; i++ ) { 
 		sendto(outsock, packetbuf, 17, 0, (SOCKADDR *)&dest_addr, sizeof(dest_addr)); 
 		printf("discovery packet sent\n");  fflush(stdout); 
 
-		rc = recvfrom_withtimeout(discoverySock,  discbuf, sizeof(discbuf), 0, 
-		                           (SOCKADDR *)&disc_reply_addr, &disc_reply_addr_len, 3, 0); 
-		printf("recvfrom_withtimeout rc=%d\n", rc); 
-		if ( rc > 0 ) { 
-			if ( discbuf[0] == 0xef && discbuf[1] == 0xfe && discbuf[2] == 02  ) { 
+		for ( j = 0; j < 2; j++ ) {
+			rc = recvfrom_withtimeout(listenSock,  discbuf, sizeof(discbuf), 0, 
+		                          (SOCKADDR *)&disc_reply_addr, &disc_reply_addr_len, 3, 0); 
+			printf("recvfrom_withtimeout rc=%d\n", rc); 
+			if ( rc > 0 ) { 
+				if ( discbuf[0] == 0xef && discbuf[1] == 0xfe && discbuf[2] == 02  ) { 
+					if ( memcmp(discbuf+3, sigbuf, 6) ==0 ) {
+						printf("ignoring our own broadcast\n"); 
+						continue; 
+					}
+					printf("got good discovery reply\n"); 
+					Dump(stdout, discbuf, rc, "discovery reply"); 
+					memcpy(MetisMACAddr, discbuf+3, 6); /* save off MAC Addr */ 
+					return disc_reply_addr.sin_addr.S_un.S_addr;
 
-				printf("got good discovery reply\n"); 
-				Dump(stdout, discbuf, rc, "discovery reply"); 
-				memcpy(MetisMACAddr, discbuf+3, 6); /* save off MAC Addr */ 
-				return disc_reply_addr.sin_addr.S_un.S_addr;
 
-
-				// return *((u_long *)(&(discbuf[3])));				
-			}
-		} 
-		else { 
-			printf("disc reply rc=%d\n", rc); 
-		} 
+					// return *((u_long *)(&(discbuf[3])));				
+				}
+			} 
+			else { 
+				printf("disc reply rc=%d\n", rc); 
+			} 
+		}
 	 }
 					
 	 fflush(stdout); 
@@ -419,13 +427,13 @@ int WSA_inited = 0;
 KD5TFDVK6APHAUDIO_API void DeInitMetisSockets(void) {
 	if ( listenSock != (SOCKET)0 ) { 
 		shutdown(listenSock, SD_BOTH); 
+		closesocket(listenSock); 
 		listenSock = (SOCKET)0; 
-
 	} 
-	if ( discoverySock != (SOCKET)0) { 
-		shutdown(discoverySock, SD_BOTH); 
-		discoverySock = 0; 
-	} 
+//	if ( discoverySock != (SOCKET)0) { 
+//		shutdown(discoverySock, SD_BOTH); 
+//		discoverySock = 0; 
+//	} 
 }
 
 
@@ -463,19 +471,19 @@ KD5TFDVK6APHAUDIO_API int nativeInitMetis(char *netaddr) {
 		sndbufsize = 10240;
 		rc = setsockopt(listenSock, SOL_SOCKET, SO_SNDBUF, (const char *)&sndbufsize, sizeof(int)); 
 		if ( rc == SOCKET_ERROR ) { 
-			printf("CreateSockets Warning: setsockopt SO_BROADCAST failed!\n"); 
+			printf("CreateSockets Warning: setsockopt SO_SNDBUF failed!\n"); 
 		}
 	}
 
-	if ( discoverySock == (SOCKET)0 ) { 
-
-		discoverySock = createSocket(1025); 
-
-		if ( discoverySock == INVALID_SOCKET ) { 
-			printf("createSocket on discoverySock failed.\n");
-			return -2; 
-		} 
-	}
+//	if ( discoverySock == (SOCKET)0 ) { 
+//
+//		discoverySock = createSocket(1025); 
+//
+//		if ( discoverySock == INVALID_SOCKET ) { 
+//			printf("createSocket on discoverySock failed.\n");
+//			return -2; 
+//		} 
+//	}
 
 
 
@@ -537,19 +545,22 @@ int SendStartToMetis(void) 	 {
 	 packetbuf[3] = 0x01;
 	 
 	 starting_seq = MetisLastRecvSeq;
-	 for ( i = 0; i < 5; i++ ) { 
+	 for ( i = 0; i < 5; i++ ) {
+		/* printf("start sent\n"); */ 
 		sendto(listenSock, packetbuf, sizeof(packetbuf), 0, (SOCKADDR *)&MetisSockAddr, sizeof(MetisSockAddr)); 
 		MetisReadDirect(fbuf, sizeof(fbuf)); 
 		if ( MetisLastRecvSeq != starting_seq ) { 
 			break; 
 		} 
+		/* printf("c&c forced\n");  */ 
 		ForceCandCFrame(); 
 		Sleep(10); 
-		if ( MetisLastRecvSeq != starting_seq ) { 
-			break; 
-		} 
+//		if ( MetisLastRecvSeq != starting_seq ) { 
+//			break; 
+//		} 
 	 }
-	 if ( MetisLastRecvSeq == starting_seq ) {
+	 /* fflush(stdout);  */ 
+	 if ( MetisLastRecvSeq == starting_seq ) {		 
 		 return -1; 
 	 } 
 	 return 0; 
@@ -601,7 +612,7 @@ int MetisReadDirect(char *bufp, int buflen) {
 	rc = recvfrom_withtimeout(listenSock, readbuf, sizeof(readbuf), 0, (struct sockaddr *)&fromaddr, &fromlen, 0, 500000); 
 	/* rc = recvfrom(listenSock, readbuf, sizeof(readbuf), 0, (struct sockaddr *)&fromaddr, &fromlen);  */ 
 	if ( rc < 0 ) {  /* failed */ 
-		printf("recvfrom on listSock failed!\n");  fflush(stdout); 
+		printf("MRD: recvfrom on listSock failed w/ rc=%d!\n", rc);  fflush(stdout); 
 		return rc; 	
 	}
 	/* check frame is from who we expect */ 
@@ -613,7 +624,7 @@ int MetisReadDirect(char *bufp, int buflen) {
 			seqbytep[1] = readbuf[6]; 
 			seqbytep[0] = readbuf[7]; 
 			if ( seqnum != (1 + MetisLastRecvSeq) )  { 
-				printf("seq error this: %d last: %d\n", seqnum, MetisLastRecvSeq); 
+				printf("MRD: seq error this: %d last: %d\n", seqnum, MetisLastRecvSeq); 
 			} 
 			MetisLastRecvSeq = seqnum;
 			if ( endpoint == 6 ) { 
@@ -621,15 +632,15 @@ int MetisReadDirect(char *bufp, int buflen) {
 				return 1024; 
 			}
 			else { 
-				printf("ignoring data for ep %d\n", endpoint); 
+				printf("MRD: ignoring data for ep %d\n", endpoint); 
 			} 
 		} 
 		else { 
-			printf("ignoring right sized frame bad header!\n", rc); 			
+			printf("MRD: ignoring right sized frame bad header!\n", rc); 			
 		} 
 	} 
 	else { 
-		printf("ignoring short frame size=%d\n", rc); 
+		printf("MRD: ignoring short frame size=%d\n", rc); 
 	} 
 	return 0; 
 } 
@@ -760,6 +771,7 @@ int MetisStartReadThread(void) {
 void MetisStopReadThread(void) {
 	SendStopToMetis(); 
 	MetisKeepRunning = 0; 
+	DeInitMetisSockets(); 
 	return; 
 } 
 
