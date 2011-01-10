@@ -491,8 +491,8 @@ cordic_16 tx_cordic
 // Add some gain  before we feed the DAC so we can drive to 1/2W on 6m. This is necessary since the 
 // interpolating CIC has a loss since it does not interpolate by 2^n. 
 
-// assign  DAC[13:0] = {C122_i_out[17], C122_i_out[15:3]};   // use q_out if 90 degree phase shift required by EER Tx etc
-assign DAC[13:0] = C122_i_out[16:3]; // gain of 2, use q_out if 90 degree phase shift required by EER Tx etc 
+assign  DAC[13:0] = {C122_i_out[17], C122_i_out[15:3]};   // use q_out if 90 degree phase shift required by EER Tx etc
+//assign DAC[13:0] = C122_i_out[16:3]; // gain of 2, use q_out if 90 degree phase shift required by EER Tx etc 
 
 /////////////////////////////////////////////////////////////////
 //
@@ -582,14 +582,47 @@ assign Tx_level = 8'd128;
 	01xx  = 122.88MHz source from Mercury 
 	
 */
-wire   [60:0] rcv_data;
+wire   [68:0] rcv_data;				// **** was 60:0
 wire          rcv_rdy;
 
 // get necessary C & C data
 
+//reg         PTT_out;       // PTT to Penelope
+//reg   [3:0] C122_clock_select;  // 10MHz and 122.88MHz clock selection
+//reg   [6:0] OC;            // Open Collector outputs data
+//parameter PENNY_ADDR = 4'b0; // set C&C address that Penny will respond to
+
+//always @ (posedge C122_clk)
+//begin
+//  if (C122_rst)
+//  begin
+//    C122_DFS1         <= 1'b0;   // I/Q sampling rate selection
+//    C122_DFS0         <= 1'b0;
+//    PTT_out           <= 1'b0; 
+//    C122_frequency_HZ <= 32'b0;
+//    C122_clock_select <= 4'b0000;     
+//    OC                <= 7'b0;   // Penelope Open Collectors
+//  end
+//  else if (rcv_rdy)
+//  begin
+//    C122_DFS1    <= rcv_data[60];
+//    C122_DFS0    <= rcv_data[59];
+//    PTT_out      <= rcv_data[58];
+//    if (rcv_data[57:54] == PENNY_ADDR) // check that the C&C data is for this board
+//    begin
+//      C122_frequency_HZ <= rcv_data[53:22];
+//      C122_clock_select <= rcv_data[21:18];     
+//      OC                <= rcv_data[17:11]; // Penelope Open Collectors
+//    end
+//  end
+//end
+
+// new version for PennyLane
+
 reg         PTT_out;       // PTT to Penelope
 reg   [3:0] C122_clock_select;  // 10MHz and 122.88MHz clock selection
 reg   [6:0] OC;            // Open Collector outputs data
+//reg   [7:0] Tx_level;		 // PennyLane power output level
 parameter PENNY_ADDR = 4'b0; // set C&C address that Penny will respond to
 
 always @ (posedge C122_clk)
@@ -602,65 +635,32 @@ begin
     C122_frequency_HZ <= 32'b0;
     C122_clock_select <= 4'b0000;     
     OC                <= 7'b0;   // Penelope Open Collectors
+//    Tx_level 		  <= 8'b0;	// PennyLane power output level
   end
   else if (rcv_rdy)
   begin
-    C122_DFS1    <= rcv_data[60];
-    C122_DFS0    <= rcv_data[59];
-    PTT_out      <= rcv_data[58];
+    C122_DFS1    <= rcv_data[68];
+    C122_DFS0    <= rcv_data[67];
+    PTT_out      <= rcv_data[66];
     if (rcv_data[57:54] == PENNY_ADDR) // check that the C&C data is for this board
     begin
-      C122_frequency_HZ <= rcv_data[53:22];
-      C122_clock_select <= rcv_data[21:18];     
-      OC                <= rcv_data[17:11]; // Penelope Open Collectors
+      C122_frequency_HZ <= rcv_data[61:30];
+      C122_clock_select <= rcv_data[29:26];     
+      OC                <= rcv_data[25:19]; 	// Penelope Open Collectors
+//      Tx_level	    	<= rcv_data[7:0];		// PennyLane power level
     end
   end
 end
 
-// new version for PennyLane
-
-//reg         PTT_out;       // PTT to Penelope
-//reg   [3:0] C122_clock_select;  // 10MHz and 122.88MHz clock selection
-//reg   [6:0] OC;            // Open Collector outputs data
-//reg   [7:0] Tx_level;		 // PennyLane power output level
-//parameter PENNY_ADDR = 4'b0; // set C&C address that Penny will respond to
-//
-//always @ (posedge C122_clk)
-//begin
-//  if (C122_rst)
-//  begin
-//    C122_DFS1         <= 1'b0;   // I/Q sampling rate selection
-//    C122_DFS0         <= 1'b0;
-//    PTT_out           <= 1'b0; 
-//    C122_frequency_HZ <= 32'b0;
-//    C122_clock_select <= 4'b0000;     
-//    OC                <= 7'b0;   // Penelope Open Collectors
-//    Tx_level 			<= 8'b0;	// PennyLane power output level
-//  end
-//  else if (rcv_rdy)
-//  begin
-//    C122_DFS1    <= rcv_data[68];
-//    C122_DFS0    <= rcv_data[67];
-//    PTT_out      <= rcv_data[66];
-//    if (rcv_data[57:54] == PENNY_ADDR) // check that the C&C data is for this board
-//    begin
-//      C122_frequency_HZ <= rcv_data[61:30];
-//      C122_clock_select <= rcv_data[29:26];     
-//      OC                <= rcv_data[25:19]; 	// Penelope Open Collectors
-//      Tx_level	    	<= rcv_data[7:0];	// PennyLane power level
-//    end
-//  end
-//end
-
-//NWire_rcv  #(.DATA_BITS(69), .ICLK_FREQ(122880000), .XCLK_FREQ(122880000), .SLOWEST_FREQ(500)) 
-//      CCrcv (.irst(C122_rst), .iclk(C122_clk), .xrst(C122_rst), .xclk(C122_clk),
-//             .xrcv_data(rcv_data), .xrcv_rdy(rcv_rdy), .xrcv_ack(rcv_rdy), .din(CC));
-
-
-
-NWire_rcv  #(.DATA_BITS(61), .ICLK_FREQ(122880000), .XCLK_FREQ(122880000), .SLOWEST_FREQ(500)) 
+NWire_rcv  #(.DATA_BITS(69), .ICLK_FREQ(122880000), .XCLK_FREQ(122880000), .SLOWEST_FREQ(500)) 
       CCrcv (.irst(C122_rst), .iclk(C122_clk), .xrst(C122_rst), .xclk(C122_clk),
              .xrcv_data(rcv_data), .xrcv_rdy(rcv_rdy), .xrcv_ack(rcv_rdy), .din(CC));
+
+
+
+//NWire_rcv  #(.DATA_BITS(61), .ICLK_FREQ(122880000), .XCLK_FREQ(122880000), .SLOWEST_FREQ(500)) 
+//      CCrcv (.irst(C122_rst), .iclk(C122_clk), .xrst(C122_rst), .xclk(C122_clk),
+//             .xrcv_data(rcv_data), .xrcv_rdy(rcv_rdy), .xrcv_ack(rcv_rdy), .din(CC));
 
 // if set use internal 10MHz TCXO and send to C16 else get from C16
 assign ref_ext        = C122_clock_select[0];
@@ -800,7 +800,23 @@ assign LED4 = (AIN5 > 1000)? 1'b0 : 1'b1;
 assign LED5 = (AIN5 > 2000)? 1'b0 : 1'b1;  
 assign LED6 = (AIN5 > 3000)? 1'b0 : 1'b1;  
 
-assign LED7 = 0;    // LED7 ON so we can see code has loaded OK 
+//assign LED7 = 0;    // LED7 ON so we can see code has loaded OK 
+// blink - fast when PTT active
+//assign LED2 = source_122MHZ; //LVDSTXE;
+//assign LED3 = C122_clock_select[2]; //nLVDSRXE;
+//assign LED4 = LVDSTXE; //C122_clock_select[1];
+//assign LED5 = PLL_locked; //C122_clock_select[0]; //source_122MHZ;
+
+
+reg[26:0]counter;
+always @(posedge C122_clk) counter = counter + 1'b1;
+assign LED7 = PTT_out ? counter[24] : counter[26];  // LED 7 flashes twice as fast when PTT active.
+
+//reg[22:0]count_10;
+//always @(posedge ext_10MHZ) count_10 = count_10 + 1'b1;
+//assign LED6 = count_10[22];
+
+
 
 // User open collector outputs 
 assign USEROUT0 = OC[0];
