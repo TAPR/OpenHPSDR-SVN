@@ -1,13 +1,13 @@
-/* Quartus II Version 10.1 Build 153 11/29/2010 SJ Web Edition */
+/* Quartus II Version 9.1 Build 350 03/24/2010 Service Pack 2 SJ Web Edition */
 JedecChain;
 	FileRevision(JESD32A);
 	DefaultMfr(6E);
 
-	P ActionCode(Ign)
-		Device PartName(EPCS4) MfrSpec(OpMask(0) Child_OpMask(1 1) FullPath("O:/HPSDR/trunk/Penelope V1.3/Penelope.pof"));
+	P ActionCode(Cfg)
+		Device PartName(EP2C8Q208) Path("C:/HPSDR/trunk/Penelope V1.3/") File("Penelope.sof") MfrSpec(OpMask(1));
 
 ChainEnd;
 
 AlteraBegin;
-	ChainType(asc);
+	ChainType(JTAG);
 AlteraEnd;
