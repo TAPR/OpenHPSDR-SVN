@@ -32,6 +32,9 @@
 
 // NOTE: the data to send is latched on the positive edge of lrclk
 
+
+`timescale 1ns/100ps 
+
 module I2S_xmit (rst, lrclk, clk, CBrise, CBfall, sample, outbit, xmit_rdy, xmit_ack);
 
 parameter DATA_BITS = 32; // MUST be an even number

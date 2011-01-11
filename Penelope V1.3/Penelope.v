@@ -50,16 +50,18 @@
 			  - Change DAC to DAC[13:0] = C122_i_out[16:3];
 
 
-  4 Jan 1011 - Added support for PennyLane, common code for both boards. Penelope
+  4 Jan 2011 - Added support for PennyLane, common code for both boards. Penelope
                 will ignore the signal on DAC_ALC.
                 Tx_level is set to 128 for testing.
+ 11 Jan 2011 - Drive_Level sent from Ozy using nWire via Atlas_C18
+             -  *** set pin for C16 and Drive_Level is set to 128 for testing  *****
   
 */
 
 
 /*
   IMPORTANT:  In Analysis and Synthesis Settings make sure Power-Up Don't Care is NOT checked.
-  Built with Quartus V10.1
+  Built with Quartus V9.1sp2
 */
 
 //    Atlas bus
@@ -67,7 +69,8 @@
 //    Pin   Signal    Function
 //    A11   CDOUT_P   mic data to Ozy
 //    C12   J_CDIN    I2S I&Q data from Ozy to Janus
-//    C19   P_CDIN    NWire I&Q data from Ozy to Penelope
+//    C18             nWire Drive_Level from Ozy for PennyLane
+//    C19   P_CDIN    nWire I&Q data from Ozy to Penelope
 //    C22   M_LR_clk  from Mercury to Ozy
 //    C23   P_IQ_sync  from Penelope to Ozy
 //    C20   CC        Command and Control data from Ozy       
@@ -76,7 +79,7 @@
 
 
 module Penelope (
-        _10MHZ,ext_10MHZ,C122_clk,A11,C19,C22,LED2,LED3,LED4,LED5,LED6,LED7,
+        _10MHZ,ext_10MHZ,C122_clk,A11,C18, C19,C22,LED2,LED3,LED4,LED5,LED6,LED7,
         USEROUT0,USEROUT1,USEROUT2,USEROUT3,USEROUT4,USEROUT5,USEROUT6,DAC,nLVDSRXE,LVDSTXE,
         FPGA_PLL,PTT,PTT_in,nCS,CMODE,TLV320_CDIN,TLV320_CDOUT,TLV320_CBCLK,TLV320_CLRCIN,TLV320_CLRCOUT,TLV320_CMCLK,
         CC, ADCMOSI,ADCCLK,ADCMISO,nADCCS,PWM0,PWM1,PWM2,FPGA_PTT,A5, DAC_ALC
@@ -86,6 +89,7 @@ input  wire _10MHZ;
 inout  tri  ext_10MHZ;  // 10MHz reference to Atlas pin C16
 input  wire C122_clk;
 output wire A11;        // CDOUT_P (Mic) to Atlas bus 
+input  wire C18;		// nWire Drive_Level from Ozy for PennyLane
 input  wire C19;        // P_IQ_data (NWire I&Q) from Ozy
 output wire C22;        // P_IQ_sync from Penelope to Ozy
 output wire LED2;
@@ -524,20 +528,31 @@ assign PWM0 = PWM0_accumulator[16];       // send to PWM LPFs for now
 assign PWM1 = PWM1_accumulator[16]; 
 assign PWM2 = PWM2_accumulator[16]; 
 
+//-----------------------------------------------------------
+//  Get Drive_Level (PennyLane only)
+//-----------------------------------------------------------
+
+wire drive_rdy;
+wire [7:0] Drive_Level; 	// Tx drive level
+
+NWire_rcv  #(.DATA_BITS(8), .ICLK_FREQ(122880000), .XCLK_FREQ(122880000), .SLOWEST_FREQ(1000)) 
+      p_ser (.irst(C122_rst), .iclk(C122_clk), .xrst(C122_rst), .xclk(C122_clk),
+             .xrcv_data(/*Drive_Level*/), .xrcv_rdy(drive_rdy), .xrcv_ack(drive_rdy), .din(C18));
+
 
 //------------------------------------------------------------
 //  Set Power Output (PennyLane only)
 //------------------------------------------------------------
 
 // PWM DAC to set drive current to DAC on PennyLane. PWM_count increments 
-// using C122_clk. If the count is less than the drive 
-// level set by the PC then DAC_ALC will be high, otherwise low.  
+// using C122_clk. If the count is less than the Drive 
+// Level set by the PC then DAC_ALC will be high, otherwise low.  
 
 reg [7:0] PWM_count;
 always @ (posedge C122_clk)
 begin 
 	PWM_count <= PWM_count + 1'b1;
-	if (Tx_level >= PWM_count)
+	if (Drive_Level >= PWM_count)
 		DAC_ALC <= 1'b1;
 	else 
 		DAC_ALC <= 1'b0;
@@ -545,8 +560,7 @@ end
 
 
 //for testing set the drive control to mid way.
-wire [7:0] Tx_level; // Tx drive level
-assign Tx_level = 8'd128;
+assign Drive_Level = 8'd128;
 
 ///////////////////////////////////////////////////////////
 //
@@ -562,16 +576,9 @@ assign Tx_level = 8'd128;
 	<[60:59]DFS1,DFS0><[58]PTT><[57:54]address><[53:22]frequency><[21:18]clock_select><[17:11]OC>
 	<[10]Mode><[9]PGA><[8]DITHER><[7]RAND><[6:5]ATTEN><[4:3]TX_relay><[2]Rout><[1:0]RX_relay> 
 	
-	****new format for PennyLane support
-	
-	<[68:67]DFS1,DFS0><[66]PTT><[65:62]address><[61:30]frequency><[29:26]clock_select><[25:19]OC>
-	<[18]Mode><[17]PGA><[16]DITHER><[15]RAND><[14:13]ATTEN><[12:11]TX_relay><[10]Rout><[9:8]RX_relay><[7:0]Tx_level>
-	
-		
-	for a total of 69 bits. Frequency is in Hz and 32 bit binary format and 
+	for a total of 61 bits. Frequency is in Hz and 32 bit binary format and 
 	OC is the open collector data on Penelope. Mode is for a future Class E PA,
 	PGA, DITHER and RAND are ADC settings and ATTEN the attenuator on Alex. 
-	Tx_level is used by PennyLane only and sets the output power level.
 	
 	The clock source (clock_select) decodes as follows:
 	
@@ -582,47 +589,14 @@ assign Tx_level = 8'd128;
 	01xx  = 122.88MHz source from Mercury 
 	
 */
-wire   [68:0] rcv_data;				// **** was 60:0
+wire   [60:0] rcv_data;				
 wire          rcv_rdy;
 
 // get necessary C & C data
 
-//reg         PTT_out;       // PTT to Penelope
-//reg   [3:0] C122_clock_select;  // 10MHz and 122.88MHz clock selection
-//reg   [6:0] OC;            // Open Collector outputs data
-//parameter PENNY_ADDR = 4'b0; // set C&C address that Penny will respond to
-
-//always @ (posedge C122_clk)
-//begin
-//  if (C122_rst)
-//  begin
-//    C122_DFS1         <= 1'b0;   // I/Q sampling rate selection
-//    C122_DFS0         <= 1'b0;
-//    PTT_out           <= 1'b0; 
-//    C122_frequency_HZ <= 32'b0;
-//    C122_clock_select <= 4'b0000;     
-//    OC                <= 7'b0;   // Penelope Open Collectors
-//  end
-//  else if (rcv_rdy)
-//  begin
-//    C122_DFS1    <= rcv_data[60];
-//    C122_DFS0    <= rcv_data[59];
-//    PTT_out      <= rcv_data[58];
-//    if (rcv_data[57:54] == PENNY_ADDR) // check that the C&C data is for this board
-//    begin
-//      C122_frequency_HZ <= rcv_data[53:22];
-//      C122_clock_select <= rcv_data[21:18];     
-//      OC                <= rcv_data[17:11]; // Penelope Open Collectors
-//    end
-//  end
-//end
-
-// new version for PennyLane
-
 reg         PTT_out;       // PTT to Penelope
 reg   [3:0] C122_clock_select;  // 10MHz and 122.88MHz clock selection
 reg   [6:0] OC;            // Open Collector outputs data
-//reg   [7:0] Tx_level;		 // PennyLane power output level
 parameter PENNY_ADDR = 4'b0; // set C&C address that Penny will respond to
 
 always @ (posedge C122_clk)
@@ -635,32 +609,25 @@ begin
     C122_frequency_HZ <= 32'b0;
     C122_clock_select <= 4'b0000;     
     OC                <= 7'b0;   // Penelope Open Collectors
-//    Tx_level 		  <= 8'b0;	// PennyLane power output level
   end
   else if (rcv_rdy)
   begin
-    C122_DFS1    <= rcv_data[68];
-    C122_DFS0    <= rcv_data[67];
-    PTT_out      <= rcv_data[66];
+    C122_DFS1    <= rcv_data[60];
+    C122_DFS0    <= rcv_data[59];
+    PTT_out      <= rcv_data[58];
     if (rcv_data[57:54] == PENNY_ADDR) // check that the C&C data is for this board
     begin
-      C122_frequency_HZ <= rcv_data[61:30];
-      C122_clock_select <= rcv_data[29:26];     
-      OC                <= rcv_data[25:19]; 	// Penelope Open Collectors
-//      Tx_level	    	<= rcv_data[7:0];		// PennyLane power level
+      C122_frequency_HZ <= rcv_data[53:22];
+      C122_clock_select <= rcv_data[21:18];     
+      OC                <= rcv_data[17:11]; // Penelope Open Collectors
     end
   end
 end
 
-NWire_rcv  #(.DATA_BITS(69), .ICLK_FREQ(122880000), .XCLK_FREQ(122880000), .SLOWEST_FREQ(500)) // **** 5000 or 10000 in other code
+
+NWire_rcv  #(.DATA_BITS(61), .ICLK_FREQ(122880000), .XCLK_FREQ(122880000), .SLOWEST_FREQ(500)) 
       CCrcv (.irst(C122_rst), .iclk(C122_clk), .xrst(C122_rst), .xclk(C122_clk),
              .xrcv_data(rcv_data), .xrcv_rdy(rcv_rdy), .xrcv_ack(rcv_rdy), .din(CC));
-
-
-
-//NWire_rcv  #(.DATA_BITS(61), .ICLK_FREQ(122880000), .XCLK_FREQ(122880000), .SLOWEST_FREQ(500)) 
-//      CCrcv (.irst(C122_rst), .iclk(C122_clk), .xrst(C122_rst), .xclk(C122_clk),
-//             .xrcv_data(rcv_data), .xrcv_rdy(rcv_rdy), .xrcv_ack(rcv_rdy), .din(CC));
 
 // if set use internal 10MHz TCXO and send to C16 else get from C16
 assign ref_ext        = C122_clock_select[0];

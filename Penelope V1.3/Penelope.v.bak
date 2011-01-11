@@ -50,9 +50,10 @@
 			  - Change DAC to DAC[13:0] = C122_i_out[16:3];
 
 
-  4 Jan 1011 - Added support for PennyLane, common code for both boards. Penelope
+  4 Jan 2011 - Added support for PennyLane, common code for both boards. Penelope
                 will ignore the signal on DAC_ALC.
                 Tx_level is set to 128 for testing.
+ 11 Jan 2011 - Drive_Level sent from Ozy using nWire via Atlas_C18
   
 */
 
@@ -67,6 +68,7 @@
 //    Pin   Signal    Function
 //    A11   CDOUT_P   mic data to Ozy
 //    C12   J_CDIN    I2S I&Q data from Ozy to Janus
+//    C18             nWire Drive_Level from Ozy for PennyLane
 //    C19   P_CDIN    NWire I&Q data from Ozy to Penelope
 //    C22   M_LR_clk  from Mercury to Ozy
 //    C23   P_IQ_sync  from Penelope to Ozy
@@ -76,7 +78,7 @@
 
 
 module Penelope (
-        _10MHZ,ext_10MHZ,C122_clk,A11,C19,C22,LED2,LED3,LED4,LED5,LED6,LED7,
+        _10MHZ,ext_10MHZ,C122_clk,A11,C18, C19,C22,LED2,LED3,LED4,LED5,LED6,LED7,
         USEROUT0,USEROUT1,USEROUT2,USEROUT3,USEROUT4,USEROUT5,USEROUT6,DAC,nLVDSRXE,LVDSTXE,
         FPGA_PLL,PTT,PTT_in,nCS,CMODE,TLV320_CDIN,TLV320_CDOUT,TLV320_CBCLK,TLV320_CLRCIN,TLV320_CLRCOUT,TLV320_CMCLK,
         CC, ADCMOSI,ADCCLK,ADCMISO,nADCCS,PWM0,PWM1,PWM2,FPGA_PTT,A5, DAC_ALC
@@ -86,6 +88,7 @@ input  wire _10MHZ;
 inout  tri  ext_10MHZ;  // 10MHz reference to Atlas pin C16
 input  wire C122_clk;
 output wire A11;        // CDOUT_P (Mic) to Atlas bus 
+input  wire C18;		// nWire Drive_Level from Ozy for PennyLane
 input  wire C19;        // P_IQ_data (NWire I&Q) from Ozy
 output wire C22;        // P_IQ_sync from Penelope to Ozy
 output wire LED2;
@@ -524,20 +527,30 @@ assign PWM0 = PWM0_accumulator[16];       // send to PWM LPFs for now
 assign PWM1 = PWM1_accumulator[16]; 
 assign PWM2 = PWM2_accumulator[16]; 
 
+//-----------------------------------------------------------
+//  Get Drive_Level (PennyLane only)
+//-----------------------------------------------------------
+
+wire drive_rdy;
+
+NWire_rcv  #(.DATA_BITS(8), .ICLK_FREQ(122880000), .XCLK_FREQ(122880000), .SLOWEST_FREQ(1000)) 
+      p_ser (.irst(C122_rst), .iclk(C122_clk), .xrst(C122_rst), .xclk(C122_clk),
+             .xrcv_data(Drive_Level), .xrcv_rdy(drive_rdy), .xrcv_ack(drive_rdy), .din(C18));
+
 
 //------------------------------------------------------------
 //  Set Power Output (PennyLane only)
 //------------------------------------------------------------
 
 // PWM DAC to set drive current to DAC on PennyLane. PWM_count increments 
-// using C122_clk. If the count is less than the drive 
-// level set by the PC then DAC_ALC will be high, otherwise low.  
+// using C122_clk. If the count is less than the Drive 
+// Level set by the PC then DAC_ALC will be high, otherwise low.  
 
 reg [7:0] PWM_count;
 always @ (posedge C122_clk)
 begin 
 	PWM_count <= PWM_count + 1'b1;
-	if (Tx_level >= PWM_count)
+	if (Drive_Level >= PWM_count)
 		DAC_ALC <= 1'b1;
 	else 
 		DAC_ALC <= 1'b0;
@@ -545,8 +558,8 @@ end
 
 
 //for testing set the drive control to mid way.
-wire [7:0] Tx_level; // Tx drive level
-assign Tx_level = 8'd128;
+wire [7:0] Drive_Level; // Tx drive level
+assign Drive_Level = 8'd128;
 
 ///////////////////////////////////////////////////////////
 //
@@ -652,7 +665,7 @@ begin
   end
 end
 
-NWire_rcv  #(.DATA_BITS(69), .ICLK_FREQ(122880000), .XCLK_FREQ(122880000), .SLOWEST_FREQ(500)) 
+NWire_rcv  #(.DATA_BITS(69), .ICLK_FREQ(122880000), .XCLK_FREQ(122880000), .SLOWEST_FREQ(500)) // **** 5000 or 10000 in other code
       CCrcv (.irst(C122_rst), .iclk(C122_clk), .xrst(C122_rst), .xclk(C122_clk),
              .xrcv_data(rcv_data), .xrcv_rdy(rcv_rdy), .xrcv_ack(rcv_rdy), .din(CC));
 
