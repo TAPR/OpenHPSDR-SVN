@@ -1,5 +1,5 @@
 EDA Netlist Writer report for Ozy_Janus
-Mon Jan 10 20:51:58 2011
+Tue Jan 11 15:04:32 2011
 Quartus II Version 9.1 Build 350 03/24/2010 Service Pack 2 SJ Web Edition
 
 
@@ -36,7 +36,7 @@ applicable agreement for further details.
 +-------------------------------------------------------------------+
 ; EDA Netlist Writer Summary                                        ;
 +---------------------------+---------------------------------------+
-; EDA Netlist Writer Status ; Successful - Mon Jan 10 20:51:58 2011 ;
+; EDA Netlist Writer Status ; Successful - Tue Jan 11 15:04:32 2011 ;
 ; Revision Name             ; Ozy_Janus                             ;
 ; Top-level Entity Name     ; Ozy_Janus                             ;
 ; Family                    ; Cyclone II                            ;
@@ -66,16 +66,16 @@ applicable agreement for further details.
 +---------------------------------------------------------------------------------------------------+--------------------+
 
 
-+------------------------------------------------------------------+
-; Simulation Generated Files                                       ;
-+------------------------------------------------------------------+
-; Generated Files                                                  ;
-+------------------------------------------------------------------+
-; C:/HPSDR/trunk/Ozy V1.8/simulation/modelsim/Ozy_Janus.vo         ;
-; C:/HPSDR/trunk/Ozy V1.8/simulation/modelsim/Ozy_Janus_fast.vo    ;
-; C:/HPSDR/trunk/Ozy V1.8/simulation/modelsim/Ozy_Janus_v.sdo      ;
-; C:/HPSDR/trunk/Ozy V1.8/simulation/modelsim/Ozy_Janus_v_fast.sdo ;
-+------------------------------------------------------------------+
++-------------------------------------------------------------------+
+; Simulation Generated Files                                        ;
++-------------------------------------------------------------------+
+; Generated Files                                                   ;
++-------------------------------------------------------------------+
+; O:/HPSDR/trunk/Ozy V1.8a/simulation/modelsim/Ozy_Janus.vo         ;
+; O:/HPSDR/trunk/Ozy V1.8a/simulation/modelsim/Ozy_Janus_fast.vo    ;
+; O:/HPSDR/trunk/Ozy V1.8a/simulation/modelsim/Ozy_Janus_v.sdo      ;
+; O:/HPSDR/trunk/Ozy V1.8a/simulation/modelsim/Ozy_Janus_v_fast.sdo ;
++-------------------------------------------------------------------+
 
 
 +-----------------------------+
@@ -84,15 +84,15 @@ applicable agreement for further details.
 Info: *******************************************************************
 Info: Running Quartus II EDA Netlist Writer
     Info: Version 9.1 Build 350 03/24/2010 Service Pack 2 SJ Web Edition
-    Info: Processing started: Mon Jan 10 20:51:53 2011
+    Info: Processing started: Tue Jan 11 15:04:23 2011
 Info: Command: quartus_eda --read_settings_files=off --write_settings_files=off Ozy_Janus -c Ozy_Janus
 Warning: An incorrect timescale is selected for the Verilog Output (.VO) file of this PLL design. It's required that the timescale should be 1 ps when simulating a PLL design in a third party EDA tool.
 Warning: An incorrect timescale is selected for the Verilog Output (.VO) file of this PLL design. It's required that the timescale should be 1 ps when simulating a PLL design in a third party EDA tool.
-Info: Generated files "Ozy_Janus.vo", "Ozy_Janus_fast.vo", "Ozy_Janus_v.sdo" and "Ozy_Janus_v_fast.sdo" in directory "C:/HPSDR/trunk/Ozy V1.8/simulation/modelsim/" for EDA simulation tool
+Info: Generated files "Ozy_Janus.vo", "Ozy_Janus_fast.vo", "Ozy_Janus_v.sdo" and "Ozy_Janus_v_fast.sdo" in directory "O:/HPSDR/trunk/Ozy V1.8a/simulation/modelsim/" for EDA simulation tool
 Info: Quartus II EDA Netlist Writer was successful. 0 errors, 2 warnings
-    Info: Peak virtual memory: 185 megabytes
-    Info: Processing ended: Mon Jan 10 20:51:58 2011
-    Info: Elapsed time: 00:00:05
-    Info: Total CPU time (on all processors): 00:00:06
+    Info: Peak virtual memory: 184 megabytes
+    Info: Processing ended: Tue Jan 11 15:04:33 2011
+    Info: Elapsed time: 00:00:10
+    Info: Total CPU time (on all processors): 00:00:08
 
 

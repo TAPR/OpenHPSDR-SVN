@@ -1,5 +1,5 @@
 Assembler report for Ozy_Janus
-Mon Jan 10 20:51:43 2011
+Tue Jan 11 15:04:06 2011
 Quartus II Version 9.1 Build 350 03/24/2010 Service Pack 2 SJ Web Edition
 
 
@@ -10,9 +10,9 @@ Quartus II Version 9.1 Build 350 03/24/2010 Service Pack 2 SJ Web Edition
   2. Assembler Summary
   3. Assembler Settings
   4. Assembler Generated Files
-  5. Assembler Device Options: C:/HPSDR/trunk/Ozy V1.8/Ozy_Janus.sof
-  6. Assembler Device Options: C:/HPSDR/trunk/Ozy V1.8/Ozy_Janus.pof
-  7. Assembler Device Options: C:/HPSDR/trunk/Ozy V1.8/Ozy_Janus.rbf
+  5. Assembler Device Options: O:/HPSDR/trunk/Ozy V1.8a/Ozy_Janus.sof
+  6. Assembler Device Options: O:/HPSDR/trunk/Ozy V1.8a/Ozy_Janus.pof
+  7. Assembler Device Options: O:/HPSDR/trunk/Ozy V1.8a/Ozy_Janus.rbf
   8. Assembler Messages
 
 
@@ -39,7 +39,7 @@ applicable agreement for further details.
 +---------------------------------------------------------------+
 ; Assembler Summary                                             ;
 +-----------------------+---------------------------------------+
-; Assembler Status      ; Successful - Mon Jan 10 20:51:43 2011 ;
+; Assembler Status      ; Successful - Tue Jan 11 15:04:05 2011 ;
 ; Revision Name         ; Ozy_Janus                             ;
 ; Top-level Entity Name ; Ozy_Janus                             ;
 ; Family                ; Cyclone II                            ;
@@ -79,48 +79,48 @@ applicable agreement for further details.
 +-----------------------------------------------------------------------------+----------+---------------+
 
 
-+---------------------------------------+
-; Assembler Generated Files             ;
-+---------------------------------------+
-; File Name                             ;
-+---------------------------------------+
-; C:/HPSDR/trunk/Ozy V1.8/Ozy_Janus.sof ;
-; C:/HPSDR/trunk/Ozy V1.8/Ozy_Janus.pof ;
-; C:/HPSDR/trunk/Ozy V1.8/Ozy_Janus.rbf ;
-+---------------------------------------+
++----------------------------------------+
+; Assembler Generated Files              ;
++----------------------------------------+
+; File Name                              ;
++----------------------------------------+
+; O:/HPSDR/trunk/Ozy V1.8a/Ozy_Janus.sof ;
+; O:/HPSDR/trunk/Ozy V1.8a/Ozy_Janus.pof ;
+; O:/HPSDR/trunk/Ozy V1.8a/Ozy_Janus.rbf ;
++----------------------------------------+
 
 
-+-----------------------------------------------------------------+
-; Assembler Device Options: C:/HPSDR/trunk/Ozy V1.8/Ozy_Janus.sof ;
-+----------------+------------------------------------------------+
-; Option         ; Setting                                        ;
-+----------------+------------------------------------------------+
-; Device         ; EP2C8Q208C8                                    ;
-; JTAG usercode  ; 0xFFFFFFFF                                     ;
-; Checksum       ; 0x004818C3                                     ;
-+----------------+------------------------------------------------+
++------------------------------------------------------------------+
+; Assembler Device Options: O:/HPSDR/trunk/Ozy V1.8a/Ozy_Janus.sof ;
++----------------+-------------------------------------------------+
+; Option         ; Setting                                         ;
++----------------+-------------------------------------------------+
+; Device         ; EP2C8Q208C8                                     ;
+; JTAG usercode  ; 0xFFFFFFFF                                      ;
+; Checksum       ; 0x00481F69                                      ;
++----------------+-------------------------------------------------+
 
 
-+-----------------------------------------------------------------+
-; Assembler Device Options: C:/HPSDR/trunk/Ozy V1.8/Ozy_Janus.pof ;
-+--------------------+--------------------------------------------+
-; Option             ; Setting                                    ;
-+--------------------+--------------------------------------------+
-; Device             ; EPCS4                                      ;
-; JTAG usercode      ; 0x00000000                                 ;
-; Checksum           ; 0x06A94D64                                 ;
-; Compression Ratio  ; 2                                          ;
-+--------------------+--------------------------------------------+
++------------------------------------------------------------------+
+; Assembler Device Options: O:/HPSDR/trunk/Ozy V1.8a/Ozy_Janus.pof ;
++--------------------+---------------------------------------------+
+; Option             ; Setting                                     ;
++--------------------+---------------------------------------------+
+; Device             ; EPCS4                                       ;
+; JTAG usercode      ; 0x00000000                                  ;
+; Checksum           ; 0x06A9BD7E                                  ;
+; Compression Ratio  ; 2                                           ;
++--------------------+---------------------------------------------+
 
 
-+-----------------------------------------------------------------+
-; Assembler Device Options: C:/HPSDR/trunk/Ozy V1.8/Ozy_Janus.rbf ;
-+---------------------+-------------------------------------------+
-; Option              ; Setting                                   ;
-+---------------------+-------------------------------------------+
-; Raw Binary File     ;                                           ;
-;  Compression Ratio  ; 2                                         ;
-+---------------------+-------------------------------------------+
++------------------------------------------------------------------+
+; Assembler Device Options: O:/HPSDR/trunk/Ozy V1.8a/Ozy_Janus.rbf ;
++---------------------+--------------------------------------------+
+; Option              ; Setting                                    ;
++---------------------+--------------------------------------------+
+; Raw Binary File     ;                                            ;
+;  Compression Ratio  ; 2                                          ;
++---------------------+--------------------------------------------+
 
 
 +--------------------+
@@ -129,14 +129,14 @@ applicable agreement for further details.
 Info: *******************************************************************
 Info: Running Quartus II Assembler
     Info: Version 9.1 Build 350 03/24/2010 Service Pack 2 SJ Web Edition
-    Info: Processing started: Mon Jan 10 20:51:41 2011
+    Info: Processing started: Tue Jan 11 15:04:02 2011
 Info: Command: quartus_asm --read_settings_files=off --write_settings_files=off Ozy_Janus -c Ozy_Janus
 Info: Writing out detailed assembly data for power analysis
 Info: Assembler is generating device programming files
 Info: Quartus II Assembler was successful. 0 errors, 0 warnings
     Info: Peak virtual memory: 169 megabytes
-    Info: Processing ended: Mon Jan 10 20:51:43 2011
-    Info: Elapsed time: 00:00:02
+    Info: Processing ended: Tue Jan 11 15:04:06 2011
+    Info: Elapsed time: 00:00:04
     Info: Total CPU time (on all processors): 00:00:02
 
 
