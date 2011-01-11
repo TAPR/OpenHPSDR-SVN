@@ -224,6 +224,7 @@ set_location_assignment PIN_138 -to MDOUT[0]
 set_location_assignment PIN_139 -to MDOUT[1]
 set_location_assignment PIN_141 -to MDOUT[2]
 set_global_assignment -name MISC_FILE "C:/HPSDR/trunk/Ozy V1.7/Ozy_Janus.dpf"
-set_global_assignment -name USE_CONFIGURATION_DEVICE ON
 set_global_assignment -name MISC_FILE "O:/HPSDR/trunk/Ozy V1.8a/Ozy_Janus.dpf"
 set_global_assignment -name RESERVE_ALL_UNUSED_PINS_NO_OUTPUT_GND "AS INPUT TRI-STATED"
+set_location_assignment PIN_176 -to C18
+set_global_assignment -name MISC_FILE "C:/HPSDR/trunk/Ozy V1.8a/Ozy_Janus.dpf"

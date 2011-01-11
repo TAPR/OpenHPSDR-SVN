@@ -122,7 +122,7 @@
 //                 Note: currently only support for 3 channels but support is in place to increase to 8
 //              3. Temporarily changed back to Async_usb
 // Sept 26,2009 - release as V1.7
-// Jan  10,2011 - Added support for PennyLand. Use Atlas_C18 for nWire Tx with Tx_level
+// Jan  10,2011 - Added support for PennyLand. Use Atlas_C18 for nWire Tx with Drive_Level
 //
 ////////////////////////////////////////////////////////////
 
@@ -1291,7 +1291,7 @@ I2S_xmit #(.DATA_BITS(32))
 	For the present for use with Mercury and Penelope the address is ignored. 
 
 */
-wire [68:0] IF_xmit_data;
+wire [60:0] IF_xmit_data;
 reg   [3:0] CC_address;     // C&C address  0 - 8 
 wire        IF_CC_rdy, IF_CC_pulse;
 

@@ -239,7 +239,7 @@ module Ozy_Janus(
 parameter M_TPD   = 4;
 parameter IF_TPD  = 2;
 
-localparam Ozy_serialno = 8'd17;	// Serial number of this version
+localparam Ozy_serialno = 8'd18;	// Serial number of this version
 localparam NR = 3;                  //Maximum number of Mercury receiver channels
 
 localparam RX_FIFO_SZ  = 2048; // 16 by 2048 deep RX FIFO
