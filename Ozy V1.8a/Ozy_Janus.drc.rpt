@@ -1,5 +1,5 @@
 Design Assistant report for Ozy_Janus
-Tue Jan 11 15:04:21 2011
+Tue Jan 11 16:19:34 2011
 Quartus II Version 9.1 Build 350 03/24/2010 Service Pack 2 SJ Web Edition
 
 
@@ -38,7 +38,7 @@ applicable agreement for further details.
 +-------------------------------------------------------------------------+
 ; Design Assistant Summary                                                ;
 +-----------------------------------+-------------------------------------+
-; Design Assistant Status           ; Analyzed - Tue Jan 11 15:04:21 2011 ;
+; Design Assistant Status           ; Analyzed - Tue Jan 11 16:19:33 2011 ;
 ; Revision Name                     ; Ozy_Janus                           ;
 ; Top-level Entity Name             ; Ozy_Janus                           ;
 ; Family                            ; Cyclone II                          ;
@@ -443,7 +443,7 @@ applicable agreement for further details.
 Info: *******************************************************************
 Info: Running Quartus II Design Assistant
     Info: Version 9.1 Build 350 03/24/2010 Service Pack 2 SJ Web Edition
-    Info: Processing started: Tue Jan 11 15:04:16 2011
+    Info: Processing started: Tue Jan 11 16:19:28 2011
 Info: Command: quartus_drc --read_settings_files=off --write_settings_files=off Ozy_Janus -c Ozy_Janus
 Critical Warning: (High) Rule D101: Data bits are not synchronized when transferred between asynchronous clock domains. (Value defined:2). Found 73 asynchronous clock domain interface structure(s) related to this rule.
     Critical Warning: Node  "cdc_sync:cdc_jrdy|sigb[0]"
@@ -548,8 +548,8 @@ Info: (Information) Rule T102: Top nodes with the highest number of fan-outs. (V
 Info: Design Assistant information: finished post-fitting analysis of current design -- generated 102 information messages and 76 warning messages
 Info: Quartus II Design Assistant was successful. 0 errors, 35 warnings
     Info: Peak virtual memory: 155 megabytes
-    Info: Processing ended: Tue Jan 11 15:04:21 2011
-    Info: Elapsed time: 00:00:05
+    Info: Processing ended: Tue Jan 11 16:19:34 2011
+    Info: Elapsed time: 00:00:06
     Info: Total CPU time (on all processors): 00:00:05
 
 

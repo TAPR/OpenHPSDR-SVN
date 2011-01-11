@@ -122,7 +122,7 @@
 //                 Note: currently only support for 3 channels but support is in place to increase to 8
 //              3. Temporarily changed back to Async_usb
 // Sept 26,2009 - release as V1.7
-// Jan  10,2011 - Added support for PennyLand. Added Drive_Level to C&C data.
+// Jan  10,2011 - Added support for PennyLand. Use Atlas_C18 for nWire Tx with Tx_level
 //
 ////////////////////////////////////////////////////////////
 
@@ -230,7 +230,7 @@
 
 module Ozy_Janus(
         IF_clk, FX2_FD, FLAGA, FLAGB, FLAGC, SLWR, SLRD, SLOE, PKEND, FIFO_ADR, DOUT,
-        A5, A6, A12, C4, C5, C6, C7, C8, C9, C12, C13, C14, C19, C21, C22, C23, C24,
+        A5, A6, A12, C4, C5, C6, C7, C8, C9, C12, C13, C14, C18, C19, C21, C22, C23, C24,
         CDOUT, CDOUT_P, PTT_in, AK_reset,DEBUG_LED0,
         DEBUG_LED1, DEBUG_LED2,DEBUG_LED3, C48_clk, CC, MDOUT, /*FX2_CLK,*/
         SPI_SCK, SPI_SI, SPI_SO, SPI_CS, GPIO_OUT, GPIO_IN, GPIO_nIOE,
@@ -280,6 +280,7 @@ output wire          C9;          // CLRCLK to Janus
 output wire          C12;         // J_IQ_data - Rx data to TLV320AIC23B to Janus
 output wire          C13;         // DFS0
 output wire          C14;         // DFS1
+output wire 		 C18;		  // nWire to PennyLane with Tx_level
 output wire          C19;         // P_IQ_data - Rx data to TLV320AIC23B on Penelope
 output wire          C21;         // Spectrum data Trigger signal to Mercury
 input  wire          C22;         // P_IQ_sync from Penelope
@@ -1274,10 +1275,10 @@ I2S_xmit #(.DATA_BITS(32))
 	
 	The data fomat is as follows:
 	
-	<[68:67]DFS1,DFS0><[66]PTT><[65:62]address><[61:30]frequency><[29:26]clock_select><[25:19]OC>
-	<[18]Mode><[17]PGA><[16]DITHER><[15]RAND><[14:13]ATTEN><[12:11]TX_relay><[10]Rout><[9:8]RX_relay><[7:0]Drive_Level>
+	<[60:59]DFS1,DFS0><[58]PTT><[57:54]address><[53:22]frequency><[21:18]clock_select><[17:11]OC>
+	<[10]Mode><[9]PGA><[8]DITHER><[7]RAND><[6:5]ATTEN><[4:3]TX_relay><[2]Rout><[1:0]RX_relay> 
 
-	Total of 69 bits. Frequency is in Hz and OC is the open collector data on Penelope.
+	Total of 61 bits. Frequency is in Hz and OC is the open collector data on Penelope.
 	The clock source decodes as follows:
 	
 	0x00  = 10MHz reference from Atlas bus ie Gibraltar
@@ -1310,11 +1311,26 @@ begin
 end
 
 assign IF_xmit_data = {IF_DFS1,IF_DFS0,PTT_out,CC_address,IF_frequency[CC_address],IF_clock_s,IF_OC,IF_mode,IF_PGA,
-                       IF_DITHER, IF_RAND, IF_ATTEN, IF_TX_relay, IF_Rout, IF_RX_relay, IF_Drive_Level};
+                       IF_DITHER, IF_RAND, IF_ATTEN, IF_TX_relay, IF_Rout, IF_RX_relay};
 
-NWire_xmit  #(.DATA_BITS(69), .ICLK_FREQ(48000000), .XCLK_FREQ(48000000), .SEND_FREQ(10000)) 
+NWire_xmit  #(.DATA_BITS(61), .ICLK_FREQ(48000000), .XCLK_FREQ(48000000), .SEND_FREQ(10000)) 
       CCxmit (.irst(IF_rst), .iclk(IF_clk), .xrst(IF_rst), .xclk(IF_clk),
               .xdata(IF_xmit_data), .xreq(1'b1), .xrdy(IF_CC_rdy), .xack(), .dout(CC));
+              
+              
+///////////////////////////////////////////////////////
+//
+//				nWire to PennyLane  - sends Drive_Level
+//
+/////////////////////////////////////////////////////// 
+
+NWire_xmit  #(.DATA_BITS(8), .ICLK_FREQ(48000000), .XCLK_FREQ(48000000), .SEND_FREQ(1000)) 
+      ser_no (.irst(IF_rst), .iclk(IF_clk), .xrst(IF_rst), .xclk(IF_clk),
+              .xdata(IF_Drive_Level), .xreq(1'b1), .xrdy(), .xack(), .dout(C18));
+
+             
+              
+              
 ///////////////////////////////////////////////////////
 //
 //                      NWire Penelope data

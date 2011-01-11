@@ -1,5 +1,5 @@
 Classic Timing Analyzer report for Ozy_Janus
-Tue Jan 11 15:04:12 2011
+Tue Jan 11 16:19:24 2011
 Quartus II Version 9.1 Build 350 03/24/2010 Service Pack 2 SJ Web Edition
 
 
@@ -2167,7 +2167,7 @@ applicable agreement for further details.
 Info: *******************************************************************
 Info: Running Quartus II Classic Timing Analyzer
     Info: Version 9.1 Build 350 03/24/2010 Service Pack 2 SJ Web Edition
-    Info: Processing started: Tue Jan 11 15:04:08 2011
+    Info: Processing started: Tue Jan 11 16:19:20 2011
 Info: Command: quartus_tan --read_settings_files=off --write_settings_files=off Ozy_Janus -c Ozy_Janus --timing_analysis_only
 Warning: Clock latency analysis for PLL offsets is supported for the current device family, but is not enabled
 Warning: PLL "clkmult3:cm3|altpll:altpll_component|_clk0" input frequency requirement of 144.01 MHz overrides default required fmax of 96.01 MHz -- Slack information will be reported
@@ -2511,7 +2511,7 @@ Critical Warning: Timing requirements for slow timing model timing analysis were
 Warning: Found invalid timing assignments -- see Ignored Timing Assignments report for details
 Info: Quartus II Classic Timing Analyzer was successful. 0 errors, 7 warnings
     Info: Peak virtual memory: 162 megabytes
-    Info: Processing ended: Tue Jan 11 15:04:14 2011
+    Info: Processing ended: Tue Jan 11 16:19:26 2011
     Info: Elapsed time: 00:00:06
     Info: Total CPU time (on all processors): 00:00:05
 
