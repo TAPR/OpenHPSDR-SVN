@@ -27,6 +27,9 @@
 // Outputs:
 // phase_out - phase accumulator current value, size based on RESOLUTION parameter, default = 32
 //
+
+`timescale 1ns/100ps 
+
 module phase_accumulator(clk,reset,frequency,phase_out);
 	parameter RESOLUTION = 32;
 	
