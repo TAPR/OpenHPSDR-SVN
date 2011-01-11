@@ -242,7 +242,7 @@ VCCIO2                       : 172       : power  :                   : 3.3V    
 RESERVED_INPUT               : 173       :        :                   :         : 2         :                
 GND                          : 174       : gnd    :                   :         :           :                
 RESERVED_INPUT               : 175       :        :                   :         : 2         :                
-C18                          : 176       : output : 3.3-V LVTTL       :         : 2         : N              
+C18                          : 176       : output : 3.3-V LVTTL       :         : 2         : Y              
 GND                          : 177       : gnd    :                   :         :           :                
 VCCINT                       : 178       : power  :                   : 1.2V    :           :                
 C19                          : 179       : output : 3.3-V LVTTL       :         : 2         : Y              

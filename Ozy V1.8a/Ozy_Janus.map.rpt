@@ -1,5 +1,5 @@
 Analysis & Synthesis report for Ozy_Janus
-Tue Jan 11 16:16:37 2011
+Tue Jan 11 20:12:56 2011
 Quartus II Version 9.1 Build 350 03/24/2010 Service Pack 2 SJ Web Edition
 
 
@@ -9,113 +9,114 @@ Quartus II Version 9.1 Build 350 03/24/2010 Service Pack 2 SJ Web Edition
   1. Legal Notice
   2. Analysis & Synthesis Summary
   3. Analysis & Synthesis Settings
-  4. Analysis & Synthesis Source Files Read
-  5. Analysis & Synthesis Resource Usage Summary
-  6. Analysis & Synthesis Resource Utilization by Entity
-  7. Analysis & Synthesis RAM Summary
-  8. State Machine - |Ozy_Janus|IF_PWM_state
-  9. State Machine - |Ozy_Janus|IF_SYNC_state
- 10. State Machine - |Ozy_Janus|led_blinker:BLINK_D4|LED_state
- 11. State Machine - |Ozy_Janus|led_blinker:BLINK_D1|LED_state
- 12. State Machine - |Ozy_Janus|NWire_rcv:m_ser|TB_state
- 13. State Machine - |Ozy_Janus|NWire_rcv:p_ser|TB_state
- 14. State Machine - |Ozy_Janus|NWire_xmit:ser_no|NW_state
- 15. State Machine - |Ozy_Janus|NWire_xmit:CCxmit|NW_state
- 16. State Machine - |Ozy_Janus|I2S_xmit:J_IQPWM|TLV_state
- 17. State Machine - |Ozy_Janus|NWire_xmit:P_IQPWM|NW_state
- 18. State Machine - |Ozy_Janus|I2S_xmit:J_LRAudio|TLV_state
- 19. State Machine - |Ozy_Janus|NWire_xmit:M_LRAudio|NW_state
- 20. State Machine - |Ozy_Janus|async_usb:usb1|FX_state
- 21. State Machine - |Ozy_Janus|NWire_rcv:SPD|TB_state
- 22. State Machine - |Ozy_Janus|Tx_fifo_ctrl:TXFC|AD_state
- 23. State Machine - |Ozy_Janus|NWire_rcv:MDC[2].M_IQ|TB_state
- 24. State Machine - |Ozy_Janus|NWire_rcv:MDC[1].M_IQ|TB_state
- 25. State Machine - |Ozy_Janus|NWire_rcv:MDC[0].M_IQ|TB_state
- 26. State Machine - |Ozy_Janus|NWire_rcv:P_MIC|TB_state
- 27. Registers Removed During Synthesis
- 28. Removed Registers Triggering Further Register Optimizations
- 29. General Register Statistics
- 30. Registers Added for RAM Pass-Through Logic
- 31. Multiplexer Restructuring Statistics (No Restructuring Performed)
- 32. Source assignments for FIFO:TXF|altsyncram:mem_rtl_0|altsyncram_o1h1:auto_generated
- 33. Source assignments for FIFO:SPF|altsyncram:mem_rtl_1|altsyncram_s0h1:auto_generated
- 34. Source assignments for FIFO:RXF|altsyncram:mem_rtl_2|altsyncram_c1h1:auto_generated
- 35. Parameter Settings for User Entity Instance: Top-level Entity: |Ozy_Janus
- 36. Parameter Settings for User Entity Instance: gpio_control:gpio_controlSDR|SPI_REGS:spi_regs
- 37. Parameter Settings for User Entity Instance: gpio_control:gpio_controlSDR|gpio_oport:port1reg
- 38. Parameter Settings for User Entity Instance: gpio_control:gpio_controlSDR|gpio_oport:port2reg
- 39. Parameter Settings for User Entity Instance: clkmult3:cm3|altpll:altpll_component
- 40. Parameter Settings for User Entity Instance: cdc_mcp:dfs
- 41. Parameter Settings for User Entity Instance: cdc_mcp:dfs|cdc_sync:rdy
- 42. Parameter Settings for User Entity Instance: cdc_mcp:dfs|pulsegen:pls
- 43. Parameter Settings for User Entity Instance: cdc_mcp:dfs|cdc_sync:ack
- 44. Parameter Settings for User Entity Instance: clk_lrclk_gen:lrgen
- 45. Parameter Settings for User Entity Instance: clk_lrclk_gen:clrgen
- 46. Parameter Settings for User Entity Instance: NWire_rcv:P_MIC
- 47. Parameter Settings for User Entity Instance: I2S_rcv:J_MIC
- 48. Parameter Settings for User Entity Instance: NWire_rcv:MDC[0].M_IQ
- 49. Parameter Settings for User Entity Instance: NWire_rcv:MDC[1].M_IQ
- 50. Parameter Settings for User Entity Instance: NWire_rcv:MDC[2].M_IQ
- 51. Parameter Settings for User Entity Instance: I2S_rcv:J_IQ
- 52. Parameter Settings for User Entity Instance: Tx_fifo_ctrl:TXFC
- 53. Parameter Settings for User Entity Instance: FIFO:TXF
- 54. Parameter Settings for User Entity Instance: FIFO:RXF
- 55. Parameter Settings for User Entity Instance: FIFO:SPF
- 56. Parameter Settings for User Entity Instance: NWire_rcv:SPD
- 57. Parameter Settings for User Entity Instance: async_usb:usb1
- 58. Parameter Settings for User Entity Instance: cdc_sync:cdc_c23
- 59. Parameter Settings for User Entity Instance: pulsegen:cdc_m
- 60. Parameter Settings for User Entity Instance: cdc_sync:cdc_c22
- 61. Parameter Settings for User Entity Instance: pulsegen:cdc_p
- 62. Parameter Settings for User Entity Instance: cdc_sync:cdc_clr
- 63. Parameter Settings for User Entity Instance: pulsegen:cdc_j
- 64. Parameter Settings for User Entity Instance: cdc_sync:cdc_jrdy
- 65. Parameter Settings for User Entity Instance: cdc_sync:cdc_jack
- 66. Parameter Settings for User Entity Instance: cdc_mcp:lra
- 67. Parameter Settings for User Entity Instance: cdc_mcp:lra|cdc_sync:rdy
- 68. Parameter Settings for User Entity Instance: cdc_mcp:lra|pulsegen:pls
- 69. Parameter Settings for User Entity Instance: cdc_mcp:lra|cdc_sync:ack
- 70. Parameter Settings for User Entity Instance: NWire_xmit:M_LRAudio
- 71. Parameter Settings for User Entity Instance: I2S_xmit:J_LRAudio
- 72. Parameter Settings for User Entity Instance: NWire_xmit:P_IQPWM
- 73. Parameter Settings for User Entity Instance: cdc_mcp:iqp
- 74. Parameter Settings for User Entity Instance: cdc_mcp:iqp|cdc_sync:rdy
- 75. Parameter Settings for User Entity Instance: cdc_mcp:iqp|pulsegen:pls
- 76. Parameter Settings for User Entity Instance: cdc_mcp:iqp|cdc_sync:ack
- 77. Parameter Settings for User Entity Instance: I2S_xmit:J_IQPWM
- 78. Parameter Settings for User Entity Instance: pulsegen:CC_p
- 79. Parameter Settings for User Entity Instance: NWire_xmit:CCxmit
- 80. Parameter Settings for User Entity Instance: NWire_xmit:ser_no
- 81. Parameter Settings for User Entity Instance: NWire_rcv:p_ser
- 82. Parameter Settings for User Entity Instance: NWire_rcv:m_ser
- 83. Parameter Settings for User Entity Instance: debounce:de_PTT
- 84. Parameter Settings for User Entity Instance: debounce:de_dot
- 85. Parameter Settings for User Entity Instance: debounce:de_dash
- 86. Parameter Settings for User Entity Instance: led_blinker:BLINK_D1
- 87. Parameter Settings for User Entity Instance: led_blinker:BLINK_D4
- 88. Parameter Settings for Inferred Entity Instance: FIFO:TXF|altsyncram:mem_rtl_0
- 89. Parameter Settings for Inferred Entity Instance: FIFO:SPF|altsyncram:mem_rtl_1
- 90. Parameter Settings for Inferred Entity Instance: FIFO:RXF|altsyncram:mem_rtl_2
- 91. altpll Parameter Settings by Entity Instance
- 92. altsyncram Parameter Settings by Entity Instance
- 93. Port Connectivity Checks: "led_blinker:BLINK_D1"
- 94. Port Connectivity Checks: "NWire_xmit:ser_no"
- 95. Port Connectivity Checks: "NWire_xmit:CCxmit"
- 96. Port Connectivity Checks: "I2S_xmit:J_IQPWM"
- 97. Port Connectivity Checks: "cdc_mcp:iqp"
- 98. Port Connectivity Checks: "cdc_mcp:lra"
- 99. Port Connectivity Checks: "FIFO:SPF"
-100. Port Connectivity Checks: "FIFO:RXF"
-101. Port Connectivity Checks: "FIFO:TXF"
-102. Port Connectivity Checks: "Tx_fifo_ctrl:TXFC"
-103. Port Connectivity Checks: "I2S_rcv:J_IQ"
-104. Port Connectivity Checks: "NWire_rcv:MDC[2].M_IQ"
-105. Port Connectivity Checks: "NWire_rcv:MDC[1].M_IQ"
-106. Port Connectivity Checks: "I2S_rcv:J_MIC"
-107. Port Connectivity Checks: "clk_lrclk_gen:clrgen"
-108. Port Connectivity Checks: "clk_lrclk_gen:lrgen"
-109. Port Connectivity Checks: "gpio_control:gpio_controlSDR"
-110. Analysis & Synthesis Messages
+  4. Parallel Compilation
+  5. Analysis & Synthesis Source Files Read
+  6. Analysis & Synthesis Resource Usage Summary
+  7. Analysis & Synthesis Resource Utilization by Entity
+  8. Analysis & Synthesis RAM Summary
+  9. State Machine - |Ozy_Janus|IF_PWM_state
+ 10. State Machine - |Ozy_Janus|IF_SYNC_state
+ 11. State Machine - |Ozy_Janus|led_blinker:BLINK_D4|LED_state
+ 12. State Machine - |Ozy_Janus|led_blinker:BLINK_D1|LED_state
+ 13. State Machine - |Ozy_Janus|NWire_rcv:m_ser|TB_state
+ 14. State Machine - |Ozy_Janus|NWire_rcv:p_ser|TB_state
+ 15. State Machine - |Ozy_Janus|NWire_xmit:ser_no|NW_state
+ 16. State Machine - |Ozy_Janus|NWire_xmit:CCxmit|NW_state
+ 17. State Machine - |Ozy_Janus|I2S_xmit:J_IQPWM|TLV_state
+ 18. State Machine - |Ozy_Janus|NWire_xmit:P_IQPWM|NW_state
+ 19. State Machine - |Ozy_Janus|I2S_xmit:J_LRAudio|TLV_state
+ 20. State Machine - |Ozy_Janus|NWire_xmit:M_LRAudio|NW_state
+ 21. State Machine - |Ozy_Janus|async_usb:usb1|FX_state
+ 22. State Machine - |Ozy_Janus|NWire_rcv:SPD|TB_state
+ 23. State Machine - |Ozy_Janus|Tx_fifo_ctrl:TXFC|AD_state
+ 24. State Machine - |Ozy_Janus|NWire_rcv:MDC[2].M_IQ|TB_state
+ 25. State Machine - |Ozy_Janus|NWire_rcv:MDC[1].M_IQ|TB_state
+ 26. State Machine - |Ozy_Janus|NWire_rcv:MDC[0].M_IQ|TB_state
+ 27. State Machine - |Ozy_Janus|NWire_rcv:P_MIC|TB_state
+ 28. Registers Removed During Synthesis
+ 29. Removed Registers Triggering Further Register Optimizations
+ 30. General Register Statistics
+ 31. Registers Added for RAM Pass-Through Logic
+ 32. Multiplexer Restructuring Statistics (No Restructuring Performed)
+ 33. Source assignments for FIFO:TXF|altsyncram:mem_rtl_0|altsyncram_o1h1:auto_generated
+ 34. Source assignments for FIFO:SPF|altsyncram:mem_rtl_1|altsyncram_s0h1:auto_generated
+ 35. Source assignments for FIFO:RXF|altsyncram:mem_rtl_2|altsyncram_c1h1:auto_generated
+ 36. Parameter Settings for User Entity Instance: Top-level Entity: |Ozy_Janus
+ 37. Parameter Settings for User Entity Instance: gpio_control:gpio_controlSDR|SPI_REGS:spi_regs
+ 38. Parameter Settings for User Entity Instance: gpio_control:gpio_controlSDR|gpio_oport:port1reg
+ 39. Parameter Settings for User Entity Instance: gpio_control:gpio_controlSDR|gpio_oport:port2reg
+ 40. Parameter Settings for User Entity Instance: clkmult3:cm3|altpll:altpll_component
+ 41. Parameter Settings for User Entity Instance: cdc_mcp:dfs
+ 42. Parameter Settings for User Entity Instance: cdc_mcp:dfs|cdc_sync:rdy
+ 43. Parameter Settings for User Entity Instance: cdc_mcp:dfs|pulsegen:pls
+ 44. Parameter Settings for User Entity Instance: cdc_mcp:dfs|cdc_sync:ack
+ 45. Parameter Settings for User Entity Instance: clk_lrclk_gen:lrgen
+ 46. Parameter Settings for User Entity Instance: clk_lrclk_gen:clrgen
+ 47. Parameter Settings for User Entity Instance: NWire_rcv:P_MIC
+ 48. Parameter Settings for User Entity Instance: I2S_rcv:J_MIC
+ 49. Parameter Settings for User Entity Instance: NWire_rcv:MDC[0].M_IQ
+ 50. Parameter Settings for User Entity Instance: NWire_rcv:MDC[1].M_IQ
+ 51. Parameter Settings for User Entity Instance: NWire_rcv:MDC[2].M_IQ
+ 52. Parameter Settings for User Entity Instance: I2S_rcv:J_IQ
+ 53. Parameter Settings for User Entity Instance: Tx_fifo_ctrl:TXFC
+ 54. Parameter Settings for User Entity Instance: FIFO:TXF
+ 55. Parameter Settings for User Entity Instance: FIFO:RXF
+ 56. Parameter Settings for User Entity Instance: FIFO:SPF
+ 57. Parameter Settings for User Entity Instance: NWire_rcv:SPD
+ 58. Parameter Settings for User Entity Instance: async_usb:usb1
+ 59. Parameter Settings for User Entity Instance: cdc_sync:cdc_c23
+ 60. Parameter Settings for User Entity Instance: pulsegen:cdc_m
+ 61. Parameter Settings for User Entity Instance: cdc_sync:cdc_c22
+ 62. Parameter Settings for User Entity Instance: pulsegen:cdc_p
+ 63. Parameter Settings for User Entity Instance: cdc_sync:cdc_clr
+ 64. Parameter Settings for User Entity Instance: pulsegen:cdc_j
+ 65. Parameter Settings for User Entity Instance: cdc_sync:cdc_jrdy
+ 66. Parameter Settings for User Entity Instance: cdc_sync:cdc_jack
+ 67. Parameter Settings for User Entity Instance: cdc_mcp:lra
+ 68. Parameter Settings for User Entity Instance: cdc_mcp:lra|cdc_sync:rdy
+ 69. Parameter Settings for User Entity Instance: cdc_mcp:lra|pulsegen:pls
+ 70. Parameter Settings for User Entity Instance: cdc_mcp:lra|cdc_sync:ack
+ 71. Parameter Settings for User Entity Instance: NWire_xmit:M_LRAudio
+ 72. Parameter Settings for User Entity Instance: I2S_xmit:J_LRAudio
+ 73. Parameter Settings for User Entity Instance: NWire_xmit:P_IQPWM
+ 74. Parameter Settings for User Entity Instance: cdc_mcp:iqp
+ 75. Parameter Settings for User Entity Instance: cdc_mcp:iqp|cdc_sync:rdy
+ 76. Parameter Settings for User Entity Instance: cdc_mcp:iqp|pulsegen:pls
+ 77. Parameter Settings for User Entity Instance: cdc_mcp:iqp|cdc_sync:ack
+ 78. Parameter Settings for User Entity Instance: I2S_xmit:J_IQPWM
+ 79. Parameter Settings for User Entity Instance: pulsegen:CC_p
+ 80. Parameter Settings for User Entity Instance: NWire_xmit:CCxmit
+ 81. Parameter Settings for User Entity Instance: NWire_xmit:ser_no
+ 82. Parameter Settings for User Entity Instance: NWire_rcv:p_ser
+ 83. Parameter Settings for User Entity Instance: NWire_rcv:m_ser
+ 84. Parameter Settings for User Entity Instance: debounce:de_PTT
+ 85. Parameter Settings for User Entity Instance: debounce:de_dot
+ 86. Parameter Settings for User Entity Instance: debounce:de_dash
+ 87. Parameter Settings for User Entity Instance: led_blinker:BLINK_D1
+ 88. Parameter Settings for User Entity Instance: led_blinker:BLINK_D4
+ 89. Parameter Settings for Inferred Entity Instance: FIFO:TXF|altsyncram:mem_rtl_0
+ 90. Parameter Settings for Inferred Entity Instance: FIFO:SPF|altsyncram:mem_rtl_1
+ 91. Parameter Settings for Inferred Entity Instance: FIFO:RXF|altsyncram:mem_rtl_2
+ 92. altpll Parameter Settings by Entity Instance
+ 93. altsyncram Parameter Settings by Entity Instance
+ 94. Port Connectivity Checks: "led_blinker:BLINK_D1"
+ 95. Port Connectivity Checks: "NWire_xmit:ser_no"
+ 96. Port Connectivity Checks: "NWire_xmit:CCxmit"
+ 97. Port Connectivity Checks: "I2S_xmit:J_IQPWM"
+ 98. Port Connectivity Checks: "cdc_mcp:iqp"
+ 99. Port Connectivity Checks: "cdc_mcp:lra"
+100. Port Connectivity Checks: "FIFO:SPF"
+101. Port Connectivity Checks: "FIFO:RXF"
+102. Port Connectivity Checks: "FIFO:TXF"
+103. Port Connectivity Checks: "Tx_fifo_ctrl:TXFC"
+104. Port Connectivity Checks: "I2S_rcv:J_IQ"
+105. Port Connectivity Checks: "NWire_rcv:MDC[2].M_IQ"
+106. Port Connectivity Checks: "NWire_rcv:MDC[1].M_IQ"
+107. Port Connectivity Checks: "I2S_rcv:J_MIC"
+108. Port Connectivity Checks: "clk_lrclk_gen:clrgen"
+109. Port Connectivity Checks: "clk_lrclk_gen:lrgen"
+110. Port Connectivity Checks: "gpio_control:gpio_controlSDR"
+111. Analysis & Synthesis Messages
 
 
 
@@ -141,13 +142,13 @@ applicable agreement for further details.
 +-----------------------------------------------------------------------------------+
 ; Analysis & Synthesis Summary                                                      ;
 +------------------------------------+----------------------------------------------+
-; Analysis & Synthesis Status        ; Successful - Tue Jan 11 16:16:37 2011        ;
+; Analysis & Synthesis Status        ; Successful - Tue Jan 11 20:12:56 2011        ;
 ; Quartus II Version                 ; 9.1 Build 350 03/24/2010 SP 2 SJ Web Edition ;
 ; Revision Name                      ; Ozy_Janus                                    ;
 ; Top-level Entity Name              ; Ozy_Janus                                    ;
 ; Family                             ; Cyclone II                                   ;
-; Total logic elements               ; 6,223                                        ;
-;     Total combinational functions  ; 4,867                                        ;
+; Total logic elements               ; 6,224                                        ;
+;     Total combinational functions  ; 4,868                                        ;
 ;     Dedicated logic registers      ; 3,429                                        ;
 ; Total registers                    ; 3429                                         ;
 ; Total pins                         ; 89                                           ;
@@ -240,35 +241,46 @@ applicable agreement for further details.
 +----------------------------------------------------------------------------+--------------------+--------------------+
 
 
+Parallel compilation was disabled, but you have multiple processors available. Enable parallel compilation to reduce compilation time.
++-------------------------------------+
+; Parallel Compilation                ;
++----------------------------+--------+
+; Processors                 ; Number ;
++----------------------------+--------+
+; Number detected on machine ; 2      ;
+; Maximum allowed            ; 1      ;
++----------------------------+--------+
+
+
 +----------------------------------------------------------------------------------------------------------------------------------------------------+
 ; Analysis & Synthesis Source Files Read                                                                                                             ;
 +----------------------------------+-----------------+------------------------------+----------------------------------------------------------------+
 ; File Name with User-Entered Path ; Used in Netlist ; File Type                    ; File Name with Absolute Path                                   ;
 +----------------------------------+-----------------+------------------------------+----------------------------------------------------------------+
-; clkmult3.v                       ; yes             ; User Wizard-Generated File   ; O:/HPSDR/trunk/Ozy V1.8a/clkmult3.v                            ;
-; ../common/cdc_sync.v             ; yes             ; User Verilog HDL File        ; O:/HPSDR/trunk/Ozy V1.8a/common/cdc_sync.v                     ;
-; ../common/I2S_xmit.v             ; yes             ; User Verilog HDL File        ; O:/HPSDR/trunk/Ozy V1.8a/common/I2S_xmit.v                     ;
-; ../common/I2S_rcv.v              ; yes             ; User Verilog HDL File        ; O:/HPSDR/trunk/Ozy V1.8a/common/I2S_rcv.v                      ;
-; ../common/clk_lrclk_gen.v        ; yes             ; User Verilog HDL File        ; O:/HPSDR/trunk/Ozy V1.8a/common/clk_lrclk_gen.v                ;
-; ../common/NWire_rcv.v            ; yes             ; User Verilog HDL File        ; O:/HPSDR/trunk/Ozy V1.8a/common/NWire_rcv.v                    ;
-; ../common/NWire_xmit.v           ; yes             ; User Verilog HDL File        ; O:/HPSDR/trunk/Ozy V1.8a/common/NWire_xmit.v                   ;
-; debounce.v                       ; yes             ; User Verilog HDL File        ; O:/HPSDR/trunk/Ozy V1.8a/debounce.v                            ;
-; SPI_REGS.v                       ; yes             ; User Verilog HDL File        ; O:/HPSDR/trunk/Ozy V1.8a/SPI_REGS.v                            ;
-; gpio_control.v                   ; yes             ; User Verilog HDL File        ; O:/HPSDR/trunk/Ozy V1.8a/gpio_control.v                        ;
-; Ozy_Janus.v                      ; yes             ; User Verilog HDL File        ; O:/HPSDR/trunk/Ozy V1.8a/Ozy_Janus.v                           ;
-; gpio_oport.v                     ; yes             ; User Verilog HDL File        ; O:/HPSDR/trunk/Ozy V1.8a/gpio_oport.v                          ;
-; led_blinker.v                    ; yes             ; User Verilog HDL File        ; O:/HPSDR/trunk/Ozy V1.8a/led_blinker.v                         ;
-; async_usb.v                      ; yes             ; User Verilog HDL File        ; O:/HPSDR/trunk/Ozy V1.8a/async_usb.v                           ;
-; Tx_fifo_ctrl.v                   ; yes             ; User Verilog HDL File        ; O:/HPSDR/trunk/Ozy V1.8a/Tx_fifo_ctrl.v                        ;
-; sp_rcv_ctrl.v                    ; yes             ; User Verilog HDL File        ; O:/HPSDR/trunk/Ozy V1.8a/sp_rcv_ctrl.v                         ;
-; ../common/cdc_mcp.v              ; yes             ; User Verilog HDL File        ; O:/HPSDR/trunk/Ozy V1.8a/common/cdc_mcp.v                      ;
-; ../common/pulsegen.v             ; yes             ; User Verilog HDL File        ; O:/HPSDR/trunk/Ozy V1.8a/common/pulsegen.v                     ;
-; FIFO.v                           ; yes             ; User Verilog HDL File        ; O:/HPSDR/trunk/Ozy V1.8a/FIFO.v                                ;
+; clkmult3.v                       ; yes             ; User Wizard-Generated File   ; C:/HPSDR/trunk/Ozy V1.8a/clkmult3.v                            ;
+; ../common/cdc_sync.v             ; yes             ; User Verilog HDL File        ; C:/HPSDR/trunk/Ozy V1.8a/common/cdc_sync.v                     ;
+; ../common/I2S_xmit.v             ; yes             ; User Verilog HDL File        ; C:/HPSDR/trunk/Ozy V1.8a/common/I2S_xmit.v                     ;
+; ../common/I2S_rcv.v              ; yes             ; User Verilog HDL File        ; C:/HPSDR/trunk/Ozy V1.8a/common/I2S_rcv.v                      ;
+; ../common/clk_lrclk_gen.v        ; yes             ; User Verilog HDL File        ; C:/HPSDR/trunk/Ozy V1.8a/common/clk_lrclk_gen.v                ;
+; ../common/NWire_rcv.v            ; yes             ; User Verilog HDL File        ; C:/HPSDR/trunk/Ozy V1.8a/common/NWire_rcv.v                    ;
+; ../common/NWire_xmit.v           ; yes             ; User Verilog HDL File        ; C:/HPSDR/trunk/Ozy V1.8a/common/NWire_xmit.v                   ;
+; debounce.v                       ; yes             ; User Verilog HDL File        ; C:/HPSDR/trunk/Ozy V1.8a/debounce.v                            ;
+; SPI_REGS.v                       ; yes             ; User Verilog HDL File        ; C:/HPSDR/trunk/Ozy V1.8a/SPI_REGS.v                            ;
+; gpio_control.v                   ; yes             ; User Verilog HDL File        ; C:/HPSDR/trunk/Ozy V1.8a/gpio_control.v                        ;
+; Ozy_Janus.v                      ; yes             ; User Verilog HDL File        ; C:/HPSDR/trunk/Ozy V1.8a/Ozy_Janus.v                           ;
+; gpio_oport.v                     ; yes             ; User Verilog HDL File        ; C:/HPSDR/trunk/Ozy V1.8a/gpio_oport.v                          ;
+; led_blinker.v                    ; yes             ; User Verilog HDL File        ; C:/HPSDR/trunk/Ozy V1.8a/led_blinker.v                         ;
+; async_usb.v                      ; yes             ; User Verilog HDL File        ; C:/HPSDR/trunk/Ozy V1.8a/async_usb.v                           ;
+; Tx_fifo_ctrl.v                   ; yes             ; User Verilog HDL File        ; C:/HPSDR/trunk/Ozy V1.8a/Tx_fifo_ctrl.v                        ;
+; sp_rcv_ctrl.v                    ; yes             ; User Verilog HDL File        ; C:/HPSDR/trunk/Ozy V1.8a/sp_rcv_ctrl.v                         ;
+; ../common/cdc_mcp.v              ; yes             ; User Verilog HDL File        ; C:/HPSDR/trunk/Ozy V1.8a/common/cdc_mcp.v                      ;
+; ../common/pulsegen.v             ; yes             ; User Verilog HDL File        ; C:/HPSDR/trunk/Ozy V1.8a/common/pulsegen.v                     ;
+; FIFO.v                           ; yes             ; User Verilog HDL File        ; C:/HPSDR/trunk/Ozy V1.8a/FIFO.v                                ;
 ; altpll.tdf                       ; yes             ; Megafunction                 ; c:/altera/91sp2/quartus/libraries/megafunctions/altpll.tdf     ;
 ; altsyncram.tdf                   ; yes             ; Megafunction                 ; c:/altera/91sp2/quartus/libraries/megafunctions/altsyncram.tdf ;
-; db/altsyncram_o1h1.tdf           ; yes             ; Auto-Generated Megafunction  ; O:/HPSDR/trunk/Ozy V1.8a/db/altsyncram_o1h1.tdf                ;
-; db/altsyncram_s0h1.tdf           ; yes             ; Auto-Generated Megafunction  ; O:/HPSDR/trunk/Ozy V1.8a/db/altsyncram_s0h1.tdf                ;
-; db/altsyncram_c1h1.tdf           ; yes             ; Auto-Generated Megafunction  ; O:/HPSDR/trunk/Ozy V1.8a/db/altsyncram_c1h1.tdf                ;
+; db/altsyncram_o1h1.tdf           ; yes             ; Auto-Generated Megafunction  ; C:/HPSDR/trunk/Ozy V1.8a/db/altsyncram_o1h1.tdf                ;
+; db/altsyncram_s0h1.tdf           ; yes             ; Auto-Generated Megafunction  ; C:/HPSDR/trunk/Ozy V1.8a/db/altsyncram_s0h1.tdf                ;
+; db/altsyncram_c1h1.tdf           ; yes             ; Auto-Generated Megafunction  ; C:/HPSDR/trunk/Ozy V1.8a/db/altsyncram_c1h1.tdf                ;
 +----------------------------------+-----------------+------------------------------+----------------------------------------------------------------+
 
 
@@ -277,16 +289,16 @@ applicable agreement for further details.
 +---------------------------------------------+--------+
 ; Resource                                    ; Usage  ;
 +---------------------------------------------+--------+
-; Estimated Total logic elements              ; 6,223  ;
+; Estimated Total logic elements              ; 6,224  ;
 ;                                             ;        ;
-; Total combinational functions               ; 4867   ;
+; Total combinational functions               ; 4868   ;
 ; Logic element usage by number of LUT inputs ;        ;
-;     -- 4 input functions                    ; 1111   ;
-;     -- 3 input functions                    ; 1806   ;
+;     -- 4 input functions                    ; 1113   ;
+;     -- 3 input functions                    ; 1805   ;
 ;     -- <=2 input functions                  ; 1950   ;
 ;                                             ;        ;
 ; Logic elements by mode                      ;        ;
-;     -- normal mode                          ; 2903   ;
+;     -- normal mode                          ; 2904   ;
 ;     -- arithmetic mode                      ; 1964   ;
 ;                                             ;        ;
 ; Total registers                             ; 3429   ;
@@ -298,7 +310,7 @@ applicable agreement for further details.
 ; Total PLLs                                  ; 1      ;
 ; Maximum fan-out node                        ; IF_clk ;
 ; Maximum fan-out                             ; 2060   ;
-; Total fan-out                               ; 24651  ;
+; Total fan-out                               ; 24656  ;
 ; Average fan-out                             ; 2.92   ;
 +---------------------------------------------+--------+
 
@@ -308,7 +320,7 @@ applicable agreement for further details.
 +-------------------------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+-------------------------------------------------------------------------+--------------+
 ; Compilation Hierarchy Node                ; LC Combinationals ; LC Registers ; Memory Bits ; DSP Elements ; DSP 9x9 ; DSP 18x18 ; Pins ; Virtual Pins ; Full Hierarchy Name                                                     ; Library Name ;
 +-------------------------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+-------------------------------------------------------------------------+--------------+
-; |Ozy_Janus                                ; 4867 (382)        ; 3429 (552)   ; 114688      ; 0            ; 0       ; 0         ; 89   ; 0            ; |Ozy_Janus                                                              ; work         ;
+; |Ozy_Janus                                ; 4868 (382)        ; 3429 (552)   ; 114688      ; 0            ; 0       ; 0         ; 89   ; 0            ; |Ozy_Janus                                                              ; work         ;
 ;    |FIFO:RXF|                             ; 94 (94)           ; 77 (77)      ; 32768       ; 0            ; 0       ; 0         ; 0    ; 0            ; |Ozy_Janus|FIFO:RXF                                                     ; work         ;
 ;       |altsyncram:mem_rtl_2|              ; 0 (0)             ; 0 (0)        ; 32768       ; 0            ; 0       ; 0         ; 0    ; 0            ; |Ozy_Janus|FIFO:RXF|altsyncram:mem_rtl_2                                ; work         ;
 ;          |altsyncram_c1h1:auto_generated| ; 0 (0)             ; 0 (0)        ; 32768       ; 0            ; 0       ; 0         ; 0    ; 0            ; |Ozy_Janus|FIFO:RXF|altsyncram:mem_rtl_2|altsyncram_c1h1:auto_generated ; work         ;
@@ -333,7 +345,7 @@ applicable agreement for further details.
 ;    |NWire_xmit:M_LRAudio|                 ; 82 (82)           ; 118 (118)    ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Ozy_Janus|NWire_xmit:M_LRAudio                                         ; work         ;
 ;    |NWire_xmit:P_IQPWM|                   ; 108 (108)         ; 147 (147)    ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Ozy_Janus|NWire_xmit:P_IQPWM                                           ; work         ;
 ;    |NWire_xmit:ser_no|                    ; 122 (122)         ; 55 (55)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Ozy_Janus|NWire_xmit:ser_no                                            ; work         ;
-;    |Tx_fifo_ctrl:TXFC|                    ; 297 (297)         ; 32 (32)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Ozy_Janus|Tx_fifo_ctrl:TXFC                                            ; work         ;
+;    |Tx_fifo_ctrl:TXFC|                    ; 298 (298)         ; 32 (32)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Ozy_Janus|Tx_fifo_ctrl:TXFC                                            ; work         ;
 ;    |async_usb:usb1|                       ; 93 (93)           ; 40 (40)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Ozy_Janus|async_usb:usb1                                               ; work         ;
 ;    |cdc_mcp:dfs|                          ; 10 (6)            ; 8 (4)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Ozy_Janus|cdc_mcp:dfs                                                  ; work         ;
 ;       |cdc_sync:ack|                      ; 2 (2)             ; 2 (2)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Ozy_Janus|cdc_mcp:dfs|cdc_sync:ack                                     ; work         ;
@@ -2383,9 +2395,10 @@ Note: In order to hide this table in the UI and the text report file, please set
 ; IF_chan[2]         ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
 ; IF_last_chan       ; Input  ; Info     ; Stuck at GND                                                                        ;
 ; Ozy_serialno[7..5] ; Input  ; Info     ; Stuck at GND                                                                        ;
-; Ozy_serialno[3..1] ; Input  ; Info     ; Stuck at GND                                                                        ;
+; Ozy_serialno[3..2] ; Input  ; Info     ; Stuck at GND                                                                        ;
 ; Ozy_serialno[4]    ; Input  ; Info     ; Stuck at VCC                                                                        ;
-; Ozy_serialno[0]    ; Input  ; Info     ; Stuck at VCC                                                                        ;
+; Ozy_serialno[1]    ; Input  ; Info     ; Stuck at VCC                                                                        ;
+; Ozy_serialno[0]    ; Input  ; Info     ; Stuck at GND                                                                        ;
 +--------------------+--------+----------+-------------------------------------------------------------------------------------+
 
 
@@ -2474,7 +2487,7 @@ Note: In order to hide this table in the UI and the text report file, please set
 Info: *******************************************************************
 Info: Running Quartus II Analysis & Synthesis
     Info: Version 9.1 Build 350 03/24/2010 Service Pack 2 SJ Web Edition
-    Info: Processing started: Tue Jan 11 16:15:52 2011
+    Info: Processing started: Tue Jan 11 20:12:37 2011
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off Ozy_Janus -c Ozy_Janus
 Info: Found 1 design units, including 1 entities, in source file clkmult3.v
     Info: Found entity 1: clkmult3
@@ -2794,17 +2807,17 @@ Info: 55 registers lost all their fanouts during netlist optimizations. The firs
     Info: Register "NWire_xmit:M_LRAudio|dly_cnt[1]" lost all its fanouts during netlist optimizations.
     Info: Register "NWire_xmit:M_LRAudio|dly_cnt[0]" lost all its fanouts during netlist optimizations.
     Info: Register "async_usb:usb1|FX_state~7" lost all its fanouts during netlist optimizations.
-Info: Implemented 6448 device resources after synthesis - the final resource count might be different
+Info: Implemented 6449 device resources after synthesis - the final resource count might be different
     Info: Implemented 29 input pins
     Info: Implemented 43 output pins
     Info: Implemented 17 bidirectional pins
-    Info: Implemented 6310 logic cells
+    Info: Implemented 6311 logic cells
     Info: Implemented 48 RAM segments
     Info: Implemented 1 PLLs
 Info: Quartus II Analysis & Synthesis was successful. 0 errors, 19 warnings
     Info: Peak virtual memory: 191 megabytes
-    Info: Processing ended: Tue Jan 11 16:16:38 2011
-    Info: Elapsed time: 00:00:46
-    Info: Total CPU time (on all processors): 00:00:40
+    Info: Processing ended: Tue Jan 11 20:12:56 2011
+    Info: Elapsed time: 00:00:19
+    Info: Total CPU time (on all processors): 00:00:19
 
 
