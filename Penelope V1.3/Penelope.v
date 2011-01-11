@@ -54,7 +54,7 @@
                 will ignore the signal on DAC_ALC.
                 Tx_level is set to 128 for testing.
  11 Jan 2011 - Drive_Level sent from Ozy using nWire via Atlas_C18
-             -  *** set pin for C16 and Drive_Level is set to 128 for testing  *****
+             -  *** Drive_Level is set to 128 for testing  *****
   
 */
 
@@ -537,7 +537,7 @@ wire [7:0] Drive_Level; 	// Tx drive level
 
 NWire_rcv  #(.DATA_BITS(8), .ICLK_FREQ(122880000), .XCLK_FREQ(122880000), .SLOWEST_FREQ(1000)) 
       p_ser (.irst(C122_rst), .iclk(C122_clk), .xrst(C122_rst), .xclk(C122_clk),
-             .xrcv_data(/*Drive_Level*/), .xrcv_rdy(drive_rdy), .xrcv_ack(drive_rdy), .din(C18));
+             .xrcv_data(Drive_Level), .xrcv_rdy(drive_rdy), .xrcv_ack(drive_rdy), .din(C18));
 
 
 //------------------------------------------------------------
@@ -560,7 +560,7 @@ end
 
 
 //for testing set the drive control to mid way.
-assign Drive_Level = 8'd128;
+// assign Drive_Level = 8'd128;
 
 ///////////////////////////////////////////////////////////
 //

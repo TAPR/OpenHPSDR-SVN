@@ -142,8 +142,8 @@ RESERVED_INPUT               : 72        :        :                   :         
 GND                          : 73        : gnd    :                   :         :           :                
 C19                          : 74        : input  : 3.3-V LVTTL       :         : 4         : Y              
 RESERVED_INPUT               : 75        :        :                   :         : 4         :                
-RESERVED_INPUT               : 76        :        :                   :         : 4         :                
-C18                          : 77        : input  : 3.3-V LVTTL       :         : 4         : N              
+C18                          : 76        : input  : 3.3-V LVTTL       :         : 4         : Y              
+RESERVED_INPUT               : 77        :        :                   :         : 4         :                
 GND                          : 78        : gnd    :                   :         :           :                
 VCCINT                       : 79        : power  :                   : 1.2V    :           :                
 RESERVED_INPUT               : 80        :        :                   :         : 4         :                
