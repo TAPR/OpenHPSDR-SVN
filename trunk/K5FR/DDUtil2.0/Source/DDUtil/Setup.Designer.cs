@@ -46,7 +46,7 @@ namespace DataDecoder
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Setup));
             this.tabControl = new System.Windows.Forms.TabControl();
             this.tabPorts = new System.Windows.Forms.TabPage();
@@ -3760,7 +3760,8 @@ namespace DataDecoder
             this.txtA95mem.Size = new System.Drawing.Size(39, 18);
             this.txtA95mem.TabIndex = 115;
             this.txtA95mem.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.toolTip1.SetToolTip(this.txtA95mem, "Selected memory mode.");
+            this.toolTip1.SetToolTip(this.txtA95mem, "Selected memory mode (double-click to save new settings).");
+            this.txtA95mem.DoubleClick += new System.EventHandler(this.txtA95mem_DoubleClick);
             // 
             // btnA95mem
             // 
@@ -6955,9 +6956,9 @@ namespace DataDecoder
             // 
             this.dgm.AllowUserToAddRows = false;
             this.dgm.AllowUserToDeleteRows = false;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.White;
-            this.dgm.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.White;
+            this.dgm.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle2;
             this.dgm.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.dgm.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgm.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
