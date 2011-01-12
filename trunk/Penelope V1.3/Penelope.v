@@ -6,7 +6,7 @@
 //  HPSDR - High Performance Software Defined Radio
 //
 //
-//  Penelope Exciter.
+//  Penelope and PennyLane Exciter.
 //
 //
 //  This program is free software; you can redistribute it and/or modify
@@ -53,8 +53,8 @@
   4 Jan 2011 - Added support for PennyLane, common code for both boards. Penelope
                 will ignore the signal on DAC_ALC.
                 Tx_level is set to 128 for testing.
- 11 Jan 2011 - Drive_Level sent from Ozy using nWire via Atlas_C18
-             -  *** Drive_Level is set to 128 for testing  *****
+ 11 Jan 2011 - Drive_Level sent from Ozy using nWire via Atlas_C18, ignored by Peneope.
+ 12          - Replaced CORDIC etc with code from Hermes. Changed overall gain to approx unity.
   
 */
 
@@ -105,7 +105,7 @@ output wire USEROUT3;
 output wire USEROUT4;
 output wire USEROUT5;
 output wire USEROUT6;
-output wire [13:0] DAC;
+output reg [13:0] DAC;
 output wire nLVDSRXE;
 output wire LVDSTXE;
 output wire FPGA_PLL;
@@ -139,11 +139,11 @@ assign nCS      = 1'b1; // I2C address of TLV320 is 0x1B
 localparam SERIAL = 8'd13;  // software version serial number = 1.3
 
 localparam C122_TPD = 1.3;
-//////////////////////////////////////////////////////////////
-//
+
+//----------------------------------
 //		Reset
-//
-//////////////////////////////////////////////////////////////
+//----------------------------------
+
 
 reg C122_rst;
 reg [10:0] C122_rst_cnt;
@@ -156,11 +156,9 @@ begin
   C122_rst <= #C122_TPD C122_rst_cnt[10] ? 1'b0 : 1'b1;
 end
 
-//////////////////////////////////////////////////////////////
-//
+//---------------------------
 //    CLOCKS
-//
-//////////////////////////////////////////////////////////////
+//---------------------------
 
 localparam SPEED_48K = 2'b00;
 
@@ -226,25 +224,28 @@ assign reference = ref_ext ? _10MHZ : ext_10MHZ;
 assign ext_10MHZ = ref_ext ? _10MHZ : 1'bz;    // C16 is bidirectional so set high Z if input. 
 
 
-//////////////////////////////////////////////////////////////
-//
+//-----------------------------
 //    ADC SPI interface 
-//
-//////////////////////////////////////////////////////////////
+//-----------------------------
 
-wire [11:0] AIN5;  // holds 12 bit ADC value of Forward Power detector.
 
+wire [11:0] AIN5;  				// holds 12 bit ADC value of Forward Power detector.
+reg  [11:0] C122_Power_out;		// holds Forward power in C122_clk domain 
+reg  [11:0] temp;
+	
 ADC ADC_SPI(.clock(C122_CBCLK), .SCLK(ADCCLK), .nCS(nADCCS), .MISO(ADCMISO), .MOSI(ADCMOSI), .AIN5(AIN5));
 
+// transfer AIN5 into C122 clock domain
+always @ (posedge C122_clk)
+	{C122_Power_out, temp} <= {temp, AIN5};
+	
 
-
-//////////////////////////////////////////////////////////////
-//
+//-------------------------------------------------
 //    Convert frequency to phase word
 //
 //    Calculates  ratio of frequency/122.88Mhz
-//
-//////////////////////////////////////////////////////////////
+//--------------------------------------------------
+
 /*
  B scalar multiplication will be used to do the F/122.88Mhz function
  where: F * C = R
@@ -284,201 +285,103 @@ begin
   end
 end
 
-////////////////////////////////////////////////////////////////
-//
-//  ALC
-//
-////////////////////////////////////////////////////////////////
+//---------------------------------------------------------
+//                 Transmitter code 
+//---------------------------------------------------------	
 
-// The following code provides fast attack and slow decay for the 
-// ALC voltage. The output from the ALC ADC is compared with its
-// previous sample. If higher, or the same, the new value is used.
-// If lower, then the previous value is used but decremented by 1 each 
-// time through the loop. This provides a (linear) slow decay of
-// approximately 2 seconds. Extend ALC input to 21 bits to 
-// get sufficient delay. 
-
-/*
-
-	This is how the ALC works.  Its basically a low gain control loop . The 
-	inputs are a pre-set reference level (that determines the maximum RF 
-	output level) and the other is the output of an ADC/Integrator  that 
-	provides a voltage proportional to the RF envelope. The output is a 
-	gain value (1...0.0000).
-
-	In order to continuously measure the peak RF output a fast attack, slow 
-	decay integrator is used at the output of the ADC. This prevents the 
-	feedback voltage varying at speech rates and causing intermodulation 
-	distortion.
-
-	If the integrator voltage is < reference then do nothing since we have 
-	not reached the max RF output yet. If the integrator is > reference 
-	then reduce I and Q inputs to the DAC (by x gain) so that the max RF 
-	output is not exceeded.  Since the loop gain is low this will not be 
-	exact ( we are not trying to hold the output constant like in an AGC 
-	system) but the long term trend will be that the Integrator output = 
-	reference.
-
-	The higher the values of I and Q then the lower to gain needs to be.
+/* 
+	The gain distribution of the transmitter code is as follows.
+	Since the CIC interpolating filters do not interpolate by 2^n they have an overall loss.
 	
+	The overall gain in the interpolating filter is ((RM)^N)/R.  So in this case its 2560^4.
+	This is normalised by dividing by ceil(log2(2560^4)).
+	
+	In which case the normalized gain would be (2560^4)/(2^46) = .6103515625
+	
+	The CORDIC has an overall gain of SQRT(2) * 1.647 = 2.328
+	(the SQRT(2) is due to using complex inputs).
+	
+	Since the CORDIC takes 16 bit I & Q inputs but output needs to be truncated to 14 bits, in order to
+	interface to the DAC, the gain is reduced by 1/4 to 0.5822.
+	
+	We need to be able to drive to DAC to its full range in order to maximise the S/N ratio and 
+	minimise the amount of PA gain.  We can increase the output of the CORDIC by multiplying it by 2.
+	This is simply achieved by setting the CORDIC output width to 15 bits and assigning bits [13:0] to the DAC.
+	
+	The gain distripution is now:
+	
+	0.61 * 0.5822 * 2 = 0.71.
+	
+	In order for the over gain to be unity we need a gain stage of 1/0.71 =  1.407.
+	We can approximate this by using addition thus
+	
+	output  = input + input/4 + input/8 + input/32 = input * 1.40625
+	
+	Hence the over all gain is now 
+
+	0.61 * 1.40625 * 0.588 * 2 =  0.9988
+
+
 */
 
+reg signed [15:0]C122_cic_i;
+reg signed [15:0]C122_cic_q;
+wire C122_ce_out_i;
+wire C122_ce_out_q;
+wire signed [15:0] I_sync_data;
+wire signed [15:0] Q_sync_data; 
 
-
-localparam DEC_SEC = 2000;              // seconds*1000 => milliseconds
-localparam ATT_SEC = 10;               // seconds*1000 => milliseconds
-localparam CLK_RATE = 12288000/4/1000;  // speed of CBCLK/1000 = clocks/second/1000
-localparam DECAY_RANGE = (DEC_SEC*CLK_RATE)>>16; // 2000 mS decay for full 16 bit range
-localparam ATTACK_RANGE = (ATT_SEC*CLK_RATE)>>16; // 100 mS attack for full 16 bit range
-localparam DR = clogb2(DECAY_RANGE);    // number of bits needed to hold range from 0 - DECAY_RANGE
-localparam AR = clogb2(ATTACK_RANGE);   // number of bits needed to hold range from 0 - ATTACK_RANGE
-
-wire    [15:0] ALC_in;
-reg     [15:0] ALC_out;
-reg     [DR:0] decay_cnt;
-reg     [AR:0] attack_cnt;
-
-assign ALC_in = {AIN5, 4'b0}; // convert to a 16 bit value range
-
+// latch I&Q data on strobe from CIC filters
 always @ (posedge C122_clk)
-begin
-  if (C122_cbfall)
-  begin
-    if ((ALC_in < ALC_out) || (attack_cnt == ATTACK_RANGE))
-      attack_cnt <= 0;
-    else
-      attack_cnt <= attack_cnt + 1'b1; // ALC_in >= ALC_out so run attack counter
-
-    if ((ALC_in >= ALC_out) || (decay_cnt == DECAY_RANGE))
-      decay_cnt <= 0;
-    else
-      decay_cnt <= decay_cnt + 1'b1; // ALC_in < ALC_out so run decay counter
-
-    if ((ALC_in < ALC_out) && (decay_cnt == DECAY_RANGE))
-      ALC_out <= ALC_out - 1'b1;  // slow decay
-    else if ((ALC_in > ALC_out) && (attack_cnt == ATTACK_RANGE))
-      ALC_out <= ALC_out + 1'b1;  // quick attack
-  end
-end
-
-wire [15:0] PWM0_Data;
-wire [15:0] PWM1_Data;
-wire [15:0] PWM2_Data;
-reg  [15:0] C122_ALC_i;
-reg  [15:0] C122_ALC_q;
-
-reg  [11:0] C122_ain5;
-
-always @(posedge C122_clk)  // bring AIN5 into C122_clk domain
-begin: CB_AIN5_TO_C122
-  reg  [11:0] ain1, ain0;
-
-  {ain1, ain0} <= {ain0, AIN5};
-  if (C122_cbfall)
-    C122_ain5 <= ain1;
-end
-
-assign PWM0_Data = C122_ALC_i;
-assign PWM1_Data = {1'b0,C122_ain5,3'd0}; // PWM1 has RF output envelope.
-//assign PWM1_Data = C122_ALC_q;
-assign PWM2_Data = {1'b0,ALC_out[15:1]};    // PWM2 has ALC volts for testing
-
-
-/*
-  The Automatic Level Control (ALC) works as follows. The I and Q samples are multipled 
-  by a value 'gain'. This is a fractional value such that 0.9999 is represented as 65535. 
-  With no RF output the gain is set to 1 (actually 0.9999). When RF is produced this is
-  converted into a DC level, linearized and fed to a 12 bit ADC. The output of the ADC is 
-  then subtracted from the gain, hence as the RF output increase the gain reduces which
-  in the asemtote is a preset level that corresponds to ~0.5W of RF output.
-*/
-wire [15:0] set_level;
-wire [15:0] gain;
-wire [15:0] ALC_level;
-
-wire [15:0] C122_res_i, C122_res_q;
-reg  [15:0] C122_qx0;
-reg  [15:0] C122_ix0;
-
-wire [15:0] I_sync_data;
-wire [15:0] Q_sync_data;
-
-// unsigned => 0.9999 i.e. ~unity gain = (B16-1) = 2^16 - 1 = 65535 
-assign set_level = 16'hCCCC;
-
-assign ALC_level = {5'd0,ALC_out[15:5]}; // unsigned gain for ALC signal
-
-assign gain = (set_level - ALC_level);
-
-// use this to turn ALC off
-// assign gain = set_level;
-
-// signed multiply of I & Q by gain
-ALC ALC_I(.out(C122_res_i), .sample(I_sync_data), .multiply(gain));
-
-ALC ALC_Q(.out(C122_res_q), .sample(Q_sync_data), .multiply(gain));
-
-// latch I & Q data into  CIC when ce_out_x goes high. 
-wire               C122_ce_out_i;   // narrow pulse when data required
-wire               C122_ce_out_q;   // narrow pulse when data required
-reg  signed [15:0] C122_cic_i;
-reg  signed [15:0] C122_cic_q;
-
-always @ (posedge C122_clk)
-begin
-  if (C122_cbfall) // 16 by 16 bit multiply should be possible in 1 CBCLK cycle
-  begin
-    C122_ALC_i <= C122_res_i; 
-    C122_ALC_q <= C122_res_q;
-  end
-
-  if (C122_ce_out_i)
-    C122_cic_i <= C122_ALC_i;
-
-  if (C122_ce_out_q)
-    C122_cic_q <= C122_ALC_q;
+begin 
+	if (C122_ce_out_i)
+		C122_cic_i = I_sync_data;
+	if (C122_ce_out_q)
+		C122_cic_q = Q_sync_data;	
 end 
 
-////////////////////////////////////////////////////////////////
-//
-//  Interpolating CIC filter  R = 2560  N = 5
-//
-////////////////////////////////////////////////////////////////
 
-wire [15:0] C122_cic_out_i;
-wire [15:0] C122_cic_out_q;
+//-----------------------------------------------
+//  Interpolating CIC filter  R = 2560  N = 5
+//-----------------------------------------------
+
+wire signed [15:0] C122_cic_out_i;
+wire signed [15:0] C122_cic_out_q;
+wire signed [15:0] C122_out_i;
+wire signed [15:0] C122_out_q; 
 
 cicint cic_I(.clk(C122_clk), .clk_enable(1'b1), .reset(C122_rst), .filter_in(C122_cic_i),
              .filter_out(C122_cic_out_i), .ce_out(C122_ce_out_i));
+             
 cicint cic_Q(.clk(C122_clk), .clk_enable(1'b1), .reset(C122_rst), .filter_in(C122_cic_q),
              .filter_out(C122_cic_out_q), .ce_out(C122_ce_out_q));
 
+// multiply CIC outputs by 1.40625, >>> is the Veriloig arrithmetic shift right
+// i.e. output  = input + input/4 + input/8 + input/32 = input * 1.40625
+    
+assign C122_out_i = C122_cic_out_i + (C122_cic_out_i >>> 2) + (C122_cic_out_i >>> 3)   + (C122_cic_out_i >>> 5);
+assign C122_out_q = C122_cic_out_q + (C122_cic_out_q >>> 2) + (C122_cic_out_q >>> 3)   + (C122_cic_out_q >>> 5);
 
-//////////////////////////////////////////////////////////////
-//
+
+
+//---------------------------
 //    CORDIC NCO 
-//
-//////////////////////////////////////////////////////////////
+//---------------------------
 
 // Code rotates input at set frequency and produces I & Q /
 
 wire [17:0] C122_i_out; 
 wire [17:0] C122_q_out; 
 wire [31:0] C122_phase;
-
-// The phase accumulator takes a 32 bit frequency dword and outputs a 32 bit phase dword on each clock
-phase_accumulator rx_phase_accumulator
-  (.clk(C122_clk), .reset(C122_rst), .frequency(C122_phase_word), .phase_out(C122_phase));
+wire signed [14:0] C122_cordic_i_out;
 
 
-// The cordic takes I and Q in along with the top 15 bits of the phase dword.
-// The I and Q out are freq shifted
-cordic_16 tx_cordic
-      (.i_in(C122_cic_out_q), .q_in(C122_cic_out_i),
-       .iout(C122_i_out), .qout(C122_q_out), .ain(C122_phase[31:12]), .clk(C122_clk));
+cpl_cordic #(.OUT_WIDTH(15))
+ 		cordic_inst (.clock(C122_clk), .frequency(C122_phase_word), .in_data_I(C122_out_q),
+	    			 .in_data_Q(C122_out_i), .out_data_I(C122_cordic_i_out), .out_data_Q());       
 
 
-// NOTE:  I and Q inputs reversed to give correct sideband out - FIX THIS 
+// NOTE:  I and Q inputs reversed to give correct sideband out
 
 /* 
   We can use either the I or Q output from the CORDIC directly to drive the DAC.
@@ -492,41 +395,48 @@ cordic_16 tx_cordic
         = cos(f1 + f2) + j sin(f1 + f2)
 */
 
-// Add some gain  before we feed the DAC so we can drive to 1/2W on 6m. This is necessary since the 
-// interpolating CIC has a loss since it does not interpolate by 2^n. 
+// the CORDIC output is stable on the negative edge of the clock
 
-assign  DAC[13:0] = {C122_i_out[17], C122_i_out[15:3]};   // use q_out if 90 degree phase shift required by EER Tx etc
-//assign DAC[13:0] = C122_i_out[16:3]; // gain of 2, use q_out if 90 degree phase shift required by EER Tx etc 
+always @ (negedge C122_clk)
+	DAC[13:0] = C122_cordic_i_out[13:0];   //gain of 2
 
-/////////////////////////////////////////////////////////////////
-//
+
+//--------------------------------------------
 // Single bit PWM 16 bit D/A converters
+//--------------------------------------------
+
+// not presently used 
+
+//wire [15:0] PWM0_Data;
+//wire [15:0] PWM1_Data;
+//wire [15:0] PWM2_Data;
+//reg  [15:0] PWM0_Data_in;
+//reg  [15:0] PWM1_Data_in;
+//reg  [15:0] PWM2_Data_in;
+//reg  [16:0] PWM0_accumulator;
+//reg  [16:0] PWM1_accumulator;
+//reg  [16:0] PWM2_accumulator;
 //
-/////////////////////////////////////////////////////////////////
-
-
-reg  [15:0] PWM0_Data_in;
-reg  [15:0] PWM1_Data_in;
-reg  [15:0] PWM2_Data_in;
-reg  [16:0] PWM0_accumulator;
-reg  [16:0] PWM1_accumulator;
-reg  [16:0] PWM2_accumulator;
-
-// This runs off the 122.88MHz clock to provide adequate resolution.
-
-always @(posedge C122_clk)
-begin
-  PWM0_Data_in      <= PWM0_Data + 16'h8000;         // so that 0 in gives 50:50 mark/space
-  PWM1_Data_in      <= PWM1_Data + 16'h8000;
-  PWM2_Data_in      <= PWM2_Data + 16'h8000;
-  PWM0_accumulator  <= PWM0_accumulator[15:0] + PWM0_Data_in;
-  PWM1_accumulator  <= PWM1_accumulator[15:0] + PWM1_Data_in;
-  PWM2_accumulator  <= PWM2_accumulator[15:0] + PWM2_Data_in;
-end
-
-assign PWM0 = PWM0_accumulator[16];       // send to PWM LPFs for now 
-assign PWM1 = PWM1_accumulator[16]; 
-assign PWM2 = PWM2_accumulator[16]; 
+//assign PWM0_Data = 0;
+//assign PWM1_Data = 0;
+//assign PWM2_Data = 0;
+//
+//
+//// This runs off the 122.88MHz clock to provide adequate resolution.
+//
+//always @(posedge C122_clk)
+//begin
+//  PWM0_Data_in      <= PWM0_Data + 16'h8000;         // so that 0 in gives 50:50 mark/space
+//  PWM1_Data_in      <= PWM1_Data + 16'h8000;
+//  PWM2_Data_in      <= PWM2_Data + 16'h8000;
+//  PWM0_accumulator  <= PWM0_accumulator[15:0] + PWM0_Data_in;
+//  PWM1_accumulator  <= PWM1_accumulator[15:0] + PWM1_Data_in;
+//  PWM2_accumulator  <= PWM2_accumulator[15:0] + PWM2_Data_in;
+//end
+//
+//assign PWM0 = PWM0_accumulator[16];       // send to PWM LPFs for now 
+//assign PWM1 = PWM1_accumulator[16]; 
+//assign PWM2 = PWM2_accumulator[16]; 
 
 //-----------------------------------------------------------
 //  Get Drive_Level (PennyLane only)
@@ -559,14 +469,10 @@ begin
 end 
 
 
-//for testing set the drive control to mid way.
-// assign Drive_Level = 8'd128;
-
-///////////////////////////////////////////////////////////
-//
+//-----------------------------------------
 //    Command and Control Decoder 
-//
-///////////////////////////////////////////////////////////
+//-----------------------------------------
+
 /*
 	The C&C encoder broadcasts data over the Atlas bus C20 for
 	use by other cards e.g. Mercury and Penelope.
@@ -634,11 +540,11 @@ assign ref_ext        = C122_clock_select[0];
 // if set use internally and send to LVDS else get from LVDS. Force to 0 during reset 
 assign source_122MHZ  = C122_rst ? 1'b0 : (C122_clock_select[3:2] == 2'b00);
 
-////////////////////////////////////////////////////////////////
-//
+
+//---------------------------------------------------------------------------
 //		Get P_IQ_data (Atlas C19) and then synchronize it to CBCLK/CLRCLK 
-//
-//////////////////////////////////////////////////////////////
+//---------------------------------------------------------------------------
+
 wire        IQ_rdy;
 
 NWire_rcv #(.DATA_BITS(32), .ICLK_FREQ(122880000), .XCLK_FREQ(122880000), .SLOWEST_FREQ(10000))
@@ -646,17 +552,17 @@ NWire_rcv #(.DATA_BITS(32), .ICLK_FREQ(122880000), .XCLK_FREQ(122880000), .SLOWE
             .xrcv_rdy(IQ_rdy), .xrcv_ack(IQ_rdy), .xrcv_data({I_sync_data, Q_sync_data}),
             .din(C19));
                  
-assign C22 = CLRCLK; // P_IQ_sync -> so Ozy knows when to send P_IQ_data
+assign C22 = CLRCLK; // P_IQ_sync -> so Ozy knows when to send P_IQ_data  **** why are we sending the I and Q data to the TLV320 ??? ****
 
 I2S_xmit #(.DATA_BITS(32))  // CLRCLK running at 48KHz
   IQD (.rst(C122_rst), .lrclk(CLRCLK), .clk(C122_clk), .CBrise(C122_cbrise),
        .CBfall(C122_cbfall), .sample({I_sync_data,Q_sync_data}), .outbit(TLV320_CDIN));
 
-///////////////////////////////////////////////////////////
-//
-// send data to CDOUT_P (Atlas A11)
-//
-///////////////////////////////////////////////////////////
+
+//------------------------------------------------------
+// send microphone data to CDOUT_P (Atlas A11)
+//------------------------------------------------------
+
 reg  [15:0] C122_mic_data;
 wire        C122_mic_rdy;
 wire [31:0] C122_mic_LR;
@@ -674,18 +580,18 @@ end
 I2S_rcv #(32,2,1) // WARNING: values 2,1 may need adjusting for best capture of data
    PJD (.xrst(C122_rst), .xclk(C122_clk), .xData(C122_mic_LR),
         .xData_rdy(C122_mic_rdy), .BCLK(C122_CBCLK), .LRCLK(CLRCLK), .din(TLV320_CDOUT));
-///////////////////////////////////////////////////////////
-//
+        
+ 
+//-------------------------------------------
 //    Serial Number & Power out Encoder 
-//
-///////////////////////////////////////////////////////////
+//-------------------------------------------
 
 // Sends current software serial # as an 8 bit value.
-// Sends ALC as 12 bits
+// Sends Power output as 12 bits
 
 wire [19:0] xmit_data;
 
-assign xmit_data = {SERIAL,ALC_in[15:4]};
+assign xmit_data = {SERIAL,C122_Power_out};
 
 NWire_xmit  #(.DATA_BITS(20), .ICLK_FREQ(122880000), .XCLK_FREQ(122880000), .SEND_FREQ(1000)) 
       ser_no (.irst(C122_rst), .iclk(C122_clk), .xrst(C122_rst), .xclk(C122_clk),
@@ -767,23 +673,9 @@ assign LED4 = (AIN5 > 1000)? 1'b0 : 1'b1;
 assign LED5 = (AIN5 > 2000)? 1'b0 : 1'b1;  
 assign LED6 = (AIN5 > 3000)? 1'b0 : 1'b1;  
 
-//assign LED7 = 0;    // LED7 ON so we can see code has loaded OK 
-// blink - fast when PTT active
-//assign LED2 = source_122MHZ; //LVDSTXE;
-//assign LED3 = C122_clock_select[2]; //nLVDSRXE;
-//assign LED4 = LVDSTXE; //C122_clock_select[1];
-//assign LED5 = PLL_locked; //C122_clock_select[0]; //source_122MHZ;
-
-
 reg[26:0]counter;
 always @(posedge C122_clk) counter = counter + 1'b1;
 assign LED7 = PTT_out ? counter[24] : counter[26];  // LED 7 flashes twice as fast when PTT active.
-
-//reg[22:0]count_10;
-//always @(posedge ext_10MHZ) count_10 = count_10 + 1'b1;
-//assign LED6 = count_10[22];
-
-
 
 // User open collector outputs 
 assign USEROUT0 = OC[0];
