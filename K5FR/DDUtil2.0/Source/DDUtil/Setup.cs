@@ -1023,7 +1023,7 @@ namespace DataDecoder
                         this.Invoke(d, new object[] { text });
                     }
                     else
-                        txtFwd.Text = text;
+                        txtFwd.Text = text.TrimStart('0');
                 }
                 catch { }
 
@@ -4610,10 +4610,9 @@ namespace DataDecoder
             else
             {
                 if (text == "1") txtA95mem.Text = "Def";
-                else if (text == "2") txtA95mem.Text = "Usr 1";
-                else if (text == "3") txtA95mem.Text = "Usr 2";
+                else if (text == "2") txtA95mem.Text = "User1";
+                else if (text == "3") txtA95mem.Text = "User2";
                 else txtA95mem.Text = "";
-                //else if (text == "4") txtA95mem.Text = "Auto";
             }
         }
         // Write to Plate Current (Ip) window
@@ -5054,6 +5053,15 @@ namespace DataDecoder
             txtA95msg.Clear();
             SetA95fault("False");
         }
+        // the memory window was double-clicked
+        private void txtA95mem_DoubleClick(object sender, EventArgs e)
+        {
+            if (txtA95mem.Text == "User1" || txtA95mem.Text == "User2")
+            {
+                A95Q.Enqueue("01,15");
+                SetA95msg("Memory Saved");
+            }
+        }
 
         #endregion Events
 
@@ -5132,8 +5140,10 @@ namespace DataDecoder
                 if (chkA95enab.Checked && !chkLPenab.Checked &&
                     !chkWNEnab.Checked && !chkPM.Checked)
                 {
+                    txtFwd.Visible = true; lblFwd.Visible = true;
+                    txtFwd.Enabled = true;
                     txtAvg.Enabled = true; txtSWR.Enabled = true;
-                    txtAvg.Text = "0.0"; txtSWR.Text = "0.0";
+                    txtFwd.Text =  txtAvg.Text = txtSWR.Text = "0.0";
                     lblAvg.Text = "Fwd";
                     wattmtr = true;
                 }
@@ -5250,10 +5260,11 @@ namespace DataDecoder
                         case "2":
                             regx = @"(?<fwd>\d+),(?<ref>\d+),(?<pin>\d+),(?<vp>\d+)," +
                                    @"(?<ip>\d+),(?<gain>\d+),(?<vg>\d+),(?<ig>\d+)," +
-                                   @"(?<bnd>\d+),(?<state>\d+),(?<key>\d+),(?<pep>\d+)";
+                                   @"(?<bnd>\d+),(?<state>\d+),(?<fault>\d+),(?<key>\d+),(?<pep>\d+)";
                             Match APA02 = Regex.Match(param, regx);
                             if (wattmtr)
                             {
+                                SetFwd(APA02.Groups["pep"].Value.Substring(0, 4));
                                 SetAvg(APA02.Groups["fwd"].Value.Substring(0,4));
                                 string refSwr = APA02.Groups["ref"].ToString();
                                 SetSwr((refSwr.Substring(0, 2) + "." +
@@ -17355,7 +17366,7 @@ ZZDU0:0:0:0:0:0:0:0:0:1:3:0:0:06:07:00:00:04:000:000:059:020:026:022:010:0000:00
                 this.Invoke(d, new object[] { text });
             }
             else
-                txtAvg.Text = text.TrimStart('0'); ;
+                txtAvg.Text = text.TrimStart('0');
         }
         // Write SWR reading to txt box
         //delegate void SetSWRCallback(string text);

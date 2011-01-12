@@ -518,7 +518,7 @@
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:MsgBoxCheck, Version=1.0.3984.12993, Culture=neutral, processorArchitecture=x86"
+            "AssemblyAsmDisplayName" = "8:MsgBoxCheck, Version=1.0.4024.35877, Culture=neutral, processorArchitecture=x86"
                 "ScatterAssemblies"
                 {
                     "_3B2A91740AF2B27F98D7567BB49F4422"
@@ -1184,14 +1184,14 @@
         {
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:DDUtil"
-        "ProductCode" = "8:{0586AE4D-4134-411C-8475-B6777804AC57}"
-        "PackageCode" = "8:{F40756B5-B6A7-48C6-BDCB-9C9A47C6FAEE}"
+        "ProductCode" = "8:{3475EC21-774C-481B-B429-C56CF538A6C5}"
+        "PackageCode" = "8:{C06D4D7C-67AF-4D20-B284-238F845D87D4}"
         "UpgradeCode" = "8:{E787AEB9-A577-499D-A08E-775DE944A651}"
         "RestartWWWService" = "11:FALSE"
         "RemovePreviousVersions" = "11:TRUE"
         "DetectNewerInstalledVersion" = "11:TRUE"
         "InstallAllUsers" = "11:FALSE"
-        "ProductVersion" = "8:2.0.094"
+        "ProductVersion" = "8:2.0.096"
         "Manufacturer" = "8:Default Company Name"
         "ARPHELPTELEPHONE" = "8:"
         "ARPHELPLINK" = "8:"
