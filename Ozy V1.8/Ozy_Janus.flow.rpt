@@ -1,0 +1,171 @@
+Flow report for Ozy_Janus
+Tue Jan 11 20:14:28 2011
+Quartus II Version 9.1 Build 350 03/24/2010 Service Pack 2 SJ Web Edition
+
+
+---------------------
+; Table of Contents ;
+---------------------
+  1. Legal Notice
+  2. Flow Summary
+  3. Flow Settings
+  4. Flow Non-Default Global Settings
+  5. Flow Elapsed Time
+  6. Flow OS Summary
+  7. Flow Log
+
+
+
+----------------
+; Legal Notice ;
+----------------
+Copyright (C) 1991-2010 Altera Corporation
+Your use of Altera Corporation's design tools, logic functions 
+and other software and tools, and its AMPP partner logic 
+functions, and any output files from any of the foregoing 
+(including device programming or simulation files), and any 
+associated documentation or information are expressly subject 
+to the terms and conditions of the Altera Program License 
+Subscription Agreement, Altera MegaCore Function License 
+Agreement, or other applicable license agreement, including, 
+without limitation, that your use is for the sole purpose of 
+programming logic devices manufactured by Altera and sold by 
+Altera or its authorized distributors.  Please refer to the 
+applicable agreement for further details.
+
+
+
++-----------------------------------------------------------------------------------+
+; Flow Summary                                                                      ;
++------------------------------------+----------------------------------------------+
+; Flow Status                        ; Successful - Tue Jan 11 20:14:28 2011        ;
+; Quartus II Version                 ; 9.1 Build 350 03/24/2010 SP 2 SJ Web Edition ;
+; Revision Name                      ; Ozy_Janus                                    ;
+; Top-level Entity Name              ; Ozy_Janus                                    ;
+; Family                             ; Cyclone II                                   ;
+; Device                             ; EP2C8Q208C8                                  ;
+; Timing Models                      ; Final                                        ;
+; Met timing requirements            ; No                                           ;
+; Total logic elements               ; 6,166 / 8,256 ( 75 % )                       ;
+;     Total combinational functions  ; 4,909 / 8,256 ( 59 % )                       ;
+;     Dedicated logic registers      ; 3,493 / 8,256 ( 42 % )                       ;
+; Total registers                    ; 3493                                         ;
+; Total pins                         ; 89 / 138 ( 64 % )                            ;
+; Total virtual pins                 ; 0                                            ;
+; Total memory bits                  ; 114,688 / 165,888 ( 69 % )                   ;
+; Embedded Multiplier 9-bit elements ; 0 / 36 ( 0 % )                               ;
+; Total PLLs                         ; 1 / 2 ( 50 % )                               ;
++------------------------------------+----------------------------------------------+
+
+
++-----------------------------------------+
+; Flow Settings                           ;
++-------------------+---------------------+
+; Option            ; Setting             ;
++-------------------+---------------------+
+; Start date & time ; 01/11/2011 20:12:37 ;
+; Main task         ; Compilation         ;
+; Revision Name     ; Ozy_Janus           ;
++-------------------+---------------------+
+
+
++-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Flow Non-Default Global Settings                                                                                                                                                                                                                                                                                                              ;
++---------------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+--------------------------------+-------------+-------------------+
+; Assignment Name                             ; Value                                                                                                                                                                                                                        ; Default Value                  ; Entity Name ; Section Id        ;
++---------------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+--------------------------------+-------------+-------------------+
+; ADV_NETLIST_OPT_SYNTH_WYSIWYG_REMAP         ; On                                                                                                                                                                                                                           ; Off                            ; --          ; --                ;
+; ALLOW_POWER_UP_DONT_CARE                    ; Off                                                                                                                                                                                                                          ; On                             ; --          ; --                ;
+; COMPILER_SIGNATURE_ID                       ; 123483488765.129474795700920                                                                                                                                                                                                 ; --                             ; --          ; --                ;
+; EDA_DESIGN_INSTANCE_NAME                    ; ozy_janus                                                                                                                                                                                                                    ; --                             ; --          ; Altera simulation ;
+; EDA_NATIVELINK_SIMULATION_TEST_BENCH        ; Altera simulation                                                                                                                                                                                                            ; --                             ; --          ; eda_simulation    ;
+; EDA_OUTPUT_DATA_FORMAT                      ; Verilog                                                                                                                                                                                                                      ; --                             ; --          ; eda_simulation    ;
+; EDA_SIMULATION_TOOL                         ; ModelSim (Verilog)                                                                                                                                                                                                           ; <None>                         ; --          ; --                ;
+; EDA_TEST_BENCH_ENABLE_STATUS                ; TEST_BENCH_MODE                                                                                                                                                                                                              ; --                             ; --          ; eda_simulation    ;
+; EDA_TEST_BENCH_FILE                         ; sim.v                                                                                                                                                                                                                        ; --                             ; --          ; Altera simulation ;
+; EDA_TEST_BENCH_MODULE_NAME                  ; sim                                                                                                                                                                                                                          ; --                             ; --          ; Altera simulation ;
+; EDA_TEST_BENCH_NAME                         ; Altera simulation                                                                                                                                                                                                            ; --                             ; --          ; eda_simulation    ;
+; EDA_TIME_SCALE                              ; 1 ns                                                                                                                                                                                                                         ; --                             ; --          ; eda_simulation    ;
+; ENABLE_DA_RULE                              ; C101, C102, C103, C104, C105, C106, R101, R102, R103, R104, R105, T101, T102, A101, A102, A103, A104, A105, A106, A107, A108, A109, A110, S101, S102, S103, S104, D101, D102, D103, H101, H102, M101, M102, M103, M104, M105 ; --                             ; --          ; --                ;
+; ENABLE_DRC_SETTINGS                         ; On                                                                                                                                                                                                                           ; Off                            ; --          ; --                ;
+; ENABLE_SIGNALTAP                            ; Off                                                                                                                                                                                                                          ; --                             ; --          ; --                ;
+; FITTER_EFFORT                               ; Standard Fit                                                                                                                                                                                                                 ; Auto Fit                       ; --          ; --                ;
+; FMAX_REQUIREMENT                            ; 96 MHz                                                                                                                                                                                                                       ; --                             ; --          ; --                ;
+; INCREMENTAL_COMPILATION                     ; Off                                                                                                                                                                                                                          ; FULL_INCREMENTAL_COMPILATION   ; --          ; --                ;
+; IP_TOOL_NAME                                ; ALTPLL                                                                                                                                                                                                                       ; --                             ; --          ; --                ;
+; IP_TOOL_VERSION                             ; 8.1                                                                                                                                                                                                                          ; --                             ; --          ; --                ;
+; MESSAGE_SUPPRESSION_RULE_FILE               ; Ozy_Janus.srf                                                                                                                                                                                                                ; --                             ; --          ; --                ;
+; MISC_FILE                                   ; C:/Documents and Settings/Kirk Weedman/Desktop/HPSDR Verilog/OzyJanus/Ozy_Janus.dpf                                                                                                                                          ; --                             ; --          ; --                ;
+; MISC_FILE                                   ; C:/Documents and Settings/Kirk/Desktop/OzyJanus/Ozy_Janus.dpf                                                                                                                                                                ; --                             ; --          ; --                ;
+; MISC_FILE                                   ; C:/Documents and Settings/Kirk/Desktop/HPSDR Verilog/OzyJanus/Ozy_Janus.dpf                                                                                                                                                  ; --                             ; --          ; --                ;
+; MISC_FILE                                   ; C:/Documents and Settings/Kirk/Desktop/openhpsdr/HPSDR Verilog/OzyJanus/Ozy_Janus.dpf                                                                                                                                        ; --                             ; --          ; --                ;
+; MISC_FILE                                   ; clkmult3_inst.v                                                                                                                                                                                                              ; --                             ; --          ; --                ;
+; MISC_FILE                                   ; clkmult3_bb.v                                                                                                                                                                                                                ; --                             ; --          ; --                ;
+; MISC_FILE                                   ; clkmult3.ppf                                                                                                                                                                                                                 ; --                             ; --          ; --                ;
+; MISC_FILE                                   ; C:/HPSDR/trunk/Ozy V1.7/Ozy_Janus.dpf                                                                                                                                                                                        ; --                             ; --          ; --                ;
+; MISC_FILE                                   ; O:/HPSDR/trunk/Ozy V1.8a/Ozy_Janus.dpf                                                                                                                                                                                       ; --                             ; --          ; --                ;
+; MISC_FILE                                   ; C:/HPSDR/trunk/Ozy V1.8a/Ozy_Janus.dpf                                                                                                                                                                                       ; --                             ; --          ; --                ;
+; MUX_RESTRUCTURE                             ; Off                                                                                                                                                                                                                          ; Auto                           ; --          ; --                ;
+; NUMBER_OF_DESTINATION_TO_REPORT             ; 20                                                                                                                                                                                                                           ; 10                             ; --          ; --                ;
+; NUMBER_OF_SOURCES_PER_DESTINATION_TO_REPORT ; 20                                                                                                                                                                                                                           ; 10                             ; --          ; --                ;
+; OPTIMIZE_HOLD_TIMING                        ; All Paths                                                                                                                                                                                                                    ; IO Paths and Minimum TPD Paths ; --          ; --                ;
+; OPTIMIZE_MULTI_CORNER_TIMING                ; On                                                                                                                                                                                                                           ; Off                            ; --          ; --                ;
+; PARTITION_COLOR                             ; 14622752                                                                                                                                                                                                                     ; --                             ; --          ; Top               ;
+; PARTITION_FITTER_PRESERVATION_LEVEL         ; PLACEMENT_AND_ROUTING                                                                                                                                                                                                        ; --                             ; --          ; Top               ;
+; PARTITION_NETLIST_TYPE                      ; POST_FIT                                                                                                                                                                                                                     ; --                             ; --          ; Top               ;
+; PHYSICAL_SYNTHESIS_COMBO_LOGIC              ; On                                                                                                                                                                                                                           ; Off                            ; --          ; --                ;
+; PHYSICAL_SYNTHESIS_COMBO_LOGIC_FOR_AREA     ; On                                                                                                                                                                                                                           ; Off                            ; --          ; --                ;
+; PHYSICAL_SYNTHESIS_REGISTER_DUPLICATION     ; On                                                                                                                                                                                                                           ; Off                            ; --          ; --                ;
+; POWER_BOARD_THERMAL_MODEL                   ; None (CONSERVATIVE)                                                                                                                                                                                                          ; --                             ; --          ; --                ;
+; POWER_PRESET_COOLING_SOLUTION               ; 23 MM HEAT SINK WITH 200 LFPM AIRFLOW                                                                                                                                                                                        ; --                             ; --          ; --                ;
+; REMOVE_REDUNDANT_LOGIC_CELLS                ; On                                                                                                                                                                                                                           ; Off                            ; --          ; --                ;
+; SAVE_DISK_SPACE                             ; Off                                                                                                                                                                                                                          ; On                             ; --          ; --                ;
+; SMART_RECOMPILE                             ; On                                                                                                                                                                                                                           ; Off                            ; --          ; --                ;
+; STATE_MACHINE_PROCESSING                    ; User-Encoded                                                                                                                                                                                                                 ; Auto                           ; --          ; --                ;
+; TIMEQUEST_DO_REPORT_TIMING                  ; On                                                                                                                                                                                                                           ; Off                            ; --          ; --                ;
+; USE_LOGICLOCK_CONSTRAINTS_IN_BALANCING      ; Off                                                                                                                                                                                                                          ; On                             ; --          ; --                ;
+; USE_SIGNALTAP_FILE                          ; TestModeCheck.stp                                                                                                                                                                                                            ; --                             ; --          ; --                ;
++---------------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+--------------------------------+-------------+-------------------+
+
+
++-----------------------------------------------------------------------------------------------------------------------------+
+; Flow Elapsed Time                                                                                                           ;
++-------------------------+--------------+-------------------------+---------------------+------------------------------------+
+; Module Name             ; Elapsed Time ; Average Processors Used ; Peak Virtual Memory ; Total CPU Time (on all processors) ;
++-------------------------+--------------+-------------------------+---------------------+------------------------------------+
+; Analysis & Synthesis    ; 00:00:19     ; 1.0                     ; 191 MB              ; 00:00:19                           ;
+; Fitter                  ; 00:01:12     ; 1.0                     ; 215 MB              ; 00:01:12                           ;
+; Assembler               ; 00:00:01     ; 1.0                     ; 169 MB              ; 00:00:01                           ;
+; Classic Timing Analyzer ; 00:00:03     ; 1.0                     ; 152 MB              ; 00:00:02                           ;
+; Design Assistant        ; 00:00:03     ; 1.0                     ; 150 MB              ; 00:00:03                           ;
+; EDA Netlist Writer      ; 00:00:05     ; 1.0                     ; 184 MB              ; 00:00:05                           ;
+; Total                   ; 00:01:43     ; --                      ; --                  ; 00:01:42                           ;
++-------------------------+--------------+-------------------------+---------------------+------------------------------------+
+
+
++---------------------------------------------------------------------------------------+
+; Flow OS Summary                                                                       ;
++-------------------------+------------------+------------+------------+----------------+
+; Module Name             ; Machine Hostname ; OS Name    ; OS Version ; Processor type ;
++-------------------------+------------------+------------+------------+----------------+
+; Analysis & Synthesis    ; phil             ; Windows XP ; 5.1        ; i686           ;
+; Fitter                  ; phil             ; Windows XP ; 5.1        ; i686           ;
+; Assembler               ; phil             ; Windows XP ; 5.1        ; i686           ;
+; Classic Timing Analyzer ; phil             ; Windows XP ; 5.1        ; i686           ;
+; Design Assistant        ; phil             ; Windows XP ; 5.1        ; i686           ;
+; EDA Netlist Writer      ; phil             ; Windows XP ; 5.1        ; i686           ;
++-------------------------+------------------+------------+------------+----------------+
+
+
+------------
+; Flow Log ;
+------------
+quartus_map --read_settings_files=on --write_settings_files=off Ozy_Janus -c Ozy_Janus
+quartus_fit --read_settings_files=off --write_settings_files=off Ozy_Janus -c Ozy_Janus
+quartus_asm --read_settings_files=off --write_settings_files=off Ozy_Janus -c Ozy_Janus
+quartus_tan --read_settings_files=off --write_settings_files=off Ozy_Janus -c Ozy_Janus --timing_analysis_only
+quartus_drc --read_settings_files=off --write_settings_files=off Ozy_Janus -c Ozy_Janus
+quartus_eda --read_settings_files=off --write_settings_files=off Ozy_Janus -c Ozy_Janus
+
+
+

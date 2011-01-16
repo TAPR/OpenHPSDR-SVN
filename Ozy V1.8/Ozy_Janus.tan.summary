@@ -1,0 +1,136 @@
+--------------------------------------------------------------------------------------
+Timing Analyzer Summary
+--------------------------------------------------------------------------------------
+
+Type           : Worst-case tsu
+Slack          : N/A
+Required Time  : None
+Actual Time    : 8.939 ns
+From           : FLAGB
+To             : async_usb:usb1|FX_state~4
+From Clock     : --
+To Clock       : IF_clk
+Failed Paths   : 0
+
+Type           : Worst-case tco
+Slack          : N/A
+Required Time  : None
+Actual Time    : 17.751 ns
+From           : led_blinker:BLINK_D1|led_timer[7]
+To             : DEBUG_LED0
+From Clock     : IF_clk
+To Clock       : --
+Failed Paths   : 0
+
+Type           : Worst-case tpd
+Slack          : N/A
+Required Time  : None
+Actual Time    : 11.337 ns
+From           : SDOBACK
+To             : FX2_PE1
+From Clock     : --
+To Clock       : --
+Failed Paths   : 0
+
+Type           : Worst-case th
+Slack          : N/A
+Required Time  : None
+Actual Time    : -1.391 ns
+From           : C5
+To             : I2S_rcv:J_IQ|bc0
+From Clock     : --
+To Clock       : IF_clk
+Failed Paths   : 0
+
+Type           : Clock Setup: 'clkmult3:cm3|altpll:altpll_component|_clk0'
+Slack          : -0.269 ns
+Required Time  : 144.01 MHz ( period = 6.944 ns )
+Actual Time    : 138.64 MHz ( period = 7.213 ns )
+From           : NWire_rcv:MDC[2].M_IQ|DB_LEN[3][0]
+To             : NWire_rcv:MDC[2].M_IQ|tb_width[11]
+From Clock     : clkmult3:cm3|altpll:altpll_component|_clk0
+To Clock       : clkmult3:cm3|altpll:altpll_component|_clk0
+Failed Paths   : 21
+
+Type           : Clock Setup: 'IF_clk'
+Slack          : 0.193 ns
+Required Time  : 48.00 MHz ( period = 20.833 ns )
+Actual Time    : N/A
+From           : NWire_rcv:MDC[1].M_IQ|idata[11]
+To             : NWire_rcv:MDC[1].M_IQ|DIFF_CLK.xd0[11]
+From Clock     : clkmult3:cm3|altpll:altpll_component|_clk0
+To Clock       : IF_clk
+Failed Paths   : 0
+
+Type           : Clock Setup: 'C5'
+Slack          : 71.249 ns
+Required Time  : 12.29 MHz ( period = 81.366 ns )
+Actual Time    : 98.84 MHz ( period = 10.117 ns )
+From           : clk_lrclk_gen:lrgen|Brise
+To             : I2S_xmit:J_IQPWM|bit_count[2]
+From Clock     : C5
+To Clock       : C5
+Failed Paths   : 0
+
+Type           : Clock Setup: 'SPI_SCK'
+Slack          : 76.690 ns
+Required Time  : 12.29 MHz ( period = 81.366 ns )
+Actual Time    : 213.86 MHz ( period = 4.676 ns )
+From           : gpio_control:gpio_controlSDR|gpio_oport:port1reg|data_reg[4]
+To             : gpio_control:gpio_controlSDR|SPI_REGS:spi_regs|sdata[4]
+From Clock     : SPI_SCK
+To Clock       : SPI_SCK
+Failed Paths   : 0
+
+Type           : Clock Hold: 'clkmult3:cm3|altpll:altpll_component|_clk0'
+Slack          : 0.499 ns
+Required Time  : 144.01 MHz ( period = 6.944 ns )
+Actual Time    : N/A
+From           : NWire_rcv:MDC[1].M_IQ|TB_state~2
+To             : NWire_rcv:MDC[1].M_IQ|TB_state~2
+From Clock     : clkmult3:cm3|altpll:altpll_component|_clk0
+To Clock       : clkmult3:cm3|altpll:altpll_component|_clk0
+Failed Paths   : 0
+
+Type           : Clock Hold: 'IF_clk'
+Slack          : 0.499 ns
+Required Time  : 48.00 MHz ( period = 20.833 ns )
+Actual Time    : N/A
+From           : CC_address[0]
+To             : CC_address[0]
+From Clock     : IF_clk
+To Clock       : IF_clk
+Failed Paths   : 0
+
+Type           : Clock Hold: 'C5'
+Slack          : 0.499 ns
+Required Time  : 12.29 MHz ( period = 81.366 ns )
+Actual Time    : N/A
+From           : I2S_xmit:J_IQPWM|bit_count[0]
+To             : I2S_xmit:J_IQPWM|bit_count[0]
+From Clock     : C5
+To Clock       : C5
+Failed Paths   : 0
+
+Type           : Clock Hold: 'SPI_SCK'
+Slack          : 0.499 ns
+Required Time  : 12.29 MHz ( period = 81.366 ns )
+Actual Time    : N/A
+From           : gpio_control:gpio_controlSDR|SPI_REGS:spi_regs|sdata[7]
+To             : gpio_control:gpio_controlSDR|SPI_REGS:spi_regs|sdata[7]
+From Clock     : SPI_SCK
+To Clock       : SPI_SCK
+Failed Paths   : 0
+
+Type           : Total number of failed paths
+Slack          : 
+Required Time  : 
+Actual Time    : 
+From           : 
+To             : 
+From Clock     : 
+To Clock       : 
+Failed Paths   : 21
+
+--------------------------------------------------------------------------------------
+
