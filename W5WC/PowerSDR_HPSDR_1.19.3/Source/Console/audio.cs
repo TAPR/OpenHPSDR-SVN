@@ -250,7 +250,7 @@ namespace PowerSDR
 			{
 				//Debug.WriteLine("radio_volume: "+value.ToString("f3"));
 				radio_volume = value;
-                if (console.CurrentModel == Model.HERMES)
+                if (console.CurrentModel == Model.HERMES || console.PennyLanePresent )
                 {
                     JanusAudio.SetOutputPower((float)radio_volume);
                 }
@@ -2097,12 +2097,12 @@ namespace PowerSDR
 
                 /* hermes hack needed */
                 ScaleBuffer(out_l2, out_l1, frameCount, (float)monitor_volume);
-                if (console.CurrentModel != Model.HERMES) /* Hermes power level set by command and control to programmable gain amp .. no need to do digital scaling  for power */
+                if (console.CurrentModel != Model.HERMES && !console.PennyLanePresent ) /* Hermes power level set by command and control to programmable gain amp .. no need to do digital scaling  for power */
                 {
                     ScaleBuffer(out_l2, out_l2, frameCount, (float)tx_vol);
                 }
                 ScaleBuffer(out_r2, out_r1, frameCount, (float)monitor_volume);
-                if (console.CurrentModel != Model.HERMES) /* Hermes power level set by command and control to programmable gain amp .. no need to do digital scaling  for power */
+                if (console.CurrentModel != Model.HERMES && !console.PennyLanePresent ) /* Hermes power level set by command and control to programmable gain amp .. no need to do digital scaling  for power */
                 {
                     ScaleBuffer(out_r2, out_r2, frameCount, (float)tx_vol);
                 }	

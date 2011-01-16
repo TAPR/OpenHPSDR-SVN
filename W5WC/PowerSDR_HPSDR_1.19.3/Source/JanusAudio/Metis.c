@@ -1,6 +1,6 @@
 /*
  * Metis.c - Support code for OpenHPSDR.org's Metis board 
- * Copyright (C) 2010 Bill Tracey, KD5TFD (bill@ewjt.com) 
+ * Copyright (C) 2010, 2011 Bill Tracey, KD5TFD (bill@ewjt.com) 
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -309,10 +309,10 @@ SOCKET createSocket(int portnum) {
 		printf("getsockname failed\n");
 	} 
 	
-	//rc = setsockopt(sock, SOL_SOCKET, SO_BROADCAST, (const char *)&btrue, sizeof(int)); 
-	//if ( rc == SOCKET_ERROR ) { 
-	//	printf("CreateSockets Warning: setsockopt SO_BROADCAST failed!\n"); 
-	//}
+	rc = setsockopt(sock, SOL_SOCKET, SO_BROADCAST, (const char *)&btrue, sizeof(int)); 
+	if ( rc == SOCKET_ERROR ) { 
+		printf("CreateSockets Warning: setsockopt SO_BROADCAST failed!\n"); 
+	}
 
 	rcv_timeo = 500; 
 	rc = setsockopt(sock, SOL_SOCKET, SO_RCVTIMEO, (const char *)&rcv_timeo, sizeof(int)); 
@@ -353,7 +353,7 @@ SOCKET createSocket(int portnum) {
 
 
  u_long doDiscovery() { 
-	 SOCKET outsock; 
+	 // SOCKET outsock; 
 	 int rc; 
 	 unsigned char packetbuf[250];
 	 unsigned char discbuf[2048]; 
@@ -379,14 +379,14 @@ SOCKET createSocket(int portnum) {
 	 dest_addr.sin_family = AF_INET;
 	 dest_addr.sin_port = htons(1024); 
 	 dest_addr.sin_addr.s_addr = inet_addr("255.255.255.255"); 
-	 outsock = socket(AF_INET, SOCK_DGRAM, IPPROTO_UDP); 
-	 rc = setsockopt(outsock, SOL_SOCKET, SO_BROADCAST, (const char *)&btrue, sizeof(int)); 
-	 if ( rc == SOCKET_ERROR ) { 
-     	printf("CreateSockets Warning: setsockopt SO_BROADCAST failed!\n"); 
-	 }
+	 // outsock = socket(AF_INET, SOCK_DGRAM, IPPROTO_UDP); 
+	 // rc = setsockopt(outsock, SOL_SOCKET, SO_BROADCAST, (const char *)&btrue, sizeof(int)); 
+	 // if ( rc == SOCKET_ERROR ) { 
+     // 	printf("CreateSockets Warning: setsockopt SO_BROADCAST failed!\n"); 
+	 // }
 
 	 for ( i = 0; i < 5; i++ ) { 
-		sendto(outsock, packetbuf, 17, 0, (SOCKADDR *)&dest_addr, sizeof(dest_addr)); 
+		sendto(listenSock, packetbuf, 17, 0, (SOCKADDR *)&dest_addr, sizeof(dest_addr)); 
 		printf("discovery packet sent\n");  fflush(stdout); 
 
 		for ( j = 0; j < 2; j++ ) {
@@ -403,8 +403,6 @@ SOCKET createSocket(int portnum) {
 					Dump(stdout, discbuf, rc, "discovery reply"); 
 					memcpy(MetisMACAddr, discbuf+3, 6); /* save off MAC Addr */ 
 					return disc_reply_addr.sin_addr.S_un.S_addr;
-
-
 					// return *((u_long *)(&(discbuf[3])));				
 				}
 			} 
