@@ -1388,6 +1388,7 @@ namespace PowerSDR
         private LabelTS lblMetisMAC;
         private LabelTS labelTS9;
         private LabelTS labelTS16;
+        private CheckBoxTS chkPennyLane;
         private System.ComponentModel.IContainer components;
 
         #endregion
@@ -2918,6 +2919,7 @@ namespace PowerSDR
             this.timer_sweep = new System.Windows.Forms.Timer(this.components);
             this.mainMenu1 = new System.Windows.Forms.MainMenu(this.components);
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
+            this.chkPennyLane = new System.Windows.Forms.CheckBoxTS();
             this.tcSetup.SuspendLayout();
             this.tpGeneral.SuspendLayout();
             this.tcGeneral.SuspendLayout();
@@ -3643,6 +3645,7 @@ namespace PowerSDR
             // 
             // groupBoxHPSDRHW
             // 
+            this.groupBoxHPSDRHW.Controls.Add(this.chkPennyLane);
             this.groupBoxHPSDRHW.Controls.Add(this.chkExcaliburPresent);
             this.groupBoxHPSDRHW.Controls.Add(this.chkAlexPresent);
             this.groupBoxHPSDRHW.Controls.Add(this.chkJanusPresent);
@@ -3659,7 +3662,7 @@ namespace PowerSDR
             // 
             this.chkExcaliburPresent.AutoSize = true;
             this.chkExcaliburPresent.Image = null;
-            this.chkExcaliburPresent.Location = new System.Drawing.Point(25, 80);
+            this.chkExcaliburPresent.Location = new System.Drawing.Point(25, 91);
             this.chkExcaliburPresent.Name = "chkExcaliburPresent";
             this.chkExcaliburPresent.Size = new System.Drawing.Size(69, 17);
             this.chkExcaliburPresent.TabIndex = 2;
@@ -3671,7 +3674,7 @@ namespace PowerSDR
             // 
             this.chkAlexPresent.AutoSize = true;
             this.chkAlexPresent.Image = null;
-            this.chkAlexPresent.Location = new System.Drawing.Point(25, 60);
+            this.chkAlexPresent.Location = new System.Drawing.Point(25, 73);
             this.chkAlexPresent.Name = "chkAlexPresent";
             this.chkAlexPresent.Size = new System.Drawing.Size(46, 17);
             this.chkAlexPresent.TabIndex = 3;
@@ -3683,7 +3686,7 @@ namespace PowerSDR
             // 
             this.chkJanusPresent.AutoSize = true;
             this.chkJanusPresent.Image = null;
-            this.chkJanusPresent.Location = new System.Drawing.Point(25, 100);
+            this.chkJanusPresent.Location = new System.Drawing.Point(25, 108);
             this.chkJanusPresent.Name = "chkJanusPresent";
             this.chkJanusPresent.Size = new System.Drawing.Size(54, 17);
             this.chkJanusPresent.TabIndex = 4;
@@ -7746,7 +7749,7 @@ namespace PowerSDR
             this.lblRealeaseDate.Name = "lblRealeaseDate";
             this.lblRealeaseDate.Size = new System.Drawing.Size(130, 16);
             this.lblRealeaseDate.TabIndex = 4;
-            this.lblRealeaseDate.Text = "W5WC - 1/9/2011";
+            this.lblRealeaseDate.Text = "W5WC - 1/15/2011";
             // 
             // lblPenelopeFWVer
             // 
@@ -21058,6 +21061,18 @@ namespace PowerSDR
             this.saveFileDialog1.InitialDirectory = "Environment.GetFolderPath(Environment.SpecialFolder.Desktop)";
             this.saveFileDialog1.FileOk += new System.ComponentModel.CancelEventHandler(this.saveFileDialog1_FileOk);
             // 
+            // chkPennyLane
+            // 
+            this.chkPennyLane.AutoSize = true;
+            this.chkPennyLane.Image = null;
+            this.chkPennyLane.Location = new System.Drawing.Point(25, 57);
+            this.chkPennyLane.Name = "chkPennyLane";
+            this.chkPennyLane.Size = new System.Drawing.Size(80, 17);
+            this.chkPennyLane.TabIndex = 5;
+            this.chkPennyLane.Text = "PennyLane";
+            this.chkPennyLane.UseVisualStyleBackColor = true;
+            this.chkPennyLane.CheckedChanged += new System.EventHandler(this.chkPennyLane_CheckedChanged);
+            // 
             // Setup
             // 
             this.AutoScaleBaseSize = new System.Drawing.Size(5, 13);
@@ -22996,6 +23011,12 @@ namespace PowerSDR
         {
             get { return chkPennyPresent.Checked; }
             set { chkPennyPresent.Checked = value; }
+        }
+
+        public bool PennyLanePresent
+        {
+            get { return chkPennyLane.Checked; }
+            set { chkPennyLane.Checked = value; }
         }
 
         public float ImageGainTX
@@ -29654,10 +29675,11 @@ namespace PowerSDR
             udFMDev.Value = tbFMDev.Value;
         }
 
-        private void chkPennyPresent_CheckedChanged(object sender, System.EventArgs e)
+        private void chkPennyLane_CheckedChanged(object sender, System.EventArgs e)
         {
+
             int bits = JanusAudio.GetC1Bits();
-            if (!chkPennyPresent.Checked)
+            if (!chkPennyLane.Checked)
             {
                 bits &= 0xdf;  // 11011111
                 radPenny10MHz.Checked = false;
@@ -29667,8 +29689,9 @@ namespace PowerSDR
                 rad12288MHzPenny.Checked = false;
                 rad12288MHzPenny.Enabled = false;
                 grpPennyExtCtrl.Enabled = false;
-                chkPennyExtCtrl.Checked = false;
                 chkPennyExtCtrl.Enabled = false;
+                console.PennyLanePresent = false;
+                JanusAudio.EnableHermesPower(0);
             }
             else
             {
@@ -29684,6 +29707,54 @@ namespace PowerSDR
                 {
                     grpPennyExtCtrl.Enabled = true;
                 }
+                console.PennyPresent = false;
+                console.PennyLanePresent = true;
+                chkPennyPresent.Checked = false;
+                JanusAudio.EnableHermesPower(1);
+            }
+            JanusAudio.SetC1Bits(bits);
+            checkHPSDRDefaults(sender, e);
+        }
+
+
+
+
+
+        private void chkPennyPresent_CheckedChanged(object sender, System.EventArgs e)
+        {
+            int bits = JanusAudio.GetC1Bits();
+            if (!chkPennyPresent.Checked)
+            {
+                bits &= 0xdf;  // 11011111
+                radPenny10MHz.Checked = false;
+                radPenny10MHz.Enabled = false;
+                radPennyMic.Checked = false;
+                radPennyMic.Enabled = false;
+                rad12288MHzPenny.Checked = false;
+                rad12288MHzPenny.Enabled = false;
+                grpPennyExtCtrl.Enabled = false;
+                chkPennyExtCtrl.Checked = false;
+                chkPennyExtCtrl.Enabled = false;
+                console.PennyPresent = false;				
+            }
+            else
+            {
+                bits |= 0x20;   // 00100000
+
+
+                radPenny10MHz.Enabled = true;
+                radPennyMic.Enabled = true;
+                rad12288MHzPenny.Enabled = true;
+
+                chkPennyExtCtrl.Enabled = true;
+                if (chkPennyExtCtrl.Checked)
+                {
+                    grpPennyExtCtrl.Enabled = true;
+                }
+                console.PennyPresent = true;
+                console.PennyLanePresent = false;
+                chkPennyLane.Checked = false;
+                JanusAudio.EnableHermesPower(0); 
             }
             JanusAudio.SetC1Bits(bits);
             checkHPSDRDefaults(sender, e);
@@ -31111,6 +31182,8 @@ namespace PowerSDR
         {
             return IPStringFromInt(addr, new StringBuilder());
         }
+
+   
     }
 
 	#region PADeviceInfo Helper Class

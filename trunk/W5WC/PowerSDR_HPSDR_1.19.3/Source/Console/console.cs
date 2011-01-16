@@ -27,7 +27,7 @@
 //=================================================================
 
 //
-// SoftRock and HPSDR Modifications Copyright (C) 2005, 2006, 2007, 2008 Bill Tracey (kd5tfd)
+// SoftRock and HPSDR Modifications Copyright (C) 2005, 2006, 2007, 2008, 2009, 2010, 2011 Bill Tracey (kd5tfd)
 //
 
 //#define INTERLEAVED
@@ -18740,7 +18740,7 @@ namespace PowerSDR
                         chkX2TR.Visible = false; //w5wc
                        
                         int hermes_power_enable;
-                        if (current_model == Model.HERMES)
+                        if (current_model == Model.HERMES || PennyLanePresent )
                         {
                             hermes_power_enable = 1;
                         }
@@ -21727,7 +21727,8 @@ namespace PowerSDR
 			get { return ptbFilterShift.Value; }
 			set	{ ptbFilterShift.Value = value; }
 		}
-		
+
+        public bool PennyLanePresent = false; 
 		public bool PennyPresent = false;
 		public bool AlexPresent = false; 
 		public bool MercuryPresent = false; 
