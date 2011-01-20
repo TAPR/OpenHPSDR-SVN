@@ -53,7 +53,7 @@
   4 Jan 2011 - Added support for PennyLane, common code for both boards. Penelope
                 will ignore the signal on DAC_ALC.
                 Tx_level is set to 128 for testing.
- 11 Jan 2011 - Drive_Level sent from Ozy using nWire via Atlas_C18, ignored by Peneope.
+ 11 Jan 2011 - Drive_Level sent from Ozy using nWire via Atlas_C18, ignored by Penelope.
  12          - Replaced CORDIC etc with code from Hermes. Changed overall gain to approx unity.
   
 */
@@ -359,8 +359,11 @@ cicint cic_Q(.clk(C122_clk), .clk_enable(1'b1), .reset(C122_rst), .filter_in(C12
 // multiply CIC outputs by 1.40625, >>> is the Veriloig arrithmetic shift right
 // i.e. output  = input + input/4 + input/8 + input/32 = input * 1.40625
     
-assign C122_out_i = C122_cic_out_i + (C122_cic_out_i >>> 2) + (C122_cic_out_i >>> 3)   + (C122_cic_out_i >>> 5);
-assign C122_out_q = C122_cic_out_q + (C122_cic_out_q >>> 2) + (C122_cic_out_q >>> 3)   + (C122_cic_out_q >>> 5);
+//assign C122_out_i = C122_cic_out_i; // + (C122_cic_out_i >>> 2) + (C122_cic_out_i >>> 3)   + (C122_cic_out_i >>> 5);
+//assign C122_out_q = C122_cic_out_q; // + (C122_cic_out_q >>> 2) + (C122_cic_out_q >>> 3)   + (C122_cic_out_q >>> 5);
+
+assign C122_out_i = C122_cic_out_i  - (C122_cic_out_i >>> 7);
+assign C122_out_q = C122_cic_out_q  - (C122_cic_out_q >>> 7);
 
 
 
@@ -376,7 +379,7 @@ wire [31:0] C122_phase;
 wire signed [14:0] C122_cordic_i_out;
 
 
-cpl_cordic #(.OUT_WIDTH(15))
+cpl_cordic #(.OUT_WIDTH(16))
  		cordic_inst (.clock(C122_clk), .frequency(C122_phase_word), .in_data_I(C122_out_q),
 	    			 .in_data_Q(C122_out_i), .out_data_I(C122_cordic_i_out), .out_data_Q());       
 
@@ -398,7 +401,7 @@ cpl_cordic #(.OUT_WIDTH(15))
 // the CORDIC output is stable on the negative edge of the clock
 
 always @ (negedge C122_clk)
-	DAC[13:0] = C122_cordic_i_out[13:0];   //gain of 2
+	DAC[13:0] = C122_cordic_i_out[13:0];   //gain of 4
 
 
 //--------------------------------------------
@@ -437,6 +440,12 @@ always @ (negedge C122_clk)
 //assign PWM0 = PWM0_accumulator[16];       // send to PWM LPFs for now 
 //assign PWM1 = PWM1_accumulator[16]; 
 //assign PWM2 = PWM2_accumulator[16]; 
+
+// for board tests
+assign PWM0 = 0;
+assign PWM1 = 0;
+assign PMW2 = 0;
+
 
 //-----------------------------------------------------------
 //  Get Drive_Level (PennyLane only)
