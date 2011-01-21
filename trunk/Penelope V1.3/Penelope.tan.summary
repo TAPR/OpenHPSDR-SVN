@@ -5,7 +5,7 @@ Timing Analyzer Summary
 Type           : Worst-case tsu
 Slack          : N/A
 Required Time  : None
-Actual Time    : 5.813 ns
+Actual Time    : 5.388 ns
 From           : C19
 To             : NWire_rcv:IQPWM|d0
 From Clock     : --
@@ -15,9 +15,9 @@ Failed Paths   : 0
 Type           : Worst-case tco
 Slack          : N/A
 Required Time  : None
-Actual Time    : 16.524 ns
-From           : ADC:ADC_SPI|AIN5[3]
-To             : LED6
+Actual Time    : 16.774 ns
+From           : ADC:ADC_SPI|AIN5[1]
+To             : LED4
 From Clock     : C122_clk
 To Clock       : --
 Failed Paths   : 0
@@ -35,39 +35,39 @@ Failed Paths   : 0
 Type           : Worst-case th
 Slack          : N/A
 Required Time  : None
-Actual Time    : -2.301 ns
+Actual Time    : -1.697 ns
 From           : ADCMISO
-To             : ADC:ADC_SPI|temp_AIN5[7]
+To             : ADC:ADC_SPI|temp_AIN5[5]
 From Clock     : --
 To Clock       : C122_clk
 Failed Paths   : 0
 
 Type           : Clock Setup: 'C122_clk'
-Slack          : 0.020 ns
+Slack          : -0.311 ns
 Required Time  : 122.88 MHz ( period = 8.138 ns )
-Actual Time    : 123.18 MHz ( period = 8.118 ns )
-From           : cicint:cic_Q|section_out10[0]
-To             : cicint:cic_Q|section_out10[61]
+Actual Time    : 118.36 MHz ( period = 8.449 ns )
+From           : cicint:cic_I|section_out6[0]_OTERM39
+To             : cicint:cic_I|section_out8[40]
 From Clock     : C122_clk
 To Clock       : C122_clk
-Failed Paths   : 0
+Failed Paths   : 13
 
 Type           : Clock Setup: 'clk_lrclk_gen:clrgen|BCLK'
-Slack          : 77.553 ns
+Slack          : 77.460 ns
 Required Time  : 12.29 MHz ( period = 81.380 ns )
-Actual Time    : 261.30 MHz ( period = 3.827 ns )
+Actual Time    : 255.10 MHz ( period = 3.920 ns )
 From           : ADC:ADC_SPI|bit_cnt[1]
-To             : ADC:ADC_SPI|ADC_state~2
+To             : ADC:ADC_SPI|bit_cnt[0]
 From Clock     : clk_lrclk_gen:clrgen|BCLK
 To Clock       : clk_lrclk_gen:clrgen|BCLK
 Failed Paths   : 0
 
 Type           : Clock Setup: '_10MHZ'
-Slack          : 96.836 ns
+Slack          : 96.645 ns
 Required Time  : 10.00 MHz ( period = 100.000 ns )
-Actual Time    : 316.06 MHz ( period = 3.164 ns )
+Actual Time    : 298.06 MHz ( period = 3.355 ns )
 From           : oddClockDivider:refClockDivider|count[0]
-To             : oddClockDivider:refClockDivider|count[3]
+To             : oddClockDivider:refClockDivider|count[5]
 From Clock     : _10MHZ
 To Clock       : _10MHZ
 Failed Paths   : 0
@@ -110,7 +110,7 @@ From           :
 To             : 
 From Clock     : 
 To Clock       : 
-Failed Paths   : 0
+Failed Paths   : 13
 
 --------------------------------------------------------------------------------------
 

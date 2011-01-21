@@ -1,5 +1,5 @@
 Analysis & Synthesis report for Penelope
-Wed Jan 12 12:04:16 2011
+Fri Jan 21 09:33:22 2011
 Quartus II Version 9.1 Build 350 03/24/2010 Service Pack 2 SJ Web Edition
 
 
@@ -81,15 +81,15 @@ applicable agreement for further details.
 +-----------------------------------------------------------------------------------+
 ; Analysis & Synthesis Summary                                                      ;
 +------------------------------------+----------------------------------------------+
-; Analysis & Synthesis Status        ; Successful - Wed Jan 12 12:04:15 2011        ;
+; Analysis & Synthesis Status        ; Successful - Fri Jan 21 09:33:22 2011        ;
 ; Quartus II Version                 ; 9.1 Build 350 03/24/2010 SP 2 SJ Web Edition ;
 ; Revision Name                      ; Penelope                                     ;
 ; Top-level Entity Name              ; Penelope                                     ;
 ; Family                             ; Cyclone II                                   ;
-; Total logic elements               ; 4,770                                        ;
-;     Total combinational functions  ; 4,379                                        ;
-;     Dedicated logic registers      ; 2,848                                        ;
-; Total registers                    ; 2848                                         ;
+; Total logic elements               ; 4,708                                        ;
+;     Total combinational functions  ; 4,317                                        ;
+;     Dedicated logic registers      ; 2,847                                        ;
+; Total registers                    ; 2847                                         ;
 ; Total pins                         ; 58                                           ;
 ; Total virtual pins                 ; 0                                            ;
 ; Total memory bits                  ; 0                                            ;
@@ -181,27 +181,27 @@ applicable agreement for further details.
 +----------------------------------------------------------------------------+--------------------+--------------------+
 
 
-+----------------------------------------------------------------------------------------------------------------------------------------------------------+
-; Analysis & Synthesis Source Files Read                                                                                                                   ;
-+------------------------------------------+-----------------+------------------------------+--------------------------------------------------------------+
-; File Name with User-Entered Path         ; Used in Netlist ; File Type                    ; File Name with Absolute Path                                 ;
-+------------------------------------------+-----------------+------------------------------+--------------------------------------------------------------+
-; C:/HPSDR/WIP/Hermes/Verilog/cpl_cordic.v ; yes             ; User Verilog HDL File        ; C:/HPSDR/WIP/Hermes/Verilog/cpl_cordic.v                     ;
-; PLL_clock_detector.v                     ; yes             ; User Wizard-Generated File   ; O:/HPSDR/trunk/Penelope V1.3/PLL_clock_detector.v            ;
-; ../common/I2S_xmit.v                     ; yes             ; User Verilog HDL File        ; O:/HPSDR/trunk/Penelope V1.3/common/I2S_xmit.v               ;
-; ../common/NWire_rcv.v                    ; yes             ; User Verilog HDL File        ; O:/HPSDR/trunk/Penelope V1.3/common/NWire_rcv.v              ;
-; ../common/NWire_xmit.v                   ; yes             ; User Verilog HDL File        ; O:/HPSDR/trunk/Penelope V1.3/common/NWire_xmit.v             ;
-; ../common/clk_lrclk_gen.v                ; yes             ; User Verilog HDL File        ; O:/HPSDR/trunk/Penelope V1.3/common/clk_lrclk_gen.v          ;
-; ../common/clk_div.v                      ; yes             ; User Verilog HDL File        ; O:/HPSDR/trunk/Penelope V1.3/common/clk_div.v                ;
-; oddClockDiv.v                            ; yes             ; User Verilog HDL File        ; O:/HPSDR/trunk/Penelope V1.3/oddClockDiv.v                   ;
-; ADC.v                                    ; yes             ; User Verilog HDL File        ; O:/HPSDR/trunk/Penelope V1.3/ADC.v                           ;
-; cicint.v                                 ; yes             ; User Verilog HDL File        ; O:/HPSDR/trunk/Penelope V1.3/cicint.v                        ;
-; Penelope.v                               ; yes             ; User Verilog HDL File        ; O:/HPSDR/trunk/Penelope V1.3/Penelope.v                      ;
-; ../common/I2S_rcv.v                      ; yes             ; User Verilog HDL File        ; O:/HPSDR/trunk/Penelope V1.3/common/I2S_rcv.v                ;
-; altpll.tdf                               ; yes             ; Megafunction                 ; c:/altera/91sp2/quartus/libraries/megafunctions/altpll.tdf   ;
-; lpm_mult.tdf                             ; yes             ; Megafunction                 ; c:/altera/91sp2/quartus/libraries/megafunctions/lpm_mult.tdf ;
-; db/mult_7ct.tdf                          ; yes             ; Auto-Generated Megafunction  ; O:/HPSDR/trunk/Penelope V1.3/db/mult_7ct.tdf                 ;
-+------------------------------------------+-----------------+------------------------------+--------------------------------------------------------------+
++--------------------------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Source Files Read                                                                                                           ;
++----------------------------------+-----------------+------------------------------+--------------------------------------------------------------+
+; File Name with User-Entered Path ; Used in Netlist ; File Type                    ; File Name with Absolute Path                                 ;
++----------------------------------+-----------------+------------------------------+--------------------------------------------------------------+
+; cpl_cordic.v                     ; yes             ; User Verilog HDL File        ; O:/HPSDR/trunk/Penelope V1.3/cpl_cordic.v                    ;
+; PLL_clock_detector.v             ; yes             ; User Wizard-Generated File   ; O:/HPSDR/trunk/Penelope V1.3/PLL_clock_detector.v            ;
+; ../common/I2S_xmit.v             ; yes             ; User Verilog HDL File        ; O:/HPSDR/trunk/Penelope V1.3/common/I2S_xmit.v               ;
+; ../common/NWire_rcv.v            ; yes             ; User Verilog HDL File        ; O:/HPSDR/trunk/Penelope V1.3/common/NWire_rcv.v              ;
+; ../common/NWire_xmit.v           ; yes             ; User Verilog HDL File        ; O:/HPSDR/trunk/Penelope V1.3/common/NWire_xmit.v             ;
+; ../common/clk_lrclk_gen.v        ; yes             ; User Verilog HDL File        ; O:/HPSDR/trunk/Penelope V1.3/common/clk_lrclk_gen.v          ;
+; ../common/clk_div.v              ; yes             ; User Verilog HDL File        ; O:/HPSDR/trunk/Penelope V1.3/common/clk_div.v                ;
+; oddClockDiv.v                    ; yes             ; User Verilog HDL File        ; O:/HPSDR/trunk/Penelope V1.3/oddClockDiv.v                   ;
+; ADC.v                            ; yes             ; User Verilog HDL File        ; O:/HPSDR/trunk/Penelope V1.3/ADC.v                           ;
+; cicint.v                         ; yes             ; User Verilog HDL File        ; O:/HPSDR/trunk/Penelope V1.3/cicint.v                        ;
+; Penelope.v                       ; yes             ; User Verilog HDL File        ; O:/HPSDR/trunk/Penelope V1.3/Penelope.v                      ;
+; ../common/I2S_rcv.v              ; yes             ; User Verilog HDL File        ; O:/HPSDR/trunk/Penelope V1.3/common/I2S_rcv.v                ;
+; altpll.tdf                       ; yes             ; Megafunction                 ; c:/altera/91sp2/quartus/libraries/megafunctions/altpll.tdf   ;
+; lpm_mult.tdf                     ; yes             ; Megafunction                 ; c:/altera/91sp2/quartus/libraries/megafunctions/lpm_mult.tdf ;
+; db/mult_7ct.tdf                  ; yes             ; Auto-Generated Megafunction  ; O:/HPSDR/trunk/Penelope V1.3/db/mult_7ct.tdf                 ;
++----------------------------------+-----------------+------------------------------+--------------------------------------------------------------+
 
 
 +--------------------------------------------------------+
@@ -209,28 +209,28 @@ applicable agreement for further details.
 +---------------------------------------------+----------+
 ; Resource                                    ; Usage    ;
 +---------------------------------------------+----------+
-; Estimated Total logic elements              ; 4,770    ;
+; Estimated Total logic elements              ; 4,708    ;
 ;                                             ;          ;
-; Total combinational functions               ; 4379     ;
+; Total combinational functions               ; 4317     ;
 ; Logic element usage by number of LUT inputs ;          ;
-;     -- 4 input functions                    ; 338      ;
-;     -- 3 input functions                    ; 2503     ;
-;     -- <=2 input functions                  ; 1538     ;
+;     -- 4 input functions                    ; 337      ;
+;     -- 3 input functions                    ; 2449     ;
+;     -- <=2 input functions                  ; 1531     ;
 ;                                             ;          ;
 ; Logic elements by mode                      ;          ;
-;     -- normal mode                          ; 1545     ;
-;     -- arithmetic mode                      ; 2834     ;
+;     -- normal mode                          ; 1541     ;
+;     -- arithmetic mode                      ; 2776     ;
 ;                                             ;          ;
-; Total registers                             ; 2848     ;
-;     -- Dedicated logic registers            ; 2848     ;
+; Total registers                             ; 2847     ;
+;     -- Dedicated logic registers            ; 2847     ;
 ;     -- I/O registers                        ; 0        ;
 ;                                             ;          ;
 ; I/O pins                                    ; 58       ;
 ; Embedded Multiplier 9-bit elements          ; 8        ;
 ; Total PLLs                                  ; 1        ;
 ; Maximum fan-out node                        ; C122_clk ;
-; Maximum fan-out                             ; 2807     ;
-; Total fan-out                               ; 19959    ;
+; Maximum fan-out                             ; 2806     ;
+; Total fan-out                               ; 19781    ;
 ; Average fan-out                             ; 2.74     ;
 +---------------------------------------------+----------+
 
@@ -240,7 +240,7 @@ applicable agreement for further details.
 +--------------------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+---------------------------------------------------------------+--------------+
 ; Compilation Hierarchy Node           ; LC Combinationals ; LC Registers ; Memory Bits ; DSP Elements ; DSP 9x9 ; DSP 18x18 ; Pins ; Virtual Pins ; Full Hierarchy Name                                           ; Library Name ;
 +--------------------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+---------------------------------------------------------------+--------------+
-; |Penelope                            ; 4379 (289)        ; 2848 (241)   ; 0           ; 8            ; 0       ; 4         ; 58   ; 0            ; |Penelope                                                     ; work         ;
+; |Penelope                            ; 4317 (229)        ; 2847 (241)   ; 0           ; 8            ; 0       ; 4         ; 58   ; 0            ; |Penelope                                                     ; work         ;
 ;    |ADC:ADC_SPI|                     ; 36 (36)           ; 34 (34)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Penelope|ADC:ADC_SPI                                         ;              ;
 ;    |I2S_rcv:PJD|                     ; 26 (26)           ; 57 (57)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Penelope|I2S_rcv:PJD                                         ;              ;
 ;    |I2S_xmit:IQD|                    ; 65 (65)           ; 57 (57)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Penelope|I2S_xmit:IQD                                        ;              ;
@@ -256,7 +256,7 @@ applicable agreement for further details.
 ;    |clk_div:TLVCLK|                  ; 4 (4)             ; 4 (4)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Penelope|clk_div:TLVCLK                                      ;              ;
 ;    |clk_lrclk_gen:clrgen|            ; 34 (34)           ; 25 (25)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Penelope|clk_lrclk_gen:clrgen                                ;              ;
 ;    |clk_lrclk_gen:lrgen|             ; 35 (35)           ; 24 (24)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Penelope|clk_lrclk_gen:lrgen                                 ;              ;
-;    |cpl_cordic:cordic_inst|          ; 1723 (1723)       ; 1050 (1050)  ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Penelope|cpl_cordic:cordic_inst                              ;              ;
+;    |cpl_cordic:cordic_inst|          ; 1721 (1721)       ; 1049 (1049)  ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Penelope|cpl_cordic:cordic_inst                              ;              ;
 ;    |lpm_mult:Mult0|                  ; 33 (0)            ; 0 (0)        ; 0           ; 8            ; 0       ; 4         ; 0    ; 0            ; |Penelope|lpm_mult:Mult0                                      ;              ;
 ;       |mult_7ct:auto_generated|      ; 33 (33)           ; 0 (0)        ; 0           ; 8            ; 0       ; 4         ; 0    ; 0            ; |Penelope|lpm_mult:Mult0|mult_7ct:auto_generated              ;              ;
 ;    |oddClockDivider:refClockDivider| ; 16 (16)           ; 8 (8)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Penelope|oddClockDivider:refClockDivider                     ;              ;
@@ -391,7 +391,9 @@ Encoding Type:  User-Encoded
 ; Register name                           ; Reason for Removal                          ;
 +-----------------------------------------+---------------------------------------------+
 ; cpl_cordic:cordic_inst|X[18][22]        ; Lost fanout                                 ;
+; cpl_cordic:cordic_inst|X[18][21]        ; Lost fanout                                 ;
 ; cpl_cordic:cordic_inst|X[17][22]        ; Lost fanout                                 ;
+; cpl_cordic:cordic_inst|X[17][21]        ; Lost fanout                                 ;
 ; NWire_rcv:p_ser|tb_width[17]            ; Merged with NWire_rcv:p_ser|tb_width[16]    ;
 ; cpl_cordic:cordic_inst|Z[0][19]         ; Merged with cpl_cordic:cordic_inst|Z[0][18] ;
 ; cicint:cic_Q|diff1[15]                  ; Merged with cicint:cic_Q|diff1[16]          ;
@@ -463,7 +465,7 @@ Encoding Type:  User-Encoded
 ; PWM_count[7]                            ; Merged with counter[7]                      ;
 ; count_12288[6]                          ; Merged with counter[6]                      ;
 ; count_12288[7]                          ; Merged with counter[7]                      ;
-; Total Number of Removed Registers = 101 ;                                             ;
+; Total Number of Removed Registers = 103 ;                                             ;
 +-----------------------------------------+---------------------------------------------+
 
 
@@ -492,7 +494,7 @@ Encoding Type:  User-Encoded
 +----------------------------------------------+-------+
 ; Statistic                                    ; Value ;
 +----------------------------------------------+-------+
-; Total registers                              ; 2848  ;
+; Total registers                              ; 2847  ;
 ; Number of registers using Synchronous Clear  ; 284   ;
 ; Number of registers using Synchronous Load   ; 193   ;
 ; Number of registers using Asynchronous Clear ; 667   ;
@@ -998,7 +1000,7 @@ Note: In order to hide this table in the UI and the text report file, please set
 +----------------+-------+--------------------------------------------+
 ; IN_WIDTH       ; 16    ; Signed Integer                             ;
 ; EXTRA_BITS     ; 5     ; Signed Integer                             ;
-; OUT_WIDTH      ; 15    ; Signed Integer                             ;
+; OUT_WIDTH      ; 16    ; Signed Integer                             ;
 +----------------+-------+--------------------------------------------+
 Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings Tables in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
 
@@ -1246,14 +1248,15 @@ Note: In order to hide this table in the UI and the text report file, please set
 +------------------+--------+----------+-------------------------------------------------------------------------------------+
 
 
-+--------------------------------------------------------------------------------------------------------------------------+
-; Port Connectivity Checks: "cpl_cordic:cordic_inst"                                                                       ;
-+----------------+--------+----------+-------------------------------------------------------------------------------------+
-; Port           ; Type   ; Severity ; Details                                                                             ;
-+----------------+--------+----------+-------------------------------------------------------------------------------------+
-; out_data_I[14] ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
-; out_data_Q     ; Output ; Info     ; Explicitly unconnected                                                              ;
-+----------------+--------+----------+-------------------------------------------------------------------------------------+
++------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Port Connectivity Checks: "cpl_cordic:cordic_inst"                                                                                                                     ;
++----------------+--------+----------+-----------------------------------------------------------------------------------------------------------------------------------+
+; Port           ; Type   ; Severity ; Details                                                                                                                           ;
++----------------+--------+----------+-----------------------------------------------------------------------------------------------------------------------------------+
+; out_data_I     ; Output ; Warning  ; Output or bidir port (16 bits) is wider than the port expression (15 bits) it drives; bit(s) "out_data_I[15..15]" have no fanouts ;
+; out_data_I[15] ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed.                                               ;
+; out_data_Q     ; Output ; Info     ; Explicitly unconnected                                                                                                            ;
++----------------+--------+----------+-----------------------------------------------------------------------------------------------------------------------------------+
 
 
 +----------------------------------------------+
@@ -1313,9 +1316,9 @@ Note: In order to hide this table in the UI and the text report file, please set
 Info: *******************************************************************
 Info: Running Quartus II Analysis & Synthesis
     Info: Version 9.1 Build 350 03/24/2010 Service Pack 2 SJ Web Edition
-    Info: Processing started: Wed Jan 12 12:03:43 2011
+    Info: Processing started: Fri Jan 21 09:32:46 2011
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off Penelope -c Penelope
-Info: Found 1 design units, including 1 entities, in source file c:/hpsdr/wip/hermes/verilog/cpl_cordic.v
+Info: Found 1 design units, including 1 entities, in source file cpl_cordic.v
     Info: Found entity 1: cpl_cordic
 Info: Found 1 design units, including 1 entities, in source file pll_clock_detector.v
     Info: Found entity 1: PLL_clock_detector
@@ -1329,26 +1332,22 @@ Info: Found 1 design units, including 1 entities, in source file common/clk_lrcl
     Info: Found entity 1: clk_lrclk_gen
 Info: Found 1 design units, including 1 entities, in source file common/clk_div.v
     Info: Found entity 1: clk_div
-Info: Found 1 design units, including 1 entities, in source file alc.v
-    Info: Found entity 1: ALC
+Warning: Can't analyze file -- file ALC.v is missing
 Info: Found 1 design units, including 1 entities, in source file oddclockdiv.v
     Info: Found entity 1: oddClockDivider
-Info: Found 1 design units, including 1 entities, in source file cordic.v
-    Info: Found entity 1: cordic_16
 Info: Found 1 design units, including 1 entities, in source file adc.v
     Info: Found entity 1: ADC
-Info: Found 1 design units, including 1 entities, in source file phase_accumulator.v
-    Info: Found entity 1: phase_accumulator
+Warning: Can't analyze file -- file phase_accumulator.v is missing
 Info: Found 1 design units, including 1 entities, in source file cicint.v
     Info: Found entity 1: cicint
 Info: Found 1 design units, including 1 entities, in source file penelope.v
     Info: Found entity 1: Penelope
 Info: Found 1 design units, including 1 entities, in source file common/i2s_rcv.v
     Info: Found entity 1: I2S_rcv
+Warning (10236): Verilog HDL Implicit Net warning at Penelope.v(447): created implicit net for "PMW2"
 Info: Elaborating entity "Penelope" for the top level hierarchy
-Warning (10034): Output port "PWM0" at Penelope.v(127) has no driver
-Warning (10034): Output port "PWM1" at Penelope.v(128) has no driver
-Warning (10034): Output port "PWM2" at Penelope.v(129) has no driver
+Warning (10036): Verilog HDL or VHDL warning at Penelope.v(447): object "PMW2" assigned a value but never read
+Warning (10034): Output port "PWM2" at Penelope.v(131) has no driver
 Info: Elaborating entity "clk_div" for hierarchy "clk_div:TLVCLK"
 Info: Elaborating entity "clk_lrclk_gen" for hierarchy "clk_lrclk_gen:clrgen"
 Warning (10230): Verilog HDL assignment warning at clk_lrclk_gen.v(63): truncated value with size 32 to match size of target (16)
@@ -1445,12 +1444,14 @@ Info: Instantiated megafunction "lpm_mult:Mult0" with the following parameter:
     Info: Parameter "MAXIMIZE_SPEED" = "5"
 Info: Found 1 design units, including 1 entities, in source file db/mult_7ct.tdf
     Info: Found entity 1: mult_7ct
-Warning: 4 hierarchies have connectivity warnings - see the Connectivity Checks report folder
+Warning: 5 hierarchies have connectivity warnings - see the Connectivity Checks report folder
 Info: Ignored 168 buffer(s)
     Info: Ignored 168 SOFT buffer(s)
-Info: 27 registers lost all their fanouts during netlist optimizations. The first 27 are displayed below.
+Info: 29 registers lost all their fanouts during netlist optimizations. The first 29 are displayed below.
     Info: Register "cpl_cordic:cordic_inst|X[18][22]" lost all its fanouts during netlist optimizations.
+    Info: Register "cpl_cordic:cordic_inst|X[18][21]" lost all its fanouts during netlist optimizations.
     Info: Register "cpl_cordic:cordic_inst|X[17][22]" lost all its fanouts during netlist optimizations.
+    Info: Register "cpl_cordic:cordic_inst|X[17][21]" lost all its fanouts during netlist optimizations.
     Info: Register "NWire_xmit:ser_no|dly_cnt[24]" lost all its fanouts during netlist optimizations.
     Info: Register "NWire_xmit:ser_no|dly_cnt[23]" lost all its fanouts during netlist optimizations.
     Info: Register "NWire_xmit:ser_no|dly_cnt[22]" lost all its fanouts during netlist optimizations.
@@ -1477,18 +1478,18 @@ Info: 27 registers lost all their fanouts during netlist optimizations. The firs
     Info: Register "NWire_xmit:ser_no|dly_cnt[1]" lost all its fanouts during netlist optimizations.
     Info: Register "NWire_xmit:ser_no|dly_cnt[0]" lost all its fanouts during netlist optimizations.
 Info: Generated suppressed messages file O:/HPSDR/trunk/Penelope V1.3/Penelope.map.smsg
-Info: Implemented 4987 device resources after synthesis - the final resource count might be different
+Info: Implemented 4925 device resources after synthesis - the final resource count might be different
     Info: Implemented 8 input pins
     Info: Implemented 49 output pins
     Info: Implemented 1 bidirectional pins
-    Info: Implemented 4920 logic cells
+    Info: Implemented 4858 logic cells
     Info: Implemented 1 PLLs
     Info: Implemented 8 DSP elements
-Info: Quartus II Analysis & Synthesis was successful. 0 errors, 15 warnings
+Info: Quartus II Analysis & Synthesis was successful. 0 errors, 17 warnings
     Info: Peak virtual memory: 186 megabytes
-    Info: Processing ended: Wed Jan 12 12:04:16 2011
-    Info: Elapsed time: 00:00:33
-    Info: Total CPU time (on all processors): 00:00:31
+    Info: Processing ended: Fri Jan 21 09:33:22 2011
+    Info: Elapsed time: 00:00:36
+    Info: Total CPU time (on all processors): 00:00:32
 
 
 +------------------------------------------+
