@@ -55,6 +55,8 @@
                 Tx_level is set to 128 for testing.
  11 Jan 2011 - Drive_Level sent from Ozy using nWire via Atlas_C18, ignored by Penelope.
  12          - Replaced CORDIC etc with code from Hermes. Changed overall gain to approx unity.
+ 21          - Corrected overall gain levels. Code now works with Penelope and PennyLane.
+			 - LED[7] now flashes to show V1.3 loaded, flashes x2 when PTT active.
   
 */
 
@@ -298,29 +300,30 @@ end
 	
 	In which case the normalized gain would be (2560^4)/(2^46) = .6103515625
 	
-	The CORDIC has an overall gain of SQRT(2) * 1.647 = 2.328
-	(the SQRT(2) is due to using complex inputs).
+	The CORDIC has an overall gain of 1.647.
 	
 	Since the CORDIC takes 16 bit I & Q inputs but output needs to be truncated to 14 bits, in order to
-	interface to the DAC, the gain is reduced by 1/4 to 0.5822.
+	interface to the DAC, the gain is reduced by 1/4 to 0.41175
 	
 	We need to be able to drive to DAC to its full range in order to maximise the S/N ratio and 
-	minimise the amount of PA gain.  We can increase the output of the CORDIC by multiplying it by 2.
-	This is simply achieved by setting the CORDIC output width to 15 bits and assigning bits [13:0] to the DAC.
+	minimise the amount of PA gain.  We can increase the output of the CORDIC by multiplying it by 4.
+	This is simply achieved by setting the CORDIC output width to 16 bits and assigning bits [13:0] to the DAC.
 	
 	The gain distripution is now:
 	
-	0.61 * 0.5822 * 2 = 0.71.
+	0.61 * 0.41174 * 4 = 1.00467 
 	
-	In order for the over gain to be unity we need a gain stage of 1/0.71 =  1.407.
-	We can approximate this by using addition thus
+	This means that the DAC output will wrap if a full range 16 bit I/Q signal is received. 
+	This can be prevented by reducing the output of the CIC filter.
 	
-	output  = input + input/4 + input/8 + input/32 = input * 1.40625
+	If we subtract 1/128 of the CIC output from itself the level becomes
 	
-	Hence the over all gain is now 
-
-	0.61 * 1.40625 * 0.588 * 2 =  0.9988
-
+	1 - 1/128 = 0.9921875
+	
+	Hence the overall gain is now 
+	
+	0.61 * 0.9921875 * 0.41174 * 4 = 0.996798
+	
 
 */
 
@@ -356,12 +359,9 @@ cicint cic_I(.clk(C122_clk), .clk_enable(1'b1), .reset(C122_rst), .filter_in(C12
 cicint cic_Q(.clk(C122_clk), .clk_enable(1'b1), .reset(C122_rst), .filter_in(C122_cic_q),
              .filter_out(C122_cic_out_q), .ce_out(C122_ce_out_q));
 
-// multiply CIC outputs by 1.40625, >>> is the Veriloig arrithmetic shift right
-// i.e. output  = input + input/4 + input/8 + input/32 = input * 1.40625
+// multiply CIC outputs by 0.9921875, >>> is the Veriloig arrithmetic shift right
+// i.e. output  = input - input/128 = input * 0.9921875
     
-//assign C122_out_i = C122_cic_out_i; // + (C122_cic_out_i >>> 2) + (C122_cic_out_i >>> 3)   + (C122_cic_out_i >>> 5);
-//assign C122_out_q = C122_cic_out_q; // + (C122_cic_out_q >>> 2) + (C122_cic_out_q >>> 3)   + (C122_cic_out_q >>> 5);
-
 assign C122_out_i = C122_cic_out_i  - (C122_cic_out_i >>> 7);
 assign C122_out_q = C122_cic_out_q  - (C122_cic_out_q >>> 7);
 
