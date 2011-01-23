@@ -18,7 +18,7 @@ unsigned char* Metis::getMACAddress() {
 
 QString Metis::toString() {
     QString text;
-    text.sprintf("%02X:%02X:%02X:%02X:%02x:%02X (%d.%d.%d.%d)",
+    text.sprintf("%02X:%02X:%02X:%02X:%02x:%02X (%ld.%ld.%ld.%ld)",
                  macaddress[0],macaddress[1],macaddress[2],macaddress[3],macaddress[4],macaddress[5],
                  ipaddress&0xFF,(ipaddress>>8)&0xFF,(ipaddress>>16)&0xFF,(ipaddress>>24)&0xFF);
     return text;

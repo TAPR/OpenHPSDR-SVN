@@ -20,10 +20,9 @@
 class DiscoveryThread : public QThread {
     Q_OBJECT
 public:
-    DiscoveryThread();
+    DiscoveryThread(int discovery_socket);
     void run();
     void stop();
-    void setIPAddress(long ip);
 signals:
     void metis_found(unsigned char*,long);
     void reply(unsigned char);

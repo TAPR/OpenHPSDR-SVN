@@ -52,11 +52,13 @@ void RawReceiveThread::run() {
         }
         packet=(unsigned char*)pcap_next(handle,&header);
         if(packet==NULL) {
+            qDebug() <<"RawReceiveThread received NULL packet";
             if(handle==NULL) {
                 break;
             }
             emit timeout();
         } else {
+            qDebug() <<"RawReceiveThread received packet length "<<header.len;
             if(header.len>=22) {
                 // check destination is us
                 if(packet[0]==hw[0] && packet[1]==hw[1] && packet[2]==hw[2] &&
@@ -71,25 +73,24 @@ void RawReceiveThread::run() {
                         if(packet[12]==0xEF && packet[13]==0xFE) {
                             if(packet[14]==0x03) {
                                 switch(packet[15]) {
-                                case 1:
-                                    // command completed successfully
-                                    //qDebug()<<"received command completed";
-                                    emit commandCompleted();
+                                case INVALID_COMMAND:
+                                    // invalid command
+                                    qDebug()<<"received INVALID_COMMAND reply";
                                     break;
-                                case 2:
-                                    //ready for next 256 bytes of data
-                                    //qDebug()<<"received ready for next buffer";
+                                case ERASE_DONE:
+                                    emit eraseCompleted();
+                                    break;
+                                case SEND_MORE:
                                     emit nextBuffer();
                                     break;
-                                case 3:
-                                    // MAC address
-                                    //qDebug()<<"received MAC address";
+                                case HAVE_MAC_ADDRESS:
                                     emit macAddress(&packet[16]);
                                     break;
-                                case 4:
-                                    // IP address
-                                    //qDebug()<<"received IP address"<<packet[16]<<"."<<packet[17]<<"."<<packet[18]<<"."<<packet[19];
+                                case HAVE_IP_ADDRESS:
                                     emit ipAddress(&packet[16]);
+                                    break;
+                                case FPGA_ID:
+                                    emit fpgaId(&packet[16]);
                                     break;
                                 default:
                                     qDebug()<<"received invalid reply"<<packet[15];
