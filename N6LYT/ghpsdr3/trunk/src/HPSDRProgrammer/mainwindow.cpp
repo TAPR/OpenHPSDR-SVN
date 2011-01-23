@@ -75,6 +75,10 @@ MainWindow::MainWindow(QWidget *parent) :
 
     connect(ui->tabWidget,SIGNAL(currentChanged(int)),this,SLOT(tabChanged(int)));
 
+    connect(ui->interrogatePushButton,SIGNAL(clicked()),this,SLOT(jtagInterrogate()));
+    connect(ui->jtagBrowsePushButton,SIGNAL(clicked()),this,SLOT(jtagBrowse()));
+    connect(ui->jtagProgramPushButton,SIGNAL(clicked()),this,SLOT(jtagProgram()));
+
     if(ui->interfaceComboBox->count()>0) {
         ui->interfaceComboBox->setCurrentIndex(0);
         interfaceSelected(0);
@@ -82,8 +86,13 @@ MainWindow::MainWindow(QWidget *parent) :
 
     bootloader=false;
 
+    ui->tabWidget->setTabEnabled(1,true);
+    ui->tabWidget->setTabEnabled(2,true);
+
+    ui->tabWidget_2->setTabEnabled(1,true);
     ui->tabWidget_2->setTabEnabled(2,false);
     ui->tabWidget_2->setTabEnabled(3,false);
+    ui->tabWidget_2->setTabEnabled(4,false);
 
 }
 
@@ -117,15 +126,95 @@ void MainWindow::interfaceSelected(int index) {
 
 // SLOT - browse - called when the "Browse ..." button on the Program tab is pressed.
 void MainWindow::browse() {
-    QString fileName=QFileDialog::getOpenFileName(this,tr("Select File"),"",tr("pof Files (*.pof)"));
+    //QString fileName=QFileDialog::getOpenFileName(this,tr("Select File"),"",tr("pof Files (*.pof)"));
+    QString fileName=QFileDialog::getOpenFileName(this,tr("Select File"),"",tr("rbf Files (*.rbf)"));
     ui->fileLineEdit->setText(fileName);
+}
+
+/*
+// private load a pof file
+void MainWindow::loadPOF(QString filename) {
+    int length;
+    int ffCount;
+    int i;
+
+    QFile pofFile(filename);
+    pofFile.open(QIODevice::ReadOnly);
+    QDataStream in(&pofFile);
+    length=pofFile.size();
+    data=(char*)malloc(length);
+
+    status("reading file...");
+    if(in.readRawData(data,length)!=length) {
+        status("Error: could not read pof file");
+        pofFile.close();
+        QApplication::restoreOverrideCursor();
+        blocks=0;
+    } else {
+        pofFile.close();
+        status("file read successfully");
+
+        // trim
+        start=0x95;
+        if(length>0x200095) {
+            length=0x200095;
+        }
+        ffCount=0;
+        for(i=length-1;i>=start;i--) {
+            if(data[i]==(char)0xFF) {
+                ffCount++;
+            } else {
+                break;
+            }
+        }
+
+        end=length-ffCount+36; // trim the FF's but keep at least 36
+        end+=(256-((end-start)%256)); // must be multiple of 256 bytes
+        blocks=(end-start)/256;
+
+        qDebug() <<"start="<<start<<" end="<<end<<" blocks="<<blocks;
+    }
+}
+*/
+
+// private load an rbf file
+void MainWindow::loadRBF(QString filename) {
+    int length;
+    int i;
+
+    QFile rbfFile(filename);
+    rbfFile.open(QIODevice::ReadOnly);
+    QDataStream in(&rbfFile);
+    length=((rbfFile.size()+255)/256)*256;
+    data=(char*)malloc(length);
+
+
+    qDebug() << "file size=" << rbfFile.size() << "length=" << length;
+    status("reading file...");
+    if(in.readRawData(data,rbfFile.size())!=rbfFile.size()) {
+        status("Error: could not read rbf file");
+        rbfFile.close();
+        QApplication::restoreOverrideCursor();
+        blocks=0;
+    } else {
+        status("file read successfully");
+
+        // pad out to mod 256 with 0xFF
+        for(i=rbfFile.size();i<length;i++) {
+            data[i]=0xFF;
+        }
+        rbfFile.close();
+
+        start=0;
+        end=length;
+        blocks=length/256;
+
+        qDebug() <<"start="<<start<<" end="<<end<<" blocks="<<blocks;
+    }
 }
 
 // SLOT - program - called when the "Program" button on the Program tab is pressed.
 void MainWindow::program() {
-    int length;
-    int ffCount;
-    int i;
 
     ui->statusListWidget->clear();
     ui->statusListWidget->addItem("");
@@ -133,54 +222,22 @@ void MainWindow::program() {
 
     // check that an interface has been selected
     if(ui->interfaceComboBox->currentIndex()!=-1) {
-        // check that a pof file has been selected
-        if(ui->fileLineEdit->text().endsWith(".pof")) {
+        // check that a file has been selected
+        if(ui->fileLineEdit->text().endsWith(".rbf")) {
+        //if(ui->fileLineEdit->text().endsWith(".pof")) {
 
 
             QApplication::setOverrideCursor(QCursor(Qt::BusyCursor));
 
-            // load the pof file and convert to rpd
-            QFile pofFile(ui->fileLineEdit->text());
-            pofFile.open(QIODevice::ReadOnly);
-            QDataStream in(&pofFile);
-            length=pofFile.size();
-            data=(char*)malloc(length);
-
-            status("reading file...");
-            if(in.readRawData(data,length)!=length) {
-                status("Error: could not read pof file");
-                pofFile.close();
-                QApplication::restoreOverrideCursor();
-            } else {
-                pofFile.close();
-                status("file read successfully");
-
-                // trim
-                start=0x95;
-                if(length>0x200095) {
-                    length=0x200095;
-                }
-                ffCount=0;
-                for(i=length-1;i>=start;i--) {
-                    if(data[i]==(char)0xFF) {
-                        ffCount++;
-                    } else {
-                        break;
-                    }
-                }
-
-                end=length-ffCount+36; // trim the FF's but keep at least 36
-                end+=(256-((end-start)%256)); // must be multiple of 256 bytes
-                blocks=(end-start)/256;
-
-                qDebug() <<"start="<<start<<" end="<<end<<" blocks="<<blocks;
-
+            // load thefile
+            //loadPOF(ui->fileLineEdit->text());
+            loadRBF(ui->fileLineEdit->text());
+            if(blocks>0) {
                 if(bootloader) {
                     bootloaderProgram();
                 } else {
                     flashProgram();
                 }
-
             }
         } else {
             status("Error: no file selected");
@@ -193,6 +250,8 @@ void MainWindow::program() {
 void MainWindow::bootloaderProgram() {
     char errbuf[PCAP_ERRBUF_SIZE];
 
+    size=0;
+    data_command=PROGRAM_FLASH;
     qDebug()<<"MainWindow::bootloaderProgram";
     handle=pcap_open_live(ui->interfaceComboBox->currentText().toAscii().constData(),1024,1,TIMEOUT,errbuf);
     if (handle == NULL) {
@@ -201,7 +260,7 @@ void MainWindow::bootloaderProgram() {
     } else {
         rawReceiveThread=new RawReceiveThread(hw,handle);
         rawReceiveThread->start();
-        QObject::connect(rawReceiveThread,SIGNAL(commandCompleted()),this,SLOT(commandCompleted()));
+        QObject::connect(rawReceiveThread,SIGNAL(eraseCompleted()),this,SLOT(eraseCompleted()));
         QObject::connect(rawReceiveThread,SIGNAL(nextBuffer()),this,SLOT(nextBuffer()));
         QObject::connect(rawReceiveThread,SIGNAL(timeout()),this,SLOT(timeout()));
 
@@ -213,12 +272,15 @@ void MainWindow::bootloaderProgram() {
 
 void MainWindow::flashProgram() {
 
+    size=blocks;
+    data_command=PROGRAM_METIS_FLASH;
+
     // start a thread to listen for replies
     receiveThread=new ReceiveThread(metisIP);
     receiveThread->setIPAddress(ip);
     receiveThread->start();
 
-    QObject::connect(receiveThread,SIGNAL(commandCompleted()),this,SLOT(commandCompleted()));
+    QObject::connect(receiveThread,SIGNAL(eraseCompleted()),this,SLOT(eraseCompleted()));
     QObject::connect(receiveThread,SIGNAL(nextBuffer()),this,SLOT(nextBuffer()));
 
     state=ERASING;
@@ -257,7 +319,7 @@ void MainWindow::bootloaderErase() {
         status("Error: cannot open interface (are you running as root)");
     } else {
         rawReceiveThread=new RawReceiveThread(hw,handle);
-        QObject::connect(rawReceiveThread,SIGNAL(commandCompleted()),this,SLOT(commandCompleted()));
+        QObject::connect(rawReceiveThread,SIGNAL(eraseCompleted()),this,SLOT(eraseCompleted()));
         QObject::connect(rawReceiveThread,SIGNAL(timeout()),this,SLOT(timeout()));
         rawReceiveThread->start();
 
@@ -270,7 +332,7 @@ void MainWindow::bootloaderErase() {
 void MainWindow::flashErase() {
     receiveThread=new ReceiveThread(metisIP);
     receiveThread->setIPAddress(ip);
-    QObject::connect(receiveThread,SIGNAL(commandCompleted()),this,SLOT(commandCompleted()));
+    QObject::connect(receiveThread,SIGNAL(eraseCompleted()),this,SLOT(eraseCompleted()));
     QObject::connect(receiveThread,SIGNAL(timeout()),this,SLOT(timeout()));
     receiveThread->start();
 
@@ -417,7 +479,7 @@ void MainWindow::setIP() {
             buffer[13]=0xFE;
 
             buffer[14]=0x03; //
-            buffer[15]=0x05; // write ip address
+            buffer[15]=WRITE_METIS_IP;
 
             /*fill the frame with 0x00*/
             buffer[16]=(unsigned char)addr[0];
@@ -447,9 +509,9 @@ void MainWindow::eraseData() {
     eraseTimeouts=0;
     status("Erasing device ... (takes several seconds)");
     if(bootloader) {
-        sendRawCommand(0x02);
+        sendRawCommand(ERASE_METIS_FLASH);
     } else {
-        sendCommand(0x02);
+        sendCommand(ERASE_METIS_FLASH);
     }
 }
 
@@ -457,14 +519,14 @@ void MainWindow::eraseData() {
 void MainWindow::readMAC() {
     eraseTimeouts=0;
     status("Reading Metis MAC Address ...");
-    sendRawCommand(0x03);
+    sendRawCommand(READ_METIS_MAC);
 }
 
 // private function to read the IP address from Metis.
 void MainWindow::readIP() {
     eraseTimeouts=0;
     status("Reading Metis IP address ...");
-    sendRawCommand(0x04);
+    sendRawCommand(READ_METIS_IP);
 }
 
 // private function to send a command.
@@ -497,7 +559,7 @@ void MainWindow::sendCommand(unsigned char command) {
     s=socket(PF_INET,SOCK_DGRAM,IPPROTO_UDP);
     if(s<0) {
         perror("create socket failed for send_command\n");
-        exit(1);
+        return;
     }
 
     setsockopt(s, SOL_SOCKET, SO_REUSEADDR, (const char*)&on, sizeof(on));
@@ -510,7 +572,7 @@ void MainWindow::sendCommand(unsigned char command) {
     rc=bind(s,(struct sockaddr*)&name,sizeof(name));
     if(rc != 0) {
         fprintf(stderr,"cannot bind to interface: rc=%d\n", rc);
-        exit(1);
+        return;
     }
 
     struct sockaddr_in addr={0,0,{0},{0}};
@@ -520,7 +582,7 @@ void MainWindow::sendCommand(unsigned char command) {
 
     if(sendto(s,(char*)buffer,sizeof(buffer),0,(struct sockaddr*)&addr,sizeof(addr))<0) {
         perror("sendto socket failed for sendCommand\n");
-        exit(1);
+        return;
     }
 
 }
@@ -579,7 +641,7 @@ void MainWindow::sendData() {
     buffer[0]=0xEF;
     buffer[1]=0xFE;
     buffer[2]=0x03;
-    buffer[3]=0x01;
+    buffer[3]=PROGRAM_METIS_FLASH;
     buffer[4]=(blocks>>24)&0xFF;
     buffer[5]=(blocks>>16)&0xFF;
     buffer[6]=(blocks>>8)&0xFF;
@@ -603,7 +665,7 @@ void MainWindow::sendData() {
     qDebug("sendto");
     if(sendto(s,(char*)&buffer[0],sizeof(buffer),0,(struct sockaddr*)&addr,length)<0) {
         perror("sendto socket failed for sendCommand\n");
-        exit(1);
+        return;
     }
 
     QString text;
@@ -620,7 +682,7 @@ void MainWindow::sendData() {
 
 // private function to send 256 byte block of the pof file.
 void MainWindow::sendRawData() {
-    unsigned char buffer[272];
+    unsigned char buffer[276];
 
     qDebug()<<"sendRawData offset="<<offset;
 
@@ -644,14 +706,19 @@ void MainWindow::sendRawData() {
         buffer[13]=0xFE;
 
         buffer[14]=0x03;
-        buffer[15]=0x01;
+        buffer[15]=PROGRAM_METIS_FLASH;
+
+        buffer[16]=0x00;
+        buffer[17]=0x00;
+        buffer[18]=0x00;
+        buffer[19]=0x00;
 
         /*fill the frame with some data*/
         for(int i=0;i<256;i++) {
-                buffer[i+16]=(unsigned char)data[i+offset];
+                buffer[i+20]=(unsigned char)data[i+offset];
         }
 
-        if(pcap_sendpacket(handle,buffer,272)!=0) {
+        if(pcap_sendpacket(handle,buffer,276)!=0) {
             qDebug()<<"pcap_sendpacket failed";
             status("send data command failed");
             idle();
@@ -666,16 +733,14 @@ void MainWindow::sendRawData() {
                 }
             }
         }
-
-
     }
 }
 
-// SLOT - commandCompleted - called when a command completed reply packet received
-void MainWindow::commandCompleted() {
+// SLOT - eraseCompleted
+void MainWindow::eraseCompleted() {
     switch(state) {
     case IDLE:
-        // ignore
+        qDebug()<<"received eraseCompleted when state is IDLE";
         break;
     case ERASING:
         status("Device erased successfully");
@@ -694,12 +759,46 @@ void MainWindow::commandCompleted() {
         QApplication::restoreOverrideCursor();
         break;
     case READ_MAC:
+        qDebug()<<"received eraseCompleted when state is READ_MAC";
         break;
     case READ_IP:
+        qDebug()<<"received eraseCompleted when state is READ_IP";
         break;
     case WRITE_IP:
         status("Metis IP written successfully");
         idle();
+        break;
+    case JTAG_INTERROGATE:
+        qDebug()<<"received eraseCompleted when state is JTAG_INTERROGATE";
+        break;
+    }
+}
+
+// SLOT - eraseCompleted
+void MainWindow::fpgaId(unsigned char* data) {
+    switch(state) {
+    case JTAG_INTERROGATE:
+        fpga_id=((data[0]&0xFF)<<16)+((data[1]&0xFF)<<8)+(data[2]&0xFF);
+        if(fpga_id==0) {
+            status("No Mercury or Penelope board found");
+            status("Make sure that Metis is in the slot farthest away from the power connector.");
+            status("The target board should be in the next slot adjacent to Metis.");
+            status("The target board has the 'Last JTAG' jumper installed.");
+            status("The are no other boards on the Atlas Bus.");
+        } else if(fpga_id==0x020F30) {
+            status("found Mercury");
+            ui->jtagLineEdit->setText("Mercury - 0x020F30");
+        } else if(fpga_id==0x020B20) {
+            status("found Penelope");
+            ui->jtagLineEdit->setText("Penelope - 0x020B20");
+        } else {
+            status("unknown FPGA id");
+            fpga_id=0;
+        }
+        idle();
+        break;
+    default:
+        qDebug()<<"received fpgaId when state is not JTAG_INTERROGATE";
         break;
     }
 }
@@ -753,6 +852,17 @@ void MainWindow::timeout() {
     case WRITE_IP:
         // should not happen as there is no repsonse
         break;
+    case JTAG_INTERROGATE:
+        qDebug() << "timeout while state is JTAG_INTERROGATE";
+        break;
+    case JTAG_ERASING:
+        eraseTimeouts++;
+        if(eraseTimeouts==MAX_ERASE_TIMEOUTS) {
+            status("Error: erase timeout - power cycle and try again?");
+            idle();
+            QApplication::restoreOverrideCursor();
+        }
+        break;
     }
 }
 
@@ -788,24 +898,17 @@ void MainWindow::discover() {
     metis.clear();
 
     // send the discovery packet
-    int discovery_socket;
-    struct sockaddr_in discovery_addr;
-    int discovery_length;
-    unsigned char buffer[17];
+    unsigned char buffer[63];
+    int i;
     int rc;
     int on=1;
-
-    // start a thread to listen for discovery responses
-    discoveryThread=new DiscoveryThread();
-    discoveryThread->setIPAddress(ip);
-    discoveryThread->start();
-
-    QObject::connect(discoveryThread,SIGNAL(metis_found(unsigned char*,long)),this,SLOT(metis_found(unsigned char*,long)));
 
     discovery_socket=socket(PF_INET,SOCK_DGRAM,IPPROTO_UDP);
     if(discovery_socket<0) {
         perror("create socket failed for discovery_socket\n");
-        exit(1);
+        status("create socket failed for discovery_socket");
+        discoveryThread->stop();
+        return;
     }
 
     setsockopt(discovery_socket, SOL_SOCKET, SO_REUSEADDR, (char*)&on, sizeof(on));
@@ -818,34 +921,33 @@ void MainWindow::discover() {
     rc=bind(discovery_socket,(struct sockaddr*)&name,sizeof(name));
     if(rc != 0) {
         fprintf(stderr,"cannot bind to interface: rc=%d\n", rc);
-        exit(1);
+        status("cannot bind to interface");
+        discoveryThread->stop();
+        return;
     }
 
     rc=setsockopt(discovery_socket, SOL_SOCKET, SO_BROADCAST, (char*)&on, sizeof(on));
     if(rc != 0) {
         fprintf(stderr,"cannot set SO_BROADCAST: rc=%d\n", rc);
-        exit(1);
+        status("cannot set SO_BROADCAST");
+        discoveryThread->stop();
+        return;
     }
 
     QApplication::setOverrideCursor(QCursor(Qt::BusyCursor));
+
+    // start a thread to listen for discovery responses
+    discoveryThread=new DiscoveryThread(discovery_socket);
+    discoveryThread->start();
+    QObject::connect(discoveryThread,SIGNAL(metis_found(unsigned char*,long)),this,SLOT(metis_found(unsigned char*,long)));
 
     buffer[0]=(char)0xEF; //header
     buffer[1]=(char)0XFE;
     buffer[2]=(char)0x02;
     buffer[3]=(char)ip&0xFF; //my ip
-    buffer[4]=(char)(ip>>8)&0xFF;
-    buffer[5]=(char)(ip>>16)&0xFF;
-    buffer[6]=(char)(ip>>24)&0xFF;
-    buffer[7]=(char)hw[0]; //my mac
-    buffer[8]=(char)hw[1];
-    buffer[9]=(char)hw[2];
-    buffer[10]=(char)hw[3];
-    buffer[11]=(char)hw[4];
-    buffer[12]=(char)hw[5];
-    buffer[13]=(char)0x0A;// metis ip
-    buffer[14]=(char)0x01;
-    buffer[15]=(char)0x01;
-    buffer[16]=(char)0x02;
+    for(i=4;i<63;i++) {
+        buffer[i]=(char)0x00;
+    }
 
     discovery_length=sizeof(discovery_addr);
     memset(&discovery_addr,0,discovery_length);
@@ -855,7 +957,9 @@ void MainWindow::discover() {
 
     if(sendto(discovery_socket,(char*)buffer,sizeof(buffer),0,(struct sockaddr*)&discovery_addr,discovery_length)<0) {
         perror("sendto socket failed for discovery_socket\n");
-        exit(1);
+        status("sendto socket failed for discovery_socket");
+        discoveryThread->stop();
+        return;
     }
 
     // disable the Discovery button
@@ -889,7 +993,7 @@ void MainWindow::metis_found(unsigned char* hw,long ip) {
 
     m=new Metis(ip,hw);
 
-    //qDebug() << "metis_found";
+    qDebug() << "metis_found";
     metis.append(m);
     ui->metisComboBox->addItem(m->toString());
     status(m->toString());
@@ -905,5 +1009,194 @@ void MainWindow::tabChanged(int index) {
     bootloader=(index==1);
     ui->tabWidget_2->setTabEnabled(2,bootloader);
     ui->tabWidget_2->setTabEnabled(3,bootloader);
+    ui->tabWidget_2->setTabEnabled(4,bootloader);
 
+}
+
+void MainWindow::jtagInterrogate() {
+    char errbuf[PCAP_ERRBUF_SIZE];
+
+    handle=pcap_open_live(ui->interfaceComboBox->currentText().toAscii().constData(),1024,1,TIMEOUT,errbuf);
+    if (handle == NULL) {
+        qDebug()<<"Couldn't open device "<<ui->interfaceComboBox->currentText().toAscii().constData()<<errbuf;
+        status("Error: cannot open interface (are you running as root)");
+    } else {
+        rawReceiveThread=new RawReceiveThread(hw,handle);
+        QObject::connect(rawReceiveThread,SIGNAL(fpgaId(unsigned char*)),this,SLOT(fpgaId(unsigned char*)));
+        QObject::connect(rawReceiveThread,SIGNAL(timeout()),this,SLOT(timeout()));
+        rawReceiveThread->start();
+
+        state=JTAG_INTERROGATE;
+        interrogate();
+    }
+}
+
+void MainWindow::jtagBrowse() {
+    //QString fileName=QFileDialog::getOpenFileName(this,tr("Select File"),"",tr("pof Files (*.pof)"));
+    QString fileName=QFileDialog::getOpenFileName(this,tr("Select File"),"",tr("rbf Files (*.rbf)"));
+    ui->jtagProgramLineEdit->setText(fileName);
+}
+
+void MainWindow::jtagProgram() {
+
+    if(fpga_id==0x020F30 || fpga_id==0x020B20) {
+        if(ui->jtagProgramLineEdit->text().endsWith(".rbf")) {
+            if(fpga_id==0x020F30) {
+                // Mercury
+                data_command=PROGRAM_MERCURY;
+                loadMercuryRBF(ui->jtagProgramLineEdit->text());
+                if(blocks>0) {
+                    if(bootloader) {
+                        jtagBootloaderProgram();
+                    } else {
+                        jtagFlashProgram();
+                    }
+                }
+            } else {
+                // Penelope
+                data_command=PROGRAM_PENELOPE;
+                loadPenelopeRBF(ui->jtagProgramLineEdit->text());
+                if(blocks>0) {
+                    if(bootloader) {
+                        jtagBootloaderProgram();
+                    } else {
+                        jtagFlashProgram();
+                    }
+                }
+            }
+        } else {
+            status("No file selected.");
+        }
+    } else {
+        status("No target defined");
+    }
+}
+
+void MainWindow::loadMercuryRBF(QString filename) {
+    int length;
+    int i;
+
+    QFile rbfFile(filename);
+    rbfFile.open(QIODevice::ReadOnly);
+    QDataStream in(&rbfFile);
+    length=((rbfFile.size()+16+255)/256)*256;
+    data=(char*)malloc(length);
+
+
+    qDebug() << "file size=" << rbfFile.size() << "length=" << length;
+    status("reading file...");
+    if(in.readRawData(data,rbfFile.size())!=rbfFile.size()) {
+        status("Error: could not read rbf file");
+        rbfFile.close();
+        QApplication::restoreOverrideCursor();
+        blocks=0;
+    } else {
+        status("file read successfully");
+
+        // pad out to mod 256 with 0xFF
+        for(i=rbfFile.size();i<length;i++) {
+            data[i]=0xFF;
+        }
+        rbfFile.close();
+
+        start=0;
+        end=length;
+        blocks=length/256;
+
+        qDebug() <<"start="<<start<<" end="<<end<<" blocks="<<blocks;
+    }
+}
+
+void MainWindow::loadPenelopeRBF(QString filename) {
+    int length;
+    int i;
+
+    QFile rbfFile(filename);
+    rbfFile.open(QIODevice::ReadOnly);
+    QDataStream in(&rbfFile);
+    length=((rbfFile.size()-44+255)/256)*256;
+    data=(char*)malloc(length+44);
+
+
+    qDebug() << "file size=" << rbfFile.size() << "length=" << length;
+    status("reading file...");
+    if(in.readRawData(data,rbfFile.size())!=rbfFile.size()) {
+        status("Error: could not read rbf file");
+        rbfFile.close();
+        QApplication::restoreOverrideCursor();
+        blocks=0;
+    } else {
+        status("file read successfully");
+
+        // pad out to mod 256 with 0xFF
+        for(i=rbfFile.size();i<length;i++) {
+            data[i]=0xFF;
+        }
+        rbfFile.close();
+
+        start=44;
+        end=length;
+        blocks=length/256;
+
+        qDebug() <<"start="<<start<<" end="<<end<<" blocks="<<blocks;
+    }
+}
+
+void MainWindow::jtagBootloaderProgram() {
+    char errbuf[PCAP_ERRBUF_SIZE];
+
+    qDebug()<<"MainWindow::bootloaderProgram";
+    handle=pcap_open_live(ui->interfaceComboBox->currentText().toAscii().constData(),1024,1,TIMEOUT,errbuf);
+    if (handle == NULL) {
+        qDebug()<<"Couldn't open device "<<ui->interfaceComboBox->currentText().toAscii().constData()<<errbuf;
+        status("Error: cannot open interface (are you running as root)");
+    } else {
+        rawReceiveThread=new RawReceiveThread(hw,handle);
+        rawReceiveThread->start();
+        QObject::connect(rawReceiveThread,SIGNAL(commandCompleted()),this,SLOT(commandCompleted()));
+        QObject::connect(rawReceiveThread,SIGNAL(nextBuffer()),this,SLOT(nextBuffer()));
+        QObject::connect(rawReceiveThread,SIGNAL(timeout()),this,SLOT(timeout()));
+
+        // start by erasing
+        state=JTAG_ERASING;
+        jtagEraseData();
+    }
+}
+
+// private function to send the command to erase
+void MainWindow::jtagEraseData() {
+    eraseTimeouts=0;
+    status("Erasing device ... (takes several seconds)");
+    if(bootloader) {
+        sendRawCommand(JTAG_ERASE_FLASH);
+    } else {
+        sendCommand(JTAG_ERASE_FLASH);
+    }
+}
+void MainWindow::jtagFlashProgram() {
+
+    size=blocks*256;
+
+    // start a thread to listen for replies
+    receiveThread=new ReceiveThread(metisIP);
+    receiveThread->setIPAddress(ip);
+    receiveThread->start();
+
+    QObject::connect(receiveThread,SIGNAL(eraseCompleted()),this,SLOT(eraseCompleted()));
+    QObject::connect(receiveThread,SIGNAL(nextBuffer()),this,SLOT(nextBuffer()));
+
+    state=ERASING;
+    eraseData();
+
+}
+
+void MainWindow::interrogate() {
+    eraseTimeouts=0;
+    status("");
+    status("Interrogating JTAG chain");
+    if(bootloader) {
+        sendRawCommand(0x06);
+    } else {
+        sendCommand(0x06);
+    }
 }

@@ -39,7 +39,9 @@ void showAddr(char * name, struct sockaddr *a)
 // get a list of the interfaces on the system
 Interfaces::Interfaces() {
     char errbuf[PCAP_ERRBUF_SIZE];
+#ifdef __WIN32
     pcap_addr_t* addr;
+#endif
     int nqInterfaces;       // count qualified interfaces in the list from QNetworkInterface::allInterfaces()
 
     nqInterfaces=0;

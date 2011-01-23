@@ -10,7 +10,7 @@ ReceiveThread::ReceiveThread(long metisIP) {
     qDebug()<<"ReceiveThread";
 
     QString text;
-    text.sprintf("ReceiveThread: metisIP %d.%d.%d.%d)",
+    text.sprintf("ReceiveThread: metisIP %ld.%ld.%ld.%ld)",
                  metisIP&0xFF,(metisIP>>8)&0xFF,(metisIP>>16)&0xFF,(metisIP>>24)&0xFF);
     qDebug()<<text;
     metisIPAddress=metisIP;
@@ -20,7 +20,7 @@ ReceiveThread::ReceiveThread(long metisIP) {
 void ReceiveThread::setIPAddress(long ip) {
     myIPAddress=ip;
     QString text;
-    text.sprintf("ReceiveThread: myIP %d.%d.%d.%d)",
+    text.sprintf("ReceiveThread: myIP %ld.%ld.%ld.%ld)",
                  (ip>>24)&0xFF,(ip>>16)&0xFF,(ip>>8)&0xFF,ip&0xFF);
     qDebug()<<text;
 }
@@ -55,7 +55,7 @@ void ReceiveThread::run() {
     length=sizeof(addr);
     memset(&addr,0,length);
     addr.sin_family=AF_INET;
-    addr.sin_port=htons(1025);
+    addr.sin_port=htons(1024);
     addr.sin_addr.s_addr=htonl(myIPAddress);
     if(bind(s,(struct sockaddr*)&addr,length)<0) {
         qDebug() << "bind socket failed for ReceiveThread ";
@@ -98,7 +98,7 @@ void ReceiveThread::run() {
                 switch(buffer[2]) {
                     case 3:  // erase completed
                         qDebug()<<"commandCompleted";
-                        emit commandCompleted();
+                        emit eraseCompleted();
                         break;
                     case 4:  // ready for next buffer
                         qDebug()<<"ready for next buffer";

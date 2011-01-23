@@ -26,6 +26,19 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
+#include <sys/types.h>
+#ifdef __WIN32
+#include <winsock2.h>
+#else
+#include <sys/socket.h>
+#include <sys/ioctl.h>
+#include <netinet/in.h>
+#include <arpa/inet.h>
+#include <netdb.h>
+#include <net/if_arp.h>
+#include <net/if.h>
+#include <ifaddrs.h>
+#endif
 #include <pcap.h>
 
 #include <QMainWindow>
@@ -43,6 +56,10 @@
 #define READ_MAC 4
 #define READ_IP 5
 #define WRITE_IP 6
+#define JTAG_INTERROGATE 7
+#define JTAG_ERASING 8
+#define JTAG_PROGRAM 9
+
 
 #define TIMEOUT 10 // ms
 #define MAX_ERASE_TIMEOUTS (20*(1000/TIMEOUT)) // 20 seconds
@@ -72,20 +89,27 @@ public slots:
     void discovery_timeout();
 
     // SLOTS for RawReceiveThread
-    void commandCompleted();
+    void eraseCompleted();
     void nextBuffer();
     void timeout();
     void macAddress(unsigned char*);
     void ipAddress(unsigned char*);
+    void fpgaId(unsigned char*);
 
     void metis_found(unsigned char*,long);
     void metisSelected(int);
 
     void tabChanged(int);
 
+    void jtagInterrogate();
+    void jtagBrowse();
+    void jtagProgram();
+
 private:
     Ui::MainWindow *ui;
 
+    //void loadPOF(QString filename);
+    void loadRBF(QString filename);
     void eraseData();
     void readMAC();
     void readIP();
@@ -105,6 +129,13 @@ private:
     void bootloaderErase();
     void flashErase();
 
+    void interrogate();
+    void loadMercuryRBF(QString filename);
+    void loadPenelopeRBF(QString filename);
+    void jtagBootloaderProgram();
+    void jtagEraseData();
+    void jtagFlashProgram();
+
     Interfaces interfaces;
     long ip;
     QString hwAddress;
@@ -120,6 +151,12 @@ private:
     int end;
     int blocks;
 
+    int size; //depending on how and what we are programming
+              // 0 if programming flash on metis in raw modfe
+              // blocks if programming flash on metis in command mode
+              // bytes (blocks*256) if programming flash on JTAG (Mercury or Penelope)
+    unsigned char data_command;
+
     pcap_t *handle;
 
     QList<Metis*> metis;
@@ -129,11 +166,17 @@ private:
     int percent;
     int eraseTimeouts;
 
+    int discovery_socket;
+    struct sockaddr_in discovery_addr;
+    int discovery_length;
+
     DiscoveryThread* discoveryThread;
     ReceiveThread* receiveThread;
     RawReceiveThread* rawReceiveThread;
 
     bool bootloader;
+
+    long fpga_id;
 
 };
 

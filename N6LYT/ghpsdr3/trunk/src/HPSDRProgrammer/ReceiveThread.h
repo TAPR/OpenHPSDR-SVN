@@ -25,7 +25,7 @@ public:
     void stop();
     void setIPAddress(long ip);
 signals:
-    void commandCompleted();
+    void eraseCompleted();
     void nextBuffer();
     void timeout();
 private:
