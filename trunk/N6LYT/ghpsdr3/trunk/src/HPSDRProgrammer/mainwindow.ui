@@ -118,11 +118,11 @@
       <x>10</x>
       <y>180</y>
       <width>801</width>
-      <height>121</height>
+      <height>161</height>
      </rect>
     </property>
     <property name="currentIndex">
-     <number>0</number>
+     <number>4</number>
     </property>
     <widget class="QWidget" name="programTab">
      <attribute name="title">
@@ -365,6 +365,42 @@
       <property name="geometry">
        <rect>
         <x>10</x>
+        <y>100</y>
+        <width>131</width>
+        <height>17</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Flash Program FIle:</string>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="jtagFlashProgramLineEdit">
+      <property name="geometry">
+       <rect>
+        <x>150</x>
+        <y>90</y>
+        <width>431</width>
+        <height>27</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="jtagFlashBrowsePushButton">
+      <property name="geometry">
+       <rect>
+        <x>590</x>
+        <y>90</y>
+        <width>71</width>
+        <height>27</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Browse</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_4">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
         <y>60</y>
         <width>131</width>
         <height>17</height>
@@ -397,17 +433,17 @@
        <string>Browse</string>
       </property>
      </widget>
-     <widget class="QPushButton" name="jtagProgramPushButton">
+     <widget class="QPushButton" name="jtagFlashProgramPushButton">
       <property name="geometry">
        <rect>
         <x>670</x>
-        <y>50</y>
+        <y>90</y>
         <width>111</width>
         <height>27</height>
        </rect>
       </property>
       <property name="text">
-       <string>JTAG Program</string>
+       <string>Program</string>
       </property>
      </widget>
     </widget>
@@ -416,9 +452,9 @@
     <property name="geometry">
      <rect>
       <x>10</x>
-      <y>310</y>
+      <y>360</y>
       <width>801</width>
-      <height>251</height>
+      <height>201</height>
      </rect>
     </property>
    </widget>

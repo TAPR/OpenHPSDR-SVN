@@ -57,8 +57,9 @@
 #define READ_IP 5
 #define WRITE_IP 6
 #define JTAG_INTERROGATE 7
-#define JTAG_ERASING 8
-#define JTAG_PROGRAM 9
+#define JTAG_PROGRAM 8
+#define FLASH_ERASING 9
+#define FLASH_PROGRAM 10
 
 
 #define TIMEOUT 10 // ms
@@ -104,12 +105,16 @@ public slots:
     void jtagInterrogate();
     void jtagBrowse();
     void jtagProgram();
+    void jtagFlashBrowse();
+    void jtagFlashProgram();
+    void nextJTAGBuffer();
+    void startJTAGFlashErase();
 
 private:
     Ui::MainWindow *ui;
 
     //void loadPOF(QString filename);
-    void loadRBF(QString filename);
+    int loadRBF(QString filename);
     void eraseData();
     void readMAC();
     void readIP();
@@ -120,6 +125,8 @@ private:
 
     void sendRawData();
     void sendData();
+    void sendJTAGData();
+    void sendJTAGFlashData();
 
     void idle();
     void status(QString text);
@@ -129,12 +136,12 @@ private:
     void bootloaderErase();
     void flashErase();
 
-    void interrogate();
-    void loadMercuryRBF(QString filename);
-    void loadPenelopeRBF(QString filename);
+    int loadMercuryRBF(QString filename);
+    int loadPenelopeRBF(QString filename);
     void jtagBootloaderProgram();
     void jtagEraseData();
-    void jtagFlashProgram();
+    //void jtagFlashProgram();
+    void loadFlash();
 
     Interfaces interfaces;
     long ip;
