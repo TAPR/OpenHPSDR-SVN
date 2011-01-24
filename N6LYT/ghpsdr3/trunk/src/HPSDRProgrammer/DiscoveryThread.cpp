@@ -27,6 +27,7 @@ void DiscoveryThread::run() {
 
     while(!stopped) {
         qDebug()<<"DiscoveryThread::run recvfrom";
+        length=sizeof(addr);
         bytes_read=recvfrom(s,(char*)buffer,sizeof(buffer),0,(struct sockaddr*)&addr,(socklen_t*)&length);
         if(bytes_read<=0) {
             qDebug() << "recvfrom socket failed for discovery_thread";

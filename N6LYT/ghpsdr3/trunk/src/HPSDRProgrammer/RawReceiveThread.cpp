@@ -52,7 +52,7 @@ void RawReceiveThread::run() {
         }
         packet=(unsigned char*)pcap_next(handle,&header);
         if(packet==NULL) {
-            qDebug() <<"RawReceiveThread received NULL packet";
+            //qDebug() <<"RawReceiveThread received NULL packet";
             if(handle==NULL) {
                 break;
             }
