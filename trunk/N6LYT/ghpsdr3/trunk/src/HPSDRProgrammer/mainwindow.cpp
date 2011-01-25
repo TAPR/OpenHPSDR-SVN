@@ -1106,15 +1106,17 @@ void MainWindow::discovery_timeout() {
     QApplication::restoreOverrideCursor();
 }
 
-void MainWindow::metis_found(unsigned char* hw,long ip) {
+void MainWindow::metis_found(unsigned char* hw,long metis_ip) {
     Metis* m;
 
-    m=new Metis(ip,hw);
+    if(htonl(metis_ip)!=ip) {
+        m=new Metis(metis_ip,hw);
 
-    qDebug() << "metis_found";
-    metis.append(m);
-    ui->metisComboBox->addItem(m->toString());
-    status(m->toString());
+        qDebug() << "metis_found";
+        metis.append(m);
+        ui->metisComboBox->addItem(m->toString());
+        status(m->toString());
+    }
 }
 
 void MainWindow::metisSelected(int index) {
