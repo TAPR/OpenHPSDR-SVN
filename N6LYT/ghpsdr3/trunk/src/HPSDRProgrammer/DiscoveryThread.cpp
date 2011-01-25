@@ -11,7 +11,7 @@ void DiscoveryThread::stop() {
     qDebug()<<"DiscoveryThread::stop";
     stopped=true;
 #ifdef __WIN32
-    socket_close(s);
+    closesocket(s);
 #else
     close(s);
 #endif
