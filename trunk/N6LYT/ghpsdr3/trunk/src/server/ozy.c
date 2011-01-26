@@ -164,6 +164,7 @@ static FILE* recording;
 
 int metis=0;
 
+void ozy_prime();
 void* ozy_ep6_ep2_io_thread(void* arg);
 void* ozy_ep4_io_thread(void* arg);
 void* playback_thread(void* arg);
@@ -200,6 +201,7 @@ int create_ozy_thread() {
 
     if(!playback) {
         ozy_init();
+        ozy_prime();
     }
 
     if(timing) {
@@ -351,6 +353,13 @@ ozy_open();
     fprintf(stderr,"Ozy FX2 version: %s\n",ozy_firmware_version);
 #endif
 
+
+    return rc;
+}
+
+void ozy_prime() {
+    int i;
+
     memset((char *)&ozy_output_buffer,0,OZY_BUFFER_SIZE);
     while(configure>0) {
         write_ozy_output_buffer();
@@ -365,7 +374,6 @@ ozy_open();
     current_receiver=0;
 
 fprintf(stderr,"server configured for %d receivers at %d\n",receivers,sample_rate);
-    return rc;
 }
 
 void* ozy_ep6_ep2_io_thread(void* arg) {

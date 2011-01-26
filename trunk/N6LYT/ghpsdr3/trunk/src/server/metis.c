@@ -54,13 +54,16 @@ METIS_CARD metis_cards[MAX_METIS_CARDS];
 #define DISCOVER_SENT 1
 static int discover_state=DISCOVER_IDLE;
 
-#define DISCOVERY_SEND_PORT 1024
-#define DISCOVERY_RECEIVE_PORT 1025
-#define DATA_PORT 1024
+#define PORT 1024
+#define DISCOVERY_SEND_PORT PORT
+#define DISCOVERY_RECEIVE_PORT PORT
+#define DATA_PORT PORT
 
 static int discovery_socket;
 static struct sockaddr_in discovery_addr;
 static int discovery_length;
+
+static int discovering;
 
 static unsigned char hw_address[6];
 static long ip_address;
@@ -71,14 +74,12 @@ static int data_addr_length;
 
 static unsigned char buffer[70];
 
-static pthread_t discovery_thread_id;
 static pthread_t receive_thread_id;
 static int found=0;
 
 int ep;
 long sequence=-1;
 
-void* metis_discovery_thread(void* arg);
 void* metis_receive_thread(void* arg);
 void metis_send_buffer(char* buffer,int length);
 
@@ -124,6 +125,8 @@ void metis_discover(char* interface,char* metisip) {
     struct ifreq ifr;
 
     fprintf(stderr,"Looking for Metis card on interface %s\n",interface);
+
+    discovering=1;
     
     // send a broadcast to locate metis boards on the network
     discovery_socket=socket(PF_INET,SOCK_DGRAM,IPPROTO_UDP);
@@ -149,10 +152,10 @@ void metis_discover(char* interface,char* metisip) {
          hw_address[0], hw_address[1], hw_address[2], hw_address[3], hw_address[4], hw_address[5]);
 
 
-    // start a thread to get discovery responses
-    rc=pthread_create(&discovery_thread_id,NULL,metis_discovery_thread,NULL);
+    // start a receive thread to get discovery responses
+    rc=pthread_create(&receive_thread_id,NULL,metis_receive_thread,NULL);
     if(rc != 0) {
-        fprintf(stderr,"pthread_create failed on discovery_thread: rc=%d\n", rc);
+        fprintf(stderr,"pthread_create failed on metis_receive_thread: rc=%d\n", rc);
         exit(1);
     }
 
@@ -183,105 +186,10 @@ void metis_discover(char* interface,char* metisip) {
     for(i=0;i<60;i++) {
         buffer[i+3]=0x00;
     }
-/*
-    buffer[3]=ip_address&0xFF; // my IP address
-    buffer[4]=(ip_address>>8)&0xFF;
-    buffer[5]=(ip_address>>16)&0xFF;
-    buffer[6]=(ip_address>>24)&0xFF;
-    buffer[7]=hw_address[0]; // mt MAC address
-    buffer[8]=hw_address[1];
-    buffer[9]=hw_address[2];
-    buffer[10]=hw_address[3];
-    buffer[11]=hw_address[4];
-    buffer[12]=hw_address[5];
-
-    long addr=inet_addr(metisip);
-    buffer[13]=addr&0xFF; // metis IP address or 0L for DHCP
-    buffer[14]=(addr>>8)&0xFF;
-    buffer[15]=(addr>>16)&0xFF;
-    buffer[16]=(addr>>24)&0xFF;
-*/
 
     if(sendto(discovery_socket,buffer,63,0,(struct sockaddr*)&discovery_addr,discovery_length)<0) {
         perror("sendto socket failed for discovery_socket\n");
         exit(1);
-    }
-}
-
-void* metis_discovery_thread(void* arg) {
-    int s;
-    struct sockaddr_in addr;
-    int length;
-    unsigned char buffer[2048];
-    int bytes_read;
-
-    s=socket(PF_INET,SOCK_DGRAM,IPPROTO_UDP);
-    if(s<0) {
-        perror("create socket failed for discovery_thread\n");
-        exit(1);
-    }
-    length=sizeof(addr);
-    memset(&addr,0,length);
-    addr.sin_family=AF_INET;
-    addr.sin_port=htons(DISCOVERY_RECEIVE_PORT);
-    addr.sin_addr.s_addr = ip_address;
-
-    if(bind(s,(struct sockaddr*)&addr,length)<0) {
-        perror("bind socket failed for discovery_thread");
-        exit(1);
-    }
-
-    while(1) {
-   	bytes_read=recvfrom(s,buffer,sizeof(buffer),0,(struct sockaddr*)&addr,&length);
-        if(bytes_read<0) {
-            perror("recvfrom socket failed for discovery_thread");
-            exit(1);
-        }
-
-//fprintf(stderr,"DISCOVERY_RECEIVE_PORT read %d bytes\n",bytes_read);
-        if(bytes_read>=13) {
-            if(buffer[0]==0xEF && buffer[1]==0xFE) {
-                switch(buffer[2]) {
-                    case 2:  // response to a discovery packet
-                        if(found<MAX_METIS_CARDS) {
-/*
-                            // ip address is next 4 bytes
-                            sprintf(metis_cards[found].ip_address,"%d.%d.%d.%d",
-                                       buffer[3]&0xFF,buffer[4]&0xFF,buffer[5]&0xFF,buffer[6]&0xFF);
-                            fprintf(stderr,"Metis IP address %s\n",metis_cards[found].ip_address);
-    
-                            sprintf(metis_cards[found].mac_address,"%02X:%02X:%02X:%02X:%02X:%02X",
-                                       buffer[7]&0xFF,buffer[8]&0xFF,buffer[9]&0xFF,buffer[10]&0xFF,buffer[11]&0xFF,buffer[12]&0xFF);
-                            fprintf(stderr,"Metis MAC address %s\n",metis_cards[found].mac_address);
-*/
-                            // get MAC address from reply
-                            sprintf(metis_cards[found].mac_address,"%02X:%02X:%02X:%02X:%02X:%02X",
-                                       buffer[3]&0xFF,buffer[4]&0xFF,buffer[5]&0xFF,buffer[6]&0xFF,buffer[7]&0xFF,buffer[8]&0xFF);
-                            fprintf(stderr,"Metis MAC address %s\n",metis_cards[found].mac_address);
-
-                            // get ip address from packet header
-                            sprintf(metis_cards[found].ip_address,"%d.%d.%d.%d",
-                                       addr.sin_addr.s_addr&0xFF,
-                                       (addr.sin_addr.s_addr>>8)&0xFF,
-                                       (addr.sin_addr.s_addr>>16)&0xFF,
-                                       (addr.sin_addr.s_addr>>24)&0xFF);
-                            fprintf(stderr,"Metis IP address %s\n",metis_cards[found].ip_address);
-                            found++;
-                        } else {
-                            fprintf(stderr,"too many metis cards!\n");
-                        }
-                        break;
-                    case 1:  // a data packet
-                       // should not happen on this port
-                       fprintf(stderr,"unexpected data packet on port 1025!\n");
-                       break;
-                }
-            } else {
-                fprintf(stderr,"received invalid response to discover %02X,%02X,%02X\n",buffer[0],buffer[1],buffer[2]);
-            }
-        } else {
-            fprintf(stderr,"discovery_thread expected at least 13 bytes. read %d bytes\n",bytes_read);
-        }
     }
 }
 
@@ -310,6 +218,8 @@ void metis_start_receive_thread() {
 
     fprintf(stderr,"Metis starting receive thread\n");
 
+    discovering=0;
+
     h=gethostbyname(metis_cards[0].ip_address);
     if(h==NULL) {
         fprintf(stderr,"metis_start_receiver_thread: unknown host %s\n",metis_cards[0].ip_address);
@@ -322,13 +232,8 @@ void metis_start_receive_thread() {
     data_addr.sin_port=htons(DATA_PORT);
     memcpy((char *)&data_addr.sin_addr.s_addr,h->h_addr_list[0],h->h_length);
 
-    // start a thread to get discovery responses
-    rc=pthread_create(&receive_thread_id,NULL,metis_receive_thread,NULL);
-    if(rc != 0) {
-        fprintf(stderr,"pthread_create failed on discovery_thread: rc=%d\n", rc);
-        exit(1);
-    }
-
+    ozy_prime();
+    
     // send a packet to start the stream
     buffer[0]=0xEF;
     buffer[1]=0xFE;
@@ -343,6 +248,7 @@ void metis_start_receive_thread() {
         perror("sendto socket failed for start\n");
         exit(1);
     }
+
 }
 
 void* metis_receive_thread(void* arg) {
@@ -351,49 +257,71 @@ void* metis_receive_thread(void* arg) {
     unsigned char buffer[2048];
     int bytes_read;
 
+    length=sizeof(addr);
     while(1) {
    	bytes_read=recvfrom(discovery_socket,buffer,sizeof(buffer),0,(struct sockaddr*)&addr,&length);
         if(bytes_read<0) {
-            perror("recvfrom socket failed for receive_thread");
+            perror("recvfrom socket failed for metis_receive_thread");
             exit(1);
         }
 
-//fprintf(stderr,"DATA_PORT read %d bytes\n",bytes_read);
-
-        if(bytes_read==1032) {
-            if(buffer[0]==0xEF && buffer[1]==0xFE) {
+        if(buffer[0]==0xEF && buffer[1]==0xFE) {
             switch(buffer[2]) {
                 case 1:
-                    // get the end point
-                    ep=buffer[3]&0xFF;
+                    if(!discovering) {
+                        // get the end point
+                        ep=buffer[3]&0xFF;
 
-                    // get the sequence number
-                    sequence=((buffer[4]&0xFF)<<24)+((buffer[5]&0xFF)<<16)+((buffer[6]&0xFF)<<8)+(buffer[7]&0xFF);
-                    //fprintf(stderr,"received data ep=%d sequence=%ld\n",ep,sequence);
+                        // get the sequence number
+                        sequence=((buffer[4]&0xFF)<<24)+((buffer[5]&0xFF)<<16)+((buffer[6]&0xFF)<<8)+(buffer[7]&0xFF);
+                        //fprintf(stderr,"received data ep=%d sequence=%ld\n",ep,sequence);
 
-                    switch(ep) {
-                        case 6:
-                            // process the data
-                            process_ozy_input_buffer(&buffer[8]);
-                            process_ozy_input_buffer(&buffer[520]);
-                            break;
-                        case 4:
-                            fprintf(stderr,"EP4 data\n");
-                            break;
-                        default:
-                            fprintf(stderr,"unexpected EP %d length=%d\n",ep,bytes_read);
-                            break;
+                        switch(ep) {
+                            case 6:
+                                // process the data
+                                process_ozy_input_buffer(&buffer[8]);
+                                process_ozy_input_buffer(&buffer[520]);
+                                break;
+                            case 4:
+                                fprintf(stderr,"EP4 data\n");
+                                break;
+                            default:
+                                fprintf(stderr,"unexpected EP %d length=%d\n",ep,bytes_read);
+                                break;
+                        }
+                    } else {
+                        fprintf(stderr,"unexpected data packet when in discovery mode\n");
+                    }
+                    break;
+                case 2:  // response to a discovery packet
+                    if(discovering) {
+                        if(found<MAX_METIS_CARDS) {
+                            // get MAC address from reply
+                            sprintf(metis_cards[found].mac_address,"%02X:%02X:%02X:%02X:%02X:%02X",
+                                       buffer[3]&0xFF,buffer[4]&0xFF,buffer[5]&0xFF,buffer[6]&0xFF,buffer[7]&0xFF,buffer[8]&0xFF);
+                            fprintf(stderr,"Metis MAC address %s\n",metis_cards[found].mac_address);
+    
+                            // get ip address from packet header
+                            sprintf(metis_cards[found].ip_address,"%d.%d.%d.%d",
+                                       addr.sin_addr.s_addr&0xFF,
+                                       (addr.sin_addr.s_addr>>8)&0xFF,
+                                       (addr.sin_addr.s_addr>>16)&0xFF,
+                                       (addr.sin_addr.s_addr>>24)&0xFF);
+                            fprintf(stderr,"Metis IP address %s\n",metis_cards[found].ip_address);
+                            found++;
+                        } else {
+                            fprintf(stderr,"too many metis cards!\n");
+                        }
+                    } else {
+                        fprintf(stderr,"unexepected discovery response when not in discovery mode\n");
                     }
                     break;
                 default:
                     fprintf(stderr,"unexpected packet type: 0x%02X\n",buffer[2]);
                     break;
             }
-            } else {
-                fprintf(stderr,"received bad header bytes on data port %02X,%02X\n",buffer[0],buffer[1]);
-            }
         } else {
-            fprintf(stderr,"received %d bytes on data port - expected 1032\n",bytes_read);
+            fprintf(stderr,"received bad header bytes on data port %02X,%02X\n",buffer[0],buffer[1]);
         }
 
     }

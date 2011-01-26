@@ -45,3 +45,11 @@ Currently the server program is a command line program and it has several option
 
     timing sets the timing used. (Options are incomplete). 
 
+--metis
+
+    use Metis ethernet interface rather than Ozy USB.
+
+--interface <interface>
+
+    specify ethernet interface to use for Metis (default eth0).
+
