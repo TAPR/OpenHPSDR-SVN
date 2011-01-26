@@ -238,17 +238,39 @@ void MainWindow::bootloaderProgram() {
 }
 
 void MainWindow::flashProgram() {
+    int on=1;
+    int rc;
 
     size=blocks;
     data_command=PROGRAM_METIS_FLASH;
 
+    s=socket(PF_INET,SOCK_DGRAM,IPPROTO_UDP);
+    if(s<0) {
+        perror("create socket failed for send_command\n");
+        return;
+    }
+
+    setsockopt(s, SOL_SOCKET, SO_REUSEADDR, (const char*)&on, sizeof(on));
+
+    // bind to the selected interface
+    struct sockaddr_in name={0,0,{0},{0}};
+    name.sin_family = AF_INET;
+    name.sin_addr.s_addr = htonl(ip);
+    name.sin_port = htons(1024);
+    rc=bind(s,(struct sockaddr*)&name,sizeof(name));
+    if(rc != 0) {
+        fprintf(stderr,"cannot bind to interface: rc=%d\n", rc);
+        return;
+    }
+
     // start a thread to listen for replies
-    receiveThread=new ReceiveThread(metisIP);
+    receiveThread=new ReceiveThread(metisIP,s);
     receiveThread->setIPAddress(ip);
     receiveThread->start();
 
     QObject::connect(receiveThread,SIGNAL(eraseCompleted()),this,SLOT(eraseCompleted()));
     QObject::connect(receiveThread,SIGNAL(nextBuffer()),this,SLOT(nextBuffer()));
+    QObject::connect(receiveThread,SIGNAL(timeout()),this,SLOT(timeout()));
 
     state=ERASING;
     eraseData();
@@ -300,7 +322,29 @@ void MainWindow::bootloaderErase() {
 }
 
 void MainWindow::flashErase() {
-    receiveThread=new ReceiveThread(metisIP);
+    int on=1;
+    int rc;
+
+    s=socket(PF_INET,SOCK_DGRAM,IPPROTO_UDP);
+    if(s<0) {
+        perror("create socket failed for send_command\n");
+        return;
+    }
+
+    setsockopt(s, SOL_SOCKET, SO_REUSEADDR, (const char*)&on, sizeof(on));
+
+    // bind to the selected interface
+    struct sockaddr_in name={0,0,{0},{0}};
+    name.sin_family = AF_INET;
+    name.sin_addr.s_addr = htonl(ip);
+    name.sin_port = htons(1024);
+    rc=bind(s,(struct sockaddr*)&name,sizeof(name));
+    if(rc != 0) {
+        fprintf(stderr,"cannot bind to interface: rc=%d\n", rc);
+        return;
+    }
+
+    receiveThread=new ReceiveThread(metisIP,s);
     receiveThread->setIPAddress(ip);
     QObject::connect(receiveThread,SIGNAL(eraseCompleted()),this,SLOT(eraseCompleted()));
     QObject::connect(receiveThread,SIGNAL(timeout()),this,SLOT(timeout()));
@@ -525,34 +569,6 @@ void MainWindow::sendCommand(unsigned char command) {
     /*fill the frame with 0x00*/
     for(i=0;i<60;i++) {
         buffer[i+4]=(unsigned char)0x00;
-    }
-
-    //
-    /*
-    int s;
-    */
-    int rc;
-    int on=1;
-
-
-
-    s=socket(PF_INET,SOCK_DGRAM,IPPROTO_UDP);
-    if(s<0) {
-        perror("create socket failed for send_command\n");
-        return;
-    }
-
-    setsockopt(s, SOL_SOCKET, SO_REUSEADDR, (const char*)&on, sizeof(on));
-
-    // bind to the selected interface
-    struct sockaddr_in name={0,0,{0},{0}};
-    name.sin_family = AF_INET;
-    name.sin_addr.s_addr = htonl(ip);
-    name.sin_port = htons(1024);
-    rc=bind(s,(struct sockaddr*)&name,sizeof(name));
-    if(rc != 0) {
-        fprintf(stderr,"cannot bind to interface: rc=%d\n", rc);
-        return;
     }
 
     struct sockaddr_in addr={0,0,{0},{0}};
@@ -920,9 +936,9 @@ void MainWindow::nextBuffer() {
             sendData();
         }
     } else {
-        status("Programming device completed successfully");
+        status("Programming device completed successfully.");
         if(bootloader) {
-            status("Remember to remove JP1 when you power cycle");
+            status("Remember to remove JP1 when you power cycle.");
         }
         idle();
         QApplication::restoreOverrideCursor();
@@ -931,16 +947,25 @@ void MainWindow::nextBuffer() {
 
 // SLOT - called when a raw packet read times out (especially when erasing)
 void MainWindow::timeout() {
-    //qDebug()<<"timeout";
+    qDebug()<<"MainWindow::timeout state="<<state;
     switch(state) {
     case IDLE:
         // ignore
         break;
     case ERASING:
     case ERASING_ONLY:
-        eraseTimeouts++;
-        if(eraseTimeouts==MAX_ERASE_TIMEOUTS) {
-            status("Error: erase timeout - have you set the jumper at JP1 on Metis and power cycled?");
+        if(bootloader) {
+            eraseTimeouts++;
+            qDebug()<<"eraseTimeouts="<<eraseTimeouts;
+            if(eraseTimeouts==MAX_ERASE_TIMEOUTS) {
+                status("Error: erase timeout.");
+                status("Have you set the jumper at JP1 on Metis and power cycled?");
+                idle();
+                QApplication::restoreOverrideCursor();
+            }
+        } else {
+            status("Error: erase timeout.");
+            status("Power cycle and try again.");
             idle();
             QApplication::restoreOverrideCursor();
         }
@@ -988,7 +1013,7 @@ void MainWindow::timeout() {
 
 // private function to set state to idle
 void MainWindow::idle() {
-    //qDebug()<<"idle";
+    qDebug()<<"idle";
     if(rawReceiveThread!=NULL) {
         rawReceiveThread->stop();
         rawReceiveThread=NULL;
@@ -997,7 +1022,7 @@ void MainWindow::idle() {
         receiveThread->stop();
         receiveThread=NULL;
     }
-    state=IDLE;
+
 }
 
 
@@ -1311,25 +1336,6 @@ void MainWindow::jtagEraseData() {
     eraseTimeouts=0;
     sendRawCommand(JTAG_ERASE_FLASH);
 }
-
-/*
-void MainWindow::jtagFlashProgram() {
-
-    size=blocks*256;
-
-    // start a thread to listen for replies
-    receiveThread=new ReceiveThread(metisIP);
-    receiveThread->setIPAddress(ip);
-    receiveThread->start();
-
-    QObject::connect(receiveThread,SIGNAL(eraseCompleted()),this,SLOT(eraseCompleted()));
-    QObject::connect(receiveThread,SIGNAL(nextBuffer()),this,SLOT(nextBuffer()));
-
-    state=ERASING;
-    eraseData();
-
-}
-*/
 
 void MainWindow::jtagFlashBrowse() {
     //QString fileName=QFileDialog::getOpenFileName(this,tr("Select File"),"",tr("pof Files (*.pof)"));

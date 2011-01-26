@@ -5,9 +5,11 @@
 #include "ReceiveThread.h"
 #include "mainwindow.h"
 
-ReceiveThread::ReceiveThread(long metisIP) {
+ReceiveThread::ReceiveThread(long metisIP,int receiveSocket) {
 
     qDebug()<<"ReceiveThread";
+
+    s=receiveSocket;
 
     QString text;
     text.sprintf("ReceiveThread: metisIP %ld.%ld.%ld.%ld)",
@@ -28,74 +30,50 @@ void ReceiveThread::setIPAddress(long ip) {
 void ReceiveThread::stop() {
     qDebug()<<"ReceiveThread::stop";
     stopped=true;
+#ifdef __WIN32
+    closesocket(s);
+#else
+    close(s);
+#endif
 }
 
 void ReceiveThread::run() {
+    fd_set fds;
+    int n;
     struct timeval t;
-    int on=1;
 
     qDebug() << "ReceiveThread::run";
 
-    s=socket(PF_INET,SOCK_DGRAM,IPPROTO_UDP);
-    if(s<0) {
-        qDebug() << "create socket failed for ReceiveThread";
-        exit(1);
-    }
-
     // set timeout on the socket
-    t.tv_sec = TIMEOUT / 1000 ;
-    t.tv_usec = ( TIMEOUT % 1000) * 1000  ;
-    setsockopt (s, SOL_SOCKET, SO_RCVTIMEO, (char *)&t, sizeof t);
-
-    // set the reuse flag so we do not have to wait for a close to complete
-    setsockopt(s,SOL_SOCKET,SO_REUSEADDR,(char*)&on,sizeof(on));
-
-
-    // bind to the selected interface
-    length=sizeof(addr);
-    memset(&addr,0,length);
-    addr.sin_family=AF_INET;
-    addr.sin_port=htons(1024);
-    addr.sin_addr.s_addr=htonl(myIPAddress);
-    if(bind(s,(struct sockaddr*)&addr,length)<0) {
-        qDebug() << "bind socket failed for ReceiveThread ";
-        perror("bind failed");
-        exit(1);
-    }
-
-    qDebug() << "ReceiveThread";
+    t.tv_sec = 20;
+    t.tv_usec = 0;
 
     stopped=false;
 
     metis_length=sizeof(metis_addr);
     memset(&metis_addr,0,metis_length);
 
-    /*
-    metis_addr.sin_family=AF_INET;
-    metis_addr.sin_port=htons(1025);
-    metis_addr.sin_addr.s_addr=metisIPAddress;
-    */
-
-#ifdef WIN32
-#define socklen_t int
-#endif
-
     while(!stopped) {
-        bytes_read=recvfrom(s,(char*)buffer,sizeof(buffer),0,(struct sockaddr*)&metis_addr,(socklen_t*)&metis_length);
-        if(bytes_read<0) {
-#ifdef WIN32
-            if (errno!=WSAEWOULDBLOCK) {
-#else
-            if (errno!=EWOULDBLOCK) {
-#endif
-                qDebug() << "recvfrom socket failed for ReceiveThread";
-                exit(1);
-            } else {
-                emit timeout();
-            }
-        } else if(bytes_read>=60) {
-            if(buffer[0]==0xEF && buffer[1]==0xFE) {
-                switch(buffer[2]) {
+        FD_ZERO(&fds);
+        FD_SET(s,&fds);
+        t.tv_sec = 20;
+        t.tv_usec = 0;
+        n=select(s+1,&fds,NULL,NULL,&t);
+        if(n==0) {
+            qDebug()<<"select timeout";
+            emit timeout();
+            break;
+        } else if(n<0) {
+            qDebug()<<"Error: ReceiveThread: select returned "<<n;
+            break;
+        } else {
+            bytes_read=recvfrom(s,(char*)buffer,sizeof(buffer),0,(struct sockaddr*)&metis_addr,(socklen_t*)&metis_length);
+            if(bytes_read<=0) {
+                qDebug() << "recvfrom socket failed for ReceiveThread:"<<errno<<"bytes_read:"<<bytes_read;
+                break;
+            } else if(bytes_read>=60) {
+                if(buffer[0]==0xEF && buffer[1]==0xFE) {
+                    switch(buffer[2]) {
                     case 3:  // erase completed
                         qDebug()<<"commandCompleted";
                         emit eraseCompleted();
@@ -105,20 +83,17 @@ void ReceiveThread::run() {
                         emit nextBuffer();
                         break;
                     default:
-                        qDebug()<<"reply="<<buffer[3];
+                        qDebug()<<"invalid reply="<<buffer[3];
                         break;
+                    }
+                } else {
+                    qDebug() << "received invalid response in ReceiveThread";
                 }
             } else {
-                qDebug() << "received invalid response in ReceiveThread";
+                qDebug() << "ReceiveThread expected at least 60 bytes. read" << bytes_read;
             }
-        } else {
-            qDebug() << "ReceiveThread expected at least 60 bytes. read" << bytes_read;
         }
     }
 
-#ifdef WIN32
-    closesocket(s);
-#else
-    close(s);
-#endif
+    qDebug() << "ReceiveThread stopped";
 }
