@@ -4,7 +4,9 @@
 #include <sys/types.h>
 #ifdef __WIN32
 #include <winsock2.h>
+#define socklen_t int
 #else
+#include <sys/select.h>
 #include <sys/socket.h>
 #include <sys/ioctl.h>
 #include <netinet/in.h>
@@ -20,7 +22,7 @@
 class ReceiveThread : public QThread {
     Q_OBJECT
 public:
-    ReceiveThread(long metisIP);
+    ReceiveThread(long metisIP,int receiveSocket);
     void run();
     void stop();
     void setIPAddress(long ip);

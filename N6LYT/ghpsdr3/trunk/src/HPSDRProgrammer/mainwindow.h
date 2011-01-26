@@ -63,7 +63,7 @@
 
 
 #define TIMEOUT 10 // ms
-#define MAX_ERASE_TIMEOUTS (20*(1000/TIMEOUT)) // 20 seconds
+#define MAX_ERASE_TIMEOUTS (2000) // 20 seconds
 
 namespace Ui {
     class MainWindow;
