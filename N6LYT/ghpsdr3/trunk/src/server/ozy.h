@@ -28,6 +28,7 @@
 int ozy_init();
 #endif
 
+void ozy_prime();
 void ozy_set_buffers(int buffers);
 int create_ozy_thread();
 void ozy_set_receivers(int r);
