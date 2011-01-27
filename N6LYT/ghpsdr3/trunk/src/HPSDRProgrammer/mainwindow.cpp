@@ -1014,6 +1014,7 @@ void MainWindow::timeout() {
 // private function to set state to idle
 void MainWindow::idle() {
     qDebug()<<"idle";
+    state=IDLE;
     if(rawReceiveThread!=NULL) {
         rawReceiveThread->stop();
         rawReceiveThread=NULL;
