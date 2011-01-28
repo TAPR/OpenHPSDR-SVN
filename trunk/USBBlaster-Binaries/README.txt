@@ -1,22 +1,21 @@
-Phil Harman - VK6APH - 25 Arpil 2010
+Phil Harman - VK6APH - 28 Jan 2011
 
  *******  NOTE:  Altera indicates that their software will run on 32 bit versions of XP and Vista. Support or Win7 or 64 bit vesions is included from V10.0  ******
 
 
-
-Here are the steps requried to progam the EPCS16 on the Mercury board, EPCS4 on Penelope and the EPM240T100 on Janus.
+Here are the steps requried to progam the EPCS16 on the Mercury board, EPCS4 on Penelope or PennyLane and the EPM240T100 on Janus.
 
 
 1. Download all the files from here
 
 
-	svn://64.245.179.219/svn/repos_sdr_sdr_hpsdr/trunk/USBBlaster-Binaries
+	svn://svn.openhpsdr.org/svn/repos_sdr_sdr_hpsdr/trunk/USBBlaster-Binaries
 
 2. Install the Quartus II Programmer application (112MB) from www.altera.com i.e.
 
    https://www.altera.com/support/software/download/programming/quartus2/dnl-quartus2_programmer.jsp
 
-   The latest version is V9.1sp2
+   The latest version is V10.1.
    Install in the default directory. If you install in a different directory then edit
    Program-Mercury-EPCS16.bat, Program-Penelope-EPCS4.bat and Program-Janus-EPM240T100.bat to reflect the    change. 
 
@@ -59,7 +58,7 @@ Here are the steps requried to progam the EPCS16 on the Mercury board, EPCS4 on 
 
 4. To update your Mercury board, fit a jumper to the header pins marked 
    LAST JTAG JP7 at bottom left of the board just above  the Atlas connector.
-   To update your Penelope board, fit a jumper to the header pins marked
+   To update your Penelope or PennyLane board, fit a jumper to the header pins marked
    LAST JP7 located at the edge of the board next to the FPGA.
    To update your Janus board, fit a jumber to the header pins marked 
    LAST JTAG JP12 located at the bottom left of the board just above the Atlas connector. 
