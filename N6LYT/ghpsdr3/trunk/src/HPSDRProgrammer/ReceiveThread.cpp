@@ -28,17 +28,29 @@ void ReceiveThread::setIPAddress(long ip) {
 }
 
 void ReceiveThread::stop() {
+    struct linger so_linger;
+
+
+
     qDebug()<<"ReceiveThread::stop";
     stopped=true;
+    qDebug()<<"clase receiveSocket";
+
+    FD_CLR(s,&fds);
+
+    so_linger.l_onoff=1;
+    so_linger.l_linger=0;
+    qDebug()<<"setsockopt="<<setsockopt(s,SOL_SOCKET,SO_LINGER,(const char*)&so_linger,sizeof(so_linger));
+    qDebug()<<"shutdown="<<shutdown(s,2);
 #ifdef __WIN32
     closesocket(s);
 #else
-    close(s);
+    qDebug()<<"close="<<close(s);
 #endif
 }
 
 void ReceiveThread::run() {
-    fd_set fds;
+
     int n;
     struct timeval t;
 
