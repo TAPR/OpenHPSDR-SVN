@@ -252,6 +252,7 @@ void MainWindow::flashProgram() {
 
     setsockopt(s, SOL_SOCKET, SO_REUSEADDR, (const char*)&on, sizeof(on));
 
+
     // bind to the selected interface
     struct sockaddr_in name={0,0,{0},{0}};
     name.sin_family = AF_INET;

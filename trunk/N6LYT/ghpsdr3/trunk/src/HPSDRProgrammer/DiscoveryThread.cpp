@@ -8,12 +8,20 @@ DiscoveryThread::DiscoveryThread(int discovery_socket) {
 }
 
 void DiscoveryThread::stop() {
+    struct linger so_linger;
+
     qDebug()<<"DiscoveryThread::stop";
     stopped=true;
+    qDebug()<<"close discovery_socket";
+
+    so_linger.l_onoff=1;
+    so_linger.l_linger=0;
+    qDebug()<<"setsockopt="<<setsockopt(s,SOL_SOCKET,SO_LINGER,(const char*)&so_linger,sizeof(so_linger));
+    qDebug()<<"shutdown="<<shutdown(s,2);
 #ifdef __WIN32
     closesocket(s);
 #else
-    close(s);
+    qDebug()<<"close="<<close(s);
 #endif
 }
 

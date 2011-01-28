@@ -42,6 +42,7 @@ private:
 
     struct sockaddr_in metis_addr;
     int metis_length;
+    fd_set fds;
 };
 
 #endif // RECEIVETHREAD_H
