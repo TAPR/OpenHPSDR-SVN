@@ -28,7 +28,7 @@ set_global_assignment -name DEVICE EP3C25Q240C8
 set_global_assignment -name TOP_LEVEL_ENTITY Mercury
 set_global_assignment -name ORIGINAL_QUARTUS_VERSION 5.1
 set_global_assignment -name PROJECT_CREATION_TIME_DATE "21:19:27  JUNE 09, 2006"
-set_global_assignment -name LAST_QUARTUS_VERSION 9.1
+set_global_assignment -name LAST_QUARTUS_VERSION "9.1 SP2"
 set_global_assignment -name ADD_DEFAULT_PINS_TO_SIMULATION_OUTPUT_WAVEFORMS OFF
 set_global_assignment -name VECTOR_INPUT_SOURCE Mercury.vwf
 set_global_assignment -name GENERATE_RBF_FILE ON
