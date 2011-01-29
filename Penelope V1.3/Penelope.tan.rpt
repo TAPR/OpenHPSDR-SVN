@@ -1,5 +1,5 @@
 Classic Timing Analyzer report for Penelope
-Fri Jan 21 09:36:50 2011
+Sat Jan 29 14:33:12 2011
 Quartus II Version 9.1 Build 350 03/24/2010 Service Pack 2 SJ Web Edition
 
 
@@ -10,18 +10,19 @@ Quartus II Version 9.1 Build 350 03/24/2010 Service Pack 2 SJ Web Edition
   2. Timing Analyzer Summary
   3. Timing Analyzer Settings
   4. Clock Settings Summary
-  5. Clock Setup: 'C122_clk'
-  6. Clock Setup: '_10MHZ'
-  7. Clock Setup: 'clk_lrclk_gen:clrgen|BCLK'
-  8. Clock Hold: 'C122_clk'
-  9. Clock Hold: '_10MHZ'
- 10. Clock Hold: 'clk_lrclk_gen:clrgen|BCLK'
- 11. tsu
- 12. tco
- 13. tpd
- 14. th
- 15. Ignored Timing Assignments
- 16. Timing Analyzer Messages
+  5. Parallel Compilation
+  6. Clock Setup: 'C122_clk'
+  7. Clock Setup: '_10MHZ'
+  8. Clock Setup: 'clk_lrclk_gen:clrgen|BCLK'
+  9. Clock Hold: 'C122_clk'
+ 10. Clock Hold: '_10MHZ'
+ 11. Clock Hold: 'clk_lrclk_gen:clrgen|BCLK'
+ 12. tsu
+ 13. tco
+ 14. tpd
+ 15. th
+ 16. Ignored Timing Assignments
+ 17. Timing Analyzer Messages
 
 
 
@@ -113,6 +114,17 @@ applicable agreement for further details.
 ; _10MHZ                     ; 10MHz clock        ; User Pin      ; 10.0 MHz         ; 0.000 ns      ; 0.000 ns     ; --       ; N/A                   ; N/A                 ; N/A    ;              ;
 ; clk_lrclk_gen:clrgen|BCLK  ; CBCLK              ; Internal Node ; 12.29 MHz        ; 0.000 ns      ; 0.000 ns     ; --       ; N/A                   ; N/A                 ; N/A    ;              ;
 +----------------------------+--------------------+---------------+------------------+---------------+--------------+----------+-----------------------+---------------------+--------+--------------+
+
+
+Parallel compilation was disabled, but you have multiple processors available. Enable parallel compilation to reduce compilation time.
++-------------------------------------+
+; Parallel Compilation                ;
++----------------------------+--------+
+; Processors                 ; Number ;
++----------------------------+--------+
+; Number detected on machine ; 2      ;
+; Maximum allowed            ; 1      ;
++----------------------------+--------+
 
 
 +-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
@@ -2810,7 +2822,7 @@ applicable agreement for further details.
 Info: *******************************************************************
 Info: Running Quartus II Classic Timing Analyzer
     Info: Version 9.1 Build 350 03/24/2010 Service Pack 2 SJ Web Edition
-    Info: Processing started: Fri Jan 21 09:36:45 2011
+    Info: Processing started: Sat Jan 29 14:33:09 2011
 Info: Command: quartus_tan --read_settings_files=off --write_settings_files=off Penelope -c Penelope --timing_analysis_only
 Warning: Found 2 node(s) in clock paths which may be acting as ripple and/or gated clocks -- node(s) analyzed as buffer(s) resulting in clock skew
     Info: Detected ripple clock "C122_clock_select[0]" as buffer
@@ -3114,8 +3126,8 @@ Critical Warning: Timing requirements for slow timing model timing analysis were
 Warning: Found invalid timing assignments -- see Ignored Timing Assignments report for details
 Info: Quartus II Classic Timing Analyzer was successful. 0 errors, 4 warnings
     Info: Peak virtual memory: 159 megabytes
-    Info: Processing ended: Fri Jan 21 09:36:51 2011
-    Info: Elapsed time: 00:00:06
-    Info: Total CPU time (on all processors): 00:00:06
+    Info: Processing ended: Sat Jan 29 14:33:12 2011
+    Info: Elapsed time: 00:00:03
+    Info: Total CPU time (on all processors): 00:00:03
 
 
