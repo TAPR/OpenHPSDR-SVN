@@ -1,5 +1,5 @@
 Fitter report for Penelope
-Fri Jan 21 09:36:32 2011
+Sat Jan 29 14:33:04 2011
 Quartus II Version 9.1 Build 350 03/24/2010 Service Pack 2 SJ Web Edition
 
 
@@ -9,39 +9,40 @@ Quartus II Version 9.1 Build 350 03/24/2010 Service Pack 2 SJ Web Edition
   1. Legal Notice
   2. Fitter Summary
   3. Fitter Settings
-  4. Fitter Netlist Optimizations
-  5. Ignored Assignments
-  6. Incremental Compilation Preservation Summary
-  7. Incremental Compilation Partition Settings
-  8. Incremental Compilation Placement Preservation
-  9. Pin-Out File
- 10. Fitter Resource Usage Summary
- 11. Input Pins
- 12. Output Pins
- 13. Bidir Pins
- 14. I/O Bank Usage
- 15. All Package Pins
- 16. PLL Summary
- 17. Output Pin Default Load For Reported TCO
- 18. Fitter Resource Utilization by Entity
- 19. Delay Chain Summary
- 20. Pad To Core Delay Chain Fanout
- 21. Control Signals
- 22. Global & Other Fast Signals
- 23. Non-Global High Fan-Out Signals
- 24. Fitter DSP Block Usage Summary
- 25. DSP Block Details
- 26. Interconnect Usage Summary
- 27. LAB Logic Elements
- 28. LAB-wide Signals
- 29. LAB Signals Sourced
- 30. LAB Signals Sourced Out
- 31. LAB Distinct Inputs
- 32. Fitter Device Options
- 33. Operating Settings and Conditions
- 34. Estimated Delay Added for Hold Timing
- 35. Fitter Messages
- 36. Fitter Suppressed Messages
+  4. Parallel Compilation
+  5. Fitter Netlist Optimizations
+  6. Ignored Assignments
+  7. Incremental Compilation Preservation Summary
+  8. Incremental Compilation Partition Settings
+  9. Incremental Compilation Placement Preservation
+ 10. Pin-Out File
+ 11. Fitter Resource Usage Summary
+ 12. Input Pins
+ 13. Output Pins
+ 14. Bidir Pins
+ 15. I/O Bank Usage
+ 16. All Package Pins
+ 17. PLL Summary
+ 18. Output Pin Default Load For Reported TCO
+ 19. Fitter Resource Utilization by Entity
+ 20. Delay Chain Summary
+ 21. Pad To Core Delay Chain Fanout
+ 22. Control Signals
+ 23. Global & Other Fast Signals
+ 24. Non-Global High Fan-Out Signals
+ 25. Fitter DSP Block Usage Summary
+ 26. DSP Block Details
+ 27. Interconnect Usage Summary
+ 28. LAB Logic Elements
+ 29. LAB-wide Signals
+ 30. LAB Signals Sourced
+ 31. LAB Signals Sourced Out
+ 32. LAB Distinct Inputs
+ 33. Fitter Device Options
+ 34. Operating Settings and Conditions
+ 35. Estimated Delay Added for Hold Timing
+ 36. Fitter Messages
+ 37. Fitter Suppressed Messages
 
 
 
@@ -67,7 +68,7 @@ applicable agreement for further details.
 +-----------------------------------------------------------------------------------+
 ; Fitter Summary                                                                    ;
 +------------------------------------+----------------------------------------------+
-; Fitter Status                      ; Successful - Fri Jan 21 09:36:32 2011        ;
+; Fitter Status                      ; Successful - Sat Jan 29 14:33:04 2011        ;
 ; Quartus II Version                 ; 9.1 Build 350 03/24/2010 SP 2 SJ Web Edition ;
 ; Revision Name                      ; Penelope                                     ;
 ; Top-level Entity Name              ; Penelope                                     ;
@@ -139,6 +140,17 @@ applicable agreement for further details.
 ; Force Fitter to Avoid Periphery Placement Warnings                         ; Off                ; Off                            ;
 ; Use Best Effort Settings for Compilation                                   ; Off                ; Off                            ;
 +----------------------------------------------------------------------------+--------------------+--------------------------------+
+
+
+Parallel compilation was disabled, but you have multiple processors available. Enable parallel compilation to reduce compilation time.
++-------------------------------------+
+; Parallel Compilation                ;
++----------------------------+--------+
+; Processors                 ; Number ;
++----------------------------+--------+
+; Number detected on machine ; 2      ;
+; Maximum allowed            ; 1      ;
++----------------------------+--------+
 
 
 +---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
@@ -2284,7 +2296,7 @@ applicable agreement for further details.
 +--------------+
 ; Pin-Out File ;
 +--------------+
-The pin-out file can be found in O:/HPSDR/trunk/Penelope V1.3/Penelope.pin.
+The pin-out file can be found in C:/HPSDR/trunk/Penelope V1.3/Penelope.pin.
 
 
 +----------------------------------------------------------------------+
@@ -3250,7 +3262,7 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 Info: *******************************************************************
 Info: Running Quartus II Fitter
     Info: Version 9.1 Build 350 03/24/2010 Service Pack 2 SJ Web Edition
-    Info: Processing started: Fri Jan 21 09:33:24 2011
+    Info: Processing started: Sat Jan 29 14:31:33 2011
 Info: Command: quartus_fit --read_settings_files=off --write_settings_files=off Penelope -c Penelope
 Info: Selected device EP2C8Q208C8 for design "Penelope"
 Info: Low junction temperature is 0 degrees C
@@ -3307,15 +3319,15 @@ Info: Starting physical synthesis algorithm register retiming
 Info: Physical synthesis algorithm register retiming complete: estimated slack improvement of 3959 ps
 Info: Starting physical synthesis algorithm combinational resynthesis using boolean division
 Info: Physical synthesis algorithm combinational resynthesis using boolean division complete: estimated slack improvement of 0 ps
-Info: Physical synthesis optimizations for speed complete: elapsed CPU time is 00:00:26
+Info: Physical synthesis optimizations for speed complete: elapsed CPU time is 00:00:14
 Warning: Ignored locations or region assignments to the following nodes
     Warning: Node "C12" is assigned to location or region, but does not exist in design
-Info: Fitter preparation operations ending: elapsed time is 00:00:35
+Info: Fitter preparation operations ending: elapsed time is 00:00:18
 Info: Fitter placement preparation operations beginning
-Info: Fitter placement preparation operations ending: elapsed time is 00:00:07
+Info: Fitter placement preparation operations ending: elapsed time is 00:00:03
 Info: Fitter placement operations beginning
 Info: Fitter placement was successful
-Info: Fitter placement operations ending: elapsed time is 00:00:48
+Info: Fitter placement operations ending: elapsed time is 00:00:18
 Info: Starting physical synthesis optimizations for speed
 Info: Starting physical synthesis algorithm register retiming
 Info: Physical synthesis algorithm register retiming complete: estimated slack improvement of 242 ps
@@ -3325,7 +3337,7 @@ Info: Starting physical synthesis algorithm logic and register replication
 Info: Physical synthesis algorithm logic and register replication complete: estimated slack improvement of 0 ps
 Info: Starting physical synthesis algorithm fanout splitting
 Info: Physical synthesis algorithm fanout splitting complete: estimated slack improvement of 0 ps
-Info: Physical synthesis optimizations for speed complete: elapsed CPU time is 00:01:11
+Info: Physical synthesis optimizations for speed complete: elapsed CPU time is 00:00:35
 Info: Estimated most critical path is register to register delay of 7.904 ns
     Info: 1: + IC(0.000 ns) + CELL(0.000 ns) = 0.000 ns; Loc. = LAB_X24_Y12; Fanout = 4; REG Node = 'cicint:cic_I|section_out6[1]_OTERM37'
     Info: 2: + IC(0.981 ns) + CELL(0.596 ns) = 1.577 ns; Loc. = LAB_X25_Y12; Fanout = 2; COMB Node = 'cicint:cic_I|section_out7[1]~34'
@@ -3375,24 +3387,24 @@ Info: Estimated most critical path is register to register delay of 7.904 ns
 Info: Fitter routing operations beginning
 Info: Average interconnect usage is 10% of the available device resources
     Info: Peak interconnect usage is 16% of the available device resources in the region that extends from location X11_Y10 to location X22_Y19
-Info: Fitter routing operations ending: elapsed time is 00:00:19
+Info: Fitter routing operations ending: elapsed time is 00:00:08
 Info: The Fitter performed an Auto Fit compilation.  Optimizations were skipped to reduce compilation time.
     Info: Optimizations that may affect the design's routability were skipped
     Info: Optimizations that may affect the design's timing were skipped
 Info: Started post-fitting delay annotation
 Info: Delay annotation completed successfully
 Warning: Found invalid Fitter assignments. See the Ignored Assignments panel in the Fitter Compilation Report for more information.
-Info: Generated suppressed messages file O:/HPSDR/trunk/Penelope V1.3/Penelope.fit.smsg
+Info: Generated suppressed messages file C:/HPSDR/trunk/Penelope V1.3/Penelope.fit.smsg
 Info: Quartus II Fitter was successful. 0 errors, 5 warnings
     Info: Peak virtual memory: 240 megabytes
-    Info: Processing ended: Fri Jan 21 09:36:36 2011
-    Info: Elapsed time: 00:03:12
-    Info: Total CPU time (on all processors): 00:03:06
+    Info: Processing ended: Sat Jan 29 14:33:05 2011
+    Info: Elapsed time: 00:01:32
+    Info: Total CPU time (on all processors): 00:01:32
 
 
 +----------------------------+
 ; Fitter Suppressed Messages ;
 +----------------------------+
-The suppressed messages can be found in O:/HPSDR/trunk/Penelope V1.3/Penelope.fit.smsg.
+The suppressed messages can be found in C:/HPSDR/trunk/Penelope V1.3/Penelope.fit.smsg.
 
 
