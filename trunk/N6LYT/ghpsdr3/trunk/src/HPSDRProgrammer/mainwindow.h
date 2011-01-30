@@ -47,6 +47,7 @@
 #include "RawReceiveThread.h"
 #include "DiscoveryThread.h"
 #include "Metis.h"
+#include "AboutDialog.h"
 
 // states
 #define IDLE 0
@@ -78,6 +79,8 @@ public:
     ~MainWindow();
 
 public slots:
+    void quit();
+    void about();
     void interfaceSelected(int);
     void browse();
     void program();
@@ -184,6 +187,8 @@ private:
     bool bootloader;
 
     long fpga_id;
+
+    AboutDialog aboutDialog;
 
 };
 
