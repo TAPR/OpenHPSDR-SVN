@@ -62,6 +62,8 @@ MainWindow::MainWindow(QWidget *parent) :
         ++nInterfaces;
     }
 
+    connect(ui->actionQuit,SIGNAL(triggered()),this,SLOT(quit()));
+    connect(ui->actionAbout,SIGNAL(triggered()),this,SLOT(about()));
     connect(ui->interfaceComboBox,SIGNAL(currentIndexChanged(int)),this,SLOT(interfaceSelected(int)));
     connect(ui->browsePushButton,SIGNAL(clicked()),this,SLOT(browse()));
     connect(ui->programPushButton,SIGNAL(clicked()),this,SLOT(program()));
@@ -99,6 +101,14 @@ MainWindow::MainWindow(QWidget *parent) :
 
 MainWindow::~MainWindow() {
     delete ui;
+}
+
+void MainWindow::quit() {
+    exit(0);
+}
+
+void MainWindow::about() {
+    aboutDialog.setVisible(TRUE);
 }
 
 // private function to display message in the status window
@@ -254,7 +264,8 @@ void MainWindow::flashProgram() {
 
 
     // bind to the selected interface
-    struct sockaddr_in name={0,0,{0},{0}};
+    struct sockaddr_in name;
+    memset(&name, 0, sizeof(name));
     name.sin_family = AF_INET;
     name.sin_addr.s_addr = htonl(ip);
     name.sin_port = htons(1024);
@@ -335,7 +346,8 @@ void MainWindow::flashErase() {
     setsockopt(s, SOL_SOCKET, SO_REUSEADDR, (const char*)&on, sizeof(on));
 
     // bind to the selected interface
-    struct sockaddr_in name={0,0,{0},{0}};
+    struct sockaddr_in name;
+    memset(&name, 0, sizeof(name));
     name.sin_family = AF_INET;
     name.sin_addr.s_addr = htonl(ip);
     name.sin_port = htons(1024);
@@ -469,6 +481,10 @@ void MainWindow::setIP() {
     ui->statusListWidget->clear();
     status("");
 
+    // will need to run Discovery again
+    ui->metisComboBox->clear();
+    metis.clear();
+
     addr[0]=ui->ipALineEdit->text().toInt();
     addr[1]=ui->ipBLineEdit->text().toInt();
     addr[2]=ui->ipCLineEdit->text().toInt();
@@ -572,7 +588,8 @@ void MainWindow::sendCommand(unsigned char command) {
         buffer[i+4]=(unsigned char)0x00;
     }
 
-    struct sockaddr_in addr={0,0,{0},{0}};
+    struct sockaddr_in addr;
+    memset(&addr, 0, sizeof(addr));
     addr.sin_family = AF_INET;
     addr.sin_addr.s_addr = metisIP;
     addr.sin_port = htons(1024);
@@ -940,6 +957,12 @@ void MainWindow::nextBuffer() {
         status("Programming device completed successfully.");
         if(bootloader) {
             status("Remember to remove JP1 when you power cycle.");
+        } else {
+            ui->metisComboBox->clear();
+            metis.clear();
+            status("Please wait for Metis to restart.");
+            status("If using DHCP this can take up to 5 seconds.");
+            status("To use other functions you will need to run Discovery again.");
         }
         idle();
         QApplication::restoreOverrideCursor();
@@ -1055,7 +1078,8 @@ void MainWindow::discover() {
     setsockopt(discovery_socket, SOL_SOCKET, SO_REUSEADDR, (char*)&on, sizeof(on));
 
     // bind to the selected interface
-    struct sockaddr_in name={0,0,{0},{0}};
+    struct sockaddr_in name;
+    memset(&name, 0, sizeof(name));
     name.sin_family = AF_INET;
     name.sin_addr.s_addr = htonl(ip);
     name.sin_port = htons(1024);
