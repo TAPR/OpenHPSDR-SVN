@@ -3,19 +3,23 @@
 
 //  This is for the Mac permissions elevation
 //  Jeremy McDermond (NH6Z)
-#ifdef __APPLE__ && __MACH__
+#ifdef Q_WS_MAC
 #include <sys/param.h>
 #include <mach-o/dyld.h>
 #include <Authorization.h>
 #include <AuthorizationTags.h>
-#endif // __APPLE__ && __MACH__
+#endif // Q_WS_MAC
 
 
 
 int main(int argc, char *argv[])
 {
+    char myPath[PATH_MAX];
+    uint32_t pathSize=sizeof(myPath);
+
         //  Gain admin privileges on the Mac
-#ifdef __APPLE__ && __MACH__
+#ifdef Q_WS_MAC
+
     if(geteuid() != 0) {
         AuthorizationItem adminPriv;
         AuthorizationRights adminRights;
@@ -50,11 +54,20 @@ int main(int argc, char *argv[])
         exit(0);
     }
 
-#endif // __APPLE__ && __MACH__
+
+    _NSGetExecutablePath(myPath,&pathSize);
+    char* slash = strrchr(myPath, '/');
+    if(slash!=NULL) {
+        *slash = '\0';
+    }
+#endif // Q_WS_MAC
 
 
     QApplication a(argc, argv);
     MainWindow w;
+#ifdef Q_WS_MAC
+    w.setPath(myPath);
+#endif
     w.show();
 
     return a.exec();
