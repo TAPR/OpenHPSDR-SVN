@@ -42,6 +42,8 @@ MainWindow::MainWindow(QWidget *parent) :
     int i;
     int nInterfaces;
 
+    qDebug()<<"HPSDRProgrammer"<<VERSION;
+
     ui->setupUi(this);
 
     receiveThread=NULL;
@@ -97,6 +99,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->tabWidget_2->setTabEnabled(3,false);
     ui->tabWidget_2->setTabEnabled(4,false);
 
+    aboutDialog.setVersion(VERSION);
 }
 
 MainWindow::~MainWindow() {
@@ -927,11 +930,19 @@ void MainWindow::fpgaId(unsigned char* data) {
         } else if(fpga_id==0x020F30) {
             status("found Mercury");
             ui->jtagLineEdit->setText("Mercury - 0x020F30");
+#ifdef __WINDOWS
             ui->jtagProgramLineEdit->setText("Mercury_JTAG.rbf");
+#else
+            ui->jtagProgramLineEdit->setText("/usr/local/hpsdr/Mercury_JTAG.rbf");
+#endif
         } else if(fpga_id==0x020B20) {
             status("found Penelope");
             ui->jtagLineEdit->setText("Penelope - 0x020B20");
+#ifdef __WINDOWS
             ui->jtagProgramLineEdit->setText("Penelope_JTAG.rbf");
+#else
+            ui->jtagProgramLineEdit->setText("/usr/local/hpsdr/Penelope_JTAG.rbf");
+#endif
         } else {
             status("unknown FPGA id");
             fpga_id=0;
