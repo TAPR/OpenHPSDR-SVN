@@ -78,6 +78,9 @@ class MainWindow : public QMainWindow
 public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
+#ifdef Q_WS_MAC
+    void setPath(char* path);
+#endif
 
 public slots:
     void quit();
@@ -146,6 +149,10 @@ private:
     void jtagEraseData();
     //void jtagFlashProgram();
     void loadFlash();
+
+#ifdef Q_WS_MAC
+    char* myPath;
+#endif
 
     Interfaces interfaces;
     long ip;

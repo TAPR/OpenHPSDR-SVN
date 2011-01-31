@@ -23,6 +23,7 @@
 *
 */
 
+
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 
@@ -105,6 +106,12 @@ MainWindow::MainWindow(QWidget *parent) :
 MainWindow::~MainWindow() {
     delete ui;
 }
+
+#ifdef Q_WS_MAC
+void MainWindow::setPath(char* path) {
+    myPath=path;
+}
+#endif
 
 void MainWindow::quit() {
     exit(0);
@@ -930,19 +937,32 @@ void MainWindow::fpgaId(unsigned char* data) {
         } else if(fpga_id==0x020F30) {
             status("found Mercury");
             ui->jtagLineEdit->setText("Mercury - 0x020F30");
-#ifdef __WINDOWS
+#ifdef Q_WS_WIN
             ui->jtagProgramLineEdit->setText("Mercury_JTAG.rbf");
-#else
+#endif
+#ifdef Q_WS_MAC
+            QString rbfPath;
+            rbfPath.sprintf("%s/../Resources/Mercury_JTAG.rbf",myPath);
+            ui->jtagProgramLineEdit->setText(rbfPath);
+#endif
+#ifdef Q_WS_X11
             ui->jtagProgramLineEdit->setText("/usr/local/hpsdr/Mercury_JTAG.rbf");
 #endif
         } else if(fpga_id==0x020B20) {
             status("found Penelope");
             ui->jtagLineEdit->setText("Penelope - 0x020B20");
-#ifdef __WINDOWS
-            ui->jtagProgramLineEdit->setText("Penelope_JTAG.rbf");
-#else
+#ifdef Q_WS_WIN
+            ui->jtagProgramLineEdit->setText("Penelpe_JTAG.rbf");
+#endif
+#ifdef Q_WS_MAC
+            QString rbfPath;
+            rbfPath.sprintf("%s/../Resources/Penelope_JTAG.rbf",myPath);
+            ui->jtagProgramLineEdit->setText(rbfPath);
+#endif
+#ifdef Q_WS_X11
             ui->jtagProgramLineEdit->setText("/usr/local/hpsdr/Penelope_JTAG.rbf");
 #endif
+
         } else {
             status("unknown FPGA id");
             fpga_id=0;
