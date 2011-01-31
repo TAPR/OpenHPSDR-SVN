@@ -15,10 +15,13 @@ win32 {
     INCLUDEPATH += "\Documents and Settings\john\Desktop\WpdPack\Include"
     LIBS += "\Documents and Settings\john\Desktop\WpdPack\Lib\wpcap.lib" /Qt/2010.05/mingw/lib/libws2_32.a
  }
+
 macx {
     LIBS += -framework Security -lpcap
     INCLUDEPATH += "/System/Library/Frameworks/Security.framework/Headers"
-} else {
+}
+
+linux {
     LIBS += -lpcap
 }
 
