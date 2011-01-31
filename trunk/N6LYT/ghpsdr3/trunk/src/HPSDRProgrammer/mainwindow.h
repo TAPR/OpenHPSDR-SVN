@@ -48,6 +48,7 @@
 #include "DiscoveryThread.h"
 #include "Metis.h"
 #include "AboutDialog.h"
+#include "Version.h"
 
 // states
 #define IDLE 0

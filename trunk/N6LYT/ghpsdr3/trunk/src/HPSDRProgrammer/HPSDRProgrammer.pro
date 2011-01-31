@@ -37,7 +37,8 @@ HEADERS  += mainwindow.h \
     DiscoveryThread.h \
     ReceiveThread.h \
     Metis.h \
-    AboutDialog.h
+    AboutDialog.h \
+    Version.h
 
 FORMS    += mainwindow.ui \
     AboutDialog.ui

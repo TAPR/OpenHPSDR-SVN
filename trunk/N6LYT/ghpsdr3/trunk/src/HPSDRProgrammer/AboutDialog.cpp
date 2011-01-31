@@ -12,3 +12,7 @@ AboutDialog::~AboutDialog()
 {
     delete ui;
 }
+
+void AboutDialog::setVersion(QString version) {
+    ui->versionLabel->setText(version);
+}
