@@ -1338,9 +1338,6 @@ namespace PowerSDR
         private GroupBoxTS groupBoxHPSDRHW;
         private LabelTS lblPAGainByBand6;
         private NumericUpDownTS udPAGain6;
-        private TrackBarTS tbFMDev;
-        private NumericUpDown udFMDev;
-        private Label FMDev;
         private GroupBoxTS grpSI570;
         private LabelTS labelTS8;
         private NumericUpDownTS udFXtal;
@@ -1351,7 +1348,6 @@ namespace PowerSDR
         private ComboBoxTS comboFRSRegion;
         private ComboBoxTS comboGeneralXVTR;
         private CheckBoxTS chkGeneralXVTRPresent;
-        private LabelTS lblRealeaseDate;
         private LabelTS lblPAGainByBandVHF9;
         private NumericUpDownTS udPAGainVHF9;
         private LabelTS lblPAGainByBandVHF8;
@@ -1388,6 +1384,17 @@ namespace PowerSDR
         private LabelTS lblMetisMAC;
         private LabelTS labelTS9;
         private LabelTS labelTS16;
+        private GroupBoxTS grpFMtxFilter;
+        private LabelTS labelTS17;
+        private NumericUpDownTS udFMtxBW;
+        public GroupBoxTS grpRptrCntrl;
+        private LabelTS labelTS18;
+        private NumericUpDownTS udPLDev;
+        private LabelTS labelTS19;
+        private ComboBoxTS comboPLTone;
+        private Label FMDev;
+        private NumericUpDown udFMDev;
+        private TrackBarTS tbFMDev;
         private CheckBoxTS chkPennyLane;
         private System.ComponentModel.IContainer components;
 
@@ -1614,7 +1621,6 @@ namespace PowerSDR
             this.labelTS8 = new System.Windows.Forms.LabelTS();
             this.udFXtal = new System.Windows.Forms.NumericUpDownTS();
             this.groupBoxHPSDRHW = new System.Windows.Forms.GroupBoxTS();
-            this.chkPennyLane = new System.Windows.Forms.CheckBoxTS();
             this.chkExcaliburPresent = new System.Windows.Forms.CheckBoxTS();
             this.chkAlexPresent = new System.Windows.Forms.CheckBoxTS();
             this.chkJanusPresent = new System.Windows.Forms.CheckBoxTS();
@@ -1932,7 +1938,6 @@ namespace PowerSDR
             this.labelTS39 = new System.Windows.Forms.LabelTS();
             this.tpHPSDR = new System.Windows.Forms.TabPage();
             this.grpVersion = new System.Windows.Forms.GroupBoxTS();
-            this.lblRealeaseDate = new System.Windows.Forms.LabelTS();
             this.lblPenelopeFWVer = new System.Windows.Forms.LabelTS();
             this.lblMercuryFWVer = new System.Windows.Forms.LabelTS();
             this.lblOzyFWVer = new System.Windows.Forms.LabelTS();
@@ -2237,9 +2242,6 @@ namespace PowerSDR
             this.tpDSP = new System.Windows.Forms.TabPage();
             this.tcDSP = new System.Windows.Forms.TabControl();
             this.tpDSPOptions = new System.Windows.Forms.TabPage();
-            this.udFMDev = new System.Windows.Forms.NumericUpDown();
-            this.FMDev = new System.Windows.Forms.Label();
-            this.tbFMDev = new System.Windows.Forms.TrackBarTS();
             this.chkDSPTXMeterPeak = new System.Windows.Forms.CheckBoxTS();
             this.grpDSPBufferSize = new System.Windows.Forms.GroupBoxTS();
             this.grpDSPBufDig = new System.Windows.Forms.GroupBoxTS();
@@ -2371,6 +2373,17 @@ namespace PowerSDR
             this.udDSPAGCFixedGaindB = new System.Windows.Forms.NumericUpDownTS();
             this.lblDSPAGCFixed = new System.Windows.Forms.LabelTS();
             this.tpTransmit = new System.Windows.Forms.TabPage();
+            this.grpRptrCntrl = new System.Windows.Forms.GroupBoxTS();
+            this.labelTS19 = new System.Windows.Forms.LabelTS();
+            this.comboPLTone = new System.Windows.Forms.ComboBoxTS();
+            this.labelTS18 = new System.Windows.Forms.LabelTS();
+            this.udPLDev = new System.Windows.Forms.NumericUpDownTS();
+            this.grpFMtxFilter = new System.Windows.Forms.GroupBoxTS();
+            this.tbFMDev = new System.Windows.Forms.TrackBarTS();
+            this.udFMDev = new System.Windows.Forms.NumericUpDown();
+            this.FMDev = new System.Windows.Forms.Label();
+            this.labelTS17 = new System.Windows.Forms.LabelTS();
+            this.udFMtxBW = new System.Windows.Forms.NumericUpDownTS();
             this.chkTXExpert = new System.Windows.Forms.CheckBoxTS();
             this.grpTXProfileDef = new System.Windows.Forms.GroupBoxTS();
             this.btnTXProfileDefImport = new System.Windows.Forms.ButtonTS();
@@ -2920,6 +2933,7 @@ namespace PowerSDR
             this.timer_sweep = new System.Windows.Forms.Timer(this.components);
             this.mainMenu1 = new System.Windows.Forms.MainMenu(this.components);
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
+            this.chkPennyLane = new System.Windows.Forms.CheckBoxTS();
             this.tcSetup.SuspendLayout();
             this.tpGeneral.SuspendLayout();
             this.tcGeneral.SuspendLayout();
@@ -3067,8 +3081,6 @@ namespace PowerSDR
             this.tpDSP.SuspendLayout();
             this.tcDSP.SuspendLayout();
             this.tpDSPOptions.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.udFMDev)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tbFMDev)).BeginInit();
             this.grpDSPBufferSize.SuspendLayout();
             this.grpDSPBufDig.SuspendLayout();
             this.grpDSPBufCW.SuspendLayout();
@@ -3129,6 +3141,12 @@ namespace PowerSDR
             ((System.ComponentModel.ISupportInitialize)(this.udDSPAGCAttack)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.udDSPAGCFixedGaindB)).BeginInit();
             this.tpTransmit.SuspendLayout();
+            this.grpRptrCntrl.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.udPLDev)).BeginInit();
+            this.grpFMtxFilter.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.tbFMDev)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.udFMDev)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.udFMtxBW)).BeginInit();
             this.grpTXProfileDef.SuspendLayout();
             this.grpTXAM.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.udTXAMCarrierLevel)).BeginInit();
@@ -3658,23 +3676,11 @@ namespace PowerSDR
             this.groupBoxHPSDRHW.TabStop = false;
             this.groupBoxHPSDRHW.Text = "HPSDR Hardware Present";
             // 
-            // chkPennyLane
-            // 
-            this.chkPennyLane.AutoSize = true;
-            this.chkPennyLane.Image = null;
-            this.chkPennyLane.Location = new System.Drawing.Point(25, 57);
-            this.chkPennyLane.Name = "chkPennyLane";
-            this.chkPennyLane.Size = new System.Drawing.Size(80, 17);
-            this.chkPennyLane.TabIndex = 5;
-            this.chkPennyLane.Text = "PennyLane";
-            this.chkPennyLane.UseVisualStyleBackColor = true;
-            this.chkPennyLane.CheckedChanged += new System.EventHandler(this.chkPennyLane_CheckedChanged);
-            // 
             // chkExcaliburPresent
             // 
             this.chkExcaliburPresent.AutoSize = true;
             this.chkExcaliburPresent.Image = null;
-            this.chkExcaliburPresent.Location = new System.Drawing.Point(25, 91);
+            this.chkExcaliburPresent.Location = new System.Drawing.Point(25, 100);
             this.chkExcaliburPresent.Name = "chkExcaliburPresent";
             this.chkExcaliburPresent.Size = new System.Drawing.Size(69, 17);
             this.chkExcaliburPresent.TabIndex = 2;
@@ -3686,7 +3692,7 @@ namespace PowerSDR
             // 
             this.chkAlexPresent.AutoSize = true;
             this.chkAlexPresent.Image = null;
-            this.chkAlexPresent.Location = new System.Drawing.Point(25, 73);
+            this.chkAlexPresent.Location = new System.Drawing.Point(25, 80);
             this.chkAlexPresent.Name = "chkAlexPresent";
             this.chkAlexPresent.Size = new System.Drawing.Size(46, 17);
             this.chkAlexPresent.TabIndex = 3;
@@ -3698,7 +3704,7 @@ namespace PowerSDR
             // 
             this.chkJanusPresent.AutoSize = true;
             this.chkJanusPresent.Image = null;
-            this.chkJanusPresent.Location = new System.Drawing.Point(25, 108);
+            this.chkJanusPresent.Location = new System.Drawing.Point(25, 120);
             this.chkJanusPresent.Name = "chkJanusPresent";
             this.chkJanusPresent.Size = new System.Drawing.Size(54, 17);
             this.chkJanusPresent.TabIndex = 4;
@@ -7741,7 +7747,6 @@ namespace PowerSDR
             // 
             // grpVersion
             // 
-            this.grpVersion.Controls.Add(this.lblRealeaseDate);
             this.grpVersion.Controls.Add(this.lblPenelopeFWVer);
             this.grpVersion.Controls.Add(this.lblMercuryFWVer);
             this.grpVersion.Controls.Add(this.lblOzyFWVer);
@@ -7752,16 +7757,6 @@ namespace PowerSDR
             this.grpVersion.TabIndex = 4;
             this.grpVersion.TabStop = false;
             this.grpVersion.Text = "Firmware Versions";
-            // 
-            // lblRealeaseDate
-            // 
-            this.lblRealeaseDate.Font = new System.Drawing.Font("MS Reference Sans Serif", 6.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblRealeaseDate.Image = null;
-            this.lblRealeaseDate.Location = new System.Drawing.Point(8, 106);
-            this.lblRealeaseDate.Name = "lblRealeaseDate";
-            this.lblRealeaseDate.Size = new System.Drawing.Size(130, 16);
-            this.lblRealeaseDate.TabIndex = 4;
-            this.lblRealeaseDate.Text = "W5WC - 2/2/2011";
             // 
             // lblPenelopeFWVer
             // 
@@ -7894,10 +7889,10 @@ namespace PowerSDR
             this.radPennyMic.Image = null;
             this.radPennyMic.Location = new System.Drawing.Point(96, 16);
             this.radPennyMic.Name = "radPennyMic";
-            this.radPennyMic.Size = new System.Drawing.Size(100, 24);
+            this.radPennyMic.Size = new System.Drawing.Size(74, 24);
             this.radPennyMic.TabIndex = 1;
             this.radPennyMic.TabStop = true;
-            this.radPennyMic.Text = "Penny[Lane]";
+            this.radPennyMic.Text = "Penelope";
             this.radPennyMic.UseVisualStyleBackColor = true;
             this.radPennyMic.CheckedChanged += new System.EventHandler(this.radPennyMic_CheckedChanged);
             // 
@@ -7959,7 +7954,7 @@ namespace PowerSDR
             this.rad12288MHzPenny.Size = new System.Drawing.Size(88, 24);
             this.rad12288MHzPenny.TabIndex = 0;
             this.rad12288MHzPenny.TabStop = true;
-            this.rad12288MHzPenny.Text = "Penny[Lane]";
+            this.rad12288MHzPenny.Text = "Penelope";
             this.rad12288MHzPenny.UseVisualStyleBackColor = true;
             this.rad12288MHzPenny.CheckedChanged += new System.EventHandler(this.rad12288MHzPenny_CheckedChanged);
             // 
@@ -7982,10 +7977,10 @@ namespace PowerSDR
             this.radPenny10MHz.Image = null;
             this.radPenny10MHz.Location = new System.Drawing.Point(167, 20);
             this.radPenny10MHz.Name = "radPenny10MHz";
-            this.radPenny10MHz.Size = new System.Drawing.Size(85, 17);
+            this.radPenny10MHz.Size = new System.Drawing.Size(70, 17);
             this.radPenny10MHz.TabIndex = 2;
             this.radPenny10MHz.TabStop = true;
-            this.radPenny10MHz.Text = "Penny[Lane]";
+            this.radPenny10MHz.Text = "Penelope";
             this.radPenny10MHz.UseVisualStyleBackColor = true;
             this.radPenny10MHz.CheckedChanged += new System.EventHandler(this.radPenny10MHz_CheckedChanged);
             // 
@@ -11752,9 +11747,6 @@ namespace PowerSDR
             // 
             // tpDSPOptions
             // 
-            this.tpDSPOptions.Controls.Add(this.udFMDev);
-            this.tpDSPOptions.Controls.Add(this.FMDev);
-            this.tpDSPOptions.Controls.Add(this.tbFMDev);
             this.tpDSPOptions.Controls.Add(this.chkDSPTXMeterPeak);
             this.tpDSPOptions.Controls.Add(this.grpDSPBufferSize);
             this.tpDSPOptions.Controls.Add(this.grpDSPNB);
@@ -11767,46 +11759,6 @@ namespace PowerSDR
             this.tpDSPOptions.Size = new System.Drawing.Size(592, 318);
             this.tpDSPOptions.TabIndex = 2;
             this.tpDSPOptions.Text = "Options";
-            // 
-            // udFMDev
-            // 
-            this.udFMDev.Location = new System.Drawing.Point(16, 216);
-            this.udFMDev.Maximum = new decimal(new int[] {
-            10000,
-            0,
-            0,
-            0});
-            this.udFMDev.Name = "udFMDev";
-            this.udFMDev.Size = new System.Drawing.Size(70, 20);
-            this.udFMDev.TabIndex = 41;
-            this.udFMDev.Value = new decimal(new int[] {
-            2500,
-            0,
-            0,
-            0});
-            this.udFMDev.ValueChanged += new System.EventHandler(this.udFMDev_ValueChanged);
-            // 
-            // FMDev
-            // 
-            this.FMDev.AutoSize = true;
-            this.FMDev.Location = new System.Drawing.Point(13, 195);
-            this.FMDev.Name = "FMDev";
-            this.FMDev.Size = new System.Drawing.Size(73, 13);
-            this.FMDev.TabIndex = 40;
-            this.FMDev.Text = "FM Deviation:";
-            // 
-            // tbFMDev
-            // 
-            this.tbFMDev.LargeChange = 100;
-            this.tbFMDev.Location = new System.Drawing.Point(103, 195);
-            this.tbFMDev.Maximum = 10000;
-            this.tbFMDev.Name = "tbFMDev";
-            this.tbFMDev.Size = new System.Drawing.Size(129, 45);
-            this.tbFMDev.TabIndex = 39;
-            this.tbFMDev.TickFrequency = 1000;
-            this.toolTip1.SetToolTip(this.tbFMDev, "Sets the FM Deviation");
-            this.tbFMDev.Value = 2500;
-            this.tbFMDev.Scroll += new System.EventHandler(this.tbFMDev_Scroll);
             // 
             // chkDSPTXMeterPeak
             // 
@@ -12658,7 +12610,7 @@ namespace PowerSDR
             this.tbDSPImagePhaseTX.Maximum = 400;
             this.tbDSPImagePhaseTX.Minimum = -400;
             this.tbDSPImagePhaseTX.Name = "tbDSPImagePhaseTX";
-            this.tbDSPImagePhaseTX.Size = new System.Drawing.Size(160, 45);
+            this.tbDSPImagePhaseTX.Size = new System.Drawing.Size(160, 42);
             this.tbDSPImagePhaseTX.TabIndex = 3;
             this.tbDSPImagePhaseTX.TickFrequency = 50;
             this.toolTip1.SetToolTip(this.tbDSPImagePhaseTX, "Sets the phase offset between the I and Q channels.  ");
@@ -12680,7 +12632,7 @@ namespace PowerSDR
             this.tbDSPImageGainTX.Maximum = 500;
             this.tbDSPImageGainTX.Minimum = -500;
             this.tbDSPImageGainTX.Name = "tbDSPImageGainTX";
-            this.tbDSPImageGainTX.Size = new System.Drawing.Size(160, 45);
+            this.tbDSPImageGainTX.Size = new System.Drawing.Size(160, 42);
             this.tbDSPImageGainTX.TabIndex = 4;
             this.tbDSPImageGainTX.TickFrequency = 50;
             this.toolTip1.SetToolTip(this.tbDSPImageGainTX, "Sets the amplitude/gain offset between the I and Q channels.  ");
@@ -13963,6 +13915,8 @@ namespace PowerSDR
             // 
             // tpTransmit
             // 
+            this.tpTransmit.Controls.Add(this.grpRptrCntrl);
+            this.tpTransmit.Controls.Add(this.grpFMtxFilter);
             this.tpTransmit.Controls.Add(this.chkTXExpert);
             this.tpTransmit.Controls.Add(this.grpTXProfileDef);
             this.tpTransmit.Controls.Add(this.grpTXAM);
@@ -13979,12 +13933,220 @@ namespace PowerSDR
             this.tpTransmit.TabIndex = 5;
             this.tpTransmit.Text = "Transmit";
             // 
+            // grpRptrCntrl
+            // 
+            this.grpRptrCntrl.Controls.Add(this.labelTS19);
+            this.grpRptrCntrl.Controls.Add(this.comboPLTone);
+            this.grpRptrCntrl.Controls.Add(this.labelTS18);
+            this.grpRptrCntrl.Controls.Add(this.udPLDev);
+            this.grpRptrCntrl.Location = new System.Drawing.Point(297, 144);
+            this.grpRptrCntrl.Name = "grpRptrCntrl";
+            this.grpRptrCntrl.Size = new System.Drawing.Size(137, 128);
+            this.grpRptrCntrl.TabIndex = 57;
+            this.grpRptrCntrl.TabStop = false;
+            this.grpRptrCntrl.Text = "CTCSS";
+            // 
+            // labelTS19
+            // 
+            this.labelTS19.Image = null;
+            this.labelTS19.Location = new System.Drawing.Point(6, 53);
+            this.labelTS19.Name = "labelTS19";
+            this.labelTS19.Size = new System.Drawing.Size(50, 15);
+            this.labelTS19.TabIndex = 5;
+            this.labelTS19.Text = "PL Tone";
+            // 
+            // comboPLTone
+            // 
+            this.comboPLTone.DisplayMember = "254.1";
+            this.comboPLTone.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboPLTone.FormattingEnabled = true;
+            this.comboPLTone.Items.AddRange(new object[] {
+            "67.0",
+            "69.3",
+            "71.9",
+            "74.4",
+            "77.0",
+            "79.7",
+            "82.5",
+            "85.4",
+            "88.5",
+            "91.5",
+            "94.8",
+            "97.4",
+            "100.0",
+            "103.5",
+            "107.2",
+            "110.9",
+            "114.8",
+            "118.8",
+            "123.0",
+            "127.3",
+            "131.8",
+            "136.5",
+            "141.3",
+            "146.2",
+            "151.4",
+            "156.7",
+            "162.2",
+            "167.9",
+            "173.8",
+            "179.9",
+            "186.2",
+            "192.8",
+            "203.5",
+            "206.5",
+            "210.7",
+            "218.1",
+            "225.7",
+            "229.1",
+            "233.6",
+            "241.8",
+            "250.3",
+            "254.1"});
+            this.comboPLTone.Location = new System.Drawing.Point(63, 53);
+            this.comboPLTone.Name = "comboPLTone";
+            this.comboPLTone.Size = new System.Drawing.Size(60, 21);
+            this.comboPLTone.TabIndex = 4;
+            this.comboPLTone.SelectedIndexChanged += new System.EventHandler(this.comboPLTone_SelectedIndexChanged);
+            // 
+            // labelTS18
+            // 
+            this.labelTS18.Image = null;
+            this.labelTS18.Location = new System.Drawing.Point(6, 24);
+            this.labelTS18.Name = "labelTS18";
+            this.labelTS18.Size = new System.Drawing.Size(50, 15);
+            this.labelTS18.TabIndex = 3;
+            this.labelTS18.Text = "PL Dev:";
+            // 
+            // udPLDev
+            // 
+            this.udPLDev.DecimalPlaces = 4;
+            this.udPLDev.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            262144});
+            this.udPLDev.Location = new System.Drawing.Point(62, 23);
+            this.udPLDev.Maximum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.udPLDev.Minimum = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+            this.udPLDev.Name = "udPLDev";
+            this.udPLDev.Size = new System.Drawing.Size(60, 20);
+            this.udPLDev.TabIndex = 0;
+            this.toolTip1.SetToolTip(this.udPLDev, "Scale PL Tone Output");
+            this.udPLDev.Value = new decimal(new int[] {
+            25,
+            0,
+            0,
+            196608});
+            this.udPLDev.ValueChanged += new System.EventHandler(this.udPLDev_ValueChanged);
+            // 
+            // grpFMtxFilter
+            // 
+            this.grpFMtxFilter.Controls.Add(this.tbFMDev);
+            this.grpFMtxFilter.Controls.Add(this.udFMDev);
+            this.grpFMtxFilter.Controls.Add(this.FMDev);
+            this.grpFMtxFilter.Controls.Add(this.labelTS17);
+            this.grpFMtxFilter.Controls.Add(this.udFMtxBW);
+            this.grpFMtxFilter.Location = new System.Drawing.Point(297, 8);
+            this.grpFMtxFilter.Name = "grpFMtxFilter";
+            this.grpFMtxFilter.Size = new System.Drawing.Size(128, 128);
+            this.grpFMtxFilter.TabIndex = 56;
+            this.grpFMtxFilter.TabStop = false;
+            this.grpFMtxFilter.Text = "FM Transmit ";
+            // 
+            // tbFMDev
+            // 
+            this.tbFMDev.AutoSize = false;
+            this.tbFMDev.LargeChange = 100;
+            this.tbFMDev.Location = new System.Drawing.Point(5, 102);
+            this.tbFMDev.Maximum = 10000;
+            this.tbFMDev.Name = "tbFMDev";
+            this.tbFMDev.Size = new System.Drawing.Size(120, 20);
+            this.tbFMDev.TabIndex = 43;
+            this.tbFMDev.TickFrequency = 1000;
+            this.toolTip1.SetToolTip(this.tbFMDev, "Sets the FM Deviation");
+            this.tbFMDev.Value = 2500;
+            this.tbFMDev.Scroll += new System.EventHandler(this.tbFMDev_Scroll);
+            // 
+            // udFMDev
+            // 
+            this.udFMDev.Location = new System.Drawing.Point(39, 74);
+            this.udFMDev.Maximum = new decimal(new int[] {
+            10000,
+            0,
+            0,
+            0});
+            this.udFMDev.Name = "udFMDev";
+            this.udFMDev.Size = new System.Drawing.Size(56, 20);
+            this.udFMDev.TabIndex = 42;
+            this.udFMDev.Value = new decimal(new int[] {
+            2500,
+            0,
+            0,
+            0});
+            this.udFMDev.ValueChanged += new System.EventHandler(this.udFMDev_ValueChanged);
+            // 
+            // FMDev
+            // 
+            this.FMDev.AutoSize = true;
+            this.FMDev.Location = new System.Drawing.Point(12, 58);
+            this.FMDev.Name = "FMDev";
+            this.FMDev.Size = new System.Drawing.Size(73, 13);
+            this.FMDev.TabIndex = 41;
+            this.FMDev.Text = "FM Deviation:";
+            // 
+            // labelTS17
+            // 
+            this.labelTS17.Image = null;
+            this.labelTS17.Location = new System.Drawing.Point(15, 16);
+            this.labelTS17.Name = "labelTS17";
+            this.labelTS17.Size = new System.Drawing.Size(80, 15);
+            this.labelTS17.TabIndex = 3;
+            this.labelTS17.Text = "BandWidth +/-";
+            // 
+            // udFMtxBW
+            // 
+            this.udFMtxBW.Increment = new decimal(new int[] {
+            100,
+            0,
+            0,
+            0});
+            this.udFMtxBW.Location = new System.Drawing.Point(39, 34);
+            this.udFMtxBW.Maximum = new decimal(new int[] {
+            10000,
+            0,
+            0,
+            0});
+            this.udFMtxBW.Minimum = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+            this.udFMtxBW.Name = "udFMtxBW";
+            this.udFMtxBW.Size = new System.Drawing.Size(56, 20);
+            this.udFMtxBW.TabIndex = 0;
+            this.toolTip1.SetToolTip(this.udFMtxBW, "FM Transmitter Bandwidth");
+            this.udFMtxBW.Value = new decimal(new int[] {
+            5500,
+            0,
+            0,
+            0});
+            this.udFMtxBW.ValueChanged += new System.EventHandler(this.udFMtxBW_ValueChanged);
+            // 
             // chkTXExpert
             // 
             this.chkTXExpert.Checked = true;
             this.chkTXExpert.CheckState = System.Windows.Forms.CheckState.Checked;
             this.chkTXExpert.Image = null;
-            this.chkTXExpert.Location = new System.Drawing.Point(376, 16);
+            this.chkTXExpert.Location = new System.Drawing.Point(480, 166);
             this.chkTXExpert.Name = "chkTXExpert";
             this.chkTXExpert.Size = new System.Drawing.Size(56, 24);
             this.chkTXExpert.TabIndex = 55;
@@ -14024,7 +14186,7 @@ namespace PowerSDR
             // 
             this.grpTXAM.Controls.Add(this.lblTXAMCarrierLevel);
             this.grpTXAM.Controls.Add(this.udTXAMCarrierLevel);
-            this.grpTXAM.Location = new System.Drawing.Point(368, 200);
+            this.grpTXAM.Location = new System.Drawing.Point(435, 216);
             this.grpTXAM.Name = "grpTXAM";
             this.grpTXAM.Size = new System.Drawing.Size(144, 56);
             this.grpTXAM.TabIndex = 52;
@@ -14443,7 +14605,7 @@ namespace PowerSDR
             // chkDCBlock
             // 
             this.chkDCBlock.Image = null;
-            this.chkDCBlock.Location = new System.Drawing.Point(288, 16);
+            this.chkDCBlock.Location = new System.Drawing.Point(480, 190);
             this.chkDCBlock.Name = "chkDCBlock";
             this.chkDCBlock.Size = new System.Drawing.Size(72, 16);
             this.chkDCBlock.TabIndex = 48;
@@ -16313,7 +16475,6 @@ namespace PowerSDR
             this.btnSkinExport.TabIndex = 86;
             this.btnSkinExport.Text = "Export";
             this.btnSkinExport.UseVisualStyleBackColor = true;
-            this.btnSkinExport.Visible = false;
             this.btnSkinExport.Click += new System.EventHandler(this.btnSkinExport_Click);
             // 
             // grpAppSkins
@@ -20549,7 +20710,7 @@ namespace PowerSDR
             this.tkbarTestGenFreq.Location = new System.Drawing.Point(16, 104);
             this.tkbarTestGenFreq.Maximum = 20000;
             this.tkbarTestGenFreq.Name = "tkbarTestGenFreq";
-            this.tkbarTestGenFreq.Size = new System.Drawing.Size(344, 45);
+            this.tkbarTestGenFreq.Size = new System.Drawing.Size(344, 42);
             this.tkbarTestGenFreq.TabIndex = 1;
             this.tkbarTestGenFreq.TickFrequency = 1000;
             this.toolTip1.SetToolTip(this.tkbarTestGenFreq, "Sets the frequency of the signal.");
@@ -21073,6 +21234,18 @@ namespace PowerSDR
             this.saveFileDialog1.InitialDirectory = "Environment.GetFolderPath(Environment.SpecialFolder.Desktop)";
             this.saveFileDialog1.FileOk += new System.ComponentModel.CancelEventHandler(this.saveFileDialog1_FileOk);
             // 
+            // chkPennyLane
+            // 
+            this.chkPennyLane.AutoSize = true;
+            this.chkPennyLane.Image = null;
+            this.chkPennyLane.Location = new System.Drawing.Point(25, 60);
+            this.chkPennyLane.Name = "chkPennyLane";
+            this.chkPennyLane.Size = new System.Drawing.Size(80, 17);
+            this.chkPennyLane.TabIndex = 6;
+            this.chkPennyLane.Text = "PennyLane";
+            this.chkPennyLane.UseVisualStyleBackColor = true;
+            this.chkPennyLane.CheckedChanged += new System.EventHandler(this.chkPennyLane_CheckedChanged);
+            // 
             // Setup
             // 
             this.AutoScaleBaseSize = new System.Drawing.Size(5, 13);
@@ -21244,9 +21417,6 @@ namespace PowerSDR
             this.tpDSP.ResumeLayout(false);
             this.tcDSP.ResumeLayout(false);
             this.tpDSPOptions.ResumeLayout(false);
-            this.tpDSPOptions.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.udFMDev)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.tbFMDev)).EndInit();
             this.grpDSPBufferSize.ResumeLayout(false);
             this.grpDSPBufDig.ResumeLayout(false);
             this.grpDSPBufCW.ResumeLayout(false);
@@ -21308,6 +21478,13 @@ namespace PowerSDR
             ((System.ComponentModel.ISupportInitialize)(this.udDSPAGCAttack)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.udDSPAGCFixedGaindB)).EndInit();
             this.tpTransmit.ResumeLayout(false);
+            this.grpRptrCntrl.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.udPLDev)).EndInit();
+            this.grpFMtxFilter.ResumeLayout(false);
+            this.grpFMtxFilter.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.tbFMDev)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.udFMDev)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.udFMtxBW)).EndInit();
             this.grpTXProfileDef.ResumeLayout(false);
             this.grpTXAM.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.udTXAMCarrierLevel)).EndInit();
@@ -23013,13 +23190,13 @@ namespace PowerSDR
             set { chkPennyPresent.Checked = value; }
         }
 
-        public bool PennyLanePresent
+              public bool PennyLanePresent
         {
             get { return chkPennyLane.Checked; }
             set { chkPennyLane.Checked = value; }
         }
-
-        public float ImageGainTX
+		
+  public float ImageGainTX
         {
             get { return (float)udDSPImageGainTX.Value; }
             set
@@ -29723,9 +29900,6 @@ namespace PowerSDR
         }
 
 
-
-
-
         private void chkPennyPresent_CheckedChanged(object sender, System.EventArgs e)
         {
             int bits = JanusAudio.GetC1Bits();
@@ -29777,30 +29951,27 @@ namespace PowerSDR
 
         private void checkHPSDRDefaults(object sender, System.EventArgs e)
         {
-            
-            if (chkJanusPresent.Checked && !chkPennyPresent.Checked && !chkPennyLane.Checked)  // only janus - default mic to Janus 
+            if (chkJanusPresent.Checked && !chkPennyPresent.Checked)  // only janus - default mic to Janus 
             {
                 radJanusMic.Checked = true;
                 radJanusMic_CheckedChanged(sender, e);
             }
-            
-            else if ( (chkPennyPresent.Checked || chkPennyLane.Checked) && !chkJanusPresent.Checked ) 
+            else if (chkPennyPresent.Checked && !chkJanusPresent.Checked)
             {
                 radPennyMic.Checked = true;
                 radPennyMic_CheckedChanged(sender, e);
             }
-            if ((chkPennyPresent.Checked || chkPennyLane.Checked) && !chkMercuryPresent.Checked)             
+            if (chkPennyPresent.Checked && !chkMercuryPresent.Checked)
             {
                 rad12288MHzPenny.Checked = true;
                 rad12288MHzPenny_CheckedChanged(sender, e);
-            }            
-            else if ( chkMercuryPresent.Checked && !chkPennyPresent.Checked && !!chkPennyLane.Checked ) 
+            }
+            else if (chkMercuryPresent.Checked && !chkPennyPresent.Checked)
             {
-                //radMercury10MHz.Checked = true; //w5wc
-                //radMercury10MHz.Enabled = true; //w5wc
                 radMercury12288MHz.Checked = true;
                 radMercury12288MHz_CheckedChanged(sender, e);
             }
+
             return;
         }
 
@@ -29819,7 +29990,6 @@ namespace PowerSDR
             }
             else
             {
-                //radMercury10MHz.Checked = true; //w5wc
                 radMercury10MHz.Enabled = true;
                 radMercury12288MHz.Enabled = true;
 
@@ -30758,7 +30928,7 @@ namespace PowerSDR
             {
                 try // this will take an exception in the conversion for Metis .. 
                 {
-                    lblOzyFX2.Text = Convert.ToUInt32(JanusAudio.getFX2FirmwareVersionString()).ToString("Ozy FX2: 0000 00 00"); //w5wc
+                    lblOzyFX2.Text = Convert.ToUInt32(JanusAudio.getFX2FirmwareVersionString()).ToString("Ozy FX2: 0000 00 00"); 
                 }
                 catch (Exception)
                 {
@@ -30766,15 +30936,15 @@ namespace PowerSDR
                 }
                 if (console.HPSDRisMetis)
                 {
-                    lblOzyFWVer.Text = JanusAudio.getOzyFWVersion().ToString("Metis: 0\\.0"); //w5wc
+                    lblOzyFWVer.Text = JanusAudio.getOzyFWVersion().ToString("Metis: 0\\.0"); 
                     lblOzyFX2.Text = ""; 
                 }
                 else
                 {
-                    lblOzyFWVer.Text = JanusAudio.getOzyFWVersion().ToString("Ozy: 0\\.0"); //w5wc
+                    lblOzyFWVer.Text = JanusAudio.getOzyFWVersion().ToString("Ozy: 0\\.0"); 
                 }
-                lblMercuryFWVer.Text = JanusAudio.getMercuryFWVersion().ToString("Mercury: 0\\.0"); //w5wc
-                lblPenelopeFWVer.Text = JanusAudio.getPenelopeFWVersion().ToString("Penny[Lane]: 0\\.0"); //w5wc
+                lblMercuryFWVer.Text = JanusAudio.getMercuryFWVersion().ToString("Mercury: 0\\.0"); 
+                lblPenelopeFWVer.Text = JanusAudio.getPenelopeFWVersion().ToString("Penny[Lane]: 0\\.0"); 
             }
         }
 
@@ -31200,13 +31370,26 @@ namespace PowerSDR
             return sb.ToString();
         }
 
-
         private string IPStringFromInt(Int32 addr)
         {
             return IPStringFromInt(addr, new StringBuilder());
         }
 
-   
+        private void udFMtxBW_ValueChanged(object sender, EventArgs e)
+        {
+            console.FMtxBW = (int)udFMtxBW.Value;
+        }
+
+        private void comboPLTone_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            Audio.FMPLTone = double.Parse(comboPLTone.Text);
+        }
+
+        private void udPLDev_ValueChanged(object sender, EventArgs e)
+        {
+            Audio.FMPLDev = (float)udPLDev.Value;
+        }
+
     }
 
 	#region PADeviceInfo Helper Class

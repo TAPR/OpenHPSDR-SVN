@@ -26,6 +26,7 @@
 //    USA
 //=================================================================
 
+
 //#define VAC_DEBUG
 //#define MINMAX
 //#define TIMER
@@ -258,7 +259,7 @@ namespace PowerSDR
                 {
                     JanusAudio.SetOutputPower((float)0.0);
                 }
-            }
+             }
 		}
 
 		/*private static bool next_mox = false;
@@ -365,6 +366,21 @@ namespace PowerSDR
 				phase_step2 = sine_freq2/sample_rate1*2*Math.PI;
 			}
 		}
+
+        private static double fm_pl_tone = 254.1;
+        private static double phase_accumulator3 = 0.0;
+        public static double FMPLTone
+        {
+            get { return fm_pl_tone; }
+            set { fm_pl_tone = value; }
+        }
+
+        private static float fm_pl_dev = 0.005f;
+        public static float FMPLDev
+        {
+            get { return fm_pl_dev; }
+            set { fm_pl_dev = value; }
+        }
 
 		private static int in_rx1_l = 0;
 		public static int IN_RX1_L
@@ -1246,15 +1262,18 @@ namespace PowerSDR
 #endif
 			float* in_l = null, in_r = null, out_l = null, out_r = null;
 			float* out_l1 = null, out_r1 = null, out_l2 = null, out_r2 = null;
+            float* ctcss_l = null, ctcss_r = null;
 			localmox = mox;
 
 			void* ex_input  = (void *)input;
 			void* ex_output = (void *)output;
+			
 			int* array_ptr_input = (int *)input;
 			float* in_l_ptr1 = (float *)array_ptr_input[0];
 			float* in_r_ptr1 = (float *)array_ptr_input[1];
 			float* in_l_ptr2 = (float *)array_ptr_input[2];
 			float* in_r_ptr2 = (float *)array_ptr_input[3];
+			
 			int* array_ptr_output = (int *)output;
 			float* out_l_ptr1 = (float *)array_ptr_output[0];
 			float* out_r_ptr1 = (float *)array_ptr_output[1];
@@ -1320,6 +1339,8 @@ namespace PowerSDR
 			{
 				in_l = (float *)array_ptr_input[2];
 				in_r = (float *)array_ptr_input[3];
+                ctcss_l = (float *)array_ptr_input[0];
+                ctcss_r = (float *)array_ptr_input[1];
 			}
 
 			if(wave_playback)
@@ -1467,7 +1488,19 @@ namespace PowerSDR
 									ScaleBuffer(in_r, in_r, frameCount, (float)vac_preamp);
 								}
 								else
-								{
+								
+                                    if (tx_dsp_mode == DSPMode.FMN && console.PLTone == true)
+                                    {
+                                        SineWave(ctcss_l, frameCount, phase_accumulator3, fm_pl_tone);
+                                        phase_accumulator3 = CosineWave(ctcss_r, frameCount, phase_accumulator3, fm_pl_tone);
+
+                                        MixBuffer(ctcss_l, in_l, in_l, frameCount, (float)fm_pl_dev, (float)mic_preamp);
+                                        MixBuffer(ctcss_r, in_r, in_r, frameCount, (float)fm_pl_dev, (float)mic_preamp);
+                                    }
+
+                                    else
+
+									{
 									ScaleBuffer(in_l, in_l, frameCount, (float)mic_preamp);
 									ScaleBuffer(in_r, in_r, frameCount, (float)mic_preamp);
 								}
@@ -1963,6 +1996,8 @@ namespace PowerSDR
 			out_r1 = out_r_ptr1;
 			out_l2 = out_l_ptr2;
 			out_r2 = out_r_ptr2;
+            //ctcss_l = out_l_ptr1;
+            //ctcss_r = out_r_ptr1;
 
 			if(wave_record)
 			{
@@ -2099,6 +2134,22 @@ namespace PowerSDR
 						tx_vol *= 1.414;
 				}
 
+				
+				/*               if (!testing && tx_dsp_mode == DSPMode.FMN && console.PLTone == true)
+                {
+                    SineWave(ctcss_l, frameCount, phase_accumulator1, 254.1);
+                    phase_accumulator1 = CosineWave(ctcss_r, frameCount, phase_accumulator1, 254.1);
+
+                    MixBuffer(ctcss_l, out_l2, out_l1, frameCount, 0.2f);//(float)monitor_volume);
+                    MixBuffer(ctcss_l, out_l2, out_l2, frameCount, (float)tx_vol);
+
+                    MixBuffer(ctcss_r, out_r2, out_r1, frameCount, 0.2f);//(float)monitor_volume);
+                    MixBuffer(ctcss_r, out_r2, out_r2, frameCount, (float)tx_vol);
+                }
+
+                else 
+  */
+
                 /* hermes hack needed */
                 ScaleBuffer(out_l2, out_l1, frameCount, (float)monitor_volume);
                 if (console.CurrentModel != Model.HERMES && !console.PennyLanePresent ) /* Hermes power level set by command and control to programmable gain amp .. no need to do digital scaling  for power */
@@ -2110,6 +2161,7 @@ namespace PowerSDR
                 {
                     ScaleBuffer(out_r2, out_r2, frameCount, (float)tx_vol);
                 }	
+				
 				/*ScaleBuffer(out_l2, out_l1, frameCount, (float)monitor_volume);
 				ScaleBuffer(out_l2, out_l2, frameCount, (float)tx_vol);
 				ScaleBuffer(out_r2, out_r1, frameCount, (float)monitor_volume);
@@ -3082,7 +3134,7 @@ namespace PowerSDR
 
 			return callback_return;
 		}
-		// The VAC callback from 1.8.0 untouched in any way.
+				// The VAC callback from 1.8.0 untouched in any way.
 		unsafe public static int CallbackVAC(void* input, void* output, int frameCount,
 			PA19.PaStreamCallbackTimeInfo* timeInfo, int statusFlags, void *userData)
 		{
@@ -3406,6 +3458,12 @@ namespace PowerSDR
 			for(int i=0; i<samples; i++)
 				outbuf[i] = inbuf[i] * scale;
 		}
+
+        unsafe private static void MixBuffer(float* inbuf, float* buf2mix, float* outbuf, int samples, float scale, float scale2)
+        {
+            for (int i = 0; i < samples; i++)
+                outbuf[i] = (inbuf[i] * scale) + (buf2mix[i] * scale2);
+        }
 
 		unsafe private static void AddBuffer(float* dest, float *buftoadd, int samples)
 		{
