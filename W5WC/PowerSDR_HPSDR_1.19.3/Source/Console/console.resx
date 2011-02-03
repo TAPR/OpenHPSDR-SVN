@@ -221,13 +221,151 @@
     <value>887, 17</value>
   </metadata>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="picSquelch.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>Off</value>
+  </data>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="picSquelch.Location" type="System.Drawing.Point, System.Drawing">
+    <value>17, 398</value>
+  </data>
+  <data name="picSquelch.Size" type="System.Drawing.Size, System.Drawing">
+    <value>83, 3</value>
+  </data>
+  <data name="picSquelch.TabIndex" type="System.Int32, mscorlib">
+    <value>73</value>
+  </data>
+  <data name="&gt;&gt;picSquelch.Name" xml:space="preserve">
+    <value>picSquelch</value>
+  </data>
+  <data name="&gt;&gt;picSquelch.Type" xml:space="preserve">
+    <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;picSquelch.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;picSquelch.ZOrder" xml:space="preserve">
+    <value>27</value>
+  </data>
+  <data name="picRX2Squelch.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>Off</value>
+  </data>
+  <data name="picRX2Squelch.Location" type="System.Drawing.Point, System.Drawing">
+    <value>168, 666</value>
+  </data>
+  <data name="picRX2Squelch.Size" type="System.Drawing.Size, System.Drawing">
+    <value>83, 3</value>
+  </data>
+  <data name="picRX2Squelch.TabIndex" type="System.Int32, mscorlib">
+    <value>101</value>
+  </data>
+  <data name="&gt;&gt;picRX2Squelch.Name" xml:space="preserve">
+    <value>picRX2Squelch</value>
+  </data>
+  <data name="&gt;&gt;picRX2Squelch.Type" xml:space="preserve">
+    <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;picRX2Squelch.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;picRX2Squelch.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <metadata name="timer_clock.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>17, 54</value>
+  </metadata>
+  <metadata name="contextMenuStripFilterRX1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>143, 17</value>
+  </metadata>
+  <data name="toolStripMenuItemRX1FilterConfigure.Size" type="System.Drawing.Size, System.Drawing">
+    <value>162, 22</value>
+  </data>
+  <data name="toolStripMenuItemRX1FilterConfigure.Text" xml:space="preserve">
+    <value>Configure...</value>
+  </data>
+  <data name="toolStripMenuItemRX1FilterReset.Size" type="System.Drawing.Size, System.Drawing">
+    <value>162, 22</value>
+  </data>
+  <data name="toolStripMenuItemRX1FilterReset.Text" xml:space="preserve">
+    <value>Reset to Defaults</value>
+  </data>
+  <data name="contextMenuStripFilterRX1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>163, 48</value>
+  </data>
+  <data name="contextMenuStripFilterRX1.Text" xml:space="preserve">
+    <value>RX1 Filter</value>
+  </data>
+  <data name="&gt;&gt;contextMenuStripFilterRX1.Name" xml:space="preserve">
+    <value>contextMenuStripFilterRX1</value>
+  </data>
+  <data name="&gt;&gt;contextMenuStripFilterRX1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ContextMenuStrip, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <metadata name="contextMenuStripFilterRX2.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>326, 17</value>
+  </metadata>
+  <data name="toolStripMenuItemRX2FilterConfigure.Size" type="System.Drawing.Size, System.Drawing">
+    <value>162, 22</value>
+  </data>
+  <data name="toolStripMenuItemRX2FilterConfigure.Text" xml:space="preserve">
+    <value>Configure...</value>
+  </data>
+  <data name="toolStripMenuItemRX2FilterReset.Size" type="System.Drawing.Size, System.Drawing">
+    <value>162, 22</value>
+  </data>
+  <data name="toolStripMenuItemRX2FilterReset.Text" xml:space="preserve">
+    <value>Reset to Defaults</value>
+  </data>
+  <data name="contextMenuStripFilterRX2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>163, 48</value>
+  </data>
+  <data name="&gt;&gt;contextMenuStripFilterRX2.Name" xml:space="preserve">
+    <value>contextMenuStripFilterRX2</value>
+  </data>
+  <data name="&gt;&gt;contextMenuStripFilterRX2.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ContextMenuStrip, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <metadata name="timer_navigate.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>17, 17</value>
+  </metadata>
+  <data name="ptbRX2Squelch.BackgroundImageLayout" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
+    <value>Stretch</value>
+  </data>
+  <data name="ptbRX2Squelch.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>Off</value>
+  </data>
+  <data name="ptbRX2Squelch.Location" type="System.Drawing.Point, System.Drawing">
+    <value>160, 646</value>
+  </data>
+  <data name="ptbRX2Squelch.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 2, 2, 2</value>
+  </data>
+  <data name="ptbRX2Squelch.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 2, 2, 2</value>
+  </data>
+  <data name="ptbRX2Squelch.Size" type="System.Drawing.Size, System.Drawing">
+    <value>100, 24</value>
+  </data>
+  <data name="ptbRX2Squelch.TabIndex" type="System.Int32, mscorlib">
+    <value>132</value>
+  </data>
+  <data name="&gt;&gt;ptbRX2Squelch.Name" xml:space="preserve">
+    <value>ptbRX2Squelch</value>
+  </data>
+  <data name="&gt;&gt;ptbRX2Squelch.Type" xml:space="preserve">
+    <value>PowerSDR.PrettyTrackBar, PowerSDR, Version=1.19.3.2, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ptbRX2Squelch.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;ptbRX2Squelch.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
   <data name="ptbRX2RF.BackgroundImageLayout" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
     <value>Stretch</value>
   </data>
   <data name="ptbRX2RF.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>Off</value>
   </data>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="ptbRX2RF.Location" type="System.Drawing.Point, System.Drawing">
     <value>160, 600</value>
   </data>
@@ -257,6 +395,12 @@
   </data>
   <data name="&gt;&gt;ptbRX2RF.ZOrder" xml:space="preserve">
     <value>4</value>
+  </data>
+  <data name="panelOptions.AutoScrollMargin" type="System.Drawing.Size, System.Drawing">
+    <value>0, 0</value>
+  </data>
+  <data name="panelOptions.AutoScrollMinSize" type="System.Drawing.Size, System.Drawing">
+    <value>0, 0</value>
   </data>
   <data name="chkSR.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
     <value>Button</value>
@@ -716,6 +860,30 @@
   </data>
   <data name="&gt;&gt;chkFWCATUBypass.ZOrder" xml:space="preserve">
     <value>10</value>
+  </data>
+  <data name="panelOptions.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 8.25pt, style=Bold</value>
+  </data>
+  <data name="panelOptions.Location" type="System.Drawing.Point, System.Drawing">
+    <value>5, 41</value>
+  </data>
+  <data name="panelOptions.Size" type="System.Drawing.Size, System.Drawing">
+    <value>117, 105</value>
+  </data>
+  <data name="panelOptions.TabIndex" type="System.Int32, mscorlib">
+    <value>116</value>
+  </data>
+  <data name="&gt;&gt;panelOptions.Name" xml:space="preserve">
+    <value>panelOptions</value>
+  </data>
+  <data name="&gt;&gt;panelOptions.Type" xml:space="preserve">
+    <value>System.Windows.Forms.PanelTS, PowerSDR, Version=1.19.3.2, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;panelOptions.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;panelOptions.ZOrder" xml:space="preserve">
+    <value>5</value>
   </data>
   <data name="ptbCWSpeed.BackgroundImageLayout" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
     <value>Stretch</value>
@@ -6363,174 +6531,6 @@
   <data name="&gt;&gt;chkBCI.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="picSquelch.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>Off</value>
-  </data>
-  <data name="picSquelch.Location" type="System.Drawing.Point, System.Drawing">
-    <value>17, 398</value>
-  </data>
-  <data name="picSquelch.Size" type="System.Drawing.Size, System.Drawing">
-    <value>83, 3</value>
-  </data>
-  <data name="picSquelch.TabIndex" type="System.Int32, mscorlib">
-    <value>73</value>
-  </data>
-  <data name="&gt;&gt;picSquelch.Name" xml:space="preserve">
-    <value>picSquelch</value>
-  </data>
-  <data name="&gt;&gt;picSquelch.Type" xml:space="preserve">
-    <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;picSquelch.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;picSquelch.ZOrder" xml:space="preserve">
-    <value>27</value>
-  </data>
-  <data name="picRX2Squelch.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>Off</value>
-  </data>
-  <data name="picRX2Squelch.Location" type="System.Drawing.Point, System.Drawing">
-    <value>168, 666</value>
-  </data>
-  <data name="picRX2Squelch.Size" type="System.Drawing.Size, System.Drawing">
-    <value>83, 3</value>
-  </data>
-  <data name="picRX2Squelch.TabIndex" type="System.Int32, mscorlib">
-    <value>101</value>
-  </data>
-  <data name="&gt;&gt;picRX2Squelch.Name" xml:space="preserve">
-    <value>picRX2Squelch</value>
-  </data>
-  <data name="&gt;&gt;picRX2Squelch.Type" xml:space="preserve">
-    <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;picRX2Squelch.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;picRX2Squelch.ZOrder" xml:space="preserve">
-    <value>2</value>
-  </data>
-  <metadata name="timer_clock.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>17, 54</value>
-  </metadata>
-  <metadata name="contextMenuStripFilterRX1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>143, 17</value>
-  </metadata>
-  <data name="toolStripMenuItemRX1FilterConfigure.Size" type="System.Drawing.Size, System.Drawing">
-    <value>162, 22</value>
-  </data>
-  <data name="toolStripMenuItemRX1FilterConfigure.Text" xml:space="preserve">
-    <value>Configure...</value>
-  </data>
-  <data name="toolStripMenuItemRX1FilterReset.Size" type="System.Drawing.Size, System.Drawing">
-    <value>162, 22</value>
-  </data>
-  <data name="toolStripMenuItemRX1FilterReset.Text" xml:space="preserve">
-    <value>Reset to Defaults</value>
-  </data>
-  <data name="contextMenuStripFilterRX1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>163, 48</value>
-  </data>
-  <data name="contextMenuStripFilterRX1.Text" xml:space="preserve">
-    <value>RX1 Filter</value>
-  </data>
-  <data name="&gt;&gt;contextMenuStripFilterRX1.Name" xml:space="preserve">
-    <value>contextMenuStripFilterRX1</value>
-  </data>
-  <data name="&gt;&gt;contextMenuStripFilterRX1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ContextMenuStrip, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <metadata name="contextMenuStripFilterRX2.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>326, 17</value>
-  </metadata>
-  <data name="toolStripMenuItemRX2FilterConfigure.Size" type="System.Drawing.Size, System.Drawing">
-    <value>162, 22</value>
-  </data>
-  <data name="toolStripMenuItemRX2FilterConfigure.Text" xml:space="preserve">
-    <value>Configure...</value>
-  </data>
-  <data name="toolStripMenuItemRX2FilterReset.Size" type="System.Drawing.Size, System.Drawing">
-    <value>162, 22</value>
-  </data>
-  <data name="toolStripMenuItemRX2FilterReset.Text" xml:space="preserve">
-    <value>Reset to Defaults</value>
-  </data>
-  <data name="contextMenuStripFilterRX2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>163, 48</value>
-  </data>
-  <data name="&gt;&gt;contextMenuStripFilterRX2.Name" xml:space="preserve">
-    <value>contextMenuStripFilterRX2</value>
-  </data>
-  <data name="&gt;&gt;contextMenuStripFilterRX2.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ContextMenuStrip, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <metadata name="timer_navigate.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>17, 17</value>
-  </metadata>
-  <data name="ptbRX2Squelch.BackgroundImageLayout" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
-    <value>Stretch</value>
-  </data>
-  <data name="ptbRX2Squelch.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>Off</value>
-  </data>
-  <data name="ptbRX2Squelch.Location" type="System.Drawing.Point, System.Drawing">
-    <value>160, 646</value>
-  </data>
-  <data name="ptbRX2Squelch.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>2, 2, 2, 2</value>
-  </data>
-  <data name="ptbRX2Squelch.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>2, 2, 2, 2</value>
-  </data>
-  <data name="ptbRX2Squelch.Size" type="System.Drawing.Size, System.Drawing">
-    <value>100, 24</value>
-  </data>
-  <data name="ptbRX2Squelch.TabIndex" type="System.Int32, mscorlib">
-    <value>132</value>
-  </data>
-  <data name="&gt;&gt;ptbRX2Squelch.Name" xml:space="preserve">
-    <value>ptbRX2Squelch</value>
-  </data>
-  <data name="&gt;&gt;ptbRX2Squelch.Type" xml:space="preserve">
-    <value>PowerSDR.PrettyTrackBar, PowerSDR, Version=1.19.3.2, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ptbRX2Squelch.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;ptbRX2Squelch.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="panelOptions.AutoScrollMargin" type="System.Drawing.Size, System.Drawing">
-    <value>0, 0</value>
-  </data>
-  <data name="panelOptions.AutoScrollMinSize" type="System.Drawing.Size, System.Drawing">
-    <value>0, 0</value>
-  </data>
-  <data name="panelOptions.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 8.25pt, style=Bold</value>
-  </data>
-  <data name="panelOptions.Location" type="System.Drawing.Point, System.Drawing">
-    <value>5, 41</value>
-  </data>
-  <data name="panelOptions.Size" type="System.Drawing.Size, System.Drawing">
-    <value>117, 105</value>
-  </data>
-  <data name="panelOptions.TabIndex" type="System.Int32, mscorlib">
-    <value>116</value>
-  </data>
-  <data name="&gt;&gt;panelOptions.Name" xml:space="preserve">
-    <value>panelOptions</value>
-  </data>
-  <data name="&gt;&gt;panelOptions.Type" xml:space="preserve">
-    <value>System.Windows.Forms.PanelTS, PowerSDR, Version=1.19.3.2, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;panelOptions.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;panelOptions.ZOrder" xml:space="preserve">
-    <value>5</value>
-  </data>
   <data name="panelModeSpecificCW.AutoScrollMargin" type="System.Drawing.Size, System.Drawing">
     <value>0, 0</value>
   </data>
@@ -10897,7 +10897,7 @@
     <value>Stretch</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>1016, 673</value>
+    <value>1016, 652</value>
   </data>
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -10945,7 +10945,7 @@
     <value>Off</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
-    <value>PowerSDR™/HPSDR v1.19.3.2   baseSVN 3444 (W5WC - 1/15/11)</value>
+    <value>PowerSDR™/HPSDR v1.19.3.2   baseSVN 3444 (W5WC - 2/2/11)</value>
   </data>
   <data name="&gt;&gt;mainMenu1.Name" xml:space="preserve">
     <value>mainMenu1</value>
