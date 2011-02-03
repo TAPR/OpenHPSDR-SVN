@@ -21,7 +21,7 @@ macx {
     INCLUDEPATH += "/System/Library/Frameworks/Security.framework/Headers"
 }
 
-linux {
+unix {
     LIBS += -lpcap
 }
 
