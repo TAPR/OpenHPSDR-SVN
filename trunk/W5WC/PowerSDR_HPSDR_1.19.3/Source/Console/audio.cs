@@ -254,6 +254,10 @@ namespace PowerSDR
                 {
                     JanusAudio.SetOutputPower((float)radio_volume);
                 }
+                else
+                {
+                    JanusAudio.SetOutputPower((float)0.0);
+                }
             }
 		}
 

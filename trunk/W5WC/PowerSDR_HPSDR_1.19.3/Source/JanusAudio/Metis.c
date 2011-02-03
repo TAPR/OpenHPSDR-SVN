@@ -466,10 +466,16 @@ KD5TFDVK6APHAUDIO_API int nativeInitMetis(char *netaddr) {
 			return -2; 
 		} 
 
-		sndbufsize = 10240;
+		sndbufsize = 0xffff;
 		rc = setsockopt(listenSock, SOL_SOCKET, SO_SNDBUF, (const char *)&sndbufsize, sizeof(int)); 
 		if ( rc == SOCKET_ERROR ) { 
 			printf("CreateSockets Warning: setsockopt SO_SNDBUF failed!\n"); 
+		}
+
+		sndbufsize = 0xffff;
+		rc = setsockopt(listenSock, SOL_SOCKET, SO_RCVBUF, (const char *)&sndbufsize, sizeof(int)); 
+		if ( rc == SOCKET_ERROR ) { 
+			printf("CreateSockets Warning: setsockopt SO_RCVBUF failed!\n"); 
 		}
 	}
 
