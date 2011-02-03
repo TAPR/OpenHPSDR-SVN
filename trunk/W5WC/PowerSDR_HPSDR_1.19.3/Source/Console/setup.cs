@@ -1621,6 +1621,7 @@ namespace PowerSDR
             this.labelTS8 = new System.Windows.Forms.LabelTS();
             this.udFXtal = new System.Windows.Forms.NumericUpDownTS();
             this.groupBoxHPSDRHW = new System.Windows.Forms.GroupBoxTS();
+            this.chkPennyLane = new System.Windows.Forms.CheckBoxTS();
             this.chkExcaliburPresent = new System.Windows.Forms.CheckBoxTS();
             this.chkAlexPresent = new System.Windows.Forms.CheckBoxTS();
             this.chkJanusPresent = new System.Windows.Forms.CheckBoxTS();
@@ -2933,7 +2934,6 @@ namespace PowerSDR
             this.timer_sweep = new System.Windows.Forms.Timer(this.components);
             this.mainMenu1 = new System.Windows.Forms.MainMenu(this.components);
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
-            this.chkPennyLane = new System.Windows.Forms.CheckBoxTS();
             this.tcSetup.SuspendLayout();
             this.tpGeneral.SuspendLayout();
             this.tcGeneral.SuspendLayout();
@@ -3675,6 +3675,18 @@ namespace PowerSDR
             this.groupBoxHPSDRHW.TabIndex = 30;
             this.groupBoxHPSDRHW.TabStop = false;
             this.groupBoxHPSDRHW.Text = "HPSDR Hardware Present";
+            // 
+            // chkPennyLane
+            // 
+            this.chkPennyLane.AutoSize = true;
+            this.chkPennyLane.Image = null;
+            this.chkPennyLane.Location = new System.Drawing.Point(25, 60);
+            this.chkPennyLane.Name = "chkPennyLane";
+            this.chkPennyLane.Size = new System.Drawing.Size(80, 17);
+            this.chkPennyLane.TabIndex = 6;
+            this.chkPennyLane.Text = "PennyLane";
+            this.chkPennyLane.UseVisualStyleBackColor = true;
+            this.chkPennyLane.CheckedChanged += new System.EventHandler(this.chkPennyLane_CheckedChanged);
             // 
             // chkExcaliburPresent
             // 
@@ -7766,7 +7778,7 @@ namespace PowerSDR
             this.lblPenelopeFWVer.Name = "lblPenelopeFWVer";
             this.lblPenelopeFWVer.Size = new System.Drawing.Size(128, 16);
             this.lblPenelopeFWVer.TabIndex = 3;
-            this.lblPenelopeFWVer.Text = "Penelope: 0.0";
+            this.lblPenelopeFWVer.Text = "Penny[Lane]: 0.0";
             // 
             // lblMercuryFWVer
             // 
@@ -7889,10 +7901,10 @@ namespace PowerSDR
             this.radPennyMic.Image = null;
             this.radPennyMic.Location = new System.Drawing.Point(96, 16);
             this.radPennyMic.Name = "radPennyMic";
-            this.radPennyMic.Size = new System.Drawing.Size(74, 24);
+            this.radPennyMic.Size = new System.Drawing.Size(100, 24);
             this.radPennyMic.TabIndex = 1;
             this.radPennyMic.TabStop = true;
-            this.radPennyMic.Text = "Penelope";
+            this.radPennyMic.Text = "Penny[Lane]";
             this.radPennyMic.UseVisualStyleBackColor = true;
             this.radPennyMic.CheckedChanged += new System.EventHandler(this.radPennyMic_CheckedChanged);
             // 
@@ -7954,7 +7966,7 @@ namespace PowerSDR
             this.rad12288MHzPenny.Size = new System.Drawing.Size(88, 24);
             this.rad12288MHzPenny.TabIndex = 0;
             this.rad12288MHzPenny.TabStop = true;
-            this.rad12288MHzPenny.Text = "Penelope";
+            this.rad12288MHzPenny.Text = "Penny[Lane]";
             this.rad12288MHzPenny.UseVisualStyleBackColor = true;
             this.rad12288MHzPenny.CheckedChanged += new System.EventHandler(this.rad12288MHzPenny_CheckedChanged);
             // 
@@ -7977,10 +7989,10 @@ namespace PowerSDR
             this.radPenny10MHz.Image = null;
             this.radPenny10MHz.Location = new System.Drawing.Point(167, 20);
             this.radPenny10MHz.Name = "radPenny10MHz";
-            this.radPenny10MHz.Size = new System.Drawing.Size(70, 17);
+            this.radPenny10MHz.Size = new System.Drawing.Size(85, 17);
             this.radPenny10MHz.TabIndex = 2;
             this.radPenny10MHz.TabStop = true;
-            this.radPenny10MHz.Text = "Penelope";
+            this.radPenny10MHz.Text = "Penny[Lane]";
             this.radPenny10MHz.UseVisualStyleBackColor = true;
             this.radPenny10MHz.CheckedChanged += new System.EventHandler(this.radPenny10MHz_CheckedChanged);
             // 
@@ -21234,18 +21246,6 @@ namespace PowerSDR
             this.saveFileDialog1.InitialDirectory = "Environment.GetFolderPath(Environment.SpecialFolder.Desktop)";
             this.saveFileDialog1.FileOk += new System.ComponentModel.CancelEventHandler(this.saveFileDialog1_FileOk);
             // 
-            // chkPennyLane
-            // 
-            this.chkPennyLane.AutoSize = true;
-            this.chkPennyLane.Image = null;
-            this.chkPennyLane.Location = new System.Drawing.Point(25, 60);
-            this.chkPennyLane.Name = "chkPennyLane";
-            this.chkPennyLane.Size = new System.Drawing.Size(80, 17);
-            this.chkPennyLane.TabIndex = 6;
-            this.chkPennyLane.Text = "PennyLane";
-            this.chkPennyLane.UseVisualStyleBackColor = true;
-            this.chkPennyLane.CheckedChanged += new System.EventHandler(this.chkPennyLane_CheckedChanged);
-            // 
             // Setup
             // 
             this.AutoScaleBaseSize = new System.Drawing.Size(5, 13);
@@ -31389,7 +31389,6 @@ namespace PowerSDR
         {
             Audio.FMPLDev = (float)udPLDev.Value;
         }
-
     }
 
 	#region PADeviceInfo Helper Class
