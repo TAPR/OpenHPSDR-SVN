@@ -6457,19 +6457,19 @@
     <value>143, 17</value>
   </metadata>
   <data name="toolStripMenuItemRX1FilterConfigure.Size" type="System.Drawing.Size, System.Drawing">
-    <value>158, 22</value>
+    <value>162, 22</value>
   </data>
   <data name="toolStripMenuItemRX1FilterConfigure.Text" xml:space="preserve">
     <value>Configure...</value>
   </data>
   <data name="toolStripMenuItemRX1FilterReset.Size" type="System.Drawing.Size, System.Drawing">
-    <value>158, 22</value>
+    <value>162, 22</value>
   </data>
   <data name="toolStripMenuItemRX1FilterReset.Text" xml:space="preserve">
     <value>Reset to Defaults</value>
   </data>
   <data name="contextMenuStripFilterRX1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>159, 48</value>
+    <value>163, 48</value>
   </data>
   <data name="contextMenuStripFilterRX1.Text" xml:space="preserve">
     <value>RX1 Filter</value>
@@ -6484,19 +6484,19 @@
     <value>326, 17</value>
   </metadata>
   <data name="toolStripMenuItemRX2FilterConfigure.Size" type="System.Drawing.Size, System.Drawing">
-    <value>158, 22</value>
+    <value>162, 22</value>
   </data>
   <data name="toolStripMenuItemRX2FilterConfigure.Text" xml:space="preserve">
     <value>Configure...</value>
   </data>
   <data name="toolStripMenuItemRX2FilterReset.Size" type="System.Drawing.Size, System.Drawing">
-    <value>158, 22</value>
+    <value>162, 22</value>
   </data>
   <data name="toolStripMenuItemRX2FilterReset.Text" xml:space="preserve">
     <value>Reset to Defaults</value>
   </data>
   <data name="contextMenuStripFilterRX2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>159, 48</value>
+    <value>163, 48</value>
   </data>
   <data name="&gt;&gt;contextMenuStripFilterRX2.Name" xml:space="preserve">
     <value>contextMenuStripFilterRX2</value>
@@ -10984,7 +10984,7 @@
     <value>Off</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
-    <value>PowerSDR™/OpenHPSDR v1.19.3.3   baseSVN 3444 (W5WC - 2/3/11)</value>
+    <value>PowerSDR™/OpenHPSDR v1.19.3.3   baseSVN 3444 (W5WC - 2/7/11)</value>
   </data>
   <data name="&gt;&gt;mainMenu1.Name" xml:space="preserve">
     <value>mainMenu1</value>
