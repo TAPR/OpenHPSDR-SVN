@@ -57,6 +57,7 @@
  12          - Replaced CORDIC etc with code from Hermes. Changed overall gain to approx unity.
  21          - Corrected overall gain levels. Code now works with Penelope and PennyLane.
 			 - LED[7] now flashes to show V1.3 loaded, flashes x2 when PTT active.
+ 12 Feb 2011 - Set I and Q to zero when PTT not active
   
 */
 
@@ -399,9 +400,14 @@ cpl_cordic #(.OUT_WIDTH(16))
 */
 
 // the CORDIC output is stable on the negative edge of the clock
+// only enable RF out when PTT is active
 
 always @ (negedge C122_clk)
-	DAC[13:0] = C122_cordic_i_out[13:0];   //gain of 4
+begin
+	if (PTT_out) 
+		DAC[13:0] = C122_cordic_i_out[13:0];   //gain of 4
+	else DAC[13:0] = 14'd0;
+end 
 
 
 //--------------------------------------------

@@ -5,9 +5,9 @@ Timing Analyzer Summary
 Type           : Worst-case tsu
 Slack          : N/A
 Required Time  : None
-Actual Time    : 5.388 ns
-From           : C19
-To             : NWire_rcv:IQPWM|d0
+Actual Time    : 5.808 ns
+From           : CC
+To             : NWire_rcv:CCrcv|d0
 From Clock     : --
 To Clock       : C122_clk
 Failed Paths   : 0
@@ -15,9 +15,9 @@ Failed Paths   : 0
 Type           : Worst-case tco
 Slack          : N/A
 Required Time  : None
-Actual Time    : 16.774 ns
+Actual Time    : 16.575 ns
 From           : ADC:ADC_SPI|AIN5[1]
-To             : LED4
+To             : LED5
 From Clock     : C122_clk
 To Clock       : --
 Failed Paths   : 0
@@ -25,7 +25,7 @@ Failed Paths   : 0
 Type           : Worst-case tpd
 Slack          : N/A
 Required Time  : None
-Actual Time    : 10.826 ns
+Actual Time    : 10.830 ns
 From           : PTT
 To             : PTT_in
 From Clock     : --
@@ -35,37 +35,37 @@ Failed Paths   : 0
 Type           : Worst-case th
 Slack          : N/A
 Required Time  : None
-Actual Time    : -1.697 ns
+Actual Time    : -1.212 ns
 From           : ADCMISO
-To             : ADC:ADC_SPI|temp_AIN5[5]
+To             : ADC:ADC_SPI|temp_AIN5[8]
 From Clock     : --
 To Clock       : C122_clk
 Failed Paths   : 0
 
 Type           : Clock Setup: 'C122_clk'
-Slack          : -0.311 ns
+Slack          : -0.419 ns
 Required Time  : 122.88 MHz ( period = 8.138 ns )
-Actual Time    : 118.36 MHz ( period = 8.449 ns )
-From           : cicint:cic_I|section_out6[0]_OTERM39
-To             : cicint:cic_I|section_out8[40]
+Actual Time    : 116.86 MHz ( period = 8.557 ns )
+From           : cicint:cic_Q|section_out6[0]_OTERM119
+To             : cicint:cic_Q|section_out8[40]
 From Clock     : C122_clk
 To Clock       : C122_clk
-Failed Paths   : 13
+Failed Paths   : 46
 
 Type           : Clock Setup: 'clk_lrclk_gen:clrgen|BCLK'
-Slack          : 77.460 ns
+Slack          : 77.598 ns
 Required Time  : 12.29 MHz ( period = 81.380 ns )
-Actual Time    : 255.10 MHz ( period = 3.920 ns )
-From           : ADC:ADC_SPI|bit_cnt[1]
-To             : ADC:ADC_SPI|bit_cnt[0]
+Actual Time    : 264.41 MHz ( period = 3.782 ns )
+From           : ADC:ADC_SPI|ADC_state~3
+To             : ADC:ADC_SPI|bit_cnt[2]
 From Clock     : clk_lrclk_gen:clrgen|BCLK
 To Clock       : clk_lrclk_gen:clrgen|BCLK
 Failed Paths   : 0
 
 Type           : Clock Setup: '_10MHZ'
-Slack          : 96.645 ns
+Slack          : 96.857 ns
 Required Time  : 10.00 MHz ( period = 100.000 ns )
-Actual Time    : 298.06 MHz ( period = 3.355 ns )
+Actual Time    : 318.17 MHz ( period = 3.143 ns )
 From           : oddClockDivider:refClockDivider|count[0]
 To             : oddClockDivider:refClockDivider|count[5]
 From Clock     : _10MHZ
@@ -110,7 +110,7 @@ From           :
 To             : 
 From Clock     : 
 To Clock       : 
-Failed Paths   : 13
+Failed Paths   : 46
 
 --------------------------------------------------------------------------------------
 
