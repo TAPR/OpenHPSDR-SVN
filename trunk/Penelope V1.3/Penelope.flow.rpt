@@ -1,5 +1,5 @@
 Flow report for Penelope
-Sat Jan 29 14:33:12 2011
+Sat Feb 12 11:02:38 2011
 Quartus II Version 9.1 Build 350 03/24/2010 Service Pack 2 SJ Web Edition
 
 
@@ -38,7 +38,7 @@ applicable agreement for further details.
 +-----------------------------------------------------------------------------------+
 ; Flow Summary                                                                      ;
 +------------------------------------+----------------------------------------------+
-; Flow Status                        ; Successful - Sat Jan 29 14:33:12 2011        ;
+; Flow Status                        ; Successful - Sat Feb 12 11:02:38 2011        ;
 ; Quartus II Version                 ; 9.1 Build 350 03/24/2010 SP 2 SJ Web Edition ;
 ; Revision Name                      ; Penelope                                     ;
 ; Top-level Entity Name              ; Penelope                                     ;
@@ -46,10 +46,10 @@ applicable agreement for further details.
 ; Device                             ; EP2C8Q208C8                                  ;
 ; Timing Models                      ; Final                                        ;
 ; Met timing requirements            ; No                                           ;
-; Total logic elements               ; 4,895 / 8,256 ( 59 % )                       ;
-;     Total combinational functions  ; 4,451 / 8,256 ( 54 % )                       ;
-;     Dedicated logic registers      ; 3,160 / 8,256 ( 38 % )                       ;
-; Total registers                    ; 3160                                         ;
+; Total logic elements               ; 4,890 / 8,256 ( 59 % )                       ;
+;     Total combinational functions  ; 4,436 / 8,256 ( 54 % )                       ;
+;     Dedicated logic registers      ; 3,112 / 8,256 ( 38 % )                       ;
+; Total registers                    ; 3112                                         ;
 ; Total pins                         ; 58 / 138 ( 42 % )                            ;
 ; Total virtual pins                 ; 0                                            ;
 ; Total memory bits                  ; 0 / 165,888 ( 0 % )                          ;
@@ -63,7 +63,7 @@ applicable agreement for further details.
 +-------------------+---------------------+
 ; Option            ; Setting             ;
 +-------------------+---------------------+
-; Start date & time ; 01/29/2011 14:31:19 ;
+; Start date & time ; 02/12/2011 11:00:27 ;
 ; Main task         ; Compilation         ;
 ; Revision Name     ; Penelope            ;
 +-------------------+---------------------+
@@ -75,7 +75,7 @@ applicable agreement for further details.
 ; Assignment Name                             ; Value                                                                              ; Default Value                  ; Entity Name ; Section Id     ;
 +---------------------------------------------+------------------------------------------------------------------------------------+--------------------------------+-------------+----------------+
 ; ALLOW_POWER_UP_DONT_CARE                    ; Off                                                                                ; On                             ; --          ; --             ;
-; COMPILER_SIGNATURE_ID                       ; 123483488765.129628267805012                                                       ; --                             ; --          ; --             ;
+; COMPILER_SIGNATURE_ID                       ; 123483488765.129747962600652                                                       ; --                             ; --          ; --             ;
 ; EDA_OUTPUT_DATA_FORMAT                      ; None                                                                               ; --                             ; --          ; eda_simulation ;
 ; EDA_TIME_SCALE                              ; 1 ps                                                                               ; --                             ; --          ; eda_simulation ;
 ; ENABLE_SIGNALTAP                            ; Off                                                                                ; --                             ; --          ; --             ;
@@ -111,11 +111,11 @@ applicable agreement for further details.
 +-------------------------+--------------+-------------------------+---------------------+------------------------------------+
 ; Module Name             ; Elapsed Time ; Average Processors Used ; Peak Virtual Memory ; Total CPU Time (on all processors) ;
 +-------------------------+--------------+-------------------------+---------------------+------------------------------------+
-; Analysis & Synthesis    ; 00:00:13     ; 1.0                     ; 186 MB              ; 00:00:13                           ;
-; Fitter                  ; 00:01:31     ; 1.0                     ; 240 MB              ; 00:01:30                           ;
+; Analysis & Synthesis    ; 00:00:19     ; 1.0                     ; 186 MB              ; 00:00:14                           ;
+; Fitter                  ; 00:01:42     ; 1.0                     ; 239 MB              ; 00:01:34                           ;
 ; Assembler               ; 00:00:01     ; 1.0                     ; 168 MB              ; 00:00:01                           ;
-; Classic Timing Analyzer ; 00:00:03     ; 1.0                     ; 159 MB              ; 00:00:02                           ;
-; Total                   ; 00:01:48     ; --                      ; --                  ; 00:01:46                           ;
+; Classic Timing Analyzer ; 00:00:02     ; 1.0                     ; 159 MB              ; 00:00:02                           ;
+; Total                   ; 00:02:04     ; --                      ; --                  ; 00:01:51                           ;
 +-------------------------+--------------+-------------------------+---------------------+------------------------------------+
 
 

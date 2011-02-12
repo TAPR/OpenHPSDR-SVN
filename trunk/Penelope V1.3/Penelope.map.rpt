@@ -1,5 +1,5 @@
 Analysis & Synthesis report for Penelope
-Sat Jan 29 14:31:32 2011
+Sat Feb 12 11:00:46 2011
 Quartus II Version 9.1 Build 350 03/24/2010 Service Pack 2 SJ Web Edition
 
 
@@ -82,13 +82,13 @@ applicable agreement for further details.
 +-----------------------------------------------------------------------------------+
 ; Analysis & Synthesis Summary                                                      ;
 +------------------------------------+----------------------------------------------+
-; Analysis & Synthesis Status        ; Successful - Sat Jan 29 14:31:32 2011        ;
+; Analysis & Synthesis Status        ; Successful - Sat Feb 12 11:00:45 2011        ;
 ; Quartus II Version                 ; 9.1 Build 350 03/24/2010 SP 2 SJ Web Edition ;
 ; Revision Name                      ; Penelope                                     ;
 ; Top-level Entity Name              ; Penelope                                     ;
 ; Family                             ; Cyclone II                                   ;
-; Total logic elements               ; 4,708                                        ;
-;     Total combinational functions  ; 4,317                                        ;
+; Total logic elements               ; 4,705                                        ;
+;     Total combinational functions  ; 4,328                                        ;
 ;     Dedicated logic registers      ; 2,847                                        ;
 ; Total registers                    ; 2847                                         ;
 ; Total pins                         ; 58                                           ;
@@ -221,16 +221,16 @@ Parallel compilation was disabled, but you have multiple processors available. E
 +---------------------------------------------+----------+
 ; Resource                                    ; Usage    ;
 +---------------------------------------------+----------+
-; Estimated Total logic elements              ; 4,708    ;
+; Estimated Total logic elements              ; 4,705    ;
 ;                                             ;          ;
-; Total combinational functions               ; 4317     ;
+; Total combinational functions               ; 4328     ;
 ; Logic element usage by number of LUT inputs ;          ;
-;     -- 4 input functions                    ; 337      ;
-;     -- 3 input functions                    ; 2449     ;
-;     -- <=2 input functions                  ; 1531     ;
+;     -- 4 input functions                    ; 335      ;
+;     -- 3 input functions                    ; 2448     ;
+;     -- <=2 input functions                  ; 1545     ;
 ;                                             ;          ;
 ; Logic elements by mode                      ;          ;
-;     -- normal mode                          ; 1541     ;
+;     -- normal mode                          ; 1552     ;
 ;     -- arithmetic mode                      ; 2776     ;
 ;                                             ;          ;
 ; Total registers                             ; 2847     ;
@@ -242,8 +242,8 @@ Parallel compilation was disabled, but you have multiple processors available. E
 ; Total PLLs                                  ; 1        ;
 ; Maximum fan-out node                        ; C122_clk ;
 ; Maximum fan-out                             ; 2806     ;
-; Total fan-out                               ; 19781    ;
-; Average fan-out                             ; 2.74     ;
+; Total fan-out                               ; 19798    ;
+; Average fan-out                             ; 2.73     ;
 +---------------------------------------------+----------+
 
 
@@ -252,14 +252,14 @@ Parallel compilation was disabled, but you have multiple processors available. E
 +--------------------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+---------------------------------------------------------------+--------------+
 ; Compilation Hierarchy Node           ; LC Combinationals ; LC Registers ; Memory Bits ; DSP Elements ; DSP 9x9 ; DSP 18x18 ; Pins ; Virtual Pins ; Full Hierarchy Name                                           ; Library Name ;
 +--------------------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+---------------------------------------------------------------+--------------+
-; |Penelope                            ; 4317 (229)        ; 2847 (241)   ; 0           ; 8            ; 0       ; 4         ; 58   ; 0            ; |Penelope                                                     ; work         ;
+; |Penelope                            ; 4328 (243)        ; 2847 (241)   ; 0           ; 8            ; 0       ; 4         ; 58   ; 0            ; |Penelope                                                     ; work         ;
 ;    |ADC:ADC_SPI|                     ; 36 (36)           ; 34 (34)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Penelope|ADC:ADC_SPI                                         ;              ;
 ;    |I2S_rcv:PJD|                     ; 26 (26)           ; 57 (57)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Penelope|I2S_rcv:PJD                                         ;              ;
 ;    |I2S_xmit:IQD|                    ; 65 (65)           ; 57 (57)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Penelope|I2S_xmit:IQD                                        ;              ;
 ;    |NWire_rcv:CCrcv|                 ; 470 (470)         ; 238 (238)    ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Penelope|NWire_rcv:CCrcv                                     ;              ;
 ;    |NWire_rcv:IQPWM|                 ; 370 (370)         ; 177 (177)    ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Penelope|NWire_rcv:IQPWM                                     ;              ;
 ;    |NWire_rcv:p_ser|                 ; 402 (402)         ; 143 (143)    ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Penelope|NWire_rcv:p_ser                                     ;              ;
-;    |NWire_xmit:P_MIC|                ; 147 (147)         ; 82 (82)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Penelope|NWire_xmit:P_MIC                                    ;              ;
+;    |NWire_xmit:P_MIC|                ; 144 (144)         ; 82 (82)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Penelope|NWire_xmit:P_MIC                                    ;              ;
 ;    |NWire_xmit:ser_no|               ; 70 (70)           ; 41 (41)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Penelope|NWire_xmit:ser_no                                   ;              ;
 ;    |PLL_clock_detector:PLL_inst|     ; 0 (0)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Penelope|PLL_clock_detector:PLL_inst                         ;              ;
 ;       |altpll:altpll_component|      ; 0 (0)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Penelope|PLL_clock_detector:PLL_inst|altpll:altpll_component ;              ;
@@ -521,47 +521,47 @@ Encoding Type:  User-Encoded
 +--------------------+-----------+---------------+----------------------+------------------------+------------+---------------------------------------------+
 ; Multiplexer Inputs ; Bus Width ; Baseline Area ; Area if Restructured ; Saving if Restructured ; Registered ; Example Multiplexer Output                  ;
 +--------------------+-----------+---------------+----------------------+------------------------+------------+---------------------------------------------+
-; 3:1                ; 32 bits   ; 64 LEs        ; 32 LEs               ; 32 LEs                 ; Yes        ; |Penelope|I2S_xmit:IQD|last_data[12]        ;
-; 3:1                ; 6 bits    ; 12 LEs        ; 6 LEs                ; 6 LEs                  ; Yes        ; |Penelope|NWire_rcv:IQPWM|DBrise_cnt[3]     ;
+; 3:1                ; 32 bits   ; 64 LEs        ; 32 LEs               ; 32 LEs                 ; Yes        ; |Penelope|I2S_xmit:IQD|last_data[22]        ;
+; 3:1                ; 6 bits    ; 12 LEs        ; 6 LEs                ; 6 LEs                  ; Yes        ; |Penelope|NWire_rcv:IQPWM|DBrise_cnt[2]     ;
 ; 3:1                ; 13 bits   ; 26 LEs        ; 13 LEs               ; 13 LEs                 ; Yes        ; |Penelope|NWire_rcv:IQPWM|tb_width[11]      ;
-; 3:1                ; 5 bits    ; 10 LEs        ; 5 LEs                ; 5 LEs                  ; Yes        ; |Penelope|NWire_rcv:IQPWM|data_cnt[3]       ;
+; 3:1                ; 5 bits    ; 10 LEs        ; 5 LEs                ; 5 LEs                  ; Yes        ; |Penelope|NWire_rcv:IQPWM|data_cnt[1]       ;
 ; 3:1                ; 6 bits    ; 12 LEs        ; 6 LEs                ; 6 LEs                  ; Yes        ; |Penelope|NWire_rcv:CCrcv|DBrise_cnt[0]     ;
-; 3:1                ; 17 bits   ; 34 LEs        ; 17 LEs               ; 17 LEs                 ; Yes        ; |Penelope|NWire_rcv:CCrcv|tb_width[15]      ;
-; 3:1                ; 6 bits    ; 12 LEs        ; 6 LEs                ; 6 LEs                  ; Yes        ; |Penelope|NWire_rcv:CCrcv|data_cnt[4]       ;
-; 3:1                ; 4 bits    ; 8 LEs         ; 4 LEs                ; 4 LEs                  ; Yes        ; |Penelope|NWire_rcv:p_ser|DBrise_cnt[3]     ;
-; 3:1                ; 16 bits   ; 32 LEs        ; 16 LEs               ; 16 LEs                 ; Yes        ; |Penelope|NWire_rcv:p_ser|tb_width[1]       ;
+; 3:1                ; 17 bits   ; 34 LEs        ; 17 LEs               ; 17 LEs                 ; Yes        ; |Penelope|NWire_rcv:CCrcv|tb_width[5]       ;
+; 3:1                ; 6 bits    ; 12 LEs        ; 6 LEs                ; 6 LEs                  ; Yes        ; |Penelope|NWire_rcv:CCrcv|data_cnt[3]       ;
+; 3:1                ; 4 bits    ; 8 LEs         ; 4 LEs                ; 4 LEs                  ; Yes        ; |Penelope|NWire_rcv:p_ser|DBrise_cnt[0]     ;
+; 3:1                ; 16 bits   ; 32 LEs        ; 16 LEs               ; 16 LEs                 ; Yes        ; |Penelope|NWire_rcv:p_ser|tb_width[0]       ;
 ; 3:1                ; 3 bits    ; 6 LEs         ; 3 LEs                ; 3 LEs                  ; Yes        ; |Penelope|NWire_rcv:p_ser|data_cnt[1]       ;
-; 3:1                ; 15 bits   ; 30 LEs        ; 15 LEs               ; 15 LEs                 ; Yes        ; |Penelope|NWire_rcv:IQPWM|tb_cnt[12]        ;
-; 3:1                ; 19 bits   ; 38 LEs        ; 19 LEs               ; 19 LEs                 ; Yes        ; |Penelope|NWire_rcv:CCrcv|tb_cnt[6]         ;
+; 3:1                ; 15 bits   ; 30 LEs        ; 15 LEs               ; 15 LEs                 ; Yes        ; |Penelope|NWire_rcv:IQPWM|tb_cnt[8]         ;
+; 3:1                ; 19 bits   ; 38 LEs        ; 19 LEs               ; 19 LEs                 ; Yes        ; |Penelope|NWire_rcv:CCrcv|tb_cnt[15]        ;
 ; 3:1                ; 18 bits   ; 36 LEs        ; 18 LEs               ; 18 LEs                 ; Yes        ; |Penelope|NWire_rcv:p_ser|tb_cnt[1]         ;
-; 3:1                ; 15 bits   ; 30 LEs        ; 15 LEs               ; 15 LEs                 ; Yes        ; |Penelope|NWire_xmit:P_MIC|id[12]           ;
+; 3:1                ; 15 bits   ; 30 LEs        ; 15 LEs               ; 15 LEs                 ; Yes        ; |Penelope|NWire_xmit:P_MIC|id[8]            ;
 ; 3:1                ; 3 bits    ; 6 LEs         ; 3 LEs                ; 3 LEs                  ; Yes        ; |Penelope|C122_DFS1                         ;
-; 3:1                ; 3 bits    ; 6 LEs         ; 3 LEs                ; 3 LEs                  ; Yes        ; |Penelope|clk_div:TLVCLK|cnt[1]             ;
+; 3:1                ; 3 bits    ; 6 LEs         ; 3 LEs                ; 3 LEs                  ; Yes        ; |Penelope|clk_div:TLVCLK|cnt[2]             ;
 ; 3:1                ; 3 bits    ; 6 LEs         ; 3 LEs                ; 3 LEs                  ; Yes        ; |Penelope|NWire_xmit:ser_no|id[12]          ;
-; 3:1                ; 12 bits   ; 24 LEs        ; 12 LEs               ; 12 LEs                 ; Yes        ; |Penelope|NWire_xmit:ser_no|id[0]           ;
-; 3:1                ; 4 bits    ; 8 LEs         ; 4 LEs                ; 4 LEs                  ; Yes        ; |Penelope|I2S_xmit:IQD|bit_count[1]         ;
+; 3:1                ; 12 bits   ; 24 LEs        ; 12 LEs               ; 12 LEs                 ; Yes        ; |Penelope|NWire_xmit:ser_no|id[6]           ;
+; 3:1                ; 4 bits    ; 8 LEs         ; 4 LEs                ; 4 LEs                  ; Yes        ; |Penelope|I2S_xmit:IQD|bit_count[2]         ;
 ; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |Penelope|C122_SPEED[1]                     ;
-; 3:1                ; 16 bits   ; 32 LEs        ; 16 LEs               ; 16 LEs                 ; Yes        ; |Penelope|clk_lrclk_gen:clrgen|BCLK_cnt[4]  ;
-; 3:1                ; 60 bits   ; 120 LEs       ; 60 LEs               ; 60 LEs                 ; Yes        ; |Penelope|NWire_rcv:IQPWM|DB_LEN[1][13]     ;
-; 3:1                ; 76 bits   ; 152 LEs       ; 76 LEs               ; 76 LEs                 ; Yes        ; |Penelope|NWire_rcv:CCrcv|DB_LEN[0][3]      ;
-; 3:1                ; 72 bits   ; 144 LEs       ; 72 LEs               ; 72 LEs                 ; Yes        ; |Penelope|NWire_rcv:p_ser|DB_LEN[1][17]     ;
-; 3:1                ; 50 bits   ; 100 LEs       ; 50 LEs               ; 50 LEs                 ; Yes        ; |Penelope|NWire_rcv:CCrcv|rdata[25]         ;
-; 3:1                ; 8 bits    ; 16 LEs        ; 8 LEs                ; 8 LEs                  ; Yes        ; |Penelope|NWire_rcv:p_ser|rdata[7]          ;
-; 3:1                ; 10 bits   ; 20 LEs        ; 10 LEs               ; 10 LEs                 ; Yes        ; |Penelope|I2S_rcv:PJD|b_clk_cnt[9]          ;
-; 3:1                ; 16 bits   ; 32 LEs        ; 16 LEs               ; 16 LEs                 ; Yes        ; |Penelope|clk_lrclk_gen:lrgen|BCLK_cnt[9]   ;
-; 3:1                ; 32 bits   ; 64 LEs        ; 32 LEs               ; 32 LEs                 ; Yes        ; |Penelope|NWire_rcv:IQPWM|rdata[21]         ;
-; 3:1                ; 17 bits   ; 34 LEs        ; 34 LEs               ; 0 LEs                  ; Yes        ; |Penelope|cpl_cordic:cordic_inst|Y[0][21]   ;
-; 3:1                ; 17 bits   ; 34 LEs        ; 34 LEs               ; 0 LEs                  ; Yes        ; |Penelope|cpl_cordic:cordic_inst|X[0][6]    ;
-; 3:1                ; 25 bits   ; 50 LEs        ; 25 LEs               ; 25 LEs                 ; Yes        ; |Penelope|NWire_xmit:P_MIC|dly_cnt[8]       ;
+; 3:1                ; 16 bits   ; 32 LEs        ; 16 LEs               ; 16 LEs                 ; Yes        ; |Penelope|clk_lrclk_gen:clrgen|BCLK_cnt[0]  ;
+; 3:1                ; 60 bits   ; 120 LEs       ; 60 LEs               ; 60 LEs                 ; Yes        ; |Penelope|NWire_rcv:IQPWM|DB_LEN[2][2]      ;
+; 3:1                ; 76 bits   ; 152 LEs       ; 76 LEs               ; 76 LEs                 ; Yes        ; |Penelope|NWire_rcv:CCrcv|DB_LEN[0][11]     ;
+; 3:1                ; 72 bits   ; 144 LEs       ; 72 LEs               ; 72 LEs                 ; Yes        ; |Penelope|NWire_rcv:p_ser|DB_LEN[0][6]      ;
+; 3:1                ; 50 bits   ; 100 LEs       ; 50 LEs               ; 50 LEs                 ; Yes        ; |Penelope|NWire_rcv:CCrcv|rdata[32]         ;
+; 3:1                ; 8 bits    ; 16 LEs        ; 8 LEs                ; 8 LEs                  ; Yes        ; |Penelope|NWire_rcv:p_ser|rdata[2]          ;
+; 3:1                ; 10 bits   ; 20 LEs        ; 10 LEs               ; 10 LEs                 ; Yes        ; |Penelope|I2S_rcv:PJD|b_clk_cnt[1]          ;
+; 3:1                ; 16 bits   ; 32 LEs        ; 16 LEs               ; 16 LEs                 ; Yes        ; |Penelope|clk_lrclk_gen:lrgen|BCLK_cnt[7]   ;
+; 3:1                ; 32 bits   ; 64 LEs        ; 32 LEs               ; 32 LEs                 ; Yes        ; |Penelope|NWire_rcv:IQPWM|rdata[22]         ;
+; 3:1                ; 17 bits   ; 34 LEs        ; 34 LEs               ; 0 LEs                  ; Yes        ; |Penelope|cpl_cordic:cordic_inst|Y[0][20]   ;
+; 3:1                ; 17 bits   ; 34 LEs        ; 34 LEs               ; 0 LEs                  ; Yes        ; |Penelope|cpl_cordic:cordic_inst|X[0][8]    ;
+; 3:1                ; 25 bits   ; 50 LEs        ; 25 LEs               ; 25 LEs                 ; Yes        ; |Penelope|NWire_xmit:P_MIC|dly_cnt[2]       ;
 ; 4:1                ; 15 bits   ; 30 LEs        ; 30 LEs               ; 0 LEs                  ; Yes        ; |Penelope|I2S_xmit:IQD|data[9]              ;
-; 4:1                ; 5 bits    ; 10 LEs        ; 10 LEs               ; 0 LEs                  ; Yes        ; |Penelope|clk_lrclk_gen:clrgen|LRCLK_cnt[3] ;
-; 4:1                ; 9 bits    ; 18 LEs        ; 9 LEs                ; 9 LEs                  ; Yes        ; |Penelope|C122_clock_select[3]              ;
+; 4:1                ; 5 bits    ; 10 LEs        ; 10 LEs               ; 0 LEs                  ; Yes        ; |Penelope|clk_lrclk_gen:clrgen|LRCLK_cnt[0] ;
+; 4:1                ; 9 bits    ; 18 LEs        ; 9 LEs                ; 9 LEs                  ; Yes        ; |Penelope|C122_clock_select[2]              ;
 ; 4:1                ; 5 bits    ; 10 LEs        ; 10 LEs               ; 0 LEs                  ; Yes        ; |Penelope|clk_lrclk_gen:lrgen|LRCLK_cnt[4]  ;
-; 4:1                ; 5 bits    ; 10 LEs        ; 5 LEs                ; 5 LEs                  ; Yes        ; |Penelope|I2S_rcv:PJD|shift_cnt[4]          ;
-; 4:1                ; 4 bits    ; 8 LEs         ; 4 LEs                ; 4 LEs                  ; Yes        ; |Penelope|ADC:ADC_SPI|bit_cnt[3]            ;
-; 5:1                ; 14 bits   ; 42 LEs        ; 14 LEs               ; 28 LEs                 ; Yes        ; |Penelope|NWire_xmit:ser_no|bcnt[7]         ;
-; 5:1                ; 32 bits   ; 96 LEs        ; 32 LEs               ; 64 LEs                 ; Yes        ; |Penelope|NWire_xmit:P_MIC|bcnt[19]         ;
-; 4:1                ; 33 bits   ; 66 LEs        ; 66 LEs               ; 0 LEs                  ; Yes        ; |Penelope|C122_frequency_HZ[0]              ;
+; 4:1                ; 5 bits    ; 10 LEs        ; 5 LEs                ; 5 LEs                  ; Yes        ; |Penelope|I2S_rcv:PJD|shift_cnt[3]          ;
+; 4:1                ; 4 bits    ; 8 LEs         ; 4 LEs                ; 4 LEs                  ; Yes        ; |Penelope|ADC:ADC_SPI|bit_cnt[1]            ;
+; 5:1                ; 14 bits   ; 42 LEs        ; 14 LEs               ; 28 LEs                 ; Yes        ; |Penelope|NWire_xmit:ser_no|bcnt[6]         ;
+; 5:1                ; 32 bits   ; 96 LEs        ; 32 LEs               ; 64 LEs                 ; Yes        ; |Penelope|NWire_xmit:P_MIC|bcnt[30]         ;
+; 4:1                ; 33 bits   ; 66 LEs        ; 66 LEs               ; 0 LEs                  ; Yes        ; |Penelope|C122_frequency_HZ[22]             ;
 +--------------------+-----------+---------------+----------------------+------------------------+------------+---------------------------------------------+
 
 
@@ -1328,7 +1328,7 @@ Note: In order to hide this table in the UI and the text report file, please set
 Info: *******************************************************************
 Info: Running Quartus II Analysis & Synthesis
     Info: Version 9.1 Build 350 03/24/2010 Service Pack 2 SJ Web Edition
-    Info: Processing started: Sat Jan 29 14:31:18 2011
+    Info: Processing started: Sat Feb 12 11:00:25 2011
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off Penelope -c Penelope
 Info: Found 1 design units, including 1 entities, in source file cpl_cordic.v
     Info: Found entity 1: cpl_cordic
@@ -1356,10 +1356,10 @@ Info: Found 1 design units, including 1 entities, in source file penelope.v
     Info: Found entity 1: Penelope
 Info: Found 1 design units, including 1 entities, in source file common/i2s_rcv.v
     Info: Found entity 1: I2S_rcv
-Warning (10236): Verilog HDL Implicit Net warning at Penelope.v(447): created implicit net for "PMW2"
+Warning (10236): Verilog HDL Implicit Net warning at Penelope.v(453): created implicit net for "PMW2"
 Info: Elaborating entity "Penelope" for the top level hierarchy
-Warning (10036): Verilog HDL or VHDL warning at Penelope.v(447): object "PMW2" assigned a value but never read
-Warning (10034): Output port "PWM2" at Penelope.v(131) has no driver
+Warning (10036): Verilog HDL or VHDL warning at Penelope.v(453): object "PMW2" assigned a value but never read
+Warning (10034): Output port "PWM2" at Penelope.v(132) has no driver
 Info: Elaborating entity "clk_div" for hierarchy "clk_div:TLVCLK"
 Info: Elaborating entity "clk_lrclk_gen" for hierarchy "clk_lrclk_gen:clrgen"
 Warning (10230): Verilog HDL assignment warning at clk_lrclk_gen.v(63): truncated value with size 32 to match size of target (16)
@@ -1490,18 +1490,18 @@ Info: 29 registers lost all their fanouts during netlist optimizations. The firs
     Info: Register "NWire_xmit:ser_no|dly_cnt[1]" lost all its fanouts during netlist optimizations.
     Info: Register "NWire_xmit:ser_no|dly_cnt[0]" lost all its fanouts during netlist optimizations.
 Info: Generated suppressed messages file C:/HPSDR/trunk/Penelope V1.3/Penelope.map.smsg
-Info: Implemented 4925 device resources after synthesis - the final resource count might be different
+Info: Implemented 4922 device resources after synthesis - the final resource count might be different
     Info: Implemented 8 input pins
     Info: Implemented 49 output pins
     Info: Implemented 1 bidirectional pins
-    Info: Implemented 4858 logic cells
+    Info: Implemented 4855 logic cells
     Info: Implemented 1 PLLs
     Info: Implemented 8 DSP elements
 Info: Quartus II Analysis & Synthesis was successful. 0 errors, 17 warnings
     Info: Peak virtual memory: 186 megabytes
-    Info: Processing ended: Sat Jan 29 14:31:32 2011
-    Info: Elapsed time: 00:00:14
-    Info: Total CPU time (on all processors): 00:00:14
+    Info: Processing ended: Sat Feb 12 11:00:46 2011
+    Info: Elapsed time: 00:00:21
+    Info: Total CPU time (on all processors): 00:00:15
 
 
 +------------------------------------------+
