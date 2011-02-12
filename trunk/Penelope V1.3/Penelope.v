@@ -379,6 +379,10 @@ wire [17:0] C122_q_out;
 wire [31:0] C122_phase;
 wire signed [14:0] C122_cordic_i_out;
 
+wire signed [14:0] gated;
+
+assign gated = PTT_out ? C122_cordic_i_out : 14'd0;
+
 
 cpl_cordic #(.OUT_WIDTH(16))
  		cordic_inst (.clock(C122_clk), .frequency(C122_phase_word), .in_data_I(C122_out_q),
@@ -404,9 +408,10 @@ cpl_cordic #(.OUT_WIDTH(16))
 
 always @ (negedge C122_clk)
 begin
-	if (PTT_out) 
-		DAC[13:0] = C122_cordic_i_out[13:0];   //gain of 4
-	else DAC[13:0] = 14'd0;
+	//if (PTT_out) 
+		//DAC[13:0] = C122_cordic_i_out[13:0];   //gain of 4
+		DAC[13:0] = gated[13:0];   //gain of 4
+	//else DAC[13:0] = 14'd0;
 end 
 
 
