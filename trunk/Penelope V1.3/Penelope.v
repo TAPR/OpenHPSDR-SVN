@@ -44,27 +44,28 @@
   12 Apr 2009 - Modified to use NWirwe - Kirk Weedman, KD7IRS
   18 May 2009 - Released as V1.2
   6  Jun 2010 - Modifed 122.88MHz clock selection to use external clock if PLL not locked.
-				This overcomes the problem with not being able to select the correct clock
-				if one is not already present.
+					 This overcomes the problem with not being able to select the correct clock
+					 if one is not already present.
   7           - Force source_122MHZ = 1'b0 at reset as an alternative to the PLL locked solution.
-			  - Change DAC to DAC[13:0] = C122_i_out[16:3];
-
-
+			     - Change DAC to DAC[13:0] = C122_i_out[16:3];
   4 Jan 2011 - Added support for PennyLane, common code for both boards. Penelope
                 will ignore the signal on DAC_ALC.
                 Tx_level is set to 128 for testing.
  11 Jan 2011 - Drive_Level sent from Ozy using nWire via Atlas_C18, ignored by Penelope.
  12          - Replaced CORDIC etc with code from Hermes. Changed overall gain to approx unity.
  21          - Corrected overall gain levels. Code now works with Penelope and PennyLane.
-			 - LED[7] now flashes to show V1.3 loaded, flashes x2 when PTT active.
+					- LED[7] now flashes to show V1.3 loaded, flashes x2 when PTT active.
  12 Feb 2011 - Set I and Q to zero when PTT not active
+				 - Can't use Quartus V9.2sp2 since have to leave USB Blaster connected or wont load from flash.
+				   This version built using Quartus V10.1sp1.
+ 
   
 */
 
 
 /*
   IMPORTANT:  In Analysis and Synthesis Settings make sure Power-Up Don't Care is NOT checked.
-  Built with Quartus V9.1sp2
+  Built with Quartus V10.1sp1
 */
 
 //    Atlas bus
