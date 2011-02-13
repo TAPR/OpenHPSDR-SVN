@@ -11,13 +11,14 @@ Here are the steps requried to progam the EPCS16 on the Mercury board, EPCS4 on 
 
 	svn://svn.openhpsdr.org/svn/repos_sdr_sdr_hpsdr/trunk/USBBlaster-Binaries
 
-2. Install the Quartus II Programmer application (112MB) from www.altera.com i.e.
+2. Install the Quartus II Programmer application (177MB) from www.altera.com i.e.
 
    https://www.altera.com/support/software/download/programming/quartus2/dnl-quartus2_programmer.jsp
 
-   The latest version is V10.1.
+   The latest version is V10.1sp1.
+
    Install in the default directory. If you install in a different directory then edit
-   Program-Mercury-EPCS16.bat, Program-Penelope-EPCS4.bat and Program-Janus-EPM240T100.bat to reflect the    change. 
+   Program-Mercury-EPCS16.bat, Program-Penelope-EPCS4.bat and Program-Janus-EPM240T100.bat to reflect the change. 
 
    We need to install this application in order to load the large number of
    DLLs requried to run the simple command line  programer (quartus_pgm.exe)
