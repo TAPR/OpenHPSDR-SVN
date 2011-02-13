@@ -1,4 +1,4 @@
-Phil Harman - VK6APH - 28 Jan 2011
+Phil Harman - VK6APH - 13 Feb 2011
 
  *******  NOTE:  Altera indicates that their software will run on 32 bit versions of XP and Vista. Support or Win7 or 64 bit vesions is included from V10.0  ******
 
