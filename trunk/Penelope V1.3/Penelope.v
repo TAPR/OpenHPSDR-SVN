@@ -456,7 +456,7 @@ end
 // for board tests
 assign PWM0 = 0;
 assign PWM1 = 0;
-assign PMW2 = 0;
+assign PWM2 = 0;
 
 
 //-----------------------------------------------------------

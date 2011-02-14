@@ -1,5 +1,5 @@
-Analysis & Synthesis report for Penelope
-Sat Feb 12 17:18:09 2011
+Analysis & Elaboration report for Penelope
+Mon Feb 14 16:19:02 2011
 Quartus II Version 10.1 Build 197 01/19/2011 Service Pack 1 SJ Web Edition
 
 
@@ -7,57 +7,37 @@ Quartus II Version 10.1 Build 197 01/19/2011 Service Pack 1 SJ Web Edition
 ; Table of Contents ;
 ---------------------
   1. Legal Notice
-  2. Analysis & Synthesis Summary
-  3. Analysis & Synthesis Settings
-  4. Parallel Compilation
-  5. Analysis & Synthesis Source Files Read
-  6. Analysis & Synthesis Resource Usage Summary
-  7. Analysis & Synthesis Resource Utilization by Entity
-  8. Analysis & Synthesis DSP Block Usage Summary
-  9. Analysis & Synthesis IP Cores Summary
- 10. State Machine - |Penelope|NWire_xmit:ser_no|NW_state
- 11. State Machine - |Penelope|NWire_xmit:P_MIC|NW_state
- 12. State Machine - |Penelope|I2S_xmit:IQD|TLV_state
- 13. State Machine - |Penelope|NWire_rcv:IQPWM|TB_state
- 14. State Machine - |Penelope|NWire_rcv:CCrcv|TB_state
- 15. State Machine - |Penelope|NWire_rcv:p_ser|TB_state
- 16. State Machine - |Penelope|ADC:ADC_SPI|ADC_state
- 17. Registers Removed During Synthesis
- 18. Removed Registers Triggering Further Register Optimizations
- 19. General Register Statistics
- 20. Multiplexer Restructuring Statistics (Restructuring Performed)
- 21. Parameter Settings for User Entity Instance: Top-level Entity: |Penelope
- 22. Parameter Settings for User Entity Instance: clk_div:TLVCLK
- 23. Parameter Settings for User Entity Instance: clk_lrclk_gen:clrgen
- 24. Parameter Settings for User Entity Instance: clk_lrclk_gen:lrgen
- 25. Parameter Settings for User Entity Instance: PLL_clock_detector:PLL_inst|altpll:altpll_component
- 26. Parameter Settings for User Entity Instance: cicint:cic_I
- 27. Parameter Settings for User Entity Instance: cicint:cic_Q
- 28. Parameter Settings for User Entity Instance: cpl_cordic:cordic_inst
- 29. Parameter Settings for User Entity Instance: NWire_rcv:p_ser
- 30. Parameter Settings for User Entity Instance: NWire_rcv:CCrcv
- 31. Parameter Settings for User Entity Instance: NWire_rcv:IQPWM
- 32. Parameter Settings for User Entity Instance: I2S_xmit:IQD
- 33. Parameter Settings for User Entity Instance: NWire_xmit:P_MIC
- 34. Parameter Settings for User Entity Instance: I2S_rcv:PJD
- 35. Parameter Settings for User Entity Instance: NWire_xmit:ser_no
- 36. Parameter Settings for User Entity Instance: oddClockDivider:refClockDivider
- 37. Parameter Settings for Inferred Entity Instance: lpm_mult:Mult0
- 38. altpll Parameter Settings by Entity Instance
- 39. lpm_mult Parameter Settings by Entity Instance
- 40. Port Connectivity Checks: "NWire_xmit:ser_no"
- 41. Port Connectivity Checks: "I2S_rcv:PJD"
- 42. Port Connectivity Checks: "NWire_xmit:P_MIC"
- 43. Port Connectivity Checks: "I2S_xmit:IQD"
- 44. Port Connectivity Checks: "NWire_rcv:CCrcv"
- 45. Port Connectivity Checks: "cpl_cordic:cordic_inst"
- 46. Port Connectivity Checks: "cicint:cic_Q"
- 47. Port Connectivity Checks: "cicint:cic_I"
- 48. Port Connectivity Checks: "PLL_clock_detector:PLL_inst"
- 49. Port Connectivity Checks: "clk_lrclk_gen:lrgen"
- 50. Port Connectivity Checks: "clk_lrclk_gen:clrgen"
- 51. Elapsed Time Per Partition
- 52. Analysis & Synthesis Messages
+  2. Analysis & Elaboration Summary
+  3. Parameter Settings for User Entity Instance: Top-level Entity: |Penelope
+  4. Parameter Settings for User Entity Instance: clk_div:TLVCLK
+  5. Parameter Settings for User Entity Instance: clk_lrclk_gen:clrgen
+  6. Parameter Settings for User Entity Instance: clk_lrclk_gen:lrgen
+  7. Parameter Settings for User Entity Instance: PLL_clock_detector:PLL_inst|altpll:altpll_component
+  8. Parameter Settings for User Entity Instance: cicint:cic_I
+  9. Parameter Settings for User Entity Instance: cicint:cic_Q
+ 10. Parameter Settings for User Entity Instance: cpl_cordic:cordic_inst
+ 11. Parameter Settings for User Entity Instance: NWire_rcv:p_ser
+ 12. Parameter Settings for User Entity Instance: NWire_rcv:CCrcv
+ 13. Parameter Settings for User Entity Instance: NWire_rcv:IQPWM
+ 14. Parameter Settings for User Entity Instance: I2S_xmit:IQD
+ 15. Parameter Settings for User Entity Instance: NWire_xmit:P_MIC
+ 16. Parameter Settings for User Entity Instance: I2S_rcv:PJD
+ 17. Parameter Settings for User Entity Instance: NWire_xmit:ser_no
+ 18. Parameter Settings for User Entity Instance: oddClockDivider:refClockDivider
+ 19. altpll Parameter Settings by Entity Instance
+ 20. Analysis & Elaboration Settings
+ 21. Port Connectivity Checks: "NWire_xmit:ser_no"
+ 22. Port Connectivity Checks: "I2S_rcv:PJD"
+ 23. Port Connectivity Checks: "NWire_xmit:P_MIC"
+ 24. Port Connectivity Checks: "I2S_xmit:IQD"
+ 25. Port Connectivity Checks: "NWire_rcv:CCrcv"
+ 26. Port Connectivity Checks: "cpl_cordic:cordic_inst"
+ 27. Port Connectivity Checks: "cicint:cic_Q"
+ 28. Port Connectivity Checks: "cicint:cic_I"
+ 29. Port Connectivity Checks: "PLL_clock_detector:PLL_inst"
+ 30. Port Connectivity Checks: "clk_lrclk_gen:lrgen"
+ 31. Port Connectivity Checks: "clk_lrclk_gen:clrgen"
+ 32. Analysis & Elaboration Messages
 
 
 
@@ -81,520 +61,23 @@ applicable agreement for further details.
 
 
 +------------------------------------------------------------------------------------+
-; Analysis & Synthesis Summary                                                       ;
+; Analysis & Elaboration Summary                                                     ;
 +------------------------------------+-----------------------------------------------+
-; Analysis & Synthesis Status        ; Successful - Sat Feb 12 17:18:09 2011         ;
+; Analysis & Elaboration Status      ; Successful - Mon Feb 14 16:19:02 2011         ;
 ; Quartus II Version                 ; 10.1 Build 197 01/19/2011 SP 1 SJ Web Edition ;
 ; Revision Name                      ; Penelope                                      ;
 ; Top-level Entity Name              ; Penelope                                      ;
 ; Family                             ; Cyclone II                                    ;
-; Total logic elements               ; 4,707                                         ;
-;     Total combinational functions  ; 4,331                                         ;
-;     Dedicated logic registers      ; 2,850                                         ;
-; Total registers                    ; 2850                                          ;
-; Total pins                         ; 58                                            ;
-; Total virtual pins                 ; 0                                             ;
-; Total memory bits                  ; 0                                             ;
-; Embedded Multiplier 9-bit elements ; 8                                             ;
-; Total PLLs                         ; 1                                             ;
+; Total logic elements               ; N/A until Partition Merge                     ;
+;     Total combinational functions  ; N/A until Partition Merge                     ;
+;     Dedicated logic registers      ; N/A until Partition Merge                     ;
+; Total registers                    ; N/A until Partition Merge                     ;
+; Total pins                         ; N/A until Partition Merge                     ;
+; Total virtual pins                 ; N/A until Partition Merge                     ;
+; Total memory bits                  ; N/A until Partition Merge                     ;
+; Embedded Multiplier 9-bit elements ; N/A until Partition Merge                     ;
+; Total PLLs                         ; N/A until Partition Merge                     ;
 +------------------------------------+-----------------------------------------------+
-
-
-+----------------------------------------------------------------------------------------------------------------------+
-; Analysis & Synthesis Settings                                                                                        ;
-+----------------------------------------------------------------------------+--------------------+--------------------+
-; Option                                                                     ; Setting            ; Default Value      ;
-+----------------------------------------------------------------------------+--------------------+--------------------+
-; Device                                                                     ; EP2C8Q208C8        ;                    ;
-; Top-level entity name                                                      ; Penelope           ; Penelope           ;
-; Family name                                                                ; Cyclone II         ; Stratix            ;
-; State Machine Processing                                                   ; User-Encoded       ; Auto               ;
-; Power-Up Don't Care                                                        ; Off                ; On                 ;
-; Remove Redundant Logic Cells                                               ; On                 ; Off                ;
-; Use smart compilation                                                      ; Off                ; Off                ;
-; Maximum processors allowed for parallel compilation                        ; 1                  ; 1                  ;
-; Enable parallel Assembler and TimeQuest Timing Analyzer during compilation ; On                 ; On                 ;
-; Enable compact report table                                                ; Off                ; Off                ;
-; Restructure Multiplexers                                                   ; Auto               ; Auto               ;
-; Create Debugging Nodes for IP Cores                                        ; Off                ; Off                ;
-; Preserve fewer node names                                                  ; On                 ; On                 ;
-; Disable OpenCore Plus hardware evaluation                                  ; Off                ; Off                ;
-; Verilog Version                                                            ; Verilog_2001       ; Verilog_2001       ;
-; VHDL Version                                                               ; VHDL_1993          ; VHDL_1993          ;
-; Safe State Machine                                                         ; Off                ; Off                ;
-; Extract Verilog State Machines                                             ; On                 ; On                 ;
-; Extract VHDL State Machines                                                ; On                 ; On                 ;
-; Ignore Verilog initial constructs                                          ; Off                ; Off                ;
-; Iteration limit for constant Verilog loops                                 ; 5000               ; 5000               ;
-; Iteration limit for non-constant Verilog loops                             ; 250                ; 250                ;
-; Add Pass-Through Logic to Inferred RAMs                                    ; On                 ; On                 ;
-; Parallel Synthesis                                                         ; On                 ; On                 ;
-; DSP Block Balancing                                                        ; Auto               ; Auto               ;
-; NOT Gate Push-Back                                                         ; On                 ; On                 ;
-; Remove Duplicate Registers                                                 ; On                 ; On                 ;
-; Ignore CARRY Buffers                                                       ; Off                ; Off                ;
-; Ignore CASCADE Buffers                                                     ; Off                ; Off                ;
-; Ignore GLOBAL Buffers                                                      ; Off                ; Off                ;
-; Ignore ROW GLOBAL Buffers                                                  ; Off                ; Off                ;
-; Ignore LCELL Buffers                                                       ; Off                ; Off                ;
-; Ignore SOFT Buffers                                                        ; On                 ; On                 ;
-; Limit AHDL Integers to 32 Bits                                             ; Off                ; Off                ;
-; Optimization Technique                                                     ; Balanced           ; Balanced           ;
-; Carry Chain Length                                                         ; 70                 ; 70                 ;
-; Auto Carry Chains                                                          ; On                 ; On                 ;
-; Auto Open-Drain Pins                                                       ; On                 ; On                 ;
-; Perform WYSIWYG Primitive Resynthesis                                      ; Off                ; Off                ;
-; Auto ROM Replacement                                                       ; On                 ; On                 ;
-; Auto RAM Replacement                                                       ; On                 ; On                 ;
-; Auto Shift Register Replacement                                            ; Auto               ; Auto               ;
-; Auto Clock Enable Replacement                                              ; On                 ; On                 ;
-; Strict RAM Replacement                                                     ; Off                ; Off                ;
-; Allow Synchronous Control Signals                                          ; On                 ; On                 ;
-; Force Use of Synchronous Clear Signals                                     ; Off                ; Off                ;
-; Auto RAM to Logic Cell Conversion                                          ; Off                ; Off                ;
-; Auto Resource Sharing                                                      ; Off                ; Off                ;
-; Allow Any RAM Size For Recognition                                         ; Off                ; Off                ;
-; Allow Any ROM Size For Recognition                                         ; Off                ; Off                ;
-; Allow Any Shift Register Size For Recognition                              ; Off                ; Off                ;
-; Use LogicLock Constraints during Resource Balancing                        ; On                 ; On                 ;
-; Ignore translate_off and synthesis_off directives                          ; Off                ; Off                ;
-; Timing-Driven Synthesis                                                    ; Off                ; Off                ;
-; Report Parameter Settings                                                  ; On                 ; On                 ;
-; Report Source Assignments                                                  ; On                 ; On                 ;
-; Report Connectivity Checks                                                 ; On                 ; On                 ;
-; Ignore Maximum Fan-Out Assignments                                         ; Off                ; Off                ;
-; Synchronization Register Chain Length                                      ; 2                  ; 2                  ;
-; PowerPlay Power Optimization                                               ; Normal compilation ; Normal compilation ;
-; HDL message level                                                          ; Level2             ; Level2             ;
-; Suppress Register Optimization Related Messages                            ; Off                ; Off                ;
-; Number of Removed Registers Reported in Synthesis Report                   ; 100                ; 100                ;
-; Number of Inverted Registers Reported in Synthesis Report                  ; 100                ; 100                ;
-; Clock MUX Protection                                                       ; On                 ; On                 ;
-; Auto Gated Clock Conversion                                                ; Off                ; Off                ;
-; Block Design Naming                                                        ; Auto               ; Auto               ;
-; SDC constraint protection                                                  ; Off                ; Off                ;
-; Synthesis Effort                                                           ; Auto               ; Auto               ;
-; Shift Register Replacement - Allow Asynchronous Clear Signal               ; On                 ; On                 ;
-; Analysis & Synthesis Message Level                                         ; Medium             ; Medium             ;
-; Disable Register Merging Across Hierarchies                                ; Auto               ; Auto               ;
-; Resource Aware Inference For Block RAM                                     ; On                 ; On                 ;
-; Synthesis Seed                                                             ; 1                  ; 1                  ;
-+----------------------------------------------------------------------------+--------------------+--------------------+
-
-
-Parallel compilation was disabled, but you have multiple processors available. Enable parallel compilation to reduce compilation time.
-+-------------------------------------+
-; Parallel Compilation                ;
-+----------------------------+--------+
-; Processors                 ; Number ;
-+----------------------------+--------+
-; Number detected on machine ; 2      ;
-; Maximum allowed            ; 1      ;
-+----------------------------+--------+
-
-
-+----------------------------------------------------------------------------------------------------------------------------------------------------+
-; Analysis & Synthesis Source Files Read                                                                                                             ;
-+----------------------------------+-----------------+------------------------------+----------------------------------------------------------------+
-; File Name with User-Entered Path ; Used in Netlist ; File Type                    ; File Name with Absolute Path                                   ;
-+----------------------------------+-----------------+------------------------------+----------------------------------------------------------------+
-; cpl_cordic.v                     ; yes             ; User Verilog HDL File        ; C:/HPSDR/trunk/Penelope V1.3/cpl_cordic.v                      ;
-; PLL_clock_detector.v             ; yes             ; User Wizard-Generated File   ; C:/HPSDR/trunk/Penelope V1.3/PLL_clock_detector.v              ;
-; ../common/I2S_xmit.v             ; yes             ; User Verilog HDL File        ; C:/HPSDR/trunk/Penelope V1.3/common/I2S_xmit.v                 ;
-; ../common/NWire_rcv.v            ; yes             ; User Verilog HDL File        ; C:/HPSDR/trunk/Penelope V1.3/common/NWire_rcv.v                ;
-; ../common/NWire_xmit.v           ; yes             ; User Verilog HDL File        ; C:/HPSDR/trunk/Penelope V1.3/common/NWire_xmit.v               ;
-; ../common/clk_lrclk_gen.v        ; yes             ; User Verilog HDL File        ; C:/HPSDR/trunk/Penelope V1.3/common/clk_lrclk_gen.v            ;
-; ../common/clk_div.v              ; yes             ; User Verilog HDL File        ; C:/HPSDR/trunk/Penelope V1.3/common/clk_div.v                  ;
-; oddClockDiv.v                    ; yes             ; User Verilog HDL File        ; C:/HPSDR/trunk/Penelope V1.3/oddClockDiv.v                     ;
-; ADC.v                            ; yes             ; User Verilog HDL File        ; C:/HPSDR/trunk/Penelope V1.3/ADC.v                             ;
-; cicint.v                         ; yes             ; User Verilog HDL File        ; C:/HPSDR/trunk/Penelope V1.3/cicint.v                          ;
-; Penelope.v                       ; yes             ; User Verilog HDL File        ; C:/HPSDR/trunk/Penelope V1.3/Penelope.v                        ;
-; ../common/I2S_rcv.v              ; yes             ; User Verilog HDL File        ; C:/HPSDR/trunk/Penelope V1.3/common/I2S_rcv.v                  ;
-; altpll.tdf                       ; yes             ; Megafunction                 ; c:/altera/10.1sp1/quartus/libraries/megafunctions/altpll.tdf   ;
-; lpm_mult.tdf                     ; yes             ; Megafunction                 ; c:/altera/10.1sp1/quartus/libraries/megafunctions/lpm_mult.tdf ;
-; db/mult_7ct.tdf                  ; yes             ; Auto-Generated Megafunction  ; C:/HPSDR/trunk/Penelope V1.3/db/mult_7ct.tdf                   ;
-+----------------------------------+-----------------+------------------------------+----------------------------------------------------------------+
-
-
-+--------------------------------------------------------+
-; Analysis & Synthesis Resource Usage Summary            ;
-+---------------------------------------------+----------+
-; Resource                                    ; Usage    ;
-+---------------------------------------------+----------+
-; Estimated Total logic elements              ; 4,707    ;
-;                                             ;          ;
-; Total combinational functions               ; 4331     ;
-; Logic element usage by number of LUT inputs ;          ;
-;     -- 4 input functions                    ; 333      ;
-;     -- 3 input functions                    ; 2466     ;
-;     -- <=2 input functions                  ; 1532     ;
-;                                             ;          ;
-; Logic elements by mode                      ;          ;
-;     -- normal mode                          ; 1537     ;
-;     -- arithmetic mode                      ; 2794     ;
-;                                             ;          ;
-; Total registers                             ; 2850     ;
-;     -- Dedicated logic registers            ; 2850     ;
-;     -- I/O registers                        ; 0        ;
-;                                             ;          ;
-; I/O pins                                    ; 58       ;
-; Embedded Multiplier 9-bit elements          ; 8        ;
-; Total PLLs                                  ; 1        ;
-;     -- PLLs                                 ; 1        ;
-;                                             ;          ;
-; Maximum fan-out node                        ; C122_clk ;
-; Maximum fan-out                             ; 2809     ;
-; Total fan-out                               ; 19870    ;
-; Average fan-out                             ; 2.74     ;
-+---------------------------------------------+----------+
-
-
-+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-; Analysis & Synthesis Resource Utilization by Entity                                                                                                                                                                             ;
-+--------------------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+---------------------------------------------------------------+--------------+
-; Compilation Hierarchy Node           ; LC Combinationals ; LC Registers ; Memory Bits ; DSP Elements ; DSP 9x9 ; DSP 18x18 ; Pins ; Virtual Pins ; Full Hierarchy Name                                           ; Library Name ;
-+--------------------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+---------------------------------------------------------------+--------------+
-; |Penelope                            ; 4331 (243)        ; 2850 (241)   ; 0           ; 8            ; 0       ; 4         ; 58   ; 0            ; |Penelope                                                     ;              ;
-;    |ADC:ADC_SPI|                     ; 36 (36)           ; 34 (34)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Penelope|ADC:ADC_SPI                                         ;              ;
-;    |I2S_rcv:PJD|                     ; 26 (26)           ; 57 (57)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Penelope|I2S_rcv:PJD                                         ;              ;
-;    |I2S_xmit:IQD|                    ; 65 (65)           ; 57 (57)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Penelope|I2S_xmit:IQD                                        ;              ;
-;    |NWire_rcv:CCrcv|                 ; 470 (470)         ; 238 (238)    ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Penelope|NWire_rcv:CCrcv                                     ;              ;
-;    |NWire_rcv:IQPWM|                 ; 370 (370)         ; 177 (177)    ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Penelope|NWire_rcv:IQPWM                                     ;              ;
-;    |NWire_rcv:p_ser|                 ; 402 (402)         ; 143 (143)    ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Penelope|NWire_rcv:p_ser                                     ;              ;
-;    |NWire_xmit:P_MIC|                ; 144 (144)         ; 83 (83)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Penelope|NWire_xmit:P_MIC                                    ;              ;
-;    |NWire_xmit:ser_no|               ; 70 (70)           ; 40 (40)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Penelope|NWire_xmit:ser_no                                   ;              ;
-;    |PLL_clock_detector:PLL_inst|     ; 0 (0)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Penelope|PLL_clock_detector:PLL_inst                         ;              ;
-;       |altpll:altpll_component|      ; 0 (0)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Penelope|PLL_clock_detector:PLL_inst|altpll:altpll_component ;              ;
-;    |cicint:cic_I|                    ; 336 (336)         ; 340 (340)    ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Penelope|cicint:cic_I                                        ;              ;
-;    |cicint:cic_Q|                    ; 323 (323)         ; 327 (327)    ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Penelope|cicint:cic_Q                                        ;              ;
-;    |clk_div:TLVCLK|                  ; 4 (4)             ; 4 (4)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Penelope|clk_div:TLVCLK                                      ;              ;
-;    |clk_lrclk_gen:clrgen|            ; 34 (34)           ; 25 (25)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Penelope|clk_lrclk_gen:clrgen                                ;              ;
-;    |clk_lrclk_gen:lrgen|             ; 35 (35)           ; 24 (24)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Penelope|clk_lrclk_gen:lrgen                                 ;              ;
-;    |cpl_cordic:cordic_inst|          ; 1724 (1724)       ; 1052 (1052)  ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Penelope|cpl_cordic:cordic_inst                              ;              ;
-;    |lpm_mult:Mult0|                  ; 33 (0)            ; 0 (0)        ; 0           ; 8            ; 0       ; 4         ; 0    ; 0            ; |Penelope|lpm_mult:Mult0                                      ;              ;
-;       |mult_7ct:auto_generated|      ; 33 (33)           ; 0 (0)        ; 0           ; 8            ; 0       ; 4         ; 0    ; 0            ; |Penelope|lpm_mult:Mult0|mult_7ct:auto_generated              ;              ;
-;    |oddClockDivider:refClockDivider| ; 16 (16)           ; 8 (8)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Penelope|oddClockDivider:refClockDivider                     ;              ;
-+--------------------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+---------------------------------------------------------------+--------------+
-Note: For table entries with two numbers listed, the numbers in parentheses indicate the number of resources of the given type used by the specific entity alone. The numbers listed outside of parentheses indicate the total resources of the given type used by the specific entity and all of its sub-entities in the hierarchy.
-
-
-+-----------------------------------------------------+
-; Analysis & Synthesis DSP Block Usage Summary        ;
-+---------------------------------------+-------------+
-; Statistic                             ; Number Used ;
-+---------------------------------------+-------------+
-; Simple Multipliers (9-bit)            ; 0           ;
-; Simple Multipliers (18-bit)           ; 4           ;
-; Embedded Multiplier Blocks            ; --          ;
-; Embedded Multiplier 9-bit elements    ; 8           ;
-; Signed Embedded Multipliers           ; 0           ;
-; Unsigned Embedded Multipliers         ; 4           ;
-; Mixed Sign Embedded Multipliers       ; 0           ;
-; Variable Sign Embedded Multipliers    ; 0           ;
-; Dedicated Input Shift Register Chains ; 0           ;
-+---------------------------------------+-------------+
-Note: number of Embedded Multiplier Blocks used is only available after a successful fit.
-
-
-+-----------------------------------------------------------------------------------------------------------------------------------------------------------+
-; Analysis & Synthesis IP Cores Summary                                                                                                                     ;
-+--------+--------------+---------+--------------+--------------+---------------------------------------+---------------------------------------------------+
-; Vendor ; IP Core Name ; Version ; Release Date ; License Type ; Entity Instance                       ; IP Include File                                   ;
-+--------+--------------+---------+--------------+--------------+---------------------------------------+---------------------------------------------------+
-; Altera ; ALTPLL       ; N/A     ; N/A          ; N/A          ; |Penelope|PLL_clock_detector:PLL_inst ; C:/HPSDR/trunk/Penelope V1.3/PLL_clock_detector.v ;
-+--------+--------------+---------+--------------+--------------+---------------------------------------+---------------------------------------------------+
-
-
-Encoding Type:  User-Encoded
-+-------------------------------------------------------------+
-; State Machine - |Penelope|NWire_xmit:ser_no|NW_state        ;
-+----------------------+------------+------------+------------+
-; Name                 ; NW_state~4 ; NW_state~3 ; NW_state~2 ;
-+----------------------+------------+------------+------------+
-; NW_state.NW_IDLE     ; 0          ; 0          ; 0          ;
-; NW_state.NW_WAIT     ; 0          ; 1          ; 0          ;
-; NW_state.NW_DATA_Q1  ; 0          ; 1          ; 1          ;
-; NW_state.NW_DATA_Q23 ; 1          ; 0          ; 0          ;
-; NW_state.NW_DATA_Q4  ; 1          ; 0          ; 1          ;
-; NW_state.NW_LOW      ; 1          ; 1          ; 0          ;
-+----------------------+------------+------------+------------+
-
-
-Encoding Type:  User-Encoded
-+-------------------------------------------------------------+
-; State Machine - |Penelope|NWire_xmit:P_MIC|NW_state         ;
-+----------------------+------------+------------+------------+
-; Name                 ; NW_state~4 ; NW_state~3 ; NW_state~2 ;
-+----------------------+------------+------------+------------+
-; NW_state.NW_IDLE     ; 0          ; 0          ; 0          ;
-; NW_state.NW_WAIT     ; 0          ; 1          ; 0          ;
-; NW_state.NW_DATA_Q1  ; 0          ; 1          ; 1          ;
-; NW_state.NW_DATA_Q23 ; 1          ; 0          ; 0          ;
-; NW_state.NW_DATA_Q4  ; 1          ; 0          ; 1          ;
-; NW_state.NW_LOW      ; 1          ; 1          ; 0          ;
-+----------------------+------------+------------+------------+
-
-
-Encoding Type:  User-Encoded
-+---------------------------------------------------------------+
-; State Machine - |Penelope|I2S_xmit:IQD|TLV_state              ;
-+---------------------+-------------+-------------+-------------+
-; Name                ; TLV_state~4 ; TLV_state~3 ; TLV_state~2 ;
-+---------------------+-------------+-------------+-------------+
-; TLV_state.TLV_IDLE  ; 0           ; 0           ; 0           ;
-; TLV_state.TLV_WH    ; 0           ; 0           ; 1           ;
-; TLV_state.TLV_LR_LO ; 0           ; 1           ; 0           ;
-; TLV_state.TLV_WL    ; 0           ; 1           ; 1           ;
-; TLV_state.TLV_LR_HI ; 1           ; 0           ; 0           ;
-+---------------------+-------------+-------------+-------------+
-
-
-Encoding Type:  User-Encoded
-+---------------------------------------------------------+
-; State Machine - |Penelope|NWire_rcv:IQPWM|TB_state      ;
-+------------------+------------+------------+------------+
-; Name             ; TB_state~4 ; TB_state~3 ; TB_state~2 ;
-+------------------+------------+------------+------------+
-; TB_state.TB_IDLE ; 0          ; 0          ; 0          ;
-; TB_state.TB_DB   ; 0          ; 0          ; 1          ;
-; TB_state.TB_CALC ; 0          ; 1          ; 0          ;
-; TB_state.TB_SYNC ; 0          ; 1          ; 1          ;
-; TB_state.TB_NEXT ; 1          ; 0          ; 0          ;
-; TB_state.TB_BIT  ; 1          ; 0          ; 1          ;
-+------------------+------------+------------+------------+
-
-
-Encoding Type:  User-Encoded
-+---------------------------------------------------------+
-; State Machine - |Penelope|NWire_rcv:CCrcv|TB_state      ;
-+------------------+------------+------------+------------+
-; Name             ; TB_state~4 ; TB_state~3 ; TB_state~2 ;
-+------------------+------------+------------+------------+
-; TB_state.TB_IDLE ; 0          ; 0          ; 0          ;
-; TB_state.TB_DB   ; 0          ; 0          ; 1          ;
-; TB_state.TB_CALC ; 0          ; 1          ; 0          ;
-; TB_state.TB_SYNC ; 0          ; 1          ; 1          ;
-; TB_state.TB_NEXT ; 1          ; 0          ; 0          ;
-; TB_state.TB_BIT  ; 1          ; 0          ; 1          ;
-+------------------+------------+------------+------------+
-
-
-Encoding Type:  User-Encoded
-+---------------------------------------------------------+
-; State Machine - |Penelope|NWire_rcv:p_ser|TB_state      ;
-+------------------+------------+------------+------------+
-; Name             ; TB_state~4 ; TB_state~3 ; TB_state~2 ;
-+------------------+------------+------------+------------+
-; TB_state.TB_IDLE ; 0          ; 0          ; 0          ;
-; TB_state.TB_DB   ; 0          ; 0          ; 1          ;
-; TB_state.TB_CALC ; 0          ; 1          ; 0          ;
-; TB_state.TB_SYNC ; 0          ; 1          ; 1          ;
-; TB_state.TB_NEXT ; 1          ; 0          ; 0          ;
-; TB_state.TB_BIT  ; 1          ; 0          ; 1          ;
-+------------------+------------+------------+------------+
-
-
-Encoding Type:  User-Encoded
-+---------------------------------------------------------+
-; State Machine - |Penelope|ADC:ADC_SPI|ADC_state         ;
-+---------------+-------------+-------------+-------------+
-; Name          ; ADC_state~4 ; ADC_state~3 ; ADC_state~2 ;
-+---------------+-------------+-------------+-------------+
-; ADC_state.000 ; 0           ; 0           ; 0           ;
-; ADC_state.001 ; 0           ; 0           ; 1           ;
-; ADC_state.010 ; 0           ; 1           ; 0           ;
-; ADC_state.011 ; 0           ; 1           ; 1           ;
-; ADC_state.100 ; 1           ; 0           ; 0           ;
-+---------------+-------------+-------------+-------------+
-
-
-+---------------------------------------------------------------------------------------+
-; Registers Removed During Synthesis                                                    ;
-+-----------------------------------------+---------------------------------------------+
-; Register name                           ; Reason for Removal                          ;
-+-----------------------------------------+---------------------------------------------+
-; cpl_cordic:cordic_inst|X[18][22]        ; Lost fanout                                 ;
-; cpl_cordic:cordic_inst|X[18][21]        ; Lost fanout                                 ;
-; cpl_cordic:cordic_inst|X[17][22]        ; Lost fanout                                 ;
-; cpl_cordic:cordic_inst|X[17][21]        ; Lost fanout                                 ;
-; NWire_rcv:p_ser|tb_width[17]            ; Merged with NWire_rcv:p_ser|tb_width[16]    ;
-; cpl_cordic:cordic_inst|Z[0][19]         ; Merged with cpl_cordic:cordic_inst|Z[0][18] ;
-; cicint:cic_Q|diff1[15]                  ; Merged with cicint:cic_Q|diff1[16]          ;
-; cicint:cic_Q|diff2[16]                  ; Merged with cicint:cic_Q|diff2[17]          ;
-; cicint:cic_Q|diff3[17]                  ; Merged with cicint:cic_Q|diff3[18]          ;
-; cicint:cic_Q|diff4[18]                  ; Merged with cicint:cic_Q|diff4[19]          ;
-; cicint:cic_I|diff1[15]                  ; Merged with cicint:cic_I|diff1[16]          ;
-; cicint:cic_I|diff2[16]                  ; Merged with cicint:cic_I|diff2[17]          ;
-; cicint:cic_I|diff3[17]                  ; Merged with cicint:cic_I|diff3[18]          ;
-; cicint:cic_I|diff4[18]                  ; Merged with cicint:cic_I|diff4[19]          ;
-; NWire_xmit:ser_no|dly_cnt[0]            ; Merged with NWire_xmit:P_MIC|dly_cnt[0]     ;
-; NWire_xmit:ser_no|dly_cnt[1]            ; Merged with NWire_xmit:P_MIC|dly_cnt[1]     ;
-; NWire_xmit:ser_no|dly_cnt[2]            ; Merged with NWire_xmit:P_MIC|dly_cnt[2]     ;
-; NWire_xmit:ser_no|dly_cnt[3]            ; Merged with NWire_xmit:P_MIC|dly_cnt[3]     ;
-; NWire_xmit:ser_no|dly_cnt[4]            ; Merged with NWire_xmit:P_MIC|dly_cnt[4]     ;
-; NWire_xmit:ser_no|dly_cnt[5]            ; Merged with NWire_xmit:P_MIC|dly_cnt[5]     ;
-; NWire_xmit:ser_no|dly_cnt[6]            ; Merged with NWire_xmit:P_MIC|dly_cnt[6]     ;
-; NWire_xmit:ser_no|dly_cnt[7]            ; Merged with NWire_xmit:P_MIC|dly_cnt[7]     ;
-; NWire_xmit:ser_no|dly_cnt[8]            ; Merged with NWire_xmit:P_MIC|dly_cnt[8]     ;
-; NWire_xmit:ser_no|dly_cnt[9]            ; Merged with NWire_xmit:P_MIC|dly_cnt[9]     ;
-; NWire_xmit:ser_no|dly_cnt[10]           ; Merged with NWire_xmit:P_MIC|dly_cnt[10]    ;
-; NWire_xmit:ser_no|dly_cnt[11]           ; Merged with NWire_xmit:P_MIC|dly_cnt[11]    ;
-; NWire_xmit:ser_no|dly_cnt[12]           ; Merged with NWire_xmit:P_MIC|dly_cnt[12]    ;
-; NWire_xmit:ser_no|dly_cnt[13]           ; Merged with NWire_xmit:P_MIC|dly_cnt[13]    ;
-; NWire_xmit:ser_no|dly_cnt[14]           ; Merged with NWire_xmit:P_MIC|dly_cnt[14]    ;
-; NWire_xmit:ser_no|dly_cnt[15]           ; Merged with NWire_xmit:P_MIC|dly_cnt[15]    ;
-; NWire_xmit:ser_no|dly_cnt[16]           ; Merged with NWire_xmit:P_MIC|dly_cnt[16]    ;
-; NWire_xmit:ser_no|dly_cnt[17]           ; Merged with NWire_xmit:P_MIC|dly_cnt[17]    ;
-; NWire_xmit:ser_no|dly_cnt[18]           ; Merged with NWire_xmit:P_MIC|dly_cnt[18]    ;
-; NWire_xmit:ser_no|dly_cnt[19]           ; Merged with NWire_xmit:P_MIC|dly_cnt[19]    ;
-; NWire_xmit:ser_no|dly_cnt[20]           ; Merged with NWire_xmit:P_MIC|dly_cnt[20]    ;
-; NWire_xmit:ser_no|dly_cnt[21]           ; Merged with NWire_xmit:P_MIC|dly_cnt[21]    ;
-; NWire_xmit:ser_no|dly_cnt[22]           ; Merged with NWire_xmit:P_MIC|dly_cnt[22]    ;
-; NWire_xmit:ser_no|dly_cnt[23]           ; Merged with NWire_xmit:P_MIC|dly_cnt[23]    ;
-; NWire_xmit:ser_no|dly_cnt[24]           ; Merged with NWire_xmit:P_MIC|dly_cnt[24]    ;
-; NWire_xmit:ser_no|dly_cnt[25]           ; Merged with NWire_xmit:P_MIC|dly_cnt[25]    ;
-; NWire_rcv:IQPWM|tb_width[14]            ; Merged with NWire_rcv:IQPWM|tb_width[13]    ;
-; NWire_rcv:CCrcv|tb_width[18]            ; Merged with NWire_rcv:CCrcv|tb_width[17]    ;
-; cpl_cordic:cordic_inst|X[0][1]          ; Merged with cpl_cordic:cordic_inst|X[0][0]  ;
-; cpl_cordic:cordic_inst|X[0][2]          ; Merged with cpl_cordic:cordic_inst|X[0][0]  ;
-; cpl_cordic:cordic_inst|Y[0][0]          ; Merged with cpl_cordic:cordic_inst|X[0][0]  ;
-; cpl_cordic:cordic_inst|Y[0][1]          ; Merged with cpl_cordic:cordic_inst|X[0][0]  ;
-; cpl_cordic:cordic_inst|Y[0][2]          ; Merged with cpl_cordic:cordic_inst|X[0][0]  ;
-; cicint:cic_Q|cur_count[11]              ; Merged with cicint:cic_I|cur_count[11]      ;
-; cicint:cic_Q|cur_count[10]              ; Merged with cicint:cic_I|cur_count[10]      ;
-; cicint:cic_Q|cur_count[9]               ; Merged with cicint:cic_I|cur_count[9]       ;
-; cicint:cic_Q|cur_count[8]               ; Merged with cicint:cic_I|cur_count[8]       ;
-; cicint:cic_Q|cur_count[7]               ; Merged with cicint:cic_I|cur_count[7]       ;
-; cicint:cic_Q|cur_count[6]               ; Merged with cicint:cic_I|cur_count[6]       ;
-; cicint:cic_Q|cur_count[5]               ; Merged with cicint:cic_I|cur_count[5]       ;
-; cicint:cic_Q|cur_count[4]               ; Merged with cicint:cic_I|cur_count[4]       ;
-; cicint:cic_Q|cur_count[3]               ; Merged with cicint:cic_I|cur_count[3]       ;
-; cicint:cic_Q|cur_count[2]               ; Merged with cicint:cic_I|cur_count[2]       ;
-; cicint:cic_Q|cur_count[1]               ; Merged with cicint:cic_I|cur_count[1]       ;
-; cicint:cic_Q|cur_count[0]               ; Merged with cicint:cic_I|cur_count[0]       ;
-; cicint:cic_Q|ce_out_reg                 ; Merged with cicint:cic_I|ce_out_reg         ;
-; NWire_xmit:ser_no|id[19]                ; Stuck at GND due to stuck port data_in      ;
-; NWire_rcv:IQPWM|tb_width[13]            ; Stuck at GND due to stuck port data_in      ;
-; NWire_rcv:CCrcv|tb_width[17]            ; Stuck at GND due to stuck port data_in      ;
-; NWire_rcv:p_ser|tb_width[16]            ; Stuck at GND due to stuck port data_in      ;
-; NWire_xmit:ser_no|id[16..18]            ; Stuck at GND due to stuck port data_in      ;
-; cpl_cordic:cordic_inst|Y[0][3]          ; Stuck at GND due to stuck port data_in      ;
-; cpl_cordic:cordic_inst|X[0][0]          ; Stuck at GND due to stuck port data_in      ;
-; cpl_cordic:cordic_inst|X[0][3]          ; Stuck at GND due to stuck port data_in      ;
-; cpl_cordic:cordic_inst|Y[1][0]          ; Stuck at GND due to stuck port data_in      ;
-; cpl_cordic:cordic_inst|Y[1][1]          ; Stuck at GND due to stuck port data_in      ;
-; cpl_cordic:cordic_inst|Y[1][2]          ; Stuck at GND due to stuck port data_in      ;
-; cpl_cordic:cordic_inst|X[1][0]          ; Stuck at GND due to stuck port data_in      ;
-; cpl_cordic:cordic_inst|X[1][1]          ; Stuck at GND due to stuck port data_in      ;
-; cpl_cordic:cordic_inst|X[1][2]          ; Stuck at GND due to stuck port data_in      ;
-; cpl_cordic:cordic_inst|Y[2][0]          ; Stuck at GND due to stuck port data_in      ;
-; cpl_cordic:cordic_inst|X[2][0]          ; Stuck at GND due to stuck port data_in      ;
-; cpl_cordic:cordic_inst|Y[0][4]          ; Stuck at GND due to stuck port data_in      ;
-; cpl_cordic:cordic_inst|X[0][4]          ; Stuck at GND due to stuck port data_in      ;
-; cpl_cordic:cordic_inst|Y[1][3]          ; Stuck at GND due to stuck port data_in      ;
-; cpl_cordic:cordic_inst|X[1][3]          ; Stuck at GND due to stuck port data_in      ;
-; cpl_cordic:cordic_inst|Y[2][1]          ; Stuck at GND due to stuck port data_in      ;
-; cpl_cordic:cordic_inst|X[2][1]          ; Stuck at GND due to stuck port data_in      ;
-; PWM_count[0]                            ; Merged with counter[0]                      ;
-; count_12288[0]                          ; Merged with counter[0]                      ;
-; PWM_count[1]                            ; Merged with counter[1]                      ;
-; PWM_count[2]                            ; Merged with counter[2]                      ;
-; count_12288[1]                          ; Merged with counter[1]                      ;
-; PWM_count[3]                            ; Merged with counter[3]                      ;
-; count_12288[2]                          ; Merged with counter[2]                      ;
-; PWM_count[4]                            ; Merged with counter[4]                      ;
-; count_12288[3]                          ; Merged with counter[3]                      ;
-; PWM_count[5]                            ; Merged with counter[5]                      ;
-; count_12288[4]                          ; Merged with counter[4]                      ;
-; PWM_count[6]                            ; Merged with counter[6]                      ;
-; count_12288[5]                          ; Merged with counter[5]                      ;
-; PWM_count[7]                            ; Merged with counter[7]                      ;
-; count_12288[6]                          ; Merged with counter[6]                      ;
-; count_12288[7]                          ; Merged with counter[7]                      ;
-; Total Number of Removed Registers = 100 ;                                             ;
-+-----------------------------------------+---------------------------------------------+
-
-
-+-----------------------------------------------------------------------------------------------------------------------------+
-; Removed Registers Triggering Further Register Optimizations                                                                 ;
-+--------------------------------+---------------------------+----------------------------------------------------------------+
-; Register name                  ; Reason for Removal        ; Registers Removed due to This Register                         ;
-+--------------------------------+---------------------------+----------------------------------------------------------------+
-; cpl_cordic:cordic_inst|X[0][0] ; Stuck at GND              ; cpl_cordic:cordic_inst|Y[1][0], cpl_cordic:cordic_inst|Y[2][0] ;
-;                                ; due to stuck port data_in ;                                                                ;
-; cpl_cordic:cordic_inst|Y[1][1] ; Stuck at GND              ; cpl_cordic:cordic_inst|X[2][0], cpl_cordic:cordic_inst|Y[2][1] ;
-;                                ; due to stuck port data_in ;                                                                ;
-; cpl_cordic:cordic_inst|X[1][1] ; Stuck at GND              ; cpl_cordic:cordic_inst|X[2][1]                                 ;
-;                                ; due to stuck port data_in ;                                                                ;
-; cpl_cordic:cordic_inst|Y[0][4] ; Stuck at GND              ; cpl_cordic:cordic_inst|X[1][3]                                 ;
-;                                ; due to stuck port data_in ;                                                                ;
-; cpl_cordic:cordic_inst|X[0][4] ; Stuck at GND              ; cpl_cordic:cordic_inst|Y[1][3]                                 ;
-;                                ; due to stuck port data_in ;                                                                ;
-+--------------------------------+---------------------------+----------------------------------------------------------------+
-
-
-+------------------------------------------------------+
-; General Register Statistics                          ;
-+----------------------------------------------+-------+
-; Statistic                                    ; Value ;
-+----------------------------------------------+-------+
-; Total registers                              ; 2850  ;
-; Number of registers using Synchronous Clear  ; 284   ;
-; Number of registers using Synchronous Load   ; 216   ;
-; Number of registers using Asynchronous Clear ; 667   ;
-; Number of registers using Asynchronous Load  ; 0     ;
-; Number of registers using Clock Enable       ; 966   ;
-; Number of registers using Preset             ; 0     ;
-+----------------------------------------------+-------+
-
-
-+-----------------------------------------------------------------------------------------------------------------------------------------------------------+
-; Multiplexer Restructuring Statistics (Restructuring Performed)                                                                                            ;
-+--------------------+-----------+---------------+----------------------+------------------------+------------+---------------------------------------------+
-; Multiplexer Inputs ; Bus Width ; Baseline Area ; Area if Restructured ; Saving if Restructured ; Registered ; Example Multiplexer Output                  ;
-+--------------------+-----------+---------------+----------------------+------------------------+------------+---------------------------------------------+
-; 3:1                ; 32 bits   ; 64 LEs        ; 32 LEs               ; 32 LEs                 ; Yes        ; |Penelope|I2S_xmit:IQD|last_data[31]        ;
-; 3:1                ; 6 bits    ; 12 LEs        ; 6 LEs                ; 6 LEs                  ; Yes        ; |Penelope|NWire_rcv:IQPWM|DBrise_cnt[0]     ;
-; 3:1                ; 13 bits   ; 26 LEs        ; 13 LEs               ; 13 LEs                 ; Yes        ; |Penelope|NWire_rcv:IQPWM|tb_width[1]       ;
-; 3:1                ; 5 bits    ; 10 LEs        ; 5 LEs                ; 5 LEs                  ; Yes        ; |Penelope|NWire_rcv:IQPWM|data_cnt[1]       ;
-; 3:1                ; 6 bits    ; 12 LEs        ; 6 LEs                ; 6 LEs                  ; Yes        ; |Penelope|NWire_rcv:CCrcv|DBrise_cnt[1]     ;
-; 3:1                ; 17 bits   ; 34 LEs        ; 17 LEs               ; 17 LEs                 ; Yes        ; |Penelope|NWire_rcv:CCrcv|tb_width[7]       ;
-; 3:1                ; 6 bits    ; 12 LEs        ; 6 LEs                ; 6 LEs                  ; Yes        ; |Penelope|NWire_rcv:CCrcv|data_cnt[3]       ;
-; 3:1                ; 4 bits    ; 8 LEs         ; 4 LEs                ; 4 LEs                  ; Yes        ; |Penelope|NWire_rcv:p_ser|DBrise_cnt[0]     ;
-; 3:1                ; 16 bits   ; 32 LEs        ; 16 LEs               ; 16 LEs                 ; Yes        ; |Penelope|NWire_rcv:p_ser|tb_width[13]      ;
-; 3:1                ; 3 bits    ; 6 LEs         ; 3 LEs                ; 3 LEs                  ; Yes        ; |Penelope|NWire_rcv:p_ser|data_cnt[1]       ;
-; 3:1                ; 15 bits   ; 30 LEs        ; 15 LEs               ; 15 LEs                 ; Yes        ; |Penelope|NWire_rcv:IQPWM|tb_cnt[14]        ;
-; 3:1                ; 19 bits   ; 38 LEs        ; 19 LEs               ; 19 LEs                 ; Yes        ; |Penelope|NWire_rcv:CCrcv|tb_cnt[1]         ;
-; 3:1                ; 18 bits   ; 36 LEs        ; 18 LEs               ; 18 LEs                 ; Yes        ; |Penelope|NWire_rcv:p_ser|tb_cnt[14]        ;
-; 3:1                ; 15 bits   ; 30 LEs        ; 15 LEs               ; 15 LEs                 ; Yes        ; |Penelope|NWire_xmit:P_MIC|id[7]            ;
-; 3:1                ; 3 bits    ; 6 LEs         ; 3 LEs                ; 3 LEs                  ; Yes        ; |Penelope|C122_DFS1                         ;
-; 3:1                ; 3 bits    ; 6 LEs         ; 3 LEs                ; 3 LEs                  ; Yes        ; |Penelope|clk_div:TLVCLK|cnt[1]             ;
-; 3:1                ; 3 bits    ; 6 LEs         ; 3 LEs                ; 3 LEs                  ; Yes        ; |Penelope|NWire_xmit:ser_no|id[13]          ;
-; 3:1                ; 12 bits   ; 24 LEs        ; 12 LEs               ; 12 LEs                 ; Yes        ; |Penelope|NWire_xmit:ser_no|id[4]           ;
-; 3:1                ; 4 bits    ; 8 LEs         ; 4 LEs                ; 4 LEs                  ; Yes        ; |Penelope|I2S_xmit:IQD|bit_count[1]         ;
-; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |Penelope|C122_SPEED[0]                     ;
-; 3:1                ; 16 bits   ; 32 LEs        ; 16 LEs               ; 16 LEs                 ; Yes        ; |Penelope|clk_lrclk_gen:clrgen|BCLK_cnt[0]  ;
-; 3:1                ; 60 bits   ; 120 LEs       ; 60 LEs               ; 60 LEs                 ; Yes        ; |Penelope|NWire_rcv:IQPWM|DB_LEN[3][10]     ;
-; 3:1                ; 76 bits   ; 152 LEs       ; 76 LEs               ; 76 LEs                 ; Yes        ; |Penelope|NWire_rcv:CCrcv|DB_LEN[0][0]      ;
-; 3:1                ; 72 bits   ; 144 LEs       ; 72 LEs               ; 72 LEs                 ; Yes        ; |Penelope|NWire_rcv:p_ser|DB_LEN[0][9]      ;
-; 3:1                ; 50 bits   ; 100 LEs       ; 50 LEs               ; 50 LEs                 ; Yes        ; |Penelope|NWire_rcv:CCrcv|rdata[54]         ;
-; 3:1                ; 8 bits    ; 16 LEs        ; 8 LEs                ; 8 LEs                  ; Yes        ; |Penelope|NWire_rcv:p_ser|rdata[4]          ;
-; 3:1                ; 10 bits   ; 20 LEs        ; 10 LEs               ; 10 LEs                 ; Yes        ; |Penelope|I2S_rcv:PJD|b_clk_cnt[9]          ;
-; 3:1                ; 16 bits   ; 32 LEs        ; 16 LEs               ; 16 LEs                 ; Yes        ; |Penelope|clk_lrclk_gen:lrgen|BCLK_cnt[7]   ;
-; 3:1                ; 32 bits   ; 64 LEs        ; 32 LEs               ; 32 LEs                 ; Yes        ; |Penelope|NWire_rcv:IQPWM|rdata[19]         ;
-; 3:1                ; 18 bits   ; 36 LEs        ; 36 LEs               ; 0 LEs                  ; Yes        ; |Penelope|cpl_cordic:cordic_inst|Y[0][13]   ;
-; 3:1                ; 18 bits   ; 36 LEs        ; 36 LEs               ; 0 LEs                  ; Yes        ; |Penelope|cpl_cordic:cordic_inst|X[0][10]   ;
-; 3:1                ; 25 bits   ; 50 LEs        ; 25 LEs               ; 25 LEs                 ; Yes        ; |Penelope|NWire_xmit:P_MIC|dly_cnt[5]       ;
-; 4:1                ; 15 bits   ; 30 LEs        ; 30 LEs               ; 0 LEs                  ; Yes        ; |Penelope|I2S_xmit:IQD|data[6]              ;
-; 4:1                ; 5 bits    ; 10 LEs        ; 10 LEs               ; 0 LEs                  ; Yes        ; |Penelope|clk_lrclk_gen:clrgen|LRCLK_cnt[4] ;
-; 4:1                ; 9 bits    ; 18 LEs        ; 9 LEs                ; 9 LEs                  ; Yes        ; |Penelope|OC[3]                             ;
-; 4:1                ; 5 bits    ; 10 LEs        ; 10 LEs               ; 0 LEs                  ; Yes        ; |Penelope|clk_lrclk_gen:lrgen|LRCLK_cnt[3]  ;
-; 4:1                ; 5 bits    ; 10 LEs        ; 5 LEs                ; 5 LEs                  ; Yes        ; |Penelope|I2S_rcv:PJD|shift_cnt[4]          ;
-; 4:1                ; 4 bits    ; 8 LEs         ; 4 LEs                ; 4 LEs                  ; Yes        ; |Penelope|ADC:ADC_SPI|bit_cnt[0]            ;
-; 5:1                ; 14 bits   ; 42 LEs        ; 14 LEs               ; 28 LEs                 ; Yes        ; |Penelope|NWire_xmit:ser_no|bcnt[9]         ;
-; 5:1                ; 32 bits   ; 96 LEs        ; 32 LEs               ; 64 LEs                 ; Yes        ; |Penelope|NWire_xmit:P_MIC|bcnt[15]         ;
-; 4:1                ; 33 bits   ; 66 LEs        ; 66 LEs               ; 0 LEs                  ; Yes        ; |Penelope|C122_frequency_HZ[28]             ;
-+--------------------+-----------+---------------+----------------------+------------------------+------------+---------------------------------------------+
 
 
 +--------------------------------------------------------------------------+
@@ -1162,41 +645,6 @@ Note: In order to hide this table in the UI and the text report file, please set
 Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
 
 
-+-----------------------------------------------------------------------------------+
-; Parameter Settings for Inferred Entity Instance: lpm_mult:Mult0                   ;
-+------------------------------------------------+------------+---------------------+
-; Parameter Name                                 ; Value      ; Type                ;
-+------------------------------------------------+------------+---------------------+
-; AUTO_CARRY_CHAINS                              ; ON         ; AUTO_CARRY          ;
-; IGNORE_CARRY_BUFFERS                           ; OFF        ; IGNORE_CARRY        ;
-; AUTO_CASCADE_CHAINS                            ; ON         ; AUTO_CASCADE        ;
-; IGNORE_CASCADE_BUFFERS                         ; OFF        ; IGNORE_CASCADE      ;
-; LPM_WIDTHA                                     ; 32         ; Untyped             ;
-; LPM_WIDTHB                                     ; 31         ; Untyped             ;
-; LPM_WIDTHP                                     ; 63         ; Untyped             ;
-; LPM_WIDTHR                                     ; 63         ; Untyped             ;
-; LPM_WIDTHS                                     ; 1          ; Untyped             ;
-; LPM_REPRESENTATION                             ; UNSIGNED   ; Untyped             ;
-; LPM_PIPELINE                                   ; 0          ; Untyped             ;
-; LATENCY                                        ; 0          ; Untyped             ;
-; INPUT_A_IS_CONSTANT                            ; NO         ; Untyped             ;
-; INPUT_B_IS_CONSTANT                            ; YES        ; Untyped             ;
-; USE_EAB                                        ; OFF        ; Untyped             ;
-; MAXIMIZE_SPEED                                 ; 5          ; Untyped             ;
-; DEVICE_FAMILY                                  ; Cyclone II ; Untyped             ;
-; CARRY_CHAIN                                    ; MANUAL     ; Untyped             ;
-; APEX20K_TECHNOLOGY_MAPPER                      ; LUT        ; TECH_MAPPER_APEX20K ;
-; DEDICATED_MULTIPLIER_CIRCUITRY                 ; AUTO       ; Untyped             ;
-; DEDICATED_MULTIPLIER_MIN_INPUT_WIDTH_FOR_AUTO  ; 0          ; Untyped             ;
-; DEDICATED_MULTIPLIER_MIN_OUTPUT_WIDTH_FOR_AUTO ; 0          ; Untyped             ;
-; CBXI_PARAMETER                                 ; mult_7ct   ; Untyped             ;
-; INPUT_A_FIXED_VALUE                            ; Bx         ; Untyped             ;
-; INPUT_B_FIXED_VALUE                            ; Bx         ; Untyped             ;
-; USE_AHDL_IMPLEMENTATION                        ; OFF        ; Untyped             ;
-+------------------------------------------------+------------+---------------------+
-Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
-
-
 +-------------------------------------------------------------------------------------+
 ; altpll Parameter Settings by Entity Instance                                        ;
 +-------------------------------+-----------------------------------------------------+
@@ -1214,24 +662,86 @@ Note: In order to hide this table in the UI and the text report file, please set
 +-------------------------------+-----------------------------------------------------+
 
 
-+--------------------------------------------------------+
-; lpm_mult Parameter Settings by Entity Instance         ;
-+---------------------------------------+----------------+
-; Name                                  ; Value          ;
-+---------------------------------------+----------------+
-; Number of entity instances            ; 1              ;
-; Entity Instance                       ; lpm_mult:Mult0 ;
-;     -- LPM_WIDTHA                     ; 32             ;
-;     -- LPM_WIDTHB                     ; 31             ;
-;     -- LPM_WIDTHP                     ; 63             ;
-;     -- LPM_REPRESENTATION             ; UNSIGNED       ;
-;     -- INPUT_A_IS_CONSTANT            ; NO             ;
-;     -- INPUT_B_IS_CONSTANT            ; YES            ;
-;     -- USE_EAB                        ; OFF            ;
-;     -- DEDICATED_MULTIPLIER_CIRCUITRY ; AUTO           ;
-;     -- INPUT_A_FIXED_VALUE            ; Bx             ;
-;     -- INPUT_B_FIXED_VALUE            ; Bx             ;
-+---------------------------------------+----------------+
++----------------------------------------------------------------------------------------------------------------------+
+; Analysis & Elaboration Settings                                                                                      ;
++----------------------------------------------------------------------------+--------------------+--------------------+
+; Option                                                                     ; Setting            ; Default Value      ;
++----------------------------------------------------------------------------+--------------------+--------------------+
+; Device                                                                     ; EP2C8Q208C8        ;                    ;
+; Top-level entity name                                                      ; Penelope           ; Penelope           ;
+; Family name                                                                ; Cyclone II         ; Stratix            ;
+; State Machine Processing                                                   ; User-Encoded       ; Auto               ;
+; Power-Up Don't Care                                                        ; Off                ; On                 ;
+; Remove Redundant Logic Cells                                               ; On                 ; Off                ;
+; Timing-Driven Synthesis                                                    ; On                 ; Off                ;
+; Use smart compilation                                                      ; Off                ; Off                ;
+; Maximum processors allowed for parallel compilation                        ; 1                  ; 1                  ;
+; Enable parallel Assembler and TimeQuest Timing Analyzer during compilation ; On                 ; On                 ;
+; Enable compact report table                                                ; Off                ; Off                ;
+; Restructure Multiplexers                                                   ; Auto               ; Auto               ;
+; Create Debugging Nodes for IP Cores                                        ; Off                ; Off                ;
+; Preserve fewer node names                                                  ; On                 ; On                 ;
+; Disable OpenCore Plus hardware evaluation                                  ; Off                ; Off                ;
+; Verilog Version                                                            ; Verilog_2001       ; Verilog_2001       ;
+; VHDL Version                                                               ; VHDL_1993          ; VHDL_1993          ;
+; Safe State Machine                                                         ; Off                ; Off                ;
+; Extract Verilog State Machines                                             ; On                 ; On                 ;
+; Extract VHDL State Machines                                                ; On                 ; On                 ;
+; Ignore Verilog initial constructs                                          ; Off                ; Off                ;
+; Iteration limit for constant Verilog loops                                 ; 5000               ; 5000               ;
+; Iteration limit for non-constant Verilog loops                             ; 250                ; 250                ;
+; Add Pass-Through Logic to Inferred RAMs                                    ; On                 ; On                 ;
+; Parallel Synthesis                                                         ; On                 ; On                 ;
+; DSP Block Balancing                                                        ; Auto               ; Auto               ;
+; NOT Gate Push-Back                                                         ; On                 ; On                 ;
+; Remove Duplicate Registers                                                 ; On                 ; On                 ;
+; Ignore CARRY Buffers                                                       ; Off                ; Off                ;
+; Ignore CASCADE Buffers                                                     ; Off                ; Off                ;
+; Ignore GLOBAL Buffers                                                      ; Off                ; Off                ;
+; Ignore ROW GLOBAL Buffers                                                  ; Off                ; Off                ;
+; Ignore LCELL Buffers                                                       ; Off                ; Off                ;
+; Ignore SOFT Buffers                                                        ; On                 ; On                 ;
+; Limit AHDL Integers to 32 Bits                                             ; Off                ; Off                ;
+; Optimization Technique                                                     ; Balanced           ; Balanced           ;
+; Carry Chain Length                                                         ; 70                 ; 70                 ;
+; Auto Carry Chains                                                          ; On                 ; On                 ;
+; Auto Open-Drain Pins                                                       ; On                 ; On                 ;
+; Perform WYSIWYG Primitive Resynthesis                                      ; Off                ; Off                ;
+; Auto ROM Replacement                                                       ; On                 ; On                 ;
+; Auto RAM Replacement                                                       ; On                 ; On                 ;
+; Auto Shift Register Replacement                                            ; Auto               ; Auto               ;
+; Auto Clock Enable Replacement                                              ; On                 ; On                 ;
+; Strict RAM Replacement                                                     ; Off                ; Off                ;
+; Allow Synchronous Control Signals                                          ; On                 ; On                 ;
+; Force Use of Synchronous Clear Signals                                     ; Off                ; Off                ;
+; Auto RAM to Logic Cell Conversion                                          ; Off                ; Off                ;
+; Auto Resource Sharing                                                      ; Off                ; Off                ;
+; Allow Any RAM Size For Recognition                                         ; Off                ; Off                ;
+; Allow Any ROM Size For Recognition                                         ; Off                ; Off                ;
+; Allow Any Shift Register Size For Recognition                              ; Off                ; Off                ;
+; Use LogicLock Constraints during Resource Balancing                        ; On                 ; On                 ;
+; Ignore translate_off and synthesis_off directives                          ; Off                ; Off                ;
+; Report Parameter Settings                                                  ; On                 ; On                 ;
+; Report Source Assignments                                                  ; On                 ; On                 ;
+; Report Connectivity Checks                                                 ; On                 ; On                 ;
+; Ignore Maximum Fan-Out Assignments                                         ; Off                ; Off                ;
+; Synchronization Register Chain Length                                      ; 2                  ; 2                  ;
+; PowerPlay Power Optimization                                               ; Normal compilation ; Normal compilation ;
+; HDL message level                                                          ; Level2             ; Level2             ;
+; Suppress Register Optimization Related Messages                            ; Off                ; Off                ;
+; Number of Removed Registers Reported in Synthesis Report                   ; 100                ; 100                ;
+; Number of Inverted Registers Reported in Synthesis Report                  ; 100                ; 100                ;
+; Clock MUX Protection                                                       ; On                 ; On                 ;
+; Auto Gated Clock Conversion                                                ; Off                ; Off                ;
+; Block Design Naming                                                        ; Auto               ; Auto               ;
+; SDC constraint protection                                                  ; Off                ; Off                ;
+; Synthesis Effort                                                           ; Auto               ; Auto               ;
+; Shift Register Replacement - Allow Asynchronous Clear Signal               ; On                 ; On                 ;
+; Analysis & Synthesis Message Level                                         ; Medium             ; Medium             ;
+; Disable Register Merging Across Hierarchies                                ; Auto               ; Auto               ;
+; Resource Aware Inference For Block RAM                                     ; On                 ; On                 ;
+; Synthesis Seed                                                             ; 1                  ; 1                  ;
++----------------------------------------------------------------------------+--------------------+--------------------+
 
 
 +------------------------------------------------------------+
@@ -1355,23 +865,14 @@ Note: In order to hide this table in the UI and the text report file, please set
 +--------+--------+----------+----------------------------------------------------------------------------------------------------------+
 
 
-+-------------------------------+
-; Elapsed Time Per Partition    ;
-+----------------+--------------+
-; Partition Name ; Elapsed Time ;
-+----------------+--------------+
-; Top            ; 00:00:12     ;
-+----------------+--------------+
-
-
-+-------------------------------+
-; Analysis & Synthesis Messages ;
-+-------------------------------+
++---------------------------------+
+; Analysis & Elaboration Messages ;
++---------------------------------+
 Info: *******************************************************************
-Info: Running Quartus II Analysis & Synthesis
+Info: Running Quartus II Analysis & Elaboration
     Info: Version 10.1 Build 197 01/19/2011 Service Pack 1 SJ Web Edition
-    Info: Processing started: Sat Feb 12 17:17:47 2011
-Info: Command: quartus_map --read_settings_files=on --write_settings_files=off Penelope -c Penelope
+    Info: Processing started: Mon Feb 14 16:18:55 2011
+Info: Command: quartus_map --read_settings_files=on --write_settings_files=off Penelope -c Penelope --analysis_and_elaboration
 Info: Found 1 design units, including 1 entities, in source file cpl_cordic.v
     Info: Found entity 1: cpl_cordic
 Info: Found 1 design units, including 1 entities, in source file pll_clock_detector.v
@@ -1386,22 +887,17 @@ Info: Found 1 design units, including 1 entities, in source file common/clk_lrcl
     Info: Found entity 1: clk_lrclk_gen
 Info: Found 1 design units, including 1 entities, in source file common/clk_div.v
     Info: Found entity 1: clk_div
-Warning: Can't analyze file -- file ALC.v is missing
 Info: Found 1 design units, including 1 entities, in source file oddclockdiv.v
     Info: Found entity 1: oddClockDivider
 Info: Found 1 design units, including 1 entities, in source file adc.v
     Info: Found entity 1: ADC
-Warning: Can't analyze file -- file phase_accumulator.v is missing
 Info: Found 1 design units, including 1 entities, in source file cicint.v
     Info: Found entity 1: cicint
 Info: Found 1 design units, including 1 entities, in source file penelope.v
     Info: Found entity 1: Penelope
 Info: Found 1 design units, including 1 entities, in source file common/i2s_rcv.v
     Info: Found entity 1: I2S_rcv
-Warning (10236): Verilog HDL Implicit Net warning at Penelope.v(458): created implicit net for "PMW2"
 Info: Elaborating entity "Penelope" for the top level hierarchy
-Warning (10036): Verilog HDL or VHDL warning at Penelope.v(458): object "PMW2" assigned a value but never read
-Warning (10034): Output port "PWM2" at Penelope.v(132) has no driver
 Info: Elaborating entity "clk_div" for hierarchy "clk_div:TLVCLK"
 Info: Elaborating entity "clk_lrclk_gen" for hierarchy "clk_lrclk_gen:clrgen"
 Warning (10230): Verilog HDL assignment warning at clk_lrclk_gen.v(63): truncated value with size 32 to match size of target (16)
@@ -1481,44 +977,11 @@ Info: Elaborating entity "NWire_xmit" for hierarchy "NWire_xmit:P_MIC"
 Info: Elaborating entity "I2S_rcv" for hierarchy "I2S_rcv:PJD"
 Info: Elaborating entity "NWire_xmit" for hierarchy "NWire_xmit:ser_no"
 Info: Elaborating entity "oddClockDivider" for hierarchy "oddClockDivider:refClockDivider"
-Warning: Clock multiplexers are found and protected
-    Warning: Found clock multiplexer reference
-Info: Inferred 1 megafunctions from design logic
-    Info: Inferred multiplier megafunction ("lpm_mult") from the following logic: "Mult0"
-Info: Elaborated megafunction instantiation "lpm_mult:Mult0"
-Info: Instantiated megafunction "lpm_mult:Mult0" with the following parameter:
-    Info: Parameter "LPM_WIDTHA" = "32"
-    Info: Parameter "LPM_WIDTHB" = "31"
-    Info: Parameter "LPM_WIDTHP" = "63"
-    Info: Parameter "LPM_WIDTHR" = "63"
-    Info: Parameter "LPM_WIDTHS" = "1"
-    Info: Parameter "LPM_REPRESENTATION" = "UNSIGNED"
-    Info: Parameter "INPUT_A_IS_CONSTANT" = "NO"
-    Info: Parameter "INPUT_B_IS_CONSTANT" = "YES"
-    Info: Parameter "MAXIMIZE_SPEED" = "5"
-Info: Found 1 design units, including 1 entities, in source file db/mult_7ct.tdf
-    Info: Found entity 1: mult_7ct
 Warning: 5 hierarchies have connectivity warnings - see the Connectivity Checks report folder
-Info: Ignored 168 buffer(s)
-    Info: Ignored 168 SOFT buffer(s)
-Info: 4 registers lost all their fanouts during netlist optimizations. The first 4 are displayed below.
-    Info: Register "cpl_cordic:cordic_inst|X[18][22]" lost all its fanouts during netlist optimizations.
-    Info: Register "cpl_cordic:cordic_inst|X[18][21]" lost all its fanouts during netlist optimizations.
-    Info: Register "cpl_cordic:cordic_inst|X[17][22]" lost all its fanouts during netlist optimizations.
-    Info: Register "cpl_cordic:cordic_inst|X[17][21]" lost all its fanouts during netlist optimizations.
-Info: Generating hard_block partition "hard_block:auto_generated_inst"
-    Info: Adding node "PLL_clock_detector:PLL_inst|altpll:altpll_component|pll"
-Info: Implemented 4924 device resources after synthesis - the final resource count might be different
-    Info: Implemented 8 input pins
-    Info: Implemented 49 output pins
-    Info: Implemented 1 bidirectional pins
-    Info: Implemented 4857 logic cells
-    Info: Implemented 1 PLLs
-    Info: Implemented 8 DSP elements
-Info: Quartus II Analysis & Synthesis was successful. 0 errors, 17 warnings
-    Info: Peak virtual memory: 230 megabytes
-    Info: Processing ended: Sat Feb 12 17:18:09 2011
-    Info: Elapsed time: 00:00:22
-    Info: Total CPU time (on all processors): 00:00:15
+Info: Quartus II Analysis & Elaboration was successful. 0 errors, 10 warnings
+    Info: Peak virtual memory: 216 megabytes
+    Info: Processing ended: Mon Feb 14 16:19:02 2011
+    Info: Elapsed time: 00:00:07
+    Info: Total CPU time (on all processors): 00:00:03
 
 
