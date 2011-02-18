@@ -88,6 +88,9 @@ MainWindow::MainWindow(QWidget *parent) :
     if(ui->interfaceComboBox->count()>0) {
         ui->interfaceComboBox->setCurrentIndex(0);
         interfaceSelected(0);
+    } else {
+        // dont allow discovery if no interface found
+        ui->discoverPushButton->setEnabled(false);
     }
 
     bootloader=false;
