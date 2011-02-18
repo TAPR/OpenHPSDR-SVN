@@ -11,13 +11,34 @@
 #endif // Q_WS_MAC
 
 
+void myMessageOutput(QtMsgType type, const char *msg)
+ {
+     switch (type) {
+     case QtDebugMsg:
+         fprintf(stderr, "Debug: %s\n", msg);
+         break;
+     case QtWarningMsg:
+         fprintf(stderr, "Warning: %s\n", msg);
+         break;
+     case QtCriticalMsg:
+         fprintf(stderr, "Critical: %s\n", msg);
+         break;
+     case QtFatalMsg:
+         fprintf(stderr, "Fatal: %s\n", msg);
+         abort();
+     }
+ }
 
 int main(int argc, char *argv[])
 {
     char myPath[PATH_MAX];
     uint32_t pathSize=sizeof(myPath);
 
-        //  Gain admin privileges on the Mac
+    // install debug message handler
+    qInstallMsgHandler(myMessageOutput);
+
+
+    //  Gain admin privileges on the Mac
 #ifdef Q_WS_MAC
 
     if(geteuid() != 0) {
@@ -61,6 +82,7 @@ int main(int argc, char *argv[])
         *slash = '\0';
     }
 #endif // Q_WS_MAC
+
 
 
     QApplication a(argc, argv);
