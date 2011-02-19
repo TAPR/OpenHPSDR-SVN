@@ -28865,8 +28865,7 @@ namespace PowerSDR
 		private int count11 = 0;
 		private double timer12 = 0.0;
 		private int count12 = 0;*/
-
-        //int* dbuff;        
+        
 		private bool mox = false;
 		private void chkMOX_CheckedChanged2(object sender, System.EventArgs e)
 		{
@@ -28986,7 +28985,7 @@ namespace PowerSDR
 
 				/*t1.Stop();
 				timer3 += t1.DurationMsec;
-				count3++;*/ //w5wc
+				count3++;*/ 
 
 				switch(rx1_dsp_mode)
 				{

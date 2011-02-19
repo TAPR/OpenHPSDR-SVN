@@ -977,7 +977,7 @@ namespace PowerSDR
 			}
 		}
 
-        public void PTTODelayStart()
+        private void PTTODelayStart()
         {
             Thread t = new Thread(new ThreadStart(PTTODelay));
             t.Name = "Run PTT Out Delay Thread";

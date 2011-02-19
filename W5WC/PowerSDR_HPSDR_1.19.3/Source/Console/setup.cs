@@ -24238,7 +24238,6 @@ namespace PowerSDR
                 grpPAGainByBand.Visible = true;
                 grpGeneralHardwareSDR1000.Visible = false;
                 grpGeneralDDS.Visible = false;
-                chkGeneralDisablePTT.Checked = false; //w5wc
                 btnWizard.Visible = true;
                 chkGeneralRXOnly.Checked = false;
                 chkGeneralRXOnly.Enabled = true;
