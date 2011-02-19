@@ -168,6 +168,7 @@ namespace PowerSDR
 		public Register8 rfe_ic10;
 		public Register8 rfe_ic7;
 		public Register8 rfe_ic11;
+        public static Console console = null;
 
 		#endregion
 
@@ -262,12 +263,33 @@ namespace PowerSDR
             set { ozy_control = value; }
         }
 
+        private bool ptto_delay_control = false;
+        public bool PTTODelayControl
+        {
+            get { return ptto_delay_control; }
+            set { ptto_delay_control = value; }
+        }
+
 		private int pll_mult = 1;
 		public int PLLMult
 		{
 			//get { return pll_mult; }
 			set { pll_mult = value; }
 		}
+
+        private static int ptt_out_delay = 20;
+        public static int PTTOutDelay
+        {
+            get { return ptt_out_delay; }
+            set { ptt_out_delay = value; }
+        }
+
+        private bool tun_control = false;
+        public bool TUNControl
+        {
+            get { return tun_control; }
+            set { tun_control = value; }
+        }
 
 		#endregion
 
@@ -383,6 +405,7 @@ namespace PowerSDR
                 if (value)
                 {
                     JanusAudio.SetXmitBit(1);
+
                     if (c.serialPTT != null)
                     {
                         c.serialPTT.setDTR(true);
@@ -397,7 +420,13 @@ namespace PowerSDR
                 }
                 else
                 {
-                    JanusAudio.SetXmitBit(0);
+                    if (ptto_delay_control &&
+                        c.RX1DSPMode != DSPMode.CWL &&
+                        c.RX1DSPMode != DSPMode.CWU)
+                        PTTODelayStart();
+                    else
+                        JanusAudio.SetXmitBit(0);
+  
                     if (c.serialPTT != null)
                     {
                         c.serialPTT.setDTR(false);
@@ -947,6 +976,24 @@ namespace PowerSDR
 				LatchRegister(lpt_addr, PIO_IC8, (byte)(addr | DDSWRB));
 			}
 		}
+
+        public void PTTODelayStart()
+        {
+            Thread t = new Thread(new ThreadStart(PTTODelay));
+            t.Name = "Run PTT Out Delay Thread";
+            t.IsBackground = true;
+            t.Priority = ThreadPriority.Highest;
+            t.Start();
+        }
+
+        private void PTTODelay()
+        {
+            HiPerfTimer t1 = new HiPerfTimer();
+                t1.Start();
+                t1.Stop();
+                while (t1.DurationMsec < ptt_out_delay) t1.Stop();
+                JanusAudio.SetXmitBit(0);
+        }
 
 		#endregion
 

@@ -1396,6 +1396,13 @@ namespace PowerSDR
         private NumericUpDown udFMDev;
         private TrackBarTS tbFMDev;
         private CheckBoxTS chkPennyLane;
+        private LabelTS lblPTTOutDelay;
+        private NumericUpDownTS udGenPTTOutDelay;
+        private CheckBoxTS chkPTTOutDelay;
+        private GroupBoxTS grpDiagInfo;
+        private LabelTS lblSyncData;
+        private LabelTS lblMoxDelay;
+        private NumericUpDownTS udMoxDelay;
         private System.ComponentModel.IContainer components;
 
         #endregion
@@ -1620,6 +1627,14 @@ namespace PowerSDR
             this.grpSI570 = new System.Windows.Forms.GroupBoxTS();
             this.labelTS8 = new System.Windows.Forms.LabelTS();
             this.udFXtal = new System.Windows.Forms.NumericUpDownTS();
+            this.grpGeneralDDS = new System.Windows.Forms.GroupBoxTS();
+            this.chkGenDDSExpert = new System.Windows.Forms.CheckBoxTS();
+            this.udDDSCorrection = new System.Windows.Forms.NumericUpDownTS();
+            this.lblClockCorrection = new System.Windows.Forms.LabelTS();
+            this.udDDSIFFreq = new System.Windows.Forms.NumericUpDownTS();
+            this.lblIFFrequency = new System.Windows.Forms.LabelTS();
+            this.udDDSPLLMult = new System.Windows.Forms.NumericUpDownTS();
+            this.lblPLLMult = new System.Windows.Forms.LabelTS();
             this.groupBoxHPSDRHW = new System.Windows.Forms.GroupBoxTS();
             this.chkPennyLane = new System.Windows.Forms.CheckBoxTS();
             this.chkExcaliburPresent = new System.Windows.Forms.CheckBoxTS();
@@ -1650,14 +1665,6 @@ namespace PowerSDR
             this.udGeneralLPTDelay = new System.Windows.Forms.NumericUpDownTS();
             this.lblGeneralLPTAddr = new System.Windows.Forms.LabelTS();
             this.comboGeneralLPTAddr = new System.Windows.Forms.ComboBoxTS();
-            this.grpGeneralDDS = new System.Windows.Forms.GroupBoxTS();
-            this.chkGenDDSExpert = new System.Windows.Forms.CheckBoxTS();
-            this.udDDSCorrection = new System.Windows.Forms.NumericUpDownTS();
-            this.lblClockCorrection = new System.Windows.Forms.LabelTS();
-            this.udDDSIFFreq = new System.Windows.Forms.NumericUpDownTS();
-            this.lblIFFrequency = new System.Windows.Forms.LabelTS();
-            this.udDDSPLLMult = new System.Windows.Forms.NumericUpDownTS();
-            this.lblPLLMult = new System.Windows.Forms.LabelTS();
             this.tpGeneralOptions = new System.Windows.Forms.TabPage();
             this.grpGenCustomTitleText = new System.Windows.Forms.GroupBoxTS();
             this.txtGenCustomTitle = new System.Windows.Forms.TextBoxTS();
@@ -1679,6 +1686,10 @@ namespace PowerSDR
             this.lblOptClickTuneDIGU = new System.Windows.Forms.LabelTS();
             this.udOptClickTuneOffsetDIGU = new System.Windows.Forms.NumericUpDownTS();
             this.grpGeneralOptions = new System.Windows.Forms.GroupBoxTS();
+            this.lblMoxDelay = new System.Windows.Forms.LabelTS();
+            this.udMoxDelay = new System.Windows.Forms.NumericUpDownTS();
+            this.chkPTTOutDelay = new System.Windows.Forms.CheckBoxTS();
+            this.udGenPTTOutDelay = new System.Windows.Forms.NumericUpDownTS();
             this.chkGenAllModeMicPTT = new System.Windows.Forms.CheckBoxTS();
             this.chkGeneralSpurRed = new System.Windows.Forms.CheckBoxTS();
             this.chkGeneralDisablePTT = new System.Windows.Forms.CheckBoxTS();
@@ -1686,12 +1697,13 @@ namespace PowerSDR
             this.chkSplitOff = new System.Windows.Forms.CheckBoxTS();
             this.chkGeneralCustomFilter = new System.Windows.Forms.CheckBoxTS();
             this.chkGenOptionsShowATUPopup = new System.Windows.Forms.CheckBoxTS();
+            this.udGenTX1Delay = new System.Windows.Forms.NumericUpDownTS();
+            this.udGeneralX2Delay = new System.Windows.Forms.NumericUpDownTS();
+            this.lblGenTX1Delay = new System.Windows.Forms.LabelTS();
+            this.lblGeneralX2Delay = new System.Windows.Forms.LabelTS();
+            this.lblPTTOutDelay = new System.Windows.Forms.LabelTS();
             this.chkGeneralEnableX2 = new System.Windows.Forms.CheckBoxTS();
             this.chkGenTX1Delay = new System.Windows.Forms.CheckBoxTS();
-            this.lblGeneralX2Delay = new System.Windows.Forms.LabelTS();
-            this.lblGenTX1Delay = new System.Windows.Forms.LabelTS();
-            this.udGeneralX2Delay = new System.Windows.Forms.NumericUpDownTS();
-            this.udGenTX1Delay = new System.Windows.Forms.NumericUpDownTS();
             this.grpGeneralProcessPriority = new System.Windows.Forms.GroupBoxTS();
             this.comboGeneralProcessPriority = new System.Windows.Forms.ComboBoxTS();
             this.grpGeneralUpdates = new System.Windows.Forms.GroupBoxTS();
@@ -2922,6 +2934,8 @@ namespace PowerSDR
             this.btnImpulse = new System.Windows.Forms.ButtonTS();
             this.grpTestAudioBalance = new System.Windows.Forms.GroupBoxTS();
             this.btnTestAudioBalStart = new System.Windows.Forms.ButtonTS();
+            this.grpDiagInfo = new System.Windows.Forms.GroupBoxTS();
+            this.lblSyncData = new System.Windows.Forms.LabelTS();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.btnExportDB = new System.Windows.Forms.ButtonTS();
@@ -2946,15 +2960,15 @@ namespace PowerSDR
             ((System.ComponentModel.ISupportInitialize)(this.udSoftRockCenterFreq)).BeginInit();
             this.grpSI570.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.udFXtal)).BeginInit();
+            this.grpGeneralDDS.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.udDDSCorrection)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.udDDSIFFreq)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.udDDSPLLMult)).BeginInit();
             this.groupBoxHPSDRHW.SuspendLayout();
             this.grpGeneralHardwareFLEX5000.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.udF3KFanTempThresh)).BeginInit();
             this.grpGeneralHardwareSDR1000.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.udGeneralLPTDelay)).BeginInit();
-            this.grpGeneralDDS.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.udDDSCorrection)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.udDDSIFFreq)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.udDDSPLLMult)).BeginInit();
             this.tpGeneralOptions.SuspendLayout();
             this.grpGenCustomTitleText.SuspendLayout();
             this.grpOptMisc.SuspendLayout();
@@ -2964,8 +2978,10 @@ namespace PowerSDR
             ((System.ComponentModel.ISupportInitialize)(this.udOptClickTuneOffsetDIGL)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.udOptClickTuneOffsetDIGU)).BeginInit();
             this.grpGeneralOptions.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.udGeneralX2Delay)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.udMoxDelay)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.udGenPTTOutDelay)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.udGenTX1Delay)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.udGeneralX2Delay)).BeginInit();
             this.grpGeneralProcessPriority.SuspendLayout();
             this.grpGeneralUpdates.SuspendLayout();
             this.tpGeneralCalibration.SuspendLayout();
@@ -3252,6 +3268,7 @@ namespace PowerSDR
             this.grpImpulseTest.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.udImpulseNum)).BeginInit();
             this.grpTestAudioBalance.SuspendLayout();
+            this.grpDiagInfo.SuspendLayout();
             this.SuspendLayout();
             // 
             // tcSetup
@@ -3311,10 +3328,10 @@ namespace PowerSDR
             this.tpGeneralHardware.Controls.Add(this.chkGeneralRXOnly);
             this.tpGeneralHardware.Controls.Add(this.grpHWSoftRock);
             this.tpGeneralHardware.Controls.Add(this.grpSI570);
+            this.tpGeneralHardware.Controls.Add(this.grpGeneralDDS);
             this.tpGeneralHardware.Controls.Add(this.groupBoxHPSDRHW);
             this.tpGeneralHardware.Controls.Add(this.grpGeneralHardwareFLEX5000);
             this.tpGeneralHardware.Controls.Add(this.grpGeneralHardwareSDR1000);
-            this.tpGeneralHardware.Controls.Add(this.grpGeneralDDS);
             this.tpGeneralHardware.Location = new System.Drawing.Point(4, 22);
             this.tpGeneralHardware.Name = "tpGeneralHardware";
             this.tpGeneralHardware.Size = new System.Drawing.Size(592, 318);
@@ -3660,6 +3677,155 @@ namespace PowerSDR
             0,
             0,
             0});
+            // 
+            // grpGeneralDDS
+            // 
+            this.grpGeneralDDS.Controls.Add(this.chkGenDDSExpert);
+            this.grpGeneralDDS.Controls.Add(this.udDDSCorrection);
+            this.grpGeneralDDS.Controls.Add(this.lblClockCorrection);
+            this.grpGeneralDDS.Controls.Add(this.udDDSIFFreq);
+            this.grpGeneralDDS.Controls.Add(this.lblIFFrequency);
+            this.grpGeneralDDS.Controls.Add(this.udDDSPLLMult);
+            this.grpGeneralDDS.Controls.Add(this.lblPLLMult);
+            this.grpGeneralDDS.Location = new System.Drawing.Point(328, 8);
+            this.grpGeneralDDS.Name = "grpGeneralDDS";
+            this.grpGeneralDDS.Size = new System.Drawing.Size(176, 136);
+            this.grpGeneralDDS.TabIndex = 4;
+            this.grpGeneralDDS.TabStop = false;
+            this.grpGeneralDDS.Text = "DDS";
+            // 
+            // chkGenDDSExpert
+            // 
+            this.chkGenDDSExpert.Image = null;
+            this.chkGenDDSExpert.Location = new System.Drawing.Point(56, 104);
+            this.chkGenDDSExpert.Name = "chkGenDDSExpert";
+            this.chkGenDDSExpert.Size = new System.Drawing.Size(56, 24);
+            this.chkGenDDSExpert.TabIndex = 8;
+            this.chkGenDDSExpert.Text = "Expert";
+            this.chkGenDDSExpert.CheckedChanged += new System.EventHandler(this.chkGenDDSExpert_CheckedChanged);
+            // 
+            // udDDSCorrection
+            // 
+            this.udDDSCorrection.Increment = new decimal(new int[] {
+            10,
+            0,
+            0,
+            0});
+            this.udDDSCorrection.Location = new System.Drawing.Point(104, 24);
+            this.udDDSCorrection.Maximum = new decimal(new int[] {
+            1000000,
+            0,
+            0,
+            0});
+            this.udDDSCorrection.Minimum = new decimal(new int[] {
+            1000000,
+            0,
+            0,
+            -2147483648});
+            this.udDDSCorrection.Name = "udDDSCorrection";
+            this.udDDSCorrection.Size = new System.Drawing.Size(64, 20);
+            this.udDDSCorrection.TabIndex = 7;
+            this.toolTip1.SetToolTip(this.udDDSCorrection, "Correction for DDS frequency");
+            this.udDDSCorrection.Value = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+            this.udDDSCorrection.Visible = false;
+            this.udDDSCorrection.ValueChanged += new System.EventHandler(this.udDDSCorrection_ValueChanged);
+            this.udDDSCorrection.LostFocus += new System.EventHandler(this.udDDSCorrection_LostFocus);
+            // 
+            // lblClockCorrection
+            // 
+            this.lblClockCorrection.Image = null;
+            this.lblClockCorrection.Location = new System.Drawing.Point(16, 24);
+            this.lblClockCorrection.Name = "lblClockCorrection";
+            this.lblClockCorrection.Size = new System.Drawing.Size(72, 23);
+            this.lblClockCorrection.TabIndex = 6;
+            this.lblClockCorrection.Text = "Clock Offset:";
+            this.lblClockCorrection.Visible = false;
+            // 
+            // udDDSIFFreq
+            // 
+            this.udDDSIFFreq.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.udDDSIFFreq.Location = new System.Drawing.Point(112, 72);
+            this.udDDSIFFreq.Maximum = new decimal(new int[] {
+            20000,
+            0,
+            0,
+            0});
+            this.udDDSIFFreq.Minimum = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+            this.udDDSIFFreq.Name = "udDDSIFFreq";
+            this.udDDSIFFreq.Size = new System.Drawing.Size(56, 20);
+            this.udDDSIFFreq.TabIndex = 5;
+            this.toolTip1.SetToolTip(this.udDDSIFFreq, "Intermediate Frequency");
+            this.udDDSIFFreq.Value = new decimal(new int[] {
+            9000,
+            0,
+            0,
+            0});
+            this.udDDSIFFreq.Visible = false;
+            this.udDDSIFFreq.ValueChanged += new System.EventHandler(this.udDDSIFFreq_ValueChanged);
+            this.udDDSIFFreq.LostFocus += new System.EventHandler(this.udDDSIFFreq_LostFocus);
+            // 
+            // lblIFFrequency
+            // 
+            this.lblIFFrequency.Image = null;
+            this.lblIFFrequency.Location = new System.Drawing.Point(16, 72);
+            this.lblIFFrequency.Name = "lblIFFrequency";
+            this.lblIFFrequency.Size = new System.Drawing.Size(48, 23);
+            this.lblIFFrequency.TabIndex = 4;
+            this.lblIFFrequency.Text = "IF (Hz):";
+            this.lblIFFrequency.Visible = false;
+            // 
+            // udDDSPLLMult
+            // 
+            this.udDDSPLLMult.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.udDDSPLLMult.Location = new System.Drawing.Point(120, 48);
+            this.udDDSPLLMult.Maximum = new decimal(new int[] {
+            20,
+            0,
+            0,
+            0});
+            this.udDDSPLLMult.Minimum = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+            this.udDDSPLLMult.Name = "udDDSPLLMult";
+            this.udDDSPLLMult.Size = new System.Drawing.Size(48, 20);
+            this.udDDSPLLMult.TabIndex = 3;
+            this.toolTip1.SetToolTip(this.udDDSPLLMult, "Multiplier for external clock (1 if using internal clock)");
+            this.udDDSPLLMult.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.udDDSPLLMult.Visible = false;
+            this.udDDSPLLMult.ValueChanged += new System.EventHandler(this.udDDSPLLMult_ValueChanged);
+            this.udDDSPLLMult.LostFocus += new System.EventHandler(this.udDDSPLLMult_LostFocus);
+            // 
+            // lblPLLMult
+            // 
+            this.lblPLLMult.Image = null;
+            this.lblPLLMult.Location = new System.Drawing.Point(16, 48);
+            this.lblPLLMult.Name = "lblPLLMult";
+            this.lblPLLMult.Size = new System.Drawing.Size(80, 23);
+            this.lblPLLMult.TabIndex = 2;
+            this.lblPLLMult.Text = "PLL Multiplier:";
+            this.lblPLLMult.Visible = false;
             // 
             // groupBoxHPSDRHW
             // 
@@ -4050,155 +4216,6 @@ namespace PowerSDR
             this.comboGeneralLPTAddr.SelectedIndexChanged += new System.EventHandler(this.comboGeneralLPTAddr_SelectedIndexChanged);
             this.comboGeneralLPTAddr.KeyDown += new System.Windows.Forms.KeyEventHandler(this.comboGeneralLPTAddr_KeyDown);
             // 
-            // grpGeneralDDS
-            // 
-            this.grpGeneralDDS.Controls.Add(this.chkGenDDSExpert);
-            this.grpGeneralDDS.Controls.Add(this.udDDSCorrection);
-            this.grpGeneralDDS.Controls.Add(this.lblClockCorrection);
-            this.grpGeneralDDS.Controls.Add(this.udDDSIFFreq);
-            this.grpGeneralDDS.Controls.Add(this.lblIFFrequency);
-            this.grpGeneralDDS.Controls.Add(this.udDDSPLLMult);
-            this.grpGeneralDDS.Controls.Add(this.lblPLLMult);
-            this.grpGeneralDDS.Location = new System.Drawing.Point(328, 8);
-            this.grpGeneralDDS.Name = "grpGeneralDDS";
-            this.grpGeneralDDS.Size = new System.Drawing.Size(176, 136);
-            this.grpGeneralDDS.TabIndex = 4;
-            this.grpGeneralDDS.TabStop = false;
-            this.grpGeneralDDS.Text = "DDS";
-            // 
-            // chkGenDDSExpert
-            // 
-            this.chkGenDDSExpert.Image = null;
-            this.chkGenDDSExpert.Location = new System.Drawing.Point(56, 104);
-            this.chkGenDDSExpert.Name = "chkGenDDSExpert";
-            this.chkGenDDSExpert.Size = new System.Drawing.Size(56, 24);
-            this.chkGenDDSExpert.TabIndex = 8;
-            this.chkGenDDSExpert.Text = "Expert";
-            this.chkGenDDSExpert.CheckedChanged += new System.EventHandler(this.chkGenDDSExpert_CheckedChanged);
-            // 
-            // udDDSCorrection
-            // 
-            this.udDDSCorrection.Increment = new decimal(new int[] {
-            10,
-            0,
-            0,
-            0});
-            this.udDDSCorrection.Location = new System.Drawing.Point(104, 24);
-            this.udDDSCorrection.Maximum = new decimal(new int[] {
-            1000000,
-            0,
-            0,
-            0});
-            this.udDDSCorrection.Minimum = new decimal(new int[] {
-            1000000,
-            0,
-            0,
-            -2147483648});
-            this.udDDSCorrection.Name = "udDDSCorrection";
-            this.udDDSCorrection.Size = new System.Drawing.Size(64, 20);
-            this.udDDSCorrection.TabIndex = 7;
-            this.toolTip1.SetToolTip(this.udDDSCorrection, "Correction for DDS frequency");
-            this.udDDSCorrection.Value = new decimal(new int[] {
-            0,
-            0,
-            0,
-            0});
-            this.udDDSCorrection.Visible = false;
-            this.udDDSCorrection.ValueChanged += new System.EventHandler(this.udDDSCorrection_ValueChanged);
-            this.udDDSCorrection.LostFocus += new System.EventHandler(this.udDDSCorrection_LostFocus);
-            // 
-            // lblClockCorrection
-            // 
-            this.lblClockCorrection.Image = null;
-            this.lblClockCorrection.Location = new System.Drawing.Point(16, 24);
-            this.lblClockCorrection.Name = "lblClockCorrection";
-            this.lblClockCorrection.Size = new System.Drawing.Size(72, 23);
-            this.lblClockCorrection.TabIndex = 6;
-            this.lblClockCorrection.Text = "Clock Offset:";
-            this.lblClockCorrection.Visible = false;
-            // 
-            // udDDSIFFreq
-            // 
-            this.udDDSIFFreq.Increment = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.udDDSIFFreq.Location = new System.Drawing.Point(112, 72);
-            this.udDDSIFFreq.Maximum = new decimal(new int[] {
-            20000,
-            0,
-            0,
-            0});
-            this.udDDSIFFreq.Minimum = new decimal(new int[] {
-            0,
-            0,
-            0,
-            0});
-            this.udDDSIFFreq.Name = "udDDSIFFreq";
-            this.udDDSIFFreq.Size = new System.Drawing.Size(56, 20);
-            this.udDDSIFFreq.TabIndex = 5;
-            this.toolTip1.SetToolTip(this.udDDSIFFreq, "Intermediate Frequency");
-            this.udDDSIFFreq.Value = new decimal(new int[] {
-            9000,
-            0,
-            0,
-            0});
-            this.udDDSIFFreq.Visible = false;
-            this.udDDSIFFreq.ValueChanged += new System.EventHandler(this.udDDSIFFreq_ValueChanged);
-            this.udDDSIFFreq.LostFocus += new System.EventHandler(this.udDDSIFFreq_LostFocus);
-            // 
-            // lblIFFrequency
-            // 
-            this.lblIFFrequency.Image = null;
-            this.lblIFFrequency.Location = new System.Drawing.Point(16, 72);
-            this.lblIFFrequency.Name = "lblIFFrequency";
-            this.lblIFFrequency.Size = new System.Drawing.Size(48, 23);
-            this.lblIFFrequency.TabIndex = 4;
-            this.lblIFFrequency.Text = "IF (Hz):";
-            this.lblIFFrequency.Visible = false;
-            // 
-            // udDDSPLLMult
-            // 
-            this.udDDSPLLMult.Increment = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.udDDSPLLMult.Location = new System.Drawing.Point(120, 48);
-            this.udDDSPLLMult.Maximum = new decimal(new int[] {
-            20,
-            0,
-            0,
-            0});
-            this.udDDSPLLMult.Minimum = new decimal(new int[] {
-            0,
-            0,
-            0,
-            0});
-            this.udDDSPLLMult.Name = "udDDSPLLMult";
-            this.udDDSPLLMult.Size = new System.Drawing.Size(48, 20);
-            this.udDDSPLLMult.TabIndex = 3;
-            this.toolTip1.SetToolTip(this.udDDSPLLMult, "Multiplier for external clock (1 if using internal clock)");
-            this.udDDSPLLMult.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.udDDSPLLMult.Visible = false;
-            this.udDDSPLLMult.ValueChanged += new System.EventHandler(this.udDDSPLLMult_ValueChanged);
-            this.udDDSPLLMult.LostFocus += new System.EventHandler(this.udDDSPLLMult_LostFocus);
-            // 
-            // lblPLLMult
-            // 
-            this.lblPLLMult.Image = null;
-            this.lblPLLMult.Location = new System.Drawing.Point(16, 48);
-            this.lblPLLMult.Name = "lblPLLMult";
-            this.lblPLLMult.Size = new System.Drawing.Size(80, 23);
-            this.lblPLLMult.TabIndex = 2;
-            this.lblPLLMult.Text = "PLL Multiplier:";
-            this.lblPLLMult.Visible = false;
-            // 
             // tpGeneralOptions
             // 
             this.tpGeneralOptions.BackColor = System.Drawing.SystemColors.Control;
@@ -4472,6 +4489,10 @@ namespace PowerSDR
             // 
             // grpGeneralOptions
             // 
+            this.grpGeneralOptions.Controls.Add(this.lblMoxDelay);
+            this.grpGeneralOptions.Controls.Add(this.udMoxDelay);
+            this.grpGeneralOptions.Controls.Add(this.chkPTTOutDelay);
+            this.grpGeneralOptions.Controls.Add(this.udGenPTTOutDelay);
             this.grpGeneralOptions.Controls.Add(this.chkGenAllModeMicPTT);
             this.grpGeneralOptions.Controls.Add(this.chkGeneralSpurRed);
             this.grpGeneralOptions.Controls.Add(this.chkGeneralDisablePTT);
@@ -4479,18 +4500,105 @@ namespace PowerSDR
             this.grpGeneralOptions.Controls.Add(this.chkSplitOff);
             this.grpGeneralOptions.Controls.Add(this.chkGeneralCustomFilter);
             this.grpGeneralOptions.Controls.Add(this.chkGenOptionsShowATUPopup);
+            this.grpGeneralOptions.Controls.Add(this.udGenTX1Delay);
+            this.grpGeneralOptions.Controls.Add(this.udGeneralX2Delay);
+            this.grpGeneralOptions.Controls.Add(this.lblGenTX1Delay);
+            this.grpGeneralOptions.Controls.Add(this.lblGeneralX2Delay);
+            this.grpGeneralOptions.Controls.Add(this.lblPTTOutDelay);
             this.grpGeneralOptions.Controls.Add(this.chkGeneralEnableX2);
             this.grpGeneralOptions.Controls.Add(this.chkGenTX1Delay);
-            this.grpGeneralOptions.Controls.Add(this.lblGeneralX2Delay);
-            this.grpGeneralOptions.Controls.Add(this.lblGenTX1Delay);
-            this.grpGeneralOptions.Controls.Add(this.udGeneralX2Delay);
-            this.grpGeneralOptions.Controls.Add(this.udGenTX1Delay);
             this.grpGeneralOptions.Location = new System.Drawing.Point(8, 8);
             this.grpGeneralOptions.Name = "grpGeneralOptions";
             this.grpGeneralOptions.Size = new System.Drawing.Size(248, 144);
             this.grpGeneralOptions.TabIndex = 6;
             this.grpGeneralOptions.TabStop = false;
             this.grpGeneralOptions.Text = "Options";
+            // 
+            // lblMoxDelay
+            // 
+            this.lblMoxDelay.Image = null;
+            this.lblMoxDelay.Location = new System.Drawing.Point(115, 56);
+            this.lblMoxDelay.Name = "lblMoxDelay";
+            this.lblMoxDelay.Size = new System.Drawing.Size(65, 23);
+            this.lblMoxDelay.TabIndex = 21;
+            this.lblMoxDelay.Text = "MOX Delay:";
+            this.lblMoxDelay.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.lblMoxDelay.Visible = false;
+            // 
+            // udMoxDelay
+            // 
+            this.udMoxDelay.Enabled = false;
+            this.udMoxDelay.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.udMoxDelay.Location = new System.Drawing.Point(184, 58);
+            this.udMoxDelay.Maximum = new decimal(new int[] {
+            50,
+            0,
+            0,
+            0});
+            this.udMoxDelay.Minimum = new decimal(new int[] {
+            5,
+            0,
+            0,
+            0});
+            this.udMoxDelay.Name = "udMoxDelay";
+            this.udMoxDelay.Size = new System.Drawing.Size(48, 20);
+            this.udMoxDelay.TabIndex = 20;
+            this.toolTip1.SetToolTip(this.udMoxDelay, "Sets the delay between carrier & PTT out after PTT drops.");
+            this.udMoxDelay.Value = new decimal(new int[] {
+            10,
+            0,
+            0,
+            0});
+            this.udMoxDelay.Visible = false;
+            this.udMoxDelay.ValueChanged += new System.EventHandler(this.udMoxDelay_ValueChanged);
+            // 
+            // chkPTTOutDelay
+            // 
+            this.chkPTTOutDelay.Enabled = false;
+            this.chkPTTOutDelay.Image = null;
+            this.chkPTTOutDelay.Location = new System.Drawing.Point(16, 16);
+            this.chkPTTOutDelay.Name = "chkPTTOutDelay";
+            this.chkPTTOutDelay.Size = new System.Drawing.Size(96, 32);
+            this.chkPTTOutDelay.TabIndex = 19;
+            this.chkPTTOutDelay.Text = "Enable PTT Delay";
+            this.toolTip1.SetToolTip(this.chkPTTOutDelay, "Check this box to delay PTT Out line after releasing PTT in.");
+            this.chkPTTOutDelay.Visible = false;
+            this.chkPTTOutDelay.CheckedChanged += new System.EventHandler(this.chkPTTOutDelay_CheckedChanged);
+            // 
+            // udGenPTTOutDelay
+            // 
+            this.udGenPTTOutDelay.Enabled = false;
+            this.udGenPTTOutDelay.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.udGenPTTOutDelay.Location = new System.Drawing.Point(184, 20);
+            this.udGenPTTOutDelay.Maximum = new decimal(new int[] {
+            300,
+            0,
+            0,
+            0});
+            this.udGenPTTOutDelay.Minimum = new decimal(new int[] {
+            5,
+            0,
+            0,
+            0});
+            this.udGenPTTOutDelay.Name = "udGenPTTOutDelay";
+            this.udGenPTTOutDelay.Size = new System.Drawing.Size(48, 20);
+            this.udGenPTTOutDelay.TabIndex = 17;
+            this.toolTip1.SetToolTip(this.udGenPTTOutDelay, "Sets the Delay period to drop PTT Out after PTT In drops.");
+            this.udGenPTTOutDelay.Value = new decimal(new int[] {
+            20,
+            0,
+            0,
+            0});
+            this.udGenPTTOutDelay.Visible = false;
+            this.udGenPTTOutDelay.ValueChanged += new System.EventHandler(this.udGenPTTOutDelay_ValueChanged);
             // 
             // chkGenAllModeMicPTT
             // 
@@ -4573,52 +4681,37 @@ namespace PowerSDR
             this.chkGenOptionsShowATUPopup.Visible = false;
             this.chkGenOptionsShowATUPopup.CheckedChanged += new System.EventHandler(this.chkGenOptionsShowATUPopup_CheckedChanged);
             // 
-            // chkGeneralEnableX2
+            // udGenTX1Delay
             // 
-            this.chkGeneralEnableX2.Enabled = false;
-            this.chkGeneralEnableX2.Image = null;
-            this.chkGeneralEnableX2.Location = new System.Drawing.Point(128, 20);
-            this.chkGeneralEnableX2.Name = "chkGeneralEnableX2";
-            this.chkGeneralEnableX2.Size = new System.Drawing.Size(96, 32);
-            this.chkGeneralEnableX2.TabIndex = 7;
-            this.chkGeneralEnableX2.Text = "Enable X2 TR Sequencing";
-            this.toolTip1.SetToolTip(this.chkGeneralEnableX2, "Check this box to enable X2-7 TR sequencing using the delay set below.");
-            this.chkGeneralEnableX2.Visible = false;
-            this.chkGeneralEnableX2.CheckedChanged += new System.EventHandler(this.chkGeneralEnableX2_CheckedChanged);
-            // 
-            // chkGenTX1Delay
-            // 
-            this.chkGenTX1Delay.Enabled = false;
-            this.chkGenTX1Delay.Image = null;
-            this.chkGenTX1Delay.Location = new System.Drawing.Point(126, 20);
-            this.chkGenTX1Delay.Name = "chkGenTX1Delay";
-            this.chkGenTX1Delay.Size = new System.Drawing.Size(96, 32);
-            this.chkGenTX1Delay.TabIndex = 13;
-            this.chkGenTX1Delay.Text = "Enable TX Out Delay";
-            this.toolTip1.SetToolTip(this.chkGenTX1Delay, "Check this box to delay after switching TX Out (before switch TR) with the value " +
-                    "set below.");
-            this.chkGenTX1Delay.Visible = false;
-            this.chkGenTX1Delay.CheckedChanged += new System.EventHandler(this.chkGenTX1Delay_CheckedChanged);
-            // 
-            // lblGeneralX2Delay
-            // 
-            this.lblGeneralX2Delay.Image = null;
-            this.lblGeneralX2Delay.Location = new System.Drawing.Point(128, 56);
-            this.lblGeneralX2Delay.Name = "lblGeneralX2Delay";
-            this.lblGeneralX2Delay.Size = new System.Drawing.Size(56, 23);
-            this.lblGeneralX2Delay.TabIndex = 9;
-            this.lblGeneralX2Delay.Text = "X2 Delay:";
-            this.lblGeneralX2Delay.Visible = false;
-            // 
-            // lblGenTX1Delay
-            // 
-            this.lblGenTX1Delay.Image = null;
-            this.lblGenTX1Delay.Location = new System.Drawing.Point(128, 48);
-            this.lblGenTX1Delay.Name = "lblGenTX1Delay";
-            this.lblGenTX1Delay.Size = new System.Drawing.Size(56, 26);
-            this.lblGenTX1Delay.TabIndex = 14;
-            this.lblGenTX1Delay.Text = "TX Out Delay:";
-            this.lblGenTX1Delay.Visible = false;
+            this.udGenTX1Delay.Enabled = false;
+            this.udGenTX1Delay.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.udGenTX1Delay.Location = new System.Drawing.Point(184, 56);
+            this.udGenTX1Delay.Maximum = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            0});
+            this.udGenTX1Delay.Minimum = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+            this.udGenTX1Delay.Name = "udGenTX1Delay";
+            this.udGenTX1Delay.Size = new System.Drawing.Size(48, 20);
+            this.udGenTX1Delay.TabIndex = 15;
+            this.toolTip1.SetToolTip(this.udGenTX1Delay, "Sets the Delay period to wait after switching TX Out before TR when enabled above" +
+                    ".");
+            this.udGenTX1Delay.Value = new decimal(new int[] {
+            50,
+            0,
+            0,
+            0});
+            this.udGenTX1Delay.Visible = false;
+            this.udGenTX1Delay.ValueChanged += new System.EventHandler(this.udGenTX1Delay_ValueChanged);
             // 
             // udGeneralX2Delay
             // 
@@ -4651,37 +4744,63 @@ namespace PowerSDR
             this.udGeneralX2Delay.ValueChanged += new System.EventHandler(this.udGeneralX2Delay_ValueChanged);
             this.udGeneralX2Delay.LostFocus += new System.EventHandler(this.udGeneralX2Delay_LostFocus);
             // 
-            // udGenTX1Delay
+            // lblGenTX1Delay
             // 
-            this.udGenTX1Delay.Enabled = false;
-            this.udGenTX1Delay.Increment = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.udGenTX1Delay.Location = new System.Drawing.Point(184, 56);
-            this.udGenTX1Delay.Maximum = new decimal(new int[] {
-            1000,
-            0,
-            0,
-            0});
-            this.udGenTX1Delay.Minimum = new decimal(new int[] {
-            0,
-            0,
-            0,
-            0});
-            this.udGenTX1Delay.Name = "udGenTX1Delay";
-            this.udGenTX1Delay.Size = new System.Drawing.Size(48, 20);
-            this.udGenTX1Delay.TabIndex = 15;
-            this.toolTip1.SetToolTip(this.udGenTX1Delay, "Sets the Delay period to wait after switching TX Out before TR when enabled above" +
-                    ".");
-            this.udGenTX1Delay.Value = new decimal(new int[] {
-            50,
-            0,
-            0,
-            0});
-            this.udGenTX1Delay.Visible = false;
-            this.udGenTX1Delay.ValueChanged += new System.EventHandler(this.udGenTX1Delay_ValueChanged);
+            this.lblGenTX1Delay.Image = null;
+            this.lblGenTX1Delay.Location = new System.Drawing.Point(128, 48);
+            this.lblGenTX1Delay.Name = "lblGenTX1Delay";
+            this.lblGenTX1Delay.Size = new System.Drawing.Size(56, 26);
+            this.lblGenTX1Delay.TabIndex = 14;
+            this.lblGenTX1Delay.Text = "TX Out Delay:";
+            this.lblGenTX1Delay.Visible = false;
+            // 
+            // lblGeneralX2Delay
+            // 
+            this.lblGeneralX2Delay.Image = null;
+            this.lblGeneralX2Delay.Location = new System.Drawing.Point(128, 56);
+            this.lblGeneralX2Delay.Name = "lblGeneralX2Delay";
+            this.lblGeneralX2Delay.Size = new System.Drawing.Size(56, 23);
+            this.lblGeneralX2Delay.TabIndex = 9;
+            this.lblGeneralX2Delay.Text = "X2 Delay:";
+            this.lblGeneralX2Delay.Visible = false;
+            // 
+            // lblPTTOutDelay
+            // 
+            this.lblPTTOutDelay.Image = null;
+            this.lblPTTOutDelay.Location = new System.Drawing.Point(114, 18);
+            this.lblPTTOutDelay.Name = "lblPTTOutDelay";
+            this.lblPTTOutDelay.Size = new System.Drawing.Size(70, 23);
+            this.lblPTTOutDelay.TabIndex = 18;
+            this.lblPTTOutDelay.Text = "PTT Delay";
+            this.lblPTTOutDelay.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.lblPTTOutDelay.Visible = false;
+            // 
+            // chkGeneralEnableX2
+            // 
+            this.chkGeneralEnableX2.Enabled = false;
+            this.chkGeneralEnableX2.Image = null;
+            this.chkGeneralEnableX2.Location = new System.Drawing.Point(128, 20);
+            this.chkGeneralEnableX2.Name = "chkGeneralEnableX2";
+            this.chkGeneralEnableX2.Size = new System.Drawing.Size(96, 32);
+            this.chkGeneralEnableX2.TabIndex = 7;
+            this.chkGeneralEnableX2.Text = "Enable X2 TR Sequencing";
+            this.toolTip1.SetToolTip(this.chkGeneralEnableX2, "Check this box to enable X2-7 TR sequencing using the delay set below.");
+            this.chkGeneralEnableX2.Visible = false;
+            this.chkGeneralEnableX2.CheckedChanged += new System.EventHandler(this.chkGeneralEnableX2_CheckedChanged);
+            // 
+            // chkGenTX1Delay
+            // 
+            this.chkGenTX1Delay.Enabled = false;
+            this.chkGenTX1Delay.Image = null;
+            this.chkGenTX1Delay.Location = new System.Drawing.Point(126, 20);
+            this.chkGenTX1Delay.Name = "chkGenTX1Delay";
+            this.chkGenTX1Delay.Size = new System.Drawing.Size(96, 32);
+            this.chkGenTX1Delay.TabIndex = 13;
+            this.chkGenTX1Delay.Text = "Enable TX Out Delay";
+            this.toolTip1.SetToolTip(this.chkGenTX1Delay, "Check this box to delay after switching TX Out (before switch TR) with the value " +
+                    "set below.");
+            this.chkGenTX1Delay.Visible = false;
+            this.chkGenTX1Delay.CheckedChanged += new System.EventHandler(this.chkGenTX1Delay_CheckedChanged);
             // 
             // grpGeneralProcessPriority
             // 
@@ -7765,7 +7884,7 @@ namespace PowerSDR
             this.grpVersion.Controls.Add(this.lblOzyFX2);
             this.grpVersion.Location = new System.Drawing.Point(288, 128);
             this.grpVersion.Name = "grpVersion";
-            this.grpVersion.Size = new System.Drawing.Size(176, 128);
+            this.grpVersion.Size = new System.Drawing.Size(156, 128);
             this.grpVersion.TabIndex = 4;
             this.grpVersion.TabStop = false;
             this.grpVersion.Text = "Firmware Versions";
@@ -7818,7 +7937,7 @@ namespace PowerSDR
             this.groupBoxTS1.Controls.Add(this.chkMercDither);
             this.groupBoxTS1.Location = new System.Drawing.Point(288, 16);
             this.groupBoxTS1.Name = "groupBoxTS1";
-            this.groupBoxTS1.Size = new System.Drawing.Size(176, 104);
+            this.groupBoxTS1.Size = new System.Drawing.Size(156, 104);
             this.groupBoxTS1.TabIndex = 3;
             this.groupBoxTS1.TabStop = false;
             this.groupBoxTS1.Text = "Mercury Options";
@@ -7890,7 +8009,7 @@ namespace PowerSDR
             this.groupBoxMicSource.Controls.Add(this.radJanusMic);
             this.groupBoxMicSource.Location = new System.Drawing.Point(8, 200);
             this.groupBoxMicSource.Name = "groupBoxMicSource";
-            this.groupBoxMicSource.Size = new System.Drawing.Size(264, 48);
+            this.groupBoxMicSource.Size = new System.Drawing.Size(196, 48);
             this.groupBoxMicSource.TabIndex = 2;
             this.groupBoxMicSource.TabStop = false;
             this.groupBoxMicSource.Text = "Mic Source";
@@ -16487,6 +16606,7 @@ namespace PowerSDR
             this.btnSkinExport.TabIndex = 86;
             this.btnSkinExport.Text = "Export";
             this.btnSkinExport.UseVisualStyleBackColor = true;
+            this.btnSkinExport.Visible = false;
             this.btnSkinExport.Click += new System.EventHandler(this.btnSkinExport_Click);
             // 
             // grpAppSkins
@@ -21154,6 +21274,26 @@ namespace PowerSDR
             this.btnTestAudioBalStart.Text = "Start";
             this.btnTestAudioBalStart.Click += new System.EventHandler(this.btnTestAudioBalStart_Click);
             // 
+            // grpDiagInfo
+            // 
+            this.grpDiagInfo.Controls.Add(this.lblSyncData);
+            this.grpDiagInfo.Location = new System.Drawing.Point(452, 16);
+            this.grpDiagInfo.Name = "grpDiagInfo";
+            this.grpDiagInfo.Size = new System.Drawing.Size(118, 104);
+            this.grpDiagInfo.TabIndex = 5;
+            this.grpDiagInfo.TabStop = false;
+            this.grpDiagInfo.Text = "Diag Info";
+            this.grpDiagInfo.Visible = false;
+            // 
+            // lblSyncData
+            // 
+            this.lblSyncData.Image = null;
+            this.lblSyncData.Location = new System.Drawing.Point(10, 23);
+            this.lblSyncData.Name = "lblSyncData";
+            this.lblSyncData.Size = new System.Drawing.Size(97, 16);
+            this.lblSyncData.TabIndex = 0;
+            this.lblSyncData.Text = "Frame Sync: ";
+            // 
             // openFileDialog1
             // 
             this.openFileDialog1.FileOk += new System.ComponentModel.CancelEventHandler(this.openFileDialog1_FileOk);
@@ -21277,16 +21417,16 @@ namespace PowerSDR
             ((System.ComponentModel.ISupportInitialize)(this.udSoftRockCenterFreq)).EndInit();
             this.grpSI570.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.udFXtal)).EndInit();
+            this.grpGeneralDDS.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.udDDSCorrection)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.udDDSIFFreq)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.udDDSPLLMult)).EndInit();
             this.groupBoxHPSDRHW.ResumeLayout(false);
             this.groupBoxHPSDRHW.PerformLayout();
             this.grpGeneralHardwareFLEX5000.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.udF3KFanTempThresh)).EndInit();
             this.grpGeneralHardwareSDR1000.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.udGeneralLPTDelay)).EndInit();
-            this.grpGeneralDDS.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.udDDSCorrection)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.udDDSIFFreq)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.udDDSPLLMult)).EndInit();
             this.tpGeneralOptions.ResumeLayout(false);
             this.grpGenCustomTitleText.ResumeLayout(false);
             this.grpGenCustomTitleText.PerformLayout();
@@ -21297,8 +21437,10 @@ namespace PowerSDR
             ((System.ComponentModel.ISupportInitialize)(this.udOptClickTuneOffsetDIGL)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.udOptClickTuneOffsetDIGU)).EndInit();
             this.grpGeneralOptions.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.udGeneralX2Delay)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.udMoxDelay)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.udGenPTTOutDelay)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.udGenTX1Delay)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.udGeneralX2Delay)).EndInit();
             this.grpGeneralProcessPriority.ResumeLayout(false);
             this.grpGeneralUpdates.ResumeLayout(false);
             this.tpGeneralCalibration.ResumeLayout(false);
@@ -21591,6 +21733,7 @@ namespace PowerSDR
             this.grpImpulseTest.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.udImpulseNum)).EndInit();
             this.grpTestAudioBalance.ResumeLayout(false);
+            this.grpDiagInfo.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -21605,6 +21748,7 @@ namespace PowerSDR
         {
             if (console.Hdw != null)
                 comboGeneralLPTAddr.Text = Convert.ToString(console.Hdw.LPTAddr, 16);
+            chkPTTOutDelay.Checked = console.Hdw.PTTODelayControl;
             udGeneralLPTDelay.Value = console.LatchDelay;
             chkGeneralRXOnly.Checked = console.RXOnly;
             chkGeneralUSBPresent.Checked = console.USBPresent;
@@ -23190,12 +23334,18 @@ namespace PowerSDR
             set { chkPennyPresent.Checked = value; }
         }
 
-              public bool PennyLanePresent
+        public bool PennyLanePresent
         {
             get { return chkPennyLane.Checked; }
             set { chkPennyLane.Checked = value; }
         }
-		
+
+        public bool PTTODelayControl
+        {
+            get { return chkPTTOutDelay.Checked; }
+            set { chkPTTOutDelay.Checked = value; }
+        }
+
   public float ImageGainTX
         {
             get { return (float)udDSPImageGainTX.Value; }
@@ -23962,6 +24112,9 @@ namespace PowerSDR
                 chkJanusPresent.Enabled = false;
                 chkExcaliburPresent.Checked = false;
                 chkExcaliburPresent.Enabled = false;
+                chkPennyLane.Checked = false;
+                chkPennyLane.Enabled = false;
+
             }
             radGenModelHPSDR_or_Hermes_CheckedChanged(sender, e, true);
         }
@@ -23975,6 +24128,7 @@ namespace PowerSDR
                 chkMercuryPresent.Enabled = true;
                 chkJanusPresent.Enabled = true;
                 chkExcaliburPresent.Enabled = true;
+                chkPennyLane.Enabled = true;
             }
             radGenModelHPSDR_or_Hermes_CheckedChanged(sender, e, false);
 
@@ -24100,6 +24254,13 @@ namespace PowerSDR
                 lblGeneralX2Delay.Visible = false;
                 udGeneralX2Delay.Visible = false;
                 rtxtPACalReq.Visible = false;
+                lblPTTOutDelay.Visible = true;
+                udGenPTTOutDelay.Visible = true;
+                lblMoxDelay.Visible = true;
+                udMoxDelay.Visible = true;
+                udMoxDelay.Enabled = true;
+                chkPTTOutDelay.Visible = true;
+                chkPTTOutDelay.Enabled = true;
 
                 if (is_hermes)
                 {
@@ -30910,18 +31071,6 @@ namespace PowerSDR
             }
         }
 
-        //private void tpHPSDR_Paint(object sender, System.Windows.Forms.PaintEventArgs e)
-        //{
-        //    if (console.PowerOn)
-        //    {
-        //        lblOzyFX2.Text = Convert.ToUInt32(JanusAudio.getFX2FirmwareVersionString()).ToString("Ozy FX2: 0000 00 00"); //w5wc
-        //        lblOzyFWVer.Text = JanusAudio.getOzyFWVersion().ToString("Ozy: 0\\.0"); //w5wc
-        //        lblMercuryFWVer.Text = JanusAudio.getMercuryFWVersion().ToString("Mercury: 0\\.0"); //w5wc
-        //        lblPenelopeFWVer.Text = JanusAudio.getPenelopeFWVersion().ToString("Penelope: 0\\.0"); //w5wc
-        //        return;
-        //    }
-        //}
-
         private void tpHPSDR_Paint(object sender, System.Windows.Forms.PaintEventArgs e)
         {
             if (console.PowerOn)
@@ -30944,7 +31093,14 @@ namespace PowerSDR
                     lblOzyFWVer.Text = JanusAudio.getOzyFWVersion().ToString("Ozy: 0\\.0"); 
                 }
                 lblMercuryFWVer.Text = JanusAudio.getMercuryFWVersion().ToString("Mercury: 0\\.0"); 
-                lblPenelopeFWVer.Text = JanusAudio.getPenelopeFWVersion().ToString("Penny[Lane]: 0\\.0"); 
+                lblPenelopeFWVer.Text = JanusAudio.getPenelopeFWVersion().ToString("Penny[Lane]: 0\\.0");
+
+ /*               int rc = JanusAudio.GetHaveSync();
+                if (rc == 1)
+                    lblSyncData.Text = "FrameSync: Yes";
+                else
+                    lblSyncData.Text = "FrameSync: No"; 
+*/
             }
         }
 
@@ -31389,6 +31545,24 @@ namespace PowerSDR
         {
             Audio.FMPLDev = (float)udPLDev.Value;
         }
+
+        private void udGenPTTOutDelay_ValueChanged(object sender, EventArgs e)
+        {
+            HW.PTTOutDelay = (int)udGenPTTOutDelay.Value;
+        }
+
+        private void chkPTTOutDelay_CheckedChanged(object sender, EventArgs e)
+        {
+            udGenPTTOutDelay.Enabled = chkPTTOutDelay.Checked;
+            console.Hdw.PTTODelayControl = chkPTTOutDelay.Checked;           
+        }
+
+        private void udMoxDelay_ValueChanged(object sender, EventArgs e)
+        {
+            console.MoxDelay = (int)udMoxDelay.Value;
+        }
+
+ 
     }
 
 	#region PADeviceInfo Helper Class
