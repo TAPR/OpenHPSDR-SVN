@@ -454,6 +454,7 @@ namespace PowerSDR
         private Thread update_rx2_dds_thread;
         private Thread update_tx_dds_thread;
         private Thread audio_watchdog_thread;
+       // private Thread digital_watchdog_thread;
 		//private HiPerfTimer polltimer;
 
 		private bool calibration_running = false;
@@ -487,7 +488,7 @@ namespace PowerSDR
         public DSPTestForm dspTestForm;
         public PreSelForm preSelForm;
         public Predistest predistForm;
-
+        public bool buffiszero = false;
 		public bool fwc_init = false;
 		public int fwc_index = -1;
 		private long fwc_last_cal_date_time = 0;
@@ -5654,10 +5655,10 @@ namespace PowerSDR
             this.Controls.Add(this.panelBandVHF);
             this.Controls.Add(this.panelDisplay);
             this.Controls.Add(this.ptbSquelch);
-            this.Controls.Add(this.panelModeSpecificPhone);
-            this.Controls.Add(this.panelModeSpecificDigital);
             this.Controls.Add(this.panelAntenna);
             this.Controls.Add(this.panelModeSpecificCW);
+            this.Controls.Add(this.panelModeSpecificPhone);
+            this.Controls.Add(this.panelModeSpecificDigital);
             this.KeyPreview = true;
             this.Menu = this.mainMenu1;
             this.Name = "Console";
@@ -19864,10 +19865,7 @@ namespace PowerSDR
         public bool PLTone
         {
             get { return chkPLTone.Checked; }
-            set
-            {
-                chkPLTone.Checked = value;
-            }
+            set { chkPLTone.Checked = value; }
         }
 		
 		public bool CPDR
@@ -21716,7 +21714,10 @@ namespace PowerSDR
 		public bool TUN
 		{
 			get { return chkTUN.Checked; }
-			set	{ chkTUN.Checked = value; }
+			set	{ 
+                chkTUN.Checked = value;
+                Hdw.TUNControl = true;
+                }
 		}
 
 		public bool TUNEnabled
@@ -22048,6 +22049,13 @@ namespace PowerSDR
         {
             get { return fm_tx_bw; }
             set { fm_tx_bw = value; }
+        }
+
+        private int mox_delay = 10;
+        public int MoxDelay
+        {
+            get { return mox_delay; }
+            set { mox_delay = value; }
         }
 
 		private int tx_filter_high = 3100;
@@ -25343,6 +25351,7 @@ namespace PowerSDR
 		{
 			HiPerfTimer cwpolltimer = new HiPerfTimer();
 			cwpolltimer.Start();
+            
 
 			while(chkPower.Checked)
 			{
@@ -25609,7 +25618,7 @@ namespace PowerSDR
 							case PTTMode.CW:
 								if(!cw_ptt)
 								{
-									t9.Start(); //w5wc
+									t9.Start(); 
 									if (cw_semi_break_in_enabled)
 									{
 										break_in_timer.Stop();
@@ -26257,6 +26266,34 @@ namespace PowerSDR
         {
             Audio.Start();
         }
+
+        private void DigitalWatchdog()
+        {
+            int limit = (sample_rate1 / Audio.BlockSize)/60;
+            //int count = 0;
+            HiPerfTimer t = new HiPerfTimer();
+            t.Start();
+
+            while (chkPower.Checked)
+            {
+                if (Audio.EmptyBuffers > limit) // 1 second dropout
+               // {
+                    buffiszero = true;
+                  else
+                    buffiszero = false;
+
+                   // Audio.TestMute = false;
+                    //count++;
+                  //  Audio.StopAudio1();
+                  //  if (vac_enabled)
+                    //    Audio.StopAudioVAC();
+                   // Thread.Sleep(500);
+                   // this.Invoke(new MethodInvoker(AudioStart));
+               // }
+               // Thread.Sleep(3000);
+            }
+        }
+
 
 		#endregion
 
@@ -27558,6 +27595,15 @@ namespace PowerSDR
                     audio_watchdog_thread.Start();
                 }
 
+             /*   if (current_model == Model.HPSDR || current_model == Model.HERMES) //test for buffer drain
+                {
+                    digital_watchdog_thread = new Thread(new ThreadStart(DigitalWatchdog));
+                    digital_watchdog_thread.Name = "Digital Watchdog Thread";
+                    digital_watchdog_thread.Priority = ThreadPriority.Lowest;
+                    digital_watchdog_thread.IsBackground = true;
+                    digital_watchdog_thread.Start();
+                } */
+
                 if (!rx_only)
                 {
                     chkMOX.Enabled = true;
@@ -28525,7 +28571,7 @@ namespace PowerSDR
 						freq -= 0.012;
 						break;*/
 				}
-
+           
 				spur_reduction = false;
 				if_shift = false;
 				
@@ -28563,7 +28609,7 @@ namespace PowerSDR
                     if (alex_ant_ctrl_enabled)
                     {
                         Alex.getAlex().UpdateAlexAntSelection(rx1_band, mox);
-                    }
+                    } 
 
                     if (x2_enabled)
 					{
@@ -28601,11 +28647,10 @@ namespace PowerSDR
 						{
 							Hdw.XVTR_RF = true;
 						}
-					}					
-				
+					}
+ 
 					Hdw.TransmitRelay = true;			
-				}
-				
+				}				
 			}
 			else // rx
 			{
@@ -28647,8 +28692,9 @@ namespace PowerSDR
 						else
 						{
 							Hdw.XVTR_RF = false;
-						}
-					}
+						} 
+					} 
+                    
 					Hdw.TransmitRelay = false;
 
 					if(x2_enabled)
@@ -28820,9 +28866,11 @@ namespace PowerSDR
 		private double timer12 = 0.0;
 		private int count12 = 0;*/
 
+        //int* dbuff;        
 		private bool mox = false;
 		private void chkMOX_CheckedChanged2(object sender, System.EventArgs e)
 		{
+            
 			//Debug.WriteLine("MOX: "+chkMOX.Checked);	
 			t1.Start();
 			if(rx_only && chkMOX.Checked)
@@ -28960,28 +29008,32 @@ namespace PowerSDR
 				}*/
 			}
 
-            /*if (tx)
-            {
-                t1.Stop();
-                timer4 += t1.DurationMsec;
-                count4++;
-            }*/ //w5wc
-
+            
             if (tx)
             {
                 AudioMOXChanged(tx);
                 HdwMOXChanged(tx, freq);
             }
-            else
+            else            
             {
-                HdwMOXChanged(tx, freq);
-                Thread.Sleep(20);
-                AudioMOXChanged(tx);
-
+                
+                mox = tx;
+                buffiszero = false;
+                AudioMOXChanged(tx); //changes audio.callback4port tx/rx
+                //Thread.Sleep(10);
+                t1.Start();
+                while (!buffiszero) { //delay until audio.callback4port clears data stream 
+                    //Thread.Sleep(1); 
+               if (t1.DurationMsec > 50) break; //watchdog timer just in case
+                }
+                
+                t1.Start();
+                while (t1.DurationMsec < mox_delay) t1.Stop();
+                //Thread.Sleep(20);
+                HdwMOXChanged(tx, freq); //toggles PTT etc.
                 DttSP.SetThreadProcessingMode(1, 0);
-                DttSP.FlushAllBufs(0, false);//w5wc
-                DttSP.SetThreadProcessingMode(0, 2); 
-				mox = tx;//w5wc
+                DttSP.FlushAllBufs(0, false);
+                DttSP.SetThreadProcessingMode(0, 2);          
             }
 
 
@@ -29036,7 +29088,7 @@ namespace PowerSDR
 				t1.Stop();
 				timer7 += t1.DurationMsec;
 				count7++;
-			}*/ //w5wc
+			}*/ 
 
 			/*Debug.WriteLine("1:"+(timer1/count1).ToString("f3")+
 				" 2:"+(timer2/count2).ToString("f3")+
@@ -29399,7 +29451,7 @@ namespace PowerSDR
 			else
 			{
 				Audio.TXInputSignal = Audio.SignalSource.RADIO;
-
+                Hdw.TUNControl = true;
 				chkMOX.Checked = false;
 				chkTUN.BackColor = SystemColors.Control;
 				tuning = false;
@@ -35698,8 +35750,9 @@ namespace PowerSDR
 
 				panelVFO.Location = new Point (gr_VFO_basis_location.X+(h_delta/4),gr_VFO_basis_location.Y+v_delta);
 				grpVFOBetween.Location = new Point(gr_vfobetween_basis_location.X+(h_delta/2),gr_vfobetween_basis_location.Y);
-				btnDisplayPanCenter.Location = new Point(btn_display_pan_center_basis.X+(h_delta),btn_display_pan_center_basis.Y+v_delta);
-				ptbDisplayPan.Size = new Size(tb_display_pan_size_basis.Width+(h_delta),tb_display_pan_size_basis.Height);
+				//btnDisplayPanCenter.Location = new Point(btn_display_pan_center_basis.X+(h_delta),btn_display_pan_center_basis.Y+v_delta);
+                btnDisplayPanCenter.Location = new Point(btn_display_pan_center_basis.X, btn_display_pan_center_basis.Y + v_delta);
+               // ptbDisplayPan.Size = new Size(tb_display_pan_size_basis.Width+(h_delta),tb_display_pan_size_basis.Height);
 				radDisplayZoom4x.Location = new Point(btn_display_zoom_4x_basis.X+h_delta,btn_display_zoom_4x_basis.Y+v_delta);
 				radDisplayZoom2x.Location = new Point(btn_display_zoom_2x_basis.X+h_delta,btn_display_zoom_2x_basis.Y+v_delta);
 				radDisplayZoom1x.Location = new Point(btn_display_zoom_1x_basis.X+h_delta,btn_display_zoom_1x_basis.Y+v_delta);

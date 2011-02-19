@@ -1410,8 +1410,7 @@ namespace PowerSDR
 
 			switch(current_audio_state1)
 			{
-				case AudioState.DTTSP:
-					
+				case AudioState.DTTSP:                    
 					#region VOX
 					if(vox_enabled)
 					{
@@ -1700,293 +1699,16 @@ namespace PowerSDR
 								ClearBuffer(out_r_ptr2, frameCount);
 								break;
 						}
+                        
 					}
 
 					#endregion
 
 					break;
-				case AudioState.CW: 
-					#region oldswitch
-					/*if(next_audio_state1 == AudioState.SWITCH)
-					{
-						ClearBuffer(in_l_ptr1, frameCount);
-						ClearBuffer(in_r_ptr1, frameCount);
-						if (vac_enabled) 
-						{
-							if((rb_vacIN_l.ReadSpace() >= frameCount)&&(rb_vacIN_r.ReadSpace() >= frameCount))
-							{
-								Win32.EnterCriticalSection(cs_vac);
-								rb_vacIN_l.ReadPtr(in_l_ptr1,frameCount);
-								rb_vacIN_r.ReadPtr(in_r_ptr1,frameCount);
-								Win32.LeaveCriticalSection(cs_vac);
-							}
-							else
-							{
-								VACDebug("rb_vacIN_l underflow 4inTX");
-							}
-						}
-						DttSP.ExchangeSamples2(array_ptr_input, array_ptr_output, frameCount);
-						if (switch_count == 0) next_audio_state1 = AudioState.CW;
-						switch_count--;
-					}*/
-					#endregion
+				case AudioState.CW:
 					DttSP.CWtoneExchange(out_l_ptr2, out_r_ptr2, frameCount);
-					//					if (cw_delay == 1) cw_delay = 0;
+                    
 					break;
-				/*case AudioState.SINL_COSR:
-					if(!mox)
-					{
-						out_l = out_l_ptr1;
-						out_r = out_r_ptr1;
-					}
-					else
-					{
-						out_l = out_l_ptr2;
-						out_r = out_r_ptr2;
-					}
-
-					if(two_tone)
-					{
-						double dump;
-						
-						SineWave2Tone(out_l, frameCount,
-							phase_accumulator1, phase_accumulator2,
-							sine_freq1, sine_freq2,
-							out dump, out dump);
-							
-						CosineWave2Tone(out_r, frameCount,
-							phase_accumulator1, phase_accumulator2,
-							sine_freq1, sine_freq2,
-							out phase_accumulator1, out phase_accumulator2);
-					}
-					else
-					{
-						SineWave(out_l, frameCount, phase_accumulator1, sine_freq1);
-						phase_accumulator1 = CosineWave(out_r, frameCount, phase_accumulator1, sine_freq1);
-					}
-					break;					
-				case AudioState.SINL_SINR:
-					if(!mox)
-					{
-						out_l = out_l_ptr1;
-						out_r = out_r_ptr1;
-					}
-					else
-					{
-						out_l = out_l_ptr2;
-						out_r = out_r_ptr2;
-					}
-
-					if(two_tone)
-					{
-						SineWave2Tone(out_l, frameCount,
-							phase_accumulator1, phase_accumulator2,
-							sine_freq1, sine_freq2,
-							out phase_accumulator1, out phase_accumulator2);
-						CopyBuffer(out_l, out_r, frameCount);							
-					}
-					else
-					{
-						phase_accumulator1 = SineWave(out_l, frameCount, phase_accumulator1, sine_freq1);
-						CopyBuffer(out_l, out_r, frameCount);
-					}
-					break;
-				case AudioState.SINL_NOR:
-					if(!mox)
-					{
-						out_l = out_l_ptr1;
-						out_r = out_r_ptr1;
-					}
-					else
-					{
-						out_l = out_l_ptr2;
-						out_r = out_r_ptr2;
-					}
-					if(two_tone)
-					{
-						SineWave2Tone(out_l, frameCount,
-							phase_accumulator1, phase_accumulator2,
-							sine_freq1, sine_freq2,
-							out phase_accumulator1, out phase_accumulator2);
-						ClearBuffer(out_r, frameCount);		
-					}
-					else
-					{
-						phase_accumulator1 = SineWave(out_l, frameCount, phase_accumulator1, sine_freq1);
-						ClearBuffer(out_r, frameCount);
-					}
-					break;
-				case AudioState.COSL_SINR:
-					if(!mox)
-					{
-						out_l = out_l_ptr1;
-						out_r = out_r_ptr1;
-					}
-					else
-					{
-						out_l = out_l_ptr2;
-						out_r = out_r_ptr2;
-					}
-
-					if(two_tone)
-					{
-						double dump;
-						
-						CosineWave2Tone(out_l, frameCount,
-							phase_accumulator1, phase_accumulator2,
-							sine_freq1, sine_freq2,
-							out dump, out dump);
-
-						SineWave2Tone(out_r, frameCount,
-							phase_accumulator1, phase_accumulator2,
-							sine_freq1, sine_freq2,
-							out phase_accumulator1, out phase_accumulator2);
-					}
-					else
-					{
-						CosineWave(out_l, frameCount, phase_accumulator1, sine_freq1);
-						phase_accumulator1 = SineWave(out_r, frameCount, phase_accumulator1, sine_freq1);
-					}
-					break;
-				case AudioState.NOL_SINR:
-					if(!mox)
-					{
-						out_l = out_l_ptr1;
-						out_r = out_r_ptr1;
-					}
-					else
-					{
-						out_l = out_l_ptr2;
-						out_r = out_r_ptr2;
-					}
-
-					if(two_tone)
-					{
-						ClearBuffer(out_l, frameCount);
-						SineWave2Tone(out_r, frameCount,
-							phase_accumulator1, phase_accumulator2,
-							sine_freq1, sine_freq2,
-							out phase_accumulator1, out phase_accumulator2);
-					}
-					else
-					{
-						ClearBuffer(out_l, frameCount);
-						phase_accumulator1 = SineWave(out_r, frameCount, phase_accumulator1, sine_freq1);
-					}
-					break;
-				case AudioState.NOL_NOR:
-					if(!mox)
-					{
-						out_l = out_l_ptr1;
-						out_r = out_r_ptr1;
-					}
-					else
-					{
-						out_l = out_l_ptr2;
-						out_r = out_r_ptr2;
-					}
-
-					ClearBuffer(out_l, frameCount);
-					ClearBuffer(out_r, frameCount);
-					break;
-				case AudioState.PIPE:
-					CopyBuffer(in_l_ptr1, out_l_ptr1, frameCount);
-					CopyBuffer(in_r_ptr1, out_r_ptr1, frameCount);
-					CopyBuffer(in_l_ptr2, out_l_ptr2, frameCount);
-					CopyBuffer(in_r_ptr2, out_r_ptr2, frameCount);
-					break;*/
-					#region oldswitch2_vac
-					/*case AudioState.SWITCH:
-						if(!ramp_down && !ramp_up)
-						{
-							switch(dsp_mode)
-							{
-								case DSPMode.CWL:
-								case DSPMode.CWU:
-									break;
-								default:
-									ClearBuffer(in_l_ptr2, frameCount);
-									ClearBuffer(in_r_ptr2, frameCount);
-									break;
-							}
-							if(mox != next_mox) mox = next_mox;
-						}
-
-						if(vac_enabled)
-						{
-							if((rb_vacIN_l.ReadSpace() >= frameCount)&&(rb_vacIN_r.ReadSpace() >= frameCount))
-							{
-								Win32.EnterCriticalSection(cs_vac);
-								rb_vacIN_l.ReadPtr(in_l_ptr2,frameCount);
-								rb_vacIN_r.ReadPtr(in_r_ptr2,frameCount);
-								Win32.LeaveCriticalSection(cs_vac);
-							}
-							else
-							{
-								VACDebug("rb_vacIN_l underflow 4inTX");
-							}
-						}
-						DttSP.ExchangeSamples2(array_ptr_input, array_ptr_output, frameCount);
-						if(ramp_down)
-						{
-							int i;
-							for(i=0; i<frameCount; i++)
-							{
-								float w = (float)Math.Sin(ramp_val * Math.PI / 2.0);
-								out_l_ptr1[i] *= w;
-								out_r_ptr1[i] *= w;
-								ramp_val += ramp_step;
-								if(++ramp_count >= ramp_samples)
-								{
-									ramp_down = false;
-									break;
-								}
-							}
-
-							if(ramp_down)
-							{
-								for(; i<frameCount; i++)
-								{
-									out_l_ptr1[i] = 0.0f;
-									out_r_ptr1[i] = 0.0f;
-								}
-							}
-						}
-						else if(ramp_up)
-						{
-							for(int i=0; i<frameCount; i++)
-							{
-								float w = (float)Math.Sin(ramp_val * Math.PI / 2.0);
-								out_l_ptr1[i] *= w;
-								out_r_ptr1[i] *= w;
-								ramp_val += ramp_step;
-								if(++ramp_count >= ramp_samples)
-								{
-									ramp_up = false;
-									break;
-								}
-							}
-						}
-						else
-						{
-							ClearBuffer(out_l_ptr1, frameCount);
-							ClearBuffer(out_r_ptr1, frameCount);
-						}
-
-						if (next_audio_state1 == AudioState.CW) 
-						{
-							//cw_delay = 1;
-							DttSP.CWtoneExchange(out_l_ptr2, out_r_ptr2, frameCount);
-						}  
-						else if(switch_count == 1)
-							DttSP.CWRingRestart();
-					
-						switch_count--;
-						//if(switch_count == ramp_up_num) RampUp = true;
-						if(switch_count == 0)
-							current_audio_state1 = next_audio_state1;
-						break;*/
-					#endregion
 			}
 
 			if(!localmox) DoScope(out_l_ptr1, frameCount);
@@ -2114,13 +1836,14 @@ namespace PowerSDR
 				}
 			}
 
+            
 			// Scale output to SDR-1000
 			if(!localmox)
 			{
 				ScaleBuffer(out_l1, out_l1, frameCount, (float)monitor_volume);
 				ScaleBuffer(out_r1, out_r1, frameCount, (float)monitor_volume);
-				ClearBuffer(out_l2, frameCount);
-				ClearBuffer(out_r2, frameCount);
+				//ClearBuffer(out_l2, frameCount);
+				//ClearBuffer(out_r2, frameCount);
 			}
 			else
 			{
@@ -2135,26 +1858,26 @@ namespace PowerSDR
 				}
 
 				
-				/*               if (!testing && tx_dsp_mode == DSPMode.FMN && console.PLTone == true)
-                {
-                    SineWave(ctcss_l, frameCount, phase_accumulator1, 254.1);
-                    phase_accumulator1 = CosineWave(ctcss_r, frameCount, phase_accumulator1, 254.1);
+//				              if (!testing && tx_dsp_mode == DSPMode.FMN && console.PLTone == true)
+ //               {
+ //                   SineWave(ctcss_l, frameCount, phase_accumulator1, 254.1);
+   //                 phase_accumulator1 = CosineWave(ctcss_r, frameCount, phase_accumulator1, 254.1);
+//
+ //                   MixBuffer(ctcss_l, out_l2, out_l1, frameCount, 0.2f);//(float)monitor_volume);
+  //                  MixBuffer(ctcss_l, out_l2, out_l2, frameCount, (float)tx_vol);
 
-                    MixBuffer(ctcss_l, out_l2, out_l1, frameCount, 0.2f);//(float)monitor_volume);
-                    MixBuffer(ctcss_l, out_l2, out_l2, frameCount, (float)tx_vol);
+//                    MixBuffer(ctcss_r, out_r2, out_r1, frameCount, 0.2f);//(float)monitor_volume);
+ //                   MixBuffer(ctcss_r, out_r2, out_r2, frameCount, (float)tx_vol);
+  //              }
 
-                    MixBuffer(ctcss_r, out_r2, out_r1, frameCount, 0.2f);//(float)monitor_volume);
-                    MixBuffer(ctcss_r, out_r2, out_r2, frameCount, (float)tx_vol);
-                }
-
-                else 
-  */
+//                else 
+ // 
 
                 /* hermes hack needed */
                 ScaleBuffer(out_l2, out_l1, frameCount, (float)monitor_volume);
                 if (console.CurrentModel != Model.HERMES && !console.PennyLanePresent ) /* Hermes power level set by command and control to programmable gain amp .. no need to do digital scaling  for power */
                 {
-                    ScaleBuffer(out_l2, out_l2, frameCount, (float)tx_vol);
+                    ScaleBuffer(out_l2, out_l2, frameCount,(float)tx_vol);
                 }
                 ScaleBuffer(out_r2, out_r1, frameCount, (float)monitor_volume);
                 if (console.CurrentModel != Model.HERMES && !console.PennyLanePresent ) /* Hermes power level set by command and control to programmable gain amp .. no need to do digital scaling  for power */
@@ -2168,10 +1891,16 @@ namespace PowerSDR
 				ScaleBuffer(out_r2, out_r2, frameCount, (float)tx_vol);*/
 			}
 
+ //           float sum = SumBuffer(out_l2, frameCount);
+           
+//            if (sum == 0.0f)
+//                console.buffiszero = true;
+           
+
 			/*Debug.WriteLine("Max 1L: "+MaxSample(out_l1, frameCount).ToString("f5")+" 1R: "+MaxSample(out_r1, frameCount).ToString("f5")+
 				" 2L: "+MaxSample(out_l2, frameCount).ToString("f5")+" 2R: "+MaxSample(out_r2, frameCount).ToString("f5"));*/
 
-			if(!testing && soundcard != SoundCard.DELTA_44)
+            if (!testing && soundcard != SoundCard.DELTA_44 || console.CurrentModel != Model.HPSDR || console.CurrentModel != Model.HERMES)
 			{
 				// clip radio output to prevent overdrive
 				float clip_thresh = (float)(1.5f / audio_volts1);
@@ -2199,19 +1928,17 @@ namespace PowerSDR
 											out_r2[i] = -clip_thresh;
 										} 
 
-					/*// Branchless clipping -- testing found this was more costly overall and especially when 
-					 * when dealing with samples that mostly do not need clipping
+//					Branchless clipping -- testing found this was more costly overall and especially when 
+//					  when dealing with samples that mostly do not need clipping
 
-					float x1 = Math.Abs(out_l2[i]+clip_thresh);
-					float x2 = Math.Abs(out_l2[i]-clip_thresh);
-					x1 -= x2;
-					out_l2[i] = x1 * 0.5f;
-					x1 = Math.Abs(out_r2[i]+clip_thresh);
-					x2 = Math.Abs(out_r2[i]-clip_thresh);
-					x1 -= x2;
-					out_r2[i] = x1 * 0.5f;*/
-					
-
+//					float x1 = Math.Abs(out_l2[i]+clip_thresh);
+//					float x2 = Math.Abs(out_l2[i]-clip_thresh);
+//					x1 -= x2;
+//					out_l2[i] = x1 * 0.5f;
+//					x1 = Math.Abs(out_r2[i]+clip_thresh);
+//					x2 = Math.Abs(out_r2[i]-clip_thresh);
+//					x1 -= x2;
+//					out_r2[i] = x1 * 0.5f;					
 				}
 
 				if(audio_volts1 > 1.5f)
@@ -2220,7 +1947,15 @@ namespace PowerSDR
 					ScaleBuffer(out_l1, out_l1, frameCount, (float)(1.5f / audio_volts1));
 					ScaleBuffer(out_r1, out_r1, frameCount, (float)(1.5f / audio_volts1));
 				}
-			}
+
+ 			}
+            if (!localmox)
+            {
+               ClearBuffer(out_l2, frameCount);
+               ClearBuffer(out_r2, frameCount);
+               console.buffiszero = true;
+            }
+
 
 #if(MINMAX)
 			Debug.Write(MaxSample(out_l2, out_r2, frameCount).ToString("f6")+",");
@@ -2234,6 +1969,7 @@ namespace PowerSDR
 			t1.Stop();
 			Debug.WriteLine(t1.Duration);
 #endif
+                    
 			return callback_return;
 		}
 
