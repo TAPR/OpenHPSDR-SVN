@@ -22057,6 +22057,12 @@ namespace PowerSDR
             get { return mox_delay; }
             set { mox_delay = value; }
         }
+        private int rf_delay = 30;
+        public int RFDelay
+        {
+            get { return rf_delay; }
+            set { rf_delay = value; }
+        }
 
 		private int tx_filter_high = 3100;
 		public int TXFilterHigh
@@ -29006,16 +29012,16 @@ namespace PowerSDR
 						poll_pa_pwr_thread.Abort();
 				}*/
 			}
-
-            
+           
             if (tx)
             {
                 AudioMOXChanged(tx);
+                t1.Start();
+                while (t1.DurationMsec < rf_delay) t1.Stop();
                 HdwMOXChanged(tx, freq);
             }
             else            
-            {
-                
+            {                
                 mox = tx;
                 buffiszero = false;
                 AudioMOXChanged(tx); //changes audio.callback4port tx/rx
