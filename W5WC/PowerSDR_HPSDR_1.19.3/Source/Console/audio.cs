@@ -194,6 +194,13 @@ namespace PowerSDR
 			set { vox_threshold = value; }
 		}
 
+        private static float vox_gain = 0.001f;
+        public static float VOXGain
+        {
+            get { return vox_gain; }
+            set { vox_gain = value; }
+        }
+        
 		public static double TXScale
 		{
 			get { return high_swr_scale * radio_volume; }
@@ -1412,39 +1419,61 @@ namespace PowerSDR
 			{
 				case AudioState.DTTSP:                    
 					#region VOX
-					if(vox_enabled)
+ 					if(vox_enabled)
 					{
-						float* vox_l = null, vox_r = null;
-						switch(soundcard)
-						{
-							case SoundCard.FIREBOX:
-							case SoundCard.EDIROL_FA_66:
-								vox_l = in_l_ptr1;
-								vox_r = in_r_ptr1;
-								break;
-							case SoundCard.DELTA_44:
-							default:
-								vox_l = in_l_ptr2;
-								vox_r = in_r_ptr2;
-								break;
-						}
+                        if (console.CurrentModel == Model.HPSDR || console.CurrentModel == Model.HERMES)
+                        {                       
+                            if (tx_dsp_mode == DSPMode.LSB ||
+                                tx_dsp_mode == DSPMode.USB ||
+                                tx_dsp_mode == DSPMode.DSB ||
+                                tx_dsp_mode == DSPMode.AM ||
+                                tx_dsp_mode == DSPMode.SAM ||
+                                tx_dsp_mode == DSPMode.FMN)
+                            {                                
+                                peak = MaxSample(in_l_ptr2, in_r_ptr2, frameCount);
 
-						if(tx_dsp_mode == DSPMode.LSB ||
-							tx_dsp_mode == DSPMode.USB ||
-							tx_dsp_mode == DSPMode.DSB ||
-							tx_dsp_mode == DSPMode.AM  ||
-							tx_dsp_mode == DSPMode.SAM ||
-							tx_dsp_mode == DSPMode.FMN)
-						{
-							peak = MaxSample(vox_l, vox_r, frameCount);
+                                // compare power to threshold
+                                if (peak > vox_threshold)
+                                    vox_active = true;
+                                else
+                                    vox_active = false;
+                            }
+                        }
+                        else
+                        {
+                            float* vox_l = null, vox_r = null;
+                            switch (soundcard)
+                            {
+                                case SoundCard.FIREBOX:
+                                case SoundCard.EDIROL_FA_66:
+                                    vox_l = in_l_ptr1;
+                                    vox_r = in_r_ptr1;
+                                    break;
+                                case SoundCard.DELTA_44:
+                                default:
+                                    vox_l = in_l_ptr2;
+                                    vox_r = in_r_ptr2;
+                                    break;
+                            }
 
-							// compare power to threshold
-							if(peak > vox_threshold) 
-								vox_active = true;
-							else 
-								vox_active = false;
-						}
+                            if (tx_dsp_mode == DSPMode.LSB ||
+                                tx_dsp_mode == DSPMode.USB ||
+                                tx_dsp_mode == DSPMode.DSB ||
+                                tx_dsp_mode == DSPMode.AM ||
+                                tx_dsp_mode == DSPMode.SAM ||
+                                tx_dsp_mode == DSPMode.FMN)
+                            {
+                                peak = MaxSample(vox_l, vox_r, frameCount);
+
+                                // compare power to threshold
+                                if (peak > vox_threshold)
+                                    vox_active = true;
+                                else
+                                    vox_active = false;
+                            }
+                        }                            
 					}
+
 					#endregion
 
 					if (tx_dsp_mode == DSPMode.CWU || tx_dsp_mode == DSPMode.CWL)
@@ -1506,7 +1535,8 @@ namespace PowerSDR
 							}
 						}
 					}
-
+                    
+ 
 					#region Input Signal Source
 
 					if(!mox)
