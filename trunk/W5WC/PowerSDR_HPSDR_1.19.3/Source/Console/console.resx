@@ -221,13 +221,187 @@
     <value>887, 17</value>
   </metadata>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="ptbFilterShift.BackgroundImageLayout" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
+    <value>Stretch</value>
+  </data>
+  <data name="ptbFilterShift.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>Off</value>
+  </data>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="ptbFilterShift.Location" type="System.Drawing.Point, System.Drawing">
+    <value>40, 135</value>
+  </data>
+  <data name="ptbFilterShift.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 2, 2, 2</value>
+  </data>
+  <data name="ptbFilterShift.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 2, 2, 2</value>
+  </data>
+  <data name="ptbFilterShift.Size" type="System.Drawing.Size, System.Drawing">
+    <value>80, 24</value>
+  </data>
+  <data name="ptbFilterShift.TabIndex" type="System.Int32, mscorlib">
+    <value>108</value>
+  </data>
+  <data name="ptbFilterShift.ToolTip" xml:space="preserve">
+    <value>Shifts the filter up or down the band with the slider.</value>
+  </data>
+  <data name="&gt;&gt;ptbFilterShift.Name" xml:space="preserve">
+    <value>ptbFilterShift</value>
+  </data>
+  <data name="&gt;&gt;ptbFilterShift.Type" xml:space="preserve">
+    <value>PowerSDR.PrettyTrackBar, PowerSDR, Version=1.19.3.3, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ptbFilterShift.Parent" xml:space="preserve">
+    <value>panelFilter</value>
+  </data>
+  <data name="&gt;&gt;ptbFilterShift.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="ptbFilterWidth.BackgroundImageLayout" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
+    <value>Stretch</value>
+  </data>
+  <data name="ptbFilterWidth.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>Off</value>
+  </data>
+  <data name="ptbFilterWidth.Location" type="System.Drawing.Point, System.Drawing">
+    <value>50, 105</value>
+  </data>
+  <data name="ptbFilterWidth.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 2, 2, 2</value>
+  </data>
+  <data name="ptbFilterWidth.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 2, 2, 2</value>
+  </data>
+  <data name="ptbFilterWidth.Size" type="System.Drawing.Size, System.Drawing">
+    <value>112, 24</value>
+  </data>
+  <data name="ptbFilterWidth.TabIndex" type="System.Int32, mscorlib">
+    <value>114</value>
+  </data>
+  <data name="ptbFilterWidth.ToolTip" xml:space="preserve">
+    <value>Extends/Contracts the filter width with the slider.</value>
+  </data>
+  <data name="&gt;&gt;ptbFilterWidth.Name" xml:space="preserve">
+    <value>ptbFilterWidth</value>
+  </data>
+  <data name="&gt;&gt;ptbFilterWidth.Type" xml:space="preserve">
+    <value>PowerSDR.PrettyTrackBar, PowerSDR, Version=1.19.3.3, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;ptbFilterWidth.Parent" xml:space="preserve">
+    <value>panelFilter</value>
+  </data>
+  <data name="&gt;&gt;ptbFilterWidth.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="btnFilterShiftReset.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
+    <value>Flat</value>
+  </data>
+  <data name="btnFilterShiftReset.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 8.25pt</value>
+  </data>
+  <data name="btnFilterShiftReset.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>Off</value>
+  </data>
+  <data name="btnFilterShiftReset.Location" type="System.Drawing.Point, System.Drawing">
+    <value>122, 137</value>
+  </data>
+  <data name="btnFilterShiftReset.Size" type="System.Drawing.Size, System.Drawing">
+    <value>45, 20</value>
+  </data>
+  <data name="btnFilterShiftReset.TabIndex" type="System.Int32, mscorlib">
+    <value>50</value>
+  </data>
+  <data name="btnFilterShiftReset.Text" xml:space="preserve">
+    <value>Reset</value>
+  </data>
+  <data name="btnFilterShiftReset.ToolTip" xml:space="preserve">
+    <value>Reset IF Shift to center (0) position.</value>
+  </data>
+  <data name="&gt;&gt;btnFilterShiftReset.Name" xml:space="preserve">
+    <value>btnFilterShiftReset</value>
+  </data>
+  <data name="&gt;&gt;btnFilterShiftReset.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ButtonTS, PowerSDR, Version=1.19.3.3, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;btnFilterShiftReset.Parent" xml:space="preserve">
+    <value>panelFilter</value>
+  </data>
+  <data name="&gt;&gt;btnFilterShiftReset.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="udFilterHigh.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="udFilterHigh.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 8.25pt</value>
+  </data>
+  <data name="udFilterHigh.Location" type="System.Drawing.Point, System.Drawing">
+    <value>116, 164</value>
+  </data>
+  <data name="udFilterHigh.Size" type="System.Drawing.Size, System.Drawing">
+    <value>52, 20</value>
+  </data>
+  <data name="udFilterHigh.TabIndex" type="System.Int32, mscorlib">
+    <value>45</value>
+  </data>
+  <data name="udFilterHigh.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
+    <value>Right</value>
+  </data>
+  <data name="udFilterHigh.ToolTip" xml:space="preserve">
+    <value>High Filter</value>
+  </data>
+  <data name="&gt;&gt;udFilterHigh.Name" xml:space="preserve">
+    <value>udFilterHigh</value>
+  </data>
+  <data name="&gt;&gt;udFilterHigh.Type" xml:space="preserve">
+    <value>System.Windows.Forms.NumericUpDownTS, PowerSDR, Version=1.19.3.3, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;udFilterHigh.Parent" xml:space="preserve">
+    <value>panelFilter</value>
+  </data>
+  <data name="&gt;&gt;udFilterHigh.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="udFilterLow.Enabled" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="udFilterLow.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 8.25pt</value>
+  </data>
+  <data name="udFilterLow.Location" type="System.Drawing.Point, System.Drawing">
+    <value>31, 164</value>
+  </data>
+  <data name="udFilterLow.Size" type="System.Drawing.Size, System.Drawing">
+    <value>52, 20</value>
+  </data>
+  <data name="udFilterLow.TabIndex" type="System.Int32, mscorlib">
+    <value>26</value>
+  </data>
+  <data name="udFilterLow.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
+    <value>Right</value>
+  </data>
+  <data name="udFilterLow.ToolTip" xml:space="preserve">
+    <value>Low Filter</value>
+  </data>
+  <data name="&gt;&gt;udFilterLow.Name" xml:space="preserve">
+    <value>udFilterLow</value>
+  </data>
+  <data name="&gt;&gt;udFilterLow.Type" xml:space="preserve">
+    <value>System.Windows.Forms.NumericUpDownTS, PowerSDR, Version=1.19.3.3, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;udFilterLow.Parent" xml:space="preserve">
+    <value>panelFilter</value>
+  </data>
+  <data name="&gt;&gt;udFilterLow.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
   <data name="ptbRX2RF.BackgroundImageLayout" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
     <value>Stretch</value>
   </data>
   <data name="ptbRX2RF.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>Off</value>
   </data>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="ptbRX2RF.Location" type="System.Drawing.Point, System.Drawing">
     <value>160, 600</value>
   </data>
@@ -256,7 +430,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ptbRX2RF.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>5</value>
   </data>
   <data name="chkSR.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
     <value>Button</value>
@@ -785,6 +959,9 @@
   </data>
   <data name="udCWBreakInDelay.TabIndex" type="System.Int32, mscorlib">
     <value>35</value>
+  </data>
+  <data name="udCWBreakInDelay.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
+    <value>Right</value>
   </data>
   <data name="udCWBreakInDelay.ToolTip" xml:space="preserve">
     <value>Amount of time to stay in TX after the last detected CW signal.</value>
@@ -2197,7 +2374,7 @@
     <value>panelVFO</value>
   </data>
   <data name="&gt;&gt;btnXITReset.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>3</value>
   </data>
   <data name="udRIT.Location" type="System.Drawing.Point, System.Drawing">
     <value>76, 103</value>
@@ -2221,7 +2398,7 @@
     <value>panelVFO</value>
   </data>
   <data name="&gt;&gt;udRIT.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>4</value>
   </data>
   <data name="btnIFtoVFO.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
     <value>Flat</value>
@@ -2260,7 +2437,7 @@
     <value>panelVFO</value>
   </data>
   <data name="&gt;&gt;btnIFtoVFO.ZOrder" xml:space="preserve">
-    <value>6</value>
+    <value>5</value>
   </data>
   <data name="chkRIT.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
     <value>Button</value>
@@ -2299,7 +2476,7 @@
     <value>panelVFO</value>
   </data>
   <data name="&gt;&gt;chkRIT.ZOrder" xml:space="preserve">
-    <value>7</value>
+    <value>6</value>
   </data>
   <data name="btnVFOSwap.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
     <value>Flat</value>
@@ -2338,7 +2515,7 @@
     <value>panelVFO</value>
   </data>
   <data name="&gt;&gt;btnVFOSwap.ZOrder" xml:space="preserve">
-    <value>8</value>
+    <value>7</value>
   </data>
   <data name="chkXIT.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
     <value>Button</value>
@@ -2377,7 +2554,7 @@
     <value>panelVFO</value>
   </data>
   <data name="&gt;&gt;chkXIT.ZOrder" xml:space="preserve">
-    <value>9</value>
+    <value>8</value>
   </data>
   <data name="btnVFOBtoA.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
     <value>Flat</value>
@@ -2416,7 +2593,7 @@
     <value>panelVFO</value>
   </data>
   <data name="&gt;&gt;btnVFOBtoA.ZOrder" xml:space="preserve">
-    <value>10</value>
+    <value>9</value>
   </data>
   <data name="udXIT.Location" type="System.Drawing.Point, System.Drawing">
     <value>12, 103</value>
@@ -2440,7 +2617,7 @@
     <value>panelVFO</value>
   </data>
   <data name="&gt;&gt;udXIT.ZOrder" xml:space="preserve">
-    <value>11</value>
+    <value>10</value>
   </data>
   <data name="btnVFOAtoB.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
     <value>Flat</value>
@@ -2479,7 +2656,7 @@
     <value>panelVFO</value>
   </data>
   <data name="&gt;&gt;btnVFOAtoB.ZOrder" xml:space="preserve">
-    <value>12</value>
+    <value>11</value>
   </data>
   <data name="chkRX1Preamp.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
     <value>Button</value>
@@ -2530,7 +2707,7 @@
     <value>13</value>
   </data>
   <data name="comboAGC.Location" type="System.Drawing.Point, System.Drawing">
-    <value>4, 170</value>
+    <value>4, 175</value>
   </data>
   <data name="comboAGC.Size" type="System.Drawing.Size, System.Drawing">
     <value>48, 21</value>
@@ -2557,7 +2734,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblAGC.Location" type="System.Drawing.Point, System.Drawing">
-    <value>8, 154</value>
+    <value>8, 159</value>
   </data>
   <data name="lblAGC.Size" type="System.Drawing.Size, System.Drawing">
     <value>40, 16</value>
@@ -2602,7 +2779,7 @@
     <value>High</value>
   </data>
   <data name="comboPreamp.Location" type="System.Drawing.Point, System.Drawing">
-    <value>52, 170</value>
+    <value>52, 175</value>
   </data>
   <data name="comboPreamp.Size" type="System.Drawing.Size, System.Drawing">
     <value>50, 21</value>
@@ -2629,7 +2806,7 @@
     <value>Off</value>
   </data>
   <data name="lblRF.Location" type="System.Drawing.Point, System.Drawing">
-    <value>8, 58</value>
+    <value>8, 61</value>
   </data>
   <data name="lblRF.Size" type="System.Drawing.Size, System.Drawing">
     <value>90, 16</value>
@@ -2658,20 +2835,32 @@
   <data name="&gt;&gt;lblRF.ZOrder" xml:space="preserve">
     <value>8</value>
   </data>
+  <data name="chkShowTXFilter.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
+    <value>Button</value>
+  </data>
+  <data name="chkShowTXFilter.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
+    <value>Flat</value>
+  </data>
+  <data name="chkShowTXFilter.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 8.25pt, style=Bold</value>
+  </data>
   <data name="chkShowTXFilter.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>Off</value>
   </data>
   <data name="chkShowTXFilter.Location" type="System.Drawing.Point, System.Drawing">
-    <value>217, 48</value>
+    <value>268, 83</value>
   </data>
   <data name="chkShowTXFilter.Size" type="System.Drawing.Size, System.Drawing">
-    <value>100, 23</value>
+    <value>50, 23</value>
   </data>
   <data name="chkShowTXFilter.TabIndex" type="System.Int32, mscorlib">
     <value>50</value>
   </data>
   <data name="chkShowTXFilter.Text" xml:space="preserve">
-    <value>Show TX Filter</value>
+    <value>TX FL</value>
+  </data>
+  <data name="chkShowTXFilter.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>TopCenter</value>
   </data>
   <data name="chkShowTXFilter.ToolTip" xml:space="preserve">
     <value>Shows the TX Filter on the display when in Panadapter mode</value>
@@ -2686,7 +2875,7 @@
     <value>panelModeSpecificPhone</value>
   </data>
   <data name="&gt;&gt;chkShowTXFilter.ZOrder" xml:space="preserve">
-    <value>14</value>
+    <value>15</value>
   </data>
   <data name="chkDX.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
     <value>Button</value>
@@ -2704,7 +2893,7 @@
     <value>7, 44</value>
   </data>
   <data name="chkDX.Size" type="System.Drawing.Size, System.Drawing">
-    <value>50, 23</value>
+    <value>50, 24</value>
   </data>
   <data name="chkDX.TabIndex" type="System.Int32, mscorlib">
     <value>88</value>
@@ -2728,7 +2917,7 @@
     <value>panelModeSpecificPhone</value>
   </data>
   <data name="&gt;&gt;chkDX.ZOrder" xml:space="preserve">
-    <value>15</value>
+    <value>16</value>
   </data>
   <data name="chkTXEQ.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
     <value>Button</value>
@@ -2743,7 +2932,7 @@
     <value>Off</value>
   </data>
   <data name="chkTXEQ.Location" type="System.Drawing.Point, System.Drawing">
-    <value>268, 70</value>
+    <value>268, 60</value>
   </data>
   <data name="chkTXEQ.Size" type="System.Drawing.Size, System.Drawing">
     <value>50, 23</value>
@@ -2770,7 +2959,7 @@
     <value>panelModeSpecificPhone</value>
   </data>
   <data name="&gt;&gt;chkTXEQ.ZOrder" xml:space="preserve">
-    <value>17</value>
+    <value>18</value>
   </data>
   <data name="comboTXProfile.ItemHeight" type="System.Int32, mscorlib">
     <value>13</value>
@@ -2797,7 +2986,7 @@
     <value>panelModeSpecificPhone</value>
   </data>
   <data name="&gt;&gt;comboTXProfile.ZOrder" xml:space="preserve">
-    <value>18</value>
+    <value>19</value>
   </data>
   <data name="chkRXEQ.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
     <value>Button</value>
@@ -2812,7 +3001,7 @@
     <value>Off</value>
   </data>
   <data name="chkRXEQ.Location" type="System.Drawing.Point, System.Drawing">
-    <value>217, 70</value>
+    <value>217, 60</value>
   </data>
   <data name="chkRXEQ.Size" type="System.Drawing.Size, System.Drawing">
     <value>50, 23</value>
@@ -2839,7 +3028,7 @@
     <value>panelModeSpecificPhone</value>
   </data>
   <data name="&gt;&gt;chkRXEQ.ZOrder" xml:space="preserve">
-    <value>19</value>
+    <value>20</value>
   </data>
   <data name="chkCPDR.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
     <value>Button</value>
@@ -2857,7 +3046,7 @@
     <value>7, 70</value>
   </data>
   <data name="chkCPDR.Size" type="System.Drawing.Size, System.Drawing">
-    <value>50, 23</value>
+    <value>50, 24</value>
   </data>
   <data name="chkCPDR.TabIndex" type="System.Int32, mscorlib">
     <value>35</value>
@@ -2881,7 +3070,7 @@
     <value>panelModeSpecificPhone</value>
   </data>
   <data name="&gt;&gt;chkCPDR.ZOrder" xml:space="preserve">
-    <value>20</value>
+    <value>21</value>
   </data>
   <data name="chkPhoneVAC.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
     <value>Button</value>
@@ -2896,7 +3085,7 @@
     <value>Off</value>
   </data>
   <data name="chkPhoneVAC.Location" type="System.Drawing.Point, System.Drawing">
-    <value>217, 93</value>
+    <value>217, 83</value>
   </data>
   <data name="chkPhoneVAC.Size" type="System.Drawing.Size, System.Drawing">
     <value>50, 23</value>
@@ -2923,7 +3112,7 @@
     <value>panelModeSpecificPhone</value>
   </data>
   <data name="&gt;&gt;chkPhoneVAC.ZOrder" xml:space="preserve">
-    <value>21</value>
+    <value>22</value>
   </data>
   <data name="chkVOX.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
     <value>Button</value>
@@ -2941,7 +3130,7 @@
     <value>7, 96</value>
   </data>
   <data name="chkVOX.Size" type="System.Drawing.Size, System.Drawing">
-    <value>50, 23</value>
+    <value>50, 24</value>
   </data>
   <data name="chkVOX.TabIndex" type="System.Int32, mscorlib">
     <value>69</value>
@@ -2965,7 +3154,7 @@
     <value>panelModeSpecificPhone</value>
   </data>
   <data name="&gt;&gt;chkVOX.ZOrder" xml:space="preserve">
-    <value>22</value>
+    <value>23</value>
   </data>
   <data name="chkNoiseGate.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
     <value>Button</value>
@@ -2983,7 +3172,7 @@
     <value>7, 122</value>
   </data>
   <data name="chkNoiseGate.Size" type="System.Drawing.Size, System.Drawing">
-    <value>50, 23</value>
+    <value>50, 24</value>
   </data>
   <data name="chkNoiseGate.TabIndex" type="System.Int32, mscorlib">
     <value>70</value>
@@ -3007,7 +3196,7 @@
     <value>panelModeSpecificPhone</value>
   </data>
   <data name="&gt;&gt;chkNoiseGate.ZOrder" xml:space="preserve">
-    <value>23</value>
+    <value>24</value>
   </data>
   <data name="comboDigTXProfile.ItemHeight" type="System.Int32, mscorlib">
     <value>13</value>
@@ -3166,10 +3355,10 @@
     <value>Off</value>
   </data>
   <data name="btnDisplayPanCenter.Location" type="System.Drawing.Point, System.Drawing">
-    <value>245, 275</value>
+    <value>245, 274</value>
   </data>
   <data name="btnDisplayPanCenter.Size" type="System.Drawing.Size, System.Drawing">
-    <value>50, 23</value>
+    <value>50, 24</value>
   </data>
   <data name="btnDisplayPanCenter.TabIndex" type="System.Int32, mscorlib">
     <value>55</value>
@@ -3194,102 +3383,6 @@
   </data>
   <data name="&gt;&gt;btnDisplayPanCenter.ZOrder" xml:space="preserve">
     <value>14</value>
-  </data>
-  <data name="udFilterHigh.Enabled" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="udFilterHigh.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 8.25pt</value>
-  </data>
-  <data name="udFilterHigh.Location" type="System.Drawing.Point, System.Drawing">
-    <value>112, 98</value>
-  </data>
-  <data name="udFilterHigh.Size" type="System.Drawing.Size, System.Drawing">
-    <value>52, 20</value>
-  </data>
-  <data name="udFilterHigh.TabIndex" type="System.Int32, mscorlib">
-    <value>45</value>
-  </data>
-  <data name="udFilterHigh.ToolTip" xml:space="preserve">
-    <value>High Filter Cutoff</value>
-  </data>
-  <data name="&gt;&gt;udFilterHigh.Name" xml:space="preserve">
-    <value>udFilterHigh</value>
-  </data>
-  <data name="&gt;&gt;udFilterHigh.Type" xml:space="preserve">
-    <value>System.Windows.Forms.NumericUpDownTS, PowerSDR, Version=1.19.3.3, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;udFilterHigh.Parent" xml:space="preserve">
-    <value>panelFilter</value>
-  </data>
-  <data name="&gt;&gt;udFilterHigh.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="udFilterLow.Enabled" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="udFilterLow.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 8.25pt</value>
-  </data>
-  <data name="udFilterLow.Location" type="System.Drawing.Point, System.Drawing">
-    <value>32, 98</value>
-  </data>
-  <data name="udFilterLow.Size" type="System.Drawing.Size, System.Drawing">
-    <value>51, 20</value>
-  </data>
-  <data name="udFilterLow.TabIndex" type="System.Int32, mscorlib">
-    <value>26</value>
-  </data>
-  <data name="udFilterLow.ToolTip" xml:space="preserve">
-    <value>Low Filter Cutoff</value>
-  </data>
-  <data name="&gt;&gt;udFilterLow.Name" xml:space="preserve">
-    <value>udFilterLow</value>
-  </data>
-  <data name="&gt;&gt;udFilterLow.Type" xml:space="preserve">
-    <value>System.Windows.Forms.NumericUpDownTS, PowerSDR, Version=1.19.3.3, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;udFilterLow.Parent" xml:space="preserve">
-    <value>panelFilter</value>
-  </data>
-  <data name="&gt;&gt;udFilterLow.ZOrder" xml:space="preserve">
-    <value>5</value>
-  </data>
-  <data name="btnFilterShiftReset.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
-    <value>Flat</value>
-  </data>
-  <data name="btnFilterShiftReset.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 8.25pt</value>
-  </data>
-  <data name="btnFilterShiftReset.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>Off</value>
-  </data>
-  <data name="btnFilterShiftReset.Location" type="System.Drawing.Point, System.Drawing">
-    <value>116, 158</value>
-  </data>
-  <data name="btnFilterShiftReset.Size" type="System.Drawing.Size, System.Drawing">
-    <value>50, 23</value>
-  </data>
-  <data name="btnFilterShiftReset.TabIndex" type="System.Int32, mscorlib">
-    <value>50</value>
-  </data>
-  <data name="btnFilterShiftReset.Text" xml:space="preserve">
-    <value>Reset</value>
-  </data>
-  <data name="btnFilterShiftReset.ToolTip" xml:space="preserve">
-    <value>Reset IF Shift to center (0) position.</value>
-  </data>
-  <data name="&gt;&gt;btnFilterShiftReset.Name" xml:space="preserve">
-    <value>btnFilterShiftReset</value>
-  </data>
-  <data name="&gt;&gt;btnFilterShiftReset.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ButtonTS, PowerSDR, Version=1.19.3.3, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;btnFilterShiftReset.Parent" xml:space="preserve">
-    <value>panelFilter</value>
-  </data>
-  <data name="&gt;&gt;btnFilterShiftReset.ZOrder" xml:space="preserve">
-    <value>2</value>
   </data>
   <data name="radModeAM.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
     <value>Button</value>
@@ -3901,7 +3994,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;comboRX2Band.ZOrder" xml:space="preserve">
-    <value>20</value>
+    <value>18</value>
   </data>
   <data name="chkVFOATX.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
     <value>Button</value>
@@ -4045,7 +4138,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;chkPower.ZOrder" xml:space="preserve">
-    <value>32</value>
+    <value>30</value>
   </data>
   <data name="comboMeterTXMode.ItemHeight" type="System.Int32, mscorlib">
     <value>13</value>
@@ -4141,7 +4234,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;chkSquelch.ZOrder" xml:space="preserve">
-    <value>33</value>
+    <value>31</value>
   </data>
   <data name="btnMemoryQuickRestore.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
     <value>Flat</value>
@@ -4927,7 +5020,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lblRX2RF.ZOrder" xml:space="preserve">
-    <value>24</value>
+    <value>22</value>
   </data>
   <data name="chkRX2Squelch.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
     <value>Button</value>
@@ -4963,7 +5056,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;chkRX2Squelch.ZOrder" xml:space="preserve">
-    <value>23</value>
+    <value>21</value>
   </data>
   <data name="chkRX2Preamp.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
     <value>Button</value>
@@ -5002,7 +5095,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;chkRX2Preamp.ZOrder" xml:space="preserve">
-    <value>22</value>
+    <value>20</value>
   </data>
   <data name="chkRX2DisplayAVG.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
     <value>Button</value>
@@ -5811,78 +5904,6 @@
   <data name="&gt;&gt;ptbAF.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
-  <data name="ptbFilterWidth.BackgroundImageLayout" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
-    <value>Stretch</value>
-  </data>
-  <data name="ptbFilterWidth.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>Off</value>
-  </data>
-  <data name="ptbFilterWidth.Location" type="System.Drawing.Point, System.Drawing">
-    <value>48, 126</value>
-  </data>
-  <data name="ptbFilterWidth.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>2, 2, 2, 2</value>
-  </data>
-  <data name="ptbFilterWidth.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>2, 2, 2, 2</value>
-  </data>
-  <data name="ptbFilterWidth.Size" type="System.Drawing.Size, System.Drawing">
-    <value>112, 24</value>
-  </data>
-  <data name="ptbFilterWidth.TabIndex" type="System.Int32, mscorlib">
-    <value>114</value>
-  </data>
-  <data name="ptbFilterWidth.ToolTip" xml:space="preserve">
-    <value>Extends/Contracts the filter width with the slider.</value>
-  </data>
-  <data name="&gt;&gt;ptbFilterWidth.Name" xml:space="preserve">
-    <value>ptbFilterWidth</value>
-  </data>
-  <data name="&gt;&gt;ptbFilterWidth.Type" xml:space="preserve">
-    <value>PowerSDR.PrettyTrackBar, PowerSDR, Version=1.19.3.3, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ptbFilterWidth.Parent" xml:space="preserve">
-    <value>panelFilter</value>
-  </data>
-  <data name="&gt;&gt;ptbFilterWidth.ZOrder" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="ptbFilterShift.BackgroundImageLayout" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
-    <value>Stretch</value>
-  </data>
-  <data name="ptbFilterShift.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>Off</value>
-  </data>
-  <data name="ptbFilterShift.Location" type="System.Drawing.Point, System.Drawing">
-    <value>39, 158</value>
-  </data>
-  <data name="ptbFilterShift.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>2, 2, 2, 2</value>
-  </data>
-  <data name="ptbFilterShift.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>2, 2, 2, 2</value>
-  </data>
-  <data name="ptbFilterShift.Size" type="System.Drawing.Size, System.Drawing">
-    <value>80, 24</value>
-  </data>
-  <data name="ptbFilterShift.TabIndex" type="System.Int32, mscorlib">
-    <value>108</value>
-  </data>
-  <data name="ptbFilterShift.ToolTip" xml:space="preserve">
-    <value>Shifts the filter up or down the band with the slider.</value>
-  </data>
-  <data name="&gt;&gt;ptbFilterShift.Name" xml:space="preserve">
-    <value>ptbFilterShift</value>
-  </data>
-  <data name="&gt;&gt;ptbFilterShift.Type" xml:space="preserve">
-    <value>PowerSDR.PrettyTrackBar, PowerSDR, Version=1.19.3.3, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;ptbFilterShift.Parent" xml:space="preserve">
-    <value>panelFilter</value>
-  </data>
-  <data name="&gt;&gt;ptbFilterShift.ZOrder" xml:space="preserve">
-    <value>0</value>
-  </data>
   <data name="ptbPanMainRX.BackgroundImageLayout" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
     <value>Stretch</value>
   </data>
@@ -6166,10 +6187,10 @@
     <value>Off</value>
   </data>
   <data name="radDisplayZoom05.Location" type="System.Drawing.Point, System.Drawing">
-    <value>550, 275</value>
+    <value>550, 274</value>
   </data>
   <data name="radDisplayZoom05.Size" type="System.Drawing.Size, System.Drawing">
-    <value>40, 23</value>
+    <value>40, 24</value>
   </data>
   <data name="radDisplayZoom05.TabIndex" type="System.Int32, mscorlib">
     <value>64</value>
@@ -6211,7 +6232,7 @@
     <value>673, 274</value>
   </data>
   <data name="radDisplayZoom4x.Size" type="System.Drawing.Size, System.Drawing">
-    <value>40, 23</value>
+    <value>40, 24</value>
   </data>
   <data name="radDisplayZoom4x.TabIndex" type="System.Int32, mscorlib">
     <value>67</value>
@@ -6250,10 +6271,10 @@
     <value>Off</value>
   </data>
   <data name="radDisplayZoom2x.Location" type="System.Drawing.Point, System.Drawing">
-    <value>632, 275</value>
+    <value>632, 274</value>
   </data>
   <data name="radDisplayZoom2x.Size" type="System.Drawing.Size, System.Drawing">
-    <value>40, 23</value>
+    <value>40, 24</value>
   </data>
   <data name="radDisplayZoom2x.TabIndex" type="System.Int32, mscorlib">
     <value>66</value>
@@ -6292,10 +6313,10 @@
     <value>Off</value>
   </data>
   <data name="radDisplayZoom1x.Location" type="System.Drawing.Point, System.Drawing">
-    <value>591, 275</value>
+    <value>591, 274</value>
   </data>
   <data name="radDisplayZoom1x.Size" type="System.Drawing.Size, System.Drawing">
-    <value>40, 23</value>
+    <value>40, 24</value>
   </data>
   <data name="radDisplayZoom1x.TabIndex" type="System.Int32, mscorlib">
     <value>65</value>
@@ -6376,7 +6397,7 @@
     <value>Off</value>
   </data>
   <data name="chkPLTone.Location" type="System.Drawing.Point, System.Drawing">
-    <value>268, 93</value>
+    <value>217, 106</value>
   </data>
   <data name="chkPLTone.Size" type="System.Drawing.Size, System.Drawing">
     <value>50, 23</value>
@@ -6403,6 +6424,48 @@
     <value>panelModeSpecificPhone</value>
   </data>
   <data name="&gt;&gt;chkPLTone.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="chkMicMute.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
+    <value>Button</value>
+  </data>
+  <data name="chkMicMute.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
+    <value>Flat</value>
+  </data>
+  <data name="chkMicMute.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 8.25pt, style=Bold</value>
+  </data>
+  <data name="chkMicMute.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>Off</value>
+  </data>
+  <data name="chkMicMute.Location" type="System.Drawing.Point, System.Drawing">
+    <value>7, 18</value>
+  </data>
+  <data name="chkMicMute.Size" type="System.Drawing.Size, System.Drawing">
+    <value>50, 24</value>
+  </data>
+  <data name="chkMicMute.TabIndex" type="System.Int32, mscorlib">
+    <value>114</value>
+  </data>
+  <data name="chkMicMute.Text" xml:space="preserve">
+    <value>MIC</value>
+  </data>
+  <data name="chkMicMute.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>TopCenter</value>
+  </data>
+  <data name="chkMicMute.ToolTip" xml:space="preserve">
+    <value>Mutes Mic</value>
+  </data>
+  <data name="&gt;&gt;chkMicMute.Name" xml:space="preserve">
+    <value>chkMicMute</value>
+  </data>
+  <data name="&gt;&gt;chkMicMute.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBoxTS, PowerSDR, Version=1.19.3.3, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;chkMicMute.Parent" xml:space="preserve">
+    <value>panelModeSpecificPhone</value>
+  </data>
+  <data name="&gt;&gt;chkMicMute.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <data name="picSquelch.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
@@ -6427,7 +6490,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;picSquelch.ZOrder" xml:space="preserve">
-    <value>27</value>
+    <value>25</value>
   </data>
   <data name="picRX2Squelch.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>Off</value>
@@ -6543,6 +6606,618 @@
   <data name="&gt;&gt;ptbRX2Squelch.ZOrder" xml:space="preserve">
     <value>3</value>
   </data>
+  <data name="panelFilter.AutoScrollMargin" type="System.Drawing.Size, System.Drawing">
+    <value>0, 0</value>
+  </data>
+  <data name="panelFilter.AutoScrollMinSize" type="System.Drawing.Size, System.Drawing">
+    <value>0, 0</value>
+  </data>
+  <data name="radFilter1.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
+    <value>Button</value>
+  </data>
+  <data name="radFilter1.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
+    <value>Flat</value>
+  </data>
+  <data name="radFilter1.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 8.25pt, style=Bold</value>
+  </data>
+  <data name="radFilter1.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="radFilter1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>10, 7</value>
+  </data>
+  <data name="radFilter1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>50, 23</value>
+  </data>
+  <data name="radFilter1.TabIndex" type="System.Int32, mscorlib">
+    <value>26</value>
+  </data>
+  <data name="radFilter1.Text" xml:space="preserve">
+    <value>6.0k</value>
+  </data>
+  <data name="radFilter1.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>TopCenter</value>
+  </data>
+  <data name="&gt;&gt;radFilter1.Name" xml:space="preserve">
+    <value>radFilter1</value>
+  </data>
+  <data name="&gt;&gt;radFilter1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButtonTS, PowerSDR, Version=1.19.3.3, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;radFilter1.Parent" xml:space="preserve">
+    <value>panelFilter</value>
+  </data>
+  <data name="&gt;&gt;radFilter1.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="lblFilterHigh.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="lblFilterHigh.Location" type="System.Drawing.Point, System.Drawing">
+    <value>85, 166</value>
+  </data>
+  <data name="lblFilterHigh.Size" type="System.Drawing.Size, System.Drawing">
+    <value>30, 16</value>
+  </data>
+  <data name="lblFilterHigh.TabIndex" type="System.Int32, mscorlib">
+    <value>47</value>
+  </data>
+  <data name="lblFilterHigh.Text" xml:space="preserve">
+    <value>High</value>
+  </data>
+  <data name="lblFilterHigh.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleLeft</value>
+  </data>
+  <data name="&gt;&gt;lblFilterHigh.Name" xml:space="preserve">
+    <value>lblFilterHigh</value>
+  </data>
+  <data name="&gt;&gt;lblFilterHigh.Type" xml:space="preserve">
+    <value>System.Windows.Forms.LabelTS, PowerSDR, Version=1.19.3.3, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;lblFilterHigh.Parent" xml:space="preserve">
+    <value>panelFilter</value>
+  </data>
+  <data name="&gt;&gt;lblFilterHigh.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
+  <data name="lblFilterWidth.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>Off</value>
+  </data>
+  <data name="lblFilterWidth.Location" type="System.Drawing.Point, System.Drawing">
+    <value>5, 111</value>
+  </data>
+  <data name="lblFilterWidth.Size" type="System.Drawing.Size, System.Drawing">
+    <value>40, 16</value>
+  </data>
+  <data name="lblFilterWidth.TabIndex" type="System.Int32, mscorlib">
+    <value>52</value>
+  </data>
+  <data name="lblFilterWidth.Text" xml:space="preserve">
+    <value>Width:</value>
+  </data>
+  <data name="&gt;&gt;lblFilterWidth.Name" xml:space="preserve">
+    <value>lblFilterWidth</value>
+  </data>
+  <data name="&gt;&gt;lblFilterWidth.Type" xml:space="preserve">
+    <value>System.Windows.Forms.LabelTS, PowerSDR, Version=1.19.3.3, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;lblFilterWidth.Parent" xml:space="preserve">
+    <value>panelFilter</value>
+  </data>
+  <data name="&gt;&gt;lblFilterWidth.ZOrder" xml:space="preserve">
+    <value>7</value>
+  </data>
+  <data name="radFilterVar2.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
+    <value>Button</value>
+  </data>
+  <data name="radFilterVar2.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
+    <value>Flat</value>
+  </data>
+  <data name="radFilterVar2.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 8.25pt, style=Bold</value>
+  </data>
+  <data name="radFilterVar2.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="radFilterVar2.Location" type="System.Drawing.Point, System.Drawing">
+    <value>112, 76</value>
+  </data>
+  <data name="radFilterVar2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>50, 23</value>
+  </data>
+  <data name="radFilterVar2.TabIndex" type="System.Int32, mscorlib">
+    <value>36</value>
+  </data>
+  <data name="radFilterVar2.Text" xml:space="preserve">
+    <value>Var 2</value>
+  </data>
+  <data name="radFilterVar2.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>TopCenter</value>
+  </data>
+  <data name="&gt;&gt;radFilterVar2.Name" xml:space="preserve">
+    <value>radFilterVar2</value>
+  </data>
+  <data name="&gt;&gt;radFilterVar2.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButtonTS, PowerSDR, Version=1.19.3.3, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;radFilterVar2.Parent" xml:space="preserve">
+    <value>panelFilter</value>
+  </data>
+  <data name="&gt;&gt;radFilterVar2.ZOrder" xml:space="preserve">
+    <value>8</value>
+  </data>
+  <data name="lblFilterLow.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="lblFilterLow.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 166</value>
+  </data>
+  <data name="lblFilterLow.Size" type="System.Drawing.Size, System.Drawing">
+    <value>28, 16</value>
+  </data>
+  <data name="lblFilterLow.TabIndex" type="System.Int32, mscorlib">
+    <value>46</value>
+  </data>
+  <data name="lblFilterLow.Text" xml:space="preserve">
+    <value>Low</value>
+  </data>
+  <data name="lblFilterLow.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>MiddleLeft</value>
+  </data>
+  <data name="&gt;&gt;lblFilterLow.Name" xml:space="preserve">
+    <value>lblFilterLow</value>
+  </data>
+  <data name="&gt;&gt;lblFilterLow.Type" xml:space="preserve">
+    <value>System.Windows.Forms.LabelTS, PowerSDR, Version=1.19.3.3, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;lblFilterLow.Parent" xml:space="preserve">
+    <value>panelFilter</value>
+  </data>
+  <data name="&gt;&gt;lblFilterLow.ZOrder" xml:space="preserve">
+    <value>9</value>
+  </data>
+  <data name="radFilterVar1.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
+    <value>Button</value>
+  </data>
+  <data name="radFilterVar1.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
+    <value>Flat</value>
+  </data>
+  <data name="radFilterVar1.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 8.25pt, style=Bold</value>
+  </data>
+  <data name="radFilterVar1.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="radFilterVar1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>61, 76</value>
+  </data>
+  <data name="radFilterVar1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>50, 23</value>
+  </data>
+  <data name="radFilterVar1.TabIndex" type="System.Int32, mscorlib">
+    <value>35</value>
+  </data>
+  <data name="radFilterVar1.Text" xml:space="preserve">
+    <value>Var 1</value>
+  </data>
+  <data name="radFilterVar1.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>TopCenter</value>
+  </data>
+  <data name="&gt;&gt;radFilterVar1.Name" xml:space="preserve">
+    <value>radFilterVar1</value>
+  </data>
+  <data name="&gt;&gt;radFilterVar1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButtonTS, PowerSDR, Version=1.19.3.3, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;radFilterVar1.Parent" xml:space="preserve">
+    <value>panelFilter</value>
+  </data>
+  <data name="&gt;&gt;radFilterVar1.ZOrder" xml:space="preserve">
+    <value>10</value>
+  </data>
+  <data name="radFilter10.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
+    <value>Button</value>
+  </data>
+  <data name="radFilter10.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
+    <value>Flat</value>
+  </data>
+  <data name="radFilter10.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 8.25pt, style=Bold</value>
+  </data>
+  <data name="radFilter10.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="radFilter10.Location" type="System.Drawing.Point, System.Drawing">
+    <value>10, 76</value>
+  </data>
+  <data name="radFilter10.Size" type="System.Drawing.Size, System.Drawing">
+    <value>50, 23</value>
+  </data>
+  <data name="radFilter10.TabIndex" type="System.Int32, mscorlib">
+    <value>34</value>
+  </data>
+  <data name="radFilter10.Text" xml:space="preserve">
+    <value>25</value>
+  </data>
+  <data name="radFilter10.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>TopCenter</value>
+  </data>
+  <data name="&gt;&gt;radFilter10.Name" xml:space="preserve">
+    <value>radFilter10</value>
+  </data>
+  <data name="&gt;&gt;radFilter10.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButtonTS, PowerSDR, Version=1.19.3.3, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;radFilter10.Parent" xml:space="preserve">
+    <value>panelFilter</value>
+  </data>
+  <data name="&gt;&gt;radFilter10.ZOrder" xml:space="preserve">
+    <value>11</value>
+  </data>
+  <data name="lblFilterShift.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>Off</value>
+  </data>
+  <data name="lblFilterShift.Location" type="System.Drawing.Point, System.Drawing">
+    <value>5, 142</value>
+  </data>
+  <data name="lblFilterShift.Size" type="System.Drawing.Size, System.Drawing">
+    <value>39, 16</value>
+  </data>
+  <data name="lblFilterShift.TabIndex" type="System.Int32, mscorlib">
+    <value>49</value>
+  </data>
+  <data name="lblFilterShift.Text" xml:space="preserve">
+    <value>Shift:</value>
+  </data>
+  <data name="&gt;&gt;lblFilterShift.Name" xml:space="preserve">
+    <value>lblFilterShift</value>
+  </data>
+  <data name="&gt;&gt;lblFilterShift.Type" xml:space="preserve">
+    <value>System.Windows.Forms.LabelTS, PowerSDR, Version=1.19.3.3, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;lblFilterShift.Parent" xml:space="preserve">
+    <value>panelFilter</value>
+  </data>
+  <data name="&gt;&gt;lblFilterShift.ZOrder" xml:space="preserve">
+    <value>12</value>
+  </data>
+  <data name="radFilter9.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
+    <value>Button</value>
+  </data>
+  <data name="radFilter9.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
+    <value>Flat</value>
+  </data>
+  <data name="radFilter9.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 8.25pt, style=Bold</value>
+  </data>
+  <data name="radFilter9.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="radFilter9.Location" type="System.Drawing.Point, System.Drawing">
+    <value>112, 53</value>
+  </data>
+  <data name="radFilter9.Size" type="System.Drawing.Size, System.Drawing">
+    <value>50, 23</value>
+  </data>
+  <data name="radFilter9.TabIndex" type="System.Int32, mscorlib">
+    <value>33</value>
+  </data>
+  <data name="radFilter9.Text" xml:space="preserve">
+    <value>50</value>
+  </data>
+  <data name="radFilter9.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>TopCenter</value>
+  </data>
+  <data name="&gt;&gt;radFilter9.Name" xml:space="preserve">
+    <value>radFilter9</value>
+  </data>
+  <data name="&gt;&gt;radFilter9.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButtonTS, PowerSDR, Version=1.19.3.3, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;radFilter9.Parent" xml:space="preserve">
+    <value>panelFilter</value>
+  </data>
+  <data name="&gt;&gt;radFilter9.ZOrder" xml:space="preserve">
+    <value>13</value>
+  </data>
+  <data name="radFilter8.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
+    <value>Button</value>
+  </data>
+  <data name="radFilter8.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
+    <value>Flat</value>
+  </data>
+  <data name="radFilter8.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 8.25pt, style=Bold</value>
+  </data>
+  <data name="radFilter8.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="radFilter8.Location" type="System.Drawing.Point, System.Drawing">
+    <value>61, 53</value>
+  </data>
+  <data name="radFilter8.Size" type="System.Drawing.Size, System.Drawing">
+    <value>50, 23</value>
+  </data>
+  <data name="radFilter8.TabIndex" type="System.Int32, mscorlib">
+    <value>32</value>
+  </data>
+  <data name="radFilter8.Text" xml:space="preserve">
+    <value>100</value>
+  </data>
+  <data name="radFilter8.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>TopCenter</value>
+  </data>
+  <data name="&gt;&gt;radFilter8.Name" xml:space="preserve">
+    <value>radFilter8</value>
+  </data>
+  <data name="&gt;&gt;radFilter8.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButtonTS, PowerSDR, Version=1.19.3.3, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;radFilter8.Parent" xml:space="preserve">
+    <value>panelFilter</value>
+  </data>
+  <data name="&gt;&gt;radFilter8.ZOrder" xml:space="preserve">
+    <value>14</value>
+  </data>
+  <data name="radFilter2.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
+    <value>Button</value>
+  </data>
+  <data name="radFilter2.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
+    <value>Flat</value>
+  </data>
+  <data name="radFilter2.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 8.25pt, style=Bold</value>
+  </data>
+  <data name="radFilter2.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="radFilter2.Location" type="System.Drawing.Point, System.Drawing">
+    <value>61, 7</value>
+  </data>
+  <data name="radFilter2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>50, 23</value>
+  </data>
+  <data name="radFilter2.TabIndex" type="System.Int32, mscorlib">
+    <value>27</value>
+  </data>
+  <data name="radFilter2.Text" xml:space="preserve">
+    <value>4.0k</value>
+  </data>
+  <data name="radFilter2.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>TopCenter</value>
+  </data>
+  <data name="&gt;&gt;radFilter2.Name" xml:space="preserve">
+    <value>radFilter2</value>
+  </data>
+  <data name="&gt;&gt;radFilter2.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButtonTS, PowerSDR, Version=1.19.3.3, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;radFilter2.Parent" xml:space="preserve">
+    <value>panelFilter</value>
+  </data>
+  <data name="&gt;&gt;radFilter2.ZOrder" xml:space="preserve">
+    <value>15</value>
+  </data>
+  <data name="radFilter7.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
+    <value>Button</value>
+  </data>
+  <data name="radFilter7.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
+    <value>Flat</value>
+  </data>
+  <data name="radFilter7.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 8.25pt, style=Bold</value>
+  </data>
+  <data name="radFilter7.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="radFilter7.Location" type="System.Drawing.Point, System.Drawing">
+    <value>10, 53</value>
+  </data>
+  <data name="radFilter7.Size" type="System.Drawing.Size, System.Drawing">
+    <value>50, 23</value>
+  </data>
+  <data name="radFilter7.TabIndex" type="System.Int32, mscorlib">
+    <value>31</value>
+  </data>
+  <data name="radFilter7.Text" xml:space="preserve">
+    <value>250</value>
+  </data>
+  <data name="radFilter7.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>TopCenter</value>
+  </data>
+  <data name="&gt;&gt;radFilter7.Name" xml:space="preserve">
+    <value>radFilter7</value>
+  </data>
+  <data name="&gt;&gt;radFilter7.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButtonTS, PowerSDR, Version=1.19.3.3, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;radFilter7.Parent" xml:space="preserve">
+    <value>panelFilter</value>
+  </data>
+  <data name="&gt;&gt;radFilter7.ZOrder" xml:space="preserve">
+    <value>16</value>
+  </data>
+  <data name="radFilter3.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
+    <value>Button</value>
+  </data>
+  <data name="radFilter3.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
+    <value>Flat</value>
+  </data>
+  <data name="radFilter3.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 8.25pt, style=Bold</value>
+  </data>
+  <data name="radFilter3.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="radFilter3.Location" type="System.Drawing.Point, System.Drawing">
+    <value>112, 7</value>
+  </data>
+  <data name="radFilter3.Size" type="System.Drawing.Size, System.Drawing">
+    <value>50, 23</value>
+  </data>
+  <data name="radFilter3.TabIndex" type="System.Int32, mscorlib">
+    <value>27</value>
+  </data>
+  <data name="radFilter3.Text" xml:space="preserve">
+    <value>2.6k</value>
+  </data>
+  <data name="radFilter3.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>TopCenter</value>
+  </data>
+  <data name="&gt;&gt;radFilter3.Name" xml:space="preserve">
+    <value>radFilter3</value>
+  </data>
+  <data name="&gt;&gt;radFilter3.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButtonTS, PowerSDR, Version=1.19.3.3, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;radFilter3.Parent" xml:space="preserve">
+    <value>panelFilter</value>
+  </data>
+  <data name="&gt;&gt;radFilter3.ZOrder" xml:space="preserve">
+    <value>17</value>
+  </data>
+  <data name="radFilter6.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
+    <value>Button</value>
+  </data>
+  <data name="radFilter6.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
+    <value>Flat</value>
+  </data>
+  <data name="radFilter6.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 8.25pt, style=Bold</value>
+  </data>
+  <data name="radFilter6.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="radFilter6.Location" type="System.Drawing.Point, System.Drawing">
+    <value>112, 30</value>
+  </data>
+  <data name="radFilter6.Size" type="System.Drawing.Size, System.Drawing">
+    <value>50, 23</value>
+  </data>
+  <data name="radFilter6.TabIndex" type="System.Int32, mscorlib">
+    <value>30</value>
+  </data>
+  <data name="radFilter6.Text" xml:space="preserve">
+    <value>500</value>
+  </data>
+  <data name="radFilter6.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>TopCenter</value>
+  </data>
+  <data name="&gt;&gt;radFilter6.Name" xml:space="preserve">
+    <value>radFilter6</value>
+  </data>
+  <data name="&gt;&gt;radFilter6.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButtonTS, PowerSDR, Version=1.19.3.3, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;radFilter6.Parent" xml:space="preserve">
+    <value>panelFilter</value>
+  </data>
+  <data name="&gt;&gt;radFilter6.ZOrder" xml:space="preserve">
+    <value>18</value>
+  </data>
+  <data name="radFilter4.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
+    <value>Button</value>
+  </data>
+  <data name="radFilter4.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
+    <value>Flat</value>
+  </data>
+  <data name="radFilter4.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 8.25pt, style=Bold</value>
+  </data>
+  <data name="radFilter4.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="radFilter4.Location" type="System.Drawing.Point, System.Drawing">
+    <value>10, 30</value>
+  </data>
+  <data name="radFilter4.Size" type="System.Drawing.Size, System.Drawing">
+    <value>50, 23</value>
+  </data>
+  <data name="radFilter4.TabIndex" type="System.Int32, mscorlib">
+    <value>28</value>
+  </data>
+  <data name="radFilter4.Text" xml:space="preserve">
+    <value>2.1k</value>
+  </data>
+  <data name="radFilter4.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>TopCenter</value>
+  </data>
+  <data name="&gt;&gt;radFilter4.Name" xml:space="preserve">
+    <value>radFilter4</value>
+  </data>
+  <data name="&gt;&gt;radFilter4.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButtonTS, PowerSDR, Version=1.19.3.3, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;radFilter4.Parent" xml:space="preserve">
+    <value>panelFilter</value>
+  </data>
+  <data name="&gt;&gt;radFilter4.ZOrder" xml:space="preserve">
+    <value>19</value>
+  </data>
+  <data name="radFilter5.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
+    <value>Button</value>
+  </data>
+  <data name="radFilter5.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
+    <value>Flat</value>
+  </data>
+  <data name="radFilter5.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 8.25pt, style=Bold</value>
+  </data>
+  <data name="radFilter5.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="radFilter5.Location" type="System.Drawing.Point, System.Drawing">
+    <value>61, 30</value>
+  </data>
+  <data name="radFilter5.Size" type="System.Drawing.Size, System.Drawing">
+    <value>50, 23</value>
+  </data>
+  <data name="radFilter5.TabIndex" type="System.Int32, mscorlib">
+    <value>29</value>
+  </data>
+  <data name="radFilter5.Text" xml:space="preserve">
+    <value>1.0k</value>
+  </data>
+  <data name="radFilter5.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
+    <value>TopCenter</value>
+  </data>
+  <data name="&gt;&gt;radFilter5.Name" xml:space="preserve">
+    <value>radFilter5</value>
+  </data>
+  <data name="&gt;&gt;radFilter5.Type" xml:space="preserve">
+    <value>System.Windows.Forms.RadioButtonTS, PowerSDR, Version=1.19.3.3, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;radFilter5.Parent" xml:space="preserve">
+    <value>panelFilter</value>
+  </data>
+  <data name="&gt;&gt;radFilter5.ZOrder" xml:space="preserve">
+    <value>20</value>
+  </data>
+  <data name="panelFilter.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 8.25pt, style=Bold</value>
+  </data>
+  <data name="panelFilter.Location" type="System.Drawing.Point, System.Drawing">
+    <value>840, 368</value>
+  </data>
+  <data name="panelFilter.Size" type="System.Drawing.Size, System.Drawing">
+    <value>173, 192</value>
+  </data>
+  <data name="panelFilter.TabIndex" type="System.Int32, mscorlib">
+    <value>62</value>
+  </data>
+  <data name="&gt;&gt;panelFilter.Name" xml:space="preserve">
+    <value>panelFilter</value>
+  </data>
+  <data name="&gt;&gt;panelFilter.Type" xml:space="preserve">
+    <value>System.Windows.Forms.PanelTS, PowerSDR, Version=1.19.3.3, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;panelFilter.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;panelFilter.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
   <data name="panelOptions.AutoScrollMargin" type="System.Drawing.Size, System.Drawing">
     <value>0, 0</value>
   </data>
@@ -6571,7 +7246,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;panelOptions.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>6</value>
   </data>
   <data name="panelModeSpecificCW.AutoScrollMargin" type="System.Drawing.Size, System.Drawing">
     <value>0, 0</value>
@@ -6703,7 +7378,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;panelModeSpecificCW.ZOrder" xml:space="preserve">
-    <value>39</value>
+    <value>41</value>
   </data>
   <data name="panelAntenna.AutoScrollMargin" type="System.Drawing.Size, System.Drawing">
     <value>0, 0</value>
@@ -6823,7 +7498,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;panelAntenna.ZOrder" xml:space="preserve">
-    <value>38</value>
+    <value>35</value>
   </data>
   <data name="panelRX2Filter.AutoScrollMargin" type="System.Drawing.Size, System.Drawing">
     <value>0, 0</value>
@@ -7261,7 +7936,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;panelRX2Filter.ZOrder" xml:space="preserve">
-    <value>8</value>
+    <value>7</value>
   </data>
   <data name="panelRX2Mode.AutoScrollMargin" type="System.Drawing.Size, System.Drawing">
     <value>0, 0</value>
@@ -7288,7 +7963,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;panelRX2Mode.ZOrder" xml:space="preserve">
-    <value>9</value>
+    <value>8</value>
   </data>
   <data name="panelRX2Display.AutoScrollMargin" type="System.Drawing.Size, System.Drawing">
     <value>0, 0</value>
@@ -7315,7 +7990,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;panelRX2Display.ZOrder" xml:space="preserve">
-    <value>10</value>
+    <value>9</value>
   </data>
   <data name="panelRX2Mixer.AutoScrollMargin" type="System.Drawing.Size, System.Drawing">
     <value>0, 0</value>
@@ -7432,7 +8107,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;panelRX2Mixer.ZOrder" xml:space="preserve">
-    <value>12</value>
+    <value>11</value>
   </data>
   <data name="panelMultiRX.AutoScrollMargin" type="System.Drawing.Size, System.Drawing">
     <value>0, 0</value>
@@ -7459,7 +8134,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;panelMultiRX.ZOrder" xml:space="preserve">
-    <value>13</value>
+    <value>12</value>
   </data>
   <data name="panelDisplay2.AutoScrollMargin" type="System.Drawing.Size, System.Drawing">
     <value>0, 0</value>
@@ -7489,7 +8164,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;panelDisplay2.ZOrder" xml:space="preserve">
-    <value>14</value>
+    <value>13</value>
   </data>
   <data name="panelDSP.AutoScrollMargin" type="System.Drawing.Size, System.Drawing">
     <value>0, 0</value>
@@ -7519,7 +8194,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;panelDSP.ZOrder" xml:space="preserve">
-    <value>15</value>
+    <value>14</value>
   </data>
   <data name="panelVFO.AutoScrollMargin" type="System.Drawing.Size, System.Drawing">
     <value>0, 0</value>
@@ -7534,7 +8209,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblCPUMeter.Location" type="System.Drawing.Point, System.Drawing">
-    <value>12, 128</value>
+    <value>10, 128</value>
   </data>
   <data name="lblCPUMeter.Size" type="System.Drawing.Size, System.Drawing">
     <value>120, 16</value>
@@ -7548,6 +8223,9 @@
   <data name="lblCPUMeter.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleLeft</value>
   </data>
+  <data name="lblCPUMeter.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
   <data name="&gt;&gt;lblCPUMeter.Name" xml:space="preserve">
     <value>lblCPUMeter</value>
   </data>
@@ -7558,7 +8236,7 @@
     <value>panelVFO</value>
   </data>
   <data name="&gt;&gt;lblCPUMeter.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>12</value>
   </data>
   <data name="panelVFO.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 8.25pt, style=Bold</value>
@@ -7582,7 +8260,34 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;panelVFO.ZOrder" xml:space="preserve">
-    <value>16</value>
+    <value>15</value>
+  </data>
+  <data name="txtCPUMeter.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 8.25pt, style=Bold</value>
+  </data>
+  <data name="txtCPUMeter.Location" type="System.Drawing.Point, System.Drawing">
+    <value>8, 53</value>
+  </data>
+  <data name="txtCPUMeter.Size" type="System.Drawing.Size, System.Drawing">
+    <value>88, 20</value>
+  </data>
+  <data name="txtCPUMeter.TabIndex" type="System.Int32, mscorlib">
+    <value>64</value>
+  </data>
+  <data name="txtCPUMeter.Text" xml:space="preserve">
+    <value>CPU %:</value>
+  </data>
+  <data name="&gt;&gt;txtCPUMeter.Name" xml:space="preserve">
+    <value>txtCPUMeter</value>
+  </data>
+  <data name="&gt;&gt;txtCPUMeter.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBoxTS, PowerSDR, Version=1.19.3.3, Culture=neutral, PublicKeyToken=null</value>
+  </data>
+  <data name="&gt;&gt;txtCPUMeter.Parent" xml:space="preserve">
+    <value>panelDateTime</value>
+  </data>
+  <data name="&gt;&gt;txtCPUMeter.ZOrder" xml:space="preserve">
+    <value>2</value>
   </data>
   <data name="panelDateTime.AutoScrollMargin" type="System.Drawing.Size, System.Drawing">
     <value>0, 0</value>
@@ -7590,8 +8295,11 @@
   <data name="panelDateTime.AutoScrollMinSize" type="System.Drawing.Size, System.Drawing">
     <value>0, 0</value>
   </data>
+  <data name="txtTime.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 8.25pt, style=Bold</value>
+  </data>
   <data name="txtTime.Location" type="System.Drawing.Point, System.Drawing">
-    <value>8, 42</value>
+    <value>8, 30</value>
   </data>
   <data name="txtTime.Size" type="System.Drawing.Size, System.Drawing">
     <value>88, 20</value>
@@ -7617,8 +8325,11 @@
   <data name="&gt;&gt;txtTime.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
+  <data name="txtDate.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Microsoft Sans Serif, 8.25pt, style=Bold</value>
+  </data>
   <data name="txtDate.Location" type="System.Drawing.Point, System.Drawing">
-    <value>8, 18</value>
+    <value>8, 7</value>
   </data>
   <data name="txtDate.Size" type="System.Drawing.Size, System.Drawing">
     <value>88, 20</value>
@@ -7663,7 +8374,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;panelDateTime.ZOrder" xml:space="preserve">
-    <value>17</value>
+    <value>16</value>
   </data>
   <data name="panelSoundControls.AutoScrollMargin" type="System.Drawing.Size, System.Drawing">
     <value>0, 0</value>
@@ -7675,7 +8386,7 @@
     <value>Off</value>
   </data>
   <data name="lblAF.Location" type="System.Drawing.Point, System.Drawing">
-    <value>8, 10</value>
+    <value>8, 13</value>
   </data>
   <data name="lblAF.Size" type="System.Drawing.Size, System.Drawing">
     <value>79, 16</value>
@@ -7705,7 +8416,7 @@
     <value>Off</value>
   </data>
   <data name="lblPreamp.Location" type="System.Drawing.Point, System.Drawing">
-    <value>52, 154</value>
+    <value>52, 159</value>
   </data>
   <data name="lblPreamp.Size" type="System.Drawing.Size, System.Drawing">
     <value>48, 16</value>
@@ -7735,7 +8446,7 @@
     <value>Off</value>
   </data>
   <data name="lblPWR.Location" type="System.Drawing.Point, System.Drawing">
-    <value>8, 106</value>
+    <value>8, 109</value>
   </data>
   <data name="lblPWR.Size" type="System.Drawing.Size, System.Drawing">
     <value>88, 16</value>
@@ -7780,7 +8491,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;panelSoundControls.ZOrder" xml:space="preserve">
-    <value>18</value>
+    <value>17</value>
   </data>
   <data name="panelModeSpecificPhone.AutoScrollMargin" type="System.Drawing.Size, System.Drawing">
     <value>0, 0</value>
@@ -7810,7 +8521,7 @@
     <value>panelModeSpecificPhone</value>
   </data>
   <data name="&gt;&gt;picNoiseGate.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>2</value>
   </data>
   <data name="lblNoiseGateVal.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 8.25pt, style=Bold</value>
@@ -7843,7 +8554,7 @@
     <value>panelModeSpecificPhone</value>
   </data>
   <data name="&gt;&gt;lblNoiseGateVal.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>3</value>
   </data>
   <data name="ptbNoiseGate.BackgroundImageLayout" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
     <value>Stretch</value>
@@ -7876,7 +8587,7 @@
     <value>panelModeSpecificPhone</value>
   </data>
   <data name="&gt;&gt;ptbNoiseGate.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>4</value>
   </data>
   <data name="picVOX.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>Off</value>
@@ -7900,7 +8611,7 @@
     <value>panelModeSpecificPhone</value>
   </data>
   <data name="&gt;&gt;picVOX.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>5</value>
   </data>
   <data name="ptbVOX.BackgroundImageLayout" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
     <value>Stretch</value>
@@ -7933,7 +8644,7 @@
     <value>panelModeSpecificPhone</value>
   </data>
   <data name="&gt;&gt;ptbVOX.ZOrder" xml:space="preserve">
-    <value>5</value>
+    <value>6</value>
   </data>
   <data name="lblVOXVal.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 8.25pt, style=Bold</value>
@@ -7966,7 +8677,7 @@
     <value>panelModeSpecificPhone</value>
   </data>
   <data name="&gt;&gt;lblVOXVal.ZOrder" xml:space="preserve">
-    <value>6</value>
+    <value>7</value>
   </data>
   <data name="ptbCPDR.BackgroundImageLayout" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
     <value>Stretch</value>
@@ -7999,7 +8710,7 @@
     <value>panelModeSpecificPhone</value>
   </data>
   <data name="&gt;&gt;ptbCPDR.ZOrder" xml:space="preserve">
-    <value>7</value>
+    <value>8</value>
   </data>
   <data name="lblCPDRVal.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 8.25pt, style=Bold</value>
@@ -8032,7 +8743,7 @@
     <value>panelModeSpecificPhone</value>
   </data>
   <data name="&gt;&gt;lblCPDRVal.ZOrder" xml:space="preserve">
-    <value>8</value>
+    <value>9</value>
   </data>
   <data name="ptbDX.BackgroundImageLayout" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
     <value>Stretch</value>
@@ -8065,7 +8776,7 @@
     <value>panelModeSpecificPhone</value>
   </data>
   <data name="&gt;&gt;ptbDX.ZOrder" xml:space="preserve">
-    <value>9</value>
+    <value>10</value>
   </data>
   <data name="lblDXVal.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 8.25pt, style=Bold</value>
@@ -8098,7 +8809,7 @@
     <value>panelModeSpecificPhone</value>
   </data>
   <data name="&gt;&gt;lblDXVal.ZOrder" xml:space="preserve">
-    <value>10</value>
+    <value>11</value>
   </data>
   <data name="lblMicVal.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 8.25pt, style=Bold</value>
@@ -8110,16 +8821,16 @@
     <value>159, 21</value>
   </data>
   <data name="lblMicVal.Size" type="System.Drawing.Size, System.Drawing">
-    <value>29, 16</value>
+    <value>55, 16</value>
   </data>
   <data name="lblMicVal.TabIndex" type="System.Int32, mscorlib">
     <value>108</value>
   </data>
   <data name="lblMicVal.Text" xml:space="preserve">
-    <value>10</value>
+    <value>-40</value>
   </data>
   <data name="lblMicVal.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>MiddleCenter</value>
+    <value>MiddleLeft</value>
   </data>
   <data name="&gt;&gt;lblMicVal.Name" xml:space="preserve">
     <value>lblMicVal</value>
@@ -8131,7 +8842,7 @@
     <value>panelModeSpecificPhone</value>
   </data>
   <data name="&gt;&gt;lblMicVal.ZOrder" xml:space="preserve">
-    <value>11</value>
+    <value>12</value>
   </data>
   <data name="ptbMic.BackgroundImageLayout" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
     <value>Stretch</value>
@@ -8164,7 +8875,7 @@
     <value>panelModeSpecificPhone</value>
   </data>
   <data name="&gt;&gt;ptbMic.ZOrder" xml:space="preserve">
-    <value>12</value>
+    <value>13</value>
   </data>
   <data name="lblMIC.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 8.25pt, style=Bold</value>
@@ -8182,10 +8893,13 @@
     <value>52</value>
   </data>
   <data name="lblMIC.Text" xml:space="preserve">
-    <value>Mic</value>
+    <value>MIC</value>
   </data>
   <data name="lblMIC.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
     <value>MiddleCenter</value>
+  </data>
+  <data name="lblMIC.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
   </data>
   <data name="&gt;&gt;lblMIC.Name" xml:space="preserve">
     <value>lblMIC</value>
@@ -8197,7 +8911,7 @@
     <value>panelModeSpecificPhone</value>
   </data>
   <data name="&gt;&gt;lblMIC.ZOrder" xml:space="preserve">
-    <value>13</value>
+    <value>14</value>
   </data>
   <data name="lblTransmitProfile.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>Off</value>
@@ -8227,7 +8941,7 @@
     <value>panelModeSpecificPhone</value>
   </data>
   <data name="&gt;&gt;lblTransmitProfile.ZOrder" xml:space="preserve">
-    <value>16</value>
+    <value>17</value>
   </data>
   <data name="panelModeSpecificPhone.Location" type="System.Drawing.Point, System.Drawing">
     <value>504, 400</value>
@@ -8248,7 +8962,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;panelModeSpecificPhone.ZOrder" xml:space="preserve">
-    <value>40</value>
+    <value>39</value>
   </data>
   <data name="panelModeSpecificDigital.AutoScrollMargin" type="System.Drawing.Size, System.Drawing">
     <value>0, 0</value>
@@ -8410,7 +9124,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;panelModeSpecificDigital.ZOrder" xml:space="preserve">
-    <value>41</value>
+    <value>40</value>
   </data>
   <data name="panelDisplay.AutoScrollMargin" type="System.Drawing.Size, System.Drawing">
     <value>0, 0</value>
@@ -8713,619 +9427,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;panelDisplay.ZOrder" xml:space="preserve">
-    <value>36</value>
-  </data>
-  <data name="panelFilter.AutoScrollMargin" type="System.Drawing.Size, System.Drawing">
-    <value>0, 0</value>
-  </data>
-  <data name="panelFilter.AutoScrollMinSize" type="System.Drawing.Size, System.Drawing">
-    <value>0, 0</value>
-  </data>
-  <data name="radFilter1.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
-    <value>Button</value>
-  </data>
-  <data name="radFilter1.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
-    <value>Flat</value>
-  </data>
-  <data name="radFilter1.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 8.25pt, style=Bold</value>
-  </data>
-  <data name="radFilter1.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="radFilter1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>8, 2</value>
-  </data>
-  <data name="radFilter1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>50, 23</value>
-  </data>
-  <data name="radFilter1.TabIndex" type="System.Int32, mscorlib">
-    <value>26</value>
-  </data>
-  <data name="radFilter1.Text" xml:space="preserve">
-    <value>6.0k</value>
-  </data>
-  <data name="radFilter1.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>TopCenter</value>
-  </data>
-  <data name="&gt;&gt;radFilter1.Name" xml:space="preserve">
-    <value>radFilter1</value>
-  </data>
-  <data name="&gt;&gt;radFilter1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RadioButtonTS, PowerSDR, Version=1.19.3.3, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;radFilter1.Parent" xml:space="preserve">
-    <value>panelFilter</value>
-  </data>
-  <data name="&gt;&gt;radFilter1.ZOrder" xml:space="preserve">
-    <value>4</value>
-  </data>
-  <data name="lblFilterHigh.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="lblFilterHigh.Location" type="System.Drawing.Point, System.Drawing">
-    <value>81, 98</value>
-  </data>
-  <data name="lblFilterHigh.Size" type="System.Drawing.Size, System.Drawing">
-    <value>40, 16</value>
-  </data>
-  <data name="lblFilterHigh.TabIndex" type="System.Int32, mscorlib">
-    <value>47</value>
-  </data>
-  <data name="lblFilterHigh.Text" xml:space="preserve">
-    <value>High</value>
-  </data>
-  <data name="lblFilterHigh.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>MiddleLeft</value>
-  </data>
-  <data name="&gt;&gt;lblFilterHigh.Name" xml:space="preserve">
-    <value>lblFilterHigh</value>
-  </data>
-  <data name="&gt;&gt;lblFilterHigh.Type" xml:space="preserve">
-    <value>System.Windows.Forms.LabelTS, PowerSDR, Version=1.19.3.3, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;lblFilterHigh.Parent" xml:space="preserve">
-    <value>panelFilter</value>
-  </data>
-  <data name="&gt;&gt;lblFilterHigh.ZOrder" xml:space="preserve">
-    <value>6</value>
-  </data>
-  <data name="lblFilterLow.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="lblFilterLow.Location" type="System.Drawing.Point, System.Drawing">
-    <value>5, 98</value>
-  </data>
-  <data name="lblFilterLow.Size" type="System.Drawing.Size, System.Drawing">
-    <value>32, 16</value>
-  </data>
-  <data name="lblFilterLow.TabIndex" type="System.Int32, mscorlib">
-    <value>46</value>
-  </data>
-  <data name="lblFilterLow.Text" xml:space="preserve">
-    <value>Low</value>
-  </data>
-  <data name="lblFilterLow.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>MiddleLeft</value>
-  </data>
-  <data name="&gt;&gt;lblFilterLow.Name" xml:space="preserve">
-    <value>lblFilterLow</value>
-  </data>
-  <data name="&gt;&gt;lblFilterLow.Type" xml:space="preserve">
-    <value>System.Windows.Forms.LabelTS, PowerSDR, Version=1.19.3.3, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;lblFilterLow.Parent" xml:space="preserve">
-    <value>panelFilter</value>
-  </data>
-  <data name="&gt;&gt;lblFilterLow.ZOrder" xml:space="preserve">
-    <value>7</value>
-  </data>
-  <data name="lblFilterWidth.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>Off</value>
-  </data>
-  <data name="lblFilterWidth.Location" type="System.Drawing.Point, System.Drawing">
-    <value>5, 126</value>
-  </data>
-  <data name="lblFilterWidth.Size" type="System.Drawing.Size, System.Drawing">
-    <value>40, 16</value>
-  </data>
-  <data name="lblFilterWidth.TabIndex" type="System.Int32, mscorlib">
-    <value>52</value>
-  </data>
-  <data name="lblFilterWidth.Text" xml:space="preserve">
-    <value>Width:</value>
-  </data>
-  <data name="&gt;&gt;lblFilterWidth.Name" xml:space="preserve">
-    <value>lblFilterWidth</value>
-  </data>
-  <data name="&gt;&gt;lblFilterWidth.Type" xml:space="preserve">
-    <value>System.Windows.Forms.LabelTS, PowerSDR, Version=1.19.3.3, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;lblFilterWidth.Parent" xml:space="preserve">
-    <value>panelFilter</value>
-  </data>
-  <data name="&gt;&gt;lblFilterWidth.ZOrder" xml:space="preserve">
-    <value>8</value>
-  </data>
-  <data name="radFilterVar2.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
-    <value>Button</value>
-  </data>
-  <data name="radFilterVar2.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
-    <value>Flat</value>
-  </data>
-  <data name="radFilterVar2.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 8.25pt, style=Bold</value>
-  </data>
-  <data name="radFilterVar2.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="radFilterVar2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>110, 71</value>
-  </data>
-  <data name="radFilterVar2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>50, 23</value>
-  </data>
-  <data name="radFilterVar2.TabIndex" type="System.Int32, mscorlib">
-    <value>36</value>
-  </data>
-  <data name="radFilterVar2.Text" xml:space="preserve">
-    <value>Var 2</value>
-  </data>
-  <data name="radFilterVar2.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>TopCenter</value>
-  </data>
-  <data name="&gt;&gt;radFilterVar2.Name" xml:space="preserve">
-    <value>radFilterVar2</value>
-  </data>
-  <data name="&gt;&gt;radFilterVar2.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RadioButtonTS, PowerSDR, Version=1.19.3.3, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;radFilterVar2.Parent" xml:space="preserve">
-    <value>panelFilter</value>
-  </data>
-  <data name="&gt;&gt;radFilterVar2.ZOrder" xml:space="preserve">
-    <value>9</value>
-  </data>
-  <data name="radFilterVar1.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
-    <value>Button</value>
-  </data>
-  <data name="radFilterVar1.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
-    <value>Flat</value>
-  </data>
-  <data name="radFilterVar1.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 8.25pt, style=Bold</value>
-  </data>
-  <data name="radFilterVar1.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="radFilterVar1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>59, 71</value>
-  </data>
-  <data name="radFilterVar1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>50, 23</value>
-  </data>
-  <data name="radFilterVar1.TabIndex" type="System.Int32, mscorlib">
-    <value>35</value>
-  </data>
-  <data name="radFilterVar1.Text" xml:space="preserve">
-    <value>Var 1</value>
-  </data>
-  <data name="radFilterVar1.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>TopCenter</value>
-  </data>
-  <data name="&gt;&gt;radFilterVar1.Name" xml:space="preserve">
-    <value>radFilterVar1</value>
-  </data>
-  <data name="&gt;&gt;radFilterVar1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RadioButtonTS, PowerSDR, Version=1.19.3.3, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;radFilterVar1.Parent" xml:space="preserve">
-    <value>panelFilter</value>
-  </data>
-  <data name="&gt;&gt;radFilterVar1.ZOrder" xml:space="preserve">
-    <value>10</value>
-  </data>
-  <data name="radFilter10.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
-    <value>Button</value>
-  </data>
-  <data name="radFilter10.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
-    <value>Flat</value>
-  </data>
-  <data name="radFilter10.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 8.25pt, style=Bold</value>
-  </data>
-  <data name="radFilter10.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="radFilter10.Location" type="System.Drawing.Point, System.Drawing">
-    <value>8, 71</value>
-  </data>
-  <data name="radFilter10.Size" type="System.Drawing.Size, System.Drawing">
-    <value>50, 23</value>
-  </data>
-  <data name="radFilter10.TabIndex" type="System.Int32, mscorlib">
-    <value>34</value>
-  </data>
-  <data name="radFilter10.Text" xml:space="preserve">
-    <value>25</value>
-  </data>
-  <data name="radFilter10.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>TopCenter</value>
-  </data>
-  <data name="&gt;&gt;radFilter10.Name" xml:space="preserve">
-    <value>radFilter10</value>
-  </data>
-  <data name="&gt;&gt;radFilter10.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RadioButtonTS, PowerSDR, Version=1.19.3.3, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;radFilter10.Parent" xml:space="preserve">
-    <value>panelFilter</value>
-  </data>
-  <data name="&gt;&gt;radFilter10.ZOrder" xml:space="preserve">
-    <value>11</value>
-  </data>
-  <data name="lblFilterShift.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>Off</value>
-  </data>
-  <data name="lblFilterShift.Location" type="System.Drawing.Point, System.Drawing">
-    <value>5, 158</value>
-  </data>
-  <data name="lblFilterShift.Size" type="System.Drawing.Size, System.Drawing">
-    <value>39, 16</value>
-  </data>
-  <data name="lblFilterShift.TabIndex" type="System.Int32, mscorlib">
-    <value>49</value>
-  </data>
-  <data name="lblFilterShift.Text" xml:space="preserve">
-    <value>Shift:</value>
-  </data>
-  <data name="&gt;&gt;lblFilterShift.Name" xml:space="preserve">
-    <value>lblFilterShift</value>
-  </data>
-  <data name="&gt;&gt;lblFilterShift.Type" xml:space="preserve">
-    <value>System.Windows.Forms.LabelTS, PowerSDR, Version=1.19.3.3, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;lblFilterShift.Parent" xml:space="preserve">
-    <value>panelFilter</value>
-  </data>
-  <data name="&gt;&gt;lblFilterShift.ZOrder" xml:space="preserve">
-    <value>12</value>
-  </data>
-  <data name="radFilter9.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
-    <value>Button</value>
-  </data>
-  <data name="radFilter9.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
-    <value>Flat</value>
-  </data>
-  <data name="radFilter9.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 8.25pt, style=Bold</value>
-  </data>
-  <data name="radFilter9.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="radFilter9.Location" type="System.Drawing.Point, System.Drawing">
-    <value>110, 48</value>
-  </data>
-  <data name="radFilter9.Size" type="System.Drawing.Size, System.Drawing">
-    <value>50, 23</value>
-  </data>
-  <data name="radFilter9.TabIndex" type="System.Int32, mscorlib">
     <value>33</value>
-  </data>
-  <data name="radFilter9.Text" xml:space="preserve">
-    <value>50</value>
-  </data>
-  <data name="radFilter9.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>TopCenter</value>
-  </data>
-  <data name="&gt;&gt;radFilter9.Name" xml:space="preserve">
-    <value>radFilter9</value>
-  </data>
-  <data name="&gt;&gt;radFilter9.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RadioButtonTS, PowerSDR, Version=1.19.3.3, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;radFilter9.Parent" xml:space="preserve">
-    <value>panelFilter</value>
-  </data>
-  <data name="&gt;&gt;radFilter9.ZOrder" xml:space="preserve">
-    <value>13</value>
-  </data>
-  <data name="radFilter8.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
-    <value>Button</value>
-  </data>
-  <data name="radFilter8.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
-    <value>Flat</value>
-  </data>
-  <data name="radFilter8.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 8.25pt, style=Bold</value>
-  </data>
-  <data name="radFilter8.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="radFilter8.Location" type="System.Drawing.Point, System.Drawing">
-    <value>59, 48</value>
-  </data>
-  <data name="radFilter8.Size" type="System.Drawing.Size, System.Drawing">
-    <value>50, 23</value>
-  </data>
-  <data name="radFilter8.TabIndex" type="System.Int32, mscorlib">
-    <value>32</value>
-  </data>
-  <data name="radFilter8.Text" xml:space="preserve">
-    <value>100</value>
-  </data>
-  <data name="radFilter8.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>TopCenter</value>
-  </data>
-  <data name="&gt;&gt;radFilter8.Name" xml:space="preserve">
-    <value>radFilter8</value>
-  </data>
-  <data name="&gt;&gt;radFilter8.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RadioButtonTS, PowerSDR, Version=1.19.3.3, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;radFilter8.Parent" xml:space="preserve">
-    <value>panelFilter</value>
-  </data>
-  <data name="&gt;&gt;radFilter8.ZOrder" xml:space="preserve">
-    <value>14</value>
-  </data>
-  <data name="radFilter2.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
-    <value>Button</value>
-  </data>
-  <data name="radFilter2.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
-    <value>Flat</value>
-  </data>
-  <data name="radFilter2.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 8.25pt, style=Bold</value>
-  </data>
-  <data name="radFilter2.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="radFilter2.Location" type="System.Drawing.Point, System.Drawing">
-    <value>59, 2</value>
-  </data>
-  <data name="radFilter2.Size" type="System.Drawing.Size, System.Drawing">
-    <value>50, 23</value>
-  </data>
-  <data name="radFilter2.TabIndex" type="System.Int32, mscorlib">
-    <value>27</value>
-  </data>
-  <data name="radFilter2.Text" xml:space="preserve">
-    <value>4.0k</value>
-  </data>
-  <data name="radFilter2.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>TopCenter</value>
-  </data>
-  <data name="&gt;&gt;radFilter2.Name" xml:space="preserve">
-    <value>radFilter2</value>
-  </data>
-  <data name="&gt;&gt;radFilter2.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RadioButtonTS, PowerSDR, Version=1.19.3.3, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;radFilter2.Parent" xml:space="preserve">
-    <value>panelFilter</value>
-  </data>
-  <data name="&gt;&gt;radFilter2.ZOrder" xml:space="preserve">
-    <value>15</value>
-  </data>
-  <data name="radFilter7.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
-    <value>Button</value>
-  </data>
-  <data name="radFilter7.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
-    <value>Flat</value>
-  </data>
-  <data name="radFilter7.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 8.25pt, style=Bold</value>
-  </data>
-  <data name="radFilter7.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="radFilter7.Location" type="System.Drawing.Point, System.Drawing">
-    <value>8, 48</value>
-  </data>
-  <data name="radFilter7.Size" type="System.Drawing.Size, System.Drawing">
-    <value>50, 23</value>
-  </data>
-  <data name="radFilter7.TabIndex" type="System.Int32, mscorlib">
-    <value>31</value>
-  </data>
-  <data name="radFilter7.Text" xml:space="preserve">
-    <value>250</value>
-  </data>
-  <data name="radFilter7.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>TopCenter</value>
-  </data>
-  <data name="&gt;&gt;radFilter7.Name" xml:space="preserve">
-    <value>radFilter7</value>
-  </data>
-  <data name="&gt;&gt;radFilter7.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RadioButtonTS, PowerSDR, Version=1.19.3.3, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;radFilter7.Parent" xml:space="preserve">
-    <value>panelFilter</value>
-  </data>
-  <data name="&gt;&gt;radFilter7.ZOrder" xml:space="preserve">
-    <value>16</value>
-  </data>
-  <data name="radFilter3.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
-    <value>Button</value>
-  </data>
-  <data name="radFilter3.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
-    <value>Flat</value>
-  </data>
-  <data name="radFilter3.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 8.25pt, style=Bold</value>
-  </data>
-  <data name="radFilter3.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="radFilter3.Location" type="System.Drawing.Point, System.Drawing">
-    <value>110, 2</value>
-  </data>
-  <data name="radFilter3.Size" type="System.Drawing.Size, System.Drawing">
-    <value>50, 23</value>
-  </data>
-  <data name="radFilter3.TabIndex" type="System.Int32, mscorlib">
-    <value>27</value>
-  </data>
-  <data name="radFilter3.Text" xml:space="preserve">
-    <value>2.6k</value>
-  </data>
-  <data name="radFilter3.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>TopCenter</value>
-  </data>
-  <data name="&gt;&gt;radFilter3.Name" xml:space="preserve">
-    <value>radFilter3</value>
-  </data>
-  <data name="&gt;&gt;radFilter3.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RadioButtonTS, PowerSDR, Version=1.19.3.3, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;radFilter3.Parent" xml:space="preserve">
-    <value>panelFilter</value>
-  </data>
-  <data name="&gt;&gt;radFilter3.ZOrder" xml:space="preserve">
-    <value>17</value>
-  </data>
-  <data name="radFilter6.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
-    <value>Button</value>
-  </data>
-  <data name="radFilter6.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
-    <value>Flat</value>
-  </data>
-  <data name="radFilter6.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 8.25pt, style=Bold</value>
-  </data>
-  <data name="radFilter6.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="radFilter6.Location" type="System.Drawing.Point, System.Drawing">
-    <value>110, 25</value>
-  </data>
-  <data name="radFilter6.Size" type="System.Drawing.Size, System.Drawing">
-    <value>50, 23</value>
-  </data>
-  <data name="radFilter6.TabIndex" type="System.Int32, mscorlib">
-    <value>30</value>
-  </data>
-  <data name="radFilter6.Text" xml:space="preserve">
-    <value>500</value>
-  </data>
-  <data name="radFilter6.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>TopCenter</value>
-  </data>
-  <data name="&gt;&gt;radFilter6.Name" xml:space="preserve">
-    <value>radFilter6</value>
-  </data>
-  <data name="&gt;&gt;radFilter6.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RadioButtonTS, PowerSDR, Version=1.19.3.3, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;radFilter6.Parent" xml:space="preserve">
-    <value>panelFilter</value>
-  </data>
-  <data name="&gt;&gt;radFilter6.ZOrder" xml:space="preserve">
-    <value>18</value>
-  </data>
-  <data name="radFilter4.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
-    <value>Button</value>
-  </data>
-  <data name="radFilter4.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
-    <value>Flat</value>
-  </data>
-  <data name="radFilter4.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 8.25pt, style=Bold</value>
-  </data>
-  <data name="radFilter4.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="radFilter4.Location" type="System.Drawing.Point, System.Drawing">
-    <value>8, 25</value>
-  </data>
-  <data name="radFilter4.Size" type="System.Drawing.Size, System.Drawing">
-    <value>50, 23</value>
-  </data>
-  <data name="radFilter4.TabIndex" type="System.Int32, mscorlib">
-    <value>28</value>
-  </data>
-  <data name="radFilter4.Text" xml:space="preserve">
-    <value>2.1k</value>
-  </data>
-  <data name="radFilter4.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>TopCenter</value>
-  </data>
-  <data name="&gt;&gt;radFilter4.Name" xml:space="preserve">
-    <value>radFilter4</value>
-  </data>
-  <data name="&gt;&gt;radFilter4.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RadioButtonTS, PowerSDR, Version=1.19.3.3, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;radFilter4.Parent" xml:space="preserve">
-    <value>panelFilter</value>
-  </data>
-  <data name="&gt;&gt;radFilter4.ZOrder" xml:space="preserve">
-    <value>19</value>
-  </data>
-  <data name="radFilter5.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
-    <value>Button</value>
-  </data>
-  <data name="radFilter5.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
-    <value>Flat</value>
-  </data>
-  <data name="radFilter5.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 8.25pt, style=Bold</value>
-  </data>
-  <data name="radFilter5.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="radFilter5.Location" type="System.Drawing.Point, System.Drawing">
-    <value>59, 25</value>
-  </data>
-  <data name="radFilter5.Size" type="System.Drawing.Size, System.Drawing">
-    <value>50, 23</value>
-  </data>
-  <data name="radFilter5.TabIndex" type="System.Int32, mscorlib">
-    <value>29</value>
-  </data>
-  <data name="radFilter5.Text" xml:space="preserve">
-    <value>1.0k</value>
-  </data>
-  <data name="radFilter5.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>TopCenter</value>
-  </data>
-  <data name="&gt;&gt;radFilter5.Name" xml:space="preserve">
-    <value>radFilter5</value>
-  </data>
-  <data name="&gt;&gt;radFilter5.Type" xml:space="preserve">
-    <value>System.Windows.Forms.RadioButtonTS, PowerSDR, Version=1.19.3.3, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;radFilter5.Parent" xml:space="preserve">
-    <value>panelFilter</value>
-  </data>
-  <data name="&gt;&gt;radFilter5.ZOrder" xml:space="preserve">
-    <value>20</value>
-  </data>
-  <data name="panelFilter.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Microsoft Sans Serif, 8.25pt, style=Bold</value>
-  </data>
-  <data name="panelFilter.Location" type="System.Drawing.Point, System.Drawing">
-    <value>840, 368</value>
-  </data>
-  <data name="panelFilter.Size" type="System.Drawing.Size, System.Drawing">
-    <value>173, 192</value>
-  </data>
-  <data name="panelFilter.TabIndex" type="System.Int32, mscorlib">
-    <value>62</value>
-  </data>
-  <data name="&gt;&gt;panelFilter.Name" xml:space="preserve">
-    <value>panelFilter</value>
-  </data>
-  <data name="&gt;&gt;panelFilter.Type" xml:space="preserve">
-    <value>System.Windows.Forms.PanelTS, PowerSDR, Version=1.19.3.3, Culture=neutral, PublicKeyToken=null</value>
-  </data>
-  <data name="&gt;&gt;panelFilter.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;panelFilter.ZOrder" xml:space="preserve">
-    <value>19</value>
   </data>
   <data name="panelMode.AutoScrollMargin" type="System.Drawing.Size, System.Drawing">
     <value>0, 0</value>
@@ -9337,7 +9439,10 @@
     <value>Microsoft Sans Serif, 8.25pt, style=Bold</value>
   </data>
   <data name="panelMode.Location" type="System.Drawing.Point, System.Drawing">
-    <value>838, 260</value>
+    <value>840, 260</value>
+  </data>
+  <data name="panelMode.RightToLeft" type="System.Windows.Forms.RightToLeft, System.Windows.Forms">
+    <value>Yes</value>
   </data>
   <data name="panelMode.Size" type="System.Drawing.Size, System.Drawing">
     <value>173, 104</value>
@@ -9355,7 +9460,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;panelMode.ZOrder" xml:space="preserve">
-    <value>6</value>
+    <value>36</value>
   </data>
   <data name="panelBandHF.AutoScrollMargin" type="System.Drawing.Size, System.Drawing">
     <value>0, 0</value>
@@ -9367,7 +9472,7 @@
     <value>Microsoft Sans Serif, 8.25pt, style=Bold</value>
   </data>
   <data name="panelBandHF.Location" type="System.Drawing.Point, System.Drawing">
-    <value>838, 126</value>
+    <value>840, 126</value>
   </data>
   <data name="panelBandHF.Size" type="System.Drawing.Size, System.Drawing">
     <value>173, 128</value>
@@ -9385,7 +9490,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;panelBandHF.ZOrder" xml:space="preserve">
-    <value>7</value>
+    <value>37</value>
   </data>
   <data name="txtVFOAFreq.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 20.25pt</value>
@@ -9604,7 +9709,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;grpVFOA.ZOrder" xml:space="preserve">
-    <value>30</value>
+    <value>28</value>
   </data>
   <data name="txtVFOBLSD.Font" type="System.Drawing.Font, System.Drawing">
     <value>Microsoft Sans Serif, 15.75pt</value>
@@ -9811,7 +9916,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;grpVFOB.ZOrder" xml:space="preserve">
-    <value>31</value>
+    <value>29</value>
   </data>
   <data name="btnBandHF.FlatStyle" type="System.Windows.Forms.FlatStyle, System.Windows.Forms">
     <value>Flat</value>
@@ -9949,7 +10054,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;grpMultimeter.ZOrder" xml:space="preserve">
-    <value>29</value>
+    <value>27</value>
   </data>
   <data name="lblTuneStep.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>Off</value>
@@ -9997,7 +10102,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;grpVFOBetween.ZOrder" xml:space="preserve">
-    <value>28</value>
+    <value>26</value>
   </data>
   <data name="lblDisplayModeTop.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>Off</value>
@@ -10078,7 +10183,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;grpDisplaySplit.ZOrder" xml:space="preserve">
-    <value>26</value>
+    <value>24</value>
   </data>
   <data name="chkRX2.Appearance" type="System.Windows.Forms.Appearance, System.Windows.Forms">
     <value>Button</value>
@@ -10114,7 +10219,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;chkRX2.ZOrder" xml:space="preserve">
-    <value>34</value>
+    <value>32</value>
   </data>
   <data name="picRX2Meter.Enabled" type="System.Boolean, mscorlib">
     <value>False</value>
@@ -10219,7 +10324,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;grpRX2Meter.ZOrder" xml:space="preserve">
-    <value>25</value>
+    <value>23</value>
   </data>
   <data name="lblRX2Band.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>Off</value>
@@ -10249,7 +10354,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lblRX2Band.ZOrder" xml:space="preserve">
-    <value>21</value>
+    <value>19</value>
   </data>
   <data name="panelBandVHF.AutoScrollMargin" type="System.Drawing.Size, System.Drawing">
     <value>0, 0</value>
@@ -10846,7 +10951,7 @@
     <value>13</value>
   </data>
   <data name="panelBandVHF.Location" type="System.Drawing.Point, System.Drawing">
-    <value>838, 126</value>
+    <value>840, 126</value>
   </data>
   <data name="panelBandVHF.Size" type="System.Drawing.Size, System.Drawing">
     <value>173, 128</value>
@@ -10864,7 +10969,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;panelBandVHF.ZOrder" xml:space="preserve">
-    <value>35</value>
+    <value>38</value>
   </data>
   <data name="panelRX2DSP.AutoScrollMargin" type="System.Drawing.Size, System.Drawing">
     <value>0, 0</value>
@@ -10891,7 +10996,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;panelRX2DSP.ZOrder" xml:space="preserve">
-    <value>11</value>
+    <value>10</value>
   </data>
   <data name="ptbSquelch.BackgroundImageLayout" type="System.Windows.Forms.ImageLayout, System.Windows.Forms">
     <value>Stretch</value>
@@ -10924,7 +11029,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;ptbSquelch.ZOrder" xml:space="preserve">
-    <value>37</value>
+    <value>34</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -10939,7 +11044,7 @@
     <value>Stretch</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>1016, 673</value>
+    <value>1016, 681</value>
   </data>
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -10987,7 +11092,7 @@
     <value>Off</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
-    <value>PowerSDR™/OpenHPSDR v1.19.3.3   baseSVN 3444 (W5WC - 2/19/11)</value>
+    <value>PowerSDR™/OpenHPSDR v1.19.3.3   baseSVN 3444 (W5WC - 2/24/11)</value>
   </data>
   <data name="&gt;&gt;mainMenu1.Name" xml:space="preserve">
     <value>mainMenu1</value>
