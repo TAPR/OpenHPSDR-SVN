@@ -4189,18 +4189,17 @@ namespace PowerSDR
             resources.ApplyResources(this.panelFilter, "panelFilter");
             this.panelFilter.BackColor = System.Drawing.Color.Transparent;
             this.panelFilter.ContextMenuStrip = this.contextMenuStripFilterRX1;
+            this.panelFilter.Controls.Add(this.radFilter1);
             this.panelFilter.Controls.Add(this.ptbFilterShift);
             this.panelFilter.Controls.Add(this.ptbFilterWidth);
             this.panelFilter.Controls.Add(this.btnFilterShiftReset);
             this.panelFilter.Controls.Add(this.udFilterHigh);
-            this.panelFilter.Controls.Add(this.radFilter1);
             this.panelFilter.Controls.Add(this.udFilterLow);
             this.panelFilter.Controls.Add(this.lblFilterHigh);
             this.panelFilter.Controls.Add(this.lblFilterWidth);
             this.panelFilter.Controls.Add(this.radFilterVar2);
             this.panelFilter.Controls.Add(this.lblFilterLow);
             this.panelFilter.Controls.Add(this.radFilterVar1);
-            this.panelFilter.Controls.Add(this.radFilter10);
             this.panelFilter.Controls.Add(this.lblFilterShift);
             this.panelFilter.Controls.Add(this.radFilter9);
             this.panelFilter.Controls.Add(this.radFilter8);
@@ -4210,6 +4209,7 @@ namespace PowerSDR
             this.panelFilter.Controls.Add(this.radFilter6);
             this.panelFilter.Controls.Add(this.radFilter4);
             this.panelFilter.Controls.Add(this.radFilter5);
+            this.panelFilter.Controls.Add(this.radFilter10);
             this.panelFilter.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.panelFilter.Name = "panelFilter";
             // 
@@ -5649,7 +5649,6 @@ namespace PowerSDR
             this.BackColor = System.Drawing.SystemColors.Control;
             this.Controls.Add(this.picRX2Squelch);
             this.Controls.Add(this.ptbRX2Squelch);
-            this.Controls.Add(this.panelFilter);
             this.Controls.Add(this.ptbRX2RF);
             this.Controls.Add(this.panelOptions);
             this.Controls.Add(this.panelRX2Filter);
@@ -5687,6 +5686,7 @@ namespace PowerSDR
             this.Controls.Add(this.panelModeSpecificPhone);
             this.Controls.Add(this.panelModeSpecificDigital);
             this.Controls.Add(this.panelModeSpecificCW);
+            this.Controls.Add(this.panelFilter);
             this.KeyPreview = true;
             this.Menu = this.mainMenu1;
             this.Name = "Console";
@@ -8593,7 +8593,7 @@ namespace PowerSDR
 					switch(m)
 					{
 						case (int)DSPMode.LSB:
-						case (int)DSPMode.DIGL:
+						//case (int)DSPMode.DIGL:
 						switch(f)
 						{
 							case Filter.F1:
@@ -8636,7 +8636,7 @@ namespace PowerSDR
 							preset[m].LastFilter = Filter.F6;
 							break;
 						case (int)DSPMode.USB:
-						case (int)DSPMode.DIGU:
+						//case (int)DSPMode.DIGU:
 						switch(f)
 						{
 							case Filter.F1:
@@ -8678,7 +8678,91 @@ namespace PowerSDR
 						}
 							preset[m].LastFilter = Filter.F6;
 							break;
-						case (int)DSPMode.CWL:
+			                        case (int)DSPMode.DIGL:
+                            switch (f)
+                            {
+                                case Filter.F1:
+                                    preset[m].SetFilter(f, -digl_click_tune_offset-1500, -digl_click_tune_offset+1500, "3.0k");
+                                    break;
+                                case Filter.F2:
+                                    preset[m].SetFilter(f, -digl_click_tune_offset-1250, -digl_click_tune_offset+1250, "2.5k");
+                                    break;
+                                case Filter.F3:
+                                    preset[m].SetFilter(f, -digl_click_tune_offset-1000, -digl_click_tune_offset+1000, "2.0k");
+                                    break;
+                                case Filter.F4:
+                                    preset[m].SetFilter(f, -digl_click_tune_offset-750, -digl_click_tune_offset+750, "1.5k");
+                                    break;
+                                case Filter.F5:
+                                    preset[m].SetFilter(f, -digl_click_tune_offset-500, -digl_click_tune_offset+500, "1.0k");
+                                    break;
+                                case Filter.F6:
+                                    preset[m].SetFilter(f, -digl_click_tune_offset-400, -digl_click_tune_offset+400, "800");
+                                    break;
+                                case Filter.F7:
+                                    preset[m].SetFilter(f, -digl_click_tune_offset-300, -digl_click_tune_offset+300, "600");
+                                    break;
+                                case Filter.F8:
+                                    preset[m].SetFilter(f, -digl_click_tune_offset-150, -digl_click_tune_offset+150, "300");
+                                    break;
+                                case Filter.F9:
+                                    preset[m].SetFilter(f, -digl_click_tune_offset-75, -digl_click_tune_offset+75, "150");
+                                    break;
+                                case Filter.F10:
+                                    preset[m].SetFilter(f, -digl_click_tune_offset-38, -digl_click_tune_offset+38, "75");
+                                    break;
+                                case Filter.VAR1:
+                                    preset[m].SetFilter(f, -digl_click_tune_offset-400, -digl_click_tune_offset+400, "Var 1");
+                                    break;
+                                case Filter.VAR2:
+                                    preset[m].SetFilter(f, -digl_click_tune_offset-400, -digl_click_tune_offset+400, "Var 2");
+                                    break;
+                            }
+                            preset[m].LastFilter = Filter.F5;
+                            break;
+                        case (int)DSPMode.DIGU:
+                            switch (f)
+                            {
+                                case Filter.F1:
+                                    preset[m].SetFilter(f, digu_click_tune_offset-1500, digu_click_tune_offset+1500, "3.0k");
+                                    break;
+                                case Filter.F2:
+                                    preset[m].SetFilter(f, digu_click_tune_offset-1250, digu_click_tune_offset+1250, "2.5k");
+                                    break;
+                                case Filter.F3:
+                                    preset[m].SetFilter(f, digu_click_tune_offset-1000, digu_click_tune_offset+1000, "2.0k");
+                                    break;
+                                case Filter.F4:
+                                    preset[m].SetFilter(f, digu_click_tune_offset-750, digu_click_tune_offset+750, "1.5k");
+                                    break;
+                                case Filter.F5:
+                                    preset[m].SetFilter(f, digu_click_tune_offset-500, digu_click_tune_offset+500, "1.0k");
+                                    break;
+                                case Filter.F6:
+                                    preset[m].SetFilter(f, digu_click_tune_offset-400, digu_click_tune_offset+400, "800");
+                                    break;
+                                case Filter.F7:
+                                    preset[m].SetFilter(f, digu_click_tune_offset-300, digu_click_tune_offset+300, "600");
+                                    break;
+                                case Filter.F8:
+                                    preset[m].SetFilter(f, digu_click_tune_offset-150, digu_click_tune_offset+150, "300");
+                                    break;
+                                case Filter.F9:
+                                    preset[m].SetFilter(f, digu_click_tune_offset-75, digu_click_tune_offset+75, "150");
+                                    break;
+                                case Filter.F10:
+                                    preset[m].SetFilter(f, digu_click_tune_offset-38, digu_click_tune_offset+38, "75");
+                                    break;
+                                case Filter.VAR1:
+                                    preset[m].SetFilter(f, digu_click_tune_offset - 400, digu_click_tune_offset+400, "Var 1");
+                                    break;
+                                case Filter.VAR2:
+                                    preset[m].SetFilter(f, digu_click_tune_offset-400, digu_click_tune_offset+400, "Var 2");
+                                    break;
+                            }
+                            preset[m].LastFilter = Filter.F5;
+                            break;	
+			case (int)DSPMode.CWL:
 						switch(f)
 						{
 							case Filter.F1:
@@ -9412,6 +9496,42 @@ namespace PowerSDR
 			SetRX2BandButtonColor(rx2_band);*/
             SetRX1BandButton(rx1_band);
 		}
+		
+       private void DeselectHF()
+        {
+            radBand160.Checked = false;
+            radBand80.Checked = false;
+            radBand60.Checked = false;
+            radBand40.Checked = false;
+            radBand30.Checked = false;
+            radBand20.Checked = false;
+            radBand17.Checked = false;
+            radBand15.Checked = false;
+            radBand12.Checked = false;
+            radBand10.Checked = false;
+            radBand6.Checked = false;
+            radBandWWV.Checked = false;
+            radBandGEN.Checked = false;
+            radBand2.Checked = false;
+        }
+
+        private void DeselectVHF()
+        {
+            radBandVHF0.Checked = false;
+            radBandVHF1.Checked = false;
+            radBandVHF2.Checked = false;
+            radBandVHF3.Checked = false;
+            radBandVHF4.Checked = false;
+            radBandVHF5.Checked = false;
+            radBandVHF6.Checked = false;
+            radBandVHF7.Checked = false;
+            radBandVHF8.Checked = false;
+            radBandVHF9.Checked = false;
+            radBandVHF10.Checked = false;
+            radBandVHF11.Checked = false;
+            radBandVHF12.Checked = false;
+            radBandVHF13.Checked = false;
+        }
 
         private void SetRX1BandButton(Band b)
         {
@@ -9419,49 +9539,119 @@ namespace PowerSDR
             {
                 case Band.B160M:
                     radBand160.Checked = true;
+                    DeselectVHF();
                     break;
                 case Band.B80M:
                     radBand80.Checked = true;
+                    DeselectVHF();
                     break;
                 case Band.B60M:
                     radBand60.Checked = true;
+                    DeselectVHF();
                     break;
                 case Band.B40M:
                     radBand40.Checked = true;
+                    DeselectVHF();
                     break;
                 case Band.B30M:
                     radBand30.Checked = true;
+                    DeselectVHF();
                     break;
                 case Band.B20M:
                     radBand20.Checked = true;
+                    DeselectVHF();
                     break;
                 case Band.B17M:
                     radBand17.Checked = true;
+                    DeselectVHF();
                     break;
                 case Band.B15M:
                     radBand15.Checked = true;
+                    DeselectVHF();
                     break;
                 case Band.B12M:
                     radBand12.Checked = true;
+                    DeselectVHF();
                     break;
                 case Band.B10M:
                     radBand10.Checked = true;
+                    DeselectVHF();
                     break;
                 case Band.B6M:
                     radBand6.Checked = true;
+                    DeselectVHF();
                     break;
                 case Band.B2M:
                     radBand2.Checked = true;
+                    DeselectVHF();
                     break;
                 case Band.WWV:
                     radBandWWV.Checked = true;
+                    DeselectVHF();
                     break;
                 case Band.GEN:
                     radBandGEN.Checked = true;
+                    DeselectVHF();
+                    break;
+                case Band.VHF0:
+                    radBandVHF0.Checked = true;
+                    DeselectHF();
+                    break;
+                case Band.VHF1:
+                    radBandVHF1.Checked = true;
+                    DeselectHF();
+                    break;
+                case Band.VHF2:
+                    radBandVHF2.Checked = true;
+                    DeselectHF();
+                    break;
+                case Band.VHF3:
+                    radBandVHF3.Checked = true;
+                    DeselectHF();
+                    break;
+                case Band.VHF4:
+                    radBandVHF4.Checked = true;
+                    DeselectHF();
+                    break;
+                case Band.VHF5:
+                    radBandVHF5.Checked = true;
+                    DeselectHF();
+                    break;
+                case Band.VHF6:
+                    radBandVHF6.Checked = true;
+                    DeselectHF();
+                    break;
+                case Band.VHF7:
+                    radBandVHF7.Checked = true;
+                    DeselectHF();
+                    break;
+                case Band.VHF8:
+                    radBandVHF8.Checked = true;
+                    DeselectHF();
+                    break;
+                case Band.VHF9:
+                    radBandVHF9.Checked = true;
+                    DeselectHF();
+                    break;
+                case Band.VHF10:
+                    radBandVHF10.Checked = true;
+                    DeselectHF();
+                    break;
+                case Band.VHF11:
+                    radBandVHF11.Checked = true;
+                    DeselectHF();
+                    break;
+                case Band.VHF12:
+                    radBandVHF12.Checked = true;
+                    DeselectHF();
+                    break;
+                case Band.VHF13:
+                    radBandVHF13.Checked = true;
+                    DeselectHF();
                     break;
             }
         }
-
+		
 		private void SetRX1BandButtonColor(Band b)
 		{
 			// Sets band button color based on passed band.
@@ -25019,7 +25209,7 @@ namespace PowerSDR
 								else
 								{
 									//output = "-30"+separator+"0 dB";
-									new_meter_data = -30.0f;
+									new_meter_data = MicGainMin;
 								}								
 								break;
 							case MeterTXMode.EQ:
