@@ -1798,7 +1798,6 @@ namespace PowerSDR
             this.radFilterVar2 = new System.Windows.Forms.RadioButtonTS();
             this.lblFilterLow = new System.Windows.Forms.LabelTS();
             this.radFilterVar1 = new System.Windows.Forms.RadioButtonTS();
-            this.radFilter10 = new System.Windows.Forms.RadioButtonTS();
             this.lblFilterShift = new System.Windows.Forms.LabelTS();
             this.radFilter9 = new System.Windows.Forms.RadioButtonTS();
             this.radFilter8 = new System.Windows.Forms.RadioButtonTS();
@@ -1808,6 +1807,7 @@ namespace PowerSDR
             this.radFilter6 = new System.Windows.Forms.RadioButtonTS();
             this.radFilter4 = new System.Windows.Forms.RadioButtonTS();
             this.radFilter5 = new System.Windows.Forms.RadioButtonTS();
+            this.radFilter10 = new System.Windows.Forms.RadioButtonTS();
             this.panelOptions = new System.Windows.Forms.PanelTS();
             this.panelModeSpecificCW = new System.Windows.Forms.PanelTS();
             this.lblCWSpeed = new System.Windows.Forms.LabelTS();
@@ -4261,15 +4261,6 @@ namespace PowerSDR
             this.radFilterVar1.Name = "radFilterVar1";
             this.radFilterVar1.CheckedChanged += new System.EventHandler(this.radFilterVar1_CheckedChanged);
             // 
-            // radFilter10
-            // 
-            resources.ApplyResources(this.radFilter10, "radFilter10");
-            this.radFilter10.FlatAppearance.BorderSize = 0;
-            this.radFilter10.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.radFilter10.Image = null;
-            this.radFilter10.Name = "radFilter10";
-            this.radFilter10.CheckedChanged += new System.EventHandler(this.radFilter10_CheckedChanged);
-            // 
             // lblFilterShift
             // 
             this.lblFilterShift.ForeColor = System.Drawing.Color.White;
@@ -4348,6 +4339,15 @@ namespace PowerSDR
             this.radFilter5.Image = null;
             this.radFilter5.Name = "radFilter5";
             this.radFilter5.CheckedChanged += new System.EventHandler(this.radFilter5_CheckedChanged);
+            // 
+            // radFilter10
+            // 
+            resources.ApplyResources(this.radFilter10, "radFilter10");
+            this.radFilter10.FlatAppearance.BorderSize = 0;
+            this.radFilter10.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.radFilter10.Image = null;
+            this.radFilter10.Name = "radFilter10";
+            this.radFilter10.CheckedChanged += new System.EventHandler(this.radFilter10_CheckedChanged);
             // 
             // panelOptions
             // 
@@ -5690,7 +5690,6 @@ namespace PowerSDR
             this.KeyPreview = true;
             this.Menu = this.mainMenu1;
             this.Name = "Console";
-            this.TransparencyKey = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(198)))));
             this.MouseWheel += new System.Windows.Forms.MouseEventHandler(this.Console_MouseWheel);
             this.Closing += new System.ComponentModel.CancelEventHandler(this.Console_Closing);
             this.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.Console_KeyPress);
@@ -28839,20 +28838,6 @@ namespace PowerSDR
                         freq -= 0.012;
                         break;*/
                 }
-                if (ModelIsHPSDRorHermes())
-                {
-                    if (penny_ext_ctrl_enabled)
-                    {
-                        Penny.getPenny().UpdateExtCtrl(rx1_band, mox);
-                    }
-                    if (alex_ant_ctrl_enabled)
-                    {
-                        Alex.getAlex().UpdateAlexAntSelection(rx1_band, mox);
-                    }
-                }
-                else
-                {
-
                     spur_reduction = false;
                     if_shift = false;
 
@@ -28883,14 +28868,14 @@ namespace PowerSDR
                             Hdw.UpdateHardware = false;
                         }
 
-                        /*   if (penny_ext_ctrl_enabled)
+                           if (penny_ext_ctrl_enabled)
                            {
                                Penny.getPenny().UpdateExtCtrl(rx1_band, mox);
                            }
                            if (alex_ant_ctrl_enabled)
                            {
                                Alex.getAlex().UpdateAlexAntSelection(rx1_band, mox);
-                           }  */
+                           }  
 
                         if (x2_enabled)
                         {
@@ -28929,18 +28914,11 @@ namespace PowerSDR
                                 Hdw.XVTR_RF = true;
                             }
                         }
-                    }
                 }
                     Hdw.TransmitRelay = true;               
             }
             else // rx
             {
-                if (ModelIsHPSDRorHermes())
-                {
-                    Hdw.TransmitRelay = false;
-                }
-                else
-                {
                     if (fwc_init && (current_model == Model.FLEX5000 || current_model == Model.FLEX3000))
                     {
 
@@ -28996,7 +28974,6 @@ namespace PowerSDR
                             Hdw.MuteRelay = false;
 
                         RX1PreampMode = rx1_preamp_mode;
-                    }
 
                     spur_reduction = SetupForm.chkGeneralSpurRed.Checked;
 
@@ -29005,7 +28982,7 @@ namespace PowerSDR
                         if_shift = true;
                 }
         }
-            if (!fwc_init || current_model != Model.FLEX5000 || !ModelIsHPSDRorHermes())
+            if (!fwc_init || current_model != Model.FLEX5000)
                     Hdw.UpdateHardware = true;
             
 			if(!fwc_init || current_model != Model.FLEX5000)
