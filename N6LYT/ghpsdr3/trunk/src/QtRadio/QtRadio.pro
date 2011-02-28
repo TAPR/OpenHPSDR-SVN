@@ -46,7 +46,8 @@ SOURCES += main.cpp\
     BookmarksEditDialog.cpp \
     Xvtr.cpp \
     XvtrEntry.cpp \
-    Bookmarks.cpp
+    Bookmarks.cpp \
+    KeypadDialog.cpp
         
 
 HEADERS  += \ 
@@ -85,7 +86,8 @@ HEADERS  += \
     BookmarksEditDialog.h \
     Xvtr.h \
     XvtrEntry.h \
-    Bookmarks.h
+    Bookmarks.h \
+    KeypadDialog.h
 
 FORMS    += \   
     UI.ui \
@@ -94,7 +96,8 @@ FORMS    += \
     About.ui \
     Bookmark.ui \
     BookmarksDialog.ui \
-    BookmarksEditDialog.ui
+    BookmarksEditDialog.ui \
+    KeypadDialog.ui
 
 OTHER_FILES +=
 

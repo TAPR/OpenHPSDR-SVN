@@ -80,6 +80,9 @@ UI::UI() {
     connect(widget.actionGain_90,SIGNAL(triggered()),this,SLOT(actionGain_90()));
     connect(widget.actionGain_100,SIGNAL(triggered()),this,SLOT(actionGain_100()));
 
+    connect(widget.actionKeypad, SIGNAL(triggered()),this,SLOT(actionKeypad()));
+    connect(&keypad,SIGNAL(setKeypadFrequency(long long)),this,SLOT(setKeypadFrequency(long long)));
+
     connect(widget.action160, SIGNAL(triggered()),this,SLOT(action160()));
     connect(widget.action80, SIGNAL(triggered()),this,SLOT(action80()));
     connect(widget.action60, SIGNAL(triggered()),this,SLOT(action60()));
@@ -545,6 +548,15 @@ void UI::setSubRxGain(int gain) {
     connection.sendCommand(command);
 
     qDebug() << command;
+}
+
+void UI::actionKeypad() {
+    keypad.clear();
+    keypad.show();
+}
+
+void UI::setKeypadFrequency(long long f) {
+    frequencyChanged(f);
 }
 
 void UI::action160() {
@@ -1097,6 +1109,7 @@ void UI::frequencyChanged(long long f) {
     command.clear();
     QTextStream(&command) << "setFrequency " << f;
 
+    band.setFrequency(f);
     connection.sendCommand(command);
     widget.spectrumFrame->setFrequency(f);
     widget.waterfallFrame->setFrequency(f);
