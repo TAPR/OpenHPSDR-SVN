@@ -214,6 +214,7 @@ if(ozy_debug) {
                         break;
                     }
                 } else {
+fprintf(stderr,"missing IQ frames\n");
                 }
             }
         }
