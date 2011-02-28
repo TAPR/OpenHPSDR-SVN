@@ -61,6 +61,7 @@
 #include "BookmarksEditDialog.h"
 #include "Xvtr.h"
 #include "XvtrEntry.h"
+#include "KeypadDialog.h"
 
 #define DSPSERVER_BASE_PORT 8000
 
@@ -102,6 +103,9 @@ public slots:
     void actionGain_80();
     void actionGain_90();
     void actionGain_100();
+
+    void actionKeypad();
+    void setKeypadFrequency(long long);
 
     void action160();
     void action80();
@@ -268,6 +272,8 @@ private:
     BookmarksEditDialog* bookmarksEditDialog;
 
     Bookmarks bookmarks;
+
+    KeypadDialog keypad;
 
 };
 

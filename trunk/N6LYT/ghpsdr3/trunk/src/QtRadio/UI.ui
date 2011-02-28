@@ -55,6 +55,8 @@
       <string>XVTR</string>
      </property>
     </widget>
+    <addaction name="actionKeypad"/>
+    <addaction name="separator"/>
     <addaction name="action160"/>
     <addaction name="action80"/>
     <addaction name="action60"/>
@@ -756,6 +758,11 @@
    </property>
    <property name="text">
     <string>Polyphase</string>
+   </property>
+  </action>
+  <action name="actionKeypad">
+   <property name="text">
+    <string>Keypad</string>
    </property>
   </action>
  </widget>
