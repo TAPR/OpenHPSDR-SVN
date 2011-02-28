@@ -140,6 +140,7 @@ fprintf(stderr,"client_thread\n");
 
     if(bind(serverSocket,(struct sockaddr *)&server,sizeof(server))<0) {
         perror("client bind");
+        fprintf(stderr,"port=%d\n",port);
         return NULL;
     }
 
