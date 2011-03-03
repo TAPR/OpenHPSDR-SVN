@@ -10,7 +10,7 @@ DiscoveryThread::DiscoveryThread(int discovery_socket) {
 void DiscoveryThread::stop() {
     struct linger so_linger;
 
-    qDebug()<<"DiscoveryThread::stop";
+    qDebug()<<"DiscoveryThread::stop discovery_socket:"<<s;
     stopped=true;
     qDebug()<<"close discovery_socket";
 

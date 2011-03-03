@@ -39,29 +39,26 @@ void showAddr(char * name, struct sockaddr *a)
 // get a list of the interfaces on the system
 Interfaces::Interfaces() {
     char errbuf[PCAP_ERRBUF_SIZE];
-#ifdef __WIN32
-    pcap_addr_t* addr;
-#endif
-    int nqInterfaces;       // count qualified interfaces in the list from QNetworkInterface::allInterfaces()
 
-    nqInterfaces=0;
+    nInterfaces=0;
     QList<QNetworkInterface> list = QNetworkInterface::allInterfaces();
+
     foreach (QNetworkInterface iface, list) {
-        //qDebug() << iface.name() <<"="<< iface.hardwareAddress();
-        QList<QNetworkAddressEntry> addressEntries=iface.addressEntries();
-        foreach(QNetworkAddressEntry addr,addressEntries) {
-            if((addr.ip().toIPv4Address() != 0) && (addr.ip().toIPv4Address() != 0x7f000001)) {     // we only want those with "real" IP addresses
-                qDebug()<<iface.name()<<iface.hardwareAddress()<<addr.ip().toString();
-                interfaces.append(iface);
-#ifndef __WIN32
-                interfaceNames.insert(nqInterfaces, iface.name().toAscii());
-#endif
-                nqInterfaces++;
+        if(!(iface.flags() & QNetworkInterface::IsLoopBack)&& iface.flags() & QNetworkInterface::IsUp){
+            //qDebug() << iface.name() <<"="<< iface.hardwareAddress();
+            QList<QNetworkAddressEntry> addressEntries=iface.addressEntries();
+            foreach(QNetworkAddressEntry addr,addressEntries) {
+                if(addr.ip().protocol() == QAbstractSocket::IPv4Protocol) {
+                    qDebug()<<iface.name()<<iface.hardwareAddress()<<addr.ip().toString();
+                    interfaces.append(iface);
+                    interfaceNames.insert(nInterfaces, iface.humanReadableName().toAscii());
+                    nInterfaces++;
+                }
             }
         }
     }
 
-    qDebug() << "Interfaces found " << nqInterfaces;
+    qDebug() << "Interfaces found " << nInterfaces;
 
     /* Retrieve the device list on the local machine */
     if (pcap_findalldevs(&alldevs, errbuf) == -1)
@@ -69,35 +66,6 @@ Interfaces::Interfaces() {
         qDebug()<<"Error in pcap_findalldevs: "<< errbuf;
         exit(1);
     }
-
-#ifdef __WIN32
-    nInterfaces=0;
-    for(dev=alldevs;dev;dev=dev->next) {
-        for(addr=dev->addresses;addr;addr=addr->next){
-            struct sockaddr_in* s=(struct sockaddr_in*)addr->addr;
-            if(s->sin_family==AF_INET) {
-                if(s->sin_addr.s_addr==0x00000000 || s->sin_addr.s_addr==0x0100007F) {
-                    // ignore no address or local interface
-                } else {
-                    qDebug()<<dev->name;
-                    qDebug()<<"   address="<<s->sin_addr.s_addr;
-                    if (dev->description != NULL) qDebug()<<"  description "<<dev->description;
-                    for (int i = 0; i < nqInterfaces; ++i) {
-                        if (strstr(dev->name, interfaces[i].name().toAscii())) {
-                            qDebug()<<"Qt interface #"<<i;
-                            interfaceNames.insert(i, dev->name);
-                        }
-                    }
-                    ++nInterfaces;
-                }
-            }
-        }
-    }
-
-    qDebug() << "Interfaces found "<<nInterfaces;
-#else
-    nInterfaces=nqInterfaces;
-#endif
 }
 
 
@@ -149,4 +117,3 @@ long Interfaces::getInterfaceIPAddress(int index) {
     }
     return a;
 }
-

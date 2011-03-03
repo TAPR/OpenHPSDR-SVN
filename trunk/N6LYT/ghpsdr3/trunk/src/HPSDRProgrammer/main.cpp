@@ -31,8 +31,6 @@ void myMessageOutput(QtMsgType type, const char *msg)
 
 int main(int argc, char *argv[])
 {
-    char myPath[PATH_MAX];
-    uint32_t pathSize=sizeof(myPath);
 
     // install debug message handler
     qInstallMsgHandler(myMessageOutput);
@@ -40,6 +38,8 @@ int main(int argc, char *argv[])
 
     //  Gain admin privileges on the Mac
 #ifdef Q_WS_MAC
+    char myPath[PATH_MAX];
+    uint32_t pathSize=sizeof(myPath);
 
     if(geteuid() != 0) {
         AuthorizationItem adminPriv;
