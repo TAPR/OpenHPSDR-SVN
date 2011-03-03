@@ -17,6 +17,8 @@
 #include <ifaddrs.h>
 #endif
 
+#include "Metis.h"
+
 class DiscoveryThread : public QThread {
     Q_OBJECT
 public:
@@ -24,7 +26,7 @@ public:
     void run();
     void stop();
 signals:
-    void metis_found(unsigned char*,long);
+    void metis_found(Metis*);
     void reply(unsigned char);
 private:
     bool stopped;

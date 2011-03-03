@@ -1135,7 +1135,7 @@ void MainWindow::discover() {
     // start a thread to listen for discovery responses
     discoveryThread=new DiscoveryThread(discovery_socket);
     discoveryThread->start();
-    QObject::connect(discoveryThread,SIGNAL(metis_found(unsigned char*,long)),this,SLOT(metis_found(unsigned char*,long)));
+    QObject::connect(discoveryThread,SIGNAL(metis_found(Metis*)),this,SLOT(metis_found(Metis*)));
 
     buffer[0]=(char)0xEF; //header
     buffer[1]=(char)0XFE;
@@ -1188,12 +1188,9 @@ void MainWindow::discovery_timeout() {
     QApplication::restoreOverrideCursor();
 }
 
-void MainWindow::metis_found(unsigned char* hw,long metis_ip) {
-    Metis* m;
+void MainWindow::metis_found(Metis* m) {
 
-    if(htonl(metis_ip)!=ip) {
-        m=new Metis(metis_ip,hw);
-
+    if(htonl(m->getIpAddress())!=ip) {
         qDebug() << "metis_found";
         metis.append(m);
         ui->metisComboBox->addItem(m->toString());

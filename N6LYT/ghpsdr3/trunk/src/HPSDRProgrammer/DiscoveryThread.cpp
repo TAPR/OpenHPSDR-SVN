@@ -1,6 +1,7 @@
 #include "QDebug"
 
 #include "DiscoveryThread.h"
+#include "Metis.h"
 
 
 DiscoveryThread::DiscoveryThread(int discovery_socket) {
@@ -46,7 +47,7 @@ void DiscoveryThread::run() {
                         emit reply(buffer[3]);
                         break;
                     case 2:  // response to a discovery packet
-                        emit metis_found(&buffer[3],addr.sin_addr.s_addr);
+                        emit metis_found(new Metis(addr.sin_addr.s_addr,&buffer[3]));
                         break;
                     case 1:  // a data packet
                        // should not happen on this port
