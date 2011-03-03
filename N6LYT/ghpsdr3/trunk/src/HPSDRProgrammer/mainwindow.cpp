@@ -1105,7 +1105,6 @@ void MainWindow::discover() {
     if(discovery_socket<0) {
         perror("create socket failed for discovery_socket\n");
         status("create socket failed for discovery_socket");
-        discoveryThread->stop();
         return;
     }
 
@@ -1121,7 +1120,6 @@ void MainWindow::discover() {
     if(rc != 0) {
         fprintf(stderr,"cannot bind to interface: rc=%d\n", rc);
         status("cannot bind to interface");
-        discoveryThread->stop();
         return;
     }
 
@@ -1129,7 +1127,6 @@ void MainWindow::discover() {
     if(rc != 0) {
         fprintf(stderr,"cannot set SO_BROADCAST: rc=%d\n", rc);
         status("cannot set SO_BROADCAST");
-        discoveryThread->stop();
         return;
     }
 
