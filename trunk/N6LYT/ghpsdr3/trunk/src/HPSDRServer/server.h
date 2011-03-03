@@ -50,8 +50,23 @@ public:
 
     void setSampleRate(QString s);
     void setReceivers(QString r);
+    void set10MHzClock(QString c);
+    void set122_88MHzClock(QString c);
+    void setPreamp(QString s);
+    void setRandom(QString s);
+    void setDither(QString s);
+    void setDuplex(QString s);
+    void setClassE(QString s);
     QString getSampleRate();
     QString getReceivers();
+    QString get10MHzClock();
+    QString get122_88MHzClock();
+    QString getPreamp();
+    QString getRandom();
+    QString getDither();
+    QString getDuplex();
+    QString getClassE();
+
 
     void sendBuffer();
 
@@ -97,6 +112,13 @@ private:
 
     QString sampleRate;
     QString receivers;
+    QString clock10MHz;
+    QString clock122_88MHz;
+    QString preamp;
+    QString random;
+    QString dither;
+    QString duplex;
+    QString classE;
 
     unsigned char output_buffer[1032];
     unsigned char metis_buffer[512];

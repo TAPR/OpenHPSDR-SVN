@@ -204,6 +204,7 @@
                           "<tr bgcolor=\"skyblue\" width=\"100%\">\r\n"
                           "<td><form action=\"configure.html\">";
 
+         // sample rate
          *outputStream << "Sample Rate: <SELECT name=\"samplerate\">"
                           "<OPTION VALUE=\"48000\"";
          if(server->getSampleRate()=="48000") {
@@ -222,6 +223,7 @@
          *outputStream << ">192000</OPTION>"
                           "</SELECT>";
 
+         // receivers
          *outputStream << "<BR>Receivers: <SELECT name=\"receivers\">"
                           "<OPTION VALUE=\"1\"";
          if(server->getReceivers()=="1") {
@@ -244,6 +246,74 @@
          }
          *outputStream << ">4</OPTION>"
                           "</SELECT>";
+
+         // 10MHz clock source
+         *outputStream << "<BR>10 Mhz clock source:";
+
+         *outputStream << "<SELECT name=\"clock10\">";
+
+         *outputStream << "<OPTION VALUE=\"Atlas\"";
+         if(server->get10MHzClock()=="Atlas") {
+             *outputStream << " SELECTED";
+         }
+         *outputStream << ">Atlas</OPTION>";
+
+         *outputStream << "<OPTION VALUE=\"Mercury\"";
+         if(server->get10MHzClock()=="Mercury") {
+             *outputStream << " SELECTED";
+         }
+         *outputStream << ">Mercury</OPTION>";
+
+         *outputStream << "<OPTION VALUE=\"Penelope\"";
+         if(server->get10MHzClock()=="Penelope") {
+             *outputStream << " SELECTED";
+         }
+         *outputStream << ">Penelope</OPTION>";
+
+         *outputStream << "</SELECT>";
+
+         // 122.88MHz clock source
+         *outputStream << "<BR>122.88 Mhz clock source:";
+
+         *outputStream << "<SELECT name=\"clock122_88\">";
+
+         *outputStream << "<OPTION VALUE=\"Mercury\"";
+         if(server->get122_88MHzClock()=="Mercury") {
+             *outputStream << " SELECTED";
+         }
+         *outputStream << ">Mercury</OPTION>";
+
+         *outputStream << "<OPTION VALUE=\"Penelope\"";
+         if(server->get122_88MHzClock()=="Penelope") {
+             *outputStream << " SELECTED";
+         }
+         *outputStream << ">Penelope</OPTION>";
+
+         *outputStream << "</SELECT>";
+
+         *outputStream << "<BR>Preamp: <INPUT TYPE=\"CHECKBOX\" NAME=\"preamp\"";
+         if(server->getPreamp()=="on") {
+             *outputStream << " CHECKED";
+         }
+         *outputStream << ">";
+
+         *outputStream << "<BR>Random: <INPUT TYPE=\"CHECKBOX\" NAME=\"random\"";
+         if(server->getRandom()=="on") {
+             *outputStream << " CHECKED";
+         }
+         *outputStream << ">";
+
+         *outputStream << "<BR>Dither: <INPUT TYPE=\"CHECKBOX\" NAME=\"dither\"";
+         if(server->getDither()=="on") {
+             *outputStream << " CHECKED";
+         }
+         *outputStream << ">";
+
+         *outputStream << "<BR>Class E: <INPUT TYPE=\"CHECKBOX\" NAME=\"classe\"";
+         if(server->getClassE()=="on") {
+             *outputStream << " CHECKED";
+         }
+         *outputStream << ">";
 
          *outputStream << "<br><input type='SUBMIT' value='Configure'>"
                           "</form>\r\n"
@@ -332,4 +402,11 @@
  void WebClient::configure() {
      server->setSampleRate(params["samplerate"]);
      server->setReceivers(params["receivers"]);
+     server->set10MHzClock(params["clock10"]);
+     server->set122_88MHzClock(params["clock122_88"]);
+     server->setPreamp(params["preamp"]);
+     server->setRandom(params["random"]);
+     server->setDither(params["dither"]);
+     server->setClassE(params["classe"]);
+
  }

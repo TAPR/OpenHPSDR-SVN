@@ -35,7 +35,14 @@ Server::Server() {
     control_out[3]=(unsigned char)0x18; // ALEX_ATTENUATION_0DB | LT2208_GAIN_OFF | LT2208_DITHER_ON | LT2208_RANDOM_ON
     control_out[4]=(unsigned char)0x04; // DUPLEX
 
+    clock10MHz="Mercury";
+    clock122_88MHz=="Mercury";
+    preamp="";
+    random="on";
+    dither="on";
     metis_buffer_index=8;
+    duplex="on";
+    classE="";
 }
 
 void Server::setDevice(QString d) {
@@ -344,7 +351,6 @@ void Server::process_iq_buffer(unsigned char* buffer) {
     int r;
     int left_sample,right_sample,mic_sample;
     float left_sample_float,right_sample_float,mic_sample_float;
-    int bytes;
 
     //qDebug()<<"process_iq_buffer";
     //if(rx_frame<10) {
@@ -505,6 +511,107 @@ QString Server::getSampleRate() {
 
 QString Server::getReceivers() {
     return receivers;
+}
+
+void Server::set10MHzClock(QString c) {
+    qDebug()<<"Server::set10MHzClock "<<c;
+    int source=0;
+    clock10MHz=c;
+    if(c=="Atlas") {
+        source=0;
+    } else if(c=="Mercury") {
+        source=2;
+    } else if(c=="Penelope") {
+        source=1;
+    }
+    control_out[1]=control_out[1]&0xF3;
+    control_out[1]=control_out[1]|(source<<2);
+}
+
+QString Server::get10MHzClock() {
+    return clock10MHz;
+}
+
+void Server::set122_88MHzClock(QString c) {
+    qDebug()<<"Server::set122_88MHzClock "<<c;
+    int source=0;
+    clock122_88MHz=c;
+    if(c=="Mercury") {
+        source=1;
+    } else if(c=="Penelope") {
+        source=0;
+    }
+    control_out[1]=control_out[1]&0xEF;
+    control_out[1]=control_out[1]|(source<<4);
+}
+
+QString Server::get122_88MHzClock() {
+    return clock122_88MHz;
+}
+
+void Server::setPreamp(QString s) {
+    qDebug()<<"Server::setPreamp "<<s;
+    int p=0;
+    preamp=s;
+    p=(s=="on");
+    control_out[3]=control_out[3]&0xFB;
+    control_out[3]=control_out[3]|(p<<2);
+}
+
+QString Server::getPreamp() {
+    return preamp;
+}
+
+void Server::setRandom(QString s) {
+    qDebug()<<"Server::setRandom "<<s;
+    int r=0;
+    random=s;
+    r=(s=="on");
+    control_out[3]=control_out[3]&0xEF;
+    control_out[3]=control_out[3]|(r<<4);
+}
+
+QString Server::getRandom() {
+    return random;
+}
+
+void Server::setDither(QString s) {
+    qDebug()<<"Server::setDither "<<s;
+    int d=0;
+    d=(s=="on");
+    dither=s;
+    control_out[3]=control_out[3]&0xF7;
+    control_out[3]=control_out[3]|(d<<3);
+}
+
+QString Server::getDither() {
+    return dither;
+}
+
+void Server::setDuplex(QString s) {
+    qDebug()<<"Server::setDuplex "<<s;
+    int d=0;
+    d=(s=="on");
+    duplex=s;
+    control_out[4]=control_out[4]&0xFB;
+    control_out[4]=control_out[4]|(d<<2);
+}
+
+QString Server::getDuplex() {
+    return duplex;
+}
+
+void Server::setClassE(QString s) {
+    qDebug()<<"Server::setClassE "<<s;
+    int d=0;
+    d=(s=="on");
+    classE=s;
+    control_out[2]=control_out[2]&0xFB;
+    control_out[2]=control_out[2]|d;
+}
+
+QString Server::getClassE() {
+    return classE;
 }
 
 void Server::sendBuffer() {
