@@ -1,4 +1,4 @@
-#/*
+/*
  * File:   Interfaces.h
  * Author: John Melton, G0ORX/N6LYT
  *
@@ -32,8 +32,6 @@
 #include <netinet/in.h>
 #endif
 
-#include <pcap.h>
-
 #include <QList>
 #include <QtNetwork/QNetworkInterface>
 #include <QtNetwork/QNetworkAddressEntry>
@@ -46,13 +44,10 @@ public:
     QString getInterfaceNameAt(int index);
     QString getInterfaceHardwareAddress(int index);
     long getInterfaceIPAddress(int index);
-    QString getInterfaceIPAddress(QString n);
+    QString getInterfaceIPAddress(QString name);
 
 private:
     int nInterfaces;
-
-    pcap_if_t* alldevs;
-    pcap_if_t* dev;
 
     QList<QNetworkInterface> interfaces;
     QList<QString> interfaceNames;
