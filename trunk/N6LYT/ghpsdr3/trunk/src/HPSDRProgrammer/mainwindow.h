@@ -104,7 +104,7 @@ public slots:
     void ipAddress(unsigned char*);
     void fpgaId(unsigned char*);
 
-    void metis_found(unsigned char*,long);
+    void metis_found(Metis*);
     void metisSelected(int);
 
     void tabChanged(int);
