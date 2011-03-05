@@ -30,6 +30,7 @@ public:
     Metis(long ipaddr,unsigned char* macaddr);
     long getIpAddress();
     unsigned char* getMACAddress();
+    QString getHostAddress();
     QString toString();
 
 private:

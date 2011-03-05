@@ -49,7 +49,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
     receiveThread=NULL;
     rawReceiveThread=NULL;
-    discoveryThread=NULL;
+    discovery=NULL;
 
 #ifdef __WIN32
     ui->privilegesLabel->setText("You must be running with Administrator privileges to be able to read/write raw ethernet frames.");
@@ -134,6 +134,7 @@ void MainWindow::status(QString text) {
 // SLOT - interfaceSelected - called when the interface selection is changed
 void MainWindow::interfaceSelected(int index) {
     bool ok;
+    interfaceName=interfaces.getInterfaceNameAt(index);
     ip=interfaces.getInterfaceIPAddress(index);
     hwAddress=interfaces.getInterfaceHardwareAddress(index);
     if(hwAddress==NULL) {
@@ -243,7 +244,7 @@ void MainWindow::bootloaderProgram() {
     size=0;
     data_command=PROGRAM_FLASH;
     qDebug()<<"MainWindow::bootloaderProgram";
-    handle=pcap_open_live(ui->interfaceComboBox->currentText().toAscii().constData(),1024,1,TIMEOUT,errbuf);
+    handle=pcap_open_live(interfaces.getPcapName(ui->interfaceComboBox->currentText().toAscii().constData()),1024,1,TIMEOUT,errbuf);
     if (handle == NULL) {
         qDebug()<<"Couldn't open device "<<ui->interfaceComboBox->currentText().toAscii().constData()<<errbuf;
         status("Error: cannot open interface (are you running as root)");
@@ -267,31 +268,9 @@ void MainWindow::flashProgram() {
     size=blocks;
     data_command=PROGRAM_METIS_FLASH;
 
-    s=socket(PF_INET,SOCK_DGRAM,IPPROTO_UDP);
-    if(s<0) {
-        perror("create socket failed for send_command\n");
-        return;
-    }
-
-    setsockopt(s, SOL_SOCKET, SO_REUSEADDR, (const char*)&on, sizeof(on));
-
-
-    // bind to the selected interface
-    struct sockaddr_in name;
-    memset(&name, 0, sizeof(name));
-    name.sin_family = AF_INET;
-    name.sin_addr.s_addr = htonl(ip);
-    name.sin_port = htons(1024);
-    rc=bind(s,(struct sockaddr*)&name,sizeof(name));
-    if(rc != 0) {
-        fprintf(stderr,"cannot bind to interface: rc=%d\n", rc);
-        return;
-    }
-
     // start a thread to listen for replies
-    receiveThread=new ReceiveThread(metisIP,s);
-    receiveThread->setIPAddress(ip);
-    receiveThread->start();
+    QString myip=interfaces.getInterfaceIPAddress(interfaceName);
+    receiveThread=new ReceiveThread(myip,metisHostAddress);
 
     QObject::connect(receiveThread,SIGNAL(eraseCompleted()),this,SLOT(eraseCompleted()));
     QObject::connect(receiveThread,SIGNAL(nextBuffer()),this,SLOT(nextBuffer()));
@@ -330,7 +309,7 @@ void MainWindow::erase() {
 void MainWindow::bootloaderErase() {
     char errbuf[PCAP_ERRBUF_SIZE];
 
-    handle=pcap_open_live(ui->interfaceComboBox->currentText().toAscii().constData(),1024,1,TIMEOUT,errbuf);
+    handle=pcap_open_live(interfaces.getPcapName(ui->interfaceComboBox->currentText().toAscii().constData()),1024,1,TIMEOUT,errbuf);
     if (handle == NULL) {
         qDebug()<<"Couldn't open device "<<ui->interfaceComboBox->currentText().toAscii().constData()<<errbuf;
         status("Error: cannot open interface (are you running as root)");
@@ -350,31 +329,10 @@ void MainWindow::flashErase() {
     int on=1;
     int rc;
 
-    s=socket(PF_INET,SOCK_DGRAM,IPPROTO_UDP);
-    if(s<0) {
-        perror("create socket failed for send_command\n");
-        return;
-    }
+    qDebug()<<"MainWindow::flashErase";
 
-    setsockopt(s, SOL_SOCKET, SO_REUSEADDR, (const char*)&on, sizeof(on));
-
-    // bind to the selected interface
-    struct sockaddr_in name;
-    memset(&name, 0, sizeof(name));
-    name.sin_family = AF_INET;
-    name.sin_addr.s_addr = htonl(ip);
-    name.sin_port = htons(1024);
-    rc=bind(s,(struct sockaddr*)&name,sizeof(name));
-    if(rc != 0) {
-        fprintf(stderr,"cannot bind to interface: rc=%d\n", rc);
-        return;
-    }
-
-    receiveThread=new ReceiveThread(metisIP,s);
-    receiveThread->setIPAddress(ip);
-    QObject::connect(receiveThread,SIGNAL(eraseCompleted()),this,SLOT(eraseCompleted()));
-    QObject::connect(receiveThread,SIGNAL(timeout()),this,SLOT(timeout()));
-    receiveThread->start();
+    QString myip=interfaces.getInterfaceIPAddress(interfaceName);
+    receiveThread=new ReceiveThread(myip,metisHostAddress);
 
     // start erasing
     state=ERASING_ONLY;
@@ -398,9 +356,8 @@ void MainWindow::getMAC() {
     if(ui->interfaceComboBox->currentIndex()!=-1) {
         //hw=interfaces.getInterfaceHardwareAddress(ui->interfaceComboBox->currentText());
         //ip=interfaces.getInterfaceIPAddress(ui->interfaceComboBox->currentText());
-//    QString x = ui->interfaceComboBox->currentText().toAscii().constData();
-    QString x = ui->interfaceComboBox->currentText();
-        handle=pcap_open_live(x.toAscii(),1024,1,TIMEOUT,errbuf);
+
+        handle=pcap_open_live(interfaces.getPcapName(ui->interfaceComboBox->currentText().toAscii().constData()),1024,1,TIMEOUT,errbuf);
         if (handle == NULL) {
             qDebug()<<"Couldn't open device "<<ui->interfaceComboBox->currentText().toAscii().constData()<<errbuf;
             status("Error: cannot open interface (are you running as root)");
@@ -434,7 +391,7 @@ void MainWindow::macAddress(unsigned char* mac) {
 void MainWindow::getIP() {
     char errbuf[PCAP_ERRBUF_SIZE];
 
-    qDebug()<<"getIP";
+    qDebug()<<"getIP: "<<interfaceName;
 
     ui->statusListWidget->clear();
     status("");
@@ -448,7 +405,7 @@ void MainWindow::getIP() {
     // check that an interface has been selected
     if(ui->interfaceComboBox->currentIndex()!=-1) {
 
-        handle=pcap_open_live(ui->interfaceComboBox->currentText().toAscii().constData(),1024,1,TIMEOUT,errbuf);
+        handle=pcap_open_live(interfaces.getPcapName(ui->interfaceComboBox->currentText().toAscii().constData()),1024,1,TIMEOUT,errbuf);
         if (handle == NULL) {
             qDebug()<<"Couldn't open device "<<ui->interfaceComboBox->currentText().toAscii().constData()<<errbuf;
             status("Error: cannot open interface (are you running as root)");
@@ -506,7 +463,7 @@ void MainWindow::setIP() {
         status("Error: invalid IP address");
     } else {
 
-        handle=pcap_open_live(ui->interfaceComboBox->currentText().toAscii().constData(),1024,1,TIMEOUT,errbuf);
+        handle=pcap_open_live(interfaces.getPcapName(ui->interfaceComboBox->currentText().toAscii().constData()),1024,1,TIMEOUT,errbuf);
         if (handle == NULL) {
             qDebug()<<"Couldn't open device "<<ui->interfaceComboBox->currentText().toAscii().constData()<<errbuf;
             status("Error: cannot open interface (are you running as root)");
@@ -564,8 +521,21 @@ void MainWindow::eraseData() {
     status("Erasing device ... (takes several seconds)");
     if(bootloader) {
         sendRawCommand(ERASE_METIS_FLASH);
-    } else {
+    } else {    
         sendCommand(ERASE_METIS_FLASH);
+        // wait 20 seconds to allow replys
+        QTimer::singleShot(20000,this,SLOT(erase_timeout()));
+    }
+}
+
+// slot for erase timout
+void MainWindow::erase_timeout() {
+    qDebug()<<"MainWindow::erase_timeout";
+    if(state==ERASING || state==ERASING_ONLY) {
+        status("Error: erase timeout.");
+        status("Power cycle and try again.");
+        idle();
+        QApplication::restoreOverrideCursor();
     }
 }
 
@@ -588,7 +558,7 @@ void MainWindow::sendCommand(unsigned char command) {
     unsigned char buffer[64];
     int i;
 
-    //qDebug()<<"sendCommand "<<command;
+    qDebug()<<"sendCommand "<<command;
 
     buffer[0]=0xEF; // protocol
     buffer[1]=0xFE;
@@ -601,16 +571,7 @@ void MainWindow::sendCommand(unsigned char command) {
         buffer[i+4]=(unsigned char)0x00;
     }
 
-    struct sockaddr_in addr;
-    memset(&addr, 0, sizeof(addr));
-    addr.sin_family = AF_INET;
-    addr.sin_addr.s_addr = metisIP;
-    addr.sin_port = htons(1024);
-
-    if(sendto(s,(char*)buffer,sizeof(buffer),0,(struct sockaddr*)&addr,sizeof(addr))<0) {
-        perror("sendto socket failed for sendCommand\n");
-        return;
-    }
+    receiveThread->send((const char*)buffer,sizeof(buffer));
 
 }
 
@@ -679,21 +640,7 @@ void MainWindow::sendData() {
         buffer[i+8]=(unsigned char)data[i+offset];
     }
 
-    //
-    struct sockaddr_in addr;
-    int length;
-
-    length=sizeof(addr);
-    memset(&addr,0,length);
-    addr.sin_family=AF_INET;
-    addr.sin_port=htons(1024);
-    addr.sin_addr.s_addr=metisIP;
-
-    qDebug("sendto");
-    if(sendto(s,(char*)&buffer[0],sizeof(buffer),0,(struct sockaddr*)&addr,length)<0) {
-        perror("sendto socket failed for sendCommand\n");
-        return;
-    }
+    receiveThread->send((const char*)buffer,sizeof(buffer));
 
     QString text;
     int p=(offset+256)*100/(end-start);
@@ -1086,8 +1033,6 @@ void MainWindow::idle() {
 
 
 void MainWindow::discover() {
-    // using raw sockets as unable to get Qt UDP sockets to bind to a specific interface
-
     ui->statusListWidget->clear();
     status("");
     status("Metis Discovery");
@@ -1095,69 +1040,16 @@ void MainWindow::discover() {
     ui->metisComboBox->clear();
     metis.clear();
 
-    // send the discovery packet
-    unsigned char buffer[63];
-    int i;
-    int rc;
-    int on=1;
 
-    discovery_socket=socket(PF_INET,SOCK_DGRAM,IPPROTO_UDP);
-    if(discovery_socket<0) {
-        perror("create socket failed for discovery_socket\n");
-        status("create socket failed for discovery_socket");
-        return;
-    }
 
-    setsockopt(discovery_socket, SOL_SOCKET, SO_REUSEADDR, (char*)&on, sizeof(on));
-
-    // bind to the selected interface
-    struct sockaddr_in name;
-    memset(&name, 0, sizeof(name));
-    name.sin_family = AF_INET;
-    name.sin_addr.s_addr = htonl(ip);
-    name.sin_port = htons(1024);
-    rc=bind(discovery_socket,(struct sockaddr*)&name,sizeof(name));
-    if(rc != 0) {
-        fprintf(stderr,"cannot bind to interface: rc=%d\n", rc);
-        status("cannot bind to interface");
-        return;
-    }
-
-    rc=setsockopt(discovery_socket, SOL_SOCKET, SO_BROADCAST, (char*)&on, sizeof(on));
-    if(rc != 0) {
-        fprintf(stderr,"cannot set SO_BROADCAST: rc=%d\n", rc);
-        status("cannot set SO_BROADCAST");
-        return;
-    }
+    QString myip=interfaces.getInterfaceIPAddress(interfaceName);
 
     QApplication::setOverrideCursor(QCursor(Qt::BusyCursor));
 
     // start a thread to listen for discovery responses
-    discoveryThread=new DiscoveryThread(discovery_socket);
-    discoveryThread->start();
-    QObject::connect(discoveryThread,SIGNAL(metis_found(Metis*)),this,SLOT(metis_found(Metis*)));
-
-    buffer[0]=(char)0xEF; //header
-    buffer[1]=(char)0XFE;
-    buffer[2]=(char)0x02;
-    buffer[3]=(char)ip&0xFF; //my ip
-    for(i=4;i<63;i++) {
-        buffer[i]=(char)0x00;
-    }
-
-    discovery_length=sizeof(discovery_addr);
-    memset(&discovery_addr,0,discovery_length);
-    discovery_addr.sin_family=AF_INET;
-    discovery_addr.sin_port=htons(1024);
-    discovery_addr.sin_addr.s_addr=htonl(INADDR_BROADCAST);
-
-    if(sendto(discovery_socket,(char*)buffer,sizeof(buffer),0,(struct sockaddr*)&discovery_addr,discovery_length)<0) {
-        perror("sendto socket failed for discovery_socket\n");
-        status("sendto socket failed for discovery_socket");
-        discoveryThread->stop();
-        return;
-    }
-
+    discovery=new Discovery(myip);
+    connect(discovery,SIGNAL(metis_found(Metis*)),this,SLOT(metis_found(Metis*)));
+    discovery->discover();
     // disable the Discovery button
     ui->discoverPushButton->setDisabled(true);
 
@@ -1167,9 +1059,7 @@ void MainWindow::discover() {
 
 void MainWindow::discovery_timeout() {
 
-    // stop the discovery listening thread
-    discoveryThread->stop();
-
+    discovery->stop();
     if(ui->metisComboBox->count()>0) {
         ui->metisComboBox->setCurrentIndex(0);
         metisSelected(0);
@@ -1201,6 +1091,7 @@ void MainWindow::metis_found(Metis* m) {
 void MainWindow::metisSelected(int index) {
     if(index>=0) {
         metisIP=metis.at(index)->getIpAddress();
+        metisHostAddress=metis.at(index)->getHostAddress();
     }
 }
 
@@ -1218,7 +1109,7 @@ void MainWindow::jtagInterrogate() {
     ui->statusListWidget->clear();
     status("");
 
-    handle=pcap_open_live(ui->interfaceComboBox->currentText().toAscii().constData(),1024,1,TIMEOUT,errbuf);
+    handle=pcap_open_live(interfaces.getPcapName(ui->interfaceComboBox->currentText().toAscii().constData()),1024,1,TIMEOUT,errbuf);
     if (handle == NULL) {
         qDebug()<<"Couldn't open device "<<ui->interfaceComboBox->currentText().toAscii().constData()<<errbuf;
         status("Error: cannot open interface (are you running as root)");
@@ -1369,7 +1260,7 @@ void MainWindow::jtagBootloaderProgram() {
     ui->statusListWidget->clear();
     status("");
 
-    handle=pcap_open_live(ui->interfaceComboBox->currentText().toAscii().constData(),1024,1,TIMEOUT,errbuf);
+    handle=pcap_open_live(interfaces.getPcapName(ui->interfaceComboBox->currentText().toAscii().constData()),1024,1,TIMEOUT,errbuf);
     if (handle == NULL) {
         qDebug()<<"Couldn't open device "<<ui->interfaceComboBox->currentText().toAscii().constData()<<errbuf;
         status("Error: cannot open interface (are you running as root)");
@@ -1434,7 +1325,7 @@ void MainWindow::jtagFlashProgram() {
         return;
     }
 
-    handle=pcap_open_live(ui->interfaceComboBox->currentText().toAscii().constData(),1024,1,TIMEOUT,errbuf);
+    handle=pcap_open_live(interfaces.getPcapName(ui->interfaceComboBox->currentText().toAscii().constData()),1024,1,TIMEOUT,errbuf);
     if (handle == NULL) {
         qDebug()<<"Couldn't open device "<<ui->interfaceComboBox->currentText().toAscii().constData()<<errbuf;
         status("Error: cannot open interface (are you running as root)");

@@ -26,26 +26,16 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
-#include <sys/types.h>
-#ifdef __WIN32
-#include <winsock2.h>
-#else
-#include <sys/socket.h>
-#include <sys/ioctl.h>
-#include <netinet/in.h>
-#include <arpa/inet.h>
-#include <netdb.h>
-#include <net/if_arp.h>
-#include <net/if.h>
-#include <ifaddrs.h>
-#endif
 #include <pcap.h>
 
 #include <QMainWindow>
+#include <QUdpSocket>
+#include <QHostAddress>
+
 #include "Interfaces.h"
 #include "ReceiveThread.h"
 #include "RawReceiveThread.h"
-#include "DiscoveryThread.h"
+#include "Discovery.h"
 #include "Metis.h"
 #include "AboutDialog.h"
 #include "Version.h"
@@ -82,6 +72,7 @@ public:
     void setPath(char* path);
 #endif
 
+
 public slots:
     void quit();
     void about();
@@ -97,6 +88,7 @@ public slots:
     void discovery_timeout();
 
     // SLOTS for RawReceiveThread
+    void erase_timeout();
     void eraseCompleted();
     void nextBuffer();
     void timeout();
@@ -156,10 +148,12 @@ private:
 
     Interfaces interfaces;
     long ip;
+    QString interfaceName;
     QString hwAddress;
     unsigned char hw[6];
 
     long metisIP;
+    QString metisHostAddress;
 
     int s;
 
@@ -184,11 +178,7 @@ private:
     int percent;
     int eraseTimeouts;
 
-    int discovery_socket;
-    struct sockaddr_in discovery_addr;
-    int discovery_length;
-
-    DiscoveryThread* discoveryThread;
+    Discovery* discovery;
     ReceiveThread* receiveThread;
     RawReceiveThread* rawReceiveThread;
 
