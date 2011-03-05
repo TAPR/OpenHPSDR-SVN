@@ -1,0 +1,7 @@
+V1.0  Released 28 Jan 2011 - Original production code loaded by TAPR (VK6APH)
+
+V1.1  Released  4 Mar 2011 - Added mic/line-in selection on Penny(Lane) (VK6APH). Added support for multiple receivers
+                             in a single Mercury board or Multiple Mercury boards (K5SO).
+
+
+
