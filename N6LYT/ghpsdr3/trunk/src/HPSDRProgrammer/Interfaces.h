@@ -33,7 +33,6 @@
 #endif
 
 #include <pcap.h>
-
 #include <QList>
 #include <QtNetwork/QNetworkInterface>
 #include <QtNetwork/QNetworkAddressEntry>
@@ -46,14 +45,16 @@ public:
     QString getInterfaceNameAt(int index);
     QString getInterfaceHardwareAddress(int index);
     long getInterfaceIPAddress(int index);
+    QString getInterfaceIPAddress(QString name);
+    char* getPcapName(QString name);
+
 private:
     int nInterfaces;
 
-    pcap_if_t* alldevs;
-    pcap_if_t* dev;
-
     QList<QNetworkInterface> interfaces;
     QList<QString> interfaceNames;
+
+    pcap_if_t* devs;
 };
 
 #endif // INTERFACES_H

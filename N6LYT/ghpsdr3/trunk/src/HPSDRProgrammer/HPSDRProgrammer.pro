@@ -29,19 +29,19 @@ SOURCES += main.cpp\
         mainwindow.cpp \
     Interfaces.cpp \
     RawReceiveThread.cpp \
-    DiscoveryThread.cpp \
     ReceiveThread.cpp \
     Metis.cpp \
-    AboutDialog.cpp
+    AboutDialog.cpp \
+    Discovery.cpp
 
 HEADERS  += mainwindow.h \
     Interfaces.h \
     RawReceiveThread.h \
-    DiscoveryThread.h \
     ReceiveThread.h \
     Metis.h \
     AboutDialog.h \
-    Version.h
+    Version.h \
+    Discovery.h
 
 FORMS    += mainwindow.ui \
     AboutDialog.ui

@@ -17,32 +17,26 @@
 #include <ifaddrs.h>
 #endif
 #include <QThread>
+#include <QUdpSocket>
 
-
-class ReceiveThread : public QThread {
+class ReceiveThread : public QObject {
     Q_OBJECT
 public:
-    ReceiveThread(long metisIP,int receiveSocket);
-    void run();
+    ReceiveThread(QString myip,QString metis);
+    void send(const char* buffer,int length);
     void stop();
-    void setIPAddress(long ip);
 signals:
     void eraseCompleted();
     void nextBuffer();
     void timeout();
+public slots:
+    void readyRead();
 private:
-    long metisIPAddress;
-    bool stopped;
-    long myIPAddress;
-    int s;
-    struct sockaddr_in addr;
-    int length;
     unsigned char buffer[2048];
-    int bytes_read;
 
-    struct sockaddr_in metis_addr;
-    int metis_length;
-    fd_set fds;
+    QString myip;
+    QString metisip;
+    QUdpSocket socket;
 };
 
 #endif // RECEIVETHREAD_H

@@ -25,20 +25,13 @@
 
 #include <QDebug>
 #include <QString>
-#include "pcap.h"
+
 #include "Interfaces.h"
 
-void showAddr(char * name, struct sockaddr *a)
-{   qDebug()<<name;
-    for (int i = 0; i < 14; ++i)
-    {   int b = a->sa_data[i];
-        qDebug() << b;
-    }
-}
+#include <pcap.h>
 
 // get a list of the interfaces on the system
 Interfaces::Interfaces() {
-    char errbuf[PCAP_ERRBUF_SIZE];
 
     nInterfaces=0;
     QList<QNetworkInterface> list = QNetworkInterface::allInterfaces();
@@ -60,11 +53,12 @@ Interfaces::Interfaces() {
 
     qDebug() << "Interfaces found " << nInterfaces;
 
-    /* Retrieve the device list on the local machine */
-    if (pcap_findalldevs(&alldevs, errbuf) == -1)
-    {
-        qDebug()<<"Error in pcap_findalldevs: "<< errbuf;
-        exit(1);
+    char errbuf[PCAP_ERRBUF_SIZE];
+
+    int devices=pcap_findalldevs(&devs,errbuf);
+    pcap_if_t* dev;
+    for(dev=devs;dev!=NULL;dev=dev->next) {
+        qDebug()<<dev->description<<":"<<dev->name;
     }
 }
 
@@ -84,6 +78,28 @@ QString Interfaces::getInterfaceNameAt(int index) {
         ++i;
     }
     return name;
+}
+
+char* Interfaces::getPcapName(QString name) {
+    qDebug()<<"getPcapName:"<<name;
+    QList<QNetworkInterface> list = QNetworkInterface::allInterfaces();
+    QString n="";
+    foreach (QNetworkInterface iface, list) {
+        if(iface.humanReadableName()==name) {
+            n=iface.name();
+        }
+    }
+
+    qDebug()<<"getPcapName: n="<<n;
+    if(n!="") {
+        pcap_if_t* dev;
+        for(dev=devs;dev!=NULL;dev=dev->next) {
+            if(QString(dev->name).contains(n)) {
+                qDebug()<<dev->description<<":"<<dev->name;
+                return dev->name;
+            }
+        }
+    }
 }
 
 QString Interfaces::getInterfaceHardwareAddress(int index) {
@@ -116,4 +132,29 @@ long Interfaces::getInterfaceIPAddress(int index) {
         i++;
     }
     return a;
+}
+
+QString Interfaces::getInterfaceIPAddress(QString name) {
+    int i=0;
+
+    foreach(QString n, interfaceNames) {
+        if(name==n) {
+            break;
+        }
+        ++i;
+    }
+
+    long a=0;
+    QList<QNetworkAddressEntry> addressEntries=interfaces.at(i).addressEntries();
+    foreach(QNetworkAddressEntry addr,addressEntries) {
+        if((addr.ip().toIPv4Address() != 0) && (addr.ip().toIPv4Address() != 0x7f000001)) {
+            a=addr.ip().toIPv4Address();
+            break;
+        }
+    }
+
+    QString ip;
+    ip.sprintf("%ld.%ld.%ld.%ld",(a>>24)&0xFF,(a>>16)&0xFF,(a>>8)&0xFF,a&0xFF);
+
+    return ip;
 }
