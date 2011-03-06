@@ -96,7 +96,7 @@ KD5TFDVK6APHAUDIO_API int StartAudioNative(int sample_rate, int samples_per_bloc
                 FPGAWriteBufSize = 2048;
         }
 
-		if ( isMetis ) {  // force write buf size on Mets -- we can only send 2x512 usb frames in an enet frame for Metis so lock this down 
+		if ( isMetis ) {  // force write buf size on Metis -- we can only send 2x512 usb frames in an enet frame for Metis so lock this down 
 						  // 
 			FPGAWriteBufSize = 1024; 
 		} 
@@ -514,6 +514,26 @@ KD5TFDVK6APHAUDIO_API void EnableHermesPower(int enabled) {
 	HermesPowerEnabled = enabled; 
 } 
 
+KD5TFDVK6APHAUDIO_API void SetMicBoost(int bits) { // 0 == 0dB, 1 == 20dB
+        if ( bits == 0 ) {
+                MicBoost = 0;
+        }
+        else {
+                MicBoost = 1;
+        }
+		return;
+}
+
+KD5TFDVK6APHAUDIO_API void SetLineIn(int bits) { // 0 == Mic-In, 1 == Line-In
+	if ( bits != 0 ) { 
+		LineIn = (1 << 1); 
+	} 
+	else { 
+		LineIn = 0;
+	}	
+	return;
+}
+
 KD5TFDVK6APHAUDIO_API void SetAlexAtten(int bits) { 
 	MercAtten = bits; 
 	if ( MercAtten > 3 ) MercAtten = 0; 
@@ -529,9 +549,6 @@ KD5TFDVK6APHAUDIO_API void SetMercDither(int bits) {
 	}	
 	return;
 }
-
-
-
 
 KD5TFDVK6APHAUDIO_API void SetMercRandom(int bits) { 
 	if ( bits != 0 ) { 
@@ -596,6 +613,10 @@ KD5TFDVK6APHAUDIO_API int getPenelopeFWVersion() {
 
 KD5TFDVK6APHAUDIO_API int getOzyFWVersion() { 
 	return OzyFWVersion; 
+} 
+
+KD5TFDVK6APHAUDIO_API int getHaveSync() { 
+	return HaveSync; 
 } 
 
 
