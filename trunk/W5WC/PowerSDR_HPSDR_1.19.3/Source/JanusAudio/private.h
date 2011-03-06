@@ -251,6 +251,9 @@ extern int MercDither;
 extern int MercPreamp;
 extern int MercRandom;
 
+extern int MicBoost;
+extern int LineIn;
+
 extern int AlexRxAnt;
 extern int AlexTxAnt;
 extern int AlexRxOut;

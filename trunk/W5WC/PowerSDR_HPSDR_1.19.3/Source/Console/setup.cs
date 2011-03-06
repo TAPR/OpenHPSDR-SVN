@@ -1413,6 +1413,8 @@ namespace PowerSDR
         private LabelTS labelTS21;
         private LabelTS labelTS20;
         private CheckBoxTS chk20dbMicBoost;
+        private RadioButtonTS radLineIn;
+        private RadioButtonTS radMicIn;
         private System.ComponentModel.IContainer components;
 
         #endregion
@@ -2400,6 +2402,8 @@ namespace PowerSDR
             this.lblDSPAGCFixed = new System.Windows.Forms.LabelTS();
             this.tpTransmit = new System.Windows.Forms.TabPage();
             this.grpBoxMic = new System.Windows.Forms.GroupBoxTS();
+            this.radLineIn = new System.Windows.Forms.RadioButtonTS();
+            this.radMicIn = new System.Windows.Forms.RadioButtonTS();
             this.chk20dbMicBoost = new System.Windows.Forms.CheckBoxTS();
             this.udMicGainMin = new System.Windows.Forms.NumericUpDownTS();
             this.udMicGainMax = new System.Windows.Forms.NumericUpDownTS();
@@ -14139,6 +14143,8 @@ namespace PowerSDR
             // 
             // grpBoxMic
             // 
+            this.grpBoxMic.Controls.Add(this.radLineIn);
+            this.grpBoxMic.Controls.Add(this.radMicIn);
             this.grpBoxMic.Controls.Add(this.chk20dbMicBoost);
             this.grpBoxMic.Controls.Add(this.udMicGainMin);
             this.grpBoxMic.Controls.Add(this.udMicGainMax);
@@ -14149,12 +14155,40 @@ namespace PowerSDR
             this.grpBoxMic.Size = new System.Drawing.Size(144, 90);
             this.grpBoxMic.TabIndex = 58;
             this.grpBoxMic.TabStop = false;
-            this.grpBoxMic.Text = "Mic Preamp Gain";
+            this.grpBoxMic.Text = "Mic    Gain         Source";
+            // 
+            // radLineIn
+            // 
+            this.radLineIn.Image = null;
+            this.radLineIn.Location = new System.Drawing.Point(82, 42);
+            this.radLineIn.Name = "radLineIn";
+            this.radLineIn.Size = new System.Drawing.Size(57, 16);
+            this.radLineIn.TabIndex = 13;
+            this.radLineIn.Text = "Line In";
+            this.radLineIn.TextAlign = System.Drawing.ContentAlignment.TopLeft;
+            this.toolTip1.SetToolTip(this.radLineIn, "Enables Line Input to Penelope");
+            this.radLineIn.UseVisualStyleBackColor = true;
+            this.radLineIn.CheckedChanged += new System.EventHandler(this.radLineIn_CheckedChanged);
+            // 
+            // radMicIn
+            // 
+            this.radMicIn.Checked = true;
+            this.radMicIn.Image = null;
+            this.radMicIn.Location = new System.Drawing.Point(82, 17);
+            this.radMicIn.Name = "radMicIn";
+            this.radMicIn.Size = new System.Drawing.Size(55, 16);
+            this.radMicIn.TabIndex = 12;
+            this.radMicIn.TabStop = true;
+            this.radMicIn.Text = "Mic In";
+            this.radMicIn.TextAlign = System.Drawing.ContentAlignment.TopLeft;
+            this.toolTip1.SetToolTip(this.radMicIn, "Enable Microphone Input on Penelope");
+            this.radMicIn.UseVisualStyleBackColor = true;
+            this.radMicIn.CheckedChanged += new System.EventHandler(this.radMicIn_CheckedChanged);
             // 
             // chk20dbMicBoost
             // 
             this.chk20dbMicBoost.Image = null;
-            this.chk20dbMicBoost.Location = new System.Drawing.Point(17, 65);
+            this.chk20dbMicBoost.Location = new System.Drawing.Point(10, 65);
             this.chk20dbMicBoost.Name = "chk20dbMicBoost";
             this.chk20dbMicBoost.Size = new System.Drawing.Size(110, 16);
             this.chk20dbMicBoost.TabIndex = 11;
@@ -14169,7 +14203,7 @@ namespace PowerSDR
             0,
             0,
             0});
-            this.udMicGainMin.Location = new System.Drawing.Point(40, 40);
+            this.udMicGainMin.Location = new System.Drawing.Point(35, 40);
             this.udMicGainMin.Maximum = new decimal(new int[] {
             0,
             0,
@@ -14181,7 +14215,7 @@ namespace PowerSDR
             0,
             -2147483648});
             this.udMicGainMin.Name = "udMicGainMin";
-            this.udMicGainMin.Size = new System.Drawing.Size(48, 20);
+            this.udMicGainMin.Size = new System.Drawing.Size(40, 20);
             this.udMicGainMin.TabIndex = 10;
             this.udMicGainMin.Value = new decimal(new int[] {
             40,
@@ -14197,7 +14231,7 @@ namespace PowerSDR
             0,
             0,
             0});
-            this.udMicGainMax.Location = new System.Drawing.Point(40, 15);
+            this.udMicGainMax.Location = new System.Drawing.Point(35, 15);
             this.udMicGainMax.Maximum = new decimal(new int[] {
             70,
             0,
@@ -14209,7 +14243,7 @@ namespace PowerSDR
             0,
             0});
             this.udMicGainMax.Name = "udMicGainMax";
-            this.udMicGainMax.Size = new System.Drawing.Size(48, 20);
+            this.udMicGainMax.Size = new System.Drawing.Size(40, 20);
             this.udMicGainMax.TabIndex = 9;
             this.udMicGainMax.Value = new decimal(new int[] {
             10,
@@ -14221,18 +14255,18 @@ namespace PowerSDR
             // labelTS21
             // 
             this.labelTS21.Image = null;
-            this.labelTS21.Location = new System.Drawing.Point(6, 43);
+            this.labelTS21.Location = new System.Drawing.Point(4, 43);
             this.labelTS21.Name = "labelTS21";
-            this.labelTS21.Size = new System.Drawing.Size(40, 16);
+            this.labelTS21.Size = new System.Drawing.Size(30, 16);
             this.labelTS21.TabIndex = 5;
             this.labelTS21.Text = "Min:";
             // 
             // labelTS20
             // 
             this.labelTS20.Image = null;
-            this.labelTS20.Location = new System.Drawing.Point(6, 18);
+            this.labelTS20.Location = new System.Drawing.Point(4, 18);
             this.labelTS20.Name = "labelTS20";
-            this.labelTS20.Size = new System.Drawing.Size(40, 16);
+            this.labelTS20.Size = new System.Drawing.Size(30, 16);
             this.labelTS20.TabIndex = 4;
             this.labelTS20.Text = "Max:";
             // 
@@ -14515,7 +14549,7 @@ namespace PowerSDR
             65536});
             this.udTXAMCarrierLevel.Location = new System.Drawing.Point(80, 24);
             this.udTXAMCarrierLevel.Maximum = new decimal(new int[] {
-            100,
+            125,
             0,
             0,
             0});
@@ -25649,7 +25683,7 @@ namespace PowerSDR
         private void chk20dbMicBoost_CheckedChanged(object sender, System.EventArgs e)
         {
             console.MicBoost = chk20dbMicBoost.Checked;
-            //console.SetMicGain();
+            console.SetMicGain();
         }
 
     
@@ -30261,7 +30295,7 @@ namespace PowerSDR
             if (!chkPennyLane.Checked)
             {
                 bits &= 0xdf;  // 11011111
-                console.PennyLanePresent = false;
+                //console.PennyLanePresent = false;
                 radPenny10MHz.Checked = false;
                 radPenny10MHz.Enabled = false;
                 radPennyMic.Checked = false;
@@ -30271,11 +30305,11 @@ namespace PowerSDR
                 grpPennyExtCtrl.Enabled = false;
                 chkPennyExtCtrl.Enabled = false;                
                 JanusAudio.EnableHermesPower(0);
-                if (!chkPennyPresent.Checked)
+                /*if (!chkPennyPresent.Checked)
                 {
                    chkGeneralRXOnly.Checked = true;
                    chkGeneralRXOnly.Enabled = false;
-                }
+                }*/
             }
             else
             {
@@ -30292,11 +30326,13 @@ namespace PowerSDR
                     grpPennyExtCtrl.Enabled = true;
                 }
                 console.PennyPresent = false;
-                console.PennyLanePresent = true;
+                //console.PennyLanePresent = true;
                 chkGeneralRXOnly.Enabled = true;  
                 
                 JanusAudio.EnableHermesPower(1);
+                console.SetMicGain();
             }
+            console.PennyLanePresent = chkPennyLane.Checked;
             JanusAudio.SetC1Bits(bits);
             checkHPSDRDefaults(sender, e);
         }
@@ -30308,7 +30344,7 @@ namespace PowerSDR
             if (!chkPennyPresent.Checked)
             {
                 bits &= 0xdf;  // 11011111
-                console.PennyPresent = false;
+                //console.PennyPresent = false;
                 radPenny10MHz.Checked = false;
                 radPenny10MHz.Enabled = false;
                 radPennyMic.Checked = false;
@@ -30318,18 +30354,17 @@ namespace PowerSDR
                 grpPennyExtCtrl.Enabled = false;
                 chkPennyExtCtrl.Checked = false;
                 chkPennyExtCtrl.Enabled = false;
-                if (!chkPennyLane.Checked)
+                /*if (!chkPennyLane.Checked)
                 {
                     chkGeneralRXOnly.Checked = true;
                     chkGeneralRXOnly.Enabled = false;
-                }
+                } */
                 				
             }
             else
             {
                 chkPennyLane.Checked = false;
                 bits |= 0x20;   // 00100000
-
 
                 radPenny10MHz.Enabled = true;
                 radPennyMic.Enabled = true;
@@ -30340,12 +30375,14 @@ namespace PowerSDR
                 {
                     grpPennyExtCtrl.Enabled = true;
                 }
-                console.PennyPresent = true;
-                chkGeneralRXOnly.Enabled = true;  
+                //console.PennyPresent = true;
+               // chkGeneralRXOnly.Enabled = true;  
                 console.PennyLanePresent = false;
                 
-                JanusAudio.EnableHermesPower(0); 
+                JanusAudio.EnableHermesPower(0);
+                console.SetMicGain();
             }
+            console.PennyPresent = chkPennyPresent.Checked;
             JanusAudio.SetC1Bits(bits);
             checkHPSDRDefaults(sender, e);
 
@@ -30353,22 +30390,23 @@ namespace PowerSDR
 
         private void checkHPSDRDefaults(object sender, System.EventArgs e)
         {
-            if (chkJanusPresent.Checked && !chkPennyPresent.Checked)  // only janus - default mic to Janus 
+            if (chkJanusPresent.Checked && !chkPennyPresent.Checked && !chkPennyLane.Checked)  // only janus - default mic to Janus 
             {
                 radJanusMic.Checked = true;
                 radJanusMic_CheckedChanged(sender, e);
             }
-            else if (chkPennyPresent.Checked && !chkJanusPresent.Checked)
+            else if ((chkPennyPresent.Checked || chkPennyLane.Checked) && !chkJanusPresent.Checked)
             {
                 radPennyMic.Checked = true;
                 radPennyMic_CheckedChanged(sender, e);
             }
-            if (chkPennyPresent.Checked && !chkMercuryPresent.Checked)
+
+            if ((chkPennyPresent.Checked || chkPennyLane.Checked) && !chkMercuryPresent.Checked)
             {
                 rad12288MHzPenny.Checked = true;
                 rad12288MHzPenny_CheckedChanged(sender, e);
             }
-            else if (chkMercuryPresent.Checked && !chkPennyPresent.Checked)
+            else if (chkMercuryPresent.Checked && !chkPennyPresent.Checked && !chkPennyLane.Checked)
             {
                 radMercury12288MHz.Checked = true;
                 radMercury12288MHz_CheckedChanged(sender, e);
@@ -31714,8 +31752,30 @@ namespace PowerSDR
                     console.Extended = true;
                     break;
             }
-
             console.CurrentRegion = CurrentRegion;
+        }
+
+        private void radMicIn_CheckedChanged(object sender, EventArgs e)
+        {
+            if (radMicIn.Checked)
+            {
+                console.LineIn = false;
+                radLineIn.Checked = false;
+                chk20dbMicBoost.Enabled = true;
+                console.SetMicGain();
+            }
+        }
+
+        private void radLineIn_CheckedChanged(object sender, EventArgs e)
+        {
+            if (radLineIn.Checked)
+            {
+                console.LineIn = true;
+                radMicIn.Checked = false;
+                chk20dbMicBoost.Checked = false;
+                chk20dbMicBoost.Enabled = false;
+                console.SetMicGain();
+            }
         }
 
         private void radOzyUSB_CheckedChanged(object sender, EventArgs e)
@@ -31807,7 +31867,6 @@ namespace PowerSDR
         {
             console.RFDelay = (int)udRFDelay.Value;
         }
-
  
     }
 

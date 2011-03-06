@@ -6232,7 +6232,7 @@ namespace PowerSDR
                    // Hdw.Init(); 							// Power down hardware
                    // Hdw.StandBy(); 						// initialize hardware device				
                     SetupForm.AddHPSDRPages(); 
-                    SetComboPreampForHPSDR(); 
+                    SetComboPreampForHPSDR();                   
                     break;
             }
 
@@ -18518,6 +18518,16 @@ namespace PowerSDR
 			}
 		}
 
+        private bool line_in = false;
+        public bool LineIn
+        {
+            get { return line_in; }
+            set
+            {
+                line_in = value;
+            }
+        }
+
 		private bool mic_boost = false;
 		public bool MicBoost
 		{
@@ -21970,7 +21980,14 @@ namespace PowerSDR
 			set	{ ptbFilterShift.Value = value; }
 		}
 
-        public bool PennyLanePresent = false; 
+        private bool pennylanepresent = false;
+        public bool PennyLanePresent
+        {
+            get { return pennylanepresent; }
+            set { pennylanepresent = value; }
+        } 
+
+        //public bool PennyLanePresent = false; 
 		public bool PennyPresent = false;
 		public bool AlexPresent = false; 
 		public bool MercuryPresent = false; 
@@ -28614,7 +28631,7 @@ namespace PowerSDR
                 if (mic_boost)
                 {
                     lblMicVal.Text = (ptbMic.Value + 20).ToString() + " dB";
-                    gain_db += 20.0;
+                    //gain_db += 20.0;
                 }
                 else
                 {
@@ -38414,69 +38431,65 @@ namespace PowerSDR
 
         public void SetMicGain()
         {
-            // This is used to set the MicGain and Line in when Ozy/Magister is used
-            // The I2C settings are as follows: 
-
-            //    For mic input and boost on/off
-            //    1E 00 - Reset chip
-            //    12 01 - set digital interface active
-            //    08 15 - D/A on, mic input, mic 20dB boost
-            //    08 14 - ditto but no mic boost
-            //    0C 00 - All chip power on
-            //    0E 02 - Slave, 16 bit, I2S
-            //    10 00 - 48k, Normal mode
-            //    0A 00 - turn D/A mute off
-            //    00 00 - set Line in gain to 0
-
-            //    For line input                           
-            //    1E 00 - Reset chip
-            //    12 01 - set digital interface active
-            //    08 10 - D/A on, line input
-            //    0C 00 - All chip power on
-            //    0E 02 - Slave, 16 bit, I2S
-            //    10 00 - 48k, Normal mode
-            //    0A 00 - turn D/A mute off 
-            //    00 00 - set Line in gain to 0
-
-//#if false
-            if ((PennyPresent || PennyLanePresent))  // update mic gain on Penny or PennyLane TLV320 
+           if ((chkPower.Checked) && (PennyPresent || pennylanepresent))
             {
-
-                byte[] Penny_TLV320 = new byte[2];
-                byte[] Penny_TLV320_data = new byte[16];
-
-                // need to select the config data depending on the Mic Gain (20dB) or line in selected
-
-              //  if (LineIn)
-               //     Penny_TLV320_data = new byte[] { 0x1e, 0x00, 0x12, 0x01, 0x08, 0x10, 0x0c, 0x00, 0x0e, 0x02, 0x01, 0x00, 0x0a, 0x00, 0x00, 0x00 };                 
-              //  else if (MicGain20dB)
-                if (mic_boost)
-                    Penny_TLV320_data = new byte[] { 0x1e, 0x00, 0x12, 0x01, 0x08, 0x15, 0x0c, 0x00, 0x0e, 0x02, 0x01, 0x00, 0x0a, 0x00, 0x00, 0x00 };               
-                else
-                    Penny_TLV320_data = new byte[] { 0x1e, 0x00, 0x12, 0x01, 0x08, 0x14, 0x0c, 0x00, 0x0e, 0x02, 0x01, 0x00, 0x0a, 0x00, 0x00, 0x00 };
-                
-                // set the I2C interface speed to 400kHZ
-                if (!(OZY.Set_I2C_Speed(hdev, 1)))
+                if (HPSDRisMetis)
                 {
-                    MessageBox.Show("Unable to set I2C speed to 400kHz", "System Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    return;
+                    int v;
+
+                    if (mic_boost) v = 1;
+                    else v = 0;
+                    JanusAudio.SetMicBoost(v);
+
+                    if (line_in) v = 1;
+                    else v = 0;
+                    JanusAudio.SetLineIn(v);
                 }
-                
-                // send the configuration data to the TLV320 on Penelope or PennyLane 
-                for (int x = 0; x < 16; x += 2)
+                else
                 {
-                    Penny_TLV320[0] = Penny_TLV320_data[x]; Penny_TLV320[1] = Penny_TLV320_data[x + 1];
-                    if (!(OZY.Write_I2C(hdev, 0x1b, Penny_TLV320)))
-                    {
-                        MessageBox.Show("Unable to configure TLV320 on Penelope via I2C", "System Eror!", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        // break out of the configuration loop 
-                        break;
-                   }
-                } 
-            }
-//#endif
-        }
+                    IntPtr oz_hdev = JanusAudio.OzyOpen();
+                    IntPtr usb_hdev = JanusAudio.OzyHandleToRealHandle(oz_hdev);
 
+                    byte[] Penny_TLV320 = new byte[2];
+                    byte[] Penny_TLV320_data = new byte[16];
+
+                    // need to select the config data depending on the Mic Gain (20dB) or line in selected
+                    if (line_in)
+                    {
+                        Penny_TLV320_data = new byte[] { 0x1e, 0x00, 0x12, 0x01, 0x08, 0x10, 0x0c, 0x00, 0x0e, 0x02, 0x01, 0x00, 0x0a, 0x00, 0x00, 0x00 };
+                    }
+                    else if (mic_boost)
+                    {
+                        Penny_TLV320_data = new byte[] { 0x1e, 0x00, 0x12, 0x01, 0x08, 0x15, 0x0c, 0x00, 0x0e, 0x02, 0x01, 0x00, 0x0a, 0x00, 0x00, 0x00 };
+                    }
+                    else
+                    {
+                        Penny_TLV320_data = new byte[] { 0x1e, 0x00, 0x12, 0x01, 0x08, 0x14, 0x0c, 0x00, 0x0e, 0x02, 0x01, 0x00, 0x0a, 0x00, 0x00, 0x00 };
+                    }
+
+
+                    // set the I2C interface speed to 400kHZ
+                    if (!(OZY.Set_I2C_Speed(usb_hdev, 1)))
+                    {
+                        MessageBox.Show("Unable to set I2C speed to 400kHz", "System Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return;
+                    }
+
+                    // send the configuration data to the TLV320 on Penelope or PennyLane 
+                    for (int x = 0; x < 16; x += 2)
+                    {
+                        Penny_TLV320[0] = Penny_TLV320_data[x]; Penny_TLV320[1] = Penny_TLV320_data[x + 1];
+                        if (!(OZY.Write_I2C(usb_hdev, 0x1b, Penny_TLV320)))
+                        {
+                            MessageBox.Show("Unable to configure TLV320 on Penelope via I2C", "System Eror!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            // break out of the configuration loop 
+                            break;
+                        }
+
+                    }
+                }
+            }
+        }
 
  	}
 }

@@ -1013,7 +1013,7 @@ void IOThreadMainLoop(void) {
                                                 // printf(" C3");
                                                 ControlBytesIn[3] = FPGAReadBufp[i];
 												if ( (ControlBytesIn[0] & CandCAddrMask) == 0 ) { 
-													PenelopeFWVersion = (int)(ControlBytesIn[3]); 
+													PenelopeFWVersion = (int)(ControlBytesIn[3]);
 												}
 
                                                 // RxFifoAvail = ((unsigned char)FPGAReadBufp[i]) << 4;
@@ -1228,7 +1228,7 @@ void IOThreadMainLoop(void) {
                                                         FPGAWriteBufp[writebufpos] = 0x7f;
                                                         break;
 
-                                                case OUT_STATE_CONTROL0:
+                                                case OUT_STATE_CONTROL0: //C0
                                                         out_state = OUT_STATE_CONTROL1;
                                                         // write_buf[writebufpos] = ControlBytesIn[0];
 #if 0
@@ -1262,7 +1262,7 @@ void IOThreadMainLoop(void) {
 
                                                         break;
 
-                                                case OUT_STATE_CONTROL1:
+                                                case OUT_STATE_CONTROL1: //C1
                                                         out_state = OUT_STATE_CONTROL2;
                                                         // send sample rate in C1 low 2 bits
                                                         // FPGAWriteBufp[writebufpos] = ((ControlBytesIn[1] & 0xfc) | (SampleRateIn2Bits & 3));
@@ -1270,11 +1270,17 @@ void IOThreadMainLoop(void) {
                                                             FPGAWriteBufp[writebufpos] =  (VFOfreq >> 24) & 0xff; // byte 0 of freq
                                                         }
 														else if ( out_control_idx == 2 ) {  /* send power out level */
-															FPGAWriteBufp[writebufpos] = (unsigned char)(OutputPowerFactor & 0xff);
-															if ( lastOutPower != (FPGAWriteBufp[writebufpos] & 0xff ) ) { 
+															if (HermesPowerEnabled) {
+															    FPGAWriteBufp[writebufpos] = (unsigned char)(OutputPowerFactor & 0xff);
+															    if ( lastOutPower != (FPGAWriteBufp[writebufpos] & 0xff ) ) { 
 																lastOutPower = FPGAWriteBufp[writebufpos] & 0xff ; 
 																printf("outPower: %u\n", lastOutPower);  fflush(stdout); 
 															} 
+															//else {
+                                                               // FPGAWriteBufp[writebufpos] = 0;
+															//}
+														   }
+
 														} 
                                                         else {
 															FPGAWriteBufp[writebufpos] =  (SampleRateIn2Bits & 3) | ( C1Mask & 0xfc ) ;
@@ -1290,13 +1296,13 @@ void IOThreadMainLoop(void) {
 #endif
                                                         break;
 
-                                                case OUT_STATE_CONTROL2:
+                                                case OUT_STATE_CONTROL2: //C2
                                                         out_state = OUT_STATE_CONTROL3;
                                                         if ( out_control_idx == 1 ) {
                                                                 FPGAWriteBufp[writebufpos] = (VFOfreq >> 16) & 0xff;
                                                         }
 														else if ( out_control_idx == 2 ) { 
-															 FPGAWriteBufp[writebufpos] = 0; 
+															 FPGAWriteBufp[writebufpos] = (MicBoost | LineIn) & 0x3;
 														} 
                                                         else {
 															FPGAWriteBufp[writebufpos] = PennyOCBits << 1; /* ControlBytesIn[2];  */
@@ -1309,7 +1315,7 @@ void IOThreadMainLoop(void) {
 #endif
                                                         break;
 
-                                                case OUT_STATE_CONTROL3:
+                                                case OUT_STATE_CONTROL3: //C3
                                                         out_state = OUT_STATE_CONTROL4;
                                                         if ( out_control_idx == 1 ) {
                                                                 FPGAWriteBufp[writebufpos] = (VFOfreq >> 8) & 0xff;
@@ -1329,7 +1335,7 @@ void IOThreadMainLoop(void) {
 
                                                         break;
 
-                                                case OUT_STATE_CONTROL4:
+                                                case OUT_STATE_CONTROL4: //C4
                                                         out_state = OUT_STATE_LEFT_HI_NEEDED;
                                                         // write_buf[writebufpos] = ControlBytesIn[4];
                                                         if ( out_control_idx == 1 ) {
@@ -1353,7 +1359,7 @@ void IOThreadMainLoop(void) {
 															out_control_idx = 0; 
 														} 
                                                         else if ( out_control_idx == 1 ) {
-															if ( HermesPowerEnabled ) {
+															if ( HermesPowerEnabled || isMetis) {
                                                                 out_control_idx = 2;
 															}
 															else { 

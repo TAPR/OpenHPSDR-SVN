@@ -50,7 +50,7 @@ namespace PowerSDR
 		// get ozy firmware version string - 8 bytes.  returns 
 		// null for error 
 		private static string getOzyFirmwareString() 
-		{ 
+		{
 			IntPtr oz_h = JanusAudio.OzyOpen(); 
 			
 			if ( oz_h == (IntPtr)0 ) 
@@ -71,7 +71,7 @@ namespace PowerSDR
 				                                      OzySDR1kControl.SDR1KCTRL_READ_VERSION, 
 				                                      0, buf, buf.Length, 1000); 
 			// System.Console.WriteLine("read version rc: " + rc); 
-
+           
 			string result = null;
 			
 			if ( rc == 8 )    // got length we expected 
@@ -83,11 +83,10 @@ namespace PowerSDR
 				} 
 				result = new string(cbuf); 			
 				System.Console.WriteLine("version: >" + result + "<"); 
-			}
-			JanusAudio.OzyClose(oz_h); 
+			}           
+			JanusAudio.OzyClose(oz_h);
 			return result; 
 		} 
-
 
 		public static string setC1Opts(string opt) 
 		{ 
@@ -104,7 +103,6 @@ namespace PowerSDR
 					on_mask = 0;       // 10 meg atlas == 00xx
 					result= "Atlas10"; 
 					break; 
-
 
 				case "--Penny10MHz": 
 					off_mask =  0xf3;  // 11110011
@@ -136,7 +134,6 @@ namespace PowerSDR
 					result = "CfgMerc";
 					break; 
 
-
 				case "--CfgBoth": 				
 					off_mask =  0x9f;     // 10011111
 					on_mask = 0x60;
@@ -154,10 +151,8 @@ namespace PowerSDR
 			bits &= off_mask; 
 			bits |= on_mask; 
 			JanusAudio.SetC1Bits(bits); 
-
 			return result; 
 		} 
-
 
 		private static string fx2_fw_version = "n/a"; 
 
@@ -165,8 +160,6 @@ namespace PowerSDR
 		{ 
 			return fx2_fw_version; 
 		} 
-			
-
 
 		[DllImport("JanusAudio.dll")]
 		unsafe public static extern void EnableHermesPower(int enable);
@@ -192,16 +185,12 @@ namespace PowerSDR
 
 		// [DllImport("JanusAudio.dll")]
 		// public static extern int getNetworkAddrs(Int32[] addrs, Int32 count); 
-
-		
 		
 		[DllImport("JanusAudio.dll")]
 		public static extern void DeInitMetisSockets();
 
 		[DllImport("JanusAudio.dll", CharSet = CharSet.Ansi) ]
-		unsafe public static extern int nativeInitMetis(String netaddr);
-
-		
+		unsafe public static extern int nativeInitMetis(String netaddr);		
 
 //		private static bool MetisInitialized = false;
 		// returns 0 on success, !0 on failure 
@@ -260,25 +249,35 @@ namespace PowerSDR
 				bool rc = p.Start(); 
 				// System.Console.WriteLine("start returned: " + rc); 
 				p.WaitForExit(); 
-				// System.Console.WriteLine("OzyInit completes"); 				
-			
+				// System.Console.WriteLine("OzyInit completes"); 						
+               /*  Stopwatch sw;
+                 sw = Stopwatch.StartNew();
 
-				// load it again 
-				oz_fw_version = getOzyFirmwareString(); 
+                 do
+                 {
+                 oz_fw_version = getOzyFirmwareString();
+                    
+                     Thread.Sleep(1);
+                     if (sw.ElapsedMilliseconds > 3000) break;
+                 }
+                 while (oz_fw_version == null);
+                 sw.Stop();  */
+
+                // load it again 
+                oz_fw_version = getOzyFirmwareString();               
 			}
 
 			if ( oz_fw_version == null ) 
 			{
 				return 1; 
-			}
+			} 
 
-			fx2_fw_version = oz_fw_version; 
+            fx2_fw_version = oz_fw_version;
 
 			/* else */ 
-			isFirmwareLoaded = true; 
+			isFirmwareLoaded = true;
 			return 0; 
 		}
-
 		
 #if false 
 		// old  obsolete code follows 
@@ -337,7 +336,6 @@ namespace PowerSDR
 		// and set fwVersionmsg to point to an appropriate message
 		private static bool fwVersionsGood() 
 		{ 
-
 			Console c = Console.getConsole(); 
 			
 			if  ( c != null && c.HPSDRisMetis )  
@@ -347,21 +345,45 @@ namespace PowerSDR
 			} 
 			
 			bool result = true; 
-			int ozy_ver = getOzyFWVersion(); 
-			if ( ozy_ver <= 15 ) 
-			{ 
-				legacyDotDashPTT = true;
-				JanusAudio.SetLegacyDotDashPTT(1);
-			} 
+            string fx2_version_string = getFX2FirmwareVersionString();
+            int merc_ver = getMercuryFWVersion();
+			int penny_ver = getPenelopeFWVersion();
+            int ozy_ver; // = getOzyFWVersion();
 
-			int merc_ver = getMercuryFWVersion();
-			int penny_ver = getPenelopeFWVersion(); 
-			string fx2_version_string = getFX2FirmwareVersionString(); 
+           do
+            {
+                ozy_ver = getOzyFWVersion();
+            }
+            while (ozy_ver < 12);
+
+           if (c.MercuryPresent)
+           {
+               do
+               {
+                   merc_ver = getMercuryFWVersion();
+               }
+               while (merc_ver < 26);
+           }
+
+            if (c.PennyPresent) {
+                do 
+                {
+                    penny_ver = getPenelopeFWVersion(); 
+                }
+                while (penny_ver <= 10);
+
+            }
+
+            if (ozy_ver <= 15)
+            {
+                legacyDotDashPTT = true;
+                JanusAudio.SetLegacyDotDashPTT(1);
+            } 
 			
-			System.Console.WriteLine("fx2: " + fx2_version_string); 
-			System.Console.WriteLine("ozy: " + ozy_ver); 
-			System.Console.WriteLine("merc: " + merc_ver); 
-			System.Console.WriteLine("penny: " + penny_ver); 
+			//System.Console.WriteLine("fx2: " + fx2_version_string); 
+			//System.Console.WriteLine("ozy: " + ozy_ver); 
+			//System.Console.WriteLine("merc: " + merc_ver); 
+			//System.Console.WriteLine("penny: " + penny_ver); 
 			if ( forceFWGood == true ) 
 			{ 
 				System.Console.WriteLine("Firmware ver check forced good!"); 
@@ -393,21 +415,17 @@ namespace PowerSDR
 			return result; 
 		} 
 
-		 
-
 		// returns -101 for firmware version error 
 		unsafe public static int StartAudio(int sample_rate, int samples_per_block, PA19.PaStreamCallback cb, int sample_bits, int no_send) 
 		{ 			
-
-			
-
 			if ( initOzy() != 0 )  
 			{ 
 				return 1; 
-			}	 
-			int result = StartAudioNative(sample_rate, samples_per_block, cb, sample_bits, no_send); 
-			if ( result == 0 && !fwVersionsChecked ) 
-			{ 
+			}
+			int result = StartAudioNative(sample_rate, samples_per_block, cb, sample_bits, no_send);
+
+            if ( result == 0 && !fwVersionsChecked )
+			{               
 				Thread.Sleep(100); // wait for frames 
 				if ( !fwVersionsGood() ) 
 				{
@@ -417,19 +435,16 @@ namespace PowerSDR
 				{ 
 					fwVersionsChecked = true; 
 				} 
-			} 
-			return result; 
-				
+			}
+            InitOzyMic();
+			return result;
 		} 
 
 		[DllImport("JanusAudio.dll")]
 		public static extern int GetMetisIPAddr(); 
-
 		
 		[DllImport("JanusAudio.dll")]
 		public static extern void GetMetisMACAddr(byte[] addr_bytes); 
-
-
 
 		[DllImport("JanusAudio.dll")]
 		unsafe public static extern int StartAudioNative(int sample_rate, int samples_per_block, PA19.PaStreamCallback cb, int sample_bits, int no_send); 
@@ -442,7 +457,6 @@ namespace PowerSDR
 
 		[DllImport("JanusAudio.dll")]
 		unsafe public static extern int GetC1Bits(); 
-
 
 		[DllImport("JanusAudio.dll")]
 		unsafe public static extern int nativeGetDotDashPTT();  // bit 0 = ptt, bit1 = dash asserted, bit 2 = dot asserted 
@@ -458,7 +472,6 @@ namespace PowerSDR
 			}
 			return bits;
 		}
-
 		
 		[DllImport("JanusAudio.dll")]
 		unsafe public static extern void SetLegacyDotDashPTT(int bit); 
@@ -468,7 +481,6 @@ namespace PowerSDR
 
 		[DllImport("JanusAudio.dll")]
 		unsafe public static extern int GetDiagData(int *a, int count);  // get diag data, count is how many slots are in array 
-
 
 		[DllImport("JanusAudio.dll")]
 		unsafe public static extern void SetVFOfreq_native(double f);  // tell aux hardware current freq -- in MHz 
@@ -486,9 +498,7 @@ namespace PowerSDR
 			}
 		}
 
-
 		private static double lastVFOfreq = 0; 
-
 		unsafe public static void SetVFOfreq(double f) 
 		{ 
 			lastVFOfreq = f; 
@@ -520,9 +530,15 @@ namespace PowerSDR
 		unsafe public static extern IntPtr OzyHandleToRealHandle(IntPtr ozh);
 
 		[DllImport("JanusAudio.dll")]
-		unsafe public static extern int IsOzyAttached(); 
+		unsafe public static extern int IsOzyAttached();
 
-		[DllImport("JanusAudio.dll")]
+        [DllImport("JanusAudio.dll")]
+        unsafe public static extern void SetMicBoost(int bits);
+
+        [DllImport("JanusAudio.dll")]
+        unsafe public static extern void SetLineIn(int bits);
+
+        [DllImport("JanusAudio.dll")]
 		unsafe public static extern void SetAlexAtten(int bits); 
 							  
 		[DllImport("JanusAudio.dll")]
@@ -546,14 +562,11 @@ namespace PowerSDR
 		[DllImport("JanusAudio.dll")]
 		unsafe public static extern int getOzyFWVersion();
 
-		
-
+        [DllImport("JanusAudio.dll")]
+        unsafe public static extern int getHaveSync();
 
 		[DllImport("JanusAudio.dll")]
-
 		unsafe public static extern int getFwdPower();
-
-
 
 		// 
 		// compute fwd power from Penny based on count returned 
@@ -565,7 +578,6 @@ namespace PowerSDR
 			int power_int = JanusAudio.getFwdPower(); 
 			double power_f = (double)power_int; 
 			double result; 
-
 
 			if ( power_int <= 2095 ) 
 			{ 
@@ -643,7 +655,12 @@ namespace PowerSDR
 		[DllImport("JanusAudio.dll")]
 		unsafe public static extern int GetEP4Data(char *bufp);
 
-
+        private static void InitOzyMic()
+        {
+            Console c = Console.getConsole();
+            c.SetMicGain();
+        }
+  
 //		public static bool CWptt() 
 //		{ 			
 //			if ( ( GetDotDash() & 0x3 ) != 0  ) 
