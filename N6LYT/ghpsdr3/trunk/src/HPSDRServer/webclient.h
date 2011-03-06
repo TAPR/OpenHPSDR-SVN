@@ -1,8 +1,9 @@
 #ifndef WEBCLIENT_H
 #define WEBCLIENT_H
 
-#include <QThread>
+#include <QObject>
 #include <QTcpSocket>
+#include <QStringList>
 
 #include "server.h"
 #include "discovery.h"

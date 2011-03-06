@@ -328,7 +328,7 @@
                               "<tr bgcolor=\"skyblue\" width=\"100%\">\r\n"
                               "<td>";
 
-             *outputStream << "Ozy Software Version: ";
+             *outputStream << server->getDevice()<<" Software Version: ";
              *outputStream << server->getOzySoftwareVersion();
              *outputStream << "<BR>Mercury Software Version: ";
              *outputStream << server->getMercurySoftwareVersion();
