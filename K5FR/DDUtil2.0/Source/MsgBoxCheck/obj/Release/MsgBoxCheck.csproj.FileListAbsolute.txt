@@ -1,3 +1,0 @@
-C:\Documents and Settings\Steve\Desktop\DDUtil 2.0\bin\Release\MsgBoxCheck.dll
-C:\Documents and Settings\Steve\Desktop\DDUtil 2.0\Source\MsgBoxCheck\obj\Release\ResolveAssemblyReference.cache
-C:\Documents and Settings\Steve\Desktop\DDUtil 2.0\Source\MsgBoxCheck\obj\Release\MsgBoxCheck.dll
