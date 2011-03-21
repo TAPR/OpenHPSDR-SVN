@@ -3323,8 +3323,11 @@ namespace PowerSDR
 
             if (pan_fill)
             {
-                points[W].X = W; points[W].Y = H;
-                points[W+1].X = 0; points[W+1].Y = H;
+                points[W].X = W; 
+                points[W].Y = H;
+
+                points[W+1].X = 0; 
+                points[W+1].Y = H;
                 if (bottom)
                 {
                     points[W].Y += H;
@@ -3332,13 +3335,33 @@ namespace PowerSDR
                 }
                 data_line_pen.Color = Color.FromArgb(100, 255, 255, 255);
                 g.FillPolygon(data_line_pen.Brush, points);
-                points[W] = points[W-1];
-                points[W+1] = points[W-1];
+
+                //points[W] = points[W-1];
+                //points[W+1] = points[W-1];
                 data_line_pen.Color = data_line_color;
-                g.DrawLines(data_line_pen, points);                
+                //g.DrawLines(data_line_pen, points); 
+                g.InterpolationMode = InterpolationMode.HighQualityBicubic;
+                g.SmoothingMode = SmoothingMode.AntiAlias;
+                for (int i = 1; i < W; i++)
+                {
+                    g.DrawLine(data_line_pen, points[i - 1], points[i]);
+                }
+                g.SmoothingMode = SmoothingMode.Default;
+                g.InterpolationMode = InterpolationMode.Default;
             }
-            else g.DrawLines(data_line_pen, points);
-			
+            else 
+            {
+                g.InterpolationMode = InterpolationMode.HighQualityBicubic;
+                g.SmoothingMode = SmoothingMode.AntiAlias;
+                for (int i = 1; i < W; i++)
+                {
+                    g.DrawLine(data_line_pen, points[i - 1], points[i]);
+                }
+                g.SmoothingMode = SmoothingMode.Default;
+                g.InterpolationMode = InterpolationMode.Default;
+                //g.DrawLines(data_line_pen, points);
+            }
+
 			points = null;
 
 			// draw long cursor

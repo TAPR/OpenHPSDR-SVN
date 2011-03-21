@@ -12456,7 +12456,6 @@ namespace PowerSDR
             this.lblLMSNRLeak.Size = new System.Drawing.Size(40, 16);
             this.lblLMSNRLeak.TabIndex = 11;
             this.lblLMSNRLeak.Text = "Leak:";
-            this.lblLMSNRLeak.Visible = false;
             // 
             // udLMSNRLeak
             // 
@@ -12630,7 +12629,6 @@ namespace PowerSDR
             this.lblLMSANFLeak.Size = new System.Drawing.Size(40, 16);
             this.lblLMSANFLeak.TabIndex = 9;
             this.lblLMSANFLeak.Text = "Leak:";
-            this.lblLMSANFLeak.Visible = false;
             // 
             // udLMSANFLeak
             // 
