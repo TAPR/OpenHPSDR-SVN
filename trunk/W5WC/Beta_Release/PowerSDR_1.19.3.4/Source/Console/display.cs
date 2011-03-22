@@ -372,18 +372,20 @@ namespace PowerSDR
 			get { return rx2_preamp_offset; }
 			set	{ rx2_preamp_offset = value; }
 		}
-        private static float tx_display_cal_offset;					// display calibration offset in dB
-        public static float TXDisplayCalOffset
+
+        private static bool tx_display_cal_control = false;
+        public static bool TXDisplayCalControl
         {
-            get { return tx_display_cal_offset; }
-            set { tx_display_cal_offset = value; }
+            get { return tx_display_cal_control; }
+            set { tx_display_cal_control = value; }
         }
 
 		private static float rx1_display_cal_offset;					// display calibration offset in dB
 		public static float RX1DisplayCalOffset
 		{
 			get { return rx1_display_cal_offset; }
-			set { rx1_display_cal_offset = value; }
+			set { rx1_display_cal_offset = value;
+            }
 		}
 
 		private static float rx2_display_cal_offset;					// display calibration offset in dB
@@ -392,6 +394,18 @@ namespace PowerSDR
 			get { return rx2_display_cal_offset; }
 			set { rx2_display_cal_offset = value; }
 		}
+
+        private static float tx_display_cal_offset = rx1_display_cal_offset;					// display calibration offset in dB
+        public static float TXDisplayCalOffset
+        {
+            get { return tx_display_cal_offset; }
+            set
+            {
+                if (tx_display_cal_control)
+                    tx_display_cal_offset = value;
+                else tx_display_cal_offset = rx1_display_cal_offset;
+            }
+        }
 
 		private static Model current_model = Model.FLEX5000;
 		public static Model CurrentModel

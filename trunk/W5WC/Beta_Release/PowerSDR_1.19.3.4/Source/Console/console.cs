@@ -1335,13 +1335,10 @@ namespace PowerSDR
 			
 			Splash.SetStatus("Finished");						// Set progress point
 			// Activates double buffering
-			//this.SetStyle(ControlStyles.DoubleBuffer, true);
 
             this.SetStyle(ControlStyles.UserPaint |
                ControlStyles.AllPaintingInWmPaint |
                ControlStyles.OptimizedDoubleBuffer, true);
-
-            //this.SetStyle(ControlStyles.ResizeRedraw, true);
 
             this.UpdateStyles();
 
@@ -6611,11 +6608,12 @@ namespace PowerSDR
 			a.Add("current_datetime_mode/"+ (int)current_datetime_mode);
 			a.Add("rx1_display_cal_offset/"+rx1_display_cal_offset.ToString("f3"));
 			a.Add("rx1_meter_cal_offset/"+rx1_meter_cal_offset);
+            a.Add("tx_display_cal_offset/" + tx_display_cal_offset.ToString("f3"));
 
 			a.Add("txtMemoryQuick/"+ txtMemoryQuick.Text);		// save quick memory settings
 			a.Add("quick_save_mode/"+(int)quick_save_mode);
 			a.Add("quick_save_filter/"+(int)quick_save_filter);
-//w5wc check
+
 			a.Add("fwc_last_cal_date_time/"+fwc_last_cal_date_time);
 			a.Add("fwc_serial_num/"+fwc_serial_num);
 			a.Add("fwc_trx_serial_num/"+fwc_trx_serial_num);
@@ -7411,6 +7409,9 @@ namespace PowerSDR
 					case "rx1_display_cal_offset":
 						RX1DisplayCalOffset = float.Parse(val);
 						break;
+                    case "tx_display_cal_offset":
+                        TXDisplayCalOffset = float.Parse(val);
+                        break;
 					case "rx1_meter_cal_offset":
 						rx1_meter_cal_offset = float.Parse(val);
 						break;
@@ -18140,7 +18141,9 @@ namespace PowerSDR
 			//Display.RX2PreampOffset = rx2_preamp_offset[(int)rx2_preamp_mode];
 			Display.RX1DisplayCalOffset = rx1_level_table[(int)rx1_band][0]+rx1_path_offset+rx1_xvtr_gain_offset+rx1_loop_offset;
 			//Display.RX2DisplayCalOffset = rx2_level_table[(int)rx2_band][0]+rx2_path_offset+rx2_xvtr_gain_offset+rx2_loop_offset;
-		}
+            Display.TXDisplayCalOffset = tx_display_cal_offset;
+            SetupForm.UpdateDisplayMeter();
+        }
 
 		private bool snap_to_click_tuning = true;
 		public bool SnapToClickTuning
@@ -18834,6 +18837,18 @@ namespace PowerSDR
 				UpdateDisplayOffsets();
 			}
 		}
+
+        private float tx_display_cal_offset;					// display calibration offset per volume setting in dB
+        public float TXDisplayCalOffset
+        {
+            get { return tx_display_cal_offset; }
+            set
+            {
+                tx_display_cal_offset = value;
+                //Display.TXDisplayCalOffset = value;
+                UpdateDisplayOffsets();
+            }
+        }
 
 		private int display_cursor_x;						// x-coord of the cursor when over the display
 		public int DisplayCursorX

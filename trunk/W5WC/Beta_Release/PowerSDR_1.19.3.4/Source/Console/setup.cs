@@ -1516,6 +1516,10 @@ namespace PowerSDR
             comboCATstopbits.Text = "1";
             comboCATRigType.Text = "TS-2000";
             comboFRSRegion.Text = "United States";
+            comboTXTUNMeter.Text = "254.1";
+            //DisplayOffset = console.RX1DisplayCalOffset;
+            //MeterOffset = console.MultiMeterCalOffset;
+
             //fillMetisIPAddrCombo();  /* must happen before GetOptions is called */ 
 
             GetOptions();
@@ -5043,16 +5047,17 @@ namespace PowerSDR
             // chkTXCal
             // 
             this.chkTXCal.Image = null;
-            this.chkTXCal.Location = new System.Drawing.Point(24, 19);
+            this.chkTXCal.Location = new System.Drawing.Point(8, 20);
             this.chkTXCal.Name = "chkTXCal";
-            this.chkTXCal.Size = new System.Drawing.Size(65, 20);
+            this.chkTXCal.Size = new System.Drawing.Size(80, 20);
             this.chkTXCal.TabIndex = 13;
-            this.chkTXCal.Text = "TX Cal:";
-            this.chkTXCal.Visible = false;
+            this.chkTXCal.Text = "TX Offset:";
+            this.chkTXCal.CheckedChanged += new System.EventHandler(this.chkTXCal_CheckedChanged);
             // 
             // udTXDisplayCalOffset
             // 
             this.udTXDisplayCalOffset.DecimalPlaces = 1;
+            this.udTXDisplayCalOffset.Enabled = false;
             this.udTXDisplayCalOffset.Increment = new decimal(new int[] {
             1,
             0,
@@ -5072,9 +5077,9 @@ namespace PowerSDR
             this.udTXDisplayCalOffset.Name = "udTXDisplayCalOffset";
             this.udTXDisplayCalOffset.Size = new System.Drawing.Size(50, 20);
             this.udTXDisplayCalOffset.TabIndex = 12;
-            this.toolTip1.SetToolTip(this.udTXDisplayCalOffset, "Level calibration reference frequency");
+            this.toolTip1.SetToolTip(this.udTXDisplayCalOffset, "Level TX Display Offset");
             this.udTXDisplayCalOffset.Value = new decimal(new int[] {
-            782,
+            632,
             0,
             0,
             -2147418112});
@@ -14489,7 +14494,6 @@ namespace PowerSDR
             // 
             // comboPLTone
             // 
-            this.comboPLTone.DisplayMember = "254.1";
             this.comboPLTone.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboPLTone.FormattingEnabled = true;
             this.comboPLTone.Items.AddRange(new object[] {
@@ -17399,7 +17403,7 @@ namespace PowerSDR
             this.tbHGridColorAlpha.Size = new System.Drawing.Size(66, 18);
             this.tbHGridColorAlpha.TabIndex = 88;
             this.tbHGridColorAlpha.TickFrequency = 64;
-            this.tbHGridColorAlpha.Value = 65;
+            this.tbHGridColorAlpha.Value = 16;
             this.tbHGridColorAlpha.Scroll += new System.EventHandler(this.tbHGridColorAlpha_Scroll);
             // 
             // clrbtnHGridColor
@@ -17433,7 +17437,7 @@ namespace PowerSDR
             this.tbGridFineAlpha.Size = new System.Drawing.Size(66, 18);
             this.tbGridFineAlpha.TabIndex = 85;
             this.tbGridFineAlpha.TickFrequency = 64;
-            this.tbGridFineAlpha.Value = 65;
+            this.tbGridFineAlpha.Value = 16;
             this.tbGridFineAlpha.Scroll += new System.EventHandler(this.tbGridFineAlpha_Scroll);
             // 
             // tbGridCourseAlpha
@@ -17445,7 +17449,7 @@ namespace PowerSDR
             this.tbGridCourseAlpha.Size = new System.Drawing.Size(66, 18);
             this.tbGridCourseAlpha.TabIndex = 84;
             this.tbGridCourseAlpha.TickFrequency = 64;
-            this.tbGridCourseAlpha.Value = 65;
+            this.tbGridCourseAlpha.Value = 42;
             this.tbGridCourseAlpha.Scroll += new System.EventHandler(this.tbGridCourseAlpha_Scroll);
             // 
             // tbBackgroundAlpha
@@ -17457,7 +17461,7 @@ namespace PowerSDR
             this.tbBackgroundAlpha.Size = new System.Drawing.Size(66, 18);
             this.tbBackgroundAlpha.TabIndex = 83;
             this.tbBackgroundAlpha.TickFrequency = 64;
-            this.tbBackgroundAlpha.Value = 65;
+            this.tbBackgroundAlpha.Value = 16;
             this.tbBackgroundAlpha.Scroll += new System.EventHandler(this.tbBackgroundAlpha_Scroll);
             // 
             // clrbtnGridFine
@@ -23380,6 +23384,16 @@ namespace PowerSDR
             udAudioVoltage1_ValueChanged(this, e);
             chkAudioLatencyManual1_CheckedChanged(this, e);
 
+            // Calibration Tab
+            chkTXCal_CheckedChanged(this, e);
+            udTXDisplayCalOffset_ValueChanged(this, e);
+
+            // Test Tab
+            udTestFreq_ValueChanged(this, e);
+            tkbarTestGenFreq_Scroll(this, e);
+            updnTestGenScale_ValueChanged(this, e);
+            udTwoToneLevel_ValueChanged(this, e);
+
             // Display Tab
             udDisplayGridMax_ValueChanged(this, e);
             udDisplayGridMin_ValueChanged(this, e);
@@ -23413,6 +23427,11 @@ namespace PowerSDR
             udTXFilterLow_ValueChanged(this, e);
             udTransmitTunePower_ValueChanged(this, e);
             udPAGain_ValueChanged(this, e);
+            udFMtxBW_ValueChanged(this, e);
+            udFMDev_ValueChanged(this, e);
+            tbFMDev_Scroll(this, e);
+            udPLDev_ValueChanged(this, e);
+            comboPLTone_SelectedIndexChanged(this, e);
 
             // Keyboard Tab
             comboKBTuneUp1_SelectedIndexChanged(this, e);
@@ -24152,7 +24171,7 @@ namespace PowerSDR
             set { chkPTTOutDelay.Checked = value; }
         }
 
-  public float ImageGainTX
+        public float ImageGainTX
         {
             get { return (float)udDSPImageGainTX.Value; }
             set
@@ -24605,6 +24624,30 @@ namespace PowerSDR
                 value = (int)Math.Max(udRTTYL.Minimum, value);
                 value = (int)Math.Min(udRTTYL.Maximum, value);
                 udRTTYL.Value = value;
+            }
+        }
+
+        public float MeterOffset
+        {
+            get
+            {
+                return float.Parse(txtMeterOffset.Text);
+            }
+            set
+            {
+                txtMeterOffset.Text = value.ToString();
+            }
+        }
+
+        public float DisplayOffset
+        {
+            get
+            {
+                return float.Parse(txtDisplayOffset.Text);
+            }
+            set
+            {
+                txtDisplayOffset.Text = value.ToString();
             }
         }
 
@@ -25182,6 +25225,13 @@ namespace PowerSDR
             }
         }
 
+        public void UpdateDisplayMeter()
+        {
+            //txtMeterOffset.Text = console.MultiMeterCalOffset.ToString();
+            //txtDisplayOffset.Text = console.RX1DisplayCalOffset.ToString();
+            MeterOffset = console.MultiMeterCalOffset;
+            DisplayOffset = console.RX1DisplayCalOffset;
+        }
 
         public void AddHPSDRPages()
         {
@@ -25500,8 +25550,12 @@ namespace PowerSDR
                 false);
             if (done) MessageBox.Show("Level Calibration complete.");
             btnGeneralCalLevelStart.Enabled = true;
-            txtMeterOffset.Text = console.MultiMeterCalOffset.ToString();
-            txtDisplayOffset.Text = console.RX1DisplayCalOffset.ToString();
+            //txtMeterOffset.Text = console.MultiMeterCalOffset.ToString();
+            //console.txtDisplayOffset.Text = console.RX1DisplayCalOffset.ToString();
+            //MeterOffset = console.MultiMeterCalOffset;
+            //DisplayOffset = console.RX1DisplayCalOffset;
+            UpdateDisplayMeter();
+
         }
 
         private void CalibrateRXImage()
@@ -32473,7 +32527,8 @@ namespace PowerSDR
 
         private void udTXDisplayCalOffset_ValueChanged(object sender, EventArgs e)
         {
-            Display.TXDisplayCalOffset = (float)udTXDisplayCalOffset.Value;
+            //Display.TXDisplayCalOffset = (float)udTXDisplayCalOffset.Value;
+            console.TXDisplayCalOffset = (float)udTXDisplayCalOffset.Value;
         }
 
         private void udTwoToneLevel_ValueChanged(object sender, EventArgs e)
@@ -32518,6 +32573,13 @@ namespace PowerSDR
         private void tbHGridColorAlpha_Scroll(object sender, EventArgs e)
         {
             clrbtnHGridColor_Changed(this, EventArgs.Empty);
+        }
+
+        private void chkTXCal_CheckedChanged(object sender, EventArgs e)
+        {
+            udTXDisplayCalOffset.Enabled = chkTXCal.Checked;
+            Display.TXDisplayCalControl = chkTXCal.Checked;
+            udTXDisplayCalOffset_ValueChanged(this, EventArgs.Empty);
         }
 
  
