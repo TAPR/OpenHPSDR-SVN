@@ -20,7 +20,8 @@ public:
 
     QString attach(Client* c);
     QString detach(Client* c);
-    void put_samples(int index,float left,float right);
+    void put_iq_samples(int index,float left,float right);
+    void put_mic_samples(int index,float mic);
     void send_IQ_buffer();
 
     void setFrequency(long f);
@@ -39,8 +40,8 @@ private:
     int rx;
     int play_audio;
 
-    float input_buffer[2*BUFFER_SIZE];
-    float output_buffer[2*BUFFER_SIZE];
+    float input_buffer[3*BUFFER_SIZE];  // I,Q,Mic
+    float output_buffer[4*BUFFER_SIZE]; // Audio L/R and Transmit I/Q
 
     long frequency;
     int frequency_changed;

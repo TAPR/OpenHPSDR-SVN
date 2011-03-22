@@ -58,10 +58,15 @@ QString Receiver::detach(Client* c) {
     }
 }
 
-void Receiver::put_samples(int index,float left,float right) {
+void Receiver::put_iq_samples(int index,float left,float right) {
     //qDebug()<<"Receiver::put_samples index="<<index;
     input_buffer[index]=left;
     input_buffer[index+BUFFER_SIZE]=right;
+
+}
+
+void Receiver::put_mic_samples(int index, float mic) {
+    input_buffer[index+BUFFER_SIZE+BUFFER_SIZE]=mic;
 }
 
 void Receiver::send_IQ_buffer() {

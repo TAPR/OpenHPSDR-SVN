@@ -315,10 +315,34 @@
          }
          *outputStream << ">";
 
+         *outputStream << "<BR>Line In: <INPUT TYPE=\"CHECKBOX\" NAME=\"linein\"";
+         if(server->getLineIn()=="on") {
+             *outputStream << " CHECKED";
+         }
+         *outputStream << ">";
+
+         *outputStream << "<BR>Mic Boost (20dB): <INPUT TYPE=\"CHECKBOX\" NAME=\"micboost\"";
+         if(server->getMicBoost()=="on") {
+             *outputStream << " CHECKED";
+         }
+         *outputStream << ">";
+         *outputStream << "<BR>Mic Gain: <INPUT TYPE=\"TEXT\" NAME=\"micgain\" VALUE=\"";
+         *outputStream << server->getMicGain();
+         *outputStream << "\">";
+
          *outputStream << "<br><input type='SUBMIT' value='Configure'>"
                           "</form>\r\n"
-                            "</td>\r\n"
-                          "</tr>\r\n"
+                            "</td>\r\n";
+
+         *outputStream << "<td>\r\n";
+         QString control;
+         control.sprintf("%02X %02X %02X %02X %02X",server->getControlOut(0),server->getControlOut(1),server->getControlOut(2),server->getControlOut(3),server->getControlOut(4));
+         *outputStream << "control out:" << control;
+         *outputStream << "<br>mox:" << server->getMox();
+         *outputStream << "<br>Mic Gain:" << server->getMicGain();
+         *outputStream << "</td>\r\n";
+
+         *outputStream << "</tr>\r\n"
                           "</table>\r\n";
 
          if(server->getState()==Server::RUNNING) {
@@ -381,6 +405,8 @@
      server->clearError();
      server->setInterface(i);
      server->clearMetis();
+     server->bind();
+
      Discovery* discovery=new Discovery(server);
  }
 
@@ -388,6 +414,9 @@
      qDebug()<<"WebClient::start";
      QString m=QUrl::fromPercentEncoding(params["metis"].toLocal8Bit());
      m.replace("+"," ");
+
+     qDebug()<<m;
+
      server->clearError();
      server->setMetis(m);
      server->start();
@@ -408,5 +437,7 @@
      server->setRandom(params["random"]);
      server->setDither(params["dither"]);
      server->setClassE(params["classe"]);
-
+     server->setLineIn(params["linein"]);
+     server->setMicBoost(params["micboost"]);
+     server->setMicGain(atof(params["micgain"].toAscii().constData()));
  }

@@ -35,6 +35,7 @@ private:
     void stop();
     void configure();
 
+    QUdpSocket socket;
 };
 
 

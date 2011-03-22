@@ -18,9 +18,13 @@ class Server : public QThread {
 public:
     Server();
 
+    void bind();
+
     void setDevice(QString d);
     void setInterface(QString i);
     void setMetis(QString m);
+
+    QUdpSocket* getSocket();
 
     QString getDevice();
     QString getInterface();
@@ -57,6 +61,8 @@ public:
     void setDither(QString s);
     void setDuplex(QString s);
     void setClassE(QString s);
+    void setLineIn(QString s);
+    void setMicBoost(QString s);
     QString getSampleRate();
     QString getReceivers();
     QString get10MHzClock();
@@ -66,6 +72,8 @@ public:
     QString getDither();
     QString getDuplex();
     QString getClassE();
+    QString getLineIn();
+    QString getMicBoost();
 
 
     void sendBuffer();
@@ -88,6 +96,14 @@ public:
 
     void clearError();
     void setError(QString e);
+
+    void setMox(int state);
+    int getMox();
+
+    float getMicGain();
+    void setMicGain(float gain);
+
+    unsigned char getControlOut(int index);
 
 public slots:
     void readyRead();
@@ -119,6 +135,8 @@ private:
     QString dither;
     QString duplex;
     QString classE;
+    QString line_in;
+    QString mic_boost;
 
     unsigned char output_buffer[1032];
     unsigned char metis_buffer[512];
@@ -149,6 +167,10 @@ private:
     int AIN4;
     int AIN6;
 
+    int mox;
+
+
+
     float mic_gain;
 
     int samples;
@@ -164,7 +186,10 @@ private:
 
     ClientServer* clientServer;
 
-    int send_frequency;
+    int send_rx_frequency;
+    int send_tx_frequency;
+
+    int penny_change;
 
     Error error;
 
