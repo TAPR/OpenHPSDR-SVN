@@ -16,6 +16,7 @@ public slots:
 
 private:
     QTcpServer* webserver;
+    QTcpSocket socket;
     Server server;
 
 };

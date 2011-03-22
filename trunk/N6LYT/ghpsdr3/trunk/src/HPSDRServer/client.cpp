@@ -80,15 +80,17 @@ QString Client::parseCommand(QString buffer) {
         }
     } else if(token[0]=="mox") {
         if(token.count()>=2) {
-            mox=(token[1]=="on");
+            mox=(token[1]=="1");
+            server->setMox(mox);
+            qDebug()<<"mox"<<token[1]<<mox;
         } else {
-            return "Invalid preamp command";
+            return "Invalid mox command";
         }
     } else if(token[0]=="ocoutput") {
         if(token.count()>=2) {
             ocoutput=token[1].toInt();
         } else {
-            return "Invalid preamp command";
+            return "Invalid ocoutput command";
         }
     } else if(token[0]=="record") {
         if(token.count()>=2) {

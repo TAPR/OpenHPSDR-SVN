@@ -16,7 +16,6 @@ public slots:
 
 private:
     Server* server;
-    QUdpSocket socket;
 };
 
 #endif // DISCOVERY_H

@@ -1,11 +1,13 @@
 #include "server.h"
 #include "client.h"
 
+#include <QUdpSocket>
 #include <QDebug>
 #include <QEventLoop>
 #include <QTimer>
 
 Server::Server() {
+
     // defaults
     device="Ozy";
     iface="";
@@ -19,6 +21,10 @@ Server::Server() {
     sampleRate="96000";
     receivers="1";
 
+    send_rx_frequency=0;
+    send_tx_frequency=0;
+
+    penny_change=1;
 
     for(int i=0;i<4;i++) {
         receiver[i]=new Receiver();
@@ -30,7 +36,7 @@ Server::Server() {
     mic_gain=0.26F;
 
     control_out[0]=(unsigned char)0x00; // MOX_DISABLED
-    control_out[1]=(unsigned char)0xD9; // CONFIG_MERCURY | MERCURY_122_88MHZ_SOURCE | MERCURY_10MHZ_SOURCE | MIC_SOURCE_PENELOPE | SPEED_96KHZ
+    control_out[1]=(unsigned char)0xF9; // CONFIG_BOTH| MERCURY_122_88MHZ_SOURCE | MERCURY_10MHZ_SOURCE | MIC_SOURCE_PENELOPE | SPEED_96KHZ
     control_out[2]=(unsigned char)0x00; // MODE_OTHERS
     control_out[3]=(unsigned char)0x18; // ALEX_ATTENUATION_0DB | LT2208_GAIN_OFF | LT2208_DITHER_ON | LT2208_RANDOM_ON
     control_out[4]=(unsigned char)0x04; // DUPLEX
@@ -41,8 +47,29 @@ Server::Server() {
     random="on";
     dither="on";
     metis_buffer_index=8;
-    duplex="on";
+    duplex="";
     classE="";
+
+    line_in="";
+    mic_boost="";
+    ptt=0;
+    dot=0;
+    dash=0;
+    mox=0;
+}
+
+QUdpSocket* Server::getSocket() {
+    return &socket;
+}
+
+void Server::bind() {
+    socket.close();
+
+    if(!socket.bind(QHostAddress(getInterfaceIPAddress(getInterface())),0,QUdpSocket::ReuseAddressHint)) {
+        error.set("Error: Server::bind: bind failed");
+        qDebug()<<"Error: Server::bind bind failed "<<socket.errorString();
+        return;
+    }
 }
 
 void Server::setDevice(QString d) {
@@ -220,11 +247,12 @@ void Server::startMetis() {
             metisAddress=m.getHostAddress();
 
             qDebug()<<"startMetis on interface"<<getInterface()<<getInterfaceIPAddress(getInterface());
-            if(!socket.bind(QHostAddress(getInterfaceIPAddress(getInterface())),1024,QUdpSocket::ReuseAddressHint)) {
-                error.set("Error: Server::startMetis: bind failed");
-                qDebug()<<"Error: Server::startMetis bind failed "<<socket.errorString();
-                return;
-            }
+            qDebug()<<"startMetis:"<<metis;
+            //if(!socket->bind(QHostAddress(getInterfaceIPAddress(getInterface())),1024,QUdpSocket::ReuseAddressHint)) {
+            //    error.set("Error: Server::startMetis: bind failed");
+            //    qDebug()<<"Error: Server::startMetis bind failed "<<socket.errorString();
+            //    return;
+            //}
 
             connect(&socket,SIGNAL(readyRead()),this,SLOT(readyRead()));
 
@@ -238,7 +266,7 @@ void Server::startMetis() {
                 buffer[i]=(char)0x00;
             }
 
-            qDebug()<<"writeDatagram start command";
+            qDebug()<<"writeDatagram start command"<<metisAddress->toString();
             if(socket.writeDatagram((const char*)buffer,sizeof(buffer),*metisAddress,1024)<0) {
                 qDebug()<<"Error: Discovery: writeDatagram failed "<<socket.errorString();
                 return;
@@ -284,7 +312,7 @@ void Server::stopMetis() {
             }
 
             socket.flush();
-            socket.close();
+            //socket.close();
 
             break;
         }
@@ -428,34 +456,19 @@ void Server::process_iq_buffer(unsigned char* buffer) {
                 right_sample += (int)((unsigned char)buffer[b++]);
                 left_sample_float=(float)left_sample/8388607.0; // 24 bit sample
                 right_sample_float=(float)right_sample/8388607.0; // 24 bit sample
-                receiver[r]->put_samples(samples,left_sample_float,right_sample_float);
+                receiver[r]->put_iq_samples(samples,left_sample_float,right_sample_float);
             }
             mic_sample    = (int)((signed char) buffer[b++]) << 8;
             mic_sample   += (int)((unsigned char)buffer[b++]);
             mic_sample_float=(float)mic_sample/32767.0*mic_gain; // 16 bit sample
-
-            // add to buffer
-            //mic_left_buffer[samples]=mic_sample_float;
-            //mic_right_buffer[samples]=0.0f;
+            for(r=0;r<receivers.toInt();r++) {
+                receiver[r]->put_mic_samples(samples,mic_sample_float);
+            }
             samples++;
-
-            //if(timing) {
-            //    sample_count++;
-            //    if(sample_count==sample_rate) {
-            //        ftime(&end_time);
-            //        fprintf(stderr,"%d samples in %ld ms\n",sample_count,((end_time.time*1000)+end_time.millitm)-((start_time.time*1000)+start_time.millitm));
-            //        sample_count=0;
-            //        ftime(&start_time);
-            //    }
-            //}
-
 
             // when we have enough samples send them to the clients
             if(samples==1024) {
-                //if(ptt||mox) {
-                //    process_microphone_samples(mic_left_buffer);
-                //}
-                // send I/Q data to clients
+                // send I/Q and mic data to clients
                 for(r=0;r<receivers.toInt();r++) {
                     receiver[r]->send_IQ_buffer();
                 }
@@ -465,9 +478,6 @@ void Server::process_iq_buffer(unsigned char* buffer) {
 
     } else {
         qDebug()<<"Server::process_iq_buffer SYNC Error";
-        //fprintf(stderr,"SYNC error\n");
-        //dump_ozy_buffer("SYNC ERROR",rx_frame,buffer);
-        //exit(1);
     }
 
     rx_frame++;
@@ -629,7 +639,7 @@ void Server::sendBuffer() {
         buffer[6]=control_out[3];
         buffer[7]=control_out[4];
     } else {
-        if(send_frequency) {
+        if(send_rx_frequency) {
             long frequency=receiver[current_receiver]->getFrequency();
             buffer[3]=control_out[0]|((current_receiver+2)<<1);
             buffer[4]=frequency>>24;
@@ -648,10 +658,10 @@ void Server::sendBuffer() {
         current_receiver++;
         if(current_receiver>=receivers.toInt()) {
             current_receiver=0;
-            if(send_frequency) {
-                send_frequency=0;
+            if(send_rx_frequency) {
+                send_rx_frequency=0;
             } else {
-                send_frequency=1;
+                send_rx_frequency=1;
             }
         }
     }
@@ -749,8 +759,9 @@ QString Server::getReceiversHTML() {
 }
 
 void Server::playAudio(float *buffer) {
+    //  buffer contains 1024 Left Audio Samples, Right Audio Samples and Transmit I samples, Transmit Q samples.
     //qDebug()<<"Server::playAudio";
-    // send audio to HPSDR
+    // send audio to HPSDR always at 48000
     int increment=1;
     if(sampleRate=="48000") {
         increment=1;
@@ -762,49 +773,84 @@ void Server::playAudio(float *buffer) {
 
     float* left=buffer;
     float* right=&buffer[BUFFER_SIZE];
+    float* tx_left=&buffer[BUFFER_SIZE*2];
+    float* tx_right=&buffer[BUFFER_SIZE*3];
 
     short left_audio_sample;
     short right_audio_sample;
+    short left_tx_sample;
+    short right_tx_sample;
     for(int i=0;i<BUFFER_SIZE;i+=increment) {
         left_audio_sample=(short)(left[i]*32767.0);
         right_audio_sample=(short)(right[i]*32767.0);
+
+        if(mox) {
+            left_tx_sample=(short)(tx_left[i]*32767.0);
+            right_tx_sample=(short)(tx_right[i]*32767.0);
+
+            //qDebug()<<"tx["<<metis_buffer_index<<"]="<<left_tx_sample<<","<<right_tx_sample;
+        } else {
+            left_tx_sample=(short)0;
+            right_tx_sample=(short)0;
+        }
 
         metis_buffer[metis_buffer_index++]=left_audio_sample>>8;
         metis_buffer[metis_buffer_index++]=left_audio_sample;
         metis_buffer[metis_buffer_index++]=right_audio_sample>>8;
         metis_buffer[metis_buffer_index++]=right_audio_sample;
-        metis_buffer[metis_buffer_index++]=0; //left_tx_sample>>8;
-        metis_buffer[metis_buffer_index++]=0; //left_tx_sample;
-        metis_buffer[metis_buffer_index++]=0; //right_tx_sample>>8;
-        metis_buffer[metis_buffer_index++]=0; //right_tx_sample;
+
+        metis_buffer[metis_buffer_index++]=left_tx_sample>>8;
+        metis_buffer[metis_buffer_index++]=left_tx_sample;
+        metis_buffer[metis_buffer_index++]=right_tx_sample>>8;
+        metis_buffer[metis_buffer_index++]=right_tx_sample;
 
         if(metis_buffer_index==512) {
             metis_buffer[0]=(unsigned char)0x7F;
             metis_buffer[1]=(unsigned char)0x7F;
             metis_buffer[2]=(unsigned char)0x7F;
 
-            if(send_frequency) {
+            if(send_tx_frequency) {
+                send_tx_frequency=0;
                 long frequency=receiver[current_receiver]->getFrequency();
-                metis_buffer[3]=control_out[0]|((current_receiver+2)<<1);
+                metis_buffer[3]=control_out[0]|0x02;
                 metis_buffer[4]=(frequency>>24)&0xFF;
                 metis_buffer[5]=(frequency>>16)&0xFF;
                 metis_buffer[6]=(frequency>>8)&0xFF;
                 metis_buffer[7]=frequency&0xFF;
+            } else if(penny_change) {
+                metis_buffer[3]=control_out[0]|0x12;
+                metis_buffer[4]=0; // Hermes/PennyLane drive level
+                metis_buffer[5]=0;
+                if("on"==mic_boost) metis_buffer[5]|=0x01;
+                if("on"==line_in) metis_buffer[5]|=0x02;
+                metis_buffer[6]=0;
+                metis_buffer[7]=0;
+                penny_change=0;
             } else {
-                metis_buffer[3]=control_out[0];
-                metis_buffer[4]=control_out[1];
-                metis_buffer[5]=control_out[2];
-                metis_buffer[6]=control_out[3];
-                metis_buffer[7]=control_out[4];
-
-            }
-            current_receiver++;
-            if(current_receiver>=receivers.toInt()) {
-                current_receiver=0;
-                if(send_frequency) {
-                    send_frequency=0;
+                if(send_rx_frequency) {
+                    long frequency=receiver[current_receiver]->getFrequency();
+                    metis_buffer[3]=control_out[0]|((current_receiver+2)<<1);
+                    metis_buffer[4]=(frequency>>24)&0xFF;
+                    metis_buffer[5]=(frequency>>16)&0xFF;
+                    metis_buffer[6]=(frequency>>8)&0xFF;
+                    metis_buffer[7]=frequency&0xFF;
                 } else {
-                    send_frequency=1;
+                    metis_buffer[3]=control_out[0];
+                    metis_buffer[4]=control_out[1];
+                    metis_buffer[5]=control_out[2];
+                    metis_buffer[6]=control_out[3];
+                    metis_buffer[7]=control_out[4];
+
+                }
+                current_receiver++;
+                if(current_receiver>=receivers.toInt()) {
+                    current_receiver=0;
+                    if(send_rx_frequency) {
+                        send_rx_frequency=0;
+                        send_tx_frequency=1;
+                    } else {
+                        send_rx_frequency=1;
+                    }
                 }
             }
 
@@ -837,4 +883,45 @@ QString Server::getErrorHTML() {
         s.append("</table>\r\n");
     }
     return s;
+}
+
+void Server::setMox(int state) {
+    qDebug()<<"Server::setMox"<<state;
+    mox=state;
+    control_out[0]=control_out[0]&0xFE;
+    control_out[0]=control_out[0]|(mox&0x01);
+}
+
+int Server::getMox() {
+    return mox;
+}
+
+unsigned char Server::getControlOut(int index) {
+    return control_out[index];
+}
+
+float Server::getMicGain() {
+    return mic_gain;
+}
+
+void Server::setMicGain(float gain) {
+    mic_gain=gain;
+}
+
+QString Server::getMicBoost() {
+    return mic_boost;
+}
+
+void Server::setMicBoost(QString s) {
+        mic_boost=s;
+        penny_change=1;
+}
+
+QString Server::getLineIn() {
+    return line_in;
+}
+
+void Server::setLineIn(QString s) {
+    line_in=s;
+    penny_change=1;
 }

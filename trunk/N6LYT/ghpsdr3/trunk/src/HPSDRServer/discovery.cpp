@@ -11,13 +11,7 @@ Discovery::Discovery(Server* s) {
     server=s;
     server->clearMetis();
 
-    if(!socket.bind(QHostAddress(server->getInterfaceIPAddress(server->getInterface())),1024,QUdpSocket::ReuseAddressHint)) {
-        server->setError("Error: Discovery: bind failed");
-        qDebug()<<"Error: Discovery: bind failed "<<socket.errorString();
-        return;
-    }
-
-    connect(&socket,SIGNAL(readyRead()),this,SLOT(readyRead()));
+    connect(server->getSocket(),SIGNAL(readyRead()),this,SLOT(readyRead()));
 
     unsigned char buffer[63];
 
@@ -28,8 +22,8 @@ Discovery::Discovery(Server* s) {
         buffer[i]=(char)0x00;
     }
 
-    if(socket.writeDatagram((const char*)buffer,sizeof(buffer),QHostAddress::Broadcast,1024)<0) {
-        qDebug()<<"Error: Discovery: writeDatagram failed "<<socket.errorString();
+    if(server->getSocket()->writeDatagram((const char*)buffer,sizeof(buffer),QHostAddress::Broadcast,1024)<0) {
+        qDebug()<<"Error: Discovery: writeDatagram failed "<<server->getSocket()->errorString();
         return;
     }
 
@@ -40,13 +34,11 @@ Discovery::Discovery(Server* s) {
     timer->start(1000);
 
     qDebug()<<"start 1 second timeout loop";
-    // Execute the event loop here, now we will wait here until readyRead() signal is emitted
+    // Execute the event loop here and wait for the timeout to trigger
     // which in turn will trigger event loop quit.
     loop.exec();
 
-    qDebug()<<"Closing discovery socket";
-    socket.close();
-
+    disconnect(server->getSocket(),SIGNAL(readyRead()),this,SLOT(readyRead()));
 }
 
 void Discovery::readyRead() {
@@ -55,8 +47,8 @@ void Discovery::readyRead() {
     quint16 metisPort;
     unsigned char buffer[1024];
 
-    if(socket.readDatagram((char*)&buffer,(qint64)sizeof(buffer),&metisAddress,&metisPort)<0) {
-        qDebug()<<"Error: Discovery: readDatagram failed "<<socket.errorString();
+    if(server->getSocket()->readDatagram((char*)&buffer,(qint64)sizeof(buffer),&metisAddress,&metisPort)<0) {
+        qDebug()<<"Error: Discovery: readDatagram failed "<<server->getSocket()->errorString();
         return;
     }
 

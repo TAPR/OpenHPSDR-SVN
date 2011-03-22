@@ -23,7 +23,7 @@ private:
 
     QUdpSocket socket;
 
-    float audio_buffer[BUFFER_SIZE*2];
+    float audio_buffer[BUFFER_SIZE*4];  // Audio left/right, Transmit I/Q
 
 };
 
