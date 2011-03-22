@@ -1601,6 +1601,10 @@ namespace PowerSDR
             udTXFilterHigh_ValueChanged(this, e);
             udTXFilterLow_ValueChanged(this, e);
             tbRX1FilterAlpha_Scroll(this, e);
+            tbBackgroundAlpha_Scroll(this, e);
+            tbGridCourseAlpha_Scroll(this, e);
+            tbGridFineAlpha_Scroll(this, e);
+            tbHGridColorAlpha_Scroll(this, e);
             tbMultiRXFilterAlpha_Scroll(this, e);
 
             for (int i = 0; i < 2; i++)
@@ -22691,6 +22695,8 @@ namespace PowerSDR
         {
             clrbtnBackground.Color = Display.DisplayBackgroundColor;
             clrbtnGrid.Color = Display.GridColor;
+            clrbtnGridFine.Color = Display.GridPenDark;
+            clrbtnHGridColor.Color = Display.HGridColor;
             clrbtnZeroLine.Color = Display.GridZeroColor;
             clrbtnText.Color = Display.GridTextColor;
             clrbtnDataLine.Color = Display.DataLineColor;
@@ -23437,6 +23443,8 @@ namespace PowerSDR
             clrbtnPeakText_Changed(this, e);
             clrbtnBackground_Changed(this, e);
             clrbtnGrid_Changed(this, e);
+            clrbtnGridFine_Changed(this, e);
+            clrbtnHGridColor_Changed(this, e);
             clrbtnZeroLine_Changed(this, e);
             clrbtnFilter_Changed(this, e);
             clrbtnText_Changed(this, e);
