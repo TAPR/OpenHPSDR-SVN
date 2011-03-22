@@ -1335,11 +1335,14 @@ namespace PowerSDR
 			
 			Splash.SetStatus("Finished");						// Set progress point
 			// Activates double buffering
-			//SetStyle(ControlStyles.DoubleBuffer, true);
+			//this.SetStyle(ControlStyles.DoubleBuffer, true);
 
             this.SetStyle(ControlStyles.UserPaint |
                ControlStyles.AllPaintingInWmPaint |
                ControlStyles.OptimizedDoubleBuffer, true);
+
+            //this.SetStyle(ControlStyles.ResizeRedraw, true);
+
             this.UpdateStyles();
 
 			Splash.CloseForm();									// End splash screen

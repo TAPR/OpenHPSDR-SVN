@@ -675,14 +675,15 @@ namespace PowerSDR
 				DrawBackground();
 			}
 		}
-
-        private static Color hgrid_color = Color.FromArgb(65, 255, 255, 255);
+        private static Pen hgrid_pen = new Pen(Color.White);
+        private static Color hgrid_color = Color.White;//FromArgb(65, 255, 255, 255);
         public static Color HGridColor
         {
             get { return hgrid_color; }
             set
             {
                 hgrid_color = value;
+                hgrid_pen = new Pen(hgrid_color);
                 DrawBackground();
             }
         }
@@ -1169,7 +1170,7 @@ namespace PowerSDR
 			System.Drawing.Font font = new System.Drawing.Font("Arial", 9);
 			SolidBrush grid_text_brush = new SolidBrush(grid_text_color);
 			Pen grid_pen = new Pen(grid_color);
-            Pen hgrid_pen = new Pen(hgrid_color);
+            //Pen hgrid_pen = new Pen(hgrid_color);
 			// draw background
 			if(bottom) g.FillRectangle(new SolidBrush(display_background_color), 0, H, W, H);
 			else g.FillRectangle(new SolidBrush(display_background_color), 0, 0, W, H);
@@ -1537,8 +1538,8 @@ namespace PowerSDR
 
 			System.Drawing.Font font = new System.Drawing.Font("Arial", 9);
 			SolidBrush grid_text_brush = new SolidBrush(grid_text_color);
-            Pen hgrid_pen = new Pen(hgrid_color);
-			Pen grid_pen = new Pen(grid_color);
+            //Pen hgrid_pen = new Pen(hgrid_color);
+			//Pen grid_pen = new Pen(grid_color);
             //Pen grid_pen = new Pen(Color.FromArgb(42, Color.White));
             Pen grid_pen_inb = new Pen(grid_pen_dark);
             //Pen grid_pen_dark = new Pen(Color.FromArgb(16, Color.White));
@@ -2049,8 +2050,8 @@ namespace PowerSDR
                                goto default;
                          default:
                              {
-                                if (bottom) g.DrawLine(grid_pen, vgrid, H + top, vgrid, H + H);
-                                else g.DrawLine(grid_pen, vgrid, top, vgrid, H);			//wa6ahl
+                                if (bottom) g.DrawLine(new Pen(grid_color), vgrid, H + top, vgrid, H + H);
+                                else g.DrawLine(new Pen(grid_color), vgrid, top, vgrid, H);			//wa6ahl
 
                                 int fgrid_2 = ((i + 1) * freq_step_size) + (int)((low / freq_step_size) * freq_step_size);
                                 int x_2 = (int)(((float)(fgrid_2 - vfo_delta - low) / width * W));
@@ -2101,8 +2102,8 @@ namespace PowerSDR
                 else
                 {
                     vgrid = Convert.ToInt32((double)-(fgrid - low) / (low - high) * W);	//wa6ahl
-                    if (bottom) g.DrawLine(grid_pen, vgrid, H + top, vgrid, H + H);
-                    else g.DrawLine(grid_pen, vgrid, top, vgrid, H);			//wa6ahl
+                    if (bottom) g.DrawLine(new Pen(grid_color), vgrid, H + top, vgrid, H + H);
+                    else g.DrawLine(new Pen(grid_color), vgrid, top, vgrid, H);			//wa6ahl
 
                     double new_fgrid = (vfoa_hz + fgrid) / 1000000;
 
