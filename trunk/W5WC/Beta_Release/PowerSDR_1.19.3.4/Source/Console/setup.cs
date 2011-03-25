@@ -1425,7 +1425,6 @@ namespace PowerSDR
         private LabelTS lblPulsePeriod;
         private NumericUpDownTS udTestFreq;
         private GroupBoxTS grpBoxTXDisplayCal;
-        private CheckBoxTS chkTXCal;
         private CheckBoxTS chkDSPALCEnabled;
         private TextBox txtDisplayOffset;
         private TextBox txtMeterOffset;
@@ -1444,6 +1443,49 @@ namespace PowerSDR
         private TrackBarTS tbHGridColorAlpha;
         private ColorButton clrbtnHGridColor;
         private LabelTS lblHGrid;
+        private CheckBoxTS chkGridControl;
+        private TabPage tcAppearanceTXDisplay;
+        private GroupBoxTS groupBoxTS3;
+        private CheckBoxTS chkTXGridControl;
+        private TrackBarTS tbTXFilterAlpha;
+        private ColorButton clrbtnTXBandEdge;
+        private LabelTS lblTXBandEdge;
+        private LabelTS lblDispTXFilterColor;
+        private ColorButton clrbtnGridTXFilter;
+        private GroupBoxTS groupBoxTS2;
+        private TrackBarTS tbTXHGridColorAlpha;
+        private ColorButton clrbtnTXHGridColor;
+        private LabelTS lblTXHGridColor;
+        private TrackBarTS tbTXVGridFineAlpha;
+        private TrackBarTS tbTXVGridCourseAlpha;
+        private TrackBarTS tbTXBackgroundAlpha;
+        private ColorButton clrbtnTXVGridFine;
+        private LabelTS lblTXVGridFine;
+        private LabelTS lblTXVGridColor;
+        private ColorButton clrbtnTXBackground;
+        private NumericUpDownTS udTXLineWidth;
+        private ColorButton clrbtnTXVGrid;
+        private LabelTS lblTXLineWidth;
+        private LabelTS lblTXBackgroundColor;
+        private ColorButton clrbtnTXDataLine;
+        private ColorButton clrbtnTXZeroLine;
+        private LabelTS lblTXDataLineColor;
+        private LabelTS lblTXZeroLineColor;
+        private ColorButton clrbtnTXText;
+        private LabelTS lblTXTextColor;
+        private GroupBoxTS grpTXSpectrumGrid;
+        private CheckBoxTS chkTXPanFill;
+        private ComboBoxTS comboTXLabelAlign;
+        private LabelTS lblTXAlign;
+        private NumericUpDownTS udTXGridStep;
+        private NumericUpDownTS udTXGridMin;
+        private NumericUpDownTS udTXGridMax;
+        private LabelTS lblTXGridStep;
+        private LabelTS lblTXGridMin;
+        private LabelTS lblTXGridMax;
+        private TrackBarTS tbTXTextAlpha;
+        private TrackBarTS tbTXZeroLineAlpha;
+        private LabelTS labelTS55;
         private System.ComponentModel.IContainer components;
 
         #endregion
@@ -1494,6 +1536,7 @@ namespace PowerSDR
             Audio.IN_TX_L = 4;
             Audio.IN_TX_R = 5;
             comboDisplayLabelAlign.Text = "Auto";
+            comboTXLabelAlign.Text = "Auto"; 
             comboDisplayDriver.Text = "GDI+";
             comboDSPPhoneRXBuf.Text = "4096";
             comboDSPPhoneTXBuf.Text = "2048";
@@ -1605,11 +1648,18 @@ namespace PowerSDR
             udTXFilterHigh_ValueChanged(this, e);
             udTXFilterLow_ValueChanged(this, e);
             tbRX1FilterAlpha_Scroll(this, e);
+            tbTXFilterAlpha_Scroll(this, e);
             tbBackgroundAlpha_Scroll(this, e);
+            tbTXBackgroundAlpha_Scroll(this, e);
             tbGridCourseAlpha_Scroll(this, e);
+            tbTXVGridCourseAlpha_Scroll(this, e);
             tbGridFineAlpha_Scroll(this, e);
+            tbTXVGridFineAlpha_Scroll(this, e);
             tbHGridColorAlpha_Scroll(this, e);
+            tbTXHGridColorAlpha_Scroll(this, e); 
             tbMultiRXFilterAlpha_Scroll(this, e);
+            tbTXZeroLineAlpha_Scroll(this, e);
+            tbTXTextAlpha_Scroll(this, e);
 
             for (int i = 0; i < 2; i++)
                 for (int j = 0; j < 2; j++)
@@ -1763,7 +1813,7 @@ namespace PowerSDR
             this.chkGeneralUpdateRelease = new System.Windows.Forms.CheckBoxTS();
             this.tpGeneralCalibration = new System.Windows.Forms.TabPage();
             this.grpBoxTXDisplayCal = new System.Windows.Forms.GroupBoxTS();
-            this.chkTXCal = new System.Windows.Forms.CheckBoxTS();
+            this.labelTS55 = new System.Windows.Forms.LabelTS();
             this.udTXDisplayCalOffset = new System.Windows.Forms.NumericUpDownTS();
             this.grpHPSDRFreqCalDbg = new System.Windows.Forms.GroupBoxTS();
             this.btnHPSDRFreqCalReset = new System.Windows.Forms.Button();
@@ -2650,6 +2700,7 @@ namespace PowerSDR
             this.clrbtnText = new PowerSDR.ColorButton();
             this.lblDisplayTextColor = new System.Windows.Forms.LabelTS();
             this.grpAppPanadapter = new System.Windows.Forms.GroupBoxTS();
+            this.chkGridControl = new System.Windows.Forms.CheckBoxTS();
             this.tbMultiRXFilterAlpha = new System.Windows.Forms.TrackBarTS();
             this.clrbtnSubRXZero = new PowerSDR.ColorButton();
             this.chkShowFreqOffset = new System.Windows.Forms.CheckBoxTS();
@@ -2695,6 +2746,47 @@ namespace PowerSDR
             this.clrbtnMeterLeft = new PowerSDR.ColorButton();
             this.lblMeterType = new System.Windows.Forms.LabelTS();
             this.comboMeterType = new System.Windows.Forms.ComboBoxTS();
+            this.tcAppearanceTXDisplay = new System.Windows.Forms.TabPage();
+            this.grpTXSpectrumGrid = new System.Windows.Forms.GroupBoxTS();
+            this.chkTXGridControl = new System.Windows.Forms.CheckBoxTS();
+            this.chkTXPanFill = new System.Windows.Forms.CheckBoxTS();
+            this.comboTXLabelAlign = new System.Windows.Forms.ComboBoxTS();
+            this.lblTXAlign = new System.Windows.Forms.LabelTS();
+            this.udTXGridStep = new System.Windows.Forms.NumericUpDownTS();
+            this.udTXGridMin = new System.Windows.Forms.NumericUpDownTS();
+            this.udTXGridMax = new System.Windows.Forms.NumericUpDownTS();
+            this.lblTXGridStep = new System.Windows.Forms.LabelTS();
+            this.lblTXGridMin = new System.Windows.Forms.LabelTS();
+            this.lblTXGridMax = new System.Windows.Forms.LabelTS();
+            this.groupBoxTS3 = new System.Windows.Forms.GroupBoxTS();
+            this.tbTXFilterAlpha = new System.Windows.Forms.TrackBarTS();
+            this.lblDispTXFilterColor = new System.Windows.Forms.LabelTS();
+            this.clrbtnGridTXFilter = new PowerSDR.ColorButton();
+            this.lblTXDataLineColor = new System.Windows.Forms.LabelTS();
+            this.clrbtnTXDataLine = new PowerSDR.ColorButton();
+            this.lblTXLineWidth = new System.Windows.Forms.LabelTS();
+            this.udTXLineWidth = new System.Windows.Forms.NumericUpDownTS();
+            this.groupBoxTS2 = new System.Windows.Forms.GroupBoxTS();
+            this.tbTXTextAlpha = new System.Windows.Forms.TrackBarTS();
+            this.lblTXBandEdge = new System.Windows.Forms.LabelTS();
+            this.clrbtnTXBandEdge = new PowerSDR.ColorButton();
+            this.tbTXZeroLineAlpha = new System.Windows.Forms.TrackBarTS();
+            this.tbTXHGridColorAlpha = new System.Windows.Forms.TrackBarTS();
+            this.clrbtnTXHGridColor = new PowerSDR.ColorButton();
+            this.lblTXHGridColor = new System.Windows.Forms.LabelTS();
+            this.tbTXVGridFineAlpha = new System.Windows.Forms.TrackBarTS();
+            this.tbTXVGridCourseAlpha = new System.Windows.Forms.TrackBarTS();
+            this.tbTXBackgroundAlpha = new System.Windows.Forms.TrackBarTS();
+            this.clrbtnTXVGridFine = new PowerSDR.ColorButton();
+            this.lblTXVGridFine = new System.Windows.Forms.LabelTS();
+            this.lblTXVGridColor = new System.Windows.Forms.LabelTS();
+            this.clrbtnTXBackground = new PowerSDR.ColorButton();
+            this.clrbtnTXVGrid = new PowerSDR.ColorButton();
+            this.lblTXBackgroundColor = new System.Windows.Forms.LabelTS();
+            this.clrbtnTXZeroLine = new PowerSDR.ColorButton();
+            this.lblTXZeroLineColor = new System.Windows.Forms.LabelTS();
+            this.clrbtnTXText = new PowerSDR.ColorButton();
+            this.lblTXTextColor = new System.Windows.Forms.LabelTS();
             this.tpKeyboard = new System.Windows.Forms.TabPage();
             this.grpKBXIT = new System.Windows.Forms.GroupBoxTS();
             this.lblKBXITUp = new System.Windows.Forms.LabelTS();
@@ -3337,6 +3429,21 @@ namespace PowerSDR
             this.tpAppearanceMeter.SuspendLayout();
             this.grpMeterEdge.SuspendLayout();
             this.grpAppearanceMeter.SuspendLayout();
+            this.tcAppearanceTXDisplay.SuspendLayout();
+            this.grpTXSpectrumGrid.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.udTXGridStep)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.udTXGridMin)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.udTXGridMax)).BeginInit();
+            this.groupBoxTS3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.tbTXFilterAlpha)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.udTXLineWidth)).BeginInit();
+            this.groupBoxTS2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.tbTXTextAlpha)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.tbTXZeroLineAlpha)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.tbTXHGridColorAlpha)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.tbTXVGridFineAlpha)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.tbTXVGridCourseAlpha)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.tbTXBackgroundAlpha)).BeginInit();
             this.tpKeyboard.SuspendLayout();
             this.grpKBXIT.SuspendLayout();
             this.grpKBRIT.SuspendLayout();
@@ -5035,7 +5142,7 @@ namespace PowerSDR
             // 
             // grpBoxTXDisplayCal
             // 
-            this.grpBoxTXDisplayCal.Controls.Add(this.chkTXCal);
+            this.grpBoxTXDisplayCal.Controls.Add(this.labelTS55);
             this.grpBoxTXDisplayCal.Controls.Add(this.udTXDisplayCalOffset);
             this.grpBoxTXDisplayCal.Location = new System.Drawing.Point(360, 126);
             this.grpBoxTXDisplayCal.Name = "grpBoxTXDisplayCal";
@@ -5044,26 +5151,25 @@ namespace PowerSDR
             this.grpBoxTXDisplayCal.TabStop = false;
             this.grpBoxTXDisplayCal.Text = "TX Display Cal";
             // 
-            // chkTXCal
+            // labelTS55
             // 
-            this.chkTXCal.Image = null;
-            this.chkTXCal.Location = new System.Drawing.Point(8, 20);
-            this.chkTXCal.Name = "chkTXCal";
-            this.chkTXCal.Size = new System.Drawing.Size(80, 20);
-            this.chkTXCal.TabIndex = 13;
-            this.chkTXCal.Text = "TX Offset:";
-            this.chkTXCal.CheckedChanged += new System.EventHandler(this.chkTXCal_CheckedChanged);
+            this.labelTS55.Image = null;
+            this.labelTS55.Location = new System.Drawing.Point(26, 32);
+            this.labelTS55.Name = "labelTS55";
+            this.labelTS55.Size = new System.Drawing.Size(60, 30);
+            this.labelTS55.TabIndex = 13;
+            this.labelTS55.Text = "TX Display Offset:";
+            this.labelTS55.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
             // udTXDisplayCalOffset
             // 
             this.udTXDisplayCalOffset.DecimalPlaces = 1;
-            this.udTXDisplayCalOffset.Enabled = false;
             this.udTXDisplayCalOffset.Increment = new decimal(new int[] {
             1,
             0,
             0,
             65536});
-            this.udTXDisplayCalOffset.Location = new System.Drawing.Point(95, 20);
+            this.udTXDisplayCalOffset.Location = new System.Drawing.Point(92, 42);
             this.udTXDisplayCalOffset.Maximum = new decimal(new int[] {
             0,
             0,
@@ -5084,6 +5190,7 @@ namespace PowerSDR
             0,
             -2147418112});
             this.udTXDisplayCalOffset.ValueChanged += new System.EventHandler(this.udTXDisplayCalOffset_ValueChanged);
+            this.udTXDisplayCalOffset.LostFocus += new System.EventHandler(this.udTXDisplayCalOffset_LostFocus);
             // 
             // grpHPSDRFreqCalDbg
             // 
@@ -17022,6 +17129,7 @@ namespace PowerSDR
             this.tcAppearance.Controls.Add(this.tpAppearanceGeneral);
             this.tcAppearance.Controls.Add(this.tpAppearanceDisplay);
             this.tcAppearance.Controls.Add(this.tpAppearanceMeter);
+            this.tcAppearance.Controls.Add(this.tcAppearanceTXDisplay);
             this.tcAppearance.Location = new System.Drawing.Point(0, 0);
             this.tcAppearance.Name = "tcAppearance";
             this.tcAppearance.SelectedIndex = 0;
@@ -17392,7 +17500,7 @@ namespace PowerSDR
             this.grpAppGrid.Size = new System.Drawing.Size(200, 256);
             this.grpAppGrid.TabIndex = 78;
             this.grpAppGrid.TabStop = false;
-            this.grpAppGrid.Text = "Grid Control                           Alpha";
+            this.grpAppGrid.Text = "Grid                                     Alpha";
             // 
             // tbHGridColorAlpha
             // 
@@ -17638,6 +17746,7 @@ namespace PowerSDR
             // 
             // grpAppPanadapter
             // 
+            this.grpAppPanadapter.Controls.Add(this.chkGridControl);
             this.grpAppPanadapter.Controls.Add(this.tbMultiRXFilterAlpha);
             this.grpAppPanadapter.Controls.Add(this.clrbtnSubRXZero);
             this.grpAppPanadapter.Controls.Add(this.chkShowFreqOffset);
@@ -17657,6 +17766,19 @@ namespace PowerSDR
             this.grpAppPanadapter.TabIndex = 77;
             this.grpAppPanadapter.TabStop = false;
             this.grpAppPanadapter.Text = "Panadapter                           Alpha";
+            // 
+            // chkGridControl
+            // 
+            this.chkGridControl.Checked = true;
+            this.chkGridControl.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkGridControl.Image = null;
+            this.chkGridControl.Location = new System.Drawing.Point(8, 200);
+            this.chkGridControl.Name = "chkGridControl";
+            this.chkGridControl.Size = new System.Drawing.Size(120, 16);
+            this.chkGridControl.TabIndex = 83;
+            this.chkGridControl.Text = "Display Grid";
+            this.toolTip1.SetToolTip(this.chkGridControl, "Display the Grid on the Panadapter");
+            this.chkGridControl.CheckedChanged += new System.EventHandler(this.chkGridControl_CheckedChanged);
             // 
             // tbMultiRXFilterAlpha
             // 
@@ -18163,6 +18285,571 @@ namespace PowerSDR
             this.comboMeterType.TabIndex = 78;
             this.toolTip1.SetToolTip(this.comboMeterType, "Changes the appearance of the Multimeter on the front panel.");
             this.comboMeterType.SelectedIndexChanged += new System.EventHandler(this.comboMeterType_SelectedIndexChanged);
+            // 
+            // tcAppearanceTXDisplay
+            // 
+            this.tcAppearanceTXDisplay.Controls.Add(this.grpTXSpectrumGrid);
+            this.tcAppearanceTXDisplay.Controls.Add(this.groupBoxTS3);
+            this.tcAppearanceTXDisplay.Controls.Add(this.groupBoxTS2);
+            this.tcAppearanceTXDisplay.Location = new System.Drawing.Point(4, 22);
+            this.tcAppearanceTXDisplay.Name = "tcAppearanceTXDisplay";
+            this.tcAppearanceTXDisplay.Padding = new System.Windows.Forms.Padding(3);
+            this.tcAppearanceTXDisplay.Size = new System.Drawing.Size(592, 318);
+            this.tcAppearanceTXDisplay.TabIndex = 3;
+            this.tcAppearanceTXDisplay.Text = "TX Display";
+            this.tcAppearanceTXDisplay.UseVisualStyleBackColor = true;
+            // 
+            // grpTXSpectrumGrid
+            // 
+            this.grpTXSpectrumGrid.Controls.Add(this.chkTXGridControl);
+            this.grpTXSpectrumGrid.Controls.Add(this.chkTXPanFill);
+            this.grpTXSpectrumGrid.Controls.Add(this.comboTXLabelAlign);
+            this.grpTXSpectrumGrid.Controls.Add(this.lblTXAlign);
+            this.grpTXSpectrumGrid.Controls.Add(this.udTXGridStep);
+            this.grpTXSpectrumGrid.Controls.Add(this.udTXGridMin);
+            this.grpTXSpectrumGrid.Controls.Add(this.udTXGridMax);
+            this.grpTXSpectrumGrid.Controls.Add(this.lblTXGridStep);
+            this.grpTXSpectrumGrid.Controls.Add(this.lblTXGridMin);
+            this.grpTXSpectrumGrid.Controls.Add(this.lblTXGridMax);
+            this.grpTXSpectrumGrid.Location = new System.Drawing.Point(10, 5);
+            this.grpTXSpectrumGrid.Name = "grpTXSpectrumGrid";
+            this.grpTXSpectrumGrid.Size = new System.Drawing.Size(112, 216);
+            this.grpTXSpectrumGrid.TabIndex = 81;
+            this.grpTXSpectrumGrid.TabStop = false;
+            this.grpTXSpectrumGrid.Text = "TX Grid Scale";
+            // 
+            // chkTXGridControl
+            // 
+            this.chkTXGridControl.Checked = true;
+            this.chkTXGridControl.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkTXGridControl.Image = null;
+            this.chkTXGridControl.Location = new System.Drawing.Point(8, 161);
+            this.chkTXGridControl.Name = "chkTXGridControl";
+            this.chkTXGridControl.Size = new System.Drawing.Size(98, 16);
+            this.chkTXGridControl.TabIndex = 83;
+            this.chkTXGridControl.Text = "Display Grid";
+            this.toolTip1.SetToolTip(this.chkTXGridControl, "Display the Grid on the Panadapter");
+            this.chkTXGridControl.CheckedChanged += new System.EventHandler(this.chkTXGridControl_CheckedChanged);
+            // 
+            // chkTXPanFill
+            // 
+            this.chkTXPanFill.Checked = true;
+            this.chkTXPanFill.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkTXPanFill.Image = null;
+            this.chkTXPanFill.Location = new System.Drawing.Point(8, 139);
+            this.chkTXPanFill.Name = "chkTXPanFill";
+            this.chkTXPanFill.Size = new System.Drawing.Size(100, 16);
+            this.chkTXPanFill.TabIndex = 41;
+            this.chkTXPanFill.Text = "Fill Panadapter";
+            this.toolTip1.SetToolTip(this.chkTXPanFill, "Check to fill the panadapter display line below the data.");
+            this.chkTXPanFill.CheckedChanged += new System.EventHandler(this.chkTXPanFill_CheckedChanged);
+            // 
+            // comboTXLabelAlign
+            // 
+            this.comboTXLabelAlign.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboTXLabelAlign.DropDownWidth = 48;
+            this.comboTXLabelAlign.Items.AddRange(new object[] {
+            "Left",
+            "Cntr",
+            "Right",
+            "Auto",
+            "Off"});
+            this.comboTXLabelAlign.Location = new System.Drawing.Point(48, 96);
+            this.comboTXLabelAlign.Name = "comboTXLabelAlign";
+            this.comboTXLabelAlign.Size = new System.Drawing.Size(56, 21);
+            this.comboTXLabelAlign.TabIndex = 30;
+            this.toolTip1.SetToolTip(this.comboTXLabelAlign, "Sets the alignement of the grid callouts on the display.");
+            this.comboTXLabelAlign.SelectedIndexChanged += new System.EventHandler(this.comboTXLabelAlign_SelectedIndexChanged);
+            // 
+            // lblTXAlign
+            // 
+            this.lblTXAlign.Image = null;
+            this.lblTXAlign.Location = new System.Drawing.Point(8, 96);
+            this.lblTXAlign.Name = "lblTXAlign";
+            this.lblTXAlign.Size = new System.Drawing.Size(40, 16);
+            this.lblTXAlign.TabIndex = 29;
+            this.lblTXAlign.Text = "Align:";
+            // 
+            // udTXGridStep
+            // 
+            this.udTXGridStep.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.udTXGridStep.Location = new System.Drawing.Point(48, 72);
+            this.udTXGridStep.Maximum = new decimal(new int[] {
+            40,
+            0,
+            0,
+            0});
+            this.udTXGridStep.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.udTXGridStep.Name = "udTXGridStep";
+            this.udTXGridStep.Size = new System.Drawing.Size(56, 20);
+            this.udTXGridStep.TabIndex = 25;
+            this.toolTip1.SetToolTip(this.udTXGridStep, "Horizontal Grid Step Size in dB.");
+            this.udTXGridStep.Value = new decimal(new int[] {
+            10,
+            0,
+            0,
+            0});
+            this.udTXGridStep.ValueChanged += new System.EventHandler(this.udTXGridStep_ValueChanged);
+            // 
+            // udTXGridMin
+            // 
+            this.udTXGridMin.Increment = new decimal(new int[] {
+            5,
+            0,
+            0,
+            0});
+            this.udTXGridMin.Location = new System.Drawing.Point(48, 48);
+            this.udTXGridMin.Maximum = new decimal(new int[] {
+            200,
+            0,
+            0,
+            0});
+            this.udTXGridMin.Minimum = new decimal(new int[] {
+            200,
+            0,
+            0,
+            -2147483648});
+            this.udTXGridMin.Name = "udTXGridMin";
+            this.udTXGridMin.Size = new System.Drawing.Size(56, 20);
+            this.udTXGridMin.TabIndex = 24;
+            this.toolTip1.SetToolTip(this.udTXGridMin, "Signal Level at bottom of display in dB.");
+            this.udTXGridMin.Value = new decimal(new int[] {
+            100,
+            0,
+            0,
+            -2147483648});
+            this.udTXGridMin.ValueChanged += new System.EventHandler(this.udTXGridMin_ValueChanged);
+            this.udTXGridMin.LostFocus += new System.EventHandler(this.udTXGridMin_LostFocus);
+            // 
+            // udTXGridMax
+            // 
+            this.udTXGridMax.Increment = new decimal(new int[] {
+            5,
+            0,
+            0,
+            0});
+            this.udTXGridMax.Location = new System.Drawing.Point(48, 24);
+            this.udTXGridMax.Maximum = new decimal(new int[] {
+            200,
+            0,
+            0,
+            0});
+            this.udTXGridMax.Minimum = new decimal(new int[] {
+            200,
+            0,
+            0,
+            -2147483648});
+            this.udTXGridMax.Name = "udTXGridMax";
+            this.udTXGridMax.Size = new System.Drawing.Size(56, 20);
+            this.udTXGridMax.TabIndex = 23;
+            this.toolTip1.SetToolTip(this.udTXGridMax, "Signal level at top of display in dB.");
+            this.udTXGridMax.Value = new decimal(new int[] {
+            30,
+            0,
+            0,
+            0});
+            this.udTXGridMax.ValueChanged += new System.EventHandler(this.udTXGridMax_ValueChanged);
+            this.udTXGridMax.LostFocus += new System.EventHandler(this.udTXGridMax_LostFocus);
+            // 
+            // lblTXGridStep
+            // 
+            this.lblTXGridStep.Image = null;
+            this.lblTXGridStep.Location = new System.Drawing.Point(8, 72);
+            this.lblTXGridStep.Name = "lblTXGridStep";
+            this.lblTXGridStep.Size = new System.Drawing.Size(32, 16);
+            this.lblTXGridStep.TabIndex = 28;
+            this.lblTXGridStep.Text = "Step:";
+            // 
+            // lblTXGridMin
+            // 
+            this.lblTXGridMin.Image = null;
+            this.lblTXGridMin.Location = new System.Drawing.Point(8, 48);
+            this.lblTXGridMin.Name = "lblTXGridMin";
+            this.lblTXGridMin.Size = new System.Drawing.Size(32, 16);
+            this.lblTXGridMin.TabIndex = 27;
+            this.lblTXGridMin.Text = "Min:";
+            // 
+            // lblTXGridMax
+            // 
+            this.lblTXGridMax.Image = null;
+            this.lblTXGridMax.Location = new System.Drawing.Point(8, 24);
+            this.lblTXGridMax.Name = "lblTXGridMax";
+            this.lblTXGridMax.Size = new System.Drawing.Size(32, 16);
+            this.lblTXGridMax.TabIndex = 26;
+            this.lblTXGridMax.Text = "Max:";
+            // 
+            // groupBoxTS3
+            // 
+            this.groupBoxTS3.Controls.Add(this.tbTXFilterAlpha);
+            this.groupBoxTS3.Controls.Add(this.lblDispTXFilterColor);
+            this.groupBoxTS3.Controls.Add(this.clrbtnGridTXFilter);
+            this.groupBoxTS3.Controls.Add(this.lblTXDataLineColor);
+            this.groupBoxTS3.Controls.Add(this.clrbtnTXDataLine);
+            this.groupBoxTS3.Controls.Add(this.lblTXLineWidth);
+            this.groupBoxTS3.Controls.Add(this.udTXLineWidth);
+            this.groupBoxTS3.Location = new System.Drawing.Point(145, 5);
+            this.groupBoxTS3.Name = "groupBoxTS3";
+            this.groupBoxTS3.Size = new System.Drawing.Size(200, 128);
+            this.groupBoxTS3.TabIndex = 80;
+            this.groupBoxTS3.TabStop = false;
+            this.groupBoxTS3.Text = "Panadapter                           Alpha";
+            // 
+            // tbTXFilterAlpha
+            // 
+            this.tbTXFilterAlpha.AutoSize = false;
+            this.tbTXFilterAlpha.Location = new System.Drawing.Point(130, 20);
+            this.tbTXFilterAlpha.Maximum = 255;
+            this.tbTXFilterAlpha.Name = "tbTXFilterAlpha";
+            this.tbTXFilterAlpha.Size = new System.Drawing.Size(66, 18);
+            this.tbTXFilterAlpha.TabIndex = 78;
+            this.tbTXFilterAlpha.TickFrequency = 64;
+            this.tbTXFilterAlpha.Value = 65;
+            this.tbTXFilterAlpha.Scroll += new System.EventHandler(this.tbTXFilterAlpha_Scroll);
+            // 
+            // lblDispTXFilterColor
+            // 
+            this.lblDispTXFilterColor.Image = null;
+            this.lblDispTXFilterColor.Location = new System.Drawing.Point(8, 20);
+            this.lblDispTXFilterColor.Name = "lblDispTXFilterColor";
+            this.lblDispTXFilterColor.Size = new System.Drawing.Size(64, 30);
+            this.lblDispTXFilterColor.TabIndex = 45;
+            this.lblDispTXFilterColor.Text = "TX Filter Color:";
+            // 
+            // clrbtnGridTXFilter
+            // 
+            this.clrbtnGridTXFilter.Automatic = "Automatic";
+            this.clrbtnGridTXFilter.Color = System.Drawing.Color.White;
+            this.clrbtnGridTXFilter.Image = null;
+            this.clrbtnGridTXFilter.Location = new System.Drawing.Point(80, 20);
+            this.clrbtnGridTXFilter.MoreColors = "More Colors...";
+            this.clrbtnGridTXFilter.Name = "clrbtnGridTXFilter";
+            this.clrbtnGridTXFilter.Size = new System.Drawing.Size(40, 23);
+            this.clrbtnGridTXFilter.TabIndex = 71;
+            this.clrbtnGridTXFilter.Changed += new System.EventHandler(this.clrbtnGridTXFilter_Changed);
+            // 
+            // lblTXDataLineColor
+            // 
+            this.lblTXDataLineColor.Image = null;
+            this.lblTXDataLineColor.Location = new System.Drawing.Point(8, 50);
+            this.lblTXDataLineColor.Name = "lblTXDataLineColor";
+            this.lblTXDataLineColor.Size = new System.Drawing.Size(64, 20);
+            this.lblTXDataLineColor.TabIndex = 41;
+            this.lblTXDataLineColor.Text = "Data Line:";
+            this.lblTXDataLineColor.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // clrbtnTXDataLine
+            // 
+            this.clrbtnTXDataLine.Automatic = "Automatic";
+            this.clrbtnTXDataLine.Color = System.Drawing.Color.White;
+            this.clrbtnTXDataLine.Image = null;
+            this.clrbtnTXDataLine.Location = new System.Drawing.Point(80, 50);
+            this.clrbtnTXDataLine.MoreColors = "More Colors...";
+            this.clrbtnTXDataLine.Name = "clrbtnTXDataLine";
+            this.clrbtnTXDataLine.Size = new System.Drawing.Size(40, 23);
+            this.clrbtnTXDataLine.TabIndex = 73;
+            this.clrbtnTXDataLine.Changed += new System.EventHandler(this.clrbtnTXDataLine_Changed);
+            // 
+            // lblTXLineWidth
+            // 
+            this.lblTXLineWidth.Image = null;
+            this.lblTXLineWidth.Location = new System.Drawing.Point(8, 80);
+            this.lblTXLineWidth.Name = "lblTXLineWidth";
+            this.lblTXLineWidth.Size = new System.Drawing.Size(64, 30);
+            this.lblTXLineWidth.TabIndex = 43;
+            this.lblTXLineWidth.Text = "Data Line Width:";
+            // 
+            // udTXLineWidth
+            // 
+            this.udTXLineWidth.DecimalPlaces = 1;
+            this.udTXLineWidth.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
+            this.udTXLineWidth.Location = new System.Drawing.Point(80, 80);
+            this.udTXLineWidth.Maximum = new decimal(new int[] {
+            50,
+            0,
+            0,
+            65536});
+            this.udTXLineWidth.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
+            this.udTXLineWidth.Name = "udTXLineWidth";
+            this.udTXLineWidth.Size = new System.Drawing.Size(40, 20);
+            this.udTXLineWidth.TabIndex = 42;
+            this.udTXLineWidth.Value = new decimal(new int[] {
+            10,
+            0,
+            0,
+            65536});
+            this.udTXLineWidth.ValueChanged += new System.EventHandler(this.udTXLineWidth_ValueChanged);
+            this.udTXLineWidth.LostFocus += new System.EventHandler(this.udTXLineWidth_LostFocus);
+            // 
+            // groupBoxTS2
+            // 
+            this.groupBoxTS2.Controls.Add(this.tbTXTextAlpha);
+            this.groupBoxTS2.Controls.Add(this.lblTXBandEdge);
+            this.groupBoxTS2.Controls.Add(this.clrbtnTXBandEdge);
+            this.groupBoxTS2.Controls.Add(this.tbTXZeroLineAlpha);
+            this.groupBoxTS2.Controls.Add(this.tbTXHGridColorAlpha);
+            this.groupBoxTS2.Controls.Add(this.clrbtnTXHGridColor);
+            this.groupBoxTS2.Controls.Add(this.lblTXHGridColor);
+            this.groupBoxTS2.Controls.Add(this.tbTXVGridFineAlpha);
+            this.groupBoxTS2.Controls.Add(this.tbTXVGridCourseAlpha);
+            this.groupBoxTS2.Controls.Add(this.tbTXBackgroundAlpha);
+            this.groupBoxTS2.Controls.Add(this.clrbtnTXVGridFine);
+            this.groupBoxTS2.Controls.Add(this.lblTXVGridFine);
+            this.groupBoxTS2.Controls.Add(this.lblTXVGridColor);
+            this.groupBoxTS2.Controls.Add(this.clrbtnTXBackground);
+            this.groupBoxTS2.Controls.Add(this.clrbtnTXVGrid);
+            this.groupBoxTS2.Controls.Add(this.lblTXBackgroundColor);
+            this.groupBoxTS2.Controls.Add(this.clrbtnTXZeroLine);
+            this.groupBoxTS2.Controls.Add(this.lblTXZeroLineColor);
+            this.groupBoxTS2.Controls.Add(this.clrbtnTXText);
+            this.groupBoxTS2.Controls.Add(this.lblTXTextColor);
+            this.groupBoxTS2.Location = new System.Drawing.Point(375, 5);
+            this.groupBoxTS2.Name = "groupBoxTS2";
+            this.groupBoxTS2.Size = new System.Drawing.Size(200, 256);
+            this.groupBoxTS2.TabIndex = 79;
+            this.groupBoxTS2.TabStop = false;
+            this.groupBoxTS2.Text = "Grid                                      Alpha";
+            // 
+            // tbTXTextAlpha
+            // 
+            this.tbTXTextAlpha.AutoSize = false;
+            this.tbTXTextAlpha.Location = new System.Drawing.Point(130, 170);
+            this.tbTXTextAlpha.Maximum = 255;
+            this.tbTXTextAlpha.Name = "tbTXTextAlpha";
+            this.tbTXTextAlpha.Size = new System.Drawing.Size(66, 18);
+            this.tbTXTextAlpha.TabIndex = 90;
+            this.tbTXTextAlpha.TickFrequency = 64;
+            this.tbTXTextAlpha.Value = 255;
+            this.tbTXTextAlpha.Scroll += new System.EventHandler(this.tbTXTextAlpha_Scroll);
+            // 
+            // lblTXBandEdge
+            // 
+            this.lblTXBandEdge.Image = null;
+            this.lblTXBandEdge.Location = new System.Drawing.Point(8, 200);
+            this.lblTXBandEdge.Name = "lblTXBandEdge";
+            this.lblTXBandEdge.Size = new System.Drawing.Size(64, 24);
+            this.lblTXBandEdge.TabIndex = 65;
+            this.lblTXBandEdge.Text = "Band Edge:";
+            this.lblTXBandEdge.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // clrbtnTXBandEdge
+            // 
+            this.clrbtnTXBandEdge.Automatic = "Automatic";
+            this.clrbtnTXBandEdge.Color = System.Drawing.Color.Red;
+            this.clrbtnTXBandEdge.Image = null;
+            this.clrbtnTXBandEdge.Location = new System.Drawing.Point(82, 200);
+            this.clrbtnTXBandEdge.MoreColors = "More Colors...";
+            this.clrbtnTXBandEdge.Name = "clrbtnTXBandEdge";
+            this.clrbtnTXBandEdge.Size = new System.Drawing.Size(40, 23);
+            this.clrbtnTXBandEdge.TabIndex = 71;
+            this.clrbtnTXBandEdge.Changed += new System.EventHandler(this.clrbtnTXBandEdge_Changed);
+            // 
+            // tbTXZeroLineAlpha
+            // 
+            this.tbTXZeroLineAlpha.AutoSize = false;
+            this.tbTXZeroLineAlpha.Location = new System.Drawing.Point(130, 140);
+            this.tbTXZeroLineAlpha.Maximum = 255;
+            this.tbTXZeroLineAlpha.Name = "tbTXZeroLineAlpha";
+            this.tbTXZeroLineAlpha.Size = new System.Drawing.Size(66, 18);
+            this.tbTXZeroLineAlpha.TabIndex = 89;
+            this.tbTXZeroLineAlpha.TickFrequency = 64;
+            this.tbTXZeroLineAlpha.Value = 255;
+            this.tbTXZeroLineAlpha.Scroll += new System.EventHandler(this.tbTXZeroLineAlpha_Scroll);
+            // 
+            // tbTXHGridColorAlpha
+            // 
+            this.tbTXHGridColorAlpha.AutoSize = false;
+            this.tbTXHGridColorAlpha.Location = new System.Drawing.Point(130, 110);
+            this.tbTXHGridColorAlpha.Maximum = 255;
+            this.tbTXHGridColorAlpha.Name = "tbTXHGridColorAlpha";
+            this.tbTXHGridColorAlpha.Size = new System.Drawing.Size(66, 18);
+            this.tbTXHGridColorAlpha.TabIndex = 88;
+            this.tbTXHGridColorAlpha.TickFrequency = 64;
+            this.tbTXHGridColorAlpha.Value = 16;
+            this.tbTXHGridColorAlpha.Scroll += new System.EventHandler(this.tbTXHGridColorAlpha_Scroll);
+            // 
+            // clrbtnTXHGridColor
+            // 
+            this.clrbtnTXHGridColor.Automatic = "Automatic";
+            this.clrbtnTXHGridColor.Color = System.Drawing.Color.White;
+            this.clrbtnTXHGridColor.Image = null;
+            this.clrbtnTXHGridColor.Location = new System.Drawing.Point(82, 110);
+            this.clrbtnTXHGridColor.MoreColors = "More Colors...";
+            this.clrbtnTXHGridColor.Name = "clrbtnTXHGridColor";
+            this.clrbtnTXHGridColor.Size = new System.Drawing.Size(40, 23);
+            this.clrbtnTXHGridColor.TabIndex = 87;
+            this.clrbtnTXHGridColor.Changed += new System.EventHandler(this.clrbtnTXHGridColor_Changed);
+            // 
+            // lblTXHGridColor
+            // 
+            this.lblTXHGridColor.Image = null;
+            this.lblTXHGridColor.Location = new System.Drawing.Point(8, 110);
+            this.lblTXHGridColor.Name = "lblTXHGridColor";
+            this.lblTXHGridColor.Size = new System.Drawing.Size(60, 20);
+            this.lblTXHGridColor.TabIndex = 86;
+            this.lblTXHGridColor.Text = "H-Grid:";
+            this.lblTXHGridColor.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // tbTXVGridFineAlpha
+            // 
+            this.tbTXVGridFineAlpha.AutoSize = false;
+            this.tbTXVGridFineAlpha.Location = new System.Drawing.Point(130, 80);
+            this.tbTXVGridFineAlpha.Maximum = 255;
+            this.tbTXVGridFineAlpha.Name = "tbTXVGridFineAlpha";
+            this.tbTXVGridFineAlpha.Size = new System.Drawing.Size(66, 18);
+            this.tbTXVGridFineAlpha.TabIndex = 85;
+            this.tbTXVGridFineAlpha.TickFrequency = 64;
+            this.tbTXVGridFineAlpha.Value = 16;
+            this.tbTXVGridFineAlpha.Scroll += new System.EventHandler(this.tbTXVGridFineAlpha_Scroll);
+            // 
+            // tbTXVGridCourseAlpha
+            // 
+            this.tbTXVGridCourseAlpha.AutoSize = false;
+            this.tbTXVGridCourseAlpha.Location = new System.Drawing.Point(130, 50);
+            this.tbTXVGridCourseAlpha.Maximum = 255;
+            this.tbTXVGridCourseAlpha.Name = "tbTXVGridCourseAlpha";
+            this.tbTXVGridCourseAlpha.Size = new System.Drawing.Size(66, 18);
+            this.tbTXVGridCourseAlpha.TabIndex = 84;
+            this.tbTXVGridCourseAlpha.TickFrequency = 64;
+            this.tbTXVGridCourseAlpha.Value = 42;
+            this.tbTXVGridCourseAlpha.Scroll += new System.EventHandler(this.tbTXVGridCourseAlpha_Scroll);
+            // 
+            // tbTXBackgroundAlpha
+            // 
+            this.tbTXBackgroundAlpha.AutoSize = false;
+            this.tbTXBackgroundAlpha.Location = new System.Drawing.Point(130, 20);
+            this.tbTXBackgroundAlpha.Maximum = 255;
+            this.tbTXBackgroundAlpha.Name = "tbTXBackgroundAlpha";
+            this.tbTXBackgroundAlpha.Size = new System.Drawing.Size(66, 18);
+            this.tbTXBackgroundAlpha.TabIndex = 83;
+            this.tbTXBackgroundAlpha.TickFrequency = 64;
+            this.tbTXBackgroundAlpha.Value = 16;
+            this.tbTXBackgroundAlpha.Scroll += new System.EventHandler(this.tbTXBackgroundAlpha_Scroll);
+            // 
+            // clrbtnTXVGridFine
+            // 
+            this.clrbtnTXVGridFine.Automatic = "Automatic";
+            this.clrbtnTXVGridFine.Color = System.Drawing.Color.White;
+            this.clrbtnTXVGridFine.Image = null;
+            this.clrbtnTXVGridFine.Location = new System.Drawing.Point(82, 80);
+            this.clrbtnTXVGridFine.MoreColors = "More Colors...";
+            this.clrbtnTXVGridFine.Name = "clrbtnTXVGridFine";
+            this.clrbtnTXVGridFine.Size = new System.Drawing.Size(40, 23);
+            this.clrbtnTXVGridFine.TabIndex = 75;
+            this.clrbtnTXVGridFine.Changed += new System.EventHandler(this.clrbtnTXVGridFine_Changed);
+            // 
+            // lblTXVGridFine
+            // 
+            this.lblTXVGridFine.Image = null;
+            this.lblTXVGridFine.Location = new System.Drawing.Point(8, 80);
+            this.lblTXVGridFine.Name = "lblTXVGridFine";
+            this.lblTXVGridFine.Size = new System.Drawing.Size(72, 20);
+            this.lblTXVGridFine.TabIndex = 74;
+            this.lblTXVGridFine.Text = "V-Grid Fine:";
+            this.lblTXVGridFine.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // lblTXVGridColor
+            // 
+            this.lblTXVGridColor.Image = null;
+            this.lblTXVGridColor.Location = new System.Drawing.Point(8, 50);
+            this.lblTXVGridColor.Name = "lblTXVGridColor";
+            this.lblTXVGridColor.Size = new System.Drawing.Size(72, 20);
+            this.lblTXVGridColor.TabIndex = 35;
+            this.lblTXVGridColor.Text = "V-Grid:";
+            this.lblTXVGridColor.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // clrbtnTXBackground
+            // 
+            this.clrbtnTXBackground.Automatic = "Automatic";
+            this.clrbtnTXBackground.Color = System.Drawing.Color.Black;
+            this.clrbtnTXBackground.Image = null;
+            this.clrbtnTXBackground.Location = new System.Drawing.Point(82, 20);
+            this.clrbtnTXBackground.MoreColors = "More Colors...";
+            this.clrbtnTXBackground.Name = "clrbtnTXBackground";
+            this.clrbtnTXBackground.Size = new System.Drawing.Size(40, 23);
+            this.clrbtnTXBackground.TabIndex = 68;
+            this.clrbtnTXBackground.Changed += new System.EventHandler(this.clrbtnTXBackground_Changed);
+            // 
+            // clrbtnTXVGrid
+            // 
+            this.clrbtnTXVGrid.Automatic = "Automatic";
+            this.clrbtnTXVGrid.Color = System.Drawing.Color.White;
+            this.clrbtnTXVGrid.Image = null;
+            this.clrbtnTXVGrid.Location = new System.Drawing.Point(82, 50);
+            this.clrbtnTXVGrid.MoreColors = "More Colors...";
+            this.clrbtnTXVGrid.Name = "clrbtnTXVGrid";
+            this.clrbtnTXVGrid.Size = new System.Drawing.Size(40, 23);
+            this.clrbtnTXVGrid.TabIndex = 69;
+            this.clrbtnTXVGrid.Changed += new System.EventHandler(this.clrbtnTXVGrid_Changed);
+            // 
+            // lblTXBackgroundColor
+            // 
+            this.lblTXBackgroundColor.Image = null;
+            this.lblTXBackgroundColor.Location = new System.Drawing.Point(8, 23);
+            this.lblTXBackgroundColor.Name = "lblTXBackgroundColor";
+            this.lblTXBackgroundColor.Size = new System.Drawing.Size(72, 20);
+            this.lblTXBackgroundColor.TabIndex = 34;
+            this.lblTXBackgroundColor.Text = "Background:";
+            this.lblTXBackgroundColor.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // clrbtnTXZeroLine
+            // 
+            this.clrbtnTXZeroLine.Automatic = "Automatic";
+            this.clrbtnTXZeroLine.Color = System.Drawing.Color.Red;
+            this.clrbtnTXZeroLine.Image = null;
+            this.clrbtnTXZeroLine.Location = new System.Drawing.Point(82, 140);
+            this.clrbtnTXZeroLine.MoreColors = "More Colors...";
+            this.clrbtnTXZeroLine.Name = "clrbtnTXZeroLine";
+            this.clrbtnTXZeroLine.Size = new System.Drawing.Size(40, 23);
+            this.clrbtnTXZeroLine.TabIndex = 70;
+            this.clrbtnTXZeroLine.Changed += new System.EventHandler(this.clrbtnTXZeroLine_Changed);
+            // 
+            // lblTXZeroLineColor
+            // 
+            this.lblTXZeroLineColor.Image = null;
+            this.lblTXZeroLineColor.Location = new System.Drawing.Point(8, 140);
+            this.lblTXZeroLineColor.Name = "lblTXZeroLineColor";
+            this.lblTXZeroLineColor.Size = new System.Drawing.Size(72, 20);
+            this.lblTXZeroLineColor.TabIndex = 36;
+            this.lblTXZeroLineColor.Text = "Zero Line:";
+            this.lblTXZeroLineColor.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // clrbtnTXText
+            // 
+            this.clrbtnTXText.Automatic = "Automatic";
+            this.clrbtnTXText.Color = System.Drawing.Color.Yellow;
+            this.clrbtnTXText.Image = null;
+            this.clrbtnTXText.Location = new System.Drawing.Point(82, 170);
+            this.clrbtnTXText.MoreColors = "More Colors...";
+            this.clrbtnTXText.Name = "clrbtnTXText";
+            this.clrbtnTXText.Size = new System.Drawing.Size(40, 23);
+            this.clrbtnTXText.TabIndex = 72;
+            this.clrbtnTXText.Changed += new System.EventHandler(this.clrbtnTXText_Changed);
+            // 
+            // lblTXTextColor
+            // 
+            this.lblTXTextColor.Image = null;
+            this.lblTXTextColor.Location = new System.Drawing.Point(8, 170);
+            this.lblTXTextColor.Name = "lblTXTextColor";
+            this.lblTXTextColor.Size = new System.Drawing.Size(64, 20);
+            this.lblTXTextColor.TabIndex = 39;
+            this.lblTXTextColor.Text = "Text:";
+            this.lblTXTextColor.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // tpKeyboard
             // 
@@ -22500,6 +23187,21 @@ namespace PowerSDR
             this.tpAppearanceMeter.ResumeLayout(false);
             this.grpMeterEdge.ResumeLayout(false);
             this.grpAppearanceMeter.ResumeLayout(false);
+            this.tcAppearanceTXDisplay.ResumeLayout(false);
+            this.grpTXSpectrumGrid.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.udTXGridStep)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.udTXGridMin)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.udTXGridMax)).EndInit();
+            this.groupBoxTS3.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.tbTXFilterAlpha)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.udTXLineWidth)).EndInit();
+            this.groupBoxTS2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.tbTXTextAlpha)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.tbTXZeroLineAlpha)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.tbTXHGridColorAlpha)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.tbTXVGridFineAlpha)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.tbTXVGridCourseAlpha)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.tbTXBackgroundAlpha)).EndInit();
             this.tpKeyboard.ResumeLayout(false);
             this.grpKBXIT.ResumeLayout(false);
             this.grpKBRIT.ResumeLayout(false);
@@ -22644,6 +23346,10 @@ namespace PowerSDR
             udDisplayPhasePts.Value = Display.PhaseNumPts;
             udDisplayMultiPeakHoldTime.Value = console.MultimeterPeakHoldTime;
             udDisplayMultiTextHoldTime.Value = console.MultimeterTextPeakTime;
+            udTXGridMax.Value = Display.TXSpectrumGridMax;
+            udTXGridMin.Value = Display.TXSpectrumGridMin;
+            udTXGridStep.Value = Display.TXSpectrumGridStep;
+  
         }
 
         private void InitDSPTab()
@@ -23385,7 +24091,6 @@ namespace PowerSDR
             chkAudioLatencyManual1_CheckedChanged(this, e);
 
             // Calibration Tab
-            chkTXCal_CheckedChanged(this, e);
             udTXDisplayCalOffset_ValueChanged(this, e);
 
             // Test Tab
@@ -23399,6 +24104,9 @@ namespace PowerSDR
             udDisplayGridMin_ValueChanged(this, e);
             udDisplayGridStep_ValueChanged(this, e);
             udDisplayFPS_ValueChanged(this, e);
+            udTXGridMax_ValueChanged(this, e);
+            udTXGridMin_ValueChanged(this, e);
+            udTXGridStep_ValueChanged(this, e);
             udDisplayMeterDelay_ValueChanged(this, e);
             udDisplayPeakText_ValueChanged(this, e);
             udDisplayCPUMeter_ValueChanged(this, e);
@@ -23461,16 +24169,26 @@ namespace PowerSDR
             clrbtnBandLight_Changed(this, e);
             clrbtnPeakText_Changed(this, e);
             clrbtnBackground_Changed(this, e);
+            clrbtnTXBackground_Changed(this, e);
             clrbtnGrid_Changed(this, e);
+            clrbtnTXVGrid_Changed(this, e);
             clrbtnGridFine_Changed(this, e);
             clrbtnHGridColor_Changed(this, e);
+            clrbtnTXHGridColor_Changed(this, e);
             clrbtnZeroLine_Changed(this, e);
+            clrbtnTXZeroLine_Changed(this, e);
             clrbtnFilter_Changed(this, e);
+            clrbtnGridTXFilter_Changed(this, e);
             clrbtnText_Changed(this, e);
             clrbtnDataLine_Changed(this, e);
             udDisplayLineWidth_ValueChanged(this, e);
+            udTXLineWidth_ValueChanged(this, e);
+            clrbtnTXDataLine_Changed(this, e);
             clrbtnMeterLeft_Changed(this, e);
             clrbtnMeterRight_Changed(this, e);
+            chkGridControl_CheckedChanged(this, e);
+            clrbtnBandEdge_Changed(this, e);
+            clrbtnTXBandEdge_Changed(this, e);
         }
 
         public string[] GetTXProfileStrings()
@@ -27249,6 +27967,11 @@ namespace PowerSDR
             Display.SpectrumGridMax = (int)udDisplayGridMax.Value;
         }
 
+        private void udTXGridMax_LostFocus(object sender, System.EventArgs e)
+        {
+            Display.TXSpectrumGridMax = (int)udTXGridMax.Value;
+        }
+
         private void udDisplayGridMax_Click(object sender, System.EventArgs e)
         {
             udDisplayGridMax_LostFocus(sender, e);
@@ -27393,6 +28116,50 @@ namespace PowerSDR
                 /*case "DirectX":
                     console.CurrentDisplayEngine = DisplayEngine.DIRECT_X;
                     break;*/
+            }
+        }
+
+        private void udTXGridMax_ValueChanged(object sender, System.EventArgs e)
+        {
+            if (udTXGridMax.Value <= udTXGridMin.Value)
+                udTXGridMax.Value = udTXGridMin.Value + 10;
+            Display.TXSpectrumGridMax = (int)udTXGridMax.Value;
+        }
+
+        private void udTXGridMin_ValueChanged(object sender, System.EventArgs e)
+        {
+            if (udTXGridMin.Value >= udTXGridMax.Value)
+                udTXGridMin.Value = udTXGridMax.Value - 10;
+            Display.TXSpectrumGridMin = (int)udTXGridMin.Value;
+        }
+
+        private void udTXGridStep_ValueChanged(object sender, System.EventArgs e)
+        {
+            Display.TXSpectrumGridStep = (int)udTXGridStep.Value;
+        }
+
+        private void comboTXLabelAlign_SelectedIndexChanged(object sender, System.EventArgs e)
+        {
+            switch (comboTXLabelAlign.Text)
+            {
+                case "Left":
+                    Display.TXDisplayLabelAlign = DisplayLabelAlignment.LEFT;
+                    break;
+                case "Cntr":
+                    Display.TXDisplayLabelAlign = DisplayLabelAlignment.CENTER;
+                    break;
+                case "Right":
+                    Display.TXDisplayLabelAlign = DisplayLabelAlignment.RIGHT;
+                    break;
+                case "Auto":
+                    Display.TXDisplayLabelAlign = DisplayLabelAlignment.AUTO;
+                    break;
+                case "Off":
+                    Display.TXDisplayLabelAlign = DisplayLabelAlignment.OFF;
+                    break;
+                default:
+                    Display.TXDisplayLabelAlign = DisplayLabelAlignment.LEFT;
+                    break;
             }
         }
 
@@ -28191,10 +28958,20 @@ namespace PowerSDR
             //Display.DisplayBackgroundColor = clrbtnBackground.Color;
         }
 
+        private void clrbtnTXBackground_Changed(object sender, System.EventArgs e)
+        {
+            Display.TXDisplayBackgroundColor = Color.FromArgb(tbTXBackgroundAlpha.Value, clrbtnTXBackground.Color);
+        }
+
         private void clrbtnGrid_Changed(object sender, System.EventArgs e)
         {
             Display.GridColor = Color.FromArgb(tbGridCourseAlpha.Value, clrbtnGrid.Color);
             //Display.GridColor = clrbtnGrid.Color;
+        }
+
+        private void clrbtnTXVGrid_Changed(object sender, System.EventArgs e)
+        {
+            Display.TXVGridColor = Color.FromArgb(tbTXVGridCourseAlpha.Value, clrbtnTXVGrid.Color);
         }
 
         private void clrbtnZeroLine_Changed(object sender, System.EventArgs e)
@@ -28202,9 +28979,19 @@ namespace PowerSDR
             Display.GridZeroColor = clrbtnZeroLine.Color;
         }
 
+        private void clrbtnTXZeroLine_Changed(object sender, System.EventArgs e)
+        {
+            Display.TXGridZeroColor = Color.FromArgb(tbTXZeroLineAlpha.Value, clrbtnTXZeroLine.Color);
+        }
+
         private void clrbtnText_Changed(object sender, System.EventArgs e)
         {
             Display.GridTextColor = clrbtnText.Color;
+        }
+
+        private void clrbtnTXText_Changed(object sender, System.EventArgs e)
+        {
+            Display.GridTXTextColor = Color.FromArgb(tbTXTextAlpha.Value, clrbtnTXText.Color);
         }
 
         private void clrbtnDataLine_Changed(object sender, System.EventArgs e)
@@ -28212,14 +28999,29 @@ namespace PowerSDR
             Display.DataLineColor = clrbtnDataLine.Color;
         }
 
+        private void clrbtnTXDataLine_Changed(object sender, System.EventArgs e)
+        {
+            Display.TXDataLineColor = clrbtnTXDataLine.Color;
+        }
+
         private void clrbtnFilter_Changed(object sender, System.EventArgs e)
         {
             Display.DisplayFilterColor = Color.FromArgb(tbRX1FilterAlpha.Value, clrbtnFilter.Color);
         }
 
+        private void clrbtnGridTXFilter_Changed(object sender, System.EventArgs e)
+        {
+            Display.TXFilterColor = Color.FromArgb(tbTXFilterAlpha.Value, clrbtnGridTXFilter.Color);
+        }
+
         private void udDisplayLineWidth_ValueChanged(object sender, System.EventArgs e)
         {
             Display.DisplayLineWidth = (float)udDisplayLineWidth.Value;
+        }
+
+        private void udTXLineWidth_ValueChanged(object sender, System.EventArgs e)
+        {
+            Display.TXDisplayLineWidth = (float)udTXLineWidth.Value;
         }
 
         private void clrbtnMeterLeft_Changed(object sender, System.EventArgs e)
@@ -29791,6 +30593,16 @@ namespace PowerSDR
             udDisplayGridStep.Value = udDisplayGridStep.Value;
         }
 
+        private void udTXGridMin_LostFocus(object sender, EventArgs e)
+        {
+            udTXGridMin.Value = udTXGridMin.Value;
+        }
+
+        private void udTXGridStep_LostFocus(object sender, EventArgs e)
+        {
+            udTXGridStep.Value = udTXGridStep.Value;
+        }
+
         private void udDisplayGridMin_LostFocus(object sender, EventArgs e)
         {
             udDisplayGridMin.Value = udDisplayGridMin.Value;
@@ -30101,6 +30913,11 @@ namespace PowerSDR
             udDisplayLineWidth.Value = udDisplayLineWidth.Value;
         }
 
+        private void udTXLineWidth_LostFocus(object sender, EventArgs e)
+        {
+            udTXLineWidth.Value = udTXLineWidth.Value;
+        }
+
         private void udTestGenScale_LostFocus(object sender, EventArgs e)
         {
             udTestGenScale.Value = udTestGenScale.Value;
@@ -30151,6 +30968,11 @@ namespace PowerSDR
         private void clrbtnBandEdge_Changed(object sender, System.EventArgs e)
         {
             Display.BandEdgeColor = clrbtnBandEdge.Color;
+        }
+
+        private void clrbtnTXBandEdge_Changed(object sender, System.EventArgs e)
+        {
+            Display.TXBandEdgeColor = clrbtnTXBandEdge.Color;
         }
 
         private void comboMeterType_SelectedIndexChanged(object sender, System.EventArgs e)
@@ -30813,6 +31635,11 @@ namespace PowerSDR
             Display.PanFill = chkDisplayPanFill.Checked;
         }
 
+        private void chkTXPanFill_CheckedChanged(object sender, System.EventArgs e)
+        {
+            Display.TXPanFill = chkTXPanFill.Checked;
+        }
+
         private void udF3KFanTempThresh_ValueChanged(object sender, System.EventArgs e)
         {
             console.F3KTempThresh = (float)udF3KFanTempThresh.Value;
@@ -30876,6 +31703,11 @@ namespace PowerSDR
         private void tbRX1FilterAlpha_Scroll(object sender, EventArgs e)
         {
             clrbtnFilter_Changed(this, EventArgs.Empty);
+        }
+
+        private void tbTXFilterAlpha_Scroll(object sender, EventArgs e)
+        {
+            clrbtnGridTXFilter_Changed(this, EventArgs.Empty);
         }
 
         private void udTXNoiseGateAttenuate_ValueChanged(object sender, System.EventArgs e)
@@ -32527,8 +33359,13 @@ namespace PowerSDR
 
         private void udTXDisplayCalOffset_ValueChanged(object sender, EventArgs e)
         {
-            //Display.TXDisplayCalOffset = (float)udTXDisplayCalOffset.Value;
-            console.TXDisplayCalOffset = (float)udTXDisplayCalOffset.Value;
+            Display.TXDisplayCalOffset = (float)udTXDisplayCalOffset.Value;
+            //console.TXDisplayCalOffset = (float)udTXDisplayCalOffset.Value;
+        }
+
+        private void udTXDisplayCalOffset_LostFocus(object sender, EventArgs e)
+        {
+            udTXDisplayCalOffset.Value = udTXDisplayCalOffset.Value;
         }
 
         private void udTwoToneLevel_ValueChanged(object sender, EventArgs e)
@@ -32550,9 +33387,20 @@ namespace PowerSDR
             //Display.GridPenDark = clrbtnGridFine.Color;
         }
 
+        private void clrbtnTXVGridFine_Changed(object sender, EventArgs e)
+        {
+            Display.TXVGridPenFine = Color.FromArgb(tbTXVGridFineAlpha.Value, clrbtnTXVGridFine.Color);
+            //Display.GridPenDark = clrbtnGridFine.Color;
+        }
+
         private void tbBackgroundAlpha_Scroll(object sender, EventArgs e)
         {
             clrbtnBackground_Changed(this, EventArgs.Empty);
+        }
+
+        private void tbTXBackgroundAlpha_Scroll(object sender, EventArgs e)
+        {
+            clrbtnTXBackground_Changed(this, EventArgs.Empty);
         }
 
         private void tbGridCourseAlpha_Scroll(object sender, EventArgs e)
@@ -32560,9 +33408,19 @@ namespace PowerSDR
             clrbtnGrid_Changed(this, EventArgs.Empty);
         }
 
+        private void tbTXVGridCourseAlpha_Scroll(object sender, EventArgs e)
+        {
+            clrbtnTXVGrid_Changed(this, EventArgs.Empty);
+        }
+
         private void tbGridFineAlpha_Scroll(object sender, EventArgs e)
         {
             clrbtnGridFine_Changed(this, EventArgs.Empty);
+        }
+
+        private void tbTXVGridFineAlpha_Scroll(object sender, EventArgs e)
+        {
+            clrbtnTXVGridFine_Changed(this, EventArgs.Empty);
         }
 
         private void clrbtnHGridColor_Changed(object sender, EventArgs e)
@@ -32570,19 +33428,47 @@ namespace PowerSDR
             Display.HGridColor = Color.FromArgb(tbHGridColorAlpha.Value, clrbtnHGridColor.Color);
         }
 
+        private void clrbtnTXHGridColor_Changed(object sender, EventArgs e)
+        {
+            Display.TXHGridColor = Color.FromArgb(tbTXHGridColorAlpha.Value, clrbtnTXHGridColor.Color);
+        }
+
         private void tbHGridColorAlpha_Scroll(object sender, EventArgs e)
         {
             clrbtnHGridColor_Changed(this, EventArgs.Empty);
         }
 
-        private void chkTXCal_CheckedChanged(object sender, EventArgs e)
+        private void tbTXHGridColorAlpha_Scroll(object sender, EventArgs e)
+        {
+            clrbtnTXHGridColor_Changed(this, EventArgs.Empty);
+        }
+
+        private void tbTXZeroLineAlpha_Scroll(object sender, EventArgs e)
+        {
+            clrbtnTXZeroLine_Changed(this, EventArgs.Empty);
+        }
+
+        private void tbTXTextAlpha_Scroll(object sender, EventArgs e)
+        {
+            clrbtnTXText_Changed(this, EventArgs.Empty);
+        }
+
+       /* private void chkTXCal_CheckedChanged(object sender, EventArgs e)
         {
             udTXDisplayCalOffset.Enabled = chkTXCal.Checked;
             Display.TXDisplayCalControl = chkTXCal.Checked;
-            udTXDisplayCalOffset_ValueChanged(this, EventArgs.Empty);
+            //udTXDisplayCalOffset_ValueChanged(this, EventArgs.Empty);
+        }*/
+
+        private void chkGridControl_CheckedChanged(object sender, EventArgs e)
+        {
+            Display.GridControl = chkGridControl.Checked;
         }
 
- 
+        private void chkTXGridControl_CheckedChanged(object sender, EventArgs e)
+        {
+            Display.TXGridControl = chkTXGridControl.Checked;
+        }
     }
 
 	#region PADeviceInfo Helper Class
