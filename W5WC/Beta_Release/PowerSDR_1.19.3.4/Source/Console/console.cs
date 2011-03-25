@@ -1624,12 +1624,19 @@ namespace PowerSDR
             this.timer_cpu_meter = new System.Windows.Forms.Timer(this.components);
             this.timer_peak_text = new System.Windows.Forms.Timer(this.components);
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.ptbFilterShift = new PowerSDR.PrettyTrackBar();
-            this.ptbFilterWidth = new PowerSDR.PrettyTrackBar();
-            this.btnFilterShiftReset = new System.Windows.Forms.ButtonTS();
-            this.udFilterHigh = new System.Windows.Forms.NumericUpDownTS();
-            this.udFilterLow = new System.Windows.Forms.NumericUpDownTS();
+            this.picSquelch = new System.Windows.Forms.PictureBox();
+            this.picRX2Squelch = new System.Windows.Forms.PictureBox();
+            this.timer_clock = new System.Windows.Forms.Timer(this.components);
+            this.contextMenuStripFilterRX1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.toolStripMenuItemRX1FilterConfigure = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItemRX1FilterReset = new System.Windows.Forms.ToolStripMenuItem();
+            this.contextMenuStripFilterRX2 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.toolStripMenuItemRX2FilterConfigure = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItemRX2FilterReset = new System.Windows.Forms.ToolStripMenuItem();
+            this.timer_navigate = new System.Windows.Forms.Timer(this.components);
+            this.ptbRX2Squelch = new PowerSDR.PrettyTrackBar();
             this.ptbRX2RF = new PowerSDR.PrettyTrackBar();
+            this.panelOptions = new System.Windows.Forms.PanelTS();
             this.chkSR = new System.Windows.Forms.CheckBoxTS();
             this.chkFWCATU = new System.Windows.Forms.CheckBoxTS();
             this.ckQuickPlay = new System.Windows.Forms.CheckBoxTS();
@@ -1640,6 +1647,11 @@ namespace PowerSDR
             this.chkTUN = new System.Windows.Forms.CheckBoxTS();
             this.chkX2TR = new System.Windows.Forms.CheckBoxTS();
             this.comboTuneMode = new System.Windows.Forms.ComboBoxTS();
+            this.ptbFilterShift = new PowerSDR.PrettyTrackBar();
+            this.ptbFilterWidth = new PowerSDR.PrettyTrackBar();
+            this.btnFilterShiftReset = new System.Windows.Forms.ButtonTS();
+            this.udFilterHigh = new System.Windows.Forms.NumericUpDownTS();
+            this.udFilterLow = new System.Windows.Forms.NumericUpDownTS();
             this.chkFWCATUBypass = new System.Windows.Forms.CheckBoxTS();
             this.ptbCWSpeed = new PowerSDR.PrettyTrackBar();
             this.udCWPitch = new System.Windows.Forms.NumericUpDownTS();
@@ -1786,17 +1798,6 @@ namespace PowerSDR
             this.chkBCI = new System.Windows.Forms.CheckBoxTS();
             this.chkPLTone = new System.Windows.Forms.CheckBoxTS();
             this.chkMicMute = new System.Windows.Forms.CheckBoxTS();
-            this.picSquelch = new System.Windows.Forms.PictureBox();
-            this.picRX2Squelch = new System.Windows.Forms.PictureBox();
-            this.timer_clock = new System.Windows.Forms.Timer(this.components);
-            this.contextMenuStripFilterRX1 = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.toolStripMenuItemRX1FilterConfigure = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItemRX1FilterReset = new System.Windows.Forms.ToolStripMenuItem();
-            this.contextMenuStripFilterRX2 = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.toolStripMenuItemRX2FilterConfigure = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItemRX2FilterReset = new System.Windows.Forms.ToolStripMenuItem();
-            this.timer_navigate = new System.Windows.Forms.Timer(this.components);
-            this.ptbRX2Squelch = new PowerSDR.PrettyTrackBar();
             this.panelFilter = new System.Windows.Forms.PanelTS();
             this.radFilter1 = new System.Windows.Forms.RadioButtonTS();
             this.lblFilterHigh = new System.Windows.Forms.LabelTS();
@@ -1814,7 +1815,6 @@ namespace PowerSDR
             this.radFilter4 = new System.Windows.Forms.RadioButtonTS();
             this.radFilter5 = new System.Windows.Forms.RadioButtonTS();
             this.radFilter10 = new System.Windows.Forms.RadioButtonTS();
-            this.panelOptions = new System.Windows.Forms.PanelTS();
             this.panelModeSpecificCW = new System.Windows.Forms.PanelTS();
             this.lblCWSpeed = new System.Windows.Forms.LabelTS();
             this.grpSemiBreakIn = new System.Windows.Forms.GroupBoxTS();
@@ -1937,11 +1937,17 @@ namespace PowerSDR
             this.radBandVHF0 = new System.Windows.Forms.RadioButtonTS();
             this.panelRX2DSP = new System.Windows.Forms.PanelTS();
             this.ptbSquelch = new PowerSDR.PrettyTrackBar();
+            ((System.ComponentModel.ISupportInitialize)(this.picSquelch)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picRX2Squelch)).BeginInit();
+            this.contextMenuStripFilterRX1.SuspendLayout();
+            this.contextMenuStripFilterRX2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.ptbRX2Squelch)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ptbRX2RF)).BeginInit();
+            this.panelOptions.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ptbFilterShift)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ptbFilterWidth)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.udFilterHigh)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.udFilterLow)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.ptbRX2RF)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ptbCWSpeed)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.udCWPitch)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.udCWBreakInDelay)).BeginInit();
@@ -1962,13 +1968,7 @@ namespace PowerSDR
             ((System.ComponentModel.ISupportInitialize)(this.ptbRX1Gain)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ptbVACRXGain)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ptbVACTXGain)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.picSquelch)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.picRX2Squelch)).BeginInit();
-            this.contextMenuStripFilterRX1.SuspendLayout();
-            this.contextMenuStripFilterRX2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.ptbRX2Squelch)).BeginInit();
             this.panelFilter.SuspendLayout();
-            this.panelOptions.SuspendLayout();
             this.panelModeSpecificCW.SuspendLayout();
             this.grpSemiBreakIn.SuspendLayout();
             this.panelAntenna.SuspendLayout();
@@ -2142,108 +2142,84 @@ namespace PowerSDR
             this.timer_peak_text.Interval = 500;
             this.timer_peak_text.Tick += new System.EventHandler(this.timer_peak_text_Tick);
             // 
-            // ptbFilterShift
+            // picSquelch
             // 
-            resources.ApplyResources(this.ptbFilterShift, "ptbFilterShift");
-            this.ptbFilterShift.HeadImage = null;
-            this.ptbFilterShift.LargeChange = 1;
-            this.ptbFilterShift.Maximum = 1000;
-            this.ptbFilterShift.Minimum = -1000;
-            this.ptbFilterShift.Name = "ptbFilterShift";
-            this.ptbFilterShift.Orientation = System.Windows.Forms.Orientation.Horizontal;
-            this.ptbFilterShift.SmallChange = 1;
-            this.ptbFilterShift.TabStop = false;
-            this.toolTip1.SetToolTip(this.ptbFilterShift, resources.GetString("ptbFilterShift.ToolTip"));
-            this.ptbFilterShift.Value = 0;
-            this.ptbFilterShift.Scroll += new PowerSDR.PrettyTrackBar.ScrollHandler(this.ptbFilterShift_Scroll);
+            this.picSquelch.BackColor = System.Drawing.SystemColors.ControlText;
+            resources.ApplyResources(this.picSquelch, "picSquelch");
+            this.picSquelch.Name = "picSquelch";
+            this.picSquelch.TabStop = false;
+            this.picSquelch.Paint += new System.Windows.Forms.PaintEventHandler(this.picSquelch_Paint);
             // 
-            // ptbFilterWidth
+            // picRX2Squelch
             // 
-            resources.ApplyResources(this.ptbFilterWidth, "ptbFilterWidth");
-            this.ptbFilterWidth.HeadImage = null;
-            this.ptbFilterWidth.LargeChange = 1;
-            this.ptbFilterWidth.Maximum = 10000;
-            this.ptbFilterWidth.Minimum = 0;
-            this.ptbFilterWidth.Name = "ptbFilterWidth";
-            this.ptbFilterWidth.Orientation = System.Windows.Forms.Orientation.Horizontal;
-            this.ptbFilterWidth.SmallChange = 1;
-            this.ptbFilterWidth.TabStop = false;
-            this.toolTip1.SetToolTip(this.ptbFilterWidth, resources.GetString("ptbFilterWidth.ToolTip"));
-            this.ptbFilterWidth.Value = 10;
-            this.ptbFilterWidth.Scroll += new PowerSDR.PrettyTrackBar.ScrollHandler(this.ptbFilterWidth_Scroll);
+            this.picRX2Squelch.BackColor = System.Drawing.SystemColors.ControlText;
+            resources.ApplyResources(this.picRX2Squelch, "picRX2Squelch");
+            this.picRX2Squelch.Name = "picRX2Squelch";
+            this.picRX2Squelch.TabStop = false;
+            this.picRX2Squelch.Paint += new System.Windows.Forms.PaintEventHandler(this.picRX2Squelch_Paint);
             // 
-            // btnFilterShiftReset
+            // timer_clock
             // 
-            this.btnFilterShiftReset.FlatAppearance.BorderSize = 0;
-            resources.ApplyResources(this.btnFilterShiftReset, "btnFilterShiftReset");
-            this.btnFilterShiftReset.Image = null;
-            this.btnFilterShiftReset.Name = "btnFilterShiftReset";
-            this.btnFilterShiftReset.Tag = "Reset Filter Shift";
-            this.toolTip1.SetToolTip(this.btnFilterShiftReset, resources.GetString("btnFilterShiftReset.ToolTip"));
-            this.btnFilterShiftReset.Click += new System.EventHandler(this.btnFilterShiftReset_Click);
+            this.timer_clock.Enabled = true;
+            this.timer_clock.Tick += new System.EventHandler(this.timer_clock_Tick);
             // 
-            // udFilterHigh
+            // contextMenuStripFilterRX1
             // 
-            this.udFilterHigh.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(46)))), ((int)(((byte)(46)))));
-            resources.ApplyResources(this.udFilterHigh, "udFilterHigh");
-            this.udFilterHigh.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.udFilterHigh.Increment = new decimal(new int[] {
-            10,
-            0,
-            0,
-            0});
-            this.udFilterHigh.Maximum = new decimal(new int[] {
-            9999,
-            0,
-            0,
-            0});
-            this.udFilterHigh.Minimum = new decimal(new int[] {
-            9999,
-            0,
-            0,
-            -2147483648});
-            this.udFilterHigh.Name = "udFilterHigh";
-            this.udFilterHigh.ReadOnly = true;
-            this.toolTip1.SetToolTip(this.udFilterHigh, resources.GetString("udFilterHigh.ToolTip"));
-            this.udFilterHigh.Value = new decimal(new int[] {
-            6000,
-            0,
-            0,
-            0});
-            this.udFilterHigh.ValueChanged += new System.EventHandler(this.udFilterHigh_ValueChanged);
-            this.udFilterHigh.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.Console_KeyPress);
-            this.udFilterHigh.LostFocus += new System.EventHandler(this.udFilterHigh_LostFocus);
+            this.contextMenuStripFilterRX1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripMenuItemRX1FilterConfigure,
+            this.toolStripMenuItemRX1FilterReset});
+            this.contextMenuStripFilterRX1.Name = "contextMenuStripFilterRX1";
+            resources.ApplyResources(this.contextMenuStripFilterRX1, "contextMenuStripFilterRX1");
             // 
-            // udFilterLow
+            // toolStripMenuItemRX1FilterConfigure
             // 
-            this.udFilterLow.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(46)))), ((int)(((byte)(46)))));
-            resources.ApplyResources(this.udFilterLow, "udFilterLow");
-            this.udFilterLow.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.udFilterLow.Increment = new decimal(new int[] {
-            10,
-            0,
-            0,
-            0});
-            this.udFilterLow.Maximum = new decimal(new int[] {
-            9999,
-            0,
-            0,
-            0});
-            this.udFilterLow.Minimum = new decimal(new int[] {
-            9999,
-            0,
-            0,
-            -2147483648});
-            this.udFilterLow.Name = "udFilterLow";
-            this.toolTip1.SetToolTip(this.udFilterLow, resources.GetString("udFilterLow.ToolTip"));
-            this.udFilterLow.Value = new decimal(new int[] {
-            0,
-            0,
-            0,
-            0});
-            this.udFilterLow.ValueChanged += new System.EventHandler(this.udFilterLow_ValueChanged);
-            this.udFilterLow.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.Console_KeyPress);
-            this.udFilterLow.LostFocus += new System.EventHandler(this.udFilterLow_LostFocus);
+            this.toolStripMenuItemRX1FilterConfigure.Name = "toolStripMenuItemRX1FilterConfigure";
+            resources.ApplyResources(this.toolStripMenuItemRX1FilterConfigure, "toolStripMenuItemRX1FilterConfigure");
+            this.toolStripMenuItemRX1FilterConfigure.Click += new System.EventHandler(this.toolStripMenuItemRX1FilterConfigure_Click);
+            // 
+            // toolStripMenuItemRX1FilterReset
+            // 
+            this.toolStripMenuItemRX1FilterReset.Name = "toolStripMenuItemRX1FilterReset";
+            resources.ApplyResources(this.toolStripMenuItemRX1FilterReset, "toolStripMenuItemRX1FilterReset");
+            this.toolStripMenuItemRX1FilterReset.Click += new System.EventHandler(this.toolStripMenuItemRX1FilterReset_Click);
+            // 
+            // contextMenuStripFilterRX2
+            // 
+            this.contextMenuStripFilterRX2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripMenuItemRX2FilterConfigure,
+            this.toolStripMenuItemRX2FilterReset});
+            this.contextMenuStripFilterRX2.Name = "contextMenuStripFilterRX2";
+            resources.ApplyResources(this.contextMenuStripFilterRX2, "contextMenuStripFilterRX2");
+            // 
+            // toolStripMenuItemRX2FilterConfigure
+            // 
+            this.toolStripMenuItemRX2FilterConfigure.Name = "toolStripMenuItemRX2FilterConfigure";
+            resources.ApplyResources(this.toolStripMenuItemRX2FilterConfigure, "toolStripMenuItemRX2FilterConfigure");
+            this.toolStripMenuItemRX2FilterConfigure.Click += new System.EventHandler(this.toolStripMenuItemRX2FilterConfigure_Click);
+            // 
+            // toolStripMenuItemRX2FilterReset
+            // 
+            this.toolStripMenuItemRX2FilterReset.Name = "toolStripMenuItemRX2FilterReset";
+            resources.ApplyResources(this.toolStripMenuItemRX2FilterReset, "toolStripMenuItemRX2FilterReset");
+            this.toolStripMenuItemRX2FilterReset.Click += new System.EventHandler(this.toolStripMenuItemRX2FilterReset_Click);
+            // 
+            // timer_navigate
+            // 
+            this.timer_navigate.Tick += new System.EventHandler(this.timer_navigate_Tick);
+            // 
+            // ptbRX2Squelch
+            // 
+            resources.ApplyResources(this.ptbRX2Squelch, "ptbRX2Squelch");
+            this.ptbRX2Squelch.HeadImage = null;
+            this.ptbRX2Squelch.LargeChange = 1;
+            this.ptbRX2Squelch.Maximum = 0;
+            this.ptbRX2Squelch.Minimum = -160;
+            this.ptbRX2Squelch.Name = "ptbRX2Squelch";
+            this.ptbRX2Squelch.Orientation = System.Windows.Forms.Orientation.Horizontal;
+            this.ptbRX2Squelch.SmallChange = 1;
+            this.ptbRX2Squelch.TabStop = false;
+            this.ptbRX2Squelch.Value = -150;
+            this.ptbRX2Squelch.Scroll += new PowerSDR.PrettyTrackBar.ScrollHandler(this.ptbRX2Squelch_Scroll);
             // 
             // ptbRX2RF
             // 
@@ -2259,6 +2235,24 @@ namespace PowerSDR
             this.toolTip1.SetToolTip(this.ptbRX2RF, resources.GetString("ptbRX2RF.ToolTip"));
             this.ptbRX2RF.Value = 90;
             this.ptbRX2RF.Scroll += new PowerSDR.PrettyTrackBar.ScrollHandler(this.ptbRX2RF_Scroll);
+            // 
+            // panelOptions
+            // 
+            resources.ApplyResources(this.panelOptions, "panelOptions");
+            this.panelOptions.BackColor = System.Drawing.Color.Transparent;
+            this.panelOptions.Controls.Add(this.chkSR);
+            this.panelOptions.Controls.Add(this.chkFWCATU);
+            this.panelOptions.Controls.Add(this.ckQuickPlay);
+            this.panelOptions.Controls.Add(this.chkMON);
+            this.panelOptions.Controls.Add(this.ckQuickRec);
+            this.panelOptions.Controls.Add(this.chkMUT);
+            this.panelOptions.Controls.Add(this.chkMOX);
+            this.panelOptions.Controls.Add(this.chkTUN);
+            this.panelOptions.Controls.Add(this.chkX2TR);
+            this.panelOptions.Controls.Add(this.comboTuneMode);
+            this.panelOptions.Controls.Add(this.chkFWCATUBypass);
+            this.panelOptions.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.panelOptions.Name = "panelOptions";
             // 
             // chkSR
             // 
@@ -2366,6 +2360,109 @@ namespace PowerSDR
             this.comboTuneMode.Name = "comboTuneMode";
             this.toolTip1.SetToolTip(this.comboTuneMode, resources.GetString("comboTuneMode.ToolTip"));
             this.comboTuneMode.SelectedIndexChanged += new System.EventHandler(this.comboTuneMode_SelectedIndexChanged);
+            // 
+            // ptbFilterShift
+            // 
+            resources.ApplyResources(this.ptbFilterShift, "ptbFilterShift");
+            this.ptbFilterShift.HeadImage = null;
+            this.ptbFilterShift.LargeChange = 1;
+            this.ptbFilterShift.Maximum = 1000;
+            this.ptbFilterShift.Minimum = -1000;
+            this.ptbFilterShift.Name = "ptbFilterShift";
+            this.ptbFilterShift.Orientation = System.Windows.Forms.Orientation.Horizontal;
+            this.ptbFilterShift.SmallChange = 1;
+            this.ptbFilterShift.TabStop = false;
+            this.toolTip1.SetToolTip(this.ptbFilterShift, resources.GetString("ptbFilterShift.ToolTip"));
+            this.ptbFilterShift.Value = 0;
+            this.ptbFilterShift.Scroll += new PowerSDR.PrettyTrackBar.ScrollHandler(this.ptbFilterShift_Scroll);
+            // 
+            // ptbFilterWidth
+            // 
+            resources.ApplyResources(this.ptbFilterWidth, "ptbFilterWidth");
+            this.ptbFilterWidth.HeadImage = null;
+            this.ptbFilterWidth.LargeChange = 1;
+            this.ptbFilterWidth.Maximum = 10000;
+            this.ptbFilterWidth.Minimum = 0;
+            this.ptbFilterWidth.Name = "ptbFilterWidth";
+            this.ptbFilterWidth.Orientation = System.Windows.Forms.Orientation.Horizontal;
+            this.ptbFilterWidth.SmallChange = 1;
+            this.ptbFilterWidth.TabStop = false;
+            this.toolTip1.SetToolTip(this.ptbFilterWidth, resources.GetString("ptbFilterWidth.ToolTip"));
+            this.ptbFilterWidth.Value = 10;
+            this.ptbFilterWidth.Scroll += new PowerSDR.PrettyTrackBar.ScrollHandler(this.ptbFilterWidth_Scroll);
+            // 
+            // btnFilterShiftReset
+            // 
+            this.btnFilterShiftReset.FlatAppearance.BorderSize = 0;
+            resources.ApplyResources(this.btnFilterShiftReset, "btnFilterShiftReset");
+            this.btnFilterShiftReset.Image = null;
+            this.btnFilterShiftReset.Name = "btnFilterShiftReset";
+            this.btnFilterShiftReset.Tag = "Reset Filter Shift";
+            this.toolTip1.SetToolTip(this.btnFilterShiftReset, resources.GetString("btnFilterShiftReset.ToolTip"));
+            this.btnFilterShiftReset.Click += new System.EventHandler(this.btnFilterShiftReset_Click);
+            // 
+            // udFilterHigh
+            // 
+            this.udFilterHigh.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(46)))), ((int)(((byte)(46)))));
+            resources.ApplyResources(this.udFilterHigh, "udFilterHigh");
+            this.udFilterHigh.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.udFilterHigh.Increment = new decimal(new int[] {
+            10,
+            0,
+            0,
+            0});
+            this.udFilterHigh.Maximum = new decimal(new int[] {
+            9999,
+            0,
+            0,
+            0});
+            this.udFilterHigh.Minimum = new decimal(new int[] {
+            9999,
+            0,
+            0,
+            -2147483648});
+            this.udFilterHigh.Name = "udFilterHigh";
+            this.udFilterHigh.ReadOnly = true;
+            this.toolTip1.SetToolTip(this.udFilterHigh, resources.GetString("udFilterHigh.ToolTip"));
+            this.udFilterHigh.Value = new decimal(new int[] {
+            6000,
+            0,
+            0,
+            0});
+            this.udFilterHigh.ValueChanged += new System.EventHandler(this.udFilterHigh_ValueChanged);
+            this.udFilterHigh.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.Console_KeyPress);
+            this.udFilterHigh.LostFocus += new System.EventHandler(this.udFilterHigh_LostFocus);
+            // 
+            // udFilterLow
+            // 
+            this.udFilterLow.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(46)))), ((int)(((byte)(46)))));
+            resources.ApplyResources(this.udFilterLow, "udFilterLow");
+            this.udFilterLow.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.udFilterLow.Increment = new decimal(new int[] {
+            10,
+            0,
+            0,
+            0});
+            this.udFilterLow.Maximum = new decimal(new int[] {
+            9999,
+            0,
+            0,
+            0});
+            this.udFilterLow.Minimum = new decimal(new int[] {
+            9999,
+            0,
+            0,
+            -2147483648});
+            this.udFilterLow.Name = "udFilterLow";
+            this.toolTip1.SetToolTip(this.udFilterLow, resources.GetString("udFilterLow.ToolTip"));
+            this.udFilterLow.Value = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+            this.udFilterLow.ValueChanged += new System.EventHandler(this.udFilterLow_ValueChanged);
+            this.udFilterLow.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.Console_KeyPress);
+            this.udFilterLow.LostFocus += new System.EventHandler(this.udFilterLow_LostFocus);
             // 
             // chkFWCATUBypass
             // 
@@ -4111,85 +4208,6 @@ namespace PowerSDR
             this.toolTip1.SetToolTip(this.chkMicMute, resources.GetString("chkMicMute.ToolTip"));
             this.chkMicMute.CheckedChanged += new System.EventHandler(this.chkMicMute_CheckedChanged);
             // 
-            // picSquelch
-            // 
-            this.picSquelch.BackColor = System.Drawing.SystemColors.ControlText;
-            resources.ApplyResources(this.picSquelch, "picSquelch");
-            this.picSquelch.Name = "picSquelch";
-            this.picSquelch.TabStop = false;
-            this.picSquelch.Paint += new System.Windows.Forms.PaintEventHandler(this.picSquelch_Paint);
-            // 
-            // picRX2Squelch
-            // 
-            this.picRX2Squelch.BackColor = System.Drawing.SystemColors.ControlText;
-            resources.ApplyResources(this.picRX2Squelch, "picRX2Squelch");
-            this.picRX2Squelch.Name = "picRX2Squelch";
-            this.picRX2Squelch.TabStop = false;
-            this.picRX2Squelch.Paint += new System.Windows.Forms.PaintEventHandler(this.picRX2Squelch_Paint);
-            // 
-            // timer_clock
-            // 
-            this.timer_clock.Enabled = true;
-            this.timer_clock.Tick += new System.EventHandler(this.timer_clock_Tick);
-            // 
-            // contextMenuStripFilterRX1
-            // 
-            this.contextMenuStripFilterRX1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripMenuItemRX1FilterConfigure,
-            this.toolStripMenuItemRX1FilterReset});
-            this.contextMenuStripFilterRX1.Name = "contextMenuStripFilterRX1";
-            resources.ApplyResources(this.contextMenuStripFilterRX1, "contextMenuStripFilterRX1");
-            // 
-            // toolStripMenuItemRX1FilterConfigure
-            // 
-            this.toolStripMenuItemRX1FilterConfigure.Name = "toolStripMenuItemRX1FilterConfigure";
-            resources.ApplyResources(this.toolStripMenuItemRX1FilterConfigure, "toolStripMenuItemRX1FilterConfigure");
-            this.toolStripMenuItemRX1FilterConfigure.Click += new System.EventHandler(this.toolStripMenuItemRX1FilterConfigure_Click);
-            // 
-            // toolStripMenuItemRX1FilterReset
-            // 
-            this.toolStripMenuItemRX1FilterReset.Name = "toolStripMenuItemRX1FilterReset";
-            resources.ApplyResources(this.toolStripMenuItemRX1FilterReset, "toolStripMenuItemRX1FilterReset");
-            this.toolStripMenuItemRX1FilterReset.Click += new System.EventHandler(this.toolStripMenuItemRX1FilterReset_Click);
-            // 
-            // contextMenuStripFilterRX2
-            // 
-            this.contextMenuStripFilterRX2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripMenuItemRX2FilterConfigure,
-            this.toolStripMenuItemRX2FilterReset});
-            this.contextMenuStripFilterRX2.Name = "contextMenuStripFilterRX2";
-            resources.ApplyResources(this.contextMenuStripFilterRX2, "contextMenuStripFilterRX2");
-            // 
-            // toolStripMenuItemRX2FilterConfigure
-            // 
-            this.toolStripMenuItemRX2FilterConfigure.Name = "toolStripMenuItemRX2FilterConfigure";
-            resources.ApplyResources(this.toolStripMenuItemRX2FilterConfigure, "toolStripMenuItemRX2FilterConfigure");
-            this.toolStripMenuItemRX2FilterConfigure.Click += new System.EventHandler(this.toolStripMenuItemRX2FilterConfigure_Click);
-            // 
-            // toolStripMenuItemRX2FilterReset
-            // 
-            this.toolStripMenuItemRX2FilterReset.Name = "toolStripMenuItemRX2FilterReset";
-            resources.ApplyResources(this.toolStripMenuItemRX2FilterReset, "toolStripMenuItemRX2FilterReset");
-            this.toolStripMenuItemRX2FilterReset.Click += new System.EventHandler(this.toolStripMenuItemRX2FilterReset_Click);
-            // 
-            // timer_navigate
-            // 
-            this.timer_navigate.Tick += new System.EventHandler(this.timer_navigate_Tick);
-            // 
-            // ptbRX2Squelch
-            // 
-            resources.ApplyResources(this.ptbRX2Squelch, "ptbRX2Squelch");
-            this.ptbRX2Squelch.HeadImage = null;
-            this.ptbRX2Squelch.LargeChange = 1;
-            this.ptbRX2Squelch.Maximum = 0;
-            this.ptbRX2Squelch.Minimum = -160;
-            this.ptbRX2Squelch.Name = "ptbRX2Squelch";
-            this.ptbRX2Squelch.Orientation = System.Windows.Forms.Orientation.Horizontal;
-            this.ptbRX2Squelch.SmallChange = 1;
-            this.ptbRX2Squelch.TabStop = false;
-            this.ptbRX2Squelch.Value = -150;
-            this.ptbRX2Squelch.Scroll += new PowerSDR.PrettyTrackBar.ScrollHandler(this.ptbRX2Squelch_Scroll);
-            // 
             // panelFilter
             // 
             resources.ApplyResources(this.panelFilter, "panelFilter");
@@ -4354,24 +4372,6 @@ namespace PowerSDR
             this.radFilter10.Image = null;
             this.radFilter10.Name = "radFilter10";
             this.radFilter10.CheckedChanged += new System.EventHandler(this.radFilter10_CheckedChanged);
-            // 
-            // panelOptions
-            // 
-            resources.ApplyResources(this.panelOptions, "panelOptions");
-            this.panelOptions.BackColor = System.Drawing.Color.Transparent;
-            this.panelOptions.Controls.Add(this.chkSR);
-            this.panelOptions.Controls.Add(this.chkFWCATU);
-            this.panelOptions.Controls.Add(this.ckQuickPlay);
-            this.panelOptions.Controls.Add(this.chkMON);
-            this.panelOptions.Controls.Add(this.ckQuickRec);
-            this.panelOptions.Controls.Add(this.chkMUT);
-            this.panelOptions.Controls.Add(this.chkMOX);
-            this.panelOptions.Controls.Add(this.chkTUN);
-            this.panelOptions.Controls.Add(this.chkX2TR);
-            this.panelOptions.Controls.Add(this.comboTuneMode);
-            this.panelOptions.Controls.Add(this.chkFWCATUBypass);
-            this.panelOptions.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.panelOptions.Name = "panelOptions";
             // 
             // panelModeSpecificCW
             // 
@@ -5702,11 +5702,17 @@ namespace PowerSDR
             this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.Console_KeyUp);
             this.Resize += new System.EventHandler(this.Console_Resize);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Console_KeyDown);
+            ((System.ComponentModel.ISupportInitialize)(this.picSquelch)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picRX2Squelch)).EndInit();
+            this.contextMenuStripFilterRX1.ResumeLayout(false);
+            this.contextMenuStripFilterRX2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.ptbRX2Squelch)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ptbRX2RF)).EndInit();
+            this.panelOptions.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.ptbFilterShift)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ptbFilterWidth)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.udFilterHigh)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.udFilterLow)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.ptbRX2RF)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ptbCWSpeed)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.udCWPitch)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.udCWBreakInDelay)).EndInit();
@@ -5727,13 +5733,7 @@ namespace PowerSDR
             ((System.ComponentModel.ISupportInitialize)(this.ptbRX1Gain)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ptbVACRXGain)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ptbVACTXGain)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.picSquelch)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.picRX2Squelch)).EndInit();
-            this.contextMenuStripFilterRX1.ResumeLayout(false);
-            this.contextMenuStripFilterRX2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.ptbRX2Squelch)).EndInit();
             this.panelFilter.ResumeLayout(false);
-            this.panelOptions.ResumeLayout(false);
             this.panelModeSpecificCW.ResumeLayout(false);
             this.grpSemiBreakIn.ResumeLayout(false);
             this.panelAntenna.ResumeLayout(false);
@@ -6608,7 +6608,7 @@ namespace PowerSDR
 			a.Add("current_datetime_mode/"+ (int)current_datetime_mode);
 			a.Add("rx1_display_cal_offset/"+rx1_display_cal_offset.ToString("f3"));
 			a.Add("rx1_meter_cal_offset/"+rx1_meter_cal_offset);
-            a.Add("tx_display_cal_offset/" + tx_display_cal_offset.ToString("f3"));
+            //a.Add("tx_display_cal_offset/" + tx_display_cal_offset.ToString("f3"));
 
 			a.Add("txtMemoryQuick/"+ txtMemoryQuick.Text);		// save quick memory settings
 			a.Add("quick_save_mode/"+(int)quick_save_mode);
@@ -7409,9 +7409,9 @@ namespace PowerSDR
 					case "rx1_display_cal_offset":
 						RX1DisplayCalOffset = float.Parse(val);
 						break;
-                    case "tx_display_cal_offset":
-                        TXDisplayCalOffset = float.Parse(val);
-                        break;
+                  //  case "tx_display_cal_offset":
+                    //    TXDisplayCalOffset = float.Parse(val);
+                   //     break;
 					case "rx1_meter_cal_offset":
 						rx1_meter_cal_offset = float.Parse(val);
 						break;
@@ -18141,7 +18141,7 @@ namespace PowerSDR
 			//Display.RX2PreampOffset = rx2_preamp_offset[(int)rx2_preamp_mode];
 			Display.RX1DisplayCalOffset = rx1_level_table[(int)rx1_band][0]+rx1_path_offset+rx1_xvtr_gain_offset+rx1_loop_offset;
 			//Display.RX2DisplayCalOffset = rx2_level_table[(int)rx2_band][0]+rx2_path_offset+rx2_xvtr_gain_offset+rx2_loop_offset;
-            Display.TXDisplayCalOffset = tx_display_cal_offset;
+            //Display.TXDisplayCalOffset = tx_display_cal_offset;
             SetupForm.UpdateDisplayMeter();
         }
 
@@ -18838,7 +18838,7 @@ namespace PowerSDR
 			}
 		}
 
-        private float tx_display_cal_offset;					// display calibration offset per volume setting in dB
+      /*  private float tx_display_cal_offset;					// display calibration offset per volume setting in dB
         public float TXDisplayCalOffset
         {
             get { return tx_display_cal_offset; }
@@ -18848,7 +18848,7 @@ namespace PowerSDR
                 //Display.TXDisplayCalOffset = value;
                 UpdateDisplayOffsets();
             }
-        }
+        } */
 
 		private int display_cursor_x;						// x-coord of the cursor when over the display
 		public int DisplayCursorX
