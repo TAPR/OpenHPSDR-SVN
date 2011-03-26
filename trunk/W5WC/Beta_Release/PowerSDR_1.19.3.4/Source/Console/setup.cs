@@ -1660,6 +1660,7 @@ namespace PowerSDR
             tbMultiRXFilterAlpha_Scroll(this, e);
             tbTXZeroLineAlpha_Scroll(this, e);
             tbTXTextAlpha_Scroll(this, e);
+            checkHPSDRDefaults(this, e);
 
             for (int i = 0; i < 2; i++)
                 for (int j = 0; j < 2; j++)
@@ -25805,7 +25806,7 @@ namespace PowerSDR
                 grpGeneralHardwareSDR1000.Visible = false;
                 grpGeneralDDS.Visible = false;
                 btnWizard.Visible = true;
-                chkGeneralRXOnly.Checked = false;
+                //chkGeneralRXOnly.Checked = false;
                 chkGeneralRXOnly.Enabled = true;
                 grpHWSoftRock.Visible = false;
                 chkGeneralCustomFilter.Visible = false;
@@ -31781,7 +31782,6 @@ namespace PowerSDR
 
         private void chkPennyLane_CheckedChanged(object sender, System.EventArgs e)
         {
-
             int bits = JanusAudio.GetC1Bits();
             if (!chkPennyLane.Checked)
             {
@@ -31901,6 +31901,23 @@ namespace PowerSDR
                 radMercury12288MHz_CheckedChanged(sender, e);
             }
 
+            if (chkMercuryPresent.Checked && !radMercury10MHz.Checked && !radAtlas10MHz.Checked &&
+                !radPenny10MHz.Checked)
+            {
+                radMercury10MHz.Checked = true;
+                radMercury10MHz_CheckedChanged(sender, e);
+                radMercury12288MHz.Checked = true;
+                radMercury12288MHz_CheckedChanged(sender, e);
+            }
+
+            if (!chkPennyPresent.Checked && !chkPennyLane.Checked)
+            {
+                chkGeneralRXOnly.Checked = true;
+            }
+            else
+            {
+                chkGeneralRXOnly.Checked = false;
+            }
             return;
         }
 
@@ -31909,7 +31926,6 @@ namespace PowerSDR
             int bits = JanusAudio.GetC1Bits();
             if (!chkMercuryPresent.Checked)
             {
-
                 radMercury10MHz.Checked = false;
                 radMercury12288MHz.Checked = false;
                 radMercury10MHz.Enabled = false;
@@ -31964,7 +31980,6 @@ namespace PowerSDR
             }
 
         }
-
 
         private void radAtlas10MHz_CheckedChanged(object sender, System.EventArgs e)
         {
@@ -32027,7 +32042,6 @@ namespace PowerSDR
                 JanusAudio.SetC1Bits(bits);
             }
         }
-
 
         private void radPennyMic_CheckedChanged(object sender, System.EventArgs e)
         {
