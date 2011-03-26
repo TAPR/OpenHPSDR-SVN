@@ -216,6 +216,7 @@ namespace PowerSDR
 		HISTOGRAM,
 		PANAFALL,
 		PANASCOPE,
+        SPECTRASCOPE,
 		OFF,
 		LAST,
 	}
@@ -11912,13 +11913,13 @@ namespace PowerSDR
 				case DisplayMode.SPECTRUM:
 				case DisplayMode.HISTOGRAM:
 				case DisplayMode.WATERFALL:
+                case DisplayMode.SPECTRASCOPE:
 					if(chkDisplayAVG.Checked)
 						Display.ResetRX1DisplayAverage();
 					if(chkDisplayPeak.Checked)
 						Display.ResetRX1DisplayPeak();
 					break;
 				case DisplayMode.PANADAPTER:
-
 					break;
 			}
 
@@ -22506,6 +22507,7 @@ namespace PowerSDR
 						case DisplayMode.WATERFALL:
 						case DisplayMode.PANAFALL:
 						case DisplayMode.PANASCOPE:
+                        case DisplayMode.SPECTRASCOPE:
 							Display.DrawBackground();
 							break;
 					}
@@ -22531,6 +22533,7 @@ namespace PowerSDR
 						case DisplayMode.WATERFALL:
 						case DisplayMode.PANAFALL:
 						case DisplayMode.PANASCOPE:
+                        case DisplayMode.SPECTRASCOPE:
 							Display.DrawBackground();
 							break;
 					}
@@ -23575,7 +23578,7 @@ namespace PowerSDR
 		private float PixelToDb(float y)
 		{
 			if(chkSplitDisplay.Checked || Display.CurrentDisplayMode == DisplayMode.PANAFALL ||
-				Display.CurrentDisplayMode == DisplayMode.PANASCOPE)
+                Display.CurrentDisplayMode == DisplayMode.PANASCOPE)
 			{
 				if(y <= picDisplay.Height/2) y *= 2.0f;
 				else y = (y-picDisplay.Height/2)*2.0f;
@@ -25205,14 +25208,15 @@ namespace PowerSDR
 						{
 							case DisplayMode.SPECTRUM:
 							case DisplayMode.HISTOGRAM:
+                            case DisplayMode.SPECTRASCOPE:
 								fixed(float* ptr = &Display.new_display_data[0])
-									//DttSP.GetSpectrum(thread, ptr);
-                                DttSP.GetPanadapter(thread, ptr);
+									DttSP.GetSpectrum(thread, ptr);
+                                //DttSP.GetPanadapter(thread, ptr);
 								break;
 							case DisplayMode.WATERFALL:
 							case DisplayMode.PANADAPTER:
 							case DisplayMode.PANAFALL:
-							case DisplayMode.PANASCOPE:
+							case DisplayMode.PANASCOPE:                           
 								fixed(float* ptr = &Display.new_display_data[0])
 									DttSP.GetPanadapter(thread, ptr);
 								break;
@@ -26378,6 +26382,7 @@ namespace PowerSDR
 				case DisplayMode.WATERFALL:
 				case DisplayMode.PANAFALL:
 				case DisplayMode.PANASCOPE:
+                case DisplayMode.SPECTRASCOPE:
 					UpdatePeakText();
 					break;
 				default:
@@ -28284,7 +28289,12 @@ namespace PowerSDR
 					Display.CurrentDisplayMode = DisplayMode.PANASCOPE;
 					CalcDisplayFreq();
 					break;
-				case "Off":
+                case "Spectrascope":
+                    Display.CurrentDisplayMode = DisplayMode.SPECTRASCOPE;
+                    UpdateRXDisplayVars((int)udFilterLow.Value, (int)udFilterHigh.Value);
+                    //CalcDisplayFreq();
+                    break;
+                case "Off":
 					Display.CurrentDisplayMode = DisplayMode.OFF;
 					break;
 			}
@@ -28303,12 +28313,14 @@ namespace PowerSDR
 				case DisplayMode.WATERFALL:
 				case DisplayMode.PANAFALL:
 				case DisplayMode.PANASCOPE:
+                //case DisplayMode.SPECTRASCOPE:
 					switch(Display.CurrentDisplayMode)
 					{
 						case DisplayMode.PANADAPTER:
 						case DisplayMode.WATERFALL:
 						case DisplayMode.PANAFALL:
 						case DisplayMode.PANASCOPE:
+                        //case DisplayMode.SPECTRASCOPE:
 							break;
 						default:
 							RX1Filter = rx1_filter; // reset filter display limits
@@ -28397,7 +28409,7 @@ namespace PowerSDR
 					radio.GetDSPRX(0, 0).SpectrumPreFilter = true;
 					radio.GetDSPRX(1, 0).SpectrumPreFilter = true;
 					break;
-				default:
+               default:
 					chkDisplayAVG.Enabled = true;
 					if(chkDisplayAVG.Checked)
 						chkDisplayAVG.BackColor = button_selected_color;
@@ -28428,6 +28440,7 @@ namespace PowerSDR
 					case DisplayMode.WATERFALL:
 					case DisplayMode.PANAFALL:
 					case DisplayMode.PANASCOPE:
+                    case DisplayMode.SPECTRASCOPE:
 						btnZeroBeat.Enabled = true;
 						break;
 					default:
@@ -29279,6 +29292,7 @@ namespace PowerSDR
 				case DisplayMode.WATERFALL:
 				case DisplayMode.PANAFALL:
 				case DisplayMode.PANASCOPE:
+                case DisplayMode.SPECTRASCOPE:
 					Display.DrawBackground();
 					break;
 			}
@@ -29325,6 +29339,7 @@ namespace PowerSDR
 				case DisplayMode.WATERFALL:
 				case DisplayMode.PANAFALL:
 				case DisplayMode.PANASCOPE:
+                case DisplayMode.SPECTRASCOPE:
 					Display.DrawBackground();
 					break;
 			}
@@ -29847,6 +29862,7 @@ namespace PowerSDR
 					case DisplayMode.WATERFALL:
 					case DisplayMode.PANAFALL:
 					case DisplayMode.PANASCOPE:
+                    case DisplayMode.SPECTRASCOPE:
 						btnZeroBeat.Enabled = true; // only allow zerobeat when avg is on 
 						break;
 					default:
@@ -31925,6 +31941,7 @@ namespace PowerSDR
 				{
 					case DisplayMode.HISTOGRAM:
 					case DisplayMode.SPECTRUM:
+                    case DisplayMode.SPECTRASCOPE:
 						DisplayCursorX = e.X;
 						DisplayCursorY = e.Y;
 						float x = PixelToHz(e.X);
@@ -35330,6 +35347,7 @@ namespace PowerSDR
 				case DisplayMode.WATERFALL:
 				case DisplayMode.PANAFALL:
 				case DisplayMode.PANASCOPE:
+                case DisplayMode.SPECTRASCOPE:
 					if ( chkDisplayAVG.Checked ) 
 					{
 						spectrum_data = Display.rx1_average_buffer; 

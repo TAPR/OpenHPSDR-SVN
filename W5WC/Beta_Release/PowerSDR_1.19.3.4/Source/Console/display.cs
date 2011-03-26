@@ -1180,45 +1180,52 @@ namespace PowerSDR
 
 			//Graphics g = Graphics.FromImage(display_bitmap);
 			//g.SmoothingMode = SmoothingMode.AntiAlias;
-			bool update = true;
+			//bool update = true;
 			
 			if(!split_display)
 			{
 				switch(current_display_mode) 
 				{
 					case DisplayMode.SPECTRUM:
-						update = DrawSpectrum(e.Graphics, W, H, false);
+						DrawSpectrum(e.Graphics, W, H, false);
 						break;
 					case DisplayMode.PANADAPTER:
-						update = DrawPanadapter(e.Graphics, W, H, 1, false);
+                        //update = DrawPanadapter(e.Graphics, W, H, 1, false);
+                        DrawPanadapter(e.Graphics, W, H, 1, false);
 						break;
 					case DisplayMode.SCOPE:
-						update = DrawScope(e.Graphics, W, H, false);
+						DrawScope(e.Graphics, W, H, false);
 						break;
 					case DisplayMode.PHASE:
-						update = DrawPhase(e.Graphics, W, H, false);
+						DrawPhase(e.Graphics, W, H, false);
 						break;
 					case DisplayMode.PHASE2:
 						DrawPhase2(e.Graphics, W, H, false);
 						break;
 					case DisplayMode.WATERFALL:
-						update = DrawWaterfall(e.Graphics, W, H, 1, false);
+						DrawWaterfall(e.Graphics, W, H, 1, false);
 						break;
 					case DisplayMode.HISTOGRAM:
-						update = DrawHistogram(e.Graphics, W, H);
+						DrawHistogram(e.Graphics, W, H);
 						break;
 					case DisplayMode.PANAFALL:
 						split_display = true;
-						update = DrawPanadapter(e.Graphics, W, H/2, 1, false);
-						update = DrawWaterfall(e.Graphics, W, H/2, 1, true);
+						DrawPanadapter(e.Graphics, W, H / 2, 1, false);
+						DrawWaterfall(e.Graphics, W, H / 2, 1, true);
 						split_display = false;
 						break;
 					case DisplayMode.PANASCOPE:
 						split_display = true;
-						update = DrawPanadapter(e.Graphics, W, H/2, 1, false);
-						update = DrawScope(e.Graphics, W, H/2, true);
+						DrawPanadapter(e.Graphics, W, H / 2, 1, false);
+						DrawScope(e.Graphics, W, H / 2, true);
 						split_display = false;
 						break;
+                    case DisplayMode.SPECTRASCOPE:
+                        split_display = true;                        
+                        DrawSpectrum(e.Graphics, W, H / 2, false);
+                        DrawScope(e.Graphics, W, H / 2, true);
+                        split_display = false;
+                        break;
 					case DisplayMode.OFF:
 						//Thread.Sleep(1000);
 						break;
@@ -1231,25 +1238,25 @@ namespace PowerSDR
 				switch(current_display_mode)
 				{
 					case DisplayMode.SPECTRUM:
-						update = DrawSpectrum(e.Graphics, W, H/2, false);
+						DrawSpectrum(e.Graphics, W, H/2, false);
 						break;
 					case DisplayMode.PANADAPTER:
-						update = DrawPanadapter(e.Graphics, W, H/2, 1, false);
+						DrawPanadapter(e.Graphics, W, H/2, 1, false);
 						break;
 					case DisplayMode.SCOPE:
-						update = DrawScope(e.Graphics, W, H/2, false);
+						DrawScope(e.Graphics, W, H/2, false);
 						break;
 					case DisplayMode.PHASE:
-						update = DrawPhase(e.Graphics, W, H/2, false);
+						DrawPhase(e.Graphics, W, H/2, false);
 						break;
 					case DisplayMode.PHASE2:
 						DrawPhase2(e.Graphics, W, H/2, false);
 						break;
 					case DisplayMode.WATERFALL:
-						update = DrawWaterfall(e.Graphics, W, H/2, 1, false);
+						DrawWaterfall(e.Graphics, W, H/2, 1, false);
 						break;
 					case DisplayMode.HISTOGRAM:
-						update = DrawHistogram(e.Graphics, W, H/2);
+						DrawHistogram(e.Graphics, W, H/2);
 						break;
 					case DisplayMode.OFF:
 						DrawOffBackground(e.Graphics, W, H/2, false);
@@ -1261,25 +1268,25 @@ namespace PowerSDR
 				switch(current_display_mode_bottom)
 				{
 					case DisplayMode.SPECTRUM:
-						update = DrawSpectrum(e.Graphics, W, H/2, true);
+						DrawSpectrum(e.Graphics, W, H/2, true);
 						break;
 					case DisplayMode.PANADAPTER:
-						update = DrawPanadapter(e.Graphics, W, H/2, 2, true);
+						DrawPanadapter(e.Graphics, W, H/2, 2, true);
 						break;
 					case DisplayMode.SCOPE:
-						update = DrawScope(e.Graphics, W, H/2, true);
+						DrawScope(e.Graphics, W, H/2, true);
 						break;
 					case DisplayMode.PHASE:
-						update = DrawPhase(e.Graphics, W, H/2, true);
+						DrawPhase(e.Graphics, W, H/2, true);
 						break;
 					case DisplayMode.PHASE2:
 						DrawPhase2(e.Graphics, W, H/2, true);
 						break;
 					case DisplayMode.WATERFALL:
-						update = DrawWaterfall(e.Graphics, W, H/2, 2, true);
+						DrawWaterfall(e.Graphics, W, H/2, 2, true);
 						break;
 					case DisplayMode.HISTOGRAM:
-						update = DrawHistogram(e.Graphics, W, H/2);
+						DrawHistogram(e.Graphics, W, H/2);
 						break;
 					case DisplayMode.OFF:
 						DrawOffBackground(e.Graphics, W, H/2, true);
@@ -1289,14 +1296,14 @@ namespace PowerSDR
 				}
 			}
 
-			if(update)
+			/*if(update)
 			{
 				//e.Graphics.DrawImage(display_bmp, 0, 0);
 			}
 			else
 			{
 				Debug.WriteLine("display update = false");
-			}
+			}*/
 		}
 
 		private static void UpdateDisplayPeak(float[] buffer, float[] new_data) 
