@@ -1196,6 +1196,9 @@ namespace PowerSDR
 					case DisplayMode.SCOPE:
 						DrawScope(e.Graphics, W, H, false);
 						break;
+                    case DisplayMode.SCOPE2:
+                        DrawScope2(e.Graphics, W, H, false);
+                        break;
 					case DisplayMode.PHASE:
 						DrawPhase(e.Graphics, W, H, false);
 						break;
@@ -3748,27 +3751,28 @@ namespace PowerSDR
 
 			Point[] points = new Point[W*2];			// create Point array
 			for(int i=0; i<W; i++)						// fill point array
-			{	
-				int pixel = 0;
-				if(bottom) pixel = (int)(H/2 * scope_max[i]);
-				else pixel = (int)(H/2 * scope_max[i]);
-				int y = H/2 - pixel;
-				points[i].X = i;
-				points[i].Y = y;
-				if(bottom) points[i].Y += H;
+			{
+                int pixel = 0;
+                if (bottom) pixel = (int)(H / 2 * scope_max[i]);
+                else pixel = (int)(H / 2 * scope_max[i]);
+                int y = H / 2 - pixel;
+                points[i].X = i;
+                points[i].Y = y;
+                if (bottom) points[i].Y += H;
 
-				if(bottom) pixel = (int)(H/2 * scope_min[i]);
-				else pixel = (int)(H/2 * scope_min[i]);
-				y = H/2 - pixel;
-				points[W*2-1-i].X = i;
-				points[W*2-1-i].Y = y;
-				if(bottom)points[W*2-1-i].Y += H;
-				//if(points[W*2-1-i].Y == points[i].Y)
-				//	points[W*2-1-i].Y += 1;
+                if (bottom) pixel = (int)(H / 2 * scope_min[i]);
+                else pixel = (int)(H / 2 * scope_min[i]);
+                y = H / 2 - pixel;
+                points[W * 2 - 1 - i].X = i;
+                points[W * 2 - 1 - i].Y = y;
+                if (bottom) points[W * 2 - 1 - i].Y += H; 
+                //if(points[W*2-1-i].Y == points[i].Y)
+                //	points[W*2-1-i].Y += 1; 
 			}
 
 			// draw the connected points
-			g.DrawLines(data_line_pen, points);
+            g.DrawCurve(data_line_pen, points);
+			//g.DrawLines(data_line_pen, points);
 			g.FillPolygon(new SolidBrush(data_line_pen.Color), points);
 
 			// draw long cursor
@@ -3785,6 +3789,130 @@ namespace PowerSDR
 
 			return true;
 		}
+
+        private static float[] scope2_min = new float[W];
+        public static float[] Scope2Min
+        {
+            get { return scope2_min; }
+            set { scope2_min = value; }
+        }
+        private static float[] scope2_max = new float[W];
+        public static float[] Scope2Max
+        {
+            get { return scope2_max; }
+            set { scope2_max = value; }
+        }
+
+        unsafe private static bool DrawScope2(Graphics g, int W, int H, bool bottom)
+        {
+            if (scope_min.Length < W)
+            {
+                scope_min = new float[W];
+                Audio.ScopeMin = scope_min;
+            }
+
+            if (scope_max.Length < W)
+            {
+                scope_max = new float[W];
+                Audio.ScopeMax = scope_max;
+            }
+
+            if (scope2_min.Length < W)
+            {
+                scope2_min = new float[W];
+                Audio.Scope2Min = scope2_min;
+            }
+            if (scope2_max.Length < W)
+            {
+                scope2_max = new float[W];
+                Audio.Scope2Max = scope2_max;
+            }
+
+            //DrawScopeGrid(ref g, W, H, bottom);
+
+            Point[] points = new Point[W]; // * 2];			// create Point array
+           /* for (int i = 0; i < W; i++)						// fill point array
+            {
+                int pixel = 0;
+                int pixel2 = 0;
+
+                pixel = (int)(H / 2 * scope_max[i]);
+                int y = H / 2 - pixel;
+              
+                pixel2 = (int)(H / 2 * scope2_max[i]);
+                int x = H / 2 - pixel2;
+
+                points[i].X = x; //x; //Horizontal
+                points[i].Y = y; //y; //Vertical    */             
+
+
+              /*  pixel = (int)(H / 2 * scope_min[i]);
+                y = H / 2 - pixel;
+
+                pixel2 = (int)(H / 2 * scope2_min[i]);
+                x = H / 2 - pixel2;
+
+                points[W * 2 - 1 - i].X = x; //-Horizontal
+                points[W * 2 - 1 - i].Y = y; //-Vertical           
+            }*/
+            int y1 = (int)(H * 0.25f);
+            int y2 = (int)(H * 0.5f);
+            int y3 = (int)(H * 0.75f);
+            g.DrawLine(new Pen(Color.FromArgb(64, 64, 64)), 0, y1, W, y1);
+            g.DrawLine(new Pen(Color.FromArgb(48, 48, 48)), 0, y2, W, y2);
+            g.DrawLine(new Pen(Color.FromArgb(64, 64, 64)), 0, y3, W, y3);
+
+            Pen waveform_line_pen = new Pen(Color.LightGreen, 0.2f);
+
+            int samples = scope2_max.Length;
+            float xScale = (float)samples / W;
+            float yScale = (float)H / 4;
+
+            // draw the left input samples
+            points[0].X = 0;
+            points[0].Y = (int)(y1 - (scope2_max[0] * yScale));
+            for (int x = 0; x < W; x++)
+            {
+                int i = (int)Math.Truncate((float)x * xScale);
+                int y = (int)(y1 - (scope2_max[i] * yScale));
+                points[x].X = x;
+                points[x].Y = y;
+            }
+
+            // draw the connected points
+            //g.DrawPolygon(data_line_pen, points);
+            g.DrawLines(waveform_line_pen, points);
+            //g.FillPolygon(new SolidBrush(data_line_pen.Color), points);
+            // draw the right input samples
+
+            points[0].X = 0;
+            points[0].Y = (int)(y3 - (scope_max[0] * yScale));
+            for (int x = 0; x < W; x++)
+            {
+                int i = (int)Math.Truncate((float)x * xScale);
+                int y = (int)(y3 - (scope_max[i] * yScale));
+                points[x].X = x;
+                points[x].Y = y;
+            }
+           // g.DrawLines(waveform_line_pen, points);    // draw the waveform
+            g.DrawCurve(waveform_line_pen, points);
+            waveform_line_pen.Dispose();
+            waveform_line_pen = null;
+
+            // draw long cursor
+         /*   if (current_click_tune_mode != ClickTuneMode.Off)
+            {
+                Pen p;
+                if (current_click_tune_mode == ClickTuneMode.VFOA)
+                    p = new Pen(grid_text_color);
+                else p = new Pen(Color.Red);
+                if (bottom) g.DrawLine(p, display_cursor_x, 0, display_cursor_x, H + H);
+                else g.DrawLine(p, display_cursor_x, 0, display_cursor_x, H);
+                g.DrawLine(p, 0, display_cursor_y, W, display_cursor_y);
+            }*/
+
+            return true;
+        }
 
 		unsafe private static bool DrawPhase(Graphics g, int W, int H, bool bottom)
 		{

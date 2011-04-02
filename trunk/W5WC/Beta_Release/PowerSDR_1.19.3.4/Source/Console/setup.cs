@@ -5371,10 +5371,9 @@ namespace PowerSDR
             // 
             // txtDisplayOffset
             // 
-            this.txtDisplayOffset.BackColor = System.Drawing.Color.Gray;
-            this.txtDisplayOffset.Enabled = false;
+            this.txtDisplayOffset.BackColor = System.Drawing.Color.WhiteSmoke;
             this.txtDisplayOffset.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtDisplayOffset.ForeColor = System.Drawing.Color.White;
+            this.txtDisplayOffset.ForeColor = System.Drawing.Color.Black;
             this.txtDisplayOffset.Location = new System.Drawing.Point(100, 118);
             this.txtDisplayOffset.Name = "txtDisplayOffset";
             this.txtDisplayOffset.ReadOnly = true;
@@ -5383,10 +5382,9 @@ namespace PowerSDR
             // 
             // txtMeterOffset
             // 
-            this.txtMeterOffset.BackColor = System.Drawing.Color.Gray;
-            this.txtMeterOffset.Enabled = false;
+            this.txtMeterOffset.BackColor = System.Drawing.Color.WhiteSmoke;
             this.txtMeterOffset.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtMeterOffset.ForeColor = System.Drawing.Color.White;
+            this.txtMeterOffset.ForeColor = System.Drawing.Color.Black;
             this.txtMeterOffset.Location = new System.Drawing.Point(100, 92);
             this.txtMeterOffset.Name = "txtMeterOffset";
             this.txtMeterOffset.ReadOnly = true;
@@ -25946,7 +25944,7 @@ namespace PowerSDR
 
         public void UpdateDisplayMeter()
         {
-            //txtMeterOffset.Text = console.MultiMeterCalOffset.ToString();
+            //txtMeterOffset.Text = console.PreampOffset.ToString();
             //txtDisplayOffset.Text = console.RX1DisplayCalOffset.ToString();
             MeterOffset = console.MultiMeterCalOffset;
             DisplayOffset = console.RX1DisplayCalOffset;
