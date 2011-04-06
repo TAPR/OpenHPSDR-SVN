@@ -3817,11 +3817,11 @@ namespace PowerSDR
                 Audio.ScopeMax = scope_max;
             }
 
-            if (scope2_min.Length < W)
-            {
-                scope2_min = new float[W];
-                Audio.Scope2Min = scope2_min;
-            }
+           // if (scope2_min.Length < W)
+           // {
+            //    scope2_min = new float[W];
+            //    Audio.Scope2Min = scope2_min;
+            //}
             if (scope2_max.Length < W)
             {
                 scope2_max = new float[W];
@@ -3886,16 +3886,19 @@ namespace PowerSDR
             // draw the right input samples
 
             points[0].X = 0;
-            points[0].Y = (int)(y3 - (scope_max[0] * yScale));
+            points[0].Y = (int)(y2 - (scope_max[0] * yScale));
             for (int x = 0; x < W; x++)
             {
                 int i = (int)Math.Truncate((float)x * xScale);
                 int y = (int)(y3 - (scope_max[i] * yScale));
-                points[x].X = x;
-                points[x].Y = y;
+                //int X = (int)(scope2_max[i] * W);
+                points[x].X = x;// (int)(scope2_max[x]);
+                points[x].Y = y;// y;
             }
-           // g.DrawLines(waveform_line_pen, points);    // draw the waveform
-            g.DrawCurve(waveform_line_pen, points);
+           g.DrawLines(waveform_line_pen, points);    // draw the waveform
+            //g.DrawCurve(waveform_line_pen, points);
+            //g.DrawPolygon(waveform_line_pen, points);
+            //g.FillPolygon(new SolidBrush(waveform_line_pen.Color), points);
             waveform_line_pen.Dispose();
             waveform_line_pen = null;
 
@@ -4398,27 +4401,27 @@ namespace PowerSDR
                     //points[W] = points[W-1];
                     //points[W+1] = points[W-1];
                     data_line_pen.Color = data_line_color;
-                    //g.DrawLines(data_line_pen, points); 
-                    g.InterpolationMode = InterpolationMode.HighQualityBicubic;
-                    g.SmoothingMode = SmoothingMode.AntiAlias;
-                    for (int i = 1; i < W; i++)
-                    {
-                        g.DrawLine(data_line_pen, points[i - 1], points[i]);
-                    }
-                    g.SmoothingMode = SmoothingMode.Default;
-                    g.InterpolationMode = InterpolationMode.Default;
+                    g.DrawLines(data_line_pen, points); 
+                   // g.InterpolationMode = InterpolationMode.HighQualityBicubic;
+                   // g.SmoothingMode = SmoothingMode.AntiAlias;
+                   // for (int i = 1; i < W; i++)
+                    //{
+                    //    g.DrawLine(data_line_pen, points[i - 1], points[i]);
+                   // }
+                   // g.SmoothingMode = SmoothingMode.Default;
+                   // g.InterpolationMode = InterpolationMode.Default;
                 }
                 else
                 {
-                    g.InterpolationMode = InterpolationMode.HighQualityBicubic;
-                    g.SmoothingMode = SmoothingMode.AntiAlias;
-                    for (int i = 1; i < W; i++)
-                    {
-                        g.DrawLine(data_line_pen, points[i - 1], points[i]);
-                    }
-                    g.SmoothingMode = SmoothingMode.Default;
-                    g.InterpolationMode = InterpolationMode.Default;
-                    //g.DrawLines(data_line_pen, points);
+                   // g.InterpolationMode = InterpolationMode.HighQualityBicubic;
+                   // g.SmoothingMode = SmoothingMode.AntiAlias;
+                   // for (int i = 1; i < W; i++)
+                   // {
+                   //     g.DrawLine(data_line_pen, points[i - 1], points[i]);
+                   // }
+                   // g.SmoothingMode = SmoothingMode.Default;
+                   // g.InterpolationMode = InterpolationMode.Default;
+                    g.DrawLines(data_line_pen, points);
                 }
             }
             else
@@ -4441,27 +4444,27 @@ namespace PowerSDR
                     //points[W] = points[W-1];
                     //points[W+1] = points[W-1];
                     tx_data_line_pen.Color = tx_data_line_color;
-                    //g.DrawLines(data_line_pen, points); 
-                    g.InterpolationMode = InterpolationMode.HighQualityBicubic;
-                    g.SmoothingMode = SmoothingMode.AntiAlias;
-                    for (int i = 1; i < W; i++)
-                    {
-                        g.DrawLine(tx_data_line_pen, points[i - 1], points[i]);
-                    }
-                    g.SmoothingMode = SmoothingMode.Default;
-                    g.InterpolationMode = InterpolationMode.Default;
+                    g.DrawLines(data_line_pen, points); 
+                   // g.InterpolationMode = InterpolationMode.HighQualityBicubic;
+                   // g.SmoothingMode = SmoothingMode.AntiAlias;
+                   // for (int i = 1; i < W; i++)
+                    //{
+                   //     g.DrawLine(tx_data_line_pen, points[i - 1], points[i]);
+                   // }
+                   // g.SmoothingMode = SmoothingMode.Default;
+                   // g.InterpolationMode = InterpolationMode.Default;
                 }
                 else
                 {
-                    g.InterpolationMode = InterpolationMode.HighQualityBicubic;
-                    g.SmoothingMode = SmoothingMode.AntiAlias;
-                    for (int i = 1; i < W; i++)
-                    {
-                        g.DrawLine(tx_data_line_pen, points[i - 1], points[i]);
-                    }
-                    g.SmoothingMode = SmoothingMode.Default;
-                    g.InterpolationMode = InterpolationMode.Default;
-                    //g.DrawLines(data_line_pen, points);
+                   // g.InterpolationMode = InterpolationMode.HighQualityBicubic;
+                   // g.SmoothingMode = SmoothingMode.AntiAlias;
+                   // for (int i = 1; i < W; i++)
+                   // {
+                   //     g.DrawLine(tx_data_line_pen, points[i - 1], points[i]);
+                   // }
+                   // g.SmoothingMode = SmoothingMode.Default;
+                   // g.InterpolationMode = InterpolationMode.Default;
+                    g.DrawLines(data_line_pen, points);
                 }
             }
 

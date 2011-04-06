@@ -815,8 +815,7 @@ namespace PowerSDR
 		private System.Windows.Forms.CheckBoxTS chkTUN;
 		private System.Windows.Forms.CheckBoxTS chkMOX;
 		private System.Windows.Forms.NumericUpDownTS udXIT;
-		private System.Windows.Forms.NumericUpDownTS udRIT;
-		private System.Windows.Forms.CheckBoxTS chkMUT;
+        private System.Windows.Forms.NumericUpDownTS udRIT;
 		private System.Windows.Forms.CheckBoxTS chkXIT;
 		private System.Windows.Forms.CheckBoxTS chkRIT;
         private System.Windows.Forms.LabelTS lblPWR;
@@ -1109,10 +1108,11 @@ namespace PowerSDR
         private RadioButtonTS radDisplayZoom1x;
         private CheckBoxTS chkFWCATUBypass;
         private CheckBoxTS chkFWCATU;
-        private CheckBoxTS chkBCI;
         private CheckBoxTS chkPLTone;
         private CheckBoxTS chkMicMute;
         private TextBoxTS txtCPUMeter;
+        private CheckBoxTS chkBCI;
+        private CheckBoxTS chkMUT;
 		private System.Windows.Forms.CheckBoxTS chkFullDuplex;
 
 		#endregion
@@ -1632,7 +1632,6 @@ namespace PowerSDR
             this.ckQuickPlay = new System.Windows.Forms.CheckBoxTS();
             this.chkMON = new System.Windows.Forms.CheckBoxTS();
             this.ckQuickRec = new System.Windows.Forms.CheckBoxTS();
-            this.chkMUT = new System.Windows.Forms.CheckBoxTS();
             this.chkMOX = new System.Windows.Forms.CheckBoxTS();
             this.chkTUN = new System.Windows.Forms.CheckBoxTS();
             this.chkX2TR = new System.Windows.Forms.CheckBoxTS();
@@ -1785,7 +1784,6 @@ namespace PowerSDR
             this.radDisplayZoom4x = new System.Windows.Forms.RadioButtonTS();
             this.radDisplayZoom2x = new System.Windows.Forms.RadioButtonTS();
             this.radDisplayZoom1x = new System.Windows.Forms.RadioButtonTS();
-            this.chkBCI = new System.Windows.Forms.CheckBoxTS();
             this.chkPLTone = new System.Windows.Forms.CheckBoxTS();
             this.chkMicMute = new System.Windows.Forms.CheckBoxTS();
             this.picSquelch = new System.Windows.Forms.PictureBox();
@@ -1939,6 +1937,8 @@ namespace PowerSDR
             this.radBandVHF0 = new System.Windows.Forms.RadioButtonTS();
             this.panelRX2DSP = new System.Windows.Forms.PanelTS();
             this.ptbSquelch = new PowerSDR.PrettyTrackBar();
+            this.chkBCI = new System.Windows.Forms.CheckBoxTS();
+            this.chkMUT = new System.Windows.Forms.CheckBoxTS();
             ((System.ComponentModel.ISupportInitialize)(this.ptbRX2RF)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ptbFilterShift)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ptbFilterWidth)).BeginInit();
@@ -2210,16 +2210,6 @@ namespace PowerSDR
             this.ckQuickRec.Name = "ckQuickRec";
             this.toolTip1.SetToolTip(this.ckQuickRec, resources.GetString("ckQuickRec.ToolTip"));
             this.ckQuickRec.CheckedChanged += new System.EventHandler(this.ckQuickRec_CheckedChanged);
-            // 
-            // chkMUT
-            // 
-            resources.ApplyResources(this.chkMUT, "chkMUT");
-            this.chkMUT.FlatAppearance.BorderSize = 0;
-            this.chkMUT.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.chkMUT.Image = null;
-            this.chkMUT.Name = "chkMUT";
-            this.toolTip1.SetToolTip(this.chkMUT, resources.GetString("chkMUT.ToolTip"));
-            this.chkMUT.CheckedChanged += new System.EventHandler(this.chkMUT_CheckedChanged);
             // 
             // chkMOX
             // 
@@ -4081,18 +4071,6 @@ namespace PowerSDR
             this.radDisplayZoom1x.UseVisualStyleBackColor = true;
             this.radDisplayZoom1x.CheckedChanged += new System.EventHandler(this.radDisplayZoom1x_CheckedChanged);
             // 
-            // chkBCI
-            // 
-            resources.ApplyResources(this.chkBCI, "chkBCI");
-            this.chkBCI.BackColor = System.Drawing.Color.Transparent;
-            this.chkBCI.FlatAppearance.BorderSize = 0;
-            this.chkBCI.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.chkBCI.Image = null;
-            this.chkBCI.Name = "chkBCI";
-            this.toolTip1.SetToolTip(this.chkBCI, resources.GetString("chkBCI.ToolTip"));
-            this.chkBCI.UseVisualStyleBackColor = false;
-            this.chkBCI.CheckedChanged += new System.EventHandler(this.chkBCI_CheckedChanged);
-            // 
             // chkPLTone
             // 
             resources.ApplyResources(this.chkPLTone, "chkPLTone");
@@ -4201,7 +4179,6 @@ namespace PowerSDR
             this.panelOptions.Controls.Add(this.ckQuickPlay);
             this.panelOptions.Controls.Add(this.chkMON);
             this.panelOptions.Controls.Add(this.ckQuickRec);
-            this.panelOptions.Controls.Add(this.chkMUT);
             this.panelOptions.Controls.Add(this.chkMOX);
             this.panelOptions.Controls.Add(this.chkTUN);
             this.panelOptions.Controls.Add(this.chkX2TR);
@@ -4425,6 +4402,7 @@ namespace PowerSDR
             // 
             resources.ApplyResources(this.panelAntenna, "panelAntenna");
             this.panelAntenna.BackColor = System.Drawing.Color.Transparent;
+            this.panelAntenna.Controls.Add(this.chkBCI);
             this.panelAntenna.Controls.Add(this.lblAntRX2);
             this.panelAntenna.Controls.Add(this.lblAntRX1);
             this.panelAntenna.Controls.Add(this.lblAntTX);
@@ -4649,7 +4627,7 @@ namespace PowerSDR
             // 
             resources.ApplyResources(this.panelDSP, "panelDSP");
             this.panelDSP.BackColor = System.Drawing.Color.Transparent;
-            this.panelDSP.Controls.Add(this.chkBCI);
+            this.panelDSP.Controls.Add(this.chkMUT);
             this.panelDSP.Controls.Add(this.chkNR);
             this.panelDSP.Controls.Add(this.chkDSPNB2);
             this.panelDSP.Controls.Add(this.chkBIN);
@@ -5651,6 +5629,26 @@ namespace PowerSDR
             this.ptbSquelch.Value = -150;
             this.ptbSquelch.Scroll += new PowerSDR.PrettyTrackBar.ScrollHandler(this.ptbSquelch_Scroll);
             // 
+            // chkBCI
+            // 
+            resources.ApplyResources(this.chkBCI, "chkBCI");
+            this.chkBCI.BackColor = System.Drawing.Color.Transparent;
+            this.chkBCI.FlatAppearance.BorderSize = 0;
+            this.chkBCI.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.chkBCI.Image = null;
+            this.chkBCI.Name = "chkBCI";
+            this.toolTip1.SetToolTip(this.chkBCI, resources.GetString("chkBCI.ToolTip"));
+            this.chkBCI.UseVisualStyleBackColor = false;
+            // 
+            // chkMUT
+            // 
+            resources.ApplyResources(this.chkMUT, "chkMUT");
+            this.chkMUT.FlatAppearance.BorderSize = 0;
+            this.chkMUT.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.chkMUT.Image = null;
+            this.chkMUT.Name = "chkMUT";
+            this.toolTip1.SetToolTip(this.chkMUT, resources.GetString("chkMUT.ToolTip"));
+            // 
             // Console
             // 
             resources.ApplyResources(this, "$this");
@@ -5687,7 +5685,6 @@ namespace PowerSDR
             this.Controls.Add(this.chkRX2);
             this.Controls.Add(this.panelDisplay);
             this.Controls.Add(this.ptbSquelch);
-            this.Controls.Add(this.panelAntenna);
             this.Controls.Add(this.panelMode);
             this.Controls.Add(this.panelBandHF);
             this.Controls.Add(this.panelBandVHF);
@@ -5695,6 +5692,7 @@ namespace PowerSDR
             this.Controls.Add(this.panelModeSpecificPhone);
             this.Controls.Add(this.panelModeSpecificDigital);
             this.Controls.Add(this.panelModeSpecificCW);
+            this.Controls.Add(this.panelAntenna);
             this.KeyPreview = true;
             this.Menu = this.mainMenu1;
             this.Name = "Console";
@@ -19154,7 +19152,8 @@ namespace PowerSDR
 
                     case Model.HPSDR:
                     case Model.HERMES:
-                        MinFreq = Math.Max(if_freq, 0.000001);
+                        IFFreq = 0.000001;
+                        MinFreq = 0.000001;
                         MaxFreq = 65.0;
                         SetComboPreampForHPSDR();
                         comboPreamp.Text = "On";
