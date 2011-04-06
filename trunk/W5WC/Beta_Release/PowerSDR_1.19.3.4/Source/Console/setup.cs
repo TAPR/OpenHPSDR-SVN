@@ -1702,6 +1702,14 @@ namespace PowerSDR
             this.tpGeneral = new System.Windows.Forms.TabPage();
             this.tcGeneral = new System.Windows.Forms.TabControl();
             this.tpGeneralHardware = new System.Windows.Forms.TabPage();
+            this.grpGeneralDDS = new System.Windows.Forms.GroupBoxTS();
+            this.chkGenDDSExpert = new System.Windows.Forms.CheckBoxTS();
+            this.udDDSCorrection = new System.Windows.Forms.NumericUpDownTS();
+            this.lblClockCorrection = new System.Windows.Forms.LabelTS();
+            this.udDDSIFFreq = new System.Windows.Forms.NumericUpDownTS();
+            this.lblIFFrequency = new System.Windows.Forms.LabelTS();
+            this.udDDSPLLMult = new System.Windows.Forms.NumericUpDownTS();
+            this.lblPLLMult = new System.Windows.Forms.LabelTS();
             this.grpMetisAddr = new System.Windows.Forms.GroupBoxTS();
             this.labelTS16 = new System.Windows.Forms.LabelTS();
             this.labelTS9 = new System.Windows.Forms.LabelTS();
@@ -1728,14 +1736,6 @@ namespace PowerSDR
             this.grpSI570 = new System.Windows.Forms.GroupBoxTS();
             this.labelTS8 = new System.Windows.Forms.LabelTS();
             this.udFXtal = new System.Windows.Forms.NumericUpDownTS();
-            this.grpGeneralDDS = new System.Windows.Forms.GroupBoxTS();
-            this.chkGenDDSExpert = new System.Windows.Forms.CheckBoxTS();
-            this.udDDSCorrection = new System.Windows.Forms.NumericUpDownTS();
-            this.lblClockCorrection = new System.Windows.Forms.LabelTS();
-            this.udDDSIFFreq = new System.Windows.Forms.NumericUpDownTS();
-            this.lblIFFrequency = new System.Windows.Forms.LabelTS();
-            this.udDDSPLLMult = new System.Windows.Forms.NumericUpDownTS();
-            this.lblPLLMult = new System.Windows.Forms.LabelTS();
             this.groupBoxHPSDRHW = new System.Windows.Forms.GroupBoxTS();
             this.chkPennyLane = new System.Windows.Forms.CheckBoxTS();
             this.chkExcaliburPresent = new System.Windows.Forms.CheckBoxTS();
@@ -3136,6 +3136,10 @@ namespace PowerSDR
             this.tpGeneral.SuspendLayout();
             this.tcGeneral.SuspendLayout();
             this.tpGeneralHardware.SuspendLayout();
+            this.grpGeneralDDS.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.udDDSCorrection)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.udDDSIFFreq)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.udDDSPLLMult)).BeginInit();
             this.grpMetisAddr.SuspendLayout();
             this.grpOzyType.SuspendLayout();
             this.grpFRSRegion.SuspendLayout();
@@ -3144,10 +3148,6 @@ namespace PowerSDR
             ((System.ComponentModel.ISupportInitialize)(this.udSoftRockCenterFreq)).BeginInit();
             this.grpSI570.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.udFXtal)).BeginInit();
-            this.grpGeneralDDS.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.udDDSCorrection)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.udDDSIFFreq)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.udDDSPLLMult)).BeginInit();
             this.groupBoxHPSDRHW.SuspendLayout();
             this.grpGeneralHardwareFLEX5000.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.udF3KFanTempThresh)).BeginInit();
@@ -3543,16 +3543,166 @@ namespace PowerSDR
             this.tpGeneralHardware.Controls.Add(this.chkGeneralRXOnly);
             this.tpGeneralHardware.Controls.Add(this.grpHWSoftRock);
             this.tpGeneralHardware.Controls.Add(this.grpSI570);
-            this.tpGeneralHardware.Controls.Add(this.grpGeneralDDS);
             this.tpGeneralHardware.Controls.Add(this.groupBoxHPSDRHW);
             this.tpGeneralHardware.Controls.Add(this.grpGeneralHardwareFLEX5000);
             this.tpGeneralHardware.Controls.Add(this.grpGeneralHardwareSDR1000);
+            this.tpGeneralHardware.Controls.Add(this.grpGeneralDDS);
             this.tpGeneralHardware.Location = new System.Drawing.Point(4, 22);
             this.tpGeneralHardware.Name = "tpGeneralHardware";
             this.tpGeneralHardware.Size = new System.Drawing.Size(592, 318);
             this.tpGeneralHardware.TabIndex = 0;
             this.tpGeneralHardware.Text = "Hardware Config";
             this.tpGeneralHardware.Paint += new System.Windows.Forms.PaintEventHandler(this.tpGeneralHardware_Paint);
+            // 
+            // grpGeneralDDS
+            // 
+            this.grpGeneralDDS.Controls.Add(this.chkGenDDSExpert);
+            this.grpGeneralDDS.Controls.Add(this.udDDSCorrection);
+            this.grpGeneralDDS.Controls.Add(this.lblClockCorrection);
+            this.grpGeneralDDS.Controls.Add(this.udDDSIFFreq);
+            this.grpGeneralDDS.Controls.Add(this.lblIFFrequency);
+            this.grpGeneralDDS.Controls.Add(this.udDDSPLLMult);
+            this.grpGeneralDDS.Controls.Add(this.lblPLLMult);
+            this.grpGeneralDDS.Location = new System.Drawing.Point(326, 8);
+            this.grpGeneralDDS.Name = "grpGeneralDDS";
+            this.grpGeneralDDS.Size = new System.Drawing.Size(160, 146);
+            this.grpGeneralDDS.TabIndex = 4;
+            this.grpGeneralDDS.TabStop = false;
+            this.grpGeneralDDS.Text = "DDS";
+            // 
+            // chkGenDDSExpert
+            // 
+            this.chkGenDDSExpert.Image = null;
+            this.chkGenDDSExpert.Location = new System.Drawing.Point(44, 104);
+            this.chkGenDDSExpert.Name = "chkGenDDSExpert";
+            this.chkGenDDSExpert.Size = new System.Drawing.Size(56, 16);
+            this.chkGenDDSExpert.TabIndex = 8;
+            this.chkGenDDSExpert.Text = "Expert";
+            this.chkGenDDSExpert.CheckedChanged += new System.EventHandler(this.chkGenDDSExpert_CheckedChanged);
+            // 
+            // udDDSCorrection
+            // 
+            this.udDDSCorrection.Increment = new decimal(new int[] {
+            10,
+            0,
+            0,
+            0});
+            this.udDDSCorrection.Location = new System.Drawing.Point(88, 17);
+            this.udDDSCorrection.Maximum = new decimal(new int[] {
+            1000000,
+            0,
+            0,
+            0});
+            this.udDDSCorrection.Minimum = new decimal(new int[] {
+            1000000,
+            0,
+            0,
+            -2147483648});
+            this.udDDSCorrection.Name = "udDDSCorrection";
+            this.udDDSCorrection.Size = new System.Drawing.Size(64, 20);
+            this.udDDSCorrection.TabIndex = 7;
+            this.toolTip1.SetToolTip(this.udDDSCorrection, "Correction for DDS frequency");
+            this.udDDSCorrection.Value = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+            this.udDDSCorrection.Visible = false;
+            this.udDDSCorrection.ValueChanged += new System.EventHandler(this.udDDSCorrection_ValueChanged);
+            this.udDDSCorrection.LostFocus += new System.EventHandler(this.udDDSCorrection_LostFocus);
+            // 
+            // lblClockCorrection
+            // 
+            this.lblClockCorrection.Image = null;
+            this.lblClockCorrection.Location = new System.Drawing.Point(5, 20);
+            this.lblClockCorrection.Name = "lblClockCorrection";
+            this.lblClockCorrection.Size = new System.Drawing.Size(72, 16);
+            this.lblClockCorrection.TabIndex = 6;
+            this.lblClockCorrection.Text = "Clock Offset:";
+            this.lblClockCorrection.Visible = false;
+            // 
+            // udDDSIFFreq
+            // 
+            this.udDDSIFFreq.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.udDDSIFFreq.Location = new System.Drawing.Point(98, 68);
+            this.udDDSIFFreq.Maximum = new decimal(new int[] {
+            20000,
+            0,
+            0,
+            0});
+            this.udDDSIFFreq.Minimum = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+            this.udDDSIFFreq.Name = "udDDSIFFreq";
+            this.udDDSIFFreq.Size = new System.Drawing.Size(56, 20);
+            this.udDDSIFFreq.TabIndex = 5;
+            this.toolTip1.SetToolTip(this.udDDSIFFreq, "Intermediate Frequency");
+            this.udDDSIFFreq.Value = new decimal(new int[] {
+            9000,
+            0,
+            0,
+            0});
+            this.udDDSIFFreq.Visible = false;
+            this.udDDSIFFreq.ValueChanged += new System.EventHandler(this.udDDSIFFreq_ValueChanged);
+            this.udDDSIFFreq.LostFocus += new System.EventHandler(this.udDDSIFFreq_LostFocus);
+            // 
+            // lblIFFrequency
+            // 
+            this.lblIFFrequency.Image = null;
+            this.lblIFFrequency.Location = new System.Drawing.Point(5, 68);
+            this.lblIFFrequency.Name = "lblIFFrequency";
+            this.lblIFFrequency.Size = new System.Drawing.Size(48, 16);
+            this.lblIFFrequency.TabIndex = 4;
+            this.lblIFFrequency.Text = "IF (Hz):";
+            this.lblIFFrequency.Visible = false;
+            // 
+            // udDDSPLLMult
+            // 
+            this.udDDSPLLMult.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.udDDSPLLMult.InterceptArrowKeys = false;
+            this.udDDSPLLMult.Location = new System.Drawing.Point(105, 42);
+            this.udDDSPLLMult.Maximum = new decimal(new int[] {
+            20,
+            0,
+            0,
+            0});
+            this.udDDSPLLMult.Minimum = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+            this.udDDSPLLMult.Name = "udDDSPLLMult";
+            this.udDDSPLLMult.Size = new System.Drawing.Size(48, 20);
+            this.udDDSPLLMult.TabIndex = 3;
+            this.toolTip1.SetToolTip(this.udDDSPLLMult, "Multiplier for external clock (1 if using internal clock)");
+            this.udDDSPLLMult.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.udDDSPLLMult.Visible = false;
+            this.udDDSPLLMult.ValueChanged += new System.EventHandler(this.udDDSPLLMult_ValueChanged);
+            this.udDDSPLLMult.LostFocus += new System.EventHandler(this.udDDSPLLMult_LostFocus);
+            // 
+            // lblPLLMult
+            // 
+            this.lblPLLMult.Image = null;
+            this.lblPLLMult.Location = new System.Drawing.Point(5, 42);
+            this.lblPLLMult.Name = "lblPLLMult";
+            this.lblPLLMult.Size = new System.Drawing.Size(80, 16);
+            this.lblPLLMult.TabIndex = 2;
+            this.lblPLLMult.Text = "PLL Multiplier:";
+            this.lblPLLMult.Visible = false;
             // 
             // grpMetisAddr
             // 
@@ -3893,155 +4043,6 @@ namespace PowerSDR
             0,
             0});
             // 
-            // grpGeneralDDS
-            // 
-            this.grpGeneralDDS.Controls.Add(this.chkGenDDSExpert);
-            this.grpGeneralDDS.Controls.Add(this.udDDSCorrection);
-            this.grpGeneralDDS.Controls.Add(this.lblClockCorrection);
-            this.grpGeneralDDS.Controls.Add(this.udDDSIFFreq);
-            this.grpGeneralDDS.Controls.Add(this.lblIFFrequency);
-            this.grpGeneralDDS.Controls.Add(this.udDDSPLLMult);
-            this.grpGeneralDDS.Controls.Add(this.lblPLLMult);
-            this.grpGeneralDDS.Location = new System.Drawing.Point(328, 8);
-            this.grpGeneralDDS.Name = "grpGeneralDDS";
-            this.grpGeneralDDS.Size = new System.Drawing.Size(176, 136);
-            this.grpGeneralDDS.TabIndex = 4;
-            this.grpGeneralDDS.TabStop = false;
-            this.grpGeneralDDS.Text = "DDS";
-            // 
-            // chkGenDDSExpert
-            // 
-            this.chkGenDDSExpert.Image = null;
-            this.chkGenDDSExpert.Location = new System.Drawing.Point(56, 104);
-            this.chkGenDDSExpert.Name = "chkGenDDSExpert";
-            this.chkGenDDSExpert.Size = new System.Drawing.Size(56, 24);
-            this.chkGenDDSExpert.TabIndex = 8;
-            this.chkGenDDSExpert.Text = "Expert";
-            this.chkGenDDSExpert.CheckedChanged += new System.EventHandler(this.chkGenDDSExpert_CheckedChanged);
-            // 
-            // udDDSCorrection
-            // 
-            this.udDDSCorrection.Increment = new decimal(new int[] {
-            10,
-            0,
-            0,
-            0});
-            this.udDDSCorrection.Location = new System.Drawing.Point(104, 24);
-            this.udDDSCorrection.Maximum = new decimal(new int[] {
-            1000000,
-            0,
-            0,
-            0});
-            this.udDDSCorrection.Minimum = new decimal(new int[] {
-            1000000,
-            0,
-            0,
-            -2147483648});
-            this.udDDSCorrection.Name = "udDDSCorrection";
-            this.udDDSCorrection.Size = new System.Drawing.Size(64, 20);
-            this.udDDSCorrection.TabIndex = 7;
-            this.toolTip1.SetToolTip(this.udDDSCorrection, "Correction for DDS frequency");
-            this.udDDSCorrection.Value = new decimal(new int[] {
-            0,
-            0,
-            0,
-            0});
-            this.udDDSCorrection.Visible = false;
-            this.udDDSCorrection.ValueChanged += new System.EventHandler(this.udDDSCorrection_ValueChanged);
-            this.udDDSCorrection.LostFocus += new System.EventHandler(this.udDDSCorrection_LostFocus);
-            // 
-            // lblClockCorrection
-            // 
-            this.lblClockCorrection.Image = null;
-            this.lblClockCorrection.Location = new System.Drawing.Point(16, 24);
-            this.lblClockCorrection.Name = "lblClockCorrection";
-            this.lblClockCorrection.Size = new System.Drawing.Size(72, 23);
-            this.lblClockCorrection.TabIndex = 6;
-            this.lblClockCorrection.Text = "Clock Offset:";
-            this.lblClockCorrection.Visible = false;
-            // 
-            // udDDSIFFreq
-            // 
-            this.udDDSIFFreq.Increment = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.udDDSIFFreq.Location = new System.Drawing.Point(112, 72);
-            this.udDDSIFFreq.Maximum = new decimal(new int[] {
-            20000,
-            0,
-            0,
-            0});
-            this.udDDSIFFreq.Minimum = new decimal(new int[] {
-            0,
-            0,
-            0,
-            0});
-            this.udDDSIFFreq.Name = "udDDSIFFreq";
-            this.udDDSIFFreq.Size = new System.Drawing.Size(56, 20);
-            this.udDDSIFFreq.TabIndex = 5;
-            this.toolTip1.SetToolTip(this.udDDSIFFreq, "Intermediate Frequency");
-            this.udDDSIFFreq.Value = new decimal(new int[] {
-            9000,
-            0,
-            0,
-            0});
-            this.udDDSIFFreq.Visible = false;
-            this.udDDSIFFreq.ValueChanged += new System.EventHandler(this.udDDSIFFreq_ValueChanged);
-            this.udDDSIFFreq.LostFocus += new System.EventHandler(this.udDDSIFFreq_LostFocus);
-            // 
-            // lblIFFrequency
-            // 
-            this.lblIFFrequency.Image = null;
-            this.lblIFFrequency.Location = new System.Drawing.Point(16, 72);
-            this.lblIFFrequency.Name = "lblIFFrequency";
-            this.lblIFFrequency.Size = new System.Drawing.Size(48, 23);
-            this.lblIFFrequency.TabIndex = 4;
-            this.lblIFFrequency.Text = "IF (Hz):";
-            this.lblIFFrequency.Visible = false;
-            // 
-            // udDDSPLLMult
-            // 
-            this.udDDSPLLMult.Increment = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.udDDSPLLMult.Location = new System.Drawing.Point(120, 48);
-            this.udDDSPLLMult.Maximum = new decimal(new int[] {
-            20,
-            0,
-            0,
-            0});
-            this.udDDSPLLMult.Minimum = new decimal(new int[] {
-            0,
-            0,
-            0,
-            0});
-            this.udDDSPLLMult.Name = "udDDSPLLMult";
-            this.udDDSPLLMult.Size = new System.Drawing.Size(48, 20);
-            this.udDDSPLLMult.TabIndex = 3;
-            this.toolTip1.SetToolTip(this.udDDSPLLMult, "Multiplier for external clock (1 if using internal clock)");
-            this.udDDSPLLMult.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.udDDSPLLMult.Visible = false;
-            this.udDDSPLLMult.ValueChanged += new System.EventHandler(this.udDDSPLLMult_ValueChanged);
-            this.udDDSPLLMult.LostFocus += new System.EventHandler(this.udDDSPLLMult_LostFocus);
-            // 
-            // lblPLLMult
-            // 
-            this.lblPLLMult.Image = null;
-            this.lblPLLMult.Location = new System.Drawing.Point(16, 48);
-            this.lblPLLMult.Name = "lblPLLMult";
-            this.lblPLLMult.Size = new System.Drawing.Size(80, 23);
-            this.lblPLLMult.TabIndex = 2;
-            this.lblPLLMult.Text = "PLL Multiplier:";
-            this.lblPLLMult.Visible = false;
-            // 
             // groupBoxHPSDRHW
             // 
             this.groupBoxHPSDRHW.Controls.Add(this.chkPennyLane);
@@ -4052,7 +4053,7 @@ namespace PowerSDR
             this.groupBoxHPSDRHW.Controls.Add(this.chkPennyPresent);
             this.groupBoxHPSDRHW.Location = new System.Drawing.Point(160, 8);
             this.groupBoxHPSDRHW.Name = "groupBoxHPSDRHW";
-            this.groupBoxHPSDRHW.Size = new System.Drawing.Size(160, 248);
+            this.groupBoxHPSDRHW.Size = new System.Drawing.Size(160, 171);
             this.groupBoxHPSDRHW.TabIndex = 30;
             this.groupBoxHPSDRHW.TabStop = false;
             this.groupBoxHPSDRHW.Text = "HPSDR Hardware Present";
@@ -22883,6 +22884,10 @@ namespace PowerSDR
             this.tpGeneral.ResumeLayout(false);
             this.tcGeneral.ResumeLayout(false);
             this.tpGeneralHardware.ResumeLayout(false);
+            this.grpGeneralDDS.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.udDDSCorrection)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.udDDSIFFreq)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.udDDSPLLMult)).EndInit();
             this.grpMetisAddr.ResumeLayout(false);
             this.grpOzyType.ResumeLayout(false);
             this.grpOzyType.PerformLayout();
@@ -22892,10 +22897,6 @@ namespace PowerSDR
             ((System.ComponentModel.ISupportInitialize)(this.udSoftRockCenterFreq)).EndInit();
             this.grpSI570.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.udFXtal)).EndInit();
-            this.grpGeneralDDS.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.udDDSCorrection)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.udDDSIFFreq)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.udDDSPLLMult)).EndInit();
             this.groupBoxHPSDRHW.ResumeLayout(false);
             this.groupBoxHPSDRHW.PerformLayout();
             this.grpGeneralHardwareFLEX5000.ResumeLayout(false);

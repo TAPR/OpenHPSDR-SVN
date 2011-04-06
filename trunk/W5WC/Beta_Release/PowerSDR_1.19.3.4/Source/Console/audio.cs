@@ -1636,9 +1636,11 @@ namespace PowerSDR
 					}
 
 					#endregion
-
-                    if (!localmox) DoScope2(rx1_in_l, frameCount);
-                    else DoScope2(tx_in_l, frameCount);
+               
+                  
+                        if (!localmox) DoScope2(rx1_in_l, frameCount);
+                        else DoScope2(tx_in_l, frameCount);
+                   
 
 #if(MINMAX)
 					Debug.Write(MaxSample(in_l, in_r, frameCount).ToString("f6")+",");
@@ -2913,6 +2915,13 @@ namespace PowerSDR
                     ScaleBuffer(out_r1, out_r1, frameCount, (float)(1.5f / audio_volts1));
                 }
             }
+         /*   if (!localmox)
+            {
+                //ClearBuffer(out_l2, frameCount);
+                //ClearBuffer(out_r2, frameCount);
+                console.buffiszero = true;
+            }*/
+
 
 #if(MINMAX)
 			Debug.Write(MaxSample(out_l2, out_r2, frameCount).ToString("f6")+",");
@@ -4709,7 +4718,7 @@ namespace PowerSDR
                             num_channels, 
                             0, 
                             latency1);
-                    else
+                    else 
                     retval = StartAudio(ref callback4port, 
                         (uint)block_size1, 
                         sample_rate1, 
@@ -4940,12 +4949,21 @@ namespace PowerSDR
 
 			for(int i=0; i<frameCount; i++)
 			{
-				if(buf[i] < scope_pixel_min) 
+                if (Display.CurrentDisplayMode == DisplayMode.SCOPE)
+                {
+                    if (buf[i] < scope_pixel_min)
+                        scope_pixel_min = buf[i];
+                    if (buf[i] > scope_pixel_max)
+                        scope_pixel_max = buf[i];
+                }
+                else
+                {
                     scope_pixel_min = buf[i];
-				if(buf[i] > scope_pixel_max) 
                     scope_pixel_max = buf[i];
+                }
 
-				scope_sample_index++;
+
+                    scope_sample_index++;
 				if(scope_sample_index >= scope_samples_per_pixel)
 				{
 					scope_sample_index = 0;
@@ -4981,13 +4999,13 @@ namespace PowerSDR
 
         private static int scope2_sample_index = 0;
         private static int scope2_pixel_index = 0;
-        private static float scope2_pixel_min = float.MaxValue;
+       // private static float scope2_pixel_min = float.MaxValue;
         private static float scope2_pixel_max = float.MinValue;
-        private static float[] scope2_min;
-        public static float[] Scope2Min
-        {
-            set { scope2_min = value; }
-        }
+       // private static float[] scope2_min;
+       // public static float[] Scope2Min
+       // {
+       //     set { scope2_min = value; }
+       // }
         public static float[] scope2_max;
         public static float[] Scope2Max
         {
@@ -4996,12 +5014,12 @@ namespace PowerSDR
 
         unsafe private static void DoScope2(float* buf, int frameCount)
         {
-            if (scope2_min == null || scope2_min.Length < scope_display_width)
-            {
-                if (Display.Scope2Min == null || Display.Scope2Min.Length < scope_display_width)
-                    Display.Scope2Min = new float[scope_display_width];
-                scope2_min = Display.Scope2Min;
-            }
+          //  if (scope2_min == null || scope2_min.Length < scope_display_width)
+          //  {
+           //     if (Display.Scope2Min == null || Display.Scope2Min.Length < scope_display_width)
+           //         Display.Scope2Min = new float[scope_display_width];
+           //     scope2_min = Display.Scope2Min;
+           // }
             if (scope2_max == null || scope2_max.Length < scope_display_width)
             {
                 if (Display.Scope2Max == null || Display.Scope2Max.Length < scope_display_width)
@@ -5013,17 +5031,17 @@ namespace PowerSDR
             {
                // if (buf[i] < scope2_pixel_min) scope2_pixel_min = buf[i];
                // if (buf[i] > scope2_pixel_max) scope2_pixel_max = buf[i];
-                scope2_pixel_min = buf[i];
+               // scope2_pixel_min = buf[i];
                 scope2_pixel_max = buf[i];
 
                 scope2_sample_index++;
                 if (scope2_sample_index >= scope_samples_per_pixel)
                 {
                     scope2_sample_index = 0;
-                    scope2_min[scope2_pixel_index] = scope2_pixel_min;
+                  //  scope2_min[scope2_pixel_index] = scope2_pixel_min;
                     scope2_max[scope2_pixel_index] = scope2_pixel_max;
 
-                    scope2_pixel_min = float.MaxValue;
+                  //  scope2_pixel_min = float.MaxValue;
                     scope2_pixel_max = float.MinValue;
 
                     scope2_pixel_index++;
