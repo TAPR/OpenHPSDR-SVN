@@ -1786,6 +1786,8 @@ namespace PowerSDR
             this.radDisplayZoom1x = new System.Windows.Forms.RadioButtonTS();
             this.chkPLTone = new System.Windows.Forms.CheckBoxTS();
             this.chkMicMute = new System.Windows.Forms.CheckBoxTS();
+            this.chkBCI = new System.Windows.Forms.CheckBoxTS();
+            this.chkMUT = new System.Windows.Forms.CheckBoxTS();
             this.picSquelch = new System.Windows.Forms.PictureBox();
             this.picRX2Squelch = new System.Windows.Forms.PictureBox();
             this.timer_clock = new System.Windows.Forms.Timer(this.components);
@@ -1937,8 +1939,6 @@ namespace PowerSDR
             this.radBandVHF0 = new System.Windows.Forms.RadioButtonTS();
             this.panelRX2DSP = new System.Windows.Forms.PanelTS();
             this.ptbSquelch = new PowerSDR.PrettyTrackBar();
-            this.chkBCI = new System.Windows.Forms.CheckBoxTS();
-            this.chkMUT = new System.Windows.Forms.CheckBoxTS();
             ((System.ComponentModel.ISupportInitialize)(this.ptbRX2RF)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ptbFilterShift)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ptbFilterWidth)).BeginInit();
@@ -4091,6 +4091,27 @@ namespace PowerSDR
             this.toolTip1.SetToolTip(this.chkMicMute, resources.GetString("chkMicMute.ToolTip"));
             this.chkMicMute.CheckedChanged += new System.EventHandler(this.chkMicMute_CheckedChanged);
             // 
+            // chkBCI
+            // 
+            resources.ApplyResources(this.chkBCI, "chkBCI");
+            this.chkBCI.BackColor = System.Drawing.Color.Transparent;
+            this.chkBCI.FlatAppearance.BorderSize = 0;
+            this.chkBCI.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.chkBCI.Image = null;
+            this.chkBCI.Name = "chkBCI";
+            this.toolTip1.SetToolTip(this.chkBCI, resources.GetString("chkBCI.ToolTip"));
+            this.chkBCI.UseVisualStyleBackColor = false;
+            // 
+            // chkMUT
+            // 
+            resources.ApplyResources(this.chkMUT, "chkMUT");
+            this.chkMUT.FlatAppearance.BorderSize = 0;
+            this.chkMUT.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.chkMUT.Image = null;
+            this.chkMUT.Name = "chkMUT";
+            this.toolTip1.SetToolTip(this.chkMUT, resources.GetString("chkMUT.ToolTip"));
+            this.chkMUT.CheckedChanged += new System.EventHandler(this.chkMUT_CheckedChanged);
+            // 
             // picSquelch
             // 
             this.picSquelch.BackColor = System.Drawing.SystemColors.ControlText;
@@ -5628,26 +5649,6 @@ namespace PowerSDR
             this.ptbSquelch.TabStop = false;
             this.ptbSquelch.Value = -150;
             this.ptbSquelch.Scroll += new PowerSDR.PrettyTrackBar.ScrollHandler(this.ptbSquelch_Scroll);
-            // 
-            // chkBCI
-            // 
-            resources.ApplyResources(this.chkBCI, "chkBCI");
-            this.chkBCI.BackColor = System.Drawing.Color.Transparent;
-            this.chkBCI.FlatAppearance.BorderSize = 0;
-            this.chkBCI.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.chkBCI.Image = null;
-            this.chkBCI.Name = "chkBCI";
-            this.toolTip1.SetToolTip(this.chkBCI, resources.GetString("chkBCI.ToolTip"));
-            this.chkBCI.UseVisualStyleBackColor = false;
-            // 
-            // chkMUT
-            // 
-            resources.ApplyResources(this.chkMUT, "chkMUT");
-            this.chkMUT.FlatAppearance.BorderSize = 0;
-            this.chkMUT.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.chkMUT.Image = null;
-            this.chkMUT.Name = "chkMUT";
-            this.toolTip1.SetToolTip(this.chkMUT, resources.GetString("chkMUT.ToolTip"));
             // 
             // Console
             // 
@@ -32766,15 +32767,23 @@ namespace PowerSDR
 			SaveBand();
 			if(last_band.Equals("60M"))
 			{
-				if((Control.ModifierKeys & Keys.Shift) == Keys.Shift)
-					band_60m_index = (band_60m_index-1+band_60m_register)%band_60m_register;
-				else
+                if (current_region == FRSRegion.UK)
+                    band_60m_register = 7;
+                else
+                    band_60m_register = 12;
+				//if((Control.ModifierKeys & Keys.Shift) == Keys.Shift)
+					//band_60m_index = (band_60m_index-1+band_60m_register)%band_60m_register;
+				//else
 					band_60m_index = (band_60m_index+1)%band_60m_register;
 			}
 			last_band = "60M";
 
 			string filter, mode;
 			double freq;
+            if (current_region == FRSRegion.US)
+            {
+                if (band_60m_index < 7) band_60m_index = 7;
+            }
 			if(DB.GetBandStack(last_band, band_60m_index, out mode, out filter, out freq))
 			{
 				SetBand(mode, filter, freq);
@@ -32789,15 +32798,23 @@ namespace PowerSDR
             SaveBand();
             if (last_band.Equals("60M"))
             {
-                if ((Control.ModifierKeys & Keys.Shift) == Keys.Shift)
-                    band_60m_index = (band_60m_index - 1 + band_60m_register) % band_60m_register;
+                if (current_region == FRSRegion.UK) 
+                    band_60m_register = 7;
                 else
+                    band_60m_register = 12;
+               // if ((Control.ModifierKeys & Keys.Shift) == Keys.Shift)
+                 //   band_60m_index = (band_60m_index - 1 + band_60m_register) % band_60m_register;
+               // else
                     band_60m_index = (band_60m_index + 1) % band_60m_register;
             }
             last_band = "60M";
 
             string filter, mode;
             double freq;
+            if (current_region == FRSRegion.US)
+            {
+                if (band_60m_index < 7) band_60m_index = 7;
+            }
             if (DB.GetBandStack(last_band, band_60m_index, out mode, out filter, out freq))
             {
                 SetBand(mode, filter, freq);
