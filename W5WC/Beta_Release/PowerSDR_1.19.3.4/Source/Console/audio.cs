@@ -1636,10 +1636,11 @@ namespace PowerSDR
 					}
 
 					#endregion
-               
-                  
-                        if (!localmox) DoScope2(rx1_in_l, frameCount);
-                        else DoScope2(tx_in_l, frameCount);
+
+
+                    if (!localmox)
+                        DoScope2(rx1_in_l, frameCount);                    
+                    else DoScope2(tx_in_l, frameCount);
                    
 
 #if(MINMAX)
@@ -1760,7 +1761,7 @@ namespace PowerSDR
 
 					break;
 				case AudioState.CW:
-                    DttSP.ExchangeSamples2(ex_input, ex_output, frameCount);
+                    //DttSP.ExchangeSamples2(ex_input, ex_output, frameCount);
 					DttSP.CWtoneExchange(out_l_ptr2, out_r_ptr2, frameCount);
                     
 					break;
