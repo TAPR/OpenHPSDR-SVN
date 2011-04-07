@@ -1141,7 +1141,7 @@ namespace PowerSDR
             {
                 Assembly assembly = Assembly.GetExecutingAssembly();
                 FileVersionInfo fvi = FileVersionInfo.GetVersionInfo(assembly.Location);
-                string version = fvi.FileVersion.Substring(0, fvi.FileVersion.LastIndexOf("."));
+                string version = fvi.FileVersion;//.Substring(0, fvi.FileVersion.LastIndexOf("."));
                 AppDataPath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData)
                     + "\\FlexRadio Systems\\PowerSDR v" + version + "\\";
             }
@@ -5811,7 +5811,7 @@ namespace PowerSDR
             {
                 Assembly assembly = Assembly.GetExecutingAssembly();
                 FileVersionInfo fvi = FileVersionInfo.GetVersionInfo(assembly.Location);
-                string version = fvi.FileVersion.Substring(0, fvi.FileVersion.LastIndexOf("."));
+                string version = fvi.FileVersion;//.Substring(0, fvi.FileVersion.LastIndexOf("."));
                 app_data_path = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData)
                     + "\\FlexRadio Systems\\PowerSDR v" + version + "\\";
             }
@@ -38523,7 +38523,7 @@ namespace PowerSDR
         {
             Assembly assembly = Assembly.GetExecutingAssembly();
             FileVersionInfo fvi = FileVersionInfo.GetVersionInfo(assembly.Location);
-            string version = fvi.FileVersion.Substring(0, fvi.FileVersion.LastIndexOf("."));
+            string version = fvi.FileVersion;//.Substring(0, fvi.FileVersion.LastIndexOf("."));
             return version;
         }
 
