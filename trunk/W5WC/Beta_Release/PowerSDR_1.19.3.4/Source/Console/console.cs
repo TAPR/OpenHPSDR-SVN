@@ -35078,16 +35078,19 @@ namespace PowerSDR
 					if(chkVFOSync.Checked) chkVFOSync.Checked = false;
 					TXBand = BandByFreq(VFOBFreq, tx_xvtr_index, true, current_region);
 					grpVFOB.Font = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold);
-					grpVFOB.ForeColor = Color.Red;
+					//grpVFOB.ForeColor = Color.Red;
+                    grpVFOB.ForeColor = SystemColors.ControlLightLight;
                     grpVFOA.Font = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold);
                     grpVFOA.ForeColor = SystemColors.ControlLightLight;
 					chkVFOBTX.Checked = true;
 					//chkVFOBTX.ForeColor = Color.Black;
 					if(chkPower.Checked)
 					{
-						txtVFOBFreq.ForeColor = Color.Red;
-						txtVFOBMSD.ForeColor = Color.Red;
-						txtVFOBLSD.ForeColor = small_vfo_color;
+						//txtVFOBFreq.ForeColor = Color.Red;
+						//txtVFOBMSD.ForeColor = Color.Red;
+                        txtVFOBFreq.ForeColor = vfo_text_light_color;
+                        txtVFOBMSD.ForeColor = vfo_text_light_color;
+                        txtVFOBLSD.ForeColor = small_vfo_color;
 						txtVFOBBand.ForeColor = band_text_light_color;
 
 						if(current_model == Model.FLEX5000 && fwc_init)
