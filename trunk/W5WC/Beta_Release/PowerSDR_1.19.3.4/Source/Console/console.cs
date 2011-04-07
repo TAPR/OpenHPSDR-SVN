@@ -23903,19 +23903,21 @@ namespace PowerSDR
 
 					if((!mox && current_meter_rx_mode != MeterRXMode.OFF) ||
 						(mox && current_meter_tx_mode != MeterTXMode.OFF))
-					{
+                    {
 						if(pixel_x <= 0) pixel_x = 1;
 
 						LinearGradientBrush brush = new LinearGradientBrush(new Rectangle(0, 0, pixel_x, H),
 							meter_left_color, meter_right_color, LinearGradientMode.Horizontal);
 
 						g.FillRectangle(brush, 0, 0, pixel_x, H);
-				
-						for(int i=0; i<21; i++)
-							g.DrawLine(new Pen(meter_background_color), 6+i*8, 0, 6+i*8, H);
+                        brush.Dispose();
 
-						g.DrawLine(new Pen(Color.Red), pixel_x, 0, pixel_x, H);
-						g.FillRectangle(new SolidBrush(meter_background_color), pixel_x+1, 0, W-pixel_x, H);
+                        Pen meter_background_pen = new Pen(meter_background_color);
+						for(int i=0; i<21; i++)
+							g.DrawLine(meter_background_pen, 6+i*8, 0, 6+i*8, H);
+
+						g.DrawLine(Pens.Red, pixel_x, 0, pixel_x, H);
+						g.FillRectangle(meter_background_pen.Brush, pixel_x+1, 0, W-pixel_x, H);
 
 						if(pixel_x >= meter_peak_value)
 						{
@@ -23931,8 +23933,8 @@ namespace PowerSDR
 							}
 							else
 							{
-								g.DrawLine(new Pen(Color.Red), meter_peak_value, 0, meter_peak_value, H);
-								g.DrawLine(new Pen(Color.Red), meter_peak_value-1, 0, meter_peak_value-1, H);
+								g.DrawLine(Pens.Red, meter_peak_value, 0, meter_peak_value, H);
+								g.DrawLine(Pens.Red, meter_peak_value-1, 0, meter_peak_value-1, H);
 							}
 						}
 					}
@@ -24042,7 +24044,9 @@ namespace PowerSDR
 							num = avg_num = current_meter_data * 0.2 + avg_num * 0.8; // slow decay
 					}
 
-					g.DrawRectangle(new Pen(edge_meter_background_color), 0, 0, W, H);
+                    Pen edge_meter_background_pen = new Pen(edge_meter_background_color);
+					g.DrawRectangle(edge_meter_background_pen, 0, 0, W, H);
+                    edge_meter_background_pen.Dispose();
 
 					SolidBrush low_brush = new SolidBrush(edge_low_color);
 					SolidBrush high_brush = new SolidBrush(edge_high_color);
@@ -24387,7 +24391,8 @@ namespace PowerSDR
 									//g.TextRenderingHint = TextRenderingHint.SystemDefault;
 									g.DrawString("25+", f, high_brush, (int)(W*0.75+i*spacing-(int)2.5*string_width), (int)(H-4-8-string_height));
 								}
-								
+                                
+
 								spacing = (W*0.75-2.0)/4.0;
 								pixel_x = (int)(num/5.0*spacing);
 								break;
@@ -24395,6 +24400,8 @@ namespace PowerSDR
 								break;
 						}
 					}
+                    high_brush.Dispose();
+                    low_brush.Dispose();
 
 					if((!mox && current_meter_rx_mode != MeterRXMode.OFF) ||
 						(mox && current_meter_tx_mode != MeterTXMode.OFF))
@@ -24885,8 +24892,9 @@ namespace PowerSDR
 					x += (vfo_decimal_space-vfo_char_space);
 				width = x+vfo_char_width;
 			}
-
-			e.Graphics.DrawLine(new Pen(txtVFOAFreq.ForeColor, 2.0f), x, 1, width, 1);
+            Pen p = new Pen(txtVFOAFreq.ForeColor, 2.0f);
+			e.Graphics.DrawLine(p, x, 1, width, 1);
+            p.Dispose();
 		}
 
 		private void panelVFOBHover_Paint(object sender, System.Windows.Forms.PaintEventArgs e)
@@ -24918,8 +24926,9 @@ namespace PowerSDR
 					x += (vfo_decimal_space-vfo_char_space);
 				width = x+vfo_char_width;
 			}
-
+            Pen p = new Pen(txtVFOBFreq.ForeColor, 2.0f);
 			e.Graphics.DrawLine(new Pen(txtVFOBFreq.ForeColor, 2.0f), x, 1, width, 1);
+            p.Dispose();
 		}
 
 		public void UpdateRX1DisplayAverage(float[] buffer, float[] new_data) 
@@ -30019,7 +30028,11 @@ namespace PowerSDR
 			}
 			else
 			{
-				Audio.TXInputSignal = Audio.SignalSource.RADIO;
+                //Audio.SourceScale = 0.0000001;
+                Audio.TXInputSignal = Audio.SignalSource.SILENCE;
+                Thread.Sleep(200);
+				Audio.TXInputSignal = Audio.SignalSource.RADIO;                
+
                 Hdw.TUNControl = true;
 				chkMOX.Checked = false;
 				chkTUN.BackColor = SystemColors.Control;
@@ -35078,17 +35091,17 @@ namespace PowerSDR
 					if(chkVFOSync.Checked) chkVFOSync.Checked = false;
 					TXBand = BandByFreq(VFOBFreq, tx_xvtr_index, true, current_region);
 					grpVFOB.Font = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold);
-					//grpVFOB.ForeColor = Color.Red;
-                    grpVFOB.ForeColor = SystemColors.ControlLightLight;
+					grpVFOB.ForeColor = Color.Red;
+                    //grpVFOB.ForeColor = SystemColors.ControlLightLight;
                     grpVFOA.Font = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Bold);
                     grpVFOA.ForeColor = SystemColors.ControlLightLight;
 					chkVFOBTX.Checked = true;
 					//chkVFOBTX.ForeColor = Color.Black;
 					if(chkPower.Checked)
 					{
-						//txtVFOBFreq.ForeColor = Color.Red;
+						txtVFOBFreq.ForeColor = Color.Red;
 						//txtVFOBMSD.ForeColor = Color.Red;
-                        txtVFOBFreq.ForeColor = vfo_text_light_color;
+                        //txtVFOBFreq.ForeColor = vfo_text_light_color;
                         txtVFOBMSD.ForeColor = vfo_text_light_color;
                         txtVFOBLSD.ForeColor = small_vfo_color;
 						txtVFOBBand.ForeColor = band_text_light_color;
@@ -36677,8 +36690,9 @@ namespace PowerSDR
 					x += (vfo_sub_decimal_space-vfo_sub_char_space);
 				width = x+vfo_sub_char_width;
 			}
-
-			e.Graphics.DrawLine(new Pen(txtVFOABand.ForeColor, 2.0f), x, 1, width, 1);
+            Pen p = new Pen(txtVFOABand.ForeColor, 2.0f);
+			e.Graphics.DrawLine(p, x, 1, width, 1);
+            p.Dispose();
 		}
 
 		private void panelVFOASubHover_MouseMove(object sender, System.Windows.Forms.MouseEventArgs e)
