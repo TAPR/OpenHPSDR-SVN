@@ -4637,10 +4637,8 @@ namespace PowerSDR
 		private static float[] waterfall_data;
 		unsafe static private bool DrawWaterfall(Graphics g, int W, int H, int rx, bool bottom)
 		{
-            if (!bottom)
-            {
-                DrawWaterfallGrid(ref g, W, H, rx, bottom);
-            }
+            if (grid_control) DrawWaterfallGrid(ref g, W, H, rx, bottom);
+            
 			if(waterfall_data == null || waterfall_data.Length < W)
 				waterfall_data = new float[W];		// array of points to display
 			float slope = 0.0F;						// samples to process per pixel
