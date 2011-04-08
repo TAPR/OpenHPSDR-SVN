@@ -44,10 +44,13 @@ namespace PowerSDR
 
 		public static DataSet ds;
 
-        private static string app_data_path = "";
-        public static string AppDataPath
+       // private static string app_data_path = "";
+       // public static string AppDataPath
+        private static string file_name = "";
+        public static string FileName
         {
-            set { app_data_path = value; }
+            //set { app_data_path = value; }
+            set { file_name = value; }
         }
 
 		#endregion
@@ -1396,8 +1399,10 @@ namespace PowerSDR
 		{
 			ds = new DataSet("Data");
 
-            if (File.Exists(app_data_path + "\\database.xml"))
-                ds.ReadXml(app_data_path + "\\database.xml");
+             if (File.Exists(file_name))
+                ds.ReadXml(file_name);
+         //  if (File.Exists(app_data_path + "\\database.xml"))
+             //   ds.ReadXml(app_data_path + "\\database.xml");
 
 			VerifyTables();
 
@@ -1406,7 +1411,8 @@ namespace PowerSDR
 
 		public static void Update()
 		{
-			ds.WriteXml(app_data_path+"\\database.xml", XmlWriteMode.WriteSchema);
+		     ds.WriteXml(file_name, XmlWriteMode.WriteSchema);
+			//ds.WriteXml(app_data_path+"\\database.xml", XmlWriteMode.WriteSchema);
 		}
 
 		public static void Exit()

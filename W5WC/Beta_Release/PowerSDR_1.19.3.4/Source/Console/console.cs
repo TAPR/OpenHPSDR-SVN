@@ -1123,8 +1123,7 @@ namespace PowerSDR
 		// ======================================================
 
 		public Console(string[] args)
-		{
-			
+		{			
             foreach (string s in args)
             {
                 if (s.StartsWith("-datapath:"))
@@ -1134,6 +1133,21 @@ namespace PowerSDR
                     if(!path.EndsWith("\\")) path += "\\";
                     if (Directory.Exists(path))
                         AppDataPath = path;
+					else
+                    {
+                        DialogResult dr = MessageBox.Show("-datapath: command line option found, but the folder specified was not found.\n" +
+                            "Would you like to create this folder?  If not, the default folder will be used.\n\n" +
+                            "("+s+")",
+                            "Command Line Option: Create Folder?",
+                            MessageBoxButtons.YesNo,
+                            MessageBoxIcon.Question);
+
+                        if(dr == DialogResult.Yes)
+                        {
+                            Directory.CreateDirectory(path);
+                            AppDataPath = path;
+                        }
+					}
                 }
             }
 
@@ -1141,7 +1155,7 @@ namespace PowerSDR
             {
                 Assembly assembly = Assembly.GetExecutingAssembly();
                 FileVersionInfo fvi = FileVersionInfo.GetVersionInfo(assembly.Location);
-                string version = fvi.FileVersion;//.Substring(0, fvi.FileVersion.LastIndexOf("."));
+                string version = fvi.FileVersion; //.Substring(0, fvi.FileVersion.LastIndexOf("."));
                 AppDataPath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData)
                     + "\\FlexRadio Systems\\PowerSDR v" + version + "\\";
             }
@@ -1152,7 +1166,7 @@ namespace PowerSDR
             if (!Directory.Exists(app_data_path))
                 Directory.CreateDirectory(app_data_path);
 
-           if (Keyboard.IsKeyDown(Keys.R) && Keyboard.IsKeyDown(Keys.S))
+          /* if (Keyboard.IsKeyDown(Keys.R) && Keyboard.IsKeyDown(Keys.S))
             {
                 MessageBox.Show("The database reset function has been activated.  A copy of the current\n"+
                     "database will be placed on the desktop with a date and time stamp in the file name\n"+
@@ -1168,6 +1182,42 @@ namespace PowerSDR
                     File.Copy(app_data_path + "\\database.xml", desktop + "\\PowerSDR_database_" + datetime + ".xml");
                     File.Delete(app_data_path + "\\database.xml");
                     Thread.Sleep(100);
+                }
+            } */
+			
+            if(db_file_name == "")
+                DBFileName = AppDataPath + "database.xml";
+
+            if (File.Exists(db_file_name))
+            {
+                if (Keyboard.IsKeyDown(Keys.LShiftKey) || Keyboard.IsKeyDown(Keys.RShiftKey))
+                {
+                    Thread.Sleep(500); // ensure this is intentional
+                    if (Keyboard.IsKeyDown(Keys.LShiftKey) || Keyboard.IsKeyDown(Keys.RShiftKey))
+                    {
+                        DialogResult dr = MessageBox.Show(
+                            "The database reset function has been tiggered.  Would you like to reset your database?\n\n"+
+                            "If so, a copy of the current database will be placed on the desktop with\n"+
+                            "a date and time stamp in the file name before creating a brand new\n"+
+                            "database for active use.",
+                            "Reset Database?",
+                            MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+
+                        if (dr == DialogResult.Yes)
+                        {
+                            string desktop = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+                            string datetime = DateTime.Now.ToShortDateString().Replace("/", "-") + "_" +
+                                DateTime.Now.ToShortTimeString().Replace(":", ".");
+
+                            string file = db_file_name.Substring(db_file_name.LastIndexOf("\\") + 1);
+                            file = file.Substring(0, file.Length - 4);
+
+                            File.Copy(db_file_name, desktop + "\\PowerSDR_" + file + "_" + datetime + ".xml");
+
+                            File.Delete(db_file_name);
+                            Thread.Sleep(100);
+                        }
+                    }
                 }
             }
 			
@@ -1588,6 +1638,9 @@ namespace PowerSDR
 				string desktop = Environment.GetFolderPath(Environment.SpecialFolder.Desktop); 
 				string datetime = DateTime.Now.ToShortDateString().Replace("/", "-")+"_"+
 					DateTime.Now.ToShortTimeString().Replace(":", ".");
+
+				string file = db_file_name.Substring(db_file_name.LastIndexOf("\\") + 1);
+                file = file.Substring(0, file.Length - 4);
 
                 File.Copy(app_data_path + "\\database.xml", desktop + "\\PowerSDR_database_" + datetime + ".xml");
                 File.Delete(app_data_path + "\\database.xml");
@@ -5802,8 +5855,26 @@ namespace PowerSDR
                     string path = s.Trim().Substring(s.Trim().IndexOf(":") + 1);
                     if (path.EndsWith("\"")) path = path.Substring(0, path.Length - 1);
                     if (!path.EndsWith("\\")) path += "\\";
-                    if (Directory.Exists(path))
+ #if(DEBUG)
+                    path += "Debug\\";
+#endif
+                   if (Directory.Exists(path))
                         app_data_path = path;
+                     else
+                    {
+                        DialogResult dr = MessageBox.Show("-datapath: command line option found, but the folder specified was not found.\n" +
+                            "Would you like to create this folder?  If not, the default folder will be used.\n\n" +
+                            "(" + s + ")",
+                            "Command Line Option: Create Folder?",
+                            MessageBoxButtons.YesNo,
+                            MessageBoxIcon.Question);
+
+                        if (dr == DialogResult.Yes)
+                        {
+                            Directory.CreateDirectory(path);
+                            app_data_path = path;
+                        }
+                    }
                 }
             }
 
@@ -5811,13 +5882,29 @@ namespace PowerSDR
             {
                 Assembly assembly = Assembly.GetExecutingAssembly();
                 FileVersionInfo fvi = FileVersionInfo.GetVersionInfo(assembly.Location);
-                string version = fvi.FileVersion;//.Substring(0, fvi.FileVersion.LastIndexOf("."));
+                string version = fvi.FileVersion; //.Substring(0, fvi.FileVersion.LastIndexOf("."));
                 app_data_path = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData)
                     + "\\FlexRadio Systems\\PowerSDR v" + version + "\\";
+#if(DEBUG)
+                app_data_path += "Debug\\";
+#endif
             }
             try 
 			{
 				if(!File.Exists(app_data_path+"wisdom"))
+				{
+                    // Need to create the directory in %appdata% before we go run wisdom
+                    if (!Directory.Exists(app_data_path))
+                        Directory.CreateDirectory(app_data_path);
+                    Process p = Process.Start(Application.StartupPath + "\\fftw_wisdom.exe", "\"" + app_data_path);
+					MessageBox.Show("Running one time optimization.  Please wait patiently for "+
+						"this process to finish.\nTypically the optimization takes no more than 3-5 minutes.",
+						"Optimizing...",
+						MessageBoxButtons.OK,
+						MessageBoxIcon.Information);
+					p.WaitForExit();
+				} 
+	/*	if(!File.Exists(app_data_path+"wisdom"))
 				{
                     Process p = Process.Start(Application.StartupPath + "\\fftw_wisdom.exe", "\""+app_data_path);
 					MessageBox.Show("Running one time optimization.  Please wait patiently for "+
@@ -5826,7 +5913,7 @@ namespace PowerSDR
 						MessageBoxButtons.OK,
 						MessageBoxIcon.Information);
 					p.WaitForExit();
-				} 
+				} */
 						 
 /*				else 
 				{
@@ -17253,6 +17340,20 @@ namespace PowerSDR
             }
         }
  
+        private string db_file_name = "";
+        public string DBFileName
+        {
+            get { return db_file_name; }
+            set
+            {
+                if (initializing) // ignore changes here after init is complete per design
+                {
+                    db_file_name = value;
+                    DB.FileName = value;
+                }
+            }
+        }
+		
         private string app_data_path = "";
         public string AppDataPath
         {
@@ -17260,7 +17361,7 @@ namespace PowerSDR
             set
             {
                 app_data_path = value;
-                DB.AppDataPath = value;
+                //DB.AppDataPath = value;
                 FWCEEPROM.AppDataPath = value;
                 //HIDEEPROM.AppDataPath = value; 
                 Skin.AppDataPath = value;
@@ -25913,8 +26014,8 @@ namespace PowerSDR
 					}
 					else
 					{
-						//byte b = 0; //w5wc
-                        //if(current_model == Model.SDR1000) //w5wc
+						//byte b = 0; 
+                        //if(current_model == Model.SDR1000)
                         byte b = Hdw.StatusPort(); //w5wc
                         kptt = Keyer.KeyerPTT;
                         kmptt = Keyer.MemoryPTT;
@@ -38537,7 +38638,7 @@ namespace PowerSDR
         {
             Assembly assembly = Assembly.GetExecutingAssembly();
             FileVersionInfo fvi = FileVersionInfo.GetVersionInfo(assembly.Location);
-            string version = fvi.FileVersion;//.Substring(0, fvi.FileVersion.LastIndexOf("."));
+            string version = fvi.FileVersion; //.Substring(0, fvi.FileVersion.LastIndexOf("."));
             return version;
         }
 
@@ -38795,6 +38896,405 @@ namespace PowerSDR
             }
            return true;
         }
+        /*
+        #region Collapsible Display
+
+        // W1CEG:  Start
+        ///////////////////////////////////////////////////////////////////////////////
+        // Collapsible Display                                                        //
+        ///////////////////////////////////////////////////////////////////////////////
+
+        private Size expandedSize = new Size(0, 0);
+
+        private bool collapsedDisplay = false;
+        public bool CollapsedDisplay
+        {
+            get { return this.collapsedDisplay; }
+        }
+
+        private bool showTopControls = false;
+        public bool ShowTopControls
+        {
+            set { this.showTopControls = value; }
+        }
+
+        private bool showBandControls = false;
+        public bool ShowBandControls
+        {
+            set { this.showBandControls = value; }
+        }
+
+        private bool showModeControls = false;
+        public bool ShowModeControls
+        {
+            set { this.showModeControls = value; }
+        }
+
+
+        private void mnuCollapse_Click(object sender, EventArgs e)
+        {
+            if (this.collapsedDisplay)
+                this.ExpandDisplay();
+            else
+                this.CollapseDisplay();
+        }
+
+        private void ExpandDisplay()
+        {
+            this.mnuCollapse.Text = "Collapse";
+            this.collapsedDisplay = false;
+
+            int minWidth = console_basis_size.Width;
+            int minHeight = (fwc_init && current_model == Model.FLEX5000 && FWCEEPROM.RX2OK) ?
+                console_basis_size.Height - (panelRX2Filter.Height + 8) :
+                console_basis_size.Height;
+
+            this.Size = this.expandedSize;
+            this.MinimumSize = new Size(minWidth, minHeight);
+
+            chkPower.Show();
+            grpVFOBetween.Show();
+            grpMultimeter.Show();
+            panelOptions.Show();
+            panelSoundControls.Show();
+            chkSquelch.Show();
+            ptbSquelch.Show();
+            picSquelch.Show();
+            panelDateTime.Show();
+            panelVFO.Show();
+            panelDSP.Show();
+            panelDisplay2.Show();
+            panelMultiRX.Show();
+            panelModeSpecificCW.Show();
+            panelModeSpecificPhone.Show();
+            panelModeSpecificDigital.Show();
+            panelFilter.Show();
+            panelMode.Show();
+            panelBandHF.Show();
+            panelBandVHF.Show();
+            chkBCI.Show();
+#if (DEBUG)
+			txtRigAnsInjection.Show();
+#endif
+
+            int h_delta = this.Width - console_basis_size.Width;
+            int v_delta = Math.Max(this.Height - console_basis_size.Height, 0);
+
+            grpVFOA.Location = new Point(gr_VFOA_basis_location.X + (h_delta / 4), gr_VFOA_basis_location.Y);
+            grpVFOB.Location = new Point(gr_VFOB_basis_location.X + h_delta - (h_delta / 4), gr_VFOB_basis_location.Y);
+            grpMultimeter.Size = gr_multi_meter_size_basis;
+            picMultiMeterDigital.Location = pic_multi_meter_digital_basis;
+            txtMultiText.Show();
+
+            //			chkMON.Parent = panelOptions;
+            //			chkMON.Location = chk_mon_basis;
+            //			chkMUT.Parent = panelOptions;
+            //			chkMUT.Location = chk_mut_basis;
+            ptbAF.Parent = panelSoundControls;
+            ptbAF.Location = tb_af_basis;
+            ptbRF.Parent = panelSoundControls;
+            ptbRF.Location = tb_rf_basis;
+
+            comboDisplayMode.Parent = panelDisplay2;
+            comboDisplayMode.Location = combo_display_mode_basis;
+
+            btnDisplayPanCenter.Location = new Point(btn_display_pan_center_basis.X + (h_delta), btn_display_pan_center_basis.Y + v_delta);
+            ptbDisplayPan.Size = new Size(tb_display_pan_size_basis.Width + (h_delta), tb_display_pan_size_basis.Height);
+            radDisplayZoom4x.Location = new Point(btn_display_zoom_4x_basis.X + h_delta, btn_display_zoom_4x_basis.Y + v_delta);
+            radDisplayZoom2x.Location = new Point(btn_display_zoom_2x_basis.X + h_delta, btn_display_zoom_2x_basis.Y + v_delta);
+            radDisplayZoom1x.Location = new Point(btn_display_zoom_1x_basis.X + h_delta, btn_display_zoom_1x_basis.Y + v_delta);
+            radDisplayZoom05.Location = new Point(btn_display_zoom_05_basis.X + h_delta, btn_display_zoom_05_basis.Y + v_delta);
+            ptbDisplayZoom.Location = new Point(tb_display_zoom_basis.X + h_delta, tb_display_zoom_basis.Y + v_delta);
+            txtDisplayPeakFreq.Location = new Point(txt_display_peak_freq_basis.X + h_delta, txt_display_peak_freq_basis.Y + v_delta);
+            txtDisplayPeakPower.Location = new Point(txt_display_peak_power_basis.X + h_delta, txt_display_peak_power_basis.Y + v_delta);
+            txtDisplayPeakOffset.Location = new Point(txt_display_peak_offset_basis.X + h_delta, txt_display_peak_offset_basis.Y + v_delta);
+            lblDisplayZoom.Location = new Point(lbl_display_zoom_basis.X + h_delta, lbl_display_zoom_basis.Y + v_delta);
+
+            panelDisplay.Location = gr_display_basis;
+            panelDisplay.Size = new Size(gr_display_size_basis.Width + h_delta, gr_display_size_basis.Height + v_delta);
+            picDisplay.Location = pic_display_basis;
+            picDisplay.Size = new Size(pic_display_size_basis.Width + h_delta, pic_display_size_basis.Height + v_delta);
+            textBox1.Size = new Size(textbox1_size_basis.Width + h_delta, textbox1_size_basis.Height);
+            textBox1.Location = new Point(textbox1_basis.X, textbox1_basis.Y + v_delta);
+            panelDisplay2.Location = new Point(gr_display2_basis.X + (h_delta / 2), gr_display2_basis.Y + v_delta);
+            panelDSP.Location = new Point(gr_dsp_basis.X + (h_delta / 2), gr_dsp_basis.Y + v_delta);
+
+            ptbDisplayPan.Location = new Point(tb_displaypan_basis.X, tb_displaypan_basis.Y + v_delta);
+            ptbDisplayZoom.Size = tb_display_zoom_size_basis;
+            lblDisplayPan.Location = new Point(lbl_displaypan_basis.X, lbl_displaypan_basis.Y + v_delta);
+            txtDisplayCursorFreq.Location = new Point(txt_display_cursor_freq_basis.X, txt_display_cursor_freq_basis.Y + v_delta);
+            txtDisplayCursorPower.Location = new Point(txt_display_cursor_power_basis.X, txt_display_cursor_power_basis.Y + v_delta);
+            txtDisplayCursorOffset.Location = new Point(txt_display_cursor_offset_basis.X, txt_display_cursor_offset_basis.Y + v_delta);
+
+            // :NOTE: Force update on pan control
+            ptbDisplayPan.Value = ptbDisplayPan.Value;
+            ptbDisplayPan_Scroll(this, EventArgs.Empty);
+
+            // :NOTE: Force update on zoom control
+            ptbDisplayZoom.Value = ptbDisplayZoom.Value;
+            ptbDisplayZoom_Scroll(this, EventArgs.Empty);
+
+
+            panelBandHF.Location = new Point(gr_BandHF_basis_location.X + h_delta, gr_BandHF_basis_location.Y + (v_delta / 4));
+            panelBandHF.Size = gr_BandHF_basis_size;
+            radBand160.Location = rad_band160_basis;
+            radBand80.Location = rad_band80_basis;
+            radBand60.Location = rad_band60_basis;
+            radBand40.Location = rad_band40_basis;
+            radBand30.Location = rad_band30_basis;
+            radBand20.Location = rad_band20_basis;
+            radBand17.Location = rad_band17_basis;
+            radBand15.Location = rad_band15_basis;
+            radBand12.Location = rad_band12_basis;
+            radBand10.Location = rad_band10_basis;
+            radBand6.Location = rad_band6_basis;
+            radBand2.Location = rad_band2_basis;
+            radBandWWV.Location = rad_bandwwv_basis;
+            radBandGEN.Location = rad_bandgen_basis;
+
+            panelMode.Location = new Point(gr_Mode_basis_location.X + h_delta, gr_Mode_basis_location.Y + (v_delta / 2));
+            panelMode.Size = gr_Mode_basis_size;
+            radModeLSB.Location = rad_mode_lsb_basis;
+            radModeUSB.Location = rad_mode_usb_basis;
+            radModeDSB.Location = rad_mode_dsb_basis;
+            radModeCWL.Location = rad_mode_cwl_basis;
+            radModeCWU.Location = rad_mode_cwu_basis;
+            radModeFMN.Location = rad_mode_fmn_basis;
+            radModeAM.Location = rad_mode_am_basis;
+            radModeSAM.Location = rad_mode_sam_basis;
+            radModeSPEC.Location = rad_mode_spec_basis;
+            radModeDIGL.Location = rad_mode_digl_basis;
+            radModeDIGU.Location = rad_mode_digu_basis;
+            radModeDRM.Location = rad_mode_drm_basis;
+        }
+
+        public void CollapseDisplay()
+        {
+            // Save expanded display size
+            if (!this.collapsedDisplay)
+                this.expandedSize = this.Size;
+
+            this.mnuCollapse.Text = "Expand";
+            this.collapsedDisplay = true;
+
+            int minWidth = 600;
+            int minHeight = 200;
+
+            if (this.showTopControls)
+            {
+                minWidth = Math.Max(minWidth, console_basis_size.Width);
+                minHeight += grpVFOA.Height + 5;
+            }
+
+            if (this.showBandControls)
+            {
+                minWidth = Math.Max(minWidth, radBand160.Width * 14 + this.Width - this.ClientSize.Width);
+                minHeight += 5 + radBand160.Height;
+            }
+
+            if (this.showModeControls)
+            {
+                minWidth = Math.Max(minWidth, radModeLSB.Width * 12 + this.Width - this.ClientSize.Width);
+                minHeight += 5 + radModeLSB.Height;
+            }
+
+            this.MinimumSize = new Size(minWidth, minHeight);
+
+            panelOptions.Hide();
+            panelSoundControls.Hide();
+            chkSquelch.Hide();
+            ptbSquelch.Hide();
+            picSquelch.Hide();
+            panelDateTime.Hide();
+            panelVFO.Hide();
+            panelDSP.Hide();
+            panelDisplay2.Hide();
+            panelMultiRX.Hide();
+            panelModeSpecificCW.Hide();
+            panelModeSpecificPhone.Hide();
+            panelModeSpecificDigital.Hide();
+            panelFilter.Hide();
+            panelBandVHF.Hide();
+            chkBCI.Hide();
+#if (DEBUG)
+			txtRigAnsInjection.Hide();
+#endif
+
+            if (this.showTopControls)
+            {
+                chkPower.Show();
+                grpVFOBetween.Show();
+                grpMultimeter.Show();
+
+                txtMultiText.Hide();
+
+                //				chkMON.Parent = this;
+                //				chkMON.Show();
+                //				chkMUT.Parent = this;
+                //				chkMUT.Show();
+                ptbAF.Parent = this;
+                ptbAF.Show();
+                ptbRF.Parent = this;
+                ptbRF.Show();
+            }
+            else
+            {
+                comboDisplayMode.Show();
+                chkPower.Hide();
+                grpVFOBetween.Hide();
+                grpMultimeter.Hide();
+            }
+
+            if (this.showBandControls)
+                panelBandHF.Show();
+            else
+                panelBandHF.Hide();
+
+
+            if (this.showModeControls)
+                panelMode.Show();
+            else
+                panelMode.Hide();
+
+
+            this.RepositionControlsForCollapsedlDisplay();
+
+            this.Size = new Size(this.SetupIFForm.CollapsedWidth,
+                this.SetupIFForm.CollapsedHeight);
+        }
+
+        private void RepositionControlsForCollapsedlDisplay()
+        {
+            int top = 0;
+            int h_delta = this.Width - console_basis_size.Width;
+            int v_delta = Math.Max(this.Height - console_basis_size.Height, 0);
+
+            if (this.showTopControls)
+            {
+                top = grpMultimeter.Location.Y + grpMultimeter.Size.Height + 5;
+                grpVFOA.Location = new Point(gr_VFOA_basis_location.X + (h_delta / 4), gr_VFOA_basis_location.Y);
+                grpVFOB.Location = new Point(gr_VFOB_basis_location.X + h_delta - (h_delta / 4), gr_VFOB_basis_location.Y);
+                picMultiMeterDigital.Location = txtMultiText.Location;
+                grpMultimeter.Size = new Size(grpMultimeter.Width, grpVFOB.Height);
+
+                //				chkMON.Location = new Point(10, chkPower.Location.Y + chkPower.Height + 5);
+                //				chkMUT.Location = new Point(chkMON.Location.X + chkMON.Width, chkPower.Location.Y + chkPower.Height + 5);
+                ptbAF.Location = new Point(10, chkPower.Location.Y + chkPower.Height + 2);
+                ptbRF.Location = new Point(10, ptbAF.Location.Y + ptbAF.Height + 2);
+            }
+
+            panelDisplay.Location = new Point(0, top);
+
+            int height = this.ClientSize.Height - top;
+
+            if (this.showBandControls)
+                height -= radBand160.Height;
+
+            if (this.showModeControls)
+                height -= radModeLSB.Height;
+
+            panelDisplay.Size = new Size(this.ClientSize.Width, height);
+
+            picDisplay.Location = new Point(0, 0);
+            picDisplay.Size = new Size(panelDisplay.Size.Width, panelDisplay.Size.Height - (textbox1_size_basis.Height + 5 + tb_display_pan_size_basis.Height + 5));
+
+            top = picDisplay.Location.Y + picDisplay.Height;
+            txtDisplayCursorOffset.Location = new Point(picDisplay.Location.X, top);
+            txtDisplayCursorPower.Location = new Point(txtDisplayCursorOffset.Location.X + txtDisplayCursorOffset.Width, top);
+            txtDisplayCursorFreq.Location = new Point(txtDisplayCursorPower.Location.X + txtDisplayCursorPower.Width, top);
+            textBox1.Location = new Point(txtDisplayCursorFreq.Location.X + txtDisplayCursorFreq.Width, top);
+            textBox1.Size = new Size(picDisplay.Width - (txtDisplayPeakOffset.Width + txtDisplayPeakPower.Width + txtDisplayPeakFreq.Width + txtDisplayCursorOffset.Width + txtDisplayCursorPower.Width + txtDisplayCursorFreq.Width), textbox1_size_basis.Height);
+            txtDisplayPeakOffset.Location = new Point(textBox1.Location.X + textBox1.Width, top);
+            txtDisplayPeakPower.Location = new Point(txtDisplayPeakOffset.Location.X + txtDisplayPeakOffset.Width, top);
+            txtDisplayPeakFreq.Location = new Point(txtDisplayPeakPower.Location.X + txtDisplayPeakPower.Width, top);
+
+            top = txtDisplayPeakOffset.Location.Y + txtDisplayPeakOffset.Height + 5;
+            int dynamicWidth = picDisplay.Width - (lblDisplayPan.Width + btnDisplayPanCenter.Width + 5 +
+                comboDisplayMode.Width + 5 + lblDisplayZoom.Width + radDisplayZoom05.Width * 4);
+
+            lblDisplayPan.Location = new Point(picDisplay.Location.X, top);
+            ptbDisplayPan.Location = new Point(lblDisplayPan.Location.X + lblDisplayPan.Width, top);
+            ptbDisplayPan.Size = new Size(dynamicWidth / 2, tb_display_pan_size_basis.Height);
+            btnDisplayPanCenter.Location = new Point(ptbDisplayPan.Location.X + ptbDisplayPan.Width, top);
+            //			btnDisplayPanCenter_Click(this, EventArgs.Empty);
+
+            // :NOTE: Force update on pan control
+            ptbDisplayPan.Value = ptbDisplayPan.Value;
+            ptbDisplayPan_Scroll(this, EventArgs.Empty);
+
+            comboDisplayMode.Parent = panelDisplay;
+            comboDisplayMode.Location = new Point(btnDisplayPanCenter.Location.X + btnDisplayPanCenter.Width + 5, top);
+
+            lblDisplayZoom.Location = new Point(comboDisplayMode.Location.X + comboDisplayMode.Width + 5, top);
+            ptbDisplayZoom.Location = new Point(lblDisplayZoom.Location.X + lblDisplayZoom.Width, top);
+            ptbDisplayZoom.Size = new Size(dynamicWidth / 2, tb_display_zoom_size_basis.Height);
+
+            // :NOTE: Force update on zoom control
+            ptbDisplayZoom.Value = ptbDisplayZoom.Value;
+            ptbDisplayZoom_Scroll(this, EventArgs.Empty);
+
+            radDisplayZoom05.Location = new Point(ptbDisplayZoom.Location.X + ptbDisplayZoom.Width, top);
+            radDisplayZoom1x.Location = new Point(radDisplayZoom05.Location.X + radDisplayZoom05.Width, top);
+            radDisplayZoom2x.Location = new Point(radDisplayZoom1x.Location.X + radDisplayZoom1x.Width, top);
+            radDisplayZoom4x.Location = new Point(radDisplayZoom2x.Location.X + radDisplayZoom2x.Width, top);
+
+
+            top = panelDisplay.Location.Y + panelDisplay.Height;
+
+            if (this.showBandControls)
+            {
+                panelBandHF.Location = new Point(this.ClientSize.Width / 2 - radBand160.Width * 7, top);
+                panelBandHF.Size = new Size(radBand160.Width * 14, radBand160.Height);
+
+                radBand160.Location = new Point(0, 0);
+                radBand80.Location = new Point(radBand160.Location.X + radBand160.Width, 0);
+                radBand60.Location = new Point(radBand80.Location.X + radBand80.Width, 0);
+                radBand40.Location = new Point(radBand60.Location.X + radBand60.Width, 0);
+                radBand30.Location = new Point(radBand40.Location.X + radBand40.Width, 0);
+                radBand20.Location = new Point(radBand30.Location.X + radBand30.Width, 0);
+                radBand17.Location = new Point(radBand20.Location.X + radBand20.Width, 0);
+                radBand15.Location = new Point(radBand17.Location.X + radBand17.Width, 0);
+                radBand12.Location = new Point(radBand15.Location.X + radBand15.Width, 0);
+                radBand10.Location = new Point(radBand12.Location.X + radBand12.Width, 0);
+                radBand6.Location = new Point(radBand10.Location.X + radBand10.Width, 0);
+                radBand2.Location = new Point(radBand6.Location.X + radBand6.Width, 0);
+                radBandWWV.Location = new Point(radBand2.Location.X + radBand2.Width, 0);
+                radBandGEN.Location = new Point(radBandWWV.Location.X + radBandWWV.Width, 0);
+
+                top = panelBandHF.Location.Y + panelBandHF.Height;
+            }
+
+            if (this.showModeControls)
+            {
+                panelMode.Location = new Point(this.ClientSize.Width / 2 - radModeLSB.Width * 6, top);
+                panelMode.Size = new Size(radModeLSB.Width * 12, radModeLSB.Height);
+
+                radModeLSB.Location = new Point(0, 0);
+                radModeUSB.Location = new Point(radModeLSB.Location.X + radModeLSB.Width, 0);
+                radModeDSB.Location = new Point(radModeUSB.Location.X + radModeUSB.Width, 0);
+                radModeCWL.Location = new Point(radModeDSB.Location.X + radModeDSB.Width, 0);
+                radModeCWU.Location = new Point(radModeCWL.Location.X + radModeCWL.Width, 0);
+                radModeFMN.Location = new Point(radModeCWU.Location.X + radModeCWU.Width, 0);
+                radModeAM.Location = new Point(radModeFMN.Location.X + radModeFMN.Width, 0);
+                radModeSAM.Location = new Point(radModeAM.Location.X + radModeAM.Width, 0);
+                radModeSPEC.Location = new Point(radModeSAM.Location.X + radModeSAM.Width, 0);
+                radModeDIGL.Location = new Point(radModeSPEC.Location.X + radModeSPEC.Width, 0);
+                radModeDIGU.Location = new Point(radModeDIGL.Location.X + radModeDIGL.Width, 0);
+                radModeDRM.Location = new Point(radModeDIGU.Location.X + radModeDIGU.Width, 0);
+
+                top = panelMode.Location.Y + panelMode.Height;
+            }
+
+            if (!this.showTopControls)
+            {
+                grpVFOA.Location = new Point(grpVFOA.Location.X, -200);
+                grpVFOB.Location = new Point(grpVFOB.Location.X, -200);
+            }
+        }
+
+        // W1CEG:  End
+        #endregion Collapsible Display */
+
 
  	}
 }
