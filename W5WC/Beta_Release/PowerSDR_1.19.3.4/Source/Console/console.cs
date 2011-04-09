@@ -726,8 +726,8 @@ namespace PowerSDR
 		private Point lbl_display_zoom_basis = new Point (100,100);		//k6jca
 		private Size gr_display_size_basis = new Size (100,100);		//k6jca
 		private Size pic_display_size_basis = new Size (100,100);		//k6jca
-		private Size textbox1_size_basis = new Size (100,100);		//k6jca
-		private Point textbox1_basis = new Point (100,100);		//k6jca
+        private Size txtOverload_size_basis = new Size(100, 100);		//k6jca
+        private Point txtOverload_basis = new Point(100, 100);		//k6jca
 		private Point gr_display2_basis = new Point (100,100);		//k6jca
 		private Point gr_dsp_basis = new Point (100,100);		//k6jca
 		private Point tb_displaypan_basis = new Point (100,100);		//k6jca
@@ -774,6 +774,48 @@ namespace PowerSDR
 		private Point lbl_rx2_band_basis = new Point(100, 100);
 		private Point combo_rx2_band_basis = new Point(100, 100);
         public bool si570_used = false; // modif F8CHK
+
+        // :W1CEG:
+        private Size gr_multi_meter_size_basis = new Size(100, 100);
+        private Point pic_multi_meter_digital_basis = new Point(100, 100);
+        private Size gr_options_size_basis = new Size(100, 100);
+        private Point chk_mon_basis = new Point(100, 100);
+        private Point chk_mut_basis = new Point(100, 100);
+        private Point tb_af_basis = new Point(100, 100);
+        private Point tb_rf_basis = new Point(100, 100);
+        private Point gr_display_basis = new Point(100, 100);
+        private Point pic_display_basis = new Point(100, 100);
+        private Point combo_display_mode_basis = new Point(100, 100);
+        private Size tb_display_zoom_size_basis = new Size(100, 100);
+        private Size gr_BandHF_basis_size = new Size(100, 100);
+        private Size gr_BandVHF_basis_size = new Size(100, 100);
+        private Size gr_Mode_basis_size = new Size(100, 100);
+        private Point rad_band160_basis = new Point(100, 100);
+        private Point rad_band80_basis = new Point(100, 100);
+        private Point rad_band60_basis = new Point(100, 100);
+        private Point rad_band40_basis = new Point(100, 100);
+        private Point rad_band30_basis = new Point(100, 100);
+        private Point rad_band20_basis = new Point(100, 100);
+        private Point rad_band17_basis = new Point(100, 100);
+        private Point rad_band15_basis = new Point(100, 100);
+        private Point rad_band12_basis = new Point(100, 100);
+        private Point rad_band10_basis = new Point(100, 100);
+        private Point rad_band6_basis = new Point(100, 100);
+        private Point rad_band2_basis = new Point(100, 100);
+        private Point rad_bandwwv_basis = new Point(100, 100);
+        private Point rad_bandgen_basis = new Point(100, 100);
+        private Point rad_mode_lsb_basis = new Point(100, 100);
+        private Point rad_mode_usb_basis = new Point(100, 100);
+        private Point rad_mode_dsb_basis = new Point(100, 100);
+        private Point rad_mode_cwl_basis = new Point(100, 100);
+        private Point rad_mode_cwu_basis = new Point(100, 100);
+        private Point rad_mode_fmn_basis = new Point(100, 100);
+        private Point rad_mode_am_basis = new Point(100, 100);
+        private Point rad_mode_sam_basis = new Point(100, 100);
+        private Point rad_mode_spec_basis = new Point(100, 100);
+        private Point rad_mode_digl_basis = new Point(100, 100);
+        private Point rad_mode_digu_basis = new Point(100, 100);
+        private Point rad_mode_drm_basis = new Point(100, 100);
 
 		#endregion
 
@@ -1113,6 +1155,7 @@ namespace PowerSDR
         private TextBoxTS txtCPUMeter;
         private CheckBoxTS chkBCI;
         private CheckBoxTS chkMUT;
+        private MenuItem mnuCollapse;
 		private System.Windows.Forms.CheckBoxTS chkFullDuplex;
 
 		#endregion
@@ -1676,6 +1719,7 @@ namespace PowerSDR
             this.mnuFWC = new System.Windows.Forms.MenuItem();
             this.mnuReportBug = new System.Windows.Forms.MenuItem();
             this.mnuProfiles = new System.Windows.Forms.MenuItem();
+            this.mnuCollapse = new System.Windows.Forms.MenuItem();
             this.timer_cpu_meter = new System.Windows.Forms.Timer(this.components);
             this.timer_peak_text = new System.Windows.Forms.Timer(this.components);
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
@@ -2082,7 +2126,8 @@ namespace PowerSDR
             this.mnuInfo,
             this.mnuFWC,
             this.mnuReportBug,
-            this.mnuProfiles});
+            this.mnuProfiles,
+            this.mnuCollapse});
             // 
             // mnuSetup
             // 
@@ -2185,6 +2230,12 @@ namespace PowerSDR
             this.mnuProfiles.Index = 14;
             resources.ApplyResources(this.mnuProfiles, "mnuProfiles");
             this.mnuProfiles.Click += new System.EventHandler(this.mnuProfiles_Click);
+            // 
+            // mnuCollapse
+            // 
+            this.mnuCollapse.Index = 15;
+            resources.ApplyResources(this.mnuCollapse, "mnuCollapse");
+            this.mnuCollapse.Click += new System.EventHandler(this.mnuCollapse_Click);
             // 
             // timer_cpu_meter
             // 
@@ -36482,43 +36533,53 @@ namespace PowerSDR
                 panelBandHF.Location = new Point(gr_BandHF_basis_location.X + h_delta, gr_BandHF_basis_location.Y + (v_delta / 4));
                 panelBandVHF.Location = new Point(gr_BandVHF_basis_location.X + h_delta, gr_BandVHF_basis_location.Y + (v_delta / 4));
 				panelMode.Location = new Point(gr_Mode_basis_location.X+h_delta,gr_Mode_basis_location.Y+(v_delta/2));
-				grpVFOB.Location = new Point(gr_VFOB_basis_location.X+h_delta-(h_delta/4),gr_VFOB_basis_location.Y);
-				grpVFOA.Location = new Point(gr_VFOA_basis_location.X+(h_delta/4),gr_VFOA_basis_location.Y);
+				//grpVFOB.Location = new Point(gr_VFOB_basis_location.X+h_delta-(h_delta/4),gr_VFOB_basis_location.Y);
+				//grpVFOA.Location = new Point(gr_VFOA_basis_location.X+(h_delta/4),gr_VFOA_basis_location.Y);
                 panelModeSpecificPhone.Location = new Point(gr_ModePhone_basis_location.X + h_delta - (h_delta / 4), gr_ModePhone_basis_location.Y + v_delta);
                 panelModeSpecificCW.Location = new Point(gr_ModeCW_basis_location.X + h_delta - (h_delta / 4), gr_ModeCW_basis_location.Y + v_delta);
                 panelModeSpecificDigital.Location = new Point(gr_ModeDig_basis_location.X + h_delta - (h_delta / 4), gr_ModeDig_basis_location.Y + v_delta);
 
 				panelVFO.Location = new Point (gr_VFO_basis_location.X+(h_delta/4),gr_VFO_basis_location.Y+v_delta);
 				grpVFOBetween.Location = new Point(gr_vfobetween_basis_location.X+(h_delta/2),gr_vfobetween_basis_location.Y);
-				//btnDisplayPanCenter.Location = new Point(btn_display_pan_center_basis.X+(h_delta),btn_display_pan_center_basis.Y+v_delta);
-                btnDisplayPanCenter.Location = new Point(btn_display_pan_center_basis.X, btn_display_pan_center_basis.Y + v_delta);
-               // ptbDisplayPan.Size = new Size(tb_display_pan_size_basis.Width+(h_delta),tb_display_pan_size_basis.Height);
-				radDisplayZoom4x.Location = new Point(btn_display_zoom_4x_basis.X+h_delta,btn_display_zoom_4x_basis.Y+v_delta);
-				radDisplayZoom2x.Location = new Point(btn_display_zoom_2x_basis.X+h_delta,btn_display_zoom_2x_basis.Y+v_delta);
-				radDisplayZoom1x.Location = new Point(btn_display_zoom_1x_basis.X+h_delta,btn_display_zoom_1x_basis.Y+v_delta);
-				radDisplayZoom05.Location = new Point(btn_display_zoom_05_basis.X+h_delta,btn_display_zoom_05_basis.Y+v_delta);
-				ptbDisplayZoom.Location = new Point(tb_display_zoom_basis.X+h_delta,tb_display_zoom_basis.Y+v_delta);
-				txtDisplayPeakFreq.Location = new Point(txt_display_peak_freq_basis.X+h_delta,txt_display_peak_freq_basis.Y+v_delta);
-				txtDisplayPeakPower.Location = new Point(txt_display_peak_power_basis.X+h_delta,txt_display_peak_power_basis.Y+v_delta);
-				txtDisplayPeakOffset.Location = new Point(txt_display_peak_offset_basis.X+h_delta,txt_display_peak_offset_basis.Y+v_delta);
-				lblDisplayZoom.Location = new Point(lbl_display_zoom_basis.X+h_delta,lbl_display_zoom_basis.Y+v_delta);
 
-                panelDisplay.Size = new Size(gr_display_size_basis.Width + h_delta, gr_display_size_basis.Height + v_delta);
-				picDisplay.Size = new Size(pic_display_size_basis.Width+h_delta,pic_display_size_basis.Height+v_delta);
-				txtOverload.Size = new Size(textbox1_size_basis.Width+h_delta,textbox1_size_basis.Height);
-				txtOverload.Location = new Point(textbox1_basis.X,textbox1_basis.Y+v_delta);
-				panelDisplay2.Location = new Point(gr_display2_basis.X+(h_delta/2),gr_display2_basis.Y+v_delta);
-				panelDSP.Location = new Point(gr_dsp_basis.X+(h_delta/2),gr_dsp_basis.Y+v_delta);
+                if (!this.collapsedDisplay)
+                {
+                    grpVFOB.Location = new Point(gr_VFOB_basis_location.X + h_delta - (h_delta / 4), gr_VFOB_basis_location.Y);
+                    grpVFOA.Location = new Point(gr_VFOA_basis_location.X + (h_delta / 4), gr_VFOA_basis_location.Y);
 
-				panelMultiRX.Location = new Point(gr_multirx_basis.X+(h_delta/2),gr_multirx_basis.Y+v_delta);
-				ptbDisplayPan.Location = new Point(tb_displaypan_basis.X,tb_displaypan_basis.Y+v_delta);
-				lblDisplayPan.Location = new Point(lbl_displaypan_basis.X,lbl_displaypan_basis.Y+v_delta);
-				txtDisplayCursorFreq.Location = new Point(txt_display_cursor_freq_basis.X,txt_display_cursor_freq_basis.Y+v_delta);
-				txtDisplayCursorPower.Location = new Point(txt_display_cursor_power_basis.X,txt_display_cursor_power_basis.Y+v_delta);
-				txtDisplayCursorOffset.Location = new Point(txt_display_cursor_offset_basis.X,txt_display_cursor_offset_basis.Y+v_delta);
-				chkPower.Location = new Point(chk_power_basis.X,chk_power_basis.Y+(v_delta/8));
-				panelOptions.Location = new Point(gr_options_basis.X,gr_options_basis.Y+(v_delta/4));
-				panelSoundControls.Location = new Point(gr_sound_controls_basis.X,gr_sound_controls_basis.Y+(v_delta/8)+(v_delta/4));
+                    //btnDisplayPanCenter.Location = new Point(btn_display_pan_center_basis.X+(h_delta),btn_display_pan_center_basis.Y+v_delta);
+                    btnDisplayPanCenter.Location = new Point(btn_display_pan_center_basis.X, btn_display_pan_center_basis.Y + v_delta);
+                    // ptbDisplayPan.Size = new Size(tb_display_pan_size_basis.Width+(h_delta),tb_display_pan_size_basis.Height);
+                    radDisplayZoom4x.Location = new Point(btn_display_zoom_4x_basis.X + h_delta, btn_display_zoom_4x_basis.Y + v_delta);
+                    radDisplayZoom2x.Location = new Point(btn_display_zoom_2x_basis.X + h_delta, btn_display_zoom_2x_basis.Y + v_delta);
+                    radDisplayZoom1x.Location = new Point(btn_display_zoom_1x_basis.X + h_delta, btn_display_zoom_1x_basis.Y + v_delta);
+                    radDisplayZoom05.Location = new Point(btn_display_zoom_05_basis.X + h_delta, btn_display_zoom_05_basis.Y + v_delta);
+                    ptbDisplayZoom.Location = new Point(tb_display_zoom_basis.X + h_delta, tb_display_zoom_basis.Y + v_delta);
+                    txtDisplayPeakFreq.Location = new Point(txt_display_peak_freq_basis.X + h_delta, txt_display_peak_freq_basis.Y + v_delta);
+                    txtDisplayPeakPower.Location = new Point(txt_display_peak_power_basis.X + h_delta, txt_display_peak_power_basis.Y + v_delta);
+                    txtDisplayPeakOffset.Location = new Point(txt_display_peak_offset_basis.X + h_delta, txt_display_peak_offset_basis.Y + v_delta);
+                    lblDisplayZoom.Location = new Point(lbl_display_zoom_basis.X + h_delta, lbl_display_zoom_basis.Y + v_delta);
+
+                    panelDisplay.Size = new Size(gr_display_size_basis.Width + h_delta, gr_display_size_basis.Height + v_delta);
+                    picDisplay.Size = new Size(pic_display_size_basis.Width + h_delta, pic_display_size_basis.Height + v_delta);
+                    txtOverload.Size = new Size(txtOverload_size_basis.Width + h_delta, txtOverload_size_basis.Height);
+                    txtOverload.Location = new Point(txtOverload_basis.X, txtOverload_basis.Y + v_delta);
+                    panelDisplay2.Location = new Point(gr_display2_basis.X + (h_delta / 2), gr_display2_basis.Y + v_delta);
+                    panelDSP.Location = new Point(gr_dsp_basis.X + (h_delta / 2), gr_dsp_basis.Y + v_delta);
+
+                    //panelMultiRX.Location = new Point(gr_multirx_basis.X + (h_delta / 2), gr_multirx_basis.Y + v_delta);
+                    ptbDisplayPan.Location = new Point(tb_displaypan_basis.X, tb_displaypan_basis.Y + v_delta);
+                    lblDisplayPan.Location = new Point(lbl_displaypan_basis.X, lbl_displaypan_basis.Y + v_delta);
+                    txtDisplayCursorFreq.Location = new Point(txt_display_cursor_freq_basis.X, txt_display_cursor_freq_basis.Y + v_delta);
+                    txtDisplayCursorPower.Location = new Point(txt_display_cursor_power_basis.X, txt_display_cursor_power_basis.Y + v_delta);
+                    txtDisplayCursorOffset.Location = new Point(txt_display_cursor_offset_basis.X, txt_display_cursor_offset_basis.Y + v_delta);
+
+                    chkPower.Location = new Point(chk_power_basis.X, chk_power_basis.Y + (v_delta / 8));
+                    panelOptions.Location = new Point(gr_options_basis.X, gr_options_basis.Y + (v_delta / 4));
+                }
+
+                panelMultiRX.Location = new Point(gr_multirx_basis.X + (h_delta / 2), gr_multirx_basis.Y + v_delta);
+                panelSoundControls.Location = new Point(gr_sound_controls_basis.X,gr_sound_controls_basis.Y+(v_delta/8)+(v_delta/4));
 				chkSquelch.Location = new Point(chk_squelch_basis.X,chk_squelch_basis.Y+(v_delta/2));
 				picSquelch.Location = new Point(pic_sql_basis.X,pic_sql_basis.Y+(v_delta/2));
 				ptbSquelch.Location = new Point(tb_sql_basis.X,tb_sql_basis.Y+(v_delta/2));
@@ -36549,6 +36610,14 @@ namespace PowerSDR
 				comboRX2Band.Location = new Point(combo_rx2_band_basis.X, combo_rx2_band_basis.Y+v_delta);
 			}
 			previous_delta = h_delta+v_delta; //we'll check this next time through...
+
+#if (DEBUG)
+			if (this.txtRigAnsInjection != null)
+				this.txtRigAnsInjection.Location = new Point(5,this.button1.Location.Y);
+#endif
+
+            if (this.collapsedDisplay)
+                this.RepositionControlsForCollapsedlDisplay();
 
 		}
 
@@ -36603,8 +36672,8 @@ namespace PowerSDR
 
             gr_display_size_basis = this.panelDisplay.Size;
 			pic_display_size_basis = this.picDisplay.Size;
-			textbox1_size_basis = this.txtOverload.Size;
-			textbox1_basis = this.txtOverload.Location;
+            txtOverload_size_basis = this.txtOverload.Size;
+            txtOverload_basis = this.txtOverload.Location;
 			gr_display2_basis = this.panelDisplay2.Location;
 			gr_dsp_basis = this.panelDSP.Location;
 			gr_multirx_basis = this.panelMultiRX.Location;
@@ -36644,7 +36713,49 @@ namespace PowerSDR
 			chk_rx2_preamp_basis = this.chkRX2Preamp.Location;
 			lbl_rx2_band_basis = this.lblRX2Band.Location;
 			combo_rx2_band_basis = this.comboRX2Band.Location;
-		}
+
+            // :W1CEG:
+            gr_multi_meter_size_basis = this.grpMultimeter.Size;
+            pic_multi_meter_digital_basis = this.picMultiMeterDigital.Location;
+            gr_options_size_basis = this.panelOptions.Size;
+            chk_mon_basis = this.chkMON.Location;
+            chk_mut_basis = this.chkMUT.Location;
+            tb_af_basis = this.ptbAF.Location;
+            tb_rf_basis = this.ptbRF.Location;
+            gr_display_basis = this.panelDisplay.Location;
+            pic_display_basis = this.picDisplay.Location;
+            combo_display_mode_basis = this.comboDisplayMode.Location;
+            tb_display_zoom_size_basis = this.ptbDisplayZoom.Size;
+            gr_BandHF_basis_size = panelBandHF.Size;
+            gr_BandVHF_basis_size = panelBandVHF.Size;
+            gr_Mode_basis_size = panelMode.Size;
+            rad_band160_basis = radBand160.Location;
+            rad_band80_basis = radBand80.Location;
+            rad_band60_basis = radBand60.Location;
+            rad_band40_basis = radBand40.Location;
+            rad_band30_basis = radBand30.Location;
+            rad_band20_basis = radBand20.Location;
+            rad_band17_basis = radBand17.Location;
+            rad_band15_basis = radBand15.Location;
+            rad_band12_basis = radBand12.Location;
+            rad_band10_basis = radBand10.Location;
+            rad_band6_basis = radBand6.Location;
+            rad_band2_basis = radBand2.Location;
+            rad_bandwwv_basis = radBandWWV.Location;
+            rad_bandgen_basis = radBandGEN.Location;
+            rad_mode_lsb_basis = radModeLSB.Location;
+            rad_mode_usb_basis = radModeUSB.Location;
+            rad_mode_dsb_basis = radModeDSB.Location;
+            rad_mode_cwl_basis = radModeCWL.Location;
+            rad_mode_cwu_basis = radModeCWU.Location;
+            rad_mode_fmn_basis = radModeFMN.Location;
+            rad_mode_am_basis = radModeAM.Location;
+            rad_mode_sam_basis = radModeSAM.Location;
+            rad_mode_spec_basis = radModeSPEC.Location;
+            rad_mode_digl_basis = radModeDIGL.Location;
+            rad_mode_digu_basis = radModeDIGU.Location;
+            rad_mode_drm_basis = radModeDRM.Location;
+        }
 
 		private bool rx2_enabled = false;
 		public bool RX2Enabled
@@ -38256,7 +38367,7 @@ namespace PowerSDR
 				set_min_size = true;
 			}
 
-			if(this.Width < console_basis_size.Width)
+            if (this.Width < console_basis_size.Width && !this.collapsedDisplay)
 			{
 				this.Width = console_basis_size.Width;
 				return;
@@ -38267,7 +38378,7 @@ namespace PowerSDR
 				if(this.Height < console_basis_size.Height - (panelRX2Filter.Height+8))
                     this.Height = console_basis_size.Height - (panelRX2Filter.Height + 8);
 			}
-			else if(this.Height < console_basis_size.Height) 
+            else if (this.Height < console_basis_size.Height && !this.collapsedDisplay) 
 			{
 				this.Height = console_basis_size.Height;
 				return;
@@ -38275,6 +38386,25 @@ namespace PowerSDR
 
 			int h_delta = this.Width-console_basis_size.Width;
 			int v_delta = Math.Max(this.Height-console_basis_size.Height, 0);
+
+            if (this.SetupForm != null)
+            {
+                if (this.collapsedDisplay)
+                {
+                    this.SetupForm.CollapsedWidth = this.Width;
+                    this.SetupForm.CollapsedHeight = this.Height;
+                }
+                else
+                {
+                    if (this.SetupForm.CollapsedWidth == 0)
+                        this.SetupForm.CollapsedWidth = console_basis_size.Width;
+                    if (this.SetupForm.CollapsedHeight == 0)
+                        this.SetupForm.CollapsedHeight =
+                            (fwc_init && current_model == Model.FLEX5000 && FWCEEPROM.RX2OK) ?
+                                console_basis_size.Height - (panelRX2Filter.Height + 8) :
+                                console_basis_size.Height;
+                }
+            }
 
 			ResizeConsole(h_delta, v_delta);
 		}
@@ -38896,7 +39026,7 @@ namespace PowerSDR
             }
            return true;
         }
-        /*
+        
         #region Collapsible Display
 
         // W1CEG:  Start
@@ -39014,8 +39144,8 @@ namespace PowerSDR
             panelDisplay.Size = new Size(gr_display_size_basis.Width + h_delta, gr_display_size_basis.Height + v_delta);
             picDisplay.Location = pic_display_basis;
             picDisplay.Size = new Size(pic_display_size_basis.Width + h_delta, pic_display_size_basis.Height + v_delta);
-            textBox1.Size = new Size(textbox1_size_basis.Width + h_delta, textbox1_size_basis.Height);
-            textBox1.Location = new Point(textbox1_basis.X, textbox1_basis.Y + v_delta);
+            txtOverload.Size = new Size(txtOverload_size_basis.Width + h_delta, txtOverload_size_basis.Height);
+            txtOverload.Location = new Point(txtOverload_basis.X, txtOverload_basis.Y + v_delta);
             panelDisplay2.Location = new Point(gr_display2_basis.X + (h_delta / 2), gr_display2_basis.Y + v_delta);
             panelDSP.Location = new Point(gr_dsp_basis.X + (h_delta / 2), gr_dsp_basis.Y + v_delta);
 
@@ -39159,8 +39289,8 @@ namespace PowerSDR
 
             this.RepositionControlsForCollapsedlDisplay();
 
-            this.Size = new Size(this.SetupIFForm.CollapsedWidth,
-                this.SetupIFForm.CollapsedHeight);
+            this.Size = new Size(this.SetupForm.CollapsedWidth,
+                this.SetupForm.CollapsedHeight);
         }
 
         private void RepositionControlsForCollapsedlDisplay()
@@ -39196,15 +39326,15 @@ namespace PowerSDR
             panelDisplay.Size = new Size(this.ClientSize.Width, height);
 
             picDisplay.Location = new Point(0, 0);
-            picDisplay.Size = new Size(panelDisplay.Size.Width, panelDisplay.Size.Height - (textbox1_size_basis.Height + 5 + tb_display_pan_size_basis.Height + 5));
+            picDisplay.Size = new Size(panelDisplay.Size.Width, panelDisplay.Size.Height - (txtOverload_size_basis.Height + 5 + tb_display_pan_size_basis.Height + 5));
 
             top = picDisplay.Location.Y + picDisplay.Height;
             txtDisplayCursorOffset.Location = new Point(picDisplay.Location.X, top);
             txtDisplayCursorPower.Location = new Point(txtDisplayCursorOffset.Location.X + txtDisplayCursorOffset.Width, top);
             txtDisplayCursorFreq.Location = new Point(txtDisplayCursorPower.Location.X + txtDisplayCursorPower.Width, top);
-            textBox1.Location = new Point(txtDisplayCursorFreq.Location.X + txtDisplayCursorFreq.Width, top);
-            textBox1.Size = new Size(picDisplay.Width - (txtDisplayPeakOffset.Width + txtDisplayPeakPower.Width + txtDisplayPeakFreq.Width + txtDisplayCursorOffset.Width + txtDisplayCursorPower.Width + txtDisplayCursorFreq.Width), textbox1_size_basis.Height);
-            txtDisplayPeakOffset.Location = new Point(textBox1.Location.X + textBox1.Width, top);
+            txtOverload.Location = new Point(txtDisplayCursorFreq.Location.X + txtDisplayCursorFreq.Width, top);
+            txtOverload.Size = new Size(picDisplay.Width - (txtDisplayPeakOffset.Width + txtDisplayPeakPower.Width + txtDisplayPeakFreq.Width + txtDisplayCursorOffset.Width + txtDisplayCursorPower.Width + txtDisplayCursorFreq.Width), txtOverload_size_basis.Height);
+            txtDisplayPeakOffset.Location = new Point(txtOverload.Location.X + txtOverload.Width, top);
             txtDisplayPeakPower.Location = new Point(txtDisplayPeakOffset.Location.X + txtDisplayPeakOffset.Width, top);
             txtDisplayPeakFreq.Location = new Point(txtDisplayPeakPower.Location.X + txtDisplayPeakPower.Width, top);
 
@@ -39293,7 +39423,7 @@ namespace PowerSDR
         }
 
         // W1CEG:  End
-        #endregion Collapsible Display */
+        #endregion Collapsible Display 
 
 
  	}

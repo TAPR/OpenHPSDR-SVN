@@ -1486,6 +1486,13 @@ namespace PowerSDR
         private TrackBarTS tbTXTextAlpha;
         private TrackBarTS tbTXZeroLineAlpha;
         private LabelTS labelTS55;
+        private TabPage tpAppearanceCollapsible;
+        private TextBoxTS txtCollapsedHeight;
+        private TextBoxTS txtCollapsedWidth;
+        private GroupBox grpBoxCollapsible;
+        private CheckBoxTS chkShowModeControls;
+        private CheckBoxTS chkShowBandControls;
+        private CheckBoxTS chkShowTopControls;
         private System.ComponentModel.IContainer components;
 
         #endregion
@@ -2788,6 +2795,13 @@ namespace PowerSDR
             this.lblTXZeroLineColor = new System.Windows.Forms.LabelTS();
             this.clrbtnTXText = new PowerSDR.ColorButton();
             this.lblTXTextColor = new System.Windows.Forms.LabelTS();
+            this.tpAppearanceCollapsible = new System.Windows.Forms.TabPage();
+            this.txtCollapsedHeight = new System.Windows.Forms.TextBoxTS();
+            this.txtCollapsedWidth = new System.Windows.Forms.TextBoxTS();
+            this.grpBoxCollapsible = new System.Windows.Forms.GroupBox();
+            this.chkShowModeControls = new System.Windows.Forms.CheckBoxTS();
+            this.chkShowBandControls = new System.Windows.Forms.CheckBoxTS();
+            this.chkShowTopControls = new System.Windows.Forms.CheckBoxTS();
             this.tpKeyboard = new System.Windows.Forms.TabPage();
             this.grpKBXIT = new System.Windows.Forms.GroupBoxTS();
             this.lblKBXITUp = new System.Windows.Forms.LabelTS();
@@ -3445,6 +3459,8 @@ namespace PowerSDR
             ((System.ComponentModel.ISupportInitialize)(this.tbTXVGridFineAlpha)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tbTXVGridCourseAlpha)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tbTXBackgroundAlpha)).BeginInit();
+            this.tpAppearanceCollapsible.SuspendLayout();
+            this.grpBoxCollapsible.SuspendLayout();
             this.tpKeyboard.SuspendLayout();
             this.grpKBXIT.SuspendLayout();
             this.grpKBRIT.SuspendLayout();
@@ -14531,7 +14547,6 @@ namespace PowerSDR
             -2147483648});
             this.udMicGainMin.ValueChanged += new System.EventHandler(this.udMicGainMin_ValueChanged);
             this.udMicGainMin.LostFocus += new System.EventHandler(this.udMicGainMin_LostFocus);
- 
             // 
             // udMicGainMax
             // 
@@ -14561,7 +14576,6 @@ namespace PowerSDR
             0});
             this.udMicGainMax.ValueChanged += new System.EventHandler(this.udMicGainMax_ValueChanged);
             this.udMicGainMax.LostFocus += new System.EventHandler(this.udMicGainMax_LostFocus);
- 
             // 
             // labelTS21
             // 
@@ -17134,6 +17148,7 @@ namespace PowerSDR
             this.tcAppearance.Controls.Add(this.tpAppearanceDisplay);
             this.tcAppearance.Controls.Add(this.tpAppearanceMeter);
             this.tcAppearance.Controls.Add(this.tcAppearanceTXDisplay);
+            this.tcAppearance.Controls.Add(this.tpAppearanceCollapsible);
             this.tcAppearance.Location = new System.Drawing.Point(0, 0);
             this.tcAppearance.Name = "tcAppearance";
             this.tcAppearance.SelectedIndex = 0;
@@ -18854,6 +18869,87 @@ namespace PowerSDR
             this.lblTXTextColor.TabIndex = 39;
             this.lblTXTextColor.Text = "Text:";
             this.lblTXTextColor.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // tpAppearanceCollapsible
+            // 
+            this.tpAppearanceCollapsible.Controls.Add(this.txtCollapsedHeight);
+            this.tpAppearanceCollapsible.Controls.Add(this.txtCollapsedWidth);
+            this.tpAppearanceCollapsible.Controls.Add(this.grpBoxCollapsible);
+            this.tpAppearanceCollapsible.Location = new System.Drawing.Point(4, 22);
+            this.tpAppearanceCollapsible.Name = "tpAppearanceCollapsible";
+            this.tpAppearanceCollapsible.Padding = new System.Windows.Forms.Padding(3);
+            this.tpAppearanceCollapsible.Size = new System.Drawing.Size(592, 318);
+            this.tpAppearanceCollapsible.TabIndex = 4;
+            this.tpAppearanceCollapsible.Text = "Collapsible Display";
+            this.tpAppearanceCollapsible.UseVisualStyleBackColor = true;
+            // 
+            // txtCollapsedHeight
+            // 
+            this.txtCollapsedHeight.Location = new System.Drawing.Point(530, 15);
+            this.txtCollapsedHeight.MaxLength = 50;
+            this.txtCollapsedHeight.Name = "txtCollapsedHeight";
+            this.txtCollapsedHeight.Size = new System.Drawing.Size(37, 20);
+            this.txtCollapsedHeight.TabIndex = 15;
+            this.txtCollapsedHeight.Text = "0";
+            this.txtCollapsedHeight.Visible = false;
+            // 
+            // txtCollapsedWidth
+            // 
+            this.txtCollapsedWidth.Location = new System.Drawing.Point(487, 15);
+            this.txtCollapsedWidth.MaxLength = 50;
+            this.txtCollapsedWidth.Name = "txtCollapsedWidth";
+            this.txtCollapsedWidth.Size = new System.Drawing.Size(37, 20);
+            this.txtCollapsedWidth.TabIndex = 14;
+            this.txtCollapsedWidth.Text = "0";
+            this.txtCollapsedWidth.Visible = false;
+            // 
+            // grpBoxCollapsible
+            // 
+            this.grpBoxCollapsible.Controls.Add(this.chkShowModeControls);
+            this.grpBoxCollapsible.Controls.Add(this.chkShowBandControls);
+            this.grpBoxCollapsible.Controls.Add(this.chkShowTopControls);
+            this.grpBoxCollapsible.Location = new System.Drawing.Point(15, 15);
+            this.grpBoxCollapsible.Name = "grpBoxCollapsible";
+            this.grpBoxCollapsible.Size = new System.Drawing.Size(162, 88);
+            this.grpBoxCollapsible.TabIndex = 1;
+            this.grpBoxCollapsible.TabStop = false;
+            this.grpBoxCollapsible.Text = "Show Additional Controls";
+            // 
+            // chkShowModeControls
+            // 
+            this.chkShowModeControls.AutoSize = true;
+            this.chkShowModeControls.Image = null;
+            this.chkShowModeControls.Location = new System.Drawing.Point(6, 65);
+            this.chkShowModeControls.Name = "chkShowModeControls";
+            this.chkShowModeControls.Size = new System.Drawing.Size(94, 17);
+            this.chkShowModeControls.TabIndex = 14;
+            this.chkShowModeControls.Text = "Mode Controls";
+            this.chkShowModeControls.UseVisualStyleBackColor = true;
+            this.chkShowModeControls.CheckedChanged += new System.EventHandler(this.chkModeControls_CheckedChanged);
+            // 
+            // chkShowBandControls
+            // 
+            this.chkShowBandControls.AutoSize = true;
+            this.chkShowBandControls.Image = null;
+            this.chkShowBandControls.Location = new System.Drawing.Point(6, 42);
+            this.chkShowBandControls.Name = "chkShowBandControls";
+            this.chkShowBandControls.Size = new System.Drawing.Size(92, 17);
+            this.chkShowBandControls.TabIndex = 11;
+            this.chkShowBandControls.Text = "Band Controls";
+            this.chkShowBandControls.UseVisualStyleBackColor = true;
+            this.chkShowBandControls.CheckedChanged += new System.EventHandler(this.chkShowBandControls_CheckedChanged);
+            // 
+            // chkShowTopControls
+            // 
+            this.chkShowTopControls.AutoSize = true;
+            this.chkShowTopControls.Image = null;
+            this.chkShowTopControls.Location = new System.Drawing.Point(6, 19);
+            this.chkShowTopControls.Name = "chkShowTopControls";
+            this.chkShowTopControls.Size = new System.Drawing.Size(86, 17);
+            this.chkShowTopControls.TabIndex = 10;
+            this.chkShowTopControls.Text = "Top Controls";
+            this.chkShowTopControls.UseVisualStyleBackColor = true;
+            this.chkShowTopControls.CheckedChanged += new System.EventHandler(this.chkShowTopControls_CheckedChanged);
             // 
             // tpKeyboard
             // 
@@ -23206,6 +23302,10 @@ namespace PowerSDR
             ((System.ComponentModel.ISupportInitialize)(this.tbTXVGridFineAlpha)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.tbTXVGridCourseAlpha)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.tbTXBackgroundAlpha)).EndInit();
+            this.tpAppearanceCollapsible.ResumeLayout(false);
+            this.tpAppearanceCollapsible.PerformLayout();
+            this.grpBoxCollapsible.ResumeLayout(false);
+            this.grpBoxCollapsible.PerformLayout();
             this.tpKeyboard.ResumeLayout(false);
             this.grpKBXIT.ResumeLayout(false);
             this.grpKBRIT.ResumeLayout(false);
@@ -24041,6 +24141,28 @@ namespace PowerSDR
                         comboAudioTransmit1.Items.Add(s);
                     }
                 }
+            }
+        }
+
+        public int CollapsedWidth
+        {
+            get { return int.Parse(this.txtCollapsedWidth.Text); }
+            set
+            {
+                this.txtCollapsedWidth.Text = value.ToString();
+                //				if (!saving)
+                //					SaveOptions();
+            }
+        }
+
+        public int CollapsedHeight
+        {
+            get { return int.Parse(this.txtCollapsedHeight.Text); }
+            set
+            {
+                this.txtCollapsedHeight.Text = value.ToString();
+                //				if (!saving)
+                //					SaveOptions();
             }
         }
 
@@ -28864,6 +28986,31 @@ namespace PowerSDR
         {
             console.MicGainMax = (int)udMicGainMax.Value;
         }
+
+        private void chkShowTopControls_CheckedChanged(object sender, EventArgs e)
+        {
+            this.console.ShowTopControls = chkShowTopControls.Checked;
+
+            if (this.console.CollapsedDisplay)
+                this.console.CollapseDisplay();
+        }
+
+        private void chkShowBandControls_CheckedChanged(object sender, EventArgs e)
+        {
+            this.console.ShowBandControls = chkShowBandControls.Checked;
+
+            if (this.console.CollapsedDisplay)
+                this.console.CollapseDisplay();
+        }
+
+        private void chkModeControls_CheckedChanged(object sender, EventArgs e)
+        {
+            this.console.ShowModeControls = chkShowModeControls.Checked;
+
+            if (this.console.CollapsedDisplay)
+                this.console.CollapseDisplay();
+        }
+
 
         #endregion
 
