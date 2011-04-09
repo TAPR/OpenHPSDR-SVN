@@ -3,5 +3,11 @@ V1.0  Released 28 Jan 2011 - Original production code loaded by TAPR (VK6APH)
 V1.1  Released  4 Mar 2011 - Added mic/line-in selection on Penny(Lane) (VK6APH). Added support for multiple receivers
                              in a single Mercury board or Multiple Mercury boards (K5SO).
 
+v1.2  Released  9 Apr 2011 - Reset sequence number sent by Metis if board idle or Stop received. Do not reset sequence
+			     number if a Discovery received. IP address of PC that is receiving data is preserved during
+			     Discovery – this enables multiple Metis boards on the same network.
+			     Discovery reply indicates if Metis board is running and current software version loaded.
+			     Added IP address of DHCP server, that provides Metis' IP address, to DHCP_request.  
+			     Added wide band bandscope data with on/off control. (VK6APH) 
 
 
