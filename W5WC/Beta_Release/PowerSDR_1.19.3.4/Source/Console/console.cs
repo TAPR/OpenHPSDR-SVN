@@ -4954,8 +4954,8 @@ namespace PowerSDR
             resources.ApplyResources(this.ptbMic, "ptbMic");
             this.ptbMic.HeadImage = null;
             this.ptbMic.LargeChange = 1;
-            this.ptbMic.Maximum = 10;
-            this.ptbMic.Minimum = -120;
+            this.ptbMic.Maximum = 70;
+            this.ptbMic.Minimum = -96;
             this.ptbMic.Name = "ptbMic";
             this.ptbMic.Orientation = System.Windows.Forms.Orientation.Horizontal;
             this.ptbMic.SmallChange = 1;
@@ -28998,8 +28998,8 @@ namespace PowerSDR
 
 		private void ptbMic_Scroll(object sender, System.EventArgs e)
 		{
-            if (ModelIsHPSDRorHermes())
-            {
+           // if (ModelIsHPSDRorHermes())
+           // {
                 ptbMic.Minimum = mic_gain_min;
                 ptbMic.Maximum = mic_gain_max;
                 double gain_db = (double)ptbMic.Value;
@@ -29017,8 +29017,8 @@ namespace PowerSDR
                 //double gain_db = (double)ptbMic.Value;
                 Audio.MicPreamp = Math.Pow(10.0, gain_db / 20.0); // convert to scalar            
                 if (ptbMic.Focused) btnHidden.Focus();
-            }
-            else
+           // }
+          /*  else
             {
                 if (chkMicMute.Checked == true) chkMicMute.Checked = false;
                 ptbMic.Minimum = 0;
@@ -29028,7 +29028,7 @@ namespace PowerSDR
                 if (mic_boost) gain_db += 20.0;
                 Audio.MicPreamp = Math.Pow(10.0, gain_db / 20.0); // convert to scalar
                 if (ptbMic.Focused) btnHidden.Focus();
-            }
+            }*/
 		}
 
 		private void ptbCWSpeed_Scroll(object sender, System.EventArgs e)
