@@ -8821,16 +8821,16 @@
     <value>159, 21</value>
   </data>
   <data name="lblMicVal.Size" type="System.Drawing.Size, System.Drawing">
-    <value>55, 16</value>
+    <value>44, 16</value>
   </data>
   <data name="lblMicVal.TabIndex" type="System.Int32, mscorlib">
     <value>108</value>
   </data>
   <data name="lblMicVal.Text" xml:space="preserve">
-    <value>-40</value>
+    <value>6</value>
   </data>
   <data name="lblMicVal.TextAlign" type="System.Drawing.ContentAlignment, System.Drawing">
-    <value>MiddleLeft</value>
+    <value>MiddleCenter</value>
   </data>
   <data name="&gt;&gt;lblMicVal.Name" xml:space="preserve">
     <value>lblMicVal</value>
