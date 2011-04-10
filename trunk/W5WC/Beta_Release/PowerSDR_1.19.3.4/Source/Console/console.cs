@@ -23390,6 +23390,13 @@ namespace PowerSDR
 			}
 		}
 
+        private Keys key_space_ptt = Keys.Space;
+        public Keys KeySpacePTT
+        {
+            get { return key_space_ptt; }
+            set { key_space_ptt = value; }
+        }
+
   
 
 		private bool xvtr_present = false;
@@ -23530,6 +23537,12 @@ namespace PowerSDR
             set { s_meter = value; }
         }
 
+        private bool spacebar_ptt = true;
+        public bool SpaceBarPTT
+        {
+            get { return spacebar_ptt; }
+            set { spacebar_ptt = value; }
+        }
 
 		public float PreampOffset
 		{
@@ -26979,13 +26992,13 @@ namespace PowerSDR
 		}
 
 		private void Console_KeyUp(object sender, System.Windows.Forms.KeyEventArgs e)
-		{
+        {
 			if(e.Shift == false && shift_down)
 				shift_down = false;
-		}
+        }
 
 		private void Console_KeyDown(object sender, System.Windows.Forms.KeyEventArgs e)
-		{
+        {
 			if(e.Shift == true && !shift_down)
 				shift_down = true;
 
@@ -27004,6 +27017,7 @@ namespace PowerSDR
                         break;
 					case Keys.C:
 						if(fwc_init && (current_model == Model.FLEX5000 || current_model == Model.FLEX3000))
+                            
 						{
 							fwcCalForm = new FWCCalForm(this);
 							fwcCalForm.Show();
@@ -27040,20 +27054,25 @@ namespace PowerSDR
 						mnuRelays.Visible = true;
 						break;
 					case Keys.P:
-						if(fwc_init && (current_model == Model.FLEX5000 || current_model == Model.FLEX3000))
-						{
-							flex5000ProdTestForm = new FLEX5000ProdTestForm(this);
-							flex5000ProdTestForm.Show();
-							flex5000ProdTestForm.Focus();
-						}
-						else
-						{
-							if(ProdTestForm == null || ProdTestForm.IsDisposed)
-								ProdTestForm = new ProductionTest(this);
-							ProdTestForm.Show();
-							ProdTestForm.Focus();
-						}
-						break;
+                        switch (current_model)
+                        {
+                            case Model.FLEX5000:
+                            case Model.FLEX3000:
+                                if (fwc_init)
+                                {
+                                    flex5000ProdTestForm = new FLEX5000ProdTestForm(this);
+                                    flex5000ProdTestForm.Show();
+                                    flex5000ProdTestForm.Focus();
+                                }
+                                break;
+                            case Model.SDR1000:
+                                if (ProdTestForm == null || ProdTestForm.IsDisposed)
+                                    ProdTestForm = new ProductionTest(this);
+                                ProdTestForm.Show();
+                                ProdTestForm.Focus();
+                                break;
+                        }
+                        break;
 					case Keys.R:
 						if(fwc_init && current_model == Model.FLEX5000 && FWCEEPROM.RX2OK)
 						{
@@ -27081,6 +27100,15 @@ namespace PowerSDR
 							PAQualForm.Focus();
 						}
 						break;
+                  /*  case Keys.V:
+                        if (fwc_init && current_model == Model.FLEX5000 && FWCEEPROM.VUOK)
+                        {
+                            if (flex5000VUCalForm == null || flex5000VUCalForm.IsDisposed)
+                                flex5000VUCalForm = new FLEX5000VUCalForm(this);
+                            flex5000VUCalForm.Show();
+                            flex5000VUCalForm.Focus();
+                        }
+                        break;*/
 				}
 				shift_down = false;
 			}
@@ -27096,20 +27124,16 @@ namespace PowerSDR
 							flex5000LPFForm.Show();
 							flex5000LPFForm.Focus();
 						}
-						break;
+						break;                    
                     case Keys.D:
                         if (dspTestForm == null || dspTestForm.IsDisposed)
                             dspTestForm = new DSPTestForm(this);
+                        dspTestForm.Show();
+                        dspTestForm.Focus();
                         break;
-					case Keys.P:
-                        if (fwc_init && current_model == Model.FLEX5000)
-                        {
-                            if (predistForm == null || predistForm.IsDisposed)
-                                predistForm = new Predistest();
-                            predistForm.Show();
-                            predistForm.Focus();
-                        }
-						break;
+                  /*  case Keys.G:
+                        CallCal1500TXImageComb();
+                        break;*/
                     case Keys.R:
                         if (FWCEEPROM.RX2OK)
                         {
@@ -27336,6 +27360,16 @@ namespace PowerSDR
 
 				switch(e.KeyCode)
 				{
+                    case Keys.Space:
+                        {
+                            if (chkPower.Checked && spacebar_ptt)
+                            {
+                                chkMOX.Checked = !chkMOX.Checked;
+                                e.Handled = true;
+                            }
+                            else if (!chkPower.Checked && spacebar_ptt) e.Handled = true;
+                        }
+                        break;
 					case Keys.Multiply:
 						chkMUT.Checked = !chkMUT.Checked;
 						break;
@@ -28012,7 +28046,7 @@ namespace PowerSDR
 					txtVFOAFreq.Select(1,0);
 				}
 			}
-		}
+        }
 
 		// chkPower
         private void chkPower_CheckedChanged(object sender, System.EventArgs e)
@@ -36611,10 +36645,6 @@ namespace PowerSDR
 			}
 			previous_delta = h_delta+v_delta; //we'll check this next time through...
 
-#if (DEBUG)
-			if (this.txtRigAnsInjection != null)
-				this.txtRigAnsInjection.Location = new Point(5,this.button1.Location.Y);
-#endif
 
             if (this.collapsedDisplay)
                 this.RepositionControlsForCollapsedlDisplay();
@@ -38676,7 +38706,7 @@ namespace PowerSDR
                 return;
             TDxInput.Vector3D t = TDxSensor.Translation;
             TDxInput.AngleAxis r = TDxSensor.Rotation;
-            TDxDevice.Keyboard.IsKeyDown(1);
+           /* TDxDevice.Keyboard.IsKeyDown(1);
             double del;
             int val;
 
@@ -38739,7 +38769,7 @@ namespace PowerSDR
                     ptbFilterWidth.Value = val;
                     ptbFilterWidth_Scroll(this.ptbFilterWidth, EventArgs.Empty);
                 }
-            }
+            }*/
         }
 
         public void PressKeyboardButton(Keys keyCode)
@@ -39103,9 +39133,6 @@ namespace PowerSDR
             panelBandHF.Show();
             panelBandVHF.Show();
             chkBCI.Show();
-#if (DEBUG)
-			txtRigAnsInjection.Show();
-#endif
 
             int h_delta = this.Width - console_basis_size.Width;
             int v_delta = Math.Max(this.Height - console_basis_size.Height, 0);
@@ -39246,9 +39273,6 @@ namespace PowerSDR
             panelFilter.Hide();
             panelBandVHF.Hide();
             chkBCI.Hide();
-#if (DEBUG)
-			txtRigAnsInjection.Hide();
-#endif
 
             if (this.showTopControls)
             {

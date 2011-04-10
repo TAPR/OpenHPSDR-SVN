@@ -1493,6 +1493,8 @@ namespace PowerSDR
         private CheckBoxTS chkShowModeControls;
         private CheckBoxTS chkShowBandControls;
         private CheckBoxTS chkShowTopControls;
+        private GroupBoxTS grpBoxSpaceBarPTT;
+        private CheckBoxTS chkSpaceBarPTT;
         private System.ComponentModel.IContainer components;
 
         #endregion
@@ -3146,6 +3148,8 @@ namespace PowerSDR
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.grpDiagInfo = new System.Windows.Forms.GroupBoxTS();
             this.lblSyncData = new System.Windows.Forms.LabelTS();
+            this.chkSpaceBarPTT = new System.Windows.Forms.CheckBoxTS();
+            this.grpBoxSpaceBarPTT = new System.Windows.Forms.GroupBoxTS();
             this.tcSetup.SuspendLayout();
             this.tpGeneral.SuspendLayout();
             this.tcGeneral.SuspendLayout();
@@ -3500,6 +3504,7 @@ namespace PowerSDR
             ((System.ComponentModel.ISupportInitialize)(this.udImpulseNum)).BeginInit();
             this.grpTestAudioBalance.SuspendLayout();
             this.grpDiagInfo.SuspendLayout();
+            this.grpBoxSpaceBarPTT.SuspendLayout();
             this.SuspendLayout();
             // 
             // tcSetup
@@ -18953,6 +18958,7 @@ namespace PowerSDR
             // 
             // tpKeyboard
             // 
+            this.tpKeyboard.Controls.Add(this.grpBoxSpaceBarPTT);
             this.tpKeyboard.Controls.Add(this.grpKBXIT);
             this.tpKeyboard.Controls.Add(this.grpKBRIT);
             this.tpKeyboard.Controls.Add(this.grpKBMode);
@@ -22962,6 +22968,29 @@ namespace PowerSDR
             this.lblSyncData.TabIndex = 0;
             this.lblSyncData.Text = "Frame Sync: ";
             // 
+            // chkSpaceBarPTT
+            // 
+            this.chkSpaceBarPTT.Checked = true;
+            this.chkSpaceBarPTT.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkSpaceBarPTT.Image = null;
+            this.chkSpaceBarPTT.Location = new System.Drawing.Point(22, 39);
+            this.chkSpaceBarPTT.Name = "chkSpaceBarPTT";
+            this.chkSpaceBarPTT.Size = new System.Drawing.Size(64, 16);
+            this.chkSpaceBarPTT.TabIndex = 40;
+            this.chkSpaceBarPTT.Text = "Enable";
+            this.toolTip1.SetToolTip(this.chkSpaceBarPTT, "Check to enable spacebar push-to-talk");
+            this.chkSpaceBarPTT.CheckedChanged += new System.EventHandler(this.chkSpaceBarPTT_CheckedChanged);
+            // 
+            // grpBoxSpaceBarPTT
+            // 
+            this.grpBoxSpaceBarPTT.Controls.Add(this.chkSpaceBarPTT);
+            this.grpBoxSpaceBarPTT.Location = new System.Drawing.Point(392, 112);
+            this.grpBoxSpaceBarPTT.Name = "grpBoxSpaceBarPTT";
+            this.grpBoxSpaceBarPTT.Size = new System.Drawing.Size(112, 72);
+            this.grpBoxSpaceBarPTT.TabIndex = 41;
+            this.grpBoxSpaceBarPTT.TabStop = false;
+            this.grpBoxSpaceBarPTT.Text = "SpaceBar PTT";
+            // 
             // Setup
             // 
             this.AutoScaleBaseSize = new System.Drawing.Size(5, 13);
@@ -23346,6 +23375,7 @@ namespace PowerSDR
             ((System.ComponentModel.ISupportInitialize)(this.udImpulseNum)).EndInit();
             this.grpTestAudioBalance.ResumeLayout(false);
             this.grpDiagInfo.ResumeLayout(false);
+            this.grpBoxSpaceBarPTT.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -24028,6 +24058,7 @@ namespace PowerSDR
             //			KeyList.Add(Keys.OemPeriod);
             //			KeyList.Add(Keys.OemBackslash);
             //			KeyList.Add(Keys.OemQuestion);
+            //          KeyList.Add(Keys.Space);
 
             foreach (Control c in tpKeyboard.Controls)
             {
@@ -33644,6 +33675,11 @@ namespace PowerSDR
         private void chkTXGridControl_CheckedChanged(object sender, EventArgs e)
         {
             Display.TXGridControl = chkTXGridControl.Checked;
+        }
+
+        private void chkSpaceBarPTT_CheckedChanged(object sender, EventArgs e)
+        {
+            console.SpaceBarPTT = chkSpaceBarPTT.Checked;
         }
     }
 
