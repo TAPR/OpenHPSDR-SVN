@@ -450,8 +450,8 @@ namespace PowerSDR
 		private Thread noise_gate_update_thread;			// polls the mic input during TX
         private Thread f3k_temp_thread;				// polls the temp on the FLEX-3000 to turn fan on/off
         private Thread f3k_mic_function_thread;				// handles the FLEX-3000 mic inputs (Up, Down, Fast)
-        private Thread wbir_thread;
-        private Thread wbir_rx2_thread;
+        //private Thread wbir_thread;
+       // private Thread wbir_rx2_thread;
         private Thread update_rx1_dds_thread;
         private Thread update_rx2_dds_thread;
         private Thread update_tx_dds_thread;
@@ -735,8 +735,7 @@ namespace PowerSDR
 		private Point txt_display_cursor_freq_basis = new Point (100,100);		//k6jca
 		private Point txt_display_cursor_power_basis = new Point (100,100);		//k6jca
 		private Point txt_display_cursor_offset_basis = new Point (100,100);		//k6jca
-		private Point chk_power_basis = new Point (100,100);		//k6jca
-		private Point gr_multirx_basis = new Point (100,100);		//k6jca
+        private Point gr_multirx_basis = new Point(100, 100);		//k6jca
 
 		private Point pan_rx2_divider_basis = new Point(100, 100);
 		private Size pan_rx2_divider_size_basis = new Size(100, 100);
@@ -778,14 +777,25 @@ namespace PowerSDR
         // :W1CEG:
         private Size gr_multi_meter_size_basis = new Size(100, 100);
         private Point pic_multi_meter_digital_basis = new Point(100, 100);
+        private Size pic_multi_meter_size_basis = new Size(100, 100);
+        private Point lbl_multi_smeter_basis = new Point(100, 100);
+        private Point txt_multi_text_basis = new Point(100, 100);
+        private Point chk_power_basis = new Point(100, 100);		//k6jca
+        private Point gr_power_basis = new Point(100, 100);		//k6jca
         private Size gr_options_size_basis = new Size(100, 100);
         private Point chk_mon_basis = new Point(100, 100);
         private Point chk_mut_basis = new Point(100, 100);
+        private Point chk_mox_basis = new Point(100, 100);
+        private Point chk_tun_basis = new Point(100, 100);
+       // private Point lbl_af_basis = new Point(100, 100);
         private Point tb_af_basis = new Point(100, 100);
         private Point tb_rf_basis = new Point(100, 100);
         private Point gr_display_basis = new Point(100, 100);
         private Point pic_display_basis = new Point(100, 100);
         private Point combo_display_mode_basis = new Point(100, 100);
+        private Point combo_agc_basis = new Point(100, 100);       
+        private Point combo_meter_rxmode_basis = new Point(100, 100);
+        private Point combo_meter_txmode_basis = new Point(100, 100);
         private Size tb_display_zoom_size_basis = new Size(100, 100);
         private Size gr_BandHF_basis_size = new Size(100, 100);
         private Size gr_BandVHF_basis_size = new Size(100, 100);
@@ -1156,7 +1166,12 @@ namespace PowerSDR
         private CheckBoxTS chkBCI;
         private CheckBoxTS chkMUT;
         private MenuItem mnuCollapse;
-		private System.Windows.Forms.CheckBoxTS chkFullDuplex;
+        private PanelTS panelPower;
+        private LabelTS lblAF2;
+        private LabelTS lblRF2;
+        private LabelTS lblModeLabel;
+        private LabelTS lblFilterLabel;
+		private CheckBoxTS chkFullDuplex;
 
 		#endregion
 
@@ -1723,6 +1738,7 @@ namespace PowerSDR
             this.timer_cpu_meter = new System.Windows.Forms.Timer(this.components);
             this.timer_peak_text = new System.Windows.Forms.Timer(this.components);
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.chkPower = new System.Windows.Forms.CheckBoxTS();
             this.ptbRX2RF = new PowerSDR.PrettyTrackBar();
             this.chkSR = new System.Windows.Forms.CheckBoxTS();
             this.chkFWCATU = new System.Windows.Forms.CheckBoxTS();
@@ -1822,7 +1838,6 @@ namespace PowerSDR
             this.chkVFOATX = new System.Windows.Forms.CheckBoxTS();
             this.txtWheelTune = new System.Windows.Forms.TextBoxTS();
             this.chkVFOBTX = new System.Windows.Forms.CheckBoxTS();
-            this.chkPower = new System.Windows.Forms.CheckBoxTS();
             this.comboMeterTXMode = new System.Windows.Forms.ComboBoxTS();
             this.comboMeterRXMode = new System.Windows.Forms.ComboBoxTS();
             this.chkSquelch = new System.Windows.Forms.CheckBoxTS();
@@ -1895,6 +1910,8 @@ namespace PowerSDR
             this.toolStripMenuItemRX2FilterConfigure = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItemRX2FilterReset = new System.Windows.Forms.ToolStripMenuItem();
             this.timer_navigate = new System.Windows.Forms.Timer(this.components);
+            this.lblRF2 = new System.Windows.Forms.LabelTS();
+            this.panelPower = new System.Windows.Forms.PanelTS();
             this.ptbRX2Squelch = new PowerSDR.PrettyTrackBar();
             this.panelOptions = new System.Windows.Forms.PanelTS();
             this.panelFilter = new System.Windows.Forms.PanelTS();
@@ -1954,6 +1971,7 @@ namespace PowerSDR
             this.lblAF = new System.Windows.Forms.LabelTS();
             this.lblPreamp = new System.Windows.Forms.LabelTS();
             this.lblPWR = new System.Windows.Forms.LabelTS();
+            this.lblAF2 = new System.Windows.Forms.LabelTS();
             this.panelModeSpecificPhone = new System.Windows.Forms.PanelTS();
             this.picNoiseGate = new System.Windows.Forms.PictureBox();
             this.lblNoiseGateVal = new System.Windows.Forms.LabelTS();
@@ -1990,6 +2008,8 @@ namespace PowerSDR
             this.panelBandHF = new System.Windows.Forms.PanelTS();
             this.txtVFOAFreq = new System.Windows.Forms.TextBoxTS();
             this.grpVFOA = new System.Windows.Forms.GroupBoxTS();
+            this.lblModeLabel = new System.Windows.Forms.LabelTS();
+            this.lblFilterLabel = new System.Windows.Forms.LabelTS();
             this.panelVFOASubHover = new System.Windows.Forms.Panel();
             this.panelVFOAHover = new System.Windows.Forms.Panel();
             this.txtVFOALSD = new System.Windows.Forms.TextBoxTS();
@@ -2005,9 +2025,9 @@ namespace PowerSDR
             this.txtVFOBFreq = new System.Windows.Forms.TextBoxTS();
             this.btnBandHF = new System.Windows.Forms.ButtonTS();
             this.grpMultimeter = new System.Windows.Forms.GroupBoxTS();
+            this.txtMultiText = new System.Windows.Forms.TextBoxTS();
             this.picMultiMeterDigital = new System.Windows.Forms.PictureBox();
             this.lblMultiSMeter = new System.Windows.Forms.LabelTS();
-            this.txtMultiText = new System.Windows.Forms.TextBoxTS();
             this.lblTuneStep = new System.Windows.Forms.LabelTS();
             this.grpVFOBetween = new System.Windows.Forms.GroupBoxTS();
             this.lblDisplayModeTop = new System.Windows.Forms.LabelTS();
@@ -2065,6 +2085,7 @@ namespace PowerSDR
             ((System.ComponentModel.ISupportInitialize)(this.picRX2Squelch)).BeginInit();
             this.contextMenuStripFilterRX1.SuspendLayout();
             this.contextMenuStripFilterRX2.SuspendLayout();
+            this.panelPower.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ptbRX2Squelch)).BeginInit();
             this.panelOptions.SuspendLayout();
             this.panelFilter.SuspendLayout();
@@ -2247,6 +2268,17 @@ namespace PowerSDR
             // 
             this.timer_peak_text.Interval = 500;
             this.timer_peak_text.Tick += new System.EventHandler(this.timer_peak_text_Tick);
+            // 
+            // chkPower
+            // 
+            resources.ApplyResources(this.chkPower, "chkPower");
+            this.chkPower.BackColor = System.Drawing.SystemColors.Control;
+            this.chkPower.FlatAppearance.BorderSize = 0;
+            this.chkPower.Image = null;
+            this.chkPower.Name = "chkPower";
+            this.toolTip1.SetToolTip(this.chkPower, resources.GetString("chkPower.ToolTip"));
+            this.chkPower.UseVisualStyleBackColor = false;
+            this.chkPower.CheckedChanged += new System.EventHandler(this.chkPower_CheckedChanged);
             // 
             // ptbRX2RF
             // 
@@ -3468,17 +3500,6 @@ namespace PowerSDR
             this.toolTip1.SetToolTip(this.chkVFOBTX, resources.GetString("chkVFOBTX.ToolTip"));
             this.chkVFOBTX.CheckedChanged += new System.EventHandler(this.chkVFOBTX_CheckedChanged);
             // 
-            // chkPower
-            // 
-            resources.ApplyResources(this.chkPower, "chkPower");
-            this.chkPower.BackColor = System.Drawing.SystemColors.Control;
-            this.chkPower.FlatAppearance.BorderSize = 0;
-            this.chkPower.Image = null;
-            this.chkPower.Name = "chkPower";
-            this.toolTip1.SetToolTip(this.chkPower, resources.GetString("chkPower.ToolTip"));
-            this.chkPower.UseVisualStyleBackColor = false;
-            this.chkPower.CheckedChanged += new System.EventHandler(this.chkPower_CheckedChanged);
-            // 
             // comboMeterTXMode
             // 
             this.comboMeterTXMode.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(46)))), ((int)(((byte)(46)))));
@@ -4281,6 +4302,22 @@ namespace PowerSDR
             // 
             this.timer_navigate.Tick += new System.EventHandler(this.timer_navigate_Tick);
             // 
+            // lblRF2
+            // 
+            this.lblRF2.BackColor = System.Drawing.Color.Transparent;
+            this.lblRF2.ForeColor = System.Drawing.Color.White;
+            this.lblRF2.Image = null;
+            resources.ApplyResources(this.lblRF2, "lblRF2");
+            this.lblRF2.Name = "lblRF2";
+            // 
+            // panelPower
+            // 
+            resources.ApplyResources(this.panelPower, "panelPower");
+            this.panelPower.BackColor = System.Drawing.Color.Transparent;
+            this.panelPower.Controls.Add(this.chkPower);
+            this.panelPower.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.panelPower.Name = "panelPower";
+            // 
             // ptbRX2Squelch
             // 
             resources.ApplyResources(this.ptbRX2Squelch, "ptbRX2Squelch");
@@ -4862,6 +4899,14 @@ namespace PowerSDR
             resources.ApplyResources(this.lblPWR, "lblPWR");
             this.lblPWR.Name = "lblPWR";
             // 
+            // lblAF2
+            // 
+            this.lblAF2.BackColor = System.Drawing.Color.Transparent;
+            this.lblAF2.ForeColor = System.Drawing.Color.White;
+            this.lblAF2.Image = null;
+            resources.ApplyResources(this.lblAF2, "lblAF2");
+            this.lblAF2.Name = "lblAF2";
+            // 
             // panelModeSpecificPhone
             // 
             resources.ApplyResources(this.panelModeSpecificPhone, "panelModeSpecificPhone");
@@ -5261,6 +5306,8 @@ namespace PowerSDR
             // grpVFOA
             // 
             this.grpVFOA.BackColor = System.Drawing.Color.Transparent;
+            this.grpVFOA.Controls.Add(this.lblModeLabel);
+            this.grpVFOA.Controls.Add(this.lblFilterLabel);
             this.grpVFOA.Controls.Add(this.chkVFOATX);
             this.grpVFOA.Controls.Add(this.panelVFOASubHover);
             this.grpVFOA.Controls.Add(this.panelVFOAHover);
@@ -5273,6 +5320,22 @@ namespace PowerSDR
             this.grpVFOA.ForeColor = System.Drawing.Color.Red;
             this.grpVFOA.Name = "grpVFOA";
             this.grpVFOA.TabStop = false;
+            // 
+            // lblModeLabel
+            // 
+            resources.ApplyResources(this.lblModeLabel, "lblModeLabel");
+            this.lblModeLabel.BackColor = System.Drawing.Color.Black;
+            this.lblModeLabel.ForeColor = System.Drawing.Color.DarkOrange;
+            this.lblModeLabel.Image = null;
+            this.lblModeLabel.Name = "lblModeLabel";
+            // 
+            // lblFilterLabel
+            // 
+            resources.ApplyResources(this.lblFilterLabel, "lblFilterLabel");
+            this.lblFilterLabel.BackColor = System.Drawing.Color.Black;
+            this.lblFilterLabel.ForeColor = System.Drawing.Color.DarkOrange;
+            this.lblFilterLabel.Image = null;
+            this.lblFilterLabel.Name = "lblFilterLabel";
             // 
             // panelVFOASubHover
             // 
@@ -5419,14 +5482,24 @@ namespace PowerSDR
             // 
             this.grpMultimeter.BackColor = System.Drawing.Color.Transparent;
             this.grpMultimeter.Controls.Add(this.comboMeterTXMode);
-            this.grpMultimeter.Controls.Add(this.picMultiMeterDigital);
-            this.grpMultimeter.Controls.Add(this.lblMultiSMeter);
             this.grpMultimeter.Controls.Add(this.comboMeterRXMode);
             this.grpMultimeter.Controls.Add(this.txtMultiText);
+            this.grpMultimeter.Controls.Add(this.picMultiMeterDigital);
+            this.grpMultimeter.Controls.Add(this.lblMultiSMeter);
             this.grpMultimeter.ForeColor = System.Drawing.Color.White;
             resources.ApplyResources(this.grpMultimeter, "grpMultimeter");
             this.grpMultimeter.Name = "grpMultimeter";
             this.grpMultimeter.TabStop = false;
+            // 
+            // txtMultiText
+            // 
+            this.txtMultiText.BackColor = System.Drawing.Color.Black;
+            this.txtMultiText.Cursor = System.Windows.Forms.Cursors.Default;
+            resources.ApplyResources(this.txtMultiText, "txtMultiText");
+            this.txtMultiText.ForeColor = System.Drawing.Color.Yellow;
+            this.txtMultiText.Name = "txtMultiText";
+            this.txtMultiText.ReadOnly = true;
+            this.txtMultiText.GotFocus += new System.EventHandler(this.HideFocus);
             // 
             // picMultiMeterDigital
             // 
@@ -5439,19 +5512,11 @@ namespace PowerSDR
             // 
             // lblMultiSMeter
             // 
+            this.lblMultiSMeter.BackColor = System.Drawing.Color.Transparent;
+            this.lblMultiSMeter.ForeColor = System.Drawing.Color.White;
             this.lblMultiSMeter.Image = null;
             resources.ApplyResources(this.lblMultiSMeter, "lblMultiSMeter");
             this.lblMultiSMeter.Name = "lblMultiSMeter";
-            // 
-            // txtMultiText
-            // 
-            this.txtMultiText.BackColor = System.Drawing.Color.Black;
-            this.txtMultiText.Cursor = System.Windows.Forms.Cursors.Default;
-            resources.ApplyResources(this.txtMultiText, "txtMultiText");
-            this.txtMultiText.ForeColor = System.Drawing.Color.Yellow;
-            this.txtMultiText.Name = "txtMultiText";
-            this.txtMultiText.ReadOnly = true;
-            this.txtMultiText.GotFocus += new System.EventHandler(this.HideFocus);
             // 
             // lblTuneStep
             // 
@@ -5758,6 +5823,8 @@ namespace PowerSDR
             // 
             resources.ApplyResources(this, "$this");
             this.BackColor = System.Drawing.SystemColors.Control;
+            this.Controls.Add(this.lblRF2);
+            this.Controls.Add(this.panelPower);
             this.Controls.Add(this.picRX2Squelch);
             this.Controls.Add(this.ptbRX2Squelch);
             this.Controls.Add(this.ptbRX2RF);
@@ -5768,6 +5835,7 @@ namespace PowerSDR
             this.Controls.Add(this.panelRX2DSP);
             this.Controls.Add(this.panelRX2Mixer);
             this.Controls.Add(this.panelMultiRX);
+            this.Controls.Add(this.lblAF2);
             this.Controls.Add(this.panelDisplay2);
             this.Controls.Add(this.panelDSP);
             this.Controls.Add(this.panelVFO);
@@ -5785,7 +5853,6 @@ namespace PowerSDR
             this.Controls.Add(this.grpMultimeter);
             this.Controls.Add(this.grpVFOA);
             this.Controls.Add(this.grpVFOB);
-            this.Controls.Add(this.chkPower);
             this.Controls.Add(this.chkSquelch);
             this.Controls.Add(this.chkRX2);
             this.Controls.Add(this.panelDisplay);
@@ -5836,6 +5903,7 @@ namespace PowerSDR
             ((System.ComponentModel.ISupportInitialize)(this.picRX2Squelch)).EndInit();
             this.contextMenuStripFilterRX1.ResumeLayout(false);
             this.contextMenuStripFilterRX2.ResumeLayout(false);
+            this.panelPower.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.ptbRX2Squelch)).EndInit();
             this.panelOptions.ResumeLayout(false);
             this.panelFilter.ResumeLayout(false);
@@ -6494,6 +6562,30 @@ namespace PowerSDR
             ptbRF_Scroll(this, EventArgs.Empty);
             ptbVACRXGain_Scroll(this, EventArgs.Empty);
             ptbVACTXGain_Scroll(this, EventArgs.Empty);
+            radFilter1_CheckedChanged(this, EventArgs.Empty);
+            radFilter2_CheckedChanged(this, EventArgs.Empty);
+            radFilter3_CheckedChanged(this, EventArgs.Empty);
+            radFilter4_CheckedChanged(this, EventArgs.Empty);
+            radFilter5_CheckedChanged(this, EventArgs.Empty);
+            radFilter6_CheckedChanged(this, EventArgs.Empty);
+            radFilter7_CheckedChanged(this, EventArgs.Empty);
+            radFilter8_CheckedChanged(this, EventArgs.Empty);
+            radFilter9_CheckedChanged(this, EventArgs.Empty);
+            radFilter10_CheckedChanged(this, EventArgs.Empty);
+            radFilterVar1_CheckedChanged(this, EventArgs.Empty);
+            radFilterVar2_CheckedChanged(this, EventArgs.Empty);
+            radModeLSB_CheckedChanged(this, EventArgs.Empty);
+            radModeUSB_CheckedChanged(this, EventArgs.Empty);
+            radModeDSB_CheckedChanged(this, EventArgs.Empty);
+            radModeCWL_CheckedChanged(this, EventArgs.Empty);
+            radModeCWU_CheckedChanged(this, EventArgs.Empty);
+            radModeFMN_CheckedChanged(this, EventArgs.Empty);
+            radModeAM_CheckedChanged(this, EventArgs.Empty);
+            radModeSAM_CheckedChanged(this, EventArgs.Empty);
+            radModeSPEC_CheckedChanged(this, EventArgs.Empty);
+            radModeDIGL_CheckedChanged(this, EventArgs.Empty);
+            radModeDIGU_CheckedChanged(this, EventArgs.Empty);
+            radModeSPEC_CheckedChanged(this, EventArgs.Empty);
             CalcDisplayFreq();
 
             wheel_tune_index--;					// Setup wheel tuning
@@ -12141,7 +12233,7 @@ namespace PowerSDR
 			{
 				case Filter.F1:
 					radFilter1.Text = rx1_filters[(int)rx1_dsp_mode].GetName(Filter.F1);
-					break;
+    				break;
 				case Filter.F2:
 					radFilter2.Text = rx1_filters[(int)rx1_dsp_mode].GetName(Filter.F2);
 					break;
@@ -18407,6 +18499,7 @@ namespace PowerSDR
 							picMultiMeterDigital.BackColor = meter_background_color;
                             picRX2Meter.Height -= lblRX2Meter.ClientSize.Height;
                             picRX2Meter.BackColor = meter_background_color;
+                            lblMultiSMeter.Show();
 							break;
 					}
 						break;
@@ -18418,6 +18511,7 @@ namespace PowerSDR
 							picMultiMeterDigital.BackColor = edge_meter_background_color;
                             picRX2Meter.Height += lblRX2Meter.ClientSize.Height;
                             picRX2Meter.BackColor = edge_meter_background_color;
+                            lblMultiSMeter.Hide();
     						break;
 					}
 						break;
@@ -18427,7 +18521,7 @@ namespace PowerSDR
 			}
 		}
 
-		private Color gen_background_color = SystemColors.Control;//k6jca 1/13/08
+	/*	private Color gen_background_color = SystemColors.Control;//k6jca 1/13/08
 		public Color GenBackgroundColor							  //k6jca  1/13/08
 		{
 			get
@@ -18436,12 +18530,12 @@ namespace PowerSDR
 			}
 			set
 			{
-				/*gen_background_color = value;
-				this.BackColor = value;
-				grpVFOA.BackColor = value;
-				grpVFOB.BackColor = value;*/
+				//gen_background_color = value;
+				//this.BackColor = value;
+				//grpVFOA.BackColor = value;
+				//grpVFOB.BackColor = value;
 			}
-		}
+		}*/
 
 		public bool VFOSync
 		{
@@ -18464,6 +18558,8 @@ namespace PowerSDR
 				txtVFOBLSD.BackColor = value;
 				panelVFOAHover.BackColor = value;
 				panelVFOBHover.BackColor = value;
+                lblFilterLabel.BackColor = value;
+                lblModeLabel.BackColor = value;
 			}
 		}
 
@@ -18504,15 +18600,17 @@ namespace PowerSDR
 		}
 
 		private Color edge_meter_background_color = Color.Black;
+        private Pen edge_meter_background_pen = new Pen(Color.Black);
 		public Color EdgeMeterBackgroundColor
 		{
 			get { return edge_meter_background_color; }
 			set
 			{
 				edge_meter_background_color = value;
+                edge_meter_background_pen.Color = edge_meter_background_color;
 				if(current_meter_display_mode == MultiMeterDisplayMode.Edge)
 				{
-					picMultiMeterDigital.BackColor = value;
+ 					picMultiMeterDigital.BackColor = value;
 					picMultiMeterDigital.Invalidate();
                     picRX2Meter.BackColor = value;
                     if (chkRX2.Checked)
@@ -18520,7 +18618,7 @@ namespace PowerSDR
 				}
 			}
 		}
-
+        private SolidBrush low_brush = new SolidBrush(Color.White);					           
 		private Color edge_low_color = Color.White;
 		public Color EdgeLowColor
 		{
@@ -18528,6 +18626,7 @@ namespace PowerSDR
 			set
 			{
 				edge_low_color = value;
+                low_brush.Color = edge_low_color;
 				if(current_meter_display_mode == MultiMeterDisplayMode.Edge)
                 {
                     picMultiMeterDigital.Invalidate();
@@ -18536,7 +18635,7 @@ namespace PowerSDR
                 }
 			}
 		}
-
+        private SolidBrush high_brush = new SolidBrush(Color.Red);
 		private Color edge_high_color = Color.Red;
 		public Color EdgeHighColor
 		{
@@ -18544,6 +18643,7 @@ namespace PowerSDR
 			set
 			{
 				edge_high_color = value;
+                high_brush.Color = edge_high_color;
 				if(current_meter_display_mode == MultiMeterDisplayMode.Edge)
                 {
                     picMultiMeterDigital.Invalidate();
@@ -18553,6 +18653,9 @@ namespace PowerSDR
 			}
 		}
 
+						  
+        private Pen line_pen = new Pen(Color.Yellow);
+        private Pen line_dark_pen = new Pen(Color.Yellow);
 		private Color edge_avg_color = Color.Yellow;
 		public Color EdgeAVGColor
 		{
@@ -18560,11 +18663,17 @@ namespace PowerSDR
 			set
 			{
 				edge_avg_color = value;
+               // line_dark_pen.Color =
+				 //   Color.FromArgb((edge_avg_color.R+edge_meter_background_color.R)/2,
+				//	(edge_avg_color.G+edge_meter_background_color.G)/2,
+				//	(edge_avg_color.B+edge_meter_background_color.B)/2);
+ 
 				if(current_meter_display_mode == MultiMeterDisplayMode.Edge)
 					picMultiMeterDigital.Invalidate();
 			}
 		}
 
+        private Pen meter_background_pen = new Pen(Color.Black);
 		private Color meter_background_color = Color.Black;
 		public Color MeterBackgroundColor
 		{
@@ -18572,6 +18681,7 @@ namespace PowerSDR
 			set
 			{
 				meter_background_color = value;
+                meter_background_pen.Color = meter_background_color;
 				if(current_meter_display_mode == MultiMeterDisplayMode.Original)
 				{
 					picMultiMeterDigital.BackColor = value;
@@ -18626,6 +18736,8 @@ namespace PowerSDR
 				}
 			}
 		}
+
+        private Font font7 = new Font("Arial", 7.0f, FontStyle.Bold);
 
 		private int default_low_cut = 150;
 		public int DefaultLowCut
@@ -23020,6 +23132,7 @@ namespace PowerSDR
 			}
 		}
 
+        private Pen txtvfoafreq_forecolor_pen = new Pen(Color.Yellow, 2.0f);
 		private Color vfo_text_light_color = Color.Yellow;
 		public Color VFOTextLightColor
 		{
@@ -23030,6 +23143,7 @@ namespace PowerSDR
 				{
 					txtVFOAFreq.ForeColor = value;
 					txtVFOAMSD.ForeColor = value;
+                    txtvfoafreq_forecolor_pen.Color = vfo_text_light_color;
 				}
 
 				vfo_text_light_color = value;
@@ -23047,6 +23161,7 @@ namespace PowerSDR
 					txtVFOAFreq.ForeColor = value;
 					txtVFOAMSD.ForeColor = value;
 					txtVFOALSD.ForeColor = value;
+                    txtvfoafreq_forecolor_pen.Color = vfo_text_dark_color;
 				}
 				if(!chkVFOSplit.Checked)
 				{
@@ -23768,6 +23883,8 @@ namespace PowerSDR
 			return (y-16)*i*display_delay;
 		}
 
+        
+
 		#endregion
 
 		#region Paint Event Handlers
@@ -24071,19 +24188,17 @@ namespace PowerSDR
                     {
 						if(pixel_x <= 0) pixel_x = 1;
 
-						LinearGradientBrush brush = new LinearGradientBrush(new Rectangle(0, 0, pixel_x, H),
-							meter_left_color, meter_right_color, LinearGradientMode.Horizontal);
+						using(LinearGradientBrush brush = new LinearGradientBrush(new Rectangle(0, 0, pixel_x, H),
+							meter_left_color, meter_right_color, LinearGradientMode.Horizontal))
 
 						g.FillRectangle(brush, 0, 0, pixel_x, H);
-                        brush.Dispose();
-
-                        Pen meter_background_pen = new Pen(meter_background_color);
-						for(int i=0; i<21; i++)
+                        
+    					for(int i=0; i<21; i++)
 							g.DrawLine(meter_background_pen, 6+i*8, 0, 6+i*8, H);
 
 						g.DrawLine(Pens.Red, pixel_x, 0, pixel_x, H);
 						g.FillRectangle(meter_background_pen.Brush, pixel_x+1, 0, W-pixel_x, H);
-
+						
 						if(pixel_x >= meter_peak_value)
 						{
 							meter_peak_count = 0;
@@ -24209,12 +24324,9 @@ namespace PowerSDR
 							num = avg_num = current_meter_data * 0.2 + avg_num * 0.8; // slow decay
 					}
 
-                    Pen edge_meter_background_pen = new Pen(edge_meter_background_color);
-					g.DrawRectangle(edge_meter_background_pen, 0, 0, W, H);
-                    edge_meter_background_pen.Dispose();
+   				g.DrawRectangle(edge_meter_background_pen, 0, 0, W, H);
 
-					SolidBrush low_brush = new SolidBrush(edge_low_color);
-					SolidBrush high_brush = new SolidBrush(edge_high_color);
+	                 //using (Font f = new Font("Arial", 7.0f, FontStyle.Bold))
 
 					if(!mox)
 					{
@@ -24231,14 +24343,14 @@ namespace PowerSDR
 									g.FillRectangle(low_brush, (int)(i*spacing-spacing*0.5), H-4-3, 1, 3);
 									g.FillRectangle(low_brush, (int)(i*spacing), H-4-6, 2, 6);
 
-									Font f = new Font("Arial", 7.0f, FontStyle.Bold);
-									SizeF size = g.MeasureString((-1+i*2).ToString(), f, 1, StringFormat.GenericTypographic);
+									//Font f = new Font("Arial", 7.0f, FontStyle.Bold);
+									SizeF size = g.MeasureString((-1+i*2).ToString(), font7, 1, StringFormat.GenericTypographic);
 									double string_width = size.Width-2.0;
 									string_height = size.Height-2.0;
 									
 									//g.TextRenderingHint = TextRenderingHint.AntiAlias;
 									//g.SmoothingMode = SmoothingMode.AntiAlias;
-									g.DrawString((-1+i*2).ToString(), f, low_brush, (int)(i*spacing-string_width+(int)(i/5)), (int)(H-4-8-string_height));
+									g.DrawString((-1+i*2).ToString(), font7, low_brush, (int)(i*spacing-string_width+(int)(i/5)), (int)(H-4-8-string_height));
 									//g.SmoothingMode = SmoothingMode.None;
 								}
 								spacing = ((double)W*0.5-2.0-4.0)/3.0;
@@ -24247,12 +24359,12 @@ namespace PowerSDR
 									g.FillRectangle(high_brush, (int)((double)W*0.5+i*spacing-spacing*0.5), H-4-3, 1, 3);
 									g.FillRectangle(high_brush, (int)((double)W*0.5+i*spacing), H-4-6, 2, 6);
 
-									Font f = new Font("Arial", 7.0f, FontStyle.Bold);
-									SizeF size = g.MeasureString("+"+(i*20).ToString(), f, 3, StringFormat.GenericTypographic);
+									//Font f = new Font("Arial", 7.0f, FontStyle.Bold);
+									SizeF size = g.MeasureString("+"+(i*20).ToString(), font7, 3, StringFormat.GenericTypographic);
 									double string_width = size.Width-2.0;
 									
 									//g.TextRenderingHint = TextRenderingHint.SystemDefault;
-									g.DrawString("+"+(i*20).ToString(), f, high_brush, (int)(W*0.5+i*spacing-(int)string_width*3-i/3*2), (int)(H-4-8-string_height));
+									g.DrawString("+"+(i*20).ToString(), font7, high_brush, (int)(W*0.5+i*spacing-(int)string_width*3-i/3*2), (int)(H-4-8-string_height));
 								}
 
 								if(num > -73.0) // high area
@@ -24278,14 +24390,14 @@ namespace PowerSDR
 									g.FillRectangle(b, (int)(i*spacing-spacing/2), H-4-3, 1, 5);
 									g.FillRectangle(b, (int)(i*spacing), H-4-6, 2, 8);
 
-									Font f = new Font("Arial", 7.0f, FontStyle.Bold);
+									//Font f = new Font("Arial", 7.0f, FontStyle.Bold);
 									string s = (-120+i*20).ToString();
-									SizeF size = g.MeasureString(s, f, 1, StringFormat.GenericTypographic);
+									SizeF size = g.MeasureString(s, font7, 1, StringFormat.GenericTypographic);
 									double string_width = size.Width-2.0;
-									size = g.MeasureString("0", f, 1, StringFormat.GenericTypographic);
+									size = g.MeasureString("0", font7, 1, StringFormat.GenericTypographic);
 									string_height = size.Height-2.0;
 									
-									g.DrawString(s, f, b, (int)(i*spacing-(int)string_width*(s.Length)), (int)(H-4-8-string_height));
+									g.DrawString(s, font7, b, (int)(i*spacing-(int)string_width*(s.Length)), (int)(H-4-8-string_height));
 								}
 
 								pixel_x = (int)((num + 120.0)/120.0*(W-5.0));
@@ -24315,14 +24427,14 @@ namespace PowerSDR
 									g.FillRectangle(low_brush, (int)(i*spacing), H-4-6, 2, 6);
 
 									string s = (-30+i*10).ToString();
-									Font f = new Font("Arial", 7.0f, FontStyle.Bold);
-									SizeF size = g.MeasureString("0", f, 1, StringFormat.GenericTypographic);
+									//Font f = new Font("Arial", 7.0f, FontStyle.Bold);
+									SizeF size = g.MeasureString("0", font7, 1, StringFormat.GenericTypographic);
 									double string_width = size.Width-2.0;
 									string_height = size.Height-2.0;
 									
 									//g.TextRenderingHint = TextRenderingHint.AntiAlias;
 									//g.SmoothingMode = SmoothingMode.AntiAlias;
-									g.DrawString(s, f, low_brush, (int)(i*spacing-string_width*s.Length+1.0-(int)(i/2)+(int)(i/3)), (int)(H-4-8-string_height));
+									g.DrawString(s, font7, low_brush, (int)(i*spacing-string_width*s.Length+1.0-(int)(i/2)+(int)(i/3)), (int)(H-4-8-string_height));
 									//g.SmoothingMode = SmoothingMode.None;
 								}
 								spacing = (W*0.335-2.0-3.0)/3.0;
@@ -24331,12 +24443,12 @@ namespace PowerSDR
 									g.FillRectangle(high_brush, (int)((double)W*0.665+i*spacing-spacing*0.5), H-4-3, 1, 3);
 									g.FillRectangle(high_brush, (int)((double)W*0.665+i*spacing), H-4-6, 2, 6);
 
-									Font f = new Font("Arial", 7.0f, FontStyle.Bold);
-									SizeF size = g.MeasureString(i.ToString(), f, 3, StringFormat.GenericTypographic);
+									//Font f = new Font("Arial", 7.0f, FontStyle.Bold);
+									SizeF size = g.MeasureString(i.ToString(), font7, 3, StringFormat.GenericTypographic);
 									double string_width = size.Width-2.0;
 									
 									g.TextRenderingHint = TextRenderingHint.SystemDefault;
-									g.DrawString(i.ToString(), f, high_brush, (int)(W*0.665+i*spacing-(int)string_width), (int)(H-4-8-string_height));
+									g.DrawString(i.ToString(), font7, high_brush, (int)(W*0.665+i*spacing-(int)string_width), (int)(H-4-8-string_height));
 								}
 								
 								if(num > 0.0) // high area
@@ -24363,14 +24475,14 @@ namespace PowerSDR
 										g.FillRectangle(low_brush, (int)(i*spacing), H-4-6, 2, 6);
 
 										string s = list[i-1];
-										Font f = new Font("Arial", 7.0f, FontStyle.Bold);
-										SizeF size = g.MeasureString("0", f, 1, StringFormat.GenericTypographic);
+										//Font f = new Font("Arial", 7.0f, FontStyle.Bold);
+										SizeF size = g.MeasureString("0", font7, 1, StringFormat.GenericTypographic);
 										double string_width = size.Width-2.0;
 										string_height = size.Height-2.0;
 									
 										//g.TextRenderingHint = TextRenderingHint.AntiAlias;
 										//g.SmoothingMode = SmoothingMode.AntiAlias;
-										g.DrawString(s, f, low_brush, (int)(i*spacing-string_width*s.Length+(int)(i/3)+(int)(i/4)), (int)(H-4-8-string_height));
+										g.DrawString(s, font7, low_brush, (int)(i*spacing-string_width*s.Length+(int)(i/3)+(int)(i/4)), (int)(H-4-8-string_height));
 										//g.SmoothingMode = SmoothingMode.None;
 									}
 									spacing = (W*0.25-2.0-10.0)/1.0;
@@ -24379,12 +24491,12 @@ namespace PowerSDR
 										g.FillRectangle(high_brush, (int)((double)W*0.75+i*spacing-spacing*0.5), H-4-3, 1, 3);
 										g.FillRectangle(high_brush, (int)((double)W*0.75+i*spacing), H-4-6, 2, 6);
 
-										Font f = new Font("Arial", 7.0f, FontStyle.Bold);
-										SizeF size = g.MeasureString("0", f, 3, StringFormat.GenericTypographic);
+										//Font f = new Font("Arial", 7.0f, FontStyle.Bold);
+										SizeF size = g.MeasureString("0", font7, 3, StringFormat.GenericTypographic);
 										double string_width = size.Width-2.0;
 									
 										g.TextRenderingHint = TextRenderingHint.SystemDefault;
-										g.DrawString("120+", f, high_brush, (int)(W*0.75+i*spacing-(int)3.5*string_width), (int)(H-4-8-string_height));
+										g.DrawString("120+", font7, high_brush, (int)(W*0.75+i*spacing-(int)3.5*string_width), (int)(H-4-8-string_height));
 									}
 								
 									if(num <= 100.0) // low area
@@ -24421,14 +24533,14 @@ namespace PowerSDR
 										g.FillRectangle(low_brush, (int)(i*spacing), H-4-6, 2, 6);
 
 										string s = list[i-1];
-										Font f = new Font("Arial", 7.0f, FontStyle.Bold);
-										SizeF size = g.MeasureString("0", f, 1, StringFormat.GenericTypographic);
+										//Font f = new Font("Arial", 7.0f, FontStyle.Bold);
+										SizeF size = g.MeasureString("0", font7, 1, StringFormat.GenericTypographic);
 										double string_width = size.Width-2.0;
 										string_height = size.Height-2.0;
 									
 										//g.TextRenderingHint = TextRenderingHint.AntiAlias;
 										//g.SmoothingMode = SmoothingMode.AntiAlias;
-										g.DrawString(s, f, low_brush, (int)(i*spacing-string_width*s.Length+1.0+(int)(i/2)-(int)(i/4)), (int)(H-4-8-string_height));
+										g.DrawString(s, font7, low_brush, (int)(i*spacing-string_width*s.Length+1.0+(int)(i/2)-(int)(i/4)), (int)(H-4-8-string_height));
 										//g.SmoothingMode = SmoothingMode.None;
 									}
 									spacing = (W*0.25-2.0-9.0)/1.0;
@@ -24437,12 +24549,12 @@ namespace PowerSDR
 										g.FillRectangle(high_brush, (int)((double)W*0.75+i*spacing-spacing*0.5), H-4-3, 1, 3);
 										g.FillRectangle(high_brush, (int)((double)W*0.75+i*spacing), H-4-6, 2, 6);
 
-										Font f = new Font("Arial", 7.0f, FontStyle.Bold);
-										SizeF size = g.MeasureString("0", f, 3, StringFormat.GenericTypographic);
+										//Font f = new Font("Arial", 7.0f, FontStyle.Bold);
+										SizeF size = g.MeasureString("0", font7, 3, StringFormat.GenericTypographic);
 										double string_width = size.Width-2.0;
 									
 										//g.TextRenderingHint = TextRenderingHint.SystemDefault;
-										g.DrawString("1000", f, high_brush, (int)(W*0.75+2+i*spacing-(int)4.0*string_width), (int)(H-4-8-string_height));
+										g.DrawString("1000", font7, high_brush, (int)(W*0.75+2+i*spacing-(int)4.0*string_width), (int)(H-4-8-string_height));
 									}
 								
 									num *= 1000;
@@ -24477,14 +24589,14 @@ namespace PowerSDR
 									g.FillRectangle(low_brush, (int)(i*spacing), H-4-6, 2, 6);
 
 									string s = swr_list[i-1];
-									Font f = new Font("Arial", 7.0f, FontStyle.Bold);
-									SizeF size = g.MeasureString("0", f, 1, StringFormat.GenericTypographic);
+									//Font f = new Font("Arial", 7.0f, FontStyle.Bold);
+									SizeF size = g.MeasureString("0", font7, 1, StringFormat.GenericTypographic);
 									double string_width = size.Width-2.0;
 									string_height = size.Height-2.0;
 									
 									//g.TextRenderingHint = TextRenderingHint.AntiAlias;
 									//g.SmoothingMode = SmoothingMode.AntiAlias;
-									g.DrawString(s, f, low_brush, (int)(i*spacing-string_width*s.Length+2.0-2*(int)(i/2)+3*(int)(i/4)), (int)(H-4-8-string_height));
+									g.DrawString(s, font7, low_brush, (int)(i*spacing-string_width*s.Length+2.0-2*(int)(i/2)+3*(int)(i/4)), (int)(H-4-8-string_height));
 									//g.SmoothingMode = SmoothingMode.None;
 								}
 								spacing = (W*0.25-2.0-9.0)/1.0;
@@ -24493,12 +24605,12 @@ namespace PowerSDR
 									g.FillRectangle(high_brush, (int)((double)W*0.75+i*spacing-spacing*0.5), H-4-3, 1, 3);
 									g.FillRectangle(high_brush, (int)((double)W*0.75+i*spacing), H-4-6, 2, 6);
 
-									Font f = new Font("Arial", 7.0f, FontStyle.Bold);
-									SizeF size = g.MeasureString("0", f, 3, StringFormat.GenericTypographic);
+									//Font f = new Font("Arial", 7.0f, FontStyle.Bold);
+									SizeF size = g.MeasureString("0", font7, 3, StringFormat.GenericTypographic);
 									double string_width = size.Width-2.0;
 									
 									//g.TextRenderingHint = TextRenderingHint.SystemDefault;
-									g.DrawString("20+", f, high_brush, (int)(W*0.75+i*spacing-(int)2.5*string_width), (int)(H-4-8-string_height));
+									g.DrawString("20+", font7, high_brush, (int)(W*0.75+i*spacing-(int)2.5*string_width), (int)(H-4-8-string_height));
 								}
 								
 								if(num < 10.0) // low area
@@ -24533,14 +24645,14 @@ namespace PowerSDR
 									g.FillRectangle(low_brush, (int)(i*spacing), H-4-6, 2, 6);
 
 									string s = gain_list[i-1];
-									Font f = new Font("Arial", 7.0f, FontStyle.Bold);
-									SizeF size = g.MeasureString("0", f, 1, StringFormat.GenericTypographic);
+									//Font f = new Font("Arial", 7.0f, FontStyle.Bold);
+									SizeF size = g.MeasureString("0", font7, 1, StringFormat.GenericTypographic);
 									double string_width = size.Width-2.0;
 									string_height = size.Height-2.0;
 									
 									//g.TextRenderingHint = TextRenderingHint.AntiAlias;
 									//g.SmoothingMode = SmoothingMode.AntiAlias;
-									g.DrawString(s, f, low_brush, (int)(i*spacing-string_width*s.Length+(int)(i/3)), (int)(H-4-8-string_height));
+									g.DrawString(s, font7, low_brush, (int)(i*spacing-string_width*s.Length+(int)(i/3)), (int)(H-4-8-string_height));
 									//g.SmoothingMode = SmoothingMode.None;
 								}
 								spacing = (W*0.25-2.0-9.0)/1.0;
@@ -24549,12 +24661,12 @@ namespace PowerSDR
 									g.FillRectangle(high_brush, (int)((double)W*0.75+i*spacing-spacing*0.5), H-4-3, 1, 3);
 									g.FillRectangle(high_brush, (int)((double)W*0.75+i*spacing), H-4-6, 2, 6);
 
-									Font f = new Font("Arial", 7.0f, FontStyle.Bold);
-									SizeF size = g.MeasureString("0", f, 3, StringFormat.GenericTypographic);
+									//Font f = new Font("Arial", 7.0f, FontStyle.Bold);
+									SizeF size = g.MeasureString("0", font7, 3, StringFormat.GenericTypographic);
 									double string_width = size.Width-2.0;
 									
 									//g.TextRenderingHint = TextRenderingHint.SystemDefault;
-									g.DrawString("25+", f, high_brush, (int)(W*0.75+i*spacing-(int)2.5*string_width), (int)(H-4-8-string_height));
+									g.DrawString("25+", font7, high_brush, (int)(W*0.75+i*spacing-(int)2.5*string_width), (int)(H-4-8-string_height));
 								}
                                 
 
@@ -24565,21 +24677,19 @@ namespace PowerSDR
 								break;
 						}
 					}
-                    high_brush.Dispose();
-                    low_brush.Dispose();
-
+               
 					if((!mox && current_meter_rx_mode != MeterRXMode.OFF) ||
 						(mox && current_meter_tx_mode != MeterTXMode.OFF))
 					{
 						pixel_x = Math.Max(0, pixel_x);
 						pixel_x = Math.Min(W-3, pixel_x);
 
-						Pen line_pen = new Pen(edge_avg_color);
-						Pen line_dark_pen = new Pen(
+						
+						line_dark_pen.Color =
 							Color.FromArgb((edge_avg_color.R+edge_meter_background_color.R)/2,
 							(edge_avg_color.G+edge_meter_background_color.G)/2,
-							(edge_avg_color.B+edge_meter_background_color.B)/2));
-
+							(edge_avg_color.B+edge_meter_background_color.B)/2);
+						
 						g.InterpolationMode = InterpolationMode.HighQualityBicubic;
 						g.SmoothingMode = SmoothingMode.HighQuality;
 						g.DrawLine(line_dark_pen, pixel_x-1, 0, pixel_x-1, H);
@@ -24587,6 +24697,7 @@ namespace PowerSDR
 						g.DrawLine(line_dark_pen, pixel_x+1, 0, pixel_x+1, H);
 						g.InterpolationMode = InterpolationMode.Default;
 						g.SmoothingMode = SmoothingMode.Default;
+						
 					}
 
 					meter_timer.Stop();
@@ -24789,17 +24900,18 @@ namespace PowerSDR
 					{
 						if(pixel_x <= 0) pixel_x = 1;
 
-						LinearGradientBrush brush = new LinearGradientBrush(new Rectangle(0, 0, pixel_x, H),
-							meter_left_color, meter_right_color, LinearGradientMode.Horizontal);
-
+						using(LinearGradientBrush brush = new LinearGradientBrush(new Rectangle(0, 0, pixel_x, H),
+							meter_left_color, meter_right_color, LinearGradientMode.Horizontal))
 						g.FillRectangle(brush, 0, 0, pixel_x, H);
-				
+					//using (Pen meter_background_pen = new Pen(new SolidBrush(meter_background_color))) 
+                        //{
 						for(int i=0; i<21; i++)
-							g.DrawLine(new Pen(meter_background_color), 6+i*8, 0, 6+i*8, H);
+							g.DrawLine(meter_background_pen, 6+i*8, 0, 6+i*8, H);
 
-						g.DrawLine(new Pen(Color.Red), pixel_x, 0, pixel_x, H);
-						g.FillRectangle(new SolidBrush(meter_background_color), pixel_x+1, 0, W-pixel_x, H);
-
+						g.DrawLine(Pens.Red, pixel_x, 0, pixel_x, H);
+						g.FillRectangle(meter_background_pen.Brush, pixel_x+1, 0, W-pixel_x, H);
+						//}
+						
 						if(pixel_x >= rx2_meter_peak_value)
 						{
 							rx2_meter_peak_count = 0;
@@ -24814,8 +24926,8 @@ namespace PowerSDR
 							}
 							else
 							{
-								g.DrawLine(new Pen(Color.Red), rx2_meter_peak_value, 0, rx2_meter_peak_value, H);
-								g.DrawLine(new Pen(Color.Red), rx2_meter_peak_value-1, 0, rx2_meter_peak_value-1, H);
+								g.DrawLine(Pens.Red, rx2_meter_peak_value, 0, rx2_meter_peak_value, H);
+								g.DrawLine(Pens.Red, rx2_meter_peak_value-1, 0, rx2_meter_peak_value-1, H);
 							}
 						}
 					}
@@ -24870,11 +24982,12 @@ namespace PowerSDR
 						else 
 							num = rx2_avg_num = rx2_meter_current_data * 0.2 + rx2_avg_num * 0.8; // slow decay
 					}
+                    //using (Pen p = new Pen(edge_meter_background_color))
+                        g.DrawRectangle(edge_meter_background_pen, 0, 0, W, H);
 
-					g.DrawRectangle(new Pen(edge_meter_background_color), 0, 0, W, H);
-
-					SolidBrush low_brush = new SolidBrush(edge_low_color);
-					SolidBrush high_brush = new SolidBrush(edge_high_color);
+					//using (SolidBrush low_brush = new SolidBrush(edge_low_color),
+					          // high_brush = new SolidBrush(edge_high_color))
+                    //using (Font f = new Font("Arial", 7.0f, FontStyle.Bold))
 
 					switch(rx2_meter_mode)
 					{								
@@ -24889,14 +25002,14 @@ namespace PowerSDR
 								g.FillRectangle(low_brush, (int)(i*spacing-spacing*0.5), H-4-3, 1, 3);
 								g.FillRectangle(low_brush, (int)(i*spacing), H-4-6, 2, 6);
 
-								Font f = new Font("Arial", 7.0f, FontStyle.Bold);
-								SizeF size = g.MeasureString((-1+i*2).ToString(), f, 1, StringFormat.GenericTypographic);
+								//Font f = new Font("Arial", 7.0f, FontStyle.Bold);
+								SizeF size = g.MeasureString((-1+i*2).ToString(), font7, 1, StringFormat.GenericTypographic);
 								double string_width = size.Width-2.0;
 								string_height = size.Height-2.0;
 										
 								//g.TextRenderingHint = TextRenderingHint.AntiAlias;
 								//g.SmoothingMode = SmoothingMode.AntiAlias;
-								g.DrawString((-1+i*2).ToString(), f, low_brush, (int)(i*spacing-string_width+(int)(i/5)), (int)(H-4-8-string_height));
+								g.DrawString((-1+i*2).ToString(), font7, low_brush, (int)(i*spacing-string_width+(int)(i/5)), (int)(H-4-8-string_height));
 								//g.SmoothingMode = SmoothingMode.None;
 							}
 							spacing = ((double)W*0.5-2.0-4.0)/3.0;
@@ -24905,12 +25018,12 @@ namespace PowerSDR
 								g.FillRectangle(high_brush, (int)((double)W*0.5+i*spacing-spacing*0.5), H-4-3, 1, 3);
 								g.FillRectangle(high_brush, (int)((double)W*0.5+i*spacing), H-4-6, 2, 6);
 
-								Font f = new Font("Arial", 7.0f, FontStyle.Bold);
-								SizeF size = g.MeasureString("+"+(i*20).ToString(), f, 3, StringFormat.GenericTypographic);
+								//Font f = new Font("Arial", 7.0f, FontStyle.Bold);
+								SizeF size = g.MeasureString("+"+(i*20).ToString(), font7, 3, StringFormat.GenericTypographic);
 								double string_width = size.Width-2.0;
 										
 								//g.TextRenderingHint = TextRenderingHint.SystemDefault;
-								g.DrawString("+"+(i*20).ToString(), f, high_brush, (int)(W*0.5+i*spacing-(int)string_width*3-i/3*2), (int)(H-4-8-string_height));
+								g.DrawString("+"+(i*20).ToString(), font7, high_brush, (int)(W*0.5+i*spacing-(int)string_width*3-i/3*2), (int)(H-4-8-string_height));
 							}
 
 							if(num > -73.0) // high area
@@ -24936,14 +25049,14 @@ namespace PowerSDR
 								g.FillRectangle(b, (int)(i*spacing-spacing/2), H-4-3, 1, 5);
 								g.FillRectangle(b, (int)(i*spacing), H-4-6, 2, 8);
 
-								Font f = new Font("Arial", 7.0f, FontStyle.Bold);
+								//Font f = new Font("Arial", 7.0f, FontStyle.Bold);
 								string s = (-120+i*20).ToString();
-								SizeF size = g.MeasureString(s, f, 1, StringFormat.GenericTypographic);
+								SizeF size = g.MeasureString(s, font7, 1, StringFormat.GenericTypographic);
 								double string_width = size.Width-2.0;
-								size = g.MeasureString("0", f, 1, StringFormat.GenericTypographic);
+								size = g.MeasureString("0", font7, 1, StringFormat.GenericTypographic);
 								string_height = size.Height-2.0;
 										
-								g.DrawString(s, f, b, (int)(i*spacing-(int)string_width*(s.Length)), (int)(H-4-8-string_height));
+								g.DrawString(s, font7, b, (int)(i*spacing-(int)string_width*(s.Length)), (int)(H-4-8-string_height));
 							}
 
 							pixel_x = (int)((num + 120.0)/120.0*(W-5.0));
@@ -24958,12 +25071,11 @@ namespace PowerSDR
 						pixel_x = Math.Max(0, pixel_x);
 						pixel_x = Math.Min(W-3, pixel_x);
 
-						Pen line_pen = new Pen(edge_avg_color);
-						Pen line_dark_pen = new Pen(
-							Color.FromArgb((edge_avg_color.R+edge_meter_background_color.R)/2,
-							(edge_avg_color.G+edge_meter_background_color.G)/2,
-							(edge_avg_color.B+edge_meter_background_color.B)/2));
-
+                        line_dark_pen.Color =
+                            Color.FromArgb((edge_avg_color.R + edge_meter_background_color.R) / 2,
+                            (edge_avg_color.G + edge_meter_background_color.G) / 2,
+                            (edge_avg_color.B + edge_meter_background_color.B) / 2);
+						
 						g.InterpolationMode = InterpolationMode.HighQualityBicubic;
 						g.SmoothingMode = SmoothingMode.HighQuality;
 						g.DrawLine(line_dark_pen, pixel_x-1, 0, pixel_x-1, H);
@@ -24971,6 +25083,7 @@ namespace PowerSDR
 						g.DrawLine(line_dark_pen, pixel_x+1, 0, pixel_x+1, H);
 						g.InterpolationMode = InterpolationMode.Default;
 						g.SmoothingMode = SmoothingMode.Default;
+						
 					}
 
 					rx2_meter_timer.Stop();
@@ -25057,9 +25170,8 @@ namespace PowerSDR
 					x += (vfo_decimal_space-vfo_char_space);
 				width = x+vfo_char_width;
 			}
-            Pen p = new Pen(txtVFOAFreq.ForeColor, 2.0f);
-			e.Graphics.DrawLine(p, x, 1, width, 1);
-            p.Dispose();
+            //using (Pen p = new Pen(txtVFOAFreq.ForeColor, 2.0f))
+			e.Graphics.DrawLine(txtvfoafreq_forecolor_pen, x, 1, width, 1);
 		}
 
 		private void panelVFOBHover_Paint(object sender, System.Windows.Forms.PaintEventArgs e)
@@ -25091,9 +25203,8 @@ namespace PowerSDR
 					x += (vfo_decimal_space-vfo_char_space);
 				width = x+vfo_char_width;
 			}
-            Pen p = new Pen(txtVFOBFreq.ForeColor, 2.0f);
+            using (Pen p = new Pen(txtVFOBFreq.ForeColor, 2.0f))
 			e.Graphics.DrawLine(new Pen(txtVFOBFreq.ForeColor, 2.0f), x, 1, width, 1);
-            p.Dispose();
 		}
 
 		public void UpdateRX1DisplayAverage(float[] buffer, float[] new_data) 
@@ -28252,7 +28363,7 @@ namespace PowerSDR
                         break;
                 }
 
-                wbir_thread = new Thread(new ThreadStart(WBIR));
+               /* wbir_thread = new Thread(new ThreadStart(WBIR));
                 wbir_thread.Name = "WBIR Thread";
                 wbir_thread.Priority = ThreadPriority.Normal;
                 wbir_thread.IsBackground = true;
@@ -28265,7 +28376,7 @@ namespace PowerSDR
                     wbir_rx2_thread.Priority = ThreadPriority.Normal;
                     wbir_rx2_thread.IsBackground = true;
                     wbir_rx2_thread.Start();
-                }
+                }*/
 
                 update_rx1_dds_thread = new Thread(new ThreadStart(UpdateRX1DDSFreq));
                 update_rx1_dds_thread.Name = "RX1 DDS Thread";
@@ -34209,6 +34320,7 @@ namespace PowerSDR
 			if(radModeLSB.Checked)
 			{
 				SetRX1Mode(DSPMode.LSB);
+                lblModeLabel.Text = radModeLSB.Text;
 			}
 		}
 
@@ -34217,7 +34329,8 @@ namespace PowerSDR
 			if(radModeUSB.Checked)
 			{
 				SetRX1Mode(DSPMode.USB);
-			}
+                lblModeLabel.Text = radModeUSB.Text;
+            }
 		}
 
 		private void radModeDSB_CheckedChanged(object sender, System.EventArgs e)
@@ -34225,7 +34338,8 @@ namespace PowerSDR
 			if(radModeDSB.Checked)
 			{
 				SetRX1Mode(DSPMode.DSB);
-			}
+                lblModeLabel.Text = radModeDSB.Text;
+            }
 		}
 
 		private void radModeCWL_CheckedChanged(object sender, System.EventArgs e)
@@ -34233,8 +34347,8 @@ namespace PowerSDR
 			if(radModeCWL.Checked)
 			{
 				SetRX1Mode(DSPMode.CWL);
-			}
-
+                lblModeLabel.Text = radModeCWL.Text;
+            }
 		}
 
 		private void radModeCWU_CheckedChanged(object sender, System.EventArgs e)
@@ -34242,7 +34356,8 @@ namespace PowerSDR
 			if(radModeCWU.Checked)
 			{
 				SetRX1Mode(DSPMode.CWU);
-			}
+                lblModeLabel.Text = radModeCWU.Text;
+            }
 		}
 
 		private void radModeFMN_CheckedChanged(object sender, System.EventArgs e)
@@ -34250,7 +34365,8 @@ namespace PowerSDR
 			if(radModeFMN.Checked)
 			{
 				SetRX1Mode(DSPMode.FMN);
-			}
+                lblModeLabel.Text = radModeFMN.Text;
+            }
 			//radio.GetDSP(0, 0).SetRXFilter(-50000, 50000);
 		}
 
@@ -34259,7 +34375,8 @@ namespace PowerSDR
 			if(radModeAM.Checked)
 			{
 				SetRX1Mode(DSPMode.AM);
-			}
+                lblModeLabel.Text = radModeAM.Text;
+            }
 		}
 
 		private void radModeSAM_CheckedChanged(object sender, System.EventArgs e)
@@ -34267,7 +34384,8 @@ namespace PowerSDR
 			if(radModeSAM.Checked)
 			{
 				SetRX1Mode(DSPMode.SAM);
-			}
+                lblModeLabel.Text = radModeSAM.Text;
+            }
 		}
 
 		private void radModeDIGU_CheckedChanged(object sender, System.EventArgs e)
@@ -34275,7 +34393,8 @@ namespace PowerSDR
 			if(radModeDIGU.Checked)
 			{
 				SetRX1Mode(DSPMode.DIGU);
-			}
+                lblModeLabel.Text = radModeDIGU.Text;
+            }
 		}
 
 		private void radModeSPEC_CheckedChanged(object sender, System.EventArgs e)
@@ -34283,7 +34402,8 @@ namespace PowerSDR
 			if(radModeSPEC.Checked)
 			{
 				SetRX1Mode(DSPMode.SPEC);
-			}
+                lblModeLabel.Text = radModeSPEC.Text;
+            }
 		}
 
 		private void radModeDIGL_CheckedChanged(object sender, System.EventArgs e)
@@ -34291,7 +34411,8 @@ namespace PowerSDR
 			if(radModeDIGL.Checked)
 			{
 				SetRX1Mode(DSPMode.DIGL);
-			}
+                lblModeLabel.Text = radModeDIGL.Text;
+            }
 		}
 
 		private void radModeDRM_CheckedChanged(object sender, System.EventArgs e)
@@ -34299,7 +34420,8 @@ namespace PowerSDR
 			if(radModeDRM.Checked)
 			{
 				SetRX1Mode(DSPMode.DRM);
-			}
+                lblModeLabel.Text = radModeDRM.Text;
+            }
 		}
 
 		#endregion
@@ -34464,77 +34586,111 @@ namespace PowerSDR
 
 		private void radFilter1_CheckedChanged(object sender, System.EventArgs e)
 		{
-			if(radFilter1.Checked)
-			{
-				SetRX1Filter(Filter.F1);
-			}
+            if (radFilter1.Checked)
+            {
+                SetRX1Filter(Filter.F1);
+                lblFilterLabel.Text = radFilter1.Text;
+            }
 		}
 
 		private void radFilter2_CheckedChanged(object sender, System.EventArgs e)
-		{
-			if(radFilter2.Checked)
-				SetRX1Filter(Filter.F2);
-		}
+        {
+            if (radFilter2.Checked)
+            {
+                SetRX1Filter(Filter.F2);            
+                lblFilterLabel.Text = radFilter2.Text;
+            }
+        }
 
 		private void radFilter3_CheckedChanged(object sender, System.EventArgs e)
 		{
-			if(radFilter3.Checked)
-				SetRX1Filter(Filter.F3);
-		}
+            if (radFilter3.Checked)
+            {
+                SetRX1Filter(Filter.F3);
+                lblFilterLabel.Text = radFilter3.Text;
+            }
+        }
 
 		private void radFilter4_CheckedChanged(object sender, System.EventArgs e)
 		{
-			if(radFilter4.Checked)
-				SetRX1Filter(Filter.F4);
-		}
+            if (radFilter4.Checked)
+            {
+                SetRX1Filter(Filter.F4);
+                lblFilterLabel.Text = radFilter4.Text;
+            }
+        }
 
 		private void radFilter5_CheckedChanged(object sender, System.EventArgs e)
 		{
-			if(radFilter5.Checked)
-				SetRX1Filter(Filter.F5);
-		}
+            if (radFilter5.Checked)
+            {
+                SetRX1Filter(Filter.F5);
+                lblFilterLabel.Text = radFilter5.Text;
+            }
+        }
 
 		private void radFilter6_CheckedChanged(object sender, System.EventArgs e)
 		{
-			if(radFilter6.Checked)
-				SetRX1Filter(Filter.F6);
-		}
+            if (radFilter6.Checked)
+            {
+                SetRX1Filter(Filter.F6);
+                lblFilterLabel.Text = radFilter6.Text;
+            }
+        }
 
 		private void radFilter7_CheckedChanged(object sender, System.EventArgs e)
 		{
-			if(radFilter7.Checked)
-				SetRX1Filter(Filter.F7);
-		}
+            if (radFilter7.Checked)
+            {
+                SetRX1Filter(Filter.F7);
+                lblFilterLabel.Text = radFilter7.Text;
+            }
+        }
 
 		private void radFilter8_CheckedChanged(object sender, System.EventArgs e)
 		{
-			if(radFilter8.Checked)
-				SetRX1Filter(Filter.F8);
-		}
+            if (radFilter8.Checked)
+            {
+                SetRX1Filter(Filter.F8);
+                lblFilterLabel.Text = radFilter1.Text;
+            }
+        }
 
 		private void radFilter9_CheckedChanged(object sender, System.EventArgs e)
 		{
-			if(radFilter9.Checked)
-				SetRX1Filter(Filter.F9);
-		}
+            if (radFilter9.Checked)
+            {
+                SetRX1Filter(Filter.F9);
+                lblFilterLabel.Text = radFilter9.Text;
+            }
+        }
 
 		private void radFilter10_CheckedChanged(object sender, System.EventArgs e)
 		{
-			if(radFilter10.Checked)
-				SetRX1Filter(Filter.F10);
-		}
+            if (radFilter10.Checked)
+            {
+                SetRX1Filter(Filter.F10);
+                lblFilterLabel.Text = radFilter10.Text;
+            }
+        }
 
 		private void radFilterVar1_CheckedChanged(object sender, System.EventArgs e)
 		{
-			if(radFilterVar1.Checked)
-				SetRX1Filter(Filter.VAR1);
-		}
+            if (radFilterVar1.Checked)
+            {
+                SetRX1Filter(Filter.VAR1);
+                lblFilterLabel.Text = radFilterVar1.Text;
+            }
+        }
 
 		private void radFilterVar2_CheckedChanged(object sender, System.EventArgs e)
 		{
-			if(radFilterVar2.Checked)
-				SetRX1Filter(Filter.VAR2);
-		}
+            if (radFilterVar2.Checked)
+            {
+                SetRX1Filter(Filter.VAR2);
+                lblFilterLabel.Text = radFilterVar2.Text;
+            }
+        }
 
 		private void udFilterLow_ValueChanged(object sender, System.EventArgs e)
 		{
@@ -36608,10 +36764,11 @@ namespace PowerSDR
                     txtDisplayCursorPower.Location = new Point(txt_display_cursor_power_basis.X, txt_display_cursor_power_basis.Y + v_delta);
                     txtDisplayCursorOffset.Location = new Point(txt_display_cursor_offset_basis.X, txt_display_cursor_offset_basis.Y + v_delta);
 
-                    chkPower.Location = new Point(chk_power_basis.X, chk_power_basis.Y + (v_delta / 8));
+                    //chkPower.Location = new Point(chk_power_basis.X, chk_power_basis.Y + (v_delta / 8));
+                    panelPower.Location = new Point(gr_power_basis.X, gr_power_basis.Y + (v_delta / 8));
                     panelOptions.Location = new Point(gr_options_basis.X, gr_options_basis.Y + (v_delta / 4));
                 }
-
+                //chkPower.Location = new Point(chk_power_basis.X, chk_power_basis.Y + (v_delta / 8));
                 panelMultiRX.Location = new Point(gr_multirx_basis.X + (h_delta / 2), gr_multirx_basis.Y + v_delta);
                 panelSoundControls.Location = new Point(gr_sound_controls_basis.X,gr_sound_controls_basis.Y+(v_delta/8)+(v_delta/4));
 				chkSquelch.Location = new Point(chk_squelch_basis.X,chk_squelch_basis.Y+(v_delta/2));
@@ -36713,6 +36870,7 @@ namespace PowerSDR
 			txt_display_cursor_power_basis = this.txtDisplayCursorPower.Location;
 			txt_display_cursor_offset_basis = this.txtDisplayCursorOffset.Location;
 			chk_power_basis = this.chkPower.Location;
+            gr_power_basis = this.panelPower.Location;
 			gr_options_basis = this.panelOptions.Location;
 			gr_sound_controls_basis = this.panelSoundControls.Location;
 			chk_squelch_basis = this.chkSquelch.Location;
@@ -36747,14 +36905,23 @@ namespace PowerSDR
             // :W1CEG:
             gr_multi_meter_size_basis = this.grpMultimeter.Size;
             pic_multi_meter_digital_basis = this.picMultiMeterDigital.Location;
+            lbl_multi_smeter_basis = this.lblMultiSMeter.Location;
+            pic_multi_meter_size_basis = this.picMultiMeterDigital.Size;
+            txt_multi_text_basis = this.txtMultiText.Location;
             gr_options_size_basis = this.panelOptions.Size;
             chk_mon_basis = this.chkMON.Location;
             chk_mut_basis = this.chkMUT.Location;
+            chk_mox_basis = this.chkMOX.Location;
+            chk_tun_basis = this.chkTUN.Location;
+            //lbl_af_basis = this.lblAF.Location;
             tb_af_basis = this.ptbAF.Location;
             tb_rf_basis = this.ptbRF.Location;
             gr_display_basis = this.panelDisplay.Location;
             pic_display_basis = this.picDisplay.Location;
             combo_display_mode_basis = this.comboDisplayMode.Location;
+            combo_agc_basis = this.comboAGC.Location;
+            combo_meter_rxmode_basis = this.comboMeterRXMode.Location;
+            combo_meter_txmode_basis = this.comboMeterTXMode.Location;
             tb_display_zoom_size_basis = this.ptbDisplayZoom.Size;
             gr_BandHF_basis_size = panelBandHF.Size;
             gr_BandVHF_basis_size = panelBandVHF.Size;
@@ -36932,9 +37099,8 @@ namespace PowerSDR
 					x += (vfo_sub_decimal_space-vfo_sub_char_space);
 				width = x+vfo_sub_char_width;
 			}
-            Pen p = new Pen(txtVFOABand.ForeColor, 2.0f);
+            using (Pen p = new Pen(txtVFOABand.ForeColor, 2.0f))
 			e.Graphics.DrawLine(p, x, 1, width, 1);
-            p.Dispose();
 		}
 
 		private void panelVFOASubHover_MouseMove(object sender, System.Windows.Forms.MouseEventArgs e)
@@ -39112,7 +39278,8 @@ namespace PowerSDR
             this.Size = this.expandedSize;
             this.MinimumSize = new Size(minWidth, minHeight);
 
-            chkPower.Show();
+            panelPower.Show();
+            grpVFOB.Show();
             grpVFOBetween.Show();
             grpMultimeter.Show();
             panelOptions.Show();
@@ -39133,30 +39300,55 @@ namespace PowerSDR
             panelBandHF.Show();
             panelBandVHF.Show();
             chkBCI.Show();
-
+            lblAF2.Hide();
+            lblRF2.Hide();
+            lblModeLabel.Hide();
+            lblFilterLabel.Hide();
+ 
             int h_delta = this.Width - console_basis_size.Width;
             int v_delta = Math.Max(this.Height - console_basis_size.Height, 0);
 
             grpVFOA.Location = new Point(gr_VFOA_basis_location.X + (h_delta / 4), gr_VFOA_basis_location.Y);
             grpVFOB.Location = new Point(gr_VFOB_basis_location.X + h_delta - (h_delta / 4), gr_VFOB_basis_location.Y);
             grpMultimeter.Size = gr_multi_meter_size_basis;
+            picMultiMeterDigital.Parent = grpMultimeter;
             picMultiMeterDigital.Location = pic_multi_meter_digital_basis;
-            txtMultiText.Show();
+            lblMultiSMeter.Parent = grpMultimeter;
+            lblMultiSMeter.Location = lbl_multi_smeter_basis;
+            txtMultiText.Parent = grpMultimeter;
+            txtMultiText.Location = txt_multi_text_basis;
+            comboMeterRXMode.Parent = grpMultimeter;
+            comboMeterRXMode.Location = combo_meter_rxmode_basis;
+            comboMeterTXMode.Parent = grpMultimeter;
+            comboMeterTXMode.Location = combo_meter_txmode_basis;
+            //txtMultiText.Show();
+            chkPower.Parent = panelPower;
+            chkPower.Location = chk_power_basis;
+            chkMON.Parent = panelOptions;
+            chkMON.Location = chk_mon_basis;
+            chkMUT.Parent = panelDSP;
+            chkMUT.Location = chk_mut_basis;
 
-            //			chkMON.Parent = panelOptions;
-            //			chkMON.Location = chk_mon_basis;
-            //			chkMUT.Parent = panelOptions;
-            //			chkMUT.Location = chk_mut_basis;
+            chkMOX.Parent = panelOptions;
+            chkMOX.Location = chk_mox_basis;
+            chkTUN.Parent = panelOptions;
+            chkTUN.Location = chk_tun_basis;
+
+            //lblAF.Parent = panelSoundControls;
+            //lblAF.Location = lbl_af_basis;
             ptbAF.Parent = panelSoundControls;
             ptbAF.Location = tb_af_basis;
             ptbRF.Parent = panelSoundControls;
             ptbRF.Location = tb_rf_basis;
+            comboAGC.Parent = panelSoundControls;
+            comboAGC.Location = combo_agc_basis;
 
             comboDisplayMode.Parent = panelDisplay2;
             comboDisplayMode.Location = combo_display_mode_basis;
 
             btnDisplayPanCenter.Location = new Point(btn_display_pan_center_basis.X + (h_delta), btn_display_pan_center_basis.Y + v_delta);
-            ptbDisplayPan.Size = new Size(tb_display_pan_size_basis.Width + (h_delta), tb_display_pan_size_basis.Height);
+            //ptbDisplayPan.Size = new Size(tb_display_pan_size_basis.Width + (h_delta), tb_display_pan_size_basis.Height);
+            ptbDisplayPan.Size = tb_display_pan_size_basis;
             radDisplayZoom4x.Location = new Point(btn_display_zoom_4x_basis.X + h_delta, btn_display_zoom_4x_basis.Y + v_delta);
             radDisplayZoom2x.Location = new Point(btn_display_zoom_2x_basis.X + h_delta, btn_display_zoom_2x_basis.Y + v_delta);
             radDisplayZoom1x.Location = new Point(btn_display_zoom_1x_basis.X + h_delta, btn_display_zoom_1x_basis.Y + v_delta);
@@ -39190,7 +39382,6 @@ namespace PowerSDR
             // :NOTE: Force update on zoom control
             ptbDisplayZoom.Value = ptbDisplayZoom.Value;
             ptbDisplayZoom_Scroll(this, EventArgs.Empty);
-
 
             panelBandHF.Location = new Point(gr_BandHF_basis_location.X + h_delta, gr_BandHF_basis_location.Y + (v_delta / 4));
             panelBandHF.Size = gr_BandHF_basis_size;
@@ -39257,6 +39448,7 @@ namespace PowerSDR
 
             this.MinimumSize = new Size(minWidth, minHeight);
 
+            panelPower.Hide();
             panelOptions.Hide();
             panelSoundControls.Hide();
             chkSquelch.Hide();
@@ -39273,30 +39465,58 @@ namespace PowerSDR
             panelFilter.Hide();
             panelBandVHF.Hide();
             chkBCI.Hide();
+            grpVFOBetween.Hide();
+            grpVFOB.Hide();
+            grpMultimeter.Hide();
 
             if (this.showTopControls)
             {
+                chkPower.Parent = this;
                 chkPower.Show();
-                grpVFOBetween.Show();
-                grpMultimeter.Show();
+               // grpVFOBetween.Show();
+                //grpMultimeter.Show();
+                picMultiMeterDigital.Parent = this;
+                picMultiMeterDigital.Show();
+                txtMultiText.Parent = this;
+                txtMultiText.Show();
 
-                txtMultiText.Hide();
+                chkMON.Parent = this;
+                chkMON.Show();
+                chkMUT.Parent = this;
+                chkMUT.Show();
+                chkMOX.Parent = this;
+                chkMOX.Show();
+                chkTUN.Parent = this;
+                chkTUN.Show();
 
-                //				chkMON.Parent = this;
-                //				chkMON.Show();
-                //				chkMUT.Parent = this;
-                //				chkMUT.Show();
+                //lblAF2.Parent = this;
+                lblAF2.Show();
+                lblRF2.Show();
                 ptbAF.Parent = this;
                 ptbAF.Show();
                 ptbRF.Parent = this;
                 ptbRF.Show();
+                comboAGC.Parent = this;
+                comboAGC.Show();
+
+                lblMultiSMeter.Parent = this;
+                lblMultiSMeter.Show();
+                comboMeterRXMode.Parent = this;
+                comboMeterRXMode.Show();
+                comboMeterTXMode.Parent = this;
+                comboMeterTXMode.Show();
+
+                lblModeLabel.Show();
+                lblFilterLabel.Show();
             }
             else
             {
                 comboDisplayMode.Show();
-                chkPower.Hide();
+                //chkPower.Hide();
                 grpVFOBetween.Hide();
                 grpMultimeter.Hide();
+                lblAF2.Hide();
+                lblRF2.Hide();
             }
 
             if (this.showBandControls)
@@ -39325,16 +39545,40 @@ namespace PowerSDR
 
             if (this.showTopControls)
             {
-                top = grpMultimeter.Location.Y + grpMultimeter.Size.Height + 5;
-                grpVFOA.Location = new Point(gr_VFOA_basis_location.X + (h_delta / 4), gr_VFOA_basis_location.Y);
-                grpVFOB.Location = new Point(gr_VFOB_basis_location.X + h_delta - (h_delta / 4), gr_VFOB_basis_location.Y);
-                picMultiMeterDigital.Location = txtMultiText.Location;
-                grpMultimeter.Size = new Size(grpMultimeter.Width, grpVFOB.Height);
+                top = grpVFOA.Height + 5;
+                //top = grpMultimeter.Location.Y + grpMultimeter.Height + 5;
+                //grpVFOA.Location = new Point(gr_VFOA_basis_location.X + (h_delta / 4), gr_VFOA_basis_location.Y);
+                grpVFOA.Location = new Point((this.ClientSize.Width - grpVFOA.Width) / 2, gr_VFOA_basis_location.Y);
+                //grpVFOB.Location = new Point(gr_VFOB_basis_location.X + h_delta - (h_delta / 4), gr_VFOB_basis_location.Y);
+                txtMultiText.Location = new Point((this.ClientSize.Width - (grpVFOA.Location.X + grpVFOA.Width)) * 2, grpVFOA.Location.Y + 5);
+                // picMultiMeterDigital.Location = txtMultiText.Location;
+                picMultiMeterDigital.Location = new Point(txtMultiText.Location.X, txtMultiText.Location.Y + txtMultiText.Height + 8);
+                //grpMultimeter.Size = new Size(grpMultimeter.Width, grpVFOB.Height);
+                if (current_meter_display_mode == MultiMeterDisplayMode.Original)               
+                {
+                    lblMultiSMeter.Location = new Point(picMultiMeterDigital.Location.X, picMultiMeterDigital.Location.Y +
+                                                        picMultiMeterDigital.Height);
+                    lblMultiSMeter.Show();
+                }
+                else lblMultiSMeter.Hide();
+                comboMeterRXMode.Location = new Point(txtMultiText.Location.X - comboMeterRXMode.Width - 10,
+                    txtMultiText.Location.Y + 2);
+                comboMeterTXMode.Location = new Point(comboMeterRXMode.Location.X, 
+                    comboMeterRXMode.Location.Y + comboMeterRXMode.Height + 5);
+                chkPower.Location = new Point(60, grpVFOA.Location.Y + 2);
+              //chkMON.Location = new Point(10, chkPower.Location.Y + chkPower.Height + 5);
+                chkMON.Location = new Point(grpVFOA.Location.X - chkMON.Width - 10, grpVFOA.Location.Y + 8);
+              //chkMUT.Location = new Point(chkMON.Location.X + chkMON.Width, chkPower.Location.Y + chkPower.Height + 5);
+                chkTUN.Location = new Point(chkMON.Location.X, chkMON.Location.Y + chkMON.Height + 4);
+                chkMOX.Location = new Point(chkTUN.Location.X, chkTUN.Location.Y + chkTUN.Height + 4);
 
-                //				chkMON.Location = new Point(10, chkPower.Location.Y + chkPower.Height + 5);
-                //				chkMUT.Location = new Point(chkMON.Location.X + chkMON.Width, chkPower.Location.Y + chkPower.Height + 5);
-                ptbAF.Location = new Point(10, chkPower.Location.Y + chkPower.Height + 2);
-                ptbRF.Location = new Point(10, ptbAF.Location.Y + ptbAF.Height + 2);
+                lblAF2.Location = new Point(5, chkPower.Location.Y + chkPower.Height + 5);
+                ptbAF.Location = new Point(lblAF2.Location.X + lblAF2.Width, lblAF2.Location.Y);
+              //ptbAF.Location = new Point(10, chkPower.Location.Y + chkPower.Height + 2);
+                lblRF2.Location = new Point(5, lblAF2.Location.Y + lblAF2.Height + 2);
+                ptbRF.Location = new Point(lblRF2.Location.X + lblRF2.Width, ptbAF.Location.Y + ptbAF.Height + 2);
+                comboAGC.Location = new Point(ptbRF.Location.X + ptbRF.Width + 2, ptbRF.Location.Y + 2);
+                chkMUT.Location = new Point(ptbAF.Location.X + ptbAF.Width + 2, ptbAF.Location.Y);
             }
 
             panelDisplay.Location = new Point(0, top);
@@ -39442,7 +39686,7 @@ namespace PowerSDR
             if (!this.showTopControls)
             {
                 grpVFOA.Location = new Point(grpVFOA.Location.X, -200);
-                grpVFOB.Location = new Point(grpVFOB.Location.X, -200);
+                //grpVFOB.Location = new Point(grpVFOB.Location.X, -200);
             }
         }
 
