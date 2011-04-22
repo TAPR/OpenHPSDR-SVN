@@ -1638,9 +1638,9 @@ namespace PowerSDR
 					#endregion
 
 
-                    if (!localmox)
+                  /*  if (!localmox)
                         DoScope2(rx1_in_l, frameCount);                    
-                    else DoScope2(tx_in_l, frameCount);
+                    else DoScope2(tx_in_l, frameCount); */
                    
 
 #if(MINMAX)
@@ -1767,8 +1767,16 @@ namespace PowerSDR
 					break;
 			}
 
-			if(!localmox) DoScope(rx1_out_l, frameCount);
-			else DoScope(tx_out_r, frameCount);
+            if (!localmox)
+            {
+                DoScope(rx1_out_l, frameCount);
+                DoScope2(rx1_out_r, frameCount);
+            }
+            else
+            {
+                DoScope(tx_out_l, frameCount);
+                DoScope2(tx_out_r, frameCount);
+            }
 
             out_l1 = rx1_out_l;
             out_r1 = rx1_out_r;
@@ -4964,7 +4972,7 @@ namespace PowerSDR
                 }
 
 
-                    scope_sample_index++;
+                   scope_sample_index++;
 				if(scope_sample_index >= scope_samples_per_pixel)
 				{
 					scope_sample_index = 0;

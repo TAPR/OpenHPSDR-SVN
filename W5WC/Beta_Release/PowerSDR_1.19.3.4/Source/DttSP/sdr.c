@@ -240,7 +240,7 @@ setup_rx (int k, unsigned int thread)
 	/* auto-noise filter */
 	rx[thread][k].anr.gen = new_lmsr (
 		rx[thread][k].buf.o,	// CXB signal,
-		40,						// int delay,
+		64,						// int delay,
 		16e-4f,					// REAL adaptation_rate,
 		10e-7f,			  		// REAL leakage,
 		64,						// int adaptive_filter_size,
@@ -343,7 +343,7 @@ setup_tx (unsigned int thread)
 		1,							// mode kept around for control reasons
 		CXBbase (tx[thread].buf.i),	// input buffer
 		CXBsize (tx[thread].buf.i),	// output buffer
-		1.1f,						// Target output
+		1.0f,						// Target output
 		2,							// Attack time constant in ms
 		500,						// Decay time constant in ms
 		1,							// Slope
@@ -1143,9 +1143,9 @@ do_tx_pre (unsigned int thread)
 			do_tx_meter (thread, tx[thread].buf.i, TX_LVL);
 			do_tx_meter (thread, tx[thread].buf.i, TX_COMP);
 
-			if (tx[thread].alc.flag)
-				DttSPAgc (tx[thread].alc.gen, tx[thread].tick);
-			do_tx_meter (thread, tx[thread].buf.i, TX_ALC);
+			//if (tx[thread].alc.flag)
+			//	DttSPAgc (tx[thread].alc.gen, tx[thread].tick);
+			//do_tx_meter (thread, tx[thread].buf.i, TX_ALC);
 
 			do_tx_meter (thread, tx[thread].buf.i, TX_CPDR);
 			break;
@@ -1160,9 +1160,9 @@ do_tx_pre (unsigned int thread)
 			do_tx_meter (thread, tx[thread].buf.i, TX_LVL);
 			//fprintf(stderr,"[%.2f,%.2f]  ", peakl(tx[thread].buf.i), peakr(tx[thread].buf.i));
 
-			if (tx[thread].alc.flag)
-				DttSPAgc (tx[thread].alc.gen, tx[thread].tick);
-			do_tx_meter (thread, tx[thread].buf.i, TX_ALC);
+			//if (tx[thread].alc.flag)
+				//DttSPAgc (tx[thread].alc.gen, tx[thread].tick);
+			//do_tx_meter (thread, tx[thread].buf.i, TX_ALC);
 			//fprintf(stderr,"[%.2f,%.2f]  ", peakl(tx[thread].buf.i), peakr(tx[thread].buf.i));
 
 			if (tx[thread].spr.flag)
@@ -1189,11 +1189,15 @@ do_tx_post (unsigned int thread)
 
 	//fprintf(stderr,"[%.2f,%.2f]  ", peakl(tx[thread].buf.i), peakr(tx[thread].buf.i));
 	filter_OvSv (tx[thread].filt.ovsv);
+
+	//fprintf(stderr,"[%.2f,%.2f]  ", peakl(tx[thread].buf.o), peakr(tx[thread].buf.o));	
+	
+	if (tx[thread].alc.flag)
+		DttSPAgc (tx[thread].alc.gen, tx[thread].tick);
+	do_tx_meter (thread, tx[thread].buf.o, TX_ALC);
+	
 	if (uni[thread].spec.flag)
 		do_tx_spectrum (thread, tx[thread].buf.o);
-	//fprintf(stderr,"[%.2f,%.2f]  ", peakl(tx[thread].buf.o), peakr(tx[thread].buf.o));
-
-	// meter modulated signal
 
 	if (tx[thread].osc.gen->Frequency != 0.0)
 	{
@@ -1205,8 +1209,12 @@ do_tx_post (unsigned int thread)
 				Cmul (CXBdata (tx[thread].buf.o, i), OSCCdata (tx[thread].osc.gen, i));
 		}
 	}
+	
 	correctIQ (tx[thread].buf.o, tx[thread].iqfix, TRUE,0);
+
+	// meter modulated signal
 	do_tx_meter (thread, tx[thread].buf.o, TX_PWR);
+
 	//fprintf(stderr,"[%.2f,%.2f]  ", peakl(tx[thread].buf.o), peakr(tx[thread].buf.o));
 	//fprintf(stderr,"\n");
 	//fflush(stderr);

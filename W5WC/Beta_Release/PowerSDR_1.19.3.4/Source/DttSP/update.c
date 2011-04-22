@@ -118,27 +118,6 @@ SetSwchRiseThresh(unsigned int thread, REAL val)
 	sem_post(&top[thread].sync.upd.sem);
 }
 
-/* DttSP_EXP void
-SetThreadProcessingMode(unsigned int thread, RUNMODE runmode)
-{
-	sem_wait(&top[thread].sync.upd.sem);
-	top[thread].state = runmode;
-
-	if(runmode == RUN_MUTE) // added to clear the filter on TX->RX transitions
-	{
-		int k;
-
-		for(k=0; k<2; k++)
-		{
-			reset_OvSv (rx[thread][k].filt.ovsv);
-			DttSPAgc_flushbuf(rx[thread][k].dttspagc.gen);
-		}
-	}
-
-	sem_post(&top[thread].sync.upd.sem);
-	//fprintf(stderr,"thread: %0u setting mode to %0d\n", thread, (int)runmode),fflush(stderr);
-} */
-
 DttSP_EXP void
 SetThreadProcessingMode(unsigned int thread, RUNMODE runmode)
 {
