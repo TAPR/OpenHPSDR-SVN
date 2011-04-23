@@ -18663,11 +18663,7 @@ namespace PowerSDR
 			set
 			{
 				edge_avg_color = value;
-               // line_dark_pen.Color =
-				 //   Color.FromArgb((edge_avg_color.R+edge_meter_background_color.R)/2,
-				//	(edge_avg_color.G+edge_meter_background_color.G)/2,
-				//	(edge_avg_color.B+edge_meter_background_color.B)/2);
- 
+                line_pen.Color = edge_avg_color; 
 				if(current_meter_display_mode == MultiMeterDisplayMode.Edge)
 					picMultiMeterDigital.Invalidate();
 			}
@@ -18737,7 +18733,17 @@ namespace PowerSDR
 			}
 		}
 
-        private Font font7 = new Font("Arial", 7.0f, FontStyle.Bold);
+		private Color info_buttons_color = Color.DarkOrange;
+        public Color InfoButtonsColor
+		{
+            get { return info_buttons_color; }
+			set
+			{
+                info_buttons_color = value;
+                lblModeLabel.ForeColor = value;
+                lblFilterLabel.ForeColor = value;
+			}
+		}
 
 		private int default_low_cut = 150;
 		public int DefaultLowCut
@@ -23909,6 +23915,7 @@ namespace PowerSDR
 			}
 		}
 
+        private Font font7 = new Font("Arial", 7.0f, FontStyle.Bold);
 		private double avg_num = -130.0;
 		private void picMultiMeterDigital_Paint(object sender, System.Windows.Forms.PaintEventArgs e)
 		{
