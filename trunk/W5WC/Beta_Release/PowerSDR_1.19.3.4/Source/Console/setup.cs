@@ -1495,6 +1495,9 @@ namespace PowerSDR
         private CheckBoxTS chkShowTopControls;
         private GroupBoxTS grpBoxSpaceBarPTT;
         private CheckBoxTS chkSpaceBarPTT;
+        private TrackBarTS tbMeterEdgeBackgroundAlpha;
+        private ColorButton clrbtnInfoButtonsColor;
+        private LabelTS labelTS58;
         private System.ComponentModel.IContainer components;
 
         #endregion
@@ -1669,6 +1672,7 @@ namespace PowerSDR
             tbMultiRXFilterAlpha_Scroll(this, e);
             tbTXZeroLineAlpha_Scroll(this, e);
             tbTXTextAlpha_Scroll(this, e);
+            tbMeterEdgeBackgroundAlpha_Scroll(this, e);
             checkHPSDRDefaults(this, e);
 
             for (int i = 0; i < 2; i++)
@@ -2675,6 +2679,8 @@ namespace PowerSDR
             this.clrbtnOutOfBand = new PowerSDR.ColorButton();
             this.lblOutOfBand = new System.Windows.Forms.LabelTS();
             this.grpAppearanceVFO = new System.Windows.Forms.GroupBoxTS();
+            this.clrbtnInfoButtonsColor = new PowerSDR.ColorButton();
+            this.labelTS58 = new System.Windows.Forms.LabelTS();
             this.clrbtnVFOBackground = new PowerSDR.ColorButton();
             this.lblVFOBackground = new System.Windows.Forms.LabelTS();
             this.clrbtnVFOSmallColor = new PowerSDR.ColorButton();
@@ -2739,6 +2745,7 @@ namespace PowerSDR
             this.lblMeterDigitalText = new System.Windows.Forms.LabelTS();
             this.clrbtnMeterDigText = new PowerSDR.ColorButton();
             this.grpMeterEdge = new System.Windows.Forms.GroupBoxTS();
+            this.tbMeterEdgeBackgroundAlpha = new System.Windows.Forms.TrackBarTS();
             this.clrbtnEdgeIndicator = new PowerSDR.ColorButton();
             this.labelTS1 = new System.Windows.Forms.LabelTS();
             this.clrbtnMeterEdgeBackground = new PowerSDR.ColorButton();
@@ -2805,6 +2812,8 @@ namespace PowerSDR
             this.chkShowBandControls = new System.Windows.Forms.CheckBoxTS();
             this.chkShowTopControls = new System.Windows.Forms.CheckBoxTS();
             this.tpKeyboard = new System.Windows.Forms.TabPage();
+            this.grpBoxSpaceBarPTT = new System.Windows.Forms.GroupBoxTS();
+            this.chkSpaceBarPTT = new System.Windows.Forms.CheckBoxTS();
             this.grpKBXIT = new System.Windows.Forms.GroupBoxTS();
             this.lblKBXITUp = new System.Windows.Forms.LabelTS();
             this.lblKBXITDown = new System.Windows.Forms.LabelTS();
@@ -3148,8 +3157,6 @@ namespace PowerSDR
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.grpDiagInfo = new System.Windows.Forms.GroupBoxTS();
             this.lblSyncData = new System.Windows.Forms.LabelTS();
-            this.chkSpaceBarPTT = new System.Windows.Forms.CheckBoxTS();
-            this.grpBoxSpaceBarPTT = new System.Windows.Forms.GroupBoxTS();
             this.tcSetup.SuspendLayout();
             this.tpGeneral.SuspendLayout();
             this.tcGeneral.SuspendLayout();
@@ -3447,6 +3454,7 @@ namespace PowerSDR
             this.grpDisplayPeakCursor.SuspendLayout();
             this.tpAppearanceMeter.SuspendLayout();
             this.grpMeterEdge.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.tbMeterEdgeBackgroundAlpha)).BeginInit();
             this.grpAppearanceMeter.SuspendLayout();
             this.tcAppearanceTXDisplay.SuspendLayout();
             this.grpTXSpectrumGrid.SuspendLayout();
@@ -3466,6 +3474,7 @@ namespace PowerSDR
             this.tpAppearanceCollapsible.SuspendLayout();
             this.grpBoxCollapsible.SuspendLayout();
             this.tpKeyboard.SuspendLayout();
+            this.grpBoxSpaceBarPTT.SuspendLayout();
             this.grpKBXIT.SuspendLayout();
             this.grpKBRIT.SuspendLayout();
             this.grpKBMode.SuspendLayout();
@@ -3504,7 +3513,6 @@ namespace PowerSDR
             ((System.ComponentModel.ISupportInitialize)(this.udImpulseNum)).BeginInit();
             this.grpTestAudioBalance.SuspendLayout();
             this.grpDiagInfo.SuspendLayout();
-            this.grpBoxSpaceBarPTT.SuspendLayout();
             this.SuspendLayout();
             // 
             // tcSetup
@@ -17336,6 +17344,8 @@ namespace PowerSDR
             // 
             // grpAppearanceVFO
             // 
+            this.grpAppearanceVFO.Controls.Add(this.clrbtnInfoButtonsColor);
+            this.grpAppearanceVFO.Controls.Add(this.labelTS58);
             this.grpAppearanceVFO.Controls.Add(this.clrbtnVFOBackground);
             this.grpAppearanceVFO.Controls.Add(this.lblVFOBackground);
             this.grpAppearanceVFO.Controls.Add(this.clrbtnVFOSmallColor);
@@ -17347,10 +17357,31 @@ namespace PowerSDR
             this.grpAppearanceVFO.Controls.Add(this.lblVFOPowerOff);
             this.grpAppearanceVFO.Location = new System.Drawing.Point(144, 8);
             this.grpAppearanceVFO.Name = "grpAppearanceVFO";
-            this.grpAppearanceVFO.Size = new System.Drawing.Size(144, 184);
+            this.grpAppearanceVFO.Size = new System.Drawing.Size(144, 231);
             this.grpAppearanceVFO.TabIndex = 39;
             this.grpAppearanceVFO.TabStop = false;
             this.grpAppearanceVFO.Text = "VFO";
+            // 
+            // clrbtnInfoButtonsColor
+            // 
+            this.clrbtnInfoButtonsColor.Automatic = "Automatic";
+            this.clrbtnInfoButtonsColor.Color = System.Drawing.Color.DarkOrange;
+            this.clrbtnInfoButtonsColor.Image = null;
+            this.clrbtnInfoButtonsColor.Location = new System.Drawing.Point(88, 189);
+            this.clrbtnInfoButtonsColor.MoreColors = "More Colors...";
+            this.clrbtnInfoButtonsColor.Name = "clrbtnInfoButtonsColor";
+            this.clrbtnInfoButtonsColor.Size = new System.Drawing.Size(40, 23);
+            this.clrbtnInfoButtonsColor.TabIndex = 75;
+            this.clrbtnInfoButtonsColor.Changed += new System.EventHandler(this.clrbtnInfoButtonsColor_Changed);
+            // 
+            // labelTS58
+            // 
+            this.labelTS58.Image = null;
+            this.labelTS58.Location = new System.Drawing.Point(18, 189);
+            this.labelTS58.Name = "labelTS58";
+            this.labelTS58.Size = new System.Drawing.Size(60, 23);
+            this.labelTS58.TabIndex = 74;
+            this.labelTS58.Text = "Info Color:";
             // 
             // clrbtnVFOBackground
             // 
@@ -18108,6 +18139,7 @@ namespace PowerSDR
             // 
             // grpMeterEdge
             // 
+            this.grpMeterEdge.Controls.Add(this.tbMeterEdgeBackgroundAlpha);
             this.grpMeterEdge.Controls.Add(this.clrbtnEdgeIndicator);
             this.grpMeterEdge.Controls.Add(this.labelTS1);
             this.grpMeterEdge.Controls.Add(this.clrbtnMeterEdgeBackground);
@@ -18118,10 +18150,22 @@ namespace PowerSDR
             this.grpMeterEdge.Controls.Add(this.clrbtnMeterEdgeLow);
             this.grpMeterEdge.Location = new System.Drawing.Point(312, 8);
             this.grpMeterEdge.Name = "grpMeterEdge";
-            this.grpMeterEdge.Size = new System.Drawing.Size(136, 160);
+            this.grpMeterEdge.Size = new System.Drawing.Size(206, 160);
             this.grpMeterEdge.TabIndex = 80;
             this.grpMeterEdge.TabStop = false;
             this.grpMeterEdge.Text = "Edge Style";
+            // 
+            // tbMeterEdgeBackgroundAlpha
+            // 
+            this.tbMeterEdgeBackgroundAlpha.AutoSize = false;
+            this.tbMeterEdgeBackgroundAlpha.Location = new System.Drawing.Point(128, 88);
+            this.tbMeterEdgeBackgroundAlpha.Maximum = 255;
+            this.tbMeterEdgeBackgroundAlpha.Name = "tbMeterEdgeBackgroundAlpha";
+            this.tbMeterEdgeBackgroundAlpha.Size = new System.Drawing.Size(66, 18);
+            this.tbMeterEdgeBackgroundAlpha.TabIndex = 89;
+            this.tbMeterEdgeBackgroundAlpha.TickFrequency = 64;
+            this.tbMeterEdgeBackgroundAlpha.Value = 255;
+            this.tbMeterEdgeBackgroundAlpha.Scroll += new System.EventHandler(this.tbMeterEdgeBackgroundAlpha_Scroll);
             // 
             // clrbtnEdgeIndicator
             // 
@@ -18971,6 +19015,29 @@ namespace PowerSDR
             this.tpKeyboard.Size = new System.Drawing.Size(584, 286);
             this.tpKeyboard.TabIndex = 4;
             this.tpKeyboard.Text = "Keyboard";
+            // 
+            // grpBoxSpaceBarPTT
+            // 
+            this.grpBoxSpaceBarPTT.Controls.Add(this.chkSpaceBarPTT);
+            this.grpBoxSpaceBarPTT.Location = new System.Drawing.Point(392, 112);
+            this.grpBoxSpaceBarPTT.Name = "grpBoxSpaceBarPTT";
+            this.grpBoxSpaceBarPTT.Size = new System.Drawing.Size(112, 72);
+            this.grpBoxSpaceBarPTT.TabIndex = 41;
+            this.grpBoxSpaceBarPTT.TabStop = false;
+            this.grpBoxSpaceBarPTT.Text = "SpaceBar PTT";
+            // 
+            // chkSpaceBarPTT
+            // 
+            this.chkSpaceBarPTT.Checked = true;
+            this.chkSpaceBarPTT.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkSpaceBarPTT.Image = null;
+            this.chkSpaceBarPTT.Location = new System.Drawing.Point(22, 39);
+            this.chkSpaceBarPTT.Name = "chkSpaceBarPTT";
+            this.chkSpaceBarPTT.Size = new System.Drawing.Size(64, 16);
+            this.chkSpaceBarPTT.TabIndex = 40;
+            this.chkSpaceBarPTT.Text = "Enable";
+            this.toolTip1.SetToolTip(this.chkSpaceBarPTT, "Check to enable spacebar push-to-talk");
+            this.chkSpaceBarPTT.CheckedChanged += new System.EventHandler(this.chkSpaceBarPTT_CheckedChanged);
             // 
             // grpKBXIT
             // 
@@ -22968,29 +23035,6 @@ namespace PowerSDR
             this.lblSyncData.TabIndex = 0;
             this.lblSyncData.Text = "Frame Sync: ";
             // 
-            // chkSpaceBarPTT
-            // 
-            this.chkSpaceBarPTT.Checked = true;
-            this.chkSpaceBarPTT.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkSpaceBarPTT.Image = null;
-            this.chkSpaceBarPTT.Location = new System.Drawing.Point(22, 39);
-            this.chkSpaceBarPTT.Name = "chkSpaceBarPTT";
-            this.chkSpaceBarPTT.Size = new System.Drawing.Size(64, 16);
-            this.chkSpaceBarPTT.TabIndex = 40;
-            this.chkSpaceBarPTT.Text = "Enable";
-            this.toolTip1.SetToolTip(this.chkSpaceBarPTT, "Check to enable spacebar push-to-talk");
-            this.chkSpaceBarPTT.CheckedChanged += new System.EventHandler(this.chkSpaceBarPTT_CheckedChanged);
-            // 
-            // grpBoxSpaceBarPTT
-            // 
-            this.grpBoxSpaceBarPTT.Controls.Add(this.chkSpaceBarPTT);
-            this.grpBoxSpaceBarPTT.Location = new System.Drawing.Point(392, 112);
-            this.grpBoxSpaceBarPTT.Name = "grpBoxSpaceBarPTT";
-            this.grpBoxSpaceBarPTT.Size = new System.Drawing.Size(112, 72);
-            this.grpBoxSpaceBarPTT.TabIndex = 41;
-            this.grpBoxSpaceBarPTT.TabStop = false;
-            this.grpBoxSpaceBarPTT.Text = "SpaceBar PTT";
-            // 
             // Setup
             // 
             this.AutoScaleBaseSize = new System.Drawing.Size(5, 13);
@@ -23315,6 +23359,7 @@ namespace PowerSDR
             this.grpDisplayPeakCursor.ResumeLayout(false);
             this.tpAppearanceMeter.ResumeLayout(false);
             this.grpMeterEdge.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.tbMeterEdgeBackgroundAlpha)).EndInit();
             this.grpAppearanceMeter.ResumeLayout(false);
             this.tcAppearanceTXDisplay.ResumeLayout(false);
             this.grpTXSpectrumGrid.ResumeLayout(false);
@@ -23336,6 +23381,7 @@ namespace PowerSDR
             this.grpBoxCollapsible.ResumeLayout(false);
             this.grpBoxCollapsible.PerformLayout();
             this.tpKeyboard.ResumeLayout(false);
+            this.grpBoxSpaceBarPTT.ResumeLayout(false);
             this.grpKBXIT.ResumeLayout(false);
             this.grpKBRIT.ResumeLayout(false);
             this.grpKBMode.ResumeLayout(false);
@@ -23375,7 +23421,6 @@ namespace PowerSDR
             ((System.ComponentModel.ISupportInitialize)(this.udImpulseNum)).EndInit();
             this.grpTestAudioBalance.ResumeLayout(false);
             this.grpDiagInfo.ResumeLayout(false);
-            this.grpBoxSpaceBarPTT.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -29263,7 +29308,12 @@ namespace PowerSDR
             console.SmallVFOColor = clrbtnVFOSmallColor.Color;
         }
 
-        private void clrbtnPeakBackground_Changed(object sender, System.EventArgs e)
+        private void clrbtnInfoButtonsColor_Changed(object sender, System.EventArgs e)
+        {
+            console.InfoButtonsColor = clrbtnInfoButtonsColor.Color;
+        }
+
+       private void clrbtnPeakBackground_Changed(object sender, System.EventArgs e)
         {
             console.PeakBackgroundColor = clrbtnPeakBackground.Color;
         }
@@ -31198,7 +31248,8 @@ namespace PowerSDR
 
         private void clrbtnMeterEdgeBackground_Changed(object sender, System.EventArgs e)
         {
-            console.EdgeMeterBackgroundColor = clrbtnMeterEdgeBackground.Color;
+            console.EdgeMeterBackgroundColor = Color.FromArgb(tbMeterEdgeBackgroundAlpha.Value, clrbtnMeterEdgeBackground.Color);
+           // console.EdgeMeterBackgroundColor = clrbtnMeterEdgeBackground.Color;
         }
 
         private void clrbtnEdgeIndicator_Changed(object sender, System.EventArgs e)
@@ -31897,11 +31948,13 @@ namespace PowerSDR
         private void tbRX1FilterAlpha_Scroll(object sender, EventArgs e)
         {
             clrbtnFilter_Changed(this, EventArgs.Empty);
+            toolTip1.SetToolTip(tbRX1FilterAlpha, tbRX1FilterAlpha.Value.ToString());
         }
 
         private void tbTXFilterAlpha_Scroll(object sender, EventArgs e)
         {
             clrbtnGridTXFilter_Changed(this, EventArgs.Empty);
+            toolTip1.SetToolTip(tbTXFilterAlpha, tbTXFilterAlpha.Value.ToString());
         }
 
         private void udTXNoiseGateAttenuate_ValueChanged(object sender, System.EventArgs e)
@@ -31912,6 +31965,7 @@ namespace PowerSDR
         private void tbMultiRXFilterAlpha_Scroll(object sender, EventArgs e)
         {
             clrbtnSubRXFilter_Changed(this, EventArgs.Empty);
+            toolTip1.SetToolTip(tbMultiRXFilterAlpha, tbMultiRXFilterAlpha.Value.ToString());
         }
 
         private void chkWheelTuneVFOB_CheckedChanged(object sender, EventArgs e)
@@ -33603,31 +33657,37 @@ namespace PowerSDR
         private void tbBackgroundAlpha_Scroll(object sender, EventArgs e)
         {
             clrbtnBackground_Changed(this, EventArgs.Empty);
+            toolTip1.SetToolTip(tbBackgroundAlpha, tbBackgroundAlpha.Value.ToString());
         }
 
         private void tbTXBackgroundAlpha_Scroll(object sender, EventArgs e)
         {
             clrbtnTXBackground_Changed(this, EventArgs.Empty);
+            toolTip1.SetToolTip(tbTXBackgroundAlpha, tbTXBackgroundAlpha.Value.ToString());
         }
 
         private void tbGridCourseAlpha_Scroll(object sender, EventArgs e)
         {
             clrbtnGrid_Changed(this, EventArgs.Empty);
+            toolTip1.SetToolTip(tbGridCourseAlpha, tbGridCourseAlpha.Value.ToString());
         }
 
         private void tbTXVGridCourseAlpha_Scroll(object sender, EventArgs e)
         {
             clrbtnTXVGrid_Changed(this, EventArgs.Empty);
+            toolTip1.SetToolTip(tbTXVGridCourseAlpha, tbTXVGridCourseAlpha.Value.ToString());
         }
 
         private void tbGridFineAlpha_Scroll(object sender, EventArgs e)
         {
             clrbtnGridFine_Changed(this, EventArgs.Empty);
+            toolTip1.SetToolTip(tbGridFineAlpha, tbGridFineAlpha.Value.ToString());
         }
 
         private void tbTXVGridFineAlpha_Scroll(object sender, EventArgs e)
         {
             clrbtnTXVGridFine_Changed(this, EventArgs.Empty);
+            toolTip1.SetToolTip(tbTXVGridFineAlpha, tbTXVGridFineAlpha.Value.ToString());
         }
 
         private void clrbtnHGridColor_Changed(object sender, EventArgs e)
@@ -33643,21 +33703,31 @@ namespace PowerSDR
         private void tbHGridColorAlpha_Scroll(object sender, EventArgs e)
         {
             clrbtnHGridColor_Changed(this, EventArgs.Empty);
+            toolTip1.SetToolTip(tbHGridColorAlpha, tbHGridColorAlpha.Value.ToString());
+        }
+
+        private void tbMeterEdgeBackgroundAlpha_Scroll(object sender, EventArgs e)
+        {
+            clrbtnMeterEdgeBackground_Changed(this, EventArgs.Empty);
+            toolTip1.SetToolTip(tbMeterEdgeBackgroundAlpha, tbMeterEdgeBackgroundAlpha.Value.ToString());
         }
 
         private void tbTXHGridColorAlpha_Scroll(object sender, EventArgs e)
         {
             clrbtnTXHGridColor_Changed(this, EventArgs.Empty);
+            toolTip1.SetToolTip(tbTXHGridColorAlpha, tbTXHGridColorAlpha.Value.ToString());
         }
 
         private void tbTXZeroLineAlpha_Scroll(object sender, EventArgs e)
         {
             clrbtnTXZeroLine_Changed(this, EventArgs.Empty);
+            toolTip1.SetToolTip(tbTXZeroLineAlpha, tbTXZeroLineAlpha.Value.ToString());
         }
 
         private void tbTXTextAlpha_Scroll(object sender, EventArgs e)
         {
             clrbtnTXText_Changed(this, EventArgs.Empty);
+            toolTip1.SetToolTip(tbTXTextAlpha, tbTXTextAlpha.Value.ToString());
         }
 
        /* private void chkTXCal_CheckedChanged(object sender, EventArgs e)

@@ -9622,7 +9622,7 @@
     <value>True</value>
   </data>
   <data name="lblModeLabel.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Tahoma, 6.75pt</value>
+    <value>Tahoma, 6.75pt, style=Bold</value>
   </data>
   <data name="lblModeLabel.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>Off</value>
@@ -9631,7 +9631,7 @@
     <value>11, 20</value>
   </data>
   <data name="lblModeLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>34, 11</value>
+    <value>35, 11</value>
   </data>
   <data name="lblModeLabel.TabIndex" type="System.Int32, mscorlib">
     <value>122</value>
@@ -9661,13 +9661,13 @@
     <value>True</value>
   </data>
   <data name="lblFilterLabel.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Tahoma, 6.75pt</value>
+    <value>Tahoma, 6.75pt, style=Bold</value>
   </data>
   <data name="lblFilterLabel.Location" type="System.Drawing.Point, System.Drawing">
     <value>11, 36</value>
   </data>
   <data name="lblFilterLabel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>25, 11</value>
+    <value>29, 11</value>
   </data>
   <data name="lblFilterLabel.TabIndex" type="System.Int32, mscorlib">
     <value>121</value>
@@ -11260,7 +11260,7 @@
     <value>Off</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
-    <value>PowerSDR™/OpenHPSDR v1.19.3.4   baseSVN 3444 (W5WC - 4/22/11)</value>
+    <value>PowerSDR™/OpenHPSDR v1.19.3.4   baseSVN 3444 (W5WC - 4/23/11)</value>
   </data>
   <data name="&gt;&gt;mainMenu1.Name" xml:space="preserve">
     <value>mainMenu1</value>
