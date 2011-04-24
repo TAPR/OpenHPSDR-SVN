@@ -214,6 +214,48 @@
   <data name="mnuCollapse.Text" xml:space="preserve">
     <value>Collapse</value>
   </data>
+  <data name="mnuFilterCancel.Text" xml:space="preserve">
+    <value>Cancel...</value>
+  </data>
+  <data name="menuItem12.Text" xml:space="preserve">
+    <value>-</value>
+  </data>
+  <data name="mnuFilter1.Text" xml:space="preserve">
+    <value>6.0k</value>
+  </data>
+  <data name="mnuFilter2.Text" xml:space="preserve">
+    <value>4.0k</value>
+  </data>
+  <data name="mnuFilter3.Text" xml:space="preserve">
+    <value>2.6k</value>
+  </data>
+  <data name="mnuFilter4.Text" xml:space="preserve">
+    <value>2.1k</value>
+  </data>
+  <data name="mnuFilter5.Text" xml:space="preserve">
+    <value>1.0k</value>
+  </data>
+  <data name="mnuFilter6.Text" xml:space="preserve">
+    <value>500</value>
+  </data>
+  <data name="mnuFilter7.Text" xml:space="preserve">
+    <value>250</value>
+  </data>
+  <data name="mnuFilter8.Text" xml:space="preserve">
+    <value>100</value>
+  </data>
+  <data name="mnuFilter9.Text" xml:space="preserve">
+    <value>50</value>
+  </data>
+  <data name="mnuFilter10.Text" xml:space="preserve">
+    <value>25</value>
+  </data>
+  <data name="mnuFilter.Text" xml:space="preserve">
+    <value>Filter</value>
+  </data>
+  <data name="mnuFilter.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
   <metadata name="timer_cpu_meter.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>618, 17</value>
   </metadata>
@@ -9781,7 +9823,7 @@
     <value>116</value>
   </data>
   <data name="txtVFOAMSD.Text" xml:space="preserve">
-    <value>12345</value>
+    <value>14.195000</value>
   </data>
   <data name="txtVFOAMSD.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
     <value>Right</value>
@@ -9946,7 +9988,7 @@
     <value>117</value>
   </data>
   <data name="txtVFOBMSD.Text" xml:space="preserve">
-    <value>12345</value>
+    <value>14.195000</value>
   </data>
   <data name="txtVFOBMSD.TextAlign" type="System.Windows.Forms.HorizontalAlignment, System.Windows.Forms">
     <value>Right</value>
@@ -11374,6 +11416,84 @@
     <value>mnuCollapse</value>
   </data>
   <data name="&gt;&gt;mnuCollapse.Type" xml:space="preserve">
+    <value>System.Windows.Forms.MenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;mnuFilter.Name" xml:space="preserve">
+    <value>mnuFilter</value>
+  </data>
+  <data name="&gt;&gt;mnuFilter.Type" xml:space="preserve">
+    <value>System.Windows.Forms.MenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;mnuFilterCancel.Name" xml:space="preserve">
+    <value>mnuFilterCancel</value>
+  </data>
+  <data name="&gt;&gt;mnuFilterCancel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.MenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;menuItem12.Name" xml:space="preserve">
+    <value>menuItem12</value>
+  </data>
+  <data name="&gt;&gt;menuItem12.Type" xml:space="preserve">
+    <value>System.Windows.Forms.MenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;mnuFilter1.Name" xml:space="preserve">
+    <value>mnuFilter1</value>
+  </data>
+  <data name="&gt;&gt;mnuFilter1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.MenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;mnuFilter2.Name" xml:space="preserve">
+    <value>mnuFilter2</value>
+  </data>
+  <data name="&gt;&gt;mnuFilter2.Type" xml:space="preserve">
+    <value>System.Windows.Forms.MenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;mnuFilter3.Name" xml:space="preserve">
+    <value>mnuFilter3</value>
+  </data>
+  <data name="&gt;&gt;mnuFilter3.Type" xml:space="preserve">
+    <value>System.Windows.Forms.MenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;mnuFilter4.Name" xml:space="preserve">
+    <value>mnuFilter4</value>
+  </data>
+  <data name="&gt;&gt;mnuFilter4.Type" xml:space="preserve">
+    <value>System.Windows.Forms.MenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;mnuFilter5.Name" xml:space="preserve">
+    <value>mnuFilter5</value>
+  </data>
+  <data name="&gt;&gt;mnuFilter5.Type" xml:space="preserve">
+    <value>System.Windows.Forms.MenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;mnuFilter6.Name" xml:space="preserve">
+    <value>mnuFilter6</value>
+  </data>
+  <data name="&gt;&gt;mnuFilter6.Type" xml:space="preserve">
+    <value>System.Windows.Forms.MenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;mnuFilter7.Name" xml:space="preserve">
+    <value>mnuFilter7</value>
+  </data>
+  <data name="&gt;&gt;mnuFilter7.Type" xml:space="preserve">
+    <value>System.Windows.Forms.MenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;mnuFilter8.Name" xml:space="preserve">
+    <value>mnuFilter8</value>
+  </data>
+  <data name="&gt;&gt;mnuFilter8.Type" xml:space="preserve">
+    <value>System.Windows.Forms.MenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;mnuFilter9.Name" xml:space="preserve">
+    <value>mnuFilter9</value>
+  </data>
+  <data name="&gt;&gt;mnuFilter9.Type" xml:space="preserve">
+    <value>System.Windows.Forms.MenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;mnuFilter10.Name" xml:space="preserve">
+    <value>mnuFilter10</value>
+  </data>
+  <data name="&gt;&gt;mnuFilter10.Type" xml:space="preserve">
     <value>System.Windows.Forms.MenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;timer_cpu_meter.Name" xml:space="preserve">
