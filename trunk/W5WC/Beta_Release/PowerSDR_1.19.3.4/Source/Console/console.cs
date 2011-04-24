@@ -1171,6 +1171,19 @@ namespace PowerSDR
         private LabelTS lblRF2;
         private LabelTS lblModeLabel;
         private LabelTS lblFilterLabel;
+        private MenuItem mnuFilter;
+        private MenuItem mnuFilterCancel;
+        private MenuItem menuItem12;
+        private MenuItem mnuFilter1;
+        private MenuItem mnuFilter2;
+        private MenuItem mnuFilter3;
+        private MenuItem mnuFilter4;
+        private MenuItem mnuFilter5;
+        private MenuItem mnuFilter6;
+        private MenuItem mnuFilter7;
+        private MenuItem mnuFilter8;
+        private MenuItem mnuFilter9;
+        private MenuItem mnuFilter10;
 		private CheckBoxTS chkFullDuplex;
 
 		#endregion
@@ -1735,6 +1748,19 @@ namespace PowerSDR
             this.mnuReportBug = new System.Windows.Forms.MenuItem();
             this.mnuProfiles = new System.Windows.Forms.MenuItem();
             this.mnuCollapse = new System.Windows.Forms.MenuItem();
+            this.mnuFilter = new System.Windows.Forms.MenuItem();
+            this.mnuFilterCancel = new System.Windows.Forms.MenuItem();
+            this.menuItem12 = new System.Windows.Forms.MenuItem();
+            this.mnuFilter1 = new System.Windows.Forms.MenuItem();
+            this.mnuFilter2 = new System.Windows.Forms.MenuItem();
+            this.mnuFilter3 = new System.Windows.Forms.MenuItem();
+            this.mnuFilter4 = new System.Windows.Forms.MenuItem();
+            this.mnuFilter5 = new System.Windows.Forms.MenuItem();
+            this.mnuFilter6 = new System.Windows.Forms.MenuItem();
+            this.mnuFilter7 = new System.Windows.Forms.MenuItem();
+            this.mnuFilter8 = new System.Windows.Forms.MenuItem();
+            this.mnuFilter9 = new System.Windows.Forms.MenuItem();
+            this.mnuFilter10 = new System.Windows.Forms.MenuItem();
             this.timer_cpu_meter = new System.Windows.Forms.Timer(this.components);
             this.timer_peak_text = new System.Windows.Forms.Timer(this.components);
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
@@ -2148,7 +2174,8 @@ namespace PowerSDR
             this.mnuFWC,
             this.mnuReportBug,
             this.mnuProfiles,
-            this.mnuCollapse});
+            this.mnuCollapse,
+            this.mnuFilter});
             // 
             // mnuSetup
             // 
@@ -2257,6 +2284,95 @@ namespace PowerSDR
             this.mnuCollapse.Index = 15;
             resources.ApplyResources(this.mnuCollapse, "mnuCollapse");
             this.mnuCollapse.Click += new System.EventHandler(this.mnuCollapse_Click);
+            // 
+            // mnuFilter
+            // 
+            this.mnuFilter.Index = 16;
+            this.mnuFilter.MenuItems.AddRange(new System.Windows.Forms.MenuItem[] {
+            this.mnuFilterCancel,
+            this.menuItem12,
+            this.mnuFilter1,
+            this.mnuFilter2,
+            this.mnuFilter3,
+            this.mnuFilter4,
+            this.mnuFilter5,
+            this.mnuFilter6,
+            this.mnuFilter7,
+            this.mnuFilter8,
+            this.mnuFilter9,
+            this.mnuFilter10});
+            resources.ApplyResources(this.mnuFilter, "mnuFilter");
+            // 
+            // mnuFilterCancel
+            // 
+            this.mnuFilterCancel.Index = 0;
+            resources.ApplyResources(this.mnuFilterCancel, "mnuFilterCancel");
+            this.mnuFilterCancel.Click += new System.EventHandler(this.mnuFilterCancel_Click);
+            // 
+            // menuItem12
+            // 
+            this.menuItem12.Index = 1;
+            resources.ApplyResources(this.menuItem12, "menuItem12");
+            // 
+            // mnuFilter1
+            // 
+            this.mnuFilter1.Index = 2;
+            resources.ApplyResources(this.mnuFilter1, "mnuFilter1");
+            this.mnuFilter1.Click += new System.EventHandler(this.mnuFilter1_Click);
+            // 
+            // mnuFilter2
+            // 
+            this.mnuFilter2.Index = 3;
+            resources.ApplyResources(this.mnuFilter2, "mnuFilter2");
+            this.mnuFilter2.Click += new System.EventHandler(this.mnuFilter2_Click);
+            // 
+            // mnuFilter3
+            // 
+            this.mnuFilter3.Index = 4;
+            resources.ApplyResources(this.mnuFilter3, "mnuFilter3");
+            this.mnuFilter3.Click += new System.EventHandler(this.mnuFilter3_Click);
+            // 
+            // mnuFilter4
+            // 
+            this.mnuFilter4.Index = 5;
+            resources.ApplyResources(this.mnuFilter4, "mnuFilter4");
+            this.mnuFilter4.Click += new System.EventHandler(this.mnuFilter4_Click);
+            // 
+            // mnuFilter5
+            // 
+            this.mnuFilter5.Index = 6;
+            resources.ApplyResources(this.mnuFilter5, "mnuFilter5");
+            this.mnuFilter5.Click += new System.EventHandler(this.mnuFilter5_Click);
+            // 
+            // mnuFilter6
+            // 
+            this.mnuFilter6.Index = 7;
+            resources.ApplyResources(this.mnuFilter6, "mnuFilter6");
+            this.mnuFilter6.Click += new System.EventHandler(this.mnuFilter6_Click);
+            // 
+            // mnuFilter7
+            // 
+            this.mnuFilter7.Index = 8;
+            resources.ApplyResources(this.mnuFilter7, "mnuFilter7");
+            this.mnuFilter7.Click += new System.EventHandler(this.mnuFilter7_Click);
+            // 
+            // mnuFilter8
+            // 
+            this.mnuFilter8.Index = 9;
+            resources.ApplyResources(this.mnuFilter8, "mnuFilter8");
+            this.mnuFilter8.Click += new System.EventHandler(this.mnuFilter8_Click);
+            // 
+            // mnuFilter9
+            // 
+            this.mnuFilter9.Index = 10;
+            resources.ApplyResources(this.mnuFilter9, "mnuFilter9");
+            this.mnuFilter9.Click += new System.EventHandler(this.mnuFilter9_Click);
+            // 
+            // mnuFilter10
+            // 
+            this.mnuFilter10.Index = 11;
+            resources.ApplyResources(this.mnuFilter10, "mnuFilter10");
+            this.mnuFilter10.Click += new System.EventHandler(this.mnuFilter10_Click);
             // 
             // timer_cpu_meter
             // 
@@ -34278,16 +34394,16 @@ namespace PowerSDR
                     FWC.SetTXOffset(new_txosc);
             }
 
-			radFilter1.Text = rx1_filters[(int)new_mode].GetName(Filter.F1);
-			radFilter2.Text = rx1_filters[(int)new_mode].GetName(Filter.F2);
-			radFilter3.Text = rx1_filters[(int)new_mode].GetName(Filter.F3);
-			radFilter4.Text = rx1_filters[(int)new_mode].GetName(Filter.F4);
-			radFilter5.Text = rx1_filters[(int)new_mode].GetName(Filter.F5);
-			radFilter6.Text = rx1_filters[(int)new_mode].GetName(Filter.F6);
-			radFilter7.Text = rx1_filters[(int)new_mode].GetName(Filter.F7);
-			radFilter8.Text = rx1_filters[(int)new_mode].GetName(Filter.F8);
-			radFilter9.Text = rx1_filters[(int)new_mode].GetName(Filter.F9);
-			radFilter10.Text = rx1_filters[(int)new_mode].GetName(Filter.F10);
+            mnuFilter1.Text = (radFilter1.Text = rx1_filters[(int)new_mode].GetName(Filter.F1));
+            mnuFilter2.Text = (radFilter2.Text = rx1_filters[(int)new_mode].GetName(Filter.F2));
+			mnuFilter3.Text = (radFilter3.Text = rx1_filters[(int)new_mode].GetName(Filter.F3));
+			mnuFilter4.Text = (radFilter4.Text = rx1_filters[(int)new_mode].GetName(Filter.F4));
+			mnuFilter5.Text = (radFilter5.Text = rx1_filters[(int)new_mode].GetName(Filter.F5));
+			mnuFilter6.Text = (radFilter6.Text = rx1_filters[(int)new_mode].GetName(Filter.F6));
+			mnuFilter7.Text = (radFilter7.Text = rx1_filters[(int)new_mode].GetName(Filter.F7));
+			mnuFilter8.Text = (radFilter8.Text = rx1_filters[(int)new_mode].GetName(Filter.F8));
+			mnuFilter9.Text = (radFilter9.Text = rx1_filters[(int)new_mode].GetName(Filter.F9));
+			mnuFilter10.Text = (radFilter10.Text = rx1_filters[(int)new_mode].GetName(Filter.F10));
 			radFilterVar1.Text = rx1_filters[(int)new_mode].GetName(Filter.VAR1);
 			radFilterVar2.Text = rx1_filters[(int)new_mode].GetName(Filter.VAR2);
 
@@ -34593,91 +34709,202 @@ namespace PowerSDR
 
 		private void radFilter1_CheckedChanged(object sender, System.EventArgs e)
 		{
+            mnuFilter1.Text = radFilter1.Text;
+ 
             if (radFilter1.Checked)
             {
                 SetRX1Filter(Filter.F1);
                 lblFilterLabel.Text = radFilter1.Text;
-            }
+                mnuFilter1.Checked = true;
+                mnuFilter2.Checked = false;
+                mnuFilter3.Checked = false;
+                mnuFilter4.Checked = false;
+                mnuFilter5.Checked = false;
+                mnuFilter6.Checked = false;
+                mnuFilter7.Checked = false;
+                mnuFilter8.Checked = false;
+                mnuFilter9.Checked = false;
+                mnuFilter10.Checked = false;
+           }
 		}
 
 		private void radFilter2_CheckedChanged(object sender, System.EventArgs e)
         {
+            mnuFilter2.Text = radFilter2.Text;
             if (radFilter2.Checked)
             {
                 SetRX1Filter(Filter.F2);            
                 lblFilterLabel.Text = radFilter2.Text;
+                mnuFilter1.Checked = false;
+                mnuFilter2.Checked = true;
+                mnuFilter3.Checked = false;
+                mnuFilter4.Checked = false;
+                mnuFilter5.Checked = false;
+                mnuFilter6.Checked = false;
+                mnuFilter7.Checked = false;
+                mnuFilter8.Checked = false;
+                mnuFilter9.Checked = false;
+                mnuFilter10.Checked = false;
             }
         }
 
 		private void radFilter3_CheckedChanged(object sender, System.EventArgs e)
 		{
+            mnuFilter3.Text = radFilter3.Text;
             if (radFilter3.Checked)
             {
                 SetRX1Filter(Filter.F3);
                 lblFilterLabel.Text = radFilter3.Text;
+                mnuFilter1.Checked = false;
+                mnuFilter2.Checked = false;
+                mnuFilter3.Checked = true;
+                mnuFilter4.Checked = false;
+                mnuFilter5.Checked = false;
+                mnuFilter6.Checked = false;
+                mnuFilter7.Checked = false;
+                mnuFilter8.Checked = false;
+                mnuFilter9.Checked = false;
+                mnuFilter10.Checked = false;
             }
         }
 
 		private void radFilter4_CheckedChanged(object sender, System.EventArgs e)
 		{
+            mnuFilter4.Text = radFilter4.Text;
             if (radFilter4.Checked)
             {
                 SetRX1Filter(Filter.F4);
                 lblFilterLabel.Text = radFilter4.Text;
+                mnuFilter1.Checked = false;
+                mnuFilter2.Checked = false;
+                mnuFilter3.Checked = false;
+                mnuFilter4.Checked = true;
+                mnuFilter5.Checked = false;
+                mnuFilter6.Checked = false;
+                mnuFilter7.Checked = false;
+                mnuFilter8.Checked = false;
+                mnuFilter9.Checked = false;
+                mnuFilter10.Checked = false;
             }
         }
 
 		private void radFilter5_CheckedChanged(object sender, System.EventArgs e)
 		{
+            mnuFilter5.Text = radFilter5.Text;
             if (radFilter5.Checked)
             {
                 SetRX1Filter(Filter.F5);
                 lblFilterLabel.Text = radFilter5.Text;
+                mnuFilter1.Checked = false;
+                mnuFilter2.Checked = false;
+                mnuFilter3.Checked = false;
+                mnuFilter4.Checked = false;
+                mnuFilter5.Checked = true;
+                mnuFilter6.Checked = false;
+                mnuFilter7.Checked = false;
+                mnuFilter8.Checked = false;
+                mnuFilter9.Checked = false;
+                mnuFilter10.Checked = false;
             }
         }
 
 		private void radFilter6_CheckedChanged(object sender, System.EventArgs e)
 		{
+            mnuFilter6.Text = radFilter6.Text;
             if (radFilter6.Checked)
             {
                 SetRX1Filter(Filter.F6);
                 lblFilterLabel.Text = radFilter6.Text;
+                mnuFilter1.Checked = false;
+                mnuFilter2.Checked = false;
+                mnuFilter3.Checked = false;
+                mnuFilter4.Checked = false;
+                mnuFilter5.Checked = false;
+                mnuFilter6.Checked = true;
+                mnuFilter7.Checked = false;
+                mnuFilter8.Checked = false;
+                mnuFilter9.Checked = false;
+                mnuFilter10.Checked = false;
             }
         }
 
 		private void radFilter7_CheckedChanged(object sender, System.EventArgs e)
 		{
+            mnuFilter7.Text = radFilter7.Text;
             if (radFilter7.Checked)
             {
                 SetRX1Filter(Filter.F7);
                 lblFilterLabel.Text = radFilter7.Text;
+                mnuFilter1.Checked = false;
+                mnuFilter2.Checked = false;
+                mnuFilter3.Checked = false;
+                mnuFilter4.Checked = false;
+                mnuFilter5.Checked = false;
+                mnuFilter6.Checked = false;
+                mnuFilter7.Checked = true;
+                mnuFilter8.Checked = false;
+                mnuFilter9.Checked = false;
+                mnuFilter10.Checked = false;
             }
         }
 
 		private void radFilter8_CheckedChanged(object sender, System.EventArgs e)
 		{
+            mnuFilter8.Text = radFilter8.Text;
             if (radFilter8.Checked)
             {
                 SetRX1Filter(Filter.F8);
-                lblFilterLabel.Text = radFilter1.Text;
+                lblFilterLabel.Text = radFilter8.Text;
+                mnuFilter1.Checked = false;
+                mnuFilter2.Checked = false;
+                mnuFilter3.Checked = false;
+                mnuFilter4.Checked = false;
+                mnuFilter5.Checked = false;
+                mnuFilter6.Checked = false;
+                mnuFilter7.Checked = false;
+                mnuFilter8.Checked = true;
+                mnuFilter9.Checked = false;
+                mnuFilter10.Checked = false;
             }
         }
 
 		private void radFilter9_CheckedChanged(object sender, System.EventArgs e)
 		{
+            mnuFilter9.Text = radFilter9.Text;
             if (radFilter9.Checked)
             {
                 SetRX1Filter(Filter.F9);
                 lblFilterLabel.Text = radFilter9.Text;
+                mnuFilter1.Checked = false;
+                mnuFilter2.Checked = false;
+                mnuFilter3.Checked = false;
+                mnuFilter4.Checked = false;
+                mnuFilter5.Checked = false;
+                mnuFilter6.Checked = false;
+                mnuFilter7.Checked = false;
+                mnuFilter8.Checked = false;
+                mnuFilter9.Checked = true;
+                mnuFilter10.Checked = false;
             }
         }
 
 		private void radFilter10_CheckedChanged(object sender, System.EventArgs e)
 		{
+            mnuFilter10.Text = radFilter10.Text;
             if (radFilter10.Checked)
             {
                 SetRX1Filter(Filter.F10);
                 lblFilterLabel.Text = radFilter10.Text;
+                mnuFilter1.Checked = false;
+                mnuFilter2.Checked = false;
+                mnuFilter3.Checked = false;
+                mnuFilter4.Checked = false;
+                mnuFilter5.Checked = false;
+                mnuFilter6.Checked = false;
+                mnuFilter7.Checked = false;
+                mnuFilter8.Checked = false;
+                mnuFilter9.Checked = false;
+                mnuFilter10.Checked = true;
             }
         }
 
@@ -39276,6 +39503,7 @@ namespace PowerSDR
         {
             this.mnuCollapse.Text = "Collapse";
             this.collapsedDisplay = false;
+            this.mnuFilter.Visible = false;
 
             int minWidth = console_basis_size.Width;
             int minHeight = (fwc_init && current_model == Model.FLEX5000 && FWCEEPROM.RX2OK) ?
@@ -39431,6 +39659,7 @@ namespace PowerSDR
 
             this.mnuCollapse.Text = "Expand";
             this.collapsedDisplay = true;
+            this.mnuFilter.Visible = true;
 
             int minWidth = 600;
             int minHeight = 200;
@@ -39696,10 +39925,63 @@ namespace PowerSDR
                 //grpVFOB.Location = new Point(grpVFOB.Location.X, -200);
             }
         }
-
         // W1CEG:  End
         #endregion Collapsible Display 
 
+        private void mnuFilter1_Click(object sender, EventArgs e)
+        {
+            radFilter1.Checked = true;
+         }
 
- 	}
+        private void mnuFilter2_Click(object sender, EventArgs e)
+        {
+            radFilter2.Checked = true;
+        }
+
+        private void mnuFilter3_Click(object sender, EventArgs e)
+        {
+            radFilter3.Checked = true;
+        }
+
+        private void mnuFilter4_Click(object sender, EventArgs e)
+        {
+            radFilter4.Checked = true;
+        }
+
+        private void mnuFilter5_Click(object sender, EventArgs e)
+        {
+            radFilter5.Checked = true;
+        }
+
+        private void mnuFilter6_Click(object sender, EventArgs e)
+        {
+            radFilter6.Checked = true;
+        }
+
+        private void mnuFilter7_Click(object sender, EventArgs e)
+        {
+            radFilter7.Checked = true;
+        }
+
+        private void mnuFilter8_Click(object sender, EventArgs e)
+        {
+            radFilter8.Checked = true;
+        }
+
+        private void mnuFilter9_Click(object sender, EventArgs e)
+        {
+            radFilter9.Checked = true;
+        }
+
+        private void mnuFilter10_Click(object sender, EventArgs e)
+        {
+            radFilter10.Checked = true;
+        }
+
+        private void mnuFilterCancel_Click(object sender, EventArgs e)
+        {
+            if (sender == null) return;
+        }
+
+  	}
 }
