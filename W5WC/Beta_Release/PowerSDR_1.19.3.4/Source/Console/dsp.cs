@@ -26,17 +26,16 @@
 //    USA
 //=================================================================
 
-
-using System;
-using System.Collections;
-using System.Text;
-using System.Security;
-using System.Runtime.InteropServices;
-using System.Windows.Forms;
-using System.Diagnostics;
-
 namespace PowerSDR
 {
+    using System;
+    using System.Collections;
+    using System.Text;
+    using System.Security;
+    using System.Runtime.InteropServices;
+    using System.Windows.Forms;
+    using System.Diagnostics;
+
 	unsafe class DttSP
 	{
 		#region Enums

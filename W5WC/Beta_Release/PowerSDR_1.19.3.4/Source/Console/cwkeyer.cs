@@ -33,14 +33,14 @@
 	Bridgewater, NJ 08807
 */
 
-using System;
-using System.Threading;
-using System.Diagnostics;
-using System.Windows.Forms;
-using System.IO.Ports;
-
 namespace PowerSDR
 {
+    using System;
+    using System.Threading;
+    using System.Diagnostics;
+    using System.Windows.Forms;
+    using System.IO.Ports;
+
 	public class CWKeyer2
 	{
 		#region Variables and Properties
@@ -324,7 +324,7 @@ namespace PowerSDR
 		public CWKeyer2(Console c)
 		{
 			console = c;
-			if(console.CurrentModel == Model.SDR1000)
+			//if(console.CurrentModel == Model.SDR1000)
                 hw = console.Hdw;
 			siolisten = console.Siolisten;
 			Thread.Sleep(50);
@@ -392,10 +392,10 @@ namespace PowerSDR
 							break;
 
                         case "Ozy/Hermes":
-                            int tmp = JanusAudio.GetDotDashPTT();
+                            //int tmp = JanusAudio.GetDotDashPTT();
                             // System.Console.WriteLine("dd: " + tmp); 
-                            extkey_dot = ((tmp & 0x4) != 0);
-                            extkey_dash = ((tmp & 0x2) != 0);
+                            extkey_dot = fwc_dot; // ((tmp & 0x4) != 0);
+                            extkey_dash = fwc_dash; // ((tmp & 0x2) != 0);                           
                             break;
 
                         default: // COM port

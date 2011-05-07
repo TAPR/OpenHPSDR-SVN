@@ -368,8 +368,8 @@ setup_tx (unsigned int thread)
 
 	tx[thread].alc.gen = newDttSPAgc (
 		1,								// mode kept around for control reasons alone
-		CXBbase (tx[thread].buf.i),		// input buffer
-		CXBsize (tx[thread].buf.i),		// output buffer
+		CXBbase (tx[thread].buf.o),		// input buffer
+		CXBsize (tx[thread].buf.o),		// output buffer
 		1.08f,							// Target output
 		2,								// Attack time constant in ms
 		10,								// Decay time constant in ms
@@ -790,16 +790,21 @@ do_rx_pre (int k, unsigned int thread)
 {
 	int i, n = min (CXBhave (rx[thread][k].buf.i), uni[thread].buflen);
 
-	if (rx[thread][k].nb.flag)
-		noiseblanker (rx[thread][k].nb.gen);
-	if (rx[thread][k].nb_sdrom.flag)
-		SDROMnoiseblanker (rx[thread][k].nb_sdrom.gen);
+	//if (rx[thread][k].nb.flag)
+	//	noiseblanker (rx[thread][k].nb.gen);
+	//if (rx[thread][k].nb_sdrom.flag)
+	//	SDROMnoiseblanker (rx[thread][k].nb_sdrom.gen);
 
 	// metering for uncorrected values here
 	do_rx_meter (k, thread, rx[thread][k].buf.i, RXMETER_PRE_CONV);
 
 	if (rx[thread][k].dcb->flag) DCBlock(rx[thread][k].dcb);
 
+	if (rx[thread][k].nb.flag)
+		noiseblanker (rx[thread][k].nb.gen);
+	if (rx[thread][k].nb_sdrom.flag)
+		SDROMnoiseblanker (rx[thread][k].nb_sdrom.gen);
+		
 	correctIQ (rx[thread][k].buf.i, rx[thread][k].iqfix, FALSE, k);
 
 	/* 2nd IF conversion happens here */
@@ -1058,10 +1063,10 @@ do_tx_meter (unsigned int thread, CXB buf, TXMETERTYPE mt)
 		case TX_ALC:
 			for (i = 0; i < CXBhave (tx[thread].buf.i); i++)
 				alc_avg = (REAL) (0.9995 * alc_avg +
-				0.0005 * Csqrmag (CXBdata (tx[thread].buf.i, i)));
+				0.0005 * Csqrmag (CXBdata (tx[thread].buf.o, i)));
 			uni[thread].meter.tx.val[TX_ALC] = (REAL) (-10.0 * log10 (alc_avg + 1e-16));
 
-			alc_pk = CXBpeak(tx[thread].buf.i);
+			alc_pk = CXBpeak(tx[thread].buf.o);
 			uni[thread].meter.tx.val[TX_ALC_PK] = (REAL) (-20.0 * log10 (alc_pk+ 1e-16));
 			uni[thread].meter.tx.val[TX_ALC_G] = (REAL)(20.0*log10(tx[thread].alc.gen->gain.now+1e-16));
 			//fprintf(stdout, "pk: %15.12f  comp: %15.12f\n", uni[thread].meter.tx.val[TX_ALC_PK], uni[thread].meter.tx.val[TX_ALC_G]);

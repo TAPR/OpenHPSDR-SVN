@@ -26,14 +26,14 @@
 //    USA
 //=================================================================
 
-using System;
-using System.Drawing;
-using System.Collections;
-using System.ComponentModel;
-using System.Windows.Forms;
-
 namespace PowerSDR
 {
+    using System;
+    using System.Drawing;
+    using System.Collections;
+    using System.ComponentModel;
+    using System.Windows.Forms;
+
 	unsafe public class DSPTestForm : System.Windows.Forms.Form
 	{
 		private Console console;

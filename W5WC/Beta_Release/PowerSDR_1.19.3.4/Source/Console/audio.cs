@@ -33,16 +33,15 @@
 //#define INTERLEAVED
 //#define SPLIT_INTERLEAVED
 
-
-using System;
-using System.Collections;
-using System.Diagnostics;
-using System.Runtime.InteropServices;
-using System.Threading;
-using System.Windows.Forms;
-
 namespace PowerSDR
 {
+    using System;
+    using System.Collections;
+    using System.Diagnostics;
+    using System.Runtime.InteropServices;
+    using System.Threading;
+    using System.Windows.Forms;
+
 	public class Audio
 	{
 		#region PowerSDR Specific Variables

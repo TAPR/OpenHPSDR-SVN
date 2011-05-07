@@ -26,10 +26,10 @@
 //    USA
 //=================================================================
 
-using System;
-
 namespace PowerSDR
 {
+    using System;
+
 	/// <summary>
 	/// Summary description for filter.
 	/// </summary>

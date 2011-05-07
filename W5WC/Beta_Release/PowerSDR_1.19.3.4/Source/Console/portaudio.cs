@@ -26,26 +26,25 @@
 //    USA
 //=================================================================
 
-using System;
-//using System.Collections;
-//using System.Diagnostics;
-using System.Collections;
-using System.Text;
-using System.Security;
-using System.Runtime.InteropServices;
-//using System.Threading;
-using System.Windows.Forms;
-
-using PaError = System.Int32;
-using PaDeviceIndex = System.Int32; 
-using PaHostApiIndex = System.Int32;
-using PaTime = System.Double;
-using PaSampleFormat = System.UInt32; 
-using PaStreamFlags = System.UInt32; 
-using PaStreamCallbackFlags = System.UInt32; 
-
 namespace PowerSDR
 {
+    using System;
+    //using System.Collections;
+    //using System.Diagnostics;
+    using System.Collections;
+    using System.Text;
+    using System.Security;
+    using System.Runtime.InteropServices;
+    //using System.Threading;
+    using System.Windows.Forms;
+    using PaError = System.Int32;
+    using PaDeviceIndex = System.Int32;
+    using PaHostApiIndex = System.Int32;
+    using PaTime = System.Double;
+    using PaSampleFormat = System.UInt32;
+    using PaStreamFlags = System.UInt32;
+    using PaStreamCallbackFlags = System.UInt32; 
+
 	public class PA19
 	{
 		#region Constants

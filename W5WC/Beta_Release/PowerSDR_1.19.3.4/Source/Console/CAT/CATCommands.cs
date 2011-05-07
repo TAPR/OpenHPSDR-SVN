@@ -1,5 +1,7 @@
 //=================================================================
-// CATCommands.cs
+// <copyright file="CATCommands.cs" company="Bob Tracey">
+//     Bob Tracey 2005 copyright tag.
+// </copyright>
 //=================================================================
 // Copyright (C) 2005  Bob Tracy
 //
@@ -20,17 +22,16 @@
 // You may contact the author via email at: k5kdn@arrl.net
 //=================================================================
 
-
-using System;
-using System.Reflection;
-using System.Diagnostics;
-using System.Threading;
-using System.Text;
-using System.Text.RegularExpressions;
-using System.Globalization;
-
 namespace PowerSDR
 {
+    using System;
+    using System.Reflection;
+    using System.Diagnostics;
+    using System.Threading;
+    using System.Text;
+    using System.Text.RegularExpressions;
+    using System.Globalization;
+
 	/// <summary>
 	/// Summary description for CATCommands.
 	/// </summary>
