@@ -26,22 +26,22 @@
 //    USA
 //=================================================================
 
-using System;
-using System.Collections;
-using System.Data;
-using System.Diagnostics;
-using System.Drawing;
-using System.ComponentModel;
-using System.Threading;
-using System.Windows.Forms;
-using SDRSerialSupportII;
-using System.Text;
-using System.IO;
-using System.IO.Ports;
-using TDxInput;
-
 namespace PowerSDR
 {
+    using System;
+    using System.Collections;
+    using System.Data;
+    using System.Diagnostics;
+    using System.Drawing;
+    using System.ComponentModel;
+    using System.Threading;
+    using System.Windows.Forms;
+    using SDRSerialSupportII;
+    using System.Text;
+    using System.IO;
+    using System.IO.Ports;
+    using TDxInput;
+
     public class Setup : System.Windows.Forms.Form
     {
         #region Variable Declaration
@@ -774,7 +774,7 @@ namespace PowerSDR
         private PowerSDR.ColorButton clrbtnBandEdge;
         private System.Windows.Forms.LabelTS lblBandEdge;
         private System.Windows.Forms.CheckBoxTS chkShowFreqOffset;
-        private System.Windows.Forms.ComboBoxTS comboMeterType;
+        public System.Windows.Forms.ComboBoxTS comboMeterType;
         private PowerSDR.ColorButton clrbtnMeterEdgeBackground;
         private PowerSDR.ColorButton clrbtnMeterEdgeHigh;
         private PowerSDR.ColorButton clrbtnMeterEdgeLow;
@@ -26034,6 +26034,7 @@ namespace PowerSDR
                 udRFDelay.Enabled = true;
                 lblRFDelay.Visible = true;
                 grpImpulseTest.Visible = false;
+                chkCWKeyerMonoCable.Visible = false;
 
                 if (is_hermes)
                 {
@@ -26138,7 +26139,7 @@ namespace PowerSDR
                 chkCalExpert.Enabled = true;
 
                 grpHPSDRFreqCalDbg.Visible = false;
-
+                chkCWKeyerMonoCable.Visible = true;
 
                 if (!tcSetup.TabPages.Contains(tpExtCtrl))
                 {

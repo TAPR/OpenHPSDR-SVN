@@ -26,17 +26,17 @@
 //    USA
 //=================================================================
 
-using System;
-using System.Diagnostics;
-using System.Drawing;
-using System.Drawing.Drawing2D;
-using System.Drawing.Text;
-using System.Collections;
-using System.ComponentModel;
-using System.Windows.Forms;
-
 namespace PowerSDR
 {
+    using System;
+    using System.Diagnostics;
+    using System.Drawing;
+    using System.Drawing.Drawing2D;
+    using System.Drawing.Text;
+    using System.Collections;
+    using System.ComponentModel;
+    using System.Windows.Forms;
+
 	/// <summary>
 	/// Summary description for DiversityForm.
 	/// </summary>

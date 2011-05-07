@@ -26,21 +26,20 @@
 //    USA
 //=================================================================
 
-using System;
-using System.Collections;
-using System.Diagnostics;
-using System.Drawing;
-using System.Drawing.Drawing2D;
-using System.Drawing.Imaging;
-using System.Threading;
-using System.Windows.Forms;
-
-//using Microsoft.DirectX;
-//using Microsoft.DirectX.Direct3D;
-
-
 namespace PowerSDR
-{		
+{
+    using System;
+    using System.Collections;
+    using System.Diagnostics;
+    using System.Drawing;
+    using System.Drawing.Drawing2D;
+    using System.Drawing.Imaging;
+    using System.Threading;
+    using System.Windows.Forms;
+
+    //using Microsoft.DirectX;
+    //using Microsoft.DirectX.Direct3D;
+	
 	class Display
 	{
 		#region Variable Declaration
@@ -2212,7 +2211,7 @@ namespace PowerSDR
 			double h_pixel_step = (double)H/h_steps;
 			int top = (int)((double)grid_step*H/y_range);
 
-			if(!local_mox && sub_rx1_enabled && rx==1)
+			if(!local_mox && sub_rx1_enabled && rx==1) //multi-rx
 			{
 				// draw Sub RX filter
 				// get filter screen coordinates

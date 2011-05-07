@@ -26,13 +26,13 @@
 //    USA
 //=================================================================
 
-using System;
-using System.Runtime.InteropServices;
-using System.Collections;
-using System.IO;
-
 namespace PowerSDR
 {
+    using System;
+    using System.Runtime.InteropServices;
+    using System.Collections;
+    using System.IO;
+
 	public class Mixer
 	{
 		#region Constants

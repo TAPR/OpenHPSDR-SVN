@@ -28,12 +28,13 @@
 //    USA
 //=================================================================
 
-using System;
-using System.Threading;
-using PortTalk;
 
 namespace PowerSDR
 {
+    using System;
+    using System.Threading;
+    using PortTalk;
+
 	public class AD9854
 	{
 		#region Enums
@@ -279,8 +280,8 @@ namespace PowerSDR
 
 			for(int i=0; i<6; i++)
 			{
-				byte b = (byte)(tuning_word >> (40-i*8));
-				PWrite(b, (byte)(4+i));
+				byte b = (byte)(tuning_word >> (40 - i * 8));
+				PWrite(b, (byte)(4 + i));
 			}
 		}
 

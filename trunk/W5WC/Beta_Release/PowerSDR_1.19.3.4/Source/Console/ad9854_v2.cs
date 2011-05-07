@@ -30,13 +30,13 @@
 //    USA
 //=================================================================
 
-using System;
-using System.Threading;
-using PortTalk;
-using System.Diagnostics;
-
 namespace PowerSDR
 {
+    using System;
+    using System.Threading;
+    using PortTalk;
+    using System.Diagnostics;
+
 	public class AD9854_v2
 	{
 		#region Enums

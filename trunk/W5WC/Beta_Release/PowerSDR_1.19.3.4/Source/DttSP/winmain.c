@@ -244,73 +244,6 @@ run_swch(unsigned int thread)
 		top[thread].hold.size.frames, thread);
 }
 
-/* PRIVATE void
-run_swch(unsigned int thread)
-{
-	int i, n = top[thread].hold.size.frames;
-	REAL w;
-//	static int count = 0;
-
-	process_samples(top[thread].hold.buf.l, top[thread].hold.buf.r,
-		top[thread].hold.aux.l, top[thread].hold.aux.r,
-		top[thread].hold.size.frames, thread);
-
-	for (i = 0; i < n; i++)
-	{
-//		count++;
-		if (top[thread].swch.env.curr.type == SWCH_FALL)
-		{
-			top[thread].swch.env.curr.val += top[thread].swch.env.fall.incr;
-			w = (REAL)sin(top[thread].swch.env.curr.val * M_PI /  2.0f);
-			top[thread].hold.buf.l[thread] *= w, top[thread].hold.buf.r[thread] *= w;
-			top[thread].hold.aux.l[thread] *= w, top[thread].hold.aux.r[thread] *= w;
-//			if (top[thread].swch.env.curr.cnt == 0) fprintf(stderr, "FALL\n"),fflush(stderr);
-//			if(top[thread].swch.env.curr.cnt == 0) top[thread].hold.buf.l[thread] = top[thread].hold.buf.r[thread] = -1.0;
-			if (++top[thread].swch.env.curr.cnt >= top[thread].swch.env.fall.size)
-			{
-				//top[thread].hold.buf.l[thread] = top[thread].hold.buf.r[thread] = -1.0;
-				top[thread].swch.env.curr.type = SWCH_STDY;
-				top[thread].swch.env.curr.cnt = 0;
-				top[thread].swch.env.curr.val = 0.0;
-//				fprintf(stderr, "Fall End: %d\n", count);
-			}
-		}
-		else if (top[thread].swch.env.curr.type == SWCH_STDY)
-		{
-			top[thread].hold.buf.l[i]= top[thread].hold.buf.r[i] =
-				top[thread].hold.aux.l[i] =  top[thread].hold.aux.r[i] = 0.0;
-//			if (top[thread].swch.env.curr.cnt == 0) fprintf(stderr, "STDY\n"),fflush(stderr);
-			if (++top[thread].swch.env.curr.cnt >= top[thread].swch.env.stdy.size)
-			{
-//				top[thread].hold.buf.l[thread] = top[thread].hold.buf.r[thread] = -1.0;
-				top[thread].swch.env.curr.type = SWCH_RISE;
-				top[thread].swch.env.curr.cnt = 0;
-				top[thread].swch.env.curr.val = 0.0;
-//				fprintf(stderr, "Stdy End: %d\n", count);
-			}
-		}
-		else if (top[thread].swch.env.curr.type == SWCH_RISE)
-		{
-			top[thread].swch.env.curr.val += top[thread].swch.env.rise.incr;
-			w = (REAL)sin(top[thread].swch.env.curr.val * M_PI /  2.0f);
-			top[thread].hold.buf.l[i] *= w, top[thread].hold.buf.r[i] *= w;
-			top[thread].hold.aux.l[i] *= w, top[thread].hold.aux.r[i] *= w;
-//			if (top[thread].swch.env.curr.cnt == 0) fprintf(stderr, "RISE\n"),fflush(stderr);
-			if (++top[thread].swch.env.curr.cnt >= top[thread].swch.env.rise.size)
-			{
-//				reset_meters();
-//				reset_spectrum();
-//				reset_counters();
-	
-				uni[thread].mode.trx = top[thread].swch.trx.next;
-				top[thread].state = top[thread].swch.run.last;
-				break;
-//				fprintf(stderr, "Rise End: %d\n", count);
-			}
-		}
-	}
-} */
-
 
 //========================================================================
 
@@ -471,7 +404,7 @@ Audio_Callback2 (float **input, float **output, unsigned int nframes)
 		}
 		return;
     }
-
+#if 0
 	if (diversity.flag) {
 		// Deal with the transmitter first
 		if ((ringb_float_read_space (top[1].jack.ring.o.l) >= nframes)
@@ -626,7 +559,7 @@ Audio_Callback2 (float **input, float **output, unsigned int nframes)
 			sem_post (&top[2].sync.buf.sem);
 
 	} else
-
+#endif
 	for(thread=0; thread<threadno; thread++) 
 	{
 		int l=2*thread, r = 2*thread+1;
@@ -705,9 +638,9 @@ Audio_Callback2 (float **input, float **output, unsigned int nframes)
 		}
 		
 		// if enough accumulated in ring, fire dsp
-		/*if ((ringb_float_read_space (top[thread].jack.ring.i.l) >= top[thread].hold.size.frames) &&
-			(ringb_float_read_space (top[thread].jack.ring.i.r) >= top[thread].hold.size.frames))
-*/
+		//if ((ringb_float_read_space (top[thread].jack.ring.i.l) >= top[thread].hold.size.frames) &&
+			//(ringb_float_read_space (top[thread].jack.ring.i.r) >= top[thread].hold.size.frames))
+
 			if (ringb_float_read_space (top[thread].jack.ring.i.l) >= top[thread].hold.size.frames)
 			sem_post (&top[thread].sync.buf.sem);
 	}

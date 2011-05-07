@@ -26,18 +26,17 @@
 //    USA
 //=================================================================
 
-using System;
-using System.Data;
-using System.Windows.Forms;
-using System.Collections;
-using System.Diagnostics;
-using System.Globalization;
-using System.IO;
-using System.Threading;
-
-
 namespace PowerSDR
 {
+    using System;
+    using System.Data;
+    using System.Windows.Forms;
+    using System.Collections;
+    using System.Diagnostics;
+    using System.Globalization;
+    using System.IO;
+    using System.Threading;
+
 	class DB
 	{
 		#region Variable Declaration

@@ -28,12 +28,12 @@
 
 //#define DAL
 
-using System;
-using System.Diagnostics;
-using System.Runtime.InteropServices;
-
 namespace PowerSDR
 {
+    using System;
+    using System.Diagnostics;
+    using System.Runtime.InteropServices;
+
 	unsafe public class FWC
 	{
 		#region Opcode Definition

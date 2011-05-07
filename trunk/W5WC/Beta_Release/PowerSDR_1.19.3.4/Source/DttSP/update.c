@@ -417,7 +417,7 @@ SetNRvals (unsigned int thread, unsigned subrx, int taps, int delay, double gain
 	rx[thread][subrx].anr.gen->adaptive_filter_size = taps;
 	rx[thread][subrx].anr.gen->delay = delay;
 	rx[thread][subrx].anr.gen->adaptation_rate = (REAL)gain;
-	rx[thread][subrx].banr.gen->adaptation_rate = 0.1f*(REAL)gain;
+	rx[thread][subrx].banr.gen->adaptation_rate = (REAL)gain;
 	rx[thread][subrx].anr.gen->leakage = (REAL)leakage;
 	memset(rx[thread][subrx].anr.gen->adaptive_filter,0,sizeof(COMPLEX)*128);
 	sem_post(&top[thread].sync.upd.sem);
@@ -481,7 +481,7 @@ SetANFvals (unsigned int thread, unsigned subrx, int taps, int delay, double gai
 	rx[thread][subrx].anf.gen->size = taps;
 	rx[thread][subrx].anf.gen->delay = delay;
 	rx[thread][subrx].anf.gen->adaptation_rate = (REAL)gain;
-	rx[thread][subrx].banf.gen->adaptation_rate = (REAL)gain*0.1f;
+	rx[thread][subrx].banf.gen->adaptation_rate = (REAL)gain;
 	rx[thread][subrx].anf.gen->leakage = (REAL)leakage;
 	memset(rx[thread][subrx].anf.gen->adaptive_filter,0,sizeof(COMPLEX)*128);
 

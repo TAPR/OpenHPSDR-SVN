@@ -26,16 +26,16 @@
 //    USA
 //=================================================================
 
-using System;
-using System.Runtime.InteropServices;
-using System.Threading;
-using System.Diagnostics;
-using System.IO;
-using System.Windows.Forms;
-using Microsoft.Win32;
-
 namespace PortTalk
 {
+    using System;
+    using System.Runtime.InteropServices;
+    using System.Threading;
+    using System.Diagnostics;
+    using System.IO;
+    using System.Windows.Forms;
+    using Microsoft.Win32;
+
 	/// <summary>
 	/// Summary description for Class1.
 	/// </summary>
