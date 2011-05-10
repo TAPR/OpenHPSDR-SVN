@@ -984,8 +984,7 @@ namespace PowerSDR
 		private System.Windows.Forms.NumericUpDownTS udCWBreakInDelay;
 		private System.Windows.Forms.CheckBoxTS chkPhoneVAC;
 		private System.Windows.Forms.ComboBoxTS comboDigTXProfile;
-		private System.Windows.Forms.LabelTS lblDigTXProfile;
-		private System.Windows.Forms.MenuItem mnuReportBug;
+        private System.Windows.Forms.LabelTS lblDigTXProfile;
 		private System.Windows.Forms.CheckBoxTS chkRXEQ;
         private System.Windows.Forms.CheckBoxTS chkTXEQ;
         private System.Windows.Forms.MenuItem mnuMixer;
@@ -1192,6 +1191,10 @@ namespace PowerSDR
         private MenuItem mnuNB;
         private MenuItem mnuNB2;
         private MenuItem mnuBIN;
+        private MenuItem mnuDisplayControls;
+        public MenuItem mnuShowTopControls;
+        public MenuItem mnuShowBandControls;
+        public MenuItem mnuShowModeControls;
 		private CheckBoxTS chkFullDuplex;
 
 		#endregion
@@ -1559,7 +1562,7 @@ namespace PowerSDR
                     form.ShowDialog();
                 }*/ //w5wc
 
-				mnuReportBug.Visible = false; 
+				//mnuReportBug.Visible = false; 
 			//}
 
 			if(run_setup_wizard)
@@ -1753,7 +1756,6 @@ namespace PowerSDR
             this.mnuATU = new System.Windows.Forms.MenuItem();
             this.mnuInfo = new System.Windows.Forms.MenuItem();
             this.mnuFWC = new System.Windows.Forms.MenuItem();
-            this.mnuReportBug = new System.Windows.Forms.MenuItem();
             this.mnuProfiles = new System.Windows.Forms.MenuItem();
             this.mnuCollapse = new System.Windows.Forms.MenuItem();
             this.mnuFilter = new System.Windows.Forms.MenuItem();
@@ -1777,6 +1779,10 @@ namespace PowerSDR
             this.mnuNB = new System.Windows.Forms.MenuItem();
             this.mnuNB2 = new System.Windows.Forms.MenuItem();
             this.mnuBIN = new System.Windows.Forms.MenuItem();
+            this.mnuDisplayControls = new System.Windows.Forms.MenuItem();
+            this.mnuShowTopControls = new System.Windows.Forms.MenuItem();
+            this.mnuShowBandControls = new System.Windows.Forms.MenuItem();
+            this.mnuShowModeControls = new System.Windows.Forms.MenuItem();
             this.timer_cpu_meter = new System.Windows.Forms.Timer(this.components);
             this.timer_peak_text = new System.Windows.Forms.Timer(this.components);
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
@@ -2188,11 +2194,11 @@ namespace PowerSDR
             this.mnuATU,
             this.mnuInfo,
             this.mnuFWC,
-            this.mnuReportBug,
             this.mnuProfiles,
             this.mnuCollapse,
             this.mnuFilter,
-            this.mnuDSP});
+            this.mnuDSP,
+            this.mnuDisplayControls});
             // 
             // mnuSetup
             // 
@@ -2284,27 +2290,21 @@ namespace PowerSDR
             this.mnuFWC.Index = 12;
             resources.ApplyResources(this.mnuFWC, "mnuFWC");
             // 
-            // mnuReportBug
-            // 
-            this.mnuReportBug.Index = 13;
-            resources.ApplyResources(this.mnuReportBug, "mnuReportBug");
-            this.mnuReportBug.Click += new System.EventHandler(this.mnuReportBug_Click);
-            // 
             // mnuProfiles
             // 
-            this.mnuProfiles.Index = 14;
+            this.mnuProfiles.Index = 13;
             resources.ApplyResources(this.mnuProfiles, "mnuProfiles");
             this.mnuProfiles.Click += new System.EventHandler(this.mnuProfiles_Click);
             // 
             // mnuCollapse
             // 
-            this.mnuCollapse.Index = 15;
+            this.mnuCollapse.Index = 14;
             resources.ApplyResources(this.mnuCollapse, "mnuCollapse");
             this.mnuCollapse.Click += new System.EventHandler(this.mnuCollapse_Click);
             // 
             // mnuFilter
             // 
-            this.mnuFilter.Index = 16;
+            this.mnuFilter.Index = 15;
             this.mnuFilter.MenuItems.AddRange(new System.Windows.Forms.MenuItem[] {
             this.mnuFilterCancel,
             this.menuItem12,
@@ -2393,7 +2393,7 @@ namespace PowerSDR
             // 
             // mnuDSP
             // 
-            this.mnuDSP.Index = 17;
+            this.mnuDSP.Index = 16;
             this.mnuDSP.MenuItems.AddRange(new System.Windows.Forms.MenuItem[] {
             this.mnuDSPCancel,
             this.menuItem1,
@@ -2444,6 +2444,33 @@ namespace PowerSDR
             this.mnuBIN.Index = 6;
             resources.ApplyResources(this.mnuBIN, "mnuBIN");
             this.mnuBIN.Click += new System.EventHandler(this.mnuDSP_Click);
+            // 
+            // mnuDisplayControls
+            // 
+            this.mnuDisplayControls.Index = 17;
+            this.mnuDisplayControls.MenuItems.AddRange(new System.Windows.Forms.MenuItem[] {
+            this.mnuShowTopControls,
+            this.mnuShowBandControls,
+            this.mnuShowModeControls});
+            resources.ApplyResources(this.mnuDisplayControls, "mnuDisplayControls");
+            // 
+            // mnuShowTopControls
+            // 
+            this.mnuShowTopControls.Index = 0;
+            resources.ApplyResources(this.mnuShowTopControls, "mnuShowTopControls");
+            this.mnuShowTopControls.Click += new System.EventHandler(this.mnuShowTopControls_Click);
+            // 
+            // mnuShowBandControls
+            // 
+            this.mnuShowBandControls.Index = 1;
+            resources.ApplyResources(this.mnuShowBandControls, "mnuShowBandControls");
+            this.mnuShowBandControls.Click += new System.EventHandler(this.mnuShowBandControls_Click);
+            // 
+            // mnuShowModeControls
+            // 
+            this.mnuShowModeControls.Index = 2;
+            resources.ApplyResources(this.mnuShowModeControls, "mnuShowModeControls");
+            this.mnuShowModeControls.Click += new System.EventHandler(this.mnuShowModeControls_Click);
             // 
             // timer_cpu_meter
             // 
@@ -39598,6 +39625,7 @@ namespace PowerSDR
             this.collapsedDisplay = false;
             this.mnuFilter.Visible = false;
             this.mnuDSP.Visible = false;
+            this.mnuDisplayControls.Visible = false;
 
             int minWidth = console_basis_size.Width;
             int minHeight = (fwc_init && current_model == Model.FLEX5000 && FWCEEPROM.RX2OK) ?
@@ -39762,6 +39790,7 @@ namespace PowerSDR
             this.collapsedDisplay = true;
             this.mnuFilter.Visible = true;
             this.mnuDSP.Visible = true;
+            this.mnuDisplayControls.Visible = true;
 
             int minWidth = 600;
             int minHeight = 200;
@@ -40127,6 +40156,21 @@ namespace PowerSDR
                     chkBIN.Checked = !chkBIN.Checked;
                     break;
             }
+        }
+
+        private void mnuShowTopControls_Click(object sender, EventArgs e)
+        {
+            SetupForm.chkShowTopControls.Checked = !SetupForm.chkShowTopControls.Checked;
+        }
+
+        private void mnuShowBandControls_Click(object sender, EventArgs e)
+        {
+            SetupForm.chkShowBandControls.Checked = !SetupForm.chkShowBandControls.Checked;
+        }
+
+        private void mnuShowModeControls_Click(object sender, EventArgs e)
+        {
+            SetupForm.chkShowModeControls.Checked = !SetupForm.chkShowModeControls.Checked;
         }
 
   	}

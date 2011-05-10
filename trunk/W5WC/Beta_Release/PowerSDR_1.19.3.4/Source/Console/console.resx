@@ -196,15 +196,6 @@
   <data name="mnuFWC.Visible" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
-  <data name="mnuReportBug.ShowShortcut" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
-  <data name="mnuReportBug.Text" xml:space="preserve">
-    <value>R&amp;eport Bug</value>
-  </data>
-  <data name="mnuReportBug.Visible" type="System.Boolean, mscorlib">
-    <value>False</value>
-  </data>
   <data name="mnuProfiles.Text" xml:space="preserve">
     <value>Remote Profiles</value>
   </data>
@@ -281,6 +272,21 @@
     <value>DSP</value>
   </data>
   <data name="mnuDSP.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="mnuShowTopControls.Text" xml:space="preserve">
+    <value>Top Controls</value>
+  </data>
+  <data name="mnuShowBandControls.Text" xml:space="preserve">
+    <value>Band Controls</value>
+  </data>
+  <data name="mnuShowModeControls.Text" xml:space="preserve">
+    <value>Mode Controls</value>
+  </data>
+  <data name="mnuDisplayControls.Text" xml:space="preserve">
+    <value>Display Controls</value>
+  </data>
+  <data name="mnuDisplayControls.Visible" type="System.Boolean, mscorlib">
     <value>False</value>
   </data>
   <metadata name="timer_cpu_meter.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
@@ -11335,7 +11341,7 @@
     <value>Off</value>
   </data>
   <data name="$this.Text" xml:space="preserve">
-    <value>PowerSDR™/OpenHPSDR v1.19.3.4   baseSVN 3444 (W5WC - 5/6/11)</value>
+    <value>PowerSDR™/OpenHPSDR v1.19.3.4   baseSVN 3444 (W5WC - 5/9/11)</value>
   </data>
   <data name="&gt;&gt;mainMenu1.Name" xml:space="preserve">
     <value>mainMenu1</value>
@@ -11431,12 +11437,6 @@
     <value>mnuFWC</value>
   </data>
   <data name="&gt;&gt;mnuFWC.Type" xml:space="preserve">
-    <value>System.Windows.Forms.MenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;mnuReportBug.Name" xml:space="preserve">
-    <value>mnuReportBug</value>
-  </data>
-  <data name="&gt;&gt;mnuReportBug.Type" xml:space="preserve">
     <value>System.Windows.Forms.MenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;mnuProfiles.Name" xml:space="preserve">
@@ -11575,6 +11575,30 @@
     <value>mnuBIN</value>
   </data>
   <data name="&gt;&gt;mnuBIN.Type" xml:space="preserve">
+    <value>System.Windows.Forms.MenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;mnuDisplayControls.Name" xml:space="preserve">
+    <value>mnuDisplayControls</value>
+  </data>
+  <data name="&gt;&gt;mnuDisplayControls.Type" xml:space="preserve">
+    <value>System.Windows.Forms.MenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;mnuShowTopControls.Name" xml:space="preserve">
+    <value>mnuShowTopControls</value>
+  </data>
+  <data name="&gt;&gt;mnuShowTopControls.Type" xml:space="preserve">
+    <value>System.Windows.Forms.MenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;mnuShowBandControls.Name" xml:space="preserve">
+    <value>mnuShowBandControls</value>
+  </data>
+  <data name="&gt;&gt;mnuShowBandControls.Type" xml:space="preserve">
+    <value>System.Windows.Forms.MenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;mnuShowModeControls.Name" xml:space="preserve">
+    <value>mnuShowModeControls</value>
+  </data>
+  <data name="&gt;&gt;mnuShowModeControls.Type" xml:space="preserve">
     <value>System.Windows.Forms.MenuItem, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;timer_cpu_meter.Name" xml:space="preserve">

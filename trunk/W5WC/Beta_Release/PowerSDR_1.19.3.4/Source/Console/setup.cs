@@ -1490,9 +1490,9 @@ namespace PowerSDR
         private TextBoxTS txtCollapsedHeight;
         private TextBoxTS txtCollapsedWidth;
         private GroupBox grpBoxCollapsible;
-        private CheckBoxTS chkShowModeControls;
-        private CheckBoxTS chkShowBandControls;
-        private CheckBoxTS chkShowTopControls;
+        public CheckBoxTS chkShowModeControls;
+        public CheckBoxTS chkShowBandControls;
+        public CheckBoxTS chkShowTopControls;
         private GroupBoxTS grpBoxSpaceBarPTT;
         private CheckBoxTS chkSpaceBarPTT;
         private TrackBarTS tbMeterEdgeBackgroundAlpha;
@@ -29067,6 +29067,7 @@ namespace PowerSDR
         private void chkShowTopControls_CheckedChanged(object sender, EventArgs e)
         {
             this.console.ShowTopControls = chkShowTopControls.Checked;
+            this.console.mnuShowTopControls.Checked = chkShowTopControls.Checked;
 
             if (this.console.CollapsedDisplay)
                 this.console.CollapseDisplay();
@@ -29075,6 +29076,7 @@ namespace PowerSDR
         private void chkShowBandControls_CheckedChanged(object sender, EventArgs e)
         {
             this.console.ShowBandControls = chkShowBandControls.Checked;
+            this.console.mnuShowBandControls.Checked = chkShowBandControls.Checked;
 
             if (this.console.CollapsedDisplay)
                 this.console.CollapseDisplay();
@@ -29083,6 +29085,7 @@ namespace PowerSDR
         private void chkModeControls_CheckedChanged(object sender, EventArgs e)
         {
             this.console.ShowModeControls = chkShowModeControls.Checked;
+            this.console.mnuShowModeControls.Checked = chkShowModeControls.Checked;
 
             if (this.console.CollapsedDisplay)
                 this.console.CollapseDisplay();
