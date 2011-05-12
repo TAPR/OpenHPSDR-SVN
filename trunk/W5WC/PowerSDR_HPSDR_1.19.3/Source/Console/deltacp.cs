@@ -26,12 +26,12 @@
 //    USA
 //=================================================================
 
-using System;
-using System.Runtime.InteropServices;
-using System.Text;
-
 namespace PowerSDR
 {
+    using System;
+    using System.Runtime.InteropServices;
+    using System.Text;
+
 	class DeltaCP
 	{
 		#region Constants

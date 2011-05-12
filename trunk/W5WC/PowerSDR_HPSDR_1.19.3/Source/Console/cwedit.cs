@@ -26,15 +26,15 @@
 //    USA
 //=================================================================
 
-using System;
-using System.Drawing;
-using System.Diagnostics;
-using System.Collections;
-using System.ComponentModel;
-using System.Windows.Forms;
-
 namespace PowerSDR
 {
+    using System;
+    using System.Drawing;
+    using System.Diagnostics;
+    using System.Collections;
+    using System.ComponentModel;
+    using System.Windows.Forms;
+
 	/// <summary>
 	/// Summary description for cwedit.
 	/// </summary>

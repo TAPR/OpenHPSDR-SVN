@@ -67,8 +67,7 @@ WSCompand (WSCompander wsc)
 		{
 			COMPLEX val = CXBdata (wsc->buff, i);
 			REAL mag = Cmag (val), scl = WSCLookup (wsc, mag);
-			CXBdata (wsc->buff, i) = Cscl(Cscl (val, scl), 0.7969); /* kd5tfd - 0.7969 scale factor is to prevent overdriving of signal when compander on - problem for PennyLane
-																	            because it's DAC is driven at full scale and output power is via a PGA */ 
+			CXBdata (wsc->buff, i) = Cscl(Cscl (val, scl), 0.7969); /* kd5tfd - 0.7969 scale factor is to prevent overdriving of signal when compander on - problem for PennyLane																	            because it's DAC is driven at full scale and output power is via a PGA */ 
 		}
 	}
 }

@@ -26,11 +26,11 @@
 //    USA
 //=================================================================
 
-using System;
-using System.Runtime.InteropServices;
-
 namespace PowerSDR
 {
+    using System;
+    using System.Runtime.InteropServices;
+
 	unsafe class Win32
 	{
 		#region Dll Method Definitions

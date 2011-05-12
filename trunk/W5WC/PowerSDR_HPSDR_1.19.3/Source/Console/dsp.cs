@@ -26,17 +26,16 @@
 //    USA
 //=================================================================
 
-
-using System;
-using System.Collections;
-using System.Text;
-using System.Security;
-using System.Runtime.InteropServices;
-using System.Windows.Forms;
-using System.Diagnostics;
-
 namespace PowerSDR
 {
+    using System;
+    using System.Collections;
+    using System.Text;
+    using System.Security;
+    using System.Runtime.InteropServices;
+    using System.Windows.Forms;
+    using System.Diagnostics;
+
 	unsafe class DttSP
 	{
 		#region Enums
@@ -409,6 +408,9 @@ namespace PowerSDR
 
 		[DllImport("DttSP.dll", EntryPoint="SetTXLevelerSt")]///
 		public static extern void SetTXLevelerSt(uint thread, bool state);
+
+        [DllImport("DttSP.dll", EntryPoint = "SetTXALCSt")]///
+        public static extern void SetTXALCSt(uint thread, bool state);
 
 		[DllImport("DttSP.dll", EntryPoint="SetWindow")]///
 		public static extern void SetWindow(uint thread, Window windowset);

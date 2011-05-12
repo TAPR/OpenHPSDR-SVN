@@ -34,14 +34,15 @@
 // Modified By: Eric Wachsmann
 //=================================================================
 
-using System;
-using System.Diagnostics;
-using System.Drawing;
-using System.ComponentModel;
-using System.Windows.Forms;
 
 namespace PowerSDR
 {
+    using System;
+    using System.Diagnostics;
+    using System.Drawing;
+    using System.ComponentModel;
+    using System.Windows.Forms;
+
     [ DefaultEvent ( "Changed" ) ]
 	public class ColorButton : System.Windows.Forms.ButtonTS
 	{

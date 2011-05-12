@@ -134,7 +134,7 @@ compute_spectrum (SpecBlock * sb)
 	else
 	{				// SPEC_PWR
 		for (i = 0, j = half; i < half; i++, j++)
-		{
+		{			
 			sb->output[i] =
 				(float) (10.0 *
 				log10 (Csqrmag (CXBdata (sb->freqbuf, j)) + 1e-60));

@@ -29,13 +29,13 @@
 
 //#define DEBUG_VERBOSE
 
-using System;
-using System.Diagnostics;
-using System.Threading;
-using PortTalk;
-
 namespace PowerSDR
 {
+    using System;
+    using System.Diagnostics;
+    using System.Threading;
+    using PortTalk;
+
 	public class HW
 	{
 		#region Structs

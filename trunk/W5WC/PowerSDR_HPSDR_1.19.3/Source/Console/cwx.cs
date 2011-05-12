@@ -36,20 +36,20 @@
 #define SAVERESTORE
 //#define CWX_DEBUG (Note: Please do not put all Debug.Writeline()under this. Leave them commented off.)
 
-using System;
-using System.IO;
-using System.Drawing;
-using System.Diagnostics;
-using System.Collections;
-using System.Threading;
-using System.ComponentModel;
-using System.Windows.Forms;
-using System.Runtime.InteropServices;
-using System.Text;
-using System.Text.RegularExpressions;
-
 namespace PowerSDR
 {
+    using System;
+    using System.IO;
+    using System.Drawing;
+    using System.Diagnostics;
+    using System.Collections;
+    using System.Threading;
+    using System.ComponentModel;
+    using System.Windows.Forms;
+    using System.Runtime.InteropServices;
+    using System.Text;
+    using System.Text.RegularExpressions;
+
 	/// <summary>
 	///  CWX is the cw memory and keyboard handler.
 	/// </summary>

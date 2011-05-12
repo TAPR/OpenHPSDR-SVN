@@ -26,21 +26,20 @@
 //    USA
 //=================================================================
 
-using System;
-using System.Collections;
-using System.Diagnostics;
-using System.Drawing;
-using System.Drawing.Drawing2D;
-using System.Drawing.Imaging;
-using System.Threading;
-using System.Windows.Forms;
-
-//using Microsoft.DirectX;
-//using Microsoft.DirectX.Direct3D;
-
-
 namespace PowerSDR
-{		
+{
+    using System;
+    using System.Collections;
+    using System.Diagnostics;
+    using System.Drawing;
+    using System.Drawing.Drawing2D;
+    using System.Drawing.Imaging;
+    using System.Threading;
+    using System.Windows.Forms;
+
+    //using Microsoft.DirectX;
+    //using Microsoft.DirectX.Direct3D;
+	
 	class Display
 	{
 		#region Variable Declaration
@@ -76,6 +75,13 @@ namespace PowerSDR
         {
             get { return pan_fill; }
             set { pan_fill = value; }
+        }
+
+        private static bool tx_pan_fill = true;
+        public static bool TXPanFill
+        {
+            get { return tx_pan_fill; }
+            set { tx_pan_fill = value; }
         }
 
 		private static bool tx_on_vfob = false;
@@ -164,30 +170,6 @@ namespace PowerSDR
 			set	{ tx_filter_high = value; }
 		}
 
-		private static Color sub_rx_zero_line_color = Color.LightSkyBlue;
-		public static Color SubRXZeroLine
-		{
-			get { return sub_rx_zero_line_color; }
-			set
-			{
-				sub_rx_zero_line_color = value;
-				if(current_display_mode == DisplayMode.PANADAPTER && sub_rx1_enabled)
-					DrawBackground();
-			}
-		}
-
-		private static Color sub_rx_filter_color = Color.Blue;
-		public static Color SubRXFilterColor
-		{
-			get { return sub_rx_filter_color; }
-			set
-			{
-				sub_rx_filter_color = value;
-				if(current_display_mode == DisplayMode.PANADAPTER && sub_rx1_enabled)
-					DrawBackground();
-			}
-		}
-
 		private static bool sub_rx1_enabled = false;
 		public static bool SubRX1Enabled
 		{
@@ -219,18 +201,6 @@ namespace PowerSDR
 			set
 			{
 				show_freq_offset = value;
-				if(current_display_mode == DisplayMode.PANADAPTER)
-					DrawBackground();
-			}
-		}
-
-		private static Color band_edge_color = Color.Red;
-		public static Color BandEdgeColor
-		{
-			get{ return band_edge_color;}
-			set
-			{
-				band_edge_color = value;
 				if(current_display_mode == DisplayMode.PANADAPTER)
 					DrawBackground();
 			}
@@ -373,11 +343,19 @@ namespace PowerSDR
 			set	{ rx2_preamp_offset = value; }
 		}
 
+        private static bool tx_display_cal_control = false;
+        public static bool TXDisplayCalControl
+        {
+            get { return tx_display_cal_control; }
+            set { tx_display_cal_control = value; }
+        }
+
 		private static float rx1_display_cal_offset;					// display calibration offset in dB
 		public static float RX1DisplayCalOffset
 		{
 			get { return rx1_display_cal_offset; }
-			set { rx1_display_cal_offset = value; }
+			set { rx1_display_cal_offset = value;
+            }
 		}
 
 		private static float rx2_display_cal_offset;					// display calibration offset in dB
@@ -386,6 +364,18 @@ namespace PowerSDR
 			get { return rx2_display_cal_offset; }
 			set { rx2_display_cal_offset = value; }
 		}
+
+        private static float tx_display_cal_offset = -63.2f;					// display calibration offset in dB
+        public static float TXDisplayCalOffset
+        {
+            get { return tx_display_cal_offset; }
+            set
+            {
+                //if (tx_display_cal_control)
+                    tx_display_cal_offset = value;
+                //else tx_display_cal_offset = rx1_display_cal_offset;
+            }
+        }
 
 		private static Model current_model = Model.FLEX5000;
 		public static Model CurrentModel
@@ -407,6 +397,20 @@ namespace PowerSDR
 			get { return display_cursor_y; }
 			set { display_cursor_y = value; }
 		}
+
+        private static bool grid_control = true;
+        public static bool GridControl
+        {
+            get { return grid_control; }
+            set { grid_control = value; }
+        }
+
+        private static bool tx_grid_control = true;
+        public static bool TXGridControl
+        {
+            get { return tx_grid_control; }
+            set { tx_grid_control = value; }
+        }
 
 		private static ClickTuneMode current_click_tune_mode = ClickTuneMode.Off;
 		public static ClickTuneMode CurrentClickTuneMode
@@ -637,73 +641,323 @@ namespace PowerSDR
 			}
 		}
 
+        private static int tx_spectrum_grid_max = 30;
+        public static int TXSpectrumGridMax
+        {
+            get { return tx_spectrum_grid_max; }
+            set
+            {
+                tx_spectrum_grid_max = value;
+                DrawBackground();
+            }
+        }
+
+        private static int tx_spectrum_grid_min = -100;
+        public static int TXSpectrumGridMin
+        {
+            get { return tx_spectrum_grid_min; }
+            set
+            {
+                tx_spectrum_grid_min = value;
+                DrawBackground();
+            }
+        }
+
+        private static int tx_spectrum_grid_step = 10;
+        public static int TXSpectrumGridStep
+        {
+            get { return tx_spectrum_grid_step; }
+            set
+            {
+                tx_spectrum_grid_step = value;
+                DrawBackground();
+            }
+        }
+
+        private static Color band_edge_color = Color.Red;
+        private static Pen band_edge_pen = new Pen(band_edge_color);
+        public static Color BandEdgeColor
+        {
+            get { return band_edge_color; }
+            set
+            {
+                band_edge_color = value;
+                band_edge_pen.Color = band_edge_color;
+                if (current_display_mode == DisplayMode.PANADAPTER)
+                    DrawBackground();
+            }
+        }
+
+        private static Color tx_band_edge_color = Color.Red;
+        private static Pen tx_band_edge_pen = new Pen(tx_band_edge_color);
+        public static Color TXBandEdgeColor
+        {
+            get { return tx_band_edge_color; }
+            set
+            {
+                tx_band_edge_color = value;
+                tx_band_edge_pen.Color = tx_band_edge_color;
+                if (current_display_mode == DisplayMode.PANADAPTER)
+                    DrawBackground();
+            }
+        }
+
+        private static Color sub_rx_zero_line_color = Color.LightSkyBlue;
+        private static Pen sub_rx_zero_line_pen = new Pen(sub_rx_zero_line_color);
+        public static Color SubRXZeroLine
+        {
+            get { return sub_rx_zero_line_color; }
+            set
+            {
+                sub_rx_zero_line_color = value;
+                sub_rx_zero_line_pen.Color = sub_rx_zero_line_color;
+                if (current_display_mode == DisplayMode.PANADAPTER && sub_rx1_enabled)
+                    DrawBackground();
+            }
+        }
+
+        private static Color sub_rx_filter_color = Color.Blue;
+        private static SolidBrush sub_rx_filter_brush = new SolidBrush(sub_rx_filter_color);
+        public static Color SubRXFilterColor
+        {
+            get { return sub_rx_filter_color; }
+            set
+            {
+                sub_rx_filter_color = value;
+                sub_rx_filter_brush.Color = sub_rx_filter_color;
+                if (current_display_mode == DisplayMode.PANADAPTER && sub_rx1_enabled)
+                    DrawBackground();
+            }
+        }
+
 		private static Color grid_text_color = Color.Yellow;
-		public static Color GridTextColor
+        private static SolidBrush grid_text_brush = new SolidBrush(grid_text_color);
+        private static Pen grid_text_pen = new Pen(grid_text_color);
+        public static Color GridTextColor
 		{
 			get{ return grid_text_color;}
 			set
 			{
 				grid_text_color = value;
-				DrawBackground();
+                grid_text_brush.Color = grid_text_color;
+                grid_text_pen.Color = grid_text_color;
+                DrawBackground();
 			}
 		}
 
-		private static Color grid_zero_color = Color.Red;
+        private static Color grid_tx_text_color = Color.FromArgb(255, Color.Yellow);
+        private static SolidBrush grid_tx_text_brush = new SolidBrush(Color.FromArgb(255, grid_tx_text_color));
+        public static Color GridTXTextColor
+        {
+            get { return grid_tx_text_color; }
+            set
+            {
+                grid_tx_text_color = value;
+                grid_tx_text_brush.Color = grid_tx_text_color;
+                DrawBackground();
+            }
+        }
+
+        private static Color grid_zero_color = Color.Red;
+        private static Pen grid_zero_pen = new Pen(grid_zero_color);
 		public static Color GridZeroColor
 		{
 			get{ return grid_zero_color;}
 			set
 			{
 				grid_zero_color = value;
-				DrawBackground();
+                grid_zero_pen.Color = grid_zero_color; 
+                DrawBackground();
 			}
 		}
 
-		private static Color grid_color = Color.Purple;
+       private static Color tx_grid_zero_color = Color.FromArgb(255, Color.Red);
+       private static Pen tx_grid_zero_pen = new Pen(Color.FromArgb(255, tx_grid_zero_color));
+       public static Color TXGridZeroColor
+        {
+            get { return tx_grid_zero_color; }
+            set
+            {
+                tx_grid_zero_color = value;
+                tx_grid_zero_pen.Color = tx_grid_zero_color; 
+                DrawBackground();
+            }
+        }
+
+        private static Color grid_color = Color.FromArgb(65, 255, 255, 255);
+        private static Pen grid_pen = new Pen(grid_color);
 		public static Color GridColor
 		{
 			get{ return grid_color;}
 			set
 			{
 				grid_color = value;
+                grid_pen.Color = grid_color;
 				DrawBackground();
 			}
 		}
 
-		private static Pen data_line_pen = new Pen(new SolidBrush(Color.White), display_line_width);
+        private static Color tx_vgrid_color = Color.FromArgb(65, 255, 255, 255);
+        private static Pen tx_vgrid_pen = new Pen(tx_vgrid_color); 
+        public static Color TXVGridColor
+        {
+            get { return tx_vgrid_color; }
+            set
+            {
+                tx_vgrid_color = value;
+                tx_vgrid_pen.Color = tx_vgrid_color;
+                DrawBackground();
+            }
+        }
+ 
+        
+        private static Color hgrid_color = Color.White;
+        private static Pen hgrid_pen = new Pen(hgrid_color);
+        public static Color HGridColor
+        {
+            get { return hgrid_color; }
+            set
+            {
+                hgrid_color = value;
+                hgrid_pen = new Pen(hgrid_color);
+                DrawBackground();
+            }
+        }
+
+        
+        private static Color tx_hgrid_color = Color.White;
+        private static Pen tx_hgrid_pen = new Pen(tx_hgrid_color);
+        public static Color TXHGridColor
+        {
+            get { return tx_hgrid_color; }
+            set
+            {
+                tx_hgrid_color = value;
+                tx_hgrid_pen = new Pen(tx_hgrid_color);
+                DrawBackground();
+            }
+        }
+
 		private static Color data_line_color = Color.White;
+        private static Pen data_line_pen = new Pen(new SolidBrush(data_line_color), 1.0F);
+        private static Pen data_line_fpen = new Pen(Color.FromArgb(100, data_line_color));
 		public static Color DataLineColor
 		{
 			get{ return data_line_color;}
 			set
 			{
 				data_line_color = value;
-				data_line_pen = new Pen(new SolidBrush(data_line_color), display_line_width);
+                data_line_pen.Color = data_line_color;
+                data_line_fpen.Color = Color.FromArgb(100, data_line_color);
 				DrawBackground();
 			}
 		}
 
+        private static Color tx_data_line_color = Color.White;
+        private static Pen tx_data_line_pen = new Pen(new SolidBrush(tx_data_line_color), 1.0F);
+        private static Pen tx_data_line_fpen = new Pen(Color.FromArgb(100, tx_data_line_color));
+        public static Color TXDataLineColor
+        {
+            get { return tx_data_line_color; }
+            set
+            {
+                tx_data_line_color = value;
+                tx_data_line_pen.Color = tx_data_line_color;
+                tx_data_line_fpen.Color = Color.FromArgb(100, tx_data_line_color);
+                DrawBackground();
+            }
+        }
+
+        private static Color grid_pen_dark = Color.FromArgb(65, 255, 255, 255);
+        private static Pen grid_pen_inb = new Pen(grid_pen_dark);
+		public static Color GridPenDark
+		{
+            get { return grid_pen_dark; }
+			set
+			{
+                grid_pen_dark = value;
+                grid_pen_inb.Color = grid_pen_dark;
+				DrawBackground();
+			}
+		}
+
+        private static Color tx_vgrid_pen_fine = Color.FromArgb(65, 255, 255, 255);
+        private static Pen tx_vgrid_pen_inb = new Pen(tx_vgrid_pen_fine);
+        public static Color TXVGridPenFine
+        {
+            get { return tx_vgrid_pen_fine; }
+            set
+            {
+                tx_vgrid_pen_fine = value;
+                tx_vgrid_pen_inb.Color = tx_vgrid_pen_fine;
+                DrawBackground();
+            }
+        }
+       
 		private static Color display_filter_color = Color.FromArgb(65, 255, 255, 255);
+        private static SolidBrush display_filter_brush = new SolidBrush(display_filter_color);
 		public static Color DisplayFilterColor
 		{
 			get { return display_filter_color; }
 			set
 			{
 				display_filter_color = value;
-				DrawBackground();
+                display_filter_brush.Color = display_filter_color;
+                DrawBackground();
 			}
 		}
+       
+        private static Color tx_filter_color = Color.FromArgb(65, 255, 255, 255);
+        private static SolidBrush tx_filter_brush = new SolidBrush(tx_filter_color);
+        public static Color TXFilterColor
+        {
+            get { return tx_filter_color; }
+            set
+            {
+               tx_filter_color = value;
+               tx_filter_brush.Color = tx_filter_color;
+               DrawBackground();
+            }
+        }
 
 		private static Color display_filter_tx_color = Color.Yellow;
+        private static Pen tx_filter_pen = new Pen(display_filter_tx_color);
 		public static Color DisplayFilterTXColor
 		{
 			get { return display_filter_tx_color; }
 			set
 			{
 				display_filter_tx_color = value;
+                tx_filter_pen.Color = display_filter_tx_color;
 				DrawBackground();
 			}
 		}
+
+        private static Color display_background_color = Color.Black;
+        private static SolidBrush display_background_brush = new SolidBrush(display_background_color);
+        public static Color DisplayBackgroundColor
+        {
+            get { return display_background_color; }
+            set
+            {
+                display_background_color = value;
+                display_background_brush.Color = display_background_color;
+                DrawBackground();
+            }
+        }
+
+        private static Color tx_display_background_color = Color.Black;
+        private static SolidBrush tx_display_background_brush = new SolidBrush(tx_display_background_color);
+        public static Color TXDisplayBackgroundColor
+        {
+            get { return tx_display_background_color; }
+            set
+            {
+                tx_display_background_color = value;
+                tx_display_background_brush.Color = tx_display_background_color;
+                DrawBackground();
+            }
+        }
 
 		private static bool draw_tx_filter = false;
 		public static bool DrawTXFilter
@@ -726,18 +980,7 @@ namespace PowerSDR
 				DrawBackground();
 			}
 		}
-
-		private static Color display_background_color = Color.Black;
-		public static Color DisplayBackgroundColor
-		{
-			get { return display_background_color; }
-			set
-			{
-				display_background_color = value;
-				DrawBackground();
-			}
-		}
-	
+        
 		private static Color waterfall_low_color = Color.Black;
 		public static Color WaterfallLowColor
 		{
@@ -780,9 +1023,20 @@ namespace PowerSDR
 			set
 			{
 				display_line_width = value;
-				data_line_pen = new Pen(new SolidBrush(data_line_color), display_line_width);
+				data_line_pen.Width = display_line_width;
 			}
 		}
+
+        private static float tx_display_line_width = 1.0F;
+        public static float TXDisplayLineWidth
+        {
+            get { return tx_display_line_width; }
+            set
+            {
+                tx_display_line_width = value;
+                tx_data_line_pen.Width = tx_display_line_width;
+            }
+        }
 
 		private static DisplayLabelAlignment display_label_align = DisplayLabelAlignment.LEFT;
 		public static DisplayLabelAlignment DisplayLabelAlign
@@ -795,12 +1049,30 @@ namespace PowerSDR
 			}
 		}
 
+        private static DisplayLabelAlignment tx_display_label_align = DisplayLabelAlignment.LEFT;
+        public static DisplayLabelAlignment TXDisplayLabelAlign
+        {
+            get { return tx_display_label_align; }
+            set
+            {
+                tx_display_label_align = value;
+                DrawBackground();
+            }
+        }
+
 		private static int phase_num_pts = 100;
 		public static int PhaseNumPts
 		{
 			get{ return phase_num_pts;}
 			set{ phase_num_pts = value;}
 		}
+
+        private static Pen dhp = new Pen(Color.FromArgb(0, 255, 0)),				
+                           dhp1 = new Pen(Color.FromArgb(150, 0, 0, 255)),
+                           dhp2 = new Pen(Color.FromArgb(150, 255, 0, 0));
+
+        private static Font font14 = new Font("Arial", 14, FontStyle.Bold);
+        private static Font font9 = new Font("Arial", 9);
 
 		#endregion
 
@@ -955,45 +1227,55 @@ namespace PowerSDR
 
 			//Graphics g = Graphics.FromImage(display_bitmap);
 			//g.SmoothingMode = SmoothingMode.AntiAlias;
-			bool update = true;
+			//bool update = true;
 			
 			if(!split_display)
 			{
 				switch(current_display_mode) 
 				{
 					case DisplayMode.SPECTRUM:
-						update = DrawSpectrum(e.Graphics, W, H, false);
+						DrawSpectrum(e.Graphics, W, H, false);
 						break;
 					case DisplayMode.PANADAPTER:
-						update = DrawPanadapter(e.Graphics, W, H, 1, false);
+                        //update = DrawPanadapter(e.Graphics, W, H, 1, false);
+                        DrawPanadapter(e.Graphics, W, H, 1, false);
 						break;
 					case DisplayMode.SCOPE:
-						update = DrawScope(e.Graphics, W, H, false);
+						DrawScope(e.Graphics, W, H, false);
 						break;
+                    case DisplayMode.SCOPE2:
+                        DrawScope2(e.Graphics, W, H, false);
+                        break;
 					case DisplayMode.PHASE:
-						update = DrawPhase(e.Graphics, W, H, false);
+						DrawPhase(e.Graphics, W, H, false);
 						break;
 					case DisplayMode.PHASE2:
 						DrawPhase2(e.Graphics, W, H, false);
 						break;
 					case DisplayMode.WATERFALL:
-						update = DrawWaterfall(e.Graphics, W, H, 1, false);
+						DrawWaterfall(e.Graphics, W, H, 1, false);
 						break;
 					case DisplayMode.HISTOGRAM:
-						update = DrawHistogram(e.Graphics, W, H);
+						DrawHistogram(e.Graphics, W, H);
 						break;
 					case DisplayMode.PANAFALL:
 						split_display = true;
-						update = DrawPanadapter(e.Graphics, W, H/2, 1, false);
-						update = DrawWaterfall(e.Graphics, W, H/2, 1, true);
+						DrawPanadapter(e.Graphics, W, H / 2, 1, false);
+						DrawWaterfall(e.Graphics, W, H / 2, 1, true);
 						split_display = false;
 						break;
 					case DisplayMode.PANASCOPE:
 						split_display = true;
-						update = DrawPanadapter(e.Graphics, W, H/2, 1, false);
-						update = DrawScope(e.Graphics, W, H/2, true);
+						DrawPanadapter(e.Graphics, W, H / 2, 1, false);
+						DrawScope(e.Graphics, W, H / 2, true);
 						split_display = false;
 						break;
+                    case DisplayMode.SPECTRASCOPE:
+                        split_display = true;                        
+                        DrawSpectrum(e.Graphics, W, H / 2, false);
+                        DrawScope(e.Graphics, W, H / 2, true);
+                        split_display = false;
+                        break;
 					case DisplayMode.OFF:
 						//Thread.Sleep(1000);
 						break;
@@ -1006,25 +1288,25 @@ namespace PowerSDR
 				switch(current_display_mode)
 				{
 					case DisplayMode.SPECTRUM:
-						update = DrawSpectrum(e.Graphics, W, H/2, false);
+						DrawSpectrum(e.Graphics, W, H/2, false);
 						break;
 					case DisplayMode.PANADAPTER:
-						update = DrawPanadapter(e.Graphics, W, H/2, 1, false);
+						DrawPanadapter(e.Graphics, W, H/2, 1, false);
 						break;
 					case DisplayMode.SCOPE:
-						update = DrawScope(e.Graphics, W, H/2, false);
+						DrawScope(e.Graphics, W, H/2, false);
 						break;
 					case DisplayMode.PHASE:
-						update = DrawPhase(e.Graphics, W, H/2, false);
+						DrawPhase(e.Graphics, W, H/2, false);
 						break;
 					case DisplayMode.PHASE2:
 						DrawPhase2(e.Graphics, W, H/2, false);
 						break;
 					case DisplayMode.WATERFALL:
-						update = DrawWaterfall(e.Graphics, W, H/2, 1, false);
+						DrawWaterfall(e.Graphics, W, H/2, 1, false);
 						break;
 					case DisplayMode.HISTOGRAM:
-						update = DrawHistogram(e.Graphics, W, H/2);
+						DrawHistogram(e.Graphics, W, H/2);
 						break;
 					case DisplayMode.OFF:
 						DrawOffBackground(e.Graphics, W, H/2, false);
@@ -1036,25 +1318,25 @@ namespace PowerSDR
 				switch(current_display_mode_bottom)
 				{
 					case DisplayMode.SPECTRUM:
-						update = DrawSpectrum(e.Graphics, W, H/2, true);
+						DrawSpectrum(e.Graphics, W, H/2, true);
 						break;
 					case DisplayMode.PANADAPTER:
-						update = DrawPanadapter(e.Graphics, W, H/2, 2, true);
+						DrawPanadapter(e.Graphics, W, H/2, 2, true);
 						break;
 					case DisplayMode.SCOPE:
-						update = DrawScope(e.Graphics, W, H/2, true);
+						DrawScope(e.Graphics, W, H/2, true);
 						break;
 					case DisplayMode.PHASE:
-						update = DrawPhase(e.Graphics, W, H/2, true);
+						DrawPhase(e.Graphics, W, H/2, true);
 						break;
 					case DisplayMode.PHASE2:
 						DrawPhase2(e.Graphics, W, H/2, true);
 						break;
 					case DisplayMode.WATERFALL:
-						update = DrawWaterfall(e.Graphics, W, H/2, 2, true);
+						DrawWaterfall(e.Graphics, W, H/2, 2, true);
 						break;
 					case DisplayMode.HISTOGRAM:
-						update = DrawHistogram(e.Graphics, W, H/2);
+						DrawHistogram(e.Graphics, W, H/2);
 						break;
 					case DisplayMode.OFF:
 						DrawOffBackground(e.Graphics, W, H/2, true);
@@ -1064,14 +1346,14 @@ namespace PowerSDR
 				}
 			}
 
-			if(update)
+			/*if(update)
 			{
 				//e.Graphics.DrawImage(display_bmp, 0, 0);
 			}
 			else
 			{
 				Debug.WriteLine("display update = false");
-			}
+			}*/
 		}
 
 		private static void UpdateDisplayPeak(float[] buffer, float[] new_data) 
@@ -1102,49 +1384,47 @@ namespace PowerSDR
 		private static void DrawPhaseGrid(ref Graphics g, int W, int H, bool bottom)
 		{
 			// draw background
-			if(bottom) g.FillRectangle(new SolidBrush(display_background_color), 0, H, W, H);
-			else g.FillRectangle(new SolidBrush(display_background_color), 0, 0, W, H);
+    		if(bottom) g.FillRectangle(display_background_brush, 0, H, W, H);
+			else g.FillRectangle(display_background_brush, 0, 0, W, H);
 
 			for(double i=0.50; i < 3; i+=.50)	// draw 3 concentric circles
 			{
-				if(bottom) g.DrawEllipse(new Pen(grid_color), (int)(W/2-H*i/2), H+(int)(H/2-H*i/2), (int)(H*i), (int)(H*i));
-				else g.DrawEllipse(new Pen(grid_color), (int)(W/2-H*i/2), (int)(H/2-H*i/2), (int)(H*i), (int)(H*i));
+				if(bottom) g.DrawEllipse(grid_pen, (int)(W/2-H*i/2), H+(int)(H/2-H*i/2), (int)(H*i), (int)(H*i));
+				else g.DrawEllipse(grid_pen, (int)(W/2-H*i/2), (int)(H/2-H*i/2), (int)(H*i), (int)(H*i));
 			}
-
-			if(high_swr && !bottom)
-				g.DrawString("High SWR", new System.Drawing.Font("Arial", 14, FontStyle.Bold), new SolidBrush(Color.Red), 245, 20);
-		}
+ 			if(high_swr && !bottom)
+				g.DrawString("High SWR", font14, Brushes.Red, 245, 20);
+        }
 
 		private static void DrawScopeGrid(ref Graphics g, int W, int H, bool bottom)
 		{
 			// draw background
-			//if(bottom) g.FillRectangle(new SolidBrush(display_background_color), 0, H, W, H);
-			//else g.FillRectangle(new SolidBrush(display_background_color), 0, 0, W, H);
+    		if(bottom) g.FillRectangle(display_background_brush, 0, H, W, H);
+			else g.FillRectangle(display_background_brush, 0, 0, W, H);
 
+           /* using (Pen grid_pen = new Pen(grid_color))
 			if(bottom)
 			{
-				g.DrawLine(new Pen(grid_color), 0, H+H/2, W, H+H/2);	// draw horizontal line
-				g.DrawLine(new Pen(grid_color), W/2, H, W/2, H+H);	// draw vertical line
+				g.DrawLine(grid_pen, 0, H+H/2, W, H+H/2);	// draw horizontal line
+				g.DrawLine(grid_pen, W/2, H, W/2, H+H);	// draw vertical line
 			}
 			else
 			{
-				g.DrawLine(new Pen(grid_color), 0, H/2, W, H/2);	// draw horizontal line
-				g.DrawLine(new Pen(grid_color), W/2, 0, W/2, H);	// draw vertical line
-			}
-
+				g.DrawLine(grid_pen, 0, H/2, W, H/2);	// draw horizontal line
+				g.DrawLine(grid_pen, W/2, 0, W/2, H);	// draw vertical line
+			} */
+            //using (Font font = new Font("Arial", 14, FontStyle.Bold))
+            using (SolidBrush brush = new SolidBrush(Color.Red))
 			if(high_swr && !bottom)
-				g.DrawString("High SWR", new System.Drawing.Font("Arial", 14, FontStyle.Bold), new SolidBrush(Color.Red), 245, 20);
-		}
+				g.DrawString("High SWR", font14, brush, 245, 20);
+        }
 
 		private static void DrawSpectrumGrid(ref Graphics g, int W, int H, bool bottom)
 		{
-			System.Drawing.Font font = new System.Drawing.Font("Arial", 9);
-			SolidBrush grid_text_brush = new SolidBrush(grid_text_color);
-			Pen grid_pen = new Pen(grid_color);
-
+ 
 			// draw background
-			if(bottom) g.FillRectangle(new SolidBrush(display_background_color), 0, H, W, H);
-			else g.FillRectangle(new SolidBrush(display_background_color), 0, 0, W, H);
+            if(bottom) g.FillRectangle(display_background_brush, 0, H, W, H);
+			else g.FillRectangle(display_background_brush, 0, 0, W, H);
 
 			int low = 0;								// init limit variables
 			int high = 0;
@@ -1207,8 +1487,8 @@ namespace PowerSDR
 					int offset = (int)((label.Length+1)*4.1);
 					if(x-offset >= 0)
 					{
-						if(bottom) g.DrawString("-"+label, font, grid_text_brush, x-offset, H+(float)Math.Floor(H*.01));
-						else g.DrawString("-"+label, font, grid_text_brush, x-offset, (float)Math.Floor(H*.01));
+						if(bottom) g.DrawString("-"+label, font9, grid_text_brush, x-offset, H+(float)Math.Floor(H*.01));
+						else g.DrawString("-"+label, font9, grid_text_brush, x-offset, (float)Math.Floor(H*.01));
 					}
 				}
 
@@ -1223,17 +1503,17 @@ namespace PowerSDR
 					int num = spectrum_grid_max - i*grid_step;
 					int y = (int)Math.Floor((double)(spectrum_grid_max - num)*H/y_range);
 
-					if(bottom) g.DrawLine(grid_pen, 0, H+y, W, H+y);
-					else g.DrawLine(grid_pen, 0, y, W, y);
+					if(bottom) g.DrawLine(hgrid_pen, 0, H+y, W, H+y);
+					else g.DrawLine(hgrid_pen, 0, y, W, y);
 
 					// Draw horizontal line labels
                     if (i != 1) // avoid intersecting vertical and horizontal labels
                     {
                         string label = num.ToString();
                         if (label.Length == 3)
-                            xOffset = (int)g.MeasureString("-", font).Width - 2;
+                            xOffset = (int)g.MeasureString("-", font9).Width - 2;
                         int offset = (int)(label.Length * 4.1);
-                        SizeF size = g.MeasureString(label, font);
+                        SizeF size = g.MeasureString(label, font9);
 
                         int x = 0;
                         switch (display_label_align)
@@ -1258,22 +1538,27 @@ namespace PowerSDR
                         y -= 8;
                         if (y + 9 < H)
                         {
-                            if (bottom) g.DrawString(label, font, grid_text_brush, x, H + y);
-                            g.DrawString(label, font, grid_text_brush, x, y);
+                            if (bottom) g.DrawString(label, font9, grid_text_brush, x, H + y);
+                            g.DrawString(label, font9, grid_text_brush, x, y);
                         }
                     }
 				}
 
 				// Draw middle vertical line
+                if(rx1_dsp_mode == DSPMode.AM ||
+                    rx1_dsp_mode == DSPMode.SAM ||
+                    rx1_dsp_mode == DSPMode.FMN ||
+                    rx1_dsp_mode == DSPMode.DSB ||
+                    rx1_dsp_mode == DSPMode.SPEC)
 				if(bottom)
 				{
-					g.DrawLine(new Pen(grid_zero_color), W-1, H, W-1, H+H);
-					g.DrawLine(new Pen(grid_zero_color), W-2, H, W-2, H+H);
+					g.DrawLine(grid_zero_pen, W-1, H, W-1, H+H);
+					g.DrawLine(grid_zero_pen, W-2, H, W-2, H+H);
 				}
 				else
 				{
-					g.DrawLine(new Pen(grid_zero_color), W-1, 0, W-1, H);
-					g.DrawLine(new Pen(grid_zero_color), W-2, 0, W-2, H);
+					g.DrawLine(grid_zero_pen, W-1, 0, W-1, H);
+					g.DrawLine(grid_zero_pen, W-2, 0, W-2, H);
 				}
 			}
 			else if(low == 0)
@@ -1303,8 +1588,8 @@ namespace PowerSDR
 					int offset = (int)(label.Length*4.1);
 					if(x-offset+label.Length*7 < W)
 					{
-						if(bottom) g.DrawString(label, font, grid_text_brush, x-offset, H+(float)Math.Floor(H*.01));
-						else g.DrawString(label, font, grid_text_brush, x-offset, (float)Math.Floor(H*.01));
+						if(bottom) g.DrawString(label, font9, grid_text_brush, x-offset, H+(float)Math.Floor(H*.01));
+						else g.DrawString(label, font9, grid_text_brush, x-offset, (float)Math.Floor(H*.01));
 					}
 				}
 
@@ -1318,17 +1603,17 @@ namespace PowerSDR
 					int num = spectrum_grid_max - i*grid_step;
 					int y = (int)Math.Floor((double)(spectrum_grid_max - num)*H/y_range);
 
-					if(bottom) g.DrawLine(grid_pen, 0, H+y, W, H+y);
-					else g.DrawLine(grid_pen, 0, y, W, y);
+					if(bottom) g.DrawLine(hgrid_pen, 0, H+y, W, H+y);
+					else g.DrawLine(hgrid_pen, 0, y, W, y);
 
 					// Draw horizontal line labels
                     if (i != 1) // avoid intersecting vertical and horizontal labels
                     {
                         string label = num.ToString();
                         if (label.Length == 3)
-                            xOffset = (int)g.MeasureString("-", font).Width - 2;
+                            xOffset = (int)g.MeasureString("-", font9).Width - 2;
                         int offset = (int)(label.Length * 4.1);
-                        SizeF size = g.MeasureString(label, font);
+                        SizeF size = g.MeasureString(label, font9);
 
                         int x = 0;
                         switch (display_label_align)
@@ -1353,22 +1638,27 @@ namespace PowerSDR
                         y -= 8;
                         if (y + 9 < H)
                         {
-                            if (bottom) g.DrawString(label, font, grid_text_brush, x, H + y);
-                            g.DrawString(label, font, grid_text_brush, x, y);
+                            if (bottom) g.DrawString(label, font9, grid_text_brush, x, H + y);
+                            g.DrawString(label, font9, grid_text_brush, x, y);
                         }
                     }
 				}
 
 				// Draw middle vertical line
+                 if(rx1_dsp_mode == DSPMode.AM ||
+                    rx1_dsp_mode == DSPMode.SAM ||
+                    rx1_dsp_mode == DSPMode.FMN ||
+                    rx1_dsp_mode == DSPMode.DSB ||
+                    rx1_dsp_mode == DSPMode.SPEC)
 				if(bottom)
 				{
-					g.DrawLine(new Pen(grid_zero_color), 0, H, 0, H+H);
-					g.DrawLine(new Pen(grid_zero_color), 1, H, 1, H+H);
+					g.DrawLine(grid_zero_pen, 0, H, 0, H+H);
+					g.DrawLine(grid_zero_pen, 1, H, 1, H+H);
 				}
 				else
 				{
-					g.DrawLine(new Pen(grid_zero_color), 0, 0, 0, H);
-					g.DrawLine(new Pen(grid_zero_color), 1, 0, 1, H);
+					g.DrawLine(grid_zero_pen, 0, 0, 0, H);
+					g.DrawLine(grid_zero_pen, 1, 0, 1, H);
 				}
 			}
 			else if(low < 0 && high > 0)
@@ -1410,13 +1700,13 @@ namespace PowerSDR
 					{
 						if(bottom)
 						{
-							g.DrawString("-"+label, font, grid_text_brush, xLeft-offsetL, H+(float)Math.Floor(H*.01));
-							g.DrawString(label, font, grid_text_brush, xRight-offsetR, H+(float)Math.Floor(H*.01));
+							g.DrawString("-"+label, font9, grid_text_brush, xLeft-offsetL, H+(float)Math.Floor(H*.01));
+							g.DrawString(label, font9, grid_text_brush, xRight-offsetR, H+(float)Math.Floor(H*.01));
 						}
 						else
 						{
-							g.DrawString("-"+label, font, grid_text_brush, xLeft-offsetL, (float)Math.Floor(H*.01));
-							g.DrawString(label, font, grid_text_brush, xRight-offsetR, (float)Math.Floor(H*.01));
+							g.DrawString("-"+label, font9, grid_text_brush, xLeft-offsetL, (float)Math.Floor(H*.01));
+							g.DrawString(label, font9, grid_text_brush, xRight-offsetR, (float)Math.Floor(H*.01));
 						}
 					}
 				}
@@ -1438,9 +1728,9 @@ namespace PowerSDR
                     {
                         string label = num.ToString();
                         if (label.Length == 3)
-                            xOffset = (int)g.MeasureString("-", font).Width - 2;
+                            xOffset = (int)g.MeasureString("-", font9).Width - 2;
                         int offset = (int)(label.Length * 4.1);
-                        SizeF size = g.MeasureString(label, font);
+                        SizeF size = g.MeasureString(label, font9);
 
                         int x = 0;
                         switch (display_label_align)
@@ -1465,35 +1755,404 @@ namespace PowerSDR
                         y -= 8;
                         if (y + 9 < H)
                         {
-                            if (bottom) g.DrawString(label, font, grid_text_brush, x, H + y);
-                            g.DrawString(label, font, grid_text_brush, x, y);
+                            if (bottom) g.DrawString(label, font9, grid_text_brush, x, H + y);
+                            g.DrawString(label, font9, grid_text_brush, x, y);
                         }
                     }
 				}
 
 				// Draw middle vertical line
+                if(rx1_dsp_mode == DSPMode.AM ||
+                   rx1_dsp_mode == DSPMode.SAM ||
+                   rx1_dsp_mode == DSPMode.FMN ||
+                   rx1_dsp_mode == DSPMode.DSB ||
+                   rx1_dsp_mode == DSPMode.SPEC)
 				if(bottom)
 				{
-					g.DrawLine(new Pen(grid_zero_color), mid_w, H, mid_w, H+H);
-					g.DrawLine(new Pen(grid_zero_color), mid_w-1, H, mid_w-1, H+H);
+					g.DrawLine(grid_zero_pen, mid_w, H, mid_w, H+H);
+					g.DrawLine(grid_zero_pen, mid_w-1, H, mid_w-1, H+H);
 				}
 				else
 				{
-					g.DrawLine(new Pen(grid_zero_color), mid_w, 0, mid_w, H);
-					g.DrawLine(new Pen(grid_zero_color), mid_w-1, 0, mid_w-1, H);
+					g.DrawLine(grid_zero_pen, mid_w, 0, mid_w, H);
+					g.DrawLine(grid_zero_pen, mid_w-1, 0, mid_w-1, H);
 				}
 			}
 
 			if(high_swr && !bottom)
-				g.DrawString("High SWR", new System.Drawing.Font("Arial", 14, FontStyle.Bold), new SolidBrush(Color.Red), 245, 20);
-		}
+                g.DrawString("High SWR", font14, Brushes.Red, 245, 20);
+        }
+
+        private static void DrawTXSpectrumGrid(ref Graphics g, int W, int H, bool bottom)
+        {
+
+            // draw background
+            if (bottom) g.FillRectangle(tx_display_background_brush, 0, H, W, H);
+            else g.FillRectangle(tx_display_background_brush, 0, 0, W, H);
+
+            int low = 0;								// init limit variables
+            int high = 0;
+
+            int center_line_x = (int)(-(double)low / (high - low) * W);
+
+           // if (!mox)
+           // {
+            //    low = rx_display_low;				// get RX display limits
+           //     high = rx_display_high;
+           // }
+           // else
+           // {
+                if (rx1_dsp_mode == DSPMode.CWL || rx1_dsp_mode == DSPMode.CWU)
+                {
+                    low = rx_display_low;
+                    high = rx_display_high;
+                }
+                else
+                {
+                    low = tx_display_low;			// get RX display limits
+                    high = tx_display_high;
+                }
+           // }
+
+            int mid_w = W / 2;
+            int[] step_list = { 10, 20, 25, 50 };
+            int step_power = 1;
+            int step_index = 0;
+            int freq_step_size = 50;
+            int y_range = tx_spectrum_grid_max - tx_spectrum_grid_min;
+            int grid_step = tx_spectrum_grid_step;
+            if (split_display) grid_step *= 2;
+
+            if (high == 0)
+            {
+                int f = -low;
+                // Calculate horizontal step size
+                while (f / freq_step_size > 7)
+                {
+                    freq_step_size = step_list[step_index] * (int)Math.Pow(10.0, step_power);
+                    step_index = (step_index + 1) % 4;
+                    if (step_index == 0) step_power++;
+                }
+                float pixel_step_size = (float)(W * freq_step_size / f);
+
+                int num_steps = f / freq_step_size;
+
+                // Draw vertical lines
+                for (int i = 1; i <= num_steps; i++)
+                {
+                    int x = W - (int)Math.Floor(i * pixel_step_size);	// for negative numbers
+
+                    if (bottom) g.DrawLine(tx_vgrid_pen, x, H, x, H + H);
+                    else g.DrawLine(tx_vgrid_pen, x, 0, x, H);				// draw right line
+
+                    // Draw vertical line labels
+                    int num = i * freq_step_size;
+                    string label = num.ToString();
+                    int offset = (int)((label.Length + 1) * 4.1);
+                    if (x - offset >= 0)
+                    {
+                        if (bottom) g.DrawString("-" + label, font9, grid_tx_text_brush, x - offset, H + (float)Math.Floor(H * .01));
+                        else g.DrawString("-" + label, font9, grid_tx_text_brush, x - offset, (float)Math.Floor(H * .01));
+                    }
+                }
+
+                // Draw horizontal lines
+                int V = (int)(tx_spectrum_grid_max - tx_spectrum_grid_min);
+                num_steps = V / grid_step;
+                pixel_step_size = H / num_steps;
+
+                for (int i = 1; i < num_steps; i++)
+                {
+                    int xOffset = 0;
+                    int num = tx_spectrum_grid_max - i * grid_step;
+                    int y = (int)Math.Floor((double)(tx_spectrum_grid_max - num) * H / y_range);
+
+                    if (bottom) g.DrawLine(tx_hgrid_pen, 0, H + y, W, H + y);
+                    else g.DrawLine(tx_hgrid_pen, 0, y, W, y);
+
+                    // Draw horizontal line labels
+                    if (i != 1) // avoid intersecting vertical and horizontal labels
+                    {
+                        string label = num.ToString();
+                        if (label.Length == 3)
+                            xOffset = (int)g.MeasureString("-", font9).Width - 2;
+                        int offset = (int)(label.Length * 4.1);
+                        SizeF size = g.MeasureString(label, font9);
+
+                        int x = 0;
+                        switch (display_label_align)
+                        {
+                            case DisplayLabelAlignment.LEFT:
+                                x = xOffset + 3;
+                                break;
+                            case DisplayLabelAlignment.CENTER:
+                                x = center_line_x + xOffset;
+                                break;
+                            case DisplayLabelAlignment.RIGHT:
+                                x = (int)(W - size.Width - 3);
+                                break;
+                            case DisplayLabelAlignment.AUTO:
+                                x = xOffset + 3;
+                                break;
+                            case DisplayLabelAlignment.OFF:
+                                x = W;
+                                break;
+                        }
+
+                        y -= 8;
+                        if (y + 9 < H)
+                        {
+                            if (bottom) g.DrawString(label, font9, grid_tx_text_brush, x, H + y);
+                            g.DrawString(label, font9, grid_tx_text_brush, x, y);
+                        }
+                    }
+                }
+
+                // Draw middle vertical line
+                if (rx1_dsp_mode == DSPMode.AM ||
+                    rx1_dsp_mode == DSPMode.SAM ||
+                    rx1_dsp_mode == DSPMode.FMN ||
+                    rx1_dsp_mode == DSPMode.DSB ||
+                    rx1_dsp_mode == DSPMode.SPEC)
+                    if (bottom)
+                    {
+                        g.DrawLine(tx_grid_zero_pen, W - 1, H, W - 1, H + H);
+                        g.DrawLine(tx_grid_zero_pen, W - 2, H, W - 2, H + H);
+                    }
+                    else
+                    {
+                        g.DrawLine(tx_grid_zero_pen, W - 1, 0, W - 1, H);
+                        g.DrawLine(tx_grid_zero_pen, W - 2, 0, W - 2, H);
+                    }
+            }
+            else if (low == 0)
+            {
+                int f = high;
+                // Calculate horizontal step size
+                while (f / freq_step_size > 7)
+                {
+                    freq_step_size = step_list[step_index] * (int)Math.Pow(10.0, step_power);
+                    step_index = (step_index + 1) % 4;
+                    if (step_index == 0) step_power++;
+                }
+                float pixel_step_size = (float)(W * freq_step_size / f);
+                int num_steps = f / freq_step_size;
+
+                // Draw vertical lines
+                for (int i = 1; i <= num_steps; i++)
+                {
+                    int x = (int)Math.Floor(i * pixel_step_size);// for positive numbers
+
+                    if (bottom) g.DrawLine(tx_vgrid_pen, x, H, x, H + H);
+                    else g.DrawLine(tx_vgrid_pen, x, 0, x, H);				// draw right line
+
+                    // Draw vertical line labels
+                    int num = i * freq_step_size;
+                    string label = num.ToString();
+                    int offset = (int)(label.Length * 4.1);
+                    if (x - offset + label.Length * 7 < W)
+                    {
+                        if (bottom) g.DrawString(label, font9, grid_tx_text_brush, x - offset, H + (float)Math.Floor(H * .01));
+                        else g.DrawString(label, font9, grid_tx_text_brush, x - offset, (float)Math.Floor(H * .01));
+                    }
+                }
+
+                // Draw horizontal lines
+                int V = (int)(tx_spectrum_grid_max - tx_spectrum_grid_min);
+                int numSteps = V / grid_step;
+                pixel_step_size = H / numSteps;
+                for (int i = 1; i < numSteps; i++)
+                {
+                    int xOffset = 0;
+                    int num = tx_spectrum_grid_max - i * grid_step;
+                    int y = (int)Math.Floor((double)(spectrum_grid_max - num) * H / y_range);
+
+                    if (bottom) g.DrawLine(tx_hgrid_pen, 0, H + y, W, H + y);
+                    else g.DrawLine(tx_hgrid_pen, 0, y, W, y);
+
+                    // Draw horizontal line labels
+                    if (i != 1) // avoid intersecting vertical and horizontal labels
+                    {
+                        string label = num.ToString();
+                        if (label.Length == 3)
+                            xOffset = (int)g.MeasureString("-", font9).Width - 2;
+                        int offset = (int)(label.Length * 4.1);
+                        SizeF size = g.MeasureString(label, font9);
+
+                        int x = 0;
+                        switch (display_label_align)
+                        {
+                            case DisplayLabelAlignment.LEFT:
+                                x = xOffset + 3;
+                                break;
+                            case DisplayLabelAlignment.CENTER:
+                                x = center_line_x + xOffset;
+                                break;
+                            case DisplayLabelAlignment.RIGHT:
+                                x = (int)(W - size.Width - 3);
+                                break;
+                            case DisplayLabelAlignment.AUTO:
+                                x = xOffset + 3;
+                                break;
+                            case DisplayLabelAlignment.OFF:
+                                x = W;
+                                break;
+                        }
+
+                        y -= 8;
+                        if (y + 9 < H)
+                        {
+                            if (bottom) g.DrawString(label, font9, grid_tx_text_brush, x, H + y);
+                            g.DrawString(label, font9, grid_tx_text_brush, x, y);
+                        }
+                    }
+                }
+
+                // Draw middle vertical line
+                if (rx1_dsp_mode == DSPMode.AM ||
+                   rx1_dsp_mode == DSPMode.SAM ||
+                   rx1_dsp_mode == DSPMode.FMN ||
+                   rx1_dsp_mode == DSPMode.DSB ||
+                   rx1_dsp_mode == DSPMode.SPEC)
+                    if (bottom)
+                    {
+                        g.DrawLine(tx_grid_zero_pen, 0, H, 0, H + H);
+                        g.DrawLine(tx_grid_zero_pen, 1, H, 1, H + H);
+                    }
+                    else
+                    {
+                        g.DrawLine(tx_grid_zero_pen, 0, 0, 0, H);
+                        g.DrawLine(tx_grid_zero_pen, 1, 0, 1, H);
+                    }
+            }
+            else if (low < 0 && high > 0)
+            {
+                int f = high;
+
+                // Calculate horizontal step size
+                while (f / freq_step_size > 4)
+                {
+                    freq_step_size = step_list[step_index] * (int)Math.Pow(10.0, step_power);
+                    step_index = (step_index + 1) % 4;
+                    if (step_index == 0) step_power++;
+                }
+                int pixel_step_size = W / 2 * freq_step_size / f;
+                int num_steps = f / freq_step_size;
+
+                // Draw vertical lines
+                for (int i = 1; i <= num_steps; i++)
+                {
+                    int xLeft = mid_w - (i * pixel_step_size);			// for negative numbers
+                    int xRight = mid_w + (i * pixel_step_size);		// for positive numbers
+                    if (bottom)
+                    {
+                        g.DrawLine(tx_vgrid_pen, xLeft, H, xLeft, H + H);		// draw left line
+                        g.DrawLine(tx_vgrid_pen, xRight, H, xRight, H + H);		// draw right line
+                    }
+                    else
+                    {
+                        g.DrawLine(tx_vgrid_pen, xLeft, 0, xLeft, H);		// draw left line
+                        g.DrawLine(tx_vgrid_pen, xRight, 0, xRight, H);		// draw right line
+                    }
+
+                    // Draw vertical line labels
+                    int num = i * freq_step_size;
+                    string label = num.ToString();
+                    int offsetL = (int)((label.Length + 1) * 4.1);
+                    int offsetR = (int)(label.Length * 4.1);
+                    if (xLeft - offsetL >= 0)
+                    {
+                        if (bottom)
+                        {
+                            g.DrawString("-" + label, font9, grid_tx_text_brush, xLeft - offsetL, H + (float)Math.Floor(H * .01));
+                            g.DrawString(label, font9, grid_tx_text_brush, xRight - offsetR, H + (float)Math.Floor(H * .01));
+                        }
+                        else
+                        {
+                            g.DrawString("-" + label, font9, grid_tx_text_brush, xLeft - offsetL, (float)Math.Floor(H * .01));
+                            g.DrawString(label, font9, grid_tx_text_brush, xRight - offsetR, (float)Math.Floor(H * .01));
+                        }
+                    }
+                }
+
+                // Draw horizontal lines
+                int V = (int)(tx_spectrum_grid_max - tx_spectrum_grid_min);
+                int numSteps = V / grid_step;
+                pixel_step_size = H / numSteps;
+                for (int i = 1; i < numSteps; i++)
+                {
+                    int xOffset = 0;
+                    int num = tx_spectrum_grid_max - i * grid_step;
+                    int y = (int)Math.Floor((double)(tx_spectrum_grid_max - num) * H / y_range);
+                    if (bottom) g.DrawLine(grid_pen, 0, H + y, W, H + y);
+                    else g.DrawLine(grid_pen, 0, y, W, y);
+
+                    // Draw horizontal line labels
+                    if (i != 1) // avoid intersecting vertical and horizontal labels
+                    {
+                        string label = num.ToString();
+                        if (label.Length == 3)
+                            xOffset = (int)g.MeasureString("-", font9).Width - 2;
+                        int offset = (int)(label.Length * 4.1);
+                        SizeF size = g.MeasureString(label, font9);
+
+                        int x = 0;
+                        switch (display_label_align)
+                        {
+                            case DisplayLabelAlignment.LEFT:
+                                x = xOffset + 3;
+                                break;
+                            case DisplayLabelAlignment.CENTER:
+                                x = center_line_x + xOffset;
+                                break;
+                            case DisplayLabelAlignment.RIGHT:
+                                x = (int)(W - size.Width - 3);
+                                break;
+                            case DisplayLabelAlignment.AUTO:
+                                x = xOffset + 3;
+                                break;
+                            case DisplayLabelAlignment.OFF:
+                                x = W;
+                                break;
+                        }
+
+                        y -= 8;
+                        if (y + 9 < H)
+                        {
+                            if (bottom) g.DrawString(label, font9, grid_tx_text_brush, x, H + y);
+                            g.DrawString(label, font9, grid_tx_text_brush, x, y);
+                        }
+                    }
+                }
+
+                // Draw middle vertical line
+                if (rx1_dsp_mode == DSPMode.AM ||
+                   rx1_dsp_mode == DSPMode.SAM ||
+                   rx1_dsp_mode == DSPMode.FMN ||
+                   rx1_dsp_mode == DSPMode.DSB ||
+                   rx1_dsp_mode == DSPMode.SPEC)
+                    if (bottom)
+                    {
+                        g.DrawLine(tx_grid_zero_pen, mid_w, H, mid_w, H + H);
+                        g.DrawLine(tx_grid_zero_pen, mid_w - 1, H, mid_w - 1, H + H);
+                    }
+                    else
+                    {
+                        g.DrawLine(tx_grid_zero_pen, mid_w, 0, mid_w, H);
+                        g.DrawLine(tx_grid_zero_pen, mid_w - 1, 0, mid_w - 1, H);
+                    }
+            }
+
+            if (high_swr && !bottom)
+                g.DrawString("High SWR", font14, Brushes.Red, 245, 20);
+        }
 
 		private static void DrawPanadapterGrid(ref Graphics g, int W, int H, int rx, bool bottom)
 		{
 			// draw background
-			/*if(bottom) g.FillRectangle(new SolidBrush(display_background_color), 0, H, W, H);
-			else g.FillRectangle(new SolidBrush(display_background_color), 0, 0, W, H);*/
-
+           if (bottom) g.FillRectangle(display_background_brush, 0, H, W, H);
+            else g.FillRectangle(display_background_brush, 0, 0, W, H); 
+ 
 			bool local_mox = mox;
 			if(rx==2) local_mox = false;
 			int low = rx_display_low;					// initialize variables
@@ -1506,15 +2165,7 @@ namespace PowerSDR
             int inbetweenies = 5;
 			int grid_step = spectrum_grid_step;
 			if(split_display) grid_step *= 2;
-
-			System.Drawing.Font font = new System.Drawing.Font("Arial", 9);
-			SolidBrush grid_text_brush = new SolidBrush(grid_text_color);
-			//Pen grid_pen = new Pen(grid_color);
-            Pen grid_pen = new Pen(Color.FromArgb(42, Color.White));
-            Pen grid_pen_dark = new Pen(Color.FromArgb(16, Color.White));
-            //display_filter_color = Color.FromArgb(40, 255, 255, 255);
-			Pen tx_filter_pen = new Pen(display_filter_tx_color);
-			int y_range = spectrum_grid_max - spectrum_grid_min;
+		    int y_range = spectrum_grid_max - spectrum_grid_min;
 			int filter_low, filter_high;
 
 			int center_line_x = (int)(-(double)low/(high-low)*W);
@@ -1560,7 +2211,7 @@ namespace PowerSDR
 			double h_pixel_step = (double)H/h_steps;
 			int top = (int)((double)grid_step*H/y_range);
 
-			if(!local_mox && sub_rx1_enabled && rx==1)
+			if(!local_mox && sub_rx1_enabled && rx==1) //multi-rx
 			{
 				// draw Sub RX filter
 				// get filter screen coordinates
@@ -1573,12 +2224,12 @@ namespace PowerSDR
 				// draw rx filter
 				if(bottom)
 				{
-					g.FillRectangle(new SolidBrush(sub_rx_filter_color),	// draw filter overlay
+					g.FillRectangle(sub_rx_filter_brush,	// draw filter overlay
 						filter_left_x, H+top, filter_right_x-filter_left_x, H+H-top);
 				}
 				else
 				{
-					g.FillRectangle(new SolidBrush(sub_rx_filter_color),	// draw filter overlay
+					g.FillRectangle(sub_rx_filter_brush,	// draw filter overlay
 						filter_left_x, top, filter_right_x-filter_left_x, H-top);
 				}
 
@@ -1586,13 +2237,13 @@ namespace PowerSDR
 				int x = (int)((float)(vfoa_sub_hz-vfoa_hz-low)/(high-low)*W);
 				if(bottom)
 				{
-					g.DrawLine(new Pen(sub_rx_zero_line_color), x, H+top, x, H+H);
-					g.DrawLine(new Pen(sub_rx_zero_line_color), x-1, H+top, x-1, H+H);
+					g.DrawLine(sub_rx_zero_line_pen, x, H+top, x, H+H);
+					g.DrawLine(sub_rx_zero_line_pen, x-1, H+top, x-1, H+H);
 				}
 				else
 				{
-					g.DrawLine(new Pen(sub_rx_zero_line_color), x, top, x, H);
-					g.DrawLine(new Pen(sub_rx_zero_line_color), x-1, top, x-1, H);
+					g.DrawLine(sub_rx_zero_line_pen, x, top, x, H);
+					g.DrawLine(sub_rx_zero_line_pen, x-1, top, x-1, H);
 				}
 			}
 
@@ -1608,12 +2259,12 @@ namespace PowerSDR
 				// draw rx filter
 				if(bottom)
 				{
-					g.FillRectangle(new SolidBrush(display_filter_color),	// draw filter overlay
+					g.FillRectangle(display_filter_brush,	// draw filter overlay
 						filter_left_x, H+top, filter_right_x-filter_left_x, H+H-top);
 				}
 				else
 				{
-					g.FillRectangle(new SolidBrush(display_filter_color),	// draw filter overlay
+					g.FillRectangle(display_filter_brush,	// draw filter overlay
 						filter_left_x, top, filter_right_x-filter_left_x, H-top);
 				}
 			}
@@ -1756,16 +2407,16 @@ namespace PowerSDR
                                 actual_fgrid == 28.0 || actual_fgrid == 29.7 ||
                                 actual_fgrid == 50.0 || actual_fgrid == 54.0)
                             {
-                                if (bottom) g.DrawLine(new Pen(band_edge_color), vgrid, H + top, vgrid, H + H);
-                                else g.DrawLine(new Pen(band_edge_color), vgrid, top, vgrid, H);
+                                if (bottom) g.DrawLine(band_edge_pen, vgrid, H + top, vgrid, H + H);
+                                else g.DrawLine(band_edge_pen, vgrid, top, vgrid, H);
 
                                 label = actual_fgrid.ToString("f3");
                                 if (actual_fgrid < 10) offsetL = (int)((label.Length + 1) * 4.1) - 14;
                                 else if (actual_fgrid < 100.0) offsetL = (int)((label.Length + 1) * 4.1) - 11;
                                 else offsetL = (int)((label.Length + 1) * 4.1) - 8;
 
-                                if (bottom) g.DrawString(label, font, new SolidBrush(band_edge_color), vgrid - offsetL, H + (float)Math.Floor(H * .01));
-                                else g.DrawString(label, font, new SolidBrush(band_edge_color), vgrid - offsetL, (float)Math.Floor(H * .01));
+                                if (bottom) g.DrawString(label, font9, band_edge_pen.Brush, vgrid - offsetL, H + (float)Math.Floor(H * .01));
+                                else g.DrawString(label, font9, band_edge_pen.Brush, vgrid - offsetL, (float)Math.Floor(H * .01));
 
                                 int fgrid_2 = ((i + 1) * freq_step_size) + (int)((low / freq_step_size) * freq_step_size);
                                 int x_2 = (int)(((float)(fgrid_2 - vfo_delta - low) / width * W));
@@ -1774,8 +2425,8 @@ namespace PowerSDR
                                 for (int j = 1; j < inbetweenies; j++)
                                 {
                                     float x3 = (float)vgrid + (j * scale);
-                                    if (bottom) g.DrawLine(grid_pen_dark, x3, H + top, x3, H + H);
-                                    else g.DrawLine(grid_pen_dark, x3, top, x3, H);
+                                    if (bottom) g.DrawLine(grid_pen_inb, x3, H + top, x3, H + H);
+                                    else g.DrawLine(grid_pen_inb, x3, top, x3, H);
                                 }
                                 break;
                             }
@@ -1794,17 +2445,17 @@ namespace PowerSDR
                                 actual_fgrid == 28.0 || actual_fgrid == 29.7 ||
                                 actual_fgrid == 50.0 || actual_fgrid == 54.0)
                             {
-                                if (bottom) g.DrawLine(new Pen(band_edge_color), vgrid, H + top, vgrid, H + H);
-                                else g.DrawLine(new Pen(band_edge_color), vgrid, top, vgrid, H);
+                                if (bottom) g.DrawLine(band_edge_pen, vgrid, H + top, vgrid, H + H);
+                                else g.DrawLine(band_edge_pen, vgrid, top, vgrid, H);
 
                                 label = actual_fgrid.ToString("f3");
                                 if (actual_fgrid < 10) offsetL = (int)((label.Length + 1) * 4.1) - 14;
                                 else if (actual_fgrid < 100.0) offsetL = (int)((label.Length + 1) * 4.1) - 11;
                                 else offsetL = (int)((label.Length + 1) * 4.1) - 8;
 
-                                if (bottom) g.DrawString(label, font, new SolidBrush(band_edge_color), vgrid - offsetL, H + (float)Math.Floor(H * .01));
-                                else g.DrawString(label, font, new SolidBrush(band_edge_color), vgrid - offsetL, (float)Math.Floor(H * .01));
-
+                                if (bottom) g.DrawString(label, font9, band_edge_pen.Brush, vgrid - offsetL, H + (float)Math.Floor(H * .01));
+                                else g.DrawString(label, font9, band_edge_pen.Brush, vgrid - offsetL, (float)Math.Floor(H * .01));
+                                
                                 int fgrid_2 = ((i + 1) * freq_step_size) + (int)((low / freq_step_size) * freq_step_size);
                                 int x_2 = (int)(((float)(fgrid_2 - vfo_delta - low) / width * W));
                                 float scale = (float)(x_2 - vgrid) / inbetweenies;
@@ -1812,8 +2463,8 @@ namespace PowerSDR
                                 for (int j = 1; j < inbetweenies; j++)
                                 {
                                     float x3 = (float)vgrid + (j * scale);
-                                    if (bottom) g.DrawLine(grid_pen_dark, x3, H + top, x3, H + H);
-                                    else g.DrawLine(grid_pen_dark, x3, top, x3, H);
+                                    if (bottom) g.DrawLine(grid_pen_inb, x3, H + top, x3, H + H);
+                                    else g.DrawLine(grid_pen_inb, x3, top, x3, H);
                                 }
                                 break;
                             }
@@ -1832,16 +2483,16 @@ namespace PowerSDR
                                 actual_fgrid == 28.0 || actual_fgrid == 29.7 ||
                                 actual_fgrid == 50.08 || actual_fgrid == 51.0)
                             {
-                                if (bottom) g.DrawLine(new Pen(band_edge_color), vgrid, H + top, vgrid, H + H);
-                                else g.DrawLine(new Pen(band_edge_color), vgrid, top, vgrid, H);
+                                if (bottom) g.DrawLine(band_edge_pen, vgrid, H + top, vgrid, H + H);
+                                else g.DrawLine(band_edge_pen, vgrid, top, vgrid, H);
 
                                 label = actual_fgrid.ToString("f3");
                                 if (actual_fgrid < 10) offsetL = (int)((label.Length + 1) * 4.1) - 14;
                                 else if (actual_fgrid < 100.0) offsetL = (int)((label.Length + 1) * 4.1) - 11;
                                 else offsetL = (int)((label.Length + 1) * 4.1) - 8;
 
-                                if (bottom) g.DrawString(label, font, new SolidBrush(band_edge_color), vgrid - offsetL, H + (float)Math.Floor(H * .01));
-                                else g.DrawString(label, font, new SolidBrush(band_edge_color), vgrid - offsetL, (float)Math.Floor(H * .01));
+                                if (bottom) g.DrawString(label, font9, band_edge_pen.Brush, vgrid - offsetL, H + (float)Math.Floor(H * .01));
+                                else g.DrawString(label, font9, band_edge_pen.Brush, vgrid - offsetL, (float)Math.Floor(H * .01));
 
                                 int fgrid_2 = ((i + 1) * freq_step_size) + (int)((low / freq_step_size) * freq_step_size);
                                 int x_2 = (int)(((float)(fgrid_2 - vfo_delta - low) / width * W));
@@ -1850,8 +2501,8 @@ namespace PowerSDR
                                 for (int j = 1; j < inbetweenies; j++)
                                 {
                                     float x3 = (float)vgrid + (j * scale);
-                                    if (bottom) g.DrawLine(grid_pen_dark, x3, H + top, x3, H + H);
-                                    else g.DrawLine(grid_pen_dark, x3, top, x3, H);
+                                    if (bottom) g.DrawLine(grid_pen_inb, x3, H + top, x3, H + H);
+                                    else g.DrawLine(grid_pen_inb, x3, top, x3, H);
                                 }
                                 break;
                             }
@@ -1870,16 +2521,16 @@ namespace PowerSDR
                                 actual_fgrid == 28.0 || actual_fgrid == 29.7 ||
                                 actual_fgrid == 50.0 || actual_fgrid == 54.0)
                             {
-                                if (bottom) g.DrawLine(new Pen(band_edge_color), vgrid, H + top, vgrid, H + H);
-                                else g.DrawLine(new Pen(band_edge_color), vgrid, top, vgrid, H);
+                                if (bottom) g.DrawLine(band_edge_pen, vgrid, H + top, vgrid, H + H);
+                                else g.DrawLine(band_edge_pen, vgrid, top, vgrid, H);
 
                                 label = actual_fgrid.ToString("f3");
                                 if (actual_fgrid < 10) offsetL = (int)((label.Length + 1) * 4.1) - 14;
                                 else if (actual_fgrid < 100.0) offsetL = (int)((label.Length + 1) * 4.1) - 11;
                                 else offsetL = (int)((label.Length + 1) * 4.1) - 8;
 
-                                if (bottom) g.DrawString(label, font, new SolidBrush(band_edge_color), vgrid - offsetL, H + (float)Math.Floor(H * .01));
-                                else g.DrawString(label, font, new SolidBrush(band_edge_color), vgrid - offsetL, (float)Math.Floor(H * .01));
+                                if (bottom) g.DrawString(label, font9, band_edge_pen.Brush, vgrid - offsetL, H + (float)Math.Floor(H * .01));
+                                else g.DrawString(label, font9, band_edge_pen.Brush, vgrid - offsetL, (float)Math.Floor(H * .01));
 
                                 int fgrid_2 = ((i + 1) * freq_step_size) + (int)((low / freq_step_size) * freq_step_size);
                                 int x_2 = (int)(((float)(fgrid_2 - vfo_delta - low) / width * W));
@@ -1888,8 +2539,8 @@ namespace PowerSDR
                                 for (int j = 1; j < inbetweenies; j++)
                                 {
                                     float x3 = (float)vgrid + (j * scale);
-                                    if (bottom) g.DrawLine(grid_pen_dark, x3, H + top, x3, H + H);
-                                    else g.DrawLine(grid_pen_dark, x3, top, x3, H);
+                                    if (bottom) g.DrawLine(grid_pen_inb, x3, H + top, x3, H + H);
+                                    else g.DrawLine(grid_pen_inb, x3, top, x3, H);
                                 }
                                 break;
                             }
@@ -1908,16 +2559,16 @@ namespace PowerSDR
                                 actual_fgrid == 28.0 || actual_fgrid == 29.7 ||
                                 actual_fgrid == 50.08 || actual_fgrid == 51.0)
                             {
-                                if (bottom) g.DrawLine(new Pen(band_edge_color), vgrid, H + top, vgrid, H + H);
-                                else g.DrawLine(new Pen(band_edge_color), vgrid, top, vgrid, H);
+                                if (bottom) g.DrawLine(band_edge_pen, vgrid, H + top, vgrid, H + H);
+                                else g.DrawLine(band_edge_pen, vgrid, top, vgrid, H);
 
                                 label = actual_fgrid.ToString("f3");
                                 if (actual_fgrid < 10) offsetL = (int)((label.Length + 1) * 4.1) - 14;
                                 else if (actual_fgrid < 100.0) offsetL = (int)((label.Length + 1) * 4.1) - 11;
                                 else offsetL = (int)((label.Length + 1) * 4.1) - 8;
 
-                                if (bottom) g.DrawString(label, font, new SolidBrush(band_edge_color), vgrid - offsetL, H + (float)Math.Floor(H * .01));
-                                else g.DrawString(label, font, new SolidBrush(band_edge_color), vgrid - offsetL, (float)Math.Floor(H * .01));
+                                if (bottom) g.DrawString(label, font9, band_edge_pen.Brush, vgrid - offsetL, H + (float)Math.Floor(H * .01));
+                                else g.DrawString(label, font9, band_edge_pen.Brush, vgrid - offsetL, (float)Math.Floor(H * .01));
 
                                 int fgrid_2 = ((i + 1) * freq_step_size) + (int)((low / freq_step_size) * freq_step_size);
                                 int x_2 = (int)(((float)(fgrid_2 - vfo_delta - low) / width * W));
@@ -1926,8 +2577,8 @@ namespace PowerSDR
                                 for (int j = 1; j < inbetweenies; j++)
                                 {
                                     float x3 = (float)vgrid + (j * scale);
-                                    if (bottom) g.DrawLine(grid_pen_dark, x3, H + top, x3, H + H);
-                                    else g.DrawLine(grid_pen_dark, x3, top, x3, H);
+                                    if (bottom) g.DrawLine(grid_pen_inb, x3, H + top, x3, H + H);
+                                    else g.DrawLine(grid_pen_inb, x3, top, x3, H);
                                 }
                                 break;
                             }
@@ -1953,16 +2604,16 @@ namespace PowerSDR
                             actual_fgrid == 28.0 || actual_fgrid == 29.7 ||
                             actual_fgrid == 50.0 || actual_fgrid == 54.0)
                             {
-                                if (bottom) g.DrawLine(new Pen(band_edge_color), vgrid, H + top, vgrid, H + H);
-                                else g.DrawLine(new Pen(band_edge_color), vgrid, top, vgrid, H);
+                                if (bottom) g.DrawLine(band_edge_pen, vgrid, H + top, vgrid, H + H);
+                                else g.DrawLine(band_edge_pen, vgrid, top, vgrid, H);
 
                                 label = actual_fgrid.ToString("f3");
                                 if (actual_fgrid < 10) offsetL = (int)((label.Length + 1) * 4.1) - 14;
                                 else if (actual_fgrid < 100.0) offsetL = (int)((label.Length + 1) * 4.1) - 11;
                                 else offsetL = (int)((label.Length + 1) * 4.1) - 8;
 
-                                if (bottom) g.DrawString(label, font, new SolidBrush(band_edge_color), vgrid - offsetL, H + (float)Math.Floor(H * .01));
-                                else g.DrawString(label, font, new SolidBrush(band_edge_color), vgrid - offsetL, (float)Math.Floor(H * .01));
+                                if (bottom) g.DrawString(label, font9, band_edge_pen.Brush, vgrid - offsetL, H + (float)Math.Floor(H * .01));
+                                else g.DrawString(label, font9, band_edge_pen.Brush, vgrid - offsetL, (float)Math.Floor(H * .01));
 
                                 int fgrid_2 = ((i + 1) * freq_step_size) + (int)((low / freq_step_size) * freq_step_size);
                                 int x_2 = (int)(((float)(fgrid_2 - vfo_delta - low) / width * W));
@@ -1971,8 +2622,8 @@ namespace PowerSDR
                                 for (int j = 1; j < inbetweenies; j++)
                                 {
                                     float x3 = (float)vgrid + (j * scale);
-                                    if (bottom) g.DrawLine(grid_pen_dark, x3, H + top, x3, H + H);
-                                    else g.DrawLine(grid_pen_dark, x3, top, x3, H);
+                                    if (bottom) g.DrawLine(grid_pen_inb, x3, H + top, x3, H + H);
+                                    else g.DrawLine(grid_pen_inb, x3, top, x3, H);
                                 }
                                 break;
                             }
@@ -1992,16 +2643,16 @@ namespace PowerSDR
                                 actual_fgrid == 28.0 || actual_fgrid == 29.7 ||
                                 actual_fgrid == 50.0 || actual_fgrid == 54.0)
                             {
-                                if (bottom) g.DrawLine(new Pen(band_edge_color), vgrid, H + top, vgrid, H + H);
-                                else g.DrawLine(new Pen(band_edge_color), vgrid, top, vgrid, H);
+                                if (bottom) g.DrawLine(band_edge_pen, vgrid, H + top, vgrid, H + H);
+                                else g.DrawLine(band_edge_pen, vgrid, top, vgrid, H);
 
                                 label = actual_fgrid.ToString("f3");
                                 if (actual_fgrid < 10) offsetL = (int)((label.Length + 1) * 4.1) - 14;
                                 else if (actual_fgrid < 100.0) offsetL = (int)((label.Length + 1) * 4.1) - 11;
                                 else offsetL = (int)((label.Length + 1) * 4.1) - 8;
 
-                                if (bottom) g.DrawString(label, font, new SolidBrush(band_edge_color), vgrid - offsetL, H + (float)Math.Floor(H * .01));
-                                else g.DrawString(label, font, new SolidBrush(band_edge_color), vgrid - offsetL, (float)Math.Floor(H * .01));
+                                if (bottom) g.DrawString(label, font9, band_edge_pen.Brush, vgrid - offsetL, H + (float)Math.Floor(H * .01));
+                                else g.DrawString(label, font9, band_edge_pen.Brush, vgrid - offsetL, (float)Math.Floor(H * .01));
 
                                 int fgrid_2 = ((i + 1) * freq_step_size) + (int)((low / freq_step_size) * freq_step_size);
                                 int x_2 = (int)(((float)(fgrid_2 - vfo_delta - low) / width * W));
@@ -2010,8 +2661,8 @@ namespace PowerSDR
                                 for (int j = 1; j < inbetweenies; j++)
                                 {
                                     float x3 = (float)vgrid + (j * scale);
-                                    if (bottom) g.DrawLine(grid_pen_dark, x3, H + top, x3, H + H);
-                                    else g.DrawLine(grid_pen_dark, x3, top, x3, H);
+                                    if (bottom) g.DrawLine(grid_pen_inb, x3, H + top, x3, H + H);
+                                    else g.DrawLine(grid_pen_inb, x3, top, x3, H);
                                 }
                                 break;
                             }
@@ -2029,8 +2680,8 @@ namespace PowerSDR
                                 for (int j = 1; j < inbetweenies; j++)
                                 {
                                     float x3 = (float)vgrid + (j * scale);
-                                    if (bottom) g.DrawLine(grid_pen_dark, x3, H + top, x3, H + H);
-                                    else g.DrawLine(grid_pen_dark, x3, top, x3, H);
+                                    if (bottom) g.DrawLine(grid_pen_inb, x3, H + top, x3, H + H);
+                                    else g.DrawLine(grid_pen_inb, x3, top, x3, H);
                                 }
 
                                 if (((double)((int)(actual_fgrid * 1000))) == actual_fgrid * 1000)
@@ -2061,8 +2712,8 @@ namespace PowerSDR
                                     else offsetL = (int)((label.Length) * 4.1) - 8;
                                 }
 
-                                if (bottom) g.DrawString(label, font, grid_text_brush, vgrid - offsetL, H + (float)Math.Floor(H * .01));
-                                else g.DrawString(label, font, grid_text_brush, vgrid - offsetL, (float)Math.Floor(H * .01));
+                                if (bottom) g.DrawString(label, font9, grid_text_brush, vgrid - offsetL, H + (float)Math.Floor(H * .01));
+                                else g.DrawString(label, font9, grid_text_brush, vgrid - offsetL, (float)Math.Floor(H * .01));
                             
                                  break;
                              } 
@@ -2081,8 +2732,8 @@ namespace PowerSDR
                     offsetR = (int)(label.Length * 4.1);
                     if ((vgrid - offsetL >= 0) && (vgrid + offsetR < W) && (fgrid != 0))
                     {
-                        if (bottom) g.DrawString(label, font, grid_text_brush, vgrid - offsetL, H + (float)Math.Floor(H * .01));
-                        else g.DrawString(label, font, grid_text_brush, vgrid - offsetL, (float)Math.Floor(H * .01));
+                        if (bottom) g.DrawString(label, font9, grid_text_brush, vgrid - offsetL, H + (float)Math.Floor(H * .01));
+                        else g.DrawString(label, font9, grid_text_brush, vgrid - offsetL, (float)Math.Floor(H * .01));
                     }
                 }
 			
@@ -2099,8 +2750,8 @@ namespace PowerSDR
 				if (band_edge_offset >= low && band_edge_offset <= high)
 				{
 					int temp_vline =  (int)((double)(band_edge_offset-low)/(high-low)*W);//wa6ahl
-					if(bottom) g.DrawLine(new Pen(band_edge_color), temp_vline, H+top, temp_vline, H+H);//wa6ahl
-					else g.DrawLine(new Pen(band_edge_color), temp_vline, top, temp_vline, H);//wa6ahl
+					if(bottom) g.DrawLine(band_edge_pen, temp_vline, H+top, temp_vline, H+H);//wa6ahl
+					else g.DrawLine(band_edge_pen, temp_vline, top, temp_vline, H);//wa6ahl
 				}
 				//if(i == 1 && !show_freq_offset) break;
 			}
@@ -2111,8 +2762,8 @@ namespace PowerSDR
 				int xOffset = 0;
 				int num = spectrum_grid_max - i*grid_step;
 				int y = (int)((double)(spectrum_grid_max - num)*H/y_range);
-				if(bottom) g.DrawLine(grid_pen, 0, H+y, W, H+y);
-				else g.DrawLine(grid_pen, 0, y, W, y);
+				if(bottom) g.DrawLine(hgrid_pen, 0, H+y, W, H+y);
+				else g.DrawLine(hgrid_pen, 0, y, W, y);
 
 				// Draw horizontal line labels
 				if(i != 1) // avoid intersecting vertical and horizontal labels
@@ -2120,9 +2771,9 @@ namespace PowerSDR
 					num = spectrum_grid_max - i*grid_step;
 					string label = num.ToString();
 					if(label.Length == 3)
-						xOffset = (int)g.MeasureString("-", font).Width - 2;
+						xOffset = (int)g.MeasureString("-", font9).Width - 2;
 					int offset = (int)(label.Length*4.1);
-					SizeF size = g.MeasureString(label, font);
+					SizeF size = g.MeasureString(label, font9);
 
 					int x = 0;
 					switch(display_label_align)
@@ -2147,8 +2798,8 @@ namespace PowerSDR
 					y -= 8;
 					if(y+9 < H)
 					{
-						if(bottom) g.DrawString(label, font, grid_text_brush, x, H+y);
-						else g.DrawString(label, font, grid_text_brush, x, y);
+						if(bottom) g.DrawString(label, font9, grid_text_brush, x, H+y);
+						else g.DrawString(label, font9, grid_text_brush, x, y);
 					}
 				}
 			}
@@ -2158,32 +2809,717 @@ namespace PowerSDR
 			{
 				if(bottom)
 				{
-					g.DrawLine(new Pen(grid_zero_color), center_line_x, H+top, center_line_x, H+H);
-					g.DrawLine(new Pen(grid_zero_color), center_line_x+1, H+top, center_line_x+1, H+H);
+					g.DrawLine(grid_zero_pen, center_line_x, H+top, center_line_x, H+H);
+					g.DrawLine(grid_zero_pen, center_line_x+1, H+top, center_line_x+1, H+H);
 				}
 				else
 				{
-					g.DrawLine(new Pen(grid_zero_color), center_line_x, top, center_line_x, H);
-					g.DrawLine(new Pen(grid_zero_color), center_line_x+1, top, center_line_x+1, H);
+					g.DrawLine(grid_zero_pen, center_line_x, top, center_line_x, H);
+					g.DrawLine(grid_zero_pen, center_line_x+1, top, center_line_x+1, H);
 				}
 			}
 
 			if(show_freq_offset)
 			{
-				if(bottom) g.DrawString("0", font, new SolidBrush(grid_zero_color), center_line_x-5, H+(float)Math.Floor(H*.01));
-				else g.DrawString("0", font, new SolidBrush(grid_zero_color), center_line_x-5, (float)Math.Floor(H*.01));
+				if(bottom) g.DrawString("0", font9, grid_zero_pen.Brush, center_line_x-5, H+(float)Math.Floor(H*.01));
+				else g.DrawString("0", font9, grid_zero_pen.Brush, center_line_x-5, (float)Math.Floor(H*.01));
 			}
 
 			if(high_swr && rx==1)
-				g.DrawString("High SWR", new System.Drawing.Font("Arial", 14, FontStyle.Bold), new SolidBrush(Color.Red), 245, 20);
-		}
+				g.DrawString("High SWR", font14, Brushes.Red, 245, 20);
+        }     
+        
+
+        private static void DrawTXPanadapterGrid(ref Graphics g, int W, int H, int rx, bool bottom)
+        {
+            // draw background
+            if (bottom) g.FillRectangle(tx_display_background_brush, 0, H, W, H);
+            else g.FillRectangle(tx_display_background_brush, 0, 0, W, H);
+
+            bool local_mox = mox;
+            if (rx == 2) local_mox = false;
+            int low = rx_display_low;					// initialize variables
+            int high = rx_display_high;
+            int mid_w = W / 2;
+            int[] step_list = { 10, 20, 25, 50 };
+            int step_power = 1;
+            int step_index = 0;
+            int freq_step_size = 50;
+            int inbetweenies = 5;
+            int grid_step = tx_spectrum_grid_step;
+            if (split_display) grid_step *= 2;
+
+            int y_range = tx_spectrum_grid_max - tx_spectrum_grid_min;
+            int filter_low, filter_high;
+
+            int center_line_x = (int)(-(double)low / (high - low) * W);
+
+            if (local_mox) // get filter limits
+            {
+                filter_low = tx_filter_low;
+                filter_high = tx_filter_high;
+            }
+            else if (rx == 1)
+            {
+                filter_low = rx1_filter_low;
+                filter_high = rx1_filter_high;
+            }
+            else //if(rx == 2)
+            {
+                filter_low = rx2_filter_low;
+                filter_high = rx2_filter_high;
+            }
+
+            if ((rx1_dsp_mode == DSPMode.DRM && rx == 1) ||
+                (rx2_dsp_mode == DSPMode.DRM && rx == 2))
+            {
+                filter_low = -5000;
+                filter_high = 5000;
+            }
+
+            // Calculate horizontal step size
+            int width = high - low;
+            while (width / freq_step_size > 10)
+            {
+                /*inbetweenies = step_list[step_index] / 10;
+                if (inbetweenies == 1) inbetweenies = 10;*/
+                freq_step_size = step_list[step_index] * (int)Math.Pow(10.0, step_power);
+                step_index = (step_index + 1) % 4;
+                if (step_index == 0) step_power++;
+            }
+            double w_pixel_step = (double)W * freq_step_size / width;
+            int w_steps = width / freq_step_size;
+
+            // calculate vertical step size
+            int h_steps = (tx_spectrum_grid_max - tx_spectrum_grid_min) / grid_step;
+            double h_pixel_step = (double)H / h_steps;
+            int top = (int)((double)grid_step * H / y_range);
+
+            if (!local_mox && sub_rx1_enabled && rx == 1)
+            {
+                // draw Sub RX filter
+                // get filter screen coordinates
+                int filter_left_x = (int)((float)(filter_low - low + vfoa_sub_hz - vfoa_hz - rit_hz) / (high - low) * W);
+                int filter_right_x = (int)((float)(filter_high - low + vfoa_sub_hz - vfoa_hz - rit_hz) / (high - low) * W);
+
+                // make the filter display at least one pixel wide.
+                if (filter_left_x == filter_right_x) filter_right_x = filter_left_x + 1;
+
+                // draw rx filter
+                if (bottom)
+                {
+                    g.FillRectangle(new SolidBrush(sub_rx_filter_color),	// draw filter overlay
+                        filter_left_x, H + top, filter_right_x - filter_left_x, H + H - top);
+                }
+                else
+                {
+                    g.FillRectangle(new SolidBrush(sub_rx_filter_color),	// draw filter overlay
+                        filter_left_x, top, filter_right_x - filter_left_x, H - top);
+                }
+
+                // draw Sub RX 0Hz line
+                int x = (int)((float)(vfoa_sub_hz - vfoa_hz - low) / (high - low) * W);
+                if (bottom)
+                {
+                    g.DrawLine(sub_rx_zero_line_pen, x, H + top, x, H + H);
+                    g.DrawLine(sub_rx_zero_line_pen, x - 1, H + top, x - 1, H + H);
+                }
+                else
+                {
+                    g.DrawLine(sub_rx_zero_line_pen, x, top, x, H);
+                    g.DrawLine(sub_rx_zero_line_pen, x - 1, top, x - 1, H);
+                }
+            }
+
+            if (!(local_mox && (rx1_dsp_mode == DSPMode.CWL || rx1_dsp_mode == DSPMode.CWU)))
+            {
+                // get filter screen coordinates
+                int filter_left_x = (int)((float)(filter_low - low) / (high - low) * W);
+                int filter_right_x = (int)((float)(filter_high - low) / (high - low) * W);
+
+                // make the filter display at least one pixel wide.
+                if (filter_left_x == filter_right_x) filter_right_x = filter_left_x + 1;
+
+                // draw tx filter
+                if (bottom)
+                {
+                    g.FillRectangle(tx_filter_brush,	// draw filter overlay
+                        filter_left_x, H + top, filter_right_x - filter_left_x, H + H - top);
+                }
+                else
+                {
+                    g.FillRectangle(tx_filter_brush,	// draw filter overlay
+                        filter_left_x, top, filter_right_x - filter_left_x, H - top);
+                }
+            }
+
+            if (!local_mox && draw_tx_filter &&
+                (rx1_dsp_mode != DSPMode.CWL && rx1_dsp_mode != DSPMode.CWU))
+            {
+                // get tx filter limits
+                int filter_left_x;
+                int filter_right_x;
+
+                if (tx_on_vfob)
+                {
+                    if (!split_enabled)
+                    {
+                        filter_left_x = (int)((float)(tx_filter_low - low + xit_hz - rit_hz /*+ (vfob_hz - vfoa_hz)*/) / (high - low) * W);
+                        filter_right_x = (int)((float)(tx_filter_high - low + xit_hz - rit_hz /*+ (vfob_hz - vfoa_hz)*/) / (high - low) * W);
+                    }
+                    else
+                    {
+                        filter_left_x = (int)((float)(tx_filter_low - low + xit_hz - rit_hz + (vfob_sub_hz - vfoa_hz)) / (high - low) * W);
+                        filter_right_x = (int)((float)(tx_filter_high - low + xit_hz - rit_hz + (vfob_sub_hz - vfoa_hz)) / (high - low) * W);
+                    }
+                }
+                else
+                {
+                    if (!split_enabled)
+                    {
+                        filter_left_x = (int)((float)(tx_filter_low - low + xit_hz - rit_hz) / (high - low) * W);
+                        filter_right_x = (int)((float)(tx_filter_high - low + xit_hz - rit_hz) / (high - low) * W);
+                    }
+                    else
+                    {
+                        filter_left_x = (int)((float)(tx_filter_low - low + xit_hz - rit_hz + (vfoa_sub_hz - vfoa_hz)) / (high - low) * W);
+                        filter_right_x = (int)((float)(tx_filter_high - low + xit_hz - rit_hz + (vfoa_sub_hz - vfoa_hz)) / (high - low) * W);
+                    }
+                }
+
+                if (bottom && tx_on_vfob)
+                {
+                    g.DrawLine(tx_filter_pen, filter_left_x, H + top, filter_left_x, H + H);		// draw tx filter overlay
+                    g.DrawLine(tx_filter_pen, filter_left_x + 1, H + top, filter_left_x + 1, H + H);	// draw tx filter overlay
+                    g.DrawLine(tx_filter_pen, filter_right_x, H + top, filter_right_x, H + H);	// draw tx filter overlay
+                    g.DrawLine(tx_filter_pen, filter_right_x + 1, H + top, filter_right_x + 1, H + H);// draw tx filter overlay
+                }
+                else if (!tx_on_vfob)
+                {
+                    g.DrawLine(tx_filter_pen, filter_left_x, top, filter_left_x, H);		// draw tx filter overlay
+                    g.DrawLine(tx_filter_pen, filter_left_x + 1, top, filter_left_x + 1, H);	// draw tx filter overlay
+                    g.DrawLine(tx_filter_pen, filter_right_x, top, filter_right_x, H);	// draw tx filter overlay
+                    g.DrawLine(tx_filter_pen, filter_right_x + 1, top, filter_right_x + 1, H);// draw tx filter overlay
+                }
+            }
+
+            if (!local_mox && draw_tx_cw_freq &&
+                (rx1_dsp_mode == DSPMode.CWL || rx1_dsp_mode == DSPMode.CWU))
+            {
+                int pitch = cw_pitch;
+                if (rx1_dsp_mode == DSPMode.CWL)
+                    pitch = -cw_pitch;
+
+                int cw_line_x;
+                if (!split_enabled)
+                    cw_line_x = (int)((float)(pitch - low + xit_hz - rit_hz) / (high - low) * W);
+                else
+                    cw_line_x = (int)((float)(pitch - low + xit_hz - rit_hz + (vfoa_sub_hz - vfoa_hz)) / (high - low) * W);
+
+                if (bottom)
+                {
+                    g.DrawLine(tx_filter_pen, cw_line_x, H + top, cw_line_x, H + H);
+                    g.DrawLine(tx_filter_pen, cw_line_x + 1, H + top, cw_line_x + 1, H + H);
+                }
+                else
+                {
+                    g.DrawLine(tx_filter_pen, cw_line_x, top, cw_line_x, H);
+                    g.DrawLine(tx_filter_pen, cw_line_x + 1, top, cw_line_x + 1, H);
+                }
+            }
+
+            double vfo;
+
+            if (local_mox)
+            {
+                if (split_enabled)
+                    vfo = vfoa_sub_hz;
+                else
+                    vfo = vfoa_hz;
+                vfo += xit_hz;
+            }
+            else if (rx == 1)
+            {
+                vfo = vfoa_hz + rit_hz;
+            }
+            else //if(rx==2)
+            {
+                vfo = vfob_hz + rit_hz;
+            }
+
+            switch (rx1_dsp_mode)
+            {
+                case DSPMode.CWL:
+                    vfo += cw_pitch;
+                    break;
+                case DSPMode.CWU:
+                    vfo -= cw_pitch;
+                    break;
+                default:
+                    break;
+            }
+
+            long vfo_round = ((long)(vfo / freq_step_size)) * freq_step_size;
+            long vfo_delta = (long)(vfo - vfo_round);
+
+            int f_steps = (width / freq_step_size) + 1;
+            // Draw vertical lines
+            for (int i = 0; i < f_steps + 1; i++)
+            {
+                string label;
+                int offsetL;
+                int offsetR;
+
+                int fgrid = i * freq_step_size + (low / freq_step_size) * freq_step_size;
+                double actual_fgrid = ((double)(vfo_round + fgrid)) / 1000000;
+                int vgrid = (int)((double)(fgrid - vfo_delta - low) / (high - low) * W);
+
+                if (!show_freq_offset)
+                {
+
+                    switch (console.CurrentRegion)//w5wc
+                    {
+                        case FRSRegion.US:
+                            if (actual_fgrid == 1.8 || actual_fgrid == 2.0 ||
+                                actual_fgrid == 3.5 || actual_fgrid == 4.0 ||
+                                actual_fgrid == 7.0 || actual_fgrid == 7.3 ||
+                                actual_fgrid == 10.1 || actual_fgrid == 10.15 ||
+                                actual_fgrid == 14.0 || actual_fgrid == 14.35 ||
+                                actual_fgrid == 18.068 || actual_fgrid == 18.168 ||
+                                actual_fgrid == 21.0 || actual_fgrid == 21.45 ||
+                                actual_fgrid == 24.89 || actual_fgrid == 24.99 ||
+                                actual_fgrid == 28.0 || actual_fgrid == 29.7 ||
+                                actual_fgrid == 50.0 || actual_fgrid == 54.0)
+                            {
+                                if (bottom) g.DrawLine(tx_band_edge_pen, vgrid, H + top, vgrid, H + H);
+                                else g.DrawLine(tx_band_edge_pen, vgrid, top, vgrid, H);
+
+                                label = actual_fgrid.ToString("f3");
+                                if (actual_fgrid < 10) offsetL = (int)((label.Length + 1) * 4.1) - 14;
+                                else if (actual_fgrid < 100.0) offsetL = (int)((label.Length + 1) * 4.1) - 11;
+                                else offsetL = (int)((label.Length + 1) * 4.1) - 8;
+
+                                if (bottom) g.DrawString(label, font9, tx_band_edge_pen.Brush, vgrid - offsetL, H + (float)Math.Floor(H * .01));
+                                else g.DrawString(label, font9, tx_band_edge_pen.Brush, vgrid - offsetL, (float)Math.Floor(H * .01));
+
+                                int fgrid_2 = ((i + 1) * freq_step_size) + (int)((low / freq_step_size) * freq_step_size);
+                                int x_2 = (int)(((float)(fgrid_2 - vfo_delta - low) / width * W));
+                                float scale = (float)(x_2 - vgrid) / inbetweenies;
+
+                                for (int j = 1; j < inbetweenies; j++)
+                                {
+                                    float x3 = (float)vgrid + (j * scale);
+                                    if (bottom) g.DrawLine(tx_vgrid_pen_inb, x3, H + top, x3, H + H);
+                                    else g.DrawLine(tx_vgrid_pen_inb, x3, top, x3, H);
+                                }
+                                break;
+                            }
+                            else
+                                goto default;
+
+                        case FRSRegion.Spain:
+                            if (actual_fgrid == 1.81 || actual_fgrid == 2.0 ||
+                                actual_fgrid == 3.5 || actual_fgrid == 3.8 ||
+                                actual_fgrid == 7.0 || actual_fgrid == 7.2 ||
+                                actual_fgrid == 10.1 || actual_fgrid == 10.15 ||
+                                actual_fgrid == 14.0 || actual_fgrid == 14.35 ||
+                                actual_fgrid == 18.068 || actual_fgrid == 18.168 ||
+                                actual_fgrid == 21.0 || actual_fgrid == 21.45 ||
+                                actual_fgrid == 24.89 || actual_fgrid == 24.99 ||
+                                actual_fgrid == 28.0 || actual_fgrid == 29.7 ||
+                                actual_fgrid == 50.0 || actual_fgrid == 54.0)
+                            {
+                                if (bottom) g.DrawLine(tx_band_edge_pen, vgrid, H + top, vgrid, H + H);
+                                else g.DrawLine(tx_band_edge_pen, vgrid, top, vgrid, H);
+
+                                label = actual_fgrid.ToString("f3");
+                                if (actual_fgrid < 10) offsetL = (int)((label.Length + 1) * 4.1) - 14;
+                                else if (actual_fgrid < 100.0) offsetL = (int)((label.Length + 1) * 4.1) - 11;
+                                else offsetL = (int)((label.Length + 1) * 4.1) - 8;
+
+                                if (bottom) g.DrawString(label, font9, tx_band_edge_pen.Brush, vgrid - offsetL, H + (float)Math.Floor(H * .01));
+                                else g.DrawString(label, font9, tx_band_edge_pen.Brush, vgrid - offsetL, (float)Math.Floor(H * .01));
+
+                                int fgrid_2 = ((i + 1) * freq_step_size) + (int)((low / freq_step_size) * freq_step_size);
+                                int x_2 = (int)(((float)(fgrid_2 - vfo_delta - low) / width * W));
+                                float scale = (float)(x_2 - vgrid) / inbetweenies;
+
+                                for (int j = 1; j < inbetweenies; j++)
+                                {
+                                    float x3 = (float)vgrid + (j * scale);
+                                    if (bottom) g.DrawLine(tx_vgrid_pen_inb, x3, H + top, x3, H + H);
+                                    else g.DrawLine(tx_vgrid_pen_inb, x3, top, x3, H);
+                                }
+                                break;
+                            }
+                            else
+                                goto default;
+
+                        case FRSRegion.Germany:
+                            if (actual_fgrid == 1.81 || actual_fgrid == 2.0 ||
+                                actual_fgrid == 3.5 || actual_fgrid == 3.8 ||
+                                actual_fgrid == 7.0 || actual_fgrid == 7.2 ||
+                                actual_fgrid == 10.1 || actual_fgrid == 10.15 ||
+                                actual_fgrid == 14.0 || actual_fgrid == 14.35 ||
+                                actual_fgrid == 18.068 || actual_fgrid == 18.168 ||
+                                actual_fgrid == 21.0 || actual_fgrid == 21.45 ||
+                                actual_fgrid == 24.89 || actual_fgrid == 24.99 ||
+                                actual_fgrid == 28.0 || actual_fgrid == 29.7 ||
+                                actual_fgrid == 50.08 || actual_fgrid == 51.0)
+                            {
+                                if (bottom) g.DrawLine(tx_band_edge_pen, vgrid, H + top, vgrid, H + H);
+                                else g.DrawLine(tx_band_edge_pen, vgrid, top, vgrid, H);
+
+                                label = actual_fgrid.ToString("f3");
+                                if (actual_fgrid < 10) offsetL = (int)((label.Length + 1) * 4.1) - 14;
+                                else if (actual_fgrid < 100.0) offsetL = (int)((label.Length + 1) * 4.1) - 11;
+                                else offsetL = (int)((label.Length + 1) * 4.1) - 8;
+
+                                if (bottom) g.DrawString(label, font9, tx_band_edge_pen.Brush, vgrid - offsetL, H + (float)Math.Floor(H * .01));
+                                else g.DrawString(label, font9, tx_band_edge_pen.Brush, vgrid - offsetL, (float)Math.Floor(H * .01));
+
+                                int fgrid_2 = ((i + 1) * freq_step_size) + (int)((low / freq_step_size) * freq_step_size);
+                                int x_2 = (int)(((float)(fgrid_2 - vfo_delta - low) / width * W));
+                                float scale = (float)(x_2 - vgrid) / inbetweenies;
+
+                                for (int j = 1; j < inbetweenies; j++)
+                                {
+                                    float x3 = (float)vgrid + (j * scale);
+                                    if (bottom) g.DrawLine(tx_vgrid_pen_inb, x3, H + top, x3, H + H);
+                                    else g.DrawLine(tx_vgrid_pen_inb, x3, top, x3, H);
+                                }
+                                break;
+                            }
+                            else
+                                goto default;
+
+                        case FRSRegion.UK:
+                            if (actual_fgrid == 1.8 || actual_fgrid == 2.0 ||
+                                actual_fgrid == 3.5 || actual_fgrid == 4.0 ||
+                                actual_fgrid == 7.0 || actual_fgrid == 7.3 ||
+                                actual_fgrid == 10.1 || actual_fgrid == 10.15 ||
+                                actual_fgrid == 14.0 || actual_fgrid == 14.35 ||
+                                actual_fgrid == 18.068 || actual_fgrid == 18.168 ||
+                                actual_fgrid == 21.0 || actual_fgrid == 21.45 ||
+                                actual_fgrid == 24.89 || actual_fgrid == 24.99 ||
+                                actual_fgrid == 28.0 || actual_fgrid == 29.7 ||
+                                actual_fgrid == 50.0 || actual_fgrid == 54.0)
+                            {
+                                if (bottom) g.DrawLine(tx_band_edge_pen, vgrid, H + top, vgrid, H + H);
+                                else g.DrawLine(tx_band_edge_pen, vgrid, top, vgrid, H);
+
+                                label = actual_fgrid.ToString("f3");
+                                if (actual_fgrid < 10) offsetL = (int)((label.Length + 1) * 4.1) - 14;
+                                else if (actual_fgrid < 100.0) offsetL = (int)((label.Length + 1) * 4.1) - 11;
+                                else offsetL = (int)((label.Length + 1) * 4.1) - 8;
+
+                                if (bottom) g.DrawString(label, font9, tx_band_edge_pen.Brush, vgrid - offsetL, H + (float)Math.Floor(H * .01));
+                                else g.DrawString(label, font9, tx_band_edge_pen.Brush, vgrid - offsetL, (float)Math.Floor(H * .01));
+
+                                int fgrid_2 = ((i + 1) * freq_step_size) + (int)((low / freq_step_size) * freq_step_size);
+                                int x_2 = (int)(((float)(fgrid_2 - vfo_delta - low) / width * W));
+                                float scale = (float)(x_2 - vgrid) / inbetweenies;
+
+                                for (int j = 1; j < inbetweenies; j++)
+                                {
+                                    float x3 = (float)vgrid + (j * scale);
+                                    if (bottom) g.DrawLine(tx_vgrid_pen_inb, x3, H + top, x3, H + H);
+                                    else g.DrawLine(tx_vgrid_pen_inb, x3, top, x3, H);
+                                }
+                                break;
+                            }
+                            else
+                                goto default;
+
+                        case FRSRegion.Italy_Plus:
+                            if (actual_fgrid == 1.81 || actual_fgrid == 2.0 ||
+                                actual_fgrid == 3.5 || actual_fgrid == 3.8 ||
+                                actual_fgrid == 6.975 || actual_fgrid == 7.2 ||
+                                actual_fgrid == 10.1 || actual_fgrid == 10.15 ||
+                                actual_fgrid == 14.0 || actual_fgrid == 14.35 ||
+                                actual_fgrid == 18.068 || actual_fgrid == 18.168 ||
+                                actual_fgrid == 21.0 || actual_fgrid == 21.45 ||
+                                actual_fgrid == 24.89 || actual_fgrid == 24.99 ||
+                                actual_fgrid == 28.0 || actual_fgrid == 29.7 ||
+                                actual_fgrid == 50.08 || actual_fgrid == 51.0)
+                            {
+                                if (bottom) g.DrawLine(tx_band_edge_pen, vgrid, H + top, vgrid, H + H);
+                                else g.DrawLine(tx_band_edge_pen, vgrid, top, vgrid, H);
+
+                                label = actual_fgrid.ToString("f3");
+                                if (actual_fgrid < 10) offsetL = (int)((label.Length + 1) * 4.1) - 14;
+                                else if (actual_fgrid < 100.0) offsetL = (int)((label.Length + 1) * 4.1) - 11;
+                                else offsetL = (int)((label.Length + 1) * 4.1) - 8;
+
+                                if (bottom) g.DrawString(label, font9, tx_band_edge_pen.Brush, vgrid - offsetL, H + (float)Math.Floor(H * .01));
+                                else g.DrawString(label, font9, tx_band_edge_pen.Brush, vgrid - offsetL, (float)Math.Floor(H * .01));
+
+                                int fgrid_2 = ((i + 1) * freq_step_size) + (int)((low / freq_step_size) * freq_step_size);
+                                int x_2 = (int)(((float)(fgrid_2 - vfo_delta - low) / width * W));
+                                float scale = (float)(x_2 - vgrid) / inbetweenies;
+
+                                for (int j = 1; j < inbetweenies; j++)
+                                {
+                                    float x3 = (float)vgrid + (j * scale);
+                                    if (bottom) g.DrawLine(tx_vgrid_pen_inb, x3, H + top, x3, H + H);
+                                    else g.DrawLine(tx_vgrid_pen_inb, x3, top, x3, H);
+                                }
+                                break;
+                            }
+                            else
+                                goto default;
+
+                        case FRSRegion.Japan:
+                            if (actual_fgrid == .137 || actual_fgrid == .138 ||
+                            actual_fgrid == 1.81 || actual_fgrid == 1.825 ||
+                            actual_fgrid == 1.907 || actual_fgrid == 1.913 ||
+                            actual_fgrid == 3.5 || actual_fgrid == 3.575 ||
+                            actual_fgrid == 3.599 || actual_fgrid == 3.612 ||
+                            actual_fgrid == 3.68 || actual_fgrid == 3.687 ||
+                            actual_fgrid == 3.702 || actual_fgrid == 3.716 ||
+                            actual_fgrid == 3.745 || actual_fgrid == 3.77 ||
+                            actual_fgrid == 3.791 || actual_fgrid == 3.805 ||
+                            actual_fgrid == 7.0 || actual_fgrid == 7.2 ||
+                            actual_fgrid == 10.1 || actual_fgrid == 10.15 ||
+                            actual_fgrid == 14.0 || actual_fgrid == 14.35 ||
+                            actual_fgrid == 18.068 || actual_fgrid == 18.168 ||
+                            actual_fgrid == 21.0 || actual_fgrid == 21.45 ||
+                            actual_fgrid == 24.89 || actual_fgrid == 24.99 ||
+                            actual_fgrid == 28.0 || actual_fgrid == 29.7 ||
+                            actual_fgrid == 50.0 || actual_fgrid == 54.0)
+                            {
+                                if (bottom) g.DrawLine(tx_band_edge_pen, vgrid, H + top, vgrid, H + H);
+                                else g.DrawLine(tx_band_edge_pen, vgrid, top, vgrid, H);
+
+                                label = actual_fgrid.ToString("f3");
+                                if (actual_fgrid < 10) offsetL = (int)((label.Length + 1) * 4.1) - 14;
+                                else if (actual_fgrid < 100.0) offsetL = (int)((label.Length + 1) * 4.1) - 11;
+                                else offsetL = (int)((label.Length + 1) * 4.1) - 8;
+
+                                if (bottom) g.DrawString(label, font9, tx_band_edge_pen.Brush, vgrid - offsetL, H + (float)Math.Floor(H * .01));
+                                else g.DrawString(label, font9, tx_band_edge_pen.Brush, vgrid - offsetL, (float)Math.Floor(H * .01));
+
+                                int fgrid_2 = ((i + 1) * freq_step_size) + (int)((low / freq_step_size) * freq_step_size);
+                                int x_2 = (int)(((float)(fgrid_2 - vfo_delta - low) / width * W));
+                                float scale = (float)(x_2 - vgrid) / inbetweenies;
+
+                                for (int j = 1; j < inbetweenies; j++)
+                                {
+                                    float x3 = (float)vgrid + (j * scale);
+                                    if (bottom) g.DrawLine(tx_vgrid_pen_inb, x3, H + top, x3, H + H);
+                                    else g.DrawLine(tx_vgrid_pen_inb, x3, top, x3, H);
+                                }
+                                break;
+                            }
+                            else
+                                goto default;
+
+                        case FRSRegion.Australia:
+                            if (actual_fgrid == 1.8 || actual_fgrid == 1.875 ||
+                                actual_fgrid == 3.5 || actual_fgrid == 3.7 ||
+                                actual_fgrid == 3.776 || actual_fgrid == 3.8 ||
+                                actual_fgrid == 7.0 || actual_fgrid == 7.3 ||
+                                actual_fgrid == 10.1 || actual_fgrid == 10.15 ||
+                                actual_fgrid == 14.0 || actual_fgrid == 14.35 ||
+                                actual_fgrid == 18.068 || actual_fgrid == 18.168 ||
+                                actual_fgrid == 21.0 || actual_fgrid == 21.45 ||
+                                actual_fgrid == 24.89 || actual_fgrid == 24.99 ||
+                                actual_fgrid == 28.0 || actual_fgrid == 29.7 ||
+                                actual_fgrid == 50.0 || actual_fgrid == 54.0)
+                            {
+                                if (bottom) g.DrawLine(tx_band_edge_pen, vgrid, H + top, vgrid, H + H);
+                                else g.DrawLine(tx_band_edge_pen, vgrid, top, vgrid, H);
+
+                                label = actual_fgrid.ToString("f3");
+                                if (actual_fgrid < 10) offsetL = (int)((label.Length + 1) * 4.1) - 14;
+                                else if (actual_fgrid < 100.0) offsetL = (int)((label.Length + 1) * 4.1) - 11;
+                                else offsetL = (int)((label.Length + 1) * 4.1) - 8;
+
+                                if (bottom) g.DrawString(label, font9, tx_band_edge_pen.Brush, vgrid - offsetL, H + (float)Math.Floor(H * .01));
+                                else g.DrawString(label, font9, tx_band_edge_pen.Brush, vgrid - offsetL, (float)Math.Floor(H * .01));
+
+                                int fgrid_2 = ((i + 1) * freq_step_size) + (int)((low / freq_step_size) * freq_step_size);
+                                int x_2 = (int)(((float)(fgrid_2 - vfo_delta - low) / width * W));
+                                float scale = (float)(x_2 - vgrid) / inbetweenies;
+
+                                for (int j = 1; j < inbetweenies; j++)
+                                {
+                                    float x3 = (float)vgrid + (j * scale);
+                                    if (bottom) g.DrawLine(tx_vgrid_pen_inb, x3, H + top, x3, H + H);
+                                    else g.DrawLine(tx_vgrid_pen_inb, x3, top, x3, H);
+                                }
+                                break;
+                            }
+                            else
+                                goto default;
+                        default:
+                            {
+                                if (bottom) g.DrawLine(tx_vgrid_pen, vgrid, H + top, vgrid, H + H);
+                                else g.DrawLine(tx_vgrid_pen, vgrid, top, vgrid, H);			//wa6ahl
+
+                                int fgrid_2 = ((i + 1) * freq_step_size) + (int)((low / freq_step_size) * freq_step_size);
+                                int x_2 = (int)(((float)(fgrid_2 - vfo_delta - low) / width * W));
+                                float scale = (float)(x_2 - vgrid) / inbetweenies;
+
+                                for (int j = 1; j < inbetweenies; j++)
+                                {
+                                    float x3 = (float)vgrid + (j * scale);
+                                    if (bottom) g.DrawLine(tx_vgrid_pen_inb, x3, H + top, x3, H + H);
+                                    else g.DrawLine(tx_vgrid_pen_inb, x3, top, x3, H);
+                                }
+
+                                if (((double)((int)(actual_fgrid * 1000))) == actual_fgrid * 1000)
+                                {
+                                    label = actual_fgrid.ToString("f3"); //wa6ahl
+
+                                    //if(actual_fgrid > 1300.0)
+                                    //	label = label.Substring(label.Length-4);
+
+                                    if (actual_fgrid < 10) offsetL = (int)((label.Length + 1) * 4.1) - 14;
+                                    else if (actual_fgrid < 100.0) offsetL = (int)((label.Length + 1) * 4.1) - 11;
+                                    else offsetL = (int)((label.Length + 1) * 4.1) - 8;
+                                }
+                                else
+                                {
+                                    string temp_string;
+                                    int jper;
+                                    label = actual_fgrid.ToString("f4");
+                                    temp_string = label;
+                                    jper = label.IndexOf('.') + 4;
+                                    label = label.Insert(jper, " ");
+
+                                    //if(actual_fgrid > 1300.0)
+                                    //	label = label.Substring(label.Length-4);
+
+                                    if (actual_fgrid < 10) offsetL = (int)((label.Length) * 4.1) - 14;
+                                    else if (actual_fgrid < 100.0) offsetL = (int)((label.Length) * 4.1) - 11;
+                                    else offsetL = (int)((label.Length) * 4.1) - 8;
+                                }
+
+                                if (bottom) g.DrawString(label, font9, grid_tx_text_brush, vgrid - offsetL, H + (float)Math.Floor(H * .01));
+                                else g.DrawString(label, font9, grid_tx_text_brush, vgrid - offsetL, (float)Math.Floor(H * .01));
+
+                                break;
+                            }
+                    }
+                }
+                else
+                {
+                    vgrid = Convert.ToInt32((double)-(fgrid - low) / (low - high) * W);	//wa6ahl
+                    if (bottom) g.DrawLine(tx_vgrid_pen, vgrid, H + top, vgrid, H + H);
+                    else g.DrawLine(tx_vgrid_pen, vgrid, top, vgrid, H);			//wa6ahl
+
+                    double new_fgrid = (vfoa_hz + fgrid) / 1000000;
+
+                    label = fgrid.ToString();
+                    offsetL = (int)((label.Length + 1) * 4.1);
+                    offsetR = (int)(label.Length * 4.1);
+                    if ((vgrid - offsetL >= 0) && (vgrid + offsetR < W) && (fgrid != 0))
+                    {
+                        if (bottom) g.DrawString(label, font9, grid_tx_text_brush, vgrid - offsetL, H + (float)Math.Floor(H * .01));
+                        else g.DrawString(label, font9, grid_tx_text_brush, vgrid - offsetL, (float)Math.Floor(H * .01));
+                    }
+                }
+
+            }
+
+
+            int[] band_edge_list = { 18068000, 18168000, 1800000, 2000000, 3500000, 4000000,
+				7000000, 7300000, 10100000, 10150000, 14000000, 14350000, 21000000, 21450000,
+				24890000, 24990000, 28000000, 29700000, 50000000, 54000000, 144000000, 148000000 };
+
+            for (int i = 0; i < band_edge_list.Length; i++)
+            {
+                double band_edge_offset = band_edge_list[i] - vfo;
+                if (band_edge_offset >= low && band_edge_offset <= high)
+                {
+                    int temp_vline = (int)((double)(band_edge_offset - low) / (high - low) * W);//wa6ahl
+                    if (bottom) g.DrawLine(tx_band_edge_pen, temp_vline, H + top, temp_vline, H + H);//wa6ahl
+                    else g.DrawLine(tx_band_edge_pen, temp_vline, top, temp_vline, H);//wa6ahl
+                }
+                //if(i == 1 && !show_freq_offset) break;
+            }
+
+            // Draw horizontal lines
+            for (int i = 1; i < h_steps; i++)
+            {
+                int xOffset = 0;
+                int num = tx_spectrum_grid_max - i * grid_step;
+                int y = (int)((double)(tx_spectrum_grid_max - num) * H / y_range);
+                if (bottom) g.DrawLine(tx_hgrid_pen, 0, H + y, W, H + y);
+                else g.DrawLine(tx_hgrid_pen, 0, y, W, y);
+
+                // Draw horizontal line labels
+                if (i != 1) // avoid intersecting vertical and horizontal labels
+                {
+                    num = tx_spectrum_grid_max - i * grid_step;
+                    string label = num.ToString();
+                    if (label.Length == 3)
+                        xOffset = (int)g.MeasureString("-", font9).Width - 2;
+                    int offset = (int)(label.Length * 4.1);
+                    SizeF size = g.MeasureString(label, font9);
+
+                    int x = 0;
+                    switch (tx_display_label_align)
+                    {
+                        case DisplayLabelAlignment.LEFT:
+                            x = xOffset + 3;
+                            break;
+                        case DisplayLabelAlignment.CENTER:
+                            x = center_line_x + xOffset;
+                            break;
+                        case DisplayLabelAlignment.RIGHT:
+                            x = (int)(W - size.Width - 3);
+                            break;
+                        case DisplayLabelAlignment.AUTO:
+                            x = xOffset + 3;
+                            break;
+                        case DisplayLabelAlignment.OFF:
+                            x = W;
+                            break;
+                    }
+
+                    y -= 8;
+                    if (y + 9 < H)
+                    {
+                        if (bottom) g.DrawString(label, font9, grid_tx_text_brush, x, H + y);
+                        else g.DrawString(label, font9, grid_tx_text_brush, x, y);
+                    }
+                }
+            }
+
+            // Draw 0Hz vertical line if visible
+            if (center_line_x >= 0 && center_line_x <= W)
+            {
+                if (bottom)
+                {
+                    g.DrawLine(tx_grid_zero_pen, center_line_x, H + top, center_line_x, H + H);
+                    g.DrawLine(tx_grid_zero_pen, center_line_x + 1, H + top, center_line_x + 1, H + H);
+                }
+                else
+                {
+                    g.DrawLine(tx_grid_zero_pen, center_line_x, top, center_line_x, H);
+                    g.DrawLine(tx_grid_zero_pen, center_line_x + 1, top, center_line_x + 1, H);
+                }
+            }
+
+            if (show_freq_offset)
+            {
+                if (bottom) g.DrawString("0", font9, tx_grid_zero_pen.Brush, center_line_x - 5, H + (float)Math.Floor(H * .01));
+                else g.DrawString("0", font9, tx_grid_zero_pen.Brush, center_line_x - 5, (float)Math.Floor(H * .01));
+            }
+
+            if (high_swr && rx == 1)
+                g.DrawString("High SWR", font14, Brushes.Red, 245, 20);
+            
+        }
 
 		private static void DrawWaterfallGrid(ref Graphics g, int W, int H, int rx, bool bottom)
 		{
 			// draw background
-			if(bottom) g.FillRectangle(new SolidBrush(display_background_color), 0, H, W, H);
-			else g.FillRectangle(new SolidBrush(display_background_color), 0, 0, W, H);
-
+    		if(bottom) g.FillRectangle(display_background_brush, 0, H, W, H);
+			else g.FillRectangle(display_background_brush, 0, 0, W, H);
+            
 			int low = rx_display_low;					// initialize variables
 			int high = rx_display_high;
 			int mid_w = W/2;
@@ -2191,11 +3527,6 @@ namespace PowerSDR
 			int step_power = 1;
 			int step_index = 0;
 			int freq_step_size = 50;
-
-			System.Drawing.Font font = new System.Drawing.Font("Arial", 9);
-			SolidBrush grid_text_brush = new SolidBrush(grid_text_color);
-			Pen grid_pen = new Pen(grid_color);
-			Pen tx_filter_pen = new Pen(display_filter_tx_color);
 			int y_range = spectrum_grid_max - spectrum_grid_min;
 			int filter_low, filter_high;
 
@@ -2247,8 +3578,8 @@ namespace PowerSDR
 				{
 					// draw Sub RX 0Hz line
 					int x = (int)((float)(vfoa_sub_hz-vfoa_hz-low)/(high-low)*W);
-					g.DrawLine(new Pen(sub_rx_zero_line_color), x, 0, x, top);
-					g.DrawLine(new Pen(sub_rx_zero_line_color), x-1, 0, x-1, top);
+					//g.DrawLine(new Pen(sub_rx_zero_line_color), x, 0, x, top);
+					//g.DrawLine(new Pen(sub_rx_zero_line_color), x-1, 0, x-1, top);
 
 					// draw Sub RX filter
 					// get filter screen coordinates
@@ -2259,8 +3590,8 @@ namespace PowerSDR
 					if(filter_left_x == filter_right_x) filter_right_x = filter_left_x+1;
 
 					// draw rx filter
-					g.FillRectangle(new SolidBrush(sub_rx_filter_color),	// draw filter overlay
-						filter_left_x, 0, filter_right_x-filter_left_x, top);
+					//g.FillRectangle(new SolidBrush(sub_rx_filter_color),	// draw filter overlay
+						//filter_left_x, 0, filter_right_x-filter_left_x, top);
 				}
 
 				if(!(mox && (rx1_dsp_mode == DSPMode.CWL || rx1_dsp_mode == DSPMode.CWU)))
@@ -2273,8 +3604,8 @@ namespace PowerSDR
 					if(filter_left_x == filter_right_x) filter_right_x = filter_left_x+1;
 
 					// draw rx filter
-					g.FillRectangle(new SolidBrush(display_filter_color),	// draw filter overlay
-						filter_left_x, 0, filter_right_x-filter_left_x, top);
+					//g.FillRectangle(new SolidBrush(display_filter_color),	// draw filter overlay
+						//filter_left_x, 0, filter_right_x-filter_left_x, top);
 				}
 
 				if(!mox && draw_tx_filter &&
@@ -2295,10 +3626,10 @@ namespace PowerSDR
 						filter_right_x = (int)((float)(tx_filter_high-low+xit_hz+(vfoa_sub_hz-vfoa_hz))/(high-low)*W);
 					}
 				
-					g.DrawLine(tx_filter_pen, filter_left_x, H, filter_left_x, H+top);		// draw tx filter overlay
-					g.DrawLine(tx_filter_pen, filter_left_x+1, H, filter_left_x+1, H+top);	// draw tx filter overlay
-					g.DrawLine(tx_filter_pen, filter_right_x, H, filter_right_x, H+top);		// draw tx filter overlay
-					g.DrawLine(tx_filter_pen, filter_right_x+1, H, filter_right_x+1, H+top);	// draw tx filter overlay
+					//g.DrawLine(tx_filter_pen, filter_left_x, H, filter_left_x, H+top);		// draw tx filter overlay
+					//g.DrawLine(tx_filter_pen, filter_left_x+1, H, filter_left_x+1, H+top);	// draw tx filter overlay
+					//g.DrawLine(tx_filter_pen, filter_right_x, H, filter_right_x, H+top);		// draw tx filter overlay
+					//g.DrawLine(tx_filter_pen, filter_right_x+1, H, filter_right_x+1, H+top);	// draw tx filter overlay
 				}
 		
 				if(!mox && draw_tx_cw_freq &&
@@ -2381,16 +3712,16 @@ namespace PowerSDR
                         actual_fgrid == 50.0 || actual_fgrid == 54.0 ||
                         actual_fgrid == 144.0 || actual_fgrid == 148.0)
                     {
-                        if (bottom) g.DrawLine(new Pen(band_edge_color), vgrid, H + top, vgrid, H + H);
-                        else g.DrawLine(new Pen(band_edge_color), vgrid, top, vgrid, H);
+                       /* if (bottom) g.DrawLine(band_edge_pen, vgrid, H + top, vgrid, H + H);
+                        else g.DrawLine(band_edge_pen, vgrid, top, vgrid, H);*/
 
                         label = actual_fgrid.ToString("f3");
                         if (actual_fgrid < 10) offsetL = (int)((label.Length + 1) * 4.1) - 14;
                         else if (actual_fgrid < 100.0) offsetL = (int)((label.Length + 1) * 4.1) - 11;
                         else offsetL = (int)((label.Length + 1) * 4.1) - 8;
 
-                        if (bottom) g.DrawString(label, font, new SolidBrush(band_edge_color), vgrid - offsetL, H + (float)Math.Floor(H * .01));
-                        else g.DrawString(label, font, new SolidBrush(band_edge_color), vgrid - offsetL, (float)Math.Floor(H * .01));
+                        if (bottom) g.DrawString(label, font9, band_edge_pen.Brush, vgrid - offsetL, H + (float)Math.Floor(H * .01));
+                        else g.DrawString(label, font9, band_edge_pen.Brush, vgrid - offsetL, (float)Math.Floor(H * .01));
   
                             break;
                     }
@@ -2409,16 +3740,16 @@ namespace PowerSDR
                             actual_fgrid == 28.0 || actual_fgrid == 29.7 ||
                             actual_fgrid == 50.0 || actual_fgrid == 54.0)
                         {
-                            if (bottom) g.DrawLine(new Pen(band_edge_color), vgrid, H + top, vgrid, H + H);
-                            else g.DrawLine(new Pen(band_edge_color), vgrid, top, vgrid, H);
+                            if (bottom) g.DrawLine(band_edge_pen, vgrid, H + top, vgrid, H + H);
+                            else g.DrawLine(band_edge_pen, vgrid, top, vgrid, H);
 
                             label = actual_fgrid.ToString("f3");
                             if (actual_fgrid < 10) offsetL = (int)((label.Length + 1) * 4.1) - 14;
                             else if (actual_fgrid < 100.0) offsetL = (int)((label.Length + 1) * 4.1) - 11;
                             else offsetL = (int)((label.Length + 1) * 4.1) - 8;
 
-                            if (bottom) g.DrawString(label, font, new SolidBrush(band_edge_color), vgrid - offsetL, H + (float)Math.Floor(H * .01));
-                            else g.DrawString(label, font, new SolidBrush(band_edge_color), vgrid - offsetL, (float)Math.Floor(H * .01));
+                            if (bottom) g.DrawString(label, font9, band_edge_pen.Brush, vgrid - offsetL, H + (float)Math.Floor(H * .01));
+                            else g.DrawString(label, font9, band_edge_pen.Brush, vgrid - offsetL, (float)Math.Floor(H * .01));
 
                             break;
                         }
@@ -2437,16 +3768,16 @@ namespace PowerSDR
                             actual_fgrid == 28.0 || actual_fgrid == 29.7 ||
                             actual_fgrid == 50.08 || actual_fgrid == 51.0)
                         {
-                            if (bottom) g.DrawLine(new Pen(band_edge_color), vgrid, H + top, vgrid, H + H);
-                            else g.DrawLine(new Pen(band_edge_color), vgrid, top, vgrid, H);
+                            if (bottom) g.DrawLine(band_edge_pen, vgrid, H + top, vgrid, H + H);
+                            else g.DrawLine(band_edge_pen, vgrid, top, vgrid, H);
 
                             label = actual_fgrid.ToString("f3");
                             if (actual_fgrid < 10) offsetL = (int)((label.Length + 1) * 4.1) - 14;
                             else if (actual_fgrid < 100.0) offsetL = (int)((label.Length + 1) * 4.1) - 11;
                             else offsetL = (int)((label.Length + 1) * 4.1) - 8;
 
-                            if (bottom) g.DrawString(label, font, new SolidBrush(band_edge_color), vgrid - offsetL, H + (float)Math.Floor(H * .01));
-                            else g.DrawString(label, font, new SolidBrush(band_edge_color), vgrid - offsetL, (float)Math.Floor(H * .01));
+                            if (bottom) g.DrawString(label, font9, band_edge_pen.Brush, vgrid - offsetL, H + (float)Math.Floor(H * .01));
+                            else g.DrawString(label, font9, band_edge_pen.Brush, vgrid - offsetL, (float)Math.Floor(H * .01));
 
                             break;
                         }
@@ -2465,16 +3796,16 @@ namespace PowerSDR
                             actual_fgrid == 28.0 || actual_fgrid == 29.7 ||
                             actual_fgrid == 50.0 || actual_fgrid == 54.0)
                         {
-                            if (bottom) g.DrawLine(new Pen(band_edge_color), vgrid, H + top, vgrid, H + H);
-                            else g.DrawLine(new Pen(band_edge_color), vgrid, top, vgrid, H);
+                            if (bottom) g.DrawLine(band_edge_pen, vgrid, H + top, vgrid, H + H);
+                            else g.DrawLine(band_edge_pen, vgrid, top, vgrid, H);
 
                             label = actual_fgrid.ToString("f3");
                             if (actual_fgrid < 10) offsetL = (int)((label.Length + 1) * 4.1) - 14;
                             else if (actual_fgrid < 100.0) offsetL = (int)((label.Length + 1) * 4.1) - 11;
                             else offsetL = (int)((label.Length + 1) * 4.1) - 8;
 
-                            if (bottom) g.DrawString(label, font, new SolidBrush(band_edge_color), vgrid - offsetL, H + (float)Math.Floor(H * .01));
-                            else g.DrawString(label, font, new SolidBrush(band_edge_color), vgrid - offsetL, (float)Math.Floor(H * .01));
+                            if (bottom) g.DrawString(label, font9, band_edge_pen.Brush, vgrid - offsetL, H + (float)Math.Floor(H * .01));
+                            else g.DrawString(label, font9, band_edge_pen.Brush, vgrid - offsetL, (float)Math.Floor(H * .01));
 
                            break;
                         }
@@ -2493,16 +3824,16 @@ namespace PowerSDR
                             actual_fgrid == 28.0 || actual_fgrid == 29.7 ||
                             actual_fgrid == 50.08 || actual_fgrid == 51.0)
                         {
-                            if (bottom) g.DrawLine(new Pen(band_edge_color), vgrid, H + top, vgrid, H + H);
-                            else g.DrawLine(new Pen(band_edge_color), vgrid, top, vgrid, H);
+                            if (bottom) g.DrawLine(band_edge_pen, vgrid, H + top, vgrid, H + H);
+                            else g.DrawLine(band_edge_pen, vgrid, top, vgrid, H);
 
                             label = actual_fgrid.ToString("f3");
                             if (actual_fgrid < 10) offsetL = (int)((label.Length + 1) * 4.1) - 14;
                             else if (actual_fgrid < 100.0) offsetL = (int)((label.Length + 1) * 4.1) - 11;
                             else offsetL = (int)((label.Length + 1) * 4.1) - 8;
 
-                            if (bottom) g.DrawString(label, font, new SolidBrush(band_edge_color), vgrid - offsetL, H + (float)Math.Floor(H * .01));
-                            else g.DrawString(label, font, new SolidBrush(band_edge_color), vgrid - offsetL, (float)Math.Floor(H * .01));
+                            if (bottom) g.DrawString(label, font9, band_edge_pen.Brush, vgrid - offsetL, H + (float)Math.Floor(H * .01));
+                            else g.DrawString(label, font9, band_edge_pen.Brush, vgrid - offsetL, (float)Math.Floor(H * .01));
 
                             break;
                         }
@@ -2528,16 +3859,16 @@ namespace PowerSDR
                         actual_fgrid == 28.0 || actual_fgrid == 29.7 ||
                         actual_fgrid == 50.0 || actual_fgrid == 54.0)
                         {
-                            if (bottom) g.DrawLine(new Pen(band_edge_color), vgrid, H + top, vgrid, H + H);
-                            else g.DrawLine(new Pen(band_edge_color), vgrid, top, vgrid, H);
+                            if (bottom) g.DrawLine(band_edge_pen, vgrid, H + top, vgrid, H + H);
+                            else g.DrawLine(band_edge_pen, vgrid, top, vgrid, H);
 
                             label = actual_fgrid.ToString("f3");
                             if (actual_fgrid < 10) offsetL = (int)((label.Length + 1) * 4.1) - 14;
                             else if (actual_fgrid < 100.0) offsetL = (int)((label.Length + 1) * 4.1) - 11;
                             else offsetL = (int)((label.Length + 1) * 4.1) - 8;
 
-                            if (bottom) g.DrawString(label, font, new SolidBrush(band_edge_color), vgrid - offsetL, H + (float)Math.Floor(H * .01));
-                            else g.DrawString(label, font, new SolidBrush(band_edge_color), vgrid - offsetL, (float)Math.Floor(H * .01));
+                            if (bottom) g.DrawString(label, font9, band_edge_pen.Brush, vgrid - offsetL, H + (float)Math.Floor(H * .01));
+                            else g.DrawString(label, font9, band_edge_pen.Brush, vgrid - offsetL, (float)Math.Floor(H * .01));
 
                            break;
                         }
@@ -2557,16 +3888,16 @@ namespace PowerSDR
                             actual_fgrid == 28.0 || actual_fgrid == 29.7 ||
                             actual_fgrid == 50.0 || actual_fgrid == 54.0)
                         {
-                            if (bottom) g.DrawLine(new Pen(band_edge_color), vgrid, H + top, vgrid, H + H);
-                            else g.DrawLine(new Pen(band_edge_color), vgrid, top, vgrid, H);
+                            if (bottom) g.DrawLine(band_edge_pen, vgrid, H + top, vgrid, H + H);
+                            else g.DrawLine(band_edge_pen, vgrid, top, vgrid, H);
 
                             label = actual_fgrid.ToString("f3");
                             if (actual_fgrid < 10) offsetL = (int)((label.Length + 1) * 4.1) - 14;
                             else if (actual_fgrid < 100.0) offsetL = (int)((label.Length + 1) * 4.1) - 11;
                             else offsetL = (int)((label.Length + 1) * 4.1) - 8;
 
-                            if (bottom) g.DrawString(label, font, new SolidBrush(band_edge_color), vgrid - offsetL, H + (float)Math.Floor(H * .01));
-                            else g.DrawString(label, font, new SolidBrush(band_edge_color), vgrid - offsetL, (float)Math.Floor(H * .01));
+                            if (bottom) g.DrawString(label, font9, band_edge_pen.Brush, vgrid - offsetL, H + (float)Math.Floor(H * .01));
+                            else g.DrawString(label, font9, band_edge_pen.Brush, vgrid - offsetL, (float)Math.Floor(H * .01));
 
                             break;
                         }
@@ -2639,9 +3970,9 @@ namespace PowerSDR
                                     }
                                 }
                             }
-                            if (bottom) g.DrawLine(grid_pen, vgrid, H + top, vgrid, H + H);
+                           /* if (bottom) g.DrawLine(grid_pen, vgrid, H + top, vgrid, H + H);
                             else g.DrawLine(grid_pen, vgrid, top, vgrid, H);			//wa6ahl
-                            grid_pen.DashStyle = DashStyle.Solid;
+                            grid_pen.DashStyle = DashStyle.Solid;*/
 
                             if (((double)((int)(actual_fgrid * 1000))) == actual_fgrid * 1000)
                             {
@@ -2671,17 +4002,17 @@ namespace PowerSDR
                                 else offsetL = (int)((label.Length) * 4.1) - 8;
                             }
 
-                            if (bottom) g.DrawString(label, font, grid_text_brush, vgrid - offsetL, H + (float)Math.Floor(H * .01));
-                            else g.DrawString(label, font, grid_text_brush, vgrid - offsetL, (float)Math.Floor(H * .01));
+                            if (bottom) g.DrawString(label, font9, grid_text_brush, vgrid - offsetL, H + (float)Math.Floor(H * .01));
+                            else g.DrawString(label, font9, grid_text_brush, vgrid - offsetL, (float)Math.Floor(H * .01));
                             break;
                         }
                     }
 				}
 				else
 				{
-					vgrid = Convert.ToInt32((double)-(fgrid-low)/(low-high)*W);	//wa6ahl
+					/* vgrid = Convert.ToInt32((double)-(fgrid-low)/(low-high)*W);	//wa6ahl
 					if(bottom) g.DrawLine(grid_pen, vgrid, H+top, vgrid, H+H);
-					else g.DrawLine(grid_pen, vgrid, top, vgrid, H);			//wa6ahl
+					else g.DrawLine(grid_pen, vgrid, top, vgrid, H); */		//wa6ahl
 
 					double new_fgrid = (vfoa_hz + fgrid) / 1000000;
 
@@ -2690,13 +4021,13 @@ namespace PowerSDR
 					offsetR = (int)(label.Length*4.1);
 					if ((vgrid-offsetL >=0) && (vgrid+offsetR < W) && (fgrid != 0))
 					{
-						if(bottom) g.DrawString(label, font, grid_text_brush, vgrid-offsetL, H+(float)Math.Floor(H*.01));
-						else g.DrawString(label, font, grid_text_brush, vgrid-offsetL, (float)Math.Floor(H*.01));
+						if(bottom) g.DrawString(label, font9, grid_text_brush, vgrid-offsetL, H+(float)Math.Floor(H*.01));
+						else g.DrawString(label, font9, grid_text_brush, vgrid-offsetL, (float)Math.Floor(H*.01));
 					}
 				}
 			}
 
-          /*  int[] band_edge_list = { 1800000, 2000000, 3500000, 4000000,
+         /*   int[] band_edge_list = { 1800000, 2000000, 3500000, 4000000,
 									   7000000, 7300000, 10100000, 10150000, 14000000, 14350000, 21000000, 21450000,
 									   24890000, 24990000, 28000000, 29700000, 50000000, 54000000, 144000000, 148000000 };
 			
@@ -2710,7 +4041,7 @@ namespace PowerSDR
 					else g.DrawLine(new Pen(band_edge_color), temp_vline, 0, temp_vline, top);
 				}
 				if(i == 1 && !show_freq_offset) break;
-			}*/
+			} */
 
 			/*// Draw horizontal lines
 			for(int i=1; i<h_steps; i++)
@@ -2761,7 +4092,7 @@ namespace PowerSDR
 			}*/
 
 			// Draw 0Hz vertical line if visible
-			if(center_line_x >= 0 && center_line_x <= W)
+			/* if(center_line_x >= 0 && center_line_x <= W)
 			{
 				if(!bottom)
 				{
@@ -2773,26 +4104,26 @@ namespace PowerSDR
 					g.DrawLine(new Pen(grid_zero_color), center_line_x, H, center_line_x, H+top);
 					g.DrawLine(new Pen(grid_zero_color), center_line_x+1, H, center_line_x+1, H+top);
 				}
-			}
+			} */
 
 			if(show_freq_offset)
 			{
-				if(bottom) g.DrawString("0", font, new SolidBrush(grid_zero_color), center_line_x-5, H+(float)Math.Floor(H*.01));
-				else g.DrawString("0", font, new SolidBrush(grid_zero_color), center_line_x-5, (float)Math.Floor(H*.01));
+				if(bottom) g.DrawString("0", font9, grid_zero_pen.Brush, center_line_x-5, H+(float)Math.Floor(H*.01));
+				else g.DrawString("0", font9, grid_zero_pen.Brush, center_line_x-5, (float)Math.Floor(H*.01));
 			}
 
 			if(high_swr && !bottom)
-				g.DrawString("High SWR", new System.Drawing.Font("Arial", 14, FontStyle.Bold), new SolidBrush(Color.Red), 245, 20);
-		}
+				g.DrawString("High SWR", font14, Brushes.Red, 245, 20);
+        }
 
 		private static void DrawOffBackground(Graphics g, int W, int H, bool bottom)
 		{
 			// draw background
-			if(bottom) g.FillRectangle(new SolidBrush(display_background_color), 0, H, W, H);
-			else g.FillRectangle(new SolidBrush(display_background_color), 0, 0, W, H);
+    		if(bottom) g.FillRectangle(display_background_brush, 0, H, W, H);
+			else g.FillRectangle(display_background_brush, 0, 0, W, H);
 
-			if(high_swr && !bottom)
-				g.DrawString("High SWR", new System.Drawing.Font("Arial", 14, FontStyle.Bold), new SolidBrush(Color.Red), 245, 20);
+ 			if(high_swr && !bottom)
+				g.DrawString("High SWR", font14, Brushes.Red, 245, 20);
 		}
 
 		private static float[] scope_min = new float[W];
@@ -2821,39 +4152,41 @@ namespace PowerSDR
 			}
 
 			DrawScopeGrid(ref g, W, H, bottom);
-
+ 
 			Point[] points = new Point[W*2];			// create Point array
 			for(int i=0; i<W; i++)						// fill point array
-			{	
-				int pixel = 0;
-				if(bottom) pixel = (int)(H/2 * scope_max[i]);
-				else pixel = (int)(H/2 * scope_max[i]);
-				int y = H/2 - pixel;
-				points[i].X = i;
-				points[i].Y = y;
-				if(bottom) points[i].Y += H;
+			{
+                int pixel = 0;
+                if (bottom) pixel = (int)(H / 2 * scope_max[i]);
+                else pixel = (int)(H / 2 * scope_max[i]);
+                int y = H / 2 - pixel;
+                points[i].X = i;
+                points[i].Y = y;
+                if (bottom) points[i].Y += H;
 
-				if(bottom) pixel = (int)(H/2 * scope_min[i]);
-				else pixel = (int)(H/2 * scope_min[i]);
-				y = H/2 - pixel;
-				points[W*2-1-i].X = i;
-				points[W*2-1-i].Y = y;
-				if(bottom)points[W*2-1-i].Y += H;
-				//if(points[W*2-1-i].Y == points[i].Y)
-				//	points[W*2-1-i].Y += 1;
+                if (bottom) pixel = (int)(H / 2 * scope_min[i]);
+                else pixel = (int)(H / 2 * scope_min[i]);
+                y = H / 2 - pixel;
+                points[W * 2 - 1 - i].X = i;
+                points[W * 2 - 1 - i].Y = y;
+                if (bottom) points[W * 2 - 1 - i].Y += H; 
+                //if(points[W*2-1-i].Y == points[i].Y)
+                //	points[W*2-1-i].Y += 1; 
 			}
-
-			// draw the connected points
-			g.DrawLines(data_line_pen, points);
-			g.FillPolygon(new SolidBrush(data_line_pen.Color), points);
+            //using (Pen data_line_pen = new Pen(new SolidBrush(data_line_color), display_line_width))
+            {
+                // draw the connected points
+                g.DrawLines(data_line_pen, points);
+                g.FillPolygon(data_line_pen.Brush, points);
+            }
 
 			// draw long cursor
 			if(current_click_tune_mode != ClickTuneMode.Off)
 			{
 				Pen p;
 				if(current_click_tune_mode == ClickTuneMode.VFOA)
-					p = new Pen(grid_text_color);
-				else p = new Pen(Color.Red);
+					p = grid_text_pen;
+				else p = Pens.Red;
 				if(bottom) g.DrawLine(p, display_cursor_x, 0, display_cursor_x, H+H);
 				else g.DrawLine(p, display_cursor_x, 0, display_cursor_x, H);
 				g.DrawLine(p, 0, display_cursor_y, W, display_cursor_y);
@@ -2861,6 +4194,124 @@ namespace PowerSDR
 
 			return true;
 		}
+
+        private static float[] scope2_min = new float[W];
+        public static float[] Scope2Min
+        {
+            get { return scope2_min; }
+            set { scope2_min = value; }
+        }
+        private static float[] scope2_max = new float[W];
+        public static float[] Scope2Max
+        {
+            get { return scope2_max; }
+            set { scope2_max = value; }
+        }
+
+        unsafe private static bool DrawScope2(Graphics g, int W, int H, bool bottom)
+        {
+            if (scope_min.Length < W)
+            {
+                scope_min = new float[W];
+                Audio.ScopeMin = scope_min;
+            }
+
+            if (scope_max.Length < W)
+            {
+                scope_max = new float[W];
+                Audio.ScopeMax = scope_max;
+            }
+
+           // if (scope2_min.Length < W)
+           // {
+            //    scope2_min = new float[W];
+            //    Audio.Scope2Min = scope2_min;
+            //}
+            if (scope2_max.Length < W)
+            {
+                scope2_max = new float[W];
+                Audio.Scope2Max = scope2_max;
+            }
+
+            //DrawScopeGrid(ref g, W, H, bottom);
+
+            Point[] points = new Point[W]; // * 2];			// create Point array
+           /* for (int i = 0; i < W; i++)						// fill point array
+            {
+                int pixel = 0;
+                int pixel2 = 0;
+
+                pixel = (int)(H / 2 * scope_max[i]);
+                int y = H / 2 - pixel;
+              
+                pixel2 = (int)(H / 2 * scope2_max[i]);
+                int x = H / 2 - pixel2;
+
+                points[i].X = x; //x; //Horizontal
+                points[i].Y = y; //y; //Vertical    */             
+
+
+              /*  pixel = (int)(H / 2 * scope_min[i]);
+                y = H / 2 - pixel;
+
+                pixel2 = (int)(H / 2 * scope2_min[i]);
+                x = H / 2 - pixel2;
+
+                points[W * 2 - 1 - i].X = x; //-Horizontal
+                points[W * 2 - 1 - i].Y = y; //-Vertical           
+            }*/
+            int y1 = (int)(H * 0.25f);
+            int y2 = (int)(H * 0.5f);
+            int y3 = (int)(H * 0.75f);
+            using (Pen y1_pen = new Pen(Color.FromArgb(64, 64, 64)),
+                       y2_pen = new Pen(Color.FromArgb(48, 48, 48)),
+                       y3_pen = new Pen(Color.FromArgb(64, 64, 64)))
+            {
+                g.DrawLine(y1_pen, 0, y1, W, y1);                
+                g.DrawLine(y2_pen, 0, y2, W, y2);
+                g.DrawLine(y3_pen, 0, y3, W, y3);
+            }
+
+            int samples = scope2_max.Length;
+            float xScale = (float)samples / W;
+            float yScale = (float)H / 4;
+
+            // draw the left input samples
+            points[0].X = 0;
+            points[0].Y = (int)(y1 - (scope2_max[0] * yScale));
+
+             for (int x = 0; x < W; x++)
+            {
+                int i = (int)Math.Truncate((float)x * xScale);
+                int y = (int)(y1 - (scope2_max[i] * yScale));
+                points[x].X = x;
+                points[x].Y = y;
+            }
+
+            // draw the connected points
+            using (Pen waveform_line_pen = new Pen(Color.LightGreen, 0.2f))
+            {
+                //g.DrawPolygon(data_line_pen, points);
+                g.DrawLines(waveform_line_pen, points);
+                //g.FillPolygon(new SolidBrush(data_line_pen.Color), points);
+                // draw the right input samples
+
+                points[0].X = 0;
+                points[0].Y = (int)(y2 - (scope_max[0] * yScale));
+                for (int x = 0; x < W; x++)
+                {
+                    int i = (int)Math.Truncate((float)x * xScale);
+                    int y = (int)(y3 - (scope_max[i] * yScale));
+                    //int X = (int)(scope2_max[i] * W);
+                    points[x].X = x;// (int)(scope2_max[x]);
+                    points[x].Y = y;// y;
+                }
+                   // draw the waveform
+                    g.DrawLines(waveform_line_pen, points);
+            }   
+ 
+            return true;
+        }
 
 		unsafe private static bool DrawPhase(Graphics g, int W, int H, bool bottom)
 		{
@@ -2884,6 +4335,7 @@ namespace PowerSDR
 				data_ready_bottom = false;
 			}
 
+            
 			Point[] points = new Point[num_points];		// declare Point array
 			for(int i=0,j=0; i<num_points; i++,j+=8)	// fill point array
 			{
@@ -2905,6 +4357,7 @@ namespace PowerSDR
 			}
 			
 			// draw each point
+            //using (Pen data_line_pen = new Pen(new SolidBrush (data_line_color), display_line_width))
 			for(int i=0; i<num_points; i++)
 				g.DrawRectangle(data_line_pen, points[i].X, points[i].Y, 1, 1);
 
@@ -2913,12 +4366,11 @@ namespace PowerSDR
 			{
 				Pen p;
 				if(current_click_tune_mode == ClickTuneMode.VFOA)
-					p = new Pen(grid_text_color);
-				else p = new Pen(Color.Red);
+					p = grid_text_pen;
+				else p = Pens.Red;
 				g.DrawLine(p, display_cursor_x, 0, display_cursor_x, H);
 				g.DrawLine(p, 0, display_cursor_y, W, display_cursor_y);
-			}
-
+			}            
 			return true;
 		}
 
@@ -2943,8 +4395,8 @@ namespace PowerSDR
 						Win32.memcpy(wptr, rptr, BUFFER_SIZE*sizeof(float));
 				data_ready_bottom = false;
 			}
-
-			Point[] points = new Point[num_points];		// declare Point array
+           
+            Point[] points = new Point[num_points];		// declare Point array
 			for(int i=0; i<num_points; i++)	// fill point array
 			{
 				int x = 0;
@@ -2965,6 +4417,7 @@ namespace PowerSDR
 			}
 			
 			// draw each point
+            //using ( Pen data_line_pen = new Pen(new SolidBrush(data_line_color), display_line_width))
 			for(int i=0; i<num_points; i++)
 				g.DrawRectangle(data_line_pen, points[i].X, points[i].Y, 1, 1);
 
@@ -2973,8 +4426,8 @@ namespace PowerSDR
 			{
 				Pen p;
 				if(current_click_tune_mode == ClickTuneMode.VFOA)
-					p = new Pen(grid_text_color);
-				else p = new Pen(Color.Red);
+					p = grid_text_pen;
+				else p = Pens.Red;
 				if(bottom) g.DrawLine(p, display_cursor_x, 0, display_cursor_x, H);
 				else g.DrawLine(p, display_cursor_x, H, display_cursor_x, H+H);
 				g.DrawLine(p, 0, display_cursor_y, W, display_cursor_y);
@@ -2984,7 +4437,9 @@ namespace PowerSDR
 		private static Point[] points;
 		unsafe static private bool DrawSpectrum(Graphics g, int W, int H, bool bottom)
 		{
-			DrawSpectrumGrid(ref g, W, H, bottom);
+            if (!mox && grid_control) DrawSpectrumGrid(ref g, W, H, bottom);
+            if (mox && tx_grid_control) DrawTXSpectrumGrid(ref g, W, H, bottom);
+            //DrawSpectrumGrid(ref g, W, H, bottom);
 			if(points == null || points.Length < W) 
 				points = new Point[W];			// array of points to display
 			float slope = 0.0f;						// samples to process per pixel
@@ -3018,7 +4473,8 @@ namespace PowerSDR
 				if(mox && (rx1_dsp_mode == DSPMode.CWL || rx1_dsp_mode == DSPMode.CWU))
 				{
 					for(int i=0; i<current_display_data.Length; i++)
-						current_display_data[i] = -200.0f;
+                        current_display_data[i] = spectrum_grid_min - rx1_display_cal_offset;
+						//current_display_data[i] = -200.0f;
 				}
 				else
 				{
@@ -3033,12 +4489,12 @@ namespace PowerSDR
 			}
 			else if(bottom && data_ready_bottom)
 			{
-				if(mox && (rx1_dsp_mode == DSPMode.CWL || rx1_dsp_mode == DSPMode.CWU))
+				/*if(mox && (rx1_dsp_mode == DSPMode.CWL || rx1_dsp_mode == DSPMode.CWU))
 				{
 					for(int i=0; i<current_display_data_bottom.Length; i++)
 						current_display_data_bottom[i] = -200.0f;
 				}
-				else
+				else */
 				{
 					fixed(void *rptr = &new_display_data_bottom[0])
 						fixed(void *wptr = &current_display_data_bottom[0])
@@ -3067,7 +4523,8 @@ namespace PowerSDR
 			if ((num_samples - start_sample_index) > (BUFFER_SIZE+1))
 				num_samples = BUFFER_SIZE - start_sample_index;
 
-			slope = (float)num_samples/(float)W;
+            
+            slope = (float)num_samples / (float)W;
 			for(int i=0; i<W; i++)
 			{
 				float max = float.MinValue;
@@ -3097,9 +4554,15 @@ namespace PowerSDR
 							if (current_display_data_bottom[j] > max) max=current_display_data_bottom[j];
 					}
 				}
-
-				if(!bottom) max += rx1_display_cal_offset;
-				else max += rx2_display_cal_offset;
+                if (!mox)
+                {
+                    if (!bottom) max += rx1_display_cal_offset;
+                    else max += rx2_display_cal_offset;
+                }
+                else
+                {
+                    if (!bottom) max += tx_display_cal_offset;
+                }
 
 				if(!mox)
 				{
@@ -3115,11 +4578,184 @@ namespace PowerSDR
 
 				points[i].X = i;
                 points[i].Y = (int)Math.Min((Math.Floor((spectrum_grid_max - max) * H / yRange)), H);
-				if(bottom) points[i].Y += H;
+                if (bottom) points[i].Y += H;
 			}
 
 			max_y = local_max_y;
+            //using (Pen data_line_pen = new Pen(new SolidBrush(data_line_color), display_line_width))
+			g.DrawLines(data_line_pen, points);
 
+			// draw long cursor
+			if(current_click_tune_mode != ClickTuneMode.Off)
+			{
+				Pen p;
+				if(current_click_tune_mode == ClickTuneMode.VFOA)
+					p = grid_text_pen;
+				else p = Pens.Red;
+				if(bottom)
+				{
+					g.DrawLine(p, display_cursor_x, H, display_cursor_x, H+H);
+					g.DrawLine(p, 0, display_cursor_y, W, display_cursor_y);
+				}
+				else
+				{
+					g.DrawLine(p, display_cursor_x, 0, display_cursor_x, H);
+					g.DrawLine(p, 0, display_cursor_y, W, display_cursor_y);
+				}
+			}
+
+			return true;
+		}
+
+/*		private static Point[] points;
+		unsafe static private bool DrawSpectrum(Graphics g, int W, int H, bool bottom)
+		{
+            if (!mox && grid_control) DrawSpectrumGrid(ref g, W, H, bottom);
+            if (mox && tx_grid_control) DrawSpectrumGrid(ref g, W, H, bottom);
+            //DrawSpectrumGrid(ref g, W, H, bottom);
+			if(points == null || points.Length < W) 
+				points = new Point[W];			// array of points to display
+			float slope = 0.0f;						// samples to process per pixel
+			int num_samples = 0;					// number of samples to process
+			int start_sample_index = 0;				// index to begin looking at samples
+			int low = 0;
+			int high = 0;
+			float local_max_y = float.MinValue;
+
+			if(!mox)
+			{
+				low = rx_display_low;
+				high = rx_display_high;
+			}
+			else
+			{
+				low = tx_display_low;
+				high = tx_display_high;
+			}
+
+			if(rx1_dsp_mode == DSPMode.DRM)
+			{
+				low = 2500;
+				high = 21500;
+			}
+
+			int yRange = spectrum_grid_max - spectrum_grid_min;
+
+			if(!bottom && data_ready)
+			{
+				if(mox && (rx1_dsp_mode == DSPMode.CWL || rx1_dsp_mode == DSPMode.CWU))
+				{
+					for(int i=0; i<current_display_data.Length; i++)
+                        current_display_data[i] = spectrum_grid_min - rx1_display_cal_offset;
+						//current_display_data[i] = -200.0f;
+				}
+				else
+				{
+					fixed(void *rptr = &new_display_data[0])
+						fixed(void *wptr = &current_display_data[0])
+							Win32.memcpy(wptr, rptr, BUFFER_SIZE*sizeof(float));
+
+					if ( current_model == Model.SOFTROCK40 ) 
+						console.AdjustDisplayDataForBandEdge(ref current_display_data);
+				}
+				data_ready = false;
+			}
+			else if(bottom && data_ready_bottom)
+			{
+				//if(mox && (rx1_dsp_mode == DSPMode.CWL || rx1_dsp_mode == DSPMode.CWU))
+				//{
+				//	for(int i=0; i<current_display_data_bottom.Length; i++)
+				//		current_display_data_bottom[i] = -200.0f;
+				//}
+				//else
+				{
+					fixed(void *rptr = &new_display_data_bottom[0])
+						fixed(void *wptr = &current_display_data_bottom[0])
+							Win32.memcpy(wptr, rptr, BUFFER_SIZE*sizeof(float));
+
+					if ( current_model == Model.SOFTROCK40 ) 
+						console.AdjustDisplayDataForBandEdge(ref current_display_data_bottom);
+				}
+				data_ready_bottom = false;
+			}
+
+			if(!bottom && average_on)
+				console.UpdateRX1DisplayAverage(rx1_average_buffer, current_display_data);
+			else if(bottom && rx2_avg_on)
+				console.UpdateRX2DisplayAverage(rx2_average_buffer, current_display_data_bottom);
+
+			if(!bottom && peak_on)
+				UpdateDisplayPeak(rx1_peak_buffer, current_display_data);
+			else if(bottom && rx2_peak_on)
+				UpdateDisplayPeak(rx2_peak_buffer, current_display_data_bottom);
+
+			start_sample_index = (BUFFER_SIZE>>1) + (int)((low * BUFFER_SIZE) / sample_rate);
+			num_samples = (int)((high - low) * BUFFER_SIZE / sample_rate);
+
+			if (start_sample_index < 0) start_sample_index = 0;
+			if ((num_samples - start_sample_index) > (BUFFER_SIZE+1))
+				num_samples = BUFFER_SIZE - start_sample_index;
+
+            
+            slope = (float)num_samples / (float)W;
+			for(int i=0; i<W; i++)
+			{
+				float max = float.MinValue;
+				float dval = i*slope + start_sample_index;
+				int lindex = (int)Math.Floor(dval);
+				if(!bottom)
+				{
+					if (slope <= 1) 
+						max =  current_display_data[lindex]*((float)lindex-dval+1) + current_display_data[lindex+1]*(dval-(float)lindex);
+					else 
+					{
+						int rindex = (int)Math.Floor(dval + slope);
+						if (rindex > BUFFER_SIZE) rindex = BUFFER_SIZE;
+						for(int j=lindex;j<rindex;j++)
+							if (current_display_data[j] > max) max=current_display_data[j];
+					}
+				}
+				else
+				{
+					if (slope <= 1) 
+						max =  current_display_data_bottom[lindex]*((float)lindex-dval+1) + current_display_data_bottom[lindex+1]*(dval-(float)lindex);
+					else 
+					{
+						int rindex = (int)Math.Floor(dval + slope);
+						if (rindex > BUFFER_SIZE) rindex = BUFFER_SIZE;
+						for(int j=lindex;j<rindex;j++)
+							if (current_display_data_bottom[j] > max) max=current_display_data_bottom[j];
+					}
+				}
+                if (!mox)
+                {
+                    if (!bottom) max += rx1_display_cal_offset;
+                    else max += rx2_display_cal_offset;
+                }
+                else
+                {
+                    if (!bottom) max += tx_display_cal_offset;
+                }
+
+				if(!mox)
+				{
+					if(!bottom)	max += rx1_preamp_offset;
+					else max += rx2_preamp_offset;
+				}
+
+				if(max > local_max_y)
+				{
+					local_max_y = max;
+					max_x = i;
+				}
+
+				points[i].X = i;
+                points[i].Y = (int)Math.Min((Math.Floor((spectrum_grid_max - max) * H / yRange)), H);
+                if (bottom) points[i].Y += H;
+			}
+
+			max_y = local_max_y;
+            using (Pen data_line_pen = new Pen(new SolidBrush(data_line_color), display_line_width))
 			g.DrawLines(data_line_pen, points);
 
 			// draw long cursor
@@ -3139,30 +4775,57 @@ namespace PowerSDR
 					g.DrawLine(p, display_cursor_x, 0, display_cursor_x, H);
 					g.DrawLine(p, 0, display_cursor_y, W, display_cursor_y);
 				}
+                p.Dispose();
 			}
 
 			return true;
-		}
-
+		} */
+     
 		unsafe static private bool DrawPanadapter(Graphics g, int W, int H, int rx, bool bottom)
 		{
-			DrawPanadapterGrid(ref g, W, H, rx, bottom);
-            if (pan_fill)
+            if (!mox && grid_control) DrawPanadapterGrid(ref g, W, H, rx, bottom);
+            if (mox && tx_grid_control) DrawTXPanadapterGrid(ref g, W, H, rx, bottom);
+            if (!mox)
             {
-                if (points == null || points.Length < W + 2)
-                    points = new Point[W + 2];
+                if (pan_fill)
+                {
+                    if (points == null || points.Length < W + 2)
+                        points = new Point[W + 2];
+                }
+                else
+                {
+                    if (points == null || points.Length < W)
+                        points = new Point[W];			// array of points to display
+                }
             }
             else
             {
-                if (points == null || points.Length < W)
-                    points = new Point[W];			// array of points to display
+                if (tx_pan_fill)
+                {
+                    if (points == null || points.Length < W + 2)
+                        points = new Point[W + 2];
+                }
+                else
+                {
+                    if (points == null || points.Length < W)
+                        points = new Point[W];			// array of points to display
+                }
             }
+
 			float slope = 0.0F;						// samples to process per pixel
 			int num_samples = 0;					// number of samples to process
 			int start_sample_index = 0;				// index to begin looking at samples
 			int Low = rx_display_low;
 			int High = rx_display_high;
-			int yRange = spectrum_grid_max - spectrum_grid_min;
+            int yRange;
+            if (!mox)
+            {
+                yRange = spectrum_grid_max - spectrum_grid_min;
+            }
+            else
+            {
+                yRange = tx_spectrum_grid_max - tx_spectrum_grid_min;
+            }
 			float local_max_y = float.MinValue;
 
 			if(rx1_dsp_mode == DSPMode.DRM)
@@ -3252,9 +4915,18 @@ namespace PowerSDR
 							if (current_display_data_bottom[j%4096] > max) max=current_display_data_bottom[j%4096];
 					}
 				}
+                if (!mox)
+                {
+                    if (rx == 1) max += rx1_display_cal_offset;
+                    else if (rx == 2) max += rx2_display_cal_offset;
+                }
+                else
+                {
+                    max += tx_display_cal_offset;
+                }
 
-				if(rx==1) max += rx1_display_cal_offset;
-				else if(rx==2) max += rx2_display_cal_offset;
+				//if(rx==1) max += rx1_display_cal_offset;
+				//else if(rx==2) max += rx2_display_cal_offset;
 
 				if(!mox) 
 				{
@@ -3268,31 +4940,107 @@ namespace PowerSDR
 					max_x = i;
 				}
 
-				points[i].X = i;
-				points[i].Y = (int)(Math.Floor((spectrum_grid_max - max)*H/yRange));
-				if(bottom) points[i].Y += H;
-			} 
-			
-			max_y = local_max_y;
-
-            if (pan_fill)
-            {
-                points[W].X = W; points[W].Y = H;
-                points[W+1].X = 0; points[W+1].Y = H;
-                if (bottom)
+                if (!mox)
                 {
-                    points[W].Y += H;
-                    points[W+1].Y += H;
+                    points[i].X = i;
+                    points[i].Y = (int)(Math.Floor((spectrum_grid_max - max) * H / yRange));
+                    if (bottom) points[i].Y += H;
                 }
-                data_line_pen.Color = Color.FromArgb(100, 255, 255, 255);
-                g.FillPolygon(data_line_pen.Brush, points);
-                points[W] = points[W-1];
-                points[W+1] = points[W-1];
-                data_line_pen.Color = data_line_color;
-                g.DrawLines(data_line_pen, points);                
+                else
+                {
+                    points[i].X = i;
+                    points[i].Y = (int)(Math.Floor((tx_spectrum_grid_max - max) * H / yRange));
+                    if (bottom) points[i].Y += H;
+                }
+			}
+
+			max_y = local_max_y;
+            if (!mox)
+            {
+                if (pan_fill)
+                {
+                    points[W].X = W;
+                    points[W].Y = H;
+
+                    points[W + 1].X = 0;
+                    points[W + 1].Y = H;
+                    if (bottom)
+                    {
+                        points[W].Y += H;
+                        points[W + 1].Y += H;
+                    }
+
+                    //points[W] = points[W-1];
+                    //points[W+1] = points[W-1];
+                    
+                    g.DrawLines(data_line_pen, points);
+                    g.FillPolygon(data_line_fpen.Brush, points);
+
+                    // g.InterpolationMode = InterpolationMode.HighQualityBicubic;
+                   // g.SmoothingMode = SmoothingMode.AntiAlias;
+                   // for (int i = 1; i < W; i++)
+                    //{
+                    //    g.DrawLine(data_line_pen, points[i - 1], points[i]);
+                   // }
+                   // g.SmoothingMode = SmoothingMode.Default;
+                   // g.InterpolationMode = InterpolationMode.Default;
+                }
+                else
+                {
+                   // g.InterpolationMode = InterpolationMode.HighQualityBicubic;
+                   // g.SmoothingMode = SmoothingMode.AntiAlias;
+                   // for (int i = 1; i < W; i++)
+                   // {
+                   //     g.DrawLine(data_line_pen, points[i - 1], points[i]);
+                   // }
+                   // g.SmoothingMode = SmoothingMode.Default;
+                   // g.InterpolationMode = InterpolationMode.Default;
+                    g.DrawLines(data_line_pen, points);
+                }
             }
-            else g.DrawLines(data_line_pen, points);
-			
+            else
+            {
+                if (tx_pan_fill)
+                {
+                    points[W].X = W;
+                    points[W].Y = H;
+
+                    points[W + 1].X = 0;
+                    points[W + 1].Y = H;
+                    if (bottom)
+                    {
+                        points[W].Y += H;
+                        points[W + 1].Y += H;
+                    }
+ 
+                    //points[W] = points[W-1];
+                    //points[W+1] = points[W-1];
+                    
+                    g.DrawLines(tx_data_line_pen, points);
+                    g.FillPolygon(tx_data_line_fpen.Brush, points);
+                    // g.InterpolationMode = InterpolationMode.HighQualityBicubic;
+                    // g.SmoothingMode = SmoothingMode.AntiAlias;
+                    // for (int i = 1; i < W; i++)
+                    //{
+                    //     g.DrawLine(tx_data_line_pen, points[i - 1], points[i]);
+                    // }
+                    // g.SmoothingMode = SmoothingMode.Default;
+                    // g.InterpolationMode = InterpolationMode.Default;
+                }
+                else
+                {
+                    // g.InterpolationMode = InterpolationMode.HighQualityBicubic;
+                    // g.SmoothingMode = SmoothingMode.AntiAlias;
+                    // for (int i = 1; i < W; i++)
+                    // {
+                    //     g.DrawLine(tx_data_line_pen, points[i - 1], points[i]);
+                    // }
+                    // g.SmoothingMode = SmoothingMode.Default;
+                    // g.InterpolationMode = InterpolationMode.Default;
+                    g.DrawLines(tx_data_line_pen, points);
+                }
+            }
+            
 			points = null;
 
 			// draw long cursor
@@ -3300,8 +5048,8 @@ namespace PowerSDR
 			{
 				Pen p;
 				if(current_click_tune_mode == ClickTuneMode.VFOA)
-					p = new Pen(grid_text_color);
-				else p = new Pen(Color.Red);
+					p = grid_text_pen;
+				else p = Pens.Red;
 				if(bottom)
 				{
 					if(display_cursor_y > H)
@@ -3319,7 +5067,6 @@ namespace PowerSDR
 					}
 				}
 			}
-
 			return true;
 		}
 
@@ -3335,7 +5082,8 @@ namespace PowerSDR
 		private static float[] waterfall_data;
 		unsafe static private bool DrawWaterfall(Graphics g, int W, int H, int rx, bool bottom)
 		{
-			DrawWaterfallGrid(ref g, W, H, rx, bottom);
+            if (grid_control) DrawWaterfallGrid(ref g, W, H, rx, bottom);
+            
 			if(waterfall_data == null || waterfall_data.Length < W)
 				waterfall_data = new float[W];		// array of points to display
 			float slope = 0.0F;						// samples to process per pixel
@@ -3450,8 +5198,15 @@ namespace PowerSDR
 						}
 					}
 
-					if(rx==1) max += rx1_display_cal_offset;
-					else if(rx==2) max += rx2_display_cal_offset;
+                    if (!mox)
+                    {
+                        if (rx == 1) max += rx1_display_cal_offset;
+                        else if (rx == 2) max += rx2_display_cal_offset;
+                    }
+                    else
+                    {
+                        max += tx_display_cal_offset;
+                    }
 
 					if(!mox) 
 					{
@@ -3635,8 +5390,8 @@ namespace PowerSDR
 			{
 				Pen p;
 				if(current_click_tune_mode == ClickTuneMode.VFOA)
-					p = new Pen(grid_text_color);
-				else p = new Pen(Color.Red);
+					p = grid_text_pen;
+				else p = Pens.Red;
                 if (bottom)
                 {
                     if (display_cursor_y > H)
@@ -3653,7 +5408,7 @@ namespace PowerSDR
                         g.DrawLine(p, display_cursor_x, 0, display_cursor_x, H);
                         g.DrawLine(p, 0, display_cursor_y, W, display_cursor_y);
                     }
-                }		
+                } 
 			}
 
 			return true;
@@ -3709,15 +5464,15 @@ namespace PowerSDR
 			{
 				//if(!bottom)
 					console.UpdateRX1DisplayAverage(rx1_average_buffer, current_display_data);
-				/*else
-					console.UpdateRX2DisplayAverage(rx2_average_buffer, current_display_data_bottom);*/
+				//else
+					//console.UpdateRX2DisplayAverage(rx2_average_buffer, current_display_data_bottom);
 			}
 			if(peak_on)
 			{
 				//if(!bottom)
 					UpdateDisplayPeak(rx1_peak_buffer, current_display_data);
-				/*else
-					UpdateDisplayPeak(rx2_peak_buffer, current_display_data_bottom);*/
+				//else
+				//	UpdateDisplayPeak(rx2_peak_buffer, current_display_data_bottom);
 			}
 
 			num_samples = (high - low);
@@ -3745,7 +5500,15 @@ namespace PowerSDR
 
 				}
 
-				max += rx1_display_cal_offset;
+                if (!mox)
+                {
+                    max += rx1_display_cal_offset;
+                }
+                else
+                {
+                    max += tx_display_cal_offset;
+                }
+
 				if(!mox) max += rx1_preamp_offset;
 
 				switch(rx1_dsp_mode)
@@ -3791,20 +5554,22 @@ namespace PowerSDR
 					}
 
 					int alpha = (int)Math.Max(255-histogram_history[i]*5, 0);
-					Color c = Color.FromArgb(alpha, 0, 255, 0);
 					int height = points[i].Y-histogram_data[i];
-					g.DrawRectangle(new Pen(c), i, histogram_data[i], 1, height);
-				}
+                    dhp.Color = Color.FromArgb(alpha, 0, 255, 0);
 
+                    // using (Pen dhp = new Pen(Color.FromArgb(alpha, 0, 255, 0)))
+					g.DrawRectangle(dhp, i, histogram_data[i], 1, height);
+				}
+                //using (Pen dhp1 = new Pen(Color.FromArgb(150, 0, 0, 255)),
+                         //  dhp2 = new Pen(Color.FromArgb(150, 255, 0, 0)))
 				if(points[i].Y >= avg)		// value is below the average
 				{
-					Color c = Color.FromArgb(150, 0, 0, 255);
-					g.DrawRectangle(new Pen(c), points[i].X, points[i].Y, 1, H-points[i].Y);
+					g.DrawRectangle(dhp1, points[i].X, points[i].Y, 1, H-points[i].Y);
 				}
 				else 
 				{
-					g.DrawRectangle(new Pen(Color.FromArgb(150, 0, 0, 255)), points[i].X, (int)Math.Floor(avg), 1, H-(int)Math.Floor(avg));
-					g.DrawRectangle(new Pen(Color.FromArgb(150, 255, 0, 0)), points[i].X, points[i].Y, 1, (int)Math.Floor(avg)-points[i].Y);
+					g.DrawRectangle(dhp1, points[i].X, (int)Math.Floor(avg), 1, H-(int)Math.Floor(avg));
+					g.DrawRectangle(dhp2, points[i].X, points[i].Y, 1, (int)Math.Floor(avg)-points[i].Y);
 				}
 			}
 
@@ -3813,11 +5578,11 @@ namespace PowerSDR
 			{
 				Pen p;
 				if(current_click_tune_mode == ClickTuneMode.VFOA)
-					p = new Pen(grid_text_color);
-				else p = new Pen(Color.Red);
+					p = grid_text_pen;
+				else p = Pens.Red;
 				g.DrawLine(p, display_cursor_x, 0, display_cursor_x, H);
 				g.DrawLine(p, 0, display_cursor_y, W, display_cursor_y);
-			}
+ 			} 
 
 			return true;
 		}

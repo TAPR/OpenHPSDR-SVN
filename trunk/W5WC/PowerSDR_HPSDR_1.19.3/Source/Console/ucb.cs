@@ -28,13 +28,13 @@
 
 //#define DEBUG_VERBOSE
 
-using System;
-using System.Diagnostics;
-using System.Threading;
-using System.Windows.Forms;
-
 namespace PowerSDR
 {
+    using System;
+    using System.Diagnostics;
+    using System.Threading;
+    using System.Windows.Forms;
+
 	public class UCB
 	{
 		private const int TIME_OUT_COUNT = 2000;
