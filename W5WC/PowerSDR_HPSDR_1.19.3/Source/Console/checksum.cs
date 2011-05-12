@@ -25,13 +25,13 @@
 //    Austin, TX 78750
 //    USA
 //=================================================================
-using System;
-
-using System.IO;
-using System.Windows.Forms;
 
 namespace PowerSDR
 {
+    using System;
+    using System.IO;
+    using System.Windows.Forms;
+
 	/// <summary>
 	/// Summary description for checksum.
 	/// </summary>

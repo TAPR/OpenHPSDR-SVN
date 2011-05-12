@@ -26,26 +26,26 @@
 //    USA
 //=================================================================
 
-using System;
-using System.Collections;
-using System.ComponentModel;
-using System.Diagnostics;
-using System.Drawing;
-using System.Drawing.Drawing2D;
-using System.Drawing.Imaging;
-using System.Drawing.Text;
-using System.Globalization;
-using System.IO;
-using System.IO.Ports;
-using System.Net;
-using System.Reflection;
-using System.Runtime.InteropServices;
-using System.Threading;
-using System.Text;
-using System.Windows.Forms;
-
 namespace PowerSDR
 {
+    using System;
+    using System.Collections;
+    using System.ComponentModel;
+    using System.Diagnostics;
+    using System.Drawing;
+    using System.Drawing.Drawing2D;
+    using System.Drawing.Imaging;
+    using System.Drawing.Text;
+    using System.Globalization;
+    using System.IO;
+    using System.IO.Ports;
+    using System.Net;
+    using System.Reflection;
+    using System.Runtime.InteropServices;
+    using System.Threading;
+    using System.Text;
+    using System.Windows.Forms;
+
 	#region Radio Class 
 
 	public class Radio
@@ -116,10 +116,10 @@ namespace PowerSDR
 
 		public static void CreateDSP()
 		{
-            System.String app_data_path = "";
+            String app_data_path = "";
             Assembly assembly = Assembly.GetExecutingAssembly();
             FileVersionInfo fvi = FileVersionInfo.GetVersionInfo(assembly.Location);
-            System.String version = fvi.FileVersion.Substring(0, fvi.FileVersion.LastIndexOf("."));
+            String version = fvi.FileVersion; //.Substring(0, fvi.FileVersion.LastIndexOf("."));
             app_data_path = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData)
                 + "\\FlexRadio Systems\\PowerSDR v" + version + "\\wisdom";
 
@@ -1283,6 +1283,7 @@ namespace PowerSDR
 			TXLevelerDecay = tx_leveler_decay;
 			TXLevelerHang = tx_leveler_hang;
 			TXLevelerOn = tx_leveler_on;
+            TXALCOn = tx_alc_on;
 			CurrentWindow = current_window;
 			SpectrumPolyphase = spectrum_polyphase;
 			TXSquelchThreshold = tx_squelch_threshold;
@@ -1838,6 +1839,25 @@ namespace PowerSDR
 				}
 			}
 		}
+
+        private bool tx_alc_on_dsp = true;
+        private bool tx_alc_on = true;
+        public bool TXALCOn
+        {
+            get { return tx_alc_on; }
+            set
+            {
+                tx_alc_on = value;
+                if (update)
+                {
+                    if (value != tx_alc_on_dsp || force)
+                    {
+                        DttSP.SetTXALCSt(thread, value);
+                        tx_alc_on_dsp = value;
+                    }
+                }
+            }
+        }
 
 		private Window current_window_dsp = Window.BLKHARRIS;
 		private Window current_window = Window.BLKHARRIS;

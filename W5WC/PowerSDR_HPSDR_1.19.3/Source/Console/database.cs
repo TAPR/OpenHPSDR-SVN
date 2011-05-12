@@ -26,28 +26,30 @@
 //    USA
 //=================================================================
 
-using System;
-using System.Data;
-using System.Windows.Forms;
-using System.Collections;
-using System.Diagnostics;
-using System.Globalization;
-using System.IO;
-using System.Threading;
-
-
 namespace PowerSDR
 {
+    using System;
+    using System.Data;
+    using System.Windows.Forms;
+    using System.Collections;
+    using System.Diagnostics;
+    using System.Globalization;
+    using System.IO;
+    using System.Threading;
+
 	class DB
 	{
 		#region Variable Declaration
 
 		public static DataSet ds;
 
-        private static string app_data_path = "";
-        public static string AppDataPath
+       // private static string app_data_path = "";
+       // public static string AppDataPath
+        private static string file_name = "";
+        public static string FileName
         {
-            set { app_data_path = value; }
+            //set { app_data_path = value; }
+            set { file_name = value; }
         }
 
 		#endregion
@@ -120,11 +122,11 @@ namespace PowerSDR
 								3.885000, 3.885000, "75M AM Calling Frequency", true,
 								3.885001, 3.999999, "75M SSB",	                true,
 
-								5.330500, 5.330500, "60M Channel 1",			true,
-								5.346500, 5.346500, "60M Channel 2",			true,
                                 5.258500, 5.258500, "60M Channel FA",           true,
 								5.278500, 5.278500, "60M Channel FB",           true,
                                 5.288500, 5.288500, "60M Channel FC",           true,
+ 								5.330500, 5.330500, "60M Channel 1",			true,
+								5.346500, 5.346500, "60M Channel 2",			true,
                                 5.366500, 5.366500, "60M Channel 3/FK",         true,
                                 5.371500, 5.371500, "60M Channel 4/FL",         true,
                                 5.398500, 5.398500, "60M Channel FE",           true,
@@ -447,15 +449,21 @@ namespace PowerSDR
 								"80M", "CWL", "F1", 3.501000,
 								"80M", "LSB", "F6", 3.751000,
 								"80M", "LSB", "F6", 3.850000,
+
                                 "60M", "USB", "F6", 5.258500,
 								"60M", "USB", "F6", 5.278500,
 								"60M", "USB", "F6", 5.288500,
+                                "60M", "USB", "F6", 5.398500,
+								"60M", "USB", "F6", 5.366500,
+								"60M", "USB", "F6", 5.371500,                               
+								"60M", "USB", "F6", 5.403500,
+
 								"60M", "USB", "F6", 5.330500,
 								"60M", "USB", "F6", 5.346500,
 								"60M", "USB", "F6", 5.366500,
-								"60M", "USB", "F6", 5.371500,
-                                "60M", "USB", "F6", 5.398500,
+								"60M", "USB", "F6", 5.371500,                               
 								"60M", "USB", "F6", 5.403500,
+
 								"40M", "CWL", "F1", 7.001000,
 								"40M", "LSB", "F6", 7.152000,
 								"40M", "LSB", "F6", 7.255000,
@@ -1390,8 +1398,10 @@ namespace PowerSDR
 		{
 			ds = new DataSet("Data");
 
-            if (File.Exists(app_data_path + "\\database.xml"))
-                ds.ReadXml(app_data_path + "\\database.xml");
+             if (File.Exists(file_name))
+                ds.ReadXml(file_name);
+         //  if (File.Exists(app_data_path + "\\database.xml"))
+             //   ds.ReadXml(app_data_path + "\\database.xml");
 
 			VerifyTables();
 
@@ -1400,7 +1410,8 @@ namespace PowerSDR
 
 		public static void Update()
 		{
-			ds.WriteXml(app_data_path+"\\database.xml", XmlWriteMode.WriteSchema);
+		     ds.WriteXml(file_name, XmlWriteMode.WriteSchema);
+			//ds.WriteXml(app_data_path+"\\database.xml", XmlWriteMode.WriteSchema);
 		}
 
 		public static void Exit()

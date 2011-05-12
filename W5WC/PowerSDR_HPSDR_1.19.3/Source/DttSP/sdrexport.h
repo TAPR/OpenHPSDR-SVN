@@ -95,6 +95,7 @@ extern struct _uni
     BOOLEAN flag;
     FILE *fp;
     splitfld splt;
+	
   } update;
 
   struct
@@ -138,6 +139,7 @@ extern struct _rx
     double freq, phase;
     OSC gen;
   } osc;
+  
   struct
   {
 	 int decim;
@@ -145,6 +147,7 @@ extern struct _rx
 	 ResStF gen1r,gen1i,gen2r,gen2i;
   } resample;
   float output_gain;
+  
   struct
   {
     ComplexFIR coef;
@@ -160,6 +163,7 @@ extern struct _rx
     NB gen;
     BOOLEAN flag;
   } nb;
+  
   struct
   {
     REAL thresh;
@@ -184,19 +188,23 @@ extern struct _rx
     DTTSPAGC gen;
     BOOLEAN flag;
   } dttspagc;
+  
   struct
   {
     AMD gen;
   } am;
+  
   struct
   {
     FMD gen;
   } fm;
+  
   struct
   {
     BOOLEAN flag;
     SpotToneGen gen;
   } spot;
+  
   struct
   {
     REAL thresh, atten, power;
@@ -222,6 +230,7 @@ extern struct _rx
   {
     BOOLEAN flag;
   } bin;
+  
   REAL norm;
   COMPLEX azim;
   long tick;
@@ -249,6 +258,7 @@ extern struct _tx
     double freq, phase;
     OSC gen;
   } osc;
+  
   struct
   {
     ComplexFIR coef;
@@ -285,13 +295,11 @@ extern struct _tx
     BOOLEAN flag;
   } grapheq;
 
-
   struct
   {
     SpeechProc gen;
     BOOLEAN flag;
   } spr;
-
 
   struct
   {
@@ -378,9 +386,7 @@ extern struct _top
       } i, o;
     } auxr;
 
-
     size_t reset_size;
-
     size_t size;
 
     struct
@@ -434,27 +440,46 @@ extern struct _top
 
 
   // TRX switching
-  struct {
-    struct {
-      struct {
-	SWCHSTATE type;
-	int cnt;
-	REAL val;
+  struct 
+  {
+    struct 
+	{
+      struct 
+	  {
+		SWCHSTATE type;
+		int cnt;
+		REAL val;
       } curr;
-      struct {
+	  
+      struct 
+	  {
 	int size;
 	REAL incr;
       } fall, rise, stdy;
     } env;
-    struct {
+	
+    struct 
+	{
       TRXMODE next;
     } trx;
-    struct {
+	
+    struct 
+	{
       RUNMODE last;
     } run;
+	
+	struct
+	{
+		BOOLEAN flag;
+		int count;
+		int count_limit;
+		float threshold;
+	} rise_thresh;
+
+	BOOLEAN flag;
+	
   } swch;
 
-  
   BOOLEAN susp;
   int offset;
 

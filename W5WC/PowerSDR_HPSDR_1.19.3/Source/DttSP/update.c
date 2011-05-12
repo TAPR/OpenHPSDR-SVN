@@ -57,9 +57,9 @@ gmean (REAL x, REAL y)
 }
 
 DttSP_EXP void
-Setup_SDR ()
+Setup_SDR (char *app_data_path)
 {
-	extern void setup ();
+	extern void setup (app_data_path);
 	setup ();
 }
 
@@ -98,13 +98,50 @@ SetThreadCom(unsigned int thread)
 	}
 }
 
+DttSP_EXP void 
+SetSwchFlag(unsigned int thread, unsigned int val)
+{
+	//fprintf(stderr, "DttSP: SetSwchFlag(%u, %u)\n", thread, val), fflush(stderr);
+
+	sem_wait(&top[thread].sync.upd.sem);
+	top[thread].swch.flag = val;
+	sem_post(&top[thread].sync.upd.sem);
+}
+
+DttSP_EXP void
+SetSwchRiseThresh(unsigned int thread, REAL val)
+{
+	fprintf(stderr, "DttSP: SetSwchRiseThresh(%u, %f)\n", thread, val), fflush(stderr);
+
+	sem_wait(&top[thread].sync.upd.sem);
+	top[thread].swch.rise_thresh.threshold = val;
+	sem_post(&top[thread].sync.upd.sem);
+}
+
 DttSP_EXP void
 SetThreadProcessingMode(unsigned int thread, RUNMODE runmode)
 {
 	sem_wait(&top[thread].sync.upd.sem);
-	top[thread].state = runmode;
 
-	if(runmode == RUN_MUTE) // added to clear the filter on TX->RX transitions
+	// this block here to eliminate glitching on 3K due to TR relay impulse
+	if(top[thread].swch.flag && top[thread].state == RUN_MUTE && runmode == RUN_PLAY)
+	{
+		top[thread].swch.env.curr.type = SWCH_RISE;
+		top[thread].swch.env.curr.cnt = 0;
+		top[thread].swch.env.curr.val = 0.0;
+		top[thread].swch.rise_thresh.flag = FALSE;
+		top[thread].swch.rise_thresh.count = 0;
+		top[thread].swch.rise_thresh.count_limit = (int)(uni[thread].samplerate * 0.050);
+		//top[thread].swch.rise_thresh.threshold = 3e-4f;
+		top[thread].swch.run.last = RUN_PLAY;
+		top[thread].state = RUN_SWCH;		
+	}
+	else
+	{
+		top[thread].state = runmode;
+	}
+
+	/*if(runmode == RUN_MUTE) // added to clear the filter on TX->RX transitions
 	{
 		int k;
 
@@ -113,11 +150,12 @@ SetThreadProcessingMode(unsigned int thread, RUNMODE runmode)
 			reset_OvSv (rx[thread][k].filt.ovsv);
 			DttSPAgc_flushbuf(rx[thread][k].dttspagc.gen);
 		}
-	}
+	}*/
 
 	sem_post(&top[thread].sync.upd.sem);
 	//fprintf(stderr,"thread: %0u setting mode to %0d\n", thread, (int)runmode),fflush(stderr);
 }
+
 DttSP_EXP int
 SetMode (unsigned int thread, unsigned int subrx, SDRMODE m)
 {
@@ -365,7 +403,10 @@ SetNR (unsigned int thread, unsigned subrx, BOOLEAN setit)
 {
 	sem_wait(&top[thread].sync.upd.sem);
 	rx[thread][subrx].anr.flag = setit;
-	if (!setit) memset(rx[thread][subrx].anr.gen->adaptive_filter,0,sizeof(COMPLEX)*128);
+	if (!setit) 
+	{
+	memset(rx[thread][subrx].anr.gen->adaptive_filter,0,sizeof(COMPLEX)*128);
+	}
 	sem_post(&top[thread].sync.upd.sem);
 }
 
@@ -376,7 +417,7 @@ SetNRvals (unsigned int thread, unsigned subrx, int taps, int delay, double gain
 	rx[thread][subrx].anr.gen->adaptive_filter_size = taps;
 	rx[thread][subrx].anr.gen->delay = delay;
 	rx[thread][subrx].anr.gen->adaptation_rate = (REAL)gain;
-	rx[thread][subrx].banr.gen->adaptation_rate = 0.1f*(REAL)gain;
+	rx[thread][subrx].banr.gen->adaptation_rate = (REAL)gain;
 	rx[thread][subrx].anr.gen->leakage = (REAL)leakage;
 	memset(rx[thread][subrx].anr.gen->adaptive_filter,0,sizeof(COMPLEX)*128);
 	sem_post(&top[thread].sync.upd.sem);
@@ -440,7 +481,7 @@ SetANFvals (unsigned int thread, unsigned subrx, int taps, int delay, double gai
 	rx[thread][subrx].anf.gen->size = taps;
 	rx[thread][subrx].anf.gen->delay = delay;
 	rx[thread][subrx].anf.gen->adaptation_rate = (REAL)gain;
-	rx[thread][subrx].banf.gen->adaptation_rate = (REAL)gain*0.1f;
+	rx[thread][subrx].banf.gen->adaptation_rate = (REAL)gain;
 	rx[thread][subrx].anf.gen->leakage = (REAL)leakage;
 	memset(rx[thread][subrx].anf.gen->adaptive_filter,0,sizeof(COMPLEX)*128);
 
@@ -705,6 +746,16 @@ SetTXLevelerSt (unsigned int thread, BOOLEAN state)
 	sem_wait(&top[thread].sync.upd.sem);
 
 	tx[thread].leveler.flag = state;
+
+	sem_post(&top[thread].sync.upd.sem);
+}
+
+DttSP_EXP void // (W5WC) ALC On/Off Control
+SetTXALCSt (unsigned int thread, BOOLEAN state)
+{
+	sem_wait(&top[thread].sync.upd.sem);
+
+	tx[thread].alc.flag = state;
 
 	sem_post(&top[thread].sync.upd.sem);
 }
@@ -1304,7 +1355,6 @@ SetTRX (unsigned int thread, TRXMODE setit)
 {
 //	int i;
 	sem_wait (&top[thread].sync.upd.sem);
-
 	uni[thread].mode.trx = setit;
 
 #if 0
@@ -1732,7 +1782,7 @@ SetDiversity (int setit)
 	sem_wait(&top[0].sync.upd.sem);
 	sem_wait(&top[1].sync.upd.sem);
 	sem_wait(&top[2].sync.upd.sem);
-	reset_em=TRUE;
+	//reset_em=TRUE;
 	diversity.flag = setit;
 	sem_post(&top[0].sync.upd.sem);
 	sem_post(&top[1].sync.upd.sem);

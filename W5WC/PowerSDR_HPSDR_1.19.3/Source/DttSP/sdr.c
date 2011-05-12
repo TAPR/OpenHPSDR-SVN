@@ -210,24 +210,25 @@ setup_rx (int k, unsigned int thread)
 	rx[thread][k].fm.gen = newFMD (
 		uni[thread].samplerate,			// REAL samprate
 		0.0,							// REAL f_initial
-		-6000.0,						// REAL f_lobound
-		6000.0,							// REAL f_hibound
-		5000.0,							// REAL f_bandwid
+		-8000.0,						// REAL f_lobound
+		8000.0,							// REAL f_hibound
+		16000.0,							// REAL f_bandwid
 		CXBsize (rx[thread][k].buf.o),	// int size
 		CXBbase (rx[thread][k].buf.o),	// COMPLEX *ivec
 		CXBbase (rx[thread][k].buf.o),	// COMPLEX *ovec
 		"New FM Demod structure");		// char *error message;
 
-	/* noise reduction */
+	/* auto-notch filter */
 	rx[thread][k].anf.gen = new_lmsr (
 		rx[thread][k].buf.o,	// CXB signal,
 		64,						// int delay,
-		0.01f,					// REAL adaptation_rate,
-		0.000001f,				// REAL leakage,
-		45,						// int adaptive_filter_size,
+		10e-4f,					// REAL adaptation_rate,
+		1e-7f,				// REAL leakage,
+		64,						// int adaptive_filter_size,
 		LMADF_INTERFERENCE);
 	rx[thread][k].anf.flag = FALSE;
-
+	
+	/* block auto-notch filter */
 	rx[thread][k].banf.gen = new_blms(
 		rx[thread][k].buf.o,    // CXB signal,
 		0.01f,				// REAL adaptation_rate,
@@ -235,16 +236,18 @@ setup_rx (int k, unsigned int thread)
 		LMADF_INTERFERENCE,		// type
 		uni->wisdom.bits);      // fftw wisdom
 	rx[thread][k].banf.flag = FALSE;
-
+	
+	/* auto-noise filter */
 	rx[thread][k].anr.gen = new_lmsr (
 		rx[thread][k].buf.o,	// CXB signal,
-		40,						// int delay,
-		0.00015f,				// REAL adaptation_rate,
-		0.000001f,				// REAL leakage,
-		30,						// int adaptive_filter_size,
+		64,						// int delay,
+		16e-4f,					// REAL adaptation_rate,
+		10e-7f,			  		// REAL leakage,
+		64,						// int adaptive_filter_size,
 		LMADF_NOISE);
 	rx[thread][k].anr.flag = FALSE;
 
+	/* block auto-noise filter */
 	rx[thread][k].banr.gen = new_blms(
 		rx[thread][k].buf.o,    // CXB signal,
 		0.001f,					// REAL adaptation_rate,
@@ -340,13 +343,13 @@ setup_tx (unsigned int thread)
 		1,							// mode kept around for control reasons
 		CXBbase (tx[thread].buf.i),	// input buffer
 		CXBsize (tx[thread].buf.i),	// output buffer
-		1.1f,						// Target output
+		1.0f,						// Target output
 		2,							// Attack time constant in ms
 		500,						// Decay time constant in ms
 		1,							// Slope
-		500,						//Hangtime in ms
+		500,						// Hangtime in ms
 		uni[thread].samplerate,		// Sample rate
-		5.62f,						// Maximum gain as a multipler, linear not dB
+		1.778f,						// Maximum gain as a multipler, linear not dB
 		1.0,						// Minimum gain as a multipler, linear not dB
 		1.0,						// Set the current gain
 		"LVL");						// Set a tag for an error message if the memory allocation fails
@@ -365,8 +368,8 @@ setup_tx (unsigned int thread)
 
 	tx[thread].alc.gen = newDttSPAgc (
 		1,								// mode kept around for control reasons alone
-		CXBbase (tx[thread].buf.i),		// input buffer
-		CXBsize (tx[thread].buf.i),		// output buffer
+		CXBbase (tx[thread].buf.o),		// input buffer
+		CXBsize (tx[thread].buf.o),		// output buffer
 		1.08f,							// Target output
 		2,								// Attack time constant in ms
 		10,								// Decay time constant in ms
@@ -787,16 +790,21 @@ do_rx_pre (int k, unsigned int thread)
 {
 	int i, n = min (CXBhave (rx[thread][k].buf.i), uni[thread].buflen);
 
-	if (rx[thread][k].nb.flag)
-		noiseblanker (rx[thread][k].nb.gen);
-	if (rx[thread][k].nb_sdrom.flag)
-		SDROMnoiseblanker (rx[thread][k].nb_sdrom.gen);
+	//if (rx[thread][k].nb.flag)
+	//	noiseblanker (rx[thread][k].nb.gen);
+	//if (rx[thread][k].nb_sdrom.flag)
+	//	SDROMnoiseblanker (rx[thread][k].nb_sdrom.gen);
 
 	// metering for uncorrected values here
 	do_rx_meter (k, thread, rx[thread][k].buf.i, RXMETER_PRE_CONV);
 
 	if (rx[thread][k].dcb->flag) DCBlock(rx[thread][k].dcb);
 
+	if (rx[thread][k].nb.flag)
+		noiseblanker (rx[thread][k].nb.gen);
+	if (rx[thread][k].nb_sdrom.flag)
+		SDROMnoiseblanker (rx[thread][k].nb_sdrom.gen);
+		
 	correctIQ (rx[thread][k].buf.i, rx[thread][k].iqfix, FALSE, k);
 
 	/* 2nd IF conversion happens here */
@@ -928,6 +936,9 @@ do_rx_post (int k, unsigned int thread)
 													rx[thread][k].azim.im*CXBimag(rx[thread][k].buf.o, i));
 	} 
 
+	if ((thread == 2)  && (diversity.flag))
+		for (i=0;i< n; i++) CXBdata(rx[thread][k].buf.o,i) = cxzero;
+	else
 	if (rx[thread][k].output_gain != 1.0)
 		for (i = 0; i < n; i++) CXBdata(rx[thread][k].buf.o,i) = Cscl(CXBdata(rx[thread][k].buf.o,i),rx[thread][k].output_gain);
 	if (rx[thread][k].resample.flag) {
@@ -1052,10 +1063,10 @@ do_tx_meter (unsigned int thread, CXB buf, TXMETERTYPE mt)
 		case TX_ALC:
 			for (i = 0; i < CXBhave (tx[thread].buf.i); i++)
 				alc_avg = (REAL) (0.9995 * alc_avg +
-				0.0005 * Csqrmag (CXBdata (tx[thread].buf.i, i)));
+				0.0005 * Csqrmag (CXBdata (tx[thread].buf.o, i)));
 			uni[thread].meter.tx.val[TX_ALC] = (REAL) (-10.0 * log10 (alc_avg + 1e-16));
 
-			alc_pk = CXBpeak(tx[thread].buf.i);
+			alc_pk = CXBpeak(tx[thread].buf.o);
 			uni[thread].meter.tx.val[TX_ALC_PK] = (REAL) (-20.0 * log10 (alc_pk+ 1e-16));
 			uni[thread].meter.tx.val[TX_ALC_G] = (REAL)(20.0*log10(tx[thread].alc.gen->gain.now+1e-16));
 			//fprintf(stdout, "pk: %15.12f  comp: %15.12f\n", uni[thread].meter.tx.val[TX_ALC_PK], uni[thread].meter.tx.val[TX_ALC_G]);
@@ -1137,9 +1148,9 @@ do_tx_pre (unsigned int thread)
 			do_tx_meter (thread, tx[thread].buf.i, TX_LVL);
 			do_tx_meter (thread, tx[thread].buf.i, TX_COMP);
 
-			if (tx[thread].alc.flag)
-				DttSPAgc (tx[thread].alc.gen, tx[thread].tick);
-			do_tx_meter (thread, tx[thread].buf.i, TX_ALC);
+			//if (tx[thread].alc.flag)
+			//	DttSPAgc (tx[thread].alc.gen, tx[thread].tick);
+			//do_tx_meter (thread, tx[thread].buf.i, TX_ALC);
 
 			do_tx_meter (thread, tx[thread].buf.i, TX_CPDR);
 			break;
@@ -1154,9 +1165,9 @@ do_tx_pre (unsigned int thread)
 			do_tx_meter (thread, tx[thread].buf.i, TX_LVL);
 			//fprintf(stderr,"[%.2f,%.2f]  ", peakl(tx[thread].buf.i), peakr(tx[thread].buf.i));
 
-			if (tx[thread].alc.flag)
-				DttSPAgc (tx[thread].alc.gen, tx[thread].tick);
-			do_tx_meter (thread, tx[thread].buf.i, TX_ALC);
+			//if (tx[thread].alc.flag)
+				//DttSPAgc (tx[thread].alc.gen, tx[thread].tick);
+			//do_tx_meter (thread, tx[thread].buf.i, TX_ALC);
 			//fprintf(stderr,"[%.2f,%.2f]  ", peakl(tx[thread].buf.i), peakr(tx[thread].buf.i));
 
 			if (tx[thread].spr.flag)
@@ -1183,11 +1194,15 @@ do_tx_post (unsigned int thread)
 
 	//fprintf(stderr,"[%.2f,%.2f]  ", peakl(tx[thread].buf.i), peakr(tx[thread].buf.i));
 	filter_OvSv (tx[thread].filt.ovsv);
+
+	//fprintf(stderr,"[%.2f,%.2f]  ", peakl(tx[thread].buf.o), peakr(tx[thread].buf.o));	
+	
+	if (tx[thread].alc.flag)
+		DttSPAgc (tx[thread].alc.gen, tx[thread].tick);
+	do_tx_meter (thread, tx[thread].buf.o, TX_ALC);
+	
 	if (uni[thread].spec.flag)
 		do_tx_spectrum (thread, tx[thread].buf.o);
-	//fprintf(stderr,"[%.2f,%.2f]  ", peakl(tx[thread].buf.o), peakr(tx[thread].buf.o));
-
-	// meter modulated signal
 
 	if (tx[thread].osc.gen->Frequency != 0.0)
 	{
@@ -1199,8 +1214,12 @@ do_tx_post (unsigned int thread)
 				Cmul (CXBdata (tx[thread].buf.o, i), OSCCdata (tx[thread].osc.gen, i));
 		}
 	}
+	
 	correctIQ (tx[thread].buf.o, tx[thread].iqfix, TRUE,0);
+
+	// meter modulated signal
 	do_tx_meter (thread, tx[thread].buf.o, TX_PWR);
+
 	//fprintf(stderr,"[%.2f,%.2f]  ", peakl(tx[thread].buf.o), peakr(tx[thread].buf.o));
 	//fprintf(stderr,"\n");
 	//fflush(stderr);
@@ -1308,7 +1327,8 @@ process_samples (float *bufl, float *bufr, float *auxl, float *auxr, int n, unsi
 				int kone = -1;
 				if (uni[thread].multirx.act[k])
 				{
-					if (!kdone) {
+					if (!kdone) 
+					{
 						kdone = TRUE;
 						kone = k;
 						for (i = 0; i < n; i++)
@@ -1317,7 +1337,8 @@ process_samples (float *bufl, float *bufr, float *auxl, float *auxr, int n, unsi
 								bufl[i], CXBreal (rx[thread][k].buf.i, i) = bufr[i];
 						}
 						CXBhave (rx[thread][k].buf.i) = n;
-					} else memcpy(rx[thread][k].buf.i,rx[thread][kone].buf.i,CXBhave(rx[thread][kdone].buf.i)*sizeof(COMPLEX));
+					} 
+					else memcpy(rx[thread][k].buf.i,rx[thread][kone].buf.i,CXBhave(rx[thread][kdone].buf.i)*sizeof(COMPLEX));
 				}
 			}
 			

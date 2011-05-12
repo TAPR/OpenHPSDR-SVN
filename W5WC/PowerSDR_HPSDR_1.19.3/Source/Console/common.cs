@@ -26,14 +26,14 @@
 //    USA
 //=================================================================
 
-using System;
-using System.Diagnostics;
-using System.Drawing;
-using System.Collections;
-using System.Windows.Forms;
-
 namespace PowerSDR
 {
+    using System;
+    using System.Diagnostics;
+    using System.Drawing;
+    using System.Collections;
+    using System.Windows.Forms;
+
 	public class Common
 	{
 		public static void ControlList(Control c, ref ArrayList a)
