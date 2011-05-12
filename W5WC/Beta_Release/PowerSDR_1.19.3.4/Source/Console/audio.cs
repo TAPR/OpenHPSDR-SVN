@@ -1956,7 +1956,7 @@ namespace PowerSDR
             {
                ClearBuffer(out_l2, frameCount);
                ClearBuffer(out_r2, frameCount);
-               console.buffiszero = true;
+               //console.buffiszero = true;
             }
 
 #if(MINMAX)

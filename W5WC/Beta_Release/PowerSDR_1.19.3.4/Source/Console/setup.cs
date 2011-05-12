@@ -1494,10 +1494,13 @@ namespace PowerSDR
         public CheckBoxTS chkShowBandControls;
         public CheckBoxTS chkShowTopControls;
         private GroupBoxTS grpBoxSpaceBarPTT;
-        private CheckBoxTS chkSpaceBarPTT;
         private TrackBarTS tbMeterEdgeBackgroundAlpha;
         private ColorButton clrbtnInfoButtonsColor;
         private LabelTS labelTS58;
+        private RadioButtonTS radSpaceBarLastBtn;
+        private RadioButtonTS radSpaceBarMicMute;
+        private RadioButtonTS radSpaceBarVOX;
+        private RadioButtonTS radSpaceBarPTT;
         private System.ComponentModel.IContainer components;
 
         #endregion
@@ -2813,7 +2816,10 @@ namespace PowerSDR
             this.chkShowTopControls = new System.Windows.Forms.CheckBoxTS();
             this.tpKeyboard = new System.Windows.Forms.TabPage();
             this.grpBoxSpaceBarPTT = new System.Windows.Forms.GroupBoxTS();
-            this.chkSpaceBarPTT = new System.Windows.Forms.CheckBoxTS();
+            this.radSpaceBarLastBtn = new System.Windows.Forms.RadioButtonTS();
+            this.radSpaceBarMicMute = new System.Windows.Forms.RadioButtonTS();
+            this.radSpaceBarVOX = new System.Windows.Forms.RadioButtonTS();
+            this.radSpaceBarPTT = new System.Windows.Forms.RadioButtonTS();
             this.grpKBXIT = new System.Windows.Forms.GroupBoxTS();
             this.lblKBXITUp = new System.Windows.Forms.LabelTS();
             this.lblKBXITDown = new System.Windows.Forms.LabelTS();
@@ -4515,7 +4521,7 @@ namespace PowerSDR
             // chkWheelTuneVFOB
             // 
             this.chkWheelTuneVFOB.Image = null;
-            this.chkWheelTuneVFOB.Location = new System.Drawing.Point(16, 144);
+            this.chkWheelTuneVFOB.Location = new System.Drawing.Point(16, 120);
             this.chkWheelTuneVFOB.Name = "chkWheelTuneVFOB";
             this.chkWheelTuneVFOB.Size = new System.Drawing.Size(122, 32);
             this.chkWheelTuneVFOB.TabIndex = 5;
@@ -4527,7 +4533,7 @@ namespace PowerSDR
             // chkMouseTuneStep
             // 
             this.chkMouseTuneStep.Image = null;
-            this.chkMouseTuneStep.Location = new System.Drawing.Point(16, 120);
+            this.chkMouseTuneStep.Location = new System.Drawing.Point(16, 100);
             this.chkMouseTuneStep.Name = "chkMouseTuneStep";
             this.chkMouseTuneStep.Size = new System.Drawing.Size(112, 16);
             this.chkMouseTuneStep.TabIndex = 4;
@@ -4538,7 +4544,7 @@ namespace PowerSDR
             // chkZeroBeatRIT
             // 
             this.chkZeroBeatRIT.Image = null;
-            this.chkZeroBeatRIT.Location = new System.Drawing.Point(16, 96);
+            this.chkZeroBeatRIT.Location = new System.Drawing.Point(16, 80);
             this.chkZeroBeatRIT.Name = "chkZeroBeatRIT";
             this.chkZeroBeatRIT.Size = new System.Drawing.Size(112, 16);
             this.chkZeroBeatRIT.TabIndex = 3;
@@ -4552,7 +4558,7 @@ namespace PowerSDR
             this.chkSnapClickTune.Checked = true;
             this.chkSnapClickTune.CheckState = System.Windows.Forms.CheckState.Checked;
             this.chkSnapClickTune.Image = null;
-            this.chkSnapClickTune.Location = new System.Drawing.Point(16, 72);
+            this.chkSnapClickTune.Location = new System.Drawing.Point(16, 60);
             this.chkSnapClickTune.Name = "chkSnapClickTune";
             this.chkSnapClickTune.Size = new System.Drawing.Size(112, 16);
             this.chkSnapClickTune.TabIndex = 2;
@@ -4563,7 +4569,7 @@ namespace PowerSDR
             // chkDisableToolTips
             // 
             this.chkDisableToolTips.Image = null;
-            this.chkDisableToolTips.Location = new System.Drawing.Point(16, 48);
+            this.chkDisableToolTips.Location = new System.Drawing.Point(16, 40);
             this.chkDisableToolTips.Name = "chkDisableToolTips";
             this.chkDisableToolTips.Size = new System.Drawing.Size(112, 16);
             this.chkDisableToolTips.TabIndex = 1;
@@ -4574,7 +4580,7 @@ namespace PowerSDR
             // chkOptAlwaysOnTop
             // 
             this.chkOptAlwaysOnTop.Image = null;
-            this.chkOptAlwaysOnTop.Location = new System.Drawing.Point(16, 24);
+            this.chkOptAlwaysOnTop.Location = new System.Drawing.Point(16, 20);
             this.chkOptAlwaysOnTop.Name = "chkOptAlwaysOnTop";
             this.chkOptAlwaysOnTop.Size = new System.Drawing.Size(104, 16);
             this.chkOptAlwaysOnTop.TabIndex = 0;
@@ -13380,7 +13386,7 @@ namespace PowerSDR
             this.grpDSPKeyerOptions.Controls.Add(this.chkCWAutoSwitchMode);
             this.grpDSPKeyerOptions.Location = new System.Drawing.Point(296, 8);
             this.grpDSPKeyerOptions.Name = "grpDSPKeyerOptions";
-            this.grpDSPKeyerOptions.Size = new System.Drawing.Size(147, 224);
+            this.grpDSPKeyerOptions.Size = new System.Drawing.Size(130, 185);
             this.grpDSPKeyerOptions.TabIndex = 37;
             this.grpDSPKeyerOptions.TabStop = false;
             this.grpDSPKeyerOptions.Text = "Options";
@@ -19018,26 +19024,70 @@ namespace PowerSDR
             // 
             // grpBoxSpaceBarPTT
             // 
-            this.grpBoxSpaceBarPTT.Controls.Add(this.chkSpaceBarPTT);
+            this.grpBoxSpaceBarPTT.Controls.Add(this.radSpaceBarLastBtn);
+            this.grpBoxSpaceBarPTT.Controls.Add(this.radSpaceBarMicMute);
+            this.grpBoxSpaceBarPTT.Controls.Add(this.radSpaceBarVOX);
+            this.grpBoxSpaceBarPTT.Controls.Add(this.radSpaceBarPTT);
             this.grpBoxSpaceBarPTT.Location = new System.Drawing.Point(392, 112);
             this.grpBoxSpaceBarPTT.Name = "grpBoxSpaceBarPTT";
-            this.grpBoxSpaceBarPTT.Size = new System.Drawing.Size(112, 72);
+            this.grpBoxSpaceBarPTT.Size = new System.Drawing.Size(112, 112);
             this.grpBoxSpaceBarPTT.TabIndex = 41;
             this.grpBoxSpaceBarPTT.TabStop = false;
-            this.grpBoxSpaceBarPTT.Text = "SpaceBar PTT";
+            this.grpBoxSpaceBarPTT.Text = "SpaceBar Control";
             // 
-            // chkSpaceBarPTT
+            // radSpaceBarLastBtn
             // 
-            this.chkSpaceBarPTT.Checked = true;
-            this.chkSpaceBarPTT.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chkSpaceBarPTT.Image = null;
-            this.chkSpaceBarPTT.Location = new System.Drawing.Point(22, 39);
-            this.chkSpaceBarPTT.Name = "chkSpaceBarPTT";
-            this.chkSpaceBarPTT.Size = new System.Drawing.Size(64, 16);
-            this.chkSpaceBarPTT.TabIndex = 40;
-            this.chkSpaceBarPTT.Text = "Enable";
-            this.toolTip1.SetToolTip(this.chkSpaceBarPTT, "Check to enable spacebar push-to-talk");
-            this.chkSpaceBarPTT.CheckedChanged += new System.EventHandler(this.chkSpaceBarPTT_CheckedChanged);
+            this.radSpaceBarLastBtn.AutoSize = true;
+            this.radSpaceBarLastBtn.Image = null;
+            this.radSpaceBarLastBtn.Location = new System.Drawing.Point(6, 20);
+            this.radSpaceBarLastBtn.Name = "radSpaceBarLastBtn";
+            this.radSpaceBarLastBtn.Size = new System.Drawing.Size(102, 17);
+            this.radSpaceBarLastBtn.TabIndex = 44;
+            this.radSpaceBarLastBtn.Text = "Last Btn Clicked";
+            this.toolTip1.SetToolTip(this.radSpaceBarLastBtn, "SpaceBar selects the Last Button Clicked");
+            this.radSpaceBarLastBtn.UseVisualStyleBackColor = true;
+            this.radSpaceBarLastBtn.CheckedChanged += new System.EventHandler(this.radSpaceBarLastBtn_CheckedChanged);
+            // 
+            // radSpaceBarMicMute
+            // 
+            this.radSpaceBarMicMute.AutoSize = true;
+            this.radSpaceBarMicMute.Image = null;
+            this.radSpaceBarMicMute.Location = new System.Drawing.Point(6, 80);
+            this.radSpaceBarMicMute.Name = "radSpaceBarMicMute";
+            this.radSpaceBarMicMute.Size = new System.Drawing.Size(69, 17);
+            this.radSpaceBarMicMute.TabIndex = 43;
+            this.radSpaceBarMicMute.Text = "Mic Mute";
+            this.toolTip1.SetToolTip(this.radSpaceBarMicMute, "SpaceBar Controls Mic Mute");
+            this.radSpaceBarMicMute.UseVisualStyleBackColor = true;
+            this.radSpaceBarMicMute.CheckedChanged += new System.EventHandler(this.radSpaceBarMicMute_CheckedChanged);
+            // 
+            // radSpaceBarVOX
+            // 
+            this.radSpaceBarVOX.AutoSize = true;
+            this.radSpaceBarVOX.Image = null;
+            this.radSpaceBarVOX.Location = new System.Drawing.Point(6, 60);
+            this.radSpaceBarVOX.Name = "radSpaceBarVOX";
+            this.radSpaceBarVOX.Size = new System.Drawing.Size(47, 17);
+            this.radSpaceBarVOX.TabIndex = 42;
+            this.radSpaceBarVOX.Text = "VOX";
+            this.toolTip1.SetToolTip(this.radSpaceBarVOX, "SpaceBar Controls VOX");
+            this.radSpaceBarVOX.UseVisualStyleBackColor = true;
+            this.radSpaceBarVOX.CheckedChanged += new System.EventHandler(this.radSpaceBarVOX_CheckedChanged);
+            // 
+            // radSpaceBarPTT
+            // 
+            this.radSpaceBarPTT.AutoSize = true;
+            this.radSpaceBarPTT.Checked = true;
+            this.radSpaceBarPTT.Image = null;
+            this.radSpaceBarPTT.Location = new System.Drawing.Point(6, 40);
+            this.radSpaceBarPTT.Name = "radSpaceBarPTT";
+            this.radSpaceBarPTT.Size = new System.Drawing.Size(75, 17);
+            this.radSpaceBarPTT.TabIndex = 41;
+            this.radSpaceBarPTT.TabStop = true;
+            this.radSpaceBarPTT.Text = "PTT/MOX";
+            this.toolTip1.SetToolTip(this.radSpaceBarPTT, "SpaceBar controls PTT");
+            this.radSpaceBarPTT.UseVisualStyleBackColor = true;
+            this.radSpaceBarPTT.CheckedChanged += new System.EventHandler(this.radSpaceBarPTT_CheckedChanged);
             // 
             // grpKBXIT
             // 
@@ -23382,6 +23432,7 @@ namespace PowerSDR
             this.grpBoxCollapsible.PerformLayout();
             this.tpKeyboard.ResumeLayout(false);
             this.grpBoxSpaceBarPTT.ResumeLayout(false);
+            this.grpBoxSpaceBarPTT.PerformLayout();
             this.grpKBXIT.ResumeLayout(false);
             this.grpKBRIT.ResumeLayout(false);
             this.grpKBMode.ResumeLayout(false);
@@ -33751,10 +33802,31 @@ namespace PowerSDR
             Display.TXGridControl = chkTXGridControl.Checked;
         }
 
-        private void chkSpaceBarPTT_CheckedChanged(object sender, EventArgs e)
+        private void radSpaceBarLastBtn_CheckedChanged(object sender, EventArgs e)
         {
-            console.SpaceBarPTT = chkSpaceBarPTT.Checked;
+            this.console.SpaceBarLastBtn = radSpaceBarLastBtn.Checked;
         }
+
+        private void radSpaceBarPTT_CheckedChanged(object sender, EventArgs e)
+        {
+            this.console.SpaceBarPTT = radSpaceBarPTT.Checked;
+        }
+
+        private void radSpaceBarVOX_CheckedChanged(object sender, EventArgs e)
+        {
+            this.console.SpaceBarVOX = radSpaceBarVOX.Checked;
+        }
+
+        private void radSpaceBarMicMute_CheckedChanged(object sender, EventArgs e)
+        {
+            this.console.SpaceBarMicMute = radSpaceBarMicMute.Checked;
+        }
+
+        private void radSpaceBarMicMute_CheckedChanged_1(object sender, EventArgs e)
+        {
+
+        }
+
     }
 
 	#region PADeviceInfo Helper Class

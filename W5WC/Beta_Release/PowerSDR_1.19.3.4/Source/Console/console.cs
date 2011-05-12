@@ -6319,6 +6319,14 @@ namespace PowerSDR
 			set { fwc_mic_ptt = value; }
 		}
 
+        private bool mic_ptt = false;
+        public bool MicPTT
+        {
+            get { return mic_ptt; }
+            set { mic_ptt = value; }
+        }
+
+
         private void InitConsole()
         {
 #if(DEBUG)
@@ -23879,11 +23887,32 @@ namespace PowerSDR
             set { s_meter = value; }
         }
 
+        private bool spacebar_last_btn = false;
+        public bool SpaceBarLastBtn
+        {
+            get { return spacebar_last_btn; }
+            set { spacebar_last_btn = value; }
+        }
+
         private bool spacebar_ptt = true;
         public bool SpaceBarPTT
         {
             get { return spacebar_ptt; }
             set { spacebar_ptt = value; }
+        }
+
+        private bool spacebar_vox = false;
+        public bool SpaceBarVOX
+        {
+            get { return spacebar_vox; }
+            set { spacebar_vox = value; }
+        }
+
+        private bool spacebar_mic_mute = false;
+        public bool SpaceBarMicMute
+        {
+            get { return spacebar_mic_mute; }
+            set { spacebar_mic_mute = value; }
         }
 
 		public float PreampOffset
@@ -26405,7 +26434,8 @@ namespace PowerSDR
 
 				if(!manual_mox && !disable_ptt && !rx_only)
 				{
-					bool mic_ptt = false, x2_ptt = false, cw_ptt = false, cat_ptt_local = false, vox_ptt = false;
+                    //bool mic_ptt = false, 
+					bool x2_ptt = false, cw_ptt = false, cat_ptt_local = false, vox_ptt = false;
 					bool keyer_playing = DttSP.KeyerPlaying();
 					if(fwc_init && (current_model == Model.FLEX5000 || current_model == Model.FLEX3000))
 					{
@@ -26591,6 +26621,26 @@ namespace PowerSDR
 								return;
 							}*/
 						}
+
+                        if (Keyer.AutoSwitchMode && mic_ptt)
+                        {
+                            switch (tx_mode)
+                            {
+                                case DSPMode.CWL:
+                                    break_in_timer.Stop();
+                                    chkMOX.Checked = false;
+                                    this.RX1DSPMode = DSPMode.LSB;
+                                    //radModeLSB.Checked = true;
+                                    break;
+                                case DSPMode.CWU:
+                                    break_in_timer.Stop();
+                                    chkMOX.Checked = false;
+                                    this.RX1DSPMode = DSPMode.USB;
+                                    //radModeUSB.Checked = true;
+                                    break;
+                            }
+                        } 
+	
 					}
 					else // else if(mox)
 					{
@@ -27707,12 +27757,39 @@ namespace PowerSDR
 				{
                     case Keys.Space:
                         {
-                            if (chkPower.Checked && spacebar_ptt)
+                            if (chkPower.Checked)
                             {
-                                chkMOX.Checked = !chkMOX.Checked;
-                                e.Handled = true;
+                                if (spacebar_ptt)
+                                {
+                                    chkMOX.Checked = !chkMOX.Checked;
+                                    e.Handled = true;
+                                }
+                                else if (spacebar_vox)
+                                {
+                                    chkVOX.Checked = !chkVOX.Checked;
+                                    e.Handled = true;
+                                }
+                                else if (spacebar_mic_mute)
+                                {
+                                    chkMicMute.Checked = !chkMicMute.Checked;
+                                    e.Handled = true;
+                                }
+                                else if (spacebar_last_btn)
+                                {
+                                    break;
+                                }
                             }
-                            else if (!chkPower.Checked && spacebar_ptt) e.Handled = true;
+                            else 
+                            {
+                                if (!chkPower.Checked)
+                                {
+                                    if (spacebar_last_btn)
+                                    {
+                                        break;
+                                    }
+                                    else e.Handled = true;
+                                }
+                            }
                         }
                         break;
 					case Keys.Multiply:
@@ -29978,8 +30055,12 @@ namespace PowerSDR
                 return;
             }
 
-            bool tx = mox = chkMOX.Checked;
-            double freq = 0.0;
+           // bool tx = mox = chkMOX.Checked;
+           // double freq = 0.0;
+            bool tx = chkMOX.Checked;
+
+            if (tx) mox = tx;
+            double freq = 0.0;			
 
             if (!full_duplex)
             {
@@ -30119,27 +30200,29 @@ namespace PowerSDR
             {
                 DttSP.SetThreadProcessingMode(0, 0);
                 AudioMOXChanged(tx);
-                t1.Start();
-                while (t1.DurationMsec < rf_delay) t1.Stop();
+               // t1.Start();
+               // while (t1.DurationMsec < rf_delay) t1.Stop();
+                Thread.Sleep(rf_delay);
                 DttSP.FlushAllBufs(0, false);
                 HdwMOXChanged(tx, freq);
             }
             else
             {
                 mox = tx;
-                buffiszero = false;
+               // buffiszero = false;
                 AudioMOXChanged(tx); //changes audio.callback4port tx/rx
                 //Thread.Sleep(10);
-                t1.Start();
-                while (!buffiszero) //delay until audio.callback4port clears data stream 
-                { 
+               // t1.Start();
+              //  while (!buffiszero) //delay until audio.callback4port clears data stream 
+               // { 
                     //Thread.Sleep(1); 
-                    if (t1.DurationMsec > 50) break; //watchdog timer just in case
-                }
+               //     if (t1.DurationMsec > 50) break; //watchdog timer just in case
+               // }
 
-                t1.Start();
-                while (t1.DurationMsec < mox_delay) t1.Stop();
+              //  t1.Start();
+              //  while (t1.DurationMsec < mox_delay) t1.Stop();
                 //Thread.Sleep(20);
+                Thread.Sleep(mox_delay);
                 HdwMOXChanged(tx, freq); //toggles PTT etc.
                 DttSP.SetThreadProcessingMode(1, 0);
                 DttSP.FlushAllBufs(1, true);
