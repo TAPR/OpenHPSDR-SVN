@@ -6072,13 +6072,13 @@ namespace PowerSDR
             this.Controls.Add(this.panelDisplay);
             this.Controls.Add(this.ptbSquelch);
             this.Controls.Add(this.panelMode);
-            this.Controls.Add(this.panelBandHF);
-            this.Controls.Add(this.panelBandVHF);
             this.Controls.Add(this.panelFilter);
             this.Controls.Add(this.panelModeSpecificPhone);
             this.Controls.Add(this.panelModeSpecificDigital);
             this.Controls.Add(this.panelModeSpecificCW);
             this.Controls.Add(this.panelAntenna);
+            this.Controls.Add(this.panelBandHF);
+            this.Controls.Add(this.panelBandVHF);
             this.KeyPreview = true;
             this.Menu = this.mainMenu1;
             this.Name = "Console";
@@ -39624,15 +39624,36 @@ namespace PowerSDR
                     // need to select the config data depending on the Mic Gain (20dB) or line in selected
                     if (line_in)
                     {
-                        Penny_TLV320_data = new byte[] { 0x1e, 0x00, 0x12, 0x01, 0x08, 0x10, 0x0c, 0x00, 0x0e, 0x02, 0x01, 0x00, 0x0a, 0x00, 0x00, 0x00 };
+                        Penny_TLV320_data = new byte[] { 0x1e, 0x00,                    
+                                                         0x12, 0x01, 
+                                                         0x08, 0x12,
+                                                         0x00, 0x17,
+                                                         0x0c, 0x00, 
+                                                         0x0e, 0x02, 
+                                                         0x10, 0x00, 
+                                                         0x0a, 0x00 };
                     }
                     else if (mic_boost)
                     {
-                        Penny_TLV320_data = new byte[] { 0x1e, 0x00, 0x12, 0x01, 0x08, 0x15, 0x0c, 0x00, 0x0e, 0x02, 0x01, 0x00, 0x0a, 0x00, 0x00, 0x00 };
+                        Penny_TLV320_data = new byte[] { 0x1e, 0x00, 
+                                                         0x12, 0x01, 
+                                                         0x08, 0x15, 
+                                                         0x0c, 0x00, 
+                                                         0x0e, 0x02, 
+                                                         0x10, 0x00, 
+                                                         0x0a, 0x00, 
+                                                         0x00, 0x00 };
                     }
                     else
                     {
-                        Penny_TLV320_data = new byte[] { 0x1e, 0x00, 0x12, 0x01, 0x08, 0x14, 0x0c, 0x00, 0x0e, 0x02, 0x01, 0x00, 0x0a, 0x00, 0x00, 0x00 };
+                        Penny_TLV320_data = new byte[] { 0x1e, 0x00, 
+                                                         0x12, 0x01, 
+                                                         0x08, 0x14, 
+                                                         0x0c, 0x00, 
+                                                         0x0e, 0x02, 
+                                                         0x10, 0x00, 
+                                                         0x0a, 0x00, 
+                                                         0x00, 0x00 };
                     }
 
 
@@ -39793,9 +39814,10 @@ namespace PowerSDR
             comboDisplayMode.Parent = panelDisplay2;
             comboDisplayMode.Location = combo_display_mode_basis;
 
-            btnDisplayPanCenter.Location = new Point(btn_display_pan_center_basis.X + (h_delta), btn_display_pan_center_basis.Y + v_delta);
+            //btnDisplayPanCenter.Location = new Point(btn_display_pan_center_basis.X + (h_delta), btn_display_pan_center_basis.Y + v_delta);
             //ptbDisplayPan.Size = new Size(tb_display_pan_size_basis.Width + (h_delta), tb_display_pan_size_basis.Height);
             ptbDisplayPan.Size = tb_display_pan_size_basis;
+            btnDisplayPanCenter.Location = new Point(ptbDisplayPan.Location.X + ptbDisplayPan.Width + 4, ptbDisplayPan.Location.Y);
             radDisplayZoom4x.Location = new Point(btn_display_zoom_4x_basis.X + h_delta, btn_display_zoom_4x_basis.Y + v_delta);
             radDisplayZoom2x.Location = new Point(btn_display_zoom_2x_basis.X + h_delta, btn_display_zoom_2x_basis.Y + v_delta);
             radDisplayZoom1x.Location = new Point(btn_display_zoom_1x_basis.X + h_delta, btn_display_zoom_1x_basis.Y + v_delta);
