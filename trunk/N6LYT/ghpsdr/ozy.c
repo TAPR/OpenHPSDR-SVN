@@ -31,6 +31,7 @@
 #include "main.h"
 #include "sinewave.h"
 #include "vfo.h"
+#include "metis.h"
 
 /*
  *   ozy interface
@@ -63,6 +64,12 @@ static long rxFrequency=7056000;
 static int rxFrequency_changed=1;
 static long txFrequency=7056000;
 static int txFrequency_changed=1;
+
+unsigned char output_buffer[OZY_BUFFER_SIZE];
+int output_buffer_index=8;
+
+unsigned char bandscope_buffer[8192];
+int bandscope_buffer_index=0;
 
 static int force_write=0;
 
@@ -135,6 +142,33 @@ static struct timeb start_time;
 static struct timeb end_time;
 static int sample_count=0;
 
+static int metis=0;
+static char interface[128];
+
+void ozy_set_metis() {
+    metis=1;
+}
+
+void ozy_set_interface(char* iface) {
+    strcpy(interface,iface);
+}
+
+char* ozy_get_interface() {
+    return interface;
+}
+
+void process_bandscope_buffer(char* buffer) {
+    int i;
+
+    for(i=0;i<512;i++) {
+        bandscope_buffer[bandscope_buffer_index++]=buffer[i];
+    }
+
+    if(bandscope_buffer_index>=SPECTRUM_BUFFER_SIZE) {
+        memcpy(spectrum_samples,bandscope_buffer,SPECTRUM_BUFFER_SIZE);
+        bandscope_buffer_index=0;
+    }
+}
 
 /* --------------------------------------------------------------------------*/
 /** 
@@ -147,6 +181,7 @@ void process_ozy_input_buffer(char* buffer) {
     int b=0;
     int c=0;
     unsigned char ozy_samples[8*8];
+    int bytes;
 
     int last_ptt;
     int last_dot;
@@ -311,8 +346,78 @@ void process_ozy_input_buffer(char* buffer) {
                         right_tx_sample=0;
                     }
 
-                    audio_stream_put_samples(left_rx_sample,right_rx_sample);
+                    //audio_stream_put_samples(left_rx_sample,right_rx_sample);
 
+                    output_buffer[output_buffer_index++]=left_rx_sample>>8;
+                    output_buffer[output_buffer_index++]=left_rx_sample;
+                    output_buffer[output_buffer_index++]=right_rx_sample>>8;
+                    output_buffer[output_buffer_index++]=right_rx_sample;
+                    output_buffer[output_buffer_index++]=left_tx_sample>>8;
+                    output_buffer[output_buffer_index++]=left_tx_sample;
+                    output_buffer[output_buffer_index++]=right_tx_sample>>8;
+                    output_buffer[output_buffer_index++]=right_tx_sample;
+
+                    if(output_buffer_index>=OZY_BUFFER_SIZE) {
+            output_buffer[0]=SYNC;
+            output_buffer[1]=SYNC;
+            output_buffer[2]=SYNC;
+
+            if(splitChanged) {
+                output_buffer[3]=control_out[0];
+                output_buffer[4]=control_out[1];
+                output_buffer[5]=control_out[2];
+                output_buffer[6]=control_out[3];
+                if(bSplit) {
+                    output_buffer[7]=control_out[4]|0x04;
+                } else {
+                    output_buffer[7]=control_out[4];
+                }
+                splitChanged=0;
+            } else if(frequencyAChanged) {
+                if(bSplit) {
+                    output_buffer[3]=control_out[0]|0x04; // Mercury (1)
+                } else {
+                    output_buffer[3]=control_out[0]|0x02; // Mercury and Penelope
+                }
+                output_buffer[4]=ddsAFrequency>>24;
+                output_buffer[5]=ddsAFrequency>>16;
+                output_buffer[6]=ddsAFrequency>>8;
+                output_buffer[7]=ddsAFrequency;
+                frequencyAChanged=0;
+            } else if(frequencyBChanged) {
+                if(bSplit) {
+                    output_buffer[3]=control_out[0]|0x02; // Penelope
+                    output_buffer[4]=ddsBFrequency>>24;
+                    output_buffer[5]=ddsBFrequency>>16;
+                    output_buffer[6]=ddsBFrequency>>8;
+                    output_buffer[7]=ddsBFrequency;
+                }
+                frequencyBChanged=0;
+            } else {
+                output_buffer[3]=control_out[0];
+                output_buffer[4]=control_out[1];
+                output_buffer[5]=control_out[2];
+                output_buffer[6]=control_out[3];
+                if(bSplit) {
+                    output_buffer[7]=control_out[4]|0x04;
+                } else {
+                    output_buffer[7]=control_out[4];
+                }
+            }
+
+
+                        if(metis) {
+                            metis_write(0x02,output_buffer,OZY_BUFFER_SIZE);
+                        } else {
+                            bytes=libusb_write_ozy(0x02,(void*)(output_buffer),OZY_BUFFER_SIZE);
+                            if(bytes!=OZY_BUFFER_SIZE) {
+                                perror("OzyBulkWrite failed");
+                            }
+                        }
+                        output_buffer_index=8;
+                    }
+
+/*
                     ozy_samples[c]=left_rx_sample>>8;
                     ozy_samples[c+1]=left_rx_sample;
                     ozy_samples[c+2]=right_rx_sample>>8;
@@ -328,6 +433,7 @@ void process_ozy_input_buffer(char* buffer) {
                         }
                         c=0;
                     }
+*/
                 }
             
                 samples=0;
@@ -401,28 +507,31 @@ void* ozy_spectrum_buffer_thread(void* arg) {
 void* ozy_ep6_ep2_io_thread(void* arg) {
     struct ozy_buffer* ozy_buffer;
     unsigned char output_buffer[OZY_BUFFER_SIZE];
+    unsigned char input_buffer[OZY_BUFFER_SIZE];
     int bytes;
 
     while(1) {
 
         // read an input buffer (blocks until all bytes read)
-        ozy_buffer=get_ozy_free_buffer();
-        if(ozy_buffer!=NULL) {
-            bytes=libusb_read_ozy(0x86,(void*)(ozy_buffer->buffer),OZY_BUFFER_SIZE);
+        //ozy_buffer=get_ozy_free_buffer();
+        //if(ozy_buffer!=NULL) {
+            bytes=libusb_read_ozy(0x86,(void*)(input_buffer),OZY_BUFFER_SIZE);
             if (bytes < 0) {
                 fprintf(stderr,"ozy_ep6_ep2_io_thread: OzyBulkRead read failed %d\n",bytes);
-                free_ozy_buffer(ozy_buffer);
+                //free_ozy_buffer(ozy_buffer);
             } else if (bytes != OZY_BUFFER_SIZE) {
                 fprintf(stderr,"ozy_ep6_ep2_io_thread: OzyBulkRead only read %d bytes\n",bytes);
-                free_ozy_buffer(ozy_buffer);
+                //free_ozy_buffer(ozy_buffer);
             } else {
                 // process input buffer
-                put_ozy_input_buffer(ozy_buffer);
-                sem_post(ozy_input_buffer_sem);
+                //put_ozy_input_buffer(ozy_buffer);
+                //sem_post(ozy_input_buffer_sem);
+                process_ozy_input_buffer(input_buffer);
             }
 
-        }
+        //}
 
+/*
         // see if we have enough to send a buffer or force the write if we have a timeout
         if((bytes==USB_TIMEOUT) || ozy_ringbuffer_entries(ozy_output_buffer)>=(OZY_BUFFER_SIZE-8) || force_write || frequencyAChanged || frequencyBChanged) {
             
@@ -492,6 +601,7 @@ void* ozy_ep6_ep2_io_thread(void* arg) {
             //    dump_ozy_buffer("output buffer",output_buffer);
             //}
         }
+*/
 
     }
 }
@@ -734,22 +844,37 @@ int ozy_init() {
             | LT2208_RANDOM_ON;
     control_out[4] = 0;
 
-    // open ozy
-    rc = libusb_open_ozy();
-    if (rc != 0) {
-        fprintf(stderr,"Cannot locate Ozy\n");
-        return (-1);
+    if(metis) {
+        int found;
+        int i;
+        metis_discover(interface);
+        for(i=0;i<60000;i++) {
+            if(metis_found()>0) {
+fprintf(stderr,"Metis found after %d\n",i);
+                break;
+            }
+        }
+        if(metis_found()<=0) {
+            return (-3);
+        }
+    } else {
+        // open ozy
+        rc = libusb_open_ozy();
+        if (rc != 0) {
+            fprintf(stderr,"Cannot locate Ozy\n");
+            return (-1);
+        }
+
+        rc=libusb_get_ozy_firmware_string(ozy_firmware_version,8);
+
+        if(rc!=0) {
+            fprintf(stderr,"Failed to get Ozy Firmware Version - Have you run initozy yet?\n");
+            libusb_close_ozy();
+            return (-2);
+        }
+
+        fprintf(stderr,"Ozy FX2 version: %s\n",ozy_firmware_version);
     }
-
-    rc=libusb_get_ozy_firmware_string(ozy_firmware_version,8);
-
-    if(rc!=0) {
-        fprintf(stderr,"Failed to get Ozy Firmware Version - Have you run initozy yet?\n");
-        libusb_close_ozy();
-        return (-2);
-    }
-
-    fprintf(stderr,"Ozy FX2 version: %s\n",ozy_firmware_version);
     
     switch(speed) {
         case 48000:
@@ -766,32 +891,36 @@ int ozy_init() {
     force_write=0;
 
     // create buffers of ozy
-    create_ozy_ringbuffer(68*512);
-    create_ozy_buffers(68);
+    create_ozy_ringbuffer(128*512);
+    create_ozy_buffers(128);
     create_spectrum_buffers(8);
     
     // create a thread to process EP6 input buffers
-    rc=pthread_create(&ozy_input_buffer_thread_id,NULL,ozy_input_buffer_thread,NULL);
-    if(rc != 0) {
-        fprintf(stderr,"pthread_create failed on ozy_input_buffer_thread: rc=%d\n", rc);
-    }
-
-    // create a thread to read/write to EP6/EP2
-    rc=pthread_create(&ep6_ep2_io_thread_id,NULL,ozy_ep6_ep2_io_thread,NULL);
-    if(rc != 0) {
-        fprintf(stderr,"pthread_create failed on ozy_ep6_io_thread: rc=%d\n", rc);
-    }
+//    rc=pthread_create(&ozy_input_buffer_thread_id,NULL,ozy_input_buffer_thread,NULL);
+//    if(rc != 0) {
+//        fprintf(stderr,"pthread_create failed on ozy_input_buffer_thread: rc=%d\n", rc);
+//    }
 
     // create a thread to process EP4 input buffers
-    rc=pthread_create(&ozy_spectrum_buffer_thread_id,NULL,ozy_spectrum_buffer_thread,NULL);
-    if(rc != 0) {
-        fprintf(stderr,"pthread_create failed on ozy_spectrum_buffer_thread: rc=%d\n", rc);
-    }
+//    rc=pthread_create(&ozy_spectrum_buffer_thread_id,NULL,ozy_spectrum_buffer_thread,NULL);
+//    if(rc != 0) {
+//        fprintf(stderr,"pthread_create failed on ozy_spectrum_buffer_thread: rc=%d\n", rc);
+//    }
 
-    // create a thread to read from EP4
-    rc=pthread_create(&ep4_io_thread_id,NULL,ozy_ep4_io_thread,NULL);
-    if(rc != 0) {
-        fprintf(stderr,"pthread_create failed on ozy_ep4_io_thread: rc=%d\n", rc);
+    if(metis) { 
+        metis_start_receive_thread();
+    } else {
+        // create a thread to read/write to EP6/EP2
+        rc=pthread_create(&ep6_ep2_io_thread_id,NULL,ozy_ep6_ep2_io_thread,NULL);
+        if(rc != 0) {
+            fprintf(stderr,"pthread_create failed on ozy_ep6_io_thread: rc=%d\n", rc);
+        }
+
+        // create a thread to read from EP4
+        rc=pthread_create(&ep4_io_thread_id,NULL,ozy_ep4_io_thread,NULL);
+        if(rc != 0) {
+            fprintf(stderr,"pthread_create failed on ozy_ep4_io_thread: rc=%d\n", rc);
+        }
     }
 
 

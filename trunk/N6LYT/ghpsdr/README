@@ -25,8 +25,8 @@ If all is OK you will end up with the ghpsdr binary.
 
 Included with the the ghpsdr source is a built version of libDttSP.a for 32 bit Linux.  If you are building on 64 bit linux then copy over the libDttSP.a.64 to libDttSP.a.  See below for instructions on how to build libDttSP.a.
 
-Running ghpsdr
---------------
+Running ghpsdr with Ozy or Magister
+-----------------------------------
 
 To be able to run as a non root user you will need to add a udev script to set the permissions on the USB Ozy device.
 
@@ -39,9 +39,22 @@ When Ozy is powered on and plugged in udev will recognise it and create /dev/ozy
 You will also need to download initozy and the related files to load Ozy and the FPGA code.
 
 
+
 From the ghpsdr install directory run the command:
 
 ./ghpsdr
+
+Running ghpsdr with Metis
+-------------------------
+
+
+From the ghpsdr install directory run the command:
+
+./ghpsdr --metis [--interface <iface>]
+
+the default interface is eth0
+
+Currently, the software assumes there is only one Metis on the interface. If there are more than 1 then it uses the first one that it discovers.
 
 
 Building libDttSP.a

@@ -84,6 +84,11 @@ int mox;
 
 int forwardPower;
 
+void ozy_set_metis();
+void ozy_set_interface(char*);
+char* ozy_get_interface();
+
+
 /* --------------------------------------------------------------------------*/
 /** 
 * @brief Initialize the Ozy interface 

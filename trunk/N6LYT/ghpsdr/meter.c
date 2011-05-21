@@ -444,7 +444,7 @@ GtkWidget* buildMeterUI() {
     g_signal_connect(G_OBJECT (dbm),"expose_event",G_CALLBACK(dbm_expose_event),NULL);
     gtk_widget_show(dbm);
 #ifdef NETBOOK
-    gtk_fixed_put((GtkFixed*)meterFixed,dbm,0,228);
+    gtk_fixed_put((GtkFixed*)meterFixed,dbm,0,28);
 #else
     gtk_fixed_put((GtkFixed*)meterFixed,dbm,0,30);
 #endif
