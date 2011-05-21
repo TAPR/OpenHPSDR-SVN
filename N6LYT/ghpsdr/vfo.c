@@ -994,7 +994,7 @@ GtkWidget* buildVfoUI() {
     g_signal_connect(G_OBJECT(buttonFrequencyUp),"released",G_CALLBACK(frequencyReleasedCallback),NULL);
     gtk_widget_show(buttonFrequencyUp);
 #ifdef NETBOOK
-    gtk_fixed_put((GtkFixed*)vfoFixed,buttonFrequencyUp,258,25);
+    gtk_fixed_put((GtkFixed*)vfoFixed,buttonFrequencyUp,258,20);
 #else
     gtk_fixed_put((GtkFixed*)vfoFixed,buttonFrequencyUp,300,25);
 #endif

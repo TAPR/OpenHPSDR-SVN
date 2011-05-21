@@ -291,7 +291,11 @@ void drawFilterLow(gboolean queue) {
         layout = pango_layout_new (context);
         pango_layout_set_width(layout,filterLowDisplay->allocation.width*PANGO_SCALE);
         pango_layout_set_alignment(layout,PANGO_ALIGN_RIGHT);
-        sprintf(temp,"<span foreground='#7AAA6E' background='#000000' font_desc='Sans Bold 10'>Low   % 5d </span>",filterLow);
+#ifdef NETBOOK
+        sprintf(temp,"<span foreground='#7AAA6E' background='#000000' font_desc='Sans Bold 8'>Low   % 5d </span>",filterLow);
+#else
+    	sprintf(temp,"<span foreground='#7AAA6E' background='#000000' font_desc='Sans Bold 10'>Low   % 5d </span>",filterLow);
+#endif
         pango_layout_set_markup (layout,temp, -1);
         gdk_draw_layout(GDK_DRAWABLE(filterLowDisplayPixmap),gc,0,2,layout);
 
@@ -334,7 +338,11 @@ void drawFilterHigh(gboolean queue) {
         layout = pango_layout_new (context);
         pango_layout_set_width(layout,filterHighDisplay->allocation.width*PANGO_SCALE);
         pango_layout_set_alignment(layout,PANGO_ALIGN_RIGHT);
-        sprintf(temp,"<span foreground='#7AAA6E' background='#000000' font_desc='Sans Bold 10'>High  % 5d </span>",filterHigh);
+#ifdef NETBOOK
+       sprintf(temp,"<span foreground='#7AAA6E' background='#000000' font_desc='Sans Bold 8'>High  % 5d </span>",filterHigh);
+#else
+       sprintf(temp,"<span foreground='#7AAA6E' background='#000000' font_desc='Sans Bold 10'>High  % 5d </span>",filterHigh);
+#endif
         pango_layout_set_markup (layout,temp, -1);
         gdk_draw_layout(GDK_DRAWABLE(filterHighDisplayPixmap),gc,0,2,layout);
 

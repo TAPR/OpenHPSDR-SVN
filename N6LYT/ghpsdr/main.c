@@ -130,6 +130,7 @@
 #include "subrx.h"
 #include "iphone.h"
 #include "audiostream.h"
+#include "metis.h"
 
 GdkColor background;
 GdkColor buttonBackground;
@@ -432,7 +433,7 @@ void buildMainUI() {
     // add the mode window
     gtk_widget_show(modeWindow);
 #ifdef NETBOOK
-    gtk_fixed_put((GtkFixed*)mainFixed,modeWindow,1,136);
+    gtk_fixed_put((GtkFixed*)mainFixed,modeWindow,1,135);
 #else
     gtk_fixed_put((GtkFixed*)mainFixed,modeWindow,5,150);
 #endif
@@ -440,7 +441,7 @@ void buildMainUI() {
     // add the filter window
     gtk_widget_show(filterWindow);
 #ifdef NETBOOK
-    gtk_fixed_put((GtkFixed*)mainFixed,filterWindow,1,230);
+    gtk_fixed_put((GtkFixed*)mainFixed,filterWindow,1,225);
 #else
     gtk_fixed_put((GtkFixed*)mainFixed,filterWindow,5,250);
 #endif
@@ -448,7 +449,7 @@ void buildMainUI() {
     // add the audio window
     gtk_widget_show(audioWindow);
 #ifdef NETBOOK
-    gtk_fixed_put((GtkFixed*)mainFixed,audioWindow,1,368);
+    gtk_fixed_put((GtkFixed*)mainFixed,audioWindow,1,370);
 #else
     gtk_fixed_put((GtkFixed*)mainFixed,audioWindow,5,400);
 #endif
@@ -657,6 +658,8 @@ struct option longOptions[] = {
     {"sample-rate",required_argument, 0, 1},
     {"property-path",required_argument, 0, 2},
     {"timing",no_argument, 0, 3},
+    {"metis",no_argument, 0, 4},
+    {"interface",required_argument, 0, 5},
 };
 
 char* shortOptions="";
@@ -687,6 +690,12 @@ void processCommands(int argc,char** argv) {
             case 3:
                 timing=1;
                 break;
+            case 4:
+                ozy_set_metis();
+                break;
+            case 5:
+                ozy_set_interface(optarg);
+                break;
         }
     }
 }
@@ -706,6 +715,7 @@ int main(int argc,char* argv[]) {
     GtkWidget* dialog;
     gint result;
     int i;
+    char message[128];
 
     gtk_init(&argc,&argv);
 
@@ -713,6 +723,7 @@ int main(int argc,char* argv[]) {
 
     strcpy(propertyPath,".ghpsdr.properties");
     strcpy(soundCardName,"UNSUPPORTED_CARD");
+    ozy_set_interface("eth0");
     processCommands(argc,argv);
     loadProperties(propertyPath);
 
@@ -775,6 +786,27 @@ int main(int argc,char* argv[]) {
                     wait(&result);
                     fprintf(stderr,"wait status=%d\n",result);
                     retry=TRUE;
+                }
+                gtk_widget_destroy (dialog);
+                break;
+
+            case -3: // did not find metis
+                sprintf(message,"Cannot locate Metis on interface %s!",ozy_get_interface());
+                dialog = gtk_message_dialog_new (NULL,
+                                                 GTK_DIALOG_DESTROY_WITH_PARENT,
+                                                 GTK_MESSAGE_ERROR,
+                                                 GTK_BUTTONS_YES_NO,
+                                                 message);
+                gtk_message_dialog_format_secondary_text(GTK_MESSAGE_DIALOG(dialog),"Retry?");
+                gtk_window_set_title(GTK_WINDOW(dialog),"GHPSDR");
+                result = gtk_dialog_run (GTK_DIALOG (dialog));
+                switch (result) {
+                    case GTK_RESPONSE_YES:
+                        retry=TRUE;
+                        break;
+                    default:
+                        exit(1);
+                        break;
                 }
                 gtk_widget_destroy (dialog);
                 break;

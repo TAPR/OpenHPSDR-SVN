@@ -26,7 +26,8 @@ SOURCES= agc.c audio.c band.c bandscope.c bandscope_control.c bandscope_update.c
          soundcard.c spectrum_buffers.c spectrum.c spectrum_update.c util.c vfo.c volume.c\
          sinewave.c transmit.c\
          iphone.c audiostream.c\
-         subrx.c
+         subrx.c\
+         metis.c
 
 OBJS= agc.o audio.o band.o bandscope.o bandscope_control.o bandscope_update.o command.o\
       display.o filter.o frequency.o libusbio.o main.o meter.o\
@@ -36,7 +37,8 @@ OBJS= agc.o audio.o band.o bandscope.o bandscope_control.o bandscope_update.o co
       soundcard.o spectrum_buffers.o spectrum.o spectrum_update.o util.o vfo.o volume.o\
       sinewave.o transmit.o\
       iphone.o audiostream.o\
-      subrx.o
+      subrx.o\
+      metis.o
 
 PROGRAM=bin/ghpsdr
 

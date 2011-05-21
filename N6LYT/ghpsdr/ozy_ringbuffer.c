@@ -88,7 +88,7 @@ int ozy_ringbuffer_put(struct ozy_ringbuffer* buffer,unsigned char* f,int n) {
     bytes=n;
 
     if(ozy_ringbuffer_space(buffer)<=n) {
-fprintf(stderr,"ozy_ringbuffer_put: space=%d wanted=%d\n",ozy_ringbuffer_space(buffer),n);
+fprintf(stderr,"ozy_ringbuffer_put: space=%d wanted=%d inert=%d remove=%d\n",ozy_ringbuffer_space(buffer),n,buffer->insert_index,buffer->remove_index);
         bytes=ozy_ringbuffer_space(buffer)-1;
     }
     ozy_put_bytes+=bytes;

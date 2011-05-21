@@ -40,7 +40,7 @@ int spectrumUpdatesPerSecond;
 gint spectrumUpdate(gpointer data);
 void updateSamples();
 
-float spectrumBuffer[SPECTRUM_BUFFER_SIZE];
+float spectrumBuffer[SPECTRUM_SAMPLES];
 
 gint spectrumTimerId;
 
