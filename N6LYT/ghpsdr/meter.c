@@ -332,30 +332,10 @@ void meterPlotSignal(float sample) {
 
     // plot the meter
     float val=sample;
-    val+=multimeterCalibrationOffset + preampOffset + getFilterSizeCalibrationOffset();
+    val+=multimeterCalibrationOffset + getFilterSizeCalibrationOffset();
 
     meterDbm=(int)val;
-
-    meterX=0;
-
-    if(val <= -97.0f)
-        meterX = (int)(0+(val+100.0)/3.0*10);
-    else if(val <= -91.0f)
-        meterX = (int)(10+(val+97.0)/6.0*17);
-    else if(val <= -85.0f)
-        meterX = (int)(27+(val+91.0)/6.0*16);
-    else if(val <= -79.0f)
-        meterX = (int)(43+(val+85.0)/6.0*17);
-    else if(val <= -73.0f)
-        meterX = (int)(60+(val+79.0)/6.0*16);
-    else if(val <= -53.0f)
-        meterX = (int)(76+(val+73.0)/20.0*24);
-    else if(val <= -33.0f)
-        meterX = (int)(100+(val+53.0)/20.0*24);
-    else if(val <= -13.0f)
-        meterX = (int)(124+(val+33.0)/20.0*24);
-    else
-        meterX = (int)(148 + (val+13.0)/20.0*19);
+    meterX=meterDbm+127;
     if(meterX<=0) meterX=1;
 }
 

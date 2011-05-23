@@ -722,7 +722,7 @@ int main(int argc,char* argv[]) {
     fprintf(stderr,"ghpsdr Version %s\n",VERSION);
 
     strcpy(propertyPath,".ghpsdr.properties");
-    strcpy(soundCardName,"UNSUPPORTED_CARD");
+    strcpy(soundCardName,"HPSDR");
     ozy_set_interface("eth0");
     processCommands(argc,argv);
     loadProperties(propertyPath);

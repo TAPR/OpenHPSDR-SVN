@@ -77,7 +77,7 @@ static unsigned char control_in[5]={0x00,0x00,0x00,0x00,0x00};
 
 unsigned char control_out[5]={0x00,0x00,0x00,0x00,0x00};
 
-int output_sample_increment=1; // 1=48000 2=96000 4=192000
+int output_sample_increment=2; // 1=48000 2=96000 4=192000
 
 int buffer_size=1024;
 
@@ -118,7 +118,7 @@ unsigned char spectrum_samples[SPECTRUM_BUFFER_SIZE];
 
 int lt2208ADCOverflow=0;
 
-int speed=0;           // default 48K
+int speed=1;           // default 96K
 int class=0;           // default other
 int lt2208Dither=1;    // default dither on
 int lt2208Random=1;    // default random 0n
@@ -128,7 +128,7 @@ int clock10MHz=2;      // default 10 MHz clock source Mercury
 int clock122_88MHz=1;  // default 122.88 MHz clock source Mercury
 int preamp=0;          // default preamp off
 
-int sampleRate=48000;  // default 48k
+int sampleRate=96000;  // default 48k
 
 int mox=0;             // default not transmitting
 
@@ -830,6 +830,9 @@ void setLT2208Random(int random) {
 int ozy_init() {
     int rc;
 
+    //
+    setSpeed(speed);
+
     // setup defaults
     control_out[0] = MOX_DISABLED;
     control_out[1] = CONFIG_MERCURY
@@ -876,18 +879,6 @@ fprintf(stderr,"Metis found after %d\n",i);
         fprintf(stderr,"Ozy FX2 version: %s\n",ozy_firmware_version);
     }
     
-    switch(speed) {
-        case 48000:
-            output_sample_increment = 1;
-            break;
-        case 96000:
-            output_sample_increment = 2;
-            break;
-        case 192000:
-            output_sample_increment = 4;
-            break;
-    }
-
     force_write=0;
 
     // create buffers of ozy
