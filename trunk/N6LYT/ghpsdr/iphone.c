@@ -41,6 +41,7 @@
 #include "mode.h"
 #include "ozy.h"
 #include "spectrum_update.h"
+#include "spectrum_buffers.h"
 #include "vfo.h"
 #include "main.h"
 #include "soundcard.h"

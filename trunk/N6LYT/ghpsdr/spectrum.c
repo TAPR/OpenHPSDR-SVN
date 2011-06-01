@@ -84,7 +84,7 @@ int adcOverflow=0;
 
 gboolean spectrumAverage=1;
 int initAverage=1;
-float averageSpectrum[SPECTRUM_BUFFER_SIZE];
+float averageSpectrum[SPECTRUM_SAMPLES];
 float spectrumAverageSmoothing=0.4f;
  
 gboolean spectrum_configure_event(GtkWidget* widget,GdkEventConfigure* event);
@@ -577,11 +577,11 @@ void plotSpectrum(float* samples,int height) {
     f=frequencyA-(sampleRate/2);
     hzPerPixel=(float)sampleRate/(float)spectrumWIDTH;
 
-    start_sample_index=(SPECTRUM_BUFFER_SIZE>>1)+((spectrumLow*SPECTRUM_BUFFER_SIZE)/sampleRate);
-    num_samples=(int)((spectrumHigh-spectrumLow)*SPECTRUM_BUFFER_SIZE/sampleRate);
+    start_sample_index=(SPECTRUM_SAMPLES>>1)+((spectrumLow*SPECTRUM_SAMPLES)/sampleRate);
+    num_samples=(int)((spectrumHigh-spectrumLow)*SPECTRUM_SAMPLES/sampleRate);
     if (start_sample_index < 0) start_sample_index = 0;
-    if ((num_samples - start_sample_index) > (SPECTRUM_BUFFER_SIZE+1))
-        num_samples = SPECTRUM_BUFFER_SIZE-start_sample_index;
+    if ((num_samples - start_sample_index) > (SPECTRUM_SAMPLES+1))
+        num_samples = SPECTRUM_SAMPLES-start_sample_index;
     slope = (float)num_samples/(float)spectrumWIDTH;
 
     int spectrum_max_x=0;
@@ -590,17 +590,17 @@ void plotSpectrum(float* samples,int height) {
 
     if(spectrumAverage) {
         if(initAverage) {
-            for(i=0;i<SPECTRUM_BUFFER_SIZE;i++) {
+            for(i=0;i<SPECTRUM_SAMPLES;i++) {
                 averageSpectrum[i]=samples[i];
             }
             initAverage=0;
         } else {
-            for(i=0;i<SPECTRUM_BUFFER_SIZE;i++) {
+            for(i=0;i<SPECTRUM_SAMPLES;i++) {
                 averageSpectrum[i] = (samples[i] * (1 - spectrumAverageSmoothing)) + (averageSpectrum[i] * spectrumAverageSmoothing);
             }
         }
     } else {
-        for(i=0;i<SPECTRUM_BUFFER_SIZE;i++) {
+        for(i=0;i<SPECTRUM_SAMPLES;i++) {
             averageSpectrum[i]=samples[i];
         }
     }
@@ -610,7 +610,7 @@ void plotSpectrum(float* samples,int height) {
         float dval = i*slope + start_sample_index;
         int lindex = (int)floorf(dval);
         int rindex = (int)floorf(dval + slope);
-        if (rindex > SPECTRUM_BUFFER_SIZE) rindex = SPECTRUM_BUFFER_SIZE;
+        if (rindex > SPECTRUM_SAMPLES) rindex = SPECTRUM_SAMPLES;
 
         if(f>0) {
             int j;
