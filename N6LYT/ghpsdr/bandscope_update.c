@@ -79,9 +79,11 @@ gint bandscopeUpdate(gpointer data) {
 void bandscopeUpdateSamples() {
     int i;
     short s;
+
     for(i=0;i<BANDSCOPE_BUFFER_SIZE;i++) {
         s=(bandscopeBuffer[i*2]<<8)+bandscopeBuffer[(i*2)+1];
         bandscopeSamples[i]=(float)s/32767.0f; // get into range -1..+1
     }
+
     updateBandscope(bandscopeSamples);
 }

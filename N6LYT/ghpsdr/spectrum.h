@@ -36,6 +36,8 @@
 #define spectrumHISTOGRAM 6
 #define spectrumNONE 7
 
+#define SPECTRUM_SAMPLES 1024
+
 #ifdef NETBOOK
 #define spectrumWIDTH 858
 #define spectrumHEIGHT 300

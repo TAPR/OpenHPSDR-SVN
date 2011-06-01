@@ -223,9 +223,11 @@ void updateBandscope(float* samples) {
         timebuf[i][0]-=average;
     }
 */
+
     for(i=0;i<BANDSCOPE_BUFFER_SIZE*BANDSCOPE_MULTIPLIER;i++) {
         if(i<BANDSCOPE_BUFFER_SIZE) {
             timebuf[i][0]=samples[i]*blackmanHarris[i];
+            //timebuf[i][0]=samples[i];
         } else {
             timebuf[i][0]=0.0f;
         }
