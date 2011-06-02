@@ -232,7 +232,7 @@ void metis_start_receive_thread() {
     data_addr.sin_port=htons(DATA_PORT);
     memcpy((char *)&data_addr.sin_addr.s_addr,h->h_addr_list[0],h->h_length);
 
-    //  ***************  ozy_prime();
+    ozy_prime();
     
     // send a packet to start the stream
     buffer[0]=0xEF;
@@ -336,7 +336,6 @@ static int offset=8;
 int metis_write(unsigned char ep,char* buffer,int length) {
     int i;
 
-//fprintf(stderr,"metis_write\n");
     if(offset==8) {
 
         send_sequence++;

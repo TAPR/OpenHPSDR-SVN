@@ -181,7 +181,6 @@ void process_bandscope_buffer(char* buffer) {
 void process_ozy_input_buffer(char* buffer) {
     int i,j;
     int b=0;
-    int c=0;
     unsigned char ozy_samples[8*8];
     int bytes;
 
@@ -336,7 +335,7 @@ void process_ozy_input_buffer(char* buffer) {
                 }
 
                 // process the output
-                for(j=0,c=0;j<buffer_size;j+=output_sample_increment) {
+                for(j=0;j<buffer_size;j+=output_sample_increment) {
                     left_rx_sample=(short)(left_output_buffer[j]*32767.0);
                     right_rx_sample=(short)(right_output_buffer[j]*32767.0);
 
@@ -360,52 +359,52 @@ void process_ozy_input_buffer(char* buffer) {
                     output_buffer[output_buffer_index++]=right_tx_sample;
 
                     if(output_buffer_index>=OZY_BUFFER_SIZE) {
-            output_buffer[0]=SYNC;
-            output_buffer[1]=SYNC;
-            output_buffer[2]=SYNC;
+                        output_buffer[0]=SYNC;
+                        output_buffer[1]=SYNC;
+                        output_buffer[2]=SYNC;
 
-            if(splitChanged) {
-                output_buffer[3]=control_out[0];
-                output_buffer[4]=control_out[1];
-                output_buffer[5]=control_out[2];
-                output_buffer[6]=control_out[3];
-                if(bSplit) {
-                    output_buffer[7]=control_out[4]|0x04;
-                } else {
-                    output_buffer[7]=control_out[4];
-                }
-                splitChanged=0;
-            } else if(frequencyAChanged) {
-                if(bSplit) {
-                    output_buffer[3]=control_out[0]|0x04; // Mercury (1)
-                } else {
-                    output_buffer[3]=control_out[0]|0x02; // Mercury and Penelope
-                }
-                output_buffer[4]=ddsAFrequency>>24;
-                output_buffer[5]=ddsAFrequency>>16;
-                output_buffer[6]=ddsAFrequency>>8;
-                output_buffer[7]=ddsAFrequency;
-                frequencyAChanged=0;
-            } else if(frequencyBChanged) {
-                if(bSplit) {
-                    output_buffer[3]=control_out[0]|0x02; // Penelope
-                    output_buffer[4]=ddsBFrequency>>24;
-                    output_buffer[5]=ddsBFrequency>>16;
-                    output_buffer[6]=ddsBFrequency>>8;
-                    output_buffer[7]=ddsBFrequency;
-                }
-                frequencyBChanged=0;
-            } else {
-                output_buffer[3]=control_out[0];
-                output_buffer[4]=control_out[1];
-                output_buffer[5]=control_out[2];
-                output_buffer[6]=control_out[3];
-                if(bSplit) {
-                    output_buffer[7]=control_out[4]|0x04;
-                } else {
-                    output_buffer[7]=control_out[4];
-                }
-            }
+                        if(splitChanged) {
+                            output_buffer[3]=control_out[0];
+                            output_buffer[4]=control_out[1];
+                            output_buffer[5]=control_out[2];
+                            output_buffer[6]=control_out[3];
+                            if(bSplit) {
+                                output_buffer[7]=control_out[4]|0x04;
+                            } else {
+                                output_buffer[7]=control_out[4];
+                            }
+                            splitChanged=0;
+                        } else if(frequencyAChanged) {
+                            if(bSplit) {
+                                output_buffer[3]=control_out[0]|0x04; // Mercury (1)
+                            } else {
+                                output_buffer[3]=control_out[0]|0x02; // Mercury and Penelope
+                            }
+                            output_buffer[4]=ddsAFrequency>>24;
+                            output_buffer[5]=ddsAFrequency>>16;
+                            output_buffer[6]=ddsAFrequency>>8;
+                            output_buffer[7]=ddsAFrequency;
+                            frequencyAChanged=0;
+                        } else if(frequencyBChanged) {
+                            if(bSplit) {
+                                output_buffer[3]=control_out[0]|0x02; // Penelope
+                                output_buffer[4]=ddsBFrequency>>24;
+                                output_buffer[5]=ddsBFrequency>>16;
+                                output_buffer[6]=ddsBFrequency>>8;
+                                output_buffer[7]=ddsBFrequency;
+                            }
+                            frequencyBChanged=0;
+                        } else {
+                            output_buffer[3]=control_out[0];
+                            output_buffer[4]=control_out[1];
+                            output_buffer[5]=control_out[2];
+                            output_buffer[6]=control_out[3];
+                            if(bSplit) {
+                                output_buffer[7]=control_out[4]|0x04;
+                            } else {
+                                output_buffer[7]=control_out[4];
+                            }
+                        }
 
 
                         if(metis) {
@@ -419,23 +418,6 @@ void process_ozy_input_buffer(char* buffer) {
                         output_buffer_index=8;
                     }
 
-/*
-                    ozy_samples[c]=left_rx_sample>>8;
-                    ozy_samples[c+1]=left_rx_sample;
-                    ozy_samples[c+2]=right_rx_sample>>8;
-                    ozy_samples[c+3]=right_rx_sample;
-                    ozy_samples[c+4]=left_tx_sample>>8;
-                    ozy_samples[c+5]=left_tx_sample;
-                    ozy_samples[c+6]=right_tx_sample>>8;
-                    ozy_samples[c+7]=right_tx_sample;
-                    c+=8;
-                    if(c==64) {
-                        if(ozy_ringbuffer_put(ozy_output_buffer,ozy_samples,c)!=c) {
-                            // ozy output buffer overflow
-                        }
-                        c=0;
-                    }
-*/
                 }
             
                 samples=0;
@@ -453,6 +435,35 @@ void process_ozy_input_buffer(char* buffer) {
         dump_ozy_buffer("input buffer",buffer);
     }
 
+}
+
+void ozy_prime() {
+    int i;
+    int bytes;
+
+    output_buffer[0]=SYNC;
+    output_buffer[1]=SYNC;
+    output_buffer[2]=SYNC;
+    output_buffer[3]=control_out[0];
+    output_buffer[4]=control_out[1];
+    output_buffer[5]=control_out[2];
+    output_buffer[6]=control_out[3];
+    output_buffer[7]=control_out[4];
+
+    for(i=8;i<OZY_BUFFER_SIZE;i++) {
+        output_buffer[i]=0;
+    }
+
+    for(i=0;i<2;i++) {
+        if(metis) {
+            metis_write(0x02,output_buffer,OZY_BUFFER_SIZE);
+        } else {
+            bytes=libusb_write_ozy(0x02,(void*)(output_buffer),OZY_BUFFER_SIZE);
+            if(bytes!=OZY_BUFFER_SIZE) {
+                perror("OzyBulkWrite failed");
+            }
+        }
+    }
 }
 
 /* --------------------------------------------------------------------------*/
