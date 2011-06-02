@@ -40,6 +40,7 @@
 #include "soundcard.h"
 #include "spectrum.h"
 #include "spectrum_update.h"
+#include "spectrum_buffers.h"
 #include "vfo.h"
 #include "subrx.h"
 #include "iphone.h"
