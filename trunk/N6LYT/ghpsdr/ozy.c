@@ -548,6 +548,9 @@ void* ozy_ep6_ep2_io_thread(void* arg) {
 #ifdef OZY_BUFFERS
         // see if we have enough to send a buffer or force the write if we have a timeout
         if((bytes==USB_TIMEOUT) || ozy_ringbuffer_entries(ozy_output_buffer)>=(OZY_BUFFER_SIZE-8) || force_write || frequencyAChanged || frequencyBChanged) {
+#else
+        if(bytes==USB_TIMEOUT) {
+#endif
             
             force_write=0;
 
@@ -598,12 +601,14 @@ void* ozy_ep6_ep2_io_thread(void* arg) {
                 }
             }
 
+#ifdef OZY_BUFFERS
             if(ozy_ringbuffer_entries(ozy_output_buffer)>=(OZY_BUFFER_SIZE-8)) {
                 bytes=ozy_ringbuffer_get(ozy_output_buffer,&output_buffer[8],OZY_BUFFER_SIZE-8);
                 if(bytes!=OZY_BUFFER_SIZE-8) {
                     fprintf(stderr,"OOPS - thought there was enough for usb output but only %d\n",bytes);
                 }
             }
+#endif
 
             bytes=libusb_write_ozy(0x02,(void*)(output_buffer),OZY_BUFFER_SIZE);
             if(bytes!=OZY_BUFFER_SIZE) {
@@ -615,7 +620,6 @@ void* ozy_ep6_ep2_io_thread(void* arg) {
             //    dump_ozy_buffer("output buffer",output_buffer);
             //}
         }
-#endif
 
     }
 }
@@ -879,11 +883,11 @@ int ozy_init() {
 
     if(metis) {
         int found;
-        int i;
+        long i;
         metis_discover(interface);
-        for(i=0;i<60000;i++) {
+        for(i=0;i<30000;i++) {
             if(metis_found()>0) {
-fprintf(stderr,"Metis found after %d\n",i);
+fprintf(stderr,"Metis discovered after %ld\n",i);
                 break;
             }
         }
