@@ -33,6 +33,8 @@
 #include "vfo.h"
 #include "metis.h"
 
+//#define OZY_BUFFERS
+
 /*
  *   ozy interface
  */
@@ -511,27 +513,39 @@ void* ozy_ep6_ep2_io_thread(void* arg) {
     int bytes;
 
     while(1) {
-
         // read an input buffer (blocks until all bytes read)
-        //ozy_buffer=get_ozy_free_buffer();
-        //if(ozy_buffer!=NULL) {
+#ifdef OZY_BUFFERS
+        ozy_buffer=get_ozy_free_buffer();
+        if(ozy_buffer!=NULL) {
+            bytes=libusb_read_ozy(0x86,(void*)(ozy_buffer->buffer),OZY_BUFFER_SIZE);
+#else
             bytes=libusb_read_ozy(0x86,(void*)(input_buffer),OZY_BUFFER_SIZE);
+#endif
             if (bytes < 0) {
                 fprintf(stderr,"ozy_ep6_ep2_io_thread: OzyBulkRead read failed %d\n",bytes);
-                //free_ozy_buffer(ozy_buffer);
+#ifdef OZY_BUFFERS
+                free_ozy_buffer(ozy_buffer);
+#endif
             } else if (bytes != OZY_BUFFER_SIZE) {
                 fprintf(stderr,"ozy_ep6_ep2_io_thread: OzyBulkRead only read %d bytes\n",bytes);
-                //free_ozy_buffer(ozy_buffer);
+#ifdef OZY_BUFFERS
+                free_ozy_buffer(ozy_buffer);
+#endif
             } else {
                 // process input buffer
-                //put_ozy_input_buffer(ozy_buffer);
-                //sem_post(ozy_input_buffer_sem);
+#ifdef OZY_BUFFERS
+                put_ozy_input_buffer(ozy_buffer);
+                sem_post(ozy_input_buffer_sem);
+#else
                 process_ozy_input_buffer(input_buffer);
+#endif
             }
 
-        //}
+#ifdef OZY_BUFFERS
+        }
+#endif
 
-/*
+#ifdef OZY_BUFFERS
         // see if we have enough to send a buffer or force the write if we have a timeout
         if((bytes==USB_TIMEOUT) || ozy_ringbuffer_entries(ozy_output_buffer)>=(OZY_BUFFER_SIZE-8) || force_write || frequencyAChanged || frequencyBChanged) {
             
@@ -601,7 +615,7 @@ void* ozy_ep6_ep2_io_thread(void* arg) {
             //    dump_ozy_buffer("output buffer",output_buffer);
             //}
         }
-*/
+#endif
 
     }
 }
@@ -618,26 +632,42 @@ void* ozy_ep4_io_thread(void* arg) {
     struct spectrum_buffer* spectrum_buffer;
     int bytes;
     int i;
+    unsigned char input_buffer[SPECTRUM_BUFFER_SIZE];
 
     while(1) {
+#ifdef OZY_BUFFERS
         spectrum_buffer=get_spectrum_free_buffer();
         if(spectrum_buffer!=NULL) {
             bytes=libusb_read_ozy(0x84,(void*)(spectrum_buffer->buffer),SPECTRUM_BUFFER_SIZE);
+#else
+            bytes=libusb_read_ozy(0x84,(void*)(input_buffer),SPECTRUM_BUFFER_SIZE);
+#endif
             if (bytes < 0) {
                 fprintf(stderr,"ozy_ep4_io_thread: OzyBulkRead failed %d bytes\n",bytes);
+#ifdef OZY_BUFFERS
                 free_spectrum_buffer(spectrum_buffer);
+#endif
             } else if (bytes != SPECTRUM_BUFFER_SIZE) {
                 fprintf(stderr,"ozy_ep4_io_thread: OzyBulkRead only read %d bytes\n",bytes);
+#ifdef OZY_BUFFERS
                 free_spectrum_buffer(spectrum_buffer);
+#endif
             } else {
-
                 // process input buffer
+#ifdef OZY_BUFFERS
                 put_spectrum_input_buffer(spectrum_buffer);
                 sem_post(spectrum_input_buffer_sem);
+#else
+                for(i=0;i<SPECTRUM_BUFFER_SIZE;i+=OZY_BUFFER_SIZE) {
+                    process_bandscope_buffer(&input_buffer[i]);
+                }
+#endif
             }
+#ifdef OZY_BUFFERS
         } else {
             fprintf(stderr,"ozy_ep4_io_thread: get_spectrum_free_buffer returned NULL!");
         }
+#endif
     }
 }
 
@@ -881,26 +911,31 @@ fprintf(stderr,"Metis found after %d\n",i);
     
     force_write=0;
 
+#ifdef OZY_BUFFERS
     // create buffers of ozy
     create_ozy_ringbuffer(128*512);
     create_ozy_buffers(128);
+#endif
     create_spectrum_buffers(8);
     
-    // create a thread to process EP6 input buffers
-//    rc=pthread_create(&ozy_input_buffer_thread_id,NULL,ozy_input_buffer_thread,NULL);
-//    if(rc != 0) {
-//        fprintf(stderr,"pthread_create failed on ozy_input_buffer_thread: rc=%d\n", rc);
-//    }
-
-    // create a thread to process EP4 input buffers
-//    rc=pthread_create(&ozy_spectrum_buffer_thread_id,NULL,ozy_spectrum_buffer_thread,NULL);
-//    if(rc != 0) {
-//        fprintf(stderr,"pthread_create failed on ozy_spectrum_buffer_thread: rc=%d\n", rc);
-//    }
 
     if(metis) { 
         metis_start_receive_thread();
     } else {
+#ifdef OZY_BUFFERS
+        // create a thread to process EP6 input buffers
+        rc=pthread_create(&ozy_input_buffer_thread_id,NULL,ozy_input_buffer_thread,NULL);
+        if(rc != 0) {
+            fprintf(stderr,"pthread_create failed on ozy_input_buffer_thread: rc=%d\n", rc);
+        }
+
+        // create a thread to process EP4 input buffers
+        rc=pthread_create(&ozy_spectrum_buffer_thread_id,NULL,ozy_spectrum_buffer_thread,NULL);
+        if(rc != 0) {
+            fprintf(stderr,"pthread_create failed on ozy_spectrum_buffer_thread: rc=%d\n", rc);
+        }
+#endif
+
         // create a thread to read/write to EP6/EP2
         rc=pthread_create(&ep6_ep2_io_thread_id,NULL,ozy_ep6_ep2_io_thread,NULL);
         if(rc != 0) {
