@@ -283,8 +283,8 @@ void* metis_receive_thread(void* arg) {
                                 process_ozy_input_buffer(&buffer[520]);
                                 break;
                             case 4: // EP4
-                                process_bandscope_buffer(&buffer[0]);
-                                process_bandscope_buffer(&buffer[512]);
+                                process_bandscope_buffer(&buffer[8]);
+                                process_bandscope_buffer(&buffer[520]);
                                 break;
                             default:
                                 fprintf(stderr,"unexpected EP %d length=%d\n",ep,bytes_read);
