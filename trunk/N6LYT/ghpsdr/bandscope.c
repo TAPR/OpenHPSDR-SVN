@@ -42,8 +42,8 @@ GtkAdjustment* horizontalAdjustment;
 GtkAdjustment* verticalAdjustment;
 GtkWidget* bandscope;
 
-int bandscopeMAX=60;
-int bandscopeMIN=-0;
+int bandscopeMAX=70;
+int bandscopeMIN=-10;
 int bandscopeSTEP=10;
 
 int bandscopeLow=0;
