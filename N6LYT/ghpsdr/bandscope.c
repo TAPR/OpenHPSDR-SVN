@@ -224,7 +224,7 @@ void updateBandscope(float* samples) {
     // compute the power levels
     for(i=0;i<BANDSCOPE_BUFFER_SIZE*BANDSCOPE_MULTIPLIER;i++) {
         result[i]=(10.0f*log(sqrt(freqbuf[i][0]*freqbuf[i][0] +
-                  freqbuf[i][1]*freqbuf[i][1])))/*+preampOffset*/;
+                  freqbuf[i][1]*freqbuf[i][1])));
     }
 
     if(bandscopeAverage) {
@@ -404,6 +404,7 @@ void plotBandscope(float* samples) {
             for(j=offset;j<offset+samplesPerPixel;j++) {
                   if(samples[j]>max) max=samples[j];
             }
+            max = max + displayCalibrationOffset + preampOffset;
             bandscopePoints[i].x=i;
             bandscopePoints[i].y=(int)(floor((bandscopeMAX - max)*(float)bandscopeHEIGHT/yRange));
         }
