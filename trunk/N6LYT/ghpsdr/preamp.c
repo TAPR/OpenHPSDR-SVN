@@ -41,6 +41,7 @@ GtkWidget* preampFrame;
 GtkWidget* preampTable;
 
 GtkWidget* buttonOn;
+float preampOffset=0.0;
 
 /* --------------------------------------------------------------------------*/
 /** 
@@ -56,10 +57,13 @@ void preampButtonCallback(GtkWidget* widget,gpointer data) {
 
     if(preamp) {
         state=0;
+        preampOffset=0.0;
     } else {
         state=1;
+        preampOffset=-20.0;
     }    
     setPreamp(state);
+
 
     label=gtk_bin_get_child((GtkBin*)widget);
     if(state) {
@@ -112,8 +116,10 @@ void forcePreamp(int state) {
     if(state) {
         gtk_widget_modify_fg(label, GTK_STATE_NORMAL, &buttonSelected);
         gtk_widget_modify_fg(label, GTK_STATE_PRELIGHT, &buttonSelected);
+        preampOffset=-20.0;
     } else {
         gtk_widget_modify_fg(label, GTK_STATE_NORMAL, &white);
         gtk_widget_modify_fg(label, GTK_STATE_PRELIGHT, &black);
+        preampOffset=0.0;
     }
 }

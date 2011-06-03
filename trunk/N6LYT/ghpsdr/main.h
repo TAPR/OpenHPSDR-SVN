@@ -41,10 +41,7 @@ GdkColor verticalColor;
 GdkColor horizontalColor;
 GdkColor spectrumTextColor;
 
-
 char propertiesPath[128];
-
-float preampOffset;
 
 int cwPitch;
 

@@ -40,6 +40,12 @@ GtkWidget* setupNotebook;
 
 void quitSetup();
 
+void ghpsdr_setup_update() {
+    if(setupWindow!=NULL) {
+        updateDisplaySetup();
+    }
+}
+
 /* --------------------------------------------------------------------------*/
 /** 
 * @brief ghpsdr_setup

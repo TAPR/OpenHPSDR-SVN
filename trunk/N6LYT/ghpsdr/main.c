@@ -819,7 +819,6 @@ int main(int argc,char* argv[]) {
     mainRootX=0;
     mainRootY=0;
 
-    preampOffset=-20.0F;
     cwPitch =600;
 
     restoreInitialState();

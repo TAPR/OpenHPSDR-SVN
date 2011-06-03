@@ -335,3 +335,12 @@ void bandscopeAverageChanged(GtkToggleButton* button,gpointer data) {
 void bandscopeSmoothingChanged(GtkSpinButton* spinButton,gpointer data) {
     bandscopeAverageSmoothing=gtk_spin_button_get_value(spinButton);
 }
+
+void updateDisplaySetup() {
+    gtk_spin_button_set_value((GtkSpinButton*)spectrumHighSpinButton,(double)spectrumMAX);
+    gtk_spin_button_set_value((GtkSpinButton*)spectrumLowSpinButton,(double)spectrumMIN);
+    gtk_spin_button_set_value((GtkSpinButton*)spectrumStepSpinButton,(double)spectrumSTEP);
+    gtk_spin_button_set_value((GtkSpinButton*)waterfallHighSpinButton,(double)waterfallHighThreshold);
+    gtk_spin_button_set_value((GtkSpinButton*)waterfallLowSpinButton,(double)waterfallLowThreshold);
+}
+

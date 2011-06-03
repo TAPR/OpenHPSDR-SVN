@@ -30,3 +30,5 @@
 //
 
 void ghpsdr_setup();
+
+void ghpsdr_setup_update();

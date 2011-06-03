@@ -31,3 +31,5 @@
 //
 
 GtkWidget* displaySetupUI();
+
+void updateDisplaySetup();
