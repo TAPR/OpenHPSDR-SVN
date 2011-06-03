@@ -42,6 +42,7 @@
 #include "property.h"
 #include "soundcard.h"
 #include "ozy.h"
+#include "preamp.h"
 
 GtkWidget* meterFixed;
 GtkWidget* meter;
@@ -332,7 +333,7 @@ void meterPlotSignal(float sample) {
 
     // plot the meter
     float val=sample;
-    val+=multimeterCalibrationOffset + getFilterSizeCalibrationOffset();
+    val+=multimeterCalibrationOffset + getFilterSizeCalibrationOffset()+preampOffset;
 
     meterDbm=(int)val;
     meterX=meterDbm+127;
