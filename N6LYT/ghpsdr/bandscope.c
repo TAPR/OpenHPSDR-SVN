@@ -36,6 +36,7 @@
 #include "soundcard.h"
 #include "bandscope.h"
 #include "vfo.h"
+#include "preamp.h"
 
 GtkWidget* bandscopeScrolledWindow;
 GtkAdjustment* horizontalAdjustment;
@@ -207,23 +208,6 @@ void updateBandscope(float* samples) {
     float average=0.0f;
 
     // copy samples into time domain array
-/*
-    for(i=0;i<BANDSCOPE_BUFFER_SIZE*BANDSCOPE_MULTIPLIER;i++) {
-        if(i<BANDSCOPE_BUFFER_SIZE) {
-            timebuf[i][0]=samples[i]*blackmanHarris[i];
-            average+=timebuf[i][0];
-        } else {
-            timebuf[i][0]=0.0f;
-        }
-        timebuf[i][1]=0.0f;
-    }
-
-    average=average/(float)i;
-    for(i=0;i<BANDSCOPE_BUFFER_SIZE*BANDSCOPE_MULTIPLIER;i++) {
-        timebuf[i][0]-=average;
-    }
-*/
-
     for(i=0;i<BANDSCOPE_BUFFER_SIZE*BANDSCOPE_MULTIPLIER;i++) {
         if(i<BANDSCOPE_BUFFER_SIZE) {
             timebuf[i][0]=samples[i]*blackmanHarris[i];
@@ -234,15 +218,13 @@ void updateBandscope(float* samples) {
         timebuf[i][1]=0.0f;
     }
 
-
-
     // perform the fft
     fftwf_execute(plan);
 
     // compute the power levels
     for(i=0;i<BANDSCOPE_BUFFER_SIZE*BANDSCOPE_MULTIPLIER;i++) {
-        result[i]=10.0f*log(sqrt(freqbuf[i][0]*freqbuf[i][0] +
-                  freqbuf[i][1]*freqbuf[i][1]));
+        result[i]=(10.0f*log(sqrt(freqbuf[i][0]*freqbuf[i][0] +
+                  freqbuf[i][1]*freqbuf[i][1])))/*+preampOffset*/;
     }
 
     if(bandscopeAverage) {

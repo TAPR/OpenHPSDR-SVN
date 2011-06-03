@@ -51,6 +51,7 @@
 #include "vfo.h"
 #include "spectrum.h"
 #include "subrx.h"
+#include "setup.h"
 
 GtkWidget* bandFrame;
 GtkWidget* bandTable;
@@ -507,6 +508,9 @@ void selectBand(GtkWidget* widget) {
 
         }
     }
+
+    //  if setup window displayed update the spectrum and waterfall values
+    ghpsdr_setup_update();
 }
 
 /* --------------------------------------------------------------------------*/

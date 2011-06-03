@@ -25,6 +25,8 @@
 * 
 */
 
+float preampOffset;
+
 /* --------------------------------------------------------------------------*/
 /** 
 * @brief Build Preamp User Interface 
