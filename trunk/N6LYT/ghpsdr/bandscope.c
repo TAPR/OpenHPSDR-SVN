@@ -409,7 +409,7 @@ void plotBandscope(float* samples) {
             for(j=offset;j<offset+samplesPerPixel;j++) {
                   if(samples[j]>max) max=samples[j];
             }
-            max = max + displayCalibrationOffset + preampOffset;
+            max = max + displayCalibrationOffset /*+ preampOffset*/;
             bandscopePoints[i].x=i;
             bandscopePoints[i].y=(int)(floor((bandscopeMAX - max)*(float)bandscopeHEIGHT/yRange));
         }

@@ -25,11 +25,10 @@
 * 
 */
 
-gboolean cwKeyboard;
-
 int cwPitch;
 
-GtkWidget* buildCwUI();
-void cwSaveState();
-void cwRestoreState();
+short cwSin[240];
+short cwCos[240];
+int cwIndex;
 
+void init_cw();
