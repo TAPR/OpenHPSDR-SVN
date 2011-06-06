@@ -43,7 +43,7 @@
 #include "spectrum_buffers.h"
 #include "vfo.h"
 #include "subrx.h"
-#include "iphone.h"
+#include "preamp.h"
 
 GtkWidget* spectrum;
 
@@ -326,8 +326,6 @@ gboolean spectrum_scroll_event(GtkWidget* widget,GdkEventScroll* event) {
 * @param samples
 */
 void updateSpectrum(float* samples) {
-
-    iphone_set_samples(samples);
 
     spectrumLow=-sampleRate/2;
     spectrumHigh=+sampleRate/2;

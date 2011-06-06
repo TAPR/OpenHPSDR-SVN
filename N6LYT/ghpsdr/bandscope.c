@@ -55,7 +55,8 @@ int bandscopeOffset=0;
 
 float* blackmanHarris;
 
-fftwf_complex* timebuf;
+//fftwf_complex* timebuf;
+float* timebuf;
 fftwf_complex* freqbuf;
 fftwf_plan plan;
 float* result;
@@ -90,9 +91,11 @@ float *blackmanHarrisFilter(int n);
 GtkWidget* buildBandscopeUI() {
     
     // prepare the fft (time domain to frequency domain)
-    timebuf=(fftwf_complex*)fftwf_malloc(sizeof(fftwf_complex)*BANDSCOPE_BUFFER_SIZE*BANDSCOPE_MULTIPLIER);
+    //timebuf=(fftwf_complex*)fftwf_malloc(sizeof(fftwf_complex)*BANDSCOPE_BUFFER_SIZE*BANDSCOPE_MULTIPLIER);
+    timebuf=(double*)fftwf_malloc(sizeof(double)*BANDSCOPE_BUFFER_SIZE*BANDSCOPE_MULTIPLIER);
     freqbuf=(fftwf_complex*)fftwf_malloc(sizeof(fftwf_complex)*BANDSCOPE_BUFFER_SIZE*BANDSCOPE_MULTIPLIER);
-    plan=fftwf_plan_dft_1d(BANDSCOPE_BUFFER_SIZE*BANDSCOPE_MULTIPLIER,timebuf,freqbuf,FFTW_FORWARD,FFTW_ESTIMATE);
+    //plan=fftwf_plan_dft_1d(BANDSCOPE_BUFFER_SIZE*BANDSCOPE_MULTIPLIER,timebuf,freqbuf,FFTW_FORWARD,FFTW_MEASURE);
+    plan=fftwf_plan_dft_r2c_1d(BANDSCOPE_BUFFER_SIZE*BANDSCOPE_MULTIPLIER,timebuf,freqbuf,FFTW_MEASURE);
 
     result=malloc(BANDSCOPE_BUFFER_SIZE*BANDSCOPE_MULTIPLIER*sizeof(float));
 
@@ -210,12 +213,14 @@ void updateBandscope(float* samples) {
     // copy samples into time domain array
     for(i=0;i<BANDSCOPE_BUFFER_SIZE*BANDSCOPE_MULTIPLIER;i++) {
         if(i<BANDSCOPE_BUFFER_SIZE) {
-            timebuf[i][0]=samples[i]*blackmanHarris[i];
+            //timebuf[i][0]=samples[i]*blackmanHarris[i];
+            timebuf[i]=samples[i]*blackmanHarris[i];
             //timebuf[i][0]=samples[i];
         } else {
-            timebuf[i][0]=0.0f;
+            //timebuf[i][0]=0.0f;
+            timebuf[i]=0.0f;
         }
-        timebuf[i][1]=0.0f;
+        //timebuf[i][1]=0.0f;
     }
 
     // perform the fft
