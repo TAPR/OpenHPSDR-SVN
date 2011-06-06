@@ -128,7 +128,6 @@
 #include "volume.h"
 #include "transmit.h"
 #include "subrx.h"
-#include "iphone.h"
 #include "audiostream.h"
 #include "metis.h"
 
@@ -878,7 +877,6 @@ int main(int argc,char* argv[]) {
 
     setSoundcard(getSoundcardId(soundCardName));
 
-    iphone_init();
     audio_stream_init();
 
     gtk_main();
