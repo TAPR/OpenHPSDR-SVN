@@ -32,6 +32,7 @@
 #include "sinewave.h"
 #include "vfo.h"
 #include "metis.h"
+#include "cw.h"
 
 //#define OZY_BUFFERS
 
@@ -288,12 +289,12 @@ void process_ozy_input_buffer(char* buffer) {
                 // transmit
                 if(mox) {
                     
-                    if(tuning) {
-                        tuningPhase=sineWave(mic_left_buffer,1024,tuningPhase,(double)cwPitch);
-                    } 
-/*
+                    //if(tuning) {
+                    //    tuningPhase=sineWave(mic_left_buffer,1024,tuningPhase,(double)cwPitch);
+                    //} 
+
                     if(!tuning) {
-*/
+
                         Audio_Callback (mic_left_buffer,mic_right_buffer,
                                         left_tx_buffer,right_tx_buffer, buffer_size, 1);
 /*
@@ -301,15 +302,18 @@ void process_ozy_input_buffer(char* buffer) {
                         switch(mode) {
                             case modeUSB:
                             case modeCWU:
-                                tuningPhase=cwSignal(left_tx_buffer,right_tx_buffer,1024,tuningPhase,(double)cwPitch);
+                                cwFillBuffers(left_tx_buffer,right_tx_buffer,1024);
+                                //tuningPhase=cwSignal(left_tx_buffer,right_tx_buffer,1024,tuningPhase,(double)cwPitch);
                                 break;
                             case modeLSB:
                             case modeCWL:
-                                tuningPhase=cwSignal(right_tx_buffer,left_tx_buffer,1024,tuningPhase,(double)cwPitch);
+                                cwFillBuffers(right_tx_buffer,left_tx_buffer,1024);
+                                //tuningPhase=cwSignal(right_tx_buffer,left_tx_buffer,1024,tuningPhase,(double)cwPitch);
                                 break;
                         }
-                    }
 */
+                    }
+
                 } else if(dot) {
                     switch(mode) {
                         case modeUSB:
@@ -340,8 +344,27 @@ void process_ozy_input_buffer(char* buffer) {
                     right_rx_sample=(short)(right_output_buffer[j]*32767.0);
 
                     if(mox || ptt || dot || dash ) {
-                        left_tx_sample=(short)(left_tx_buffer[j]*32767.0*rfGain);
-                        right_tx_sample=(short)(right_tx_buffer[j]*32767.0*rfGain);
+                        if(tuning) {
+                            switch(mode) {
+                                case modeUSB:
+                                case modeCWU:
+                                    left_tx_sample=cwSin[cwIndex]*rfGain;
+                                    right_tx_sample=cwCos[cwIndex]*rfGain;
+                                    cwIndex++;
+                                    if(cwIndex>=240) cwIndex=0;
+                                    break;
+                                case modeLSB:
+                                case modeCWL:
+                                    left_tx_sample=cwCos[cwIndex]*rfGain;
+                                    right_tx_sample=cwSin[cwIndex]*rfGain;
+                                    cwIndex++;
+                                    if(cwIndex>=240) cwIndex=0;
+                                    break;
+                            }
+                        } else {
+                            left_tx_sample=(short)(left_tx_buffer[j]*32767.0*rfGain);
+                            right_tx_sample=(short)(right_tx_buffer[j]*32767.0*rfGain);
+                        }
                     } else {
                         left_tx_sample=0;
                         right_tx_sample=0;

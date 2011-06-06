@@ -130,6 +130,7 @@
 #include "subrx.h"
 #include "audiostream.h"
 #include "metis.h"
+#include "cw.h"
 
 GdkColor background;
 GdkColor buttonBackground;
@@ -725,6 +726,8 @@ int main(int argc,char* argv[]) {
     ozy_set_interface("eth0");
     processCommands(argc,argv);
     loadProperties(propertyPath);
+
+    init_cw();
 
     // initialize DttSP
     Setup_SDR();
