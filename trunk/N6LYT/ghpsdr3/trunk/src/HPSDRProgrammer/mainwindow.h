@@ -72,7 +72,6 @@ public:
     void setPath(char* path);
 #endif
 
-
 public slots:
     void quit();
     void about();
@@ -178,6 +177,7 @@ private:
     int percent;
     int eraseTimeouts;
 
+    QUdpSocket socket;
     Discovery* discovery;
     ReceiveThread* receiveThread;
     RawReceiveThread* rawReceiveThread;

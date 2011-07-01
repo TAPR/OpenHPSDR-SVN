@@ -27,12 +27,13 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 
-#include "QDebug"
-#include "QCursor"
-#include "QFile"
-#include "QFileDialog"
-#include "QRect"
-#include "QTimer"
+#include <QDebug>
+#include <QCursor>
+#include <QFile>
+#include <QFileDialog>
+#include <QRect>
+#include <QTimer>
+#include <QUdpSocket>
 
 #include "pcap.h"
 
@@ -153,6 +154,7 @@ void MainWindow::interfaceSelected(int index) {
         hw[3]=(unsigned char)hwAddress.mid(9,2).toInt(&ok,16);
         hw[4]=(unsigned char)hwAddress.mid(12,2).toInt(&ok,16);
         hw[5]=(unsigned char)hwAddress.mid(15,2).toInt(&ok,16);
+
     }
 }
 
@@ -270,7 +272,7 @@ void MainWindow::flashProgram() {
 
     // start a thread to listen for replies
     QString myip=interfaces.getInterfaceIPAddress(interfaceName);
-    receiveThread=new ReceiveThread(myip,metisHostAddress);
+    receiveThread=new ReceiveThread(&socket,myip,metisHostAddress);
 
     QObject::connect(receiveThread,SIGNAL(eraseCompleted()),this,SLOT(eraseCompleted()));
     QObject::connect(receiveThread,SIGNAL(nextBuffer()),this,SLOT(nextBuffer()));
@@ -332,7 +334,7 @@ void MainWindow::flashErase() {
     qDebug()<<"MainWindow::flashErase";
 
     QString myip=interfaces.getInterfaceIPAddress(interfaceName);
-    receiveThread=new ReceiveThread(myip,metisHostAddress);
+    receiveThread=new ReceiveThread(&socket,myip,metisHostAddress);
 
     // start erasing
     state=ERASING_ONLY;
@@ -902,7 +904,7 @@ void MainWindow::fpgaId(unsigned char* data) {
             status("found Penelope");
             ui->jtagLineEdit->setText("Penelope - 0x020B20");
 #ifdef Q_WS_WIN
-            ui->jtagProgramLineEdit->setText("Penelpe_JTAG.rbf");
+            ui->jtagProgramLineEdit->setText("Penelope_JTAG.rbf");
 #endif
 #ifdef Q_WS_MAC
             QString rbfPath;
@@ -1046,8 +1048,13 @@ void MainWindow::discover() {
 
     QApplication::setOverrideCursor(QCursor(Qt::BusyCursor));
 
-    // start a thread to listen for discovery responses
-    discovery=new Discovery(myip);
+    socket.close();
+    if(!socket.bind(QHostAddress(ip),0,QUdpSocket::ReuseAddressHint)) {
+        qDebug()<<"Error: Discovery: bind failed "<<socket.errorString();
+        return;
+    }
+
+    discovery=new Discovery(&socket,myip);
     connect(discovery,SIGNAL(metis_found(Metis*)),this,SLOT(metis_found(Metis*)));
     discovery->discover();
     // disable the Discovery button
