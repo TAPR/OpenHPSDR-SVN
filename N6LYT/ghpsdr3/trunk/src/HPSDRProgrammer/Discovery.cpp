@@ -4,16 +4,12 @@
 #include "Metis.h"
 
 
-Discovery::Discovery(QString myip) {
+Discovery::Discovery(QUdpSocket* s,QString myip) {
     qDebug()<<"Discovery: "<<myip;
     ip=myip;
+    socket=s;
 
-    if(!socket.bind(QHostAddress(ip),5001,QUdpSocket::ReuseAddressHint)) {
-        qDebug()<<"Error: Discovery: bind failed "<<socket.errorString();
-        return;
-    }
-
-    connect(&socket,SIGNAL(readyRead()),this,SLOT(readyRead()));
+    connect(socket,SIGNAL(readyRead()),this,SLOT(readyRead()));
 }
 
 void Discovery::discover() {
@@ -28,14 +24,14 @@ void Discovery::discover() {
         buffer[i]=(char)0x00;
     }
 
-    if(socket.writeDatagram((const char*)buffer,sizeof(buffer),QHostAddress::Broadcast,1024)<0) {
-        qDebug()<<"Error: Discovery: writeDatagram failed "<<socket.errorString();
+    if(socket->writeDatagram((const char*)buffer,sizeof(buffer),QHostAddress::Broadcast,1024)<0) {
+        qDebug()<<"Error: Discovery: writeDatagram failed "<<socket->errorString();
         return;
     }
 }
 
 void Discovery::stop() {
-    socket.close();
+    disconnect(socket,SIGNAL(readyRead()),this,SLOT(readyRead()));
 }
 
 void Discovery::readyRead() {
@@ -46,7 +42,7 @@ void Discovery::readyRead() {
 
     qDebug()<<"Discovery::readyRead";
 
-    if(socket.readDatagram((char*)&buffer,(qint64)sizeof(buffer),&metisAddress,&metisPort)>0) {
+    if(socket->readDatagram((char*)&buffer,(qint64)sizeof(buffer),&metisAddress,&metisPort)>0) {
 
         if(buffer[0]==0xEF && buffer[1]==0xFE) {
             switch(buffer[2]) {

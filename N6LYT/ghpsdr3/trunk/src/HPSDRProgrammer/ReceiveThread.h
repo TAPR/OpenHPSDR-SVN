@@ -22,7 +22,7 @@
 class ReceiveThread : public QObject {
     Q_OBJECT
 public:
-    ReceiveThread(QString myip,QString metis);
+    ReceiveThread(QUdpSocket *s,QString myip,QString metis);
     void send(const char* buffer,int length);
     void stop();
 signals:
@@ -36,7 +36,7 @@ private:
 
     QString myip;
     QString metisip;
-    QUdpSocket socket;
+    QUdpSocket* socket;
 };
 
 #endif // RECEIVETHREAD_H

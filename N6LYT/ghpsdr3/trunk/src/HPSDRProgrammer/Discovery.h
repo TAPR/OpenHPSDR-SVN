@@ -9,7 +9,7 @@
 class Discovery : public QObject {
     Q_OBJECT
 public:
-    Discovery(QString myip);
+    Discovery(QUdpSocket* s,QString myip);
     void discover();
     void stop();
 signals:
@@ -24,7 +24,7 @@ private:
     unsigned char buffer[2048];
     int bytes_read;
 
-    QUdpSocket socket;
+    QUdpSocket* socket;
     QString ip;
     qint16 port;
 };
