@@ -40,8 +40,8 @@
 #include "filter.h"
 #include "test.h"
 
-#define MODE modeCWL
-#define FILTER filterF6
+#define MODE modeAM
+#define FILTER filterF9
 #define SAMPLES 50
 #define TIMER 10
 

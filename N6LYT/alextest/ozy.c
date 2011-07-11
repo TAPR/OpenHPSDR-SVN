@@ -282,8 +282,13 @@ void process_ozy_input_buffer(char* buffer) {
             // add to buffer
             left_input_buffer[samples]=left_sample_float;
             right_input_buffer[samples]=right_sample_float;
-            mic_left_buffer[samples]=mic_sample_float;
-            mic_right_buffer[samples]=0.0f;
+            if(testing) {
+                mic_left_buffer[samples]=0.0f;
+                mic_right_buffer[samples]=0.0f;
+            } else {
+                mic_left_buffer[samples]=mic_sample_float;
+                mic_right_buffer[samples]=0.0f;
+            }
             samples++;
 
             if(timing) {
@@ -307,9 +312,12 @@ void process_ozy_input_buffer(char* buffer) {
 
                 // transmit
                 if(mox) {
-                    if(tuning | testing) {
+                    if(tuning) {
                         sineWave(mic_left_buffer,buffer_size,tuningPhase,(double)cwPitch);
                         tuningPhase=sineWave(mic_right_buffer,buffer_size,tuningPhase,(double)cwPitch);
+                    } else if(testing) {
+                        //sineWave(mic_left_buffer,buffer_size,tuningPhase,(double)0);
+                        //tuningPhase=sineWave(mic_right_buffer,buffer_size,tuningPhase,(double)cwPitch);
                     } else if(mode==modeCWU || mode==modeCWL) {
                         CWtoneExchange(mic_left_buffer, mic_right_buffer, buffer_size);
                         //sineWave(mic_left_buffer,buffer_size,tuningPhase,(double)cwPitch);
@@ -1070,7 +1078,8 @@ void ozyRestoreState() {
     }
     value=getProperty("class");
     if(value) {
-        setMode(atoi(value));
+        //setMode(atoi(value));
+        setClass(atoi(value));
     }
     value=getProperty("lt2208Dither");
     if(value) {
