@@ -1,6 +1,6 @@
 Analysis & Synthesis report for Cyclops
-Mon Aug 31 19:39:00 2009
-Quartus II Version 9.0 Build 132 02/25/2009 SJ Web Edition
+Sat Jul 09 16:46:16 2011
+Quartus II Version 9.1 Build 350 03/24/2010 Service Pack 2 SJ Web Edition
 
 
 ---------------------
@@ -9,65 +9,66 @@ Quartus II Version 9.0 Build 132 02/25/2009 SJ Web Edition
   1. Legal Notice
   2. Analysis & Synthesis Summary
   3. Analysis & Synthesis Settings
-  4. Analysis & Synthesis Source Files Read
-  5. Analysis & Synthesis Resource Usage Summary
-  6. Analysis & Synthesis Resource Utilization by Entity
-  7. Analysis & Synthesis RAM Summary
-  8. State Machine - |Cyclops|IF_PWM_state
-  9. State Machine - |Cyclops|IF_SYNC_state
- 10. State Machine - |Cyclops|ADF4112_SPI:ADF4112|SPI_state
- 11. State Machine - |Cyclops|led_blinker:BLINK_D4|LED_state
- 12. State Machine - |Cyclops|led_blinker:BLINK_D1|LED_state
- 13. State Machine - |Cyclops|NWire_xmit:CCxmit|NW_state
- 14. State Machine - |Cyclops|NWire_xmit:M_LRAudio|NW_state
- 15. State Machine - |Cyclops|async_usb:usb1|FX_state
- 16. State Machine - |Cyclops|NWire_rcv:SPD|TB_state
- 17. State Machine - |Cyclops|Tx_fifo_ctrl:TXFC|AD_state
- 18. State Machine - |Cyclops|NWire_rcv:M_IQ|TB_state
- 19. User-Specified and Inferred Latches
- 20. Registers Removed During Synthesis
- 21. Removed Registers Triggering Further Register Optimizations
- 22. General Register Statistics
- 23. Registers Added for RAM Pass-Through Logic
- 24. Multiplexer Restructuring Statistics (Restructuring Performed)
- 25. Source assignments for Tx_fifo:TXF|scfifo:scfifo_component|scfifo_ft31:auto_generated|a_dpfifo_2l31:dpfifo|altsyncram_r3e1:FIFOram
- 26. Source assignments for Tx_fifo:TXF|scfifo:scfifo_component|scfifo_ft31:auto_generated|a_dpfifo_2l31:dpfifo|altsyncram_r3e1:FIFOram|altsyncram_mkj1:altsyncram1
- 27. Source assignments for SP_fifo:SPF|scfifo:scfifo_component|scfifo_1t31:auto_generated|a_dpfifo_kk31:dpfifo|altsyncram_v2e1:FIFOram
- 28. Source assignments for SP_fifo:SPF|scfifo:scfifo_component|scfifo_1t31:auto_generated|a_dpfifo_kk31:dpfifo|altsyncram_v2e1:FIFOram|altsyncram_qjj1:altsyncram1
- 29. Source assignments for RFIFO:RXF|altsyncram:mem_rtl_0|altsyncram_h2j1:auto_generated
- 30. Parameter Settings for User Entity Instance: Top-level Entity: |Cyclops
- 31. Parameter Settings for User Entity Instance: clkmult3:cm3|altpll:altpll_component
- 32. Parameter Settings for User Entity Instance: NWire_rcv:M_IQ
- 33. Parameter Settings for User Entity Instance: Tx_fifo_ctrl:TXFC
- 34. Parameter Settings for User Entity Instance: Tx_fifo:TXF|scfifo:scfifo_component
- 35. Parameter Settings for User Entity Instance: SP_fifo:SPF|scfifo:scfifo_component
- 36. Parameter Settings for User Entity Instance: NWire_rcv:SPD
- 37. Parameter Settings for User Entity Instance: async_usb:usb1
- 38. Parameter Settings for User Entity Instance: cdc_sync:cdc_c23
- 39. Parameter Settings for User Entity Instance: pulsegen:cdc_m
- 40. Parameter Settings for User Entity Instance: NWire_xmit:M_LRAudio
- 41. Parameter Settings for User Entity Instance: pulsegen:CC_p
- 42. Parameter Settings for User Entity Instance: NWire_xmit:CCxmit
- 43. Parameter Settings for User Entity Instance: led_blinker:BLINK_D1
- 44. Parameter Settings for User Entity Instance: led_blinker:BLINK_D4
- 45. Parameter Settings for Inferred Entity Instance: RFIFO:RXF|altsyncram:mem_rtl_0
- 46. altpll Parameter Settings by Entity Instance
- 47. scfifo Parameter Settings by Entity Instance
- 48. altsyncram Parameter Settings by Entity Instance
- 49. Port Connectivity Checks: "led_blinker:BLINK_D1"
- 50. Port Connectivity Checks: "NWire_xmit:CCxmit"
- 51. Port Connectivity Checks: "SP_fifo:SPF"
- 52. Port Connectivity Checks: "Tx_fifo:TXF"
- 53. Port Connectivity Checks: "Tx_fifo_ctrl:TXFC"
- 54. Analysis & Synthesis Messages
- 55. Analysis & Synthesis Suppressed Messages
+  4. Parallel Compilation
+  5. Analysis & Synthesis Source Files Read
+  6. Analysis & Synthesis Resource Usage Summary
+  7. Analysis & Synthesis Resource Utilization by Entity
+  8. Analysis & Synthesis RAM Summary
+  9. State Machine - |Cyclops|IF_PWM_state
+ 10. State Machine - |Cyclops|IF_SYNC_state
+ 11. State Machine - |Cyclops|ADF4112_SPI:ADF4112|SPI_state
+ 12. State Machine - |Cyclops|led_blinker:BLINK_D4|LED_state
+ 13. State Machine - |Cyclops|led_blinker:BLINK_D1|LED_state
+ 14. State Machine - |Cyclops|NWire_xmit:CCxmit|NW_state
+ 15. State Machine - |Cyclops|NWire_xmit:M_LRAudio|NW_state
+ 16. State Machine - |Cyclops|async_usb:usb1|FX_state
+ 17. State Machine - |Cyclops|NWire_rcv:SPD|TB_state
+ 18. State Machine - |Cyclops|Tx_fifo_ctrl:TXFC|AD_state
+ 19. State Machine - |Cyclops|NWire_rcv:M_IQ|TB_state
+ 20. User-Specified and Inferred Latches
+ 21. Registers Removed During Synthesis
+ 22. Removed Registers Triggering Further Register Optimizations
+ 23. General Register Statistics
+ 24. Registers Added for RAM Pass-Through Logic
+ 25. Multiplexer Restructuring Statistics (Restructuring Performed)
+ 26. Source assignments for Tx_fifo:TXF|scfifo:scfifo_component|scfifo_ft31:auto_generated|a_dpfifo_2l31:dpfifo|altsyncram_r3e1:FIFOram
+ 27. Source assignments for Tx_fifo:TXF|scfifo:scfifo_component|scfifo_ft31:auto_generated|a_dpfifo_2l31:dpfifo|altsyncram_r3e1:FIFOram|altsyncram_mkj1:altsyncram1
+ 28. Source assignments for SP_fifo:SPF|scfifo:scfifo_component|scfifo_1t31:auto_generated|a_dpfifo_kk31:dpfifo|altsyncram_v2e1:FIFOram
+ 29. Source assignments for SP_fifo:SPF|scfifo:scfifo_component|scfifo_1t31:auto_generated|a_dpfifo_kk31:dpfifo|altsyncram_v2e1:FIFOram|altsyncram_qjj1:altsyncram1
+ 30. Source assignments for RFIFO:RXF|altsyncram:mem_rtl_0|altsyncram_c1h1:auto_generated
+ 31. Parameter Settings for User Entity Instance: Top-level Entity: |Cyclops
+ 32. Parameter Settings for User Entity Instance: clkmult3:cm3|altpll:altpll_component
+ 33. Parameter Settings for User Entity Instance: NWire_rcv:M_IQ
+ 34. Parameter Settings for User Entity Instance: Tx_fifo_ctrl:TXFC
+ 35. Parameter Settings for User Entity Instance: Tx_fifo:TXF|scfifo:scfifo_component
+ 36. Parameter Settings for User Entity Instance: SP_fifo:SPF|scfifo:scfifo_component
+ 37. Parameter Settings for User Entity Instance: NWire_rcv:SPD
+ 38. Parameter Settings for User Entity Instance: async_usb:usb1
+ 39. Parameter Settings for User Entity Instance: cdc_sync:cdc_c23
+ 40. Parameter Settings for User Entity Instance: pulsegen:cdc_m
+ 41. Parameter Settings for User Entity Instance: NWire_xmit:M_LRAudio
+ 42. Parameter Settings for User Entity Instance: pulsegen:CC_p
+ 43. Parameter Settings for User Entity Instance: NWire_xmit:CCxmit
+ 44. Parameter Settings for User Entity Instance: led_blinker:BLINK_D1
+ 45. Parameter Settings for User Entity Instance: led_blinker:BLINK_D4
+ 46. Parameter Settings for Inferred Entity Instance: RFIFO:RXF|altsyncram:mem_rtl_0
+ 47. altpll Parameter Settings by Entity Instance
+ 48. scfifo Parameter Settings by Entity Instance
+ 49. altsyncram Parameter Settings by Entity Instance
+ 50. Port Connectivity Checks: "led_blinker:BLINK_D1"
+ 51. Port Connectivity Checks: "NWire_xmit:CCxmit"
+ 52. Port Connectivity Checks: "SP_fifo:SPF"
+ 53. Port Connectivity Checks: "Tx_fifo:TXF"
+ 54. Port Connectivity Checks: "Tx_fifo_ctrl:TXFC"
+ 55. Analysis & Synthesis Messages
+ 56. Analysis & Synthesis Suppressed Messages
 
 
 
 ----------------
 ; Legal Notice ;
 ----------------
-Copyright (C) 1991-2009 Altera Corporation
+Copyright (C) 1991-2010 Altera Corporation
 Your use of Altera Corporation's design tools, logic functions 
 and other software and tools, and its AMPP partner logic 
 functions, and any output files from any of the foregoing 
@@ -83,99 +84,114 @@ applicable agreement for further details.
 
 
 
-+------------------------------------------------------------------------------+
-; Analysis & Synthesis Summary                                                 ;
-+------------------------------------+-----------------------------------------+
-; Analysis & Synthesis Status        ; Successful - Mon Aug 31 19:39:00 2009   ;
-; Quartus II Version                 ; 9.0 Build 132 02/25/2009 SJ Web Edition ;
-; Revision Name                      ; Cyclops                                 ;
-; Top-level Entity Name              ; Cyclops                                 ;
-; Family                             ; Cyclone II                              ;
-; Total logic elements               ; 2,736                                   ;
-;     Total combinational functions  ; 2,048                                   ;
-;     Dedicated logic registers      ; 1,655                                   ;
-; Total registers                    ; 1655                                    ;
-; Total pins                         ; 45                                      ;
-; Total virtual pins                 ; 0                                       ;
-; Total memory bits                  ; 114,688                                 ;
-; Embedded Multiplier 9-bit elements ; 0                                       ;
-; Total PLLs                         ; 1                                       ;
-+------------------------------------+-----------------------------------------+
++-----------------------------------------------------------------------------------+
+; Analysis & Synthesis Summary                                                      ;
++------------------------------------+----------------------------------------------+
+; Analysis & Synthesis Status        ; Successful - Sat Jul 09 16:46:16 2011        ;
+; Quartus II Version                 ; 9.1 Build 350 03/24/2010 SP 2 SJ Web Edition ;
+; Revision Name                      ; Cyclops                                      ;
+; Top-level Entity Name              ; Cyclops                                      ;
+; Family                             ; Cyclone II                                   ;
+; Total logic elements               ; 2,741                                        ;
+;     Total combinational functions  ; 2,053                                        ;
+;     Dedicated logic registers      ; 1,655                                        ;
+; Total registers                    ; 1655                                         ;
+; Total pins                         ; 45                                           ;
+; Total virtual pins                 ; 0                                            ;
+; Total memory bits                  ; 114,688                                      ;
+; Embedded Multiplier 9-bit elements ; 0                                            ;
+; Total PLLs                         ; 1                                            ;
++------------------------------------+----------------------------------------------+
 
 
-+----------------------------------------------------------------------------------------------------------+
-; Analysis & Synthesis Settings                                                                            ;
-+----------------------------------------------------------------+--------------------+--------------------+
-; Option                                                         ; Setting            ; Default Value      ;
-+----------------------------------------------------------------+--------------------+--------------------+
-; Device                                                         ; EP2C8Q208C8        ;                    ;
-; Top-level entity name                                          ; Cyclops            ; Cyclops            ;
-; Family name                                                    ; Cyclone II         ; Stratix II         ;
-; Power-Up Don't Care                                            ; Off                ; On                 ;
-; Use Generated Physical Constraints File                        ; Off                ;                    ;
-; Use smart compilation                                          ; Off                ; Off                ;
-; Restructure Multiplexers                                       ; Auto               ; Auto               ;
-; Create Debugging Nodes for IP Cores                            ; Off                ; Off                ;
-; Preserve fewer node names                                      ; On                 ; On                 ;
-; Disable OpenCore Plus hardware evaluation                      ; Off                ; Off                ;
-; Verilog Version                                                ; Verilog_2001       ; Verilog_2001       ;
-; VHDL Version                                                   ; VHDL93             ; VHDL93             ;
-; State Machine Processing                                       ; Auto               ; Auto               ;
-; Safe State Machine                                             ; Off                ; Off                ;
-; Extract Verilog State Machines                                 ; On                 ; On                 ;
-; Extract VHDL State Machines                                    ; On                 ; On                 ;
-; Ignore Verilog initial constructs                              ; Off                ; Off                ;
-; Iteration limit for constant Verilog loops                     ; 5000               ; 5000               ;
-; Iteration limit for non-constant Verilog loops                 ; 250                ; 250                ;
-; Add Pass-Through Logic to Inferred RAMs                        ; On                 ; On                 ;
-; Parallel Synthesis                                             ; Off                ; Off                ;
-; DSP Block Balancing                                            ; Auto               ; Auto               ;
-; NOT Gate Push-Back                                             ; On                 ; On                 ;
-; Remove Redundant Logic Cells                                   ; Off                ; Off                ;
-; Remove Duplicate Registers                                     ; On                 ; On                 ;
-; Ignore CARRY Buffers                                           ; Off                ; Off                ;
-; Ignore CASCADE Buffers                                         ; Off                ; Off                ;
-; Ignore GLOBAL Buffers                                          ; Off                ; Off                ;
-; Ignore ROW GLOBAL Buffers                                      ; Off                ; Off                ;
-; Ignore LCELL Buffers                                           ; Off                ; Off                ;
-; Ignore SOFT Buffers                                            ; On                 ; On                 ;
-; Limit AHDL Integers to 32 Bits                                 ; Off                ; Off                ;
-; Optimization Technique                                         ; Balanced           ; Balanced           ;
-; Carry Chain Length                                             ; 70                 ; 70                 ;
-; Auto Carry Chains                                              ; On                 ; On                 ;
-; Auto Open-Drain Pins                                           ; On                 ; On                 ;
-; Perform WYSIWYG Primitive Resynthesis                          ; Off                ; Off                ;
-; Auto ROM Replacement                                           ; On                 ; On                 ;
-; Auto RAM Replacement                                           ; On                 ; On                 ;
-; Auto Shift Register Replacement                                ; Auto               ; Auto               ;
-; Auto Clock Enable Replacement                                  ; On                 ; On                 ;
-; Strict RAM Replacement                                         ; Off                ; Off                ;
-; Allow Synchronous Control Signals                              ; On                 ; On                 ;
-; Force Use of Synchronous Clear Signals                         ; Off                ; Off                ;
-; Auto RAM to Logic Cell Conversion                              ; Off                ; Off                ;
-; Auto Resource Sharing                                          ; Off                ; Off                ;
-; Allow Any RAM Size For Recognition                             ; Off                ; Off                ;
-; Allow Any ROM Size For Recognition                             ; Off                ; Off                ;
-; Allow Any Shift Register Size For Recognition                  ; Off                ; Off                ;
-; Use LogicLock Constraints during Resource Balancing            ; On                 ; On                 ;
-; Ignore translate_off and synthesis_off directives              ; Off                ; Off                ;
-; Timing-Driven Synthesis                                        ; Off                ; Off                ;
-; Show Parameter Settings Tables in Synthesis Report             ; On                 ; On                 ;
-; Ignore Maximum Fan-Out Assignments                             ; Off                ; Off                ;
-; Synchronization Register Chain Length                          ; 2                  ; 2                  ;
-; PowerPlay Power Optimization                                   ; Normal compilation ; Normal compilation ;
-; HDL message level                                              ; Level2             ; Level2             ;
-; Suppress Register Optimization Related Messages                ; Off                ; Off                ;
-; Number of Removed Registers Reported in Synthesis Report       ; 100                ; 100                ;
-; Number of Inverted Registers Reported in Synthesis Report      ; 100                ; 100                ;
-; Clock MUX Protection                                           ; On                 ; On                 ;
-; Auto Gated Clock Conversion                                    ; Off                ; Off                ;
-; Block Design Naming                                            ; Auto               ; Auto               ;
-; SDC constraint protection                                      ; Off                ; Off                ;
-; Synthesis Effort                                               ; Auto               ; Auto               ;
-; Allows Asynchronous Clear Usage For Shift Register Replacement ; On                 ; On                 ;
-; Analysis & Synthesis Message Level                             ; Medium             ; Medium             ;
-+----------------------------------------------------------------+--------------------+--------------------+
++----------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Settings                                                                                        ;
++----------------------------------------------------------------------------+--------------------+--------------------+
+; Option                                                                     ; Setting            ; Default Value      ;
++----------------------------------------------------------------------------+--------------------+--------------------+
+; Device                                                                     ; EP2C8Q208C8        ;                    ;
+; Top-level entity name                                                      ; Cyclops            ; Cyclops            ;
+; Family name                                                                ; Cyclone II         ; Stratix II         ;
+; Power-Up Don't Care                                                        ; Off                ; On                 ;
+; Use Generated Physical Constraints File                                    ; Off                ;                    ;
+; Use smart compilation                                                      ; Off                ; Off                ;
+; Enable parallel Assembler and TimeQuest Timing Analyzer during compilation ; On                 ; On                 ;
+; Enable compact report table                                                ; Off                ; Off                ;
+; Restructure Multiplexers                                                   ; Auto               ; Auto               ;
+; Create Debugging Nodes for IP Cores                                        ; Off                ; Off                ;
+; Preserve fewer node names                                                  ; On                 ; On                 ;
+; Disable OpenCore Plus hardware evaluation                                  ; Off                ; Off                ;
+; Verilog Version                                                            ; Verilog_2001       ; Verilog_2001       ;
+; VHDL Version                                                               ; VHDL_1993          ; VHDL_1993          ;
+; State Machine Processing                                                   ; Auto               ; Auto               ;
+; Safe State Machine                                                         ; Off                ; Off                ;
+; Extract Verilog State Machines                                             ; On                 ; On                 ;
+; Extract VHDL State Machines                                                ; On                 ; On                 ;
+; Ignore Verilog initial constructs                                          ; Off                ; Off                ;
+; Iteration limit for constant Verilog loops                                 ; 5000               ; 5000               ;
+; Iteration limit for non-constant Verilog loops                             ; 250                ; 250                ;
+; Add Pass-Through Logic to Inferred RAMs                                    ; On                 ; On                 ;
+; Parallel Synthesis                                                         ; Off                ; Off                ;
+; DSP Block Balancing                                                        ; Auto               ; Auto               ;
+; NOT Gate Push-Back                                                         ; On                 ; On                 ;
+; Remove Redundant Logic Cells                                               ; Off                ; Off                ;
+; Remove Duplicate Registers                                                 ; On                 ; On                 ;
+; Ignore CARRY Buffers                                                       ; Off                ; Off                ;
+; Ignore CASCADE Buffers                                                     ; Off                ; Off                ;
+; Ignore GLOBAL Buffers                                                      ; Off                ; Off                ;
+; Ignore ROW GLOBAL Buffers                                                  ; Off                ; Off                ;
+; Ignore LCELL Buffers                                                       ; Off                ; Off                ;
+; Ignore SOFT Buffers                                                        ; On                 ; On                 ;
+; Limit AHDL Integers to 32 Bits                                             ; Off                ; Off                ;
+; Optimization Technique                                                     ; Balanced           ; Balanced           ;
+; Carry Chain Length                                                         ; 70                 ; 70                 ;
+; Auto Carry Chains                                                          ; On                 ; On                 ;
+; Auto Open-Drain Pins                                                       ; On                 ; On                 ;
+; Perform WYSIWYG Primitive Resynthesis                                      ; Off                ; Off                ;
+; Auto ROM Replacement                                                       ; On                 ; On                 ;
+; Auto RAM Replacement                                                       ; On                 ; On                 ;
+; Auto Shift Register Replacement                                            ; Auto               ; Auto               ;
+; Auto Clock Enable Replacement                                              ; On                 ; On                 ;
+; Strict RAM Replacement                                                     ; Off                ; Off                ;
+; Allow Synchronous Control Signals                                          ; On                 ; On                 ;
+; Force Use of Synchronous Clear Signals                                     ; Off                ; Off                ;
+; Auto RAM to Logic Cell Conversion                                          ; Off                ; Off                ;
+; Auto Resource Sharing                                                      ; Off                ; Off                ;
+; Allow Any RAM Size For Recognition                                         ; Off                ; Off                ;
+; Allow Any ROM Size For Recognition                                         ; Off                ; Off                ;
+; Allow Any Shift Register Size For Recognition                              ; Off                ; Off                ;
+; Use LogicLock Constraints during Resource Balancing                        ; On                 ; On                 ;
+; Ignore translate_off and synthesis_off directives                          ; Off                ; Off                ;
+; Timing-Driven Synthesis                                                    ; Off                ; Off                ;
+; Show Parameter Settings Tables in Synthesis Report                         ; On                 ; On                 ;
+; Ignore Maximum Fan-Out Assignments                                         ; Off                ; Off                ;
+; Synchronization Register Chain Length                                      ; 2                  ; 2                  ;
+; PowerPlay Power Optimization                                               ; Normal compilation ; Normal compilation ;
+; HDL message level                                                          ; Level2             ; Level2             ;
+; Suppress Register Optimization Related Messages                            ; Off                ; Off                ;
+; Number of Removed Registers Reported in Synthesis Report                   ; 5000               ; 5000               ;
+; Number of Inverted Registers Reported in Synthesis Report                  ; 100                ; 100                ;
+; Clock MUX Protection                                                       ; On                 ; On                 ;
+; Auto Gated Clock Conversion                                                ; Off                ; Off                ;
+; Block Design Naming                                                        ; Auto               ; Auto               ;
+; SDC constraint protection                                                  ; Off                ; Off                ;
+; Synthesis Effort                                                           ; Auto               ; Auto               ;
+; Shift Register Replacement - Allow Asynchronous Clear Signal               ; On                 ; On                 ;
+; Analysis & Synthesis Message Level                                         ; Medium             ; Medium             ;
+; Disable Register Merging Across Hierarchies                                ; Auto               ; Auto               ;
+; Resource Aware Inference For Block RAM                                     ; On                 ; On                 ;
++----------------------------------------------------------------------------+--------------------+--------------------+
+
+
+Parallel compilation was disabled, but you have multiple processors available. Enable parallel compilation to reduce compilation time.
++-------------------------------------+
+; Parallel Compilation                ;
++----------------------------+--------+
+; Processors                 ; Number ;
++----------------------------+--------+
+; Number detected on machine ; 2      ;
+; Maximum allowed            ; 1      ;
++----------------------------+--------+
 
 
 +----------------------------------------------------------------------------------------------------------------------------------------------------------+
@@ -197,17 +213,8 @@ applicable agreement for further details.
 ; clkmult3.v                       ; yes             ; User Wizard-Generated File   ; C:/HPSDR/trunk/CyclopsII/Verilog Code/Cyclops/clkmult3.v             ;
 ; Cyclops.v                        ; yes             ; User Verilog HDL File        ; C:/HPSDR/trunk/CyclopsII/Verilog Code/Cyclops/Cyclops.v              ;
 ; led_blinker.v                    ; yes             ; User Verilog HDL File        ; C:/HPSDR/trunk/CyclopsII/Verilog Code/Cyclops/led_blinker.v          ;
-; altpll.tdf                       ; yes             ; Megafunction                 ; c:/altera/90/quartus/libraries/megafunctions/altpll.tdf              ;
-; aglobal90.inc                    ; yes             ; Megafunction                 ; c:/altera/90/quartus/libraries/megafunctions/aglobal90.inc           ;
-; stratix_pll.inc                  ; yes             ; Megafunction                 ; c:/altera/90/quartus/libraries/megafunctions/stratix_pll.inc         ;
-; stratixii_pll.inc                ; yes             ; Megafunction                 ; c:/altera/90/quartus/libraries/megafunctions/stratixii_pll.inc       ;
-; cycloneii_pll.inc                ; yes             ; Megafunction                 ; c:/altera/90/quartus/libraries/megafunctions/cycloneii_pll.inc       ;
-; scfifo.tdf                       ; yes             ; Megafunction                 ; c:/altera/90/quartus/libraries/megafunctions/scfifo.tdf              ;
-; a_regfifo.inc                    ; yes             ; Megafunction                 ; c:/altera/90/quartus/libraries/megafunctions/a_regfifo.inc           ;
-; a_dpfifo.inc                     ; yes             ; Megafunction                 ; c:/altera/90/quartus/libraries/megafunctions/a_dpfifo.inc            ;
-; a_i2fifo.inc                     ; yes             ; Megafunction                 ; c:/altera/90/quartus/libraries/megafunctions/a_i2fifo.inc            ;
-; a_fffifo.inc                     ; yes             ; Megafunction                 ; c:/altera/90/quartus/libraries/megafunctions/a_fffifo.inc            ;
-; a_f2fifo.inc                     ; yes             ; Megafunction                 ; c:/altera/90/quartus/libraries/megafunctions/a_f2fifo.inc            ;
+; altpll.tdf                       ; yes             ; Megafunction                 ; c:/altera/91sp2/quartus/libraries/megafunctions/altpll.tdf           ;
+; scfifo.tdf                       ; yes             ; Megafunction                 ; c:/altera/91sp2/quartus/libraries/megafunctions/scfifo.tdf           ;
 ; db/scfifo_ft31.tdf               ; yes             ; Auto-Generated Megafunction  ; C:/HPSDR/trunk/CyclopsII/Verilog Code/Cyclops/db/scfifo_ft31.tdf     ;
 ; db/a_dpfifo_2l31.tdf             ; yes             ; Auto-Generated Megafunction  ; C:/HPSDR/trunk/CyclopsII/Verilog Code/Cyclops/db/a_dpfifo_2l31.tdf   ;
 ; db/altsyncram_r3e1.tdf           ; yes             ; Auto-Generated Megafunction  ; C:/HPSDR/trunk/CyclopsII/Verilog Code/Cyclops/db/altsyncram_r3e1.tdf ;
@@ -224,16 +231,8 @@ applicable agreement for further details.
 ; db/cntr_g5b.tdf                  ; yes             ; Auto-Generated Megafunction  ; C:/HPSDR/trunk/CyclopsII/Verilog Code/Cyclops/db/cntr_g5b.tdf        ;
 ; db/cntr_477.tdf                  ; yes             ; Auto-Generated Megafunction  ; C:/HPSDR/trunk/CyclopsII/Verilog Code/Cyclops/db/cntr_477.tdf        ;
 ; db/cntr_o6b.tdf                  ; yes             ; Auto-Generated Megafunction  ; C:/HPSDR/trunk/CyclopsII/Verilog Code/Cyclops/db/cntr_o6b.tdf        ;
-; altsyncram.tdf                   ; yes             ; Megafunction                 ; c:/altera/90/quartus/libraries/megafunctions/altsyncram.tdf          ;
-; stratix_ram_block.inc            ; yes             ; Megafunction                 ; c:/altera/90/quartus/libraries/megafunctions/stratix_ram_block.inc   ;
-; lpm_mux.inc                      ; yes             ; Megafunction                 ; c:/altera/90/quartus/libraries/megafunctions/lpm_mux.inc             ;
-; lpm_decode.inc                   ; yes             ; Megafunction                 ; c:/altera/90/quartus/libraries/megafunctions/lpm_decode.inc          ;
-; a_rdenreg.inc                    ; yes             ; Megafunction                 ; c:/altera/90/quartus/libraries/megafunctions/a_rdenreg.inc           ;
-; altrom.inc                       ; yes             ; Megafunction                 ; c:/altera/90/quartus/libraries/megafunctions/altrom.inc              ;
-; altram.inc                       ; yes             ; Megafunction                 ; c:/altera/90/quartus/libraries/megafunctions/altram.inc              ;
-; altdpram.inc                     ; yes             ; Megafunction                 ; c:/altera/90/quartus/libraries/megafunctions/altdpram.inc            ;
-; altqpram.inc                     ; yes             ; Megafunction                 ; c:/altera/90/quartus/libraries/megafunctions/altqpram.inc            ;
-; db/altsyncram_h2j1.tdf           ; yes             ; Auto-Generated Megafunction  ; C:/HPSDR/trunk/CyclopsII/Verilog Code/Cyclops/db/altsyncram_h2j1.tdf ;
+; altsyncram.tdf                   ; yes             ; Megafunction                 ; c:/altera/91sp2/quartus/libraries/megafunctions/altsyncram.tdf       ;
+; db/altsyncram_c1h1.tdf           ; yes             ; Auto-Generated Megafunction  ; C:/HPSDR/trunk/CyclopsII/Verilog Code/Cyclops/db/altsyncram_c1h1.tdf ;
 +----------------------------------+-----------------+------------------------------+----------------------------------------------------------------------+
 
 
@@ -242,16 +241,16 @@ applicable agreement for further details.
 +---------------------------------------------+--------+
 ; Resource                                    ; Usage  ;
 +---------------------------------------------+--------+
-; Estimated Total logic elements              ; 2,736  ;
+; Estimated Total logic elements              ; 2,741  ;
 ;                                             ;        ;
-; Total combinational functions               ; 2048   ;
+; Total combinational functions               ; 2053   ;
 ; Logic element usage by number of LUT inputs ;        ;
-;     -- 4 input functions                    ; 673    ;
-;     -- 3 input functions                    ; 530    ;
-;     -- <=2 input functions                  ; 845    ;
+;     -- 4 input functions                    ; 651    ;
+;     -- 3 input functions                    ; 562    ;
+;     -- <=2 input functions                  ; 840    ;
 ;                                             ;        ;
 ; Logic elements by mode                      ;        ;
-;     -- normal mode                          ; 1363   ;
+;     -- normal mode                          ; 1368   ;
 ;     -- arithmetic mode                      ; 685    ;
 ;                                             ;        ;
 ; Total registers                             ; 1655   ;
@@ -263,7 +262,7 @@ applicable agreement for further details.
 ; Total PLLs                                  ; 1      ;
 ; Maximum fan-out node                        ; IF_clk ;
 ; Maximum fan-out                             ; 1154   ;
-; Total fan-out                               ; 11901  ;
+; Total fan-out                               ; 11899  ;
 ; Average fan-out                             ; 3.13   ;
 +---------------------------------------------+--------+
 
@@ -273,43 +272,43 @@ applicable agreement for further details.
 +-------------------------------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+--------------------------------------------------------------------------------------------------------------------------------------------------+--------------+
 ; Compilation Hierarchy Node                      ; LC Combinationals ; LC Registers ; Memory Bits ; DSP Elements ; DSP 9x9 ; DSP 18x18 ; Pins ; Virtual Pins ; Full Hierarchy Name                                                                                                                              ; Library Name ;
 +-------------------------------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+--------------------------------------------------------------------------------------------------------------------------------------------------+--------------+
-; |Cyclops                                        ; 2048 (298)        ; 1655 (551)   ; 114688      ; 0            ; 0       ; 0         ; 45   ; 0            ; |Cyclops                                                                                                                                         ; work         ;
-;    |ADF4112_SPI:ADF4112|                        ; 36 (36)           ; 13 (13)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Cyclops|ADF4112_SPI:ADF4112                                                                                                                     ; work         ;
-;    |NWire_rcv:M_IQ|                             ; 368 (368)         ; 309 (309)    ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Cyclops|NWire_rcv:M_IQ                                                                                                                          ; work         ;
-;    |NWire_rcv:SPD|                              ; 292 (292)         ; 166 (166)    ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Cyclops|NWire_rcv:SPD                                                                                                                           ; work         ;
-;    |NWire_xmit:CCxmit|                          ; 318 (318)         ; 108 (108)    ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Cyclops|NWire_xmit:CCxmit                                                                                                                       ; work         ;
-;    |NWire_xmit:M_LRAudio|                       ; 123 (123)         ; 150 (150)    ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Cyclops|NWire_xmit:M_LRAudio                                                                                                                    ; work         ;
-;    |RFIFO:RXF|                                  ; 69 (69)           ; 77 (77)      ; 32768       ; 0            ; 0       ; 0         ; 0    ; 0            ; |Cyclops|RFIFO:RXF                                                                                                                               ; work         ;
-;       |altsyncram:mem_rtl_0|                    ; 0 (0)             ; 0 (0)        ; 32768       ; 0            ; 0       ; 0         ; 0    ; 0            ; |Cyclops|RFIFO:RXF|altsyncram:mem_rtl_0                                                                                                          ; work         ;
-;          |altsyncram_h2j1:auto_generated|       ; 0 (0)             ; 0 (0)        ; 32768       ; 0            ; 0       ; 0         ; 0    ; 0            ; |Cyclops|RFIFO:RXF|altsyncram:mem_rtl_0|altsyncram_h2j1:auto_generated                                                                           ; work         ;
-;    |SP_fifo:SPF|                                ; 69 (0)            ; 44 (0)       ; 16384       ; 0            ; 0       ; 0         ; 0    ; 0            ; |Cyclops|SP_fifo:SPF                                                                                                                             ; work         ;
-;       |scfifo:scfifo_component|                 ; 69 (0)            ; 44 (0)       ; 16384       ; 0            ; 0       ; 0         ; 0    ; 0            ; |Cyclops|SP_fifo:SPF|scfifo:scfifo_component                                                                                                     ; work         ;
-;          |scfifo_1t31:auto_generated|           ; 69 (0)            ; 44 (0)       ; 16384       ; 0            ; 0       ; 0         ; 0    ; 0            ; |Cyclops|SP_fifo:SPF|scfifo:scfifo_component|scfifo_1t31:auto_generated                                                                          ; work         ;
-;             |a_dpfifo_kk31:dpfifo|              ; 69 (37)           ; 44 (15)      ; 16384       ; 0            ; 0       ; 0         ; 0    ; 0            ; |Cyclops|SP_fifo:SPF|scfifo:scfifo_component|scfifo_1t31:auto_generated|a_dpfifo_kk31:dpfifo                                                     ; work         ;
-;                |altsyncram_v2e1:FIFOram|        ; 0 (0)             ; 0 (0)        ; 16384       ; 0            ; 0       ; 0         ; 0    ; 0            ; |Cyclops|SP_fifo:SPF|scfifo:scfifo_component|scfifo_1t31:auto_generated|a_dpfifo_kk31:dpfifo|altsyncram_v2e1:FIFOram                             ; work         ;
-;                   |altsyncram_qjj1:altsyncram1| ; 0 (0)             ; 0 (0)        ; 16384       ; 0            ; 0       ; 0         ; 0    ; 0            ; |Cyclops|SP_fifo:SPF|scfifo:scfifo_component|scfifo_1t31:auto_generated|a_dpfifo_kk31:dpfifo|altsyncram_v2e1:FIFOram|altsyncram_qjj1:altsyncram1 ; work         ;
-;                |cntr_477:usedw_counter|         ; 11 (11)           ; 10 (10)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Cyclops|SP_fifo:SPF|scfifo:scfifo_component|scfifo_1t31:auto_generated|a_dpfifo_kk31:dpfifo|cntr_477:usedw_counter                              ; work         ;
-;                |cntr_g5b:rd_ptr_msb|            ; 10 (10)           ; 9 (9)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Cyclops|SP_fifo:SPF|scfifo:scfifo_component|scfifo_1t31:auto_generated|a_dpfifo_kk31:dpfifo|cntr_g5b:rd_ptr_msb                                 ; work         ;
-;                |cntr_o6b:wr_ptr|                ; 11 (11)           ; 10 (10)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Cyclops|SP_fifo:SPF|scfifo:scfifo_component|scfifo_1t31:auto_generated|a_dpfifo_kk31:dpfifo|cntr_o6b:wr_ptr                                     ; work         ;
-;    |Tx_fifo:TXF|                                ; 81 (0)            ; 52 (0)       ; 65536       ; 0            ; 0       ; 0         ; 0    ; 0            ; |Cyclops|Tx_fifo:TXF                                                                                                                             ; work         ;
-;       |scfifo:scfifo_component|                 ; 81 (0)            ; 52 (0)       ; 65536       ; 0            ; 0       ; 0         ; 0    ; 0            ; |Cyclops|Tx_fifo:TXF|scfifo:scfifo_component                                                                                                     ; work         ;
-;          |scfifo_ft31:auto_generated|           ; 81 (0)            ; 52 (0)       ; 65536       ; 0            ; 0       ; 0         ; 0    ; 0            ; |Cyclops|Tx_fifo:TXF|scfifo:scfifo_component|scfifo_ft31:auto_generated                                                                          ; work         ;
-;             |a_dpfifo_2l31:dpfifo|              ; 81 (43)           ; 52 (17)      ; 65536       ; 0            ; 0       ; 0         ; 0    ; 0            ; |Cyclops|Tx_fifo:TXF|scfifo:scfifo_component|scfifo_ft31:auto_generated|a_dpfifo_2l31:dpfifo                                                     ; work         ;
-;                |altsyncram_r3e1:FIFOram|        ; 0 (0)             ; 0 (0)        ; 65536       ; 0            ; 0       ; 0         ; 0    ; 0            ; |Cyclops|Tx_fifo:TXF|scfifo:scfifo_component|scfifo_ft31:auto_generated|a_dpfifo_2l31:dpfifo|altsyncram_r3e1:FIFOram                             ; work         ;
-;                   |altsyncram_mkj1:altsyncram1| ; 0 (0)             ; 0 (0)        ; 65536       ; 0            ; 0       ; 0         ; 0    ; 0            ; |Cyclops|Tx_fifo:TXF|scfifo:scfifo_component|scfifo_ft31:auto_generated|a_dpfifo_2l31:dpfifo|altsyncram_r3e1:FIFOram|altsyncram_mkj1:altsyncram1 ; work         ;
-;                |cntr_677:usedw_counter|         ; 13 (13)           ; 12 (12)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Cyclops|Tx_fifo:TXF|scfifo:scfifo_component|scfifo_ft31:auto_generated|a_dpfifo_2l31:dpfifo|cntr_677:usedw_counter                              ; work         ;
-;                |cntr_p6b:rd_ptr_msb|            ; 12 (12)           ; 11 (11)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Cyclops|Tx_fifo:TXF|scfifo:scfifo_component|scfifo_ft31:auto_generated|a_dpfifo_2l31:dpfifo|cntr_p6b:rd_ptr_msb                                 ; work         ;
-;                |cntr_q6b:wr_ptr|                ; 13 (13)           ; 12 (12)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Cyclops|Tx_fifo:TXF|scfifo:scfifo_component|scfifo_ft31:auto_generated|a_dpfifo_2l31:dpfifo|cntr_q6b:wr_ptr                                     ; work         ;
-;    |Tx_fifo_ctrl:TXFC|                          ; 100 (100)         ; 30 (30)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Cyclops|Tx_fifo_ctrl:TXFC                                                                                                                       ; work         ;
-;    |async_usb:usb1|                             ; 83 (83)           ; 54 (54)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Cyclops|async_usb:usb1                                                                                                                          ; work         ;
-;    |cdc_sync:cdc_c23|                           ; 2 (2)             ; 2 (2)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Cyclops|cdc_sync:cdc_c23                                                                                                                        ; work         ;
-;    |clkmult3:cm3|                               ; 0 (0)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Cyclops|clkmult3:cm3                                                                                                                            ; work         ;
-;       |altpll:altpll_component|                 ; 0 (0)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Cyclops|clkmult3:cm3|altpll:altpll_component                                                                                                    ; work         ;
-;    |led_blinker:BLINK_D1|                       ; 95 (95)           ; 43 (43)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Cyclops|led_blinker:BLINK_D1                                                                                                                    ; work         ;
-;    |led_blinker:BLINK_D4|                       ; 90 (90)           ; 40 (40)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Cyclops|led_blinker:BLINK_D4                                                                                                                    ; work         ;
-;    |pulsegen:CC_p|                              ; 1 (1)             ; 1 (1)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Cyclops|pulsegen:CC_p                                                                                                                           ; work         ;
-;    |pulsegen:cdc_m|                             ; 1 (1)             ; 1 (1)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Cyclops|pulsegen:cdc_m                                                                                                                          ; work         ;
-;    |sp_rcv_ctrl:SPC|                            ; 22 (22)           ; 14 (14)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Cyclops|sp_rcv_ctrl:SPC                                                                                                                         ; work         ;
+; |Cyclops                                        ; 2053 (301)        ; 1655 (551)   ; 114688      ; 0            ; 0       ; 0         ; 45   ; 0            ; |Cyclops                                                                                                                                         ; work         ;
+;    |ADF4112_SPI:ADF4112|                        ; 39 (39)           ; 13 (13)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Cyclops|ADF4112_SPI:ADF4112                                                                                                                     ;              ;
+;    |NWire_rcv:M_IQ|                             ; 368 (368)         ; 309 (309)    ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Cyclops|NWire_rcv:M_IQ                                                                                                                          ;              ;
+;    |NWire_rcv:SPD|                              ; 292 (292)         ; 166 (166)    ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Cyclops|NWire_rcv:SPD                                                                                                                           ;              ;
+;    |NWire_xmit:CCxmit|                          ; 316 (316)         ; 108 (108)    ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Cyclops|NWire_xmit:CCxmit                                                                                                                       ;              ;
+;    |NWire_xmit:M_LRAudio|                       ; 125 (125)         ; 150 (150)    ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Cyclops|NWire_xmit:M_LRAudio                                                                                                                    ;              ;
+;    |RFIFO:RXF|                                  ; 70 (70)           ; 77 (77)      ; 32768       ; 0            ; 0       ; 0         ; 0    ; 0            ; |Cyclops|RFIFO:RXF                                                                                                                               ;              ;
+;       |altsyncram:mem_rtl_0|                    ; 0 (0)             ; 0 (0)        ; 32768       ; 0            ; 0       ; 0         ; 0    ; 0            ; |Cyclops|RFIFO:RXF|altsyncram:mem_rtl_0                                                                                                          ;              ;
+;          |altsyncram_c1h1:auto_generated|       ; 0 (0)             ; 0 (0)        ; 32768       ; 0            ; 0       ; 0         ; 0    ; 0            ; |Cyclops|RFIFO:RXF|altsyncram:mem_rtl_0|altsyncram_c1h1:auto_generated                                                                           ;              ;
+;    |SP_fifo:SPF|                                ; 69 (0)            ; 44 (0)       ; 16384       ; 0            ; 0       ; 0         ; 0    ; 0            ; |Cyclops|SP_fifo:SPF                                                                                                                             ;              ;
+;       |scfifo:scfifo_component|                 ; 69 (0)            ; 44 (0)       ; 16384       ; 0            ; 0       ; 0         ; 0    ; 0            ; |Cyclops|SP_fifo:SPF|scfifo:scfifo_component                                                                                                     ;              ;
+;          |scfifo_1t31:auto_generated|           ; 69 (0)            ; 44 (0)       ; 16384       ; 0            ; 0       ; 0         ; 0    ; 0            ; |Cyclops|SP_fifo:SPF|scfifo:scfifo_component|scfifo_1t31:auto_generated                                                                          ;              ;
+;             |a_dpfifo_kk31:dpfifo|              ; 69 (37)           ; 44 (15)      ; 16384       ; 0            ; 0       ; 0         ; 0    ; 0            ; |Cyclops|SP_fifo:SPF|scfifo:scfifo_component|scfifo_1t31:auto_generated|a_dpfifo_kk31:dpfifo                                                     ;              ;
+;                |altsyncram_v2e1:FIFOram|        ; 0 (0)             ; 0 (0)        ; 16384       ; 0            ; 0       ; 0         ; 0    ; 0            ; |Cyclops|SP_fifo:SPF|scfifo:scfifo_component|scfifo_1t31:auto_generated|a_dpfifo_kk31:dpfifo|altsyncram_v2e1:FIFOram                             ;              ;
+;                   |altsyncram_qjj1:altsyncram1| ; 0 (0)             ; 0 (0)        ; 16384       ; 0            ; 0       ; 0         ; 0    ; 0            ; |Cyclops|SP_fifo:SPF|scfifo:scfifo_component|scfifo_1t31:auto_generated|a_dpfifo_kk31:dpfifo|altsyncram_v2e1:FIFOram|altsyncram_qjj1:altsyncram1 ;              ;
+;                |cntr_477:usedw_counter|         ; 11 (11)           ; 10 (10)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Cyclops|SP_fifo:SPF|scfifo:scfifo_component|scfifo_1t31:auto_generated|a_dpfifo_kk31:dpfifo|cntr_477:usedw_counter                              ;              ;
+;                |cntr_g5b:rd_ptr_msb|            ; 10 (10)           ; 9 (9)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Cyclops|SP_fifo:SPF|scfifo:scfifo_component|scfifo_1t31:auto_generated|a_dpfifo_kk31:dpfifo|cntr_g5b:rd_ptr_msb                                 ;              ;
+;                |cntr_o6b:wr_ptr|                ; 11 (11)           ; 10 (10)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Cyclops|SP_fifo:SPF|scfifo:scfifo_component|scfifo_1t31:auto_generated|a_dpfifo_kk31:dpfifo|cntr_o6b:wr_ptr                                     ;              ;
+;    |Tx_fifo:TXF|                                ; 81 (0)            ; 52 (0)       ; 65536       ; 0            ; 0       ; 0         ; 0    ; 0            ; |Cyclops|Tx_fifo:TXF                                                                                                                             ;              ;
+;       |scfifo:scfifo_component|                 ; 81 (0)            ; 52 (0)       ; 65536       ; 0            ; 0       ; 0         ; 0    ; 0            ; |Cyclops|Tx_fifo:TXF|scfifo:scfifo_component                                                                                                     ;              ;
+;          |scfifo_ft31:auto_generated|           ; 81 (0)            ; 52 (0)       ; 65536       ; 0            ; 0       ; 0         ; 0    ; 0            ; |Cyclops|Tx_fifo:TXF|scfifo:scfifo_component|scfifo_ft31:auto_generated                                                                          ;              ;
+;             |a_dpfifo_2l31:dpfifo|              ; 81 (43)           ; 52 (17)      ; 65536       ; 0            ; 0       ; 0         ; 0    ; 0            ; |Cyclops|Tx_fifo:TXF|scfifo:scfifo_component|scfifo_ft31:auto_generated|a_dpfifo_2l31:dpfifo                                                     ;              ;
+;                |altsyncram_r3e1:FIFOram|        ; 0 (0)             ; 0 (0)        ; 65536       ; 0            ; 0       ; 0         ; 0    ; 0            ; |Cyclops|Tx_fifo:TXF|scfifo:scfifo_component|scfifo_ft31:auto_generated|a_dpfifo_2l31:dpfifo|altsyncram_r3e1:FIFOram                             ;              ;
+;                   |altsyncram_mkj1:altsyncram1| ; 0 (0)             ; 0 (0)        ; 65536       ; 0            ; 0       ; 0         ; 0    ; 0            ; |Cyclops|Tx_fifo:TXF|scfifo:scfifo_component|scfifo_ft31:auto_generated|a_dpfifo_2l31:dpfifo|altsyncram_r3e1:FIFOram|altsyncram_mkj1:altsyncram1 ;              ;
+;                |cntr_677:usedw_counter|         ; 13 (13)           ; 12 (12)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Cyclops|Tx_fifo:TXF|scfifo:scfifo_component|scfifo_ft31:auto_generated|a_dpfifo_2l31:dpfifo|cntr_677:usedw_counter                              ;              ;
+;                |cntr_p6b:rd_ptr_msb|            ; 12 (12)           ; 11 (11)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Cyclops|Tx_fifo:TXF|scfifo:scfifo_component|scfifo_ft31:auto_generated|a_dpfifo_2l31:dpfifo|cntr_p6b:rd_ptr_msb                                 ;              ;
+;                |cntr_q6b:wr_ptr|                ; 13 (13)           ; 12 (12)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Cyclops|Tx_fifo:TXF|scfifo:scfifo_component|scfifo_ft31:auto_generated|a_dpfifo_2l31:dpfifo|cntr_q6b:wr_ptr                                     ;              ;
+;    |Tx_fifo_ctrl:TXFC|                          ; 100 (100)         ; 30 (30)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Cyclops|Tx_fifo_ctrl:TXFC                                                                                                                       ;              ;
+;    |async_usb:usb1|                             ; 83 (83)           ; 54 (54)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Cyclops|async_usb:usb1                                                                                                                          ;              ;
+;    |cdc_sync:cdc_c23|                           ; 2 (2)             ; 2 (2)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Cyclops|cdc_sync:cdc_c23                                                                                                                        ;              ;
+;    |clkmult3:cm3|                               ; 0 (0)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Cyclops|clkmult3:cm3                                                                                                                            ;              ;
+;       |altpll:altpll_component|                 ; 0 (0)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Cyclops|clkmult3:cm3|altpll:altpll_component                                                                                                    ;              ;
+;    |led_blinker:BLINK_D1|                       ; 95 (95)           ; 43 (43)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Cyclops|led_blinker:BLINK_D1                                                                                                                    ;              ;
+;    |led_blinker:BLINK_D4|                       ; 88 (88)           ; 40 (40)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Cyclops|led_blinker:BLINK_D4                                                                                                                    ;              ;
+;    |pulsegen:CC_p|                              ; 1 (1)             ; 1 (1)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Cyclops|pulsegen:CC_p                                                                                                                           ;              ;
+;    |pulsegen:cdc_m|                             ; 1 (1)             ; 1 (1)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Cyclops|pulsegen:cdc_m                                                                                                                          ;              ;
+;    |sp_rcv_ctrl:SPC|                            ; 22 (22)           ; 14 (14)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Cyclops|sp_rcv_ctrl:SPC                                                                                                                         ;              ;
 +-------------------------------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+--------------------------------------------------------------------------------------------------------------------------------------------------+--------------+
 Note: For table entries with two numbers listed, the numbers in parentheses indicate the number of resources of the given type used by the specific entity alone. The numbers listed outside of parentheses indicate the total resources of the given type used by the specific entity and all of its sub-entities in the hierarchy.
 
@@ -319,7 +318,7 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 +----------------------------------------------------------------------------------------------------------------------------------------------------+------+------------------+--------------+--------------+--------------+--------------+-------+------+
 ; Name                                                                                                                                               ; Type ; Mode             ; Port A Depth ; Port A Width ; Port B Depth ; Port B Width ; Size  ; MIF  ;
 +----------------------------------------------------------------------------------------------------------------------------------------------------+------+------------------+--------------+--------------+--------------+--------------+-------+------+
-; RFIFO:RXF|altsyncram:mem_rtl_0|altsyncram_h2j1:auto_generated|ALTSYNCRAM                                                                           ; AUTO ; Simple Dual Port ; 2048         ; 16           ; 2048         ; 16           ; 32768 ; None ;
+; RFIFO:RXF|altsyncram:mem_rtl_0|altsyncram_c1h1:auto_generated|ALTSYNCRAM                                                                           ; AUTO ; Simple Dual Port ; 2048         ; 16           ; 2048         ; 16           ; 32768 ; None ;
 ; SP_fifo:SPF|scfifo:scfifo_component|scfifo_1t31:auto_generated|a_dpfifo_kk31:dpfifo|altsyncram_v2e1:FIFOram|altsyncram_qjj1:altsyncram1|ALTSYNCRAM ; AUTO ; True Dual Port   ; 1024         ; 16           ; 1024         ; 16           ; 16384 ; None ;
 ; Tx_fifo:TXF|scfifo:scfifo_component|scfifo_ft31:auto_generated|a_dpfifo_2l31:dpfifo|altsyncram_r3e1:FIFOram|altsyncram_mkj1:altsyncram1|ALTSYNCRAM ; AUTO ; True Dual Port   ; 4096         ; 16           ; 4096         ; 16           ; 65536 ; None ;
 +----------------------------------------------------------------------------------------------------------------------------------------------------+------+------------------+--------------+--------------+--------------+--------------+-------+------+
@@ -532,13 +531,13 @@ Note: All latches listed above may not be present at the end of synthesis due to
 ; NWire_rcv:M_IQ|tb_width[13]             ; Merged with NWire_rcv:M_IQ|tb_width[12]             ;
 ; NWire_rcv:SPD|tb_width[10]              ; Stuck at GND due to stuck port data_in              ;
 ; NWire_rcv:M_IQ|tb_width[12]             ; Stuck at GND due to stuck port data_in              ;
-; First_LO_data[22]                       ; Merged with First_LO_data[1]                        ;
-; Second_LO_data[15]                      ; Merged with Second_LO_data[0]                       ;
 ; First_LO_data[7,21,23]                  ; Merged with First_LO_data[6]                        ;
-; Second_LO_data[7,14,16,18..19,22]       ; Merged with Second_LO_data[1]                       ;
-; Second_LO_data[3,5,10..11]              ; Merged with Second_LO_data[2]                       ;
+; First_LO_data[22]                       ; Merged with First_LO_data[1]                        ;
+; Second_LO_data[11,15]                   ; Merged with Second_LO_data[0]                       ;
+; Second_LO_data[7,12..13,16..19,22]      ; Merged with Second_LO_data[1]                       ;
+; Second_LO_data[3,5,10]                  ; Merged with Second_LO_data[2]                       ;
 ; Second_LO_data[20]                      ; Merged with Second_LO_data[4]                       ;
-; Second_LO_data[9,12..13,17,21,23]       ; Merged with Second_LO_data[8]                       ;
+; Second_LO_data[9,14,21,23]              ; Merged with Second_LO_data[8]                       ;
 ; First_LO_data[6]                        ; Stuck at GND due to stuck port data_in              ;
 ; led_blinker:BLINK_D4|bit_sel[1..3]      ; Stuck at GND due to stuck port data_in              ;
 ; led_blinker:BLINK_D4|led_code[1..3]     ; Stuck at GND due to stuck port data_in              ;
@@ -553,43 +552,43 @@ Note: All latches listed above may not be present at the end of synthesis due to
 ; RFIFO:RXF|mem_0_bypass[6]               ; Merged with RFIFO:RXF|outptr[2]                     ;
 ; RFIFO:RXF|mem_0_bypass[4]               ; Merged with RFIFO:RXF|outptr[1]                     ;
 ; RFIFO:RXF|mem_0_bypass[2]               ; Merged with RFIFO:RXF|outptr[0]                     ;
-; IF_PWM_state~13                         ; Lost fanout                                         ;
-; IF_PWM_state~14                         ; Lost fanout                                         ;
-; IF_PWM_state~15                         ; Lost fanout                                         ;
-; IF_SYNC_state~11                        ; Lost fanout                                         ;
-; IF_SYNC_state~12                        ; Lost fanout                                         ;
-; IF_SYNC_state~13                        ; Lost fanout                                         ;
-; ADF4112_SPI:ADF4112|SPI_state~7         ; Lost fanout                                         ;
-; ADF4112_SPI:ADF4112|SPI_state~8         ; Lost fanout                                         ;
-; ADF4112_SPI:ADF4112|SPI_state~9         ; Lost fanout                                         ;
-; led_blinker:BLINK_D4|LED_state~5        ; Lost fanout                                         ;
-; led_blinker:BLINK_D4|LED_state~6        ; Lost fanout                                         ;
-; led_blinker:BLINK_D4|LED_state~7        ; Lost fanout                                         ;
-; led_blinker:BLINK_D1|LED_state~5        ; Lost fanout                                         ;
-; led_blinker:BLINK_D1|LED_state~6        ; Lost fanout                                         ;
-; led_blinker:BLINK_D1|LED_state~7        ; Lost fanout                                         ;
-; NWire_xmit:CCxmit|NW_state~11           ; Lost fanout                                         ;
-; NWire_xmit:CCxmit|NW_state~12           ; Lost fanout                                         ;
-; NWire_xmit:CCxmit|NW_state~13           ; Lost fanout                                         ;
-; NWire_xmit:M_LRAudio|NW_state~11        ; Lost fanout                                         ;
-; NWire_xmit:M_LRAudio|NW_state~12        ; Lost fanout                                         ;
-; NWire_xmit:M_LRAudio|NW_state~13        ; Lost fanout                                         ;
-; async_usb:usb1|FX_state~25              ; Lost fanout                                         ;
-; async_usb:usb1|FX_state~26              ; Lost fanout                                         ;
-; async_usb:usb1|FX_state~27              ; Lost fanout                                         ;
-; async_usb:usb1|FX_state~28              ; Lost fanout                                         ;
-; async_usb:usb1|FX_state~29              ; Lost fanout                                         ;
-; async_usb:usb1|FX_state~30              ; Lost fanout                                         ;
-; NWire_rcv:SPD|TB_state~11               ; Lost fanout                                         ;
-; NWire_rcv:SPD|TB_state~12               ; Lost fanout                                         ;
-; NWire_rcv:SPD|TB_state~13               ; Lost fanout                                         ;
-; Tx_fifo_ctrl:TXFC|AD_state~17           ; Lost fanout                                         ;
-; Tx_fifo_ctrl:TXFC|AD_state~18           ; Lost fanout                                         ;
-; Tx_fifo_ctrl:TXFC|AD_state~19           ; Lost fanout                                         ;
-; Tx_fifo_ctrl:TXFC|AD_state~20           ; Lost fanout                                         ;
-; NWire_rcv:M_IQ|TB_state~11              ; Lost fanout                                         ;
-; NWire_rcv:M_IQ|TB_state~12              ; Lost fanout                                         ;
-; NWire_rcv:M_IQ|TB_state~13              ; Lost fanout                                         ;
+; IF_PWM_state~2                          ; Lost fanout                                         ;
+; IF_PWM_state~3                          ; Lost fanout                                         ;
+; IF_PWM_state~4                          ; Lost fanout                                         ;
+; IF_SYNC_state~2                         ; Lost fanout                                         ;
+; IF_SYNC_state~3                         ; Lost fanout                                         ;
+; IF_SYNC_state~4                         ; Lost fanout                                         ;
+; ADF4112_SPI:ADF4112|SPI_state~3         ; Lost fanout                                         ;
+; ADF4112_SPI:ADF4112|SPI_state~4         ; Lost fanout                                         ;
+; ADF4112_SPI:ADF4112|SPI_state~5         ; Lost fanout                                         ;
+; led_blinker:BLINK_D4|LED_state~2        ; Lost fanout                                         ;
+; led_blinker:BLINK_D4|LED_state~3        ; Lost fanout                                         ;
+; led_blinker:BLINK_D4|LED_state~4        ; Lost fanout                                         ;
+; led_blinker:BLINK_D1|LED_state~2        ; Lost fanout                                         ;
+; led_blinker:BLINK_D1|LED_state~3        ; Lost fanout                                         ;
+; led_blinker:BLINK_D1|LED_state~4        ; Lost fanout                                         ;
+; NWire_xmit:CCxmit|NW_state~2            ; Lost fanout                                         ;
+; NWire_xmit:CCxmit|NW_state~3            ; Lost fanout                                         ;
+; NWire_xmit:CCxmit|NW_state~4            ; Lost fanout                                         ;
+; NWire_xmit:M_LRAudio|NW_state~2         ; Lost fanout                                         ;
+; NWire_xmit:M_LRAudio|NW_state~3         ; Lost fanout                                         ;
+; NWire_xmit:M_LRAudio|NW_state~4         ; Lost fanout                                         ;
+; async_usb:usb1|FX_state~2               ; Lost fanout                                         ;
+; async_usb:usb1|FX_state~3               ; Lost fanout                                         ;
+; async_usb:usb1|FX_state~4               ; Lost fanout                                         ;
+; async_usb:usb1|FX_state~5               ; Lost fanout                                         ;
+; async_usb:usb1|FX_state~6               ; Lost fanout                                         ;
+; async_usb:usb1|FX_state~7               ; Lost fanout                                         ;
+; NWire_rcv:SPD|TB_state~2                ; Lost fanout                                         ;
+; NWire_rcv:SPD|TB_state~3                ; Lost fanout                                         ;
+; NWire_rcv:SPD|TB_state~4                ; Lost fanout                                         ;
+; Tx_fifo_ctrl:TXFC|AD_state~2            ; Lost fanout                                         ;
+; Tx_fifo_ctrl:TXFC|AD_state~3            ; Lost fanout                                         ;
+; Tx_fifo_ctrl:TXFC|AD_state~4            ; Lost fanout                                         ;
+; Tx_fifo_ctrl:TXFC|AD_state~5            ; Lost fanout                                         ;
+; NWire_rcv:M_IQ|TB_state~2               ; Lost fanout                                         ;
+; NWire_rcv:M_IQ|TB_state~3               ; Lost fanout                                         ;
+; NWire_rcv:M_IQ|TB_state~4               ; Lost fanout                                         ;
 ; led_blinker:BLINK_D4|LED_state.LED_IDLE ; Merged with led_blinker:BLINK_D1|LED_state.LED_IDLE ;
 ; async_usb:usb1|FX_state.FX_F6           ; Merged with async_usb:usb1|Rx_fifo_wreq             ;
 ; Second_LO_data[8]                       ; Stuck at GND due to stuck port data_in              ;
@@ -604,13 +603,13 @@ Note: All latches listed above may not be present at the end of synthesis due to
 +---------------------------------+---------------------------+----------------------------------------+
 ; Register name                   ; Reason for Removal        ; Registers Removed due to This Register ;
 +---------------------------------+---------------------------+----------------------------------------+
+; led_blinker:BLINK_D1|ld[1]      ; Stuck at GND              ; led_blinker:BLINK_D1|led_code[3]       ;
+;                                 ; due to stuck port data_in ;                                        ;
 ; led_blinker:BLINK_D4|bit_sel[2] ; Stuck at GND              ; led_blinker:BLINK_D4|led_code[2]       ;
 ;                                 ; due to stuck port data_in ;                                        ;
 ; led_blinker:BLINK_D4|bit_sel[1] ; Stuck at GND              ; led_blinker:BLINK_D4|led_code[1]       ;
 ;                                 ; due to stuck port data_in ;                                        ;
 ; led_blinker:BLINK_D4|bit_sel[3] ; Stuck at GND              ; led_blinker:BLINK_D4|led_code[3]       ;
-;                                 ; due to stuck port data_in ;                                        ;
-; led_blinker:BLINK_D1|bit_sel[3] ; Stuck at GND              ; led_blinker:BLINK_D1|led_code[3]       ;
 ;                                 ; due to stuck port data_in ;                                        ;
 +---------------------------------+---------------------------+----------------------------------------+
 
@@ -677,64 +676,64 @@ Note: All latches listed above may not be present at the end of synthesis due to
 +----------------------------+-----------------+
 
 
-+----------------------------------------------------------------------------------------------------------------------------------------------------------+
-; Multiplexer Restructuring Statistics (Restructuring Performed)                                                                                           ;
-+--------------------+-----------+---------------+----------------------+------------------------+------------+--------------------------------------------+
-; Multiplexer Inputs ; Bus Width ; Baseline Area ; Area if Restructured ; Saving if Restructured ; Registered ; Example Multiplexer Output                 ;
-+--------------------+-----------+---------------+----------------------+------------------------+------------+--------------------------------------------+
-; 3:1                ; 16 bits   ; 32 LEs        ; 16 LEs               ; 16 LEs                 ; Yes        ; |Cyclops|async_usb:usb1|Rx_fifo_wdata[2]   ;
-; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |Cyclops|async_usb:usb1|FIFO_ADR[0]        ;
-; 3:1                ; 5 bits    ; 10 LEs        ; 5 LEs                ; 5 LEs                  ; Yes        ; |Cyclops|NWire_rcv:SPD|DBrise_cnt[4]       ;
-; 3:1                ; 10 bits   ; 20 LEs        ; 10 LEs               ; 10 LEs                 ; Yes        ; |Cyclops|NWire_rcv:SPD|tb_width[3]         ;
-; 3:1                ; 4 bits    ; 8 LEs         ; 4 LEs                ; 4 LEs                  ; Yes        ; |Cyclops|NWire_rcv:SPD|data_cnt[2]         ;
-; 3:1                ; 6 bits    ; 12 LEs        ; 6 LEs                ; 6 LEs                  ; Yes        ; |Cyclops|NWire_rcv:M_IQ|DBrise_cnt[2]      ;
-; 3:1                ; 12 bits   ; 24 LEs        ; 12 LEs               ; 12 LEs                 ; Yes        ; |Cyclops|NWire_rcv:M_IQ|tb_width[7]        ;
-; 3:1                ; 6 bits    ; 12 LEs        ; 6 LEs                ; 6 LEs                  ; Yes        ; |Cyclops|NWire_rcv:M_IQ|data_cnt[5]        ;
-; 3:1                ; 13 bits   ; 26 LEs        ; 13 LEs               ; 13 LEs                 ; Yes        ; |Cyclops|IF_bleed_cnt[10]                  ;
-; 3:1                ; 12 bits   ; 24 LEs        ; 12 LEs               ; 12 LEs                 ; Yes        ; |Cyclops|NWire_rcv:SPD|tb_cnt[7]           ;
-; 3:1                ; 24 bits   ; 48 LEs        ; 24 LEs               ; 24 LEs                 ; Yes        ; |Cyclops|LRcnt[23]                         ;
-; 3:1                ; 14 bits   ; 28 LEs        ; 14 LEs               ; 14 LEs                 ; Yes        ; |Cyclops|NWire_rcv:M_IQ|tb_cnt[6]          ;
-; 3:1                ; 31 bits   ; 62 LEs        ; 31 LEs               ; 31 LEs                 ; Yes        ; |Cyclops|NWire_xmit:M_LRAudio|id[14]       ;
-; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |Cyclops|NWire_xmit:CCxmit|id[59]          ;
-; 3:1                ; 26 bits   ; 52 LEs        ; 26 LEs               ; 26 LEs                 ; Yes        ; |Cyclops|NWire_xmit:CCxmit|id[17]          ;
-; 3:1                ; 48 bits   ; 96 LEs        ; 48 LEs               ; 48 LEs                 ; Yes        ; |Cyclops|NWire_rcv:SPD|DB_LEN[1][6]        ;
-; 3:1                ; 56 bits   ; 112 LEs       ; 56 LEs               ; 56 LEs                 ; Yes        ; |Cyclops|NWire_rcv:M_IQ|DB_LEN[2][7]       ;
-; 3:1                ; 16 bits   ; 32 LEs        ; 16 LEs               ; 16 LEs                 ; Yes        ; |Cyclops|NWire_rcv:SPD|rdata[2]            ;
-; 3:1                ; 48 bits   ; 96 LEs        ; 48 LEs               ; 48 LEs                 ; Yes        ; |Cyclops|NWire_rcv:M_IQ|rdata[12]          ;
-; 3:1                ; 26 bits   ; 52 LEs        ; 26 LEs               ; 26 LEs                 ; Yes        ; |Cyclops|led_blinker:BLINK_D1|led_timer[7] ;
-; 3:1                ; 26 bits   ; 52 LEs        ; 26 LEs               ; 26 LEs                 ; Yes        ; |Cyclops|led_blinker:BLINK_D4|led_timer[7] ;
-; 3:1                ; 24 bits   ; 48 LEs        ; 24 LEs               ; 24 LEs                 ; Yes        ; |Cyclops|NWire_xmit:CCxmit|dly_cnt[3]      ;
-; 3:1                ; 25 bits   ; 50 LEs        ; 25 LEs               ; 25 LEs                 ; Yes        ; |Cyclops|NWire_xmit:M_LRAudio|dly_cnt[5]   ;
-; 3:1                ; 12 bits   ; 24 LEs        ; 12 LEs               ; 12 LEs                 ; Yes        ; |Cyclops|sp_rcv_ctrl:SPC|count[11]         ;
-; 4:1                ; 23 bits   ; 46 LEs        ; 23 LEs               ; 23 LEs                 ; Yes        ; |Cyclops|IF_clock_s[0]                     ;
-; 4:1                ; 4 bits    ; 8 LEs         ; 4 LEs                ; 4 LEs                  ; Yes        ; |Cyclops|CC_address[2]                     ;
-; 4:1                ; 5 bits    ; 10 LEs        ; 5 LEs                ; 5 LEs                  ; Yes        ; |Cyclops|Tx_fifo_ctrl:TXFC|AD_timer[4]     ;
-; 4:1                ; 5 bits    ; 10 LEs        ; 5 LEs                ; 5 LEs                  ; Yes        ; |Cyclops|Tx_fifo_ctrl:TXFC|tx_addr[4]      ;
-; 4:1                ; 4 bits    ; 8 LEs         ; 4 LEs                ; 4 LEs                  ; Yes        ; |Cyclops|led_blinker:BLINK_D4|bit_sel[1]   ;
-; 4:1                ; 4 bits    ; 8 LEs         ; 4 LEs                ; 4 LEs                  ; Yes        ; |Cyclops|led_blinker:BLINK_D1|bit_sel[2]   ;
-; 4:1                ; 5 bits    ; 10 LEs        ; 5 LEs                ; 5 LEs                  ; Yes        ; |Cyclops|ADF4112_SPI:ADF4112|bit_count[0]  ;
-; 5:1                ; 8 bits    ; 24 LEs        ; 8 LEs                ; 16 LEs                 ; Yes        ; |Cyclops|NWire_xmit:CCxmit|bcnt[1]         ;
-; 5:1                ; 8 bits    ; 24 LEs        ; 8 LEs                ; 16 LEs                 ; Yes        ; |Cyclops|NWire_xmit:M_LRAudio|bcnt[7]      ;
-; 11:1               ; 32 bits   ; 224 LEs       ; 192 LEs              ; 32 LEs                 ; Yes        ; |Cyclops|NWire_xmit:CCxmit|id[43]          ;
-; 17:1               ; 2 bits    ; 22 LEs        ; 2 LEs                ; 20 LEs                 ; Yes        ; |Cyclops|Second_LO_data[2]                 ;
-; 17:1               ; 2 bits    ; 22 LEs        ; 2 LEs                ; 20 LEs                 ; Yes        ; |Cyclops|Second_LO_data[6]                 ;
-; 17:1               ; 2 bits    ; 22 LEs        ; 2 LEs                ; 20 LEs                 ; Yes        ; |Cyclops|First_LO_data[6]                  ;
-; 7:1                ; 32 bits   ; 128 LEs       ; 32 LEs               ; 96 LEs                 ; Yes        ; |Cyclops|IF_frequency[0][29]               ;
-; 8:1                ; 32 bits   ; 160 LEs       ; 32 LEs               ; 128 LEs                ; Yes        ; |Cyclops|IF_frequency[1][2]                ;
-; 8:1                ; 32 bits   ; 160 LEs       ; 32 LEs               ; 128 LEs                ; Yes        ; |Cyclops|IF_frequency[2][13]               ;
-; 8:1                ; 32 bits   ; 160 LEs       ; 32 LEs               ; 128 LEs                ; Yes        ; |Cyclops|IF_frequency[3][28]               ;
-; 8:1                ; 32 bits   ; 160 LEs       ; 32 LEs               ; 128 LEs                ; Yes        ; |Cyclops|IF_frequency[4][24]               ;
-; 8:1                ; 32 bits   ; 160 LEs       ; 32 LEs               ; 128 LEs                ; Yes        ; |Cyclops|IF_frequency[5][20]               ;
-; 8:1                ; 32 bits   ; 160 LEs       ; 32 LEs               ; 128 LEs                ; Yes        ; |Cyclops|IF_frequency[6][16]               ;
-; 8:1                ; 32 bits   ; 160 LEs       ; 32 LEs               ; 128 LEs                ; Yes        ; |Cyclops|IF_frequency[7][16]               ;
-; 8:1                ; 32 bits   ; 160 LEs       ; 32 LEs               ; 128 LEs                ; Yes        ; |Cyclops|IF_frequency[8][5]                ;
-; 19:1               ; 2 bits    ; 24 LEs        ; 4 LEs                ; 20 LEs                 ; Yes        ; |Cyclops|First_LO_data[0]                  ;
-; 19:1               ; 16 bits   ; 192 LEs       ; 32 LEs               ; 160 LEs                ; Yes        ; |Cyclops|First_LO_data[18]                 ;
-; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; No         ; |Cyclops|Tx_fifo_ctrl:TXFC|AD_state~11     ;
-; 7:1                ; 8 bits    ; 32 LEs        ; 32 LEs               ; 0 LEs                  ; No         ; |Cyclops|Tx_fifo_ctrl:TXFC|Selector14      ;
-; 8:1                ; 3 bits    ; 15 LEs        ; 15 LEs               ; 0 LEs                  ; No         ; |Cyclops|Tx_fifo_ctrl:TXFC|Selector22      ;
-; 8:1                ; 5 bits    ; 25 LEs        ; 25 LEs               ; 0 LEs                  ; No         ; |Cyclops|Tx_fifo_ctrl:TXFC|Selector19      ;
-+--------------------+-----------+---------------+----------------------+------------------------+------------+--------------------------------------------+
++-----------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Multiplexer Restructuring Statistics (Restructuring Performed)                                                                                            ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+---------------------------------------------+
+; Multiplexer Inputs ; Bus Width ; Baseline Area ; Area if Restructured ; Saving if Restructured ; Registered ; Example Multiplexer Output                  ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+---------------------------------------------+
+; 3:1                ; 16 bits   ; 32 LEs        ; 16 LEs               ; 16 LEs                 ; Yes        ; |Cyclops|async_usb:usb1|Rx_fifo_wdata[2]    ;
+; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |Cyclops|async_usb:usb1|FIFO_ADR[1]         ;
+; 3:1                ; 5 bits    ; 10 LEs        ; 5 LEs                ; 5 LEs                  ; Yes        ; |Cyclops|NWire_rcv:SPD|DBrise_cnt[0]        ;
+; 3:1                ; 10 bits   ; 20 LEs        ; 10 LEs               ; 10 LEs                 ; Yes        ; |Cyclops|NWire_rcv:SPD|tb_width[9]          ;
+; 3:1                ; 4 bits    ; 8 LEs         ; 4 LEs                ; 4 LEs                  ; Yes        ; |Cyclops|NWire_rcv:SPD|data_cnt[3]          ;
+; 3:1                ; 6 bits    ; 12 LEs        ; 6 LEs                ; 6 LEs                  ; Yes        ; |Cyclops|NWire_rcv:M_IQ|DBrise_cnt[0]       ;
+; 3:1                ; 12 bits   ; 24 LEs        ; 12 LEs               ; 12 LEs                 ; Yes        ; |Cyclops|NWire_rcv:M_IQ|tb_width[2]         ;
+; 3:1                ; 6 bits    ; 12 LEs        ; 6 LEs                ; 6 LEs                  ; Yes        ; |Cyclops|NWire_rcv:M_IQ|data_cnt[1]         ;
+; 3:1                ; 13 bits   ; 26 LEs        ; 13 LEs               ; 13 LEs                 ; Yes        ; |Cyclops|IF_bleed_cnt[5]                    ;
+; 3:1                ; 12 bits   ; 24 LEs        ; 12 LEs               ; 12 LEs                 ; Yes        ; |Cyclops|NWire_rcv:SPD|tb_cnt[3]            ;
+; 3:1                ; 24 bits   ; 48 LEs        ; 24 LEs               ; 24 LEs                 ; Yes        ; |Cyclops|LRcnt[5]                           ;
+; 3:1                ; 14 bits   ; 28 LEs        ; 14 LEs               ; 14 LEs                 ; Yes        ; |Cyclops|NWire_rcv:M_IQ|tb_cnt[6]           ;
+; 3:1                ; 31 bits   ; 62 LEs        ; 31 LEs               ; 31 LEs                 ; Yes        ; |Cyclops|NWire_xmit:M_LRAudio|id[14]        ;
+; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |Cyclops|NWire_xmit:CCxmit|id[59]           ;
+; 3:1                ; 26 bits   ; 52 LEs        ; 26 LEs               ; 26 LEs                 ; Yes        ; |Cyclops|NWire_xmit:CCxmit|id[19]           ;
+; 3:1                ; 48 bits   ; 96 LEs        ; 48 LEs               ; 48 LEs                 ; Yes        ; |Cyclops|NWire_rcv:SPD|DB_LEN[1][6]         ;
+; 3:1                ; 56 bits   ; 112 LEs       ; 56 LEs               ; 56 LEs                 ; Yes        ; |Cyclops|NWire_rcv:M_IQ|DB_LEN[2][6]        ;
+; 3:1                ; 48 bits   ; 96 LEs        ; 48 LEs               ; 48 LEs                 ; Yes        ; |Cyclops|NWire_rcv:M_IQ|rdata[34]           ;
+; 3:1                ; 16 bits   ; 32 LEs        ; 16 LEs               ; 16 LEs                 ; Yes        ; |Cyclops|NWire_rcv:SPD|rdata[11]            ;
+; 3:1                ; 26 bits   ; 52 LEs        ; 26 LEs               ; 26 LEs                 ; Yes        ; |Cyclops|led_blinker:BLINK_D1|led_timer[7]  ;
+; 3:1                ; 26 bits   ; 52 LEs        ; 26 LEs               ; 26 LEs                 ; Yes        ; |Cyclops|led_blinker:BLINK_D4|led_timer[10] ;
+; 3:1                ; 24 bits   ; 48 LEs        ; 24 LEs               ; 24 LEs                 ; Yes        ; |Cyclops|NWire_xmit:CCxmit|dly_cnt[3]       ;
+; 3:1                ; 25 bits   ; 50 LEs        ; 25 LEs               ; 25 LEs                 ; Yes        ; |Cyclops|NWire_xmit:M_LRAudio|dly_cnt[5]    ;
+; 3:1                ; 12 bits   ; 24 LEs        ; 12 LEs               ; 12 LEs                 ; Yes        ; |Cyclops|sp_rcv_ctrl:SPC|count[11]          ;
+; 4:1                ; 23 bits   ; 46 LEs        ; 23 LEs               ; 23 LEs                 ; Yes        ; |Cyclops|IF_clock_s[0]                      ;
+; 4:1                ; 4 bits    ; 8 LEs         ; 4 LEs                ; 4 LEs                  ; Yes        ; |Cyclops|CC_address[2]                      ;
+; 4:1                ; 5 bits    ; 10 LEs        ; 5 LEs                ; 5 LEs                  ; Yes        ; |Cyclops|Tx_fifo_ctrl:TXFC|AD_timer[4]      ;
+; 4:1                ; 5 bits    ; 10 LEs        ; 5 LEs                ; 5 LEs                  ; Yes        ; |Cyclops|Tx_fifo_ctrl:TXFC|tx_addr[4]       ;
+; 4:1                ; 4 bits    ; 8 LEs         ; 4 LEs                ; 4 LEs                  ; Yes        ; |Cyclops|led_blinker:BLINK_D4|bit_sel[1]    ;
+; 4:1                ; 4 bits    ; 8 LEs         ; 4 LEs                ; 4 LEs                  ; Yes        ; |Cyclops|led_blinker:BLINK_D1|bit_sel[2]    ;
+; 4:1                ; 5 bits    ; 10 LEs        ; 5 LEs                ; 5 LEs                  ; Yes        ; |Cyclops|ADF4112_SPI:ADF4112|bit_count[0]   ;
+; 5:1                ; 8 bits    ; 24 LEs        ; 8 LEs                ; 16 LEs                 ; Yes        ; |Cyclops|NWire_xmit:CCxmit|bcnt[1]          ;
+; 5:1                ; 8 bits    ; 24 LEs        ; 8 LEs                ; 16 LEs                 ; Yes        ; |Cyclops|NWire_xmit:M_LRAudio|bcnt[7]       ;
+; 11:1               ; 32 bits   ; 224 LEs       ; 192 LEs              ; 32 LEs                 ; Yes        ; |Cyclops|NWire_xmit:CCxmit|id[43]           ;
+; 17:1               ; 2 bits    ; 22 LEs        ; 2 LEs                ; 20 LEs                 ; Yes        ; |Cyclops|Second_LO_data[2]                  ;
+; 17:1               ; 2 bits    ; 22 LEs        ; 2 LEs                ; 20 LEs                 ; Yes        ; |Cyclops|Second_LO_data[6]                  ;
+; 17:1               ; 2 bits    ; 22 LEs        ; 2 LEs                ; 20 LEs                 ; Yes        ; |Cyclops|First_LO_data[6]                   ;
+; 7:1                ; 32 bits   ; 128 LEs       ; 32 LEs               ; 96 LEs                 ; Yes        ; |Cyclops|IF_frequency[0][29]                ;
+; 8:1                ; 32 bits   ; 160 LEs       ; 32 LEs               ; 128 LEs                ; Yes        ; |Cyclops|IF_frequency[1][2]                 ;
+; 8:1                ; 32 bits   ; 160 LEs       ; 32 LEs               ; 128 LEs                ; Yes        ; |Cyclops|IF_frequency[2][13]                ;
+; 8:1                ; 32 bits   ; 160 LEs       ; 32 LEs               ; 128 LEs                ; Yes        ; |Cyclops|IF_frequency[3][28]                ;
+; 8:1                ; 32 bits   ; 160 LEs       ; 32 LEs               ; 128 LEs                ; Yes        ; |Cyclops|IF_frequency[4][24]                ;
+; 8:1                ; 32 bits   ; 160 LEs       ; 32 LEs               ; 128 LEs                ; Yes        ; |Cyclops|IF_frequency[5][20]                ;
+; 8:1                ; 32 bits   ; 160 LEs       ; 32 LEs               ; 128 LEs                ; Yes        ; |Cyclops|IF_frequency[6][16]                ;
+; 8:1                ; 32 bits   ; 160 LEs       ; 32 LEs               ; 128 LEs                ; Yes        ; |Cyclops|IF_frequency[7][16]                ;
+; 8:1                ; 32 bits   ; 160 LEs       ; 32 LEs               ; 128 LEs                ; Yes        ; |Cyclops|IF_frequency[8][5]                 ;
+; 19:1               ; 2 bits    ; 24 LEs        ; 4 LEs                ; 20 LEs                 ; Yes        ; |Cyclops|First_LO_data[0]                   ;
+; 19:1               ; 16 bits   ; 192 LEs       ; 32 LEs               ; 160 LEs                ; Yes        ; |Cyclops|First_LO_data[18]                  ;
+; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; No         ; |Cyclops|Tx_fifo_ctrl:TXFC|AD_state         ;
+; 7:1                ; 8 bits    ; 32 LEs        ; 32 LEs               ; 0 LEs                  ; No         ; |Cyclops|Tx_fifo_ctrl:TXFC|Selector14       ;
+; 8:1                ; 3 bits    ; 15 LEs        ; 15 LEs               ; 0 LEs                  ; No         ; |Cyclops|Tx_fifo_ctrl:TXFC|Selector22       ;
+; 8:1                ; 5 bits    ; 25 LEs        ; 25 LEs               ; 0 LEs                  ; No         ; |Cyclops|Tx_fifo_ctrl:TXFC|Selector19       ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+---------------------------------------------+
 
 
 +------------------------------------------------------------------------------------------------------------------------------------+
@@ -774,7 +773,7 @@ Note: All latches listed above may not be present at the end of synthesis due to
 
 
 +--------------------------------------------------------------------------------------+
-; Source assignments for RFIFO:RXF|altsyncram:mem_rtl_0|altsyncram_h2j1:auto_generated ;
+; Source assignments for RFIFO:RXF|altsyncram:mem_rtl_0|altsyncram_c1h1:auto_generated ;
 +---------------------------------+--------------------+------+------------------------+
 ; Assignment                      ; Value              ; From ; To                     ;
 +---------------------------------+--------------------+------+------------------------+
@@ -795,13 +794,13 @@ Note: All latches listed above may not be present at the end of synthesis due to
 ; CP16           ; 1                        ; Unsigned Binary             ;
 ; CP15           ; 1                        ; Unsigned Binary             ;
 ; CP14           ; 1                        ; Unsigned Binary             ;
-; CP13           ; 0                        ; Unsigned Binary             ;
+; CP13           ; 1                        ; Unsigned Binary             ;
 ; CP12           ; 1                        ; Unsigned Binary             ;
 ; CP11           ; 1                        ; Unsigned Binary             ;
-; TC4            ; 1                        ; Unsigned Binary             ;
-; TC3            ; 0                        ; Unsigned Binary             ;
-; TC2            ; 0                        ; Unsigned Binary             ;
-; TC1            ; 0                        ; Unsigned Binary             ;
+; TC4            ; 0                        ; Unsigned Binary             ;
+; TC3            ; 1                        ; Unsigned Binary             ;
+; TC2            ; 1                        ; Unsigned Binary             ;
+; TC1            ; 1                        ; Unsigned Binary             ;
 ; F5             ; 0                        ; Unsigned Binary             ;
 ; F4             ; 0                        ; Unsigned Binary             ;
 ; F3             ; 0                        ; Unsigned Binary             ;
@@ -814,8 +813,8 @@ Note: All latches listed above may not be present at the end of synthesis due to
 ; F1             ; 0                        ; Unsigned Binary             ;
 ; C2             ; 1                        ; Unsigned Binary             ;
 ; C1             ; 1                        ; Unsigned Binary             ;
-; Second_LO_INL  ; 010111011100000010010011 ; Unsigned Binary             ;
-; First_LO_INL   ; 010111011100000000010011 ; Unsigned Binary             ;
+; Second_LO_INL  ; 010111111011100010010011 ; Unsigned Binary             ;
+; First_LO_INL   ; 010111111011100000010011 ; Unsigned Binary             ;
 ; LO2_BD23       ; 0                        ; Unsigned Binary             ;
 ; LO2_DLY        ; 0                        ; Unsigned Binary             ;
 ; LO2_SYNC       ; 0                        ; Unsigned Binary             ;
@@ -1475,7 +1474,7 @@ Note: In order to hide this table in the UI and the text report file, please set
 ; CLOCK_ENABLE_CORE_B                ; USE_INPUT_CLKEN      ; Untyped             ;
 ; ENABLE_ECC                         ; FALSE                ; Untyped             ;
 ; DEVICE_FAMILY                      ; Cyclone II           ; Untyped             ;
-; CBXI_PARAMETER                     ; altsyncram_h2j1      ; Untyped             ;
+; CBXI_PARAMETER                     ; altsyncram_c1h1      ; Untyped             ;
 +------------------------------------+----------------------+---------------------+
 Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings Tables in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
 
@@ -1599,10 +1598,10 @@ Note: In order to hide this table in the UI and the text report file, please set
 +-------------------------------+
 Info: *******************************************************************
 Info: Running Quartus II Analysis & Synthesis
-    Info: Version 9.0 Build 132 02/25/2009 SJ Web Edition
-    Info: Processing started: Mon Aug 31 19:38:47 2009
+    Info: Version 9.1 Build 350 03/24/2010 Service Pack 2 SJ Web Edition
+    Info: Processing started: Sat Jul 09 16:46:03 2011
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off Cyclops -c Cyclops
-Info: Found 1 design units, including 1 entities, in source file Tx_fifo_ctrl.v
+Info: Found 1 design units, including 1 entities, in source file tx_fifo_ctrl.v
     Info: Found entity 1: Tx_fifo_ctrl
 Info: Found 1 design units, including 1 entities, in source file common/cdc_mcp.v
     Info: Found entity 1: cdc_mcp
@@ -1612,45 +1611,45 @@ Info: Found 1 design units, including 1 entities, in source file common/clk_div.
     Info: Found entity 1: clk_div
 Info: Found 1 design units, including 1 entities, in source file common/clk_lrclk_gen.v
     Info: Found entity 1: clk_lrclk_gen
-Info: Found 1 design units, including 1 entities, in source file common/I2S_rcv.v
+Info: Found 1 design units, including 1 entities, in source file common/i2s_rcv.v
     Info: Found entity 1: I2S_rcv
-Info: Found 1 design units, including 1 entities, in source file common/I2S_xmit.v
+Info: Found 1 design units, including 1 entities, in source file common/i2s_xmit.v
     Info: Found entity 1: I2S_xmit
-Info: Found 1 design units, including 1 entities, in source file common/NWire_rcv.v
+Info: Found 1 design units, including 1 entities, in source file common/nwire_rcv.v
     Info: Found entity 1: NWire_rcv
-Info: Found 1 design units, including 1 entities, in source file common/NWire_xmit.v
+Info: Found 1 design units, including 1 entities, in source file common/nwire_xmit.v
     Info: Found entity 1: NWire_xmit
-Info: Found 1 design units, including 1 entities, in source file common/OneWire_rcv.v
+Info: Found 1 design units, including 1 entities, in source file common/onewire_rcv.v
     Info: Found entity 1: onewire_rcv
-Info: Found 1 design units, including 1 entities, in source file common/OneWire_xmit.v
+Info: Found 1 design units, including 1 entities, in source file common/onewire_xmit.v
     Info: Found entity 1: onewire_xmit
 Info: Found 1 design units, including 1 entities, in source file common/pulsegen.v
     Info: Found entity 1: pulsegen
-Info: Found 1 design units, including 1 entities, in source file RFIFO.v
+Info: Found 1 design units, including 1 entities, in source file rfifo.v
     Info: Found entity 1: RFIFO
-Info: Found 1 design units, including 1 entities, in source file Rx_fifo.v
+Info: Found 1 design units, including 1 entities, in source file rx_fifo.v
     Info: Found entity 1: Rx_fifo
-Info: Found 1 design units, including 1 entities, in source file SP_fifo.v
+Info: Found 1 design units, including 1 entities, in source file sp_fifo.v
     Info: Found entity 1: SP_fifo
 Info: Found 1 design units, including 1 entities, in source file sp_rcv_ctrl.v
     Info: Found entity 1: sp_rcv_ctrl
-Info: Found 1 design units, including 1 entities, in source file SPI.v
+Info: Found 1 design units, including 1 entities, in source file spi.v
     Info: Found entity 1: SPI
-Info: Found 1 design units, including 1 entities, in source file SPI_REGS.v
+Info: Found 1 design units, including 1 entities, in source file spi_regs.v
     Info: Found entity 1: SPI_REGS
 Info: Found 1 design units, including 1 entities, in source file sync_usb.v
     Info: Found entity 1: sync_usb
-Info: Found 1 design units, including 1 entities, in source file Tx_fifo.v
+Info: Found 1 design units, including 1 entities, in source file tx_fifo.v
     Info: Found entity 1: Tx_fifo
 Info: Found 1 design units, including 1 entities, in source file async_usb.v
     Info: Found entity 1: async_usb
-Info: Found 1 design units, including 1 entities, in source file ADF4112_SPI.v
+Info: Found 1 design units, including 1 entities, in source file adf4112_spi.v
     Info: Found entity 1: ADF4112_SPI
 Info: Found 1 design units, including 1 entities, in source file clkmult3.v
     Info: Found entity 1: clkmult3
 Info: Found 1 design units, including 1 entities, in source file clock_det.v
     Info: Found entity 1: clock_det
-Info: Found 1 design units, including 1 entities, in source file Cyclops.v
+Info: Found 1 design units, including 1 entities, in source file cyclops.v
     Info: Found entity 1: Cyclops
 Info: Found 1 design units, including 1 entities, in source file flash.v
     Info: Found entity 1: flash
@@ -1658,36 +1657,21 @@ Info: Found 1 design units, including 1 entities, in source file gpio_control.v
     Info: Found entity 1: gpio_control
 Info: Found 1 design units, including 1 entities, in source file gpio_oport.v
     Info: Found entity 1: gpio_oport
-Info: Found 1 design units, including 1 entities, in source file HPF_select.v
+Info: Found 1 design units, including 1 entities, in source file hpf_select.v
     Info: Found entity 1: HPF_select
-Info: Found 1 design units, including 1 entities, in source file I2S_LR_Capture.v
+Info: Found 1 design units, including 1 entities, in source file i2s_lr_capture.v
     Info: Found entity 1: I2S_LR_Capture
 Info: Found 1 design units, including 1 entities, in source file led_blinker.v
     Info: Found entity 1: led_blinker
-Info: Found 1 design units, including 1 entities, in source file LPF_select.v
+Info: Found 1 design units, including 1 entities, in source file lpf_select.v
     Info: Found entity 1: LPF_select
 Info: Elaborating entity "Cyclops" for the top level hierarchy
-Warning (10036): Verilog HDL or VHDL warning at Cyclops.v(308): object "C12_rst" assigned a value but never read
-Warning (10858): Verilog HDL warning at Cyclops.v(309): object C12_clk used but never assigned
-Warning (10858): Verilog HDL warning at Cyclops.v(342): object IF_mic_Data used but never assigned
-Warning (10240): Verilog HDL Always Construct warning at Cyclops.v(346): inferring latch(es) for variable "IF_tx_IQ_mic_rdy", which holds its previous value in one or more paths through the always construct
-Warning (10030): Net "IF_mic_Data[15]" at Cyclops.v(342) has no driver or initial value, using a default initial value '0'
-Warning (10030): Net "IF_mic_Data[14]" at Cyclops.v(342) has no driver or initial value, using a default initial value '0'
-Warning (10030): Net "IF_mic_Data[13]" at Cyclops.v(342) has no driver or initial value, using a default initial value '0'
-Warning (10030): Net "IF_mic_Data[12]" at Cyclops.v(342) has no driver or initial value, using a default initial value '0'
-Warning (10030): Net "IF_mic_Data[11]" at Cyclops.v(342) has no driver or initial value, using a default initial value '0'
-Warning (10030): Net "IF_mic_Data[10]" at Cyclops.v(342) has no driver or initial value, using a default initial value '0'
-Warning (10030): Net "IF_mic_Data[9]" at Cyclops.v(342) has no driver or initial value, using a default initial value '0'
-Warning (10030): Net "IF_mic_Data[8]" at Cyclops.v(342) has no driver or initial value, using a default initial value '0'
-Warning (10030): Net "IF_mic_Data[7]" at Cyclops.v(342) has no driver or initial value, using a default initial value '0'
-Warning (10030): Net "IF_mic_Data[6]" at Cyclops.v(342) has no driver or initial value, using a default initial value '0'
-Warning (10030): Net "IF_mic_Data[5]" at Cyclops.v(342) has no driver or initial value, using a default initial value '0'
-Warning (10030): Net "IF_mic_Data[4]" at Cyclops.v(342) has no driver or initial value, using a default initial value '0'
-Warning (10030): Net "IF_mic_Data[3]" at Cyclops.v(342) has no driver or initial value, using a default initial value '0'
-Warning (10030): Net "IF_mic_Data[2]" at Cyclops.v(342) has no driver or initial value, using a default initial value '0'
-Warning (10030): Net "IF_mic_Data[1]" at Cyclops.v(342) has no driver or initial value, using a default initial value '0'
-Warning (10030): Net "IF_mic_Data[0]" at Cyclops.v(342) has no driver or initial value, using a default initial value '0'
-Info (10041): Inferred latch for "IF_tx_IQ_mic_rdy" at Cyclops.v(348)
+Warning (10036): Verilog HDL or VHDL warning at Cyclops.v(309): object "C12_rst" assigned a value but never read
+Warning (10858): Verilog HDL warning at Cyclops.v(310): object C12_clk used but never assigned
+Warning (10858): Verilog HDL warning at Cyclops.v(343): object IF_mic_Data used but never assigned
+Warning (10240): Verilog HDL Always Construct warning at Cyclops.v(347): inferring latch(es) for variable "IF_tx_IQ_mic_rdy", which holds its previous value in one or more paths through the always construct
+Warning (10030): Net "IF_mic_Data" at Cyclops.v(343) has no driver or initial value, using a default initial value '0'
+Info (10041): Inferred latch for "IF_tx_IQ_mic_rdy" at Cyclops.v(349)
 Info: Elaborating entity "clkmult3" for hierarchy "clkmult3:cm3"
 Info: Elaborating entity "altpll" for hierarchy "clkmult3:cm3|altpll:altpll_component"
 Info: Elaborated megafunction instantiation "clkmult3:cm3|altpll:altpll_component"
@@ -1856,7 +1840,6 @@ Info: Inferred 1 megafunctions from design logic
         Info: Parameter ADDRESS_REG_B set to CLOCK0
         Info: Parameter INDATA_ACLR_A set to NONE
         Info: Parameter WRCONTROL_ACLR_A set to NONE
-        Info: Parameter RAM_BLOCK_TYPE set to AUTO
         Info: Parameter READ_DURING_WRITE_MODE_MIXED_PORTS set to OLD_DATA
 Info: Elaborated megafunction instantiation "RFIFO:RXF|altsyncram:mem_rtl_0"
 Info: Instantiated megafunction "RFIFO:RXF|altsyncram:mem_rtl_0" with the following parameter:
@@ -1874,68 +1857,67 @@ Info: Instantiated megafunction "RFIFO:RXF|altsyncram:mem_rtl_0" with the follow
     Info: Parameter "ADDRESS_REG_B" = "CLOCK0"
     Info: Parameter "INDATA_ACLR_A" = "NONE"
     Info: Parameter "WRCONTROL_ACLR_A" = "NONE"
-    Info: Parameter "RAM_BLOCK_TYPE" = "AUTO"
     Info: Parameter "READ_DURING_WRITE_MODE_MIXED_PORTS" = "OLD_DATA"
-Info: Found 1 design units, including 1 entities, in source file db/altsyncram_h2j1.tdf
-    Info: Found entity 1: altsyncram_h2j1
+Info: Found 1 design units, including 1 entities, in source file db/altsyncram_c1h1.tdf
+    Info: Found entity 1: altsyncram_c1h1
 Warning: 2 hierarchies have connectivity warnings - see the Connectivity Checks report folder
 Warning: Output pins are stuck at VCC or GND
     Warning (13410): Pin "PKEND" is stuck at VCC
     Warning (13410): Pin "C15" is stuck at GND
     Warning (13410): Pin "C17" is stuck at GND
 Info: 37 registers lost all their fanouts during netlist optimizations. The first 37 are displayed below.
-    Info: Register "IF_PWM_state~13" lost all its fanouts during netlist optimizations.
-    Info: Register "IF_PWM_state~14" lost all its fanouts during netlist optimizations.
-    Info: Register "IF_PWM_state~15" lost all its fanouts during netlist optimizations.
-    Info: Register "IF_SYNC_state~11" lost all its fanouts during netlist optimizations.
-    Info: Register "IF_SYNC_state~12" lost all its fanouts during netlist optimizations.
-    Info: Register "IF_SYNC_state~13" lost all its fanouts during netlist optimizations.
-    Info: Register "ADF4112_SPI:ADF4112|SPI_state~7" lost all its fanouts during netlist optimizations.
-    Info: Register "ADF4112_SPI:ADF4112|SPI_state~8" lost all its fanouts during netlist optimizations.
-    Info: Register "ADF4112_SPI:ADF4112|SPI_state~9" lost all its fanouts during netlist optimizations.
-    Info: Register "led_blinker:BLINK_D4|LED_state~5" lost all its fanouts during netlist optimizations.
-    Info: Register "led_blinker:BLINK_D4|LED_state~6" lost all its fanouts during netlist optimizations.
-    Info: Register "led_blinker:BLINK_D4|LED_state~7" lost all its fanouts during netlist optimizations.
-    Info: Register "led_blinker:BLINK_D1|LED_state~5" lost all its fanouts during netlist optimizations.
-    Info: Register "led_blinker:BLINK_D1|LED_state~6" lost all its fanouts during netlist optimizations.
-    Info: Register "led_blinker:BLINK_D1|LED_state~7" lost all its fanouts during netlist optimizations.
-    Info: Register "NWire_xmit:CCxmit|NW_state~11" lost all its fanouts during netlist optimizations.
-    Info: Register "NWire_xmit:CCxmit|NW_state~12" lost all its fanouts during netlist optimizations.
-    Info: Register "NWire_xmit:CCxmit|NW_state~13" lost all its fanouts during netlist optimizations.
-    Info: Register "NWire_xmit:M_LRAudio|NW_state~11" lost all its fanouts during netlist optimizations.
-    Info: Register "NWire_xmit:M_LRAudio|NW_state~12" lost all its fanouts during netlist optimizations.
-    Info: Register "NWire_xmit:M_LRAudio|NW_state~13" lost all its fanouts during netlist optimizations.
-    Info: Register "async_usb:usb1|FX_state~25" lost all its fanouts during netlist optimizations.
-    Info: Register "async_usb:usb1|FX_state~26" lost all its fanouts during netlist optimizations.
-    Info: Register "async_usb:usb1|FX_state~27" lost all its fanouts during netlist optimizations.
-    Info: Register "async_usb:usb1|FX_state~28" lost all its fanouts during netlist optimizations.
-    Info: Register "async_usb:usb1|FX_state~29" lost all its fanouts during netlist optimizations.
-    Info: Register "async_usb:usb1|FX_state~30" lost all its fanouts during netlist optimizations.
-    Info: Register "NWire_rcv:SPD|TB_state~11" lost all its fanouts during netlist optimizations.
-    Info: Register "NWire_rcv:SPD|TB_state~12" lost all its fanouts during netlist optimizations.
-    Info: Register "NWire_rcv:SPD|TB_state~13" lost all its fanouts during netlist optimizations.
-    Info: Register "Tx_fifo_ctrl:TXFC|AD_state~17" lost all its fanouts during netlist optimizations.
-    Info: Register "Tx_fifo_ctrl:TXFC|AD_state~18" lost all its fanouts during netlist optimizations.
-    Info: Register "Tx_fifo_ctrl:TXFC|AD_state~19" lost all its fanouts during netlist optimizations.
-    Info: Register "Tx_fifo_ctrl:TXFC|AD_state~20" lost all its fanouts during netlist optimizations.
-    Info: Register "NWire_rcv:M_IQ|TB_state~11" lost all its fanouts during netlist optimizations.
-    Info: Register "NWire_rcv:M_IQ|TB_state~12" lost all its fanouts during netlist optimizations.
-    Info: Register "NWire_rcv:M_IQ|TB_state~13" lost all its fanouts during netlist optimizations.
+    Info: Register "IF_PWM_state~2" lost all its fanouts during netlist optimizations.
+    Info: Register "IF_PWM_state~3" lost all its fanouts during netlist optimizations.
+    Info: Register "IF_PWM_state~4" lost all its fanouts during netlist optimizations.
+    Info: Register "IF_SYNC_state~2" lost all its fanouts during netlist optimizations.
+    Info: Register "IF_SYNC_state~3" lost all its fanouts during netlist optimizations.
+    Info: Register "IF_SYNC_state~4" lost all its fanouts during netlist optimizations.
+    Info: Register "ADF4112_SPI:ADF4112|SPI_state~3" lost all its fanouts during netlist optimizations.
+    Info: Register "ADF4112_SPI:ADF4112|SPI_state~4" lost all its fanouts during netlist optimizations.
+    Info: Register "ADF4112_SPI:ADF4112|SPI_state~5" lost all its fanouts during netlist optimizations.
+    Info: Register "led_blinker:BLINK_D4|LED_state~2" lost all its fanouts during netlist optimizations.
+    Info: Register "led_blinker:BLINK_D4|LED_state~3" lost all its fanouts during netlist optimizations.
+    Info: Register "led_blinker:BLINK_D4|LED_state~4" lost all its fanouts during netlist optimizations.
+    Info: Register "led_blinker:BLINK_D1|LED_state~2" lost all its fanouts during netlist optimizations.
+    Info: Register "led_blinker:BLINK_D1|LED_state~3" lost all its fanouts during netlist optimizations.
+    Info: Register "led_blinker:BLINK_D1|LED_state~4" lost all its fanouts during netlist optimizations.
+    Info: Register "NWire_xmit:CCxmit|NW_state~2" lost all its fanouts during netlist optimizations.
+    Info: Register "NWire_xmit:CCxmit|NW_state~3" lost all its fanouts during netlist optimizations.
+    Info: Register "NWire_xmit:CCxmit|NW_state~4" lost all its fanouts during netlist optimizations.
+    Info: Register "NWire_xmit:M_LRAudio|NW_state~2" lost all its fanouts during netlist optimizations.
+    Info: Register "NWire_xmit:M_LRAudio|NW_state~3" lost all its fanouts during netlist optimizations.
+    Info: Register "NWire_xmit:M_LRAudio|NW_state~4" lost all its fanouts during netlist optimizations.
+    Info: Register "async_usb:usb1|FX_state~2" lost all its fanouts during netlist optimizations.
+    Info: Register "async_usb:usb1|FX_state~3" lost all its fanouts during netlist optimizations.
+    Info: Register "async_usb:usb1|FX_state~4" lost all its fanouts during netlist optimizations.
+    Info: Register "async_usb:usb1|FX_state~5" lost all its fanouts during netlist optimizations.
+    Info: Register "async_usb:usb1|FX_state~6" lost all its fanouts during netlist optimizations.
+    Info: Register "async_usb:usb1|FX_state~7" lost all its fanouts during netlist optimizations.
+    Info: Register "NWire_rcv:SPD|TB_state~2" lost all its fanouts during netlist optimizations.
+    Info: Register "NWire_rcv:SPD|TB_state~3" lost all its fanouts during netlist optimizations.
+    Info: Register "NWire_rcv:SPD|TB_state~4" lost all its fanouts during netlist optimizations.
+    Info: Register "Tx_fifo_ctrl:TXFC|AD_state~2" lost all its fanouts during netlist optimizations.
+    Info: Register "Tx_fifo_ctrl:TXFC|AD_state~3" lost all its fanouts during netlist optimizations.
+    Info: Register "Tx_fifo_ctrl:TXFC|AD_state~4" lost all its fanouts during netlist optimizations.
+    Info: Register "Tx_fifo_ctrl:TXFC|AD_state~5" lost all its fanouts during netlist optimizations.
+    Info: Register "NWire_rcv:M_IQ|TB_state~2" lost all its fanouts during netlist optimizations.
+    Info: Register "NWire_rcv:M_IQ|TB_state~3" lost all its fanouts during netlist optimizations.
+    Info: Register "NWire_rcv:M_IQ|TB_state~4" lost all its fanouts during netlist optimizations.
 Info: Generated suppressed messages file C:/HPSDR/trunk/CyclopsII/Verilog Code/Cyclops/Cyclops.map.smsg
 Warning: Design contains 1 input pin(s) that do not drive logic
     Warning (15610): No output dependent on input pin "DOUT"
-Info: Implemented 2880 device resources after synthesis - the final resource count might be different
+Info: Implemented 2886 device resources after synthesis - the final resource count might be different
     Info: Implemented 9 input pins
     Info: Implemented 20 output pins
     Info: Implemented 16 bidirectional pins
-    Info: Implemented 2786 logic cells
+    Info: Implemented 2792 logic cells
     Info: Implemented 48 RAM segments
-    Info: Implemented 1 ClockLock PLLs
-Info: Quartus II Analysis & Synthesis was successful. 0 errors, 30 warnings
-    Info: Peak virtual memory: 192 megabytes
-    Info: Processing ended: Mon Aug 31 19:39:00 2009
+    Info: Implemented 1 PLLs
+Info: Quartus II Analysis & Synthesis was successful. 0 errors, 15 warnings
+    Info: Peak virtual memory: 191 megabytes
+    Info: Processing ended: Sat Jul 09 16:46:16 2011
     Info: Elapsed time: 00:00:13
-    Info: Total CPU time (on all processors): 00:00:13
+    Info: Total CPU time (on all processors): 00:00:12
 
 
 +------------------------------------------+

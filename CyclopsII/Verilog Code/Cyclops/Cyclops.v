@@ -80,6 +80,7 @@ address control space, you address it as the FNL, not the INL.
 				  - debounce, Mercury S# and ADC overload, J_IQPWM, P_IQPWM, J_LRAudio, J_IQ
 	30 Aug  2009  - Removed remaining unused code.
 	31 Aug  2009  - Set C15 and C17 to outputs at 0V to protect 10MHz on C16
+	 9 Jul  2011  - Start project again. Reduce PLL current drive to minimum
   
 */
 
@@ -1135,7 +1136,7 @@ INL:    Normal operation
         Digital lock detect on MUXOUT
         Positive CP polarity
         No "fast lock"
-        CP current = 2.5 mA.
+        CP current = 5 mA.
         Prescaler P=64
 */
 
@@ -1145,19 +1146,19 @@ parameter PD2	= 1'b0;
 parameter CP16 	= 1'b1;		// Increase current for "fast lock"
 //
 parameter CP15 	= 1'b1;     // Fast lock not currently implemented
-parameter CP14 	= 1'b1;		// Icp = 2.5mA
-parameter CP13 	= 1'b0;
+parameter CP14 	= 1'b1;		// Icp = 5 mA
+parameter CP13 	= 1'b1;
 parameter CP12 	= 1'b1;
 //
 parameter CP11 	= 1'b1;		// R = 4.7k
-parameter TC4 	= 1'b1;
-parameter TC3 	= 1'b0;
-parameter TC2 	= 1'b0;
+parameter TC4 	= 1'b0;
+parameter TC3 	= 1'b1;
+parameter TC2 	= 1'b1;
 //
-parameter TC1 	= 1'b0;		// TIMEOUT PFD = 31 cycles
+parameter TC1 	= 1'b1;		// TIMEOUT PFD = 31 cycles
 parameter F5 	= 1'b0;
 parameter F4 	= 1'b0;		// fast lock disabled
-parameter F3 	= 1'b0;		// outout normal
+parameter F3 	= 1'b0;		// output normal
 //
 parameter F2_VCO1   = 1'b0;     // Charge Pump VCO1 = negative
 parameter F2_VCO2   = 1'b1;     // Charge Pump VCO2 = positive

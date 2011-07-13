@@ -79,6 +79,8 @@ address control space, you address it as the FNL, not the INL.
     29 Aug  2009  - Start removing unwanted code. Penny S# & ALC, 48MHz to Janus, dot, dash, PTT and 
 				  - debounce, Mercury S# and ADC overload, J_IQPWM, P_IQPWM, J_LRAudio, J_IQ
 	30 Aug  2009  - Removed remaining unused code.
+	31 Aug  2009  - Set C15 and C17 to outputs at 0V to protect 10MHz on C16
+	 9 Jul  2011  - Start project again. Reduce PLL current drive to minimum
   
 */
 
@@ -194,7 +196,7 @@ address control space, you address it as the FNL, not the INL.
 
 module Cyclops(
         IF_clk, FX2_FD, FLAGA, FLAGB, FLAGC, SLWR, SLRD, SLOE, PKEND, FIFO_ADR, DOUT,
-         A12, C21,  C23, C24,
+         A12, C15, C17, C21,  C23, C24,
         DEBUG_LED0,
         DEBUG_LED1, DEBUG_LED2,DEBUG_LED3, CC, MDOUT, 
         ADF4112_SPI_clock, ADF4112_SPI_data, LE1, LE2,					
@@ -228,6 +230,8 @@ output wire         DEBUG_LED1;
 output wire         DEBUG_LED2;
 output wire         DEBUG_LED3;
 input  wire         A12;            // NWire spectrum data from Mercury
+output wire 		C15;
+output wire 		C17;
 output wire         C21;            // Spectrum data Trigger signal to Mercury
 input  wire         C23;            // M_LR_sync from Mercury
 output wire         C24;            // M_LR_data - Left & Right audio data in NWire format to Mercury
@@ -256,6 +260,11 @@ output  LE2;
 //assign TCK = FX2_PE2;
 //assign TDO = FX2_PE0;  // TDO on our slot ties to TDI on next slot  
 assign FX2_PE1 = SDOBACK;
+
+// ground adjacent pins to C16
+
+assign C15 = 1'b0;
+assign C17 = 1'b0;
 
 
 ///////////////////////////////////////////////////////////////
@@ -1134,22 +1143,22 @@ INL:    Normal operation
 parameter P2	= 1'b0;		
 parameter P1 	= 1'b1;		// prescaler 16/17
 parameter PD2	= 1'b0;
-parameter CP16 	= 1'b1;		// Increase current for "fast lock"
+parameter CP16 	= 1'b0;		// Increase current for "fast lock"
 //
-parameter CP15 	= 1'b1;     // Fast lock not currently implemented
-parameter CP14 	= 1'b1;		// Icp = 2.5mA
+parameter CP15 	= 1'b0;     // Fast lock not currently implemented
+parameter CP14 	= 1'b0;		// Icp = 0.63mA
 parameter CP13 	= 1'b0;
-parameter CP12 	= 1'b1;
+parameter CP12 	= 1'b0;
 //
-parameter CP11 	= 1'b1;		// R = 4.7k
-parameter TC4 	= 1'b1;
-parameter TC3 	= 1'b0;
-parameter TC2 	= 1'b0;
+parameter CP11 	= 1'b0;		// R = 4.7k
+parameter TC4 	= 1'b0;
+parameter TC3 	= 1'b1;
+parameter TC2 	= 1'b1;
 //
-parameter TC1 	= 1'b0;		// TIMEOUT PFD = 31 cycles
+parameter TC1 	= 1'b1;		// TIMEOUT PFD = 31 cycles
 parameter F5 	= 1'b0;
 parameter F4 	= 1'b0;		// fast lock disabled
-parameter F3 	= 1'b0;		// outout normal
+parameter F3 	= 1'b0;		// output normal
 //
 parameter F2_VCO1   = 1'b0;     // Charge Pump VCO1 = negative
 parameter F2_VCO2   = 1'b1;     // Charge Pump VCO2 = positive

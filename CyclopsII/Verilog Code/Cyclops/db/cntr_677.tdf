@@ -1,8 +1,8 @@
 --lpm_counter DEVICE_FAMILY="Cyclone II" lpm_width=12 clock cnt_en q sclr updown
---VERSION_BEGIN 9.0 cbx_cycloneii 2008:05:19:10:57:37:SJ cbx_lpm_add_sub 2008:12:09:22:11:50:SJ cbx_lpm_compare 2009:02:03:01:43:16:SJ cbx_lpm_counter 2008:05:19:10:42:20:SJ cbx_lpm_decode 2008:05:19:10:39:27:SJ cbx_mgl 2009:01:29:16:12:07:SJ cbx_stratix 2008:09:18:16:08:35:SJ cbx_stratixii 2008:11:14:16:08:42:SJ  VERSION_END
+--VERSION_BEGIN 9.1SP2 cbx_cycloneii 2010:03:24:20:43:43:SJ cbx_lpm_add_sub 2010:03:24:20:43:43:SJ cbx_lpm_compare 2010:03:24:20:43:43:SJ cbx_lpm_counter 2010:03:24:20:43:43:SJ cbx_lpm_decode 2010:03:24:20:43:43:SJ cbx_mgl 2010:03:24:21:01:05:SJ cbx_stratix 2010:03:24:20:43:43:SJ cbx_stratixii 2010:03:24:20:43:43:SJ  VERSION_END
 
 
--- Copyright (C) 1991-2009 Altera Corporation
+-- Copyright (C) 1991-2010 Altera Corporation
 --  Your use of Altera Corporation's design tools, logic functions 
 --  and other software and tools, and its AMPP partner logic 
 --  functions, and any output files from any of the foregoing 
