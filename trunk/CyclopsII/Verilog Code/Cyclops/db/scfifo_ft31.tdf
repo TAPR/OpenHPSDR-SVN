@@ -1,8 +1,8 @@
 --scfifo ADD_RAM_OUTPUT_REGISTER="ON" DEVICE_FAMILY="Cyclone II" LPM_NUMWORDS=4096 LPM_SHOWAHEAD="OFF" lpm_width=16 lpm_widthu=12 OPTIMIZE_FOR_SPEED=5 OVERFLOW_CHECKING="ON" UNDERFLOW_CHECKING="ON" USE_EAB="ON" clock data empty full q rdreq sclr usedw wrreq CARRY_CHAIN="MANUAL" CARRY_CHAIN_LENGTH=48 CYCLONEII_M4K_COMPATIBILITY="ON" INTENDED_DEVICE_FAMILY="Cyclone II" LOW_POWER_MODE="AUTO"
---VERSION_BEGIN 9.0 cbx_altdpram 2008:05:19:10:27:12:SJ cbx_altsyncram 2008:11:06:10:05:41:SJ cbx_cycloneii 2008:05:19:10:57:37:SJ cbx_fifo_common 2008:05:19:10:54:06:SJ cbx_lpm_add_sub 2008:12:09:22:11:50:SJ cbx_lpm_compare 2009:02:03:01:43:16:SJ cbx_lpm_counter 2008:05:19:10:42:20:SJ cbx_lpm_decode 2008:05:19:10:39:27:SJ cbx_lpm_mux 2008:05:19:10:30:36:SJ cbx_mgl 2009:01:29:16:12:07:SJ cbx_scfifo 2008:05:19:10:25:30:SJ cbx_stratix 2008:09:18:16:08:35:SJ cbx_stratixii 2008:11:14:16:08:42:SJ cbx_stratixiii 2008:12:24:11:49:14:SJ cbx_util_mgl 2008:11:21:14:58:47:SJ  VERSION_END
+--VERSION_BEGIN 9.1SP2 cbx_altdpram 2010:03:24:20:43:42:SJ cbx_altsyncram 2010:03:24:20:43:42:SJ cbx_cycloneii 2010:03:24:20:43:43:SJ cbx_fifo_common 2010:03:24:20:43:42:SJ cbx_lpm_add_sub 2010:03:24:20:43:43:SJ cbx_lpm_compare 2010:03:24:20:43:43:SJ cbx_lpm_counter 2010:03:24:20:43:43:SJ cbx_lpm_decode 2010:03:24:20:43:43:SJ cbx_lpm_mux 2010:03:24:20:43:43:SJ cbx_mgl 2010:03:24:21:01:05:SJ cbx_scfifo 2010:03:24:20:43:43:SJ cbx_stratix 2010:03:24:20:43:43:SJ cbx_stratixii 2010:03:24:20:43:43:SJ cbx_stratixiii 2010:03:24:20:43:43:SJ cbx_util_mgl 2010:03:24:20:43:43:SJ  VERSION_END
 
 
--- Copyright (C) 1991-2009 Altera Corporation
+-- Copyright (C) 1991-2010 Altera Corporation
 --  Your use of Altera Corporation's design tools, logic functions 
 --  and other software and tools, and its AMPP partner logic 
 --  functions, and any output files from any of the foregoing 

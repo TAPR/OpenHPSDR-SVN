@@ -5,7 +5,7 @@ Timing Analyzer Summary
 Type           : Worst-case tsu
 Slack          : N/A
 Required Time  : None
-Actual Time    : 8.005 ns
+Actual Time    : 8.375 ns
 From           : FLAGB
 To             : async_usb:usb1|FX_state.FX_TDONE
 From Clock     : --
@@ -15,8 +15,8 @@ Failed Paths   : 0
 Type           : Worst-case tco
 Slack          : N/A
 Required Time  : None
-Actual Time    : 17.045 ns
-From           : led_blinker:BLINK_D4|led_timer[9]
+Actual Time    : 17.122 ns
+From           : led_blinker:BLINK_D4|led_timer[3]
 To             : DEBUG_LED3
 From Clock     : IF_clk
 To Clock       : --
@@ -35,42 +35,42 @@ Failed Paths   : 0
 Type           : Worst-case th
 Slack          : N/A
 Required Time  : None
-Actual Time    : -5.203 ns
-From           : FX2_FD[2]
-To             : async_usb:usb1|Rx_fifo_wdata[10]
+Actual Time    : -4.022 ns
+From           : FX2_FD[7]
+To             : async_usb:usb1|Rx_fifo_wdata[15]
 From Clock     : --
 To Clock       : IF_clk
 Failed Paths   : 0
 
 Type           : Clock Setup: 'clkmult3:cm3|altpll:altpll_component|_clk0'
-Slack          : -0.592 ns
+Slack          : -0.259 ns
 Required Time  : 144.01 MHz ( period = 6.944 ns )
-Actual Time    : 132.70 MHz ( period = 7.536 ns )
-From           : NWire_rcv:M_IQ|tb_width[4]
-To             : NWire_rcv:M_IQ|pass[2]
+Actual Time    : 138.83 MHz ( period = 7.203 ns )
+From           : NWire_rcv:SPD|tb_width[1]
+To             : NWire_rcv:SPD|pass[1]
 From Clock     : clkmult3:cm3|altpll:altpll_component|_clk0
 To Clock       : clkmult3:cm3|altpll:altpll_component|_clk0
-Failed Paths   : 25
+Failed Paths   : 9
 
 Type           : Clock Setup: 'IF_clk'
-Slack          : 0.081 ns
+Slack          : 0.631 ns
 Required Time  : 48.00 MHz ( period = 20.833 ns )
 Actual Time    : N/A
-From           : NWire_rcv:SPD|idata[0]
-To             : NWire_rcv:SPD|DIFF_CLK.xd0[0]
+From           : NWire_rcv:M_IQ|idata[12]
+To             : NWire_rcv:M_IQ|DIFF_CLK.xd0[12]
 From Clock     : clkmult3:cm3|altpll:altpll_component|_clk0
 To Clock       : IF_clk
 Failed Paths   : 0
 
 Type           : Clock Hold: 'IF_clk'
-Slack          : -1.300 ns
+Slack          : -1.303 ns
 Required Time  : 48.00 MHz ( period = 20.833 ns )
 Actual Time    : N/A
-From           : PLL_freq[8]
-To             : Previous_PLL_freq[8]
+From           : PLL_freq[9]
+To             : Previous_PLL_freq[9]
 From Clock     : IF_clk
 To Clock       : IF_clk
-Failed Paths   : 32
+Failed Paths   : 30
 
 Type           : Clock Hold: 'clkmult3:cm3|altpll:altpll_component|_clk0'
 Slack          : 0.499 ns
@@ -90,7 +90,7 @@ From           :
 To             : 
 From Clock     : 
 To Clock       : 
-Failed Paths   : 57
+Failed Paths   : 39
 
 --------------------------------------------------------------------------------------
 

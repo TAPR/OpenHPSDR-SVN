@@ -182,9 +182,9 @@ namespace Cyclops
 
         public int IQScale = 6;     // sets default display scale of I and Q signals
 
-        public int GridMax = 0;     // sets maximum value of Bandscope display
-        public int GridMin = -160;  // sets minimum value of Bandscope display
-        public int GridStep = 20;   // sets distance between grid lines on bandscope 
+        public int GridMax = -20;     // sets maximum value of Bandscope display
+        public int GridMin = -130;  // sets minimum value of Bandscope display
+        public int GridStep = 10;   // sets distance between grid lines on bandscope 
 
         int delta;                  // difference between the current and previous mouse position on the bandscope
         int loop_count = 0;         // delay until we read FPGA code version from Ozy
