@@ -30,24 +30,9 @@
 // alex_tx_test.h
 //
 
-struct _TX_TEST {
-    char* stimulate_on;
-    char* detect_on;
-    char* relay_activate;
-    long long frequency;
-    int rf_det_level;
-    int rf_exp_level;
-    char* description;
-    GtkWidget* testWidget;
-    GtkWidget* frequencyWidget;
-    GtkWidget* levelWidget;
-    int pause;
-};
-
-typedef struct _TX_TEST TX_TEST;
-
 /** 
 * @brief  Alex Tx Test UI
 */
 GtkWidget* alexTxTestUI();
 
+void alex_tx_test_load(char* filename);

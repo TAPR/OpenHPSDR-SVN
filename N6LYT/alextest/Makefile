@@ -30,7 +30,7 @@ SOURCES= agc.c audio.c band.c bandscope.c bandscope_control.c bandscope_update.c
          subrx.c\
          metis.c\
          cw.c\
-         alex_rx_test.c alex_tx_test.c test.c
+         alex_rx_test.c alex_tx_test.c test.c expression.c
 
 HEADERS= agc.h alex_rx_test.h alex_tx_test.h audio.h audiostream.h band.h bandscope_control.h\
          bandscope.h bandscope_update.h bandstack.h command.h cw.h display.h display_setup.h\
@@ -38,7 +38,7 @@ HEADERS= agc.h alex_rx_test.h alex_tx_test.h audio.h audiostream.h band.h bandsc
          metis.h mode.h ozy_buffers.h ozy.h ozy_ringbuffer.h preamp.h property.h receiver.h\
          screensize.h setup.h sinewave.h soundcard.h spectrum_buffers.h spectrum.h\
          spectrum_update.h subrx.h test.h transmit.h util.h version.h vfo.h volume.h\
-         xvtr.h xvtr_setup.h
+         xvtr.h xvtr_setup.h expression.h
 
 OBJS= agc.o audio.o band.o bandscope.o bandscope_control.o bandscope_update.o command.o\
       display.o filter.o frequency.o libusbio.o main.o meter.o\
@@ -51,7 +51,7 @@ OBJS= agc.o audio.o band.o bandscope.o bandscope_control.o bandscope_update.o co
       subrx.o\
       metis.o\
       cw.o\
-      alex_rx_test.o alex_tx_test.o test.o
+      alex_rx_test.o alex_tx_test.o test.o expression.o
 
 PROGRAM=bin/alextest
 
