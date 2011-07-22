@@ -770,6 +770,9 @@ int main(int argc,char* argv[]) {
     processCommands(argc,argv);
     loadProperties(propertyPath);
 
+    alex_rx_test_load("alex_rx_test.csv");
+    alex_tx_test_load("alex_tx_test.csv");
+
     init_cw();
 
     // initialize DttSP
@@ -931,6 +934,7 @@ int main(int argc,char* argv[]) {
     setSoundcard(getSoundcardId(soundCardName));
 
     audio_stream_init();
+
 
     gtk_main();
 

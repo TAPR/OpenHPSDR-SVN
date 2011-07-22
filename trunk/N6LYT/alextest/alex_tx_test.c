@@ -30,8 +30,10 @@
 
 #include <stdlib.h>
 #include <string.h>
+#include <stdio.h>
 #include <gtk/gtk.h>
 #include "alex_tx_test.h"
+#include "alex_test.h"
 #include "vfo.h"
 #include "meter.h"
 #include "ozy.h"
@@ -39,6 +41,7 @@
 #include "mode.h"
 #include "filter.h"
 #include "test.h"
+#include "expression.h"
 
 #define MODE modeAM
 #define FILTER filterF9
@@ -53,35 +56,8 @@ static GtkWidget* passFail;
 static GtkWidget* dialog;
 
 // tests to perform
-static TX_TEST tx_test[]= {
-    {"X1","X3","K17,K18,K8",2000000,0,-43,"6M bypass, DIR COUPLER, K8 NC",NULL,NULL,NULL,0},
-    {"X1","X4","K17,K18,K8",2000000,0,0,"6M bypass, DIR COUPLER, K11 NO",NULL,NULL,NULL,0},
-    {"X1","X5","K17,K18,K8",2000000,0,0,"6M bypass, K14 NO",NULL,NULL,NULL,0},
-    {"X1","X3","K17,K18,K11",2000000,0,0,"6M bypass, K8 NO",NULL,NULL,NULL,0},
-    {"X1","X4","K17,K18,K11",2000000,0,-43,"6M bypass, K11 NC",NULL,NULL,NULL,0},
-    {"X1","X5","K17,K18,K11",2000000,0,0,"6M bypass, K14 NO",NULL,NULL,NULL,0},
-    {"X1","X3","K17,K18,K14",2000000,0,0,"6M bypass, K8 NO",NULL,NULL,NULL,0},
-    {"X1","X4","K17,K18,K14",2000000,0,0,"6M bypass, K11 NO",NULL,NULL,NULL,0},
-    {"X1","X5","K17,K18,K14",2000000,0,-43,"6M bypass, K14 NC",NULL,NULL,NULL,0},
-    {"X1","X5","K17,K18,K14",61400000,0,-43,"6M LPF",NULL,NULL,NULL,0},
-    {"X1","X5","K17,K18,K14,K5",2000000,0,0,"K5 NC",NULL,NULL,NULL,0},
-    {"X1","X5","K17,K18,K14,K5",2000000,0,-43,"K5 NO",NULL,NULL,NULL,0},
-    {"X2","X5","K17,K18,K14",2000000,0,0,"K5 NO",NULL,NULL,NULL,0},
-    {"X2","X5","K14",2000000,0,0,"all LPF NO",NULL,NULL,NULL,0},
-    {"X1","X5","K14,K1/2",2400000,0,-44,"160M LPF pass",NULL,NULL,NULL,0},
-    {"X1","X5","K14,K1/2",3160000,0,-74,"160M LPF reject",NULL,NULL,NULL,0},
-    {"X1","X5","K14,K3/4",5000000,0,-44,"80M LPF padd",NULL,NULL,NULL,0},
-    {"X1","X5","K14,K3/4",6420000,0,-74,"80M HPF reject",NULL,NULL,NULL,0},
-    {"X1","X5","K14,K6/7",7900000,0,-44,"60/40M HPF pass",NULL,NULL,NULL,0},
-    {"X1","X5","K14,K6/7",11420000,0,-74,"60/40M HPF reject",NULL,NULL,NULL,0},
-    {"X1","X5","K14,K9/10",16500000,0,-44,"30/20M HPF pass",NULL,NULL,NULL,0},
-    {"X1","X5","K14,K9/10",19560000,0,-74,"30/20M HPF reject",NULL,NULL,NULL,0},
-    {"X1","X5","K14,K12/13",25400000,0,-44,"17/15M HPF pass",NULL,NULL,NULL,0},
-    {"X1","X5","K14,K12/13",33960000,0,-74,"17/15M HPF reject",NULL,NULL,NULL,0},
-    {"X1","X5","K14,K15/16",33400000,0,-44,"12/10M HPF pass",NULL,NULL,NULL,0},
-    {"X1","X5","K14,K15/16",45480000,0,-74,"12/10M HPF reject",NULL,NULL,NULL,0},
-    {"","","",0,0,0,"",NULL,NULL,NULL,0}
-    };
+static ALEX_TEST tx_test[100];
+static int tx_test_index=0;
 
 // timer for steppiung through tests
 static gint timerId;
@@ -90,11 +66,28 @@ static gint timerId;
 static gint test;
 static gint stage;
 static gint samples;
-
 static int level;
 
 static int failures;
 static gboolean stepping;
+
+
+int alex_tx_test_get_result(int id) {
+    ALEX_TEST* t;
+    int result=0;
+    int i=0;
+     
+fprintf(stderr,"alex_tx_test_get_result: %d\n",id);
+    while(tx_test[i].frequency!=0) {
+        if(tx_test[i].id==id) {
+            result=tx_test[i].rf_det_level;
+fprintf(stderr,"alex_tx_test_get_result: result=%d\n",result);
+            break;
+        }
+        i++;
+    }
+    return result;
+}
 
 /* --------------------------------------------------------------------------*/
 /**
@@ -105,10 +98,11 @@ static gboolean stepping;
 * @return
 */
 gint alexTxTest(gpointer data) {
-    TX_TEST* t;
+    ALEX_TEST* t;
     char text[16];
     GdkColor color;
     int min,max;
+    
 
 //fprintf(stderr,"alexTxTest test=%d stage=%d\n",test,stage);
     t=&tx_test[test];
@@ -153,61 +147,56 @@ gint alexTxTest(gpointer data) {
                 setMOX(1);
                 stage++;
                 break;
-            case 2: // get level
+            case 2: // pause if required
+                if(strcmp(t->pause,"NO")!=0) {
+                    //stop the timer
+                    gtk_timeout_remove(timerId);
+                    // dialog box to say adjust C94
+                    dialog = gtk_message_dialog_new(GTK_WINDOW(testWindow),
+                                 GTK_DIALOG_DESTROY_WITH_PARENT,
+                                 GTK_MESSAGE_INFO,
+                                 GTK_BUTTONS_OK,
+                                 t->pause, "Alex Tx Test");
+                    gtk_window_set_title(GTK_WINDOW(dialog), "Alex Tx Test");
+                    gtk_dialog_run(GTK_DIALOG(dialog));
+                    gtk_widget_destroy(dialog);
+
+                    // restart the timer
+                    timerId=gtk_timeout_add(TIMER,alexTxTest,NULL);
+                }
+                stage++;
+                break;
+            case 3: // get level
                 if(meterDbm>level) level=meterDbm;
                 samples++;
-                if(samples==SAMPLES) {
+                if(samples>=SAMPLES) {
                     sprintf(text,"%d dBm",level);
-                    if(t->rf_exp_level==0) {
-                        if(level>-100) {
-                            gdk_color_parse("red", &color);
-                            gtk_widget_modify_fg(t->levelWidget, GTK_STATE_NORMAL, &color);
-                            failures++;
-                        } else {
-                            gdk_color_parse("green", &color);
-                            gtk_widget_modify_fg(t->levelWidget, GTK_STATE_NORMAL, &color);
-                        }
+                    t->rf_det_level=level;
+                    min=evaluate(t->rf_min_level,&alex_tx_test_get_result);
+                    max=evaluate(t->rf_max_level,&alex_tx_test_get_result);
+
+fprintf(stderr,"level=%d min=%d max=%d\n",level,min,max);
+
+                    if(level<min || level>max) {
+                        gdk_color_parse("red", &color);
+                        gtk_widget_modify_fg(t->levelWidget, GTK_STATE_NORMAL, &color);
+                        failures++;
                     } else {
-                        // +/- 5%
-                        min=t->rf_exp_level + ((t->rf_exp_level*5)/100);
-                        max=t->rf_exp_level - ((t->rf_exp_level*5)/100);
-                        if(level<min || level>max) {
-                            gdk_color_parse("red", &color);
-                            gtk_widget_modify_fg(t->levelWidget, GTK_STATE_NORMAL, &color);
-                            failures++;
-                        } else {
-                            gdk_color_parse("green", &color);
-                            gtk_widget_modify_fg(t->levelWidget, GTK_STATE_NORMAL, &color);
-                        }
+                        gdk_color_parse("green", &color);
+                        gtk_widget_modify_fg(t->levelWidget, GTK_STATE_NORMAL, &color);
                     }
                     gtk_label_set_text(GTK_LABEL(t->levelWidget),text);
-                    if(t->pause) {
-                        //stop the timer
-                        gtk_timeout_remove(timerId);
-                        // dialog box to say adjust C94
-                        dialog = gtk_message_dialog_new(GTK_WINDOW(testWindow),
-                                     GTK_DIALOG_DESTROY_WITH_PARENT,
-                                     GTK_MESSAGE_INFO,
-                                     GTK_BUTTONS_OK,
-                                     "Adjust C94", "Alex Rx Test");
-                        gtk_window_set_title(GTK_WINDOW(dialog), "Alex Rx Test");
-                        gtk_dialog_run(GTK_DIALOG(dialog));
-                        gtk_widget_destroy(dialog);
-
-                        // restart the timer
-                        timerId=gtk_timeout_add(TIMER,alexTxTest,NULL);
-                    }
                     if(stepping) {
                         gtk_timeout_remove(timerId);
                     }
                     stage++;
                 }
                 break;
-            case 3: // stop RF
+            case 4: // stop RF
  //               fprintf(stderr,"Stop RF\n");
                 gdk_color_parse("black", &color);
-                gtk_widget_modify_fg(t->testWidget, GTK_STATE_NORMAL, &color);
                 gtk_widget_modify_fg(t->frequencyWidget, GTK_STATE_NORMAL, &color);
+                gtk_widget_modify_fg(t->testWidget, GTK_STATE_NORMAL, &color);
                 setMOX(0);
                 testing=0;
                 stage=0;
@@ -297,7 +286,7 @@ GtkWidget* alexTxTestUI() {
     gtk_widget_show(box);
     gtk_box_pack_start(GTK_BOX(alexTxTestPage),box,FALSE,FALSE,2);
 
-    table=gtk_table_new(8,26+1,FALSE);
+    table=gtk_table_new(6,31+1,FALSE);
 
     i=0;
 
@@ -307,39 +296,29 @@ GtkWidget* alexTxTestUI() {
     gtk_table_attach(GTK_TABLE(table), label, 0, 1, i, i+1, 
         GTK_FILL | GTK_SHRINK, GTK_FILL | GTK_SHRINK, 6, 1);
     
-    label=gtk_label_new("Stim");
+    label=gtk_label_new("RF stim freq");
     gtk_widget_show(label);
     gtk_table_attach(GTK_TABLE(table), label, 1, 2, i, i+1, 
         GTK_FILL | GTK_SHRINK, GTK_FILL | GTK_SHRINK, 6, 1);
     
-    label=gtk_label_new("Det");
+    label=gtk_label_new("Description");
     gtk_widget_show(label);
     gtk_table_attach(GTK_TABLE(table), label, 2, 3, i, i+1, 
         GTK_FILL | GTK_SHRINK, GTK_FILL | GTK_SHRINK, 6, 1);
     
-    label=gtk_label_new("Relay Activate");
+    label=gtk_label_new("RF min level");
     gtk_widget_show(label);
     gtk_table_attach(GTK_TABLE(table), label, 3, 4, i, i+1, 
         GTK_FILL | GTK_SHRINK, GTK_FILL | GTK_SHRINK, 6, 1);
-
-    label=gtk_label_new("RF stim freq");
+    
+    label=gtk_label_new("RF max level");
     gtk_widget_show(label);
     gtk_table_attach(GTK_TABLE(table), label, 4, 5, i, i+1, 
         GTK_FILL | GTK_SHRINK, GTK_FILL | GTK_SHRINK, 6, 1);
     
-    label=gtk_label_new("Description");
-    gtk_widget_show(label);
-    gtk_table_attach(GTK_TABLE(table), label, 5, 6, i, i+1, 
-        GTK_FILL | GTK_SHRINK, GTK_FILL | GTK_SHRINK, 6, 1);
-    
-    label=gtk_label_new("RF exp level");
-    gtk_widget_show(label);
-    gtk_table_attach(GTK_TABLE(table), label, 6, 7, i, i+1, 
-        GTK_FILL | GTK_SHRINK, GTK_FILL | GTK_SHRINK, 6, 1);
-    
     label=gtk_label_new("RF det level");
     gtk_widget_show(label);
-    gtk_table_attach(GTK_TABLE(table), label, 7, 8, i, i+1, 
+    gtk_table_attach(GTK_TABLE(table), label, 5, 6, i, i+1, 
         GTK_FILL | GTK_SHRINK, GTK_FILL | GTK_SHRINK, 6, 1);
     
     i=0;
@@ -356,33 +335,6 @@ GtkWidget* alexTxTestUI() {
         gtk_table_attach(GTK_TABLE(table), alignment, 0, 1, i+1, i+2, 
             GTK_FILL | GTK_SHRINK, GTK_FILL | GTK_SHRINK, 6, 1);
      
-        sprintf(text,"%s",tx_test[i].stimulate_on);
-        label=gtk_label_new(text);
-        gtk_widget_show(label);
-        alignment=gtk_alignment_new(1,0,0,0);
-        gtk_widget_show(alignment);
-        gtk_container_add( GTK_CONTAINER(alignment), label );
-        gtk_table_attach(GTK_TABLE(table), alignment, 1, 2, i+1, i+2, 
-            GTK_FILL | GTK_SHRINK, GTK_FILL | GTK_SHRINK, 6, 1);
-
-        sprintf(text,"%s",tx_test[i].detect_on);
-        label=gtk_label_new(text);
-        gtk_widget_show(label);
-        alignment=gtk_alignment_new(1,0,0,0);
-        gtk_widget_show(alignment);
-        gtk_container_add( GTK_CONTAINER(alignment), label );
-        gtk_table_attach(GTK_TABLE(table), alignment, 2, 3, i+1, i+2, 
-            GTK_FILL | GTK_SHRINK, GTK_FILL | GTK_SHRINK, 6, 1);
-
-        sprintf(text,"%s",tx_test[i].relay_activate);
-        label=gtk_label_new(text);
-        gtk_widget_show(label);
-        alignment=gtk_alignment_new(1,0,0,0);
-        gtk_widget_show(alignment);
-        gtk_container_add( GTK_CONTAINER(alignment), label );
-        gtk_table_attach(GTK_TABLE(table), alignment, 3, 4, i+1, i+2, 
-            GTK_FILL | GTK_SHRINK, GTK_FILL | GTK_SHRINK, 6, 1);
-
         sprintf(text,"%2.2fMHz",(float)tx_test[i].frequency/1000000.0f);
         label=gtk_label_new(text);
         gtk_widget_show(label);
@@ -390,7 +342,7 @@ GtkWidget* alexTxTestUI() {
         alignment=gtk_alignment_new(1,0,0,0);
         gtk_widget_show(alignment);
         gtk_container_add( GTK_CONTAINER(alignment), label );
-        gtk_table_attach(GTK_TABLE(table), alignment, 4, 5, i+1, i+2, 
+        gtk_table_attach(GTK_TABLE(table), alignment, 1, 2, i+1, i+2, 
             GTK_FILL | GTK_SHRINK, GTK_FILL | GTK_SHRINK, 6, 1);
 
         label=gtk_label_new(tx_test[i].description);
@@ -398,20 +350,23 @@ GtkWidget* alexTxTestUI() {
         alignment=gtk_alignment_new(0,0,0,0);
         gtk_widget_show(alignment);
         gtk_container_add( GTK_CONTAINER(alignment), label );
-        gtk_table_attach(GTK_TABLE(table), alignment, 5, 6, i+1, i+2, 
+        gtk_table_attach(GTK_TABLE(table), alignment, 2, 3, i+1, i+2, 
             GTK_FILL | GTK_SHRINK, GTK_FILL | GTK_SHRINK, 6, 1);
 
-        if(tx_test[i].rf_exp_level==0) {
-            sprintf(text,"%s","no output");
-        } else {
-            sprintf(text,"%ddBm",tx_test[i].rf_exp_level);
-        }
-        label=gtk_label_new(text);
+        label=gtk_label_new(tx_test[i].rf_min_level);
         gtk_widget_show(label);
         alignment=gtk_alignment_new(0,0,0,0);
         gtk_widget_show(alignment);
         gtk_container_add( GTK_CONTAINER(alignment), label );
-        gtk_table_attach(GTK_TABLE(table), alignment, 6, 7, i+1, i+2, 
+        gtk_table_attach(GTK_TABLE(table), alignment, 3, 4, i+1, i+2, 
+            GTK_FILL | GTK_SHRINK, GTK_FILL | GTK_SHRINK, 6, 1);
+
+        label=gtk_label_new(tx_test[i].rf_max_level);
+        gtk_widget_show(label);
+        alignment=gtk_alignment_new(0,0,0,0);
+        gtk_widget_show(alignment);
+        gtk_container_add( GTK_CONTAINER(alignment), label );
+        gtk_table_attach(GTK_TABLE(table), alignment, 4, 5, i+1, i+2, 
             GTK_FILL | GTK_SHRINK, GTK_FILL | GTK_SHRINK, 6, 1);
 
         label=gtk_label_new("-dBm");
@@ -420,7 +375,7 @@ GtkWidget* alexTxTestUI() {
         alignment=gtk_alignment_new(0,0,0,0);
         gtk_widget_show(alignment);
         gtk_container_add( GTK_CONTAINER(alignment), label );
-        gtk_table_attach(GTK_TABLE(table), alignment, 7, 8, i+1, i+2, 
+        gtk_table_attach(GTK_TABLE(table), alignment, 5, 6, i+1, i+2, 
             GTK_FILL | GTK_SHRINK, GTK_FILL | GTK_SHRINK, 6, 1);
 
         i++;
@@ -428,13 +383,13 @@ GtkWidget* alexTxTestUI() {
 
         label=gtk_label_new("Result");
         gtk_widget_show(label);
-        gtk_table_attach(GTK_TABLE(table), label, 6, 7, i+1, i+2, 
+        gtk_table_attach(GTK_TABLE(table), label, 4, 5, i+1, i+2, 
             GTK_FILL | GTK_SHRINK, GTK_FILL | GTK_SHRINK, 6, 1);
 
         label=gtk_label_new("");
         gtk_widget_show(label);
         passFail=label;
-        gtk_table_attach(GTK_TABLE(table), label, 7, 8, i+1, i+2, 
+        gtk_table_attach(GTK_TABLE(table), label, 5, 6, i+1, i+2, 
             GTK_FILL | GTK_SHRINK, GTK_FILL | GTK_SHRINK, 6, 1);
 
 
@@ -445,4 +400,48 @@ GtkWidget* alexTxTestUI() {
     testing=FALSE;
 
     return alexTxTestPage;
+}
+
+void alex_tx_test_load(char* filename) {
+    char string[128];
+    char* token;
+ 
+    FILE* f=fopen(filename,"r");
+    if(f==NULL) {
+        fprintf(stderr,"Error: cannot open %s\n",filename);
+        exit(1);
+    }
+
+    while(fgets(string,sizeof(string),f)) {
+fprintf(stderr,string);
+        // id
+        token=strtok(string,",\r\n");
+        if(token==NULL) continue;
+        tx_test[tx_test_index].id=atoi(token);
+        // description
+        token=strtok(NULL,",");
+        strcpy(tx_test[tx_test_index].description,token);
+        // frequency
+        token=strtok(NULL,",");
+        tx_test[tx_test_index].frequency=atoll(token);
+        // min expression
+        token=strtok(NULL,",");
+        strcpy(tx_test[tx_test_index].rf_min_level,token);
+        // max expression
+        token=strtok(NULL,",");
+        strcpy(tx_test[tx_test_index].rf_max_level,token);
+        // pause
+        token=strtok(NULL,",");
+        if(token[0]=='"') {
+            token[strlen(token)-2]='\0';
+            strcpy(tx_test[tx_test_index].pause,&token[1]);
+        } else {
+            strcpy(tx_test[tx_test_index].pause,token);
+        }
+        tx_test_index++;
+    }
+
+    tx_test[tx_test_index].frequency=0;
+
+    fclose(f);
 }

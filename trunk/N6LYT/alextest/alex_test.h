@@ -1,6 +1,6 @@
 /** 
-* @file alex_rx_test.h
-* @brief Alex Rx Test functions
+* @file alex_test.h
+* @brief Alex Test
 * @author John Melton, G0ORX/N6LYT, Doxygen Comments Dave Larsen, KV0S
 * @version 0.1
 * @date 2009-04-12
@@ -27,12 +27,21 @@
 
 
 //
-// alex_rx_test.h
+// alex_test.h
 //
 
-/** 
-* @brief  Alex Rx Test UI
-*/
-GtkWidget* alexRxTestUI();
+struct _ALEX_TEST {
+    int id;
+    long long frequency;
+    int rf_det_level;
+    char rf_min_level[64];
+    char rf_max_level[64];
+    char description[64];
+    GtkWidget* testWidget;
+    GtkWidget* frequencyWidget;
+    GtkWidget* levelWidget;
+    char pause[64];
+};
 
-void alex_rx_test_load(char* filename);
+typedef struct _ALEX_TEST ALEX_TEST;
+
