@@ -93,7 +93,9 @@ namespace Cyclops
 
         public SharpDSP2._1.DSPState state;         // public so that the Setup form can use it
         SharpDSP2._1.DSPBuffer SignalBuffer;
+        SharpDSP2._1.DSPBuffer TempSignalBuffer;    // used for decimating input I&Q signal
         public SharpDSP2._1.Receiver rcvr;          // public so that the Setup form can use it 
+        public SharpDSP2._1.Resampler resample;     // 
         SharpDSP2._1.RingBuffer AudioRing;
         float[] PowerSpectrumData = new float[rbufSize];    // data acquired from rcvr.PowerSpectrumSignal event
 
@@ -251,6 +253,7 @@ namespace Cyclops
             AudioRing = new SharpDSP2._1.RingBuffer(EP4BufSize);          // create a ring buffer for rcvr audio output complex values
 
             SignalBuffer = new SharpDSP2._1.DSPBuffer(state);
+            TempSignalBuffer = new SharpDSP2._1.DSPBuffer(state);
 
             stepSize.Text = "100Hz";  // force mouse wheel step size for now
             stepSize_SelectedIndexChanged(this, EventArgs.Empty);  // force contol to update 
@@ -422,12 +425,14 @@ namespace Cyclops
 
         void PowerSpectrumSignal_ps_event(object source, SharpDSP2._1.PowerSpectrumSignal.PSpectrumEvent e)
         {
-            Array.Copy(e.buffer, PowerSpectrumData, rbufSize);
+            //Array.Copy(e.buffer, PowerSpectrumData, rbufSize);
+            PowerSpectrumData = e.buffer;  // save the copy time 
         }
 
         void OutbandPowerSpectrumSignal_ps_event(object source, SharpDSP2._1.OutbandPowerSpectrumSignal.PSpectrumEvent e)
         {
-            Array.Copy(e.buffer, FullBandwidthPowerSpectrumData, EP4BufSize);
+            // Array.Copy(e.buffer, FullBandwidthPowerSpectrumData, EP4BufSize);
+            FullBandwidthPowerSpectrumData = e.buffer; // save the copy time 
         }
 
         private void ProcessWideBandData()
@@ -448,29 +453,39 @@ namespace Cyclops
                     temp[3] = 0;
                     RealAverage = 0.0f;
                     int i, k;
-                    for (i = 0, k = 0; i < EP4BufSize; i += 2, ++k)
-                    {
-                        // use this rather than BitConverter.ToInt16()...since its faster and less CPU intensive
-                        // without the '(short)' in there, the value doesn't get sign-extended!
-                        // so what should be small negative values show up as (almost) positive values?
-                        Sample = scaleIn * (float)(short)((EP4buf[i] << 8) | (EP4buf[i + 1]));
+                    //for (i = 0, k = 0; i < EP4BufSize; i += 2, ++k)
+                    //{
+                    //    // use this rather than BitConverter.ToInt16()...since its faster and less CPU intensive
+                    //    // without the '(short)' in there, the value doesn't get sign-extended!
+                    //    // so what should be small negative values show up as (almost) positive values?
+                    //    Sample = scaleIn * (float)(short)((EP4buf[i] << 8) | (EP4buf[i + 1]));
 
-                        RealAverage += Sample;
-                        SamplesReal[k] = Sample;
+                    //    RealAverage += Sample;
+                    //    SamplesReal[k] = Sample;
+                    //}
+
+                    for (i = 0; i < outbuffer.Length; i++)
+                    {
+                        SamplesReal[i] = outbuffer[i].real;
+                        SamplesImag[i] = outbuffer[i].imag;
                     }
 
-                    RealAverage /= (float)k;
-                    for (i = 0; i < k; ++i)
-                    {
-                        SamplesReal[i] -= RealAverage;      // Subtract average
-                        SamplesImag[i] = SamplesReal[i];    // temporary -- soon will do digital down-conversion
-                        // with sin & cos, so we'll actually have I & Q data to enter.
-                    }
 
-                    FullBandwidthSpectrum.Process(SamplesReal, SamplesImag, EP4BufSize / 2);
-                }
+                    //RealAverage /= (float)k;
+                    //for (i = 0; i < k; ++i)
+                    //{
+                    //    SamplesReal[i] -= RealAverage;      // Subtract average
+                    //    SamplesImag[i] = SamplesReal[i];    // temporary -- soon will do digital down-conversion
+                    //    // with sin & cos, so we'll actually have I & Q data to enter.
+                    //}
+
+                    //FullBandwidthSpectrum.Process(SamplesReal, SamplesImag, EP4BufSize / 2);
+                    FullBandwidthSpectrum.Process(SamplesReal, SamplesImag, 4096);
+                }   
+
+               }
             }
-        }
+        
 
 
         public void UpdateFormTitle()
@@ -731,8 +746,12 @@ namespace Cyclops
             // read I & Q values from the buffer and plot the sample on the scope
             for (int i = 0; i < iqsize; i++)
             {
-                I_sample[i] = (int)(scaleIQDisplay * SignalBuffer.cpx[i].real);
-                Q_sample[i] = (int)(scaleIQDisplay * SignalBuffer.cpx[i].imag);
+                //I_sample[i] = (int)(scaleIQDisplay * SignalBuffer.cpx[i].real);
+                //Q_sample[i] = (int)(scaleIQDisplay * SignalBuffer.cpx[i].imag);
+
+                // try this to get samples from output side of DSP filter after applying AM 
+                //I_sample[i] = (int)(scaleIQDisplay * outbuffer[i].real);
+                //Q_sample[i] = (int)(scaleIQDisplay * outbuffer[i].imag);
             }
         }
 
@@ -847,7 +866,8 @@ namespace Cyclops
                 for (int k = 0; k < 4; ++k)
                 {
                     // we have 2 x 4095 samples since we use a real signal so start half way 
-                    Sample = FullBandwidthPowerSpectrumData[4095 + 4 * xpos + k];
+                    //Sample = FullBandwidthPowerSpectrumData[4095 + 4 * xpos + k];
+                    Sample = FullBandwidthPowerSpectrumData[2048 + (4 * xpos) + k];
                     if (Sample > SampleMax) SampleMax = Sample;
                 }
                 int nFBPS = (int)(SampleMax + PreampOffset);
@@ -934,7 +954,7 @@ namespace Cyclops
         }
 
         // This thread runs at program load and reads data from Ozy
-        public void USBLoop()
+        public void  USBLoop()
         {
             int ret;
             for (; ; ) // do this forever 
@@ -974,6 +994,8 @@ namespace Cyclops
             //WriteKKCSV();
         }
 
+        int loop_number = 0;
+        
         // get data from Ozy via the USB port
         public void Process_Data(ref byte[] rbuf)
         {
@@ -1027,7 +1049,7 @@ namespace Cyclops
                 return;
             }
 
-            for (int frame = 0; frame < 4; frame++)
+            for (int frame = 0; frame < 4; frame++)  
             {
                 int coarse_pointer = frame * 512; //512 bytes total in each frame
                 rc0 = rbuf[coarse_pointer + 3];
@@ -1061,9 +1083,11 @@ namespace Cyclops
                     // use the following rather than BitConverter.ToInt32 since uses much less CPU
 
                     // get an I sample...JAM
+                    //TempSignalBuffer.cpx[sample_no].real = scaleIn * (float)((rbuf[k + 2] << 8) | (rbuf[k + 1] << 16) | (rbuf[k] << 24));
                     SignalBuffer.cpx[sample_no].real = scaleIn * (float)((rbuf[k + 2] << 8) | (rbuf[k + 1] << 16) | (rbuf[k] << 24));
 
                     // get a Q sample
+                    //TempSignalBuffer.cpx[sample_no].imag = scaleIn * (float)((rbuf[k + 5] << 8) | (rbuf[k + 4] << 16) | (rbuf[k + 3] << 24));
                     SignalBuffer.cpx[sample_no].imag = scaleIn * (float)((rbuf[k + 5] << 8) | (rbuf[k + 4] << 16) | (rbuf[k + 3] << 24));
 
                     // This single sample is now complete.
@@ -1073,20 +1097,38 @@ namespace Cyclops
                     if (sample_no == iqsize)
                     {
                         sample_no = 0;
-                        read_ready = false;           // just in case we try to display whilst data is changing
-                        rcvr.DoDSPProcess(ref SignalBuffer.cpx, ref outbuffer);  // Do all the DSP processing for rcvr
 
-                        // If SampleRate > 48000, decimate by skipping samples as we place them into the AudioRing buffer
-                        // since sample rate to Ozy is always 48k.
-                        int SampleSpacing = SampleRate / 48000;
+                        // set up resampler to decimate by 2
+                        resample = new SharpDSP2._1.Resampler(256,1,2);
 
-                        for (int sample = 0; sample < outbufferSize; sample += SampleSpacing)
-                        {
-                            AudioRing.Write(outbuffer[sample]);
-                        }
 
-                        read_ready = true;  // flag used to indicate to the graphic display code we have data ready
+                        resample.DoResample(SignalBuffer.cpx, iqsize / 2, SignalBuffer.cpx);
+                        
 
+
+                            // select SPEC mode for debug testing 
+                            //state.DSPMode = SharpDSP2._1.DSPMode_e.SPEC;
+                            //rcvr.FilterFrequencyHigh = 24000;
+                            //rcvr.FilterFrequencyLow = -rcvr.FilterFrequencyHigh;
+                            //rcvr.AGCMode = SharpDSP2._1.AGCType_e.agcOff;
+                            //rcvr.AGCFixedGainDB = 0.01f;
+
+
+                            sample_no = 0;
+                            read_ready = false;           // just in case we try to display whilst data is changing
+                            rcvr.DoDSPProcess(ref SignalBuffer.cpx, ref outbuffer);  // Do all the DSP processing for rcvr
+
+                            // If SampleRate > 48000, decimate by skipping samples as we place them into the AudioRing buffer
+                            // since sample rate to Ozy is always 48k.
+                            int SampleSpacing = SampleRate / 48000;
+
+                            for (int sample = 0; sample < outbufferSize; sample += SampleSpacing)
+                            {
+                                AudioRing.Write(outbuffer[sample]);
+                            }
+
+                            read_ready = true;  // flag used to indicate to the graphic display code we have data ready
+                        
                     }
                     // If SampleRate is 48000, send a frame to Ozy for every frame read
                     // If SampleRate is 96000, send a frame for every two read (audio is decimated by factor of two)
@@ -1343,7 +1385,7 @@ namespace Cyclops
                 ProcessWideBandData();
 
                 // get bandwidth samples as IQ data
-                GetIQSamples();
+                //GetIQSamples();
 
                 ComputeDisplay();
 
