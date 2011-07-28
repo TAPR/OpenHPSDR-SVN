@@ -12,7 +12,9 @@
 #define TOKEN_MINUS 4
 #define TOKEN_NUMBER 5
 #define TOKEN_RESULT 6
-#define TOKEN_EOS 7
+#define TOKEN_FORWARD 7
+#define TOKEN_REVERSE 8
+#define TOKEN_EOS 9
 
 char* parse_string;
 int parse_length;
@@ -28,6 +30,8 @@ int stack_index=-1;
 int error=0;
 
 int (*getResult)(int) = NULL;
+int (*getForward)(int) = NULL;
+int (*getReverse)(int) = NULL;
 
 void simple_expression();
 
@@ -103,10 +107,24 @@ void get_token(char* string) {
 
             case '$':
                 token_string[token_index++]=parse_string[parse_index++];
-                while((parse_index<parse_length) && isdigit(parse_string[parse_index])) {
-                    token_string[token_index++]=parse_string[parse_index++];
+                if(parse_string[parse_index]=='F') {
+                    token_index++;
+                    while((parse_index<parse_length) && isdigit(parse_string[parse_index])) {
+                        token_string[token_index++]=parse_string[parse_index++];
+                    }
+                    token=TOKEN_FORWARD;
+                } else if(parse_string[parse_index]=='R') {
+                    token_index++;
+                    while((parse_index<parse_length) && isdigit(parse_string[parse_index])) {
+                        token_string[token_index++]=parse_string[parse_index++];
+                    }
+                    token=TOKEN_REVERSE;
+                } else {
+                    while((parse_index<parse_length) && isdigit(parse_string[parse_index])) {
+                        token_string[token_index++]=parse_string[parse_index++];
+                    }
+                    token=TOKEN_RESULT;
                 }
-                token=TOKEN_RESULT;
                 break;
             default:
                 token_string[token_index++]=parse_string[parse_index++];
@@ -189,6 +207,16 @@ void term() {
             push(getResult(result_id));
             get_token(NULL);
             break;
+        case TOKEN_FORWARD:
+            result_id=atoi(&token_string[1]);
+            push(getForward(result_id));
+            get_token(NULL);
+            break;
+        case TOKEN_REVERSE:
+            result_id=atoi(&token_string[1]);
+            push(getReverse(result_id));
+            get_token(NULL);
+            break;
         case TOKEN_LPAREN:
             get_token(NULL);
             simple_expression();
@@ -236,10 +264,12 @@ void simple_expression() {
     }
 }
 
-int evaluate(char* expression,int (*result)(int)) {
+int evaluate(char* expression,int (*result)(int),int (*forward)(int),int (*reverse)(int)) {
     int value;
 //fprintf(stderr,"evaluate: %s\n",expression);
     getResult=result;
+    getForward=forward;
+    getReverse=reverse;
     stack_index=-1;
     get_token(expression);
     switch(token) {

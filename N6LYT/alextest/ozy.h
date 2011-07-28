@@ -68,6 +68,16 @@ extern "C" {
 #define LT2208_RANDOM_OFF         0x00
 #define LT2208_RANDOM_ON          0x10
 
+int penelopeForwardPower;
+int alexForwardPower;
+int alexReversePower;
+int AIN3;
+int AIN4;
+int AIN6;
+int IO1; // 1 is inactive
+int IO2;
+int IO3;
+
 int speed;
 int class;
 int lt2208Dither;
@@ -81,8 +91,6 @@ int preamp;
 int sampleRate;
 
 int mox;
-
-int forwardPower;
 
 int pennyLane;
 

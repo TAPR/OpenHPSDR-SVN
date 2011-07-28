@@ -34,6 +34,9 @@ struct _ALEX_TEST {
     int id;
     long long frequency;
     int rf_det_level;
+    int rf_fwd_level;
+    int rf_rev_level;
+    char rf_source[8];
     char rf_min_level[64];
     char rf_max_level[64];
     char description[64];

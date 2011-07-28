@@ -1,6 +1,6 @@
 /** 
 * @file alex_tx_test.h
-* @brief Alex Tx Test functions
+* @brief Alex Rx Test functions
 * @author John Melton, G0ORX/N6LYT, Doxygen Comments Dave Larsen, KV0S
 * @version 0.1
 * @date 2009-04-12
