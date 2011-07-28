@@ -45,7 +45,7 @@
 
 #define MODE modeAM
 #define FILTER filterF9
-#define SAMPLES 50
+#define SAMPLES 20
 #define TIMER 10
 
 static GtkWidget* alexRxTestPage;
@@ -66,7 +66,10 @@ static gint timerId;
 static gint test;
 static gint stage;
 static gint samples;
+// test sample values
 static int level;
+static int forwardPower;
+static int reversePower;
 
 static int failures;
 static gboolean stepping;
@@ -76,12 +79,43 @@ int alex_rx_test_get_result(int id) {
     ALEX_TEST* t;
     int result=0;
     int i=0;
-     
 fprintf(stderr,"alex_rx_test_get_result: %d\n",id);
     while(rx_test[i].frequency!=0) {
         if(rx_test[i].id==id) {
             result=rx_test[i].rf_det_level;
 fprintf(stderr,"alex_rx_test_get_result: result=%d\n",result);
+            break;
+        }
+        i++;
+    }
+    return result;
+}
+
+int alex_rx_test_get_fwd(int id) {
+    ALEX_TEST* t;
+    int result=0;
+    int i=0;
+fprintf(stderr,"alex_rx_test_get_fwd: %d\n",id);
+    while(rx_test[i].frequency!=0) {
+        if(rx_test[i].id==id) {
+            result=rx_test[i].rf_fwd_level;
+fprintf(stderr,"alex_rx_test_get_fwd: result=%d\n",result);
+            break;
+        }
+        i++;
+    }
+    return result;
+}
+
+int alex_rx_test_get_rev(int id) {
+    ALEX_TEST* t;
+    int result=0;
+    int i=0;
+fprintf(stderr,"alex_rx_test_get_rev: %d\n",id);
+    while(rx_test[i].frequency!=0) {
+        if(rx_test[i].id==id) {
+            result=rx_test[i].rf_rev_level;
+fprintf(stderr,"alex_rx_test_get_rev: result=%d\n",result);
             break;
         }
         i++;
@@ -130,7 +164,7 @@ gint alexRxTest(gpointer data) {
                 gtk_widget_modify_fg(t->testWidget, GTK_STATE_NORMAL, &color);
                 setMode(mode);
                 setFilter(FILTER);
-                setAFrequency(t->frequency+(long long)(test+1));
+                setAFrequency(t->frequency);
                 if(stepping) {
                     gtk_timeout_remove(timerId);
                 }
@@ -168,24 +202,52 @@ gint alexRxTest(gpointer data) {
                 break;
             case 3: // get level
                 if(meterDbm>level) level=meterDbm;
+                if(alexForwardPower>forwardPower) forwardPower=alexForwardPower;
+                if(alexReversePower>reversePower) reversePower=alexReversePower;
                 samples++;
                 if(samples>=SAMPLES) {
-                    sprintf(text,"%d dBm",level);
                     t->rf_det_level=level;
-                    min=evaluate(t->rf_min_level,&alex_rx_test_get_result);
-                    max=evaluate(t->rf_max_level,&alex_rx_test_get_result);
+                    t->rf_fwd_level=forwardPower;
+                    t->rf_rev_level=reversePower;
+                    min=evaluate(t->rf_min_level,&alex_rx_test_get_result,&alex_rx_test_get_fwd,&alex_rx_test_get_rev);
+                    max=evaluate(t->rf_max_level,&alex_rx_test_get_result,&alex_rx_test_get_fwd,&alex_rx_test_get_rev);
 
-fprintf(stderr,"level=%d min=%d max=%d\n",level,min,max);
+fprintf(stderr,"level=%d fwd=%d rev=%d min=%d max=%d\n",level,forwardPower,reversePower,min,max);
 
-                    if(level<min || level>max) {
-                        gdk_color_parse("red", &color);
-                        gtk_widget_modify_fg(t->levelWidget, GTK_STATE_NORMAL, &color);
-                        failures++;
-                    } else {
-                        gdk_color_parse("green", &color);
-                        gtk_widget_modify_fg(t->levelWidget, GTK_STATE_NORMAL, &color);
+                    if(strcmp(t->rf_source,"D")==0) {
+                        if(level<min || level>max) {
+                            gdk_color_parse("red", &color);
+                            gtk_widget_modify_fg(t->levelWidget, GTK_STATE_NORMAL, &color);
+                            failures++;
+                        } else {
+                            gdk_color_parse("green", &color);
+                            gtk_widget_modify_fg(t->levelWidget, GTK_STATE_NORMAL, &color);
+                        }
+                        sprintf(text,"%d dBm",level);
+                        gtk_label_set_text(GTK_LABEL(t->levelWidget),text);
+                    } else if(strcmp(t->rf_source,"F")==0) {
+                        if(forwardPower<min || forwardPower>max) {
+                            gdk_color_parse("red", &color);
+                            gtk_widget_modify_fg(t->levelWidget, GTK_STATE_NORMAL, &color);
+                            failures++;
+                        } else {
+                            gdk_color_parse("green", &color);
+                            gtk_widget_modify_fg(t->levelWidget, GTK_STATE_NORMAL, &color);
+                        }
+                        sprintf(text,"%d",forwardPower);
+                        gtk_label_set_text(GTK_LABEL(t->levelWidget),text);
+                    } else if(strcmp(t->rf_source,"R")==0) {
+                        if(reversePower<min || reversePower>max) {
+                            gdk_color_parse("red", &color);
+                            gtk_widget_modify_fg(t->levelWidget, GTK_STATE_NORMAL, &color);
+                            failures++;
+                        } else {
+                            gdk_color_parse("green", &color);
+                            gtk_widget_modify_fg(t->levelWidget, GTK_STATE_NORMAL, &color);
+                        }
+                        sprintf(text,"%d",reversePower);
+                        gtk_label_set_text(GTK_LABEL(t->levelWidget),text);
                     }
-                    gtk_label_set_text(GTK_LABEL(t->levelWidget),text);
                     if(stepping) {
                         gtk_timeout_remove(timerId);
                     }
@@ -286,7 +348,7 @@ GtkWidget* alexRxTestUI() {
     gtk_widget_show(box);
     gtk_box_pack_start(GTK_BOX(alexRxTestPage),box,FALSE,FALSE,2);
 
-    table=gtk_table_new(6,31+1,FALSE);
+    table=gtk_table_new(7,rx_test_index+1,FALSE);
 
     i=0;
 
@@ -305,20 +367,25 @@ GtkWidget* alexRxTestUI() {
     gtk_widget_show(label);
     gtk_table_attach(GTK_TABLE(table), label, 2, 3, i, i+1, 
         GTK_FILL | GTK_SHRINK, GTK_FILL | GTK_SHRINK, 6, 1);
-    
-    label=gtk_label_new("RF min level");
+
+    label=gtk_label_new("Source");
     gtk_widget_show(label);
     gtk_table_attach(GTK_TABLE(table), label, 3, 4, i, i+1, 
         GTK_FILL | GTK_SHRINK, GTK_FILL | GTK_SHRINK, 6, 1);
     
-    label=gtk_label_new("RF max level");
+    label=gtk_label_new("RF min level");
     gtk_widget_show(label);
     gtk_table_attach(GTK_TABLE(table), label, 4, 5, i, i+1, 
         GTK_FILL | GTK_SHRINK, GTK_FILL | GTK_SHRINK, 6, 1);
     
-    label=gtk_label_new("RF det level");
+    label=gtk_label_new("RF max level");
     gtk_widget_show(label);
     gtk_table_attach(GTK_TABLE(table), label, 5, 6, i, i+1, 
+        GTK_FILL | GTK_SHRINK, GTK_FILL | GTK_SHRINK, 6, 1);
+    
+    label=gtk_label_new("RF det level");
+    gtk_widget_show(label);
+    gtk_table_attach(GTK_TABLE(table), label, 6, 7, i, i+1, 
         GTK_FILL | GTK_SHRINK, GTK_FILL | GTK_SHRINK, 6, 1);
     
     i=0;
@@ -353,7 +420,7 @@ GtkWidget* alexRxTestUI() {
         gtk_table_attach(GTK_TABLE(table), alignment, 2, 3, i+1, i+2, 
             GTK_FILL | GTK_SHRINK, GTK_FILL | GTK_SHRINK, 6, 1);
 
-        label=gtk_label_new(rx_test[i].rf_min_level);
+        label=gtk_label_new(rx_test[i].rf_source);
         gtk_widget_show(label);
         alignment=gtk_alignment_new(0,0,0,0);
         gtk_widget_show(alignment);
@@ -361,12 +428,20 @@ GtkWidget* alexRxTestUI() {
         gtk_table_attach(GTK_TABLE(table), alignment, 3, 4, i+1, i+2, 
             GTK_FILL | GTK_SHRINK, GTK_FILL | GTK_SHRINK, 6, 1);
 
-        label=gtk_label_new(rx_test[i].rf_max_level);
+        label=gtk_label_new(rx_test[i].rf_min_level);
         gtk_widget_show(label);
         alignment=gtk_alignment_new(0,0,0,0);
         gtk_widget_show(alignment);
         gtk_container_add( GTK_CONTAINER(alignment), label );
         gtk_table_attach(GTK_TABLE(table), alignment, 4, 5, i+1, i+2, 
+            GTK_FILL | GTK_SHRINK, GTK_FILL | GTK_SHRINK, 6, 1);
+
+        label=gtk_label_new(rx_test[i].rf_max_level);
+        gtk_widget_show(label);
+        alignment=gtk_alignment_new(0,0,0,0);
+        gtk_widget_show(alignment);
+        gtk_container_add( GTK_CONTAINER(alignment), label );
+        gtk_table_attach(GTK_TABLE(table), alignment, 5, 6, i+1, i+2, 
             GTK_FILL | GTK_SHRINK, GTK_FILL | GTK_SHRINK, 6, 1);
 
         label=gtk_label_new("-dBm");
@@ -375,7 +450,7 @@ GtkWidget* alexRxTestUI() {
         alignment=gtk_alignment_new(0,0,0,0);
         gtk_widget_show(alignment);
         gtk_container_add( GTK_CONTAINER(alignment), label );
-        gtk_table_attach(GTK_TABLE(table), alignment, 5, 6, i+1, i+2, 
+        gtk_table_attach(GTK_TABLE(table), alignment, 6, 7, i+1, i+2, 
             GTK_FILL | GTK_SHRINK, GTK_FILL | GTK_SHRINK, 6, 1);
 
         i++;
@@ -413,6 +488,7 @@ void alex_rx_test_load(char* filename) {
     }
 
     while(fgets(string,sizeof(string),f)) {
+fprintf(stderr,string);
         // id
         token=strtok(string,",");
         rx_test[rx_test_index].id=atoi(token);
@@ -422,6 +498,14 @@ void alex_rx_test_load(char* filename) {
         // frequency
         token=strtok(NULL,",");
         rx_test[rx_test_index].frequency=atoll(token);
+        // source
+        token=strtok(NULL,",");
+        if(token[0]=='"') {
+            token[strlen(token)-1]='\0';
+            strcpy(rx_test[rx_test_index].rf_source,&token[1]);
+        } else {
+            strcpy(rx_test[rx_test_index].rf_source,token);
+        }
         // min expression
         token=strtok(NULL,",");
         strcpy(rx_test[rx_test_index].rf_min_level,token);

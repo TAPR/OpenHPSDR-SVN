@@ -48,7 +48,7 @@ int mercury_software_version=0;
 int penelope_software_version=0;
 int ozy_software_version=0;
 
-int forwardPower=0;
+int penelopeForwardPower=0;
 int alexForwardPower=0;
 int alexReversePower=0;
 int AIN3=0;
@@ -249,12 +249,12 @@ void process_ozy_input_buffer(char* buffer) {
             }
             break;
         case 1:
-            forwardPower=(control_in[1]<<8)+control_in[2]; // from Penelope or Hermes
+            penelopeForwardPower=(control_in[1]<<8)+control_in[2]; // from Penelope or Hermes
             
             alexForwardPower=(control_in[3]<<8)+control_in[4]; // from Alex or Apollo
             break;
         case 2:
-            alexForwardPower=(control_in[1]<<8)+control_in[2]; // from Alex or Apollo
+            alexReversePower=(control_in[1]<<8)+control_in[2]; // from Alex or Apollo
             AIN3=(control_in[3]<<8)+control_in[4]; // from Pennelope or Hermes
             break;
         case 3:
