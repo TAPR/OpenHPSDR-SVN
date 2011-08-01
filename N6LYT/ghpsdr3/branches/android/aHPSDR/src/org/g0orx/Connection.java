@@ -128,7 +128,7 @@ public class Connection extends Thread {
 		meter = Integer.parseInt(s);
 
 		for (int i = 0; i < BUFFER_SIZE; i++) {
-			samples[i] = -(buffer[i] & 0xFF) - 30;
+			samples[i] = -(buffer[i] & 0xFF);
 		}
 
 		if (spectrumView != null) {
