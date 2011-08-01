@@ -22,8 +22,12 @@ public class Update extends Thread {
 		running = false;
 	}
 
+	public void setFps(int fps) {
+		this.fps=fps;
+	}
+	
 	private Connection connection;
 	private boolean running = true;
-	private int fps = 8;
+	private int fps = 10;
 
 }

@@ -12,14 +12,27 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.WindowManager;
 import android.view.Display;
+import android.hardware.Sensor;
+import android.hardware.SensorEvent;
+import android.hardware.SensorEventListener;
+import android.hardware.SensorManager;
 
-public class AHPSDRActivity extends Activity {
+public class AHPSDRActivity extends Activity implements SensorEventListener {
 	/** Called when the activity is first created. */
+	
+	
+
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+		//this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+		
+		getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN | WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+		
+        mSensorManager = (SensorManager)getSystemService(SENSOR_SERVICE);
+        mGravity = mSensorManager.getDefaultSensor(Sensor.TYPE_GRAVITY);
         
 		Display display = getWindowManager().getDefaultDisplay(); 
 		int width = display.getWidth();
@@ -36,6 +49,13 @@ public class AHPSDRActivity extends Activity {
 		setContentView(spectrumView);
 
 	}
+
+	public void onAccuracyChanged(Sensor sensor, int accuracy) {
+    }
+
+    public void onSensorChanged(SensorEvent event) {
+    	spectrumView.setSensors(event.values[0],event.values[1],event.values[2]);
+    }
 
 	public boolean onTrackballEvent(MotionEvent event) {
 		switch (event.getAction()) {
@@ -60,17 +80,19 @@ public class AHPSDRActivity extends Activity {
 	public void onResume() {
 		super.onResume();
 		Log.i("Jmonitor", "onResume");
+		mSensorManager.registerListener(this, mGravity, SensorManager.SENSOR_DELAY_NORMAL);
 		connection.start();
 		connection.setFrequency(7048000);
 		connection.setMode(0);
 		connection.setFilter(-2850, -150);
-		connection.setGain(30);
+		connection.setGain(80);
 		connection.setAGC(AGC_LONG);
 		update.start();
 	}
 
 	public void onPause() {
 		super.onPause();
+		mSensorManager.unregisterListener(this);
 		Log.i("Jmonitor", "onPause");
 	}
 
@@ -93,6 +115,7 @@ public class AHPSDRActivity extends Activity {
 		menu.add(0, MENU_AGC, 0, "AGC");
 		menu.add(0, MENU_DSP, 0, "DSP");
 		menu.add(0, MENU_GAIN, 0, "GAIN");
+		menu.add(0, MENU_FPS, 0, "FPS");
 		menu.add(0, MENU_QUIT, 0, "Quit");
 		return true;
 	}
@@ -119,6 +142,9 @@ public class AHPSDRActivity extends Activity {
 			break;
 		case MENU_GAIN:
 			showDialog(MENU_GAIN);
+			break;
+		case MENU_FPS:
+			showDialog(MENU_FPS);
 			break;
 
 		}
@@ -668,12 +694,27 @@ public class AHPSDRActivity extends Activity {
 					});
 			dialog = builder.create();
 			break;
+		case MENU_FPS:
+			builder = new AlertDialog.Builder(this);
+			builder.setTitle("Select FPS");
+			builder.setSingleChoiceItems(fpss, FPS_10,
+					new DialogInterface.OnClickListener() {
+						public void onClick(DialogInterface dialog, int item) {
+							update.setFps(item);
+							dialog.dismiss();
+						}
+					});
+			dialog = builder.create();
+			break;
 		default:
 			dialog = null;
 			break;
 		}
 		return dialog;
 	}
+
+	private SensorManager mSensorManager;
+    private Sensor mGravity;
 
 	private Connection connection;
 	private SpectrumView spectrumView;
@@ -686,6 +727,7 @@ public class AHPSDRActivity extends Activity {
 	public static final int MENU_AGC = 4;
 	public static final int MENU_DSP = 5;
 	public static final int MENU_GAIN = 6;
+	public static final int MENU_FPS = 7;
 
 	public static final CharSequence[] bands = { "160", "80", "60", "40", "30",
 			"20", "17", "15", "12", "10", "6", "GEN", "WWV" };
@@ -743,7 +785,8 @@ public class AHPSDRActivity extends Activity {
 			"50", "60", "70", "80", "90", "100" };
 
 	public int gain = 30;
-
+	
+	
 	public static final int GAIN_0 = 0;
 	public static final int GAIN_10 = 1;
 	public static final int GAIN_20 = 2;
@@ -755,6 +798,25 @@ public class AHPSDRActivity extends Activity {
 	public static final int GAIN_80 = 8;
 	public static final int GAIN_90 = 9;
 	public static final int GAIN_100 = 10;
+	
+    public static final CharSequence[] fpss = { "1", "2", "3", "4", "5",
+		"6", "7", "8", "9", "10", "11", "12" };
+	
+    public int fps = 10;
+    
+	public static final int FPS_1 = 1;
+	public static final int FPS_2 = 2;
+	public static final int FPS_3 = 3;
+	public static final int FPS_4 = 4;
+	public static final int FPS_5 = 5;
+	public static final int FPS_6 = 6;
+	public static final int FPS_7 = 7;
+	public static final int FPS_8 = 8;
+	public static final int FPS_9 = 9;
+	public static final int FPS_10 = 10;
+	public static final int FPS_11 = 11;
+	public static final int FPS_12 = 12;
+	
 
 	public static final CharSequence[] ssbFilters = { "5.0k", "4.4k", "3.8k",
 			"3.3k", "2.9k", "2.7k", "2.4k", "2.1k", "1.8k", "1.0k" };
@@ -782,5 +844,8 @@ public class AHPSDRActivity extends Activity {
 	private static final int BASE_PORT = 8000;
 	private int port = 8000;
 	private int receiver = 0;
+	
+	private float xAxisLevel=-1.9F;
+	
 
 }

@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
+import android.graphics.DashPathEffect;
 import android.graphics.Paint;
 import android.graphics.Path;
 import android.view.MotionEvent;
@@ -30,9 +31,27 @@ public class SpectrumView extends View implements OnTouchListener {
 				waterfall.setPixel(x, y, Color.BLACK);
 			}
 		}
+
 		this.setOnTouchListener(this);
 	}
 
+	void setSensors(float sensor1,float sensor2,float sensor3) {
+		
+		if(sensor2>(-1.9F+4.0F)) {
+			connection.setFrequency((long) (connection.getFrequency() + 1000));
+		} else if(sensor2>(-1.9F+3.0F)) {
+			connection.setFrequency((long) (connection.getFrequency() + 100));
+		} else if(sensor2>(-1.9F+2.0F)) {
+			connection.setFrequency((long) (connection.getFrequency() + 10));
+		} else if(sensor2<(-1.9F-4.0F)) {
+			connection.setFrequency((long) (connection.getFrequency() - 1000));
+		} else if(sensor2<(-1.9F-3.0F)) {
+			connection.setFrequency((long) (connection.getFrequency() - 100));
+		} else if(sensor2<(-1.9F-2.0F)) {
+			connection.setFrequency((long) (connection.getFrequency() - 10));
+		}
+	}
+	
 	protected void onDraw(Canvas canvas) {
 		if (connection.isConnected()) {
 
@@ -56,16 +75,33 @@ public class SpectrumView extends View implements OnTouchListener {
 				canvas.drawText(Integer.toString(num), 3, y + 2, paint);
 			}
 
+			// plot the vertical frequency markers
+			float hzPerPixel=(float)connection.getSampleRate()/(float)WIDTH;
+			long f=connection.getFrequency()-(connection.getSampleRate()/2);
+			for(int i=0;i<WIDTH;i++) {
+				f=connection.getFrequency()-(connection.getSampleRate()/2)+(long)(hzPerPixel*i);
+				if(f>0) {
+					if((f%10000)<(long)hzPerPixel) {
+						paint.setColor(Color.YELLOW);
+						DashPathEffect dashPath = new DashPathEffect(new float[]{1,4}, 1);
+						paint.setPathEffect(dashPath);
+					    paint.setStrokeWidth(1);
+						canvas.drawLine(i,0,i,HEIGHT,paint);
+						paint.setColor(Color.WHITE);
+						paint.setPathEffect(null);
+						long mhz=f/1000000;
+						long khz=(f%1000000)/10000;
+						
+						canvas.drawText(Long.toString(mhz)+"."+((khz<10)?"0":"")+Long.toString(khz), i, HEIGHT-5, paint);
+					}
+				}
+			}
+			
+			
 			// plot the cursor
 			paint.setColor(Color.RED);
 			canvas.drawLine(WIDTH/2, 0, WIDTH/2, HEIGHT, paint);
 
-			// plot scroll markers
-			paint.setColor(Color.LTGRAY);
-			canvas.drawLine(WIDTH-100, 0, WIDTH-100, HEIGHT, paint);
-			canvas.drawLine(100, 0, 100, HEIGHT, paint);
-
-			
 			// display the frequency and mode
 			paint.setColor(Color.GREEN);
 			paint.setTextSize(24.0F);
@@ -84,6 +120,30 @@ public class SpectrumView extends View implements OnTouchListener {
 			// draw the waterfall
 			canvas.drawBitmap(waterfall, 1, HEIGHT, paint);
 
+			// draw the S-Meter
+			int smeter=connection.getMeter()+121;
+			//paint.setColor(Color.GREEN);
+			//canvas.drawText(Integer.toString(dbm)+"dBm", WIDTH-100, 25, paint);
+			paint.setColor(Color.RED);
+			canvas.drawRect(WIDTH-125,10,(WIDTH-125)+smeter,25, paint);
+			paint.setColor(Color.GREEN);
+			canvas.drawLine(WIDTH-125, 25, WIDTH-125, 10, paint);
+			canvas.drawLine((WIDTH-125)+9, 25, (WIDTH-125)+9, 10, paint);
+			canvas.drawLine((WIDTH-125)+18, 25, (WIDTH-125)+18, 10, paint);
+			canvas.drawLine((WIDTH-125)+27, 25, (WIDTH-125)+27, 10, paint);
+			canvas.drawLine((WIDTH-125)+47, 25, (WIDTH-125)+47, 10, paint);
+			canvas.drawLine((WIDTH-125)+67, 25, (WIDTH-125)+67, 10, paint);
+			canvas.drawLine((WIDTH-125)+87, 25, (WIDTH-125)+87, 10, paint);
+			paint.setTextSize(8.0F);
+			canvas.drawText("3", (WIDTH-125)+9-2, 35, paint);
+			canvas.drawText("6", (WIDTH-125)+18-2, 35, paint);
+			canvas.drawText("9", (WIDTH-125)+27-2, 35, paint);
+			canvas.drawText("+20", (WIDTH-125)+47-4, 35, paint);
+			canvas.drawText("+40", (WIDTH-125)+67-4, 35, paint);
+			canvas.drawText("+60", (WIDTH-125)+87-4, 35, paint);
+
+			
+			
 			String status = connection.getStatus();
 			if (status != null) {
 				paint.setColor(Color.RED);
@@ -178,15 +238,22 @@ public class SpectrumView extends View implements OnTouchListener {
 					startX = event.getX();
 					moved=false;
 					scroll=false;
-					int step=event.getY()>HEIGHT?100:1000;
-					if(startX>(WIDTH-100)) {
-						
-						connection.setFrequency((long) (connection.getFrequency() + step));
+/*
+					if(event.getY()>((HEIGHT*2)-100)) {
+						int step=100;
+					    if(startX<(WIDTH/4)) {
+					    	step=-100;
+					    } else if(startX<(WIDTH/2)) {
+						    step=-1000;
+					    } else if(startX<((WIDTH-WIDTH/4))) {
+				            step=1000;
+					    } else {
+						    step=100;
+					    }
+					    connection.setFrequency((long) (connection.getFrequency() + step));
 					    scroll=true;	
-					} else if(startX<100) {
-						connection.setFrequency((long) (connection.getFrequency() - step));
-						scroll=true;
 					}
+*/
 				}
 				break;
 			case MotionEvent.ACTION_MOVE:
@@ -230,7 +297,7 @@ public class SpectrumView extends View implements OnTouchListener {
 
 		return true;
 	}
-
+	
 	private Paint paint;
 
 	private Connection connection;
@@ -243,11 +310,11 @@ public class SpectrumView extends View implements OnTouchListener {
 	Bitmap waterfall;
 	int[] pixels;
 
-	private int spectrumHigh = -40;
-	private int spectrumLow = -180;
+	private int spectrumHigh = 0;
+	private int spectrumLow = -140;
 
 	private int waterfallHigh = -75;
-	private int waterfallLow = -140;
+	private int waterfallLow = -115;
 
 	private int filterLow;
 	private int filterHigh;
