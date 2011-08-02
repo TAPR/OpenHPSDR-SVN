@@ -93,6 +93,8 @@ public class AHPSDRActivity extends Activity implements SensorEventListener {
 	public void onPause() {
 		super.onPause();
 		mSensorManager.unregisterListener(this);
+		update.stop();
+		connection.close();
 		Log.i("Jmonitor", "onPause");
 	}
 
