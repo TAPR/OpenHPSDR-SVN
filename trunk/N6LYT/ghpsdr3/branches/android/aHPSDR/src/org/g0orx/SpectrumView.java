@@ -38,17 +38,17 @@ public class SpectrumView extends View implements OnTouchListener {
 	void setSensors(float sensor1,float sensor2,float sensor3) {
 		
 		if(sensor2>(-1.9F+4.0F)) {
-			connection.setFrequency((long) (connection.getFrequency() + 1000));
-		} else if(sensor2>(-1.9F+3.0F)) {
-			connection.setFrequency((long) (connection.getFrequency() + 100));
-		} else if(sensor2>(-1.9F+2.0F)) {
-			connection.setFrequency((long) (connection.getFrequency() + 10));
-		} else if(sensor2<(-1.9F-4.0F)) {
 			connection.setFrequency((long) (connection.getFrequency() - 1000));
-		} else if(sensor2<(-1.9F-3.0F)) {
+		} else if(sensor2>(-1.9F+3.0F)) {
 			connection.setFrequency((long) (connection.getFrequency() - 100));
-		} else if(sensor2<(-1.9F-2.0F)) {
+		} else if(sensor2>(-1.9F+2.0F)) {
 			connection.setFrequency((long) (connection.getFrequency() - 10));
+		} else if(sensor2<(-1.9F-4.0F)) {
+			connection.setFrequency((long) (connection.getFrequency() + 1000));
+		} else if(sensor2<(-1.9F-3.0F)) {
+			connection.setFrequency((long) (connection.getFrequency() + 100));
+		} else if(sensor2<(-1.9F-2.0F)) {
+			connection.setFrequency((long) (connection.getFrequency() + 10));
 		}
 	}
 	
@@ -86,13 +86,12 @@ public class SpectrumView extends View implements OnTouchListener {
 						DashPathEffect dashPath = new DashPathEffect(new float[]{1,4}, 1);
 						paint.setPathEffect(dashPath);
 					    paint.setStrokeWidth(1);
-						canvas.drawLine(i,0,i,HEIGHT,paint);
+						canvas.drawLine(i,35,i,HEIGHT-25,paint);
 						paint.setColor(Color.WHITE);
 						paint.setPathEffect(null);
 						long mhz=f/1000000;
 						long khz=(f%1000000)/10000;
-						
-						canvas.drawText(Long.toString(mhz)+"."+((khz<10)?"0":"")+Long.toString(khz), i, HEIGHT-5, paint);
+						canvas.drawText(Long.toString(mhz)+"."+((khz<10)?"0":"")+Long.toString(khz), i-5, HEIGHT-5, paint);
 					}
 				}
 			}
