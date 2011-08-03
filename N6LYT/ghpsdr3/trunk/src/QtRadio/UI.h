@@ -186,6 +186,7 @@ public slots:
     void fpsChanged(int f);
     void waterfallHighChanged(int high);
     void waterfallLowChanged(int low);
+    void waterfallAutomaticChanged(bool state);
 
     void hostChanged(QString host);
     void receiverChanged(int rx);
