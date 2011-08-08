@@ -45,7 +45,7 @@
 
 #define MODE modeAM
 #define FILTER filterF9
-#define SAMPLES 20
+#define SAMPLES 40
 #define TIMER 10
 
 static GtkWidget* alexRxTestPage;
@@ -178,6 +178,8 @@ gint alexRxTest(gpointer data) {
                 testing=1;
                 tuningPhase=0.0;
                 level=-250;
+                forwardPower=0;
+                reversePower=0;
                 setMOX(1);
                 stage++;
                 break;

@@ -64,6 +64,7 @@ guchar* waterfallPixels;
 gint rowStride,
      nChannels;
 
+gboolean waterfallAutomatic=TRUE;
 float waterfallHighThreshold=-100.0f;
 float waterfallLowThreshold=-150.0f;
 
@@ -573,6 +574,8 @@ void plotSpectrum(float* samples,int height) {
     long long f;
     float hzPerPixel;
 
+    int average;
+
     f=frequencyA-(sampleRate/2);
     hzPerPixel=(float)sampleRate/(float)spectrumWIDTH;
 
@@ -604,6 +607,7 @@ void plotSpectrum(float* samples,int height) {
         }
     }
 
+    average=0;
     for(i=0; i<spectrumWIDTH; i++) {
         float max = -1000000.0F;
         float dval = i*slope + start_sample_index;
@@ -625,6 +629,8 @@ void plotSpectrum(float* samples,int height) {
         // save for waterfall
         waterfall[i]=max;
 
+        average=average+(int)max;
+
         if(max > spectrum_max_y)
         {
             spectrum_max_y = max;
@@ -635,6 +641,11 @@ void plotSpectrum(float* samples,int height) {
         spectrumPoints[i].x = i;
         f+=(long long)hzPerPixel;
 
+    }
+
+    if(waterfallAutomatic) {
+        waterfallLowThreshold=(float)((average/spectrumWIDTH)-10);
+        waterfallHighThreshold=waterfallLowThreshold+60.0;;
     }
 }
 
@@ -894,6 +905,8 @@ void spectrumSaveState() {
     sprintf(string,"%f",waterfallLowThreshold);
     setProperty("waterfall.low",string);
 
+    sprintf(string,"%d",waterfallAutomatic);
+    setProperty("waterfall.automatic",string);
 }
 
 /* --------------------------------------------------------------------------*/
@@ -923,6 +936,9 @@ void spectrumRestoreState() {
 
     value=getProperty("waterfall.low");
     if(value) waterfallLowThreshold=atof(value);
+
+    value=getProperty("waterfall.automatic");
+    if(value) waterfallAutomatic=atoi(value);
 
 }
 
