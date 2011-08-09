@@ -285,6 +285,9 @@ void process_ozy_input_buffer(char* buffer) {
             if(testing) {
                 mic_left_buffer[samples]=0.0f;
                 mic_right_buffer[samples]=0.0f;
+            } else if(tuning && (mode=modeAM)) {
+                mic_left_buffer[samples]=0.0f;
+                mic_right_buffer[samples]=0.0f;
             } else {
                 mic_left_buffer[samples]=mic_sample_float;
                 mic_right_buffer[samples]=0.0f;
@@ -312,7 +315,8 @@ void process_ozy_input_buffer(char* buffer) {
 
                 // transmit
                 if(mox) {
-                    if(tuning) {
+                    if(tuning && (mode==modeAM)) {
+                    } else if(tuning) {
                         sineWave(mic_left_buffer,buffer_size,tuningPhase,(double)cwPitch);
                         tuningPhase=sineWave(mic_right_buffer,buffer_size,tuningPhase,(double)cwPitch);
                     } else if(testing) {
