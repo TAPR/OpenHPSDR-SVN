@@ -36,3 +36,4 @@
 GtkWidget* alexTxTestUI();
 
 void alex_tx_test_load(char* filename);
+void alex_tx_set_samples(int samples);

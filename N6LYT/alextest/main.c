@@ -689,6 +689,7 @@ static struct option longOptions[] = {
     {"timing",no_argument, NULL, 't'},
     {"metis",no_argument, NULL, 'm'},
     {"interface",required_argument, NULL, 'i'},
+    {"samples",required_argument, NULL, 'a'},
     {0,0,0,0}
 };
 
@@ -727,6 +728,10 @@ void processCommands(int argc,char* argv[]) {
                 break;
             case 'i':
                 ozy_set_interface(optarg);
+                break;
+            case 'a':
+                alex_rx_set_samples(atoi(optarg));
+                alex_tx_set_samples(atoi(optarg));
                 break;
             case '?':
                 fprintf(stderr,"Usage:\n");
