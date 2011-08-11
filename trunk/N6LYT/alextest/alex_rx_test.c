@@ -42,11 +42,12 @@
 #include "filter.h"
 #include "test.h"
 #include "expression.h"
+#include "dttsp.h"
 
 #define MODE modeAM
 #define FILTER filterF9
 #define SAMPLES 40
-#define TIMER 10
+#define TIMER 20
 
 static GtkWidget* alexRxTestPage;
 static GtkWidget* alexRxStartButton;

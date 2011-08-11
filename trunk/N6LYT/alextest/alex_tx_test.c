@@ -42,6 +42,7 @@
 #include "filter.h"
 #include "test.h"
 #include "expression.h"
+#include "dttsp.h"
 
 #define MODE modeAM
 #define FILTER filterF9
@@ -81,7 +82,6 @@ void alex_tx_set_samples(int s) {
 }
 
 int alex_tx_test_get_result(int id) {
-    ALEX_TEST* t;
     int result=0;
     int i=0;
 fprintf(stderr,"alex_tx_test_get_result: %d\n",id);
@@ -97,7 +97,6 @@ fprintf(stderr,"alex_tx_test_get_result: result=%d\n",result);
 }
 
 int alex_tx_test_get_fwd(int id) {
-    ALEX_TEST* t;
     int result=0;
     int i=0;
 fprintf(stderr,"alex_tx_test_get_fwd: %d\n",id);
@@ -113,7 +112,6 @@ fprintf(stderr,"alex_tx_test_get_fwd: result=%d\n",result);
 }
 
 int alex_tx_test_get_rev(int id) {
-    ALEX_TEST* t;
     int result=0;
     int i=0;
 fprintf(stderr,"alex_tx_test_get_rev: %d\n",id);
@@ -137,7 +135,7 @@ fprintf(stderr,"alex_tx_test_get_rev: result=%d\n",result);
 * @return
 */
 gint alexTxTest(gpointer data) {
-    ALEX_TEST* t;
+    static ALEX_TEST* t;
     char text[16];
     GdkColor color;
     int min,max;
@@ -213,10 +211,12 @@ gint alexTxTest(gpointer data) {
                 if(alexReversePower>reversePower) reversePower=alexReversePower;
                 samples++;
                 if(samples>=max_samples) {
+fprintf(stderr,"id=%d\n",t->id);
                     //t->rf_det_level=level;
                     //t->rf_fwd_level=forwardPower;
                     //t->rf_rev_level=reversePower;
                     t->rf_det_level=getMeter();
+fprintf(stderr,"id=%d rf_det_level=%d\n",t->id,t->rf_det_level);
                     t->rf_fwd_level=alexForwardPower;
                     t->rf_rev_level=alexReversePower;
                     min=evaluate(t->rf_min_level,&alex_tx_test_get_result,&alex_tx_test_get_fwd,&alex_tx_test_get_rev);
