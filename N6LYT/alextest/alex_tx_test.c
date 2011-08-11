@@ -46,7 +46,7 @@
 #define MODE modeAM
 #define FILTER filterF9
 #define SAMPLES 40
-#define TIMER 10
+#define TIMER 20
 
 static GtkWidget* alexTxTestPage;
 static GtkWidget* alexTxStartButton;
@@ -216,7 +216,7 @@ gint alexTxTest(gpointer data) {
                     //t->rf_det_level=level;
                     //t->rf_fwd_level=forwardPower;
                     //t->rf_rev_level=reversePower;
-                    t->rf_det_level=meterDbm;
+                    t->rf_det_level=getMeter();
                     t->rf_fwd_level=alexForwardPower;
                     t->rf_rev_level=alexReversePower;
                     min=evaluate(t->rf_min_level,&alex_tx_test_get_result,&alex_tx_test_get_fwd,&alex_tx_test_get_rev);
@@ -288,6 +288,7 @@ fprintf(stderr,"level=%d fwd=%d rev=%d min=%d max=%d\n",level,forwardPower,rever
 * @return
 */
 void alexTxTestStartButtonCallback(GtkWidget* widget,gpointer data) {
+    int i;
     if(testing) {
         // stop the testing sequence
         gtk_timeout_remove(timerId);
@@ -304,6 +305,11 @@ void alexTxTestStartButtonCallback(GtkWidget* widget,gpointer data) {
         setMode(MODE);
         setFilter(FILTER);
 
+        i=0;
+        while(tx_test[i].frequency!=0) {
+            gtk_label_set_text(GTK_LABEL(tx_test[i].levelWidget),"");
+            i++;
+        }
         failures=0;
         gtk_label_set_text(GTK_LABEL(passFail),"");
         

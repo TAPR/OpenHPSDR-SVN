@@ -216,7 +216,7 @@ gint alexRxTest(gpointer data) {
                     //t->rf_det_level=level;
                     //t->rf_fwd_level=forwardPower;
                     //t->rf_rev_level=reversePower;
-                    t->rf_det_level=meterDbm;
+                    t->rf_det_level=getMeter();
                     t->rf_fwd_level=alexForwardPower;
                     t->rf_rev_level=alexReversePower;
                     min=evaluate(t->rf_min_level,&alex_rx_test_get_result,&alex_rx_test_get_fwd,&alex_rx_test_get_rev);
