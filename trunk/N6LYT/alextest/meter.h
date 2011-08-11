@@ -43,5 +43,6 @@ void updateMeter(float sample);
 
 GtkWidget* buildMeterUI();
 void updateMeter(float sample);
+int getMeter();
 void meterSaveState();
 void meterRestoreState();

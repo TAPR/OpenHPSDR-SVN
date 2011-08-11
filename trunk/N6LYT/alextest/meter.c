@@ -371,6 +371,12 @@ void updateMeter(float sample) {
     }
 }
 
+int getMeter() {
+    float val=CalculateRXMeter(0,0,0);
+    val+=multimeterCalibrationOffset + getFilterSizeCalibrationOffset()+preampOffset;
+    return (int)val;   
+}
+
 /* --------------------------------------------------------------------------*/
 /** 
 * @brief Set the meter mode
