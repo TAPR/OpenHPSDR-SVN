@@ -288,6 +288,7 @@ fprintf(stderr,"level=%d fwd=%d rev=%d min=%d max=%d\n",level,forwardPower,rever
 * @return
 */
 void alexRxTestStartButtonCallback(GtkWidget* widget,gpointer data) {
+    int i;
     if(testing) {
         // stop the testing sequence
         gtk_timeout_remove(timerId);
@@ -304,6 +305,11 @@ void alexRxTestStartButtonCallback(GtkWidget* widget,gpointer data) {
         setMode(MODE);
         setFilter(FILTER);
 
+        i=0;
+        while(rx_test[i].frequency!=0) {
+            gtk_label_set_text(GTK_LABEL(rx_test[i].levelWidget),"");
+            i++;
+        }
         failures=0;
         gtk_label_set_text(GTK_LABEL(passFail),"");
         
