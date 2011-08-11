@@ -43,6 +43,7 @@
 #include "soundcard.h"
 #include "ozy.h"
 #include "preamp.h"
+#include "dttsp.h"
 
 GtkWidget* meterFixed;
 GtkWidget* meter;
@@ -374,6 +375,7 @@ void updateMeter(float sample) {
 int getMeter() {
     float val=CalculateRXMeter(0,0,0);
     val+=multimeterCalibrationOffset + getFilterSizeCalibrationOffset()+preampOffset;
+fprintf(stderr,"getMeter: %d\n",(int)val);
     return (int)val;   
 }
 
