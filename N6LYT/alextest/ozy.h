@@ -98,6 +98,7 @@ int pennyLane;
 
 int buffer_size;
 
+void ozy_set_buffer_size(int);
 void ozy_set_metis();
 void ozy_set_interface(char*);
 char* ozy_get_interface();
