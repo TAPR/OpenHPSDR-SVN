@@ -84,17 +84,17 @@ int output_sample_increment=2; // 1=48000 2=96000 4=192000
 
 int buffer_size=BUFFER_SIZE;
 
-float left_input_buffer[BUFFER_SIZE];
-float right_input_buffer[BUFFER_SIZE];
+float* left_input_buffer;
+float* right_input_buffer;
 
-float mic_left_buffer[BUFFER_SIZE];
-float mic_right_buffer[BUFFER_SIZE];
+float* mic_left_buffer;
+float* mic_right_buffer;
 
-float left_output_buffer[BUFFER_SIZE];
-float right_output_buffer[BUFFER_SIZE];
+float* left_output_buffer;
+float* right_output_buffer;
 
-float left_tx_buffer[BUFFER_SIZE];
-float right_tx_buffer[BUFFER_SIZE];
+float* left_tx_buffer;
+float* right_tx_buffer;
 
 int samples=0;
 
@@ -150,6 +150,10 @@ static int sample_count=0;
 
 static int metis=0;
 static char interface[128];
+
+void ozy_set_buffer_size(int size) {
+    buffer_size=size;
+}
 
 void ozy_set_metis() {
     metis=1;
@@ -285,7 +289,7 @@ void process_ozy_input_buffer(char* buffer) {
             if(testing) {
                 mic_left_buffer[samples]=0.0f;
                 mic_right_buffer[samples]=0.0f;
-            } else if(tuning && (mode=modeAM)) {
+            } else if(tuning && (mode==modeAM)) {
                 mic_left_buffer[samples]=0.0f;
                 mic_right_buffer[samples]=0.0f;
             } else {
@@ -333,7 +337,6 @@ void process_ozy_input_buffer(char* buffer) {
                 Audio_Callback (mic_left_buffer,mic_right_buffer,
                                 left_tx_buffer,right_tx_buffer, buffer_size, 1);
 
-
                 if(pennyLane) {
                     gain=1.0;
                 } else {
@@ -350,6 +353,10 @@ void process_ozy_input_buffer(char* buffer) {
                         left_tx_sample=0;
                         right_tx_sample=0;
                     }
+
+//if(tuning && (mode==modeAM) && mox) {
+//    fprintf(stderr,"%d,%d\n",left_tx_sample,right_tx_sample);
+//}
 
                     //audio_stream_put_samples(left_rx_sample,right_rx_sample);
 
@@ -877,6 +884,18 @@ void setLT2208Random(int random) {
 */
 int ozy_init() {
     int rc;
+
+    left_input_buffer=malloc(sizeof(float)*buffer_size);
+    right_input_buffer=malloc(sizeof(float)*buffer_size);
+
+    mic_left_buffer=malloc(sizeof(float)*buffer_size);
+    mic_right_buffer=malloc(sizeof(float)*buffer_size);
+
+    left_output_buffer=malloc(sizeof(float)*buffer_size);
+    right_output_buffer=malloc(sizeof(float)*buffer_size);
+
+    left_tx_buffer=malloc(sizeof(float)*buffer_size);
+    right_tx_buffer=malloc(sizeof(float)*buffer_size);
 
     //
     setSpeed(speed);

@@ -690,6 +690,7 @@ static struct option longOptions[] = {
     {"metis",no_argument, NULL, 'm'},
     {"interface",required_argument, NULL, 'i'},
     {"samples",required_argument, NULL, 'a'},
+    {"buffersize",required_argument, NULL, 'b'},
     {0,0,0,0}
 };
 
@@ -732,6 +733,9 @@ void processCommands(int argc,char* argv[]) {
             case 'a':
                 alex_rx_set_samples(atoi(optarg));
                 alex_tx_set_samples(atoi(optarg));
+                break;
+            case 'b':
+                ozy_set_buffer_size(atoi(optarg));
                 break;
             case '?':
                 fprintf(stderr,"Usage:\n");
