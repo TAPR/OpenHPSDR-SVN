@@ -152,7 +152,11 @@ static int metis=0;
 static char interface[128];
 
 void ozy_set_buffer_size(int size) {
-    buffer_size=size;
+    if(size==32 || size==64 || size==128 || size==256 || size==512 || size==1024 || size==2048) {
+        buffer_size=size;
+    } else {
+        fprintf(stderr,"Error: buffersize %d must be 32|64|128|256|512|1024|2048\n",size);
+    }
 }
 
 void ozy_set_metis() {
@@ -283,6 +287,9 @@ void process_ozy_input_buffer(char* buffer) {
             right_sample_float=(float)right_sample/8388607.0; // 24 bit sample
             mic_sample_float=((float)mic_sample/32767.0f)*micGain; // 16 bit sample
 
+//if(tuning && (mode==modeAM) && mox) {
+//    fprintf(stderr,"%f,%f\n",left_sample_float,right_sample_float);
+//}
             // add to buffer
             left_input_buffer[samples]=left_sample_float;
             right_input_buffer[samples]=right_sample_float;
