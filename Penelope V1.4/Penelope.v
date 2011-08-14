@@ -625,6 +625,7 @@ wire [43:0] xmit_data;
 
 assign xmit_data = {SERIAL,C122_Power_out, C122_AIN1, C122_AIN2};
 
+
 NWire_xmit  #(.DATA_BITS(44), .ICLK_FREQ(122880000), .XCLK_FREQ(122880000), .SEND_FREQ(1000)) 
       ser_no (.irst(C122_rst), .iclk(C122_clk), .xrst(C122_rst), .xclk(C122_clk),
               .xdata(xmit_data), .xreq(1'b1), .xrdy(), .xack(), .dout(A5));

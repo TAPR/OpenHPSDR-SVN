@@ -66,7 +66,7 @@ begin
     bit_cnt   <= 4'd15;         // set bit counter
     if (ADC_address[13:11] == 3'd5)
 		ADC_address <= 16'b0;		// reset ADC address
-	else ADC_address <= ADC_address + 16'b0000_1000_0000_0000;  // increment ADC address
+	 else ADC_address <= ADC_address + 16'b0000_1000_0000_0000;  // increment ADC address
     ADC_state <= 1;
 	end
 	
@@ -118,7 +118,7 @@ begin
 // NOTE: data is from previous address sent! 
   if (SCLK && (bit_cnt <= 11)) begin 	// start capturing data at bit counter = 11
 	case (ADC_address[13:11])
-		0: 	   	temp_6[bit_cnt] <= MISO;   	// capture incoming data
+		0: 	temp_6[bit_cnt] <= MISO;   	// capture incoming data
 		1:		temp_1[bit_cnt] <= MISO;
 		2:		temp_2[bit_cnt] <= MISO;
 		3:		temp_3[bit_cnt] <= MISO;
