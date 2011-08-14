@@ -13,4 +13,6 @@ v1.2  Released  9 Apr 2011 - Reset sequence number sent by Metis if board idle o
 V1.3 Released  14 Apr 2011 - Added sequence number to wide bandscope data.(VK6APH) Changed Atlas bus connections for multiple
                              Mercury boards (K5SO).
 
+V1.4 Released 14 Aug 2011  - Added support for FWD and REV power from Penny(Lane).
+
 
