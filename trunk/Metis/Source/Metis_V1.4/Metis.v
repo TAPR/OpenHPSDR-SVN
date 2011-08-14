@@ -1657,7 +1657,7 @@ begin
     {Penny_serialno, Penny_ALC, FWD, REV} <= #IF_TPD IF_pd;
 end
 
-NWire_rcv  #(.DATA_BITS(44), .ICLK_FREQ(48000000), .XCLK_FREQ(48000000), .SLOWEST_FREQ(500)) 
+NWire_rcv  #(.DATA_BITS(44), .ICLK_FREQ(48000000), .XCLK_FREQ(48000000), .SLOWEST_FREQ(1000)) 
       p_ser (.irst(IF_rst), .iclk(IF_clk), .xrst(IF_rst), .xclk(IF_clk),
              .xrcv_data(IF_pd), .xrcv_rdy(IF_pd_rdy), .xrcv_ack(IF_pd_rdy), .din(ATLAS_A5));
              

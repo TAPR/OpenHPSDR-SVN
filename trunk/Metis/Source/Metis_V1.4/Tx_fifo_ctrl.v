@@ -234,13 +234,13 @@ begin
     begin
       C1_DATA = {4'b0,Penny_ALC[11:8]};
       C2_DATA = Penny_ALC[7:0];
-      C3_DATA = {4'b0, FWD[11:8]}; 	// Forward Power from ADC AIN4 on Penny(Lane)
+      C3_DATA = {4'b0, FWD[11:8]}; 	// Forward Power from ADC AIN1 on Penny(Lane)
       C4_DATA = FWD[7:0]; 			
     end
 
     2:
     begin
-      C1_DATA = {4'b0, REV[11:8]};  // Reverse Power from ADC AIN3 on Penny(Lane)
+      C1_DATA = {4'b0, REV[11:8]};  // Reverse Power from ADC AIN2 on Penny(Lane)
       C2_DATA = REV[7:0];
       C3_DATA = 8'b0;
       C4_DATA = 8'b0;
