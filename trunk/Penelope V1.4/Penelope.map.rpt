@@ -1,5 +1,5 @@
 Analysis & Synthesis report for Penelope
-Sat Aug 13 09:54:52 2011
+Sun Aug 14 20:08:12 2011
 Quartus II Version 10.1 Build 197 01/19/2011 Service Pack 1 SJ Web Edition
 
 
@@ -85,7 +85,7 @@ applicable agreement for further details.
 +------------------------------------------------------------------------------------+
 ; Analysis & Synthesis Summary                                                       ;
 +------------------------------------+-----------------------------------------------+
-; Analysis & Synthesis Status        ; Successful - Sat Aug 13 09:54:52 2011         ;
+; Analysis & Synthesis Status        ; Successful - Sun Aug 14 20:08:12 2011         ;
 ; Quartus II Version                 ; 10.1 Build 197 01/19/2011 SP 1 SJ Web Edition ;
 ; Revision Name                      ; Penelope                                      ;
 ; Top-level Entity Name              ; Penelope                                      ;
@@ -1373,7 +1373,7 @@ Note: In order to hide this table in the UI and the text report file, please set
 +----------------+--------------+
 ; Partition Name ; Elapsed Time ;
 +----------------+--------------+
-; Top            ; 00:00:13     ;
+; Top            ; 00:00:12     ;
 +----------------+--------------+
 
 
@@ -1383,7 +1383,7 @@ Note: In order to hide this table in the UI and the text report file, please set
 Info: *******************************************************************
 Info: Running Quartus II Analysis & Synthesis
     Info: Version 10.1 Build 197 01/19/2011 Service Pack 1 SJ Web Edition
-    Info: Processing started: Sat Aug 13 09:54:33 2011
+    Info: Processing started: Sun Aug 14 20:07:55 2011
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off Penelope -c Penelope
 Info: Found 1 design units, including 1 entities, in source file cpl_cordic.v
     Info: Found entity 1: cpl_cordic
@@ -1526,9 +1526,9 @@ Info: Implemented 5066 device resources after synthesis - the final resource cou
     Info: Implemented 1 PLLs
     Info: Implemented 8 DSP elements
 Info: Quartus II Analysis & Synthesis was successful. 0 errors, 12 warnings
-    Info: Peak virtual memory: 238 megabytes
-    Info: Processing ended: Sat Aug 13 09:54:52 2011
-    Info: Elapsed time: 00:00:19
+    Info: Peak virtual memory: 232 megabytes
+    Info: Processing ended: Sun Aug 14 20:08:12 2011
+    Info: Elapsed time: 00:00:17
     Info: Total CPU time (on all processors): 00:00:17
 
 

@@ -1,5 +1,5 @@
 TimeQuest Timing Analyzer report for Penelope
-Sat Aug 13 09:56:39 2011
+Sun Aug 14 20:09:54 2011
 Quartus II Version 10.1 Build 197 01/19/2011 Service Pack 1 SJ Web Edition
 
 
@@ -131,7 +131,7 @@ Parallel compilation was disabled, but you have multiple processors available. E
 +---------------+--------+--------------------------+
 ; SDC File Path ; Status ; Read at                  ;
 +---------------+--------+--------------------------+
-; Penelope.sdc  ; OK     ; Sat Aug 13 09:56:33 2011 ;
+; Penelope.sdc  ; OK     ; Sun Aug 14 20:09:49 2011 ;
 +---------------+--------+--------------------------+
 
 
@@ -2964,7 +2964,7 @@ No dedicated SERDES Receiver circuitry present in device or used in design
 Info: *******************************************************************
 Info: Running Quartus II TimeQuest Timing Analyzer
     Info: Version 10.1 Build 197 01/19/2011 Service Pack 1 SJ Web Edition
-    Info: Processing started: Sat Aug 13 09:56:31 2011
+    Info: Processing started: Sun Aug 14 20:09:47 2011
 Info: Command: quartus_sta Penelope -c Penelope
 Info: qsta_default_script.tcl version: #4
 Info: Low junction temperature is 0 degrees C
@@ -3034,8 +3034,8 @@ Info: Design is not fully constrained for hold requirements
 Info: Generated suppressed messages file C:/HPSDR/trunk/Penelope V1.4/Penelope.sta.smsg
 Info: Quartus II TimeQuest Timing Analyzer was successful. 0 errors, 1 warning
     Info: Peak virtual memory: 229 megabytes
-    Info: Processing ended: Sat Aug 13 09:56:39 2011
-    Info: Elapsed time: 00:00:08
+    Info: Processing ended: Sun Aug 14 20:09:54 2011
+    Info: Elapsed time: 00:00:07
     Info: Total CPU time (on all processors): 00:00:07
 
 
