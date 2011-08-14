@@ -31,12 +31,15 @@
 			        3 - Add wide band spectrum and on/off enable
 			 May   13 - Added independant serial number for wide bandscope data.
 			 July  29 - Added FWD and REV power from Penny(Lane)
+			 
+			 
+**** Built using Quartus V9.1 sp2 ****
 			         
 
 					  
 			    
 	NOTES:  	  	- Under Settings > Analysis & Synthesis Settings > Verilig HDL Input, select SystemVerilog-2005 so can pass RAM to a module
-					- Spectrum data not presently sent - Atlas C21 not connected
+
 					
 	LEDs  - LED[0] is located at the top of the board
 	

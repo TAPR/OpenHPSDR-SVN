@@ -1,5 +1,5 @@
 Analysis & Synthesis report for Metis
-Sat Jul 30 12:19:03 2011
+Sun Aug 14 17:04:31 2011
 Quartus II Version 9.1 Build 350 03/24/2010 Service Pack 2 SJ Web Edition
 
 
@@ -208,15 +208,15 @@ applicable agreement for further details.
 +-----------------------------------------------------------------------------------+
 ; Analysis & Synthesis Summary                                                      ;
 +------------------------------------+----------------------------------------------+
-; Analysis & Synthesis Status        ; Successful - Sat Jul 30 12:19:03 2011        ;
+; Analysis & Synthesis Status        ; Successful - Sun Aug 14 17:04:30 2011        ;
 ; Quartus II Version                 ; 9.1 Build 350 03/24/2010 SP 2 SJ Web Edition ;
 ; Revision Name                      ; Metis                                        ;
 ; Top-level Entity Name              ; Metis                                        ;
 ; Family                             ; Cyclone III                                  ;
-; Total logic elements               ; 14,660                                       ;
-;     Total combinational functions  ; 11,558                                       ;
-;     Dedicated logic registers      ; 6,675                                        ;
-; Total registers                    ; 6675                                         ;
+; Total logic elements               ; 14,642                                       ;
+;     Total combinational functions  ; 11,540                                       ;
+;     Dedicated logic registers      ; 6,669                                        ;
+; Total registers                    ; 6669                                         ;
 ; Total pins                         ; 67                                           ;
 ; Total virtual pins                 ; 0                                            ;
 ; Total memory bits                  ; 290,816                                      ;
@@ -426,20 +426,20 @@ Parallel compilation was disabled, but you have multiple processors available. E
 +---------------------------------------------+-----------------------------------------------------------------------------------------------+
 ; Resource                                    ; Usage                                                                                         ;
 +---------------------------------------------+-----------------------------------------------------------------------------------------------+
-; Estimated Total logic elements              ; 14,660                                                                                        ;
+; Estimated Total logic elements              ; 14,642                                                                                        ;
 ;                                             ;                                                                                               ;
-; Total combinational functions               ; 11558                                                                                         ;
+; Total combinational functions               ; 11540                                                                                         ;
 ; Logic element usage by number of LUT inputs ;                                                                                               ;
-;     -- 4 input functions                    ; 5602                                                                                          ;
-;     -- 3 input functions                    ; 3403                                                                                          ;
-;     -- <=2 input functions                  ; 2553                                                                                          ;
+;     -- 4 input functions                    ; 5591                                                                                          ;
+;     -- 3 input functions                    ; 3398                                                                                          ;
+;     -- <=2 input functions                  ; 2551                                                                                          ;
 ;                                             ;                                                                                               ;
 ; Logic elements by mode                      ;                                                                                               ;
-;     -- normal mode                          ; 7627                                                                                          ;
-;     -- arithmetic mode                      ; 3931                                                                                          ;
+;     -- normal mode                          ; 7624                                                                                          ;
+;     -- arithmetic mode                      ; 3916                                                                                          ;
 ;                                             ;                                                                                               ;
-; Total registers                             ; 6675                                                                                          ;
-;     -- Dedicated logic registers            ; 6675                                                                                          ;
+; Total registers                             ; 6669                                                                                          ;
+;     -- Dedicated logic registers            ; 6669                                                                                          ;
 ;     -- I/O registers                        ; 0                                                                                             ;
 ;                                             ;                                                                                               ;
 ; I/O pins                                    ; 67                                                                                            ;
@@ -447,8 +447,8 @@ Parallel compilation was disabled, but you have multiple processors available. E
 ; Embedded Multiplier 9-bit elements          ; 8                                                                                             ;
 ; Total PLLs                                  ; 1                                                                                             ;
 ; Maximum fan-out node                        ; PLL_clocks:PLL_inst|altpll:altpll_component|PLL_clocks_altpll:auto_generated|wire_pll1_clk[0] ;
-; Maximum fan-out                             ; 4809                                                                                          ;
-; Total fan-out                               ; 59159                                                                                         ;
+; Maximum fan-out                             ; 4798                                                                                          ;
+; Total fan-out                               ; 59077                                                                                         ;
 ; Average fan-out                             ; 3.21                                                                                          ;
 +---------------------------------------------+-----------------------------------------------------------------------------------------------+
 
@@ -458,7 +458,7 @@ Parallel compilation was disabled, but you have multiple processors available. E
 +----------------------------------------------------------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+--------------+
 ; Compilation Hierarchy Node                                                 ; LC Combinationals ; LC Registers ; Memory Bits ; DSP Elements ; DSP 9x9 ; DSP 18x18 ; Pins ; Virtual Pins ; Full Hierarchy Name                                                                                                                                                                                                           ; Library Name ;
 +----------------------------------------------------------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+--------------+
-; |Metis                                                                     ; 11558 (532)       ; 6675 (579)   ; 290816      ; 8            ; 0       ; 4         ; 67   ; 0            ; |Metis                                                                                                                                                                                                                        ; work         ;
+; |Metis                                                                     ; 11540 (532)       ; 6669 (579)   ; 290816      ; 8            ; 0       ; 4         ; 67   ; 0            ; |Metis                                                                                                                                                                                                                        ; work         ;
 ;    |ASMI_interface:ASMI_int_inst|                                          ; 346 (169)         ; 210 (77)     ; 4096        ; 0            ; 0       ; 0         ; 4    ; 0            ; |Metis|ASMI_interface:ASMI_int_inst                                                                                                                                                                                           ;              ;
 ;       |ASMI:ASMI_inst|                                                     ; 177 (0)           ; 133 (0)      ; 4096        ; 0            ; 0       ; 0         ; 4    ; 0            ; |Metis|ASMI_interface:ASMI_int_inst|ASMI:ASMI_inst                                                                                                                                                                            ;              ;
 ;          |ASMI_altasmi_parallel_cv82:ASMI_altasmi_parallel_cv82_component| ; 177 (101)         ; 133 (72)     ; 4096        ; 0            ; 0       ; 0         ; 4    ; 0            ; |Metis|ASMI_interface:ASMI_int_inst|ASMI:ASMI_inst|ASMI_altasmi_parallel_cv82:ASMI_altasmi_parallel_cv82_component                                                                                                            ;              ;
@@ -510,7 +510,7 @@ Parallel compilation was disabled, but you have multiple processors available. E
 ;          |altsyncram_15h1:auto_generated|                                  ; 0 (0)             ; 0 (0)        ; 65536       ; 0            ; 0       ; 0         ; 0    ; 0            ; |Metis|FIFO:RXF|altsyncram:mem_rtl_0|altsyncram_15h1:auto_generated                                                                                                                                                           ;              ;
 ;    |I2C_Master:I2C_Master_inst|                                            ; 64 (64)           ; 20 (20)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Metis|I2C_Master:I2C_Master_inst                                                                                                                                                                                             ;              ;
 ;    |Led_control:Control_LED0|                                              ; 47 (47)           ; 30 (30)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Metis|Led_control:Control_LED0                                                                                                                                                                                               ; work         ;
-;    |Led_control:Control_LED1|                                              ; 53 (53)           ; 30 (30)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Metis|Led_control:Control_LED1                                                                                                                                                                                               ; work         ;
+;    |Led_control:Control_LED1|                                              ; 54 (54)           ; 30 (30)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Metis|Led_control:Control_LED1                                                                                                                                                                                               ; work         ;
 ;    |Led_flash:Flash_LED10|                                                 ; 33 (33)           ; 25 (25)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Metis|Led_flash:Flash_LED10                                                                                                                                                                                                  ; work         ;
 ;    |Led_flash:Flash_LED11|                                                 ; 34 (34)           ; 25 (25)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Metis|Led_flash:Flash_LED11                                                                                                                                                                                                  ; work         ;
 ;    |Led_flash:Flash_LED1|                                                  ; 33 (33)           ; 25 (25)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Metis|Led_flash:Flash_LED1                                                                                                                                                                                                   ;              ;
@@ -532,7 +532,7 @@ Parallel compilation was disabled, but you have multiple processors available. E
 ;    |NWire_rcv:m_ver2|                                                      ; 405 (405)         ; 149 (149)    ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Metis|NWire_rcv:m_ver2                                                                                                                                                                                                       ; work         ;
 ;    |NWire_rcv:m_ver3|                                                      ; 405 (405)         ; 149 (149)    ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Metis|NWire_rcv:m_ver3                                                                                                                                                                                                       ;              ;
 ;    |NWire_rcv:m_ver4|                                                      ; 405 (405)         ; 149 (149)    ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Metis|NWire_rcv:m_ver4                                                                                                                                                                                                       ;              ;
-;    |NWire_rcv:p_ser|                                                       ; 445 (445)         ; 224 (224)    ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Metis|NWire_rcv:p_ser                                                                                                                                                                                                        ; work         ;
+;    |NWire_rcv:p_ser|                                                       ; 425 (425)         ; 218 (218)    ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Metis|NWire_rcv:p_ser                                                                                                                                                                                                        ; work         ;
 ;    |NWire_xmit:CCxmit|                                                     ; 197 (197)         ; 82 (82)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Metis|NWire_xmit:CCxmit                                                                                                                                                                                                      ; work         ;
 ;    |NWire_xmit:M_LRAudio|                                                  ; 71 (71)           ; 120 (120)    ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Metis|NWire_xmit:M_LRAudio                                                                                                                                                                                                   ; work         ;
 ;    |NWire_xmit:P_IQPWM|                                                    ; 125 (125)         ; 150 (150)    ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Metis|NWire_xmit:P_IQPWM                                                                                                                                                                                                     ; work         ;
@@ -555,7 +555,7 @@ Parallel compilation was disabled, but you have multiple processors available. E
 ;    |PLL_clocks:PLL_inst|                                                   ; 0 (0)             ; 1 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Metis|PLL_clocks:PLL_inst                                                                                                                                                                                                    ;              ;
 ;       |altpll:altpll_component|                                            ; 0 (0)             ; 1 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Metis|PLL_clocks:PLL_inst|altpll:altpll_component                                                                                                                                                                            ;              ;
 ;          |PLL_clocks_altpll:auto_generated|                                ; 0 (0)             ; 1 (1)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Metis|PLL_clocks:PLL_inst|altpll:altpll_component|PLL_clocks_altpll:auto_generated                                                                                                                                           ;              ;
-;    |Rx_MAC:Rx_MAC_inst|                                                    ; 750 (750)         ; 1455 (1455)  ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Metis|Rx_MAC:Rx_MAC_inst                                                                                                                                                                                                     ;              ;
+;    |Rx_MAC:Rx_MAC_inst|                                                    ; 751 (751)         ; 1455 (1455)  ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Metis|Rx_MAC:Rx_MAC_inst                                                                                                                                                                                                     ;              ;
 ;    |SP_fifo:SPF|                                                           ; 104 (0)           ; 154 (0)      ; 65536       ; 0            ; 0       ; 0         ; 0    ; 0            ; |Metis|SP_fifo:SPF                                                                                                                                                                                                            ;              ;
 ;       |dcfifo_mixed_widths:dcfifo_mixed_widths_component|                  ; 104 (0)           ; 154 (0)      ; 65536       ; 0            ; 0       ; 0         ; 0    ; 0            ; |Metis|SP_fifo:SPF|dcfifo_mixed_widths:dcfifo_mixed_widths_component                                                                                                                                                          ;              ;
 ;          |dcfifo_q9l1:auto_generated|                                      ; 104 (20)          ; 154 (40)     ; 65536       ; 0            ; 0       ; 0         ; 0    ; 0            ; |Metis|SP_fifo:SPF|dcfifo_mixed_widths:dcfifo_mixed_widths_component|dcfifo_q9l1:auto_generated                                                                                                                               ;              ;
@@ -1237,33 +1237,36 @@ Note: All cells listed above may not be present at the end of synthesis due to v
 ; MDIO:MDIO_inst|REG_data[5][12]                                                                                                                                                          ; Merged with MDIO:MDIO_inst|REG_data[5][9]                                                                                             ;
 ; MDIO:MDIO_inst|REG_data[5][9]                                                                                                                                                           ; Merged with MDIO:MDIO_inst|REG_data[5][8]                                                                                             ;
 ; MDIO:MDIO_inst|REG_data[5][8]                                                                                                                                                           ; Merged with MDIO:MDIO_inst|REG_data[3][0]                                                                                             ;
-; NWire_rcv:m_ver4|tb_width[17]                                                                                                                                                           ; Merged with NWire_rcv:m_ver4|tb_width[16]                                                                                             ;
 ; NWire_rcv:m_ver3|tb_width[17]                                                                                                                                                           ; Merged with NWire_rcv:m_ver3|tb_width[16]                                                                                             ;
 ; NWire_rcv:m_ver2|tb_width[17]                                                                                                                                                           ; Merged with NWire_rcv:m_ver2|tb_width[16]                                                                                             ;
 ; NWire_rcv:m_ser|tb_width[17]                                                                                                                                                            ; Merged with NWire_rcv:m_ser|tb_width[16]                                                                                              ;
-; NWire_rcv:p_ser|tb_width[17]                                                                                                                                                            ; Merged with NWire_rcv:p_ser|tb_width[16]                                                                                              ;
+; NWire_rcv:p_ser|tb_width[16]                                                                                                                                                            ; Merged with NWire_rcv:p_ser|tb_width[15]                                                                                              ;
 ; NWire_xmit:M_LRAudio|DIFF_CLK.iq0                                                                                                                                                       ; Merged with NWire_xmit:P_IQPWM|DIFF_CLK.iq0                                                                                           ;
 ; NWire_xmit:M_LRAudio|DIFF_CLK.iq1                                                                                                                                                       ; Merged with NWire_xmit:P_IQPWM|DIFF_CLK.iq1                                                                                           ;
 ; NWire_xmit:M_LRAudio|DIFF_CLK.iq2                                                                                                                                                       ; Merged with NWire_xmit:P_IQPWM|DIFF_CLK.iq2                                                                                           ;
-; sp_rcv_ctrl:SPC|wrenable                                                                                                                                                                ; Merged with sp_rcv_ctrl:SPC|state                                                                                                     ;
-; NWire_rcv:SPD|tb_width[11]                                                                                                                                                              ; Merged with NWire_rcv:SPD|tb_width[10]                                                                                                ;
 ; NWire_rcv:MDC[3].M_IQ|tb_width[13]                                                                                                                                                      ; Merged with NWire_rcv:MDC[3].M_IQ|tb_width[12]                                                                                        ;
 ; NWire_rcv:P_MIC|DIFF_CLK.ia0                                                                                                                                                            ; Merged with NWire_rcv:MDC[0].M_IQ|DIFF_CLK.ia0                                                                                        ;
 ; NWire_rcv:P_MIC|DIFF_CLK.ia1                                                                                                                                                            ; Merged with NWire_rcv:MDC[0].M_IQ|DIFF_CLK.ia1                                                                                        ;
 ; ASMI_interface:ASMI_int_inst|ASMI:ASMI_inst|ASMI_altasmi_parallel_cv82:ASMI_altasmi_parallel_cv82_component|end_op_hdlyreg                                                              ; Merged with ASMI_interface:ASMI_int_inst|ASMI:ASMI_inst|ASMI_altasmi_parallel_cv82:ASMI_altasmi_parallel_cv82_component|clr_rstat_reg ;
+; NWire_rcv:m_ver4|tb_width[17]                                                                                                                                                           ; Merged with NWire_rcv:m_ver4|tb_width[16]                                                                                             ;
+; NWire_rcv:SPD|tb_width[11]                                                                                                                                                              ; Merged with NWire_rcv:SPD|tb_width[10]                                                                                                ;
+; NWire_rcv:MDC[0].M_IQ|tb_width[13]                                                                                                                                                      ; Merged with NWire_rcv:MDC[0].M_IQ|tb_width[12]                                                                                        ;
+; NWire_rcv:P_MIC|tb_width[13]                                                                                                                                                            ; Merged with NWire_rcv:P_MIC|tb_width[12]                                                                                              ;
+; sp_rcv_ctrl:SPC|wrenable                                                                                                                                                                ; Merged with sp_rcv_ctrl:SPC|state                                                                                                     ;
+; NWire_rcv:MDC[2].M_IQ|tb_width[13]                                                                                                                                                      ; Merged with NWire_rcv:MDC[2].M_IQ|tb_width[12]                                                                                        ;
 ; NWire_xmit:CCxmit|dly_cnt[0..23]                                                                                                                                                        ; Lost fanout                                                                                                                           ;
 ; NWire_xmit:M_LRAudio|dly_cnt[0..24]                                                                                                                                                     ; Lost fanout                                                                                                                           ;
 ; NWire_rcv:m_ver4|tb_width[16]                                                                                                                                                           ; Stuck at GND due to stuck port data_in                                                                                                ;
 ; NWire_rcv:m_ver3|tb_width[16]                                                                                                                                                           ; Stuck at GND due to stuck port data_in                                                                                                ;
 ; NWire_rcv:m_ver2|tb_width[16]                                                                                                                                                           ; Stuck at GND due to stuck port data_in                                                                                                ;
 ; NWire_rcv:m_ser|tb_width[16]                                                                                                                                                            ; Stuck at GND due to stuck port data_in                                                                                                ;
-; NWire_rcv:p_ser|tb_width[16]                                                                                                                                                            ; Stuck at GND due to stuck port data_in                                                                                                ;
+; NWire_rcv:p_ser|tb_width[15]                                                                                                                                                            ; Stuck at GND due to stuck port data_in                                                                                                ;
 ; NWire_rcv:SPD|tb_width[10]                                                                                                                                                              ; Stuck at GND due to stuck port data_in                                                                                                ;
 ; NWire_rcv:MDC[3].M_IQ|tb_width[12]                                                                                                                                                      ; Stuck at GND due to stuck port data_in                                                                                                ;
-; NWire_rcv:MDC[2].M_IQ|tb_width[12..13]                                                                                                                                                  ; Stuck at GND due to stuck port data_in                                                                                                ;
+; NWire_rcv:MDC[2].M_IQ|tb_width[12]                                                                                                                                                      ; Stuck at GND due to stuck port data_in                                                                                                ;
 ; NWire_rcv:MDC[1].M_IQ|tb_width[12..13]                                                                                                                                                  ; Stuck at GND due to stuck port data_in                                                                                                ;
-; NWire_rcv:MDC[0].M_IQ|tb_width[12..13]                                                                                                                                                  ; Stuck at GND due to stuck port data_in                                                                                                ;
-; NWire_rcv:P_MIC|tb_width[12..13]                                                                                                                                                        ; Stuck at GND due to stuck port data_in                                                                                                ;
+; NWire_rcv:MDC[0].M_IQ|tb_width[12]                                                                                                                                                      ; Stuck at GND due to stuck port data_in                                                                                                ;
+; NWire_rcv:P_MIC|tb_width[12]                                                                                                                                                            ; Stuck at GND due to stuck port data_in                                                                                                ;
 ; Tx_MAC:Tx_MAC_inst|frame[3..7]                                                                                                                                                          ; Stuck at GND due to stuck port data_in                                                                                                ;
 ; NWire_xmit:CCxmit|dly_cnt[24]                                                                                                                                                           ; Merged with NWire_xmit:ser_no|dly_cnt[24]                                                                                             ;
 ; NWire_xmit:M_LRAudio|dly_cnt[25]                                                                                                                                                        ; Merged with NWire_xmit:P_IQPWM|dly_cnt[25]                                                                                            ;
@@ -1437,12 +1440,12 @@ Note: All cells listed above may not be present at the end of synthesis due to v
 +----------------------------------------------+-------+
 ; Statistic                                    ; Value ;
 +----------------------------------------------+-------+
-; Total registers                              ; 6675  ;
-; Number of registers using Synchronous Clear  ; 1289  ;
+; Total registers                              ; 6669  ;
+; Number of registers using Synchronous Clear  ; 1287  ;
 ; Number of registers using Synchronous Load   ; 52    ;
 ; Number of registers using Asynchronous Clear ; 654   ;
 ; Number of registers using Asynchronous Load  ; 0     ;
-; Number of registers using Clock Enable       ; 4363  ;
+; Number of registers using Clock Enable       ; 4358  ;
 ; Number of registers using Preset             ; 0     ;
 +----------------------------------------------+-------+
 
@@ -1530,64 +1533,64 @@ Note: All cells listed above may not be present at the end of synthesis due to v
 ; Multiplexer Inputs ; Bus Width ; Baseline Area ; Area if Restructured ; Saving if Restructured ; Registered ; Example Multiplexer Output                        ;
 +--------------------+-----------+---------------+----------------------+------------------------+------------+---------------------------------------------------+
 ; 3:1                ; 4 bits    ; 8 LEs         ; 4 LEs                ; 4 LEs                  ; Yes        ; |Metis|NWire_rcv:m_ver4|DBrise_cnt[2]             ;
-; 3:1                ; 16 bits   ; 32 LEs        ; 16 LEs               ; 16 LEs                 ; Yes        ; |Metis|NWire_rcv:m_ver4|tb_width[14]              ;
+; 3:1                ; 16 bits   ; 32 LEs        ; 16 LEs               ; 16 LEs                 ; Yes        ; |Metis|NWire_rcv:m_ver4|tb_width[5]               ;
 ; 3:1                ; 4 bits    ; 8 LEs         ; 4 LEs                ; 4 LEs                  ; Yes        ; |Metis|NWire_rcv:m_ver4|data_cnt[3]               ;
-; 3:1                ; 4 bits    ; 8 LEs         ; 4 LEs                ; 4 LEs                  ; Yes        ; |Metis|NWire_rcv:m_ver3|DBrise_cnt[0]             ;
-; 3:1                ; 16 bits   ; 32 LEs        ; 16 LEs               ; 16 LEs                 ; Yes        ; |Metis|NWire_rcv:m_ver3|tb_width[14]              ;
-; 3:1                ; 4 bits    ; 8 LEs         ; 4 LEs                ; 4 LEs                  ; Yes        ; |Metis|NWire_rcv:m_ver3|data_cnt[2]               ;
-; 3:1                ; 4 bits    ; 8 LEs         ; 4 LEs                ; 4 LEs                  ; Yes        ; |Metis|NWire_rcv:m_ver2|DBrise_cnt[0]             ;
-; 3:1                ; 16 bits   ; 32 LEs        ; 16 LEs               ; 16 LEs                 ; Yes        ; |Metis|NWire_rcv:m_ver2|tb_width[4]               ;
-; 3:1                ; 4 bits    ; 8 LEs         ; 4 LEs                ; 4 LEs                  ; Yes        ; |Metis|NWire_rcv:m_ver2|data_cnt[0]               ;
-; 3:1                ; 4 bits    ; 8 LEs         ; 4 LEs                ; 4 LEs                  ; Yes        ; |Metis|NWire_rcv:m_ser|DBrise_cnt[0]              ;
-; 3:1                ; 16 bits   ; 32 LEs        ; 16 LEs               ; 16 LEs                 ; Yes        ; |Metis|NWire_rcv:m_ser|tb_width[13]               ;
-; 3:1                ; 4 bits    ; 8 LEs         ; 4 LEs                ; 4 LEs                  ; Yes        ; |Metis|NWire_rcv:m_ser|data_cnt[2]                ;
+; 3:1                ; 4 bits    ; 8 LEs         ; 4 LEs                ; 4 LEs                  ; Yes        ; |Metis|NWire_rcv:m_ver3|DBrise_cnt[2]             ;
+; 3:1                ; 16 bits   ; 32 LEs        ; 16 LEs               ; 16 LEs                 ; Yes        ; |Metis|NWire_rcv:m_ver3|tb_width[5]               ;
+; 3:1                ; 4 bits    ; 8 LEs         ; 4 LEs                ; 4 LEs                  ; Yes        ; |Metis|NWire_rcv:m_ver3|data_cnt[0]               ;
+; 3:1                ; 4 bits    ; 8 LEs         ; 4 LEs                ; 4 LEs                  ; Yes        ; |Metis|NWire_rcv:m_ver2|DBrise_cnt[3]             ;
+; 3:1                ; 16 bits   ; 32 LEs        ; 16 LEs               ; 16 LEs                 ; Yes        ; |Metis|NWire_rcv:m_ver2|tb_width[5]               ;
+; 3:1                ; 4 bits    ; 8 LEs         ; 4 LEs                ; 4 LEs                  ; Yes        ; |Metis|NWire_rcv:m_ver2|data_cnt[1]               ;
+; 3:1                ; 4 bits    ; 8 LEs         ; 4 LEs                ; 4 LEs                  ; Yes        ; |Metis|NWire_rcv:m_ser|DBrise_cnt[3]              ;
+; 3:1                ; 16 bits   ; 32 LEs        ; 16 LEs               ; 16 LEs                 ; Yes        ; |Metis|NWire_rcv:m_ser|tb_width[6]                ;
+; 3:1                ; 4 bits    ; 8 LEs         ; 4 LEs                ; 4 LEs                  ; Yes        ; |Metis|NWire_rcv:m_ser|data_cnt[0]                ;
 ; 3:1                ; 6 bits    ; 12 LEs        ; 6 LEs                ; 6 LEs                  ; Yes        ; |Metis|NWire_rcv:p_ser|DBrise_cnt[4]              ;
-; 3:1                ; 16 bits   ; 32 LEs        ; 16 LEs               ; 16 LEs                 ; Yes        ; |Metis|NWire_rcv:p_ser|tb_width[10]               ;
-; 3:1                ; 6 bits    ; 12 LEs        ; 6 LEs                ; 6 LEs                  ; Yes        ; |Metis|NWire_rcv:p_ser|data_cnt[1]                ;
-; 3:1                ; 5 bits    ; 10 LEs        ; 5 LEs                ; 5 LEs                  ; Yes        ; |Metis|NWire_rcv:SPD|DBrise_cnt[0]                ;
+; 3:1                ; 15 bits   ; 30 LEs        ; 15 LEs               ; 15 LEs                 ; Yes        ; |Metis|NWire_rcv:p_ser|tb_width[14]               ;
+; 3:1                ; 6 bits    ; 12 LEs        ; 6 LEs                ; 6 LEs                  ; Yes        ; |Metis|NWire_rcv:p_ser|data_cnt[5]                ;
+; 3:1                ; 5 bits    ; 10 LEs        ; 5 LEs                ; 5 LEs                  ; Yes        ; |Metis|NWire_rcv:SPD|DBrise_cnt[4]                ;
 ; 3:1                ; 10 bits   ; 20 LEs        ; 10 LEs               ; 10 LEs                 ; Yes        ; |Metis|NWire_rcv:SPD|tb_width[9]                  ;
-; 3:1                ; 4 bits    ; 8 LEs         ; 4 LEs                ; 4 LEs                  ; Yes        ; |Metis|NWire_rcv:SPD|data_cnt[2]                  ;
-; 3:1                ; 3 bits    ; 6 LEs         ; 3 LEs                ; 3 LEs                  ; Yes        ; |Metis|Tx_fifo_ctrl:TXFC|IF_chan[1]               ;
-; 3:1                ; 6 bits    ; 12 LEs        ; 6 LEs                ; 6 LEs                  ; Yes        ; |Metis|NWire_rcv:MDC[3].M_IQ|DBrise_cnt[1]        ;
-; 3:1                ; 12 bits   ; 24 LEs        ; 12 LEs               ; 12 LEs                 ; Yes        ; |Metis|NWire_rcv:MDC[3].M_IQ|tb_width[8]          ;
-; 3:1                ; 6 bits    ; 12 LEs        ; 6 LEs                ; 6 LEs                  ; Yes        ; |Metis|NWire_rcv:MDC[3].M_IQ|data_cnt[1]          ;
-; 3:1                ; 6 bits    ; 12 LEs        ; 6 LEs                ; 6 LEs                  ; Yes        ; |Metis|NWire_rcv:MDC[2].M_IQ|DBrise_cnt[3]        ;
-; 3:1                ; 12 bits   ; 24 LEs        ; 12 LEs               ; 12 LEs                 ; Yes        ; |Metis|NWire_rcv:MDC[2].M_IQ|tb_width[2]          ;
-; 3:1                ; 6 bits    ; 12 LEs        ; 6 LEs                ; 6 LEs                  ; Yes        ; |Metis|NWire_rcv:MDC[2].M_IQ|data_cnt[0]          ;
-; 3:1                ; 6 bits    ; 12 LEs        ; 6 LEs                ; 6 LEs                  ; Yes        ; |Metis|NWire_rcv:MDC[1].M_IQ|DBrise_cnt[0]        ;
-; 3:1                ; 12 bits   ; 24 LEs        ; 12 LEs               ; 12 LEs                 ; Yes        ; |Metis|NWire_rcv:MDC[1].M_IQ|tb_width[8]          ;
-; 3:1                ; 6 bits    ; 12 LEs        ; 6 LEs                ; 6 LEs                  ; Yes        ; |Metis|NWire_rcv:MDC[1].M_IQ|data_cnt[2]          ;
-; 3:1                ; 6 bits    ; 12 LEs        ; 6 LEs                ; 6 LEs                  ; Yes        ; |Metis|NWire_rcv:MDC[0].M_IQ|DBrise_cnt[0]        ;
-; 3:1                ; 12 bits   ; 24 LEs        ; 12 LEs               ; 12 LEs                 ; Yes        ; |Metis|NWire_rcv:MDC[0].M_IQ|tb_width[6]          ;
+; 3:1                ; 4 bits    ; 8 LEs         ; 4 LEs                ; 4 LEs                  ; Yes        ; |Metis|NWire_rcv:SPD|data_cnt[1]                  ;
+; 3:1                ; 3 bits    ; 6 LEs         ; 3 LEs                ; 3 LEs                  ; Yes        ; |Metis|Tx_fifo_ctrl:TXFC|IF_chan[2]               ;
+; 3:1                ; 6 bits    ; 12 LEs        ; 6 LEs                ; 6 LEs                  ; Yes        ; |Metis|NWire_rcv:MDC[3].M_IQ|DBrise_cnt[3]        ;
+; 3:1                ; 12 bits   ; 24 LEs        ; 12 LEs               ; 12 LEs                 ; Yes        ; |Metis|NWire_rcv:MDC[3].M_IQ|tb_width[2]          ;
+; 3:1                ; 6 bits    ; 12 LEs        ; 6 LEs                ; 6 LEs                  ; Yes        ; |Metis|NWire_rcv:MDC[3].M_IQ|data_cnt[4]          ;
+; 3:1                ; 6 bits    ; 12 LEs        ; 6 LEs                ; 6 LEs                  ; Yes        ; |Metis|NWire_rcv:MDC[2].M_IQ|DBrise_cnt[4]        ;
+; 3:1                ; 12 bits   ; 24 LEs        ; 12 LEs               ; 12 LEs                 ; Yes        ; |Metis|NWire_rcv:MDC[2].M_IQ|tb_width[6]          ;
+; 3:1                ; 6 bits    ; 12 LEs        ; 6 LEs                ; 6 LEs                  ; Yes        ; |Metis|NWire_rcv:MDC[2].M_IQ|data_cnt[5]          ;
+; 3:1                ; 6 bits    ; 12 LEs        ; 6 LEs                ; 6 LEs                  ; Yes        ; |Metis|NWire_rcv:MDC[1].M_IQ|DBrise_cnt[4]        ;
+; 3:1                ; 12 bits   ; 24 LEs        ; 12 LEs               ; 12 LEs                 ; Yes        ; |Metis|NWire_rcv:MDC[1].M_IQ|tb_width[0]          ;
+; 3:1                ; 6 bits    ; 12 LEs        ; 6 LEs                ; 6 LEs                  ; Yes        ; |Metis|NWire_rcv:MDC[1].M_IQ|data_cnt[4]          ;
+; 3:1                ; 6 bits    ; 12 LEs        ; 6 LEs                ; 6 LEs                  ; Yes        ; |Metis|NWire_rcv:MDC[0].M_IQ|DBrise_cnt[5]        ;
+; 3:1                ; 12 bits   ; 24 LEs        ; 12 LEs               ; 12 LEs                 ; Yes        ; |Metis|NWire_rcv:MDC[0].M_IQ|tb_width[5]          ;
 ; 3:1                ; 6 bits    ; 12 LEs        ; 6 LEs                ; 6 LEs                  ; Yes        ; |Metis|NWire_rcv:MDC[0].M_IQ|data_cnt[1]          ;
-; 3:1                ; 5 bits    ; 10 LEs        ; 5 LEs                ; 5 LEs                  ; Yes        ; |Metis|NWire_rcv:P_MIC|DBrise_cnt[4]              ;
-; 3:1                ; 12 bits   ; 24 LEs        ; 12 LEs               ; 12 LEs                 ; Yes        ; |Metis|NWire_rcv:P_MIC|tb_width[11]               ;
-; 3:1                ; 4 bits    ; 8 LEs         ; 4 LEs                ; 4 LEs                  ; Yes        ; |Metis|NWire_rcv:P_MIC|data_cnt[3]                ;
-; 3:1                ; 13 bits   ; 26 LEs        ; 13 LEs               ; 13 LEs                 ; Yes        ; |Metis|IF_bleed_cnt[12]                           ;
+; 3:1                ; 5 bits    ; 10 LEs        ; 5 LEs                ; 5 LEs                  ; Yes        ; |Metis|NWire_rcv:P_MIC|DBrise_cnt[1]              ;
+; 3:1                ; 12 bits   ; 24 LEs        ; 12 LEs               ; 12 LEs                 ; Yes        ; |Metis|NWire_rcv:P_MIC|tb_width[3]                ;
+; 3:1                ; 4 bits    ; 8 LEs         ; 4 LEs                ; 4 LEs                  ; Yes        ; |Metis|NWire_rcv:P_MIC|data_cnt[0]                ;
+; 3:1                ; 13 bits   ; 26 LEs        ; 13 LEs               ; 13 LEs                 ; Yes        ; |Metis|IF_bleed_cnt[1]                            ;
 ; 3:1                ; 18 bits   ; 36 LEs        ; 18 LEs               ; 18 LEs                 ; Yes        ; |Metis|NWire_rcv:m_ver4|tb_cnt[8]                 ;
-; 3:1                ; 18 bits   ; 36 LEs        ; 18 LEs               ; 18 LEs                 ; Yes        ; |Metis|NWire_rcv:m_ver3|tb_cnt[8]                 ;
-; 3:1                ; 18 bits   ; 36 LEs        ; 18 LEs               ; 18 LEs                 ; Yes        ; |Metis|NWire_rcv:m_ver2|tb_cnt[17]                ;
-; 3:1                ; 18 bits   ; 36 LEs        ; 18 LEs               ; 18 LEs                 ; Yes        ; |Metis|NWire_rcv:m_ser|tb_cnt[6]                  ;
-; 3:1                ; 18 bits   ; 36 LEs        ; 18 LEs               ; 18 LEs                 ; Yes        ; |Metis|NWire_rcv:p_ser|tb_cnt[13]                 ;
-; 3:1                ; 12 bits   ; 24 LEs        ; 12 LEs               ; 12 LEs                 ; Yes        ; |Metis|NWire_rcv:SPD|tb_cnt[10]                   ;
-; 3:1                ; 14 bits   ; 28 LEs        ; 14 LEs               ; 14 LEs                 ; Yes        ; |Metis|NWire_rcv:MDC[3].M_IQ|tb_cnt[13]           ;
-; 3:1                ; 14 bits   ; 28 LEs        ; 14 LEs               ; 14 LEs                 ; Yes        ; |Metis|NWire_rcv:MDC[2].M_IQ|tb_cnt[0]            ;
-; 3:1                ; 14 bits   ; 28 LEs        ; 14 LEs               ; 14 LEs                 ; Yes        ; |Metis|NWire_rcv:MDC[1].M_IQ|tb_cnt[11]           ;
-; 3:1                ; 14 bits   ; 28 LEs        ; 14 LEs               ; 14 LEs                 ; Yes        ; |Metis|NWire_rcv:MDC[0].M_IQ|tb_cnt[10]           ;
+; 3:1                ; 18 bits   ; 36 LEs        ; 18 LEs               ; 18 LEs                 ; Yes        ; |Metis|NWire_rcv:m_ver3|tb_cnt[9]                 ;
+; 3:1                ; 18 bits   ; 36 LEs        ; 18 LEs               ; 18 LEs                 ; Yes        ; |Metis|NWire_rcv:m_ver2|tb_cnt[11]                ;
+; 3:1                ; 18 bits   ; 36 LEs        ; 18 LEs               ; 18 LEs                 ; Yes        ; |Metis|NWire_rcv:m_ser|tb_cnt[4]                  ;
+; 3:1                ; 17 bits   ; 34 LEs        ; 17 LEs               ; 17 LEs                 ; Yes        ; |Metis|NWire_rcv:p_ser|tb_cnt[6]                  ;
+; 3:1                ; 12 bits   ; 24 LEs        ; 12 LEs               ; 12 LEs                 ; Yes        ; |Metis|NWire_rcv:SPD|tb_cnt[0]                    ;
+; 3:1                ; 14 bits   ; 28 LEs        ; 14 LEs               ; 14 LEs                 ; Yes        ; |Metis|NWire_rcv:MDC[3].M_IQ|tb_cnt[8]            ;
+; 3:1                ; 14 bits   ; 28 LEs        ; 14 LEs               ; 14 LEs                 ; Yes        ; |Metis|NWire_rcv:MDC[2].M_IQ|tb_cnt[2]            ;
+; 3:1                ; 14 bits   ; 28 LEs        ; 14 LEs               ; 14 LEs                 ; Yes        ; |Metis|NWire_rcv:MDC[1].M_IQ|tb_cnt[13]           ;
+; 3:1                ; 14 bits   ; 28 LEs        ; 14 LEs               ; 14 LEs                 ; Yes        ; |Metis|NWire_rcv:MDC[0].M_IQ|tb_cnt[4]            ;
 ; 3:1                ; 14 bits   ; 28 LEs        ; 14 LEs               ; 14 LEs                 ; Yes        ; |Metis|NWire_rcv:P_MIC|tb_cnt[3]                  ;
-; 3:1                ; 4 bits    ; 8 LEs         ; 4 LEs                ; 4 LEs                  ; Yes        ; |Metis|Tx_MAC:Tx_MAC_inst|sync_TD[3]              ;
+; 3:1                ; 4 bits    ; 8 LEs         ; 4 LEs                ; 4 LEs                  ; Yes        ; |Metis|Tx_MAC:Tx_MAC_inst|sync_TD[2]              ;
 ; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |Metis|Tx_MAC:Tx_MAC_inst|Tx_fifo_rdreq           ;
-; 3:1                ; 7 bits    ; 14 LEs        ; 7 LEs                ; 7 LEs                  ; Yes        ; |Metis|NWire_xmit:ser_no|id[0]                    ;
-; 3:1                ; 31 bits   ; 62 LEs        ; 31 LEs               ; 31 LEs                 ; Yes        ; |Metis|NWire_xmit:P_IQPWM|id[4]                   ;
-; 3:1                ; 27 bits   ; 54 LEs        ; 27 LEs               ; 27 LEs                 ; Yes        ; |Metis|NWire_xmit:CCxmit|id[1]                    ;
-; 3:1                ; 31 bits   ; 62 LEs        ; 31 LEs               ; 31 LEs                 ; Yes        ; |Metis|NWire_xmit:M_LRAudio|id[8]                 ;
-; 3:1                ; 25 bits   ; 50 LEs        ; 25 LEs               ; 25 LEs                 ; Yes        ; |Metis|delay[16]                                  ;
-; 3:1                ; 72 bits   ; 144 LEs       ; 72 LEs               ; 72 LEs                 ; Yes        ; |Metis|NWire_rcv:m_ver4|DB_LEN[3][14]             ;
-; 3:1                ; 72 bits   ; 144 LEs       ; 72 LEs               ; 72 LEs                 ; Yes        ; |Metis|NWire_rcv:m_ver3|DB_LEN[2][17]             ;
-; 3:1                ; 72 bits   ; 144 LEs       ; 72 LEs               ; 72 LEs                 ; Yes        ; |Metis|NWire_rcv:m_ver2|DB_LEN[3][0]              ;
-; 3:1                ; 72 bits   ; 144 LEs       ; 72 LEs               ; 72 LEs                 ; Yes        ; |Metis|NWire_rcv:m_ser|DB_LEN[1][4]               ;
-; 3:1                ; 72 bits   ; 144 LEs       ; 72 LEs               ; 72 LEs                 ; Yes        ; |Metis|NWire_rcv:p_ser|DB_LEN[3][14]              ;
-; 3:1                ; 48 bits   ; 96 LEs        ; 48 LEs               ; 48 LEs                 ; Yes        ; |Metis|NWire_rcv:SPD|DB_LEN[3][0]                 ;
+; 3:1                ; 7 bits    ; 14 LEs        ; 7 LEs                ; 7 LEs                  ; Yes        ; |Metis|NWire_xmit:ser_no|id[3]                    ;
+; 3:1                ; 31 bits   ; 62 LEs        ; 31 LEs               ; 31 LEs                 ; Yes        ; |Metis|NWire_xmit:P_IQPWM|id[3]                   ;
+; 3:1                ; 27 bits   ; 54 LEs        ; 27 LEs               ; 27 LEs                 ; Yes        ; |Metis|NWire_xmit:CCxmit|id[3]                    ;
+; 3:1                ; 31 bits   ; 62 LEs        ; 31 LEs               ; 31 LEs                 ; Yes        ; |Metis|NWire_xmit:M_LRAudio|id[25]                ;
+; 3:1                ; 25 bits   ; 50 LEs        ; 25 LEs               ; 25 LEs                 ; Yes        ; |Metis|delay[20]                                  ;
+; 3:1                ; 72 bits   ; 144 LEs       ; 72 LEs               ; 72 LEs                 ; Yes        ; |Metis|NWire_rcv:m_ver4|DB_LEN[2][9]              ;
+; 3:1                ; 72 bits   ; 144 LEs       ; 72 LEs               ; 72 LEs                 ; Yes        ; |Metis|NWire_rcv:m_ver3|DB_LEN[0][9]              ;
+; 3:1                ; 72 bits   ; 144 LEs       ; 72 LEs               ; 72 LEs                 ; Yes        ; |Metis|NWire_rcv:m_ver2|DB_LEN[0][1]              ;
+; 3:1                ; 72 bits   ; 144 LEs       ; 72 LEs               ; 72 LEs                 ; Yes        ; |Metis|NWire_rcv:m_ser|DB_LEN[0][1]               ;
+; 3:1                ; 68 bits   ; 136 LEs       ; 68 LEs               ; 68 LEs                 ; Yes        ; |Metis|NWire_rcv:p_ser|DB_LEN[3][4]               ;
+; 3:1                ; 48 bits   ; 96 LEs        ; 48 LEs               ; 48 LEs                 ; Yes        ; |Metis|NWire_rcv:SPD|DB_LEN[2][10]                ;
 ; 3:1                ; 56 bits   ; 112 LEs       ; 56 LEs               ; 56 LEs                 ; Yes        ; |Metis|NWire_rcv:MDC[3].M_IQ|DB_LEN[3][10]        ;
 ; 3:1                ; 56 bits   ; 112 LEs       ; 56 LEs               ; 56 LEs                 ; Yes        ; |Metis|NWire_rcv:MDC[2].M_IQ|DB_LEN[2][5]         ;
 ; 3:1                ; 56 bits   ; 112 LEs       ; 56 LEs               ; 56 LEs                 ; Yes        ; |Metis|NWire_rcv:MDC[1].M_IQ|DB_LEN[3][5]         ;
@@ -1605,8 +1608,8 @@ Note: All cells listed above may not be present at the end of synthesis due to v
 ; 3:1                ; 48 bits   ; 96 LEs        ; 48 LEs               ; 48 LEs                 ; Yes        ; |Metis|NWire_rcv:MDC[1].M_IQ|rdata[17]            ;
 ; 3:1                ; 48 bits   ; 96 LEs        ; 48 LEs               ; 48 LEs                 ; Yes        ; |Metis|NWire_rcv:MDC[2].M_IQ|rdata[27]            ;
 ; 3:1                ; 48 bits   ; 96 LEs        ; 48 LEs               ; 48 LEs                 ; Yes        ; |Metis|NWire_rcv:MDC[3].M_IQ|rdata[3]             ;
-; 3:1                ; 16 bits   ; 32 LEs        ; 16 LEs               ; 16 LEs                 ; Yes        ; |Metis|NWire_rcv:P_MIC|rdata[4]                   ;
-; 3:1                ; 16 bits   ; 32 LEs        ; 16 LEs               ; 16 LEs                 ; Yes        ; |Metis|NWire_rcv:SPD|rdata[13]                    ;
+; 3:1                ; 16 bits   ; 32 LEs        ; 16 LEs               ; 16 LEs                 ; Yes        ; |Metis|NWire_rcv:P_MIC|rdata[2]                   ;
+; 3:1                ; 16 bits   ; 32 LEs        ; 16 LEs               ; 16 LEs                 ; Yes        ; |Metis|NWire_rcv:SPD|rdata[12]                    ;
 ; 3:1                ; 24 bits   ; 48 LEs        ; 24 LEs               ; 24 LEs                 ; Yes        ; |Metis|NWire_xmit:ser_no|dly_cnt[21]              ;
 ; 3:1                ; 25 bits   ; 50 LEs        ; 25 LEs               ; 25 LEs                 ; Yes        ; |Metis|NWire_xmit:P_IQPWM|dly_cnt[13]             ;
 ; 4:1                ; 3 bits    ; 6 LEs         ; 6 LEs                ; 0 LEs                  ; Yes        ; |Metis|Tx_MAC:Tx_MAC_inst|frame[1]                ;
@@ -3231,7 +3234,7 @@ Note: In order to hide this table in the UI and the text report file, please set
 ; Parameter Name ; Value    ; Type                             ;
 +----------------+----------+----------------------------------+
 ; DATA_BITS      ; 44       ; Signed Integer                   ;
-; SLOWEST_FREQ   ; 500      ; Signed Integer                   ;
+; SLOWEST_FREQ   ; 1000     ; Signed Integer                   ;
 ; ICLK_FREQ      ; 48000000 ; Signed Integer                   ;
 ; XCLK_FREQ      ; 48000000 ; Signed Integer                   ;
 ; TPD            ; 1        ; Signed Integer                   ;
@@ -3934,7 +3937,7 @@ Note: In order to hide this table in the UI and the text report file, please set
 Info: *******************************************************************
 Info: Running Quartus II Analysis & Synthesis
     Info: Version 9.1 Build 350 03/24/2010 Service Pack 2 SJ Web Edition
-    Info: Processing started: Sat Jul 30 12:17:07 2011
+    Info: Processing started: Sun Aug 14 17:02:34 2011
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off Metis -c Metis
 Info: Found 1 design units, including 1 entities, in source file sp_rcv_ctrl.v
     Info: Found entity 1: sp_rcv_ctrl
@@ -4627,19 +4630,19 @@ Info: Generated suppressed messages file C:/HPSDR/trunk/Metis/Source/Metis_V1.4/
 Warning: Design contains 2 input pin(s) that do not drive logic
     Warning (15610): No output dependent on input pin "PHY_INT_N"
     Warning (15610): No output dependent on input pin "CLK_25MHZ"
-Info: Implemented 14894 device resources after synthesis - the final resource count might be different
+Info: Implemented 14876 device resources after synthesis - the final resource count might be different
     Info: Implemented 29 input pins
     Info: Implemented 37 output pins
     Info: Implemented 1 bidirectional pins
-    Info: Implemented 14754 logic cells
+    Info: Implemented 14736 logic cells
     Info: Implemented 64 RAM segments
     Info: Implemented 1 PLLs
     Info: Implemented 8 DSP elements
 Info: Quartus II Analysis & Synthesis was successful. 0 errors, 38 warnings
-    Info: Peak virtual memory: 235 megabytes
-    Info: Processing ended: Sat Jul 30 12:19:03 2011
-    Info: Elapsed time: 00:01:56
-    Info: Total CPU time (on all processors): 00:01:55
+    Info: Peak virtual memory: 236 megabytes
+    Info: Processing ended: Sun Aug 14 17:04:31 2011
+    Info: Elapsed time: 00:01:57
+    Info: Total CPU time (on all processors): 00:01:54
 
 
 +------------------------------------------+
