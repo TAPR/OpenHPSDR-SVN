@@ -4,10 +4,10 @@ JedecChain;
 	DefaultMfr(6E);
 
 	P ActionCode(Cfg)
-		Device PartName(EP2C8Q208) Path("C:/HPSDR/trunk/Penelope V1.4/") File("Penelope.sof") MfrSpec(OpMask(1));
+		Device PartName(EPCS4) Path("C:/HPSDR/trunk/Penelope V1.4/") File("Penelope.pof") MfrSpec(OpMask(1) Child_OpMask(1 1));
 
 ChainEnd;
 
 AlteraBegin;
-	ChainType(JTAG);
+	ChainType(asc);
 AlteraEnd;
