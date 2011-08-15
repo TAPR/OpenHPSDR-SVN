@@ -24,19 +24,16 @@
 // 
 // This class provides access to FX2 routines to control an SDR1k connected to the 25 pin port on Ozy 
 // 
-using System;
-using System.Runtime.CompilerServices;
-using System.Threading; 
-using HPSDR_USB_LIB_V1;
 
 namespace PowerSDR
 {
+    using System;
+    using System.Runtime.CompilerServices;
+    using System.Threading;
+    using HPSDR_USB_LIB_V1;
 
 	public class OzySDR1kControl
 	{
-
-
-
 		// the following set of declarations MUST match the values used in the FX2 code - hpsdr_commands.h 
 		public static readonly byte VRQ_SDR1K_CTL = 0x0d; 
 		// private static readonly byte SDR1KCTRL_SET_DATA_REG = 0x1; 
@@ -67,8 +64,7 @@ namespace PowerSDR
 		{
 		
 		}
-
-		
+	
 		private int Open(string appName, uint config) { return 0; }
 		public static int Close() { return 0; }
 
@@ -152,9 +148,6 @@ namespace PowerSDR
 			} 
 			return bits_out; 
 		}
-
-		
-
 
 		[MethodImpl(MethodImplOptions.Synchronized)]
 		private int get_status_port() 

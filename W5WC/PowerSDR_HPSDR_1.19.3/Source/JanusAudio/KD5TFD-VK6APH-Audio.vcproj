@@ -222,6 +222,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\Ozyutils.c"
+				>
+			</File>
+			<File
 				RelativePath=".\PowerSDR-Interface.c"
 				>
 			</File>
@@ -261,6 +265,18 @@
 			</File>
 			<File
 				RelativePath=".\nanotimer.h"
+				>
+			</File>
+			<File
+				RelativePath=".\Ozycommands.h"
+				>
+			</File>
+			<File
+				RelativePath=".\Ozydefs.h"
+				>
+			</File>
+			<File
+				RelativePath=".\Ozyutils.h"
 				>
 			</File>
 			<File

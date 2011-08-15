@@ -22,13 +22,15 @@
 
 #include <stdio.h> 
 #include "private.h"
-#include <usb.h> 
+#include "Ozyutils.h"
+//#include <usb.h> 
+//#include <time.h>
 
-#define OZY_PID (0x0007) 
-#define OZY_VID (0xfffe) 
+//#define OZY_PID (0x0007) 
+//#define OZY_VID (0xfffe) 
 
 /* IO Timeout - in msecs */ 
-#define OZY_IO_TIMEOUT (300) 
+//#define OZY_IO_TIMEOUT (300) 
 
 // returns non zero if devp match vid and pid passed 
 int doesDevMatchVIDPID(struct usb_device *devp, int vid, int pid) { 
@@ -37,7 +39,6 @@ int doesDevMatchVIDPID(struct usb_device *devp, int vid, int pid) {
 	}
 	return 0; 
 } 
-
 
 struct usb_device *findOzyFromDevice(struct usb_device *devp) { 
 	int i; 
@@ -56,7 +57,6 @@ struct usb_device *findOzyFromDevice(struct usb_device *devp) {
 	return NULL; 
 } 
 
-
 struct usb_device *findOzyFromDevices(struct usb_device *devp) { 
 	struct usb_device *dp; 
 	while ( devp != NULL ) { 
@@ -68,8 +68,6 @@ struct usb_device *findOzyFromDevices(struct usb_device *devp) {
 	} 
 	return NULL; 
 }
-
-
 
 struct usb_device *findOzy(struct usb_bus *busp) { 
 	struct usb_bus *bp; 
@@ -90,7 +88,6 @@ int OzyUSBinitialized = 0;
 
 struct OzyHandle *SavedOzyh = NULL;
 int SavedOzyHandleUseCount = 0;  
-
 
 /* 
  * Returns !0 if Ozy found attached to bus, 0 if not attached 
@@ -116,8 +113,6 @@ KD5TFDVK6APHAUDIO_API int IsOzyAttached(void) {
 	/* else */ 
 	return 1; 
 }
-
-
 
 struct OzyHandle *internalOzyOpen(void)
 {
@@ -195,7 +190,6 @@ struct OzyHandle *internalOzyOpen(void)
 		fprintf(stdout, "warning: usb_clear_halt on ep 0x2 failed: rc=%d\n", rc); fflush(stdout); 
 	} 
 
-
 	/* if we get here all is well - device is open and claimed */ 
 	ozyh->devp = ozydevp; 
 	ozyh->h = ozyusbh; 
@@ -221,8 +215,6 @@ KD5TFDVK6APHAUDIO_API struct OzyHandle *OzyOpen(void) {
 	return SavedOzyh; 	 
 }  
 
-
-
 void internalOzyClose(struct OzyHandle *h)
 {
 	usb_release_interface(h->h, 0x0); 
@@ -230,7 +222,6 @@ void internalOzyClose(struct OzyHandle *h)
 	free(h); 
 	return; 
 }
-
 
 KD5TFDVK6APHAUDIO_API void OzyClose(struct OzyHandle *h) {
 	//!!fixme -- need mutex 
@@ -249,11 +240,6 @@ KD5TFDVK6APHAUDIO_API void OzyClose(struct OzyHandle *h) {
     return; 
 }
 
-
-
-
-
-
 ///////////////////////////////////////////////////
 // USB functions to send and receive bulk packets
 KD5TFDVK6APHAUDIO_API int OzyBulkWrite(struct OzyHandle *h, int ep, void* buffer, int buffersize)
@@ -263,10 +249,130 @@ KD5TFDVK6APHAUDIO_API int OzyBulkWrite(struct OzyHandle *h, int ep, void* buffer
 	return rc; 	
 }
 
-
 KD5TFDVK6APHAUDIO_API int  OzyBulkRead(struct OzyHandle *h, int ep, void* buffer, int buffersize)
 { 
 	int rc; 
 	rc = usb_bulk_read(h->h, ep, (char *)buffer,  buffersize, OZY_IO_TIMEOUT);
 	return rc; 
 }
+
+KD5TFDVK6APHAUDIO_API int LoadFirmware(char *filename) {
+    int myvid = OZY_VID;
+    int mypid = OZY_PID;
+	  
+    usb_dev_handle *hdev = NULL;
+    struct usb_bus *bus = NULL;
+    struct usb_device *dev = NULL;
+    
+    usb_init();
+    usb_find_busses();
+    usb_find_devices();
+    dev = NULL;
+    bus = NULL;
+	
+    for (bus = usb_get_busses(); bus; bus = bus->next)
+    {
+        for (dev = bus->devices; dev; dev = dev->next)
+        {
+			//sleep(1);
+            if (dev->descriptor.idVendor == myvid 
+                    && dev->descriptor.idProduct == mypid)
+            {
+				hdev = usb_open(dev);
+				break;
+            }
+        }
+    }
+    
+    if(!hdev) {
+        printf("error: did not find usb device 0x%X 0x%X\n", myvid, mypid);	
+        return -1;
+    } 
+	else {
+		printf("found and opened usb device\n");		
+    }
+    
+    // RESET CPU
+    if (Reset_CPU(hdev, 1) == -1) {
+        printf("error reseting CPU\n");
+        usb_close(hdev);
+        return -1;
+    } 
+	else {
+        printf("cpu in reset...\n");
+    }
+    
+    // LOAD FIRMWARE
+	Sleep(1);
+	printf("Loading firmware...  ");        
+    if (Load_Firmware(hdev, filename) == -1) {
+        printf("error loading firmware\n");
+        usb_close(hdev);
+        return -1;
+    } 
+	else {
+        printf("firmware loaded\n");
+    }
+    
+    // TAKE CPU OUT OF RESET
+    if (Reset_CPU(hdev, 0) == -1) {
+        printf("error starting CPU\n");
+        usb_close(hdev);
+        return -1;
+    } 
+	else {
+        printf("cpu was restarted...\n");
+    }
+    
+    usb_close(hdev);
+    hdev = NULL;
+    
+    return 0;
+}
+        
+KD5TFDVK6APHAUDIO_API int LoadFPGA(char *filename) {
+    int myvid = OZY_VID;		
+    int mypid = OZY_PID;		
+           
+    usb_dev_handle *hdev = NULL;
+    struct usb_bus *bus = NULL;
+    struct usb_device *dev = NULL;
+    
+    usb_init();
+    usb_find_busses();
+    usb_find_devices();
+    dev = NULL;
+    bus = NULL;
+    
+    for (bus = usb_get_busses(); bus; bus = bus->next)
+    {
+        for (dev = bus->devices; dev; dev = dev->next)
+        {
+            if (dev->descriptor.idVendor == myvid 
+                    && dev->descriptor.idProduct == mypid)
+            {
+                hdev = usb_open(dev);
+            }
+        }
+    }
+    
+    if(!hdev) {
+        printf("error: did not find usb device 0x%X 0x%X\n", myvid, mypid);		
+        return -1;
+    } 
+	else {
+		printf("found and opened usb device\n");
+    }
+	printf("Loading FPGA...\n");        
+
+    if (Load_Fpga_Rbf(hdev, filename) == -1) {
+        printf("failed to load FPGA\n"); 
+		return -1;							        
+    }     
+    usb_close(hdev);
+    
+    hdev = NULL;
+    
+    return 0;    
+}
+

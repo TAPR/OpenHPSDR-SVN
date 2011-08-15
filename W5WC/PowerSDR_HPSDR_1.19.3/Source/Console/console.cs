@@ -600,6 +600,8 @@ namespace PowerSDR
 		public float[][] power_table;						// table used to store power in new power cal routine
 		public int pa_fwd_power;							// forward power as read by the ADC on the PA
 		public int pa_rev_power;							// reverse power as read by the ADC on the PA
+        public double alex_fwd_power;
+        public double alex_rev_power;
 		private bool tuning;								// true when the TUN button is active
 		public bool atu_tuning;		    					// true while the atu is tuning
 		private Band tuned_band;							// last band that the atu was tuned on
@@ -682,6 +684,7 @@ namespace PowerSDR
 		public CWKeyer2 Keyer;
 		private HiPerfTimer break_in_timer;
 		public double avg_vox_pwr = 0.0;
+        public string pwr_mode;
 
 		// BT 11/05/2007
 		public PowerSDR.RemoteProfiles ProfileForm;
@@ -11299,7 +11302,19 @@ namespace PowerSDR
 			return swr;
 		}
 
-		public double FWCSWR(int adc_fwd, int adc_rev)
+        public double ALEXSWR(double adc_fwd, double adc_rev)
+        {
+            double f = adc_fwd;
+            double r = adc_rev;
+
+            if (adc_fwd == 0 && adc_rev == 0) return 1.0;
+            if (adc_rev > adc_fwd) return 50.0;
+
+            double sqrt_r_over_f = Math.Sqrt(r / f);
+            return (1.0 + sqrt_r_over_f) / (1.0 - sqrt_r_over_f);
+        }
+
+        public double FWCSWR(int adc_fwd, int adc_rev)
 		{
 			double f = FWCPAPower(adc_fwd);
 			double r = FWCPAPower(adc_rev)*swr_table[(int)tx_band];
@@ -15309,7 +15324,7 @@ namespace PowerSDR
                 old_multimeter_cal = rx1_meter_cal_offset;
                 old_display_cal = rx1_display_cal_offset;
                 int progress_divisor;
-                if (AlexPresent)
+                if (alexpresent)
                 {
                     progress_divisor = 270;
                 }
@@ -15403,7 +15418,7 @@ namespace PowerSDR
                 rx1_preamp_offset[(int)PreampMode.HPSDR_OFF] = -off_offset;
                 rx1_preamp_offset[(int)PreampMode.HPSDR_ON] = 0.0f;
 
-                if (AlexPresent)
+                if (alexpresent)
                 {
                     RX1PreampMode = PreampMode.HPSDR_MINUS10;
                     Thread.Sleep(100);
@@ -22670,10 +22685,45 @@ namespace PowerSDR
 
         //public bool PennyLanePresent = false; 
 		public bool PennyPresent = false;
-		public bool AlexPresent = false; 
+		//public bool AlexPresent = false; 
 		public bool MercuryPresent = false; 
 		public bool JanusPresent = false; 
 		public bool HPSDRisMetis = false; 
+
+        private bool alexpresent = false;
+        public bool AlexPresent
+        {
+            get { return alexpresent; }
+            set
+            {
+                alexpresent = value;
+                if (alexpresent)
+                {
+                    if (!comboMeterTXMode.Items.Contains("Ref Pwr"))
+                        comboMeterTXMode.Items.Insert(1, "Ref Pwr");
+                   // if (!comboMeterTXMode.Items.Contains("SWR"))
+                    //    comboMeterTXMode.Items.Insert(2, "SWR");
+
+                    if (comboMeterTXMode.SelectedIndex < 0)
+                        comboMeterTXMode.SelectedIndex = 0;
+                }
+                else
+                {
+                    string cur_txt = comboMeterTXMode.Text;
+                    {
+                        if (comboMeterTXMode.Items.Contains("Ref Pwr"))
+                            comboMeterTXMode.Items.Remove("Ref Pwr");
+
+                        if (comboMeterTXMode.Items.Contains("SWR"))
+                            comboMeterTXMode.Items.Remove("SWR");
+                    }
+                    comboMeterTXMode.Text = cur_txt;
+                    if (comboMeterTXMode.SelectedIndex < 0 &&
+                        comboMeterTXMode.Items.Count > 0)
+                        comboMeterTXMode.SelectedIndex = 0;
+                }
+            }
+        }
 
 		private string metis_network_ip_addr; 
 		public string MetisNetworkIPAddr 
@@ -22726,7 +22776,7 @@ namespace PowerSDR
                     {
                         rx1_preamp_mode = PreampMode.HPSDR_OFF;
                     }
-                    else if (!AlexPresent &&
+                    else if (!alexpresent &&
                                 ((rx1_preamp_mode == PreampMode.HPSDR_MINUS10) ||
                                     (rx1_preamp_mode == PreampMode.HPSDR_MINUS20) ||
                                     (rx1_preamp_mode == PreampMode.HPSDR_MINUS30)
@@ -23772,31 +23822,42 @@ namespace PowerSDR
 			set
 			{
 				pa_present = value;
-				if(current_model == Model.SDR1000)
+                if (current_model == Model.SDR1000)               
                     Hdw.PAPresent = value;
-				if(pa_present)
-				{
-					if(!comboMeterTXMode.Items.Contains("Ref Pwr"))
-						comboMeterTXMode.Items.Insert(1, "Ref Pwr");
-					if(!comboMeterTXMode.Items.Contains("SWR"))
-						comboMeterTXMode.Items.Insert(2, "SWR");
+                    if (pa_present || alexpresent)
+                    {
+                        if (!comboMeterTXMode.Items.Contains("Ref Pwr"))
+                            comboMeterTXMode.Items.Insert(1, "Ref Pwr");
+                        if (pa_present) //remove for alex swr
+                        {
+                            if (!comboMeterTXMode.Items.Contains("SWR"))
+                                comboMeterTXMode.Items.Insert(2, "SWR");
+                        }
+                        if (alexpresent)
+                        {
+                            if (comboMeterTXMode.Items.Contains("SWR"))
+                                comboMeterTXMode.Items.Remove("SWR");
+                        }
 
-					if(comboMeterTXMode.SelectedIndex < 0)
-						comboMeterTXMode.SelectedIndex = 0;
-				}
-				else
-				{
-					string cur_txt = comboMeterTXMode.Text;
-					if(comboMeterTXMode.Items.Contains("Ref Pwr"))
-						comboMeterTXMode.Items.Remove("Ref Pwr");
-					if(comboMeterTXMode.Items.Contains("SWR"))
-						comboMeterTXMode.Items.Remove("SWR");
-					
-					comboMeterTXMode.Text = cur_txt;
-					if(comboMeterTXMode.SelectedIndex < 0 &&
-						comboMeterTXMode.Items.Count > 0)
-						comboMeterTXMode.SelectedIndex = 0;
-				}
+                        if (comboMeterTXMode.SelectedIndex < 0)
+                            comboMeterTXMode.SelectedIndex = 0;
+                    }
+                    else
+                    {
+                        string cur_txt = comboMeterTXMode.Text;
+                        {
+                            if (comboMeterTXMode.Items.Contains("Ref Pwr"))
+                                comboMeterTXMode.Items.Remove("Ref Pwr");
+
+                            if (comboMeterTXMode.Items.Contains("SWR"))
+                                comboMeterTXMode.Items.Remove("SWR");
+                        }
+                        comboMeterTXMode.Text = cur_txt;
+                        if (comboMeterTXMode.SelectedIndex < 0 &&
+                            comboMeterTXMode.Items.Count > 0)
+                            comboMeterTXMode.SelectedIndex = 0;
+                    }
+                
 				ptbPWR_Scroll(this, EventArgs.Empty);
 			}
 		}
@@ -26112,7 +26173,12 @@ namespace PowerSDR
 								{
                                     case Model.HPSDR:
                                     case Model.HERMES:
-                                        new_meter_data = JanusAudio.computeFwdPower();
+                                        if (alexpresent)
+                                            //pwr_mode = "alex_fwd";
+                                            new_meter_data = JanusAudio.computeAlexFwdPower();
+                                        else
+                                            //pwr_mode = "fwd";
+                                            new_meter_data = JanusAudio.computeFwdPower();
                                         break; 
 
 									case Model.FLEX5000:
@@ -26153,7 +26219,16 @@ namespace PowerSDR
 							case MeterTXMode.REVERSE_POWER:
 								switch(current_model)
 								{
-									case Model.FLEX5000:
+                                    case Model.HPSDR:
+                                    case Model.HERMES:
+                                        if (alexpresent)
+                                        {
+                                            //pwr_mode = "rev";
+                                            new_meter_data = JanusAudio.computeRefPower();
+                                        }
+                                        else new_meter_data = 0.0f;
+                                        break;
+                                    case Model.FLEX5000:
 									case Model.FLEX3000:
 										//output = ((double)pa_rev_power/4096*2.5).ToString("f3")+" V";
 										power = FWCPAPower(pa_rev_power)*swr_table[(int)tx_band];
@@ -26173,7 +26248,16 @@ namespace PowerSDR
 								{
 									switch(current_model)
 									{
-										case Model.FLEX5000:
+                                        case Model.HPSDR:
+                                        case Model.HERMES:
+                                            if (alexpresent)
+                                            {
+                                                alex_fwd_power = JanusAudio.computeAlexFwdPower();
+                                                alex_rev_power = JanusAudio.computeRefPower();
+                                                swr = ALEXSWR(alex_fwd_power, alex_rev_power);                                               
+                                            }
+                                            break;
+                                        case Model.FLEX5000:
 										case Model.FLEX3000:
 											swr = FWCSWR(pa_fwd_power, pa_rev_power);
 											//output = swr.ToString("f1")+" : 1";	
@@ -39473,7 +39557,7 @@ namespace PowerSDR
             }
             comboPreamp.Items.Clear();
             comboPreamp.Items.AddRange(on_off_preamp_settings);
-            if (AlexPresent)
+            if (alexpresent)
             {
                 comboPreamp.Items.AddRange(alex_preamp_settings);
             }

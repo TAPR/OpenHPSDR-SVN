@@ -682,7 +682,7 @@ void ForceCandCFrames(int count) {
 	buf[3] = XmitBit;									  /* c0	*/ 
 	buf[4] = (SampleRateIn2Bits	& 3) | ( C1Mask	& 0xfc ); /* c1	*/
 	buf[5] = PennyOCBits <<	1;							  /* c2	*/
-	buf[6] = (MercAtten | MercDither	| MercPreamp | MercRandom |	AlexRxAnt |	AlexRxOut) & 0xff; /* c3 */
+	buf[6] = (MercAtten | MercDither | MercPreamp | MercRandom | AlexRxAnt | AlexRxOut) & 0xff; /* c3 */
 	buf[7] = AlexTxAnt & 0x3;
 
 	buf[512] = 0x7f; 
@@ -730,6 +730,8 @@ int last_xmit_bit = 0;
 //
 void IOThreadMainLoop(void) {
 		int fwd_power_stage; 
+		int ref_power_stage; 
+		int alex_fwd_power; 
         short *sample_bufp = NULL;
         int sample_count = 0;
         int i;
@@ -754,19 +756,6 @@ void IOThreadMainLoop(void) {
         int out_sample_pairs_this_sync = 0; // how many sample pairs we've written -- l+r = 1
         int frames_written_this_read = 0; // how many frames have we written on this read
 
-#ifdef PERF_DEBUG
-        __int64 read_start_t = 0;
-        __int64 read_stop_t = 0;
-        __int64 delta_t = 0;
-        __int64 write_interval_t = 0;
-        __int64 now_t = 0;
-        __int64 read_t = 0;
-        __int64 write_top_t;
-        __int64 write_bottom_t = 0;
-        __int64 last_write_t = 0;
-        __int64 last_read_t = 0;
-#endif
-
         int wrote_frame = 0;
         int ok_to_write = 0;
 
@@ -782,12 +771,6 @@ void IOThreadMainLoop(void) {
         unsigned char RxOverrun = 0;
         unsigned char TxOverrun = 0;
 		int zero_read_count = 0; 		
-#if PRINTF_C_AND_C
-        int dbggate = 0;
-#endif
-#if 0 
-		int wdbg_gate = 0; 
-#endif
 
         sample_bufp_size = 4*sizeof(int)*BlockSize;
 
@@ -813,34 +796,10 @@ void IOThreadMainLoop(void) {
 				
 			if ( !isMetis || !wrote_frame ) { /* if not metis write, or if we did not write frame last time, time to read */ 				
 				
-#ifdef WRITE_MULTI_PER_READ
-                if ( !wrote_frame || (RxFifoAvail - (frames_written_this_read * 512)) < 512 ) { /* should we write */
-                        printf("read top: fw: %d fa:%d\n", frames_written_this_read, RxFifoAvail); fflush(stdout);
-
-#endif
-
-
-#if 0 						
-						++wdbg_gate; 
-						if (  wdbg_gate > 1000 ) { 
-							fprintf(stdout, "---> fwtr: %d\n", frames_written_this_read); 
-							if ( wdbg_gate > 1020 ) { 
-								wdbg_gate = 0; 
-								fprintf(stdout, "\n", frames_written_this_read); 
-								fflush(stdout); 
-							} 
-						} 
-#endif 											
                         frames_written_this_read = 0;
                         // first read data and process it
-#ifdef PERF_DEBUG
-                        read_start_t = getPerfTicks();
-#endif
 #ifndef TEST_READ
                         // numread = XyloBulkRead(XyloH, 4, read_buf, sizeof(read_buf));
-#ifdef XYLO
-                        numread = XyloBulkRead(XyloH, 4, FPGAReadBufp, FPGAReadBufSize);
-#endif
 #ifdef OZY
 						if ( isMetis ) { 
 							//numread = MetisBulkRead(6, FPGAReadBufp, FPGAReadBufSize);
@@ -884,15 +843,6 @@ void IOThreadMainLoop(void) {
 							memcpy(EP6_DumpBuf + EP6_DumpBufBytesUsed, FPGAReadBufp, copy_count); 
 							EP6_DumpBufBytesUsed += copy_count; 
 						} 
-#endif 
-
-
-#if 0 
-                        ++dbggate;
-                        if ( dbggate == 10000 ) {
-                                dbggate = 0;
-                                fprintf(stdout, "OBR: numread=%d\n", numread); fflush(stdout);
-                        }
 #endif 
 
 
@@ -952,37 +902,27 @@ void IOThreadMainLoop(void) {
 												// printf(" C0: 0x%08x\n", FPGAReadBufp[i]); fflush(stdout);
                                                 ControlBytesIn[0] = FPGAReadBufp[i];
                                                 DotDashBits = FPGAReadBufp[i] & DotDashMask;
-
-#if 0 
-												++dbggate; 
-													if ( dbggate >= 10002 ) { 
-													dbggate = 0; 
-												} 
-												if ( dbggate >= 10000 ) { 
-													printf("c0: 0x%x %d\n", ControlBytesIn[0], dbggate);   fflush(stdout); 
-												} 
-
-#endif 
-
-#if 0
-                                                ++dbggate;
-                                                if ( dbggate == 1000 ) {
-                                                        printf("cb0: %d ddb: %d\n", ControlBytesIn[0], DotDashBits); fflush(stdout);
-                                                        dbggate = 0;
-                                                }
-#endif
                                                 state = STATE_CONTROL1; // look for 2nd control byte
                                                 break;
+												
                                         case STATE_CONTROL1:
                                                 // printf(" C1");
                                                 ControlBytesIn[1] = FPGAReadBufp[i];
+
 												if ( (ControlBytesIn[0] & CandCAddrMask) == 0 ) { 
 													processOverloadBit(ControlBytesIn[1] & 1); 
 												}
-												if ( (ControlBytesIn[0] & CandCAddrMask) == CandCFwdPowerBit ) {  // fwd power, c1 == bits 15-8, c0 == bits 7-0
+												if ( (ControlBytesIn[0] & CandCAddrMask) == CandCFwdPowerBit ) {  // Penny(AIN5) fwd power, c0 == 0x08, c1 == bits 15-8, c2 == bits 7-0
 													fwd_power_stage = ((ControlBytesIn[1] << 8) & 0xff00); 													
 												}
-												
+ 												if ( (ControlBytesIn[0] & CandCAddrMask) == 0x10 ) {  // Alex(AIN2) ref power, c0 == 0x10, c1 == bits 15-8, c2 == bits 7-0
+													ref_power_stage = ((ControlBytesIn[1] << 8) & 0xff00);
+												}
+												if ( (ControlBytesIn[0] & CandCAddrMask) == 0x20 ) { // MercuryFWBit c0 == 0x20
+												// Assign ControlBytesIn[1] to Mercury1 version number
+ 											    	MercuryFWVersion =  (int)(ControlBytesIn[1] >> 1);
+												    processOverloadBit(ControlBytesIn[1] & 1);
+												}												
 												
                                                 // TxOverrun = FPGAReadBufp[i];
                                                 state = STATE_CONTROL2; // look for 3rd control byte
@@ -994,52 +934,75 @@ void IOThreadMainLoop(void) {
 												if ( (ControlBytesIn[0] & CandCAddrMask ) == 0 ) { 
 													MercuryFWVersion =  (int)(ControlBytesIn[2]); 
 												}
-												if ( (ControlBytesIn[0] & CandCAddrMask) == CandCFwdPowerBit ) {  // fwd power, c1 == bits 15-8, c0 == bits 7-0													
+												if ( (ControlBytesIn[0] & CandCAddrMask) == CandCFwdPowerBit ) {  //  Penny(AIN5) fwd power, c0 == 0x08, c1 == bits 15-8, c2 == bits 7-0													
 													fwd_power_stage |=  (((int)(ControlBytesIn[2])) & 0xff);
 													FwdPower = fwd_power_stage; 														
-#if 0 
-													++dbggate; 
-													if ( dbggate >= 1000 ) { 
-														fprintf(stdout, "FwdPower: %i\n", FwdPower); fflush(stdout); 
-														dbggate = 0; 
-													} 													
-#endif 
 												}
+												if ( (ControlBytesIn[0] & CandCAddrMask) == 0x10 ) {  // Alex(AIN2) ref power, c1 == bits 15-8, c2 == bits 7-0													
+													ref_power_stage |=  (((int)(ControlBytesIn[2])) & 0xff);
+													RefPower = ref_power_stage; 
+												}
+												if ( (ControlBytesIn[0] & CandCAddrMask) == 0x20 ) {
+												// Assign ControlBytesIn[2] to Mercury2 version number
+												Mercury2FWVersion =  (int)(ControlBytesIn[2] >> 1);
+												//processOverloadBit(ControlBytesIn[2] & 1);
+												}												
 
                                                 // RxOverrun = FPGAReadBufp[i];
                                                 state = STATE_CONTROL3; // look for 4th control byte
                                                 break;
+												
                                         case STATE_CONTROL3:  //
                                                 // printf(" C3");
                                                 ControlBytesIn[3] = FPGAReadBufp[i];
 												if ( (ControlBytesIn[0] & CandCAddrMask) == 0 ) { 
 													PenelopeFWVersion = (int)(ControlBytesIn[3]);
 												}
-
-                                                // RxFifoAvail = ((unsigned char)FPGAReadBufp[i]) << 4;
+												if ( (ControlBytesIn[0] & CandCAddrMask) == 0x08 ) {  // Alex/Apollo(AIN1), fwd power, c0 == 0x08, c3 == bits 15-8, c4 == bits 7-0
+													alex_fwd_power = ((ControlBytesIn[3] << 8) & 0xff00); 
+												}
+												if ( (ControlBytesIn[0] & CandCAddrMask) == 0x20 ) {
+												// Assign ControlBytesIn[3] to Mercury3 version number
+												Mercury3FWVersion =  (int)(ControlBytesIn[3] >> 1);
+												//processOverloadBit(ControlBytesIn[3] & 1);
+												}												
+                                               // RxFifoAvail = ((unsigned char)FPGAReadBufp[i]) << 4;
                                                 state = STATE_CONTROL4;  // look for 5th and last control byte
                                                 break;
+												
                                         case STATE_CONTROL4:
                                                 // printf(" C4");
                                                 ControlBytesIn[4] = FPGAReadBufp[i];
 												if ( (ControlBytesIn[0] & CandCAddrMask) == 0 ) { 
 													OzyFWVersion =  (int)(ControlBytesIn[4]); 
 												}
+ 												if ( (ControlBytesIn[0] & CandCAddrMask) == 0x08 ) {  // Alex/Apollo(AIN1) fwd power, c0 == 0x08, c3 == bits 15-8, c4 == bits 7-0													
+													alex_fwd_power |=  (((int)(ControlBytesIn[4])) & 0xff);
+													AlexFwdPower = alex_fwd_power; 	
+												}
+												if ( (ControlBytesIn[0] & CandCAddrMask) == 0x20 ) {
+												// Assign ControlBytesIn[4] to Mercury4 version number
+												Mercury4FWVersion = (int)(ControlBytesIn[4] >> 1);
+												//processOverloadBit(ControlBytesIn[4] & 1);
+												}												
                                                 // RxFramePlaying = (unsigned char)FPGAReadBufp[i];
                                                 state = STATE_SAMPLE_HI;
                                                 sample_is_left = 1;
                                                 // printf("fa: %d fp: %d\n", RxFifoAvail, RxFramePlaying);
                                                 break;
+												
                                         case STATE_SAMPLE_HI:
                                                 // printf(" HI");
                                                 this_num = ((int)FPGAReadBufp[i]) << 16; // start new sample, preserve the sign bit!
                                                 state = STATE_SAMPLE_MID;
                                                 break;
+												
                                         case STATE_SAMPLE_MID:
                                                 // printf(" MI");
                                                 this_num = (((unsigned char)FPGAReadBufp[i]) <<8) | this_num;  // add in middle part of sample -- unsigned!
                                                 state = STATE_SAMPLE_LO;
                                                 break;
+												
                                         case STATE_SAMPLE_LO:
                                                 // printf(" LO");
                                                 this_num = ((unsigned char)FPGAReadBufp[i]) | this_num; // add in last part of sample
@@ -1110,19 +1073,6 @@ void IOThreadMainLoop(void) {
 
 
                                         case STATE_SYNC_HI:
-                                                // printf("\nSH");
-#if 0
-                                                ++dbggate;
-
-/// dbg
-                                                if ( dbggate >= 1024 ) {  // force sync loss
-                                                        FPGAReadBufp[i] = 0xff;
-                                                }
-                                                if ( dbggate >= 1100 ) {
-                                                        dbggate = 0;
-                                                }
-///
-#endif
                                                 samples_this_sync = 0;
                                                 if ( (unsigned char)FPGAReadBufp[i] != 0x7f ) { // argh did not find sync
                                                         ++LostSyncCount;
@@ -1133,8 +1083,8 @@ void IOThreadMainLoop(void) {
                                                         state = STATE_SYNC_MID;
                                                 }
                                                 break;
+												
                                         case STATE_SYNC_MID:
-                                                // printf(" SM");
                                                 if ( FPGAReadBufp[i] != 0x7f ) { // argh did not find sync
                                                         ++LostSyncCount;
                                                         state = STATE_NOSYNC;
@@ -1144,6 +1094,7 @@ void IOThreadMainLoop(void) {
                                                         state = STATE_SYNC_LO;
                                                 }
                                                 break;
+												
                                         case STATE_SYNC_LO:
                                                 // printf(" SL");
                                                 if ( FPGAReadBufp[i] != 0x7f ) { // argh did not find sync
@@ -1162,26 +1113,15 @@ void IOThreadMainLoop(void) {
                                                 break;
 
                                 }
-                                //++in_stream_sync_count;
-                                //if ( in_stream_sync_count >= 512 ) {
-                                //      in_stream_sync_count = 0;
-                                //}
                                 second_last_byte = last_byte;
                                 last_byte = FPGAReadBufp[i];
 
                         } /* for numread = ... */
 					}	/* metis or write frame */
-#ifdef WRITE_MULTI_PER_READ
-                }/* should we write */
-#endif
-
 
                 // ok now that we've handled the inbound block send outbound data if we have any
                 //
                 // printf("out top: out_sync: %d out_state: %d total_written: %d\n", out_stream_sync_count, out_state, total_written); fflush(stdout);
-#ifdef PERF_DEBUG
-                write_top_t = getPerfTicks();
-#endif
                 wrote_frame = 0;
 
                 if ( !have_out_buf ) {
@@ -1244,21 +1184,10 @@ void IOThreadMainLoop(void) {
                                                                 FPGAWriteBufp[writebufpos] |= 2;
                                                         }
 														else if  ( out_control_idx == 2 ) { 
-															FPGAWriteBufp[writebufpos] |= 0x12; 
+															FPGAWriteBufp[writebufpos] |= 0x12; //C0 0001001x
 														} 
                                                         ControlBytesOut[0] = FPGAWriteBufp[writebufpos];
 														
-#ifdef PRINTF_C_AND_C
-                                                        ++dbggate;
-                                                        if ( dbggate >= 10000 ) {
-															if ( dbggate == 10002 )  { 
-																dbggate = 0;       
-															}
-															else { 
-                                                                printf("c0: 0x%x\n", FPGAWriteBufp[writebufpos]);  
-															}
-                                                        }
-#endif
 
                                                         break;
 
@@ -1276,9 +1205,9 @@ void IOThreadMainLoop(void) {
 																lastOutPower = FPGAWriteBufp[writebufpos] & 0xff ; 
 																printf("outPower: %u\n", lastOutPower);  fflush(stdout); 
 															} 
-															//else {
-                                                               // FPGAWriteBufp[writebufpos] = 0;
-															//}
+															else {
+                                                                FPGAWriteBufp[writebufpos] = 0;
+															}
 														   }
 
 														} 
@@ -1287,13 +1216,6 @@ void IOThreadMainLoop(void) {
                                                         }
 
                                                         ControlBytesOut[1] = FPGAWriteBufp[writebufpos];
-
-
-#ifdef PRINTF_C_AND_C                                                        
-                                                        if ( dbggate >= 10000 ) {
-	                                                        printf("c1: 0x%x\n", FPGAWriteBufp[writebufpos]);  
-                                                        }
-#endif
                                                         break;
 
                                                 case OUT_STATE_CONTROL2: //C2
@@ -1308,11 +1230,6 @@ void IOThreadMainLoop(void) {
 															FPGAWriteBufp[writebufpos] = PennyOCBits << 1; /* ControlBytesIn[2];  */
                                                         }
                                                         ControlBytesOut[2] = FPGAWriteBufp[writebufpos];
-#if PRINTF_C_AND_C                                                        
-                                                        if ( dbggate >= 10000 ) {                                                                
-																printf("c2: 0x%x ctrlidx: %d\n", FPGAWriteBufp[writebufpos], out_control_idx);  
-                                                        }
-#endif
                                                         break;
 
                                                 case OUT_STATE_CONTROL3: //C3
@@ -1327,12 +1244,6 @@ void IOThreadMainLoop(void) {
                                                                 FPGAWriteBufp[writebufpos] = ( MercAtten | MercDither | MercPreamp | MercRandom | AlexRxAnt | AlexRxOut) & 0xff; 																
                                                         }
                                                         ControlBytesOut[3] = FPGAWriteBufp[writebufpos];
-#if PRINTF_C_AND_C                                                        
-                                                        if ( dbggate >= 10000 ) {                                                                
-																printf("c3: 0x%x ctrlidx: %d\n", FPGAWriteBufp[writebufpos] & 0xff, out_control_idx);  
-                                                        }
-#endif
-
                                                         break;
 
                                                 case OUT_STATE_CONTROL4: //C4
@@ -1345,15 +1256,10 @@ void IOThreadMainLoop(void) {
 															 FPGAWriteBufp[writebufpos] = 0; 
 														} 
                                                         else {
-																FPGAWriteBufp[writebufpos] = AlexTxAnt & 0x3; 
+																FPGAWriteBufp[writebufpos] = (AlexTxAnt | Duplex | NRx) & 0x3F; 
                                                                 // FPGAWriteBufp[writebufpos] = out_frame_idx;
                                                         }
                                                         ControlBytesOut[4] = FPGAWriteBufp[writebufpos];
-#if PRINTF_C_AND_C
-                                                        if ( dbggate >= 10000 ) {															
-																printf("c4: 0x%x ctrlidx: %d\n\n", FPGAWriteBufp[writebufpos] & 0xff, out_control_idx);  fflush(stdout);
-                                                        }
-#endif 
                                                         ++out_frame_idx;
 														if ( out_control_idx == 2 ) { 
 															out_control_idx = 0; 

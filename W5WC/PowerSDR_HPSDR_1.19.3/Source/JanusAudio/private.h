@@ -95,12 +95,12 @@ struct OzyHandle {
         struct usb_dev_handle *h;
 };
 
-
-
 extern KD5TFDVK6APHAUDIO_API int OzyBulkWrite(struct OzyHandle *h, int ep, void* buffer, int buffersize);
 extern KD5TFDVK6APHAUDIO_API int OzyBulkRead(struct OzyHandle *h, int ep, void* buffer, int buffersize);
-#endif
+extern KD5TFDVK6APHAUDIO_API int LoadFirmware(char * filename);
+extern KD5TFDVK6APHAUDIO_API int LoadFPGA(char * filename);
 
+#endif
 
 // IOThread rountines
 extern void *IOThreadMain(void *argp);
@@ -254,14 +254,22 @@ extern int MercRandom;
 extern int MicBoost;
 extern int LineIn;
 
+extern int Duplex;
+extern int NRx;
+
 extern int AlexRxAnt;
 extern int AlexTxAnt;
 extern int AlexRxOut;
 extern int FwdPower;
+extern int RefPower;
+extern int AlexFwdPower;
 
 extern int ADC_Overloads;
 
 extern int MercuryFWVersion;
+extern int Mercury2FWVersion;
+extern int Mercury3FWVersion;
+extern int Mercury4FWVersion;
 extern int PenelopeFWVersion;
 extern int OzyFWVersion;
 extern unsigned int OutputPowerFactor;
