@@ -4,7 +4,7 @@
 #
 #-------------------------------------------------
 
-QT       += core gui
+QT       += core gui help
 
 TARGET = griffinID
 TEMPLATE = app
@@ -12,9 +12,13 @@ TEMPLATE = app
 
 SOURCES += main.cpp\
         mainwindow.cpp \
-    about.cpp
+    about.cpp \
+    wspr.cpp \
+    qrss.cpp
 
 HEADERS  += mainwindow.h \
-    about.h
+    about.h \
+    wspr.h \
+    qrss.h
 
 FORMS    += mainwindow.ui

@@ -1,6 +1,6 @@
 /**
-* \file main.cpp
-* \brief Code files for the main function as part of the Griffin ID program
+* \file qrss.h
+* \brief Header files for the QRSS functions as part of the Griffin ID program
 * \author David R. Larsen, KV0S
 * \version 1.0.0
 * \date August 14, 2011
@@ -26,19 +26,39 @@
 */
 
 
-#include <QtGui/QApplication>
-#include "mainwindow.h"
+#ifndef QRSS_H
+#define QRSS_H
+
+#include <QString>
+#include <QHash>
+#include <QDebug>
+
 
 /**
- *  \brief the About class for the griffinID program
+ *  \brief the QRSS class for the griffinID program
+ *
+ *  These functions encode the text string to transmit the QRSS beacon.  This is used to encode your
+ *  output beacon using the openhpsdr.org : griffin board
+ *
+ *  QRSS is vaey slow speed, low bandwidth transmissions.
+ *  Thanks to Dave WW2R for his help on the QRSS information.
  *
  */
 
-int main(int argc, char *argv[])
+class QRSS
 {
-    QApplication a(argc, argv);
-    MainWindow w;
-    w.show();
+public:
+    QRSS();
+    QString morsechar( QChar ch );
+    QString encodeCW( QString message );
+    QString displayCW( QString message );
 
-    return a.exec();
-}
+private:
+    QHash <QChar, QString> morse;
+
+private slots:
+    QString message;
+
+};
+
+#endif // QRSS_H
