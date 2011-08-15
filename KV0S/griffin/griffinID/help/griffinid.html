@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE HTML>
+<html>
+<header>
+<title>griffinID program</title>
+<link rel="stylesheet" type="text/css" href="daveStyle.css" />
+</header>
+<body>
+<hr class="full"/> 
+<h2> GriffinID program</h2>
+
+<p>This a a service program to be used with the griffin WSPR/QRSS beacon board.  This board transmits independent of 
+a computer so the transmited beacon string must be loaded into the the FPGA.  This program takes your string input 
+and formats it for inclusion in the firmware of the FPGA. </p>
+
+<p>This is program will generate:
+<ol>
+<li> WSPR beacon string in encoded format</li>
+<li> QRSS beacon string in encoded in morse and output in a hex string format</li>
+</ol>
+</p>
+  
+<p>This program follows the restrictions of the WSPR software in the call signs are limited to 6 characters abd the third character must be a number 
+and padded with blank before and after the number.  The location can be entered either as a 4 character Maidenhead Grid or Latitude/Longitude but 
+limited to 2<sup>o</sup> by 1<sup>o</sup> cells.  You will also need to enter the dBm of the signal transmit strenght.  To get the <a href="dbm.html">
+dbm to Watts</a> table follow the link. </p>
+
+<p>If you generating a QRSS string you only need to enter your call sign</p>
+
+<div align="right">
+<hr class="full"/>  
+<small>Author: Dave Larsen, KV0S<br/>
+August 14, 2011</small>
+</body>
+</html> 
