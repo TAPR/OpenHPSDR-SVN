@@ -318,7 +318,7 @@ namespace PowerSDR
 		}
 #endif
 
-		private static bool fwVersionsChecked = false; 
+		public static bool fwVersionsChecked = false; 
 		private static string fwVersionMsg = null; 
 
 		public static string getFWVersionErrorMsg() 
@@ -332,85 +332,114 @@ namespace PowerSDR
 
 		// checks if the firmware versions are consistent - returns false if they are not 
 		// and set fwVersionmsg to point to an appropriate message
-		private static bool fwVersionsGood() 
-		{ 
-			Console c = Console.getConsole(); 
-			
+		private static bool fwVersionsGood()
+        {
+            if (forceFWGood == true)
+            {
+                System.Console.WriteLine("Firmware ver check forced good!");
+                return true;
+            }
+
+            bool result = true;
+			Console c = Console.getConsole();
+            int penny_ver = 0;
+            byte[] metis_ver = new byte[1];
 			if  ( c != null && c.HPSDRisMetis )  
-			{ 
-				System.Console.WriteLine("!! METIS TODO firmware check stubbed"); 
-				return true; 
+			{
+                GetMetisCodeVersion(metis_ver);
+                if (c.PennyPresent || c.PennyLanePresent)
+                {
+                    penny_ver = getPenelopeFWVersion();
+                    if ((metis_ver[0] >= (byte)14) && (penny_ver < 14) ||
+                        (metis_ver[0] <= (byte)13) && (penny_ver > 13))
+                    {
+                       fwVersionMsg = "Invalid Firmware Level. Ozy v1.9 requires Penelope v1.4 or PennyLane v1.4\n";
+                       result = false;
+                    }
+                }             
+				//System.Console.WriteLine("!! METIS TODO firmware check stubbed"); 
+				return result; 
 			} 
 			
-			bool result = true; 
-            string fx2_version_string = getFX2FirmwareVersionString();
-            int merc_ver = getMercuryFWVersion();
-			int penny_ver = getPenelopeFWVersion();
-            int ozy_ver; // = getOzyFWVersion();
+           string fx2_version_string = getFX2FirmwareVersionString();
+           int merc_ver = 0;
+           int ozy_ver = 0;
 
-           do
-            {
-                ozy_ver = getOzyFWVersion();
-            }
-            while (ozy_ver < 12);
-
-           if (c.MercuryPresent)
-           {
-               do
-               {
-                   merc_ver = getMercuryFWVersion();
-               }
-               while (merc_ver < 26);
-           }
-
-            if (c.PennyPresent) {
-                do 
-                {
-                    penny_ver = getPenelopeFWVersion(); 
-                }
-                while (penny_ver <= 10);
-
-            }
-
-            if (ozy_ver <= 15)
-            {
-                legacyDotDashPTT = true;
-                JanusAudio.SetLegacyDotDashPTT(1);
-            } 
-			
+		
 			//System.Console.WriteLine("fx2: " + fx2_version_string); 
 			//System.Console.WriteLine("ozy: " + ozy_ver); 
 			//System.Console.WriteLine("merc: " + merc_ver); 
 			//System.Console.WriteLine("penny: " + penny_ver); 
-			if ( forceFWGood == true ) 
-			{ 
-				System.Console.WriteLine("Firmware ver check forced good!"); 
-				return true; 
-			} 
 
-			if ( fx2_version_string.CompareTo("20090524") >= 0 ) 
-			{ 
-				if ( (ozy_ver < 13) || 
-					 ( c != null && c.MercuryPresent && (merc_ver < 27) ) || 
-					 ( c != null && c.PennyPresent && (penny_ver < 12) )
-			       ) 
-				{ 
-					result = false; 
-					fwVersionMsg = "Invalid Firmware Level.  Ozy >= 16, Penelope >= 12 and Mercury >= 27 required\n"; 
-				}								
-			} 
-			else  
-			{
-				if (  ( ozy_ver > 12 )  || 
-					( c != null && c.MercuryPresent && (merc_ver > 26) ) || 
-					( c != null && c.PennyPresent && (penny_ver > 11) )
-					) 
-				{
-					result = false; 
-					fwVersionMsg = "Invalid Firmware Level.  Ozy < 13, Penelope < 12 and Mercury < 27 required\n"; 
-				}				
-		    }						
-			return result; 
+            if (fx2_version_string.CompareTo("20090524") >= 0)
+            {
+                do
+                {
+                    ozy_ver = getOzyFWVersion();
+                }
+                while (ozy_ver < 12);
+
+                if (c.MercuryPresent)
+                {
+                    do
+                    {
+                        merc_ver = getMercuryFWVersion();
+                    }
+                    while (merc_ver < 26);
+                }
+
+                if (c.PennyPresent || c.PennyLanePresent)
+                {
+                    do 
+                    {
+                        penny_ver = getPenelopeFWVersion();
+                        Thread.Sleep(10);
+                        if (penny_ver < 11)
+                        {
+                            penny_ver = getPenelopeFWVersion();
+                            Thread.Sleep(10);
+                            if (penny_ver > 0) break;
+                            penny_ver = getPenelopeFWVersion();
+                            if (penny_ver == 0) break;
+                        }
+                    }
+                    while (penny_ver <= 10);
+
+                }
+
+                if (ozy_ver <= 15)
+                {
+                    legacyDotDashPTT = true;
+                    JanusAudio.SetLegacyDotDashPTT(1);
+                }
+
+                if ((ozy_ver == 18) &&
+                    (c != null && (c.PennyPresent || c.PennyLanePresent) && (penny_ver > 13)) ||
+                   ((ozy_ver >= 19) &&
+                    (c != null && (c.PennyPresent || c.PennyLanePresent) && (penny_ver < 14))))
+                {
+                    result = false;
+                    fwVersionMsg = "Invalid Firmware Level. Ozy v1.9 requires Penelope v1.4 or PennyLane v1.4\n";
+                }
+
+              /*  if ((ozy_ver < 13) ||
+                   (c != null && c.MercuryPresent && (merc_ver < 27)) ||
+                   (c != null && (c.PennyPresent || c.PennyLanePresent) && (penny_ver < 12))
+                   )
+                {
+                    result = false;
+                    fwVersionMsg = "Invalid Firmware Level.  Ozy >= 16, Penelope >= 12 and Mercury >= 27 required\n";
+                } 
+                 if ((ozy_ver > 12) ||
+                         (c != null && c.MercuryPresent && (merc_ver > 26)) ||
+                         (c != null && (c.PennyPresent || c.PennyLanePresent) && (penny_ver > 11))
+                         )
+                     {
+                         result = false;
+                         fwVersionMsg = "Invalid Firmware Level.  Ozy < 13, Penelope < 12 and Mercury < 27 required\n";
+                     }*/
+           }
+                return result;
 		} 
 
 		// returns -101 for firmware version error 
@@ -457,9 +486,15 @@ namespace PowerSDR
 		unsafe public static extern int StopAudio(); 
 
 		[DllImport("JanusAudio.dll")]
-		unsafe public static extern void SetC1Bits(int bits); 
+		unsafe public static extern void SetC1Bits(int bits);
 
-		[DllImport("JanusAudio.dll")]
+        [DllImport("JanusAudio.dll")] // sets number of receivers
+        unsafe public static extern void SetNRx(int nrx);
+
+        [DllImport("JanusAudio.dll")] // sets full or half duplex
+        unsafe public static extern void SetDuplex(int dupx);
+
+        [DllImport("JanusAudio.dll")]
 		unsafe public static extern int GetC1Bits(); 
 
 		[DllImport("JanusAudio.dll")]
@@ -523,7 +558,6 @@ namespace PowerSDR
             //f = (f * 1000000) * correction_factor;
             // System.Console.WriteLine("corrected freq: " + f);
 			SetVFOfreq_native(f);
-            c.SetupForm.txtDDSVFO.Text = f.ToString();
 		} 
 
 		[DllImport("JanusAudio.dll")]
@@ -562,7 +596,16 @@ namespace PowerSDR
 		[DllImport("JanusAudio.dll")]
 		unsafe public static extern int getMercuryFWVersion();
 
-		[DllImport("JanusAudio.dll")]
+        [DllImport("JanusAudio.dll")]
+        unsafe public static extern int getMercury2FWVersion();
+
+        [DllImport("JanusAudio.dll")]
+        unsafe public static extern int getMercury3FWVersion();
+
+        [DllImport("JanusAudio.dll")]
+        unsafe public static extern int getMercury4FWVersion();
+
+        [DllImport("JanusAudio.dll")]
 		unsafe public static extern int getPenelopeFWVersion();
 
 		[DllImport("JanusAudio.dll")]
@@ -574,17 +617,36 @@ namespace PowerSDR
 		[DllImport("JanusAudio.dll")]
 		unsafe public static extern int getFwdPower();
 
+    	[DllImport("JanusAudio.dll")]
+		unsafe public static extern int getRefPower();
+
+		[DllImport("JanusAudio.dll")]
+		unsafe public static extern int getAlexFwdPower();
+
 		// 
 		// compute fwd power from Penny based on count returned 
 		// this conversion is a linear interpolation of values measured on an 
 		// actual penny board 		
 		// 
 		public static float computeFwdPower() 
-		{ 
-			int power_int = JanusAudio.getFwdPower(); 
+		{
+            //int power_int = 0;
+            int power_int = JanusAudio.getFwdPower();
 			double power_f = (double)power_int; 
 			double result; 
-
+           /* switch (pwr_mode)
+            {
+                case "fwd":
+                   power_int = JanusAudio.getFwdPower();
+                   break;
+                case "rev":
+                   power_int = JanusAudio.getRefPower();
+                   break;
+                case "alex_fwd":
+                   power_int = JanusAudio.getAlexFwdPower();
+                   break;
+            }*/
+            
 			if ( power_int <= 2095 ) 
 			{ 
 				if ( power_int <= 874 ) 
@@ -631,9 +693,143 @@ namespace PowerSDR
 
 			result = result/1000;  //convert to watts 
 			return (float)result; 
-		} 
+		}
 
-		[DllImport("JanusAudio.dll")]
+        public static float computeRefPower()
+        {
+            //int power_int = 0;
+            int power_int = JanusAudio.getRefPower();
+            double power_f = (double)power_int;
+            double result;
+          /*  switch (pwr_mode)
+            {
+                case "fwd":
+                    power_int = JanusAudio.getFwdPower();
+                    break;
+                case "rev":
+                    power_int = JanusAudio.getRefPower();
+                    break;
+                case "alex_fwd":
+                    power_int = JanusAudio.getAlexFwdPower();
+                    break;
+            }*/
+
+            if (power_int <= 2095)
+            {
+                if (power_int <= 874)
+                {
+                    if (power_int <= 113)
+                    {
+                        result = 0.0;
+                    }
+                    else  // > 113 
+                    {
+                        result = (power_f - 113.0) * 0.065703;
+                    }
+                }
+                else  // > 874 
+                {
+                    if (power_int <= 1380)
+                    {
+                        result = 50.0 + ((power_f - 874.0) * 0.098814);
+                    }
+                    else  // > 1380 
+                    {
+                        result = 100.0 + ((power_f - 1380.0) * 0.13986);
+                    }
+                }
+            }
+            else  // > 2095 
+            {
+                if (power_int <= 3038)
+                {
+                    if (power_int <= 2615)
+                    {
+                        result = 200.0 + ((power_f - 2095.0) * 0.192308);
+                    }
+                    else  // > 2615, <3038 
+                    {
+                        result = 300.0 + ((power_f - 2615.0) * 0.236407);
+                    }
+                }
+                else  // > 3038 
+                {
+                    result = 400.0 + ((power_f - 3038.0) * 0.243902);
+                }
+            }
+
+            result = result / 1000;  //convert to watts 
+            return (float)result;
+        }
+
+        public static float computeAlexFwdPower()
+        {
+            //int power_int = 0;
+            int power_int = JanusAudio.getAlexFwdPower();
+            double power_f = (double)power_int;
+            double result;
+          /*  switch (pwr_mode)
+            {
+                case "fwd":
+                    power_int = JanusAudio.getFwdPower();
+                    break;
+                case "rev":
+                    power_int = JanusAudio.getRevPower();
+                    break;
+                case "alex_fwd":
+                    power_int = JanusAudio.getAlexFwdPower();
+                    break;
+            }*/
+
+            if (power_int <= 2095)
+            {
+                if (power_int <= 874)
+                {
+                    if (power_int <= 113)
+                    {
+                        result = 0.0;
+                    }
+                    else  // > 113 
+                    {
+                        result = (power_f - 113.0) * 0.065703;
+                    }
+                }
+                else  // > 874 
+                {
+                    if (power_int <= 1380)
+                    {
+                        result = 50.0 + ((power_f - 874.0) * 0.098814);
+                    }
+                    else  // > 1380 
+                    {
+                        result = 100.0 + ((power_f - 1380.0) * 0.13986);
+                    }
+                }
+            }
+            else  // > 2095 
+            {
+                if (power_int <= 3038)
+                {
+                    if (power_int <= 2615)
+                    {
+                        result = 200.0 + ((power_f - 2095.0) * 0.192308);
+                    }
+                    else  // > 2615, <3038 
+                    {
+                        result = 300.0 + ((power_f - 2615.0) * 0.236407);
+                    }
+                }
+                else  // > 3038 
+                {
+                    result = 400.0 + ((power_f - 3038.0) * 0.243902);
+                }
+            }
+
+            result = result / 1000;  //convert to watts 
+            return (float)result;
+        }
+
+        [DllImport("JanusAudio.dll")]
 		unsafe public static extern int getControlByteIn(int n); 
 
 		[DllImport("JanusAudio.dll")]
