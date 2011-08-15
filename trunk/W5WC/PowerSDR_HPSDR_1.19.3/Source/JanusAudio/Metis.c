@@ -51,6 +51,8 @@ void *MetisEP6RingBuf = NULL;
 pthread_t MetisReadThreadID; 
 int MetisLastRecvSeq = 0; 
 char MetisMACAddr[6] = { 0, 0, 0, 0, 0, 0 }; 
+char MetisCodeVersion[1] = { 0 };
+char MetisBoardID[1] = {0 };
 
 
 extern void Dump(FILE *ofile,                /* file handle to dump to - assumed to be      */
@@ -402,6 +404,8 @@ SOCKET createSocket(int portnum) {
 					printf("got good discovery reply\n"); 
 					Dump(stdout, discbuf, rc, "discovery reply"); 
 					memcpy(MetisMACAddr, discbuf+3, 6); /* save off MAC Addr */ 
+					memcpy(MetisCodeVersion, discbuf+9, 1); /* save off loaded Code Version */
+					memcpy(MetisBoardID, discbuf+10, 1); /* save off Board_ID 0x00 = Metis, 0x01 = Hermes, 0x02 = Griffin */
 					return disc_reply_addr.sin_addr.S_un.S_addr;
 					// return *((u_long *)(&(discbuf[3])));				
 				}
@@ -532,6 +536,15 @@ KD5TFDVK6APHAUDIO_API int GetMetisIPAddr(void) {
 KD5TFDVK6APHAUDIO_API void GetMetisMACAddr(char addr_bytes[]) { 
 	memcpy(addr_bytes, MetisMACAddr, 6); 
 } 
+
+KD5TFDVK6APHAUDIO_API void GetMetisCodeVersion(char addr_bytes[]) { 
+	memcpy(addr_bytes, MetisCodeVersion, 1); 
+} 
+
+KD5TFDVK6APHAUDIO_API void GetMetisBoardID(char addr_bytes[]) { 
+	memcpy(addr_bytes, MetisBoardID, 1); 
+} 
+
 
 int SendStartToMetis(void) 	 {
 

@@ -59,8 +59,8 @@ namespace PowerSDR
 		}
 
 
-		private byte[] TXBitMasks = new byte[12]; 
-		private byte[] RXBitMasks = new byte[12]; 
+		private byte[] TXBitMasks = new byte[25]; 
+		private byte[] RXBitMasks = new byte[25]; 
 
 
 		public void setBandBitMask(Band band, byte mask, bool tx) 
@@ -92,14 +92,14 @@ namespace PowerSDR
 
 		public void UpdateExtCtrl(Band band, bool tx) 
 		{
-			if ( !tx )  // if !tx ignore given band and round off to nearest band based on freq 
+			if ( !tx && (int)band < 12)  // if !tx ignore given band and round off to nearest band based on freq 
 			{ 
 				band = Alex.AntBandFromFreq();
 			} 
 
 			int idx = (int)band - (int)Band.B160M; 
 			int bits; 
-			if ( idx < 0 || idx > 11 ) 
+			if ( idx < 0 || idx > 26 ) 
 			{ 
 				bits = 0; 
 			} 

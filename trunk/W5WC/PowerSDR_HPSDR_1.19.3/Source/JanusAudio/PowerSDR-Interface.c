@@ -487,6 +487,13 @@ KD5TFDVK6APHAUDIO_API void SetAlexAntBits(int rx_ant, int tx_ant, int rx_out) {
 	return;
 }
 
+KD5TFDVK6APHAUDIO_API void SetNRx(int nrx) {  
+	
+	nrx = ( nrx << 3); 
+	NRx = nrx & 0x38; 
+
+	return;
+}
 
 int getDDPTTcount = 0; 
 int last_DDP = 0; 
@@ -507,6 +514,16 @@ KD5TFDVK6APHAUDIO_API void SetXmitBit(int xmit) {   // bit xmitbit ==0, recv mod
         else {
                 XmitBit = 1;
         }
+}
+
+KD5TFDVK6APHAUDIO_API void SetDuplex(int dupx) {   // dupx == 0, half duplex, != 0, full duplex
+        if ( dupx != 0 ) {
+                Duplex = (1 << 2);
+        }
+        else {
+                Duplex = 0;
+        }
+		return;
 }
 
 KD5TFDVK6APHAUDIO_API void EnableHermesPower(int enabled) { 
@@ -550,17 +567,6 @@ KD5TFDVK6APHAUDIO_API void SetMercDither(int bits) {
 	return;
 }
 
-KD5TFDVK6APHAUDIO_API void SetMercRandom(int bits) { 
-	if ( bits != 0 ) { 
-		MercRandom = (1 << 4); 
-	} 
-	else { 
-		MercRandom = 0; 
-	}	
-	return;
-}
-
-
 KD5TFDVK6APHAUDIO_API void SetMercPreamp(int bits) { 
 	if ( bits != 0 ) { 
 		MercPreamp = (1 << 2); 
@@ -571,15 +577,23 @@ KD5TFDVK6APHAUDIO_API void SetMercPreamp(int bits) {
 	return;
 }
 
+KD5TFDVK6APHAUDIO_API void SetMercRandom(int bits) { 
+	if ( bits != 0 ) { 
+		MercRandom = (1 << 4); 
+	} 
+	else { 
+		MercRandom = 0; 
+	}	
+	return;
+}
+
 KD5TFDVK6APHAUDIO_API void SetFPGATestMode(int i) {
 	FPGATestMode = i;
 }
 
-
 KD5TFDVK6APHAUDIO_API void SetOutputPowerFactor(int u) {
 	OutputPowerFactor = (unsigned int)(u & 0xff);
 }
-
 
 KD5TFDVK6APHAUDIO_API void SetLegacyDotDashPTT(int bit) { 
 	if ( bit ) { 
@@ -594,8 +608,6 @@ KD5TFDVK6APHAUDIO_API void SetLegacyDotDashPTT(int bit) {
 	} 
 }
 
-
-
 KD5TFDVK6APHAUDIO_API int getAndResetADC_Overload() { 
 	int n; 
 	n = ADC_Overloads; 
@@ -605,6 +617,18 @@ KD5TFDVK6APHAUDIO_API int getAndResetADC_Overload() {
 
 KD5TFDVK6APHAUDIO_API int getMercuryFWVersion() { 
 	return MercuryFWVersion; 
+} 
+
+KD5TFDVK6APHAUDIO_API int getMercury2FWVersion() { 
+	return Mercury2FWVersion; 
+} 
+
+KD5TFDVK6APHAUDIO_API int getMercury3FWVersion() { 
+	return Mercury3FWVersion; 
+} 
+
+KD5TFDVK6APHAUDIO_API int getMercury4FWVersion() { 
+	return Mercury4FWVersion; 
 } 
 
 KD5TFDVK6APHAUDIO_API int getPenelopeFWVersion() { 
@@ -619,11 +643,17 @@ KD5TFDVK6APHAUDIO_API int getHaveSync() {
 	return HaveSync; 
 } 
 
-
 KD5TFDVK6APHAUDIO_API int getFwdPower() { 
 	return FwdPower; 
 } 
 
+KD5TFDVK6APHAUDIO_API int getRefPower() { 
+	return RefPower; 
+} 
+
+KD5TFDVK6APHAUDIO_API int getAlexFwdPower() { 
+	return AlexFwdPower; 
+} 
 
 KD5TFDVK6APHAUDIO_API int getControlByteIn(int n) { 
 	if ( n < 0 || n > 4 ) { 
@@ -631,8 +661,6 @@ KD5TFDVK6APHAUDIO_API int getControlByteIn(int n) {
 	} 
 	return ControlBytesIn[n];  
 } 
-
-
 
 //
 // bufp MUST point to a 4096 byte buffer 
@@ -655,9 +683,6 @@ KD5TFDVK6APHAUDIO_API int GetEP4Data(char *bufp) {
 	} 
 	return 0; 
 }
-
-
-
 
 // diag data mapping
 // 0-4 C0-C4 in
@@ -686,9 +711,6 @@ KD5TFDVK6APHAUDIO_API int GetDiagData(int *a, int count) {
         a[13] = HaveSync;
         return 14;
 }
-
-
-
 
 ///
 /// Obsolete 2 channel versions of the code
