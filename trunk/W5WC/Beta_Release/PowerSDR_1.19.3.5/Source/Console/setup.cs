@@ -26633,7 +26633,8 @@ namespace PowerSDR
             chkGeneralCustomFilter.Checked = console.EnableLPF0;
             chkGeneralUpdateRelease.Checked = console.NotifyOnRelease;
             chkGeneralUpdateBeta.Checked = console.NotifyOnBeta;
-        }
+             chkAlexPresent.Checked = console.AlexPresent;
+       }
 
         private void InitAudioTab()
         {
@@ -27450,6 +27451,7 @@ namespace PowerSDR
             comboGeneralProcessPriority_SelectedIndexChanged(this, e);
             chkGeneralUpdateRelease_CheckedChanged(this, e);
             chkGeneralUpdateBeta_CheckedChanged(this, e);
+            chkAlexPresent_CheckedChanged(this, e);
 
             // Audio Tab
             comboAudioSoundCard_SelectedIndexChanged(this, e);
@@ -35338,7 +35340,8 @@ namespace PowerSDR
             console.PennyLanePresent = chkPennyLane.Checked;
             JanusAudio.SetC1Bits(bits);
             checkHPSDRDefaults(sender, e);
-        }
+            JanusAudio.fwVersionsChecked = false;
+       }
 
 
         private void chkPennyPresent_CheckedChanged(object sender, System.EventArgs e)
@@ -35374,14 +35377,13 @@ namespace PowerSDR
                 }
                 //console.PennyPresent = true;
                // chkGeneralRXOnly.Enabled = true;  
-                console.PennyLanePresent = false;
-                
+                console.PennyLanePresent = false;               
                 JanusAudio.EnableHermesPower(0);
             }
             console.PennyPresent = chkPennyPresent.Checked;
             JanusAudio.SetC1Bits(bits);
             checkHPSDRDefaults(sender, e);
-
+            JanusAudio.fwVersionsChecked = false;
         }
 
         private void checkHPSDRDefaults(object sender, System.EventArgs e)
@@ -35451,6 +35453,7 @@ namespace PowerSDR
             }
             JanusAudio.SetC1Bits(bits);
             checkHPSDRDefaults(sender, e);
+            JanusAudio.fwVersionsChecked = false;
             console.MercuryPresent = chkMercuryPresent.Checked;
         }
 

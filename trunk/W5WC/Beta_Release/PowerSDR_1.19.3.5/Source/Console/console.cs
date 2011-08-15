@@ -621,6 +621,8 @@ namespace PowerSDR
 		public float[][] power_table;						// table used to store power in new power cal routine
 		public int pa_fwd_power;							// forward power as read by the ADC on the PA
 		public int pa_rev_power;							// reverse power as read by the ADC on the PA
+        public double alex_fwd_power;
+        public double alex_rev_power;
 		private bool tuning;								// true when the TUN button is active
 		public bool atu_tuning;		    					// true while the atu is tuning
 		private Band tuned_band;							// last band that the atu was tuned on
@@ -1216,6 +1218,7 @@ namespace PowerSDR
         public MenuItem mnuShowModeControls;
         private CheckBoxTS chkCWDisableTXDisplay;
         private CheckBoxTS chkShowCWZero;
+        private MenuItem mnuMultiRX;
 		private CheckBoxTS chkFullDuplex;
 
 		#endregion
@@ -2124,6 +2127,7 @@ namespace PowerSDR
             this.radBandVHF0 = new System.Windows.Forms.RadioButtonTS();
             this.panelRX2DSP = new System.Windows.Forms.PanelTS();
             this.ptbSquelch = new PowerSDR.PrettyTrackBar();
+            this.mnuMultiRX = new System.Windows.Forms.MenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.ptbRX2RF)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ptbFilterShift)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ptbFilterWidth)).BeginInit();
@@ -2402,7 +2406,8 @@ namespace PowerSDR
             this.mnuANF,
             this.mnuNB,
             this.mnuNB2,
-            this.mnuBIN});
+            this.mnuBIN,
+            this.mnuMultiRX});
             resources.ApplyResources(this.mnuDSP, "mnuDSP");
             // 
             // mnuDSPCancel
@@ -6049,6 +6054,12 @@ namespace PowerSDR
             this.ptbSquelch.TabStop = false;
             this.ptbSquelch.Value = -150;
             this.ptbSquelch.Scroll += new PowerSDR.PrettyTrackBar.ScrollHandler(this.ptbSquelch_Scroll);
+            // 
+            // mnuMultiRX
+            // 
+            this.mnuMultiRX.Index = 7;
+            resources.ApplyResources(this.mnuMultiRX, "mnuMultiRX");
+            this.mnuMultiRX.Click += new System.EventHandler(this.mnuDSP_Click);
             // 
             // Console
             // 
@@ -11525,6 +11536,18 @@ namespace PowerSDR
 			return swr;
 		}
 
+        public double ALEXSWR(double adc_fwd, double adc_rev)
+        {
+            double f = adc_fwd;
+            double r = adc_rev;
+
+            if (adc_fwd == 0 && adc_rev == 0) return 1.0;
+            if (adc_rev > adc_fwd) return 50.0;
+
+            double sqrt_r_over_f = Math.Sqrt(r / f);
+            return (1.0 + sqrt_r_over_f) / (1.0 - sqrt_r_over_f);
+        }
+		
 		public double FWCSWR(int adc_fwd, int adc_rev)
 		{
 			double f = FWCPAPower(adc_fwd);
@@ -23003,10 +23026,45 @@ namespace PowerSDR
 
         //public bool PennyLanePresent = false; 
 		public bool PennyPresent = false;
-		public bool AlexPresent = false; 
+		//public bool AlexPresent = false; 
 		public bool MercuryPresent = false; 
 		public bool JanusPresent = false; 
 		public bool HPSDRisMetis = false; 
+
+       private bool alexpresent = false;
+        public bool AlexPresent
+        {
+            get { return alexpresent; }
+            set
+            {
+                alexpresent = value;
+                if (alexpresent)
+                {
+                    if (!comboMeterTXMode.Items.Contains("Ref Pwr"))
+                        comboMeterTXMode.Items.Insert(1, "Ref Pwr");
+                   // if (!comboMeterTXMode.Items.Contains("SWR"))
+                    //    comboMeterTXMode.Items.Insert(2, "SWR");
+
+                    if (comboMeterTXMode.SelectedIndex < 0)
+                        comboMeterTXMode.SelectedIndex = 0;
+                }
+                else
+                {
+                    string cur_txt = comboMeterTXMode.Text;
+                    {
+                        if (comboMeterTXMode.Items.Contains("Ref Pwr"))
+                            comboMeterTXMode.Items.Remove("Ref Pwr");
+
+                        if (comboMeterTXMode.Items.Contains("SWR"))
+                            comboMeterTXMode.Items.Remove("SWR");
+                    }
+                    comboMeterTXMode.Text = cur_txt;
+                    if (comboMeterTXMode.SelectedIndex < 0 &&
+                        comboMeterTXMode.Items.Count > 0)
+                        comboMeterTXMode.SelectedIndex = 0;
+                }
+            }
+        }
 
 		private string metis_network_ip_addr; 
 		public string MetisNetworkIPAddr 
@@ -24113,14 +24171,23 @@ namespace PowerSDR
 				pa_present = value;
 				if(current_model == Model.SDR1000)
                     Hdw.PAPresent = value;
-				if(pa_present)
+				if(pa_present || alexpresent)
 				{
 					if(!comboMeterTXMode.Items.Contains("Ref Pwr"))
 						comboMeterTXMode.Items.Insert(1, "Ref Pwr");
+                        if (pa_present) //remove for alex swr
+                        {
 					if(!comboMeterTXMode.Items.Contains("SWR"))
 						comboMeterTXMode.Items.Insert(2, "SWR");
-
-					if(comboMeterTXMode.SelectedIndex < 0)
+                        }
+			            if (alexpresent)
+                        {
+                            if (comboMeterTXMode.Items.Contains("SWR"))
+                                comboMeterTXMode.Items.Remove("SWR");
+                        }
+					    
+						
+           		if(comboMeterTXMode.SelectedIndex < 0)
 						comboMeterTXMode.SelectedIndex = 0;
 				}
 				else
@@ -26471,7 +26538,12 @@ namespace PowerSDR
 								{
                                     case Model.HPSDR:
                                     case Model.HERMES:
-                                        new_meter_data = JanusAudio.computeFwdPower();
+                                        if (alexpresent)
+                                            //pwr_mode = "alex_fwd";
+                                            new_meter_data = JanusAudio.computeAlexFwdPower();
+                                        else
+                                            //pwr_mode = "fwd";
+                                            new_meter_data = JanusAudio.computeFwdPower();
                                         break; 
 
 									case Model.FLEX5000:
@@ -26512,6 +26584,15 @@ namespace PowerSDR
 							case MeterTXMode.REVERSE_POWER:
 								switch(current_model)
 								{
+                                   case Model.HPSDR:
+                                    case Model.HERMES:
+                                        if (alexpresent)
+                                        {
+                                            //pwr_mode = "rev";
+                                            new_meter_data = JanusAudio.computeRefPower();
+                                        }
+                                        else new_meter_data = 0.0f;
+                                        break;
 									case Model.FLEX5000:
 									case Model.FLEX3000:
 										//output = ((double)pa_rev_power/4096*2.5).ToString("f3")+" V";
@@ -26532,6 +26613,15 @@ namespace PowerSDR
 								{
 									switch(current_model)
 									{
+                                       case Model.HPSDR:
+                                        case Model.HERMES:
+                                            if (alexpresent)
+                                            {
+                                                alex_fwd_power = JanusAudio.computeAlexFwdPower();
+                                                alex_rev_power = JanusAudio.computeRefPower();
+                                                swr = ALEXSWR(alex_fwd_power, alex_rev_power);                                               
+                                            }
+                                            break;
 										case Model.FLEX5000:
 										case Model.FLEX3000:
 											swr = FWCSWR(pa_fwd_power, pa_rev_power);
@@ -37103,6 +37193,7 @@ namespace PowerSDR
 					CurrentClickTuneMode = ClickTuneMode.VFOA;
 			}
 			Display.SubRX1Enabled = chkEnableMultiRX.Checked;
+            mnuMultiRX.Checked = chkEnableMultiRX.Checked;
 		}
 
 		private void chkPanSwap_CheckedChanged(object sender, System.EventArgs e)
@@ -40667,6 +40758,11 @@ namespace PowerSDR
                 case "BIN":
                     chkBIN.Checked = !chkBIN.Checked;
                     break;
+                case "Multi-RX":
+                    chkEnableMultiRX.Checked = !chkEnableMultiRX.Checked;
+                    break;
+             
+
             }
         }
 

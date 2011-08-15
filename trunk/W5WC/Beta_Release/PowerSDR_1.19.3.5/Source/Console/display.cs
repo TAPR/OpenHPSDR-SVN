@@ -2446,12 +2446,12 @@ namespace PowerSDR
                 if (bottom)
                 {
                     g.DrawLine(tx_filter_pen, cw_line_x1, H + top, cw_line_x1, H + H);
-                    //g.DrawLine(tx_filter_pen, cw_line_x1 + 1, H + top, cw_line_x1 + 1, H + H);
+                   // g.DrawLine(tx_filter_pen, cw_line_x1 + 1, H + top, cw_line_x1 + 1, H + H);
                 }
                 else
                 {
                     g.DrawLine(cw_zero_pen, cw_line_x1, top, cw_line_x1, H);
-                    //g.DrawLine(tx_filter_pen, cw_line_x + 1, top, cw_line_x + 1, H);
+                   // g.DrawLine(tx_filter_pen, cw_line_x1 + 1, top, cw_line_x1 + 1, H);
                 }
             }
 
@@ -2468,6 +2468,7 @@ namespace PowerSDR
                    // g.DrawLine(grid_zero_pen, center_line_x, top, center_line_x, H);
                    // g.DrawLine(grid_zero_pen, center_line_x + 1, top, center_line_x + 1, H);
                     g.DrawLine(grid_zero_pen, r_x0[0], top, r_x0[0], H);
+                    g.DrawLine(grid_zero_pen, r_x0[0] + 1, top, r_x0[0] + 1, H);
  
                 }
             }
