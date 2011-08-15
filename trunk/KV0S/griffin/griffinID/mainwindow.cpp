@@ -1,6 +1,40 @@
+/**
+* \file mainwindow.cpp
+* \brief Code files for the MainWindow functions as part of the Griffin ID program
+* \author David R. Larsen, KV0S
+* \version 1.0.0
+* \date August 14, 2011
+*/
+
+
+
+/* Copyright (C) 2010 - David R. Larsen, KV0S
+* This program is free software; you can redistribute it and/or
+* modify it under the terms of the GNU General Public License
+* as published by the Free Software Foundation; either version 2
+* of the License, or (at your option) any later version.
+*
+* This program is distributed in the hope that it will be useful,
+* but WITHOUT ANY WARRANTY; without even the implied warranty of
+* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+* GNU General Public License for more details.
+*
+* You should have received a copy of the GNU General Public License
+* along with this program; if not, write to the Free Software
+* Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+*
+*/
+
+
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include <QDebug>
+
+/**
+ *  \brief the MainWindow class for the griffinID program
+ *
+ *
+ */
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -19,27 +53,125 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->call_lineEdit->setInputMask(">NN9NNN");
 
     About *abd = new About();
-    abd->setVersion( QString( "0.0.1" ) );
+    abd->setVersion( QString( "1.0." ) );
 
     loadGridBox();
     loadPowerBox();
 
     ui->call_lineEdit->setText( settings.value("call").toString() );
     ui->grid_comboBox->setCurrentIndex( settings.value("grid").toInt() );
+    ui->lat_doubleSpinBox->setValue( settings.value("lat").toDouble());
+    ui->lon_doubleSpinBox->setValue( settings.value("lon").toDouble());
     ui->power_comboBox->setCurrentIndex( settings.value("power").toInt() );
 
+    wspr = new WSPR();
+    qrss = new QRSS();
+
+
+    // test->packing("KV0S  ", "EM38", 20);
+    // test->convolution();
+    // test->interleave();
+
+    /*for( int i= 0; i < 11; i++ )
+    {
+        qDebug() << test->packed[i];
+    }
+    char* str = test->getSymbol();
+    for( int i= 0; i < 162; i++ )
+    {
+        qDebug() << QString("%1").arg(str[i],1,2);
+    }
+    char* str2 = test->symbol2;
+    for( int i= 0; i < 162; i++ )
+    {
+        qDebug() << QString("%1").arg(str2[i],1,10 );
+    }
+    */
+
     connect( ui->actionQuit,SIGNAL(triggered()),this,SLOT(close()));
-    connect(ui->actionSave_as,SIGNAL(triggered()),this,SLOT(writeString()));
+    //connect(ui->actionSave_as,SIGNAL(triggered()),this,SLOT(writeString()));
     connect(ui->actionAbout,SIGNAL(triggered()),abd,SLOT(aboutMessage()));
+    connect(ui->grid_comboBox,SIGNAL(currentIndexChanged(int)),this,SLOT(gridLocationUpdate()));
+    connect(ui->lat_doubleSpinBox,SIGNAL(valueChanged(double)),this,SLOT(latLocationUpdate(double)));
+    connect(ui->lon_doubleSpinBox,SIGNAL(valueChanged(double)),this,SLOT(lonLocationUpdate(double)));
+    connect(ui->actionSave_WSPR,SIGNAL(triggered()),this,SLOT(outputWSPRfile()));
+    connect(ui->actionSave_QRSS,SIGNAL(triggered()),this,SLOT(outputQRSSfile()));
 }
+
+/**
+ *  \brief the MainWindow decontructor
+ *
+ *
+ */
 
 MainWindow::~MainWindow()
 {
     settings.setValue("call", ui->call_lineEdit->text());
     settings.setValue("grid", ui->grid_comboBox->currentIndex());
+    settings.setValue("lat", ui->lat_doubleSpinBox->value());
+    settings.setValue("lon", ui->lon_doubleSpinBox->value());
     settings.setValue("power", ui->power_comboBox->currentIndex());
     delete ui;
 }
+
+/**
+ *  \brief gridLocationUpdate
+ *  slot for updating the grid location update
+ *
+ *
+ */
+
+void MainWindow::gridLocationUpdate()
+{
+    int idx = ui->grid_comboBox->currentIndex();
+    QString value = ui->grid_comboBox->itemText( idx );
+    wspr->grid2deg( value.toLocal8Bit().data(), 4);
+    ui->lat_doubleSpinBox->setValue(wspr->getLat());
+    ui->lon_doubleSpinBox->setValue(wspr->getLong());
+}
+
+/**
+ *  \brief latLocationUpdate function
+ *  slot for updating latitude location update
+ *
+ */
+
+void MainWindow::latLocationUpdate( double latval )
+{
+   double lonval = ui->lon_doubleSpinBox->value();
+   wspr->deg2grid( latval, lonval, 4 );
+   QString gridsq = QString( wspr->getGrid() );
+   gridsq = gridsq.mid(0,4);
+   //qDebug() << QString( gridsq );
+   int idx = ui->grid_comboBox->findText( gridsq );
+   //qDebug() << idx;
+   ui->grid_comboBox->setCurrentIndex( idx );
+}
+
+/**
+ *  \brief lonLocationUpdate function
+ *   slot for updating longitude location update
+ *
+ */
+
+void MainWindow::lonLocationUpdate( double lonval )
+{
+   double latval = ui->lat_doubleSpinBox->value();
+   wspr->deg2grid( latval, lonval, 4 );
+   //qDebug() << "char* " << wspr->getGrid();
+   QString gridsq = QString( wspr->getGrid() );
+   //qDebug() << "QString" << gridsq.mid(0,4);
+   gridsq = gridsq.mid(0,4);
+   int idx = ui->grid_comboBox->findText( gridsq );
+   //qDebug() << idx;
+   ui->grid_comboBox->setCurrentIndex( idx );
+}
+
+/**
+ *  \brief loadGridBox function
+ *
+ *
+ */
 
 void MainWindow::loadGridBox()
 {
@@ -71,6 +203,12 @@ void MainWindow::loadGridBox()
 
 }
 
+/**
+ *  \brief loadPowerBox function
+ *
+ *
+ */
+
 void MainWindow::loadPowerBox()
 {
     QStringList power;
@@ -82,275 +220,86 @@ void MainWindow::loadPowerBox()
         powercode.replace( 0, 1, QChar(code) );
         for( int l=0; l<10; l++ )
         {
-            int code1 = 48 + l;
-            powercode.replace( 1, 1, QChar(code1) );
-            power << powercode;
-
+            if( l == 0 || l == 3 || l == 7)
+            {
+               int code1 = 48 + l;
+               powercode.replace( 1, 1, QChar(code1) );
+               power << powercode;
+            }
         }
     }
     ui->power_comboBox->addItems( power );
 }
 
-QString MainWindow::morsechar( QChar ch )
+/**
+ *  \brief outputWSPRfile function
+ *
+ *
+ */
+
+void MainWindow::outputWSPRfile( )
 {
-    //ch.toUpper();
-    QHash <QChar, QString> morse;
-    morse['A'] = "10111";
-    morse['B'] = "111010101";
-    morse['C'] = "11101011101";
-    morse['D'] = "1110101";
-    morse['E'] = "1";
-    morse['F'] = "101011101";
-    morse['G'] = "111011101";
-    morse['H'] = "1010101";
-    morse['I'] = "101";
-    morse['J'] = "1011101110111";
-    morse['K'] = "111010111";
-    morse['L'] = "101110101";
-    morse['M'] = "1110111";
-    morse['N'] = "11101";
-    morse['O'] = "11101110111";
-    morse['P'] = "10111011101";
-    morse['Q'] = "1110111010111";
-    morse['R'] = "1011101";
-    morse['S'] = "10101";
-    morse['T'] = "111";
-    morse['U'] = "1010111";
-    morse['V'] = "101010111";
-    morse['W'] = "101110111";
-    morse['X'] = "11101010111";
-    morse['Y'] = "11101110101";
-    morse['Z'] = "11101110101";
-    morse['1'] = "10111011101110111";
-    morse['2'] = "101011101110111";
-    morse['3'] = "1010101110111";
-    morse['4'] = "10101010111";
-    morse['5'] = "101010101";
-    morse['6'] = "11101010101";
-    morse['7'] = "1110111010101";
-    morse['8'] = "111011101110101";
-    morse['9'] = "11101110111011101";
-    morse['0'] = "1110111011101110111";
-    morse[' '] = "000000";
+    QString call = ui->call_lineEdit->text();
+    QString loc = ui->grid_comboBox->currentText();
+    QString dbm = ui->power_comboBox->currentText();
+    wspr->packing( QString("%1").arg(call,6).toLocal8Bit().data(), loc.toLocal8Bit().data(), dbm.toInt());
+    wspr->convolution();
+    wspr->interleave();
+    char* symb = wspr->getSymbol();
+    QString message = QString("%1 %2 %3").arg(call,6).arg(loc).arg(dbm);
+    WSPRfile =  QFileDialog::getSaveFileName(this, tr("WSPR Output File"), "", tr("WSPR Files (*.mif)"));
+    QFile file( WSPRfile );
+    if (!file.open(QIODevice::WriteOnly | QIODevice::Text))
+             return;
 
-
-    return( morse[ch]);
-}
-
-QString MainWindow::encodeCW( QStringList message )
-{
-    QString output;
-    output = "";
-    for (int i = 0; i < message.size(); ++i)
-    {
-        //qDebug() << message.at(i) << endl;
-        QString value = (message.at(i)).toUpper();
-        //qDebug() << value;
-        for( int j = 0; j < value.size(); ++j )
-        {
-            //qDebug() << value[j];
-            output.append( morsechar( value[j] ));
-            output.append( "000" );
-        }
-        output.append( morsechar( ' ' ) );
+    QTextStream out(&file);
+    out << "-- WSPR message file for openhpsdr.org : griffin board" << endl;
+    out << "-- Encode call sign is "<< message << endl;
+    // TODO: show Binary, Hex and Display
+    out << "WIDTH=2;" << endl;
+    out << "DEPTH=162;" << endl;
+    out << "ADDRESS_RADIX=UNS;" << endl;
+    out << "DATA_RADIX=UNS;" << endl;
+    out << "CONTENT BEGIN" << endl;
+    for( int i = 0; i < 162; i++ ){
+        //TODO: add real data
+        out << i << " : " << QString("%1").arg(int(symb[i]),1,10) << ";" << endl;
     }
+    out << "END;" << endl;
+    file.close();
+ }
 
-    //qDebug() << "in encodeCW";
-    //foreach( QChar c, output ){
-    //    qDebug() << c << "=" << c.unicode() << "=" << QString( "%1" ).arg( c.unicode(), 0 , 2 );
-    //}
-    return(  output );
-}
+/**
+ *  \brief outputQRSSfile function
+ *
+ *
+ */
 
-QString MainWindow::displayCW( QString message )
+void MainWindow::outputQRSSfile( )
 {
-    QString display;
-    for( int i = 0; i < message.size(); ++i )
+    QString call = ui->call_lineEdit->text();
+    QString message = QString("%1").arg(call,6);
+    QString str = qrss->encodeCW( call.mid(0,6) );
+    QRSSfile =  QFileDialog::getSaveFileName(this, tr("QRSS Output File"), "", tr("QRSS Files (*.mif)"));
+    QFile file( QRSSfile );
+    if (!file.open(QIODevice::WriteOnly | QIODevice::Text))
+             return;
+
+    QTextStream out(&file);
+    out << "-- QRSS call sign file for openhpsdr.org : griffin board" << endl;
+    out << "-- Encode call sign is "<< message << endl;
+    out << "-- " << str << endl;
+    out << "-- " << qrss->displayCW( str ) << endl;
+    // TODO: show Binary, Hex and Display
+    out << "WIDTH=8;" << endl;
+    out << "DEPTH=16;" << endl;
+    out << "ADDRESS_RADIX=UNS;" << endl;
+    out << "DATA_RADIX=HEX;" << endl;
+    out << "CONTENT BEGIN" << endl;
+    for( int i = 0; i< (str.size() / 8); i++ )
     {
-        if( message.at(i) == '1' )
-        {
-            display.append('#');
-        }else{
-            display.append(' ');
-        }
+        out << i << " : " << (QString("%1").arg(wspr->binaryByteLookup( str.mid(i*8,8) ),2,16)).toUpper() << ";" << endl;
     }
-    return( display );
-}
-
-void MainWindow::writeString()
-{
-    QString filename;
-    QStringList message;
-    filename =  QFileDialog::getSaveFileName(this, tr("Save File as"),"",tr("Files (*.qrss *.wspr)"));
-     //qDebug() << filename << " returned " << endl;
-    ui->statusBar->showMessage(QString(" Writing to file %1").arg(filename));
-    QFile *file = new QFile(filename);
-    if( !file->open(QFile::WriteOnly) )
-    {
-        qDebug() << "Open failed." << endl;
-    }else{
-        qDebug() << "Open success." << endl;
-    }
-    if( filename.contains("qrss"))
-    {
-        message << ui->call_lineEdit->text();
-        QString binary = encodeCW( message );
-        QString display = displayCW( encodeCW( message ) );
-        file->write(binary.toLocal8Bit().constData());
-        file->write("\n");
-        file->write(display.toLocal8Bit().constData());
-        file->close();
-     }else{
-        message << (ui->call_lineEdit->text().leftJustified(6,' ')) << ui->grid_comboBox->currentText() << ui->power_comboBox->currentText();
-        long value = encodeWSPR( message );
-        qDebug() << message << value;
-    }
-
-}
-
-int MainWindow::wsprcallchar( QChar ch )
-{
-    //ch.toUpper();
-    QHash <QChar, int> wspr;
-    wspr['A'] = 10;
-    wspr['B'] = 11;
-    wspr['C'] = 12;
-    wspr['D'] = 13;
-    wspr['E'] = 14;
-    wspr['F'] = 15;
-    wspr['G'] = 16;
-    wspr['H'] = 17;
-    wspr['I'] = 18;
-    wspr['J'] = 19;
-    wspr['K'] = 20;
-    wspr['L'] = 21;
-    wspr['M'] = 22;
-    wspr['N'] = 23;
-    wspr['O'] = 24;
-    wspr['P'] = 25;
-    wspr['Q'] = 26;
-    wspr['R'] = 27;
-    wspr['S'] = 28;
-    wspr['T'] = 29;
-    wspr['U'] = 30;
-    wspr['V'] = 31;
-    wspr['W'] = 32;
-    wspr['X'] = 33;
-    wspr['Y'] = 34;
-    wspr['Z'] = 35;
-    wspr['1'] = 1;
-    wspr['2'] = 2;
-    wspr['3'] = 3;
-    wspr['4'] = 4;
-    wspr['5'] = 5;
-    wspr['6'] = 6;
-    wspr['7'] = 7;
-    wspr['8'] = 8;
-    wspr['9'] = 9;
-    wspr['0'] = 0;
-    wspr[' '] = 36;
-
-    return( wspr[ch]);
-}
-int MainWindow::wsprlocchar( QChar ch )
-{
-    //ch.toUpper();
-    QHash <QChar, int> wspr;
-    wspr['A'] = 0;
-    wspr['B'] = 1;
-    wspr['C'] = 2;
-    wspr['D'] = 3;
-    wspr['E'] = 4;
-    wspr['F'] = 5;
-    wspr['G'] = 6;
-    wspr['H'] = 7;
-    wspr['I'] = 8;
-    wspr['J'] = 9;
-    wspr['K'] = 10;
-    wspr['L'] = 11;
-    wspr['M'] = 12;
-    wspr['N'] = 13;
-    wspr['O'] = 14;
-    wspr['P'] = 15;
-    wspr['Q'] = 16;
-    wspr['R'] = 17;
-
-    return( wspr[ch]);
-}
-
-
-
-long MainWindow::encodeWSPR( QStringList message )
-{
-    long output;
-    long output1;
-    long output2;
-    QString msgNumbers;
-    for (int i = 0; i < message.size(); ++i)
-    {
-        //qDebug() << message.at(i) << endl;
-        QString value;
-        value = (message.at(i)).toUpper();
-        //value.leftJustified(6, ' ', false);
-        qDebug() << value;
-        if( i == 0 )
-        {
-          for( int j = 0; j < value.size(); ++j )
-          {
-              //qDebug() << wsprcallchar( value[j] );
-              msgNumbers.append( QString("%1,").arg(wsprcallchar(value[j])));
-              if( j == 0 )
-              {
-                 output = wsprcallchar( value[j] );
-              }else if( j == 1 ){
-                 output = output * 36 + wsprcallchar( value[j] );
-              }else if ( j == 2 ){
-                 output = output * 10 + wsprcallchar( value[j] );
-              }else if ( j == 3 ){
-                 output = output * 27 + (wsprcallchar( value[j] ) - 10);
-              }else if ( j == 4 ){
-                 output = output * 27 + (wsprcallchar( value[j] ) - 10);
-              }else if ( j == 5 ){
-                 output = output * 27 + (wsprcallchar( value[j] ) - 10);
-              }else{
-
-             }
-          }
-        }else if( i == 1){
-            if( value.size() == 4 )
-            {
-                //qDebug() << wsprlocchar( value[0] );
-                //qDebug() << wsprlocchar( value[1] );
-                //qDebug() << wsprlocchar( value[2] );
-                //qDebug() << wsprlocchar( value[3] );
-                msgNumbers.append( QString("%1,").arg(wsprlocchar(value[0])));
-                msgNumbers.append( QString("%1,").arg(wsprlocchar(value[1])));
-                msgNumbers.append( QString("%1,").arg(wsprcallchar(value[2])));
-                msgNumbers.append( QString("%1,").arg(wsprcallchar(value[3])));
-                output1 = (179 - 10 * wsprlocchar( value[0] ) - wsprcallchar( value[2] )) * 180 + 10 * wsprlocchar( value[1]) + wsprcallchar( value[3] );
-            }
-        }else if( i == 2 ){
-                //qDebug() << value.toInt();
-                msgNumbers.append( QString("%1,").arg(value.toInt()));
-                output2 = output1 * 128 + value.toInt() + 64;
-        }else{
-            qDebug() << "ERROR: only 3 words allowed! ";
-        }
-        msgNumbers.append( QString("%1,").arg(wsprcallchar( ' ' )));
-
-    }
-    qDebug() << msgNumbers << endl;
-    qDebug() << "in encodeWSPR" << output << output1 << output2;
-    qDebug() << QString("%1").arg(output,28,2) << QString("%1").arg(output2,15,2) << endl;
-    QString data;
-    bool ok;
-    data.append(QString("%1").arg(output,28,2));
-    data.append(QString("%1").arg(output2,15,2));
-    qDebug() << data;
-    QByteArray test = QCString(QString("10010110") );
-    QByteArray KEY = QByteArray::fromHex( QByteArray( "30 81 9F 30 0D 06 09 2A 86 48 86 F7 0D 01 01 01 05 00 03 81 8D 00" ).replace( ' ', "" ) );
-    //uint8_t array[] = { 0x30, 0x81, 0x9f, 0x8d, 0 };
-    //qDebug() << QString("%1").arg(KEY,100,10);
-    qDebug() << test;
-    return(  output );
-}
+    out << "END;" << endl;
+    file.close();
+ }
