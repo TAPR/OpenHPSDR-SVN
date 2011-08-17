@@ -19,6 +19,23 @@ public class Connection extends Thread {
 
 		this.server = server;
 		this.port = port;
+		
+		connect();
+
+		// 2.1
+		// audioTrack=new
+		// AudioTrack(AudioManager.STREAM_MUSIC,8000,AudioFormat.CHANNEL_OUT_MONO,AudioFormat.ENCODING_PCM_16BIT,BUFFER_SIZE*2,AudioTrack.MODE_STREAM);
+
+		System.gc();
+	}
+
+	public void setServer(String server) {
+		System.err.println("Connection.setServer: "+server);
+		this.server=server;
+	}
+	
+	public void connect() {
+		System.err.println("Connection.connect: "+server+":"+port);
 		try {
 			socket = new Socket(server, port);
 			inputStream = socket.getInputStream();
@@ -26,23 +43,19 @@ public class Connection extends Thread {
 		} catch (Exception e) {
 			Log.e("Connection", "Error creating socket for " + server + ":"
 					+ port + "'" + e.getMessage() + "'");
+			status=e.toString();
 		}
-
-		// 2.1
-		// audioTrack=new
-		// AudioTrack(AudioManager.STREAM_MUSIC,8000,AudioFormat.CHANNEL_OUT_MONO,AudioFormat.ENCODING_PCM_16BIT,BUFFER_SIZE*2,AudioTrack.MODE_STREAM);
-
-		// 1.6
+		
 		audioTrack = new AudioTrack(AudioManager.STREAM_MUSIC, 8000,
 				AudioFormat.CHANNEL_CONFIGURATION_MONO,
 				AudioFormat.ENCODING_PCM_16BIT, AUDIO_BUFFER_SIZE * 2,
 				AudioTrack.MODE_STREAM);
-
+		
 		audioTrack.play();
-		System.gc();
 	}
-
+	
 	public void close() {
+System.err.println("Connection.close");
         running=false;
         if(socket!=null) {
                 try {
@@ -50,27 +63,46 @@ public class Connection extends Thread {
                 } catch (Exception e) {
 
                 }
+                socket=null;
         }
         if(audioTrack.getPlayState()!=AudioTrack.PLAYSTATE_PLAYING) {
             audioTrack.stop();
         }
     }
 
+	public boolean isRunning() {
+		return running;
+	}
+	
 	public void run() {
 		int bytes;
+		int bytes_read=0;
 		byte[] header = new byte[HEADER_SIZE];
 		byte[] spectrumBuffer = new byte[BUFFER_SIZE];
 		byte[] audioBuffer = new byte[AUDIO_BUFFER_SIZE];
-
+System.err.println("Connection.run");
 		if (socket != null) {
+			running=true;
 			while (running) {
 				try {
 					bytes = 0;
 					while (bytes != HEADER_SIZE) {
-						bytes += inputStream.read(header, bytes, HEADER_SIZE
+						bytes_read = inputStream.read(header, bytes, HEADER_SIZE
 								- bytes);
+						if(bytes_read==-1) break;
+						bytes+=bytes_read;
 					}
 
+					if(bytes_read==-1) {
+						if(socket!=null) {
+							socket.close();
+							socket=null;
+						}
+						status="remote connection terminated";
+						connected=false;
+						break;
+					}
+					
 					// start the audio once we are connected
 					if (!connected) {
 						sendCommand("startAudioStream " + AUDIO_BUFFER_SIZE);
@@ -104,9 +136,15 @@ public class Connection extends Thread {
 							.println("Connection.run: Exception reading socket: "
 									+ e.toString());
 					e.printStackTrace();
+					status=e.toString();
+					running=false;
+					connected=false;
 				}
 			}
+			
+			running=false;
 		}
+System.err.println("Connection.run: exit");
 	}
 
 	private void processSpectrumBuffer(byte[] header, byte[] buffer) {
@@ -176,6 +214,8 @@ public class Connection extends Thread {
 			} catch (IOException e) {
 				System.err.println("Connection.sendCommand: IOException: "
 						+ e.getMessage());
+				status=e.toString();
+				connected=false;
 			}
 		}
 	}
@@ -195,6 +235,14 @@ public class Connection extends Thread {
 		sendCommand("setFilter " + filterLow + " " + filterHigh);
 	}
 
+	public int getFilterLow() {
+		return filterLow;
+	}
+	
+	public int getFilterHigh() {
+		return filterHigh;
+	}
+	
 	public void setMode(int mode) {
 		this.mode = mode;
 		sendCommand("setMode " + mode);
@@ -265,7 +313,7 @@ public class Connection extends Thread {
 
 	private static final int HEADER_SIZE = 48;
 	private int BUFFER_SIZE = 480;
-	private static final int AUDIO_BUFFER_SIZE = 2000;
+	static final int AUDIO_BUFFER_SIZE = 2000;
 
 	private static final int SPECTRUM_BUFFER = 0;
 	private static final int AUDIO_BUFFER = 1;
@@ -275,8 +323,9 @@ public class Connection extends Thread {
 	private Socket socket;
 	private InputStream inputStream;
 	private OutputStream outputStream;
-	private boolean running = true;
+	private boolean running = false;
 	private boolean connected = false;
+	
 
 	private long frequency;
 	private int filterLow;
@@ -296,7 +345,7 @@ public class Connection extends Thread {
 	short[] decodedBuffer = new short[AUDIO_BUFFER_SIZE];
 
 	private AudioTrack audioTrack;
-	private String status = null;
+	private String status = "";
 
 	public static final int modeLSB = 0;
 	public static final int modeUSB = 1;
